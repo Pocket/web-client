@@ -1,0 +1,20 @@
+{
+  "title": [
+    {
+      "pattern": "^(project|deploy|build|docs|feat|fix|refactor|test|chore).{1,}",
+      "message": "Your title needs to be prefixed with on of the following types: project|deploy|build|docs|feat|fix|refactor|test|chore"
+    }
+  ],
+  "body": [
+    {
+      "pattern": ".{1,}",
+      "message": "You need literally anything in your description."
+    }
+  ],
+  "head.ref": [
+    {
+      "pattern": "^(project|deploy|build|docs|feat|fix|refactor|test|chore)/",
+      "message": "Your branch name must be formated as `<type>/` where type is: project|deploy|build|docs|feat|fix|refactor|test|chore"
+    }
+  ]
+}

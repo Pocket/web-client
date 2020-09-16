@@ -1,0 +1,27 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["react-app", "prettier", "plugin:cypress/recommended"],
+  "plugins": ["prettier", "jsx-a11y"],
+  "globals": {
+    "React": false,
+    "snowplow": true
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "no-unneeded-ternary": "warn",
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "args": "after-used"
+      }
+    ]
+  },
+  "env": {
+    "mocha": true
+  }
+}
