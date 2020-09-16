@@ -1,0 +1,41 @@
+{
+  "name": "@pocket/web-client",
+  "version": "1.0.0",
+  "description": "Pocket front end client",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pocket/web-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/Pocket/web-client#readme",
+  "bugs": {
+    "url": "https://github.com/Pocket/web-client/issues"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0"
+  },
+  "dependencies": {
+    "next": "^9.5.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
