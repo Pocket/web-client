@@ -48,6 +48,8 @@ export const ARTICLE_API_URL =
 // Currently set to expire Thu, 04 Mar 2021 16:00:00 GMT
 export const ARTICLE_API_KEY = 'da2-shleiiw7qzcnlkjwg3v7rfkpte'
 
+export const UNLEASH_API_URL = 'https://featureflags.readitlater.com/graphql'
+
 // Currently used in common/utilities/snowplow.js to help determine whether a given
 // link is from a Pocket property or not
 export const INTERNAL_DOMAINS = [

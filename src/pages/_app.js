@@ -4,10 +4,13 @@ import { ViewportProvider } from '@pocket/web-ui'
 import { useEffect } from 'react'
 import { END } from 'redux-saga'
 import { wrapper } from 'store'
-import { fetchUserData, userHydrate } from 'connectors/user/user.state'
-import { checkSessGuid, sessGuidHydrate } from 'connectors/user/user.state'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Sentry from '@sentry/node'
+
+import { fetchUserData, userHydrate } from 'connectors/user/user.state'
+import { checkSessGuid, sessGuidHydrate } from 'connectors/user/user.state'
+import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
+import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 
 /** Setup Files
  --------------------------------------------------------------- */
@@ -72,6 +75,10 @@ PocketWebClient.getInitialProps = async ({ Component, ctx }) => {
   // !! Hydrate sess_guid
   const sessGuid = await checkSessGuid(ctx)
   if (sessGuid) store.dispatch(sessGuidHydrate(sessGuid))
+
+  // !! Hydrate features set with unleash
+  const features = await fetchUnleashData(user, sessGuid)
+  if (features) store.dispatch(featuresHydrate(features))
 
   // Wait for getInitialProps to run the component if they exist
   const pageProps = {

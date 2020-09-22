@@ -7,13 +7,17 @@ import { all } from 'redux-saga/effects'
 import { appReducers, appSagas } from 'connectors/app/app.state'
 import { userReducers, userSagas } from 'connectors/user/user.state'
 
+import { featureReducers } from 'connectors/feature-flags/feature-flags.state'
+import { featureSagas } from 'connectors/feature-flags/feature-flags.state'
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const pageReducers = {}
 
 const connectorReducers = {
   app: appReducers, // App wide (mostly example at this time)
-  user: userReducers // User profile and auth
+  user: userReducers, // User profile and auth,
+  features: featureReducers // Feature flags (very basic start)
 }
 
 const rootReducer = combineReducers({
@@ -24,7 +28,7 @@ const rootReducer = combineReducers({
 /* SAGAS
  --------------------------------------------------------------- */
 function* rootSaga() {
-  yield all([...appSagas, ...userSagas])
+  yield all([...appSagas, ...userSagas, ...featureSagas])
 }
 
 /* STORE
