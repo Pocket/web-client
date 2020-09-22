@@ -16,6 +16,7 @@ import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
  --------------------------------------------------------------- */
 import { sentrySettings } from 'common/setup/sentry-settings'
 import { loadPolyfills } from 'common/setup/polyfills'
+import { appWithTranslation } from 'common/setup/i18n'
 
 /** Set up Sentry so we may catch errors
  --------------------------------------------------------------- */
@@ -102,4 +103,4 @@ PocketWebClient.getInitialProps = async ({ Component, ctx }) => {
  * 1. Redux: for managing state
  * 2. ReduxSaga: for managing async state requirements
  */
-export default wrapper.withRedux(PocketWebClient)
+export default wrapper.withRedux(appWithTranslation(PocketWebClient))

@@ -6,12 +6,7 @@ import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
 import { BASE_URL } from 'common/constants'
 
-export const getSelectedLink = (currentPath) => {
-  switch (currentPath) {
-    default:
-      return 'discover'
-  }
-}
+export const getSelectedLink = (currentPath) => currentPath.slice(1)
 
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
@@ -72,6 +67,7 @@ const GlobalNav = (props) => {
 
   return (
     <GlobalNavComponent
+      pocketLogoOutboundUrl={'/'}
       appRootSelector="#__next"
       links={links}
       selectedLink={selectedLink}

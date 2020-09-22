@@ -1,7 +1,7 @@
 import Discover from 'containers/discover/discover'
 
 Discover.getInitialProps = async () => {
-  return {}
+  return { namespacesRequired: ['common'] }
 }
 
 export default Discover
