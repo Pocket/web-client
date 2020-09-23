@@ -17,7 +17,8 @@ export const request = ({ params = {}, path, method = 'GET', cookie }) => {
   const endpoint = `${API_URL}/${path}?${queryParams}`
 
   const headers = {
-    Origin: 'https://getpocket.com'
+    Origin: 'https://getpocket.com',
+    'User-Agent': `Pocket;web;client;${process.env.BUILD_ID}`
   }
 
   if (cookie) headers.Cookie = cookie

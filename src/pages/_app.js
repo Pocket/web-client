@@ -14,9 +14,11 @@ import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 
 /** Setup Files
  --------------------------------------------------------------- */
-import { sentrySettings } from 'common/setup/sentry-settings'
+import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
 import { appWithTranslation } from 'common/setup/i18n'
+import { initializeSnowplow } from 'common/setup/snowplow/init'
+import { trackPageView } from 'connectors/snowplow/snowplow.state'
 
 /** Set up Sentry so we may catch errors
  --------------------------------------------------------------- */
@@ -34,10 +36,10 @@ function PocketWebClient({ Component, pageProps, err }) {
     loadPolyfills()
 
     // Set up Snowplow
-    // initializeSnowplow(user_id, sess_guid)
+    initializeSnowplow(user_id, sess_guid)
 
     // Track Page View
-    // dispatch(trackPageView())
+    dispatch(trackPageView())
 
     // Set up Google Analytics
     // const { path } = pageProps

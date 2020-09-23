@@ -1,4 +1,4 @@
-import { injectLibScript } from '@pocket/web-utilities'
+import { injectLibScript } from './inject-script'
 
 export function loadOptinMonster() {
   const ACCOUNT_ID = 58246

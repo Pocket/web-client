@@ -10,6 +10,9 @@ import { userReducers, userSagas } from 'connectors/user/user.state'
 import { featureReducers } from 'connectors/feature-flags/feature-flags.state'
 import { featureSagas } from 'connectors/feature-flags/feature-flags.state'
 
+import { snowplowReducers } from 'connectors/snowplow/snowplow.state'
+import { snowplowSagas } from 'connectors/snowplow/snowplow.state'
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const pageReducers = {}
@@ -17,7 +20,8 @@ const pageReducers = {}
 const connectorReducers = {
   app: appReducers, // App wide (mostly example at this time)
   user: userReducers, // User profile and auth,
-  features: featureReducers // Feature flags (very basic start)
+  features: featureReducers, // Feature flags (very basic start)
+  snowplow: snowplowReducers // Snowplow analytics config post-initial-load
 }
 
 const rootReducer = combineReducers({
@@ -28,7 +32,7 @@ const rootReducer = combineReducers({
 /* SAGAS
  --------------------------------------------------------------- */
 function* rootSaga() {
-  yield all([...appSagas, ...userSagas, ...featureSagas])
+  yield all([...appSagas, ...userSagas, ...featureSagas, ...snowplowSagas])
 }
 
 /* STORE
