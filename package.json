@@ -7,7 +7,7 @@
     "dev": "SHOW_DEV=included next dev -p 80",
     "build": "npm run locale-inject && SHOW_DEV=included next build",
     "start": "next start -p 80",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_PATH=./src:./public:$NODE_PATH NODE_ENV=test mocha --reporter spec --harmony --require .scripts/babel-register .scripts/test-setup.js $(find src/ -name '*.spec.js')",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "locale-inject": "node ./.scripts/localization/locale-inject",
@@ -44,6 +44,8 @@
     "@zeit/next-source-maps": "0.0.3",
     "babel-loader": "8.1.0",
     "babel-plugin-module-resolver": "4.0.0",
+    "enzyme": "3.11.0",
+    "enzyme-adapter-react-16": "1.15.4",
     "eslint": "7.9.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-config-react-app": "5.2.1",
@@ -56,11 +58,13 @@
     "eslint-plugin-react-hooks": "4.1.2",
     "extract-css-chunks-webpack-plugin": "4.7.5",
     "graphql": "15.3.0",
+    "mocha": "8.1.3",
     "next-build-id": "3.0.0",
     "next-compose-plugins": "2.2.0",
     "optimize-css-assets-webpack-plugin": "5.0.4",
     "prettier": "2.1.2",
-    "react-is": "16.13.1"
+    "react-is": "16.13.1",
+    "sinon": "9.0.3"
   },
   "dependencies": {
     "@pocket/web-localization": "0.2.0",
