@@ -1,32 +1,23 @@
 import assert from 'assert'
 
-import { getSelectedLink, enforceDefaultAvatar } from './global-nav'
+import { enforceDefaultAvatar } from './global-nav'
 
-describe('GlobalNav', function () {
-  describe('getSelectedLink()', function () {
-    it('returns `discover` regardless of Discover path', () => {
-      assert.equal(getSelectedLink('/syndicated-article'), 'discover')
-      assert.equal(getSelectedLink('/topic'), 'discover')
-      assert.equal(getSelectedLink('/'), 'discover')
-    })
+describe('GlobalNav:enforceDefaultAvatar()', function () {
+  it('returns an empty string when passed a default avatar url we want to override', () => {
+    assert.equal(
+      enforceDefaultAvatar(
+        'https://mydomain.com/profile-images/profileBlue.png'
+      ),
+      ''
+    )
   })
-  describe('enforceDefaultAvatar()', function () {
-    it('returns an empty string when passed a default avatar url we want to override', () => {
-      assert.equal(
-        enforceDefaultAvatar(
-          'https://mydomain.com/profile-images/profileBlue.png'
-        ),
-        ''
-      )
-    })
-    it('passes through the avatar url, when that url contains no substring in the disallowed list', () => {
-      const validUrl = 'https://mydomain.com/profile-images/good-times.jpg'
+  it('passes through the avatar url, when that url contains no substring in the disallowed list', () => {
+    const validUrl = 'https://mydomain.com/profile-images/good-times.jpg'
 
-      assert.equal(enforceDefaultAvatar(validUrl), validUrl)
-    })
-    it('handles null and undefined by providing an empty string', () => {
-      assert.equal(enforceDefaultAvatar(null), '')
-      assert.equal(enforceDefaultAvatar(undefined), '')
-    })
+    assert.equal(enforceDefaultAvatar(validUrl), validUrl)
+  })
+  it('handles null and undefined by providing an empty string', () => {
+    assert.equal(enforceDefaultAvatar(null), '')
+    assert.equal(enforceDefaultAvatar(undefined), '')
   })
 })

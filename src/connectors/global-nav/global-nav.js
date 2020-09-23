@@ -5,8 +5,7 @@ import { GlobalNav as GlobalNavComponent } from '@pocket/web-ui'
 import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
 import { BASE_URL } from 'common/constants'
-
-export const getSelectedLink = (currentPath) => currentPath.slice(1)
+import { getTopLevelPath } from 'common/utilities'
 
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
@@ -34,7 +33,7 @@ const GlobalNav = (props) => {
   const selectedLink =
     props.selectedLink !== undefined
       ? props.selectedLink
-      : getSelectedLink(router.pathname)
+      : getTopLevelPath(router.pathname)
 
   const isPremium = useSelector(
     (state) => parseInt(state?.user?.premium_status, 10) === 1 || false
