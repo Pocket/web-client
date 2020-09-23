@@ -1,3 +1,4 @@
+
 // POCKET
 export const CONSUMER_KEY = '89624-08a6833ec06c1379f4cee8e3' //web-discover consumer key
 export const BASE_URL = 'https://getpocket.com'
@@ -13,6 +14,7 @@ export const READING_WPM = 220
 export const CAPTCHA_SITE_KEY = '6LfIpyYUAAAAAPtNSKafudr16odFL1eQte0vR0Py' // API key used with Google's ReCaptcha service
 export const GOOGLE_ANALYTICS_ID = 'UA-370613-9'
 export const FACEBOOK_APP_ID = '131450656879143'
+export const GREENHOUSE_JOBS_URL = 'https://boards-api.greenhouse.io/v1/boards/pocketco/jobs' // Greenhouse board id for Pocket org
 
 // SNOWPLOW
 export const API_USER_ID = 89624 // Pocket backend identifier for an API user used in Snowplow analytic events
