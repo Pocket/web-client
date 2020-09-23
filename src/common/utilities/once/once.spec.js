@@ -1,4 +1,4 @@
-import { once } from './index'
+import { once } from './once'
 import assert from 'assert'
 import sinon from 'sinon'
 

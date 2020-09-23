@@ -1,13 +1,13 @@
 import assert from 'assert'
 
-import { buildBeaconUrl } from './index'
+import { buildBeaconUrl } from './beacon'
 
 describe('beacon', () => {
   describe('buildBeaconUrl', () => {
     it('build a url with proper query params', () => {
       const options = {
         path: '/pv',
-        data: { soda: ['Dr Pepper', 'Coca Cola', 'Fanta'], size: 'x-large' },
+        data: { soda: ['Dr Pepper', 'Coca Cola', 'Fanta'], size: 'x-large' }
       }
       const url = buildBeaconUrl('abcd1234', options)
 

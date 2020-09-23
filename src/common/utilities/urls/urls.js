@@ -37,3 +37,12 @@ export function domainForUrl(url) {
 
   return match[1]
 }
+
+/**
+ * getTopLevelPath
+ * @param {string} path to grab first chain (base) from
+ * @return {string} base path `/some/long/url` returns `some`
+ */
+export function getTopLevelPath(path) {
+  return path.split('/')[1]
+}

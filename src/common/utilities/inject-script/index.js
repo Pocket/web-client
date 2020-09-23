@@ -1,21 +1,14 @@
 const createScript = (url, scriptContent, isAsync = true) => {
   const script = document.createElement('script')
 
-  if (url) {
-    script.src = url
-  }
-
-  if (scriptContent) {
-    script.text = scriptContent
-  }
+  if (url) script.src = url
+  if (scriptContent) script.text = scriptContent
 
   script.async = isAsync
-
   document.body.appendChild(script)
 
-  return () => {
-    document.body.removeChild(script)
-  }
+  // return removal function
+  return () => document.body.removeChild(script)
 }
 
 /**
@@ -24,7 +17,7 @@ const createScript = (url, scriptContent, isAsync = true) => {
  * @param {Boolean} isAsync Set to true to load the script in a non-blocking way
  */
 export const injectLibScript = (url, isAsync = true) => {
-  if (!url) throw new Error('useLibScript() missing required parameter: url')
+  if (!url) throw new Error('injectLibScript() missing required parameter: url')
   createScript(url, null, isAsync)
 }
 
@@ -36,7 +29,7 @@ export const injectLibScript = (url, isAsync = true) => {
 export const injectInlineScript = (scriptContent = null, isAsync = true) => {
   if (!scriptContent)
     throw new Error(
-      'useInlineScript() missing required parameter: scriptContent'
+      'injectInlineScript() missing required parameter: scriptContent'
     )
   createScript(null, scriptContent, isAsync)
 }

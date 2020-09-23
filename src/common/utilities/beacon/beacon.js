@@ -1,5 +1,5 @@
 import queryString from 'query-string'
-import { request } from '../request'
+import { request } from 'common/utilities/request/request'
 
 export const API_URL = process.env.POCKET_API_URL
   ? process.env.POCKET_API_URL
@@ -46,7 +46,7 @@ export function buildBeaconUrl(consumerKey, options) {
       // preserve any existing params in the options.path
       ...queryParams,
       ...postData,
-      consumer_key: consumerKey,
+      consumer_key: consumerKey
     },
     { arrayFormat: 'bracket' }
   )
