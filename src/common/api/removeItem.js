@@ -1,4 +1,4 @@
-import { requestWithAuth } from './request'
+import { request } from 'common/utilities/request/request'
 
 /**
  * Delete an item from your pocket account

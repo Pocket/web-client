@@ -1,4 +1,4 @@
-import { request } from './request'
+import { request } from 'common/utilities/request/request'
 
 /**
  * Get the topic page feed

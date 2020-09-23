@@ -1,4 +1,4 @@
-import { request } from './request'
+import { request } from 'common/utilities/request/request'
 
 export const getPublisherRecs = (itemId) => {
   return request({
