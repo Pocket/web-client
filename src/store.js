@@ -13,6 +13,9 @@ import { featureSagas } from 'connectors/feature-flags/feature-flags.state'
 import { snowplowReducers } from 'connectors/snowplow/snowplow.state'
 import { snowplowSagas } from 'connectors/snowplow/snowplow.state'
 
+import { itemsReducers } from 'connectors/items/items.state'
+import { itemsSagas } from 'connectors/items/items.state'
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const pageReducers = {}
@@ -21,7 +24,8 @@ const connectorReducers = {
   app: appReducers, // App wide (mostly example at this time)
   user: userReducers, // User profile and auth,
   features: featureReducers, // Feature flags (very basic start)
-  snowplow: snowplowReducers // Snowplow analytics config post-initial-load
+  snowplow: snowplowReducers, // Snowplow analytics config post-initial-load
+  items: itemsReducers // Shared item store for all items in app
 }
 
 const rootReducer = combineReducers({
@@ -32,7 +36,13 @@ const rootReducer = combineReducers({
 /* SAGAS
  --------------------------------------------------------------- */
 function* rootSaga() {
-  yield all([...appSagas, ...userSagas, ...featureSagas, ...snowplowSagas])
+  yield all([
+    ...appSagas,
+    ...userSagas,
+    ...featureSagas,
+    ...snowplowSagas,
+    ...itemsSagas
+  ])
 }
 
 /* STORE
