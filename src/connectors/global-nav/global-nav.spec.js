@@ -11,11 +11,13 @@ describe('GlobalNav:enforceDefaultAvatar()', function () {
       ''
     )
   })
+
   it('passes through the avatar url, when that url contains no substring in the disallowed list', () => {
     const validUrl = 'https://mydomain.com/profile-images/good-times.jpg'
 
     assert.equal(enforceDefaultAvatar(validUrl), validUrl)
   })
+
   it('handles null and undefined by providing an empty string', () => {
     assert.equal(enforceDefaultAvatar(null), '')
     assert.equal(enforceDefaultAvatar(undefined), '')

@@ -11,3 +11,5 @@ export { getValueFromCookie } from './cookies/cookies'
 
 export { arrayToObject } from './object-array/object-array'
 export { getObjectWithValidKeysOnly } from './object-array/object-array'
+
+export { useCorrectEffect } from './server-side/use-correct-effect'

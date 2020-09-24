@@ -46,4 +46,7 @@ export {
   IMPRESSION_REQUIREMENT_INSTANT,
   IMPRESSION_REQUIREMENT_VIEWABLE
 } from './impression'
+
+export { getLinkOpenTarget } from './link-target'
+
 export { default as createVariantEnrollEvent } from './variant-enroll'

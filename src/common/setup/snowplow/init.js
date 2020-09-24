@@ -3,9 +3,6 @@ import { SNOWPLOW_COLLECTOR } from 'common/constants'
 import { SNOWPLOW_HEARTBEAT_DELAY } from 'common/constants'
 import { SNOWPLOW_HEARTBEAT_INTERVAL } from 'common/constants'
 import { SNOWPLOW_CONFIG } from 'common/constants'
-import { INTERNAL_DOMAINS } from 'common/constants'
-import { CONTENT_OPEN_DESTINATION_INTERNAL } from './events'
-import { CONTENT_OPEN_DESTINATION_EXTERNAL } from './events'
 import { createUserEntity, apiUserEntity } from './entities'
 
 export function initializeSnowplow(user_id, sess_guid) {
@@ -32,14 +29,4 @@ export function initializeSnowplow(user_id, sess_guid) {
   const userEntity = createUserEntity(user_id, sess_guid)
   const globalContexts = [userEntity, apiUserEntity]
   snowplow('addGlobalContexts', globalContexts)
-}
-
-export const getLinkOpenTarget = (link, isSyndicated = false) => {
-  const url = new URL(link)
-  const isInternal = INTERNAL_DOMAINS.includes(url.hostname)
-
-  if (isSyndicated) return CONTENT_OPEN_DESTINATION_INTERNAL
-  if (isInternal) return CONTENT_OPEN_DESTINATION_INTERNAL
-
-  return CONTENT_OPEN_DESTINATION_EXTERNAL
 }
