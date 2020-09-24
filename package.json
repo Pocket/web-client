@@ -8,7 +8,7 @@
     "build": "npm run locale-inject && SHOW_DEV=included next build",
     "start": "next start -p 80",
     "test": "NODE_PATH=./src:./public:$NODE_PATH NODE_ENV=test mocha --reporter spec --harmony --require .scripts/babel-register .scripts/test-setup.js $(find src/ -name '*.spec.js')",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./public -h localhost.web.getpocket.com",
     "build-storybook": "build-storybook",
     "locale-inject": "node ./.scripts/localization/locale-inject",
     "locale-parse": "node ./.scripts/localization/locale-parse"
@@ -57,6 +57,7 @@
     "eslint-plugin-react": "7.20.6",
     "eslint-plugin-react-hooks": "4.1.2",
     "extract-css-chunks-webpack-plugin": "4.7.5",
+    "file-loader": "6.1.0",
     "graphql": "15.3.0",
     "mocha": "8.1.3",
     "next-build-id": "3.0.0",
@@ -83,9 +84,11 @@
     "next-redux-saga": "4.1.2",
     "next-redux-wrapper": "6.0.2",
     "nookies": "2.4.0",
+    "prop-types": "15.7.2",
     "query-string": "6.13.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-intersection-observer": "8.28.5",
     "react-redux": "7.2.1",
     "redux": "4.0.5",
     "redux-saga": "1.1.3"
