@@ -24,7 +24,7 @@ export const pocketHitsSignup = (
   frequency = 'daily'
 ) => {
   return request({
-    path: '/newsletter/subscription',
+    path: 'v3/newsletter/subscription',
     data: {
       email,
       'g-captcha-response': captchaResponseKey,
@@ -39,7 +39,7 @@ export const pocketHitsSignup = (
 
 export const confirmSubscription = (subscriptionId, locale) => {
   return request({
-    path: `/newsletter/subscription/opt-in/${subscriptionId}`,
+    path: `v3/newsletter/subscription/opt-in/${subscriptionId}`,
     data: {
       locale
     }

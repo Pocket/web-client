@@ -8,8 +8,8 @@ import { request } from 'common/utilities/request/request'
  */
 export function getTopicFeed(topic, curated = 5, algorithmic = 20) {
   return request({
-    path: '/discover/topics/',
-    data: {
+    path: 'v3/discover/topics',
+    params: {
       topics: topic,
       curated_count: curated,
       algorithmic_count: algorithmic
@@ -22,6 +22,6 @@ export function getTopicFeed(topic, curated = 5, algorithmic = 20) {
  */
 export function getTopicList() {
   return request({
-    path: '/discover/topicList/'
+    path: 'v3/discover/topicList'
   })
 }

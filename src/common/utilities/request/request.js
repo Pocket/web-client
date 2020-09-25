@@ -7,7 +7,13 @@ import { CONSUMER_KEY, API_URL } from 'common/constants'
  * @param {string} requestInfo.path The endpoint to hit
  * @param {string=GET} requestInfo.method Request method to use
  */
-export const request = ({ params = {}, path, method = 'GET', cookie }) => {
+export const request = ({
+  params = {},
+  path,
+  method = 'GET',
+  cookie,
+  auth
+}) => {
   const queryParams = queryString.stringify({
     ...params,
     consumer_key: CONSUMER_KEY,
@@ -34,12 +40,14 @@ export const request = ({ params = {}, path, method = 'GET', cookie }) => {
     headers,
     credentials: 'include'
   })
-    .then(handleErrors)
+    .then((response) => handleErrors(response, auth))
     .then((response) => response.json())
     .catch((error) => error)
 }
 
-function handleErrors(response) {
+function handleErrors(response, auth) {
+  if (!auth) return response
+
   // On a bad request we should reject the promise and pass on the status
   if (!response.ok) return Promise.reject({ xErrorCode: response.status })
 

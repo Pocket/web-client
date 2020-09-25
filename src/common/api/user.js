@@ -5,7 +5,7 @@ import { request } from 'common/utilities/request/request'
  */
 export const createGuid = async () => {
   return request({
-    path: '/guid'
+    path: 'v3/guid'
   }).then(({ guid }) => guid)
 }
 
@@ -13,7 +13,7 @@ export const createGuid = async () => {
  * Get a user's information	server side
  */
 export const getUserInfo = (cookie) => {
-  const params = { hash: '9dJDjsla49la' }
-  const path = '/v3/getuser'
+  const params = { auth: true, hash: '9dJDjsla49la' }
+  const path = 'v3/getuser'
   return request({ params, path })
 }

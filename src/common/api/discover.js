@@ -3,10 +3,10 @@ import { request } from 'common/utilities/request/request'
 /**
  * Get the explore home feed
  */
-export const getExploreFeed = () => {
+export const getDiscoverFeed = () => {
   return request({
-    path: '/discover',
-    data: {
+    path: 'v3/discover',
+    params: {
       count: 20
     }
   })
