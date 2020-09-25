@@ -2,6 +2,9 @@ import ReactGA from 'react-ga'
 import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 
 // common params used for any event in this view
+// NOTE: We are using explore as part of legacy support despite the section
+// being re-branded as "discover"
+//!! This page should be overhauled for use with snowplow
 const baseParams = {
   view: 'web',
   section: 'explore',
