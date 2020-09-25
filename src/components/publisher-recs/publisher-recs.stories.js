@@ -1,0 +1,34 @@
+import React from 'react'
+import PublisherRecs from './publisher-recs'
+
+import {
+  publisher,
+  publisherRecommendations as publisherRecs
+} from '../../common/_mocks'
+
+export default {
+  title: 'Components/PublisherRecs',
+  component: PublisherRecs
+}
+
+export const normal = () => {
+  return (
+    <PublisherRecs
+      publisher={publisher.theVerge}
+      recommendations={publisherRecs.recommendations}
+    />
+  )
+}
+
+export const noPublisherLogo = () => {
+  return (
+    <PublisherRecs
+      publisher={publisher.noLogoPublisher}
+      recommendations={publisherRecs.recommendations}
+    />
+  )
+}
+
+export const noRecs = () => {
+  return <PublisherRecs publisher={publisher.theVerge} />
+}

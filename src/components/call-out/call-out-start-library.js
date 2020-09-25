@@ -1,0 +1,200 @@
+import React from 'react'
+import { css } from 'linaria'
+import { useSelector } from 'react-redux'
+import { Button } from '@pocket/web-ui'
+import { CrossIcon } from '@pocket/web-ui'
+import { SIGNUP_URL } from 'common/constants'
+import { Chyron } from 'components/chyron/chyron'
+import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { breakpointSmallDesktop } from '@pocket/web-ui' // 1023
+import { breakpointLargeTablet } from '@pocket/web-ui' // 1023
+
+const INSTANCE_ID = 'call-out-start-library'
+
+const wrapper = css`
+  position: relative;
+  margin-top: var(--spacing650);
+
+  &:before {
+    position: absolute;
+    top: -24px;
+    left: -24px;
+    height: 375px;
+    width: 100%;
+    content: ' ';
+    background-color: var(--color-coralLightest);
+  }
+
+  div {
+    background-color: var(--color-teal100);
+    padding: 3.625rem var(--spacing150) var(--spacing150);
+    width: 100%;
+    position: relative;
+  }
+
+  h3 {
+    font-family: var(--fontSerifAlt);
+    font-size: 2.3125rem;
+    font-weight: 500;
+    line-height: 119%;
+    margin-bottom: 1.875rem;
+    color: var(--color-textPrimary);
+  }
+
+  .zigzag {
+    margin-left: -78px;
+    margin-bottom: var(--spacing150);
+  }
+
+  p {
+    font-family: var(--fontSansSerif);
+    font-size: 1rem;
+    line-height: 150%;
+    color: var(--color-textPrimary);
+  }
+
+  .pocket-svg {
+    display: inline-block;
+    position: relative;
+    height: 1.125rem;
+    width: 1.25rem;
+    content: ' ';
+    background-image: url('data:image/svg+xml;utf8,<svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.46333 2.16671C2.244 2.16671 2.06283 2.34971 2.06283 2.57925V7.62041C2.06283 12.0431 5.6089 15.625 9.97949 15.625C14.3501 15.625 17.8962 12.0431 17.8962 7.62041V2.57925C17.8962 2.34971 17.715 2.16671 17.4957 2.16671H2.46333ZM2.46333 0.583374H17.4957C18.593 0.583374 19.4795 1.4788 19.4795 2.57925V7.62041C19.4795 12.9141 15.2281 17.2084 9.97949 17.2084C4.73086 17.2084 0.479492 12.9141 0.479492 7.62041V2.57925C0.479492 1.4788 1.36596 0.583374 2.46333 0.583374ZM13.3833 5.95582C13.6954 5.64959 14.1966 5.65432 14.5029 5.96639C14.8091 6.27846 14.8044 6.77969 14.4923 7.08592L10.534 10.9702C10.2261 11.2724 9.73292 11.2724 9.42501 10.9702L5.46668 7.08592C5.15461 6.77969 5.14987 6.27846 5.45611 5.96639C5.76234 5.65432 6.26357 5.64959 6.57564 5.95582L9.97949 9.29599L13.3833 5.95582Z" fill="%231A1A1A"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    margin: auto 0.125rem -0.25rem;
+  }
+
+  a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .close-button {
+    position: absolute;
+    right: var(--spacing100);
+    top: var(--spacing100);
+    font-size: var(--fontSize175);
+    color: var(--color-textPrimary);
+    &:hover {
+      color: var(--color-textPrimary);
+    }
+  }
+
+  ${breakpointSmallDesktop} {
+    h3 {
+      font-size: var(--fontSize175);
+      line-height: 129%;
+    }
+  }
+`
+
+export function CallOutStartLibrary({
+  dismissChyron,
+  completeChyron,
+  handleDismiss,
+  handleComplete,
+  onVisible
+}) {
+  function handleCloseClick() {
+    handleDismiss()
+    dismissChyron()
+  }
+
+  function handleButtonClick() {
+    handleComplete()
+    completeChyron()
+  }
+
+  return (
+    <VisibilitySensor onVisible={onVisible}>
+      <aside className={wrapper}>
+        <div>
+          <Button
+            onClick={handleCloseClick}
+            className="close-button"
+            variant="inline">
+            <CrossIcon />
+          </Button>
+
+          <h3>Save these stories in a personal library</h3>
+          <svg
+            className="zigzag"
+            xmlns="http://www.w3.org/2000/svg"
+            width="192"
+            height="13"
+            fill="none">
+            <defs />
+            <path
+              stroke="#221F1F"
+              strokeMiterlimit="10"
+              strokeWidth="2"
+              d="M0 1.306c13.72 0 13.72 9.91 27.42 9.91 13.7 0 13.7-9.91 27.42-9.91 13.72 0 13.72 9.91 27.42 9.91 13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.42 9.91c13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.44 9.91"
+            />
+          </svg>
+          <p>
+            Use the <span className="pocket-svg"></span> button to build your
+            personal library of articles right in Pocket. Read them when you’re
+            free in a quiet, calm space.
+          </p>
+          <Button
+            target="_blank"
+            onClick={handleButtonClick}
+            href={`${SIGNUP_URL}?utm_source=explore&utm_medium=web`}>
+            Start your library
+          </Button>
+        </div>
+      </aside>
+    </VisibilitySensor>
+  )
+}
+
+const ExplorePosition = css`
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  align-items: start;
+  justify-content: space-between;
+  grid-column-gap: var(--spacing150);
+  grid-row-gap: var(--spacing150);
+  /* this is a 12 column grid */
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-flow: dense;
+
+  section {
+    grid-column-start: 10;
+    grid-column-end: span 3;
+    margin-top: var(--size250);
+  }
+
+  ${breakpointLargeTablet} {
+    display: none;
+  }
+`
+
+export function CallOutStartLibraryExplore({
+  handleImpression,
+  handleDismiss,
+  handleComplete
+}) {
+  const isAuthenticated = useSelector((state) => state.user.auth)
+
+  return (
+    <div className={ExplorePosition}>
+      {isAuthenticated ? null : (
+        <section>
+          <Chyron instanceId={INSTANCE_ID}>
+            <CallOutStartLibrary
+              onVisible={handleImpression}
+              handleDismiss={handleDismiss}
+              handleComplete={handleComplete}
+            />
+          </Chyron>
+        </section>
+      )}
+    </div>
+  )
+}
