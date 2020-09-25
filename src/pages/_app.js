@@ -20,6 +20,9 @@ import { appWithTranslation } from 'common/setup/i18n'
 import { initializeSnowplow } from 'common/setup/snowplow/init'
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
 
+import ReactGA from 'react-ga'
+import { GOOGLE_ANALYTICS_ID } from 'common/constants'
+
 /** Set up Sentry so we may catch errors
  --------------------------------------------------------------- */
 Sentry.init(sentrySettings)
@@ -42,9 +45,9 @@ function PocketWebClient({ Component, pageProps, err }) {
     dispatch(trackPageView())
 
     // Set up Google Analytics
-    // const { path } = pageProps
-    // ReactGA.initialize(GOOGLE_ANALYTICS_ID)
-    // ReactGA.pageview(path)
+    const { path } = pageProps
+    ReactGA.initialize(GOOGLE_ANALYTICS_ID)
+    ReactGA.pageview(path)
 
     // Load OptinMonster
     // loadOptinMonster()
