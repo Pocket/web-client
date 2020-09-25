@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { useCorrectEffect } from 'common/utilities'
+import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { createPopper } from '@popperjs/core'
 
 export const popoverBase = {

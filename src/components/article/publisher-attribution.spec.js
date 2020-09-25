@@ -5,7 +5,7 @@ import { mount } from 'enzyme'
 import { testIdSelector } from '@pocket/web-utilities/test-utils'
 import { PublisherAttribution } from './publisher-attribution'
 
-import { publisher } from '../../common/_mocks'
+import { publisher } from 'mock/article'
 
 describe('PublisherAttribution', () => {
   const baseProps = {

@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import VisibilitySensor from './visibility-sensor'
 import { ParsedContent } from 'components/article/parsed-content'
 import { ScrollChyron } from 'components/chyron/chyron-scroll'
-import { articleContent } from 'common/_mocks/'
+import { articleContent } from 'mock/article'
 import { css } from 'linaria'
 
 export default {

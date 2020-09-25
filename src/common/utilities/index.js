@@ -14,4 +14,4 @@ export { getValueFromCookie } from './cookies/cookies'
 export { arrayToObject } from './object-array/object-array'
 export { getObjectWithValidKeysOnly } from './object-array/object-array'
 
-export { useCorrectEffect } from './hooks/use-correct-effect'
+export { addAmbientMotion } from './animation/animation'

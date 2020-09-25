@@ -1,7 +1,7 @@
 import React from 'react'
 import { ParsedContent } from './parsed-content'
 
-import { articleContent } from 'common/_mocks/'
+import { articleContent } from 'mock/article'
 
 export default {
   title: 'Components/Article/ParsedContent',

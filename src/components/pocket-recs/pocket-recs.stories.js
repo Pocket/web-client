@@ -1,10 +1,7 @@
 import React from 'react'
 import PocketRecs from './pocket-recs'
 
-import {
-  pocketRecommendations as pocketRecs,
-  publisher
-} from '../../common/_mocks'
+import { pocketRecommendations as pocketRecs, publisher } from 'mock/article'
 import PublisherRecs from '../publisher-recs/publisher-recs'
 
 export default {

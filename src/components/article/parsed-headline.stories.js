@@ -1,7 +1,7 @@
 import React from 'react'
 import { ParsedHeadline } from './parsed-headline'
 
-import { article } from 'common/_mocks/'
+import { article } from 'mock/article'
 const { title, description } = article.photosAndCaptions
 
 export default {

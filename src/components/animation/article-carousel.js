@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-expressions */
 import React, { useRef, useEffect, useState } from 'react'
-import useCorrectEffect from 'common/utilities/use-correct-effect'
+import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classNames from 'classnames'
 import { breakpointMediumTablet, breakpointLargeHandset } from '@pocket/web-ui'
-import usePrefersReducedMotion from 'common/hooks/prefers-reduced-motion'
-import { addAmbientMotion } from 'common/utilities/animation'
+import { usePrefersReducedMotion } from 'common/utilities/hooks/prefers-reduced-motion'
+import { addAmbientMotion } from 'common/utilities'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 

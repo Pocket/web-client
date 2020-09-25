@@ -1,7 +1,7 @@
 import React from 'react'
 import { AuthorByline } from './author-byline'
 
-import { article, publisher } from 'common/_mocks/'
+import { article, publisher } from 'mock/article'
 const authorNames = article.photosAndCaptions.authorNames
 const { url, name, showAuthors } = publisher.theVerge
 

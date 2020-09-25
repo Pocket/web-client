@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { css } from 'linaria'
-import usePrefersReducedMotion from './prefers-reduced-motion'
+import { usePrefersReducedMotion } from './prefers-reduced-motion'
 import gsap from 'gsap'
 
 export default {

@@ -12,12 +12,12 @@ const getInitialState = () => {
     : !window.matchMedia(QUERY).matches
 }
 
-/*
+/**
  * This hook can be used to determine whether a user `prefers-reduced-motion`
  * to improve accessibility. Read more about this CSS media feature
  * [here](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).
  */
-export default function usePrefersReducedMotion() {
+export function usePrefersReducedMotion() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(
     getInitialState
   )

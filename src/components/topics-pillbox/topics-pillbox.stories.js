@@ -1,6 +1,6 @@
 import React from 'react'
 
-import topicsData from 'common/_mocks/topics'
+import { topics } from 'mock/article'
 import TopicsPillbox from './topics-pillbox'
 
 export default {
@@ -9,13 +9,13 @@ export default {
 }
 
 export const normal = () => (
-  <TopicsPillbox id="topics-pillbox-story" topicsMap={topicsData} />
+  <TopicsPillbox id="topics-pillbox-story" topicsMap={topics} />
 )
 
 export const centerAlign = () => (
   <TopicsPillbox
     id="topics-pillbox-story"
-    topicsMap={topicsData}
+    topicsMap={topics}
     alignItems="center"
   />
 )

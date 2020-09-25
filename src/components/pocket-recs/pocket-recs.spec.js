@@ -10,10 +10,7 @@ import PocketRecs, {
   Recommendation
 } from './pocket-recs'
 
-import {
-  pocketRecommendations as pocketRecs,
-  publisher
-} from '../../common/_mocks/'
+import { pocketRecommendations as pocketRecs, publisher } from 'mock/article'
 
 describe('PocketRecs', () => {
   const baseProps = {

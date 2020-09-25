@@ -1,4 +1,4 @@
-let publisher = {
+const publisher = {
   theVerge: {
     name: 'The Verge',
     recommendationName: 'The Verge',

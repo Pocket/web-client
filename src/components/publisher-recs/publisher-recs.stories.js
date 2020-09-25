@@ -4,7 +4,7 @@ import PublisherRecs from './publisher-recs'
 import {
   publisher,
   publisherRecommendations as publisherRecs
-} from '../../common/_mocks'
+} from 'mock/article'
 
 export default {
   title: 'Components/PublisherRecs',

@@ -1,7 +1,7 @@
 import React from 'react'
 import { PublisherAttribution } from './publisher-attribution'
 
-import { publisher, article } from 'common/_mocks/'
+import { publisher, article } from 'mock/article'
 const { publishedAt } = article.photosAndCaptions
 
 export default {
