@@ -13,7 +13,7 @@ export const createGuid = async () => {
  * Get a user's information	server side
  */
 export const getUserInfo = (cookie) => {
-  const params = { auth: true, hash: '9dJDjsla49la' }
+  const params = { hash: '9dJDjsla49la' }
   const path = 'v3/getuser'
-  return request({ params, path })
+  return request({ params, path, auth: true })
 }

@@ -7,8 +7,8 @@ import { request } from 'common/utilities/request/request'
  */
 export function getSearchFeed(topic, count = 20) {
   return request({
-    path: '/discover/search',
-    data: {
+    path: 'v3/discover/search',
+    params: {
       q: topic,
       count
     }
