@@ -1,7 +1,6 @@
 import { takeLatest, takeEvery } from 'redux-saga/effects'
 
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
-import { SNOWPLOW_SET_GLOBAL_CONTEXTS } from 'actions'
 import { SNOWPLOW_TRACK_CONTENT_OPEN } from 'actions'
 import { SNOWPLOW_TRACK_IMPRESSION } from 'actions'
 import { VARIANTS_SAVE } from 'actions'
@@ -18,9 +17,7 @@ import { createVariantEnrollEvent } from 'common/setup/snowplow/events'
 import { snowplowTrackPageView } from 'common/api/snowplow-analytics'
 import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
 
-const initialState = {
-  globalContexts: []
-}
+const initialState = {}
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -48,12 +45,6 @@ export const trackImpression = (component, requirement, position, item) => {
  --------------------------------------------------------------- */
 export const snowplowReducers = (state = initialState, action) => {
   switch (action.type) {
-    case SNOWPLOW_SET_GLOBAL_CONTEXTS: {
-      const { globalContexts } = action
-
-      return { ...state, globalContexts }
-    }
-
     default:
       return state
   }

@@ -11,6 +11,7 @@ import { ITEMS_SAVE_FAILURE } from 'actions'
 import { ITEMS_UNSAVE_REQUEST } from 'actions'
 import { ITEMS_UNSAVE_SUCCESS } from 'actions'
 import { ITEMS_UNSAVE_FAILURE } from 'actions'
+import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -53,6 +54,12 @@ export const itemsReducers = (state = initialState, action) => {
       const { id } = action
       return updateSaveStatus(state, id, 'saved')
     }
+
+    // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
+    // it represents the state used to build the page on the server.
+    case HYDRATE:
+      const { items } = action.payload
+      return { ...state, ...items }
 
     default:
       return state
@@ -198,7 +205,13 @@ function displayExcerpt({ item, curated_info }) {
  * @returns {string} The url that should be saved or opened
  */
 function openUrl({ item, redirect_url }) {
-  return redirect_url || item?.given_url || item?.resolved_url || null
+  return (
+    devLink(item) ||
+    redirect_url ||
+    item?.given_url ||
+    item?.resolved_url ||
+    null
+  )
 }
 
 /** SAVE URL
@@ -232,7 +245,17 @@ function readTimeFromWordCount(wordCount) {
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {bool} if the item is syndicated or not
  */
-function syndicated({ item }) {
+const syndicated = function ({ item }) {
   if (!item) return false
   return 'syndicated_article' in item
+}
+
+const devLink = function (item) {
+  // In Dev, don't use redirect so we may test article view more easily
+  const isSyndicated = syndicated({ item })
+  const isDev = process.env.SHOW_DEV === 'included'
+  const path = item?.resolved_url || false
+  return isSyndicated && isDev && path
+    ? `discover/item/${path.substring(path.lastIndexOf('/') + 1)}`
+    : false
 }
