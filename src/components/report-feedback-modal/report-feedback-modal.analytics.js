@@ -1,8 +1,8 @@
 import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
-import { createReportEntity } from 'common/setup/snowplow/entities'
-import { createContentEntity } from 'common/setup/snowplow/entities'
-import { createEngagementEvent } from 'common/setup/snowplow/events'
-import { ENGAGEMENT_TYPE_REPORT } from 'common/setup/snowplow/events'
+import { createReportEntity } from 'connectors/snowplow/entities'
+import { createContentEntity } from 'connectors/snowplow/entities'
+import { createEngagementEvent } from 'connectors/snowplow/events'
+import { ENGAGEMENT_TYPE_REPORT } from 'connectors/snowplow/events'
 
 export const sendReportToSnowplow = (reportData, user, reportedItem) => {
   const snowplowEvent = createEngagementEvent(ENGAGEMENT_TYPE_REPORT)

@@ -1,9 +1,9 @@
 import { trackImpression } from 'connectors/snowplow/snowplow.state'
 import { trackContentOpen } from 'connectors/snowplow/snowplow.state'
-import { CONTENT_OPEN_TRIGGER_CLICK } from 'common/setup/snowplow/events'
-import { IMPRESSION_COMPONENT_CARD } from 'common/setup/snowplow/events'
-import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'common/setup/snowplow/events'
-import { getLinkOpenTarget } from 'common/setup/snowplow/events'
+import { CONTENT_OPEN_TRIGGER_CLICK } from 'connectors/snowplow/events'
+import { IMPRESSION_COMPONENT_CARD } from 'connectors/snowplow/events'
+import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
+import { getLinkOpenTarget } from 'connectors/snowplow/events'
 
 /**
  * fireItemImpression - function to conditionally execute when an item is

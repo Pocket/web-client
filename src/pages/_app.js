@@ -17,11 +17,11 @@ import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
 import { appWithTranslation } from 'common/setup/i18n'
-import { initializeSnowplow } from 'common/setup/snowplow/init'
-import { trackPageView } from 'connectors/snowplow/snowplow.state'
+import { initializeSnowplow } from 'common/setup/snowplow'
 
-import ReactGA from 'react-ga'
+import { trackPageView } from 'connectors/snowplow/snowplow.state'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
+import ReactGA from 'react-ga'
 
 /** Set up Sentry so we may catch errors
  --------------------------------------------------------------- */
