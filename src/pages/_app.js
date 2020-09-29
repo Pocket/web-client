@@ -7,6 +7,7 @@ import { wrapper } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
 import * as Sentry from '@sentry/node'
 
+import { appSetBaseURL } from 'connectors/app/app.state'
 import { fetchUserData, userHydrate } from 'connectors/user/user.state'
 import { checkSessGuid, sessGuidHydrate } from 'connectors/user/user.state'
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
