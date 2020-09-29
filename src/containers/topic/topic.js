@@ -1,14 +1,17 @@
 import Layout from 'layouts/main'
-import ErrorPage from 'pages/_error'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+
+import ErrorPage from 'pages/_error'
 import TopicCollection from './topic-collection'
 import TopicPage from './topic-page'
 import TopicSearch from './topic-search'
-import { useEffect, useState } from 'react'
 import { trackPageView } from './topic.analytics'
-import ReportFeedbackModal from '../../components/report-feedback-modal/report-feedback-modal'
+import ReportFeedbackModal from 'components/report-feedback-modal/report-feedback-modal'
 
-export default function Topic({ url, statusCode = 500 }) {
+export default function Topic(props) {
+  const { url = '', statusCode = 500 } = props
+
   // Select state to use
   const searchItems = useSelector((state) => state.topic?.searchItems)
   const curatedItems = useSelector((state) => state.topic?.curatedItems)
