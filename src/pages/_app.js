@@ -65,32 +65,34 @@ function PocketWebClient({ Component, pageProps, err }) {
   )
 }
 
-PocketWebClient.getInitialProps = async ({ Component, ctx }) => {
-  // Get the host, url and path so they are available to all pages
+PocketWebClient.getInitialProps = async ({ Component, ctx, router }) => {
+  const isDev = process.env.NODE_ENV !== 'production'
   const { req, store } = ctx
-  const host = req.headers.host
-  const url = req.protocol + '://' + host + req.originalUrl
-  const path = req.originalUrl // req.originalUrl maintains query params
 
   // The following functions are deemed critical, render blocking requests
   // ---------------------------------------------------------------
-  // !! Hydrate user information
-  const user = await fetchUserData(ctx)
-  if (user) store.dispatch(userHydrate(user))
+  if (req) {
+    // !! Hydrate app/server info
+    const protocol = isDev ? 'http://' : 'https://'
+    const baseURL = protocol + req.headers.host
+    store.dispatch(appSetBaseURL(baseURL))
 
-  // !! Hydrate sess_guid
-  const sessGuid = await checkSessGuid(ctx)
-  if (sessGuid) store.dispatch(sessGuidHydrate(sessGuid))
+    // !! Hydrate user information
+    const user = await fetchUserData(ctx)
+    if (user) store.dispatch(userHydrate(user))
 
-  // !! Hydrate features set with unleash
-  const features = await fetchUnleashData(user, sessGuid)
-  if (features) store.dispatch(featuresHydrate(features))
+    // !! Hydrate sess_guid
+    const sessGuid = await checkSessGuid(ctx)
+    if (sessGuid) store.dispatch(sessGuidHydrate(sessGuid))
+
+    // !! Hydrate features set with unleash
+    const features = await fetchUnleashData(user, sessGuid)
+    if (features) store.dispatch(featuresHydrate(features))
+  }
 
   // Wait for getInitialProps to run the component if they exist
   const pageProps = {
-    ...(Component.getInitialProps
-      ? await Component.getInitialProps(ctx, user, sessGuid)
-      : {})
+    ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {})
   }
 
   // Stop the saga if on server
@@ -98,6 +100,11 @@ PocketWebClient.getInitialProps = async ({ Component, ctx }) => {
     store.dispatch(END)
     await store.sagaTask.toPromise()
   }
+
+  // ?? Should we get url and path to pass through: Probably not
+  const appState = store.getState()
+  const path = router.asPath
+  const url = `${appState.app.baseURL}${path}`
 
   // Return our modified pageProps
   return { pageProps: { ...pageProps, url, path } }

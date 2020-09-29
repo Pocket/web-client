@@ -37,7 +37,7 @@ import { CallOutStartLibraryExplore } from 'components/call-out/call-out-start-l
 import { CallOutPocketHitsSignup } from 'components/call-out/call-out-pocket-hits'
 
 export default function Discover({ url }) {
-  // useEffect(trackPageView, [])
+  useEffect(trackPageView, [])
 
   // Select items
   const items = useSelector((state) => state.discover.items)
