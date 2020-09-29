@@ -60,12 +60,6 @@ Topic.getInitialProps = async ({ store, query, res }) => {
     algorithmicItemsById
   } = response
 
-  // Hydrate the topic list state
-  dispatch(hydrateTopicList({ activeTopic: slug, topicsByName }))
-
-  // Hydrate the topic page item arrays
-  dispatch(hydrateTopic({ searchItems, curatedItems, algorithmicItems }))
-
   // Hydrate the items array
   dispatch(
     hydrateItems({
@@ -74,6 +68,12 @@ Topic.getInitialProps = async ({ store, query, res }) => {
       ...algorithmicItemsById
     })
   )
+
+  // Hydrate the topic list state
+  dispatch(hydrateTopicList({ activeTopic: slug, topicsByName }))
+
+  // Hydrate the topic page item arrays
+  dispatch(hydrateTopic({ searchItems, curatedItems, algorithmicItems }))
 
   return { namespacesRequired: ['common'] }
 }
