@@ -3,7 +3,6 @@ import classNames from 'classnames'
 
 const rangeStepperWrapper = css`
   display: grid;
-  grid-template-columns: repeat(7, 18px);
   padding: 0 6px;
   justify-items: center;
   button {
@@ -54,7 +53,11 @@ export const StepperRange = ({ range = [], current = 0, onChange }) => {
   }
 
   return (
-    <div className={rangeStepperWrapper} current={current} lastIndex={range.length - 1}>
+    <div
+      className={rangeStepperWrapper}
+      style={{ gridTemplateColumns: `repeat(${range.length}, 18px)`}}
+      current={current}
+      lastIndex={range.length - 1}>
       {range.map((step, index) => (
         <button
           key={index}

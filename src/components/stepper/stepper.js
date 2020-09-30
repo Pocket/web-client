@@ -46,6 +46,9 @@ export const StepperWrapper = ({ children, ...args }) => (
 )
 
 const iconWrapper = css`
+  span {
+    height: 24px;
+  }
   &[data-tooltip] {
     cursor: initial;
     padding: 0px 10px 0 0;

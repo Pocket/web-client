@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import { Loader, LoaderCentered, LoadMore } from './loader'
 
 export default {
