@@ -1,7 +1,7 @@
 import { takeLatest, put, takeEvery } from 'redux-saga/effects'
 import { getDiscoverFeed } from 'common/api/discover'
 import { getItemSaveAnalytics } from './discover.analytics'
-import { deriveItemData } from 'connectors/items/items.state'
+import { deriveItemData } from 'connectors/discoverItems/items.state'
 import { arrayToObject } from 'common/utilities'
 
 import { DISCOVER_DATA_REQUEST } from 'actions'
@@ -11,8 +11,8 @@ import { DISCOVER_HYDRATE } from 'actions'
 import { DISCOVER_SAVE_REQUEST } from 'actions'
 import { DISCOVER_UNSAVE_REQUEST } from 'actions'
 
-import { ITEMS_SAVE_REQUEST } from 'actions'
-import { ITEMS_UNSAVE_REQUEST } from 'actions'
+import { DISCOVER_ITEMS_SAVE_REQUEST } from 'actions'
+import { DISCOVER_ITEMS_UNSAVE_REQUEST } from 'actions'
 
 import { HYDRATE } from 'actions'
 
@@ -27,7 +27,7 @@ export const unSaveDiscoverItem = (id) => ({ type: DISCOVER_UNSAVE_REQUEST, id }
  --------------------------------------------------------------- */
 const initialState = { items: [] }
 
-export const discoverReducers = (state = initialState, action) => {
+export const discoverHomeReducers = (state = initialState, action) => {
   switch (action.type) {
     case DISCOVER_DATA_SUCCESS: {
       const { items, itemsById } = action
@@ -47,8 +47,8 @@ export const discoverReducers = (state = initialState, action) => {
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE:
-      const { discover } = action.payload
-      return { ...state, ...discover }
+      const { discoverHome } = action.payload
+      return { ...state, ...discoverHome }
 
     default:
       return state
@@ -57,7 +57,7 @@ export const discoverReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const discoverSagas = [
+export const discoverHomeSagas = [
   takeLatest(DISCOVER_DATA_REQUEST, discoverDataRequest),
   takeEvery(DISCOVER_SAVE_REQUEST, discoverSaveRequest),
   takeEvery(DISCOVER_UNSAVE_REQUEST, discoverUnSaveRequest)
@@ -80,13 +80,13 @@ function* discoverDataRequest() {
 function* discoverSaveRequest(action) {
   const { url, id, position } = action
   const analytics = getItemSaveAnalytics(position)
-  yield put({ type: ITEMS_SAVE_REQUEST, id, url, analytics })
+  yield put({ type: DISCOVER_ITEMS_SAVE_REQUEST, id, url, analytics })
 }
 
 // This is only here to keep a consistent chain for item actions
 function* discoverUnSaveRequest(action) {
   const { id } = action
-  yield put({ type: ITEMS_UNSAVE_REQUEST, id })
+  yield put({ type: DISCOVER_ITEMS_UNSAVE_REQUEST, id })
 }
 
 /** ASYNC Functions

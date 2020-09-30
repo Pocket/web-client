@@ -2,7 +2,7 @@ import { Card } from 'components/card/card'
 import response from 'mock/discover.json'
 import { cardLockup } from './card-lockup'
 
-import { deriveItemData } from 'connectors/items/items.state'
+import { deriveItemData } from 'connectors/discoverItems/items.state'
 
 const items = deriveItemData(response.feed)
 

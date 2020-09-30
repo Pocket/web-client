@@ -4,53 +4,56 @@ import { getImageCacheUrl, domainForUrl } from 'common/utilities'
 import { saveItem as saveItemAPI } from 'common/api/saveItem'
 import { removeItem as removeItemAPI } from 'common/api/removeItem'
 
-import { ITEMS_HYDRATE } from 'actions'
-import { ITEMS_SAVE_REQUEST } from 'actions'
-import { ITEMS_SAVE_SUCCESS } from 'actions'
-import { ITEMS_SAVE_FAILURE } from 'actions'
-import { ITEMS_UNSAVE_REQUEST } from 'actions'
-import { ITEMS_UNSAVE_SUCCESS } from 'actions'
-import { ITEMS_UNSAVE_FAILURE } from 'actions'
+import { DISCOVER_ITEMS_HYDRATE } from 'actions'
+import { DISCOVER_ITEMS_SAVE_REQUEST } from 'actions'
+import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
+import { DISCOVER_ITEMS_SAVE_FAILURE } from 'actions'
+import { DISCOVER_ITEMS_UNSAVE_REQUEST } from 'actions'
+import { DISCOVER_ITEMS_UNSAVE_SUCCESS } from 'actions'
+import { DISCOVER_ITEMS_UNSAVE_FAILURE } from 'actions'
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const hydrateItems = (hydrated) => ({ type: ITEMS_HYDRATE, hydrated })
-export const saveItem = (id, url, analytics) => ({type: ITEMS_SAVE_REQUEST, id, url, analytics}) //prettier-ignore
-export const unSaveItem = id => ({ type: ITEMS_UNSAVE_REQUEST, id }) //prettier-ignore
+export const hydrateItems = (hydrated) => ({
+  type: DISCOVER_ITEMS_HYDRATE,
+  hydrated
+})
+export const saveItem = (id, url, analytics) => ({type: DISCOVER_ITEMS_SAVE_REQUEST, id, url, analytics}) //prettier-ignore
+export const unSaveItem = id => ({ type: DISCOVER_ITEMS_UNSAVE_REQUEST, id }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {}
 
-export const itemsReducers = (state = initialState, action) => {
+export const discoverItemsReducers = (state = initialState, action) => {
   switch (action.type) {
-    case ITEMS_HYDRATE: {
+    case DISCOVER_ITEMS_HYDRATE: {
       const { hydrated } = action
       return { ...state, ...hydrated }
     }
 
-    case ITEMS_SAVE_REQUEST: {
+    case DISCOVER_ITEMS_SAVE_REQUEST: {
       const { id } = action
       return updateSaveStatus(state, id, 'saving')
     }
 
-    case ITEMS_SAVE_SUCCESS: {
+    case DISCOVER_ITEMS_SAVE_SUCCESS: {
       const { id } = action
       return updateSaveStatus(state, id, 'saved')
     }
 
-    case ITEMS_SAVE_FAILURE: {
+    case DISCOVER_ITEMS_SAVE_FAILURE: {
       const { id } = action
       return updateSaveStatus(state, id, 'unsaved')
     }
 
-    case ITEMS_UNSAVE_SUCCESS: {
+    case DISCOVER_ITEMS_UNSAVE_SUCCESS: {
       const { id } = action
       return updateSaveStatus(state, id, 'unsaved')
     }
 
-    case ITEMS_UNSAVE_FAILURE: {
+    case DISCOVER_ITEMS_UNSAVE_FAILURE: {
       const { id } = action
       return updateSaveStatus(state, id, 'saved')
     }
@@ -58,8 +61,8 @@ export const itemsReducers = (state = initialState, action) => {
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE:
-      const { items } = action.payload
-      return { ...state, ...items }
+      const { discoverItemsById } = action.payload
+      return { ...state, ...discoverItemsById }
 
     default:
       return state
@@ -79,9 +82,9 @@ export function updateSaveStatus(state, id, save_status) {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const itemsSagas = [
-  takeEvery(ITEMS_SAVE_REQUEST, itemsSaveRequest),
-  takeEvery(ITEMS_UNSAVE_REQUEST, itemsUnSaveRequest)
+export const discoverItemsSagas = [
+  takeEvery(DISCOVER_ITEMS_SAVE_REQUEST, itemsSaveRequest),
+  takeEvery(DISCOVER_ITEMS_UNSAVE_REQUEST, itemsUnSaveRequest)
 ]
 
 /** SAGA :: RESPONDERS
@@ -94,9 +97,9 @@ function* itemsSaveRequest(action) {
     const response = yield saveItemAPI(url, analytics)
     if (response?.status !== 1) throw new Error('Unable to save')
 
-    yield put({ type: ITEMS_SAVE_SUCCESS, id })
+    yield put({ type: DISCOVER_ITEMS_SAVE_SUCCESS, id })
   } catch (error) {
-    yield put({ type: ITEMS_SAVE_FAILURE, error })
+    yield put({ type: DISCOVER_ITEMS_SAVE_FAILURE, error })
   }
 }
 
@@ -107,9 +110,9 @@ function* itemsUnSaveRequest(action) {
     const response = yield removeItemAPI(id)
     if (response?.status !== 1) throw new Error('Unable to remove item')
 
-    yield put({ type: ITEMS_UNSAVE_SUCCESS, id })
+    yield put({ type: DISCOVER_ITEMS_UNSAVE_SUCCESS, id })
   } catch (error) {
-    yield put({ type: ITEMS_UNSAVE_FAILURE, error })
+    yield put({ type: DISCOVER_ITEMS_UNSAVE_FAILURE, error })
   }
 }
 
@@ -142,8 +145,7 @@ export function deriveItemData(response) {
 
 /** DERIVE Functions
   * ? Derived fields to help clarify logic for what values to use in some common cases
-  * ? The data we recieve this is not normalized yet. This can move to web_utilities
-  * ? once that work is completed.
+  * ? The data we receive this is not normalized yet.
  --------------------------------------------------------------- */
 
 /** TITLE

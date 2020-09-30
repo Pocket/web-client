@@ -13,11 +13,12 @@ export default function Topic(props) {
   const { url = '', statusCode = 500 } = props
 
   // Select state to use
-  const searchItems = useSelector((state) => state.topic?.searchItems)
-  const curatedItems = useSelector((state) => state.topic?.curatedItems)
-  const algorithmicItems = useSelector((state) => state.topic?.algorithmicItems)
   const topicList = useSelector((state) => state.topicList?.topicsByName)
   const activeTopic = useSelector((state) => state.topicList?.activeTopic)
+
+  const searchItems = useSelector((state) => state.discoverTopic?.[activeTopic]?.searchItems) //prettier-ignore
+  const curatedItems = useSelector((state) => state.discoverTopic?.[activeTopic]?.curatedItems) //prettier-ignore
+  const algorithmicItems = useSelector((state) => state.discoverTopic?.[activeTopic]?.algorithmicItems) //prettier-ignore
 
   const topic = topicList[activeTopic] || activeTopic
   const title = topic?.display_name || topic

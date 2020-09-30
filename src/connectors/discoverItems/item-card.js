@@ -22,7 +22,7 @@ export function ItemCard({
 }) {
   // Get data from state
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const item = useSelector((state) => state.items[id])
+  const item = useSelector((state) => state.discoverItemsById[id])
 
   const { save_url, save_status } = item
   const dispatch = useDispatch()

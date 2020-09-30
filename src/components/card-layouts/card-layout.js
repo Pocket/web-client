@@ -1,7 +1,7 @@
 import { cardsContainer } from 'components/card-layouts/cards-container'
 import { cardList } from 'components/card-layouts/card-list'
 import { cardLockup } from 'components/card-layouts/card-lockup'
-import { ItemCard } from 'connectors/items/item-card'
+import { ItemCard } from 'connectors/discoverItems/item-card'
 import { cx } from 'linaria'
 
 /**

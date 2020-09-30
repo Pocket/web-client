@@ -40,7 +40,7 @@ export default function Discover({ url }) {
   useEffect(trackPageView, [])
 
   // Select items
-  const items = useSelector((state) => state.discover.items)
+  const items = useSelector((state) => state.discoverHome.items)
 
   // Return error if no items are present
   // !! TODO: FIX THIS - This is a horrid error

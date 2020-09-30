@@ -4,7 +4,7 @@ import { hydrateTopicList } from 'connectors/topic-list/topic-list.state'
 import { fetchTopicData } from 'containers/topic/topic.state'
 import { fetchSearchData } from 'containers/topic/topic.state'
 import { hydrateTopic } from 'containers/topic/topic.state'
-import { hydrateItems } from 'connectors/items/items.state'
+import { hydrateItems } from 'connectors/discoverItems/items.state'
 
 /**
  * Server Side State Hydration
