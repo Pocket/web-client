@@ -1,0 +1,68 @@
+import { css } from 'linaria'
+import classNames from 'classnames'
+
+const rangeStepperWrapper = css`
+  display: grid;
+  grid-template-columns: repeat(7, 18px);
+  padding: 0 6px;
+  justify-items: center;
+  button {
+    position: relative;
+    background: transparent;
+    border-radius: 50%;
+    width: 15px;
+    border: none;
+    padding: 0px;
+    height: 15px;
+    overflow: hidden;
+    &:focus {
+      outline: none;
+    }
+    &:before {
+      content: ' ';
+      position: absolute;
+      height: 6px;
+      width: 6px;
+      background: var(--color-popoverBorder);
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &:after {
+      content: ' ';
+      position: absolute;
+      height: 12px;
+      width: 12px;
+      background-color: var(--color-actionPrimaryHover);
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+    &:hover, &.current {
+      &:after { display: block; }
+    }
+  }
+`
+
+export const StepperRange = ({ range = [], current = 0, onChange }) => {
+  const onStepClick = ({ target }) => {
+    const dataIndex = target.getAttribute('data-index-number')
+    onChange(parseInt(dataIndex))
+  }
+
+  return (
+    <div className={rangeStepperWrapper} current={current} lastIndex={range.length - 1}>
+      {range.map((step, index) => (
+        <button
+          key={index}
+          data-index-number={index}
+          onClick={onStepClick}
+          className={classNames({ current: index === current })}
+        />
+      ))}
+    </div>
+  )
+}
