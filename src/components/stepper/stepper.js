@@ -1,34 +1,7 @@
 import { css } from 'linaria'
 import { tooltipBase } from 'components/tooltip/tooltip'
 import classNames from 'classnames'
-
-export const buttonReset = css`
-  input:focus,
-  button:focus,
-  select:focus {
-    outline: 0;
-  }
-  border: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  overflow: visible;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  line-height: normal;
-  text-align: inherit;
-  -webkit-font-smoothing: inherit;
-  -moz-osx-font-smoothing: inherit;
-  -webkit-appearance: none;
-  &::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-  }
-  &:focus {
-    outline: 0;
-  }
-`
+import { buttonReset } from 'components/buttons/button-reset'
 
 const stepperWrapper = css`
   align-self: start;
@@ -62,7 +35,7 @@ export const IconWrapper = ({ children, ...args }) => (
 
 const sizeChangeButton = css`
   display: block;
-  color: var(--color-textSecondary);
+  color: var(--color-textTertiary);
   &:hover {
     cursor: initial;
     background: transparent;
@@ -73,8 +46,8 @@ const sizeChangeButton = css`
   padding: 8px 10px;
   &.active {
     cursor: pointer;
-    color: var(--color-actionSecondary);
-    background-color: var(--color-actionSecondaryHoverText);
+    color: var(--color-textSecondary);
+    background-color: var(--color-popoverBorder);
     &:hover {
       background: var(--color-actionPrimarySubdued);
       color: var(--color-actionPrimaryHover);

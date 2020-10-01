@@ -4,7 +4,7 @@ import { AddIcon, RemoveIcon, TextSettingsIcon } from '@pocket/web-ui'
 import { useState } from 'react'
 
 export default {
-  title: 'Elements/Stepper'
+  title: 'Components/Stepper'
 }
 
 export const normal = () => {

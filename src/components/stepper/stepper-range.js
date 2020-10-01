@@ -22,7 +22,7 @@ const rangeStepperWrapper = css`
       position: absolute;
       height: 6px;
       width: 6px;
-      background: var(--color-popoverBorder);
+      background: var(--color-textSecondary);
       border-radius: 50%;
       left: 50%;
       top: 50%;
@@ -33,7 +33,7 @@ const rangeStepperWrapper = css`
       position: absolute;
       height: 12px;
       width: 12px;
-      background-color: var(--color-actionPrimaryHover);
+      background-color: var(--color-actionPrimary);
       border-radius: 50%;
       left: 50%;
       top: 50%;
