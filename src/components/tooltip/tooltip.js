@@ -10,6 +10,7 @@ export const tooltipBody = css`
   text-align: center;
   font-size: 14px;
   line-height: 1.2;
+  font-family: 'Graphik Web';
 
   &:before {
     position: absolute;
