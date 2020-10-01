@@ -2,7 +2,7 @@ import { takeLatest, put, takeEvery } from 'redux-saga/effects'
 import { getTopicFeed } from 'common/api/topics'
 import { getSearchFeed } from 'common/api/search'
 import { getItemSaveAnalytics } from './topic.analytics'
-import { deriveItemData } from 'connectors/discoverItems/items.state'
+import { deriveItemData } from 'connectors/discover-items/items.state'
 import { arrayToObject } from 'common/utilities'
 import {
   TOPIC_DATA_REQUEST,

@@ -1,11 +1,11 @@
-import { CollectionPageHeader } from 'components/card-layouts/card-page-header'
-import { CardList, CardLayout } from 'components/card-layouts/card-layout'
+import { CollectionPageHeader } from 'components/discover-layouts/card-page-header'
+import { CardList, CardLayout } from 'components/discover-layouts/card-layout'
 import { useSelector } from 'react-redux'
 import { saveTopicItem, unSaveTopicItem } from './topic.state'
 import { trackItemOpen, trackTopicClick } from './topic.analytics'
 import { trackUnAuthSave } from './topic.analytics'
 import { trackItemImpression } from './topic.analytics'
-import { CardTopicsNav } from 'components/card-layouts/card-topics-nav'
+import { CardTopicsNav } from 'components/discover-layouts/card-topics-nav'
 
 export default function topicCollection({
   curatedItems,

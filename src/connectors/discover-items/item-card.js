@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Card } from 'components/card/card'
+import { Card } from 'components/discover-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { useInView } from 'react-intersection-observer'
 import { fireItemImpression, fireItemOpen } from './items.analytics'

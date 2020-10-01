@@ -1,10 +1,10 @@
-import { Card } from 'components/card/card'
+import { Card } from 'components/discover-card/card'
 import response from 'mock/discover.json'
 import { cardList } from './card-list'
-import { deriveItemData } from 'connectors/discoverItems/items.state'
+import { deriveItemData } from 'connectors/discover-items/items.state'
 
 export default {
-  title: 'Components/Card Layouts/cardList'
+  title: 'components/discover-card Layouts/cardList'
 }
 
 export const Normal = () => {

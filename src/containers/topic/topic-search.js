@@ -1,12 +1,12 @@
-import { SearchPageHeader } from 'components/card-layouts/card-page-header'
-import { CardList, CardLayout } from 'components/card-layouts/card-layout'
+import { SearchPageHeader } from 'components/discover-layouts/card-page-header'
+import { CardList, CardLayout } from 'components/discover-layouts/card-layout'
 import { saveTopicItem, unSaveTopicItem } from './topic.state'
 import { useSelector } from 'react-redux'
 import { trackItemOpen } from './topic.analytics'
 import { trackUnAuthSave } from './topic.analytics'
 import { trackItemImpression } from './topic.analytics'
 import { trackTopicClick } from './topic.analytics'
-import { CardTopicsNav } from 'components/card-layouts/card-topics-nav'
+import { CardTopicsNav } from 'components/discover-layouts/card-topics-nav'
 
 export default function topicSearch({ searchItems, topic, sharedActions }) {
   // Get topicList for sections that require it

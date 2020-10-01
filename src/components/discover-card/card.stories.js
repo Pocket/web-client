@@ -1,10 +1,10 @@
 import { Card as CardComponent } from './card'
-import { deriveItemData } from 'connectors/discoverItems/items.state'
+import { deriveItemData } from 'connectors/discover-items/items.state'
 
 import response from 'mock/discover.json'
 
 export default {
-  title: 'Components/Card/Card',
+  title: 'components/discover-card/Card',
   component: CardComponent
 }
 

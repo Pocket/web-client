@@ -1,13 +1,13 @@
-import { Card } from 'components/card/card'
+import { Card } from 'components/discover-card/card'
 import response from 'mock/discover.json'
 import { cardLockup } from './card-lockup'
 
-import { deriveItemData } from 'connectors/discoverItems/items.state'
+import { deriveItemData } from 'connectors/discover-items/items.state'
 
 const items = deriveItemData(response.feed)
 
 export default {
-  title: 'Components/Card Layouts/cardLockup'
+  title: 'components/discover-card Layouts/cardLockup'
 }
 
 export const Center = () => {

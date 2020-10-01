@@ -3,7 +3,7 @@ import { hydrateDiscover } from 'containers/discover/discover.state'
 import { fetchDiscoverData } from 'containers/discover/discover.state'
 import { fetchTopicList } from 'connectors/topic-list/topic-list.state'
 import { hydrateTopicList } from 'connectors/topic-list/topic-list.state'
-import { hydrateItems } from 'connectors/discoverItems/items.state'
+import { hydrateItems } from 'connectors/discover-items/items.state'
 
 /**
  * Server Side State Hydration

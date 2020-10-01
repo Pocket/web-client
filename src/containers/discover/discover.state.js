@@ -1,7 +1,7 @@
 import { takeLatest, put, takeEvery } from 'redux-saga/effects'
 import { getDiscoverFeed } from 'common/api/discover'
 import { getItemSaveAnalytics } from './discover.analytics'
-import { deriveItemData } from 'connectors/discoverItems/items.state'
+import { deriveItemData } from 'connectors/discover-items/items.state'
 import { arrayToObject } from 'common/utilities'
 
 import { DISCOVER_DATA_REQUEST } from 'actions'

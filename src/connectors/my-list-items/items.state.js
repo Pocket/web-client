@@ -4,56 +4,59 @@ import { getImageCacheUrl, domainForUrl } from 'common/utilities'
 import { saveItem as saveItemAPI } from 'common/api/saveItem'
 import { removeItem as removeItemAPI } from 'common/api/removeItem'
 
-import { DISCOVER_ITEMS_HYDRATE } from 'actions'
-import { DISCOVER_ITEMS_SAVE_REQUEST } from 'actions'
-import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
-import { DISCOVER_ITEMS_SAVE_FAILURE } from 'actions'
-import { DISCOVER_ITEMS_UNSAVE_REQUEST } from 'actions'
-import { DISCOVER_ITEMS_UNSAVE_SUCCESS } from 'actions'
-import { DISCOVER_ITEMS_UNSAVE_FAILURE } from 'actions'
+import { MYLIST_ITEMS_HYDRATE } from 'actions'
+import { MYLIST_DATA_SUCCESS } from 'actions'
+import { MYLIST_ITEMS_SAVE_REQUEST } from 'actions'
+import { MYLIST_ITEMS_SAVE_SUCCESS } from 'actions'
+import { MYLIST_ITEMS_SAVE_FAILURE } from 'actions'
+import { MYLIST_ITEMS_UNSAVE_REQUEST } from 'actions'
+import { MYLIST_ITEMS_UNSAVE_SUCCESS } from 'actions'
+import { MYLIST_ITEMS_UNSAVE_FAILURE } from 'actions'
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const hydrateItems = (hydrated) => ({
-  type: DISCOVER_ITEMS_HYDRATE,
-  hydrated
-})
-export const saveItem = (id, url, analytics) => ({type: DISCOVER_ITEMS_SAVE_REQUEST, id, url, analytics}) //prettier-ignore
-export const unSaveItem = id => ({ type: DISCOVER_ITEMS_UNSAVE_REQUEST, id }) //prettier-ignore
+export const hydrateItems = (hydrated) => ({ type: MYLIST_ITEMS_HYDRATE, hydrated }) //prettier-ignore
+export const saveItem = (id, url, analytics) => ({type: MYLIST_ITEMS_SAVE_REQUEST, id, url, analytics}) //prettier-ignore
+export const unSaveItem = id => ({ type: MYLIST_ITEMS_UNSAVE_REQUEST, id }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {}
 
-export const discoverItemsReducers = (state = initialState, action) => {
+export const myListItemsReducers = (state = initialState, action) => {
   switch (action.type) {
-    case DISCOVER_ITEMS_HYDRATE: {
+    case MYLIST_ITEMS_HYDRATE: {
       const { hydrated } = action
       return { ...state, ...hydrated }
     }
 
-    case DISCOVER_ITEMS_SAVE_REQUEST: {
+    case MYLIST_DATA_SUCCESS: {
+      const { itemsById } = action
+      return { ...state, ...itemsById }
+    }
+
+    case MYLIST_ITEMS_SAVE_REQUEST: {
       const { id } = action
       return updateSaveStatus(state, id, 'saving')
     }
 
-    case DISCOVER_ITEMS_SAVE_SUCCESS: {
+    case MYLIST_ITEMS_SAVE_SUCCESS: {
       const { id } = action
       return updateSaveStatus(state, id, 'saved')
     }
 
-    case DISCOVER_ITEMS_SAVE_FAILURE: {
+    case MYLIST_ITEMS_SAVE_FAILURE: {
       const { id } = action
       return updateSaveStatus(state, id, 'unsaved')
     }
 
-    case DISCOVER_ITEMS_UNSAVE_SUCCESS: {
+    case MYLIST_ITEMS_UNSAVE_SUCCESS: {
       const { id } = action
       return updateSaveStatus(state, id, 'unsaved')
     }
 
-    case DISCOVER_ITEMS_UNSAVE_FAILURE: {
+    case MYLIST_ITEMS_UNSAVE_FAILURE: {
       const { id } = action
       return updateSaveStatus(state, id, 'saved')
     }
@@ -82,9 +85,9 @@ export function updateSaveStatus(state, id, save_status) {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const discoverItemsSagas = [
-  takeEvery(DISCOVER_ITEMS_SAVE_REQUEST, itemsSaveRequest),
-  takeEvery(DISCOVER_ITEMS_UNSAVE_REQUEST, itemsUnSaveRequest)
+export const myListItemsSagas = [
+  takeEvery(MYLIST_ITEMS_SAVE_REQUEST, itemsSaveRequest),
+  takeEvery(MYLIST_ITEMS_UNSAVE_REQUEST, itemsUnSaveRequest)
 ]
 
 /** SAGA :: RESPONDERS
@@ -97,9 +100,9 @@ function* itemsSaveRequest(action) {
     const response = yield saveItemAPI(url, analytics)
     if (response?.status !== 1) throw new Error('Unable to save')
 
-    yield put({ type: DISCOVER_ITEMS_SAVE_SUCCESS, id })
+    yield put({ type: MYLIST_ITEMS_SAVE_SUCCESS, id })
   } catch (error) {
-    yield put({ type: DISCOVER_ITEMS_SAVE_FAILURE, error })
+    yield put({ type: MYLIST_ITEMS_SAVE_FAILURE, error })
   }
 }
 
@@ -110,9 +113,9 @@ function* itemsUnSaveRequest(action) {
     const response = yield removeItemAPI(id)
     if (response?.status !== 1) throw new Error('Unable to remove item')
 
-    yield put({ type: DISCOVER_ITEMS_UNSAVE_SUCCESS, id })
+    yield put({ type: MYLIST_ITEMS_UNSAVE_SUCCESS, id })
   } catch (error) {
-    yield put({ type: DISCOVER_ITEMS_UNSAVE_FAILURE, error })
+    yield put({ type: MYLIST_ITEMS_UNSAVE_FAILURE, error })
   }
 }
 
@@ -127,17 +130,31 @@ export function deriveItemData(response) {
    * @read_time {string} An approximation of how long it takes to read the article based on
    * @save_status {string} A string value (unsaved, saving, saved)
    */
-  return response.map((feedItem) => {
+  return response.map((item) => {
     return {
-      resolved_id: feedItem.item?.resolved_id,
-      title: displayTitle(feedItem),
-      thumbnail: displayThumbnail(feedItem),
-      publisher: displayPublisher(feedItem),
-      excerpt: displayExcerpt(feedItem),
-      save_url: saveUrl(feedItem),
-      open_url: openUrl(feedItem),
-      read_time: readTime(feedItem),
-      syndicated: syndicated(feedItem),
+      resolved_id: item?.resolved_id,
+      sort_id: item?.sort_id,
+      favorite: item?.favorite,
+      has_image: item?.has_image,
+      has_video: item?.has_video,
+      is_article: item?.is_article,
+      is_index: item?.is_index,
+      lang: item?.lang,
+      listen_duration_estimate: item?.listen_duration_estimate,
+      sort_id: item?.sort_id,
+      status: item?.status,
+      time_added: '1600201689',
+      time_favorited: item?.time_favorited,
+      time_read: item?.time_read,
+      time_updated: item?.time_updated,
+      title: displayTitle({ item }),
+      thumbnail: displayThumbnail({ item }),
+      publisher: displayPublisher({ item }),
+      excerpt: displayExcerpt({ item }),
+      save_url: saveUrl({ item }),
+      open_url: openUrl({ item }),
+      read_time: readTime({ item }),
+      syndicated: syndicated({ item }),
       save_status: 'unsaved'
     }
   })

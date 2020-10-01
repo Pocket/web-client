@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { CardTopicsNav } from 'components/card-layouts/card-topics-nav'
+import { CardTopicsNav } from 'components/discover-layouts/card-topics-nav'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 
 const topicBubblesStyles = css`
@@ -16,7 +16,5 @@ const topicBubblesStyles = css`
 `
 
 export function TopicsBubbles({ topics }) {
-  return (
-    <CardTopicsNav topics={topics} classNames={[topicBubblesStyles]} />
-  )
+  return <CardTopicsNav topics={topics} classNames={[topicBubblesStyles]} />
 }

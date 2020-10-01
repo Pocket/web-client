@@ -8,7 +8,7 @@ import { shallow } from 'enzyme'
 import * as reactRedux from 'react-redux'
 
 import { ItemCard } from './item-card'
-import { Card } from 'components/card/card'
+import { Card } from 'components/discover-card/card'
 
 describe('ItemCard', function () {
   // redux dependencies are stubbed so that we don't need to set up a Provider/context,

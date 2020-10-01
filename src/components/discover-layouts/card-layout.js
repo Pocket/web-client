@@ -1,7 +1,7 @@
-import { cardsContainer } from 'components/card-layouts/cards-container'
-import { cardList } from 'components/card-layouts/card-list'
-import { cardLockup } from 'components/card-layouts/card-lockup'
-import { ItemCard } from 'connectors/discoverItems/item-card'
+import { cardsContainer } from 'components/discover-layouts/cards-container'
+import { cardList } from 'components/discover-layouts/card-list'
+import { cardLockup } from 'components/discover-layouts/card-lockup'
+import { ItemCard } from 'connectors/discover-items/item-card'
 import { cx } from 'linaria'
 
 /**
