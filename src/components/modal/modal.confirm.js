@@ -51,7 +51,6 @@ export const ConfirmDelete = ({
       <Button
         onClick={confirmModal}
         className={buttonSpacing}
-        // margin="0 0 0 15px"
         // data-tooltip={translate('modalConfirm.delete', { type: operateOn })}
         // aria-label={translate('modalConfirm.delete', { type: operateOn })}
       >

@@ -46,3 +46,12 @@ export function domainForUrl(url) {
 export function getTopLevelPath(path) {
   return path.split('/')[1]
 }
+
+/**
+ * urlWithPermanentLibrary
+ * @param {string} item_id of the article
+ * @return {string} url pointed at the permanent library item
+ */
+export function urlWithPermanentLibrary(item_id) {
+  return `https://getpocket.com/library/?pl_i=${item_id}`
+}
