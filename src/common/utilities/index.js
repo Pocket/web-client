@@ -18,3 +18,5 @@ export { getObjectWithValidKeysOnly } from './object-array/object-array'
 export { addAmbientMotion } from './animation/animation'
 
 export { openWindow } from './open-window/open-window'
+
+export { validateEmail } from './validate-email/validate-email'

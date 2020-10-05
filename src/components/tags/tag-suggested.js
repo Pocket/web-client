@@ -13,8 +13,8 @@ export const suggestedTag = css`
     border: 1px solid #286F96;
   }
 `
-export const SuggestedTag = ({ children, ...args }) => (
-  <div className={classNames(tagBase, suggestedTag)} {...args}>
+export const SuggestedTag = ({ children, margin, ...args }) => (
+  <div className={classNames(tagBase, suggestedTag)} style={{ margin }} {...args}>
     { children }
   </div>
 )
