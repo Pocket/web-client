@@ -94,6 +94,9 @@ const shareAction = css`
   button {
     margin-left: 10px;
   }
+  .secondary {
+    padding: 10px 12px;
+  }
 `
 
 export class ShareSheet extends React.Component {
@@ -239,7 +242,7 @@ export class ShareSheet extends React.Component {
 
         <div className={shareAction}>
           <Button
-            type="neutral"
+            variant="secondary"
             // aria-label={translate('share.cancelAction')}
             onClick={this.props.onClose}>
             Cancel
