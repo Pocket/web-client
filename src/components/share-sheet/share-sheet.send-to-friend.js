@@ -4,7 +4,7 @@ import { Tagging } from 'components/tagging/tagging'
 
 const panelWrapper = css`
   margin-bottom: 1em;
-  padding: 1em 0;
+  padding: 1em 0 0;
   border-top: 4px solid var(--color-dividerTertiary);
   border-bottom: 1px solid var(--color-dividerTertiary);
   h4 {
