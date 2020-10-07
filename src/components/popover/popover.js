@@ -96,7 +96,7 @@ export function usePopover(options) {
       element.removeEventListener('click', handleTriggerClick)
       removeDocumentListeners()
     }
-  }, [])
+  }, [popTrigger.current])
 
   return { popTrigger, popBody, shown }
 }

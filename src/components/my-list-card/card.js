@@ -5,14 +5,20 @@ import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { CardMedia } from 'components/my-list-card/card-media'
 import { ItemAction } from 'components/my-list-card/item-action'
 import { underliner } from 'components/underliner/underliner'
-import { ReportIcon } from '@pocket/web-ui'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 
+import { IosShareIcon } from '@pocket/web-ui'
+import { DeleteIcon } from '@pocket/web-ui'
+import { ArchiveIcon } from '@pocket/web-ui'
+import { FavoriteIcon } from '@pocket/web-ui'
+import { TagIcon } from '@pocket/web-ui'
+
 const card = css`
-  height: 100%;
+  height: 355px;
   width: 100%;
   border-bottom: 1px solid var(--color-dividerTertiary);
   padding: 0;
+  margin-bottom: 20px;
   font-family: var(--fontSansSerif);
   font-weight: 400;
   color: var(--color-textPrimary);
@@ -23,7 +29,7 @@ const card = css`
     display: block;
     height: 100%;
     width: 100%;
-    padding-bottom: var(--size400);
+    padding-bottom: var(--size200);
     text-decoration: none;
     transition-property: color;
     transition-duration: 0.2s;
@@ -77,6 +83,8 @@ const card = css`
     font-weight: 600;
     padding: var(--size100) 0 0;
     margin: 0;
+    max-height: 4.4em;
+    overflow: hidden;
   }
 
   .details {
@@ -106,7 +114,7 @@ const card = css`
     bottom: 0;
     left: 0;
     width: 100%;
-    padding-bottom: 1.5em;
+    padding-bottom: 1em;
   }
 
   .actions {
@@ -119,7 +127,7 @@ const card = css`
  * out of the [feed](https://github.com/Pocket/spec/blob/master/query/v3server/feed.md)
  * and makes sure the appropriate data is represented.
  */
-export const Card = React.forwardRef(({ item }, ref) => {
+export const Card = ({ item }) => {
   const {
     resolved_id: id,
     title,
@@ -135,7 +143,6 @@ export const Card = React.forwardRef(({ item }, ref) => {
     <article
       className={card}
       key={id}
-      ref={ref}
       {...testIdAttribute(`article-card-${id}`)}>
       <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
         <span className="idOverlay">{id}</span>
@@ -160,8 +167,34 @@ export const Card = React.forwardRef(({ item }, ref) => {
           <ItemAction
             menuItems={[
               {
-                label: 'Report',
-                icon: <ReportIcon />,
+                label: 'Share',
+                icon: <IosShareIcon />,
+                onClick: () => onReportFeedback
+              },
+              {
+                label: 'Delete',
+                icon: <DeleteIcon />,
+                onClick: () => {
+                  onReportFeedback()
+                }
+              },
+              {
+                label: 'Archive',
+                icon: <ArchiveIcon />,
+                onClick: () => {
+                  onReportFeedback()
+                }
+              },
+              {
+                label: 'Favorite',
+                icon: <FavoriteIcon />,
+                onClick: () => {
+                  onReportFeedback()
+                }
+              },
+              {
+                label: 'Tag',
+                icon: <TagIcon />,
                 onClick: () => {
                   onReportFeedback()
                 }
@@ -174,4 +207,4 @@ export const Card = React.forwardRef(({ item }, ref) => {
       </footer>
     </article>
   )
-})
+}

@@ -11,7 +11,6 @@ export const cardsGrid = {
   alignItems: 'start',
   justifyContent: 'space-between',
   gridColumnGap: spacing150,
-  gridRowGap: spacing150,
   /* this is a 12 column grid */
   gridTemplateColumns: 'repeat(12, 1fr)',
   gridAutoFlow: 'dense',
@@ -37,19 +36,14 @@ export const cardsContainer = css`
     padding-top: var(--spacing150);
   }
 
-  /* Hide all borders on last article largeTablet and below */
-  &.list article:last-of-type {
-    ${breakpointLargeTablet} {
-      border-bottom: none;
-    }
-  }
-
   &.no-border {
     border-bottom: none;
   }
 
   /* Hide all border on last article list or explicit no-border */
-  &.no-border article:last-of-type {
+  &.no-border article:nth-last-of-type(3),
+  &.no-border article:nth-last-of-type(2),
+  &.no-border article:nth-last-of-type(1) {
     border-bottom: none;
   }
 

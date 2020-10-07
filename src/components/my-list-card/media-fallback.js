@@ -16,7 +16,7 @@ const _colorAmber = '#FCB643'
 const _colorMint = '#00CB77'
 
 const imageBlockBefore = {
-  transition: 'background-color 1000ms linear',
+  transition: 'background-color 300ms linear',
   content: '""',
   overflow: 'hidden',
   display: 'block',
@@ -31,7 +31,7 @@ const imageBlockBefore = {
 }
 
 const imageBlockAfter = {
-  transition: 'opacity 1000ms linear',
+  transition: 'opacity 300ms linear',
   backgroundColor: 'transparent',
   color: 'var(--fallbackColor)',
   content: 'var(--fallbackLetter)',
@@ -60,7 +60,7 @@ const pendingStyle = css`
   position: relative;
   &::before {
     ${imageBlockBefore};
-    background-color: #a6a6a6; /* TODO: change to var(--color-grey65) when palette available in web-ui */
+    background-color: var(--color-dividerTertiary);
   }
   &::after {
     ${imageBlockAfter};

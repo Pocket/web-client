@@ -49,7 +49,7 @@ export const shareContainer = css`
 export const popoverContainer = css`
   ${popoverBase};
   font-size: var(--fontSize100);
-  line-height: 40px;
+  line-height: 36px;
   .popoverLink {
     width: 100%;
     color: var(--color-textSecondary);
@@ -61,7 +61,7 @@ export const popoverContainer = css`
       align-items: center;
       align-content: center;
       width: 100%;
-      height: 40px;
+      height: 36px;
       padding: 0 16px !important;
       cursor: pointer;
       justify-content: flex-start;
@@ -75,7 +75,7 @@ export const popoverContainer = css`
     svg {
       fill: currentColor;
       height: 24px;
-      margin: -2px 10px 0 0;
+      margin: -4px 10px 0 0;
     }
 
     &:hover {

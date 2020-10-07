@@ -12,7 +12,15 @@ export const cardGrid = css`
   article {
     grid-column: span 4;
     h2 {
-      font-size: 1.5rem;
+      font-size: var(--fontSize125);
+    }
+    .details {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .excerpt {
+      display: none;
     }
   }
 `

@@ -191,7 +191,9 @@ function displayThumbnail({ item, curated_info }) {
     item?.top_image_url ||
     item?.images?.[Object.keys(item.images)[0]]?.src ||
     null
-  return correct_image ? getImageCacheUrl(correct_image) : null
+  return correct_image
+    ? getImageCacheUrl(correct_image, { width: 300, height: 200 })
+    : null
 }
 
 /** PUBLISHER
