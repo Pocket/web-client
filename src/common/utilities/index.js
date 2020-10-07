@@ -17,6 +17,11 @@ export { getObjectWithValidKeysOnly } from './object-array/object-array'
 
 export { addAmbientMotion } from './animation/animation'
 
+export { getScrollTop } from './scroll/scroll'
+export { atEndOfScroll } from './scroll/scroll'
+
+export { capitalizeFirstLetter } from './strings/strings'
+
 export { openWindow } from './open-window/open-window'
 
 export { validateEmail } from './validate-email/validate-email'
