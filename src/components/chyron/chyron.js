@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
-import { localStore } from 'connectors/browser-storage/browser-storage'
-import { css } from 'linaria'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
 const CHYRON_NOT_COMPLETED = 'not-completed'
 const CHYRON_COMPLETED = 'completed'

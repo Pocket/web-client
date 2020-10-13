@@ -1,5 +1,5 @@
 import { takeEvery, put } from 'redux-saga/effects'
-import { localStore } from 'connectors/browser-storage/browser-storage'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
 import { VARIANTS_DEFINE, VARIANTS_SAVE, VARIANTS_UPDATE } from 'actions'
 
 /** ACTIONS
