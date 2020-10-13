@@ -26,8 +26,8 @@ export function ItemCard({ id, position, fluidHeight }) {
   const itemArchive = () => dispatch(itemsArchiveAction([{ id, position }]))
   const itemUnArchive = () => dispatch(itemsUnArchiveAction([{ id, position }]))
 
-  const itemFavorite = () => dispatch(itemsFavoriteAction({ id, position }))
-  const itemUnFavorite = () => dispatch(itemsUnFavoriteAction({ id, position }))
+  const itemFavorite = () => dispatch(itemsFavoriteAction([{ id, position }]))
+  const itemUnFavorite = () => dispatch(itemsUnFavoriteAction([{ id, position }])) //prettier-ignore
 
   const itemTag = () => {}
 
