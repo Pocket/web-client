@@ -8,7 +8,7 @@ import { HighlightIcon, IosShareIcon } from '@pocket/web-ui'
 // import { ShareMenu } from 'Modules/ShareMenu/shareMenu'
 
 const popupContainer = css`
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
 `
@@ -180,7 +180,7 @@ class SelectionPopoverClass extends Component {
     return (
       <div
         className={popupContainer}
-        style={{ transform: `translate(${Math.round(center)}px, ${Math.round(top)}px)` }}>
+        style={{ transform: `translate(${Math.round(center)}px, ${Math.round(top + window.scrollY)}px)` }}>
         <div
           className={classNames(overlayBase, popupWrapper, { hideArrow: this.state.share })}
           ref={this.containerRef}>

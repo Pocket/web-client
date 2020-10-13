@@ -1,4 +1,4 @@
-import { StepperWrapper, IconWrapper, SizeChangeButton } from './stepper'
+import { StepperWrapper, IconWrapper, StepperButton } from './stepper'
 import { StepperRange } from './stepper-range'
 import { AddIcon, RemoveIcon, TextSettingsIcon } from '@pocket/web-ui'
 import { useState } from 'react'
@@ -25,28 +25,28 @@ export const normal = () => {
   return (
     <>
       <StepperWrapper>
-        <IconWrapper data-tooltip="increase!">
+        <IconWrapper data-tooltip={range[current]}>
           <TextSettingsIcon />
         </IconWrapper>
-        <SizeChangeButton
+        <StepperButton
           active={minusActive()}
           onClick={clickDecrease}
           aria-label="aria-label"
           data-tooltip="size button">
           <RemoveIcon />
-        </SizeChangeButton>
+        </StepperButton>
         <StepperRange
           current={current}
           range={range}
           onChange={setCurrent}
         />
-        <SizeChangeButton
+        <StepperButton
           active={plusActive()}
           onClick={clickIncrease}
           aria-label="aria-label"
           data-tooltip="another size button">
           <AddIcon />
-        </SizeChangeButton>
+        </StepperButton>
       </StepperWrapper>
 
       <p style={{ fontSize: range[current] }}>

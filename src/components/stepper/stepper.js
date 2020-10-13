@@ -10,9 +10,10 @@ const stepperWrapper = css`
   display: grid;
   grid-template-columns: repeat(4, auto);
   width: 100%;
-  height: 63px;
+  height: var(--size300);
   align-items: center;
   justify-content: center;
+  padding: 0 var(--spacing150);
 `
 export const StepperWrapper = ({ children, ...args }) => (
   <div className={stepperWrapper} {...args}>{children}</div>
@@ -33,7 +34,7 @@ export const IconWrapper = ({ children, ...args }) => (
   </div>
 )
 
-const sizeChangeButton = css`
+const stepperButton = css`
   display: block;
   color: var(--color-textTertiary);
   &:hover {
@@ -57,9 +58,9 @@ const sizeChangeButton = css`
     z-index: unset;
   }
 `
-export const SizeChangeButton = ({ children, active, ...args }) => (
+export const StepperButton = ({ children, active, ...args }) => (
   <button
-    className={classNames(buttonReset, sizeChangeButton, tooltipBase, { active })}
+    className={classNames(buttonReset, stepperButton, tooltipBase, { active })}
     {...args}>
     { children }
   </button>

@@ -20,3 +20,5 @@ export { addAmbientMotion } from './animation/animation'
 export { openWindow } from './open-window/open-window'
 
 export { validateEmail } from './validate-email/validate-email'
+
+export { getTimeToRead } from './time-to-read/time-to-read'

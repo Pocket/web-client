@@ -4,4 +4,6 @@ export default {
   title: 'Components/Rail'
 }
 
-export const normal = () => <Rail visible>hey</Rail>
+export const visible = () => <Rail visible>👀 Peek!</Rail>
+
+export const invisible = () => <Rail>👀 Peek!</Rail>

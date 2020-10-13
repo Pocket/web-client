@@ -1,0 +1,60 @@
+{
+  "item_id": "3108900766",
+  "resolved_id": "3108900766",
+  "given_url": "https://www.youtube.com/watch?v=US1TDJaEA0c",
+  "given_title": "",
+  "favorite": "0",
+  "status": "0",
+  "time_added": "1599886154",
+  "time_updated": "1599886157",
+  "time_read": "0",
+  "time_favorited": "0",
+  "sort_id": 0,
+  "resolved_title": "Xena and Najara Vine Fight | Xena: Warrior Princess",
+  "resolved_url": "https://www.youtube.com/watch?v=US1TDJaEA0c",
+  "excerpt": "Get ready for one of the most iconic fights in Xena!\n\nFrom Season 4 Episode 18 'The convert' - Najara returns claiming a newfound mantra for non-violence while Joxer wrestles with the guilt of his first kill.\n\nThis is the official YouTube channel for Xena: Warrior Princess. Strong, confident, sexy a",
+  "is_article": "0",
+  "is_index": "0",
+  "has_video": "2",
+  "has_image": "1",
+  "word_count": "0",
+  "lang": "",
+  "authors": {
+    "124992169": {
+      "item_id": "3108900766",
+      "author_id": "124992169",
+      "name": "Xena: Warrior Princess",
+      "url": "https://www.youtube.com/channel/UCyH4IRbdWccwGH-hGKwu28Q"
+    }
+  },
+  "images": {
+    "1": {
+      "item_id": "3108900766",
+      "image_id": "1",
+      "src": "https://i.ytimg.com/vi/US1TDJaEA0c/maxresdefault.jpg",
+      "width": "1280",
+      "height": "720",
+      "credit": "",
+      "caption": ""
+    }
+  },
+  "videos": {
+    "1": {
+      "item_id": "3108900766",
+      "video_id": "1",
+      "src": "http://www.youtube.com/watch?v=US1TDJaEA0c",
+      "width": "0",
+      "height": "0",
+      "type": "1",
+      "vid": "US1TDJaEA0c",
+      "length": "364"
+    }
+  },
+  "domain_metadata": {
+    "name": "YouTube",
+    "logo": "https://logo.clearbit.com/youtube.com?size=800",
+    "greyscale_logo": "https://logo.clearbit.com/youtube.com?size=800&greyscale=true"
+  },
+  "listen_duration_estimate": 0,
+  "item_content": "\n\t\t<div id=\"RIL_container\">\n\t\t\t\n\t\t\t<div id=\"RIL_header\">\n\t\t\t\t\n\t\t\t\t<h1>Xena and Najara Vine Fight | Xena: Warrior Princess</h1>\n\t\t\t\t<cite>by <a class=\"RIL_author\" href=\"https://www.youtube.com/channel/UCyH4IRbdWccwGH-hGKwu28Q\">Xena: Warrior Princess</a>, <a href=\"http://youtube.com\">youtube.com</a><span class=\"RIL_date\"><br class=\"RIL_date_sep\" />September  5, 2020 04:00 AM</span></cite>\n\t\t\t</div>\n\t\t\t\n\t\t\t<div id=\"RIL_body\">\n\t\t\t\n\t\t\t\t<div id=\"RIL_less\">\n\t\t\t\t\n\t\t\t\t<!--STARTLESS--><div id='RIL_ARTICLE_NOTE' class='note'>\n\t\t\t\t\t\t\t<p>This page doesn't appear to be an article and therefore may not display well in the Article View. You may want to switch to the <a href='ISRIL:WEB'>Full Web Page view</a>.\n\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t<p>If you know there <em>should</em> be an <em>article</em> here, help improve the article parser by <a href='http://ideashower.com/support/read-it-later/report-pages-not-saving-well-offline-here/'>reporting this page</a>. Thanks!\n\t\t\t\t\t\t\t</p></div><div  ><div id=\"RIL_VIDEO_1\" class=\"RIL_VIDEO\"></div></div>\n\t\t\t\t<!--ENDLESS-->\n\t\t\t\t\n\t\t\t\t</div>\n\t\t\t\t\n\t\t\t</div>\n\t\t\n\t\t</div>\n\t\t\n\t</div>"
+}

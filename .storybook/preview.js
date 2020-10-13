@@ -14,10 +14,8 @@ export const parameters = {
 export const decorators = [
   (Story) => (
     <Provider store={store}>
-      <div style={{ margin: '4em' }}>
-        <ColorModePicker floating />
-        <Story />
-      </div>
+      <ColorModePicker floating />
+      <Story />
     </Provider>
   )
 ]

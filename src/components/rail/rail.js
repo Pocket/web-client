@@ -2,7 +2,7 @@ import { css } from 'linaria'
 import classNames from 'classnames'
 
 const railWrapper = css`
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   top: 0;
@@ -14,8 +14,9 @@ const railWrapper = css`
   &:hover,
   &.visible {
     background-color: var(--color-dividerTertiary);
-    box-shadow: none;
+    box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.12);
     border-right: 1px solid var(--color-dividerSecondary);
+    transition: all 150ms ease-in-out;
   }
 `
 

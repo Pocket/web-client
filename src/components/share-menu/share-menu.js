@@ -78,19 +78,3 @@ export class ShareMenu extends Component {
     )
   }
 }
-
-
-/*
-      <Menu
-        menuItems={this.menuItems}
-        width={200}
-        listMode={this.props.listMode}
-        addedStyles={this.props.addedStyles}>
-        <SocialItems
-          url={this.props.url}
-          onSocialShare={this.onSocialShare}
-          quote={this.props.quote}
-          title={this.props.title}
-        />
-      </Menu>
-      */

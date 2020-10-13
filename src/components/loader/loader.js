@@ -18,7 +18,7 @@ const LoadInOut = posed.div({
   }
 })
 
-export const loaderCentered = css`
+const loaderCentered = css`
   height: calc(100vh - 63px);
   width: 100%;
   display: flex;
@@ -30,7 +30,7 @@ export const LoaderCentered = ({ children }) => (
   <div className={loaderCentered}>{children}</div>
 )
 
-export const loadMore = css`
+const loadMore = css`
   height: 200px;
   width: 100%;
   display: flex;
