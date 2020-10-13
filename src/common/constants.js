@@ -1,6 +1,7 @@
 
 // POCKET
 export const CONSUMER_KEY = '89624-08a6833ec06c1379f4cee8e3' //web-discover consumer key
+// export const CONSUMER_KEY = '78809-9423d8c743a58f62b23ee85c' //web-app-draft consumer
 export const BASE_URL = 'https://getpocket.com'
 export const API_URL = 'https://getpocket.com'
 export const LOGIN_URL = 'https://getpocket.com/login'
@@ -61,3 +62,26 @@ export const KEYS = {
   RIGHT: 39,
   DOWN: 40
 }
+
+export const API_ACTION_ADD = 'add'
+export const API_ACTION_ADD_FAIL = 'add_failed'
+export const API_ACTION_ARCHIVE = 'archive'
+export const API_ACTION_UNARCHIVE = 'readd'
+export const API_ACTION_FAVORITE = 'favorite'
+export const API_ACTION_UNFAVORITE = 'unfavorite'
+export const API_ACTION_DELETE = 'delete'
+export const API_ACTION_SCROLLED = 'scrolled'
+export const API_ACTION_SHARE = 'shared_to'
+export const API_ACTION_SHARE_TO = 'share_to_'
+export const API_ACTION_RECOMMEND = 'share_post'
+export const API_ACTION_REPLACE_TAGS = 'tags_replace'
+export const API_ACTION_ADD_TAGS = 'tags_add'
+export const API_ACTION_TAGS_CLEARED = 'tags_clear'
+export const API_ACTION_ADD_ANNOTATION = 'add_annotation'
+export const API_ACTION_DELETE_ANNOTATION = 'delete_annotation'
+
+// ANALYTICS
+export const ANALYTICS_UI = 'cxt_ui'
+export const ANALYTICS_VIEW = 'cxt_view'
+export const ANALYTICS_INDEX = 'cxt_index'
+export const ANALYTICS_LIST_MODE = 'cxt_list_view'
