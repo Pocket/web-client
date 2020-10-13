@@ -100,9 +100,9 @@ export function SideNav({ subset, home }) {
         <button className={subActive('highlights')}>Highlights</button>
       </Link>
 
-      <Link href="/my-list/tags">
+      {/* <Link href="/my-list/tags">
         <button className={subActive('tags')}>Tags</button>
-      </Link>
+      </Link> */}
 
       <Link href="/my-list/articles">
         <button className={subActive('articles')}>Articles</button>
