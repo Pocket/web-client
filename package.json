@@ -4,7 +4,7 @@
   "description": "Pocket front end client",
   "main": "index.js",
   "scripts": {
-    "dev": "SHOW_DEV=included next dev -p 8080",
+    "dev": "SHOW_DEV=included next dev -p 80",
     "build": "npm run locale-inject && SHOW_DEV=included next build",
     "start": "next start -p 80",
     "test": "NODE_PATH=./src:./public:$NODE_PATH NODE_ENV=test mocha --reporter spec --harmony --require .scripts/babel-register .scripts/test-setup.js $(find src/ -name '*.spec.js')",
