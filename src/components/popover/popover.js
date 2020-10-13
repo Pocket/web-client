@@ -88,15 +88,21 @@ export function usePopover(options) {
    */
   useCorrectEffect(() => {
     if (!popTrigger.current) return
-
     const element = popTrigger.current
     element.addEventListener('click', handleTriggerClick)
 
     return () => {
       element.removeEventListener('click', handleTriggerClick)
-      removeDocumentListeners()
     }
   }, [popTrigger.current])
+
+  useCorrectEffect(() => {
+    const element = popTrigger?.current
+    return () => {
+      removeDocumentListeners()
+      if (element) element.removeEventListener('click', handleTriggerClick)
+    }
+  }, [])
 
   return { popTrigger, popBody, shown }
 }
