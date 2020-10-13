@@ -2,6 +2,7 @@ import { getUserInfo } from 'common/api/user'
 import { createGuid } from 'common/api/user'
 import { getValueFromCookie } from 'common/utilities'
 import { setCookie } from 'nookies'
+import { put, takeLatest } from 'redux-saga/effects'
 
 import { HYDRATE } from 'actions'
 import { USER_HYDRATE } from 'actions'
@@ -29,17 +30,18 @@ export const userReducers = (state = initialState, action) => {
   switch (action.type) {
     case USER_HYDRATE: {
       const { hydrate } = action
-      return { ...state, ...hydrate, auth: true }
+      return { ...state, ...hydrate, auth: true, userStatus: true }
     }
 
     case USER_SUCCESS: {
       const { user } = action
-      return { ...state, ...user, auth: true }
+      return { ...state, ...user, auth: true, userStatus: true }
     }
 
     case USER_FAILURE: {
       return {
         ...state,
+        userStatus: true,
         auth: false // force auth to false
       }
     }
@@ -49,12 +51,6 @@ export const userReducers = (state = initialState, action) => {
       return { ...state, sess_guid }
     }
 
-    // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
-    // it represents the state used to build the page on the server.
-    case HYDRATE:
-      const { user } = action.payload
-      return { ...state, ...user }
-
     default:
       return state
   }
@@ -62,10 +58,17 @@ export const userReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const userSagas = []
+export const userSagas = [takeLatest(USER_REQUEST, userRequest)]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
+function* userRequest() {
+  const response = yield getUserInfo()
+  if (response.xErrorCode) return false
+
+  const { user } = response
+  if (user) yield put({ type: USER_SUCCESS, user })
+}
 
 /** ASYNC Functions
  --------------------------------------------------------------- */

@@ -1,7 +1,9 @@
 import React from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux'
-import { GlobalNav as GlobalNavComponent } from '@pocket/web-ui'
+import { useSelector, useDispatch } from 'react-redux'
+import { getUser } from 'connectors/user/user.state'
+import GlobalNavComponent from 'components/global-nav/global-nav'
 import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
 import { BASE_URL } from 'common/constants'
@@ -29,19 +31,18 @@ export const enforceDefaultAvatar = (avatarUrl = '') => {
  * provided to it to the GlobalNav component.
  */
 const GlobalNav = (props) => {
+  const dispatch = useDispatch()
   const router = useRouter()
   const selectedLink =
     props.selectedLink !== undefined
       ? props.selectedLink
       : getTopLevelPath(router.pathname)
 
-  const isPremium = useSelector(
-    (state) => parseInt(state?.user?.premium_status, 10) === 1 || false
-  )
+  const userStatus = useSelector((state) => state?.user?.userStatus)
+  const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false) //prettier-ignore
   const isLoggedIn = useSelector((state) => !!state.user.auth)
-  const retrievedAvatar = useSelector(
-    (state) => state?.user?.profile?.avatar_url
-  )
+  const retrievedAvatar = useSelector((state) => state?.user?.profile?.avatar_url) // prettier-ignore
+
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.user?.first_name)
   const userId = useSelector((state) => state?.user?.user_id)
@@ -64,6 +65,10 @@ const GlobalNav = (props) => {
     }
   ]
 
+  useEffect(() => {
+    if (!userStatus) dispatch(getUser())
+  }, [userStatus])
+
   return (
     <GlobalNavComponent
       pocketLogoOutboundUrl={'/'}
@@ -75,6 +80,7 @@ const GlobalNav = (props) => {
       avatarSrc={avatarSrc}
       accountName={accountName}
       profileUrl={profileUrl}
+      userStatus={userStatus}
     />
   )
 }
