@@ -1,8 +1,30 @@
 import PropTypes from 'prop-types'
 import Head from 'next/head'
-import { GlobalFooter, PageContainer } from '@pocket/web-ui'
-import GlobalNav from 'connectors/global-nav/global-nav'
 import { css } from 'linaria'
+import { GlobalFooter, PageContainer } from '@pocket/web-ui'
+import { breakpointLargeTablet } from '@pocket/web-ui'
+import GlobalNav from 'connectors/global-nav/global-nav'
+
+const myListContainer = css`
+  display: grid;
+  align-items: start;
+  justify-content: space-between;
+  grid-column-gap: var(--spacing150);
+  grid-row-gap: var(--spacing150);
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-flow: dense;
+
+  ${breakpointLargeTablet} {
+    grid-column-gap: var(--spacing150);
+    grid-row-gap: var(--spacing150);
+  }
+  .main {
+    grid-column: span 10;
+  }
+  .side-nav {
+    grid-column: span 2;
+  }
+`
 
 const fixedNavContainer = css`
   padding-top: 65px;
@@ -30,7 +52,9 @@ function mainLayout({
         {isFullWidthLayout ? (
           children
         ) : (
-          <PageContainer>{children}</PageContainer>
+          <PageContainer>
+            <div className={myListContainer}>{children}</div>
+          </PageContainer>
         )}
       </div>
 
