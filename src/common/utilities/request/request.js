@@ -11,6 +11,7 @@ export const request = ({
   params = {},
   path,
   method = 'GET',
+  body,
   cookie,
   auth
 }) => {
@@ -38,6 +39,7 @@ export const request = ({
   return fetch(endpoint, {
     method,
     headers,
+    body,
     credentials: 'include'
   })
     .then((response) => handleErrors(response, auth))
