@@ -3,6 +3,7 @@ const path = require('path')
 module.exports = ({ config, mode }) => {
   const alias = {
     mock: path.join(__dirname, './_data'),
+    helpers: path.join(__dirname, './helpers'),
     media: path.join(__dirname, '../public/static'),
     common: path.join(__dirname, '../src/common'),
     containers: path.join(__dirname, '../src/containers'),

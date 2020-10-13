@@ -10,7 +10,8 @@ const upsellWrapper = css`
   font-size: 16px;
   font-weight: 500;
   line-height: 130%;
-  padding: 25px 0 26px;
+  padding: var(--spacing075) 0;
+  width: 100%;
 
   p {
     line-height: 130%;

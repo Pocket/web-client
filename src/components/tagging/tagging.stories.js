@@ -53,11 +53,15 @@ export const tagSuggestionsLoading = () => <TagSuggestions isPremium />
 
 export const tagModal = () => (
   <TagModal
+    isOpen
+    appRootSelector="#root"
     suggestedTags={_getRandom(COLORS, 3)}
     typeahead={COLORS} />
 )
 export const tagModalHasTags = () => (
   <TagModal
+    isOpen
+    appRootSelector="#root"
     currentTags={_getRandom(COLORS, 2)}
     suggestedTags={_getRandom(COLORS, 3)}
     typeahead={COLORS} />
@@ -65,6 +69,8 @@ export const tagModalHasTags = () => (
 export const tagModalSuggestions = () => (
   <TagModal
     isPremium
+    isOpen
+    appRootSelector="#root"
     currentTags={_getRandom(COLORS, 2)}
     suggestedTags={_getRandom(COLORS, 3)}
     typeahead={COLORS} />
@@ -72,12 +78,16 @@ export const tagModalSuggestions = () => (
 export const tagModalSuggestionsLoading = () => (
   <TagModal
     isPremium
+    isOpen
+    appRootSelector="#root"
     currentTags={_getRandom(COLORS, 2)}
     typeahead={COLORS} />
 )
 export const tagModalNoSuggestions = () => (
   <TagModal
     isPremium
+    isOpen
+    appRootSelector="#root"
     currentTags={_getRandom(COLORS, 2)}
     suggestedTags={[]}
     typeahead={COLORS} />

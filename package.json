@@ -39,6 +39,7 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@storybook/addon-actions": "6.0.21",
     "@storybook/addon-essentials": "6.0.21",
+    "@storybook/addon-knobs": "6.0.26",
     "@storybook/addon-links": "6.0.21",
     "@storybook/react": "6.0.21",
     "@zeit/next-source-maps": "0.0.3",

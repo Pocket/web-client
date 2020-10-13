@@ -1,7 +1,7 @@
 import React from 'react'
 import { text } from '@storybook/addon-knobs'
 import defineKnobs from 'helpers/define-knobs'
-import AvatarButton from './avatar-button'
+import { AvatarButton } from './avatar-button'
 
 const avatarKnobs = defineKnobs((props) => {
   return {

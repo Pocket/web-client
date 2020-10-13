@@ -6,7 +6,7 @@ import {
   AddIcon,
   EditIcon,
   NotificationIcon,
-} from 'components/icons/icons'
+} from '@pocket/web-ui'
 
 export default {
   title: 'Components/GlobalNav/GlobalNavTools',

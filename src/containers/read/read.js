@@ -8,6 +8,7 @@ import { SelectionPopover } from 'components/popover/popover-selection'
 import { Sidebar } from 'components/reader/sidebar'
 import { compileAnnotations } from 'components/annotations/utilities'
 import { Fonts, FONT_TYPES } from 'components/fonts/fonts'
+import { TagModal } from 'components/tagging/tag.modal'
 
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2,1.3,1.4,1.5,1.65,1.9,2.5]
@@ -47,6 +48,7 @@ const articleWrapper = css`
 
 export default function Read({ item }) {
   const [sideBarOpen, setSideBar] = useState(false)
+  const [taggingModalOpen, setTaggingModal] = useState(false)
   const [highlight, setHighlight] = useState(null)
   const [highlightList, setHighlightList] = useState({})
 
@@ -93,6 +95,8 @@ export default function Read({ item }) {
 
   const toggleSidebar = () => setSideBar(!sideBarOpen)
 
+  const toggleTagging = () => setTaggingModal(!taggingModalOpen)
+
   const toggleHighlight = () => {
     const selection = window.getSelection()
     if (selection.toString()) {
@@ -114,7 +118,9 @@ export default function Read({ item }) {
 
   return (
     <>
-      <ReaderNav toggleSidebar={toggleSidebar} />
+      <ReaderNav
+        toggleSidebar={toggleSidebar}
+        toggleTagging={toggleTagging} />
 
       <main className={articleWrapper}>
         <aside className={classNames('sidebar', { active: sideBarOpen })}>
@@ -141,6 +147,13 @@ export default function Read({ item }) {
           ) : null}
         </article>
       </main>
+      <TagModal
+        isOpen={taggingModalOpen}
+        setModalOpen={setTaggingModal}
+        currentTags={tags}
+        appRootSelector="#root"
+        typeahead={[]}
+        suggestedTags={[]} />
     </>
   )
 }

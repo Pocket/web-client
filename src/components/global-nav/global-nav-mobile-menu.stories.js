@@ -2,7 +2,7 @@ import React from 'react'
 import { object, text } from '@storybook/addon-knobs'
 import defineKnobs from 'helpers/define-knobs'
 import GlobalNavMobileMenu from './global-nav-mobile-menu'
-import { DiscoverIcon, ListViewIcon } from '../..'
+import { DiscoverIcon, ListViewIcon } from '@pocket/web-ui'
 
 const globalNavLinksKnobs = defineKnobs((props) => {
   return {

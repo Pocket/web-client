@@ -8,6 +8,7 @@ const suggestedWrapper = css`
   padding: 10px 0;
   min-height: 50px;
   font-family: "Graphik Web";
+  width: 100%;
 `
 
 const CantFindSuggestions = () => {

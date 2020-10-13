@@ -7,7 +7,7 @@ import {
   AddIcon,
   EditIcon,
   NotificationIcon,
-} from 'components/icons/icons'
+} from '@pocket/web-ui'
 import GlobalNav from './global-nav'
 
 const globalNavKnobs = defineKnobs((props) => {

@@ -6,8 +6,11 @@ import {
   Button,
   CrossIcon,
   breakpointLargeTablet,
-  breakpointTinyTablet
-   } from '@pocket/web-ui'
+  breakpointTinyTablet,
+  Modal,
+  ModalBody,
+  ModalFooter
+} from '@pocket/web-ui'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
 import classNames from 'classnames'
@@ -50,7 +53,6 @@ const panelTagging = css`
   display: flex;
   align-content: flex-end;
   align-items: center;
-  padding-bottom: 10px;
 `
 
 const closeButton = css`
@@ -108,53 +110,52 @@ export class TagModal extends React.Component {
       return this.props.confirmModal({ tags })
     }
 
-    this.props.confirmModal({ tags: this.state.tags })
+    // send tags to State here
+    // this.props.confirmModal({ tags: this.state.tags })
+    this.props.setModalOpen(false)
   }
 
   render() {
+    const { isOpen, setModalOpen, appRootSelector } = this.props
     const isActive = this.state.value || this.state.actionable
     return (
-      <div className={classNames(overlayBase, panelWrapper)}>
-        <div className={panelHeader}>
-          <h3 className={taggingTitle}>
-            Edit Tags {/*'tagging.modal.editTags'*/}
-          </h3>
-          <button
-            // aria-label
-            className={classNames(buttonReset, closeButton)}
-            onClick={this.props.cancelModal}>
-            <CrossIcon />
-          </button>
-        </div>
+      <Modal
+        appRootSelector={appRootSelector}
+        title="Edit Tags"
+        screenReaderLabel="Edit Article Tags"
+        isOpen={isOpen}
+        handleClose={() => setModalOpen(false)}>
+        <ModalBody>
+          <div className={panelTagging}>
+            <Tagging
+              setInputRef={this.setInputRef}
+              value={this.state.value}
+              setValue={this.setValue}
+              addTag={this.addTag}
+              removeTag={this.removeTag}
+              setTags={this.setTags}
+              tags={this.state.tags}
+              typeahead={this.props.typeahead}
+            />
 
-        <div className={panelTagging}>
-          <Tagging
-            setInputRef={this.setInputRef}
-            value={this.state.value}
-            setValue={this.setValue}
-            addTag={this.addTag}
-            removeTag={this.removeTag}
-            setTags={this.setTags}
+            <Button
+              onClick={this.onSubmit}
+              className={buttonStyles}
+              disabled={!isActive}>
+              Save {/*'tagging.modal.save'*/}
+            </Button>
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <TagSuggestions
+            suggestedTags={this.props.suggestedTags}
             tags={this.state.tags}
-            typeahead={this.props.typeahead}
+            addTag={this.addTag}
+            isPremium={this.props.isPremium}
+            trackClick={this.props.trackClick}
           />
-
-          <Button
-            onClick={this.onSubmit}
-            className={buttonStyles}
-            disabled={!isActive}>
-            Save {/*'tagging.modal.save'*/}
-          </Button>
-        </div>
-
-        <TagSuggestions
-          suggestedTags={this.props.suggestedTags}
-          tags={this.state.tags}
-          addTag={this.addTag}
-          isPremium={this.props.isPremium}
-          trackClick={this.props.trackClick}
-        />
-      </div>
+        </ModalFooter>
+      </Modal>
     )
   }
 }

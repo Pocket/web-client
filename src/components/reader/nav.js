@@ -57,7 +57,7 @@ const articleActions = css`
   }
 `
 
-export const ReaderNav = ({ toggleSidebar }) => {
+export const ReaderNav = ({ toggleSidebar, toggleTagging }) => {
   return (
     <header className={headerStyle}>
       <div className="global-nav-container">
@@ -78,7 +78,9 @@ export const ReaderNav = ({ toggleSidebar }) => {
             </WithTooltip>
 
             <WithTooltip label="Tag Article">
-              <button className={classNames(buttonReset, buttonStyles)}>
+              <button
+                onClick={toggleTagging}
+                className={classNames(buttonReset, buttonStyles)}>
                 <TagIcon />
               </button>
             </WithTooltip>

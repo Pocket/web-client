@@ -1,5 +1,5 @@
 import { Card as CardComponent } from './card'
-import { deriveItemData } from 'connectors/my-list-card/items.state'
+import { deriveItemData } from 'connectors/items-by-id/my-list/items.state'
 
 import response from 'mock/discover.json'
 

@@ -3,14 +3,13 @@ import { ToastList } from './toast-list'
 import { Toast } from './toast'
 import Lorem from 'react-lorem-component'
 
-import { API_ACTION_ADD } from 'actions'
-import { API_ACTION_ARCHIVE } from 'actions'
-import { API_ACTION_READD } from 'actions'
-import { API_ACTION_DELETE } from 'actions'
-import { API_ACTION_REPLACE_TAGS } from 'actions'
-import { API_ACTION_ADD_TAGS } from 'actions'
-import { API_ACTION_RECOMMEND } from 'actions'
-import { API_ACTION_SHARE } from 'actions'
+import { ITEMS_ADD_SUCCESS } from 'actions'
+import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
+// import { API_ACTION_READD } from 'actions'
+import { ITEMS_DELETE_SUCCESS } from 'actions'
+import { ITEMS_TAG_SUCCESS } from 'actions'
+// import { API_ACTION_RECOMMEND } from 'actions'
+// import { API_ACTION_SHARE } from 'actions'
 import { TOAST_ITEM_NOT_IN_LIST } from 'actions'
 
 export default {
@@ -20,14 +19,13 @@ export default {
 
 const types = ['neutral', 'success', 'warn']
 const actions = [
-  API_ACTION_ADD,
-  API_ACTION_ARCHIVE,
-  API_ACTION_READD,
-  API_ACTION_DELETE,
-  API_ACTION_REPLACE_TAGS,
-  API_ACTION_ADD_TAGS,
-  API_ACTION_RECOMMEND,
-  API_ACTION_SHARE,
+  ITEMS_ADD_SUCCESS,
+  ITEMS_ARCHIVE_SUCCESS,
+  // API_ACTION_READD,
+  ITEMS_DELETE_SUCCESS,
+  ITEMS_TAG_SUCCESS,
+  // API_ACTION_RECOMMEND,
+  // API_ACTION_SHARE,
   TOAST_ITEM_NOT_IN_LIST
 ]
 
