@@ -2,7 +2,7 @@ import { takeLatest, put, takeEvery } from 'redux-saga/effects'
 import { getTopicFeed } from 'common/api/topics'
 import { getSearchFeed } from 'common/api/search'
 import { getItemSaveAnalytics } from './topic.analytics'
-import { deriveItemData } from 'connectors/discover-items/items.state'
+import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { arrayToObject } from 'common/utilities'
 import {
   TOPIC_DATA_REQUEST,
@@ -89,14 +89,14 @@ export async function fetchTopicData(topic, isCollection) {
 
     // Derive curated item data and create items by id
     const { curated = [] } = response
-    const derivedCuratedItems = await deriveItemData(curated)
+    const derivedCuratedItems = await deriveDiscoverItems(curated)
     const curatedIds = derivedCuratedItems.map(mapIds)
     const curatedItems = [...new Set(curatedIds)] // Unique entries only
     const curatedItemsById = arrayToObject(derivedCuratedItems, 'resolved_id')
 
     // Derive algorithmic item data and create items by id
     const { algorithmic = [] } = response
-    const derivedAlgorithmicItems = await deriveItemData(algorithmic)
+    const derivedAlgorithmicItems = await deriveDiscoverItems(algorithmic)
     const algorithmicIds = derivedAlgorithmicItems.map(mapIds)
     const algorithmicItems = [...new Set(algorithmicIds)] // Unique entries only
     const algorithmicItemsById = arrayToObject(
@@ -129,7 +129,7 @@ export async function fetchSearchData(query) {
 
     // Derive curated item data and create items by id
     const { results = [] } = response
-    const derivedSearchItems = await deriveItemData(results)
+    const derivedSearchItems = await deriveDiscoverItems(results)
     const searchIds = derivedSearchItems.map(mapIds)
     const searchItems = [...new Set(searchIds)] // Unique entries only
     const searchItemsById = arrayToObject(derivedSearchItems, 'resolved_id')

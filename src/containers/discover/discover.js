@@ -27,10 +27,14 @@ import Layout from 'layouts/main'
 import ErrorPage from 'pages/_error'
 
 // Components
-import { CardPageHeader } from 'components/discover-layouts/card-page-header'
-import { CardListHeading } from 'components/discover-layouts/card-page-header'
-import { CardList, CardLayout } from 'components/discover-layouts/card-layout'
-import { CardTopicsNav } from 'components/discover-layouts/card-topics-nav'
+import { CardPageHeader } from 'components/headers/discover-header'
+import { CardListHeading } from 'components/headers/discover-header'
+
+import { CardList } from 'components/items-layout/dynamic-blocks'
+import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
+
+import { CardTopicsNav } from 'components/items-layout/topic-list'
+
 import ReportFeedbackModal from 'components/report-feedback-modal/report-feedback-modal'
 import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { CallOutStartLibraryExplore } from 'components/call-out/call-out-start-library'
@@ -84,7 +88,7 @@ export default function Discover({ url }) {
         title="Discover the best of the&nbsp;web"
         subHeading="Today’s essential reads"
       />
-      <CardLayout {...actions}>
+      <DynamicCardLayout {...actions}>
         {/* Top Lockup (center)*/}
         <CardList
           type="lockupCenter"
@@ -135,7 +139,7 @@ export default function Discover({ url }) {
 
         {/* Bottom TopicNav */}
         <CardTopicsNav topics={topics} track={trackTopicClick} />
-      </CardLayout>
+      </DynamicCardLayout>
       <ReportFeedbackModal
         isOpen={isOpen}
         setModalOpen={setModalOpen}

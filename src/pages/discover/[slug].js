@@ -4,7 +4,7 @@ import { hydrateTopicList } from 'connectors/topic-list/topic-list.state'
 import { fetchTopicData } from 'containers/topic/topic.state'
 import { fetchSearchData } from 'containers/topic/topic.state'
 import { hydrateTopic } from 'containers/topic/topic.state'
-import { hydrateItems } from 'connectors/discover-items/items.state'
+import { hydrateItems } from 'connectors/items-by-id/discover/items.state'
 
 import { wrapper } from 'store'
 /**
@@ -46,9 +46,7 @@ export const getStaticProps = wrapper.getStaticProps(
 
     // We are not fully supporting search at the moment
     if (page_type === 'search' && !validSearchTopic) {
-      res.append('X-Robots-Tag', 'none')
-      res.statusCode = 404
-      return { statusCode: 404 }
+      return { props: { statusCode: 404 } }
     }
 
     // Get topic items from the correct endpoint
@@ -58,8 +56,7 @@ export const getStaticProps = wrapper.getStaticProps(
         : await fetchTopicData(topic, isCollection)
 
     if (!response) {
-      res.statusCode = 500
-      return { statusCode: 500 }
+      return { props: { statusCode: 500 } }
     }
 
     const {

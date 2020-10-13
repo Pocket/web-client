@@ -1,19 +1,14 @@
 // Vendor
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Link from 'next/link'
 
-import Layout from 'layouts/main'
+import Layout from 'layouts/with-sidebar'
 import { getMylistData } from './my-list.state'
 
-import { CardPageHeader } from 'components/my-list-layouts/card-page-header'
-import { myListContainer } from 'components/my-list-container/my-list-container'
-import { myListNavigation } from 'components/my-list-container/my-list-container'
-import { myListMain } from 'components/my-list-container/my-list-container'
+import { MyListHeader } from 'components/headers/my-list-header'
 
-import { sideNavHeader } from 'components/my-list-side-nav/side-nav'
-import { sideNavItem } from 'components/my-list-side-nav/side-nav'
-import { ListLayout } from 'components/my-list-layouts/list-layout'
+import { VirtualizedList } from 'components/items-layout/virtualized-list'
+import { SideNav } from 'components/side-nav/side-nav'
 
 export default function Collection(props) {
   const { metaData = {}, subset = 'active', filter } = props
@@ -25,78 +20,34 @@ export default function Collection(props) {
   const offset = useSelector((state) => state.myList[`${section}Offset`])
   const total = useSelector((state) => state.myList[`${section}Total`])
 
+  // Check if we have requested list items
   useEffect(() => {
-    // Check if we have requested list items
-    // YES: Great!
-    if (items?.length) {
-      // Is this part of the first item grab?
-
-      // YES: Let's hydrate the list a bit more
-      if (offset === 18 && offset <= total) {
-        dispatch(getMylistData(54, offset, subset, filter))
-      }
-
-      // NO: No problem, let's wait for the next explicit request
+    // We grab a small set of items for initial load quickly
+    if (!items?.length) {
+      dispatch(getMylistData(18, 0, subset, filter))
       return
     }
 
-    // NO: Cool let's get a small set of items to get a fast page load
-    dispatch(getMylistData(18, 0, subset, filter))
+    // Subsequent runs we make a check to see if we need to prime the list
+    const gatherMoreItems = offset === 18 && offset <= total
+    if (gatherMoreItems) dispatch(getMylistData(54, offset, subset, filter))
+
+    return
   }, [items])
 
-  const loadMore = () => {
-    dispatch(getMylistData(150, offset, subset, filter))
-  }
-
-  const subActive = (sub) => {
-    const activeClass = sub === subset ? 'active' : ''
-    return `${sideNavItem} ${activeClass}`
-  }
+  // Explicit request to load more items
+  const loadMore = () => dispatch(getMylistData(150, offset, subset, filter))
 
   const type = 'grid'
   return (
     <Layout title={metaData.title} metaData={metaData}>
-      <div className={myListContainer}>
-        <nav role="navigation" className={myListNavigation}>
-          <Link href="/my-list">
-            <button className={subActive('active')}>Active</button>
-          </Link>
-
-          <Link href="/my-list/archive">
-            <button className={subActive('archive')}>Archive</button>
-          </Link>
-
-          <div className={sideNavHeader}>Filters</div>
-
-          <Link href="/my-list/favorites">
-            <button className={subActive('favorites')}>Favorites</button>
-          </Link>
-
-          <Link href="/my-list/highlights">
-            <button className={subActive('highlights')}>Highlights</button>
-          </Link>
-
-          {/*
-          <Link href="/my-list/tags">
-            <button className={subActive('tags')}>Tags</button>
-          </Link>
-          */}
-
-          <Link href="/my-list/articles">
-            <button className={subActive('articles')}>Articles</button>
-          </Link>
-
-          <Link href="/my-list/videos">
-            <button className={subActive('videos')}>Videos</button>
-          </Link>
-        </nav>
-        <main className={myListMain}>
-          <CardPageHeader subset={subset} filter={filter} />
-          {items?.length ? (
-            <ListLayout type={type} items={items} loadMore={loadMore} />
-          ) : null}
-        </main>
-      </div>
+      <SideNav subset={subset} />
+      <main className="main">
+        <MyListHeader subset={subset} filter={filter} />
+        {items?.length ? (
+          <VirtualizedList type={type} items={items} loadMore={loadMore} />
+        ) : null}
+      </main>
     </Layout>
   )
 }

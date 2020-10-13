@@ -1,11 +1,13 @@
-import { CollectionPageHeader } from 'components/discover-layouts/card-page-header'
-import { CardList, CardLayout } from 'components/discover-layouts/card-layout'
+import { CollectionPageHeader } from 'components/headers/discover-header'
+import { CardList } from 'components/items-layout/dynamic-blocks'
+import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
+import { CardTopicsNav } from 'components/items-layout/topic-list'
+
 import { useSelector } from 'react-redux'
 import { saveTopicItem, unSaveTopicItem } from './topic.state'
 import { trackItemOpen, trackTopicClick } from './topic.analytics'
 import { trackUnAuthSave } from './topic.analytics'
 import { trackItemImpression } from './topic.analytics'
-import { CardTopicsNav } from 'components/discover-layouts/card-topics-nav'
 
 export default function topicCollection({
   curatedItems,
@@ -33,7 +35,7 @@ export default function topicCollection({
         note={topic.display_note}
       />
 
-      <CardLayout {...actions}>
+      <DynamicCardLayout {...actions}>
         {/* Top Lockup (left)*/}
         <CardList type="lockupLeft" count={5} items={curatedItems} />
 
@@ -48,7 +50,7 @@ export default function topicCollection({
 
         {/* Bottom TopicNav */}
         <CardTopicsNav topics={topics} track={trackTopicClick} />
-      </CardLayout>
+      </DynamicCardLayout>
     </>
   )
 }

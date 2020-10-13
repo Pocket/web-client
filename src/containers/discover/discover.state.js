@@ -1,7 +1,7 @@
 import { takeLatest, put, takeEvery } from 'redux-saga/effects'
 import { getDiscoverFeed } from 'common/api/discover'
 import { getItemSaveAnalytics } from './discover.analytics'
-import { deriveItemData } from 'connectors/discover-items/items.state'
+import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { arrayToObject } from 'common/utilities'
 
 import { DISCOVER_DATA_REQUEST } from 'actions'
@@ -15,6 +15,8 @@ import { DISCOVER_ITEMS_SAVE_REQUEST } from 'actions'
 import { DISCOVER_ITEMS_UNSAVE_REQUEST } from 'actions'
 
 import { HYDRATE } from 'actions'
+
+import { HOME_DATA_DISCOVER_SUCCESS } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -100,7 +102,7 @@ function* discoverUnSaveRequest(action) {
 export async function fetchDiscoverData() {
   try {
     const response = await getDiscoverFeed()
-    const derivedItems = await deriveItemData(response.feed)
+    const derivedItems = await deriveDiscoverItems(response.feed)
 
     const items = derivedItems.map((item) => item.resolved_id)
     const itemsById = arrayToObject(derivedItems, 'resolved_id')

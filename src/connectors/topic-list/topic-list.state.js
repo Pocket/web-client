@@ -1,11 +1,16 @@
 import { arrayToObject } from 'common/utilities'
+import { getTopicList as apiTopicList } from 'common/api/topics'
 import { TOPICLIST_HYDRATE } from 'actions'
 import { TOPICLIST_SET_ACTIVE } from 'actions'
-import { getTopicList } from 'common/api/topics'
+import { TOPICLIST_REQUEST } from 'actions'
+import { TOPICLIST_SUCCESS } from 'actions'
+import { TOPICLIST_FAILURE } from 'actions'
 import { HYDRATE } from 'actions'
+import { takeLatest, put, takeEvery } from 'redux-saga/effects'
 
 /** ACTIONS
  --------------------------------------------------------------- */
+export const getTopicList = () => ({ type: TOPICLIST_REQUEST })
 export const hydrateTopicList = (hydrated) => ({ type: TOPICLIST_HYDRATE, hydrated }) /*prettier-ignore */
 export const setActiveTopic = (topic) => ({ type: TOPICLIST_SET_ACTIVE, topic })
 
@@ -21,6 +26,11 @@ export const topicListReducers = (state = initialState, action) => {
     case TOPICLIST_HYDRATE: {
       const { hydrated } = action
       return { ...state, ...hydrated }
+    }
+
+    case TOPICLIST_SUCCESS: {
+      const { topicsByName } = action
+      return { ...state, topicsByName }
     }
 
     case TOPICLIST_SET_ACTIVE: {
@@ -41,11 +51,19 @@ export const topicListReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const topicListSagas = []
+export const topicListSagas = [takeLatest(TOPICLIST_REQUEST, topicListRequest)]
 
 /** ASYNC Functions
  --------------------------------------------------------------- */
-
+function* topicListRequest(action) {
+  try {
+    const topicsByName = yield fetchTopicList()
+    yield put({ type: TOPICLIST_SUCCESS, topicsByName })
+  } catch (error) {
+    console.log(error)
+    yield put({ type: TOPICLIST_FAILURE, error })
+  }
+}
 /**
  * fetchTopicList
  * Make and async request for a Pocket v3 feed and return best data
@@ -53,7 +71,7 @@ export const topicListSagas = []
  */
 export async function fetchTopicList() {
   try {
-    const response = await getTopicList()
+    const response = await apiTopicList()
     const { topics } = response
     const topicsByName = arrayToObject(topics, 'topic_slug')
     return topicsByName

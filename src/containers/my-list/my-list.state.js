@@ -1,6 +1,6 @@
 import { takeLatest, put, takeEvery } from 'redux-saga/effects'
 import { getMyList } from 'common/api/my-list'
-import { deriveItemData } from 'connectors/my-list-items/items.state'
+import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { arrayToObject } from 'common/utilities'
 
 import { MYLIST_DATA_REQUEST } from 'actions'
@@ -30,9 +30,9 @@ export const unSaveMylistItem = (id) => ({ type: MYLIST_UNSAVE_REQUEST, id }) //
 // to support something like indexDB (which I want to do)
 const initialState = {
   // State for active list items
-  active: [],
-  activeOffset: 0,
-  activeTotal: false,
+  unread: [],
+  unreadOffset: 0,
+  unreadTotal: false,
 
   // State for archive list items
   archive: [],
@@ -161,6 +161,7 @@ function* myListDataRequest(action) {
     const parameters = {}
 
     // Set appropriate subset
+    if (subset === 'unread') parameters.state = 'unread'
     if (subset === 'archive') parameters.state = 'read'
     if (subset === 'favorites') parameters.favorite = 1
     if (subset === 'highlights') parameters.hasAnnotations = 1
@@ -180,8 +181,6 @@ function* myListDataRequest(action) {
     })
 
     const newOffset = offset + items?.length
-
-    // Deriving data from the response
     yield put({
       type: MYLIST_DATA_SUCCESS,
       items,
@@ -212,7 +211,7 @@ export async function fetchMyListData(params) {
 
     const total = response.total
 
-    const derivedItems = await deriveItemData(Object.values(response.list))
+    const derivedItems = await deriveMyListItems(Object.values(response.list))
 
     const items = derivedItems
       .sort((a, b) => a.sort_id - b.sort_id)

@@ -1,12 +1,14 @@
-import { SearchPageHeader } from 'components/discover-layouts/card-page-header'
-import { CardList, CardLayout } from 'components/discover-layouts/card-layout'
 import { saveTopicItem, unSaveTopicItem } from './topic.state'
 import { useSelector } from 'react-redux'
 import { trackItemOpen } from './topic.analytics'
 import { trackUnAuthSave } from './topic.analytics'
 import { trackItemImpression } from './topic.analytics'
 import { trackTopicClick } from './topic.analytics'
-import { CardTopicsNav } from 'components/discover-layouts/card-topics-nav'
+
+import { SearchPageHeader } from 'components/headers/discover-header'
+import { CardList } from 'components/items-layout/dynamic-blocks'
+import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
+import { CardTopicsNav } from 'components/items-layout/topic-list'
 
 export default function topicSearch({ searchItems, topic, sharedActions }) {
   // Get topicList for sections that require it
@@ -25,7 +27,7 @@ export default function topicSearch({ searchItems, topic, sharedActions }) {
   return (
     <>
       <SearchPageHeader title={topic} />
-      <CardLayout {...actions}>
+      <DynamicCardLayout {...actions}>
         {/* Top List */}
         <CardList type="lockupLeft" count={5} items={searchItems} />
 
@@ -43,7 +45,7 @@ export default function topicSearch({ searchItems, topic, sharedActions }) {
           track={trackTopicClick}
           classNames={['no-border']}
         />
-      </CardLayout>
+      </DynamicCardLayout>
     </>
   )
 }

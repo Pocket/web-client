@@ -14,8 +14,8 @@ import { featureSagas } from 'connectors/feature-flags/feature-flags.state'
 // import { snowplowReducers } from 'connectors/snowplow/snowplow.state'
 import { snowplowSagas } from 'connectors/snowplow/snowplow.state'
 
-import { discoverItemsReducers } from 'connectors/discover-items/items.state'
-import { discoverItemsSagas } from 'connectors/discover-items/items.state'
+import { discoverItemsReducers } from 'connectors/items-by-id/discover/items.state'
+import { discoverItemsSagas } from 'connectors/items-by-id/discover/items.state'
 
 import { discoverHomeReducers } from 'containers/discover/discover.state'
 import { discoverHomeSagas } from 'containers/discover/discover.state'
@@ -38,8 +38,9 @@ import { recitSagas } from 'connectors/recit/recit.state'
 import { myListReducers } from 'containers/my-list/my-list.state'
 import { myListSagas } from 'containers/my-list/my-list.state'
 
-import { myListItemsReducers } from 'connectors/my-list-items/items.state'
-import { myListItemsSagas } from 'connectors/my-list-items/items.state'
+import { myListItemsReducers } from 'connectors/items-by-id/my-list/items.state'
+import { myListItemsSagas } from 'connectors/items-by-id/my-list/items.state'
+
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
 
@@ -73,7 +74,7 @@ const rootReducer = combineReducers({
   ...globalReducers,
   ...marketingReducers,
   ...discoverReducers,
-  ...collectionReducers
+  ...collectionReducers,
   home: homeReducers
 })
 
@@ -93,7 +94,7 @@ function* rootSaga() {
     ...syndicatedArticleSagas,
     ...recitSagas,
     ...myListSagas,
-    ...myListItemsSagas
+    ...myListItemsSagas,
     ...homeSagas
   ])
 }

@@ -1,12 +1,14 @@
 import { useSelector } from 'react-redux'
-import { CardPageHeader } from 'components/discover-layouts/card-page-header'
-import { CardSectionHeader } from 'components/discover-layouts/card-section-header'
-import { CardList, CardLayout } from 'components/discover-layouts/card-layout'
 import { saveTopicItem, unSaveTopicItem } from './topic.state'
 import { trackItemOpen, trackItemImpression } from './topic.analytics'
 import { trackTopicClick } from './topic.analytics'
 import { trackUnAuthSave } from './topic.analytics'
-import { CardTopicsNav } from 'components/discover-layouts/card-topics-nav'
+
+import { CardPageHeader } from 'components/headers/discover-header'
+import { SectionHeader } from 'components/headers/section-header'
+import { CardList } from 'components/items-layout/dynamic-blocks'
+import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
+import { CardTopicsNav } from 'components/items-layout/topic-list'
 
 export default function topicPage({
   curatedItems,
@@ -31,25 +33,25 @@ export default function topicPage({
     <>
       <CardPageHeader title={topic.display_name} />
 
-      <CardSectionHeader
+      <SectionHeader
         sectionTitle="Curated by our editors"
         sectionDescription="Stories to fuel your mind"
       />
 
       {/* Curated */}
-      <CardLayout {...actions}>
+      <DynamicCardLayout {...actions}>
         {/* Top Lockup (left)*/}
         <CardList type="lockupLeft" count={5} items={curatedItems} />
-      </CardLayout>
+      </DynamicCardLayout>
 
-      <CardSectionHeader
+      <SectionHeader
         sectionTitle="Popular with Pocket readers"
         sectionDescription="Stories from across the web"
         addPadding={true}
       />
 
       {/* Algorithmic */}
-      <CardLayout {...actions} initialOffset={5}>
+      <DynamicCardLayout {...actions} initialOffset={5}>
         {/* Top List */}
         <CardList type="list" count={5} items={algorithmicItems}>
           {/* Top TopicNav (in rail / inline list) */}
@@ -65,7 +67,7 @@ export default function topicPage({
 
         {/* Bottom TopicNav */}
         <CardTopicsNav topics={topics} track={trackTopicClick} />
-      </CardLayout>
+      </DynamicCardLayout>
     </>
   )
 }
