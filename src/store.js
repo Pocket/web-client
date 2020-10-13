@@ -40,6 +40,8 @@ import { myListSagas } from 'containers/my-list/my-list.state'
 
 import { myListItemsReducers } from 'connectors/my-list-items/items.state'
 import { myListItemsSagas } from 'connectors/my-list-items/items.state'
+import { homeReducers } from 'containers/home/home.state'
+import { homeSagas } from 'containers/home/home.state'
 
 /* REDUCERS
  --------------------------------------------------------------- */
@@ -72,6 +74,7 @@ const rootReducer = combineReducers({
   ...marketingReducers,
   ...discoverReducers,
   ...collectionReducers
+  home: homeReducers
 })
 
 /* SAGAS
@@ -91,6 +94,7 @@ function* rootSaga() {
     ...recitSagas,
     ...myListSagas,
     ...myListItemsSagas
+    ...homeSagas
   ])
 }
 

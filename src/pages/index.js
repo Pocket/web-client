@@ -1,7 +1,7 @@
 import Main from 'containers/home/home'
 
-Main.getInitialProps = async () => {
-  return { namespacesRequired: ['save-to-pocket'] }
+export async function getStaticProps() {
+  return { props: { namespacesRequired: ['common'] } }
 }
 
 export default Main
