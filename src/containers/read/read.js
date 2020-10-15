@@ -2,7 +2,7 @@ import { css } from 'linaria'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
-import { domainForUrl } from 'common/utilities'
+import { domainForUrl, getBool } from 'common/utilities'
 import { Loader, LoaderCentered } from 'components/loader/loader'
 import { ReaderNav } from 'components/reader/nav'
 import { ItemHeader } from 'components/reader/header'
@@ -12,8 +12,12 @@ import { Sidebar } from 'components/reader/sidebar'
 import { compileAnnotations, requestAnnotationPatch } from 'components/annotations/utilities'
 import { Fonts, FONT_TYPES } from 'components/fonts/fonts'
 import { TagModal } from 'components/tagging/tag.modal'
+import { DeleteModal } from 'components/delete/delete.modal'
 import { SendToFriend } from 'components/share-sheet/share-sheet'
-import { itemDataRequested, saveAnnotation } from './read.state'
+import {
+  itemDataRequested,
+  saveAnnotation,
+} from './read.state'
 
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2,1.3,1.4,1.5,1.65,1.9,2.5]
@@ -72,6 +76,7 @@ export default function Read({ appRootSelector, itemId }) {
   const [sideBarOpen, setSideBar] = useState(false)
   const [taggingModalOpen, setTaggingModal] = useState(false)
   const [sendModalOpen, setSendModal] = useState(false)
+  const [deleteModalOpen, setDeleteModal] = useState(false)
   const [highlight, setHighlight] = useState(null)
   const [highlightList, setHighlightList] = useState({})
 
@@ -100,10 +105,12 @@ export default function Read({ appRootSelector, itemId }) {
     word_count,
     videos,
     images,
-    annotations
+    annotations,
+    favorite
   } = articleData
 
   const tagList = Object.keys(tags)
+  const favStatus = getBool(favorite)
 
   const headerData = {
     authors,
@@ -139,9 +146,8 @@ export default function Read({ appRootSelector, itemId }) {
   }
 
   const toggleSidebar = () => setSideBar(!sideBarOpen)
-
   const toggleTagging = () => setTaggingModal(!taggingModalOpen)
-
+  const toggleDelete = () => setDeleteModal(!deleteModalOpen)
   const toggleShare = (recommend) => setSendModal(recommend || true)
 
   const toggleHighlight = () => {
@@ -171,14 +177,34 @@ export default function Read({ appRootSelector, itemId }) {
     }))
   }
 
+  const deleteItem = () => {
+    // dispatch(deleteListItem({ item_id }))
+  }
+
+  const archiveItem = () => {
+    // dispatch(archiveListItem({ item_id }))
+  }
+
+  const toggleFavorite = () => {
+    if (favStatus) {
+      // dispatch(favoriteListItem({ item_id }))
+    }
+    else {
+      // dispatch(unFavoriteListItem({ item_id }))
+    }
+  }
+
   return (
     <>
       <ReaderNav
         toggleSidebar={toggleSidebar}
         toggleTagging={toggleTagging}
         toggleShare={toggleShare}
+        toggleDelete={toggleDelete}
         shareData={shareData}
+        archiveItem={archiveItem}
         displaySettings={{ columnWidth, lineHeight, fontSize, fontFamily }}
+        favorite={favStatus}
       />
 
       <main className={articleWrapper}>
@@ -210,6 +236,11 @@ export default function Read({ appRootSelector, itemId }) {
           ) : null }
         </article>
       </main>
+      <DeleteModal
+        isOpen={deleteModalOpen}
+        setModalOpen={setDeleteModal}
+        appRootSelector={appRootSelector}
+        deleteItem={deleteItem} />
       <TagModal
         isPremium={isPremium}
         isOpen={taggingModalOpen}

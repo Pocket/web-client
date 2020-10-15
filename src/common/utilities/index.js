@@ -8,6 +8,8 @@ export { redirect } from './server-side/redirect'
 
 export { getPublishedDate } from './date-time/date-time'
 
+export { getBool } from './get-bool/get-bool'
+
 export { numberWithCommas } from './numbers/numbers'
 
 export { getValueFromCookie } from './cookies/cookies'

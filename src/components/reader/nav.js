@@ -50,6 +50,10 @@ const buttonStyles = css`
     color: var(--color-textPrimary);
     background-color: transparent;
   }
+
+  &.favorite {
+    color: var(--color-amber);
+  }
 `
 
 const articleActions = css`
@@ -68,7 +72,11 @@ export const ReaderNav = ({
   toggleSidebar,
   toggleTagging,
   toggleShare,
+  toggleDelete,
+  toggleFavorite,
+  archiveItem,
   shareData,
+  favorite,
   displaySettings
 }) => {
   const dispatch = useDispatch()
@@ -106,19 +114,25 @@ export const ReaderNav = ({
             </WithTooltip>
 
             <WithTooltip label="Favorite Article"> {/*Unfavorite Article*/}
-              <button className={classNames(buttonReset, buttonStyles)}>
+              <button
+                onClick={toggleFavorite}
+                className={classNames(buttonReset, buttonStyles, { favorite })}>
                 <FavoriteIcon />
               </button>
             </WithTooltip>
 
             <WithTooltip label="Archive Article">
-              <button className={classNames(buttonReset, buttonStyles)}>
+              <button
+                onClick={archiveItem}
+                className={classNames(buttonReset, buttonStyles)}>
                 <ArchiveIcon />
               </button>
             </WithTooltip>
 
             <WithTooltip label="Delete from Library">
-              <button className={classNames(buttonReset, buttonStyles)}>
+              <button
+                onClick={toggleDelete}
+                className={classNames(buttonReset, buttonStyles)}>
                 <DeleteIcon />
               </button>
             </WithTooltip>
@@ -142,4 +156,3 @@ export const ReaderNav = ({
     </header>
   )
 }
-// appRootSelector="#__next"

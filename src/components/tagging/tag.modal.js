@@ -106,23 +106,23 @@ export class TagModal extends React.Component {
         isOpen={isOpen}
         handleClose={() => setModalOpen(false)}>
         <ModalBody className={panelTagging}>
-            <Tagging
-              setInputRef={this.setInputRef}
-              value={this.state.value}
-              setValue={this.setValue}
-              addTag={this.addTag}
-              removeTag={this.removeTag}
-              setTags={this.setTags}
-              tags={this.state.tags}
-              typeahead={this.props.typeahead}
-            />
+          <Tagging
+            setInputRef={this.setInputRef}
+            value={this.state.value}
+            setValue={this.setValue}
+            addTag={this.addTag}
+            removeTag={this.removeTag}
+            setTags={this.setTags}
+            tags={this.state.tags}
+            typeahead={this.props.typeahead}
+          />
 
-            <Button
-              onClick={this.onSubmit}
-              className={buttonStyles}
-              disabled={!isActive}>
-              Save {/*'tagging.modal.save'*/}
-            </Button>
+          <Button
+            onClick={this.onSubmit}
+            className={buttonStyles}
+            disabled={!isActive}>
+            Save {/*'tagging.modal.save'*/}
+          </Button>
         </ModalBody>
         <ModalFooter>
           <TagSuggestions
