@@ -1,7 +1,6 @@
 
 // POCKET
-export const CONSUMER_KEY = '89624-08a6833ec06c1379f4cee8e3' //web-discover consumer key
-// export const CONSUMER_KEY = '78809-9423d8c743a58f62b23ee85c' //web-app-draft consumer
+export const CONSUMER_KEY = '78809-9423d8c743a58f62b23ee85c' //web-app-draft consumer
 export const BASE_URL = 'https://getpocket.com'
 export const API_URL = 'https://getpocket.com'
 export const LOGIN_URL = 'https://getpocket.com/login'

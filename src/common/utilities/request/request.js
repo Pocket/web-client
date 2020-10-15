@@ -25,7 +25,9 @@ export const request = ({
 
   const headers = {
     Origin: 'https://getpocket.com',
-    'User-Agent': `Pocket;web;client;${process.env.BUILD_ID}`
+    'User-Agent': `Pocket;web;client;${process.env.BUILD_ID}`,
+    'Content-Type': 'application/json',
+    'X-Accept': 'application/json; charset=UTF8 '
   }
 
   if (cookie) headers.Cookie = cookie
