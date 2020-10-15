@@ -6,6 +6,7 @@ import { css } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import classNames from 'classnames'
 import { FONT_TYPES } from 'components/fonts/fonts'
+import FontSVG from 'static/fonts/fonts.symbols-d30c8725.svg'
 
 const fontFamilyButton = css`
   height: 50px;
@@ -48,7 +49,7 @@ export const FontSettings = ({
                   width: '120px'
                 }}>
                 <use
-                  href={`static/fonts/fonts.symbols-d30c8725.svg#${
+                  href={`${FontSVG}#${
                     FONT_TYPES[font].selector
                   }`}
                 />

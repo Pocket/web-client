@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
 import { HighlightIcon, IosShareIcon } from '@pocket/web-ui'
-// import { ShareMenu } from 'Modules/ShareMenu/shareMenu'
+import { ShareMenu } from 'components/share-menu/share-menu'
 
 const popupContainer = css`
   position: absolute;
@@ -64,37 +64,17 @@ class SelectionPopoverClass extends Component {
   }
 
   onHighlight = () => {
-    this.props.addAnnotation({
-      item_id: this.props.item_id,
-      quote: this.props.textSelection,
-      patch: this.props.requestPatch(this.props.anchor),
-      analytics: {
-        'cxt_view': 'reader'
-      }
-    })
+    this.props.addAnnotation()
     this.props.disablePopup()
   }
 
   onShare = recommend => {
-    this.props.shareItem({
-      item_id: this.props.item_id,
-      recommend,
-      recent_friends: this.props.recent_friends,
-      quote: this.props.textSelection,
-      ...this.props.item
-    })
+    this.props.shareItem(recommend)
     this.props.disablePopup()
   }
 
   onSocialShare = service => {
-    this.props.socialShare({
-      item_id: this.props.item_id,
-      analytics: {
-        'cxt_view': 'reader',
-        'cxt_ui': 'selection'
-      },
-      service
-    })
+    this.props.socialShare(service)
   }
 
   toggleShare = () => {
@@ -120,22 +100,14 @@ class SelectionPopoverClass extends Component {
   }
 
   get shareMenu() {
-    const { item } = this.props
-    const title = item?.resolved_title || item?.given_title
+    const { shareItem, shareData } = this.props
 
     return (
-      <p style={{ padding: '10px' }}>
-        Zoinks! There will eventually be a share menu here!
-        {/*<ShareMenu
-          url={this.props.item.resolved_url}
-          item_id={this.props.item_id}
-          isPremium={this.props.isPremium}
-          shareItem={this.onShare}
-          socialShare={this.onSocialShare}
-          quote={this.props.textSelection}
-          title={title}
-        />*/}
-      </p>
+      <ShareMenu
+        shareItem={shareItem}
+        { ...shareData }
+        // socialShare={}
+      />
     )
   }
 
@@ -144,14 +116,12 @@ class SelectionPopoverClass extends Component {
       <React.Fragment>
         <button
           className={classNames(buttonWrapper, buttonReset)}
-          // aria-label={translate('shareExcerpt.highlight.aria')}
+          // aria-label={'shareExcerpt.highlight.aria'}
           onClick={this.onHighlight}>
           <span className={iconWrapper}>
             <HighlightIcon />
           </span>
-          {/*<Translate id="shareExcerpt.highlight.copy">*/}
-            Highlight
-          {/*</Translate>*/}
+            Highlight {/*"shareExcerpt.highlight.copy"*/}
         </button>
         <button
           className={classNames(buttonWrapper, buttonReset)}
@@ -160,9 +130,7 @@ class SelectionPopoverClass extends Component {
           <span className={iconWrapper}>
             <IosShareIcon />
           </span>
-          {/*<Translate id="shareExcerpt.shareExcerpt.copy">*/}
-            Share
-          {/*</Translate>*/}
+            Share {/*"shareExcerpt.shareExcerpt.copy*/}
         </button>
       </React.Fragment>
     )
@@ -194,12 +162,11 @@ class SelectionPopoverClass extends Component {
 SelectionPopoverClass.propTypes = {
   item: PropTypes.object,
   textSelection: PropTypes.string,
-  recent_friends: PropTypes.array,
+  recentFriends: PropTypes.array,
   item_id: PropTypes.string,
   disablePopup: PropTypes.func,
   shareItem: PropTypes.func,
-  socialShare: PropTypes.func,
-  annotateItem: PropTypes.func
+  socialShare: PropTypes.func
 }
 
 export const SelectionPopover = SelectionPopoverClass

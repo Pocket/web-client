@@ -1,5 +1,5 @@
-import { FriendList } from './share-sheet.friends'
-import { ShareSheet } from './share-sheet'
+import { Friends } from './share-sheet.friends'
+import { SendToFriend } from './share-sheet'
 import { useState } from 'react'
 import FRIEND_LIST from 'mock/friends.json'
 
@@ -21,7 +21,7 @@ const FriendWrapper = () => {
   }
 
   return (
-    <FriendList
+    <Friends
       friends={recent_friends}
       selectedFriends={friends}
       onToggle={onToggle}
@@ -35,29 +35,44 @@ const mockItem = {
   thumbnail: 'http://www.fillmurray.com/500/500',
   title: 'Consistent Design Systems in Sketch With Atomic Design and the Auto-Layout Plugin',
   domain: 'css-tricks.com',
-  recent_friends,
-  auto_complete_emails
+  recentFriends: recent_friends,
+  autoCompleteEmails: auto_complete_emails
 }
 export const recommend = () => (
-  <ShareSheet {...mockItem} recommend="recommend" />
+  <SendToFriend
+    {...mockItem}
+    isOpen
+    appRootSelector="#root"
+    recommend="recommend" />
 )
 export const recommendWithQuote = () => (
-  <ShareSheet
+  <SendToFriend
     {...mockItem}
+    isOpen
+    appRootSelector="#root"
     quote="Real cool article, brosef."
     recommend="recommend" />
 )
 export const recommendNoThumbnail = () => (
-  <ShareSheet
+  <SendToFriend
     {...mockItem}
+    isOpen
+    appRootSelector="#root"
     thumbnail={null}
     quote="Real cool article, brosef."
     recommend="recommend" />
 )
 
 export const sendToFriend = () => (
-  <ShareSheet {...mockItem} />
+  <SendToFriend
+    {...mockItem}
+    isOpen
+    appRootSelector="#root" />
 )
 export const sendWithQuote = () => (
-  <ShareSheet {...mockItem} quote="Real cool article, brosef." />
+  <SendToFriend
+    {...mockItem}
+    isOpen
+    appRootSelector="#root"
+    quote="Real cool article, brosef." />
 )

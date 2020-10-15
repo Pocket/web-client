@@ -4,7 +4,6 @@ import { Tagging } from './tagging'
 import { TagSuggestions } from './tag.suggestions'
 import {
   Button,
-  CrossIcon,
   breakpointLargeTablet,
   breakpointTinyTablet,
   Modal,
@@ -35,30 +34,11 @@ const panelWrapper = css`
   }
 `
 
-const panelHeader = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
-  padding-bottom: 15px;
-`
-
-const taggingTitle = css`
-  font-size: 16px;
-  line-height: 16px;
-  margin: 0;
-`
-
 const panelTagging = css`
   display: flex;
   align-content: flex-end;
   align-items: center;
-`
-
-const closeButton = css`
-  &:hover {
-    background: transparent;
-  }
+  width: 100%;
 `
 
 const buttonStyles = css`
@@ -125,8 +105,7 @@ export class TagModal extends React.Component {
         screenReaderLabel="Edit Article Tags"
         isOpen={isOpen}
         handleClose={() => setModalOpen(false)}>
-        <ModalBody>
-          <div className={panelTagging}>
+        <ModalBody className={panelTagging}>
             <Tagging
               setInputRef={this.setInputRef}
               value={this.state.value}
@@ -144,7 +123,6 @@ export class TagModal extends React.Component {
               disabled={!isActive}>
               Save {/*'tagging.modal.save'*/}
             </Button>
-          </div>
         </ModalBody>
         <ModalFooter>
           <TagSuggestions

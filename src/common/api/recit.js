@@ -11,3 +11,16 @@ export const getPocketRecs = (itemId) => {
     path: `v3/recit/module/syndicated_article/${itemId}`
   })
 }
+
+export const getRecommendations = (itemId) => {
+  const lang = 'en' // Gotta be a good way to pass this in
+  return request({
+    path: 'v3/discover/recIt',
+    data: {
+      item_id: itemId, // resolved_id
+      locale_lang: lang,
+      count: 3,
+      module: 'web_client'
+    }
+  })
+}

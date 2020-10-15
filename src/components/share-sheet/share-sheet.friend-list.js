@@ -1,12 +1,11 @@
 import { css } from 'linaria'
-import { FriendList } from './share-sheet.friends'
+import { Friends } from './share-sheet.friends'
 import { Tagging } from 'components/tagging/tagging'
 
 const panelWrapper = css`
-  margin-bottom: 1em;
+  margin: 0 -1em 1em;
   padding: 1em 0 0;
   border-top: 4px solid var(--color-dividerTertiary);
-  border-bottom: 1px solid var(--color-dividerTertiary);
   h4 {
     margin: 0 0 10px;
     font-size: 12px;
@@ -16,20 +15,16 @@ const panelWrapper = css`
 const inputWrapper = css`
   padding: 0 1em 0.25em;
 `
-const clampHeight = css`
-  max-height: 200px;
-  overflow-y: scroll;
-`
 
-export const SendToFriend = ({
+export const FriendList = ({
   value,
   setValue,
   addEmail,
   removeEmail,
   setEmails,
   emails,
-  auto_complete_emails,
-  recent_friends,
+  autoCompleteEmails,
+  recentFriends,
   onFriendUpdate,
   selectedFriends
 }) => (
@@ -43,18 +38,16 @@ export const SendToFriend = ({
         removeTag={removeEmail}
         setTags={setEmails}
         tags={emails}
-        typeahead={auto_complete_emails}
+        typeahead={autoCompleteEmails?.map(item => item.email)}
         email
       />
     </div>
-    <div className={clampHeight}>
-      {recent_friends ? (
-        <FriendList
-          friends={recent_friends}
-          onToggle={onFriendUpdate}
-          selectedFriends={selectedFriends}
-        />
-      ) : null}
-    </div>
+    {recentFriends ? (
+      <Friends
+        friends={recentFriends}
+        onToggle={onFriendUpdate}
+        selectedFriends={selectedFriends}
+      />
+    ) : null}
   </div>
 )

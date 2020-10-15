@@ -25,7 +25,7 @@ export function getListPositionByAttr(attribute) {
 
 export function compileAnnotations(highlightList) {
   const current = Object.keys(highlightList).map(
-    key => highlightListt[key].id
+    key => highlightList[key].id
   )
   const annList = getListPositionByAttr('annotation_id')
   // De-dupe any annotation node references (annotations may cross multiple nodes)

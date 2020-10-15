@@ -30,7 +30,7 @@ export const ColumnWidthSettings = ({
         </IconWrapper>
         <StepperButton
           active={minusActive()}
-          onClick={clickDecrease}
+          onClick={handleDecrease}
           aria-label="Decrease Column Width"
           data-tooltip="Decrease Column Width">
           <RemoveIcon />
@@ -42,7 +42,7 @@ export const ColumnWidthSettings = ({
         />
         <StepperButton
           active={plusActive()}
-          onClick={clickIncrease}
+          onClick={handleIncrease}
           aria-label="Increase Column Width"
           data-tooltip="Increase Column Width">
           <AddIcon />

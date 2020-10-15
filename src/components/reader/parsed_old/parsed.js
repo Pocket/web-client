@@ -135,7 +135,7 @@ export class Parsed extends Component {
       socialShare,
       addAnnotation,
       item_id,
-      recent_friends,
+      recentFriends,
       item,
       isPremium
     } = this.props
@@ -163,7 +163,7 @@ export class Parsed extends Component {
             requestPatch={requestAnnotationPatch}
             textSelection={textSelection}
             item_id={item_id}
-            recent_friends={recent_friends}
+            recentFriends={recentFriends}
             item={item}
             isPremium={isPremium}
           />

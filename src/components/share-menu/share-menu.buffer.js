@@ -1,17 +1,6 @@
 import { openWindow } from 'common/utilities'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tooltipBase } from 'components/tooltip/tooltip'
-import { css } from 'linaria'
-import classNames from 'classnames'
-
-const bufferButton = css`
-  &.buffer-button {
-    width: 100%;
-    cursor: pointer;
-    padding: 0;
-    color: inherit;
-  }
-`
 
 export const BufferShareButton = ({ url, text, onShareWindowClose, children }) => {
   const prepareWindow = (url, quote, callback) => {
@@ -34,7 +23,6 @@ export const BufferShareButton = ({ url, text, onShareWindowClose, children }) =
 
   return (
     <button
-      className={classNames(bufferButton, 'buffer-button')}
       aria-label="Buffer"
       onClick={clickHandler}>
       { children }

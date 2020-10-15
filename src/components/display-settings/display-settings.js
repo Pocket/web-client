@@ -20,6 +20,10 @@ const COLUMN_WIDTH = [531, 574, 632, 718, 826, 933, 1041]
 
 const displayStyles = css`
   & > span { background: transparent; }
+
+  #display-settings {
+    min-width: 355px;
+  }
 `
 
 const fontFamilyButton = css`
@@ -43,11 +47,19 @@ const buttonStyles = css`
   }
 `
 
-export const DisplaySettings = ({ appRootSelector, isPremium }) => {
-  const [fontFamily, setFontFamily] = useState('blanco')
-  const [fontSize, setFontSize] = useState(4)
-  const [lineHeight, setLineHeight] = useState(4)
-  const [columnWidth, setColumnWidth] = useState(4)
+export const DisplaySettings = ({
+  fontFamily,
+  fontSize,
+  columnWidth,
+  lineHeight,
+  appRootSelector,
+  setFontFamily,
+  setFontSize,
+  setLineHeight,
+  setColumnWidth,
+  isPremium,
+  forceShow
+}) => {
   const [displayFonts, setDisplayFonts] = useState(false)
 
   const displayMenuTriggerRef = useRef(null)
@@ -95,6 +107,8 @@ export const DisplaySettings = ({ appRootSelector, isPremium }) => {
         </button>
       </WithTooltip>
       <PopupMenu
+        forceShow={forceShow}
+        id="display-settings"
         onClose={handleOnClose}
         trigger={displayMenuTriggerRef}
         title="Display Settings"

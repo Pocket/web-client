@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import copy from 'clipboard-copy'
 import { css } from 'linaria'
+import { popoverBase } from 'components/popover/popover'
 import { PopupMenuGroup, PopupMenuItem } from '@pocket/web-ui'
 import { SocialItems } from './share-menu.social'
 import { urlWithPocketRedirect, urlWithPermanentLibrary } from 'common/utilities'
@@ -12,6 +13,7 @@ import {
 } from '@pocket/web-ui'
 
 const menuStyle = css`
+  ${popoverBase};
   display: block;
   list-style-type: none;
   margin: 0;
@@ -37,8 +39,10 @@ export class ShareMenu extends Component {
   onSocialShare = service => this.props.socialShare(service)
 
   render() {
+    const { popoverRef } = this.props
+
     return (
-      <ul className={menuStyle}>
+      <ul className={menuStyle} ref={popoverRef}>
         <PopupMenuGroup>
           <PopupMenuItem onClick={this.copyLink}>
             <LinkIcon />

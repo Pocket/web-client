@@ -8,6 +8,7 @@ import {
 import { ShareMenu } from 'components/share-menu/share-menu'
 import { buttonReset } from 'components/buttons/button-reset'
 import classNames from 'classnames'
+import { usePopover } from 'components/popover/popover'
 
 const shareStyles = css`
   display: inline-block;
@@ -23,26 +24,38 @@ const buttonStyles = css`
   }
 `
 
-export const ShareArticle = ({ appRootSelector, toggleSidebar }) => {
+export const ShareArticle = ({ appRootSelector, toggleSidebar, shareItem, shareData }) => {
   const shareTriggerRef = useRef(null)
+  // Popover Effect
+  const { popTrigger, popBody, shown } = usePopover({
+    placement: 'top-end',
+    modifiers: [{
+      name: 'offset',
+      options: {
+        offset: [0, 0]
+      }
+    }]
+  })
+
+  const handleClick = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+
 
   return (
     <div className={shareStyles}>
       <WithTooltip label="Share Article">
         <button
           className={classNames(buttonReset, buttonStyles)}
-          ref={shareTriggerRef}>
+          onClick={handleClick}
+          ref={popTrigger}>
           <IosShareIcon />
         </button>
       </WithTooltip>
-      <PopupMenu
-        trigger={shareTriggerRef}
-        title="Share Menu"
-        screenReaderLabel="Share Menu"
-        appRootSelector={appRootSelector}
-      >
-        <ShareMenu />
-      </PopupMenu>
+      {shown ? (
+        <ShareMenu popoverRef={popBody} shareItem={shareItem} {...shareData} />
+      ) : null}
     </div>
   )
 }

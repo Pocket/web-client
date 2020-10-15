@@ -1,43 +1,35 @@
 import React from 'react'
 import { css } from 'linaria'
-import { SendToFriend } from './share-sheet.send-to-friend'
 import {
   Button,
-  breakpointTinyTablet
+  breakpointLargeTablet,
+  breakpointTinyTablet,
+  Modal,
+  ModalBody,
+  ModalFooter
 } from '@pocket/web-ui'
-import { overlayBase } from 'components/overlay/overlay'
-// import { ItemInfo } from 'Modules/Items/Common/Info/item.info'
 import { validateEmail } from 'common/utilities'
-import classNames from 'classnames'
+import { FriendList } from './share-sheet.friend-list'
 
-const shareContainer = css`
-  font-family: "Graphik Web";
-  padding: 20px 0;
-  max-width: 575px;
-  color: var(--color-textPrimary);
-  h2,
-  h3 {
-    margin: 0;
-    padding: 0;
-    font-weight: 600;
-    font-size: 1em;
-    line-height: 1.5em;
-  }
-  h3 {
-    text-transform: uppercase;
-    padding-bottom: 1.5em;
+const panelWrapper = css`
+  position: relative;
+  box-sizing: border-box;
+  padding: 20px 0 0;
+  width: 500px;
+
+  > div {
+    padding-right: 20px;
+    padding-left: 20px;
   }
 `
-const shareHeader = css`
-  font-weight: 600;
-  padding: 0 1em 1em;
-  border-bottom: 1px solid var(--color-dividerSecondary);
-`
+
 const shareDetails = css`
-  padding: 1em;
   display: grid;
   grid-template-columns: auto 120px;
   grid-column-gap: 20px;
+  h6 {
+    font-size: var(--fontSize100);
+  }
   cite {
     color: var(--color-textSecondary);
     display: block;
@@ -52,7 +44,7 @@ const shareDetails = css`
 `
 
 const shareQuote = css`
-  margin: 5px 25px 25px;
+  margin: 5px 0 25px;
   padding: 0 15px;
   border-left: 1px solid var(--color-dividerSecondary);
   color: var(--color-textSecondary);
@@ -65,6 +57,7 @@ const shareThumbnail = css`
   height: 100px;
   border-radius: 4px;
   display: block;
+  margin-bottom: 1em;
 
   ${breakpointTinyTablet} {
     display: none;
@@ -72,7 +65,7 @@ const shareThumbnail = css`
 `
 
 const shareComment = css`
-  padding: 0 1em 1em;
+  padding: 0 0 1em;
   textarea {
     border: 1px solid var(--color-formFieldBorder);
     border-radius: 4px;
@@ -99,7 +92,13 @@ const shareAction = css`
   }
 `
 
-export class ShareSheet extends React.Component {
+const footerStyles = css`
+  button {
+    margin-left: var(--spacing050);
+  }
+`
+
+export class SendToFriend extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -136,7 +135,7 @@ export class ShareSheet extends React.Component {
     if (this.props.recommend) shareData.channels = ['public_profile']
 
     this.props.confirmModal(shareData)
-    this.props.onClose()
+    this.props.setModalOpen(false)
   }
 
   handleCommentChange = event => {
@@ -189,62 +188,66 @@ export class ShareSheet extends React.Component {
       title,
       recommend,
       quote,
-      recent_friends,
-      auto_complete_emails,
-      thumbnail
+      recentFriends,
+      autoCompleteEmails,
+      thumbnail,
+      isOpen,
+      setModalOpen,
+      appRootSelector
     } = this.props
 
     const isRecommend = recommend === 'recommend'
-
+    const isActive = this.state.value || this.state.actionable
     return (
-      <div className={classNames(overlayBase, shareContainer)}>
-        <div className={shareHeader}>
-          {isRecommend
-            ? "Recommend"
-            : "Send"}
-        </div>
-        <div className={shareDetails}>
-          <header>
-            <h2>{title}</h2>
-            {/*<ItemInfo {...this.props} noLink={true} />*/}
-          </header>
-          {thumbnail ? (
-            <div
-              className={shareThumbnail}
-              style={{ backgroundImage: `url('${thumbnail}')` }} />
+      <Modal
+        appRootSelector={appRootSelector}
+        title={isRecommend ? "Recommend" : "Send"}
+        screenReaderLabel={isRecommend ? "Recommend" : "Send"}
+        isOpen={isOpen}
+        handleClose={() => setModalOpen(false)}>
+        <ModalBody>
+          <div className={shareDetails}>
+            <header>
+              <h6>{title}</h6>
+              {/*<ItemInfo {...this.props} noLink={true} />*/}
+            </header>
+            {thumbnail ? (
+              <div
+                className={shareThumbnail}
+                style={{ backgroundImage: `url('${thumbnail}')` }} />
+            ) : null}
+          </div>
+
+          {quote ? <div className={shareQuote}>{quote}</div> : null}
+
+          <div className={shareComment}>
+            <textarea
+              value={this.state.comment}
+              onChange={this.handleCommentChange}
+              placeholder="Comment" //translate('share.commentPlaceholder')
+            />
+          </div>
+
+          {!isRecommend ? (
+            <FriendList
+              selectedFriends={this.state.friends}
+              recentFriends={recentFriends}
+              autoCompleteEmails={autoCompleteEmails}
+              onFriendUpdate={this.onFriendUpdate}
+              addEmail={this.addEmail}
+              removeEmail={this.removeEmail}
+              setEmails={this.setEmails}
+              emails={this.state.emails}
+              value={this.state.email}
+              setValue={this.handleEmailChange}
+            />
           ) : null}
-        </div>
-
-        {quote ? <div className={shareQuote}>{quote}</div> : null}
-
-        <div className={shareComment}>
-          <textarea
-            value={this.state.comment}
-            onChange={this.handleCommentChange}
-            placeholder="Comment" //translate('share.commentPlaceholder')
-          />
-        </div>
-
-        {!recommend ? (
-          <SendToFriend
-            selectedFriends={this.state.friends}
-            recent_friends={recent_friends}
-            auto_complete_emails={auto_complete_emails}
-            onFriendUpdate={this.onFriendUpdate}
-            addEmail={this.addEmail}
-            removeEmail={this.removeEmail}
-            setEmails={this.setEmails}
-            emails={this.state.emails}
-            value={this.state.email}
-            setValue={this.handleEmailChange}
-          />
-        ) : null}
-
-        <div className={shareAction}>
+        </ModalBody>
+        <ModalFooter className={footerStyles}>
           <Button
             variant="secondary"
             // aria-label={translate('share.cancelAction')}
-            onClick={this.props.onClose}>
+            onClick={() => setModalOpen(false)}>
             Cancel
           </Button>
           <Button
@@ -259,8 +262,8 @@ export class ShareSheet extends React.Component {
               ? "Recommend"
               : "Send"}
           </Button>
-        </div>
-      </div>
+        </ModalFooter>
+      </Modal>
     )
   }
 }

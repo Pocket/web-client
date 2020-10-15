@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux'
 import { css } from 'linaria'
 import {
   ArrowLeftIcon, HighlightIcon, IosShareIcon,
@@ -8,10 +9,16 @@ import { DisplaySettings } from 'components/display-settings/display-settings'
 import { ShareArticle } from './share'
 import { buttonReset } from 'components/buttons/button-reset'
 import classNames from 'classnames'
+import {
+  updateLineHeight,
+  updateColumnWidth,
+  updateFontSize,
+  updateFontType
+} from 'containers/read/read.state'
 
 const headerStyle = css`
   position: fixed;
-  z-index: var(--zIndexHeader);
+  z-index: var(--zIndexTooltip);
   width: 100%;
   background: var(--color-canvas);
   box-shadow: var(--raisedCanvas);
@@ -57,7 +64,20 @@ const articleActions = css`
   }
 `
 
-export const ReaderNav = ({ toggleSidebar, toggleTagging }) => {
+export const ReaderNav = ({
+  toggleSidebar,
+  toggleTagging,
+  toggleShare,
+  shareData,
+  displaySettings
+}) => {
+  const dispatch = useDispatch()
+
+  const setFontFamily = (val) => dispatch(updateFontType(val))
+  const setFontSize = (val) => dispatch(updateFontSize(val))
+  const setLineHeight = (val) => dispatch(updateLineHeight(val))
+  const setColumnWidth = (val) => dispatch(updateColumnWidth(val))
+
   return (
     <header className={headerStyle}>
       <div className="global-nav-container">
@@ -103,10 +123,20 @@ export const ReaderNav = ({ toggleSidebar, toggleTagging }) => {
               </button>
             </WithTooltip>
 
-            <ShareArticle appRootSelector="#root" />
+            <ShareArticle
+              appRootSelector="#__next"
+              shareItem={toggleShare}
+              shareData={shareData} />
           </div>
 
-          <DisplaySettings appRootSelector="#root" isPremium/>
+          <DisplaySettings
+            {...displaySettings}
+            appRootSelector="#__next"
+            setFontFamily={setFontFamily}
+            setFontSize={setFontSize}
+            setLineHeight={setLineHeight}
+            setColumnWidth={setColumnWidth}
+            isPremium/>
         </nav>
       </div>
     </header>

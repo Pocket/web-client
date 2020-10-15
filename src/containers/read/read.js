@@ -1,14 +1,19 @@
 import { css } from 'linaria'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
+import { domainForUrl } from 'common/utilities'
+import { Loader, LoaderCentered } from 'components/loader/loader'
 import { ReaderNav } from 'components/reader/nav'
 import { ItemHeader } from 'components/reader/header'
 import { Content } from 'components/reader/content'
 import { SelectionPopover } from 'components/popover/popover-selection'
 import { Sidebar } from 'components/reader/sidebar'
-import { compileAnnotations } from 'components/annotations/utilities'
+import { compileAnnotations, requestAnnotationPatch } from 'components/annotations/utilities'
 import { Fonts, FONT_TYPES } from 'components/fonts/fonts'
 import { TagModal } from 'components/tagging/tag.modal'
+import { SendToFriend } from 'components/share-sheet/share-sheet'
+import { itemDataRequested, saveAnnotation } from './read.state'
 
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2,1.3,1.4,1.5,1.65,1.9,2.5]
@@ -23,6 +28,8 @@ const articleWrapper = css`
   overflow-x: hidden;
 
   .sidebar {
+    position: relative;
+    z-index: 1;
     width: 0;
     transition: width 150ms ease-in-out;
 
@@ -46,26 +53,57 @@ const articleWrapper = css`
   }
 `
 
-export default function Read({ item }) {
+export default function Read({ appRootSelector, itemId }) {
+  const dispatch = useDispatch()
+
+  const isPremium = useSelector(
+    (state) => parseInt(state?.user?.premium_status, 10) === 1 || false
+  )
+
+  const articleData = useSelector((state) => state.reader.articleData)
+  const articleContent = useSelector((state) => state.reader.articleContent)
+  const suggestedTags = useSelector((state) => state.reader.suggestedTags)
+  const lineHeight = useSelector((state) => state.reader.lineHeight)
+  const columnWidth = useSelector((state) => state.reader.columnWidth)
+  const fontSize = useSelector((state) => state.reader.fontSize)
+  const fontFamily = useSelector((state) => state.reader.fontFamily)
+  // const tagLibrary = useSelector((state) => state.reader.tagLibrary)
+
   const [sideBarOpen, setSideBar] = useState(false)
   const [taggingModalOpen, setTaggingModal] = useState(false)
+  const [sendModalOpen, setSendModal] = useState(false)
   const [highlight, setHighlight] = useState(null)
   const [highlightList, setHighlightList] = useState({})
 
+  useEffect(() => {
+    dispatch(itemDataRequested(itemId))
+  }, [dispatch])
+
+  if (!articleData) {
+    return (
+      <LoaderCentered>
+        <Loader isVisible />
+      </LoaderCentered>
+    )
+  }
+
   const {
+    item_id,
     authors,
     given_title,
     resolved_title,
     resolved_url,
     given_url,
+    top_image_url,
     tags,
     has_video,
     word_count,
     videos,
-    item_content,
     images,
     annotations
-  } = item
+  } = articleData
+
+  const tagList = Object.keys(tags)
 
   const headerData = {
     authors,
@@ -73,29 +111,38 @@ export default function Read({ item }) {
     resolved_title,
     resolved_url,
     given_url,
-    tags,
+    tags: tagList,
     has_video,
     word_count,
     videos
   }
 
   const contentData = {
-    content: item_content,
+    content: articleContent,
     annotations,
     images,
     videos
   }
 
+  const shareData = {
+    url: resolved_url,
+    quote: highlight?.toString(),
+    title: resolved_title || given_title,
+    item_id
+  }
+
   const customStyles = {
-    maxWidth: `${COLUMN_WIDTH_RANGE[3]}px`,
-    lineHeight: LINE_HEIGHT_RANGE[3],
-    fontSize: `${FONT_RANGE[3]}px`,
-    fontFamily: 'IdealSans'
+    maxWidth: `${COLUMN_WIDTH_RANGE[columnWidth]}px`,
+    lineHeight: LINE_HEIGHT_RANGE[lineHeight],
+    fontSize: `${FONT_RANGE[fontSize]}px`,
+    fontFamily: FONT_TYPES[fontFamily].family
   }
 
   const toggleSidebar = () => setSideBar(!sideBarOpen)
 
   const toggleTagging = () => setTaggingModal(!taggingModalOpen)
+
+  const toggleShare = (recommend) => setSendModal(recommend || true)
 
   const toggleHighlight = () => {
     const selection = window.getSelection()
@@ -116,11 +163,23 @@ export default function Read({ item }) {
     setHighlightList(compiled)
   }
 
+  const addAnnotation = () => {
+    dispatch(saveAnnotation({
+      item_id,
+      patch: requestAnnotationPatch(highlight),
+      quote: highlight.toString()
+    }))
+  }
+
   return (
     <>
       <ReaderNav
         toggleSidebar={toggleSidebar}
-        toggleTagging={toggleTagging} />
+        toggleTagging={toggleTagging}
+        toggleShare={toggleShare}
+        shareData={shareData}
+        displaySettings={{ columnWidth, lineHeight, fontSize, fontFamily }}
+      />
 
       <main className={articleWrapper}>
         <aside className={classNames('sidebar', { active: sideBarOpen })}>
@@ -134,26 +193,41 @@ export default function Read({ item }) {
         </aside>
         <article className={classNames(Fonts, "reader")} style={customStyles}>
           <ItemHeader {...headerData} />
-          <Content
-            {...contentData}
-            onMouseUp={toggleHighlight}
-            annotationsBuilt={buildAnnotations}
-          />
+          {articleContent ? (
+            <Content
+              {...contentData}
+              onMouseUp={toggleHighlight}
+              annotationsBuilt={buildAnnotations} />
+          ) : null }
           {highlight ? (
             <SelectionPopover
               anchor={highlight}
               disablePopup={clearSelection}
+              addAnnotation={addAnnotation}
+              shareItem={toggleShare}
+              shareData={shareData}
             />
-          ) : null}
+          ) : null }
         </article>
       </main>
       <TagModal
+        isPremium={isPremium}
         isOpen={taggingModalOpen}
         setModalOpen={setTaggingModal}
-        currentTags={tags}
-        appRootSelector="#root"
+        appRootSelector={appRootSelector}
+        currentTags={tagList}
         typeahead={[]}
-        suggestedTags={[]} />
+        suggestedTags={suggestedTags} />
+      <SendToFriend
+        {...shareData}
+        domain={domainForUrl(resolved_url)}
+        // recentFriends={recent_friends},
+        // autoCompleteEmails={auto_complete_emails}
+        isOpen={!!sendModalOpen}
+        setModalOpen={setSendModal}
+        appRootSelector={appRootSelector}
+        thumbnail={top_image_url}
+        recommend={sendModalOpen} />
     </>
   )
 }

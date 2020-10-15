@@ -66,7 +66,7 @@ class FriendItem extends React.Component {
   }
 }
 
-export const FriendList = ({ friends, onToggle, selectedFriends }) => {
+export const Friends = ({ friends, onToggle, selectedFriends }) => {
   return friends?.map((friend, index) => {
     return (
       <FriendItem

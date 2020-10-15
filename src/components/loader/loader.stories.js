@@ -12,9 +12,9 @@ export const loaderCentered = () => (
   </LoaderCentered>
 )
 
-// // This was a much more complicated example involving
-// // list items and such. In other words, make me more
-// // complex once you get list stuffs
+// This was a much more complicated example involving
+// list items and such. In other words, make me more
+// complex once you get list stuffs
 export const loadMore = () => (
   <LoadMore>
     <Loader isVisible />

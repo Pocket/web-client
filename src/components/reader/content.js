@@ -44,8 +44,11 @@ export const Content = ({
     if (content) externalizeLinks(articleRef.current)
     if (images) loadParsedImages(images)
     if (videos) loadParsedVideos(videos)
-    if (annotations) processAnnotations(annotations, callback, articleRef.current)
   }, [])
+
+  useEffect(() => {
+    if (annotations) processAnnotations(annotations, callback, articleRef.current)
+  })
 
   return (
     <article

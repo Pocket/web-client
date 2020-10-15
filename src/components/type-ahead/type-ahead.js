@@ -119,6 +119,7 @@ export class TypeAhead extends React.Component {
   /* Render
   ------------------------------------------------------- */
   render() {
+    console.log(this.state.items)
     return this.isOpen ? (
       <TypeAheadMenu>
         {this.state.items.map((item, index) => (

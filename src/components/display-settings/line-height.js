@@ -30,7 +30,7 @@ export const LineHeightSettings = ({
         </IconWrapper>
         <StepperButton
           active={minusActive()}
-          onClick={clickDecrease}
+          onClick={handleDecrease}
           aria-label="Decrease Line Height"
           data-tooltip="Decrease Line Height">
           <RemoveIcon />
@@ -42,7 +42,7 @@ export const LineHeightSettings = ({
         />
         <StepperButton
           active={plusActive()}
-          onClick={clickIncrease}
+          onClick={handleIncrease}
           aria-label="Increase Line Height"
           data-tooltip="Increase Line Height">
           <AddIcon />
