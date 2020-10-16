@@ -10,6 +10,9 @@ import { MYLIST_HYDRATE } from 'actions'
 import { MYLIST_SAVE_REQUEST } from 'actions'
 import { MYLIST_UNSAVE_REQUEST } from 'actions'
 
+import { ITEMS_ARCHIVE_REQUEST } from 'actions'
+import { ITEMS_UNARCHIVE_REQUEST } from 'actions'
+
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
@@ -133,6 +136,16 @@ export const myListReducers = (state = initialState, action) => {
       const { mylist } = action.payload
       return { ...state, ...mylist }
 
+    case ITEMS_ARCHIVE_REQUEST: {
+      const { items } = action
+      return reconcileItemsArchived(items, state)
+    }
+
+    case ITEMS_UNARCHIVE_REQUEST: {
+      const { items } = action
+      return reconcileItemsUnArchived(items, state)
+    }
+
     default:
       return state
   }
@@ -223,5 +236,33 @@ export async function fetchMyListData(params) {
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.log('discover.state', error)
+  }
+}
+
+/** RECONCILERS
+ --------------------------------------------------------------- */
+export function reconcileItemsArchived(items, state) {
+  const itemIds = items.map((item) => item.id)
+  //prettier-ignore
+  return {
+    ...state,
+    unread: state.unread.filter( item => !itemIds.includes(item)),
+    favoritesactive: state.favoritesactive.filter( item => !itemIds.includes(item)),
+    highlightsactive: state.highlightsactive.filter( item => !itemIds.includes(item)),
+    articlesactive: state.articlesactive.filter( item => !itemIds.includes(item)),
+    videosactive: state.videosactive.filter( item => !itemIds.includes(item))
+  }
+}
+
+export function reconcileItemsUnArchived(items, state) {
+  const itemIds = items.map((item) => item.id)
+  //prettier-ignore
+  return {
+    ...state,
+    archive: state.archive.filter( item => !itemIds.includes(item)),
+    favoritesarchive: state.favoritesarchive.filter( item => !itemIds.includes(item)),
+    highlightsarchive: state.highlightsarchive.filter( item => !itemIds.includes(item)),
+    articlesarchive: state.articlesarchive.filter( item => !itemIds.includes(item)),
+    videosarchive: state.videosarchive.filter( item => !itemIds.includes(item))
   }
 }
