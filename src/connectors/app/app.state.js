@@ -1,13 +1,15 @@
 import { APP_DEV_MODE_TOGGLE } from 'actions'
 import { APP_SET_BASE_URL } from 'actions'
+import { APP_SET_MODE } from 'actions'
 import { HYDRATE } from 'actions'
 
-const initialState = { devMode: false }
+const initialState = { devMode: false, mode: 'default' }
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const devModeToggle = () => ({ type: APP_DEV_MODE_TOGGLE })
 export const appSetBaseURL = (baseURL) => ({ type: APP_SET_BASE_URL, baseURL })
+export const appSetMode = (mode) => ({ type: APP_SET_MODE, mode })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -21,6 +23,16 @@ export const appReducers = (state = initialState, action) => {
     case APP_SET_BASE_URL: {
       const { baseURL } = action
       return { ...state, baseURL }
+    }
+
+    case APP_SET_MODE: {
+      // MODES
+      // default
+      // search
+      // add
+      // bulkedit
+      const { mode } = action
+      return { ...state, mode }
     }
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and

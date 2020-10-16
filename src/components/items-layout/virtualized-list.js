@@ -99,7 +99,7 @@ export function VirtualizedList({ type, items, actions, loadMore }) {
   const scrollTracker = useRef(null)
 
   // Set up state to track for virtualization
-  const [height, columnCount] = [379, 3] // height + rowGap
+  const [height, columnCount] = type === 'list' ? [89, 1] : [379, 3] //row-gap = 24
 
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
@@ -199,7 +199,13 @@ export function VirtualizedList({ type, items, actions, loadMore }) {
         <div className={sectionTypes[type]}>
           {itemsToShow.map((id, index) => {
             return (
-              <MemoizedItem id={id} key={id} position={index} {...actions} />
+              <MemoizedItem
+                id={id}
+                key={id}
+                position={index}
+                type={type}
+                {...actions}
+              />
             )
           })}
         </div>

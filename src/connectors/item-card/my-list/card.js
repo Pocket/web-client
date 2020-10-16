@@ -14,7 +14,7 @@ import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
  * Creates a connected `Card` with the appropriate data and actions
  * @param {object} {id, position} item_id for data and position for analytics
  */
-export function ItemCard({ id, position, fluidHeight }) {
+export function ItemCard({ id, position, fluidHeight, type }) {
   const dispatch = useDispatch()
 
   // Get data from state
@@ -36,6 +36,7 @@ export function ItemCard({ id, position, fluidHeight }) {
       item={item}
       position={position}
       fluidHeight={fluidHeight}
+      type={type}
       actions={{
         itemShare,
         itemDelete,

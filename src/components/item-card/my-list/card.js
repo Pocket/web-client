@@ -23,8 +23,12 @@ const card = css`
   color: var(--color-textPrimary);
   position: relative;
 
-  &.fixedheight {
+  &.fixedheightgrid {
     height: 355px;
+  }
+
+  &.fixedheightlist {
+    height: 65px;
   }
 
   & > a {
@@ -130,7 +134,7 @@ const card = css`
  * out of the [feed](https://github.com/Pocket/spec/blob/master/query/v3server/feed.md)
  * and makes sure the appropriate data is represented.
  */
-export const Card = ({ item, fluidHeight, actions }) => {
+export const Card = ({ item, fluidHeight, type, actions }) => {
   const {
     resolved_id: id,
     title,
@@ -144,7 +148,9 @@ export const Card = ({ item, fluidHeight, actions }) => {
 
   const { itemShare, itemDelete, itemArchive, itemFavorite, itemTag } = actions
 
-  const cardClass = fluidHeight ? card : `${card} fixedheight`
+  const cardType = type === 'list' ? 'fixedheightlist' : 'fixedheightgrid'
+  const cardClass = fluidHeight ? card : `${card} ${cardType}`
+
   return (
     <article
       className={cardClass}
