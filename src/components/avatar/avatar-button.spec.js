@@ -4,19 +4,19 @@ import { shallow } from 'enzyme'
 import sinon from 'sinon'
 import { testIdSelector, mockEvent } from '@pocket/web-utilities/test-utils'
 
-import AvatarButton from './avatar-button'
+import { AvatarButton } from './avatar-button'
 
 describe('Avatar', () => {
   const baseProps = {
     size: '123px',
-    label: 'view your kitties',
+    label: 'view your kitties'
   }
 
   it('Passes the size prop to the avatar element', () => {
     const button = shallow(<AvatarButton {...baseProps} />)
     const avatar = button.find(testIdSelector('avatar-button-avatar-'))
 
-    assert.equal(avatar.prop('size'), baseProps.size)
+    assert.strictEqual(avatar.prop('size'), baseProps.size)
   })
 
   it('Passes the src prop to the avatar element', () => {
@@ -25,13 +25,13 @@ describe('Avatar', () => {
     )
     const avatar = button.find(testIdSelector('avatar-button-avatar-'))
 
-    assert.equal(avatar.prop('src'), 'http://placekitten.com/150/150')
+    assert.strictEqual(avatar.prop('src'), 'http://placekitten.com/150/150')
   })
 
   it('Applies a title attribute to the button if props.label is provided', () => {
     const button = shallow(<AvatarButton {...baseProps} />)
 
-    assert.equal(button.prop('title'), baseProps.label)
+    assert.strictEqual(button.prop('title'), baseProps.label)
   })
 
   it('Calls the props.onClick callback when the button is clicked', () => {

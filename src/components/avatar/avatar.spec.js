@@ -7,14 +7,14 @@ import Avatar from './avatar'
 
 describe('Avatar', () => {
   const baseProps = {
-    size: '123px',
+    size: '123px'
   }
 
   it('Sets the width & height styles of the avatar element to the size provided', () => {
     const avatar = shallow(<Avatar {...baseProps} />)
 
-    assert.equal(avatar.prop('style').width, '123px')
-    assert.equal(avatar.prop('style').height, '123px')
+    assert.strictEqual(avatar.prop('style').width, '123px')
+    assert.strictEqual(avatar.prop('style').height, '123px')
   })
 
   it('Renders a default icon if props.src isn’t provided', () => {
@@ -30,7 +30,7 @@ describe('Avatar', () => {
     const img = avatar.find(testIdSelector('avatar-image-'))
 
     assert(img.exists())
-    assert.equal(img.prop('src'), 'http://placekitten.com/150/150')
+    assert.strictEqual(img.prop('src'), 'http://placekitten.com/150/150')
   })
 
   it('Includes alt text on the image tag if props.altText is provided', () => {
@@ -43,7 +43,7 @@ describe('Avatar', () => {
     )
     const img = avatar.find(testIdSelector('avatar-image-'))
 
-    assert.equal(img.prop('alt'), 'kitties!')
+    assert.strictEqual(img.prop('alt'), 'kitties!')
   })
 
   it('applies a css class name to the outer node if props.className is provided', () => {

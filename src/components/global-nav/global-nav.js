@@ -3,25 +3,24 @@ import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
+import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 
-import {
-  breakpointSmallTablet,
-  breakpointTinyTablet,
-  fontSansSerif,
-  fontSize100,
-  screenTinyTablet
-} from '@pocket/web-ui'
-
+import { breakpointSmallTablet } from '@pocket/web-ui'
+import { breakpointTinyTablet } from '@pocket/web-ui'
+import { fontSansSerif } from '@pocket/web-ui'
+import { fontSize100 } from '@pocket/web-ui'
+import { screenTinyTablet } from '@pocket/web-ui'
 import { PageContainer } from '@pocket/web-ui'
 import { Logo } from '@pocket/web-ui'
 import { LogoMark } from '@pocket/web-ui'
-import { DiscoverIcon, ListViewIcon } from '@pocket/web-ui'
-import GlobalNavLinks from './global-nav-links'
-import GlobalNavMobileMenu from './global-nav-mobile-menu'
-import GlobalNavTools from './global-nav-tools'
-import GlobalNavAccount from './global-nav-account'
+import { DiscoverIcon } from '@pocket/web-ui'
+import { ListViewIcon } from '@pocket/web-ui'
 import { useViewport } from '@pocket/web-ui'
-import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
+
+import GlobalNavLinks from './links/global-nav-links'
+import GlobalNavMobileMenu from './mobile/global-nav-mobile-menu'
+import GlobalNavTools from './tools/global-nav-tools'
+import GlobalNavAccount from './account/global-nav-account'
 
 export const DEFAULT_LINKS = [
   {
@@ -196,7 +195,7 @@ const toolsStyle = css`
  * <GlobalNav isLoggedIn={!!state.user.auth} />
  * ```
  */
-const GlobalNavV2 = ({
+const GlobalNav = ({
   appRootSelector,
   pocketLogoOutboundUrl,
   selectedLink,
@@ -298,7 +297,7 @@ const GlobalNavV2 = ({
   )
 }
 
-GlobalNavV2.propTypes = {
+GlobalNav.propTypes = {
   /**
    * Query selector to pass to components (e.g. MobileMenu, and Popover) that
    * make use of the Modal component, this lets the Modal component correctly
@@ -380,7 +379,7 @@ GlobalNavV2.propTypes = {
   children: PropTypes.node
 }
 
-GlobalNavV2.defaultProps = {
+GlobalNav.defaultProps = {
   pocketLogoOutboundUrl: '/explore?src=navbar',
   selectedLink: '',
   isLoggedIn: false,
@@ -395,4 +394,4 @@ GlobalNavV2.defaultProps = {
   children: null
 }
 
-export default GlobalNavV2
+export default GlobalNav

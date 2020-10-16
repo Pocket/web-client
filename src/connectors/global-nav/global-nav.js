@@ -1,11 +1,21 @@
 import React from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import { getUser } from 'connectors/user/user.state'
+import { appSetMode } from 'connectors/app/app.state'
+
 import GlobalNavComponent from 'components/global-nav/global-nav'
+import GlobalNavSearch from 'components/global-nav/tools/search/global-nav-search'
+import GlobalNavAdd from 'components/global-nav/tools/add/global-nav-add'
+
 import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
+import { SearchIcon } from '@pocket/web-ui'
+import { AddIcon } from '@pocket/web-ui'
+import { EditIcon } from '@pocket/web-ui'
+import { NotificationIcon } from '@pocket/web-ui'
+
 import { BASE_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities'
 
@@ -38,6 +48,7 @@ const GlobalNav = (props) => {
       ? props.selectedLink
       : getTopLevelPath(router.pathname)
 
+  const appMode = useSelector((state) => state?.app?.mode)
   const userStatus = useSelector((state) => state?.user?.userStatus)
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false) //prettier-ignore
   const isLoggedIn = useSelector((state) => !!state.user.auth)
@@ -65,9 +76,45 @@ const GlobalNav = (props) => {
     }
   ]
 
+  /**
+   * We want to grab user data if it has not been checked yet
+   * NOTE This may be better served in the _app.js
+   */
   useEffect(() => {
     if (!userStatus) dispatch(getUser())
   }, [userStatus])
+
+  /**
+   * Tools are what we use on myList
+   */
+  const tools =
+    selectedLink === 'my-list'
+      ? [
+          { name: 'search', label: 'Search', icon: <SearchIcon /> },
+          { name: 'add-item', label: 'Save a URL', icon: <AddIcon /> },
+          { name: 'bulk-edit', label: 'Bulk Edit', icon: <EditIcon /> },
+          {
+            name: 'notifications',
+            label: 'View Activity',
+            icon: <NotificationIcon />
+          }
+        ]
+      : []
+
+  const toolClick = (name) => {
+    if (name === 'search') dispatch(appSetMode('search'))
+    if (name === 'add-item') dispatch(appSetMode('add'))
+  }
+
+  const resetNav = () => dispatch(appSetMode('default'))
+  const onSubmit = () => {}
+
+  const navChildren = {
+    search: GlobalNavSearch,
+    add: GlobalNavAdd
+  }
+
+  const NavTakeover = navChildren[appMode]
 
   return (
     <GlobalNavComponent
@@ -81,7 +128,12 @@ const GlobalNav = (props) => {
       accountName={accountName}
       profileUrl={profileUrl}
       userStatus={userStatus}
-    />
+      onToolClick={toolClick}
+      tools={tools}>
+      {NavTakeover ? (
+        <NavTakeover onClose={resetNav} onSubmit={onSubmit} />
+      ) : null}
+    </GlobalNavComponent>
   )
 }
 

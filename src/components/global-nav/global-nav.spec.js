@@ -13,18 +13,18 @@ const baseProps = {
       name: 'cheeseburger',
       id: 'cheeseburger-id',
       label: 'Cheeseburger',
-      url: 'https://cheeseburger.io',
+      url: 'https://cheeseburger.io'
     },
     {
       name: 'chalupa',
       id: 'chulupa-id',
       label: 'Chalupa',
-      url: 'http://chalupa.biz',
-    },
+      url: 'http://chalupa.biz'
+    }
   ],
   selectedLink: 'chalupa',
   onLinkClick: handleLinkClick,
-  appRootSelector: '#root',
+  appRootSelector: '#root'
 }
 
 describe('GlobalNav', () => {

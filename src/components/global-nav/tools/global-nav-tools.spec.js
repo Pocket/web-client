@@ -3,9 +3,9 @@ import React from 'react'
 import sinon from 'sinon'
 import { shallow } from 'enzyme'
 import { mockEvent } from '@pocket/web-utilities/test-utils'
+import { PlayIcon, TagIcon } from '@pocket/web-ui'
 
 import GlobalNavTools from './global-nav-tools'
-import { PlayIcon, TagIcon } from 'components/icons/icons'
 
 describe('GlobalNavTools', () => {
   const baseProps = {
@@ -13,10 +13,10 @@ describe('GlobalNavTools', () => {
       {
         name: 'cheeses',
         label: 'Cheeses',
-        icon: <PlayIcon />,
+        icon: <PlayIcon />
       },
-      { name: 'chocolates', label: 'Chocolates', icon: <TagIcon /> },
-    ],
+      { name: 'chocolates', label: 'Chocolates', icon: <TagIcon /> }
+    ]
   }
 
   it('renders the correct number of buttons', () => {

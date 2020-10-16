@@ -6,7 +6,8 @@ import { mockEvent } from '@pocket/web-utilities/test-utils'
 import { testIdSelector } from '@pocket/web-utilities/test-utils'
 
 import GlobalNavMobileMenu, { Menu, MobileLink } from './global-nav-mobile-menu'
-import Drawer from '../drawer/drawer'
+import { Drawer } from '@pocket/web-ui'
+
 const baseProps = {
   appRootSelector: '#root',
   isOpen: true,
@@ -15,15 +16,15 @@ const baseProps = {
       name: 'cheeses',
       id: 'cheeses-id',
       label: 'Cheeses',
-      url: 'https://cheese.com',
+      url: 'https://cheese.com'
     },
     {
       name: 'chocolates',
       id: 'chocolates-id',
       label: 'Chocolates',
-      url: 'https://frans.com',
-    },
-  ],
+      url: 'https://frans.com'
+    }
+  ]
 }
 
 describe('GlobalNavMobileMenu', () => {
