@@ -6,7 +6,8 @@ require('@babel/register')({
       'module-resolver',
       {
         alias: {
-          layouts: path.join(__dirname, '../src/components/_layouts')
+          layouts: path.join(__dirname, '../src/containers/_layouts'),
+          mock: path.join(__dirname, '../.storybook/_data')
         }
       }
     ]
