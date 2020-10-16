@@ -12,10 +12,39 @@ import TopicCollection from './topic-collection'
 import TopicPage from './topic-page'
 import Topic from 'containers/topic/topic'
 
+const mockEmpty = {
+  discoverTopic: {
+    'broken-dreams': {
+      curatedItems: [],
+      algorithmicItems: []
+    }
+  },
+  topicList: {
+    activeTopic: 'broken-dreams',
+    topicsByName: {
+      'broken-dreams': {
+        curator_label: 'TwitBookFaceGram',
+        display_name: 'TwitBookFaceGram',
+        display_note:
+          'Come for the social connection.  Stay for the crippling FOMA.',
+        page_type: 'editorial_collection',
+        topic: 'broken_dreams',
+        topic_slug: 'broken-dreams'
+      }
+    }
+  }
+}
+
 const mockState = {
-  topic: {
-    curatedItems: [1, 2, 3, 4],
-    algorithmicItems: [1, 2, 3, 4]
+  discoverTopic: {
+    'laser-cats': {
+      curatedItems: [1, 2, 3, 4],
+      algorithmicItems: [1, 2, 3, 4]
+    },
+    'badgers-and-badges': {
+      curatedItems: [1, 2, 3, 4],
+      algorithmicItems: [1, 2, 3, 4]
+    }
   }
 }
 
@@ -74,15 +103,8 @@ describe('TopicPage', function () {
   })
 
   it('renders an error when no results are returned', () => {
-    const mockState = {
-      ...mockPageTopic,
-      topic: {
-        curatedItems: [],
-        algorithmicItems: []
-      }
-    }
     // tell useSelector to return the pending state to the component via our stub
-    useSelectorStub.callsFake((fn) => fn(mockState))
+    useSelectorStub.callsFake((fn) => fn(mockEmpty))
     const topicContainer = shallow(<Topic />)
     const errorRendered = topicContainer.find(ErrorPage)
 
@@ -91,6 +113,7 @@ describe('TopicPage', function () {
 
   it('renders a topic collection when `page_type` is `editorial_collection`', () => {
     const mockState = mockCollectionTopic
+
     // tell useSelector to return the pending state to the component via our stub
     useSelectorStub.callsFake((fn) => fn(mockState))
     const topicContainer = shallow(<Topic />)
@@ -103,6 +126,7 @@ describe('TopicPage', function () {
 
   it('renders a topic page when `page_type` is not `editorial_collection`', () => {
     const mockState = mockPageTopic
+
     // tell useSelector to return the pending state to the component via our stub
     useSelectorStub.callsFake((fn) => fn(mockState))
     const topicContainer = shallow(<Topic />)

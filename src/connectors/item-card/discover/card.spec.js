@@ -8,7 +8,7 @@ import { shallow } from 'enzyme'
 import * as reactRedux from 'react-redux'
 
 import { ItemCard } from './card'
-import { Card } from 'components/discover-card/card'
+import { Card } from 'components/item-card/discover/card'
 
 describe('ItemCard', function () {
   // redux dependencies are stubbed so that we don't need to set up a Provider/context,
@@ -38,7 +38,7 @@ describe('ItemCard', function () {
   it('renders an article card', () => {
     const mockState = {
       user: { auth: true },
-      items: {
+      discoverItemsById: {
         12345: {
           resolved_id: '12345',
           save_url: 'https://isithalloween.com',
@@ -60,7 +60,7 @@ describe('ItemCard', function () {
   it('saves an item when the item is in an unsaved state', () => {
     const mockState = {
       user: { auth: true },
-      items: {
+      discoverItemsById: {
         12345: {
           resolved_id: '12345',
           save_url: 'https://isithalloween.com',
@@ -95,7 +95,7 @@ describe('ItemCard', function () {
   it('unsaves an item when the item is in a saved state', () => {
     const mockState = {
       user: { auth: true },
-      items: {
+      discoverItemsById: {
         12345: {
           resolved_id: '12345',
           save_url: 'https://isithalloween.com',

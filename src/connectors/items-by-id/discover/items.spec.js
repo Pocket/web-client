@@ -1,6 +1,6 @@
 import assert from 'assert'
 import { updateSaveStatus } from './items.state'
-import { deriveItemData } from './items.state'
+import { deriveDiscoverItems } from './items.derive'
 
 // An item without expected values that make up the bulk of the visuals in a card
 // EX: title, excerpt, images.  These are assumed to always be there, but there
@@ -39,7 +39,7 @@ const itemWithMissingData = [
   }
 ]
 
-describe('Items', function () {
+describe('Discover Items', function () {
   describe('updateSaveStatus', function () {
     beforeEach(function () {
       this.currentTest.state = {
@@ -57,7 +57,7 @@ describe('Items', function () {
 
   describe('deriveItemData', function () {
     it('should not fail when incomplete item data is passed in', function () {
-      const derivedItems = deriveItemData(itemWithMissingData)
+      const derivedItems = deriveDiscoverItems(itemWithMissingData)
       const expectedSaveUrl = 'https://www.bloomberg.com/features/2020-carnival-cruise-coronavirus/?utm_source=pocket&utm_medium=email&utm_campaign=pockethits' //prettier-ignore
       const expectedOpenUrl = 'https://getpocket.com/redirect?url=https%3A%2F%2Fwww.bloomberg.com%2Ffeatures%2F2020-carnival-cruise-coronavirus%2F%3Futm_source%3Dpocket%26utm_medium%3Demail%26utm_campaign%3Dpockethits&h=8f2057741c81b67e7964c83fcb945e25b2722814bab17193be67e2b45350ccf3&nt=0' //prettier-ignore
 

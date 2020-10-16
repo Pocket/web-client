@@ -1,6 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import { READING_WPM } from 'common/constants'
-import { getImageCacheUrl, domainForUrl } from 'common/utilities'
+
 import { saveItem as saveItemAPI } from 'common/api/saveItem'
 import { removeItem as removeItemAPI } from 'common/api/removeItem'
 

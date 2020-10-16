@@ -9,7 +9,7 @@ import { trackItemOpen, trackTopicClick } from './topic.analytics'
 import { trackUnAuthSave } from './topic.analytics'
 import { trackItemImpression } from './topic.analytics'
 
-export default function topicCollection({
+export default function TopicCollection({
   curatedItems,
   topic,
   sharedActions

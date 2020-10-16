@@ -25,7 +25,7 @@ export function deriveMyListItems(response) {
       listen_duration_estimate: item?.listen_duration_estimate,
       sort_id: item?.sort_id,
       status: item?.status,
-      time_added: '1600201689', //??
+      time_added: item?.time_added,
       time_favorited: item?.time_favorited,
       time_read: item?.time_read,
       time_updated: item?.time_updated,

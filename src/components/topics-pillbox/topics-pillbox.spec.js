@@ -87,7 +87,7 @@ describe('TopicsPillbox', () => {
     )
     const pill = pillbox.find(testIdSelector('topic-pill')).first()
 
-    assert.equal(pill.prop('href'), '/explore/classics')
+    assert.equal(pill.prop('href'), '/discover/classics')
   })
 
   it('puts promoted topic items at the front of the list', () => {
@@ -97,7 +97,7 @@ describe('TopicsPillbox', () => {
     const pill = pillbox.find(testIdSelector('topic-pill')).first()
 
     assert.equal(pill.prop('promoted'), true)
-    assert.equal(pill.prop('href'), '/explore/superheroes')
+    assert.equal(pill.prop('href'), '/discover/superheroes')
   })
 
   it('calls props.onTopicClick when the user clicks on a topic, passing through expected params', () => {
