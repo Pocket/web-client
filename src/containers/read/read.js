@@ -14,6 +14,7 @@ import { Fonts, FONT_TYPES } from 'components/fonts/fonts'
 import { TagModal } from 'components/tagging/tag.modal'
 import { DeleteModal } from 'components/delete/delete.modal'
 import { SendToFriend } from 'components/share-sheet/share-sheet'
+import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import {
   itemDataRequested,
   saveAnnotation,
@@ -39,7 +40,7 @@ const articleWrapper = css`
 
     .rail-wrapper {
       transform: translateX(-318px);
-      transition: transform 150ms ease-in-out;
+      transition: all 150ms ease-in-out;
       padding-top: var(--size400);
     }
 
@@ -71,6 +72,8 @@ export default function Read({ appRootSelector, itemId }) {
   const columnWidth = useSelector((state) => state.reader.columnWidth)
   const fontSize = useSelector((state) => state.reader.fontSize)
   const fontFamily = useSelector((state) => state.reader.fontFamily)
+  const recentFriends = useSelector((state) => state.reader.recentFriends)
+  const autoCompleteEmails = useSelector((state) => state.reader.autoCompleteEmails)
   // const tagLibrary = useSelector((state) => state.reader.tagLibrary)
 
   const [sideBarOpen, setSideBar] = useState(false)
@@ -78,7 +81,8 @@ export default function Read({ appRootSelector, itemId }) {
   const [sendModalOpen, setSendModal] = useState(false)
   const [deleteModalOpen, setDeleteModal] = useState(false)
   const [highlight, setHighlight] = useState(null)
-  const [highlightList, setHighlightList] = useState({})
+  const [highlightList, setHighlightList] = useState(false)
+  const [highlightHovered, setHighlightHovered] = useState(null)
 
   useEffect(() => {
     dispatch(itemDataRequested(itemId))
@@ -133,7 +137,7 @@ export default function Read({ appRootSelector, itemId }) {
 
   const shareData = {
     url: resolved_url,
-    quote: highlight?.toString(),
+    quote: highlight?.toString() || sendModalOpen?.quote,
     title: resolved_title || given_title,
     item_id
   }
@@ -148,7 +152,7 @@ export default function Read({ appRootSelector, itemId }) {
   const toggleSidebar = () => setSideBar(!sideBarOpen)
   const toggleTagging = () => setTaggingModal(!taggingModalOpen)
   const toggleDelete = () => setDeleteModal(!deleteModalOpen)
-  const toggleShare = (recommend) => setSendModal(recommend || true)
+  const toggleShare = ({ destination, quote }) => setSendModal({ destination, quote })
 
   const toggleHighlight = () => {
     const selection = window.getSelection()
@@ -159,13 +163,24 @@ export default function Read({ appRootSelector, itemId }) {
     }
   }
 
+  const toggleHighlightHover = (e) => {
+    if (e.type === 'mouseout') {
+      setHighlightHovered(null)
+    } else {
+      setHighlightHovered({
+        id: e.target.getAttribute('annotation_id'),
+        event: e
+      })
+    }
+  }
+
   const clearSelection = () => {
     window.getSelection().removeAllRanges()
     toggleHighlight()
   }
 
   const buildAnnotations = () => {
-    const compiled = compileAnnotations(highlightList)
+    const compiled = compileAnnotations(annotations)
     setHighlightList(compiled)
   }
 
@@ -211,10 +226,10 @@ export default function Read({ appRootSelector, itemId }) {
         <aside className={classNames('sidebar', { active: sideBarOpen })}>
           <Sidebar
             sideBarOpen={sideBarOpen}
-            clickAction={toggleSidebar}
-            annotations={annotations}
-            annotationList={highlightList}
-            viewPort={{ top: 1000, bottom: 1800 }}
+            toggleSidebar={toggleSidebar}
+            highlightList={highlightList}
+            shareItem={toggleShare}
+            shareData={shareData}
           />
         </aside>
         <article className={classNames(Fonts, "reader")} style={customStyles}>
@@ -223,6 +238,7 @@ export default function Read({ appRootSelector, itemId }) {
             <Content
               {...contentData}
               onMouseUp={toggleHighlight}
+              onHighlightHover={toggleHighlightHover}
               annotationsBuilt={buildAnnotations} />
           ) : null }
           {highlight ? (
@@ -233,6 +249,15 @@ export default function Read({ appRootSelector, itemId }) {
               shareItem={toggleShare}
               shareData={shareData}
             />
+          ) : null }
+          {highlightList ? (
+            <HighlightInlineMenu
+              highlightList={highlightList}
+              highlightHovered={highlightHovered}
+              shareItem={toggleShare}
+              shareData={shareData}
+              isPremium={isPremium}
+              deleteHighlight={''} />
           ) : null }
         </article>
       </main>
@@ -252,13 +277,13 @@ export default function Read({ appRootSelector, itemId }) {
       <SendToFriend
         {...shareData}
         domain={domainForUrl(resolved_url)}
-        // recentFriends={recent_friends},
-        // autoCompleteEmails={auto_complete_emails}
+        recentFriends={recentFriends}
+        autoCompleteEmails={autoCompleteEmails}
         isOpen={!!sendModalOpen}
         setModalOpen={setSendModal}
         appRootSelector={appRootSelector}
         thumbnail={top_image_url}
-        recommend={sendModalOpen} />
+        recommend={sendModalOpen.destination} />
     </>
   )
 }

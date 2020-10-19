@@ -20,20 +20,6 @@ export const quoteCard = () => (
   </div>
 )
 
-const annotationList = {
-    "1417": {
-      "id": "e0a6ec44-374b-4fd8-98d9-3aa9e5e944e2",
-      "new": false
-    },
-    "3268": {
-      "id": "bfff4b51-17db-4c27-bd89-3bad00ab0582",
-      "new": false
-    },
-    "3880": {
-      "id": "3d9b0e41-7367-400d-87dd-b3a823a43577",
-      "new": false
-    }
-  }
 const annotations = [
     {
       "annotation_id": "3d9b0e41-7367-400d-87dd-b3a823a43577",
@@ -65,8 +51,6 @@ export const quoteList = () => (
   <Rail visible>
     <QuoteList
       annotations={annotations}
-      annotationList={annotationList}
-      viewPort={{ top: 1000, bottom: 1800 }}
       visible={true}
       isPremium={true}
     />
@@ -77,8 +61,6 @@ export const quoteFullList = () => (
   <Rail visible>
     <QuoteList
       annotations={annotations}
-      annotationList={annotationList}
-      viewPort={{ top: 1000, bottom: 1800 }}
       visible={true} // WHAT IS THIS FOR>???
       isPremium={false}
     />

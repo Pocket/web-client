@@ -26,7 +26,11 @@ export class ShareMenu extends Component {
     copied: false
   }
 
-  copyLink = () => {
+  copyLink = (e) => {
+  // const handleClick = (event) => {
+    e.preventDefault()
+    e.stopPropagation()
+  // }
     const { url, quote } = this.props
     const str = quote ? `${quote} [${url}]` : url
     copy(str).then(this.setCopied)

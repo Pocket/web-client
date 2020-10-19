@@ -9,42 +9,18 @@ import DiffMatchPatch from 'diff-match-patch'
       // gutterActive: var(--color-drawerCanvas),
       // metaColor: var(--color-grey55)
 
-export function getListPositionByAttr(attribute) {
-  const nodes = document.querySelectorAll(`[${attribute}]`)
-  let nodeList = {}
-  if (nodes) {
-    nodes.forEach(item => {
-      let key = Math.round(
-        item.getBoundingClientRect().top + window.pageYOffset
-      )
-      nodeList[key] = item.getAttribute(attribute)
-    })
-  }
-  return nodeList
-}
-
 export function compileAnnotations(highlightList) {
-  const current = Object.keys(highlightList).map(
-    key => highlightList[key].id
-  )
-  const annList = getListPositionByAttr('annotation_id')
-  // De-dupe any annotation node references (annotations may cross multiple nodes)
-  let unique = {}
-  Object.keys(annList).forEach(key => {
-    if (
-      typeof unique[annList[key]] == 'undefined' ||
-      unique[annList[key]] > key
-    ) {
-      unique[annList[key]] = key
-    }
-  })
-  // unique list uses ID as key, reverse to use y-coord as key
-  let reverse = {}
-  Object.keys(unique).forEach(
-    key => (reverse[unique[key]] = { id: key, new: !current.includes(key) })
-  )
+  const listWithPosition = []
 
-  return reverse
+  highlightList.forEach(item => {
+    const el = document.querySelector(`[annotation_id="${item.annotation_id}"]`)
+    listWithPosition.push({
+      ...item,
+      position: Math.round(el.getBoundingClientRect().top + window.pageYOffset)
+    })
+  })
+
+  return listWithPosition
 }
 
 /**
@@ -57,8 +33,8 @@ function highlightRegex(text) {
   return new RegExp(text.replace(/[.*+?|()[\]{}\\$^]/g,'\\$&').replace(/\s+/g,'\\s+'),'ig')
 }
 
-export function highlightAnnotation (annotation, callback, element, className = 'highlight') {
-  highlight(element, className, annotation, callback)
+export function highlightAnnotation (annotation, onHover, element, callback) {
+  highlight(element, 'highlight', annotation, onHover, callback)
 }
 
 /**
@@ -86,7 +62,7 @@ export function highlightAnnotation (annotation, callback, element, className = 
  * @param  {function} tapListener  Function to be called if highlighted
  *                                 section was tapped
  */
-function highlight(node, className, annotation, tapListener) {
+function highlight(node, className, annotation, tapListener, callback) {
   const doc = document
 
   if (!node) {
@@ -289,7 +265,7 @@ function highlight(node, className, annotation, tapListener) {
     // index-node pair, this means this match is completed
     iEntry++
     if (iTextEnd <= indices[iEntry].i) {
-      return
+      return callback()
     }
   }
 }

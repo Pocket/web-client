@@ -3,7 +3,8 @@ import { css } from 'linaria'
 import {
   ArrowLeftIcon, HighlightIcon, IosShareIcon,
   TagIcon, FavoriteIcon, ArchiveIcon, DeleteIcon,
-  WithTooltip
+  WithTooltip,
+  breakpointLargeTablet, breakpointMediumHandset
 } from '@pocket/web-ui'
 import { DisplaySettings } from 'components/display-settings/display-settings'
 import { ShareArticle } from './share'
@@ -39,6 +40,14 @@ const navStyle = css`
   padding: 0 var(--spacing250);
   span[tooltip] {
     background: transparent;
+  }
+
+  ${breakpointLargeTablet} {
+    padding: 0 var(--spacing150);
+  }
+
+  ${breakpointMediumHandset} {
+    padding: 0 var(--spacing100);
   }
 `
 

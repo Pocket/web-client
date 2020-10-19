@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { css } from 'linaria'
 import classNames from 'classnames'
 import { IosShareIcon } from '@pocket/web-ui'
-
-// import { AnnotationMenu } from './annotations.menu'
+import { AnnotationMenu } from './annotations.menu'
 import { cardStyles, Quote, CreatedDate } from './annotations.card'
 
 import { buttonReset } from 'components/buttons/button-reset'
@@ -21,6 +20,7 @@ const listWrapper = css`
   width: 100%;
   transform: translateX(-500px);
   transition: transform 150ms ease-in-out;
+  padding-top: 64px;
   &.visible {
     transform: translateX(0);
   }
@@ -30,6 +30,14 @@ const menuWrapper = css`
   position: absolute;
   bottom: 15px;
   right: 20px;
+
+
+  button {
+    box-shadow: none;
+    .icon {
+      margin-top: -5px;
+    }
+  }
 `
 
 const menuTrigger = css`
@@ -50,36 +58,24 @@ const activeCardStyles = css`
 `
 
 const headingStyles = css`
+  font-family: 'Graphik Web';
   font-size: 16px;
   line-height: 22px;
   font-weight: 500;
-  padding: 25px 0 2px 25px;
+  padding: 25px 25px 2px ;
+  margin-bottom: 0;
 `
 
 export class QuoteList extends Component {
   renderCards = () => {
-    const { annotations, annotationList, viewPort } = this.props
+    const { annotations, onClickEvent, shareItem, shareData } = this.props
     const cards = []
 
-    // Map the annotationList (which has vertical position as key)
-    // to each matching annotation, and sort by that value
     annotations
-      .map(a => {
-        let coordY
-        Object.keys(annotationList).forEach(key => {
-          if (a.annotation_id === annotationList[key].id) {
-            coordY = key
-          }
-        })
-
-        return {
-          ...a,
-          coordY
-        }
-      })
-      .sort((a, b) => a.coordY - b.coordY)
+      .sort((a, b) => a.position - b.position)
       .forEach(annot => {
-        const active = annot.coordY > viewPort.top && annot.coordY < viewPort.bottom
+        // const active = annot.coordY > viewPort.top && annot.coordY < viewPort.bottom
+        const active = false
 
         cards.push(
           <div
@@ -89,24 +85,19 @@ export class QuoteList extends Component {
             className={classNames(cardStyles, activeCardStyles, { active })}>
             <Quote
               // aria-label={translate('annotations.scrollTo')}
-              onClick={() => this.props.onClickEvent(annot.coordY)}>
+              onClick={() => onClickEvent(annot.coordY)}>
               {annot.quote}
             </Quote>
             <CreatedDate>{annot.created_at}</CreatedDate>
 
             <div className={menuWrapper}>
-              {/*<AnnotationMenu
-                annotation_id={annot.annotation_id}
-                deleteAnnotation={this.props.deleteAnnotation}
-                item_id={this.props.item_id}
-                item={this.props.item}
-                shareItem={this.props.shareItem}
-                socialShare={this.props.socialShare}
-                annotation={annot}>
-                <button className={classNames(buttonReset, menuTrigger)}>
-                  <IosShareIcon />
-                </button>
-              </AnnotationMenu>*/}
+              <AnnotationMenu
+                visible
+                alignRight
+                id={annot.annotation_id}
+                shareItem={shareItem}
+                shareData={shareData}
+                quote={annot.quote}  />
             </div>
           </div>
         )
@@ -127,11 +118,11 @@ export class QuoteList extends Component {
   }
 
   render() {
-    const { visible, heading, annotationList } = this.props
+    const { visible, heading, annotations } = this.props
 
-    return annotationList ? (
+    return annotations ? (
       <div className={classNames(listWrapper, { visible })}>
-        {heading && <h6 className={headingStyles}>{heading}</h6>}
+        <h6 className={headingStyles}>My Highlights</h6> {/*translate*/}
         {this.renderCards()}
       </div>
     ) : null

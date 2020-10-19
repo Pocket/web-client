@@ -1,30 +1,15 @@
-/* eslint  react/jsx-no-target-blank: 0*/
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import classNames from 'classnames'
 import { css } from 'linaria'
 import DOMPurify from 'dompurify'
 import { loadParsedImages } from './images'
 import { loadParsedVideos } from './videos'
-import { contentStyles } from './styles'
+import { contentStyles, highlightStyles } from './styles'
 import {
   highlightAnnotation,
   removeAllHighlights,
   // removeHighlight
 } from 'components/annotations/utilities'
-
-const processAnnotations = (annotations, callback, element) => {
-  removeAllHighlights()
-  annotations.forEach(highlight => {
-    highlightAnnotation(highlight, callback, element)
-  })
-}
-
-const externalizeLinks = (element) => {
-  const links = element.querySelectorAll('a[nodeindex]')
-  links.forEach(link => {
-    link.setAttribute('target', '_blank')
-    link.setAttribute('rel', 'noopener noreferrer')
-  })
-}
 
 /* EXPORTED COMPONENT
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -34,27 +19,55 @@ export const Content = ({
   videos,
   annotations,
   annotationsBuilt,
+  onHighlightHover,
  ...args
 }) => {
   const articleRef = useRef(null)
+  const [loaded, setLoaded] = useState(false)
 
-  const callback = () => annotationsBuilt()
+  const processAnnotations = (annotations) => {
+    removeAllHighlights()
+    let itemsProcessed = 0
+    annotations.forEach((highlight, index, array) => {
+      highlightAnnotation(highlight, onHighlightHover, articleRef.current, () => {
+        itemsProcessed++
+        if (itemsProcessed === array.length) {
+          annotationsBuilt()
+        }
+      })
+    })
+  }
+
+  const externalizeLinks = () => {
+    const links = articleRef.current.querySelectorAll('a[href]')
+    links.forEach(link => {
+      link.setAttribute('target', '_blank')
+      link.setAttribute('rel', 'noopener noreferrer')
+    })
+  }
 
   useEffect(() => {
-    if (content) externalizeLinks(articleRef.current)
+    if (content) externalizeLinks()
     if (images) loadParsedImages(images)
     if (videos) loadParsedVideos(videos)
   }, [])
 
   useEffect(() => {
-    if (annotations) processAnnotations(annotations, callback, articleRef.current)
-  })
+    if (annotations) {
+      let timer = !loaded ? 500 : 0
+      setTimeout(() => {
+        processAnnotations(annotations)
+      }, timer)
+    }
+
+    setLoaded(true)
+  }, [annotations.length])
 
   return (
     <article
       {...args}
       ref={articleRef}
-      className={contentStyles}
+      className={classNames(contentStyles, highlightStyles)}
       dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }} />
   )
 }

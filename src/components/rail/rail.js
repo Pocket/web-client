@@ -7,16 +7,14 @@ const railWrapper = css`
   bottom: 0;
   top: 0;
   width: 350px;
-  background-color: transparent;
-  box-shadow: none;
-  border-right: 1px solid transparent;
-  transition: all 150ms ease-in-out;
-  &:hover,
-  &.visible {
     background-color: var(--color-dividerTertiary);
     box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.12);
     border-right: 1px solid var(--color-dividerSecondary);
-    transition: all 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out;
+  opacity: 0;
+  &:hover,
+  &.visible {
+    opacity: 1;
   }
 `
 

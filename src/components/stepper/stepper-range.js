@@ -57,7 +57,7 @@ export const StepperRange = ({ range = [], current = 0, onChange }) => {
       className={rangeStepperWrapper}
       style={{ gridTemplateColumns: `repeat(${range.length}, 18px)`}}
       current={current}
-      lastIndex={range.length - 1}>
+      lastindex={range.length - 1}>
       {range.map((step, index) => (
         <button
           key={index}

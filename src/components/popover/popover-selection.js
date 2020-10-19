@@ -105,8 +105,8 @@ class SelectionPopoverClass extends Component {
     return (
       <ShareMenu
         shareItem={shareItem}
+        quote={this.props.textSelection}
         { ...shareData }
-        // socialShare={}
       />
     )
   }

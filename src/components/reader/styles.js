@@ -1,6 +1,5 @@
 import { css } from 'linaria'
-// import { InlineHighlightStyle } from '../Annotations/annotations.inline'
-// ${InlineHighlightStyle};
+import { darkMode, sepiaMode } from '@pocket/web-ui'
 
 export const READER_PADDING = 40
 
@@ -142,6 +141,8 @@ export const contentStyles = css`
   blockquote,
   aside {
     font-style: italic;
+    margin: 0;
+    padding: var(--spacing250);
   }
 
   a {
@@ -275,9 +276,91 @@ export const contentStyles = css`
     vertical-align: top;
     font-size: 0.8em;
   }
+`
+
+export const highlightStyles = css`
+  *::-moz-selection,
+  *::selection {
+    background-color: #E5F2F1 !important;
+    color: #333333 !important;
+  }
 
   .highlight {
     position: relative;
-    background-color: pink;
+    background-color: #FEE8C3;
+    color: #333333;
+  }
+  a .highlight,
+  a.highlight {
+    text-shadow: -1px -1px 0 #FEE8C3,
+      1px -1px 0 #FEE8C3,
+      -1px 1px 0 #FEE8C3,
+      1px 1px 0 #FEE8C3 !important;
+    background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0) 1px,
+      #333333 1px,
+      #333333 2px,
+      rgba(0, 0, 0, 0) 2px
+    );
+  }
+
+  ${darkMode} {
+    *::-moz-selection,
+    *::selection {
+      background-color: rgb(0, 73, 69, 0.99) !important;
+      color: #E0E0E0 !important;
+    }
+
+    .highlight {
+      position: relative;
+      background-color: #FEE8C3;
+      color: var(--color-grey10);
+    }
+    a .highlight,
+    a.highlight {
+      text-shadow: -1px -1px 0 #FEE8C3,
+        1px -1px 0 #FEE8C3,
+        -1px 1px 0 #FEE8C3,
+        1px 1px 0 #FEE8C3 !important;
+      background-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0) 1px,
+        var(--color-grey10) 1px,
+        var(--color-grey10) 2px,
+        rgba(0, 0, 0, 0) 2px
+      );
+    }
+  }
+
+  ${sepiaMode} {
+    *::-moz-selection,
+    *::selection {
+      background-color: #DDE2D2 !important;
+      color: #3B3934 !important;
+    }
+
+    .highlight {
+      position: relative;
+      background-color: #FEDDA7;
+      color: #3B3934;
+    }
+    a .highlight,
+    a.highlight {
+      text-shadow: -1px -1px 0 #FEDDA7,
+        1px -1px 0 #FEDDA7,
+        -1px 1px 0 #FEDDA7,
+        1px 1px 0 #FEDDA7 !important;
+      background-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0) 1px,
+        #3B3934 1px,
+        #3B3934 2px,
+        rgba(0, 0, 0, 0) 2px
+      );
+    }
   }
 `

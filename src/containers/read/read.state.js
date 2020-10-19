@@ -8,7 +8,7 @@ import {
   // ARTICLE_CONTENT_REQUESTED,
   ARTICLE_CONTENT_SUCCESS,
   ARTICLE_CONTENT_FAILURE,
-  SUGGESTED_TAGS_REQUEST,
+  // SUGGESTED_TAGS_REQUEST,
   SUGGESTED_TAGS_SUCCESS,
   SUGGESTED_TAGS_FAILURE,
   ANNOTATION_SAVE_REQUEST,
@@ -17,15 +17,17 @@ import {
   UPDATE_LINE_HEIGHT,
   UPDATE_COLUMN_WIDTH,
   UPDATE_FONT_SIZE,
-  UPDATE_FONT_TYPE
+  UPDATE_FONT_TYPE,
+  FRIENDS_SUCCESS,
+  FRIENDS_FAILURE
 } from 'actions'
-import { getArticleText, getSuggestedTags } from 'common/api/reader'
+import { getArticleText, getSuggestedTags, getRecentFriends } from 'common/api/reader'
 import { getMyList } from 'common/api/my-list'
 // import { saveItem } from 'common/api/saveItem'
 // import { removeItem } from 'common/api/removeItem'
 import { HYDRATE } from 'actions'
 
-import { ITEM, TAG_LIST, ARTICLE, SUGGESTED_TAGS } from './mock-responses'
+import { ITEM, TAG_LIST, ARTICLE, SUGGESTED_TAGS, FRIENDS } from './mock-responses'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -65,7 +67,9 @@ const initialState = {
   lineHeight: 3,
   columnWidth: 3,
   fontSize: 3,
-  fontFamily: 'blanco'
+  fontFamily: 'blanco',
+  autoCompleteEmails: null,
+  recentFriends: null
 }
 
 export const readReducers = (state = initialState, action) => {
@@ -110,6 +114,11 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, fontFamily }
     }
 
+    case FRIENDS_SUCCESS: {
+      const { autoCompleteEmails, recentFriends } = action
+      return { ...state, autoCompleteEmails, recentFriends }
+    }
+
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE:
@@ -127,6 +136,7 @@ export const readSagas = [
   takeEvery(ARTICLE_ITEM_REQUESTED, articleItemRequest),
   takeEvery(ARTICLE_ITEM_SUCCESS, articleContentRequest),
   takeEvery(ARTICLE_ITEM_SUCCESS, suggestedTagsRequest),
+  takeEvery(ARTICLE_ITEM_SUCCESS, friendsRequest),
   takeEvery(ANNOTATION_SAVE_REQUEST, annotationSaveRequest)
 ]
 
@@ -168,12 +178,24 @@ function* suggestedTagsRequest({ item }) {
     const itemId = item?.item_id
     const response = yield getSuggestedTags(itemId)
     // if (!response.suggested_tags) return console.log('No Tags')
-    // const tags = response.suggested_tags.map(item => item.tag)
+    // const tags = response.suggested_tags?.map(item => item.tag)
     const tags = SUGGESTED_TAGS.suggested_tags.map(item => item.tag)
 
     yield put({ type: SUGGESTED_TAGS_SUCCESS, tags })
   } catch (error) {
     yield put({ type: SUGGESTED_TAGS_FAILURE, error })
+  }
+}
+
+function* friendsRequest() {
+  try {
+    const response = yield getRecentFriends()
+    // if (!response.auto_complete_emails && !response.recent_friends) return console.log('No Friends!')
+    const recentFriends = FRIENDS?.recent_friends
+    const autoCompleteEmails = FRIENDS?.auto_complete_emails
+    yield put({ type: FRIENDS_SUCCESS, recentFriends, autoCompleteEmails })
+  } catch (error) {
+    yield put({ type: FRIENDS_FAILURE, error })
   }
 }
 

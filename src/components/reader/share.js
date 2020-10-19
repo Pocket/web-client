@@ -3,7 +3,7 @@ import { css } from 'linaria'
 import {
   ArrowLeftIcon, HighlightIcon, IosShareIcon,
   TagIcon, FavoriteIcon, ArchiveIcon, DeleteIcon,
-  WithTooltip, PopupMenu
+  WithTooltip
 } from '@pocket/web-ui'
 import { ShareMenu } from 'components/share-menu/share-menu'
 import { buttonReset } from 'components/buttons/button-reset'
@@ -42,6 +42,9 @@ export const ShareArticle = ({ appRootSelector, toggleSidebar, shareItem, shareD
     event.stopPropagation()
   }
 
+  const handleShare = (destination) => {
+    shareItem({ destination })
+  }
 
   return (
     <div className={shareStyles}>
@@ -54,7 +57,7 @@ export const ShareArticle = ({ appRootSelector, toggleSidebar, shareItem, shareD
         </button>
       </WithTooltip>
       {shown ? (
-        <ShareMenu popoverRef={popBody} shareItem={shareItem} {...shareData} />
+        <ShareMenu popoverRef={popBody} shareItem={handleShare} {...shareData} />
       ) : null}
     </div>
   )
