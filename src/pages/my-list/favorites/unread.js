@@ -5,7 +5,7 @@ export async function getStaticProps() {
     props: {
       namespacesRequired: ['common'],
       subset: 'favorites',
-      filter: 'active'
+      filter: 'unread'
     }
   }
 }

@@ -4,8 +4,8 @@ export async function getStaticProps() {
   return {
     props: {
       namespacesRequired: ['common'],
-      subset: 'videos',
-      filter: 'active'
+      subset: 'articles',
+      filter: 'unread'
     }
   }
 }

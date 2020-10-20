@@ -100,8 +100,8 @@ export function FilterMenu({ subset, filter }) {
             </Link>
           </div>
           <div>
-            <Link href={`/my-list/${subset}/active`}>
-              <button className={filterActive('active')}>Active</button>
+            <Link href={`/my-list/${subset}/unread`}>
+              <button className={filterActive('unread')}>Unread</button>
             </Link>
           </div>
           <div>
