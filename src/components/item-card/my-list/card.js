@@ -10,7 +10,9 @@ import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { IosShareIcon } from '@pocket/web-ui'
 import { DeleteIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
+import { AddIcon } from '@pocket/web-ui'
 import { FavoriteIcon } from '@pocket/web-ui'
+import { FavoriteFilledIcon } from '@pocket/web-ui'
 import { TagIcon } from '@pocket/web-ui'
 
 const card = css`
@@ -121,7 +123,7 @@ const card = css`
     bottom: 0;
     left: 0;
     width: 100%;
-    padding-bottom: 1em;
+    padding-bottom: 0.5em;
   }
 
   .actions {
@@ -142,14 +144,32 @@ export const Card = ({ item, fluidHeight, type, actions }) => {
     publisher,
     excerpt,
     read_time,
+    favorite,
+    status,
     open_url = '',
     onOpen = () => {}
   } = item
 
-  const { itemShare, itemDelete, itemArchive, itemFavorite, itemTag } = actions
+  const {
+    itemShare,
+    itemDelete,
+    itemArchive,
+    itemUnArchive,
+    itemFavorite,
+    itemUnFavorite,
+    itemTag
+  } = actions
 
   const cardType = type === 'list' ? 'fixedheightlist' : 'fixedheightgrid'
   const cardClass = fluidHeight ? card : `${card} ${cardType}`
+
+  const archiveAction = status === '0' ? itemArchive : itemUnArchive
+  const CorrectArchiveIcon = status === '0' ? ArchiveIcon : AddIcon
+  const archiveLabel = status === '0' ? 'Archive' : 'Add'
+
+  const favoriteAction = favorite === '0' ? itemFavorite : itemUnFavorite
+  const CorrectFavIcon = favorite === '0' ? FavoriteIcon : FavoriteIcon // FavoriteFilledIcon <- Icon is broken
+  const favoriteLabel = favorite === '0' ? 'Favorite' : 'UnFavorite'
 
   return (
     <article
@@ -189,14 +209,14 @@ export const Card = ({ item, fluidHeight, type, actions }) => {
                 onClick: itemDelete
               },
               {
-                label: 'Archive',
-                icon: <ArchiveIcon />,
-                onClick: itemArchive
+                label: archiveLabel,
+                icon: <CorrectArchiveIcon />,
+                onClick: archiveAction
               },
               {
-                label: 'Favorite',
-                icon: <FavoriteIcon />,
-                onClick: itemFavorite
+                label: favoriteLabel,
+                icon: <CorrectFavIcon />,
+                onClick: favoriteAction
               },
               {
                 label: 'Tag',
