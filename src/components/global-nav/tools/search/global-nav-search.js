@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { SearchIcon, CrossIcon } from '@pocket/web-ui'
-import {
-  breakpointMediumHandset,
-  screenMediumHandset,
-  fontSansSerif,
-  fontSize085
-} from '@pocket/web-ui'
+import { breakpointMediumHandset } from '@pocket/web-ui'
+import { screenMediumHandset } from '@pocket/web-ui'
 import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
@@ -22,6 +18,7 @@ const searchStyle = css`
     height: var(--size300);
     width: 100%;
     margin-right: var(--spacing050);
+    max-width: initial;
     &.has-value {
       padding-right: var(--spacing400);
     }
@@ -69,8 +66,8 @@ const closeIconStyle = css`
 
 const closeLabelStyle = css`
   display: none;
-  font-family: ${fontSansSerif};
-  font-size: ${fontSize085};
+  font-family: var(--fontSansSerif);
+  font-size: var(--fontSize085);
   color: var(--color-textSecondary);
 
   ${breakpointMediumHandset} {
@@ -122,7 +119,7 @@ const clearButtonStyle = css`
   right: var(--spacing050);
   position: absolute;
   color: var(--color-textTertiary);
-  font-family: ${fontSansSerif};
+  font-family: var(--fontSansSerif);
   font-size: var(--fontSize100);
   padding-right: var(--spacing100);
   background-color: transparent;
@@ -175,12 +172,12 @@ const GlobalNavSearch = ({
   mobilePlaceholder
 }) => {
   const initialSearchValue = ''
-  const [searchTerm, updateSearchTerm] = useState(value)
+  const [searchTerm, updatesearchTerm] = useState(value)
   const [isMobile, updateIsMobile] = useState(false)
 
-  const handleClear = () => updateSearchTerm(initialSearchValue)
+  const handleClear = () => updatesearchTerm(initialSearchValue)
 
-  const handleInputChange = (e) => updateSearchTerm(e.target.value)
+  const handleInputChange = (e) => updatesearchTerm(e.target.value)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -190,12 +187,9 @@ const GlobalNavSearch = ({
     onSubmit(searchTerm)
   }
 
-  // only checked once to avoid any performance hits, and the first value should
-  // suffice to show user preferred placeholder text. No risk of broken
-  // functionality
   useEffect(() => {
     updateIsMobile(window.innerWidth < screenMediumHandset)
-  }, [])
+  }, [window.innerWidth])
 
   return (
     <form className={searchStyle} onSubmit={handleSubmit}>
@@ -206,11 +200,9 @@ const GlobalNavSearch = ({
           name="q"
           className={classnames([
             'search-input',
-            {
-              'has-value': !!searchTerm
-            }
+            { 'has-value': !!searchTerm }
           ])}
-          aria-label="Search Pocket"
+          aria-label="Search your collection"
           value={searchTerm}
           onChange={handleInputChange}
           onFocus={onFocus}
