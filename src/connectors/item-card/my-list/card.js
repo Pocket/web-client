@@ -31,7 +31,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
 
   const itemTag = () => {}
 
-  return (
+  return item ? (
     <Card
       item={item}
       position={position}
@@ -47,7 +47,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
         itemTag
       }}
     />
-  )
+  ) : null
 }
 
 // This seems like an over-optimization so do some actual testing here
