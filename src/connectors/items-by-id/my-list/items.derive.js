@@ -29,6 +29,8 @@ export function deriveMyListItems(response) {
       time_favorited: item?.time_favorited,
       time_read: item?.time_read,
       time_updated: item?.time_updated,
+      tags: item?.tags,
+      annotations: item?.annotations,
       title: displayTitle({ item }),
       thumbnail: displayThumbnail({ item }),
       publisher: displayPublisher({ item }),
@@ -36,8 +38,7 @@ export function deriveMyListItems(response) {
       save_url: saveUrl({ item }),
       open_url: openUrl({ item }),
       read_time: readTime({ item }),
-      syndicated: syndicated({ item }),
-      save_status: 'unsaved'
+      syndicated: syndicated({ item })
     }
   })
 }
