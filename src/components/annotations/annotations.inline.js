@@ -1,7 +1,14 @@
 import { AnnotationMenu } from 'components/annotations/annotations.menu'
 
 
-export const HighlightInlineMenu = ({ isPremium, highlightList = [], highlightHovered, shareItem, shareData }) => {
+export const HighlightInlineMenu = ({
+  isPremium,
+  highlightList = [],
+  highlightHovered,
+  shareItem,
+  shareData,
+  deleteAnnotation
+}) => {
   const inlineMenus = []
 
   highlightList.forEach(highlight => {
@@ -13,13 +20,14 @@ export const HighlightInlineMenu = ({ isPremium, highlightList = [], highlightHo
         <AnnotationMenu
           isPremium={isPremium}
           key={highlight.annotation_id}
-          id={highlight.annotation_id}
+          annotationId={highlight.annotation_id}
           visible={highlightHovered?.id === highlight.annotation_id}
           top={Math.round(y + window.pageYOffset)}
           left={x + el.offsetLeft}
           shareItem={shareItem}
           shareData={shareData}
           quote={highlight.quote}
+          deleteAnnotation={deleteAnnotation}
         />
       )
     }

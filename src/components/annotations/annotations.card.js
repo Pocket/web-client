@@ -24,15 +24,6 @@ export const cardStyles = css`
     filter: drop-shadow(-6px 0 4px rgba(0, 0, 0, 0.12));
   }
 `
-/*
-  border-radius: 4px;
-  transform: translateY(${props => props.topAdj}px);
-  background-color: var(--color-popoverCanvas);
-  &:before {
-    content: '';
-    position: absolute;
-    top: ${props => Math.abs(props.topAdj) + 10}px;
-*/
 
 const quoteStyles = css`
   line-height: 25px;
@@ -132,7 +123,7 @@ export class CardPositioning extends Component {
     return (
       <div
         className={classNames(cardStyles, addedStyles, { arrow })}
-        topAdj={this.state.topAdj}
+        style={{ top: this.state.topAdj }}
         ref={node => (this.contentNode = node)}>
         {this.props.children}
       </div>

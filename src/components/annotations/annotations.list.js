@@ -31,7 +31,6 @@ const menuWrapper = css`
   bottom: 15px;
   right: 20px;
 
-
   button {
     box-shadow: none;
     .icon {
@@ -68,7 +67,7 @@ const headingStyles = css`
 
 export class QuoteList extends Component {
   renderCards = () => {
-    const { annotations, onClickEvent, shareItem, shareData } = this.props
+    const { annotations, onClickEvent, shareItem, shareData, deleteAnnotation } = this.props
     const cards = []
 
     annotations
@@ -81,11 +80,10 @@ export class QuoteList extends Component {
           <div
             onClick={e => e.stopPropagation()}
             key={annot.annotation_id}
-            addedStyles={cardStyles}
             className={classNames(cardStyles, activeCardStyles, { active })}>
             <Quote
               // aria-label={translate('annotations.scrollTo')}
-              onClick={() => onClickEvent(annot.coordY)}>
+              onClick={() => onClickEvent(annot.position)}>
               {annot.quote}
             </Quote>
             <CreatedDate>{annot.created_at}</CreatedDate>
@@ -97,6 +95,7 @@ export class QuoteList extends Component {
                 id={annot.annotation_id}
                 shareItem={shareItem}
                 shareData={shareData}
+                deleteAnnotation={deleteAnnotation}
                 quote={annot.quote}  />
             </div>
           </div>

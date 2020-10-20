@@ -69,9 +69,10 @@ export const AnnotationMenu = ({
   visible,
   top = 0,
   left = 0,
-  id,
+  annotationId,
   shareItem,
   shareData,
+  deleteAnnotation,
   quote
 }) => {
   const [shareOpen, setShareOpen] = useState(false)
@@ -100,7 +101,7 @@ export const AnnotationMenu = ({
   }
 
   const handleDelete = () => {
-    // delete(id)
+    // deleteAnnotation(annotationId)
   }
 
   const handleShare = (destination) => {

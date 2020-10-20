@@ -3,6 +3,7 @@ import { Rail } from 'components/rail/rail'
 import { ChevronLeftIcon, ChevronRightIcon } from '@pocket/web-ui'
 import { buttonReset } from 'components/buttons/button-reset'
 import { QuoteList } from 'components/annotations/annotations.list'
+import { TicList } from 'components/annotations/annotations.tics'
 import classNames from 'classnames'
 
 const railWrapper = css`
@@ -53,15 +54,18 @@ export const Sidebar = ({
   sideBarOpen,
   highlightList,
   shareItem,
-  shareData
+  shareData,
+  deleteAnnotation
 }) => {
   return (
+  <>
     <Rail visible={sideBarOpen} clickAction={sideBarOpen ? null : toggleSidebar}>
       <QuoteList
         visible={sideBarOpen}
         shareItem={shareItem}
         annotations={highlightList}
         shareData={shareData}
+        deleteAnnotation={deleteAnnotation}
       />
 
       <div className={classNames(railWrapper, { visible: sideBarOpen })}>
@@ -74,5 +78,13 @@ export const Sidebar = ({
         </div>
       </div>
     </Rail>
+      <TicList
+        visible={!sideBarOpen}
+        shareItem={shareItem}
+        annotations={highlightList}
+        shareData={shareData}
+        deleteAnnotation={deleteAnnotation}
+      />
+  </>
   )
 }

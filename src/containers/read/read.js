@@ -230,6 +230,7 @@ export default function Read({ appRootSelector, itemId }) {
             highlightList={highlightList}
             shareItem={toggleShare}
             shareData={shareData}
+            // deleteAnnotation={deleteAnnotation}
           />
         </aside>
         <article className={classNames(Fonts, "reader")} style={customStyles}>
@@ -257,7 +258,8 @@ export default function Read({ appRootSelector, itemId }) {
               shareItem={toggleShare}
               shareData={shareData}
               isPremium={isPremium}
-              deleteHighlight={''} />
+              // deleteAnnotation={deleteAnnotation}
+            />
           ) : null }
         </article>
       </main>
