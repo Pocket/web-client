@@ -5,9 +5,6 @@ import { getItemSaveAnalytics } from './topic.analytics'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { arrayToObject } from 'common/utilities'
 import {
-  TOPIC_DATA_REQUEST,
-  TOPIC_DATA_SUCCESS,
-  TOPIC_DATA_FAILURE,
   TOPIC_HYDRATE,
   TOPIC_SAVE_REQUEST,
   TOPIC_UNSAVE_REQUEST,

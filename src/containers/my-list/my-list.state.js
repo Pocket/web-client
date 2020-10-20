@@ -1,17 +1,30 @@
-import { takeLatest, put, takeEvery } from 'redux-saga/effects'
+import { takeLatest, put, takeEvery, select } from 'redux-saga/effects'
 import { getMyList } from 'common/api/my-list'
 import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { arrayToObject } from 'common/utilities'
 
+import { reconcileItemsArchived } from './my-list.reconcilers'
+import { reconcileItemsUnArchived } from './my-list.reconcilers'
+import { reconcileItemsUnFavorited } from './my-list.reconcilers'
+import { reconcileItemsDeleted } from './my-list.reconcilers'
+
+import { filterSelector } from './my-list.filters'
+import { sortSelector } from './my-list.sorters'
+
 import { MYLIST_DATA_REQUEST } from 'actions'
 import { MYLIST_DATA_SUCCESS } from 'actions'
 import { MYLIST_DATA_FAILURE } from 'actions'
+import { MYLIST_UPDATE_REQUEST } from 'actions'
+import { MYLIST_UPDATE_SUCCESS } from 'actions'
+import { MYLIST_UPDATE_FAILURE } from 'actions'
 import { MYLIST_HYDRATE } from 'actions'
 import { MYLIST_SAVE_REQUEST } from 'actions'
 import { MYLIST_UNSAVE_REQUEST } from 'actions'
 
 import { ITEMS_ARCHIVE_REQUEST } from 'actions'
 import { ITEMS_UNARCHIVE_REQUEST } from 'actions'
+import { ITEMS_DELETE_REQUEST } from 'actions'
+import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
 
 import { HYDRATE } from 'actions'
 
@@ -21,6 +34,7 @@ export const getMylistData = (count, offset, subset, filter, sort) => ({ type: M
 export const hydrateMylist = (hydrated) => ({ type: MYLIST_HYDRATE, hydrated }) //prettier-ignore
 export const saveMylistItem = (id, url, position) => ({type: MYLIST_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const unSaveMylistItem = (id) => ({ type: MYLIST_UNSAVE_REQUEST, id }) //prettier-ignore
+export const updateMyListData = (since, subset, filter) => ({ type: MYLIST_UPDATE_REQUEST, since, subset, filter }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -35,88 +49,117 @@ const initialState = {
   // State for active list items
   unread: [],
   unreadOffset: 0,
+  unreadSince: 0,
   unreadTotal: false,
 
   // State for archive list items
   archive: [],
   archiveOffset: 0,
+  archiveSince: 0,
   archiveTotal: false,
 
   // State for favorites and favorite filters
   favorites: [],
-  favoritesTotal: false,
   favoritesOffset: 0,
+  favoritesSince: 0,
+  favoritesTotal: false,
 
-  favoritesactive: [],
-  favoritesactiveOffset: 0,
-  favoritesactiveTotal: false,
+  favoritesunread: [],
+  favoritesunreadOffset: 0,
+  favoritesunreadSince: 0,
+  favoritesunreadTotal: false,
 
   favoritesarchive: [],
   favoritesarchiveOffset: 0,
+  favoritesarchiveSince: 0,
   favoritesarchiveTotal: false,
 
   // State for highlights and highlight filters
   highlights: [],
-  highlightsTotal: false,
+  highlightsSince: 0,
   highlightsOffset: 0,
+  highlightsTotal: false,
 
-  highlightsactive: [],
-  highlightsactiveOffset: 0,
-  highlightsactiveTotal: false,
+  highlightsunread: [],
+  highlightsunreadOffset: 0,
+  highlightsunreadSince: 0,
+  highlightsunreadTotal: false,
 
   highlightsarchive: [],
   highlightsarchiveOffset: 0,
+  highlightsarchiveSince: 0,
   highlightsarchiveTotal: false,
 
   highlightsfavorites: [],
   highlightsfavoritesOffset: 0,
+  highlightsfavoritesSince: 0,
   highlightsfavoritesTotal: false,
 
   // State for articles and article filters
   articles: [],
-  articlesTotal: false,
   articlesOffset: 0,
+  articlesSince: 0,
+  articlesTotal: false,
 
-  articlesactive: [],
-  articlesactiveOffset: 0,
-  articlesactiveTotal: false,
+  articlesunread: [],
+  articlesunreadOffset: 0,
+  articlesunreadSince: 0,
+  articlesunreadTotal: false,
 
   articlesarchive: [],
   articlesarchiveOffset: 0,
+  articlesarchiveSince: 0,
   articlesarchiveTotal: false,
 
   articlesfavorites: [],
   articlesfavoritesOffset: 0,
+  articlesfavoritesSince: 0,
   articlesfavoritesTotal: false,
 
   // State for videos and video filters
   videos: [],
-  videosTotal: false,
   videosOffset: 0,
+  videosSince: 0,
+  videosTotal: false,
 
-  videosactive: [],
-  videosactiveOffset: 0,
-  videosactiveTotal: false,
+  videosunread: [],
+  videosunreadOffset: 0,
+  videosunreadSince: 0,
+  videosunreadTotal: false,
 
   videosarchive: [],
   videosarchiveOffset: 0,
+  videosarchiveSince: 0,
   videosarchiveTotal: false,
 
   videosfavorites: [],
   videosfavoritesOffset: 0,
+  videosfavoritesSince: 0,
   videosfavoritesTotal: false
 }
 
 export const myListReducers = (state = initialState, action) => {
   switch (action.type) {
     case MYLIST_DATA_SUCCESS: {
-      const { items, offset, subset, total, filter } = action
+      const { items, offset, subset, total, filter, since } = action
       const section = filter ? subset + filter : subset
       return {
         ...state,
-        [section]: [...state[section], ...items],
+        [section]: items,
         [`${section}Offset`]: offset,
+        [`${section}Since`]: since,
         [`${section}Total`]: parseInt(total, 10)
+      }
+    }
+
+    case MYLIST_UPDATE_SUCCESS: {
+      const { items, subset, filter, since } = action
+      const section = filter ? subset + filter : subset
+      return {
+        ...state,
+        [section]: items,
+        [`${section}Offset`]: items.length,
+        [`${section}Since`]: since
       }
     }
 
@@ -136,6 +179,7 @@ export const myListReducers = (state = initialState, action) => {
       const { mylist } = action.payload
       return { ...state, ...mylist }
 
+    // Reconcilers
     case ITEMS_ARCHIVE_REQUEST: {
       const { items } = action
       return reconcileItemsArchived(items, state)
@@ -146,6 +190,16 @@ export const myListReducers = (state = initialState, action) => {
       return reconcileItemsUnArchived(items, state)
     }
 
+    case ITEMS_UNFAVORITE_REQUEST: {
+      const { items } = action
+      return reconcileItemsUnFavorited(items, state)
+    }
+
+    case ITEMS_DELETE_REQUEST: {
+      const { items } = action
+      return reconcileItemsDeleted(items, state)
+    }
+
     default:
       return state
   }
@@ -154,13 +208,16 @@ export const myListReducers = (state = initialState, action) => {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const myListSagas = [
-  takeLatest(MYLIST_DATA_REQUEST, myListDataRequest)
+  takeLatest(MYLIST_DATA_REQUEST, myListDataRequest),
+  takeLatest(MYLIST_UPDATE_REQUEST, myListUpdate)
   // takeEvery(MYLIST_DATA_SUCCESS, mylistSaveRequest),
   // takeEvery(MYLIST_DATA_FAILURE, mylistUnSaveRequest)
 ]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
+export const getMyListItemsById = (state) => state.myListItemsById
+
 function* myListDataRequest(action) {
   try {
     const {
@@ -186,14 +243,26 @@ function* myListDataRequest(action) {
     if (filter === 'archive') parameters.state = 'read'
     if (filter === 'favorites') parameters.favorite = 1
 
-    const { items, itemsById, total } = yield fetchMyListData({
+    const { itemsById, total, since } = yield fetchMyListData({
       count,
       offset,
       sort,
       ...parameters
     })
 
+    const existingItemsById = yield select(getMyListItemsById)
+    const itemsByIdDraft = { ...existingItemsById, ...itemsById }
+
+    const filterFunction = filterSelector(subset, filter)
+    console.log(filterFunction)
+    const sortFunction = sortSelector(subset, 'newest') //TODO: hook this to selector
+    const items = Object.values(itemsByIdDraft)
+      .filter(filterFunction)
+      .sort(sortFunction)
+      .map((item) => item.resolved_id)
+
     const newOffset = offset + items?.length
+
     yield put({
       type: MYLIST_DATA_SUCCESS,
       items,
@@ -201,11 +270,52 @@ function* myListDataRequest(action) {
       offset: newOffset,
       subset,
       filter,
-      total
+      total,
+      since
     })
   } catch (error) {
     console.log(error)
     yield put({ type: MYLIST_DATA_FAILURE, error })
+  }
+}
+
+function* myListUpdate(action) {
+  try {
+    const { since, subset = 'active', filter } = action
+    const data = yield fetchMyListUpdate({ since })
+
+    // No updates so simply return
+    if (data.total === 0) return
+
+    // If anything has changed, update the item store
+    const { updatedItemsById, itemsToDelete, updatedSince } = data
+    const existingItemsById = yield select(getMyListItemsById)
+
+    //Remove all items to delete
+    itemsToDelete.forEach((id) => delete existingItemsById[id])
+
+    // Update all items in need of update
+    const itemsById = { ...existingItemsById, ...updatedItemsById }
+
+    const filterFunction = filterSelector(subset)
+    const sortFunction = sortSelector(subset, 'newest') //TODO: hook this to selector
+    const items = Object.values(itemsById)
+      .filter(filterFunction)
+      .sort(sortFunction)
+      .map((item) => item.resolved_id)
+
+    // Update our item store
+    yield put({
+      type: MYLIST_UPDATE_SUCCESS,
+      items,
+      itemsById,
+      subset,
+      filter,
+      since: updatedSince
+    })
+  } catch (error) {
+    console.log(error)
+    yield put({ type: MYLIST_UPDATE_FAILURE, error })
   }
 }
 
@@ -214,7 +324,7 @@ function* myListDataRequest(action) {
 
 /**
  * fetchDiscoverData
- * Make and async request for a Pocket v3 feed and return best data
+ * Make wand async request for a Pocket v3 feed and return best data
  * @return items {array} An array of derived items
  */
 export async function fetchMyListData(params) {
@@ -223,46 +333,38 @@ export async function fetchMyListData(params) {
     if (!response.list) return console.log('No Items')
 
     const total = response.total
+    const since = response.since
 
     const derivedItems = await deriveMyListItems(Object.values(response.list))
-
-    const items = derivedItems
-      .sort((a, b) => a.sort_id - b.sort_id)
-      .map((item) => item.resolved_id)
-
     const itemsById = arrayToObject(derivedItems, 'resolved_id')
 
-    return { items, itemsById, total }
+    return { itemsById, total, since }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.log('discover.state', error)
   }
 }
 
-/** RECONCILERS
- --------------------------------------------------------------- */
-export function reconcileItemsArchived(items, state) {
-  const itemIds = items.map((item) => item.id)
-  //prettier-ignore
-  return {
-    ...state,
-    unread: state.unread.filter( item => !itemIds.includes(item)),
-    favoritesactive: state.favoritesactive.filter( item => !itemIds.includes(item)),
-    highlightsactive: state.highlightsactive.filter( item => !itemIds.includes(item)),
-    articlesactive: state.articlesactive.filter( item => !itemIds.includes(item)),
-    videosactive: state.videosactive.filter( item => !itemIds.includes(item))
-  }
-}
+export async function fetchMyListUpdate(params) {
+  try {
+    const response = await getMyList(params)
+    const { status, total, since, list } = response
 
-export function reconcileItemsUnArchived(items, state) {
-  const itemIds = items.map((item) => item.id)
-  //prettier-ignore
-  return {
-    ...state,
-    archive: state.archive.filter( item => !itemIds.includes(item)),
-    favoritesarchive: state.favoritesarchive.filter( item => !itemIds.includes(item)),
-    highlightsarchive: state.highlightsarchive.filter( item => !itemIds.includes(item)),
-    articlesarchive: state.articlesarchive.filter( item => !itemIds.includes(item)),
-    videosarchive: state.videosarchive.filter( item => !itemIds.includes(item))
+    // If no changes have happened just return that
+    if (status === 2) return { total: 0 }
+
+    // Find all items that have been deleted
+    const itemsToDelete = Object.values(list)
+      .filter((item) => item.status === '2')
+      .map((item) => item.item_id)
+
+    const itemsToUpdate = Object.values(list)
+    const derivedItems = await deriveMyListItems(itemsToUpdate)
+    const updatedItemsById = arrayToObject(derivedItems, 'resolved_id')
+
+    return { updatedItemsById, itemsToDelete, total, updatedSince: since }
+  } catch (error) {
+    //TODO: adjust this once error reporting strategy is defined.
+    console.log('discover.state', error)
   }
 }
