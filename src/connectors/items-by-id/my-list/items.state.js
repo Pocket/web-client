@@ -3,13 +3,14 @@ import { saveItem as saveItemAPI } from 'common/api/saveItem'
 import { removeItem as removeItemAPI } from 'common/api/removeItem'
 
 import { MYLIST_DATA_SUCCESS } from 'actions'
+import { MYLIST_UPDATE_SUCCESS } from 'actions'
 import { HOME_DATA_LATEST_SUCCESS } from 'actions'
 
 /* CONSOLIDATE
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 // import { itemTagSagas } from './items.tag'
 import { itemAddSagas } from './items.add'
-// import { itemDeleteSagas } from './items.delete'
+import { itemDeleteSagas } from './items.delete'
 import { itemFavoriteSagas } from './items.favorite'
 import { itemArchiveSagas } from './items.archive'
 // import { itemShareSagas } from './items.share'
@@ -41,6 +42,10 @@ export const myListItemsReducers = (state = initialState, action) => {
       return { ...state, ...itemsById }
     }
 
+    case MYLIST_UPDATE_SUCCESS: {
+      const { itemsById } = action
+      return itemsById
+    }
     default:
       return state
   }
@@ -50,6 +55,7 @@ export const myListItemsReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const myListItemsSagas = [
   ...itemAddSagas,
+  ...itemDeleteSagas,
   ...itemArchiveSagas,
   ...itemFavoriteSagas
 ]

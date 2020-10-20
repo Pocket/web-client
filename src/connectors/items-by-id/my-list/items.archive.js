@@ -32,12 +32,17 @@ function* itemsArchive({ items }) {
   const data = yield call(sendItemActions, actions)
 
   if (data) return yield put({ type: ITEMS_ARCHIVE_SUCCESS, data })
+
+  return yield put({ type: ITEMS_ARCHIVE_FAILURE, items })
 }
 
 function* itemsUnArchive({ items }) {
   const actions = buildActions(items, API_ACTION_UNARCHIVE)
   const data = yield call(sendItemActions, actions)
+
   if (data) return yield put({ type: ITEMS_UNARCHIVE_SUCCESS, data })
+
+  return yield put({ type: ITEMS_UNARCHIVE_FAILURE, items })
 }
 
 function buildActions(items, action) {

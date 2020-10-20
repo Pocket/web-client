@@ -9,23 +9,23 @@ import { API_ACTION_DELETE } from 'common/constants'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const itemsDeleteAction = (payload) => ({ type: ITEMS_DELETE_REQUEST, payload }) //prettier-ignore
+export const itemsDeleteAction = (items) => ({ type: ITEMS_DELETE_REQUEST, items }) //prettier-ignore
 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-export const itemDeleteSagas = [takeEvery(ITEMS_DELETE_REQUEST, itemDelete)]
+export const itemDeleteSagas = [takeEvery(ITEMS_DELETE_REQUEST, itemsDelete)]
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-export function* itemDelete(action) {
-  try {
-    const { url, analytics } = action.payload
-    const actions = [{ action: API_ACTION_DELETE, url, ...analytics }]
-    const data = yield call(sendItemActions, actions)
+function* itemsDelete({ items }) {
+  const actions = buildActions(items, API_ACTION_DELETE)
+  const data = yield call(sendItemActions, actions)
 
-    if (data) return yield put({ type: ITEMS_DELETE_SUCCESS, data })
-    yield put({ type: ITEMS_DELETE_FAILURE })
-  } catch (error) {
-    console.log(error)
-  }
+  if (data) return yield put({ type: ITEMS_DELETE_SUCCESS, data })
+
+  return yield put({ type: ITEMS_DELETE_FAILURE, items })
+}
+
+function buildActions(items, action) {
+  return items.map((item) => ({ action, item_id: item.id }))
 }
