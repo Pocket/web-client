@@ -254,7 +254,6 @@ function* myListDataRequest(action) {
     const itemsByIdDraft = { ...existingItemsById, ...itemsById }
 
     const filterFunction = filterSelector(subset, filter)
-    console.log(filterFunction)
     const sortFunction = sortSelector(subset, 'newest') //TODO: hook this to selector
     const items = Object.values(itemsByIdDraft)
       .filter(filterFunction)
