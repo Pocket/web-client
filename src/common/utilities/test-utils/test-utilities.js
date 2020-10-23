@@ -45,7 +45,7 @@ export function testIdSelector(id, qualifier = '') {
 export const mockEvent = {
   target: {},
   preventDefault() {},
-  stopPropagation() {},
+  stopPropagation() {}
 }
 
 /**
@@ -63,8 +63,8 @@ export function createMockFetchResponse(data, isFail = false) {
     headers: {
       get(headerName) {
         return this[headerName]
-      },
-    },
+      }
+    }
   }
 
   if (data) {

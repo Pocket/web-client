@@ -49,9 +49,7 @@ export const onHoverTooltip = () => (
         <div className={triggerElement}>Trigger</div>
       </Trigger>
 
-      <TooltipContent>
-        Sneaky tooltip
-      </TooltipContent>
+      <TooltipContent>Sneaky tooltip</TooltipContent>
     </Popover>
   </div>
 )

@@ -21,13 +21,23 @@ import {
   FRIENDS_SUCCESS,
   FRIENDS_FAILURE
 } from 'actions'
-import { getArticleText, getSuggestedTags, getRecentFriends } from 'common/api/reader'
+import {
+  getArticleText,
+  getSuggestedTags,
+  getRecentFriends
+} from 'common/api/reader'
 import { getMyList } from 'common/api/my-list'
 // import { saveItem } from 'common/api/saveItem'
 // import { removeItem } from 'common/api/removeItem'
 import { HYDRATE } from 'actions'
 
-import { ITEM, TAG_LIST, ARTICLE, SUGGESTED_TAGS, FRIENDS } from './mock-responses'
+import {
+  ITEM,
+  TAG_LIST,
+  ARTICLE,
+  SUGGESTED_TAGS,
+  FRIENDS
+} from './mock-responses'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -142,7 +152,7 @@ export const readSagas = [
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-const getArticleData = state => state.reader.articleData
+const getArticleData = (state) => state.reader.articleData
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -179,7 +189,7 @@ function* suggestedTagsRequest({ item }) {
     const response = yield getSuggestedTags(itemId)
     // if (!response.suggested_tags) return console.log('No Tags')
     // const tags = response.suggested_tags?.map(item => item.tag)
-    const tags = SUGGESTED_TAGS.suggested_tags.map(item => item.tag)
+    const tags = SUGGESTED_TAGS.suggested_tags.map((item) => item.tag)
 
     yield put({ type: SUGGESTED_TAGS_SUCCESS, tags })
   } catch (error) {
@@ -210,19 +220,21 @@ function* annotationSaveRequest({ item_id, quote, patch }) {
     }
 
     const articleData = yield select(getArticleData)
-    const list = (articleData.annotations || [])
+    const list = articleData.annotations || []
     const item = {
       ...articleData,
       annotation: list.push(annotation)
     }
 
     // Update the server
-    const actions = [{
-      action: API_ACTION_ADD_ANNOTATION,
-      item_id: articleData.item_id,
-      annotation: annotation,
-      cxt_view: 'reader'
-    }]
+    const actions = [
+      {
+        action: API_ACTION_ADD_ANNOTATION,
+        item_id: articleData.item_id,
+        annotation: annotation,
+        cxt_view: 'reader'
+      }
+    ]
 
     // const response = yield sendItemAction(actions)
 

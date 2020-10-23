@@ -8,19 +8,19 @@ const globalNavAccountKnobs = defineKnobs((props) => {
   return {
     isLoggedIn: boolean('isLoggedIn', props.isLoggedIn),
     isPremium: boolean('isPremium', props.isPremium),
-    avatarSrc: text('avatarSrc', props.avatarSrc),
+    avatarSrc: text('avatarSrc', props.avatarSrc)
   }
 })
 
 export default {
   title: 'Components/GlobalNav/GlobalNavAccount',
   component: GlobalNavAccount,
-  decorators: [globalNavAccountKnobs],
+  decorators: [globalNavAccountKnobs]
 }
 
 const baseProps = {
   appRootSelector: '#root',
-  accountName: 'Fluffers',
+  accountName: 'Fluffers'
 }
 
 export const loggedOutUser = () => {

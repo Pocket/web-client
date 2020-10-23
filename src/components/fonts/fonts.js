@@ -72,10 +72,8 @@ export const Fonts = css`
       font-family: 'IdealSans';
       font-style: italic;
       font-weight: bold;
-      src: url(${IdealSansBoldItalicWoff}),
-        url(${IdealSansBoldItalicWoff});
+      src: url(${IdealSansBoldItalicWoff}), url(${IdealSansBoldItalicWoff});
     }
-
 
     @font-face {
       font-family: 'Inter';
@@ -98,10 +96,8 @@ export const Fonts = css`
       font-family: 'Inter';
       font-style: italic;
       font-weight: bold;
-      src: url(${InterBoldItalicWoff}),
-        url(${InterBoldItalicWoff2});
+      src: url(${InterBoldItalicWoff}), url(${InterBoldItalicWoff2});
     }
-
 
     @font-face {
       font-family: 'Sentinel';
@@ -124,10 +120,8 @@ export const Fonts = css`
       font-family: 'Sentinel';
       font-style: italic;
       font-weight: bold;
-      src: url(${SentinelBoldItalicWoff}),
-        url(${SentinelBoldItalicWoff2});
+      src: url(${SentinelBoldItalicWoff}), url(${SentinelBoldItalicWoff2});
     }
-
 
     @font-face {
       font-family: 'Tiempos';
@@ -150,10 +144,8 @@ export const Fonts = css`
       font-family: 'Tiempos';
       font-style: italic;
       font-weight: bold;
-      src: url(${TiemposBoldItalicWoff}),
-        url(${TiemposBoldItalicWoff2});
+      src: url(${TiemposBoldItalicWoff}), url(${TiemposBoldItalicWoff2});
     }
-
 
     @font-face {
       font-family: 'Whitney';
@@ -176,8 +168,7 @@ export const Fonts = css`
       font-family: 'Whitney';
       font-style: italic;
       font-weight: bold;
-      src: url(${WhitneyBoldItalicWoff}),
-        url(${WhitneyBoldItalicWoff2});
+      src: url(${WhitneyBoldItalicWoff}), url(${WhitneyBoldItalicWoff2});
     }
   }
 `

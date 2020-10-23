@@ -38,7 +38,7 @@ const publisherGrid = css`
 function PublisherGrid({ publishers }) {
   return (
     <div className={publisherGrid}>
-      {publishers.map(publisher => (
+      {publishers.map((publisher) => (
         <img
           src={publisher.path}
           alt={publisher.name}

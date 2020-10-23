@@ -99,8 +99,7 @@ const GlobalNavLinks = ({
               href={link.url}
               onClick={(event) => {
                 handleClick(event, link.name, link.url)
-              }}
-            >
+              }}>
               {link.label}
             </a>
           </li>
@@ -120,7 +119,7 @@ GlobalNavLinks.propTypes = {
     PropTypes.shape({
       name: PropTypes.string,
       label: PropTypes.string,
-      url: PropTypes.string,
+      url: PropTypes.string
     })
   ),
 
@@ -135,7 +134,7 @@ GlobalNavLinks.propTypes = {
    * Callback function called when any link is clicked. Gets passed the name and
    * url of that link.
    */
-  onLinkClick: PropTypes.func,
+  onLinkClick: PropTypes.func
 }
 
 GlobalNavLinks.defaultProps = {
@@ -144,17 +143,17 @@ GlobalNavLinks.defaultProps = {
       name: 'discover',
       id: 'discover',
       label: 'Discover',
-      url: 'https://getpocket.com/explore?src=navbar',
+      url: 'https://getpocket.com/explore?src=navbar'
     },
     {
       name: 'my-list',
       id: 'my-list',
       label: 'My List',
-      url: 'https://app.getpocket.com?src=navbar',
-    },
+      url: 'https://app.getpocket.com?src=navbar'
+    }
   ],
   selectedLink: null,
-  onLinkClick(event, linkName, linkUrl) {},
+  onLinkClick(event, linkName, linkUrl) {}
 }
 
 export default GlobalNavLinks

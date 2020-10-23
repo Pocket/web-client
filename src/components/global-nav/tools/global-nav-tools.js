@@ -60,8 +60,7 @@ const GlobalNavTools = ({ tools, onToolClick }) => {
               title={tool.label}
               onClick={(event) => {
                 handleToolClick(event, tool.name)
-              }}
-            >
+              }}>
               {tool.icon}
             </button>
           </li>
@@ -82,7 +81,7 @@ GlobalNavTools.propTypes = {
     PropTypes.shape({
       name: PropTypes.string,
       label: PropTypes.string,
-      icon: PropTypes.node,
+      icon: PropTypes.node
     })
   ),
 
@@ -90,12 +89,12 @@ GlobalNavTools.propTypes = {
    * Callback function called when any tool is clicked. Gets passed the name of
    * that tool.
    */
-  onToolClick: PropTypes.func,
+  onToolClick: PropTypes.func
 }
 
 GlobalNavTools.defaultProps = {
   tools: [],
-  onToolClick(toolName) {},
+  onToolClick(toolName) {}
 }
 
 export default GlobalNavTools

@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
 import { css } from 'linaria'
 import {
-  OverflowMenuIcon, IosShareIcon, DeleteIcon,
-  PopupMenu, PopupMenuGroup, PopupMenuItem
+  OverflowMenuIcon,
+  IosShareIcon,
+  DeleteIcon,
+  PopupMenu,
+  PopupMenuGroup,
+  PopupMenuItem
 } from '@pocket/web-ui'
 import { buttonReset } from 'components/buttons/button-reset'
 import { ShareMenu } from 'components/share-menu/share-menu'
@@ -80,7 +84,7 @@ export const AnnotationMenu = ({
   let timer
 
   useEffect(() => {
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer)
   }, [])
 
   const startTimer = () => {
@@ -119,17 +123,13 @@ export const AnnotationMenu = ({
           className={classNames(buttonReset, buttonStyles, { visible })}>
           <OverflowMenuIcon />
         </button>
-        { menuOpen ? (
+        {menuOpen ? (
           shareOpen ? (
             <ul
               onMouseEnter={clearTimer}
               onMouseLeave={startTimer}
               className={classNames(menuWrapper, { alignRight })}>
-              <ShareMenu
-                shareItem={handleShare}
-                quote={quote}
-                { ...shareData }
-              />
+              <ShareMenu shareItem={handleShare} quote={quote} {...shareData} />
             </ul>
           ) : (
             <ul
@@ -137,20 +137,16 @@ export const AnnotationMenu = ({
               onMouseLeave={startTimer}
               className={classNames(overlayBase, menuWrapper, { alignRight })}>
               <PopupMenuGroup>
-                <PopupMenuItem
-                  onClick={handleDelete}
-                  icon={<DeleteIcon />}>
+                <PopupMenuItem onClick={handleDelete} icon={<DeleteIcon />}>
                   Delete
                 </PopupMenuItem>
-                <PopupMenuItem
-                  onClick={toggleShare}
-                  icon={<IosShareIcon />}>
+                <PopupMenuItem onClick={toggleShare} icon={<IosShareIcon />}>
                   Share
                 </PopupMenuItem>
               </PopupMenuGroup>
             </ul>
           )
-        ) : null }
+        ) : null}
       </div>
     </div>
   )

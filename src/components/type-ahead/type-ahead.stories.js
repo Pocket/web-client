@@ -13,14 +13,14 @@ class TypeAheadStory extends React.Component {
     this.state = { inputValue: '' }
   }
 
-  setTextInputRef = element => (this.textInput = element)
-  setValue = value => {
+  setTextInputRef = (element) => (this.textInput = element)
+  setValue = (value) => {
     this.setState({ inputValue: value })
   }
-  onChange = event => this.setValue(event.target.value)
+  onChange = (event) => this.setValue(event.target.value)
   reFocus = () => this.textInput.current.focus()
 
-  keyDown = event => {
+  keyDown = (event) => {
     if (event.keyCode === KEYS.ESCAPE) this.setValue('')
   }
 

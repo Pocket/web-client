@@ -31,7 +31,7 @@ export class Tagging extends Component {
     this.setState({ inputReady: true })
   }
 
-  setInputRef = input => {
+  setInputRef = (input) => {
     if (this.props.setInputRef) this.props.setInputRef(input)
     this.inputReference = input
   }
@@ -40,7 +40,7 @@ export class Tagging extends Component {
 
   onFocus = () => {}
 
-  setValue = value => {
+  setValue = (value) => {
     this.props.setValue({ value })
   }
 
@@ -52,16 +52,16 @@ export class Tagging extends Component {
   }
 
   // Tag Handling
-  selectClick = tag => {
+  selectClick = (tag) => {
     const tagActive = this.state.activeTags.includes(tag)
     tagActive ? this.makeTagInactive(tag) : this.makeTagActive(tag)
   }
 
-  removeClick = tag => {
+  removeClick = (tag) => {
     this.props.removeTag(tag)
   }
 
-  addTag = tag => {
+  addTag = (tag) => {
     this.props.addTag(tag)
   }
 
@@ -73,17 +73,17 @@ export class Tagging extends Component {
   removeActiveTags = () => {
     const { activeTags } = this.state
     const { tags, setTags } = this.props
-    setTags(tags.filter(tag => !activeTags.includes(tag)))
+    setTags(tags.filter((tag) => !activeTags.includes(tag)))
     this.setState({ activeTags: [] })
   }
 
-  makeTagActive = tag => {
+  makeTagActive = (tag) => {
     this.setState({ activeTags: [...this.state.activeTags, tag] })
   }
 
-  makeTagInactive = tag => {
+  makeTagInactive = (tag) => {
     this.setState({
-      activeTags: this.state.activeTags.filter(activeTag => activeTag !== tag)
+      activeTags: this.state.activeTags.filter((activeTag) => activeTag !== tag)
     })
   }
 

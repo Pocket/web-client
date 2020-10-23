@@ -32,7 +32,7 @@ export function openWindow(
     url,
     name,
     Object.keys(config)
-      .map(key => `${key}=${config[key]}`)
+      .map((key) => `${key}=${config[key]}`)
       .join(', ')
   )
 

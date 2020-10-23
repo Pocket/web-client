@@ -61,11 +61,11 @@ function replaceImageMarkup(data) {
 export function loadParsedImages(images) {
   if (!images) return
 
-  Object.keys(images).map(imageKey =>
+  Object.keys(images).map((imageKey) =>
     loadImage(images[imageKey])
       .then(buildImageMarkup)
       .then(replaceImageMarkup)
-      .catch(error => {
+      .catch((error) => {
         invalidateImage(error, images[imageKey])
       })
   )

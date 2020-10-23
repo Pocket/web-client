@@ -36,7 +36,8 @@ export const EmptyList = () => {
         You haven’t highlighted anything yet {/*"annotations.infoHeading"*/}
       </h4>
       <p className={info}>
-        When you select text while you’re reading, it'll appear here. {/*"annotations.instructions"*/}
+        When you select text while you’re reading, it'll appear here.{' '}
+        {/*"annotations.instructions"*/}
       </p>
     </div>
   )

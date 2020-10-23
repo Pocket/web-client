@@ -2,7 +2,7 @@ import { css } from 'linaria'
 import { ArrowRightIcon } from '@pocket/web-ui'
 
 const linkWrapper = css`
-  font-family: "Graphik Web";
+  font-family: 'Graphik Web';
   font-weight: 500;
   line-height: 132%;
   color: var(--color-actionPrimary);
@@ -21,20 +21,14 @@ const linkWrapper = css`
   }
 `
 
-export const ArrowLink = ({
-  href,
-  target,
-  margin,
-  onClick,
-  children
-}) => (
+export const ArrowLink = ({ href, target, margin, onClick, children }) => (
   <a
     className={linkWrapper}
     style={{ margin }}
     href={href}
     target={target}
     onClick={onClick}>
-    { children }
+    {children}
     <ArrowRightIcon className="arrow-icon" />
   </a>
 )

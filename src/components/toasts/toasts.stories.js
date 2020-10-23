@@ -16,7 +16,6 @@ export default {
   title: 'Components/Toasts'
 }
 
-
 const types = ['neutral', 'success', 'warn']
 const actions = [
   ITEMS_ADD_SUCCESS,
@@ -42,7 +41,7 @@ class ToastStories extends Component {
   }
 
   addToast = () => {
-    this.setState(state => {
+    this.setState((state) => {
       const randToast = {
         type: types[Math.floor(Math.random() * types.length)],
         apiAction: actions[Math.floor(Math.random() * actions.length)]
@@ -57,8 +56,8 @@ class ToastStories extends Component {
     })
   }
 
-  removeToast = key => {
-    this.setState(state => {
+  removeToast = (key) => {
+    this.setState((state) => {
       // eslint-disable-next-line no-unused-vars
       const { [key]: deletedKey, ...toasts } = state.toasts
       return { ...state, toasts }

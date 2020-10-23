@@ -45,7 +45,7 @@ export const ConfirmDelete = ({
         // aria-label={translate('modalConfirm.cancel')}
       >
         {/*<Translate id="modalConfirm.cancel">*/}
-          Cancel
+        Cancel
         {/*</Translate>*/}
       </Button>
       <Button
@@ -55,7 +55,7 @@ export const ConfirmDelete = ({
         // aria-label={translate('modalConfirm.delete', { type: operateOn })}
       >
         {/*<Translate id="modalConfirm.delete" data={{ type: operateOn }}>*/}
-          Delete {operateOn}
+        Delete {operateOn}
         {/*</Translate>*/}
       </Button>
     </div>

@@ -10,12 +10,12 @@ const themeWrapper = css`
 `
 
 const themeRadioButtons = css`
-  input[type="radio"] + label:before {
+  input[type='radio'] + label:before {
     top: 3px;
     left: -9px;
   }
 
-  input[type="radio"] + label:after {
+  input[type='radio'] + label:after {
     top: 8px;
     left: -4px;
   }

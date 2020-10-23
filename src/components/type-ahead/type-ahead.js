@@ -37,7 +37,7 @@ export class TypeAhead extends React.Component {
     if (nextProps.inputValue !== this.props.inputValue) {
       const nextItems = matchSorter(this.allItems, nextProps.inputValue, {
         threshold: rankings.CONTAINS
-      }).filter(item => {
+      }).filter((item) => {
         if (!nextProps.inputValue) return false
         if (!item) return false
         if (item === 'untagged items') return false
@@ -53,7 +53,7 @@ export class TypeAhead extends React.Component {
 
   /* Key Events
   ------------------------------------------------------- */
-  keyDown = event => {
+  keyDown = (event) => {
     const validCodes = [KEYS.DOWN, KEYS.UP, KEYS.ENTER]
     if (!validCodes.includes(event.keyCode)) return
     if (!this.state.items.length) return
@@ -75,12 +75,12 @@ export class TypeAhead extends React.Component {
 
   /* Selection Manipulation
   ------------------------------------------------------- */
-  setSelected = index => {
+  setSelected = (index) => {
     this.props.setValue(this.state.items[index])
     this.props.reFocus()
   }
 
-  adjustSelected = moveDown => {
+  adjustSelected = (moveDown) => {
     if (this.state.selectedIndex === -1) {
       return this.setState({
         selectedIndex: moveDown ? 0 : this.state.items.length - 1

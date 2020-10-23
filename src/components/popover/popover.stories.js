@@ -33,7 +33,7 @@ const wrapperLink = css`
   }
 `
 
-const PopoverBlock = function({ popoverRef }) {
+const PopoverBlock = function ({ popoverRef }) {
   return (
     <Portal>
       <div className={popoverContainer} ref={popoverRef}>
@@ -46,8 +46,8 @@ const PopoverBlock = function({ popoverRef }) {
   )
 }
 
-const PopoverAction = function({ popoverOptions, copy }) {
-  const handleClick = event => {
+const PopoverAction = function ({ popoverOptions, copy }) {
+  const handleClick = (event) => {
     event.preventDefault()
     event.stopPropagation()
   }

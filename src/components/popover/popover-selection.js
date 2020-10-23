@@ -68,12 +68,12 @@ class SelectionPopoverClass extends Component {
     this.props.disablePopup()
   }
 
-  onShare = recommend => {
+  onShare = (recommend) => {
     this.props.shareItem(recommend)
     this.props.disablePopup()
   }
 
-  onSocialShare = service => {
+  onSocialShare = (service) => {
     this.props.socialShare(service)
   }
 
@@ -81,7 +81,7 @@ class SelectionPopoverClass extends Component {
     this.setState({ share: true })
   }
 
-  isClickOutside = e => {
+  isClickOutside = (e) => {
     if (e.button !== 0) return // only process left-click
     if (
       !this.containerRef.current ||
@@ -106,7 +106,7 @@ class SelectionPopoverClass extends Component {
       <ShareMenu
         shareItem={shareItem}
         quote={this.props.textSelection}
-        { ...shareData }
+        {...shareData}
       />
     )
   }
@@ -121,7 +121,7 @@ class SelectionPopoverClass extends Component {
           <span className={iconWrapper}>
             <HighlightIcon />
           </span>
-            Highlight {/*"shareExcerpt.highlight.copy"*/}
+          Highlight {/*"shareExcerpt.highlight.copy"*/}
         </button>
         <button
           className={classNames(buttonWrapper, buttonReset)}
@@ -130,7 +130,7 @@ class SelectionPopoverClass extends Component {
           <span className={iconWrapper}>
             <IosShareIcon />
           </span>
-            Share {/*"shareExcerpt.shareExcerpt.copy*/}
+          Share {/*"shareExcerpt.shareExcerpt.copy*/}
         </button>
       </React.Fragment>
     )
@@ -148,9 +148,15 @@ class SelectionPopoverClass extends Component {
     return (
       <div
         className={popupContainer}
-        style={{ transform: `translate(${Math.round(center)}px, ${Math.round(top + window.scrollY)}px)` }}>
+        style={{
+          transform: `translate(${Math.round(center)}px, ${Math.round(
+            top + window.scrollY
+          )}px)`
+        }}>
         <div
-          className={classNames(overlayBase, popupWrapper, { hideArrow: this.state.share })}
+          className={classNames(overlayBase, popupWrapper, {
+            hideArrow: this.state.share
+          })}
           ref={this.containerRef}>
           {!this.state.share ? this.defaultMenu : this.shareMenu}
         </div>

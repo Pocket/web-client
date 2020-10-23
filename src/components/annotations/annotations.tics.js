@@ -28,7 +28,8 @@ const ticWrapper = css`
   z-index: 100;
   cursor: pointer;
   transition: transform 0 ease-in-out;
-  &, &.loading {
+  &,
+  &.loading {
     transform: translate(-100px, 0);
   }
   &.active {
@@ -53,8 +54,7 @@ const anchorWrapper = css`
 const flyAwayWrapper = css`
   padding: 0 20px;
   position: absolute;
-  transition: transform 150ms ease-in-out,
-    opacity 125ms ease-in-out 0ms;
+  transition: transform 150ms ease-in-out, opacity 125ms ease-in-out 0ms;
   transform: translate(250px, -40px);
   pointer-events: none;
   opacity: 0;
@@ -62,8 +62,7 @@ const flyAwayWrapper = css`
     transform: translate(350px, -40px);
     opacity: 1;
     pointer-events: auto;
-    transition: transform 150ms ease-in-out,
-      opacity 100ms ease-in-out 50ms;
+    transition: transform 150ms ease-in-out, opacity 100ms ease-in-out 50ms;
   }
 `
 
@@ -95,20 +94,27 @@ const floatingCardStyles = css`
   position: relative;
 `
 
-const Card = ({ annotation, active, shareItem, shareData, deleteAnnotation }) => {
+const Card = ({
+  annotation,
+  active,
+  shareItem,
+  shareData,
+  deleteAnnotation
+}) => {
   return annotation ? (
     <CardPositioning
       show
-      onClick={e => e.stopPropagation()}
+      onClick={(e) => e.stopPropagation()}
       key={annotation.annotation_id}
-      addedStyles={floatingCardStyles}> {/*activeCardStyles, */}
+      addedStyles={floatingCardStyles}>
+      {' '}
+      {/*activeCardStyles, */}
       <Quote
         // aria-label={translate('annotations.scrollTo')}
         onClick={() => onClickEvent(annotation.position)}>
         {annotation.quote}
       </Quote>
       <CreatedDate>{annotation.created_at}</CreatedDate>
-
       <div className={menuWrapper}>
         <AnnotationMenu
           visible
@@ -116,7 +122,8 @@ const Card = ({ annotation, active, shareItem, shareData, deleteAnnotation }) =>
           shareItem={shareItem}
           shareData={shareData}
           quote={annotation.quote}
-          deleteAnnotation={deleteAnnotation} />
+          deleteAnnotation={deleteAnnotation}
+        />
       </div>
     </CardPositioning>
   ) : null
@@ -139,7 +146,7 @@ const HighlightIndex = ({
   useEffect(() => {
     setLoading(false)
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer)
   }, [])
 
   const itemHoverOn = () => {
@@ -160,7 +167,7 @@ const HighlightIndex = ({
     }
   }
 
-  const onItemClick = e => {
+  const onItemClick = (e) => {
     e.stopPropagation()
     onClickEvent(annotation.position)
   }
@@ -178,7 +185,7 @@ const HighlightIndex = ({
       className={classNames(ticWrapper, className)}
       style={{ top }}>
       <div className={anchorWrapper}>
-        <div className={classNames(flyAwayWrapper, { 'show': hoverOpen })}>
+        <div className={classNames(flyAwayWrapper, { show: hoverOpen })}>
           <Card
             annotation={annotation}
             // active={onScreen}
@@ -187,7 +194,7 @@ const HighlightIndex = ({
             deleteAnnotation={deleteAnnotation}
           />
         </div>
-        { children }
+        {children}
       </div>
     </div>
   )
@@ -205,8 +212,13 @@ export const TicList = ({
     let body = document.body
     let html = document.documentElement
 
-    const docHeight = Math.max(body.scrollHeight, body.offsetHeight,
-        html.clientHeight, html.scrollHeight, html.offsetHeight)
+    const docHeight = Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight
+    )
 
     const screenHeight =
       Math.max(document.documentElement.clientHeight, window.innerHeight || 0) -
@@ -238,8 +250,6 @@ export const TicList = ({
   }
 
   return annotations ? (
-    <div className={classNames(ticTray, { visible })}>
-      { renderTics() }
-    </div>
+    <div className={classNames(ticTray, { visible })}>{renderTics()}</div>
   ) : null
 }

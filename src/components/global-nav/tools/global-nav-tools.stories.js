@@ -1,16 +1,11 @@
 import React from 'react'
 
 import GlobalNavTools from './global-nav-tools'
-import {
-  SearchIcon,
-  AddIcon,
-  EditIcon,
-  NotificationIcon,
-} from '@pocket/web-ui'
+import { SearchIcon, AddIcon, EditIcon, NotificationIcon } from '@pocket/web-ui'
 
 export default {
   title: 'Components/GlobalNav/GlobalNavTools',
-  component: GlobalNavTools,
+  component: GlobalNavTools
   // NOTE: not using knobs because including a React component within a prop
   // decorated with a knob results in recursion
 }
@@ -24,8 +19,8 @@ export const standard = () => (
       {
         name: 'notifications',
         label: 'View Activity',
-        icon: <NotificationIcon />,
-      },
+        icon: <NotificationIcon />
+      }
     ]}
   />
 )

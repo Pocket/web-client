@@ -2,32 +2,27 @@ import React from 'react'
 import { boolean, text } from '@storybook/addon-knobs'
 import defineKnobs from 'helpers/define-knobs'
 
-import {
-  SearchIcon,
-  AddIcon,
-  EditIcon,
-  NotificationIcon,
-} from '@pocket/web-ui'
+import { SearchIcon, AddIcon, EditIcon, NotificationIcon } from '@pocket/web-ui'
 import GlobalNav from './global-nav'
 
 const globalNavKnobs = defineKnobs((props) => {
   return {
     isLoggedIn: boolean('isLoggedIn', props.isLoggedIn),
     isPremium: boolean('isPremium', props.isPremium),
-    avatarSrc: text('avatarSrc', props.avatarSrc),
+    avatarSrc: text('avatarSrc', props.avatarSrc)
   }
 })
 
 export default {
   title: 'Components/GlobalNav/GlobalNav',
   component: GlobalNav,
-  decorators: [globalNavKnobs],
+  decorators: [globalNavKnobs]
 }
 
 const baseProps = {
   selectedLink: 'discover',
   appRootSelector: '#root',
-  accountName: 'Fluffers',
+  accountName: 'Fluffers'
 }
 
 export const standard = () => <GlobalNav {...baseProps} />
@@ -52,8 +47,8 @@ export const withTools = () => (
       {
         name: 'notifications',
         label: 'View Activity',
-        icon: <NotificationIcon />,
-      },
+        icon: <NotificationIcon />
+      }
     ]}
   />
 )

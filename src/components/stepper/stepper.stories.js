@@ -35,11 +35,7 @@ export const normal = () => {
           data-tooltip="size button">
           <RemoveIcon />
         </StepperButton>
-        <StepperRange
-          current={current}
-          range={range}
-          onChange={setCurrent}
-        />
+        <StepperRange current={current} range={range} onChange={setCurrent} />
         <StepperButton
           active={plusActive()}
           onClick={clickIncrease}

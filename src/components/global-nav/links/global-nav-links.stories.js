@@ -6,14 +6,14 @@ import GlobalNavLinks from './global-nav-links'
 const globalNavLinksKnobs = defineKnobs((props) => {
   return {
     links: object('links', props.links),
-    selectedLink: text('selectedLink', props.selectedLink || 'discover'),
+    selectedLink: text('selectedLink', props.selectedLink || 'discover')
   }
 })
 
 export default {
   title: 'Components/GlobalNav/GlobalNavLinks',
   component: GlobalNavLinks,
-  decorators: [globalNavLinksKnobs],
+  decorators: [globalNavLinksKnobs]
 }
 
 export const standard = () => <GlobalNavLinks />

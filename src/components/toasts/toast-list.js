@@ -25,15 +25,15 @@ export class ToastList extends Component {
   getToastMessage(action, count) {
     switch (action) {
       case ITEMS_ADD_SUCCESS: {
-        return "Saved to Pocket" //"toasts.addUrl"
+        return 'Saved to Pocket' //"toasts.addUrl"
       }
 
       case ITEMS_ADD_FAILURE: {
-        return "Unable to Save" //"toasts.addUrlFailed"
+        return 'Unable to Save' //"toasts.addUrlFailed"
       }
 
       case ITEMS_ARCHIVE_SUCCESS: {
-        return "Archived" //"toasts.archive"
+        return 'Archived' //"toasts.archive"
       }
 
       // case API_ACTION_READD: {
@@ -41,14 +41,14 @@ export class ToastList extends Component {
       // }
 
       case ITEMS_DELETE_SUCCESS: {
-        return "Deleted" //"toasts.delete"
+        return 'Deleted' //"toasts.delete"
       }
 
       case ITEMS_TAG_SUCCESS: {
         if (count > 1) {
-          return "Tag updated" //"toasts.tagAdded"
+          return 'Tag updated' //"toasts.tagAdded"
         }
-        return "Tags updated" //"toasts.tagsAdded"
+        return 'Tags updated' //"toasts.tagsAdded"
       }
 
       // case API_ACTION_SHARE: {
@@ -60,7 +60,7 @@ export class ToastList extends Component {
       // }
 
       case TOAST_ITEM_NOT_IN_LIST: {
-        return "This item cannot be found in your list" //"toasts.notInList"
+        return 'This item cannot be found in your list' //"toasts.notInList"
       }
 
       default:
@@ -91,7 +91,7 @@ export class ToastList extends Component {
       <div className={toastContainer}>
         {Object.keys(list)
           .reverse()
-          .map(key => this.buildToast(list, key))}
+          .map((key) => this.buildToast(list, key))}
       </div>
     )
   }

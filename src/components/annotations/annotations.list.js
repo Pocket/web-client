@@ -61,24 +61,30 @@ const headingStyles = css`
   font-size: 16px;
   line-height: 22px;
   font-weight: 500;
-  padding: 25px 25px 2px ;
+  padding: 25px 25px 2px;
   margin-bottom: 0;
 `
 
 export class QuoteList extends Component {
   renderCards = () => {
-    const { annotations, onClickEvent, shareItem, shareData, deleteAnnotation } = this.props
+    const {
+      annotations,
+      onClickEvent,
+      shareItem,
+      shareData,
+      deleteAnnotation
+    } = this.props
     const cards = []
 
     annotations
       .sort((a, b) => a.position - b.position)
-      .forEach(annot => {
+      .forEach((annot) => {
         // const active = annot.coordY > viewPort.top && annot.coordY < viewPort.bottom
         const active = false
 
         cards.push(
           <div
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
             key={annot.annotation_id}
             className={classNames(cardStyles, activeCardStyles, { active })}>
             <Quote
@@ -96,7 +102,8 @@ export class QuoteList extends Component {
                 shareItem={shareItem}
                 shareData={shareData}
                 deleteAnnotation={deleteAnnotation}
-                quote={annot.quote}  />
+                quote={annot.quote}
+              />
             </div>
           </div>
         )
@@ -106,14 +113,12 @@ export class QuoteList extends Component {
       cards.push(
         <div>LIMIT!!!</div>
         // <LimitNotice
-          // key='notice'
-          // trackClick={this.props.trackClick} />
+        // key='notice'
+        // trackClick={this.props.trackClick} />
       )
     }
 
-    return cards.length > 0
-      ? cards
-      : <EmptyList />
+    return cards.length > 0 ? cards : <EmptyList />
   }
 
   render() {

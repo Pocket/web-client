@@ -10,10 +10,10 @@ const baseProps = {
     {
       name: 'cheeses',
       label: 'Cheeses',
-      url: 'https://cheese.com',
+      url: 'https://cheese.com'
     },
-    { name: 'chocolates', label: 'Chocolates', url: 'https://frans.com' },
-  ],
+    { name: 'chocolates', label: 'Chocolates', url: 'https://frans.com' }
+  ]
 }
 
 describe('GlobalNavLinks', () => {

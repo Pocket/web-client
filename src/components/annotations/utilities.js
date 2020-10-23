@@ -1,18 +1,18 @@
 import DiffMatchPatch from 'diff-match-patch'
 
-      // bright: var(--color-amber)
-      // preview: rgb(255, 210, 94, 0.4),
-      // active: rgb(252, 182, 67, 0.3),
-      // border: var(--color-popoverCanvas),
-      // borderActive: var(--color-popoverBorder),
-      // gutter: var(--color-dividerTertiary),
-      // gutterActive: var(--color-drawerCanvas),
-      // metaColor: var(--color-grey55)
+// bright: var(--color-amber)
+// preview: rgb(255, 210, 94, 0.4),
+// active: rgb(252, 182, 67, 0.3),
+// border: var(--color-popoverCanvas),
+// borderActive: var(--color-popoverBorder),
+// gutter: var(--color-dividerTertiary),
+// gutterActive: var(--color-drawerCanvas),
+// metaColor: var(--color-grey55)
 
 export function compileAnnotations(highlightList) {
   const listWithPosition = []
 
-  highlightList.forEach(item => {
+  highlightList.forEach((item) => {
     const el = document.querySelector(`[annotation_id="${item.annotation_id}"]`)
     listWithPosition.push({
       ...item,
@@ -30,10 +30,13 @@ export function compileAnnotations(highlightList) {
  * @return {RegExp}      [description]
  */
 function highlightRegex(text) {
-  return new RegExp(text.replace(/[.*+?|()[\]{}\\$^]/g,'\\$&').replace(/\s+/g,'\\s+'),'ig')
+  return new RegExp(
+    text.replace(/[.*+?|()[\]{}\\$^]/g, '\\$&').replace(/\s+/g, '\\s+'),
+    'ig'
+  )
 }
 
-export function highlightAnnotation (annotation, onHover, element, callback) {
+export function highlightAnnotation(annotation, onHover, element, callback) {
   highlight(element, 'highlight', annotation, onHover, callback)
 }
 
@@ -76,14 +79,15 @@ function highlight(node, className, annotation, tapListener, callback) {
 
   // initialize root loop
   let indices = [],
-      text = [], // will be morphed into a string later
-      iNode = 0,
-      nNodes = node.childNodes.length,
-      nodeText,
-      textLength = 0,
-      stack = [],
-      child, nChildren,
-      state
+    text = [], // will be morphed into a string later
+    iNode = 0,
+    nNodes = node.childNodes.length,
+    nodeText,
+    textLength = 0,
+    stack = [],
+    child,
+    nChildren,
+    state
 
   // collect text and index-node pairs
   for (;;) {
@@ -104,7 +108,11 @@ function highlight(node, className, annotation, tapListener, callback) {
           continue
         }
         // add extra space for tags which fall naturally on word boundaries
-        if (child.tagName.search(/^(a|b|basefont|bdo|big|em|font|i|s|small|span|strike|strong|su[bp]|tt|u)$/i) < 0) {
+        if (
+          child.tagName.search(
+            /^(a|b|basefont|bdo|big|em|font|i|s|small|span|strike|strong|su[bp]|tt|u)$/i
+          ) < 0
+        ) {
           text.push(' ')
           textLength++
         }
@@ -140,28 +148,46 @@ function highlight(node, className, annotation, tapListener, callback) {
   indices.push({ i: text.length })
 
   // find and hilight all matches
-  let iMatch, matchingText, which,
-      iTextStart, iTextEnd,
-      i, iLeft, iRight,
-      iEntry, entry,
-      parentNode, nextNode, newNode,
-      iNodeTextStart, iNodeTextEnd,
-      textStart, textMiddle, textEnd
+  let iMatch,
+    matchingText,
+    which,
+    iTextStart,
+    iTextEnd,
+    i,
+    iLeft,
+    iRight,
+    iEntry,
+    entry,
+    parentNode,
+    nextNode,
+    newNode,
+    iNodeTextStart,
+    iNodeTextEnd,
+    textStart,
+    textMiddle,
+    textEnd
 
   if (annotation.version === 2 || annotation.version === '2') {
-    let pktTagRegex = new RegExp('<pkt_tag_annotation>([\\s\\S]*)</pkt_tag_annotation>')
+    let pktTagRegex = new RegExp(
+      '<pkt_tag_annotation>([\\s\\S]*)</pkt_tag_annotation>'
+    )
     which = 1 // Highlight only the part inside parens (in regex-speak: the first group).
     // Use diff-match-patch library.
     const dmp = new DiffMatchPatch()
-    let patchResult = dmp.patch_apply(dmp.patch_fromText(annotation.patch), text)
+    let patchResult = dmp.patch_apply(
+      dmp.patch_fromText(annotation.patch),
+      text
+    )
     if (patchResult[1][0]) {
       matchingText = pktTagRegex.exec(patchResult[0])
-    }
-    else {
+    } else {
       // deeper search
       dmp.Match_Distance = 3000
       dmp.Match_Threshold = 0.5
-      let secondPatchResult = dmp.patch_apply(dmp.patch_fromText(annotation.patch), text)
+      let secondPatchResult = dmp.patch_apply(
+        dmp.patch_fromText(annotation.patch),
+        text
+      )
       if (secondPatchResult[1][0]) {
         matchingText = pktTagRegex.exec(secondPatchResult[0])
       }
@@ -170,7 +196,7 @@ function highlight(node, className, annotation, tapListener, callback) {
 
   if (!matchingText) {
     // Fallback on a regex matching the quote text exactly.
-    matchingText = highlightRegex(annotation.quote).exec(text);
+    matchingText = highlightRegex(annotation.quote).exec(text)
     which = 0 // Highlight the entire match.
     if (!matchingText) {
       return
@@ -189,14 +215,12 @@ function highlight(node, className, annotation, tapListener, callback) {
   iLeft = 0
   iRight = indices.length
   while (iLeft < iRight) {
-    i = iLeft + iRight >> 1
+    i = (iLeft + iRight) >> 1
     if (iTextStart < indices[i].i) {
       iRight = i
-    }
-    else if (iTextStart >= indices[i+1].i) {
+    } else if (iTextStart >= indices[i + 1].i) {
       iLeft = i + 1
-    }
-    else {
+    } else {
       iLeft = iRight = i
     }
   }
@@ -213,16 +237,16 @@ function highlight(node, className, annotation, tapListener, callback) {
     parentNode = node.parentNode
     nextNode = node.nextSibling
     iNodeTextStart = iTextStart - entry.i
-    iNodeTextEnd = Math.min(iTextEnd,indices[iEntry+1].i) - entry.i
+    iNodeTextEnd = Math.min(iTextEnd, indices[iEntry + 1].i) - entry.i
 
     // slice of text before hilighted slice
     textStart = null
-    if (iNodeTextStart > 0){
-      textStart = nodeText.substring(0,iNodeTextStart)
+    if (iNodeTextStart > 0) {
+      textStart = nodeText.substring(0, iNodeTextStart)
     }
 
     // hilighted slice
-    textMiddle = nodeText.substring(iNodeTextStart,iNodeTextEnd)
+    textMiddle = nodeText.substring(iNodeTextStart, iNodeTextEnd)
 
     // slice of text after hilighted slice
     textEnd = null
@@ -233,8 +257,7 @@ function highlight(node, className, annotation, tapListener, callback) {
     // update DOM according to found slices of text
     if (textStart) {
       node.nodeValue = textStart
-    }
-    else {
+    } else {
       parentNode.removeChild(node)
     }
     newNode = doc.createElement('span')
@@ -242,7 +265,7 @@ function highlight(node, className, annotation, tapListener, callback) {
 
     newNode.appendChild(doc.createTextNode(textMiddle))
     newNode.className = className
-    parentNode.insertBefore(newNode,nextNode)
+    parentNode.insertBefore(newNode, nextNode)
 
     if (typeof tapListener !== 'undefined') {
       try {
@@ -257,7 +280,7 @@ function highlight(node, className, annotation, tapListener, callback) {
     // return;
     if (textEnd) {
       newNode = doc.createTextNode(textEnd)
-      parentNode.insertBefore(newNode,nextNode)
+      parentNode.insertBefore(newNode, nextNode)
       indices[iEntry] = { n: newNode, i: iTextEnd } // important: make a copy, do not overwrite
     }
 
@@ -271,22 +294,24 @@ function highlight(node, className, annotation, tapListener, callback) {
 }
 
 /**
-* Remove all tags where added to the dom while highlighting
-* @param  {Mixed}  element   Element where to remove the tags
-* @param  {string} className The class name of the elments to remove
-* @return {Boolean}          Boolean that describes if remove was successfull
-*/
+ * Remove all tags where added to the dom while highlighting
+ * @param  {Mixed}  element   Element where to remove the tags
+ * @param  {string} className The class name of the elments to remove
+ * @return {Boolean}          Boolean that describes if remove was successfull
+ */
 export function removeHighlight(element, className) {
   // No element given just bail out
-  if (!element) { return false }
+  if (!element) {
+    return false
+  }
 
   // Go through all elements recusively and remove all tags with the
   // given className
   if (element.nodeType === 1) {
-    if (element.getAttribute("class") === className) {
+    if (element.getAttribute('class') === className) {
       let text = element.removeChild(element.firstChild)
-          element.parentNode.insertBefore(text,element)
-          element.parentNode.removeChild(element)
+      element.parentNode.insertBefore(text, element)
+      element.parentNode.removeChild(element)
       return true
     }
 
@@ -324,7 +349,12 @@ export function requestAnnotationPatch(sel) {
   after.setEnd(wholeThing.endContainer, wholeThing.endOffset)
 
   let originalText = before.toString() + selection.toString() + after.toString()
-  let modifiedText = before.toString() + "<pkt_tag_annotation>" + selection.toString() + "</pkt_tag_annotation>" + after.toString()
+  let modifiedText =
+    before.toString() +
+    '<pkt_tag_annotation>' +
+    selection.toString() +
+    '</pkt_tag_annotation>' +
+    after.toString()
 
   let dmp = new DiffMatchPatch()
   return dmp.patch_toText(dmp.patch_make(originalText, modifiedText))

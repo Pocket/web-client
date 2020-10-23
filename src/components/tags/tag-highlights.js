@@ -5,13 +5,13 @@ import { tagBase } from './tags'
 import classNames from 'classnames'
 
 const highlightWrapper = css`
-  background-color: #FFF8EC;
+  background-color: #fff8ec;
   svg {
-    color: #FFC25E;
+    color: #ffc25e;
     padding-right: 4px;
   }
   span {
-    color: #976D28;
+    color: #976d28;
   }
 `
 export function HighlightsTag({ count, margin }) {

@@ -42,7 +42,7 @@ function TopicList({ topics, showTopBorder }) {
       className={classnames(topicList, {
         'visible-top-border': showTopBorder
       })}>
-      {topics.map(topic => (
+      {topics.map((topic) => (
         <li key={`topic-list-${topic}`}>{topic}</li>
       ))}
     </ul>

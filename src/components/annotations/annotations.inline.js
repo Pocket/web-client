@@ -1,6 +1,5 @@
 import { AnnotationMenu } from 'components/annotations/annotations.menu'
 
-
 export const HighlightInlineMenu = ({
   isPremium,
   highlightList = [],
@@ -11,8 +10,10 @@ export const HighlightInlineMenu = ({
 }) => {
   const inlineMenus = []
 
-  highlightList.forEach(highlight => {
-    const el = document.querySelector(`[annotation_id="${highlight.annotation_id}"]`)
+  highlightList.forEach((highlight) => {
+    const el = document.querySelector(
+      `[annotation_id="${highlight.annotation_id}"]`
+    )
 
     if (el) {
       const { x, y } = el.getBoundingClientRect()

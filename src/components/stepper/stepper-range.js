@@ -40,8 +40,11 @@ const rangeStepperWrapper = css`
       transform: translate(-50%, -50%);
       display: none;
     }
-    &:hover, &.current {
-      &:after { display: block; }
+    &:hover,
+    &.current {
+      &:after {
+        display: block;
+      }
     }
   }
 `
@@ -55,7 +58,7 @@ export const StepperRange = ({ range = [], current = 0, onChange }) => {
   return (
     <div
       className={rangeStepperWrapper}
-      style={{ gridTemplateColumns: `repeat(${range.length}, 18px)`}}
+      style={{ gridTemplateColumns: `repeat(${range.length}, 18px)` }}
       current={current}
       lastindex={range.length - 1}>
       {range.map((step, index) => (

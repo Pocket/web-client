@@ -28,20 +28,20 @@ export const getRecentFriends = () => {
   return request({
     path: 'v3/get',
     data: {
-      "images":1,
-      "videos":1,
-      "tags":1,
-      "rediscovery":1,
-      "annotations":1,
-      "authors":1,
-      "itemTopics":1,
-      "meta":1,
-      "posts":1,
-      "total":1,
-      "state":"all",
-      "shares":"recent_friends",
-      "count":1,
-      "locale_lang":"en-US"
+      images: 1,
+      videos: 1,
+      tags: 1,
+      rediscovery: 1,
+      annotations: 1,
+      authors: 1,
+      itemTopics: 1,
+      meta: 1,
+      posts: 1,
+      total: 1,
+      state: 'all',
+      shares: 'recent_friends',
+      count: 1,
+      locale_lang: 'en-US'
     }
   })
 }

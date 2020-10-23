@@ -7,14 +7,14 @@ const avatarKnobs = defineKnobs((props) => {
   return {
     src: text('src', props.src),
     size: text('size', props.size),
-    label: text('label', props.label),
+    label: text('label', props.label)
   }
 })
 
 export default {
   title: 'Components/Avatar/AvatarButton',
   component: AvatarButton,
-  decorators: [avatarKnobs],
+  decorators: [avatarKnobs]
 }
 
 export const defaultAvatar = () => (

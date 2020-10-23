@@ -10,4 +10,6 @@ export const divideVertical = () => <DivideVertical />
 
 export const divideHorizontal = () => <DivideHorizontal />
 
-export const divideHorizontalMargin = () => <DivideHorizontal margin='20px 100px' />
+export const divideHorizontalMargin = () => (
+  <DivideHorizontal margin="20px 100px" />
+)

@@ -2,7 +2,7 @@ import { css } from 'linaria'
 import { getImageCacheUrl } from 'common/utilities'
 
 const rowWrapper = css`
-  font-family: "Graphik Web";
+  font-family: 'Graphik Web';
   padding: 0 1em;
   display: grid;
   grid-template-columns: 24px auto;
@@ -50,7 +50,9 @@ class FriendItem extends React.Component {
         <div
           className={friendThumbnail}
           data-test={getImageCacheUrl(friend.avatar_url)}
-          style={{ backgroundImage: `url('${getImageCacheUrl(friend.avatar_url)}')`}}
+          style={{
+            backgroundImage: `url('${getImageCacheUrl(friend.avatar_url)}')`
+          }}
         />
         <div className={friendName}>
           <p>{friend.name}</p>

@@ -9,23 +9,25 @@ import { ItemHeader } from 'components/reader/header'
 import { Content } from 'components/reader/content'
 import { SelectionPopover } from 'components/popover/popover-selection'
 import { Sidebar } from 'components/reader/sidebar'
-import { compileAnnotations, requestAnnotationPatch } from 'components/annotations/utilities'
+import {
+  compileAnnotations,
+  requestAnnotationPatch
+} from 'components/annotations/utilities'
 import { Fonts, FONT_TYPES } from 'components/fonts/fonts'
 import { TagModal } from 'components/tagging/tag.modal'
 import { DeleteModal } from 'components/delete/delete.modal'
 import { SendToFriend } from 'components/share-sheet/share-sheet'
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
-import {
-  itemDataRequested,
-  saveAnnotation,
-} from './read.state'
+import { itemDataRequested, saveAnnotation } from './read.state'
 
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
-export const LINE_HEIGHT_RANGE = [1.2,1.3,1.4,1.5,1.65,1.9,2.5]
+export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
 export const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
 
 const articleWrapper = css`
-  p { font-size: unset !important; }
+  p {
+    font-size: unset !important;
+  }
 
   display: flex;
   flex-direction: row;
@@ -73,7 +75,9 @@ export default function Read({ appRootSelector, itemId }) {
   const fontSize = useSelector((state) => state.reader.fontSize)
   const fontFamily = useSelector((state) => state.reader.fontFamily)
   const recentFriends = useSelector((state) => state.reader.recentFriends)
-  const autoCompleteEmails = useSelector((state) => state.reader.autoCompleteEmails)
+  const autoCompleteEmails = useSelector(
+    (state) => state.reader.autoCompleteEmails
+  )
   // const tagLibrary = useSelector((state) => state.reader.tagLibrary)
 
   const [sideBarOpen, setSideBar] = useState(false)
@@ -152,7 +156,8 @@ export default function Read({ appRootSelector, itemId }) {
   const toggleSidebar = () => setSideBar(!sideBarOpen)
   const toggleTagging = () => setTaggingModal(!taggingModalOpen)
   const toggleDelete = () => setDeleteModal(!deleteModalOpen)
-  const toggleShare = ({ destination, quote }) => setSendModal({ destination, quote })
+  const toggleShare = ({ destination, quote }) =>
+    setSendModal({ destination, quote })
 
   const toggleHighlight = () => {
     const selection = window.getSelection()
@@ -185,11 +190,13 @@ export default function Read({ appRootSelector, itemId }) {
   }
 
   const addAnnotation = () => {
-    dispatch(saveAnnotation({
-      item_id,
-      patch: requestAnnotationPatch(highlight),
-      quote: highlight.toString()
-    }))
+    dispatch(
+      saveAnnotation({
+        item_id,
+        patch: requestAnnotationPatch(highlight),
+        quote: highlight.toString()
+      })
+    )
   }
 
   const deleteItem = () => {
@@ -203,8 +210,7 @@ export default function Read({ appRootSelector, itemId }) {
   const toggleFavorite = () => {
     if (favStatus) {
       // dispatch(favoriteListItem({ item_id }))
-    }
-    else {
+    } else {
       // dispatch(unFavoriteListItem({ item_id }))
     }
   }
@@ -233,15 +239,16 @@ export default function Read({ appRootSelector, itemId }) {
             // deleteAnnotation={deleteAnnotation}
           />
         </aside>
-        <article className={classNames(Fonts, "reader")} style={customStyles}>
+        <article className={classNames(Fonts, 'reader')} style={customStyles}>
           <ItemHeader {...headerData} />
           {articleContent ? (
             <Content
               {...contentData}
               onMouseUp={toggleHighlight}
               onHighlightHover={toggleHighlightHover}
-              annotationsBuilt={buildAnnotations} />
-          ) : null }
+              annotationsBuilt={buildAnnotations}
+            />
+          ) : null}
           {highlight ? (
             <SelectionPopover
               anchor={highlight}
@@ -250,7 +257,7 @@ export default function Read({ appRootSelector, itemId }) {
               shareItem={toggleShare}
               shareData={shareData}
             />
-          ) : null }
+          ) : null}
           {highlightList ? (
             <HighlightInlineMenu
               highlightList={highlightList}
@@ -260,14 +267,15 @@ export default function Read({ appRootSelector, itemId }) {
               isPremium={isPremium}
               // deleteAnnotation={deleteAnnotation}
             />
-          ) : null }
+          ) : null}
         </article>
       </main>
       <DeleteModal
         isOpen={deleteModalOpen}
         setModalOpen={setDeleteModal}
         appRootSelector={appRootSelector}
-        deleteItem={deleteItem} />
+        deleteItem={deleteItem}
+      />
       <TagModal
         isPremium={isPremium}
         isOpen={taggingModalOpen}
@@ -275,7 +283,8 @@ export default function Read({ appRootSelector, itemId }) {
         appRootSelector={appRootSelector}
         currentTags={tagList}
         typeahead={[]}
-        suggestedTags={suggestedTags} />
+        suggestedTags={suggestedTags}
+      />
       <SendToFriend
         {...shareData}
         domain={domainForUrl(resolved_url)}
@@ -285,7 +294,8 @@ export default function Read({ appRootSelector, itemId }) {
         setModalOpen={setSendModal}
         appRootSelector={appRootSelector}
         thumbnail={top_image_url}
-        recommend={sendModalOpen.destination} />
+        recommend={sendModalOpen.destination}
+      />
     </>
   )
 }

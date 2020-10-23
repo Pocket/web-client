@@ -1,6 +1,9 @@
 import {
-  PopupMenuGroup, PopupMenuItem,
-  CheckCircledIcon, ChevronLeftIcon, PremiumIcon
+  PopupMenuGroup,
+  PopupMenuItem,
+  CheckCircledIcon,
+  ChevronLeftIcon,
+  PremiumIcon
 } from '@pocket/web-ui'
 import { css } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
@@ -21,14 +24,10 @@ const fontFamilyButton = css`
   }
 `
 
-export const FontSettings = ({
-  updateFontFamily,
-  currentFont,
-  isPremium
-}) => {
+export const FontSettings = ({ updateFontFamily, currentFont, isPremium }) => {
   return (
     <PopupMenuGroup>
-      {Object.keys(FONT_TYPES).map(font => {
+      {Object.keys(FONT_TYPES).map((font) => {
         const showPremium = FONT_TYPES[font].premium && !isPremium
         const isActive = currentFont === font
         const click = () => updateFontFamily(font)
@@ -40,23 +39,17 @@ export const FontSettings = ({
             icon={showPremium ? <PremiumIcon /> : null}
             onClick={click}
             aria-label={FONT_TYPES[font].name}>
-              <svg
-                style={{
-                  display: 'inline-block',
-                  position: 'relative',
-                  fill: 'currentColor',
-                  height: '24px',
-                  width: '120px'
-                }}>
-                <use
-                  href={`${FontSVG}#${
-                    FONT_TYPES[font].selector
-                  }`}
-                />
-              </svg>
-            {isActive ? (
-              <CheckCircledIcon />
-            ) : null}
+            <svg
+              style={{
+                display: 'inline-block',
+                position: 'relative',
+                fill: 'currentColor',
+                height: '24px',
+                width: '120px'
+              }}>
+              <use href={`${FontSVG}#${FONT_TYPES[font].selector}`} />
+            </svg>
+            {isActive ? <CheckCircledIcon /> : null}
           </PopupMenuItem>
         )
       })}

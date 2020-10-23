@@ -2,7 +2,7 @@ import React from 'react'
 import { Tag } from 'components/tags/tags'
 
 export const TagList = ({ tags, activeTags, selectClick, removeClick }) => {
-  return tags.map(tag => {
+  return tags.map((tag) => {
     const isActive = activeTags?.includes(tag)
     return (
       <Tag

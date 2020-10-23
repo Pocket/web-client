@@ -2,7 +2,12 @@ import { openWindow } from 'common/utilities'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tooltipBase } from 'components/tooltip/tooltip'
 
-export const BufferShareButton = ({ url, text, onShareWindowClose, children }) => {
+export const BufferShareButton = ({
+  url,
+  text,
+  onShareWindowClose,
+  children
+}) => {
   const prepareWindow = (url, quote, callback) => {
     const opts = {
       name: 'buffer',
@@ -16,16 +21,14 @@ export const BufferShareButton = ({ url, text, onShareWindowClose, children }) =
     openWindow(link, opts, callback)
   }
 
-  const clickHandler = e => {
+  const clickHandler = (e) => {
     e.preventDefault()
     prepareWindow(url, text, onShareWindowClose)
   }
 
   return (
-    <button
-      aria-label="Buffer"
-      onClick={clickHandler}>
-      { children }
+    <button aria-label="Buffer" onClick={clickHandler}>
+      {children}
     </button>
   )
 }

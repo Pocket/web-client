@@ -84,16 +84,22 @@ describe('SocialMetaData', () => {
   it('displays default og:type element when type not included as a prop', () => {
     const mockMetaData = Object.assign({}, mockMetaContentData)
     const socialMetaTags = shallow(<SocialMetaData {...mockMetaData} />)
-    const typeTag = socialMetaTags.find(testIdSelector('og-type')).prop('content')
+    const typeTag = socialMetaTags
+      .find(testIdSelector('og-type'))
+      .prop('content')
 
-    assert(typeTag === "website")
+    assert(typeTag === 'website')
   })
 
   it('updates og:type element when including type prop', () => {
     const customTypeTag = 'gorgonzola'
     const mockMetaData = Object.assign({}, mockMetaContentData)
-    const socialMetaTags = shallow(<SocialMetaData {...mockMetaData} type={customTypeTag} />)
-    const typeTag = socialMetaTags.find(testIdSelector('og-type')).prop('content')
+    const socialMetaTags = shallow(
+      <SocialMetaData {...mockMetaData} type={customTypeTag} />
+    )
+    const typeTag = socialMetaTags
+      .find(testIdSelector('og-type'))
+      .prop('content')
 
     assert(typeTag === customTypeTag)
   })

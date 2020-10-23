@@ -14,7 +14,8 @@ const topicsLinkStyles = css`
     color: var(--color-actionPrimary);
     font-weight: 500;
 
-    &:hover, &:active {
+    &:hover,
+    &:active {
       color: var(--color-actionPrimaryHover);
     }
   }
@@ -33,9 +34,9 @@ const topicsLinkStyles = css`
 
 export function TopicsCTA({ topic }) {
   if (!topic) return null
-  const { topic_slug, display_name }  = topic
+  const { topic_slug, display_name } = topic
 
-  return (topic_slug && display_name) ? (
+  return topic_slug && display_name ? (
     <aside className={topicsLinkStyles}>
       Discover more stories in{' '}
       <a href={`/explore/${topic.topic_slug}`}>

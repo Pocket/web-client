@@ -7,7 +7,7 @@ import { loadParsedVideos } from './videos'
 import { contentStyles, highlightStyles } from './styles'
 import {
   highlightAnnotation,
-  removeAllHighlights,
+  removeAllHighlights
   // removeHighlight
 } from 'components/annotations/utilities'
 
@@ -20,7 +20,7 @@ export const Content = ({
   annotations,
   annotationsBuilt,
   onHighlightHover,
- ...args
+  ...args
 }) => {
   const articleRef = useRef(null)
   const [loaded, setLoaded] = useState(false)
@@ -29,18 +29,23 @@ export const Content = ({
     removeAllHighlights()
     let itemsProcessed = 0
     annotations.forEach((highlight, index, array) => {
-      highlightAnnotation(highlight, onHighlightHover, articleRef.current, () => {
-        itemsProcessed++
-        if (itemsProcessed === array.length) {
-          annotationsBuilt()
+      highlightAnnotation(
+        highlight,
+        onHighlightHover,
+        articleRef.current,
+        () => {
+          itemsProcessed++
+          if (itemsProcessed === array.length) {
+            annotationsBuilt()
+          }
         }
-      })
+      )
     })
   }
 
   const externalizeLinks = () => {
     const links = articleRef.current.querySelectorAll('a[href]')
-    links.forEach(link => {
+    links.forEach((link) => {
       link.setAttribute('target', '_blank')
       link.setAttribute('rel', 'noopener noreferrer')
     })
@@ -68,6 +73,7 @@ export const Content = ({
       {...args}
       ref={articleRef}
       className={classNames(contentStyles, highlightStyles)}
-      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }} />
+      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
+    />
   )
 }

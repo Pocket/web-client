@@ -21,7 +21,7 @@ const toastBlock = css`
   font-weight: 500;
   line-height: 22px;
   font-size: 16px;
-  font-family: "Graphik Web";
+  font-family: 'Graphik Web';
   text-align: left;
   padding: 20px;
   border-radius: 4px;
@@ -112,8 +112,10 @@ export class Toast extends Component {
           className={classNames(toastBlock, `${type}`)}
           style={this.state.toastStyle}
           onTransitionEnd={this.transitionEnd}>
-          <div>{ children }</div>
-          <button className={classNames(buttonReset, closeWrapper)} onClick={this.unMountStyle}>
+          <div>{children}</div>
+          <button
+            className={classNames(buttonReset, closeWrapper)}
+            onClick={this.unMountStyle}>
             <CrossIcon />
           </button>
         </div>

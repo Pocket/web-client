@@ -5,16 +5,19 @@ import classNames from 'classnames'
 export const suggestedTag = css`
   cursor: pointer;
   background-color: var(--color-canvas);
-  color: #1EABF9;
-  border: 1px solid #1EABF9;
+  color: #1eabf9;
+  border: 1px solid #1eabf9;
   &:hover {
-    color: #286F96;
+    color: #286f96;
     background-color: var(--color-canvas);
-    border: 1px solid #286F96;
+    border: 1px solid #286f96;
   }
 `
 export const SuggestedTag = ({ children, margin, ...args }) => (
-  <div className={classNames(tagBase, suggestedTag)} style={{ margin }} {...args}>
-    { children }
+  <div
+    className={classNames(tagBase, suggestedTag)}
+    style={{ margin }}
+    {...args}>
+    {children}
   </div>
 )

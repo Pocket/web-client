@@ -86,29 +86,36 @@ const loadWrapper = css`
   }
 
   @keyframes bounce {
-    0%, 70%, 100% {
+    0%,
+    70%,
+    100% {
       transform: translateY(0);
-    } 35% {
+    }
+    35% {
       transform: translateY(-20px);
     }
   }
 
   @keyframes spinTriangle {
-    0%{
+    0% {
       transform: rotate(0deg);
-    } 40% {
+    }
+    40% {
       transform: rotate(120deg);
-    } 100% {
+    }
+    100% {
       transform: rotate(120deg);
     }
   }
 
   @keyframes spinSquare {
-    0%{
+    0% {
       transform: rotate(0deg);
-    } 60% {
+    }
+    60% {
       transform: rotate(90deg);
-    } 100% {
+    }
+    100% {
       transform: rotate(90deg);
     }
   }

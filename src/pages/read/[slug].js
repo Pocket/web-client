@@ -5,7 +5,7 @@ Reader.getInitialProps = async ({ query }) => {
 
   return {
     namespacesRequired: ['common'],
-    appRootSelector: "#__next",
+    appRootSelector: '#__next',
     itemId: slug
   }
 }

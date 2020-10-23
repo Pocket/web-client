@@ -25,16 +25,9 @@ export const normal = () => {
 
   return (
     <div onMouseUp={toggleHighlight}>
-      <Lorem
-        count={4}
-        paragraphLowerBound={8}
-        paragraphUpperBound={20}
-      />
+      <Lorem count={4} paragraphLowerBound={8} paragraphUpperBound={20} />
       {highlight ? (
-        <SelectionPopover
-            anchor={highlight}
-            disablePopup={clearSelection}
-        />
+        <SelectionPopover anchor={highlight} disablePopup={clearSelection} />
       ) : null}
     </div>
   )

@@ -1,10 +1,16 @@
 import { useDispatch } from 'react-redux'
 import { css } from 'linaria'
 import {
-  ArrowLeftIcon, HighlightIcon, IosShareIcon,
-  TagIcon, FavoriteIcon, ArchiveIcon, DeleteIcon,
+  ArrowLeftIcon,
+  HighlightIcon,
+  IosShareIcon,
+  TagIcon,
+  FavoriteIcon,
+  ArchiveIcon,
+  DeleteIcon,
   WithTooltip,
-  breakpointLargeTablet, breakpointMediumHandset
+  breakpointLargeTablet,
+  breakpointMediumHandset
 } from '@pocket/web-ui'
 import { DisplaySettings } from 'components/display-settings/display-settings'
 import { ShareArticle } from './share'
@@ -99,7 +105,8 @@ export const ReaderNav = ({
     <header className={headerStyle}>
       <div className="global-nav-container">
         <nav className={navStyle}>
-          <WithTooltip label="Back to My List">{/*'reader.topNav.back'*/}
+          <WithTooltip label="Back to My List">
+            {/*'reader.topNav.back'*/}
             <button className={classNames(buttonReset, buttonStyles)}>
               <ArrowLeftIcon />
             </button>
@@ -122,7 +129,9 @@ export const ReaderNav = ({
               </button>
             </WithTooltip>
 
-            <WithTooltip label="Favorite Article"> {/*Unfavorite Article*/}
+            <WithTooltip label="Favorite Article">
+              {' '}
+              {/*Unfavorite Article*/}
               <button
                 onClick={toggleFavorite}
                 className={classNames(buttonReset, buttonStyles, { favorite })}>
@@ -149,7 +158,8 @@ export const ReaderNav = ({
             <ShareArticle
               appRootSelector="#__next"
               shareItem={toggleShare}
-              shareData={shareData} />
+              shareData={shareData}
+            />
           </div>
 
           <DisplaySettings
@@ -159,7 +169,8 @@ export const ReaderNav = ({
             setFontSize={setFontSize}
             setLineHeight={setLineHeight}
             setColumnWidth={setColumnWidth}
-            isPremium/>
+            isPremium
+          />
         </nav>
       </div>
     </header>

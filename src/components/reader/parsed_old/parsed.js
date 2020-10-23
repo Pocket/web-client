@@ -62,7 +62,7 @@ export class Parsed extends Component {
 
   externalizeLinks() {
     const links = this.contentNode.querySelectorAll('a[nodeindex]')
-    links.forEach(link => {
+    links.forEach((link) => {
       link.setAttribute('target', '_blank')
       link.setAttribute('rel', 'noopener noreferrer')
     })
@@ -72,15 +72,14 @@ export class Parsed extends Component {
     try {
       if (position && position[1] && list) {
         const top =
-          Object.keys(list).find(key => list[key] === position[1].node_index) ||
-          0
+          Object.keys(list).find(
+            (key) => list[key] === position[1].node_index
+          ) || 0
 
         window.scrollTo(0, top)
       }
     } catch (error) {
-      process.env.NODE_ENV !== 'production'
-        ? console.log(error)
-        : null //Sentry.captureException(error)
+      process.env.NODE_ENV !== 'production' ? console.log(error) : null //Sentry.captureException(error)
     }
   }
 
@@ -147,7 +146,7 @@ export class Parsed extends Component {
         onMouseUp={this.toggleHighlight}>
         <div
           className={contentStyles}
-          ref={node => (this.contentNode = node)}
+          ref={(node) => (this.contentNode = node)}
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item_content) }}
           fontSize={fontSize}
           fontType={fontType}

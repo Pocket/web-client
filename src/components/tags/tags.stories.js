@@ -23,7 +23,9 @@ const marksGrid = css`
 export const tag = () => (
   <div className={marksGrid}>
     <Tag selected>business</Tag>
-    <Tag selected removeClick>business</Tag>
+    <Tag selected removeClick>
+      business
+    </Tag>
     <Tag removeClick>business</Tag>
     <Tag>business</Tag>
   </div>
@@ -45,8 +47,10 @@ export const highlights = () => <HighlightsTag count={3} />
 
 export const allTags = () => (
   <div className={marksGrid}>
-      <Tag selected>business</Tag>
-    <Tag selected removeClick>business</Tag>
+    <Tag selected>business</Tag>
+    <Tag selected removeClick>
+      business
+    </Tag>
     <Tag removeClick>business</Tag>
     <Tag>business</Tag>
     <SuggestedTag>business</SuggestedTag>

@@ -25,10 +25,7 @@ const longPageStyles = css`
 const ProgressBarStory = ({ scrollPercentage, noScroll, loremCount }) => (
   <React.Fragment>
     <div className={navBar}>
-      <ProgressBar
-        percentage={scrollPercentage}
-        noScroll={noScroll}
-      />
+      <ProgressBar percentage={scrollPercentage} noScroll={noScroll} />
     </div>
     <div className={longPageStyles}>
       <Lorem
@@ -47,4 +44,3 @@ export const noScroll = () => <WrappedStory loremCount={22} noScroll />
 export const shortPage = () => <WrappedStory loremCount={7} />
 
 export const longPage = () => <WrappedStory loremCount={22} />
-

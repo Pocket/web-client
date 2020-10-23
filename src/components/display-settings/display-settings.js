@@ -1,7 +1,13 @@
 import React, { useRef, useState } from 'react'
 import {
-  PopupMenu, PopupMenuGroup, PopupMenuItem,
-  TextSizeIcon, ChevronDownIcon, ChevronRightIcon, PremiumIcon, ChevronLeftIcon,
+  PopupMenu,
+  PopupMenuGroup,
+  PopupMenuItem,
+  TextSizeIcon,
+  ChevronDownIcon,
+  ChevronRightIcon,
+  PremiumIcon,
+  ChevronLeftIcon,
   WithTooltip
 } from '@pocket/web-ui'
 import { css } from 'linaria'
@@ -19,7 +25,9 @@ const LINE_HEIGHT = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
 const COLUMN_WIDTH = [531, 574, 632, 718, 826, 933, 1041]
 
 const displayStyles = css`
-  & > span { background: transparent; }
+  & > span {
+    background: transparent;
+  }
 
   #display-settings {
     min-width: 355px;
@@ -116,22 +124,23 @@ export const DisplaySettings = ({
         appRootSelector={appRootSelector}
         popperOptions={{
           placement: 'bottom-end',
-          modifiers: [{
-            name: 'offset',
-            options: {
-              offset: [0, 4],
-            },
-          }]
-        }}
-      >
+          modifiers: [
+            {
+              name: 'offset',
+              options: {
+                offset: [0, 4]
+              }
+            }
+          ]
+        }}>
         <PopupMenuGroup>
-          { displayFonts ? (
+          {displayFonts ? (
             <PopupMenuItem
               onClick={toggleDisplayFonts}
               icon={<ChevronLeftIcon />}>
               Font Options {/*reader.displaySettings.fontOptions*/}
             </PopupMenuItem>
-          ):(
+          ) : (
             <PopupMenuItem
               className={fontFamilyButton}
               onClick={toggleDisplayFonts}>
@@ -140,14 +149,14 @@ export const DisplaySettings = ({
             </PopupMenuItem>
           )}
         </PopupMenuGroup>
-        { displayFonts ? (
+        {displayFonts ? (
           <FontSettings
             closeMenu={toggleDisplayFonts}
             updateFontFamily={updateFontFamily}
             isPremium={isPremium}
             currentFont={fontFamily}
           />
-        ):(
+        ) : (
           <>
             <ThemeSettings />
             <FontSizeSettings
@@ -157,7 +166,7 @@ export const DisplaySettings = ({
               current={fontSize}
               setCurrent={setFontSize}
             />
-            { isPremium ? (
+            {isPremium ? (
               <>
                 <LineHeightSettings
                   clickDecrease={decreaseLineHeight}
@@ -174,7 +183,7 @@ export const DisplaySettings = ({
                   setCurrent={setColumnWidth}
                 />
               </>
-            ):(
+            ) : (
               <PopupMenuGroup>
                 <PopupMenuItem
                   href="https://getpocket.com/premium?ep=3"

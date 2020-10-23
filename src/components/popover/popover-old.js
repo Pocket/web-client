@@ -91,10 +91,21 @@ export class Content extends PureComponent {
   render() {
     return (
       <PopoverContext.Consumer>
-        {({ on, onHover, offHover, onClick, persist, collisionLeft, attachBottom }) => {
+        {({
+          on,
+          onHover,
+          offHover,
+          onClick,
+          persist,
+          collisionLeft,
+          attachBottom
+        }) => {
           return on ? (
             <div
-              className={classNames(popoverContent, { attachBottom, collisionLeft })}
+              className={classNames(popoverContent, {
+                attachBottom,
+                collisionLeft
+              })}
               onMouseOver={onHover}
               onMouseOut={persist ? null : offHover}
               onClick={onClick}
@@ -108,40 +119,64 @@ export class Content extends PureComponent {
   }
 }
 
-export function TooltipContent({ attachBottom, topOffset = 0, leftOffset = 0, children }) {
-    const [contentStyle, setContentStyle] = useState({})
-    const tooltipTriggerRef = useRef()
-    const contentRefCallback = useCallback(node => {
-      if(node && tooltipTriggerRef.current) {
+export function TooltipContent({
+  attachBottom,
+  topOffset = 0,
+  leftOffset = 0,
+  children
+}) {
+  const [contentStyle, setContentStyle] = useState({})
+  const tooltipTriggerRef = useRef()
+  const contentRefCallback = useCallback(
+    (node) => {
+      if (node && tooltipTriggerRef.current) {
         const { scrollWidth } = node
-        const { top, left, height } = tooltipTriggerRef.current.getBoundingClientRect()
+        const {
+          top,
+          left,
+          height
+        } = tooltipTriggerRef.current.getBoundingClientRect()
         setContentStyle({
           top: top + topOffset + height + 10 + 'px',
           left: left + leftOffset,
           width: scrollWidth
         })
       }
-    }, [leftOffset, topOffset])
-    return ReactDOM.createPortal(
-      <PopoverContext.Consumer>
-        {({ triggerRef, on, onHover, offHover, onClick, persist, collisionLeft }) => {
-          tooltipTriggerRef.current = triggerRef.current
-          return on ? (
-            <div
-              ref={contentRefCallback}
-              className={classNames(popoverContent, tooltipBody, 'tooltip', { attachBottom, collisionLeft })}
-              style={contentStyle}
-              onMouseOver={onHover}
-              onMouseOut={persist ? null : offHover}
-              onClick={onClick}
-              data-positioned>
-              {children}
-            </div>
-          ) : null
-        }}
-      </PopoverContext.Consumer>
-    , document.body)
-  }
+    },
+    [leftOffset, topOffset]
+  )
+  return ReactDOM.createPortal(
+    <PopoverContext.Consumer>
+      {({
+        triggerRef,
+        on,
+        onHover,
+        offHover,
+        onClick,
+        persist,
+        collisionLeft
+      }) => {
+        tooltipTriggerRef.current = triggerRef.current
+        return on ? (
+          <div
+            ref={contentRefCallback}
+            className={classNames(popoverContent, tooltipBody, 'tooltip', {
+              attachBottom,
+              collisionLeft
+            })}
+            style={contentStyle}
+            onMouseOver={onHover}
+            onMouseOut={persist ? null : offHover}
+            onClick={onClick}
+            data-positioned>
+            {children}
+          </div>
+        ) : null
+      }}
+    </PopoverContext.Consumer>,
+    document.body
+  )
+}
 
 export class Popover extends PureComponent {
   constructor(props) {
@@ -183,7 +218,7 @@ export class Popover extends PureComponent {
     if (this.props.closeOnClick) this.deActivate()
   }
 
-  isClickOutside = e => {
+  isClickOutside = (e) => {
     const container = this.containerRef.current
     if (container && container.contains(e.target)) return
 

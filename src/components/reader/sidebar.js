@@ -17,7 +17,7 @@ const railWrapper = css`
   &:hover button,
   &.visible,
   &.visible button {
-    opacity: 1
+    opacity: 1;
   }
 `
 
@@ -47,8 +47,6 @@ const buttonStyles = css`
   }
 `
 
-
-
 export const Sidebar = ({
   toggleSidebar,
   sideBarOpen,
@@ -58,26 +56,28 @@ export const Sidebar = ({
   deleteAnnotation
 }) => {
   return (
-  <>
-    <Rail visible={sideBarOpen} clickAction={sideBarOpen ? null : toggleSidebar}>
-      <QuoteList
+    <>
+      <Rail
         visible={sideBarOpen}
-        shareItem={shareItem}
-        annotations={highlightList}
-        shareData={shareData}
-        deleteAnnotation={deleteAnnotation}
-      />
+        clickAction={sideBarOpen ? null : toggleSidebar}>
+        <QuoteList
+          visible={sideBarOpen}
+          shareItem={shareItem}
+          annotations={highlightList}
+          shareData={shareData}
+          deleteAnnotation={deleteAnnotation}
+        />
 
-      <div className={classNames(railWrapper, { visible: sideBarOpen })}>
-        <div className={verticallyCentered}>
-          <button
-            onClick={toggleSidebar}
-            className={classNames(buttonReset, buttonStyles)}>
-            { sideBarOpen ? <ChevronLeftIcon /> : <ChevronRightIcon /> }
-          </button>
+        <div className={classNames(railWrapper, { visible: sideBarOpen })}>
+          <div className={verticallyCentered}>
+            <button
+              onClick={toggleSidebar}
+              className={classNames(buttonReset, buttonStyles)}>
+              {sideBarOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </button>
+          </div>
         </div>
-      </div>
-    </Rail>
+      </Rail>
       <TicList
         visible={!sideBarOpen}
         shareItem={shareItem}
@@ -85,6 +85,6 @@ export const Sidebar = ({
         shareData={shareData}
         deleteAnnotation={deleteAnnotation}
       />
-  </>
+    </>
   )
 }

@@ -4,12 +4,10 @@ import { tagBase } from './tags'
 import classNames from 'classnames'
 
 const bestOfTag = css`
-  background-color: #FDECEE;
-  color: #EF4056;
+  background-color: #fdecee;
+  color: #ef4056;
 `
 
 export const BestOfTag = ({ children }) => (
-  <div className={classNames(buttonReset, tagBase, bestOfTag)}>
-    { children }
-  </div>
+  <div className={classNames(buttonReset, tagBase, bestOfTag)}>{children}</div>
 )

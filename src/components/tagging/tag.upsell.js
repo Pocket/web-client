@@ -52,7 +52,7 @@ export class TagUpsell extends Component {
   render() {
     return (
       <React.Fragment>
-        <DivideHorizontal margin='17px 0 0 0' />
+        <DivideHorizontal margin="17px 0 0 0" />
         <div className={upsellWrapper}>
           <p>
             <PremiumIcon />
@@ -61,9 +61,9 @@ export class TagUpsell extends Component {
           </p>
           <ArrowLink
             // onClick={this.trackPremiumClick}
-            margin='10px 0'
+            margin="10px 0"
             href={`${PREMIUM_URL}13`}
-            target='_blank'>
+            target="_blank">
             {/*'tagging.upsell.cta'*/}
             Pocket Premium
           </ArrowLink>

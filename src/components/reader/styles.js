@@ -150,10 +150,8 @@ export const contentStyles = css`
     color: var(--color-textPrimary);
     text-decoration: none;
     position: relative;
-    text-shadow: -1px -1px 0 var(--color-canvas),
-      1px -1px 0 var(--color-canvas),
-      -1px 1px 0 var(--color-canvas),
-      1px 1px 0 var(--color-canvas);
+    text-shadow: -1px -1px 0 var(--color-canvas), 1px -1px 0 var(--color-canvas),
+      -1px 1px 0 var(--color-canvas), 1px 1px 0 var(--color-canvas);
     background-image: linear-gradient(
       to top,
       rgba(0, 0, 0, 0),
@@ -281,21 +279,19 @@ export const contentStyles = css`
 export const highlightStyles = css`
   *::-moz-selection,
   *::selection {
-    background-color: #E5F2F1 !important;
+    background-color: #e5f2f1 !important;
     color: #333333 !important;
   }
 
   .highlight {
     position: relative;
-    background-color: #FEE8C3;
+    background-color: #fee8c3;
     color: #333333;
   }
   a .highlight,
   a.highlight {
-    text-shadow: -1px -1px 0 #FEE8C3,
-      1px -1px 0 #FEE8C3,
-      -1px 1px 0 #FEE8C3,
-      1px 1px 0 #FEE8C3 !important;
+    text-shadow: -1px -1px 0 #fee8c3, 1px -1px 0 #fee8c3, -1px 1px 0 #fee8c3,
+      1px 1px 0 #fee8c3 !important;
     background-image: linear-gradient(
       to top,
       rgba(0, 0, 0, 0),
@@ -310,20 +306,18 @@ export const highlightStyles = css`
     *::-moz-selection,
     *::selection {
       background-color: rgb(0, 73, 69, 0.99) !important;
-      color: #E0E0E0 !important;
+      color: #e0e0e0 !important;
     }
 
     .highlight {
       position: relative;
-      background-color: #FEE8C3;
+      background-color: #fee8c3;
       color: var(--color-grey10);
     }
     a .highlight,
     a.highlight {
-      text-shadow: -1px -1px 0 #FEE8C3,
-        1px -1px 0 #FEE8C3,
-        -1px 1px 0 #FEE8C3,
-        1px 1px 0 #FEE8C3 !important;
+      text-shadow: -1px -1px 0 #fee8c3, 1px -1px 0 #fee8c3, -1px 1px 0 #fee8c3,
+        1px 1px 0 #fee8c3 !important;
       background-image: linear-gradient(
         to top,
         rgba(0, 0, 0, 0),
@@ -338,27 +332,25 @@ export const highlightStyles = css`
   ${sepiaMode} {
     *::-moz-selection,
     *::selection {
-      background-color: #DDE2D2 !important;
-      color: #3B3934 !important;
+      background-color: #dde2d2 !important;
+      color: #3b3934 !important;
     }
 
     .highlight {
       position: relative;
-      background-color: #FEDDA7;
-      color: #3B3934;
+      background-color: #fedda7;
+      color: #3b3934;
     }
     a .highlight,
     a.highlight {
-      text-shadow: -1px -1px 0 #FEDDA7,
-        1px -1px 0 #FEDDA7,
-        -1px 1px 0 #FEDDA7,
-        1px 1px 0 #FEDDA7 !important;
+      text-shadow: -1px -1px 0 #fedda7, 1px -1px 0 #fedda7, -1px 1px 0 #fedda7,
+        1px 1px 0 #fedda7 !important;
       background-image: linear-gradient(
         to top,
         rgba(0, 0, 0, 0),
         rgba(0, 0, 0, 0) 1px,
-        #3B3934 1px,
-        #3B3934 2px,
+        #3b3934 1px,
+        #3b3934 2px,
         rgba(0, 0, 0, 0) 2px
       );
     }

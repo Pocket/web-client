@@ -8,7 +8,7 @@ import GlobalNavSearch from './global-nav-search'
 
 const baseProps = {
   onSubmit: () => {},
-  placeholder: 'Storybook placeholder text',
+  placeholder: 'Storybook placeholder text'
 }
 
 let defaultSearch

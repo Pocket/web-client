@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import detectIt from 'detect-it'
 
-export const ScrollTracker = ComponentToWrap => {
+export const ScrollTracker = (ComponentToWrap) => {
   return class ScrollHandler extends Component {
     constructor(props) {
       super(props)

@@ -7,17 +7,17 @@ import { TagUpsell } from './tag.upsell'
 const suggestedWrapper = css`
   padding: 10px 0;
   min-height: 50px;
-  font-family: "Graphik Web";
+  font-family: 'Graphik Web';
   width: 100%;
 `
 
 const CantFindSuggestions = () => {
   //"tagging.errors.noSuggestedTags"
-  return "We were unable to find any suggested tags for this item"
+  return 'We were unable to find any suggested tags for this item'
 }
 
 export class TagSuggestions extends Component {
-  prevent = event => {
+  prevent = (event) => {
     event.preventDefault()
   }
 
@@ -28,7 +28,7 @@ export class TagSuggestions extends Component {
   get suggestedTags() {
     const tags = this.props.suggestedTags || []
     return tags
-      .filter(item => !this.usedTags.includes(item))
+      .filter((item) => !this.usedTags.includes(item))
       .map((tag, index) => {
         return (
           <SuggestedTag
@@ -46,20 +46,22 @@ export class TagSuggestions extends Component {
   get suggestionsLoader() {
     return (
       <div className={suggestedWrapper}>
-        {
-          (this.props.suggestedTags === undefined)
-            ? <Loader isVisible />
-            : this.suggestedTags.length
-              ? this.suggestedTags
-              : <CantFindSuggestions />
-        }
+        {this.props.suggestedTags === undefined ? (
+          <Loader isVisible />
+        ) : this.suggestedTags.length ? (
+          this.suggestedTags
+        ) : (
+          <CantFindSuggestions />
+        )}
       </div>
     )
   }
 
   render() {
-    return this.props.isPremium
-      ? this.suggestionsLoader
-      : <TagUpsell trackClick={this.props.trackClick} />
+    return this.props.isPremium ? (
+      this.suggestionsLoader
+    ) : (
+      <TagUpsell trackClick={this.props.trackClick} />
+    )
   }
 }

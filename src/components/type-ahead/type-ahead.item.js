@@ -4,7 +4,7 @@ import { css } from 'linaria'
 import classNames from 'classnames'
 
 const itemWrapper = css`
-  font-family: "Graphik Web";
+  font-family: 'Graphik Web';
   position: relative;
   cursor: pointer;
   display: block;
@@ -22,7 +22,8 @@ const itemWrapper = css`
   padding: 0.3rem 1.1rem;
   white-space: normal;
   word-wrap: normal;
-  &:hover, &.isActive {
+  &:hover,
+  &.isActive {
     background: var(--color-actionPrimarySubdued);
   }
 `
@@ -46,7 +47,9 @@ export class TypeAheadItem extends Component {
   render() {
     const { isActive, item } = this.props
     return (
-      <div className={classNames(itemWrapper, { isActive })} onClick={this.clickAction}>
+      <div
+        className={classNames(itemWrapper, { isActive })}
+        onClick={this.clickAction}>
         <span ref={this.element}>{item}</span>
       </div>
     )

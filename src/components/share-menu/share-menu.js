@@ -4,7 +4,10 @@ import { css } from 'linaria'
 import { popoverBase } from 'components/popover/popover'
 import { PopupMenuGroup, PopupMenuItem } from '@pocket/web-ui'
 import { SocialItems } from './share-menu.social'
-import { urlWithPocketRedirect, urlWithPermanentLibrary } from 'common/utilities'
+import {
+  urlWithPocketRedirect,
+  urlWithPermanentLibrary
+} from 'common/utilities'
 import {
   ProfileIcon,
   LinkIcon,
@@ -27,10 +30,10 @@ export class ShareMenu extends Component {
   }
 
   copyLink = (e) => {
-  // const handleClick = (event) => {
+    // const handleClick = (event) => {
     e.preventDefault()
     e.stopPropagation()
-  // }
+    // }
     const { url, quote } = this.props
     const str = quote ? `${quote} [${url}]` : url
     copy(str).then(this.setCopied)
@@ -40,7 +43,7 @@ export class ShareMenu extends Component {
   }
   sendToRecommend = () => this.props.shareItem('recommend')
   sendToFriend = () => this.props.shareItem()
-  onSocialShare = service => this.props.socialShare(service)
+  onSocialShare = (service) => this.props.socialShare(service)
 
   render() {
     const { popoverRef } = this.props
@@ -52,7 +55,7 @@ export class ShareMenu extends Component {
             <LinkIcon />
             {this.state.copied
               ? 'Copied!' // ? translate('shareMenu.copied') : translate('shareMenu.copy')
-              : 'Copy Link' }
+              : 'Copy Link'}
           </PopupMenuItem>
           <PopupMenuItem onClick={this.sendToRecommend}>
             Recommend {/*translate('shareMenu.recommend')*/}
@@ -61,14 +64,15 @@ export class ShareMenu extends Component {
             <ProfileIcon />
             Send to Friend {/*translate('shareMenu.sendToFriend')*/}
           </PopupMenuItem>
-          { this.props.isPremium ? (
+          {this.props.isPremium ? (
             <PopupMenuItem
               href={urlWithPermanentLibrary(this.props.item_id)}
               target="_blank">
               <ArticleIcon />
-              Permanent Library {/*translate('shareMenu.permanentCopy.copy'),aria: translate('shareMenu.permanentCopy.aria')*/}
+              Permanent Library{' '}
+              {/*translate('shareMenu.permanentCopy.copy'),aria: translate('shareMenu.permanentCopy.aria')*/}
             </PopupMenuItem>
-          ) : null }
+          ) : null}
           <PopupMenuItem
             href={urlWithPocketRedirect(this.props.url)}
             target="_blank">

@@ -15,15 +15,14 @@ export default {
 function _getRandom(arr, n) {
   var result = new Array(n),
     len = arr.length,
-    taken = new Array(len);
-  if (n > len)
-    return arr
+    taken = new Array(len)
+  if (n > len) return arr
   while (n--) {
-    var x = Math.floor(Math.random() * len);
-    result[n] = arr[x in taken ? taken[x] : x];
-    taken[x] = --len in taken ? taken[len] : len;
+    var x = Math.floor(Math.random() * len)
+    result[n] = arr[x in taken ? taken[x] : x]
+    taken[x] = --len in taken ? taken[len] : len
   }
-  return result;
+  return result
 }
 
 const TAG_LIST = ['business', 'art', 'family', 'school', 'health']
@@ -34,14 +33,11 @@ export const tagListActive = () => (
   <TagList tags={TAG_LIST} activeTags={['art', 'family']} />
 )
 
-
 export const errorTag = () => <TagError />
 
 export const errorEmail = () => <TagError email />
 
-
 export const tagUpsell = () => <TagUpsell />
-
 
 export const tagSuggestions = () => (
   <TagSuggestions isPremium suggestedTags={TAG_LIST} />
@@ -56,7 +52,8 @@ export const tagModal = () => (
     isOpen
     appRootSelector="#root"
     suggestedTags={_getRandom(COLORS, 3)}
-    typeahead={COLORS} />
+    typeahead={COLORS}
+  />
 )
 export const tagModalHasTags = () => (
   <TagModal
@@ -64,7 +61,8 @@ export const tagModalHasTags = () => (
     appRootSelector="#root"
     currentTags={_getRandom(COLORS, 2)}
     suggestedTags={_getRandom(COLORS, 3)}
-    typeahead={COLORS} />
+    typeahead={COLORS}
+  />
 )
 export const tagModalSuggestions = () => (
   <TagModal
@@ -73,7 +71,8 @@ export const tagModalSuggestions = () => (
     appRootSelector="#root"
     currentTags={_getRandom(COLORS, 2)}
     suggestedTags={_getRandom(COLORS, 3)}
-    typeahead={COLORS} />
+    typeahead={COLORS}
+  />
 )
 export const tagModalSuggestionsLoading = () => (
   <TagModal
@@ -81,7 +80,8 @@ export const tagModalSuggestionsLoading = () => (
     isOpen
     appRootSelector="#root"
     currentTags={_getRandom(COLORS, 2)}
-    typeahead={COLORS} />
+    typeahead={COLORS}
+  />
 )
 export const tagModalNoSuggestions = () => (
   <TagModal
@@ -90,7 +90,8 @@ export const tagModalNoSuggestions = () => (
     appRootSelector="#root"
     currentTags={_getRandom(COLORS, 2)}
     suggestedTags={[]}
-    typeahead={COLORS} />
+    typeahead={COLORS}
+  />
 )
 
 /* Tagging Story
@@ -101,17 +102,19 @@ class MockState extends React.Component {
     this.state = { tags: _getRandom(COLORS, 5) }
   }
 
-  addTag = tag => {
+  addTag = (tag) => {
     if (this.state.tags.includes(tag)) return
     this.setState({ tags: [...this.state.tags, tag] })
   }
 
-  removeTag = tag => {
+  removeTag = (tag) => {
     if (!this.state.tags.includes(tag)) return
-    this.setState({ tags: this.state.tags.filter(current => current !== tag) })
+    this.setState({
+      tags: this.state.tags.filter((current) => current !== tag)
+    })
   }
 
-  setTags = tags => {
+  setTags = (tags) => {
     this.setState({ tags })
   }
 

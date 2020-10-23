@@ -1,8 +1,13 @@
 import React, { useRef } from 'react'
 import { css } from 'linaria'
 import {
-  ArrowLeftIcon, HighlightIcon, IosShareIcon,
-  TagIcon, FavoriteIcon, ArchiveIcon, DeleteIcon,
+  ArrowLeftIcon,
+  HighlightIcon,
+  IosShareIcon,
+  TagIcon,
+  FavoriteIcon,
+  ArchiveIcon,
+  DeleteIcon,
   WithTooltip
 } from '@pocket/web-ui'
 import { ShareMenu } from 'components/share-menu/share-menu'
@@ -24,17 +29,24 @@ const buttonStyles = css`
   }
 `
 
-export const ShareArticle = ({ appRootSelector, toggleSidebar, shareItem, shareData }) => {
+export const ShareArticle = ({
+  appRootSelector,
+  toggleSidebar,
+  shareItem,
+  shareData
+}) => {
   const shareTriggerRef = useRef(null)
   // Popover Effect
   const { popTrigger, popBody, shown } = usePopover({
     placement: 'top-end',
-    modifiers: [{
-      name: 'offset',
-      options: {
-        offset: [0, 0]
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 0]
+        }
       }
-    }]
+    ]
   })
 
   const handleClick = (event) => {
@@ -57,7 +69,11 @@ export const ShareArticle = ({ appRootSelector, toggleSidebar, shareItem, shareD
         </button>
       </WithTooltip>
       {shown ? (
-        <ShareMenu popoverRef={popBody} shareItem={handleShare} {...shareData} />
+        <ShareMenu
+          popoverRef={popBody}
+          shareItem={handleShare}
+          {...shareData}
+        />
       ) : null}
     </div>
   )

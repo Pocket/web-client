@@ -5,18 +5,18 @@ import GlobalNavSearch from './global-nav-search'
 
 const globalNavSearchKnobs = defineKnobs((props) => {
   return {
-    placeholder: text('placeholder', props.placeholder),
+    placeholder: text('placeholder', props.placeholder)
   }
 })
 
 export default {
   title: 'Components/GlobalNav/GlobalNavSearch',
   component: GlobalNavSearch,
-  decorators: [globalNavSearchKnobs],
+  decorators: [globalNavSearchKnobs]
 }
 
 const baseProps = {
-  onSubmit: () => {},
+  onSubmit: () => {}
 }
 
 export const globalNavSearch = () => <GlobalNavSearch {...baseProps} />

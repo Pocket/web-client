@@ -12,7 +12,7 @@ const ARTICLE_ITEM = {
 }
 
 export const article = () => (
-  <div style={{ margin: '-1em'}}>
+  <div style={{ margin: '-1em' }}>
     <Read item={ARTICLE_ITEM} />
   </div>
 )

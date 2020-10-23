@@ -7,10 +7,7 @@ import Recaptcha from 'react-google-recaptcha'
 
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { Button, TextInput } from '@pocket/web-ui'
-import {
-  breakpointSmallHandset,
-  breakpointLargeHandset
-} from '@pocket/web-ui'
+import { breakpointSmallHandset, breakpointLargeHandset } from '@pocket/web-ui'
 
 import { CAPTCHA_SITE_KEY } from 'common/constants'
 

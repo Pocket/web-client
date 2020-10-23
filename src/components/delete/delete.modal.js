@@ -1,9 +1,4 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalFooter
-} from '@pocket/web-ui'
+import { Button, Modal, ModalBody, ModalFooter } from '@pocket/web-ui'
 import { css } from 'linaria'
 
 const footerStyles = css`
@@ -12,7 +7,12 @@ const footerStyles = css`
   }
 `
 
-export const DeleteModal = ({ isOpen, setModalOpen, appRootSelector, deleteItem }) => {
+export const DeleteModal = ({
+  isOpen,
+  setModalOpen,
+  appRootSelector,
+  deleteItem
+}) => {
   const handleCloseModal = () => {
     setModalOpen(false)
   }
@@ -23,8 +23,7 @@ export const DeleteModal = ({ isOpen, setModalOpen, appRootSelector, deleteItem 
       appRootSelector={appRootSelector}
       isOpen={isOpen}
       screenReaderLabel="Delete Item"
-      handleClose={handleCloseModal}
-    >
+      handleClose={handleCloseModal}>
       <ModalBody>
         <p>Are you sure you want to delete this item? This cannot be undone.</p>
       </ModalBody>
@@ -32,9 +31,7 @@ export const DeleteModal = ({ isOpen, setModalOpen, appRootSelector, deleteItem 
         <Button variant="secondary" onClick={handleCloseModal}>
           Cancel
         </Button>
-        <Button
-          type="submit"
-          onClick={deleteItem}>
+        <Button type="submit" onClick={deleteItem}>
           Delete
         </Button>
       </ModalFooter>

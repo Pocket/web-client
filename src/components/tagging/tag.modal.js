@@ -56,30 +56,30 @@ export class TagModal extends React.Component {
     }
   }
 
-  setInputRef = input => {
+  setInputRef = (input) => {
     this.inputRef = input
   }
 
-  setValue = value => {
+  setValue = (value) => {
     this.setState({ value })
   }
 
-  addTag = tag => {
+  addTag = (tag) => {
     this.setState({ value: '' })
     if (this.inputRef) this.inputRef.focus()
     if (this.state.tags.includes(tag)) return
     this.setState({ actionable: true, tags: [...this.state.tags, tag] })
   }
 
-  removeTag = tag => {
+  removeTag = (tag) => {
     if (!this.state.tags.includes(tag)) return
     this.setState({
       actionable: true,
-      tags: this.state.tags.filter(current => current !== tag)
+      tags: this.state.tags.filter((current) => current !== tag)
     })
   }
 
-  setTags = tags => {
+  setTags = (tags) => {
     this.setState({ actionable: true, tags })
   }
 

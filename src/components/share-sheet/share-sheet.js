@@ -109,7 +109,7 @@ export class SendToFriend extends React.Component {
     }
   }
 
-  onFriendUpdate = email => {
+  onFriendUpdate = (email) => {
     if (this.state.friends.indexOf(email) > -1) {
       this.removeEmail(email)
     } else {
@@ -121,7 +121,7 @@ export class SendToFriend extends React.Component {
     const { email, emails } = this.state
     const validEmails =
       email && validateEmail(email) ? [...emails, email] : emails
-    const recipients = validEmails.map(email => {
+    const recipients = validEmails.map((email) => {
       return { email }
     })
 
@@ -138,40 +138,40 @@ export class SendToFriend extends React.Component {
     this.props.setModalOpen(false)
   }
 
-  handleCommentChange = event => {
+  handleCommentChange = (event) => {
     this.setState({ comment: event.target.value })
   }
 
-  handleEmailChange = email => {
+  handleEmailChange = (email) => {
     this.setState({ email })
   }
 
-  addEmail = email => {
+  addEmail = (email) => {
     this.setState({ email: '' })
     if (this.state.emails.includes(email)) return
     this.setState({ emails: [...this.state.emails, email] })
     this.addFriend(email)
   }
 
-  removeEmail = email => {
+  removeEmail = (email) => {
     if (!this.state.emails.includes(email)) return
     this.setState({
-      emails: this.state.emails.filter(current => current !== email)
+      emails: this.state.emails.filter((current) => current !== email)
     })
     this.removeFriend(email)
   }
 
-  addFriend = friend => {
+  addFriend = (friend) => {
     const friends = [...this.state.friends, friend]
     this.setState({ friends })
   }
 
-  removeFriend = friend => {
-    const friends = this.state.friends.filter(email => email !== friend)
+  removeFriend = (friend) => {
+    const friends = this.state.friends.filter((email) => email !== friend)
     this.setState({ friends })
   }
 
-  setEmails = emails => {
+  setEmails = (emails) => {
     this.setState({ emails })
   }
 
@@ -201,8 +201,8 @@ export class SendToFriend extends React.Component {
     return (
       <Modal
         appRootSelector={appRootSelector}
-        title={isRecommend ? "Recommend" : "Send"}
-        screenReaderLabel={isRecommend ? "Recommend" : "Send"}
+        title={isRecommend ? 'Recommend' : 'Send'}
+        screenReaderLabel={isRecommend ? 'Recommend' : 'Send'}
         isOpen={isOpen}
         handleClose={() => setModalOpen(false)}>
         <ModalBody>
@@ -214,7 +214,8 @@ export class SendToFriend extends React.Component {
             {thumbnail ? (
               <div
                 className={shareThumbnail}
-                style={{ backgroundImage: `url('${thumbnail}')` }} />
+                style={{ backgroundImage: `url('${thumbnail}')` }}
+              />
             ) : null}
           </div>
 
@@ -258,9 +259,7 @@ export class SendToFriend extends React.Component {
             //     : translate('share.sendAction')
             // }
             onClick={this.onSocialShare}>
-            {isRecommend
-              ? "Recommend"
-              : "Send"}
+            {isRecommend ? 'Recommend' : 'Send'}
           </Button>
         </ModalFooter>
       </Modal>

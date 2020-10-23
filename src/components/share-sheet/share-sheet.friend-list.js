@@ -38,7 +38,7 @@ export const FriendList = ({
         removeTag={removeEmail}
         setTags={setEmails}
         tags={emails}
-        typeahead={autoCompleteEmails?.map(item => item.email)}
+        typeahead={autoCompleteEmails?.map((item) => item.email)}
         email
       />
     </div>

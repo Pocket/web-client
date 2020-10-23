@@ -25,7 +25,7 @@ const shade = css`
 const modalContent = css`
   position: relative;
   z-index: var(--zIndexModal);
-  font-family: "Graphik Web";
+  font-family: 'Graphik Web';
 `
 export const Modal = ({ children, cancel }) => {
   const handleShadeClicks = () => {
@@ -37,7 +37,8 @@ export const Modal = ({ children, cancel }) => {
     <div className={backdrop}>
       <div
         className={classNames(backdrop, shade)}
-        onClick={handleShadeClicks} />
+        onClick={handleShadeClicks}
+      />
       <div className={modalContent}>{children}</div>
     </div>
   )

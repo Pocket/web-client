@@ -135,9 +135,7 @@ export const SocialItems = ({ onSocialShare, quote = '', url, title }) => (
         onShareWindowClose={() => onSocialShare('buffer')}
         text={quote}
         url={url}>
-        <span className="label">
-          Buffer
-        </span>
+        <span className="label">Buffer</span>
       </BufferShareButton>
     </li>
   </PopupMenuGroup>

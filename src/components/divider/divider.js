@@ -5,9 +5,7 @@ const divideVerticalStyles = css`
   height: 24px;
   background-color: var(--color-dividerSecondary);
 `
-export const DivideVertical = () => (
-  <div className={divideVerticalStyles} />
-)
+export const DivideVertical = () => <div className={divideVerticalStyles} />
 
 const divideHorizontalStyles = css`
   height: 1px;
@@ -21,6 +19,4 @@ const divideDotWrapper = css`
   padding: 0 5px;
   font-size: 0.5em;
 `
-export const DivideDot = () => (
-  <span className={divideDotWrapper}>•</span>
-)
+export const DivideDot = () => <span className={divideDotWrapper}>•</span>

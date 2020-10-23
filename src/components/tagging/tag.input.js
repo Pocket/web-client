@@ -37,19 +37,19 @@ const inputStyle = css`
 export class TagInput extends Component {
   /* Input Events
   –––––––––––––––––––––––––––––––––––––––––––––––––––– */
-  onFocus = event => {
+  onFocus = (event) => {
     this.props.onFocus(event)
   }
 
-  onBlur = event => {
+  onBlur = (event) => {
     this.props.onBlur && this.props.onBlur(event)
   }
 
-  onChange = event => {
+  onChange = (event) => {
     this.props.setValue(event.target.value)
   }
 
-  onKeyUp = event => {
+  onKeyUp = (event) => {
     switch (event.keyCode) {
       // Handle intent to remove
       case KEYS.BACKSPACE:
@@ -74,7 +74,7 @@ export class TagInput extends Component {
     }
   }
 
-  onInput = event => {
+  onInput = (event) => {
     // Check email validation
     if (
       event.charCode === KEYS.COMMA ||

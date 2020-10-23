@@ -16,7 +16,9 @@ const stepperWrapper = css`
   padding: 0 var(--spacing150);
 `
 export const StepperWrapper = ({ children, ...args }) => (
-  <div className={stepperWrapper} {...args}>{children}</div>
+  <div className={stepperWrapper} {...args}>
+    {children}
+  </div>
 )
 
 const iconWrapper = css`
@@ -30,7 +32,7 @@ const iconWrapper = css`
 `
 export const IconWrapper = ({ children, ...args }) => (
   <div className={classNames(iconWrapper, tooltipBase)} {...args}>
-    { children }
+    {children}
   </div>
 )
 
@@ -62,6 +64,6 @@ export const StepperButton = ({ children, active, ...args }) => (
   <button
     className={classNames(buttonReset, stepperButton, tooltipBase, { active })}
     {...args}>
-    { children }
+    {children}
   </button>
 )

@@ -10,4 +10,8 @@ const logoWrapper = css`
   display: inline-block;
 `
 
-export const normal = () => <div className={logoWrapper}><LogoAnimated /></div>
+export const normal = () => (
+  <div className={logoWrapper}>
+    <LogoAnimated />
+  </div>
+)

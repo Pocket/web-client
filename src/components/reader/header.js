@@ -1,7 +1,11 @@
 /* eslint  react/jsx-no-target-blank: 0*/
 import { css } from 'linaria'
 import { TagList } from 'components/tagging/tag.list'
-import { domainForUrl, urlWithPocketRedirect, getTimeToRead } from 'common/utilities'
+import {
+  domainForUrl,
+  urlWithPocketRedirect,
+  getTimeToRead
+} from 'common/utilities'
 
 /* COMPONENTS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -94,9 +98,13 @@ const tagsWrapper = css`
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 function listAuthors(authors) {
   if (!authors) return
-  return Object.keys(authors).map(authorKey => {
+  return Object.keys(authors).map((authorKey) => {
     const current = authors[authorKey]
-    return <span className={authorNoLink} key={authorKey}>{current.name}</span>
+    return (
+      <span className={authorNoLink} key={authorKey}>
+        {current.name}
+      </span>
+    )
   })
 }
 
@@ -111,7 +119,7 @@ export const ItemHeader = ({
   tags,
   has_video,
   word_count,
-  videos,
+  videos
 }) => {
   const timeEstimateProps = {
     word_count,
@@ -128,14 +136,16 @@ export const ItemHeader = ({
       <h1 className={articleTitle}>{resolved_title || given_title}</h1>
 
       <div className={articleInfo}>
-        {authorList || domain ? <div className={byWrapper}>By </div> : null} {/*"reader.header.by"*/}
+        {authorList || domain ? <div className={byWrapper}>By </div> : null}{' '}
+        {/*"reader.header.by"*/}
         {authorList ? <div className={authorWrapper}>{authorList}</div> : null}
         {domain ? <div className={domainWrapper}>{domain}</div> : null}
         {timeDisplay ? <div className={timeWrapper}>{timeDisplay}</div> : null}
       </div>
 
       <div className={pocketInfo}>
-        <a className={viewOriginal}
+        <a
+          className={viewOriginal}
           href={urlWithPocketRedirect(given_url)}
           target="_blank">
           View Original {/*"reader.header.viewOriginal"*/}

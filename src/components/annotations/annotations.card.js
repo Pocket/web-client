@@ -35,8 +35,8 @@ const quoteStyles = css`
   }
 `
 export const Quote = ({ children, ...args }) => (
-  <button className={classNames(buttonReset, quoteStyles)} { ...args }>
-    { children }
+  <button className={classNames(buttonReset, quoteStyles)} {...args}>
+    {children}
   </button>
 )
 
@@ -51,7 +51,7 @@ const styledDate = css`
 export class CreatedDate extends Component {
   getValue(val) {
     if (!val) {
-      return "Just now" //"time.now"
+      return 'Just now' //"time.now"
     }
 
     const now = dayjs()
@@ -59,13 +59,13 @@ export class CreatedDate extends Component {
     const diff = now.diff(ts, 'day')
 
     if (diff < 1) {
-      return "Added Today" //"time.addedtoday"
+      return 'Added Today' //"time.addedtoday"
     } else if (diff === 1) {
       let date = diff
       return `Added ${date} day ago` //"time.addeddayago"
     } else if (diff < 7) {
       let date = diff
-      return "Added ${date} days ago" //"time.addeddaysago"
+      return 'Added ${date} days ago' //"time.addeddaysago"
     }
 
     let date = ts.format('MMM D, YYYY')
@@ -93,9 +93,11 @@ export class CardPositioning extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.show !== this.props.show
-      && this.props.show
-      && !this.state.topAdj) {
+    if (
+      prevProps.show !== this.props.show &&
+      this.props.show &&
+      !this.state.topAdj
+    ) {
       this.setTopAdjustment()
     }
   }
@@ -124,7 +126,7 @@ export class CardPositioning extends Component {
       <div
         className={classNames(cardStyles, addedStyles, { arrow })}
         style={{ top: this.state.topAdj }}
-        ref={node => (this.contentNode = node)}>
+        ref={(node) => (this.contentNode = node)}>
         {this.props.children}
       </div>
     )

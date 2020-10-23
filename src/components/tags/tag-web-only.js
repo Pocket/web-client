@@ -8,7 +8,7 @@ const webOnlyWrapper = css`
   padding: 0 5px;
   width: 24px;
   justify-content: center;
-  background-color: #1EABF9;
+  background-color: #1eabf9;
   color: var(--color-canvas);
 `
 export function WebOnlyTag({ count, margin }) {

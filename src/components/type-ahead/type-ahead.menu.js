@@ -21,5 +21,5 @@ export const typeAheadWrapper = css`
 `
 
 export const TypeAheadMenu = ({ children }) => (
-  <div className={typeAheadWrapper}>{ children }</div>
+  <div className={typeAheadWrapper}>{children}</div>
 )

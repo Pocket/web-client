@@ -7,7 +7,7 @@ import { DiscoverIcon, ListViewIcon } from '@pocket/web-ui'
 const globalNavLinksKnobs = defineKnobs((props) => {
   return {
     links: object('links', props.links),
-    selectedLink: text('selectedLink', props.selectedLink || 'discover'),
+    selectedLink: text('selectedLink', props.selectedLink || 'discover')
   }
 })
 
@@ -19,35 +19,35 @@ const baseProps = {
       id: 'global-nav-discover-link',
       label: 'Discover',
       url: 'https://getpocket.com/explore',
-      icon: <DiscoverIcon />,
+      icon: <DiscoverIcon />
     },
     {
       name: 'my-list',
       id: 'global-nav-my-list-link',
       label: 'My List',
       url: 'https://app.getpocket.com',
-      icon: <ListViewIcon />,
+      icon: <ListViewIcon />
     },
     {
       name: 'disabled-link',
       id: 'disabled-link',
       label: 'Disabled Link',
       url: 'https://app.getpocket.com',
-      isDisabled: true,
+      isDisabled: true
     },
     {
       name: 'no-icon',
       id: 'no-icon',
       label: 'No Icon',
-      url: 'https://app.getpocket.com',
-    },
-  ],
+      url: 'https://app.getpocket.com'
+    }
+  ]
 }
 
 export default {
   title: 'Components/GlobalNav/GlobalNavMobileMenu',
   component: GlobalNavMobileMenu,
-  decorators: [globalNavLinksKnobs],
+  decorators: [globalNavLinksKnobs]
 }
 
 export const standard = () => <GlobalNavMobileMenu {...baseProps} />

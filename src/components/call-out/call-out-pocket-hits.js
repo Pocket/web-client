@@ -28,7 +28,7 @@ const wrapper = css`
     margin: 0 auto;
 
     &:after {
-      content: "";
+      content: '';
       display: table;
       clear: both;
     }

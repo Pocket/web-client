@@ -24,13 +24,16 @@ const DisplaySettingsWrapper = ({ isPremium, forceShow }) => {
         setFontFamily={setFontFamily}
         setFontSize={setFontSize}
         setLineHeight={setLineHeight}
-        setColumnWidth={setColumnWidth}/>
+        setColumnWidth={setColumnWidth}
+      />
     </div>
   )
 }
 
 export const displaySettings = () => <DisplaySettingsWrapper forceShow />
 
-export const displaySettingsPremium = () => <DisplaySettingsWrapper isPremium forceShow />
+export const displaySettingsPremium = () => (
+  <DisplaySettingsWrapper isPremium forceShow />
+)
 
 export const fullExperience = () => <DisplaySettingsWrapper isPremium />

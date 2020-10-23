@@ -1,6 +1,10 @@
 import { PopupMenuGroup } from '@pocket/web-ui'
 import { css } from 'linaria'
-import { StepperWrapper, IconWrapper, StepperButton } from 'components/stepper/stepper'
+import {
+  StepperWrapper,
+  IconWrapper,
+  StepperButton
+} from 'components/stepper/stepper'
 import { StepperRange } from 'components/stepper/stepper-range'
 import { AddIcon, RemoveIcon, LineHeightIcon } from '@pocket/web-ui'
 
@@ -35,11 +39,7 @@ export const LineHeightSettings = ({
           data-tooltip="Decrease Line Height">
           <RemoveIcon />
         </StepperButton>
-        <StepperRange
-          current={current}
-          range={range}
-          onChange={setCurrent}
-        />
+        <StepperRange current={current} range={range} onChange={setCurrent} />
         <StepperButton
           active={plusActive()}
           onClick={handleIncrease}

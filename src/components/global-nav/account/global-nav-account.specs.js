@@ -10,12 +10,12 @@ const useRefStub = sinon.stub()
 // import GlobalNavAccount through proxyquire so that we can stub its dependencies
 const GlobalNavAccount = proxyquire('./global-nav-account', {
   react: {
-    useRef: useRefStub,
-  },
+    useRef: useRefStub
+  }
 }).default
 
 const baseProps = {
-  appRootSelector: '#root',
+  appRootSelector: '#root'
 }
 const mockAvatarRef = { current: 'the avatar node!' }
 
