@@ -82,7 +82,7 @@ const listToSort = [
     time_favorited: '0',
     time_read: '0',
     is_article: '1',
-    has_video: '0',
+    has_video: '1',
     favorite: '0',
     status: '0'
   },

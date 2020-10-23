@@ -132,7 +132,7 @@ const itemWithMissingData = [
 
 describe('My List Items', function () {
   describe('deriveItemData', function () {
-    it('should not fail when incomplete item data is passed in', function () {
+    it('should derive data as expected', function () {
       const derivedItems = deriveMyListItems(itemWithMissingData)
       const expectedSaveUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
       const expectedOpenUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore

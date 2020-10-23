@@ -23,7 +23,6 @@ export function deriveMyListItems(response) {
       is_index: item?.is_index,
       lang: item?.lang,
       listen_duration_estimate: item?.listen_duration_estimate,
-      sort_id: item?.sort_id,
       status: item?.status,
       time_added: item?.time_added,
       time_favorited: item?.time_favorited,
