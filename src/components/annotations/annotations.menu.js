@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
 import { css } from 'linaria'
-import {
-  OverflowMenuIcon,
-  IosShareIcon,
-  DeleteIcon,
-  PopupMenu,
-  PopupMenuGroup,
-  PopupMenuItem
-} from '@pocket/web-ui'
+
+import { OverflowMenuIcon } from '@pocket/web-ui'
+import { IosShareIcon } from '@pocket/web-ui'
+import { DeleteIcon } from '@pocket/web-ui'
+import { PopupMenuGroup } from '@pocket/web-ui'
+import { PopupMenuItem } from '@pocket/web-ui'
+
 import { buttonReset } from 'components/buttons/button-reset'
 import { ShareMenu } from 'components/share-menu/share-menu'
 import { overlayBase } from 'components/overlay/overlay'
@@ -73,10 +72,8 @@ export const AnnotationMenu = ({
   visible,
   top = 0,
   left = 0,
-  annotationId,
   shareItem,
   shareData,
-  deleteAnnotation,
   quote
 }) => {
   const [shareOpen, setShareOpen] = useState(false)
@@ -85,7 +82,7 @@ export const AnnotationMenu = ({
 
   useEffect(() => {
     return () => clearTimeout(timer)
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const startTimer = () => {
     timer = setTimeout(() => {

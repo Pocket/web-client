@@ -20,7 +20,7 @@ const displayCase = css`
   border: 1px solid black;
 `
 
-export const normal = () => {
+export const Normal = () => {
   const [depth, setDepth] = useState(0)
 
   return (

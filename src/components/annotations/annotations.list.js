@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import { css } from 'linaria'
 import classNames from 'classnames'
-import { IosShareIcon } from '@pocket/web-ui'
 import { AnnotationMenu } from './annotations.menu'
 import { cardStyles, Quote, CreatedDate } from './annotations.card'
-
-import { buttonReset } from 'components/buttons/button-reset'
 import { EmptyList } from './annotations.empty-list'
 
 // import { LimitNotice } from './annotations.limit'
@@ -36,15 +33,6 @@ const menuWrapper = css`
     .icon {
       margin-top: -5px;
     }
-  }
-`
-
-const menuTrigger = css`
-  height: 24px;
-  cursor: pointer;
-  color: var(--color-textPrimary);
-  &:hover {
-    color: var(--color-textLinkHover);
   }
 `
 
@@ -122,7 +110,7 @@ export class QuoteList extends Component {
   }
 
   render() {
-    const { visible, heading, annotations } = this.props
+    const { visible, annotations } = this.props
 
     return annotations ? (
       <div className={classNames(listWrapper, { visible })}>

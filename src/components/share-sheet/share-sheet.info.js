@@ -1,3 +1,4 @@
+import React from 'react'
 import { css } from 'linaria'
 import { domainForUrl, urlWithPocketRedirect } from 'common/utilities'
 import classNames from 'classnames'
@@ -78,7 +79,7 @@ export const ItemDomain = ({
       ) : (
         <a
           href={urlWithPocketRedirect(url)}
-          target="_blank"
+          target="_blank" //eslint-disable-line
           onClick={onExternalLink}>
           {domain}
         </a>

@@ -17,7 +17,7 @@ const VisibilitySensor = ({ children, onVisible, heightThreshold }) => {
   useEffect(() => {
     const elementHeight = ref.current.node.getBoundingClientRect().height
     setOffset(Math.round(elementHeight * heightThreshold))
-  })
+  }, [setOffset, heightThreshold])
 
   const handleChange = (isVisible) => {
     if (isVisible && !isInvoked) {

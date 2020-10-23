@@ -1,5 +1,5 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "extends": ["react-app", "prettier", "plugin:cypress/recommended"],
   "plugins": ["prettier", "jsx-a11y"],
   "globals": {
@@ -11,7 +11,7 @@
     "jsx-a11y/anchor-is-valid": "off",
     "no-unneeded-ternary": "warn",
     "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
+    "quotes": ["warn", "single"],
     "semi": ["error", "never"],
     "no-unused-vars": [
       "warn",

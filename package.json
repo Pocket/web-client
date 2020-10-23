@@ -7,6 +7,8 @@
     "dev": "SHOW_DEV=included next dev -p 80",
     "build": "npm run locale-inject && SHOW_DEV=included next build",
     "start": "next start -p 80",
+    "lint": "./node_modules/.bin/eslint $(find src/components/ -name '*.js')",
+    "lint-diff": "./node_modules/.bin/eslint $(git diff master --name-only -- components/*.js connectors/*.js containers/*.js) --quiet",
     "test": "NODE_PATH=./src:./public:$NODE_PATH NODE_ENV=test mocha --reporter spec --harmony --require .scripts/babel-register .scripts/test-setup.js $(find src/ -name '*.spec.js')",
     "storybook": "start-storybook -s ./public -h localhost.web.getpocket.com",
     "build-storybook": "build-storybook",
@@ -34,7 +36,12 @@
     }
   },
   "devDependencies": {
+    "@babel/cli": "7.12.1",
     "@babel/core": "7.11.6",
+    "@babel/eslint-parser": "7.12.1",
+    "@babel/preset-env": "7.12.1",
+    "@babel/preset-react": "7.12.1",
+    "@babel/register": "7.12.1",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@storybook/addon-actions": "6.0.21",

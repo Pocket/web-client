@@ -7,7 +7,7 @@ export default {
   title: 'Components/Stepper'
 }
 
-export const normal = () => {
+export const Normal = () => {
   const [current, setCurrent] = useState(4)
 
   const range = ['12px', '16px', '22px', '28px', '34px', '38px', '42px']

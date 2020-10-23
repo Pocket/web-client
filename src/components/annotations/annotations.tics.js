@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { css } from 'linaria'
-import { buttonReset } from 'components/buttons/button-reset'
 import { CardPositioning, Quote, CreatedDate } from './annotations.card' // CardWrapper
 import { AnnotationMenu } from './annotations.menu'
 import classNames from 'classnames'
@@ -94,13 +93,7 @@ const floatingCardStyles = css`
   position: relative;
 `
 
-const Card = ({
-  annotation,
-  active,
-  shareItem,
-  shareData,
-  deleteAnnotation
-}) => {
+const Card = ({ annotation, shareItem, shareData, deleteAnnotation }) => {
   return annotation ? (
     <CardPositioning
       show
@@ -110,8 +103,9 @@ const Card = ({
       {' '}
       {/*activeCardStyles, */}
       <Quote
-        // aria-label={translate('annotations.scrollTo')}
-        onClick={() => onClickEvent(annotation.position)}>
+      // aria-label={translate('annotations.scrollTo')}
+      /* onClick={() => onClickEvent(annotation.position)} */
+      >
         {annotation.quote}
       </Quote>
       <CreatedDate>{annotation.created_at}</CreatedDate>

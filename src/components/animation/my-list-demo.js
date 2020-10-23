@@ -545,7 +545,7 @@ function MyListDemo({ className, showFirefoxLogo }) {
     ScrollTrigger.getAll().forEach((trigger) => {
       prefersReducedMotion ? trigger.disable() : trigger.enable()
     })
-  }, [prefersReducedMotion])
+  }, [prefersReducedMotion, ambientTimelines, parentTimeline])
 
   return (
     <div className={classNames(myListDemo, className)}>

@@ -65,7 +65,7 @@ export class CreatedDate extends Component {
       return `Added ${date} day ago` //"time.addeddayago"
     } else if (diff < 7) {
       let date = diff
-      return 'Added ${date} days ago' //"time.addeddaysago"
+      return `Added ${date} days ago` //"time.addeddaysago"
     }
 
     let date = ts.format('MMM D, YYYY')

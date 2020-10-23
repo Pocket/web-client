@@ -27,7 +27,7 @@ const displayCase = css`
   border: 1px solid black;
 `
 
-export const normal = () => {
+export const Normal = () => {
   const [isVisible, setVisible] = useState(false)
 
   return (
@@ -43,7 +43,7 @@ export const normal = () => {
   )
 }
 
-export const withChyron = () => {
+export const WithChyron = () => {
   const [isVisible, setVisible] = useState(false)
 
   return (

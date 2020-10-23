@@ -340,7 +340,17 @@ function ArticleCarousel({ images, className, delay, duration, useIntro }) {
     return () => {
       gsap.killTweensOf(parentTimeline)
     }
-  }, [isParentInView, isIntroComplete, currentIndex, prefersReducedMotion])
+  }, [
+    delay,
+    images.length,
+    duration,
+    parentTimeline,
+    isFirstPlay,
+    isParentInView,
+    isIntroComplete,
+    currentIndex,
+    prefersReducedMotion
+  ])
 
   /**
    * Plays intro when timeline is ready and carousel is in view
@@ -360,7 +370,17 @@ function ArticleCarousel({ images, className, delay, duration, useIntro }) {
     if (isIntroReady && isParentInView && !prefersReducedMotion) {
       setCurrentParentTween(animateToIntro())
     }
-  }, [isIntroReady, isParentInView, prefersReducedMotion])
+  }, [
+    isIntroReady,
+    isParentInView,
+    prefersReducedMotion,
+    delay,
+    disableIntro,
+    duration,
+    isIntroComplete,
+    isIntroDisabled,
+    parentTimeline
+  ])
 
   /**
    * Animate the floating shapes in the background
@@ -398,7 +418,7 @@ function ArticleCarousel({ images, className, delay, duration, useIntro }) {
     })
 
     currentParentTween?.pause()
-  }, [prefersReducedMotion])
+  }, [prefersReducedMotion, currentParentTween, images.length, shapeTimeline])
 
   return (
     <div className={classNames(articleCarousel, className)}>

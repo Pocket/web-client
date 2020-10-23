@@ -6,7 +6,7 @@ export default {
   title: 'Components/PopoverSelection'
 }
 
-export const normal = () => {
+export const Normal = () => {
   const [highlight, setHighlight] = useState(null)
 
   const toggleHighlight = () => {

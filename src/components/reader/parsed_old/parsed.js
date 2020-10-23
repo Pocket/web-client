@@ -78,9 +78,7 @@ export class Parsed extends Component {
 
         window.scrollTo(0, top)
       }
-    } catch (error) {
-      process.env.NODE_ENV !== 'production' ? console.log(error) : null //Sentry.captureException(error)
-    }
+    } catch (error) {}
   }
 
   checkPositioning(val) {

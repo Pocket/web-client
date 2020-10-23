@@ -29,7 +29,7 @@ const resetLocalStorage = (instanceId) => {
   localStorage.removeItem(getChyronDismissalDate(instanceId))
 
   // reload page
-  location.reload()
+  document.location.reload()
   return false
 }
 
