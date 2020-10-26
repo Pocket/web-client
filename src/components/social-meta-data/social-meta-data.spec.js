@@ -16,6 +16,7 @@ const mockMetaImageData = {
 
 const expectedTags = [
   'meta-description',
+  'pkt-description',
   'itemprop-name',
   'itemprop-description',
   'twitter-card',

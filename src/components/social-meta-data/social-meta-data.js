@@ -35,6 +35,9 @@ export function SocialMetaData({ url, title, description, image, type }) {
       {/*  Primary Meta Tags */}
       <meta name="description" content={description} {...testIdAttribute('meta-description')} />
 
+      {/*  Pocket Specific Tags */}
+      <meta name="x-pocket-override-excerpt" content={description} {...testIdAttribute('pkt-description')} />
+
       {/* Schema.org for Google */}
       <meta itemProp="name" content={title} {...testIdAttribute('itemprop-name')}/>
       <meta itemProp="description" content={description} {...testIdAttribute('itemprop-description')}/>
