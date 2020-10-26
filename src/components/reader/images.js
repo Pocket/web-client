@@ -41,13 +41,13 @@ function buildImageMarkup(data) {
 
   return Promise.resolve({
     imageId: image_id,
-    markup: `
+    markup: DOMPurify.sanitize(`
         <figure>
           <img src='${imageSource}' alt='${cleanCaption}'/>
           ${captionMarkup}
           ${creditMarkup}
         </figure>
-      `
+      `)
   })
 }
 
