@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import Layout from 'layouts/with-sidebar'
 import { getMylistData } from './my-list.state'
 import { updateMyListData } from './my-list.state'
-
+import { appSetSection } from 'connectors/app/app.state'
 import { MyListHeader } from 'components/headers/my-list-header'
 
 import { VirtualizedList } from 'components/items-layout/virtualized-list'
@@ -44,6 +44,7 @@ export default function Collection(props) {
   // Check if we have requested list items
   useEffect(() => {
     dispatch(getMylistData(18, 0, subset, filter))
+    dispatch(appSetSection(section))
   }, [])
 
   useEffect(() => {

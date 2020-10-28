@@ -5,6 +5,7 @@ export { HYDRATE } from 'next-redux-wrapper'
 export const APP_DEV_MODE_TOGGLE = 'APP_DEV_MODE_TOGGLE'
 export const APP_SET_BASE_URL = 'APP_SET_BASE_URL'
 export const APP_SET_MODE = 'APP_SET_MODE'
+export const APP_SET_SECTION = 'APP_SET_SECTION'
 
 // User info/auth
 export const USER_HYDRATE = 'USER_HYDRATE'
