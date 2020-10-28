@@ -1,5 +1,5 @@
 import React from 'react'
-import matchSorter, { rankings } from 'match-sorter'
+import { matchSorter, rankings } from 'match-sorter'
 import { TypeAheadMenu } from './type-ahead.menu'
 import { TypeAheadItem } from './type-ahead.item'
 import { KEYS } from 'common/constants'
