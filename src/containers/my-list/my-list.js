@@ -26,12 +26,12 @@ export default function Collection(props) {
   const total = useSelector((state) => state.myList[`${section}Total`])
   const since = useSelector((state) => state.myList[`${section}Since`])
 
-  const handleFocus = () => {
-    if (!since) return
-    dispatch(updateMyListData(since, subset, filter))
-  }
-
   useEffect(() => {
+    const handleFocus = () => {
+      if (!since) return
+      dispatch(updateMyListData(since, subset, filter))
+    }
+
     // Adding new event listeners
     window.addEventListener('focus', handleFocus)
 
@@ -39,7 +39,7 @@ export default function Collection(props) {
     return () => {
       window.removeEventListener('focus', handleFocus)
     }
-  }, [handleFocus])
+  }, [])
 
   // Check if we have requested list items
   useEffect(() => {

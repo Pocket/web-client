@@ -1,3 +1,4 @@
+import { cloneElement } from 'react'
 import { ItemCard as DiscoverCard } from 'connectors/item-card/discover/card'
 import { ItemCard as MyListCard } from 'connectors/item-card/my-list/card'
 import { breakpointTinyTablet } from '@pocket/web-ui'
@@ -219,7 +220,7 @@ export function DynamicCardLayout({ children, initialOffset = 0, ...actions }) {
         {/* Inner container  is this necessary?*/}
         <div className={sectionTypes[type]}>
           {/* Clone the child and add offset, sectionItems, and actions */}
-          {React.cloneElement(section, {
+          {cloneElement(section, {
             offset,
             items: sectionItems,
             ...actions

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Card } from 'components/item-card/my-list/card'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -71,4 +72,4 @@ const isEqual = (prev, next) => {
   return isTheSame
 }
 
-export const MemoizedItem = React.memo(ItemCard, isEqual)
+export const MemoizedItem = memo(ItemCard, isEqual)
