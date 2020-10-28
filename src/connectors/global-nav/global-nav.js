@@ -6,8 +6,9 @@ import { getUser } from 'connectors/user/user.state'
 import { appSetMode } from 'connectors/app/app.state'
 
 import GlobalNavComponent from 'components/global-nav/global-nav'
-import GlobalNavSearch from 'components/global-nav/tools/search/global-nav-search'
-import GlobalNavAdd from 'components/global-nav/tools/add/global-nav-add'
+import GlobalNavSearch from './global-nav-search'
+import GlobalNavAdd from './global-nav-add'
+import GlobalNavBulkEdit from './global-nav-bulk-edit'
 
 import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
@@ -104,14 +105,15 @@ const GlobalNav = (props) => {
   const toolClick = (name) => {
     if (name === 'search') dispatch(appSetMode('search'))
     if (name === 'add-item') dispatch(appSetMode('add'))
+    if (name === 'bulk-edit') dispatch(appSetMode('bulk'))
   }
 
   const resetNav = () => dispatch(appSetMode('default'))
-  const onSubmit = () => {}
 
   const navChildren = {
     search: GlobalNavSearch,
-    add: GlobalNavAdd
+    add: GlobalNavAdd,
+    bulk: GlobalNavBulkEdit
   }
 
   const NavTakeover = navChildren[appMode]
@@ -130,9 +132,7 @@ const GlobalNav = (props) => {
       userStatus={userStatus}
       onToolClick={toolClick}
       tools={tools}>
-      {NavTakeover ? (
-        <NavTakeover onClose={resetNav} onSubmit={onSubmit} />
-      ) : null}
+      {NavTakeover ? <NavTakeover onClose={resetNav} /> : null}
     </GlobalNavComponent>
   )
 }

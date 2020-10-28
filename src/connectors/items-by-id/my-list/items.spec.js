@@ -163,7 +163,8 @@ describe('My List Items', function () {
         open_url: expectedOpenUrl,
         read_time: 5,
         syndicated: false,
-        save_status: 'unsaved'
+        tags: undefined,
+        annotations: undefined
       })
     })
   })

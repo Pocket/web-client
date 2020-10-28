@@ -1,7 +1,9 @@
+import { takeLatest, put } from 'redux-saga/effects'
 import { APP_DEV_MODE_TOGGLE } from 'actions'
 import { APP_SET_BASE_URL } from 'actions'
 import { APP_SET_MODE } from 'actions'
 import { APP_SET_SECTION } from 'actions'
+import { ITEMS_BULK_CLEAR } from 'actions'
 import { HYDRATE } from 'actions'
 
 const initialState = { devMode: false, mode: 'default' }
@@ -37,7 +39,7 @@ export const appReducers = (state = initialState, action) => {
       // default
       // search
       // add
-      // bulkedit
+      // bulk
       const { mode } = action
       return { ...state, mode }
     }
@@ -56,7 +58,11 @@ export const appReducers = (state = initialState, action) => {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 
-export const appSagas = []
+export const appSagas = [takeLatest(APP_SET_MODE, appModeSwitch)]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
+function* appModeSwitch(action) {
+  const { mode } = action
+  if (mode !== 'bulk') yield put({ type: ITEMS_BULK_CLEAR })
+}

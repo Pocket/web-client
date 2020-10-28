@@ -12,7 +12,8 @@ import { DeleteIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
 import { AddIcon } from '@pocket/web-ui'
 import { FavoriteIcon } from '@pocket/web-ui'
-import { FavoriteFilledIcon } from '@pocket/web-ui'
+import { AddCircledIcon } from '@pocket/web-ui'
+import { CheckCircledIcon } from '@pocket/web-ui'
 import { TagIcon } from '@pocket/web-ui'
 
 const card = css`
@@ -24,6 +25,36 @@ const card = css`
   font-weight: 400;
   color: var(--color-textPrimary);
   position: relative;
+
+  &.bulkEdit {
+    cursor: pointer;
+    user-select: none;
+    a,
+    .actions {
+      pointer-events: none;
+    }
+
+    &.bulkSelected .title {
+      --color-underliner: var(--color-navCurrentTab);
+    }
+  }
+
+  .bulkBacking {
+    position: absolute;
+    box-sizing: content-box;
+    border-radius: var(--borderRadius);
+    padding: 1em;
+    width: 100%;
+    height: 100%;
+    transform: translate(-1em, -1em);
+    display: none;
+    z-index: -1;
+  }
+
+  &.bulkSelected .bulkBacking {
+    background-color: var(--color-navCurrentTab);
+    display: block;
+  }
 
   &.fixedheightgrid {
     height: 355px;
@@ -88,11 +119,13 @@ const card = css`
   }
 
   .title {
+    --color-underliner: var(--color-canvas);
     font-family: 'Graphik Web';
     font-weight: 600;
+    line-height: 1.22;
     padding: var(--size100) 0 0;
     margin: 0;
-    max-height: 4.4em;
+    max-height: 4.6em;
     overflow: hidden;
   }
 
@@ -129,6 +162,16 @@ const card = css`
   .actions {
     display: flex;
   }
+
+  &.bulkEdit .actions {
+    flex-direction: row-reverse;
+  }
+
+  .bulkIconStyle {
+    display: block;
+    width: 22px;
+    height: 22px;
+  }
 `
 
 /**
@@ -136,7 +179,14 @@ const card = css`
  * out of the [feed](https://github.com/Pocket/spec/blob/master/query/v3server/feed.md)
  * and makes sure the appropriate data is represented.
  */
-export const Card = ({ item, fluidHeight, type, actions }) => {
+export const Card = ({
+  item,
+  fluidHeight,
+  type,
+  actions,
+  bulkEdit,
+  bulkSelected
+}) => {
   const {
     resolved_id: id,
     title,
@@ -157,11 +207,18 @@ export const Card = ({ item, fluidHeight, type, actions }) => {
     itemUnArchive,
     itemFavorite,
     itemUnFavorite,
-    itemTag
+    itemTag,
+    itemBulkSelect,
+    itemBulkDeSelect
   } = actions
 
   const cardType = type === 'list' ? 'fixedheightlist' : 'fixedheightgrid'
-  const cardClass = fluidHeight ? card : `${card} ${cardType}`
+  const cardClass = cx(
+    card,
+    fluidHeight && cardType,
+    bulkEdit && 'bulkEdit',
+    bulkSelected && 'bulkSelected'
+  )
 
   const archiveAction = status === '0' ? itemArchive : itemUnArchive
   const CorrectArchiveIcon = status === '0' ? ArchiveIcon : AddIcon
@@ -171,11 +228,21 @@ export const Card = ({ item, fluidHeight, type, actions }) => {
   const CorrectFavIcon = favorite === '0' ? FavoriteIcon : FavoriteIcon // FavoriteFilledIcon <- Icon is broken
   const favoriteLabel = favorite === '0' ? 'Favorite' : 'UnFavorite'
 
+  const selectBulk = (event) => {
+    const withShift = event.shiftKey
+    if (bulkEdit)
+      return bulkSelected
+        ? itemBulkDeSelect(withShift)
+        : itemBulkSelect(withShift)
+  }
+
   return (
     <article
       className={cardClass}
       key={id}
-      {...testIdAttribute(`article-card-${id}`)}>
+      {...testIdAttribute(`article-card-${id}`)}
+      onClick={selectBulk}>
+      <div className="bulkBacking" />
       <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
         <span className="idOverlay">{id}</span>
       </FeatureFlag>
@@ -196,37 +263,45 @@ export const Card = ({ item, fluidHeight, type, actions }) => {
       </a>
       <footer className="footer">
         <div className="actions">
-          <ItemAction
-            menuItems={[
-              {
-                label: 'Share',
-                icon: <IosShareIcon />,
-                onClick: itemShare
-              },
-              {
-                label: 'Delete',
-                icon: <DeleteIcon />,
-                onClick: itemDelete
-              },
-              {
-                label: archiveLabel,
-                icon: <CorrectArchiveIcon />,
-                onClick: archiveAction
-              },
-              {
-                label: favoriteLabel,
-                icon: <CorrectFavIcon />,
-                onClick: favoriteAction
-              },
-              {
-                label: 'Tag',
-                icon: <TagIcon />,
-                onClick: itemTag
-              }
-            ]}
-            placement="top-end"
-            alignRight={true}
-          />
+          {bulkEdit ? (
+            bulkSelected ? (
+              <CheckCircledIcon className="bulkIconStyle" />
+            ) : (
+              <AddCircledIcon className="bulkIconStyle" />
+            )
+          ) : (
+            <ItemAction
+              menuItems={[
+                {
+                  label: 'Share',
+                  icon: <IosShareIcon />,
+                  onClick: itemShare
+                },
+                {
+                  label: 'Delete',
+                  icon: <DeleteIcon />,
+                  onClick: itemDelete
+                },
+                {
+                  label: archiveLabel,
+                  icon: <CorrectArchiveIcon />,
+                  onClick: archiveAction
+                },
+                {
+                  label: favoriteLabel,
+                  icon: <CorrectFavIcon />,
+                  onClick: favoriteAction
+                },
+                {
+                  label: 'Tag',
+                  icon: <TagIcon />,
+                  onClick: itemTag
+                }
+              ]}
+              placement="top-end"
+              alignRight={true}
+            />
+          )}
         </div>
       </footer>
     </article>

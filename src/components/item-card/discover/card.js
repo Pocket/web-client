@@ -75,10 +75,14 @@ const card = css`
   }
 
   .title {
+    --color-underliner: var(--color-canvas);
     font-family: 'Graphik Web';
     font-weight: 600;
+    line-height: 1.22;
     padding: var(--size100) 0 0;
     margin: 0;
+    max-height: 4.6em;
+    overflow: hidden;
   }
 
   .details {

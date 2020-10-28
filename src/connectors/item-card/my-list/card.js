@@ -9,6 +9,8 @@ import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favo
 
 import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
 
+import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
+import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 /**
  * Article Card
  * Creates a connected `Card` with the appropriate data and actions
@@ -17,8 +19,14 @@ import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
 export function ItemCard({ id, position, fluidHeight, type }) {
   const dispatch = useDispatch()
 
+  const appMode = useSelector((state) => state?.app?.mode)
+  const bulkEdit = appMode === 'bulk'
+
   // Get data from state
   const item = useSelector((state) => state.myListItemsById[id])
+
+  const bulkList = useSelector((state) => state.bulkEdit)
+  const bulkSelected = bulkList?.selected?.includes(id)
 
   const itemShare = () => {}
   const itemDelete = () => dispatch(itemsDeleteAction([{ id, position }]))
@@ -31,12 +39,17 @@ export function ItemCard({ id, position, fluidHeight, type }) {
 
   const itemTag = () => {}
 
+  const itemBulkSelect = (shift) => {dispatch(itemsBulkSelectAction(id, shift))} //prettier-ignore
+  const itemBulkDeSelect = (shift) => {dispatch(itemsBulkDeSelectAction(id, shift))} //prettier-ignore
+
   return item ? (
     <Card
       item={item}
       position={position}
       fluidHeight={fluidHeight}
       type={type}
+      bulkEdit={bulkEdit}
+      bulkSelected={bulkSelected}
       actions={{
         itemShare,
         itemDelete,
@@ -44,7 +57,9 @@ export function ItemCard({ id, position, fluidHeight, type }) {
         itemUnArchive,
         itemFavorite,
         itemUnFavorite,
-        itemTag
+        itemTag,
+        itemBulkSelect,
+        itemBulkDeSelect
       }}
     />
   ) : null

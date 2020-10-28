@@ -22,13 +22,13 @@
  * ```
  */
 export const underliner = {
-  textShadow: `-0.126em 0.063em 0 var(--color-canvas),
-    -0.063em 0.063em 0 var(--color-canvas),
-    0 0.063em 0 var(--color-canvas),
-    0.063em 0.063em 0 var(--color-canvas),
-    0.126em 0.063em 0 var(--color-canvas),
-    -0.126em 0 0 var(--color-canvas)`,
-  backgroundColor: 'var(--color-canvas)',
+  textShadow: `-0.126em 0.063em 0 var(--color-underliner),
+    -0.063em 0.063em 0 var(--color-underliner),
+    0 0.063em 0 var(--color-underliner),
+    0.063em 0.063em 0 var(--color-underliner),
+    0.126em 0.063em 0 var(--color-underliner),
+    -0.126em 0 0 var(--color-underliner)`,
+  backgroundColor: 'var(--color-underliner)',
   backgroundImage:
-    'linear-gradient(to top, transparent 0%, transparent 8%, var(--color-canvas) 8%, var(--color-canvas) 100%)'
+    'linear-gradient(to top, transparent 0%, transparent 8%, var(--color-underliner) 8%, var(--color-underliner) 100%)'
 }

@@ -35,7 +35,7 @@ const listToSort = [
     time_favorited: '99874',
     time_read: '20',
     is_article: '1',
-    has_video: '0',
+    has_video: '1',
     favorite: '1',
     status: '1',
     tags: {}
@@ -47,7 +47,7 @@ const listToSort = [
     time_favorited: '99622',
     time_read: '0',
     is_article: '1',
-    has_video: '1',
+    has_video: '2',
     favorite: '1',
     status: '0'
   },
@@ -93,7 +93,7 @@ const listToSort = [
     time_favorited: '0',
     time_read: '150',
     is_article: '0',
-    has_video: '1',
+    has_video: '2',
     favorite: '0',
     status: '1',
     annotations: {}
