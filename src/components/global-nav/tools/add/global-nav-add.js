@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { AddIcon, CrossIcon } from '@pocket/web-ui'
+import { AddIcon, CrossIcon, ErrorIcon } from '@pocket/web-ui'
 import { breakpointMediumHandset } from '@pocket/web-ui'
 import { screenMediumHandset } from '@pocket/web-ui'
 import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
+import { isURL } from 'validator'
 
 const addStyle = css`
   width: 100%;
@@ -17,6 +18,7 @@ const addStyle = css`
     padding-left: calc(20px + var(--spacing050) + var(--spacing075));
     height: var(--size300);
     width: 100%;
+    max-width: initial;
     margin-right: var(--spacing050);
     &.has-value {
       padding-right: var(--spacing400);
@@ -36,6 +38,28 @@ const addStyle = css`
 
     ${breakpointMediumHandset} {
       display: none;
+    }
+  }
+
+  .error-message {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    padding-right: var(--spacing050);
+
+    ${breakpointMediumHandset} {
+      padding-right: 0;
+    }
+
+    div {
+      padding: 0.5em 1em;
+      background-color: var(--color-canvas);
+      color: var(--color-error);
+      border: var(--borderStyle);
+      border-top-width: 0;
+      border-radius: 0 0 var(--borderRadius) var(--borderRadius);
+      box-shadow: var(--raisedCanvas);
     }
   }
 `
@@ -104,53 +128,6 @@ const CloseButton = ({ onClick }) => {
   )
 }
 
-const clearIconStyle = css`
-  width: 20px;
-  height: 20px;
-  display: none;
-
-  ${breakpointMediumHandset} {
-    display: inline-block;
-  }
-`
-
-const clearButtonStyle = css`
-  right: var(--spacing050);
-  position: absolute;
-  color: var(--color-textTertiary);
-  font-family: var(--fontSansSerif);
-  font-size: var(--fontSize100);
-  padding-right: var(--spacing100);
-  background-color: transparent;
-
-  span {
-    color: var(--color-textSecondary);
-
-    &:hover {
-      color: var(--color-textPrimary);
-    }
-  }
-
-  &:hover {
-    background-color: transparent;
-  }
-  ${breakpointMediumHandset} {
-    .clear-label {
-      display: none;
-    }
-    right: 0;
-  }
-`
-
-const ClearButton = ({ onClick }) => {
-  return (
-    <button className={clearButtonStyle} onClick={onClick}>
-      <span className="clear-label">Clear</span>
-      <CrossIcon className={clearIconStyle} />
-    </button>
-  )
-}
-
 const addContainerStyle = css`
   display: inline-flex;
   position: relative;
@@ -170,18 +147,23 @@ const GlobalNavAdd = ({
   placeholder,
   mobilePlaceholder
 }) => {
-  const initialSearchValue = ''
+  const inputEl = useRef(null)
+
   const [addUrl, updateAddUrl] = useState(value)
   const [isMobile, updateIsMobile] = useState(false)
+  const [inputError, updateInputError] = useState(false)
 
-  const handleClear = () => updateAddUrl(initialSearchValue)
-
-  const handleInputChange = (e) => updateAddUrl(e.target.value)
+  const handleInputChange = (e) => {
+    updateInputError(false)
+    updateAddUrl(e.target.value)
+  }
 
   const handleSubmit = (e) => {
+    e.stopPropagation()
     e.preventDefault()
 
-    if (!addUrl) return
+    const validUrl = isURL(addUrl)
+    if (!validUrl) return updateInputError('Please enter a valid url')
 
     onSubmit(addUrl)
   }
@@ -190,13 +172,18 @@ const GlobalNavAdd = ({
     updateIsMobile(window.innerWidth < screenMediumHandset)
   }, [window.innerWidth])
 
+  useEffect(() => {
+    inputEl.current.focus()
+  }, [])
+
   return (
-    <form className={addStyle} onSubmit={handleSubmit}>
+    <form className={addStyle} onSubmit={handleSubmit} autoComplete="off">
       <div className={addContainerStyle}>
         <AddIcon className={addIconStyle} />
         <input
           type="url"
-          name="q"
+          name="add-input"
+          ref={inputEl}
           className={classnames(['add-input', { 'has-value': !!addUrl }])}
           aria-label="Add Item to Pocket"
           value={addUrl}
@@ -206,11 +193,12 @@ const GlobalNavAdd = ({
           placeholder={isMobile ? mobilePlaceholder : placeholder}
           {...testIdAttribute('add-input')}
         />
-        {addUrl ? (
-          <ClearButton
-            onClick={handleClear}
-            {...testIdAttribute('add-clear')}
-          />
+        {inputError ? (
+          <div className="error-message">
+            <div>
+              <ErrorIcon /> {inputError}
+            </div>
+          </div>
         ) : null}
       </div>
       <button

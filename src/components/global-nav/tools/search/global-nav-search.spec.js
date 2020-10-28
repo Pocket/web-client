@@ -21,10 +21,10 @@ describe('GlobalNavSearch', () => {
   it('applies the `placeholder` prop value correctly to the input', () => {
     const input = defaultSearch.find(testIdSelector('search-input'))
 
-    assert.equal(input.prop('placeholder'), baseProps.placeholder)
+    assert.strictEqual(input.prop('placeholder'), baseProps.placeholder)
   })
 
-  it('calls the props.onSubmit callback when the Submit button is clicked', () => {
+  it('calls the props.onSubmit callback when the form is submitted', () => {
     const spy = sinon.spy()
     const search = shallow(
       <GlobalNavSearch
@@ -33,18 +33,14 @@ describe('GlobalNavSearch', () => {
         value="pursuit of happiness"
       />
     )
-    const submitButton = search.find(testIdSelector('search-button'))
+
     const form = search.find('form')
-
-    submitButton.simulate('click', mockEvent)
-
-    assert(spy.calledOnce)
 
     // this is meant to test the submit via keypress. Adding an event is a
     // workaround for https://github.com/enzymejs/enzyme/issues/308
-    form.simulate('submit', { preventDefault: () => {} })
+    form.simulate('submit', mockEvent)
 
-    assert(spy.calledTwice)
+    assert(spy.calledOnce)
   })
 
   it('does not render a close button when no props.onClose is provided', () => {
@@ -81,37 +77,6 @@ describe('GlobalNavSearch', () => {
     searchInput.simulate('blur', mockEvent)
 
     assert(spy.calledWith(mockEvent))
-  })
-
-  it('renders a Clear button only  when a search input value is present', () => {
-    let clearButton
-
-    clearButton = defaultSearch.find(testIdSelector('search-clear'))
-
-    assert(!clearButton.exists())
-
-    const searchWithValue = shallow(
-      <GlobalNavSearch {...baseProps} value="pursuit of happiness" />
-    )
-    clearButton = searchWithValue.find(testIdSelector('search-clear'))
-
-    assert(clearButton.exists())
-  })
-
-  it('clicking the Clear button clears the current search term', () => {
-    const search = shallow(
-      <GlobalNavSearch {...baseProps} value="pursuit of happiness" />
-    )
-    const clearButton = search.find(testIdSelector('search-clear'))
-    const searchInput = search.find(testIdSelector('search-input'))
-
-    assert.equal(searchInput.prop('value'), 'pursuit of happiness')
-
-    clearButton.simulate('click')
-
-    const changedSearchInput = search.find(testIdSelector('search-input'))
-
-    assert.equal(changedSearchInput.prop('value'), '')
   })
 
   it('supplies the search input with a value if a `value` prop was passed in', () => {

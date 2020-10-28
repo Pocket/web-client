@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { SearchIcon, CrossIcon } from '@pocket/web-ui'
+import { SearchIcon, CrossIcon, ErrorIcon } from '@pocket/web-ui'
 import { breakpointMediumHandset } from '@pocket/web-ui'
 import { screenMediumHandset } from '@pocket/web-ui'
 import { css } from 'linaria'
@@ -17,8 +17,8 @@ const searchStyle = css`
     padding-left: calc(20px + var(--spacing050) + var(--spacing075));
     height: var(--size300);
     width: 100%;
-    margin-right: var(--spacing050);
     max-width: initial;
+    margin-right: var(--spacing050);
     &.has-value {
       padding-right: var(--spacing400);
     }
@@ -37,6 +37,28 @@ const searchStyle = css`
 
     ${breakpointMediumHandset} {
       display: none;
+    }
+  }
+
+  .error-message {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    padding-right: var(--spacing050);
+
+    ${breakpointMediumHandset} {
+      padding-right: 0;
+    }
+
+    div {
+      padding: 0.5em 1em;
+      background-color: var(--color-canvas);
+      color: var(--color-error);
+      border: var(--borderStyle);
+      border-top-width: 0;
+      border-radius: 0 0 var(--borderRadius) var(--borderRadius);
+      box-shadow: var(--raisedCanvas);
     }
   }
 `
@@ -105,53 +127,6 @@ const CloseButton = ({ onClick }) => {
   )
 }
 
-const clearIconStyle = css`
-  width: 20px;
-  height: 20px;
-  display: none;
-
-  ${breakpointMediumHandset} {
-    display: inline-block;
-  }
-`
-
-const clearButtonStyle = css`
-  right: var(--spacing050);
-  position: absolute;
-  color: var(--color-textTertiary);
-  font-family: var(--fontSansSerif);
-  font-size: var(--fontSize100);
-  padding-right: var(--spacing100);
-  background-color: transparent;
-
-  span {
-    color: var(--color-textSecondary);
-
-    &:hover {
-      color: var(--color-textPrimary);
-    }
-  }
-
-  &:hover {
-    background-color: transparent;
-  }
-  ${breakpointMediumHandset} {
-    .clear-label {
-      display: none;
-    }
-    right: 0;
-  }
-`
-
-const ClearButton = ({ onClick }) => {
-  return (
-    <button className={clearButtonStyle} onClick={onClick}>
-      <span className="clear-label">Clear</span>
-      <CrossIcon className={clearIconStyle} />
-    </button>
-  )
-}
-
 const searchContainerStyle = css`
   display: inline-flex;
   position: relative;
@@ -171,18 +146,22 @@ const GlobalNavSearch = ({
   placeholder,
   mobilePlaceholder
 }) => {
-  const initialSearchValue = ''
-  const [searchTerm, updatesearchTerm] = useState(value)
+  const inputEl = useRef(null)
+
+  const [searchTerm, updateSearchTerm] = useState(value)
   const [isMobile, updateIsMobile] = useState(false)
+  const [inputError, updateInputError] = useState(false)
 
-  const handleClear = () => updatesearchTerm(initialSearchValue)
-
-  const handleInputChange = (e) => updatesearchTerm(e.target.value)
+  const handleInputChange = (e) => {
+    updateInputError(false)
+    updateSearchTerm(e.target.value)
+  }
 
   const handleSubmit = (e) => {
+    e.stopPropagation()
     e.preventDefault()
 
-    if (!searchTerm) return
+    if (!searchTerm) return updateInputError('Please enter a search term')
 
     onSubmit(searchTerm)
   }
@@ -191,13 +170,17 @@ const GlobalNavSearch = ({
     updateIsMobile(window.innerWidth < screenMediumHandset)
   }, [window.innerWidth])
 
+  useEffect(() => {
+    inputEl.current.focus()
+  }, [])
+
   return (
-    <form className={searchStyle} onSubmit={handleSubmit}>
+    <form className={searchStyle} onSubmit={handleSubmit} autoComplete="off">
       <div className={searchContainerStyle}>
         <SearchIcon className={searchIconStyle} />
         <input
-          type="search"
-          name="q"
+          name="search-input"
+          ref={inputEl}
           className={classnames([
             'search-input',
             { 'has-value': !!searchTerm }
@@ -210,16 +193,16 @@ const GlobalNavSearch = ({
           placeholder={isMobile ? mobilePlaceholder : placeholder}
           {...testIdAttribute('search-input')}
         />
-        {searchTerm ? (
-          <ClearButton
-            onClick={handleClear}
-            {...testIdAttribute('search-clear')}
-          />
+        {inputError ? (
+          <div className="error-message">
+            <div>
+              <ErrorIcon /> {inputError}
+            </div>
+          </div>
         ) : null}
       </div>
       <button
         className="search-button"
-        onClick={handleSubmit}
         {...testIdAttribute('search-button')}>
         Search
       </button>
