@@ -80,7 +80,7 @@ describe('PublisherRecs', () => {
       )
     })
   })
-  describe('RecommendedArticles', () => {
+  describe.skip('RecommendedArticles', () => {
     const maxRecs = 3
 
     it('limits the displayed articles to the max count if more than the max was passed in', () => {

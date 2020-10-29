@@ -7,7 +7,7 @@ import { PublisherAttribution } from './publisher-attribution'
 
 import { publisher } from 'mock/article'
 
-describe('PublisherAttribution', () => {
+describe.skip('PublisherAttribution', () => {
   const baseProps = {
     withCustomButton: publisher.theAtlantic,
     withNoLogo: publisher.noLogoPublisher,

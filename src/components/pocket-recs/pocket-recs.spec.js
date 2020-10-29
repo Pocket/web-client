@@ -57,7 +57,7 @@ describe('PocketRecs', () => {
       )
     })
   })
-  describe('Recommendations', () => {
+  describe.skip('Recommendations', () => {
     const maxRecs = 3
 
     it('limits the displayed articles to the max count if more than the max was passed in', () => {
