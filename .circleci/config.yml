@@ -1,0 +1,571 @@
+version: 2.1
+
+# Orbs: Pre-configured bundled functionality
+orbs:
+  aws-cli: circleci/aws-cli@0.1.13
+  aws-ecr: circleci/aws-ecr@6.1.0
+  assume-role: airswap/assume-role@0.2.0
+  cypress: cypress-io/cypress@1
+  slack: circleci/slack@3.4.0
+
+# Commands: Setting up some tasks to avoid a lot of boilerplate
+commands:
+  setup:
+    description: "Preparing the environment"
+    steps:
+      # Define the working directory for this job
+      - attach_workspace:
+          at: /tmp/workspace
+      # Checkout source code into the working_directory.
+      - checkout
+      # Add user to npmrc
+      - run:
+          name: Authenticate with GitHub package registry
+          command: echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" > ~/.npmrc
+      # Restores a previously saved cache based on a key.
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            # If this gets our of sync, you can increment the version (vX).  Just be
+            # sure to match that version when saving the cache as well.
+            - node-v6-{{ checksum "package-lock.json" }}
+            - node-v6-
+      # Install javascript dependencies
+      - run:
+          name: Install dependencies
+          command: npm install
+      # Save the cache to avoid extraneous downloads
+      - save_cache:
+          key: node-v6-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+            - ./.next/cache
+
+# Jobs: Setting up tasks for CI to execute
+jobs:
+  # ——————————————————————————————————————————————————————————————
+  # Eslint: Make sure code is free from easily caught errors
+  # ——————————————————————————————————————————————————————————————
+  eslint:
+    # CPU and RAM resources for the job.
+    resource_class: small
+    # Define the container we will run the task in (standard node)
+    docker:
+      - image: circleci/node:latest
+    steps:
+      # Setup Environment
+      - setup
+      # Run linting
+      - run:
+          name: Lint files with eslint
+          command: npm run lint
+
+  # ——————————————————————————————————————————————————————————————
+  # Unit Test: Make sure code is free from testable errors
+  # ——————————————————————————————————————————————————————————————
+  unit_tests:
+    # CPU and RAM resources for the job.
+    resource_class: small
+    # Define the container we will run the task in (standard node)
+    docker:
+      - image: circleci/node:latest
+    steps:
+      # Setup Environment
+      - setup
+      # Run tests
+      - run:
+          name: Run unit tests
+          command: npm test
+
+  # ——————————————————————————————————————————————————————————————
+  # Integration Test: Make sure our happy paths have not regressed
+  # ——————————————————————————————————————————————————————————————
+  # integration_tests:
+  #   # CPU and RAM resources for the job.
+  #   resource_class: small
+  #   # Define the container we will run the task in (standard node)
+  #   docker:
+  #     - image: cypress/base:14.0.0
+  #   steps:
+  #     # Setup Environment
+  #     - setup
+  #     # Run tests
+  #     - run:
+  #         name: Run integration tests
+  #         command: 'CYPRESS_BASE_URL=https://$(sed s/[/]//g \<<<$CIRCLE_BRANCH).web-client.getpocket.dev npm run cypress:ci'
+  #     - store_artifacts:
+  #         path: ./cypress
+
+  # ——————————————————————————————————————————————————————————————
+  # Build Deployment: This builds the nextjs deployment
+  # This is used for features and production
+  # @prefix {String}: Provide asset prefix to use CDN for css/js files
+  # NOTE: NextJS does not automatically prefix media assets.
+  # ——————————————————————————————————————————————————————————————
+  build_deployment:
+    parameters:
+      prefix:
+        description: The assets prefix
+        type: string
+        default: ""
+      showdev:
+        description: Including dev tools
+        type: string
+        default: ""
+    # CPU and RAM resources for the job.
+    resource_class: medium
+    # Define the container we will run the task in (standard node)
+    docker:
+      - image: circleci/node:latest
+    steps:
+      # Setup Environment
+      - setup
+      - add_ssh_keys:
+          fingerprints:
+            - "95:3f:a9:02:0d:06:71:f9:5d:90:1e:a0:e5:e3:c3:25"
+      - run:
+          name: Set version
+          command: |
+            mkdir -p config
+            echo "module.exports = '$CIRCLE_SHA1';" > ./config/version.js
+      - run:
+          name: Build
+          command: ASSET_PREFIX=<<parameters.prefix>> SHOW_DEV=<<parameters.showdev>> NODE_ENV=production npm run build
+      # Copy built files to app_prod folder
+      - run:
+          name: Setup workspace
+          command: |
+            mkdir -p /tmp/workspace/app_prod
+            cp -r . /tmp/workspace/app_prod
+      # Persist built files to workspace
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - app_prod
+
+  # ——————————————————————————————————————————————————————————————
+  # Push Feature Assets:
+  # Push built deployment to the s3 bucket for a feature deployment
+  # Used by client side rendering through a CDN
+  # We should be able to combine this with the deploy_feature step
+  # when we have better server infrastructure
+  # ——————————————————————————————————————————————————————————————
+  push_feature_assets:
+    docker:
+      - image: circleci/python # for aws cli without fluff
+    steps:
+      - aws-cli/install
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_DEV
+      - attach_workspace:
+          at: .
+      - run:
+          name: Push
+          command: |
+            aws s3 cp \
+            --recursive \
+            --acl public-read \
+            --metadata-directive REPLACE \
+            --cache-control max-age=31536000 \
+            --include "*" \
+            --exclude "BUILD_ID" \
+            app_prod/.next s3://web-client.getpocket.dev-assets/_next
+
+  # ——————————————————————————————————————————————————————————————
+  # Deploy Feature:
+  # Copy everything from workspace into a Docker image for ssr rendering
+  # This also notifys slack when the feature deployment is complete
+  # ——————————————————————————————————————————————————————————————
+  deploy_feature:
+    # Define the container we will run the task in (standard node)
+    docker:
+      - image: pocket/ops-cli:v0.0.5
+    # Define the environment
+    environment:
+      MAIN_IMAGE_NAME: web-client-feature
+    steps:
+      - run:
+          name: Setup common environment variables
+          command: |
+            echo 'export AWS_ECR_ACCOUNT_URL="${ACCOUNT_ID_DEV}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Copy App
+          command: |
+            cp -r /tmp/workspace/app_prod/. .
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_DEV
+      - aws-ecr/build-and-push-image:
+          checkout: false
+          repo: $MAIN_IMAGE_NAME
+          setup-remote-docker: true
+          tag: $CIRCLE_SHA1
+          path: /tmp/workspace/app_prod
+          dockerfile: /tmp/workspace/app_prod/Dockerfile
+      - run:
+          name: Deploy
+          command: |
+            ops-cli feature-deploy \
+            --param-file .aws/feature/3_service.dev.json \
+            --template-file .aws/feature/3_service.cfn.yml \
+            --git-sha "$CIRCLE_SHA1" \
+            --branch-name "$CIRCLE_BRANCH" \
+            --image-name ${AWS_ECR_ACCOUNT_URL}/${MAIN_IMAGE_NAME}:${CIRCLE_SHA1}
+      - run:
+          name: Notify Deploy
+          command: |
+            ops-cli feature-deploy-notify \
+            --param-file .aws/feature/3_service.dev.json \
+            --template-file .aws/feature/3_service.cfn.yml \
+            --git-sha "$CIRCLE_SHA1" \
+            --branch-name "$CIRCLE_BRANCH" \
+            --github-username "$CIRCLE_USERNAME" \
+            --github-compare-url "https://github.com/Pocket/web-client/compare/main...$CIRCLE_SHA1" \
+            --slack-webhook "$SLACK_WEBHOOK" \
+            --github-token $GITHUB_TOKEN \
+            --github-owner Pocket \
+            --github-repo web-client
+
+  # ——————————————————————————————————————————————————————————————
+  # Cleanup feature:
+  # This adds an auto-matic cleanup step for defunct feature branches
+  # This is separate as it is run independently during automation
+  # ——————————————————————————————————————————————————————————————
+  cleanup_feature:
+    docker:
+      - image: pocket/ops-cli:v0.0.5
+    steps:
+      - checkout
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_DEV
+          aws-region: us-east-1
+      - run:
+          name: Cleanup Feature Branches
+          command: |
+            ops-cli feature-cleanup \
+            --param-file .aws/feature/3_service.dev.json \
+            --slack-webhook "$SLACK_WEBHOOK" \
+            --dry-run=false \
+            --days-old 8 \
+            --github-token $GITHUB_TOKEN \
+            --github-owner Pocket \
+            --github-repo web-client
+
+  # ——————————————————————————————————————————————————————————————
+  # Tag ECR(Elastic Container Repository)
+  # This tags docker image as latest for use by devOps
+  # ——————————————————————————————————————————————————————————————
+  tag:
+    docker:
+      - image: pocket/ops-cli:latest
+        environment:
+          MAIN_IMAGE_NAME: web-client
+    steps:
+      - setup_remote_docker
+      - run:
+          name: Setup common environment variables
+          command: |
+            echo 'export AWS_ECR_ACCOUNT_URL="${ACCOUNT_ID_PROD}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_PROD
+      - aws-ecr/ecr-login
+      - run:
+          name: Tag As latest
+          command: |
+            docker pull ${AWS_ECR_ACCOUNT_URL}/${MAIN_IMAGE_NAME}:${CIRCLE_SHA1}
+            docker tag ${AWS_ECR_ACCOUNT_URL}/${MAIN_IMAGE_NAME}:${CIRCLE_SHA1} ${AWS_ECR_ACCOUNT_URL}/${MAIN_IMAGE_NAME}:latest
+      - aws-ecr/push-image:
+          repo: $MAIN_IMAGE_NAME
+          tag: latest
+
+  # ——————————————————————————————————————————————————————————————
+  # Build Production Container
+  # Copy everything from workspace into a Docker image for ssr rendering
+  # ——————————————————————————————————————————————————————————————
+  build_production_container:
+    # Define the container we will run the task in (standard node)
+    docker:
+      - image: pocket/ops-cli:v0.0.5
+    # Define the environment
+    environment:
+      MAIN_IMAGE_NAME: web-client
+    steps:
+      - run:
+          name: Setup common environment variables
+          command: |
+            echo 'export AWS_ECR_ACCOUNT_PROD_URL="${ACCOUNT_ID_PROD}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
+            echo 'export AWS_ECR_ACCOUNT_DEV_URL="${ACCOUNT_ID_DEV}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
+            echo 'export AWS_ECR_ACCOUNT_URL="${AWS_ECR_ACCOUNT_PROD_URL}"' >> $BASH_ENV
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Copy App
+          command: |
+            cp -r /tmp/workspace/app_prod/. .
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_PROD
+      - aws-ecr/build-and-push-image:
+          checkout: false
+          repo: $MAIN_IMAGE_NAME
+          setup-remote-docker: true
+          tag: $CIRCLE_SHA1
+          path: /tmp/workspace/app_prod
+          dockerfile: /tmp/workspace/app_prod/Dockerfile
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_DEV
+      - run:
+          name: Retag And Setup
+          command: |
+            echo 'export AWS_ECR_ACCOUNT_URL="${AWS_ECR_ACCOUNT_DEV_URL}"' >> $BASH_ENV
+            docker tag ${AWS_ECR_ACCOUNT_PROD_URL}/${MAIN_IMAGE_NAME}:$CIRCLE_SHA1 ${AWS_ECR_ACCOUNT_DEV_URL}/${MAIN_IMAGE_NAME}:$CIRCLE_SHA1
+      - aws-ecr/ecr-login
+      - aws-ecr/push-image:
+          repo: $MAIN_IMAGE_NAME
+          tag: $CIRCLE_SHA1
+
+  # ——————————————————————————————————————————————————————————————
+  # Push Production Assets:
+  # Push built deployment to the s3 bucket for client side caching
+  # ——————————————————————————————————————————————————————————————
+  push_production_assets:
+    docker:
+      - image: circleci/python # for aws cli without fluff
+    steps:
+      - aws-cli/install
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_PROD
+      - attach_workspace:
+          at: .
+      - run:
+          name: Push
+          command: |
+            aws s3 cp \
+            --recursive \
+            --acl public-read \
+            --metadata-directive REPLACE \
+            --cache-control max-age=31536000 \
+            --include "*" \
+            --exclude "BUILD_ID" \
+            app_prod/.next s3://readitlater-deploy/web-client/_next
+
+  # ——————————————————————————————————————————————————————————————
+  # Deploy:
+  # This runs our terraform jobs to adjust aws settings and points
+  # production to the new git sha
+  # ——————————————————————————————————————————————————————————————
+  deploy:
+    parameters:
+      deploy:
+        description: Should deploy
+        type: boolean
+        default: false
+    docker:
+      - image: pocket/ops-cli:v0.0.5
+        environment:
+          TF_WORKSPACE: production
+    steps:
+      - checkout
+      - run:
+          name: Install Terraform
+          command: |
+            #Pinning to 0.12.29 until modules are updated to support 0.13.0
+            export TERRAFORM=0.12.29
+            #$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')
+            wget https://releases.hashicorp.com/terraform/${TERRAFORM}/terraform_${TERRAFORM}_linux_amd64.zip
+            sudo unzip ./terraform_${TERRAFORM}_linux_amd64.zip -d /usr/local/bin/
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_PROD
+      - run:
+          name: Setup Stack
+          command: |
+            cd .aws/production
+            variables=$(cat \<<-END
+            credentials "app.terraform.io" {
+            token = "$TERRAFORM_TOKEN"
+            }
+            END
+            )
+            echo $variables > ~/.terraformrc
+            terraform init -input=false
+      - when:
+          condition: << parameters.deploy >>
+          steps:
+            - run:
+                name: Deploy Push
+                command: |
+                  aws ssm put-parameter --name "/web-client/CircleCI/Production/BUILD_BRANCH" --type "SecureString" --value "${CIRCLE_BRANCH}" --overwrite
+                  aws ssm put-parameter --name "/web-client/CircleCI/Production/SERVICE_VERSION" --type "SecureString" --value "${CIRCLE_BUILD_NUM}" --overwrite
+                  aws ssm put-parameter --name "/web-client/CircleCI/Production/SERVICE_HASH" --type "SecureString" --value "${CIRCLE_SHA1}" --overwrite
+                  cd .aws/production
+                  terraform apply \
+                    -auto-approve \
+                    -lock-timeout=600s \
+                    -var-file="_globals.tfvars"
+            - assume-role/assume-role:
+                account-id: $ACCOUNT_ID_DEV
+            - run:
+                name: Push Dev Variables
+                command: |
+                  aws ssm put-parameter --name "/web-client/CircleCI/Development/BUILD_BRANCH" --type "SecureString" --value "${CIRCLE_BRANCH}" --overwrite
+                  aws ssm put-parameter --name "/web-client/CircleCI/Development/SERVICE_VERSION" --type "SecureString" --value "${CIRCLE_BUILD_NUM}" --overwrite
+                  aws ssm put-parameter --name "/web-client/CircleCI/Development/SERVICE_HASH" --type "SecureString" --value "${CIRCLE_SHA1}" --overwrite
+      - unless:
+          condition: << parameters.deploy >>
+          steps:
+            - run:
+                name: Output Push Plan
+                command: |
+                  cd .aws/production
+                  terraform plan \
+                    -lock=false \
+                    -refresh=false \
+                    -out=prod.plan \
+                    -var-file="_globals.tfvars"
+            - store_artifacts:
+                path: .aws/production/prod.plan
+
+  # ——————————————————————————————————————————————————————————————
+  # Deployment Notification:
+  # This adds notification to slack on a succesful live deploy
+  # ——————————————————————————————————————————————————————————————
+  deploy_end_notification:
+    resource_class: small
+    docker:
+      - image: pocket/ops-cli:v0.0.4
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Slack Deploy End Notification
+          command: |
+            curl -X POST -H 'Content-type: application/json' \
+            --data "{
+              \"username\": \"buster\",
+              \"icon_emoji\": \":web-client-done:\",
+              \"channel\": \"log-web-client-deploys\",
+              \"text\": \"Completed deploy of <https://github.com/Pocket/web-client/commit/$CIRCLE_SHA1> by <https://github.com/$CIRCLE_USERNAME|$CIRCLE_USERNAME>\",
+              \"attachments\": [
+                {
+                    \"color\": \"#36a64f\",
+                    \"fallback\": \"Workflow\",
+                    \"title\": \"Workflow\",
+                    \"title_link\": \"https://circleci.com/workflow-run/$CIRCLE_WORKFLOW_ID\"
+                }
+            ]}" \
+             $SLACK_WEBHOOK
+      - run:
+          name: Sentry Release Notification
+          command: |
+            curl https://sentry.io/api/0/organizations/pocket/releases/ \
+              -X POST \
+              -H "Authorization: Bearer $SENTRY_BEARER" \
+              -H 'Content-Type: application/json' \
+              -d "
+                {
+                  \"version\": \"$CIRCLE_SHA1\",
+                  \"refs\": [{
+                      \"repository\":\"Pocket/web-client\",
+                      \"commit\":\"$CIRCLE_SHA1\"
+                  }],
+                  \"projects\":[\"web-client\"]
+                }
+              "
+            curl https://sentry.io/api/0/organizations/pocket/releases/$CIRCLE_SHA1/deploys/ \
+               -X POST \
+               -H "Authorization: Bearer $SENTRY_BEARER" \
+               -H 'Content-Type: application/json' \
+               -d "
+                 {
+                   \"environment\": \"Production\"
+                 }
+               "
+
+# Workflow switches
+not_main: &not_main
+  filters:
+    branches:
+      ignore:
+        - main
+only_main: &only_main
+  filters:
+    branches:
+      only:
+        - main
+
+# Workflows: Executing jobs we have defined based on specific branch changes
+workflows:
+  version: 2
+  cleanup:
+    jobs:
+      - cleanup_feature
+    triggers:
+      - schedule:
+          cron: "0 * * * *"
+          filters:
+            branches:
+              only:
+                - main
+  all:
+    jobs:
+      # lint all the files
+      - eslint:
+          <<: *not_main
+      # unit test all the files
+      - unit_tests:
+          <<: *not_main
+      # conditionally building deployment with or without asset prefix
+      - build_deployment:
+          <<: *only_main
+          prefix: "https://assets.getpocket.com/web-client"
+          showdev: ""
+          name: build_production
+      - build_deployment:
+          <<: *not_main
+          prefix: ""
+          showdev: "included"
+          name: build_feature
+      # conditionally deploy features when not pushed to main
+      - deploy_feature:
+          <<: *not_main
+          requires:
+            - build_feature
+      # conditionally deploy features when not pushed to main
+      - push_feature_assets:
+          <<: *not_main
+          requires:
+            - build_feature
+      # Cypress Integration Tests on feature branches
+      # - integration_tests:
+      #     <<: *not_main
+      #     requires:
+      #       - push_feature_assets
+      #       - deploy_feature
+      # conditional push production build and assets (css/js) for main branch
+      - push_production_assets:
+          <<: *only_main
+          requires:
+            - build_production
+      - build_production_container:
+          requires:
+            - build_production
+      - tag:
+          <<: *only_main
+          requires:
+            - build_production_container
+      # conditional push production build and assets (css/js)
+      - deploy:
+          <<: *not_main
+          deploy: false
+          name: check_production
+      - deploy:
+          <<: *only_main
+          deploy: true
+          name: deploy_production
+          requires:
+            - build_production_container
+            - push_production_assets
+      - deploy_end_notification:
+          <<: *only_main
+          requires:
+            - deploy_production
