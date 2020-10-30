@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-
+import { useHasChanged } from 'common/utilities/hooks/has-changed'
 import Layout from 'layouts/with-sidebar'
 import { getMylistData } from './my-list.state'
 import { updateMyListData } from './my-list.state'
@@ -16,7 +16,6 @@ import { SideNav } from 'components/side-nav/side-nav'
 export default function Collection(props) {
   const { metaData = {}, subset = 'active', filter } = props
 
-  // useEffect(trackPageView, [])
   const dispatch = useDispatch()
   const router = useRouter()
 
@@ -25,7 +24,16 @@ export default function Collection(props) {
   const offset = useSelector((state) => state.myList[`${section}Offset`])
   const total = useSelector((state) => state.myList[`${section}Total`])
   const since = useSelector((state) => state.myList[`${section}Since`])
+  const routeChange = useHasChanged(router.pathname)
 
+  const initialItemsPopulated =
+    items?.length && (items?.length >= 18 || total < 18)
+
+  /**
+   * Set up listeners for focus shifts.  When the window gains focus check if
+   * since exists and this effect runs every time since is updated
+   * ------------------------------------------------------------------------
+   */
   useEffect(() => {
     const handleFocus = () => {
       if (!since) return
@@ -34,33 +42,41 @@ export default function Collection(props) {
 
     // Adding new event listeners
     window.addEventListener('focus', handleFocus)
-
     // Remove event listeners when it is unmounted
     return () => {
       window.removeEventListener('focus', handleFocus)
     }
-  }, [])
+  }, [since, subset, filter, dispatch])
 
-  // Check if we have requested list items
+  /**
+   * Get initial list items. This should only fire once per page load
+   * despite the exhaustive dependencies
+   * ------------------------------------------------------------------------
+   */
   useEffect(() => {
+    if (initialItemsPopulated) return
     dispatch(getMylistData(18, 0, subset, filter))
     dispatch(appSetSection(section))
-  }, [])
+  }, [initialItemsPopulated, subset, filter, section, dispatch])
 
+  /**
+   * Update list if we are navigating here from another area in the app
+   * ------------------------------------------------------------------------
+   */
   useEffect(() => {
-    // Check if we are navigating to a route with items in place
-    if (!since) {
-      dispatch(getMylistData(18, 0, subset, filter))
-      return
-    }
-
+    if (!routeChange || !initialItemsPopulated || !since) return
     // If items are already in place, we want to know if anything has changed
     // since the last time we fetched the list (operations in other pages or apps)
     dispatch(updateMyListData(since, subset, filter))
-  }, [router.pathname, dispatch])
+  }, [routeChange, initialItemsPopulated, dispatch, since, subset, filter])
 
-  // Explicit request to load more items
-  const loadMore = () => dispatch(getMylistData(150, offset, subset, filter))
+  // useEffect(trackPageView, [])
+
+  /**
+   * FUNCTIONAL ACTIONS
+   * ------------------------------------------------------------------------
+   */
+  const loadMore = () => dispatch(getMylistData(45, offset, subset, filter))
 
   // TODO: Adjust this to use app state
   const type = 'grid'
