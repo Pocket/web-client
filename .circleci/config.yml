@@ -43,22 +43,6 @@ commands:
 
 # Jobs: Setting up tasks for CI to execute
 jobs:
-  # ——————————————————————————————————————————————————————————————
-  # Eslint: Make sure code is free from easily caught errors
-  # ——————————————————————————————————————————————————————————————
-  eslint:
-    # CPU and RAM resources for the job.
-    resource_class: small
-    # Define the container we will run the task in (standard node)
-    docker:
-      - image: circleci/node:latest
-    steps:
-      # Setup Environment
-      - setup
-      # Run linting
-      - run:
-          name: Lint files with eslint
-          command: npm run lint
 
   # ——————————————————————————————————————————————————————————————
   # Unit Test: Make sure code is free from testable errors
@@ -68,7 +52,7 @@ jobs:
     resource_class: small
     # Define the container we will run the task in (standard node)
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:14
     steps:
       # Setup Environment
       - setup
@@ -116,7 +100,7 @@ jobs:
     resource_class: medium
     # Define the container we will run the task in (standard node)
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:14
     steps:
       # Setup Environment
       - setup
@@ -508,9 +492,6 @@ workflows:
                 - main
   all:
     jobs:
-      # lint all the files
-      - eslint:
-          <<: *not_main
       # unit test all the files
       - unit_tests:
           <<: *not_main
@@ -554,10 +535,10 @@ workflows:
       #     requires:
       #       - build_production_container
       # conditional push production build and assets (css/js)
-      - deploy:
-          <<: *not_main
-          deploy: false
-          name: check_production
+      # - deploy:
+      #     <<: *not_main
+      #     deploy: false
+      #     name: check_production
       # - deploy:
       #     <<: *only_main
       #     deploy: true
