@@ -20,7 +20,7 @@ const resetLocalStorage = () => {
   localStore.removeItem('foodTest')
   localStore.removeItem('colorTest')
   localStore.removeItem('tentacleTest')
-  location.reload() // reload page
+  document.location.reload() // reload page
   return false
 }
 

@@ -10,7 +10,7 @@ import { CardList } from 'components/items-layout/dynamic-blocks'
 import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
 import { CardTopicsNav } from 'components/items-layout/topic-list'
 
-export default function topicSearch({ searchItems, topic, sharedActions }) {
+export default function TopicSearch({ searchItems, topic, sharedActions }) {
   // Get topicList for sections that require it
   const topics = useSelector((state) => state.topicList?.topicsByName)
 

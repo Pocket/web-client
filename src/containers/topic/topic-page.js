@@ -10,7 +10,7 @@ import { CardList } from 'components/items-layout/dynamic-blocks'
 import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
 import { CardTopicsNav } from 'components/items-layout/topic-list'
 
-export default function topicPage({
+export default function TopicPage({
   curatedItems,
   algorithmicItems,
   topic,

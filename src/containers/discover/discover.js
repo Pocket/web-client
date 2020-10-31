@@ -46,10 +46,6 @@ export default function Discover({ url }) {
   // Select items
   const items = useSelector((state) => state.discoverHome.items)
 
-  // Return error if no items are present
-  // !! TODO: FIX THIS - This is a horrid error
-  if (!items?.length) return <ErrorPage statusCode={503} />
-
   // Is user logged in?
   const isAuthenticated = useSelector((state) => state.user.auth)
 
@@ -82,7 +78,9 @@ export default function Discover({ url }) {
     url
   }
 
-  return (
+  // Return error if no items are present
+  // !! TODO: FIX THIS - This is a horrid error
+  return !items?.length ? <ErrorPage statusCode={503} /> : (
     <Layout title={metaData.title} metaData={metaData}>
       <CardPageHeader
         title="Discover the best of the&nbsp;web"
