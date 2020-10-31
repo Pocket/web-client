@@ -1,78 +1,49 @@
 import { put, takeEvery, select } from 'redux-saga/effects'
 import { v4 as uuid } from 'uuid'
-import {
-  READER_HYDRATE,
-  ARTICLE_ITEM_REQUESTED,
-  ARTICLE_ITEM_SUCCESS,
-  ARTICLE_ITEM_FAILURE,
-  // ARTICLE_CONTENT_REQUESTED,
-  ARTICLE_CONTENT_SUCCESS,
-  ARTICLE_CONTENT_FAILURE,
-  // SUGGESTED_TAGS_REQUEST,
-  SUGGESTED_TAGS_SUCCESS,
-  SUGGESTED_TAGS_FAILURE,
-  ANNOTATION_SAVE_REQUEST,
-  ANNOTATION_SAVE_SUCCESS,
-  ANNOTATION_SAVE_FAILURE,
-  UPDATE_LINE_HEIGHT,
-  UPDATE_COLUMN_WIDTH,
-  UPDATE_FONT_SIZE,
-  UPDATE_FONT_TYPE,
-  FRIENDS_SUCCESS,
-  FRIENDS_FAILURE
-} from 'actions'
+
+import { ARTICLE_ITEM_REQUEST } from 'actions'
+import { ARTICLE_ITEM_SUCCESS } from 'actions'
+import { ARTICLE_ITEM_FAILURE } from 'actions'
+
+import { ARTICLE_CONTENT_SUCCESS } from 'actions'
+import { ARTICLE_CONTENT_FAILURE } from 'actions'
+
+import { SUGGESTED_TAGS_SUCCESS } from 'actions'
+import { SUGGESTED_TAGS_FAILURE } from 'actions'
+
+import { ANNOTATION_SAVE_REQUEST } from 'actions'
+import { ANNOTATION_SAVE_SUCCESS } from 'actions'
+import { ANNOTATION_SAVE_FAILURE } from 'actions'
+
+import { UPDATE_LINE_HEIGHT } from 'actions'
+import { UPDATE_COLUMN_WIDTH } from 'actions'
+import { UPDATE_FONT_SIZE } from 'actions'
+import { UPDATE_FONT_TYPE } from 'actions'
+import { FRIENDS_SUCCESS } from 'actions'
+import { FRIENDS_FAILURE } from 'actions'
+
 import { API_ACTION_ADD_ANNOTATION } from 'common/constants'
-import {
-  getArticleText,
-  getSuggestedTags,
-  getRecentFriends,
-  getArticleFromId
-} from 'common/api/reader'
 
-// import { saveItem } from 'common/api/saveItem'
-// import { removeItem } from 'common/api/removeItem'
+import { getArticleText } from 'common/api/reader'
+import { getSuggestedTags } from 'common/api/reader'
+import { getRecentFriends } from 'common/api/reader'
+import { getArticleFromId } from 'common/api/reader'
+
 import { HYDRATE } from 'actions'
-
-import {
-  ITEM,
-  TAG_LIST,
-  ARTICLE,
-  SUGGESTED_TAGS,
-  FRIENDS
-} from './mock-responses'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const itemDataRequested = (itemId) => ({
-  type: ARTICLE_ITEM_REQUESTED,
-  itemId
-})
-export const saveAnnotation = ({ item_id, quote, patch }) => ({
-  type: ANNOTATION_SAVE_REQUEST,
-  item_id,
-  quote,
-  patch
-})
-export const updateLineHeight = (lineHeight) => ({
-  type: UPDATE_LINE_HEIGHT,
-  lineHeight
-})
-export const updateColumnWidth = (columnWidth) => ({
-  type: UPDATE_COLUMN_WIDTH,
-  columnWidth
-})
-export const updateFontSize = (fontSize) => ({
-  type: UPDATE_FONT_SIZE,
-  fontSize
-})
-export const updateFontType = (fontFamily) => ({
-  type: UPDATE_FONT_TYPE,
-  fontFamily
-})
+export const itemDataRequest = (itemId) => ({ type: ARTICLE_ITEM_REQUEST, itemId }) //prettier-ignore
+export const saveAnnotation = ({ item_id, quote, patch }) => ({ type: ANNOTATION_SAVE_REQUEST, item_id, quote, patch }) //prettier-ignore
+export const updateLineHeight = (lineHeight) => ({ type: UPDATE_LINE_HEIGHT, lineHeight }) //prettier-ignore
+export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, columnWidth }) //prettier-ignore
+export const updateFontSize = (fontSize) => ({ type: UPDATE_FONT_SIZE, fontSize }) //prettier-ignore
+export const updateFontType = (fontFamily) => ({ type: UPDATE_FONT_TYPE, fontFamily }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
+  articleState: 'pending',
   articleData: null,
   articleContent: null,
   suggestedTags: [],
@@ -145,7 +116,7 @@ export const readReducers = (state = initialState, action) => {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const readSagas = [
-  takeEvery(ARTICLE_ITEM_REQUESTED, articleItemRequest),
+  takeEvery(ARTICLE_ITEM_REQUEST, articleItemRequest),
   takeEvery(ARTICLE_ITEM_SUCCESS, articleContentRequest),
   takeEvery(ARTICLE_ITEM_SUCCESS, suggestedTagsRequest),
   takeEvery(ARTICLE_ITEM_SUCCESS, friendsRequest),
@@ -162,35 +133,33 @@ function* articleItemRequest({ itemId }) {
   try {
     const response = yield getArticleFromId(itemId)
     const item = response?.item[itemId]
+    const { resolved_url: url } = item
 
-    console.log(item)
-    // yield put({ type: ARTICLE_ITEM_SUCCESS, item })
+    if (item) return yield put({ type: ARTICLE_ITEM_SUCCESS, item, itemId, url }) //prettier-ignore
+
+    throw new Error('Item not in list')
   } catch (error) {
     yield put({ type: ARTICLE_ITEM_FAILURE, error })
   }
 }
 
-function* articleContentRequest({ item }) {
+function* articleContentRequest({ url }) {
   try {
-    const url = item?.resolved_url
     const response = yield getArticleText(url)
-    // if (!response.article) return console.log('No Content')
-    // const article = response.article
-    const article = ARTICLE.article
+    if (response?.status !== 1) throw new Error('Cannot get article text')
 
+    const { article } = response
     yield put({ type: ARTICLE_CONTENT_SUCCESS, article })
   } catch (error) {
     yield put({ type: ARTICLE_CONTENT_FAILURE, error })
   }
 }
 
-function* suggestedTagsRequest({ item }) {
+function* suggestedTagsRequest({ itemId }) {
   try {
-    const itemId = item?.item_id
     const response = yield getSuggestedTags(itemId)
-    // if (!response.suggested_tags) return console.log('No Tags')
-    // const tags = response.suggested_tags?.map(item => item.tag)
-    const tags = SUGGESTED_TAGS.suggested_tags.map((item) => item.tag)
+    if (!response.suggested_tags) return console.log('No Tags')
+    const tags = response.suggested_tags?.map((item) => item.tag)
 
     yield put({ type: SUGGESTED_TAGS_SUCCESS, tags })
   } catch (error) {
@@ -201,9 +170,9 @@ function* suggestedTagsRequest({ item }) {
 function* friendsRequest() {
   try {
     const response = yield getRecentFriends()
-    // if (!response.auto_complete_emails && !response.recent_friends) return console.log('No Friends!')
-    const recentFriends = FRIENDS?.recent_friends
-    const autoCompleteEmails = FRIENDS?.auto_complete_emails
+    if (!response.auto_complete_emails && !response.recent_friends) return console.log('No Friends!') // prettier-ignore
+    const recentFriends = response?.recent_friends
+    const autoCompleteEmails = response?.auto_complete_emails
     yield put({ type: FRIENDS_SUCCESS, recentFriends, autoCompleteEmails })
   } catch (error) {
     yield put({ type: FRIENDS_FAILURE, error })
