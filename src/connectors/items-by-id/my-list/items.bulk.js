@@ -100,16 +100,3 @@ export function* itemBulkDeSelect(action) {
     console.log(error)
   }
 }
-
-export function* itemAdd(action) {
-  try {
-    const { url, analytics } = action.payload
-    const actions = [{ action: API_ACTION_ADD, url, ...analytics }]
-    const data = yield call(sendItemActions, actions)
-
-    if (data) return yield put({ type: ITEMS_ADD_SUCCESS, data })
-    yield put({ type: ITEMS_ADD_FAILURE })
-  } catch (error) {
-    console.log(error)
-  }
-}
