@@ -9,7 +9,8 @@ export const getArticleFromId = (item_id) => {
     path: 'v3/getItem',
     params: {
       item_id
-    }, auth: true
+    },
+    auth: true
   })
 }
 
