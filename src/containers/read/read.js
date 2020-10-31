@@ -17,7 +17,7 @@ import { TagModal } from 'components/tagging/tag.modal'
 import { DeleteModal } from 'components/delete/delete.modal'
 import { SendToFriend } from 'components/share-sheet/share-sheet'
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
-import { itemDataRequested, saveAnnotation } from './read.state'
+import { itemDataRequest, saveAnnotation } from './read.state'
 
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
@@ -59,15 +59,14 @@ const articleWrapper = css`
   }
 `
 
-export default function Read({ appRootSelector }) {
+export default function Reader() {
+  const appRootSelector = '#__next'
   const dispatch = useDispatch()
+
   const router = useRouter()
   const { slug: id } = router.query
 
-  const isPremium = useSelector(
-    (state) => parseInt(state?.user?.premium_status, 10) === 1 || false
-  )
-
+  const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false ) //prettier-ignore
   const articleData = useSelector((state) => state.reader.articleData)
   const articleContent = useSelector((state) => state.reader.articleContent)
   const suggestedTags = useSelector((state) => state.reader.suggestedTags)
@@ -76,9 +75,7 @@ export default function Read({ appRootSelector }) {
   const fontSize = useSelector((state) => state.reader.fontSize)
   const fontFamily = useSelector((state) => state.reader.fontFamily)
   const recentFriends = useSelector((state) => state.reader.recentFriends)
-  const autoCompleteEmails = useSelector(
-    (state) => state.reader.autoCompleteEmails
-  )
+  const autoCompleteEmails = useSelector((state) => state.reader.autoCompleteEmails) //prettier-ignore
   // const tagLibrary = useSelector((state) => state.reader.tagLibrary)
 
   const [sideBarOpen, setSideBar] = useState(false)
@@ -90,7 +87,7 @@ export default function Read({ appRootSelector }) {
   const [highlightHovered, setHighlightHovered] = useState(null)
 
   useEffect(() => {
-    dispatch(itemDataRequested(id))
+    dispatch(itemDataRequest(id))
   }, [dispatch, id])
 
   if (!articleData) {
@@ -109,12 +106,12 @@ export default function Read({ appRootSelector }) {
     resolved_url,
     given_url,
     top_image_url,
-    tags,
+    tags = {},
     has_video,
     word_count,
     videos,
     images,
-    annotations,
+    annotations = [],
     favorite
   } = articleData
 
@@ -157,8 +154,7 @@ export default function Read({ appRootSelector }) {
   const toggleSidebar = () => setSideBar(!sideBarOpen)
   const toggleTagging = () => setTaggingModal(!taggingModalOpen)
   const toggleDelete = () => setDeleteModal(!deleteModalOpen)
-  const toggleShare = ({ destination, quote }) =>
-    setSendModal({ destination, quote })
+  const toggleShare = ({ destination, quote }) => setSendModal({ destination, quote }) //prettier-ignore
 
   const toggleHighlight = () => {
     const selection = window.getSelection()
