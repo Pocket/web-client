@@ -1,12 +1,25 @@
 import { request } from 'common/utilities/request/request'
 
 /**
+ * Get article from an id
+ * @param {*} id Item id to get article data from
+ */
+export const getArticleFromId = (item_id) => {
+  return request({
+    path: 'v3/getItem',
+    params: {
+      item_id
+    }, auth: true
+  })
+}
+
+/**
  * Fetch Article text from Parser
  */
 export const getArticleText = (url) => {
   return request({
     path: 'v3/getItemArticle',
-    data: {
+    params: {
       url //resolved_url
     },
     auth: true
@@ -16,10 +29,11 @@ export const getArticleText = (url) => {
 export const getSuggestedTags = (itemId) => {
   return request({
     path: 'v3/getSuggestedTags',
-    data: {
+    params: {
       version: 2,
       item_id: itemId
-    }
+    },
+    auth: true
   })
 }
 
@@ -27,7 +41,7 @@ export const getSuggestedTags = (itemId) => {
 export const getRecentFriends = () => {
   return request({
     path: 'v3/get',
-    data: {
+    params: {
       images: 1,
       videos: 1,
       tags: 1,
@@ -42,6 +56,7 @@ export const getRecentFriends = () => {
       shares: 'recent_friends',
       count: 1,
       locale_lang: 'en-US'
-    }
+    },
+    auth: true
   })
 }
