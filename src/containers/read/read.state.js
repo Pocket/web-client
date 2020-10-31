@@ -21,12 +21,14 @@ import {
   FRIENDS_SUCCESS,
   FRIENDS_FAILURE
 } from 'actions'
+import { API_ACTION_ADD_ANNOTATION } from 'common/constants'
 import {
   getArticleText,
   getSuggestedTags,
-  getRecentFriends
+  getRecentFriends,
+  getArticleFromId
 } from 'common/api/reader'
-import { getMyList } from 'common/api/my-list'
+
 // import { saveItem } from 'common/api/saveItem'
 // import { removeItem } from 'common/api/removeItem'
 import { HYDRATE } from 'actions'
@@ -158,12 +160,11 @@ const getArticleData = (state) => state.reader.articleData
  --------------------------------------------------------------- */
 function* articleItemRequest({ itemId }) {
   try {
-    const response = yield getMyList({ item: itemId })
-    // if (!response.list) return console.log('No Items')
-    // const item = response.list[item]
-    const item = ITEM.list[itemId]
+    const response = yield getArticleFromId(itemId)
+    const item = response?.item[itemId]
 
-    yield put({ type: ARTICLE_ITEM_SUCCESS, item })
+    console.log(item)
+    // yield put({ type: ARTICLE_ITEM_SUCCESS, item })
   } catch (error) {
     yield put({ type: ARTICLE_ITEM_FAILURE, error })
   }

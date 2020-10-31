@@ -1,4 +1,5 @@
 import { css } from 'linaria'
+import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
@@ -9,10 +10,8 @@ import { ItemHeader } from 'components/reader/header'
 import { Content } from 'components/reader/content'
 import { SelectionPopover } from 'components/popover/popover-selection'
 import { Sidebar } from 'components/reader/sidebar'
-import {
-  compileAnnotations,
-  requestAnnotationPatch
-} from 'components/annotations/utilities'
+import { compileAnnotations } from 'components/annotations/utilities'
+import { requestAnnotationPatch } from 'components/annotations/utilities'
 import { Fonts, FONT_TYPES } from 'components/fonts/fonts'
 import { TagModal } from 'components/tagging/tag.modal'
 import { DeleteModal } from 'components/delete/delete.modal'
@@ -60,8 +59,10 @@ const articleWrapper = css`
   }
 `
 
-export default function Read({ appRootSelector, itemId }) {
+export default function Read({ appRootSelector }) {
   const dispatch = useDispatch()
+  const router = useRouter()
+  const { slug: id } = router.query
 
   const isPremium = useSelector(
     (state) => parseInt(state?.user?.premium_status, 10) === 1 || false
@@ -89,8 +90,8 @@ export default function Read({ appRootSelector, itemId }) {
   const [highlightHovered, setHighlightHovered] = useState(null)
 
   useEffect(() => {
-    dispatch(itemDataRequested(itemId))
-  }, [dispatch])
+    dispatch(itemDataRequested(id))
+  }, [dispatch, id])
 
   if (!articleData) {
     return (

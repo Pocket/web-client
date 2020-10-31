@@ -196,7 +196,6 @@ export const Card = ({
     read_time,
     favorite,
     status,
-    open_url = '',
     onOpen = () => {}
   } = item
 
@@ -235,6 +234,8 @@ export const Card = ({
         ? itemBulkDeSelect(withShift)
         : itemBulkSelect(withShift)
   }
+
+  const open_url = `/read/${id}`
 
   return (
     <article
