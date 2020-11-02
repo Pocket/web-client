@@ -243,12 +243,14 @@ function* myListDataRequest(action) {
     if (filter === 'archive') parameters.state = 'read'
     if (filter === 'favorites') parameters.favorite = 1
 
-    const { itemsById, total, since } = yield fetchMyListData({
+    const { itemsById, total, since, error } = yield fetchMyListData({
       count,
       offset,
       sort,
       ...parameters
     })
+
+    if (error) return yield put({ type: MYLIST_DATA_FAILURE, error })
 
     const existingItemsById = yield select(getMyListItemsById)
     const itemsByIdDraft = { ...existingItemsById, ...itemsById }
@@ -329,7 +331,7 @@ function* myListUpdate(action) {
 export async function fetchMyListData(params) {
   try {
     const response = await getMyList(params)
-    if (!response.list) return console.log('No Items')
+    if (!response.list) return { error: 'No Items Returned' }
 
     const total = response.total
     const since = response.since

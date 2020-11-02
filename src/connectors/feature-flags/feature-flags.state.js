@@ -60,7 +60,7 @@ export async function fetchUnleashData(user = {}, sessionId) {
 /** UTILITIES
 ---------------------------------------------------------------- */
 async function filterUnleashAssignments(response) {
-  if (!response.assignments) return {}
+  if (!response?.assignments) return {}
   // Regex to only get flags for the web client
   const filterRegEx = /(temp|perm)\.web\.client\..+/i
   const assignments = response.assignments.map((flag) =>

@@ -81,12 +81,13 @@ export const homeSagas = [
  --------------------------------------------------------------- */
 function* latestDataRequest(action) {
   try {
-    const { items, itemsById, total } = yield fetchMyListData({
+    const { items, itemsById, error } = yield fetchMyListData({
       count: 5,
       offset: 0,
       state: 'unread',
       sort: 'newest'
     })
+    if (error) yield put({ type: HOME_DATA_LATEST_FAILURE, error })
 
     // Deriving data from the response
     yield put({ type: HOME_DATA_LATEST_SUCCESS, items, itemsById })
@@ -118,7 +119,7 @@ function* discoverDataRequest(action) {
 export async function fetchMyListData(params) {
   try {
     const response = await getMyList(params)
-    if (!response.list) return console.log('No Items')
+    if (!response.list) return { error: 'No Items Returned' }
 
     const total = response.total
 
