@@ -99,7 +99,9 @@ function* latestDataRequest(action) {
 
 function* discoverDataRequest(action) {
   try {
-    const { items, itemsById } = yield fetchDiscoverData()
+    const { items, itemsById, error } = yield fetchDiscoverData()
+
+    if (error) return yield put({ type: HOME_DATA_DISCOVER_FAILURE, error })
 
     // Deriving data from the response
     yield put({ type: HOME_DATA_DISCOVER_SUCCESS, items, itemsById })
@@ -146,6 +148,8 @@ export async function fetchMyListData(params) {
 export async function fetchDiscoverData() {
   try {
     const response = await getDiscoverFeed()
+    if (!response) return { error: 'no discover items' }
+
     const derivedItems = await deriveDiscoverItems(response.feed)
 
     const items = derivedItems.map((item) => item.resolved_id)
