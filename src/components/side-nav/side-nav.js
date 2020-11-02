@@ -60,7 +60,7 @@ export const sideNavItem = css`
   }
 `
 
-export function SideNav({ subset, home }) {
+export function SideNav({ subset, home, isLoggedIn }) {
   const subActive = (sub) => {
     const activeClass = sub === subset ? 'active' : ''
     return `${sideNavItem} ${activeClass}`
@@ -68,49 +68,52 @@ export function SideNav({ subset, home }) {
 
   return (
     <nav role="navigation" className="side-nav">
-      <Link href="/">
+      <a href="/">
         <button className={subActive('home')}>
           <HomeIcon className="side-nav-icon" /> Home
         </button>
-      </Link>
+      </a>
 
-      <Link href="/discover">
+      <a href="/discover">
         <button className={subActive('discover')}>
           <DiscoverIcon className="side-nav-icon" /> Discover
         </button>
-      </Link>
+      </a>
 
-      <Link href="/my-list">
+      <a href="/my-list">
         <button className={subActive('unread')}>
           <ArticleIcon className="side-nav-icon" /> My List
         </button>
-      </Link>
+      </a>
+      {isLoggedIn ? (
+        <>
+          <div className={sideNavHeader}>Quick Links</div>
 
-      <div className={sideNavHeader}>Quick Links</div>
+          <Link href="/my-list/archive">
+            <button className={subActive('archive')}>Archive</button>
+          </Link>
 
-      <Link href="/my-list/archive">
-        <button className={subActive('archive')}>Archive</button>
-      </Link>
+          <Link href="/my-list/favorites">
+            <button className={subActive('favorites')}>Favorites</button>
+          </Link>
 
-      <Link href="/my-list/favorites">
-        <button className={subActive('favorites')}>Favorites</button>
-      </Link>
+          <Link href="/my-list/highlights">
+            <button className={subActive('highlights')}>Highlights</button>
+          </Link>
 
-      <Link href="/my-list/highlights">
-        <button className={subActive('highlights')}>Highlights</button>
-      </Link>
-
-      {/* <Link href="/my-list/tags">
+          {/* <Link href="/my-list/tags">
         <button className={subActive('tags')}>Tags</button>
       </Link> */}
 
-      <Link href="/my-list/articles">
-        <button className={subActive('articles')}>Articles</button>
-      </Link>
+          <Link href="/my-list/articles">
+            <button className={subActive('articles')}>Articles</button>
+          </Link>
 
-      <Link href="/my-list/videos">
-        <button className={subActive('videos')}>Videos</button>
-      </Link>
+          <Link href="/my-list/videos">
+            <button className={subActive('videos')}>Videos</button>
+          </Link>
+        </>
+      ) : null}
     </nav>
   )
 }

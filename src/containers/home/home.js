@@ -12,6 +12,7 @@ import { SectionHeader } from 'components/headers/section-header'
 import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
 import { CardList } from 'components/items-layout/dynamic-blocks'
 import { CardTopicsNav } from 'components/items-layout/topic-list'
+import { CallOutBrand } from 'components/call-out/call-out-brand'
 
 export default function Collection(props) {
   const { metaData = {}, subset = 'active' } = props
@@ -50,7 +51,9 @@ export default function Collection(props) {
               />
             </DynamicCardLayout>
           </>
-        ) : null}
+        ) : (
+          <CallOutBrand />
+        )}
         {discover?.length ? (
           <>
             <CardTopicsNav topics={topics} track={() => {}} />

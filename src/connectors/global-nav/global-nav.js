@@ -89,7 +89,7 @@ const GlobalNav = (props) => {
    * Tools are what we use on myList
    */
   const tools =
-    selectedLink === 'my-list'
+    selectedLink === 'my-list' && isLoggedIn
       ? [
           { name: 'search', label: 'Search', icon: <SearchIcon /> },
           { name: 'add-item', label: 'Save a URL', icon: <AddIcon /> },
