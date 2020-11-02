@@ -72,8 +72,12 @@ function* topicListRequest(action) {
 export async function fetchTopicList() {
   try {
     const response = await apiTopicList()
+
+    if (!response || response.status !== 'ok') return {}
+
     const { topics } = response
     const topicsByName = arrayToObject(topics, 'topic_slug')
+
     return topicsByName
   } catch (error) {
     console.log('topic-pages.topic-list.state', error)
