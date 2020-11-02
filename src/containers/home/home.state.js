@@ -148,7 +148,7 @@ export async function fetchMyListData(params) {
 export async function fetchDiscoverData() {
   try {
     const response = await getDiscoverFeed()
-    if (!response) return { error: 'no discover items' }
+    if (!response.feed) return { error: 'no discover items' }
 
     const derivedItems = await deriveDiscoverItems(response.feed)
 
