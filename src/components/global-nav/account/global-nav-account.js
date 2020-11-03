@@ -132,8 +132,7 @@ const GlobalNavAccount = ({
   profileUrl,
   appRootSelector,
   onLinkClick,
-  onAccountClick,
-  userStatus
+  onAccountClick
 }) => {
   const accountMenuTriggerRef = useRef(null)
 
@@ -141,124 +140,117 @@ const GlobalNavAccount = ({
     onLinkClick(name)
   }
 
-  // Don't render if we don't have a user status
-  if (!userStatus) return null
-
-  if (!isLoggedIn) {
-    return (
-      <div>
+  return !isLoggedIn ? (
+    <div>
+      <a
+        href="https://getpocket.com/login?src=navbar"
+        id="global-nav-login-link"
+        className={`${accountLinkStyle} login-link`}
+        onClick={(event) => {
+          handleLinkClick('login', event)
+        }}
+        {...testIdAttribute('login-link')}>
+        Log in
+      </a>
+      <Button
+        href="https://getpocket.com/signup?src=navbar"
+        id="global-nav-signup-link"
+        className={signupLinkStyle}
+        variant="secondary"
+        onClick={(event) => {
+          handleLinkClick('signup', event)
+        }}
+        {...testIdAttribute('signup-link')}>
+        <ProfileIcon />
+        <span className="label">Sign up</span>
+      </Button>
+    </div>
+  ) : (
+    <div>
+      {!isPremium ? (
         <a
-          href="https://getpocket.com/login?src=navbar"
-          id="global-nav-login-link"
-          className={`${accountLinkStyle} login-link`}
+          href="https://getpocket.com/premium?src=navbar"
+          id="global-nav-upgrade-link"
+          className={`${accountLinkStyle} ${upgradeLinkStyle}`}
           onClick={(event) => {
-            handleLinkClick('login', event)
+            handleLinkClick('premium', event)
           }}
-          {...testIdAttribute('login-link')}>
-          Log in
+          {...testIdAttribute('upgrade-link')}>
+          <PremiumIcon />
+          <span className="label">Upgrade</span>
         </a>
-        <Button
-          href="https://getpocket.com/signup?src=navbar"
-          id="global-nav-signup-link"
-          className={signupLinkStyle}
-          variant="secondary"
-          onClick={(event) => {
-            handleLinkClick('signup', event)
-          }}
-          {...testIdAttribute('signup-link')}>
-          <ProfileIcon />
-          <span className="label">Sign up</span>
-        </Button>
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        {!isPremium ? (
-          <a
-            href="https://getpocket.com/premium?src=navbar"
-            id="global-nav-upgrade-link"
-            className={`${accountLinkStyle} ${upgradeLinkStyle}`}
-            onClick={(event) => {
-              handleLinkClick('premium', event)
-            }}
-            {...testIdAttribute('upgrade-link')}>
-            <PremiumIcon />
-            <span className="label">Upgrade</span>
-          </a>
-        ) : null}
-        <WithTooltip label="Account">
-          <AvatarButton
-            src={avatarSrc}
-            ref={accountMenuTriggerRef}
-            size="40px"
-            label={null}
-            className={avatarStyle}
-            {...testIdAttribute('account-menu-avatar')}
-          />
-        </WithTooltip>
-        <PopupMenu
-          trigger={accountMenuTriggerRef}
-          title="Account"
-          screenReaderLabel="Account menu"
-          appRootSelector={appRootSelector}
-          onOpen={onAccountClick}
-          popperOptions={{
-            placement: 'bottom-end',
-            modifiers: [
-              {
-                name: 'offset',
-                options: {
-                  offset: [0, 4]
-                }
+      ) : null}
+      <WithTooltip label="Account">
+        <AvatarButton
+          src={avatarSrc}
+          ref={accountMenuTriggerRef}
+          size="40px"
+          label={null}
+          className={avatarStyle}
+          {...testIdAttribute('account-menu-avatar')}
+        />
+      </WithTooltip>
+      <PopupMenu
+        trigger={accountMenuTriggerRef}
+        title="Account"
+        screenReaderLabel="Account menu"
+        appRootSelector={appRootSelector}
+        onOpen={onAccountClick}
+        popperOptions={{
+          placement: 'bottom-end',
+          modifiers: [
+            {
+              name: 'offset',
+              options: {
+                offset: [0, 4]
               }
-            ]
-          }}
-          {...testIdAttribute('account-menu')}>
-          <PopupMenuGroup>
-            <PopupMenuItem
-              helperText="View profile"
-              href={profileUrl}
-              id="account-menu-profile-link"
-              onClick={(event) => {
-                handleLinkClick('view-profile', event)
-              }}
-              {...testIdAttribute('account-menu-profile-link')}>
-              {accountName}
-            </PopupMenuItem>
-          </PopupMenuGroup>
-          <PopupMenuGroup>
-            <PopupMenuItem
-              href="https://getpocket.com/options?src=navbar"
-              id="account-menu-manage-account-link"
-              onClick={(event) => {
-                handleLinkClick('manage-account', event)
-              }}>
-              Manage account
-            </PopupMenuItem>
-            <PopupMenuItem
-              href="https://help.getpocket.com/category/847-category?src=navbar"
-              id="account-menu-help-link"
-              onClick={(event) => {
-                handleLinkClick('help', event)
-              }}>
-              Get help
-            </PopupMenuItem>
-          </PopupMenuGroup>
-          <PopupMenuGroup>
-            <PopupMenuItem
-              href="https://getpocket.com/lo?src=navbar"
-              id="account-menu-logout-link"
-              onClick={(event) => {
-                handleLinkClick('logout', event)
-              }}>
-              Log out
-            </PopupMenuItem>
-          </PopupMenuGroup>
-        </PopupMenu>
-      </div>
-    )
-  }
+            }
+          ]
+        }}
+        {...testIdAttribute('account-menu')}>
+        <PopupMenuGroup>
+          <PopupMenuItem
+            helperText="View profile"
+            href={profileUrl}
+            id="account-menu-profile-link"
+            onClick={(event) => {
+              handleLinkClick('view-profile', event)
+            }}
+            {...testIdAttribute('account-menu-profile-link')}>
+            {accountName}
+          </PopupMenuItem>
+        </PopupMenuGroup>
+        <PopupMenuGroup>
+          <PopupMenuItem
+            href="https://getpocket.com/options?src=navbar"
+            id="account-menu-manage-account-link"
+            onClick={(event) => {
+              handleLinkClick('manage-account', event)
+            }}>
+            Manage account
+          </PopupMenuItem>
+          <PopupMenuItem
+            href="https://help.getpocket.com/category/847-category?src=navbar"
+            id="account-menu-help-link"
+            onClick={(event) => {
+              handleLinkClick('help', event)
+            }}>
+            Get help
+          </PopupMenuItem>
+        </PopupMenuGroup>
+        <PopupMenuGroup>
+          <PopupMenuItem
+            href="https://getpocket.com/lo?src=navbar"
+            id="account-menu-logout-link"
+            onClick={(event) => {
+              handleLinkClick('logout', event)
+            }}>
+            Log out
+          </PopupMenuItem>
+        </PopupMenuGroup>
+      </PopupMenu>
+    </div>
+  )
 }
 
 GlobalNavAccount.propTypes = {
