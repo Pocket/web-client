@@ -88,19 +88,20 @@ const GlobalNav = (props) => {
   /**
    * Tools are what we use on myList
    */
-  const tools =
-    selectedLink === 'my-list' && isLoggedIn
-      ? [
-          { name: 'search', label: 'Search', icon: <SearchIcon /> },
-          { name: 'add-item', label: 'Save a URL', icon: <AddIcon /> },
-          { name: 'bulk-edit', label: 'Bulk Edit', icon: <EditIcon /> },
-          {
-            name: 'notifications',
-            label: 'View Activity',
-            icon: <NotificationIcon />
-          }
-        ]
-      : []
+  const showNav =
+    (selectedLink === 'my-list' || selectedLink === '') && isLoggedIn
+  const tools = showNav
+    ? [
+        { name: 'search', label: 'Search', icon: <SearchIcon /> },
+        { name: 'add-item', label: 'Save a URL', icon: <AddIcon /> },
+        { name: 'bulk-edit', label: 'Bulk Edit', icon: <EditIcon /> },
+        {
+          name: 'notifications',
+          label: 'View Activity',
+          icon: <NotificationIcon />
+        }
+      ]
+    : []
 
   const toolClick = (name) => {
     if (name === 'search') dispatch(appSetMode('search'))
