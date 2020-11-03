@@ -83,7 +83,7 @@ const GlobalNav = (props) => {
    */
   useEffect(() => {
     if (!userStatus) dispatch(getUser())
-  }, [userStatus])
+  }, [userStatus, dispatch])
 
   /**
    * Tools are what we use on myList

@@ -73,7 +73,7 @@ export async function fetchTopicList() {
   try {
     const response = await apiTopicList()
 
-    if (!response || response.status !== 'ok') return {}
+    if (!response || response.status !== 1) return {}
 
     const { topics } = response
     const topicsByName = arrayToObject(topics, 'topic_slug')
