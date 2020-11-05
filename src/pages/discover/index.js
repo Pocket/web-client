@@ -4,6 +4,7 @@ import { fetchDiscoverData } from 'containers/discover/discover.state'
 import { fetchTopicList } from 'connectors/topic-list/topic-list.state'
 import { hydrateTopicList } from 'connectors/topic-list/topic-list.state'
 import { hydrateItems } from 'connectors/items-by-id/discover/items.state'
+import { wrapper } from 'store'
 
 /**
  * Server Side State Hydration
@@ -12,7 +13,7 @@ import { hydrateItems } from 'connectors/items-by-id/discover/items.state'
  * until they are resolved, which is fine if we need the data for
  * SEO/Crawlers
   --------------------------------------------------------------- */
-Discover.getInitialProps = async ({ store }) => {
+export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
   const { dispatch } = store
 
   // Hydrating initial state with an async request. This will block the
@@ -26,7 +27,8 @@ Discover.getInitialProps = async ({ store }) => {
   dispatch(hydrateItems(itemsById))
   dispatch(hydrateTopicList({ topicsByName }))
 
-  return { namespacesRequired: ['common'] }
-}
+  // Revalidate means this can be regenerated once every X seconds
+  return { props: {}, revalidate: 60 }
+})
 
 export default Discover

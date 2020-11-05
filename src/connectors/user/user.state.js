@@ -3,26 +3,26 @@ import { createGuid } from 'common/api/user'
 import { getValueFromCookie } from 'common/utilities'
 import { setCookie } from 'nookies'
 import { put, takeLatest } from 'redux-saga/effects'
+import { getRequestToken, getAccessToken } from 'common/api/oauth'
+import { OAUTH_REDIRECT_URL } from 'common/constants'
 
-import { HYDRATE } from 'actions'
 import { USER_HYDRATE } from 'actions'
 import { USER_REQUEST } from 'actions'
 import { USER_DEV_REQUEST } from 'actions'
 import { USER_SUCCESS } from 'actions'
 import { USER_FAILURE } from 'actions'
 import { SESS_GUID_HYDRATE } from 'actions'
+import { USER_OAUTH_TOKEN_REQUEST } from 'actions'
 
-const initialState = { auth: false, sess_guid: null }
+const initialState = { auth: false, sess_guid: null, user_status: 'pending' }
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const userHydrate = (hydrate) => ({ type: USER_HYDRATE, hydrate })
 export const getUser = () => ({ type: USER_REQUEST })
 export const devUser = () => ({ type: USER_DEV_REQUEST })
-export const sessGuidHydrate = (sess_guid) => ({
-  type: SESS_GUID_HYDRATE,
-  sess_guid
-})
+export const sessGuidHydrate = (sess_guid) => ({type: SESS_GUID_HYDRATE,sess_guid}) //prettier-ignore
+export const userOAuthLogIn = () => ({ type: USER_OAUTH_TOKEN_REQUEST })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -30,18 +30,20 @@ export const userReducers = (state = initialState, action) => {
   switch (action.type) {
     case USER_HYDRATE: {
       const { hydrate } = action
-      return { ...state, ...hydrate, auth: true, userStatus: true }
+      const user_status = hydrate === false ? 'invalid' : 'valid'
+      const auth = hydrate !== false ? true : hydrate
+      return { ...state, ...hydrate, auth, user_status }
     }
 
     case USER_SUCCESS: {
       const { user } = action
-      return { ...state, ...user, auth: true, userStatus: true }
+      return { ...state, ...user, auth: true, user_status: 'valid' }
     }
 
     case USER_FAILURE: {
       return {
         ...state,
-        userStatus: true,
+        user_status: 'invalid',
         auth: false // force auth to false
       }
     }
@@ -58,7 +60,10 @@ export const userReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const userSagas = [takeLatest(USER_REQUEST, userRequest)]
+export const userSagas = [
+  takeLatest(USER_REQUEST, userRequest),
+  takeLatest(USER_OAUTH_TOKEN_REQUEST, userTokenRequest)
+]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -70,16 +75,39 @@ function* userRequest() {
   if (user) yield put({ type: USER_SUCCESS, user })
 }
 
+function* userTokenRequest() {
+  const response = yield getRequestToken()
+
+  if (response?.code) {
+    const { code } = response
+
+    setCookie(null, 'pkt_request_code', code, {
+      samesite: 'lax',
+      path: '/',
+      maxAge: 5 * 60 * 1000 // 5 minutes
+    })
+
+    const origin = window.location.origin
+    // Send the user to our oauth page request page
+    const loginUrl = `${OAUTH_REDIRECT_URL}?request_token=${code}&redirect_uri=${origin}`
+    document.location = loginUrl
+  }
+}
+
 /** ASYNC Functions
  --------------------------------------------------------------- */
-export async function fetchUserData(ctx) {
-  const cookie = ctx?.req?.headers?.cookie
-  const response = await getUserInfo(cookie)
+export async function fetchUserData() {
+  const response = await getUserInfo()
 
   if (response.xErrorCode) return false
 
   const { user } = response
   return user
+}
+
+export async function setUserData() {
+  // const cookies = parseCookies()
+  return { username: 'joel' }
 }
 
 /**
@@ -108,4 +136,28 @@ export async function checkSessGuid(ctx) {
   } catch (error) {
     return false
   }
+}
+
+export async function getSessGuid() {
+  const sess_guid = await createGuid()
+  setCookie(null, 'sess_guid', sess_guid, {
+    domain: 'getpocket.com',
+    samesite: 'lax',
+    path: '/',
+    maxAge: 60 * 60 * 24 * 365
+  })
+}
+
+export async function userTokenValidate(code) {
+  const response = await getAccessToken(code)
+  if (response?.access_token) {
+    const { access_token } = response
+    setCookie(null, 'pkt_access_token', access_token, {
+      domain: 'getpocket.com',
+      samesite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365
+    })
+  }
+  return false
 }

@@ -1,15 +1,19 @@
 import '@pocket/web-ui/lib/pocket-web-ui.css'
 import { ViewportProvider } from '@pocket/web-ui'
 
-import { useEffect } from 'react'
-import { END } from 'redux-saga'
+import { useEffect, useState } from 'react'
+// import { END } from 'redux-saga'
 import { wrapper } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 import * as Sentry from '@sentry/node'
+import { parseCookies, setCookie, destroyCookie } from 'nookies'
 
-import { appSetBaseURL } from 'connectors/app/app.state'
+// import { appSetBaseURL } from 'connectors/app/app.state'
 import { fetchUserData, userHydrate } from 'connectors/user/user.state'
-import { checkSessGuid, sessGuidHydrate } from 'connectors/user/user.state'
+import { getSessGuid, sessGuidHydrate } from 'connectors/user/user.state'
+import { userTokenValidate, setUserData } from 'connectors/user/user.state'
+
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
 import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 
@@ -17,7 +21,7 @@ import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
  --------------------------------------------------------------- */
 import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
-import { appWithTranslation } from 'common/setup/i18n'
+// import { appWithTranslation } from 'common/setup/i18n'
 import { initializeSnowplow } from 'common/setup/snowplow'
 
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
@@ -33,11 +37,74 @@ Sentry.init(sentrySettings)
 function PocketWebClient({ Component, pageProps, err }) {
   // Initialize app once per page load
   const dispatch = useDispatch()
-  const { user_id, sess_guid } = useSelector((state) => state.user)
+  const router = useRouter()
+
+  const { user_status, user_id, sess_guid } = useSelector((state) => state.user)
+  const path = router.pathname
 
   useEffect(() => {
     // Load any relevant polyfills
     loadPolyfills()
+  }, [])
+
+  // Check user auth status
+  useEffect(() => {
+    if (user_status !== 'pending') return
+
+    // Check cookies (these are first party cookies)
+    const cookies = parseCookies()
+    const { pkt_request_code, pkt_access_token, sess_guid } = cookies
+
+    /**
+     * First time user
+     * --------------------------------------------------------------
+     */
+    const initializeUser = async () => {
+      const sess_guid = await getSessGuid()
+      dispatch(sessGuidHydrate(sess_guid))
+      dispatch(userHydrate(false))
+    }
+
+    /**
+     * User awaiting validation
+     * --------------------------------------------------------------
+     */
+    const validateUser = async () => {
+      // We are only gonna try this code once
+      destroyCookie(null, 'pkt_request_code')
+
+      // Get an access token set
+      const isValid = await userTokenValidate(pkt_request_code)
+
+      if (isValid) {
+        // hydrate user
+        const user = await fetchUserData()
+        dispatch(userHydrate(user))
+
+        // hydrate features
+        const features = await fetchUnleashData(user, sess_guid)
+        if (features) dispatch(featuresHydrate(features))
+      }
+    }
+
+    /**
+     * User is stored
+     * --------------------------------------------------------------
+     */
+    const hydrateUser = async () => {
+      const user = await fetchUserData()
+      dispatch(userHydrate(user))
+    }
+
+    // Select a scenario
+    if (!pkt_request_code && !pkt_access_token && !sess_guid) initializeUser()
+    if (pkt_request_code) validateUser(pkt_request_code)
+    if (pkt_access_token) hydrateUser()
+    if (sess_guid && !pkt_access_token) dispatch(userHydrate(false))
+  }, [user_status, dispatch])
+
+  useEffect(() => {
+    if (user_status === 'pending') return null
 
     // Set up Snowplow
     initializeSnowplow(user_id, sess_guid)
@@ -46,7 +113,7 @@ function PocketWebClient({ Component, pageProps, err }) {
     dispatch(trackPageView())
 
     // Set up Google Analytics
-    const { path } = pageProps
+
     ReactGA.initialize(GOOGLE_ANALYTICS_ID)
     ReactGA.pageview(path)
 
@@ -56,59 +123,14 @@ function PocketWebClient({ Component, pageProps, err }) {
     // signal to Cypress that React client side has loaded
     // Make sure this is the last thing we fire
     // signalTestsReady()
-  }, []) //eslint-disable-line react-hooks/exhaustive-deps
+  }, [user_status, sess_guid, user_id, path, dispatch])
 
   // Provider is created automatically by the wrapper by next-redux-wrapper
-  return (
+  return user_status !== 'pending' ? (
     <ViewportProvider>
       <Component {...pageProps} err={err} />
     </ViewportProvider>
-  )
-}
-
-PocketWebClient.getInitialProps = async ({ Component, ctx, router }) => {
-  const isDev = process.env.NODE_ENV !== 'production'
-  const { req, store } = ctx
-
-  // The following functions are deemed critical, render blocking requests
-  // ---------------------------------------------------------------
-  if (req) {
-    // !! Hydrate app/server info
-    const protocol = isDev ? 'http://' : 'https://'
-    const baseURL = protocol + req.headers.host
-    store.dispatch(appSetBaseURL(baseURL))
-
-    // !! Hydrate user information
-    const user = await fetchUserData(ctx)
-    if (user) store.dispatch(userHydrate(user))
-
-    // !! Hydrate sess_guid
-    const sessGuid = await checkSessGuid(ctx)
-    if (sessGuid) store.dispatch(sessGuidHydrate(sessGuid))
-
-    // !! Hydrate features set with unleash
-    const features = await fetchUnleashData(user, sessGuid)
-    if (features) store.dispatch(featuresHydrate(features))
-  }
-
-  // Wait for getInitialProps to run the component if they exist
-  const pageProps = {
-    ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {})
-  }
-
-  // Stop the saga if on server
-  if (req) {
-    store.dispatch(END)
-    await store.sagaTask.toPromise()
-  }
-
-  // ?? Should we get url and path to pass through: Probably not
-  const appState = store.getState()
-  const path = router.asPath
-  const url = `${appState.app.baseURL}${path}`
-
-  // Return our modified pageProps
-  return { pageProps: { ...pageProps, url, path } }
+  ) : null
 }
 
 /**
@@ -116,4 +138,4 @@ PocketWebClient.getInitialProps = async ({ Component, ctx, router }) => {
  * 1. Redux: for managing state
  * 2. ReduxSaga: for managing async state requirements
  */
-export default wrapper.withRedux(appWithTranslation(PocketWebClient))
+export default wrapper.withRedux(PocketWebClient)

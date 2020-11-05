@@ -206,6 +206,7 @@ const GlobalNav = ({
   profileUrl,
   onLinkClick,
   onToolClick,
+  onLoginClick,
   onAccountClick,
   links,
   tools,
@@ -279,6 +280,7 @@ const GlobalNav = ({
               </div>
 
               <GlobalNavAccount
+                onLoginClick={onLoginClick}
                 appRootSelector={appRootSelector}
                 isPremium={isPremium}
                 isLoggedIn={isLoggedIn}

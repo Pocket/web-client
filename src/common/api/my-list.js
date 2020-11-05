@@ -3,6 +3,7 @@ import { request } from 'common/utilities/request/request'
 export function getMyList(data) {
   return request({
     path: 'v3/get',
+    auth: true,
     params: {
       tags: 1, //	int	1 to include Tags in Items
       positions: 1, //	int	1 to include Positions in Items
@@ -23,9 +24,10 @@ export function getMyList(data) {
   })
 }
 
-export function fetchMyList(data) {
+export function fetchMyList(params) {
   return request({
     path: 'v3/fetch',
-    data
+    auth: true,
+    params
   })
 }

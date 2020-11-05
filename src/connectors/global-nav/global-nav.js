@@ -19,6 +19,7 @@ import { NotificationIcon } from '@pocket/web-ui'
 
 import { BASE_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities'
+import { userOAuthLogIn } from 'connectors/user/user.state'
 
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
@@ -50,7 +51,7 @@ const GlobalNav = (props) => {
       : getTopLevelPath(router.pathname)
 
   const appMode = useSelector((state) => state?.app?.mode)
-  const userStatus = useSelector((state) => state?.user?.userStatus)
+  const userStatus = useSelector((state) => state?.user?.user_status)
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false) //prettier-ignore
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const retrievedAvatar = useSelector((state) => state?.user?.profile?.avatar_url) // prettier-ignore
@@ -76,14 +77,6 @@ const GlobalNav = (props) => {
       icon: <ListViewIcon />
     }
   ]
-
-  /**
-   * We want to grab user data if it has not been checked yet
-   * NOTE This may be better served in the _app.js
-   */
-  useEffect(() => {
-    if (!userStatus) dispatch(getUser())
-  }, [userStatus, dispatch])
 
   /**
    * Tools are what we use on myList
@@ -119,6 +112,12 @@ const GlobalNav = (props) => {
 
   const NavTakeover = navChildren[appMode]
 
+  const onLoginClick = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    dispatch(userOAuthLogIn())
+  }
+
   return (
     <GlobalNavComponent
       pocketLogoOutboundUrl={'/'}
@@ -132,6 +131,7 @@ const GlobalNav = (props) => {
       profileUrl={profileUrl}
       userStatus={userStatus}
       onToolClick={toolClick}
+      onLoginClick={onLoginClick}
       tools={tools}>
       {NavTakeover ? <NavTakeover onClose={resetNav} /> : null}
     </GlobalNavComponent>

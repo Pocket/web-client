@@ -132,12 +132,13 @@ const GlobalNavAccount = ({
   profileUrl,
   appRootSelector,
   onLinkClick,
+  onLoginClick,
   onAccountClick
 }) => {
   const accountMenuTriggerRef = useRef(null)
 
   function handleLinkClick(name, event) {
-    onLinkClick(name)
+    onLinkClick(name, event)
   }
 
   return !isLoggedIn ? (
@@ -147,7 +148,7 @@ const GlobalNavAccount = ({
         id="global-nav-login-link"
         className={`${accountLinkStyle} login-link`}
         onClick={(event) => {
-          handleLinkClick('login', event)
+          onLoginClick(event)
         }}
         {...testIdAttribute('login-link')}>
         Log in

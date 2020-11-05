@@ -1,11 +1,13 @@
 
 // POCKET
 export const CONSUMER_KEY = '78809-9423d8c743a58f62b23ee85c' //web-app-draft consumer
+
 export const BASE_URL = 'https://getpocket.com'
 export const API_URL = 'https://getpocket.com'
 export const LOGIN_URL = 'https://getpocket.com/login'
 export const SIGNUP_URL = 'https://getpocket.com/signup'
 export const PREMIUM_URL = 'https://getpocket.com/premium?ep='
+export const OAUTH_REDIRECT_URL = 'https://oauth-test.web.readitlater.com/auth/authorize'
 export const UNLEASH_API_URL = 'https://featureflags.readitlater.com/graphql'
 export const ARTICLE_API_URL = 'https://tz7snrninbak3oh36gjshbmdia.appsync-api.us-east-1.amazonaws.com/graphql' // ARTICLE_API_KEY is a secret and needs to be stored as such
 export const ARTICLE_API_KEY = 'da2-shleiiw7qzcnlkjwg3v7rfkpte' // Currently set to expire Thu, 04 Mar 2021 16:00:00 GMT
