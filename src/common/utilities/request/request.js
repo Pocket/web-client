@@ -81,7 +81,8 @@ function generateOAuthParameters(auth) {
     access_token: pkt_access_token,
     oauth_timestamp,
     oauth_nonce,
-    sig_hash
+    sig_hash,
+    credentials: 'omit'
   }
 }
 
