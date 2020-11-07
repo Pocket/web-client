@@ -29,13 +29,9 @@ export const request = ({
   const endpoint = `${api_url}/${path}?${queryParams}`
 
   const headers = {
-    Origin: 'https://getpocket.com',
-    'User-Agent': `Pocket;web;client;${process.env.BUILD_ID}`,
     'Content-Type': 'application/json',
-    'X-Accept': 'application/json; charset=UTF8 '
+    'X-Accept': 'application/json; charset=UTF8'
   }
-
-  if (cookie) headers.Cookie = cookie
 
   // The Promise returned from fetch() won’t reject on HTTP error status even if
   // the response is an HTTP 404 or 500. Instead, it will resolve normally
