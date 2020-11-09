@@ -124,7 +124,6 @@ export async function checkSessGuid(ctx) {
 
     if (!sessGuidSSR) {
       setCookie(ctx, 'sess_guid', sess_guid, {
-        domain: 'getpocket.com',
         samesite: 'lax',
         path: '/',
         maxAge: 473040000,
@@ -141,7 +140,6 @@ export async function checkSessGuid(ctx) {
 export async function getSessGuid() {
   const sess_guid = await createGuid()
   setCookie(null, 'sess_guid', sess_guid, {
-    domain: 'getpocket.com',
     samesite: 'lax',
     path: '/',
     maxAge: 60 * 60 * 24 * 365
@@ -153,7 +151,6 @@ export async function userTokenValidate(code) {
   if (response?.access_token) {
     const { access_token } = response
     setCookie(null, 'pkt_access_token', access_token, {
-      domain: 'getpocket.com',
       samesite: 'lax',
       path: '/',
       maxAge: 60 * 60 * 24 * 365
