@@ -20,8 +20,9 @@ export function getTopicFeed(topic, curated = 5, algorithmic = 20) {
 /**
  * Get the list of currated topics
  */
-export function getTopicList() {
+export function getTopicList(ssr) {
   return request({
+    ssr,
     path: 'v3/discover/topicList'
   })
 }

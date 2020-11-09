@@ -99,9 +99,9 @@ function* discoverUnSaveRequest(action) {
  * Make and async request for a Pocket v3 feed and return best data
  * @return items {array} An array of derived items
  */
-export async function fetchDiscoverData() {
+export async function fetchDiscoverData(ssr) {
   try {
-    const response = await getDiscoverFeed()
+    const response = await getDiscoverFeed(ssr)
     const derivedItems = await deriveDiscoverItems(response.feed)
 
     const items = derivedItems.map((item) => item.resolved_id)

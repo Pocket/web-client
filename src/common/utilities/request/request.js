@@ -15,14 +15,18 @@ export const request = ({
   path,
   method = 'GET',
   body,
-  cookie,
-  auth
+  auth,
+  ssr
 }) => {
   const oAuthParameters = generateOAuthParameters(auth)
+
+  const corsParameters = {}
+  if (!ssr) corsParameters.enable_cors = 1
+
   const queryParams = queryString.stringify({
     ...params,
+    ...corsParameters,
     consumer_key: CONSUMER_KEY,
-    enable_cors: 1,
     ...oAuthParameters
   })
 

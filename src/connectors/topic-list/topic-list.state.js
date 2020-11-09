@@ -69,9 +69,9 @@ function* topicListRequest(action) {
  * Make and async request for a Pocket v3 feed and return best data
  * @return topics {array} An array of derived items
  */
-export async function fetchTopicList() {
+export async function fetchTopicList(ssr) {
   try {
-    const response = await apiTopicList()
+    const response = await apiTopicList(ssr)
 
     if (!response || response.status !== 1) return {}
 
