@@ -1,9 +1,12 @@
 import Link from 'next/link'
 
 import { HomeIcon } from '@pocket/web-ui'
-import { DiscoverIcon } from '@pocket/web-ui'
+import { FavoriteIcon } from '@pocket/web-ui'
+import { HighlightIcon } from '@pocket/web-ui'
+import { TagIcon } from '@pocket/web-ui'
 import { ArticleIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
+import { VideoIcon } from '@pocket/web-ui'
 
 import { css } from 'linaria'
 
@@ -68,52 +71,46 @@ export function SideNav({ subset, home, isLoggedIn }) {
 
   return (
     <nav role="navigation" className="side-nav">
-      <a href="/">
-        <button className={subActive('home')}>
-          <HomeIcon className="side-nav-icon" /> Home
-        </button>
-      </a>
-
-      <a href="/discover">
-        <button className={subActive('discover')}>
-          <DiscoverIcon className="side-nav-icon" /> Discover
-        </button>
-      </a>
-
-      <a href="/my-list">
+      <Link href="/my-list">
         <button className={subActive('unread')}>
-          <ArticleIcon className="side-nav-icon" /> My List
+          <HomeIcon className="side-nav-icon" /> My List
         </button>
-      </a>
-      {isLoggedIn ? (
-        <>
-          <div className={sideNavHeader}>Quick Links</div>
+      </Link>
+      <Link href="/my-list/archive">
+        <button className={subActive('archive')}>
+          <ArchiveIcon className="side-nav-icon" /> Archive
+        </button>
+      </Link>
+      <Link href="/my-list/tags">
+        <button className={subActive('tags')}>
+          <TagIcon className="side-nav-icon" /> Tags
+        </button>
+      </Link>
+      <div className={sideNavHeader}>Filters</div>
 
-          <Link href="/my-list/archive">
-            <button className={subActive('archive')}>Archive</button>
-          </Link>
+      <Link href="/my-list/favorites">
+        <button className={subActive('favorites')}>
+          <FavoriteIcon className="side-nav-icon" /> Favorites
+        </button>
+      </Link>
 
-          <Link href="/my-list/favorites">
-            <button className={subActive('favorites')}>Favorites</button>
-          </Link>
+      <Link href="/my-list/highlights">
+        <button className={subActive('highlights')}>
+          <HighlightIcon className="side-nav-icon" /> Highlights
+        </button>
+      </Link>
 
-          <Link href="/my-list/highlights">
-            <button className={subActive('highlights')}>Highlights</button>
-          </Link>
+      <Link href="/my-list/articles">
+        <button className={subActive('articles')}>
+          <ArticleIcon className="side-nav-icon" /> Articles
+        </button>
+      </Link>
 
-          {/* <Link href="/my-list/tags">
-        <button className={subActive('tags')}>Tags</button>
-      </Link> */}
-
-          <Link href="/my-list/articles">
-            <button className={subActive('articles')}>Articles</button>
-          </Link>
-
-          <Link href="/my-list/videos">
-            <button className={subActive('videos')}>Videos</button>
-          </Link>
-        </>
-      ) : null}
+      <Link href="/my-list/videos">
+        <button className={subActive('videos')}>
+          <VideoIcon className="side-nav-icon" /> Videos
+        </button>
+      </Link>
     </nav>
   )
 }
