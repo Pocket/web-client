@@ -133,13 +133,17 @@ const GlobalNavAccount = ({
   appRootSelector,
   onLinkClick,
   onLoginClick,
-  onAccountClick
+  onAccountClick,
+  userStatus
 }) => {
   const accountMenuTriggerRef = useRef(null)
 
   function handleLinkClick(name, event) {
     onLinkClick(name, event)
   }
+
+  // Hold off on rendering until we have a clear response on user status
+  if (userStatus === 'pending') return <></>
 
   return !isLoggedIn ? (
     <div>

@@ -1,7 +1,7 @@
 import '@pocket/web-ui/lib/pocket-web-ui.css'
 import { ViewportProvider } from '@pocket/web-ui'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 // import { END } from 'redux-saga'
 import { wrapper } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
@@ -126,11 +126,11 @@ function PocketWebClient({ Component, pageProps, err }) {
   }, [user_status, sess_guid, user_id, path, dispatch])
 
   // Provider is created automatically by the wrapper by next-redux-wrapper
-  return user_status !== 'pending' ? (
+  return (
     <ViewportProvider>
       <Component {...pageProps} err={err} />
     </ViewportProvider>
-  ) : null
+  )
 }
 
 /**

@@ -1,8 +1,6 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
-import { getUser } from 'connectors/user/user.state'
 import { appSetMode } from 'connectors/app/app.state'
 
 import GlobalNavComponent from 'components/global-nav/global-nav'
@@ -81,18 +79,12 @@ const GlobalNav = (props) => {
   /**
    * Tools are what we use on myList
    */
-  const showNav =
-    (selectedLink === 'my-list' || selectedLink === '') && isLoggedIn
+  const showNav = selectedLink === 'my-list' && isLoggedIn
   const tools = showNav
     ? [
         { name: 'search', label: 'Search', icon: <SearchIcon /> },
         { name: 'add-item', label: 'Save a URL', icon: <AddIcon /> },
-        { name: 'bulk-edit', label: 'Bulk Edit', icon: <EditIcon /> },
-        {
-          name: 'notifications',
-          label: 'View Activity',
-          icon: <NotificationIcon />
-        }
+        { name: 'bulk-edit', label: 'Bulk Edit', icon: <EditIcon /> }
       ]
     : []
 

@@ -27,6 +27,7 @@ export default function Collection(props) {
   const since = useSelector((state) => state.myList[`${section}Since`])
   const routeChange = useHasChanged(router.pathname)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
+  const userStatus = useSelector((state) => state.user.user_status)
   const initialItemsPopulated =
     items?.length && (items?.length >= 18 || total < 18)
 
@@ -78,6 +79,7 @@ export default function Collection(props) {
    * ------------------------------------------------------------------------
    */
   const loadMore = () => dispatch(getMylistData(45, offset, subset, filter))
+  const shouldRender = userStatus !== 'pending'
 
   // TODO: Adjust this to use app state
   const type = 'grid'
@@ -86,18 +88,24 @@ export default function Collection(props) {
     <Layout title={metaData.title} metaData={metaData}>
       <SideNav subset={subset} isLoggedIn={isLoggedIn} />
 
-      <main className="main">
-        {isLoggedIn ? (
-          <>
-            <MyListHeader subset={subset} filter={filter} />
-            {items?.length ? (
-              <VirtualizedList type={type} items={items} loadMore={loadMore} />
-            ) : null}
-          </>
-        ) : (
-          <CallOutBrand />
-        )}
-      </main>
+      {shouldRender ? (
+        <main className="main">
+          {isLoggedIn ? (
+            <>
+              <MyListHeader subset={subset} filter={filter} />
+              {items?.length ? (
+                <VirtualizedList
+                  type={type}
+                  items={items}
+                  loadMore={loadMore}
+                />
+              ) : null}
+            </>
+          ) : (
+            <CallOutBrand />
+          )}
+        </main>
+      ) : null}
     </Layout>
   )
 }

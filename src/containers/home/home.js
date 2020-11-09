@@ -20,6 +20,9 @@ export default function Collection(props) {
   const dispatch = useDispatch()
 
   const latestSaves = useSelector((state) => state.home.latest)
+  const userStatus = useSelector((state) => state.user.user_status)
+  const shouldRender = userStatus !== 'pending'
+
   const discover = useSelector((state) => state.home.discover)
 
   // Get topicList for sections that require it
@@ -34,42 +37,44 @@ export default function Collection(props) {
   return (
     <Layout title={metaData.title} metaData={metaData}>
       <SideNav subset="home" />
-      <main className="main">
-        {latestSaves?.length ? (
-          <>
-            <SectionHeader
-              sectionTitle="Latest Saves"
-              sectionDescription="Dive into your content"
-            />
-            <DynamicCardLayout>
-              {/* Top Lockup (left)*/}
-              <CardList
-                type="lockupCenter"
-                count={5}
-                itemType="my-list"
-                items={latestSaves}
+      {shouldRender ? (
+        <main className="main">
+          {latestSaves?.length ? (
+            <>
+              <SectionHeader
+                sectionTitle="Latest Saves"
+                sectionDescription="Dive into your content"
               />
-            </DynamicCardLayout>
-          </>
-        ) : (
-          <CallOutBrand />
-        )}
-        {discover?.length ? (
-          <>
-            <CardTopicsNav topics={topics} track={() => {}} />
-            <br />
-            <br />
-            <SectionHeader
-              sectionTitle="Today’s essential reads"
-              sectionDescription="The best of the web"
-            />
-            <DynamicCardLayout>
-              {/* Top Lockup (left)*/}
-              <CardList type="lockupRight" count={5} items={discover} />
-            </DynamicCardLayout>
-          </>
-        ) : null}
-      </main>
+              <DynamicCardLayout>
+                {/* Top Lockup (left)*/}
+                <CardList
+                  type="lockupCenter"
+                  count={5}
+                  itemType="my-list"
+                  items={latestSaves}
+                />
+              </DynamicCardLayout>
+            </>
+          ) : (
+            <CallOutBrand />
+          )}
+          {discover?.length ? (
+            <>
+              <CardTopicsNav topics={topics} track={() => {}} />
+              <br />
+              <br />
+              <SectionHeader
+                sectionTitle="Today’s essential reads"
+                sectionDescription="The best of the web"
+              />
+              <DynamicCardLayout>
+                {/* Top Lockup (left)*/}
+                <CardList type="lockupRight" count={5} items={discover} />
+              </DynamicCardLayout>
+            </>
+          ) : null}
+        </main>
+      ) : null}
     </Layout>
   )
 }
