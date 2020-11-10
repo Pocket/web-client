@@ -56,10 +56,10 @@ export default function Collection(props) {
    * ------------------------------------------------------------------------
    */
   useEffect(() => {
-    if (initialItemsPopulated) return
+    if (initialItemsPopulated || userStatus === 'pending') return
     dispatch(getMylistData(18, 0, subset, filter))
     dispatch(appSetSection(section))
-  }, [initialItemsPopulated, subset, filter, section, dispatch])
+  }, [userStatus, initialItemsPopulated, subset, filter, section, dispatch])
 
   /**
    * Update list if we are navigating here from another area in the app
