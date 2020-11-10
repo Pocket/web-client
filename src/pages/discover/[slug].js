@@ -15,7 +15,7 @@ import { wrapper } from 'store'
  * SEO/Crawlers
   --------------------------------------------------------------- */
 export const getStaticPaths = async () => {
-  const topicsByName = await fetchTopicList()
+  const topicsByName = await fetchTopicList(true)
   const paths = Object.values(topicsByName).map(
     (data) => `/discover/${data.topic_slug}`
   )
@@ -32,7 +32,7 @@ export const getStaticProps = wrapper.getStaticProps(
 
     // Hydrating initial state with an async request. This will block the
     // page from loading. Do this for SEO/crawler purposes
-    const topicsByName = await fetchTopicList()
+    const topicsByName = await fetchTopicList(true)
 
     // Invalid Topic
     const searchDefault = { topic: slug, page_type: 'search' }
@@ -41,11 +41,9 @@ export const getStaticProps = wrapper.getStaticProps(
     // Get topic info
     const { topic, page_type } = activeTopic
     const isCollection = page_type === 'editorial_collection'
-    const allowedSearch = ['productivity', 'finance']
-    const validSearchTopic = allowedSearch.includes(topic.toLowerCase())
 
     // We are not fully supporting search at the moment
-    if (page_type === 'search' && !validSearchTopic) {
+    if (page_type === 'search') {
       return { props: { statusCode: 404 } }
     }
 

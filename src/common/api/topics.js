@@ -9,6 +9,7 @@ import { request } from 'common/utilities/request/request'
 export function getTopicFeed(topic, curated = 5, algorithmic = 20) {
   return request({
     path: 'v3/discover/topics',
+    ssr: true,
     params: {
       topics: topic,
       curated_count: curated,
