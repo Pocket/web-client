@@ -6,7 +6,7 @@ import { request } from 'common/utilities/request/request'
 export const createGuid = async () => {
   return request({
     path: 'v3/guid'
-  }).then(({ guid }) => guid)
+  })
 }
 
 /**
