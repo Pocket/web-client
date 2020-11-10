@@ -117,6 +117,12 @@ const upgradeLinkStyle = css`
 
 const avatarStyle = css`
   vertical-align: middle;
+  background-color: transparent;
+  color: var(--color-textSecondary);
+  &:hover {
+    color: var(--color-textPrimary);
+    background-color: transparent;
+  }
 `
 
 /**
