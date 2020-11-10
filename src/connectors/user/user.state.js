@@ -1,7 +1,6 @@
 import { getUserInfo } from 'common/api/user'
 import { createGuid } from 'common/api/user'
-import { getValueFromCookie } from 'common/utilities'
-import { setCookie } from 'nookies'
+import { setCookie, parseCookies } from 'nookies'
 import { put, takeLatest } from 'redux-saga/effects'
 import { getRequestToken, getAccessToken } from 'common/api/oauth'
 import { OAUTH_REDIRECT_URL } from 'common/constants'
@@ -15,10 +14,11 @@ import { SESS_GUID_HYDRATE } from 'actions'
 import { USER_OAUTH_TOKEN_REQUEST } from 'actions'
 
 const initialState = { auth: false, sess_guid: null, user_status: 'pending' }
+const yearInMs = 60 * 60 * 24 * 365
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const userHydrate = (hydrate) => ({ type: USER_HYDRATE, hydrate })
+export const userHydrate = (hydrate, skipCookies) => ({ type: USER_HYDRATE, hydrate, skipCookies}) //prettier-ignore
 export const getUser = () => ({ type: USER_REQUEST })
 export const devUser = () => ({ type: USER_DEV_REQUEST })
 export const sessGuidHydrate = (sess_guid) => ({type: SESS_GUID_HYDRATE,sess_guid}) //prettier-ignore
@@ -62,6 +62,7 @@ export const userReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const userSagas = [
   takeLatest(USER_REQUEST, userRequest),
+  takeLatest(USER_HYDRATE, hydrateUser),
   takeLatest(USER_OAUTH_TOKEN_REQUEST, userTokenRequest)
 ]
 
@@ -73,6 +74,29 @@ function* userRequest() {
 
   const { user } = response
   if (user) yield put({ type: USER_SUCCESS, user })
+}
+
+function* hydrateUser(action) {
+  const { hydrate, skipCookies } = action
+  if (!hydrate || skipCookies) return
+
+  const {
+    user_id,
+    username,
+    email,
+    birth,
+    first_name,
+    last_name,
+    premium_status
+  } = yield hydrate
+
+  setCookie(null, 'user_id', user_id, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
+  setCookie(null, 'username', username, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
+  setCookie(null, 'email', email, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
+  setCookie(null, 'birth', birth, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
+  setCookie(null, 'first_name', first_name, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
+  setCookie(null, 'last_name', last_name, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
+  setCookie(null, 'premium_status', premium_status, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
 }
 
 function* userTokenRequest() {
@@ -105,44 +129,15 @@ export async function fetchUserData() {
   return user
 }
 
-export async function setUserData() {
-  // const cookies = parseCookies()
-  return { username: 'joel' }
-}
-
-/**
- * getSessGuid will get a valid sess_guid from either a cookie or the server,
- * if it gets one from the server, it will also store that guid in a cookie
- * @return {string} sess_guid
- */
-export async function checkSessGuid(ctx) {
-  try {
-    // Get sess_guid
-    const cookie = ctx?.req?.headers?.cookie
-    const sessGuidSSR = getValueFromCookie('sess_guid', cookie)
-    const sess_guid = sessGuidSSR || (await createGuid())
-
-    if (!sessGuidSSR) {
-      setCookie(ctx, 'sess_guid', sess_guid, {
-        samesite: 'lax',
-        path: '/',
-        maxAge: 473040000,
-        httpOnly: true
-      })
-    }
-
-    return sess_guid
-  } catch (error) {
-    return false
-  }
-}
-
 export async function getSessGuid() {
-  const sess_guid = await createGuid()
+  const response = await createGuid()
+  if (response.status !== 1) return false
+
+  const { guid: sess_guid } = response
   setCookie(null, 'sess_guid', sess_guid, {
     samesite: 'lax',
     path: '/',
-    maxAge: 60 * 60 * 24 * 365
+    maxAge: yearInMs
   })
 }
 
@@ -153,7 +148,7 @@ export async function userTokenValidate(code) {
     setCookie(null, 'pkt_access_token', access_token, {
       samesite: 'lax',
       path: '/',
-      maxAge: 60 * 60 * 24 * 365
+      maxAge: yearInMs
     })
   }
   return false

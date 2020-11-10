@@ -7,12 +7,12 @@ import { wrapper } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import * as Sentry from '@sentry/node'
-import { parseCookies, setCookie, destroyCookie } from 'nookies'
+import { parseCookies, destroyCookie } from 'nookies'
 
 // import { appSetBaseURL } from 'connectors/app/app.state'
 import { fetchUserData, userHydrate } from 'connectors/user/user.state'
 import { getSessGuid, sessGuidHydrate } from 'connectors/user/user.state'
-import { userTokenValidate, setUserData } from 'connectors/user/user.state'
+import { userTokenValidate } from 'connectors/user/user.state'
 
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
 import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
@@ -61,6 +61,8 @@ function PocketWebClient({ Component, pageProps, err }) {
      */
     const initializeUser = async () => {
       const sess_guid = await getSessGuid()
+      if (!sess_guid) return
+
       dispatch(sessGuidHydrate(sess_guid))
       dispatch(userHydrate(false))
     }
@@ -79,7 +81,7 @@ function PocketWebClient({ Component, pageProps, err }) {
       if (isValid) {
         // hydrate user
         const user = await fetchUserData()
-        dispatch(userHydrate(user))
+        dispatch(userHydrate({ ...user, sess_guid }))
 
         // hydrate features
         const features = await fetchUnleashData(user, sess_guid)
@@ -92,8 +94,27 @@ function PocketWebClient({ Component, pageProps, err }) {
      * --------------------------------------------------------------
      */
     const hydrateUser = async () => {
+      // Check cookies (these are first party cookies)
+      const cookies = parseCookies()
+      const storedUser = {
+        sess_guid: cookies.sess_guid,
+        user_id: cookies.user_id,
+        username: cookies.username,
+        email: cookies.email,
+        birth: cookies.birth,
+        first_name: cookies.first_name,
+        last_name: cookies.last_name,
+        premium_status: cookies.premium_status,
+        profile: {
+          avatar_url: cookies.avatar_url
+        }
+      }
+
+      dispatch(userHydrate(storedUser, true))
+
+      // Update user data
       const user = await fetchUserData()
-      dispatch(userHydrate(user))
+      dispatch(userHydrate({ ...user, sess_guid }))
     }
 
     // Select a scenario
