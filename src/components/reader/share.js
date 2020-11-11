@@ -33,7 +33,8 @@ export const ShareArticle = ({
   appRootSelector,
   toggleSidebar,
   shareItem,
-  shareData
+  shareData,
+  isPremium
 }) => {
   const shareTriggerRef = useRef(null)
   // Popover Effect
@@ -70,6 +71,7 @@ export const ShareArticle = ({
       </WithTooltip>
       {shown ? (
         <ShareMenu
+          isPremium={isPremium}
           popoverRef={popBody}
           shareItem={handleShare}
           {...shareData}

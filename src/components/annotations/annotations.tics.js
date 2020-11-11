@@ -200,7 +200,8 @@ export const TicList = ({
   shareItem,
   shareData,
   deleteAnnotation,
-  visible
+  visible,
+  isPremium
 }) => {
   const renderTics = () => {
     let body = document.body
@@ -216,17 +217,17 @@ export const TicList = ({
 
     const screenHeight =
       Math.max(document.documentElement.clientHeight, window.innerHeight || 0) -
-      105 // 75 for navbar height, 30 for extra top and bottom padding
+      115 // 85 for navbar height, 30 for extra top and bottom padding
 
     const tics = []
 
-    annotations.forEach((annot) => {
+    annotations.forEach((annot, index) => {
       let percent = annot.position / docHeight
-      let top = Math.round(percent * screenHeight) + 75 // top padding
+      let top = Math.round(percent * screenHeight) + 85 // top padding
 
       tics.push(
         <HighlightIndex
-          key={annot.id}
+          key={index}
           // yCoord={key}
           annotationId={annot.id}
           top={top}

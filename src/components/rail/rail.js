@@ -10,17 +10,11 @@ const railWrapper = css`
   background-color: var(--color-dividerTertiary);
   box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.12);
   border-right: 1px solid var(--color-dividerSecondary);
-  transition: opacity 150ms ease-in-out;
-  opacity: 0;
-  &:hover,
-  &.visible {
-    opacity: 1;
-  }
 `
 
-export const Rail = ({ visible, clickAction, children }) => (
+export const Rail = ({ clickAction, children }) => (
   <div
-    className={classNames(railWrapper, 'rail-wrapper', { visible })}
+    className={classNames(railWrapper, 'rail-wrapper')}
     onClick={clickAction}>
     {children}
   </div>

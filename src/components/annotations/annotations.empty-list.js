@@ -1,5 +1,7 @@
 import { css } from 'linaria'
-// import { Illustration } from 'Elements/Illustrations/illustration'
+import HighlightDark from 'static/images/reader-upsells/HighlightsAlt-dark.svg'
+import HighlightLight from 'static/images/reader-upsells/HighlightsAlt-light.svg'
+import HighlightSepia from 'static/images/reader-upsells/HighlightsAlt-sepia.svg'
 
 const list = css`
   text-align: center;
@@ -7,6 +9,24 @@ const list = css`
   flex-direction: column;
   justify-content: center;
   height: calc(100% - 50px);
+`
+
+const imageWrapper = css`
+  margin: 20px auto;
+
+  img {
+    display: none;
+    max-width: 120px;
+  }
+  .colormode-light & {
+    img.light { display: block; }
+  }
+  .colormode-dark & {
+    img.dark { display: block; }
+  }
+  .colormode-sepia & {
+    img.sepia { display: block; }
+  }
 `
 
 const heading = css`
@@ -31,7 +51,11 @@ const info = css`
 export const EmptyList = () => {
   return (
     <div className={list}>
-      {/*<Illustration name="HighlightsAlt" size="120px" margin="0 auto" />*/}
+      <div className={imageWrapper}>
+        <img className='dark' src={HighlightDark} />
+        <img className='light' src={HighlightLight} />
+        <img className='sepia' src={HighlightSepia} />
+      </div>
       <h4 className={heading}>
         You haven’t highlighted anything yet {/*"annotations.infoHeading"*/}
       </h4>

@@ -6,25 +6,53 @@ import { QuoteList } from 'components/annotations/annotations.list'
 import { TicList } from 'components/annotations/annotations.tics'
 import classNames from 'classnames'
 
-const railWrapper = css`
+const sideBarWrapper = css`
+  width: 110px;
+  height: calc(100vh - 64px);
   position: fixed;
+  z-index: 1;
+
+  .rail-wrapper {
+    opacity: 0;
+    transform: translateX(-318px);
+    transition: all 150ms ease-in-out;
+    padding-top: var(--size400);
+  }
+
+  &.active {
+    width: 350px;
+    .rail-wrapper {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .button-rail  {
+      opacity: 1;
+    }
+  }
+  &:hover {
+    .rail-wrapper {
+      opacity: 1;
+    }
+    .button-rail  {
+      opacity: 1;
+    }
+  }
+`
+
+const buttonRail = css`
+  position: fixed;
+  top: 0;
   width: 80px;
   right: -80px;
   height: 100%;
   transition: opacity 150ms ease-in-out;
   opacity: 0;
-  &:hover,
-  &:hover button,
-  &.visible,
-  &.visible button {
-    opacity: 1;
-  }
 `
 
 const verticallyCentered = css`
   position: absolute;
   right: 0;
-  top: 50%;
+  top: calc(50% + 64px);
   transform: translateY(-50%);
 `
 
@@ -38,9 +66,6 @@ const buttonStyles = css`
   text-align: center;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
   transform: translate(-24px, -24px);
-  opacity: 0;
-  transition: opacity 200ms ease-in-out 0ms;
-
   &:hover {
     color: var(--color-textPrimary);
     background-color: var(--color-actionPrimarySubdued);
@@ -53,22 +78,33 @@ export const Sidebar = ({
   highlightList,
   shareItem,
   shareData,
-  deleteAnnotation
+  deleteAnnotation,
+  isPremium
 }) => {
+  const handleAnnotationClick = (position) => {
+    window.scrollTo({
+      left: 0,
+      top: position - 100, // scroll 100px above item to offset header
+      behavior: 'smooth'
+    })
+  }
+
   return (
-    <>
+    <aside className={classNames(sideBarWrapper, { active: sideBarOpen })}>
       <Rail
         visible={sideBarOpen}
         clickAction={sideBarOpen ? null : toggleSidebar}>
         <QuoteList
+          isPremium={isPremium}
           visible={sideBarOpen}
           shareItem={shareItem}
           annotations={highlightList}
           shareData={shareData}
           deleteAnnotation={deleteAnnotation}
+          onClickEvent={handleAnnotationClick}
         />
 
-        <div className={classNames(railWrapper, { visible: sideBarOpen })}>
+        <div className={classNames(buttonRail, 'button-rail')}>
           <div className={verticallyCentered}>
             <button
               onClick={toggleSidebar}
@@ -79,12 +115,14 @@ export const Sidebar = ({
         </div>
       </Rail>
       <TicList
+        isPremium={isPremium}
         visible={!sideBarOpen}
         shareItem={shareItem}
         annotations={highlightList}
         shareData={shareData}
         deleteAnnotation={deleteAnnotation}
+        onClickEvent={handleAnnotationClick}
       />
-    </>
+    </aside>
   )
 }

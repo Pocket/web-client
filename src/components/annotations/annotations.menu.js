@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames'
 import { css } from 'linaria'
 
@@ -56,7 +56,7 @@ const menuWrapper = css`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: var(--zIndexModal);
+  z-index: var(--zIndexTooltip);
 
   & > li {
     padding: 0;
@@ -64,6 +64,10 @@ const menuWrapper = css`
 
   &.alignRight {
     left: -160px;
+  }
+  &.flipDirection  {
+    bottom: -24px;
+    top: unset;
   }
 `
 
@@ -76,8 +80,11 @@ export const AnnotationMenu = ({
   shareData,
   quote
 }) => {
+  const screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
   const [shareOpen, setShareOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [flipDirection, setFlipDirection] =  useState(false)
+  const selfRef = useRef(null)
   let timer
 
   useEffect(() => {
@@ -91,13 +98,24 @@ export const AnnotationMenu = ({
     }, 1000)
   }
 
+  const checkDirection = () => {
+    if (selfRef.current.getBoundingClientRect().top > screenHeight/2) {
+      setFlipDirection(true)
+    }
+    else {
+      setFlipDirection(false)
+    }
+  }
+
   const clearTimer = () => clearTimeout(timer)
 
   const toggleShare = () => {
+    checkDirection()
     setShareOpen(!shareOpen)
   }
 
   const toggleMenu = () => {
+    checkDirection()
     setMenuOpen(!menuOpen)
   }
 
@@ -116,6 +134,7 @@ export const AnnotationMenu = ({
     <div className={inlineMenuStyles} style={{ top, left }}>
       <div className={relativeWrapper}>
         <button
+          ref={selfRef}
           onClick={toggleMenu}
           className={classNames(buttonReset, buttonStyles, { visible })}>
           <OverflowMenuIcon />
@@ -125,14 +144,14 @@ export const AnnotationMenu = ({
             <ul
               onMouseEnter={clearTimer}
               onMouseLeave={startTimer}
-              className={classNames(menuWrapper, { alignRight })}>
+              className={classNames(menuWrapper, { alignRight, flipDirection })}>
               <ShareMenu shareItem={handleShare} quote={quote} {...shareData} />
             </ul>
           ) : (
             <ul
               onMouseEnter={clearTimer}
               onMouseLeave={startTimer}
-              className={classNames(overlayBase, menuWrapper, { alignRight })}>
+              className={classNames(overlayBase, menuWrapper, { alignRight, flipDirection })}>
               <PopupMenuGroup>
                 <PopupMenuItem onClick={handleDelete} icon={<DeleteIcon />}>
                   Delete

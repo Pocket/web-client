@@ -4,8 +4,7 @@ import classNames from 'classnames'
 import { AnnotationMenu } from './annotations.menu'
 import { cardStyles, Quote, CreatedDate } from './annotations.card'
 import { EmptyList } from './annotations.empty-list'
-
-// import { LimitNotice } from './annotations.limit'
+import { LimitNotice } from './annotations.limit'
 
 const listWrapper = css`
   height: 100%;
@@ -99,14 +98,13 @@ export class QuoteList extends Component {
 
     if (cards.length === 3 && !this.props.isPremium) {
       cards.push(
-        <div>LIMIT!!!</div>
-        // <LimitNotice
-        // key='notice'
-        // trackClick={this.props.trackClick} />
+        <LimitNotice
+          key='notice'
+          trackClick={this.props.trackClick} />
       )
     }
 
-    return cards.length > 0 ? cards : <EmptyList />
+    return cards
   }
 
   render() {
@@ -117,6 +115,8 @@ export class QuoteList extends Component {
         <h6 className={headingStyles}>My Highlights</h6> {/*translate*/}
         {this.renderCards()}
       </div>
-    ) : null
+    ) : (
+      <EmptyList />
+    )
   }
 }

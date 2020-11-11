@@ -10,6 +10,7 @@ import { ItemHeader } from 'components/reader/header'
 import { Content } from 'components/reader/content'
 import { SelectionPopover } from 'components/popover/popover-selection'
 import { Sidebar } from 'components/reader/sidebar'
+import { BottomUpsell } from 'components/reader/upsell.bottom'
 import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 import { Fonts, FONT_TYPES } from 'components/fonts/fonts'
@@ -33,23 +34,12 @@ const articleWrapper = css`
   padding: var(--spacing400) 0;
   overflow-x: hidden;
 
-  .sidebar {
+  .sidebar-anchor {
     position: relative;
-    z-index: 1;
     width: 0;
     transition: width 150ms ease-in-out;
-
-    .rail-wrapper {
-      transform: translateX(-318px);
-      transition: all 150ms ease-in-out;
-      padding-top: var(--size400);
-    }
-
     &.active {
       width: 350px;
-      .rail-wrapper {
-        transform: translateX(0);
-      }
     }
   }
 
@@ -66,7 +56,8 @@ export default function Reader() {
   const router = useRouter()
   const { slug: id } = router.query
 
-  const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false ) //prettier-ignore
+  // const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false ) //prettier-ignore
+  const isPremium = false
   const articleData = useSelector((state) => state.reader.articleData)
   const articleContent = useSelector((state) => state.reader.articleContent)
   const suggestedTags = useSelector((state) => state.reader.suggestedTags)
@@ -215,6 +206,7 @@ export default function Reader() {
   return (
     <>
       <ReaderNav
+        isPremium={isPremium}
         toggleSidebar={toggleSidebar}
         toggleTagging={toggleTagging}
         toggleShare={toggleShare}
@@ -226,8 +218,9 @@ export default function Reader() {
       />
 
       <main className={articleWrapper}>
-        <aside className={classNames('sidebar', { active: sideBarOpen })}>
+        <div className={classNames('sidebar-anchor', { active: sideBarOpen })}>
           <Sidebar
+            isPremium={isPremium}
             sideBarOpen={sideBarOpen}
             toggleSidebar={toggleSidebar}
             highlightList={highlightList}
@@ -235,7 +228,7 @@ export default function Reader() {
             shareData={shareData}
             // deleteAnnotation={deleteAnnotation}
           />
-        </aside>
+        </div>
         <article className={classNames(Fonts, 'reader')} style={customStyles}>
           <ItemHeader {...headerData} />
           {articleContent ? (
@@ -267,6 +260,9 @@ export default function Reader() {
           ) : null}
         </article>
       </main>
+      {!isPremium && articleContent ? (
+        <BottomUpsell maxWidth={customStyles.maxWidth} />
+      ) : null}
       <DeleteModal
         isOpen={deleteModalOpen}
         setModalOpen={setDeleteModal}

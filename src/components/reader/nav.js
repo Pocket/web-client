@@ -84,6 +84,7 @@ const articleActions = css`
 `
 
 export const ReaderNav = ({
+  isPremium,
   toggleSidebar,
   toggleTagging,
   toggleShare,
@@ -107,9 +108,9 @@ export const ReaderNav = ({
         <nav className={navStyle}>
           <WithTooltip label="Back to My List">
             {/*'reader.topNav.back'*/}
-            <button className={classNames(buttonReset, buttonStyles)}>
+            <a href="/my-list" className={classNames(buttonReset, buttonStyles)}>
               <ArrowLeftIcon />
-            </button>
+            </a>
           </WithTooltip>
 
           <div className={articleActions}>
@@ -159,6 +160,7 @@ export const ReaderNav = ({
               appRootSelector="#__next"
               shareItem={toggleShare}
               shareData={shareData}
+              isPremium={isPremium}
             />
           </div>
 
@@ -169,7 +171,7 @@ export const ReaderNav = ({
             setFontSize={setFontSize}
             setLineHeight={setLineHeight}
             setColumnWidth={setColumnWidth}
-            isPremium
+            isPremium={isPremium}
           />
         </nav>
       </div>
