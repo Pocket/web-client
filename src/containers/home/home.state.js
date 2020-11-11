@@ -129,9 +129,9 @@ export async function fetchMyListData(params) {
 
     const items = derivedItems
       .sort((a, b) => a.sort_id - b.sort_id)
-      .map((item) => item.resolved_id)
+      .map((item) => item.item_id)
 
-    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+    const itemsById = arrayToObject(derivedItems, 'item_id')
 
     return { items, itemsById, total }
   } catch (error) {

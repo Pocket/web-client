@@ -260,7 +260,7 @@ function* myListDataRequest(action) {
     const items = Object.values(itemsByIdDraft)
       .filter(filterFunction)
       .sort(sortFunction)
-      .map((item) => item.resolved_id)
+      .map((item) => item.item_id)
 
     const newOffset = offset + items?.length
 
@@ -303,7 +303,7 @@ function* myListUpdate(action) {
     const items = Object.values(itemsById)
       .filter(filterFunction)
       .sort(sortFunction)
-      .map((item) => item.resolved_id)
+      .map((item) => item.item_id)
 
     // Update our item store
     yield put({
@@ -337,7 +337,7 @@ export async function fetchMyListData(params) {
     const since = response.since
 
     const derivedItems = await deriveMyListItems(Object.values(response.list))
-    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+    const itemsById = arrayToObject(derivedItems, 'item_id')
 
     return { itemsById, total, since }
   } catch (error) {
@@ -361,7 +361,7 @@ export async function fetchMyListUpdate(params) {
 
     const itemsToUpdate = Object.values(list)
     const derivedItems = await deriveMyListItems(itemsToUpdate)
-    const updatedItemsById = arrayToObject(derivedItems, 'resolved_id')
+    const updatedItemsById = arrayToObject(derivedItems, 'item_id')
 
     return { updatedItemsById, itemsToDelete, total, updatedSince: since }
   } catch (error) {

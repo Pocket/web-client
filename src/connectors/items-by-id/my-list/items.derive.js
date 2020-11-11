@@ -14,6 +14,7 @@ export function deriveMyListItems(response) {
    */
   return response.map((item) => {
     return {
+      item_id: item?.item_id,
       resolved_id: item?.resolved_id,
       sort_id: item?.sort_id,
       favorite: item?.favorite,
@@ -37,7 +38,8 @@ export function deriveMyListItems(response) {
       save_url: saveUrl({ item }),
       open_url: openUrl({ item }),
       read_time: readTime({ item }),
-      syndicated: syndicated({ item })
+      syndicated: syndicated({ item }),
+      badge_group_id: badgeGroupId({ item })
     }
   })
 }
@@ -161,4 +163,13 @@ const devLink = function (item) {
   return isSyndicated && isDev && path
     ? `discover/item/${path.substring(path.lastIndexOf('/') + 1)}`
     : false
+}
+
+/**
+ * BADGE_GROUP_ID
+ * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
+ * @returns {int} number for badge group if available
+ */
+const badgeGroupId = function ({ item }) {
+  return item?.badge_group_id || null
 }

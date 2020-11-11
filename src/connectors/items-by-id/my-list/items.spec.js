@@ -7,7 +7,7 @@ import { deriveMyListItems } from './items.derive'
 
 const itemWithMissingData = [
   {
-    item_id: '3059000415',
+    item_id: '3059000416',
     resolved_id: '3059000415',
     given_url:
       'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential',
@@ -138,6 +138,7 @@ describe('My List Items', function () {
       const expectedOpenUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
 
       assert.deepStrictEqual(derivedItems[0], {
+        item_id: '3059000416',
         resolved_id: '3059000415',
         favorite: '0',
         status: '0',

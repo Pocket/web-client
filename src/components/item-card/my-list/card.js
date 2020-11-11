@@ -188,7 +188,7 @@ export const Card = ({
   bulkSelected
 }) => {
   const {
-    resolved_id: id,
+    item_id: id,
     title,
     thumbnail,
     publisher,
