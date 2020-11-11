@@ -34,7 +34,7 @@ export const sideNavItem = css`
   padding: 0 20px;
   font-size: var(--fontSize100);
   font-weight: 400;
-  line-height: 16px;
+  line-height: 24px;
   height: 40px;
   margin-bottom: 5px;
   border-radius: 4px;
@@ -43,6 +43,7 @@ export const sideNavItem = css`
   background-color: transparent;
 
   .side-nav-icon {
+    height: 24px;
     padding-right: 10px;
     margin-top: 0;
   }

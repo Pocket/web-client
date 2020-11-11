@@ -12,7 +12,8 @@ import { DeleteIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
 import { AddIcon } from '@pocket/web-ui'
 import { FavoriteIcon } from '@pocket/web-ui'
-import { AddCircledIcon } from '@pocket/web-ui'
+import { FavoriteFilledIcon } from '@pocket/web-ui'
+import { EmptyCircledIcon } from '@pocket/web-ui'
 import { CheckCircledIcon } from '@pocket/web-ui'
 import { TagIcon } from '@pocket/web-ui'
 
@@ -224,8 +225,7 @@ export const Card = ({
   const archiveLabel = status === '0' ? 'Archive' : 'Add'
 
   const favoriteAction = favorite === '0' ? itemFavorite : itemUnFavorite
-  const CorrectFavIcon = favorite === '0' ? FavoriteIcon : FavoriteIcon // FavoriteFilledIcon <- Icon is broken
-  const favoriteLabel = favorite === '0' ? 'Favorite' : 'UnFavorite'
+  const CorrectFavIcon = favorite === '0' ? FavoriteIcon : FavoriteFilledIcon
 
   const selectBulk = (event) => {
     const withShift = event.shiftKey
@@ -268,7 +268,7 @@ export const Card = ({
             bulkSelected ? (
               <CheckCircledIcon className="bulkIconStyle" />
             ) : (
-              <AddCircledIcon className="bulkIconStyle" />
+              <EmptyCircledIcon className="bulkIconStyle" />
             )
           ) : (
             <ItemAction
@@ -289,7 +289,7 @@ export const Card = ({
                   onClick: archiveAction
                 },
                 {
-                  label: favoriteLabel,
+                  label: 'Favorite',
                   icon: <CorrectFavIcon />,
                   onClick: favoriteAction
                 },
