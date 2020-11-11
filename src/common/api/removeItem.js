@@ -6,9 +6,10 @@ import { request } from 'common/utilities/request/request'
 export const removeItem = (item_id) => {
   return request({
     path: 'v3/send',
-    params: {
+    method: 'POST',
+    body: JSON.stringify({
       actions: [{ action: 'delete', item_id }]
-    },
+    }),
     auth: true
   })
 }

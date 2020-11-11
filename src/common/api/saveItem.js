@@ -6,9 +6,10 @@ import { request } from 'common/utilities/request/request'
 export const saveItem = (url, analytics) => {
   return request({
     path: 'v3/send',
-    params: {
+    method: 'POST',
+    body: JSON.stringify({
       actions: [{ action: 'add', url, ...analytics }]
-    },
+    }),
     auth: true
   })
 }
