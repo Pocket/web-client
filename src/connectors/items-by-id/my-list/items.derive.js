@@ -38,8 +38,7 @@ export function deriveMyListItems(response) {
       save_url: saveUrl({ item }),
       open_url: openUrl({ item }),
       read_time: readTime({ item }),
-      syndicated: syndicated({ item }),
-      badge_group_id: badgeGroupId({ item })
+      syndicated: syndicated({ item })
     }
   })
 }
@@ -163,13 +162,4 @@ const devLink = function (item) {
   return isSyndicated && isDev && path
     ? `discover/item/${path.substring(path.lastIndexOf('/') + 1)}`
     : false
-}
-
-/**
- * BADGE_GROUP_ID
- * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
- * @returns {int} number for badge group if available
- */
-const badgeGroupId = function ({ item }) {
-  return item?.badge_group_id || null
 }
