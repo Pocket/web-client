@@ -52,7 +52,8 @@ const buttonRail = css`
 const verticallyCentered = css`
   position: absolute;
   right: 0;
-  top: calc(50% + 64px);
+  top: calc(50%);
+  padding-top: 64px;
   transform: translateY(-50%);
 `
 
