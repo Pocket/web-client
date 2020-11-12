@@ -59,7 +59,6 @@ export function reconcileItemsUnFavorited(items, state) {
 export function reconcileItemsDeleted(items, state) {
   if (!items) return state
   const itemIds = items.map((item) => item.id)
-
   //prettier-ignore
   return {
     ...state,

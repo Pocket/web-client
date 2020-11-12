@@ -1,15 +1,10 @@
-import { put, call, takeEvery, select } from 'redux-saga/effects'
-import { sendItemActions } from 'common/api/item-actions'
+import { put, takeEvery, select } from 'redux-saga/effects'
 
 import { ITEMS_BULK_SELECT } from 'actions'
 import { ITEMS_BULK_DESELECT } from 'actions'
 import { ITEMS_BULK_ADD } from 'actions'
 import { ITEMS_BULK_REMOVE } from 'actions'
 import { ITEMS_BULK_CLEAR } from 'actions'
-import { ITEMS_BULK_TAG } from 'actions'
-import { ITEMS_BULK_FAVORITE } from 'actions'
-import { ITEMS_BULK_ARCHIVE } from 'actions'
-import { ITEMS_BULK_DELETE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */

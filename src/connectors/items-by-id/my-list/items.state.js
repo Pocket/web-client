@@ -1,7 +1,3 @@
-import { put, takeEvery } from 'redux-saga/effects'
-import { saveItem as saveItemAPI } from 'common/api/saveItem'
-import { removeItem as removeItemAPI } from 'common/api/removeItem'
-
 import { MYLIST_DATA_SUCCESS } from 'actions'
 import { MYLIST_UPDATE_SUCCESS } from 'actions'
 import { HOME_DATA_LATEST_SUCCESS } from 'actions'
@@ -46,6 +42,7 @@ export const myListItemsReducers = (state = initialState, action) => {
       const { itemsById } = action
       return itemsById
     }
+
     default:
       return state
   }

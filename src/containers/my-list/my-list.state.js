@@ -23,7 +23,7 @@ import { MYLIST_UNSAVE_REQUEST } from 'actions'
 
 import { ITEMS_ARCHIVE_REQUEST } from 'actions'
 import { ITEMS_UNARCHIVE_REQUEST } from 'actions'
-import { ITEMS_DELETE_REQUEST } from 'actions'
+import { ITEMS_DELETE_SEND } from 'actions'
 import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
 
 import { HYDRATE } from 'actions'
@@ -195,7 +195,7 @@ export const myListReducers = (state = initialState, action) => {
       return reconcileItemsUnFavorited(items, state)
     }
 
-    case ITEMS_DELETE_REQUEST: {
+    case ITEMS_DELETE_SEND: {
       const { items } = action
       return reconcileItemsDeleted(items, state)
     }

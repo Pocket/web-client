@@ -44,6 +44,9 @@ import { myListItemsSagas } from 'connectors/items-by-id/my-list/items.state'
 import { itemBulkReducers } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemBulkSagas } from 'connectors/items-by-id/my-list/items.bulk'
 
+import { itemDeleteSagas } from 'connectors/items-by-id/my-list/items.delete'
+import { itemDeleteReducers } from 'connectors/items-by-id/my-list/items.delete'
+
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
 
@@ -62,7 +65,8 @@ const discoverReducers = {
 const collectionReducers = {
   myListItemsById: myListItemsReducers,
   myList: myListReducers,
-  bulkEdit: itemBulkReducers
+  bulkEdit: itemBulkReducers,
+  itemsToDelete: itemDeleteReducers
 }
 
 const readerReducers = {
@@ -108,6 +112,7 @@ function* rootSaga() {
     ...myListSagas,
     ...myListItemsSagas,
     ...itemBulkSagas,
+    ...itemDeleteSagas,
     ...readSagas,
     ...homeSagas
   ])

@@ -7,31 +7,22 @@ const footerStyles = css`
   }
 `
 
-export const DeleteModal = ({
-  isOpen,
-  setModalOpen,
-  appRootSelector,
-  deleteItem
-}) => {
-  const handleCloseModal = () => {
-    setModalOpen(false)
-  }
-
+export const DeleteModal = ({ isOpen, appRootSelector, confirm, cancel }) => {
   return (
     <Modal
       title="Delete Item"
       appRootSelector={appRootSelector}
       isOpen={isOpen}
       screenReaderLabel="Delete Item"
-      handleClose={handleCloseModal}>
+      handleClose={cancel}>
       <ModalBody>
         <p>Are you sure you want to delete this item? This cannot be undone.</p>
       </ModalBody>
       <ModalFooter className={footerStyles}>
-        <Button variant="secondary" onClick={handleCloseModal}>
+        <Button variant="secondary" onClick={cancel}>
           Cancel
         </Button>
-        <Button type="submit" onClick={deleteItem}>
+        <Button type="submit" onClick={confirm}>
           Delete
         </Button>
       </ModalFooter>
