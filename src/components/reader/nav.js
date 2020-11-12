@@ -6,6 +6,7 @@ import {
   IosShareIcon,
   TagIcon,
   FavoriteIcon,
+  FavoriteFilledIcon,
   ArchiveIcon,
   DeleteIcon,
   WithTooltip,
@@ -136,7 +137,11 @@ export const ReaderNav = ({
               <button
                 onClick={toggleFavorite}
                 className={classNames(buttonReset, buttonStyles, { favorite })}>
-                <FavoriteIcon />
+                { favorite ? (
+                  <FavoriteFilledIcon />
+                ) : (
+                  <FavoriteIcon />
+                )}
               </button>
             </WithTooltip>
 

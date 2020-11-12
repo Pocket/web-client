@@ -22,6 +22,11 @@ const fontFamilyButton = css`
       margin-right: 0;
     }
   }
+
+  &.showPremium {
+    pointer-events: none;
+    opacity: 0.6;
+  }
 `
 
 export const FontSettings = ({ updateFontFamily, currentFont, isPremium }) => {
@@ -35,7 +40,7 @@ export const FontSettings = ({ updateFontFamily, currentFont, isPremium }) => {
         return (
           <PopupMenuItem
             key={font}
-            className={fontFamilyButton}
+            className={classNames(fontFamilyButton, { showPremium })}
             icon={showPremium ? <PremiumIcon /> : null}
             onClick={click}
             aria-label={FONT_TYPES[font].name}>

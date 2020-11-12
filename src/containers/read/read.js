@@ -19,6 +19,11 @@ import { DeleteModal } from 'components/delete/delete.modal'
 import { SendToFriend } from 'components/share-sheet/share-sheet'
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { itemDataRequest, saveAnnotation } from './read.state'
+import { itemsDeleteConfirm } from 'connectors/items-by-id/my-list/items.delete'
+import { itemsDeleteCancel } from 'connectors/items-by-id/my-list/items.delete'
+import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
+import { itemsFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
+import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
 
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
@@ -69,10 +74,15 @@ export default function Reader() {
   const autoCompleteEmails = useSelector((state) => state.reader.autoCompleteEmails) //prettier-ignore
   // const tagLibrary = useSelector((state) => state.reader.tagLibrary)
 
+  const itemsToDelete = useSelector((state) => state.itemsToDelete)
+  const showDeleteModal = itemsToDelete.length > 0
+  const confirmDelete = () => dispatch(itemsDeleteConfirm())
+  const cancelDelete = () => dispatch(itemsDeleteCancel())
+  const itemDelete = () => dispatch(itemsDeleteAction([{ id }]))
+
   const [sideBarOpen, setSideBar] = useState(false)
   const [taggingModalOpen, setTaggingModal] = useState(false)
   const [sendModalOpen, setSendModal] = useState(false)
-  const [deleteModalOpen, setDeleteModal] = useState(false)
   const [highlight, setHighlight] = useState(null)
   const [highlightList, setHighlightList] = useState(false)
   const [highlightHovered, setHighlightHovered] = useState(null)
@@ -144,7 +154,6 @@ export default function Reader() {
 
   const toggleSidebar = () => setSideBar(!sideBarOpen)
   const toggleTagging = () => setTaggingModal(!taggingModalOpen)
-  const toggleDelete = () => setDeleteModal(!deleteModalOpen)
   const toggleShare = ({ destination, quote }) => setSendModal({ destination, quote }) //prettier-ignore
 
   const toggleHighlight = () => {
@@ -197,9 +206,9 @@ export default function Reader() {
 
   const toggleFavorite = () => {
     if (favStatus) {
-      // dispatch(favoriteListItem({ item_id }))
+      dispatch(itemsUnFavoriteAction([{ id }]))
     } else {
-      // dispatch(unFavoriteListItem({ item_id }))
+      dispatch(itemsFavoriteAction([{ id }]))
     }
   }
 
@@ -210,7 +219,8 @@ export default function Reader() {
         toggleSidebar={toggleSidebar}
         toggleTagging={toggleTagging}
         toggleShare={toggleShare}
-        toggleDelete={toggleDelete}
+        toggleDelete={itemDelete}
+        toggleFavorite={toggleFavorite}
         shareData={shareData}
         archiveItem={archiveItem}
         displaySettings={{ columnWidth, lineHeight, fontSize, fontFamily }}
@@ -264,10 +274,10 @@ export default function Reader() {
         <BottomUpsell maxWidth={customStyles.maxWidth} />
       ) : null}
       <DeleteModal
-        isOpen={deleteModalOpen}
-        setModalOpen={setDeleteModal}
+        isOpen={showDeleteModal}
+        confirm={confirmDelete}
+        cancel={cancelDelete}
         appRootSelector={appRootSelector}
-        deleteItem={deleteItem}
       />
       <TagModal
         isPremium={isPremium}

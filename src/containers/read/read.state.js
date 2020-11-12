@@ -22,6 +22,13 @@ import { UPDATE_FONT_TYPE } from 'actions'
 import { FRIENDS_SUCCESS } from 'actions'
 import { FRIENDS_FAILURE } from 'actions'
 
+import { ITEMS_DELETE_SUCCESS } from 'actions'
+
+import { ITEMS_FAVORITE_REQUEST } from 'actions'
+import { ITEMS_FAVORITE_FAILURE } from 'actions'
+import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
+import { ITEMS_UNFAVORITE_FAILURE } from 'actions'
+
 import { API_ACTION_ADD_ANNOTATION } from 'common/constants'
 
 import { getArticleText } from 'common/api/reader'
@@ -102,6 +109,19 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, autoCompleteEmails, recentFriends }
     }
 
+    // optimistic update
+    case ITEMS_FAVORITE_REQUEST:
+    case ITEMS_UNFAVORITE_FAILURE: {
+      const articleData = { ...state.articleData, favorite: 1 }
+      return { ...state, articleData }
+    }
+    // optimistic update
+    case ITEMS_UNFAVORITE_REQUEST:
+    case ITEMS_FAVORITE_FAILURE: {
+      const articleData = { ...state.articleData, favorite: 0 }
+      return { ...state, articleData }
+    }
+
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE:
@@ -120,7 +140,8 @@ export const readSagas = [
   takeEvery(ARTICLE_ITEM_SUCCESS, articleContentRequest),
   takeEvery(ARTICLE_ITEM_SUCCESS, suggestedTagsRequest),
   takeEvery(ARTICLE_ITEM_SUCCESS, friendsRequest),
-  takeEvery(ANNOTATION_SAVE_REQUEST, annotationSaveRequest)
+  takeEvery(ANNOTATION_SAVE_REQUEST, annotationSaveRequest),
+  takeEvery(ITEMS_DELETE_SUCCESS, itemDeleteSuccess)
 ]
 
 /* SAGAS :: SELECTORS
@@ -211,6 +232,12 @@ function* annotationSaveRequest({ item_id, quote, patch }) {
     yield put({ type: ANNOTATION_SAVE_SUCCESS, item })
   } catch (error) {
     yield put({ type: ANNOTATION_SAVE_FAILURE, error })
+  }
+}
+
+function itemDeleteSuccess() {
+  if (location.href.indexOf('/read/') !== -1) {
+    location.href = '/my-list'
   }
 }
 
