@@ -18,12 +18,14 @@ import { TagModal } from 'components/tagging/tag.modal'
 import { DeleteModal } from 'components/delete/delete.modal'
 import { SendToFriend } from 'components/share-sheet/share-sheet'
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
-import { itemDataRequest, saveAnnotation } from './read.state'
+import { itemDataRequest, saveAnnotation, deleteAnnotation } from './read.state'
 import { itemsDeleteConfirm } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsDeleteCancel } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
 import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
+import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
+import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
@@ -61,8 +63,7 @@ export default function Reader() {
   const router = useRouter()
   const { slug: id } = router.query
 
-  // const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false ) //prettier-ignore
-  const isPremium = false
+  const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false ) //prettier-ignore
   const articleData = useSelector((state) => state.reader.articleData)
   const articleContent = useSelector((state) => state.reader.articleContent)
   const suggestedTags = useSelector((state) => state.reader.suggestedTags)
@@ -113,11 +114,13 @@ export default function Reader() {
     videos,
     images,
     annotations = [],
-    favorite
+    favorite,
+    status
   } = articleData
 
   const tagList = Object.keys(tags)
   const favStatus = getBool(favorite)
+  const archiveStatus = getBool(status)
 
   const headerData = {
     authors,
@@ -196,20 +199,23 @@ export default function Reader() {
     )
   }
 
-  const deleteItem = () => {
-    // dispatch(deleteListItem({ item_id }))
+  const removeAnnotation = (annotation_id) => {
+    dispatch(
+      deleteAnnotation({
+        item_id,
+        annotation_id
+      })
+    )
   }
 
   const archiveItem = () => {
-    // dispatch(archiveListItem({ item_id }))
+    const archiveAction = archiveStatus ? itemsUnArchiveAction : itemsArchiveAction
+    dispatch(archiveAction([{ id }]))
   }
 
   const toggleFavorite = () => {
-    if (favStatus) {
-      dispatch(itemsUnFavoriteAction([{ id }]))
-    } else {
-      dispatch(itemsFavoriteAction([{ id }]))
-    }
+    const favoriteAction = favStatus ? itemsUnFavoriteAction : itemsFavoriteAction
+    dispatch(favoriteAction([{ id }]))
   }
 
   return (
@@ -225,6 +231,7 @@ export default function Reader() {
         archiveItem={archiveItem}
         displaySettings={{ columnWidth, lineHeight, fontSize, fontFamily }}
         favorite={favStatus}
+        archive={archiveStatus}
       />
 
       <main className={articleWrapper}>
@@ -234,9 +241,10 @@ export default function Reader() {
             sideBarOpen={sideBarOpen}
             toggleSidebar={toggleSidebar}
             highlightList={highlightList}
+            annotationCount={annotations.length}
             shareItem={toggleShare}
             shareData={shareData}
-            // deleteAnnotation={deleteAnnotation}
+            deleteAnnotation={removeAnnotation}
           />
         </div>
         <article className={classNames(Fonts, 'reader')} style={customStyles}>
@@ -262,10 +270,11 @@ export default function Reader() {
             <HighlightInlineMenu
               highlightList={highlightList}
               highlightHovered={highlightHovered}
+              annotationCount={annotations.length}
               shareItem={toggleShare}
               shareData={shareData}
               isPremium={isPremium}
-              // deleteAnnotation={deleteAnnotation}
+              deleteAnnotation={removeAnnotation}
             />
           ) : null}
         </article>

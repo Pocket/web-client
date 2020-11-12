@@ -78,7 +78,9 @@ export const AnnotationMenu = ({
   left = 0,
   shareItem,
   shareData,
-  quote
+  quote,
+  id,
+  deleteAnnotation
 }) => {
   const screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
   const [shareOpen, setShareOpen] = useState(false)
@@ -120,7 +122,7 @@ export const AnnotationMenu = ({
   }
 
   const handleDelete = () => {
-    // deleteAnnotation(annotationId)
+    deleteAnnotation(id)
   }
 
   const handleShare = (destination) => {

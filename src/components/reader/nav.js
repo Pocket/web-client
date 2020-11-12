@@ -8,6 +8,7 @@ import {
   FavoriteIcon,
   FavoriteFilledIcon,
   ArchiveIcon,
+  AddCircledIcon,
   DeleteIcon,
   WithTooltip,
   breakpointLargeTablet,
@@ -94,6 +95,7 @@ export const ReaderNav = ({
   archiveItem,
   shareData,
   favorite,
+  archive,
   displaySettings
 }) => {
   const dispatch = useDispatch()
@@ -132,8 +134,6 @@ export const ReaderNav = ({
             </WithTooltip>
 
             <WithTooltip label="Favorite Article">
-              {' '}
-              {/*Unfavorite Article*/}
               <button
                 onClick={toggleFavorite}
                 className={classNames(buttonReset, buttonStyles, { favorite })}>
@@ -149,7 +149,11 @@ export const ReaderNav = ({
               <button
                 onClick={archiveItem}
                 className={classNames(buttonReset, buttonStyles)}>
-                <ArchiveIcon />
+                { archive ? (
+                  <AddCircledIcon />
+                ) : (
+                  <ArchiveIcon />
+                )}
               </button>
             </WithTooltip>
 

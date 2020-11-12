@@ -1,4 +1,4 @@
-import { put, takeEvery, select } from 'redux-saga/effects'
+import { put, takeEvery, select, call } from 'redux-saga/effects'
 import { v4 as uuid } from 'uuid'
 
 import { ARTICLE_ITEM_REQUEST } from 'actions'
@@ -15,6 +15,10 @@ import { ANNOTATION_SAVE_REQUEST } from 'actions'
 import { ANNOTATION_SAVE_SUCCESS } from 'actions'
 import { ANNOTATION_SAVE_FAILURE } from 'actions'
 
+import { ANNOTATION_DELETE_REQUEST } from 'actions'
+import { ANNOTATION_DELETE_SUCCESS } from 'actions'
+import { ANNOTATION_DELETE_FAILURE } from 'actions'
+
 import { UPDATE_LINE_HEIGHT } from 'actions'
 import { UPDATE_COLUMN_WIDTH } from 'actions'
 import { UPDATE_FONT_SIZE } from 'actions'
@@ -29,12 +33,17 @@ import { ITEMS_FAVORITE_FAILURE } from 'actions'
 import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
 import { ITEMS_UNFAVORITE_FAILURE } from 'actions'
 
+import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
+import { ITEMS_UNARCHIVE_SUCCESS } from 'actions'
+
 import { API_ACTION_ADD_ANNOTATION } from 'common/constants'
+import { API_ACTION_DELETE_ANNOTATION } from 'common/constants'
 
 import { getArticleText } from 'common/api/reader'
 import { getSuggestedTags } from 'common/api/reader'
 import { getRecentFriends } from 'common/api/reader'
 import { getArticleFromId } from 'common/api/reader'
+import { sendItemActions } from 'common/api/item-actions'
 
 import { HYDRATE } from 'actions'
 
@@ -42,6 +51,7 @@ import { HYDRATE } from 'actions'
  --------------------------------------------------------------- */
 export const itemDataRequest = (itemId) => ({ type: ARTICLE_ITEM_REQUEST, itemId }) //prettier-ignore
 export const saveAnnotation = ({ item_id, quote, patch }) => ({ type: ANNOTATION_SAVE_REQUEST, item_id, quote, patch }) //prettier-ignore
+export const deleteAnnotation = ({ item_id, annotation_id }) => ({ type: ANNOTATION_DELETE_REQUEST, item_id, annotation_id }) //prettier-ignore
 export const updateLineHeight = (lineHeight) => ({ type: UPDATE_LINE_HEIGHT, lineHeight }) //prettier-ignore
 export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, columnWidth }) //prettier-ignore
 export const updateFontSize = (fontSize) => ({ type: UPDATE_FONT_SIZE, fontSize }) //prettier-ignore
@@ -80,6 +90,11 @@ export const readReducers = (state = initialState, action) => {
     }
 
     case ANNOTATION_SAVE_SUCCESS: {
+      const { item } = action
+      return { ...state, articleData: item }
+    }
+
+    case ANNOTATION_DELETE_SUCCESS: {
       const { item } = action
       return { ...state, articleData: item }
     }
@@ -141,12 +156,16 @@ export const readSagas = [
   takeEvery(ARTICLE_ITEM_SUCCESS, suggestedTagsRequest),
   takeEvery(ARTICLE_ITEM_SUCCESS, friendsRequest),
   takeEvery(ANNOTATION_SAVE_REQUEST, annotationSaveRequest),
-  takeEvery(ITEMS_DELETE_SUCCESS, itemDeleteSuccess)
+  takeEvery(ANNOTATION_DELETE_REQUEST, annotationDeleteRequest),
+  takeEvery(ITEMS_DELETE_SUCCESS, redirectToList),
+  takeEvery(ITEMS_ARCHIVE_SUCCESS, redirectToList),
+  takeEvery(ITEMS_UNARCHIVE_SUCCESS, redirectToList),
 ]
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getArticleData = (state) => state.reader.articleData
+const getPremiumStatus = (state) => parseInt(state.user.premium_status, 10) === 1 || false
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -178,6 +197,10 @@ function* articleContentRequest({ url }) {
 
 function* suggestedTagsRequest({ itemId }) {
   try {
+    const premiumStatus = yield select(getPremiumStatus)
+    if (!premiumStatus) return
+
+    console.log('fetching tags')
     const response = yield getSuggestedTags(itemId)
     if (!response.suggested_tags) return console.log('No Tags')
     const tags = response.suggested_tags?.map((item) => item.tag)
@@ -214,7 +237,7 @@ function* annotationSaveRequest({ item_id, quote, patch }) {
     const list = articleData.annotations || []
     const item = {
       ...articleData,
-      annotation: list.push(annotation)
+      annotations: [ ...list, annotation ]
     }
 
     // Update the server
@@ -222,20 +245,46 @@ function* annotationSaveRequest({ item_id, quote, patch }) {
       {
         action: API_ACTION_ADD_ANNOTATION,
         item_id: articleData.item_id,
-        annotation: annotation,
-        cxt_view: 'reader'
+        cxt_view: 'reader',
+        annotation
       }
     ]
 
-    // const response = yield sendItemAction(actions)
+    const data = yield call(sendItemActions, actions)
 
-    yield put({ type: ANNOTATION_SAVE_SUCCESS, item })
+    if (data) return yield put({ type: ANNOTATION_SAVE_SUCCESS, item })
   } catch (error) {
     yield put({ type: ANNOTATION_SAVE_FAILURE, error })
   }
 }
 
-function itemDeleteSuccess() {
+function* annotationDeleteRequest({ item_id, annotation_id }) {
+  try {
+    const articleData = yield select(getArticleData)
+    const annotations = articleData?.annotations.filter(i => i.annotation_id !== annotation_id)
+    const item = {
+      ...articleData,
+      annotations,
+    }
+
+    // Update the server
+    const actions = [
+      {
+        action: API_ACTION_DELETE_ANNOTATION,
+        item_id,
+        annotation_id,
+      }
+    ]
+
+    const data = yield call(sendItemActions, actions)
+
+    if (data) return yield put({ type: ANNOTATION_DELETE_SUCCESS, item })
+  } catch (error) {
+    yield put({ type: ANNOTATION_DELETE_FAILURE, error })
+  }
+}
+
+function redirectToList() {
   if (location.href.indexOf('/read/') !== -1) {
     location.href = '/my-list'
   }

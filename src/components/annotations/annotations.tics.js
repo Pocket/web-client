@@ -197,6 +197,7 @@ const HighlightIndex = ({
 export const TicList = ({
   onClickEvent,
   annotations,
+  annotationCount,
   shareItem,
   shareData,
   deleteAnnotation,
@@ -244,7 +245,7 @@ export const TicList = ({
     return tics
   }
 
-  return annotations ? (
+  return annotations && annotationCount > 0 ? (
     <div className={classNames(ticTray, { visible })}>{renderTics()}</div>
   ) : null
 }

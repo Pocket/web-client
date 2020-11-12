@@ -108,9 +108,9 @@ export class QuoteList extends Component {
   }
 
   render() {
-    const { visible, annotations } = this.props
+    const { visible, annotations, annotationCount } = this.props
 
-    return annotations ? (
+    return annotations && annotationCount > 0 ? (
       <div className={classNames(listWrapper, { visible })}>
         <h6 className={headingStyles}>My Highlights</h6> {/*translate*/}
         {this.renderCards()}
