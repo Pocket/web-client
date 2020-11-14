@@ -14,14 +14,15 @@ import { BottomUpsell } from 'components/reader/upsell.bottom'
 import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 import { Fonts, FONT_TYPES } from 'components/fonts/fonts'
-import { TagModal } from 'components/tagging/tag.modal'
-import { DeleteModal } from 'components/delete/delete.modal'
 import { SendToFriend } from 'components/share-sheet/share-sheet'
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { itemDataRequest, saveAnnotation, deleteAnnotation } from './read.state'
-import { itemsDeleteConfirm } from 'connectors/items-by-id/my-list/items.delete'
-import { itemsDeleteCancel } from 'connectors/items-by-id/my-list/items.delete'
+
+import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
+import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
+
 import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
+import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
 import { itemsFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
 import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
 import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
@@ -66,7 +67,7 @@ export default function Reader() {
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false ) //prettier-ignore
   const articleData = useSelector((state) => state.myListItemsById[id])
   const articleContent = useSelector((state) => state.reader.articleContent)
-  const suggestedTags = useSelector((state) => state.reader.suggestedTags)
+
   const lineHeight = useSelector((state) => state.reader.lineHeight)
   const columnWidth = useSelector((state) => state.reader.columnWidth)
   const fontSize = useSelector((state) => state.reader.fontSize)
@@ -75,14 +76,10 @@ export default function Reader() {
   const autoCompleteEmails = useSelector((state) => state.reader.autoCompleteEmails) //prettier-ignore
   // const tagLibrary = useSelector((state) => state.reader.tagLibrary)
 
-  const itemsToDelete = useSelector((state) => state.itemsToDelete)
-  const showDeleteModal = itemsToDelete.length > 0
-  const confirmDelete = () => dispatch(itemsDeleteConfirm())
-  const cancelDelete = () => dispatch(itemsDeleteCancel())
   const itemDelete = () => dispatch(itemsDeleteAction([{ id }]))
+  const itemTag = () => dispatch(itemsTagAction([{ id }]))
 
   const [sideBarOpen, setSideBar] = useState(false)
-  const [taggingModalOpen, setTaggingModal] = useState(false)
   const [sendModalOpen, setSendModal] = useState(false)
   const [highlight, setHighlight] = useState(null)
   const [highlightList, setHighlightList] = useState(false)
@@ -156,7 +153,6 @@ export default function Reader() {
   }
 
   const toggleSidebar = () => setSideBar(!sideBarOpen)
-  const toggleTagging = () => setTaggingModal(!taggingModalOpen)
   const toggleShare = ({ destination, quote }) => setSendModal({ destination, quote }) //prettier-ignore
 
   const toggleHighlight = () => {
@@ -209,12 +205,12 @@ export default function Reader() {
   }
 
   const archiveItem = () => {
-    const archiveAction = archiveStatus ? itemsUnArchiveAction : itemsArchiveAction
+    const archiveAction = archiveStatus ? itemsUnArchiveAction : itemsArchiveAction //prettier-ignore
     dispatch(archiveAction([{ id }]))
   }
 
   const toggleFavorite = () => {
-    const favoriteAction = favStatus ? itemsUnFavoriteAction : itemsFavoriteAction
+    const favoriteAction = favStatus ? itemsUnFavoriteAction : itemsFavoriteAction //prettier-ignore
     dispatch(favoriteAction([{ id }]))
   }
 
@@ -223,7 +219,7 @@ export default function Reader() {
       <ReaderNav
         isPremium={isPremium}
         toggleSidebar={toggleSidebar}
-        toggleTagging={toggleTagging}
+        toggleTagging={itemTag}
         toggleShare={toggleShare}
         toggleDelete={itemDelete}
         toggleFavorite={toggleFavorite}
@@ -282,21 +278,8 @@ export default function Reader() {
       {!isPremium && articleContent ? (
         <BottomUpsell maxWidth={customStyles.maxWidth} />
       ) : null}
-      <DeleteModal
-        isOpen={showDeleteModal}
-        confirm={confirmDelete}
-        cancel={cancelDelete}
-        appRootSelector={appRootSelector}
-      />
-      <TagModal
-        isPremium={isPremium}
-        isOpen={taggingModalOpen}
-        setModalOpen={setTaggingModal}
-        appRootSelector={appRootSelector}
-        currentTags={tagList}
-        typeahead={[]}
-        suggestedTags={suggestedTags}
-      />
+      <DeleteModal />
+      <TaggingModal />
       <SendToFriend
         {...shareData}
         domain={domainForUrl(resolved_url)}
