@@ -7,7 +7,6 @@ const tagErrorWrapper = css`
   left: 0;
   margin-top: 0.7em;
   padding: 0.5em 0.7em;
-  // position: absolute;
   font-family: 'Graphik Web';
   top: 100%;
   width: 100%;

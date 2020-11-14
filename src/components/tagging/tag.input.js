@@ -11,7 +11,7 @@ const inputWrapper = css`
   input {
     font-family: 'Graphik Web';
     background-color: transparent;
-    line-height: 24px;
+    line-height: 22px;
     padding: 0;
     font-size: 16px;
     color: var(--color-formFieldTextPrimary);
@@ -27,7 +27,7 @@ const autoWrapper = css`
   max-width: 100%;
 `
 const inputStyle = css`
-  display: inline-block;
+  display: block;
   min-width: 1em;
   border: 0;
   line-height: 16px;
@@ -84,6 +84,7 @@ export class TagInput extends Component {
       if (this.props.email && !validateEmail(this.props.value)) {
         this.setError()
         event.preventDefault()
+        event.stopPropagation()
         return
       }
     }
@@ -91,6 +92,7 @@ export class TagInput extends Component {
     // Add Tag on comma or tab
     if (event.charCode === KEYS.COMMA || event.keyCode === KEYS.TAB) {
       event.preventDefault()
+      event.stopPropagation()
       this.props.addTag(`${this.props.value}`)
       return
     }
@@ -98,6 +100,7 @@ export class TagInput extends Component {
     // Close on double enter
     if (event.keyCode === KEYS.ENTER) {
       event.preventDefault()
+      event.stopPropagation()
       if (this.props.value) this.props.addTag(`${this.props.value}`)
       return
     }

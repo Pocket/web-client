@@ -1,67 +1,78 @@
-import React, { Component } from 'react'
 import { css } from 'linaria'
 import { SuggestedTag } from 'components/tags/tags'
-import { Loader } from 'components/loader/loader'
 import { TagUpsell } from './tag.upsell'
 
 const suggestedWrapper = css`
-  padding: 10px 0;
+  display: block;
+  padding: var(--size125) 0 0;
   min-height: 50px;
   font-family: 'Graphik Web';
   width: 100%;
+  &.subtext {
+    color: var(--color-textTertiary);
+  }
 `
 
-const CantFindSuggestions = () => {
-  //"tagging.errors.noSuggestedTags"
-  return 'We were unable to find any suggested tags for this item'
+const suggestionStyle = css`
+  margin: 0 10px 10px 0;
+`
+
+function Loading() {
+  return (
+    <div className={`${suggestedWrapper} subtext`}>
+      ... loading suggested tags
+    </div>
+  )
 }
 
-export class TagSuggestions extends Component {
-  prevent = (event) => {
-    event.preventDefault()
-  }
+function UpSell({ trackClick }) {
+  return (
+    <div className={suggestedWrapper}>
+      <TagUpsell trackClick={trackClick} />
+    </div>
+  )
+}
 
-  get usedTags() {
-    return this.props.tags || []
-  }
+function Suggestion({ tag, addTag }) {
+  const onClick = () => addTag(tag)
+  return (
+    <SuggestedTag className={suggestionStyle} onClick={onClick}>
+      {tag}
+    </SuggestedTag>
+  )
+}
 
-  get suggestedTags() {
-    const tags = this.props.suggestedTags || []
-    return tags
-      .filter((item) => !this.usedTags.includes(item))
-      .map((tag, index) => {
-        return (
-          <SuggestedTag
-            margin="0 10px 10px 0"
-            key={tag + index}
-            onClick={() => {
-              this.props.addTag(tag)
-            }}>
-            {tag}
-          </SuggestedTag>
-        )
-      })
-  }
+function NoSuggestions() {
+  return (
+    <div className={`${suggestedWrapper} subtext`}>
+      We didn't find any tag suggestions
+    </div>
+  )
+}
 
-  get suggestionsLoader() {
-    return (
-      <div className={suggestedWrapper}>
-        {this.props.suggestedTags === undefined ? (
-          <Loader isVisible />
-        ) : this.suggestedTags.length ? (
-          this.suggestedTags
-        ) : (
-          <CantFindSuggestions />
-        )}
-      </div>
-    )
-  }
+export function TagSuggestions({
+  suggestedTags,
+  tags,
+  addTag,
+  isPremium,
+  trackClick
+}) {
+  // UpSell if user is not premium
+  if (!isPremium) return <UpSell trackClick={trackClick} />
 
-  render() {
-    return this.props.isPremium ? (
-      this.suggestionsLoader
-    ) : (
-      <TagUpsell trackClick={this.props.trackClick} />
-    )
-  }
+  // Loading if we don't have suggestedTags
+  if (!suggestedTags) return <Loading />
+
+  // No suggestions?
+  if (suggestedTags?.length === 0) return <NoSuggestions />
+
+  // We have tags, let's render them
+  const tagList = suggestedTags.filter((tag) => !tags.includes(tag))
+  return (
+    <div className={suggestedWrapper}>
+      {tagList.map((tag) => (
+        <Suggestion tag={tag} addTag={addTag} key={tag} />
+      ))}
+    </div>
+  )
 }

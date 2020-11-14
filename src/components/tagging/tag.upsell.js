@@ -52,7 +52,6 @@ export class TagUpsell extends Component {
   render() {
     return (
       <React.Fragment>
-        <DivideHorizontal margin="17px 0 0 0" />
         <div className={upsellWrapper}>
           <p>
             <PremiumIcon />
