@@ -9,12 +9,10 @@ import { getMylistData } from './my-list.state'
 import { updateMyListData } from './my-list.state'
 import { appSetSection } from 'connectors/app/app.state'
 import { MyListHeader } from 'components/headers/my-list-header'
-import { itemsDeleteConfirm } from 'connectors/items-by-id/my-list/items.delete'
-import { itemsDeleteCancel } from 'connectors/items-by-id/my-list/items.delete'
 import { VirtualizedList } from 'components/items-layout/virtualized-list'
 import { SideNav } from 'components/side-nav/side-nav'
 import { CallOutBrand } from 'components/call-out/call-out-brand'
-import { DeleteModal } from 'components/delete/delete.modal'
+import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 
 export default function Collection(props) {
   const { metaData = {}, subset = 'active', filter } = props
@@ -30,11 +28,6 @@ export default function Collection(props) {
   const routeChange = useHasChanged(router.pathname)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
-
-  const itemsToDelete = useSelector((state) => state.itemsToDelete)
-  const showDeleteModal = itemsToDelete.length > 0
-  const confirmDelete = () => dispatch(itemsDeleteConfirm())
-  const cancelDelete = () => dispatch(itemsDeleteCancel())
 
   const initialItemsPopulated =
     items?.length && (items?.length >= 18 || total < 18)
@@ -91,7 +84,7 @@ export default function Collection(props) {
 
   // TODO: Adjust this to use app state
   const type = 'grid'
-  const appRootSelector = '#__next'
+
   return (
     <Layout title={metaData.title} metaData={metaData}>
       <SideNav subset={subset} isLoggedIn={isLoggedIn} />
@@ -108,13 +101,7 @@ export default function Collection(props) {
                   loadMore={loadMore}
                 />
               ) : null}
-
-              <DeleteModal
-                isOpen={showDeleteModal}
-                confirm={confirmDelete}
-                cancel={cancelDelete}
-                appRootSelector={appRootSelector}
-              />
+              <DeleteModal />
             </>
           ) : (
             <CallOutBrand />
