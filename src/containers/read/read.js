@@ -64,7 +64,7 @@ export default function Reader() {
   const { slug: id } = router.query
 
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false ) //prettier-ignore
-  const articleData = useSelector((state) => state.reader.articleData)
+  const articleData = useSelector((state) => state.myListItemsById[id])
   const articleContent = useSelector((state) => state.reader.articleContent)
   const suggestedTags = useSelector((state) => state.reader.suggestedTags)
   const lineHeight = useSelector((state) => state.reader.lineHeight)

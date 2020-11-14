@@ -175,7 +175,7 @@ function* articleItemRequest({ itemId }) {
     const item = response?.item[itemId]
     const { resolved_url: url } = item
 
-    if (item) return yield put({ type: ARTICLE_ITEM_SUCCESS, item, itemId, url }) //prettier-ignore
+    if (item) return yield put({ type: ARTICLE_ITEM_SUCCESS, item, itemId, url, itemsById: response?.item }) //prettier-ignore
 
     throw new Error('Item not in list')
   } catch (error) {

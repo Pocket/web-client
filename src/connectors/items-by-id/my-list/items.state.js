@@ -1,6 +1,7 @@
 import { MYLIST_DATA_SUCCESS } from 'actions'
 import { MYLIST_UPDATE_SUCCESS } from 'actions'
 import { HOME_DATA_LATEST_SUCCESS } from 'actions'
+import { ARTICLE_ITEM_SUCCESS } from 'actions'
 
 /* CONSOLIDATE
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -33,6 +34,7 @@ export const myListItemsReducers = (state = initialState, action) => {
   switch (action.type) {
     // This comes from the raw item /get calls
     case MYLIST_DATA_SUCCESS:
+    case ARTICLE_ITEM_SUCCESS:
     case HOME_DATA_LATEST_SUCCESS: {
       const { itemsById } = action
       return { ...state, ...itemsById }
