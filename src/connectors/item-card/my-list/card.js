@@ -9,9 +9,11 @@ import { itemsFavoriteAction } from 'connectors/items-by-id/my-list/items.favori
 import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
 
 import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
+import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
 
 import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
+
 /**
  * Article Card
  * Creates a connected `Card` with the appropriate data and actions
@@ -38,7 +40,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const itemFavorite = () => dispatch(itemsFavoriteAction([{ id, position }]))
   const itemUnFavorite = () => dispatch(itemsUnFavoriteAction([{ id, position }])) //prettier-ignore
 
-  const itemTag = () => {}
+  const itemTag = () => dispatch(itemsTagAction([{ id, position }]))
 
   const itemBulkSelect = (shift) => {dispatch(itemsBulkSelectAction(id, shift))} //prettier-ignore
   const itemBulkDeSelect = (shift) => {dispatch(itemsBulkDeSelectAction(id, shift))} //prettier-ignore

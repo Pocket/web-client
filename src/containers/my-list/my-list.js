@@ -12,6 +12,7 @@ import { MyListHeader } from 'components/headers/my-list-header'
 import { VirtualizedList } from 'components/items-layout/virtualized-list'
 import { SideNav } from 'components/side-nav/side-nav'
 import { CallOutBrand } from 'components/call-out/call-out-brand'
+import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 
 export default function Collection(props) {
@@ -29,6 +30,7 @@ export default function Collection(props) {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
 
+  // Check for initial items so we don't over request
   const initialItemsPopulated =
     items?.length && (items?.length >= 18 || total < 18)
 
@@ -102,6 +104,7 @@ export default function Collection(props) {
                 />
               ) : null}
               <DeleteModal />
+              <TaggingModal />
             </>
           ) : (
             <CallOutBrand />
