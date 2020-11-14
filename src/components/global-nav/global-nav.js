@@ -46,7 +46,7 @@ const headerStyle = css`
   /*bottom border custom color adds a subtle "shadow" effect */
   border-bottom: solid 1px var(--color-dividerTertiary);
   position: fixed;
-  z-index: var(--zIndexModal);
+  z-index: var(--zIndexHeader);
   .pocket-logo {
     display: inline-block;
     position: relative;
