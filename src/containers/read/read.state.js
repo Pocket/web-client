@@ -159,13 +159,13 @@ export const readSagas = [
   takeEvery(ANNOTATION_DELETE_REQUEST, annotationDeleteRequest),
   takeEvery(ITEMS_DELETE_SUCCESS, redirectToList),
   takeEvery(ITEMS_ARCHIVE_SUCCESS, redirectToList),
-  takeEvery(ITEMS_UNARCHIVE_SUCCESS, redirectToList),
+  takeEvery(ITEMS_UNARCHIVE_SUCCESS, redirectToList)
 ]
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getArticleData = (state) => state.reader.articleData
-const getPremiumStatus = (state) => parseInt(state.user.premium_status, 10) === 1 || false
+const getPremiumStatus = (state) => parseInt(state.user.premium_status, 10) === 1 || false //prettier-ignore
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -237,7 +237,7 @@ function* annotationSaveRequest({ item_id, quote, patch }) {
     const list = articleData.annotations || []
     const item = {
       ...articleData,
-      annotations: [ ...list, annotation ]
+      annotations: [...list, annotation]
     }
 
     // Update the server
@@ -261,10 +261,10 @@ function* annotationSaveRequest({ item_id, quote, patch }) {
 function* annotationDeleteRequest({ item_id, annotation_id }) {
   try {
     const articleData = yield select(getArticleData)
-    const annotations = articleData?.annotations.filter(i => i.annotation_id !== annotation_id)
+    const annotations = articleData?.annotations.filter(i => i.annotation_id !== annotation_id) //prettier-ignore
     const item = {
       ...articleData,
-      annotations,
+      annotations
     }
 
     // Update the server
@@ -272,7 +272,7 @@ function* annotationDeleteRequest({ item_id, annotation_id }) {
       {
         action: API_ACTION_DELETE_ANNOTATION,
         item_id,
-        annotation_id,
+        annotation_id
       }
     ]
 
