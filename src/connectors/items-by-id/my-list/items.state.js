@@ -5,26 +5,17 @@ import { ARTICLE_ITEM_SUCCESS } from 'actions'
 
 /* CONSOLIDATE
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-// import { itemTagSagas } from './items.tag'
+import { itemTagSagas } from './items.tag'
+import { itemBulkSagas } from './items.bulk'
 import { itemAddSagas } from './items.add'
 import { itemDeleteSagas } from './items.delete'
 import { itemFavoriteSagas } from './items.favorite'
 import { itemArchiveSagas } from './items.archive'
-// import { itemShareSagas } from './items.share'
-// import { itemUseSagas } from './items.use'
-// import { itemRetrieveSagas } from './items.retrieve'
-// import { itemAnnotateSagas } from './items.annotate'
+import { itemShareSagas } from './items.share'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export { itemAddAction } from './items.add'
-// import { itemTagActions } from './items.tag'
-// import { itemDeleteActions } from './items.delete'
-// import { itemFavoriteActions } from './items.favorite'
-// export { itemArchiveActions } from './items.archive'
-// import { itemShareActions } from './items.share'
-// import { itemUseActions } from './items.use'
-// import { itemAnnotateActions } from './items.annotate'
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -56,7 +47,10 @@ export const myListItemsSagas = [
   ...itemAddSagas,
   ...itemDeleteSagas,
   ...itemArchiveSagas,
-  ...itemFavoriteSagas
+  ...itemFavoriteSagas,
+  ...itemTagSagas,
+  ...itemShareSagas,
+  ...itemBulkSagas
 ]
 
 /** SAGA :: RESPONDERS

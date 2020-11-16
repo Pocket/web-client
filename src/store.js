@@ -42,12 +42,7 @@ import { myListItemsReducers } from 'connectors/items-by-id/my-list/items.state'
 import { myListItemsSagas } from 'connectors/items-by-id/my-list/items.state'
 
 import { itemBulkReducers } from 'connectors/items-by-id/my-list/items.bulk'
-import { itemBulkSagas } from 'connectors/items-by-id/my-list/items.bulk'
-
-import { itemDeleteSagas } from 'connectors/items-by-id/my-list/items.delete'
 import { itemDeleteReducers } from 'connectors/items-by-id/my-list/items.delete'
-
-import { itemTagSagas } from 'connectors/items-by-id/my-list/items.tag'
 import { itemTagReducers } from 'connectors/items-by-id/my-list/items.tag'
 
 import { homeReducers } from 'containers/home/home.state'
@@ -115,9 +110,6 @@ function* rootSaga() {
     ...recitSagas,
     ...myListSagas,
     ...myListItemsSagas,
-    ...itemBulkSagas,
-    ...itemDeleteSagas,
-    ...itemTagSagas,
     ...readSagas,
     ...homeSagas
   ])
