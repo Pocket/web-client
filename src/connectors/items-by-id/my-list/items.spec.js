@@ -35,77 +35,11 @@ const itemWithMissingData = [
     top_image_url:
       'https://pocket-image-cache.com/1200x/filters:no_upscale():format(jpg):extract_cover()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5173%2F1595617454_GettyImages-1168909015.jpgcrop.jpg',
     authors: {
-      133889445: {
-        item_id: '3059000415',
-        author_id: '133889445',
-        name: 'Coronavirus',
-        url: 'https://getpocket.com/explore/coronavirus'
-      },
-      133889446: {
-        item_id: '3059000415',
-        author_id: '133889446',
-        name: 'Business',
-        url: 'https://getpocket.com/explore/business'
-      },
-      133889447: {
-        item_id: '3059000415',
-        author_id: '133889447',
-        name: 'Career',
-        url: 'https://getpocket.com/explore/career'
-      },
-      133889448: {
-        item_id: '3059000415',
-        author_id: '133889448',
-        name: 'Entertainment',
-        url: 'https://getpocket.com/explore/entertainment'
-      },
-      133889449: {
-        item_id: '3059000415',
-        author_id: '133889449',
-        name: 'Food',
-        url: 'https://getpocket.com/explore/food'
-      },
-      133889450: {
-        item_id: '3059000415',
-        author_id: '133889450',
-        name: 'Parenting',
-        url: 'https://getpocket.com/explore/parenting'
-      },
-      133889451: {
-        item_id: '3059000415',
-        author_id: '133889451',
-        name: 'Politics',
-        url: 'https://getpocket.com/explore/politics'
-      },
-      133889452: {
-        item_id: '3059000415',
-        author_id: '133889452',
-        name: 'Science',
-        url: 'https://getpocket.com/explore/science'
-      },
-      133889453: {
-        item_id: '3059000415',
-        author_id: '133889453',
-        name: 'Self Improvement',
-        url: 'https://getpocket.com/explore/self-improvement'
-      },
-      133889454: {
-        item_id: '3059000415',
-        author_id: '133889454',
-        name: 'Technology',
-        url: 'https://getpocket.com/explore/technology'
-      },
-      133889455: {
-        item_id: '3059000415',
-        author_id: '133889455',
-        name: 'Travel',
-        url: 'https://getpocket.com/explore/travel'
-      },
-      133889456: {
-        item_id: '3059000415',
-        author_id: '133889456',
-        name: 'Health & Fitness',
-        url: 'https://getpocket.com/explore/health'
+      72862635: {
+        item_id: '670857795',
+        author_id: '72862635',
+        name: 'Mark Singer',
+        url: 'https://www.newyorker.com/contributors/mark-singer'
       }
     },
     images: {
@@ -165,7 +99,28 @@ describe('My List Items', function () {
         read_time: 5,
         syndicated: false,
         tags: undefined,
-        annotations: undefined
+        annotations: undefined,
+        images: {
+          1: {
+            item_id: '3059000415',
+            image_id: '1',
+            src:
+              'https://pocket-syndicated-images.s3.amazonaws.com/5f1b307571176.jpg',
+            width: '0',
+            height: '0',
+            credit: '© Marco Bottigelli / Getty Images',
+            caption: ''
+          }
+        },
+        videos: undefined,
+        authors: {
+          72862635: {
+            item_id: '670857795',
+            author_id: '72862635',
+            name: 'Mark Singer',
+            url: 'https://www.newyorker.com/contributors/mark-singer'
+          }
+        }
       })
     })
   })
