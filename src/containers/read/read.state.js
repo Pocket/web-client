@@ -1,5 +1,6 @@
 import { put, takeEvery, select, call } from 'redux-saga/effects'
 import { v4 as uuid } from 'uuid'
+import { arrayToObject } from 'common/utilities'
 
 import { ARTICLE_ITEM_REQUEST } from 'actions'
 import { ARTICLE_ITEM_SUCCESS } from 'actions'
@@ -44,6 +45,8 @@ import { getSuggestedTags } from 'common/api/reader'
 import { getRecentFriends } from 'common/api/reader'
 import { getArticleFromId } from 'common/api/reader'
 import { sendItemActions } from 'common/api/item-actions'
+
+import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 
 import { HYDRATE } from 'actions'
 
@@ -174,8 +177,17 @@ function* articleItemRequest({ itemId }) {
     const response = yield getArticleFromId(itemId)
     const item = response?.item[itemId]
     const { resolved_url: url } = item
+    const derivedItems = deriveMyListItems(Object.values(response.item))
+    const itemsById = arrayToObject(derivedItems, 'item_id')
 
-    if (item) return yield put({ type: ARTICLE_ITEM_SUCCESS, item, itemId, url, itemsById: response?.item }) //prettier-ignore
+    if (item)
+      return yield put({
+        type: ARTICLE_ITEM_SUCCESS,
+        item,
+        itemId,
+        url,
+        itemsById
+      })
 
     throw new Error('Item not in list')
   } catch (error) {

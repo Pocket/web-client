@@ -1,11 +1,6 @@
 /* eslint  react/jsx-no-target-blank: 0*/
 import { css } from 'linaria'
 import { TagList } from 'components/tagging/tag.list'
-import {
-  domainForUrl,
-  urlWithPocketRedirect,
-  getTimeToRead
-} from 'common/utilities'
 
 /* COMPONENTS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -112,42 +107,28 @@ function listAuthors(authors) {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const ItemHeader = ({
   authors,
-  given_title,
-  resolved_title,
-  resolved_url,
-  given_url,
+  title,
+  publisher,
+  open_url,
   tags,
-  has_video,
-  word_count,
-  videos
+  read_time
 }) => {
-  const timeEstimateProps = {
-    word_count,
-    has_video,
-    videos
-  }
-
   const authorList = listAuthors(authors)
-  const domain = domainForUrl(resolved_url)
-  const timeDisplay = getTimeToRead(timeEstimateProps, true)
 
   return (
     <header className={headerWrapper}>
-      <h1 className={articleTitle}>{resolved_title || given_title}</h1>
+      <h1 className={articleTitle}>{title}</h1>
 
       <div className={articleInfo}>
-        {authorList || domain ? <div className={byWrapper}>By </div> : null}{' '}
+        {authorList || publisher ? <div className={byWrapper}>By </div> : null}{' '}
         {/*"reader.header.by"*/}
         {authorList ? <div className={authorWrapper}>{authorList}</div> : null}
-        {domain ? <div className={domainWrapper}>{domain}</div> : null}
-        {timeDisplay ? <div className={timeWrapper}>{timeDisplay}</div> : null}
+        {publisher ? <div className={domainWrapper}>{publisher}</div> : null}
+        {read_time ? <div className={timeWrapper}>{read_time} min</div> : null}
       </div>
 
       <div className={pocketInfo}>
-        <a
-          className={viewOriginal}
-          href={urlWithPocketRedirect(given_url)}
-          target="_blank">
+        <a className={viewOriginal} href={open_url} target="_blank">
           View Original {/*"reader.header.viewOriginal"*/}
         </a>
         {tags && (

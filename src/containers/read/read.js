@@ -100,14 +100,14 @@ export default function Reader() {
   const {
     item_id,
     authors,
-    given_title,
-    resolved_title,
-    resolved_url,
-    given_url,
-    top_image_url,
+    title,
+    open_url,
+    share_url,
+    read_time,
+    syndicated,
+    publisher,
     tags = {},
     has_video,
-    word_count,
     videos,
     images,
     annotations = [],
@@ -121,13 +121,13 @@ export default function Reader() {
 
   const headerData = {
     authors,
-    given_title,
-    resolved_title,
-    resolved_url,
-    given_url,
+    title,
+    open_url,
+    publisher,
+    syndicated,
     tags: tagList,
     has_video,
-    word_count,
+    read_time,
     videos
   }
 
@@ -139,9 +139,9 @@ export default function Reader() {
   }
 
   const shareData = {
-    url: resolved_url,
+    url: share_url,
     quote: highlight?.toString() || sendModalOpen?.quote,
-    title: resolved_title || given_title,
+    title,
     item_id
   }
 
@@ -153,7 +153,6 @@ export default function Reader() {
   }
 
   const toggleSidebar = () => setSideBar(!sideBarOpen)
-  const toggleShare = ({ destination, quote }) => setSendModal({ destination, quote }) //prettier-ignore
 
   const toggleHighlight = () => {
     const selection = window.getSelection()
