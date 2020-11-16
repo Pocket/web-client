@@ -16,6 +16,7 @@ import { FavoriteFilledIcon } from '@pocket/web-ui'
 import { EmptyCircledIcon } from '@pocket/web-ui'
 import { CheckCircledIcon } from '@pocket/web-ui'
 import { TagIcon } from '@pocket/web-ui'
+import Link from 'next/link'
 
 const card = css`
   width: 100%;
@@ -247,21 +248,23 @@ export const Card = ({
       <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
         <span className="idOverlay">{id}</span>
       </FeatureFlag>
-      <a href={open_url} onClick={onOpen}>
-        <CardMedia image_src={thumbnail} title={title} id={id} />
-        <div className="content">
-          <h2 className="title">
-            <span>{title}</span>
-          </h2>
-          <cite className="details">
-            <span>{publisher}</span>
-            <span className="readtime">
-              {read_time ? ` · ${read_time} min` : null}
-            </span>
-          </cite>
-          <p className="excerpt">{excerpt}</p>
-        </div>
-      </a>
+      <Link href={open_url}>
+        <a onClick={onOpen}>
+          <CardMedia image_src={thumbnail} title={title} id={id} />
+          <div className="content">
+            <h2 className="title">
+              <span>{title}</span>
+            </h2>
+            <cite className="details">
+              <span>{publisher}</span>
+              <span className="readtime">
+                {read_time ? ` · ${read_time} min` : null}
+              </span>
+            </cite>
+            <p className="excerpt">{excerpt}</p>
+          </div>
+        </a>
+      </Link>
       <footer className="footer">
         <div className="actions">
           {bulkEdit ? (
