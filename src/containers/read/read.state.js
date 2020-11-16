@@ -285,8 +285,8 @@ function* annotationDeleteRequest({ item_id, annotation_id }) {
 }
 
 function redirectToList() {
-  if (location.href.indexOf('/read/') !== -1) {
-    location.href = '/my-list'
+  if (document.location.href.indexOf('/read/') !== -1) {
+    document.location.href = '/my-list'
   }
 }
 
