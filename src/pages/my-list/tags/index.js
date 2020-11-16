@@ -1,4 +1,4 @@
-import TagsPage from 'containers/tags-page/tags-page'
+import TagsPage from 'containers/my-list/tags-page/tags-page'
 
 export async function getStaticProps() {
   return { props: { namespacesRequired: ['common'] } }
