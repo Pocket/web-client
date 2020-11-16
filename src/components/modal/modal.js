@@ -358,3 +358,4 @@ Modal.defaultProps = {
 }
 
 export { Modal, ModalHeader, ModalBody, ModalFooter }
+export default Modal
