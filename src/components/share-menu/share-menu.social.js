@@ -2,6 +2,7 @@ import {
   FacebookColorIcon,
   TwitterColorIcon,
   LinkedinMonoIcon,
+  BufferIcon,
   RedditMonoIcon,
   breakpointLargeHandset
 } from '@pocket/web-ui'
@@ -135,7 +136,7 @@ export const SocialItems = ({ onSocialShare, quote = '', url, title }) => (
         onShareWindowClose={() => onSocialShare('buffer')}
         text={quote}
         url={url}>
-        <span className="label">Buffer</span>
+        <BufferIcon />
       </BufferShareButton>
     </li>
   </PopupMenuGroup>

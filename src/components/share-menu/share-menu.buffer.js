@@ -27,7 +27,7 @@ export const BufferShareButton = ({
   }
 
   return (
-    <button aria-label="Buffer" onClick={clickHandler}>
+    <button aria-label="Buffer" className={buttonReset} onClick={clickHandler}>
       {children}
     </button>
   )
