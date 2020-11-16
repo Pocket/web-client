@@ -134,9 +134,6 @@ export function TaggingModal() {
       </ModalBody>
       <ModalFooter isSticky={false}>
         <div className="actions">
-          <Button variant="secondary" onClick={cancelTag}>
-            Cancel
-          </Button>
           <Button type="submit" onClick={saveTags}>
             Save
           </Button>

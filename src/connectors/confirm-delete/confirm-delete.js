@@ -26,14 +26,9 @@ export const DeleteModal = () => {
         <p>Are you sure you want to delete this item? This cannot be undone.</p>
       </ModalBody>
       <ModalFooter>
-        <div className="actions">
-          <Button variant="secondary" onClick={cancelDelete}>
-            Cancel
-          </Button>
-          <Button type="submit" onClick={confirmDelete}>
-            Delete
-          </Button>
-        </div>
+        <Button type="submit" onClick={confirmDelete}>
+          Delete
+        </Button>
       </ModalFooter>
     </Modal>
   )
