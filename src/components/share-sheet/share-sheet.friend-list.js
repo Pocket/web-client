@@ -1,6 +1,5 @@
 import { css } from 'linaria'
 import { Friends } from './share-sheet.friends'
-import { Tagging } from 'components/tagging/tagging'
 
 const panelWrapper = css`
   margin: 0 -1em 1em;
@@ -31,7 +30,7 @@ export const FriendList = ({
   <div className={panelWrapper}>
     <div className={inputWrapper}>
       <h4>SEND TO</h4> {/*Translate??*/}
-      <Tagging
+      {/* <Tagging
         value={value}
         setValue={setValue}
         addTag={addEmail}
@@ -40,7 +39,7 @@ export const FriendList = ({
         tags={emails}
         typeahead={autoCompleteEmails?.map((item) => item.email)}
         email
-      />
+      /> */}
     </div>
     {recentFriends ? (
       <Friends
