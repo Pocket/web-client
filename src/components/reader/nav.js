@@ -15,7 +15,6 @@ import {
   breakpointMediumHandset
 } from '@pocket/web-ui'
 import { DisplaySettings } from 'components/display-settings/display-settings'
-import { ShareArticle } from './share'
 import { buttonReset } from 'components/buttons/button-reset'
 import classNames from 'classnames'
 import {
@@ -72,9 +71,9 @@ const buttonStyles = css`
     color: var(--color-amber);
   }
 `
-
+// eslint-disable-next-line
 const articleActions = css`
-  & < .icon {
+  .icon {
     background-color: transparent;
     color: var(--color-textSecondary);
     font-size: var(--size150);
@@ -93,7 +92,6 @@ export const ReaderNav = ({
   toggleDelete,
   toggleFavorite,
   archiveItem,
-  shareData,
   favorite,
   archive,
   displaySettings
@@ -111,7 +109,9 @@ export const ReaderNav = ({
         <nav className={navStyle}>
           <WithTooltip label="Back to My List">
             {/*'reader.topNav.back'*/}
-            <a href="/my-list" className={classNames(buttonReset, buttonStyles)}>
+            <a
+              href="/my-list"
+              className={classNames(buttonReset, buttonStyles)}>
               <ArrowLeftIcon />
             </a>
           </WithTooltip>
@@ -137,11 +137,7 @@ export const ReaderNav = ({
               <button
                 onClick={toggleFavorite}
                 className={classNames(buttonReset, buttonStyles, { favorite })}>
-                { favorite ? (
-                  <FavoriteFilledIcon />
-                ) : (
-                  <FavoriteIcon />
-                )}
+                {favorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
               </button>
             </WithTooltip>
 
@@ -149,11 +145,7 @@ export const ReaderNav = ({
               <button
                 onClick={archiveItem}
                 className={classNames(buttonReset, buttonStyles)}>
-                { archive ? (
-                  <AddCircledIcon />
-                ) : (
-                  <ArchiveIcon />
-                )}
+                {archive ? <AddCircledIcon /> : <ArchiveIcon />}
               </button>
             </WithTooltip>
 
@@ -165,12 +157,13 @@ export const ReaderNav = ({
               </button>
             </WithTooltip>
 
-            <ShareArticle
-              appRootSelector="#__next"
-              shareItem={toggleShare}
-              shareData={shareData}
-              isPremium={isPremium}
-            />
+            <WithTooltip label="Share Article">
+              <button
+                onClick={toggleShare}
+                className={classNames(buttonReset, buttonStyles)}>
+                <IosShareIcon />
+              </button>
+            </WithTooltip>
           </div>
 
           <DisplaySettings

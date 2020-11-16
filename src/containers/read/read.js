@@ -14,15 +14,18 @@ import { BottomUpsell } from 'components/reader/upsell.bottom'
 import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 import { Fonts, FONT_TYPES } from 'components/fonts/fonts'
-import { SendToFriend } from 'components/share-sheet/share-sheet'
+
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { itemDataRequest, saveAnnotation, deleteAnnotation } from './read.state'
 
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
+import { ShareModal } from 'connectors/confirm-share/confirm-share'
 
 import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
+import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
+
 import { itemsFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
 import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
 import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
@@ -58,7 +61,6 @@ const articleWrapper = css`
 `
 
 export default function Reader() {
-  const appRootSelector = '#__next'
   const dispatch = useDispatch()
 
   const router = useRouter()
@@ -72,12 +74,10 @@ export default function Reader() {
   const columnWidth = useSelector((state) => state.reader.columnWidth)
   const fontSize = useSelector((state) => state.reader.fontSize)
   const fontFamily = useSelector((state) => state.reader.fontFamily)
-  const recentFriends = useSelector((state) => state.reader.recentFriends)
-  const autoCompleteEmails = useSelector((state) => state.reader.autoCompleteEmails) //prettier-ignore
-  // const tagLibrary = useSelector((state) => state.reader.tagLibrary)
 
   const itemDelete = () => dispatch(itemsDeleteAction([{ id }]))
   const itemTag = () => dispatch(itemsTagAction([{ id }]))
+  const itemShare = () => dispatch(itemsShareAction({ id }))
 
   const [sideBarOpen, setSideBar] = useState(false)
   const [sendModalOpen, setSendModal] = useState(false)
@@ -219,7 +219,7 @@ export default function Reader() {
         isPremium={isPremium}
         toggleSidebar={toggleSidebar}
         toggleTagging={itemTag}
-        toggleShare={toggleShare}
+        toggleShare={itemShare}
         toggleDelete={itemDelete}
         toggleFavorite={toggleFavorite}
         shareData={shareData}
@@ -237,7 +237,7 @@ export default function Reader() {
             toggleSidebar={toggleSidebar}
             highlightList={highlightList}
             annotationCount={annotations.length}
-            shareItem={toggleShare}
+            shareItem={itemShare}
             shareData={shareData}
             deleteAnnotation={removeAnnotation}
           />
@@ -257,7 +257,7 @@ export default function Reader() {
               anchor={highlight}
               disablePopup={clearSelection}
               addAnnotation={addAnnotation}
-              shareItem={toggleShare}
+              shareItem={itemShare}
               shareData={shareData}
             />
           ) : null}
@@ -266,7 +266,7 @@ export default function Reader() {
               highlightList={highlightList}
               highlightHovered={highlightHovered}
               annotationCount={annotations.length}
-              shareItem={toggleShare}
+              shareItem={itemShare}
               shareData={shareData}
               isPremium={isPremium}
               deleteAnnotation={removeAnnotation}
@@ -279,17 +279,7 @@ export default function Reader() {
       ) : null}
       <DeleteModal />
       <TaggingModal />
-      <SendToFriend
-        {...shareData}
-        domain={domainForUrl(resolved_url)}
-        recentFriends={recentFriends}
-        autoCompleteEmails={autoCompleteEmails}
-        isOpen={!!sendModalOpen}
-        setModalOpen={setSendModal}
-        appRootSelector={appRootSelector}
-        thumbnail={top_image_url}
-        recommend={sendModalOpen.destination}
-      />
+      <ShareModal />
     </>
   )
 }
