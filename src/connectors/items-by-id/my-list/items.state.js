@@ -11,7 +11,7 @@ import { itemAddSagas } from './items.add'
 import { itemDeleteSagas } from './items.delete'
 import { itemFavoriteSagas } from './items.favorite'
 import { itemArchiveSagas } from './items.archive'
-import { itemShareSagas } from './items.share'
+// import { itemShareSagas } from './items.share'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -49,7 +49,7 @@ export const myListItemsSagas = [
   ...itemArchiveSagas,
   ...itemFavoriteSagas,
   ...itemTagSagas,
-  ...itemShareSagas,
+  // ...itemShareSagas,
   ...itemBulkSagas
 ]
 
