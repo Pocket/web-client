@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { css, cx } from 'linaria'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { urlWithPocketRedirect } from 'common/utilities'
 
 import { CardMedia } from './card-media'
-import { ItemAction } from './item-action'
+import { ItemActions } from './item-actions'
 import { underliner } from 'components/underliner/underliner'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 
@@ -241,12 +241,18 @@ export const Card = ({
 
   const openUrl = (openExternal) ? urlWithPocketRedirect(open_url) : `/read/${id}`
 
+  const [showActions, setShowActions] = useState(false)
+  const actionsShow = () => setShowActions(true)
+  const actionsHide = () => setShowActions(false)
+
   return (
     <article
       className={cardClass}
       key={id}
       {...testIdAttribute(`article-card-${id}`)}
-      onClick={selectBulk}>
+      onClick={selectBulk}
+      onMouseEnter={actionsShow}
+      onMouseLeave={actionsHide}>
       <div className="bulkBacking" />
       <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
         <span className="idOverlay">{id}</span>
@@ -277,7 +283,8 @@ export const Card = ({
               <EmptyCircledIcon className="bulkIconStyle" />
             )
           ) : (
-            <ItemAction
+            <ItemActions
+              showActions={showActions}
               menuItems={[
                 {
                   label: 'Share',
