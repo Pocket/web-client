@@ -59,7 +59,7 @@ export const itemTagReducers = (state = initialState, action) => {
     case ITEMS_TAG_FAILURE:
     case ITEMS_TAG_SEND:
     case ITEMS_TAG_CANCEL: {
-      return []
+      return initialState
     }
 
     default:
