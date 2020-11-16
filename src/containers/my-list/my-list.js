@@ -14,6 +14,7 @@ import { SideNav } from 'components/side-nav/side-nav'
 import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
+import { ShareModal } from 'connectors/confirm-share/confirm-share'
 
 export default function Collection(props) {
   const { metaData = {}, subset = 'active', filter } = props
@@ -105,6 +106,7 @@ export default function Collection(props) {
               ) : null}
               <DeleteModal />
               <TaggingModal />
+              <ShareModal />
             </>
           ) : (
             <CallOutBrand />

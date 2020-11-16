@@ -10,6 +10,7 @@ import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favo
 
 import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
+import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
 
 import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
@@ -31,7 +32,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const bulkList = useSelector((state) => state.bulkEdit)
   const bulkSelected = bulkList?.selected?.includes(id)
 
-  const itemShare = () => {}
+  const itemShare = () => dispatch(itemsShareAction({ id, position }))
   const itemDelete = () => dispatch(itemsDeleteAction([{ id, position }]))
 
   const itemArchive = () => dispatch(itemsArchiveAction([{ id, position }]))
