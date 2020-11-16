@@ -46,7 +46,11 @@ const MenuItem = ({ label, icon, onClick }) => {
 
 export function ItemActions({ menuItems, showActions }) {
   return showActions ? (
-    <div className={itemActionStyle}>{menuItems.map(MenuItem)}</div>
+    <div className={itemActionStyle}>
+      {menuItems.map((props) => (
+        <MenuItem key="key" {...props} />
+      ))}
+    </div>
   ) : (
     <div></div>
   )

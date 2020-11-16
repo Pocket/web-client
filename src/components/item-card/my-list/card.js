@@ -287,26 +287,31 @@ export const Card = ({
               showActions={showActions}
               menuItems={[
                 {
+                  key: `share-${id}`,
                   label: 'Share',
                   icon: <IosShareIcon />,
                   onClick: itemShare
                 },
                 {
+                  key: `delete-${id}`,
                   label: 'Delete',
                   icon: <DeleteIcon />,
                   onClick: itemDelete
                 },
                 {
+                  key: `archive-${id}`,
                   label: archiveLabel,
                   icon: <CorrectArchiveIcon />,
                   onClick: archiveAction
                 },
                 {
+                  key: `favorite-${id}`,
                   label: 'Favorite',
                   icon: <CorrectFavIcon />,
                   onClick: favoriteAction
                 },
                 {
+                  key: `tag-${id}`,
                   label: 'Tag',
                   icon: <TagIcon />,
                   onClick: itemTag
