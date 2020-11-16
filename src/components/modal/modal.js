@@ -19,6 +19,7 @@ import { screenReaderOnly } from '@pocket/web-ui'
 import { ModalHeader } from './modal-header'
 import { ModalBody } from './modal-body'
 import { ModalFooter } from './modal-footer'
+import { ModalTabs } from './modal-tabs'
 
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 
@@ -357,5 +358,6 @@ Modal.defaultProps = {
   closeTimeoutMS: 75
 }
 
-export { Modal, ModalHeader, ModalBody, ModalFooter }
+export { Modal, ModalHeader, ModalBody, ModalTabs, ModalFooter }
+
 export default Modal
