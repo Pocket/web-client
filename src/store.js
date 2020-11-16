@@ -44,6 +44,7 @@ import { myListItemsSagas } from 'connectors/items-by-id/my-list/items.state'
 import { itemBulkReducers } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemDeleteReducers } from 'connectors/items-by-id/my-list/items.delete'
 import { itemTagReducers } from 'connectors/items-by-id/my-list/items.tag'
+import { itemShareReducers } from 'connectors/items-by-id/my-list/items.share'
 
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
@@ -66,6 +67,7 @@ const collectionReducers = {
   bulkEdit: itemBulkReducers,
   itemsToDelete: itemDeleteReducers,
   itemsToTag: itemTagReducers,
+  itemsToShare: itemShareReducers
 }
 
 const readerReducers = {
