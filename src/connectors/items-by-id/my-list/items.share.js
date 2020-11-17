@@ -21,9 +21,9 @@ import { API_ACTION_RECOMMEND } from 'common/constants'
 export const itemsShareAction = (item) => ({ type: ITEMS_SHARE_REQUEST, item }) //prettier-ignore
 export const itemsShareCancel = () => ({ type: ITEMS_SHARE_CANCEL })
 
-export const itemsRecommendConfirm = (comment) => ({ type: ITEMS_RECOMMEND_CONFIRM, comment })
+export const itemsRecommendConfirm = (comment) => ({ type: ITEMS_RECOMMEND_CONFIRM, comment }) //prettier-ignore
+export const itemsSendToFriendConfirm = (comment) => ({type: ITEMS_SEND_TO_FRIEND_CONFIRM, comment}) //prettier-ignore
 
-export const itemsSendToFriendConfirm = () => ({type: ITEMS_SEND_TO_FRIEND_CONFIRM}) //prettier-ignore
 export const itemsShareAddFriend = (tag) => ({type: ITEMS_SEND_TO_FRIEND_ADD, tag}) //prettier-ignore
 export const itemsShareRemoveFriend = (tags) => ({type: ITEMS_SEND_TO_FRIEND_REMOVE, tags}) //prettier-ignore
 
@@ -129,15 +129,16 @@ function* itemShareToFriend({ item, response }) {
   const { id, quote } = item
   const { comment } = response
   const friendList = yield select(getFriendList)
+  const to = friendList.map(email => { return { email }})
 
   // Update the server
   const actions = [
     {
       action: API_ACTION_SHARE,
-      to: friendList,
       item_id: id,
       quote,
-      comment
+      comment,
+      to
     }
   ]
 

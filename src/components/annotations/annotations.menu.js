@@ -9,7 +9,6 @@ import { PopupMenuGroup } from '@pocket/web-ui'
 import { PopupMenuItem } from '@pocket/web-ui'
 
 import { buttonReset } from 'components/buttons/button-reset'
-// import { ShareMenu } from 'components/share-menu/share-menu'
 import { overlayBase } from 'components/overlay/overlay'
 
 const inlineMenuStyles = css`

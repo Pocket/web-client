@@ -180,7 +180,6 @@ export const readSagas = [
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-// const getArticleData = (state) => state.reader.articleData
 const getAnnotations = (state) => state.reader.annotations
 const getPremiumStatus = (state) => parseInt(state.user.premium_status, 10) === 1 || false //prettier-ignore
 

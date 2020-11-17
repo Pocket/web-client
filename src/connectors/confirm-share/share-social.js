@@ -94,7 +94,7 @@ export const BufferShareButton = ({
 
 export const ShareSocial = function ({ item, quote }) {
   const dispatch = useDispatch()
-  const { open_url, title } = item
+  const { open_url, excerpt, title } = item
 
   const cancelShare = () => dispatch(itemsShareCancel())
   const onSocialShare = (type) => {
@@ -133,7 +133,7 @@ export const ShareSocial = function ({ item, quote }) {
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('linkedin')}
         title={title}
-        summary={quote}
+        summary={quote || excerpt}
         url={open_url}>
         <span className="label">
           <LinkedinMonoIcon />
@@ -151,7 +151,7 @@ export const ShareSocial = function ({ item, quote }) {
       <BufferShareButton
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('buffer')}
-        quote={quote}
+        quote={quote || excerpt}
         url={open_url}>
         <span className="label">
           <BufferIcon />
