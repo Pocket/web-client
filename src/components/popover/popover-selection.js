@@ -5,7 +5,6 @@ import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
 import { HighlightIcon, IosShareIcon } from '@pocket/web-ui'
-import { ShareMenu } from 'components/share-menu/share-menu'
 
 const popupContainer = css`
   position: absolute;
