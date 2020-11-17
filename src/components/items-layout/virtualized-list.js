@@ -16,8 +16,12 @@ export const ruler = css`
 
 export const cardGrid = css`
   ${cardsGrid};
+  grid-row-gap: var(--size200);
   article {
     grid-column: span 4;
+    & > a {
+      padding-bottom: var(--size150);
+    }
     h2 {
       font-size: var(--fontSize125);
     }

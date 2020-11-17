@@ -7,15 +7,17 @@ const itemActionStyle = css`
   align-items: center;
   align-content: center;
   width: 100%;
+  padding: 5px 0;
+  border: var(--dividerStyle);
+  border-radius: 4px;
 `
 
 const menuItemStyle = css`
   color: var(--color-textSecondary);
   height: 24px;
-  background-color: transparent;
+  background-color: var(--color-canvas);
   border: medium none;
-  padding: 0 var(--size050);
-  cursor: pointer;
+  padding: 0 var(--size075);
 
   .icon {
     height: 24px;
@@ -28,9 +30,10 @@ const menuItemStyle = css`
   }
 
   &:hover {
+    background-color: var(--color-canvas);
     color: var(--color-textLinkHover);
-    background-color: transparent;
     border: medium none;
+    cursor: pointer;
   }
 `
 

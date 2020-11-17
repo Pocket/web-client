@@ -29,6 +29,10 @@ const card = css`
   color: var(--color-textPrimary);
   position: relative;
 
+  &.actionsShown {
+    border-bottom-color: transparent;
+  }
+
   &.bulkEdit {
     cursor: pointer;
     user-select: none;
@@ -156,10 +160,10 @@ const card = css`
 
   .footer {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding-bottom: 0.5em;
+    bottom: -17px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: var(--zIndexTooltip);
   }
 
   .actions {
@@ -168,6 +172,10 @@ const card = css`
 
   &.bulkEdit .actions {
     flex-direction: row-reverse;
+  }
+
+  &.bulkEdit .footer {
+    bottom: 12px;
   }
 
   .bulkIconStyle {
@@ -216,9 +224,14 @@ export const Card = ({
     itemBulkDeSelect
   } = actions
 
+  const [showActions, setShowActions] = useState(false)
+  const actionsShow = () => setShowActions(true)
+  const actionsHide = () => setShowActions(false)
+
   const cardType = type === 'list' ? 'fixedheightlist' : 'fixedheightgrid'
   const cardClass = cx(
     card,
+    // showActions && 'actionsShown',
     fluidHeight && cardType,
     bulkEdit && 'bulkEdit',
     bulkSelected && 'bulkSelected'
@@ -240,10 +253,6 @@ export const Card = ({
   }
 
   const openUrl = (openExternal) ? urlWithPocketRedirect(open_url) : `/read/${id}`
-
-  const [showActions, setShowActions] = useState(false)
-  const actionsShow = () => setShowActions(true)
-  const actionsHide = () => setShowActions(false)
 
   return (
     <article
