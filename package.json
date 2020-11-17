@@ -92,7 +92,7 @@
     "dayjs": "1.9.4",
     "detect-it": "3.0.7",
     "diff-match-patch": "1.0.5",
-    "dompurify": "2.2.0",
+    "dompurify": "2.2.2",
     "graphql-request": "3.3.0",
     "gsap": "3.5.1",
     "intersection-observer": "0.11.0",

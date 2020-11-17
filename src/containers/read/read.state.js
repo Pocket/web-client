@@ -68,6 +68,7 @@ const initialState = {
   articleState: 'pending',
   articleData: null,
   articleContent: null,
+  favorite: null,
   tags: {},
   annotations: [],
   suggestedTags: [],
@@ -86,6 +87,7 @@ export const readReducers = (state = initialState, action) => {
       return {
         ...state,
         articleData: item,
+        favorite: item?.favorite,
         annotations: item?.annotations || [],
         tags: item?.tags || {}
       }
@@ -139,14 +141,12 @@ export const readReducers = (state = initialState, action) => {
     // optimistic update
     case ITEMS_FAVORITE_REQUEST:
     case ITEMS_UNFAVORITE_FAILURE: {
-      const articleData = { ...state.articleData, favorite: 1 }
-      return { ...state, articleData }
+      return { ...state, favorite: 1 }
     }
     // optimistic update
     case ITEMS_UNFAVORITE_REQUEST:
     case ITEMS_FAVORITE_FAILURE: {
-      const articleData = { ...state.articleData, favorite: 0 }
-      return { ...state, articleData }
+      return { ...state, favorite: 0 }
     }
     // optimistic update
     case ITEMS_TAG_SEND: {

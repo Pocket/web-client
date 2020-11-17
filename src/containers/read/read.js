@@ -33,6 +33,8 @@ import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favo
 import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 
+import { genericRecsRequested } from '/connectors/recit/recit.state'
+
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
 export const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
@@ -73,6 +75,7 @@ export default function Reader() {
   const articleContent = useSelector((state) => state.reader.articleContent)
   const annotations = useSelector((state) => state.reader.annotations)
   const tags = useSelector((state) => state.reader.tags)
+  const favorite = useSelector((state) => state.reader.favorite)
 
   const lineHeight = useSelector((state) => state.reader.lineHeight)
   const columnWidth = useSelector((state) => state.reader.columnWidth)
@@ -92,6 +95,7 @@ export default function Reader() {
 
   useEffect(() => {
     dispatch(itemDataRequest(id))
+    // dispatch(genericRecsRequested(id))
   }, [dispatch, id])
 
   if (!articleData) {
@@ -114,7 +118,6 @@ export default function Reader() {
     has_video,
     videos,
     images,
-    favorite,
     status
   } = articleData
 

@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux'
+import Link from 'next/link'
 import { css } from 'linaria'
 import {
   ArrowLeftIcon,
@@ -62,12 +63,13 @@ const buttonStyles = css`
   background-color: transparent;
   color: var(--color-textSecondary);
   font-size: var(--size150);
+  cursor: pointer;
   &:hover {
     color: var(--color-textPrimary);
     background-color: transparent;
   }
 
-  &.favorite {
+  &.favorite .icon {
     color: var(--color-amber);
   }
 `
@@ -109,11 +111,11 @@ export const ReaderNav = ({
         <nav className={navStyle}>
           <WithTooltip label="Back to My List">
             {/*'reader.topNav.back'*/}
-            <a
-              href="/my-list"
-              className={classNames(buttonReset, buttonStyles)}>
-              <ArrowLeftIcon />
-            </a>
+            <Link href="/my-list">
+              <span className={classNames(buttonReset, buttonStyles)}>
+                <ArrowLeftIcon />
+              </span>
+            </Link>
           </WithTooltip>
 
           <div className={articleActions}>

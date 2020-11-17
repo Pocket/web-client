@@ -5,9 +5,12 @@ import {
   PUBLISHER_RECS_FAILURE,
   POCKET_RECS_REQUESTED,
   POCKET_RECS_SUCCESS,
-  POCKET_RECS_FAILURE
+  POCKET_RECS_FAILURE,
+  GENERIC_RECS_REQUESTED,
+  GENERIC_RECS_SUCCESS,
+  GENERIC_RECS_FAILURE
 } from 'actions'
-import { getPublisherRecs, getPocketRecs } from 'common/api/recit'
+import { getPublisherRecs, getPocketRecs, getRecommendations } from 'common/api/recit'
 import { saveItem } from 'common/api/saveItem'
 import { removeItem } from 'common/api/removeItem'
 
@@ -21,6 +24,10 @@ export const pocketRecsRequested = (itemId) => ({
   type: POCKET_RECS_REQUESTED,
   itemId
 })
+export const genericRecsRequested = (itemId) =>  ({
+  type: GENERIC_RECS_REQUESTED,
+  itemId
+})
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -30,7 +37,8 @@ const initialState = {
   publisherRecModel: null,
   pocketRecs: [],
   pocketRecId: null,
-  pocketRecModel: null
+  pocketRecModel: null,
+  genericRecs: []
 }
 
 export const recitReducers = (state = initialState, action) => {
@@ -67,6 +75,16 @@ export const recitReducers = (state = initialState, action) => {
       }
     }
 
+    case GENERIC_RECS_SUCCESS: {
+      const {
+        response
+      } = action
+      return {
+        ...state,
+        // genericRecs: []
+      }
+    }
+
     default:
       return state
   }
@@ -76,7 +94,8 @@ export const recitReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const recitSagas = [
   takeLatest(PUBLISHER_RECS_REQUESTED, fetchPublisherRecs),
-  takeLatest(POCKET_RECS_REQUESTED, fetchPocketRecs)
+  takeLatest(POCKET_RECS_REQUESTED, fetchPocketRecs),
+  takeLatest(GENERIC_RECS_REQUESTED, fetchGenericRecs)
 ]
 
 function* fetchPublisherRecs({ itemId }) {
@@ -94,5 +113,15 @@ function* fetchPocketRecs({ itemId }) {
     yield put({ type: POCKET_RECS_SUCCESS, response })
   } catch (error) {
     yield put({ type: POCKET_RECS_FAILURE, error })
+  }
+}
+
+function* fetchGenericRecs({ itemId }) {
+  try {
+    const response = yield getRecommendations(itemId)
+    // console.log('Recit Response', { ...response })
+    yield put({ type: GENERIC_RECS_SUCCESS, response })
+  } catch (error) {
+    yield put({ type: GENERIC_RECS_FAILURE, error })
   }
 }

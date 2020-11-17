@@ -9,6 +9,7 @@ import { Button } from '@pocket/web-ui'
 import { AvatarButton } from 'components/avatar/avatar-button'
 import { PopupMenu, PopupMenuGroup, PopupMenuItem } from '@pocket/web-ui'
 import { WithTooltip } from '@pocket/web-ui'
+import { ThemeSettings } from 'components/display-settings/theme'
 
 const accountLinkStyle = css`
   display: inline-block;
@@ -259,6 +260,7 @@ const GlobalNavAccount = ({
             Log out
           </PopupMenuItem>
         </PopupMenuGroup>
+        <ThemeSettings />
       </PopupMenu>
     </div>
   )
