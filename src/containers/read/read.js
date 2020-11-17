@@ -141,13 +141,6 @@ export default function Reader() {
     videos
   }
 
-  // const shareData = {
-  //   url: share_url,
-  //   quote: highlight?.toString() || sendModalOpen?.quote,
-  //   title,
-  //   item_id
-  // }
-
   const customStyles = {
     maxWidth: `${COLUMN_WIDTH_RANGE[columnWidth]}px`,
     lineHeight: LINE_HEIGHT_RANGE[lineHeight],
