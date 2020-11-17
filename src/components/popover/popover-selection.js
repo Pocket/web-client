@@ -57,9 +57,7 @@ const iconWrapper = css`
 class SelectionPopoverClass extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      share: false
-    }
+    this.state = {}
     this.containerRef = React.createRef()
   }
 
@@ -68,17 +66,9 @@ class SelectionPopoverClass extends Component {
     this.props.disablePopup()
   }
 
-  onShare = (recommend) => {
-    this.props.shareItem(recommend)
+  onShare = () => {
+    this.props.shareItem({ quote: this.props.anchor?.toString() })
     this.props.disablePopup()
-  }
-
-  onSocialShare = (service) => {
-    this.props.socialShare(service)
-  }
-
-  toggleShare = () => {
-    this.setState({ share: true })
   }
 
   isClickOutside = (e) => {
@@ -97,43 +87,6 @@ class SelectionPopoverClass extends Component {
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.isClickOutside)
-  }
-
-  get shareMenu() {
-    const { shareItem, shareData } = this.props
-
-    return (
-      <ShareMenu
-        shareItem={shareItem}
-        quote={this.props.textSelection}
-        {...shareData}
-      />
-    )
-  }
-
-  get defaultMenu() {
-    return (
-      <React.Fragment>
-        <button
-          className={classNames(buttonWrapper, buttonReset)}
-          // aria-label={'shareExcerpt.highlight.aria'}
-          onClick={this.onHighlight}>
-          <span className={iconWrapper}>
-            <HighlightIcon />
-          </span>
-          Highlight {/*"shareExcerpt.highlight.copy"*/}
-        </button>
-        <button
-          className={classNames(buttonWrapper, buttonReset)}
-          // aria-label={translate('shareExcerpt.highlight.aria')}
-          onClick={this.toggleShare}>
-          <span className={iconWrapper}>
-            <IosShareIcon />
-          </span>
-          Share {/*"shareExcerpt.shareExcerpt.copy*/}
-        </button>
-      </React.Fragment>
-    )
   }
 
   render() {
@@ -158,7 +111,24 @@ class SelectionPopoverClass extends Component {
             hideArrow: this.state.share
           })}
           ref={this.containerRef}>
-          {!this.state.share ? this.defaultMenu : this.shareMenu}
+            <button
+              className={classNames(buttonWrapper, buttonReset)}
+              // aria-label={'shareExcerpt.highlight.aria'}
+              onClick={this.onHighlight}>
+              <span className={iconWrapper}>
+                <HighlightIcon />
+              </span>
+              Highlight {/*"shareExcerpt.highlight.copy"*/}
+            </button>
+            <button
+              className={classNames(buttonWrapper, buttonReset)}
+              // aria-label={translate('shareExcerpt.highlight.aria')}
+              onClick={this.onShare}>
+              <span className={iconWrapper}>
+                <IosShareIcon />
+              </span>
+              Share {/*"shareExcerpt.shareExcerpt.copy*/}
+            </button>
         </div>
       </div>
     )
@@ -166,13 +136,9 @@ class SelectionPopoverClass extends Component {
 }
 
 SelectionPopoverClass.propTypes = {
-  item: PropTypes.object,
-  textSelection: PropTypes.string,
-  recentFriends: PropTypes.array,
-  item_id: PropTypes.string,
-  disablePopup: PropTypes.func,
+  addAnnotation: PropTypes.func,
   shareItem: PropTypes.func,
-  socialShare: PropTypes.func
+  disablePopup: PropTypes.func
 }
 
 export const SelectionPopover = SelectionPopoverClass

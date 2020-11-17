@@ -9,7 +9,7 @@ import { PopupMenuGroup } from '@pocket/web-ui'
 import { PopupMenuItem } from '@pocket/web-ui'
 
 import { buttonReset } from 'components/buttons/button-reset'
-import { ShareMenu } from 'components/share-menu/share-menu'
+// import { ShareMenu } from 'components/share-menu/share-menu'
 import { overlayBase } from 'components/overlay/overlay'
 
 const inlineMenuStyles = css`
@@ -77,13 +77,11 @@ export const AnnotationMenu = ({
   top = 0,
   left = 0,
   shareItem,
-  shareData,
   quote,
   id,
   deleteAnnotation
 }) => {
   const screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-  const [shareOpen, setShareOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [flipDirection, setFlipDirection] =  useState(false)
   const selfRef = useRef(null)
@@ -96,7 +94,6 @@ export const AnnotationMenu = ({
   const startTimer = () => {
     timer = setTimeout(() => {
       setMenuOpen(false)
-      setShareOpen(false)
     }, 1000)
   }
 
@@ -111,11 +108,6 @@ export const AnnotationMenu = ({
 
   const clearTimer = () => clearTimeout(timer)
 
-  const toggleShare = () => {
-    checkDirection()
-    setShareOpen(!shareOpen)
-  }
-
   const toggleMenu = () => {
     checkDirection()
     setMenuOpen(!menuOpen)
@@ -125,11 +117,8 @@ export const AnnotationMenu = ({
     deleteAnnotation(id)
   }
 
-  const handleShare = (destination) => {
-    shareItem({
-      destination,
-      quote
-    })
+  const handleShare = () => {
+    shareItem({ quote })
   }
 
   return (
@@ -142,28 +131,19 @@ export const AnnotationMenu = ({
           <OverflowMenuIcon />
         </button>
         {menuOpen ? (
-          shareOpen ? (
-            <ul
-              onMouseEnter={clearTimer}
-              onMouseLeave={startTimer}
-              className={classNames(menuWrapper, { alignRight, flipDirection })}>
-              <ShareMenu shareItem={handleShare} quote={quote} {...shareData} />
-            </ul>
-          ) : (
-            <ul
-              onMouseEnter={clearTimer}
-              onMouseLeave={startTimer}
-              className={classNames(overlayBase, menuWrapper, { alignRight, flipDirection })}>
-              <PopupMenuGroup>
-                <PopupMenuItem onClick={handleDelete} icon={<DeleteIcon />}>
-                  Delete
-                </PopupMenuItem>
-                <PopupMenuItem onClick={toggleShare} icon={<IosShareIcon />}>
-                  Share
-                </PopupMenuItem>
-              </PopupMenuGroup>
-            </ul>
-          )
+          <ul
+            onMouseEnter={clearTimer}
+            onMouseLeave={startTimer}
+            className={classNames(overlayBase, menuWrapper, { alignRight, flipDirection })}>
+            <PopupMenuGroup>
+              <PopupMenuItem onClick={handleDelete} icon={<DeleteIcon />}>
+                Delete
+              </PopupMenuItem>
+              <PopupMenuItem onClick={handleShare} icon={<IosShareIcon />}>
+                Share
+              </PopupMenuItem>
+            </PopupMenuGroup>
+          </ul>
         ) : null}
       </div>
     </div>

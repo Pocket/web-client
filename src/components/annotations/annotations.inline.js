@@ -6,7 +6,6 @@ export const HighlightInlineMenu = ({
   highlightHovered,
   annotationCount,
   shareItem,
-  shareData,
   deleteAnnotation
 }) => {
   const inlineMenus = []
@@ -29,7 +28,6 @@ export const HighlightInlineMenu = ({
           top={Math.round(y + window.pageYOffset)}
           left={x + el.offsetLeft}
           shareItem={shareItem}
-          shareData={shareData}
           quote={highlight.quote}
           deleteAnnotation={deleteAnnotation}
         />

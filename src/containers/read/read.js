@@ -1,5 +1,6 @@
 import { css } from 'linaria'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
@@ -16,6 +17,7 @@ import { requestAnnotationPatch } from 'components/annotations/utilities'
 import { Fonts, FONT_TYPES } from 'components/fonts/fonts'
 
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
+import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
 import { itemDataRequest, saveAnnotation, deleteAnnotation } from './read.state'
 
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
@@ -69,6 +71,8 @@ export default function Reader() {
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false ) //prettier-ignore
   const articleData = useSelector((state) => state.myListItemsById[id])
   const articleContent = useSelector((state) => state.reader.articleContent)
+  const annotations = useSelector((state) => state.reader.annotations)
+  const tags = useSelector((state) => state.reader.tags)
 
   const lineHeight = useSelector((state) => state.reader.lineHeight)
   const columnWidth = useSelector((state) => state.reader.columnWidth)
@@ -77,12 +81,13 @@ export default function Reader() {
 
   const itemDelete = () => dispatch(itemsDeleteAction([{ id }]))
   const itemTag = () => dispatch(itemsTagAction([{ id }]))
-  const itemShare = () => dispatch(itemsShareAction({ id }))
+  const itemShare = ({ quote }) => dispatch(itemsShareAction({ id, quote }))
 
   const [sideBarOpen, setSideBar] = useState(false)
   const [sendModalOpen, setSendModal] = useState(false)
+  const [annotationLimitModal, setAnnotationLimitModal] = useState(false)
   const [highlight, setHighlight] = useState(null)
-  const [highlightList, setHighlightList] = useState(false)
+  const [highlightList, setHighlightList] = useState([])
   const [highlightHovered, setHighlightHovered] = useState(null)
 
   useEffect(() => {
@@ -106,16 +111,14 @@ export default function Reader() {
     read_time,
     syndicated,
     publisher,
-    tags = {},
     has_video,
     videos,
     images,
-    annotations = [],
     favorite,
     status
   } = articleData
 
-  const tagList = Object.keys(tags)
+  const tagList = tags ? Object.keys(tags) : []
   const favStatus = getBool(favorite)
   const archiveStatus = getBool(status)
 
@@ -138,12 +141,12 @@ export default function Reader() {
     videos
   }
 
-  const shareData = {
-    url: share_url,
-    quote: highlight?.toString() || sendModalOpen?.quote,
-    title,
-    item_id
-  }
+  // const shareData = {
+  //   url: share_url,
+  //   quote: highlight?.toString() || sendModalOpen?.quote,
+  //   title,
+  //   item_id
+  // }
 
   const customStyles = {
     maxWidth: `${COLUMN_WIDTH_RANGE[columnWidth]}px`,
@@ -153,6 +156,7 @@ export default function Reader() {
   }
 
   const toggleSidebar = () => setSideBar(!sideBarOpen)
+  const closeAnnotationLimit = () => setAnnotationLimitModal(false)
 
   const toggleHighlight = () => {
     const selection = window.getSelection()
@@ -185,13 +189,18 @@ export default function Reader() {
   }
 
   const addAnnotation = () => {
-    dispatch(
-      saveAnnotation({
-        item_id,
-        patch: requestAnnotationPatch(highlight),
-        quote: highlight.toString()
-      })
-    )
+    if (annotations.length === 3 && !isPremium) {
+      setAnnotationLimitModal(true)
+    }
+    else {
+      dispatch(
+        saveAnnotation({
+          item_id,
+          patch: requestAnnotationPatch(highlight),
+          quote: highlight.toString()
+        })
+      )
+    }
   }
 
   const removeAnnotation = (annotation_id) => {
@@ -215,6 +224,9 @@ export default function Reader() {
 
   return (
     <>
+      <Head>
+        <title>Pocket - {title}</title>
+      </Head>
       <ReaderNav
         isPremium={isPremium}
         toggleSidebar={toggleSidebar}
@@ -222,7 +234,6 @@ export default function Reader() {
         toggleShare={itemShare}
         toggleDelete={itemDelete}
         toggleFavorite={toggleFavorite}
-        shareData={shareData}
         archiveItem={archiveItem}
         displaySettings={{ columnWidth, lineHeight, fontSize, fontFamily }}
         favorite={favStatus}
@@ -238,7 +249,6 @@ export default function Reader() {
             highlightList={highlightList}
             annotationCount={annotations.length}
             shareItem={itemShare}
-            shareData={shareData}
             deleteAnnotation={removeAnnotation}
           />
         </div>
@@ -258,7 +268,6 @@ export default function Reader() {
               disablePopup={clearSelection}
               addAnnotation={addAnnotation}
               shareItem={itemShare}
-              shareData={shareData}
             />
           ) : null}
           {highlightList ? (
@@ -267,7 +276,6 @@ export default function Reader() {
               highlightHovered={highlightHovered}
               annotationCount={annotations.length}
               shareItem={itemShare}
-              shareData={shareData}
               isPremium={isPremium}
               deleteAnnotation={removeAnnotation}
             />
@@ -277,6 +285,10 @@ export default function Reader() {
       {!isPremium && articleContent ? (
         <BottomUpsell maxWidth={customStyles.maxWidth} />
       ) : null}
+      <AnnotationsLimitModal
+        showModal={annotationLimitModal}
+        closeModal={closeAnnotationLimit}
+      />
       <DeleteModal />
       <TaggingModal />
       <ShareModal />

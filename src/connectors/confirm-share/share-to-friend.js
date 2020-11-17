@@ -47,7 +47,7 @@ export function ShareToFriend() {
   const [commentValue, setCommentValue] = useState('')
   const [hasError, setHasError] = useState(false)
 
-  const confirmShare = () => dispatch(itemsSendToFriendConfirm())
+  const confirmShare = (comment) => dispatch(itemsSendToFriendConfirm({ comment }))
 
   const addFriendAction = (tag) => dispatch(itemsShareAddFriend(tag))
   const removeTagAction = (tag) => dispatch(itemsShareRemoveFriend(tag))
@@ -101,6 +101,7 @@ export function ShareToFriend() {
   const sendConfirm = () => {
     confirmShare(commentValue)
   }
+
   return (
     <div className="content">
       <div className={friendInput} onClick={setFocus}>

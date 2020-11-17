@@ -45,6 +45,7 @@ import { itemBulkReducers } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemDeleteReducers } from 'connectors/items-by-id/my-list/items.delete'
 import { itemTagReducers } from 'connectors/items-by-id/my-list/items.tag'
 import { itemShareReducers } from 'connectors/items-by-id/my-list/items.share'
+import { itemShareSagas } from 'connectors/items-by-id/my-list/items.share'
 
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
@@ -112,6 +113,7 @@ function* rootSaga() {
     ...recitSagas,
     ...myListSagas,
     ...myListItemsSagas,
+    ...itemShareSagas,
     ...readSagas,
     ...homeSagas
   ])

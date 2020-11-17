@@ -22,10 +22,9 @@ const recommendStyle = css`
 export function ShareRecommend() {
   const dispatch = useDispatch()
   const [commentValue, setCommentValue] = useState('')
-  const confirmShare = () => dispatch(itemsRecommendConfirm())
-  const onClick = () => {
-    confirmShare(commentValue)
-  }
+  const confirmShare = (comment) => dispatch(itemsRecommendConfirm(comment))
+  const onClick = () => confirmShare(commentValue)
+
   return (
     <div className={`${recommendStyle} content`}>
       <textarea

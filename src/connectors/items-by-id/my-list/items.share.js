@@ -1,5 +1,6 @@
-import { put, call, takeEvery, take, race } from 'redux-saga/effects'
+import { put, call, takeEvery, take, race, select } from 'redux-saga/effects'
 import { sendItemActions } from 'common/api/item-actions'
+import { getRecentFriends } from 'common/api/reader'
 
 import { ITEMS_SHARE_REQUEST } from 'actions'
 import { ITEMS_SHARE_CANCEL } from 'actions'
@@ -13,13 +14,14 @@ import { ITEMS_SEND_TO_FRIEND_ADD } from 'actions'
 import { ITEMS_SEND_TO_FRIEND_REMOVE } from 'actions'
 
 import { API_ACTION_SHARE } from 'common/constants'
+import { API_ACTION_RECOMMEND } from 'common/constants'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const itemsShareAction = (item) => ({ type: ITEMS_SHARE_REQUEST, item }) //prettier-ignore
 export const itemsShareCancel = () => ({ type: ITEMS_SHARE_CANCEL })
 
-export const itemsRecommendConfirm = () => ({ type: ITEMS_RECOMMEND_CONFIRM })
+export const itemsRecommendConfirm = (comment) => ({ type: ITEMS_RECOMMEND_CONFIRM, comment })
 
 export const itemsSendToFriendConfirm = () => ({type: ITEMS_SEND_TO_FRIEND_CONFIRM}) //prettier-ignore
 export const itemsShareAddFriend = (tag) => ({type: ITEMS_SEND_TO_FRIEND_ADD, tag}) //prettier-ignore
@@ -31,7 +33,8 @@ const initialState = {
   id: false,
   position: null,
   shareType: null,
-  friendList: []
+  friendList: [],
+  quote: null
 }
 
 export const itemShareReducers = (state = initialState, action) => {
@@ -68,10 +71,25 @@ export const itemShareReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-export const itemShareSagas = [takeEvery(ITEMS_SHARE_REQUEST, itemShare)]
+export const itemShareSagas = [
+  takeEvery(ITEMS_SHARE_REQUEST, itemShare),
+  takeEvery(ITEMS_SHARE_REQUEST, fetchRecentFriends),
+]
+
+
+/* SAGAS :: SELECTORS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+const getFriendList = (state) => state.itemsToShare.friendList
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+function* fetchRecentFriends() {
+  const response = yield getRecentFriends()
+  const { auto_complete_emails, friends } = response
+  const autoCompleteEmails = auto_complete_emails.map(item => item.email)
+  // console.log(response, auto_complete_emails, autoCompleteEmails)
+}
+
 function* itemShare({ item }) {
   // Wait for the user to confirm or cancel
   const { cancel, recommend, sendToFriend } = yield race({
@@ -84,12 +102,49 @@ function* itemShare({ item }) {
 
   if (recommend) return yield itemRecommend({ item, response: recommend })
 
-  if(sendToFriend) return yield itemShareToFriend({item, response: sendToFriend}) //prettier-ignore
+  if (sendToFriend) return yield itemShareToFriend({item, response: sendToFriend }) //prettier-ignore
 }
 
-function* itemRecommend({ item, response }) {}
+function* itemRecommend({ item, response }) {
+  const { id, quote } = item
+  const { comment } = response
 
-function* itemShareToFriend({ item, response }) {}
+  // Update the server
+  const actions = [
+    {
+      action: API_ACTION_RECOMMEND,
+      channels: ['public_profile'],
+      item_id: id,
+      quote,
+      comment
+    }
+  ]
+
+  const data = yield call(sendItemActions, actions)
+
+  if (data) return yield put({ type: ITEMS_SHARE_SUCCESS, data })
+}
+
+function* itemShareToFriend({ item, response }) {
+  const { id, quote } = item
+  const { comment } = response
+  const friendList = yield select(getFriendList)
+
+  // Update the server
+  const actions = [
+    {
+      action: API_ACTION_SHARE,
+      to: friendList,
+      item_id: id,
+      quote,
+      comment
+    }
+  ]
+
+  const data = yield call(sendItemActions, actions)
+
+  if (data) return yield put({ type: ITEMS_SHARE_SUCCESS, data })
+}
 
 // function buildActions(items, action) {
 //   return items.map((item) => ({ action, item_id: item.id }))

@@ -58,7 +58,6 @@ export class QuoteList extends Component {
       annotations,
       onClickEvent,
       shareItem,
-      shareData,
       deleteAnnotation
     } = this.props
     const cards = []
@@ -87,7 +86,6 @@ export class QuoteList extends Component {
                 alignRight
                 id={annot.annotation_id}
                 shareItem={shareItem}
-                shareData={shareData}
                 deleteAnnotation={deleteAnnotation}
                 quote={annot.quote}
               />

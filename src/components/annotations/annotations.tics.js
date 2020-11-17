@@ -93,7 +93,7 @@ const floatingCardStyles = css`
   position: relative;
 `
 
-const Card = ({ annotation, shareItem, shareData, deleteAnnotation }) => {
+const Card = ({ annotation, shareItem, deleteAnnotation }) => {
   return annotation ? (
     <CardPositioning
       show
@@ -114,7 +114,6 @@ const Card = ({ annotation, shareItem, shareData, deleteAnnotation }) => {
           visible
           id={annotation.annotation_id}
           shareItem={shareItem}
-          shareData={shareData}
           quote={annotation.quote}
           deleteAnnotation={deleteAnnotation}
         />
@@ -128,7 +127,6 @@ const HighlightIndex = ({
   onClickEvent,
   top,
   shareItem,
-  shareData,
   deleteAnnotation,
   children
 }) => {
@@ -184,7 +182,6 @@ const HighlightIndex = ({
             annotation={annotation}
             // active={onScreen}
             shareItem={shareItem}
-            shareData={shareData}
             deleteAnnotation={deleteAnnotation}
           />
         </div>
@@ -199,7 +196,6 @@ export const TicList = ({
   annotations,
   annotationCount,
   shareItem,
-  shareData,
   deleteAnnotation,
   visible,
   isPremium
@@ -235,7 +231,6 @@ export const TicList = ({
           annotation={annot}
           onClickEvent={onClickEvent}
           shareItem={shareItem}
-          shareData={shareData}
           deleteAnnotation={deleteAnnotation}
           // disabled={!visible || firstTime}
         />

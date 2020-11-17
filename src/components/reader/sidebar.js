@@ -79,7 +79,6 @@ export const Sidebar = ({
   highlightList,
   annotationCount,
   shareItem,
-  shareData,
   deleteAnnotation,
   isPremium
 }) => {
@@ -102,7 +101,6 @@ export const Sidebar = ({
           shareItem={shareItem}
           annotations={highlightList}
           annotationCount={annotationCount}
-          shareData={shareData}
           deleteAnnotation={deleteAnnotation}
           onClickEvent={handleAnnotationClick}
         />
@@ -123,7 +121,6 @@ export const Sidebar = ({
         shareItem={shareItem}
         annotations={highlightList}
         annotationCount={annotationCount}
-        shareData={shareData}
         deleteAnnotation={deleteAnnotation}
         onClickEvent={handleAnnotationClick}
       />

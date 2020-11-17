@@ -37,6 +37,8 @@ import { ITEMS_UNFAVORITE_FAILURE } from 'actions'
 import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_UNARCHIVE_SUCCESS } from 'actions'
 
+import { ITEMS_TAG_SEND } from 'actions'
+
 import { API_ACTION_ADD_ANNOTATION } from 'common/constants'
 import { API_ACTION_DELETE_ANNOTATION } from 'common/constants'
 
@@ -66,6 +68,8 @@ const initialState = {
   articleState: 'pending',
   articleData: null,
   articleContent: null,
+  tags: {},
+  annotations: [],
   suggestedTags: [],
   lineHeight: 3,
   columnWidth: 3,
@@ -79,7 +83,12 @@ export const readReducers = (state = initialState, action) => {
   switch (action.type) {
     case ARTICLE_ITEM_SUCCESS: {
       const { item } = action
-      return { ...state, articleData: item }
+      return {
+        ...state,
+        articleData: item,
+        annotations: item?.annotations || [],
+        tags: item?.tags || {}
+      }
     }
 
     case ARTICLE_CONTENT_SUCCESS: {
@@ -93,13 +102,13 @@ export const readReducers = (state = initialState, action) => {
     }
 
     case ANNOTATION_SAVE_SUCCESS: {
-      const { item } = action
-      return { ...state, articleData: item }
+      const { annotations } = action
+      return { ...state, annotations }
     }
 
     case ANNOTATION_DELETE_SUCCESS: {
-      const { item } = action
-      return { ...state, articleData: item }
+      const { annotations } = action
+      return { ...state, annotations }
     }
 
     case UPDATE_LINE_HEIGHT: {
@@ -139,6 +148,12 @@ export const readReducers = (state = initialState, action) => {
       const articleData = { ...state.articleData, favorite: 0 }
       return { ...state, articleData }
     }
+    // optimistic update
+    case ITEMS_TAG_SEND: {
+      const { tags } = action
+      const newTags = tags.reduce((obj, key) => { return { ...obj, [key]:{} }}, {})
+      return { ...state, tags: newTags }
+    }
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
@@ -156,8 +171,6 @@ export const readReducers = (state = initialState, action) => {
 export const readSagas = [
   takeEvery(ARTICLE_ITEM_REQUEST, articleItemRequest),
   takeEvery(ARTICLE_ITEM_SUCCESS, articleContentRequest),
-  takeEvery(ARTICLE_ITEM_SUCCESS, suggestedTagsRequest),
-  takeEvery(ARTICLE_ITEM_SUCCESS, friendsRequest),
   takeEvery(ANNOTATION_SAVE_REQUEST, annotationSaveRequest),
   takeEvery(ANNOTATION_DELETE_REQUEST, annotationDeleteRequest),
   takeEvery(ITEMS_DELETE_SUCCESS, redirectToList),
@@ -167,7 +180,8 @@ export const readSagas = [
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-const getArticleData = (state) => state.reader.articleData
+// const getArticleData = (state) => state.reader.articleData
+const getAnnotations = (state) => state.reader.annotations
 const getPremiumStatus = (state) => parseInt(state.user.premium_status, 10) === 1 || false //prettier-ignore
 
 /** SAGA :: RESPONDERS
@@ -207,34 +221,6 @@ function* articleContentRequest({ url }) {
   }
 }
 
-function* suggestedTagsRequest({ itemId }) {
-  try {
-    const premiumStatus = yield select(getPremiumStatus)
-    if (!premiumStatus) return
-
-    console.log('fetching tags')
-    const response = yield getSuggestedTags(itemId)
-    if (!response.suggested_tags) return console.log('No Tags')
-    const tags = response.suggested_tags?.map((item) => item.tag)
-
-    yield put({ type: SUGGESTED_TAGS_SUCCESS, tags })
-  } catch (error) {
-    yield put({ type: SUGGESTED_TAGS_FAILURE, error })
-  }
-}
-
-function* friendsRequest() {
-  try {
-    const response = yield getRecentFriends()
-    if (!response.auto_complete_emails && !response.recent_friends) return console.log('No Friends!') // prettier-ignore
-    const recentFriends = response?.recent_friends
-    const autoCompleteEmails = response?.auto_complete_emails
-    yield put({ type: FRIENDS_SUCCESS, recentFriends, autoCompleteEmails })
-  } catch (error) {
-    yield put({ type: FRIENDS_FAILURE, error })
-  }
-}
-
 function* annotationSaveRequest({ item_id, quote, patch }) {
   try {
     const annotation = {
@@ -245,26 +231,22 @@ function* annotationSaveRequest({ item_id, quote, patch }) {
       patch
     }
 
-    const articleData = yield select(getArticleData)
-    const list = articleData.annotations || []
-    const item = {
-      ...articleData,
-      annotations: [...list, annotation]
-    }
+    const storedAnnotations = yield select(getAnnotations)
+    const annotations = [...storedAnnotations, annotation]
 
     // Update the server
     const actions = [
       {
         action: API_ACTION_ADD_ANNOTATION,
-        item_id: articleData.item_id,
         cxt_view: 'reader',
+        item_id,
         annotation
       }
     ]
 
     const data = yield call(sendItemActions, actions)
 
-    if (data) return yield put({ type: ANNOTATION_SAVE_SUCCESS, item })
+    if (data) return yield put({ type: ANNOTATION_SAVE_SUCCESS, annotations })
   } catch (error) {
     yield put({ type: ANNOTATION_SAVE_FAILURE, error })
   }
@@ -272,12 +254,8 @@ function* annotationSaveRequest({ item_id, quote, patch }) {
 
 function* annotationDeleteRequest({ item_id, annotation_id }) {
   try {
-    const articleData = yield select(getArticleData)
-    const annotations = articleData?.annotations.filter(i => i.annotation_id !== annotation_id) //prettier-ignore
-    const item = {
-      ...articleData,
-      annotations
-    }
+    const storedAnnotations = yield select(getAnnotations)
+    const annotations = storedAnnotations.filter(i => i.annotation_id !== annotation_id) //prettier-ignore
 
     // Update the server
     const actions = [
@@ -290,7 +268,7 @@ function* annotationDeleteRequest({ item_id, annotation_id }) {
 
     const data = yield call(sendItemActions, actions)
 
-    if (data) return yield put({ type: ANNOTATION_DELETE_SUCCESS, item })
+    if (data) return yield put({ type: ANNOTATION_DELETE_SUCCESS, annotations })
   } catch (error) {
     yield put({ type: ANNOTATION_DELETE_FAILURE, error })
   }
