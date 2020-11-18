@@ -155,6 +155,10 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, tags: newTags }
     }
 
+    case ARTICLE_ITEM_REQUEST: {
+      return initialState
+    }
+
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE:
