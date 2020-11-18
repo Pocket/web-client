@@ -72,9 +72,6 @@ const buttonStyles = css`
   &.favorite .icon {
     color: var(--color-amber);
   }
-`
-// eslint-disable-next-line
-const articleActions = css`
   .icon {
     background-color: transparent;
     color: var(--color-textSecondary);
@@ -119,7 +116,7 @@ export const ReaderNav = ({
             </button>
           </WithTooltip>
 
-          <div className={articleActions}>
+          <div>
             <WithTooltip label="Open Highlights Menu">
               <button
                 onClick={toggleSidebar}
