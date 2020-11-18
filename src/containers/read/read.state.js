@@ -1,7 +1,6 @@
 import { put, takeEvery, select, call } from 'redux-saga/effects'
 import { v4 as uuid } from 'uuid'
 import { arrayToObject } from 'common/utilities'
-import { useRouter } from 'next/router'
 
 import { ARTICLE_ITEM_REQUEST } from 'actions'
 import { ARTICLE_ITEM_SUCCESS } from 'actions'
