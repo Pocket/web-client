@@ -104,6 +104,7 @@ export const ReaderNav = ({
   const setFontSize = (val) => dispatch(updateFontSize(val))
   const setLineHeight = (val) => dispatch(updateLineHeight(val))
   const setColumnWidth = (val) => dispatch(updateColumnWidth(val))
+  const goBack = () => history.go(-1)
 
   return (
     <header className={headerStyle}>
@@ -111,11 +112,11 @@ export const ReaderNav = ({
         <nav className={navStyle}>
           <WithTooltip label="Back to My List">
             {/*'reader.topNav.back'*/}
-            <Link href="/my-list">
-              <span className={classNames(buttonReset, buttonStyles)}>
-                <ArrowLeftIcon />
-              </span>
-            </Link>
+            <button
+              onClick={goBack}
+              className={classNames(buttonReset, buttonStyles)}>
+              <ArrowLeftIcon />
+            </button>
           </WithTooltip>
 
           <div className={articleActions}>
