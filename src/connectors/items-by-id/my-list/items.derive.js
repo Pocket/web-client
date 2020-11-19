@@ -41,7 +41,8 @@ export function deriveMyListItems(response) {
       save_url: saveUrl({ item }),
       open_url: openUrl({ item }),
       read_time: readTime({ item }),
-      syndicated: syndicated({ item })
+      syndicated: syndicated({ item }),
+      openExternal: openExternal({ item })
     }
   })
 }
@@ -165,4 +166,16 @@ const devLink = function (item) {
   return isSyndicated && isDev && path
     ? `discover/item/${path.substring(path.lastIndexOf('/') + 1)}`
     : false
+}
+
+/**
+ * OPEN EXTERNAL
+ * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
+ * @returns {bool} whether to open an item in a new tab
+ */
+function openExternal({ item }) {
+  if (item?.has_video === '2') return false
+  if (item?.has_image === '2') return false
+  if (item?.is_article === '1') return false
+  return true
 }

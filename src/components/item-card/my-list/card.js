@@ -203,6 +203,7 @@ export const Card = ({
     has_image,
     is_article,
     open_url,
+    openExternal,
     onOpen = () => {}
   } = item
 
@@ -248,7 +249,7 @@ export const Card = ({
     return 'web'
   }
 
-  const openUrl = (contentType() === 'web') ? urlWithPocketRedirect(open_url) : `/read/${id}`
+  const openUrl = (openExternal) ? urlWithPocketRedirect(open_url) : `/read/${id}`
 
   return (
     <article
