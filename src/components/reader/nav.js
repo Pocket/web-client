@@ -101,7 +101,14 @@ export const ReaderNav = ({
   const setFontSize = (val) => dispatch(updateFontSize(val))
   const setLineHeight = (val) => dispatch(updateLineHeight(val))
   const setColumnWidth = (val) => dispatch(updateColumnWidth(val))
-  const goBack = () => history.go(-1)
+  const goBack = () => {
+    if (history.length > 1) {
+      history.go(-1)
+    }
+    else {
+      document.location.href = '/my-list'
+    }
+  }
 
   return (
     <header className={headerStyle}>

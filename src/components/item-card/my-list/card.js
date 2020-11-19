@@ -206,8 +206,6 @@ export const Card = ({
     onOpen = () => {}
   } = item
 
-  console.log({...item})
-
   const {
     itemShare,
     itemDelete,
