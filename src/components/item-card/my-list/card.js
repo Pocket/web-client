@@ -199,9 +199,6 @@ export const Card = ({
     read_time,
     favorite,
     status,
-    has_video,
-    has_image,
-    is_article,
     open_url,
     openExternal,
     onOpen = () => {}
