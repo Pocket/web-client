@@ -242,13 +242,6 @@ export const Card = ({
         : itemBulkSelect(withShift)
   }
 
-  const contentType = () => {
-    if (has_video === '2') return 'video'
-    if (has_image === '2') return 'image'
-    if (is_article === '1') return 'article'
-    return 'web'
-  }
-
   const openUrl = (openExternal) ? urlWithPocketRedirect(open_url) : `/read/${id}`
 
   return (
