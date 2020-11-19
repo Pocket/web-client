@@ -53,6 +53,16 @@ const buttonStyles = css`
     color: var(--color-textPrimary);
     background-color: transparent;
   }
+
+  .icon {
+    background-color: transparent;
+    color: var(--color-textSecondary);
+    font-size: var(--size150);
+    &:hover {
+      color: var(--color-textPrimary);
+      background-color: transparent;
+    }
+  }
 `
 
 export const DisplaySettings = ({

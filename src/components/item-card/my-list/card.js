@@ -1,6 +1,7 @@
 import React from 'react'
 import { css, cx } from 'linaria'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
+import { urlWithPocketRedirect } from 'common/utilities'
 
 import { CardMedia } from './card-media'
 import { ItemAction } from './item-action'
@@ -198,8 +199,14 @@ export const Card = ({
     read_time,
     favorite,
     status,
+    has_video,
+    has_image,
+    is_article,
+    open_url,
     onOpen = () => {}
   } = item
+
+  console.log({...item})
 
   const {
     itemShare,
@@ -236,7 +243,14 @@ export const Card = ({
         : itemBulkSelect(withShift)
   }
 
-  const open_url = `/read/${id}`
+  const contentType = () => {
+    if (has_video === '2') return 'video'
+    if (has_image === '2') return 'image'
+    if (is_article === '1') return 'article'
+    return 'web'
+  }
+
+  const openUrl = (contentType() === 'web') ? urlWithPocketRedirect(open_url) : `/read/${id}`
 
   return (
     <article
@@ -248,7 +262,7 @@ export const Card = ({
       <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
         <span className="idOverlay">{id}</span>
       </FeatureFlag>
-      <Link href={open_url}>
+      <Link href={openUrl}>
         <a onClick={onOpen}>
           <CardMedia image_src={thumbnail} title={title} id={id} />
           <div className="content">
