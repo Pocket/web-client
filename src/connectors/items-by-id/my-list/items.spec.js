@@ -87,6 +87,7 @@ describe('My List Items', function () {
         has_image: '1',
         lang: 'en',
         listen_duration_estimate: 457,
+        openExternal: false,
         title:
           'The Undisciplined Pursuit of More (The Art of Limiting Yourself to Only The Essential)',
         thumbnail:
