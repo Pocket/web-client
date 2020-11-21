@@ -8,6 +8,9 @@ import { all } from 'redux-saga/effects'
 import { appReducers, appSagas } from 'connectors/app/app.state'
 import { userReducers, userSagas } from 'connectors/user/user.state'
 
+import { userTagsSagas } from 'containers/my-list/tags-page/tags-page.state'
+import { userTagsReducers } from 'containers/my-list/tags-page/tags-page.state'
+
 import { featureReducers } from 'connectors/feature-flags/feature-flags.state'
 import { featureSagas } from 'connectors/feature-flags/feature-flags.state'
 
@@ -65,6 +68,7 @@ const discoverReducers = {
 const collectionReducers = {
   myListItemsById: myListItemsReducers,
   myList: myListReducers,
+  userTags: userTagsReducers,
   bulkEdit: itemBulkReducers,
   itemsToDelete: itemDeleteReducers,
   itemsToTag: itemTagReducers,
@@ -102,6 +106,7 @@ function* rootSaga() {
   yield all([
     ...appSagas,
     ...userSagas,
+    ...userTagsSagas,
     ...featureSagas,
     ...snowplowSagas,
     ...discoverItemsSagas,
