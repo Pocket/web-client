@@ -7,7 +7,7 @@ import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { Pill } from '@pocket/web-ui'
 import { headingSerifAlt } from '@pocket/web-ui'
 
-const pillboxStyle = css`
+export const pillboxStyle = css`
   h3 {
     margin-bottom: var(--spacing150);
     ${headingSerifAlt}
