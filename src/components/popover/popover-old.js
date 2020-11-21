@@ -1,7 +1,6 @@
 import React, { useCallback, useState, useRef, PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import { css } from 'linaria'
-import { tooltipBody } from 'components/tooltip/tooltip'
 import { overlayBase } from 'components/overlay/overlay'
 import classNames from 'classnames'
 
@@ -160,7 +159,7 @@ export function TooltipContent({
         return on ? (
           <div
             ref={contentRefCallback}
-            className={classNames(popoverContent, tooltipBody, 'tooltip', {
+            className={classNames(popoverContent, 'tooltip', {
               attachBottom,
               collisionLeft
             })}

@@ -1,5 +1,4 @@
 import { css } from 'linaria'
-import { tooltipBase } from 'components/tooltip/tooltip'
 import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
 
@@ -31,7 +30,7 @@ const iconWrapper = css`
   }
 `
 export const IconWrapper = ({ children, ...args }) => (
-  <div className={classNames(iconWrapper, tooltipBase)} {...args}>
+  <div className={classNames(iconWrapper)} {...args}>
     {children}
   </div>
 )
@@ -62,7 +61,7 @@ const stepperButton = css`
 `
 export const StepperButton = ({ children, active, ...args }) => (
   <button
-    className={classNames(buttonReset, stepperButton, tooltipBase, { active })}
+    className={classNames(buttonReset, stepperButton, { active })}
     {...args}>
     {children}
   </button>
