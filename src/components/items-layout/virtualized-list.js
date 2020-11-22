@@ -18,12 +18,13 @@ export const cardGrid = css`
   ${cardsGrid};
   grid-row-gap: var(--size200);
   article {
+    height: 335px;
     grid-column: span 4;
     & > a {
       padding-bottom: var(--size150);
     }
     h2 {
-      font-size: var(--fontSize125);
+      font-size: var(--fontSize100);
     }
     .details {
       max-width: 100%;
@@ -103,7 +104,7 @@ export function VirtualizedList({ type, items, actions, loadMore }) {
   const scrollTracker = useRef(null)
 
   // Set up state to track for virtualization
-  const [height, columnCount] = type === 'list' ? [89, 1] : [379, 3] //row-gap = 24
+  const [height, columnCount] = type === 'list' ? [89, 1] : [367, 3] //row-gap = 24
 
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
