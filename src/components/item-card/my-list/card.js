@@ -160,7 +160,7 @@ const card = css`
 
   .footer {
     position: absolute;
-    bottom: -17px;
+    bottom: -12px;
     left: 50%;
     transform: translateX(-50%);
     z-index: var(--zIndexTooltip);
@@ -252,7 +252,7 @@ export const Card = ({
         : itemBulkSelect(withShift)
   }
 
-  const openUrl = (openExternal) ? urlWithPocketRedirect(open_url) : `/read/${id}`
+  const openUrl = openExternal ? urlWithPocketRedirect(open_url) : `/read/${id}`
 
   return (
     <article
