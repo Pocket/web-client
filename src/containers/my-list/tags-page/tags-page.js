@@ -1,15 +1,12 @@
 // @refresh reset
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { matchSorter } from 'match-sorter'
-
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'components/side-nav/side-nav'
 import { getUserTags } from './tags-page.state'
-import { Pill } from '@pocket/web-ui'
-import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import { MyListHeader } from 'components/headers/my-list-header'
-import { RecentTags } from './recent-tags'
+import { RecentTags } from 'components/tag-lists/recent-tags'
+import { TagList } from 'components/tag-lists/tags-list'
 
 export default function TagsPage(props) {
   const { metaData = {}, subset = 'active', filter } = props
@@ -19,8 +16,8 @@ export default function TagsPage(props) {
   const userStatus = useSelector((state) => state.user.user_status)
   const userTags = useSelector((state) => state.userTags.tagsList)
   const userTagsRecent = useSelector((state) => state.userTags.recentTags)
-  const userTagsWithItems = useSelector((state) => state.userTags.tagsWithItems)
 
+  const taggedItems = useSelector((state) => state.userTags.itemsWithTags)
   const [value, setValue] = useState('')
   const valueChange = (e) => setValue(e.target.value)
 
@@ -30,8 +27,6 @@ export default function TagsPage(props) {
     dispatch(getUserTags())
   }, [dispatch])
 
-  const sortedTags = matchSorter(userTags, value).slice(0, 5)
-
   return (
     <Layout title={metaData.title} metaData={metaData}>
       <SideNav subset={subset} isLoggedIn={isLoggedIn} />
@@ -39,31 +34,15 @@ export default function TagsPage(props) {
       {shouldRender ? (
         <main className="main">
           <MyListHeader subset={'tags'} filter={filter} />
-          <div style={{ paddingBottom: '2rem' }}>
-            <input
+
+          {userTagsRecent ? <RecentTags taggedItems={taggedItems} /> : null}
+          {userTags ? (
+            <TagList
+              userTags={userTags}
               value={value}
-              onChange={valueChange}
-              type="text"
-              placeholder="Search for your tags"
+              valueChange={valueChange}
             />
-          </div>
-          <div className={pillboxStyle}>
-            <ul>
-              {value.length ? (
-                <>
-                  <li>
-                    <Pill>un-tagged</Pill>
-                  </li>
-                  {sortedTags.map((tag) => (
-                    <li key={tag}>
-                      <Pill>{userTagsWithItems[tag]}</Pill>
-                    </li>
-                  ))}
-                </>
-              ) : null}
-            </ul>
-          </div>
-          {userTagsRecent ? <RecentTags /> : null}
+          ) : null}
         </main>
       ) : null}
     </Layout>

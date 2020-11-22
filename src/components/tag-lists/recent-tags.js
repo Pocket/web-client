@@ -1,14 +1,11 @@
-import { useSelector, useDispatch } from 'react-redux'
 import { DisplayCard } from 'components/item-card/my-list/card-display-only'
 import { css } from 'linaria'
+import { SectionHeader } from 'components/headers/section-header'
 
 const recentTagStyle = css`
-  h3 {
-    font-family: var(--fontSansSerif);
-    font-size: var(--fontSize100);
-    font-weight: 600;
-  }
-
+  border-bottom: var(--dividerStyle);
+  padding-bottom: 3rem;
+  margin-bottom: 2rem;
   .cards {
     padding: 0;
     font-family: var(--fontSansSerif);
@@ -21,13 +18,10 @@ const recentTagStyle = css`
   }
 `
 
-export function RecentTags() {
-  const taggedItems = useSelector((state) => state.userTags.itemsWithTags)
-
-  console.log(taggedItems)
+export function RecentTags({ taggedItems }) {
   return (
     <div className={recentTagStyle}>
-      <h3>Recently Tagged</h3>
+      <SectionHeader sectionTitle="Recently Tagged Items" />
       <div className="cards">
         {taggedItems.map((itemId) => (
           <DisplayCard key={itemId} id={itemId} />
