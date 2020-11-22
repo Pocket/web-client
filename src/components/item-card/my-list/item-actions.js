@@ -8,7 +8,7 @@ const itemActionStyle = css`
   align-content: center;
   width: 100%;
   padding: 5px 0;
-  border: var(--dividerStyle);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
 `
 
@@ -29,7 +29,9 @@ const menuItemStyle = css`
     margin: 0;
   }
 
-  &:hover {
+  &:hover,
+  &:active,
+  &:focus {
     background-color: var(--color-canvas);
     color: var(--color-textLinkHover);
     border: medium none;
