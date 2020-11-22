@@ -10,10 +10,15 @@ import { VideoIcon } from '@pocket/web-ui'
 
 import { css } from 'linaria'
 
-export const sideNav = css`
-  /* position: fixed;
-  height: 100%;
-  overflow: hidden; */
+export const sideNavWrapper = css`
+  position: relative;
+  grid-column: span 2;
+  min-height: 50vh;
+  .top-nav {
+    position: fixed;
+  }
+  .bottom-nav {
+  }
 `
 
 export const sideNavHeader = css`
@@ -71,47 +76,51 @@ export function SideNav({ subset, home, isLoggedIn }) {
   }
 
   return (
-    <nav role="navigation" className="side-nav">
-      <Link href="/my-list">
-        <button className={subActive('unread')}>
-          <HomeIcon className="side-nav-icon" /> My List
-        </button>
-      </Link>
-      <Link href="/my-list/archive">
-        <button className={subActive('archive')}>
-          <ArchiveIcon className="side-nav-icon" /> Archive
-        </button>
-      </Link>
-      <Link href="/my-list/tags">
-        <button className={subActive('tags')}>
-          <TagIcon className="side-nav-icon" /> Tags
-        </button>
-      </Link>
-      <div className={sideNavHeader}>Filters</div>
+    <div className={sideNavWrapper}>
+      <nav role="navigation" className="top-nav">
+        <Link href="/my-list">
+          <button className={subActive('unread')}>
+            <HomeIcon className="side-nav-icon" /> My List
+          </button>
+        </Link>
+        <Link href="/my-list/archive">
+          <button className={subActive('archive')}>
+            <ArchiveIcon className="side-nav-icon" /> Archive
+          </button>
+        </Link>
+        <Link href="/my-list/tags">
+          <button className={subActive('tags')}>
+            <TagIcon className="side-nav-icon" /> Tags
+          </button>
+        </Link>
+        <div className={sideNavHeader}>Filters</div>
 
-      <Link href="/my-list/favorites">
-        <button className={subActive('favorites')}>
-          <FavoriteIcon className="side-nav-icon" /> Favorites
-        </button>
-      </Link>
+        <Link href="/my-list/favorites">
+          <button className={subActive('favorites')}>
+            <FavoriteIcon className="side-nav-icon" /> Favorites
+          </button>
+        </Link>
 
-      <Link href="/my-list/highlights">
-        <button className={subActive('highlights')}>
-          <HighlightIcon className="side-nav-icon" /> Highlights
-        </button>
-      </Link>
+        <Link href="/my-list/highlights">
+          <button className={subActive('highlights')}>
+            <HighlightIcon className="side-nav-icon" /> Highlights
+          </button>
+        </Link>
 
-      <Link href="/my-list/articles">
-        <button className={subActive('articles')}>
-          <ArticleIcon className="side-nav-icon" /> Articles
-        </button>
-      </Link>
+        <Link href="/my-list/articles">
+          <button className={subActive('articles')}>
+            <ArticleIcon className="side-nav-icon" /> Articles
+          </button>
+        </Link>
 
-      <Link href="/my-list/videos">
-        <button className={subActive('videos')}>
-          <VideoIcon className="side-nav-icon" /> Videos
-        </button>
-      </Link>
-    </nav>
+        <Link href="/my-list/videos">
+          <button className={subActive('videos')}>
+            <VideoIcon className="side-nav-icon" /> Videos
+          </button>
+        </Link>
+      </nav>
+
+      <div className="bottom-nav"></div>
+    </div>
   )
 }
