@@ -160,7 +160,7 @@ const card = css`
 
   .footer {
     position: absolute;
-    bottom: -12px;
+    bottom: -15px;
     left: 50%;
     transform: translateX(-50%);
     z-index: var(--zIndexTooltip);

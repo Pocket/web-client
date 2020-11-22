@@ -8,7 +8,7 @@ const itemActionStyle = css`
   align-content: center;
   width: 100%;
   padding: 5px 0;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
 `
 
