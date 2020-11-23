@@ -160,10 +160,11 @@ const card = css`
 
   .footer {
     position: absolute;
-    bottom: -15px;
+    bottom: -12px;
     left: 50%;
+    width: 100%;
     transform: translateX(-50%);
-    z-index: var(--zIndexTooltip);
+    z-index: var(--zIndexRaised);
   }
 
   .actions {
