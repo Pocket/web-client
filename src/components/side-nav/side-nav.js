@@ -60,11 +60,11 @@ export const sideNavItem = css`
   &:active,
   &:focus {
     transition: none;
-    color: var(--color-actionPrimary);
+    color: var(--color-navCurrentTabText);
     outline: 1px auto var(--color-navCurrentTab);
   }
   &.active {
-    color: var(--color-actionPrimaryHover);
+    color: var(--color-navCurrentTabText);
     background-color: var(--color-navCurrentTab);
   }
 `
