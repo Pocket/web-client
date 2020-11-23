@@ -50,10 +50,10 @@ const card = css`
     position: absolute;
     box-sizing: content-box;
     border-radius: var(--borderRadius);
-    padding: 1em;
+    padding: 1.1em;
     width: 100%;
     height: 100%;
-    transform: translate(-1em, -1em);
+    transform: translate(-1.1em, -1.1em);
     display: none;
     z-index: -1;
   }
