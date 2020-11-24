@@ -159,12 +159,6 @@ const card = css`
   }
 
   .footer {
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    width: 100%;
-    transform: translateX(-50%);
-    z-index: var(--zIndexRaised);
   }
 
   .actions {
@@ -229,11 +223,8 @@ export const Card = ({
   const actionsShow = () => setShowActions(true)
   const actionsHide = () => setShowActions(false)
 
-  const cardType = type === 'list' ? 'fixedheightlist' : 'fixedheightgrid'
   const cardClass = cx(
     card,
-    // showActions && 'actionsShown',
-    fluidHeight && cardType,
     bulkEdit && 'bulkEdit',
     bulkSelected && 'bulkSelected'
   )

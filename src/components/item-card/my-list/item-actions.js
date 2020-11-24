@@ -6,15 +6,14 @@ const itemActionStyle = css`
   justify-content: space-evenly;
   align-items: center;
   align-content: center;
-  width: 100%;
-  padding: 7px 0;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  padding: 14px 0 7px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
   background-color: var(--color-canvas);
   border-radius: 0 0 4px 4px;
 `
 
 const menuItemStyle = css`
-  color: var(--color-textSecondary);
+  color: var(--color-textTertiary);
   height: 24px;
   background-color: var(--color-canvas);
   border: medium none;
@@ -42,7 +41,7 @@ const menuItemStyle = css`
 
 const MenuItem = ({ label, icon, onClick }) => {
   return (
-    <WithTooltip label={label}>
+    <WithTooltip label={label} placement="top" delay={true}>
       <button className={menuItemStyle} onClick={onClick}>
         {icon ? icon : null}
       </button>
@@ -51,13 +50,15 @@ const MenuItem = ({ label, icon, onClick }) => {
 }
 
 export function ItemActions({ menuItems, showActions }) {
-  return showActions ? (
-    <div className={itemActionStyle}>
-      {menuItems.map((props) => (
-        <MenuItem key="key" {...props} />
-      ))}
+  return (
+    <div className={`${itemActionStyle} item-actions`}>
+      {showActions ? (
+        <>
+          {menuItems.map((props) => (
+            <MenuItem key="key" {...props} />
+          ))}{' '}
+        </>
+      ) : null}
     </div>
-  ) : (
-    <div></div>
   )
 }
