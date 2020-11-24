@@ -27,6 +27,7 @@ export default function Collection(props) {
   const offset = useSelector((state) => state.myList[`${section}Offset`])
   const total = useSelector((state) => state.myList[`${section}Total`])
   const since = useSelector((state) => state.myList[`${section}Since`])
+  const listMode = useSelector((state) => state.app.listMode)
   const routeChange = useHasChanged(router.pathname)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
@@ -86,7 +87,7 @@ export default function Collection(props) {
   const shouldRender = userStatus !== 'pending'
 
   // TODO: Adjust this to use app state
-  const type = 'grid'
+  const type = listMode
 
   return (
     <Layout title={metaData.title} metaData={metaData}>

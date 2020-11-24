@@ -6,6 +6,8 @@ export const APP_DEV_MODE_TOGGLE = 'APP_DEV_MODE_TOGGLE'
 export const APP_SET_BASE_URL = 'APP_SET_BASE_URL'
 export const APP_SET_MODE = 'APP_SET_MODE'
 export const APP_SET_SECTION = 'APP_SET_SECTION'
+export const APP_LIST_MODE_TOGGLE = 'APP_LIST_MODE_TOGGLE'
+export const APP_SORT_ORDER_TOGGLE = 'APP_SORT_ORDER_TOGGLE'
 
 // User info/auth
 export const USER_HYDRATE = 'USER_HYDRATE'
