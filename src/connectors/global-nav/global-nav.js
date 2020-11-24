@@ -2,6 +2,8 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import { appSetMode } from 'connectors/app/app.state'
+import { listModeToggle } from 'connectors/app/app.state'
+import { sortOrderToggle } from 'connectors/app/app.state'
 
 import GlobalNavComponent from 'components/global-nav/global-nav'
 import GlobalNavSearch from './global-nav-search'
@@ -58,6 +60,12 @@ const GlobalNav = (props) => {
   const accountName = useSelector((state) => state?.user?.first_name)
   const userId = useSelector((state) => state?.user?.user_id)
   const profileUrl = `${BASE_URL}/@${userId}?src=navbar`
+
+  const listMode = useSelector((state) => state?.app?.listMode)
+  const sortOrder = useSelector((state) => state?.app?.sortOrder)
+
+  const toggleSortOrder = () => dispatch(sortOrderToggle())
+  const toggleListMode = () => dispatch(listModeToggle())
 
   const links = [
     {
@@ -124,6 +132,10 @@ const GlobalNav = (props) => {
       userStatus={userStatus}
       onToolClick={toolClick}
       onLoginClick={onLoginClick}
+      listMode={listMode}
+      sortOrder={sortOrder}
+      toggleSortOrder={toggleSortOrder}
+      toggleListMode={toggleListMode}
       tools={tools}>
       {NavTakeover ? <NavTakeover onClose={resetNav} /> : null}
     </GlobalNavComponent>

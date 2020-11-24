@@ -208,6 +208,10 @@ const GlobalNav = ({
   onToolClick,
   onLoginClick,
   onAccountClick,
+  listMode,
+  sortOrder,
+  toggleSortOrder,
+  toggleListMode,
   links,
   tools,
   userStatus,
@@ -290,6 +294,10 @@ const GlobalNav = ({
                 onLinkClick={onLinkClick}
                 onAccountClick={onAccountClick}
                 userStatus={userStatus}
+                listMode={listMode}
+                sortOrder={sortOrder}
+                toggleSortOrder={toggleSortOrder}
+                toggleListMode={toggleListMode}
               />
             </>
           )}

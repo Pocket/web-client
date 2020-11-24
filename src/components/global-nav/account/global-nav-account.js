@@ -10,6 +10,7 @@ import { AvatarButton } from 'components/avatar/avatar-button'
 import { PopupMenu, PopupMenuGroup, PopupMenuItem } from '@pocket/web-ui'
 import { WithTooltip } from '@pocket/web-ui'
 import { ThemeSettings } from 'components/display-settings/theme'
+import { ListSettings } from 'components/display-settings/list-modes'
 
 const accountLinkStyle = css`
   display: inline-block;
@@ -141,7 +142,11 @@ const GlobalNavAccount = ({
   onLinkClick,
   onLoginClick,
   onAccountClick,
-  userStatus
+  userStatus,
+  listMode,
+  sortOrder,
+  toggleSortOrder,
+  toggleListMode
 }) => {
   const accountMenuTriggerRef = useRef(null)
 
@@ -261,6 +266,12 @@ const GlobalNavAccount = ({
           </PopupMenuItem>
         </PopupMenuGroup>
         <ThemeSettings />
+        <ListSettings
+          listMode={listMode}
+          sortOrder={sortOrder}
+          toggleSortOrder={toggleSortOrder}
+          toggleListMode={toggleListMode}
+        />
       </PopupMenu>
     </div>
   )
