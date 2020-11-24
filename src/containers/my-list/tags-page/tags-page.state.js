@@ -82,7 +82,9 @@ function* userTagsRequest() {
   yield put({ type: USER_TAGS_ITEM_SUCCESS, itemsById })
 
   // This just finds which of the most recent items have tags
-  const itemsWithTags = Object.values(itemsById).filter((item) => item?.tags)
+  const itemsWithTags = Object.values(itemsById)
+    .filter((item) => item?.tags)
+    .slice(0, 4)
   const itemsWithTagsArray = itemsWithTags.map((item) => item?.tags)
   const itemsWithTagsList = itemsWithTags.map((item) => item?.item_id)
 
