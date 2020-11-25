@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { WithTooltip } from '@pocket/web-ui'
 
 const itemActionStyle = css`
@@ -18,6 +18,10 @@ const menuItemStyle = css`
   background-color: var(--color-canvas);
   border: medium none;
   padding: 0 var(--size075);
+
+  &.active {
+    color: var(--color-amber);
+  }
 
   .icon {
     height: 24px;
@@ -39,20 +43,21 @@ const menuItemStyle = css`
   }
 `
 
-const MenuItem = ({ label, icon, onClick }) => {
+const MenuItem = ({ label, icon, onClick, active }) => {
+  const itemStyle = cx(menuItemStyle, active && 'active')
   return (
     <WithTooltip label={label} placement="top" delay={true}>
-      <button className={menuItemStyle} onClick={onClick}>
+      <button className={itemStyle} onClick={onClick}>
         {icon ? icon : null}
       </button>
     </WithTooltip>
   )
 }
 
-export function ItemActions({ menuItems, showActions }) {
+export function ItemActions({ menuItems, showActions, type }) {
   return (
     <div className={`${itemActionStyle} item-actions`}>
-      {showActions ? (
+      {showActions || type === 'list' ? (
         <>
           {menuItems.map((props) => (
             <MenuItem key="key" {...props} />

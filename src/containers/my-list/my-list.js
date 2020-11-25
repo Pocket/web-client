@@ -86,7 +86,6 @@ export default function Collection(props) {
   const loadMore = () => dispatch(getMylistData(45, offset, subset, filter))
   const shouldRender = userStatus !== 'pending'
 
-  // TODO: Adjust this to use app state
   const type = listMode
 
   return (

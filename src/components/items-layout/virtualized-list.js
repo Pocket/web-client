@@ -50,10 +50,13 @@ export const cardGrid = css`
 
 export const cardList = css`
   ${cardsGrid};
+  grid-row-gap: 0;
 
   article {
     grid-column: span 12;
-    height: 63px;
+    height: 75px;
+    padding: 1em 0;
+
     & > a {
       display: grid;
       grid-column: span 11;
@@ -72,18 +75,22 @@ export const cardList = css`
     .content {
       grid-column: span 11;
       position: relative;
-      padding-bottom: 0.5rem;
     }
 
     .title {
       padding: 0;
       font-size: var(--fontSize100);
       line-height: 1.286;
+      width: 70%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .details {
       font-size: var(--fontSize075);
       line-height: 1.5;
+      padding: var(--size025) 0 0;
     }
 
     .excerpt {
@@ -91,7 +98,16 @@ export const cardList = css`
       display: none;
     }
 
+    .item-actions {
+      box-shadow: none;
+      padding: 0;
+    }
+
     .footer {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
     }
 
     .actions {
@@ -116,8 +132,8 @@ export function VirtualizedList({ type, items, actions, loadMore }) {
   const scrollTracker = useRef(null)
 
   // Set up state to track for virtualization
-  const [height, columnCount] = type === 'list' ? [87, 1] : [367, 3] //row-gap = 24
-  const itemOnScreen = type === 'list' ? 40 : 20 // total items to render minus one
+  const [height, columnCount] = type === 'list' ? [75, 1] : [367, 3] //row-gap = 24
+  const itemOnScreen = type === 'list' ? 30 : 20 // total items to render minus one
 
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)

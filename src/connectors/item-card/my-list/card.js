@@ -71,7 +71,10 @@ export function ItemCard({ id, position, fluidHeight, type }) {
 
 // This seems like an over-optimization so do some actual testing here
 const isEqual = (prev, next) => {
-  const isTheSame = prev.id === next.id && prev.position === next.position
+  const isTheSame =
+    prev.id === next.id &&
+    prev.position === next.position &&
+    prev.type === next.type
   return isTheSame
 }
 

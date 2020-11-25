@@ -185,14 +185,7 @@ const card = css`
  * out of the [feed](https://github.com/Pocket/spec/blob/master/query/v3server/feed.md)
  * and makes sure the appropriate data is represented.
  */
-export const Card = ({
-  item,
-  fluidHeight,
-  type,
-  actions,
-  bulkEdit,
-  bulkSelected
-}) => {
+export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
   const {
     item_id: id,
     title,
@@ -233,8 +226,9 @@ export const Card = ({
   const CorrectArchiveIcon = status === '0' ? ArchiveIcon : AddIcon
   const archiveLabel = status === '0' ? 'Archive' : 'Add'
 
-  const favoriteAction = favorite === '0' ? itemFavorite : itemUnFavorite
-  const CorrectFavIcon = favorite === '0' ? FavoriteIcon : FavoriteFilledIcon
+  const isFavorite = favorite === '1'
+  const favoriteAction = isFavorite ? itemUnFavorite : itemFavorite
+  const CorrectFavIcon = isFavorite ? FavoriteFilledIcon : FavoriteIcon
 
   const selectBulk = (event) => {
     const withShift = event.shiftKey
@@ -286,6 +280,7 @@ export const Card = ({
           ) : (
             <ItemActions
               showActions={showActions}
+              type={type}
               menuItems={[
                 {
                   key: `share-${id}`,
@@ -309,7 +304,8 @@ export const Card = ({
                   key: `favorite-${id}`,
                   label: 'Favorite',
                   icon: <CorrectFavIcon />,
-                  onClick: favoriteAction
+                  onClick: favoriteAction,
+                  active: isFavorite
                 },
                 {
                   key: `tag-${id}`,
@@ -318,8 +314,6 @@ export const Card = ({
                   onClick: itemTag
                 }
               ]}
-              placement="top-end"
-              alignRight={true}
             />
           )}
         </div>
