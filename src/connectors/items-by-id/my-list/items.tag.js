@@ -108,7 +108,7 @@ function* itemsTag({ items }) {
   const actions = buildActions(items, tags, apiAction)
   const data = yield call(sendItemActions, actions)
 
-  if (data) return yield put({ type: ITEMS_TAG_SUCCESS, data })
+  if (data) return yield put({ type: ITEMS_TAG_SUCCESS, data, actions })
 
   return yield put({ type: ITEMS_TAG_FAILURE, items })
 }

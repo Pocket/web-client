@@ -31,7 +31,7 @@ function* itemsFavorite({ items }) {
   const actions = buildActions(items, API_ACTION_FAVORITE)
   const data = yield call(sendItemActions, actions)
 
-  if (data) return yield put({ type: ITEMS_FAVORITE_SUCCESS, data })
+  if (data) return yield put({ type: ITEMS_FAVORITE_SUCCESS, data, actions })
 
   return yield put({ type: ITEMS_FAVORITE_FAILURE, items })
 }
@@ -39,7 +39,7 @@ function* itemsFavorite({ items }) {
 function* itemsUnFavorite({ items }) {
   const actions = buildActions(items, API_ACTION_UNFAVORITE)
   const data = yield call(sendItemActions, actions)
-  if (data) return yield put({ type: ITEMS_UNFAVORITE_SUCCESS, data })
+  if (data) return yield put({ type: ITEMS_UNFAVORITE_SUCCESS, data, actions })
 
   return yield put({ type: ITEMS_UNFAVORITE_FAILURE, items })
 }

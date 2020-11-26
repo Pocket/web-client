@@ -59,7 +59,7 @@ function* itemsDelete({ items }) {
   const actions = buildActions(items, API_ACTION_DELETE)
   const data = yield call(sendItemActions, actions)
 
-  if (data) return yield put({ type: ITEMS_DELETE_SUCCESS, data })
+  if (data) return yield put({ type: ITEMS_DELETE_SUCCESS, data, actions })
 
   return yield put({ type: ITEMS_DELETE_FAILURE, items })
 }

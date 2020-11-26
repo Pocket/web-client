@@ -23,7 +23,7 @@ export function* itemAdd(action) {
     const actions = [{ action: API_ACTION_ADD, url, ...analytics }]
     const data = yield call(sendItemActions, actions)
 
-    if (data) return yield put({ type: ITEMS_ADD_SUCCESS, data })
+    if (data) return yield put({ type: ITEMS_ADD_SUCCESS, data, actions })
     yield put({ type: ITEMS_ADD_FAILURE })
   } catch (error) {
     console.log(error)
