@@ -43,21 +43,31 @@ export function TagList({ userTags, value, valueChange }) {
       <div className={pillboxStyle}>
         <ul>
           <li>
-            <Pill>un-tagged</Pill>
+            <Link href={'/my-list/tags/untagged'}>
+              <a>
+                <Pill>un-tagged</Pill>
+              </a>
+            </Link>
           </li>
           {value.length ? (
             <>
               {sortedTags.map((tag) => (
                 <li key={tag}>
-                  <Pill>{tag}</Pill>
+                  <Link href={`/my-list/tags/${encodeURIComponent(tag)}`}>
+                    <a>
+                      <Pill>{tag}</Pill>
+                    </a>
+                  </Link>
                 </li>
               ))}
             </>
           ) : (
             orderedTags.map((tag) => (
-              <li>
-                <Link href={`/my-list/tags/${tag}`}>
-                  <Pill>{tag}</Pill>
+              <li key={tag}>
+                <Link href={`/my-list/tags/${encodeURIComponent(tag)}`}>
+                  <a>
+                    <Pill>{tag}</Pill>
+                  </a>
                 </Link>
               </li>
             ))
