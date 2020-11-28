@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { getScrollTop, atEndOfScroll } from 'common/utilities'
 import { cardsContainer } from './base'
 import { cardsGrid } from './base'
@@ -45,6 +45,9 @@ export const cardGrid = css`
       transform: translateX(-50%);
       z-index: var(--zIndexRaised);
     }
+    .bulkBacking {
+      padding: 1.1em;
+    }
   }
 `
 
@@ -56,6 +59,7 @@ export const cardList = css`
     grid-column: span 12;
     height: 75px;
     padding: 1em 0;
+    border-bottom: 1px solid var(--color-dividerTertiary);
 
     & > a {
       display: grid;
@@ -99,8 +103,10 @@ export const cardList = css`
     }
 
     .item-actions {
-      box-shadow: none;
       padding: 0;
+      &:after {
+        box-shadow: none;
+      }
     }
 
     .footer {
@@ -109,7 +115,9 @@ export const cardList = css`
       right: 0;
       transform: translateY(-50%);
     }
-
+    .bulkBacking {
+      padding: 0.125em 1.1em;
+    }
     .actions {
       grid-column: 4 / span 5;
     }

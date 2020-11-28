@@ -22,16 +22,15 @@ import Link from 'next/link'
 const card = css`
   width: 100%;
   height: 100%;
-  border-bottom: 1px solid var(--color-dividerTertiary);
   padding: 0;
   font-family: var(--fontSansSerif);
   font-weight: 400;
   color: var(--color-textPrimary);
   position: relative;
 
-  &.actionsShown {
+  /* &.actionsShown {
     border-bottom-color: transparent;
-  }
+  } */
 
   &.bulkEdit {
     cursor: pointer;
@@ -50,7 +49,6 @@ const card = css`
     position: absolute;
     box-sizing: content-box;
     border-radius: var(--borderRadius);
-    padding: 1.1em;
     width: 100%;
     height: 100%;
     transform: translate(-1.1em, -1.1em);

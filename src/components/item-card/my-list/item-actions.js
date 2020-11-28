@@ -6,21 +6,37 @@ const itemActionStyle = css`
   justify-content: space-evenly;
   align-items: center;
   align-content: center;
-  padding: 14px 0 7px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
   background-color: var(--color-canvas);
   border-radius: 0 0 4px 4px;
+  padding-bottom: var(--size025);
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    width: 100%;
+    height: 10px;
+    display: block;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }
 `
 
 const menuItemStyle = css`
   color: var(--color-textTertiary);
   height: 24px;
-  background-color: var(--color-canvas);
+  background-color: transparent;
   border: medium none;
-  padding: 0 var(--size075);
-
+  padding: var(--size025) var(--size050);
+  box-sizing: content-box;
   &.active {
     color: var(--color-amber);
+    &:hover,
+    &:active,
+    &:focus {
+      color: var(--color-amber);
+    }
   }
 
   .icon {
@@ -38,8 +54,14 @@ const menuItemStyle = css`
   &:focus {
     background-color: var(--color-canvas);
     color: var(--color-textLinkHover);
-    border: medium none;
     cursor: pointer;
+  }
+
+  &:active,
+  &:focus {
+    transition: none;
+    color: var(--color-navCurrentTabText);
+    outline: 1px auto var(--color-navCurrentTab);
   }
 `
 
@@ -55,15 +77,11 @@ const MenuItem = ({ label, icon, onClick, active }) => {
 }
 
 export function ItemActions({ menuItems, showActions, type }) {
-  return (
+  return showActions || type === 'list' ? (
     <div className={`${itemActionStyle} item-actions`}>
-      {showActions || type === 'list' ? (
-        <>
-          {menuItems.map((props) => (
-            <MenuItem key="key" {...props} />
-          ))}{' '}
-        </>
-      ) : null}
+      {menuItems.map((props) => (
+        <MenuItem key="key" {...props} />
+      ))}
     </div>
-  )
+  ) : null
 }
