@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
 import Link from 'next/link'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import {
   ArrowLeftIcon,
   HighlightIcon,
@@ -17,7 +17,6 @@ import {
 } from '@pocket/web-ui'
 import { DisplaySettings } from 'components/display-settings/display-settings'
 import { buttonReset } from 'components/buttons/button-reset'
-import classNames from 'classnames'
 import {
   updateLineHeight,
   updateColumnWidth,
@@ -46,6 +45,15 @@ const navStyle = css`
   justify-content: space-between;
   height: 100%;
   padding: 0 var(--spacing250);
+
+  .nav-actions {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+  }
+
   span[tooltip] {
     background: transparent;
   }
@@ -64,6 +72,11 @@ const buttonStyles = css`
   color: var(--color-textSecondary);
   font-size: var(--size150);
   cursor: pointer;
+
+  &.go-back {
+    padding-right: 24px;
+  }
+
   &:hover {
     color: var(--color-textPrimary);
     background-color: transparent;
@@ -102,13 +115,10 @@ export const ReaderNav = ({
   const setLineHeight = (val) => dispatch(updateLineHeight(val))
   const setColumnWidth = (val) => dispatch(updateColumnWidth(val))
   const goBack = () => {
-    if (history.length > 1) {
-      history.go(-1)
-    }
-    else {
-      document.location.href = '/my-list'
-    }
+    if (window.history.length > 1) return window.history.go(-1)
+    document.location.href = '/my-list'
   }
+  const buttonClass = cx(buttonReset, buttonStyles)
 
   return (
     <header className={headerStyle}>
@@ -116,26 +126,20 @@ export const ReaderNav = ({
         <nav className={navStyle}>
           <WithTooltip label="Back to My List">
             {/*'reader.topNav.back'*/}
-            <button
-              onClick={goBack}
-              className={classNames(buttonReset, buttonStyles)}>
+            <button onClick={goBack} className={cx(buttonClass, 'go-back')}>
               <ArrowLeftIcon />
             </button>
           </WithTooltip>
 
-          <div>
+          <div className="nav-actions">
             <WithTooltip label="Open Highlights Menu">
-              <button
-                onClick={toggleSidebar}
-                className={classNames(buttonReset, buttonStyles)}>
+              <button onClick={toggleSidebar} className={buttonClass}>
                 <HighlightIcon />
               </button>
             </WithTooltip>
 
             <WithTooltip label="Tag Article">
-              <button
-                onClick={toggleTagging}
-                className={classNames(buttonReset, buttonStyles)}>
+              <button onClick={toggleTagging} className={buttonClass}>
                 <TagIcon />
               </button>
             </WithTooltip>
@@ -143,31 +147,25 @@ export const ReaderNav = ({
             <WithTooltip label="Favorite Article">
               <button
                 onClick={toggleFavorite}
-                className={classNames(buttonReset, buttonStyles, { favorite })}>
+                className={cx(buttonClass, favorite && 'favorite')}>
                 {favorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
               </button>
             </WithTooltip>
 
             <WithTooltip label="Archive Article">
-              <button
-                onClick={archiveItem}
-                className={classNames(buttonReset, buttonStyles)}>
+              <button onClick={archiveItem} className={buttonClass}>
                 {archive ? <AddCircledIcon /> : <ArchiveIcon />}
               </button>
             </WithTooltip>
 
             <WithTooltip label="Delete from Library">
-              <button
-                onClick={toggleDelete}
-                className={classNames(buttonReset, buttonStyles)}>
+              <button onClick={toggleDelete} className={buttonClass}>
                 <DeleteIcon />
               </button>
             </WithTooltip>
 
             <WithTooltip label="Share Article">
-              <button
-                onClick={toggleShare}
-                className={classNames(buttonReset, buttonStyles)}>
+              <button onClick={toggleShare} className={buttonClass}>
                 <IosShareIcon />
               </button>
             </WithTooltip>
