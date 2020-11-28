@@ -17,6 +17,8 @@ import { userTokenValidate } from 'connectors/user/user.state'
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
 import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 
+import { listModeSet } from 'connectors/app/app.state'
+
 /** Setup Files
  --------------------------------------------------------------- */
 import { sentrySettings } from 'common/setup/sentry'
@@ -53,8 +55,8 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // Check cookies (these are first party cookies)
     const cookies = parseCookies()
-    const { pkt_request_code, pkt_access_token, sess_guid } = cookies
-
+    const { pkt_request_code, pkt_access_token, sess_guid, list_mode } = cookies
+    dispatch(listModeSet(list_mode))
     /**
      * First time user
      * --------------------------------------------------------------

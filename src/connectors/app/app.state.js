@@ -1,12 +1,14 @@
-import { takeLatest, put } from 'redux-saga/effects'
+import { takeLatest, put, select } from 'redux-saga/effects'
 import { APP_DEV_MODE_TOGGLE } from 'actions'
 import { APP_SET_BASE_URL } from 'actions'
 import { APP_SET_MODE } from 'actions'
 import { APP_SET_SECTION } from 'actions'
 import { APP_LIST_MODE_TOGGLE } from 'actions'
+import { APP_LIST_MODE_SET } from 'actions'
 import { APP_SORT_ORDER_TOGGLE } from 'actions'
 import { ITEMS_BULK_CLEAR } from 'actions'
 import { HYDRATE } from 'actions'
+import { setCookie } from 'nookies'
 
 const initialState = {
   devMode: false,
@@ -15,6 +17,8 @@ const initialState = {
   sortOrder: 'newest'
 }
 
+const yearInMs = 60 * 60 * 24 * 365
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const devModeToggle = () => ({ type: APP_DEV_MODE_TOGGLE })
@@ -22,6 +26,7 @@ export const appSetBaseURL = (baseURL) => ({ type: APP_SET_BASE_URL, baseURL })
 export const appSetMode = (mode) => ({ type: APP_SET_MODE, mode })
 export const appSetSection = (section) => ({ type: APP_SET_SECTION, section })
 export const listModeToggle = () => ({ type: APP_LIST_MODE_TOGGLE })
+export const listModeSet = (listMode) => ({ type: APP_LIST_MODE_SET, listMode}) //prettier-ignore
 export const sortOrderToggle = () => ({ type: APP_SORT_ORDER_TOGGLE })
 
 /** REDUCERS
@@ -33,8 +38,8 @@ export const appReducers = (state = initialState, action) => {
       return { ...state, devMode: !devModeState }
     }
 
-    case APP_LIST_MODE_TOGGLE: {
-      const listMode = state.listMode === 'grid' ? 'list' : 'grid'
+    case APP_LIST_MODE_SET: {
+      const { listMode } = action
       return { ...state, listMode }
     }
 
@@ -76,12 +81,24 @@ export const appReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-
-export const appSagas = [takeLatest(APP_SET_MODE, appModeSwitch)]
+export const appSagas = [
+  takeLatest(APP_SET_MODE, appModeSwitch),
+  takeLatest(APP_LIST_MODE_TOGGLE, appListModeToggle)
+]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
+const getListMode = (state) => state.app.listMode
+
 function* appModeSwitch(action) {
   const { mode } = action
   if (mode !== 'bulk') yield put({ type: ITEMS_BULK_CLEAR })
+}
+
+function* appListModeToggle() {
+  const listMode = yield select(getListMode)
+  const newListMode = listMode === 'grid' ? 'list' : 'grid'
+  setCookie(null, 'list_mode', newListMode, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
+
+  yield put({ type: APP_LIST_MODE_SET, listMode: newListMode })
 }
