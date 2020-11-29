@@ -17,12 +17,18 @@ import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
 
 export default function Collection(props) {
-  const { metaData = {}, subset = 'active', filter } = props
+  const { metaData = {}, subset: sub = 'active', filter: propFilter } = props
 
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const section = filter ? subset + filter : subset
+  const { tag, filter: queryFilter } = router.query
+  const subset = tag ? 'tag' : sub
+  const filter = tag ? queryFilter : propFilter
+  const selector = tag ? tag : sub
+
+  const section = filter ? selector + filter : selector
+
   const items = useSelector((state) => state.myList[section])
   const offset = useSelector((state) => state.myList[`${section}Offset`])
   const total = useSelector((state) => state.myList[`${section}Total`])
@@ -44,7 +50,7 @@ export default function Collection(props) {
   useEffect(() => {
     const handleFocus = () => {
       if (!since) return
-      dispatch(updateMyListData(since, subset, filter))
+      dispatch(updateMyListData(since, subset, filter, tag))
     }
 
     // Adding new event listeners
@@ -53,7 +59,7 @@ export default function Collection(props) {
     return () => {
       window.removeEventListener('focus', handleFocus)
     }
-  }, [since, subset, filter, dispatch])
+  }, [since, subset, filter, tag, dispatch])
 
   /**
    * Get initial list items. This should only fire once per page load
@@ -62,9 +68,17 @@ export default function Collection(props) {
    */
   useEffect(() => {
     if (initialItemsPopulated || userStatus === 'pending') return
-    dispatch(getMylistData(18, 0, subset, filter))
+    dispatch(getMylistData(18, 0, subset, filter, tag))
     dispatch(appSetSection(section))
-  }, [userStatus, initialItemsPopulated, subset, filter, section, dispatch])
+  }, [
+    userStatus,
+    initialItemsPopulated,
+    subset,
+    filter,
+    section,
+    tag,
+    dispatch
+  ])
 
   /**
    * Update list if we are navigating here from another area in the app
@@ -74,8 +88,8 @@ export default function Collection(props) {
     if (!routeChange || !initialItemsPopulated || !since) return
     // If items are already in place, we want to know if anything has changed
     // since the last time we fetched the list (operations in other pages or apps)
-    dispatch(updateMyListData(since, subset, filter))
-  }, [routeChange, initialItemsPopulated, dispatch, since, subset, filter])
+    dispatch(updateMyListData(since, subset, filter, tag))
+  }, [routeChange, initialItemsPopulated, dispatch, since, subset, filter, tag])
 
   // useEffect(trackPageView, [])
 
@@ -83,7 +97,10 @@ export default function Collection(props) {
    * FUNCTIONAL ACTIONS
    * ------------------------------------------------------------------------
    */
-  const loadMore = () => dispatch(getMylistData(45, offset, subset, filter))
+  const loadMore = () => {
+    dispatch(getMylistData(45, offset, subset, filter, tag))
+  }
+
   const shouldRender = userStatus !== 'pending'
 
   const type = listMode
@@ -96,7 +113,7 @@ export default function Collection(props) {
         <main className="main">
           {isLoggedIn ? (
             <>
-              <MyListHeader subset={subset} filter={filter} />
+              <MyListHeader subset={selector} filter={filter} />
               {items?.length ? (
                 <VirtualizedList
                   type={type}

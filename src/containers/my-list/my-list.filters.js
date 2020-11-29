@@ -84,19 +84,20 @@ export function filterByVideosFavorites(item) {
  * Favorites
  * ---------------------------------------------------------
  */
-export function filterByTags(item) {
-  return item.tags
+export function filterByTags(item, tag) {
+  const itemTags = item.tags ? Object.keys(item.tags) : []
+  return itemTags.includes(tag)
 }
-export function filterByTagsUnread(item) {
-  return item.status === '0' && item.tags
-}
-
-export function filterByTagsArchived(item) {
-  return item.status === '1' && item.tags
+export function filterByTagsUnread(item, tag) {
+  return item.status === '0' && filterByTags(item, tag)
 }
 
-export function filterByTagsFavorites(item) {
-  return item.favorite === '1' && item.tags
+export function filterByTagsArchived(item, tag) {
+  return item.status === '1' && filterByTags(item, tag)
+}
+
+export function filterByTagsFavorites(item, tag) {
+  return item.favorite === '1' && filterByTags(item, tag)
 }
 
 /**
@@ -131,7 +132,7 @@ export function filterSelector(subset, filter) {
     if (filter === 'favorites') return filterByVideosFavorites
     return filterByVideos
   }
-  if (subset === 'tags') {
+  if (subset === 'tag') {
     if (filter === 'unread') return filterByTagsUnread
     if (filter === 'archive') return filterByTagsArchived
     if (filter === 'favorites') return filterByTagsFavorites

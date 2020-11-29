@@ -30,11 +30,11 @@ import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getMylistData = (count, offset, subset, filter, sort) => ({ type: MYLIST_DATA_REQUEST, count, offset, subset, sort, filter}) //prettier-ignore
+export const getMylistData = (count, offset, subset, filter, tag, sort) => ({ type: MYLIST_DATA_REQUEST, count, offset, subset, sort, filter, tag}) //prettier-ignore
+export const updateMyListData = (since, subset, filter, tag) => ({ type: MYLIST_UPDATE_REQUEST, since, subset, filter, tag}) //prettier-ignore
 export const hydrateMylist = (hydrated) => ({ type: MYLIST_HYDRATE, hydrated }) //prettier-ignore
 export const saveMylistItem = (id, url, position) => ({type: MYLIST_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const unSaveMylistItem = (id) => ({ type: MYLIST_UNSAVE_REQUEST, id }) //prettier-ignore
-export const updateMyListData = (since, subset, filter) => ({ type: MYLIST_UPDATE_REQUEST, since, subset, filter }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -141,8 +141,11 @@ const initialState = {
 export const myListReducers = (state = initialState, action) => {
   switch (action.type) {
     case MYLIST_DATA_SUCCESS: {
-      const { items, offset, subset, total, filter, since } = action
-      const section = filter ? subset + filter : subset
+      const { items, offset, subset, total, filter, since, tag } = action
+      const selector = tag ? tag : subset
+
+      const section = filter ? selector + filter : selector
+
       return {
         ...state,
         [section]: items,
@@ -153,8 +156,9 @@ export const myListReducers = (state = initialState, action) => {
     }
 
     case MYLIST_UPDATE_SUCCESS: {
-      const { items, subset, filter, since } = action
-      const section = filter ? subset + filter : subset
+      const { items, subset, filter, since, tag } = action
+      const selector = tag ? tag : subset
+      const section = filter ? selector + filter : selector
       return {
         ...state,
         [section]: items,
@@ -225,6 +229,7 @@ function* myListDataRequest(action) {
       offset = 0,
       sort = 'newest',
       subset = 'active',
+      tag,
       filter
     } = action
 
@@ -237,6 +242,7 @@ function* myListDataRequest(action) {
     if (subset === 'highlights') parameters.hasAnnotations = 1
     if (subset === 'articles') parameters.contentType = 'article'
     if (subset === 'videos') parameters.contentType = 'video'
+    if (subset === 'tag') parameters.tag = tag
 
     // Apply filters
     if (filter === 'active') parameters.state = 'unread'
@@ -256,9 +262,10 @@ function* myListDataRequest(action) {
     const itemsByIdDraft = { ...existingItemsById, ...itemsById }
 
     const filterFunction = filterSelector(subset, filter)
+
     const sortFunction = sortSelector(subset, 'newest') //TODO: hook this to selector
     const items = Object.values(itemsByIdDraft)
-      .filter(filterFunction)
+      .filter((item) => filterFunction(item, tag))
       .sort(sortFunction)
       .map((item) => item.item_id)
 
@@ -271,6 +278,7 @@ function* myListDataRequest(action) {
       offset: newOffset,
       subset,
       filter,
+      tag,
       total,
       since
     })
@@ -282,7 +290,7 @@ function* myListDataRequest(action) {
 
 function* myListUpdate(action) {
   try {
-    const { since, subset = 'active', filter } = action
+    const { since, subset = 'active', filter, tag } = action
     const data = yield fetchMyListUpdate({ since })
 
     // No updates so simply return
@@ -301,7 +309,7 @@ function* myListUpdate(action) {
     const filterFunction = filterSelector(subset)
     const sortFunction = sortSelector(subset, 'newest') //TODO: hook this to selector
     const items = Object.values(itemsById)
-      .filter(filterFunction)
+      .filter((item) => filterFunction(item, tag))
       .sort(sortFunction)
       .map((item) => item.item_id)
 
@@ -312,6 +320,7 @@ function* myListUpdate(action) {
       itemsById,
       subset,
       filter,
+      tag,
       since: updatedSince
     })
   } catch (error) {
