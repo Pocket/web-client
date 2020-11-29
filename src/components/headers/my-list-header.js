@@ -42,7 +42,7 @@ const myListHeaderStyle = css`
 export const MyListHeader = ({ subset, filter }) => {
   return subset ? (
     <header className={myListHeaderStyle}>
-      <h1 className="pageTitle">My List: {capitalizeFirstLetter(subset)}</h1>
+      <h1 className="pageTitle">{capitalizeFirstLetter(subset)}</h1>
       <FilterMenu subset={subset} filter={filter} />
     </header>
   ) : null
