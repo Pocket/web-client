@@ -9,6 +9,7 @@ import { getMylistData } from './my-list.state'
 import { updateMyListData } from './my-list.state'
 import { appSetSection } from 'connectors/app/app.state'
 import { MyListHeader } from 'components/headers/my-list-header'
+import { TagPageHeader } from 'components/headers/tag-page-header'
 import { VirtualizedList } from 'components/items-layout/virtualized-list'
 import { SideNav } from 'components/side-nav/side-nav'
 import { CallOutBrand } from 'components/call-out/call-out-brand'
@@ -105,6 +106,8 @@ export default function Collection(props) {
 
   const type = listMode
 
+  const Header = tag ? TagPageHeader : MyListHeader
+
   return (
     <Layout title={metaData.title} metaData={metaData}>
       <SideNav subset={subset} isLoggedIn={isLoggedIn} />
@@ -113,7 +116,12 @@ export default function Collection(props) {
         <main className="main">
           {isLoggedIn ? (
             <>
-              <MyListHeader subset={selector} filter={filter} />
+              <Header
+                subset={subset}
+                title={selector}
+                filter={filter}
+                tag={tag}
+              />
               {items?.length ? (
                 <VirtualizedList
                   type={type}

@@ -39,11 +39,11 @@ const myListHeaderStyle = css`
   }
 `
 
-export const MyListHeader = ({ subset, filter, title }) => {
+export const TagPageHeader = ({ subset, filter, title, tag }) => {
   return subset ? (
     <header className={myListHeaderStyle}>
-      <h1 className="pageTitle">{capitalizeFirstLetter(title)}</h1>
-      <FilterMenu subset={subset} filter={filter} />
+      <h1 className="pageTitle">Tag: {capitalizeFirstLetter(title)}</h1>
+      <FilterMenu subset={subset} filter={filter} tag={tag} />
     </header>
   ) : null
 }
