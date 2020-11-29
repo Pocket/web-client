@@ -46,7 +46,7 @@ export function TagList({ userTags, value, valueChange }) {
       <div className={pillboxStyle}>
         <ul className="list">
           <li>
-            <Link href={'/my-list/tags/untagged'}>
+            <Link href={'/my-list/tags/_untagged_'}>
               <a>
                 <Pill>un-tagged</Pill>
               </a>
