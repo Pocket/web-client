@@ -42,7 +42,7 @@ export function sortSelector(type, direction) {
     highlights: 'default',
     articles: 'default',
     videos: 'default',
-    tags: 'default'
+    tag: 'default'
   }
 
   const sortType = sortTypes[type]
