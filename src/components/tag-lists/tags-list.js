@@ -15,12 +15,15 @@ const allTagStyle = css`
     }
   }
   .list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 1em;
-    grid-row-gap: 0.5em;
+    column-count: 3;
+    li {
+      display: block;
+    }
     a {
       display: block;
+      button {
+        width: 100%;
+      }
     }
   }
 `
@@ -41,7 +44,7 @@ export function TagList({ userTags, value, valueChange }) {
         />
       </div>
       <div className={pillboxStyle}>
-        <ul>
+        <ul className="list">
           <li>
             <Link href={'/my-list/tags/untagged'}>
               <a>
