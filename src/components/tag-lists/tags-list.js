@@ -15,10 +15,6 @@ const allTagStyle = css`
     }
   }
   .list {
-    column-count: 3;
-    li {
-      display: block;
-    }
     a {
       display: block;
       button {
