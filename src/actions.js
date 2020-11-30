@@ -1,3 +1,5 @@
+// QA = true
+
 // Special action fired on client side to pass state used on the server side
 export { HYDRATE } from 'next-redux-wrapper'
 
