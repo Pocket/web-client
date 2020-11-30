@@ -57,7 +57,12 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // Check cookies (these are first party cookies)
     const cookies = parseCookies()
-    const { pkt_request_code, pkt_access_token, sess_guid, list_mode } = cookies
+    const {
+      pkt_request_code,
+      pkt_access_token,
+      sess_guid,
+      list_mode = 'grid'
+    } = cookies
     dispatch(listModeSet(list_mode))
     /**
      * First time user
