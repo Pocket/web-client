@@ -1,4 +1,5 @@
-import { put, call, takeEvery, take, race } from 'redux-saga/effects'
+import { put, call, takeEvery, select } from 'redux-saga/effects'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
 import { sendItemActions } from 'common/api/item-actions'
 import { fetchStoredTags } from 'common/api/tags'
 import { fetchMyListData } from 'containers/my-list/my-list.state'
@@ -7,7 +8,10 @@ import { USER_TAGS_GET_REQUEST } from 'actions'
 import { USER_TAGS_GET_SUCCESS } from 'actions'
 import { USER_TAGS_GET_FAILURE } from 'actions'
 import { USER_TAGS_ITEM_SUCCESS } from 'actions'
+import { USER_TAGS_PIN } from 'actions'
+import { USER_TAGS_PINS_SET } from 'actions'
 
+import { USER_TAGS_HYDRATE } from 'actions'
 import { USER_TAGS_EDIT } from 'actions'
 import { USER_TAGS_EDIT_CONFIRM } from 'actions'
 import { USER_TAGS_EDIT_CANCEL } from 'actions'
@@ -20,11 +24,15 @@ import { API_ACTION_TAG_DELETE } from 'common/constants'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getUserTags = () => ({ type: USER_TAGS_GET_REQUEST }) //prettier-ignore
+export const pinUserTag = (tag) => ({ type: USER_TAGS_PIN, tag })
+export const editUserTag = (tag) => ({ type: USER_TAGS_EDIT, tag })
+export const hydrateUserTags = () => ({ type: USER_TAGS_HYDRATE })
 
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
   recentTags: [],
+  pinnedTags: [],
   tagsList: [],
   tagsWithItems: {},
   itemsWithTags: [],
@@ -55,6 +63,11 @@ export const userTagsReducers = (state = initialState, action) => {
     case USER_TAGS_GET_FAILURE: {
       return { ...state, tagToEdit: null }
     }
+
+    case USER_TAGS_PINS_SET: {
+      const { pins } = action
+      return { ...state, pinnedTags: pins }
+    }
     default:
       return state
   }
@@ -62,7 +75,16 @@ export const userTagsReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-export const userTagsSagas = [takeEvery(USER_TAGS_GET_REQUEST, userTagsRequest)]
+export const userTagsSagas = [
+  takeEvery(USER_TAGS_GET_REQUEST, userTagsRequest),
+  takeEvery(USER_TAGS_PIN, userTagsTogglePin),
+  takeEvery(USER_TAGS_EDIT, userTagsEdit),
+  takeEvery(USER_TAGS_HYDRATE, userTagsHydrate)
+]
+
+/* SAGAS :: SELECTORS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+const getPinnedTags = (state) => state.userTags.pinnedTags
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -113,6 +135,24 @@ function* userTagsRequest() {
   })
 }
 
-// function buildActions(items, action) {
-//   return items.map((item) => ({ action, item_id: item.id }))
-// }
+function* userTagsTogglePin(actions) {
+  const { tag } = actions
+  const pinnedTags = yield select(getPinnedTags)
+  const isPinned = pinnedTags.includes(tag)
+  const tags = pinnedTags.slice()
+  const draft = isPinned
+    ? tags.filter((current) => current !== tag)
+    : [...tags, tag]
+
+  localStore.setItem('user_tags_pinned', JSON.stringify(draft))
+  yield put({ type: USER_TAGS_PINS_SET, pins: draft })
+}
+
+function* userTagsEdit(actions) {
+  yield console.log(actions)
+}
+
+function* userTagsHydrate() {
+  const pinnedItems = JSON.parse(localStore.getItem('user_tags_pinned')) || []
+  yield put({ type: USER_TAGS_PINS_SET, pins: pinnedItems })
+}

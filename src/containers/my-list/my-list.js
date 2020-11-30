@@ -11,7 +11,7 @@ import { appSetSection } from 'connectors/app/app.state'
 import { MyListHeader } from 'components/headers/my-list-header'
 import { TagPageHeader } from './tags-page/tag-page-header'
 import { VirtualizedList } from 'components/items-layout/virtualized-list'
-import { SideNav } from 'components/side-nav/side-nav'
+import { SideNav } from 'connectors/side-nav/side-nav'
 import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
@@ -110,7 +110,7 @@ export default function Collection(props) {
 
   return (
     <Layout title={metaData.title} metaData={metaData}>
-      <SideNav subset={subset} isLoggedIn={isLoggedIn} />
+      <SideNav subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
 
       {shouldRender ? (
         <main className="main">

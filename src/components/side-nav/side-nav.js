@@ -14,8 +14,9 @@ export const sideNavWrapper = css`
   position: relative;
   grid-column: span 2;
   min-height: 50vh;
+  max-width: 165px;
   .top-nav {
-    position: fixed;
+    /* position: fixed; */
   }
   .bottom-nav {
   }
@@ -26,9 +27,9 @@ export const sideNavHeader = css`
   font-size: var(--fontSize100);
   font-weight: 500;
   line-height: 0.8;
-  padding: 20px 20px 10px;
+  padding: var(--spacing050);
   margin: 5px 0;
-  color: var(--color-grey65); /* ! Don't use colors direct */
+  color: var(--color-textTertiary);
 `
 
 export const sideNavItem = css`
@@ -36,7 +37,7 @@ export const sideNavItem = css`
   align-items: center;
   align-content: center;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 var(--size050);
   font-size: var(--fontSize100);
   font-weight: 400;
   line-height: 24px;
@@ -46,6 +47,17 @@ export const sideNavItem = css`
   text-decoration: none;
   color: var(--color-textPrimary);
   background-color: transparent;
+
+  &.tag-class {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: var(--fontSize085);
+    text-align: left;
+    padding: var(--spacing025) var(--spacing050);
+    height: initial;
+  }
 
   .side-nav-icon {
     height: 24px;
@@ -69,10 +81,12 @@ export const sideNavItem = css`
   }
 `
 
-export function SideNav({ subset, home, isLoggedIn }) {
-  const subActive = (sub) => {
-    const activeClass = sub === subset ? 'active' : ''
-    return `${sideNavItem} ${activeClass}`
+export function SideNav({ subset, tag, pinnedTags }) {
+  const subActive = (active, isTag) => {
+    const isActive = tag ? active === tag : active === subset
+    const activeClass = isActive ? 'active' : ''
+    const tagClass = isTag ? 'tag-class' : ''
+    return `${sideNavItem} ${activeClass} ${tagClass}`
   }
 
   return (
@@ -88,11 +102,7 @@ export function SideNav({ subset, home, isLoggedIn }) {
             <ArchiveIcon className="side-nav-icon" /> Archive
           </button>
         </Link>
-        <Link href="/my-list/tags">
-          <button className={subActive('tags')}>
-            <TagIcon className="side-nav-icon" /> Tags
-          </button>
-        </Link>
+
         <div className={sideNavHeader}>Filters</div>
 
         <Link href="/my-list/favorites">
@@ -118,8 +128,22 @@ export function SideNav({ subset, home, isLoggedIn }) {
             <VideoIcon className="side-nav-icon" /> Videos
           </button>
         </Link>
+        <div className={sideNavHeader}>Tags</div>
+        <Link href="/my-list/tags">
+          <button className={subActive('tag')}>
+            <TagIcon className="side-nav-icon" /> All Tags
+          </button>
+        </Link>
+        {pinnedTags.length
+          ? pinnedTags.map((tag) => {
+              return (
+                <Link href={`/my-list/tags/${tag}`} key={tag}>
+                  <button className={subActive(tag, true)}>{tag}</button>
+                </Link>
+              )
+            })
+          : null}
       </nav>
-
       <div className="bottom-nav"></div>
     </div>
   )

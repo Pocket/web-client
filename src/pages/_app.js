@@ -17,6 +17,8 @@ import { userTokenValidate } from 'connectors/user/user.state'
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
 import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 
+import { hydrateUserTags } from 'containers/my-list/tags-page/tags-page.state'
+
 import { listModeSet } from 'connectors/app/app.state'
 
 /** Setup Files
@@ -136,12 +138,14 @@ function PocketWebClient({ Component, pageProps, err }) {
     dispatch(trackPageView())
 
     // Set up Google Analytics
-
     ReactGA.initialize(GOOGLE_ANALYTICS_ID)
     ReactGA.pageview(path)
 
     // Load OptinMonster
     // loadOptinMonster()
+
+    // Hydrate locally stored values
+    dispatch(hydrateUserTags())
 
     // signal to Cypress that React client side has loaded
     // Make sure this is the last thing we fire
