@@ -37,6 +37,13 @@ export const cardGrid = css`
     .item-actions {
       width: 100%;
     }
+    .actions {
+      opacity: 0;
+    }
+
+    &:hover .actions {
+      opacity: 1;
+    }
     .footer {
       position: absolute;
       bottom: -12px;
@@ -141,7 +148,7 @@ export function VirtualizedList({ type, items, actions, loadMore }) {
 
   // Set up state to track for virtualization
   const [height, columnCount] = type === 'list' ? [75, 1] : [367, 3] //row-gap = 24
-  const itemOnScreen = type === 'list' ? 30 : 20 // total items to render minus one
+  const itemOnScreen = type === 'list' ? 25 : 20 // total items to render minus one
 
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
@@ -226,6 +233,7 @@ export function VirtualizedList({ type, items, actions, loadMore }) {
   }, [type])
 
   const { itemsToShow, paddingTop, listHeight } = list
+
   return (
     // Create a list container with the appropriate classnames
     <div
@@ -240,12 +248,13 @@ export function VirtualizedList({ type, items, actions, loadMore }) {
           height: `${listHeight}px`
         }}>
         <div className={sectionTypes[type]}>
-          {itemsToShow.map((id, index) => {
+          {itemsToShow.map((id) => {
+            const positionOfItem = items.indexOf(id)
             return (
               <MemoizedItem
                 id={id}
                 key={id}
-                position={index}
+                position={positionOfItem}
                 type={type}
                 {...actions}
               />

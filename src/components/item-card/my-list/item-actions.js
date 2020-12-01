@@ -76,12 +76,12 @@ const MenuItem = ({ label, icon, onClick, active }) => {
   )
 }
 
-export function ItemActions({ menuItems, showActions, type }) {
-  return showActions || type === 'list' ? (
+export function ItemActions({ menuItems }) {
+  return (
     <div className={`${itemActionStyle} item-actions`}>
       {menuItems.map((props) => (
         <MenuItem key="key" {...props} />
       ))}
     </div>
-  ) : null
+  )
 }

@@ -210,10 +210,6 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
     itemBulkDeSelect
   } = actions
 
-  const [showActions, setShowActions] = useState(false)
-  const actionsShow = () => setShowActions(true)
-  const actionsHide = () => setShowActions(false)
-
   const cardClass = cx(
     card,
     bulkEdit && 'bulkEdit',
@@ -243,9 +239,7 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
       className={cardClass}
       key={id}
       {...testIdAttribute(`article-card-${id}`)}
-      onClick={selectBulk}
-      onMouseEnter={actionsShow}
-      onMouseLeave={actionsHide}>
+      onClick={selectBulk}>
       <div className="bulkBacking" />
       <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
         <span className="idOverlay">{id}</span>
@@ -277,7 +271,7 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
             )
           ) : (
             <ItemActions
-              showActions={showActions}
+              showActions={true}
               type={type}
               menuItems={[
                 {
