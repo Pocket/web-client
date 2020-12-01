@@ -3,7 +3,7 @@ import { WithTooltip } from '@pocket/web-ui'
 
 const itemActionStyle = css`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   align-content: center;
   background-color: var(--color-canvas);
@@ -19,7 +19,6 @@ const itemActionStyle = css`
     height: 10px;
     display: block;
     border-radius: 0 0 4px 4px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   }
 `
 
