@@ -26,6 +26,9 @@ import { ITEMS_UNARCHIVE_REQUEST } from 'actions'
 import { ITEMS_DELETE_SEND } from 'actions'
 import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
 
+import { APP_SORT_ORDER_TOGGLE } from 'actions'
+import { APP_SORT_ORDER_SET } from 'actions'
+
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
@@ -177,6 +180,10 @@ export const myListReducers = (state = initialState, action) => {
       return { ...state, ...hydrated }
     }
 
+    case APP_SORT_ORDER_TOGGLE: {
+      return initialState
+    }
+
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE:
@@ -218,22 +225,20 @@ export const myListSagas = [
   // takeEvery(MYLIST_DATA_FAILURE, mylistUnSaveRequest)
 ]
 
+/** SAGA :: SELECTORS
+ --------------------------------------------------------------- */
+const getSortOrder = (state) => state.app.sortOrder
+const getMyListItemsById = (state) => state.myListItemsById
+
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-export const getMyListItemsById = (state) => state.myListItemsById
 
 function* myListDataRequest(action) {
   try {
-    const {
-      count = 15,
-      offset = 0,
-      sort = 'newest',
-      subset = 'active',
-      tag,
-      filter
-    } = action
+    const { count = 15, offset = 0, subset = 'active', tag, filter } = action
 
     const parameters = {}
+    const sortOrder = yield select(getSortOrder)
 
     // Set appropriate subset
     if (subset === 'unread') parameters.state = 'unread'
@@ -252,7 +257,7 @@ function* myListDataRequest(action) {
     const { itemsById, total, since, error } = yield fetchMyListData({
       count,
       offset,
-      sort,
+      sort: sortOrder,
       ...parameters
     })
 
@@ -263,7 +268,7 @@ function* myListDataRequest(action) {
 
     const filterFunction = filterSelector(subset, filter)
 
-    const sortFunction = sortSelector(subset, 'newest') //TODO: hook this to selector
+    const sortFunction = sortSelector(subset, sortOrder) //TODO: hook this to selector
     const items = Object.values(itemsByIdDraft)
       .filter((item) => filterFunction(item, tag))
       .sort(sortFunction)
@@ -291,6 +296,8 @@ function* myListDataRequest(action) {
 function* myListUpdate(action) {
   try {
     const { since, subset = 'active', filter, tag } = action
+    const sortOrder = yield select(getSortOrder)
+
     const data = yield fetchMyListUpdate({ since })
 
     // No updates so simply return
@@ -307,7 +314,7 @@ function* myListUpdate(action) {
     const itemsById = { ...existingItemsById, ...updatedItemsById }
 
     const filterFunction = filterSelector(subset)
-    const sortFunction = sortSelector(subset, 'newest') //TODO: hook this to selector
+    const sortFunction = sortSelector(subset, sortOrder) //TODO: hook this to selector
     const items = Object.values(itemsById)
       .filter((item) => filterFunction(item, tag))
       .sort(sortFunction)

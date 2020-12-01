@@ -35,7 +35,9 @@ export default function Collection(props) {
   const total = useSelector((state) => state.myList[`${section}Total`])
   const since = useSelector((state) => state.myList[`${section}Since`])
   const listMode = useSelector((state) => state.app.listMode)
+  const sortOrder = useSelector((state) => state.app.sortOrder)
   const routeChange = useHasChanged(router.pathname)
+
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
 
@@ -75,6 +77,7 @@ export default function Collection(props) {
     userStatus,
     initialItemsPopulated,
     subset,
+    sortOrder,
     filter,
     section,
     tag,

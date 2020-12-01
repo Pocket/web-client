@@ -6,6 +6,8 @@ import { APP_SET_SECTION } from 'actions'
 import { APP_LIST_MODE_TOGGLE } from 'actions'
 import { APP_LIST_MODE_SET } from 'actions'
 import { APP_SORT_ORDER_TOGGLE } from 'actions'
+import { APP_SORT_ORDER_SET } from 'actions'
+
 import { ITEMS_BULK_CLEAR } from 'actions'
 import { HYDRATE } from 'actions'
 import { setCookie } from 'nookies'
@@ -14,7 +16,7 @@ const initialState = {
   devMode: false,
   mode: 'default',
   listMode: 'grid',
-  sortOrder: 'newest'
+  sortOrder: 'initial'
 }
 
 const yearInMs = 60 * 60 * 24 * 365
@@ -28,6 +30,7 @@ export const appSetSection = (section) => ({ type: APP_SET_SECTION, section })
 export const listModeToggle = () => ({ type: APP_LIST_MODE_TOGGLE })
 export const listModeSet = (listMode) => ({ type: APP_LIST_MODE_SET, listMode}) //prettier-ignore
 export const sortOrderToggle = () => ({ type: APP_SORT_ORDER_TOGGLE })
+export const sortOrderSet = (sortOrder) => ({type: APP_SORT_ORDER_SET, sortOrder}) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -43,8 +46,8 @@ export const appReducers = (state = initialState, action) => {
       return { ...state, listMode }
     }
 
-    case APP_SORT_ORDER_TOGGLE: {
-      const sortOrder = state.sortOrder === 'newest' ? 'oldest' : 'newest'
+    case APP_SORT_ORDER_SET: {
+      const { sortOrder } = action
       return { ...state, sortOrder }
     }
 
@@ -83,12 +86,14 @@ export const appReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const appSagas = [
   takeLatest(APP_SET_MODE, appModeSwitch),
-  takeLatest(APP_LIST_MODE_TOGGLE, appListModeToggle)
+  takeLatest(APP_LIST_MODE_TOGGLE, appListModeToggle),
+  takeLatest(APP_SORT_ORDER_TOGGLE, appSortOrderToggle)
 ]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 const getListMode = (state) => state.app.listMode
+const getSortOrder = (state) => state.app.sortOrder
 
 function* appModeSwitch(action) {
   const { mode } = action
@@ -101,4 +106,12 @@ function* appListModeToggle() {
   setCookie(null, 'list_mode', newListMode, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
 
   yield put({ type: APP_LIST_MODE_SET, listMode: newListMode })
+}
+
+function* appSortOrderToggle() {
+  const sortOrder = yield select(getSortOrder)
+  const newSortOrder = sortOrder === 'newest' ? 'oldest' : 'newest'
+  setCookie(null, 'sort_order', newSortOrder, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
+
+  yield put({ type: APP_SORT_ORDER_SET, sortOrder: newSortOrder })
 }

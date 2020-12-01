@@ -9,6 +9,7 @@ export const APP_SET_SECTION = 'APP_SET_SECTION'
 export const APP_LIST_MODE_TOGGLE = 'APP_LIST_MODE_TOGGLE'
 export const APP_LIST_MODE_SET = 'APP_LIST_MODE_SET'
 export const APP_SORT_ORDER_TOGGLE = 'APP_SORT_ORDER_TOGGLE'
+export const APP_SORT_ORDER_SET = 'APP_SORT_ORDER_SET'
 
 // User info/auth
 export const USER_HYDRATE = 'USER_HYDRATE'

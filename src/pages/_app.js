@@ -20,6 +20,7 @@ import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 import { hydrateUserTags } from 'containers/my-list/tags-page/tags-page.state'
 
 import { listModeSet } from 'connectors/app/app.state'
+import { sortOrderSet } from 'connectors/app/app.state'
 
 /** Setup Files
  --------------------------------------------------------------- */
@@ -61,9 +62,14 @@ function PocketWebClient({ Component, pageProps, err }) {
       pkt_request_code,
       pkt_access_token,
       sess_guid,
-      list_mode = 'grid'
+      list_mode = 'grid',
+      sort_order = 'newest'
     } = cookies
+
+    // Set up defaults/user pref in state
     dispatch(listModeSet(list_mode))
+    dispatch(sortOrderSet(sort_order))
+
     /**
      * First time user
      * --------------------------------------------------------------
