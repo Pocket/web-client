@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { css, cx } from 'linaria'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { urlWithPocketRedirect } from 'common/utilities'
@@ -271,8 +271,6 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
             )
           ) : (
             <ItemActions
-              showActions={true}
-              type={type}
               menuItems={[
                 {
                   key: `share-${id}`,
