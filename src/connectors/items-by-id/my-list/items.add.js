@@ -1,7 +1,5 @@
 import { put, call, takeEvery } from 'redux-saga/effects'
 import { sendItemActions } from 'common/api/item-actions'
-import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
-import { arrayToObject } from 'common/utilities'
 
 import { ITEMS_ADD_REQUEST } from 'actions'
 import { ITEMS_ADD_SUCCESS } from 'actions'
@@ -28,7 +26,6 @@ export function* itemAdd(action) {
 
     // Catch a null response OR a response with action_errors
     if (data?.action_errors[0] !== null) {
-      console.log('wat?', data)
       yield put({ type: ITEMS_ADD_FAILURE, errors: data?.action_errors })
       return
     }
