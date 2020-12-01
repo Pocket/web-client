@@ -15,7 +15,6 @@ import { ListViewIcon } from '@pocket/web-ui'
 import { SearchIcon } from '@pocket/web-ui'
 import { AddIcon } from '@pocket/web-ui'
 import { EditIcon } from '@pocket/web-ui'
-import { NotificationIcon } from '@pocket/web-ui'
 
 import { BASE_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities'

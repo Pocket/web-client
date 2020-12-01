@@ -42,7 +42,6 @@ export const myListItemsReducers = (state = initialState, action) => {
     case ITEMS_FAVORITE_SUCCESS:
     case ITEMS_UNFAVORITE_SUCCESS:
     case ITEMS_ARCHIVE_SUCCESS:
-    case ITEMS_ADD_SUCCESS:
     case ITEMS_DELETE_SUCCESS:
     case ITEMS_UNARCHIVE_SUCCESS: {
       const { actions } = action

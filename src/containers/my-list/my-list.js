@@ -30,6 +30,7 @@ export default function Collection(props) {
 
   const section = filter ? selector + filter : selector
 
+  const listState = useSelector((state) => state.myList.listState)
   const items = useSelector((state) => state.myList[section])
   const offset = useSelector((state) => state.myList[`${section}Offset`])
   const total = useSelector((state) => state.myList[`${section}Total`])
@@ -94,6 +95,17 @@ export default function Collection(props) {
     // since the last time we fetched the list (operations in other pages or apps)
     dispatch(updateMyListData(since, subset, filter, tag))
   }, [routeChange, initialItemsPopulated, dispatch, since, subset, filter, tag])
+
+  /**
+   * When an item is added we get back sub par data from the return
+   * In order to keep the list in sync, we will just trigger an update when the
+   * list becomes `dirty`
+   */
+  useEffect(() => {
+    if (listState === 'clean') return
+
+    dispatch(updateMyListData(since, subset, filter, tag))
+  }, [listState, since, subset, filter, tag, dispatch])
 
   // useEffect(trackPageView, [])
 

@@ -25,9 +25,9 @@ import { ITEMS_ARCHIVE_REQUEST } from 'actions'
 import { ITEMS_UNARCHIVE_REQUEST } from 'actions'
 import { ITEMS_DELETE_SEND } from 'actions'
 import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
+import { ITEMS_ADD_SUCCESS } from 'actions'
 
 import { APP_SORT_ORDER_TOGGLE } from 'actions'
-import { APP_SORT_ORDER_SET } from 'actions'
 
 import { HYDRATE } from 'actions'
 
@@ -49,6 +49,8 @@ export const unSaveMylistItem = (id) => ({ type: MYLIST_UNSAVE_REQUEST, id }) //
 // the whole list and derive data that way, but that will require a larger effort
 // to support something like indexDB (which I want to do)
 const initialState = {
+  listState: 'clean',
+
   // State for active list items
   unread: [],
   unreadOffset: 0,
@@ -164,6 +166,7 @@ export const myListReducers = (state = initialState, action) => {
       const section = filter ? selector + filter : selector
       return {
         ...state,
+        listState: 'clean',
         [section]: items,
         [`${section}Offset`]: items.length,
         [`${section}Since`]: since
@@ -178,6 +181,10 @@ export const myListReducers = (state = initialState, action) => {
     case MYLIST_HYDRATE: {
       const { hydrated } = action
       return { ...state, ...hydrated }
+    }
+
+    case ITEMS_ADD_SUCCESS: {
+      return { ...state, listState: 'dirty' }
     }
 
     case APP_SORT_ORDER_TOGGLE: {

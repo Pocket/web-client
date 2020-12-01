@@ -1,5 +1,7 @@
 import { put, call, takeEvery } from 'redux-saga/effects'
 import { sendItemActions } from 'common/api/item-actions'
+import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
+import { arrayToObject } from 'common/utilities'
 
 import { ITEMS_ADD_REQUEST } from 'actions'
 import { ITEMS_ADD_SUCCESS } from 'actions'
@@ -9,7 +11,7 @@ import { API_ACTION_ADD } from 'common/constants'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const itemAddAction = (payload) => ({ type: ITEMS_ADD_REQUEST, payload }) //prettier-ignore
+export const itemAddAction = (url) => ({ type: ITEMS_ADD_REQUEST, url }) //prettier-ignore
 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -19,12 +21,19 @@ export const itemAddSagas = [takeEvery(ITEMS_ADD_REQUEST, itemAdd)]
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export function* itemAdd(action) {
   try {
-    const { url, analytics } = action.payload
-    const actions = [{ action: API_ACTION_ADD, url, ...analytics }]
+    const { url } = action
+
+    const actions = [{ action: API_ACTION_ADD, url }]
     const data = yield call(sendItemActions, actions)
 
-    if (data) return yield put({ type: ITEMS_ADD_SUCCESS, data, actions })
-    yield put({ type: ITEMS_ADD_FAILURE })
+    // Catch a null response OR a response with action_errors
+    if (data?.action_errors[0] !== null) {
+      console.log('wat?', data)
+      yield put({ type: ITEMS_ADD_FAILURE, errors: data?.action_errors })
+      return
+    }
+
+    yield put({ type: ITEMS_ADD_SUCCESS })
   } catch (error) {
     console.log(error)
   }
