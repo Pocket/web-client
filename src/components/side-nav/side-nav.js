@@ -28,7 +28,7 @@ export const sideNavHeader = css`
   font-weight: 500;
   line-height: 0.8;
   padding: var(--spacing050);
-  margin: 5px 0;
+  margin: 25px 0 5px;
   color: var(--color-textTertiary);
 `
 
