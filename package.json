@@ -123,6 +123,6 @@
     "redux": "4.0.5",
     "redux-saga": "1.1.3",
     "storage-factory": "0.1.1",
-    "validator": "13.1.17"
+    "validator": "13.5.1"
   }
 }
