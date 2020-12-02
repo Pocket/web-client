@@ -1,4 +1,4 @@
-import { takeLatest, put, takeEvery, select } from 'redux-saga/effects'
+import { takeLatest, put, select } from 'redux-saga/effects'
 import { getMyList } from 'common/api/my-list'
 import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { arrayToObject } from 'common/utilities'
@@ -33,7 +33,7 @@ import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getMylistData = (count, offset, subset, filter, tag, sort) => ({ type: MYLIST_DATA_REQUEST, count, offset, subset, sort, filter, tag}) //prettier-ignore
+export const getMylistData = (count, offset, subset, filter, tag) => ({ type: MYLIST_DATA_REQUEST, count, offset, subset, filter, tag}) //prettier-ignore
 export const updateMyListData = (since, subset, filter, tag) => ({ type: MYLIST_UPDATE_REQUEST, since, subset, filter, tag}) //prettier-ignore
 export const hydrateMylist = (hydrated) => ({ type: MYLIST_HYDRATE, hydrated }) //prettier-ignore
 export const saveMylistItem = (id, url, position) => ({type: MYLIST_SAVE_REQUEST, id, url, position}) //prettier-ignore
