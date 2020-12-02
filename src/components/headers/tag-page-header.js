@@ -5,8 +5,8 @@ import { breakpointTinyTablet } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { capitalizeFirstLetter } from 'common/utilities'
-import { BookmarkFilledIcon } from '@pocket/web-ui'
-import { BookmarkIcon } from '@pocket/web-ui'
+import { PinFilledIcon } from '@pocket/web-ui'
+import { PinIcon } from '@pocket/web-ui'
 import { EditIcon } from '@pocket/web-ui'
 import { WithTooltip } from '@pocket/web-ui'
 import { buttonReset } from 'components/buttons/button-reset'
@@ -77,7 +77,7 @@ export const TagPageHeader = ({
       <div className="tag-actions">
         <WithTooltip label="Pin Tag" delay={true}>
           <button className={buttonReset} onClick={pinTag}>
-            {isPinned ? <BookmarkFilledIcon /> : <BookmarkIcon />}
+            {isPinned ? <PinFilledIcon /> : <PinIcon />}
           </button>
         </WithTooltip>
         <WithTooltip label="Edit Tag" delay={true}>
