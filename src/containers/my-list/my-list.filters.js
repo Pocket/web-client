@@ -81,7 +81,7 @@ export function filterByVideosFavorites(item) {
 }
 
 /**
- * Favorites
+ * Tags
  * ---------------------------------------------------------
  */
 export function filterByTags(item, tag) {

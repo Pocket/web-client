@@ -6,7 +6,7 @@ import { screenMediumHandset } from '@pocket/web-ui'
 import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
-import { isURL } from 'validator'
+import isURL from 'validator/lib/isURL'
 
 const addStyle = css`
   width: 100%;
