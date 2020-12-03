@@ -6,7 +6,7 @@ import { USER_TAGS_ITEM_SUCCESS } from 'actions'
 
 import { ITEMS_FAVORITE_SUCCESS } from 'actions'
 import { ITEMS_UNFAVORITE_SUCCESS } from 'actions'
-import { ITEMS_ADD_SUCCESS } from 'actions'
+import { MYLIST_SEARCH_SUCCESS } from 'actions'
 import { ITEMS_DELETE_SUCCESS } from 'actions'
 import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_UNARCHIVE_SUCCESS } from 'actions'
@@ -34,7 +34,8 @@ export const myListItemsReducers = (state = initialState, action) => {
     case MYLIST_DATA_SUCCESS:
     case ARTICLE_ITEM_SUCCESS:
     case HOME_DATA_LATEST_SUCCESS:
-    case USER_TAGS_ITEM_SUCCESS: {
+    case USER_TAGS_ITEM_SUCCESS:
+    case MYLIST_SEARCH_SUCCESS: {
       const { itemsById } = action
       return { ...state, ...itemsById }
     }
