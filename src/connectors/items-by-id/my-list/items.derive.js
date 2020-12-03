@@ -87,7 +87,7 @@ function displayThumbnail({ item, curated_info }) {
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {string} The best text to display as the publisher of this item
  */
-function displayPublisher({ item }) {
+export function displayPublisher({ item }) {
   const urlToUse = openUrl({ item })
   const derivedDomain = domainForUrl(urlToUse)
   const syndicatedPublisher = item?.syndicated_article?.publisher?.name
@@ -134,7 +134,7 @@ function saveUrl({ item }) {
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {int} average number of minutes to read the item
  */
-function readTime({ item }) {
+export function readTime({ item }) {
   return item?.time_to_read || readTimeFromWordCount(item?.word_count) || null
 }
 

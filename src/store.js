@@ -61,6 +61,9 @@ import { readSagas } from 'containers/read/read.state'
 
 import { actionToastsReducers } from 'connectors/toasts/toast.state'
 
+import { messagesReducers } from 'containers/messages/messages.state'
+import { messagesSagas } from 'containers/messages/messages.state'
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const discoverReducers = {
@@ -78,7 +81,8 @@ const collectionReducers = {
   bulkEdit: itemBulkReducers,
   itemsToDelete: itemDeleteReducers,
   itemsToTag: itemTagReducers,
-  itemsToShare: itemShareReducers
+  itemsToShare: itemShareReducers,
+  messages: messagesReducers
 }
 
 const readerReducers = {
@@ -128,7 +132,8 @@ function* rootSaga() {
     ...myListItemsSagas,
     ...itemShareSagas,
     ...readSagas,
-    ...homeSagas
+    ...homeSagas,
+    ...messagesSagas
   ])
 }
 
