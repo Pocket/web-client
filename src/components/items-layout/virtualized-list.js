@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import { getScrollTop, atEndOfScroll } from 'common/utilities'
 import { cardsContainer } from './base'
 import { cardsGrid } from './base'
@@ -137,7 +137,7 @@ export const cardList = css`
  * @param {array} sections Array of section definitions with count and classname
  * @param {object} actions Object of actions specific to the items being built
  */
-export function VirtualizedList({ type, items, actions, loadMore }) {
+export function VirtualizedList({ type, items, actions, loadMore = () => {} }) {
   /** SETUP
  --------------------------------------------------------------- */
   // Set up ref to ruler so we can get height of the container
@@ -150,6 +150,7 @@ export function VirtualizedList({ type, items, actions, loadMore }) {
   const [height, columnCount] = type === 'list' ? [75, 1] : [367, 3] //row-gap = 24
   const itemOnScreen = type === 'list' ? 25 : 20 // total items to render minus one
 
+  const [hasScrolled, setHasScrolled] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
 
@@ -165,30 +166,42 @@ export function VirtualizedList({ type, items, actions, loadMore }) {
   const sectionTypes = { list: cardList, grid: cardGrid }
   const containerClasses = cx(cardsContainer, type)
 
+  const { itemsToShow, paddingTop, listHeight } = list
+
+  const hasItems = itemsToShow.length > 0
+
   /** FUNCTIONS
  --------------------------------------------------------------- */
-  const checkRange = (event) => {
-    // Set up the fact that we are scrolling
-    setIsScrolling(true)
-    scrollTracker.current = setTimeout(() => setIsScrolling(false), 500)
+  const checkRange = useCallback(
+    (event) => {
+      // Set up the fact that we are scrolling
+      setIsScrolling(true)
+      scrollTracker.current = setTimeout(() => setIsScrolling(false), 500)
 
-    // Get scroll direction.
-    const top = getScrollTop()
-    const naturalStart = Math.floor(top / height) * columnCount
-    const newIndex = Math.max(naturalStart - columnCount * 2, 0)
-    setRange({ start: newIndex, end: newIndex + itemOnScreen })
+      // Get scroll direction.
+      const top = getScrollTop()
+      const naturalStart = Math.floor(top / height) * columnCount
+      const newIndex = Math.max(naturalStart - columnCount * 2, 0)
+      setRange({ start: newIndex, end: newIndex + itemOnScreen })
 
-    if (event) setScrollPosition(window.scrollY)
-  }
+      if (event) setScrollPosition(window.scrollY)
+    },
+    [columnCount, height, itemOnScreen]
+  )
 
   /** EFFECTS
  --------------------------------------------------------------- */
 
   // Initial effect run once on load
   useEffect(() => {
-    // Handler to call on window resize
-    const handleResize = checkRange
-    const handleScroll = checkRange
+    const handleScroll = (event) => {
+      if (!hasScrolled) return setHasScrolled(true)
+      checkRange(event)
+    }
+
+    const handleResize = (event) => {
+      checkRange(event)
+    }
 
     // Add event listener
     window.addEventListener('resize', handleResize)
@@ -199,7 +212,7 @@ export function VirtualizedList({ type, items, actions, loadMore }) {
       window.removeEventListener('resize', handleResize)
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [height, columnCount, itemOnScreen])
+  }, [height, columnCount, itemOnScreen, hasScrolled, checkRange])
 
   // Run when our index values shift
   useEffect(() => {
@@ -214,25 +227,27 @@ export function VirtualizedList({ type, items, actions, loadMore }) {
   }, [items, range, height, columnCount])
 
   useEffect(() => {
-    const listEnd = atEndOfScroll(rulerRef.current.clientHeight * 1.8)
+    // Don't run this when there are no items yet.  Avoid doubling up.
+    if (!hasItems || loading) return
+
+    const buffer = height * 2
+    const listEnd = atEndOfScroll(buffer)
 
     if (listEnd && !loading) {
       setLoading(true)
       loadMore()
     }
-  }, [scrollPosition])
+  }, [scrollPosition, loading, height, hasItems])
 
   useEffect(() => {
     setLoading(false)
     checkRange()
-  }, [items])
+  }, [items, checkRange])
 
   useEffect(() => {
     document.body.scrollTop = 0 // For Safari
     document.documentElement.scrollTop = 0 // For Chrome, Firefox, IE and Opera
   }, [type])
-
-  const { itemsToShow, paddingTop, listHeight } = list
 
   return (
     // Create a list container with the appropriate classnames
@@ -244,9 +259,9 @@ export function VirtualizedList({ type, items, actions, loadMore }) {
       }}>
       <div
         style={{
-          paddingTop,
           height: `${listHeight}px`
         }}>
+        <div style={{ paddingTop }} />
         <div className={sectionTypes[type]}>
           {itemsToShow.map((id) => {
             const positionOfItem = items.indexOf(id)
