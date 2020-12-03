@@ -44,7 +44,7 @@ export default function Collection(props) {
 
   // Check for initial items so we don't over request
   const initialItemsPopulated =
-    items?.length && (items?.length >= 18 || total < 18)
+    items?.length && (items?.length >= 30 || total < 30)
 
   /**
    * Set up listeners for focus shifts.  When the window gains focus check if
@@ -72,7 +72,7 @@ export default function Collection(props) {
    */
   useEffect(() => {
     if (initialItemsPopulated || userStatus === 'pending') return
-    dispatch(getMylistData(18, 0, subset, filter, tag))
+    dispatch(getMylistData(30, 0, subset, filter, tag))
     dispatch(appSetSection(section))
   }, [
     userStatus,
@@ -90,7 +90,7 @@ export default function Collection(props) {
    * ------------------------------------------------------------------------
    */
   useEffect(() => {
-    if (!routeChange || !initialItemsPopulated || !since) return
+    if (!routeChange) return
     // If items are already in place, we want to know if anything has changed
     // since the last time we fetched the list (operations in other pages or apps)
     dispatch(updateMyListData(since, subset, filter, tag))
