@@ -22,7 +22,6 @@ export const getMylistSearchData = (filter, query) => ({ type: MYLIST_SEARCH_REQ
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  query: undefined,
   sortOrder: 'relevance',
 
   // State for search and search filters
