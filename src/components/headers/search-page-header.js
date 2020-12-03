@@ -38,11 +38,13 @@ const searchPageHeaderStyle = css`
   }
 `
 
-export const SearchPageHeader = ({ subset, filter, title }) => {
-  return subset ? (
+export const SearchPageHeader = ({ filter, total, query }) => {
+  return query && total ? (
     <header className={searchPageHeaderStyle}>
-      <h1 className="pageTitle">Search: {title}</h1>
-      <FilterMenu subset={subset} filter={filter} />
+      <h1 className="pageTitle">
+        <em>"{query}"</em> — {total} Search Results
+      </h1>
+      <FilterMenu subset="search" query={query} filter={filter} />
     </header>
   ) : null
 }

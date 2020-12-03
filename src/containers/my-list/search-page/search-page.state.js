@@ -1,7 +1,8 @@
 import { takeLatest, put, select } from 'redux-saga/effects'
-import { getMyList } from 'common/api/my-list'
+import { searchMyList } from 'common/api/my-list'
 import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { arrayToObject } from 'common/utilities'
+import { sortByOrder } from '../my-list.sorters'
 
 import { MYLIST_SEARCH_REQUEST } from 'actions'
 import { MYLIST_SEARCH_SUCCESS } from 'actions'
@@ -16,7 +17,7 @@ import { APP_SORT_ORDER_TOGGLE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getMylistSearchData = (count, offset, filter, query) => ({ type: MYLIST_SEARCH_REQUEST, count, offset, filter, query }) //prettier-ignore
+export const getMylistSearchData = (filter, query) => ({ type: MYLIST_SEARCH_REQUEST, filter, query }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -93,7 +94,7 @@ const getCurrentState = (state) => state.myListSearch || {}
 
 function* myListSearchRequest(action) {
   try {
-    const { count = 15, offset = 0, filter, query } = action
+    const { filter, query } = action
     const section = filter ? 'search' + filter : 'search'
 
     const parameters = { search: query }
@@ -104,10 +105,11 @@ function* myListSearchRequest(action) {
     if (filter === 'archive') parameters.state = 'read'
     if (filter === 'favorites') parameters.favorite = 1
 
-    const { itemsById, total, since, error } = yield fetchMyListData({
-      count,
-      offset,
+    const { itemsById, total, since, error } = yield fetchMyListSearch({
       locale_lang: 'en-US',
+      state: 'all',
+      count: 150,
+      offset: 0,
       sort: sortOrder,
       ...parameters
     })
@@ -116,32 +118,26 @@ function* myListSearchRequest(action) {
 
     const searchState = yield select(getCurrentState)
     const currentItems = searchState[section]
-    console.log(currentItems)
-    // console.log(itemsById, total, since, query)
-    // const existingItemsById = yield select(getMyListItemsById)
-    // const itemsByIdDraft = { ...existingItemsById, ...itemsById }
 
-    // const filterFunction = filterSelector(subset, filter)
+    const newItemIds = Object.values(itemsById)
+      .sort(sortByOrder)
+      .map((item) => item.item_id)
 
-    // const sortFunction = sortSelector(subset, sortOrder) //TODO: hook this to selector
-    // const items = Object.values(itemsByIdDraft)
-    //   .filter((item) => filterFunction(item, tag))
-    //   .sort(sortFunction)
-    //   .map((item) => item.item_id)
+    const items = Array.from(new Set([...currentItems, ...newItemIds]))
 
-    // const newOffset = offset + items?.length
+    const newOffset = items.length
 
-    // yield put({
-    //   type: MYLIST_SEARCH_SUCCESS,
-    //   items,
-    //   itemsById,
-    //   offset: newOffset,
-    //   subset,
-    //   filter,
-    //   tag,
-    //   total,
-    //   since
-    // })
+    yield put({
+      type: MYLIST_SEARCH_SUCCESS,
+      items,
+      itemsById,
+      subset: 'search',
+      filter,
+      total,
+      query,
+      offset: newOffset,
+      since
+    })
   } catch (error) {
     console.log(error)
     yield put({ type: MYLIST_SEARCH_FAILURE, error })
@@ -150,19 +146,17 @@ function* myListSearchRequest(action) {
 
 /** ASYNC Functions
  --------------------------------------------------------------- */
-
 /**
  * fetchDiscoverData
  * Make wand async request for a Pocket v3 feed and return best data
  * @return items {array} An array of derived items
  */
-export async function fetchMyListData(params) {
+export async function fetchMyListSearch(params) {
   try {
-    const response = await getMyList(params)
+    const response = await searchMyList(params)
     if (!response.list) return { error: 'No Items Returned' }
 
-    const total = response.total
-    const since = response.since
+    const { total, since } = response
 
     const derivedItems = await deriveMyListItems(Object.values(response.list))
     const itemsById = arrayToObject(derivedItems, 'item_id')

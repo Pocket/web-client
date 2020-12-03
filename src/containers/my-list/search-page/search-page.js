@@ -1,6 +1,5 @@
-// @refresh reset
 // Vendor
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
@@ -27,18 +26,18 @@ export default function Collection(props) {
 
   const section = filter ? subset + filter : subset
 
-  const items = useSelector((state) => state.myList[section])
-  const offset = useSelector((state) => state.myList[`${section}Offset`])
-  const total = useSelector((state) => state.myList[`${section}Total`])
+  const items = useSelector((state) => state.myListSearch[section])
+  const offset = useSelector((state) => state.myListSearch[`${section}Offset`])
+  const total = useSelector((state) => state.myListSearch[`${section}Total`])
   const listMode = useSelector((state) => state.app.listMode)
-  const sortOrder = useSelector((state) => state.app.sortOrder)
-
+  const sortOrder = useSelector((state) => state.myListSearch.sortOrder)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
 
+  const [hasLoaded, setHasLoaded] = useState(false)
+
   // Check for initial items so we don't over request
-  const initialItemsPopulated =
-    items?.length && (items?.length >= 18 || total < 18)
+  const initialItemsPopulated = items?.length >= 18 || (total && total < 18)
 
   /**
    * Get initial list items. This should only fire once per page load
@@ -46,17 +45,17 @@ export default function Collection(props) {
    * ------------------------------------------------------------------------
    */
   useEffect(() => {
-    if (initialItemsPopulated || userStatus === 'pending') return
-    dispatch(getMylistSearchData(18, 0, filter, query))
+    if (userStatus === 'pending' || !query || initialItemsPopulated) return
+    dispatch(getMylistSearchData(filter, query))
     dispatch(appSetSection(section))
   }, [
     userStatus,
-    initialItemsPopulated,
     subset,
     sortOrder,
     filter,
     section,
     query,
+    initialItemsPopulated,
     dispatch
   ])
 
@@ -67,7 +66,9 @@ export default function Collection(props) {
    * ------------------------------------------------------------------------
    */
   const loadMore = () => {
-    dispatch(getMylistSearchData(45, offset, filter, query))
+    if (hasLoaded) return
+    setHasLoaded(true)
+    dispatch(getMylistSearchData(filter, query))
   }
 
   const shouldRender = userStatus !== 'pending'
@@ -81,7 +82,7 @@ export default function Collection(props) {
         <main className="main">
           {isLoggedIn ? (
             <>
-              <SearchPageHeader filter={filter} query={query} />
+              <SearchPageHeader filter={filter} query={query} total={total} />
               {items?.length ? (
                 <VirtualizedList
                   type={type}
