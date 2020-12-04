@@ -9,44 +9,10 @@ export function getShares() {
   })
 }
 
-export function addShare({ share_id, item_id, item }) {
-  return request({
-    path: 'v3/send',
-    data: {
-      actions: [
-        {
-          action: 'share_added',
-          share_id: parseInt(share_id, 10),
-          item_id: item_id,
-          item
-        }
-      ]
-    },
-    auth: true
-  })
-}
-
-export function ignoreShare({ share_id, item_id, item }) {
-  return request({
-    path: 'v3/send',
-    data: {
-      actions: [
-        {
-          action: 'share_ignored',
-          share_id: parseInt(share_id, 10),
-          item_id: item_id,
-          item
-        }
-      ]
-    },
-    auth: true
-  })
-}
-
 export function resendConfirmation(email) {
   return request({
     path: 'v3/resendEmailConfirmation',
-    data: { email },
+    params: { email },
     auth: true
   })
 }

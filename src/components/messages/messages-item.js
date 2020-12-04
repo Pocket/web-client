@@ -70,7 +70,7 @@ export const MessageItem = ({
   share_id,
   item_id,
   addItem,
-  ignoreMessage
+  ignoreItem
 }) => {
   const { resolved_title, resolved_url } = item
   const { avatar_url, name } = from_friend
@@ -82,7 +82,7 @@ export const MessageItem = ({
   }
 
   const handleIgnore = () => {
-    ignoreMessage({ share_id, item_id, item })
+    ignoreItem({ share_id, item_id, item })
   }
 
   return (
@@ -96,8 +96,9 @@ export const MessageItem = ({
           </div>
           <Button
             variant="inline"
-            // onClick={handleIgnore}
-          >Dismiss</Button>
+            onClick={handleIgnore}>
+            Dismiss
+          </Button>
         </header>
         <p className="comment">{ comment }</p>
         <Card

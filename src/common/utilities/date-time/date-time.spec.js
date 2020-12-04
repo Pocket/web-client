@@ -20,6 +20,14 @@ describe('timeRelativeToNow', function () {
     assert.strictEqual(timeFromNow, 'Less than an hour ago')
   })
 
+  it('exactly one hour', function() {
+    const timestamp = dayjs().subtract(60, 'minute')
+
+    const timeFromNow = timeRelativeToNow(timestamp)
+
+    assert.strictEqual(timeFromNow, '1 hour ago')
+  })
+
   it('hours ago', function () {
     const howLongAgo = 6
     const timestamp = dayjs().subtract(howLongAgo, 'hour')

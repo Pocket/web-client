@@ -80,6 +80,8 @@ export const API_ACTION_ADD_TAGS = 'tags_add'
 export const API_ACTION_TAGS_CLEARED = 'tags_clear'
 export const API_ACTION_ADD_ANNOTATION = 'add_annotation'
 export const API_ACTION_DELETE_ANNOTATION = 'delete_annotation'
+export const API_ACTION_SHARE_ADDED = 'share_added'
+export const API_ACTION_SHARE_IGNORED = 'share_ignored'
 
 // ANALYTICS
 export const ANALYTICS_UI = 'cxt_ui'

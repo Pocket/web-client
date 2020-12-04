@@ -1,8 +1,10 @@
 import { put, call, takeEvery, select } from 'redux-saga/effects'
 import { getShares } from 'common/api/messages'
-import { addShare } from 'common/api/messages'
-import { ignoreShare } from 'common/api/messages'
 import { resendConfirmation } from 'common/api/messages'
+import { sendItemActions } from 'common/api/item-actions'
+
+import { API_ACTION_SHARE_ADDED } from 'common/constants'
+import { API_ACTION_SHARE_IGNORED } from 'common/constants'
 
 import { GET_SHARES_REQUEST } from 'actions'
 import { GET_SHARES_SUCCESS } from 'actions'
@@ -17,21 +19,22 @@ import { IGNORE_SHARE_SUCCESS } from 'actions'
 import { IGNORE_SHARE_FAILURE } from 'actions'
 
 import { RESEND_CONFIRMATION_REQUEST } from 'actions'
-// import { RESEND_CONFIRMATION_SUCCESS } from 'actions'
-// import { RESEND_CONFIRMATION_FAILURE } from 'actions'
+import { RESEND_CONFIRMATION_SUCCESS } from 'actions'
+import { RESEND_CONFIRMATION_FAILURE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getMessages = () => ({ type: GET_SHARES_REQUEST })
-export const addMessageItem = () => ({ type: ADD_SHARE_REQUEST })
-export const ignoreMessage = (payload) => ({ type: IGNORE_SHARE_REQUEST, payload })
+export const addMessageItem = (payload) => ({ type: ADD_SHARE_REQUEST, ...payload })
+export const ignoreMessage = (payload) => ({ type: IGNORE_SHARE_REQUEST, ...payload })
 export const requestConfirmation = () => ({ type: RESEND_CONFIRMATION_REQUEST })
 
 /** REDUCERS
  --------------------------------------------------------------- */
  const initialState = {
   notifications: [],
-  unconfirmed_shares: null
+  unconfirmed_shares: null,
+  confirmationStatus: null
 }
 
 export const messagesReducers = (state = initialState, action) => {
@@ -49,6 +52,12 @@ export const messagesReducers = (state = initialState, action) => {
     case ADD_SHARE_SUCCESS: {
       const { notifications } = action
       return { ...state, notifications }
+    }
+
+    case RESEND_CONFIRMATION_SUCCESS:
+    case RESEND_CONFIRMATION_FAILURE: {
+      const { confirmationStatus } = action
+      return { ...state, confirmationStatus }
     }
 
     default:
@@ -85,10 +94,17 @@ function* sharesRequest() {
   }
 }
 
-function* addRequest() {
+function* addRequest({ share_id, item_id, item }) {
   try {
-    const response = yield call(addShare, { share_id, item_id, item })
-    if (response?.status !== 1) throw new Error('Cannot ignore message')
+    const actions = [{
+      action: API_ACTION_SHARE_ADDED,
+      share_id: parseInt(share_id, 10),
+      item_id,
+      item
+    }]
+
+    const response = yield call(sendItemActions, actions)
+    if (response?.status !== 1) throw new Error('Cannot add message')
 
     const oldNotifications = yield select(getNotifications)
     const notifications = oldNotifications.filter(item => item.share_id !== share_id)
@@ -101,7 +117,14 @@ function* addRequest() {
 
 function* ignoreRequest({ share_id, item_id, item }) {
   try {
-    const response = yield call(ignoreShare, { share_id, item_id, item })
+    const actions = [{
+      action: API_ACTION_SHARE_IGNORED,
+      share_id: parseInt(share_id, 10),
+      item_id,
+      item
+    }]
+
+    const response = yield call(sendItemActions, actions)
     if (response?.status !== 1) throw new Error('Cannot ignore message')
 
     const oldNotifications = yield select(getNotifications)
@@ -114,6 +137,14 @@ function* ignoreRequest({ share_id, item_id, item }) {
 }
 
 function* confirmationRequest() {
-  const email = yield select(getUserEmail)
-  yield call(resendConfirmation, email)
+  try {
+    const email = yield select(getUserEmail)
+    const response = yield call(resendConfirmation, email)
+    const confirmationStatus = (response?.status !== 1) ? 'failed' : 'success'
+
+    yield put({ type: RESEND_CONFIRMATION_SUCCESS, confirmationStatus })
+  } catch (error) {
+    const confirmationStatus = 'failed'
+    yield put({ type: RESEND_CONFIRMATION_FAILURE, confirmationStatus })
+  }
 }

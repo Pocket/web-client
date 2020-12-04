@@ -9,6 +9,8 @@ import { ignoreMessage } from './messages.state'
 import { requestConfirmation } from './messages.state'
 import { MessagesHeader } from 'components/headers/messages-header'
 import { MessageItem } from 'components/messages/messages-item'
+import { MessageResend } from 'components/messages/messages-resend'
+import { MessageEmpty } from 'components/messages/messages-empty'
 
 export default function Messages(props) {
   const dispatch = useDispatch()
@@ -16,6 +18,7 @@ export default function Messages(props) {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const notifications = useSelector((state) => state.messages.notifications)
   const unconfirmedShares = useSelector((state) => state.messages.unconfirmed_shares)
+  const confirmationStatus = useSelector((state) => state.messages.confirmationStatus)
 
   useEffect(() => {
     dispatch(getMessages())
@@ -25,32 +28,47 @@ export default function Messages(props) {
     ? Object.keys(unconfirmedShares)
     : []
 
+  const addItem = ({ share_id, item_id, item }) => {
+    dispatch(addMessageItem({ share_id, item_id, item }))
+  }
+
+  const ignoreItem = ({ share_id, item_id, item }) => {
+    dispatch(ignoreMessage({ share_id, item_id, item }))
+  }
+
+  const resendAction = () => {
+    dispatch(requestConfirmation())
+  }
+
   return (
     <Layout title="Pocket - Messages">
       <SideNav isLoggedIn={isLoggedIn} />
 
-      <main className="main">
-        <MessagesHeader title="Activity" />
+      {notifications.length || unconfirmedArray.length ? (
+        <main className="main">
+          <MessagesHeader title="Activity" />
 
-        {notifications.map(notification => (
-          <MessageItem
-            key={notification.share_id}
-            {...notification}
-            addItem={addMessageItem}
-            ignoreMessage={ignoreMessage}
-          />
-        ))}
+          {notifications.map(notification => (
+            <MessageItem
+              key={notification.share_id}
+              {...notification}
+              addItem={addItem}
+              ignoreItem={ignoreItem}
+            />
+          ))}
 
-        {
-        //{unconfirmedArray.map(unconfirmed => (
-          // <InboxUnconfirmed
-          //   key={unconfirmed_shares[unconfirmed].email}
-          //   email={unconfirmed_shares[unconfirmed].email}
-          //   resendConfirmation={requestConfirmation}
-          // />
-        //))
-      }
-      </main>
+          {unconfirmedArray.map(unconfirmed => (
+            <MessageResend
+              key={unconfirmedShares[unconfirmed].email}
+              email={unconfirmedShares[unconfirmed].email}
+              resendAction={resendAction}
+              status={confirmationStatus}
+            />
+          ))}
+        </main>
+      ) : (
+        <MessageEmpty />
+      )}
     </Layout>
   )
 }
