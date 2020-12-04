@@ -1,4 +1,4 @@
-import { put, call, takeEvery } from 'redux-saga/effects'
+import { put, call, takeLatest } from 'redux-saga/effects'
 import { sendItemActions } from 'common/api/item-actions'
 
 import { ITEMS_FAVORITE_REQUEST } from 'actions'
@@ -21,8 +21,8 @@ export const itemsUnFavoriteAction = (items) => ({type: ITEMS_UNFAVORITE_REQUEST
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const itemFavoriteSagas = [
-  takeEvery(ITEMS_FAVORITE_REQUEST, itemsFavorite),
-  takeEvery(ITEMS_UNFAVORITE_REQUEST, itemsUnFavorite)
+  takeLatest(ITEMS_FAVORITE_REQUEST, itemsFavorite),
+  takeLatest(ITEMS_UNFAVORITE_REQUEST, itemsUnFavorite)
 ]
 
 /** SAGAS :: RESPONDERS

@@ -1,4 +1,4 @@
-import { put, call, takeEvery, take, race } from 'redux-saga/effects'
+import { put, call, takeLatest, take, race } from 'redux-saga/effects'
 import { sendItemActions } from 'common/api/item-actions'
 
 import { ITEMS_DELETE_REQUEST } from 'actions'
@@ -40,7 +40,7 @@ export const itemDeleteReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-export const itemDeleteSagas = [takeEvery(ITEMS_DELETE_REQUEST, itemsDelete)]
+export const itemDeleteSagas = [takeLatest(ITEMS_DELETE_REQUEST, itemsDelete)]
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

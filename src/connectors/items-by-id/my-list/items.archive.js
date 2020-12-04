@@ -1,4 +1,4 @@
-import { put, call, takeEvery } from 'redux-saga/effects'
+import { put, call, takeLatest } from 'redux-saga/effects'
 import { sendItemActions } from 'common/api/item-actions'
 
 import { ITEMS_ARCHIVE_REQUEST } from 'actions'
@@ -21,8 +21,8 @@ export const itemsUnArchiveAction = (items) => ({type: ITEMS_UNARCHIVE_REQUEST, 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const itemArchiveSagas = [
-  takeEvery(ITEMS_ARCHIVE_REQUEST, itemsArchive),
-  takeEvery(ITEMS_UNARCHIVE_REQUEST, itemsUnArchive)
+  takeLatest(ITEMS_ARCHIVE_REQUEST, itemsArchive),
+  takeLatest(ITEMS_UNARCHIVE_REQUEST, itemsUnArchive)
 ]
 
 /** SAGAS :: RESPONDERS
