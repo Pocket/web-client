@@ -59,6 +59,8 @@ import { homeSagas } from 'containers/home/home.state'
 import { readReducers } from 'containers/read/read.state'
 import { readSagas } from 'containers/read/read.state'
 
+import { actionToastsReducers } from 'connectors/toasts/toast.state'
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const discoverReducers = {
@@ -92,7 +94,8 @@ const globalReducers = {
   user: userReducers, // User profile and auth,
   features: featureReducers, // Feature flags (very basic start)
   topicList: topicListReducers, // Valid topics list and active topic
-  recit: recitReducers // Recommended articles, both publisher and pocket
+  recit: recitReducers, // Recommended articles, both publisher and pocket
+  toasts: actionToastsReducers // Notifications of action results
 }
 
 const rootReducer = combineReducers({
