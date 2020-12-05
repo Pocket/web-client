@@ -14,7 +14,7 @@ export const Toasts = () => {
   return (
     <div className={toastStyle}>
       {toasts.map((toast) => (
-        <Toast {...toast} />
+        <Toast {...toast} key={toast.stamp} />
       ))}
     </div>
   )
