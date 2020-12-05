@@ -281,7 +281,7 @@ function* myListDataRequest(action) {
       .sort(sortFunction)
       .map((item) => item.item_id)
 
-    const newOffset = offset + items?.length
+    const newOffset = offset + Object.keys(itemsById).length
 
     yield put({
       type: MYLIST_DATA_SUCCESS,

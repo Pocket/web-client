@@ -115,6 +115,7 @@ export default function Collection(props) {
    * ------------------------------------------------------------------------
    */
   const loadMore = () => {
+    if (offset >= total) return
     dispatch(getMylistData(45, offset, subset, filter, tag))
   }
 
