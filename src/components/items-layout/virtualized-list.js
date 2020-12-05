@@ -149,6 +149,7 @@ export function VirtualizedList({ type, items, actions, loadMore = () => {} }) {
   // Set up state to track for virtualization
   const [height, columnCount] = type === 'list' ? [75, 1] : [367, 3] //row-gap = 24
   const itemOnScreen = type === 'list' ? 25 : 20 // total items to render minus one
+  const buffer = type === 'list' ? height * 8 : height * 4
 
   const [hasScrolled, setHasScrolled] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
@@ -229,15 +230,13 @@ export function VirtualizedList({ type, items, actions, loadMore = () => {} }) {
   useEffect(() => {
     // Don't run this when there are no items yet.  Avoid doubling up.
     if (!hasItems || loading) return
-
-    const buffer = height * 2
     const listEnd = atEndOfScroll(buffer)
 
     if (listEnd && !loading) {
       setLoading(true)
       loadMore()
     }
-  }, [scrollPosition, loading, height, hasItems])
+  }, [scrollPosition, loading, height, hasItems, buffer])
 
   useEffect(() => {
     setLoading(false)
