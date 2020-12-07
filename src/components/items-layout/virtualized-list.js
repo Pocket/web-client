@@ -16,13 +16,10 @@ export const ruler = css`
 
 export const cardGrid = css`
   ${cardsGrid};
-  grid-row-gap: var(--size200);
+  grid-row-gap: var(--size100);
   article {
-    height: 335px;
+    height: 345px;
     grid-column: span 4;
-    & > a {
-      padding-bottom: var(--size150);
-    }
     h2 {
       font-size: var(--fontSize100);
     }
@@ -37,19 +34,22 @@ export const cardGrid = css`
     .item-actions {
       width: 100%;
     }
-    .actions {
+    .actions button {
       opacity: 0;
+      &.active {
+        opacity: 1;
+      }
     }
 
-    &:hover .actions {
+    &:hover .actions button {
       opacity: 1;
     }
+
     .footer {
       position: absolute;
-      bottom: -12px;
-      left: 50%;
+      bottom: 0;
+      left: 0;
       width: 100%;
-      transform: translateX(-50%);
       z-index: var(--zIndexRaised);
     }
     .bulkBacking {
@@ -147,7 +147,7 @@ export function VirtualizedList({ type, items, actions, loadMore = () => {} }) {
   const scrollTracker = useRef(null)
 
   // Set up state to track for virtualization
-  const [height, columnCount] = type === 'list' ? [75, 1] : [367, 3] //row-gap = 24
+  const [height, columnCount] = type === 'list' ? [75, 1] : [361, 3] //row-gap = 24
   const itemOnScreen = type === 'list' ? 25 : 20 // total items to render minus one
   const buffer = type === 'list' ? height * 8 : height * 4
 

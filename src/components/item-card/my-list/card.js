@@ -13,7 +13,6 @@ import { DeleteIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
 import { AddIcon } from '@pocket/web-ui'
 import { FavoriteIcon } from '@pocket/web-ui'
-import { FavoriteFilledIcon } from '@pocket/web-ui'
 import { EmptyCircledIcon } from '@pocket/web-ui'
 import { CheckCircledIcon } from '@pocket/web-ui'
 import { TagIcon } from '@pocket/web-ui'
@@ -74,7 +73,6 @@ const card = css`
     display: block;
     height: 100%;
     width: 100%;
-    padding-bottom: var(--size200);
     text-decoration: none;
     transition-property: color;
     transition-duration: 0.2s;
@@ -222,7 +220,6 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
 
   const isFavorite = favorite === '1'
   const favoriteAction = isFavorite ? itemUnFavorite : itemFavorite
-  const CorrectFavIcon = isFavorite ? FavoriteFilledIcon : FavoriteIcon
 
   const selectBulk = (event) => {
     const withShift = event.shiftKey
@@ -273,16 +270,11 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
             <ItemActions
               menuItems={[
                 {
-                  key: `share-${id}`,
-                  label: 'Share',
-                  icon: <IosShareIcon />,
-                  onClick: itemShare
-                },
-                {
-                  key: `delete-${id}`,
-                  label: 'Delete',
-                  icon: <DeleteIcon />,
-                  onClick: itemDelete
+                  key: `favorite-${id}`,
+                  label: 'Favorite',
+                  icon: <FavoriteIcon />,
+                  onClick: favoriteAction,
+                  active: isFavorite
                 },
                 {
                   key: `archive-${id}`,
@@ -291,17 +283,22 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
                   onClick: archiveAction
                 },
                 {
-                  key: `favorite-${id}`,
-                  label: 'Favorite',
-                  icon: <CorrectFavIcon />,
-                  onClick: favoriteAction,
-                  active: isFavorite
-                },
-                {
                   key: `tag-${id}`,
                   label: 'Tag',
                   icon: <TagIcon />,
                   onClick: itemTag
+                },
+                {
+                  key: `delete-${id}`,
+                  label: 'Delete',
+                  icon: <DeleteIcon />,
+                  onClick: itemDelete
+                },
+                {
+                  key: `share-${id}`,
+                  label: 'Share',
+                  icon: <IosShareIcon />,
+                  onClick: itemShare
                 }
               ]}
             />
