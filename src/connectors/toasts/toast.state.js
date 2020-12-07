@@ -23,6 +23,9 @@ import { ITEMS_SHARE_FAILURE } from 'actions'
 import { ITEMS_TAG_SUCCESS } from 'actions'
 import { ITEMS_TAG_FAILURE } from 'actions'
 
+import { ADD_SHARE_SUCCESS } from 'actions'
+import { ADD_SHARE_FAILURE } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const clearToast = (stamp) => ({ type: TOAST_CLEAR, stamp })
@@ -52,7 +55,9 @@ export const actionToastsReducers = (state = initialState, action) => {
     case ITEMS_SHARE_SUCCESS:
     case ITEMS_SHARE_FAILURE:
     case ITEMS_TAG_SUCCESS:
-    case ITEMS_TAG_FAILURE: {
+    case ITEMS_TAG_FAILURE:
+    case ADD_SHARE_SUCCESS:
+    case ADD_SHARE_FAILURE: {
       const { actions } = action
       const itemCount = actions.length
       const stamp = Date.now()

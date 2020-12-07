@@ -29,6 +29,9 @@ import { ITEMS_SHARE_FAILURE } from 'actions'
 import { ITEMS_TAG_SUCCESS } from 'actions'
 import { ITEMS_TAG_FAILURE } from 'actions'
 
+import { ADD_SHARE_SUCCESS } from 'actions'
+import { ADD_SHARE_FAILURE } from 'actions'
+
 const toastWrapper = css`
   text-align: left;
   width: 100%;
@@ -98,7 +101,9 @@ const messages = {
   [ITEMS_SHARE_SUCCESS]: 'shared',
   [ITEMS_SHARE_FAILURE]: 'error sharing',
   [ITEMS_TAG_SUCCESS]: 'tagged',
-  [ITEMS_TAG_FAILURE]: 'error tagging'
+  [ITEMS_TAG_FAILURE]: 'error tagging',
+  [ADD_SHARE_SUCCESS]: 'added',
+  [ADD_SHARE_FAILURE]: 'error adding'
 }
 
 export function Toast({ stamp, type, itemCount }) {
