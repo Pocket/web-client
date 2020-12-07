@@ -10,16 +10,6 @@ const itemActionStyle = css`
   border-radius: 0 0 4px 4px;
   padding-bottom: var(--size025);
   position: relative;
-  &:after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    bottom: 0;
-    width: 100%;
-    height: 10px;
-    display: block;
-    border-radius: 0 0 4px 4px;
-  }
 `
 
 const menuItemStyle = css`
