@@ -8,7 +8,6 @@ import { urlWithPocketRedirect } from 'common/utilities'
 const card = css`
   width: 100%;
   height: 100%;
-  max-height: 160px;
   padding: 0;
   font-family: var(--fontSansSerif);
   font-weight: 400;
@@ -64,9 +63,9 @@ const card = css`
     white-space: nowrap;
   }
 
-  footer {
-    position: absolute;
-    bottom: var(--spacing150);
+  p {
+    font-size: var(--fontSize100);
+    margin-bottom: var(--spacing100);
   }
 `
 
@@ -75,7 +74,8 @@ export const Card = ({ item, onSave }) => {
     resolved_id: id,
     resolved_title,
     resolved_url,
-    image
+    image,
+    excerpt
   } = item
 
   const time = readTime({ item })
@@ -101,6 +101,7 @@ export const Card = ({ item, onSave }) => {
             {time ? ` · ${time} min` : null}
           </span>
         </cite>
+        {excerpt ? <p>{excerpt}</p> : null}
         <footer className="footer">
           <div className="actions">
             <SaveToPocket

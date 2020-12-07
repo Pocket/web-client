@@ -15,7 +15,6 @@ export const getPocketRecs = (itemId) => {
 export const getRecommendations = (itemId) => {
   const lang = 'en' // Gotta be a good way to pass this in
   return request({
-    api_url: 'https://getpocket.com',
     path: 'v3/discover/recIt',
     method: 'POST',
     body: JSON.stringify({
@@ -23,7 +22,8 @@ export const getRecommendations = (itemId) => {
       locale_lang: lang,
       count: 3,
       module: 'web_client'
-    })
+    }),
+    auth: true
   })
 }
 

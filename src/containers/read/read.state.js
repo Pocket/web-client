@@ -1,6 +1,7 @@
 import { put, takeEvery, select, call } from 'redux-saga/effects'
 import { v4 as uuid } from 'uuid'
 import { arrayToObject } from 'common/utilities'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
 import { ARTICLE_ITEM_REQUEST } from 'actions'
 import { ARTICLE_ITEM_SUCCESS } from 'actions'
@@ -38,6 +39,8 @@ import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_UNARCHIVE_SUCCESS } from 'actions'
 
 import { ITEMS_TAG_SEND } from 'actions'
+
+import { HYDRATE_DISPLAY_SETTINGS } from 'actions'
 
 import { API_ACTION_ADD_ANNOTATION } from 'common/constants'
 import { API_ACTION_DELETE_ANNOTATION } from 'common/constants'
@@ -115,21 +118,25 @@ export const readReducers = (state = initialState, action) => {
 
     case UPDATE_LINE_HEIGHT: {
       const { lineHeight } = action
+      localStore.setItem('lineHeight', lineHeight)
       return { ...state, lineHeight }
     }
 
     case UPDATE_COLUMN_WIDTH: {
       const { columnWidth } = action
+      localStore.setItem('columnWidth', columnWidth)
       return { ...state, columnWidth }
     }
 
     case UPDATE_FONT_SIZE: {
       const { fontSize } = action
+      localStore.setItem('fontSize', fontSize)
       return { ...state, fontSize }
     }
 
     case UPDATE_FONT_TYPE: {
       const { fontFamily } = action
+      localStore.setItem('fontFamily', fontFamily)
       return { ...state, fontFamily }
     }
 
@@ -155,6 +162,11 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, tags: newTags }
     }
 
+    case HYDRATE_DISPLAY_SETTINGS: {
+      const { settings } = action
+      return { ...state, ...settings }
+    }
+
     case ARTICLE_ITEM_REQUEST: {
       return initialState
     }
@@ -174,6 +186,7 @@ export const readReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const readSagas = [
   takeEvery(ARTICLE_ITEM_REQUEST, articleItemRequest),
+  takeEvery(ARTICLE_ITEM_SUCCESS, hydrateDisplaySettings),
   takeEvery(ARTICLE_ITEM_SUCCESS, articleContentRequest),
   takeEvery(ANNOTATION_SAVE_REQUEST, annotationSaveRequest),
   takeEvery(ANNOTATION_DELETE_REQUEST, annotationDeleteRequest),
@@ -286,6 +299,17 @@ function redirectToList() {
       document.location.href = '/my-list'
     }
   }
+}
+
+function* hydrateDisplaySettings() {
+  const displaySettings = ['lineHeight', 'columnWidth', 'fontSize', 'fontFamily']
+
+  const settings = displaySettings.reduce((obj, val)  => {
+    obj[val] = localStore.getItem(val) || initialState[val]
+    return obj
+  }, {})
+
+  yield put({ type: HYDRATE_DISPLAY_SETTINGS, settings })
 }
 
 /** ASYNC REQUESTS
