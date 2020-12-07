@@ -23,8 +23,8 @@ export function timeRelativeToNow(val) {
   }
 
   const now = dayjs()
-  const ts = dayjs(val)
-  const diff = now.diff(ts, 'hours')
+  const timestamp = dayjs(val)
+  const diff = now.diff(timestamp, 'hours')
 
   if (diff < 1) {
     return 'Less than an hour ago'
@@ -38,6 +38,6 @@ export function timeRelativeToNow(val) {
     return `${date} days ago`
   }
 
-  let date = ts.format('MMM D, YYYY')
+  let date = timestamp.format('MMM D, YYYY')
   return `${date}`
 }

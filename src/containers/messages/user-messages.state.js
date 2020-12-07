@@ -32,19 +32,28 @@ export const requestConfirmation = () => ({ type: RESEND_CONFIRMATION_REQUEST })
 /** REDUCERS
  --------------------------------------------------------------- */
  const initialState = {
+  hydrated: false,
   notifications: [],
   unconfirmed_shares: null,
   confirmationStatus: null
 }
 
-export const messagesReducers = (state = initialState, action) => {
+export const userMessageReducers = (state = initialState, action) => {
   switch (action.type) {
     case GET_SHARES_SUCCESS: {
       const { notifications, unconfirmed_shares } = action
       return {
         ...state,
         notifications,
-        unconfirmed_shares
+        unconfirmed_shares,
+        hydrated: true
+      }
+    }
+
+    case GET_SHARES_FAILURE: {
+      return {
+        ...state,
+        fetched: true
       }
     }
 
@@ -67,7 +76,7 @@ export const messagesReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-export const messagesSagas = [
+export const userMessageSagas = [
   takeEvery(GET_SHARES_REQUEST, sharesRequest),
   takeEvery(ADD_SHARE_REQUEST, addRequest),
   takeEvery(IGNORE_SHARE_REQUEST, ignoreRequest),
@@ -77,7 +86,7 @@ export const messagesSagas = [
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getUserEmail = (state) => state.user.email
-const getNotifications = (state) => state.messages.notifications
+const getNotifications = (state) => state.userMessages.notifications
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

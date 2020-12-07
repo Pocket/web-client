@@ -8,6 +8,7 @@ import { urlWithPocketRedirect } from 'common/utilities'
 const card = css`
   width: 100%;
   height: 100%;
+  max-height: 160px;
   padding: 0;
   font-family: var(--fontSansSerif);
   font-weight: 400;
@@ -62,6 +63,11 @@ const card = css`
   .readtime {
     white-space: nowrap;
   }
+
+  footer {
+    position: absolute;
+    bottom: var(--spacing150);
+  }
 `
 
 export const Card = ({ item, onSave }) => {
@@ -83,7 +89,6 @@ export const Card = ({ item, onSave }) => {
       <div className="content">
         <h2 className="title">
           <a
-            className="thumbnail"
             href={urlWithPocketRedirect(resolved_url)}
             target="_recommendation"
             rel="noopener noreferrer">

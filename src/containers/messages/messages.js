@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
-import { getMessages } from './messages.state'
-import { addMessageItem } from './messages.state'
-import { ignoreMessage } from './messages.state'
-import { requestConfirmation } from './messages.state'
+import { getMessages } from './user-messages.state'
+import { addMessageItem } from './user-messages.state'
+import { ignoreMessage } from './user-messages.state'
+import { requestConfirmation } from './user-messages.state'
 import { MessagesHeader } from 'components/headers/messages-header'
 import { MessageItem } from 'components/messages/messages-item'
 import { MessageResend } from 'components/messages/messages-resend'
@@ -16,9 +16,10 @@ export default function Messages(props) {
   const dispatch = useDispatch()
 
   const isLoggedIn = useSelector((state) => !!state.user.auth)
-  const notifications = useSelector((state) => state.messages.notifications)
-  const unconfirmedShares = useSelector((state) => state.messages.unconfirmed_shares)
-  const confirmationStatus = useSelector((state) => state.messages.confirmationStatus)
+  const hydrated = useSelector((state) => state.userMessages.hydrated)
+  const notifications = useSelector((state) => state.userMessages.notifications)
+  const unconfirmedShares = useSelector((state) => state.userMessages.unconfirmed_shares)
+  const confirmationStatus = useSelector((state) => state.userMessages.confirmationStatus)
 
   useEffect(() => {
     dispatch(getMessages())
@@ -44,31 +45,33 @@ export default function Messages(props) {
     <Layout title="Pocket - Messages">
       <SideNav isLoggedIn={isLoggedIn} />
 
-      {notifications.length || unconfirmedArray.length ? (
-        <main className="main">
-          <MessagesHeader title="Activity" />
+      {hydrated ? (
+        notifications.length || unconfirmedArray.length ? (
+          <main className="main">
+            <MessagesHeader title="Activity" />
 
-          {notifications.map(notification => (
-            <MessageItem
-              key={notification.share_id}
-              {...notification}
-              addItem={addItem}
-              ignoreItem={ignoreItem}
-            />
-          ))}
+            {notifications.map(notification => (
+              <MessageItem
+                key={notification.share_id}
+                {...notification}
+                addItem={addItem}
+                ignoreItem={ignoreItem}
+              />
+            ))}
 
-          {unconfirmedArray.map(unconfirmed => (
-            <MessageResend
-              key={unconfirmedShares[unconfirmed].email}
-              email={unconfirmedShares[unconfirmed].email}
-              resendAction={resendAction}
-              status={confirmationStatus}
-            />
-          ))}
-        </main>
-      ) : (
-        <MessageEmpty />
-      )}
+            {unconfirmedArray.map(unconfirmed => (
+              <MessageResend
+                key={unconfirmedShares[unconfirmed].email}
+                email={unconfirmedShares[unconfirmed].email}
+                resendAction={resendAction}
+                status={confirmationStatus}
+              />
+            ))}
+          </main>
+        ) : (
+          <MessageEmpty />
+        )
+      ) : null }
     </Layout>
   )
 }

@@ -2,7 +2,7 @@ import { css } from 'linaria'
 import dayjs from 'dayjs'
 import { domainForUrl } from 'common/utilities'
 import Avatar from 'components/avatar/avatar'
-import { Card } from 'components/item-card/messages/card'
+import { Card } from 'components/item-card/my-list/card-message'
 import { fontSansSerif, Button } from '@pocket/web-ui'
 import { timeRelativeToNow } from 'common/utilities'
 

@@ -59,10 +59,10 @@ import { homeSagas } from 'containers/home/home.state'
 import { readReducers } from 'containers/read/read.state'
 import { readSagas } from 'containers/read/read.state'
 
-import { actionToastsReducers } from 'connectors/toasts/toast.state'
+import { userMessageReducers } from 'containers/messages/user-messages.state'
+import { userMessageSagas } from 'containers/messages/user-messages.state'
 
-import { messagesReducers } from 'containers/messages/messages.state'
-import { messagesSagas } from 'containers/messages/messages.state'
+import { actionToastsReducers } from 'connectors/toasts/toast.state'
 
 /* REDUCERS
  --------------------------------------------------------------- */
@@ -82,7 +82,7 @@ const collectionReducers = {
   itemsToDelete: itemDeleteReducers,
   itemsToTag: itemTagReducers,
   itemsToShare: itemShareReducers,
-  messages: messagesReducers
+  userMessages: userMessageReducers
 }
 
 const readerReducers = {
@@ -133,7 +133,7 @@ function* rootSaga() {
     ...itemShareSagas,
     ...readSagas,
     ...homeSagas,
-    ...messagesSagas
+    ...userMessageSagas
   ])
 }
 
