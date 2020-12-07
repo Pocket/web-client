@@ -254,6 +254,14 @@ const GlobalNavAccount = ({
             }}>
             Get help
           </PopupMenuItem>
+          <PopupMenuItem
+            href="/messages"
+            id="account-menu-messages-link"
+            onClick={(event) => {
+              handleLinkClick('messages', event)
+            }}>
+            Messages
+          </PopupMenuItem>
         </PopupMenuGroup>
         <PopupMenuGroup>
           <PopupMenuItem
