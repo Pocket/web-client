@@ -1,6 +1,10 @@
 /* eslint  react/jsx-no-target-blank: 0*/
 import { css } from 'linaria'
 import { TagList } from 'components/tagging/tag.list'
+import Link from 'next/link'
+import { Pill } from '@pocket/web-ui'
+import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
+import classNames from 'classnames'
 
 /* COMPONENTS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -87,6 +91,15 @@ const authorNoLink = css`
 
 const tagsWrapper = css`
   padding: 0 0 var(--spacing150);
+
+  .list {
+    a {
+      display: block;
+      button {
+        width: 100%;
+      }
+    }
+  }
 `
 
 /* UTILITIES
@@ -132,8 +145,18 @@ export const ItemHeader = ({
           View Original {/*"reader.header.viewOriginal"*/}
         </a>
         {tags && (
-          <div className={tagsWrapper}>
-            <TagList tags={tags} noWrap="true" />
+          <div className={classNames(tagsWrapper, pillboxStyle)}>
+            <ul className="list">
+              {tags.map((tag) => (
+                <li key={tag}>
+                  <Link href={`/my-list/tags/${encodeURIComponent(tag)}`}>
+                    <a>
+                      <Pill>{tag}</Pill>
+                    </a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
       </div>
