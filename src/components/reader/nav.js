@@ -71,6 +71,7 @@ const buttonStyles = css`
   background-color: transparent;
   color: var(--color-textSecondary);
   font-size: var(--size150);
+  height: var(--size150);
   cursor: pointer;
 
   &.go-back {
@@ -144,7 +145,8 @@ export const ReaderNav = ({
               </button>
             </WithTooltip>
 
-            <WithTooltip label="Favorite Article">
+            <WithTooltip
+              label={(favorite) ? "Remove from Favorites" : "Favorite Article"}>
               <button
                 onClick={toggleFavorite}
                 className={cx(buttonClass, favorite && 'favorite')}>
