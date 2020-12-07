@@ -26,6 +26,8 @@ import { ITEMS_UNFAVORITE_FAILURE } from 'actions'
 import { ITEMS_SHARE_SUCCESS } from 'actions'
 import { ITEMS_SHARE_FAILURE } from 'actions'
 
+import { COPY_ITEM_URL } from 'actions'
+
 import { ITEMS_TAG_SUCCESS } from 'actions'
 import { ITEMS_TAG_FAILURE } from 'actions'
 
@@ -102,8 +104,9 @@ const messages = {
   [ITEMS_SHARE_FAILURE]: 'error sharing',
   [ITEMS_TAG_SUCCESS]: 'tagged',
   [ITEMS_TAG_FAILURE]: 'error tagging',
-  [ADD_SHARE_SUCCESS]: 'added',
-  [ADD_SHARE_FAILURE]: 'error adding'
+  [ADD_SHARE_SUCCESS]: 'Item added',
+  [ADD_SHARE_FAILURE]: 'Error adding item',
+  [COPY_ITEM_URL]: 'URL copied'
 }
 
 export function Toast({ stamp, type, itemCount }) {
@@ -133,7 +136,7 @@ export function Toast({ stamp, type, itemCount }) {
       <div className={toastWrapper}>
         <div className={cx(toastBlock, `${type}`)}>
           <div>
-            {itemCopy(itemCount)} {messages[type]}
+            {itemCount ? itemCopy(itemCount) : null} {messages[type]}
           </div>
           <button className={cx(buttonReset, closeWrapper)} onClick={unmount}>
             <CrossIcon />

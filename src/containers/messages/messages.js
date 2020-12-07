@@ -11,6 +11,7 @@ import { MessagesHeader } from 'components/headers/messages-header'
 import { MessageItem } from 'components/messages/messages-item'
 import { MessageResend } from 'components/messages/messages-resend'
 import { MessageEmpty } from 'components/messages/messages-empty'
+import { Toasts } from 'connectors/toasts/toast-list'
 
 export default function Messages(props) {
   const dispatch = useDispatch()
@@ -72,6 +73,7 @@ export default function Messages(props) {
           <MessageEmpty />
         )
       ) : null }
+      <Toasts />
     </Layout>
   )
 }

@@ -7,6 +7,7 @@ import { RedditShareButton } from 'react-share'
 
 import copy from 'clipboard-copy'
 import { css } from 'linaria'
+import { COPY_ITEM_URL } from 'actions'
 
 import { LinkCopyIcon } from '@pocket/web-ui'
 import { FacebookColorIcon } from '@pocket/web-ui'
@@ -101,8 +102,10 @@ export const ShareSocial = function ({ item, quote }) {
     // Some analytics here
     cancelShare()
   }
+  const copyAction = () => ({ type: COPY_ITEM_URL })
   const copyUrl = async () => {
     await copy(open_url)
+    dispatch(copyAction())
     cancelShare()
   }
 
