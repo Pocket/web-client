@@ -140,8 +140,6 @@ export const contentStyles = css`
 
   blockquote,
   aside {
-    font-style: italic;
-    margin: 0;
     padding: var(--spacing250);
   }
 
