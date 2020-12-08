@@ -258,9 +258,9 @@ export function VirtualizedList({ type, items, actions, loadMore = () => {} }) {
       }}>
       <div
         style={{
-          height: `${listHeight}px`
+          height: `${listHeight}px`,
+          paddingTop
         }}>
-        <div style={{ paddingTop }} />
         <div className={sectionTypes[type]}>
           {itemsToShow.map((id) => {
             const positionOfItem = items.indexOf(id)
