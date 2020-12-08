@@ -73,9 +73,9 @@ const initialState = {
   tags: {},
   annotations: [],
   suggestedTags: [],
-  lineHeight: "3",
-  columnWidth: "3",
-  fontSize: "3",
+  lineHeight: 3,
+  columnWidth: 3,
+  fontSize: 3,
   fontFamily: 'blanco'
 }
 
