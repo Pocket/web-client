@@ -7,6 +7,7 @@ import { TagIcon } from '@pocket/web-ui'
 import { ArticleIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
 import { VideoIcon } from '@pocket/web-ui'
+import { ChevronUpIcon } from '@pocket/web-ui'
 
 import { css } from 'linaria'
 
@@ -19,6 +20,10 @@ export const sideNavWrapper = css`
     /* position: fixed; */
   }
   .bottom-nav {
+    margin: 0 auto;
+    max-width: 1128px;
+    position: fixed;
+    bottom: 50px;
   }
 `
 
@@ -89,6 +94,12 @@ export function SideNav({ subset, tag, pinnedTags }) {
     return `${sideNavItem} ${activeClass} ${tagClass}`
   }
 
+  const scrollToTop = () => {
+    window.scroll({
+      top: 0,
+      left: 0
+    })
+  }
   return (
     <div className={sideNavWrapper}>
       <nav role="navigation" className="top-nav">
@@ -144,7 +155,9 @@ export function SideNav({ subset, tag, pinnedTags }) {
             })
           : null}
       </nav>
-      <div className="bottom-nav"></div>
+      <div className="bottom-nav">
+        <ChevronUpIcon onClick={scrollToTop} />
+      </div>
     </div>
   )
 }
