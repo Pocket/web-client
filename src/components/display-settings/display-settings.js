@@ -83,24 +83,24 @@ export const DisplaySettings = ({
   const displayMenuTriggerRef = useRef(null)
 
   const decreaseFontSize = () => {
-    setFontSize(fontSize - 1)
+    setFontSize(parseInt(fontSize) - 1)
   }
   const increaseFontSize = () => {
-    setFontSize(fontSize + 1)
+    setFontSize(parseInt(fontSize) + 1)
   }
 
   const decreaseLineHeight = () => {
-    setLineHeight(lineHeight - 1)
+    setLineHeight(parseInt(lineHeight) - 1)
   }
   const increaseLineHeight = () => {
-    setLineHeight(lineHeight + 1)
+    setLineHeight(parseInt(lineHeight) + 1)
   }
 
   const decreaseColumnWidth = () => {
-    setColumnWidth(columnWidth - 1)
+    setColumnWidth(parseInt(columnWidth) - 1)
   }
   const increaseColumnWidth = () => {
-    setColumnWidth(columnWidth + 1)
+    setColumnWidth(parseInt(columnWidth) + 1)
   }
 
   const toggleDisplayFonts = () => {
@@ -173,7 +173,7 @@ export const DisplaySettings = ({
               clickDecrease={decreaseFontSize}
               clickIncrease={increaseFontSize}
               range={FONT_RANGE}
-              current={fontSize}
+              current={parseInt(fontSize)}
               setCurrent={setFontSize}
             />
             {isPremium ? (
@@ -182,14 +182,14 @@ export const DisplaySettings = ({
                   clickDecrease={decreaseLineHeight}
                   clickIncrease={increaseLineHeight}
                   range={LINE_HEIGHT}
-                  current={lineHeight}
+                  current={parseInt(lineHeight)}
                   setCurrent={setLineHeight}
                 />
                 <ColumnWidthSettings
                   clickDecrease={decreaseColumnWidth}
                   clickIncrease={increaseColumnWidth}
                   range={COLUMN_WIDTH}
-                  current={columnWidth}
+                  current={parseInt(columnWidth)}
                   setCurrent={setColumnWidth}
                 />
               </>

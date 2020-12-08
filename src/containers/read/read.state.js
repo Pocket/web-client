@@ -21,12 +21,12 @@ import { ANNOTATION_DELETE_REQUEST } from 'actions'
 import { ANNOTATION_DELETE_SUCCESS } from 'actions'
 import { ANNOTATION_DELETE_FAILURE } from 'actions'
 
+import { HYDRATE_DISPLAY_SETTINGS } from 'actions'
 import { UPDATE_LINE_HEIGHT } from 'actions'
 import { UPDATE_COLUMN_WIDTH } from 'actions'
 import { UPDATE_FONT_SIZE } from 'actions'
 import { UPDATE_FONT_TYPE } from 'actions'
-import { FRIENDS_SUCCESS } from 'actions'
-import { FRIENDS_FAILURE } from 'actions'
+import { SAVE_DISPLAY_SETTINGS } from 'actions'
 
 import { ITEMS_DELETE_SUCCESS } from 'actions'
 
@@ -39,8 +39,6 @@ import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_UNARCHIVE_SUCCESS } from 'actions'
 
 import { ITEMS_TAG_SEND } from 'actions'
-
-import { HYDRATE_DISPLAY_SETTINGS } from 'actions'
 
 import { API_ACTION_ADD_ANNOTATION } from 'common/constants'
 import { API_ACTION_DELETE_ANNOTATION } from 'common/constants'
@@ -75,12 +73,10 @@ const initialState = {
   tags: {},
   annotations: [],
   suggestedTags: [],
-  lineHeight: 3,
-  columnWidth: 3,
-  fontSize: 3,
-  fontFamily: 'blanco',
-  autoCompleteEmails: null,
-  recentFriends: null
+  lineHeight: "3",
+  columnWidth: "3",
+  fontSize: "3",
+  fontFamily: 'blanco'
 }
 
 export const readReducers = (state = initialState, action) => {
@@ -116,35 +112,6 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, annotations }
     }
 
-    case UPDATE_LINE_HEIGHT: {
-      const { lineHeight } = action
-      localStore.setItem('lineHeight', lineHeight)
-      return { ...state, lineHeight }
-    }
-
-    case UPDATE_COLUMN_WIDTH: {
-      const { columnWidth } = action
-      localStore.setItem('columnWidth', columnWidth)
-      return { ...state, columnWidth }
-    }
-
-    case UPDATE_FONT_SIZE: {
-      const { fontSize } = action
-      localStore.setItem('fontSize', fontSize)
-      return { ...state, fontSize }
-    }
-
-    case UPDATE_FONT_TYPE: {
-      const { fontFamily } = action
-      localStore.setItem('fontFamily', fontFamily)
-      return { ...state, fontFamily }
-    }
-
-    case FRIENDS_SUCCESS: {
-      const { autoCompleteEmails, recentFriends } = action
-      return { ...state, autoCompleteEmails, recentFriends }
-    }
-
     // optimistic update
     case ITEMS_FAVORITE_REQUEST:
     case ITEMS_UNFAVORITE_FAILURE: {
@@ -160,6 +127,11 @@ export const readReducers = (state = initialState, action) => {
       const { tags } = action
       const newTags = tags.reduce((obj, key) => { return { ...obj, [key]:{} }}, {})
       return { ...state, tags: newTags }
+    }
+
+    case SAVE_DISPLAY_SETTINGS: {
+      const { settings } = action
+      return { ...state, ...settings }
     }
 
     case HYDRATE_DISPLAY_SETTINGS: {
@@ -192,7 +164,11 @@ export const readSagas = [
   takeEvery(ANNOTATION_DELETE_REQUEST, annotationDeleteRequest),
   takeEvery(ITEMS_DELETE_SUCCESS, redirectToList),
   takeEvery(ITEMS_ARCHIVE_SUCCESS, redirectToList),
-  takeEvery(ITEMS_UNARCHIVE_SUCCESS, redirectToList)
+  takeEvery(ITEMS_UNARCHIVE_SUCCESS, redirectToList),
+  takeEvery(UPDATE_LINE_HEIGHT, saveDisplaySettings),
+  takeEvery(UPDATE_COLUMN_WIDTH, saveDisplaySettings),
+  takeEvery(UPDATE_FONT_SIZE, saveDisplaySettings),
+  takeEvery(UPDATE_FONT_TYPE, saveDisplaySettings)
 ]
 
 /* SAGAS :: SELECTORS
@@ -309,6 +285,11 @@ function* hydrateDisplaySettings() {
     return obj
   }, {})
 
+  yield put({ type: HYDRATE_DISPLAY_SETTINGS, settings })
+}
+
+function* saveDisplaySettings({ type, ...settings }) {
+  Object.keys(settings).forEach(val => localStore.setItem(val.toString(), settings[val]))
   yield put({ type: HYDRATE_DISPLAY_SETTINGS, settings })
 }
 

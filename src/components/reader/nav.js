@@ -121,6 +121,8 @@ export const ReaderNav = ({
   }
   const buttonClass = cx(buttonReset, buttonStyles)
 
+  console.log({ ...displaySettings })
+
   return (
     <header className={headerStyle}>
       <div className="global-nav-container">
