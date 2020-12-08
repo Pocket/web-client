@@ -84,6 +84,7 @@ const closeWrapper = css`
 `
 
 const itemCopy = (count) => {
+  if (!count) return null
   if (count > 1) return `${count} items`
   return '1 item'
 }
@@ -136,7 +137,7 @@ export function Toast({ stamp, type, itemCount }) {
       <div className={toastWrapper}>
         <div className={cx(toastBlock, `${type}`)}>
           <div>
-            {itemCount ? itemCopy(itemCount) : null} {messages[type]}
+            {itemCopy(itemCount)} {messages[type]}
           </div>
           <button className={cx(buttonReset, closeWrapper)} onClick={unmount}>
             <CrossIcon />
