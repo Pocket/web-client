@@ -128,6 +128,26 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, tags: newTags }
     }
 
+    case UPDATE_LINE_HEIGHT: {
+      const { lineHeight } = action
+      return { ...state, lineHeight }
+    }
+
+    case UPDATE_COLUMN_WIDTH: {
+      const { columnWidth } = action
+      return { ...state, columnWidth }
+    }
+
+    case UPDATE_FONT_SIZE: {
+      const { fontSize } = action
+      return { ...state, fontSize }
+    }
+
+    case UPDATE_FONT_TYPE: {
+      const { fontFamily } = action
+      return { ...state, fontFamily }
+    }
+
     case HYDRATE_DISPLAY_SETTINGS: {
       const { settings } = action
       return { ...state, ...settings }
@@ -283,8 +303,9 @@ function* hydrateDisplaySettings() {
 }
 
 function* saveDisplaySettings({ type, ...settings }) {
-  Object.keys(settings).forEach(val => localStore.setItem(val.toString(), settings[val]))
-  yield put({ type: HYDRATE_DISPLAY_SETTINGS, settings })
+  Object.keys(settings).forEach(val => {
+    localStore.setItem(val.toString(), settings[val])
+  })
 }
 
 /** ASYNC REQUESTS
