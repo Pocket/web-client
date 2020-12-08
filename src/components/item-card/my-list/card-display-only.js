@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { css } from 'linaria'
-import { CardMedia } from './card-media'
+import { CardMedia } from 'components/media/card-media'
 
 const card = css`
   width: 100%;

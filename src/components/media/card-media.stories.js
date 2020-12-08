@@ -1,4 +1,4 @@
-import { CardMedia } from './card-media'
+import { CardMedia } from 'components/media/card-media'
 import { css } from 'linaria'
 
 const imageWrapper = css`
@@ -19,7 +19,7 @@ const imageWrapper = css`
 `
 
 export default {
-  title: 'components/discover-card/CardMedia',
+  title: 'components/Media/CardMedia',
   component: CardMedia
 }
 

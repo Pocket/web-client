@@ -1,7 +1,8 @@
 import React from 'react'
 import { css } from 'linaria'
-import { readTime, displayPublisher } from 'connectors/items-by-id/my-list/items.derive'
-import { CardMedia } from './card-media'
+import { readTime } from 'connectors/items-by-id/my-list/items.derive'
+import { displayPublisher } from 'connectors/items-by-id/my-list/items.derive'
+import { CardMedia } from 'components/media/card-media'
 import { SaveToPocket } from 'components/save-to-pocket/save-to-pocket'
 import { urlWithPocketRedirect } from 'common/utilities'
 
@@ -70,21 +71,13 @@ const card = css`
 `
 
 export const Card = ({ item, onSave }) => {
-  const {
-    resolved_id: id,
-    resolved_title,
-    resolved_url,
-    image,
-    excerpt
-  } = item
+  const { resolved_id: id, resolved_title, resolved_url, image, excerpt } = item
 
   const time = readTime({ item })
   const publisher = displayPublisher({ item })
 
   return (
-    <article
-      className={card}
-      key={id}>
+    <article className={card} key={id}>
       <CardMedia image_src={image?.src} title={resolved_title} id={id} />
       <div className="content">
         <h2 className="title">
@@ -97,9 +90,7 @@ export const Card = ({ item, onSave }) => {
         </h2>
         <cite className="details">
           <span>{publisher}</span>
-          <span className="readtime">
-            {time ? ` · ${time} min` : null}
-          </span>
+          <span className="readtime">{time ? ` · ${time} min` : null}</span>
         </cite>
         {excerpt ? <p>{excerpt}</p> : null}
         <footer className="footer">
@@ -116,4 +107,3 @@ export const Card = ({ item, onSave }) => {
     </article>
   )
 }
-

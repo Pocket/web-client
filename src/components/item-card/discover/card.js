@@ -2,7 +2,7 @@ import React from 'react'
 import { css } from 'linaria'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 
-import { CardMedia } from './card-media'
+import { CardMedia } from 'components/media/card-media'
 import { ItemAction } from './item-action'
 import { SyndicatedBadge } from './syndicated-badge'
 import { SaveToPocket } from 'components/save-to-pocket/save-to-pocket'

@@ -3,7 +3,7 @@ import { css, cx } from 'linaria'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { urlWithPocketRedirect } from 'common/utilities'
 
-import { CardMedia } from './card-media'
+import { CardMedia } from 'components/media/card-media'
 import { ItemActions } from './item-actions'
 import { underliner } from 'components/underliner/underliner'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
