@@ -26,7 +26,6 @@ import { UPDATE_LINE_HEIGHT } from 'actions'
 import { UPDATE_COLUMN_WIDTH } from 'actions'
 import { UPDATE_FONT_SIZE } from 'actions'
 import { UPDATE_FONT_TYPE } from 'actions'
-import { SAVE_DISPLAY_SETTINGS } from 'actions'
 
 import { ITEMS_DELETE_SUCCESS } from 'actions'
 
@@ -127,11 +126,6 @@ export const readReducers = (state = initialState, action) => {
       const { tags } = action
       const newTags = tags.reduce((obj, key) => { return { ...obj, [key]:{} }}, {})
       return { ...state, tags: newTags }
-    }
-
-    case SAVE_DISPLAY_SETTINGS: {
-      const { settings } = action
-      return { ...state, ...settings }
     }
 
     case HYDRATE_DISPLAY_SETTINGS: {
