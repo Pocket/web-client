@@ -111,23 +111,6 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, annotations }
     }
 
-    // optimistic update
-    case ITEMS_FAVORITE_REQUEST:
-    case ITEMS_UNFAVORITE_FAILURE: {
-      return { ...state, favorite: 1 }
-    }
-    // optimistic update
-    case ITEMS_UNFAVORITE_REQUEST:
-    case ITEMS_FAVORITE_FAILURE: {
-      return { ...state, favorite: 0 }
-    }
-    // optimistic update
-    case ITEMS_TAG_SEND: {
-      const { tags } = action
-      const newTags = tags.reduce((obj, key) => { return { ...obj, [key]:{} }}, {})
-      return { ...state, tags: newTags }
-    }
-
     case UPDATE_LINE_HEIGHT: {
       const { lineHeight } = action
       return { ...state, lineHeight }
@@ -146,6 +129,23 @@ export const readReducers = (state = initialState, action) => {
     case UPDATE_FONT_TYPE: {
       const { fontFamily } = action
       return { ...state, fontFamily }
+    }
+
+    // optimistic update
+    case ITEMS_FAVORITE_REQUEST:
+    case ITEMS_UNFAVORITE_FAILURE: {
+      return { ...state, favorite: 1 }
+    }
+    // optimistic update
+    case ITEMS_UNFAVORITE_REQUEST:
+    case ITEMS_FAVORITE_FAILURE: {
+      return { ...state, favorite: 0 }
+    }
+    // optimistic update
+    case ITEMS_TAG_SEND: {
+      const { tags } = action
+      const newTags = tags.reduce((obj, key) => { return { ...obj, [key]:{} }}, {})
+      return { ...state, tags: newTags }
     }
 
     case HYDRATE_DISPLAY_SETTINGS: {
