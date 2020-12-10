@@ -5,7 +5,6 @@ import { urlWithPocketRedirect } from 'common/utilities'
 
 import { CardMedia } from 'components/media/card-media'
 import { ItemActions } from './item-actions'
-import { underliner } from 'components/underliner/underliner'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 
 import { IosShareIcon } from '@pocket/web-ui'
@@ -78,16 +77,11 @@ const card = css`
     transition-duration: 0.2s;
     transition-timing-function: ease;
 
-    .title span {
-      ${underliner};
-    }
-
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         color: var(--color-textPrimary);
         .title span {
-          background-color: var(--color-textPrimary);
-          transition: background-color 300ms ease-in-out;
+          text-decoration: underline;
         }
         .media {
           filter: brightness(0.95) saturate(0.8);
