@@ -91,7 +91,7 @@ describe('My List Items', function () {
         title:
           'The Undisciplined Pursuit of More (The Art of Limiting Yourself to Only The Essential)',
         thumbnail:
-          'https://pocket-image-cache.com/300x200/filters:no_upscale():format(jpg):extract_cover()/https%3A%2F%2Fpocket-image-cache.com%2F1200x%2Ffilters%3Ano_upscale()%3Aformat(jpg)%3Aextract_cover()%2Fhttps%253A%252F%252Fpocket-syndicated-images.s3.amazonaws.com%252Farticles%252F5173%252F1595617454_GettyImages-1168909015.jpgcrop.jpg',
+          'https://pocket-image-cache.com/1200x/filters:no_upscale():format(jpg):extract_cover()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5173%2F1595617454_GettyImages-1168909015.jpgcrop.jpg',
         publisher: 'Pocket',
         excerpt:
           'Many of us work in an endless stream of tasks, emails, notifications, meetings, multitasking in the process, never pausing and never ending. Pursuing more and more every day. Information overload is killing our brains.',
