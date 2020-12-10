@@ -1,5 +1,5 @@
 import { READING_WPM } from 'common/constants'
-import { getImageCacheUrl, domainForUrl } from 'common/utilities'
+import { domainForUrl } from 'common/utilities'
 
 export function deriveMyListItems(response) {
   /**
@@ -78,9 +78,7 @@ function displayThumbnail({ item, curated_info }) {
     item?.top_image_url ||
     item?.images?.[Object.keys(item.images)[0]]?.src ||
     null
-  return correct_image
-    ? getImageCacheUrl(correct_image, { width: 300, height: 200 })
-    : null
+  return correct_image ? correct_image : null
 }
 
 /** PUBLISHER
