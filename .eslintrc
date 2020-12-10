@@ -21,6 +21,16 @@
       }
     ]
   },
+  "overrides": [
+    {
+      "files": [
+        "src/**/*.stories.js"
+      ],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ],
   "env": {
     "mocha": true
   }
