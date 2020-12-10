@@ -1,7 +1,7 @@
 import { ArticleActions } from './article-actions'
 
 export default {
-  title: 'Components/Article/ArticleActions'
+  title: 'Article/ArticleActions'
 }
 
 export const Actions = () => {

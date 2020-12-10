@@ -2,7 +2,7 @@ import React from 'react'
 import { TopicsCTA } from './topics-cta'
 
 export default {
-  title: 'Components/Article/TopicsCTA',
+  title: 'Article/TopicsCTA',
   component: TopicsCTA
 }
 

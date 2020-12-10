@@ -3,7 +3,7 @@ import { css } from 'linaria'
 import { PocketHitsInlineSignup } from './ph-inline-signup'
 
 export default {
-  title: 'Components/Article/Pocket Hits Inline Signup',
+  title: 'Article/Pocket Hits Inline Signup',
   component: PocketHitsInlineSignup
 }
 

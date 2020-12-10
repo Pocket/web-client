@@ -5,7 +5,7 @@ import { article } from 'mock/article'
 const { title, description } = article.photosAndCaptions
 
 export default {
-  title: 'Components/Article/ParsedHeadline',
+  title: 'Article/ParsedHeadline',
   component: ParsedHeadline
 }
 
