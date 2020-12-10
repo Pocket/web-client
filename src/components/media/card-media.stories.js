@@ -19,7 +19,7 @@ const imageWrapper = css`
 `
 
 export default {
-  title: 'components/Media',
+  title: 'Card/Media',
   component: CardMedia
 }
 

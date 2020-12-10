@@ -3,7 +3,7 @@ import React from 'react'
 import TopicList from './topic-list'
 
 export default {
-  title: 'Components/Pocket Hits Signup/TopicList',
+  title: 'Pocket Hits/Topic List',
   component: TopicList
 }
 

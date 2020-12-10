@@ -5,7 +5,7 @@ import { ParsedContent } from 'components/article/parsed-content'
 import { articleContent } from 'mock/article'
 
 export default {
-  title: 'Components/DepthTracking',
+  title: 'Article/DepthTracking',
   component: DepthTracking
 }
 

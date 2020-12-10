@@ -2,7 +2,7 @@ import { DisplaySettings } from './display-settings'
 import { useState } from 'react'
 
 export default {
-  title: 'Components/DisplaySettings'
+  title: 'Article/DisplaySettings'
 }
 
 const DisplaySettingsWrapper = ({ isPremium, forceShow }) => {

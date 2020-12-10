@@ -7,7 +7,7 @@ import {
 } from 'mock/article'
 
 export default {
-  title: 'Components/PublisherRecs',
+  title: 'Recommendations/Publisher',
   component: PublisherRecs
 }
 

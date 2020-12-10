@@ -1,7 +1,7 @@
 import { CallOutPocketHitsSignup } from './call-out-pocket-hits'
 
 export default {
-  title: 'Components/PocketHitsMessage',
+  title: 'Messaging/Pocket Hits',
   component: CallOutPocketHitsSignup
 }
 

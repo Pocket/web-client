@@ -3,7 +3,7 @@ import { css } from 'linaria'
 import { PocketHitsIllustratedChyron } from './pocket-hits-illustrated-chyron'
 
 export default {
-  title: 'Components/Pocket Hits Illustrated Chyron',
+  title: 'Pocket Hits/Illustrated Chyron',
   component: PocketHitsIllustratedChyron
 }
 

@@ -6,7 +6,7 @@ import Modal, { ModalBody, ModalFooter } from './modal'
 import { TextArea } from '@pocket/web-ui'
 
 export default {
-  title: 'Components/Modal',
+  title: 'Overlays/Modal',
   component: Modal
 }
 

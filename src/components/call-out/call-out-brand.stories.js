@@ -1,7 +1,7 @@
 import { CallOutBrand } from './call-out-brand'
 
 export default {
-  title: 'Components/BrandMessage',
+  title: 'Messaging/Brand',
   component: CallOutBrand
 }
 

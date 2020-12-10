@@ -4,7 +4,7 @@ import { overlayBase } from './overlay'
 import { Button } from '@pocket/web-ui'
 
 export default {
-  title: 'Components/OverlayBase'
+  title: 'Overlays/Base'
 }
 
 const overlayExample = css`

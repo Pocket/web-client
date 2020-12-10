@@ -9,7 +9,7 @@ import { EmptyList } from './annotations.empty-list'
 import { QuoteList } from './annotations.list'
 
 export default {
-  title: 'Components/Annotations'
+  title: 'Article/Annotations'
 }
 
 export const emptyListMessage = () => <EmptyList />
