@@ -1,7 +1,8 @@
 import queryString from 'query-string'
-import { CONSUMER_KEY, API_URL } from 'common/constants'
+import { CONSUMER_KEY, API_URL, OAUTH_URL } from 'common/constants'
 import { parseCookies } from 'nookies'
 import crypto from 'crypto'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
 /**
  * @param {Object} requestInfo Information about the request
@@ -18,7 +19,14 @@ export const request = ({
   auth,
   ssr
 }) => {
-  const oAuthParameters = generateOAuthParameters(auth)
+  const useOAuth = localStore.getItem('useOAuth') || false
+  // !! THIS TEMPORARY 12/14/2020
+  // This is all meant to allow for feature branch auth via oAuth while keeping
+  // cookie based auth on local dev and production
+  // !! THIS SHOULD BE REMOVED IN 2077 When auth is fixed
+  const oAuthParameters = useOAuth ? generateOAuthParameters(auth) : {}
+  const credentials = useOAuth ? 'omit' : 'include'
+  const apiToUse = useOAuth ? OAUTH_URL : api_url
 
   const corsParameters = {}
   if (!ssr) corsParameters.enable_cors = 1
@@ -30,7 +38,7 @@ export const request = ({
     ...oAuthParameters
   })
 
-  const endpoint = `${api_url}/${path}?${queryParams}`
+  const endpoint = `${apiToUse}/${path}?${queryParams}`
 
   const headers = {
     'Content-Type': 'application/json',
@@ -44,6 +52,7 @@ export const request = ({
   // To that end, we catch errors here to pass them on without malformed
   // json parsing errors
   return fetch(endpoint, {
+    credentials,
     method,
     headers,
     body
@@ -85,8 +94,7 @@ function generateOAuthParameters(auth) {
     access_token: pkt_access_token,
     oauth_timestamp,
     oauth_nonce,
-    sig_hash,
-    credentials: 'omit'
+    sig_hash
   }
 }
 

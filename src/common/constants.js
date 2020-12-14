@@ -3,7 +3,8 @@
 export const CONSUMER_KEY = '94110-6d5ff7a89d72c869766af0e0' // web-client
 // export const CONSUMER_KEY = '78809-9423d8c743a58f62b23ee85c' //web-app-draft consumer
 export const BASE_URL = 'https://getpocket.com'
-export const API_URL = 'https://oauth-test.web.readitlater.com'
+export const API_URL = 'https://getpocket.com'
+export const OAUTH_URL = 'https://oauth-test.web.readitlater.com'
 export const LOGIN_URL = 'https://getpocket.com/login'
 export const SIGNUP_URL = 'https://getpocket.com/signup'
 export const PREMIUM_URL = 'https://getpocket.com/premium?ep='
