@@ -16,9 +16,10 @@ import { SearchIcon } from '@pocket/web-ui'
 import { AddIcon } from '@pocket/web-ui'
 import { EditIcon } from '@pocket/web-ui'
 
-import { BASE_URL } from 'common/constants'
+import { BASE_URL, LOGIN_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities'
 import { userOAuthLogIn } from 'connectors/user/user.state'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
@@ -62,6 +63,7 @@ const GlobalNav = (props) => {
 
   const listMode = useSelector((state) => state?.app?.listMode)
   const sortOrder = useSelector((state) => state?.app?.sortOrder)
+  const useOAuth = localStore.getItem('useOAuth') || false
 
   const toggleSortOrder = () => dispatch(sortOrderToggle())
   const toggleListMode = () => dispatch(listModeToggle())
@@ -114,7 +116,9 @@ const GlobalNav = (props) => {
   const onLoginClick = (event) => {
     event.preventDefault()
     event.stopPropagation()
-    dispatch(userOAuthLogIn())
+
+    if (useOAuth) return dispatch(userOAuthLogIn())
+    window.location.assign(`${LOGIN_URL}?src=navbar`)
   }
 
   return (

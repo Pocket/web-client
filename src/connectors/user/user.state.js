@@ -1,9 +1,10 @@
 import { getUserInfo } from 'common/api/user'
 import { createGuid } from 'common/api/user'
-import { setCookie, parseCookies } from 'nookies'
+import { setCookie } from 'nookies'
 import { put, takeLatest } from 'redux-saga/effects'
 import { getRequestToken, getAccessToken } from 'common/api/oauth'
 import { OAUTH_REDIRECT_URL } from 'common/constants'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
 import { USER_HYDRATE } from 'actions'
 import { USER_REQUEST } from 'actions'
@@ -13,7 +14,14 @@ import { USER_FAILURE } from 'actions'
 import { SESS_GUID_HYDRATE } from 'actions'
 import { USER_OAUTH_TOKEN_REQUEST } from 'actions'
 
-const initialState = { auth: false, sess_guid: null, user_status: 'pending' }
+const useOAuth = localStore.getItem('useOAuth') || false
+
+const initialState = {
+  auth: false,
+  sess_guid: null,
+  user_status: 'pending',
+  useOAuth
+}
 const yearInMs = 60 * 60 * 24 * 365
 
 /** ACTIONS
@@ -62,7 +70,7 @@ export const userReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const userSagas = [
   takeLatest(USER_REQUEST, userRequest),
-  takeLatest(USER_HYDRATE, hydrateUser),
+  // takeLatest(USER_HYDRATE, hydrateUser),
   takeLatest(USER_OAUTH_TOKEN_REQUEST, userTokenRequest)
 ]
 
@@ -76,28 +84,16 @@ function* userRequest() {
   if (user) yield put({ type: USER_SUCCESS, user })
 }
 
-function* hydrateUser(action) {
-  const { hydrate, skipCookies } = action
-  if (!hydrate || skipCookies) return
-
-  const {
-    user_id,
-    username,
-    email,
-    birth,
-    first_name,
-    last_name,
-    premium_status
-  } = yield hydrate
-
-  setCookie(null, 'user_id', user_id, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-  setCookie(null, 'username', username, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-  setCookie(null, 'email', email, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-  setCookie(null, 'birth', birth, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-  setCookie(null, 'first_name', first_name, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-  setCookie(null, 'last_name', last_name, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-  setCookie(null, 'premium_status', premium_status, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-}
+/**
+ * Side effect when hydrating users.  This will we would store user info
+ * if they have opted in to trust their current machine.  If the machine
+ * is SkyNet, we just avoid this all together
+ * The main function here is to speed up user hydration in the future
+ */
+// function* hydrateUser(action) {
+//   const { hydrate, skipCookies } = action
+//   if (!hydrate || skipCookies) return
+// }
 
 function* userTokenRequest() {
   const response = yield getRequestToken()

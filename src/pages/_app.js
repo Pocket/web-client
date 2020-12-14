@@ -44,7 +44,9 @@ function PocketWebClient({ Component, pageProps, err }) {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const { user_status, user_id, sess_guid } = useSelector((state) => state.user)
+  const { user_status, user_id, sess_guid, useOAuth } = useSelector(
+    (state) => state.user
+  )
   const path = router.pathname
 
   useEffect(() => {
@@ -52,9 +54,9 @@ function PocketWebClient({ Component, pageProps, err }) {
     loadPolyfills()
   }, [])
 
-  // Check user auth status
+  // Check user oAuth status
   useEffect(() => {
-    if (user_status !== 'pending') return
+    if (user_status !== 'pending' || !useOAuth) return
 
     // Check cookies (these are first party cookies)
     const cookies = parseCookies()
@@ -62,8 +64,8 @@ function PocketWebClient({ Component, pageProps, err }) {
       pkt_request_code,
       pkt_access_token,
       sess_guid,
-      list_mode = 'grid',
-      sort_order = 'newest'
+      list_mode = 'grid', // TODO: Switch this to local storage
+      sort_order = 'newest' // TODO: Switch this to local storage
     } = cookies
 
     // Set up defaults/user pref in state
@@ -72,6 +74,8 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     /**
      * First time user
+     * We don't have a sess_guid for this users so we are gonna
+     * assume they are a logged out user and treat them as such
      * --------------------------------------------------------------
      */
     const initializeUser = async () => {
@@ -84,6 +88,9 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     /**
      * User awaiting validation
+     * This will only happen when we are using an oAuth flow. This
+     * takes a request code and validates it.  If valid, it grabs
+     * user info and hydrates
      * --------------------------------------------------------------
      */
     const validateUser = async () => {
@@ -112,17 +119,7 @@ function PocketWebClient({ Component, pageProps, err }) {
       // Check cookies (these are first party cookies)
       const cookies = parseCookies()
       const storedUser = {
-        sess_guid: cookies.sess_guid,
-        user_id: cookies.user_id,
-        username: cookies.username,
-        email: cookies.email,
-        birth: cookies.birth,
-        first_name: cookies.first_name,
-        last_name: cookies.last_name,
-        premium_status: cookies.premium_status,
-        profile: {
-          avatar_url: cookies.avatar_url
-        }
+        sess_guid: cookies.sess_guid
       }
 
       dispatch(userHydrate(storedUser, true))
@@ -137,7 +134,41 @@ function PocketWebClient({ Component, pageProps, err }) {
     if (pkt_request_code) validateUser(pkt_request_code)
     if (pkt_access_token) hydrateUser()
     if (sess_guid && !pkt_access_token) dispatch(userHydrate(false))
-  }, [user_status, dispatch])
+  }, [user_status, useOAuth, dispatch])
+
+  // Check user status with cookies
+  useEffect(() => {
+    if (user_status !== 'pending' || useOAuth) return
+    const cookies = parseCookies()
+    const sess_guid = cookies.sess_guid
+
+    /**
+     * First time user
+     * We don't have a sess_guid for this users so we are gonna
+     * assume they are a logged out user and treat them as such
+     * --------------------------------------------------------------
+     */
+    const initializeUser = async () => {
+      const sess_guid = await getSessGuid()
+      if (!sess_guid) return
+
+      dispatch(sessGuidHydrate(sess_guid))
+      dispatch(userHydrate(false))
+    }
+
+    /**
+     * User awaiting validation
+     * This will only happen when we are using an cookies auth flow
+     * --------------------------------------------------------------
+     */
+    const validateUser = async () => {
+      const user = await fetchUserData()
+      dispatch(userHydrate(user))
+    }
+
+    if (!sess_guid) initializeUser()
+    if (sess_guid) validateUser()
+  }, [user_status, useOAuth, dispatch])
 
   useEffect(() => {
     if (user_status === 'pending') return null
