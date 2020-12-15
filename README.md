@@ -33,11 +33,11 @@ Login
 ## Structures
 
 #### Folders
-There site content is represented by five primary folders under the `/src` directory
+The site content is represented by five primary folders under the `/src` directory
 
 `/pages`
 
- This is a NEXTjs convention that provides automatic routing.  Each page of the site will be represented here.  There should be a folder representing the page which contains an `index.js` file as a top level and additional files represnting any _page specific_ components or layouts
+ This is a NEXTjs convention that provides automatic routing.  Each page of the site will be represented here.  There should be a folder representing the page which contains an `index.js` file as a top level and additional files representing any _page specific_ components or layouts
 
 `/common`
 
@@ -57,7 +57,7 @@ These are where _page level_ containers will live along with co-located state fi
 
 #### Conventions
 
-The `/containers` folder contains a `layouts` folder. The components in this folder are meant to be wrappers, that every page should leverage.  They provide a space to provide site wide functionality.  By default the have the following:
+The `/containers` folder contains a `layouts` folder. The components in this folder are meant to be wrappers, that every page should leverage.  They provide a space to provide site wide functionality.  By default they have the following:
 
 - Ability to set title (optional - defaults to `Pocket`)
 - Nav
@@ -108,7 +108,7 @@ npm run dev
 
 You will need to update your hosts file to point localhost (127.0.0.1) to the hostname `localhost.web-client.getpocket.com`. Some of our third party API keys are only enabled for `getpocket.com`, and so will not work at `localhost`. See: https://linuxize.com/post/how-to-edit-your-hosts-file/
 
-The discover pages will be deployed locally on `localhost.web-client.getpocket.com:3000` which should be indicated in your terminal.
+The discover pages will be deployed locally on `localhost.web-client.getpocket.com`.
 
 ### Storybook
 
