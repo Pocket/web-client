@@ -70,7 +70,6 @@ export const userReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const userSagas = [
   takeLatest(USER_REQUEST, userRequest),
-  // takeLatest(USER_HYDRATE, hydrateUser),
   takeLatest(USER_OAUTH_TOKEN_REQUEST, userTokenRequest)
 ]
 
@@ -83,17 +82,6 @@ function* userRequest() {
   const { user } = response
   if (user) yield put({ type: USER_SUCCESS, user })
 }
-
-/**
- * Side effect when hydrating users.  This will we would store user info
- * if they have opted in to trust their current machine.  If the machine
- * is SkyNet, we just avoid this all together
- * The main function here is to speed up user hydration in the future
- */
-// function* hydrateUser(action) {
-//   const { hydrate, skipCookies } = action
-//   if (!hydrate || skipCookies) return
-// }
 
 function* userTokenRequest() {
   const response = yield getRequestToken()
