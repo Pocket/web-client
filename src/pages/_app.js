@@ -139,6 +139,17 @@ function PocketWebClient({ Component, pageProps, err }) {
   // Check user status with cookies
   useEffect(() => {
     if (user_status !== 'pending' || useOAuth) return
+
+    // !! NOTE: This will never return a server side guid.
+    // This really only  returns the sess_guid that we set.
+    // This is due to the fact that the server set sess_guid is httpOnly.
+    // "A cookie with the HttpOnly attribute is inaccessible to the JavaScript Document.cookie"
+    //
+    // Solution here is to:
+    // a) set up a client side api 🤔
+    // b) drop sess_guid as a requirement for snowplow 👏
+    // c) make every page server rendered (as opposed to build time generated) 🤮
+    // d) a and b, then use the client side api for experiments 🔬
     const cookies = parseCookies()
     const sess_guid = cookies.sess_guid
 
@@ -153,7 +164,9 @@ function PocketWebClient({ Component, pageProps, err }) {
       if (!sess_guid) return
 
       dispatch(sessGuidHydrate(sess_guid))
-      dispatch(userHydrate(false))
+
+      const user = await fetchUserData()
+      dispatch(userHydrate(user))
     }
 
     /**
@@ -162,6 +175,8 @@ function PocketWebClient({ Component, pageProps, err }) {
      * --------------------------------------------------------------
      */
     const validateUser = async () => {
+      dispatch(sessGuidHydrate(sess_guid))
+
       const user = await fetchUserData()
       dispatch(userHydrate(user))
     }
