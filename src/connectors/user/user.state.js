@@ -135,6 +135,8 @@ export async function getSessGuid() {
     path: '/',
     maxAge: yearInMs
   })
+
+  return sess_guid
 }
 
 export async function userTokenValidate(code) {
