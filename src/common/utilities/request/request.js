@@ -19,7 +19,7 @@ export const request = ({
   auth,
   ssr
 }) => {
-  const useOAuth = localStore.getItem('useOAuth') || false
+  const useOAuth = localStore.getItem('useOAuth') === 'true'
   // !! THIS TEMPORARY 12/14/2020
   // This is all meant to allow for feature branch auth via oAuth while keeping
   // cookie based auth on local dev and production

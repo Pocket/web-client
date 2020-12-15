@@ -14,7 +14,7 @@ import { USER_FAILURE } from 'actions'
 import { SESS_GUID_HYDRATE } from 'actions'
 import { USER_OAUTH_TOKEN_REQUEST } from 'actions'
 
-const useOAuth = localStore.getItem('useOAuth') || false
+const useOAuth = localStore.getItem('useOAuth') === 'true'
 
 const initialState = {
   auth: false,
