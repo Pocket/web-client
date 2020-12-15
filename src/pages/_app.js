@@ -33,6 +33,8 @@ import { trackPageView } from 'connectors/snowplow/snowplow.state'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 import ReactGA from 'react-ga'
 
+import { DevTools } from 'connectors/dev-tools/dev-tools'
+
 /** Set up Sentry so we may catch errors
  --------------------------------------------------------------- */
 Sentry.init(sentrySettings)
@@ -48,6 +50,8 @@ function PocketWebClient({ Component, pageProps, err }) {
     (state) => state.user
   )
   const path = router.pathname
+
+  const showDevTools = process.env.SHOW_DEV === 'included'
 
   useEffect(() => {
     // Load any relevant polyfills
@@ -150,8 +154,18 @@ function PocketWebClient({ Component, pageProps, err }) {
     // b) drop sess_guid as a requirement for snowplow 👏
     // c) make every page server rendered (as opposed to build time generated) 🤮
     // d) a and b, then use the client side api for experiments 🔬
+
+    // Check cookies (these are first party cookies)
     const cookies = parseCookies()
-    const sess_guid = cookies.sess_guid
+    const {
+      sess_guid,
+      list_mode = 'grid', // TODO: Switch this to local storage
+      sort_order = 'newest' // TODO: Switch this to local storage
+    } = cookies
+
+    // Set up defaults/user pref in state
+    dispatch(listModeSet(list_mode))
+    dispatch(sortOrderSet(sort_order))
 
     /**
      * First time user
@@ -212,6 +226,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   // Provider is created automatically by the wrapper by next-redux-wrapper
   return (
     <ViewportProvider>
+      {showDevTools ? <DevTools /> : null}
       <Component {...pageProps} err={err} />
     </ViewportProvider>
   )

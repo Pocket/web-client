@@ -19,7 +19,6 @@ import { EditIcon } from '@pocket/web-ui'
 import { BASE_URL, LOGIN_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities'
 import { userOAuthLogIn } from 'connectors/user/user.state'
-import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
@@ -51,6 +50,7 @@ const GlobalNav = (props) => {
       : getTopLevelPath(router.pathname)
 
   const appMode = useSelector((state) => state?.app?.mode)
+  const useOAuth = useSelector((state) => state?.user?.useOAuth)
   const userStatus = useSelector((state) => state?.user?.user_status)
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false) //prettier-ignore
   const isLoggedIn = useSelector((state) => !!state.user.auth)
@@ -63,7 +63,6 @@ const GlobalNav = (props) => {
 
   const listMode = useSelector((state) => state?.app?.listMode)
   const sortOrder = useSelector((state) => state?.app?.sortOrder)
-  const useOAuth = localStore.getItem('useOAuth') || false
 
   const toggleSortOrder = () => dispatch(sortOrderToggle())
   const toggleListMode = () => dispatch(listModeToggle())
