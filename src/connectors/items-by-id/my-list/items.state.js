@@ -85,8 +85,13 @@ const reconcileActions = function (state, actions) {
     if (action === 'unfavorite') stateDraft[item_id].favorite = '0'
     if (action === 'archive') stateDraft[item_id].status = '1'
     if (action === 'unarchive') stateDraft[item_id].status = '0'
-    if (action === 'tags_replace')
+    if (action === 'tags_replace') {
       stateDraft[item_id].tags = getTagsObject(item_id, tags)
+    }
+    if (action === 'tags_add') {
+      const current = stateDraft[item_id].tags
+      stateDraft[item_id].tags = { ...current, ...getTagsObject(item_id, tags) }
+    }
   })
 
   return stateDraft
