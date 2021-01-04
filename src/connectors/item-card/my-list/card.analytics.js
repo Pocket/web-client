@@ -8,44 +8,40 @@ import { getLinkOpenTarget } from 'connectors/snowplow/events'
 
 /**
  * fireItemImpression - function to conditionally execute when an item is
- * in view on the page. Only fires if an impressionAction is passed in.
+ * in view on the page
  * @param {int} position position of card on page
- * @param {int} positionZeroIndex position of card on page, 0-indexed
  * @param {object} item rendered by card
  * @param {bool} inView is item in view
- * @param {function} impressionAction analytics action for impression
  */
 export function fireItemImpression(
   position,
-  positionZeroIndex,
   item,
   inView,
-  impressionAction,
   dispatch
 ) {
-  if (inView && impressionAction) {
-    impressionAction(position, item)
-
+  if (inView) {
     // trigger Snowplow impression
     dispatch(
       trackImpression(
         IMPRESSION_COMPONENT_CARD,
         IMPRESSION_REQUIREMENT_VIEWABLE,
-        positionZeroIndex,
-        item
+        position,
+        item,
+        'web-mylist-card'
       )
     )
   }
 }
 
-export function fireItemOpen(positionZeroIndex, item, dispatch) {
+export function fireItemOpen(position, item, dispatch) {
+  // is link target correct?
   const linkTarget = getLinkOpenTarget(item?.save_url, item?.syndicated)
   // trigger Snowplow content open
   dispatch(
     trackContentOpen(
       linkTarget,
       CONTENT_OPEN_TRIGGER_CLICK,
-      positionZeroIndex,
+      position,
       item
     )
   )

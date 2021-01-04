@@ -175,130 +175,133 @@ const card = css`
  * out of the [feed](https://github.com/Pocket/spec/blob/master/query/v3server/feed.md)
  * and makes sure the appropriate data is represented.
  */
-export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
-  const {
-    item_id: id,
-    title,
-    thumbnail,
-    publisher,
-    excerpt,
-    read_time,
-    favorite,
-    status,
-    open_url,
-    openExternal,
-    onOpen = () => {}
-  } = item
+export const Card = React.forwardRef(
+  ({ item, type, actions, bulkEdit, bulkSelected }, ref) => {
+    const {
+      item_id: id,
+      title,
+      thumbnail,
+      publisher,
+      excerpt,
+      read_time,
+      favorite,
+      status,
+      open_url,
+      openExternal,
+      onOpen = () => {}
+    } = item
 
-  const {
-    itemShare,
-    itemDelete,
-    itemArchive,
-    itemUnArchive,
-    itemFavorite,
-    itemUnFavorite,
-    itemTag,
-    itemBulkSelect,
-    itemBulkDeSelect
-  } = actions
+    const {
+      itemShare,
+      itemDelete,
+      itemArchive,
+      itemUnArchive,
+      itemFavorite,
+      itemUnFavorite,
+      itemTag,
+      itemBulkSelect,
+      itemBulkDeSelect
+    } = actions
 
-  const cardClass = cx(
-    card,
-    bulkEdit && 'bulkEdit',
-    bulkSelected && 'bulkSelected'
-  )
+    const cardClass = cx(
+      card,
+      bulkEdit && 'bulkEdit',
+      bulkSelected && 'bulkSelected'
+    )
 
-  const archiveAction = status === '0' ? itemArchive : itemUnArchive
-  const CorrectArchiveIcon = status === '0' ? ArchiveIcon : AddIcon
-  const archiveLabel = status === '0' ? 'Archive' : 'Add'
+    const archiveAction = status === '0' ? itemArchive : itemUnArchive
+    const CorrectArchiveIcon = status === '0' ? ArchiveIcon : AddIcon
+    const archiveLabel = status === '0' ? 'Archive' : 'Add'
 
-  const isFavorite = favorite === '1'
-  const favoriteAction = isFavorite ? itemUnFavorite : itemFavorite
+    const isFavorite = favorite === '1'
+    const favoriteAction = isFavorite ? itemUnFavorite : itemFavorite
 
-  const selectBulk = (event) => {
-    const withShift = event.shiftKey
-    if (bulkEdit)
-      return bulkSelected
-        ? itemBulkDeSelect(withShift)
-        : itemBulkSelect(withShift)
-  }
+    const selectBulk = (event) => {
+      const withShift = event.shiftKey
+      if (bulkEdit)
+        return bulkSelected
+          ? itemBulkDeSelect(withShift)
+          : itemBulkSelect(withShift)
+    }
 
-  const openUrl = openExternal ? urlWithPocketRedirect(open_url) : `/read/${id}`
+    const openUrl = openExternal ? urlWithPocketRedirect(open_url) : `/read/${id}`
 
-  return (
-    <article
-      className={cardClass}
-      key={id}
-      {...testIdAttribute(`article-card-${id}`)}
-      onClick={selectBulk}>
-      <div className="bulkBacking" />
-      <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
-        <span className="idOverlay">{id}</span>
-      </FeatureFlag>
-      <Link href={openUrl}>
-        <a onClick={onOpen}>
-          <CardMedia image_src={thumbnail} title={title} id={id} />
-          <div className="content">
-            <h2 className="title">
-              <span>{title}</span>
-            </h2>
-            <cite className="details">
-              <span>{publisher}</span>
-              <span className="readtime">
-                {read_time ? ` · ${read_time} min` : null}
-              </span>
-            </cite>
-            <p className="excerpt">{excerpt}</p>
-          </div>
-        </a>
-      </Link>
-      <footer className="footer">
-        <div className="actions">
-          {bulkEdit ? (
-            bulkSelected ? (
-              <CheckCircledIcon className="bulkIconStyle" />
+    return (
+      <article
+        className={cardClass}
+        key={id}
+        ref={ref}
+        {...testIdAttribute(`article-card-${id}`)}
+        onClick={selectBulk}>
+        <div className="bulkBacking" />
+        <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
+          <span className="idOverlay">{id}</span>
+        </FeatureFlag>
+        <Link href={openUrl}>
+          <a onClick={onOpen}>
+            <CardMedia image_src={thumbnail} title={title} id={id} />
+            <div className="content">
+              <h2 className="title">
+                <span>{title}</span>
+              </h2>
+              <cite className="details">
+                <span>{publisher}</span>
+                <span className="readtime">
+                  {read_time ? ` · ${read_time} min` : null}
+                </span>
+              </cite>
+              <p className="excerpt">{excerpt}</p>
+            </div>
+          </a>
+        </Link>
+        <footer className="footer">
+          <div className="actions">
+            {bulkEdit ? (
+              bulkSelected ? (
+                <CheckCircledIcon className="bulkIconStyle" />
+              ) : (
+                <EmptyCircledIcon className="bulkIconStyle" />
+              )
             ) : (
-              <EmptyCircledIcon className="bulkIconStyle" />
-            )
-          ) : (
-            <ItemActions
-              menuItems={[
-                {
-                  key: `favorite-${id}`,
-                  label: 'Favorite',
-                  icon: <FavoriteIcon />,
-                  onClick: favoriteAction,
-                  active: isFavorite
-                },
-                {
-                  key: `archive-${id}`,
-                  label: archiveLabel,
-                  icon: <CorrectArchiveIcon />,
-                  onClick: archiveAction
-                },
-                {
-                  key: `tag-${id}`,
-                  label: 'Tag',
-                  icon: <TagIcon />,
-                  onClick: itemTag
-                },
-                {
-                  key: `delete-${id}`,
-                  label: 'Delete',
-                  icon: <DeleteIcon />,
-                  onClick: itemDelete
-                },
-                {
-                  key: `share-${id}`,
-                  label: 'Share',
-                  icon: <IosShareIcon />,
-                  onClick: itemShare
-                }
-              ]}
-            />
-          )}
-        </div>
-      </footer>
-    </article>
-  )
-}
+              <ItemActions
+                menuItems={[
+                  {
+                    key: `favorite-${id}`,
+                    label: 'Favorite',
+                    icon: <FavoriteIcon />,
+                    onClick: favoriteAction,
+                    active: isFavorite
+                  },
+                  {
+                    key: `archive-${id}`,
+                    label: archiveLabel,
+                    icon: <CorrectArchiveIcon />,
+                    onClick: archiveAction
+                  },
+                  {
+                    key: `tag-${id}`,
+                    label: 'Tag',
+                    icon: <TagIcon />,
+                    onClick: itemTag
+                  },
+                  {
+                    key: `delete-${id}`,
+                    label: 'Delete',
+                    icon: <DeleteIcon />,
+                    onClick: itemDelete
+                  },
+                  {
+                    key: `share-${id}`,
+                    label: 'Share',
+                    icon: <IosShareIcon />,
+                    onClick: itemShare
+                  }
+                ]}
+              />
+            )}
+          </div>
+        </footer>
+      </article>
+    )
+  }
+)

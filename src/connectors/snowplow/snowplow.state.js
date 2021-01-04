@@ -31,13 +31,14 @@ export const trackContentOpen = (destination, trigger, position, item) => {
     item
   }
 }
-export const trackImpression = (component, requirement, position, item) => {
+export const trackImpression = (component, requirement, position, item, identifier) => {
   return {
     type: SNOWPLOW_TRACK_IMPRESSION,
     component,
     requirement,
     position,
-    item
+    item,
+    identifier
   }
 }
 
@@ -89,13 +90,13 @@ function* fireContentOpen({ destination, trigger, position, item }) {
   yield sendCustomSnowplowEvent(contentOpenEvent, snowplowEntities)
 }
 
-function* fireImpression({ component, requirement, position, item }) {
+function* fireImpression({ component, requirement, position, item, identifier }) {
   const impressionEvent = createImpressionEvent(component, requirement)
   const contentEntity = createContentEntity(item?.save_url, item?.resolved_id)
   const uiEntity = createUiEntity({
     type: UI_COMPONENT_CARD,
     hierarchy: 0,
-    identifier: 'web-discover-card',
+    identifier,
     index: position
   })
 

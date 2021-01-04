@@ -1,6 +1,8 @@
 import { memo } from 'react'
+import { useEffect } from 'react'
 import { Card } from 'components/item-card/my-list/card'
 import { useSelector, useDispatch } from 'react-redux'
+import { useInView } from 'react-intersection-observer'
 
 import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
@@ -14,6 +16,9 @@ import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
 
 import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
+
+import { fireItemImpression } from 'connectors/item-card/my-list/card.analytics'
+// import { fireItemOpen } from 'connectors/item-card/my-list/card.analytics'
 
 /**
  * Article Card
@@ -32,6 +37,14 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const bulkList = useSelector((state) => state.bulkEdit)
   const bulkSelected = bulkList?.selected?.includes(id)
 
+  // Fire item impression
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
+  useEffect(
+    //prettier-ignore
+    () => fireItemImpression(position, item, inView, dispatch),
+    [position, item, inView]
+  )
+
   const itemShare = () => dispatch(itemsShareAction({ id, position }))
   const itemDelete = () => dispatch(itemsDeleteAction([{ id, position }]))
 
@@ -46,14 +59,21 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const itemBulkSelect = (shift) => {dispatch(itemsBulkSelectAction(id, shift))} //prettier-ignore
   const itemBulkDeSelect = (shift) => {dispatch(itemsBulkDeSelectAction(id, shift))} //prettier-ignore
 
+  // const onOpen = () => {
+  //   // openAction(position, item)
+  //   fireItemOpen(positionZeroIndex, item, dispatch)
+  // }
+
   return item ? (
     <Card
+      ref={ref}
       item={item}
       position={position}
       fluidHeight={fluidHeight}
       type={type}
       bulkEdit={bulkEdit}
       bulkSelected={bulkSelected}
+      // onOpen={onOpen}
       actions={{
         itemShare,
         itemDelete,

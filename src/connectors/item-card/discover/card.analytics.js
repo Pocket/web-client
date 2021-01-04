@@ -31,7 +31,8 @@ export function fireItemImpression(
         IMPRESSION_COMPONENT_CARD,
         IMPRESSION_REQUIREMENT_VIEWABLE,
         positionZeroIndex,
-        item
+        item,
+        'web-discover-card'
       )
     )
   }
