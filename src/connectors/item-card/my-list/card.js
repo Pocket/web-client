@@ -30,7 +30,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const item = useSelector((state) => state.myListItemsById[id])
 
   const bulkList = useSelector((state) => state.bulkEdit)
-  const bulkSelected = bulkList?.selected?.includes(id)
+  const bulkSelected = bulkList?.selected?.map((item) => item.id).includes(id)
 
   const itemShare = () => dispatch(itemsShareAction({ id, position }))
   const itemDelete = () => dispatch(itemsDeleteAction([{ id, position }]))
