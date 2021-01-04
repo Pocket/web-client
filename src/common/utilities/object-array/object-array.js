@@ -51,3 +51,25 @@ export function getObjectWithValidKeysOnly(
     return validObject
   }, {})
 }
+
+/**
+ * Chunk - Let's you divide an array into an array of chunks
+ * Extracted from https://github.com/lodash/lodash/blob/master/chunk.js
+ * NOTE: If we start using lodash more widely, we can pull this direct from there
+ * @param {array} array Array of items
+ * @param {int} size Size of chunks
+ */
+export function chunk(array, size = 1) {
+  const safeSize = Math.max(size, 0)
+  const length = array == null ? 0 : array.length
+  if (!length || safeSize < 1) return []
+
+  let index = 0
+  let resIndex = 0
+  const result = new Array(Math.ceil(length / safeSize))
+
+  while (index < length) {
+    result[resIndex++] = array.slice(index, (index += safeSize))
+  }
+  return result
+}
