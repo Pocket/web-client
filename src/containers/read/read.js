@@ -34,7 +34,7 @@ import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favo
 import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 
-// import { genericRecsRequested } from '/connectors/recit/recit.state'
+import { genericRecsRequested } from '/connectors/recit/recit.state'
 
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
@@ -121,6 +121,8 @@ export default function Reader() {
     images,
     status
   } = articleData
+
+  // console.log({...articleData})
 
   const tagList = tags ? Object.keys(tags) : []
   const favStatus = getBool(favorite)

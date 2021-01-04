@@ -275,7 +275,6 @@ export const contentStyles = css`
 `
 
 export const highlightStyles = css`
-  *::-moz-selection,
   *::selection {
     background-color: #e5f2f1 !important;
     color: #333333 !important;
@@ -301,7 +300,6 @@ export const highlightStyles = css`
   }
 
   ${darkMode} {
-    *::-moz-selection,
     *::selection {
       background-color: rgb(0, 73, 69, 0.99) !important;
       color: #e0e0e0 !important;
@@ -328,7 +326,6 @@ export const highlightStyles = css`
   }
 
   ${sepiaMode} {
-    *::-moz-selection,
     *::selection {
       background-color: #dde2d2 !important;
       color: #3b3934 !important;

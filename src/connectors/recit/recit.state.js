@@ -118,6 +118,7 @@ function* fetchPocketRecs({ itemId }) {
 
 function* fetchGenericRecs({ itemId }) {
   try {
+    if (!itemId) return
     const response = yield getRecommendations(itemId)
     // console.log('Recit Response', { ...response })
     yield put({ type: GENERIC_RECS_SUCCESS, response })

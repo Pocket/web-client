@@ -21,9 +21,8 @@ export const getRecommendations = (itemId) => {
       item_id: itemId, // resolved_id
       locale_lang: lang,
       count: 3,
-      module: 'web_client'
+      module: 'after_article_web'
     }),
     auth: true
   })
 }
-
