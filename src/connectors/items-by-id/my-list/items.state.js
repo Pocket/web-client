@@ -105,7 +105,6 @@ const reconcileActions = function (state, actions) {
 }
 
 const getTagsObject = function (item_id, tags) {
-  console.log(tags)
   const tagsArray = tags.map((tag) => ({ item_id, tag }))
   return arrayToObject(tagsArray, 'tag')
 }
