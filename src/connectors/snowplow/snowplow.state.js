@@ -22,13 +22,14 @@ const initialState = {}
 /** ACTIONS
  --------------------------------------------------------------- */
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
-export const trackContentOpen = (destination, trigger, position, item) => {
+export const trackContentOpen = (destination, trigger, position, item, identifier) => {
   return {
     type: SNOWPLOW_TRACK_CONTENT_OPEN,
     destination,
     trigger,
     position,
-    item
+    item,
+    identifier
   }
 }
 export const trackImpression = (component, requirement, position, item, identifier) => {
@@ -76,13 +77,13 @@ function* fireVariantEnroll({ variants }) {
   }
 }
 
-function* fireContentOpen({ destination, trigger, position, item }) {
+function* fireContentOpen({ destination, trigger, position, item, identifier }) {
   const contentOpenEvent = createContentOpenEvent(destination, trigger)
   const contentEntity = createContentEntity(item?.save_url, item?.resolved_id)
   const uiEntity = createUiEntity({
     type: UI_COMPONENT_CARD,
     hierarchy: 0,
-    identifier: 'web-discover-card',
+    identifier,
     index: position
   })
 

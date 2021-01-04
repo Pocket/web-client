@@ -176,7 +176,7 @@ const card = css`
  * and makes sure the appropriate data is represented.
  */
 export const Card = React.forwardRef(
-  ({ item, type, actions, bulkEdit, bulkSelected }, ref) => {
+  ({ item, type, actions, bulkEdit, bulkSelected, onOpen }, ref) => {
     const {
       item_id: id,
       title,
@@ -187,8 +187,7 @@ export const Card = React.forwardRef(
       favorite,
       status,
       open_url,
-      openExternal,
-      onOpen = () => {}
+      openExternal
     } = item
 
     const {
@@ -238,7 +237,10 @@ export const Card = React.forwardRef(
           <span className="idOverlay">{id}</span>
         </FeatureFlag>
         <Link href={openUrl}>
-          <a onClick={onOpen}>
+          <a
+            onClick={onOpen}
+            // eslint-disable-next-line react/jsx-no-target-blank
+            target={openExternal ? '_blank' : undefined }>
             <CardMedia image_src={thumbnail} title={title} id={id} />
             <div className="content">
               <h2 className="title">

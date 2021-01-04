@@ -18,7 +18,8 @@ import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk
 import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 
 import { fireItemImpression } from 'connectors/item-card/my-list/card.analytics'
-// import { fireItemOpen } from 'connectors/item-card/my-list/card.analytics'
+import { fireItemOpen } from 'connectors/item-card/my-list/card.analytics'
+import { trackItemOpen } from 'connectors/item-card/my-list/card.analytics'
 
 /**
  * Article Card
@@ -59,10 +60,10 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const itemBulkSelect = (shift) => {dispatch(itemsBulkSelectAction(id, shift))} //prettier-ignore
   const itemBulkDeSelect = (shift) => {dispatch(itemsBulkDeSelectAction(id, shift))} //prettier-ignore
 
-  // const onOpen = () => {
-  //   // openAction(position, item)
-  //   fireItemOpen(positionZeroIndex, item, dispatch)
-  // }
+  const onOpen = () => {
+    trackItemOpen(position + 1, item, type) // legacy analytics uses 1 based position
+    fireItemOpen(position, item, dispatch)
+  }
 
   return item ? (
     <Card
@@ -73,7 +74,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
       type={type}
       bulkEdit={bulkEdit}
       bulkSelected={bulkSelected}
-      // onOpen={onOpen}
+      onOpen={onOpen}
       actions={{
         itemShare,
         itemDelete,

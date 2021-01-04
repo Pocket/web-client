@@ -46,7 +46,8 @@ export function fireItemOpen(positionZeroIndex, item, dispatch) {
       linkTarget,
       CONTENT_OPEN_TRIGGER_CLICK,
       positionZeroIndex,
-      item
+      item,
+      'web-discover-card'
     )
   )
 }
