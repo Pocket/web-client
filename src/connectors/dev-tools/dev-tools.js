@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Mousetrap from 'mousetrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { devModeToggle } from 'connectors/app/app.state'
