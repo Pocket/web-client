@@ -1,5 +1,7 @@
 import { put, call, takeLatest, take, race } from 'redux-saga/effects'
 import { sendItemActions } from 'common/api/item-actions'
+import { buildActions } from 'connectors/items-by-id/my-list/build-actions'
+import { batchSendActions } from 'connectors/items-by-id/my-list/build-actions'
 
 import { ITEMS_DELETE_REQUEST } from 'actions'
 import { ITEMS_DELETE_CONFIRM } from 'actions'
@@ -29,7 +31,8 @@ export const itemDeleteReducers = (state = initialState, action) => {
 
     case ITEMS_DELETE_FAILURE:
     case ITEMS_DELETE_SEND:
-    case ITEMS_DELETE_CANCEL: {
+    case ITEMS_DELETE_CANCEL:
+    case ITEMS_DELETE_SUCCESS: {
       return []
     }
 
@@ -53,17 +56,26 @@ function* itemsDelete({ items }) {
 
   if (cancel) return
 
-  // This trigger optimistic reconciliation of the list
-  yield put({ type: ITEMS_DELETE_SEND, items })
+  // Send all actions below a certain threshold
+  if (items.length === 1) {
+    // This trigger optimistic reconciliation of the list
+    yield put({ type: ITEMS_DELETE_SEND, items })
 
-  const actions = buildActions(items, API_ACTION_DELETE)
-  const data = yield call(sendItemActions, actions)
+    const actions = buildActions(items, API_ACTION_DELETE)
+    const data = yield call(sendItemActions, actions)
 
-  if (data) return yield put({ type: ITEMS_DELETE_SUCCESS, data, actions })
+    if (data) return yield put({ type: ITEMS_DELETE_SUCCESS, data, actions })
+    return yield put({ type: ITEMS_DELETE_FAILURE, items })
+  }
 
+  // Build and send batched actions
+  const batchActions = yield batchSendActions(items, API_ACTION_DELETE)
+
+  // If batch is successful
+  if (batchActions.length) {
+    return yield put({ type: ITEMS_DELETE_SUCCESS, actions: batchActions })
+  }
+
+  // If there is a failure
   return yield put({ type: ITEMS_DELETE_FAILURE, items })
-}
-
-function buildActions(items, action) {
-  return items.map((item) => ({ action, item_id: item.id }))
 }

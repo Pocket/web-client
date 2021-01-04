@@ -16,6 +16,8 @@ import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
+import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
+import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { Toasts } from 'connectors/toasts/toast-list'
 
 export default function Collection(props) {
@@ -148,6 +150,8 @@ export default function Collection(props) {
               <DeleteModal />
               <TaggingModal />
               <ShareModal />
+              <ArchiveModal />
+              <FavoriteModal />
               <Toasts />
             </>
           ) : (

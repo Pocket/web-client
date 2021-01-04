@@ -49,6 +49,8 @@ import { myListSearchSagas } from 'containers/my-list/search-page/search-page.st
 
 import { itemBulkReducers } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemDeleteReducers } from 'connectors/items-by-id/my-list/items.delete'
+import { itemFavoriteReducers } from 'connectors/items-by-id/my-list/items.favorite'
+import { itemArchiveReducers } from 'connectors/items-by-id/my-list/items.archive'
 import { itemTagReducers } from 'connectors/items-by-id/my-list/items.tag'
 import { itemShareReducers } from 'connectors/items-by-id/my-list/items.share'
 import { itemShareSagas } from 'connectors/items-by-id/my-list/items.share'
@@ -79,7 +81,9 @@ const collectionReducers = {
   myListSearch: myListSearchReducers,
   userTags: userTagsReducers,
   bulkEdit: itemBulkReducers,
+  itemsToFavorite: itemFavoriteReducers,
   itemsToDelete: itemDeleteReducers,
+  itemsToArchive: itemArchiveReducers,
   itemsToTag: itemTagReducers,
   itemsToShare: itemShareReducers,
   userMessages: userMessageReducers
