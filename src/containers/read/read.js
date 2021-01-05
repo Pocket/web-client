@@ -36,6 +36,13 @@ import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archi
 
 import { genericRecsRequested } from '/connectors/recit/recit.state'
 
+import { sendDeleteEvent } from './read.analytics'
+import { sendArchiveEvent } from './read.analytics'
+import { sendTagEvent } from './read.analytics'
+import { sendFavoriteEvent } from './read.analytics'
+import { sendAnnotationEvent } from './read.analytics'
+import { sendShareEvent } from './read.analytics'
+
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
 export const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
@@ -83,9 +90,18 @@ export default function Reader() {
   const fontSize = useSelector((state) => state.reader.fontSize)
   const fontFamily = useSelector((state) => state.reader.fontFamily)
 
-  const itemDelete = () => dispatch(itemsDeleteAction([{ id }]))
-  const itemTag = () => dispatch(itemsTagAction([{ id }]))
-  const itemShare = ({ quote }) => dispatch(itemsShareAction({ id, quote }))
+  const itemDelete = () => {
+    dispatch(sendDeleteEvent(articleData))
+    dispatch(itemsDeleteAction([{ id }]))
+  }
+  const itemTag = () => {
+    dispatch(sendTagEvent(articleData))
+    dispatch(itemsTagAction([{ id }]))
+  }
+  const itemShare = ({ quote }) => {
+    dispatch(sendShareEvent(articleData))
+    dispatch(itemsShareAction({ id, quote }))
+  }
 
   const [sideBarOpen, setSideBar] = useState(false)
   const [sendModalOpen, setSendModal] = useState(false)
@@ -190,6 +206,7 @@ export default function Reader() {
       setAnnotationLimitModal(true)
     }
     else {
+      dispatch(sendAnnotationEvent(articleData, false))
       dispatch(
         saveAnnotation({
           item_id,
@@ -201,6 +218,7 @@ export default function Reader() {
   }
 
   const removeAnnotation = (annotation_id) => {
+    dispatch(sendAnnotationEvent(articleData, true))
     dispatch(
       deleteAnnotation({
         item_id,
@@ -211,11 +229,13 @@ export default function Reader() {
 
   const archiveItem = () => {
     const archiveAction = archiveStatus ? itemsUnArchiveAction : itemsArchiveAction //prettier-ignore
+    dispatch(sendArchiveEvent(articleData, archiveStatus))
     dispatch(archiveAction([{ id }]))
   }
 
   const toggleFavorite = () => {
     const favoriteAction = favStatus ? itemsUnFavoriteAction : itemsFavoriteAction //prettier-ignore
+    dispatch(sendFavoriteEvent(articleData, favStatus))
     dispatch(favoriteAction([{ id }]))
   }
 
