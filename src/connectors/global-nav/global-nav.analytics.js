@@ -18,3 +18,39 @@ export const sendSearchEvent = () => (trackEngagement(
   0, // position in list (zero since it's not in list)
   'global-nav.search'
 ))
+
+export const sendBulkDeleteEvent = (items) => (trackContentEngagement(
+  ENGAGEMENT_TYPE_GENERAL,
+  0, // position in list (zero since it's in reader)
+  items,
+  'global-nav.bulk.delete'
+))
+
+
+export const sendBulkFavoriteEvent = (items, status) => {
+  const identifier = status ? 'global-nav.batch.favorite' : 'global-nav.batch.un-favorite'
+  return trackContentEngagement(
+    ENGAGEMENT_TYPE_GENERAL,
+    0, // position in list (zero since it's a nav bar button)
+    items,
+    identifier
+  )
+}
+
+export const sendBulkArchiveEvent = (items, status) => {
+  const identifier = status ? 'global-nav.batch.archive' : 'global-nav.batch.un-archive'
+  const engagement = status ? ENGAGEMENT_TYPE_SAVE : ENGAGEMENT_TYPE_GENERAL
+  return trackContentEngagement(
+    engagement,
+    0, // position in list (zero since it's a nav bar button)
+    item,
+    identifier
+  )
+}
+
+export const sendBulkTagEvent = (items) => (trackContentEngagement(
+  ENGAGEMENT_TYPE_GENERAL,
+  0, // position in list (zero since it's in reader)
+  items,
+  'global-nav.bulk.tag'
+))

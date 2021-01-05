@@ -10,6 +10,11 @@ import { itemsUnFavoriteBatch } from 'connectors/items-by-id/my-list/items.favor
 import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
 
+import { sendBulkDeleteEvent } from './global-nav.analytics'
+import { sendBulkFavoriteEvent } from './global-nav.analytics'
+import { sendBulkArchiveEvent } from './global-nav.analytics'
+import { sendBulkTagEvent } from './global-nav.analytics'
+
 import { useDispatch, useSelector } from 'react-redux'
 
 function GlobalNavBulkEditConnected({ onClose }) {
@@ -22,17 +27,29 @@ function GlobalNavBulkEditConnected({ onClose }) {
 
   const clearBulkItems = () => dispatch(itemsBulkClear())
 
-  const deleteAction = () => dispatch(itemsDeleteAction(bulkItems))
+  const deleteAction = () => {
+    dispatch(sendBulkDeleteEvent(bulkItems))
+    dispatch(itemsDeleteAction(bulkItems))
+  }
 
-  const tagAction = () => dispatch(itemsTagAction(bulkItems))
+  const tagAction = () => {
+    dispatch(sendBulkTagEvent(bulkItems))
+    dispatch(itemsTagAction(bulkItems))
+  }
 
   const archiveFunction =
     batchStatus === 'archive' ? itemsArchiveBatch : itemsUnarchiveBatch
-  const archiveAction = () => dispatch(archiveFunction(bulkItems))
+  const archiveAction = () => {
+    dispatch(sendBulkArchiveEvent(bulkItems, batchStatus === 'archive'))
+    dispatch(archiveFunction(bulkItems))
+  }
 
   const favoriteFunction =
     batchFavorite === 'favorite' ? itemsFavoriteBatch : itemsUnFavoriteBatch
-  const favoriteAction = () => dispatch(favoriteFunction(bulkItems))
+  const favoriteAction = () => {
+    dispatch(sendBulkFavoriteEvent(bulkItems, batchFavorite === 'favorite'))
+    dispatch(favoriteFunction(bulkItems))
+  }
 
   return (
     <GlobalNavBulkEdit

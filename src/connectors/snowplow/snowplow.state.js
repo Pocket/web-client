@@ -20,6 +20,8 @@ import { createEngagementEvent } from 'connectors/snowplow/events'
 import { snowplowTrackPageView } from 'common/api/snowplow-analytics'
 import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
 
+import { BATCH_SIZE } from 'common/constants'
+
 const initialState = {}
 
 /** ACTIONS
@@ -45,16 +47,16 @@ export const trackImpression = (component, requirement, position, item, identifi
     identifier
   }
 }
-export const trackContentEngagement = ({ component, identifier, position, item }) => {
+export const trackContentEngagement = (component, position, items, identifier) => {
   return {
     type: SNOWPLOW_TRACK_CONTENT_ENGAGEMENT,
     component,
     identifier,
     position,
-    item
+    items
   }
 }
-export const trackEngagement = ({ component, identifier, position }) => {
+export const trackEngagement = (component, position, identifier) => {
   return {
     type: SNOWPLOW_TRACK_ENGAGEMENT,
     component,
@@ -127,9 +129,14 @@ function* fireImpression({ component, requirement, position, item, identifier })
   yield sendCustomSnowplowEvent(impressionEvent, snowplowEntities)
 }
 
-function* fireContentEngagmenet({ component, identifier, position, item }) {
+function* fireContentEngagmenet({ component, identifier, position, items }) {
   const engagementEvent = createEngagementEvent(component)
-  const contentEntity = createContentEntity(item?.save_url, item?.resolved_id)
+
+  const contentEntities = (items.length) ? items : [items]
+  // limit content entities to BATCH_SIZE = 30
+  if (contentEntities.length > BATCH_SIZE) contentEntities.length = BATCH_SIZE
+  const contentEntity = contentEntities.map(item => createContentEntity(item?.save_url, item?.resolved_id))
+
   const uiEntity = createUiEntity({
     type: component,
     hierarchy: 0,
@@ -137,7 +144,7 @@ function* fireContentEngagmenet({ component, identifier, position, item }) {
     index: position
   })
 
-  const snowplowEntities = [contentEntity, uiEntity]
+  const snowplowEntities = [...contentEntity, uiEntity]
   yield sendCustomSnowplowEvent(engagementEvent, snowplowEntities)
 }
 
