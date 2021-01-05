@@ -16,6 +16,8 @@ import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
+import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
+import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { Toasts } from 'connectors/toasts/toast-list'
 
 export default function Collection(props) {
@@ -44,8 +46,7 @@ export default function Collection(props) {
   const userStatus = useSelector((state) => state.user.user_status)
 
   // Check for initial items so we don't over request
-  const initialItemsPopulated =
-    items?.length && (items?.length >= 30 || total < 30)
+  const initialItemsPopulated = items?.length >= 30 || total < 30
 
   /**
    * Set up listeners for focus shifts.  When the window gains focus check if
@@ -72,9 +73,9 @@ export default function Collection(props) {
    * ------------------------------------------------------------------------
    */
   useEffect(() => {
-    if (initialItemsPopulated || userStatus === 'pending') return
-    dispatch(getMylistData(30, 0, subset, filter, tag))
+    if (!initialItemsPopulated || userStatus === 'pending') return
     dispatch(appSetSection(section))
+    dispatch(getMylistData(30, 0, subset, filter, tag))
   }, [
     userStatus,
     initialItemsPopulated,
@@ -149,6 +150,8 @@ export default function Collection(props) {
               <DeleteModal />
               <TaggingModal />
               <ShareModal />
+              <ArchiveModal />
+              <FavoriteModal />
               <Toasts />
             </>
           ) : (

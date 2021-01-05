@@ -3,6 +3,7 @@ import { getMyList } from 'common/api/my-list'
 import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { arrayToObject } from 'common/utilities'
 
+import { reconcileItemsBatch } from './my-list.reconcilers'
 import { reconcileItemsArchived } from './my-list.reconcilers'
 import { reconcileItemsUnArchived } from './my-list.reconcilers'
 import { reconcileItemsUnFavorited } from './my-list.reconcilers'
@@ -21,9 +22,11 @@ import { MYLIST_HYDRATE } from 'actions'
 import { MYLIST_SAVE_REQUEST } from 'actions'
 import { MYLIST_UNSAVE_REQUEST } from 'actions'
 
+import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_ARCHIVE_REQUEST } from 'actions'
 import { ITEMS_UNARCHIVE_REQUEST } from 'actions'
 import { ITEMS_DELETE_SEND } from 'actions'
+import { ITEMS_DELETE_SUCCESS } from 'actions'
 import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
 import { ITEMS_ADD_SUCCESS } from 'actions'
 
@@ -198,6 +201,15 @@ export const myListReducers = (state = initialState, action) => {
       return { ...state, ...mylist }
 
     // Reconcilers
+    case ITEMS_ARCHIVE_SUCCESS: {
+      const { actions } = action
+      // If they took a single action it is handled optimistically
+      if (actions.length <= 0) return state
+
+      // If they batched things we handle it post response
+      return reconcileItemsBatch(actions, state)
+    }
+
     case ITEMS_ARCHIVE_REQUEST: {
       const { items } = action
       return reconcileItemsArchived(items, state)
@@ -211,6 +223,15 @@ export const myListReducers = (state = initialState, action) => {
     case ITEMS_UNFAVORITE_REQUEST: {
       const { items } = action
       return reconcileItemsUnFavorited(items, state)
+    }
+
+    case ITEMS_DELETE_SUCCESS: {
+      const { actions } = action
+      // If they took a single action it is handled optimistically
+      if (actions.length <= 0) return state
+
+      // If they batched things we handle it post response
+      return reconcileItemsBatch(actions, state)
     }
 
     case ITEMS_DELETE_SEND: {

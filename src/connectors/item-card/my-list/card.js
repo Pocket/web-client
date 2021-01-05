@@ -38,7 +38,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const impression = useSelector((state) => state.itemsAnalytics.impressions)
 
   const bulkList = useSelector((state) => state.bulkEdit)
-  const bulkSelected = bulkList?.selected?.includes(id)
+  const bulkSelected = bulkList?.selected?.map((item) => item.id).includes(id)
 
   // Fire item impression
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 })

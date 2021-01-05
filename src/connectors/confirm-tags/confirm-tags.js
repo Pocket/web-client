@@ -31,6 +31,8 @@ export function TaggingModal() {
   const suggestedTags = useSelector((state) => state.itemsToTag.suggestedTags)
   const showModal = itemsToTag?.length > 0
 
+  const isSingleTag = itemsToTag.length === 1
+
   const [value, setValue] = useState('')
   const [hasError, setHasError] = useState(false)
   const [activeTags, setActiveTags] = useState([])
@@ -124,13 +126,15 @@ export function TaggingModal() {
             onFocus={onFocus}
           />
         </TagBox>
-        <TagSuggestions
-          suggestedTags={suggestedTags}
-          tags={currentTags}
-          addTag={addTag}
-          isPremium={isPremium}
-          trackClick={() => {}}
-        />
+        {isPremium && isSingleTag ? (
+          <TagSuggestions
+            suggestedTags={suggestedTags}
+            tags={currentTags}
+            addTag={addTag}
+            isPremium={isPremium}
+            trackClick={() => {}}
+          />
+        ) : null}
       </ModalBody>
       <ModalFooter isSticky={false}>
         <div className="actions">

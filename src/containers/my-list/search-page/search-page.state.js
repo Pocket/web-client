@@ -8,11 +8,6 @@ import { MYLIST_SEARCH_REQUEST } from 'actions'
 import { MYLIST_SEARCH_SUCCESS } from 'actions'
 import { MYLIST_SEARCH_FAILURE } from 'actions'
 
-import { ITEMS_ARCHIVE_REQUEST } from 'actions'
-import { ITEMS_UNARCHIVE_REQUEST } from 'actions'
-import { ITEMS_DELETE_SEND } from 'actions'
-import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
-
 import { APP_SORT_ORDER_TOGGLE } from 'actions'
 
 /** ACTIONS
