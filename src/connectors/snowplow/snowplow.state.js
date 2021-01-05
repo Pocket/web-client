@@ -3,6 +3,8 @@ import { takeLatest, takeEvery } from 'redux-saga/effects'
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 import { SNOWPLOW_TRACK_CONTENT_OPEN } from 'actions'
 import { SNOWPLOW_TRACK_IMPRESSION } from 'actions'
+import { SNOWPLOW_TRACK_ENGAGEMENT } from 'actions'
+import { SNOWPLOW_TRACK_CONTENT_ENGAGEMENT } from 'actions'
 import { VARIANTS_SAVE } from 'actions'
 
 import { createContentEntity } from 'connectors/snowplow/entities'
@@ -13,6 +15,7 @@ import { UI_COMPONENT_CARD } from 'connectors/snowplow/entities'
 import { createImpressionEvent } from 'connectors/snowplow/events'
 import { createContentOpenEvent } from 'connectors/snowplow/events'
 import { createVariantEnrollEvent } from 'connectors/snowplow/events'
+import { createEngagementEvent } from 'connectors/snowplow/events'
 
 import { snowplowTrackPageView } from 'common/api/snowplow-analytics'
 import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
@@ -42,6 +45,15 @@ export const trackImpression = (component, requirement, position, item, identifi
     identifier
   }
 }
+export const trackContentEngagement = ({ component, identifier, position, item }) => {
+  return {
+    type: SNOWPLOW_TRACK_CONTENT_ENGAGEMENT,
+    component,
+    identifier,
+    position,
+    item
+  }
+}
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -59,6 +71,7 @@ export const snowplowSagas = [
   takeLatest(SNOWPLOW_TRACK_PAGE_VIEW, firePageView),
   takeEvery(SNOWPLOW_TRACK_CONTENT_OPEN, fireContentOpen),
   takeEvery(SNOWPLOW_TRACK_IMPRESSION, fireImpression),
+  takeEvery(SNOWPLOW_TRACK_CONTENT_ENGAGEMENT, fireContentEngagmenet),
   takeLatest(VARIANTS_SAVE, fireVariantEnroll)
 ]
 
@@ -103,4 +116,18 @@ function* fireImpression({ component, requirement, position, item, identifier })
 
   const snowplowEntities = [contentEntity, uiEntity]
   yield sendCustomSnowplowEvent(impressionEvent, snowplowEntities)
+}
+
+function* fireContentEngagmenet({ component, identifier, position, item }) {
+  const engagementEvent = createEngagementEvent(component)
+  const contentEntity = createContentEntity(item?.save_url, item?.resolved_id)
+  const uiEntity = createUiEntity({
+    type: component,
+    hierarchy: 0,
+    identifier,
+    index: position
+  })
+
+  const snowplowEntities = [contentEntity, uiEntity]
+  yield sendCustomSnowplowEvent(engagementEvent, snowplowEntities)
 }

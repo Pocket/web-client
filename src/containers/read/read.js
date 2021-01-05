@@ -122,8 +122,6 @@ export default function Reader() {
     status
   } = articleData
 
-  // console.log({...articleData})
-
   const tagList = tags ? Object.keys(tags) : []
   const favStatus = getBool(favorite)
   const archiveStatus = getBool(status)

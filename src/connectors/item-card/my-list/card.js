@@ -17,9 +17,9 @@ import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
 import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 
-import { fireItemImpression } from 'connectors/item-card/my-list/card.analytics'
 import { fireItemOpen } from 'connectors/item-card/my-list/card.analytics'
 import { trackItemOpen } from 'connectors/item-card/my-list/card.analytics'
+import { setImpression } from 'connectors/item-card/my-list/card.analytics'
 
 /**
  * Article Card
@@ -34,15 +34,18 @@ export function ItemCard({ id, position, fluidHeight, type }) {
 
   // Get data from state
   const item = useSelector((state) => state.myListItemsById[id])
+  const impression = useSelector((state) => state.itemsAnalytics.impressions)
 
   const bulkList = useSelector((state) => state.bulkEdit)
   const bulkSelected = bulkList?.selected?.includes(id)
 
   // Fire item impression
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
-  useEffect(
-    //prettier-ignore
-    () => fireItemImpression(position, item, inView, dispatch),
+  useEffect(() => {
+      if (inView && !impression[position]) {
+        dispatch(setImpression(position, item, inView))
+      }
+    },
     [position, item, inView]
   )
 
