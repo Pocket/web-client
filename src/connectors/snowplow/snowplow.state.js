@@ -54,6 +54,14 @@ export const trackContentEngagement = ({ component, identifier, position, item }
     item
   }
 }
+export const trackEngagement = ({ component, identifier, position }) => {
+  return {
+    type: SNOWPLOW_TRACK_ENGAGEMENT,
+    component,
+    identifier,
+    position
+  }
+}
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -72,6 +80,7 @@ export const snowplowSagas = [
   takeEvery(SNOWPLOW_TRACK_CONTENT_OPEN, fireContentOpen),
   takeEvery(SNOWPLOW_TRACK_IMPRESSION, fireImpression),
   takeEvery(SNOWPLOW_TRACK_CONTENT_ENGAGEMENT, fireContentEngagmenet),
+  takeEvery(SNOWPLOW_TRACK_ENGAGEMENT, fireEngagement),
   takeLatest(VARIANTS_SAVE, fireVariantEnroll)
 ]
 
@@ -129,5 +138,18 @@ function* fireContentEngagmenet({ component, identifier, position, item }) {
   })
 
   const snowplowEntities = [contentEntity, uiEntity]
+  yield sendCustomSnowplowEvent(engagementEvent, snowplowEntities)
+}
+
+function* fireEngagement({ component, identifier, position }) {
+  const engagementEvent = createEngagementEvent(component)
+  const uiEntity = createUiEntity({
+    type: component,
+    hierarchy: 0,
+    identifier,
+    index: position
+  })
+
+  const snowplowEntities = [uiEntity]
   yield sendCustomSnowplowEvent(engagementEvent, snowplowEntities)
 }

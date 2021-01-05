@@ -17,9 +17,10 @@ import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
 import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 
-import { fireItemOpen } from 'connectors/item-card/my-list/card.analytics'
-import { trackItemOpen } from 'connectors/item-card/my-list/card.analytics'
-import { setImpression } from 'connectors/item-card/my-list/card.analytics'
+import { fireItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
+import { trackItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
+import { setImpression } from 'connectors/items-by-id/my-list/items.analytics'
+import { sendEngagementEvent } from 'connectors/items-by-id/my-list/items.analytics'
 
 /**
  * Article Card
@@ -49,16 +50,38 @@ export function ItemCard({ id, position, fluidHeight, type }) {
     [position, item, inView]
   )
 
-  const itemShare = () => dispatch(itemsShareAction({ id, position }))
-  const itemDelete = () => dispatch(itemsDeleteAction([{ id, position }]))
+  const itemShare = () => {
+    dispatch(sendEngagementEvent('my-list.share', position, item))
+    dispatch(itemsShareAction({ id, position }))
+  }
+  const itemDelete = () => {
+    dispatch(sendEngagementEvent('my-list.delete', position, item))
+    dispatch(itemsDeleteAction([{ id, position }]))
+  }
 
-  const itemArchive = () => dispatch(itemsArchiveAction([{ id, position }]))
-  const itemUnArchive = () => dispatch(itemsUnArchiveAction([{ id, position }]))
+  const itemArchive = () => {
+    dispatch(sendEngagementEvent('my-list.archive', position, item))
+    dispatch(itemsArchiveAction([{ id, position }]))
+  }
+  const itemUnArchive = () => {
+    // bool to denote save action
+    dispatch(sendEngagementEvent('my-list.unarchive', position, item, true))
+    dispatch(itemsUnArchiveAction([{ id, position }]))
+  }
 
-  const itemFavorite = () => dispatch(itemsFavoriteAction([{ id, position }]))
-  const itemUnFavorite = () => dispatch(itemsUnFavoriteAction([{ id, position }])) //prettier-ignore
+  const itemFavorite = () => {
+    dispatch(sendEngagementEvent('my-list.favorite', position, item))
+    dispatch(itemsFavoriteAction([{ id, position }]))
+  }
+  const itemUnFavorite = () => {
+    dispatch(sendEngagementEvent('my-list.un-favorite', position, item))
+    dispatch(itemsUnFavoriteAction([{ id, position }])) //prettier-ignore
+  }
 
-  const itemTag = () => dispatch(itemsTagAction([{ id, position }]))
+  const itemTag = () => {
+    dispatch(sendEngagementEvent('my-list.tag', position, item))
+    dispatch(itemsTagAction([{ id, position }]))
+  }
 
   const itemBulkSelect = (shift) => {dispatch(itemsBulkSelectAction(id, shift))} //prettier-ignore
   const itemBulkDeSelect = (shift) => {dispatch(itemsBulkDeSelectAction(id, shift))} //prettier-ignore
