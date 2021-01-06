@@ -1,5 +1,5 @@
 import { takeEvery, put } from 'redux-saga/effects'
-import { trackImpression } from 'connectors/snowplow/snowplow.state'
+import { trackContentImpression } from 'connectors/snowplow/snowplow.state'
 import { trackContentOpen } from 'connectors/snowplow/snowplow.state'
 import { trackContentEngagement } from 'connectors/snowplow/snowplow.state'
 import { CONTENT_OPEN_TRIGGER_CLICK } from 'connectors/snowplow/events'
@@ -74,7 +74,7 @@ export const itemAnalyticsSagas = [
  */
 function* fireItemImpression({ position, item }) {
   yield put(
-    trackImpression(
+    trackContentImpression(
       IMPRESSION_COMPONENT_CARD,
       IMPRESSION_REQUIREMENT_VIEWABLE,
       position,

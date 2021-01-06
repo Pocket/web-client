@@ -1,4 +1,4 @@
-import { trackImpression } from 'connectors/snowplow/snowplow.state'
+import { trackContentImpression } from 'connectors/snowplow/snowplow.state'
 import { trackContentOpen } from 'connectors/snowplow/snowplow.state'
 import { CONTENT_OPEN_TRIGGER_CLICK } from 'connectors/snowplow/events'
 import { IMPRESSION_COMPONENT_CARD } from 'connectors/snowplow/events'
@@ -27,7 +27,7 @@ export function fireItemImpression(
 
     // trigger Snowplow impression
     dispatch(
-      trackImpression(
+      trackContentImpression(
         IMPRESSION_COMPONENT_CARD,
         IMPRESSION_REQUIREMENT_VIEWABLE,
         positionZeroIndex,

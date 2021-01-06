@@ -3,6 +3,7 @@ import { takeLatest, takeEvery } from 'redux-saga/effects'
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 import { SNOWPLOW_TRACK_CONTENT_OPEN } from 'actions'
 import { SNOWPLOW_TRACK_IMPRESSION } from 'actions'
+import { SNOWPLOW_TRACK_CONTENT_IMPRESSION } from 'actions'
 import { SNOWPLOW_TRACK_ENGAGEMENT } from 'actions'
 import { SNOWPLOW_TRACK_CONTENT_ENGAGEMENT } from 'actions'
 import { VARIANTS_SAVE } from 'actions'
@@ -37,13 +38,22 @@ export const trackContentOpen = (destination, trigger, position, item, identifie
     identifier
   }
 }
-export const trackImpression = (component, requirement, position, item, identifier) => {
+export const trackContentImpression = (component, requirement, position, item, identifier) => {
   return {
-    type: SNOWPLOW_TRACK_IMPRESSION,
+    type: SNOWPLOW_TRACK_CONTENT_IMPRESSION,
     component,
     requirement,
     position,
     item,
+    identifier
+  }
+}
+export const trackImpression = (component, requirement, position, identifier) => {
+  return {
+    type: SNOWPLOW_TRACK_CONTENT_IMPRESSION,
+    component,
+    requirement,
+    position,
     identifier
   }
 }
@@ -81,6 +91,7 @@ export const snowplowSagas = [
   takeLatest(SNOWPLOW_TRACK_PAGE_VIEW, firePageView),
   takeEvery(SNOWPLOW_TRACK_CONTENT_OPEN, fireContentOpen),
   takeEvery(SNOWPLOW_TRACK_IMPRESSION, fireImpression),
+  takeEvery(SNOWPLOW_TRACK_CONTENT_IMPRESSION, fireContentImpression),
   takeEvery(SNOWPLOW_TRACK_CONTENT_ENGAGEMENT, fireContentEngagmenet),
   takeEvery(SNOWPLOW_TRACK_ENGAGEMENT, fireEngagement),
   takeLatest(VARIANTS_SAVE, fireVariantEnroll)
@@ -115,7 +126,7 @@ function* fireContentOpen({ destination, trigger, position, item, identifier }) 
   yield sendCustomSnowplowEvent(contentOpenEvent, snowplowEntities)
 }
 
-function* fireImpression({ component, requirement, position, item, identifier }) {
+function* fireContentImpression({ component, requirement, position, item, identifier }) {
   const impressionEvent = createImpressionEvent(component, requirement)
   const contentEntity = createContentEntity(item?.save_url, item?.resolved_id)
   const uiEntity = createUiEntity({
@@ -126,6 +137,19 @@ function* fireImpression({ component, requirement, position, item, identifier })
   })
 
   const snowplowEntities = [contentEntity, uiEntity]
+  yield sendCustomSnowplowEvent(impressionEvent, snowplowEntities)
+}
+
+function* fireImpression({ component, requirement, position, identifier }) {
+  const impressionEvent = createImpressionEvent(component, requirement)
+  const uiEntity = createUiEntity({
+    type: component,
+    hierarchy: 0,
+    identifier,
+    index: position
+  })
+
+  const snowplowEntities = [uiEntity]
   yield sendCustomSnowplowEvent(impressionEvent, snowplowEntities)
 }
 

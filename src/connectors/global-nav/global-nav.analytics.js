@@ -1,8 +1,12 @@
 import { takeEvery, put } from 'redux-saga/effects'
+import { trackContentImpression } from 'connectors/snowplow/snowplow.state'
+import { trackImpression } from 'connectors/snowplow/snowplow.state'
 import { trackContentEngagement } from 'connectors/snowplow/snowplow.state'
 import { trackEngagement } from 'connectors/snowplow/snowplow.state'
 import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
 import { ENGAGEMENT_TYPE_SAVE } from 'connectors/snowplow/events'
+import { IMPRESSION_COMPONENT_UI } from 'connectors/snowplow/events'
+import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -25,7 +29,6 @@ export const sendBulkDeleteEvent = (items) => (trackContentEngagement(
   items,
   'global-nav.bulk.delete'
 ))
-
 
 export const sendBulkFavoriteEvent = (items, status) => {
   const identifier = status ? 'global-nav.batch.favorite' : 'global-nav.batch.un-favorite'
@@ -53,4 +56,11 @@ export const sendBulkTagEvent = (items) => (trackContentEngagement(
   0, // position in list (zero since it's in reader)
   items,
   'global-nav.bulk.tag'
+))
+
+export const sendImpression = (identifier) => (trackImpression(
+  IMPRESSION_COMPONENT_UI,
+  IMPRESSION_REQUIREMENT_VIEWABLE,
+  0,
+  identifier
 ))
