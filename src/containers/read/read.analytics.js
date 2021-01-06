@@ -1,7 +1,10 @@
 import { takeEvery, put } from 'redux-saga/effects'
 import { trackContentEngagement } from 'connectors/snowplow/snowplow.state'
+import { trackImpression } from 'connectors/snowplow/snowplow.state'
 import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
 import { ENGAGEMENT_TYPE_SAVE } from 'connectors/snowplow/events'
+import { IMPRESSION_COMPONENT_UI } from 'connectors/snowplow/events'
+import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -58,4 +61,11 @@ export const sendShareEvent = (item) => (trackContentEngagement(
   0, // position in list (zero since it's in reader)
   item,
   'reader.share'
+))
+
+export const sendImpression = (identifier) => (trackImpression(
+  IMPRESSION_COMPONENT_UI,
+  IMPRESSION_REQUIREMENT_VIEWABLE,
+  0,
+  identifier
 ))

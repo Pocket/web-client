@@ -42,6 +42,7 @@ import { sendTagEvent } from './read.analytics'
 import { sendFavoriteEvent } from './read.analytics'
 import { sendAnnotationEvent } from './read.analytics'
 import { sendShareEvent } from './read.analytics'
+import { sendImpression } from './read.analytics'
 
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
@@ -101,6 +102,9 @@ export default function Reader() {
   const itemShare = ({ quote }) => {
     dispatch(sendShareEvent(articleData))
     dispatch(itemsShareAction({ id, quote }))
+  }
+  const handleImpression = (identifier) => {
+    dispatch(sendImpression(identifier))
   }
 
   const [sideBarOpen, setSideBar] = useState(false)
@@ -255,6 +259,7 @@ export default function Reader() {
         displaySettings={{ columnWidth, lineHeight, fontSize, fontFamily }}
         favorite={favStatus}
         archive={archiveStatus}
+        onVisible={handleImpression}
       />
 
       <main className={articleWrapper}>
@@ -267,6 +272,7 @@ export default function Reader() {
             annotationCount={annotations.length}
             shareItem={itemShare}
             deleteAnnotation={removeAnnotation}
+            handleImpression={handleImpression}
           />
         </div>
         <article className={classNames(Fonts, 'reader')} style={customStyles}>
@@ -300,11 +306,14 @@ export default function Reader() {
         </article>
       </main>
       {!isPremium && articleContent ? (
-        <BottomUpsell maxWidth={customStyles.maxWidth} />
+        <BottomUpsell
+          maxWidth={customStyles.maxWidth}
+          onVisible={handleImpression} />
       ) : null}
       <AnnotationsLimitModal
         showModal={annotationLimitModal}
         closeModal={closeAnnotationLimit}
+        onVisible={handleImpression}
       />
       <DeleteModal />
       <TaggingModal />

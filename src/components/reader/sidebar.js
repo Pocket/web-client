@@ -80,7 +80,8 @@ export const Sidebar = ({
   annotationCount,
   shareItem,
   deleteAnnotation,
-  isPremium
+  isPremium,
+  handleImpression
 }) => {
   const handleAnnotationClick = (position) => {
     window.scrollTo({
@@ -103,6 +104,7 @@ export const Sidebar = ({
           annotationCount={annotationCount}
           deleteAnnotation={deleteAnnotation}
           onClickEvent={handleAnnotationClick}
+          handleImpression={handleImpression}
         />
 
         <div className={classNames(buttonRail, 'button-rail')}>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { css } from 'linaria'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
 import { DivideHorizontal } from 'components/divider/divider'
+import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { PREMIUM_URL } from 'common/constants'
 import { PremiumIcon } from '@pocket/web-ui'
 
@@ -27,47 +28,25 @@ const upsellWrapper = css`
   }
 `
 
-export class TagUpsell extends Component {
-  // componentDidMount() {
-  //   this.sendTrackClick('view_suggested_tag_upsell')
-  // }
+export const TagUpsell = ({ onVisible }) => {
 
-  // sendTrackClick = (identifier) => {
-  //   let page = (window.location.pathname.indexOf('/read/') !== -1)
-  //     ? 'reader'
-  //     : 'list'
+  const handleVisible = () => onVisible('suggested-tags.upgrade-link')
 
-  //   this.props.trackClick({
-  //     view: 'web',
-  //     section: '/premium',
-  //     identifier,
-  //     page
-  //   })
-  // }
-
-  // trackPremiumClick = () => {
-  //   this.sendTrackClick('click_suggested_tag_upsell')
-  // }
-
-  render() {
-    return (
-      <React.Fragment>
-        <div className={upsellWrapper}>
-          <p>
-            <PremiumIcon />
-            {/*'tagging.upsell.message'*/}
-            Tag stories faster than ever—get tag suggestions with.
-          </p>
-          <ArrowLink
-            // onClick={this.trackPremiumClick}
-            margin="10px 0"
-            href={`${PREMIUM_URL}13`}
-            target="_blank">
-            {/*'tagging.upsell.cta'*/}
-            Pocket Premium
-          </ArrowLink>
-        </div>
-      </React.Fragment>
-    )
-  }
+  return (
+    <VisibilitySensor onVisible={handleVisible}>
+      <div className={upsellWrapper}>
+        <p>
+          <PremiumIcon />
+          Tag stories faster than ever—get tag suggestions with.
+        </p>
+        <ArrowLink
+          id="suggested-tags.upgrade-link"
+          margin="10px 0"
+          href={`${PREMIUM_URL}13`}
+          target="_blank">
+          Pocket Premium
+        </ArrowLink>
+      </div>
+    </VisibilitySensor>
+  )
 }

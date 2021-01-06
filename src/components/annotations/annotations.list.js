@@ -58,7 +58,8 @@ export class QuoteList extends Component {
       annotations,
       onClickEvent,
       shareItem,
-      deleteAnnotation
+      deleteAnnotation,
+      handleImpression
     } = this.props
     const cards = []
 
@@ -98,7 +99,7 @@ export class QuoteList extends Component {
       cards.push(
         <LimitNotice
           key='notice'
-          trackClick={this.props.trackClick} />
+          onVisible={handleImpression} />
       )
     }
 

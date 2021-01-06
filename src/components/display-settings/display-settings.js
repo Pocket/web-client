@@ -19,6 +19,7 @@ import { LineHeightSettings } from './line-height'
 import { ColumnWidthSettings } from './column-width'
 import { ThemeSettings } from './theme'
 import { FONT_TYPES } from 'components/fonts/fonts'
+import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 
 const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
 const LINE_HEIGHT = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
@@ -76,7 +77,8 @@ export const DisplaySettings = ({
   setLineHeight,
   setColumnWidth,
   isPremium,
-  forceShow
+  forceShow,
+  onVisible
 }) => {
   const [displayFonts, setDisplayFonts] = useState(false)
 
@@ -114,6 +116,10 @@ export const DisplaySettings = ({
     setDisplayFonts(false)
   }
 
+  const handleVisible = () => {
+    onVisible('reader.display-settings')
+  }
+
   return (
     <div className={displayStyles}>
       <WithTooltip label="Display Settings">
@@ -148,7 +154,7 @@ export const DisplaySettings = ({
             <PopupMenuItem
               onClick={toggleDisplayFonts}
               icon={<ChevronLeftIcon />}>
-              Font Options {/*reader.displaySettings.fontOptions*/}
+              Font Options
             </PopupMenuItem>
           ) : (
             <PopupMenuItem
@@ -194,14 +200,17 @@ export const DisplaySettings = ({
                 />
               </>
             ) : (
-              <PopupMenuGroup>
-                <PopupMenuItem
-                  href="https://getpocket.com/premium?ep=3"
-                  target="_premium"
-                  icon={<PremiumIcon />}>
-                  Unlock more options
-                </PopupMenuItem>
-              </PopupMenuGroup>
+              <VisibilitySensor onVisible={handleVisible}>
+                <PopupMenuGroup>
+                  <PopupMenuItem
+                    id="reader.display-settings"
+                    href="https://getpocket.com/premium?ep=3"
+                    target="_premium"
+                    icon={<PremiumIcon />}>
+                    Unlock more options
+                  </PopupMenuItem>
+                </PopupMenuGroup>
+              </VisibilitySensor>
             )}
           </>
         )}

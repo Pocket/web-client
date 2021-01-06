@@ -8,11 +8,16 @@ import { itemsTagCancel } from 'connectors/items-by-id/my-list/items.tag'
 import { itemsTagAdd } from 'connectors/items-by-id/my-list/items.tag'
 import { itemsTagRemove } from 'connectors/items-by-id/my-list/items.tag'
 
+import { trackImpression } from 'connectors/snowplow/snowplow.state'
+import { IMPRESSION_COMPONENT_UI } from 'connectors/snowplow/events'
+import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
+
 import { TagList } from 'components/tagging/tag.list'
 import { TagInput } from 'components/tagging/tag.input'
 import { TagBox } from 'components/tagging/tag.box'
 
 import { TagSuggestions } from 'components/tagging/tag.suggestions'
+import { TagUpsell } from 'components/tagging/tag.upsell'
 
 export function TaggingModal() {
   const appRootSelector = '#__next'
@@ -87,6 +92,13 @@ export function TaggingModal() {
 
   const title = currentTags?.length ? 'Edit Tags' : 'Add Tags'
 
+  const handleImpression = (identifier) => dispatch(trackImpression(
+    IMPRESSION_COMPONENT_UI,
+    IMPRESSION_REQUIREMENT_VIEWABLE,
+    0,
+    identifier
+  ))
+
   return (
     <Modal
       title={title}
@@ -126,6 +138,9 @@ export function TaggingModal() {
             onFocus={onFocus}
           />
         </TagBox>
+        {!isPremium && isSingleTag ? (
+          <TagUpsell onVisible={handleImpression} />
+        ) : null}
         {isPremium && isSingleTag ? (
           <TagSuggestions
             suggestedTags={suggestedTags}
