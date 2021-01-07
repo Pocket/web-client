@@ -2,7 +2,6 @@ import { memo } from 'react'
 import { useEffect } from 'react'
 import { Card } from 'components/item-card/my-list/card'
 import { useSelector, useDispatch } from 'react-redux'
-import { useInView } from 'react-intersection-observer'
 
 import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
@@ -40,15 +39,11 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const bulkList = useSelector((state) => state.bulkEdit)
   const bulkSelected = bulkList?.selected?.map((item) => item.id).includes(id)
 
-  // Fire item impression
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
-  useEffect(() => {
-      if (inView && !impression[position]) {
-        dispatch(setImpression(position, item, inView))
-      }
-    },
-    [position, item, inView]
-  )
+  const itemImpression = () => {
+    if (!impression[position]) {
+      dispatch(setImpression(position, item))
+    }
+  }
 
   const itemShare = () => {
     dispatch(sendEngagementEvent('my-list.share', position, item))
@@ -93,7 +88,6 @@ export function ItemCard({ id, position, fluidHeight, type }) {
 
   return item ? (
     <Card
-      ref={ref}
       item={item}
       position={position}
       fluidHeight={fluidHeight}
@@ -110,7 +104,8 @@ export function ItemCard({ id, position, fluidHeight, type }) {
         itemUnFavorite,
         itemTag,
         itemBulkSelect,
-        itemBulkDeSelect
+        itemBulkDeSelect,
+        itemImpression
       }}
     />
   ) : null
