@@ -170,6 +170,8 @@ function GlobalNavBulkEdit({
 }) {
   const shouldFavorite = batchFavorite === 'favorite'
   const shouldArchive = batchStatus === 'archive'
+  const clearAction = bulkItemsCount >= 1 ? clearBulkItems : onClose
+  const clearCopy = bulkItemsCount >= 1 ? 'Clear' : 'Cancel'
 
   return (
     <div className={bulkStyle}>
@@ -207,9 +209,9 @@ function GlobalNavBulkEdit({
         </div>
         <button
           className="bulk-button"
-          onClick={clearBulkItems}
+          onClick={clearAction}
           {...testIdAttribute('clear-button')}>
-          Clear
+          {clearCopy}
         </button>
         {onClose ? (
           <CloseButton onClick={onClose} {...testIdAttribute('add-close')} />
