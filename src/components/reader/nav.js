@@ -107,7 +107,8 @@ export const ReaderNav = ({
   archiveItem,
   favorite,
   archive,
-  displaySettings
+  displaySettings,
+  onVisible
 }) => {
   const dispatch = useDispatch()
 
@@ -181,6 +182,7 @@ export const ReaderNav = ({
             setLineHeight={setLineHeight}
             setColumnWidth={setColumnWidth}
             isPremium={isPremium}
+            onVisible={onVisible}
           />
         </nav>
       </div>

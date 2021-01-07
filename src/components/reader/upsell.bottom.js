@@ -159,25 +159,11 @@ function _determineItem() {
   return tmpArray[Math.floor(Math.random() * tmpArray.length)]
 }
 
-export const BottomUpsell = ({ trackClick, maxWidth }) => {
+export const BottomUpsell = ({ maxWidth, onVisible }) => {
   const [itemToShow] = useState(_determineItem())
 
-  const sendTrackClick = (identifier) => {
-    // trackClick({
-    //   view: 'web',
-    //   section: '/premium',
-    //   page: 'reader',
-    //   page_params: itemToShow,
-    //   identifier
-    // })
-  }
-
   const handleVisible = () => {
-    sendTrackClick('view_bottom_reader_upsell')
-  }
-
-  const handleClick = () => {
-    sendTrackClick('click_bottom_reader_upsell')
+    onVisible('reader.bottom.premium')
   }
 
   return (
@@ -220,11 +206,8 @@ export const BottomUpsell = ({ trackClick, maxWidth }) => {
             <p className="small">
               this is a smaller paragraph so let's get excited!{' '}
               <ArrowLink
-                onClick={handleClick}
                 href={`${PREMIUM_URL}12`}
-                // aria-label={translate('upsell.upgrade')}
                 target="_blank">
-                {/*'upsell.pocketPremium'*/}
                 Pocket Premium
               </ArrowLink>
             </p>
@@ -232,9 +215,8 @@ export const BottomUpsell = ({ trackClick, maxWidth }) => {
 
           <div className={buttonWrapper}>
             <Button
-              onClick={handleClick}
+              id="reader.bottom.premium"
               target="_blank"
-              // aria-label={translate('upsell.upgrade')}
               href={`${PREMIUM_URL}12`}>Upgrade</Button>
           </div>
         </div>

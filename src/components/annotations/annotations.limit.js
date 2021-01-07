@@ -3,6 +3,7 @@ import { css } from 'linaria'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { PremiumIcon, Button } from '@pocket/web-ui'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
+import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 // import { MAX_ANNOTATIONS_DEFAULT } from 'Common/constants'
 import { PREMIUM_URL } from 'common/constants'
 
@@ -18,26 +19,33 @@ const upsellWrapper = css`
   }
 `
 
-export const LimitNotice = ({ trackClick }) => {
+export const LimitNotice = ({ onVisible }) => {
+
+  const handleVisible = () => onVisible('highlights.limit.sidebar')
+
   return (
-    <div className={upsellWrapper}>
-      <p>
-        <PremiumIcon />{' '}
-        You’re limited to 3 highlights per article. {/*highlightLimit.header*/}
-        Pocket Premium members get unlimited highlights. {/*highlightLimit.subheader*/}
-      </p>
-      <ArrowLink
-        // onClick={trackClick}
-        href={`${PREMIUM_URL}14`}
-        target="_blank">
-        Upgrade now {/*highlightLimit.ctaNow*/}
-      </ArrowLink>
-    </div>
+    <VisibilitySensor onVisible={handleVisible}>
+      <div className={upsellWrapper}>
+        <p>
+          <PremiumIcon />{' '}
+          You’re limited to 3 highlights per article.
+          Pocket Premium members get unlimited highlights.
+        </p>
+        <ArrowLink
+          id="highlights.limit.sidebar"
+          href={`${PREMIUM_URL}14`}
+          target="_blank">
+          Upgrade now
+        </ArrowLink>
+      </div>
+    </VisibilitySensor>
   )
 }
 
-export const ModalLimitNotice = ({ showModal, closeModal }) => {
+export const ModalLimitNotice = ({ showModal, closeModal, onVisible }) => {
   const appRootSelector = '#__next'
+
+  const handleVisible = () => onVisible('highlights.limit.modal')
 
   return (
     <Modal
@@ -47,16 +55,19 @@ export const ModalLimitNotice = ({ showModal, closeModal }) => {
       screenReaderLabel="Highlight Limit"
       handleClose={closeModal}>
       <ModalBody>
-        <p>
-          <PremiumIcon />{' '}
-          You’re limited to 3 highlights per article.
-          Pocket Premium members get unlimited highlights.{' '}
-          <ArrowLink
-            href={`${PREMIUM_URL}5`}
-            target="_blank">
-            Upgrade now
-          </ArrowLink>
-        </p>
+        <VisibilitySensor onVisible={handleVisible}>
+          <p>
+            <PremiumIcon />{' '}
+            You’re limited to 3 highlights per article.
+            Pocket Premium members get unlimited highlights.{' '}
+            <ArrowLink
+              id="reader.highlights.limit"
+              href={`${PREMIUM_URL}5`}
+              target="_blank">
+              Upgrade now
+            </ArrowLink>
+          </p>
+        </VisibilitySensor>
       </ModalBody>
       <ModalFooter>
         <Button type="submit" onClick={closeModal}>

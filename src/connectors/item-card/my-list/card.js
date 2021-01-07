@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { useEffect } from 'react'
 import { Card } from 'components/item-card/my-list/card'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -15,6 +16,11 @@ import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
 import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 
+import { fireItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
+import { trackItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
+import { setImpression } from 'connectors/items-by-id/my-list/items.analytics'
+import { sendEngagementEvent } from 'connectors/items-by-id/my-list/items.analytics'
+
 /**
  * Article Card
  * Creates a connected `Card` with the appropriate data and actions
@@ -28,23 +34,57 @@ export function ItemCard({ id, position, fluidHeight, type }) {
 
   // Get data from state
   const item = useSelector((state) => state.myListItemsById[id])
+  const impression = useSelector((state) => state.itemsAnalytics.impressions)
 
   const bulkList = useSelector((state) => state.bulkEdit)
   const bulkSelected = bulkList?.selected?.map((item) => item.id).includes(id)
 
-  const itemShare = () => dispatch(itemsShareAction({ id, position }))
-  const itemDelete = () => dispatch(itemsDeleteAction([{ id, position }]))
+  const itemImpression = () => {
+    if (!impression[position]) {
+      dispatch(setImpression(position, item))
+    }
+  }
 
-  const itemArchive = () => dispatch(itemsArchiveAction([{ id, position }]))
-  const itemUnArchive = () => dispatch(itemsUnArchiveAction([{ id, position }]))
+  const itemShare = () => {
+    dispatch(sendEngagementEvent('my-list.share', position, item))
+    dispatch(itemsShareAction({ id, position }))
+  }
+  const itemDelete = () => {
+    dispatch(sendEngagementEvent('my-list.delete', position, item))
+    dispatch(itemsDeleteAction([{ id, position }]))
+  }
 
-  const itemFavorite = () => dispatch(itemsFavoriteAction([{ id, position }]))
-  const itemUnFavorite = () => dispatch(itemsUnFavoriteAction([{ id, position }])) //prettier-ignore
+  const itemArchive = () => {
+    dispatch(sendEngagementEvent('my-list.archive', position, item))
+    dispatch(itemsArchiveAction([{ id, position }]))
+  }
+  const itemUnArchive = () => {
+    // bool to denote save action
+    dispatch(sendEngagementEvent('my-list.unarchive', position, item, true))
+    dispatch(itemsUnArchiveAction([{ id, position }]))
+  }
 
-  const itemTag = () => dispatch(itemsTagAction([{ id, position }]))
+  const itemFavorite = () => {
+    dispatch(sendEngagementEvent('my-list.favorite', position, item))
+    dispatch(itemsFavoriteAction([{ id, position }]))
+  }
+  const itemUnFavorite = () => {
+    dispatch(sendEngagementEvent('my-list.un-favorite', position, item))
+    dispatch(itemsUnFavoriteAction([{ id, position }])) //prettier-ignore
+  }
+
+  const itemTag = () => {
+    dispatch(sendEngagementEvent('my-list.tag', position, item))
+    dispatch(itemsTagAction([{ id, position }]))
+  }
 
   const itemBulkSelect = (shift) => {dispatch(itemsBulkSelectAction(id, shift))} //prettier-ignore
   const itemBulkDeSelect = (shift) => {dispatch(itemsBulkDeSelectAction(id, shift))} //prettier-ignore
+
+  const onOpen = () => {
+    trackItemOpen(position + 1, item, type) // legacy analytics uses 1 based position
+    fireItemOpen(position, item, dispatch)
+  }
 
   return item ? (
     <Card
@@ -54,6 +94,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
       type={type}
       bulkEdit={bulkEdit}
       bulkSelected={bulkSelected}
+      onOpen={onOpen}
       actions={{
         itemShare,
         itemDelete,
@@ -63,7 +104,8 @@ export function ItemCard({ id, position, fluidHeight, type }) {
         itemUnFavorite,
         itemTag,
         itemBulkSelect,
-        itemBulkDeSelect
+        itemBulkDeSelect,
+        itemImpression
       }}
     />
   ) : null

@@ -20,6 +20,8 @@ import { BASE_URL, LOGIN_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities'
 import { userOAuthLogIn } from 'connectors/user/user.state'
 
+import { sendImpression } from './global-nav.analytics'
+
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
   const DISALLOWED_PROFILE_IMGS = ['profileBlue.png'] // file names of default urls returned by BE. If a user avatar url contains one of these, we prefer to return an empty string, in order to use the Web UI's Avatar default image instead
@@ -66,6 +68,7 @@ const GlobalNav = (props) => {
 
   const toggleSortOrder = () => dispatch(sortOrderToggle())
   const toggleListMode = () => dispatch(listModeToggle())
+  const sendImpressionEvent = (identifier) => dispatch(sendImpression(identifier))
 
   const links = [
     {
@@ -138,6 +141,7 @@ const GlobalNav = (props) => {
       sortOrder={sortOrder}
       toggleSortOrder={toggleSortOrder}
       toggleListMode={toggleListMode}
+      sendImpression={sendImpressionEvent}
       tools={tools}>
       {NavTakeover ? <NavTakeover onClose={resetNav} /> : null}
     </GlobalNavComponent>

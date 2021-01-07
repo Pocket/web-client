@@ -11,6 +11,7 @@ import { PopupMenu, PopupMenuGroup, PopupMenuItem } from '@pocket/web-ui'
 import { WithTooltip } from '@pocket/web-ui'
 import { ThemeSettings } from 'components/display-settings/theme'
 import { ListSettings } from 'components/display-settings/list-modes'
+import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 
 const accountLinkStyle = css`
   display: inline-block;
@@ -146,12 +147,17 @@ const GlobalNavAccount = ({
   listMode,
   sortOrder,
   toggleSortOrder,
-  toggleListMode
+  toggleListMode,
+  sendImpression
 }) => {
   const accountMenuTriggerRef = useRef(null)
 
   function handleLinkClick(name, event) {
     onLinkClick(name, event)
+  }
+
+  function handleVisible() {
+    sendImpression('global-nav.upgrade-link')
   }
 
   // Hold off on rendering until we have a clear response on user status
@@ -185,17 +191,19 @@ const GlobalNavAccount = ({
   ) : (
     <div>
       {!isPremium ? (
-        <a
-          href="https://getpocket.com/premium?src=navbar"
-          id="global-nav-upgrade-link"
-          className={`${accountLinkStyle} ${upgradeLinkStyle}`}
-          onClick={(event) => {
-            handleLinkClick('premium', event)
-          }}
-          {...testIdAttribute('upgrade-link')}>
-          <PremiumIcon />
-          <span className="label">Upgrade</span>
-        </a>
+        <VisibilitySensor onVisible={handleVisible}>
+          <a
+            href="https://getpocket.com/premium?src=navbar"
+            id="global-nav.upgrade-link"
+            className={`${accountLinkStyle} ${upgradeLinkStyle}`}
+            onClick={(event) => {
+              handleLinkClick('premium', event)
+            }}
+            {...testIdAttribute('upgrade-link')}>
+            <PremiumIcon />
+            <span className="label">Upgrade</span>
+          </a>
+        </VisibilitySensor>
       ) : null}
       <WithTooltip label="Account">
         <AvatarButton

@@ -2,6 +2,7 @@ import React from 'react'
 import { css, cx } from 'linaria'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { urlWithPocketRedirect } from 'common/utilities'
+import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 
 import { CardMedia } from 'components/media/card-media'
 import { ItemActions } from './item-actions'
@@ -175,7 +176,7 @@ const card = css`
  * out of the [feed](https://github.com/Pocket/spec/blob/master/query/v3server/feed.md)
  * and makes sure the appropriate data is represented.
  */
-export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
+export const Card = ({ item, type, actions, bulkEdit, bulkSelected, onOpen }) => {
   const {
     item_id: id,
     title,
@@ -186,8 +187,7 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
     favorite,
     status,
     open_url,
-    openExternal,
-    onOpen = () => {}
+    openExternal
   } = item
 
   const {
@@ -199,7 +199,8 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
     itemUnFavorite,
     itemTag,
     itemBulkSelect,
-    itemBulkDeSelect
+    itemBulkDeSelect,
+    itemImpression
   } = actions
 
   const cardClass = cx(
@@ -226,6 +227,7 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
   const openUrl = openExternal ? urlWithPocketRedirect(open_url) : `/read/${id}`
 
   return (
+  <VisibilitySensor onVisible={itemImpression}>
     <article
       className={cardClass}
       key={id}
@@ -236,7 +238,10 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
         <span className="idOverlay">{id}</span>
       </FeatureFlag>
       <Link href={openUrl}>
-        <a onClick={onOpen}>
+        <a
+          onClick={onOpen}
+          // eslint-disable-next-line react/jsx-no-target-blank
+          target={openExternal ? '_blank' : undefined }>
           <CardMedia image_src={thumbnail} title={title} id={id} />
           <div className="content">
             <h2 className="title">
@@ -300,5 +305,7 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
         </div>
       </footer>
     </article>
+  </VisibilitySensor>
   )
 }
+
