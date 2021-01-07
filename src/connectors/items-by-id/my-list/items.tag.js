@@ -110,7 +110,7 @@ function* itemsTag({ items }) {
 
   // If we only have one item
   if (itemId) {
-    const actions = buildActions(items, tags, API_ACTION_REPLACE_TAGS)
+    const actions = buildActions(items, API_ACTION_REPLACE_TAGS, tags)
     const data = yield call(sendItemActions, actions)
 
     if (data) return yield put({ type: ITEMS_TAG_SUCCESS, data, actions })
