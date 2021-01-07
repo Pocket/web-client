@@ -25,7 +25,7 @@ const modalFooterStyles = css`
   &.sticky {
     position: sticky;
     bottom: 0;
-    background-color: var(--color-canvas);
+    background-color: var(--color-popoverCanvas);
     z-index: 1;
   }
 `
