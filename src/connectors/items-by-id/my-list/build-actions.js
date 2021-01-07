@@ -48,7 +48,7 @@ export function* batchSendActions(items, apiAction, tags) {
 }
 
 export function buildActions(items, apiAction, tags) {
-  const time = Date.now()
+  const time = Math.round(Date.now() / 1000)
   return items.map((item) => ({
     action: apiAction,
     item_id: item.id,
