@@ -1,4 +1,5 @@
 import { css, cx } from 'linaria'
+import { WithTooltip } from '@pocket/web-ui'
 
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { CrossIcon } from '@pocket/web-ui'
@@ -170,32 +171,46 @@ function GlobalNavBulkEdit({
 }) {
   const shouldFavorite = batchFavorite === 'favorite'
   const shouldArchive = batchStatus === 'archive'
+  const clearAction = bulkItemsCount >= 1 ? clearBulkItems : onClose
+  const clearCopy = bulkItemsCount >= 1 ? 'Clear' : 'Cancel'
 
   return (
     <div className={bulkStyle}>
       <div className={bulkContainerStyle}>
         <div className="bulk-container">
           <div className="bulk-actions">
-            <button className={buttonStyle} onClick={tagAction}>
-              <TagIcon className={bulkIconActions} />
-            </button>
-            <button className={buttonStyle} onClick={favoriteAction}>
-              {shouldFavorite ? (
-                <FavoriteIcon className={bulkIconActions} />
-              ) : (
-                <FavoriteFilledIcon className={bulkIconActions} />
-              )}
-            </button>
-            <button className={buttonStyle} onClick={archiveAction}>
-              {shouldArchive ? (
-                <ArchiveIcon className={bulkIconActions} />
-              ) : (
-                <AddIcon className={bulkIconActions} />
-              )}
-            </button>
-            <button className={buttonStyle} onClick={deleteAction}>
-              <DeleteIcon className={bulkIconActions} />
-            </button>
+            <WithTooltip label="Tag">
+              <button className={buttonStyle} onClick={tagAction}>
+                <TagIcon className={bulkIconActions} />
+              </button>
+            </WithTooltip>
+
+            <WithTooltip label={shouldFavorite ? 'Favorite' : 'Unfavorite'}>
+              <button className={buttonStyle} onClick={favoriteAction}>
+                {shouldFavorite ? (
+                  <FavoriteIcon className={bulkIconActions} />
+                ) : (
+                  <FavoriteFilledIcon className={bulkIconActions} />
+                )}
+              </button>
+            </WithTooltip>
+
+            <WithTooltip label={shouldArchive ? 'Archive' : 'Add'}>
+              <button className={buttonStyle} onClick={archiveAction}>
+                {shouldArchive ? (
+                  <ArchiveIcon className={bulkIconActions} />
+                ) : (
+                  <AddIcon className={bulkIconActions} />
+                )}
+              </button>
+            </WithTooltip>
+
+            <WithTooltip label="Delete">
+              <button className={buttonStyle} onClick={deleteAction}>
+                <DeleteIcon className={bulkIconActions} />
+              </button>
+            </WithTooltip>
+
             <div>
               {bulkItemsCount
                 ? `${bulkItemsCount} item${
@@ -207,9 +222,9 @@ function GlobalNavBulkEdit({
         </div>
         <button
           className="bulk-button"
-          onClick={clearBulkItems}
+          onClick={clearAction}
           {...testIdAttribute('clear-button')}>
-          Clear
+          {clearCopy}
         </button>
         {onClose ? (
           <CloseButton onClick={onClose} {...testIdAttribute('add-close')} />

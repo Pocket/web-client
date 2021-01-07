@@ -272,6 +272,14 @@ export const contentStyles = css`
     vertical-align: top;
     font-size: 0.8em;
   }
+
+  div:empty,
+  section:empty,
+  aside:empty,
+  p:empty,
+  li:empty {
+    display: none;
+  }
 `
 
 export const highlightStyles = css`
