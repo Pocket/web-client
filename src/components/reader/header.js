@@ -141,7 +141,11 @@ export const ItemHeader = ({
       </div>
 
       <div className={pocketInfo}>
-        <a className={viewOriginal} href={open_url} target="_blank">
+        <a
+          id="reader.external-link.view-original"
+          className={viewOriginal}
+          href={open_url}
+          target="_blank">
           View Original {/*"reader.header.viewOriginal"*/}
         </a>
         {tags && (
@@ -150,7 +154,7 @@ export const ItemHeader = ({
               {tags.map((tag) => (
                 <li key={tag}>
                   <Link href={`/my-list/tags/${encodeURIComponent(tag)}`}>
-                    <a>
+                    <a id={`reader.tag.${tag}`}>
                       <Pill>{tag}</Pill>
                     </a>
                   </Link>

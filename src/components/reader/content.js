@@ -44,9 +44,10 @@ export const Content = ({
 
   const externalizeLinks = () => {
     const links = articleRef.current.querySelectorAll('a[href]')
-    links.forEach((link) => {
+    links.forEach((link, index) => {
       link.setAttribute('target', '_blank')
       link.setAttribute('rel', 'noopener noreferrer')
+      link.setAttribute('id', `reader.external-link.num-${index}`)
     })
   }
 
