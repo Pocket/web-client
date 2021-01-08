@@ -96,8 +96,18 @@ export default function Collection(props) {
     if (!routeChange) return
     // If items are already in place, we want to know if anything has changed
     // since the last time we fetched the list (operations in other pages or apps)
+    dispatch(appSetSection(section))
     dispatch(updateMyListData(since, subset, filter, tag))
-  }, [routeChange, initialItemsPopulated, dispatch, since, subset, filter, tag])
+  }, [
+    routeChange,
+    initialItemsPopulated,
+    dispatch,
+    section,
+    since,
+    subset,
+    filter,
+    tag
+  ])
 
   /**
    * When an item is added we get back sub par data from the return
