@@ -46,7 +46,8 @@ export default function Collection(props) {
   const userStatus = useSelector((state) => state.user.user_status)
 
   // Check for initial items so we don't over request
-  const initialItemsPopulated = items?.length >= 30 || total < 30
+  const initialItemsPopulated =
+    items?.length >= 30 || (items?.length && total < 30)
 
   /**
    * Set up listeners for focus shifts.  When the window gains focus check if
@@ -73,7 +74,7 @@ export default function Collection(props) {
    * ------------------------------------------------------------------------
    */
   useEffect(() => {
-    if (!initialItemsPopulated || userStatus === 'pending') return
+    if (initialItemsPopulated || userStatus === 'pending') return
     dispatch(appSetSection(section))
     dispatch(getMylistData(30, 0, subset, filter, tag))
   }, [
