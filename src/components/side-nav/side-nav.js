@@ -9,13 +9,18 @@ import { ArchiveIcon } from '@pocket/web-ui'
 import { VideoIcon } from '@pocket/web-ui'
 import { ChevronUpIcon } from '@pocket/web-ui'
 
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 
 export const sideNavWrapper = css`
   position: relative;
   grid-column: span 2;
   min-height: 50vh;
   max-width: 165px;
+  &.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
   .top-nav {
     /* position: fixed; */
   }
@@ -86,7 +91,7 @@ export const sideNavItem = css`
   }
 `
 
-export function SideNav({ subset, tag, pinnedTags }) {
+export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
   const subActive = (active, isTag) => {
     const isActive = tag ? active === tag : active === subset
     const activeClass = isActive ? 'active' : ''
@@ -100,8 +105,11 @@ export function SideNav({ subset, tag, pinnedTags }) {
       left: 0
     })
   }
+
+  const wrapperClass = cx(sideNavWrapper, isDisabled && 'disabled')
+
   return (
-    <div className={sideNavWrapper}>
+    <div className={wrapperClass}>
       <nav role="navigation" className="top-nav">
         <Link href="/my-list">
           <button className={subActive('unread')}>
