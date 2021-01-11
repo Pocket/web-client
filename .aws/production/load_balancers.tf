@@ -607,6 +607,32 @@ resource "aws_alb_listener_rule" "public_forward_25" {
   priority = 2025
 }
 
+resource "aws_alb_listener_rule" "public_forward_50" {
+  listener_arn = data.aws_alb_listener.web_client.arn
+  action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.public.arn
+  }
+
+  condition {
+    host_header {
+      values = [var.domain_name]
+    }
+  }
+
+  condition {
+    path_pattern {
+      values = [
+        "/my-list",
+        "/my-list/",
+        "/my-list/*"
+      ]
+    }
+  }
+
+  priority = 2050
+}
+
 
 # This is the catch all. Needs to be at the bottom of the routes
 resource "aws_alb_listener_rule" "public_forward_100" {
