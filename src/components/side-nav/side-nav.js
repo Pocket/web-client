@@ -29,6 +29,9 @@ export const sideNavWrapper = css`
     max-width: 1128px;
     position: fixed;
     bottom: 50px;
+    .icon {
+      cursor: pointer;
+    }
   }
 `
 

@@ -30,6 +30,7 @@ export const HighlightInlineMenu = ({
           shareItem={shareItem}
           quote={highlight.quote}
           deleteAnnotation={deleteAnnotation}
+          floating={true}
         />
       )
     }

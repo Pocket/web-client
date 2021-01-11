@@ -39,7 +39,7 @@ const popupWrapper = css`
 
 const buttonWrapper = css`
   font-family: 'Graphik Web';
-  padding: 13px 15px 15px;
+  padding: 13px 15px 15px !important;
   cursor: pointer;
   margin: 0;
   &:hover {

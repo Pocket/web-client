@@ -57,19 +57,21 @@ export const trackImpression = (component, requirement, position, identifier) =>
     identifier
   }
 }
-export const trackContentEngagement = (component, position, items, identifier) => {
+export const trackContentEngagement = (component, ui, position, items, identifier) => {
   return {
     type: SNOWPLOW_TRACK_CONTENT_ENGAGEMENT,
     component,
+    ui,
     identifier,
     position,
     items
   }
 }
-export const trackEngagement = (component, position, identifier) => {
+export const trackEngagement = (component, ui, position, identifier) => {
   return {
     type: SNOWPLOW_TRACK_ENGAGEMENT,
     component,
+    ui,
     identifier,
     position
   }
@@ -153,7 +155,7 @@ function* fireImpression({ component, requirement, position, identifier }) {
   yield sendCustomSnowplowEvent(impressionEvent, snowplowEntities)
 }
 
-function* fireContentEngagmenet({ component, identifier, position, items }) {
+function* fireContentEngagmenet({ component, ui, identifier, position, items }) {
   const engagementEvent = createEngagementEvent(component)
 
   const contentEntities = (items.length) ? items : [items]
@@ -162,7 +164,7 @@ function* fireContentEngagmenet({ component, identifier, position, items }) {
   const contentEntity = contentEntities.map(item => createContentEntity(item?.save_url, item?.resolved_id))
 
   const uiEntity = createUiEntity({
-    type: component,
+    type: ui,
     hierarchy: 0,
     identifier,
     index: position
@@ -172,10 +174,10 @@ function* fireContentEngagmenet({ component, identifier, position, items }) {
   yield sendCustomSnowplowEvent(engagementEvent, snowplowEntities)
 }
 
-function* fireEngagement({ component, identifier, position }) {
+function* fireEngagement({ component, ui, identifier, position }) {
   const engagementEvent = createEngagementEvent(component)
   const uiEntity = createUiEntity({
-    type: component,
+    type: ui,
     hierarchy: 0,
     identifier,
     index: position

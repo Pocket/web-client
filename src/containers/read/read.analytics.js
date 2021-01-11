@@ -5,11 +5,13 @@ import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
 import { ENGAGEMENT_TYPE_SAVE } from 'connectors/snowplow/events'
 import { IMPRESSION_COMPONENT_UI } from 'connectors/snowplow/events'
 import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
+import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const sendDeleteEvent = (item) => (trackContentEngagement(
   ENGAGEMENT_TYPE_GENERAL,
+  UI_COMPONENT_BUTTON,
   0, // position in list (zero since it's in reader)
   item,
   'reader.delete'
@@ -21,6 +23,7 @@ export const sendArchiveEvent = (item, status) => {
   const engagement = status ? ENGAGEMENT_TYPE_GENERAL : ENGAGEMENT_TYPE_SAVE
   return trackContentEngagement(
     engagement,
+    UI_COMPONENT_BUTTON,
     0, // position in list (zero since it's in reader)
     item,
     identifier
@@ -29,6 +32,7 @@ export const sendArchiveEvent = (item, status) => {
 
 export const sendTagEvent = (item) => (trackContentEngagement(
   ENGAGEMENT_TYPE_GENERAL,
+  UI_COMPONENT_BUTTON,
   0, // position in list (zero since it's in reader)
   item,
   'reader.tag'
@@ -39,6 +43,7 @@ export const sendFavoriteEvent = (item, status) => {
   const identifier = status ? 'reader.un-favorite' : 'reader.favorite'
   return trackContentEngagement(
     ENGAGEMENT_TYPE_GENERAL,
+    UI_COMPONENT_BUTTON,
     0, // position in list (zero since it's in reader)
     item,
     identifier
@@ -50,6 +55,7 @@ export const sendAnnotationEvent = (item, status) => {
   const identifier = status ? 'reader.remove-annotation' : 'reader.add-annotation'
   return trackContentEngagement(
     ENGAGEMENT_TYPE_GENERAL,
+    UI_COMPONENT_BUTTON,
     0, // position in list (zero since it's in reader)
     item,
     identifier
@@ -58,6 +64,7 @@ export const sendAnnotationEvent = (item, status) => {
 
 export const sendShareEvent = (item) => (trackContentEngagement(
   ENGAGEMENT_TYPE_GENERAL,
+  UI_COMPONENT_BUTTON,
   0, // position in list (zero since it's in reader)
   item,
   'reader.share'
