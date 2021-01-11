@@ -31,9 +31,3 @@ variable "legacy_lb_tg_arn" {
   type    = "string"
   default = "arn:aws:elasticloadbalancing:us-east-1:996905175585:targetgroup/Web-Prod-Public/d8ba379efa742b8c"
 }
-
-variable "web_discover_lb_tg_arn" {
-  description = "ARN for web discover"
-  type    = "string"
-  default = "arn:aws:elasticloadbalancing:us-east-1:996905175585:targetgroup/web-discover-production/3e68c64240a54a83"
-}

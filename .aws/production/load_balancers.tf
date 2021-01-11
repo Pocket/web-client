@@ -23,7 +23,7 @@ resource "aws_alb_listener_rule" "public_forward" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
@@ -48,7 +48,7 @@ resource "aws_alb_listener_rule" "public_forward_3" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
@@ -74,7 +74,7 @@ resource "aws_alb_listener_rule" "public_forward_4" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
@@ -154,7 +154,7 @@ resource "aws_alb_listener_rule" "public_forward_8" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
@@ -180,7 +180,7 @@ resource "aws_alb_listener_rule" "public_forward_10" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
@@ -293,7 +293,7 @@ resource "aws_alb_listener_rule" "public_forward_14" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
@@ -319,7 +319,7 @@ resource "aws_alb_listener_rule" "public_forward_15" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
@@ -378,7 +378,7 @@ resource "aws_alb_listener_rule" "public_forward_17" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
@@ -405,7 +405,7 @@ resource "aws_alb_listener_rule" "public_forward_18" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
@@ -430,7 +430,7 @@ resource "aws_alb_listener_rule" "public_forward_19" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
@@ -457,7 +457,7 @@ resource "aws_alb_listener_rule" "public_forward_21" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
@@ -585,7 +585,7 @@ resource "aws_alb_listener_rule" "public_forward_25" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
@@ -613,7 +613,7 @@ resource "aws_alb_listener_rule" "public_forward_100" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = data.aws_lb_target_group.web_discover.arn
+    target_group_arn = aws_alb_target_group.public.arn
   }
 
   condition {
