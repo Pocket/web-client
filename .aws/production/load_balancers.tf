@@ -5,7 +5,7 @@
 # -----------------------------------------------------------------
 
 # We are sharing the load balancer with getpocket.com (Web)
-# This is neccesary because traffic will be partially routed here
+# This is necessary because traffic will be partially routed here
 # as we transition away from current web code
 # (eventually this will not be the case)
 data "aws_alb" "web_client" {
@@ -13,17 +13,17 @@ data "aws_alb" "web_client" {
 }
 
 # We are also sharing the listener for the same reasons outlined above
-data "aws_alb_listener" "web_discover" {
+data "aws_alb_listener" "web_client" {
   arn = data.terraform_remote_state.web.outputs.public_alb_https_listener_arn
 }
 
 #TODO: When https://github.com/terraform-providers/terraform-provider-aws/pull/8268 is merged, merge the listener rules together into 1 block.
 # Define where the load balancer should route trafffic
 resource "aws_alb_listener_rule" "public_forward" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -45,10 +45,10 @@ resource "aws_alb_listener_rule" "public_forward" {
 }
 
 resource "aws_alb_listener_rule" "public_forward_3" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -71,10 +71,10 @@ resource "aws_alb_listener_rule" "public_forward_3" {
 }
 
 resource "aws_alb_listener_rule" "public_forward_4" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -97,7 +97,7 @@ resource "aws_alb_listener_rule" "public_forward_4" {
 
 # This Points to assets for the legacy repo
 resource "aws_alb_listener_rule" "public_forward_5" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
     target_group_arn = data.aws_lb_target_group.legacy.arn
@@ -122,7 +122,7 @@ resource "aws_alb_listener_rule" "public_forward_5" {
 
 # This Points to the legacy repo
 resource "aws_alb_listener_rule" "public_forward_eoy_2020" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
     target_group_arn = data.aws_lb_target_group.legacy.arn
@@ -151,10 +151,10 @@ resource "aws_alb_listener_rule" "public_forward_eoy_2020" {
 # This can be removed once topic pages go live as it will be caught in the catch
 # all rule
 resource "aws_alb_listener_rule" "public_forward_8" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -177,10 +177,10 @@ resource "aws_alb_listener_rule" "public_forward_8" {
 # 2009 is currently in use.  Once this route 2010 is in place we can adjust it
 # to be 2009 and remove 2010.  This is done to avoid service outages
 resource "aws_alb_listener_rule" "public_forward_10" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -202,7 +202,7 @@ resource "aws_alb_listener_rule" "public_forward_10" {
 
 # We are redirecting trending and must reads to explore home (with query params)
 resource "aws_alb_listener_rule" "public_forward_11" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type = "redirect"
     redirect {
@@ -235,7 +235,7 @@ resource "aws_alb_listener_rule" "public_forward_11" {
 
 # This Points to the legacy repo
 resource "aws_alb_listener_rule" "public_forward_12" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
     target_group_arn = data.aws_lb_target_group.legacy.arn
@@ -263,7 +263,7 @@ resource "aws_alb_listener_rule" "public_forward_12" {
 
 # This Points to the legacy repo
 resource "aws_alb_listener_rule" "public_forward_13" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
     target_group_arn = data.aws_lb_target_group.legacy.arn
@@ -290,10 +290,10 @@ resource "aws_alb_listener_rule" "public_forward_13" {
 }
 
 resource "aws_alb_listener_rule" "public_forward_14" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -316,10 +316,10 @@ resource "aws_alb_listener_rule" "public_forward_14" {
 }
 
 resource "aws_alb_listener_rule" "public_forward_15" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -343,7 +343,7 @@ resource "aws_alb_listener_rule" "public_forward_15" {
 
 # We are redirecting legacy contact to contact-info
 resource "aws_alb_listener_rule" "public_forward_16" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type = "redirect"
     redirect {
@@ -375,10 +375,10 @@ resource "aws_alb_listener_rule" "public_forward_16" {
 }
 
 resource "aws_alb_listener_rule" "public_forward_17" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -402,10 +402,10 @@ resource "aws_alb_listener_rule" "public_forward_17" {
 }
 
 resource "aws_alb_listener_rule" "public_forward_18" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -427,10 +427,10 @@ resource "aws_alb_listener_rule" "public_forward_18" {
 }
 
 resource "aws_alb_listener_rule" "public_forward_19" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -454,10 +454,10 @@ resource "aws_alb_listener_rule" "public_forward_19" {
 }
 
 resource "aws_alb_listener_rule" "public_forward_21" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -482,7 +482,7 @@ resource "aws_alb_listener_rule" "public_forward_21" {
 
 # We are redirecting legacy firefox learn more routes to pocket-and-firefox
 resource "aws_alb_listener_rule" "public_forward_22" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type = "redirect"
     redirect {
@@ -517,7 +517,7 @@ resource "aws_alb_listener_rule" "public_forward_22" {
 
 # We are redirecting productivity to self improvement
 resource "aws_alb_listener_rule" "public_forward_23" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type = "redirect"
     redirect {
@@ -550,7 +550,7 @@ resource "aws_alb_listener_rule" "public_forward_23" {
 
 # We are redirecting finance to business
 resource "aws_alb_listener_rule" "public_forward_24" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type = "redirect"
     redirect {
@@ -582,10 +582,10 @@ resource "aws_alb_listener_rule" "public_forward_24" {
 }
 
 resource "aws_alb_listener_rule" "public_forward_25" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -610,10 +610,10 @@ resource "aws_alb_listener_rule" "public_forward_25" {
 
 # This is the catch all. Needs to be at the bottom of the routes
 resource "aws_alb_listener_rule" "public_forward_100" {
-  listener_arn = data.aws_alb_listener.web_discover.arn
+  listener_arn = data.aws_alb_listener.web_client.arn
   action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    target_group_arn = data.aws_lb_target_group.web_discover.arn
   }
 
   condition {
@@ -636,7 +636,7 @@ resource "aws_alb_listener_rule" "public_forward_100" {
 
 # Defining what the the load balancer should expect when routing to
 # the containers.
-# NOTE: Make sure your appliation has a route to pulse that returns 200
+# NOTE: Make sure your application has a route to pulse that returns 200
 resource "aws_alb_target_group" "public" {
   health_check {
     interval            = 30

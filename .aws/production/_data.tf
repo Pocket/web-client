@@ -67,5 +67,9 @@ data "aws_security_group" "public_alb_security_group" {
 }
 
 data "aws_lb_target_group" "legacy" {
-  arn  = "${var.lb_tg_arn}"
+  arn = var.legacy_lb_tg_arn
+}
+
+data "aws_lb_target_group" "web_discover" {
+  arn = var.web_discover_lb_tg_arn
 }
