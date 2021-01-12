@@ -8,6 +8,7 @@ import { capitalizeFirstLetter } from 'common/utilities'
 import { PinFilledIcon } from '@pocket/web-ui'
 import { PinIcon } from '@pocket/web-ui'
 import { EditIcon } from '@pocket/web-ui'
+import { DeleteIcon } from '@pocket/web-ui'
 import { WithTooltip } from '@pocket/web-ui'
 import { buttonReset } from 'components/buttons/button-reset'
 
@@ -66,6 +67,7 @@ export const TagPageHeader = ({
   tag,
   pinTag,
   editTag,
+  deleteTag,
   isPinned
 }) => {
   return subset ? (
@@ -83,6 +85,11 @@ export const TagPageHeader = ({
         <WithTooltip label="Edit Tag" delay={true}>
           <button className={buttonReset} onClick={editTag}>
             <EditIcon />
+          </button>
+        </WithTooltip>
+        <WithTooltip label="Delete Tag" delay={true}>
+          <button className={buttonReset} onClick={deleteTag}>
+            <DeleteIcon />
           </button>
         </WithTooltip>
       </div>

@@ -18,6 +18,8 @@ import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
 import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
 import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
+import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
+import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
 
 export default function Collection(props) {
@@ -163,6 +165,8 @@ export default function Collection(props) {
               <ShareModal />
               <ArchiveModal />
               <FavoriteModal />
+              <TagDeleteModal />
+              <TagEditModal />
               <Toasts />
             </>
           ) : (
