@@ -3,6 +3,7 @@ import Mousetrap from 'mousetrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { devModeToggle } from 'connectors/app/app.state'
 import { toggleOAuth } from 'connectors/user/user.state'
+import { Features } from 'connectors/dev-tools/features'
 
 import { css } from 'linaria'
 import { headingSansSerif } from '@pocket/web-ui'
@@ -64,6 +65,7 @@ export function DevTools() {
         />
         <label htmlFor="useOAuth">Use oAuth</label>
       </div>
+      <Features />
     </div>
   ) : null
 }

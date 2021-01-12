@@ -108,10 +108,6 @@ function PocketWebClient({ Component, pageProps, err }) {
         // hydrate user
         const user = await fetchUserData()
         dispatch(userHydrate({ ...user, sess_guid }))
-
-        // hydrate features
-        const features = await fetchUnleashData(user, sess_guid)
-        if (features) dispatch(featuresHydrate(features))
       }
     }
 
@@ -214,6 +210,14 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // Load OptinMonster
     // loadOptinMonster()
+
+    // hydrate features
+    const hydrateFeatures = async () => {
+      const features = await fetchUnleashData(user_id, sess_guid)
+      if (features) dispatch(featuresHydrate(features))
+    }
+
+    hydrateFeatures()
 
     // Hydrate locally stored values
     dispatch(hydrateUserTags())

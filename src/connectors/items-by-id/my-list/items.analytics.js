@@ -7,6 +7,7 @@ import { IMPRESSION_COMPONENT_CARD } from 'connectors/snowplow/events'
 import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
 import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
 import { ENGAGEMENT_TYPE_SAVE } from 'connectors/snowplow/events'
+import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
 import { getLinkOpenTarget } from 'connectors/snowplow/events'
 import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 import { ANALYTICS_VIEW } from 'common/constants'
@@ -28,6 +29,7 @@ export const sendEngagementEvent = (identifier, position, item, save) => {
   const engagement = save ? ENGAGEMENT_TYPE_SAVE : ENGAGEMENT_TYPE_GENERAL
   return trackContentEngagement(
     engagement,
+    UI_COMPONENT_BUTTON,
     position,
     item,
     identifier

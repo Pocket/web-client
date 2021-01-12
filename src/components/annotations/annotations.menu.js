@@ -15,36 +15,40 @@ const inlineMenuStyles = css`
   position: absolute;
 `
 
-const buttonStyles = css`
-  background: var(--color-popoverCanvas);
-  color: var(--color-textSecondary);
-  font-size: var(--size150);
-  border-radius: 50%;
-  height: 32px;
-  width: 32px;
-  text-align: center;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
-  transform: translate(-24px, -24px);
-  opacity: 0;
-  transition: opacity 200ms ease-in-out 600ms;
-
-  &.visible,
-  &:hover {
-    opacity: 1;
-    transition: opacity 150ms ease-in-out 0ms;
-  }
-
-  &:hover {
-    color: var(--color-textPrimary);
-    background-color: var(--color-actionPrimarySubdued);
-  }
-  .icon {
-    margin-top: 0;
-  }
-`
-
 const relativeWrapper = css`
   position: relative;
+
+  button.inline-button {
+    background: var(--color-popoverCanvas);
+    color: var(--color-textSecondary);
+    font-size: var(--size150);
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    text-align: center;
+    transform: translate(-24px, -24px);
+    opacity: 0;
+    transition: opacity 200ms ease-in-out 600ms;
+
+    &.floating {
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    &.visible,
+    &:hover {
+      opacity: 1;
+      transition: opacity 150ms ease-in-out 0ms;
+    }
+
+    &:hover {
+      color: var(--color-textPrimary);
+      background-color: var(--color-actionPrimarySubdued);
+    }
+    .icon {
+      vertical-align: top;
+      margin-top: 3.5px;
+    }
+  }
 `
 
 const menuWrapper = css`
@@ -78,7 +82,8 @@ export const AnnotationMenu = ({
   shareItem,
   quote,
   id,
-  deleteAnnotation
+  deleteAnnotation,
+  floating
 }) => {
   const screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -126,7 +131,7 @@ export const AnnotationMenu = ({
         <button
           ref={selfRef}
           onClick={toggleMenu}
-          className={classNames(buttonReset, buttonStyles, { visible })}>
+          className={classNames(buttonReset, 'inline-button', { visible, floating })}>
           <OverflowMenuIcon />
         </button>
         {menuOpen ? (

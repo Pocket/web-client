@@ -18,6 +18,8 @@ import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
 import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
 import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
+import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
+import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
 
 export default function Collection(props) {
@@ -46,7 +48,8 @@ export default function Collection(props) {
   const userStatus = useSelector((state) => state.user.user_status)
 
   // Check for initial items so we don't over request
-  const initialItemsPopulated = items?.length >= 30 || total < 30
+  const initialItemsPopulated =
+    items?.length >= 30 || (items?.length && total < 30)
 
   /**
    * Set up listeners for focus shifts.  When the window gains focus check if
@@ -73,7 +76,7 @@ export default function Collection(props) {
    * ------------------------------------------------------------------------
    */
   useEffect(() => {
-    if (!initialItemsPopulated || userStatus === 'pending') return
+    if (initialItemsPopulated || userStatus === 'pending') return
     dispatch(appSetSection(section))
     dispatch(getMylistData(30, 0, subset, filter, tag))
   }, [
@@ -95,8 +98,18 @@ export default function Collection(props) {
     if (!routeChange) return
     // If items are already in place, we want to know if anything has changed
     // since the last time we fetched the list (operations in other pages or apps)
+    dispatch(appSetSection(section))
     dispatch(updateMyListData(since, subset, filter, tag))
-  }, [routeChange, initialItemsPopulated, dispatch, since, subset, filter, tag])
+  }, [
+    routeChange,
+    initialItemsPopulated,
+    dispatch,
+    section,
+    since,
+    subset,
+    filter,
+    tag
+  ])
 
   /**
    * When an item is added we get back sub par data from the return
@@ -152,6 +165,8 @@ export default function Collection(props) {
               <ShareModal />
               <ArchiveModal />
               <FavoriteModal />
+              <TagDeleteModal />
+              <TagEditModal />
               <Toasts />
             </>
           ) : (

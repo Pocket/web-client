@@ -15,6 +15,14 @@ const modalFooterStyles = css`
   display: flex;
   justify-content: flex-end;
 
+  .footnote {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.8em;
+    padding-right: 1em;
+    color: var(--color-formFieldTextSecondary);
+  }
+
   button {
     margin-left: var(--spacing050);
   }
