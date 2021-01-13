@@ -11,6 +11,9 @@ import { ChevronUpIcon } from '@pocket/web-ui'
 
 import { css, cx } from 'linaria'
 
+import { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
+
 export const sideNavWrapper = css`
   position: relative;
   grid-column: span 2;
@@ -29,8 +32,31 @@ export const sideNavWrapper = css`
     max-width: 1128px;
     position: fixed;
     bottom: 50px;
-    .icon {
-      cursor: pointer;
+
+    button {
+      background-color: var(--color-popoverCanvas);
+      color: var(--color-textSecondary);
+      font-size: var(--size150);
+      border-radius: 50%;
+      height: 32px;
+      width: 32px;
+      text-align: center;
+      padding: 2px 0 0;
+      pointer-events: none;
+      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      transition: all 150ms ease-in-out,
+        opacity 450ms ease-in-out;
+
+      &:hover {
+        color: var(--color-textPrimary);
+        background-color: var(--color-actionPrimarySubdued);
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
+      }
+      &.visible {
+        pointer-events: auto;
+        opacity: 1;
+      }
     }
   }
 `
@@ -95,6 +121,8 @@ export const sideNavItem = css`
 `
 
 export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
+  const [ref, inView] = useInView({ threshold: 0.5 })
+
   const subActive = (active, isTag) => {
     const isActive = tag ? active === tag : active === subset
     const activeClass = isActive ? 'active' : ''
@@ -115,7 +143,7 @@ export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
     <div className={wrapperClass}>
       <nav role="navigation" className="top-nav">
         <Link href="/my-list">
-          <button className={subActive('unread')}>
+          <button className={subActive('unread')} ref={ref}>
             <HomeIcon className="side-nav-icon" /> My List
           </button>
         </Link>
@@ -167,7 +195,9 @@ export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
           : null}
       </nav>
       <div className="bottom-nav">
-        <ChevronUpIcon onClick={scrollToTop} />
+        <button onClick={scrollToTop} className={!inView ? 'visible' : 'hidden'}>
+          <ChevronUpIcon />
+        </button>
       </div>
     </div>
   )
