@@ -99,7 +99,9 @@ export function ShareToFriend() {
 
   // Confirm share
   const sendConfirm = () => {
-    confirmShare(commentValue)
+    if (currentFriends.length !== 0) {
+      confirmShare(commentValue)
+    }
   }
 
   return (
@@ -129,6 +131,7 @@ export function ShareToFriend() {
             hasActiveTags={activeTags}
             deactivateTags={deactivateTags}
             handleRemoveAction={handleRemoveAction}
+            submitForm={sendConfirm}
             // Passed Props
             addTag={addTag}
             onFocus={onFocus}

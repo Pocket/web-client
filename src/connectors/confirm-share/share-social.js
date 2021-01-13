@@ -112,8 +112,8 @@ export const ShareSocial = function ({ item, quote }) {
 
   return (
     <div className={`${socialIcons} content`}>
-      <button aria-label="Copy Url" onClick={copyUrl}>
-        <WithTooltip label="Copy Url" placement="top" delay={true}>
+      <button aria-label="Copy Link" onClick={copyUrl}>
+        <WithTooltip label="Copy Link" placement="top" delay={true}>
           <LinkCopyIcon />
         </WithTooltip>
       </button>
