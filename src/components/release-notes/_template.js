@@ -1,7 +1,7 @@
 export default function ReleaseNotes() {
   return (
     <section>
-      <h6>release_date</h6>
+      <h6>January 1, 2021</h6>
 
       <p>🎉 What’s New</p>
       <ul>

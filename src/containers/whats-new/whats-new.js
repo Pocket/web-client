@@ -60,9 +60,6 @@ export default function Messages() {
         <WhatsNewHeader title="What’s New" />
 
         <Jan142021 />
-        <Jan142021 />
-        <Jan142021 />
-        <Jan142021 />
       </main>
     </Layout>
   )
