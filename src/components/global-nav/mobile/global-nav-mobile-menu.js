@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
@@ -133,19 +134,20 @@ export const MobileLink = ({
   handleClick
 }) => (
   <li>
-    <a
-      id={id}
-      className={classnames({
-        selected: isSelected,
-        disabled: isDisabled
-      })}
-      href={isDisabled ? null : url}
-      onClick={(event) => {
-        handleClick(event, name, url)
-      }}>
-      {icon ? icon : null}
-      {label}
-    </a>
+    <Link href={isDisabled ? null : url}>
+      <a
+        id={id}
+        className={classnames({
+          selected: isSelected,
+          disabled: isDisabled
+        })}
+        onClick={(event) => {
+          handleClick(event, name, url)
+        }}>
+        {icon ? icon : null}
+        {label}
+      </a>
+    </Link>
   </li>
 )
 
@@ -174,6 +176,7 @@ const DrawerHeader = ({ handleClose }) => {
 
 export const Menu = ({
   links,
+  subLinks,
   selectedLink,
   isUserLoggedIn,
   isUserPremium,
@@ -193,6 +196,18 @@ export const Menu = ({
           key={key}
         />
       )
+    })}
+    {subLinks.map((link) => {
+      const key = `global-nav-mobile-menu-${link?.name}`
+      return link.url ? (
+        <MobileLink
+          link={link}
+          handleClick={(event) => {
+            handleClick(event, link.name, link.url)
+          }}
+          key={key}
+        />
+      ) : null
     })}
     {isUserLoggedIn && !isUserPremium ? (
       <>
@@ -222,6 +237,9 @@ export const Menu = ({
  */
 const GlobalNavMobileMenu = ({
   links,
+  subLinks,
+  subset,
+  tag,
   selectedLink,
   onLinkClick,
   isUserLoggedIn,
@@ -266,6 +284,7 @@ const GlobalNavMobileMenu = ({
         screenReaderLabel="Pocket Mobile Menu">
         <DrawerHeader handleClose={handleClose} />
         <Menu
+          subLinks={subLinks}
           links={links}
           selectedLink={selectedLink}
           handleClick={handleClick}

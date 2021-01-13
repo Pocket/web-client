@@ -140,7 +140,11 @@ export default function Collection(props) {
   const Header = tag ? TagPageHeader : MyListHeader
 
   return (
-    <Layout title={metaData.title} metaData={metaData}>
+    <Layout
+      title={metaData.title}
+      metaData={metaData}
+      subset={subset}
+      tag={tag}>
       <SideNav subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
 
       {shouldRender ? (

@@ -6,10 +6,11 @@ import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 
 import { breakpointSmallTablet } from '@pocket/web-ui'
+import { breakpointLargeTablet } from '@pocket/web-ui'
 import { breakpointTinyTablet } from '@pocket/web-ui'
 import { fontSansSerif } from '@pocket/web-ui'
 import { fontSize100 } from '@pocket/web-ui'
-import { screenTinyTablet } from '@pocket/web-ui'
+import { screenLargeTablet } from '@pocket/web-ui'
 import { PageContainer } from '@pocket/web-ui'
 import { Logo } from '@pocket/web-ui'
 import { LogoMark } from '@pocket/web-ui'
@@ -85,16 +86,15 @@ const headerStyle = css`
 
   ${breakpointSmallTablet} {
     .pocket-logo {
-      margin-right: 3.5rem;
-
       &:hover {
         cursor: pointer;
       }
     }
   }
-  ${breakpointTinyTablet} {
+
+  ${breakpointLargeTablet} {
     .pocket-logo {
-      margin-right: 0;
+      margin-right: 1rem;
     }
     &.logged-in {
       .logo {
@@ -122,11 +122,17 @@ const navStyle = css`
   align-items: center;
   height: 100%;
 
+  .site-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
   .hamburger-icon {
     display: none;
   }
 
-  ${breakpointTinyTablet} {
+  ${breakpointLargeTablet} {
     .hamburger-icon {
       display: block;
       margin-left: calc(-1 * var(--spacing075));
@@ -196,6 +202,9 @@ const toolsStyle = css`
  * ```
  */
 const GlobalNav = ({
+  subLinks,
+  subset,
+  tag,
   appRootSelector,
   pocketLogoOutboundUrl,
   selectedLink,
@@ -222,8 +231,8 @@ const GlobalNav = ({
   const viewport = useViewport()
   // if viewport not available, we're probably SSR and so set the default to the
   // desktop experience for SEO purposes
-  const viewportWidth = viewport ? viewport.width : screenTinyTablet + 1
-  const [isMobile, setIsMobile] = useState(viewportWidth <= screenTinyTablet)
+  const viewportWidth = viewport ? viewport.width : screenLargeTablet + 1
+  const [isMobile, setIsMobile] = useState(viewportWidth <= screenLargeTablet)
 
   function handleLinkClick(linkId, event) {
     if (isMobile) {
@@ -237,34 +246,38 @@ const GlobalNav = ({
 
   // effect for handling window resize
   useCorrectEffect(() => {
-    setIsMobile(viewportWidth <= screenTinyTablet)
+    setIsMobile(viewportWidth <= screenLargeTablet)
   }, [viewportWidth])
 
   return (
     <header className={classnames(headerStyle, { 'logged-in': isLoggedIn })}>
       <PageContainer className="global-nav-container">
         <nav className={navStyle}>
-          <GlobalNavMobileMenu
-            appRootSelector={appRootSelector}
-            links={links}
-            onLinkClick={onLinkClick}
-            selectedLink={selectedLink}
-            toggleClass="hamburger-icon"
-            isOpen={isMobileMenuOpen}
-            toggleMenuOpen={setMobileMenuOpen}
-          />
-          <a
-            id="pocket-logo-nav"
-            className="pocket-logo"
-            href={pocketLogoOutboundUrl}
-            onClick={(event) => {
-              handleLinkClick('pocket', event)
-            }}
-            {...testIdAttribute('logo-link')}>
-            <Logo className="logo" />
-            {isLoggedIn ? <LogoMark className="logo-mark" /> : null}
-          </a>
-
+          <div className="site-nav">
+            <GlobalNavMobileMenu
+              appRootSelector={appRootSelector}
+              links={links}
+              subLinks={subLinks}
+              subset={subset}
+              tag={tag}
+              onLinkClick={onLinkClick}
+              selectedLink={selectedLink}
+              toggleClass="hamburger-icon"
+              isOpen={isMobileMenuOpen}
+              toggleMenuOpen={setMobileMenuOpen}
+            />
+            <a
+              id="pocket-logo-nav"
+              className="pocket-logo"
+              href={pocketLogoOutboundUrl}
+              onClick={(event) => {
+                handleLinkClick('pocket', event)
+              }}
+              {...testIdAttribute('logo-link')}>
+              <Logo className="logo" />
+              {isLoggedIn ? <LogoMark className="logo-mark" /> : null}
+            </a>
+          </div>
           {children ? (
             children
           ) : (
