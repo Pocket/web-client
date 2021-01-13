@@ -41,11 +41,11 @@ const whatsNewStyles = css`
 
   ul {
     font-size: var(--fontSize100);
-    color: var(--color-textSecondary);
     margin-bottom: var(--spacing150);
 
     li {
       margin-bottom: var(--spacing050);
+      color: var(--color-textPrimary);
 
       &:last-of-type {
         margin-bottom: 0;
