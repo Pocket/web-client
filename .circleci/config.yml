@@ -353,8 +353,7 @@ jobs:
       - run:
           name: Install Terraform
           command: |
-            #Pinning to 0.12.29 until modules are updated to support 0.13.0
-            export TERRAFORM=0.12.29
+            export TERRAFORM=0.14.4
             #$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')
             wget https://releases.hashicorp.com/terraform/${TERRAFORM}/terraform_${TERRAFORM}_linux_amd64.zip
             sudo unzip ./terraform_${TERRAFORM}_linux_amd64.zip -d /usr/local/bin/
