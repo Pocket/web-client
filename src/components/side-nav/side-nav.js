@@ -18,18 +18,20 @@ export const sideNavWrapper = css`
   grid-column: span 2;
   min-height: 50vh;
   max-width: 165px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   &.disabled {
     opacity: 0.6;
     pointer-events: none;
   }
 
-  .top-nav {
-    /* position: fixed; */
-  }
+  .top-nav {}
   .bottom-nav {
-    margin: 0 auto;
-    max-width: 1128px;
-    position: fixed;
+    margin: 0;
+    position: sticky;
     bottom: 50px;
 
     button {
