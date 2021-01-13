@@ -11,7 +11,6 @@ import { ChevronUpIcon } from '@pocket/web-ui'
 
 import { css, cx } from 'linaria'
 
-import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 export const sideNavWrapper = css`
