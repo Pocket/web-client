@@ -30,11 +30,11 @@ const whatsNewStyles = css`
     font-weight: 600;
     font-size: var(--fontSize100);
     margin-bottom: var(--spacing075);
-    color: var(--color-textSecondary);
+    color: var(--color-textPrimary);
   }
 
   ul {
-    font-size: var(--fontSize085);
+    font-size: var(--fontSize100);
     color: var(--color-textSecondary);
     margin-bottom: var(--spacing150);
     max-width: 550px;
