@@ -1,9 +1,11 @@
 export default function ReleaseNotes() {
   return (
     <section>
-      <h6>January 1, 2021</h6>
+      <h5>January 1, 2021</h5>
 
-      <p>🎉 What’s New</p>
+      <h6>🎉 What’s New</h6>
+      <p></p>
+
       <ul>
         <li></li>
       </ul>
