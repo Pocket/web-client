@@ -28,6 +28,6 @@ variable "iam_stack" {
 
 variable "legacy_lb_tg_arn" {
   description = "ARN for legacy web"
-  type    = "string"
-  default = "arn:aws:elasticloadbalancing:us-east-1:996905175585:targetgroup/Web-Prod-Public/d8ba379efa742b8c"
+  type        = string
+  default     = "arn:aws:elasticloadbalancing:us-east-1:996905175585:targetgroup/Web-Prod-Public/d8ba379efa742b8c"
 }

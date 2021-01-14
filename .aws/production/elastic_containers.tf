@@ -6,7 +6,7 @@
 
 module "web-client" {
   source          = "cloudposse/ecs-container-definition/aws"
-  version         = "0.21.0"
+  version         = "0.46.2"
   essential       = true
   container_name  = "web-client-apache"
   container_image = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/${var.repo_name}:${local.service_hash}"
@@ -42,7 +42,7 @@ resource "aws_ecs_task_definition" "public" {
   network_mode          = "awsvpc"
   cpu                   = 4096
   memory                = 8192
-  container_definitions = "[${module.web-client.json_map}]"
+  container_definitions = "[${module.web-client.json_map_encoded}]"
   requires_compatibilities = [
     "FARGATE" # This is Amazons service to autmoate provisioning
   ]

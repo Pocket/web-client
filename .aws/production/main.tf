@@ -1,11 +1,16 @@
 # Terraform supports multiple providers.  We are using Amazon Web Services
 provider "aws" {
-  version = "~> 2.27"
-  region  = "us-east-1"
+  region = "us-east-1"
 }
 
 # Defining our Terraform Settings
 terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+  }
   backend "remote" {
     organization = "Pocket"
     hostname     = "app.terraform.io"
