@@ -121,8 +121,8 @@ const buttonStyle = css`
   margin-left: auto;
   background-color: transparent;
   color: var(--color-actionSecondary);
-  padding-left: 0.25em;
-  padding-right: 0.25em;
+  padding-left: var(--size100);
+  padding-right: var(--size100);
   &:hover {
     color: var(--color-actionPrimary);
     background-color: transparent;
