@@ -270,6 +270,14 @@ const GlobalNavAccount = ({
             }}>
             Messages
           </PopupMenuItem>
+          <PopupMenuItem
+            href="/whats-new"
+            id="account-menu-whats-new-link"
+            onClick={(event) => {
+              handleLinkClick('whats-new', event)
+            }}>
+            What’s New
+          </PopupMenuItem>
         </PopupMenuGroup>
         <PopupMenuGroup>
           <PopupMenuItem
