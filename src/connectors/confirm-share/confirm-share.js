@@ -31,6 +31,7 @@ export const ShareModal = () => {
   const itemId = useSelector((state) => state.itemsToShare.id)
   const item = useSelector((state) => state.myListItemsById[itemId])
   const quote = useSelector((state) => state.itemsToShare.quote)
+  const position = useSelector((state) => state.itemsToShare.position)
   const [active, setActive] = useState('social')
   const cancelShare = () => dispatch(itemsShareCancel())
 
@@ -58,7 +59,7 @@ export const ShareModal = () => {
       </ModalBody>
       <ModalTabs>
         <SelectShareType active={active} activate={activate} />
-        {active === 'social' ? <ShareSocial item={item} quote={quote} /> : null}
+        {active === 'social' ? <ShareSocial item={item} quote={quote} position={position} /> : null}
         {active === 'recommend' ? <ShareRecommend item={item} /> : null}
         {active === 'friend' ? <ShareToFriend item={item} /> : null}
       </ModalTabs>
