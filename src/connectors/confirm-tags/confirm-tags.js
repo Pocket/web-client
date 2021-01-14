@@ -103,8 +103,6 @@ export function TaggingModal() {
     identifier
   ))
 
-  console.log(currentTags)
-
   return (
     <Modal
       title={title}
