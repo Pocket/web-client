@@ -3,17 +3,17 @@
 
 # Git branch name for the current deployment
 data "aws_ssm_parameter" "build_branch" {
-  name = "/Web-Client/CircleCI/Production/BUILD_BRANCH"
+  name = "/Web-Client/CircleCI/${var.environment}/BUILD_BRANCH"
 }
 
 # CircleCI build number
 data "aws_ssm_parameter" "service_version" {
-  name = "/Web-Client/CircleCI/Production/SERVICE_VERSION"
+  name = "/Web-Client/CircleCI/${var.environment}/SERVICE_VERSION"
 }
 
 # Git SHA of the branch the current deployment
 data "aws_ssm_parameter" "service_hash" {
-  name = "/Web-Client/CircleCI/Production/SERVICE_HASH"
+  name = "/Web-Client/CircleCI/${var.environment}/SERVICE_HASH"
 }
 
 # Virtual Private Cloud - Pocket internals

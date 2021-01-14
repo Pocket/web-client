@@ -5,7 +5,7 @@
 # -----------------------------------------------------------------
 
 resource "aws_cloudwatch_log_group" "web-client-agent" {
-  name              = "/ecs/web-client/${var.environment}/apache"
+  name              = "/ecs/web-client/${local.environment}/apache"
   retention_in_days = 30
 }
 

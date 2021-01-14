@@ -24,7 +24,7 @@ terraform {
 # These are variables we will be using across the project
 locals {
   repo_context = {
-    name               = "${var.repo_name}-${var.environment}"
+    name               = "${var.repo_name}-${local.environment}"
     min_tasks          = 5
     max_tasks          = 30
     cpu_scale_in       = 25
@@ -46,11 +46,13 @@ locals {
   # 99.99999% of the time this will be master until we adjust deployment pattern
   build_branch = data.aws_ssm_parameter.build_branch.value
 
+  environment = lower(var.environment)
+
   # These are added to aws resources so we have clear metrics on
   # individual resources (cost, uptime, funkytime)
   tags = {
     service         = var.repo_name
-    environment     = var.environment
+    environment     = local.environment
     service_hash    = local.service_hash
     service_version = local.service_version
     build_branch    = local.build_branch

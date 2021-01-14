@@ -377,9 +377,9 @@ jobs:
             - run:
                 name: Deploy Push
                 command: |
-                  aws ssm put-parameter --name "/web-client/CircleCI/Production/BUILD_BRANCH" --type "SecureString" --value "${CIRCLE_BRANCH}" --overwrite
-                  aws ssm put-parameter --name "/web-client/CircleCI/Production/SERVICE_VERSION" --type "SecureString" --value "${CIRCLE_BUILD_NUM}" --overwrite
-                  aws ssm put-parameter --name "/web-client/CircleCI/Production/SERVICE_HASH" --type "SecureString" --value "${CIRCLE_SHA1}" --overwrite
+                  aws ssm put-parameter --name "/Web-Client/CircleCI/Production/BUILD_BRANCH" --type "SecureString" --value "${CIRCLE_BRANCH}" --overwrite
+                  aws ssm put-parameter --name "/Web-Client/CircleCI/Production/SERVICE_VERSION" --type "SecureString" --value "${CIRCLE_BUILD_NUM}" --overwrite
+                  aws ssm put-parameter --name "/Web-Client/CircleCI/Production/SERVICE_HASH" --type "SecureString" --value "${CIRCLE_SHA1}" --overwrite
                   cd .aws/production
                   terraform apply \
                     -auto-approve \
@@ -390,9 +390,9 @@ jobs:
             - run:
                 name: Push Dev Variables
                 command: |
-                  aws ssm put-parameter --name "/web-client/CircleCI/Development/BUILD_BRANCH" --type "SecureString" --value "${CIRCLE_BRANCH}" --overwrite
-                  aws ssm put-parameter --name "/web-client/CircleCI/Development/SERVICE_VERSION" --type "SecureString" --value "${CIRCLE_BUILD_NUM}" --overwrite
-                  aws ssm put-parameter --name "/web-client/CircleCI/Development/SERVICE_HASH" --type "SecureString" --value "${CIRCLE_SHA1}" --overwrite
+                  aws ssm put-parameter --name "/Web-Client/CircleCI/Development/BUILD_BRANCH" --type "SecureString" --value "${CIRCLE_BRANCH}" --overwrite
+                  aws ssm put-parameter --name "/Web-Client/CircleCI/Development/SERVICE_VERSION" --type "SecureString" --value "${CIRCLE_BUILD_NUM}" --overwrite
+                  aws ssm put-parameter --name "/Web-Client/CircleCI/Development/SERVICE_HASH" --type "SecureString" --value "${CIRCLE_SHA1}" --overwrite
       - unless:
           condition: << parameters.deploy >>
           steps:
