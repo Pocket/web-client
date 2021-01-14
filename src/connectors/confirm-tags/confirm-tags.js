@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Button } from '@pocket/web-ui'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
@@ -41,6 +41,10 @@ export function TaggingModal() {
   const [value, setValue] = useState('')
   const [hasError, setHasError] = useState(false)
   const [activeTags, setActiveTags] = useState([])
+
+  useEffect(() => {
+    setValue('')
+  }, [showModal])
 
   /**
    * Event Actions
@@ -133,6 +137,7 @@ export function TaggingModal() {
             hasActiveTags={activeTags}
             deactivateTags={deactivateTags}
             handleRemoveAction={handleRemoveAction}
+            submitForm={saveTags}
             // Passed Props
             addTag={addTag}
             onFocus={onFocus}

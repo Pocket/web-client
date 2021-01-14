@@ -155,7 +155,7 @@ export const ReaderNav = ({
               </button>
             </WithTooltip>
 
-            <WithTooltip label="Archive Article">
+            <WithTooltip label={archive ? "Re-add to List" : "Archive Article"}>
               <button onClick={archiveItem} className={buttonClass}>
                 {archive ? <AddCircledIcon /> : <ArchiveIcon />}
               </button>
