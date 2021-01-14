@@ -121,8 +121,6 @@ const buttonStyle = css`
   margin-left: auto;
   background-color: transparent;
   color: var(--color-actionSecondary);
-  padding-left: var(--size100);
-  padding-right: var(--size100);
   &:hover {
     color: var(--color-actionPrimary);
     background-color: transparent;
@@ -136,6 +134,11 @@ const buttonStyle = css`
   &.active {
     color: var(--color-navCurrentTabText);
     background-color: var(--color-navCurrentTab);
+  }
+
+  ${breakpointMediumHandset} {
+    padding-left: var(--size025);
+    padding-right: var(--size025);
   }
 `
 
