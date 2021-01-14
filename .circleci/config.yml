@@ -495,11 +495,11 @@ workflows:
       - unit_tests:
           <<: *not_main
       # conditionally building deployment with or without asset prefix
-      # - build_deployment:
-      #     <<: *only_main
-      #     prefix: "https://assets.getpocket.com/web-client"
-      #     showdev: ""
-      #     name: build_production
+      - build_deployment:
+          <<: *only_main
+          prefix: "https://assets.getpocket.com/web-client"
+          showdev: ""
+          name: build_production
       - build_deployment:
           <<: *not_main
           prefix: ""
@@ -522,30 +522,30 @@ workflows:
       #       - push_feature_assets
       #       - deploy_feature
       # conditional push production build and assets (css/js) for main branch
-      # - push_production_assets:
-      #     <<: *only_main
-      #     requires:
-      #       - build_production
-      # - build_production_container:
-      #     requires:
-      #       - build_production
-      # - tag:
-      #     <<: *only_main
-      #     requires:
-      #       - build_production_container
+      - push_production_assets:
+          <<: *only_main
+          requires:
+            - build_production
+      - build_production_container:
+          requires:
+            - build_production
+      - tag:
+          <<: *only_main
+          requires:
+            - build_production_container
       # conditional push production build and assets (css/js)
-      # - deploy:
-      #     <<: *not_main
-      #     deploy: false
-      #     name: check_production
-      # - deploy:
-      #     <<: *only_main
-      #     deploy: true
-      #     name: deploy_production
-      #     requires:
-      #       - build_production_container
-      #       - push_production_assets
-      # - deploy_end_notification:
-      #     <<: *only_main
-      #     requires:
-      #       - deploy_production
+      - deploy:
+          <<: *not_main
+          deploy: false
+          name: check_production
+      - deploy:
+          <<: *only_main
+          deploy: true
+          name: deploy_production
+          requires:
+            - build_production_container
+            - push_production_assets
+      - deploy_end_notification:
+          <<: *only_main
+          requires:
+            - deploy_production
