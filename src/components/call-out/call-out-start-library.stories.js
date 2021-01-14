@@ -5,7 +5,7 @@ import {
 import { css } from 'linaria'
 
 export default {
-  title: 'Components/StartLibrary',
+  title: 'Messaging/Start Library',
   component: CallOutStartLibrary
 }
 

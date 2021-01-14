@@ -1,6 +1,7 @@
 import { put, takeEvery, select, call } from 'redux-saga/effects'
 import { v4 as uuid } from 'uuid'
 import { arrayToObject } from 'common/utilities'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
 import { ARTICLE_ITEM_REQUEST } from 'actions'
 import { ARTICLE_ITEM_SUCCESS } from 'actions'
@@ -20,12 +21,11 @@ import { ANNOTATION_DELETE_REQUEST } from 'actions'
 import { ANNOTATION_DELETE_SUCCESS } from 'actions'
 import { ANNOTATION_DELETE_FAILURE } from 'actions'
 
+import { HYDRATE_DISPLAY_SETTINGS } from 'actions'
 import { UPDATE_LINE_HEIGHT } from 'actions'
 import { UPDATE_COLUMN_WIDTH } from 'actions'
 import { UPDATE_FONT_SIZE } from 'actions'
 import { UPDATE_FONT_TYPE } from 'actions'
-import { FRIENDS_SUCCESS } from 'actions'
-import { FRIENDS_FAILURE } from 'actions'
 
 import { ITEMS_DELETE_SUCCESS } from 'actions'
 
@@ -75,9 +75,7 @@ const initialState = {
   lineHeight: 3,
   columnWidth: 3,
   fontSize: 3,
-  fontFamily: 'blanco',
-  autoCompleteEmails: null,
-  recentFriends: null
+  fontFamily: 'blanco'
 }
 
 export const readReducers = (state = initialState, action) => {
@@ -133,11 +131,6 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, fontFamily }
     }
 
-    case FRIENDS_SUCCESS: {
-      const { autoCompleteEmails, recentFriends } = action
-      return { ...state, autoCompleteEmails, recentFriends }
-    }
-
     // optimistic update
     case ITEMS_FAVORITE_REQUEST:
     case ITEMS_UNFAVORITE_FAILURE: {
@@ -153,6 +146,11 @@ export const readReducers = (state = initialState, action) => {
       const { tags } = action
       const newTags = tags.reduce((obj, key) => { return { ...obj, [key]:{} }}, {})
       return { ...state, tags: newTags }
+    }
+
+    case HYDRATE_DISPLAY_SETTINGS: {
+      const { settings } = action
+      return { ...state, ...settings }
     }
 
     case ARTICLE_ITEM_REQUEST: {
@@ -174,12 +172,17 @@ export const readReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const readSagas = [
   takeEvery(ARTICLE_ITEM_REQUEST, articleItemRequest),
+  takeEvery(ARTICLE_ITEM_SUCCESS, hydrateDisplaySettings),
   takeEvery(ARTICLE_ITEM_SUCCESS, articleContentRequest),
   takeEvery(ANNOTATION_SAVE_REQUEST, annotationSaveRequest),
   takeEvery(ANNOTATION_DELETE_REQUEST, annotationDeleteRequest),
   takeEvery(ITEMS_DELETE_SUCCESS, redirectToList),
   takeEvery(ITEMS_ARCHIVE_SUCCESS, redirectToList),
-  takeEvery(ITEMS_UNARCHIVE_SUCCESS, redirectToList)
+  takeEvery(ITEMS_UNARCHIVE_SUCCESS, redirectToList),
+  takeEvery(UPDATE_LINE_HEIGHT, saveDisplaySettings),
+  takeEvery(UPDATE_COLUMN_WIDTH, saveDisplaySettings),
+  takeEvery(UPDATE_FONT_SIZE, saveDisplaySettings),
+  takeEvery(UPDATE_FONT_TYPE, saveDisplaySettings)
 ]
 
 /* SAGAS :: SELECTORS
@@ -286,6 +289,23 @@ function redirectToList() {
       document.location.href = '/my-list'
     }
   }
+}
+
+function* hydrateDisplaySettings() {
+  const displaySettings = ['lineHeight', 'columnWidth', 'fontSize', 'fontFamily']
+
+  const settings = displaySettings.reduce((obj, val)  => {
+    obj[val] = localStore.getItem(val) || initialState[val]
+    return obj
+  }, {})
+
+  yield put({ type: HYDRATE_DISPLAY_SETTINGS, settings })
+}
+
+function* saveDisplaySettings({ type, ...settings }) {
+  Object.keys(settings).forEach(val => {
+    localStore.setItem(val.toString(), settings[val])
+  })
 }
 
 /** ASYNC REQUESTS

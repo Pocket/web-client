@@ -11,7 +11,7 @@ const avatarKnobs = defineKnobs((props) => {
 })
 
 export default {
-  title: 'Components/Avatar/Avatar',
+  title: 'Components/Avatar',
   component: Avatar,
   decorators: [avatarKnobs]
 }

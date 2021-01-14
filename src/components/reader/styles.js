@@ -140,8 +140,6 @@ export const contentStyles = css`
 
   blockquote,
   aside {
-    font-style: italic;
-    margin: 0;
     padding: var(--spacing250);
   }
 
@@ -274,10 +272,17 @@ export const contentStyles = css`
     vertical-align: top;
     font-size: 0.8em;
   }
+
+  div:empty,
+  section:empty,
+  aside:empty,
+  p:empty,
+  li:empty {
+    display: none;
+  }
 `
 
 export const highlightStyles = css`
-  *::-moz-selection,
   *::selection {
     background-color: #e5f2f1 !important;
     color: #333333 !important;
@@ -303,7 +308,6 @@ export const highlightStyles = css`
   }
 
   ${darkMode} {
-    *::-moz-selection,
     *::selection {
       background-color: rgb(0, 73, 69, 0.99) !important;
       color: #e0e0e0 !important;
@@ -330,7 +334,6 @@ export const highlightStyles = css`
   }
 
   ${sepiaMode} {
-    *::-moz-selection,
     *::selection {
       background-color: #dde2d2 !important;
       color: #3b3934 !important;

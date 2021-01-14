@@ -10,7 +10,7 @@ const globalNavSearchKnobs = defineKnobs((props) => {
 })
 
 export default {
-  title: 'Components/GlobalNav/GlobalNavSearch',
+  title: 'GlobalNav/GlobalNavSearch',
   component: GlobalNavSearch,
   decorators: [globalNavSearchKnobs]
 }

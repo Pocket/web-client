@@ -9,32 +9,47 @@ import { getMylistData } from './my-list.state'
 import { updateMyListData } from './my-list.state'
 import { appSetSection } from 'connectors/app/app.state'
 import { MyListHeader } from 'components/headers/my-list-header'
+import { TagPageHeader } from './tags-page/tag-page-header'
 import { VirtualizedList } from 'components/items-layout/virtualized-list'
-import { SideNav } from 'components/side-nav/side-nav'
+import { SideNav } from 'connectors/side-nav/side-nav'
 import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
+import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
+import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
+import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
+import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
+import { Toasts } from 'connectors/toasts/toast-list'
 
 export default function Collection(props) {
-  const { metaData = {}, subset = 'active', filter } = props
+  const { metaData = {}, subset: sub = 'active', filter: propFilter } = props
 
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const section = filter ? subset + filter : subset
+  const { tag, filter: queryFilter } = router.query
+  const subset = tag ? 'tag' : sub
+  const filter = tag ? queryFilter : propFilter
+  const selector = tag ? tag : sub
+
+  const section = filter ? selector + filter : selector
+
+  const listState = useSelector((state) => state.myList.listState)
   const items = useSelector((state) => state.myList[section])
   const offset = useSelector((state) => state.myList[`${section}Offset`])
   const total = useSelector((state) => state.myList[`${section}Total`])
   const since = useSelector((state) => state.myList[`${section}Since`])
   const listMode = useSelector((state) => state.app.listMode)
+  const sortOrder = useSelector((state) => state.app.sortOrder)
   const routeChange = useHasChanged(router.pathname)
+
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
 
   // Check for initial items so we don't over request
   const initialItemsPopulated =
-    items?.length && (items?.length >= 18 || total < 18)
+    items?.length >= 30 || (items?.length && total < 30)
 
   /**
    * Set up listeners for focus shifts.  When the window gains focus check if
@@ -44,7 +59,7 @@ export default function Collection(props) {
   useEffect(() => {
     const handleFocus = () => {
       if (!since) return
-      dispatch(updateMyListData(since, subset, filter))
+      dispatch(updateMyListData(since, subset, filter, tag))
     }
 
     // Adding new event listeners
@@ -53,7 +68,7 @@ export default function Collection(props) {
     return () => {
       window.removeEventListener('focus', handleFocus)
     }
-  }, [since, subset, filter, dispatch])
+  }, [since, subset, filter, tag, dispatch])
 
   /**
    * Get initial list items. This should only fire once per page load
@@ -62,20 +77,50 @@ export default function Collection(props) {
    */
   useEffect(() => {
     if (initialItemsPopulated || userStatus === 'pending') return
-    dispatch(getMylistData(18, 0, subset, filter))
     dispatch(appSetSection(section))
-  }, [userStatus, initialItemsPopulated, subset, filter, section, dispatch])
+    dispatch(getMylistData(30, 0, subset, filter, tag))
+  }, [
+    userStatus,
+    initialItemsPopulated,
+    subset,
+    sortOrder,
+    filter,
+    section,
+    tag,
+    dispatch
+  ])
 
   /**
    * Update list if we are navigating here from another area in the app
    * ------------------------------------------------------------------------
    */
   useEffect(() => {
-    if (!routeChange || !initialItemsPopulated || !since) return
+    if (!routeChange) return
     // If items are already in place, we want to know if anything has changed
     // since the last time we fetched the list (operations in other pages or apps)
-    dispatch(updateMyListData(since, subset, filter))
-  }, [routeChange, initialItemsPopulated, dispatch, since, subset, filter])
+    dispatch(appSetSection(section))
+    dispatch(updateMyListData(since, subset, filter, tag))
+  }, [
+    routeChange,
+    initialItemsPopulated,
+    dispatch,
+    section,
+    since,
+    subset,
+    filter,
+    tag
+  ])
+
+  /**
+   * When an item is added we get back sub par data from the return
+   * In order to keep the list in sync, we will just trigger an update when the
+   * list becomes `dirty`
+   */
+  useEffect(() => {
+    if (listState === 'clean') return
+
+    dispatch(updateMyListData(since, subset, filter, tag))
+  }, [listState, since, subset, filter, tag, dispatch])
 
   // useEffect(trackPageView, [])
 
@@ -83,20 +128,31 @@ export default function Collection(props) {
    * FUNCTIONAL ACTIONS
    * ------------------------------------------------------------------------
    */
-  const loadMore = () => dispatch(getMylistData(45, offset, subset, filter))
+  const loadMore = () => {
+    if (offset >= total) return
+    dispatch(getMylistData(45, offset, subset, filter, tag))
+  }
+
   const shouldRender = userStatus !== 'pending'
 
   const type = listMode
 
+  const Header = tag ? TagPageHeader : MyListHeader
+
   return (
     <Layout title={metaData.title} metaData={metaData}>
-      <SideNav subset={subset} isLoggedIn={isLoggedIn} />
+      <SideNav subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
 
       {shouldRender ? (
         <main className="main">
           {isLoggedIn ? (
             <>
-              <MyListHeader subset={subset} filter={filter} />
+              <Header
+                subset={subset}
+                title={selector}
+                filter={filter}
+                tag={tag}
+              />
               {items?.length ? (
                 <VirtualizedList
                   type={type}
@@ -107,6 +163,11 @@ export default function Collection(props) {
               <DeleteModal />
               <TaggingModal />
               <ShareModal />
+              <ArchiveModal />
+              <FavoriteModal />
+              <TagDeleteModal />
+              <TagEditModal />
+              <Toasts />
             </>
           ) : (
             <CallOutBrand />

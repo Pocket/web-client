@@ -15,11 +15,12 @@ import { ListViewIcon } from '@pocket/web-ui'
 import { SearchIcon } from '@pocket/web-ui'
 import { AddIcon } from '@pocket/web-ui'
 import { EditIcon } from '@pocket/web-ui'
-import { NotificationIcon } from '@pocket/web-ui'
 
-import { BASE_URL } from 'common/constants'
+import { BASE_URL, LOGIN_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities'
 import { userOAuthLogIn } from 'connectors/user/user.state'
+
+import { sendImpression } from './global-nav.analytics'
 
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
@@ -51,6 +52,7 @@ const GlobalNav = (props) => {
       : getTopLevelPath(router.pathname)
 
   const appMode = useSelector((state) => state?.app?.mode)
+  const useOAuth = useSelector((state) => state?.user?.useOAuth)
   const userStatus = useSelector((state) => state?.user?.user_status)
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false) //prettier-ignore
   const isLoggedIn = useSelector((state) => !!state.user.auth)
@@ -66,6 +68,7 @@ const GlobalNav = (props) => {
 
   const toggleSortOrder = () => dispatch(sortOrderToggle())
   const toggleListMode = () => dispatch(listModeToggle())
+  const sendImpressionEvent = (identifier) => dispatch(sendImpression(identifier))
 
   const links = [
     {
@@ -115,7 +118,9 @@ const GlobalNav = (props) => {
   const onLoginClick = (event) => {
     event.preventDefault()
     event.stopPropagation()
-    dispatch(userOAuthLogIn())
+
+    if (useOAuth) return dispatch(userOAuthLogIn())
+    window.location.assign(`${LOGIN_URL}?src=navbar`)
   }
 
   return (
@@ -136,6 +141,7 @@ const GlobalNav = (props) => {
       sortOrder={sortOrder}
       toggleSortOrder={toggleSortOrder}
       toggleListMode={toggleListMode}
+      sendImpression={sendImpressionEvent}
       tools={tools}>
       {NavTakeover ? <NavTakeover onClose={resetNav} /> : null}
     </GlobalNavComponent>

@@ -7,17 +7,58 @@ import { TagIcon } from '@pocket/web-ui'
 import { ArticleIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
 import { VideoIcon } from '@pocket/web-ui'
+import { ChevronUpIcon } from '@pocket/web-ui'
 
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
+
+import { useInView } from 'react-intersection-observer'
 
 export const sideNavWrapper = css`
   position: relative;
   grid-column: span 2;
   min-height: 50vh;
-  .top-nav {
-    position: fixed;
+  max-width: 165px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &.disabled {
+    opacity: 0.6;
+    pointer-events: none;
   }
+
+  .top-nav {}
   .bottom-nav {
+    margin: 0;
+    position: sticky;
+    bottom: 50px;
+
+    button {
+      background-color: var(--color-popoverCanvas);
+      color: var(--color-textSecondary);
+      font-size: var(--size150);
+      border-radius: 50%;
+      height: 32px;
+      width: 32px;
+      text-align: center;
+      padding: 2px 0 0;
+      pointer-events: none;
+      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      transition: all 150ms ease-in-out,
+        opacity 450ms ease-in-out;
+
+      &:hover {
+        color: var(--color-textPrimary);
+        background-color: var(--color-actionPrimarySubdued);
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
+      }
+      &.visible {
+        pointer-events: auto;
+        opacity: 1;
+      }
+    }
   }
 `
 
@@ -26,9 +67,9 @@ export const sideNavHeader = css`
   font-size: var(--fontSize100);
   font-weight: 500;
   line-height: 0.8;
-  padding: 20px 20px 10px;
-  margin: 5px 0;
-  color: var(--color-grey65); /* ! Don't use colors direct */
+  padding: var(--spacing050);
+  margin: 25px 0 5px;
+  color: var(--color-textTertiary);
 `
 
 export const sideNavItem = css`
@@ -36,7 +77,7 @@ export const sideNavItem = css`
   align-items: center;
   align-content: center;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 var(--size050);
   font-size: var(--fontSize100);
   font-weight: 400;
   line-height: 24px;
@@ -46,6 +87,17 @@ export const sideNavItem = css`
   text-decoration: none;
   color: var(--color-textPrimary);
   background-color: transparent;
+
+  &.tag-class {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: var(--fontSize085);
+    text-align: left;
+    padding: var(--spacing025) var(--spacing050);
+    height: initial;
+  }
 
   .side-nav-icon {
     height: 24px;
@@ -69,17 +121,30 @@ export const sideNavItem = css`
   }
 `
 
-export function SideNav({ subset, home, isLoggedIn }) {
-  const subActive = (sub) => {
-    const activeClass = sub === subset ? 'active' : ''
-    return `${sideNavItem} ${activeClass}`
+export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
+  const [ref, inView] = useInView({ threshold: 0.5 })
+
+  const subActive = (active, isTag) => {
+    const isActive = tag ? active === tag : active === subset
+    const activeClass = isActive ? 'active' : ''
+    const tagClass = isTag ? 'tag-class' : ''
+    return `${sideNavItem} ${activeClass} ${tagClass}`
   }
 
+  const scrollToTop = () => {
+    window.scroll({
+      top: 0,
+      left: 0
+    })
+  }
+
+  const wrapperClass = cx(sideNavWrapper, isDisabled && 'disabled')
+
   return (
-    <div className={sideNavWrapper}>
+    <div className={wrapperClass}>
       <nav role="navigation" className="top-nav">
         <Link href="/my-list">
-          <button className={subActive('unread')}>
+          <button className={subActive('unread')} ref={ref}>
             <HomeIcon className="side-nav-icon" /> My List
           </button>
         </Link>
@@ -88,11 +153,7 @@ export function SideNav({ subset, home, isLoggedIn }) {
             <ArchiveIcon className="side-nav-icon" /> Archive
           </button>
         </Link>
-        <Link href="/my-list/tags">
-          <button className={subActive('tags')}>
-            <TagIcon className="side-nav-icon" /> Tags
-          </button>
-        </Link>
+
         <div className={sideNavHeader}>Filters</div>
 
         <Link href="/my-list/favorites">
@@ -118,9 +179,27 @@ export function SideNav({ subset, home, isLoggedIn }) {
             <VideoIcon className="side-nav-icon" /> Videos
           </button>
         </Link>
+        <div className={sideNavHeader}>Tags</div>
+        <Link href="/my-list/tags">
+          <button className={subActive('tag')}>
+            <TagIcon className="side-nav-icon" /> All Tags
+          </button>
+        </Link>
+        {pinnedTags.length
+          ? pinnedTags.map((tag) => {
+              return (
+                <Link href={`/my-list/tags/${tag}`} key={tag}>
+                  <button className={subActive(tag, true)}>{tag}</button>
+                </Link>
+              )
+            })
+          : null}
       </nav>
-
-      <div className="bottom-nav"></div>
+      <div className="bottom-nav">
+        <button onClick={scrollToTop} className={!inView ? 'visible' : 'hidden'}>
+          <ChevronUpIcon />
+        </button>
+      </div>
     </div>
   )
 }

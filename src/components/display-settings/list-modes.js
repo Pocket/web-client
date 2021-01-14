@@ -6,6 +6,7 @@ import { GridViewIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
 import { SortByNewestIcon } from '@pocket/web-ui'
 import { SortByOldestIcon } from '@pocket/web-ui'
+import { WithTooltip } from '@pocket/web-ui'
 
 const listSettingStyle = css`
   display: grid;
@@ -38,10 +39,26 @@ export const ListSettings = ({
     <PopupMenuGroup>
       <div className={listSettingStyle}>
         <div onClick={toggleSortOrder}>
-          {sortOrder === 'newest' ? <SortByOldestIcon /> : <SortByNewestIcon />}
+          {sortOrder === 'newest' ? (
+            <WithTooltip label="Sort items by oldest first">
+              <SortByOldestIcon />
+            </WithTooltip>
+          ) : (
+            <WithTooltip label="Sort items by newest first">
+              <SortByNewestIcon />
+            </WithTooltip>
+          )}
         </div>
         <div onClick={toggleListMode}>
-          {listMode === 'grid' ? <ListViewIcon /> : <GridViewIcon />}
+          {listMode === 'grid' ? (
+            <WithTooltip label="Display items as a list">
+              <ListViewIcon />
+            </WithTooltip>
+          ) : (
+            <WithTooltip label="Display items as a grid">
+              <GridViewIcon />
+            </WithTooltip>
+          )}
         </div>
       </div>
     </PopupMenuGroup>

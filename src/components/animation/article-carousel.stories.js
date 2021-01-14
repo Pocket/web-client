@@ -6,7 +6,7 @@ import articleImage003 from 'static/images/article-carousel/article-image-003.pn
 import articleImage004 from 'static/images/article-carousel/article-image-004.png'
 
 export default {
-  title: 'Components/Animation/ArticleCarousel',
+  title: 'Animations/ArticleCarousel',
   component: ArticleCarousel
 }
 

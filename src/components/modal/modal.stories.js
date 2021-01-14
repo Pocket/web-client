@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { css } from 'linaria'
 import { text, boolean } from '@storybook/addon-knobs'
-import Button from '../../components/button/button'
+import { Button } from '@pocket/web-ui'
 import Modal, { ModalBody, ModalFooter } from './modal'
-import TextArea from '../../components/form-fields/text-area'
+import { TextArea } from '@pocket/web-ui'
 
 export default {
-  title: 'Components/Modal',
+  title: 'Overlays/Modal',
   component: Modal
 }
 

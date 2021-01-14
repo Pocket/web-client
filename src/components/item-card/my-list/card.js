@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { css, cx } from 'linaria'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { urlWithPocketRedirect } from 'common/utilities'
+import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 
-import { CardMedia } from './card-media'
+import { CardMedia } from 'components/media/card-media'
 import { ItemActions } from './item-actions'
-import { underliner } from 'components/underliner/underliner'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 
 import { IosShareIcon } from '@pocket/web-ui'
@@ -13,7 +13,6 @@ import { DeleteIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
 import { AddIcon } from '@pocket/web-ui'
 import { FavoriteIcon } from '@pocket/web-ui'
-import { FavoriteFilledIcon } from '@pocket/web-ui'
 import { EmptyCircledIcon } from '@pocket/web-ui'
 import { CheckCircledIcon } from '@pocket/web-ui'
 import { TagIcon } from '@pocket/web-ui'
@@ -74,22 +73,16 @@ const card = css`
     display: block;
     height: 100%;
     width: 100%;
-    padding-bottom: var(--size200);
     text-decoration: none;
     transition-property: color;
     transition-duration: 0.2s;
     transition-timing-function: ease;
 
-    .title span {
-      ${underliner};
-    }
-
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         color: var(--color-textPrimary);
         .title span {
-          background-color: var(--color-textPrimary);
-          transition: background-color 300ms ease-in-out;
+          text-decoration: underline;
         }
         .media {
           filter: brightness(0.95) saturate(0.8);
@@ -183,7 +176,15 @@ const card = css`
  * out of the [feed](https://github.com/Pocket/spec/blob/master/query/v3server/feed.md)
  * and makes sure the appropriate data is represented.
  */
-export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
+export const Card = ({
+  item,
+  type,
+  actions,
+  bulkEdit,
+  bulkSelected,
+  onOpen,
+  position
+}) => {
   const {
     item_id: id,
     title,
@@ -194,8 +195,7 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
     favorite,
     status,
     open_url,
-    openExternal,
-    onOpen = () => {}
+    openExternal
   } = item
 
   const {
@@ -207,12 +207,9 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
     itemUnFavorite,
     itemTag,
     itemBulkSelect,
-    itemBulkDeSelect
+    itemBulkDeSelect,
+    itemImpression
   } = actions
-
-  const [showActions, setShowActions] = useState(false)
-  const actionsShow = () => setShowActions(true)
-  const actionsHide = () => setShowActions(false)
 
   const cardClass = cx(
     card,
@@ -226,7 +223,6 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
 
   const isFavorite = favorite === '1'
   const favoriteAction = isFavorite ? itemUnFavorite : itemFavorite
-  const CorrectFavIcon = isFavorite ? FavoriteFilledIcon : FavoriteIcon
 
   const selectBulk = (event) => {
     const withShift = event.shiftKey
@@ -239,83 +235,86 @@ export const Card = ({ item, type, actions, bulkEdit, bulkSelected }) => {
   const openUrl = openExternal ? urlWithPocketRedirect(open_url) : `/read/${id}`
 
   return (
-    <article
-      className={cardClass}
-      key={id}
-      {...testIdAttribute(`article-card-${id}`)}
-      onClick={selectBulk}
-      onMouseEnter={actionsShow}
-      onMouseLeave={actionsHide}>
-      <div className="bulkBacking" />
-      <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
-        <span className="idOverlay">{id}</span>
-      </FeatureFlag>
-      <Link href={openUrl}>
-        <a onClick={onOpen}>
-          <CardMedia image_src={thumbnail} title={title} id={id} />
-          <div className="content">
-            <h2 className="title">
-              <span>{title}</span>
-            </h2>
-            <cite className="details">
-              <span>{publisher}</span>
-              <span className="readtime">
-                {read_time ? ` · ${read_time} min` : null}
-              </span>
-            </cite>
-            <p className="excerpt">{excerpt}</p>
-          </div>
-        </a>
-      </Link>
-      <footer className="footer">
-        <div className="actions">
-          {bulkEdit ? (
-            bulkSelected ? (
-              <CheckCircledIcon className="bulkIconStyle" />
+    <VisibilitySensor onVisible={itemImpression}>
+      <article
+        className={cardClass}
+        key={id}
+        {...testIdAttribute(`article-card-${id}`)}
+        onClick={selectBulk}>
+        <div className="bulkBacking" />
+        <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
+          <span className="idOverlay">
+            {id}: {position}
+          </span>
+        </FeatureFlag>
+        <Link href={openUrl}>
+          <a
+            onClick={onOpen}
+            // eslint-disable-next-line react/jsx-no-target-blank
+            target={openExternal ? '_blank' : undefined}>
+            <CardMedia image_src={thumbnail} title={title} id={id} />
+            <div className="content">
+              <h2 className="title">
+                <span>{title}</span>
+              </h2>
+              <cite className="details">
+                <span>{publisher}</span>
+                <span className="readtime">
+                  {read_time ? ` · ${read_time} min` : null}
+                </span>
+              </cite>
+              <p className="excerpt">{excerpt}</p>
+            </div>
+          </a>
+        </Link>
+        <footer className="footer">
+          <div className="actions">
+            {bulkEdit ? (
+              bulkSelected ? (
+                <CheckCircledIcon className="bulkIconStyle" />
+              ) : (
+                <EmptyCircledIcon className="bulkIconStyle" />
+              )
             ) : (
-              <EmptyCircledIcon className="bulkIconStyle" />
-            )
-          ) : (
-            <ItemActions
-              showActions={showActions}
-              type={type}
-              menuItems={[
-                {
-                  key: `share-${id}`,
-                  label: 'Share',
-                  icon: <IosShareIcon />,
-                  onClick: itemShare
-                },
-                {
-                  key: `delete-${id}`,
-                  label: 'Delete',
-                  icon: <DeleteIcon />,
-                  onClick: itemDelete
-                },
-                {
-                  key: `archive-${id}`,
-                  label: archiveLabel,
-                  icon: <CorrectArchiveIcon />,
-                  onClick: archiveAction
-                },
-                {
-                  key: `favorite-${id}`,
-                  label: 'Favorite',
-                  icon: <CorrectFavIcon />,
-                  onClick: favoriteAction,
-                  active: isFavorite
-                },
-                {
-                  key: `tag-${id}`,
-                  label: 'Tag',
-                  icon: <TagIcon />,
-                  onClick: itemTag
-                }
-              ]}
-            />
-          )}
-        </div>
-      </footer>
-    </article>
+              <ItemActions
+                menuItems={[
+                  {
+                    key: `favorite-${id}`,
+                    label: 'Favorite',
+                    icon: <FavoriteIcon />,
+                    onClick: favoriteAction,
+                    active: isFavorite
+                  },
+                  {
+                    key: `archive-${id}`,
+                    label: archiveLabel,
+                    icon: <CorrectArchiveIcon />,
+                    onClick: archiveAction
+                  },
+                  {
+                    key: `tag-${id}`,
+                    label: 'Tag',
+                    icon: <TagIcon />,
+                    onClick: itemTag
+                  },
+                  {
+                    key: `delete-${id}`,
+                    label: 'Delete',
+                    icon: <DeleteIcon />,
+                    onClick: itemDelete
+                  },
+                  {
+                    key: `share-${id}`,
+                    label: 'Share',
+                    icon: <IosShareIcon />,
+                    onClick: itemShare
+                  }
+                ]}
+              />
+            )}
+          </div>
+        </footer>
+      </article>
+    </VisibilitySensor>
   )
 }

@@ -4,7 +4,7 @@ import { KEYS } from 'common/constants'
 import { COLORS } from 'mock/colors'
 
 export default {
-  title: 'Components/TypeAhead'
+  title: 'Forms/TypeAhead'
 }
 
 class TypeAheadStory extends React.Component {

@@ -2,7 +2,7 @@ import React from 'react'
 import EmailSignupForm from './email-signup-form'
 
 export default {
-  title: 'Components/EmailSignupForm',
+  title: 'Forms/Email Signup Form',
   component: EmailSignupForm
 }
 

@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react'
 
 export const useHasChanged = (val) => {
   const prevVal = usePrevious(val)
+  if (!prevVal) return false
   return prevVal !== val
 }
 

@@ -22,6 +22,10 @@ export function sortByOldestFavorite(itemA, itemB) {
   return itemA.time_favorited - itemB.time_favorited
 }
 
+export function sortByOrder(itemA, itemB) {
+  return itemA.sort_id - itemB.sort_id
+}
+
 export function sortSelector(type, direction) {
   const orderNewest = {
     default: sortByNewest,
@@ -42,7 +46,7 @@ export function sortSelector(type, direction) {
     highlights: 'default',
     articles: 'default',
     videos: 'default',
-    tags: 'default'
+    tag: 'default'
   }
 
   const sortType = sortTypes[type]

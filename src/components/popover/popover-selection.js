@@ -39,7 +39,7 @@ const popupWrapper = css`
 
 const buttonWrapper = css`
   font-family: 'Graphik Web';
-  padding: 13px 15px 15px;
+  padding: 13px 15px 15px !important;
   cursor: pointer;
   margin: 0;
   &:hover {
@@ -111,7 +111,7 @@ class SelectionPopoverClass extends Component {
           })}
           ref={this.containerRef}>
             <button
-              className={classNames(buttonWrapper, buttonReset)}
+              className={classNames(buttonReset, buttonWrapper)}
               // aria-label={'shareExcerpt.highlight.aria'}
               onClick={this.onHighlight}>
               <span className={iconWrapper}>
@@ -120,7 +120,7 @@ class SelectionPopoverClass extends Component {
               Highlight {/*"shareExcerpt.highlight.copy"*/}
             </button>
             <button
-              className={classNames(buttonWrapper, buttonReset)}
+              className={classNames(buttonReset, buttonWrapper)}
               // aria-label={translate('shareExcerpt.highlight.aria')}
               onClick={this.onShare}>
               <span className={iconWrapper}>

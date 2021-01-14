@@ -2,11 +2,10 @@ import React from 'react'
 import { css } from 'linaria'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 
-import { CardMedia } from './card-media'
+import { CardMedia } from 'components/media/card-media'
 import { ItemAction } from './item-action'
 import { SyndicatedBadge } from './syndicated-badge'
 import { SaveToPocket } from 'components/save-to-pocket/save-to-pocket'
-import { underliner } from 'components/underliner/underliner'
 import { ReportIcon } from '@pocket/web-ui'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 
@@ -31,16 +30,11 @@ const card = css`
     transition-duration: 0.2s;
     transition-timing-function: ease;
 
-    .title span {
-      ${underliner};
-    }
-
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         color: var(--color-textPrimary);
         .title span {
-          background-color: var(--color-textPrimary);
-          transition: background-color 300ms ease-in-out;
+          text-decoration: underline;
         }
         .media {
           filter: brightness(0.95) saturate(0.8);

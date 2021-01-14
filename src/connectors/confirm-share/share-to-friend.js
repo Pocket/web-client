@@ -99,7 +99,9 @@ export function ShareToFriend() {
 
   // Confirm share
   const sendConfirm = () => {
-    confirmShare(commentValue)
+    if (currentFriends.length !== 0) {
+      confirmShare(commentValue)
+    }
   }
 
   return (
@@ -121,7 +123,6 @@ export function ShareToFriend() {
             // Value Handling
             value={friendValue}
             setValue={setFriendValue}
-            characterLimit={25}
             // Error Handling
             clearError={clearError}
             setError={setError}
@@ -130,6 +131,7 @@ export function ShareToFriend() {
             hasActiveTags={activeTags}
             deactivateTags={deactivateTags}
             handleRemoveAction={handleRemoveAction}
+            submitForm={sendConfirm}
             // Passed Props
             addTag={addTag}
             onFocus={onFocus}
@@ -142,7 +144,10 @@ export function ShareToFriend() {
           value={commentValue}
           onChange={(e) => setCommentValue(e.target.value)}
         />
-        <Button type="submit" onClick={sendConfirm}>
+        <Button
+          type="submit"
+          disabled={currentFriends.length === 0}
+          onClick={sendConfirm}>
           Send to Friend(s)
         </Button>
       </div>

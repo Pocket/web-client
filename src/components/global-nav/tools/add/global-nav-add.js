@@ -6,7 +6,7 @@ import { screenMediumHandset } from '@pocket/web-ui'
 import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
-import { isURL } from 'validator'
+import isURL from 'validator/lib/isURL'
 
 const addStyle = css`
   width: 100%;
@@ -162,10 +162,17 @@ const GlobalNavAdd = ({
     e.stopPropagation()
     e.preventDefault()
 
-    const validUrl = isURL(addUrl)
+    const validUrl = isURL(addUrl, {
+      protocols: ['http', 'https'],
+      allow_underscores: true
+    })
     if (!validUrl) return updateInputError('Please enter a valid url')
 
-    onSubmit(addUrl)
+    const protocolRegEx = new RegExp('^https?://')
+    const prefix = !!protocolRegEx.test(addUrl) ? '' : 'https://'
+    onSubmit(`${prefix}${addUrl}`)
+
+    onClose()
   }
 
   useEffect(() => {

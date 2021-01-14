@@ -7,7 +7,6 @@ import {
   breakpointLargeHandset,
   breakpointTinyHandset
 } from '@pocket/web-ui'
-import { underliner } from 'components/underliner/underliner'
 
 const resetWrapper = css`
   font-size: initial;
@@ -213,10 +212,10 @@ const contentWrapper = css`
       font-weight: 600;
       font-size: var(--fontSize150);
       a {
-        ${underliner};
         text-decoration: none;
         color: var(--color-textPrimary);
-        &:hover  {
+        &:hover {
+          text-decoration: underline;
           transition: background-color 300ms ease-in-out;
           background-color: var(--color-textPrimary);
         }
@@ -232,7 +231,7 @@ const contentWrapper = css`
 
     .article-card-author {
       &:after {
-        content: "·";
+        content: '·';
         padding: 0 var(--spacing050) 0 0.4rem;
       }
     }
@@ -293,12 +292,12 @@ const contentWrapper = css`
     ${breakpointTinyTablet} {
       .article-card-image {
         flex-grow: 2;
-        flex-basis: 33.33%
+        flex-basis: 33.33%;
         margin-right: var(--spacing100);
       }
       .article-card-aside {
         flex-grow: 4;
-        flex-basis: 66.66%
+        flex-basis: 66.66%;
       }
     }
 

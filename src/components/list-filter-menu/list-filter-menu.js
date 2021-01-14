@@ -61,10 +61,14 @@ const filterStyle = css`
   }
 `
 
-export function FilterMenu({ subset, filter }) {
-  const hasFilter = ['favorites', 'highlights', 'articles', 'videos'].includes(
-    subset
-  )
+export function FilterMenu({ subset, filter, tag }) {
+  const hasFilter = [
+    'favorites',
+    'highlights',
+    'articles',
+    'videos',
+    'tag'
+  ].includes(subset)
 
   const filterActive = (filterLink) => {
     const activeClass = filterLink === filter ? 'active' : ''
@@ -86,6 +90,8 @@ export function FilterMenu({ subset, filter }) {
     ]
   })
 
+  const path = tag ? `tags/${tag}` : subset
+
   return hasFilter ? (
     <div className={filterStyle}>
       <span ref={popTrigger} className="filter-trigger">
@@ -95,23 +101,23 @@ export function FilterMenu({ subset, filter }) {
       {shown ? (
         <div className="filter-menu" ref={popBody}>
           <div>
-            <Link href={`/my-list/${subset}`}>
+            <Link href={`/my-list/${path}`}>
               <button className={filterActive()}>All items</button>
             </Link>
           </div>
           <div>
-            <Link href={`/my-list/${subset}/unread`}>
+            <Link href={`/my-list/${path}/unread`}>
               <button className={filterActive('unread')}>Unread</button>
             </Link>
           </div>
           <div>
-            <Link href={`/my-list/${subset}/archive`}>
+            <Link href={`/my-list/${path}/archive`}>
               <button className={filterActive('archive')}>Archive</button>
             </Link>
           </div>
-          {subset === 'favorites' ? null : (
+          {path === 'favorites' ? null : (
             <div>
-              <Link href={`/my-list/${subset}/favorites`}>
+              <Link href={`/my-list/${path}/favorites`}>
                 <button className={filterActive('favorites')}>Favorites</button>
               </Link>
             </div>

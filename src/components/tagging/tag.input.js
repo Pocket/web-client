@@ -101,7 +101,13 @@ export class TagInput extends Component {
     if (event.keyCode === KEYS.ENTER) {
       event.preventDefault()
       event.stopPropagation()
-      if (this.props.value) this.props.addTag(`${this.props.value}`)
+
+      if (this.props.value) {
+        this.props.addTag(`${this.props.value}`)
+      }
+      else {
+        this.props.submitForm()
+      }
       return
     }
 

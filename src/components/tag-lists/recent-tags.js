@@ -1,4 +1,4 @@
-import { DisplayCard } from 'components/item-card/my-list/card-display-only'
+import { SimpleCard } from 'components/item-card/my-list/card-simple'
 import { css } from 'linaria'
 import { SectionHeader } from 'components/headers/section-header'
 
@@ -24,7 +24,7 @@ export function RecentTags({ taggedItems }) {
       <SectionHeader sectionTitle="Recently Tagged Items" />
       <div className="cards">
         {taggedItems.map((itemId) => (
-          <DisplayCard key={itemId} id={itemId} />
+          <SimpleCard key={itemId} id={itemId} />
         ))}
       </div>
     </div>

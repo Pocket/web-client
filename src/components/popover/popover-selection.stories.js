@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Lorem from 'react-lorem-component'
 
 export default {
-  title: 'Components/PopoverSelection'
+  title: 'Article/Annotation Selection'
 }
 
 export const Normal = () => {

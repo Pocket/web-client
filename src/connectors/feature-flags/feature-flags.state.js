@@ -46,9 +46,8 @@ export const featureSagas = []
 
 /** ASYNC Functions
 ---------------------------------------------------------------- */
-export async function fetchUnleashData(user = {}, sessionId) {
+export async function fetchUnleashData(userId, sessionId) {
   try {
-    const userId = user.user_id
     const response = await getUnleash(sessionId, userId, 'web-discover')
     const unleashData = filterUnleashAssignments(response)
     return unleashData

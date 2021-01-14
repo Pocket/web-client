@@ -2,6 +2,8 @@ import { put, call, take, race, select } from 'redux-saga/effects'
 import { takeLatest, takeEvery } from 'redux-saga/effects'
 import { sendItemActions } from 'common/api/item-actions'
 import { getSuggestedTags } from 'common/api/tags'
+import { buildActions } from 'connectors/items-by-id/my-list/build-actions'
+import { batchSendActions } from 'connectors/items-by-id/my-list/build-actions'
 
 import { ITEMS_TAG_REQUEST } from 'actions'
 import { ITEMS_TAG_CONFIRM } from 'actions'
@@ -88,9 +90,11 @@ function* itemsTag({ items }) {
   // Set the stage for editing tags
   yield put({ type: ITEMS_TAG_EDIT, items, tags: currentTags })
 
-  // Get suggestions if we are premium
+  // Get suggestions if we are premium AND there is only one item
   const isPremium = yield select(getPremiumStatus)
-  if (isPremium) yield put({ type: ITEMS_TAG_SUGGEST_REQUEST, itemId })
+  if (isPremium && itemId) {
+    yield put({ type: ITEMS_TAG_SUGGEST_REQUEST, itemId })
+  }
 
   // Wait for the user to confirm or cancel
   const { confirm, cancel } = yield race({
@@ -104,18 +108,26 @@ function* itemsTag({ items }) {
   const { tags } = confirm
   yield put({ type: ITEMS_TAG_SEND, items, tags })
 
-  const apiAction = itemId ? API_ACTION_REPLACE_TAGS : API_ACTION_ADD_TAGS
-  const actions = buildActions(items, tags, apiAction)
-  const data = yield call(sendItemActions, actions)
+  // If we only have one item
+  if (itemId) {
+    const actions = buildActions(items, API_ACTION_REPLACE_TAGS, tags)
+    const data = yield call(sendItemActions, actions)
 
-  if (data) return yield put({ type: ITEMS_TAG_SUCCESS, data, actions })
+    if (data) return yield put({ type: ITEMS_TAG_SUCCESS, data, actions })
 
+    return yield put({ type: ITEMS_TAG_FAILURE, items })
+  }
+
+  // Build and send batched actions
+  const batchActions = yield batchSendActions(items, API_ACTION_ADD_TAGS, tags)
+
+  // If batch is successful
+  if (batchActions.length) {
+    return yield put({ type: ITEMS_TAG_SUCCESS, actions: batchActions })
+  }
+
+  // If there is a failure
   return yield put({ type: ITEMS_TAG_FAILURE, items })
-}
-
-function buildActions(items, tags, action) {
-  const time = Date.now()
-  return items.map((item) => ({ action, item_id: item.id, tags, time }))
 }
 
 function* itemsSuggest(action) {

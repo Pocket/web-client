@@ -1,3 +1,4 @@
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { MYLIST_DATA_SUCCESS } from 'actions'
 import { MYLIST_UPDATE_SUCCESS } from 'actions'
 import { HOME_DATA_LATEST_SUCCESS } from 'actions'
@@ -6,10 +7,11 @@ import { USER_TAGS_ITEM_SUCCESS } from 'actions'
 
 import { ITEMS_FAVORITE_SUCCESS } from 'actions'
 import { ITEMS_UNFAVORITE_SUCCESS } from 'actions'
-import { ITEMS_ADD_SUCCESS } from 'actions'
+import { MYLIST_SEARCH_SUCCESS } from 'actions'
 import { ITEMS_DELETE_SUCCESS } from 'actions'
 import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_UNARCHIVE_SUCCESS } from 'actions'
+import { ITEMS_TAG_SUCCESS } from 'actions'
 
 /* CONSOLIDATE
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -34,7 +36,8 @@ export const myListItemsReducers = (state = initialState, action) => {
     case MYLIST_DATA_SUCCESS:
     case ARTICLE_ITEM_SUCCESS:
     case HOME_DATA_LATEST_SUCCESS:
-    case USER_TAGS_ITEM_SUCCESS: {
+    case USER_TAGS_ITEM_SUCCESS:
+    case MYLIST_SEARCH_SUCCESS: {
       const { itemsById } = action
       return { ...state, ...itemsById }
     }
@@ -42,12 +45,17 @@ export const myListItemsReducers = (state = initialState, action) => {
     case ITEMS_FAVORITE_SUCCESS:
     case ITEMS_UNFAVORITE_SUCCESS:
     case ITEMS_ARCHIVE_SUCCESS:
-    case ITEMS_ADD_SUCCESS:
-    case ITEMS_DELETE_SUCCESS:
-    case ITEMS_UNARCHIVE_SUCCESS: {
+    case ITEMS_UNARCHIVE_SUCCESS:
+    case ITEMS_TAG_SUCCESS: {
       const { actions } = action
       const itemsById = reconcileActions(state, actions)
       return { ...state, ...itemsById }
+    }
+
+    case ITEMS_DELETE_SUCCESS: {
+      const { actions } = action
+      const itemsById = reconcileActions(state, actions)
+      return itemsById
     }
 
     case MYLIST_UPDATE_SUCCESS: {
@@ -77,12 +85,26 @@ export const myListItemsSagas = [
 const reconcileActions = function (state, actions) {
   const stateDraft = JSON.parse(JSON.stringify(state))
 
-  actions.forEach(({ action, item_id }) => {
+  actions.forEach(({ action, item_id, tags }) => {
     if (action === 'favorite') stateDraft[item_id].favorite = '1'
     if (action === 'unfavorite') stateDraft[item_id].favorite = '0'
     if (action === 'archive') stateDraft[item_id].status = '1'
     if (action === 'unarchive') stateDraft[item_id].status = '0'
+    if (action === 'tags_replace') {
+      stateDraft[item_id].tags = getTagsObject(item_id, tags)
+    }
+    if (action === 'tags_add') {
+      const current = stateDraft[item_id].tags || []
+      stateDraft[item_id].tags = { ...current, ...getTagsObject(item_id, tags) }
+    }
+
+    if (action === 'delete') delete stateDraft[item_id]
   })
 
   return stateDraft
+}
+
+const getTagsObject = function (item_id, tags) {
+  const tagsArray = tags.map((tag) => ({ item_id, tag }))
+  return arrayToObject(tagsArray, 'tag')
 }

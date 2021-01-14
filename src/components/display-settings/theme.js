@@ -121,7 +121,7 @@ export const ThemeSettings = () => {
   // current mode will be read from local storage and updated on component did mount
   // if the user had previously chosen a selection
   const [currentMode, setCurrentMode] = useState('light')
-  const [currentModeClass, setCurrentModeClass] = useState('')
+  const [currentModeClass, setCurrentModeClass] = useState('colormode-light') // default page theme
   const [isPickerExpanded, setIsPickerExpanded] = useState(false)
 
   function addOSModeListeners() {

@@ -1,8 +1,15 @@
 import { css, cx } from 'linaria'
+import { WithTooltip } from '@pocket/web-ui'
 
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { CrossIcon } from '@pocket/web-ui'
-import { ArchiveIcon, DeleteIcon, FavoriteIcon, TagIcon } from '@pocket/web-ui'
+
+import { ArchiveIcon } from '@pocket/web-ui'
+import { AddIcon } from '@pocket/web-ui'
+import { DeleteIcon } from '@pocket/web-ui'
+import { FavoriteIcon } from '@pocket/web-ui'
+import { FavoriteFilledIcon } from '@pocket/web-ui'
+import { TagIcon } from '@pocket/web-ui'
 import { breakpointMediumHandset } from '@pocket/web-ui'
 
 const bulkStyle = css`
@@ -120,13 +127,18 @@ const buttonStyle = css`
   color: var(--color-actionSecondary);
 
   &:hover {
-    cursor: pointer;
+    color: var(--color-actionPrimary);
     background-color: transparent;
-    color: var(--color-actionSecondaryHover);
-
-    span {
-      color: var(--color-textPrimary);
-    }
+  }
+  &:active,
+  &:focus {
+    transition: none;
+    color: var(--color-navCurrentTabText);
+    outline: 1px auto var(--color-navCurrentTab);
+  }
+  &.active {
+    color: var(--color-navCurrentTabText);
+    background-color: var(--color-navCurrentTab);
   }
 `
 
@@ -146,24 +158,59 @@ const bulkContainerStyle = css`
   flex: 1;
 `
 
-function GlobalNavBulkEdit({ onClose, clearBulkItems, bulkItemsCount }) {
+function GlobalNavBulkEdit({
+  onClose,
+  batchFavorite,
+  batchStatus,
+  tagAction,
+  favoriteAction,
+  archiveAction,
+  deleteAction,
+  clearBulkItems,
+  bulkItemsCount
+}) {
+  const shouldFavorite = batchFavorite === 'favorite'
+  const shouldArchive = batchStatus === 'archive'
+  const clearAction = bulkItemsCount >= 1 ? clearBulkItems : onClose
+  const clearCopy = bulkItemsCount >= 1 ? 'Clear' : 'Cancel'
+
   return (
     <div className={bulkStyle}>
       <div className={bulkContainerStyle}>
         <div className="bulk-container">
           <div className="bulk-actions">
-            <button className={buttonStyle}>
-              <TagIcon className={bulkIconActions} />
-            </button>
-            <button className={buttonStyle}>
-              <FavoriteIcon className={bulkIconActions} />
-            </button>
-            <button className={buttonStyle}>
-              <ArchiveIcon className={bulkIconActions} />
-            </button>
-            <button className={buttonStyle}>
-              <DeleteIcon className={bulkIconActions} />
-            </button>
+            <WithTooltip label="Tag">
+              <button className={buttonStyle} onClick={tagAction}>
+                <TagIcon className={bulkIconActions} />
+              </button>
+            </WithTooltip>
+
+            <WithTooltip label={shouldFavorite ? 'Favorite' : 'Unfavorite'}>
+              <button className={buttonStyle} onClick={favoriteAction}>
+                {shouldFavorite ? (
+                  <FavoriteIcon className={bulkIconActions} />
+                ) : (
+                  <FavoriteFilledIcon className={bulkIconActions} />
+                )}
+              </button>
+            </WithTooltip>
+
+            <WithTooltip label={shouldArchive ? 'Archive' : 'Add'}>
+              <button className={buttonStyle} onClick={archiveAction}>
+                {shouldArchive ? (
+                  <ArchiveIcon className={bulkIconActions} />
+                ) : (
+                  <AddIcon className={bulkIconActions} />
+                )}
+              </button>
+            </WithTooltip>
+
+            <WithTooltip label="Delete">
+              <button className={buttonStyle} onClick={deleteAction}>
+                <DeleteIcon className={bulkIconActions} />
+              </button>
+            </WithTooltip>
+
             <div>
               {bulkItemsCount
                 ? `${bulkItemsCount} item${
@@ -175,9 +222,9 @@ function GlobalNavBulkEdit({ onClose, clearBulkItems, bulkItemsCount }) {
         </div>
         <button
           className="bulk-button"
-          onClick={clearBulkItems}
+          onClick={clearAction}
           {...testIdAttribute('clear-button')}>
-          Clear
+          {clearCopy}
         </button>
         {onClose ? (
           <CloseButton onClick={onClose} {...testIdAttribute('add-close')} />

@@ -2,7 +2,7 @@ import React from 'react'
 import { GetPocketCTA } from './getpocket-cta'
 
 export default {
-  title: 'Components/Article/GetPocketCTA',
+  title: 'Article/GetPocketCTA',
   component: GetPocketCTA
 }
 

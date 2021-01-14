@@ -6,7 +6,7 @@ import { articleContent } from 'mock/article'
 import { css } from 'linaria'
 
 export default {
-  title: 'Components/Chyron',
+  title: 'Article/Chyron',
   component: Chyron
 }
 

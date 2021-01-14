@@ -44,17 +44,30 @@ import { myListSagas } from 'containers/my-list/my-list.state'
 import { myListItemsReducers } from 'connectors/items-by-id/my-list/items.state'
 import { myListItemsSagas } from 'connectors/items-by-id/my-list/items.state'
 
+import { myListSearchReducers } from 'containers/my-list/search-page/search-page.state'
+import { myListSearchSagas } from 'containers/my-list/search-page/search-page.state'
+
 import { itemBulkReducers } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemDeleteReducers } from 'connectors/items-by-id/my-list/items.delete'
+import { itemFavoriteReducers } from 'connectors/items-by-id/my-list/items.favorite'
+import { itemArchiveReducers } from 'connectors/items-by-id/my-list/items.archive'
 import { itemTagReducers } from 'connectors/items-by-id/my-list/items.tag'
 import { itemShareReducers } from 'connectors/items-by-id/my-list/items.share'
 import { itemShareSagas } from 'connectors/items-by-id/my-list/items.share'
+
+import { itemAnalyticsReducers } from 'connectors/items-by-id/my-list/items.analytics'
+import { itemAnalyticsSagas } from 'connectors/items-by-id/my-list/items.analytics'
 
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
 
 import { readReducers } from 'containers/read/read.state'
 import { readSagas } from 'containers/read/read.state'
+
+import { userMessageReducers } from 'containers/messages/user-messages.state'
+import { userMessageSagas } from 'containers/messages/user-messages.state'
+
+import { actionToastsReducers } from 'connectors/toasts/toast.state'
 
 /* REDUCERS
  --------------------------------------------------------------- */
@@ -68,11 +81,16 @@ const discoverReducers = {
 const collectionReducers = {
   myListItemsById: myListItemsReducers,
   myList: myListReducers,
+  myListSearch: myListSearchReducers,
   userTags: userTagsReducers,
   bulkEdit: itemBulkReducers,
+  itemsToFavorite: itemFavoriteReducers,
   itemsToDelete: itemDeleteReducers,
+  itemsToArchive: itemArchiveReducers,
   itemsToTag: itemTagReducers,
-  itemsToShare: itemShareReducers
+  itemsToShare: itemShareReducers,
+  itemsAnalytics: itemAnalyticsReducers,
+  userMessages: userMessageReducers
 }
 
 const readerReducers = {
@@ -88,7 +106,8 @@ const globalReducers = {
   user: userReducers, // User profile and auth,
   features: featureReducers, // Feature flags (very basic start)
   topicList: topicListReducers, // Valid topics list and active topic
-  recit: recitReducers // Recommended articles, both publisher and pocket
+  recit: recitReducers, // Recommended articles, both publisher and pocket
+  toasts: actionToastsReducers // Notifications of action results
 }
 
 const rootReducer = combineReducers({
@@ -117,10 +136,13 @@ function* rootSaga() {
     ...syndicatedArticleSagas,
     ...recitSagas,
     ...myListSagas,
+    ...myListSearchSagas,
     ...myListItemsSagas,
+    ...itemAnalyticsSagas,
     ...itemShareSagas,
     ...readSagas,
-    ...homeSagas
+    ...homeSagas,
+    ...userMessageSagas
   ])
 }
 

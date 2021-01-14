@@ -55,6 +55,10 @@ const stepperButton = css`
       color: var(--color-actionPrimaryHover);
     }
   }
+  .icon {
+    width: 24px;
+    text-align: center;
+  }
   &[data-tooltip] {
     z-index: unset;
   }

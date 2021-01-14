@@ -1,7 +1,7 @@
 import MyListDemo from './my-list-demo'
 
 export default {
-  title: 'Components/Animation/MyListDemo',
+  title: 'Animations/MyListDemo',
   component: MyListDemo
 }
 

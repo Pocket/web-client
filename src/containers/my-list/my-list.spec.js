@@ -26,7 +26,7 @@ const listToSort = [
     has_video: '0',
     favorite: '1',
     status: '1',
-    tags: {}
+    tags: { hero: '' }
   },
   {
     hero: 'CAPTAIN MARVEL',
@@ -38,7 +38,7 @@ const listToSort = [
     has_video: '1',
     favorite: '1',
     status: '1',
-    tags: {}
+    tags: { hero: '' }
   },
   {
     hero: 'Black Widow',
@@ -61,7 +61,7 @@ const listToSort = [
     has_video: '0',
     favorite: '0',
     status: '1',
-    tags: {},
+    tags: { hero: '' },
     annotations: {}
   },
   {
@@ -108,7 +108,7 @@ const listToSort = [
     has_video: '0',
     favorite: '1',
     status: '0',
-    tags: {}
+    tags: { villan: '' }
   }
 ]
 
@@ -176,10 +176,12 @@ describe('Filtering', function () {
   })
 
   it('should filterByTags', () => {
-    const filteredList = listToSort.filter(filterByTags)
+    const tag = 'hero'
+
+    const filteredList = listToSort.filter((item) => filterByTags(item, tag))
     assert.deepStrictEqual(
       filteredList.map((item) => item.hero),
-      ['Spider-Man', 'CAPTAIN MARVEL', 'Wolverine', 'Black Cat']
+      ['Spider-Man', 'CAPTAIN MARVEL', 'Wolverine']
     )
   })
 })

@@ -6,7 +6,7 @@ const authorNames = article.photosAndCaptions.authorNames
 const { url, name, showAuthors } = publisher.theVerge
 
 export default {
-  title: 'Components/Article/AuthorByline',
+  title: 'Article/AuthorByline',
   component: AuthorByline
 }
 

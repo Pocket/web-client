@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Layout from 'layouts/with-sidebar'
-import { SideNav } from 'components/side-nav/side-nav'
+import { SideNav } from 'connectors/side-nav/side-nav'
 import { getUserTags } from './tags-page.state'
 import { MyListHeader } from 'components/headers/my-list-header'
 import { RecentTags } from 'components/tag-lists/recent-tags'
@@ -33,7 +33,7 @@ export default function TagsPage(props) {
 
       {shouldRender ? (
         <main className="main">
-          <MyListHeader subset={'tags'} filter={filter} />
+          <MyListHeader subset={'tag-page'} filter={filter} title="tags" />
 
           {userTagsRecent ? <RecentTags taggedItems={taggedItems} /> : null}
           {userTags ? (

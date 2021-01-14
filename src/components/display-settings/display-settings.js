@@ -19,6 +19,7 @@ import { LineHeightSettings } from './line-height'
 import { ColumnWidthSettings } from './column-width'
 import { ThemeSettings } from './theme'
 import { FONT_TYPES } from 'components/fonts/fonts'
+import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 
 const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
 const LINE_HEIGHT = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
@@ -76,31 +77,32 @@ export const DisplaySettings = ({
   setLineHeight,
   setColumnWidth,
   isPremium,
-  forceShow
+  forceShow,
+  onVisible
 }) => {
   const [displayFonts, setDisplayFonts] = useState(false)
 
   const displayMenuTriggerRef = useRef(null)
 
   const decreaseFontSize = () => {
-    setFontSize(fontSize - 1)
+    setFontSize(parseInt(fontSize) - 1)
   }
   const increaseFontSize = () => {
-    setFontSize(fontSize + 1)
+    setFontSize(parseInt(fontSize) + 1)
   }
 
   const decreaseLineHeight = () => {
-    setLineHeight(lineHeight - 1)
+    setLineHeight(parseInt(lineHeight) - 1)
   }
   const increaseLineHeight = () => {
-    setLineHeight(lineHeight + 1)
+    setLineHeight(parseInt(lineHeight) + 1)
   }
 
   const decreaseColumnWidth = () => {
-    setColumnWidth(columnWidth - 1)
+    setColumnWidth(parseInt(columnWidth) - 1)
   }
   const increaseColumnWidth = () => {
-    setColumnWidth(columnWidth + 1)
+    setColumnWidth(parseInt(columnWidth) + 1)
   }
 
   const toggleDisplayFonts = () => {
@@ -112,6 +114,10 @@ export const DisplaySettings = ({
 
   const handleOnClose = () => {
     setDisplayFonts(false)
+  }
+
+  const handleVisible = () => {
+    onVisible('reader.display-settings')
   }
 
   return (
@@ -148,7 +154,7 @@ export const DisplaySettings = ({
             <PopupMenuItem
               onClick={toggleDisplayFonts}
               icon={<ChevronLeftIcon />}>
-              Font Options {/*reader.displaySettings.fontOptions*/}
+              Font Options
             </PopupMenuItem>
           ) : (
             <PopupMenuItem
@@ -173,7 +179,7 @@ export const DisplaySettings = ({
               clickDecrease={decreaseFontSize}
               clickIncrease={increaseFontSize}
               range={FONT_RANGE}
-              current={fontSize}
+              current={parseInt(fontSize)}
               setCurrent={setFontSize}
             />
             {isPremium ? (
@@ -182,26 +188,29 @@ export const DisplaySettings = ({
                   clickDecrease={decreaseLineHeight}
                   clickIncrease={increaseLineHeight}
                   range={LINE_HEIGHT}
-                  current={lineHeight}
+                  current={parseInt(lineHeight)}
                   setCurrent={setLineHeight}
                 />
                 <ColumnWidthSettings
                   clickDecrease={decreaseColumnWidth}
                   clickIncrease={increaseColumnWidth}
                   range={COLUMN_WIDTH}
-                  current={columnWidth}
+                  current={parseInt(columnWidth)}
                   setCurrent={setColumnWidth}
                 />
               </>
             ) : (
-              <PopupMenuGroup>
-                <PopupMenuItem
-                  href="https://getpocket.com/premium?ep=3"
-                  target="_premium"
-                  icon={<PremiumIcon />}>
-                  Unlock more options
-                </PopupMenuItem>
-              </PopupMenuGroup>
+              <VisibilitySensor onVisible={handleVisible}>
+                <PopupMenuGroup>
+                  <PopupMenuItem
+                    id="reader.display-settings"
+                    href="https://getpocket.com/premium?ep=3"
+                    target="_premium"
+                    icon={<PremiumIcon />}>
+                    Unlock more options
+                  </PopupMenuItem>
+                </PopupMenuGroup>
+              </VisibilitySensor>
             )}
           </>
         )}

@@ -2,7 +2,7 @@ import React from 'react'
 import { PocketWorthy } from './pocket-worthy'
 
 export default {
-  title: 'Components/Article/PocketWorthy',
+  title: 'Article/PocketWorthy',
   component: PocketWorthy
 }
 

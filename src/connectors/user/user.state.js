@@ -1,9 +1,10 @@
 import { getUserInfo } from 'common/api/user'
 import { createGuid } from 'common/api/user'
-import { setCookie, parseCookies } from 'nookies'
+import { setCookie } from 'nookies'
 import { put, takeLatest } from 'redux-saga/effects'
 import { getRequestToken, getAccessToken } from 'common/api/oauth'
 import { OAUTH_REDIRECT_URL } from 'common/constants'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
 import { USER_HYDRATE } from 'actions'
 import { USER_REQUEST } from 'actions'
@@ -12,8 +13,15 @@ import { USER_SUCCESS } from 'actions'
 import { USER_FAILURE } from 'actions'
 import { SESS_GUID_HYDRATE } from 'actions'
 import { USER_OAUTH_TOKEN_REQUEST } from 'actions'
+import { USER_SET_OAUTH } from 'actions'
+import { USER_TOGGLE_OAUTH } from 'actions'
 
-const initialState = { auth: false, sess_guid: null, user_status: 'pending' }
+const initialState = {
+  auth: false,
+  sess_guid: null,
+  user_status: 'pending',
+  useOAuth: localStore.getItem('useOAuth') === 'true'
+}
 const yearInMs = 60 * 60 * 24 * 365
 
 /** ACTIONS
@@ -21,6 +29,7 @@ const yearInMs = 60 * 60 * 24 * 365
 export const userHydrate = (hydrate, skipCookies) => ({ type: USER_HYDRATE, hydrate, skipCookies}) //prettier-ignore
 export const getUser = () => ({ type: USER_REQUEST })
 export const devUser = () => ({ type: USER_DEV_REQUEST })
+export const toggleOAuth = (useOAuth) => ({ type: USER_TOGGLE_OAUTH, useOAuth })
 export const sessGuidHydrate = (sess_guid) => ({type: SESS_GUID_HYDRATE,sess_guid}) //prettier-ignore
 export const userOAuthLogIn = () => ({ type: USER_OAUTH_TOKEN_REQUEST })
 
@@ -53,6 +62,11 @@ export const userReducers = (state = initialState, action) => {
       return { ...state, sess_guid }
     }
 
+    case USER_SET_OAUTH: {
+      const { useOAuth } = action
+      return { ...state, useOAuth }
+    }
+
     default:
       return state
   }
@@ -62,7 +76,7 @@ export const userReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const userSagas = [
   takeLatest(USER_REQUEST, userRequest),
-  takeLatest(USER_HYDRATE, hydrateUser),
+  takeLatest(USER_TOGGLE_OAUTH, userToggleOAuth),
   takeLatest(USER_OAUTH_TOKEN_REQUEST, userTokenRequest)
 ]
 
@@ -76,27 +90,10 @@ function* userRequest() {
   if (user) yield put({ type: USER_SUCCESS, user })
 }
 
-function* hydrateUser(action) {
-  const { hydrate, skipCookies } = action
-  if (!hydrate || skipCookies) return
-
-  const {
-    user_id,
-    username,
-    email,
-    birth,
-    first_name,
-    last_name,
-    premium_status
-  } = yield hydrate
-
-  setCookie(null, 'user_id', user_id, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-  setCookie(null, 'username', username, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-  setCookie(null, 'email', email, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-  setCookie(null, 'birth', birth, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-  setCookie(null, 'first_name', first_name, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-  setCookie(null, 'last_name', last_name, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
-  setCookie(null, 'premium_status', premium_status, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
+function* userToggleOAuth(action) {
+  const { useOAuth } = action
+  localStore.setItem('useOAuth', !useOAuth)
+  yield put({ type: USER_SET_OAUTH, useOAuth: !useOAuth })
 }
 
 function* userTokenRequest() {
@@ -139,6 +136,8 @@ export async function getSessGuid() {
     path: '/',
     maxAge: yearInMs
   })
+
+  return sess_guid
 }
 
 export async function userTokenValidate(code) {

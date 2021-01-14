@@ -9,6 +9,18 @@
 
 // ?? OPTIMIZATION: Operate solely on the current subset once memoized selectors
 // ?? are in place.
+export function reconcileItemsBatch(actions, state) {
+  if (!actions) return state
+  const action = actions[0].action
+  const items = actions.map((item) => ({ id: item.item_id }))
+
+  if (action === 'archive') return reconcileItemsArchived(items, state)
+  if (action === 'unarchive') return reconcileItemsUnArchived(items, state)
+  if (action === 'unfavorite') return reconcileItemsUnFavorited(items, state)
+  if (action === 'delete') return reconcileItemsDeleted(items, state)
+
+  return state
+}
 
 export function reconcileItemsArchived(items, state) {
   if (!items) return state

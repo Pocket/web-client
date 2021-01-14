@@ -12,7 +12,7 @@ const avatarKnobs = defineKnobs((props) => {
 })
 
 export default {
-  title: 'Components/Avatar/AvatarButton',
+  title: 'Components/AvatarButton',
   component: AvatarButton,
   decorators: [avatarKnobs]
 }

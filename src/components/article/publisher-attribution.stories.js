@@ -5,7 +5,7 @@ import { publisher, article } from 'mock/article'
 const { publishedAt } = article.photosAndCaptions
 
 export default {
-  title: 'Components/Article/PublisherAttribution',
+  title: 'Article/PublisherAttribution',
   component: PublisherAttribution
 }
 

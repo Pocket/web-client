@@ -3,7 +3,8 @@
 export const CONSUMER_KEY = '94110-6d5ff7a89d72c869766af0e0' // web-client
 // export const CONSUMER_KEY = '78809-9423d8c743a58f62b23ee85c' //web-app-draft consumer
 export const BASE_URL = 'https://getpocket.com'
-export const API_URL = 'https://oauth-test.web.readitlater.com'
+export const API_URL = 'https://getpocket.com'
+export const OAUTH_URL = 'https://oauth-test.web.readitlater.com'
 export const LOGIN_URL = 'https://getpocket.com/login'
 export const SIGNUP_URL = 'https://getpocket.com/signup'
 export const PREMIUM_URL = 'https://getpocket.com/premium?ep='
@@ -12,6 +13,7 @@ export const UNLEASH_API_URL = 'https://featureflags.readitlater.com/graphql'
 export const ARTICLE_API_URL = 'https://tz7snrninbak3oh36gjshbmdia.appsync-api.us-east-1.amazonaws.com/graphql' // ARTICLE_API_KEY is a secret and needs to be stored as such
 export const ARTICLE_API_KEY = 'da2-shleiiw7qzcnlkjwg3v7rfkpte' // Currently set to expire Thu, 04 Mar 2021 16:00:00 GMT
 export const READING_WPM = 220
+export const BATCH_SIZE = 30
 
 // THIRD PARTY
 export const CAPTCHA_SITE_KEY = '6LfIpyYUAAAAAPtNSKafudr16odFL1eQte0vR0Py' // API key used with Google's ReCaptcha service
@@ -80,6 +82,8 @@ export const API_ACTION_ADD_TAGS = 'tags_add'
 export const API_ACTION_TAGS_CLEARED = 'tags_clear'
 export const API_ACTION_ADD_ANNOTATION = 'add_annotation'
 export const API_ACTION_DELETE_ANNOTATION = 'delete_annotation'
+export const API_ACTION_SHARE_ADDED = 'share_added'
+export const API_ACTION_SHARE_IGNORED = 'share_ignored'
 
 // ANALYTICS
 export const ANALYTICS_UI = 'cxt_ui'

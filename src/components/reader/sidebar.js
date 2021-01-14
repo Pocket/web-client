@@ -47,6 +47,22 @@ const buttonRail = css`
   height: 100%;
   transition: opacity 150ms ease-in-out;
   opacity: 0;
+
+  button {
+    background: var(--color-popoverCanvas);
+    color: var(--color-textSecondary);
+    font-size: var(--size150);
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    text-align: center;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
+    transform: translate(-24px, -24px);
+    &:hover {
+      color: var(--color-textPrimary);
+      background-color: var(--color-actionPrimarySubdued);
+    }
+  }
 `
 
 const verticallyCentered = css`
@@ -57,22 +73,6 @@ const verticallyCentered = css`
   transform: translateY(-50%);
 `
 
-const buttonStyles = css`
-  background: var(--color-popoverCanvas);
-  color: var(--color-textSecondary);
-  font-size: var(--size150);
-  border-radius: 50%;
-  height: 32px;
-  width: 32px;
-  text-align: center;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
-  transform: translate(-24px, -24px);
-  &:hover {
-    color: var(--color-textPrimary);
-    background-color: var(--color-actionPrimarySubdued);
-  }
-`
-
 export const Sidebar = ({
   toggleSidebar,
   sideBarOpen,
@@ -80,7 +80,8 @@ export const Sidebar = ({
   annotationCount,
   shareItem,
   deleteAnnotation,
-  isPremium
+  isPremium,
+  handleImpression
 }) => {
   const handleAnnotationClick = (position) => {
     window.scrollTo({
@@ -103,13 +104,14 @@ export const Sidebar = ({
           annotationCount={annotationCount}
           deleteAnnotation={deleteAnnotation}
           onClickEvent={handleAnnotationClick}
+          handleImpression={handleImpression}
         />
 
         <div className={classNames(buttonRail, 'button-rail')}>
           <div className={verticallyCentered}>
             <button
               onClick={toggleSidebar}
-              className={classNames(buttonReset, buttonStyles)}>
+              className={buttonReset}>
               {sideBarOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </button>
           </div>

@@ -15,12 +15,11 @@ const allTagStyle = css`
     }
   }
   .list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 1em;
-    grid-row-gap: 0.5em;
     a {
       display: block;
+      button {
+        width: 100%;
+      }
     }
   }
 `
@@ -41,23 +40,33 @@ export function TagList({ userTags, value, valueChange }) {
         />
       </div>
       <div className={pillboxStyle}>
-        <ul>
+        <ul className="list">
           <li>
-            <Pill>un-tagged</Pill>
+            <Link href={'/my-list/tags/_untagged_'}>
+              <a>
+                <Pill>un-tagged</Pill>
+              </a>
+            </Link>
           </li>
           {value.length ? (
             <>
               {sortedTags.map((tag) => (
                 <li key={tag}>
-                  <Pill>{tag}</Pill>
+                  <Link href={`/my-list/tags/${encodeURIComponent(tag)}`}>
+                    <a>
+                      <Pill>{tag}</Pill>
+                    </a>
+                  </Link>
                 </li>
               ))}
             </>
           ) : (
             orderedTags.map((tag) => (
-              <li>
-                <Link href={`/my-list/tags/${tag}`}>
-                  <Pill>{tag}</Pill>
+              <li key={tag}>
+                <Link href={`/my-list/tags/${encodeURIComponent(tag)}`}>
+                  <a>
+                    <Pill>{tag}</Pill>
+                  </a>
                 </Link>
               </li>
             ))

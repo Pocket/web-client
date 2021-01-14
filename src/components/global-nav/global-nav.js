@@ -214,6 +214,7 @@ const GlobalNav = ({
   toggleListMode,
   links,
   tools,
+  sendImpression,
   userStatus,
   children
 }) => {
@@ -298,6 +299,7 @@ const GlobalNav = ({
                 sortOrder={sortOrder}
                 toggleSortOrder={toggleSortOrder}
                 toggleListMode={toggleListMode}
+                sendImpression={sendImpression}
               />
             </>
           )}

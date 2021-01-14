@@ -1,7 +1,7 @@
 // Vendor
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { SideNav } from 'components/side-nav/side-nav'
+import { SideNav } from 'connectors/side-nav/side-nav'
 
 import Layout from 'layouts/with-sidebar'
 

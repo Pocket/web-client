@@ -71,6 +71,7 @@ const buttonStyles = css`
   background-color: transparent;
   color: var(--color-textSecondary);
   font-size: var(--size150);
+  height: var(--size150);
   cursor: pointer;
 
   &.go-back {
@@ -106,7 +107,8 @@ export const ReaderNav = ({
   archiveItem,
   favorite,
   archive,
-  displaySettings
+  displaySettings,
+  onVisible
 }) => {
   const dispatch = useDispatch()
 
@@ -144,7 +146,8 @@ export const ReaderNav = ({
               </button>
             </WithTooltip>
 
-            <WithTooltip label="Favorite Article">
+            <WithTooltip
+              label={(favorite) ? "Remove from Favorites" : "Favorite Article"}>
               <button
                 onClick={toggleFavorite}
                 className={cx(buttonClass, favorite && 'favorite')}>
@@ -152,7 +155,7 @@ export const ReaderNav = ({
               </button>
             </WithTooltip>
 
-            <WithTooltip label="Archive Article">
+            <WithTooltip label={archive ? "Re-add to List" : "Archive Article"}>
               <button onClick={archiveItem} className={buttonClass}>
                 {archive ? <AddCircledIcon /> : <ArchiveIcon />}
               </button>
@@ -179,6 +182,7 @@ export const ReaderNav = ({
             setLineHeight={setLineHeight}
             setColumnWidth={setColumnWidth}
             isPremium={isPremium}
+            onVisible={onVisible}
           />
         </nav>
       </div>

@@ -27,16 +27,6 @@ import { Button, breakpointTinyTablet } from '@pocket/web-ui'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { PREMIUM_URL } from 'common/constants'
 
-const CopyToIllustrationsMap = {
-  library: "Library",
-  search: "Search",
-  focused: "Focused",
-  type: "Type",
-  features: "BigDiamond",
-  highlights: "Highlight",
-  tags: "Tags"
-}
-
 const borderStyles = css`
   border-top: 2px solid var(--color-dividerTertiary);
 `
@@ -65,31 +55,31 @@ const imgStyles = css`
   }
 
   .colormode-light & {
-    &.library img.light.library { display: block; }
-    &.search img.light.search { display: block; }
-    &.focused img.light.focused { display: block; }
-    &.type img.light.type { display: block; }
-    &.features img.light.features { display: block; }
-    &.highlights img.light.highlights { display: block; }
-    &.tags img.light.tags { display: block; }
+    &.library img.light { display: block; }
+    &.search img.light { display: block; }
+    &.focused img.light { display: block; }
+    &.type img.light { display: block; }
+    &.features img.light { display: block; }
+    &.highlights img.light { display: block; }
+    &.tags img.light { display: block; }
   }
   .colormode-dark & {
-    &.library img.dark.library { display: block; }
-    &.search img.dark.search { display: block; }
-    &.focused img.dark.focused { display: block; }
-    &.type img.dark.type { display: block; }
-    &.features img.dark.features { display: block; }
-    &.highlights img.dark.highlights { display: block; }
-    &.tags img.dark.tags { display: block; }
+    &.library img.dark { display: block; }
+    &.search img.dark { display: block; }
+    &.focused img.dark { display: block; }
+    &.type img.dark { display: block; }
+    &.features img.dark { display: block; }
+    &.highlights img.dark { display: block; }
+    &.tags img.dark { display: block; }
   }
   .colormode-sepia & {
-    &.library img.sepia.library { display: block; }
-    &.search img.sepia.search { display: block; }
-    &.focused img.sepia.focused { display: block; }
-    &.type img.sepia.type { display: block; }
-    &.features img.sepia.features { display: block; }
-    &.highlights img.sepia.highlights { display: block; }
-    &.tags img.sepia.tags { display: block; }
+    &.library img.sepia { display: block; }
+    &.search img.sepia { display: block; }
+    &.focused img.sepia { display: block; }
+    &.type img.sepia { display: block; }
+    &.features img.sepia { display: block; }
+    &.highlights img.sepia { display: block; }
+    &.tags img.sepia { display: block; }
   }
 `
 
@@ -154,89 +144,244 @@ const buttonWrapper = css`
   }
 `
 
+const LibraryAd = () => (
+  <>
+    <div className={classNames(imgStyles, 'library')}>
+      <img className='dark' src={LibraryDark} />
+      <img className='light' src={LibraryLight} />
+      <img className='sepia' src={LibrarySepia} />
+    </div>
+    <div className={classNames(copyWrapper, 'specificity')}>
+      <h5>Read with purpose</h5>
+      <p>Build a permanent library of every article you’ve saved with Pocket Premium.</p>
+      <p className="small">
+        Build a permanent library of every article you’ve saved with{' '}
+        <ArrowLink
+          href={`${PREMIUM_URL}12`}
+          target="_blank">
+          Pocket Premium
+        </ArrowLink>
+      </p>
+    </div>
+
+    <div className={buttonWrapper}>
+      <Button
+        id="reader.bottom.premium.library"
+        target="_blank"
+        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+    </div>
+  </>
+)
+
+const SearchAd = () => (
+  <>
+    <div className={classNames(imgStyles, 'search')}>
+      <img className='dark' src={SearchDark} />
+      <img className='light' src={SearchLight} />
+      <img className='sepia' src={SearchSepia} />
+    </div>
+    <div className={classNames(copyWrapper, 'specificity')}>
+      <h5>Search every word in your Pocket</h5>
+      <p>Unlock our powerful search tool when you join Pocket Premium.</p>
+      <p className="small">
+        Quickly search every word in your Pocket when you join{' '}
+        <ArrowLink
+          id="reader.bottom.premium.search"
+          href={`${PREMIUM_URL}12`}
+          target="_blank">
+          Pocket Premium
+        </ArrowLink>
+      </p>
+    </div>
+
+    <div className={buttonWrapper}>
+      <Button
+        id="reader.bottom.premium.search"
+        target="_blank"
+        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+    </div>
+  </>
+)
+
+const FocusedAd = () => (
+  <>
+    <div className={classNames(imgStyles, 'focused')}>
+      <img className='dark' src={FocusedDark} />
+      <img className='light' src={FocusedLight} />
+      <img className='sepia' src={FocusedSepia} />
+    </div>
+    <div className={classNames(copyWrapper, 'specificity')}>
+      <h5>Ditch the ads</h5>
+      <p>Boost your focus and get an ad-free experience with Pocket Premium.</p>
+      <p className="small">
+        Boost your focus and get an ad-free experience with{' '}
+        <ArrowLink
+          id="reader.bottom.premium.focused"
+          href={`${PREMIUM_URL}12`}
+          target="_blank">
+          Pocket Premium
+        </ArrowLink>
+      </p>
+    </div>
+
+    <div className={buttonWrapper}>
+      <Button
+        id="reader.bottom.premium.focused"
+        target="_blank"
+        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+    </div>
+  </>
+)
+
+const TypeAd = () => (
+  <>
+    <div className={classNames(imgStyles, 'type')}>
+      <img className='dark' src={TypeDark} />
+      <img className='light' src={TypeLight} />
+      <img className='sepia' src={TypeSepia} />
+    </div>
+    <div className={classNames(copyWrapper, 'specificity')}>
+      <h5>Read in your favorite font</h5>
+      <p>Get access to 8 exclusive fonts when you join Pocket Premium.</p>
+      <p className="small">
+        Customize your Pocket with 8 exclusive fonts when you join{' '}
+        <ArrowLink
+          id="reader.bottom.premium.type"
+          href={`${PREMIUM_URL}12`}
+          target="_blank">
+          Pocket Premium
+        </ArrowLink>
+      </p>
+    </div>
+
+    <div className={buttonWrapper}>
+      <Button
+        id="reader.bottom.premium.type"
+        target="_blank"
+        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+    </div>
+  </>
+)
+
+const BigDiamondAd = () => (
+  <>
+    <div className={classNames(imgStyles, 'features')}>
+      <img className='dark' src={BigDiamondDark} />
+      <img className='light' src={BigDiamondLight} />
+      <img className='sepia' src={BigDiamondSepia} />
+    </div>
+    <div className={classNames(copyWrapper, 'specificity')}>
+      <h5>Unlock exclusive features</h5>
+      <p>Take your reading experience to the next level when you join Pocket Premium.</p>
+      <p className="small">
+        Take your reading experience to the next level when you join{' '}
+        <ArrowLink
+          id="reader.bottom.premium.features"
+          href={`${PREMIUM_URL}12`}
+          target="_blank">
+          Pocket Premium
+        </ArrowLink>
+      </p>
+    </div>
+
+    <div className={buttonWrapper}>
+      <Button
+        id="reader.bottom.premium.features"
+        target="_blank"
+        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+    </div>
+  </>
+)
+
+const HighlightAd = () => (
+  <>
+    <div className={classNames(imgStyles, 'highlights')}>
+      <img className='dark' src={HighlightDark} />
+      <img className='light' src={HighlightLight} />
+      <img className='sepia' src={HighlightSepia} />
+    </div>
+    <div className={classNames(copyWrapper, 'specificity')}>
+      <h5>Unlock unlimited highlights</h5>
+      <p>Capture as many ideas as you’d like in every article with Pocket Premium.</p>
+      <p className="small">
+        Unlock unlimited highlights and never lose track of an idea with{' '}
+        <ArrowLink
+          id="reader.bottom.premium.highlights"
+          href={`${PREMIUM_URL}12`}
+          target="_blank">
+          Pocket Premium
+        </ArrowLink>
+      </p>
+    </div>
+
+    <div className={buttonWrapper}>
+      <Button
+        id="reader.bottom.premium.highlights"
+        target="_blank"
+        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+    </div>
+  </>
+)
+
+const TagsAd = () => (
+  <>
+    <div className={classNames(imgStyles, 'tags')}>
+      <img className='dark' src={TagsDark} />
+      <img className='light' src={TagsLight} />
+      <img className='sepia' src={TagsSepia} />
+    </div>
+    <div className={classNames(copyWrapper, 'specificity')}>
+      <h5>Tag stories faster than ever</h5>
+      <p>Save time and get helpful tag suggestions with Pocket Premium.</p>
+      <p className="small">
+        Tag stories faster than ever. Get tag suggestions with{' '}
+        <ArrowLink
+          id="reader.bottom.premium.tags"
+          href={`${PREMIUM_URL}12`}
+          target="_blank">
+          Pocket Premium
+        </ArrowLink>
+      </p>
+    </div>
+
+    <div className={buttonWrapper}>
+      <Button
+        id="reader.bottom.premium.tags"
+        target="_blank"
+        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+    </div>
+  </>
+)
+
+const AdsOptions = {
+  library: LibraryAd,
+  search: SearchAd,
+  focused: FocusedAd,
+  type: TypeAd,
+  features: BigDiamondAd,
+  highlights: HighlightAd,
+  tags: TagsAd
+}
+
 function _determineItem() {
-  let tmpArray = Object.keys(CopyToIllustrationsMap)
+  let tmpArray = Object.keys(AdsOptions)
   return tmpArray[Math.floor(Math.random() * tmpArray.length)]
 }
 
-export const BottomUpsell = ({ trackClick, maxWidth }) => {
-  const [itemToShow] = useState(_determineItem())
-
-  const sendTrackClick = (identifier) => {
-    // trackClick({
-    //   view: 'web',
-    //   section: '/premium',
-    //   page: 'reader',
-    //   page_params: itemToShow,
-    //   identifier
-    // })
-  }
+export const BottomUpsell = ({ maxWidth, onVisible }) => {
+  const [variant] = useState(_determineItem())
 
   const handleVisible = () => {
-    sendTrackClick('view_bottom_reader_upsell')
+    onVisible('reader.bottom.premium')
   }
 
-  const handleClick = () => {
-    sendTrackClick('click_bottom_reader_upsell')
-  }
+  const Advertisement = AdsOptions[variant]
 
   return (
     <VisibilitySensor onVisible={handleVisible}>
       <aside className={borderStyles}>
         <div className={upsellWrapper} style={{ maxWidth }}>
-          <div className={classNames(imgStyles, itemToShow)}>
-            <img className='library dark' src={LibraryDark} />
-            <img className='library light' src={LibraryLight} />
-            <img className='library sepia' src={LibrarySepia} />
-
-            <img className='search dark' src={SearchDark} />
-            <img className='search light' src={SearchLight} />
-            <img className='search sepia' src={SearchSepia} />
-
-            <img className='focused dark' src={FocusedDark} />
-            <img className='focused light' src={FocusedLight} />
-            <img className='focused sepia' src={FocusedSepia} />
-
-            <img className='type dark' src={TypeDark} />
-            <img className='type light' src={TypeLight} />
-            <img className='type sepia' src={TypeSepia} />
-
-            <img className='features dark' src={BigDiamondDark} />
-            <img className='features light' src={BigDiamondLight} />
-            <img className='features sepia' src={BigDiamondSepia} />
-
-            <img className='highlights dark' src={HighlightDark} />
-            <img className='highlights light' src={HighlightLight} />
-            <img className='highlights sepia' src={HighlightSepia} />
-
-            <img className='tags dark' src={TagsDark} />
-            <img className='tags light' src={TagsLight} />
-            <img className='tags sepia' src={TagsSepia} />
-          </div>
-
-          <div className={classNames(copyWrapper, 'specificity')}>
-            <h5>headinggggggggg</h5>
-            <p>This is a paragraph explaining why things are so interesting</p>
-            <p className="small">
-              this is a smaller paragraph so let's get excited!{' '}
-              <ArrowLink
-                onClick={handleClick}
-                href={`${PREMIUM_URL}12`}
-                // aria-label={translate('upsell.upgrade')}
-                target="_blank">
-                {/*'upsell.pocketPremium'*/}
-                Pocket Premium
-              </ArrowLink>
-            </p>
-          </div>
-
-          <div className={buttonWrapper}>
-            <Button
-              onClick={handleClick}
-              target="_blank"
-              // aria-label={translate('upsell.upgrade')}
-              href={`${PREMIUM_URL}12`}>Upgrade</Button>
-          </div>
+          <Advertisement />
         </div>
       </aside>
     </VisibilitySensor>

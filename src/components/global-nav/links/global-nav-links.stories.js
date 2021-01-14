@@ -11,7 +11,7 @@ const globalNavLinksKnobs = defineKnobs((props) => {
 })
 
 export default {
-  title: 'Components/GlobalNav/GlobalNavLinks',
+  title: 'GlobalNav/GlobalNavLinks',
   component: GlobalNavLinks,
   decorators: [globalNavLinksKnobs]
 }

@@ -14,7 +14,7 @@ const globalNavKnobs = defineKnobs((props) => {
 })
 
 export default {
-  title: 'Components/GlobalNav/GlobalNav',
+  title: 'GlobalNav/GlobalNav',
   component: GlobalNav,
   decorators: [globalNavKnobs]
 }

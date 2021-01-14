@@ -1,8 +1,9 @@
-import { takeLatest, put, takeEvery, select } from 'redux-saga/effects'
+import { takeLatest, put, select } from 'redux-saga/effects'
 import { getMyList } from 'common/api/my-list'
 import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { arrayToObject } from 'common/utilities'
 
+import { reconcileItemsBatch } from './my-list.reconcilers'
 import { reconcileItemsArchived } from './my-list.reconcilers'
 import { reconcileItemsUnArchived } from './my-list.reconcilers'
 import { reconcileItemsUnFavorited } from './my-list.reconcilers'
@@ -21,20 +22,25 @@ import { MYLIST_HYDRATE } from 'actions'
 import { MYLIST_SAVE_REQUEST } from 'actions'
 import { MYLIST_UNSAVE_REQUEST } from 'actions'
 
+import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_ARCHIVE_REQUEST } from 'actions'
 import { ITEMS_UNARCHIVE_REQUEST } from 'actions'
 import { ITEMS_DELETE_SEND } from 'actions'
+import { ITEMS_DELETE_SUCCESS } from 'actions'
 import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
+import { ITEMS_ADD_SUCCESS } from 'actions'
+
+import { APP_SORT_ORDER_TOGGLE } from 'actions'
 
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getMylistData = (count, offset, subset, filter, sort) => ({ type: MYLIST_DATA_REQUEST, count, offset, subset, sort, filter}) //prettier-ignore
+export const getMylistData = (count, offset, subset, filter, tag) => ({ type: MYLIST_DATA_REQUEST, count, offset, subset, filter, tag}) //prettier-ignore
+export const updateMyListData = (since, subset, filter, tag) => ({ type: MYLIST_UPDATE_REQUEST, since, subset, filter, tag}) //prettier-ignore
 export const hydrateMylist = (hydrated) => ({ type: MYLIST_HYDRATE, hydrated }) //prettier-ignore
 export const saveMylistItem = (id, url, position) => ({type: MYLIST_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const unSaveMylistItem = (id) => ({ type: MYLIST_UNSAVE_REQUEST, id }) //prettier-ignore
-export const updateMyListData = (since, subset, filter) => ({ type: MYLIST_UPDATE_REQUEST, since, subset, filter }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -46,6 +52,8 @@ export const updateMyListData = (since, subset, filter) => ({ type: MYLIST_UPDAT
 // the whole list and derive data that way, but that will require a larger effort
 // to support something like indexDB (which I want to do)
 const initialState = {
+  listState: 'clean',
+
   // State for active list items
   unread: [],
   unreadOffset: 0,
@@ -141,8 +149,11 @@ const initialState = {
 export const myListReducers = (state = initialState, action) => {
   switch (action.type) {
     case MYLIST_DATA_SUCCESS: {
-      const { items, offset, subset, total, filter, since } = action
-      const section = filter ? subset + filter : subset
+      const { items, offset, subset, total, filter, since, tag } = action
+      const selector = tag ? tag : subset
+
+      const section = filter ? selector + filter : selector
+
       return {
         ...state,
         [section]: items,
@@ -153,10 +164,12 @@ export const myListReducers = (state = initialState, action) => {
     }
 
     case MYLIST_UPDATE_SUCCESS: {
-      const { items, subset, filter, since } = action
-      const section = filter ? subset + filter : subset
+      const { items, subset, filter, since, tag } = action
+      const selector = tag ? tag : subset
+      const section = filter ? selector + filter : selector
       return {
         ...state,
+        listState: 'clean',
         [section]: items,
         [`${section}Offset`]: items.length,
         [`${section}Since`]: since
@@ -173,6 +186,14 @@ export const myListReducers = (state = initialState, action) => {
       return { ...state, ...hydrated }
     }
 
+    case ITEMS_ADD_SUCCESS: {
+      return { ...state, listState: 'dirty' }
+    }
+
+    case APP_SORT_ORDER_TOGGLE: {
+      return initialState
+    }
+
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE:
@@ -180,6 +201,15 @@ export const myListReducers = (state = initialState, action) => {
       return { ...state, ...mylist }
 
     // Reconcilers
+    case ITEMS_ARCHIVE_SUCCESS: {
+      const { actions } = action
+      // If they took a single action it is handled optimistically
+      if (actions.length <= 0) return state
+
+      // If they batched things we handle it post response
+      return reconcileItemsBatch(actions, state)
+    }
+
     case ITEMS_ARCHIVE_REQUEST: {
       const { items } = action
       return reconcileItemsArchived(items, state)
@@ -193,6 +223,15 @@ export const myListReducers = (state = initialState, action) => {
     case ITEMS_UNFAVORITE_REQUEST: {
       const { items } = action
       return reconcileItemsUnFavorited(items, state)
+    }
+
+    case ITEMS_DELETE_SUCCESS: {
+      const { actions } = action
+      // If they took a single action it is handled optimistically
+      if (actions.length <= 0) return state
+
+      // If they batched things we handle it post response
+      return reconcileItemsBatch(actions, state)
     }
 
     case ITEMS_DELETE_SEND: {
@@ -214,21 +253,20 @@ export const myListSagas = [
   // takeEvery(MYLIST_DATA_FAILURE, mylistUnSaveRequest)
 ]
 
+/** SAGA :: SELECTORS
+ --------------------------------------------------------------- */
+const getSortOrder = (state) => state.app.sortOrder
+const getMyListItemsById = (state) => state.myListItemsById
+
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-export const getMyListItemsById = (state) => state.myListItemsById
 
 function* myListDataRequest(action) {
   try {
-    const {
-      count = 15,
-      offset = 0,
-      sort = 'newest',
-      subset = 'active',
-      filter
-    } = action
+    const { count = 15, offset = 0, subset = 'active', tag, filter } = action
 
     const parameters = {}
+    const sortOrder = yield select(getSortOrder)
 
     // Set appropriate subset
     if (subset === 'unread') parameters.state = 'unread'
@@ -237,6 +275,7 @@ function* myListDataRequest(action) {
     if (subset === 'highlights') parameters.hasAnnotations = 1
     if (subset === 'articles') parameters.contentType = 'article'
     if (subset === 'videos') parameters.contentType = 'video'
+    if (subset === 'tag') parameters.tag = tag
 
     // Apply filters
     if (filter === 'active') parameters.state = 'unread'
@@ -246,7 +285,7 @@ function* myListDataRequest(action) {
     const { itemsById, total, since, error } = yield fetchMyListData({
       count,
       offset,
-      sort,
+      sort: sortOrder,
       ...parameters
     })
 
@@ -256,13 +295,14 @@ function* myListDataRequest(action) {
     const itemsByIdDraft = { ...existingItemsById, ...itemsById }
 
     const filterFunction = filterSelector(subset, filter)
-    const sortFunction = sortSelector(subset, 'newest') //TODO: hook this to selector
+
+    const sortFunction = sortSelector(subset, sortOrder) //TODO: hook this to selector
     const items = Object.values(itemsByIdDraft)
-      .filter(filterFunction)
+      .filter((item) => filterFunction(item, tag))
       .sort(sortFunction)
       .map((item) => item.item_id)
 
-    const newOffset = offset + items?.length
+    const newOffset = offset + Object.keys(itemsById).length
 
     yield put({
       type: MYLIST_DATA_SUCCESS,
@@ -271,6 +311,7 @@ function* myListDataRequest(action) {
       offset: newOffset,
       subset,
       filter,
+      tag,
       total,
       since
     })
@@ -282,7 +323,9 @@ function* myListDataRequest(action) {
 
 function* myListUpdate(action) {
   try {
-    const { since, subset = 'active', filter } = action
+    const { since, subset = 'active', filter, tag } = action
+    const sortOrder = yield select(getSortOrder)
+
     const data = yield fetchMyListUpdate({ since })
 
     // No updates so simply return
@@ -299,9 +342,9 @@ function* myListUpdate(action) {
     const itemsById = { ...existingItemsById, ...updatedItemsById }
 
     const filterFunction = filterSelector(subset)
-    const sortFunction = sortSelector(subset, 'newest') //TODO: hook this to selector
+    const sortFunction = sortSelector(subset, sortOrder) //TODO: hook this to selector
     const items = Object.values(itemsById)
-      .filter(filterFunction)
+      .filter((item) => filterFunction(item, tag))
       .sort(sortFunction)
       .map((item) => item.item_id)
 
@@ -312,6 +355,7 @@ function* myListUpdate(action) {
       itemsById,
       subset,
       filter,
+      tag,
       since: updatedSince
     })
   } catch (error) {

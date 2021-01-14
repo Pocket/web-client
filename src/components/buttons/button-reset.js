@@ -26,4 +26,7 @@ export const buttonReset = css`
   &:focus {
     outline: 0;
   }
+  &:hover {
+    background: transparent;
+  }
 `

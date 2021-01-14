@@ -45,7 +45,7 @@ const baseProps = {
 }
 
 export default {
-  title: 'Components/GlobalNav/GlobalNavMobileMenu',
+  title: 'GlobalNav/GlobalNavMobileMenu',
   component: GlobalNavMobileMenu,
   decorators: [globalNavLinksKnobs]
 }

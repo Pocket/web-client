@@ -19,7 +19,7 @@ import quartz from 'media/images/publisher-logos/logo-quartz.png'
 import theGuardian from 'media/images/publisher-logos/logo-guardian.png'
 
 export default {
-  title: 'Components/Pocket Hits Signup/PublisherGrid',
+  title: 'Pocket Hits/Publisher Grid',
   component: PublisherGrid
 }
 

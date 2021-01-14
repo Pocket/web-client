@@ -3,24 +3,13 @@ import { WithTooltip } from '@pocket/web-ui'
 
 const itemActionStyle = css`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   align-content: center;
   background-color: var(--color-canvas);
   border-radius: 0 0 4px 4px;
   padding-bottom: var(--size025);
   position: relative;
-  &:after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    bottom: 0;
-    width: 100%;
-    height: 10px;
-    display: block;
-    border-radius: 0 0 4px 4px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  }
 `
 
 const menuItemStyle = css`
@@ -76,12 +65,12 @@ const MenuItem = ({ label, icon, onClick, active }) => {
   )
 }
 
-export function ItemActions({ menuItems, showActions, type }) {
-  return showActions || type === 'list' ? (
+export function ItemActions({ menuItems }) {
+  return (
     <div className={`${itemActionStyle} item-actions`}>
       {menuItems.map((props) => (
         <MenuItem key="key" {...props} />
       ))}
     </div>
-  ) : null
+  )
 }
