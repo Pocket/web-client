@@ -10,7 +10,7 @@ import { updateMyListData } from './my-list.state'
 import { appSetSection } from 'connectors/app/app.state'
 import { MyListHeader } from 'components/headers/my-list-header'
 import { TagPageHeader } from './tags-page/tag-page-header'
-import { VirtualizedList } from 'components/items-layout/virtualized-list'
+import { VirtualizedList } from 'connectors/virtualized/virtualized-list'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
@@ -140,7 +140,11 @@ export default function Collection(props) {
   const Header = tag ? TagPageHeader : MyListHeader
 
   return (
-    <Layout title={metaData.title} metaData={metaData}>
+    <Layout
+      title={metaData.title}
+      metaData={metaData}
+      subset={subset}
+      tag={tag}>
       <SideNav subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
 
       {shouldRender ? (
@@ -156,7 +160,7 @@ export default function Collection(props) {
               {items?.length ? (
                 <VirtualizedList
                   type={type}
-                  items={items}
+                  section={section}
                   loadMore={loadMore}
                 />
               ) : null}

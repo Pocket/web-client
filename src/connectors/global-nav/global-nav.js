@@ -15,6 +15,12 @@ import { ListViewIcon } from '@pocket/web-ui'
 import { SearchIcon } from '@pocket/web-ui'
 import { AddIcon } from '@pocket/web-ui'
 import { EditIcon } from '@pocket/web-ui'
+import { FavoriteIcon } from '@pocket/web-ui'
+import { HighlightIcon } from '@pocket/web-ui'
+import { TagIcon } from '@pocket/web-ui'
+import { ArticleIcon } from '@pocket/web-ui'
+import { ArchiveIcon } from '@pocket/web-ui'
+import { VideoIcon } from '@pocket/web-ui'
 
 import { BASE_URL, LOGIN_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities'
@@ -44,13 +50,11 @@ export const enforceDefaultAvatar = (avatarUrl = '') => {
  * It has no stories or tests because of this, and will pass through any props
  * provided to it to the GlobalNav component.
  */
-const GlobalNav = (props) => {
+const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const dispatch = useDispatch()
   const router = useRouter()
   const selectedLink =
-    props.selectedLink !== undefined
-      ? props.selectedLink
-      : getTopLevelPath(router.pathname)
+    selected !== undefined ? selected : getTopLevelPath(router.pathname)
 
   const appMode = useSelector((state) => state?.app?.mode)
   const useOAuth = useSelector((state) => state?.user?.useOAuth)
@@ -69,7 +73,17 @@ const GlobalNav = (props) => {
 
   const toggleSortOrder = () => dispatch(sortOrderToggle())
   const toggleListMode = () => dispatch(listModeToggle())
-  const sendImpressionEvent = (identifier) => dispatch(sendImpression(identifier))
+  const sendImpressionEvent = (identifier) =>
+    dispatch(sendImpression(identifier))
+
+  const pinnedTags = useSelector((state) => state.userTags.pinnedTags)
+  const pinnedLinks = pinnedTags.map((pin) => {
+    return {
+      label: pin,
+      name: pin,
+      url: `/my-list/tags/${pin}`
+    }
+  })
 
   const links = [
     {
@@ -86,6 +100,46 @@ const GlobalNav = (props) => {
       url: '/my-list',
       icon: <ListViewIcon />
     }
+  ]
+
+  const subLinks = [
+    {
+      name: 'archive',
+      icon: <ArchiveIcon />,
+      label: 'Archive',
+      url: '/my-list/archive'
+    },
+    {
+      name: 'favorites',
+      icon: <FavoriteIcon />,
+      label: 'Favorites',
+      url: '/my-list/favorites'
+    },
+    {
+      name: 'highlights',
+      icon: <HighlightIcon />,
+      label: 'Highlights',
+      url: '/my-list/highlights'
+    },
+    {
+      name: 'articles',
+      icon: <ArticleIcon />,
+      label: 'Articles',
+      url: '/my-list/articles'
+    },
+    {
+      name: 'videos',
+      icon: <VideoIcon />,
+      label: 'Videos',
+      url: '/my-list/videos'
+    },
+    {
+      name: 'tags',
+      icon: <TagIcon />,
+      label: 'All Tags',
+      url: '/my-list/tags'
+    },
+    ...pinnedLinks
   ]
 
   /**
@@ -130,6 +184,9 @@ const GlobalNav = (props) => {
       pocketLogoOutboundUrl={'/'}
       appRootSelector="#__next"
       links={links}
+      subLinks={subLinks}
+      subset={subset}
+      tag={tag}
       selectedLink={selectedLink}
       isLoggedIn={isLoggedIn}
       isPremium={isPremium}
