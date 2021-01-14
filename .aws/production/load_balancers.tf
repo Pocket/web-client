@@ -36,7 +36,8 @@ resource "aws_alb_listener_rule" "public_forward_101" {
     path_pattern {
       values = [
          "/my-list",
-         "/my-list/"
+         "/my-list/",
+         "/my-list/*"
       ]
     }
   }
