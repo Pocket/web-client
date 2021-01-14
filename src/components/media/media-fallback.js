@@ -7,7 +7,7 @@ import { fontSerifAlt } from '@pocket/web-ui'
  * TODO:
  * - Connect on a better way to use these from web-ui
  * - Possibly move this entire hook to web-ui
- * - REMOVE Colot declarations from here once this is worked out
+ * - REMOVE Color declarations from here once this is worked out
  * NOTE: Blocking dev with lib updates is a challenge worth solving
  */
 const _colorCoral = '#EF4056'
@@ -16,7 +16,7 @@ const _colorAmber = '#FCB643'
 const _colorMint = '#00CB77'
 
 const imageBlockBefore = {
-  transition: 'background-color 300ms linear',
+  // transition: 'background-color 300ms linear',
   content: '""',
   overflow: 'hidden',
   display: 'block',
@@ -31,7 +31,7 @@ const imageBlockBefore = {
 }
 
 const imageBlockAfter = {
-  transition: 'opacity 300ms linear',
+  // transition: 'opacity 300ms linear',
   backgroundColor: 'transparent',
   color: 'var(--fallbackColor)',
   content: 'var(--fallbackLetter)',
