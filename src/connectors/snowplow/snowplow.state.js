@@ -50,7 +50,7 @@ export const trackContentImpression = (component, requirement, position, item, i
 }
 export const trackImpression = (component, requirement, position, identifier) => {
   return {
-    type: SNOWPLOW_TRACK_CONTENT_IMPRESSION,
+    type: SNOWPLOW_TRACK_IMPRESSION,
     component,
     requirement,
     position,

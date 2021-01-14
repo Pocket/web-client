@@ -280,7 +280,7 @@ export const Card = ({
                 menuItems={[
                   {
                     key: `favorite-${id}`,
-                    label: 'Favorite',
+                    label: isFavorite ? 'Unfavorite' : 'Favorite',
                     icon: <FavoriteIcon />,
                     onClick: favoriteAction,
                     active: isFavorite
