@@ -29,8 +29,17 @@ const bulkStyle = css`
     font-family: 'Graphik Web';
     font-style: normal;
     font-size: var(--fontSize100);
-    div {
+    .labelText {
       padding-left: var(--spacing100);
+      ${breakpointMediumHandset} {
+        display: none;
+      }
+    }
+  }
+
+  ${breakpointMediumHandset} {
+    .cancel-button {
+      display: none;
     }
   }
 
@@ -56,10 +65,6 @@ const bulkStyle = css`
 
   .bulk-button {
     font-size: var(--fontSize100);
-
-    ${breakpointMediumHandset} {
-      display: none;
-    }
   }
 
   .error-message {
@@ -96,13 +101,9 @@ const bulkIconActions = css`
   }
 `
 
-const closeIconStyle = css`
+const navIconStyle = css`
   width: 20px;
   height: 20px;
-
-  ${breakpointMediumHandset} {
-    display: none;
-  }
 `
 
 const closeLabelStyle = css`
@@ -110,11 +111,6 @@ const closeLabelStyle = css`
   font-family: var(--fontSansSerif);
   font-size: var(--fontSize085);
   color: var(--color-textSecondary);
-
-  ${breakpointMediumHandset} {
-    display: inline-block;
-    height: auto;
-  }
 `
 
 const CloseLabel = ({ children }) => (
@@ -125,7 +121,8 @@ const buttonStyle = css`
   margin-left: auto;
   background-color: transparent;
   color: var(--color-actionSecondary);
-
+  padding-left: 0.25em;
+  padding-right: 0.25em;
   &:hover {
     color: var(--color-actionPrimary);
     background-color: transparent;
@@ -144,8 +141,8 @@ const buttonStyle = css`
 
 const CloseButton = ({ onClick }) => {
   return (
-    <button className={buttonStyle} onClick={onClick}>
-      <CrossIcon className={closeIconStyle} />
+    <button className={`${buttonStyle} cancel-button`} onClick={onClick}>
+      <CrossIcon className={navIconStyle} />
       <CloseLabel>Cancel</CloseLabel>
     </button>
   )
@@ -211,12 +208,10 @@ function GlobalNavBulkEdit({
               </button>
             </WithTooltip>
 
-            <div>
+            <div className="labelText">
               {bulkItemsCount
-                ? `${bulkItemsCount} item${
-                    bulkItemsCount > 1 ? 's' : ''
-                  } selected`
-                : 'Select items to edit'}
+                ? `${bulkItemsCount} item${bulkItemsCount > 1 ? 's' : ''}`
+                : 'Select items'}
             </div>
           </div>
         </div>
