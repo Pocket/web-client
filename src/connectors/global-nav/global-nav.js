@@ -27,6 +27,7 @@ import { getTopLevelPath } from 'common/utilities'
 import { userOAuthLogIn } from 'connectors/user/user.state'
 
 import { sendImpression } from './global-nav.analytics'
+import { sendEngagement } from './global-nav.analytics'
 
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
@@ -154,6 +155,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     : []
 
   const toolClick = (name) => {
+    dispatch(sendEngagement(`global-nav.${name}`))
     if (name === 'search') dispatch(appSetMode('search'))
     if (name === 'add-item') dispatch(appSetMode('add'))
     if (name === 'bulk-edit') dispatch(appSetMode('bulk'))

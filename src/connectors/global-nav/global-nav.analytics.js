@@ -35,7 +35,7 @@ export const sendBulkDeleteEvent = (items) => (trackContentEngagement(
 ))
 
 export const sendBulkFavoriteEvent = (items, status) => {
-  const identifier = status ? 'global-nav.batch.favorite' : 'global-nav.batch.un-favorite'
+  const identifier = status ? 'global-nav.bulk.favorite' : 'global-nav.bulk.un-favorite'
   return trackContentEngagement(
     ENGAGEMENT_TYPE_GENERAL,
     UI_COMPONENT_BUTTON,
@@ -46,7 +46,7 @@ export const sendBulkFavoriteEvent = (items, status) => {
 }
 
 export const sendBulkArchiveEvent = (items, status) => {
-  const identifier = status ? 'global-nav.batch.archive' : 'global-nav.batch.un-archive'
+  const identifier = status ? 'global-nav.bulk.archive' : 'global-nav.bulk.un-archive'
   const engagement = status ? ENGAGEMENT_TYPE_SAVE : ENGAGEMENT_TYPE_GENERAL
   return trackContentEngagement(
     engagement,
@@ -69,5 +69,12 @@ export const sendImpression = (identifier) => (trackImpression(
   IMPRESSION_COMPONENT_UI,
   IMPRESSION_REQUIREMENT_VIEWABLE,
   0,
+  identifier
+))
+
+export const sendEngagement = (identifier) => (trackEngagement(
+  ENGAGEMENT_TYPE_GENERAL,
+  UI_COMPONENT_BUTTON,
+  0, // position in list (zero since it's not in list)
   identifier
 ))

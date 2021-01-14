@@ -158,7 +158,10 @@ export function TaggingModal() {
       </ModalBody>
       <ModalFooter isSticky={false}>
         <div className="actions">
-          <Button type="submit" onClick={saveTags}>
+          <Button
+            type="submit"
+            disabled={currentTags.length === 0}
+            onClick={saveTags}>
             Save
           </Button>
         </div>
