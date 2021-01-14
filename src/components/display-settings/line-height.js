@@ -29,7 +29,7 @@ export const LineHeightSettings = ({
   return (
     <PopupMenuGroup>
       <StepperWrapper>
-        <IconWrapper data-tooltip={`${range[current]}em`}>
+        <IconWrapper data-tooltip={`${range[current] * 100}%`}>
           <LineHeightIcon />
         </IconWrapper>
         <StepperButton
