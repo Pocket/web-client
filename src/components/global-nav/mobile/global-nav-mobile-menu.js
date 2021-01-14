@@ -197,18 +197,20 @@ export const Menu = ({
         />
       )
     })}
-    {subLinks.map((link) => {
-      const key = `global-nav-mobile-menu-${link?.name}`
-      return link.url ? (
-        <MobileLink
-          link={link}
-          handleClick={(event) => {
-            handleClick(event, link.name, link.url)
-          }}
-          key={key}
-        />
-      ) : null
-    })}
+    {subLinks
+      ? subLinks.map((link) => {
+          const key = `global-nav-mobile-menu-${link?.name}`
+          return link.url ? (
+            <MobileLink
+              link={link}
+              handleClick={(event) => {
+                handleClick(event, link.name, link.url)
+              }}
+              key={key}
+            />
+          ) : null
+        })
+      : null}
     {isUserLoggedIn && !isUserPremium ? (
       <>
         <hr className="nav-divider" />

@@ -4,9 +4,9 @@ import sinon from 'sinon'
 import { shallow } from 'enzyme'
 import { mockEvent } from '@pocket/web-utilities/test-utils'
 import { testIdSelector } from '@pocket/web-utilities/test-utils'
-
 import GlobalNavMobileMenu, { Menu, MobileLink } from './global-nav-mobile-menu'
 import { Drawer } from '@pocket/web-ui'
+import Router from 'next/router'
 
 const baseProps = {
   appRootSelector: '#root',
@@ -77,6 +77,12 @@ describe('GlobalNavMobileMenu', () => {
   })
 
   it('renders the links with correct labels as specified in the `links` prop', () => {
+    // Mock router
+    Router.router = {
+      push: () => {},
+      prefetch: () => new Promise((resolve, reject) => {})
+    }
+
     const wrapper = shallow(<GlobalNavMobileMenu {...baseProps} />)
     const links = wrapper.find(Menu).dive().find(MobileLink)
 
@@ -85,17 +91,6 @@ describe('GlobalNavMobileMenu', () => {
 
     assert.equal(firstLink.text(), baseProps.links[0].label)
     assert.equal(secondLink.text(), baseProps.links[1].label)
-  })
-
-  it('renders the links with correct urls as specified in the `links` prop', () => {
-    const wrapper = shallow(<GlobalNavMobileMenu {...baseProps} />)
-    const links = wrapper.find(Menu).dive().find(MobileLink)
-
-    const firstLink = links.at(0).dive().find('a')
-    const secondLink = links.at(1).dive().find('a')
-
-    assert.equal(firstLink.prop('href'), baseProps.links[0].url)
-    assert.equal(secondLink.prop('href'), baseProps.links[1].url)
   })
 
   it('applies the "selected" link state correctly based on props.selectedLink', () => {
