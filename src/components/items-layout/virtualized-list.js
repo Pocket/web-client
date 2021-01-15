@@ -227,15 +227,13 @@ export const cardList = css`
       .excerpt {
         display: none;
       }
+
       .item-actions {
         width: 100%;
       }
 
       .actions button {
-        opacity: 0;
-        @media (hover: none) {
-          opacity: 1;
-        }
+        opacity: 1;
         &.active {
           opacity: 1;
         }
