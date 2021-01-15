@@ -44,7 +44,7 @@ Sentry.init(sentrySettings)
 /** App
  --------------------------------------------------------------- */
 function PocketWebClient({ Component, pageProps, err }) {
-  const showMyList = localStore.getItem('showPocketApp') === 'true'
+  const showMyList = true
   const ToRender = showMyList ? Component : ComingSoon
 
   // Initialize app once per page load
