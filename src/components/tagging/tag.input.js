@@ -102,7 +102,7 @@ export class TagInput extends Component {
       event.preventDefault()
       event.stopPropagation()
 
-      if (this.props.value) {
+      if (this.props.value.trim()) {
         this.props.addTag(`${this.props.value}`)
       }
       else {

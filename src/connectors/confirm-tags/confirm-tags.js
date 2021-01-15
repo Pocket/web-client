@@ -160,7 +160,6 @@ export function TaggingModal() {
         <div className="actions">
           <Button
             type="submit"
-            disabled={currentTags.length === 0}
             onClick={saveTags}>
             Save
           </Button>
