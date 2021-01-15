@@ -1,6 +1,7 @@
 import { SimpleCard } from 'components/item-card/my-list/card-simple'
 import { css } from 'linaria'
 import { SectionHeader } from 'components/headers/section-header'
+import { breakpointLargeHandset } from '@pocket/web-ui'
 
 const recentTagStyle = css`
   border-bottom: var(--dividerStyle);
@@ -15,6 +16,12 @@ const recentTagStyle = css`
     grid-template-columns: repeat(2, 1fr);
     grid-row-gap: 1rem;
     grid-column-gap: 2rem;
+  }
+
+  ${breakpointLargeHandset} {
+    .cards {
+      grid-template-columns: 1fr;
+    }
   }
 `
 

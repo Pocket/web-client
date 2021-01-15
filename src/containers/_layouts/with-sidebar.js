@@ -14,15 +14,24 @@ const myListContainer = css`
   grid-template-columns: repeat(12, 1fr);
   grid-auto-flow: dense;
 
-  ${breakpointLargeTablet} {
-    grid-column-gap: var(--spacing150);
-    grid-row-gap: var(--spacing150);
-  }
   .main {
     grid-column: span 10;
   }
   .side-nav {
     grid-column: span 2;
+  }
+
+  ${breakpointLargeTablet} {
+    grid-column-gap: var(--spacing150);
+    grid-row-gap: var(--spacing150);
+
+    .main {
+      grid-column: span 12;
+    }
+    .side-nav {
+      display: none;
+      grid-column: span 0;
+    }
   }
 `
 
@@ -35,6 +44,8 @@ function mainLayout({
   children,
   title = 'Pocket',
   canonical,
+  subset,
+  tag,
   selectedNavLink,
   isFullWidthLayout
 }) {
@@ -46,7 +57,7 @@ function mainLayout({
         {canonical ? <link rel="canonical" href={canonical} /> : null}
       </Head>
 
-      <GlobalNav selectedLink={selectedNavLink} />
+      <GlobalNav selectedLink={selectedNavLink} subset={subset} tag={tag} />
 
       <div className={fixedNavContainer}>
         {isFullWidthLayout ? (

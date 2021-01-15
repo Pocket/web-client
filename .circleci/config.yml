@@ -353,8 +353,7 @@ jobs:
       - run:
           name: Install Terraform
           command: |
-            #Pinning to 0.12.29 until modules are updated to support 0.13.0
-            export TERRAFORM=0.12.29
+            export TERRAFORM=0.14.4
             #$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')
             wget https://releases.hashicorp.com/terraform/${TERRAFORM}/terraform_${TERRAFORM}_linux_amd64.zip
             sudo unzip ./terraform_${TERRAFORM}_linux_amd64.zip -d /usr/local/bin/
@@ -378,9 +377,9 @@ jobs:
             - run:
                 name: Deploy Push
                 command: |
-                  aws ssm put-parameter --name "/web-client/CircleCI/Production/BUILD_BRANCH" --type "SecureString" --value "${CIRCLE_BRANCH}" --overwrite
-                  aws ssm put-parameter --name "/web-client/CircleCI/Production/SERVICE_VERSION" --type "SecureString" --value "${CIRCLE_BUILD_NUM}" --overwrite
-                  aws ssm put-parameter --name "/web-client/CircleCI/Production/SERVICE_HASH" --type "SecureString" --value "${CIRCLE_SHA1}" --overwrite
+                  aws ssm put-parameter --name "/Web-Client/CircleCI/Production/BUILD_BRANCH" --type "SecureString" --value "${CIRCLE_BRANCH}" --overwrite
+                  aws ssm put-parameter --name "/Web-Client/CircleCI/Production/SERVICE_VERSION" --type "SecureString" --value "${CIRCLE_BUILD_NUM}" --overwrite
+                  aws ssm put-parameter --name "/Web-Client/CircleCI/Production/SERVICE_HASH" --type "SecureString" --value "${CIRCLE_SHA1}" --overwrite
                   cd .aws/production
                   terraform apply \
                     -auto-approve \
@@ -391,9 +390,9 @@ jobs:
             - run:
                 name: Push Dev Variables
                 command: |
-                  aws ssm put-parameter --name "/web-client/CircleCI/Development/BUILD_BRANCH" --type "SecureString" --value "${CIRCLE_BRANCH}" --overwrite
-                  aws ssm put-parameter --name "/web-client/CircleCI/Development/SERVICE_VERSION" --type "SecureString" --value "${CIRCLE_BUILD_NUM}" --overwrite
-                  aws ssm put-parameter --name "/web-client/CircleCI/Development/SERVICE_HASH" --type "SecureString" --value "${CIRCLE_SHA1}" --overwrite
+                  aws ssm put-parameter --name "/Web-Client/CircleCI/Development/BUILD_BRANCH" --type "SecureString" --value "${CIRCLE_BRANCH}" --overwrite
+                  aws ssm put-parameter --name "/Web-Client/CircleCI/Development/SERVICE_VERSION" --type "SecureString" --value "${CIRCLE_BUILD_NUM}" --overwrite
+                  aws ssm put-parameter --name "/Web-Client/CircleCI/Development/SERVICE_HASH" --type "SecureString" --value "${CIRCLE_SHA1}" --overwrite
       - unless:
           condition: << parameters.deploy >>
           steps:
@@ -496,11 +495,11 @@ workflows:
       - unit_tests:
           <<: *not_main
       # conditionally building deployment with or without asset prefix
-      # - build_deployment:
-      #     <<: *only_main
-      #     prefix: "https://assets.getpocket.com/web-client"
-      #     showdev: ""
-      #     name: build_production
+      - build_deployment:
+          <<: *only_main
+          prefix: "https://assets.getpocket.com/web-client"
+          showdev: ""
+          name: build_production
       - build_deployment:
           <<: *not_main
           prefix: ""
@@ -523,30 +522,30 @@ workflows:
       #       - push_feature_assets
       #       - deploy_feature
       # conditional push production build and assets (css/js) for main branch
-      # - push_production_assets:
-      #     <<: *only_main
-      #     requires:
-      #       - build_production
-      # - build_production_container:
-      #     requires:
-      #       - build_production
-      # - tag:
-      #     <<: *only_main
-      #     requires:
-      #       - build_production_container
+      - push_production_assets:
+          <<: *only_main
+          requires:
+            - build_production
+      - build_production_container:
+          requires:
+            - build_production
+      - tag:
+          <<: *only_main
+          requires:
+            - build_production_container
       # conditional push production build and assets (css/js)
-      # - deploy:
-      #     <<: *not_main
-      #     deploy: false
-      #     name: check_production
-      # - deploy:
-      #     <<: *only_main
-      #     deploy: true
-      #     name: deploy_production
-      #     requires:
-      #       - build_production_container
-      #       - push_production_assets
-      # - deploy_end_notification:
-      #     <<: *only_main
-      #     requires:
-      #       - deploy_production
+      - deploy:
+          <<: *not_main
+          deploy: false
+          name: check_production
+      - deploy:
+          <<: *only_main
+          deploy: true
+          name: deploy_production
+          requires:
+            - build_production_container
+            - push_production_assets
+      - deploy_end_notification:
+          <<: *only_main
+          requires:
+            - deploy_production

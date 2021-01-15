@@ -20,6 +20,7 @@ import { WithTooltip } from '@pocket/web-ui'
 import { openWindow } from 'common/utilities'
 
 import { itemsShareCancel } from 'connectors/items-by-id/my-list/items.share'
+import { itemsSocialShare } from 'connectors/items-by-id/my-list/items.share'
 
 const socialIcons = css`
   margin: 0;
@@ -94,18 +95,19 @@ export const BufferShareButton = ({
   )
 }
 
-export const ShareSocial = function ({ item, quote }) {
+export const ShareSocial = function ({ item, quote, position = 0 }) {
   const dispatch = useDispatch()
   const { open_url, excerpt, title } = item
 
   const cancelShare = () => dispatch(itemsShareCancel())
-  const onSocialShare = (type) => {
-    // Some analytics here
+  const onSocialShare = (service) => {
+    dispatch(itemsSocialShare(item, position, `share.${service}`))
     cancelShare()
   }
   const copyAction = () => ({ type: COPY_ITEM_URL })
   const copyUrl = async () => {
     await copy(open_url)
+    dispatch(itemsSocialShare(item, position, `share.copy`))
     dispatch(copyAction())
     cancelShare()
   }

@@ -11,6 +11,7 @@ import { itemsTagRemove } from 'connectors/items-by-id/my-list/items.tag'
 import { trackImpression } from 'connectors/snowplow/snowplow.state'
 import { IMPRESSION_COMPONENT_UI } from 'connectors/snowplow/events'
 import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
+import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
 
 import { TagList } from 'components/tagging/tag.list'
 import { TagInput } from 'components/tagging/tag.input'
@@ -38,12 +39,14 @@ export function TaggingModal() {
 
   const isSingleTag = itemsToTag.length === 1
 
+  const [fresh, setFresh] = useState(true)
   const [value, setValue] = useState('')
   const [hasError, setHasError] = useState(false)
   const [activeTags, setActiveTags] = useState([])
 
   useEffect(() => {
     setValue('')
+    setFresh(true)
   }, [showModal])
 
   /**
@@ -74,6 +77,7 @@ export function TaggingModal() {
   }
 
   const removeActiveTags = () => {
+    setFresh(false)
     removeTagAction(activeTags)
     setActiveTags([])
   }
@@ -81,17 +85,19 @@ export function TaggingModal() {
   const deactivateTags = () => setActiveTags([])
 
   const addTag = (tag) => {
+    setFresh(false)
     addTagAction(tag)
     setValue('')
     inputReference.current.focus()
   }
 
   const removeTag = (tags) => {
+    setFresh(false)
     removeTagAction(tags)
   }
 
   const saveTags = () => {
-    confirmTags(currentTags)
+    if (!fresh) confirmTags(currentTags)
   }
 
   const title = currentTags?.length ? 'Edit Tags' : 'Add Tags'
@@ -99,6 +105,7 @@ export function TaggingModal() {
   const handleImpression = (identifier) => dispatch(trackImpression(
     IMPRESSION_COMPONENT_UI,
     IMPRESSION_REQUIREMENT_VIEWABLE,
+    UI_COMPONENT_BUTTON,
     0,
     identifier
   ))
@@ -158,7 +165,10 @@ export function TaggingModal() {
       </ModalBody>
       <ModalFooter isSticky={false}>
         <div className="actions">
-          <Button type="submit" onClick={saveTags}>
+          <Button
+            disabled={fresh}
+            type="submit"
+            onClick={saveTags}>
             Save
           </Button>
         </div>

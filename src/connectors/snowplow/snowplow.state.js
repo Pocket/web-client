@@ -48,11 +48,12 @@ export const trackContentImpression = (component, requirement, position, item, i
     identifier
   }
 }
-export const trackImpression = (component, requirement, position, identifier) => {
+export const trackImpression = (component, requirement, ui, position, identifier) => {
   return {
-    type: SNOWPLOW_TRACK_CONTENT_IMPRESSION,
+    type: SNOWPLOW_TRACK_IMPRESSION,
     component,
     requirement,
+    ui,
     position,
     identifier
   }
@@ -142,10 +143,10 @@ function* fireContentImpression({ component, requirement, position, item, identi
   yield sendCustomSnowplowEvent(impressionEvent, snowplowEntities)
 }
 
-function* fireImpression({ component, requirement, position, identifier }) {
+function* fireImpression({ component, requirement, ui, position, identifier }) {
   const impressionEvent = createImpressionEvent(component, requirement)
   const uiEntity = createUiEntity({
-    type: component,
+    type: ui,
     hierarchy: 0,
     identifier,
     index: position

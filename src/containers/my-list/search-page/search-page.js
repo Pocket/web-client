@@ -8,7 +8,7 @@ import { getMylistSearchData } from './search-page.state'
 import { appSetSection } from 'connectors/app/app.state'
 import { SearchPageHeader } from 'components/headers/search-page-header'
 
-import { VirtualizedList } from 'components/items-layout/virtualized-list'
+import { VirtualizedList } from 'connectors/virtualized/virtualized-list'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'

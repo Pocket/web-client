@@ -1,9 +1,10 @@
-import { useRef, useState, useEffect, useCallback } from 'react'
-import { getScrollTop, atEndOfScroll } from 'common/utilities'
-import { cardsContainer } from './base'
-import { cardsGrid } from './base'
+import { cardsGrid } from 'components/items-layout/base'
 import { css, cx } from 'linaria'
-import { MemoizedItem } from 'connectors/item-card/my-list/card'
+import { breakpointSmallTablet } from '@pocket/web-ui'
+import { breakpointTinyTablet } from '@pocket/web-ui'
+import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointSmallHandset } from '@pocket/web-ui'
+import { breakpointMediumHandset } from '@pocket/web-ui'
 
 export const ruler = css`
   position: absolute;
@@ -36,6 +37,9 @@ export const cardGrid = css`
     }
     .actions button {
       opacity: 0;
+      @media (hover: none) {
+        opacity: 1;
+      }
       &.active {
         opacity: 1;
       }
@@ -54,6 +58,62 @@ export const cardGrid = css`
     }
     .bulkBacking {
       padding: 1.1em;
+    }
+  }
+
+  /* 839 */
+  ${breakpointSmallTablet} {
+    article {
+      height: 310px;
+    }
+  }
+
+  /* 719 */
+  ${breakpointTinyTablet} {
+    --grid-media: 200px;
+    --grid-height: 150px;
+  }
+
+  /* 599 */
+  ${breakpointLargeHandset} {
+    --grid-media: 150px;
+    --grid-height: 130px;
+  }
+
+  /* 399 */
+  ${breakpointSmallHandset} {
+    --grid-media: 100px;
+    --grid-height: 130px;
+  }
+
+  /* This is when we switch to a side by side layout */
+  ${breakpointTinyTablet} {
+    grid-row-gap: var(--size150);
+    article {
+      height: var(--grid-height);
+      grid-column: span 12;
+      border-bottom: var(--dividerStyle);
+
+      & > a {
+        display: grid;
+        grid-template-columns: var(--grid-media) auto;
+        grid-column-gap: 1rem;
+        align-items: flex-start;
+        height: initial;
+      }
+
+      .title {
+        padding-top: 0;
+        max-height: 2.4em;
+      }
+
+      .footer {
+        bottom: 5px;
+      }
+      .actions {
+        width: initial;
+        padding-left: calc(var(--grid-media) + 1rem);
+      }
     }
   }
 `
@@ -76,10 +136,6 @@ export const cardList = css`
       padding: 0;
     }
     .media {
-      overflow: hidden;
-      width: initial;
-      height: 0;
-      padding-top: 66.66%;
       grid-column: span 1;
     }
 
@@ -128,155 +184,78 @@ export const cardList = css`
     .actions {
       grid-column: 4 / span 5;
     }
+
+    /* 719 */
+    ${breakpointTinyTablet} {
+      & > a {
+        grid-column: span 12;
+      }
+      .media {
+        display: none;
+      }
+    }
+  }
+  /* 479 */
+  ${breakpointMediumHandset} {
+    --grid-height: 130px;
+  }
+
+  /* This is when we switch to a side by side layout */
+  ${breakpointMediumHandset} {
+    article {
+      height: var(--grid-height);
+      grid-column: span 12;
+      border-bottom: var(--dividerStyle);
+
+      & > a {
+        display: block;
+        height: initial;
+      }
+      .content {
+        grid-column: initial;
+      }
+      .title {
+        white-space: initial;
+        width: initial;
+        max-height: 2.4em;
+      }
+      .details {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .excerpt {
+        display: none;
+      }
+
+      .item-actions {
+        width: 100%;
+      }
+
+      .actions button {
+        opacity: 1;
+        &.active {
+          opacity: 1;
+        }
+        width: initial;
+      }
+
+      &:hover .actions button {
+        opacity: 1;
+      }
+
+      .footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        top: initial;
+        right: initial;
+        width: 100%;
+        z-index: var(--zIndexRaised);
+      }
+      .bulkBacking {
+        padding: 1.1em;
+      }
+    }
   }
 `
-
-/**
- * CardLayout
- * @param {array} items Array of items to split up into sections
- * @param {array} sections Array of section definitions with count and classname
- * @param {object} actions Object of actions specific to the items being built
- */
-export function VirtualizedList({ type, items, actions, loadMore = () => {} }) {
-  /** SETUP
- --------------------------------------------------------------- */
-  // Set up ref to ruler so we can get height of the container
-  const rulerRef = useRef(null)
-
-  // Set up a ref to hold our timeouts for setting scroll/not-scroll
-  const scrollTracker = useRef(null)
-
-  // Set up state to track for virtualization
-  const [height, columnCount] = type === 'list' ? [75, 1] : [361, 3] //row-gap = 24
-  const itemOnScreen = type === 'list' ? 25 : 20 // total items to render minus one
-  const buffer = type === 'list' ? height * 8 : height * 4
-
-  const [hasScrolled, setHasScrolled] = useState(false)
-  const [scrollPosition, setScrollPosition] = useState(0)
-  const [isScrolling, setIsScrolling] = useState(false)
-
-  const [loading, setLoading] = useState(false)
-  const [range, setRange] = useState({ start: -1, end: -1 })
-  const [list, setList] = useState({
-    listHeight: 0,
-    paddingTop: 0,
-    itemsToShow: []
-  })
-
-  // Define the section
-  const sectionTypes = { list: cardList, grid: cardGrid }
-  const containerClasses = cx(cardsContainer, type)
-
-  const { itemsToShow, paddingTop, listHeight } = list
-
-  const hasItems = itemsToShow.length > 0
-
-  /** FUNCTIONS
- --------------------------------------------------------------- */
-  const checkRange = useCallback(
-    (event) => {
-      // Set up the fact that we are scrolling
-      setIsScrolling(true)
-      scrollTracker.current = setTimeout(() => setIsScrolling(false), 500)
-
-      // Get scroll direction.
-      const top = getScrollTop()
-      const naturalStart = Math.floor(top / height) * columnCount
-      const newIndex = Math.max(naturalStart - columnCount * 2, 0)
-      setRange({ start: newIndex, end: newIndex + itemOnScreen })
-
-      if (event) setScrollPosition(window.scrollY)
-    },
-    [columnCount, height, itemOnScreen]
-  )
-
-  /** EFFECTS
- --------------------------------------------------------------- */
-
-  // Initial effect run once on load
-  useEffect(() => {
-    const handleScroll = (event) => {
-      if (!hasScrolled) return setHasScrolled(true)
-      checkRange(event)
-    }
-
-    const handleResize = (event) => {
-      checkRange(event)
-    }
-
-    // Add event listener
-    window.addEventListener('resize', handleResize)
-    window.addEventListener('scroll', handleScroll)
-
-    // Remove event listener on cleanup
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [height, columnCount, itemOnScreen, hasScrolled, checkRange])
-
-  // Run when our index values shift
-  useEffect(() => {
-    const { start, end } = range
-    const itemsToShow = items.slice(start, end + 1)
-    const paddingTop = (start / columnCount) * height || 0
-    const remainder = items.length % 3
-    const buffer = remainder ? 3 - remainder : 0
-    const listHeight = ((items.length + buffer) / columnCount) * height
-
-    setList({ itemsToShow, paddingTop, listHeight })
-  }, [items, range, height, columnCount])
-
-  useEffect(() => {
-    // Don't run this when there are no items yet.  Avoid doubling up.
-    if (!hasItems || loading) return
-    const listEnd = atEndOfScroll(buffer)
-
-    if (listEnd && !loading) {
-      setLoading(true)
-      loadMore()
-    }
-  }, [scrollPosition, loading, height, hasItems, buffer])
-
-  useEffect(() => {
-    setLoading(false)
-    checkRange()
-  }, [items, checkRange])
-
-  useEffect(() => {
-    document.body.scrollTop = 0 // For Safari
-    document.documentElement.scrollTop = 0 // For Chrome, Firefox, IE and Opera
-  }, [type])
-
-  return (
-    // Create a list container with the appropriate classnames
-    <div
-      className={containerClasses}
-      style={{
-        position: 'relative',
-        pointerEvents: isScrolling ? 'none' : 'auto'
-      }}>
-      <div
-        style={{
-          height: `${listHeight}px`,
-          paddingTop
-        }}>
-        <div className={sectionTypes[type]}>
-          {itemsToShow.map((id) => {
-            const positionOfItem = items.indexOf(id)
-            return (
-              <MemoizedItem
-                id={id}
-                key={id}
-                position={positionOfItem}
-                type={type}
-                {...actions}
-              />
-            )
-          })}
-        </div>
-      </div>
-      <div className={ruler} ref={rulerRef} />
-    </div>
-  )
-}

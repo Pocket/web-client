@@ -138,11 +138,11 @@ export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
     })
   }
 
-  const wrapperClass = cx(sideNavWrapper, isDisabled && 'disabled')
+  const wrapperClass = cx(sideNavWrapper, 'side-nav', isDisabled && 'disabled')
 
   return (
     <div className={wrapperClass}>
-      <nav role="navigation" className="top-nav">
+      <nav role="navigation">
         <Link href="/my-list">
           <button className={subActive('unread')} ref={ref}>
             <HomeIcon className="side-nav-icon" /> My List

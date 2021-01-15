@@ -73,6 +73,7 @@ export const sendShareEvent = (item) => (trackContentEngagement(
 export const sendImpression = (identifier) => (trackImpression(
   IMPRESSION_COMPONENT_UI,
   IMPRESSION_REQUIREMENT_VIEWABLE,
+  UI_COMPONENT_BUTTON,
   0,
   identifier
 ))

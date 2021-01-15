@@ -1,4 +1,5 @@
 import { put, call, takeEvery, take, race, select } from 'redux-saga/effects'
+
 import { sendItemActions } from 'common/api/item-actions'
 import { getRecentFriends } from 'common/api/reader'
 
@@ -13,8 +14,14 @@ import { ITEMS_SEND_TO_FRIEND_CONFIRM } from 'actions'
 import { ITEMS_SEND_TO_FRIEND_ADD } from 'actions'
 import { ITEMS_SEND_TO_FRIEND_REMOVE } from 'actions'
 
+import { ITEMS_SOCIAL_SHARE } from 'actions'
+
 import { API_ACTION_SHARE } from 'common/constants'
 import { API_ACTION_RECOMMEND } from 'common/constants'
+
+import { trackContentEngagement } from 'connectors/snowplow/snowplow.state'
+import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
+import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -26,6 +33,14 @@ export const itemsSendToFriendConfirm = (comment) => ({type: ITEMS_SEND_TO_FRIEN
 
 export const itemsShareAddFriend = (tag) => ({type: ITEMS_SEND_TO_FRIEND_ADD, tag}) //prettier-ignore
 export const itemsShareRemoveFriend = (tags) => ({type: ITEMS_SEND_TO_FRIEND_REMOVE, tags}) //prettier-ignore
+
+export const itemsSocialShare = (item, position, identifier) => (trackContentEngagement(
+  ENGAGEMENT_TYPE_GENERAL,
+  UI_COMPONENT_BUTTON,
+  position,
+  item,
+  identifier
+))
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -73,7 +88,7 @@ export const itemShareReducers = (state = initialState, action) => {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const itemShareSagas = [
   takeEvery(ITEMS_SHARE_REQUEST, itemShare),
-  takeEvery(ITEMS_SHARE_REQUEST, fetchRecentFriends),
+  takeEvery(ITEMS_SHARE_REQUEST, fetchRecentFriends)
 ]
 
 

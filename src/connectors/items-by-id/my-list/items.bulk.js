@@ -133,7 +133,9 @@ export function* itemBulkSelect(action) {
             id,
             position: itemPosition,
             favorite: itemsById[id]?.favorite,
-            status: itemsById[id]?.status
+            status: itemsById[id]?.status,
+            resolved_id: itemsById[id]?.resolved_id,
+            save_url: itemsById[id]?.save_url
           }
         })
       : [
@@ -141,7 +143,9 @@ export function* itemBulkSelect(action) {
             id,
             position,
             favorite: itemsById[id]?.favorite,
-            status: itemsById[id]?.status
+            status: itemsById[id]?.status,
+            resolved_id: itemsById[id]?.resolved_id,
+            save_url: itemsById[id]?.save_url
           }
         ]
 

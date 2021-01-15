@@ -27,6 +27,7 @@ import { sortOrderSet } from 'connectors/app/app.state'
 import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
 // import { appWithTranslation } from 'common/setup/i18n'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
 import { initializeSnowplow } from 'common/setup/snowplow'
 
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
@@ -34,6 +35,7 @@ import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 import ReactGA from 'react-ga'
 
 import { DevTools } from 'connectors/dev-tools/dev-tools'
+import ComingSoon from 'containers/coming-soon/coming-soon'
 
 /** Set up Sentry so we may catch errors
  --------------------------------------------------------------- */
@@ -42,6 +44,9 @@ Sentry.init(sentrySettings)
 /** App
  --------------------------------------------------------------- */
 function PocketWebClient({ Component, pageProps, err }) {
+  const showMyList = localStore.getItem('showPocketApp') === 'true'
+  const ToRender = showMyList ? Component : ComingSoon
+
   // Initialize app once per page load
   const dispatch = useDispatch()
   const router = useRouter()
@@ -231,7 +236,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   return (
     <ViewportProvider>
       {showDevTools ? <DevTools /> : null}
-      <Component {...pageProps} err={err} />
+      <ToRender {...pageProps} err={err} />
     </ViewportProvider>
   )
 }
