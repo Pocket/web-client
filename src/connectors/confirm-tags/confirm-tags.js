@@ -38,12 +38,14 @@ export function TaggingModal() {
 
   const isSingleTag = itemsToTag.length === 1
 
+  const [fresh, setFresh] = useState(true)
   const [value, setValue] = useState('')
   const [hasError, setHasError] = useState(false)
   const [activeTags, setActiveTags] = useState([])
 
   useEffect(() => {
     setValue('')
+    setFresh(true)
   }, [showModal])
 
   /**
@@ -74,6 +76,7 @@ export function TaggingModal() {
   }
 
   const removeActiveTags = () => {
+    setFresh(false)
     removeTagAction(activeTags)
     setActiveTags([])
   }
@@ -81,6 +84,7 @@ export function TaggingModal() {
   const deactivateTags = () => setActiveTags([])
 
   const addTag = (tag) => {
+    setFresh(false)
     addTagAction(tag)
     setValue('')
     inputReference.current.focus()
@@ -91,7 +95,7 @@ export function TaggingModal() {
   }
 
   const saveTags = () => {
-    confirmTags(currentTags)
+    if (!fresh) confirmTags(currentTags)
   }
 
   const title = currentTags?.length ? 'Edit Tags' : 'Add Tags'
@@ -159,6 +163,7 @@ export function TaggingModal() {
       <ModalFooter isSticky={false}>
         <div className="actions">
           <Button
+            disabled={fresh}
             type="submit"
             onClick={saveTags}>
             Save
