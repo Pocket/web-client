@@ -92,6 +92,7 @@ export function TaggingModal() {
   }
 
   const removeTag = (tags) => {
+    setFresh(false)
     removeTagAction(tags)
   }
 
