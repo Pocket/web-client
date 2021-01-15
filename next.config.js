@@ -10,6 +10,7 @@ module.exports = withPlugins([withCSS, withSourceMaps], {
   env: {
     SHOW_DEV: process.env.SHOW_DEV
   },
+  basePath: '/my-list',
   //prettier-ignore
   webpack: (config, { dev, isServer, webpack }) => {
 
