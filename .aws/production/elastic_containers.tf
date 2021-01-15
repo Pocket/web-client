@@ -19,6 +19,13 @@ module "web-client" {
       awslogs-stream-prefix = "ecs"
     }
   }
+  port_mappings = [
+    {
+      hostPort      = 80
+      containerPort = 80
+      protocol      = "tcp"
+    }
+  ]
   environment = [
     {
       name  = "DOMAIN"
