@@ -10,6 +10,9 @@ module.exports = withPlugins([withCSS, withSourceMaps], {
   env: {
     SHOW_DEV: process.env.SHOW_DEV
   },
+  rewrites() {
+    return [{ source: '/web-client-health', destination: '/health' }]
+  },
   //prettier-ignore
   webpack: (config, { dev, isServer, webpack }) => {
 
