@@ -41,7 +41,6 @@ export const request = ({
   const endpoint = `${apiToUse}/${path}?${queryParams}`
 
   const headers = {
-    Origin: 'https://getpocket.com',
     'Content-Type': 'application/json',
     'X-Accept': 'application/json; charset=UTF8'
   }
