@@ -87,7 +87,8 @@ export default function Collection(props) {
               {items?.length ? (
                 <VirtualizedList
                   type={type}
-                  items={items}
+                  section={section}
+                  passedItems={items}
                   loadMore={loadMore}
                 />
               ) : null}

@@ -18,8 +18,8 @@ export function VirtualizedList(props) {
   /** SETUP
  --------------------------------------------------------------- */
   const viewport = useViewport()
-  const { type = 'grid', section, actions, loadMore = () => {} } = props
-  const items = useSelector((state) => state.myList[section])
+  const { type = 'grid', section, actions, loadMore = () => {}, passedItems } = props
+  const items = useSelector((state) => state.myList[section] || passedItems)
 
   // Set up ref to ruler so we can get height of the container
   const rulerRef = useRef(null)
