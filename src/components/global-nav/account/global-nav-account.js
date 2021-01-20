@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { css } from 'linaria'
+import { Trans, useTranslation } from 'react-i18next'
 
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { ProfileIcon, PremiumIcon } from '@pocket/web-ui'
@@ -150,6 +151,8 @@ const GlobalNavAccount = ({
   toggleListMode,
   sendImpression
 }) => {
+  const { t } = useTranslation()
+
   const accountMenuTriggerRef = useRef(null)
 
   function handleLinkClick(name, event) {
@@ -173,7 +176,7 @@ const GlobalNavAccount = ({
           onLoginClick(event)
         }}
         {...testIdAttribute('login-link')}>
-        Log in
+        <Trans>Log in</Trans>
       </a>
       <Button
         href="https://getpocket.com/signup?src=navbar"
@@ -185,7 +188,7 @@ const GlobalNavAccount = ({
         }}
         {...testIdAttribute('signup-link')}>
         <ProfileIcon />
-        <span className="label">Sign up</span>
+        <span className="label"><Trans>Sign up</Trans></span>
       </Button>
     </div>
   ) : (
@@ -201,7 +204,7 @@ const GlobalNavAccount = ({
             }}
             {...testIdAttribute('upgrade-link')}>
             <PremiumIcon />
-            <span className="label">Upgrade</span>
+            <span className="label"><Trans>Upgrade</Trans></span>
           </a>
         </VisibilitySensor>
       ) : null}
@@ -217,8 +220,8 @@ const GlobalNavAccount = ({
       </WithTooltip>
       <PopupMenu
         trigger={accountMenuTriggerRef}
-        title="Account"
-        screenReaderLabel="Account menu"
+        title={t("Account")}
+        screenReaderLabel={t("Account menu")}
         appRootSelector={appRootSelector}
         onOpen={onAccountClick}
         popperOptions={{
@@ -235,7 +238,7 @@ const GlobalNavAccount = ({
         {...testIdAttribute('account-menu')}>
         <PopupMenuGroup>
           <PopupMenuItem
-            helperText="View profile"
+            helperText={t("View profile")}
             href={profileUrl}
             id="account-menu-profile-link"
             onClick={(event) => {
@@ -252,7 +255,7 @@ const GlobalNavAccount = ({
             onClick={(event) => {
               handleLinkClick('manage-account', event)
             }}>
-            Manage account
+            <Trans>Manage account</Trans>
           </PopupMenuItem>
           <PopupMenuItem
             href="https://help.getpocket.com/category/847-category?src=navbar"
@@ -260,7 +263,7 @@ const GlobalNavAccount = ({
             onClick={(event) => {
               handleLinkClick('help', event)
             }}>
-            Get help
+            <Trans>Get help</Trans>
           </PopupMenuItem>
           <PopupMenuItem
             href="/messages"
@@ -268,7 +271,7 @@ const GlobalNavAccount = ({
             onClick={(event) => {
               handleLinkClick('messages', event)
             }}>
-            Messages
+            <Trans>Messages</Trans>
           </PopupMenuItem>
           <PopupMenuItem
             href="/whats-new"
@@ -276,7 +279,7 @@ const GlobalNavAccount = ({
             onClick={(event) => {
               handleLinkClick('whats-new', event)
             }}>
-            What’s New
+            <Trans>What’s New</Trans>
           </PopupMenuItem>
         </PopupMenuGroup>
         <PopupMenuGroup>
@@ -286,7 +289,7 @@ const GlobalNavAccount = ({
             onClick={(event) => {
               handleLinkClick('logout', event)
             }}>
-            Log out
+            <Trans>Log out</Trans>
           </PopupMenuItem>
         </PopupMenuGroup>
         <ThemeSettings />

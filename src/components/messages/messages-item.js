@@ -1,4 +1,5 @@
 import { css } from 'linaria'
+import { Trans } from 'react-i18next'
 import dayjs from 'dayjs'
 import { domainForUrl } from 'common/utilities'
 import Avatar from 'components/avatar/avatar'
@@ -97,7 +98,7 @@ export const MessageItem = ({
           <Button
             variant="inline"
             onClick={handleIgnore}>
-            Dismiss
+            <Trans>Dismiss</Trans>
           </Button>
         </header>
         <p className="comment">{ comment }</p>

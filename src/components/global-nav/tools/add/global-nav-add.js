@@ -7,6 +7,7 @@ import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import isURL from 'validator/lib/isURL'
+import { Trans, useTranslation } from 'react-i18next'
 
 const addStyle = css`
   width: 100%;
@@ -123,7 +124,7 @@ const CloseButton = ({ onClick }) => {
   return (
     <button className={closeButtonStyle} onClick={onClick}>
       <CrossIcon className={closeIconStyle} />
-      <CloseLabel>Cancel</CloseLabel>
+      <CloseLabel><Trans>Cancel</Trans></CloseLabel>
     </button>
   )
 }
@@ -147,6 +148,8 @@ const GlobalNavAdd = ({
   placeholder,
   mobilePlaceholder
 }) => {
+  const { t } = useTranslation()
+
   const inputEl = useRef(null)
 
   const [addUrl, updateAddUrl] = useState(value)
@@ -166,7 +169,7 @@ const GlobalNavAdd = ({
       protocols: ['http', 'https'],
       allow_underscores: true
     })
-    if (!validUrl) return updateInputError('Please enter a valid url')
+    if (!validUrl) return updateInputError(t('Please enter a valid url'))
 
     const protocolRegEx = new RegExp('^https?://')
     const prefix = !!protocolRegEx.test(addUrl) ? '' : 'https://'
@@ -192,7 +195,7 @@ const GlobalNavAdd = ({
           name="add-input"
           ref={inputEl}
           className={classnames(['add-input', { 'has-value': !!addUrl }])}
-          aria-label="Add Item to Pocket"
+          aria-label={t("Add Item to Pocket")}
           value={addUrl}
           onChange={handleInputChange}
           onFocus={onFocus}
@@ -261,8 +264,8 @@ GlobalNavAdd.defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
   value: '',
-  placeholder: 'Save a URL https://...',
-  mobilePlaceholder: 'Save a URL'
+  placeholder: <Trans>Save a URL https://...</Trans>,
+  mobilePlaceholder: <Trans>Save a URL</Trans>
 }
 
 export default GlobalNavAdd

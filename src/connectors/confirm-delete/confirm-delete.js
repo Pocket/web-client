@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { itemsDeleteConfirm } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsDeleteCancel } from 'connectors/items-by-id/my-list/items.delete'
 import { BatchProcessing } from 'components/processing/processing'
+import { useTranslation, Trans } from 'react-i18next'
 
 export const DeleteModal = () => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   // Handle delete actions with confirmation
   const itemsToDelete = useSelector((state) => state.itemsToDelete)
@@ -22,24 +24,24 @@ export const DeleteModal = () => {
 
   return (
     <Modal
-      title="Delete Item"
+      title={t("Delete Item")}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel="Delete Item"
+      screenReaderLabel={t("Delete Item")}
       handleClose={cancelDelete}>
       <ModalBody>
         {batchStart ? (
           <BatchProcessing batchTotal={batchTotal} batchCount={batchCount} />
         ) : (
           <p>
-            Are you sure you want to delete this item? This cannot be undone.
+            <Trans>Are you sure you want to delete this item? This cannot be undone.</Trans>
           </p>
         )}
       </ModalBody>
       {batchStart ? null : (
         <ModalFooter>
           <Button type="submit" onClick={confirmDelete}>
-            Delete
+            <Trans>Delete</Trans>
           </Button>
         </ModalFooter>
       )}

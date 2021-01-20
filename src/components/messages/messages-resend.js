@@ -1,4 +1,5 @@
 import { css } from 'linaria'
+import { Trans } from 'react-i18next'
 import dayjs from 'dayjs'
 import { domainForUrl } from 'common/utilities'
 import Avatar from 'components/avatar/avatar'
@@ -13,26 +14,27 @@ export const MessageResend = ({ email, resendAction, status }) => {
   if (status === 'failed') {
     return (
       <div className={messageWrapper}>
-        <p>Oops! Something went wrong. Please try again later.</p>
+        <p><Trans>Oops! Something went wrong. Please try again later.</Trans></p>
       </div>
     )
   }
   else if (status === 'success') {
     return (
       <div className={messageWrapper}>
-        <p>Confirmation sent! Please check your email.</p>
+        <p><Trans>Confirmation sent! Please check your email.</Trans></p>
       </div>
     )
   }
   return (
     <div className={messageWrapper}>
       <p>
-        A friend has shared something with you in Pocket. To view
-        it, please confirm your email: {email}
+        <Trans>A friend has shared something with you in Pocket. To view
+        it, please confirm your email:</Trans>{' '}
+        {email}
       </p>
 
       <Button onClick={resendAction}>
-        Resend Confirmation
+        <Trans>Resend Confirmation</Trans>
       </Button>
     </div>
   )

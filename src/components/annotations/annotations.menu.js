@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames'
 import { css } from 'linaria'
+import { Trans } from 'react-i18next'
 
 import { OverflowMenuIcon } from '@pocket/web-ui'
 import { IosShareIcon } from '@pocket/web-ui'
@@ -141,10 +142,10 @@ export const AnnotationMenu = ({
             className={classNames(overlayBase, menuWrapper, { alignRight, flipDirection })}>
             <PopupMenuGroup>
               <PopupMenuItem onClick={handleDelete} icon={<DeleteIcon />}>
-                Delete
+                <Trans i18nKey="delete">Delete</Trans>
               </PopupMenuItem>
               <PopupMenuItem onClick={handleShare} icon={<IosShareIcon />}>
-                Share
+                <Trans i18nKey="share">Share</Trans>
               </PopupMenuItem>
             </PopupMenuGroup>
           </ul>

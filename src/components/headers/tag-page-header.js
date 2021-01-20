@@ -11,6 +11,7 @@ import { EditIcon } from '@pocket/web-ui'
 import { DeleteIcon } from '@pocket/web-ui'
 import { WithTooltip } from '@pocket/web-ui'
 import { buttonReset } from 'components/buttons/button-reset'
+import { useTranslation } from 'react-i18next'
 
 const myListHeaderStyle = css`
   margin-bottom: var(--spacing100);
@@ -70,24 +71,26 @@ export const TagPageHeader = ({
   deleteTag,
   isPinned
 }) => {
+  const { t } = useTranslation()
+
   return subset ? (
     <header className={myListHeaderStyle}>
       <div>
-        <h1 className="pageTitle">{capitalizeFirstLetter(title)}</h1>
+        <h1 className={t("pageTitle")}>{capitalizeFirstLetter(title)}</h1>
         <FilterMenu subset={subset} filter={filter} tag={tag} />
       </div>
       <div className="tag-actions">
-        <WithTooltip label="Pin Tag" delay={true}>
+        <WithTooltip label={t("Pin Tag")} delay={true}>
           <button className={buttonReset} onClick={pinTag}>
             {isPinned ? <PinFilledIcon /> : <PinIcon />}
           </button>
         </WithTooltip>
-        <WithTooltip label="Edit Tag" delay={true}>
+        <WithTooltip label={t("Edit Tag")} delay={true}>
           <button className={buttonReset} onClick={editTag}>
             <EditIcon />
           </button>
         </WithTooltip>
-        <WithTooltip label="Delete Tag" delay={true}>
+        <WithTooltip label={t("Delete Tag")} delay={true}>
           <button className={buttonReset} onClick={deleteTag}>
             <DeleteIcon />
           </button>

@@ -1,5 +1,6 @@
 // @refresh reset
 import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { css } from 'linaria'
 import classNames from 'classnames'
 import Layout from 'layouts/with-sidebar'
@@ -55,14 +56,15 @@ const whatsNewStyles = css`
 `
 
 export default function Messages() {
+  const { t } = useTranslation()
   const isLoggedIn = useSelector((state) => !!state.user.auth)
 
   return (
-    <Layout title="Pocket - What’s New">
+    <Layout title={`Pocket - ${t("What’s New")}`}>
       <SideNav isLoggedIn={isLoggedIn} />
 
       <main className={classNames('main', whatsNewStyles)}>
-        <WhatsNewHeader title="What’s New" />
+        <WhatsNewHeader title={t("What’s New")} />
 
         <Jan192021 />
       </main>

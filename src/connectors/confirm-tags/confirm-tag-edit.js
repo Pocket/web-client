@@ -6,6 +6,7 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { cancelEditUserTag } from 'containers/my-list/tags-page/tags-page.state'
 import { confirmEditUserTag } from 'containers/my-list/tags-page/tags-page.state'
+import { useTranslation, Trans } from 'react-i18next'
 
 const inputWrapper = css`
   input[type='text'] {
@@ -16,6 +17,7 @@ const inputWrapper = css`
 export const TagEditModal = () => {
   const dispatch = useDispatch()
   const router = useRouter()
+  const { t } = useTranslation()
 
   // Handle delete actions with confirmation
   const tagToEdit = useSelector((state) => state.userTags.tagToEdit)
@@ -35,10 +37,10 @@ export const TagEditModal = () => {
 
   return (
     <Modal
-      title="Edit Tag"
+      title={t("Edit Tag")}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel="Edit Tag"
+      screenReaderLabel={t("Edit Tag")}
       handleClose={cancelTagEdit}>
       <ModalBody>
         <div className={inputWrapper}>
@@ -52,11 +54,13 @@ export const TagEditModal = () => {
       </ModalBody>
       <ModalFooter>
         <em className="footnote">
-          Editing the tag "{tagToEdit}" will change it on all items. Are you
-          sure you want to proceed?
+          <Trans tagToEdit={tagToEdit}>
+            Editing the tag "{tagToEdit}" will change it on all items. Are you
+            sure you want to proceed?
+          </Trans>
         </em>
         <Button type="submit" onClick={confirmTagEdit}>
-          Confirm
+          <Trans>Confirm</Trans>
         </Button>
       </ModalFooter>
     </Modal>

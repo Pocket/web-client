@@ -20,6 +20,7 @@ import { ModalHeader } from './modal-header'
 import { ModalBody } from './modal-body'
 import { ModalFooter } from './modal-footer'
 import { ModalTabs } from './modal-tabs'
+import { useTranslation, Trans } from 'react-i18next'
 
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 
@@ -169,6 +170,7 @@ const Modal = ({
 }) => {
   // aids in accessibility, http://reactcommunity.org/react-modal/accessibility/
   ReactModal.setAppElement(appRootSelector)
+  const { t } = useTranslation()
 
   const [readyAnimate, setReadyAnimate] = useState(false)
   let modalContentRef = useRef(null)
@@ -262,13 +264,17 @@ const closeButtonStyles = css`
 `
 
 const CloseButton = ({ handleClose }) => {
+  const { t } = useTranslation()
+
   return (
     <button
       className={closeButtonStyles}
-      aria-label="Close"
+      aria-label={t("Close")}
       onClick={handleClose}>
       <CrossIcon />
-      <span className="visually-hidden">Close</span>
+      <span className="visually-hidden">
+        <Trans>Close</Trans>
+      </span>
     </button>
   )
 }

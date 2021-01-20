@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
+import { Trans } from 'react-i18next'
 import { appSetMode } from 'connectors/app/app.state'
 import { listModeToggle } from 'connectors/app/app.state'
 import { sortOrderToggle } from 'connectors/app/app.state'
@@ -89,14 +90,14 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     {
       name: 'discover',
       id: 'global-nav-discover-link',
-      label: 'Discover',
+      label: <Trans i18nKey="discover">Discover</Trans>,
       url: '/discover',
       icon: <DiscoverIcon />
     },
     {
       name: 'my-list',
       id: 'global-nav-my-list-link',
-      label: 'My List',
+      label: <Trans i18nKey="my-list">My List</Trans>,
       url: '/my-list',
       icon: <ListViewIcon />
     }
@@ -106,37 +107,37 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     {
       name: 'archive',
       icon: <ArchiveIcon />,
-      label: 'Archive',
+      label: <Trans i18nKey="archive">Archive</Trans>,
       url: '/my-list/archive'
     },
     {
       name: 'favorites',
       icon: <FavoriteIcon />,
-      label: 'Favorites',
+      label: <Trans i18nKey="favorites">Favorites</Trans>,
       url: '/my-list/favorites'
     },
     {
       name: 'highlights',
       icon: <HighlightIcon />,
-      label: 'Highlights',
+      label: <Trans i18nKey="highlights">Highlights</Trans>,
       url: '/my-list/highlights'
     },
     {
       name: 'articles',
       icon: <ArticleIcon />,
-      label: 'Articles',
+      label: <Trans i18nKey="articles">Articles</Trans>,
       url: '/my-list/articles'
     },
     {
       name: 'videos',
       icon: <VideoIcon />,
-      label: 'Videos',
+      label: <Trans i18nKey="videos">Videos</Trans>,
       url: '/my-list/videos'
     },
     {
       name: 'tags',
       icon: <TagIcon />,
-      label: 'All Tags',
+      label: <Trans i18nKey="all-tags">All Tags</Trans>,
       url: '/my-list/tags'
     },
     ...pinnedLinks
@@ -148,9 +149,9 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const showNav = selectedLink === 'my-list' && isLoggedIn
   const tools = showNav
     ? [
-        { name: 'search', label: 'Search', icon: <SearchIcon /> },
-        { name: 'add-item', label: 'Save a URL', icon: <AddIcon /> },
-        { name: 'bulk-edit', label: 'Bulk Edit', icon: <EditIcon /> }
+        { name: 'search', label: <Trans i18nKey="search">Search</Trans>, icon: <SearchIcon /> },
+        { name: 'add-item', label: <Trans i18nKey="save">Save a URL</Trans>, icon: <AddIcon /> },
+        { name: 'bulk-edit', label: <Trans i18nKey="bulk-edit">Bulk Edit</Trans>, icon: <EditIcon /> }
       ]
     : []
 

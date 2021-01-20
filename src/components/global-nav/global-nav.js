@@ -4,6 +4,7 @@ import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
+import { Trans, useTranslation } from 'react-i18next'
 
 import { breakpointSmallTablet } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
@@ -27,14 +28,14 @@ export const DEFAULT_LINKS = [
   {
     name: 'discover',
     id: 'global-nav-discover-link',
-    label: 'Discover',
+    label: <Trans i18nKey="discover">Discover</Trans>,
     url: 'https://getpocket.com/explore?src=navbar',
     icon: <DiscoverIcon />
   },
   {
     name: 'my-list',
     id: 'global-nav-my-list-link',
-    label: 'My List',
+    label: <Trans i18nKey="my-list">My List</Trans>,
     url: 'https://app.getpocket.com?src=navbar',
     icon: <ListViewIcon />
   }
@@ -227,6 +228,8 @@ const GlobalNav = ({
   userStatus,
   children
 }) => {
+  const { t } = useTranslation()
+
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
   const viewport = useViewport()
   // if viewport not available, we're probably SSR and so set the default to the
@@ -282,7 +285,7 @@ const GlobalNav = ({
             children
           ) : (
             <>
-              <div className={linksStyle} aria-label="Page navigation">
+              <div className={linksStyle} aria-label={t("Page navigation")}>
                 <GlobalNavLinks
                   selectedLink={selectedLink}
                   className="links"

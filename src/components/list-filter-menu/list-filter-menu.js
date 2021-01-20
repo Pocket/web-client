@@ -3,6 +3,7 @@ import { ChevronDownIcon } from '@pocket/web-ui'
 import { capitalizeFirstLetter } from 'common/utilities'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import Link from 'next/link'
+import { Trans } from 'react-i18next'
 
 // i.e., h3
 const filterStyle = css`
@@ -102,23 +103,33 @@ export function FilterMenu({ subset, filter, tag }) {
         <div className="filter-menu" ref={popBody}>
           <div>
             <Link href={`/my-list/${path}`}>
-              <button className={filterActive()}>All items</button>
+              <button className={filterActive()}>
+                <Trans>All items</Trans>
+              </button>
             </Link>
           </div>
           <div>
             <Link href={`/my-list/${path}/unread`}>
-              <button className={filterActive('unread')}>Unread</button>
+              <button className={filterActive('unread')}>
+                <Trans>Unread</Trans>
+              </button>
             </Link>
           </div>
           <div>
             <Link href={`/my-list/${path}/archive`}>
-              <button className={filterActive('archive')}>Archive</button>
+              <button className={filterActive('archive')}>
+                <Trans>Archive</Trans>
+              </button>
             </Link>
           </div>
           {path === 'favorites' ? null : (
             <div>
               <Link href={`/my-list/${path}/favorites`}>
-                <button className={filterActive('favorites')}>Favorites</button>
+                <button className={filterActive('favorites')}>
+                  <Trans>
+                    Favorites
+                  </Trans>
+                </button>
               </Link>
             </div>
           )}

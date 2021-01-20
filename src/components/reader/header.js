@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Pill } from '@pocket/web-ui'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import classNames from 'classnames'
+import { Trans } from 'react-i18next'
 
 /* COMPONENTS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -133,7 +134,7 @@ export const ItemHeader = ({
       <h1 className={articleTitle}>{title}</h1>
 
       <div className={articleInfo}>
-        {authorList || publisher ? <div className={byWrapper}>By </div> : null}{' '}
+        {authorList || publisher ? <div className={byWrapper}><Trans>By</Trans></div> : null}{' '}
         {/*"reader.header.by"*/}
         {authorList ? <div className={authorWrapper}>{authorList}</div> : null}
         {publisher ? <div className={domainWrapper}>{publisher}</div> : null}
@@ -146,7 +147,7 @@ export const ItemHeader = ({
           className={viewOriginal}
           href={open_url}
           target="_blank">
-          View Original {/*"reader.header.viewOriginal"*/}
+          <Trans>View Original</Trans>
         </a>
         {tags && (
           <div className={classNames(tagsWrapper, pillboxStyle)}>

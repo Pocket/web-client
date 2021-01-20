@@ -3,6 +3,7 @@ import { css } from 'linaria'
 import dayjs from 'dayjs'
 import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
+import { Trans } from 'react-i18next'
 
 export const cardStyles = css`
   font-family: 'Graphik Web';
@@ -51,7 +52,7 @@ const styledDate = css`
 export class CreatedDate extends Component {
   getValue(val) {
     if (!val) {
-      return 'Just now' //"time.now"
+      return <Trans>Just now</Trans>
     }
 
     const now = dayjs()
@@ -59,17 +60,17 @@ export class CreatedDate extends Component {
     const diff = now.diff(ts, 'day')
 
     if (diff < 1) {
-      return 'Added Today' //"time.addedtoday"
+      return <Trans>Added Today</Trans>
     } else if (diff === 1) {
       let date = diff
-      return `Added ${date} day ago` //"time.addeddayago"
+      return <Trans date={date}>Added {date} day ago</Trans>
     } else if (diff < 7) {
       let date = diff
-      return `Added ${date} days ago` //"time.addeddaysago"
+      return <Trans date={date}>Added {date} days ago</Trans>
     }
 
     let date = ts.format('MMM D, YYYY')
-    return `Added ${date}` //"time.added"
+    return <Trans date={date}>Added {date}</Trans>
   }
 
   render() {

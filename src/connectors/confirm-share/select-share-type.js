@@ -1,5 +1,6 @@
 import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
+import { Trans } from 'react-i18next'
 
 const tabAction = css`
   width: 100%;
@@ -35,15 +36,15 @@ export function SelectShareType({ active, activate }) {
   return (
     <div className="tabs">
       <ShareTypeTab active={active} activate={activate} tab="social">
-        Social Media
+        <Trans>Social Media</Trans>
       </ShareTypeTab>
 
       <ShareTypeTab active={active} activate={activate} tab="recommend">
-        Recommend
+        <Trans>Recommend</Trans>
       </ShareTypeTab>
 
       <ShareTypeTab active={active} activate={activate} tab="friend">
-        Send to Friend
+        <Trans>Send to Friend</Trans>
       </ShareTypeTab>
     </div>
   )

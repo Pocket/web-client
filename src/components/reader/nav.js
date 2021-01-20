@@ -23,6 +23,7 @@ import {
   updateFontSize,
   updateFontType
 } from 'containers/read/read.state'
+import { useTranslation } from 'react-i18next'
 
 const headerStyle = css`
   position: fixed;
@@ -111,6 +112,7 @@ export const ReaderNav = ({
   onVisible
 }) => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   const setFontFamily = (val) => dispatch(updateFontType(val))
   const setFontSize = (val) => dispatch(updateFontSize(val))
@@ -126,28 +128,27 @@ export const ReaderNav = ({
     <header className={headerStyle}>
       <div className="global-nav-container">
         <nav className={navStyle}>
-          <WithTooltip label="Back to My List">
-            {/*'reader.topNav.back'*/}
+          <WithTooltip label={t("Back to My List")}>
             <button onClick={goBack} className={cx(buttonClass, 'go-back')}>
               <ArrowLeftIcon />
             </button>
           </WithTooltip>
 
           <div className="nav-actions">
-            <WithTooltip label="Open Highlights Menu">
+            <WithTooltip label={t("Open Highlights Menu")}>
               <button onClick={toggleSidebar} className={buttonClass}>
                 <HighlightIcon />
               </button>
             </WithTooltip>
 
-            <WithTooltip label="Tag Article">
+            <WithTooltip label={t("Tag Article")}>
               <button onClick={toggleTagging} className={buttonClass}>
                 <TagIcon />
               </button>
             </WithTooltip>
 
             <WithTooltip
-              label={(favorite) ? "Remove from Favorites" : "Favorite Article"}>
+              label={(favorite) ? t("Remove from Favorites") : t("Favorite Article")}>
               <button
                 onClick={toggleFavorite}
                 className={cx(buttonClass, favorite && 'favorite')}>
@@ -155,19 +156,19 @@ export const ReaderNav = ({
               </button>
             </WithTooltip>
 
-            <WithTooltip label={archive ? "Re-add to List" : "Archive Article"}>
+            <WithTooltip label={archive ? t("Re-add to List") : t("Archive Article")}>
               <button onClick={archiveItem} className={buttonClass}>
                 {archive ? <AddCircledIcon /> : <ArchiveIcon />}
               </button>
             </WithTooltip>
 
-            <WithTooltip label="Delete from Library">
+            <WithTooltip label={t("Delete from Library")}>
               <button onClick={toggleDelete} className={buttonClass}>
                 <DeleteIcon />
               </button>
             </WithTooltip>
 
-            <WithTooltip label="Share Article">
+            <WithTooltip label={t("Share Article")}>
               <button onClick={toggleShare} className={buttonClass}>
                 <IosShareIcon />
               </button>

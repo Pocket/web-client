@@ -4,6 +4,7 @@ import { breakpointLargeHandset } from '@pocket/web-ui'
 import { breakpointTinyTablet } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
+import { Trans } from 'react-i18next'
 
 const searchPageHeaderStyle = css`
   margin-bottom: var(--spacing100);
@@ -42,7 +43,7 @@ export const SearchPageHeader = ({ filter, total, query }) => {
   return query && total ? (
     <header className={searchPageHeaderStyle}>
       <h1 className="pageTitle">
-        <em>"{query}"</em> — {total} Search Results
+        <em>"{query}"</em> — {total} <Trans>Search Results</Trans>
       </h1>
       <FilterMenu subset="search" query={query} filter={filter} />
     </header>

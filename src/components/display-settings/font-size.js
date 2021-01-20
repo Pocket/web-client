@@ -7,6 +7,7 @@ import {
 } from 'components/stepper/stepper'
 import { StepperRange } from 'components/stepper/stepper-range'
 import { AddIcon, RemoveIcon, TextSettingsIcon } from '@pocket/web-ui'
+import { useTranslation } from 'react-i18next'
 
 export const FontSizeSettings = ({
   clickDecrease,
@@ -15,6 +16,8 @@ export const FontSizeSettings = ({
   current,
   setCurrent
 }) => {
+  const { t } = useTranslation()
+
   const plusActive = () => current < range.length - 1
   const minusActive = () => current > 0
 
@@ -35,16 +38,16 @@ export const FontSizeSettings = ({
         <StepperButton
           active={minusActive()}
           onClick={handleDecrease}
-          aria-label="Decrease Text Size"
-          data-tooltip="Decrease Text Size">
+          aria-label={t("Decrease Text Size")}
+          data-tooltip={t("Decrease Text Size")}>
           <RemoveIcon />
         </StepperButton>
         <StepperRange current={current} range={range} onChange={setCurrent} />
         <StepperButton
           active={plusActive()}
           onClick={handleIncrease}
-          aria-label="Increase Text Size"
-          data-tooltip="Increase Text Size">
+          aria-label={t("Increase Text Size")}
+          data-tooltip={t("Increase Text Size")}>
           <AddIcon />
         </StepperButton>
       </StepperWrapper>

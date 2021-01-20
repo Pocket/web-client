@@ -7,6 +7,7 @@ import {
 } from 'components/stepper/stepper'
 import { StepperRange } from 'components/stepper/stepper-range'
 import { AddIcon, RemoveIcon, LineHeightIcon } from '@pocket/web-ui'
+import { useTranslation } from 'react-i18next'
 
 export const LineHeightSettings = ({
   clickDecrease,
@@ -15,6 +16,8 @@ export const LineHeightSettings = ({
   current,
   setCurrent
 }) => {
+  const { t } = useTranslation()
+
   const plusActive = () => current < range.length - 1
   const minusActive = () => current > 0
 
@@ -35,16 +38,16 @@ export const LineHeightSettings = ({
         <StepperButton
           active={minusActive()}
           onClick={handleDecrease}
-          aria-label="Decrease Line Height"
-          data-tooltip="Decrease Line Height">
+          aria-label={t("Decrease Line Height")}
+          data-tooltip={t("Decrease Line Height")}>
           <RemoveIcon />
         </StepperButton>
         <StepperRange current={current} range={range} onChange={setCurrent} />
         <StepperButton
           active={plusActive()}
           onClick={handleIncrease}
-          aria-label="Increase Line Height"
-          data-tooltip="Increase Line Height">
+          aria-label={t("Increase Line Height")}
+          data-tooltip={t("Increase Line Height")}>
           <AddIcon />
         </StepperButton>
       </StepperWrapper>
