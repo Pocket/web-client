@@ -210,6 +210,7 @@ const GlobalNavAccount = ({
       ) : null}
       <WithTooltip label="Account">
         <AvatarButton
+          aria-label={t("Open Account Menu")}
           src={avatarSrc}
           ref={accountMenuTriggerRef}
           size="40px"

@@ -65,6 +65,7 @@ export const StepperRange = ({ range = [], current = 0, onChange }) => {
         <button
           key={index}
           data-index-number={index}
+          aria-hidden={true}
           onClick={onStepClick}
           className={classNames({ current: index === current })}
         />

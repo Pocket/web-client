@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames'
 import { css } from 'linaria'
-import { Trans } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 
 import { OverflowMenuIcon } from '@pocket/web-ui'
 import { IosShareIcon } from '@pocket/web-ui'
@@ -86,6 +86,8 @@ export const AnnotationMenu = ({
   deleteAnnotation,
   floating
 }) => {
+  const { t } = useTranslation()
+
   const screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
   const [menuOpen, setMenuOpen] = useState(false)
   const [flipDirection, setFlipDirection] =  useState(false)
@@ -130,6 +132,7 @@ export const AnnotationMenu = ({
     <div className={inlineMenuStyles} style={{ top, left }}>
       <div className={relativeWrapper}>
         <button
+          aria-label={t("Open Highlights Menu")}
           ref={selfRef}
           onClick={toggleMenu}
           className={classNames(buttonReset, 'inline-button', { visible, floating })}>

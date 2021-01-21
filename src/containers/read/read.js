@@ -260,6 +260,7 @@ export default function Reader() {
         favorite={favStatus}
         archive={archiveStatus}
         onVisible={handleImpression}
+        sideBarOpen={sideBarOpen}
       />
 
       <main className={articleWrapper}>

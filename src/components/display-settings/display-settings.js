@@ -125,8 +125,9 @@ export const DisplaySettings = ({
 
   return (
     <div className={displayStyles}>
-      <WithTooltip label={t("Display Settings")}>
+      <WithTooltip label={t("Open Display Settings")}>
         <button
+          aria-label={t("Open Display Settings")}
           className={classNames(buttonReset, buttonStyles)}
           ref={displayMenuTriggerRef}>
           <TextSizeIcon />

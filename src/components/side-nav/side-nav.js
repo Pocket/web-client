@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Trans } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 
 import { HomeIcon } from '@pocket/web-ui'
 import { FavoriteIcon } from '@pocket/web-ui'
@@ -123,6 +123,8 @@ export const sideNavItem = css`
 `
 
 export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
+  const { t } = useTranslation()
+
   const [ref, inView] = useInView({ threshold: 0.5 })
 
   const subActive = (active, isTag) => {
@@ -206,7 +208,10 @@ export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
           : null}
       </nav>
       <div className="bottom-nav">
-        <button onClick={scrollToTop} className={!inView ? 'visible' : 'hidden'}>
+        <button
+          onClick={scrollToTop}
+          aria-label={t("Return to top")}
+          className={!inView ? 'visible' : 'hidden'}>
           <ChevronUpIcon />
         </button>
       </div>

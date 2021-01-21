@@ -58,7 +58,7 @@ const MenuItem = ({ label, icon, onClick, active }) => {
   const itemStyle = cx(menuItemStyle, active && 'active')
   return (
     <WithTooltip label={label} placement="top" delay={true}>
-      <button className={itemStyle} onClick={onClick}>
+      <button aria-label={label} className={itemStyle} onClick={onClick}>
         {icon ? icon : null}
       </button>
     </WithTooltip>

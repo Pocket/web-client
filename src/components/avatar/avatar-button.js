@@ -82,13 +82,14 @@ const buttonStyles = css`
  * styles of that button.
  */
 export const AvatarButton = React.forwardRef(
-  ({ id, size, label, src, onClick, className }, ref) => {
+  ({ id, size, label, src, onClick, className, ...rest }, ref) => {
     return (
       <button
         type="button"
         className={classnames(buttonStyles, className)}
         title={label}
         onClick={onClick}
+        { ...rest }
         ref={ref}>
         <Avatar
           size={size}

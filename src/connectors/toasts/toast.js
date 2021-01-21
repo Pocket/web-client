@@ -108,7 +108,7 @@ const messages = {
   [ITEMS_TAG_FAILURE]: <Trans>error tagging</Trans>,
   [ADD_SHARE_SUCCESS]: <Trans>Item added</Trans>,
   [ADD_SHARE_FAILURE]: <Trans>Error adding item</Trans>,
-  [COPY_ITEM_URL]: <Trans>URL copie</Trans>
+  [COPY_ITEM_URL]: <Trans>URL copied</Trans>
 }
 
 export function Toast({ stamp, type, itemCount }) {
