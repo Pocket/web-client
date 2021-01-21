@@ -318,7 +318,7 @@ GlobalNavMobileMenu.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
+      label: PropTypes.node.isRequired,
       url: PropTypes.string.isRequired,
       isDisabled: PropTypes.bool,
       icon: PropTypes.node

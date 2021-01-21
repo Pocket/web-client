@@ -119,7 +119,7 @@ GlobalNavLinks.propTypes = {
   links: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
-      label: PropTypes.string,
+      label: PropTypes.node,
       url: PropTypes.string
     })
   ),

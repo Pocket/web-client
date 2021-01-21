@@ -242,12 +242,12 @@ GlobalNavSearch.propTypes = {
   /**
    * Text to display as a note to the user when the user input is still empty
    */
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.node,
   /**
    * Text to display as a note to the user when the user input is still empty,
    * at mobile widths
    */
-  mobilePlaceholder: PropTypes.string
+  mobilePlaceholder: PropTypes.node
 }
 
 GlobalNavSearch.defaultProps = {
