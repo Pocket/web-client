@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
+import { useHasChanged } from 'common/utilities/hooks/has-changed'
 
 import Layout from 'layouts/with-sidebar'
 import { getMylistSearchData } from 'containers/my-list/my-list.state'
@@ -16,17 +17,6 @@ import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
 import { Toasts } from 'connectors/toasts/toast-list'
 
-// Custom hook to compare old query param to new query param
-// Force new search if query changes
-// https://stackoverflow.com/questions/53446020/how-to-compare-oldvalues-and-newvalues-on-react-hooks-useeffect
-function usePrevious(value) {
-  const ref = useRef()
-  useEffect(() => {
-    ref.current = value
-  })
-  return ref.current
-}
-
 export default function Collection(props) {
   const { metaData = {}, filter } = props
 
@@ -34,9 +24,8 @@ export default function Collection(props) {
   const router = useRouter()
 
   const { query } = router.query
+  const queryChange = useHasChanged(query)
   const subset = 'search'
-
-  const prevProps = usePrevious({ query })
 
   const section = filter ? subset + filter : subset
 
@@ -74,10 +63,8 @@ export default function Collection(props) {
   ])
 
   useEffect(() => {
-    if (initialItemsPopulated && prevProps?.query !== query) {
-      dispatch(getMylistSearchData(filter, query))
-    }
-  }, [query])
+    if (queryChange) dispatch(getMylistSearchData(filter, query))
+  }, [queryChange])
 
   /**
    * FUNCTIONAL ACTIONS
