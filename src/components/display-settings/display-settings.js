@@ -108,7 +108,8 @@ export const DisplaySettings = ({
     setColumnWidth(parseInt(columnWidth) + 1)
   }
 
-  const toggleDisplayFonts = () => {
+  const toggleDisplayFonts = (e) => {
+    e.stopPropagation()
     setDisplayFonts(!displayFonts)
   }
   const updateFontFamily = (family) => {
