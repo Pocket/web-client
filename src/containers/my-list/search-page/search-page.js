@@ -1,5 +1,5 @@
 // Vendor
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { useHasChanged } from 'common/utilities/hooks/has-changed'
