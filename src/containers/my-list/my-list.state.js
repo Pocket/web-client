@@ -448,7 +448,9 @@ function* myListSearchRequest(action) {
       .sort(sortByOrder)
       .map((item) => item.item_id)
 
-    const items = Array.from(new Set([...currentItems, ...newItemIds]))
+    const items = (searchState.query !== query)
+      ? Array.from(new Set([...newItemIds]))
+      : Array.from(new Set([...currentItems, ...newItemIds]))
 
     const newOffset = items.length
 
