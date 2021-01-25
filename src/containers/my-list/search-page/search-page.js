@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
 import Layout from 'layouts/with-sidebar'
-import { getMylistSearchData } from './search-page.state'
+import { getMylistSearchData } from 'containers/my-list/my-list.state'
 import { appSetSection } from 'connectors/app/app.state'
 import { SearchPageHeader } from 'components/headers/search-page-header'
 
@@ -27,11 +27,11 @@ export default function Collection(props) {
 
   const section = filter ? subset + filter : subset
 
-  const items = useSelector((state) => state.myListSearch[section])
-  const offset = useSelector((state) => state.myListSearch[`${section}Offset`])
-  const total = useSelector((state) => state.myListSearch[`${section}Total`])
+  const items = useSelector((state) => state.myList[section])
+  const offset = useSelector((state) => state.myList[`${section}Offset`])
+  const total = useSelector((state) => state.myList[`${section}Total`])
   const listMode = useSelector((state) => state.app.listMode)
-  const sortOrder = useSelector((state) => state.myListSearch.sortOrder)
+  const sortOrder = useSelector((state) => state.myList.searchSortOrder)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
 
@@ -87,7 +87,7 @@ export default function Collection(props) {
               {items?.length ? (
                 <VirtualizedList
                   type={type}
-                  items={items}
+                  section={section}
                   loadMore={loadMore}
                 />
               ) : null}

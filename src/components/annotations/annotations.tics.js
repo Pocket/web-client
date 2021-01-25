@@ -100,12 +100,7 @@ const Card = ({ annotation, shareItem, deleteAnnotation }) => {
       onClick={(e) => e.stopPropagation()}
       key={annotation.annotation_id}
       addedStyles={floatingCardStyles}>
-      {' '}
-      {/*activeCardStyles, */}
-      <Quote
-      // aria-label={translate('annotations.scrollTo')}
-      /* onClick={() => onClickEvent(annotation.position)} */
-      >
+      <Quote>
         {annotation.quote}
       </Quote>
       <CreatedDate>{annotation.created_at}</CreatedDate>

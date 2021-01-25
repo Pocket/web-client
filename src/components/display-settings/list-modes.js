@@ -8,6 +8,8 @@ import { SortByNewestIcon } from '@pocket/web-ui'
 import { SortByOldestIcon } from '@pocket/web-ui'
 import { WithTooltip } from '@pocket/web-ui'
 
+import { useTranslation } from 'react-i18next'
+
 const listSettingStyle = css`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -35,27 +37,29 @@ export const ListSettings = ({
   toggleSortOrder,
   toggleListMode
 }) => {
+  const { t } = useTranslation()
+
   return (
     <PopupMenuGroup>
       <div className={listSettingStyle}>
         <div onClick={toggleSortOrder}>
           {sortOrder === 'newest' ? (
-            <WithTooltip label="Sort items by oldest first">
+            <WithTooltip label={t("Sort items by oldest first")}>
               <SortByOldestIcon />
             </WithTooltip>
           ) : (
-            <WithTooltip label="Sort items by newest first">
+            <WithTooltip label={t("Sort items by newest first")}>
               <SortByNewestIcon />
             </WithTooltip>
           )}
         </div>
         <div onClick={toggleListMode}>
           {listMode === 'grid' ? (
-            <WithTooltip label="Display items as a list">
+            <WithTooltip label={t("Display items as a list")}>
               <ListViewIcon />
             </WithTooltip>
           ) : (
-            <WithTooltip label="Display items as a grid">
+            <WithTooltip label={t("Display items as a grid")}>
               <GridViewIcon />
             </WithTooltip>
           )}

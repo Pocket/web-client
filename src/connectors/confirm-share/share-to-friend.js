@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import isEmail from 'validator/lib/isEmail'
 import { Button } from '@pocket/web-ui'
+import { Trans, useTranslation } from 'react-i18next'
 
 import { css } from 'linaria'
 import { TagList } from 'components/tagging/tag.list'
@@ -39,6 +40,7 @@ const friendInput = css`
 
 export function ShareToFriend() {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   const currentFriends = useSelector((state) => state.itemsToShare.friendList)
 
@@ -140,7 +142,7 @@ export function ShareToFriend() {
       </div>
       <div className={sendToFriendStyle}>
         <textarea
-          placeholder="Comment"
+          placeholder={t("Comment")}
           value={commentValue}
           onChange={(e) => setCommentValue(e.target.value)}
         />
@@ -148,7 +150,7 @@ export function ShareToFriend() {
           type="submit"
           disabled={currentFriends.length === 0}
           onClick={sendConfirm}>
-          Send to Friend(s)
+          <Trans>Send to Friend(s)</Trans>
         </Button>
       </div>
     </div>

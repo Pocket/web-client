@@ -1,6 +1,7 @@
 import { css } from 'linaria'
 import { SuggestedTag } from 'components/tags/tags'
 import { TagUpsell } from './tag.upsell'
+import { Trans } from 'react-i18next'
 
 const suggestedWrapper = css`
   display: block;
@@ -20,7 +21,7 @@ const suggestionStyle = css`
 function Loading() {
   return (
     <div className={`${suggestedWrapper} subtext`}>
-      ... loading suggested tags
+      <Trans>... loading suggested tags</Trans>
     </div>
   )
 }
@@ -45,7 +46,7 @@ function Suggestion({ tag, addTag }) {
 function NoSuggestions() {
   return (
     <div className={`${suggestedWrapper} subtext`}>
-      We didn't find any tag suggestions
+      <Trans>We didn't find any tag suggestions</Trans>
     </div>
   )
 }

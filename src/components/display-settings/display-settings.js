@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import {
   PopupMenu,
   PopupMenuGroup,
@@ -80,6 +81,8 @@ export const DisplaySettings = ({
   forceShow,
   onVisible
 }) => {
+  const { t } = useTranslation()
+
   const [displayFonts, setDisplayFonts] = useState(false)
 
   const displayMenuTriggerRef = useRef(null)
@@ -122,8 +125,9 @@ export const DisplaySettings = ({
 
   return (
     <div className={displayStyles}>
-      <WithTooltip label="Display Settings">
+      <WithTooltip label={t("Open Display Settings")}>
         <button
+          aria-label={t("Open Display Settings")}
           className={classNames(buttonReset, buttonStyles)}
           ref={displayMenuTriggerRef}>
           <TextSizeIcon />
@@ -135,8 +139,8 @@ export const DisplaySettings = ({
         id="display-settings"
         onClose={handleOnClose}
         trigger={displayMenuTriggerRef}
-        title="Display Settings"
-        screenReaderLabel="Display Settings"
+        title={t("Display Settings")}
+        screenReaderLabel={t("Display Settings")}
         appRootSelector={appRootSelector}
         popperOptions={{
           placement: 'bottom-end',
@@ -154,7 +158,7 @@ export const DisplaySettings = ({
             <PopupMenuItem
               onClick={toggleDisplayFonts}
               icon={<ChevronLeftIcon />}>
-              Font Options
+              <Trans>Font Options</Trans>
             </PopupMenuItem>
           ) : (
             <PopupMenuItem
@@ -207,7 +211,7 @@ export const DisplaySettings = ({
                     href="https://getpocket.com/premium?ep=3"
                     target="_premium"
                     icon={<PremiumIcon />}>
-                    Unlock more options
+                    <Trans>Unlock more options</Trans>
                   </PopupMenuItem>
                 </PopupMenuGroup>
               </VisibilitySensor>

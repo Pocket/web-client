@@ -2,6 +2,7 @@ import { SimpleCard } from 'components/item-card/my-list/card-simple'
 import { css } from 'linaria'
 import { SectionHeader } from 'components/headers/section-header'
 import { breakpointLargeHandset } from '@pocket/web-ui'
+import { useTranslation } from 'react-i18next'
 
 const recentTagStyle = css`
   border-bottom: var(--dividerStyle);
@@ -26,9 +27,11 @@ const recentTagStyle = css`
 `
 
 export function RecentTags({ taggedItems }) {
+  const { t } = useTranslation()
+
   return (
     <div className={recentTagStyle}>
-      <SectionHeader sectionTitle="Recently Tagged Items" />
+      <SectionHeader sectionTitle={t("Recently Tagged Items")} />
       <div className="cards">
         {taggedItems.map((itemId) => (
           <SimpleCard key={itemId} id={itemId} />

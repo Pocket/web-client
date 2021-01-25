@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
+import { Trans } from 'react-i18next'
 
 const listStyle = css`
   display: flex;
@@ -118,7 +119,7 @@ GlobalNavLinks.propTypes = {
   links: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
-      label: PropTypes.string,
+      label: PropTypes.node,
       url: PropTypes.string
     })
   ),
@@ -142,13 +143,13 @@ GlobalNavLinks.defaultProps = {
     {
       name: 'discover',
       id: 'discover',
-      label: 'Discover',
+      label: <Trans i18nKey="discover">Discover</Trans>,
       url: 'https://getpocket.com/explore?src=navbar'
     },
     {
       name: 'my-list',
       id: 'my-list',
-      label: 'My List',
+      label: <Trans i18nKey="my-list">My List</Trans>,
       url: 'https://app.getpocket.com?src=navbar'
     }
   ],

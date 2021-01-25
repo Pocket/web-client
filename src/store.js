@@ -44,9 +44,6 @@ import { myListSagas } from 'containers/my-list/my-list.state'
 import { myListItemsReducers } from 'connectors/items-by-id/my-list/items.state'
 import { myListItemsSagas } from 'connectors/items-by-id/my-list/items.state'
 
-import { myListSearchReducers } from 'containers/my-list/search-page/search-page.state'
-import { myListSearchSagas } from 'containers/my-list/search-page/search-page.state'
-
 import { itemBulkReducers } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemDeleteReducers } from 'connectors/items-by-id/my-list/items.delete'
 import { itemFavoriteReducers } from 'connectors/items-by-id/my-list/items.favorite'
@@ -81,7 +78,6 @@ const discoverReducers = {
 const collectionReducers = {
   myListItemsById: myListItemsReducers,
   myList: myListReducers,
-  myListSearch: myListSearchReducers,
   userTags: userTagsReducers,
   bulkEdit: itemBulkReducers,
   itemsToFavorite: itemFavoriteReducers,
@@ -136,7 +132,6 @@ function* rootSaga() {
     ...syndicatedArticleSagas,
     ...recitSagas,
     ...myListSagas,
-    ...myListSearchSagas,
     ...myListItemsSagas,
     ...itemAnalyticsSagas,
     ...itemShareSagas,

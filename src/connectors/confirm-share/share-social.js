@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import { FacebookShareButton } from 'react-share'
 import { TwitterShareButton } from 'react-share'
@@ -97,6 +98,7 @@ export const BufferShareButton = ({
 
 export const ShareSocial = function ({ item, quote, position = 0 }) {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const { open_url, excerpt, title } = item
 
   const cancelShare = () => dispatch(itemsShareCancel())
@@ -114,8 +116,8 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
 
   return (
     <div className={`${socialIcons} content`}>
-      <button aria-label="Copy Link" onClick={copyUrl}>
-        <WithTooltip label="Copy Link" placement="top" delay={true}>
+      <button aria-label={t("Copy Link")} onClick={copyUrl}>
+        <WithTooltip label={t("Copy Link")} placement="top" delay={true}>
           <LinkCopyIcon />
         </WithTooltip>
       </button>
@@ -125,7 +127,7 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
         onShareWindowClose={() => onSocialShare('facebook')}
         quote={quote}
         url={open_url}>
-        <WithTooltip label="Share to Facebook" placement="top" delay={true}>
+        <WithTooltip label={t("Share to Facebook")} placement="top" delay={true}>
           <span className="label">
             <FacebookColorIcon />
           </span>
@@ -136,7 +138,7 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
         onShareWindowClose={() => onSocialShare('twitter')}
         title={title}
         url={open_url}>
-        <WithTooltip label="Share to Twitter" placement="top" delay={true}>
+        <WithTooltip label={t("Share to Twitter")} placement="top" delay={true}>
           <span className="label">
             <TwitterColorIcon />
           </span>
@@ -148,7 +150,7 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
         title={title}
         summary={quote || excerpt}
         url={open_url}>
-        <WithTooltip label="Share to LinkedIn" placement="top" delay={true}>
+        <WithTooltip label={t("Share to LinkedIn")} placement="top" delay={true}>
           <span className="label">
             <LinkedinMonoIcon />
           </span>
@@ -159,7 +161,7 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
         onShareWindowClose={() => onSocialShare('reddit')}
         title={title}
         url={open_url}>
-        <WithTooltip label="Share to Reddit" placement="top" delay={true}>
+        <WithTooltip label={t("Share to Reddit")} placement="top" delay={true}>
           <span className="label">
             <RedditMonoIcon />
           </span>
@@ -170,7 +172,7 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
         onShareWindowClose={() => onSocialShare('buffer')}
         quote={quote || excerpt}
         url={open_url}>
-        <WithTooltip label="Share to Buffer" placement="top" delay={true}>
+        <WithTooltip label={t("Share to Buffer")} placement="top" delay={true}>
           <span className="label">
             <BufferIcon />
           </span>

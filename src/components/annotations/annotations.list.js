@@ -5,6 +5,7 @@ import { AnnotationMenu } from './annotations.menu'
 import { cardStyles, Quote, CreatedDate } from './annotations.card'
 import { EmptyList } from './annotations.empty-list'
 import { LimitNotice } from './annotations.limit'
+import { Trans } from 'react-i18next'
 
 const listWrapper = css`
   height: 100%;
@@ -111,7 +112,9 @@ export class QuoteList extends Component {
 
     return annotations && annotationCount > 0 ? (
       <div className={classNames(listWrapper, { visible })}>
-        <h6 className={headingStyles}>My Highlights</h6> {/*translate*/}
+        <h6 className={headingStyles}>
+          <Trans>My Highlights</Trans>
+        </h6>
         {this.renderCards()}
       </div>
     ) : (

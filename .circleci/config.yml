@@ -218,7 +218,7 @@ jobs:
   # ——————————————————————————————————————————————————————————————
   cleanup_feature:
     docker:
-      - image: pocket/ops-cli:v0.0.5
+      - image: pocket/ops-cli:v0.0.10
     steps:
       - checkout
       - assume-role/assume-role:
@@ -231,6 +231,7 @@ jobs:
             --param-file .aws/feature/3_service.dev.json \
             --slack-webhook "$SLACK_WEBHOOK" \
             --dry-run=false \
+            --main-branch=main
             --days-old 8 \
             --github-token $GITHUB_TOKEN \
             --github-owner Pocket \

@@ -5,6 +5,7 @@ import { CrossIcon } from '@pocket/web-ui'
 import { Fade } from 'common/utilities/animation/fade'
 import { useDispatch } from 'react-redux'
 import { clearToast } from './toast.state'
+import { Trans } from 'react-i18next'
 
 import { ITEMS_DELETE_SUCCESS } from 'actions'
 import { ITEMS_DELETE_FAILURE } from 'actions'
@@ -90,24 +91,24 @@ const itemCopy = (count) => {
 }
 
 const messages = {
-  [ITEMS_DELETE_SUCCESS]: 'deleted',
-  [ITEMS_DELETE_FAILURE]: 'error deleting',
-  [ITEMS_ADD_SUCCESS]: 'added',
-  [ITEMS_ARCHIVE_SUCCESS]: 'archived',
-  [ITEMS_ARCHIVE_FAILURE]: 'error archiving',
-  [ITEMS_UNARCHIVE_SUCCESS]: 'added',
-  [ITEMS_UNARCHIVE_FAILURE]: 'error adding',
-  [ITEMS_FAVORITE_SUCCESS]: 'added to favorites',
-  [ITEMS_FAVORITE_FAILURE]: 'error adding to favorites:',
-  [ITEMS_UNFAVORITE_SUCCESS]: 'removed from favorites',
-  [ITEMS_UNFAVORITE_FAILURE]: 'error removing from favorites:',
-  [ITEMS_SHARE_SUCCESS]: 'shared',
-  [ITEMS_SHARE_FAILURE]: 'error sharing',
-  [ITEMS_TAG_SUCCESS]: 'tagged',
-  [ITEMS_TAG_FAILURE]: 'error tagging',
-  [ADD_SHARE_SUCCESS]: 'Item added',
-  [ADD_SHARE_FAILURE]: 'Error adding item',
-  [COPY_ITEM_URL]: 'URL copied'
+  [ITEMS_DELETE_SUCCESS]: <Trans>deleted</Trans>,
+  [ITEMS_DELETE_FAILURE]: <Trans>error deleting</Trans>,
+  [ITEMS_ADD_SUCCESS]: <Trans>added</Trans>,
+  [ITEMS_ARCHIVE_SUCCESS]: <Trans>archived</Trans>,
+  [ITEMS_ARCHIVE_FAILURE]: <Trans>error archiving</Trans>,
+  [ITEMS_UNARCHIVE_SUCCESS]: <Trans>added</Trans>,
+  [ITEMS_UNARCHIVE_FAILURE]: <Trans>error adding</Trans>,
+  [ITEMS_FAVORITE_SUCCESS]: <Trans>added to favorites</Trans>,
+  [ITEMS_FAVORITE_FAILURE]: <Trans>error adding to favorites:</Trans>,
+  [ITEMS_UNFAVORITE_SUCCESS]: <Trans>removed from favorites</Trans>,
+  [ITEMS_UNFAVORITE_FAILURE]: <Trans>error removing from favorites:</Trans>,
+  [ITEMS_SHARE_SUCCESS]: <Trans>shared</Trans>,
+  [ITEMS_SHARE_FAILURE]: <Trans>error sharing</Trans>,
+  [ITEMS_TAG_SUCCESS]: <Trans>tagged</Trans>,
+  [ITEMS_TAG_FAILURE]: <Trans>error tagging</Trans>,
+  [ADD_SHARE_SUCCESS]: <Trans>Item added</Trans>,
+  [ADD_SHARE_FAILURE]: <Trans>Error adding item</Trans>,
+  [COPY_ITEM_URL]: <Trans>URL copied</Trans>
 }
 
 export function Toast({ stamp, type, itemCount }) {

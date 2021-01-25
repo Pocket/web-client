@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
 import { HighlightIcon, IosShareIcon } from '@pocket/web-ui'
+import { Trans } from 'react-i18next'
 
 const popupContainer = css`
   position: absolute;
@@ -117,7 +118,7 @@ class SelectionPopoverClass extends Component {
               <span className={iconWrapper}>
                 <HighlightIcon />
               </span>
-              Highlight {/*"shareExcerpt.highlight.copy"*/}
+              <Trans>Highlight</Trans>
             </button>
             <button
               className={classNames(buttonReset, buttonWrapper)}
@@ -126,7 +127,7 @@ class SelectionPopoverClass extends Component {
               <span className={iconWrapper}>
                 <IosShareIcon />
               </span>
-              Share {/*"shareExcerpt.shareExcerpt.copy*/}
+              <Trans>Share</Trans>
             </button>
         </div>
       </div>

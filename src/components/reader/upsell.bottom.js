@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { css } from 'linaria'
+import { Trans } from 'react-i18next'
 import classNames from 'classnames'
 import BigDiamondDark from 'static/images/reader-upsells/BigDiamond-dark.svg'
 import BigDiamondLight from 'static/images/reader-upsells/BigDiamond-light.svg'
@@ -152,14 +153,14 @@ const LibraryAd = () => (
       <img className='sepia' src={LibrarySepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5>Read with purpose</h5>
-      <p>Build a permanent library of every article you’ve saved with Pocket Premium.</p>
+      <h5><Trans>Read with purpose</Trans></h5>
+      <p><Trans>Build a permanent library of every article you’ve saved with Pocket Premium.</Trans></p>
       <p className="small">
-        Build a permanent library of every article you’ve saved with{' '}
+        <Trans>Build a permanent library of every article you’ve saved with</Trans>{' '}
         <ArrowLink
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          Pocket Premium
+          <Trans>Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -168,7 +169,7 @@ const LibraryAd = () => (
       <Button
         id="reader.bottom.premium.library"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
     </div>
   </>
 )
@@ -181,15 +182,15 @@ const SearchAd = () => (
       <img className='sepia' src={SearchSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5>Search every word in your Pocket</h5>
-      <p>Unlock our powerful search tool when you join Pocket Premium.</p>
+      <h5><Trans>Search every word in your Pocket</Trans></h5>
+      <p><Trans>Unlock our powerful search tool when you join Pocket Premium.</Trans></p>
       <p className="small">
-        Quickly search every word in your Pocket when you join{' '}
+        <Trans>Quickly search every word in your Pocket when you join</Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.search"
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          Pocket Premium
+          <Trans>Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -198,7 +199,7 @@ const SearchAd = () => (
       <Button
         id="reader.bottom.premium.search"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
     </div>
   </>
 )
@@ -211,15 +212,15 @@ const FocusedAd = () => (
       <img className='sepia' src={FocusedSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5>Ditch the ads</h5>
-      <p>Boost your focus and get an ad-free experience with Pocket Premium.</p>
+      <h5><Trans>Ditch the ads</Trans></h5>
+      <p><Trans>Boost your focus and get an ad-free experience with Pocket Premium.</Trans></p>
       <p className="small">
-        Boost your focus and get an ad-free experience with{' '}
+        <Trans>Boost your focus and get an ad-free experience with</Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.focused"
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          Pocket Premium
+          <Trans>Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -228,7 +229,7 @@ const FocusedAd = () => (
       <Button
         id="reader.bottom.premium.focused"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
     </div>
   </>
 )
@@ -241,15 +242,15 @@ const TypeAd = () => (
       <img className='sepia' src={TypeSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5>Read in your favorite font</h5>
-      <p>Get access to 8 exclusive fonts when you join Pocket Premium.</p>
+      <h5><Trans>Read in your favorite font</Trans></h5>
+      <p><Trans>Get access to 8 exclusive fonts when you join Pocket Premium.</Trans></p>
       <p className="small">
-        Customize your Pocket with 8 exclusive fonts when you join{' '}
+        <Trans>Customize your Pocket with 8 exclusive fonts when you join</Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.type"
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          Pocket Premium
+          <Trans>Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -258,7 +259,7 @@ const TypeAd = () => (
       <Button
         id="reader.bottom.premium.type"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
     </div>
   </>
 )
@@ -271,15 +272,15 @@ const BigDiamondAd = () => (
       <img className='sepia' src={BigDiamondSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5>Unlock exclusive features</h5>
-      <p>Take your reading experience to the next level when you join Pocket Premium.</p>
+      <h5><Trans>Unlock exclusive features</Trans></h5>
+      <p><Trans>Take your reading experience to the next level when you join Pocket Premium.</Trans></p>
       <p className="small">
-        Take your reading experience to the next level when you join{' '}
+        <Trans>Take your reading experience to the next level when you join</Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.features"
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          Pocket Premium
+          <Trans>Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -288,7 +289,7 @@ const BigDiamondAd = () => (
       <Button
         id="reader.bottom.premium.features"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
     </div>
   </>
 )
@@ -301,15 +302,15 @@ const HighlightAd = () => (
       <img className='sepia' src={HighlightSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5>Unlock unlimited highlights</h5>
-      <p>Capture as many ideas as you’d like in every article with Pocket Premium.</p>
+      <h5><Trans>Unlock unlimited highlights</Trans></h5>
+      <p><Trans>Capture as many ideas as you’d like in every article with Pocket Premium.</Trans></p>
       <p className="small">
-        Unlock unlimited highlights and never lose track of an idea with{' '}
+        <Trans>Unlock unlimited highlights and never lose track of an idea with</Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.highlights"
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          Pocket Premium
+          <Trans>Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -318,7 +319,7 @@ const HighlightAd = () => (
       <Button
         id="reader.bottom.premium.highlights"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
     </div>
   </>
 )
@@ -331,15 +332,15 @@ const TagsAd = () => (
       <img className='sepia' src={TagsSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5>Tag stories faster than ever</h5>
-      <p>Save time and get helpful tag suggestions with Pocket Premium.</p>
+      <h5><Trans>Tag stories faster than ever</Trans></h5>
+      <p><Trans>Save time and get helpful tag suggestions with Pocket Premium.</Trans></p>
       <p className="small">
-        Tag stories faster than ever. Get tag suggestions with{' '}
+        <Trans>Tag stories faster than ever. Get tag suggestions with</Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.tags"
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          Pocket Premium
+          <Trans>Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -348,7 +349,7 @@ const TagsAd = () => (
       <Button
         id="reader.bottom.premium.tags"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>Upgrade</Button>
+        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
     </div>
   </>
 )

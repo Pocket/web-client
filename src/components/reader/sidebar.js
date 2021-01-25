@@ -5,6 +5,7 @@ import { buttonReset } from 'components/buttons/button-reset'
 import { QuoteList } from 'components/annotations/annotations.list'
 import { TicList } from 'components/annotations/annotations.tics'
 import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
 
 const sideBarWrapper = css`
   width: 110px;
@@ -83,6 +84,8 @@ export const Sidebar = ({
   isPremium,
   handleImpression
 }) => {
+  const { t } = useTranslation()
+
   const handleAnnotationClick = (position) => {
     window.scrollTo({
       left: 0,
@@ -111,6 +114,7 @@ export const Sidebar = ({
           <div className={verticallyCentered}>
             <button
               onClick={toggleSidebar}
+              aria-label={sideBarOpen ? t("Close Highlights Menu") : t("Open Highlights Menu")}
               className={buttonReset}>
               {sideBarOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </button>

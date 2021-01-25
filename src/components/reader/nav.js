@@ -23,6 +23,7 @@ import {
   updateFontSize,
   updateFontType
 } from 'containers/read/read.state'
+import { useTranslation } from 'react-i18next'
 
 const headerStyle = css`
   position: fixed;
@@ -108,9 +109,11 @@ export const ReaderNav = ({
   favorite,
   archive,
   displaySettings,
-  onVisible
+  onVisible,
+  sideBarOpen
 }) => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   const setFontFamily = (val) => dispatch(updateFontType(val))
   const setFontSize = (val) => dispatch(updateFontSize(val))
@@ -126,49 +129,67 @@ export const ReaderNav = ({
     <header className={headerStyle}>
       <div className="global-nav-container">
         <nav className={navStyle}>
-          <WithTooltip label="Back to My List">
-            {/*'reader.topNav.back'*/}
-            <button onClick={goBack} className={cx(buttonClass, 'go-back')}>
+          <WithTooltip label={t("Back to My List")}>
+            <button
+              onClick={goBack}
+              aria-label={t("Back to My List")}
+              className={cx(buttonClass, 'go-back')}>
               <ArrowLeftIcon />
             </button>
           </WithTooltip>
 
           <div className="nav-actions">
-            <WithTooltip label="Open Highlights Menu">
-              <button onClick={toggleSidebar} className={buttonClass}>
+            <WithTooltip label={sideBarOpen ? t("Close Highlights Menu") : t("Open Highlights Menu")}>
+              <button
+                onClick={toggleSidebar}
+                aria-label={sideBarOpen ? t("Close Highlights Menu") : t("Open Highlights Menu")}
+                className={buttonClass}>
                 <HighlightIcon />
               </button>
             </WithTooltip>
 
-            <WithTooltip label="Tag Article">
-              <button onClick={toggleTagging} className={buttonClass}>
+            <WithTooltip label={t("Tag Article")}>
+              <button
+                onClick={toggleTagging}
+                aria-label={t("Tag Article")}
+                className={buttonClass}>
                 <TagIcon />
               </button>
             </WithTooltip>
 
             <WithTooltip
-              label={(favorite) ? "Remove from Favorites" : "Favorite Article"}>
+              label={(favorite) ? t("Remove from Favorites") : t("Favorite Article")}>
               <button
                 onClick={toggleFavorite}
+                aria-label={(favorite) ? t("Remove from Favorites") : t("Favorite Article")}
                 className={cx(buttonClass, favorite && 'favorite')}>
                 {favorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
               </button>
             </WithTooltip>
 
-            <WithTooltip label={archive ? "Re-add to List" : "Archive Article"}>
-              <button onClick={archiveItem} className={buttonClass}>
+            <WithTooltip label={archive ? t("Re-add to List") : t("Archive Article")}>
+              <button
+                onClick={archiveItem}
+                aria-label={archive ? t("Re-add to List") : t("Archive Article")}
+                className={buttonClass}>
                 {archive ? <AddCircledIcon /> : <ArchiveIcon />}
               </button>
             </WithTooltip>
 
-            <WithTooltip label="Delete from Library">
-              <button onClick={toggleDelete} className={buttonClass}>
+            <WithTooltip label={t("Delete from Library")}>
+              <button
+                onClick={toggleDelete}
+                aria-label={t("Delete from Library")}
+                className={buttonClass}>
                 <DeleteIcon />
               </button>
             </WithTooltip>
 
-            <WithTooltip label="Share Article">
-              <button onClick={toggleShare} className={buttonClass}>
+            <WithTooltip label={t("Share Article")}>
+              <button
+                onClick={toggleShare}
+                aria-label={t("Share Article")}
+                className={buttonClass}>
                 <IosShareIcon />
               </button>
             </WithTooltip>

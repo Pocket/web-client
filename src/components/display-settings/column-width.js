@@ -7,6 +7,7 @@ import {
 } from 'components/stepper/stepper'
 import { StepperRange } from 'components/stepper/stepper-range'
 import { AddIcon, RemoveIcon, MarginsIcon } from '@pocket/web-ui'
+import { useTranslation } from 'react-i18next'
 
 export const ColumnWidthSettings = ({
   clickDecrease,
@@ -15,6 +16,8 @@ export const ColumnWidthSettings = ({
   current,
   setCurrent
 }) => {
+  const { t } = useTranslation()
+
   const plusActive = () => current < range.length - 1
   const minusActive = () => current > 0
 
@@ -35,16 +38,16 @@ export const ColumnWidthSettings = ({
         <StepperButton
           active={minusActive()}
           onClick={handleDecrease}
-          aria-label="Decrease Column Width"
-          data-tooltip="Decrease Column Width">
+          aria-label={t("Decrease Column Width")}
+          data-tooltip={t("Decrease Column Width")}>
           <RemoveIcon />
         </StepperButton>
         <StepperRange current={current} range={range} onChange={setCurrent} />
         <StepperButton
           active={plusActive()}
           onClick={handleIncrease}
-          aria-label="Increase Column Width"
-          data-tooltip="Increase Column Width">
+          aria-label={t("Increase Column Width")}
+          data-tooltip={t("Increase Column Width")}>
           <AddIcon />
         </StepperButton>
       </StepperWrapper>

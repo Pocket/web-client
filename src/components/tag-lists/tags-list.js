@@ -4,6 +4,7 @@ import { Pill } from '@pocket/web-ui'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import { SectionHeader } from 'components/headers/section-header'
 import { matchSorter } from 'match-sorter'
+import { useTranslation, Trans } from 'react-i18next'
 
 const allTagStyle = css`
   .searchBlock {
@@ -25,18 +26,20 @@ const allTagStyle = css`
 `
 
 export function TagList({ userTags, value, valueChange }) {
+  const { t } = useTranslation()
+
   const sortedTags = matchSorter(userTags, value).slice(0, 5)
   const orderedTags = userTags.sort((a, b) => a.localeCompare(b))
 
   return (
     <div className={allTagStyle}>
-      <SectionHeader sectionTitle="All Tags" />
+      <SectionHeader sectionTitle={t("All Tags")} />
       <div className="searchBlock">
         <input
           value={value}
           onChange={valueChange}
           type="text"
-          placeholder="Search for your tags"
+          placeholder={t("Search for your tags")}
         />
       </div>
       <div className={pillboxStyle}>
@@ -44,7 +47,7 @@ export function TagList({ userTags, value, valueChange }) {
           <li>
             <Link href={'/my-list/tags/_untagged_'}>
               <a>
-                <Pill>un-tagged</Pill>
+                <Pill><Trans>un-tagged</Trans></Pill>
               </a>
             </Link>
           </li>

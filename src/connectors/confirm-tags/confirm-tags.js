@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Button } from '@pocket/web-ui'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation, Trans } from 'react-i18next'
 
 import { itemsTagConfirm } from 'connectors/items-by-id/my-list/items.tag'
 import { itemsTagCancel } from 'connectors/items-by-id/my-list/items.tag'
@@ -28,6 +29,7 @@ export function TaggingModal() {
   const addTagAction = (tag) => dispatch(itemsTagAdd(tag))
   const removeTagAction = (tag) => dispatch(itemsTagRemove(tag))
   const cancelTag = () => dispatch(itemsTagCancel())
+  const { t } = useTranslation()
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
 
@@ -100,7 +102,7 @@ export function TaggingModal() {
     if (!fresh) confirmTags(currentTags)
   }
 
-  const title = currentTags?.length ? 'Edit Tags' : 'Add Tags'
+  const title = currentTags?.length ? t('Edit Tags') : t('Add Tags')
 
   const handleImpression = (identifier) => dispatch(trackImpression(
     IMPRESSION_COMPONENT_UI,
@@ -169,7 +171,7 @@ export function TaggingModal() {
             disabled={fresh}
             type="submit"
             onClick={saveTags}>
-            Save
+            <Trans>Save</Trans>
           </Button>
         </div>
       </ModalFooter>

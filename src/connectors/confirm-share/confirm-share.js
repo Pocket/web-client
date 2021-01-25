@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { css } from 'linaria'
 import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import { Modal, ModalBody, ModalTabs } from 'components/modal/modal'
 
@@ -23,6 +24,7 @@ const shareQuote = css`
 
 export const ShareModal = () => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   /**
    * State and state actions
@@ -48,10 +50,10 @@ export const ShareModal = () => {
 
   return (
     <Modal
-      title="Share Item"
+      title={t("Share Item")}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel="Share Item"
+      screenReaderLabel={t("Share Item")}
       handleClose={cancelShare}>
       <ModalBody>
         <DisplayCard id={itemId} />

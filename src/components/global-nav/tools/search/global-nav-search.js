@@ -6,6 +6,7 @@ import { screenMediumHandset } from '@pocket/web-ui'
 import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
+import { Trans, useTranslation } from 'react-i18next'
 
 const searchStyle = css`
   width: 100%;
@@ -122,7 +123,7 @@ const CloseButton = ({ onClick }) => {
   return (
     <button className={closeButtonStyle} onClick={onClick}>
       <CrossIcon className={closeIconStyle} />
-      <CloseLabel>Cancel</CloseLabel>
+      <CloseLabel><Trans>Cancel</Trans></CloseLabel>
     </button>
   )
 }
@@ -146,6 +147,7 @@ const GlobalNavSearch = ({
   placeholder,
   mobilePlaceholder
 }) => {
+  const { t } = useTranslation()
   const inputEl = useRef(null)
 
   const [searchTerm, updateSearchTerm] = useState(value)
@@ -161,7 +163,7 @@ const GlobalNavSearch = ({
     e.stopPropagation()
     e.preventDefault()
 
-    if (!searchTerm) return updateInputError('Please enter a search term')
+    if (!searchTerm) return updateInputError(t('Please enter a search term'))
 
     onSubmit(searchTerm)
   }
@@ -185,7 +187,7 @@ const GlobalNavSearch = ({
             'search-input',
             { 'has-value': !!searchTerm }
           ])}
-          aria-label="Search your collection"
+          aria-label={t("Search your collection")}
           value={searchTerm}
           onChange={handleInputChange}
           onFocus={onFocus}
@@ -204,7 +206,7 @@ const GlobalNavSearch = ({
       <button
         className="search-button"
         {...testIdAttribute('search-button')}>
-        Search
+        <Trans>Search</Trans>
       </button>
       {onClose ? (
         <CloseButton onClick={onClose} {...testIdAttribute('search-close')} />
@@ -240,12 +242,12 @@ GlobalNavSearch.propTypes = {
   /**
    * Text to display as a note to the user when the user input is still empty
    */
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.node,
   /**
    * Text to display as a note to the user when the user input is still empty,
    * at mobile widths
    */
-  mobilePlaceholder: PropTypes.string
+  mobilePlaceholder: PropTypes.node
 }
 
 GlobalNavSearch.defaultProps = {
@@ -253,8 +255,8 @@ GlobalNavSearch.defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
   value: '',
-  placeholder: 'Search for topics and interests',
-  mobilePlaceholder: 'Search for topics'
+  placeholder: <Trans>Search for topics and interests</Trans>,
+  mobilePlaceholder: <Trans>Search for topics</Trans>
 }
 
 export default GlobalNavSearch

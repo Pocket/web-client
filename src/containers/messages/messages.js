@@ -1,6 +1,7 @@
 // @refresh reset
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { getMessages } from './user-messages.state'
@@ -15,6 +16,7 @@ import { Toasts } from 'connectors/toasts/toast-list'
 
 export default function Messages(props) {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const hydrated = useSelector((state) => state.userMessages.hydrated)
@@ -43,13 +45,13 @@ export default function Messages(props) {
   }
 
   return (
-    <Layout title="Pocket - Messages">
+    <Layout title={`Pocket - ${t("Messages")}`}>
       <SideNav isLoggedIn={isLoggedIn} />
 
       {hydrated ? (
         notifications.length || unconfirmedArray.length ? (
           <main className="main">
-            <MessagesHeader title="Activity" />
+            <MessagesHeader title={t("Activity")} />
 
             {notifications.map(notification => (
               <MessageItem

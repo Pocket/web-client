@@ -139,6 +139,8 @@ export default function Collection(props) {
 
   const Header = tag ? TagPageHeader : MyListHeader
 
+  const title = selector === 'unread' ? 'My List' : selector
+
   return (
     <Layout
       title={metaData.title}
@@ -153,7 +155,7 @@ export default function Collection(props) {
             <>
               <Header
                 subset={subset}
-                title={selector}
+                title={title}
                 filter={filter}
                 tag={tag}
               />

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Trans, useTranslation } from 'react-i18next'
 
 import { HomeIcon } from '@pocket/web-ui'
 import { FavoriteIcon } from '@pocket/web-ui'
@@ -122,6 +123,8 @@ export const sideNavItem = css`
 `
 
 export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
+  const { t } = useTranslation()
+
   const [ref, inView] = useInView({ threshold: 0.5 })
 
   const subActive = (active, isTag) => {
@@ -145,44 +148,53 @@ export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
       <nav role="navigation">
         <Link href="/my-list">
           <button className={subActive('unread')} ref={ref}>
-            <HomeIcon className="side-nav-icon" /> My List
+            <HomeIcon className="side-nav-icon" />{' '}
+            <Trans i18nKey="my-list">My List</Trans>
           </button>
         </Link>
         <Link href="/my-list/archive">
           <button className={subActive('archive')}>
-            <ArchiveIcon className="side-nav-icon" /> Archive
+            <ArchiveIcon className="side-nav-icon" />{' '}
+            <Trans i18nKey="archive">Archive</Trans>
           </button>
         </Link>
 
-        <div className={sideNavHeader}>Filters</div>
+        <div className={sideNavHeader}>
+          <Trans i18nKey="filters">Filters</Trans>
+        </div>
 
         <Link href="/my-list/favorites">
           <button className={subActive('favorites')}>
-            <FavoriteIcon className="side-nav-icon" /> Favorites
+            <FavoriteIcon className="side-nav-icon" />{' '}
+            <Trans i18nKey="favorites">Favorites</Trans>
           </button>
         </Link>
 
         <Link href="/my-list/highlights">
           <button className={subActive('highlights')}>
-            <HighlightIcon className="side-nav-icon" /> Highlights
+            <HighlightIcon className="side-nav-icon" />{' '}
+            <Trans i18nKey="highlights">Highlights</Trans>
           </button>
         </Link>
 
         <Link href="/my-list/articles">
           <button className={subActive('articles')}>
-            <ArticleIcon className="side-nav-icon" /> Articles
+            <ArticleIcon className="side-nav-icon" />{' '}
+            <Trans i18nKey="articles">Articles</Trans>
           </button>
         </Link>
 
         <Link href="/my-list/videos">
           <button className={subActive('videos')}>
-            <VideoIcon className="side-nav-icon" /> Videos
+            <VideoIcon className="side-nav-icon" />{' '}
+            <Trans i18nKey="videos">Videos</Trans>
           </button>
         </Link>
         <div className={sideNavHeader}>Tags</div>
         <Link href="/my-list/tags">
           <button className={subActive('tag')}>
-            <TagIcon className="side-nav-icon" /> All Tags
+            <TagIcon className="side-nav-icon" />{' '}
+            <Trans i18nKey="all-tags">All Tags</Trans>
           </button>
         </Link>
         {pinnedTags.length
@@ -196,7 +208,10 @@ export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
           : null}
       </nav>
       <div className="bottom-nav">
-        <button onClick={scrollToTop} className={!inView ? 'visible' : 'hidden'}>
+        <button
+          onClick={scrollToTop}
+          aria-label={t("Return to top")}
+          className={!inView ? 'visible' : 'hidden'}>
           <ChevronUpIcon />
         </button>
       </div>

@@ -1,14 +1,5 @@
 import DiffMatchPatch from 'diff-match-patch'
 
-// bright: var(--color-amber)
-// preview: rgb(255, 210, 94, 0.4),
-// active: rgb(252, 182, 67, 0.3),
-// border: var(--color-popoverCanvas),
-// borderActive: var(--color-popoverBorder),
-// gutter: var(--color-dividerTertiary),
-// gutterActive: var(--color-drawerCanvas),
-// metaColor: var(--color-grey55)
-
 export function compileAnnotations(highlightList) {
   const listWithPosition = []
 
