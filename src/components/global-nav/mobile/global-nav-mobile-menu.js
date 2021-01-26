@@ -384,7 +384,7 @@ GlobalNavMobileMenu.defaultProps = {
       name: 'my-list',
       id: 'global-nav-my-list-link',
       label: <Trans i18nKey="nav:my-list">My List</Trans>,
-      url: 'https://app.getpocket.com?src=navbar',
+      url: 'https://getpocket.com/my-list?src=navbar',
       icon: <ListViewIcon />
     }
   ],

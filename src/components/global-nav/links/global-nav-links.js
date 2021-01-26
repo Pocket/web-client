@@ -150,7 +150,7 @@ GlobalNavLinks.defaultProps = {
       name: 'my-list',
       id: 'my-list',
       label: <Trans i18nKey="nav:my-list">My List</Trans>,
-      url: 'https://app.getpocket.com?src=navbar'
+      url: 'https://getpocket.com/my-list?src=navbar'
     }
   ],
   selectedLink: null,
