@@ -35,8 +35,6 @@ export const DEFAULT_LINKS = [
   {
     name: 'my-list',
     id: 'global-nav-my-list-link',
-    label: <Trans i18nKey="my-list">My List</Trans>,
-    url: 'https://getpocket.com/my-list?src=navbar',
     label: <Trans i18nKey="nav:my-list">My List</Trans>,
     url: 'https://getpocket.com/my-list?src=navbar',
     icon: <ListViewIcon />
