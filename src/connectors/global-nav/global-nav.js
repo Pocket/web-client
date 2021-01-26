@@ -91,7 +91,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       name: 'discover',
       id: 'global-nav-discover-link',
       label: <Trans i18nKey="discover">Discover</Trans>,
-      url: '/discover',
+      url: '/explore',
       icon: <DiscoverIcon />
     },
     {
@@ -182,7 +182,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
 
   return (
     <GlobalNavComponent
-      pocketLogoOutboundUrl={'/'}
+      pocketLogoOutboundUrl={'/my-list'}
       appRootSelector="#__next"
       links={links}
       subLinks={subLinks}
