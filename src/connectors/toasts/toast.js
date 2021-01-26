@@ -162,8 +162,8 @@ export function Toast({ stamp, type, itemCount = 1 }) {
 // t('added-to-favorites_plural', '{{count}} items added to favorites')
 // t('error-adding-to-favorites', 'Error adding to favorites')
 
-// t('removed-from-favorites', '{{count}} item removed to favorites')
-// t('removed-from-favorites_plural', '{{count}} items removed to favorites')
+// t('removed-from-favorites', '{{count}} item removed from favorites')
+// t('removed-from-favorites_plural', '{{count}} items removed from favorites')
 // t('error-removing-from-favorites', 'Error removing from favorites')
 
 // t('shared', '{{count}} item shared')
