@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { devModeToggle } from 'connectors/app/app.state'
 import { toggleOAuth } from 'connectors/user/user.state'
 import { Features } from 'connectors/dev-tools/features'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
 import { css } from 'linaria'
 import { headingSansSerif } from '@pocket/web-ui'
@@ -43,6 +44,7 @@ const devToolStyle = css`
 export function DevTools() {
   const dispatch = useDispatch()
 
+  const showDevTools = localStore.getItem('showPocketDevTools') === 'true'
   const devMode = useSelector((state) => state.app.devMode)
   const useOAuth = useSelector((state) => state.user.useOAuth)
   const handleKeyCombo = () => dispatch(devModeToggle())
@@ -53,7 +55,7 @@ export function DevTools() {
     return () => Mousetrap.unbind('q a') // Clean up
   }, []) //eslint-disable-line
 
-  return devMode ? (
+  return showDevTools && devMode ? (
     <div className={devToolStyle}>
       <h6>Dev Settings</h6>
       <div>

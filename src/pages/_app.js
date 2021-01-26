@@ -28,7 +28,6 @@ import { sortOrderSet } from 'connectors/app/app.state'
 import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
 import { appWithTranslation } from 'common/setup/i18n'
-import { localStore } from 'common/utilities/browser-storage/browser-storage'
 import { initializeSnowplow } from 'common/setup/snowplow'
 
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
@@ -53,7 +52,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   )
   const path = router.pathname
 
-  const showDevTools = localStore.getItem('showPocketDevTools') === 'true'
+  const showDevTools = process.env.SHOW_DEV === 'included'
 
   useEffect(() => {
     // Load any relevant polyfills
