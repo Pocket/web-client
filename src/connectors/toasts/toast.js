@@ -84,31 +84,25 @@ const closeWrapper = css`
   }
 `
 
-const itemCopy = (count) => {
-  if (!count) return null
-  if (count > 1) return `${count} items`
-  return '1 item'
-}
-
 const messages = {
-  [ITEMS_DELETE_SUCCESS]: <Trans>deleted</Trans>,
-  [ITEMS_DELETE_FAILURE]: <Trans>error deleting</Trans>,
-  [ITEMS_ADD_SUCCESS]: <Trans>added</Trans>,
-  [ITEMS_ARCHIVE_SUCCESS]: <Trans>archived</Trans>,
-  [ITEMS_ARCHIVE_FAILURE]: <Trans>error archiving</Trans>,
-  [ITEMS_UNARCHIVE_SUCCESS]: <Trans>added</Trans>,
-  [ITEMS_UNARCHIVE_FAILURE]: <Trans>error adding</Trans>,
-  [ITEMS_FAVORITE_SUCCESS]: <Trans>added to favorites</Trans>,
-  [ITEMS_FAVORITE_FAILURE]: <Trans>error adding to favorites:</Trans>,
-  [ITEMS_UNFAVORITE_SUCCESS]: <Trans>removed from favorites</Trans>,
-  [ITEMS_UNFAVORITE_FAILURE]: <Trans>error removing from favorites:</Trans>,
-  [ITEMS_SHARE_SUCCESS]: <Trans>shared</Trans>,
-  [ITEMS_SHARE_FAILURE]: <Trans>error sharing</Trans>,
-  [ITEMS_TAG_SUCCESS]: <Trans>tagged</Trans>,
-  [ITEMS_TAG_FAILURE]: <Trans>error tagging</Trans>,
-  [ADD_SHARE_SUCCESS]: <Trans>Item added</Trans>,
-  [ADD_SHARE_FAILURE]: <Trans>Error adding item</Trans>,
-  [COPY_ITEM_URL]: <Trans>URL copied</Trans>
+  [ITEMS_DELETE_SUCCESS]: 'deleted',
+  [ITEMS_DELETE_FAILURE]: 'error-deleting',
+  [ITEMS_ADD_SUCCESS]: 'added',
+  [ITEMS_ARCHIVE_SUCCESS]: 'archived',
+  [ITEMS_ARCHIVE_FAILURE]: 'error-archiving',
+  [ITEMS_UNARCHIVE_SUCCESS]: 'added',
+  [ITEMS_UNARCHIVE_FAILURE]: 'error-adding',
+  [ITEMS_FAVORITE_SUCCESS]: 'added-to-favorites',
+  [ITEMS_FAVORITE_FAILURE]: 'error-adding-to-favorites',
+  [ITEMS_UNFAVORITE_SUCCESS]: 'removed-from-favorites',
+  [ITEMS_UNFAVORITE_FAILURE]: 'error-removing-from-favorites',
+  [ITEMS_SHARE_SUCCESS]: 'shared',
+  [ITEMS_SHARE_FAILURE]: 'error-sharing',
+  [ITEMS_TAG_SUCCESS]: 'tagged',
+  [ITEMS_TAG_FAILURE]: 'error-tagging',
+  [ADD_SHARE_SUCCESS]: 'item-added',
+  [ADD_SHARE_FAILURE]: 'error-adding-item',
+  [COPY_ITEM_URL]: 'url-copied'
 }
 
 export function Toast({ stamp, type, itemCount }) {
@@ -138,7 +132,7 @@ export function Toast({ stamp, type, itemCount }) {
       <div className={toastWrapper}>
         <div className={cx(toastBlock, `${type}`)}>
           <div>
-            {itemCopy(itemCount)} {messages[type]}
+            <Trans i18nKey={messages[type]} count={itemCount} />
           </div>
           <button className={cx(buttonReset, closeWrapper)} onClick={unmount}>
             <CrossIcon />

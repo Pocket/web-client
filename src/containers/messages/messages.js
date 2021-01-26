@@ -21,8 +21,12 @@ export default function Messages(props) {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const hydrated = useSelector((state) => state.userMessages.hydrated)
   const notifications = useSelector((state) => state.userMessages.notifications)
-  const unconfirmedShares = useSelector((state) => state.userMessages.unconfirmed_shares)
-  const confirmationStatus = useSelector((state) => state.userMessages.confirmationStatus)
+  const unconfirmedShares = useSelector(
+    (state) => state.userMessages.unconfirmed_shares
+  )
+  const confirmationStatus = useSelector(
+    (state) => state.userMessages.confirmationStatus
+  )
 
   useEffect(() => {
     dispatch(getMessages())
@@ -45,15 +49,15 @@ export default function Messages(props) {
   }
 
   return (
-    <Layout title={`Pocket - ${t("Messages")}`}>
+    <Layout title={`Pocket - ${t('messages:messages', 'Messages')}`}>
       <SideNav isLoggedIn={isLoggedIn} />
 
       {hydrated ? (
         notifications.length || unconfirmedArray.length ? (
           <main className="main">
-            <MessagesHeader title={t("Activity")} />
+            <MessagesHeader title={t('messages:activity', 'Activity')} />
 
-            {notifications.map(notification => (
+            {notifications.map((notification) => (
               <MessageItem
                 key={notification.share_id}
                 {...notification}
@@ -62,7 +66,7 @@ export default function Messages(props) {
               />
             ))}
 
-            {unconfirmedArray.map(unconfirmed => (
+            {unconfirmedArray.map((unconfirmed) => (
               <MessageResend
                 key={unconfirmedShares[unconfirmed].email}
                 email={unconfirmedShares[unconfirmed].email}
@@ -74,7 +78,7 @@ export default function Messages(props) {
         ) : (
           <MessageEmpty />
         )
-      ) : null }
+      ) : null}
       <Toasts />
     </Layout>
   )

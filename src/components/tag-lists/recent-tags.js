@@ -31,7 +31,9 @@ export function RecentTags({ taggedItems }) {
 
   return (
     <div className={recentTagStyle}>
-      <SectionHeader sectionTitle={t("Recently Tagged Items")} />
+      <SectionHeader
+        sectionTitle={t('tags:recently-tagged-items', 'Recently Tagged Items')}
+      />
       <div className="cards">
         {taggedItems.map((itemId) => (
           <SimpleCard key={itemId} id={itemId} />

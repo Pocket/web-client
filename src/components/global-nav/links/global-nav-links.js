@@ -143,13 +143,13 @@ GlobalNavLinks.defaultProps = {
     {
       name: 'discover',
       id: 'discover',
-      label: <Trans i18nKey="discover">Discover</Trans>,
+      label: <Trans i18nKey="nav:discover">Discover</Trans>,
       url: 'https://getpocket.com/explore?src=navbar'
     },
     {
       name: 'my-list',
       id: 'my-list',
-      label: <Trans i18nKey="my-list">My List</Trans>,
+      label: <Trans i18nKey="nav:my-list">My List</Trans>,
       url: 'https://app.getpocket.com?src=navbar'
     }
   ],

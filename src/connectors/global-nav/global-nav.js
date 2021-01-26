@@ -90,14 +90,14 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     {
       name: 'discover',
       id: 'global-nav-discover-link',
-      label: <Trans i18nKey="discover">Discover</Trans>,
+      label: <Trans i18nKey="nav:discover">Discover</Trans>,
       url: '/discover',
       icon: <DiscoverIcon />
     },
     {
       name: 'my-list',
       id: 'global-nav-my-list-link',
-      label: <Trans i18nKey="my-list">My List</Trans>,
+      label: <Trans i18nKey="nav:my-list">My List</Trans>,
       url: '/my-list',
       icon: <ListViewIcon />
     }
@@ -107,37 +107,37 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     {
       name: 'archive',
       icon: <ArchiveIcon />,
-      label: <Trans i18nKey="archive">Archive</Trans>,
+      label: <Trans i18nKey="nav:archive">Archive</Trans>,
       url: '/my-list/archive'
     },
     {
       name: 'favorites',
       icon: <FavoriteIcon />,
-      label: <Trans i18nKey="favorites">Favorites</Trans>,
+      label: <Trans i18nKey="nav:favorites">Favorites</Trans>,
       url: '/my-list/favorites'
     },
     {
       name: 'highlights',
       icon: <HighlightIcon />,
-      label: <Trans i18nKey="highlights">Highlights</Trans>,
+      label: <Trans i18nKey="nav:highlights">Highlights</Trans>,
       url: '/my-list/highlights'
     },
     {
       name: 'articles',
       icon: <ArticleIcon />,
-      label: <Trans i18nKey="articles">Articles</Trans>,
+      label: <Trans i18nKey="nav:articles">Articles</Trans>,
       url: '/my-list/articles'
     },
     {
       name: 'videos',
       icon: <VideoIcon />,
-      label: <Trans i18nKey="videos">Videos</Trans>,
+      label: <Trans i18nKey="nav:videos">Videos</Trans>,
       url: '/my-list/videos'
     },
     {
       name: 'tags',
       icon: <TagIcon />,
-      label: <Trans i18nKey="all-tags">All Tags</Trans>,
+      label: <Trans i18nKey="nav:all-tags">All Tags</Trans>,
       url: '/my-list/tags'
     },
     ...pinnedLinks
@@ -149,9 +149,21 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const showNav = selectedLink === 'my-list' && isLoggedIn
   const tools = showNav
     ? [
-        { name: 'search', label: <Trans i18nKey="search">Search</Trans>, icon: <SearchIcon /> },
-        { name: 'add-item', label: <Trans i18nKey="save">Save a URL</Trans>, icon: <AddIcon /> },
-        { name: 'bulk-edit', label: <Trans i18nKey="bulk-edit">Bulk Edit</Trans>, icon: <EditIcon /> }
+        {
+          name: 'search',
+          label: <Trans i18nKey="nav:search">Search</Trans>,
+          icon: <SearchIcon />
+        },
+        {
+          name: 'add-item',
+          label: <Trans i18nKey="nav:save">Save a URL</Trans>,
+          icon: <AddIcon />
+        },
+        {
+          name: 'bulk-edit',
+          label: <Trans i18nKey="nav:bulk-edit">Bulk Edit</Trans>,
+          icon: <EditIcon />
+        }
       ]
     : []
 

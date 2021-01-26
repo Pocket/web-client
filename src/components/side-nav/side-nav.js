@@ -29,7 +29,8 @@ export const sideNavWrapper = css`
     pointer-events: none;
   }
 
-  .top-nav {}
+  .top-nav {
+  }
   .bottom-nav {
     margin: 0;
     position: sticky;
@@ -47,8 +48,7 @@ export const sideNavWrapper = css`
       pointer-events: none;
       box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
       opacity: 0;
-      transition: all 150ms ease-in-out,
-        opacity 450ms ease-in-out;
+      transition: all 150ms ease-in-out, opacity 450ms ease-in-out;
 
       &:hover {
         color: var(--color-textPrimary);
@@ -149,52 +149,52 @@ export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
         <Link href="/my-list">
           <button className={subActive('unread')} ref={ref}>
             <HomeIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="my-list">My List</Trans>
+            <Trans i18nKey="nav:my-list">My List</Trans>
           </button>
         </Link>
         <Link href="/my-list/archive">
           <button className={subActive('archive')}>
             <ArchiveIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="archive">Archive</Trans>
+            <Trans i18nKey="nav:archive">Archive</Trans>
           </button>
         </Link>
 
         <div className={sideNavHeader}>
-          <Trans i18nKey="filters">Filters</Trans>
+          <Trans i18nKey="nav:filters">Filters</Trans>
         </div>
 
         <Link href="/my-list/favorites">
           <button className={subActive('favorites')}>
             <FavoriteIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="favorites">Favorites</Trans>
+            <Trans i18nKey="nav:favorites">Favorites</Trans>
           </button>
         </Link>
 
         <Link href="/my-list/highlights">
           <button className={subActive('highlights')}>
             <HighlightIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="highlights">Highlights</Trans>
+            <Trans i18nKey="nav:highlights">Highlights</Trans>
           </button>
         </Link>
 
         <Link href="/my-list/articles">
           <button className={subActive('articles')}>
             <ArticleIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="articles">Articles</Trans>
+            <Trans i18nKey="nav:articles">Articles</Trans>
           </button>
         </Link>
 
         <Link href="/my-list/videos">
           <button className={subActive('videos')}>
             <VideoIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="videos">Videos</Trans>
+            <Trans i18nKey="nav:videos">Videos</Trans>
           </button>
         </Link>
         <div className={sideNavHeader}>Tags</div>
         <Link href="/my-list/tags">
           <button className={subActive('tag')}>
             <TagIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="all-tags">All Tags</Trans>
+            <Trans i18nKey="nav:all-tags">All Tags</Trans>
           </button>
         </Link>
         {pinnedTags.length
@@ -210,7 +210,7 @@ export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
       <div className="bottom-nav">
         <button
           onClick={scrollToTop}
-          aria-label={t("Return to top")}
+          aria-label={t('nav:return-to-top', 'Return to top')}
           className={!inView ? 'visible' : 'hidden'}>
           <ChevronUpIcon />
         </button>

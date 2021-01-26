@@ -129,66 +129,93 @@ export const ReaderNav = ({
     <header className={headerStyle}>
       <div className="global-nav-container">
         <nav className={navStyle}>
-          <WithTooltip label={t("Back to My List")}>
+          <WithTooltip label={t('nav:back-to-my-list', 'Back to My List')}>
             <button
               onClick={goBack}
-              aria-label={t("Back to My List")}
+              aria-label={t('nav:back-to-my-list', 'Back to My List')}
               className={cx(buttonClass, 'go-back')}>
               <ArrowLeftIcon />
             </button>
           </WithTooltip>
 
           <div className="nav-actions">
-            <WithTooltip label={sideBarOpen ? t("Close Highlights Menu") : t("Open Highlights Menu")}>
+            <WithTooltip
+              label={
+                sideBarOpen
+                  ? t('nav:close-highlights-menu', 'Close Highlights Menu')
+                  : t('nav:open-highlights-menu', 'Open Highlights Menu')
+              }>
               <button
                 onClick={toggleSidebar}
-                aria-label={sideBarOpen ? t("Close Highlights Menu") : t("Open Highlights Menu")}
+                aria-label={
+                  sideBarOpen
+                    ? t('nav:close-highlights-menu', 'Close Highlights Menu')
+                    : t('nav:open-highlights-menu', 'Open Highlights Menu')
+                }
                 className={buttonClass}>
                 <HighlightIcon />
               </button>
             </WithTooltip>
 
-            <WithTooltip label={t("Tag Article")}>
+            <WithTooltip label={t('nav:tag-article', 'Tag Article')}>
               <button
                 onClick={toggleTagging}
-                aria-label={t("Tag Article")}
+                aria-label={t('nav:tag-article', 'Tag Article')}
                 className={buttonClass}>
                 <TagIcon />
               </button>
             </WithTooltip>
 
             <WithTooltip
-              label={(favorite) ? t("Remove from Favorites") : t("Favorite Article")}>
+              label={
+                favorite
+                  ? t('nav:remove-from-favorites', 'Remove from Favorites')
+                  : t('nav:favorite-article', 'Favorite Article')
+              }>
               <button
                 onClick={toggleFavorite}
-                aria-label={(favorite) ? t("Remove from Favorites") : t("Favorite Article")}
+                aria-label={
+                  favorite
+                    ? t('nav:remove-from-favorites', 'Remove from Favorites')
+                    : t('nav:favorite-article', 'Favorite Article')
+                }
                 className={cx(buttonClass, favorite && 'favorite')}>
                 {favorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
               </button>
             </WithTooltip>
 
-            <WithTooltip label={archive ? t("Re-add to List") : t("Archive Article")}>
+            <WithTooltip
+              label={
+                archive
+                  ? t('nav:re-add-to-list', 'Re-add to List')
+                  : t('nav:archive-article', 'Archive Article')
+              }>
               <button
                 onClick={archiveItem}
-                aria-label={archive ? t("Re-add to List") : t("Archive Article")}
+                aria-label={
+                  archive
+                    ? t('nav:re-add-to-list', 'Re-add to List')
+                    : t('nav:archive-article', 'Archive Article')
+                }
                 className={buttonClass}>
                 {archive ? <AddCircledIcon /> : <ArchiveIcon />}
               </button>
             </WithTooltip>
 
-            <WithTooltip label={t("Delete from Library")}>
+            <WithTooltip
+              label={t('nav:delete-from-library', 'Delete from Library')}>
               <button
                 onClick={toggleDelete}
-                aria-label={t("Delete from Library")}
+                aria-label={t('nav:delete-from-library', 'Delete from Library')}
                 className={buttonClass}>
                 <DeleteIcon />
               </button>
             </WithTooltip>
 
-            <WithTooltip label={t("Share Article")}>
+            <WithTooltip label={t('nav:share-article', 'Share Article')}>
               <button
                 onClick={toggleShare}
-                aria-label={t("Share Article")}
+                aria-label={t('nav:share-article', 'Share Article')}
                 className={buttonClass}>
                 <IosShareIcon />
               </button>

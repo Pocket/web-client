@@ -97,11 +97,7 @@ export class QuoteList extends Component {
       })
 
     if (cards.length === 3 && !this.props.isPremium) {
-      cards.push(
-        <LimitNotice
-          key='notice'
-          onVisible={handleImpression} />
-      )
+      cards.push(<LimitNotice key="notice" onVisible={handleImpression} />)
     }
 
     return cards
@@ -113,7 +109,7 @@ export class QuoteList extends Component {
     return annotations && annotationCount > 0 ? (
       <div className={classNames(listWrapper, { visible })}>
         <h6 className={headingStyles}>
-          <Trans>My Highlights</Trans>
+          <Trans i18nKey="annotations:my-highlights">My Highlights</Trans>
         </h6>
         {this.renderCards()}
       </div>

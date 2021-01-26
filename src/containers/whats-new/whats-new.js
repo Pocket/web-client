@@ -60,11 +60,11 @@ export default function Messages() {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
 
   return (
-    <Layout title={`Pocket - ${t("What’s New")}`}>
+    <Layout title={`Pocket - ${t('whats-new:whats-new', "What's New")}`}>
       <SideNav isLoggedIn={isLoggedIn} />
 
       <main className={classNames('main', whatsNewStyles)}>
-        <WhatsNewHeader title={t("What’s New")} />
+        <WhatsNewHeader title={t('whats-new:whats-new', "What's New")} />
 
         <Jan192021 />
       </main>

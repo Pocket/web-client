@@ -30,12 +30,12 @@ export function ShareRecommend() {
   return (
     <div className={`${recommendStyle} content`}>
       <textarea
-        placeholder={t("Comment")}
+        placeholder={t('share:comment', 'Comment')}
         value={commentValue}
         onChange={(e) => setCommentValue(e.target.value)}
       />
       <Button type="submit" onClick={onClick}>
-        <Trans>Recommend</Trans>
+        <Trans i18nKey="share:recommend">Recommend</Trans>
       </Button>
     </div>
   )

@@ -18,12 +18,21 @@ export const ArchiveModal = () => {
   const batchStatus = useSelector((state) => state.bulkEdit.batchStatus)
 
   const showModal = itemsToArchive.length > 0
-  const archiveCopy = batchStatus === 'archive' ? (
-    <Trans>Are you sure you want to archive these items? This cannot be undone.</Trans>
-  ) : (
-    <Trans>Are you sure you want to add these items? This cannot be undone.</Trans>
-  )
-  const archiveTitle = batchStatus === 'archive' ? t('Archive Items') : t('Add Items')
+  const archiveCopy =
+    batchStatus === 'archive' ? (
+      <Trans i18nKey="confirm:archive-items-copy">
+        Are you sure you want to archive these items? This cannot be undone.
+      </Trans>
+    ) : (
+      <Trans i18nKey="confirm:add-items-copy">
+        Are you sure you want to add these items? This cannot be undone.
+      </Trans>
+    )
+
+  const archiveTitle =
+    batchStatus === 'archive'
+      ? t('confirm:archive-items', 'Archive Items')
+      : t('confirm:add-items', 'Add Items')
   const confirmArchive = () => dispatch(itemsArchiveConfirm())
   const cancelArchive = () => dispatch(itemsArchiveCancel())
 

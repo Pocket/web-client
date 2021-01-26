@@ -18,13 +18,20 @@ export const FavoriteModal = () => {
   const batchStatus = useSelector((state) => state.bulkEdit.batchStatus)
 
   const showModal = itemsToFavorite.length > 0
-  const favoriteCopy = batchStatus === 'favorite' ? (
-    <Trans>Are you sure you want to un-favorite these items? This cannot be undone.</Trans>
-  ) : (
-    <Trans>Are you sure you want to favorite these items? This cannot be undone.</Trans>
-  )
+  const favoriteCopy =
+    batchStatus === 'favorite' ? (
+      <Trans i18nKey="confirm:un-favorite-copy">
+        Are you sure you want to un-favorite these items? This cannot be undone.
+      </Trans>
+    ) : (
+      <Trans i18nKey="confirm:favorite-copy">
+        Are you sure you want to favorite these items? This cannot be undone.
+      </Trans>
+    )
   const favoriteTitle =
-    batchStatus === 'favorite' ? t('Un-Favorite Items') : t('Favorite Items')
+    batchStatus === 'favorite'
+      ? t('confirm:un-favorite-items', 'Un-Favorite Items')
+      : t('confirm:favorite-items', 'Favorite Items')
   const confirmFavorite = () => dispatch(itemsFavoriteConfirm())
   const cancelFavorite = () => dispatch(itemsFavoriteCancel())
 

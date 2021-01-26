@@ -6,7 +6,9 @@ export const BatchProcessing = ({ batchTotal, batchCount }) => {
   return (
     <ModalBody>
       <p>
-        <em><Trans>... Processing Items</Trans></em>
+        <em>
+          <Trans i18nKey="confirm:processing">... Processing Items</Trans>
+        </em>
       </p>
       <ProgressPill total={batchTotal} current={batchTotal - batchCount} />
     </ModalBody>

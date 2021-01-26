@@ -69,7 +69,7 @@ const menuWrapper = css`
   &.alignRight {
     left: -160px;
   }
-  &.flipDirection  {
+  &.flipDirection {
     bottom: -24px;
     top: unset;
   }
@@ -88,9 +88,12 @@ export const AnnotationMenu = ({
 }) => {
   const { t } = useTranslation()
 
-  const screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+  const screenHeight = Math.max(
+    document.documentElement.clientHeight,
+    window.innerHeight || 0
+  )
   const [menuOpen, setMenuOpen] = useState(false)
-  const [flipDirection, setFlipDirection] =  useState(false)
+  const [flipDirection, setFlipDirection] = useState(false)
   const selfRef = useRef(null)
   let timer
 
@@ -105,10 +108,9 @@ export const AnnotationMenu = ({
   }
 
   const checkDirection = () => {
-    if (selfRef.current.getBoundingClientRect().top > screenHeight/2) {
+    if (selfRef.current.getBoundingClientRect().top > screenHeight / 2) {
       setFlipDirection(true)
-    }
-    else {
+    } else {
       setFlipDirection(false)
     }
   }
@@ -132,17 +134,26 @@ export const AnnotationMenu = ({
     <div className={inlineMenuStyles} style={{ top, left }}>
       <div className={relativeWrapper}>
         <button
-          aria-label={t("Open Highlights Menu")}
+          aria-label={t(
+            'annotations:open-highlights-menu',
+            'Open Highlights Menu'
+          )}
           ref={selfRef}
           onClick={toggleMenu}
-          className={classNames(buttonReset, 'inline-button', { visible, floating })}>
+          className={classNames(buttonReset, 'inline-button', {
+            visible,
+            floating
+          })}>
           <OverflowMenuIcon />
         </button>
         {menuOpen ? (
           <ul
             onMouseEnter={clearTimer}
             onMouseLeave={startTimer}
-            className={classNames(overlayBase, menuWrapper, { alignRight, flipDirection })}>
+            className={classNames(overlayBase, menuWrapper, {
+              alignRight,
+              flipDirection
+            })}>
             <PopupMenuGroup>
               <PopupMenuItem onClick={handleDelete} icon={<DeleteIcon />}>
                 <Trans i18nKey="delete">Delete</Trans>

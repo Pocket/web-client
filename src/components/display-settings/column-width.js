@@ -38,16 +38,28 @@ export const ColumnWidthSettings = ({
         <StepperButton
           active={minusActive()}
           onClick={handleDecrease}
-          aria-label={t("Decrease Column Width")}
-          data-tooltip={t("Decrease Column Width")}>
+          aria-label={t(
+            'settings:decrease-column-width',
+            'Decrease column width'
+          )}
+          data-tooltip={t(
+            'settings:decrease-column-width',
+            'Decrease column width'
+          )}>
           <RemoveIcon />
         </StepperButton>
         <StepperRange current={current} range={range} onChange={setCurrent} />
         <StepperButton
           active={plusActive()}
           onClick={handleIncrease}
-          aria-label={t("Increase Column Width")}
-          data-tooltip={t("Increase Column Width")}>
+          aria-label={t(
+            'settings:increase-column-width',
+            'Increase column width'
+          )}
+          data-tooltip={t(
+            'settings:increase-column-width',
+            'Increase column width'
+          )}>
           <AddIcon />
         </StepperButton>
       </StepperWrapper>

@@ -50,10 +50,10 @@ export const ShareModal = () => {
 
   return (
     <Modal
-      title={t("Share Item")}
+      title={t('share:share-item', 'Share Item')}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t("Share Item")}
+      screenReaderLabel={t('share:share-item', 'Share Item')}
       handleClose={cancelShare}>
       <ModalBody>
         <DisplayCard id={itemId} />
@@ -61,7 +61,9 @@ export const ShareModal = () => {
       </ModalBody>
       <ModalTabs>
         <SelectShareType active={active} activate={activate} />
-        {active === 'social' ? <ShareSocial item={item} quote={quote} position={position} /> : null}
+        {active === 'social' ? (
+          <ShareSocial item={item} quote={quote} position={position} />
+        ) : null}
         {active === 'recommend' ? <ShareRecommend item={item} /> : null}
         {active === 'friend' ? <ShareToFriend item={item} /> : null}
       </ModalTabs>

@@ -26,7 +26,7 @@ const sideBarWrapper = css`
       opacity: 1;
       transform: translateX(0);
     }
-    .button-rail  {
+    .button-rail {
       opacity: 1;
     }
   }
@@ -34,7 +34,7 @@ const sideBarWrapper = css`
     .rail-wrapper {
       opacity: 1;
     }
-    .button-rail  {
+    .button-rail {
       opacity: 1;
     }
   }
@@ -114,7 +114,11 @@ export const Sidebar = ({
           <div className={verticallyCentered}>
             <button
               onClick={toggleSidebar}
-              aria-label={sideBarOpen ? t("Close Highlights Menu") : t("Open Highlights Menu")}
+              aria-label={
+                sideBarOpen
+                  ? t('nav:close-highlights-menu', 'Close Highlights Menu')
+                  : t('nav:open-highlights-menu', 'Open Highlights Menu')
+              }
               className={buttonReset}>
               {sideBarOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </button>

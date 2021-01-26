@@ -134,7 +134,11 @@ export const ItemHeader = ({
       <h1 className={articleTitle}>{title}</h1>
 
       <div className={articleInfo}>
-        {authorList || publisher ? <div className={byWrapper}><Trans>By</Trans></div> : null}{' '}
+        {authorList || publisher ? (
+          <div className={byWrapper}>
+            <Trans i18nKey="reader:by">By</Trans>
+          </div>
+        ) : null}{' '}
         {/*"reader.header.by"*/}
         {authorList ? <div className={authorWrapper}>{authorList}</div> : null}
         {publisher ? <div className={domainWrapper}>{publisher}</div> : null}
@@ -147,7 +151,7 @@ export const ItemHeader = ({
           className={viewOriginal}
           href={open_url}
           target="_blank">
-          <Trans>View Original</Trans>
+          <Trans i18nKey="reader:view-original">View Original</Trans>
         </a>
         {tags && (
           <div className={classNames(tagsWrapper, pillboxStyle)}>

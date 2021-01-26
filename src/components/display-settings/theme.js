@@ -25,15 +25,15 @@ const themeRadioButtons = css`
 const Themes = [
   {
     id: 'light',
-    label: <Trans i18nKey="light">Light</Trans>
+    label: <Trans i18nKey="settings:theme-light">Light</Trans>
   },
   {
     id: 'dark',
-    label: <Trans i18nKey="dark">Dark</Trans>
+    label: <Trans i18nKey="settings:theme-dark">Dark</Trans>
   },
   {
     id: 'sepia',
-    label: <Trans i18nKey="sepia">Sepia</Trans>
+    label: <Trans i18nKey="settings:theme-sepia">Sepia</Trans>
   }
 ]
 

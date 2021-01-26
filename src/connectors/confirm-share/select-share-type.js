@@ -36,15 +36,15 @@ export function SelectShareType({ active, activate }) {
   return (
     <div className="tabs">
       <ShareTypeTab active={active} activate={activate} tab="social">
-        <Trans>Social Media</Trans>
+        <Trans i18nKey="share:social-media">Social Media</Trans>
       </ShareTypeTab>
 
       <ShareTypeTab active={active} activate={activate} tab="recommend">
-        <Trans>Recommend</Trans>
+        <Trans i18nKey="share:recommend">Recommend</Trans>
       </ShareTypeTab>
 
       <ShareTypeTab active={active} activate={activate} tab="friend">
-        <Trans>Send to Friend</Trans>
+        <Trans i18nKey="share:send-to-friend">Send to Friend</Trans>
       </ShareTypeTab>
     </div>
   )

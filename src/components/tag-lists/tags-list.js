@@ -33,13 +33,13 @@ export function TagList({ userTags, value, valueChange }) {
 
   return (
     <div className={allTagStyle}>
-      <SectionHeader sectionTitle={t("All Tags")} />
+      <SectionHeader sectionTitle={t('tags:all-tags', 'All Tags')} />
       <div className="searchBlock">
         <input
           value={value}
           onChange={valueChange}
           type="text"
-          placeholder={t("Search for your tags")}
+          placeholder={t('tags:search-for-your-tags', 'Search for your tags')}
         />
       </div>
       <div className={pillboxStyle}>
@@ -47,7 +47,9 @@ export function TagList({ userTags, value, valueChange }) {
           <li>
             <Link href={'/my-list/tags/_untagged_'}>
               <a>
-                <Pill><Trans>un-tagged</Trans></Pill>
+                <Pill>
+                  <Trans i18nKey="tags:un-tagged">un-tagged</Trans>
+                </Pill>
               </a>
             </Link>
           </li>

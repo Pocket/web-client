@@ -24,24 +24,26 @@ export const DeleteModal = () => {
 
   return (
     <Modal
-      title={t("Delete Item")}
+      title={t('confirm:delete-item', 'Delete Item')}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t("Delete Item")}
+      screenReaderLabel={t('confirm:delete-item', 'Delete Item')}
       handleClose={cancelDelete}>
       <ModalBody>
         {batchStart ? (
           <BatchProcessing batchTotal={batchTotal} batchCount={batchCount} />
         ) : (
           <p>
-            <Trans>Are you sure you want to delete this item? This cannot be undone.</Trans>
+            <Trans i18nKey="confirm:delete-item-copy">
+              Are you sure you want to delete this item? This cannot be undone.
+            </Trans>
           </p>
         )}
       </ModalBody>
       {batchStart ? null : (
         <ModalFooter>
           <Button type="submit" onClick={confirmDelete}>
-            <Trans>Delete</Trans>
+            <Trans i18nKey="confirm:delete">Delete</Trans>
           </Button>
         </ModalFooter>
       )}

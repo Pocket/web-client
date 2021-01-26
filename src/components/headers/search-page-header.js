@@ -43,7 +43,8 @@ export const SearchPageHeader = ({ filter, total, query }) => {
   return query && total ? (
     <header className={searchPageHeaderStyle}>
       <h1 className="pageTitle">
-        <em>"{query}"</em> — {total} <Trans>Search Results</Trans>
+        <em>"{query}"</em> — {total}{' '}
+        <Trans i18nKey="search:search-results">Search Results</Trans>
       </h1>
       <FilterMenu subset="search" query={query} filter={filter} />
     </header>
