@@ -25,21 +25,21 @@ const baseProps = {
       name: 'my-list',
       id: 'global-nav-my-list-link',
       label: 'My List',
-      url: 'https://app.getpocket.com',
+      url: 'https://getpocket.com/my-list',
       icon: <ListViewIcon />
     },
     {
       name: 'disabled-link',
       id: 'disabled-link',
       label: 'Disabled Link',
-      url: 'https://app.getpocket.com',
+      url: 'https://getpocket.com/my-list',
       isDisabled: true
     },
     {
       name: 'no-icon',
       id: 'no-icon',
       label: 'No Icon',
-      url: 'https://app.getpocket.com'
+      url: 'https://getpocket.com/my-list'
     }
   ]
 }
