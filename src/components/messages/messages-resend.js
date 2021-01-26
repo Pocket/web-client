@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 import dayjs from 'dayjs'
 import { domainForUrl } from 'common/utilities'
 import Avatar from 'components/avatar/avatar'
@@ -14,27 +14,38 @@ export const MessageResend = ({ email, resendAction, status }) => {
   if (status === 'failed') {
     return (
       <div className={messageWrapper}>
-        <p><Trans>Oops! Something went wrong. Please try again later.</Trans></p>
+        <p>
+          <Trans i18nKey="messages:oops">
+            Oops! Something went wrong. Please try again later.
+          </Trans>
+        </p>
       </div>
     )
-  }
-  else if (status === 'success') {
+  } else if (status === 'success') {
     return (
       <div className={messageWrapper}>
-        <p><Trans>Confirmation sent! Please check your email.</Trans></p>
+        <p>
+          <Trans i18nKey="messages:confirmation">
+            Confirmation sent! Please check your email.
+          </Trans>
+        </p>
       </div>
     )
   }
   return (
     <div className={messageWrapper}>
       <p>
-        <Trans>A friend has shared something with you in Pocket. To view
-        it, please confirm your email:</Trans>{' '}
+        <Trans i18nKey="messages:a-friend-shared">
+          A friend has shared something with you in Pocket. To view it, please
+          confirm your email:
+        </Trans>{' '}
         {email}
       </p>
 
       <Button onClick={resendAction}>
-        <Trans>Resend Confirmation</Trans>
+        <Trans i18nKey="messages:resend-confirmation">
+          Resend Confirmation
+        </Trans>
       </Button>
     </div>
   )

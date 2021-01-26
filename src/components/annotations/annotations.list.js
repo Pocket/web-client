@@ -5,7 +5,7 @@ import { AnnotationMenu } from './annotations.menu'
 import { cardStyles, Quote, CreatedDate } from './annotations.card'
 import { EmptyList } from './annotations.empty-list'
 import { LimitNotice } from './annotations.limit'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const listWrapper = css`
   height: 100%;
@@ -97,11 +97,7 @@ export class QuoteList extends Component {
       })
 
     if (cards.length === 3 && !this.props.isPremium) {
-      cards.push(
-        <LimitNotice
-          key='notice'
-          onVisible={handleImpression} />
-      )
+      cards.push(<LimitNotice key="notice" onVisible={handleImpression} />)
     }
 
     return cards
@@ -113,7 +109,7 @@ export class QuoteList extends Component {
     return annotations && annotationCount > 0 ? (
       <div className={classNames(listWrapper, { visible })}>
         <h6 className={headingStyles}>
-          <Trans>My Highlights</Trans>
+          <Trans i18nKey="annotations:my-highlights">My Highlights</Trans>
         </h6>
         {this.renderCards()}
       </div>

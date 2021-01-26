@@ -3,7 +3,7 @@ import { css, cx } from 'linaria'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { urlWithPocketRedirect } from 'common/utilities'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'common/setup/i18n'
 
 import { CardMedia } from 'components/media/card-media'
 import { ItemActions } from './item-actions'
@@ -179,7 +179,6 @@ const card = css`
  */
 export const Card = ({
   item,
-  type,
   actions,
   bulkEdit,
   bulkSelected,
@@ -222,7 +221,10 @@ export const Card = ({
 
   const archiveAction = status === '0' ? itemArchive : itemUnArchive
   const CorrectArchiveIcon = status === '0' ? ArchiveIcon : AddIcon
-  const archiveLabel = status === '0' ? t('Archive') : t('Add')
+  const archiveLabel =
+    status === '0'
+      ? t('item-action:archive', 'Archive')
+      : t('item-action:add', 'Add')
 
   const isFavorite = favorite === '1'
   const favoriteAction = isFavorite ? itemUnFavorite : itemFavorite
@@ -283,7 +285,9 @@ export const Card = ({
                 menuItems={[
                   {
                     key: `favorite-${id}`,
-                    label: isFavorite ? t('Unfavorite') : t('Favorite'),
+                    label: isFavorite
+                      ? t('item-action:unfavorite', 'Un-Favorite')
+                      : t('item-action:favorite', 'Favorite'),
                     icon: <FavoriteIcon />,
                     onClick: favoriteAction,
                     active: isFavorite
@@ -296,19 +300,19 @@ export const Card = ({
                   },
                   {
                     key: `tag-${id}`,
-                    label: t('Tag'),
+                    label: t('item-action:tag', 'Tag'),
                     icon: <TagIcon />,
                     onClick: itemTag
                   },
                   {
                     key: `delete-${id}`,
-                    label: t('Delete'),
+                    label: t('item-action:delete', 'Delete'),
                     icon: <DeleteIcon />,
                     onClick: itemDelete
                   },
                   {
                     key: `share-${id}`,
-                    label: t('Share'),
+                    label: t('item-action:share', 'Share'),
                     icon: <IosShareIcon />,
                     onClick: itemShare
                   }

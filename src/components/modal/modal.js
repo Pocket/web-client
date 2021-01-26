@@ -20,7 +20,7 @@ import { ModalHeader } from './modal-header'
 import { ModalBody } from './modal-body'
 import { ModalFooter } from './modal-footer'
 import { ModalTabs } from './modal-tabs'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation, Trans } from 'common/setup/i18n'
 
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 
@@ -269,11 +269,11 @@ const CloseButton = ({ handleClose }) => {
   return (
     <button
       className={closeButtonStyles}
-      aria-label={t("Close")}
+      aria-label={t('common:close-label', 'Close')}
       onClick={handleClose}>
       <CrossIcon />
       <span className="visually-hidden">
-        <Trans>Close</Trans>
+        <Trans i18nKey="common:close">Close</Trans>
       </span>
     </button>
   )

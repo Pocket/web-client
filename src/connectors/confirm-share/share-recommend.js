@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Button } from '@pocket/web-ui'
 import { css } from 'linaria'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 import { itemsRecommendConfirm } from 'connectors/items-by-id/my-list/items.share'
 
@@ -30,12 +30,12 @@ export function ShareRecommend() {
   return (
     <div className={`${recommendStyle} content`}>
       <textarea
-        placeholder={t("Comment")}
+        placeholder={t('share:comment', 'Comment')}
         value={commentValue}
         onChange={(e) => setCommentValue(e.target.value)}
       />
       <Button type="submit" onClick={onClick}>
-        <Trans>Recommend</Trans>
+        <Trans i18nKey="share:recommend">Recommend</Trans>
       </Button>
     </div>
   )

@@ -12,7 +12,7 @@ import { FavoriteFilledIcon } from '@pocket/web-ui'
 import { TagIcon } from '@pocket/web-ui'
 import { breakpointMediumHandset } from '@pocket/web-ui'
 
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 const bulkStyle = css`
   width: 100%;
@@ -148,7 +148,9 @@ const CloseButton = ({ onClick }) => {
   return (
     <button className={`${buttonStyle} cancel-button`} onClick={onClick}>
       <CrossIcon className={navIconStyle} />
-      <CloseLabel><Trans>Cancel</Trans></CloseLabel>
+      <CloseLabel>
+        <Trans i18nKey="nav:cancel">Cancel</Trans>
+      </CloseLabel>
     </button>
   )
 }
@@ -176,20 +178,28 @@ function GlobalNavBulkEdit({
   const shouldFavorite = batchFavorite === 'favorite'
   const shouldArchive = batchStatus === 'archive'
   const clearAction = bulkItemsCount >= 1 ? clearBulkItems : onClose
-  const clearCopy = bulkItemsCount >= 1 ? t('Clear') : t('Cancel')
+  const clearCopy =
+    bulkItemsCount >= 1
+      ? t('nav:clear-copy', 'Clear')
+      : t('nav:cancel-copy', 'Cancel')
 
   return (
     <div className={bulkStyle}>
       <div className={bulkContainerStyle}>
         <div className="bulk-container">
           <div className="bulk-actions">
-            <WithTooltip label={t("Tag")}>
+            <WithTooltip label={t('nav:tag', 'Tag')}>
               <button className={buttonStyle} onClick={tagAction}>
                 <TagIcon className={bulkIconActions} />
               </button>
             </WithTooltip>
 
-            <WithTooltip label={shouldFavorite ? t('Favorite') : t('Unfavorite')}>
+            <WithTooltip
+              label={
+                shouldFavorite
+                  ? t('nav:favorite', 'Favorite')
+                  : t('nav:unfavorite', 'Unfavorite')
+              }>
               <button className={buttonStyle} onClick={favoriteAction}>
                 {shouldFavorite ? (
                   <FavoriteIcon className={bulkIconActions} />
@@ -199,7 +209,12 @@ function GlobalNavBulkEdit({
               </button>
             </WithTooltip>
 
-            <WithTooltip label={shouldArchive ? t('Archive') : t('Add')}>
+            <WithTooltip
+              label={
+                shouldArchive
+                  ? t('nav:archive-tooltip', 'Archive')
+                  : t('nav:add-tooltip', 'Add')
+              }>
               <button className={buttonStyle} onClick={archiveAction}>
                 {shouldArchive ? (
                   <ArchiveIcon className={bulkIconActions} />
@@ -209,16 +224,18 @@ function GlobalNavBulkEdit({
               </button>
             </WithTooltip>
 
-            <WithTooltip label={t("Delete")}>
+            <WithTooltip label={t('nav:delete', 'Delete')}>
               <button className={buttonStyle} onClick={deleteAction}>
                 <DeleteIcon className={bulkIconActions} />
               </button>
             </WithTooltip>
 
             <div className="labelText">
-              {bulkItemsCount
-                ? `${bulkItemsCount} item${bulkItemsCount > 1 ? 's' : ''}` // needs additional translation help
-                : t('Select items')}
+              {bulkItemsCount ? (
+                `${bulkItemsCount} item${bulkItemsCount > 1 ? 's' : ''}` // needs additional translation help
+              ) : (
+                <Trans i18nKey="nav:select-items">Select Items</Trans>
+              )}
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { itemsFavoriteConfirm } from 'connectors/items-by-id/my-list/items.favorite'
 import { itemsFavoriteCancel } from 'connectors/items-by-id/my-list/items.favorite'
 import { BatchProcessing } from 'components/processing/processing'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation, Trans } from 'common/setup/i18n'
 
 export const FavoriteModal = () => {
   const dispatch = useDispatch()
@@ -18,13 +18,20 @@ export const FavoriteModal = () => {
   const batchStatus = useSelector((state) => state.bulkEdit.batchStatus)
 
   const showModal = itemsToFavorite.length > 0
-  const favoriteCopy = batchStatus === 'favorite' ? (
-    <Trans>Are you sure you want to un-favorite these items? This cannot be undone.</Trans>
-  ) : (
-    <Trans>Are you sure you want to favorite these items? This cannot be undone.</Trans>
-  )
+  const favoriteCopy =
+    batchStatus === 'favorite' ? (
+      <Trans i18nKey="confirm:un-favorite-copy">
+        Are you sure you want to un-favorite these items? This cannot be undone.
+      </Trans>
+    ) : (
+      <Trans i18nKey="confirm:favorite-copy">
+        Are you sure you want to favorite these items? This cannot be undone.
+      </Trans>
+    )
   const favoriteTitle =
-    batchStatus === 'favorite' ? t('Un-Favorite Items') : t('Favorite Items')
+    batchStatus === 'favorite'
+      ? t('confirm:un-favorite-items', 'Un-Favorite Items')
+      : t('confirm:favorite-items', 'Favorite Items')
   const confirmFavorite = () => dispatch(itemsFavoriteConfirm())
   const cancelFavorite = () => dispatch(itemsFavoriteCancel())
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { PopupMenuGroup } from '@pocket/web-ui'
 import classnames from 'classnames'
 import { css } from 'linaria'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const COLOR_MODE_CACHE_KEY = 'pocket-color-mode'
 
@@ -25,15 +25,15 @@ const themeRadioButtons = css`
 const Themes = [
   {
     id: 'light',
-    label: <Trans i18nKey="light">Light</Trans>
+    label: <Trans i18nKey="settings:theme-light">Light</Trans>
   },
   {
     id: 'dark',
-    label: <Trans i18nKey="dark">Dark</Trans>
+    label: <Trans i18nKey="settings:theme-dark">Dark</Trans>
   },
   {
     id: 'sepia',
-    label: <Trans i18nKey="sepia">Sepia</Trans>
+    label: <Trans i18nKey="settings:theme-sepia">Sepia</Trans>
   }
 ]
 

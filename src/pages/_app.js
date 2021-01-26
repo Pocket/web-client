@@ -1,5 +1,6 @@
 import '@pocket/web-ui/lib/pocket-web-ui.css'
 import { ViewportProvider } from '@pocket/web-ui'
+import App from 'next/app'
 
 import { useEffect } from 'react'
 // import { END } from 'redux-saga'
@@ -26,8 +27,7 @@ import { sortOrderSet } from 'connectors/app/app.state'
  --------------------------------------------------------------- */
 import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
-// import { appWithTranslation } from 'common/setup/i18n'
-import { localStore } from 'common/utilities/browser-storage/browser-storage'
+import { appWithTranslation } from 'common/setup/i18n'
 import { initializeSnowplow } from 'common/setup/snowplow'
 
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
@@ -35,7 +35,6 @@ import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 import ReactGA from 'react-ga'
 
 import { DevTools } from 'connectors/dev-tools/dev-tools'
-import ComingSoon from 'containers/coming-soon/coming-soon'
 
 /** Set up Sentry so we may catch errors
  --------------------------------------------------------------- */
@@ -44,9 +43,6 @@ Sentry.init(sentrySettings)
 /** App
  --------------------------------------------------------------- */
 function PocketWebClient({ Component, pageProps, err }) {
-  const showMyList = localStore.getItem('showPocketApp') === 'true'
-  const ToRender = showMyList ? Component : ComingSoon
-
   // Initialize app once per page load
   const dispatch = useDispatch()
   const router = useRouter()
@@ -236,14 +232,18 @@ function PocketWebClient({ Component, pageProps, err }) {
   return (
     <ViewportProvider>
       {showDevTools ? <DevTools /> : null}
-      <ToRender {...pageProps} err={err} />
+      <Component {...pageProps} err={err} />
     </ViewportProvider>
   )
 }
+
+PocketWebClient.getInitialProps = async (appContext) => ({
+  ...(await App.getInitialProps(appContext))
+})
 
 /**
  * Export the app.  This wraps the app with a few things:
  * 1. Redux: for managing state
  * 2. ReduxSaga: for managing async state requirements
  */
-export default wrapper.withRedux(PocketWebClient)
+export default wrapper.withRedux(appWithTranslation(PocketWebClient))

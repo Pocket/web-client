@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Button } from '@pocket/web-ui'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation, Trans } from 'common/setup/i18n'
 
 import { itemsTagConfirm } from 'connectors/items-by-id/my-list/items.tag'
 import { itemsTagCancel } from 'connectors/items-by-id/my-list/items.tag'
@@ -102,15 +102,20 @@ export function TaggingModal() {
     if (!fresh) confirmTags(currentTags)
   }
 
-  const title = currentTags?.length ? t('Edit Tags') : t('Add Tags')
+  const title = currentTags?.length
+    ? t('confirm:edit-tags', 'Edit Tags')
+    : t('confirm:add-tags', 'Add Tags')
 
-  const handleImpression = (identifier) => dispatch(trackImpression(
-    IMPRESSION_COMPONENT_UI,
-    IMPRESSION_REQUIREMENT_VIEWABLE,
-    UI_COMPONENT_BUTTON,
-    0,
-    identifier
-  ))
+  const handleImpression = (identifier) =>
+    dispatch(
+      trackImpression(
+        IMPRESSION_COMPONENT_UI,
+        IMPRESSION_REQUIREMENT_VIEWABLE,
+        UI_COMPONENT_BUTTON,
+        0,
+        identifier
+      )
+    )
 
   return (
     <Modal
@@ -167,11 +172,8 @@ export function TaggingModal() {
       </ModalBody>
       <ModalFooter isSticky={false}>
         <div className="actions">
-          <Button
-            disabled={fresh}
-            type="submit"
-            onClick={saveTags}>
-            <Trans>Save</Trans>
+          <Button disabled={fresh} type="submit" onClick={saveTags}>
+            <Trans i18nKey="confirm:save">Save</Trans>
           </Button>
         </div>
       </ModalFooter>

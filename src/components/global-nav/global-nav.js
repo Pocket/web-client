@@ -4,7 +4,7 @@ import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 import { breakpointSmallTablet } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
@@ -28,7 +28,7 @@ export const DEFAULT_LINKS = [
   {
     name: 'discover',
     id: 'global-nav-discover-link',
-    label: <Trans i18nKey="discover">Discover</Trans>,
+    label: <Trans i18nKey="nav:discover">Discover</Trans>,
     url: 'https://getpocket.com/explore?src=navbar',
     icon: <DiscoverIcon />
   },
@@ -36,6 +36,8 @@ export const DEFAULT_LINKS = [
     name: 'my-list',
     id: 'global-nav-my-list-link',
     label: <Trans i18nKey="my-list">My List</Trans>,
+    url: 'https://getpocket.com/my-list?src=navbar',
+    label: <Trans i18nKey="nav:my-list">My List</Trans>,
     url: 'https://getpocket.com/my-list?src=navbar',
     icon: <ListViewIcon />
   }
@@ -285,7 +287,9 @@ const GlobalNav = ({
             children
           ) : (
             <>
-              <div className={linksStyle} aria-label={t("Page navigation")}>
+              <div
+                className={linksStyle}
+                aria-label={t('nav:page-navigation', 'Page navigation')}>
                 <GlobalNavLinks
                   selectedLink={selectedLink}
                   className="links"

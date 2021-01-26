@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import isEmail from 'validator/lib/isEmail'
 import { Button } from '@pocket/web-ui'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 import { css } from 'linaria'
 import { TagList } from 'components/tagging/tag.list'
@@ -142,7 +142,7 @@ export function ShareToFriend() {
       </div>
       <div className={sendToFriendStyle}>
         <textarea
-          placeholder={t("Comment")}
+          placeholder={t('share:comment', 'Comment')}
           value={commentValue}
           onChange={(e) => setCommentValue(e.target.value)}
         />
@@ -150,7 +150,7 @@ export function ShareToFriend() {
           type="submit"
           disabled={currentFriends.length === 0}
           onClick={sendConfirm}>
-          <Trans>Send to Friend(s)</Trans>
+          <Trans i18nKey="share:send-to-friends">Send to Friend(s)</Trans>
         </Button>
       </div>
     </div>

@@ -6,7 +6,7 @@ import { screenMediumHandset } from '@pocket/web-ui'
 import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 const searchStyle = css`
   width: 100%;
@@ -123,7 +123,9 @@ const CloseButton = ({ onClick }) => {
   return (
     <button className={closeButtonStyle} onClick={onClick}>
       <CrossIcon className={closeIconStyle} />
-      <CloseLabel><Trans>Cancel</Trans></CloseLabel>
+      <CloseLabel>
+        <Trans i18nKey="nav:cancel">Cancel</Trans>
+      </CloseLabel>
     </button>
   )
 }
@@ -163,7 +165,8 @@ const GlobalNavSearch = ({
     e.stopPropagation()
     e.preventDefault()
 
-    if (!searchTerm) return updateInputError(t('Please enter a search term'))
+    if (!searchTerm)
+      return updateInputError(t('nav:please-enter-a-search-term'))
 
     onSubmit(searchTerm)
   }
@@ -187,12 +190,12 @@ const GlobalNavSearch = ({
             'search-input',
             { 'has-value': !!searchTerm }
           ])}
-          aria-label={t("Search your collection")}
+          aria-label={t('nav:search-your-collection', 'Search your collection')}
           value={searchTerm}
           onChange={handleInputChange}
           onFocus={onFocus}
           onBlur={onBlur}
-          placeholder={isMobile ? mobilePlaceholder : placeholder}
+          placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
           {...testIdAttribute('search-input')}
         />
         {inputError ? (
@@ -203,10 +206,8 @@ const GlobalNavSearch = ({
           </div>
         ) : null}
       </div>
-      <button
-        className="search-button"
-        {...testIdAttribute('search-button')}>
-        <Trans>Search</Trans>
+      <button className="search-button" {...testIdAttribute('search-button')}>
+        <Trans i18nKey="nav:search">Search</Trans>
       </button>
       {onClose ? (
         <CloseButton onClick={onClose} {...testIdAttribute('search-close')} />
@@ -255,8 +256,12 @@ GlobalNavSearch.defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
   value: '',
-  placeholder: <Trans>Search for topics and interests</Trans>,
-  mobilePlaceholder: <Trans>Search for topics</Trans>
+  placeholder: 'nav:search-for-topics-and-interests', // default localized key
+  mobilePlaceholder: 'nav:search-for-topics' // default localized key
 }
+
+// This is so the localization parser can pick up these runtime variables
+// t('nav:search-for-topics-and-interests', 'Search for topics and interests')
+// t('nav:search-for-topics', 'Search for topics')
 
 export default GlobalNavSearch

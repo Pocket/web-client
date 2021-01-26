@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
 import { HighlightIcon, IosShareIcon } from '@pocket/web-ui'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const popupContainer = css`
   position: absolute;
@@ -111,24 +111,24 @@ class SelectionPopoverClass extends Component {
             hideArrow: this.state.share
           })}
           ref={this.containerRef}>
-            <button
-              className={classNames(buttonReset, buttonWrapper)}
-              // aria-label={'shareExcerpt.highlight.aria'}
-              onClick={this.onHighlight}>
-              <span className={iconWrapper}>
-                <HighlightIcon />
-              </span>
-              <Trans>Highlight</Trans>
-            </button>
-            <button
-              className={classNames(buttonReset, buttonWrapper)}
-              // aria-label={translate('shareExcerpt.highlight.aria')}
-              onClick={this.onShare}>
-              <span className={iconWrapper}>
-                <IosShareIcon />
-              </span>
-              <Trans>Share</Trans>
-            </button>
+          <button
+            className={classNames(buttonReset, buttonWrapper)}
+            // aria-label={'shareExcerpt.highlight.aria'}
+            onClick={this.onHighlight}>
+            <span className={iconWrapper}>
+              <HighlightIcon />
+            </span>
+            <Trans i18nKey="annotations:highlight">Highlight</Trans>
+          </button>
+          <button
+            className={classNames(buttonReset, buttonWrapper)}
+            // aria-label={translate('shareExcerpt.highlight.aria')}
+            onClick={this.onShare}>
+            <span className={iconWrapper}>
+              <IosShareIcon />
+            </span>
+            <Trans i18nKey="annotations:share">Share</Trans>
+          </button>
         </div>
       </div>
     )

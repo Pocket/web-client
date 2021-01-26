@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const listStyle = css`
   display: flex;
@@ -143,13 +143,13 @@ GlobalNavLinks.defaultProps = {
     {
       name: 'discover',
       id: 'discover',
-      label: <Trans i18nKey="discover">Discover</Trans>,
+      label: <Trans i18nKey="nav:discover">Discover</Trans>,
       url: 'https://getpocket.com/explore?src=navbar'
     },
     {
       name: 'my-list',
       id: 'my-list',
-      label: <Trans i18nKey="my-list">My List</Trans>,
+      label: <Trans i18nKey="nav:my-list">My List</Trans>,
       url: 'https://app.getpocket.com?src=navbar'
     }
   ],

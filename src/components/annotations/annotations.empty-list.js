@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 import HighlightDark from 'static/images/reader-upsells/HighlightsAlt-dark.svg'
 import HighlightLight from 'static/images/reader-upsells/HighlightsAlt-light.svg'
 import HighlightSepia from 'static/images/reader-upsells/HighlightsAlt-sepia.svg'
@@ -20,13 +20,19 @@ const imageWrapper = css`
     max-width: 120px;
   }
   .colormode-light & {
-    img.light { display: block; }
+    img.light {
+      display: block;
+    }
   }
   .colormode-dark & {
-    img.dark { display: block; }
+    img.dark {
+      display: block;
+    }
   }
   .colormode-sepia & {
-    img.sepia { display: block; }
+    img.sepia {
+      display: block;
+    }
   }
 `
 
@@ -53,15 +59,19 @@ export const EmptyList = () => {
   return (
     <div className={list}>
       <div className={imageWrapper}>
-        <img aria-hidden="true" className='dark' src={HighlightDark} />
-        <img aria-hidden="true" className='light' src={HighlightLight} />
-        <img aria-hidden="true" className='sepia' src={HighlightSepia} />
+        <img aria-hidden="true" className="dark" src={HighlightDark} />
+        <img aria-hidden="true" className="light" src={HighlightLight} />
+        <img aria-hidden="true" className="sepia" src={HighlightSepia} />
       </div>
       <h4 className={heading}>
-        <Trans>You haven’t highlighted anything yet</Trans>
+        <Trans i18nKey="annotations:you-havent-highlighted">
+          You haven’t highlighted anything yet
+        </Trans>
       </h4>
       <p className={info}>
-        <Trans>When you select text while you’re reading, it'll appear here.</Trans>
+        <Trans i18nKey="annotations:when-you-select-text">
+          When you select text while you’re reading, it'll appear here.
+        </Trans>
       </p>
     </div>
   )

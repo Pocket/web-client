@@ -6,7 +6,7 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { cancelEditUserTag } from 'containers/my-list/tags-page/tags-page.state'
 import { confirmEditUserTag } from 'containers/my-list/tags-page/tags-page.state'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation, Trans } from 'common/setup/i18n'
 
 const inputWrapper = css`
   input[type='text'] {
@@ -37,10 +37,10 @@ export const TagEditModal = () => {
 
   return (
     <Modal
-      title={t("Edit Tag")}
+      title={t('confirm:edit-tag', 'Edit Tag')}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t("Edit Tag")}
+      screenReaderLabel={t('confirm:edit-tag', 'Edit Tag')}
       handleClose={cancelTagEdit}>
       <ModalBody>
         <div className={inputWrapper}>
@@ -54,13 +54,13 @@ export const TagEditModal = () => {
       </ModalBody>
       <ModalFooter>
         <em className="footnote">
-          <Trans tagToEdit={tagToEdit}>
+          <Trans i18nKey="confirm:edit-tag-copy" tagToEdit={tagToEdit}>
             Editing the tag "{tagToEdit}" will change it on all items. Are you
             sure you want to proceed?
           </Trans>
         </em>
         <Button type="submit" onClick={confirmTagEdit}>
-          <Trans>Confirm</Trans>
+          <Trans i18nKey="confirm:confirm">Confirm</Trans>
         </Button>
       </ModalFooter>
     </Modal>

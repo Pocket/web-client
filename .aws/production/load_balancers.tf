@@ -69,6 +69,31 @@ resource "aws_alb_listener_rule" "public_forward_102" {
   priority = 2102
 }
 
+resource "aws_alb_listener_rule" "public_forward_103" {
+  listener_arn = data.aws_alb_listener.web_client.arn
+  action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.public.arn
+  }
+
+  condition {
+    host_header {
+      values = [var.domain_name]
+    }
+  }
+
+  condition {
+    path_pattern {
+      values = [
+         "/read",
+         "/read/",
+         "/read/*"
+      ]
+    }
+  }
+
+  priority = 2103
+}
 
 # Defining what the the load balancer should expect when routing to
 # the containers.

@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { css } from 'linaria'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { ProfileIcon, PremiumIcon } from '@pocket/web-ui'
@@ -176,7 +176,7 @@ const GlobalNavAccount = ({
           onLoginClick(event)
         }}
         {...testIdAttribute('login-link')}>
-        <Trans>Log in</Trans>
+        <Trans i18nKey="nav:log-in">Log in</Trans>
       </a>
       <Button
         href="https://getpocket.com/signup?src=navbar"
@@ -188,7 +188,9 @@ const GlobalNavAccount = ({
         }}
         {...testIdAttribute('signup-link')}>
         <ProfileIcon />
-        <span className="label"><Trans>Sign up</Trans></span>
+        <span className="label">
+          <Trans i18nKey="nav:sign-up">Sign up</Trans>
+        </span>
       </Button>
     </div>
   ) : (
@@ -204,13 +206,15 @@ const GlobalNavAccount = ({
             }}
             {...testIdAttribute('upgrade-link')}>
             <PremiumIcon />
-            <span className="label"><Trans>Upgrade</Trans></span>
+            <span className="label">
+              <Trans i18nKey="nav:upgrade">Upgrade</Trans>
+            </span>
           </a>
         </VisibilitySensor>
       ) : null}
-      <WithTooltip label="Account">
+      <WithTooltip label={t('nav:account', 'Account')}>
         <AvatarButton
-          aria-label={t("Open Account Menu")}
+          aria-label={t('nav:open-account-menu', 'Open Account Menu')}
           src={avatarSrc}
           ref={accountMenuTriggerRef}
           size="40px"
@@ -221,8 +225,8 @@ const GlobalNavAccount = ({
       </WithTooltip>
       <PopupMenu
         trigger={accountMenuTriggerRef}
-        title={t("Account")}
-        screenReaderLabel={t("Account menu")}
+        title={t('nav:account', 'Account')}
+        screenReaderLabel={t('nav:account-menu', 'Account Menu')}
         appRootSelector={appRootSelector}
         onOpen={onAccountClick}
         popperOptions={{
@@ -239,7 +243,7 @@ const GlobalNavAccount = ({
         {...testIdAttribute('account-menu')}>
         <PopupMenuGroup>
           <PopupMenuItem
-            helperText={t("View profile")}
+            helperText={t('nav:view-profile', 'View Profile')}
             href={profileUrl}
             id="account-menu-profile-link"
             onClick={(event) => {
@@ -256,7 +260,7 @@ const GlobalNavAccount = ({
             onClick={(event) => {
               handleLinkClick('manage-account', event)
             }}>
-            <Trans>Manage account</Trans>
+            <Trans i18nKey="nav:manage-account">Manage account</Trans>
           </PopupMenuItem>
           <PopupMenuItem
             href="https://help.getpocket.com/category/847-category?src=navbar"
@@ -264,23 +268,23 @@ const GlobalNavAccount = ({
             onClick={(event) => {
               handleLinkClick('help', event)
             }}>
-            <Trans>Get help</Trans>
+            <Trans i18nKey="nav:get-help">Get help</Trans>
           </PopupMenuItem>
           <PopupMenuItem
-            href="/messages"
+            href="/my-list/messages"
             id="account-menu-messages-link"
             onClick={(event) => {
               handleLinkClick('messages', event)
             }}>
-            <Trans>Messages</Trans>
+            <Trans i18nKey="nav:messages">Messages</Trans>
           </PopupMenuItem>
           <PopupMenuItem
-            href="/whats-new"
+            href="/my-list/whats-new"
             id="account-menu-whats-new-link"
             onClick={(event) => {
               handleLinkClick('whats-new', event)
             }}>
-            <Trans>What’s New</Trans>
+            <Trans i18nKey="nav:whats-new">What’s New</Trans>
           </PopupMenuItem>
         </PopupMenuGroup>
         <PopupMenuGroup>
@@ -290,7 +294,7 @@ const GlobalNavAccount = ({
             onClick={(event) => {
               handleLinkClick('logout', event)
             }}>
-            <Trans>Log out</Trans>
+            <Trans i18nKey="nav:log-out">Log out</Trans>
           </PopupMenuItem>
         </PopupMenuGroup>
         <ThemeSettings />

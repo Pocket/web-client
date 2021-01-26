@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { itemsArchiveConfirm } from 'connectors/items-by-id/my-list/items.archive'
 import { itemsArchiveCancel } from 'connectors/items-by-id/my-list/items.archive'
 import { BatchProcessing } from 'components/processing/processing'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation, Trans } from 'common/setup/i18n'
 
 export const ArchiveModal = () => {
   const dispatch = useDispatch()
@@ -18,12 +18,21 @@ export const ArchiveModal = () => {
   const batchStatus = useSelector((state) => state.bulkEdit.batchStatus)
 
   const showModal = itemsToArchive.length > 0
-  const archiveCopy = batchStatus === 'archive' ? (
-    <Trans>Are you sure you want to archive these items? This cannot be undone.</Trans>
-  ) : (
-    <Trans>Are you sure you want to add these items? This cannot be undone.</Trans>
-  )
-  const archiveTitle = batchStatus === 'archive' ? t('Archive Items') : t('Add Items')
+  const archiveCopy =
+    batchStatus === 'archive' ? (
+      <Trans i18nKey="confirm:archive-items-copy">
+        Are you sure you want to archive these items? This cannot be undone.
+      </Trans>
+    ) : (
+      <Trans i18nKey="confirm:add-items-copy">
+        Are you sure you want to add these items? This cannot be undone.
+      </Trans>
+    )
+
+  const archiveTitle =
+    batchStatus === 'archive'
+      ? t('confirm:archive-items', 'Archive Items')
+      : t('confirm:add-items', 'Add Items')
   const confirmArchive = () => dispatch(itemsArchiveConfirm())
   const cancelArchive = () => dispatch(itemsArchiveCancel())
 

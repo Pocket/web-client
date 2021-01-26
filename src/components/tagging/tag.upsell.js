@@ -5,7 +5,7 @@ import { DivideHorizontal } from 'components/divider/divider'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { PREMIUM_URL } from 'common/constants'
 import { PremiumIcon } from '@pocket/web-ui'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const upsellWrapper = css`
   font-family: 'Graphik Web';
@@ -30,7 +30,6 @@ const upsellWrapper = css`
 `
 
 export const TagUpsell = ({ onVisible }) => {
-
   const handleVisible = () => onVisible('suggested-tags.upgrade-link')
 
   return (
@@ -38,14 +37,16 @@ export const TagUpsell = ({ onVisible }) => {
       <div className={upsellWrapper}>
         <p>
           <PremiumIcon />
-          <Trans>Tag stories faster than ever—get tag suggestions with.</Trans>
+          <Trans i18nKey="tags:tag-stories-faster">
+            Tag stories faster than ever—get tag suggestions with.
+          </Trans>
         </p>
         <ArrowLink
           id="suggested-tags.upgrade-link"
           margin="10px 0"
           href={`${PREMIUM_URL}13`}
           target="_blank">
-          <Trans>Pocket Premium</Trans>
+          <Trans i18nKey="tags:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </div>
     </VisibilitySensor>

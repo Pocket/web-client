@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 import {
   PopupMenu,
   PopupMenuGroup,
@@ -126,9 +126,13 @@ export const DisplaySettings = ({
 
   return (
     <div className={displayStyles}>
-      <WithTooltip label={t("Open Display Settings")}>
+      <WithTooltip
+        label={t('settings:open-display-settings', 'Open Display Settings')}>
         <button
-          aria-label={t("Open Display Settings")}
+          aria-label={t(
+            'settings:open-display-settings',
+            'Open Display Settings'
+          )}
           className={classNames(buttonReset, buttonStyles)}
           ref={displayMenuTriggerRef}>
           <TextSizeIcon />
@@ -140,8 +144,8 @@ export const DisplaySettings = ({
         id="display-settings"
         onClose={handleOnClose}
         trigger={displayMenuTriggerRef}
-        title={t("Display Settings")}
-        screenReaderLabel={t("Display Settings")}
+        title={t('settings:display-settings', 'Display Settings')}
+        screenReaderLabel={t('settings:display-settings', 'Display Settings')}
         appRootSelector={appRootSelector}
         popperOptions={{
           placement: 'bottom-end',
@@ -159,7 +163,7 @@ export const DisplaySettings = ({
             <PopupMenuItem
               onClick={toggleDisplayFonts}
               icon={<ChevronLeftIcon />}>
-              <Trans>Font Options</Trans>
+              <Trans i18nKey="settings:font-options">Font Options</Trans>
             </PopupMenuItem>
           ) : (
             <PopupMenuItem
@@ -212,7 +216,9 @@ export const DisplaySettings = ({
                     href="https://getpocket.com/premium?ep=3"
                     target="_premium"
                     icon={<PremiumIcon />}>
-                    <Trans>Unlock more options</Trans>
+                    <Trans i18nKey="settings:unlock-more-options">
+                      Unlock more options
+                    </Trans>
                   </PopupMenuItem>
                 </PopupMenuGroup>
               </VisibilitySensor>

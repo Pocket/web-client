@@ -4,7 +4,7 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { cancelDeleteUserTag } from 'containers/my-list/tags-page/tags-page.state'
 import { confirmDeleteUserTag } from 'containers/my-list/tags-page/tags-page.state'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation, Trans } from 'common/setup/i18n'
 
 export const TagDeleteModal = () => {
   const dispatch = useDispatch()
@@ -22,25 +22,25 @@ export const TagDeleteModal = () => {
 
   return (
     <Modal
-      title={t("Delete Tag")}
+      title={t('confirm:delete-tag', 'Delete Tag')}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t("Delete Tag")}
+      screenReaderLabel={t('confirm:delete-tag', 'Delete Tag')}
       handleClose={cancelTagDelete}>
       <ModalBody>
-        <Trans tagToDelete={tagToDelete}>
+        <Trans i18nKey="confirm:delete-the-tag" tagToDelete={tagToDelete}>
           Delete the tag "{tagToDelete}"?
         </Trans>
       </ModalBody>
       <ModalFooter>
         <em className="footnote">
-          <Trans tagToDelete={tagToDelete}>
+          <Trans i18nKey="confirm:delete-tag-copy" tagToDelete={tagToDelete}>
             Deleting the tag "{tagToDelete}" will remove it from all items. Are
             you sure you want to proceed?
           </Trans>
         </em>
         <Button type="submit" onClick={confirmTagDelete}>
-          <Trans>Delete</Trans>
+          <Trans i18nKey="confirm:delete">Delete</Trans>
         </Button>
       </ModalFooter>
     </Modal>

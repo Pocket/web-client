@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 import {
   DiscoverIcon,
   ListViewIcon,
@@ -19,7 +19,7 @@ const premiumLinks = [
   {
     name: 'upgrade',
     id: 'upgrade-to-premium',
-    label: <Trans i18nKey="upgrade">Upgrade</Trans>,
+    label: <Trans i18nKey="nav:upgrade">Upgrade</Trans>,
     url: 'https://getpocket.com/premium?src=navbar',
     icon: <PremiumIcon />
   }
@@ -169,8 +169,11 @@ const DrawerHeader = ({ handleClose }) => {
       <Button onClick={handleClose} variant="inline" className={iconStyle}>
         <ChevronLeftIcon
           id="mobile-menu-chevron-icon"
-          title={t("Close")}
-          description={t("Close the Pocket mobile menu")}
+          title={t('nav:close', 'Close')}
+          description={t(
+            'nav:close-the-pocket-mobile-menu',
+            'Close the Pocket mobile menu'
+          )}
         />
       </Button>
     </div>
@@ -218,7 +221,7 @@ export const Menu = ({
       <>
         <hr className="nav-divider" />
         <span className="subhead" {...testIdAttribute('premium-nudge-section')}>
-          <Trans>Try Premium</Trans>
+          <Trans i18nKey="nav:try-premium">Try Premium</Trans>
         </span>
         {premiumLinks.map((premiumLink) => {
           const isSelected = premiumLink.name === selectedLink
@@ -280,15 +283,18 @@ const GlobalNavMobileMenu = ({
         className={classnames(iconStyle, toggleClass)}>
         <MenuIcon
           id="mobile-menu-menu-icon"
-          title={t("Open")}
-          description={t("Open the Pocket mobile menu")}
+          title={t('nav:open', 'Open')}
+          description={t(
+            'nav:open-the-pocket-mobile-menu',
+            'Open the Pocket mobile menu'
+          )}
         />
       </Button>
       <Drawer
         appRootSelector={appRootSelector}
         isOpen={isOpen}
         handleClose={handleClose}
-        screenReaderLabel={t("Pocket Mobile Menu")}>
+        screenReaderLabel={t('nav:pocket-mobile-menu', 'Pocket Mobile Menu')}>
         <DrawerHeader handleClose={handleClose} />
         <Menu
           subLinks={subLinks}
@@ -370,14 +376,14 @@ GlobalNavMobileMenu.defaultProps = {
     {
       name: 'discover',
       id: 'global-nav-discover-link',
-      label: <Trans i18nKey="discover">Discover</Trans>,
+      label: <Trans i18nKey="nav:discover">Discover</Trans>,
       url: 'https://getpocket.com/explore?src=navbar',
       icon: <DiscoverIcon />
     },
     {
       name: 'my-list',
       id: 'global-nav-my-list-link',
-      label: <Trans i18nKey="my-list">My List</Trans>,
+      label: <Trans i18nKey="nav:my-list">My List</Trans>,
       url: 'https://app.getpocket.com?src=navbar',
       icon: <ListViewIcon />
     }

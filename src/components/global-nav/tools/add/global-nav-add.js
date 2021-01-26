@@ -7,7 +7,7 @@ import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import isURL from 'validator/lib/isURL'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 const addStyle = css`
   width: 100%;
@@ -124,7 +124,9 @@ const CloseButton = ({ onClick }) => {
   return (
     <button className={closeButtonStyle} onClick={onClick}>
       <CrossIcon className={closeIconStyle} />
-      <CloseLabel><Trans>Cancel</Trans></CloseLabel>
+      <CloseLabel>
+        <Trans i18nKey="nav:cancel">Cancel</Trans>
+      </CloseLabel>
     </button>
   )
 }
@@ -169,7 +171,7 @@ const GlobalNavAdd = ({
       protocols: ['http', 'https'],
       allow_underscores: true
     })
-    if (!validUrl) return updateInputError(t('Please enter a valid url'))
+    if (!validUrl) return updateInputError(t('nav:please-enter-a-valid-url'))
 
     const protocolRegEx = new RegExp('^https?://')
     const prefix = !!protocolRegEx.test(addUrl) ? '' : 'https://'
@@ -195,12 +197,12 @@ const GlobalNavAdd = ({
           name="add-input"
           ref={inputEl}
           className={classnames(['add-input', { 'has-value': !!addUrl }])}
-          aria-label={t("Add Item to Pocket")}
+          aria-label={t('nav:add-item-to-pocket', 'Add Item to Pocket')}
           value={addUrl}
           onChange={handleInputChange}
           onFocus={onFocus}
           onBlur={onBlur}
-          placeholder={isMobile ? mobilePlaceholder : placeholder}
+          placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
           {...testIdAttribute('add-input')}
         />
         {inputError ? (
@@ -215,7 +217,7 @@ const GlobalNavAdd = ({
         className="add-button"
         onClick={handleSubmit}
         {...testIdAttribute('add-button')}>
-        Add
+        <Trans i18nKey="nav:add">Add</Trans>
       </button>
       {onClose ? (
         <CloseButton onClick={onClose} {...testIdAttribute('add-close')} />
@@ -264,8 +266,12 @@ GlobalNavAdd.defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
   value: '',
-  placeholder: <Trans>Save a URL https://...</Trans>,
-  mobilePlaceholder: <Trans>Save a URL</Trans>
+  placeholder: 'nav:save-a-url-https',
+  mobilePlaceholder: 'nav:save-a-url'
 }
+
+// This is so the localization parser can pick up these runtime variables
+// t('nav:save-a-url-https', 'Save a URL https://...')
+// t('nav:save-a-url', 'Save a URL')
 
 export default GlobalNavAdd

@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const tagErrorWrapper = css`
   background: #ccc;
@@ -18,9 +18,15 @@ const tagErrorWrapper = css`
 `
 
 export const TagError = ({ email }) => {
-  const msg = !email
-    ? <Trans>Tags are limited to 25 characters</Trans>
-    : <Trans>Please enter a valid email address</Trans>
+  const msg = !email ? (
+    <Trans i18nKey="tags:tags-character-limit">
+      Tags are limited to 25 characters
+    </Trans>
+  ) : (
+    <Trans i18nKey="common:please-enter-valid-email">
+      Please enter a valid email address
+    </Trans>
+  )
 
   return <div className={tagErrorWrapper}>{msg}</div>
 }

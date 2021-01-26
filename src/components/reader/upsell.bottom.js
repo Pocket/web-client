@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { css } from 'linaria'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 import classNames from 'classnames'
 import BigDiamondDark from 'static/images/reader-upsells/BigDiamond-dark.svg'
 import BigDiamondLight from 'static/images/reader-upsells/BigDiamond-light.svg'
@@ -56,31 +56,73 @@ const imgStyles = css`
   }
 
   .colormode-light & {
-    &.library img.light { display: block; }
-    &.search img.light { display: block; }
-    &.focused img.light { display: block; }
-    &.type img.light { display: block; }
-    &.features img.light { display: block; }
-    &.highlights img.light { display: block; }
-    &.tags img.light { display: block; }
+    &.library img.light {
+      display: block;
+    }
+    &.search img.light {
+      display: block;
+    }
+    &.focused img.light {
+      display: block;
+    }
+    &.type img.light {
+      display: block;
+    }
+    &.features img.light {
+      display: block;
+    }
+    &.highlights img.light {
+      display: block;
+    }
+    &.tags img.light {
+      display: block;
+    }
   }
   .colormode-dark & {
-    &.library img.dark { display: block; }
-    &.search img.dark { display: block; }
-    &.focused img.dark { display: block; }
-    &.type img.dark { display: block; }
-    &.features img.dark { display: block; }
-    &.highlights img.dark { display: block; }
-    &.tags img.dark { display: block; }
+    &.library img.dark {
+      display: block;
+    }
+    &.search img.dark {
+      display: block;
+    }
+    &.focused img.dark {
+      display: block;
+    }
+    &.type img.dark {
+      display: block;
+    }
+    &.features img.dark {
+      display: block;
+    }
+    &.highlights img.dark {
+      display: block;
+    }
+    &.tags img.dark {
+      display: block;
+    }
   }
   .colormode-sepia & {
-    &.library img.sepia { display: block; }
-    &.search img.sepia { display: block; }
-    &.focused img.sepia { display: block; }
-    &.type img.sepia { display: block; }
-    &.features img.sepia { display: block; }
-    &.highlights img.sepia { display: block; }
-    &.tags img.sepia { display: block; }
+    &.library img.sepia {
+      display: block;
+    }
+    &.search img.sepia {
+      display: block;
+    }
+    &.focused img.sepia {
+      display: block;
+    }
+    &.type img.sepia {
+      display: block;
+    }
+    &.features img.sepia {
+      display: block;
+    }
+    &.highlights img.sepia {
+      display: block;
+    }
+    &.tags img.sepia {
+      display: block;
+    }
   }
 `
 
@@ -108,7 +150,7 @@ const copyWrapper = css`
       display: none;
       line-height: 22px;
       a {
-        white-space: nowrap
+        white-space: nowrap;
       }
     }
   }
@@ -148,19 +190,26 @@ const buttonWrapper = css`
 const LibraryAd = () => (
   <>
     <div className={classNames(imgStyles, 'library')}>
-      <img className='dark' src={LibraryDark} />
-      <img className='light' src={LibraryLight} />
-      <img className='sepia' src={LibrarySepia} />
+      <img className="dark" src={LibraryDark} />
+      <img className="light" src={LibraryLight} />
+      <img className="sepia" src={LibrarySepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5><Trans>Read with purpose</Trans></h5>
-      <p><Trans>Build a permanent library of every article you’ve saved with Pocket Premium.</Trans></p>
+      <h5>
+        <Trans i18nKey="reader:read-with-purpose">Read with purpose</Trans>
+      </h5>
+      <p>
+        <Trans i18nKey="reader:permanent">
+          Build a permanent library of every article you’ve saved with Pocket
+          Premium.
+        </Trans>
+      </p>
       <p className="small">
-        <Trans>Build a permanent library of every article you’ve saved with</Trans>{' '}
-        <ArrowLink
-          href={`${PREMIUM_URL}12`}
-          target="_blank">
-          <Trans>Pocket Premium</Trans>
+        <Trans i18nKey="reader:permanent-small">
+          Build a permanent library of every article you’ve saved with
+        </Trans>{' '}
+        <ArrowLink href={`${PREMIUM_URL}12`} target="_blank">
+          <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -169,7 +218,9 @@ const LibraryAd = () => (
       <Button
         id="reader.bottom.premium.library"
         target="_blank"
-        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
+        href={`${PREMIUM_URL}12`}>
+        <Trans i18nKey="reader:upgrade">Upgrade</Trans>
+      </Button>
     </div>
   </>
 )
@@ -177,20 +228,30 @@ const LibraryAd = () => (
 const SearchAd = () => (
   <>
     <div className={classNames(imgStyles, 'search')}>
-      <img className='dark' src={SearchDark} />
-      <img className='light' src={SearchLight} />
-      <img className='sepia' src={SearchSepia} />
+      <img className="dark" src={SearchDark} />
+      <img className="light" src={SearchLight} />
+      <img className="sepia" src={SearchSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5><Trans>Search every word in your Pocket</Trans></h5>
-      <p><Trans>Unlock our powerful search tool when you join Pocket Premium.</Trans></p>
+      <h5>
+        <Trans i18nKey="reader:search-every-word">
+          Search every word in your Pocket
+        </Trans>
+      </h5>
+      <p>
+        <Trans i18nKey="reader:unlock-search">
+          Unlock our powerful search tool when you join Pocket Premium.
+        </Trans>
+      </p>
       <p className="small">
-        <Trans>Quickly search every word in your Pocket when you join</Trans>{' '}
+        <Trans i18nKey="reader:search-every-word-small">
+          Quickly search every word in your Pocket when you join
+        </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.search"
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          <Trans>Pocket Premium</Trans>
+          <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -199,7 +260,9 @@ const SearchAd = () => (
       <Button
         id="reader.bottom.premium.search"
         target="_blank"
-        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
+        href={`${PREMIUM_URL}12`}>
+        <Trans i18nKey="reader:upgrade">Upgrade</Trans>
+      </Button>
     </div>
   </>
 )
@@ -207,20 +270,28 @@ const SearchAd = () => (
 const FocusedAd = () => (
   <>
     <div className={classNames(imgStyles, 'focused')}>
-      <img className='dark' src={FocusedDark} />
-      <img className='light' src={FocusedLight} />
-      <img className='sepia' src={FocusedSepia} />
+      <img className="dark" src={FocusedDark} />
+      <img className="light" src={FocusedLight} />
+      <img className="sepia" src={FocusedSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5><Trans>Ditch the ads</Trans></h5>
-      <p><Trans>Boost your focus and get an ad-free experience with Pocket Premium.</Trans></p>
+      <h5>
+        <Trans i18nKey="reader:ditch-the-ads">Ditch the ads</Trans>
+      </h5>
+      <p>
+        <Trans i18nKey="reader:boost-your-focus">
+          Boost your focus and get an ad-free experience with Pocket Premium.
+        </Trans>
+      </p>
       <p className="small">
-        <Trans>Boost your focus and get an ad-free experience with</Trans>{' '}
+        <Trans i18nKey="reader:boost-you-focus-small">
+          Boost your focus and get an ad-free experience with
+        </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.focused"
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          <Trans>Pocket Premium</Trans>
+          <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -229,7 +300,9 @@ const FocusedAd = () => (
       <Button
         id="reader.bottom.premium.focused"
         target="_blank"
-        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
+        href={`${PREMIUM_URL}12`}>
+        <Trans i18nKey="reader:upgrade">Upgrade</Trans>
+      </Button>
     </div>
   </>
 )
@@ -237,20 +310,28 @@ const FocusedAd = () => (
 const TypeAd = () => (
   <>
     <div className={classNames(imgStyles, 'type')}>
-      <img className='dark' src={TypeDark} />
-      <img className='light' src={TypeLight} />
-      <img className='sepia' src={TypeSepia} />
+      <img className="dark" src={TypeDark} />
+      <img className="light" src={TypeLight} />
+      <img className="sepia" src={TypeSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5><Trans>Read in your favorite font</Trans></h5>
-      <p><Trans>Get access to 8 exclusive fonts when you join Pocket Premium.</Trans></p>
+      <h5>
+        <Trans i18nKey="reader:favorite-font">Read in your favorite font</Trans>
+      </h5>
+      <p>
+        <Trans i18nKey="reader:font-access">
+          Get access to 8 exclusive fonts when you join Pocket Premium.
+        </Trans>
+      </p>
       <p className="small">
-        <Trans>Customize your Pocket with 8 exclusive fonts when you join</Trans>{' '}
+        <Trans i18nKey="reader:customize-with-fonts">
+          Customize your Pocket with 8 exclusive fonts when you join
+        </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.type"
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          <Trans>Pocket Premium</Trans>
+          <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -259,7 +340,9 @@ const TypeAd = () => (
       <Button
         id="reader.bottom.premium.type"
         target="_blank"
-        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
+        href={`${PREMIUM_URL}12`}>
+        <Trans i18nKey="reader:upgrade">Upgrade</Trans>
+      </Button>
     </div>
   </>
 )
@@ -267,20 +350,31 @@ const TypeAd = () => (
 const BigDiamondAd = () => (
   <>
     <div className={classNames(imgStyles, 'features')}>
-      <img className='dark' src={BigDiamondDark} />
-      <img className='light' src={BigDiamondLight} />
-      <img className='sepia' src={BigDiamondSepia} />
+      <img className="dark" src={BigDiamondDark} />
+      <img className="light" src={BigDiamondLight} />
+      <img className="sepia" src={BigDiamondSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5><Trans>Unlock exclusive features</Trans></h5>
-      <p><Trans>Take your reading experience to the next level when you join Pocket Premium.</Trans></p>
+      <h5>
+        <Trans i18nKey="reader:unlock-exclusive-features">
+          Unlock exclusive features
+        </Trans>
+      </h5>
+      <p>
+        <Trans i18nKey="reader:next-level">
+          Take your reading experience to the next level when you join Pocket
+          Premium.
+        </Trans>
+      </p>
       <p className="small">
-        <Trans>Take your reading experience to the next level when you join</Trans>{' '}
+        <Trans i18nKey="reader:next-level-small">
+          Take your reading experience to the next level when you join
+        </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.features"
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          <Trans>Pocket Premium</Trans>
+          <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -289,7 +383,9 @@ const BigDiamondAd = () => (
       <Button
         id="reader.bottom.premium.features"
         target="_blank"
-        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
+        href={`${PREMIUM_URL}12`}>
+        <Trans i18nKey="reader:upgrade">Upgrade</Trans>
+      </Button>
     </div>
   </>
 )
@@ -297,20 +393,31 @@ const BigDiamondAd = () => (
 const HighlightAd = () => (
   <>
     <div className={classNames(imgStyles, 'highlights')}>
-      <img className='dark' src={HighlightDark} />
-      <img className='light' src={HighlightLight} />
-      <img className='sepia' src={HighlightSepia} />
+      <img className="dark" src={HighlightDark} />
+      <img className="light" src={HighlightLight} />
+      <img className="sepia" src={HighlightSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5><Trans>Unlock unlimited highlights</Trans></h5>
-      <p><Trans>Capture as many ideas as you’d like in every article with Pocket Premium.</Trans></p>
+      <h5>
+        <Trans i18nKey="reader:unlimited-highlights">
+          Unlock unlimited highlights
+        </Trans>
+      </h5>
+      <p>
+        <Trans i18nKey="reader:capture-ideas">
+          Capture as many ideas as you’d like in every article with Pocket
+          Premium.
+        </Trans>
+      </p>
       <p className="small">
-        <Trans>Unlock unlimited highlights and never lose track of an idea with</Trans>{' '}
+        <Trans i18nKey="reader:capture-ideas-small">
+          Unlock unlimited highlights and never lose track of an idea with
+        </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.highlights"
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          <Trans>Pocket Premium</Trans>
+          <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -319,7 +426,9 @@ const HighlightAd = () => (
       <Button
         id="reader.bottom.premium.highlights"
         target="_blank"
-        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
+        href={`${PREMIUM_URL}12`}>
+        <Trans i18nKey="reader:upgrade">Upgrade</Trans>
+      </Button>
     </div>
   </>
 )
@@ -327,20 +436,30 @@ const HighlightAd = () => (
 const TagsAd = () => (
   <>
     <div className={classNames(imgStyles, 'tags')}>
-      <img className='dark' src={TagsDark} />
-      <img className='light' src={TagsLight} />
-      <img className='sepia' src={TagsSepia} />
+      <img className="dark" src={TagsDark} />
+      <img className="light" src={TagsLight} />
+      <img className="sepia" src={TagsSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
-      <h5><Trans>Tag stories faster than ever</Trans></h5>
-      <p><Trans>Save time and get helpful tag suggestions with Pocket Premium.</Trans></p>
+      <h5>
+        <Trans i18nKey="reader:tag-stories-faster">
+          Tag stories faster than ever
+        </Trans>
+      </h5>
+      <p>
+        <Trans i18nKey="reader:save-time-tagging">
+          Save time and get helpful tag suggestions with Pocket Premium.
+        </Trans>
+      </p>
       <p className="small">
-        <Trans>Tag stories faster than ever. Get tag suggestions with</Trans>{' '}
+        <Trans i18nKey="reader:save-time-tagging-small">
+          Tag stories faster than ever. Get tag suggestions with
+        </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.tags"
           href={`${PREMIUM_URL}12`}
           target="_blank">
-          <Trans>Pocket Premium</Trans>
+          <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
     </div>
@@ -349,7 +468,9 @@ const TagsAd = () => (
       <Button
         id="reader.bottom.premium.tags"
         target="_blank"
-        href={`${PREMIUM_URL}12`}><Trans>Upgrade</Trans></Button>
+        href={`${PREMIUM_URL}12`}>
+        <Trans i18nKey="reader:upgrade">Upgrade</Trans>
+      </Button>
     </div>
   </>
 )

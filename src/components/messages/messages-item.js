@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 import dayjs from 'dayjs'
 import { domainForUrl } from 'common/utilities'
 import Avatar from 'components/avatar/avatar'
@@ -44,7 +44,8 @@ const messageWrapper = css`
       font-weight: 500;
       color: var(--color-actionPrimary);
 
-      &:hover, &:active {
+      &:hover,
+      &:active {
         color: var(--color-actionPrimaryHover);
         text-decoration: underline;
       }
@@ -92,19 +93,15 @@ export const MessageItem = ({
       <aside>
         <header>
           <div>
-            <p className="name">{ name }</p>
-            <p className="time">{ timeRelativeToNow(time) }</p>
+            <p className="name">{name}</p>
+            <p className="time">{timeRelativeToNow(time)}</p>
           </div>
-          <Button
-            variant="inline"
-            onClick={handleIgnore}>
-            <Trans>Dismiss</Trans>
+          <Button variant="inline" onClick={handleIgnore}>
+            <Trans i18nKey="messages:dismiss">Dismiss</Trans>
           </Button>
         </header>
-        <p className="comment">{ comment }</p>
-        <Card
-          item={item}
-          onSave={handleSave} />
+        <p className="comment">{comment}</p>
+        <Card item={item} onSave={handleSave} />
       </aside>
     </div>
   )
