@@ -9,7 +9,7 @@
     "start": "next start -p 80",
     "lint": "./node_modules/.bin/eslint $(find src/ -name '*.js' ! -name '*.stories.js' ! -name '*.spec.js')",
     "lint-diff": "./node_modules/.bin/eslint $(git diff master --name-only -- components/*.js connectors/*.js containers/*.js) --quiet",
-    "test": "NODE_PATH=./src:./public:$NODE_PATH NODE_ENV=test mocha --reporter spec --harmony --require .scripts/babel-register .scripts/test-setup.js $(find src/ -name '*.spec.js')",
+    "test": "npm run locale-inject && NODE_PATH=./src:./public:$NODE_PATH NODE_ENV=test mocha --reporter spec --harmony --require .scripts/babel-register .scripts/test-setup.js $(find src/ -name '*.spec.js')",
     "storybook": "start-storybook -s ./public -h localhost.web.getpocket.com",
     "build-storybook": "build-storybook",
     "locale-inject": "node ./.scripts/localization/locale-inject",
