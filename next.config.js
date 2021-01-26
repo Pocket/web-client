@@ -13,28 +13,6 @@ module.exports = withPlugins([withCSS, withSourceMaps], {
   rewrites() {
     return [{ source: '/web-client-health', destination: '/health' }]
   },
-  i18n: {
-    locales: [
-      'de-DE',
-      'en',
-      'es-ES',
-      'es-LA',
-      'fr-CA',
-      'fr-FR',
-      'it-IT',
-      'ja-JP',
-      'ko-KR',
-      'nl-NL',
-      'pl-PL',
-      'pt-BR',
-      'pt-PT',
-      'ru-RU',
-      'zh-CN',
-      'zh-TW'
-    ],
-    defaultLocale: 'en',
-    localeDetection: false
-  },
   //prettier-ignore
   webpack: (config, { dev, isServer, webpack }) => {
 
