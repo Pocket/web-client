@@ -271,7 +271,7 @@ const GlobalNavAccount = ({
             <Trans i18nKey="nav:get-help">Get help</Trans>
           </PopupMenuItem>
           <PopupMenuItem
-            href="/messages"
+            href="/my-list/messages"
             id="account-menu-messages-link"
             onClick={(event) => {
               handleLinkClick('messages', event)
@@ -279,7 +279,7 @@ const GlobalNavAccount = ({
             <Trans i18nKey="nav:messages">Messages</Trans>
           </PopupMenuItem>
           <PopupMenuItem
-            href="/whats-new"
+            href="/my-list/whats-new"
             id="account-menu-whats-new-link"
             onClick={(event) => {
               handleLinkClick('whats-new', event)
