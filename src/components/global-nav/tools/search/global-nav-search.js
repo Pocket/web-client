@@ -195,7 +195,7 @@ const GlobalNavSearch = ({
           onChange={handleInputChange}
           onFocus={onFocus}
           onBlur={onBlur}
-          placeholder={isMobile ? mobilePlaceholder : placeholder}
+          placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
           {...testIdAttribute('search-input')}
         />
         {inputError ? (
@@ -256,14 +256,12 @@ GlobalNavSearch.defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
   value: '',
-  placeholder: (
-    <Trans i18nKey="nav:search-for-topics-and-interests">
-      Search for topics and interests
-    </Trans>
-  ),
-  mobilePlaceholder: (
-    <Trans i18nKey="nav:search-for-topics">Search for topics</Trans>
-  )
+  placeholder: 'nav:search-for-topics-and-interests', // default localized key
+  mobilePlaceholder: 'nav:search-for-topics' // default localized key
 }
+
+// This is so the localization parser can pick up these runtime variables
+// t('nav:search-for-topics-and-interests', 'Search for topics and interests')
+// t('nav:search-for-topics', 'Search for topics')
 
 export default GlobalNavSearch

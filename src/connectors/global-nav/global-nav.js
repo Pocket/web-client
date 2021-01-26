@@ -52,6 +52,7 @@ export const enforceDefaultAvatar = (avatarUrl = '') => {
  * provided to it to the GlobalNav component.
  */
 const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
   const selectedLink =
@@ -90,14 +91,14 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     {
       name: 'discover',
       id: 'global-nav-discover-link',
-      label: <Trans i18nKey="nav:discover">Discover</Trans>,
+      label: t('nav:discover', 'Discover'),
       url: '/discover',
       icon: <DiscoverIcon />
     },
     {
       name: 'my-list',
       id: 'global-nav-my-list-link',
-      label: <Trans i18nKey="nav:my-list">My List</Trans>,
+      label: t('nav:my-list', 'My List'),
       url: '/my-list',
       icon: <ListViewIcon />
     }
@@ -107,37 +108,37 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     {
       name: 'archive',
       icon: <ArchiveIcon />,
-      label: <Trans i18nKey="nav:archive">Archive</Trans>,
+      label: t('nav:archive', 'Archive'),
       url: '/my-list/archive'
     },
     {
       name: 'favorites',
       icon: <FavoriteIcon />,
-      label: <Trans i18nKey="nav:favorites">Favorites</Trans>,
+      label: t('nav:favorites', 'Favorites'),
       url: '/my-list/favorites'
     },
     {
       name: 'highlights',
       icon: <HighlightIcon />,
-      label: <Trans i18nKey="nav:highlights">Highlights</Trans>,
+      label: t('nav:highlights', 'Highlights'),
       url: '/my-list/highlights'
     },
     {
       name: 'articles',
       icon: <ArticleIcon />,
-      label: <Trans i18nKey="nav:articles">Articles</Trans>,
+      label: t('nav:articles', 'Articles'),
       url: '/my-list/articles'
     },
     {
       name: 'videos',
       icon: <VideoIcon />,
-      label: <Trans i18nKey="nav:videos">Videos</Trans>,
+      label: t('nav:videos', 'Videos'),
       url: '/my-list/videos'
     },
     {
       name: 'tags',
       icon: <TagIcon />,
-      label: <Trans i18nKey="nav:all-tags">All Tags</Trans>,
+      label: t('nav:all-tags', 'All Tags'),
       url: '/my-list/tags'
     },
     ...pinnedLinks
@@ -151,17 +152,17 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     ? [
         {
           name: 'search',
-          label: <Trans i18nKey="nav:search">Search</Trans>,
+          label: t('nav:search', 'Search'),
           icon: <SearchIcon />
         },
         {
           name: 'add-item',
-          label: <Trans i18nKey="nav:save">Save a URL</Trans>,
+          label: t('nav:save', 'Save a URL'),
           icon: <AddIcon />
         },
         {
           name: 'bulk-edit',
-          label: <Trans i18nKey="nav:bulk-edit">Bulk Edit</Trans>,
+          label: t('nav:bulk-edit', 'Bulk Edit'),
           icon: <EditIcon />
         }
       ]

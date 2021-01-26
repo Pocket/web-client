@@ -202,7 +202,7 @@ const GlobalNavAdd = ({
           onChange={handleInputChange}
           onFocus={onFocus}
           onBlur={onBlur}
-          placeholder={isMobile ? mobilePlaceholder : placeholder}
+          placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
           {...testIdAttribute('add-input')}
         />
         {inputError ? (
@@ -266,10 +266,12 @@ GlobalNavAdd.defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
   value: '',
-  placeholder: (
-    <Trans i18nKey="nav:save-a-url-https">Save a URL https://...</Trans>
-  ),
-  mobilePlaceholder: <Trans i18nKey="nav:save-a-url">Save a URL</Trans>
+  placeholder: 'nav:save-a-url-https',
+  mobilePlaceholder: 'nav:save-a-url'
 }
+
+// This is so the localization parser can pick up these runtime variables
+// t('nav:save-a-url-https', 'Save a URL https://...')
+// t('nav:save-a-url', 'Save a URL')
 
 export default GlobalNavAdd

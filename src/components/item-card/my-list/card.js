@@ -286,8 +286,8 @@ export const Card = ({
                   {
                     key: `favorite-${id}`,
                     label: isFavorite
-                      ? t('item-action:unfavorite', 'Favorite')
-                      : t('item-action:favorite', 'Unfavorite'),
+                      ? t('item-action:unfavorite', 'Un-Favorite')
+                      : t('item-action:favorite', 'Favorite'),
                     icon: <FavoriteIcon />,
                     onClick: favoriteAction,
                     active: isFavorite
