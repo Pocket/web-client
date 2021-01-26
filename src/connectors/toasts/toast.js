@@ -100,12 +100,12 @@ const messages = {
   [ITEMS_SHARE_FAILURE]: 'error-sharing',
   [ITEMS_TAG_SUCCESS]: 'tagged',
   [ITEMS_TAG_FAILURE]: 'error-tagging',
-  [ADD_SHARE_SUCCESS]: 'item-added',
-  [ADD_SHARE_FAILURE]: 'error-adding-item',
+  [ADD_SHARE_SUCCESS]: 'added',
+  [ADD_SHARE_FAILURE]: 'error-adding',
   [COPY_ITEM_URL]: 'url-copied'
 }
 
-export function Toast({ stamp, type, itemCount }) {
+export function Toast({ stamp, type, itemCount = 1 }) {
   const dispatch = useDispatch()
 
   const [show, setShow] = useState(false)
@@ -142,3 +142,38 @@ export function Toast({ stamp, type, itemCount }) {
     </Fade>
   )
 }
+
+// t('deleted', '{{count}} item deleted')
+// t('deleted_plural', '{{count}} items deleted')
+// t('error-deleting', 'Error deleting item')
+// t('error-deleting_plural', 'Error deleting items')
+
+// t('added', '{{count}} item added')
+// t('added_plural', '{{count}} items added')
+// t('error-adding', 'Error adding item')
+// t('error-adding_plural', 'Error adding items')
+
+// t('archived', '{{count}} item archived')
+// t('archived_plural', '{{count}} items archived')
+// t('error-archiving', 'Error archiving item')
+// t('error-archiving_plural', 'Error archiving items')
+
+// t('added-to-favorites', '{{count}} item added to favorites')
+// t('added-to-favorites_plural', '{{count}} items added to favorites')
+// t('error-adding-to-favorites', 'Error adding to favorites')
+
+// t('removed-from-favorites', '{{count}} item removed to favorites')
+// t('removed-from-favorites_plural', '{{count}} items removed to favorites')
+// t('error-removing-from-favorites', 'Error removing from favorites')
+
+// t('shared', '{{count}} item shared')
+// t('shared_plural', '{{count}} items shared')
+// t('error-sharing', 'Error sharing item')
+// t('error-sharing_plural', 'Error sharing items')
+
+// t('tagged', '{{count}} item tagged')
+// t('tagged_plural', '{{count}} items tagged')
+// t('error-tagging', 'Error tagging item')
+// t('error-tagging_plural', 'Error tagging items')
+
+// t('url-copied' 'URL copied')
