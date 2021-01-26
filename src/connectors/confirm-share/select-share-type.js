@@ -1,6 +1,6 @@
 import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const tabAction = css`
   width: 100%;

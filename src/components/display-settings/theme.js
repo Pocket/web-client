@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { PopupMenuGroup } from '@pocket/web-ui'
 import classnames from 'classnames'
 import { css } from 'linaria'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const COLOR_MODE_CACHE_KEY = 'pocket-color-mode'
 

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 import {
   DiscoverIcon,
   ListViewIcon,

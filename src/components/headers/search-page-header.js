@@ -4,7 +4,7 @@ import { breakpointLargeHandset } from '@pocket/web-ui'
 import { breakpointTinyTablet } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const searchPageHeaderStyle = css`
   margin-bottom: var(--spacing100);

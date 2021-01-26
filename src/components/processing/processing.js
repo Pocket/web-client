@@ -1,6 +1,6 @@
 import { ModalBody } from 'components/modal/modal'
 import { ProgressPill } from 'components/progress-pill/progress-pill'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 export const BatchProcessing = ({ batchTotal, batchCount }) => {
   return (

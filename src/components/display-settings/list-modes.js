@@ -8,7 +8,7 @@ import { SortByNewestIcon } from '@pocket/web-ui'
 import { SortByOldestIcon } from '@pocket/web-ui'
 import { WithTooltip } from '@pocket/web-ui'
 
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'common/setup/i18n'
 
 const listSettingStyle = css`
   display: grid;

@@ -2,7 +2,7 @@ import { css } from 'linaria'
 import { fontSansSerif } from '@pocket/web-ui'
 import { MessagesHeader } from 'components/headers/messages-header'
 import classNames from 'classnames'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const emptyWrapper = css`
   font-family: ${fontSansSerif};

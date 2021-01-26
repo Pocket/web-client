@@ -1,6 +1,6 @@
 // @refresh reset
 import { useSelector } from 'react-redux'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'common/setup/i18n'
 import { css } from 'linaria'
 import classNames from 'classnames'
 import Layout from 'layouts/with-sidebar'

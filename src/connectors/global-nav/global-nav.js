@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
-import { Trans } from 'react-i18next'
+import { useTranslation } from 'common/setup/i18n'
 import { appSetMode } from 'connectors/app/app.state'
 import { listModeToggle } from 'connectors/app/app.state'
 import { sortOrderToggle } from 'connectors/app/app.state'

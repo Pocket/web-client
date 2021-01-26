@@ -5,7 +5,7 @@ import { AnnotationMenu } from './annotations.menu'
 import { cardStyles, Quote, CreatedDate } from './annotations.card'
 import { EmptyList } from './annotations.empty-list'
 import { LimitNotice } from './annotations.limit'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const listWrapper = css`
   height: 100%;

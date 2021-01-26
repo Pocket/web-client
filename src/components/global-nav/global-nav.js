@@ -4,7 +4,7 @@ import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 import { breakpointSmallTablet } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'

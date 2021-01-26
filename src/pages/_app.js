@@ -1,5 +1,6 @@
 import '@pocket/web-ui/lib/pocket-web-ui.css'
 import { ViewportProvider } from '@pocket/web-ui'
+import App from 'next/app'
 
 import { useEffect } from 'react'
 // import { END } from 'redux-saga'
@@ -26,7 +27,7 @@ import { sortOrderSet } from 'connectors/app/app.state'
  --------------------------------------------------------------- */
 import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
-// import { appWithTranslation } from 'common/setup/i18n'
+import { appWithTranslation } from 'common/setup/i18n'
 import { localStore } from 'common/utilities/browser-storage/browser-storage'
 import { initializeSnowplow } from 'common/setup/snowplow'
 
@@ -241,9 +242,13 @@ function PocketWebClient({ Component, pageProps, err }) {
   )
 }
 
+PocketWebClient.getInitialProps = async (appContext) => ({
+  ...(await App.getInitialProps(appContext))
+})
+
 /**
  * Export the app.  This wraps the app with a few things:
  * 1. Redux: for managing state
  * 2. ReduxSaga: for managing async state requirements
  */
-export default wrapper.withRedux(PocketWebClient)
+export default wrapper.withRedux(appWithTranslation(PocketWebClient))

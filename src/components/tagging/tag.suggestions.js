@@ -1,7 +1,7 @@
 import { css } from 'linaria'
 import { SuggestedTag } from 'components/tags/tags'
 import { TagUpsell } from './tag.upsell'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const suggestedWrapper = css`
   display: block;

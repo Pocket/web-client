@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import isEmail from 'validator/lib/isEmail'
 import { Button } from '@pocket/web-ui'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 import { css } from 'linaria'
 import { TagList } from 'components/tagging/tag.list'

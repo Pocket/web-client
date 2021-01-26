@@ -5,7 +5,7 @@ import { buttonReset } from 'components/buttons/button-reset'
 import { QuoteList } from 'components/annotations/annotations.list'
 import { TicList } from 'components/annotations/annotations.tics'
 import classNames from 'classnames'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'common/setup/i18n'
 
 const sideBarWrapper = css`
   width: 110px;

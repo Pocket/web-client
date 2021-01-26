@@ -7,7 +7,7 @@ import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import isURL from 'validator/lib/isURL'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 const addStyle = css`
   width: 100%;

@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { css } from 'linaria'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { ProfileIcon, PremiumIcon } from '@pocket/web-ui'

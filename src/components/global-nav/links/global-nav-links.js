@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const listStyle = css`
   display: flex;

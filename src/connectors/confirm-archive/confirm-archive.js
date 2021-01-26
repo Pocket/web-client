@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { itemsArchiveConfirm } from 'connectors/items-by-id/my-list/items.archive'
 import { itemsArchiveCancel } from 'connectors/items-by-id/my-list/items.archive'
 import { BatchProcessing } from 'components/processing/processing'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation, Trans } from 'common/setup/i18n'
 
 export const ArchiveModal = () => {
   const dispatch = useDispatch()

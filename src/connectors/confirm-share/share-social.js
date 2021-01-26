@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'common/setup/i18n'
 
 import { FacebookShareButton } from 'react-share'
 import { TwitterShareButton } from 'react-share'

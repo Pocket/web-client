@@ -7,7 +7,7 @@ import {
 } from 'components/stepper/stepper'
 import { StepperRange } from 'components/stepper/stepper-range'
 import { AddIcon, RemoveIcon, LineHeightIcon } from '@pocket/web-ui'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'common/setup/i18n'
 
 export const LineHeightSettings = ({
   clickDecrease,

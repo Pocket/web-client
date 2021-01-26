@@ -3,7 +3,7 @@ import { ChevronDownIcon } from '@pocket/web-ui'
 import { capitalizeFirstLetter } from 'common/utilities'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import Link from 'next/link'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 // i.e., h3
 const filterStyle = css`

@@ -4,7 +4,7 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { cancelDeleteUserTag } from 'containers/my-list/tags-page/tags-page.state'
 import { confirmDeleteUserTag } from 'containers/my-list/tags-page/tags-page.state'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation, Trans } from 'common/setup/i18n'
 
 export const TagDeleteModal = () => {
   const dispatch = useDispatch()

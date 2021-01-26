@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Pill } from '@pocket/web-ui'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import classNames from 'classnames'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 /* COMPONENTS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

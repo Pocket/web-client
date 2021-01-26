@@ -4,7 +4,7 @@ import { Pill } from '@pocket/web-ui'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import { SectionHeader } from 'components/headers/section-header'
 import { matchSorter } from 'match-sorter'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation, Trans } from 'common/setup/i18n'
 
 const allTagStyle = css`
   .searchBlock {

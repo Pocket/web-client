@@ -3,7 +3,7 @@ import { css, cx } from 'linaria'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { urlWithPocketRedirect } from 'common/utilities'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'common/setup/i18n'
 
 import { CardMedia } from 'components/media/card-media'
 import { ItemActions } from './item-actions'

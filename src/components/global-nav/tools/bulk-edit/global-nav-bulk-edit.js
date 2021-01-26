@@ -12,7 +12,7 @@ import { FavoriteFilledIcon } from '@pocket/web-ui'
 import { TagIcon } from '@pocket/web-ui'
 import { breakpointMediumHandset } from '@pocket/web-ui'
 
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 const bulkStyle = css`
   width: 100%;

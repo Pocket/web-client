@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 import dayjs from 'dayjs'
 import { domainForUrl } from 'common/utilities'
 import Avatar from 'components/avatar/avatar'

@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 import HighlightDark from 'static/images/reader-upsells/HighlightsAlt-dark.svg'
 import HighlightLight from 'static/images/reader-upsells/HighlightsAlt-light.svg'
 import HighlightSepia from 'static/images/reader-upsells/HighlightsAlt-sepia.svg'

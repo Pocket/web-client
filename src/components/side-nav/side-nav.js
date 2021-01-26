@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 
 import { HomeIcon } from '@pocket/web-ui'
 import { FavoriteIcon } from '@pocket/web-ui'

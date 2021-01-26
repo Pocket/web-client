@@ -23,7 +23,7 @@ import {
   updateFontSize,
   updateFontType
 } from 'containers/read/read.state'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'common/setup/i18n'
 
 const headerStyle = css`
   position: fixed;

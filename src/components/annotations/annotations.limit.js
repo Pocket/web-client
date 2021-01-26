@@ -4,7 +4,7 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { PremiumIcon, Button } from '@pocket/web-ui'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { Trans, useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'common/setup/i18n'
 import { PREMIUM_URL } from 'common/constants'
 
 const upsellWrapper = css`

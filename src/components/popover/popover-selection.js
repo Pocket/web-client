@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
 import { HighlightIcon, IosShareIcon } from '@pocket/web-ui'
-import { Trans } from 'react-i18next'
+import { Trans } from 'common/setup/i18n'
 
 const popupContainer = css`
   position: absolute;
