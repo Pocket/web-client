@@ -92,7 +92,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       name: 'discover',
       id: 'global-nav-discover-link',
       label: t('nav:discover', 'Discover'),
-      url: '/discover',
+      url: '/explore',
       icon: <DiscoverIcon />
     },
     {
