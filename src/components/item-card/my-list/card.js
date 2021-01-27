@@ -28,6 +28,11 @@ const card = css`
   color: var(--color-textPrimary);
   position: relative;
 
+  z-index: 0;
+  &:hover {
+    z-index: 1;
+  }
+
   /* &.actionsShown {
     border-bottom-color: transparent;
   } */
