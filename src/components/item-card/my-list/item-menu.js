@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
-import { PopupMenuGroup } from '@pocket/web-ui'
-import { PopupMenuItem } from '@pocket/web-ui'
+// import { PopupMenuGroup } from '@pocket/web-ui'
+// import { PopupMenuItem } from '@pocket/web-ui'
 import { WithTooltip } from '@pocket/web-ui'
 import { OverflowMenuIcon } from '@pocket/web-ui'
 import { WebViewIcon } from '@pocket/web-ui'
@@ -14,6 +14,10 @@ import classNames from 'classnames'
 import { Trans, useTranslation } from 'common/setup/i18n'
 import { urlWithPermanentLibrary } from 'common/utilities'
 import { urlWithPocketRedirect } from 'common/utilities'
+import { useViewport } from '@pocket/web-ui'
+import { PopupMenu, PopupMenuGroup, PopupMenuItem } from '@pocket/web-ui'
+import { screenLargeHandset, screenLargeTablet } from '@pocket/web-ui'
+import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 
 const relativeWrapper = css`
   position: relative;
@@ -64,25 +68,30 @@ const menuContainer = css`
   }
 
   button, a {
-    color: var(--color-textTertiary);
+    color: var(--color-textPrimary);
   }
 `
 
 export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium }) => {
   const { t } = useTranslation()
+  const viewport = useViewport()
 
   const [menuOpen, setMenuOpen] = useState(false)
   const [flipDirection, setFlipDirection] = useState(false)
 
+  const viewportWidth = viewport ? viewport.width : screenLargeTablet + 1
+  const viewportHeight = viewport ? viewport.height : 800
+  const [isMobile, setIsMobile] = useState(viewportWidth <= screenLargeHandset)
+
   const selfRef = useRef(null)
 
-  const screenHeight = Math.max(
-    document.documentElement.clientHeight,
-    window.innerHeight || 0
-  )
+  // effect for handling window resize
+  useCorrectEffect(() => {
+    setIsMobile(viewportWidth <= screenLargeHandset)
+  }, [viewportWidth])
 
   const checkDirection = () => {
-    if (selfRef.current.getBoundingClientRect().top > screenHeight / 2) {
+    if (selfRef.current.getBoundingClientRect().top > viewportHeight / 2) {
       setFlipDirection(false)
     } else {
       setFlipDirection(true)
@@ -111,7 +120,7 @@ export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium }) =>
         </button>
       </WithTooltip>
 
-      {menuOpen ? (
+      {menuOpen && !isMobile ? (
         <div
           onMouseLeave={closeMenu}
           className={classNames(menuWrapper, { flipDirection })}>
@@ -144,6 +153,54 @@ export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium }) =>
             </PopupMenuGroup>
           </ul>
         </div>
+      ) : null}
+
+      { isMobile ? (
+        <PopupMenu
+          trigger={selfRef}
+          forceShow={menuOpen}
+          title={t('nav:account', 'Account')}
+          screenReaderLabel={t('nav:account-menu', 'Account Menu')}
+          appRootSelector='#__next'
+          onOpen={openMenu}
+          onClose={closeMenu}
+          popperOptions={{
+            placement: 'bottom-end',
+            modifiers: [{
+              name: 'offset',
+              options: {
+                offset: [0, 4]
+              }
+            }]
+          }}
+        >
+          <PopupMenuGroup>
+            <PopupMenuItem
+              onClick={itemShare}
+              icon={<IosShareIcon />}>
+              <Trans i18nKey="item-action:share">Share</Trans>
+            </PopupMenuItem>
+            <PopupMenuItem
+              onClick={itemCopy}
+              icon={<LinkCopyIcon />}>
+              <Trans i18nKey="item-action:copy-link">Copy Link</Trans>
+            </PopupMenuItem>
+            <PopupMenuItem
+              target="_blank"
+              href={urlWithPocketRedirect(openUrl)}
+              icon={<WebViewIcon />}>
+              <Trans i18nKey="item-action:view-original">View Original</Trans>
+            </PopupMenuItem>
+            { isPremium ? (
+              <PopupMenuItem
+                target="_blank"
+                href={urlWithPermanentLibrary(openId)}
+                icon={<PermanentCopyIcon />}>
+                <Trans i18nKey="item-action:permanent-copy">Permanent Copy</Trans>
+              </PopupMenuItem>
+            ) : null}
+          </PopupMenuGroup>
+        </PopupMenu>
       ) : null}
     </div>
   )
