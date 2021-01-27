@@ -212,7 +212,7 @@ function* userTagsEditConfirm(action) {
 
   if (data) {
     const pinnedItems = JSON.parse(localStore.getItem('user_tags_pinned'))
-    const pinnedDraft = pinnedItems.map((pin) => (old_tag === pin ? new_tag : pin)) //prettier-ignore
+    const pinnedDraft = pinnedItems?.map((pin) => (old_tag === pin ? new_tag : pin)) //prettier-ignore
     yield localStore.setItem('user_tags_pinned', JSON.stringify(pinnedDraft))
     yield put({ type: USER_TAGS_EDIT_SUCCESS, new_tag, old_tag, pinnedDraft }) //prettier-ignore
     return yield call(router.replace, `/my-list/tags/${encodeURI(new_tag)}`)
