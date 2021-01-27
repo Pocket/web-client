@@ -1,6 +1,4 @@
 import React, { useState, useRef } from 'react'
-// import { PopupMenuGroup } from '@pocket/web-ui'
-// import { PopupMenuItem } from '@pocket/web-ui'
 import { WithTooltip } from '@pocket/web-ui'
 import { OverflowMenuIcon } from '@pocket/web-ui'
 import { WebViewIcon } from '@pocket/web-ui'
