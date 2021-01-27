@@ -10,11 +10,7 @@ const emptyWrapper = css`
 
 export const MessageEmpty = () => (
   <main className={classNames('main', emptyWrapper)}>
-    <MessagesHeader
-      title={
-        <Trans i18nKey="messages:inbox-is-empty">Your Inbox is Empty</Trans>
-      }
-    />
+    <MessagesHeader title={t('messages:inbox-is-empty', 'Your Inbox is Empty')} />
     <p>
       <Trans i18nKey="messages:when-someone-shares">
         When someone shares items with you using Send to Friend, they will
