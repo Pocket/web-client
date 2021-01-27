@@ -70,7 +70,7 @@ const menuContainer = css`
   }
 `
 
-export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium }) => {
+export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium, title }) => {
   const { t } = useTranslation()
   const viewport = useViewport()
 
@@ -156,8 +156,8 @@ export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium }) =>
       { isMobile ? (
         <PopupMenu
           trigger={selfRef}
-          title={t('item-action:item-menu', 'Item Menu')}
-          screenReaderLabel={t('item-action:item-menu', 'Item Menu')}
+          title={title}
+          screenReaderLabel={title}
           appRootSelector='#__next'
           onOpen={openMenu}
           onClose={closeMenu}

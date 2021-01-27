@@ -326,6 +326,7 @@ export const Card = ({
                   itemShare={itemShare}
                   itemCopy={itemCopy}
                   isPremium={isPremium}
+                  title={title}
                 />
               </>
             )}
