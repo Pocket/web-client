@@ -157,8 +157,8 @@ export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium }) =>
         <PopupMenu
           trigger={selfRef}
           forceShow={menuOpen}
-          title={t('nav:account', 'Account')}
-          screenReaderLabel={t('nav:account-menu', 'Account Menu')}
+          title={t('item-action:item-menu', 'Item Menu')}
+          screenReaderLabel={t('item-action:item-menu', 'Item Menu')}
           appRootSelector='#__next'
           onOpen={openMenu}
           onClose={closeMenu}
