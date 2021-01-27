@@ -19,6 +19,7 @@ const relativeWrapper = css`
   position: relative;
   width: 100%;
   text-align: right;
+  padding-left: var(--spacing050);
 `
 
 const buttonStyles = css`
@@ -64,18 +65,17 @@ export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium }) =>
   const { t } = useTranslation()
   const [menuOpen, setMenuOpen] = useState(false)
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen)
-  }
+  const openMenu = () => setMenuOpen(true)
+  const closeMenu = () => setMenuOpen(false)
 
   return (
-    <div className={relativeWrapper} onMouseLeave={toggleMenu}>
+    <div className={relativeWrapper} onMouseLeave={closeMenu}>
       <WithTooltip
         label={t('item-action:open-menu', 'Open Menu')}>
         <button
           aria-label={t('item-action:open-menu', 'Open Menu')}
           className={classNames(buttonReset, buttonStyles)}
-          onClick={toggleMenu}>
+          onClick={openMenu}>
           <OverflowMenuIcon />
         </button>
       </WithTooltip>
