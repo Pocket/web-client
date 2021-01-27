@@ -102,6 +102,7 @@ export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium }) =>
             </PopupMenuItem>
             { isPremium ? (
               <PopupMenuItem
+                target="_blank"
                 href={urlWithPermanentLibrary(openId)}
                 icon={<PermanentCopyIcon />}>
                 <Trans i18nKey="item-action:permanent-copy">Permanent Copy</Trans>
