@@ -127,117 +127,7 @@ jobs:
           paths:
             - app_prod
 
-  # ——————————————————————————————————————————————————————————————
-  # Push Feature Assets:
-  # Push built deployment to the s3 bucket for a feature deployment
-  # Used by client side rendering through a CDN
-  # We should be able to combine this with the deploy_feature step
-  # when we have better server infrastructure
-  # ——————————————————————————————————————————————————————————————
-  push_feature_assets:
-    docker:
-      - image: circleci/python # for aws cli without fluff
-    steps:
-      - aws-cli/install
-      - assume-role/assume-role:
-          account-id: $ACCOUNT_ID_DEV
-      - attach_workspace:
-          at: .
-      - run:
-          name: Push
-          command: |
-            aws s3 cp \
-            --recursive \
-            --acl public-read \
-            --metadata-directive REPLACE \
-            --cache-control max-age=31536000 \
-            --include "*" \
-            --exclude "BUILD_ID" \
-            app_prod/.next s3://web-client.getpocket.dev-assets/_next
-
-  # ——————————————————————————————————————————————————————————————
-  # Deploy Feature:
-  # Copy everything from workspace into a Docker image for ssr rendering
-  # This also notifys slack when the feature deployment is complete
-  # ——————————————————————————————————————————————————————————————
-  deploy_feature:
-    # Define the container we will run the task in (standard node)
-    docker:
-      - image: pocket/ops-cli:v0.0.5
-    # Define the environment
-    environment:
-      MAIN_IMAGE_NAME: web-client-feature
-    steps:
-      - run:
-          name: Setup common environment variables
-          command: |
-            echo 'export AWS_ECR_ACCOUNT_URL="${ACCOUNT_ID_DEV}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
-      - attach_workspace:
-          at: /tmp/workspace
-      - run:
-          name: Copy App
-          command: |
-            cp -r /tmp/workspace/app_prod/. .
-      - assume-role/assume-role:
-          account-id: $ACCOUNT_ID_DEV
-      - aws-ecr/build-and-push-image:
-          checkout: false
-          repo: $MAIN_IMAGE_NAME
-          setup-remote-docker: true
-          tag: $CIRCLE_SHA1
-          path: /tmp/workspace/app_prod
-          dockerfile: /tmp/workspace/app_prod/Dockerfile
-      - run:
-          name: Deploy
-          command: |
-            ops-cli feature-deploy \
-            --param-file .aws/feature/3_service.dev.json \
-            --template-file .aws/feature/3_service.cfn.yml \
-            --git-sha "$CIRCLE_SHA1" \
-            --branch-name "$CIRCLE_BRANCH" \
-            --image-name ${AWS_ECR_ACCOUNT_URL}/${MAIN_IMAGE_NAME}:${CIRCLE_SHA1}
-      - run:
-          name: Notify Deploy
-          command: |
-            ops-cli feature-deploy-notify \
-            --param-file .aws/feature/3_service.dev.json \
-            --template-file .aws/feature/3_service.cfn.yml \
-            --git-sha "$CIRCLE_SHA1" \
-            --branch-name "$CIRCLE_BRANCH" \
-            --github-username "$CIRCLE_USERNAME" \
-            --github-compare-url "https://github.com/Pocket/web-client/compare/main...$CIRCLE_SHA1" \
-            --slack-webhook "$SLACK_WEBHOOK" \
-            --github-token $GITHUB_TOKEN \
-            --github-owner Pocket \
-            --github-repo web-client
-
-  # ——————————————————————————————————————————————————————————————
-  # Cleanup feature:
-  # This adds an auto-matic cleanup step for defunct feature branches
-  # This is separate as it is run independently during automation
-  # ——————————————————————————————————————————————————————————————
-  cleanup_feature:
-    docker:
-      - image: pocket/ops-cli:v0.0.10
-    steps:
-      - checkout
-      - assume-role/assume-role:
-          account-id: $ACCOUNT_ID_DEV
-          aws-region: us-east-1
-      - run:
-          name: Cleanup Feature Branches
-          command: |
-            ops-cli feature-cleanup \
-            --param-file .aws/feature/3_service.dev.json \
-            --slack-webhook "$SLACK_WEBHOOK" \
-            --dry-run=false \
-            --main-branch=main
-            --days-old 8 \
-            --github-token $GITHUB_TOKEN \
-            --github-owner Pocket \
-            --github-repo web-client
-
-  # ——————————————————————————————————————————————————————————————
+   # ——————————————————————————————————————————————————————————————
   # Tag ECR(Elastic Container Repository)
   # This tags docker image as latest for use by devOps
   # ——————————————————————————————————————————————————————————————
@@ -411,7 +301,7 @@ jobs:
 
   # ——————————————————————————————————————————————————————————————
   # Deployment Notification:
-  # This adds notification to slack on a succesful live deploy
+  # This adds notification to slack on a successful live deploy
   # ——————————————————————————————————————————————————————————————
   deploy_end_notification:
     resource_class: small
@@ -480,16 +370,6 @@ only_main: &only_main
 # Workflows: Executing jobs we have defined based on specific branch changes
 workflows:
   version: 2
-  cleanup:
-    jobs:
-      - cleanup_feature
-    triggers:
-      - schedule:
-          cron: "0 * * * *"
-          filters:
-            branches:
-              only:
-                - main
   all:
     jobs:
       # unit test all the files
@@ -506,16 +386,6 @@ workflows:
           prefix: ""
           showdev: "included"
           name: build_feature
-      # conditionally deploy features when not pushed to main
-      - deploy_feature:
-          <<: *not_main
-          requires:
-            - build_feature
-      # conditionally deploy features when not pushed to main
-      - push_feature_assets:
-          <<: *not_main
-          requires:
-            - build_feature
       # Cypress Integration Tests on feature branches
       # - integration_tests:
       #     <<: *not_main
