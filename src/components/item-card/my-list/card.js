@@ -7,9 +7,9 @@ import { useTranslation } from 'common/setup/i18n'
 
 import { CardMedia } from 'components/media/card-media'
 import { ItemActions } from './item-actions'
+import { ItemMenu } from './item-menu'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 
-import { IosShareIcon } from '@pocket/web-ui'
 import { DeleteIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
 import { AddIcon } from '@pocket/web-ui'
@@ -183,7 +183,8 @@ export const Card = ({
   bulkEdit,
   bulkSelected,
   onOpen,
-  position
+  position,
+  isPremium
 }) => {
   const {
     item_id: id,
@@ -208,7 +209,8 @@ export const Card = ({
     itemTag,
     itemBulkSelect,
     itemBulkDeSelect,
-    itemImpression
+    itemImpression,
+    itemCopy
   } = actions
 
   const cardClass = cx(
@@ -281,43 +283,46 @@ export const Card = ({
                 <EmptyCircledIcon className="bulkIconStyle" />
               )
             ) : (
-              <ItemActions
-                menuItems={[
-                  {
-                    key: `favorite-${id}`,
-                    label: isFavorite
-                      ? t('item-action:unfavorite', 'Un-Favorite')
-                      : t('item-action:favorite', 'Favorite'),
-                    icon: <FavoriteIcon />,
-                    onClick: favoriteAction,
-                    active: isFavorite
-                  },
-                  {
-                    key: `archive-${id}`,
-                    label: archiveLabel,
-                    icon: <CorrectArchiveIcon />,
-                    onClick: archiveAction
-                  },
-                  {
-                    key: `tag-${id}`,
-                    label: t('item-action:tag', 'Tag'),
-                    icon: <TagIcon />,
-                    onClick: itemTag
-                  },
-                  {
-                    key: `delete-${id}`,
-                    label: t('item-action:delete', 'Delete'),
-                    icon: <DeleteIcon />,
-                    onClick: itemDelete
-                  },
-                  {
-                    key: `share-${id}`,
-                    label: t('item-action:share', 'Share'),
-                    icon: <IosShareIcon />,
-                    onClick: itemShare
-                  }
-                ]}
-              />
+              <>
+                <ItemActions
+                  menuItems={[
+                    {
+                      key: `favorite-${id}`,
+                      label: isFavorite
+                        ? t('item-action:unfavorite', 'Un-Favorite')
+                        : t('item-action:favorite', 'Favorite'),
+                      icon: <FavoriteIcon />,
+                      onClick: favoriteAction,
+                      active: isFavorite
+                    },
+                    {
+                      key: `archive-${id}`,
+                      label: archiveLabel,
+                      icon: <CorrectArchiveIcon />,
+                      onClick: archiveAction
+                    },
+                    {
+                      key: `tag-${id}`,
+                      label: t('item-action:tag', 'Tag'),
+                      icon: <TagIcon />,
+                      onClick: itemTag
+                    },
+                    {
+                      key: `delete-${id}`,
+                      label: t('item-action:delete', 'Delete'),
+                      icon: <DeleteIcon />,
+                      onClick: itemDelete
+                    }
+                  ]}
+                />
+                <ItemMenu
+                  openId={id}
+                  openUrl={open_url}
+                  itemShare={itemShare}
+                  itemCopy={itemCopy}
+                  isPremium={isPremium}
+                />
+              </>
             )}
           </div>
         </footer>

@@ -21,6 +21,9 @@ import { trackItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
 import { setImpression } from 'connectors/items-by-id/my-list/items.analytics'
 import { sendEngagementEvent } from 'connectors/items-by-id/my-list/items.analytics'
 
+import copy from 'clipboard-copy'
+import { COPY_ITEM_URL } from 'actions'
+
 /**
  * Article Card
  * Creates a connected `Card` with the appropriate data and actions
@@ -31,6 +34,8 @@ export function ItemCard({ id, position, fluidHeight, type }) {
 
   const appMode = useSelector((state) => state?.app?.mode)
   const bulkEdit = appMode === 'bulk'
+
+  const isPremium = useSelector((state) => state.user.premium_status === '1')
 
   // Get data from state
   const item = useSelector((state) => state.myListItemsById[id])
@@ -81,6 +86,12 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const itemBulkSelect = (shift) => {dispatch(itemsBulkSelectAction(id, shift))} //prettier-ignore
   const itemBulkDeSelect = (shift) => {dispatch(itemsBulkDeSelectAction(id, shift))} //prettier-ignore
 
+  const copyAction = () => ({ type: COPY_ITEM_URL })
+  const itemCopy = async () => {
+    await copy(item?.open_url)
+    dispatch(copyAction())
+  }
+
   const onOpen = () => {
     trackItemOpen(position + 1, item, type) // legacy analytics uses 1 based position
     fireItemOpen(position, item, dispatch)
@@ -105,8 +116,10 @@ export function ItemCard({ id, position, fluidHeight, type }) {
         itemTag,
         itemBulkSelect,
         itemBulkDeSelect,
-        itemImpression
+        itemImpression,
+        itemCopy
       }}
+      isPremium={isPremium}
     />
   ) : null
 }
