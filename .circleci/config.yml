@@ -370,16 +370,6 @@ only_main: &only_main
 # Workflows: Executing jobs we have defined based on specific branch changes
 workflows:
   version: 2
-  cleanup:
-    jobs:
-      - cleanup_feature
-    triggers:
-      - schedule:
-          cron: "0 * * * *"
-          filters:
-            branches:
-              only:
-                - main
   all:
     jobs:
       # unit test all the files
