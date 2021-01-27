@@ -9,7 +9,7 @@ import { css } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import classNames from 'classnames'
 import { FONT_TYPES } from 'components/fonts/fonts'
-import FontSVG from 'static/fonts/fonts.symbols-d30c8725.svg'
+import FontSVG from 'static/images/fonts.symbols-d30c8725.svg'
 
 const fontFamilyButton = css`
   height: 50px;
