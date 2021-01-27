@@ -44,15 +44,17 @@ export function TagList({ userTags, value, valueChange }) {
       </div>
       <div className={pillboxStyle}>
         <ul className="list">
-          <li>
-            <Link href={'/my-list/tags/_untagged_'}>
-              <a>
-                <Pill>
-                  <Trans i18nKey="tags:un-tagged">un-tagged</Trans>
-                </Pill>
-              </a>
-            </Link>
-          </li>
+          {'un-tagged'.includes(value) ? (
+            <li>
+              <Link href={'/my-list/tags/_untagged_'}>
+                <a>
+                  <Pill>
+                    <Trans i18nKey="tags:un-tagged">un-tagged</Trans>
+                  </Pill>
+                </a>
+              </Link>
+            </li>
+          ) : null}
           {value.length ? (
             <>
               {sortedTags.map((tag) => (

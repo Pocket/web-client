@@ -1,6 +1,5 @@
 /* eslint  react/jsx-no-target-blank: 0*/
 import { css } from 'linaria'
-import { TagList } from 'components/tagging/tag.list'
 import Link from 'next/link'
 import { Pill } from '@pocket/web-ui'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
