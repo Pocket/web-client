@@ -228,7 +228,7 @@ function* userTagsDeleteConfirm(action) {
 
   if (data) {
     const pinnedItems = JSON.parse(localStore.getItem('user_tags_pinned'))
-    const draft = pinnedItems.filter((pin) => pin !== tag)
+    const draft = pinnedItems?.filter((pin) => pin !== tag)
     yield localStore.setItem('user_tags_pinned', JSON.stringify(draft))
     yield put({ type: USER_TAGS_DELETE_SUCCESS, tag })
     return yield call(router.replace, '/my-list/tags')
