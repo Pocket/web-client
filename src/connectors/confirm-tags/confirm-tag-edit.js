@@ -55,8 +55,8 @@ export const TagEditModal = () => {
       <ModalFooter>
         <em className="footnote">
           <Trans i18nKey="confirm:edit-tag-copy" tagToEdit={tagToEdit}>
-            Editing the tag "{tagToEdit}" will change it on all items. Are you
-            sure you want to proceed?
+            Editing the tag <em>{{ tagToEdit }}</em> will change it on all
+            items. Are you sure you want to proceed?
           </Trans>
         </em>
         <Button type="submit" onClick={confirmTagEdit}>

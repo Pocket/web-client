@@ -88,7 +88,7 @@
   },
   "dependencies": {
     "@n8tb1t/use-scroll-position": "2.0.3",
-    "@pocket/web-localization": "0.4.2",
+    "@pocket/web-localization": "0.4.3",
     "@pocket/web-ui": "2.30.1",
     "@pocket/web-utilities": "1.16.0",
     "@sentry/node": "5.24.2",
