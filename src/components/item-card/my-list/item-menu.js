@@ -156,7 +156,7 @@ export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium }) =>
       { isMobile ? (
         <PopupMenu
           trigger={selfRef}
-          forceShow={menuOpen}
+          // forceShow={menuOpen}
           title={t('item-action:item-menu', 'Item Menu')}
           screenReaderLabel={t('item-action:item-menu', 'Item Menu')}
           appRootSelector='#__next'
