@@ -138,6 +138,13 @@ const card = css`
     padding: var(--size050) 0;
     display: block;
     color: var(--color-textSecondary);
+
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   .readtime {
@@ -270,7 +277,9 @@ export const Card = ({
                 <span>{title}</span>
               </h2>
               <cite className="details">
-                <span>{publisher}</span>
+                <a target="_blank" href={urlWithPocketRedirect(open_url)}>
+                  {publisher}
+                </a>
                 <span className="readtime">
                   {read_time ? ` · ${read_time} min` : null}
                 </span>

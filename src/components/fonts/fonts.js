@@ -174,7 +174,7 @@ export const Fonts = css`
 `
 export const FONT_TYPES = {
   blanco: {
-    family: 'Blanco',
+    family: 'Blanco OSF',
     name: 'Blanco',
     size: '1em'
   },
