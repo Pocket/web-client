@@ -73,7 +73,10 @@ function PocketWebClient({ Component, pageProps, err }) {
       sort_order = 'newest' // TODO: Switch this to local storage
     } = cookies
 
-    const listMode = list_mode && list_mode !== 'undefined' ? list_mode : 'grid'
+    const listMode =
+      list_mode && list_mode !== 'undefined' && list_mode !== 'card'
+        ? list_mode
+        : 'grid'
 
     // Set up defaults/user pref in state
     dispatch(listModeSet(listMode))
@@ -162,7 +165,10 @@ function PocketWebClient({ Component, pageProps, err }) {
       sort_order = 'newest' // TODO: Switch this to local storage
     } = cookies
 
-    const listMode = list_mode && list_mode !== 'undefined' ? list_mode : 'grid'
+    const listMode =
+      list_mode && list_mode !== 'undefined' && list_mode !== 'card'
+        ? list_mode
+        : 'grid'
 
     // Set up defaults/user pref in state
     dispatch(listModeSet(listMode))
