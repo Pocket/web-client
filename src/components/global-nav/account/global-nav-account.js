@@ -149,6 +149,9 @@ const GlobalNavAccount = ({
   sortOrder,
   toggleSortOrder,
   toggleListMode,
+  setListMode,
+  setCardMode,
+  setDetailMode,
   sendImpression
 }) => {
   const { t } = useTranslation()
@@ -303,6 +306,9 @@ const GlobalNavAccount = ({
           sortOrder={sortOrder}
           toggleSortOrder={toggleSortOrder}
           toggleListMode={toggleListMode}
+          setListMode={setListMode}
+          setCardMode={setCardMode}
+          setDetailMode={setDetailMode}
         />
       </PopupMenu>
     </div>

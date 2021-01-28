@@ -7,8 +7,11 @@ import { APP_LIST_MODE_TOGGLE } from 'actions'
 import { APP_LIST_MODE_SET } from 'actions'
 import { APP_SORT_ORDER_TOGGLE } from 'actions'
 import { APP_SORT_ORDER_SET } from 'actions'
-
+import { APP_LIST_MODE_LIST } from 'actions'
+import { APP_LIST_MODE_CARD } from 'actions'
+import { APP_LIST_MODE_DETAIL } from 'actions'
 import { ITEMS_BULK_CLEAR } from 'actions'
+
 import { HYDRATE } from 'actions'
 import { setCookie } from 'nookies'
 
@@ -28,7 +31,11 @@ export const appSetBaseURL = (baseURL) => ({ type: APP_SET_BASE_URL, baseURL })
 export const appSetMode = (mode) => ({ type: APP_SET_MODE, mode })
 export const appSetSection = (section) => ({ type: APP_SET_SECTION, section })
 export const listModeToggle = () => ({ type: APP_LIST_MODE_TOGGLE })
-export const listModeSet = (listMode) => ({ type: APP_LIST_MODE_SET, listMode}) //prettier-ignore
+export const listModeSet = (listMode) => ({ type: APP_LIST_MODE_SET, listMode }) //prettier-ignore
+export const setListModeList = () => ({type: APP_LIST_MODE_LIST, listMode: 'list'}) //prettier-ignore
+export const setListModeCard = () => ({type: APP_LIST_MODE_CARD, listMOde: 'card'}) //prettier-ignore
+export const setListModeDetail = () => ({type: APP_LIST_MODE_DETAIL, listMode: 'detail'}) //prettier-ignore
+
 export const sortOrderToggle = () => ({ type: APP_SORT_ORDER_TOGGLE })
 export const sortOrderSet = (sortOrder) => ({type: APP_SORT_ORDER_SET, sortOrder}) //prettier-ignore
 
@@ -87,7 +94,10 @@ export const appReducers = (state = initialState, action) => {
 export const appSagas = [
   takeLatest(APP_SET_MODE, appModeSwitch),
   takeLatest(APP_LIST_MODE_TOGGLE, appListModeToggle),
-  takeLatest(APP_SORT_ORDER_TOGGLE, appSortOrderToggle)
+  takeLatest(APP_SORT_ORDER_TOGGLE, appSortOrderToggle),
+  takeLatest(APP_LIST_MODE_LIST, appListModeSet),
+  takeLatest(APP_LIST_MODE_CARD, appListModeSet),
+  takeLatest(APP_LIST_MODE_DETAIL, appListModeSet)
 ]
 
 /** SAGA :: RESPONDERS
@@ -98,6 +108,12 @@ const getSortOrder = (state) => state.app.sortOrder
 function* appModeSwitch(action) {
   const { mode } = action
   if (mode !== 'bulk') yield put({ type: ITEMS_BULK_CLEAR })
+}
+
+function* appListModeSet(action) {
+  const { listMode } = action
+  setCookie(null, 'list_mode', listMode, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
+  yield put({ type: APP_LIST_MODE_SET, listMode })
 }
 
 function* appListModeToggle() {

@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'common/setup/i18n'
 import { appSetMode } from 'connectors/app/app.state'
 import { listModeToggle } from 'connectors/app/app.state'
+import { setListModeList } from 'connectors/app/app.state'
+import { setListModeCard } from 'connectors/app/app.state'
+import { setListModeDetail } from 'connectors/app/app.state'
 import { sortOrderToggle } from 'connectors/app/app.state'
 
 import GlobalNavComponent from 'components/global-nav/global-nav'
@@ -75,6 +78,10 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
 
   const toggleSortOrder = () => dispatch(sortOrderToggle())
   const toggleListMode = () => dispatch(listModeToggle())
+  const setListMode = () => dispatch(setListModeList())
+  const setCardMode = () => dispatch(setListModeCard())
+  const setDetailMode = () => dispatch(setListModeDetail())
+
   const sendImpressionEvent = (identifier) =>
     dispatch(sendImpression(identifier))
 
@@ -213,6 +220,9 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       listMode={listMode}
       sortOrder={sortOrder}
       toggleSortOrder={toggleSortOrder}
+      setListMode={setListMode}
+      setCardMode={setCardMode}
+      setDetailMode={setDetailMode}
       toggleListMode={toggleListMode}
       sendImpression={sendImpressionEvent}
       tools={tools}>
