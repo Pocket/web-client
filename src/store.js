@@ -66,6 +66,9 @@ import { userMessageSagas } from 'containers/messages/user-messages.state'
 
 import { actionToastsReducers } from 'connectors/toasts/toast.state'
 
+import { shortcutReducers } from 'connectors/shortcuts/shortcuts.state.js'
+import { shortcutSagas } from 'connectors/shortcuts/shortcuts.state.js'
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const discoverReducers = {
@@ -103,7 +106,8 @@ const globalReducers = {
   features: featureReducers, // Feature flags (very basic start)
   topicList: topicListReducers, // Valid topics list and active topic
   recit: recitReducers, // Recommended articles, both publisher and pocket
-  toasts: actionToastsReducers // Notifications of action results
+  toasts: actionToastsReducers, // Notifications of action results,
+  shortcuts: shortcutReducers // Keyboard shortcuts
 }
 
 const rootReducer = combineReducers({
@@ -137,7 +141,8 @@ function* rootSaga() {
     ...itemShareSagas,
     ...readSagas,
     ...homeSagas,
-    ...userMessageSagas
+    ...userMessageSagas,
+    ...shortcutSagas
   ])
 }
 

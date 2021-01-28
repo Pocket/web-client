@@ -34,6 +34,7 @@ import { trackPageView } from 'connectors/snowplow/snowplow.state'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 import ReactGA from 'react-ga'
 
+import { Shortcuts } from 'connectors/shortcuts/shortcuts'
 import { DevTools } from 'connectors/dev-tools/dev-tools'
 
 /** Set up Sentry so we may catch errors
@@ -242,6 +243,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   return (
     <ViewportProvider>
       {showDevTools ? <DevTools /> : null}
+      <Shortcuts />
       <Component {...pageProps} err={err} />
     </ViewportProvider>
   )
