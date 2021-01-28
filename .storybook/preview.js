@@ -4,6 +4,8 @@ import { withNextRouter } from 'storybook-addon-next-router'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { initializeStore } from 'store'
+import { I18nextProvider } from 'react-i18next'
+import i18n from './i18n'
 
 const store = initializeStore()
 
@@ -39,9 +41,11 @@ export const decorators = [
     document.body.classList.add(`colormode-${context.globals.theme}`)
 
     return (
-      <Provider store={store}>
-        <Story />
-      </Provider>
+      <I18nextProvider i18n={i18n}>
+        <Provider store={store}>
+          <Story />
+        </Provider>
+      </I18nextProvider>
     )
   },
   withNextRouter
