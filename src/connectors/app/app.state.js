@@ -33,7 +33,7 @@ export const appSetSection = (section) => ({ type: APP_SET_SECTION, section })
 export const listModeToggle = () => ({ type: APP_LIST_MODE_TOGGLE })
 export const listModeSet = (listMode) => ({ type: APP_LIST_MODE_SET, listMode }) //prettier-ignore
 export const setListModeList = () => ({type: APP_LIST_MODE_LIST, listMode: 'list'}) //prettier-ignore
-export const setListModeCard = () => ({type: APP_LIST_MODE_CARD, listMode: 'card'}) //prettier-ignore
+export const setListModeCard = () => ({type: APP_LIST_MODE_CARD, listMode: 'grid'}) //prettier-ignore
 export const setListModeDetail = () => ({type: APP_LIST_MODE_DETAIL, listMode: 'detail'}) //prettier-ignore
 
 export const sortOrderToggle = () => ({ type: APP_SORT_ORDER_TOGGLE })
