@@ -4,7 +4,9 @@ import { getScrollTop, atEndOfScroll } from 'common/utilities'
 import { cardsContainer } from 'components/items-layout/base'
 import { cx } from 'linaria'
 import { MemoizedItem } from 'connectors/item-card/my-list/card'
-import { cardList, cardGrid } from 'components/items-layout/virtualized-list'
+import { cardDetail } from 'components/items-layout/virtualized-list'
+import { cardList } from 'components/items-layout/virtualized-list'
+import { cardGrid } from 'components/items-layout/virtualized-list'
 import { ruler } from 'components/items-layout/virtualized-list'
 import { useViewport } from '@pocket/web-ui'
 
@@ -55,6 +57,19 @@ export function VirtualizedList(props) {
       screenMediumHandset: [154, 1],
       screenSmallHandset: [154, 1],
       screenTinyHandset: [154, 1]
+    },
+    detail: {
+      screenLargeDesktop: [155, 1],
+      screenMediumDesktop: [155, 1],
+      screenSmallDesktop: [155, 1],
+      screenTinyTablet: [185, 1],
+      screenSmallTablet: [185, 1],
+      screenMediumTablet: [185, 1],
+      screenLargeTablet: [185, 1],
+      screenLargeHandset: [185, 1],
+      screenMediumHandset: [180, 1],
+      screenTinyHandset: [185, 1],
+      screenSmallHandset: [185, 1]
     }
   }
   const [height, columnCount] = dimensions[type][breakpoint]
@@ -75,7 +90,7 @@ export function VirtualizedList(props) {
   })
 
   // Define the section
-  const sectionTypes = { list: cardList, grid: cardGrid }
+  const sectionTypes = { list: cardList, grid: cardGrid, detail: cardDetail }
   const containerClasses = cx(cardsContainer, type)
 
   const { itemsToShow, paddingTop, listHeight } = list
