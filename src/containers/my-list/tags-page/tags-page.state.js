@@ -206,13 +206,21 @@ function* userTagsTogglePin(actions) {
   yield put({ type: USER_TAGS_PINS_SET, pins: draft })
 }
 
+function* getLocalTags() {
+  const pinnedItems = localStore.getItem('user_tags_pinned')
+  const pins = (pinnedItems && pinnedItems !== 'undefined')
+    ? JSON.parse(pinnedItems)
+    : []
+  return pins
+}
+
 function* userTagsEditConfirm(action) {
   const { new_tag, old_tag, router } = action
   const data = yield call(renameStoredTag, { new_tag, old_tag })
 
   if (data) {
-    const pinnedItems = JSON.parse(localStore.getItem('user_tags_pinned'))
-    const pinnedDraft = pinnedItems?.map((pin) => (old_tag === pin ? new_tag : pin)) //prettier-ignore
+    const pinnedItems = yield getLocalTags()
+    const pinnedDraft = pinnedItems.map((pin) => (old_tag === pin ? new_tag : pin)) //prettier-ignore
     yield localStore.setItem('user_tags_pinned', JSON.stringify(pinnedDraft))
     yield put({ type: USER_TAGS_EDIT_SUCCESS, new_tag, old_tag, pinnedDraft }) //prettier-ignore
     return yield call(router.replace, `/my-list/tags/${encodeURI(new_tag)}`)
@@ -227,8 +235,8 @@ function* userTagsDeleteConfirm(action) {
   const data = yield call(deleteStoredTag, tag)
 
   if (data) {
-    const pinnedItems = JSON.parse(localStore.getItem('user_tags_pinned'))
-    const draft = pinnedItems?.filter((pin) => pin !== tag)
+    const pinnedItems = yield getLocalTags()
+    const draft = pinnedItems.filter((pin) => pin !== tag)
     yield localStore.setItem('user_tags_pinned', JSON.stringify(draft))
     yield put({ type: USER_TAGS_DELETE_SUCCESS, tag })
     return yield call(router.replace, '/my-list/tags')
@@ -238,6 +246,6 @@ function* userTagsDeleteConfirm(action) {
 }
 
 function* userTagsHydrate() {
-  const pinnedItems = JSON.parse(localStore.getItem('user_tags_pinned')) || []
+  const pinnedItems = yield getLocalTags()
   yield put({ type: USER_TAGS_PINS_SET, pins: pinnedItems })
 }
