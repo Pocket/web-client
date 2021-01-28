@@ -9,7 +9,17 @@ import { css } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import classNames from 'classnames'
 import { FONT_TYPES } from 'components/fonts/fonts'
-import FontSVG from 'static/images/fonts.symbols-d30c8725.svg'
+
+import BlancoSVG from 'static/images/font-icons/blanco.svg'
+import GraphikSVG from 'static/images/font-icons/graphik.svg'
+import IdealSansSVG from 'static/images/font-icons/ideal-sans.svg'
+import InterSVG from 'static/images/font-icons/inter.svg'
+import PlexSansSVG from 'static/images/font-icons/plex-sans.svg'
+import SentinelSVG from 'static/images/font-icons/sentinel.svg'
+import TiemposSVG from 'static/images/font-icons/tiempos.svg'
+import VollkornSVG from 'static/images/font-icons/vollkorn.svg'
+import WhitneySVG from 'static/images/font-icons/whitney.svg'
+import ZillaSlabSVG from 'static/images/font-icons/zilla-slab.svg'
 
 const fontFamilyButton = css`
   height: 50px;
@@ -23,11 +33,28 @@ const fontFamilyButton = css`
     }
   }
 
+  img {
+    height: var(--size150);
+  }
+
   &.showPremium {
     pointer-events: none;
     opacity: 0.6;
   }
 `
+
+const FontImages = {
+  blanco: BlancoSVG,
+  graphik: GraphikSVG,
+  ideal: IdealSansSVG,
+  inter: InterSVG,
+  plex: PlexSansSVG,
+  sentinel: SentinelSVG,
+  tiempos: TiemposSVG,
+  vollkorn: VollkornSVG,
+  whitney: WhitneySVG,
+  zilla: ZillaSlabSVG
+}
 
 export const FontSettings = ({ updateFontFamily, currentFont, isPremium }) => {
   return (
@@ -44,16 +71,8 @@ export const FontSettings = ({ updateFontFamily, currentFont, isPremium }) => {
             icon={showPremium ? <PremiumIcon /> : null}
             onClick={click}
             aria-label={FONT_TYPES[font].name}>
-            <svg
-              style={{
-                display: 'inline-block',
-                position: 'relative',
-                fill: 'currentColor',
-                height: '24px',
-                width: '120px'
-              }}>
-              <use href={`${FontSVG}#${FONT_TYPES[font].selector}`} />
-            </svg>
+            <img src={FontImages[font]} aria-hidden="true" />
+
             {isActive ? <CheckCircledIcon /> : null}
           </PopupMenuItem>
         )
