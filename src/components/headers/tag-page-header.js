@@ -61,7 +61,16 @@ const myListHeaderStyle = css`
   }
 `
 
-export const TagPageHeader = ({
+export const UnTaggedHeader = ({ subset, filter, tag }) => (
+  <header className={myListHeaderStyle}>
+    <div>
+      <h1 className="pageTitle">un-tagged</h1>
+      <FilterMenu subset={subset} filter={filter} tag={tag} />
+    </div>
+  </header>
+)
+
+export const TaggedHeader = ({
   subset,
   filter,
   title,
@@ -73,7 +82,7 @@ export const TagPageHeader = ({
 }) => {
   const { t } = useTranslation()
 
-  return subset ? (
+  return (
     <header className={myListHeaderStyle}>
       <div>
         <h1 className="pageTitle">{capitalizeFirstLetter(title)}</h1>
@@ -97,5 +106,31 @@ export const TagPageHeader = ({
         </WithTooltip>
       </div>
     </header>
+  )
+}
+
+export const TagPageHeader = ({
+  subset,
+  filter,
+  title,
+  tag,
+  pinTag,
+  editTag,
+  deleteTag,
+  isPinned
+}) => {
+  const TagHeader = ('_untagged_'.includes(title)) ? UnTaggedHeader : TaggedHeader
+
+  return subset ? (
+    <TagHeader
+      subset={subset}
+      filter={filter}
+      title={title}
+      tag={tag}
+      pinTag={pinTag}
+      editTag={editTag}
+      deleteTag={deleteTag}
+      isPinned={isPinned}
+    />
   ) : null
 }
