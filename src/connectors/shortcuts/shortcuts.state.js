@@ -55,21 +55,21 @@ export const cardView = () => ({ type: SHORTCUT_CARD_VIEW })
 export const changeToLightTheme = () => ({ type: SHORTCUT_LIGHT_THEME })
 export const changeToDarkTheme = () => ({ type: SHORTCUT_DARK_THEME })
 export const changeToSepiaTheme = () => ({ type: SHORTCUT_SEPIA_THEME })
-export const selectNextItem = () => ({ type: SHORTCUT_SELECT_NEXT_ITEM })
-export const selectPreviousItem = () => ({ type: SHORTCUT_SELECT_PREVIOUS_ITEM }) //prettier-ignore
-export const archiveSelectedItem = () => ({ type: SHORTCUT_ARCHIVE_SELECTED_ITEM }) //prettier-ignore
-export const favoriteSelectedItem = () => ({ type: SHORTCUT_FAVORITE_SELECTED_ITEM }) //prettier-ignore
-export const tagSelectedItem = () => ({ type: SHORTCUT_TAG_SELECTED_ITEM })
-export const viewOriginalVersion = () => ({ type: SHORTCUT_VIEW_ORIGINAL_VERSION }) //prettier-ignore
-export const openSelectedItem = () => ({ type: SHORTCUT_OPEN_SELECTED_ITEM })
+export const selectNextItem = (currentItem) => ({ type: SHORTCUT_SELECT_NEXT_ITEM, currentItem }) //prettier-ignore
+export const selectPreviousItem = (currentItem) => ({ type: SHORTCUT_SELECT_PREVIOUS_ITEM, currentItem }) //prettier-ignore
+export const archiveSelectedItem = (currentItem) => ({ type: SHORTCUT_ARCHIVE_SELECTED_ITEM, currentItem }) //prettier-ignore
+export const favoriteSelectedItem = (currentItem) => ({ type: SHORTCUT_FAVORITE_SELECTED_ITEM, currentItem }) //prettier-ignore
+export const tagSelectedItem = (currentItem) => ({ type: SHORTCUT_TAG_SELECTED_ITEM, currentItem }) //prettier-ignore
+export const viewOriginalVersion = (currentItem) => ({ type: SHORTCUT_VIEW_ORIGINAL_VERSION, currentItem }) //prettier-ignore
+export const openSelectedItem = (currentItem) => ({ type: SHORTCUT_OPEN_SELECTED_ITEM, currentItem }) //prettier-ignore
 
 export const increaseFontSize = () => ({ type: SHORTCUT_INCREASE_FONT_SIZE })
 export const decreaseFontSize = () => ({ type: SHORTCUT_DECREASE_FONT_SIZE })
 export const goBack = () => ({ type: SHORTCUT_GO_BACK })
-export const editTags = () => ({ type: SHORTCUT_EDIT_TAGS })
-export const archiveItem = () => ({ type: SHORTCUT_ARCHIVE_ITEM })
-export const favoriteItem = () => ({ type: SHORTCUT_FAVORITE_ITEM })
-export const viewOriginal = () => ({ type: SHORTCUT_VIEW_ORIGINAL })
+export const editTags = (currentItem) => ({ type: SHORTCUT_EDIT_TAGS, currentItem }) //prettier-ignore
+export const archiveItem = (currentItem) => ({ type: SHORTCUT_ARCHIVE_ITEM, currentItem }) //prettier-ignore
+export const favoriteItem = (currentItem) => ({ type: SHORTCUT_FAVORITE_ITEM, currentItem }) //prettier-ignore
+export const viewOriginal = (currentItem) => ({ type: SHORTCUT_VIEW_ORIGINAL, currentItem }) //prettier-ignore
 
 // prettier-ignore
 export const listShortcuts = [
@@ -107,7 +107,8 @@ export const readerShortcuts = [
 ]
 
 const initialState = {
-  display_legend: false
+  display_legend: false,
+  current_id: false
 }
 
 /** REDUCERS

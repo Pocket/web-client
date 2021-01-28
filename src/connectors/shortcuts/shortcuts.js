@@ -10,12 +10,14 @@ export function Shortcuts() {
   const dispatch = useDispatch()
 
   const showShortcuts = useSelector((state) => state.shortcuts.display_legend)
+  const currentItemId = useSelector((state) => state.shortcuts.current_id)
+
   const APP_ROOT_SELECTOR = '#__next'
   const cancelShortcutView = () => dispatch(closeHelpOverlay())
 
   useEffect(() => {
     listShortcuts.forEach(({ keys, action }) => {
-      const actionPayload = action()
+      const actionPayload = action(currentItemId)
       const boundAction = () => dispatch(actionPayload)
       Mousetrap.bind(keys, boundAction)
     })
@@ -24,7 +26,7 @@ export function Shortcuts() {
     return () => {
       listShortcuts.forEach(({ keys }) => Mousetrap.unbind(keys))
     }
-  }, [dispatch])
+  }, [dispatch, currentItemId])
 
   return showShortcuts ? (
     <ShortCutsView
