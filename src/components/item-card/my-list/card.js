@@ -253,6 +253,10 @@ export const Card = ({
 
   const openUrl = openExternal ? urlWithPocketRedirect(open_url) : `/read/${id}`
 
+  const stopPropagation = (e) => {
+    e.stopPropagation()
+  }
+
   return (
     <VisibilitySensor onVisible={itemImpression}>
       <article
@@ -277,7 +281,11 @@ export const Card = ({
                 <span>{title}</span>
               </h2>
               <cite className="details">
-                <a target="_blank" href={urlWithPocketRedirect(open_url)}>
+                <a
+                  id={`my-list.card.publisher.${id}.${position}`}
+                  target="_blank"
+                  onClick={stopPropagation}
+                  href={urlWithPocketRedirect(open_url)}>
                   {publisher}
                 </a>
                 <span className="readtime">
