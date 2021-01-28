@@ -23,7 +23,7 @@ export const tagBase = css`
   }
 `
 
-const tagWrapper = css`
+export const tagWrapper = css`
   text-transform: lowercase;
   max-width: 100%;
   overflow: hidden;

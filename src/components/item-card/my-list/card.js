@@ -8,6 +8,8 @@ import { useTranslation } from 'common/setup/i18n'
 import { CardMedia } from 'components/media/card-media'
 import { ItemActions } from './item-actions'
 import { ItemMenu } from './item-menu'
+import { ItemTags } from './item-tags'
+
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 
 import { DeleteIcon } from '@pocket/web-ui'
@@ -201,7 +203,8 @@ export const Card = ({
     favorite,
     status,
     open_url,
-    openExternal
+    openExternal,
+    tags
   } = item
 
   const {
@@ -280,6 +283,7 @@ export const Card = ({
           </a>
         </Link>
         <footer className="footer">
+          <ItemTags tags={tags} />
           <div className="actions">
             {bulkEdit ? (
               bulkSelected ? (

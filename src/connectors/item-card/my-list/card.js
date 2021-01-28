@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import { useEffect } from 'react'
 import { Card } from 'components/item-card/my-list/card'
 import { useSelector, useDispatch } from 'react-redux'
 

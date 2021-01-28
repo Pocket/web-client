@@ -65,12 +65,20 @@ const menuContainer = css`
     padding: 0;
   }
 
-  button, a {
+  button,
+  a {
     color: var(--color-textPrimary);
   }
 `
 
-export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium, title }) => {
+export const ItemMenu = ({
+  openId,
+  openUrl,
+  itemShare,
+  itemCopy,
+  isPremium,
+  title
+}) => {
   const { t } = useTranslation()
   const viewport = useViewport()
 
@@ -106,9 +114,8 @@ export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium, titl
   }
 
   return (
-    <div className={relativeWrapper}>
-      <WithTooltip
-        label={t('item-action:open-menu', 'Open Menu')}>
+    <div className={`${relativeWrapper} item-menu`}>
+      <WithTooltip label={t('item-action:open-menu', 'Open Menu')}>
         <button
           ref={selfRef}
           aria-label={t('item-action:open-menu', 'Open Menu')}
@@ -124,14 +131,10 @@ export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium, titl
           className={classNames(menuWrapper, { flipDirection })}>
           <ul className={classNames(overlayBase, menuContainer)}>
             <PopupMenuGroup>
-              <PopupMenuItem
-                onClick={itemShare}
-                icon={<IosShareIcon />}>
+              <PopupMenuItem onClick={itemShare} icon={<IosShareIcon />}>
                 <Trans i18nKey="item-action:share">Share</Trans>
               </PopupMenuItem>
-              <PopupMenuItem
-                onClick={itemCopy}
-                icon={<LinkCopyIcon />}>
+              <PopupMenuItem onClick={itemCopy} icon={<LinkCopyIcon />}>
                 <Trans i18nKey="item-action:copy-link">Copy Link</Trans>
               </PopupMenuItem>
               <PopupMenuItem
@@ -140,12 +143,14 @@ export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium, titl
                 icon={<WebViewIcon />}>
                 <Trans i18nKey="item-action:view-original">View Original</Trans>
               </PopupMenuItem>
-              { isPremium ? (
+              {isPremium ? (
                 <PopupMenuItem
                   target="_blank"
                   href={urlWithPermanentLibrary(openId)}
                   icon={<PermanentCopyIcon />}>
-                  <Trans i18nKey="item-action:permanent-copy">Permanent Copy</Trans>
+                  <Trans i18nKey="item-action:permanent-copy">
+                    Permanent Copy
+                  </Trans>
                 </PopupMenuItem>
               ) : null}
             </PopupMenuGroup>
@@ -153,33 +158,30 @@ export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium, titl
         </div>
       ) : null}
 
-      { isMobile ? (
+      {isMobile ? (
         <PopupMenu
           trigger={selfRef}
           title={title}
           screenReaderLabel={title}
-          appRootSelector='#__next'
+          appRootSelector="#__next"
           onOpen={openMenu}
           onClose={closeMenu}
           popperOptions={{
             placement: 'bottom-end',
-            modifiers: [{
-              name: 'offset',
-              options: {
-                offset: [0, 4]
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 4]
+                }
               }
-            }]
-          }}
-        >
+            ]
+          }}>
           <PopupMenuGroup>
-            <PopupMenuItem
-              onClick={itemShare}
-              icon={<IosShareIcon />}>
+            <PopupMenuItem onClick={itemShare} icon={<IosShareIcon />}>
               <Trans i18nKey="item-action:share">Share</Trans>
             </PopupMenuItem>
-            <PopupMenuItem
-              onClick={itemCopy}
-              icon={<LinkCopyIcon />}>
+            <PopupMenuItem onClick={itemCopy} icon={<LinkCopyIcon />}>
               <Trans i18nKey="item-action:copy-link">Copy Link</Trans>
             </PopupMenuItem>
             <PopupMenuItem
@@ -188,12 +190,14 @@ export const ItemMenu = ({ openId, openUrl, itemShare, itemCopy, isPremium, titl
               icon={<WebViewIcon />}>
               <Trans i18nKey="item-action:view-original">View Original</Trans>
             </PopupMenuItem>
-            { isPremium ? (
+            {isPremium ? (
               <PopupMenuItem
                 target="_blank"
                 href={urlWithPermanentLibrary(openId)}
                 icon={<PermanentCopyIcon />}>
-                <Trans i18nKey="item-action:permanent-copy">Permanent Copy</Trans>
+                <Trans i18nKey="item-action:permanent-copy">
+                  Permanent Copy
+                </Trans>
               </PopupMenuItem>
             ) : null}
           </PopupMenuGroup>
