@@ -109,7 +109,7 @@ resource "aws_alb_listener_rule" "public_forward_105" {
     redirect {
       port        = "443"
       host        = "getpocket.com"
-      path        = "/read"
+      path        = "/read/#{path}"
       protocol    = "HTTPS"
       status_code = "HTTP_302"
       query = "#{query}"
