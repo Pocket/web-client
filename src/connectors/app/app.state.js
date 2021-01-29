@@ -7,6 +7,9 @@ import { APP_LIST_MODE_TOGGLE } from 'actions'
 import { APP_LIST_MODE_SET } from 'actions'
 import { APP_SORT_ORDER_TOGGLE } from 'actions'
 import { APP_SORT_ORDER_SET } from 'actions'
+import { APP_SORT_ORDER_OLD } from 'actions'
+import { APP_SORT_ORDER_NEW } from 'actions'
+
 import { APP_LIST_MODE_LIST } from 'actions'
 import { APP_LIST_MODE_GRID } from 'actions'
 import { APP_LIST_MODE_DETAIL } from 'actions'
@@ -38,6 +41,8 @@ export const setListModeGrid = () => ({type: APP_LIST_MODE_GRID, listMode: 'grid
 export const setListModeDetail = () => ({type: APP_LIST_MODE_DETAIL, listMode: 'detail'}) //prettier-ignore
 
 export const sortOrderToggle = () => ({ type: APP_SORT_ORDER_TOGGLE })
+export const sortOrderSetOld = () => ({ type: APP_SORT_ORDER_OLD, sortOrder: 'oldest'}) //prettier-ignore
+export const sortOrderSetNew = () => ({ type: APP_SORT_ORDER_NEW, sortOrder: 'newest'}) //prettier-ignore
 export const sortOrderSet = (sortOrder) => ({type: APP_SORT_ORDER_SET, sortOrder}) //prettier-ignore
 
 /** REDUCERS
@@ -96,6 +101,8 @@ export const appSagas = [
   takeLatest(APP_SET_MODE, appModeSwitch),
   takeLatest(APP_LIST_MODE_TOGGLE, appListModeToggle),
   takeLatest(APP_SORT_ORDER_TOGGLE, appSortOrderToggle),
+  takeLatest(APP_SORT_ORDER_OLD, appSortOrderSet),
+  takeLatest(APP_SORT_ORDER_NEW, appSortOrderSet),
   takeLatest(APP_LIST_MODE_LIST, appListModeSet),
   takeLatest(APP_LIST_MODE_GRID, appListModeSet),
   takeLatest(APP_LIST_MODE_DETAIL, appListModeSet)
@@ -123,6 +130,13 @@ function* appListModeToggle() {
   setCookie(null, 'list_mode', newListMode, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
 
   yield put({ type: APP_LIST_MODE_SET, listMode: newListMode })
+}
+
+function* appSortOrderSet(action) {
+  const { sortOrder } = action
+  setCookie(null, 'sort_order', sortOrder, { samesite: 'strict', path: '/', maxAge: yearInMs }) //prettier-ignore
+
+  yield put({ type: APP_SORT_ORDER_SET, sortOrder })
 }
 
 function* appSortOrderToggle() {

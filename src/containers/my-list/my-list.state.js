@@ -15,6 +15,7 @@ import { sortSelector } from './my-list.sorters'
 import { sortByOrder } from './my-list.sorters'
 
 import { MYLIST_DATA_REQUEST } from 'actions'
+import { APP_SORT_ORDER_TOGGLE } from 'actions'
 import { MYLIST_DATA_SUCCESS } from 'actions'
 import { MYLIST_DATA_FAILURE } from 'actions'
 import { MYLIST_UPDATE_REQUEST } from 'actions'
@@ -36,7 +37,8 @@ import { MYLIST_SEARCH_REQUEST } from 'actions'
 import { MYLIST_SEARCH_SUCCESS } from 'actions'
 import { MYLIST_SEARCH_FAILURE } from 'actions'
 
-import { APP_SORT_ORDER_TOGGLE } from 'actions'
+import { APP_SORT_ORDER_OLD } from 'actions'
+import { APP_SORT_ORDER_NEW } from 'actions'
 
 import { HYDRATE } from 'actions'
 
@@ -220,7 +222,9 @@ export const myListReducers = (state = initialState, action) => {
       return { ...state, listState: 'dirty' }
     }
 
-    case APP_SORT_ORDER_TOGGLE: {
+    case APP_SORT_ORDER_TOGGLE:
+    case APP_SORT_ORDER_OLD:
+    case APP_SORT_ORDER_NEW: {
       return initialState
     }
 
@@ -448,9 +452,10 @@ function* myListSearchRequest(action) {
       .sort(sortByOrder)
       .map((item) => item.item_id)
 
-    const items = (searchState.query !== query)
-      ? Array.from(new Set([...newItemIds]))
-      : Array.from(new Set([...currentItems, ...newItemIds]))
+    const items =
+      searchState.query !== query
+        ? Array.from(new Set([...newItemIds]))
+        : Array.from(new Set([...currentItems, ...newItemIds]))
 
     const newOffset = items.length
 
