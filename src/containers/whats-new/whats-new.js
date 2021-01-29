@@ -7,6 +7,7 @@ import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { WhatsNewHeader } from 'components/headers/whats-new-header'
 import Jan192021 from 'components/release-notes/jan-19-2021'
+import Feb022021 from 'components/release-notes/feb-02-2021'
 
 const whatsNewStyles = css`
   font-family: var(--fontSansSerif);
@@ -66,6 +67,7 @@ export default function Messages() {
       <main className={classNames('main', whatsNewStyles)}>
         <WhatsNewHeader title={t('whats-new:whats-new', "What's New")} />
 
+        <Feb022021 />
         <Jan192021 />
       </main>
     </Layout>

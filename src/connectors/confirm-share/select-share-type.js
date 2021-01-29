@@ -43,9 +43,12 @@ export function SelectShareType({ active, activate }) {
         <Trans i18nKey="share:recommend">Recommend</Trans>
       </ShareTypeTab>
 
-      <ShareTypeTab active={active} activate={activate} tab="friend">
-        <Trans i18nKey="share:send-to-friend">Send to Friend</Trans>
-      </ShareTypeTab>
+      {/*
+        // Deprecated Feb 2, 2021
+        <ShareTypeTab active={active} activate={activate} tab="friend">
+          <Trans i18nKey="share:send-to-friend">Send to Friend</Trans>
+        </ShareTypeTab>
+      */}
     </div>
   )
 }

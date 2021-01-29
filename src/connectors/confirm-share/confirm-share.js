@@ -10,7 +10,7 @@ import { itemsShareCancel } from 'connectors/items-by-id/my-list/items.share'
 import { ShareSocial } from './share-social'
 import { SelectShareType } from './select-share-type'
 
-import { ShareToFriend } from './share-to-friend'
+// import { ShareToFriend } from './share-to-friend'
 import { ShareRecommend } from './share-recommend'
 
 const shareQuote = css`
@@ -38,7 +38,7 @@ export const ShareModal = () => {
   const cancelShare = () => dispatch(itemsShareCancel())
 
   if (!item) return null
-  // const { open_url, excerpt, title } = item
+
   const showModal = itemId !== false
 
   /**
@@ -65,7 +65,11 @@ export const ShareModal = () => {
           <ShareSocial item={item} quote={quote} position={position} />
         ) : null}
         {active === 'recommend' ? <ShareRecommend item={item} /> : null}
-        {active === 'friend' ? <ShareToFriend item={item} /> : null}
+
+        {/*
+          // Deprecated Feb 2, 2021
+          active === 'friend' ? <ShareToFriend item={item} /> : null
+        */}
       </ModalTabs>
     </Modal>
   )
