@@ -43,6 +43,32 @@ resource "aws_alb_listener_rule" "public_forward_101" {
   priority = 2101
 }
 
+resource "aws_alb_listener_rule" "public_forward_102" {
+  listener_arn = data.aws_alb_listener.web_client.arn
+  action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.public.arn
+  }
+
+  condition {
+    host_header {
+      values = [var.domain_name]
+    }
+  }
+
+  condition {
+    path_pattern {
+      values = [
+         "/my-list",
+         "/my-list/",
+         "/my-list/*"
+      ]
+    }
+  }
+
+  priority = 2102
+}
+
 resource "aws_alb_listener_rule" "public_forward_103" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
@@ -100,65 +126,6 @@ resource "aws_alb_listener_rule" "public_forward_104" {
   }
 
   priority = 2104
-}
-
-resource "aws_alb_listener_rule" "public_forward_105" {
-  listener_arn = data.aws_alb_listener.web_client.arn
-  action {
-    type = "redirect"
-    redirect {
-      port        = "443"
-      host        = "getpocket.com"
-      path        = "/read"
-      protocol    = "HTTPS"
-      status_code = "HTTP_302"
-      query = "#{query}"
-    }
-  }
-
-  condition {
-    host_header {
-      values = [var.domain_name]
-    }
-  }
-
-  condition {
-    path_pattern {
-      values = [
-         "/my-list/read",
-         "/my-list/read/",
-         "/my-list/read/*"
-      ]
-    }
-  }
-
-  priority = 2105
-}
-
-resource "aws_alb_listener_rule" "public_forward_110" {
-  listener_arn = data.aws_alb_listener.web_client.arn
-  action {
-    type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
-  }
-
-  condition {
-    host_header {
-      values = [var.domain_name]
-    }
-  }
-
-  condition {
-    path_pattern {
-      values = [
-         "/my-list",
-         "/my-list/",
-         "/my-list/*"
-      ]
-    }
-  }
-
-  priority = 2110
 }
 
 # Defining what the the load balancer should expect when routing to
