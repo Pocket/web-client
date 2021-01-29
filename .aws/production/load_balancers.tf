@@ -128,6 +128,39 @@ resource "aws_alb_listener_rule" "public_forward_104" {
   priority = 2104
 }
 
+resource "aws_alb_listener_rule" "public_forward_105" {
+  listener_arn = data.aws_alb_listener.web_client.arn
+  action {
+    type = "redirect"
+    redirect {
+      port        = "443"
+      host        = "getpocket.com"
+      path        = "/read"
+      protocol    = "HTTPS"
+      status_code = "HTTP_302"
+      query = "#{query}"
+    }
+  }
+
+  condition {
+    host_header {
+      values = [var.domain_name]
+    }
+  }
+
+  condition {
+    path_pattern {
+      values = [
+         "/my-list/read",
+         "/my-list/read/",
+         "/my-list/read/*"
+      ]
+    }
+  }
+
+  priority = 2105
+}
+
 # Defining what the the load balancer should expect when routing to
 # the containers.
 # NOTE: Make sure your application has a route to pulse that returns 200
