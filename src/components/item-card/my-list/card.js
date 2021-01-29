@@ -174,8 +174,10 @@ const card = css`
 
   .bulkIconStyle {
     display: block;
-    width: 22px;
-    height: 22px;
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+    margin-top: 0;
   }
 `
 
