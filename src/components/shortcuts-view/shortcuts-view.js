@@ -27,7 +27,7 @@ const shortcutsStyle = css`
 
 export function ShortCutDisplay({ copy, keyCopy }) {
   return (
-    <tr>
+    <tr key={keyCopy}>
       <td>{copy}</td>
       <td>{keyCopy}</td>
     </tr>
