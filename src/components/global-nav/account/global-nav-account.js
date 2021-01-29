@@ -150,7 +150,7 @@ const GlobalNavAccount = ({
   toggleSortOrder,
   toggleListMode,
   setListMode,
-  setCardMode,
+  setGridMode,
   setDetailMode,
   sendImpression
 }) => {
@@ -307,7 +307,7 @@ const GlobalNavAccount = ({
           toggleSortOrder={toggleSortOrder}
           toggleListMode={toggleListMode}
           setListMode={setListMode}
-          setCardMode={setCardMode}
+          setGridMode={setGridMode}
           setDetailMode={setDetailMode}
         />
       </PopupMenu>

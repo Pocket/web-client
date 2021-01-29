@@ -5,7 +5,7 @@ import { useTranslation } from 'common/setup/i18n'
 import { appSetMode } from 'connectors/app/app.state'
 import { listModeToggle } from 'connectors/app/app.state'
 import { setListModeList } from 'connectors/app/app.state'
-import { setListModeCard } from 'connectors/app/app.state'
+import { setListModeGrid } from 'connectors/app/app.state'
 import { setListModeDetail } from 'connectors/app/app.state'
 import { sortOrderToggle } from 'connectors/app/app.state'
 
@@ -79,7 +79,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const toggleSortOrder = () => dispatch(sortOrderToggle())
   const toggleListMode = () => dispatch(listModeToggle())
   const setListMode = () => dispatch(setListModeList())
-  const setCardMode = () => dispatch(setListModeCard())
+  const setGridMode = () => dispatch(setListModeGrid())
   const setDetailMode = () => dispatch(setListModeDetail())
 
   const sendImpressionEvent = (identifier) =>
@@ -221,7 +221,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       sortOrder={sortOrder}
       toggleSortOrder={toggleSortOrder}
       setListMode={setListMode}
-      setCardMode={setCardMode}
+      setGridMode={setGridMode}
       setDetailMode={setDetailMode}
       toggleListMode={toggleListMode}
       sendImpression={sendImpressionEvent}

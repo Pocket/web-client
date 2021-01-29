@@ -223,7 +223,7 @@ const GlobalNav = ({
   toggleSortOrder,
   toggleListMode,
   setListMode,
-  setCardMode,
+  setGridMode,
   setDetailMode,
   links,
   tools,
@@ -322,7 +322,7 @@ const GlobalNav = ({
                 toggleListMode={toggleListMode}
                 sendImpression={sendImpression}
                 setListMode={setListMode}
-                setCardMode={setCardMode}
+                setGridMode={setGridMode}
                 setDetailMode={setDetailMode}
               />
             </>

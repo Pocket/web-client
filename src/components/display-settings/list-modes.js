@@ -49,7 +49,7 @@ export const ListSettings = ({
   sortOrder = 'newest',
   toggleSortOrder,
   setListMode,
-  setCardMode,
+  setGridMode,
   setDetailMode
 }) => {
   const { t } = useTranslation()
@@ -107,7 +107,7 @@ export const ListSettings = ({
             </span>
           </WithTooltip>
         </div>
-        <div className={cx(isActive('grid') && 'active')} onClick={setCardMode}>
+        <div className={cx(isActive('grid') && 'active')} onClick={setGridMode}>
           <WithTooltip
             label={t(
               'settings:display-items-as-a-grid',

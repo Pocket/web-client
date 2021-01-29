@@ -8,7 +8,7 @@ import { APP_LIST_MODE_SET } from 'actions'
 import { APP_SORT_ORDER_TOGGLE } from 'actions'
 import { APP_SORT_ORDER_SET } from 'actions'
 import { APP_LIST_MODE_LIST } from 'actions'
-import { APP_LIST_MODE_CARD } from 'actions'
+import { APP_LIST_MODE_GRID } from 'actions'
 import { APP_LIST_MODE_DETAIL } from 'actions'
 import { ITEMS_BULK_CLEAR } from 'actions'
 
@@ -30,10 +30,11 @@ export const devModeToggle = () => ({ type: APP_DEV_MODE_TOGGLE })
 export const appSetBaseURL = (baseURL) => ({ type: APP_SET_BASE_URL, baseURL })
 export const appSetMode = (mode) => ({ type: APP_SET_MODE, mode })
 export const appSetSection = (section) => ({ type: APP_SET_SECTION, section })
+
 export const listModeToggle = () => ({ type: APP_LIST_MODE_TOGGLE })
 export const listModeSet = (listMode) => ({ type: APP_LIST_MODE_SET, listMode }) //prettier-ignore
 export const setListModeList = () => ({type: APP_LIST_MODE_LIST, listMode: 'list'}) //prettier-ignore
-export const setListModeCard = () => ({type: APP_LIST_MODE_CARD, listMode: 'grid'}) //prettier-ignore
+export const setListModeGrid = () => ({type: APP_LIST_MODE_GRID, listMode: 'grid'}) //prettier-ignore
 export const setListModeDetail = () => ({type: APP_LIST_MODE_DETAIL, listMode: 'detail'}) //prettier-ignore
 
 export const sortOrderToggle = () => ({ type: APP_SORT_ORDER_TOGGLE })
@@ -96,7 +97,7 @@ export const appSagas = [
   takeLatest(APP_LIST_MODE_TOGGLE, appListModeToggle),
   takeLatest(APP_SORT_ORDER_TOGGLE, appSortOrderToggle),
   takeLatest(APP_LIST_MODE_LIST, appListModeSet),
-  takeLatest(APP_LIST_MODE_CARD, appListModeSet),
+  takeLatest(APP_LIST_MODE_GRID, appListModeSet),
   takeLatest(APP_LIST_MODE_DETAIL, appListModeSet)
 ]
 

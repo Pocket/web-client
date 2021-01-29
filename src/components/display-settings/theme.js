@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { PopupMenuGroup } from '@pocket/web-ui'
-import classnames from 'classnames'
 import { css } from 'linaria'
 import { Trans } from 'common/setup/i18n'
 
