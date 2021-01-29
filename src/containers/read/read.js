@@ -15,7 +15,8 @@ import { BottomUpsell } from 'components/reader/upsell.bottom'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
-import { Fonts, FONT_TYPES } from 'components/fonts/fonts'
+import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
+import { ReaderFonts } from '@pocket/web-ui'
 
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
@@ -276,7 +277,7 @@ export default function Reader() {
             handleImpression={handleImpression}
           />
         </div>
-        <article className={classNames(Fonts, 'reader')} style={customStyles}>
+        <article className={classNames(ReaderFonts, GoogleFonts, 'reader')} style={customStyles}>
           <ItemHeader {...headerData} />
           {articleContent ? (
             <Content
