@@ -10,14 +10,7 @@ import { SHORTCUT_GO_TO_FAVORITES } from 'actions'
 import { SHORTCUT_GO_TO_ARTICLES } from 'actions'
 import { SHORTCUT_GO_TO_HIGHLIGHTS } from 'actions'
 import { SHORTCUT_GO_TO_VIDEOS } from 'actions'
-
-import { SHORTCUT_GO_TO_SEARCH } from 'actions'
-import { SHORTCUT_BULK_EDIT } from 'actions'
-import { SHORTCUT_SAVE_A_URL } from 'actions'
-
-import { SHORTCUT_LIGHT_THEME } from 'actions'
-import { SHORTCUT_DARK_THEME } from 'actions'
-import { SHORTCUT_SEPIA_THEME } from 'actions'
+import { SHORTCUT_GO_TO_TAG } from 'actions'
 
 import { SHORTCUT_SELECT_NEXT_ITEM } from 'actions'
 import { SHORTCUT_SELECT_PREVIOUS_ITEM } from 'actions'
@@ -46,6 +39,9 @@ import { setListModeDetail } from 'connectors/app/app.state'
 import { sortOrderSetOld } from 'connectors/app/app.state'
 import { sortOrderSetNew } from 'connectors/app/app.state'
 import { appSetMode } from 'connectors/app/app.state'
+import { setColorModeLight } from 'connectors/app/app.state'
+import { setColorModeDark } from 'connectors/app/app.state'
+import { setColorModeSepia } from 'connectors/app/app.state'
 
 export const openHelpOverlay = () => ({ type: SHORTCUT_OPEN_HELP_OVERLAY })
 export const closeHelpOverlay = () => ({ type: SHORTCUT_CLOSE_HELP_OVERLAY })
@@ -57,14 +53,11 @@ export const goToFavorites = ({router}) => ({ type: SHORTCUT_GO_TO_FAVORITES, ro
 export const goToArticles = ({router}) => ({ type: SHORTCUT_GO_TO_ARTICLES, router}) //prettier-ignore
 export const goToHighlights = ({router}) => ({ type: SHORTCUT_GO_TO_HIGHLIGHTS, router}) //prettier-ignore
 export const goToVideos = ({router}) => ({ type: SHORTCUT_GO_TO_VIDEOS, router}) //prettier-ignore
+export const gotToTag = () => ({ type: SHORTCUT_GO_TO_TAG })
 
 export const goToSearch = () => appSetMode('search')
 export const bulkEdit = () => appSetMode('bulk')
 export const saveAUrl = () => appSetMode('add')
-
-export const changeToLightTheme = () => ({ type: SHORTCUT_LIGHT_THEME })
-export const changeToDarkTheme = () => ({ type: SHORTCUT_DARK_THEME })
-export const changeToSepiaTheme = () => ({ type: SHORTCUT_SEPIA_THEME })
 
 export const selectNextItem = ({currentItem}) => ({ type: SHORTCUT_SELECT_NEXT_ITEM, currentItem }) //prettier-ignore
 export const selectPreviousItem = ({currentItem}) => ({ type: SHORTCUT_SELECT_PREVIOUS_ITEM, currentItem }) //prettier-ignore
@@ -91,7 +84,8 @@ export const listShortcuts = [
   { action: goToFavorites, copy: 'Go to Favorites', keyCopy: 'g then f', keys:  'g f' },
   { action: goToArticles, copy: 'Go to Articles', keyCopy: 'g then r', keys: 'g r' },
   { action: goToHighlights, copy: 'Go to Highlights', keyCopy: 'g then h', keys:  'g h' },
-  { action: goToVideos, copy: 'Go to Videos', keyCopy: 'g then v', keys:  'g v' },
+  { action: goToVideos, copy: 'Go to Videos', keyCopy: 'g then v', keys: 'g v' },
+  { action: gotToTag, copy: 'Go to a Tag Page', keyCopy: 'g then t', keys:  'g t' },
 
   { action: goToSearch, copy: 'Go to Search', keyCopy: 'g then s', keys: 'g s' },
   { action: bulkEdit, copy: 'Bulk Edit', keyCopy: 'g then b', keys:  'g b' },
@@ -104,9 +98,9 @@ export const listShortcuts = [
   { action: setListModeGrid, copy: 'Grid View', keyCopy: 'v then g', keys: 'v g' },
   { action: setListModeDetail, copy: 'Detail View', keyCopy: 'v then d', keys: 'v d' },
 
-  { action: changeToLightTheme, copy: 'Change to Light Theme	', keyCopy: 't then l', keys:  't l' },
-  { action: changeToDarkTheme, copy: 'Change to Dark Theme	', keyCopy: 't then d', keys:  't d' },
-  { action: changeToSepiaTheme, copy: 'Change to Sepia Theme', keyCopy: 't then s', keys:  't s' },
+  { action: setColorModeLight, copy: 'Change to Light Theme	', keyCopy: 'c then l', keys:  'c l' },
+  { action: setColorModeDark, copy: 'Change to Dark Theme	', keyCopy: 'c then d', keys:  'c d' },
+  { action: setColorModeSepia, copy: 'Change to Sepia Theme', keyCopy: 'c then s', keys:  'c s' },
 
   { action: selectNextItem, copy: 'Select Next Item', keyCopy: 'j', keys: 'j' },
   { action: selectPreviousItem, copy: 'Select Previous Item', keyCopy: 'k', keys:  'k' },
