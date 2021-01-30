@@ -8,6 +8,7 @@ import { setListModeList } from 'connectors/app/app.state'
 import { setListModeGrid } from 'connectors/app/app.state'
 import { setListModeDetail } from 'connectors/app/app.state'
 import { sortOrderToggle } from 'connectors/app/app.state'
+import { setColorMode } from 'connectors/app/app.state'
 
 import GlobalNavComponent from 'components/global-nav/global-nav'
 import GlobalNavSearch from './global-nav-search'
@@ -75,7 +76,9 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
 
   const listMode = useSelector((state) => state?.app?.listMode)
   const sortOrder = useSelector((state) => state?.app?.sortOrder)
+  const colorMode = useSelector((state) => state?.app?.colorMode)
 
+  const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
   const toggleSortOrder = () => dispatch(sortOrderToggle())
   const toggleListMode = () => dispatch(listModeToggle())
   const setListMode = () => dispatch(setListModeList())
@@ -220,6 +223,8 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       listMode={listMode}
       sortOrder={sortOrder}
       toggleSortOrder={toggleSortOrder}
+      colorMode={colorMode}
+      setColorMode={setAppColorMode}
       setListMode={setListMode}
       setGridMode={setGridMode}
       setDetailMode={setDetailMode}

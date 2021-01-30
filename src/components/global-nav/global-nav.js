@@ -220,6 +220,8 @@ const GlobalNav = ({
   onAccountClick,
   listMode,
   sortOrder,
+  colorMode,
+  setColorMode,
   toggleSortOrder,
   toggleListMode,
   setListMode,
@@ -318,6 +320,8 @@ const GlobalNav = ({
                 userStatus={userStatus}
                 listMode={listMode}
                 sortOrder={sortOrder}
+                colorMode={colorMode}
+                setColorMode={setColorMode}
                 toggleSortOrder={toggleSortOrder}
                 toggleListMode={toggleListMode}
                 sendImpression={sendImpression}

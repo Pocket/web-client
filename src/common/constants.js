@@ -14,6 +14,11 @@ export const ARTICLE_API_URL = 'https://tz7snrninbak3oh36gjshbmdia.appsync-api.u
 export const ARTICLE_API_KEY = 'da2-shleiiw7qzcnlkjwg3v7rfkpte' // Currently set to expire Thu, 04 Mar 2021 16:00:00 GMT
 export const READING_WPM = 220
 export const BATCH_SIZE = 30
+export const COLOR_MODE_PREFIX = 'colormode'
+
+export const CACHE_KEY_COLOR_MODE = 'pocket-color-mode'
+export const CACHE_KEY_LIST_MODE = 'pocket-list-mode'
+export const CACHE_KEY_SORT_ORDER = 'pocket-sort-order'
 
 // THIRD PARTY
 export const CAPTCHA_SITE_KEY = '6LfIpyYUAAAAAPtNSKafudr16odFL1eQte0vR0Py' // API key used with Google's ReCaptcha service

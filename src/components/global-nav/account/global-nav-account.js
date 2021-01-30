@@ -149,6 +149,8 @@ const GlobalNavAccount = ({
   sortOrder,
   toggleSortOrder,
   toggleListMode,
+  colorMode,
+  setColorMode,
   setListMode,
   setGridMode,
   setDetailMode,
@@ -300,7 +302,7 @@ const GlobalNavAccount = ({
             <Trans i18nKey="nav:log-out">Log out</Trans>
           </PopupMenuItem>
         </PopupMenuGroup>
-        <ThemeSettings />
+        <ThemeSettings setColorMode={setColorMode} colorMode={colorMode} />
         <ListSettings
           listMode={listMode}
           sortOrder={sortOrder}
