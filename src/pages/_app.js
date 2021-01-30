@@ -7,7 +7,7 @@ import { wrapper } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import * as Sentry from '@sentry/node'
-import { parseCookies, destroyCookie } from 'nookies'
+import { parseCookies } from 'nookies'
 
 import { fetchUserData, userHydrate } from 'connectors/user/user.state'
 import { getSessGuid, sessGuidHydrate } from 'connectors/user/user.state'
@@ -17,8 +17,7 @@ import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 
 import { hydrateUserTags } from 'containers/my-list/tags-page/tags-page.state'
 
-import { listModeSet } from 'connectors/app/app.state'
-import { sortOrderSet } from 'connectors/app/app.state'
+import { appSetPreferences } from 'connectors/app/app.state'
 
 /** Setup Files
  --------------------------------------------------------------- */
@@ -73,20 +72,10 @@ function PocketWebClient({ Component, pageProps, err }) {
     // d) a and b, then use the client side api for experiments 🔬
     // Check cookies (these are first party cookies)
     const cookies = parseCookies()
-    const {
-      sess_guid,
-      list_mode = 'grid', // TODO: Switch this to local storage
-      sort_order = 'newest' // TODO: Switch this to local storage
-    } = cookies
-
-    const listMode =
-      list_mode && list_mode !== 'undefined' && list_mode !== 'card'
-        ? list_mode
-        : 'grid'
+    const { sess_guid } = cookies
 
     // Set up defaults/user pref in state
-    dispatch(listModeSet(listMode))
-    dispatch(sortOrderSet(sort_order))
+    dispatch(appSetPreferences())
 
     /**
      * First time user
