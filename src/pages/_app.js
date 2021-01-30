@@ -3,17 +3,14 @@ import { ViewportProvider } from '@pocket/web-ui'
 import App from 'next/app'
 
 import { useEffect } from 'react'
-// import { END } from 'redux-saga'
 import { wrapper } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import * as Sentry from '@sentry/node'
 import { parseCookies, destroyCookie } from 'nookies'
 
-// import { appSetBaseURL } from 'connectors/app/app.state'
 import { fetchUserData, userHydrate } from 'connectors/user/user.state'
 import { getSessGuid, sessGuidHydrate } from 'connectors/user/user.state'
-import { userTokenValidate } from 'connectors/user/user.state'
 
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
 import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
@@ -60,92 +57,9 @@ function PocketWebClient({ Component, pageProps, err }) {
     loadPolyfills()
   }, [])
 
-  // Check user oAuth status
-  useEffect(() => {
-    if (user_status !== 'pending' || !useOAuth) return
-
-    // Check cookies (these are first party cookies)
-    const cookies = parseCookies()
-    const {
-      pkt_request_code,
-      pkt_access_token,
-      sess_guid,
-      list_mode = 'grid', // TODO: Switch this to local storage
-      sort_order = 'newest' // TODO: Switch this to local storage
-    } = cookies
-
-    const listMode =
-      list_mode && list_mode !== 'undefined' && list_mode !== 'card'
-        ? list_mode
-        : 'grid'
-
-    // Set up defaults/user pref in state
-    dispatch(listModeSet(listMode))
-    dispatch(sortOrderSet(sort_order))
-
-    /**
-     * First time user
-     * We don't have a sess_guid for this users so we are gonna
-     * assume they are a logged out user and treat them as such
-     * --------------------------------------------------------------
-     */
-    const initializeUser = async () => {
-      const sess_guid = await getSessGuid()
-      if (!sess_guid) return
-
-      dispatch(sessGuidHydrate(sess_guid))
-      dispatch(userHydrate(false))
-    }
-
-    /**
-     * User awaiting validation
-     * This will only happen when we are using an oAuth flow. This
-     * takes a request code and validates it.  If valid, it grabs
-     * user info and hydrates
-     * --------------------------------------------------------------
-     */
-    const validateUser = async () => {
-      // We are only gonna try this code once
-      destroyCookie(null, 'pkt_request_code')
-
-      // Get an access token set
-      const isValid = await userTokenValidate(pkt_request_code)
-
-      if (isValid) {
-        // hydrate user
-        const user = await fetchUserData()
-        dispatch(userHydrate({ ...user, sess_guid }))
-      }
-    }
-
-    /**
-     * User is stored
-     * --------------------------------------------------------------
-     */
-    const hydrateUser = async () => {
-      // Check cookies (these are first party cookies)
-      const cookies = parseCookies()
-      const storedUser = {
-        sess_guid: cookies.sess_guid
-      }
-
-      dispatch(userHydrate(storedUser, true))
-
-      // Update user data
-      const user = await fetchUserData()
-      dispatch(userHydrate({ ...user, sess_guid }))
-    }
-
-    // Select a scenario
-    if (!pkt_request_code && !pkt_access_token && !sess_guid) initializeUser()
-    if (pkt_request_code) validateUser(pkt_request_code)
-    if (pkt_access_token) hydrateUser()
-    if (sess_guid && !pkt_access_token) dispatch(userHydrate(false))
-  }, [user_status, useOAuth, dispatch])
-
   // Check user status with cookies
   useEffect(() => {
-    if (user_status !== 'pending' || useOAuth) return
+    if (user_status !== 'pending') return
 
     // !! NOTE: This will never return a server side guid.
     // This really only  returns the sess_guid that we set.
@@ -157,7 +71,6 @@ function PocketWebClient({ Component, pageProps, err }) {
     // b) drop sess_guid as a requirement for snowplow 👏
     // c) make every page server rendered (as opposed to build time generated) 🤮
     // d) a and b, then use the client side api for experiments 🔬
-
     // Check cookies (these are first party cookies)
     const cookies = parseCookies()
     const {
