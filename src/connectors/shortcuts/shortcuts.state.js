@@ -22,6 +22,7 @@ import { SHORTCUT_SET_CURRENT_ITEM } from 'actions'
 import { SHORTCUT_ARCHIVE_SELECTED_ITEM } from 'actions'
 import { SHORTCUT_FAVORITE_SELECTED_ITEM } from 'actions'
 import { SHORTCUT_TAG_SELECTED_ITEM } from 'actions'
+import { SHORTCUT_DELETE_ITEM } from 'actions'
 import { SHORTCUT_VIEW_ORIGINAL_VERSION } from 'actions'
 import { SHORTCUT_ENGAGE_SELECTED_ITEM } from 'actions'
 
@@ -70,8 +71,11 @@ export const engageSelectedItem = ({ router, appMode }) => ({ type: SHORTCUT_ENG
 export const archiveSelectedItem = ({currentItem}) => ({ type: SHORTCUT_ARCHIVE_SELECTED_ITEM, currentItem }) //prettier-ignore
 export const favoriteSelectedItem = ({currentItem}) => ({ type: SHORTCUT_FAVORITE_SELECTED_ITEM, currentItem }) //prettier-ignore
 export const tagSelectedItem = ({currentItem}) => ({ type: SHORTCUT_TAG_SELECTED_ITEM, currentItem }) //prettier-ignore
+export const deleteSelectedItem = ({ currentItem }) => ({
+  type: SHORTCUT_DELETE_ITEM,
+  currentItem
+})
 export const viewOriginalVersion = ({currentItem}) => ({ type: SHORTCUT_VIEW_ORIGINAL_VERSION, currentItem }) //prettier-ignore
-
 export const increaseFontSize = () => ({ type: SHORTCUT_INCREASE_FONT_SIZE })
 export const decreaseFontSize = () => ({ type: SHORTCUT_DECREASE_FONT_SIZE })
 
@@ -109,7 +113,8 @@ export const listShortcuts = [
 
   // Everything above this line works.  Everything below this line is a work in progress
   { action: selectNextItem, copy: 'Select Next Item', keyCopy: 'j', keys: 'j' },
-  { action: selectPreviousItem, copy: 'Select Previous Item', keyCopy: 'k', keys:  'k' },
+  { action: selectPreviousItem, copy: 'Select Previous Item', keyCopy: 'k', keys: 'k' },
+  { action: deleteSelectedItem, copy: 'Delete Selected Item', keyCopy: 'd', keys:  'd' },
   { action: archiveSelectedItem, copy: 'Archive Selected Item', keyCopy: 'a', keys:  'a' },
   { action: favoriteSelectedItem, copy: 'Favorite Selected Item', keyCopy: 'f', keys:  'f' },
   { action: tagSelectedItem, copy: 'Tag Selected Item', keyCopy: 't', keys:  't' },
