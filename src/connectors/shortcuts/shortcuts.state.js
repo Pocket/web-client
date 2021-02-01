@@ -68,23 +68,17 @@ export const selectNextItem = ({appMode}) => ({ type: SHORTCUT_SELECT_NEXT_ITEM,
 export const selectPreviousItem = ({appMode}) => ({ type: SHORTCUT_SELECT_PREVIOUS_ITEM, appMode }) //prettier-ignore
 export const engageSelectedItem = ({ router, appMode }) => ({ type: SHORTCUT_ENGAGE_SELECTED_ITEM, router, appMode }) //prettier-ignore
 
-export const archiveSelectedItem = ({currentItem}) => ({ type: SHORTCUT_ARCHIVE_SELECTED_ITEM, currentItem }) //prettier-ignore
-export const favoriteSelectedItem = ({currentItem}) => ({ type: SHORTCUT_FAVORITE_SELECTED_ITEM, currentItem }) //prettier-ignore
-export const tagSelectedItem = ({currentItem}) => ({ type: SHORTCUT_TAG_SELECTED_ITEM, currentItem }) //prettier-ignore
-export const deleteSelectedItem = ({ currentItem }) => ({
-  type: SHORTCUT_DELETE_ITEM,
-  currentItem
-})
-export const viewOriginalVersion = ({currentItem}) => ({ type: SHORTCUT_VIEW_ORIGINAL_VERSION, currentItem }) //prettier-ignore
 export const increaseFontSize = () => ({ type: SHORTCUT_INCREASE_FONT_SIZE })
 export const decreaseFontSize = () => ({ type: SHORTCUT_DECREASE_FONT_SIZE })
 
 export const goBack = () => ({ type: SHORTCUT_GO_BACK })
 
-export const editTags = ({currentItem}) => ({ type: SHORTCUT_EDIT_TAGS, currentItem }) //prettier-ignore
+export const deleteItem = ({currentItem}) => ({ type: SHORTCUT_DELETE_ITEM, currentItem }) //prettier-ignore
 export const archiveItem = ({currentItem}) => ({ type: SHORTCUT_ARCHIVE_ITEM, currentItem }) //prettier-ignore
-export const favoriteItem = ({currentItem}) => ({ type: SHORTCUT_FAVORITE_ITEM, currentItem }) //prettier-ignore
-export const viewOriginal = ({currentItem}) => ({ type: SHORTCUT_VIEW_ORIGINAL, currentItem }) //prettier-ignore
+export const favoriteItem = ({ currentItem }) => ({ type: SHORTCUT_FAVORITE_ITEM, currentItem }) //prettier-ignore
+export const editTags = ({ currentItem }) => ({ type: SHORTCUT_EDIT_TAGS, currentItem }) //prettier-ignore
+
+export const viewOriginal = ({router}) => ({ type: SHORTCUT_VIEW_ORIGINAL, router }) //prettier-ignore
 
 // prettier-ignore
 export const listShortcuts = [
@@ -111,16 +105,23 @@ export const listShortcuts = [
   { action: setColorModeDark, copy: 'Change to Dark Theme	', keyCopy: 'c then d', keys:  'c d' },
   { action: setColorModeSepia, copy: 'Change to Sepia Theme', keyCopy: 'c then s', keys:  'c s' },
 
-  // Everything above this line works.  Everything below this line is a work in progress
+
   { action: selectNextItem, copy: 'Select Next Item', keyCopy: 'j', keys: 'j' },
   { action: selectPreviousItem, copy: 'Select Previous Item', keyCopy: 'k', keys: 'k' },
-  { action: deleteSelectedItem, copy: 'Delete Selected Item', keyCopy: 'd', keys:  'd' },
-  { action: archiveSelectedItem, copy: 'Archive Selected Item', keyCopy: 'a', keys:  'a' },
-  { action: favoriteSelectedItem, copy: 'Favorite Selected Item', keyCopy: 'f', keys:  'f' },
-  { action: tagSelectedItem, copy: 'Tag Selected Item', keyCopy: 't', keys:  't' },
-  { action: viewOriginalVersion, copy: 'View Original Version of Selected Item', keyCopy: 'o', keys:  'o' },
-  { action: engageSelectedItem, copy: 'Open/Bulk Add Selected Item', keyCopy: 'enter', keys:  ['enter'] },
-  { action: toggleHelpOverlay, copy: 'Open Help Overlay', keyCopy: '? or /', keys:  ['?', '/'] }
+  { action: engageSelectedItem, copy: 'Open/Bulk Add Selected Item', keyCopy: 'enter', keys: ['enter'] },
+
+  { action: viewOriginal, copy: 'View Original Version of Selected Item', keyCopy: 'o', keys: 'o' },
+
+  // Everything above this line works.  Everything below this line is a work in progress
+
+  { action: deleteItem, copy: 'Delete Selected Item', keyCopy: 'd', keys:  'd' },
+  { action: archiveItem, copy: 'Archive Selected Item', keyCopy: 'a', keys:  'a' },
+  { action: favoriteItem, copy: 'Favorite Selected Item', keyCopy: 'f', keys:  'f' },
+  { action: editTags, copy: 'Tag Selected Item', keyCopy: 't', keys:  't' },
+
+
+
+  { action: toggleHelpOverlay, copy: 'Open Help Overlay', keyCopy: '? or /', keys: ['?', '/'] }
 ]
 
 // prettier-ignore
@@ -174,7 +175,8 @@ export const shortcutSagas = [
   takeEvery(SHORTCUT_SELECT_NEXT_ITEM, shortcutNextItem),
   takeEvery(SHORTCUT_SELECT_PREVIOUS_ITEM, shortcutPreviousItem),
   takeEvery(SHORTCUT_ENGAGE_SELECTED_ITEM, shortcutEngage),
-  takeLatest(APP_SET_MODE, appModeSwitch)
+  takeLatest(APP_SET_MODE, appModeSwitch),
+  takeLatest(SHORTCUT_VIEW_ORIGINAL, shortcutViewOriginal)
 ]
 
 /* SAGAS :: SELECTORS
@@ -183,6 +185,7 @@ const getCurrentItemId = (state) => state.shortcuts.currentId
 const getCurrentBulkItemId = (state) => state.bulkEdit.currentId
 const getSection = (state) => state.app.section
 const getItems = (state, section) => state.myList[section]
+const getItem = (state, id) => state.myListItemsById[id]
 
 /** SAGA :: RESPONDERS
 --------------------------------------------------------------- */
@@ -263,11 +266,22 @@ function* selectBulkItem(next) {
 function* shortcutEngage({ appMode, router }) {
   if (appMode === 'bulk') return yield call(bulkEngage)
 
-  // const selectedtId = yield select(getCurrentItemId)
-  // yield console.log('mode:', selectedtId)
+  const selectedId = yield select(getCurrentItemId)
+  yield call(router.push, `/read/${selectedId}`)
 }
 
 function* bulkEngage() {
   const bulkId = yield select(getCurrentBulkItemId)
   yield put({ type: ITEMS_BULK_TOGGLE, id: bulkId })
+}
+
+function* shortcutViewOriginal({ router }) {
+  const selectedId = yield select(getCurrentItemId)
+  if (!selectedId) return
+
+  const item = yield select(getItem, selectedId)
+  if (!item) return
+
+  const { open_url } = item
+  yield call(window.open, open_url, '_blank')
 }
