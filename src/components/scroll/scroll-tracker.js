@@ -1,18 +1,11 @@
-import React, { Component } from 'react'
-import detectIt from 'detect-it'
+import { useState, useEffect } from 'react'
 
 export const ScrollTracker = (ComponentToWrap) => {
-  return class ScrollHandler extends Component {
-    constructor(props) {
-      super(props)
-      this.checking = false
-      this.state = {
-        scrollPercentage: 0,
-        scrollDirection: 'd'
-      }
-    }
+  return ((props) => {
+    let checking = false
+    const [scrollPercentage, setPercentage] = useState(0)
 
-    getScrollPercent() {
+    const getScrollPercent = () => {
       // https://stackoverflow.com/a/8028584
       const h = document.documentElement,
         b = document.body,
@@ -20,59 +13,32 @@ export const ScrollTracker = (ComponentToWrap) => {
         sh = 'scrollHeight'
 
       var val = ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100
+      return isFinite(val) ? val : 0
+    }
 
-      return {
-        percent: isFinite(val) ? val : 0,
-        value: h[st] || b[st]
+    const update = () => {
+      checking = false
+      const percent = getScrollPercent()
+      setPercentage(percent)
+    }
+
+    useEffect(() => {
+      update()
+
+      const handleScroll = () => {
+        if (!checking) requestAnimationFrame(update)
+        checking = true
       }
-    }
 
-    update = () => {
-      this.checking = false
-      const { percent, value } = this.getScrollPercent()
-      const direction = percent >= this.state.scrollPercentage ? 'd' : 'u'
+      document.addEventListener('scroll', handleScroll)
+      return window.removeEventListener('scroll', handleScroll)
+    }, [])
 
-      this.setState({
-        scrollPercentage: percent,
-        scrollValue: value,
-        scrollDirection: direction
-      })
-    }
-
-    handleScroll = () => {
-      if (!this.checking) requestAnimationFrame(this.update)
-      this.checking = true
-    }
-
-    componentDidMount() {
-      window.addEventListener(
-        'scroll',
-        this.handleScroll,
-        detectIt.passiveEvents ? { passive: true } : false
-      )
-    }
-
-    componentWillUnmount() {
-      window.removeEventListener(
-        'scroll',
-        this.handleScroll,
-        detectIt.passiveEvents ? { passive: true } : false
-      )
-    }
-
-    componentWillMount() {
-      this.update()
-    }
-
-    render() {
-      return (
-        <ComponentToWrap
-          {...this.props}
-          scrollPercentage={this.state.scrollPercentage}
-          scrollValue={this.state.scrollValue}
-          scrollDirection={this.state.scrollDirection}
-        />
-      )
-    }
-  }
+    return (
+      <ComponentToWrap
+        {...props}
+        scrollPercentage={scrollPercentage}
+      />
+    )
+  })
 }
