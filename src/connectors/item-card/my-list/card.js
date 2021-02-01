@@ -43,6 +43,9 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const bulkList = useSelector((state) => state.bulkEdit)
   const bulkSelected = bulkList?.selected?.map((item) => item.id).includes(id)
 
+  const shortcutId = useSelector((state) => state.shortcuts.currentId)
+  const shortcutSelected = shortcutId === id
+
   const itemImpression = () => {
     if (!impression[position]) {
       dispatch(setImpression(position, item))
@@ -104,6 +107,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
       type={type}
       bulkEdit={bulkEdit}
       bulkSelected={bulkSelected}
+      shortcutSelected={shortcutSelected}
       onOpen={onOpen}
       actions={{
         itemShare,

@@ -68,6 +68,11 @@ const card = css`
     display: block;
   }
 
+  &.shortcutSelected .bulkBacking {
+    background-color: var(--color-navCurrentTab);
+    display: block;
+  }
+
   &.fixedheightgrid {
     height: 355px;
   }
@@ -191,6 +196,7 @@ export const Card = ({
   actions,
   bulkEdit,
   bulkSelected,
+  shortcutSelected,
   onOpen,
   position,
   isPremium
@@ -226,7 +232,8 @@ export const Card = ({
   const cardClass = cx(
     card,
     bulkEdit && 'bulkEdit',
-    bulkSelected && 'bulkSelected'
+    bulkSelected && 'bulkSelected',
+    shortcutSelected && 'shortcutSelected'
   )
 
   const { t } = useTranslation()

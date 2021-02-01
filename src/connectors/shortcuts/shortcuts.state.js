@@ -1,4 +1,5 @@
-import { takeLatest, call } from 'redux-saga/effects'
+import { takeLatest, takeEvery, put, call, select } from 'redux-saga/effects'
+import { APP_SET_MODE } from 'actions'
 
 import { SHORTCUT_OPEN_HELP_OVERLAY } from 'actions'
 import { SHORTCUT_CLOSE_HELP_OVERLAY } from 'actions'
@@ -14,6 +15,7 @@ import { SHORTCUT_GO_TO_TAG } from 'actions'
 
 import { SHORTCUT_SELECT_NEXT_ITEM } from 'actions'
 import { SHORTCUT_SELECT_PREVIOUS_ITEM } from 'actions'
+import { SHORTCUT_SET_CURRENT_ITEM } from 'actions'
 
 import { SHORTCUT_ARCHIVE_SELECTED_ITEM } from 'actions'
 import { SHORTCUT_FAVORITE_SELECTED_ITEM } from 'actions'
@@ -102,6 +104,7 @@ export const listShortcuts = [
   { action: setColorModeDark, copy: 'Change to Dark Theme	', keyCopy: 'c then d', keys:  'c d' },
   { action: setColorModeSepia, copy: 'Change to Sepia Theme', keyCopy: 'c then s', keys:  'c s' },
 
+  // Everything above this line works.  Everything below this line is a work in progress
   { action: selectNextItem, copy: 'Select Next Item', keyCopy: 'j', keys: 'j' },
   { action: selectPreviousItem, copy: 'Select Previous Item', keyCopy: 'k', keys:  'k' },
   { action: archiveSelectedItem, copy: 'Archive Selected Item', keyCopy: 'a', keys:  'a' },
@@ -120,8 +123,8 @@ export const readerShortcuts = [
 ]
 
 const initialState = {
-  display_legend: false,
-  current_id: false
+  displayLegend: false,
+  currentId: false
 }
 
 /** REDUCERS
@@ -129,16 +132,21 @@ const initialState = {
 export const shortcutReducers = (state = initialState, action) => {
   switch (action.type) {
     case SHORTCUT_TOGGLE_HELP_OVERLAY: {
-      const isDisplayed = state.display_legend
-      return { ...state, display_legend: !isDisplayed }
+      const isDisplayed = state.displayLegend
+      return { ...state, displayLegend: !isDisplayed }
     }
 
     case SHORTCUT_OPEN_HELP_OVERLAY: {
-      return { ...state, display_legend: true }
+      return { ...state, displayLegend: true }
     }
 
     case SHORTCUT_CLOSE_HELP_OVERLAY: {
-      return { ...state, display_legend: false }
+      return { ...state, displayLegend: false }
+    }
+
+    case SHORTCUT_SET_CURRENT_ITEM: {
+      const { currentId } = action
+      return { ...state, currentId }
     }
 
     default:
@@ -154,12 +162,24 @@ export const shortcutSagas = [
   takeLatest(SHORTCUT_GO_TO_FAVORITES, shortcutGoToFavorites),
   takeLatest(SHORTCUT_GO_TO_ARTICLES, shortcutGoToArticles),
   takeLatest(SHORTCUT_GO_TO_HIGHLIGHTS, shortcutGoToHighlights),
-  takeLatest(SHORTCUT_GO_TO_VIDEOS, shortcutGoToVideos)
+  takeLatest(SHORTCUT_GO_TO_VIDEOS, shortcutGoToVideos),
+  takeEvery(SHORTCUT_SELECT_NEXT_ITEM, shortcutNextItem),
+  takeEvery(SHORTCUT_SELECT_PREVIOUS_ITEM, shortcutPreviousItem),
+  takeLatest(APP_SET_MODE, appModeSwitch)
 ]
 
-/** SAGA :: RESPONDERS
+/* SAGAS :: SELECTORS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+const getCurrentItemId = (state) => state.shortcuts.currentId
+const getSection = (state) => state.app.section
+const getItems = (state, section) => state.myList[section]
 
+/** SAGA :: RESPONDERS
 --------------------------------------------------------------- */
+function* appModeSwitch() {
+  yield put({ type: SHORTCUT_SET_CURRENT_ITEM, currentId: false })
+}
+
 function* shortcutGoToList({ router }) {
   yield call(router.push, '/my-list')
 }
@@ -182,4 +202,32 @@ function* shortcutGoToHighlights({ router }) {
 
 function* shortcutGoToVideos({ router }) {
   yield call(router.push, '/my-list/videos')
+}
+
+function* shortcutNextItem() {
+  const newId = yield call(selectItem, true)
+  yield put({ type: SHORTCUT_SET_CURRENT_ITEM, currentId: newId })
+}
+
+function* shortcutPreviousItem() {
+  const newId = yield call(selectItem, false)
+  yield put({ type: SHORTCUT_SET_CURRENT_ITEM, currentId: newId })
+}
+
+function* selectItem(next) {
+  const currentId = yield select(getCurrentItemId)
+  const section = yield select(getSection)
+  const items = yield select(getItems, section)
+  const total = items.length
+  const currentPosition = items.indexOf(currentId)
+
+  if (next) {
+    const nextPosition = currentPosition < 0 ? 0 : currentPosition + 1
+    const nextId = items[nextPosition] ? items[nextPosition] : false
+    return nextId
+  }
+
+  const prevPosition = currentPosition >= total ? total : currentPosition - 1
+  const prevId = items[prevPosition] ? items[prevPosition] : false
+  return prevId
 }
