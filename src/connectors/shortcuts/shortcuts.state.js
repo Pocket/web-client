@@ -118,8 +118,8 @@ export const listShortcuts = [
 // prettier-ignore
 export const readerShortcuts = [
   {action: increaseFontSize, copy: 'Increase Font Size', keyCopy: 'Command/Control with +', keys: ['ctrl++', 'command++'] },
-  {action: decreaseFontSize, copy: 'Decrease Font Size', keyCopy: 'Command/Control with -', keys: ['ctrl+-', 'meta+-']},
-  {action: goBack, copy: 'Go Back', keyCopy: 'b', keys: ''},
+  {action: decreaseFontSize, copy: 'Decrease Font Size', keyCopy: 'Command/Control with -', keys: ['ctrl+-', 'command+-']},
+  {action: goBack, copy: 'Go Back', keyCopy: 'b', keys: 'b'},
 ]
 
 const initialState = {
