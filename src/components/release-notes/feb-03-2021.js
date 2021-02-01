@@ -3,8 +3,8 @@ import { Trans } from 'common/setup/i18n'
 export default function ReleaseNotes() {
   return (
     <section>
-      <Trans i18nKey="release:february-02-2021">
-        <h5>February 2, 2021</h5>
+      <Trans i18nKey="release:february-03-2021">
+        <h5>February 3, 2021</h5>
 
         <h6>🎉 What’s New</h6>
         <p>
