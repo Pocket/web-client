@@ -64,7 +64,7 @@ export const cardGrid = css`
       z-index: var(--zIndexRaised);
     }
     .bulkBacking {
-      padding: 1.1em;
+      padding: 0.45em 0.65em;
     }
   }
 
@@ -189,6 +189,7 @@ export const cardList = css`
     }
     .bulkBacking {
       padding: 0.125em 1.1em;
+      transform: translate(-0.5em, -1.1em);
     }
     .actions {
       grid-column: 4 / span 5;
@@ -338,8 +339,10 @@ export const cardDetail = css`
     }
 
     .bulkBacking {
-      padding: 0.125em 1.1em;
+      padding: 0 0.5em;
+      transform: translate(-0.5em, -1em);
     }
+
     .tags {
       grid-column: 3 / span 7;
       overflow: hidden;

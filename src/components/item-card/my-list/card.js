@@ -58,7 +58,7 @@ const card = css`
     border-radius: var(--borderRadius);
     width: 100%;
     height: 100%;
-    transform: translate(-1.1em, -1.1em);
+    transform: translate(-0.45em, -0.65em);
     display: none;
     z-index: -1;
   }

@@ -6,7 +6,6 @@ const itemActionStyle = css`
   justify-content: flex-start;
   align-items: center;
   align-content: center;
-  background-color: var(--color-canvas);
   border-radius: 0 0 4px 4px;
   padding-bottom: var(--size025);
   position: relative;
