@@ -166,7 +166,7 @@ export function TaggingModal() {
           {allTags.length > 0 ? (
             <TypeAhead
               reFocus={setFocus}
-              setValue={setValue}
+              setValue={addTag}
               inputValue={value}
               textInput={inputReference.current}
               items={allTags}
