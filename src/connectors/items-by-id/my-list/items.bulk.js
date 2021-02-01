@@ -2,6 +2,7 @@ import { put, takeEvery, take, race, select, call } from 'redux-saga/effects'
 
 import { ITEMS_BULK_SELECT } from 'actions'
 import { ITEMS_BULK_DESELECT } from 'actions'
+import { ITEMS_BULK_TOGGLE } from 'actions'
 import { ITEMS_BULK_ADD } from 'actions'
 import { ITEMS_BULK_REMOVE } from 'actions'
 import { ITEMS_BULK_CLEAR } from 'actions'
@@ -11,6 +12,7 @@ import { ITEMS_BULK_BATCH_SUCCESS } from 'actions'
 import { ITEMS_BULK_BATCH_FAILURE } from 'actions'
 import { ITEMS_BULK_BATCH_COMPLETE } from 'actions'
 import { ITEMS_ARCHIVE_CANCEL } from 'actions'
+import { ITEMS_BULK_SET_CURRENT } from 'actions'
 
 import { ITEMS_FAVORITE_BATCH } from 'actions'
 import { ITEMS_UNFAVORITE_BATCH } from 'actions'
@@ -27,6 +29,7 @@ export const itemsBulkAction = ( bulkAction ) => ({ type: ITEMS_BULK_FIRE_ACTION
 const initialState = {
   selected: [],
   lastId: null,
+  currentId: null,
   endPosition: 0,
   batchFavorite: 'favorite', // determines if the action is favorite/unfavorite
   batchStatus: 'archive', // determines if the action is archive/unarchive
@@ -38,6 +41,11 @@ const initialState = {
 
 export const itemBulkReducers = (state = initialState, action) => {
   switch (action.type) {
+    case ITEMS_BULK_SET_CURRENT: {
+      const { currentId } = action
+      return { ...state, currentId }
+    }
+
     case ITEMS_BULK_ADD: {
       const { items, lastId, endPosition, batchFavorite, batchStatus } = action
       const selectedIds = state.selected.map((item) => item.id)
@@ -95,7 +103,8 @@ export const itemBulkReducers = (state = initialState, action) => {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const itemBulkSagas = [
   takeEvery(ITEMS_BULK_SELECT, itemBulkSelect),
-  takeEvery(ITEMS_BULK_DESELECT, itemBulkDeSelect)
+  takeEvery(ITEMS_BULK_DESELECT, itemBulkDeSelect),
+  takeEvery(ITEMS_BULK_TOGGLE, itemsBulkToggle)
 ]
 
 /* SAGAS :: SELECTORS
@@ -110,6 +119,7 @@ const getSelected = (state) => state.bulkEdit.selected
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export function* itemBulkSelect(action) {
+  console.log('select')
   try {
     const { id, shift } = action
 
@@ -168,6 +178,7 @@ export function* itemBulkSelect(action) {
 }
 
 export function* itemBulkDeSelect(action) {
+  console.log('deselect')
   try {
     const { id, shift } = action
 
@@ -196,6 +207,16 @@ export function* itemBulkDeSelect(action) {
   } catch (error) {
     console.log(error)
   }
+}
+
+function* itemsBulkToggle(action) {
+  const { id } = action
+  const selected = yield select(getSelected)
+  const isSelected = selected.filter((item) => item.id === id)
+  console.log(isSelected.length)
+  yield isSelected.length
+    ? call(itemBulkDeSelect, { id })
+    : call(itemBulkSelect, { id })
 }
 
 function setBatchActions(draft) {

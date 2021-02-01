@@ -59,15 +59,17 @@ const card = css`
     width: 100%;
     height: 100%;
     transform: translate(-0.45em, -0.65em);
+    border: 1px solid transparent;
     display: none;
     z-index: -1;
   }
 
-  &.bulkSelected .bulkBacking {
-    background-color: var(--color-navCurrentTab);
+  &.bulkIsCurrent .bulkBacking {
+    border-color: var(--color-formFieldFocusLabel);
     display: block;
   }
 
+  &.bulkSelected .bulkBacking,
   &.shortcutSelected .bulkBacking {
     background-color: var(--color-navCurrentTab);
     display: block;
@@ -196,6 +198,7 @@ export const Card = ({
   actions,
   bulkEdit,
   bulkSelected,
+  bulkIsCurrent,
   shortcutSelected,
   onOpen,
   position,
@@ -231,6 +234,7 @@ export const Card = ({
 
   const cardClass = cx(
     card,
+    bulkIsCurrent && 'bulkIsCurrent',
     bulkEdit && 'bulkEdit',
     bulkSelected && 'bulkSelected',
     shortcutSelected && 'shortcutSelected'

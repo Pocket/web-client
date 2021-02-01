@@ -40,8 +40,11 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const item = useSelector((state) => state.myListItemsById[id])
   const impression = useSelector((state) => state.itemsAnalytics.impressions)
 
-  const bulkList = useSelector((state) => state.bulkEdit)
-  const bulkSelected = bulkList?.selected?.map((item) => item.id).includes(id)
+  const bulkList = useSelector((state) => state.bulkEdit.selected)
+  const bulkCurrent = useSelector((state) => state.bulkEdit.currentId)
+
+  const bulkIsCurrent = bulkCurrent === id
+  const bulkSelected = bulkList?.map((item) => item.id).includes(id)
 
   const shortcutId = useSelector((state) => state.shortcuts.currentId)
   const shortcutSelected = shortcutId === id
@@ -107,6 +110,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
       type={type}
       bulkEdit={bulkEdit}
       bulkSelected={bulkSelected}
+      bulkIsCurrent={bulkIsCurrent}
       shortcutSelected={shortcutSelected}
       onOpen={onOpen}
       actions={{

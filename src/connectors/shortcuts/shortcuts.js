@@ -11,6 +11,7 @@ export function Shortcuts() {
   const dispatch = useDispatch()
   const router = useRouter()
 
+  const appMode = useSelector((state) => state.app.mode)
   const showShortcuts = useSelector((state) => state.shortcuts.displayLegend)
 
   const APP_ROOT_SELECTOR = '#__next'
@@ -18,7 +19,7 @@ export function Shortcuts() {
 
   useEffect(() => {
     listShortcuts.forEach(({ keys, action }) => {
-      const actionPayload = action({ router })
+      const actionPayload = action({ router, appMode })
       const boundAction = () => dispatch(actionPayload)
       Mousetrap.bind(keys, boundAction)
     })
@@ -27,7 +28,7 @@ export function Shortcuts() {
     return () => {
       listShortcuts.forEach(({ keys }) => Mousetrap.unbind(keys))
     }
-  }, [dispatch, router])
+  }, [dispatch, router, appMode])
 
   return showShortcuts ? (
     <ShortCutsView
