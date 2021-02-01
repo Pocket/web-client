@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import styled from '@emotion/styled'
+import React, { useRef, useEffect } from 'react'
 import { css } from 'linaria'
 import classNames from 'classnames'
+import { usePrevious } from 'common/utilities/hooks/has-changed'
 
 const itemWrapper = css`
   font-family: 'Graphik Web';
@@ -28,30 +28,22 @@ const itemWrapper = css`
   }
 `
 
-export class TypeAheadItem extends Component {
-  constructor(props) {
-    super(props)
-    this.element = React.createRef()
-  }
+export const TypeAheadItem = ({ item, index, action, isActive }) => {
+  const ref = useRef()
+  const prevActive = usePrevious(isActive)
 
-  clickAction = () => {
-    this.props.action(this.props.index)
-  }
+  useEffect(() => {
+    if (prevActive) return
+    if (isActive) ref.current.scrollIntoView({ block: 'center' })
+  }, [isActive])
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.isActive) return
-    if (this.props.isActive)
-      this.element.current.scrollIntoView({ block: 'center' })
-  }
+  const clickAction = () => action(index)
 
-  render() {
-    const { isActive, item } = this.props
-    return (
-      <div
-        className={classNames(itemWrapper, { isActive })}
-        onClick={this.clickAction}>
-        <span ref={this.element}>{item}</span>
-      </div>
-    )
-  }
+  return (
+    <div
+      className={classNames(itemWrapper, { isActive })}
+      onClick={clickAction}>
+      <span ref={ref}>{item}</span>
+    </div>
+  )
 }

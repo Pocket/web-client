@@ -1,7 +1,7 @@
 import { css } from 'linaria'
 
 export const typeAheadWrapper = css`
-  max-height: 11.4rem;
+  max-height: 7rem;
   overflow-y: auto;
   overflow-x: hidden;
   border: 1px solid #ccc;

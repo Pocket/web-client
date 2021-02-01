@@ -41,7 +41,7 @@ class TypeAheadStory extends React.Component {
         />
 
         <TypeAhead
-          inputReady={this.state.inputReady}
+          // inputReady={this.state.inputReady}
           reFocus={this.reFocus}
           setValue={this.setValue}
           inputValue={this.state.inputValue}
