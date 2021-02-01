@@ -23,6 +23,8 @@ import {
   updateFontSize,
   updateFontType
 } from 'containers/read/read.state'
+import { WrappedProgressBar } from 'components/progress-bar/progress-bar'
+
 import { useTranslation } from 'common/setup/i18n'
 
 const headerStyle = css`
@@ -234,6 +236,7 @@ export const ReaderNav = ({
           />
         </nav>
       </div>
+      <WrappedProgressBar />
     </header>
   )
 }

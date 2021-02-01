@@ -1,4 +1,5 @@
 import { css } from 'linaria'
+import { ScrollTracker } from 'components/scroll/scroll-tracker'
 
 const barWrapper = css`
   display: block;
@@ -16,8 +17,8 @@ const barWrapper = css`
   }
 `
 
-export const ProgressBar = ({ percentage = 0, noScroll = false }) => {
-  const barTranslate = noScroll ? 0 : percentage
+export const ProgressBar = ({ scrollPercentage = 0, noScroll = false }) => {
+  const barTranslate = noScroll ? 0 : scrollPercentage
   return (
     <div className={barWrapper}>
       <div
@@ -28,3 +29,5 @@ export const ProgressBar = ({ percentage = 0, noScroll = false }) => {
     </div>
   )
 }
+
+export const WrappedProgressBar = ScrollTracker(ProgressBar)
