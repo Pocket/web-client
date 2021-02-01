@@ -8,6 +8,8 @@ import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import isURL from 'validator/lib/isURL'
 import { Trans, useTranslation } from 'common/setup/i18n'
+import { KEYS } from 'common/constants'
+import Mousetrap from 'mousetrap'
 
 const addStyle = css`
   width: 100%;
@@ -180,6 +182,15 @@ const GlobalNavAdd = ({
     onClose()
   }
 
+  const handleKeyUp = (event) => {
+    if (event.keyCode === KEYS.ESCAPE) inputEl.current.blur()
+  }
+
+  useEffect(() => {
+    Mousetrap.bind('esc', onClose)
+    return () => Mousetrap.unbind('esc')
+  }, [onClose])
+
   useEffect(() => {
     updateIsMobile(window.innerWidth < screenMediumHandset)
   }, [window.innerWidth])
@@ -202,6 +213,7 @@ const GlobalNavAdd = ({
           onChange={handleInputChange}
           onFocus={onFocus}
           onBlur={onBlur}
+          onKeyUp={handleKeyUp}
           placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
           {...testIdAttribute('add-input')}
         />

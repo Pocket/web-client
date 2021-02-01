@@ -7,6 +7,8 @@ import { css } from 'linaria'
 import classnames from 'classnames'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { Trans, useTranslation } from 'common/setup/i18n'
+import { KEYS } from 'common/constants'
+import Mousetrap from 'mousetrap'
 
 const searchStyle = css`
   width: 100%;
@@ -171,6 +173,15 @@ const GlobalNavSearch = ({
     onSubmit(searchTerm)
   }
 
+  const handleKeyUp = (event) => {
+    if (event.keyCode === KEYS.ESCAPE) inputEl.current.blur()
+  }
+
+  useEffect(() => {
+    Mousetrap.bind('esc', onClose)
+    return () => Mousetrap.unbind('esc')
+  }, [onClose])
+
   useEffect(() => {
     updateIsMobile(window.innerWidth < screenMediumHandset)
   }, [window.innerWidth])
@@ -195,6 +206,7 @@ const GlobalNavSearch = ({
           onChange={handleInputChange}
           onFocus={onFocus}
           onBlur={onBlur}
+          onKeyUp={handleKeyUp}
           placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
           {...testIdAttribute('search-input')}
         />

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { css, cx } from 'linaria'
 import { WithTooltip } from '@pocket/web-ui'
 
@@ -13,6 +14,7 @@ import { TagIcon } from '@pocket/web-ui'
 import { breakpointMediumHandset } from '@pocket/web-ui'
 
 import { Trans, useTranslation } from 'common/setup/i18n'
+import Mousetrap from 'mousetrap'
 
 const bulkStyle = css`
   width: 100%;
@@ -182,6 +184,11 @@ function GlobalNavBulkEdit({
     bulkItemsCount >= 1
       ? t('nav:clear-copy', 'Clear')
       : t('nav:cancel-copy', 'Cancel')
+
+  useEffect(() => {
+    Mousetrap.bind('esc', clearAction)
+    return () => Mousetrap.unbind('esc')
+  }, [clearAction])
 
   return (
     <div className={bulkStyle}>
