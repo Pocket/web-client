@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { useRef, useEffect } from 'react'
 import { css } from 'linaria'
 import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
@@ -33,9 +32,6 @@ const popupWrapper = css`
     border-right: 8px solid transparent;
     border-top: 8px solid var(--color-popoverCanvas);
   }
-  &.hideArrow:before {
-    border-top: 8px solid transparent;
-  }
 `
 
 const buttonWrapper = css`
@@ -54,91 +50,71 @@ const iconWrapper = css`
   margin-right: 6px;
 `
 
-class SelectionPopoverClass extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-    this.containerRef = React.createRef()
-  }
+export const SelectionPopover = ({
+  anchor,
+  addAnnotation,
+  disablePopup,
+  shareItem
+}) => {
+  const ref = useRef()
 
-  onHighlight = () => {
-    this.props.addAnnotation()
-    this.props.disablePopup()
-  }
+  useEffect(() => {
+    document.addEventListener('mousedown', isClickOutside)
+    return document.removeEventListener('mousedown', isClickOutside)
+  }, [])
 
-  onShare = () => {
-    this.props.shareItem({ quote: this.props.anchor?.toString() })
-    this.props.disablePopup()
-  }
-
-  isClickOutside = (e) => {
+  const isClickOutside = (e) => {
     if (e.button !== 0) return // only process left-click
-    if (
-      !this.containerRef.current ||
-      !this.containerRef.current.contains(e.target)
-    ) {
-      this.props.disablePopup()
+    if (!ref.current || !ref.current.contains(e.target)) {
+      disablePopup()
     }
   }
 
-  componentDidMount() {
-    document.addEventListener('mousedown', this.isClickOutside)
+  const onHighlight = () => {
+    addAnnotation()
+    disablePopup()
   }
 
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.isClickOutside)
+  const onShare = () => {
+    shareItem({ quote: anchor?.toString() })
+    disablePopup()
   }
 
-  render() {
-    const { anchor } = this.props
-    if (!anchor || anchor.rangeCount === 0) return null
+  if (!anchor || anchor.rangeCount === 0) return null
 
-    const position = anchor.getRangeAt(0).getBoundingClientRect()
+  const position = anchor.getRangeAt(0).getBoundingClientRect()
 
-    const { right, left, top } = position
-    let center = (right - left) / 2 + left
+  const { right, left, top } = position
+  let center = (right - left) / 2 + left
 
-    return (
+  return (
+    <div
+      className={popupContainer}
+      style={{
+        transform: `translate(${Math.round(center)}px, ${Math.round(
+          top + window.scrollY
+        )}px)`
+      }}>
       <div
-        className={popupContainer}
-        style={{
-          transform: `translate(${Math.round(center)}px, ${Math.round(
-            top + window.scrollY
-          )}px)`
-        }}>
-        <div
-          className={classNames(overlayBase, popupWrapper, {
-            hideArrow: this.state.share
-          })}
-          ref={this.containerRef}>
-          <button
-            className={classNames(buttonReset, buttonWrapper)}
-            // aria-label={'shareExcerpt.highlight.aria'}
-            onClick={this.onHighlight}>
-            <span className={iconWrapper}>
-              <HighlightIcon />
-            </span>
-            <Trans i18nKey="annotations:highlight">Highlight</Trans>
-          </button>
-          <button
-            className={classNames(buttonReset, buttonWrapper)}
-            // aria-label={translate('shareExcerpt.highlight.aria')}
-            onClick={this.onShare}>
-            <span className={iconWrapper}>
-              <IosShareIcon />
-            </span>
-            <Trans i18nKey="annotations:share">Share</Trans>
-          </button>
-        </div>
+        className={classNames(overlayBase, popupWrapper)}
+        ref={ref}>
+        <button
+          className={classNames(buttonReset, buttonWrapper)}
+          onClick={onHighlight}>
+          <span className={iconWrapper}>
+            <HighlightIcon />
+          </span>
+          <Trans i18nKey="annotations:highlight">Highlight</Trans>
+        </button>
+        <button
+          className={classNames(buttonReset, buttonWrapper)}
+          onClick={onShare}>
+          <span className={iconWrapper}>
+            <IosShareIcon />
+          </span>
+          <Trans i18nKey="annotations:share">Share</Trans>
+        </button>
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-SelectionPopoverClass.propTypes = {
-  addAnnotation: PropTypes.func,
-  shareItem: PropTypes.func,
-  disablePopup: PropTypes.func
-}
-
-export const SelectionPopover = SelectionPopoverClass
