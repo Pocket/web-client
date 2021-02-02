@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { css, cx } from 'linaria'
@@ -26,6 +27,7 @@ import {
 import { WrappedProgressBar } from 'components/progress-bar/progress-bar'
 
 import { useTranslation } from 'common/setup/i18n'
+import Mousetrap from 'mousetrap'
 
 const headerStyle = css`
   position: fixed;
@@ -126,6 +128,11 @@ export const ReaderNav = ({
     document.location.href = '/my-list'
   }
   const buttonClass = cx(buttonReset, buttonStyles)
+
+  useEffect(() => {
+    Mousetrap.bind('b', goBack)
+    return () => Mousetrap.unbind('b')
+  }, [])
 
   return (
     <header className={headerStyle}>
