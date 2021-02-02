@@ -119,7 +119,6 @@ const getSelected = (state) => state.bulkEdit.selected
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export function* itemBulkSelect(action) {
-  console.log('select')
   try {
     const { id, shift } = action
 
@@ -178,7 +177,6 @@ export function* itemBulkSelect(action) {
 }
 
 export function* itemBulkDeSelect(action) {
-  console.log('deselect')
   try {
     const { id, shift } = action
 
@@ -213,7 +211,6 @@ function* itemsBulkToggle(action) {
   const { id } = action
   const selected = yield select(getSelected)
   const isSelected = selected.filter((item) => item.id === id)
-  console.log(isSelected.length)
   yield isSelected.length
     ? call(itemBulkDeSelect, { id })
     : call(itemBulkSelect, { id })
