@@ -68,17 +68,17 @@ export const selectNextItem = ({appMode}) => ({ type: SHORTCUT_SELECT_NEXT_ITEM,
 export const selectPreviousItem = ({appMode}) => ({ type: SHORTCUT_SELECT_PREVIOUS_ITEM, appMode }) //prettier-ignore
 export const engageSelectedItem = ({ router, appMode }) => ({ type: SHORTCUT_ENGAGE_SELECTED_ITEM, router, appMode }) //prettier-ignore
 
-export const increaseFontSize = () => ({ type: SHORTCUT_INCREASE_FONT_SIZE })
-export const decreaseFontSize = () => ({ type: SHORTCUT_DECREASE_FONT_SIZE })
-
-export const goBack = () => ({ type: SHORTCUT_GO_BACK })
-
 export const deleteItem = ({currentItem}) => ({ type: SHORTCUT_DELETE_ITEM, currentItem }) //prettier-ignore
 export const archiveItem = ({currentItem}) => ({ type: SHORTCUT_ARCHIVE_ITEM, currentItem }) //prettier-ignore
 export const favoriteItem = ({ currentItem }) => ({ type: SHORTCUT_FAVORITE_ITEM, currentItem }) //prettier-ignore
 export const editTags = ({ currentItem }) => ({ type: SHORTCUT_EDIT_TAGS, currentItem }) //prettier-ignore
 
-export const viewOriginal = ({router}) => ({ type: SHORTCUT_VIEW_ORIGINAL, router }) //prettier-ignore
+export const viewOriginal = () => ({ type: SHORTCUT_VIEW_ORIGINAL })
+
+export const increaseFontSize = () => ({ type: SHORTCUT_INCREASE_FONT_SIZE })
+export const decreaseFontSize = () => ({ type: SHORTCUT_DECREASE_FONT_SIZE })
+
+export const goBack = () => ({ type: SHORTCUT_GO_BACK })
 
 // prettier-ignore
 export const listShortcuts = [
@@ -267,6 +267,8 @@ function* shortcutEngage({ appMode, router }) {
   if (appMode === 'bulk') return yield call(bulkEngage)
 
   const selectedId = yield select(getCurrentItemId)
+  if (!selectedId) return
+
   yield call(router.push, `/read/${selectedId}`)
 }
 
@@ -275,7 +277,7 @@ function* bulkEngage() {
   yield put({ type: ITEMS_BULK_TOGGLE, id: bulkId })
 }
 
-function* shortcutViewOriginal({ router }) {
+function* shortcutViewOriginal() {
   const selectedId = yield select(getCurrentItemId)
   if (!selectedId) return
 
@@ -283,5 +285,5 @@ function* shortcutViewOriginal({ router }) {
   if (!item) return
 
   const { open_url } = item
-  yield call(window.open, open_url, '_blank')
+  if (!open_url) yield call(window.open, open_url, '_blank')
 }
