@@ -18,7 +18,8 @@ export function Shortcuts() {
   const cancelShortcutView = () => dispatch(closeHelpOverlay())
 
   useEffect(() => {
-    listShortcuts.forEach(({ keys, action }) => {
+    listShortcuts.forEach(({ keys, action, omit }) => {
+      if (omit) return
       const actionPayload = action({ router, appMode })
       const boundAction = () => dispatch(actionPayload)
       Mousetrap.bind(keys, boundAction)

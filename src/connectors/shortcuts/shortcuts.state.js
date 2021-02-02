@@ -2,6 +2,12 @@ import { takeLatest, takeEvery, put, call, select } from 'redux-saga/effects'
 import { APP_SET_MODE } from 'actions'
 import { ITEMS_BULK_SET_CURRENT } from 'actions'
 import { ITEMS_BULK_TOGGLE } from 'actions'
+import { ITEMS_DELETE_REQUEST } from 'actions'
+import { ITEMS_ARCHIVE_REQUEST } from 'actions'
+import { ITEMS_UNARCHIVE_REQUEST } from 'actions'
+import { ITEMS_FAVORITE_REQUEST } from 'actions'
+import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
+import { ITEMS_TAG_REQUEST } from 'actions'
 
 import { SHORTCUT_OPEN_HELP_OVERLAY } from 'actions'
 import { SHORTCUT_CLOSE_HELP_OVERLAY } from 'actions'
@@ -19,17 +25,11 @@ import { SHORTCUT_SELECT_NEXT_ITEM } from 'actions'
 import { SHORTCUT_SELECT_PREVIOUS_ITEM } from 'actions'
 import { SHORTCUT_SET_CURRENT_ITEM } from 'actions'
 
-import { SHORTCUT_ARCHIVE_SELECTED_ITEM } from 'actions'
-import { SHORTCUT_FAVORITE_SELECTED_ITEM } from 'actions'
-import { SHORTCUT_TAG_SELECTED_ITEM } from 'actions'
 import { SHORTCUT_DELETE_ITEM } from 'actions'
-import { SHORTCUT_VIEW_ORIGINAL_VERSION } from 'actions'
 import { SHORTCUT_ENGAGE_SELECTED_ITEM } from 'actions'
 
 import { SHORTCUT_INCREASE_FONT_SIZE } from 'actions'
 import { SHORTCUT_DECREASE_FONT_SIZE } from 'actions'
-
-import { SHORTCUT_GO_BACK } from 'actions'
 
 import { SHORTCUT_EDIT_TAGS } from 'actions'
 import { SHORTCUT_ARCHIVE_ITEM } from 'actions'
@@ -78,8 +78,6 @@ export const viewOriginal = () => ({ type: SHORTCUT_VIEW_ORIGINAL })
 export const increaseFontSize = () => ({ type: SHORTCUT_INCREASE_FONT_SIZE })
 export const decreaseFontSize = () => ({ type: SHORTCUT_DECREASE_FONT_SIZE })
 
-export const goBack = () => ({ type: SHORTCUT_GO_BACK })
-
 // prettier-ignore
 export const listShortcuts = [
   { action: goToList, copy: 'Go to MyList', keyCopy: 'g then l', keys:  'g l' },
@@ -112,28 +110,31 @@ export const listShortcuts = [
 
   { action: viewOriginal, copy: 'View Original Version of Selected Item', keyCopy: 'o', keys: 'o' },
 
+  { action: toggleHelpOverlay, copy: 'Open Help Overlay', keyCopy: '? or /', keys: ['?', '/'] },
+
   // Everything above this line works.  Everything below this line is a work in progress
 
   { action: deleteItem, copy: 'Delete Selected Item', keyCopy: 'd', keys:  'd' },
   { action: archiveItem, copy: 'Archive Selected Item', keyCopy: 'a', keys:  'a' },
   { action: favoriteItem, copy: 'Favorite Selected Item', keyCopy: 'f', keys:  'f' },
-  { action: editTags, copy: 'Tag Selected Item', keyCopy: 't', keys:  't' },
+  { action: editTags, copy: 'Tag Selected Item', keyCopy: 't', keys:  't' }
 
 
 
-  { action: toggleHelpOverlay, copy: 'Open Help Overlay', keyCopy: '? or /', keys: ['?', '/'] }
 ]
 
 // prettier-ignore
 export const readerShortcuts = [
   {action: increaseFontSize, copy: 'Increase Font Size', keyCopy: 'Command/Control with +', keys: ['ctrl++', 'command++'] },
-  {action: decreaseFontSize, copy: 'Decrease Font Size', keyCopy: 'Command/Control with -', keys: ['ctrl+-', 'command+-']},
-  {action: goBack, copy: 'Go Back', keyCopy: 'b', keys: 'b'},
+  { action: decreaseFontSize, copy: 'Decrease Font Size', keyCopy: 'Command/Control with -', keys: ['ctrl+-', 'command+-'] },
+  // We omit this so it doesn't bind since we do that in read container
+  {action: null, copy: 'Go Back', keyCopy: 'b', keys: 'b', omit: true},
 ]
 
 const initialState = {
   displayLegend: false,
-  currentId: false
+  currentId: false,
+  position: false
 }
 
 /** REDUCERS
@@ -154,8 +155,8 @@ export const shortcutReducers = (state = initialState, action) => {
     }
 
     case SHORTCUT_SET_CURRENT_ITEM: {
-      const { currentId } = action
-      return { ...state, currentId }
+      const { currentId, position } = action
+      return { ...state, currentId, position }
     }
 
     default:
@@ -176,12 +177,17 @@ export const shortcutSagas = [
   takeEvery(SHORTCUT_SELECT_PREVIOUS_ITEM, shortcutPreviousItem),
   takeEvery(SHORTCUT_ENGAGE_SELECTED_ITEM, shortcutEngage),
   takeLatest(APP_SET_MODE, appModeSwitch),
-  takeLatest(SHORTCUT_VIEW_ORIGINAL, shortcutViewOriginal)
+  takeLatest(SHORTCUT_VIEW_ORIGINAL, shortcutViewOriginal),
+  takeLatest(SHORTCUT_DELETE_ITEM, shortcutDeleteItem),
+  takeLatest(SHORTCUT_ARCHIVE_ITEM, shortcutArchiveItem),
+  takeLatest(SHORTCUT_FAVORITE_ITEM, shortcutFavoriteItem),
+  takeLatest(SHORTCUT_EDIT_TAGS, shortcutEditTags)
 ]
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getCurrentItemId = (state) => state.shortcuts.currentId
+const getCurrentPosition = (state) => state.shortcuts.position
 const getCurrentBulkItemId = (state) => state.bulkEdit.currentId
 const getSection = (state) => state.app.section
 const getItems = (state, section) => state.myList[section]
@@ -237,12 +243,20 @@ function* selectItem(next) {
   if (next) {
     const nextPosition = currentPosition < 0 ? 0 : currentPosition + 1
     const nextId = items[nextPosition] ? items[nextPosition] : false
-    return yield put({ type: SHORTCUT_SET_CURRENT_ITEM, currentId: nextId })
+    return yield put({
+      type: SHORTCUT_SET_CURRENT_ITEM,
+      currentId: nextId,
+      position: nextPosition
+    })
   }
 
   const prevPosition = currentPosition >= total ? total : currentPosition - 1
   const prevId = items[prevPosition] ? items[prevPosition] : false
-  return yield put({ type: SHORTCUT_SET_CURRENT_ITEM, currentId: prevId })
+  return yield put({
+    type: SHORTCUT_SET_CURRENT_ITEM,
+    currentId: prevId,
+    position: prevPosition
+  })
 }
 
 function* selectBulkItem(next) {
@@ -285,5 +299,42 @@ function* shortcutViewOriginal() {
   if (!item) return
 
   const { open_url } = item
-  if (!open_url) yield call(window.open, open_url, '_blank')
+  if (open_url) yield call(window.open, open_url, '_blank')
+}
+
+function* shortcutDeleteItem() {
+  const id = yield select(getCurrentItemId)
+  const position = yield select(getCurrentPosition)
+  if (!id) return
+
+  yield put({ type: ITEMS_DELETE_REQUEST, items: [{ id, position }] })
+  return yield put({
+    type: SHORTCUT_SET_CURRENT_ITEM,
+    currentId: false,
+    position: false
+  })
+}
+
+function* shortcutArchiveItem() {
+  const id = yield select(getCurrentItemId)
+  const position = yield select(getCurrentPosition)
+  if (!id) return
+
+  yield put({ type: ITEMS_ARCHIVE_REQUEST, items: [{ id, position }] })
+}
+
+function* shortcutFavoriteItem() {
+  const id = yield select(getCurrentItemId)
+  const position = yield select(getCurrentPosition)
+  if (!id) return
+
+  //  yield put({type: })
+}
+
+function* shortcutEditTags() {
+  const id = yield select(getCurrentItemId)
+  const position = yield select(getCurrentPosition)
+  if (!id) return
+
+  yield put({ type: ITEMS_TAG_REQUEST, items: [{ id, position }] })
 }
