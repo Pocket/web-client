@@ -1,7 +1,9 @@
 import ErrorPage from 'containers/_error/error.js'
 
-function Client404() {
-  return <ErrorPage statusCode={404} />
+export async function getStaticProps() {
+  return { props: { namespacesRequired: ['common'] } }
 }
 
-export default Client404
+export default function Client404() {
+  return <ErrorPage statusCode={404} />
+}
