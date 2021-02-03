@@ -14,6 +14,7 @@ import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
 import { ITEMS_TAG_REQUEST } from 'actions'
 
 import { UPDATE_FONT_SIZE } from 'actions'
+import { UPDATE_COLUMN_WIDTH } from 'actions'
 
 import { SHORTCUT_OPEN_HELP_OVERLAY } from 'actions'
 import { SHORTCUT_CLOSE_HELP_OVERLAY } from 'actions'
@@ -36,6 +37,8 @@ import { SHORTCUT_ENGAGE_SELECTED_ITEM } from 'actions'
 
 import { SHORTCUT_INCREASE_FONT_SIZE } from 'actions'
 import { SHORTCUT_DECREASE_FONT_SIZE } from 'actions'
+import { SHORTCUT_INCREASE_COLUMN_WIDTH } from 'actions'
+import { SHORTCUT_DECREASE_COLUMN_WIDTH } from 'actions'
 
 import { SHORTCUT_EDIT_TAGS } from 'actions'
 import { SHORTCUT_ARCHIVE_ITEM } from 'actions'
@@ -43,8 +46,8 @@ import { SHORTCUT_FAVORITE_ITEM } from 'actions'
 import { SHORTCUT_VIEW_ORIGINAL } from 'actions'
 
 import { FONT_RANGE } from 'common/constants'
+import { COLUMN_WIDTH } from 'common/constants' // Need key combos for this that make sense
 // import { LINE_HEIGHT } from 'common/constants' // Need key combos for this that make sense
-// import { COLUMN_WIDTH } from 'common/constants' // Need key combos for this that make sense
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -88,6 +91,8 @@ export const viewOriginal = () => ({ type: SHORTCUT_VIEW_ORIGINAL })
 
 export const increaseFontSize = () => ({ type: SHORTCUT_INCREASE_FONT_SIZE })
 export const decreaseFontSize = () => ({ type: SHORTCUT_DECREASE_FONT_SIZE })
+export const increaseColumnWidth = () => ({type: SHORTCUT_INCREASE_COLUMN_WIDTH }) //prettier-ignore
+export const decreaseColumnWidth = () => ({type: SHORTCUT_DECREASE_COLUMN_WIDTH }) //prettier-ignore
 
 // prettier-ignore
 export const listShortcuts = [
@@ -131,6 +136,8 @@ export const listShortcuts = [
 export const readerShortcuts = [
   { action: increaseFontSize, copy: 'Increase Font Size', keyCopy: 'Control with + / =', keys: ['ctrl++', 'ctrl+='] },
   { action: decreaseFontSize, copy: 'Decrease Font Size', keyCopy: 'Control with -', keys: ['ctrl+-'] },
+  { action: increaseColumnWidth, copy: 'Increase Column Width', keyCopy: 'Alt with + / =', keys: ['alt++', 'alt+='] },
+  { action: decreaseColumnWidth, copy: 'Decrease Column Width', keyCopy: 'Alt with -', keys: ['alt+-'] },
   // We omit this so it doesn't bind since we do that in read container
   {action: null, copy: 'Go Back', keyCopy: 'b', keys: 'b', omit: true},
 ]
@@ -188,7 +195,9 @@ export const shortcutSagas = [
   takeLatest(SHORTCUT_FAVORITE_ITEM, shortcutFavoriteItem),
   takeLatest(SHORTCUT_EDIT_TAGS, shortcutEditTags),
   takeEvery(SHORTCUT_INCREASE_FONT_SIZE, shortcutIncreaseFontSize),
-  takeEvery(SHORTCUT_DECREASE_FONT_SIZE, shortcutDecreaseFontSize)
+  takeEvery(SHORTCUT_DECREASE_FONT_SIZE, shortcutDecreaseFontSize),
+  takeEvery(SHORTCUT_INCREASE_COLUMN_WIDTH, shortcutIncreaseColumnWidth),
+  takeEvery(SHORTCUT_DECREASE_COLUMN_WIDTH, shortcutDecreaseColumnWidth)
 ]
 
 /* SAGAS :: SELECTORS
@@ -200,6 +209,7 @@ const getSection = (state) => state.app.section
 const getItems = (state, section) => state.myList[section]
 const getItem = (state, id) => state.myListItemsById[id]
 const getFontSize = (state) => state.reader.fontSize
+const getColumnWidth = (state) => state.reader.columnWidth
 
 /** SAGA :: RESPONDERS
 --------------------------------------------------------------- */
@@ -362,4 +372,20 @@ function* shortcutDecreaseFontSize() {
 
   if (nextSize < 0) return
   yield put({ type: UPDATE_FONT_SIZE, fontSize: nextSize })
+}
+
+function* shortcutIncreaseColumnWidth() {
+  const columnWidth = yield select(getColumnWidth)
+  const nextSize = parseInt(columnWidth) + 1
+
+  if (nextSize > COLUMN_WIDTH.length) return
+  yield put({ type: UPDATE_COLUMN_WIDTH, columnWidth: nextSize })
+}
+
+function* shortcutDecreaseColumnWidth() {
+  const columnWidth = yield select(getColumnWidth)
+  const nextSize = parseInt(columnWidth) - 1
+
+  if (nextSize < 0) return
+  yield put({ type: UPDATE_COLUMN_WIDTH, columnWidth: nextSize })
 }
