@@ -19,6 +19,7 @@ export function Shortcuts() {
 
   useEffect(() => {
     const shortCuts = [...listShortcuts, ...readerShortcuts]
+    Mousetrap.addKeycodes({ 173: '-' }) // For FF hyphen code
 
     shortCuts.forEach(({ keys, action, omit, prevent }) => {
       if (omit) return
