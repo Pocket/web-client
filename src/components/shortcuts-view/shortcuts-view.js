@@ -5,10 +5,11 @@ import { useTranslation } from 'common/setup/i18n'
 const shortcutsStyle = css`
   table {
     width: 100%;
+    margin-top: 1.5rem;
   }
 
-  table:last-of-type {
-    margin-top: 1.5rem;
+  table:first-of-type {
+    margin-top: 0;
   }
 
   thead tr th {
@@ -37,6 +38,7 @@ export function ShortCutDisplay({ copy, keyCopy }) {
 export function ShortCutsView({
   showModal,
   listShortcuts,
+  itemActions,
   readerShortcuts,
   appRootSelector,
   cancelShortcutView
@@ -54,7 +56,7 @@ export function ShortCutsView({
           <table>
             <thead>
               <tr>
-                <th scope="col">MyList Actions</th>
+                <th scope="col">List Actions</th>
                 <th scope="col">Shortcut</th>
               </tr>
             </thead>
@@ -63,7 +65,16 @@ export function ShortCutsView({
           <table>
             <thead>
               <tr>
-                <th scope="col">Reader Actions</th>
+                <th scope="col">Item Actions</th>
+                <th scope="col">Shortcut</th>
+              </tr>
+            </thead>
+            <tbody>{itemActions.map(ShortCutDisplay)}</tbody>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Reading Actions</th>
                 <th scope="col">Shortcut</th>
               </tr>
             </thead>

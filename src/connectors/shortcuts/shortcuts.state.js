@@ -102,7 +102,7 @@ export const listShortcuts = [
   { action: goToArticles, copy: 'Go to Articles', keyCopy: 'g then r', keys: 'g r' },
   { action: goToHighlights, copy: 'Go to Highlights', keyCopy: 'g then h', keys:  'g h' },
   { action: goToVideos, copy: 'Go to Videos', keyCopy: 'g then v', keys: 'g v' },
-  { action: gotToTag, copy: 'Go to All Tags Page', keyCopy: 'g then t', keys:  'g t' },
+  { action: gotToTag, copy: 'Go to All Tags', keyCopy: 'g then t', keys:  'g t' },
 
   { action: goToSearch, copy: 'Go to Search', keyCopy: 'g then s', keys: 'g s', prevent: true},
   { action: bulkEdit, copy: 'Bulk Edit', keyCopy: 'g then b', keys:  'g b' },
@@ -119,27 +119,31 @@ export const listShortcuts = [
   { action: setColorModeDark, copy: 'Change to Dark Theme	', keyCopy: 'c then d', keys:  'c d' },
   { action: setColorModeSepia, copy: 'Change to Sepia Theme', keyCopy: 'c then s', keys:  'c s' },
 
-  { action: selectNextItem, copy: 'Select Next Item', keyCopy: 'j', keys: 'j' },
-  { action: selectPreviousItem, copy: 'Select Previous Item', keyCopy: 'k', keys: 'k' },
-  { action: engageSelectedItem, copy: 'Open/Bulk Add Selected Item', keyCopy: 'enter', keys: ['enter'] },
+  { action: toggleHelpOverlay, copy: 'Open Help Overlay', keyCopy: '? or /', keys: ['?', '/'] },
 
+]
+
+// prettier-ignore
+export const itemActions = [
+  { action: engageSelectedItem, copy: 'Open Selected Item/Select Item in Bulk Edit', keyCopy: 'enter', keys: ['enter'] },
   { action: viewOriginal, copy: 'Open Original in New Tab', keyCopy: 'o', keys: 'o' },
-
-  { action: toggleHelpOverlay, copy: 'View Keyboard Shortcuts', keyCopy: '? or /', keys: ['?', '/'] },
-  { action: deleteItem, copy: 'Delete Selected Item', keyCopy: 'd', keys:  'd' },
   { action: archiveItem, copy: 'Archive Selected Item', keyCopy: 'a', keys:  'a' },
   { action: favoriteItem, copy: 'Favorite Selected Item', keyCopy: 'f', keys:  'f' },
-  { action: editTags, copy: 'Tag Selected Item', keyCopy: 't', keys:  't', prevent: true }
+  { action: editTags, copy: 'Tag Selected Item', keyCopy: 't', keys:  't', prevent: true },
+  { action: deleteItem, copy: 'Delete Selected Item', keyCopy: 'd', keys: 'd' },
+  { action: selectNextItem, copy: 'Select Next Item', keyCopy: 'j', keys: 'j' },
+  { action: selectPreviousItem, copy: 'Select Previous Item', keyCopy: 'k', keys: 'k' },
 ]
 
 // prettier-ignore
 export const readerShortcuts = [
-  { action: increaseFontSize, copy: 'Increase Font Size', keyCopy: 'Control with + / =', keys: ['ctrl++', 'ctrl+='] },
-  { action: decreaseFontSize, copy: 'Decrease Font Size', keyCopy: 'Control with -', keys: ['ctrl+-'] },
-  { action: increaseColumnWidth, copy: 'Increase Column Width', keyCopy: 'Alt with + / =', keys: ['alt++', 'alt+='] },
-  { action: decreaseColumnWidth, copy: 'Decrease Column Width', keyCopy: 'Alt with -', keys: ['alt+-'] },
   // We omit this so it doesn't bind since we do that in read container
-  {action: null, copy: 'Go Back', keyCopy: 'b', keys: 'b', omit: true},
+  { action: null, copy: 'Back to List', keyCopy: 'b', keys: 'b', omit: true },
+
+  { action: increaseFontSize, copy: 'Increase Article Font Size', keyCopy: 'Control with =', keys: ['ctrl+='] },
+  { action: decreaseFontSize, copy: 'Decrease Article Font Size', keyCopy: 'Control with -', keys: ['ctrl+-'] },
+  { action: increaseColumnWidth, copy: 'Increase Column Width', keyCopy: 'Alt with =', keys: ['alt+='] },
+  { action: decreaseColumnWidth, copy: 'Decrease Column Width', keyCopy: 'Alt with -', keys: ['alt+-'] },
 ]
 
 const initialState = {
@@ -336,8 +340,15 @@ function* shortcutDeleteItem() {
 
 function* shortcutArchiveItem() {
   const id = yield select(getCurrentItemId)
-  const position = yield select(getCurrentPosition)
   if (!id) return
+
+  const item = yield select(getItem, id)
+  if (!item) return
+
+  const section = getSection()
+  const isArchived = item.status === 1
+
+  const position = yield select(getCurrentPosition)
 
   yield call(selectItem, true)
   yield put({ type: ITEMS_ARCHIVE_REQUEST, items: [{ id, position }] })

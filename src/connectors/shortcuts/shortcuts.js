@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ShortCutsView } from 'components/shortcuts-view/shortcuts-view'
 import { listShortcuts } from './shortcuts.state'
 import { readerShortcuts } from './shortcuts.state'
+import { itemActions } from './shortcuts.state'
+
 import { closeHelpOverlay } from './shortcuts.state'
 
 export function Shortcuts() {
@@ -18,7 +20,7 @@ export function Shortcuts() {
   const cancelShortcutView = () => dispatch(closeHelpOverlay())
 
   useEffect(() => {
-    const shortCuts = [...listShortcuts, ...readerShortcuts]
+    const shortCuts = [...listShortcuts, ...itemActions, ...readerShortcuts]
     Mousetrap.addKeycodes({ 173: '-' }) // For FF hyphen code
 
     shortCuts.forEach(({ keys, action, omit, prevent }) => {
@@ -43,6 +45,7 @@ export function Shortcuts() {
       appRootSelector={APP_ROOT_SELECTOR}
       cancelShortcutView={cancelShortcutView}
       listShortcuts={listShortcuts}
+      itemActions={itemActions}
       readerShortcuts={readerShortcuts}
     />
   ) : null
