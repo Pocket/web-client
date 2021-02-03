@@ -6,7 +6,7 @@ export const useHasChanged = (val) => {
   return prevVal !== val
 }
 
-const usePrevious = (value) => {
+export const usePrevious = (value) => {
   const ref = useRef()
   useEffect(() => {
     ref.current = value

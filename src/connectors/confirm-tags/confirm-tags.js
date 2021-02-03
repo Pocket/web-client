@@ -4,6 +4,8 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, Trans } from 'common/setup/i18n'
 
+import { getUserTags } from 'containers/my-list/tags-page/tags-page.state'
+
 import { itemsTagConfirm } from 'connectors/items-by-id/my-list/items.tag'
 import { itemsTagCancel } from 'connectors/items-by-id/my-list/items.tag'
 import { itemsTagAdd } from 'connectors/items-by-id/my-list/items.tag'
@@ -20,6 +22,8 @@ import { TagBox } from 'components/tagging/tag.box'
 
 import { TagSuggestions } from 'components/tagging/tag.suggestions'
 import { TagUpsell } from 'components/tagging/tag.upsell'
+
+import { TypeAhead } from 'components/type-ahead/type-ahead'
 
 export function TaggingModal() {
   const appRootSelector = '#__next'
@@ -39,6 +43,8 @@ export function TaggingModal() {
   const suggestedTags = useSelector((state) => state.itemsToTag.suggestedTags)
   const showModal = itemsToTag?.length > 0
 
+  const allTags = useSelector((state) => state.userTags.tagsList)
+
   const isSingleTag = itemsToTag.length === 1
 
   const [fresh, setFresh] = useState(true)
@@ -49,6 +55,7 @@ export function TaggingModal() {
   useEffect(() => {
     setValue('')
     setFresh(true)
+    if (showModal) dispatch(getUserTags())
   }, [showModal])
 
   /**
@@ -156,6 +163,15 @@ export function TaggingModal() {
             addTag={addTag}
             onFocus={onFocus}
           />
+          {allTags.length > 0 ? (
+            <TypeAhead
+              reFocus={setFocus}
+              setValue={addTag}
+              inputValue={value}
+              textInput={inputReference.current}
+              items={allTags}
+            />
+          ) : null }
         </TagBox>
         {!isPremium && isSingleTag ? (
           <TagUpsell onVisible={handleImpression} />

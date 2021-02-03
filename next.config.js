@@ -13,6 +13,15 @@ module.exports = withPlugins([withCSS, withSourceMaps], {
   rewrites() {
     return [{ source: '/web-client-health', destination: '/health' }]
   },
+  async redirects() {
+    return [
+      {
+        source: '/my-list/read/:slug',
+        destination: '/read/:slug',
+        permanent: true
+      }
+    ]
+  },
   //prettier-ignore
   webpack: (config, { dev, isServer, webpack }) => {
 
