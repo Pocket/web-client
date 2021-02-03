@@ -42,7 +42,7 @@ export const DeleteModal = () => {
       </ModalBody>
       {batchStart ? null : (
         <ModalFooter>
-          <Button type="submit" onClick={confirmDelete}>
+          <Button type="submit" onClick={confirmDelete} autoFocus={true}>
             <Trans i18nKey="confirm:delete">Delete</Trans>
           </Button>
         </ModalFooter>

@@ -56,7 +56,7 @@ export function TaggingModal() {
     setValue('')
     setFresh(true)
     if (showModal) dispatch(getUserTags())
-  }, [showModal])
+  }, [showModal, dispatch])
 
   /**
    * Event Actions
@@ -171,7 +171,7 @@ export function TaggingModal() {
               textInput={inputReference.current}
               items={allTags}
             />
-          ) : null }
+          ) : null}
         </TagBox>
         {!isPremium && isSingleTag ? (
           <TagUpsell onVisible={handleImpression} />

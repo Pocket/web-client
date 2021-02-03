@@ -53,7 +53,7 @@ export const FavoriteModal = () => {
       </ModalBody>
       {batchStart ? null : (
         <ModalFooter>
-          <Button type="submit" onClick={confirmFavorite}>
+          <Button type="submit" onClick={confirmFavorite} autoFocus={true}>
             {favoriteTitle}
           </Button>
         </ModalFooter>

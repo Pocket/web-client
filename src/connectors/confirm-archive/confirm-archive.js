@@ -54,7 +54,7 @@ export const ArchiveModal = () => {
       </ModalBody>
       {batchStart ? null : (
         <ModalFooter>
-          <Button type="submit" onClick={confirmArchive}>
+          <Button type="submit" onClick={confirmArchive} autoFocus={true}>
             {archiveTitle}
           </Button>
         </ModalFooter>
