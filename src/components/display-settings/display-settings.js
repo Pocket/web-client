@@ -21,10 +21,9 @@ import { ColumnWidthSettings } from './column-width'
 import { ThemeSettings } from './theme'
 import { FONT_TYPES } from 'components/fonts/fonts'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-
-const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
-const LINE_HEIGHT = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
-const COLUMN_WIDTH = [531, 574, 632, 718, 826, 933, 1041]
+import { FONT_RANGE } from 'common/constants'
+import { LINE_HEIGHT } from 'common/constants'
+import { COLUMN_WIDTH } from 'common/constants'
 
 const displayStyles = css`
   & > span {
