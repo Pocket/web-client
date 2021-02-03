@@ -123,7 +123,7 @@ export const listShortcuts = [
   { action: selectPreviousItem, copy: 'Select Previous Item', keyCopy: 'k', keys: 'k' },
   { action: engageSelectedItem, copy: 'Open/Bulk Add Selected Item', keyCopy: 'enter', keys: ['enter'] },
 
-  { action: viewOriginal, copy: 'View Original Version of Selected Item', keyCopy: 'o', keys: 'o' },
+  { action: viewOriginal, copy: 'Open Original in New Tab', keyCopy: 'o', keys: 'o' },
 
   { action: toggleHelpOverlay, copy: 'View Keyboard Shortcuts', keyCopy: '? or /', keys: ['?', '/'] },
   { action: deleteItem, copy: 'Delete Selected Item', keyCopy: 'd', keys:  'd' },
