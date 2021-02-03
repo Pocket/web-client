@@ -48,8 +48,7 @@ export default function Collection(props) {
   const userStatus = useSelector((state) => state.user.user_status)
 
   // Check for initial items so we don't over request
-  const initialItemsPopulated =
-    items?.length >= 30 || (items?.length && total < 30)
+  const initialItemsPopulated = items?.length || total === 0
 
   /**
    * Set up listeners for focus shifts.  When the window gains focus check if
@@ -153,12 +152,7 @@ export default function Collection(props) {
         <main className="main">
           {isLoggedIn ? (
             <>
-              <Header
-                subset={subset}
-                title={title}
-                filter={filter}
-                tag={tag}
-              />
+              <Header subset={subset} title={title} filter={filter} tag={tag} />
               {items?.length ? (
                 <VirtualizedList
                   type={type}
