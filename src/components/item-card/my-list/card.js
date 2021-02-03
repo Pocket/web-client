@@ -249,6 +249,7 @@ export const Card = ({
 
   const { t } = useTranslation()
   const linkRef = useRef(null)
+  const articleRef = useRef(null)
 
   const archiveAction = status === '0' ? itemArchive : itemUnArchive
   const CorrectArchiveIcon = status === '0' ? ArchiveIcon : AddIcon
@@ -276,7 +277,8 @@ export const Card = ({
 
   useEffect(() => {
     if (shortcutSelected && document.activeElement !== linkRef.current) {
-      linkRef.current.focus()
+      linkRef.current.focus({ preventScroll: true })
+      articleRef.current.scrollIntoView({ block: 'end' })
     }
 
     if (!shortcutSelected && document.activeElement === linkRef.current) {
@@ -287,6 +289,7 @@ export const Card = ({
   return (
     <VisibilitySensor onVisible={itemImpression}>
       <article
+        ref={articleRef}
         className={cardClass}
         key={id}
         {...testIdAttribute(`article-card-${id}`)}
