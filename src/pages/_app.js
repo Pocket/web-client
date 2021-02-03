@@ -19,6 +19,8 @@ import { hydrateUserTags } from 'containers/my-list/tags-page/tags-page.state'
 
 import { appSetPreferences } from 'connectors/app/app.state'
 
+import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
+
 /** Setup Files
  --------------------------------------------------------------- */
 import { sentrySettings } from 'common/setup/sentry'
@@ -145,7 +147,9 @@ function PocketWebClient({ Component, pageProps, err }) {
   return (
     <ViewportProvider>
       {showDevTools ? <DevTools /> : null}
-      <Shortcuts />
+      <FeatureFlag flag="temp.web.client.global.shortcuts">
+        <Shortcuts />
+      </FeatureFlag>
       <Component {...pageProps} err={err} />
     </ViewportProvider>
   )
