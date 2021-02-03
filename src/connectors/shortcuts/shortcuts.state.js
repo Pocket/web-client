@@ -1,13 +1,19 @@
 import { takeLatest, takeEvery, put, call, select } from 'redux-saga/effects'
+import { race, take } from 'redux-saga/effects'
 import { APP_SET_MODE } from 'actions'
 import { ITEMS_BULK_SET_CURRENT } from 'actions'
 import { ITEMS_BULK_TOGGLE } from 'actions'
+
 import { ITEMS_DELETE_REQUEST } from 'actions'
+import { ITEMS_DELETE_CONFIRM } from 'actions'
+import { ITEMS_DELETE_CANCEL } from 'actions'
 import { ITEMS_ARCHIVE_REQUEST } from 'actions'
 import { ITEMS_UNARCHIVE_REQUEST } from 'actions'
 import { ITEMS_FAVORITE_REQUEST } from 'actions'
 import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
 import { ITEMS_TAG_REQUEST } from 'actions'
+
+import { UPDATE_FONT_SIZE } from 'actions'
 
 import { SHORTCUT_OPEN_HELP_OVERLAY } from 'actions'
 import { SHORTCUT_CLOSE_HELP_OVERLAY } from 'actions'
@@ -35,6 +41,10 @@ import { SHORTCUT_EDIT_TAGS } from 'actions'
 import { SHORTCUT_ARCHIVE_ITEM } from 'actions'
 import { SHORTCUT_FAVORITE_ITEM } from 'actions'
 import { SHORTCUT_VIEW_ORIGINAL } from 'actions'
+
+import { FONT_RANGE } from 'common/constants'
+// import { LINE_HEIGHT } from 'common/constants' // Need key combos for this that make sense
+// import { COLUMN_WIDTH } from 'common/constants' // Need key combos for this that make sense
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -64,6 +74,7 @@ export const goToSearch = () => appSetMode('search')
 export const bulkEdit = () => appSetMode('bulk')
 export const saveAUrl = () => appSetMode('add')
 
+export const selectShortcutItem = (id, position) => ({ type: SHORTCUT_SET_CURRENT_ITEM, currentId: id, position}) //prettier-ignore
 export const selectNextItem = ({appMode}) => ({ type: SHORTCUT_SELECT_NEXT_ITEM, appMode }) //prettier-ignore
 export const selectPreviousItem = ({appMode}) => ({ type: SHORTCUT_SELECT_PREVIOUS_ITEM, appMode }) //prettier-ignore
 export const engageSelectedItem = ({ router, appMode }) => ({ type: SHORTCUT_ENGAGE_SELECTED_ITEM, router, appMode }) //prettier-ignore
@@ -88,9 +99,9 @@ export const listShortcuts = [
   { action: goToVideos, copy: 'Go to Videos', keyCopy: 'g then v', keys: 'g v' },
   { action: gotToTag, copy: 'Go to a Tag Page', keyCopy: 'g then t', keys:  'g t' },
 
-  { action: goToSearch, copy: 'Go to Search', keyCopy: 'g then s', keys: 'g s' },
+  { action: goToSearch, copy: 'Go to Search', keyCopy: 'g then s', keys: 'g s', prevent: true},
   { action: bulkEdit, copy: 'Bulk Edit', keyCopy: 'g then b', keys:  'g b' },
-  { action: saveAUrl, copy: 'Save a URL', keyCopy: 'g then u', keys: 'g u' },
+  { action: saveAUrl, copy: 'Save a URL', keyCopy: 'g then u', keys: 'g u', prevent: true},
 
   { action: sortOrderSetNew, copy: 'Sort by Newest', keyCopy: 's then n', keys: 's n' },
   { action: sortOrderSetOld, copy: 'Sort by Oldest', keyCopy: 's then o', keys:  's o' },
@@ -103,7 +114,6 @@ export const listShortcuts = [
   { action: setColorModeDark, copy: 'Change to Dark Theme	', keyCopy: 'c then d', keys:  'c d' },
   { action: setColorModeSepia, copy: 'Change to Sepia Theme', keyCopy: 'c then s', keys:  'c s' },
 
-
   { action: selectNextItem, copy: 'Select Next Item', keyCopy: 'j', keys: 'j' },
   { action: selectPreviousItem, copy: 'Select Previous Item', keyCopy: 'k', keys: 'k' },
   { action: engageSelectedItem, copy: 'Open/Bulk Add Selected Item', keyCopy: 'enter', keys: ['enter'] },
@@ -111,22 +121,16 @@ export const listShortcuts = [
   { action: viewOriginal, copy: 'View Original Version of Selected Item', keyCopy: 'o', keys: 'o' },
 
   { action: toggleHelpOverlay, copy: 'Open Help Overlay', keyCopy: '? or /', keys: ['?', '/'] },
-
-  // Everything above this line works.  Everything below this line is a work in progress
-
   { action: deleteItem, copy: 'Delete Selected Item', keyCopy: 'd', keys:  'd' },
   { action: archiveItem, copy: 'Archive Selected Item', keyCopy: 'a', keys:  'a' },
   { action: favoriteItem, copy: 'Favorite Selected Item', keyCopy: 'f', keys:  'f' },
-  { action: editTags, copy: 'Tag Selected Item', keyCopy: 't', keys:  't' }
-
-
-
+  { action: editTags, copy: 'Tag Selected Item', keyCopy: 't', keys:  't', prevent: true }
 ]
 
 // prettier-ignore
 export const readerShortcuts = [
-  {action: increaseFontSize, copy: 'Increase Font Size', keyCopy: 'Command/Control with +', keys: ['ctrl++', 'command++'] },
-  { action: decreaseFontSize, copy: 'Decrease Font Size', keyCopy: 'Command/Control with -', keys: ['ctrl+-', 'command+-'] },
+  { action: increaseFontSize, copy: 'Increase Font Size', keyCopy: 'Control with + / =', keys: ['ctrl++', 'ctrl+='] },
+  { action: decreaseFontSize, copy: 'Decrease Font Size', keyCopy: 'Control with -', keys: ['ctrl+-'] },
   // We omit this so it doesn't bind since we do that in read container
   {action: null, copy: 'Go Back', keyCopy: 'b', keys: 'b', omit: true},
 ]
@@ -181,7 +185,9 @@ export const shortcutSagas = [
   takeLatest(SHORTCUT_DELETE_ITEM, shortcutDeleteItem),
   takeLatest(SHORTCUT_ARCHIVE_ITEM, shortcutArchiveItem),
   takeLatest(SHORTCUT_FAVORITE_ITEM, shortcutFavoriteItem),
-  takeLatest(SHORTCUT_EDIT_TAGS, shortcutEditTags)
+  takeLatest(SHORTCUT_EDIT_TAGS, shortcutEditTags),
+  takeEvery(SHORTCUT_INCREASE_FONT_SIZE, shortcutIncreaseFontSize),
+  takeEvery(SHORTCUT_DECREASE_FONT_SIZE, shortcutDecreaseFontSize)
 ]
 
 /* SAGAS :: SELECTORS
@@ -192,6 +198,7 @@ const getCurrentBulkItemId = (state) => state.bulkEdit.currentId
 const getSection = (state) => state.app.section
 const getItems = (state, section) => state.myList[section]
 const getItem = (state, id) => state.myListItemsById[id]
+const getFontSize = (state) => state.reader.fontSize
 
 /** SAGA :: RESPONDERS
 --------------------------------------------------------------- */
@@ -277,13 +284,9 @@ function* selectBulkItem(next) {
   return yield put({ type: ITEMS_BULK_SET_CURRENT, currentId: prevId })
 }
 
-function* shortcutEngage({ appMode, router }) {
+function* shortcutEngage({ appMode }) {
   if (appMode === 'bulk') return yield call(bulkEngage)
-
-  const selectedId = yield select(getCurrentItemId)
-  if (!selectedId) return
-
-  yield call(router.push, `/read/${selectedId}`)
+  // We are using standard element focus for enter actions
 }
 
 function* bulkEngage() {
@@ -308,11 +311,12 @@ function* shortcutDeleteItem() {
   if (!id) return
 
   yield put({ type: ITEMS_DELETE_REQUEST, items: [{ id, position }] })
-  return yield put({
-    type: SHORTCUT_SET_CURRENT_ITEM,
-    currentId: false,
-    position: false
+  const { cancel } = yield race({
+    confirm: take(ITEMS_DELETE_CONFIRM),
+    cancel: take(ITEMS_DELETE_CANCEL)
   })
+
+  if (!cancel) return yield call(selectItem, true)
 }
 
 function* shortcutArchiveItem() {
@@ -320,6 +324,7 @@ function* shortcutArchiveItem() {
   const position = yield select(getCurrentPosition)
   if (!id) return
 
+  yield call(selectItem, true)
   yield put({ type: ITEMS_ARCHIVE_REQUEST, items: [{ id, position }] })
 }
 
@@ -328,7 +333,7 @@ function* shortcutFavoriteItem() {
   const position = yield select(getCurrentPosition)
   if (!id) return
 
-  //  yield put({type: })
+  yield put({ type: ITEMS_FAVORITE_REQUEST, items: [{ id, position }] })
 }
 
 function* shortcutEditTags() {
@@ -337,4 +342,19 @@ function* shortcutEditTags() {
   if (!id) return
 
   yield put({ type: ITEMS_TAG_REQUEST, items: [{ id, position }] })
+}
+
+function* shortcutIncreaseFontSize() {
+  const fontSize = yield select(getFontSize)
+  const nextSize = parseInt(fontSize) + 1
+
+  if (nextSize > FONT_RANGE.length) return
+  yield put({ type: UPDATE_FONT_SIZE, fontSize: nextSize })
+}
+function* shortcutDecreaseFontSize() {
+  const fontSize = yield select(getFontSize)
+  const nextSize = parseInt(fontSize) - 1
+
+  if (nextSize < 0) return
+  yield put({ type: UPDATE_FONT_SIZE, fontSize: nextSize })
 }
