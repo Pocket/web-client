@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { css, cx } from 'linaria'
 import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { urlWithPocketRedirect } from 'common/utilities'
@@ -64,11 +64,16 @@ const card = css`
     z-index: -1;
   }
 
+  &:focus {
+    outline: none;
+  }
+
   &.bulkIsCurrent .bulkBacking {
     border-color: var(--color-formFieldFocusLabel);
     display: block;
   }
 
+  &:focus-within .bulkBacking,
   &.bulkSelected .bulkBacking,
   &.shortcutSelected .bulkBacking {
     background-color: var(--color-navCurrentTab);
@@ -94,7 +99,9 @@ const card = css`
     transition-timing-function: ease;
 
     @media (hover: hover) and (pointer: fine) {
+      &:focus,
       &:hover {
+        outline: none;
         color: var(--color-textPrimary);
         .title span {
           text-decoration: underline;
@@ -200,6 +207,7 @@ export const Card = ({
   bulkSelected,
   bulkIsCurrent,
   shortcutSelected,
+  shortcutSelect,
   onOpen,
   position,
   isPremium
@@ -236,11 +244,11 @@ export const Card = ({
     card,
     bulkIsCurrent && 'bulkIsCurrent',
     bulkEdit && 'bulkEdit',
-    bulkSelected && 'bulkSelected',
-    shortcutSelected && 'shortcutSelected'
+    bulkSelected && 'bulkSelected'
   )
 
   const { t } = useTranslation()
+  const linkRef = useRef(null)
 
   const archiveAction = status === '0' ? itemArchive : itemUnArchive
   const CorrectArchiveIcon = status === '0' ? ArchiveIcon : AddIcon
@@ -262,6 +270,20 @@ export const Card = ({
 
   const openUrl = openExternal ? urlWithPocketRedirect(open_url) : `/read/${id}`
 
+  const handleFocus = () => {
+    if (!shortcutSelected) shortcutSelect()
+  }
+
+  useEffect(() => {
+    if (shortcutSelected && document.activeElement !== linkRef.current) {
+      linkRef.current.focus()
+    }
+
+    if (!shortcutSelected && document.activeElement === linkRef.current) {
+      linkRef.current.blur()
+    }
+  }, [shortcutSelected])
+
   return (
     <VisibilitySensor onVisible={itemImpression}>
       <article
@@ -277,7 +299,10 @@ export const Card = ({
         </FeatureFlag>
         <Link href={openUrl}>
           <a
+            ref={linkRef}
+            tabIndex={0}
             onClick={onOpen}
+            onFocus={handleFocus}
             // eslint-disable-next-line react/jsx-no-target-blank
             target={openExternal ? '_blank' : undefined}>
             <CardMedia image_src={thumbnail} title={title} id={id} />

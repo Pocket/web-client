@@ -19,6 +19,7 @@ import { fireItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
 import { trackItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
 import { setImpression } from 'connectors/items-by-id/my-list/items.analytics'
 import { sendEngagementEvent } from 'connectors/items-by-id/my-list/items.analytics'
+import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
 import copy from 'clipboard-copy'
 import { COPY_ITEM_URL } from 'actions'
@@ -88,8 +89,8 @@ export function ItemCard({ id, position, fluidHeight, type }) {
     dispatch(itemsTagAction([{ id, position }]))
   }
 
-  const itemBulkSelect = (shift) => {dispatch(itemsBulkSelectAction(id, shift))} //prettier-ignore
-  const itemBulkDeSelect = (shift) => {dispatch(itemsBulkDeSelectAction(id, shift))} //prettier-ignore
+  const itemBulkSelect = (shift) => dispatch(itemsBulkSelectAction(id, shift)) //prettier-ignore
+  const itemBulkDeSelect = (shift) => dispatch(itemsBulkDeSelectAction(id, shift)) //prettier-ignore
 
   const copyAction = () => ({ type: COPY_ITEM_URL })
   const itemCopy = async () => {
@@ -102,6 +103,8 @@ export function ItemCard({ id, position, fluidHeight, type }) {
     fireItemOpen(position, item, dispatch)
   }
 
+  const shortcutSelect = () => dispatch(selectShortcutItem(id, position))
+
   return item ? (
     <Card
       item={item}
@@ -112,6 +115,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
       bulkSelected={bulkSelected}
       bulkIsCurrent={bulkIsCurrent}
       shortcutSelected={shortcutSelected}
+      shortcutSelect={shortcutSelect}
       onOpen={onOpen}
       actions={{
         itemShare,
