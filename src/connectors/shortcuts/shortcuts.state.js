@@ -25,7 +25,7 @@ import { SHORTCUT_GO_TO_FAVORITES } from 'actions'
 import { SHORTCUT_GO_TO_ARTICLES } from 'actions'
 import { SHORTCUT_GO_TO_HIGHLIGHTS } from 'actions'
 import { SHORTCUT_GO_TO_VIDEOS } from 'actions'
-import { SHORTCUT_GO_TO_TAG } from 'actions'
+import { SHORTCUT_GO_TO_TAGS } from 'actions'
 
 import { SHORTCUT_SELECT_NEXT_ITEM } from 'actions'
 import { SHORTCUT_SELECT_PREVIOUS_ITEM } from 'actions'
@@ -68,7 +68,7 @@ export const goToFavorites = ({router}) => ({ type: SHORTCUT_GO_TO_FAVORITES, ro
 export const goToArticles = ({router}) => ({ type: SHORTCUT_GO_TO_ARTICLES, router}) //prettier-ignore
 export const goToHighlights = ({router}) => ({ type: SHORTCUT_GO_TO_HIGHLIGHTS, router}) //prettier-ignore
 export const goToVideos = ({router}) => ({ type: SHORTCUT_GO_TO_VIDEOS, router}) //prettier-ignore
-export const gotToTag = () => ({ type: SHORTCUT_GO_TO_TAG })
+export const gotToTag = ({ router }) => ({ type: SHORTCUT_GO_TO_TAGS, router })
 
 export const goToSearch = () => appSetMode('search')
 export const bulkEdit = () => appSetMode('bulk')
@@ -177,6 +177,7 @@ export const shortcutSagas = [
   takeLatest(SHORTCUT_GO_TO_ARTICLES, shortcutGoToArticles),
   takeLatest(SHORTCUT_GO_TO_HIGHLIGHTS, shortcutGoToHighlights),
   takeLatest(SHORTCUT_GO_TO_VIDEOS, shortcutGoToVideos),
+  takeLatest(SHORTCUT_GO_TO_TAGS, shortcutGoToTags),
   takeEvery(SHORTCUT_SELECT_NEXT_ITEM, shortcutNextItem),
   takeEvery(SHORTCUT_SELECT_PREVIOUS_ITEM, shortcutPreviousItem),
   takeEvery(SHORTCUT_ENGAGE_SELECTED_ITEM, shortcutEngage),
@@ -228,6 +229,10 @@ function* shortcutGoToHighlights({ router }) {
 
 function* shortcutGoToVideos({ router }) {
   yield call(router.push, '/my-list/videos')
+}
+
+function* shortcutGoToTags({ router }) {
+  yield call(router.push, '/my-list/tags')
 }
 
 function* shortcutNextItem({ appMode }) {
