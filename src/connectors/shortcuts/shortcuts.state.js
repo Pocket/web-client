@@ -97,7 +97,7 @@ export const listShortcuts = [
   { action: goToArticles, copy: 'Go to Articles', keyCopy: 'g then r', keys: 'g r' },
   { action: goToHighlights, copy: 'Go to Highlights', keyCopy: 'g then h', keys:  'g h' },
   { action: goToVideos, copy: 'Go to Videos', keyCopy: 'g then v', keys: 'g v' },
-  { action: gotToTag, copy: 'Go to a Tag Page', keyCopy: 'g then t', keys:  'g t' },
+  { action: gotToTag, copy: 'Go to All Tags Page', keyCopy: 'g then t', keys:  'g t' },
 
   { action: goToSearch, copy: 'Go to Search', keyCopy: 'g then s', keys: 'g s', prevent: true},
   { action: bulkEdit, copy: 'Bulk Edit', keyCopy: 'g then b', keys:  'g b' },
@@ -120,7 +120,7 @@ export const listShortcuts = [
 
   { action: viewOriginal, copy: 'View Original Version of Selected Item', keyCopy: 'o', keys: 'o' },
 
-  { action: toggleHelpOverlay, copy: 'Open Help Overlay', keyCopy: '? or /', keys: ['?', '/'] },
+  { action: toggleHelpOverlay, copy: 'View Keyboard Shortcuts', keyCopy: '? or /', keys: ['?', '/'] },
   { action: deleteItem, copy: 'Delete Selected Item', keyCopy: 'd', keys:  'd' },
   { action: archiveItem, copy: 'Archive Selected Item', keyCopy: 'a', keys:  'a' },
   { action: favoriteItem, copy: 'Favorite Selected Item', keyCopy: 'f', keys:  'f' },
