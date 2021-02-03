@@ -52,6 +52,7 @@ export const cardGrid = css`
       display: none;
     }
 
+    &:focus-within .actions button,
     &:hover .actions button {
       opacity: 1;
     }
