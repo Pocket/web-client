@@ -18,16 +18,21 @@ export function Shortcuts() {
   const cancelShortcutView = () => dispatch(closeHelpOverlay())
 
   useEffect(() => {
-    listShortcuts.forEach(({ keys, action, omit }) => {
+    const shortCuts = [...listShortcuts, ...readerShortcuts]
+
+    shortCuts.forEach(({ keys, action, omit, prevent }) => {
       if (omit) return
       const actionPayload = action({ router, appMode })
-      const boundAction = () => dispatch(actionPayload)
+      const boundAction = (event) => {
+        if (prevent) event.preventDefault()
+        dispatch(actionPayload)
+      }
       Mousetrap.bind(keys, boundAction)
     })
 
     // Clean up
     return () => {
-      listShortcuts.forEach(({ keys }) => Mousetrap.unbind(keys))
+      shortCuts.forEach(({ keys }) => Mousetrap.unbind(keys))
     }
   }, [dispatch, router, appMode])
 
