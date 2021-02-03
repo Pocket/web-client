@@ -91,7 +91,7 @@ export const decreaseFontSize = () => ({ type: SHORTCUT_DECREASE_FONT_SIZE })
 
 // prettier-ignore
 export const listShortcuts = [
-  { action: goToList, copy: 'Go to MyList', keyCopy: 'g then l', keys:  'g l' },
+  { action: goToList, copy: 'Go to My List', keyCopy: 'g then l', keys:  'g l' },
   { action: goToArchive, copy: 'Go to Archive', keyCopy: 'g then a', keys:  'g a' },
   { action: goToFavorites, copy: 'Go to Favorites', keyCopy: 'g then f', keys:  'g f' },
   { action: goToArticles, copy: 'Go to Articles', keyCopy: 'g then r', keys: 'g r' },
