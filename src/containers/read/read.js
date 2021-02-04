@@ -35,6 +35,8 @@ import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favo
 import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 
+import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
+
 import { genericRecsRequested } from '/connectors/recit/recit.state'
 
 import { sendDeleteEvent } from './read.analytics'
@@ -109,7 +111,6 @@ export default function Reader() {
   }
 
   const [sideBarOpen, setSideBar] = useState(false)
-  const [sendModalOpen, setSendModal] = useState(false)
   const [annotationLimitModal, setAnnotationLimitModal] = useState(false)
   const [highlight, setHighlight] = useState(null)
   const [highlightList, setHighlightList] = useState([])
@@ -117,6 +118,7 @@ export default function Reader() {
 
   useEffect(() => {
     dispatch(itemDataRequest(id))
+    dispatch(selectShortcutItem(id))
     // dispatch(genericRecsRequested(id))
   }, [dispatch, id])
 
@@ -133,7 +135,6 @@ export default function Reader() {
     authors,
     title,
     open_url,
-    share_url,
     read_time,
     syndicated,
     publisher,
@@ -209,8 +210,7 @@ export default function Reader() {
   const addAnnotation = () => {
     if (annotations.length === 3 && !isPremium) {
       setAnnotationLimitModal(true)
-    }
-    else {
+    } else {
       dispatch(sendAnnotationEvent(articleData, false))
       dispatch(
         saveAnnotation({
@@ -277,7 +277,9 @@ export default function Reader() {
             handleImpression={handleImpression}
           />
         </div>
-        <article className={classNames(ReaderFonts, GoogleFonts, 'reader')} style={customStyles}>
+        <article
+          className={classNames(ReaderFonts, GoogleFonts, 'reader')}
+          style={customStyles}>
           <ItemHeader {...headerData} />
           {articleContent ? (
             <Content
@@ -310,7 +312,8 @@ export default function Reader() {
       {!isPremium && articleContent ? (
         <BottomUpsell
           maxWidth={customStyles.maxWidth}
-          onVisible={handleImpression} />
+          onVisible={handleImpression}
+        />
       ) : null}
       <AnnotationsLimitModal
         showModal={annotationLimitModal}

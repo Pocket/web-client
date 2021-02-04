@@ -64,7 +64,7 @@ const myListHeaderStyle = css`
 export const UnTaggedHeader = ({ subset, filter, tag }) => (
   <header className={myListHeaderStyle}>
     <div>
-      <h1 className="pageTitle">un-tagged</h1>
+      <h1 className="pageTitle">not tagged</h1>
       <FilterMenu subset={subset} filter={filter} tag={tag} />
     </div>
   </header>
@@ -119,7 +119,7 @@ export const TagPageHeader = ({
   deleteTag,
   isPinned
 }) => {
-  const TagHeader = ('_untagged_'.includes(title)) ? UnTaggedHeader : TaggedHeader
+  const TagHeader = '_untagged_'.includes(title) ? UnTaggedHeader : TaggedHeader
 
   return subset ? (
     <TagHeader

@@ -21,6 +21,7 @@ import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
 import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
+import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
 export default function Collection(props) {
   const { metaData = {}, subset: sub = 'active', filter: propFilter } = props
@@ -121,7 +122,12 @@ export default function Collection(props) {
     dispatch(updateMyListData(since, subset, filter, tag))
   }, [listState, since, subset, filter, tag, dispatch])
 
-  // useEffect(trackPageView, [])
+  // Remove current item when we return to myList
+  // This should be leveraged more effectively in future, but for now
+  // it is simply a reset
+  useEffect(() => {
+    dispatch(selectShortcutItem(false))
+  }, [dispatch])
 
   /**
    * FUNCTIONAL ACTIONS

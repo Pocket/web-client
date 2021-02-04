@@ -49,7 +49,7 @@ export function TagList({ userTags, value, valueChange }) {
               <Link href={'/my-list/tags/_untagged_'}>
                 <a>
                   <Pill>
-                    <Trans i18nKey="tags:un-tagged">un-tagged</Trans>
+                    <Trans i18nKey="tags:not-tagged">not tagged</Trans>
                   </Pill>
                 </a>
               </Link>
