@@ -151,8 +151,8 @@ export const readerShortcuts = [
 
   { action: increaseFontSize, copy: 'Increase Article Font Size', keyCopy: 'Control =', keys: ['ctrl+='] },
   { action: decreaseFontSize, copy: 'Decrease Article Font Size', keyCopy: 'Control -', keys: ['ctrl+-'] },
-  { action: increaseColumnWidth, copy: 'Increase Column Width', keyCopy: 'Alt/Option =', keys: ['alt+='] },
-  { action: decreaseColumnWidth, copy: 'Decrease Column Width', keyCopy: 'Alt/Option  -', keys: ['alt+-'] },
+  { action: increaseColumnWidth, copy: 'Increase Column Width', keyCopy: 'Alt/Option =', keys: ['alt+='], premium: true},
+  { action: decreaseColumnWidth, copy: 'Decrease Column Width', keyCopy: 'Alt/Option  -', keys: ['alt+-'], premium: true},
 ]
 
 const initialState = {
@@ -447,7 +447,6 @@ function* shortcutBatchArchive() {
 function* shortcutBatchDelete() {
   const bulkItems = yield select(getBulkItems)
   if (!bulkItems.length) return
-  console.log(itemsDeleteAction, bulkItems)
   yield put(itemsDeleteAction(bulkItems))
 }
 

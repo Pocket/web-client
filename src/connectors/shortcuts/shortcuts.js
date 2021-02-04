@@ -14,6 +14,7 @@ export function Shortcuts() {
   const router = useRouter()
 
   const appMode = useSelector((state) => state.app.mode)
+  const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false) //prettier-ignore
   const showShortcuts = useSelector((state) => state.shortcuts.displayLegend)
 
   const APP_ROOT_SELECTOR = '#__next'
@@ -23,8 +24,9 @@ export function Shortcuts() {
     const shortCuts = [...listShortcuts, ...itemActions, ...readerShortcuts]
     Mousetrap.addKeycodes({ 173: '-' }) // For FF hyphen code
 
-    shortCuts.forEach(({ keys, action, omit, prevent }) => {
-      if (omit) return
+    shortCuts.forEach(({ keys, action, omit, prevent, premium }) => {
+      if (omit) return // We want in the list but not bound
+      if (premium && !isPremium) return // It is a premium feature
       const actionPayload = action({ router, appMode })
       const boundAction = (event) => {
         if (prevent) event.preventDefault()
@@ -37,7 +39,7 @@ export function Shortcuts() {
     return () => {
       shortCuts.forEach(({ keys }) => Mousetrap.unbind(keys))
     }
-  }, [dispatch, router, appMode])
+  }, [dispatch, router, appMode, isPremium])
 
   return showShortcuts ? (
     <ShortCutsView
