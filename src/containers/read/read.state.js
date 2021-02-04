@@ -195,9 +195,9 @@ const getPremiumStatus = (state) => parseInt(state.user.premium_status, 10) === 
 function* articleItemRequest({ itemId }) {
   try {
     const response = yield getArticleFromId(itemId)
-    const item = response?.item[itemId]
+    const item = response?.list[itemId]
     const { resolved_url: url } = item
-    const derivedItems = deriveMyListItems(Object.values(response.item))
+    const derivedItems = deriveMyListItems([item])
     const itemsById = arrayToObject(derivedItems, 'item_id')
 
     if (item)
