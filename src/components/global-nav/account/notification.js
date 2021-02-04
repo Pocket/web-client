@@ -4,7 +4,7 @@ import classNames from 'classnames'
 const bubbleStyles = css`
   height: var(--size050);
   width: var(--size050);
-  background-color: #4ABEFF;
+  background-color: var(--color-teal85);
   display: inline-block;
   margin-left: var(--spacing025);
   border-radius: 50%;
