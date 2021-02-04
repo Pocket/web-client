@@ -56,10 +56,19 @@ import { setListModeGrid } from 'connectors/app/app.state'
 import { setListModeDetail } from 'connectors/app/app.state'
 import { sortOrderSetOld } from 'connectors/app/app.state'
 import { sortOrderSetNew } from 'connectors/app/app.state'
+
 import { appSetMode } from 'connectors/app/app.state'
+
 import { setColorModeLight } from 'connectors/app/app.state'
 import { setColorModeDark } from 'connectors/app/app.state'
 import { setColorModeSepia } from 'connectors/app/app.state'
+
+import { itemsArchiveBatch } from 'connectors/items-by-id/my-list/items.archive.js'
+import { itemsUnarchiveBatch } from 'connectors/items-by-id/my-list/items.archive.js'
+import { itemsFavoriteBatch } from 'connectors/items-by-id/my-list/items.favorite.js'
+import { itemsUnFavoriteBatch } from 'connectors/items-by-id/my-list/items.favorite.js'
+import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
+import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
 
 export const openHelpOverlay = () => ({ type: SHORTCUT_OPEN_HELP_OVERLAY })
 export const closeHelpOverlay = () => ({ type: SHORTCUT_CLOSE_HELP_OVERLAY })
@@ -82,10 +91,10 @@ export const selectNextItem = ({appMode}) => ({ type: SHORTCUT_SELECT_NEXT_ITEM,
 export const selectPreviousItem = ({appMode}) => ({ type: SHORTCUT_SELECT_PREVIOUS_ITEM, appMode }) //prettier-ignore
 export const engageSelectedItem = ({ router, appMode }) => ({ type: SHORTCUT_ENGAGE_SELECTED_ITEM, router, appMode }) //prettier-ignore
 
-export const deleteItem = ({currentItem}) => ({ type: SHORTCUT_DELETE_ITEM, currentItem }) //prettier-ignore
-export const archiveItem = ({currentItem}) => ({ type: SHORTCUT_ARCHIVE_ITEM, currentItem }) //prettier-ignore
-export const favoriteItem = ({ currentItem }) => ({ type: SHORTCUT_FAVORITE_ITEM, currentItem }) //prettier-ignore
-export const editTags = ({ currentItem }) => ({ type: SHORTCUT_EDIT_TAGS, currentItem }) //prettier-ignore
+export const deleteItem = ({appMode}) => ({ type: SHORTCUT_DELETE_ITEM, appMode }) //prettier-ignore
+export const archiveItem = ({appMode}) => ({ type: SHORTCUT_ARCHIVE_ITEM, appMode }) //prettier-ignore
+export const favoriteItem = ({ appMode }) => ({ type: SHORTCUT_FAVORITE_ITEM, appMode }) //prettier-ignore
+export const editTags = ({ appMode }) => ({ type: SHORTCUT_EDIT_TAGS, appMode }) //prettier-ignore
 
 export const viewOriginal = () => ({ type: SHORTCUT_VIEW_ORIGINAL })
 
@@ -125,12 +134,12 @@ export const listShortcuts = [
 
 // prettier-ignore
 export const itemActions = [
-  { action: engageSelectedItem, copy: 'Open Selected Item/Select Item in Bulk Edit', keyCopy: 'enter', keys: ['enter'] },
   { action: viewOriginal, copy: 'Open Original in New Tab', keyCopy: 'o', keys: 'o' },
   { action: archiveItem, copy: 'Archive Selected Item', keyCopy: 'a', keys:  'a' },
   { action: favoriteItem, copy: 'Favorite Selected Item', keyCopy: 'f', keys:  'f' },
   { action: editTags, copy: 'Tag Selected Item', keyCopy: 't', keys:  't', prevent: true },
   { action: deleteItem, copy: 'Delete Selected Item', keyCopy: 'd', keys: 'd' },
+  { action: engageSelectedItem, copy: 'Select Item in Bulk Edit', keyCopy: 'x', keys: ['x'] },
   { action: selectNextItem, copy: 'Select Next Item', keyCopy: 'j', keys: 'j' },
   { action: selectPreviousItem, copy: 'Select Previous Item', keyCopy: 'k', keys: 'k' },
 ]
@@ -140,10 +149,10 @@ export const readerShortcuts = [
   // We omit this so it doesn't bind since we do that in read container
   { action: null, copy: 'Back to List', keyCopy: 'b', keys: 'b', omit: true },
 
-  { action: increaseFontSize, copy: 'Increase Article Font Size', keyCopy: 'Control with =', keys: ['ctrl+='] },
-  { action: decreaseFontSize, copy: 'Decrease Article Font Size', keyCopy: 'Control with -', keys: ['ctrl+-'] },
-  { action: increaseColumnWidth, copy: 'Increase Column Width', keyCopy: 'Alt with =', keys: ['alt+='] },
-  { action: decreaseColumnWidth, copy: 'Decrease Column Width', keyCopy: 'Alt with -', keys: ['alt+-'] },
+  { action: increaseFontSize, copy: 'Increase Article Font Size', keyCopy: 'Control =', keys: ['ctrl+='] },
+  { action: decreaseFontSize, copy: 'Decrease Article Font Size', keyCopy: 'Control -', keys: ['ctrl+-'] },
+  { action: increaseColumnWidth, copy: 'Increase Column Width', keyCopy: 'Alt/Option =', keys: ['alt+='] },
+  { action: decreaseColumnWidth, copy: 'Decrease Column Width', keyCopy: 'Alt/Option  -', keys: ['alt+-'] },
 ]
 
 const initialState = {
@@ -214,6 +223,9 @@ const getItems = (state, section) => state.myList[section]
 const getItem = (state, id) => state.myListItemsById[id]
 const getFontSize = (state) => state.reader.fontSize
 const getColumnWidth = (state) => state.reader.columnWidth
+const getBulkItems = (state) => state?.bulkEdit?.selected
+const getBatchFavorite = (state) => state?.bulkEdit?.batchFavorite
+const getBatchStatus = (state) => state?.bulkEdit?.batchStatus
 
 /** SAGA :: RESPONDERS
 --------------------------------------------------------------- */
@@ -249,6 +261,10 @@ function* shortcutGoToTags({ router }) {
   yield call(router.push, '/my-list/tags')
 }
 
+/**
+ * ITEM SELECTORS
+ * ---------------------------------------------------------------------------
+ */
 function* shortcutNextItem({ appMode }) {
   const selectFunction = appMode === 'bulk' ? selectBulkItem : selectItem
   yield call(selectFunction, true)
@@ -313,6 +329,11 @@ function* bulkEngage() {
   yield put({ type: ITEMS_BULK_TOGGLE, id: bulkId })
 }
 
+/**
+ * ITEM ACTIONS
+ * ---------------------------------------------------------------------------
+ */
+
 function* shortcutViewOriginal() {
   const selectedId = yield select(getCurrentItemId)
   if (!selectedId) return
@@ -324,7 +345,9 @@ function* shortcutViewOriginal() {
   if (open_url) yield call(window.open, open_url, '_blank')
 }
 
-function* shortcutDeleteItem() {
+function* shortcutDeleteItem({ appMode }) {
+  if (appMode === 'bulk') return yield shortcutBatchDelete()
+
   const id = yield select(getCurrentItemId)
   const position = yield select(getCurrentPosition)
   if (!id) return
@@ -338,31 +361,60 @@ function* shortcutDeleteItem() {
   if (!cancel) return yield call(selectItem, true)
 }
 
-function* shortcutArchiveItem() {
+function* shortcutArchiveItem({ appMode }) {
+  if (appMode === 'bulk') return yield shortcutBatchArchive()
+
   const id = yield select(getCurrentItemId)
   if (!id) return
 
   const item = yield select(getItem, id)
   if (!item) return
 
-  const section = getSection()
-  const isArchived = item.status === 1
+  const section = yield select(getSection)
+  const isArchived = item.status === '1'
 
   const position = yield select(getCurrentPosition)
 
-  yield call(selectItem, true)
-  yield put({ type: ITEMS_ARCHIVE_REQUEST, items: [{ id, position }] })
+  if (!isArchived) {
+    if (section === 'unread') yield call(selectItem, true)
+    return yield put({ type: ITEMS_ARCHIVE_REQUEST, items: [{ id, position }] })
+  }
+
+  if (section === 'archive') yield call(selectItem, true)
+  yield put({ type: ITEMS_UNARCHIVE_REQUEST, items: [{ id, position }] })
 }
 
-function* shortcutFavoriteItem() {
+function* shortcutFavoriteItem({ appMode }) {
+  if (appMode === 'bulk') return yield shortcutBatchFavorite()
+
   const id = yield select(getCurrentItemId)
-  const position = yield select(getCurrentPosition)
   if (!id) return
 
-  yield put({ type: ITEMS_FAVORITE_REQUEST, items: [{ id, position }] })
+  const item = yield select(getItem, id)
+  if (!item) return
+
+  const section = yield select(getSection)
+  const isFavorite = item.favorite === '1'
+
+  const position = yield select(getCurrentPosition)
+
+  if (!isFavorite) {
+    return yield put({
+      type: ITEMS_FAVORITE_REQUEST,
+      items: [{ id, position }]
+    })
+  }
+
+  if (section === 'favorites') yield call(selectItem, true)
+  return yield put({
+    type: ITEMS_UNFAVORITE_REQUEST,
+    items: [{ id, position }]
+  })
 }
 
-function* shortcutEditTags() {
+function* shortcutEditTags({ appMode }) {
+  if (appMode === 'bulk') return yield shortcutBatchTag()
+
   const id = yield select(getCurrentItemId)
   const position = yield select(getCurrentPosition)
   if (!id) return
@@ -370,6 +422,45 @@ function* shortcutEditTags() {
   yield put({ type: ITEMS_TAG_REQUEST, items: [{ id, position }] })
 }
 
+function* shortcutBatchFavorite() {
+  const bulkItems = yield select(getBulkItems)
+  if (!bulkItems.length) return
+
+  const batchFavorite = yield select(getBatchFavorite)
+  const favoriteFunction =
+    batchFavorite === 'favorite' ? itemsFavoriteBatch : itemsUnFavoriteBatch
+
+  yield put(favoriteFunction(bulkItems))
+}
+
+function* shortcutBatchArchive() {
+  const bulkItems = yield select(getBulkItems)
+  if (!bulkItems.length) return
+
+  const batchStatus = yield select(getBatchStatus)
+  const archiveFunction =
+    batchStatus === 'archive' ? itemsArchiveBatch : itemsUnarchiveBatch
+
+  yield put(archiveFunction(bulkItems))
+}
+
+function* shortcutBatchDelete() {
+  const bulkItems = yield select(getBulkItems)
+  if (!bulkItems.length) return
+  console.log(itemsDeleteAction, bulkItems)
+  yield put(itemsDeleteAction(bulkItems))
+}
+
+function* shortcutBatchTag() {
+  const bulkItems = yield select(getBulkItems)
+  if (!bulkItems.length) return
+  yield put(itemsTagAction(bulkItems))
+}
+
+/**
+ * USER PREFERENCES
+ * ---------------------------------------------------------------------------
+ */
 function* shortcutIncreaseFontSize() {
   const fontSize = yield select(getFontSize)
   const nextSize = parseInt(fontSize) + 1
