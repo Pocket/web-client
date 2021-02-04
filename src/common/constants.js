@@ -25,7 +25,7 @@ export const CACHE_KEY_LIST_MODE = 'pocket-list-mode'
 export const CACHE_KEY_SORT_ORDER = 'pocket-sort-order'
 export const CACHE_KEY_RELEASE_VERSION = 'pocket-release-version'
 
-export const RELEASE_NOTES_VERSION = 'cfeb-03-2021'
+export const RELEASE_NOTES_VERSION = 'feb-03-2021'
 
 // THIRD PARTY
 export const CAPTCHA_SITE_KEY = '6LfIpyYUAAAAAPtNSKafudr16odFL1eQte0vR0Py' // API key used with Google's ReCaptcha service
