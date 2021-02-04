@@ -1,5 +1,6 @@
 // @refresh reset
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'common/setup/i18n'
 import { css } from 'linaria'
 import classNames from 'classnames'
@@ -8,6 +9,8 @@ import { SideNav } from 'connectors/side-nav/side-nav'
 import { WhatsNewHeader } from 'components/headers/whats-new-header'
 import Jan192021 from 'components/release-notes/jan-19-2021'
 import Feb032021 from 'components/release-notes/feb-03-2021'
+import { RELEASE_NOTES_VERSION } from 'common/constants'
+import { setReleaseNotes } from 'connectors/app/app.state'
 
 const whatsNewStyles = css`
   font-family: var(--fontSansSerif);
@@ -57,8 +60,13 @@ const whatsNewStyles = css`
 `
 
 export default function Messages() {
+  const dispatch = useDispatch()
   const { t } = useTranslation()
   const isLoggedIn = useSelector((state) => !!state.user.auth)
+
+  useEffect(() => {
+    dispatch(setReleaseNotes(RELEASE_NOTES_VERSION))
+  }, [])
 
   return (
     <Layout title={`Pocket - ${t('whats-new:whats-new', "What's New")}`}>

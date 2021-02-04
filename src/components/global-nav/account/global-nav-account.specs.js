@@ -103,6 +103,24 @@ describe('GlobalNavAccount', () => {
     assert(profileLink.prop('children').includes('George'))
   })
 
+  it('renders bubble notifications when set', () => {
+    const account = shallow(<GlobalNavAccount {...baseProps} isLoggedIn showNotification />)
+    const avatarNotification = account.find(testIdSelector('notification-avatar'))
+    const whatsNewNotification = account.find(testIdSelector('notification-whatsnew'))
+
+    assert(avatarNotification.exists())
+    assert(whatsNewNotification.exists())
+  })
+
+  it('does not render bubble notifications by default', () => {
+    const account = shallow(<GlobalNavAccount {...baseProps} isLoggedIn />)
+    const avatarNotification = account.find(testIdSelector('notification-avatar'))
+    const whatsNewNotification = account.find(testIdSelector('notification-whatsnew'))
+
+    assert(!avatarNotification.exists())
+    assert(!whatsNewNotification.exists())
+  })
+
   it('calls the props.onLinkClick callback when a link is clicked, passing through the link name', () => {
     const spy1 = sinon.spy()
     const account1 = shallow(

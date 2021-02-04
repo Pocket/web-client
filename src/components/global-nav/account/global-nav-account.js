@@ -14,6 +14,9 @@ import { ThemeSettings } from 'components/display-settings/theme'
 import { ListSettings } from 'components/display-settings/list-modes'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 
+import { FloatingNotification } from './notification'
+import { InlineNotification } from './notification'
+
 const accountLinkStyle = css`
   display: inline-block;
   position: relative;
@@ -154,7 +157,8 @@ const GlobalNavAccount = ({
   setListMode,
   setGridMode,
   setDetailMode,
-  sendImpression
+  sendImpression,
+  showNotification
 }) => {
   const { t } = useTranslation()
 
@@ -227,6 +231,9 @@ const GlobalNavAccount = ({
           className={avatarStyle}
           {...testIdAttribute('account-menu-avatar')}
         />
+        { showNotification ? (
+          <FloatingNotification {...testIdAttribute('notification-avatar')} />
+        ) : null}
       </WithTooltip>
       <PopupMenu
         trigger={accountMenuTriggerRef}
@@ -289,7 +296,10 @@ const GlobalNavAccount = ({
             onClick={(event) => {
               handleLinkClick('whats-new', event)
             }}>
-            <Trans i18nKey="nav:whats-new">What’s New</Trans>
+            <Trans i18nKey="nav:whats-new">What’s New</Trans>{" "}
+            { showNotification ? (
+              <InlineNotification {...testIdAttribute('notification-whatsnew')} />
+            ) : null}
           </PopupMenuItem>
         </PopupMenuGroup>
         <PopupMenuGroup>

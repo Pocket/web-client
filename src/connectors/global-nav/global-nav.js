@@ -27,7 +27,9 @@ import { ArticleIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
 import { VideoIcon } from '@pocket/web-ui'
 
-import { BASE_URL, LOGIN_URL } from 'common/constants'
+import { BASE_URL  } from 'common/constants'
+import { LOGIN_URL } from 'common/constants'
+import { RELEASE_NOTES_VERSION } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities'
 import { userOAuthLogIn } from 'connectors/user/user.state'
 
@@ -77,6 +79,8 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const listMode = useSelector((state) => state?.app?.listMode)
   const sortOrder = useSelector((state) => state?.app?.sortOrder)
   const colorMode = useSelector((state) => state?.app?.colorMode)
+
+  const showNotification = useSelector((state) => state?.app?.releaseVersion !== RELEASE_NOTES_VERSION)
 
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
   const toggleSortOrder = () => dispatch(sortOrderToggle())
@@ -230,6 +234,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       setDetailMode={setDetailMode}
       toggleListMode={toggleListMode}
       sendImpression={sendImpressionEvent}
+      showNotification={showNotification}
       tools={tools}>
       {NavTakeover ? <NavTakeover onClose={resetNav} /> : null}
     </GlobalNavComponent>

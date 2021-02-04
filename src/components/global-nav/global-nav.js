@@ -227,6 +227,7 @@ const GlobalNav = ({
   setListMode,
   setGridMode,
   setDetailMode,
+  showNotification,
   links,
   tools,
   sendImpression,
@@ -328,6 +329,7 @@ const GlobalNav = ({
                 setListMode={setListMode}
                 setGridMode={setGridMode}
                 setDetailMode={setDetailMode}
+                showNotification={showNotification}
               />
             </>
           )}
