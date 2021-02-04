@@ -1,11 +1,19 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { Modal, ModalBody } from 'components/modal/modal'
 import { useTranslation } from 'common/setup/i18n'
+import { PremiumIcon } from '@pocket/web-ui'
 
 const shortcutsStyle = css`
   table {
     width: 100%;
     margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: minmax(150px, 1fr) minmax(150px, auto);
+    thead,
+    tbody,
+    tr {
+      display: contents;
+    }
   }
 
   table:first-of-type {
@@ -24,19 +32,32 @@ const shortcutsStyle = css`
     line-height: 2rem;
     padding: 0;
   }
+
+  tbody tr.locked {
+    color: var(--color-textSecondary);
+  }
+
+  .premium-icon {
+    color: var(--color-textAccent);
+    margin-right: 5px;
+  }
 `
 
-export function ShortCutDisplay({ copy, keyCopy }) {
+export function ShortCutDisplay({ copy, keyCopy, premium, isPremium }) {
+  const rowClass = cx(premium && !isPremium && 'locked')
   return (
-    <tr key={keyCopy}>
+    <tr key={keyCopy} className={rowClass}>
       <td>{copy}</td>
-      <td>{keyCopy}</td>
+      <td>
+        {premium ? <PremiumIcon className="premium-icon" /> : null} {keyCopy}
+      </td>
     </tr>
   )
 }
 
 export function ShortCutsView({
   showModal,
+  isPremium,
   listShortcuts,
   itemActions,
   readerShortcuts,
@@ -60,7 +81,16 @@ export function ShortCutsView({
                 <th scope="col">Shortcut</th>
               </tr>
             </thead>
-            <tbody>{listShortcuts.map(ShortCutDisplay)}</tbody>
+            <tbody>
+              {listShortcuts.map(({ copy, keyCopy, premium }) => (
+                <ShortCutDisplay
+                  copy={copy}
+                  keyCopy={keyCopy}
+                  premium={premium}
+                  isPremium={isPremium}
+                />
+              ))}
+            </tbody>
           </table>
           <table>
             <thead>
@@ -69,7 +99,16 @@ export function ShortCutsView({
                 <th scope="col">Shortcut</th>
               </tr>
             </thead>
-            <tbody>{itemActions.map(ShortCutDisplay)}</tbody>
+            <tbody>
+              {itemActions.map(({ copy, keyCopy, premium }) => (
+                <ShortCutDisplay
+                  copy={copy}
+                  keyCopy={keyCopy}
+                  premium={premium}
+                  isPremium={isPremium}
+                />
+              ))}
+            </tbody>
           </table>
           <table>
             <thead>
@@ -78,7 +117,16 @@ export function ShortCutsView({
                 <th scope="col">Shortcut</th>
               </tr>
             </thead>
-            <tbody>{readerShortcuts.map(ShortCutDisplay)}</tbody>
+            <tbody>
+              {readerShortcuts.map(({ copy, keyCopy, premium }) => (
+                <ShortCutDisplay
+                  copy={copy}
+                  keyCopy={keyCopy}
+                  premium={premium}
+                  isPremium={isPremium}
+                />
+              ))}
+            </tbody>
           </table>
         </div>
       </ModalBody>

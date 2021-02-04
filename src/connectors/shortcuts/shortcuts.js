@@ -43,6 +43,7 @@ export function Shortcuts() {
 
   return showShortcuts ? (
     <ShortCutsView
+      isPremium={isPremium}
       showModal={true}
       appRootSelector={APP_ROOT_SELECTOR}
       cancelShortcutView={cancelShortcutView}
