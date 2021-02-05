@@ -14,9 +14,6 @@ import { ITEMS_BULK_BATCH_COMPLETE } from 'actions'
 import { ITEMS_ARCHIVE_CANCEL } from 'actions'
 import { ITEMS_BULK_SET_CURRENT } from 'actions'
 
-import { ITEMS_FAVORITE_BATCH } from 'actions'
-import { ITEMS_UNFAVORITE_BATCH } from 'actions'
-
 /** ACTIONS
  --------------------------------------------------------------- */
 export const itemsBulkSelectAction = (id, shift) => ({ type: ITEMS_BULK_SELECT, id, shift }) //prettier-ignore
@@ -85,13 +82,6 @@ export const itemBulkReducers = (state = initialState, action) => {
     case ITEMS_BULK_BATCH_FAILURE: {
       const { batchCount } = action
       return { ...state, batchCount }
-    }
-
-    case ITEMS_FAVORITE_BATCH: {
-      return { ...state, batchFavorite: 'unfavorite' }
-    }
-    case ITEMS_UNFAVORITE_BATCH: {
-      return { ...state, batchFavorite: 'favorite' }
     }
 
     default:
