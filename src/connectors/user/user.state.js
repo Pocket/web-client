@@ -2,51 +2,37 @@ import { getUserInfo } from 'common/api/user'
 import { createGuid } from 'common/api/user'
 import { setCookie } from 'nookies'
 import { put, takeLatest } from 'redux-saga/effects'
-import { getRequestToken, getAccessToken } from 'common/api/oauth'
-import { OAUTH_REDIRECT_URL } from 'common/constants'
-import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
-import { USER_HYDRATE } from 'actions'
 import { USER_REQUEST } from 'actions'
-import { USER_DEV_REQUEST } from 'actions'
 import { USER_SUCCESS } from 'actions'
 import { USER_FAILURE } from 'actions'
 import { SESS_GUID_HYDRATE } from 'actions'
-import { USER_OAUTH_TOKEN_REQUEST } from 'actions'
-import { USER_SET_OAUTH } from 'actions'
-import { USER_TOGGLE_OAUTH } from 'actions'
 
 const initialState = {
   auth: false,
   sess_guid: null,
-  user_status: 'pending',
-  useOAuth: localStore.getItem('useOAuth') === 'true'
+  user_status: 'pending'
 }
 const yearInMs = 60 * 60 * 24 * 365
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const userHydrate = (hydrate, skipCookies) => ({ type: USER_HYDRATE, hydrate, skipCookies}) //prettier-ignore
-export const getUser = () => ({ type: USER_REQUEST })
-export const devUser = () => ({ type: USER_DEV_REQUEST })
-export const toggleOAuth = (useOAuth) => ({ type: USER_TOGGLE_OAUTH, useOAuth })
+export const setUser = (newVisitor) => ({ type: USER_REQUEST, newVisitor}) //prettier-ignore
 export const sessGuidHydrate = (sess_guid) => ({type: SESS_GUID_HYDRATE,sess_guid}) //prettier-ignore
-export const userOAuthLogIn = () => ({ type: USER_OAUTH_TOKEN_REQUEST })
 
 /** REDUCERS
  --------------------------------------------------------------- */
 export const userReducers = (state = initialState, action) => {
   switch (action.type) {
-    case USER_HYDRATE: {
-      const { hydrate } = action
-      const user_status = hydrate === false ? 'invalid' : 'valid'
-      const auth = hydrate !== false ? true : hydrate
-      return { ...state, ...hydrate, auth, user_status }
-    }
-
     case USER_SUCCESS: {
-      const { user } = action
-      return { ...state, ...user, auth: true, user_status: 'valid' }
+      const { user, recent_searches } = action
+      return {
+        ...state,
+        ...user,
+        recent_searches,
+        auth: true,
+        user_status: 'valid'
+      }
     }
 
     case USER_FAILURE: {
@@ -62,11 +48,6 @@ export const userReducers = (state = initialState, action) => {
       return { ...state, sess_guid }
     }
 
-    case USER_SET_OAUTH: {
-      const { useOAuth } = action
-      return { ...state, useOAuth }
-    }
-
     default:
       return state
   }
@@ -74,15 +55,17 @@ export const userReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const userSagas = [
-  takeLatest(USER_REQUEST, userRequest),
-  takeLatest(USER_TOGGLE_OAUTH, userToggleOAuth),
-  takeLatest(USER_OAUTH_TOKEN_REQUEST, userTokenRequest)
-]
+export const userSagas = [takeLatest(USER_REQUEST, userRequest)]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-function* userRequest() {
+function* userRequest(action) {
+  // If the user has no sess_guid, we just want to set user to invalid
+  // and treat them as logged out
+  const { newVisitor } = action
+  if (newVisitor) return yield put({ type: USER_FAILURE })
+
+  // Otherwise let's grab the user info use
   const response = yield getUserInfo()
   if (response.xErrorCode) return false
 
@@ -90,40 +73,12 @@ function* userRequest() {
   if (user) yield put({ type: USER_SUCCESS, user })
 }
 
-function* userToggleOAuth(action) {
-  const { useOAuth } = action
-  localStore.setItem('useOAuth', !useOAuth)
-  yield put({ type: USER_SET_OAUTH, useOAuth: !useOAuth })
-}
-
-function* userTokenRequest() {
-  const response = yield getRequestToken()
-
-  if (response?.code) {
-    const { code } = response
-
-    setCookie(null, 'pkt_request_code', code, {
-      samesite: 'lax',
-      path: '/',
-      maxAge: 5 * 60 * 1000 // 5 minutes
-    })
-
-    const origin = window.location.origin
-    // Send the user to our oauth page request page
-    const loginUrl = `${OAUTH_REDIRECT_URL}?request_token=${code}&redirect_uri=${origin}`
-    document.location = loginUrl
-  }
-}
-
 /** ASYNC Functions
  --------------------------------------------------------------- */
 export async function fetchUserData() {
   const response = await getUserInfo()
-
   if (response.xErrorCode) return false
-
-  const { user } = response
-  return user
+  return response
 }
 
 export async function getSessGuid() {
@@ -138,17 +93,4 @@ export async function getSessGuid() {
   })
 
   return sess_guid
-}
-
-export async function userTokenValidate(code) {
-  const response = await getAccessToken(code)
-  if (response?.access_token) {
-    const { access_token } = response
-    setCookie(null, 'pkt_access_token', access_token, {
-      samesite: 'lax',
-      path: '/',
-      maxAge: yearInMs
-    })
-  }
-  return false
 }

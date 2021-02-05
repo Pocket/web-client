@@ -31,7 +31,6 @@ import { BASE_URL  } from 'common/constants'
 import { LOGIN_URL } from 'common/constants'
 import { RELEASE_NOTES_VERSION } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities'
-import { userOAuthLogIn } from 'connectors/user/user.state'
 
 import { sendImpression } from './global-nav.analytics'
 import { sendEngagement } from './global-nav.analytics'
@@ -65,7 +64,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     selected !== undefined ? selected : getTopLevelPath(router.pathname)
 
   const appMode = useSelector((state) => state?.app?.mode)
-  const useOAuth = useSelector((state) => state?.user?.useOAuth)
   const userStatus = useSelector((state) => state?.user?.user_status)
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false) //prettier-ignore
   const isLoggedIn = useSelector((state) => !!state.user.auth)
@@ -202,8 +200,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const onLoginClick = (event) => {
     event.preventDefault()
     event.stopPropagation()
-
-    if (useOAuth) return dispatch(userOAuthLogIn())
     window.location.assign(`${LOGIN_URL}?src=navbar`)
   }
 

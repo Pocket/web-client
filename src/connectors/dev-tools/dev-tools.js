@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import Mousetrap from 'mousetrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { devModeToggle } from 'connectors/app/app.state'
-import { toggleOAuth } from 'connectors/user/user.state'
 import { Features } from 'connectors/dev-tools/features'
 import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
@@ -46,9 +45,7 @@ export function DevTools() {
 
   const showDevTools = localStore.getItem('showPocketDevTools') === 'true'
   const devMode = useSelector((state) => state.app.devMode)
-  const useOAuth = useSelector((state) => state.user.useOAuth)
   const handleKeyCombo = () => dispatch(devModeToggle())
-  const handleOAuthToggle = () => dispatch(toggleOAuth(useOAuth))
 
   useEffect(() => {
     Mousetrap.bind('q a', handleKeyCombo) // Enter dev mode
@@ -58,15 +55,6 @@ export function DevTools() {
   return showDevTools && devMode ? (
     <div className={devToolStyle}>
       <h6>Dev Settings</h6>
-      <div>
-        <input
-          type="checkbox"
-          id="useOAuth"
-          checked={useOAuth}
-          onChange={handleOAuthToggle}
-        />
-        <label htmlFor="useOAuth">Use oAuth</label>
-      </div>
       <Features />
     </div>
   ) : null

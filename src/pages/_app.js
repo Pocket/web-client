@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 import * as Sentry from '@sentry/node'
 import { parseCookies } from 'nookies'
 
-import { fetchUserData, userHydrate } from 'connectors/user/user.state'
+import { setUser } from 'connectors/user/user.state'
 import { getSessGuid, sessGuidHydrate } from 'connectors/user/user.state'
 
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
@@ -44,9 +44,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const { user_status, user_id, sess_guid, useOAuth } = useSelector(
-    (state) => state.user
-  )
+  const { user_status, user_id, sess_guid } = useSelector((state) => state.user)
   const path = router.pathname
 
   const showDevTools = process.env.SHOW_DEV === 'included'
@@ -60,17 +58,6 @@ function PocketWebClient({ Component, pageProps, err }) {
   useEffect(() => {
     if (user_status !== 'pending') return
 
-    // !! NOTE: This will never return a server side guid.
-    // This really only  returns the sess_guid that we set.
-    // This is due to the fact that the server set sess_guid is httpOnly.
-    // "A cookie with the HttpOnly attribute is inaccessible to the JavaScript Document.cookie"
-    //
-    // Solution here is to:
-    // a) set up a client side api 🤔
-    // b) drop sess_guid as a requirement for snowplow 👏
-    // c) make every page server rendered (as opposed to build time generated) 🤮
-    // d) a and b, then use the client side api for experiments 🔬
-    // Check cookies (these are first party cookies)
     const cookies = parseCookies()
     const { sess_guid } = cookies
 
@@ -86,11 +73,8 @@ function PocketWebClient({ Component, pageProps, err }) {
     const initializeUser = async () => {
       const sess_guid = await getSessGuid()
       if (!sess_guid) return
-
       dispatch(sessGuidHydrate(sess_guid))
-
-      const user = await fetchUserData()
-      dispatch(userHydrate(user))
+      dispatch(setUser(false))
     }
 
     /**
@@ -98,16 +82,14 @@ function PocketWebClient({ Component, pageProps, err }) {
      * This will only happen when we are using an cookies auth flow
      * --------------------------------------------------------------
      */
-    const validateUser = async () => {
+    const validateUser = () => {
       dispatch(sessGuidHydrate(sess_guid))
-
-      const user = await fetchUserData()
-      dispatch(userHydrate(user))
+      dispatch(setUser())
     }
 
     if (!sess_guid) initializeUser()
     if (sess_guid) validateUser()
-  }, [user_status, useOAuth, dispatch])
+  }, [user_status, dispatch])
 
   useEffect(() => {
     if (user_status === 'pending') return null
