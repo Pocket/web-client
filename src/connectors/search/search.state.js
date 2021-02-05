@@ -4,6 +4,7 @@ import { put, takeLatest, call } from 'redux-saga/effects'
 import { USER_SEARCH_RECENT_GET } from 'actions'
 import { USER_SEARCH_RECENT_SET } from 'actions'
 import { USER_SEARCH_RECENT_SAVE } from 'actions'
+import { USER_SEARCH_RECENT_ADD } from 'actions'
 
 const initialState = {
   recent: []
@@ -25,6 +26,12 @@ export const userSearchReducers = (state = initialState, action) => {
         .sort((itemA, itemB) => itemA.sort_id < itemB.sort_id)
         .map((item) => item.search)
       return { recent }
+    }
+
+    case USER_SEARCH_RECENT_ADD: {
+      const { searchTerm } = action
+      const recent = [searchTerm, ...state.recent].slice(0, 5)
+      return { ...state, recent }
     }
 
     default:
@@ -54,6 +61,6 @@ function* recentSearchRequest() {
 
 function* recentSearchSave(action) {
   const { searchTerm } = action
-  const response = yield call(saveRecentSearches, searchTerm)
-  console.log(response)
+  yield call(saveRecentSearches, searchTerm)
+  return yield put({ type: USER_SEARCH_RECENT_ADD, searchTerm })
 }
