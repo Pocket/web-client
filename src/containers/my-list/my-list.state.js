@@ -38,6 +38,7 @@ import { MYLIST_SEARCH_REQUEST } from 'actions'
 import { MYLIST_SEARCH_SUCCESS } from 'actions'
 import { MYLIST_SEARCH_FAILURE } from 'actions'
 
+import { APP_SET_MODE } from 'actions'
 import { APP_SORT_ORDER_OLD } from 'actions'
 import { APP_SORT_ORDER_NEW } from 'actions'
 
@@ -424,6 +425,8 @@ function* myListUpdate(action) {
 }
 
 function* myListSearchRequest(action) {
+  yield put({ type: APP_SET_MODE, mode: 'default' })
+
   try {
     const { filter, query } = action
     const section = filter ? 'search' + filter : 'search'
