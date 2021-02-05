@@ -16,6 +16,7 @@ export function reconcileItemsBatch(actions, state) {
 
   if (action === 'archive') return reconcileItemsArchived(items, state)
   if (action === 'unarchive') return reconcileItemsUnArchived(items, state)
+  if (action === 'readd') return reconcileItemsUnArchived(items, state)
   if (action === 'unfavorite') return reconcileItemsUnFavorited(items, state)
   if (action === 'delete') return reconcileItemsDeleted(items, state)
 

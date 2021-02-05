@@ -27,6 +27,7 @@ import { MYLIST_UNSAVE_REQUEST } from 'actions'
 
 import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_ARCHIVE_REQUEST } from 'actions'
+import { ITEMS_UNARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_UNARCHIVE_REQUEST } from 'actions'
 import { ITEMS_DELETE_SEND } from 'actions'
 import { ITEMS_DELETE_SUCCESS } from 'actions'
@@ -235,7 +236,8 @@ export const myListReducers = (state = initialState, action) => {
       return { ...state, ...mylist }
 
     // Reconcilers
-    case ITEMS_ARCHIVE_SUCCESS: {
+    case ITEMS_ARCHIVE_SUCCESS:
+    case ITEMS_UNARCHIVE_SUCCESS: {
       const { actions } = action
       // If they took a single action it is handled optimistically
       if (actions.length <= 0) return state
