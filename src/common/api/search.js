@@ -14,3 +14,26 @@ export function getSearchFeed(topic, count = 20) {
     }
   })
 }
+
+export function getRecentSearches() {
+  const since = Date.now() // This means we won't get list items back
+  return request({
+    path: 'v3/get',
+    auth: true,
+    params: {
+      premium: 1,
+      forcepremium: 1,
+      since
+    }
+  })
+}
+
+export function saveRecentSearches(search) {
+  return request({
+    path: 'v3/send',
+    method: 'POST',
+    body: JSON.stringify({
+      actions: [{ action: 'recent_search', search }]
+    })
+  }).then((response) => response)
+}
