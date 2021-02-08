@@ -23,7 +23,7 @@ import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
-export default function Collection(props) {
+export default function MyList(props) {
   const { metaData = {}, subset: sub = 'active', filter: propFilter } = props
 
   const dispatch = useDispatch()
