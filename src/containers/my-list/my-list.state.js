@@ -35,6 +35,7 @@ import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
 import { ITEMS_ADD_SUCCESS } from 'actions'
 
 import { MYLIST_SEARCH_REQUEST } from 'actions'
+import { MYLIST_SEARCH_CLEAR } from 'actions'
 import { MYLIST_SEARCH_SUCCESS } from 'actions'
 import { MYLIST_SEARCH_FAILURE } from 'actions'
 
@@ -276,6 +277,33 @@ export const myListReducers = (state = initialState, action) => {
       return reconcileItemsDeleted(items, state)
     }
 
+    case MYLIST_SEARCH_CLEAR: {
+      const { query } = action
+      return {
+        ...state,
+        query,
+        search: [],
+        searchOffset: 0,
+        searchSince: 0,
+        searchTotal: false,
+
+        searchunread: [],
+        searchunreadOffset: 0,
+        searchunreadSince: 0,
+        searchunreadTotal: false,
+
+        searcharchive: [],
+        searcharchiveOffset: 0,
+        searcharchiveSince: 0,
+        searcharchiveTotal: false,
+
+        searchfavorites: [],
+        searchfavoritesOffset: 0,
+        searchfavoritesSince: 0,
+        searchfavoritesTotal: false
+      }
+    }
+
     case MYLIST_SEARCH_SUCCESS: {
       const { items, offset, total, filter, since, query } = action
 
@@ -439,7 +467,9 @@ function* myListSearchRequest(action) {
     if (filter === 'archive') parameters.state = 'read'
     if (filter === 'favorites') parameters.favorite = 1
 
-    const { itemsById, total, since, error } = yield fetchMyListSearch({
+    yield put({ type: MYLIST_SEARCH_CLEAR, query })
+
+    const { itemsById, total = 0, since, error } = yield fetchMyListSearch({
       locale_lang: 'en-US',
       state: 'all',
       count: 150,

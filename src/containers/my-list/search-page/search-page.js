@@ -40,7 +40,7 @@ export default function Collection(props) {
   const [hasLoaded, setHasLoaded] = useState(false)
 
   // Check for initial items so we don't over request
-  const initialItemsPopulated = items?.length >= 18 || (total && total < 18)
+  const initialItemsPopulated = items?.length || total === 0
 
   /**
    * Get initial list items. This should only fire once per page load
