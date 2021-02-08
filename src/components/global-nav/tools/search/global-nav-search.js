@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { SearchIcon, CrossIcon, ErrorIcon } from '@pocket/web-ui'
 import { breakpointMediumHandset } from '@pocket/web-ui'
@@ -8,6 +8,7 @@ import classnames from 'classnames'
 import { Trans, useTranslation } from 'common/setup/i18n'
 import { KEYS } from 'common/constants'
 import Mousetrap from 'mousetrap'
+import { RecentSearches } from './recent-searches'
 
 const searchStyle = css`
   width: 100%;
@@ -20,7 +21,7 @@ const searchStyle = css`
     height: var(--size300);
     width: 100%;
     max-width: initial;
-    margin-right: var(--spacing050);
+    outline: 0;
     &.has-value {
       padding-right: var(--spacing400);
     }
@@ -30,7 +31,6 @@ const searchStyle = css`
       &.has-value {
         padding-right: 3rem;
       }
-      margin-right: 0;
     }
   }
 
@@ -136,6 +136,10 @@ const searchContainerStyle = css`
   position: relative;
   align-items: center;
   flex: 1;
+  margin-right: var(--spacing050);
+  ${breakpointMediumHandset} {
+    margin-right: 0;
+  }
 `
 
 /**
@@ -148,10 +152,12 @@ const GlobalNavSearch = ({
   onBlur,
   value,
   placeholder,
+  recentSearches,
   mobilePlaceholder
 }) => {
   const { t } = useTranslation()
   const inputEl = useRef(null)
+  const formRef = useRef(null)
 
   const [searchTerm, updateSearchTerm] = useState(value)
   const [isMobile, updateIsMobile] = useState(false)
@@ -185,12 +191,61 @@ const GlobalNavSearch = ({
     updateIsMobile(window.innerWidth < screenMediumHandset)
   }, [window.innerWidth])
 
-  useEffect(() => {
-    inputEl.current.focus()
-  }, [])
+  /**
+   * This block finds all the relevant elements and traps focus for them.
+   */
+  useLayoutEffect(() => {
+    if (!recentSearches.length) return
+
+    const focusableElements =
+      'a, button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+
+    const firstFocusableElement = formRef.current.querySelectorAll(focusableElements)[0] //prettier-ignore
+    const focusableContent = formRef.current.querySelectorAll(focusableElements)
+    const lastFocusableElement = focusableContent[focusableContent.length - 1]
+    const total = focusableContent.length - 1
+    const nodeArray = Array.from(focusableContent)
+
+    Mousetrap(formRef.current).bind('up', function (e) {
+      e.preventDefault()
+      const current = nodeArray.indexOf(document.activeElement)
+      const next = current === 0 ? total : current - 1
+      focusableContent[next].focus()
+    })
+
+    Mousetrap(formRef.current).bind('down', function (e) {
+      e.preventDefault()
+      const current = nodeArray.indexOf(document.activeElement)
+      const next = current === total ? 0 : current + 1
+      focusableContent[next].focus()
+    })
+
+    Mousetrap(formRef.current).bind(['shift+tab'], function (e) {
+      const isAtStart = document.activeElement === firstFocusableElement
+      if (isAtStart) {
+        e.preventDefault()
+        lastFocusableElement.focus()
+      }
+    })
+
+    Mousetrap(formRef.current).bind(['tab'], function (e) {
+      const isAtEnd = document.activeElement === lastFocusableElement
+      if (isAtEnd) {
+        e.preventDefault()
+        firstFocusableElement.focus() // add focus for the first focusable element
+      }
+    })
+
+    firstFocusableElement.focus()
+    return () => Mousetrap.unbind(['shift+tab', 'up', 'tab', 'down'])
+  }, [recentSearches])
 
   return (
-    <form className={searchStyle} onSubmit={handleSubmit} autoComplete="off">
+    <form
+      className={searchStyle}
+      onSubmit={handleSubmit}
+      autoComplete="off"
+      ref={formRef}>
       <div className={searchContainerStyle}>
         <SearchIcon className={searchIconStyle} />
         <input
@@ -209,6 +264,7 @@ const GlobalNavSearch = ({
           placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
           data-cy="search-input"
         />
+        <RecentSearches searchTerms={recentSearches} />
         {inputError ? (
           <div className="error-message">
             <div>

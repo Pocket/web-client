@@ -11,6 +11,9 @@ import { userReducers, userSagas } from 'connectors/user/user.state'
 import { userTagsSagas } from 'containers/my-list/tags-page/tags-page.state'
 import { userTagsReducers } from 'containers/my-list/tags-page/tags-page.state'
 
+import { userSearchReducers } from 'connectors/search/search.state'
+import { userSearchSagas } from 'connectors/search/search.state'
+
 import { featureReducers } from 'connectors/feature-flags/feature-flags.state'
 import { featureSagas } from 'connectors/feature-flags/feature-flags.state'
 
@@ -81,7 +84,6 @@ const discoverReducers = {
 const collectionReducers = {
   myListItemsById: myListItemsReducers,
   myList: myListReducers,
-  userTags: userTagsReducers,
   bulkEdit: itemBulkReducers,
   itemsToFavorite: itemFavoriteReducers,
   itemsToDelete: itemDeleteReducers,
@@ -89,7 +91,9 @@ const collectionReducers = {
   itemsToTag: itemTagReducers,
   itemsToShare: itemShareReducers,
   itemsAnalytics: itemAnalyticsReducers,
-  userMessages: userMessageReducers
+  userTags: userTagsReducers,
+  userMessages: userMessageReducers,
+  userSearch: userSearchReducers
 }
 
 const readerReducers = {
@@ -142,6 +146,7 @@ function* rootSaga() {
     ...readSagas,
     ...homeSagas,
     ...userMessageSagas,
+    ...userSearchSagas,
     ...shortcutSagas
   ])
 }

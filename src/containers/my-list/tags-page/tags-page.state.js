@@ -207,10 +207,9 @@ function* userTagsTogglePin(actions) {
 }
 
 function* getLocalTags() {
-  const pinnedItems = localStore.getItem('user_tags_pinned')
-  const pins = (pinnedItems && pinnedItems !== 'undefined')
-    ? JSON.parse(pinnedItems)
-    : []
+  const pinnedItems = yield localStore.getItem('user_tags_pinned')
+  const pins =
+    pinnedItems && pinnedItems !== 'undefined' ? JSON.parse(pinnedItems) : []
   return pins
 }
 
