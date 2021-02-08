@@ -1,4 +1,3 @@
-import { format } from 'date-fns'
 import dayjs from 'dayjs'
 
 /**
@@ -6,7 +5,8 @@ import dayjs from 'dayjs'
  * @param {unix timestamp} publishedAt Timestamp from the server
  */
 export function getPublishedDate(publishedAt = null) {
-  return format(new Date(publishedAt), 'MMMM d, yyyy')
+  const date = new Date(publishedAt)
+  return dayjs(date).format('MMMM d, YYYY')
 }
 
 /**
@@ -15,7 +15,6 @@ export function getPublishedDate(publishedAt = null) {
 export function getCurrentUnixTime() {
   return Math.floor(Date.now() / 1000)
 }
-
 
 export function timeRelativeToNow(val) {
   if (!val) {
@@ -33,7 +32,8 @@ export function timeRelativeToNow(val) {
   } else if (diff < 24) {
     let date = diff
     return `${date} hours ago`
-  } else if (diff < 24 * 14) { // 14 days
+  } else if (diff < 24 * 14) {
+    // 14 days
     let date = diff
     return `${date} days ago`
   }
