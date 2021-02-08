@@ -2,7 +2,7 @@ import React from 'react'
 import assert from 'assert'
 import sinon from 'sinon'
 import { shallow } from 'enzyme'
-import { testIdSelector, mockEvent } from '@pocket/web-utilities/test-utils'
+import { mockEvent } from '@pocket/web-utilities/test-utils'
 
 import TopicsPillbox from './topics-pillbox'
 
@@ -52,8 +52,8 @@ describe('TopicsPillbox', () => {
     const pillbox2 = shallow(
       <TopicsPillbox {...baseProps} headingText="Nom nom nom" />
     )
-    const heading1 = pillbox1.find(testIdSelector('heading'))
-    const heading2 = pillbox2.find(testIdSelector('heading'))
+    const heading1 = pillbox1.find("[data-cy='heading']")
+    const heading2 = pillbox2.find("[data-cy='heading']")
 
     assert.equal(heading1.text(), TopicsPillbox.defaultProps.headingText)
     assert.equal(heading2.text(), 'Nom nom nom')
@@ -63,7 +63,7 @@ describe('TopicsPillbox', () => {
     const pillbox = shallow(
       <TopicsPillbox {...baseProps} headingClassName="the-sweetness" />
     )
-    const heading = pillbox.find(testIdSelector('heading'))
+    const heading = pillbox.find("[data-cy='heading']")
 
     assert(heading.hasClass('the-sweetness'))
   })
@@ -72,7 +72,7 @@ describe('TopicsPillbox', () => {
     const pillbox = shallow(
       <TopicsPillbox {...baseProps} headingClassName="the-sweetness" />
     )
-    const pills = pillbox.find(testIdSelector('topic-pill'))
+    const pills = pillbox.find("[data-cy='topic-pill']")
 
     assert.equal(pills.length, 3)
   })
@@ -85,7 +85,7 @@ describe('TopicsPillbox', () => {
         headingClassName="the-sweetness"
       />
     )
-    const pill = pillbox.find(testIdSelector('topic-pill')).first()
+    const pill = pillbox.find("[data-cy='topic-pill']").first()
 
     assert.equal(pill.prop('href'), '/discover/classics')
   })
@@ -94,7 +94,7 @@ describe('TopicsPillbox', () => {
     const pillbox = shallow(
       <TopicsPillbox {...baseProps} headingClassName="the-sweetness" />
     )
-    const pill = pillbox.find(testIdSelector('topic-pill')).first()
+    const pill = pillbox.find("[data-cy='topic-pill']").first()
 
     assert.equal(pill.prop('promoted'), true)
     assert.equal(pill.prop('href'), '/discover/superheroes')
@@ -103,7 +103,7 @@ describe('TopicsPillbox', () => {
   it('calls props.onTopicClick when the user clicks on a topic, passing through expected params', () => {
     const spy = sinon.spy()
     const pillbox = shallow(<TopicsPillbox {...baseProps} onTopicClick={spy} />)
-    const pill = pillbox.find(testIdSelector('topic-pill')).first()
+    const pill = pillbox.find("[data-cy='topic-pill']").first()
 
     pill.simulate('click', mockEvent)
 

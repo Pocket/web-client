@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { css, cx } from 'linaria'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { urlWithPocketRedirect } from 'common/utilities'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { useTranslation } from 'common/setup/i18n'
@@ -292,7 +291,7 @@ export const Card = ({
         ref={articleRef}
         className={cardClass}
         key={id}
-        {...testIdAttribute(`article-card-${id}`)}
+        data-cy={`article-card-${id}`}
         onClick={selectBulk}>
         <div className="bulkBacking" />
         <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>

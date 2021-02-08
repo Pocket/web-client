@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { css } from 'linaria'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import classNames from 'classnames'
@@ -39,7 +38,7 @@ const ScrollChyron = ({ threshold, shouldHide, instanceId, children }) => {
   return shouldHide ? null : (
     <div
       className={chyronClassNames}
-      {...testIdAttribute('scroll-chyron-wrapper')}>
+      data-cy="scroll-chyron-wrapper">
       <Chyron instanceId={instanceId}>{children}</Chyron>
     </div>
   )

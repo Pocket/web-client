@@ -3,7 +3,6 @@ import React from 'react'
 import sinon from 'sinon'
 import { shallow } from 'enzyme'
 import { mockEvent } from '@pocket/web-utilities/test-utils'
-import { testIdSelector } from '@pocket/web-utilities/test-utils'
 import GlobalNavMobileMenu, { Menu, MobileLink } from './global-nav-mobile-menu'
 import { Drawer } from '@pocket/web-ui'
 import Router from 'next/router'
@@ -55,7 +54,7 @@ describe('GlobalNavMobileMenu', () => {
     )
     const menu = wrapper.find(Menu).shallow()
 
-    assert(menu.find(testIdSelector('premium-nudge-section')).exists())
+    assert(menu.find("[data-cy='premium-nudge-section']").exists())
 
     const wrapper2 = shallow(
       <GlobalNavMobileMenu
@@ -66,7 +65,7 @@ describe('GlobalNavMobileMenu', () => {
     )
     const menu2 = wrapper2.find(Menu).shallow()
 
-    assert(!menu2.find(testIdSelector('premium-nudge-section')).exists())
+    assert(!menu2.find("[data-cy='premium-nudge-section']").exists())
   })
 
   it('renders the correct number of links', () => {

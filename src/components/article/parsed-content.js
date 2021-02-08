@@ -1,5 +1,4 @@
 import { css } from 'linaria'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import {
   breakpointSmallTablet,
   breakpointMediumTablet,
@@ -354,7 +353,7 @@ const contentWrapper = css`
 
 export function ParsedContent({ content }) {
   return (
-    <div className={resetWrapper} {...testIdAttribute('parsed-content')}>
+    <div className={resetWrapper} data-cy="parsed-content">
       <section
         className={contentWrapper}
         dangerouslySetInnerHTML={{ __html: content }}

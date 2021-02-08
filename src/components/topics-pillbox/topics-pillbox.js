@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 
 import { Pill } from '@pocket/web-ui'
 import { headingSerifAlt } from '@pocket/web-ui'
@@ -61,7 +60,7 @@ const TopicsPillbox = ({
     <div className={classnames(pillboxStyle, `align-${alignItems}`)}>
       <h3
         className={classnames('h5', headingClassName)}
-        {...testIdAttribute('heading')}>
+        data-cy="heading">
         {headingText}
       </h3>
       <ul>
@@ -74,7 +73,7 @@ const TopicsPillbox = ({
                 onClick={(event) => {
                   handleTopicClick(event, topic.topic, index)
                 }}
-                {...testIdAttribute('topic-pill')}>
+                data-cy="topic-pill">
                 {topic.display_name}
               </Pill>
             </li>

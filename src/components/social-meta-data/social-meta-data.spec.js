@@ -1,7 +1,6 @@
 import React from 'react'
 import assert from 'assert'
 import { shallow } from 'enzyme'
-import { testIdSelector } from '@pocket/web-utilities/test-utils'
 import { SocialMetaData } from './social-meta-data'
 
 const mockMetaContentData = {
@@ -44,12 +43,12 @@ describe('SocialMetaData', () => {
     const socialMetaTags = shallow(<SocialMetaData {...mockMetaData} />)
 
     const expectedTagsMissing = expectedTags.filter((tag) => {
-      const foundTag = socialMetaTags.find(testIdSelector(tag))
+      const foundTag = socialMetaTags.find(`[data-cy='${tag}']`)
       return !foundTag.exists()
     })
 
     const optionalTagsMissing = optionalTags.filter((tag) => {
-      const foundTag = socialMetaTags.find(testIdSelector(tag))
+      const foundTag = socialMetaTags.find(`[data-cy='${tag}']`)
       return !foundTag.exists()
     })
 
@@ -62,12 +61,12 @@ describe('SocialMetaData', () => {
     const socialMetaTags = shallow(<SocialMetaData {...mockMetaData} />)
 
     const expectedTagsMissing = expectedTags.filter((tag) => {
-      const foundTag = socialMetaTags.find(testIdSelector(tag))
+      const foundTag = socialMetaTags.find(`[data-cy='${tag}']`)
       return !foundTag.exists()
     })
 
     const optionalTagsMissing = optionalTags.filter((tag) => {
-      const foundTag = socialMetaTags.find(testIdSelector(tag))
+      const foundTag = socialMetaTags.find(`[data-cy='${tag}']`)
       return !foundTag.exists()
     })
 
@@ -86,7 +85,7 @@ describe('SocialMetaData', () => {
     const mockMetaData = Object.assign({}, mockMetaContentData)
     const socialMetaTags = shallow(<SocialMetaData {...mockMetaData} />)
     const typeTag = socialMetaTags
-      .find(testIdSelector('og-type'))
+      .find("[data-cy='og-type']")
       .prop('content')
 
     assert(typeTag === 'website')
@@ -99,7 +98,7 @@ describe('SocialMetaData', () => {
       <SocialMetaData {...mockMetaData} type={customTypeTag} />
     )
     const typeTag = socialMetaTags
-      .find(testIdSelector('og-type'))
+      .find("[data-cy='og-type']")
       .prop('content')
 
     assert(typeTag === customTypeTag)

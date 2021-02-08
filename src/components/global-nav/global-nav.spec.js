@@ -1,7 +1,6 @@
 import assert from 'assert'
 import React from 'react'
 import { shallow } from 'enzyme'
-import { testIdSelector } from '@pocket/web-utilities/test-utils'
 
 import GlobalNav, { DEFAULT_LINKS } from './global-nav'
 
@@ -30,7 +29,7 @@ const baseProps = {
 describe('GlobalNav', () => {
   it('renders the "Discover" and "My List" links by default', () => {
     const globalNav = shallow(<GlobalNav appRootSelector="#root" />)
-    const defaultLinks = globalNav.find(testIdSelector('primary-links'))
+    const defaultLinks = globalNav.find("[data-cy='primary-links']")
 
     assert(defaultLinks.exists())
     assert.equal(
@@ -45,7 +44,7 @@ describe('GlobalNav', () => {
 
   it('renders the custom links when `links` prop is passed', () => {
     const globalNav = shallow(<GlobalNav {...baseProps} />)
-    const passedLinks = globalNav.find(testIdSelector('primary-links'))
+    const passedLinks = globalNav.find("[data-cy='primary-links']")
 
     assert(passedLinks.exists())
     assert.equal(
@@ -72,7 +71,7 @@ describe('GlobalNav', () => {
   it('uses the correct URL when a user clicks the Pocket Logo', () => {
     // default value
     const globalNav = shallow(<GlobalNav appRootSelector="#root" />)
-    const defaultLogoUrl = globalNav.find(testIdSelector('logo-link'))
+    const defaultLogoUrl = globalNav.find("[data-cy='logo-link']")
 
     assert.equal(defaultLogoUrl.prop('href'), '/explore?src=navbar')
 
@@ -83,7 +82,7 @@ describe('GlobalNav', () => {
         pocketLogoOutboundUrl="https://cheeseburger.io"
       />
     )
-    const customLogoUrl = globalNav2.find(testIdSelector('logo-link'))
+    const customLogoUrl = globalNav2.find("[data-cy='logo-link']")
     assert.equal(customLogoUrl.prop('href'), 'https://cheeseburger.io')
   })
 })

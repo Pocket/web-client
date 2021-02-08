@@ -1,7 +1,6 @@
 import assert from 'assert'
 import React from 'react'
 import { shallow } from 'enzyme'
-import { testIdSelector } from '@pocket/web-utilities/test-utils'
 
 import Avatar from './avatar'
 
@@ -20,14 +19,14 @@ describe('Avatar', () => {
   it('Renders a default icon if props.src isn’t provided', () => {
     const avatar = shallow(<Avatar {...baseProps} />)
 
-    assert(avatar.find(testIdSelector('avatar-default-')).exists())
+    assert(avatar.find("[data-cy='avatar-default-']").exists())
   })
 
   it('Renders an image tag with src if props.src is provided', () => {
     const avatar = shallow(
       <Avatar {...baseProps} src="http://placekitten.com/150/150" />
     )
-    const img = avatar.find(testIdSelector('avatar-image-'))
+    const img = avatar.find("[data-cy='avatar-image-']")
 
     assert(img.exists())
     assert.strictEqual(img.prop('src'), 'http://placekitten.com/150/150')
@@ -41,7 +40,7 @@ describe('Avatar', () => {
         altText="kitties!"
       />
     )
-    const img = avatar.find(testIdSelector('avatar-image-'))
+    const img = avatar.find("[data-cy='avatar-image-']")
 
     assert.strictEqual(img.prop('alt'), 'kitties!')
   })

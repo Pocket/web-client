@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
 const CHYRON_NOT_COMPLETED = 'not-completed'
@@ -61,7 +60,7 @@ const Chyron = ({ instanceId, initialDismissed, initialSuccess, children }) => {
   }, [])
 
   return isDismissed || ctaIsSuccessful ? null : (
-    <div {...testIdAttribute('chyron-wrapper')}>
+    <div data-cy="chyron-wrapper">
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, {
           // makes this dismiss and success functions available to all children

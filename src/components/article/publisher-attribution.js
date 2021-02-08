@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import { Button } from '@pocket/web-ui'
 import { getPublishedDate } from 'common/utilities'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 
@@ -63,7 +62,7 @@ const AttributionWrapper = css`
 function FollowPublisher({ leadIn, text, url, handleImpression, handleClick }) {
   return (
     <VisibilitySensor onVisible={handleImpression}>
-      <aside {...testIdAttribute('follow-publisher')}>
+      <aside data-cy="follow-publisher">
         <p>{leadIn}</p>
         <Button
           variant="secondary"
@@ -83,7 +82,7 @@ function PublisherInfo({ logoWide, publishedAt, name }) {
     <React.Fragment>
       <hr />
       {logoWide ? (
-        <img src={logoWide.url} {...testIdAttribute('publisher-img')} />
+        <img src={logoWide.url} data-cy="publisher-img" />
       ) : null}
       <p>
         This post originally appeared on {name} and was published{' '}

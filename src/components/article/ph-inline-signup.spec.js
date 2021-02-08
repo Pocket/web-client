@@ -2,7 +2,6 @@ import React from 'react'
 import assert from 'assert'
 import sinon from 'sinon'
 import { shallow } from 'enzyme'
-import { testIdSelector } from '@pocket/web-utilities/test-utils'
 import * as reactRedux from 'react-redux'
 import * as pocketHitsSignupState from 'connectors/pocket-hits/pocket-hits.state'
 import { PocketHitsInlineSignup } from './ph-inline-signup'
@@ -28,7 +27,7 @@ describe('PocketHitsInlineSignup', () => {
     )
 
     const container = shallow(<PocketHitsInlineSignup />)
-    const form = container.find(testIdSelector('inline-form'))
+    const form = container.find("[data-cy='inline-form']")
 
     form.simulate('validSubmit', 'formId', 'foo@bar.com', 'captchakey')
     assert(signupRequestDispatchStub.calledWith('foo@bar.com', 'captchakey'))
@@ -45,7 +44,7 @@ describe('PocketHitsInlineSignup', () => {
     // tell useSelector to return the pending state to the component via our stub
     useSelectorStub.callsFake((fn) => fn(mockState))
     const container = shallow(<PocketHitsInlineSignup />)
-    let form = container.find(testIdSelector('inline-form'))
+    let form = container.find("[data-cy='inline-form']")
 
     assert.equal(form.prop('isProcessing'), true)
   })
@@ -60,7 +59,7 @@ describe('PocketHitsInlineSignup', () => {
     // tell mock useSelector to return the failure state to the component via our stub
     useSelectorStub.callsFake((fn) => fn(mockState))
     const container = shallow(<PocketHitsInlineSignup />)
-    let form = container.find(testIdSelector('inline-form'))
+    let form = container.find("[data-cy='inline-form']")
 
     assert.equal(form.prop('errorMessage'), 'Oops! Something went wrong.')
   })
@@ -76,7 +75,7 @@ describe('PocketHitsInlineSignup', () => {
 
     const container = shallow(<PocketHitsInlineSignup />)
     const successMessage = container.find(
-      testIdSelector('pocket-hits-inline-success')
+      "[data-cy='pocket-hits-inline-success']"
     )
 
     assert(successMessage.exists())
@@ -92,7 +91,7 @@ describe('PocketHitsInlineSignup', () => {
     useSelectorStub.callsFake((fn) => fn(mockState))
 
     const container = shallow(<PocketHitsInlineSignup />)
-    const form = container.find(testIdSelector('inline-form'))
+    const form = container.find("[data-cy='inline-form']")
 
     assert(!form.exists())
   })

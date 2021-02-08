@@ -2,7 +2,6 @@ import 'jsdom-global/register'
 import React from 'react'
 import assert from 'assert'
 import { shallow, mount } from 'enzyme'
-import { testIdSelector } from '@pocket/web-utilities/test-utils'
 import PublisherRecs, { Publisher, RecommendedArticle } from './publisher-recs'
 
 import {
@@ -20,10 +19,10 @@ describe('PublisherRecs', () => {
       <PublisherRecs publisher={baseProps.publisher} />
     )
     const publisherHeader = noRecsInstance.find(
-      testIdSelector('publisher-header')
+      "[data-cy='publisher-header']"
     )
     const recommendations = noRecsInstance.find(
-      testIdSelector('recommended-articles')
+      "[data-cy='recommended-articles']"
     )
 
     assert(!publisherHeader.exists())
@@ -37,7 +36,7 @@ describe('PublisherRecs', () => {
       )
 
       assert.equal(
-        publisherWithLogo.find(testIdSelector('publisher-logo')).prop('src'),
+        publisherWithLogo.find("[data-cy='publisher-logo']").prop('src'),
         logo.url
       )
     })
@@ -47,7 +46,7 @@ describe('PublisherRecs', () => {
         <Publisher recommendationName={recommendationName} logo={null} />
       )
 
-      assert(!publisherNoLogo.find(testIdSelector('publisher-logo')).exists())
+      assert(!publisherNoLogo.find("[data-cy='publisher-logo']").exists())
     })
     it('renders a Publisher recommendationName, when available', () => {
       const { recommendationName, logo } = publisher.theVerge
@@ -61,7 +60,7 @@ describe('PublisherRecs', () => {
 
       assert.equal(
         publisherWithRecommendationName
-          .find(testIdSelector('publisher-recs-publisher-name'))
+          .find("[data-cy='publisher-recs-publisher-name']")
           .text(),
         `More from ${recommendationName}`
       )
@@ -74,7 +73,7 @@ describe('PublisherRecs', () => {
 
       assert.equal(
         publisherWithNoRecommendationName
-          .find(testIdSelector('publisher-recs-publisher-name'))
+          .find("[data-cy='publisher-recs-publisher-name']")
           .text(),
         `More from ${name}`
       )

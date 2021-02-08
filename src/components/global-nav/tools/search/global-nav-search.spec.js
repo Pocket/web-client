@@ -2,7 +2,7 @@ import assert from 'assert'
 import React from 'react'
 import sinon from 'sinon'
 import { shallow } from 'enzyme'
-import { testIdSelector, mockEvent } from '@pocket/web-utilities/test-utils'
+import { mockEvent } from '@pocket/web-utilities/test-utils'
 
 import GlobalNavSearch from './global-nav-search'
 
@@ -19,7 +19,7 @@ describe('GlobalNavSearch', () => {
     defaultSearch = shallow(<GlobalNavSearch {...baseProps} />)
   })
   it('applies the `placeholder` prop value correctly to the input', () => {
-    const input = defaultSearch.find(testIdSelector('search-input'))
+    const input = defaultSearch.find("[data-cy='search-input']")
 
     assert.strictEqual(input.prop('placeholder'), baseProps.placeholder)
   })
@@ -44,7 +44,7 @@ describe('GlobalNavSearch', () => {
   })
 
   it('does not render a close button when no props.onClose is provided', () => {
-    const closeButton = defaultSearch.find(testIdSelector('search-close'))
+    const closeButton = defaultSearch.find("[data-cy='search-close']")
 
     assert(!closeButton.exists())
   })
@@ -52,7 +52,7 @@ describe('GlobalNavSearch', () => {
   it('calls the props.onClose callback when the Close button is clicked', () => {
     const spy = sinon.spy()
     const search = shallow(<GlobalNavSearch {...baseProps} onClose={spy} />)
-    const closeButton = search.find(testIdSelector('search-close'))
+    const closeButton = search.find("[data-cy='search-close']")
 
     closeButton.simulate('click')
 
@@ -62,7 +62,7 @@ describe('GlobalNavSearch', () => {
   it('calls the props.onFocus callback when the search input is focused, passing the Event object', () => {
     const spy = sinon.spy()
     const search = shallow(<GlobalNavSearch {...baseProps} onFocus={spy} />)
-    const searchInput = search.find(testIdSelector('search-input'))
+    const searchInput = search.find("[data-cy='search-input']")
 
     searchInput.simulate('focus', mockEvent)
 
@@ -72,7 +72,7 @@ describe('GlobalNavSearch', () => {
   it('calls the props.onFocus callback when the search input is blurred, passing the Event object', () => {
     const spy = sinon.spy()
     const search = shallow(<GlobalNavSearch {...baseProps} onBlur={spy} />)
-    const searchInput = search.find(testIdSelector('search-input'))
+    const searchInput = search.find("[data-cy='search-input']")
 
     searchInput.simulate('blur', mockEvent)
 
@@ -80,14 +80,14 @@ describe('GlobalNavSearch', () => {
   })
 
   it('supplies the search input with a value if a `value` prop was passed in', () => {
-    const searchInput = defaultSearch.find(testIdSelector('search-input'))
+    const searchInput = defaultSearch.find("[data-cy='search-input']")
 
     assert.equal(searchInput.prop('value'), '')
 
     const searchWithValue = shallow(
       <GlobalNavSearch {...baseProps} value="pursuit of happiness" />
     )
-    const searchInput2 = searchWithValue.find(testIdSelector('search-input'))
+    const searchInput2 = searchWithValue.find("[data-cy='search-input']")
 
     assert.equal(searchInput2.prop('value'), 'pursuit of happiness')
   })

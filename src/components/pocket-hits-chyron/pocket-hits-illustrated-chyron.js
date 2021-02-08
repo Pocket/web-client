@@ -4,7 +4,6 @@ import { CrossIcon } from '@pocket/web-ui'
 import { breakpointSmallHandset, breakpointMediumTablet } from '@pocket/web-ui'
 import EmailSignupForm from 'components/email-signup-form/email-signup-form'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import Border from 'static/images/pocket-hits-chyron/border.svg'
 import EnvelopeGreen from 'static/images/pocket-hits-chyron/envelope-green.svg'
 import EnvelopeRed from 'static/images/pocket-hits-chyron/envelope-red.svg'
@@ -233,14 +232,14 @@ const PocketHitsIllustratedChyron = ({
             <div className={promoBlurbWrapper}>
               <h3
                 className={promoBlurb}
-                {...testIdAttribute('pocket-hits-chyron-success')}>
+                data-cy="pocket-hits-chyron-success">
                 All set. You’ll get your first email from us
                 tomorrow.&nbsp;Enjoy!
               </h3>
             </div>
           ) : (
             <div>
-              <section {...testIdAttribute('pocket-hits-chyron')}>
+              <section data-cy="pocket-hits-chyron">
                 <h3 className={promoBlurb}>
                   Get fascinating stories daily with{' '}
                   <span>Pocket’s newsletter</span>.

@@ -5,7 +5,6 @@ import { breakpointMediumHandset } from '@pocket/web-ui'
 import { screenMediumHandset } from '@pocket/web-ui'
 import { css } from 'linaria'
 import classnames from 'classnames'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import isURL from 'validator/lib/isURL'
 import { Trans, useTranslation } from 'common/setup/i18n'
 import { KEYS } from 'common/constants'
@@ -215,7 +214,7 @@ const GlobalNavAdd = ({
           onBlur={onBlur}
           onKeyUp={handleKeyUp}
           placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
-          {...testIdAttribute('add-input')}
+          data-cy="add-input"
         />
         {inputError ? (
           <div className="error-message">
@@ -228,11 +227,11 @@ const GlobalNavAdd = ({
       <button
         className="add-button"
         onClick={handleSubmit}
-        {...testIdAttribute('add-button')}>
+        data-cy="add-button">
         <Trans i18nKey="nav:add">Add</Trans>
       </button>
       {onClose ? (
-        <CloseButton onClick={onClose} {...testIdAttribute('add-close')} />
+        <CloseButton onClick={onClose} data-cy="add-close" />
       ) : null}
     </form>
   )

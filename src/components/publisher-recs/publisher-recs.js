@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { numberWithCommas } from 'common/utilities'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { PUBLISHER_MODULE } from 'connectors/recit/recit.analytics'
@@ -31,14 +30,14 @@ export const Publisher = ({ recommendationName, name, logo }) => {
     <div className={publisherStyles}>
       {logo ? (
         <img
-          {...testIdAttribute('publisher-logo')}
+          data-cy="publisher-logo"
           src={logo.url}
           alt={publisherName}
         />
       ) : null}
       <h6
         className="publisher-name"
-        {...testIdAttribute('publisher-recs-publisher-name')}>
+        data-cy="publisher-recs-publisher-name">
         More from {publisherName}
       </h6>
     </div>
@@ -166,9 +165,9 @@ const PublisherRecs = ({
 
   return (
     <div>
-      <Publisher {...publisher} {...testIdAttribute('publisher-header')} />
+      <Publisher {...publisher} data-cy="publisher-header" />
       <RecommendedArticles
-        {...testIdAttribute('recommended-articles')}
+        data-cy="recommended-articles"
         recommendations={recommendations}
         maxRecommendations={maxRecommendations}
         handleRecImpression={handleRecImpression}

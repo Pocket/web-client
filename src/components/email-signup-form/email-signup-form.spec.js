@@ -2,7 +2,7 @@ import React from 'react'
 import assert from 'assert'
 import sinon from 'sinon'
 import { shallow } from 'enzyme'
-import { testIdSelector, mockEvent } from '@pocket/web-utilities/test-utils'
+import { mockEvent } from '@pocket/web-utilities/test-utils'
 
 import EmailSignupForm, {
   PROCESSING_MESSAGE,
@@ -17,7 +17,7 @@ describe('EmailSignupForm', () => {
   describe('checkbox', () => {
     it('renders the checkbox if props.showCheckbox is true', () => {
       const form = shallow(<EmailSignupForm {...baseProps} showCheckbox />)
-      const checkbox = form.find(testIdSelector('checkbox'))
+      const checkbox = form.find("[data-cy='checkbox']")
 
       assert(checkbox.exists())
     })
@@ -30,7 +30,7 @@ describe('EmailSignupForm', () => {
           checkboxLabel="I want extra cheese"
         />
       )
-      const checkbox = form.find(testIdSelector('checkbox'))
+      const checkbox = form.find("[data-cy='checkbox']")
 
       assert.equal(
         checkbox.find('label').text('checkboxLabel'),
@@ -43,14 +43,14 @@ describe('EmailSignupForm', () => {
     const form = shallow(
       <EmailSignupForm {...baseProps} inputLabel="Email Address" />
     )
-    const input = form.find(testIdSelector('email-input'))
+    const input = form.find("[data-cy='email-input']")
 
     assert.equal(input.prop('labelText'), 'Email Address')
   })
 
   it('uses the button label passed as a prop', () => {
     const form = shallow(<EmailSignupForm {...baseProps} buttonLabel="Gimme" />)
-    const button = form.find(testIdSelector('submit-button'))
+    const button = form.find("[data-cy='submit-button']")
 
     assert.equal(button.prop('children'), 'Gimme')
   })
@@ -59,15 +59,15 @@ describe('EmailSignupForm', () => {
     const form = shallow(
       <EmailSignupForm {...baseProps} buttonVariant="emphasized" />
     )
-    const button = form.find(testIdSelector('submit-button'))
+    const button = form.find("[data-cy='submit-button']")
 
     assert.equal(button.prop('variant'), 'emphasized')
   })
 
   it('renders a disabled/processing state if props.isProcessing is true', () => {
     const form = shallow(<EmailSignupForm {...baseProps} isProcessing />)
-    const input = form.find(testIdSelector('email-input'))
-    const button = form.find(testIdSelector('submit-button'))
+    const input = form.find("[data-cy='email-input']")
+    const button = form.find("[data-cy='submit-button']")
 
     assert.equal(input.prop('disabled'), true)
     assert.equal(button.prop('disabled'), true)
@@ -76,7 +76,7 @@ describe('EmailSignupForm', () => {
 
   it('displays an invalid email error if an invalid email was submitted', () => {
     const form = shallow(<EmailSignupForm {...baseProps} />)
-    let input = form.find(testIdSelector('email-input'))
+    let input = form.find("[data-cy='email-input']")
 
     // first trigger change event on the input with an invalid value
     // since input is another component, we'll just call its onChange prop
@@ -84,7 +84,7 @@ describe('EmailSignupForm', () => {
     // then submit the form
     form.simulate('submit', mockEvent)
     // get the updated value for the input
-    input = form.find(testIdSelector('email-input'))
+    input = form.find("[data-cy='email-input']")
 
     assert.equal(input.prop('error'), INVALID_EMAIL_ERROR)
   })
@@ -94,7 +94,7 @@ describe('EmailSignupForm', () => {
     const form = shallow(
       <EmailSignupForm {...baseProps} onValidationError={spy} />
     )
-    let input = form.find(testIdSelector('email-input'))
+    let input = form.find("[data-cy='email-input']")
 
     // first trigger change event on the input with an invalid value
     // since input is another component, we'll just call its onChange prop
@@ -107,7 +107,7 @@ describe('EmailSignupForm', () => {
 
   it('clears the validation error message once the input changes again', () => {
     const form = shallow(<EmailSignupForm {...baseProps} />)
-    let input = form.find(testIdSelector('email-input'))
+    let input = form.find("[data-cy='email-input']")
 
     // first trigger change event on the input with an invalid value
     // since input is another component, we'll just call its onChange prop
@@ -117,7 +117,7 @@ describe('EmailSignupForm', () => {
     // then change the input value again
     input.simulate('change', { target: { value: 'cheese' } })
     // get the updated value for the input
-    input = form.find(testIdSelector('email-input'))
+    input = form.find("[data-cy='email-input']")
 
     assert.equal(input.prop('error'), '')
   })
@@ -126,7 +126,7 @@ describe('EmailSignupForm', () => {
     const form = shallow(
       <EmailSignupForm {...baseProps} errorMessage="Not enough cheese" />
     )
-    const input = form.find(testIdSelector('email-input'))
+    const input = form.find("[data-cy='email-input']")
 
     assert.equal(input.prop('error'), 'Not enough cheese')
   })
@@ -134,7 +134,7 @@ describe('EmailSignupForm', () => {
   it('calls props.onFocus, passing the instanceId, when the input is focused', () => {
     const spy = sinon.spy()
     const form = shallow(<EmailSignupForm {...baseProps} onFocus={spy} />)
-    const input = form.find(testIdSelector('email-input'))
+    const input = form.find("[data-cy='email-input']")
     input.simulate('focus', mockEvent)
 
     assert(spy.calledWith(baseProps.instanceId))
@@ -143,7 +143,7 @@ describe('EmailSignupForm', () => {
   it('calls props.onChange, passing the instanceId and value, when the input changes', () => {
     const spy = sinon.spy()
     const form = shallow(<EmailSignupForm {...baseProps} onChange={spy} />)
-    const input = form.find(testIdSelector('email-input'))
+    const input = form.find("[data-cy='email-input']")
     // since input is another component, we'll just call its onChange prop to simulate a change
     input.simulate('change', { target: { value: 'pep' } })
 
@@ -153,11 +153,11 @@ describe('EmailSignupForm', () => {
   it('calls props.onValidSubmit, passing the instanceId and recaptcha response, when the user successfully completes the recaptcha', () => {
     const spy = sinon.spy()
     const form = shallow(<EmailSignupForm {...baseProps} onValidSubmit={spy} />)
-    const input = form.find(testIdSelector('email-input'))
+    const input = form.find("[data-cy='email-input']")
 
     input.simulate('change', { target: { value: 'gouda@cheese.com' } })
 
-    const recaptcha = form.find(testIdSelector('recaptcha'))
+    const recaptcha = form.find("[data-cy='recaptcha']")
     recaptcha.simulate('change', 'recaptcha-response-string')
 
     assert(

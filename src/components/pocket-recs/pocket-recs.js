@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { getImageCacheUrl } from 'common/utilities'
 import {
   breakpointTinyTablet,
@@ -54,9 +53,9 @@ const publisherStyles = css`
 export const Publisher = ({ name, logo }) => (
   <div className={publisherStyles}>
     {logo ? (
-      <img src={logo} {...testIdAttribute('pocket-rec-publisher-logo')} />
+      <img src={logo} data-cy="pocket-rec-publisher-logo" />
     ) : (
-      <span {...testIdAttribute('pocket-rec-publisher-name')}>{name}</span>
+      <span data-cy="pocket-rec-publisher-name">{name}</span>
     )}
   </div>
 )
@@ -227,9 +226,9 @@ const PocketRecs = ({
 
   return (
     <div className={pocketRecsStyles}>
-      <Heading {...testIdAttribute('pocket-recs-heading')} />
+      <Heading data-cy="pocket-recs-heading" />
       <Recommendations
-        {...testIdAttribute('pocket-recommended-articles')}
+        data-cy="pocket-recommended-articles"
         recommendations={recommendations}
         maxRecommendations={maxRecommendations}
         handleRecImpression={handleRecImpression}

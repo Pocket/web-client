@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import { darkMode, sepiaMode } from '@pocket/web-ui'
 import classnames from 'classnames'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 
 const themedImg = css`
   &.light {
@@ -59,14 +58,14 @@ const ThemedImg = React.forwardRef(
           className={classnames(themedImg, className, mode)}
           key={`themed-img-${mode}`}
           ref={ref}
+          data-cy={`themed-img-${mode}`}
           {...remaining}
-          {...testIdAttribute(`themed-img-${mode}`)}
         />
       ) : null
     )
 
     return useWrapper ? (
-      <figure role="group" {...testIdAttribute('figure-wrapper')}>
+      <figure role="group" data-cy="figure-wrapper">
         {images}
       </figure>
     ) : (

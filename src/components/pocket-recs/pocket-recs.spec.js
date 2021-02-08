@@ -2,7 +2,6 @@ import 'jsdom-global/register'
 import React from 'react'
 import assert from 'assert'
 import { shallow, mount } from 'enzyme'
-import { testIdSelector } from '@pocket/web-utilities/test-utils'
 import PocketRecs, {
   Heading,
   Publisher,
@@ -18,9 +17,9 @@ describe('PocketRecs', () => {
   }
   it('does not render <Heading> or <Recommendations> when there are no recommendations', () => {
     const noRecsInstance = shallow(<PocketRecs recommendations={[]} />)
-    const heading = noRecsInstance.find(testIdSelector('pocket-recs-heading'))
+    const heading = noRecsInstance.find("[data-cy='pocket-recs-heading']")
     const recommendations = noRecsInstance.find(
-      testIdSelector('pocket-recommended-articles')
+      "[data-cy='pocket-recommended-articles']"
     )
 
     assert(!heading.exists())
@@ -35,7 +34,7 @@ describe('PocketRecs', () => {
 
       assert.equal(
         publisherWithLogo
-          .find(testIdSelector('pocket-rec-publisher-logo'))
+          .find("[data-cy='pocket-rec-publisher-logo']")
           .prop('src'),
         logoWideBlack
       )
@@ -46,12 +45,12 @@ describe('PocketRecs', () => {
 
       assert(
         !publisherNoLogo
-          .find(testIdSelector('pocket-rec-publisher-logo'))
+          .find("[data-cy='pocket-rec-publisher-logo']")
           .exists()
       )
       assert.equal(
         publisherNoLogo
-          .find(testIdSelector('pocket-rec-publisher-name'))
+          .find("[data-cy='pocket-rec-publisher-name']")
           .text(),
         name
       )

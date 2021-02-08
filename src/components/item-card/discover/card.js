@@ -1,6 +1,5 @@
 import React from 'react'
 import { css } from 'linaria'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 
 import { CardMedia } from 'components/media/card-media'
 import { ItemAction } from './item-action'
@@ -138,7 +137,7 @@ export const Card = React.forwardRef(
         className={card}
         key={id}
         ref={ref}
-        {...testIdAttribute(`article-card-${id}`)}>
+        data-cy={`article-card-${id}`}>
         <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
           <span className="idOverlay">{id}</span>
         </FeatureFlag>

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { Trans, useTranslation } from 'common/setup/i18n'
 
@@ -282,7 +281,7 @@ const GlobalNav = ({
               onClick={(event) => {
                 handleLinkClick('pocket', event)
               }}
-              {...testIdAttribute('logo-link')}>
+              data-cy="logo-link">
               <Logo className="logo" />
               {isLoggedIn ? <LogoMark className="logo-mark" /> : null}
             </a>
@@ -299,7 +298,7 @@ const GlobalNav = ({
                   className="links"
                   links={links}
                   onLinkClick={onLinkClick}
-                  {...testIdAttribute('primary-links')}
+                  data-cy="primary-links"
                 />
               </div>
 

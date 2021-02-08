@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { css } from 'linaria'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 
 import { darkMode } from '@pocket/web-ui'
 import { ProfileIcon } from '@pocket/web-ui'
@@ -85,12 +84,12 @@ const Avatar = ({ id, src, altText, size, className }) => {
           src={src}
           alt={altText}
           className={imageStyle}
-          {...testIdAttribute(`avatar-image-${id}`)}
+          data-cy={`avatar-image-${id}`}
         />
       ) : (
         <ProfileIcon
           className={defaultStyle}
-          {...testIdAttribute(`avatar-default-${id}`)}
+          data-cy={`avatar-default-${id}`}
         />
       )}
     </span>

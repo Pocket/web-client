@@ -8,7 +8,6 @@ import { css } from 'linaria'
 import { breakpointLargeHandset, breakpointMediumHandset } from '@pocket/web-ui'
 import EmailSignupForm from 'components/email-signup-form/email-signup-form'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import TreasureChest from 'static/images/treasure-chest.jpg'
 
 const DEFAULT_ERROR = 'Oops! Something went wrong.'
@@ -181,13 +180,13 @@ const PocketHitsInlineSignup = ({
           <figure className={illustration} />
           {isSuccessful ? (
             <div className="success vertical-center">
-              <h3 {...testIdAttribute('pocket-hits-inline-success')}>
+              <h3 data-cy="pocket-hits-inline-success">
                 All set. You’ll get your first email from us
                 tomorrow.&nbsp;Enjoy!
               </h3>
             </div>
           ) : (
-            <div {...testIdAttribute('pocket-hits-inline')}>
+            <div data-cy="pocket-hits-inline">
               <h3>
                 Get fascinating stories daily with{' '}
                 <span>Pocket’s newsletter</span>.
@@ -205,7 +204,7 @@ const PocketHitsInlineSignup = ({
                   buttonVariant="emphasized"
                   buttonSize="large"
                   hideCaptchaBadge
-                  {...testIdAttribute('inline-form')}
+                  data-cy="inline-form"
                 />
               </div>
             </div>
@@ -214,7 +213,7 @@ const PocketHitsInlineSignup = ({
         {!isSuccessful ? (
           <div
             className={captchaDisclaimer}
-            {...testIdAttribute('pocket-hits-inline-captcha')}>
+            data-cy="pocket-hits-inline-captcha">
             This site is protected by reCAPTCHA.&nbsp;
             <span>
               <a

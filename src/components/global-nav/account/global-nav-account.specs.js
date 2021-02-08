@@ -3,7 +3,7 @@ import React from 'react'
 import sinon from 'sinon'
 import proxyquire from 'proxyquire'
 import { shallow } from 'enzyme'
-import { testIdSelector, mockEvent } from '@pocket/web-utilities/test-utils'
+import { mockEvent } from '@pocket/web-utilities/test-utils'
 
 const useRefStub = sinon.stub()
 
@@ -32,7 +32,7 @@ describe('GlobalNavAccount', () => {
     const account = shallow(
       <GlobalNavAccount {...baseProps} isLoggedIn={false} />
     )
-    const link = account.find(testIdSelector('login-link'))
+    const link = account.find("[data-cy='login-link']")
 
     assert(link.exists())
   })
@@ -41,7 +41,7 @@ describe('GlobalNavAccount', () => {
     const account = shallow(
       <GlobalNavAccount {...baseProps} isLoggedIn={false} />
     )
-    const link = account.find(testIdSelector('signup-link'))
+    const link = account.find("[data-cy='signup-link']")
 
     assert(link.exists())
   })
@@ -50,7 +50,7 @@ describe('GlobalNavAccount', () => {
     const account = shallow(
       <GlobalNavAccount {...baseProps} isLoggedIn isPremium={false} />
     )
-    const link = account.find(testIdSelector('upgrade-link'))
+    const link = account.find("[data-cy='upgrade-link']")
 
     assert(link.exists())
   })
@@ -59,7 +59,7 @@ describe('GlobalNavAccount', () => {
     const account = shallow(
       <GlobalNavAccount {...baseProps} isLoggedIn isPremium />
     )
-    const link = account.find(testIdSelector('upgrade-link'))
+    const link = account.find("[data-cy='upgrade-link']")
 
     assert(!link.exists())
   })
@@ -72,7 +72,7 @@ describe('GlobalNavAccount', () => {
         avatarSrc="placekitten.com/50/50"
       />
     )
-    const avatar = account.find(testIdSelector('account-menu-avatar'))
+    const avatar = account.find("[data-cy='account-menu-avatar']")
 
     assert.equal(avatar.prop('src'), 'placekitten.com/50/50')
   })
@@ -86,7 +86,7 @@ describe('GlobalNavAccount', () => {
       />
     )
     const profileLink = account.find(
-      testIdSelector('account-menu-profile-link')
+      "[data-cy='account-menu-profile-link']"
     )
 
     assert.equal(profileLink.prop('href'), 'getpocket.com/123kitties')
@@ -97,7 +97,7 @@ describe('GlobalNavAccount', () => {
       <GlobalNavAccount {...baseProps} isLoggedIn accountName="George" />
     )
     const profileLink = account.find(
-      testIdSelector('account-menu-profile-link')
+      "[data-cy='account-menu-profile-link']"
     )
 
     assert(profileLink.prop('children').includes('George'))
@@ -105,8 +105,8 @@ describe('GlobalNavAccount', () => {
 
   it('renders bubble notifications when set', () => {
     const account = shallow(<GlobalNavAccount {...baseProps} isLoggedIn showNotification />)
-    const avatarNotification = account.find(testIdSelector('notification-avatar'))
-    const whatsNewNotification = account.find(testIdSelector('notification-whatsnew'))
+    const avatarNotification = account.find("[data-cy='notification-avatar']")
+    const whatsNewNotification = account.find("[data-cy='notification-whatsnew']")
 
     assert(avatarNotification.exists())
     assert(whatsNewNotification.exists())
@@ -114,8 +114,8 @@ describe('GlobalNavAccount', () => {
 
   it('does not render bubble notifications by default', () => {
     const account = shallow(<GlobalNavAccount {...baseProps} isLoggedIn />)
-    const avatarNotification = account.find(testIdSelector('notification-avatar'))
-    const whatsNewNotification = account.find(testIdSelector('notification-whatsnew'))
+    const avatarNotification = account.find("[data-cy='notification-avatar']")
+    const whatsNewNotification = account.find("[data-cy='notification-whatsnew']")
 
     assert(!avatarNotification.exists())
     assert(!whatsNewNotification.exists())
@@ -126,7 +126,7 @@ describe('GlobalNavAccount', () => {
     const account1 = shallow(
       <GlobalNavAccount {...baseProps} isLoggedIn={false} onLinkClick={spy1} />
     )
-    const link1 = account1.find(testIdSelector('login-link'))
+    const link1 = account1.find("[data-cy='login-link']")
     link1.simulate('click', mockEvent)
     assert(spy1.calledWith('login'))
 
@@ -134,7 +134,7 @@ describe('GlobalNavAccount', () => {
     const account2 = shallow(
       <GlobalNavAccount {...baseProps} isLoggedIn onLinkClick={spy2} />
     )
-    const link2 = account2.find(testIdSelector('account-menu-profile-link'))
+    const link2 = account2.find("[data-cy='account-menu-profile-link']")
     link2.simulate('click', mockEvent)
     assert(spy2.calledWith('view-profile'))
   })
@@ -144,7 +144,7 @@ describe('GlobalNavAccount', () => {
     const account = shallow(
       <GlobalNavAccount {...baseProps} isLoggedIn onAccountClick={spy} />
     )
-    const menu = account.find(testIdSelector('account-menu'))
+    const menu = account.find("[data-cy='account-menu']")
 
     assert(!spy.calledOnce)
     menu.simulate('open')
@@ -153,7 +153,7 @@ describe('GlobalNavAccount', () => {
 
   it('uses the avatar button as the trigger for the account popup menu', () => {
     const account = shallow(<GlobalNavAccount {...baseProps} isLoggedIn />)
-    const menu = account.find(testIdSelector('account-menu'))
+    const menu = account.find("[data-cy='account-menu']")
 
     assert.equal(menu.prop('trigger'), mockAvatarRef)
   })

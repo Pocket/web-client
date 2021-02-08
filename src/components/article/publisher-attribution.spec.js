@@ -2,7 +2,6 @@ import 'jsdom-global/register'
 import React from 'react'
 import assert from 'assert'
 import { mount } from 'enzyme'
-import { testIdSelector } from '@pocket/web-utilities/test-utils'
 import { PublisherAttribution } from './publisher-attribution'
 
 import { publisher } from 'mock/article'
@@ -19,7 +18,7 @@ describe.skip('PublisherAttribution', () => {
       <PublisherAttribution publisher={baseProps.withCustomButton} />
     )
 
-    const section = attribution.find(testIdSelector('follow-publisher'))
+    const section = attribution.find("[data-cy='follow-publisher']")
     assert(section.exists())
     attribution.unmount()
   })
@@ -29,7 +28,7 @@ describe.skip('PublisherAttribution', () => {
       <PublisherAttribution publisher={baseProps.withNoLogo} />
     )
 
-    const section = attribution.find(testIdSelector('publisher-img'))
+    const section = attribution.find("[data-cy='publisher-img']")
     assert(!section.exists())
     attribution.unmount()
   })
@@ -39,7 +38,7 @@ describe.skip('PublisherAttribution', () => {
       <PublisherAttribution publisher={baseProps.noArticleCta} />
     )
 
-    const section = attribution.find(testIdSelector('follow-publisher'))
+    const section = attribution.find("[data-cy='follow-publisher']")
     assert(!section.exists())
     attribution.unmount()
   })

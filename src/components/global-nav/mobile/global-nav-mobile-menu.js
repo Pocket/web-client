@@ -13,7 +13,6 @@ import {
 } from '@pocket/web-ui'
 import { Drawer } from '@pocket/web-ui'
 import { Button } from '@pocket/web-ui'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 
 const premiumLinks = [
   {
@@ -220,7 +219,7 @@ export const Menu = ({
     {isUserLoggedIn && !isUserPremium ? (
       <>
         <hr className="nav-divider" />
-        <span className="subhead" {...testIdAttribute('premium-nudge-section')}>
+        <span className="subhead" data-cy="premium-nudge-section">
           <Trans i18nKey="nav:try-premium">Try Premium</Trans>
         </span>
         {premiumLinks.map((premiumLink) => {

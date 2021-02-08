@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { css } from 'linaria'
 import { Trans, useTranslation } from 'common/setup/i18n'
 
@@ -184,7 +183,7 @@ const GlobalNavAccount = ({
         onClick={(event) => {
           onLoginClick(event)
         }}
-        {...testIdAttribute('login-link')}>
+        data-cy="login-link">
         <Trans i18nKey="nav:log-in">Log in</Trans>
       </a>
       <Button
@@ -195,7 +194,7 @@ const GlobalNavAccount = ({
         onClick={(event) => {
           handleLinkClick('signup', event)
         }}
-        {...testIdAttribute('signup-link')}>
+        data-cy="signup-link">
         <ProfileIcon />
         <span className="label">
           <Trans i18nKey="nav:sign-up">Sign up</Trans>
@@ -213,7 +212,7 @@ const GlobalNavAccount = ({
             onClick={(event) => {
               handleLinkClick('premium', event)
             }}
-            {...testIdAttribute('upgrade-link')}>
+            data-cy="upgrade-link">
             <PremiumIcon />
             <span className="label">
               <Trans i18nKey="nav:upgrade">Upgrade</Trans>
@@ -229,10 +228,10 @@ const GlobalNavAccount = ({
           size="40px"
           label={null}
           className={avatarStyle}
-          {...testIdAttribute('account-menu-avatar')}
+          data-cy="account-menu-avatar"
         />
         { showNotification ? (
-          <FloatingNotification {...testIdAttribute('notification-avatar')} />
+          <FloatingNotification data-cy="notification-avatar" />
         ) : null}
       </WithTooltip>
       <PopupMenu
@@ -252,7 +251,7 @@ const GlobalNavAccount = ({
             }
           ]
         }}
-        {...testIdAttribute('account-menu')}>
+        data-cy="account-menu">
         <PopupMenuGroup>
           <PopupMenuItem
             helperText={t('nav:view-profile', 'View Profile')}
@@ -261,7 +260,7 @@ const GlobalNavAccount = ({
             onClick={(event) => {
               handleLinkClick('view-profile', event)
             }}
-            {...testIdAttribute('account-menu-profile-link')}>
+            data-cy="account-menu-profile-link">
             {accountName}
           </PopupMenuItem>
         </PopupMenuGroup>
@@ -298,7 +297,7 @@ const GlobalNavAccount = ({
             }}>
             <Trans i18nKey="nav:whats-new">What’s New</Trans>{" "}
             { showNotification ? (
-              <InlineNotification {...testIdAttribute('notification-whatsnew')} />
+              <InlineNotification data-cy="notification-whatsnew" />
             ) : null}
           </PopupMenuItem>
         </PopupMenuGroup>

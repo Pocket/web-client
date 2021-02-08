@@ -4,7 +4,6 @@ import { LOGIN_URL, SIGNUP_URL } from 'common/constants'
 import { SaveIcon } from '@pocket/web-ui'
 import { SaveFilledIcon } from '@pocket/web-ui'
 import classNames from 'classnames'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 
 const saveContainer = css`
   display: flex;
@@ -75,7 +74,7 @@ const SavePopover = function ({ popoverRef, id }) {
   const signupUrl = `${SIGNUP_URL}?route=${global.location.href}`
   return (
     //prettier-ignore
-    <div className={popoverContainer} ref={popoverRef} {...testIdAttribute(`article-save-login-popup-${id}`)}>
+    <div className={popoverContainer} ref={popoverRef} data-cy={`article-save-login-popup-${id}`}>
       <a className="popoverLink" href={loginUrl}>Log in</a> or{' '}
       <a className="popoverLink" href={signupUrl}>Sign up</a> to save this article.
     </div>
@@ -124,7 +123,7 @@ export const SaveToPocket = function ({
         className={saveClasses}
         onClick={handleClick}
         ref={popTrigger}
-        {...testIdAttribute(`article-save-btn-${id}`)}>
+        data-cy={`article-save-btn-${id}`}>
         {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}
         <div className="actionCopy">{saveCopy[saveStatus]}</div>
       </div>

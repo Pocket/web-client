@@ -5,7 +5,6 @@ import isEmail from 'validator/lib/isEmail'
 import { css } from 'linaria'
 import Recaptcha from 'react-google-recaptcha'
 
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { Button, TextInput } from '@pocket/web-ui'
 import { breakpointSmallHandset, breakpointLargeHandset } from '@pocket/web-ui'
 
@@ -175,7 +174,7 @@ const EmailSignupForm = ({
           displayErrorInline={displayErrorInline}
           onFocus={handleInputFocus}
           disabled={isProcessing || isRecaptchaProcessing}
-          {...testIdAttribute('email-input')}
+          data-cy="email-input"
         />
       </div>
       <div className={classnames(buttonStyle, buttonClassName)}>
@@ -183,7 +182,7 @@ const EmailSignupForm = ({
           type="submit"
           disabled={isProcessing || isRecaptchaProcessing}
           variant={buttonVariant}
-          {...testIdAttribute('submit-button')}>
+          data-cy="submit-button">
           {isProcessing || isRecaptchaProcessing
             ? buttonLabelProcessing
             : buttonLabel}
@@ -192,7 +191,7 @@ const EmailSignupForm = ({
       {showCheckbox ? (
         <div
           className={classnames(checkboxStyle)}
-          {...testIdAttribute('checkbox')}>
+          data-cy="checkbox">
           <input
             type="checkbox"
             onChange={handleCheckboxClick}
@@ -209,7 +208,7 @@ const EmailSignupForm = ({
         size="invisible"
         sitekey={CAPTCHA_SITE_KEY}
         onChange={handleRecaptchaComplete}
-        {...testIdAttribute('recaptcha')}
+        data-cy="recaptcha"
       />
     </form>
   )

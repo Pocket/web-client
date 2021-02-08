@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 
 import Avatar from './avatar'
 
@@ -95,7 +94,7 @@ export const AvatarButton = React.forwardRef(
           size={size}
           src={src}
           altText={label}
-          {...testIdAttribute(`avatar-button-avatar-${id}`)}
+          data-cy={`avatar-button-avatar-${id}`}
         />
       </button>
     )

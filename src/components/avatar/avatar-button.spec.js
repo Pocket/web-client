@@ -2,7 +2,7 @@ import assert from 'assert'
 import React from 'react'
 import { shallow } from 'enzyme'
 import sinon from 'sinon'
-import { testIdSelector, mockEvent } from '@pocket/web-utilities/test-utils'
+import { mockEvent } from '@pocket/web-utilities/test-utils'
 
 import { AvatarButton } from './avatar-button'
 
@@ -14,7 +14,7 @@ describe('Avatar', () => {
 
   it('Passes the size prop to the avatar element', () => {
     const button = shallow(<AvatarButton {...baseProps} />)
-    const avatar = button.find(testIdSelector('avatar-button-avatar-'))
+    const avatar = button.find("[data-cy='avatar-button-avatar-']")
 
     assert.strictEqual(avatar.prop('size'), baseProps.size)
   })
@@ -23,7 +23,7 @@ describe('Avatar', () => {
     const button = shallow(
       <AvatarButton {...baseProps} src="http://placekitten.com/150/150" />
     )
-    const avatar = button.find(testIdSelector('avatar-button-avatar-'))
+    const avatar = button.find("[data-cy='avatar-button-avatar-']")
 
     assert.strictEqual(avatar.prop('src'), 'http://placekitten.com/150/150')
   })

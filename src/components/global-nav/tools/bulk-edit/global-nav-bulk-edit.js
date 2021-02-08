@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { css, cx } from 'linaria'
 import { WithTooltip } from '@pocket/web-ui'
 
-import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import { CrossIcon } from '@pocket/web-ui'
 
 import { ArchiveIcon } from '@pocket/web-ui'
@@ -249,11 +248,11 @@ function GlobalNavBulkEdit({
         <button
           className="bulk-button"
           onClick={clearAction}
-          {...testIdAttribute('clear-button')}>
+          data-cy="clear-button">
           {clearCopy}
         </button>
         {onClose ? (
-          <CloseButton onClick={onClose} {...testIdAttribute('add-close')} />
+          <CloseButton onClick={onClose} data-cy="add-close" />
         ) : null}
       </div>
     </div>
