@@ -38,7 +38,7 @@ export const TagUpsell = ({ onVisible }) => {
         <p>
           <PremiumIcon />
           <Trans i18nKey="tags:tag-stories-faster">
-            Tag stories faster than ever—get tag suggestions with.
+            Tag stories faster than ever—get tag suggestions with
           </Trans>
         </p>
         <ArrowLink
