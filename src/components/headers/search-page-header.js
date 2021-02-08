@@ -5,6 +5,7 @@ import { breakpointTinyTablet } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { Trans } from 'common/setup/i18n'
+import { Loader } from 'components/loader/loader'
 
 const searchPageHeaderStyle = css`
   margin-bottom: var(--spacing100);
@@ -40,11 +41,21 @@ const searchPageHeaderStyle = css`
 `
 
 export const SearchPageHeader = ({ filter, total, query }) => {
+  const isLoading = total === false
   return query ? (
     <header className={searchPageHeaderStyle}>
       <h1 className="pageTitle">
-        <em>"{query}"</em> — {total || 0}{' '}
-        <Trans i18nKey="search:search-results">Search Results</Trans>
+        <em>"{query}"</em> —{' '}
+        {isLoading ? (
+          <span>
+            Searching <Loader />{' '}
+          </span>
+        ) : (
+          <span>
+            {total || 0}{' '}
+            <Trans i18nKey="search:search-results">Search Results</Trans>
+          </span>
+        )}
       </h1>
       <FilterMenu subset="search" query={query} filter={filter} />
     </header>
