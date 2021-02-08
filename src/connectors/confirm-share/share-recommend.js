@@ -32,7 +32,7 @@ export function ShareRecommend() {
       <textarea
         placeholder={t('share:comment', 'Comment')}
         value={commentValue}
-        onChange={(e) => setCommentValue(e.target.value)}
+        onChange={(e) => setCommentValue(e?.target?.value)}
       />
       <Button type="submit" onClick={onClick}>
         <Trans i18nKey="share:recommend">Recommend</Trans>

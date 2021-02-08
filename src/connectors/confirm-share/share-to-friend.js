@@ -145,7 +145,7 @@ export function ShareToFriend() {
         <textarea
           placeholder={t('share:comment', 'Comment')}
           value={commentValue}
-          onChange={(e) => setCommentValue(e.target.value)}
+          onChange={(e) => setCommentValue(e?.target?.value)}
         />
         <Button
           type="submit"

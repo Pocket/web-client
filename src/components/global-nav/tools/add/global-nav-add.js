@@ -161,7 +161,7 @@ const GlobalNavAdd = ({
 
   const handleInputChange = (e) => {
     updateInputError(false)
-    updateAddUrl(e.target.value)
+    updateAddUrl(e?.target?.value)
   }
 
   const handleSubmit = (e) => {

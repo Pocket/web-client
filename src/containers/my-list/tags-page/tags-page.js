@@ -19,7 +19,7 @@ export default function TagsPage(props) {
 
   const taggedItems = useSelector((state) => state.userTags.itemsWithTags)
   const [value, setValue] = useState('')
-  const valueChange = (e) => setValue(e.target.value)
+  const valueChange = (e) => setValue(e?.target?.value)
 
   const shouldRender = userStatus !== 'pending'
 

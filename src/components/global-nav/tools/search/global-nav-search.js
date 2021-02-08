@@ -165,7 +165,7 @@ const GlobalNavSearch = ({
 
   const handleInputChange = (e) => {
     updateInputError(false)
-    updateSearchTerm(e.target.value)
+    updateSearchTerm(e?.target?.value)
   }
 
   const handleSubmit = (e) => {
