@@ -1,22 +1,4 @@
 import { css } from 'linaria'
-import posed, { PoseGroup } from 'react-pose'
-
-const LoadInOut = posed.div({
-  enter: {
-    y: 0,
-    opacity: 1,
-    delay: 0,
-    transition: {
-      y: { type: 'spring', stiffness: 400, damping: 35 },
-      default: { duration: 1000 }
-    }
-  },
-  exit: {
-    y: 50,
-    opacity: 0,
-    transition: { duration: 250 }
-  }
-})
 
 const loaderCentered = css`
   height: calc(100vh - 63px);
@@ -43,9 +25,7 @@ export const LoadMore = ({ children }) => (
 )
 
 const loadWrapper = css`
-  width: 100%;
-  height: 35px;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
 
   svg {
@@ -121,34 +101,24 @@ const loadWrapper = css`
   }
 `
 
-const loadBlock = css`
-  padding-top: 20px;
-`
-
-export const Loader = ({ isVisible }) => (
-  <PoseGroup>
-    {isVisible && [
-      <LoadInOut key="loadInOut">
-        <div className={loadWrapper}>
-          <div className={loadBlock}>
-            <div className="spin circle">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6">
-                <circle cx="3" cy="3" r="3" />
-              </svg>
-            </div>
-            <div className="spin triangle">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M24 22H0L12 2z" />
-              </svg>
-            </div>
-            <div className="spin square">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6">
-                <path d="M0 0h6v6H0z" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </LoadInOut>
-    ]}
-  </PoseGroup>
-)
+export const Loader = () => {
+  return (
+    <div className={loadWrapper}>
+      <div className="spin circle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6">
+          <circle cx="3" cy="3" r="3" />
+        </svg>
+      </div>
+      <div className="spin triangle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M24 22H0L12 2z" />
+        </svg>
+      </div>
+      <div className="spin square">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6">
+          <path d="M0 0h6v6H0z" />
+        </svg>
+      </div>
+    </div>
+  )
+}
