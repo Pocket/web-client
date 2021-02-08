@@ -67,19 +67,17 @@ function* userRequest(action) {
 
   // Otherwise let's grab the user info use
   const response = yield getUserInfo()
-  if (response.xErrorCode) return false
 
+  // Not logged in, or something else went awry?
+  if (response?.xErrorCode) return yield put({ type: USER_FAILURE })
+
+  // Yay we have a user
   const { user } = response
-  if (user) yield put({ type: USER_SUCCESS, user })
+  if (user) return yield put({ type: USER_SUCCESS, user })
 }
 
 /** ASYNC Functions
  --------------------------------------------------------------- */
-export async function fetchUserData() {
-  const response = await getUserInfo()
-  if (response.xErrorCode) return false
-  return response
-}
 
 export async function getSessGuid() {
   const response = await createGuid()
