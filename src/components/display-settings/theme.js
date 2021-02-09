@@ -35,9 +35,7 @@ const Themes = [
 ]
 
 export const ThemeSettings = ({ colorMode = 'light', setColorMode }) => {
-  function handleChange(event) {
-    setColorMode(event.target.value)
-  }
+  const handleChange = (event) => setColorMode(event?.target?.value)
 
   return (
     <PopupMenuGroup>
