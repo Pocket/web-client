@@ -7,6 +7,7 @@ import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
 import { css } from 'linaria'
 import { headingSansSerif } from '@pocket/web-ui'
+import { Languages } from './languages'
 
 const devToolStyle = css`
   padding: var(--spacing150);
@@ -56,6 +57,7 @@ export function DevTools() {
     <div className={devToolStyle}>
       <h6>Dev Settings</h6>
       <Features />
+      <Languages />
     </div>
   ) : null
 }
