@@ -5,7 +5,15 @@ class ClientDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          {/* <!-- OneTrust Cookies Consent Notice start for getpocket.com --> */}
+          <script
+            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e-test/otSDKStub.js"
+            type="text/javascript"
+            charset="UTF-8"
+            data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e-test"></script>
+          {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
+        </Head>
         <body>
           {/*
           This all sets us up for color themes without having a flash of
@@ -14,6 +22,8 @@ class ClientDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `(function () {
+
+              function OptanonWrapper() { }
 
               function setColorMode(colorMode) {
                 const htmlTag = document && document.documentElement
