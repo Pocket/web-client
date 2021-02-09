@@ -98,7 +98,7 @@ export const appReducers = (state = initialState, action) => {
     }
 
     case APP_COLOR_MODE_SET: {
-      const { colorMode } = action
+      const { colorMode = 'light' } = action
       return { ...state, colorMode }
     }
 
