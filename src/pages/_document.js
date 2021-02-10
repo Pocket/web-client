@@ -8,10 +8,10 @@ class ClientDocument extends Document {
         <Head>
           {/* <!-- OneTrust Cookies Consent Notice start for getpocket.com --> */}
           <script
-            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e-test/otSDKStub.js"
+            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e/otSDKStub.js"
             type="text/javascript"
             charset="UTF-8"
-            data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e-test"></script>
+            data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e"></script>
           {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
         </Head>
         <body>
