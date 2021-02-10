@@ -19,11 +19,12 @@ export const sendSaveEvent = (url) => (trackContentEngagement(
   'global-nav.save'
 ))
 
-export const sendSearchEvent = () => (trackEngagement(
+export const sendSearchEvent = (searchTerm) => (trackEngagement(
   ENGAGEMENT_TYPE_GENERAL,
   UI_COMPONENT_BUTTON,
   0, // position in list (zero since it's not in list)
-  'global-nav.search'
+  'global-nav.search.submit',
+  searchTerm
 ))
 
 export const sendBulkDeleteEvent = (items) => (trackContentEngagement(

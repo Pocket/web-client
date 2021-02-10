@@ -13,13 +13,16 @@ export const ENGAGEMENT_TYPE_REPORT = 'report'
  *          ENGAGEMENT_TYPE_SAVE,
  *          ENGAGEMENT_TYPE_REPORT
  *         )} - Indicates the type of engagement
- * @returns {{schema: *, data: {type: *}}}
+ * @returns {{schema: *, data: {type: *, value: *}}}
  */
-const createEngagementEvent = (type) => ({
-  schema: ENGAGEMENT_SCHEMA_URL,
-  data: {
-    type
+const createEngagementEvent = (type, value) => {
+  const data = { type }
+  if (value) data.value = value
+
+  return {
+    schema: ENGAGEMENT_SCHEMA_URL,
+    data
   }
-})
+}
 
 export default createEngagementEvent

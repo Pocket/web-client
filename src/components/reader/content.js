@@ -19,10 +19,12 @@ export const Content = ({
   annotations,
   annotationsBuilt,
   onHighlightHover,
+  externalLinkClick,
   ...args
 }) => {
   const articleRef = useRef(null)
   const [loaded, setLoaded] = useState(false)
+  const [linkList, setLinkList] = useState([])
 
   const processAnnotations = (annotations) => {
     removeAllHighlights()
@@ -42,19 +44,35 @@ export const Content = ({
     })
   }
 
+  const sendExternalLinkClick = (e) => {
+    const link = e.target.closest('a[href]')
+    const href = link.getAttribute('href')
+
+    externalLinkClick(href)
+  }
+
   const externalizeLinks = () => {
     const links = articleRef.current.querySelectorAll('a[href]')
     links.forEach((link, index) => {
       link.setAttribute('target', '_blank')
       link.setAttribute('rel', 'noopener noreferrer')
       link.setAttribute('id', `reader.external-link.num-${index}`)
+      link.addEventListener('click', sendExternalLinkClick)
     })
+
+    setLinkList(links)
   }
 
   useEffect(() => {
     if (content) externalizeLinks()
     if (images) loadParsedImages(images)
     if (videos) loadParsedVideos(videos)
+
+    return () => {
+      linkList.forEach((link, index) => {
+        link.removeEventListener('click', sendExternalLinkClick)
+      })
+    }
   }, [])
 
   useEffect(() => {

@@ -46,6 +46,7 @@ import { sendFavoriteEvent } from './read.analytics'
 import { sendAnnotationEvent } from './read.analytics'
 import { sendShareEvent } from './read.analytics'
 import { sendImpression } from './read.analytics'
+import { sendExternalLinkClick } from './read.analytics'
 
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
@@ -244,6 +245,10 @@ export default function Reader() {
     dispatch(favoriteAction([{ id }]))
   }
 
+  const externalLinkClick = (href) => {
+    dispatch(sendExternalLinkClick(articleData, href))
+  }
+
   return (
     <>
       <Head>
@@ -284,6 +289,7 @@ export default function Reader() {
           {articleContent ? (
             <Content
               {...contentData}
+              externalLinkClick={externalLinkClick}
               onMouseUp={toggleHighlight}
               onHighlightHover={toggleHighlightHover}
               annotationsBuilt={buildAnnotations}

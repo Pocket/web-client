@@ -8,7 +8,7 @@ function GlobalNavAddConnected({ onClose }) {
 
   const onSubmit = (url) => {
     // bool to denote save action, 0 is position which is required for engagement
-    dispatch(sendSaveEvent('global-nav.save', url))
+    dispatch(sendSaveEvent(url))
     dispatch(itemAddAction(url))
   }
   return <GlobalNavAdd onClose={onClose} onSubmit={onSubmit} />

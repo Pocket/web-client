@@ -14,7 +14,7 @@ function GlobalNavSearchConnected({ onClose }) {
   const recentSearches = useSelector((state) => state?.userSearch?.recent ) //prettier-ignore
 
   const onSubmit = (searchTerm) => {
-    dispatch(sendSearchEvent('global-nav.search'))
+    dispatch(sendSearchEvent(searchTerm))
     dispatch(saveRecentSearch(searchTerm))
     router.push(`/my-list/search/?query=${escape(searchTerm)}`)
   }

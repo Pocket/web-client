@@ -68,13 +68,14 @@ export const trackContentEngagement = (component, ui, position, items, identifie
     items
   }
 }
-export const trackEngagement = (component, ui, position, identifier) => {
+export const trackEngagement = (component, ui, position, identifier, value) => {
   return {
     type: SNOWPLOW_TRACK_ENGAGEMENT,
     component,
     ui,
     identifier,
-    position
+    position,
+    value
   }
 }
 
@@ -175,8 +176,8 @@ function* fireContentEngagmenet({ component, ui, identifier, position, items }) 
   yield sendCustomSnowplowEvent(engagementEvent, snowplowEntities)
 }
 
-function* fireEngagement({ component, ui, identifier, position }) {
-  const engagementEvent = createEngagementEvent(component)
+function* fireEngagement({ component, ui, identifier, position, value }) {
+  const engagementEvent = createEngagementEvent(component, value)
   const uiEntity = createUiEntity({
     type: ui,
     hierarchy: 0,

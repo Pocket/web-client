@@ -1,10 +1,12 @@
 import { takeEvery, put } from 'redux-saga/effects'
 import { trackContentEngagement } from 'connectors/snowplow/snowplow.state'
+import { trackContentOpen } from 'connectors/snowplow/snowplow.state'
 import { trackImpression } from 'connectors/snowplow/snowplow.state'
 import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
 import { ENGAGEMENT_TYPE_SAVE } from 'connectors/snowplow/events'
 import { IMPRESSION_COMPONENT_UI } from 'connectors/snowplow/events'
 import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
+import { CONTENT_OPEN_TRIGGER_CLICK } from 'connectors/snowplow/events'
 import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
 
 /** ACTIONS
@@ -76,4 +78,12 @@ export const sendImpression = (identifier) => (trackImpression(
   UI_COMPONENT_BUTTON,
   0,
   identifier
+))
+
+export const sendExternalLinkClick = (item, href) => (trackContentOpen(
+  href,
+  CONTENT_OPEN_TRIGGER_CLICK,
+  0, // position in list (zero since it's in reader)
+  item,
+  'reader.external-link'
 ))
