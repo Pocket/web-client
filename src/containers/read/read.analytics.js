@@ -20,7 +20,7 @@ export const sendDeleteEvent = (item) => (trackContentEngagement(
 // status (bool) true is un-archive, false is archive
 export const sendArchiveEvent = (item, status) => {
   const identifier = status ? 'reader.un-archive' : 'reader.archive'
-  const engagement = status ? ENGAGEMENT_TYPE_GENERAL : ENGAGEMENT_TYPE_SAVE
+  const engagement = status ? ENGAGEMENT_TYPE_SAVE : ENGAGEMENT_TYPE_GENERAL
   return trackContentEngagement(
     engagement,
     UI_COMPONENT_BUTTON,
