@@ -10,6 +10,7 @@ import { ENGAGEMENT_TYPE_SAVE } from 'connectors/snowplow/events'
 import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
 import { getLinkOpenTarget } from 'connectors/snowplow/events'
 import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
+import { BASE_URL } from 'common/constants'
 import { ANALYTICS_VIEW } from 'common/constants'
 import { ANALYTICS_LIST_MODE } from 'common/constants'
 import { ANALYTICS_INDEX } from 'common/constants'
@@ -106,7 +107,9 @@ export function trackItemOpen(position, item, listType) {
 }
 
 export function fireItemOpen(position, item, dispatch) {
-  const linkTarget = getLinkOpenTarget(item?.save_url)
+  const { openExternal, save_url, id } = item
+  const itemUrl = openExternal ? save_url : `${BASE_URL}/read/${id}`
+  const linkTarget = getLinkOpenTarget(itemUrl)
   // trigger Snowplow content open
   dispatch(
     trackContentOpen(

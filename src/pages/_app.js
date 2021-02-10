@@ -91,23 +91,24 @@ function PocketWebClient({ Component, pageProps, err }) {
     if (sess_guid) validateUser()
   }, [user_status, dispatch])
 
+  // 3rd party initializations
   useEffect(() => {
-    if (user_status === 'pending') return null
+    if (user_status !== 'pending' || !sess_guid) return
 
     // Set up Snowplow
     initializeSnowplow(user_id, sess_guid)
 
-    // Track Page View
-    dispatch(trackPageView())
-
     // Set up Google Analytics
     ReactGA.initialize(GOOGLE_ANALYTICS_ID)
-    ReactGA.pageview(path)
 
     // Load OptinMonster
     // loadOptinMonster()
+  }, [user_status, sess_guid])
 
-    // hydrate features
+  // Hydrate user features
+  useEffect(() => {
+    if (user_status === 'pending') return null
+
     const hydrateFeatures = async () => {
       const features = await fetchUnleashData(user_id, sess_guid)
       if (features) dispatch(featuresHydrate(features))
@@ -121,6 +122,14 @@ function PocketWebClient({ Component, pageProps, err }) {
     // signal to Cypress that React client side has loaded
     // Make sure this is the last thing we fire
     // signalTestsReady()
+  }, [user_status, sess_guid, user_id, dispatch])
+
+  // Track Page Views
+  useEffect(() => {
+    if (user_status === 'pending') return null
+
+    dispatch(trackPageView())
+    ReactGA.pageview(path)
   }, [user_status, sess_guid, user_id, path, dispatch])
 
   // Provider is created automatically by the wrapper by next-redux-wrapper
