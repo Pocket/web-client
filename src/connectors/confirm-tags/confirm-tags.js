@@ -106,7 +106,8 @@ export function TaggingModal() {
   }
 
   const saveTags = () => {
-    if (!fresh) confirmTags(currentTags)
+    let tagsToSubmit = value ? [value, ...currentTags] : currentTags
+    confirmTags(tagsToSubmit)
   }
 
   const title = currentTags?.length
@@ -188,7 +189,10 @@ export function TaggingModal() {
       </ModalBody>
       <ModalFooter isSticky={false}>
         <div className="actions">
-          <Button disabled={fresh} type="submit" onClick={saveTags}>
+          <Button
+            disabled={!value ? fresh : false}
+            type="submit"
+            onClick={saveTags}>
             <Trans i18nKey="confirm:save">Save</Trans>
           </Button>
         </div>
