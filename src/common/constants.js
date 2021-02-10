@@ -47,7 +47,7 @@ export const SNOWPLOW_CONFIG = {
   appId: SNOWPLOW_APP_ID,
   platform: 'web',
   eventMethod: 'beacon',
-  respectDoNotTrack: true,
+  respectDoNotTrack: false,
   contexts: { webPage: true, performanceTiming: true }
 }
 
