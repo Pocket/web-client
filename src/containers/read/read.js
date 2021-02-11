@@ -22,6 +22,8 @@ import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
 import { itemDataRequest, saveAnnotation, deleteAnnotation } from './read.state'
 
+import { setColorMode } from 'connectors/app/app.state'
+
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
@@ -94,6 +96,7 @@ export default function Reader() {
   const columnWidth = useSelector((state) => state.reader.columnWidth)
   const fontSize = useSelector((state) => state.reader.fontSize)
   const fontFamily = useSelector((state) => state.reader.fontFamily)
+  const colorMode = useSelector((state) => state?.app?.colorMode)
 
   const itemDelete = () => {
     dispatch(sendDeleteEvent(articleData))
@@ -249,6 +252,8 @@ export default function Reader() {
     dispatch(sendExternalLinkClick(articleData, href))
   }
 
+  const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
+
   return (
     <>
       <Head>
@@ -267,6 +272,8 @@ export default function Reader() {
         archive={archiveStatus}
         onVisible={handleImpression}
         sideBarOpen={sideBarOpen}
+        colorMode={colorMode}
+        setColorMode={setAppColorMode}
       />
 
       <main className={articleWrapper}>

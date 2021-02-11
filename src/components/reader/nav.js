@@ -114,7 +114,9 @@ export const ReaderNav = ({
   archive,
   displaySettings,
   onVisible,
-  sideBarOpen
+  sideBarOpen,
+  colorMode,
+  setColorMode
 }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -240,6 +242,8 @@ export const ReaderNav = ({
             setColumnWidth={setColumnWidth}
             isPremium={isPremium}
             onVisible={onVisible}
+            colorMode={colorMode}
+            setColorMode={setColorMode}
           />
         </nav>
       </div>

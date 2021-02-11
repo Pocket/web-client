@@ -78,7 +78,9 @@ export const DisplaySettings = ({
   setColumnWidth,
   isPremium,
   forceShow,
-  onVisible
+  onVisible,
+  colorMode,
+  setColorMode
 }) => {
   const { t } = useTranslation()
 
@@ -182,7 +184,7 @@ export const DisplaySettings = ({
           />
         ) : (
           <>
-            <ThemeSettings />
+            <ThemeSettings setColorMode={setColorMode} colorMode={colorMode} />
             <FontSizeSettings
               clickDecrease={decreaseFontSize}
               clickIncrease={increaseFontSize}
