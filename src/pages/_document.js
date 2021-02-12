@@ -8,10 +8,18 @@ class ClientDocument extends Document {
         <Head>
           {/* <!-- OneTrust Cookies Consent Notice start for getpocket.com --> */}
           <script
-            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e/otSDKStub.js"
             type="text/javascript"
-            charset="UTF-8"
-            data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e"></script>
+            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e-test/OtAutoBlock.js"></script>
+          <script
+            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e-test/otSDKStub.js"
+            type="text/javascript"
+            charSet="UTF-8"
+            data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e-test"></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: 'function OptanonWrapper() { }'
+            }}
+          />
           {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
         </Head>
         <body>
@@ -22,9 +30,6 @@ class ClientDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `(function () {
-
-              function OptanonWrapper() { }
-
               function setColorMode(colorMode) {
                 const htmlTag = document && document.documentElement
                 htmlTag.classList.toggle('${COLOR_MODE_PREFIX}-light', (!colorMode || colorMode === 'light'))
