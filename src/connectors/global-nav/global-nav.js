@@ -102,9 +102,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     }
   })
 
-  const showHome = useSelector(
-    (state) => state.features['temp.web.client.home.new_user']
-  )
+  const showHome = useSelector((state) => state.features['temp.web.client.home.new_user'])?.assigned //prettier-ignore
   const homeLinks = [
     {
       name: 'home',
