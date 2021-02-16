@@ -43,6 +43,31 @@ resource "aws_alb_listener_rule" "public_forward_101" {
   priority = 2101
 }
 
+# NOTE: Reserving this space for client side api routes
+# resource "aws_alb_listener_rule" "public_forward_102" {
+#   listener_arn = data.aws_alb_listener.web_client.arn
+#   action {
+#     type             = "forward"
+#     target_group_arn = aws_alb_target_group.public.arn
+#   }
+
+#   condition {
+#     host_header {
+#       values = [var.domain_name]
+#     }
+#   }
+
+#   condition {
+#     path_pattern {
+#       values = [
+#          "/web-client-api/*"
+#       ]
+#     }
+#   }
+
+#   priority = 2102
+# }
+
 resource "aws_alb_listener_rule" "public_forward_103" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
