@@ -151,13 +151,13 @@ export function SideNav({ subset, tag, pinnedTags, isDisabled, showHome }) {
         {showHome ? (
           <>
             <Link href="/home">
-              <button className={subActive('unread')} ref={ref}>
+              <button className={subActive('home')} ref={ref}>
                 <HomeIcon className="side-nav-icon" />{' '}
                 <Trans i18nKey="nav:home">Home</Trans>
               </button>
             </Link>
             <Link href="/explore">
-              <button className={subActive('unread')} ref={ref}>
+              <button className={subActive('discover')} ref={ref}>
                 <DiscoverIcon className="side-nav-icon" />{' '}
                 <Trans i18nKey="nav:discover">Discover</Trans>
               </button>
