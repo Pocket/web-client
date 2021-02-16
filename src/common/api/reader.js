@@ -17,7 +17,7 @@ export const getArticleFromId = (item_id) => {
       annotations: 1, //	int	1 to include Annotations in Items
       attribution: 2, //	int	2 to include attributionTypes in the response as well as including ExtendAttribution in Items
       item: item_id,
-      state: 'anyactive'
+      state: 'all'
     },
     auth: true
   })
