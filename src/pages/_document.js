@@ -11,9 +11,9 @@ class ClientDocument extends Document {
             type="text/javascript"
             src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e/OtAutoBlock.js"></script>
           <script
-            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e/otSDKStub.js"
+            src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
             type="text/javascript"
-            charSet="UTF-8"
+            charset="UTF-8"
             data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e"></script>
           <script
             dangerouslySetInnerHTML={{
