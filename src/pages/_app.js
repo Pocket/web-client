@@ -93,7 +93,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   // 3rd party initializations
   useEffect(() => {
-    if (user_status !== 'pending' || !sess_guid) return
+    if (!user_id || !sess_guid) return
 
     // Set up Snowplow
     initializeSnowplow(user_id, sess_guid)
@@ -103,7 +103,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // Load OptinMonster
     // loadOptinMonster()
-  }, [user_status, sess_guid])
+  }, [user_id, sess_guid])
 
   // Hydrate user features
   useEffect(() => {
