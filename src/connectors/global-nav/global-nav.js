@@ -15,6 +15,7 @@ import GlobalNavSearch from './global-nav-search'
 import GlobalNavAdd from './global-nav-add'
 import GlobalNavBulkEdit from './global-nav-bulk-edit'
 
+import { HomeIcon } from '@pocket/web-ui'
 import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
 import { SearchIcon } from '@pocket/web-ui'
@@ -27,7 +28,7 @@ import { ArticleIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
 import { VideoIcon } from '@pocket/web-ui'
 
-import { BASE_URL  } from 'common/constants'
+import { BASE_URL } from 'common/constants'
 import { LOGIN_URL } from 'common/constants'
 import { RELEASE_NOTES_VERSION } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities'
@@ -78,7 +79,9 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const sortOrder = useSelector((state) => state?.app?.sortOrder)
   const colorMode = useSelector((state) => state?.app?.colorMode)
 
-  const showNotification = useSelector((state) => state?.app?.releaseVersion !== RELEASE_NOTES_VERSION)
+  const showNotification = useSelector(
+    (state) => state?.app?.releaseVersion !== RELEASE_NOTES_VERSION
+  )
 
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
   const toggleSortOrder = () => dispatch(sortOrderToggle())
@@ -98,6 +101,33 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       url: `/my-list/tags/${pin}`
     }
   })
+
+  const showHome = useSelector(
+    (state) => state.features['temp.web.client.home.new_user']
+  )
+  const homeLinks = [
+    {
+      name: 'home',
+      id: 'global-nav-home-link',
+      label: t('nav:home', 'Home'),
+      url: 'https://getpocket.com/home',
+      icon: <HomeIcon />
+    },
+    {
+      name: 'my-list',
+      id: 'global-nav-my-list-link',
+      label: t('nav:my-list', 'My List'),
+      url: '/my-list',
+      icon: <ListViewIcon />
+    },
+    {
+      name: 'discover',
+      id: 'global-nav-discover-link',
+      label: t('nav:discover', 'Discover'),
+      url: '/explore',
+      icon: <DiscoverIcon />
+    }
+  ]
 
   const links = [
     {
@@ -203,11 +233,13 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     window.location.assign(`${LOGIN_URL}?src=navbar`)
   }
 
+  const linksToUse = showHome ? homeLinks : links
+
   return (
     <GlobalNavComponent
       pocketLogoOutboundUrl={'/'}
       appRootSelector="#__next"
-      links={links}
+      links={linksToUse}
       subLinks={subLinks}
       subset={subset}
       tag={tag}
