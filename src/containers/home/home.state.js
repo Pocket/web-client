@@ -17,6 +17,12 @@ import { HOME_HYDRATE } from 'actions'
 import { HOME_SAVE_REQUEST } from 'actions'
 import { HOME_UNSAVE_REQUEST } from 'actions'
 
+import { HOME_TOPIC_SECTION_SET } from 'actions'
+import { HOME_TOPIC_SECTION_UNSET } from 'actions'
+import { HOME_TOPIC_SECTION_REQUEST } from 'actions'
+import { HOME_TOPIC_SECTION_SUCCESS } from 'actions'
+import { HOME_TOPIC_SECTION_FAILURE } from 'actions'
+
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
@@ -27,17 +33,35 @@ export const hydrateHome = (hydrated) => ({ type: HOME_HYDRATE, hydrated }) //pr
 export const saveHomeItem = (id, url, position) => ({type: HOME_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const unSaveHomeItem = (id) => ({ type: HOME_UNSAVE_REQUEST, id }) //prettier-ignore
 
+export const setTopicSection = (topic) => ({type : HOME_TOPIC_SECTION_SET, topic}) //prettier-ignore
+export const unsetTopicSection = (topic) => ({type : HOME_TOPIC_SECTION_UNSET, topic}) //prettier-ignore
+
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
   // State for active list items
   latest: [],
   discover: [],
-  topic: []
+  topic: [],
+  topicSections: []
 }
 
 export const homeReducers = (state = initialState, action) => {
   switch (action.type) {
+    case HOME_TOPIC_SECTION_SET: {
+      const { topic } = action
+      const set = new Set([topic, ...state.topicSections])
+      return { ...state, topicSections: Array.from(set) }
+    }
+
+    case HOME_TOPIC_SECTION_UNSET: {
+      const { topic } = action
+      const filteredTopicSections = state.topicSections.filter(
+        (section) => section !== topic
+      )
+      return { ...state, topicSections: filteredTopicSections }
+    }
+
     case HOME_DATA_LATEST_SUCCESS: {
       const { items } = action
       return { ...state, latest: items }

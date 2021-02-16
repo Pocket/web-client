@@ -5,34 +5,35 @@ import { SideNav } from 'connectors/side-nav/side-nav'
 
 import Layout from 'layouts/with-sidebar'
 
-import { getHomeLatestData } from './home.state'
-import { getDiscoverData } from './home.state'
 import { getTopicList } from 'connectors/topic-list/topic-list.state'
-import { SectionHeader } from 'components/headers/section-header'
-import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
-import { CardList } from 'components/items-layout/dynamic-blocks'
-import { CardTopicsNav } from 'components/items-layout/topic-list'
-import { CallOutBrand } from 'components/call-out/call-out-brand'
+import { HomeJourneyHeader } from 'components/headers/home-header'
+import { HomeSectionHeader } from 'components/headers/home-header'
+import { TopicSelector } from 'components/topic-selector/topic-selector'
+
+import { setTopicSection } from './home.state'
+import { unsetTopicSection } from './home.state'
 
 export default function Collection(props) {
-  const { metaData = {}, subset = 'active' } = props
+  const { metaData = {} } = props
 
   const dispatch = useDispatch()
 
   const latestSaves = useSelector((state) => state.home.latest)
+  const topicSections = useSelector((state) => state.home.topicSections)
+
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
-
-  const discover = useSelector((state) => state.home.discover)
 
   // Get topicList for sections that require it
   const topics = useSelector((state) => state.topicList?.topicsByName)
 
+  // Actions
+  const handleTopicClick = (topic) => dispatch(setTopicSection(topic))
+
+  // Initialize data
   useEffect(() => {
-    dispatch(getHomeLatestData())
-    dispatch(getDiscoverData())
     dispatch(getTopicList())
-  }, [])
+  }, [dispatch])
 
   return (
     <Layout title={metaData.title} metaData={metaData}>
@@ -41,38 +42,32 @@ export default function Collection(props) {
         <main className="main">
           {latestSaves?.length ? (
             <>
-              <SectionHeader
+              <HomeSectionHeader
                 sectionTitle="Latest Saves"
                 sectionDescription="Dive into your content"
               />
-              <DynamicCardLayout>
-                {/* Top Lockup (left)*/}
-                <CardList
-                  type="lockupCenter"
-                  count={5}
-                  itemType="my-list"
-                  items={latestSaves}
-                />
-              </DynamicCardLayout>
             </>
           ) : (
-            <CallOutBrand />
-          )}
-          {discover?.length ? (
             <>
-              <CardTopicsNav topics={topics} track={() => {}} />
-              <br />
-              <br />
-              <SectionHeader
-                sectionTitle="Today’s essential reads"
-                sectionDescription="The best of the web"
+              <HomeJourneyHeader
+                sectionTitle="Start Your Journey Here"
+                sectionDescription="Select a few topics that you are interested in."
               />
-              <DynamicCardLayout>
-                {/* Top Lockup (left)*/}
-                <CardList type="lockupRight" count={5} items={discover} />
-              </DynamicCardLayout>
+              <TopicSelector
+                topics={topics}
+                handleTopicClick={handleTopicClick}
+              />
             </>
-          ) : null}
+          )}
+
+          {topicSections?.length
+            ? topicSections.map((topic) => (
+                <HomeSectionHeader
+                  sectionTitle={topic.display_name}
+                  sectionDescription="This will need to be manually set for this test"
+                />
+              ))
+            : null}
         </main>
       ) : null}
     </Layout>
