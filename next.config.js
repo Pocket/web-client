@@ -11,7 +11,10 @@ module.exports = withPlugins([withCSS, withSourceMaps], {
     SHOW_DEV: process.env.SHOW_DEV
   },
   rewrites() {
-    return [{ source: '/web-client-health', destination: '/health' }]
+    return [
+      { source: '/web-client-health', destination: '/health' },
+      { source: '/web-client-api/:path*', destination: '/api/:path*' }
+    ]
   },
   async redirects() {
     return [
