@@ -105,8 +105,6 @@ function PocketWebClient({ Component, pageProps, err }) {
     // loadOptinMonster()
   }, [user_status, sess_guid])
 
-  console.log(user_status)
-
   // Hydrate user features
   useEffect(() => {
     if (user_status === 'pending') return null
