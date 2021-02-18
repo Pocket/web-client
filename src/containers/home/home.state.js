@@ -2,6 +2,8 @@ import { takeLatest, put, takeEvery, select } from 'redux-saga/effects'
 import { getMyList } from 'common/api/my-list'
 import { getDiscoverFeed } from 'common/api/discover'
 import { getTopicFeed } from 'common/api/topics'
+import { saveItem } from 'common/api/saveItem'
+import { removeItem } from 'common/api/removeItem'
 import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { arrayToObject } from 'common/utilities'
@@ -16,7 +18,11 @@ import { HOME_DATA_DISCOVER_FAILURE } from 'actions'
 
 import { HOME_HYDRATE } from 'actions'
 import { HOME_SAVE_REQUEST } from 'actions'
+import { HOME_SAVE_SUCCESS } from 'actions'
+import { HOME_SAVE_FAILURE } from 'actions'
 import { HOME_UNSAVE_REQUEST } from 'actions'
+import { HOME_UNSAVE_SUCCESS } from 'actions'
+import { HOME_UNSAVE_FAILURE } from 'actions'
 
 import { HOME_TOPIC_SECTION_SET } from 'actions'
 import { HOME_TOPIC_SECTION_UNSET } from 'actions'
@@ -31,8 +37,8 @@ import { HYDRATE } from 'actions'
 export const getHomeLatestData = () => ({ type: HOME_DATA_LATEST_REQUEST }) //prettier-ignore
 export const getDiscoverData = () => ({ type: HOME_DATA_DISCOVER_REQUEST}) //prettier-ignore
 export const hydrateHome = (hydrated) => ({ type: HOME_HYDRATE, hydrated }) //prettier-ignore
-export const saveHomeItem = (id, url, position) => ({type: HOME_SAVE_REQUEST, id, url, position}) //prettier-ignore
-export const unSaveHomeItem = (id) => ({ type: HOME_UNSAVE_REQUEST, id }) //prettier-ignore
+export const saveHomeItem = (id, topic, url, position) => ({type: HOME_SAVE_REQUEST, id, topic, url, position}) //prettier-ignore
+export const unSaveHomeItem = (id, topic) => ({ type: HOME_UNSAVE_REQUEST, id, topic }) //prettier-ignore
 
 export const setTopicSection = (topic) => ({type : HOME_TOPIC_SECTION_SET, topic}) //prettier-ignore
 export const unsetTopicSection = (topic) => ({type : HOME_TOPIC_SECTION_UNSET, topic}) //prettier-ignore
@@ -72,6 +78,28 @@ export const homeReducers = (state = initialState, action) => {
       return { ...state, topics }
     }
 
+    case HOME_SAVE_REQUEST: {
+      const { id, topic } = action
+      return updateSaveStatus(state, id, topic, 'saving')
+    }
+    case HOME_SAVE_SUCCESS: {
+      const { id, topic } = action
+      return updateSaveStatus(state, id, topic, 'saved')
+    }
+    case HOME_SAVE_FAILURE: {
+      const { id, topic } = action
+      return updateSaveStatus(state, id, topic, 'unsaved')
+    }
+
+    case HOME_UNSAVE_SUCCESS: {
+      const { id, topic } = action
+      return updateSaveStatus(state, id, topic, 'unsaved')
+    }
+    case HOME_UNSAVE_FAILURE: {
+      const { id, topic } = action
+      return updateSaveStatus(state, id, topic, 'saved')
+    }
+
     case HOME_DATA_LATEST_SUCCESS: {
       const { items } = action
       return { ...state, latest: items }
@@ -102,14 +130,40 @@ export const homeReducers = (state = initialState, action) => {
   }
 }
 
+/** UPDATE SAVE STATUS
+ * Helper function to update save status for a specific item based on id
+ * @param {object} state Redux state object
+ * @param {string} id Item id to operate on
+ * @param {string} topic Topic item belongs to
+ * @param {string} save_status Value to update save status to
+ */
+export function updateSaveStatus(state, id, topic, save_status) {
+  const { items, itemsById } = state.topics[topic]
+  const topics = {
+    ...state.topics,
+    [topic]: {
+      items,
+      itemsById: {
+        ...itemsById,
+        [id]: {
+          ...itemsById[id],
+          save_status
+        }
+      }
+    }
+  }
+
+  return { ...state, topics }
+}
+
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const homeSagas = [
   takeLatest(HOME_DATA_LATEST_REQUEST, latestDataRequest),
   takeLatest(HOME_DATA_DISCOVER_REQUEST, discoverDataRequest),
-  takeLatest(HOME_TOPIC_SECTION_SET, topicDataRequest)
-  // takeEvery(HOME_DATA_SUCCESS, homeSaveRequest),
-  // takeEvery(HOME_DATA_FAILURE, homeUnSaveRequest)
+  takeLatest(HOME_TOPIC_SECTION_SET, topicDataRequest),
+  takeEvery(HOME_SAVE_REQUEST, homeSaveRequest),
+  takeEvery(HOME_UNSAVE_REQUEST, homeUnSaveRequest)
 ]
 
 /* SAGAS :: SELECTORS
@@ -164,6 +218,35 @@ function* topicDataRequest({ topic }) {
   } catch (error) {
     console.log('catch', error)
     yield put({ type: HOME_TOPIC_SECTION_FAILURE, error })
+  }
+}
+
+function* homeSaveRequest({ url, id, topic, position }) {
+  try {
+    const analytics = {
+      view: 'web',
+      section: 'home',
+      page: '/home/',
+      cxt_item_position: position
+    }
+
+    const response = yield saveItem(url, analytics)
+    if (response?.status !== 1) throw new Error('Unable to save')
+
+    yield put({ type: HOME_SAVE_SUCCESS, id, topic })
+  } catch (error) {
+    yield put({ type: HOME_SAVE_FAILURE, error })
+  }
+}
+
+function* homeUnSaveRequest({ id, topic }) {
+  try {
+    const response = yield removeItem(id)
+    if (response?.status !== 1) throw new Error('Unable to remove item')
+
+    yield put({ type: HOME_UNSAVE_SUCCESS, id, topic })
+  } catch (error) {
+    yield put({ type: HOME_UNSAVE_FAILURE, error })
   }
 }
 
