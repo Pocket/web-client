@@ -1,5 +1,4 @@
 // Vendor
-import { Fragment } from 'react'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SideNav } from 'connectors/side-nav/side-nav'
@@ -65,13 +64,12 @@ export default function Collection(props) {
 
           {topicSections?.length
             ? topicSections.map((topic) => (
-                <Fragment key={topic.display_name}>
-                  <HomeSectionHeader
-                    sectionTitle={topic.display_name}
-                    sectionDescription="This will need to be manually set for this test"
-                  />
+                <HomeSectionHeader
+                  key={topic.display_name}
+                  sectionTitle={topic.display_name}
+                  sectionDescription="This will need to be manually set for this test"
                   { /* topicData[topic.topic] */ }
-                </Fragment>
+                />
               ))
             : null}
         </main>
