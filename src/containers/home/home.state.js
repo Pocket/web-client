@@ -1,6 +1,7 @@
-import { takeLatest, put, takeEvery } from 'redux-saga/effects'
+import { takeLatest, put, takeEvery, select } from 'redux-saga/effects'
 import { getMyList } from 'common/api/my-list'
 import { getDiscoverFeed } from 'common/api/discover'
+import { getTopicFeed } from 'common/api/topics'
 import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { arrayToObject } from 'common/utilities'
@@ -42,8 +43,8 @@ const initialState = {
   // State for active list items
   latest: [],
   discover: [],
-  topic: [],
-  topicSections: []
+  topicSections: [],
+  topics: {}
 }
 
 export const homeReducers = (state = initialState, action) => {
@@ -60,6 +61,15 @@ export const homeReducers = (state = initialState, action) => {
         (section) => section !== topic
       )
       return { ...state, topicSections: filteredTopicSections }
+    }
+
+    case HOME_TOPIC_SECTION_SUCCESS: {
+      const { topic, data } = action
+      const topics = {
+        ...state.topics,
+        [topic]: data
+      }
+      return { ...state, topics }
     }
 
     case HOME_DATA_LATEST_SUCCESS: {
@@ -96,10 +106,15 @@ export const homeReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const homeSagas = [
   takeLatest(HOME_DATA_LATEST_REQUEST, latestDataRequest),
-  takeLatest(HOME_DATA_DISCOVER_REQUEST, discoverDataRequest)
+  takeLatest(HOME_DATA_DISCOVER_REQUEST, discoverDataRequest),
+  takeLatest(HOME_TOPIC_SECTION_SET, topicDataRequest)
   // takeEvery(HOME_DATA_SUCCESS, homeSaveRequest),
   // takeEvery(HOME_DATA_FAILURE, homeUnSaveRequest)
 ]
+
+/* SAGAS :: SELECTORS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+const getTopicData = (state) => state.home.topics
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -134,6 +149,24 @@ function* discoverDataRequest(action) {
   }
 }
 
+function* topicDataRequest({ topic }) {
+  try {
+    // check if topic data exists in state
+    const topicData = yield select(getTopicData)
+    if (topicData[topic.topic]) return
+
+    // fetch topic data
+    const { items, itemsById, error } = yield fetchTopicData(topic)
+    if (error) return yield put({ type: HOME_TOPIC_SECTION_FAILURE, error })
+
+    const data = { items, itemsById }
+    yield put({ type: HOME_TOPIC_SECTION_SUCCESS, topic: topic.topic, data })
+  } catch (error) {
+    console.log('catch', error)
+    yield put({ type: HOME_TOPIC_SECTION_FAILURE, error })
+  }
+}
+
 /** ASYNC Functions
  --------------------------------------------------------------- */
 
@@ -160,7 +193,7 @@ export async function fetchMyListData(params) {
     return { items, itemsById, total }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.log('discover.state', error)
+    console.log('home.state.mylist', error)
   }
 }
 
@@ -183,5 +216,33 @@ export async function fetchDiscoverData() {
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.log('discover.state', error)
+  }
+}
+
+// Async helper for cleaner code
+const mapIds = (item) => item.resolved_id
+
+/**
+ * fetchTopicData
+ * Make and async request for a Pocket v3 feed and return best data
+ * @return items {array} An array of derived items
+ */
+export async function fetchTopicData({ topic }) {
+  try {
+    const response = await getTopicFeed(topic, 3, 0, false)
+
+    if (!response.curated) return { error: 'No Items Returned' }
+
+    // Derive curated item data and create items by id
+    const { curated = [] } = response
+    const derivedCuratedItems = await deriveDiscoverItems(curated)
+    const curatedIds = derivedCuratedItems.map(mapIds)
+    const items = [...new Set(curatedIds)] // Unique entries only
+    const itemsById = arrayToObject(derivedCuratedItems, 'resolved_id')
+
+    return { items, itemsById }
+  } catch (error) {
+    //TODO: adjust this once error reporting strategy is defined.
+    console.log('home.state.topics', error)
   }
 }

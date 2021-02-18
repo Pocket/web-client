@@ -1,4 +1,5 @@
 // Vendor
+import { Fragment } from 'react'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SideNav } from 'connectors/side-nav/side-nav'
@@ -20,6 +21,7 @@ export default function Collection(props) {
 
   const latestSaves = useSelector((state) => state.home.latest)
   const topicSections = useSelector((state) => state.home.topicSections)
+  const topicData = useSelector((state) => state.home.topics)
 
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
@@ -55,6 +57,7 @@ export default function Collection(props) {
               />
               <TopicSelector
                 topics={topics}
+                topicSelections={topicSections}
                 handleTopicClick={handleTopicClick}
               />
             </>
@@ -62,10 +65,13 @@ export default function Collection(props) {
 
           {topicSections?.length
             ? topicSections.map((topic) => (
-                <HomeSectionHeader
-                  sectionTitle={topic.display_name}
-                  sectionDescription="This will need to be manually set for this test"
-                />
+                <Fragment key={topic.display_name}>
+                  <HomeSectionHeader
+                    sectionTitle={topic.display_name}
+                    sectionDescription="This will need to be manually set for this test"
+                  />
+                  { /* topicData[topic.topic] */ }
+                </Fragment>
               ))
             : null}
         </main>
