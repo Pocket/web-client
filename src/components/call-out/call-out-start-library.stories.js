@@ -1,7 +1,6 @@
-import {
-  CallOutStartLibrary,
-  CallOutStartLibraryExplore
-} from './call-out-start-library'
+import { CallOutStartLibrary } from './call-out-start-library'
+import { CallOutStartLibraryExplore } from './call-out-start-library'
+
 import { css } from 'linaria'
 
 export default {
