@@ -29,7 +29,13 @@ export default function Collection(props) {
   const topics = useSelector((state) => state.topicList?.topicsByName)
 
   // Actions
-  const handleTopicClick = (topic) => dispatch(setTopicSection(topic))
+  const handleTopicClick = (topic) => {
+    const topicAction = (topicSections.find(item => item.id === topic.id))
+      ? unsetTopicSection
+      : setTopicSection
+
+    dispatch(topicAction(topic))
+  }
 
   // Initialize data
   useEffect(() => {
