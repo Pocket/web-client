@@ -68,7 +68,6 @@ export default function Collection(props) {
                   key={topic.display_name}
                   sectionTitle={topic.display_name}
                   sectionDescription="This will need to be manually set for this test"
-                  { /* topicData[topic.topic] */ }
                 />
               ))
             : null}
