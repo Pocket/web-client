@@ -15,11 +15,11 @@ const storyWrapper = css`
 export const standard = () => {
   return (
     <div className={storyWrapper}>
-      <CallOutStartLibrary />
+      <CallOutStartLibrary onVisible={() => {}} />
     </div>
   )
 }
 
 export const ExplorePosition = () => {
-  return <CallOutStartLibraryExplore />
+  return <CallOutStartLibraryExplore handleImpression={() => {}} />
 }

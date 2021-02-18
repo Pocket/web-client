@@ -39,9 +39,9 @@ const wrapper = css`
     position: relative;
     text-align: left;
     max-width: 552px;
-    background-color: var(--color-teal100);
+    background-color: var(--color-calloutBackgroundPrimary);
     padding: var(--spacing150) 2.8125rem 0;
-    /* negative top margin maches bottom padding on aside */
+    /* negative top margin matches bottom padding on aside */
     margin: calc(-5.625rem + 1.5rem) 6rem 0 14rem;
     font-family: var(--fontSansSerif);
     font-size: var(--fontSize100);
@@ -59,7 +59,7 @@ const wrapper = css`
     font-weight: 500;
     line-height: 129%;
     padding: var(--spacing150) var(--spacing250) 5.625rem;
-    background-color: var(--color-coralLightest);
+    background-color: var(--color-calloutBackgroundSecondary);
   }
 
   .copy {
@@ -81,6 +81,7 @@ const wrapper = css`
     top: 0;
     left: calc(-1 * var(--size150));
     transform: translate(-100%, 50%);
+    stroke: var(--color-calloutAccent);
   }
 
   #pocket-hits-call-out-signup {
@@ -98,6 +99,12 @@ const wrapper = css`
       border-color: var(--color-canvas);
       border-radius: 4px;
     }
+
+    button:hover {
+      background-color: var(--color-actionPrimary);
+      text-decoration: underline;
+    }
+
     button[disabled] {
       padding: var(--spacing075) var(--spacing250);
     }
@@ -240,7 +247,6 @@ const CallOutPocketHitsSignup = ({
                 fill="none">
                 <defs />
                 <path
-                  stroke="#221F1F"
                   strokeMiterlimit="10"
                   strokeWidth="2"
                   d="M0 1.306c13.72 0 13.72 9.91 27.42 9.91 13.7 0 13.7-9.91 27.42-9.91 13.72 0 13.72 9.91 27.42 9.91 13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.42 9.91c13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.44 9.91"
