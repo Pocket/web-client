@@ -8,6 +8,7 @@ import { IMPRESSION_COMPONENT_UI } from 'connectors/snowplow/events'
 import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
 import { CONTENT_OPEN_TRIGGER_CLICK } from 'connectors/snowplow/events'
 import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
+import { getLinkOpenTarget } from 'connectors/snowplow/events'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -80,10 +81,13 @@ export const sendImpression = (identifier) => (trackImpression(
   identifier
 ))
 
-export const sendExternalLinkClick = (item, href) => (trackContentOpen(
-  href,
-  CONTENT_OPEN_TRIGGER_CLICK,
-  0, // position in list (zero since it's in reader)
-  item,
-  'reader.external-link'
-))
+export const sendExternalLinkClick = (item, href) => {
+  const destination = getLinkOpenTarget(href)
+  return trackContentOpen(
+    destination,
+    CONTENT_OPEN_TRIGGER_CLICK,
+    0, // position in list (zero since it's in reader)
+    item,
+    'reader.external-link'
+  )
+}
