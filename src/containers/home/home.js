@@ -1,6 +1,7 @@
 // Vendor
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { css } from 'linaria'
 import { SideNav } from 'connectors/side-nav/side-nav'
 
 import Layout from 'layouts/with-sidebar'
@@ -10,8 +11,16 @@ import { HomeJourneyHeader } from 'components/headers/home-header'
 import { HomeSectionHeader } from 'components/headers/home-header'
 import { TopicSelector } from 'components/topic-selector/topic-selector'
 
+import { HomeTopicsList } from 'connectors/item-card/home/list'
+
 import { setTopicSection } from './home.state'
 import { unsetTopicSection } from './home.state'
+import { saveHomeItem } from './home.state'
+import { unSaveHomeItem } from './home.state'
+
+const selectionStyles = css`
+  margin-bottom: 2.25rem;
+`
 
 export default function Collection(props) {
   const { metaData = {} } = props
@@ -48,14 +57,14 @@ export default function Collection(props) {
       {shouldRender ? (
         <main className="main">
           {latestSaves?.length ? (
-            <>
+            <div>
               <HomeSectionHeader
                 sectionTitle="Latest Saves"
                 sectionDescription="Dive into your content"
               />
-            </>
+            </div>
           ) : (
-            <>
+            <div className={selectionStyles}>
               <HomeJourneyHeader
                 sectionTitle="Start Your Journey Here"
                 sectionDescription="Select a few topics that you are interested in."
@@ -65,15 +74,16 @@ export default function Collection(props) {
                 topicSelections={topicSections}
                 handleTopicClick={handleTopicClick}
               />
-            </>
+            </div>
           )}
 
           {topicSections?.length
             ? topicSections.map((topic) => (
-                <HomeSectionHeader
+                <HomeTopicsList
                   key={topic.display_name}
-                  sectionTitle={topic.display_name}
-                  sectionDescription="This will need to be manually set for this test"
+                  saveAction={saveHomeItem}
+                  unSaveAction={unSaveHomeItem}
+                  {...topic}
                 />
               ))
             : null}

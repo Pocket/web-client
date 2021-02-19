@@ -17,6 +17,11 @@ export const pillboxStyle = css`
     }
   }
 
+  button {
+    font-weight: 400;
+    color: var(--color-textSecondary);
+  }
+
   .active button {
     border-color: var(--color-actionPrimaryHover);
     background: var(--color-actionPrimarySubdued);
