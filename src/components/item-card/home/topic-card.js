@@ -86,7 +86,6 @@ const card = css`
     bottom: 0;
     left: 0;
     width: 100%;
-    padding-bottom: 1.5em;
   }
 
   .actions {
@@ -108,11 +107,7 @@ export const Card = React.forwardRef(
     } = item
 
     return (
-      <article
-        className={card}
-        key={id}
-        ref={ref}
-        data-cy={`home-card-${id}`}>
+      <article className={card} key={id} ref={ref} data-cy={`home-card-${id}`}>
         <a
           href={open_url}
           onClick={onOpen}
