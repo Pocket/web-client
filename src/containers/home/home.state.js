@@ -1,25 +1,16 @@
 import { takeLatest, put, takeEvery, select } from 'redux-saga/effects'
-import { getMyList } from 'common/api/my-list'
-import { getDiscoverFeed } from 'common/api/discover'
+
 import { getTopicFeed } from 'common/api/topics'
+import { getCollectionSet } from 'common/api/collections'
 import { saveItem } from 'common/api/saveItem'
 import { removeItem } from 'common/api/removeItem'
-import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { arrayToObject } from 'common/utilities'
 
-import { HOME_DATA_LATEST_REQUEST } from 'actions'
-import { HOME_DATA_LATEST_SUCCESS } from 'actions'
-import { HOME_DATA_LATEST_FAILURE } from 'actions'
-
-import { HOME_DATA_DISCOVER_REQUEST } from 'actions'
-import { HOME_DATA_DISCOVER_SUCCESS } from 'actions'
-import { HOME_DATA_DISCOVER_FAILURE } from 'actions'
-
-import { HOME_HYDRATE } from 'actions'
 import { HOME_SAVE_REQUEST } from 'actions'
 import { HOME_SAVE_SUCCESS } from 'actions'
 import { HOME_SAVE_FAILURE } from 'actions'
+
 import { HOME_UNSAVE_REQUEST } from 'actions'
 import { HOME_UNSAVE_SUCCESS } from 'actions'
 import { HOME_UNSAVE_FAILURE } from 'actions'
@@ -30,13 +21,13 @@ import { HOME_TOPIC_SECTION_REQUEST } from 'actions'
 import { HOME_TOPIC_SECTION_SUCCESS } from 'actions'
 import { HOME_TOPIC_SECTION_FAILURE } from 'actions'
 
-import { HYDRATE } from 'actions'
+import { HOME_COLLECTION_REQUEST } from 'actions'
+import { HOME_COLLECTION_SUCCESS } from 'actions'
+import { HOME_COLLECTION_FAILURE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getHomeLatestData = () => ({ type: HOME_DATA_LATEST_REQUEST }) //prettier-ignore
-export const getDiscoverData = () => ({ type: HOME_DATA_DISCOVER_REQUEST}) //prettier-ignore
-export const hydrateHome = (hydrated) => ({ type: HOME_HYDRATE, hydrated }) //prettier-ignore
+export const getCollections = () => ({ type: HOME_COLLECTION_REQUEST })
 export const saveHomeItem = (id, topic, url, position) => ({type: HOME_SAVE_REQUEST, id, topic, url, position}) //prettier-ignore
 export const unSaveHomeItem = (id, topic) => ({ type: HOME_UNSAVE_REQUEST, id, topic }) //prettier-ignore
 
@@ -47,10 +38,9 @@ export const unsetTopicSection = (topic) => ({type : HOME_TOPIC_SECTION_UNSET, t
  --------------------------------------------------------------- */
 const initialState = {
   // State for active list items
-  latest: [],
-  discover: [],
   topicSections: [],
-  topics: {}
+  topics: {},
+  collectionSet: []
 }
 
 export const homeReducers = (state = initialState, action) => {
@@ -100,30 +90,10 @@ export const homeReducers = (state = initialState, action) => {
       return updateSaveStatus(state, id, topic, 'saved')
     }
 
-    case HOME_DATA_LATEST_SUCCESS: {
-      const { items } = action
-      return { ...state, latest: items }
+    case HOME_COLLECTION_SUCCESS: {
+      const { data: collectionSet } = action
+      return { ...state, collectionSet }
     }
-    case HOME_DATA_DISCOVER_SUCCESS: {
-      const { items } = action
-      return { ...state, discover: items }
-    }
-
-    case HOME_DATA_LATEST_FAILURE: {
-      const { error } = action
-      return { ...state, error }
-    }
-
-    case HOME_HYDRATE: {
-      const { hydrated } = action
-      return { ...state, ...hydrated }
-    }
-
-    // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
-    // it represents the state used to build the page on the server.
-    case HYDRATE:
-      const { mylist } = action.payload
-      return { ...state, ...mylist }
 
     default:
       return state
@@ -159,8 +129,7 @@ export function updateSaveStatus(state, id, topic, save_status) {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const homeSagas = [
-  takeLatest(HOME_DATA_LATEST_REQUEST, latestDataRequest),
-  takeLatest(HOME_DATA_DISCOVER_REQUEST, discoverDataRequest),
+  takeLatest(HOME_COLLECTION_REQUEST, collectionDataRequest),
   takeLatest(HOME_TOPIC_SECTION_SET, topicDataRequest),
   takeEvery(HOME_SAVE_REQUEST, homeSaveRequest),
   takeEvery(HOME_UNSAVE_REQUEST, homeUnSaveRequest)
@@ -172,36 +141,6 @@ const getTopicData = (state) => state.home.topics
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-function* latestDataRequest(action) {
-  try {
-    const { items, itemsById, error } = yield fetchMyListData({
-      count: 5,
-      offset: 0,
-      state: 'unread',
-      sort: 'newest'
-    })
-    if (error) yield put({ type: HOME_DATA_LATEST_FAILURE, error })
-
-    // Deriving data from the response
-    yield put({ type: HOME_DATA_LATEST_SUCCESS, items, itemsById })
-  } catch (error) {
-    console.log(error)
-    yield put({ type: HOME_DATA_LATEST_FAILURE, error })
-  }
-}
-
-function* discoverDataRequest(action) {
-  try {
-    const { items, itemsById, error } = yield fetchDiscoverData()
-
-    if (error) return yield put({ type: HOME_DATA_DISCOVER_FAILURE, error })
-
-    // Deriving data from the response
-    yield put({ type: HOME_DATA_DISCOVER_SUCCESS, items, itemsById })
-  } catch (error) {
-    yield put({ type: HOME_DATA_DISCOVER_FAILURE, error })
-  }
-}
 
 function* topicDataRequest({ topic }) {
   try {
@@ -218,6 +157,20 @@ function* topicDataRequest({ topic }) {
   } catch (error) {
     console.log('catch', error)
     yield put({ type: HOME_TOPIC_SECTION_FAILURE, error })
+  }
+}
+
+function* collectionDataRequest() {
+  try {
+    // fetch topic data
+    const { data, error } = yield fetchCollectionData({ count: 2 })
+
+    if (error) return yield put({ type: HOME_TOPIC_SECTION_FAILURE, error })
+
+    yield put({ type: HOME_COLLECTION_SUCCESS, data })
+  } catch (error) {
+    console.log('catch', error)
+    yield put({ type: HOME_COLLECTION_FAILURE, error })
   }
 }
 
@@ -254,58 +207,6 @@ function* homeUnSaveRequest({ id, topic }) {
  --------------------------------------------------------------- */
 
 /**
- * fetchMyListData
- * Make and async request for a Pocket v3 feed and return best data
- * @return items {array} An array of derived items
- */
-export async function fetchMyListData(params) {
-  try {
-    const response = await getMyList(params)
-    if (!response.list) return { error: 'No Items Returned' }
-
-    const total = response.total
-
-    const derivedItems = await deriveMyListItems(Object.values(response.list))
-
-    const items = derivedItems
-      .sort((a, b) => a.sort_id - b.sort_id)
-      .map((item) => item.item_id)
-
-    const itemsById = arrayToObject(derivedItems, 'item_id')
-
-    return { items, itemsById, total }
-  } catch (error) {
-    //TODO: adjust this once error reporting strategy is defined.
-    console.log('home.state.mylist', error)
-  }
-}
-
-/**
- * fetchDiscoverData
- * Make and async request for a Pocket v3 feed and return best data
- * @return items {array} An array of derived items
- */
-export async function fetchDiscoverData() {
-  try {
-    const response = await getDiscoverFeed()
-    if (!response.feed) return { error: 'no discover items' }
-
-    const derivedItems = await deriveDiscoverItems(response.feed)
-
-    const items = derivedItems.map((item) => item.resolved_id)
-    const itemsById = arrayToObject(derivedItems, 'resolved_id')
-
-    return { items, itemsById }
-  } catch (error) {
-    //TODO: adjust this once error reporting strategy is defined.
-    console.log('discover.state', error)
-  }
-}
-
-// Async helper for cleaner code
-const mapIds = (item) => item.resolved_id
-
-/**
  * fetchTopicData
  * Make and async request for a Pocket v3 feed and return best data
  * @return items {array} An array of derived items
@@ -319,11 +220,27 @@ export async function fetchTopicData({ topic }) {
     // Derive curated item data and create items by id
     const { curated = [] } = response
     const derivedCuratedItems = await deriveDiscoverItems(curated)
-    const curatedIds = derivedCuratedItems.map(mapIds)
+    const curatedIds = derivedCuratedItems.map((item) => item.resolved_id)
     const items = [...new Set(curatedIds)] // Unique entries only
     const itemsById = arrayToObject(derivedCuratedItems, 'resolved_id')
 
     return { items, itemsById }
+  } catch (error) {
+    //TODO: adjust this once error reporting strategy is defined.
+    console.log('home.state.topics', error)
+  }
+}
+
+/**
+ * fetchTopicData
+ * Make and async request for a Pocket v3 feed and return best data
+ * @return items {array} An array of derived items
+ */
+export async function fetchCollectionData({ count }) {
+  try {
+    const response = await getCollectionSet(count)
+    if (response.length) return { data: response }
+    return { error: 'No data found' }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.log('home.state.topics', error)
