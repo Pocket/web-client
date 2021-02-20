@@ -10,6 +10,8 @@ export const pillboxStyle = css`
     margin: 0;
     padding: 0;
     text-align: center;
+    padding-bottom: 1.5rem;
+    border-bottom: var(--dividerStyle);
 
     li {
       display: inline-block;
@@ -48,7 +50,12 @@ const TopicPill = ({ topic, handleTopicClick, active }) => {
   )
 }
 
-export const TopicSelector = ({ id, topics, topicSelections = [], handleTopicClick }) => {
+export const TopicSelector = ({
+  id,
+  topics,
+  topicSelections = [],
+  handleTopicClick
+}) => {
   const topicsKeys = Object.keys(topics)
   const topicsArray = topicsKeys.map((key) => topics[key])
   // don't display promoted topics
@@ -61,7 +68,7 @@ export const TopicSelector = ({ id, topics, topicSelections = [], handleTopicCli
           <TopicPill
             handleTopicClick={handleTopicClick}
             topic={topic}
-            active={topicSelections.find(item => item.id === topic.id)}
+            active={topicSelections.find((item) => item.id === topic.id)}
             key={`topics-pillbox-${id}-${topic.topic}`}
           />
         ))}
