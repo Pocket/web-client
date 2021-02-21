@@ -39,7 +39,8 @@ export const unsetTopicSection = (topic) => ({type : HOME_TOPIC_SECTION_UNSET, t
 const initialState = {
   itemsById: {},
   topicSections: [],
-  collectionSet: []
+  collectionSet: [],
+  recentSaves: []
 }
 
 export const homeReducers = (state = initialState, action) => {
@@ -74,7 +75,10 @@ export const homeReducers = (state = initialState, action) => {
       const { id } = action
       const itemsById = updateSaveStatus(state, id, 'saved')
       return { ...state, itemsById }
+      const recentSaves = new Set([id, ...state.recentSaves])
+      return { ...state, itemsById, recentSaves: Array.from(recentSaves) }
     }
+
     case HOME_SAVE_FAILURE: {
       const { id } = action
       const itemsById = updateSaveStatus(state, id, 'unsaved')
@@ -206,7 +210,7 @@ function* homeUnSaveRequest({ id, topic }) {
  */
 export async function fetchTopicData({ topic }) {
   try {
-    const response = await getTopicFeed(topic, 3, 0, false)
+    const response = await getTopicFeed(topic, 12, 0, false)
 
     if (!response.curated) return { error: 'No Items Returned' }
 

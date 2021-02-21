@@ -14,6 +14,7 @@ import { TopicSelector } from 'components/topic-selector/topic-selector'
 import { CollectionCard } from 'components/item-card/home/collection-card'
 
 import { HomeTopicsList } from 'connectors/item-card/home/listTopics'
+import { HomeRecentList } from 'connectors/item-card/home/listRecent'
 import { homeCollections } from 'components/items-layout/home-collections'
 
 import { setTopicSection } from './home.state'
@@ -25,6 +26,16 @@ const selectionStyles = css`
   margin-bottom: 2.25rem;
 `
 
+const homeStyle = css`
+  display: flex;
+  justify-content: center;
+  img {
+    display: inline-block;
+    width: 50%;
+    transform: translateX(-30px);
+  }
+`
+
 export default function Collection(props) {
   const { metaData = {} } = props
 
@@ -32,7 +43,7 @@ export default function Collection(props) {
 
   const collectionSet = useSelector((state) => state.home.collectionSet)
   const topicSections = useSelector((state) => state.home.topicSections)
-  const topicData = useSelector((state) => state.home.topics)
+  const recentSaves = useSelector((state) => state.home.recentSaves)
 
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
@@ -61,13 +72,15 @@ export default function Collection(props) {
     'Add more topics to your page'
   ]
   const journeyTitle =
-    journeyTitles[Math.min(topicSections?.length, Math.max(0, 3))]
+    journeyTitles[Math.min(topicSections?.length, Math.max(0, 2))]
 
   return (
     <Layout title={metaData.title} metaData={metaData}>
       <SideNav subset="home" />
       {shouldRender ? (
         <main className="main">
+          {recentSaves?.length ? <HomeRecentList /> : null}
+
           {topicSections?.length
             ? topicSections.map((topic) => (
                 <HomeTopicsList
@@ -82,7 +95,7 @@ export default function Collection(props) {
           <div className={selectionStyles}>
             <HomeJourneyHeader
               sectionTitle={journeyTitle}
-              sectionDescription="Select a few topics that you are interested in."
+              sectionDescription="Select topics that interest you to start building your page."
             />
             <TopicSelector
               topics={topics}

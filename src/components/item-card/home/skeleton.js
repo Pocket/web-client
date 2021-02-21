@@ -1,6 +1,10 @@
 import { cardStyle } from './topic-card'
 import { css, cx } from 'linaria'
+import { ChevronLeftIcon } from '@pocket/web-ui'
+import Link from 'next/link'
 
+import extension from 'static/images/home/extension.svg'
+import myList from 'static/images/home/myList.svg'
 
 const skeletonStyle = css`
   &.full {
@@ -59,6 +63,41 @@ export const Skeleton = ({ name, type, count }) => {
           <div className="titles smaller" />
         </article>
       ))}
+    </>
+  )
+}
+
+export const RecentSavesSkeleton = ({ count }) => {
+  const skeletonClass = cx(
+    cardStyle,
+    skeletonStyle,
+    'callout',
+    count === 1 && 'full'
+  )
+  return (
+    <>
+      {count === 2 ? (
+        <article className={skeletonClass}>
+          <div className="box">
+            <img src={extension} className="extension" />
+            Save content from anywhere:{' '}
+            <Link href={'/my-list/'}>
+              <a>Using the extension</a>
+            </Link>
+          </div>
+        </article>
+      ) : null}
+      {count === 1 ? (
+        <article className={skeletonClass}>
+          <div className="box">
+            <ChevronLeftIcon /> You can find all your saves in{' '}
+            <Link href={'/my-list/'}>
+              <a>My List</a>
+            </Link>
+            <img src={myList} className="my-list" />
+          </div>
+        </article>
+      ) : null}
     </>
   )
 }
