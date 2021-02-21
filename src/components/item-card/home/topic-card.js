@@ -6,7 +6,7 @@ import { SaveToPocket } from 'components/save-to-pocket/save-to-pocket'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { SyndicatedBadge } from 'components/item-card/discover/syndicated-badge'
 
-const card = css`
+export const cardStyle = css`
   height: 100%;
   width: 100%;
   padding: 0;
@@ -107,7 +107,11 @@ export const Card = React.forwardRef(
     } = item
 
     return (
-      <article className={card} key={id} ref={ref} data-cy={`home-card-${id}`}>
+      <article
+        className={cardStyle}
+        key={id}
+        ref={ref}
+        data-cy={`home-card-${id}`}>
         <a
           href={open_url}
           onClick={onOpen}
