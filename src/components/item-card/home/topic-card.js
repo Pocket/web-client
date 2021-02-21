@@ -61,7 +61,7 @@ const card = css`
     line-height: 1.22;
     padding: var(--size100) 0 0;
     margin: 0;
-    max-height: 4.4em;
+    max-height: 4.6em;
     overflow: hidden;
   }
 

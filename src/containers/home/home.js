@@ -13,7 +13,7 @@ import { HomeSectionHeader } from 'components/headers/home-header'
 import { TopicSelector } from 'components/topic-selector/topic-selector'
 import { CollectionCard } from 'components/item-card/home/collection-card'
 
-import { HomeTopicsList } from 'connectors/item-card/home/list'
+import { HomeTopicsList } from 'connectors/item-card/home/listTopics'
 import { homeCollections } from 'components/items-layout/home-collections'
 
 import { setTopicSection } from './home.state'
@@ -86,7 +86,7 @@ export default function Collection(props) {
             />
             <TopicSelector
               topics={topics}
-              topicSelections={topicSections}
+              topicSections={topicSections}
               handleTopicClick={handleTopicClick}
             />
           </div>

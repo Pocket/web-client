@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer'
 export const ItemCard = ({ id, topic, unSaveAction, saveAction, position }) => {
   // Get data from state
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const item = useSelector((state) => state.home.topics[topic]?.itemsById[id])
+  const item = useSelector((state) => state.home.itemsById[id])
 
   const { save_url, save_status } = item
   const dispatch = useDispatch()
@@ -18,10 +18,11 @@ export const ItemCard = ({ id, topic, unSaveAction, saveAction, position }) => {
     if (inView) console.log('impression')
   }, [inView])
 
-  const onSave = (isAuthenticated) => {
+  const onSave = () => {
     if (isAuthenticated) {
       if (save_status === 'saved') dispatch(unSaveAction(id, topic))
-      if (save_status !== 'saved') dispatch(saveAction(id, topic, save_url, position))
+      if (save_status !== 'saved')
+        dispatch(saveAction(id, topic, save_url, position))
       return
     }
 

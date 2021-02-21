@@ -53,7 +53,7 @@ const TopicPill = ({ topic, handleTopicClick, active }) => {
 export const TopicSelector = ({
   id,
   topics,
-  topicSelections = [],
+  topicSections = [],
   handleTopicClick
 }) => {
   const topicsKeys = Object.keys(topics)
@@ -68,7 +68,7 @@ export const TopicSelector = ({
           <TopicPill
             handleTopicClick={handleTopicClick}
             topic={topic}
-            active={topicSelections.find((item) => item.id === topic.id)}
+            active={topicSections.find((item) => item.id === topic.id)}
             key={`topics-pillbox-${id}-${topic.topic}`}
           />
         ))}

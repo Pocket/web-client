@@ -1,4 +1,4 @@
-import { takeLatest, put, takeEvery, select } from 'redux-saga/effects'
+import { put, takeEvery, select } from 'redux-saga/effects'
 
 import { getTopicFeed } from 'common/api/topics'
 import { getCollectionSet } from 'common/api/collections'
@@ -37,9 +37,8 @@ export const unsetTopicSection = (topic) => ({type : HOME_TOPIC_SECTION_UNSET, t
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  // State for active list items
+  itemsById: {},
   topicSections: [],
-  topics: {},
   collectionSet: []
 }
 
@@ -60,34 +59,38 @@ export const homeReducers = (state = initialState, action) => {
     }
 
     case HOME_TOPIC_SECTION_SUCCESS: {
-      const { topic, data } = action
-      const topics = {
-        ...state.topics,
-        [topic]: data
-      }
-      return { ...state, topics }
+      const { topic, itemsById, items } = action
+      const newItemsById = { ...state.itemsById, ...itemsById }
+      return { ...state, itemsById: newItemsById, [`${topic}Topic`]: items }
     }
 
     case HOME_SAVE_REQUEST: {
-      const { id, topic } = action
-      return updateSaveStatus(state, id, topic, 'saving')
+      const { id } = action
+      const itemsById = updateSaveStatus(state, id, 'saving')
+      return { ...state, itemsById }
     }
+
     case HOME_SAVE_SUCCESS: {
-      const { id, topic } = action
-      return updateSaveStatus(state, id, topic, 'saved')
+      const { id } = action
+      const itemsById = updateSaveStatus(state, id, 'saved')
+      return { ...state, itemsById }
     }
     case HOME_SAVE_FAILURE: {
-      const { id, topic } = action
-      return updateSaveStatus(state, id, topic, 'unsaved')
+      const { id } = action
+      const itemsById = updateSaveStatus(state, id, 'unsaved')
+      return { ...state, itemsById }
     }
 
     case HOME_UNSAVE_SUCCESS: {
-      const { id, topic } = action
-      return updateSaveStatus(state, id, topic, 'unsaved')
+      const { id } = action
+      const itemsById = updateSaveStatus(state, id, 'unsaved')
+      return { ...state, itemsById }
     }
+
     case HOME_UNSAVE_FAILURE: {
-      const { id, topic } = action
-      return updateSaveStatus(state, id, topic, 'saved')
+      const { id } = action
+      const itemsById = updateSaveStatus(state, id, 'saved')
+      return { ...state, itemsById }
     }
 
     case HOME_COLLECTION_SUCCESS: {
@@ -104,40 +107,26 @@ export const homeReducers = (state = initialState, action) => {
  * Helper function to update save status for a specific item based on id
  * @param {object} state Redux state object
  * @param {string} id Item id to operate on
- * @param {string} topic Topic item belongs to
  * @param {string} save_status Value to update save status to
  */
-export function updateSaveStatus(state, id, topic, save_status) {
-  const { items, itemsById } = state.topics[topic]
-  const topics = {
-    ...state.topics,
-    [topic]: {
-      items,
-      itemsById: {
-        ...itemsById,
-        [id]: {
-          ...itemsById[id],
-          save_status
-        }
-      }
-    }
-  }
-
-  return { ...state, topics }
+export function updateSaveStatus(state, id, save_status) {
+  const itemsById = state.itemsById
+  const item = itemsById[id]
+  return { ...itemsById, [id]: { ...item, save_status } }
 }
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const homeSagas = [
-  takeLatest(HOME_COLLECTION_REQUEST, collectionDataRequest),
-  takeLatest(HOME_TOPIC_SECTION_SET, topicDataRequest),
+  takeEvery(HOME_COLLECTION_REQUEST, collectionDataRequest),
+  takeEvery(HOME_TOPIC_SECTION_SET, topicDataRequest),
   takeEvery(HOME_SAVE_REQUEST, homeSaveRequest),
   takeEvery(HOME_UNSAVE_REQUEST, homeUnSaveRequest)
 ]
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-const getTopicData = (state) => state.home.topics
+const getTopicData = (state, topic) => state.home[`${topic}Topic`]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -145,15 +134,19 @@ const getTopicData = (state) => state.home.topics
 function* topicDataRequest({ topic }) {
   try {
     // check if topic data exists in state
-    const topicData = yield select(getTopicData)
-    if (topicData[topic.topic]) return
+    const topicData = yield select(getTopicData, topic)
+    if (topicData) return
 
     // fetch topic data
     const { items, itemsById, error } = yield fetchTopicData(topic)
     if (error) return yield put({ type: HOME_TOPIC_SECTION_FAILURE, error })
 
-    const data = { items, itemsById }
-    yield put({ type: HOME_TOPIC_SECTION_SUCCESS, topic: topic.topic, data })
+    yield put({
+      type: HOME_TOPIC_SECTION_SUCCESS,
+      topic: topic.topic,
+      items,
+      itemsById
+    })
   } catch (error) {
     console.log('catch', error)
     yield put({ type: HOME_TOPIC_SECTION_FAILURE, error })

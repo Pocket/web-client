@@ -1,7 +1,7 @@
 import { HomeSectionHeader } from 'components/headers/home-header'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { css } from 'linaria'
-import { ItemCard } from './card'
+import { ItemCard } from './cardTopic'
 import { cardGrid } from 'components/items-layout/virtualized-list'
 import classnames from 'classnames'
 
@@ -40,8 +40,8 @@ export const HomeTopicsList = ({
   saveAction,
   unSaveAction
 }) => {
-  const topicData = useSelector((state) => state.home.topics[topic])
-  const topicItems = topicData?.items
+  const topicItems = useSelector((state) => state.home[`${topic}Topic`])
+  const displayItems = topicItems?.slice(0, 3)
 
   return (
     <div className={topicRowStyles}>
@@ -54,8 +54,8 @@ export const HomeTopicsList = ({
         }
       />
       <section className={classnames(cardGrid, cardRowStyles)}>
-        {topicItems
-          ? topicItems.map((id, index) => (
+        {displayItems?.length
+          ? displayItems.map((id, index) => (
               <ItemCard
                 key={id}
                 id={id}
