@@ -42,7 +42,11 @@ export const HomeTopicsList = ({
   unSaveAction
 }) => {
   const topicItems = useSelector((state) => state.home[`${topic}Topic`])
-  const displayItems = topicItems?.slice(0, 3)
+  const recentSaves = useSelector((state) => state.home.recentSaves)
+
+  const displayItems = topicItems
+    ?.filter((id) => !recentSaves.includes(id))
+    .slice(0, 3)
 
   return (
     <div className={topicRowStyles}>

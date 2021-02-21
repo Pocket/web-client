@@ -74,7 +74,6 @@ export const homeReducers = (state = initialState, action) => {
     case HOME_SAVE_SUCCESS: {
       const { id } = action
       const itemsById = updateSaveStatus(state, id, 'saved')
-      return { ...state, itemsById }
       const recentSaves = new Set([id, ...state.recentSaves])
       return { ...state, itemsById, recentSaves: Array.from(recentSaves) }
     }

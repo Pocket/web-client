@@ -22,9 +22,14 @@ export const pillboxStyle = css`
   button {
     font-weight: 400;
     color: var(--color-textSecondary);
+    &:focus {
+      outline: none;
+      border-color: var(--color-actionPrimaryHover);
+    }
   }
 
-  .active button {
+  .active button,
+  button:focus {
     border-color: var(--color-actionPrimaryHover);
     background: var(--color-actionPrimarySubdued);
     color: var(--color-actionPrimaryHover);
