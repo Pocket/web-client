@@ -46,7 +46,7 @@ export const homeReducers = (state = initialState, action) => {
   switch (action.type) {
     case HOME_TOPIC_SECTION_SET: {
       const { topic } = action
-      const set = new Set([topic, ...state.topicSections])
+      const set = new Set([...state.topicSections, topic])
       return { ...state, topicSections: Array.from(set) }
     }
 
