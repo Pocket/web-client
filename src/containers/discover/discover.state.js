@@ -16,8 +16,6 @@ import { DISCOVER_ITEMS_UNSAVE_REQUEST } from 'actions'
 
 import { HYDRATE } from 'actions'
 
-import { HOME_DATA_DISCOVER_SUCCESS } from 'actions'
-
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getDiscoverData = () => ({ type: DISCOVER_DATA_REQUEST })

@@ -1,7 +1,7 @@
 import { HomeSectionHeader } from 'components/headers/home-header'
 import { useSelector } from 'react-redux'
 import { css } from 'linaria'
-import { ItemCard } from './cardRecent'
+import { ItemCard } from 'connectors/item-card/my-list/card'
 import { cardGrid } from 'components/items-layout/virtualized-list'
 import classnames from 'classnames'
 import { RecentSavesSkeleton } from 'components/item-card/home/skeleton'
@@ -20,7 +20,6 @@ export const HomeRecentList = () => {
   const recentSaves = useSelector((state) => state.home.recentSaves)
   const displayItems = recentSaves?.slice(0, 3)
   const showSkeleton = displayItems?.length < 3
-  const totalSkeltons = 3 - displayItems.length
 
   return (
     <div className={topicRowStyles}>

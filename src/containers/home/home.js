@@ -7,6 +7,7 @@ import { SideNav } from 'connectors/side-nav/side-nav'
 import Layout from 'layouts/with-sidebar'
 
 import { getTopicList } from 'connectors/topic-list/topic-list.state'
+import { getRecentSaves } from 'containers/home/home.state'
 import { getCollections } from 'containers/home/home.state'
 import { HomeJourneyHeader } from 'components/headers/home-header'
 import { HomeSectionHeader } from 'components/headers/home-header'
@@ -63,6 +64,7 @@ export default function Collection(props) {
   // Initialize data
   useEffect(() => {
     dispatch(getTopicList())
+    dispatch(getRecentSaves())
     dispatch(getCollections())
   }, [dispatch])
 

@@ -11,8 +11,6 @@ import { DISCOVER_ITEMS_UNSAVE_REQUEST } from 'actions'
 import { DISCOVER_ITEMS_UNSAVE_SUCCESS } from 'actions'
 import { DISCOVER_ITEMS_UNSAVE_FAILURE } from 'actions'
 
-import { HOME_DATA_DISCOVER_SUCCESS } from 'actions'
-
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
@@ -30,11 +28,6 @@ export const discoverItemsReducers = (state = initialState, action) => {
     case DISCOVER_ITEMS_HYDRATE: {
       const { hydrated } = action
       return { ...state, ...hydrated }
-    }
-
-    case HOME_DATA_DISCOVER_SUCCESS: {
-      const { itemsById } = action
-      return { ...state, ...itemsById }
     }
 
     case DISCOVER_ITEMS_SAVE_REQUEST: {

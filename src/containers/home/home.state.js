@@ -1,10 +1,11 @@
 import { put, takeEvery, select } from 'redux-saga/effects'
-
+import { getMyList } from 'common/api/my-list'
 import { getTopicFeed } from 'common/api/topics'
 import { getCollectionSet } from 'common/api/collections'
 import { saveItem } from 'common/api/saveItem'
 import { removeItem } from 'common/api/removeItem'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
+import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { arrayToObject } from 'common/utilities'
 
 import { HOME_SAVE_REQUEST } from 'actions'
@@ -25,9 +26,14 @@ import { HOME_COLLECTION_REQUEST } from 'actions'
 import { HOME_COLLECTION_SUCCESS } from 'actions'
 import { HOME_COLLECTION_FAILURE } from 'actions'
 
+import { HOME_RECENT_SAVES_REQUEST } from 'actions'
+import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
+import { HOME_RECENT_SAVES_FAILURE } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getCollections = () => ({ type: HOME_COLLECTION_REQUEST })
+export const getRecentSaves = () => ({ type: HOME_RECENT_SAVES_REQUEST })
 export const saveHomeItem = (id, topic, url, position) => ({type: HOME_SAVE_REQUEST, id, topic, url, position}) //prettier-ignore
 export const unSaveHomeItem = (id, topic) => ({ type: HOME_UNSAVE_REQUEST, id, topic }) //prettier-ignore
 
@@ -101,6 +107,12 @@ export const homeReducers = (state = initialState, action) => {
       return { ...state, collectionSet }
     }
 
+    case HOME_RECENT_SAVES_SUCCESS: {
+      const { items } = action
+      const recentSaves = new Set([...items, ...state.recentSaves])
+      return { ...state, recentSaves: Array.from(recentSaves) }
+    }
+
     default:
       return state
   }
@@ -121,6 +133,7 @@ export function updateSaveStatus(state, id, save_status) {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const homeSagas = [
+  takeEvery(HOME_RECENT_SAVES_REQUEST, recentDataRequest),
   takeEvery(HOME_COLLECTION_REQUEST, collectionDataRequest),
   takeEvery(HOME_TOPIC_SECTION_SET, topicDataRequest),
   takeEvery(HOME_SAVE_REQUEST, homeSaveRequest),
@@ -133,6 +146,23 @@ const getTopicData = (state, topic) => state.home[`${topic}Topic`]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
+function* recentDataRequest() {
+  try {
+    const { items, itemsById, error } = yield fetchMyListData({
+      count: 5,
+      offset: 0,
+      state: 'unread',
+      sort: 'newest'
+    })
+    if (error) yield put({ type: HOME_RECENT_SAVES_FAILURE, error })
+
+    // Deriving data from the response
+    yield put({ type: HOME_RECENT_SAVES_SUCCESS, items, itemsById })
+  } catch (error) {
+    console.log(error)
+    yield put({ type: HOME_RECENT_SAVES_FAILURE, error })
+  }
+}
 
 function* topicDataRequest({ topic }) {
   try {
@@ -182,7 +212,14 @@ function* homeSaveRequest({ url, id, topic, position }) {
     const response = yield saveItem(url, analytics)
     if (response?.status !== 1) throw new Error('Unable to save')
 
-    yield put({ type: HOME_SAVE_SUCCESS, id, topic })
+    const derivedItems = yield deriveMyListItems(
+      Object.values(response.action_results)
+    )
+
+    const items = derivedItems.map((item) => item.resolved_id)
+    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+
+    yield put({ type: HOME_SAVE_SUCCESS, id, items, itemsById })
   } catch (error) {
     yield put({ type: HOME_SAVE_FAILURE, error })
   }
@@ -201,6 +238,33 @@ function* homeUnSaveRequest({ id, topic }) {
 
 /** ASYNC Functions
  --------------------------------------------------------------- */
+
+/**
+ * fetchMyListData
+ * Make and async request for a Pocket v3 feed and return best data
+ * @return items {array} An array of derived items
+ */
+export async function fetchMyListData(params) {
+  try {
+    const response = await getMyList(params)
+    if (!response.list) return { error: 'No Items Returned' }
+
+    const total = response.total
+
+    const derivedItems = await deriveMyListItems(Object.values(response.list))
+
+    const items = derivedItems
+      .sort((a, b) => a.sort_id - b.sort_id)
+      .map((item) => item.resolved_id)
+
+    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+
+    return { items, itemsById, total }
+  } catch (error) {
+    //TODO: adjust this once error reporting strategy is defined.
+    console.log('discover.state', error)
+  }
+}
 
 /**
  * fetchTopicData
