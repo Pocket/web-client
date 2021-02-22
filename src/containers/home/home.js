@@ -54,7 +54,7 @@ export default function Collection(props) {
   // Initialize data
   useEffect(() => {
     dispatch(getTopicList())
-    dispatch(getRecentSaves())
+    // dispatch(getRecentSaves()) // Commenting this out to iterate on recent saves
     dispatch(getCollections())
   }, [dispatch])
 
