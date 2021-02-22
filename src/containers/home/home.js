@@ -27,16 +27,6 @@ const selectionStyles = css`
   margin-bottom: 2.25rem;
 `
 
-const homeStyle = css`
-  display: flex;
-  justify-content: center;
-  img {
-    display: inline-block;
-    width: 50%;
-    transform: translateX(-30px);
-  }
-`
-
 export default function Collection(props) {
   const { metaData = {} } = props
 
