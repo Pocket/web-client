@@ -115,6 +115,92 @@ const cardList = css`
   }
 `
 
+const cardDetail = css`
+  grid-column: span 12;
+  height: 155px;
+  padding: 1em 0;
+  border-bottom: 1px solid var(--color-dividerTertiary);
+
+  a.cardLink {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: var(--size150);
+    padding-bottom: 0;
+
+    .media {
+      grid-column: span 2;
+    }
+
+    .content {
+      grid-column: span 10;
+      position: relative;
+    }
+
+    .title {
+      margin-top: 0;
+      font-size: var(--fontSize100);
+      line-height: 1.286;
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .details {
+      font-size: var(--fontSize075);
+      line-height: 1.5;
+      padding: var(--size025) 0 0;
+    }
+
+    .excerpt {
+      font-size: var(--fontSize085);
+      max-height: 3.2em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+
+    .item-actions {
+      padding: 0;
+      &:after {
+        box-shadow: none;
+      }
+    }
+
+    .item-menu {
+      width: initial;
+    }
+
+    .footer {
+      align-items: center;
+      padding-top: 0.5rem;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-column-gap: var(--size150);
+    }
+
+    .bulkBacking {
+      padding: 0 0.5em;
+      transform: translate(-0.5em, -1em);
+    }
+
+    .tags {
+      grid-column: 3 / span 7;
+      overflow: hidden;
+      white-space: nowrap;
+      a {
+        font-size: 14px;
+        margin-right: 0.5em;
+        cursor: pointer;
+        text-decoration: none;
+      }
+    }
+    .actions {
+      grid-column: 10 / span 3;
+    }
+  }
+`
+
 /** Card
  * Item card for display.
  * @param {Object} props Props passed in from React
@@ -141,6 +227,7 @@ export const Card = ({
   const {
     item_id: id,
     status,
+    tags,
     favorite,
     title,
     thumbnail,
@@ -160,6 +247,7 @@ export const Card = ({
     cardShape === 'block' && `${cardBlock} block`,
     cardShape === 'wide' && `${cardWide} wide`,
     cardShape === 'list' && `${cardList} list`,
+    cardShape === 'detail' && `${cardDetail} detail`,
     !showExcerpt && 'noExcerpt',
     (!itemType || itemType === 'display') && 'noActions',
     !showMedia && 'noMedia',
@@ -185,6 +273,8 @@ export const Card = ({
 
   const type = itemType === 'display' ? false : itemType
   const ActionsMenu = bulkEdit ? ActionsBulkEdit : actionsTypes[type]
+
+  const showTags = cardShape === 'detail'
 
   return (
     <article
@@ -233,6 +323,8 @@ export const Card = ({
             id={id}
             selected={bulkSelected}
             position={position}
+            showTags={showTags}
+            tags={tags}
             status={status}
             favorite={favorite}
           />
@@ -249,7 +341,7 @@ Card.propTypes = {
   item: PropTypes.object,
   showExcerpt: PropTypes.bool,
   itemType: PropTypes.oneOf(['myList', 'discover', 'message']),
-  cardShape: PropTypes.oneOf(['block', 'wide', 'list']),
+  cardShape: PropTypes.oneOf(['block', 'wide', 'list', 'detail']),
   actions: PropTypes.object,
   bulkEdit: PropTypes.bool,
   bulkSelected: PropTypes.bool,
