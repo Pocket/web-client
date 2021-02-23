@@ -26,11 +26,13 @@ resource "aws_alb_listener_rule" "public_forward_101" {
     target_group_arn = aws_alb_target_group.public.arn
   }
 
-  condition {
-    host_header {
-      values = [var.domain_name]
-    }
-  }
+# Remove host condition so we can test with dotcom gateway
+#
+#  condition {
+#    host_header {
+#      values = [var.domain_name]
+#    }
+#  }
 
   condition {
     path_pattern {
@@ -75,11 +77,13 @@ resource "aws_alb_listener_rule" "public_forward_103" {
     target_group_arn = aws_alb_target_group.public.arn
   }
 
-  condition {
-    host_header {
-      values = [var.domain_name]
-    }
-  }
+ # Remove host condition so we can test with dotcom gateway
+ #
+ # condition {
+ #   host_header {
+ #     values = [var.domain_name]
+ #   }
+ # }
 
   condition {
     path_pattern {
@@ -108,11 +112,12 @@ resource "aws_alb_listener_rule" "public_forward_104" {
     }
   }
 
-  condition {
-    host_header {
-      values = [var.domain_name]
-    }
-  }
+# Remove host condition so we can test with dotcom gateway
+#  condition {
+#    host_header {
+#      values = [var.domain_name]
+#    }
+#  }
 
   condition {
     path_pattern {
@@ -134,11 +139,12 @@ resource "aws_alb_listener_rule" "public_forward_110" {
     target_group_arn = aws_alb_target_group.public.arn
   }
 
-  condition {
-    host_header {
-      values = [var.domain_name]
-    }
-  }
+# Remove host condition so we can test with dotcom gateway
+#  condition {
+#    host_header {
+#      values = [var.domain_name]
+#    }
+#  }
 
   condition {
     path_pattern {
