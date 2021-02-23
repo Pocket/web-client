@@ -46,8 +46,8 @@ const initialState = {
 export const itemAnalyticsReducers = (state = initialState, action) => {
   switch (action.type) {
     case SET_MY_LIST_IMPRESSION: {
-      const { position } = action
-      const impressions = { ...state.impressions, [position]: true }
+      const { item } = action
+      const impressions = { ...state.impressions, [item.item_id]: true }
       return { ...state, impressions }
     }
 
