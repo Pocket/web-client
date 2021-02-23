@@ -51,7 +51,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const shortcutSelected = shortcutId === id
 
   const itemImpression = () => {
-    if (!impression[position]) {
+    if (!impression[position] && item?.save_url) {
       dispatch(setImpression(position, item))
     }
   }
