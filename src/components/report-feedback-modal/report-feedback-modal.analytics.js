@@ -14,8 +14,7 @@ export const sendReportToSnowplow = (reportData, user, reportedItem) => {
 
   const contentEntity = createContentEntity(
     reportedItem?.save_url,
-    reportedItem?.resolved_id,
-    reportedItem?.item_id
+    reportedItem?.resolved_id
   )
 
   const snowplowEntities = [reportEntity, contentEntity]
