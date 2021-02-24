@@ -163,7 +163,10 @@ function* fireContentEngagmenet({ component, ui, identifier, position, items }) 
   const contentEntities = (items.length) ? items : [items]
   // limit content entities to BATCH_SIZE = 30
   if (contentEntities.length > BATCH_SIZE) contentEntities.length = BATCH_SIZE
-  const contentEntity = contentEntities.map(item => createContentEntity(item.save_url, item.item_id))
+  const contentEntity = contentEntities.map(item => {
+    const { save_url, item_id, id } = item
+    return createContentEntity(save_url, item_id || id) // id is bulk edit value
+  })
 
   const uiEntity = createUiEntity({
     type: ui,
