@@ -6,11 +6,22 @@ import { arrayToObject } from 'common/utilities'
 import myListResponse from 'mock/my-list.json'
 import discoverResponse from 'mock/discover.json'
 
-const discoverItems = deriveDiscoverItems(discoverResponse.feed)
-const discoverItem = discoverItems[0]
+const discoverItems = deriveDiscoverItems(discoverResponse.feed).map((item) => {
+  item.story_name = `Discover - ${item.title}`
+  return item
+})
 
-const myListItems = deriveMyListItems(Object.values(myListResponse.list))
-const itemsToDisplay = arrayToObject(myListItems, 'item_id')
+const myListItems = deriveMyListItems(Object.values(myListResponse.list)).map(
+  (item) => {
+    item.story_name = `My List - ${item.title}`
+    return item
+  }
+)
+
+const itemsToDisplay = arrayToObject(
+  [...myListItems, ...discoverItems],
+  'story_name'
+)
 
 export default {
   title: 'Card/Card Shapes',
@@ -53,12 +64,15 @@ export default {
 
 export const Card = (args) => {
   const item =
-    itemsToDisplay[args.itemToDisplay] || itemsToDisplay[myListItems[0].item_id]
+    itemsToDisplay[args.itemToDisplay] ||
+    itemsToDisplay[myListItems[0].story_name]
   return <CardComponent item={item} position={0} actions={{}} {...args} />
 }
+
 Card.args = {
   showExcerpt: true,
   showMedia: true,
   itemType: null,
+  tags: [],
   cardShape: 'block'
 }
