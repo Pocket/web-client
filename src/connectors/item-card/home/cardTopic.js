@@ -3,7 +3,16 @@ import { Card } from 'components/item-card/home/topic-card'
 import { useSelector, useDispatch } from 'react-redux'
 import { useInView } from 'react-intersection-observer'
 
-export const ItemCard = ({ id, topic, unSaveAction, saveAction, position }) => {
+export const ItemCard = ({
+  id,
+  topic,
+  unSaveAction,
+  saveAction,
+  impressionAction,
+  engagementAction,
+  openAction,
+  position
+}) => {
   // Get data from state
   const isAuthenticated = useSelector((state) => state.user.auth)
   const item = useSelector((state) => state.home.itemsById[id])
@@ -14,24 +23,23 @@ export const ItemCard = ({ id, topic, unSaveAction, saveAction, position }) => {
   // Fire item impression
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
   useEffect(() => {
-    // track impression event
-    if (inView) console.log('impression')
+    if (inView) impressionAction(item, position, id)
   }, [inView])
 
   const onSave = () => {
     if (isAuthenticated) {
-      if (save_status === 'saved') dispatch(unSaveAction(id, topic))
+      if (save_status === 'saved') engagementAction(item, position)
       if (save_status !== 'saved')
-        dispatch(saveAction(id, topic, save_url, position))
+        saveAction(item, id, save_url, position)
       return
     }
 
     // Not authenticated so just tracking the click
-    // unAuthSaveAction(position)
+    engagementAction(item, position)
   }
 
   const onOpen = () => {
-    // track open event
+    openAction(item, position)
   }
 
   return (

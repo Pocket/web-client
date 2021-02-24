@@ -30,15 +30,19 @@ import { HOME_RECENT_SAVES_REQUEST } from 'actions'
 import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
 import { HOME_RECENT_SAVES_FAILURE } from 'actions'
 
+import { HOME_SET_IMPRESSION } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getCollections = () => ({ type: HOME_COLLECTION_REQUEST })
 export const getRecentSaves = () => ({ type: HOME_RECENT_SAVES_REQUEST })
-export const saveHomeItem = (id, topic, url, position) => ({type: HOME_SAVE_REQUEST, id, topic, url, position}) //prettier-ignore
+export const saveHomeItem = (id, url, position) => ({type: HOME_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const unSaveHomeItem = (id, topic) => ({ type: HOME_UNSAVE_REQUEST, id, topic }) //prettier-ignore
 
 export const setTopicSection = (topic) => ({type : HOME_TOPIC_SECTION_SET, topic}) //prettier-ignore
 export const unsetTopicSection = (topic) => ({type : HOME_TOPIC_SECTION_UNSET, topic}) //prettier-ignore
+
+export const setHomeImpression = (id) => ({ type: HOME_SET_IMPRESSION, id }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -46,7 +50,8 @@ const initialState = {
   itemsById: {},
   topicSections: [],
   collectionSet: [],
-  recentSaves: []
+  recentSaves: [],
+  impressions: {}
 }
 
 export const homeReducers = (state = initialState, action) => {
@@ -111,6 +116,12 @@ export const homeReducers = (state = initialState, action) => {
       const { items } = action
       const recentSaves = new Set([...items, ...state.recentSaves])
       return { ...state, recentSaves: Array.from(recentSaves) }
+    }
+
+    case HOME_SET_IMPRESSION: {
+      const { id } = action
+      const impressions = { ...state.impressions, [id]: true }
+      return { ...state, impressions }
     }
 
     default:
@@ -200,7 +211,7 @@ function* collectionDataRequest() {
   }
 }
 
-function* homeSaveRequest({ url, id, topic, position }) {
+function* homeSaveRequest({ url, id, position }) {
   try {
     const analytics = {
       view: 'web',

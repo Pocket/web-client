@@ -39,7 +39,10 @@ export const HomeTopicsList = ({
   topic_slug,
   topic,
   saveAction,
-  unSaveAction
+  unSaveAction,
+  impressionAction,
+  engagementAction,
+  openAction
 }) => {
   const topicItems = useSelector((state) => state.home[`${topic}Topic`])
   const recentSaves = useSelector((state) => state.home.recentSaves)
@@ -67,6 +70,9 @@ export const HomeTopicsList = ({
               topic={topic}
               saveAction={saveAction}
               unSaveAction={unSaveAction}
+              impressionAction={impressionAction}
+              engagementAction={engagementAction}
+              openAction={openAction}
               position={index}
             />
           ))

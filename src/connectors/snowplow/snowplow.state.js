@@ -182,7 +182,8 @@ function* fireEngagement({ component, ui, identifier, position, value }) {
     type: ui,
     hierarchy: 0,
     identifier,
-    index: position
+    index: position,
+    value
   })
 
   const snowplowEntities = [uiEntity]

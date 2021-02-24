@@ -22,6 +22,13 @@ import { setTopicSection } from './home.state'
 import { unsetTopicSection } from './home.state'
 import { saveHomeItem } from './home.state'
 import { unSaveHomeItem } from './home.state'
+import { setHomeImpression } from './home.state'
+
+import { topicToggleEvent } from './home.analytics'
+import { topicImpressionEvent } from './home.analytics'
+import { topicSaveEvent } from './home.analytics'
+import { topicEngagementEvent } from './home.analytics'
+import { topicOpenEvent } from './home.analytics'
 
 const selectionStyles = css`
   margin-bottom: 2.25rem;
@@ -35,6 +42,7 @@ export default function Collection(props) {
   const collectionSet = useSelector((state) => state.home.collectionSet)
   const topicSections = useSelector((state) => state.home.topicSections)
   const recentSaves = useSelector((state) => state.home.recentSaves)
+  const impressions = useSelector((state) => state.home.impressions)
 
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
@@ -49,6 +57,27 @@ export default function Collection(props) {
       : setTopicSection
 
     dispatch(topicAction(topic))
+    dispatch(topicToggleEvent(topic.topic))
+  }
+
+  const handleTopicImpression = (item, position, id) => {
+    if (!impressions[id]) {
+      dispatch(topicImpressionEvent(item, position))
+      dispatch(setHomeImpression(id))
+    }
+  }
+
+  const handleSaveItem = (item, id, url, position) => {
+    dispatch(saveHomeItem(id, url, position))
+    dispatch(topicSaveEvent(item, position))
+  }
+
+  const handleTopicEngagement = (item, position) => {
+    dispatch(topicEngagementEvent(item, position))
+  }
+
+  const handleOpenEvent = (item, position) => {
+    dispatch(topicOpenEvent(item, position))
   }
 
   // Initialize data
@@ -77,8 +106,11 @@ export default function Collection(props) {
             ? topicSections.map((topic) => (
                 <HomeTopicsList
                   key={topic.display_name}
-                  saveAction={saveHomeItem}
+                  saveAction={handleSaveItem}
                   unSaveAction={unSaveHomeItem}
+                  impressionAction={handleTopicImpression}
+                  engagementAction={handleTopicEngagement}
+                  openAction={handleOpenEvent}
                   {...topic}
                 />
               ))
