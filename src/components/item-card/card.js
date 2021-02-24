@@ -17,6 +17,7 @@ import Link from 'next/link'
 
 const cardBlock = css`
   max-width: 552px;
+  grid-column: span 4;
   &.noMedia {
     a.cardLink .title {
       margin-top: 0;
@@ -26,7 +27,7 @@ const cardBlock = css`
 
 const cardWide = css`
   max-width: 745px;
-
+  grid-column: span 10;
   a.cardLink {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -72,9 +73,8 @@ const cardWide = css`
 `
 
 const cardList = css`
-  max-width: 940px;
   padding: var(--size100) 0;
-
+  grid-column: span 12;
   a.cardLink {
     display: grid;
     grid-template-columns: repeat(12, 1fr);

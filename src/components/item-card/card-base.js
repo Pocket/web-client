@@ -147,12 +147,21 @@ export const cardStyles = css`
     display: block;
   }
 
-  &.hero {
+  &.hero-block {
+    grid-row: span 3;
+  }
+
+  &.hero-list {
     grid-column: span 5;
-    grid-row: span 2;
+    grid-row: span 5;
+  }
+
+  &.hero-wide {
+    grid-column: span 5;
+    grid-row: span 3;
   }
 
   &.subset {
-    grid-column: span 7;
+    grid-column: span 8;
   }
 `

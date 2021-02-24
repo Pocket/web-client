@@ -25,9 +25,6 @@ const grid = css`
   align-items: start;
   grid-column-gap: var(--spacing150);
   grid-template-columns: repeat(12, 1fr);
-  article {
-    grid-column: span 4;
-  }
 `
 
 export default {
@@ -83,6 +80,12 @@ export const GridOfCards = (args) => {
     </div>
   )
 }
+GridOfCards.args = {
+  showExcerpt: true,
+  showMedia: true,
+  itemType: 'myList',
+  cardShape: 'block'
+}
 
 export const MixedLayout = (args) => {
   return (
@@ -90,19 +93,22 @@ export const MixedLayout = (args) => {
       {itemsToDisplay.map((item, index) => {
         const hero = {
           cardShape: 'block',
-          className: 'hero'
+          className: 'hero-block',
+          showMedia: true
         }
         const subset = {
-          cardShape: 'wide',
+          cardShape: 'detail',
           className: 'subset',
           showExcerpt: true,
-          showMedia: true
+          showMedia: true,
+          itemType: 'discover'
         }
 
         const layout = {
           0: hero,
           1: subset,
-          2: subset
+          2: subset,
+          3: subset
         }
 
         const argsToPass = { ...args, ...layout[index] }
@@ -119,9 +125,9 @@ export const MixedLayout = (args) => {
   )
 }
 
-GridOfCards.args = {
+MixedLayout.args = {
   showExcerpt: true,
   showMedia: true,
-  itemType: 'myList',
+  itemType: 'discover',
   cardShape: 'block'
 }
