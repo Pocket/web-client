@@ -89,7 +89,7 @@
   "dependencies": {
     "@n8tb1t/use-scroll-position": "2.0.3",
     "@pocket/web-localization": "0.5.0",
-    "@pocket/web-ui": "2.33.0",
+    "@pocket/web-ui": "2.33.1",
     "@pocket/web-utilities": "1.16.1",
     "@sentry/node": "5.24.2",
     "@sentry/react": "5.24.2",

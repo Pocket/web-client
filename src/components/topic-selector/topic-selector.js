@@ -1,7 +1,7 @@
 import React from 'react'
 import { css, cx } from 'linaria'
 import classNames from 'classnames'
-import { Pill } from '@pocket/web-ui'
+import { PillCheckbox } from '@pocket/web-ui'
 import { darkMode } from '@pocket/web-ui'
 
 export const pillboxStyle = css`
@@ -45,12 +45,14 @@ export const pillboxStyle = css`
 
 const TopicPill = ({ topic, handleTopicClick, active }) => {
   const handleClick = () => handleTopicClick(topic)
-
   return (
     <li className={classNames({ active })}>
-      <Pill onClick={handleClick} data-cy="topic-pill">
+      <PillCheckbox
+        isChecked={active}
+        onClick={handleClick}
+        data-cy="topic-pill">
         {topic.display_name}
-      </Pill>
+      </PillCheckbox>
     </li>
   )
 }
