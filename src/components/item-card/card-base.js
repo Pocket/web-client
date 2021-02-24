@@ -146,4 +146,13 @@ export const cardStyles = css`
     background-color: var(--color-navCurrentTab);
     display: block;
   }
+
+  &.hero {
+    grid-column: span 5;
+    grid-row: span 2;
+  }
+
+  &.subset {
+    grid-column: span 7;
+  }
 `
