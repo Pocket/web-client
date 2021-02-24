@@ -6,7 +6,7 @@ import { SyndicatedIcon } from '@pocket/web-ui'
 import { urlWithPocketRedirect } from 'common/utilities'
 import { CardMedia } from 'components/media/card-media'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
-
+import { ItemTags } from 'components/item-tags/item-tags'
 import { ActionsMyList } from 'connectors/item-card/actions/my-list'
 import { ActionsDiscover } from 'connectors/item-card/actions/discover'
 import { ActionsBulkEdit } from 'connectors/item-card/actions/bulk-edit'
@@ -97,6 +97,8 @@ const cardList = css`
       text-overflow: ellipsis;
     }
     .details {
+      font-size: var(--fontSize075);
+      line-height: 1.5;
       padding: 0;
     }
     .excerpt {
@@ -159,45 +161,47 @@ const cardDetail = css`
       text-overflow: ellipsis;
       display: block;
     }
+  }
+  .item-actions {
+    padding: 0;
+    &:after {
+      box-shadow: none;
+    }
+  }
 
-    .item-actions {
-      padding: 0;
-      &:after {
-        box-shadow: none;
-      }
-    }
+  .item-menu {
+    width: initial;
+  }
 
-    .item-menu {
-      width: initial;
-    }
+  .footer {
+    align-items: center;
+    align-content: center;
+    padding-top: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: var(--size150);
+  }
 
-    .footer {
-      align-items: center;
-      padding-top: 0.5rem;
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-column-gap: var(--size150);
-    }
+  .bulkBacking {
+    padding: 0 0.5em;
+    transform: translate(-0.5em, -1em);
+  }
 
-    .bulkBacking {
-      padding: 0 0.5em;
-      transform: translate(-0.5em, -1em);
+  .tags {
+    grid-column: 3 / span 7;
+    overflow: hidden;
+    white-space: nowrap;
+    a {
+      font-size: 14px;
+      margin-right: 0.5em;
+      cursor: pointer;
+      text-decoration: none;
     }
-
-    .tags {
-      grid-column: 3 / span 7;
-      overflow: hidden;
-      white-space: nowrap;
-      a {
-        font-size: 14px;
-        margin-right: 0.5em;
-        cursor: pointer;
-        text-decoration: none;
-      }
-    }
-    .actions {
-      grid-column: 10 / span 3;
-    }
+  }
+  .actions {
+    grid-column: 10 / span 3;
+    padding: 0;
+    justify-content: flex-end;
   }
 `
 
@@ -222,7 +226,8 @@ export const Card = ({
   actions,
   bulkEdit,
   bulkSelected,
-  position
+  position,
+  className
 }) => {
   const {
     item_id: id,
@@ -252,7 +257,8 @@ export const Card = ({
     (!itemType || itemType === 'display') && 'noActions',
     !showMedia && 'noMedia',
     bulkEdit && 'bulkEdit',
-    bulkSelected && 'selected'
+    bulkSelected && 'selected',
+    className
   )
 
   const selectBulk = (event) => {
@@ -318,6 +324,7 @@ export const Card = ({
         </a>
       </Link>
       <footer className="footer">
+        {showTags ? <ItemTags tags={tags} /> : null}
         {type ? (
           <ActionsMenu
             id={id}
@@ -340,7 +347,7 @@ Card.propTypes = {
   */
   item: PropTypes.object,
   showExcerpt: PropTypes.bool,
-  itemType: PropTypes.oneOf(['myList', 'discover', 'message']),
+  itemType: PropTypes.oneOf(['display', 'myList', 'discover', 'message']),
   cardShape: PropTypes.oneOf(['block', 'wide', 'list', 'detail']),
   actions: PropTypes.object,
   bulkEdit: PropTypes.bool,

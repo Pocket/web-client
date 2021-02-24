@@ -7,7 +7,7 @@ import { ArchiveIcon } from '@pocket/web-ui'
 import { AddIcon } from '@pocket/web-ui'
 import { FavoriteIcon } from '@pocket/web-ui'
 import { TagIcon } from '@pocket/web-ui'
-import { ItemTags } from './item-tags'
+
 import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 
@@ -18,14 +18,7 @@ import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
 import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
 
-export function ActionsMyList({
-  id,
-  position,
-  status,
-  favorite,
-  tags,
-  showTags
-}) {
+export function ActionsMyList({ id, position, status, favorite }) {
   const dispatch = useDispatch()
 
   const itemShare = () => dispatch(itemsShareAction({ id, position }))
@@ -48,7 +41,6 @@ export function ActionsMyList({
 
   return (
     <div className="actions">
-      {showTags ? <ItemTags tags={tags} /> : null}
       <ItemActions
         menuItems={[
           {
