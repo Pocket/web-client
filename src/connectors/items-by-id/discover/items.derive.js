@@ -15,6 +15,7 @@ export function deriveDiscoverItems(response) {
   return response.map((feedItem) => {
     return {
       resolved_id: feedItem.item?.resolved_id,
+      item_id: feedItem.item?.item_id || feedItem.item?.resolved_id,
       title: displayTitle(feedItem),
       thumbnail: displayThumbnail(feedItem),
       publisher: displayPublisher(feedItem),
