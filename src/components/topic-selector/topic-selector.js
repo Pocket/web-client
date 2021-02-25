@@ -1,31 +1,21 @@
 import React from 'react'
-import { css, cx } from 'linaria'
-import classNames from 'classnames'
+import { css } from 'linaria'
 import { PillCheckbox } from '@pocket/web-ui'
 import { darkMode } from '@pocket/web-ui'
 
 export const pillboxStyle = css`
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    padding-bottom: 1.5rem;
-    border-bottom: var(--dividerStyle);
+  padding: 0 3rem 1.5rem;
+  border-bottom: var(--dividerStyle);
 
-    li {
-      display: inline-block;
-      margin: 0 var(--spacing025) var(--spacing075);
-    }
+  .pillContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
-  button {
-    font-weight: 400;
-    color: var(--color-textSecondary);
-    &:focus {
-      outline: none;
-      border-color: var(--color-actionPrimaryHover);
-    }
+  label {
+    white-space: nowrap;
+    margin-right: 0.5rem;
   }
 
   .active button,
@@ -46,14 +36,12 @@ export const pillboxStyle = css`
 const TopicPill = ({ topic, handleTopicClick, active }) => {
   const handleClick = () => handleTopicClick(topic)
   return (
-    <li className={classNames({ active })}>
-      <PillCheckbox
-        isChecked={active}
-        onClick={handleClick}
-        data-cy="topic-pill">
-        {topic.display_name}
-      </PillCheckbox>
-    </li>
+    <PillCheckbox
+      isChecked={active}
+      onClick={handleClick}
+      data-cy="topic-pill"
+      name={topic.display_name}
+    />
   )
 }
 
@@ -70,7 +58,7 @@ export const TopicSelector = ({
 
   return (
     <div className={pillboxStyle}>
-      <ul>
+      <div className="pillContainer">
         {sortedTopics.map((topic) => (
           <TopicPill
             handleTopicClick={handleTopicClick}
@@ -79,7 +67,7 @@ export const TopicSelector = ({
             key={`topics-pillbox-${id}-${topic.topic}`}
           />
         ))}
-      </ul>
+      </div>
     </div>
   )
 }
