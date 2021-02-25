@@ -61,6 +61,24 @@ jobs:
           name: Run unit tests
           command: npm test
 
+
+  # ——————————————————————————————————————————————————————————————
+  # Release: This will tag the branch and generate a changelog
+  # ——————————————————————————————————————————————————————————————
+  release:
+    # CPU and RAM resources for the job.
+    resource_class: small
+    # Define the container we will run the task in (standard node)
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - setup
+      - add_ssh_keys:
+          fingerprints:
+            - '95:3f:a9:02:0d:06:71:f9:5d:90:1e:a0:e5:e3:c3:25'
+      # Semantic Release
+      - run: npx semantic-release
+
   # ——————————————————————————————————————————————————————————————
   # Integration Test: Make sure our happy paths have not regressed
   # ——————————————————————————————————————————————————————————————
@@ -172,6 +190,7 @@ jobs:
             echo 'export AWS_ECR_ACCOUNT_PROD_URL="${ACCOUNT_ID_PROD}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
             echo 'export AWS_ECR_ACCOUNT_DEV_URL="${ACCOUNT_ID_DEV}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
             echo 'export AWS_ECR_ACCOUNT_URL="${AWS_ECR_ACCOUNT_PROD_URL}"' >> $BASH_ENV
+            echo 'export RELEASE_VERSION="$(cat .version)"' >> $BASH_ENV
       - attach_workspace:
           at: /tmp/workspace
       - run:
@@ -187,6 +206,7 @@ jobs:
           tag: $CIRCLE_SHA1
           path: /tmp/workspace/app_prod
           dockerfile: /tmp/workspace/app_prod/Dockerfile
+          extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION}
       - assume-role/assume-role:
           account-id: $ACCOUNT_ID_DEV
       - run:
@@ -375,12 +395,17 @@ workflows:
       # unit test all the files
       - unit_tests:
           <<: *not_main
+      # Generate a changelog tag when main is updated
+      - release:
+          <<: *only_main
       # conditionally building deployment with or without asset prefix
       - build_deployment:
           <<: *only_main
           prefix: "https://assets.getpocket.com/web-client"
           showdev: ""
           name: build_production
+          requires:
+            - release
       - build_deployment:
           <<: *not_main
           prefix: ""
@@ -404,7 +429,7 @@ workflows:
           <<: *only_main
           requires:
             - build_production_container
-      # conditional push production build and assets (css/js)
+      # Check to make sure our terraform is correct on branches
       - deploy:
           <<: *not_main
           deploy: false
