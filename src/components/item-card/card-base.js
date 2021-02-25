@@ -163,5 +163,15 @@ export const cardStyles = css`
 
   &.subset {
     grid-column: span 8;
+    a.cardLink {
+    .media {
+      grid-column: span 4;
+    }
+    .content {
+      grid-column: span 8;
+    }
+    .title{
+      white-space: initial;
+    }
   }
 `
