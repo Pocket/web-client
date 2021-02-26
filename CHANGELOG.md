@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/Pocket/web-client/compare/v1.0.2...v1.0.3) (2021-02-26)
+
+
+### Bug Fixes
+
+* **home:** enable local storage of selected topics ([4e4fc4c](https://github.com/Pocket/web-client/commit/4e4fc4c6bc194c85436645076ee2f3935f582897))
+
 ## [1.0.2](https://github.com/Pocket/web-client/compare/v1.0.1...v1.0.2) (2021-02-26)
 
 

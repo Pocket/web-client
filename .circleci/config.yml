@@ -139,13 +139,17 @@ jobs:
           fingerprints:
             - "95:3f:a9:02:0d:06:71:f9:5d:90:1e:a0:e5:e3:c3:25"
       - run:
+          name: Setup common environment variables
+          command: |
+            echo 'export RELEASE_VERSION="$(cat /tmp/workspace/.version)"' >> $BASH_ENV
+      - run:
           name: Set version
           command: |
             mkdir -p config
             echo "module.exports = '$CIRCLE_SHA1';" > ./config/version.js
       - run:
           name: Build
-          command: ASSET_PREFIX=<<parameters.prefix>> SHOW_DEV=<<parameters.showdev>> NODE_ENV=production npm run build
+          command: RELEASE_VERSION=${RELEASE_VERSION} ASSET_PREFIX=<<parameters.prefix>> SHOW_DEV=<<parameters.showdev>> NODE_ENV=production npm run build
       # Copy built files to app_prod folder
       - run:
           name: Setup workspace
@@ -206,6 +210,9 @@ jobs:
             echo 'export AWS_ECR_ACCOUNT_DEV_URL="${ACCOUNT_ID_DEV}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
             echo 'export AWS_ECR_ACCOUNT_URL="${AWS_ECR_ACCOUNT_PROD_URL}"' >> $BASH_ENV
             echo 'export RELEASE_VERSION="$(cat /tmp/workspace/.version)"' >> $BASH_ENV
+      - run: 
+          name: "What version is being built?"
+          command: echo ${RELEASE_VERSION}
       - run:
           name: Copy App
           command: |
@@ -417,6 +424,8 @@ workflows:
           prefix: "https://assets.getpocket.com/web-client"
           showdev: ""
           name: build_production
+          requires:
+            - release
       # we are building on branch to make sure there are no build errors
       - build_deployment:
           <<: *not_main
@@ -438,7 +447,6 @@ workflows:
       - build_production_container:
           requires:
             - build_production
-            - release
       - tag:
           <<: *only_main
           requires:
