@@ -28,27 +28,35 @@ function GlobalNavBulkEditConnected({ onClose }) {
   const clearBulkItems = () => dispatch(itemsBulkClear())
 
   const deleteAction = () => {
-    dispatch(sendBulkDeleteEvent(bulkItems))
-    dispatch(itemsDeleteAction(bulkItems))
+    if (bulkItemsCount) {
+      dispatch(sendBulkDeleteEvent(bulkItems))
+      dispatch(itemsDeleteAction(bulkItems))
+    }
   }
 
   const tagAction = () => {
-    dispatch(sendBulkTagEvent(bulkItems))
-    dispatch(itemsTagAction(bulkItems))
+    if (bulkItemsCount) {
+      dispatch(sendBulkTagEvent(bulkItems))
+      dispatch(itemsTagAction(bulkItems))
+    }
   }
 
   const archiveFunction =
     batchStatus === 'archive' ? itemsArchiveBatch : itemsUnarchiveBatch
   const archiveAction = () => {
-    dispatch(sendBulkArchiveEvent(bulkItems, batchStatus === 'archive'))
-    dispatch(archiveFunction(bulkItems))
+    if (bulkItemsCount) {
+      dispatch(sendBulkArchiveEvent(bulkItems, batchStatus === 'archive'))
+      dispatch(archiveFunction(bulkItems))
+    }
   }
 
   const favoriteFunction =
     batchFavorite === 'favorite' ? itemsFavoriteBatch : itemsUnFavoriteBatch
   const favoriteAction = () => {
-    dispatch(sendBulkFavoriteEvent(bulkItems, batchFavorite === 'favorite'))
-    dispatch(favoriteFunction(bulkItems))
+    if (bulkItemsCount) {
+      dispatch(sendBulkFavoriteEvent(bulkItems, batchFavorite === 'favorite'))
+      dispatch(favoriteFunction(bulkItems))
+    }
   }
 
   return (
