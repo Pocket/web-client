@@ -404,11 +404,6 @@ workflows:
           prefix: "https://assets.getpocket.com/web-client"
           showdev: ""
           name: build_production
-      - build_deployment:
-          <<: *not_main
-          prefix: ""
-          showdev: "included"
-          name: build_feature
       # Cypress Integration Tests on feature branches
       # - integration_tests:
       #     <<: *not_main
