@@ -404,12 +404,14 @@ workflows:
           prefix: "https://assets.getpocket.com/web-client"
           showdev: ""
           name: build_production
-      # Cypress Integration Tests on feature branches
+
+      # Cypress Integration Tests
       # - integration_tests:
-      #     <<: *not_main
+      #     <<: *only_main
       #     requires:
       #       - push_feature_assets
       #       - deploy_feature
+
       # conditional push production build and assets (css/js) for main branch
       - push_production_assets:
           <<: *only_main
