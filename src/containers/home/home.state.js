@@ -1,4 +1,5 @@
 import { put, takeEvery, select } from 'redux-saga/effects'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
 import { getMyList } from 'common/api/my-list'
 import { getTopicFeed } from 'common/api/topics'
 import { getCollectionSet } from 'common/api/collections'
@@ -7,6 +8,10 @@ import { removeItem } from 'common/api/removeItem'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { arrayToObject } from 'common/utilities'
+
+import { CACHE_KEY_HOME_STORED_TOPICS } from 'common/constants'
+import { HOME_SET_PREFERENCES } from 'actions'
+import { HOME_HYDRATE } from 'actions'
 
 import { HOME_SAVE_REQUEST } from 'actions'
 import { HOME_SAVE_SUCCESS } from 'actions'
@@ -32,8 +37,12 @@ import { HOME_RECENT_SAVES_FAILURE } from 'actions'
 
 import { HOME_SET_IMPRESSION } from 'actions'
 
+import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
+export const homeSetPreferences = () => ({ type: HOME_SET_PREFERENCES })
+
 export const getCollections = () => ({ type: HOME_COLLECTION_REQUEST })
 export const getRecentSaves = () => ({ type: HOME_RECENT_SAVES_REQUEST })
 export const saveHomeItem = (id, url, position) => ({type: HOME_SAVE_REQUEST, id, url, position}) //prettier-ignore
@@ -56,6 +65,11 @@ const initialState = {
 
 export const homeReducers = (state = initialState, action) => {
   switch (action.type) {
+    case HOME_HYDRATE: {
+      const { topicSections } = action
+      return { ...state, topicSections }
+    }
+
     case HOME_TOPIC_SECTION_SET: {
       const { topic } = action
       const set = new Set([...state.topicSections, topic])
@@ -64,9 +78,7 @@ export const homeReducers = (state = initialState, action) => {
 
     case HOME_TOPIC_SECTION_UNSET: {
       const { topic } = action
-      const filteredTopicSections = state.topicSections.filter(
-        (section) => section !== topic
-      )
+      const filteredTopicSections = state.topicSections.filter((section) => section.id !== topic.id)
       return { ...state, topicSections: filteredTopicSections }
     }
 
@@ -124,6 +136,10 @@ export const homeReducers = (state = initialState, action) => {
       return { ...state, impressions }
     }
 
+    case SNOWPLOW_TRACK_PAGE_VIEW: {
+      return { ...state, impressions: {} }
+    }
+
     default:
       return state
   }
@@ -144,19 +160,35 @@ export function updateSaveStatus(state, id, save_status) {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const homeSagas = [
+  takeEvery(HOME_SET_PREFERENCES, homePreferences),
   takeEvery(HOME_RECENT_SAVES_REQUEST, recentDataRequest),
   takeEvery(HOME_COLLECTION_REQUEST, collectionDataRequest),
+  takeEvery(HOME_TOPIC_SECTION_REQUEST, topicDataRequest),
   takeEvery(HOME_TOPIC_SECTION_SET, topicDataRequest),
   takeEvery(HOME_SAVE_REQUEST, homeSaveRequest),
-  takeEvery(HOME_UNSAVE_REQUEST, homeUnSaveRequest)
+  takeEvery(HOME_UNSAVE_REQUEST, homeUnSaveRequest),
+  takeEvery(HOME_TOPIC_SECTION_SET, storeTopicPreferences),
+  takeEvery(HOME_TOPIC_SECTION_UNSET, storeTopicPreferences)
 ]
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getTopicData = (state, topic) => state.home[`${topic}Topic`]
+const getTopicSections = (state) => state.home.topicSections
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
+function* homePreferences() {
+  const storedSections = localStore.getItem(CACHE_KEY_HOME_STORED_TOPICS)
+  const topicSections = storedSections ? JSON.parse(storedSections) : []
+
+  for (var i = 0; i < topicSections.length; i++) {
+    yield put({ type: HOME_TOPIC_SECTION_REQUEST, topic: topicSections[i] })
+  }
+
+  yield put({ type: HOME_HYDRATE, topicSections })
+}
+
 function* recentDataRequest() {
   try {
     const { items, itemsById, error } = yield fetchMyListData({
@@ -178,7 +210,7 @@ function* recentDataRequest() {
 function* topicDataRequest({ topic }) {
   try {
     // check if topic data exists in state
-    const topicData = yield select(getTopicData, topic)
+    const topicData = yield select(getTopicData, topic.topic)
     if (topicData) return
 
     // fetch topic data
@@ -245,6 +277,11 @@ function* homeUnSaveRequest({ id, topic }) {
   } catch (error) {
     yield put({ type: HOME_UNSAVE_FAILURE, error })
   }
+}
+
+function* storeTopicPreferences({ topic }) {
+  const topicSections = yield select(getTopicSections)
+  localStore.setItem(CACHE_KEY_HOME_STORED_TOPICS, JSON.stringify(topicSections))
 }
 
 /** ASYNC Functions

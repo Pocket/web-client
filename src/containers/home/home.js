@@ -18,6 +18,7 @@ import { HomeTopicsList } from 'connectors/item-card/home/listTopics'
 import { HomeRecentList } from 'connectors/item-card/home/listRecent'
 import { homeCollections } from 'components/items-layout/home-collections'
 
+import { homeSetPreferences } from './home.state'
 import { setTopicSection } from './home.state'
 import { unsetTopicSection } from './home.state'
 import { saveHomeItem } from './home.state'
@@ -82,6 +83,7 @@ export default function Collection(props) {
 
   // Initialize data
   useEffect(() => {
+    dispatch(homeSetPreferences())
     dispatch(getTopicList())
     // dispatch(getRecentSaves()) // Commenting this out to iterate on recent saves
     dispatch(getCollections())

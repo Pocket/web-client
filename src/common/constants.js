@@ -25,6 +25,8 @@ export const CACHE_KEY_LIST_MODE = 'pocket-list-mode'
 export const CACHE_KEY_SORT_ORDER = 'pocket-sort-order'
 export const CACHE_KEY_RELEASE_VERSION = 'pocket-release-version'
 
+export const CACHE_KEY_HOME_STORED_TOPICS = 'pocket-home-stored-topics'
+
 export const RELEASE_NOTES_VERSION = 'feb-03-2021'
 
 // THIRD PARTY
