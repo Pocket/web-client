@@ -417,7 +417,12 @@ workflows:
           prefix: "https://assets.getpocket.com/web-client"
           showdev: ""
           name: build_production
-
+      # we are building on branch to make sure there are no build errors
+      - build_deployment:
+          <<: *not_main
+          prefix: ""
+          showdev: "included"
+          name: build_test
       # Cypress Integration Tests
       # - integration_tests:
       #     <<: *only_main
