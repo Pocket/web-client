@@ -78,7 +78,20 @@ jobs:
             - '95:3f:a9:02:0d:06:71:f9:5d:90:1e:a0:e5:e3:c3:25'
       # Semantic Release
       - run: npx semantic-release
-
+      - run:
+          name: Check for new release
+          command: |
+            if [ -f ".version" ]; then
+              echo "We have a semantic release"
+            else
+              echo 'No semantically releasable changes.'
+              echo `git describe --abbrev=0 --tags` > .version
+            fi  
+            cp .version /tmp/workspace/.version
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - .version
   # ——————————————————————————————————————————————————————————————
   # Integration Test: Make sure our happy paths have not regressed
   # ——————————————————————————————————————————————————————————————
