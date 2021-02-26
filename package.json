@@ -4,7 +4,7 @@
   "description": "Pocket front end client",
   "main": "index.js",
   "scripts": {
-    "dev": "SHOW_DEV=included next dev -p 80",
+    "dev": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included next dev -p 80",
     "build": "npm run locale-inject && SHOW_DEV=included next build",
     "start": "next start -p 80",
     "lint": "./node_modules/.bin/eslint $(find src/ -name '*.js' ! -name '*.stories.js' ! -name '*.spec.js')",
