@@ -404,8 +404,6 @@ workflows:
           prefix: "https://assets.getpocket.com/web-client"
           showdev: ""
           name: build_production
-          requires:
-            - release
       - build_deployment:
           <<: *not_main
           prefix: ""
@@ -425,6 +423,7 @@ workflows:
       - build_production_container:
           requires:
             - build_production
+            - release
       - tag:
           <<: *only_main
           requires:
