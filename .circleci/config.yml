@@ -197,15 +197,15 @@ jobs:
     environment:
       MAIN_IMAGE_NAME: web-client
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: Setup common environment variables
           command: |
             echo 'export AWS_ECR_ACCOUNT_PROD_URL="${ACCOUNT_ID_PROD}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
             echo 'export AWS_ECR_ACCOUNT_DEV_URL="${ACCOUNT_ID_DEV}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
             echo 'export AWS_ECR_ACCOUNT_URL="${AWS_ECR_ACCOUNT_PROD_URL}"' >> $BASH_ENV
-            echo 'export RELEASE_VERSION="$(cat .version)"' >> $BASH_ENV
-      - attach_workspace:
-          at: /tmp/workspace
+            echo 'export RELEASE_VERSION="$(cat /tmp/workspace/.version)"' >> $BASH_ENV
       - run:
           name: Copy App
           command: |
