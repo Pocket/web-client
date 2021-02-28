@@ -1,5 +1,11 @@
 import ReactGA from 'react-ga'
 import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
+import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
+import { createUiEntity } from 'connectors/snowplow/entities'
+import { createContentEntity } from 'connectors/snowplow/entities'
+import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
+import { createEngagementEvent } from 'connectors/snowplow/events'
+import { ENGAGEMENT_TYPE_SAVE } from 'connectors/snowplow/events'
 
 // common params used for a number of events in this view
 function getBaseParams() {
@@ -123,4 +129,20 @@ export function trackScrollDepth(depth) {
     label: `${depth}%`,
     nonInteraction: true
   })
+}
+
+export function sendSaveToSnowplow({ identifier, itemId, url }) {
+  const snowplowEvent = createEngagementEvent(ENGAGEMENT_TYPE_SAVE)
+
+  const uiEntity = createUiEntity({
+    type: UI_COMPONENT_BUTTON,
+    hierarchy: 0,
+    identifier
+  })
+
+  const contentEntity = createContentEntity(url, itemId)
+
+  const snowplowEntities = [uiEntity, contentEntity]
+
+  sendCustomSnowplowEvent(snowplowEvent, snowplowEntities)
 }

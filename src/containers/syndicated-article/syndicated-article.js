@@ -18,6 +18,7 @@ import { trackEmailValidationError } from './syndicated-article.analytics'
 import { trackEmailImpression } from './syndicated-article.analytics'
 import { trackEmailDismiss } from './syndicated-article.analytics'
 import { trackScrollDepth } from './syndicated-article.analytics'
+import { sendSaveToSnowplow } from './syndicated-article.analytics'
 
 import { PUBLISHER_MODULE } from '/connectors/recit/recit.analytics'
 import { POCKET_MODULE } from '/connectors/recit/recit.analytics'
@@ -44,6 +45,9 @@ import PublisherRecs from 'components/publisher-recs/publisher-recs'
 import PocketRecs from 'components/pocket-recs/pocket-recs'
 import { DepthTracking } from 'components/depth-tracking/depth-tracking'
 import { ScrollPocketHitsChyron } from 'components/pocket-hits-chyron/scroll-pocket-hits-chyron'
+import { SaveArticleTop } from 'components/article/save-article'
+import { SaveArticleBottom } from 'components/article/save-article'
+
 import ProgrammaticAd, {
   AD_TYPE_VERTICAL,
   AD_TYPE_HORIZONTAL_LG,
@@ -137,7 +141,7 @@ const main = css`
 
 const SocialWrapper = css`
   position: sticky;
-  top: var(--spacing075);
+  top: 6rem;
   grid-column-end: span 1;
 
   aside {
@@ -222,13 +226,15 @@ const stickyContainerStyles = css`
   // assign direct children position sticky
   & > * {
     position: sticky;
-    top: var(--spacing075);
+    top: 6rem;
     margin-bottom: var(--spacing400);
   }
 `
 
 const StickyContainer = ({ children, className }) => (
-  <div className={cx(stickyContainerStyles, className)}>{children}</div>
+  <div className={cx(stickyContainerStyles, className, 'sticky')}>
+    {children}
+  </div>
 )
 
 // Possible query params passed via url
@@ -244,6 +250,8 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
 
   const isAuthenticated = useSelector((state) => state.user?.auth)
   const isPremium = useSelector((state) => state.user?.premium_status)
+  const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
+  const adsEnabled = useSelector((state) => state.oneTrust?.advertising.enabled)
 
   // modify rendered elements when query params are passed in
   const { mobile_web_view, premium_user } = queryParams
@@ -296,6 +304,9 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
     showAds
   } = articleData
 
+  const allowAds = true // isPremiumUser ? false : showAds
+  const shouldShowAds = true // allowAds && oneTrustReady && adsEnabled
+
   const saveAction = (savedUrl) => {
     if (saveStatus === 'saved') dispatch(unSaveArticleItem(itemId))
     if (saveStatus !== 'saved') dispatch(saveArticleItem(savedUrl))
@@ -330,6 +341,16 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
       module,
       location
     })
+  }
+
+  const trackSaveClick = (identifier) => {
+    sendSaveToSnowplow({
+      identifier,
+      itemId,
+      url
+    })
+
+    trackShareClick('Pocket')
   }
 
   const articleMetaData = {
@@ -373,6 +394,13 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
               showAuthors={publisher?.showAuthors}
               authorNames={authorNames}
             />
+            <SaveArticleTop
+              trackSaveClick={trackSaveClick}
+              isAuthenticated={isAuthenticated}
+              saveAction={saveAction}
+              saveStatus={saveStatus}
+              url={url}
+            />
           </div>
         </header>
 
@@ -385,7 +413,7 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
                 saveAction={saveAction}
                 saveStatus={saveStatus}
                 isAuthenticated={isAuthenticated}
-                handleShareClick={trackShareClick}
+                trackSaveClick={trackSaveClick}
                 slug={slug}
               />
             </aside>
@@ -398,17 +426,17 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
           </article>
 
           <section className={SidebarWrapper}>
-            {!isPremiumUser ? (
+            {allowAds ? (
               <StickyContainer
                 className={
-                  showAds ? rightRailAdWithLabelStyles : rightRailAdStyles
+                  shouldShowAds ? rightRailAdWithLabelStyles : rightRailAdStyles
                 }>
                 <ProgrammaticAd
                   id={RIGHT_RAIL_1_ID}
                   positionAlias="RightRail1"
                   type={AD_TYPE_VERTICAL}
                   adTargetingMetadata={adTargetingMetadata}
-                  showAd={showAds}
+                  showAd={shouldShowAds}
                 />
               </StickyContainer>
             ) : null}
@@ -421,17 +449,17 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
                 handleRecClick={handleRecClick}
               />
             </StickyContainer>
-            {!isPremiumUser ? (
+            {allowAds ? (
               <StickyContainer
                 className={
-                  showAds ? rightRailAdWithLabelStyles : rightRailAdStyles
+                  shouldShowAds ? rightRailAdWithLabelStyles : rightRailAdStyles
                 }>
                 <ProgrammaticAd
                   id={RIGHT_RAIL_2_ID}
                   positionAlias="RightRail2"
                   type={AD_TYPE_VERTICAL}
                   adTargetingMetadata={adTargetingMetadata}
-                  showAd={showAds}
+                  showAd={shouldShowAds}
                 />
               </StickyContainer>
             ) : null}
@@ -440,6 +468,13 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
 
         <footer className={main}>
           <div className={classNames('spacing', { isMobileWebView })}>
+            <SaveArticleBottom
+              trackSaveClick={trackSaveClick}
+              isAuthenticated={isAuthenticated}
+              saveAction={saveAction}
+              saveStatus={saveStatus}
+              url={url}
+            />
             <PublisherAttribution
               publisher={publisher}
               publishedAt={publishedAt}
@@ -472,7 +507,7 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
 
       {/* Chyron needs to sit outside of layout to span full width */}
       <ScrollPocketHitsChyron
-        isAuthenticated={isAuthenticated || isMobileWebView}
+        isAuthenticated={true || isAuthenticated || isMobileWebView} // Manually suppressing Chyron
         instanceId="syndicated-ph-signup"
         thresholdPercent={PH_THRESHOLD_PERCENTAGE}
         utmCampaign="article-chyron"

@@ -69,7 +69,7 @@ const popoverContainer = css`
   }
 `
 
-const SavePopover = function ({ popoverRef, id }) {
+export const SavePopover = function ({ popoverRef, id }) {
   const loginUrl = `${LOGIN_URL}?route=${global.location.href}`
   const signupUrl = `${SIGNUP_URL}?route=${global.location.href}`
   return (

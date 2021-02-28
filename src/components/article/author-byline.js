@@ -5,7 +5,7 @@ const BylineWrapper = css`
   font-family: var(--fontSansSerif);
   line-height: 143%;
   color: var(--textPrimary);
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing150);
 
   a {
     font-weight: 600;

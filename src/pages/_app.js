@@ -25,6 +25,7 @@ import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
 import { appWithTranslation } from 'common/setup/i18n'
 import { initializeSnowplow } from 'common/setup/snowplow'
+import { signalTestsReady } from '../../cypress/support/utils'
 
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
@@ -126,7 +127,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // signal to Cypress that React client side has loaded
     // Make sure this is the last thing we fire
-    // signalTestsReady()
+    signalTestsReady()
   }, [user_status, sess_guid, user_id, dispatch])
 
   // Track Page Views

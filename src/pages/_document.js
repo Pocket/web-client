@@ -6,23 +6,6 @@ class ClientDocument extends Document {
     return (
       <Html>
         <Head>
-          {/* <!-- OneTrust Cookies Consent Notice start for getpocket.com --> */}
-          <script
-            type="text/javascript"
-            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e/OtAutoBlock.js"></script>
-          <script
-            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e/otSDKStub.js"
-            type="text/javascript"
-            charSet="UTF-8"
-            data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e"></script>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: 'function OptanonWrapper() { }'
-            }}
-          />
-          {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
-        </Head>
-        <body>
           {/*
           This all sets us up for color themes without having a flash of
           light if the user has chosen another color mode as the default
@@ -47,6 +30,40 @@ class ClientDocument extends Document {
             `
             }}
           />
+
+          {/* <!-- OneTrust Cookies Consent Notice start for getpocket.com --> */}
+          <script
+            type="text/javascript"
+            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e/OtAutoBlock.js"></script>
+          <script
+            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e/otSDKStub.js"
+            type="text/javascript"
+            charSet="UTF-8"
+            data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e"></script>
+
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              var timeHolder;
+
+              function dispatchOneTrust(groups){
+                if(typeof __NEXT_REDUX_STORE__ !== 'undefined') {
+                  __NEXT_REDUX_STORE__.dispatch({type: 'ONE_TRUST_DATA', groups})  
+                } else {
+                  clearTimeout(timeHolder); // clear for safety
+                  timeHolder = setTimeout(dispatchOneTrust, 50)
+                }
+              }
+
+              function OptanonWrapper() {
+                dispatchOneTrust(OptanonActiveGroups)
+              }
+              `
+            }}
+          />
+          {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
+        </Head>
+        <body>
           <Main />
           <NextScript />
         </body>
