@@ -13,7 +13,6 @@ module.exports = withPlugins([withCSS, withSourceMaps], {
   },
   rewrites() {
     return [
-      { source: '/explore', destination: '/discover' },
       { source: '/web-client-health', destination: '/health' },
       { source: '/web-client-api/:path*', destination: '/api/:path*' }
     ]
