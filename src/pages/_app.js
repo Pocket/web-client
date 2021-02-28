@@ -1,6 +1,5 @@
 import '@pocket/web-ui/lib/pocket-web-ui.css'
 import { ViewportProvider } from '@pocket/web-ui'
-import App from 'next/app'
 
 import { useEffect } from 'react'
 import { wrapper } from 'store'
@@ -163,10 +162,6 @@ function PocketWebClient({ Component, pageProps, err }) {
     </ViewportProvider>
   )
 }
-
-PocketWebClient.getInitialProps = async (appContext) => ({
-  ...(await App.getInitialProps(appContext))
-})
 
 /**
  * Export the app.  This wraps the app with a few things:
