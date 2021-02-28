@@ -304,8 +304,8 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
     showAds
   } = articleData
 
-  const allowAds = true // isPremiumUser ? false : showAds
-  const shouldShowAds = true // allowAds && oneTrustReady && adsEnabled
+  const allowAds = isPremiumUser ? false : showAds
+  const shouldShowAds = allowAds && oneTrustReady && adsEnabled
 
   const saveAction = (savedUrl) => {
     if (saveStatus === 'saved') dispatch(unSaveArticleItem(itemId))
