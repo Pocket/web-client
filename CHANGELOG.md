@@ -1,3 +1,11 @@
+## [1.0.5](https://github.com/Pocket/web-client/compare/v1.0.4...v1.0.5) (2021-03-01)
+
+
+### Bug Fixes
+
+* **card media:** stop trying to load null images ([ad64b47](https://github.com/Pocket/web-client/commit/ad64b47939d226b77e959233994c1bef4bd365b3))
+* **card media:** update tests ([b0fb14e](https://github.com/Pocket/web-client/commit/b0fb14e9061b4151951ede33dfa5e7e3d873df12))
+
 ## [1.0.4](https://github.com/Pocket/web-client/compare/v1.0.3...v1.0.4) (2021-02-26)
 
 

@@ -64,7 +64,7 @@ describe('Discover Items', function () {
       assert.deepStrictEqual(derivedItems[0], {
         title: null,
         resolved_id: '2954307210',
-        thumbnail: null,
+        thumbnail: false,
         publisher: 'Bloomberg',
         excerpt: null,
         save_url: expectedSaveUrl,

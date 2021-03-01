@@ -58,8 +58,8 @@ function displayThumbnail({ item, curated_info }) {
     curated_info?.image_src ||
     item?.top_image_url ||
     item?.images?.[Object.keys(item.images)[0]]?.src ||
-    null
-  return correct_image ? correct_image : null
+    false
+  return correct_image ? correct_image : false
 }
 
 /** PUBLISHER
