@@ -125,7 +125,7 @@ function openUrl({ item, redirect_url }) {
  * @returns {string} The url that should be saved or opened
  */
 function saveUrl({ item }) {
-  return item?.given_url || item?.resolved_url || null
+  return item?.given_url || item?.resolved_url || false
 }
 
 /** READ TIME
