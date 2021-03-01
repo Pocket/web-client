@@ -10,7 +10,7 @@ import { getImageCacheUrl } from 'common/utilities'
  * the container.  This module simple represents the graceful fallback as opposed
  * to the layout.
  */
-export const CardMedia = function ({ image_src, title, id }) {
+export const CardMedia = function ({ image_src, title, id, width }) {
   /**
    * Fallback images:
    * useFallback checks for imageLoad and if it fails, provides a class
@@ -35,18 +35,28 @@ export const CardMedia = function ({ image_src, title, id }) {
    *   0%	   = 00
    */
 
-  const cdn_image_src = image_src ? getImageCacheUrl(image_src) : null
+  const cdn_image_src = image_src ? getImageCacheUrl(image_src) : false
   const { fallbackClass, letter, color } = useFallback(cdn_image_src, title, id)
   const className = classNames('media', fallbackClass)
 
-  return (
+  const mediaFallbackDetails = {
+    '--fallbackBackground': `${color}80`,
+    '--fallbackColor': `${color}`,
+    '--fallbackLetter': `'${letter}'`
+  }
+
+  /**
+   * We are setting these explicitly to avoid the image getting blocked by
+   * ad/tracking blockers. They flag images set by JS as block-worthy
+   */
+  return cdn_image_src ? (
     <div
       className={className}
       style={{
-        backgroundImage: `url('${cdn_image_src}')`,
-        '--fallbackBackground': `${color}80`,
-        '--fallbackColor': `${color}`,
-        '--fallbackLetter': `'${letter}'`
+        ...mediaFallbackDetails,
+        backgroundImage: `url('${cdn_image_src}')`
       }}></div>
+  ) : (
+    <div className={className} style={mediaFallbackDetails} />
   )
 }
