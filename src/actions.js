@@ -20,6 +20,9 @@ export const APP_COLOR_MODE_SET = 'APP_COLOR_MODE_SET'
 export const APP_SET_RELEASE = 'APP_SET_RELEASE'
 export const APP_UPDATE_RELEASE = 'APP_UPDATE_RELEASE'
 
+// One Trust
+export const ONE_TRUST_DATA = 'ONE_TRUST_DATA'
+
 // User info/auth
 export const USER_REQUEST = 'USER_REQUEST'
 export const USER_DEV_REQUEST = 'USER_DEV_REQUEST'

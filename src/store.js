@@ -6,6 +6,7 @@ import { all } from 'redux-saga/effects'
 /* IMPORT CONTAINER STATES
  --------------------------------------------------------------- */
 import { appReducers, appSagas } from 'connectors/app/app.state'
+import { oneTrustReducers } from 'connectors/one-trust/one-trust.state'
 import { userReducers, userSagas } from 'connectors/user/user.state'
 
 import { userTagsSagas } from 'containers/my-list/tags-page/tags-page.state'
@@ -106,6 +107,7 @@ const marketingReducers = {
 
 const globalReducers = {
   app: appReducers, // App wide (mostly example at this time)
+  oneTrust: oneTrustReducers, // One Trust Readiness
   user: userReducers, // User profile and auth,
   features: featureReducers, // Feature flags (very basic start)
   topicList: topicListReducers, // Valid topics list and active topic
