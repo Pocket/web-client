@@ -1,6 +1,5 @@
 import React from 'react'
 import { css } from 'linaria'
-
 import { CardMedia } from 'components/media/card-media'
 
 const collectionCardStyle = css`
@@ -72,18 +71,20 @@ const collectionCardStyle = css`
   }
 `
 
-export const CollectionCard = ({ collection, index }) => {
-  const { title, url, image, subtitle } = collection
+export const CollectionCard = React.forwardRef(
+  ({ collection, onOpen }, ref) => {
+    const { title, url, image, subtitle } = collection
 
-  return (
-    <article className={collectionCardStyle} data-cy="home-collection">
-      <a href={url}>
-        <img src={image} width="100%" />
-        <div className="content">
-          <h2 className="title">{title}</h2>
-          <p className="subtitle">{subtitle}</p>
-        </div>
-      </a>
-    </article>
-  )
-}
+    return (
+      <article ref={ref} className={collectionCardStyle} data-cy="home-collection">
+        <a href={url} target="_blank" onClick={onOpen}>
+          <img src={image} width="100%" />
+          <div className="content">
+            <h2 className="title">{title}</h2>
+            <p className="subtitle">{subtitle}</p>
+          </div>
+        </a>
+      </article>
+    )
+  }
+)

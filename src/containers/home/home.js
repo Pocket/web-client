@@ -12,11 +12,10 @@ import { getCollections } from 'containers/home/home.state'
 import { HomeJourneyHeader } from 'components/headers/home-header'
 import { HomeSectionHeader } from 'components/headers/home-header'
 import { TopicSelector } from 'components/topic-selector/topic-selector'
-import { CollectionCard } from 'components/item-card/home/collection-card'
 
+import { HomeCollectionList } from 'connectors/item-card/home/listCollection'
 import { HomeTopicsList } from 'connectors/item-card/home/listTopics'
 import { HomeRecentList } from 'connectors/item-card/home/listRecent'
-import { homeCollections } from 'components/items-layout/home-collections'
 
 import { homeSetPreferences } from './home.state'
 import { setTopicSection } from './home.state'
@@ -30,6 +29,8 @@ import { topicImpressionEvent } from './home.analytics'
 import { topicSaveEvent } from './home.analytics'
 import { topicEngagementEvent } from './home.analytics'
 import { topicOpenEvent } from './home.analytics'
+import { collectionImpressionEvent } from './home.analytics'
+import { collectionOpenEvent } from './home.analytics'
 
 const selectionStyles = css`
   margin-bottom: 2.25rem;
@@ -41,6 +42,7 @@ export default function Collection(props) {
   const dispatch = useDispatch()
 
   const collectionSet = useSelector((state) => state.home.collectionSet)
+  console.log({ collectionSet })
   const topicSections = useSelector((state) => state.home.topicSections)
   const recentSaves = useSelector((state) => state.home.recentSaves)
   const impressions = useSelector((state) => state.home.impressions)
@@ -77,8 +79,17 @@ export default function Collection(props) {
     dispatch(topicEngagementEvent(item, position))
   }
 
-  const handleOpenEvent = (item, position) => {
+  const handleTopicOpen = (item, position) => {
     dispatch(topicOpenEvent(item, position))
+  }
+
+  const handleCollectionImpression = (item, position) => {
+    // No need for stored impressions as these won't be regenerated
+    dispatch(collectionImpressionEvent(item, position))
+  }
+
+  const handleCollectionOpen = (item, position) => {
+    dispatch(collectionOpenEvent(item, position))
   }
 
   // Initialize data
@@ -112,7 +123,7 @@ export default function Collection(props) {
                   unSaveAction={unSaveHomeItem}
                   impressionAction={handleTopicImpression}
                   engagementAction={handleTopicEngagement}
-                  openAction={handleOpenEvent}
+                  openAction={handleTopicOpen}
                   {...topic}
                 />
               ))
@@ -130,23 +141,11 @@ export default function Collection(props) {
             />
           </div>
 
-          {collectionSet?.length ? (
-            <>
-              <HomeSectionHeader
-                sectionTitle="Our Most Read Collections"
-                sectionDescription="Discover some of our most interesting reads in these collections."
-              />
-              <div className={homeCollections}>
-                {collectionSet.map((collection, index) => (
-                  <CollectionCard
-                    collection={collection}
-                    index={index}
-                    key={collection.title}
-                  />
-                ))}
-              </div>
-            </>
-          ) : null}
+          <HomeCollectionList
+            collectionSet={collectionSet}
+            impressionAction={handleCollectionImpression}
+            openAction={handleCollectionOpen}
+          />
         </main>
       ) : null}
     </Layout>

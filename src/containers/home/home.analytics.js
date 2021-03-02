@@ -54,3 +54,23 @@ export const topicOpenEvent = (item, position) => {
     'home.topic.open'
   )
 }
+
+export const collectionImpressionEvent = (item, position) => (trackContentImpression(
+  IMPRESSION_COMPONENT_CARD,
+  IMPRESSION_REQUIREMENT_VIEWABLE,
+  position,
+  { save_url: item?.url },
+  'home.collection.impression'
+))
+
+export const collectionOpenEvent = (item, position) => {
+  const destination = getLinkOpenTarget(item?.url)
+
+  return trackContentOpen(
+    destination,
+    CONTENT_OPEN_TRIGGER_CLICK,
+    position,
+    { save_url: item?.url },
+    'home.collection.open'
+  )
+}

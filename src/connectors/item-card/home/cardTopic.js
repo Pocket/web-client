@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Card } from 'components/item-card/home/topic-card'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useInView } from 'react-intersection-observer'
 
 export const ItemCard = ({
@@ -18,7 +18,6 @@ export const ItemCard = ({
   const item = useSelector((state) => state.home.itemsById[id])
 
   const { save_url, save_status } = item
-  const dispatch = useDispatch()
 
   // Fire item impression
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
