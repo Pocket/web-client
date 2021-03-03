@@ -72,7 +72,7 @@ export const sideNavHeader = css`
   line-height: 0.8;
   padding: var(--spacing050);
   margin: 25px 0 5px;
-  color: var(--color-textTertiary);
+  color: var(--color-textSecondary);
 `
 
 export const sideNavItem = css`
