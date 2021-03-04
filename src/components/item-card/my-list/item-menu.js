@@ -122,7 +122,7 @@ export const ItemMenu = ({
   useCorrectEffect(() => {
     if (!menuOpen) return
 
-    menuRef.current.querySelector('li button').focus()
+    // menuRef.current.querySelector('li button').focus()
     menuRef.current.addEventListener('focusout', () => checkInnerFocus())
     return menuRef.current.removeEventListener('focusout', () => checkInnerFocus())
   }, [menuOpen, menuRef])
