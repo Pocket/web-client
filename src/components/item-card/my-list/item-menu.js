@@ -37,7 +37,6 @@ const buttonStyles = css`
     cursor: pointer;
   }
 
-
   .icon {
     background-color: transparent;
     color: var(--color-textSecondary);
