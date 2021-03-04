@@ -129,8 +129,7 @@ export const ItemAction = function ({
   toggleLabel,
   menuItems,
   placement,
-  alignRight,
-  ...rest
+  alignRight
 }) {
   const handleClick = (event) => {
     event.preventDefault()
