@@ -30,7 +30,7 @@ const buttonStyles = css`
   font-size: var(--size150);
 
   &:hover {
-    background-color: var(--color-textPrimary);
+    color: var(--color-textPrimary);
     background-color: transparent;
   }
 
