@@ -129,7 +129,8 @@ export const ItemAction = function ({
   toggleLabel,
   menuItems,
   placement,
-  alignRight
+  alignRight,
+  ...rest
 }) {
   const handleClick = (event) => {
     event.preventDefault()
@@ -155,7 +156,11 @@ export const ItemAction = function ({
 
   return (
     <>
-      <div className={shareClasses} onClick={handleClick} ref={popTrigger}>
+      <div
+        aria-label="Open menu"
+        className={shareClasses}
+        onClick={handleClick}
+        ref={popTrigger}>
         {toggleButton}
         {toggleLabel ? <div className="actionCopy">{toggleLabel}</div> : null}
       </div>
