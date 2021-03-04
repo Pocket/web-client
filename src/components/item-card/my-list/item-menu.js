@@ -96,26 +96,11 @@ export const ItemMenu = ({
   const [isMobile, setIsMobile] = useState(viewportWidth <= screenLargeHandset)
 
   const selfRef = useRef(null)
-  const menuRef = useRef(null)
 
   // effect for handling window resize
   useCorrectEffect(() => {
     setIsMobile(viewportWidth <= screenLargeHandset)
   }, [viewportWidth])
-
-  useCorrectEffect(() => {
-    if (!menuOpen) return
-
-    menuRef.current.querySelector('li button').focus()
-    menuRef.current.addEventListener('focusout', () => checkInnerFocus())
-    return menuRef.current.removeEventListener('focusout', () => checkInnerFocus())
-  }, [menuOpen, menuRef])
-
-  const checkInnerFocus = () => {
-    if (menuRef.current.querySelectorAll(':focus-within').length === 0) {
-      setMenuOpen(false)
-    }
-  }
 
   const checkDirection = () => {
     if (selfRef.current.getBoundingClientRect().top > viewportHeight / 2) {
@@ -150,8 +135,7 @@ export const ItemMenu = ({
         <div
           onMouseLeave={closeMenu}
           className={classNames(menuWrapper, { flipDirection })}>
-          <ul ref={menuRef}
-            className={classNames(overlayBase, menuContainer)}>
+          <ul className={classNames(overlayBase, menuContainer)}>
             <PopupMenuGroup>
               <PopupMenuItem onClick={itemShare} icon={<IosShareIcon />}>
                 <Trans i18nKey="item-action:share">Share</Trans>
