@@ -29,12 +29,9 @@ const buttonStyles = css`
   color: var(--color-textSecondary);
   font-size: var(--size150);
 
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: var(--color-canvas);
-    color: var(--color-textLinkHover);
-    cursor: pointer;
+  &:hover {
+    background-color: var(--color-textPrimary);
+    background-color: transparent;
   }
 
   .icon {
