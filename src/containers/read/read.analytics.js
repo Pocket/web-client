@@ -90,3 +90,16 @@ export const sendExternalLinkClick = (item, href) => {
     'reader.external-link'
   )
 }
+
+export const sendViewOriginalEvent = (item) => {
+  const { save_url } = item
+  console.log({ save_url })
+  const destination = getLinkOpenTarget(save_url)
+  return trackContentOpen(
+    destination,
+    CONTENT_OPEN_TRIGGER_CLICK,
+    0, // position in list (zero since it's in reader)
+    item,
+    'reader.view-original'
+  )
+}

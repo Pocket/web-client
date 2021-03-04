@@ -28,9 +28,20 @@ const buttonStyles = css`
   background-color: transparent;
   color: var(--color-textSecondary);
   font-size: var(--size150);
-  &:hover {
-    color: var(--color-textPrimary);
-    background-color: transparent;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: var(--color-canvas);
+    color: var(--color-textLinkHover);
+    cursor: pointer;
+  }
+
+  &:active,
+  &:focus {
+    transition: none;
+    color: var(--color-navCurrentTabText);
+    outline: 1px auto var(--color-navCurrentTab);
   }
 
   .icon {
@@ -54,6 +65,15 @@ const menuWrapper = css`
     top: 0;
     bottom: unset;
   }
+
+  button:active,
+  button:focus,
+  a:active,
+  a:focus {
+    transition: none;
+    color: var(--color-navCurrentTabText);
+    outline: 1px auto var(--color-navCurrentTab);
+  }
 `
 
 const menuContainer = css`
@@ -76,6 +96,8 @@ export const ItemMenu = ({
   openUrl,
   itemShare,
   itemCopy,
+  itemOriginalOpen,
+  itemPermLibOpen,
   isPremium,
   title
 }) => {
@@ -90,11 +112,26 @@ export const ItemMenu = ({
   const [isMobile, setIsMobile] = useState(viewportWidth <= screenLargeHandset)
 
   const selfRef = useRef(null)
+  const menuRef = useRef(null)
 
   // effect for handling window resize
   useCorrectEffect(() => {
     setIsMobile(viewportWidth <= screenLargeHandset)
   }, [viewportWidth])
+
+  useCorrectEffect(() => {
+    if (!menuOpen) return
+
+    menuRef.current.querySelector('li button').focus()
+    menuRef.current.addEventListener('focusout', () => checkInnerFocus())
+    return menuRef.current.removeEventListener('focusout', () => checkInnerFocus())
+  }, [menuOpen, menuRef])
+
+  const checkInnerFocus = () => {
+    if (menuRef.current.querySelectorAll(':focus-within').length === 0) {
+      setMenuOpen(false)
+    }
+  }
 
   const checkDirection = () => {
     if (selfRef.current.getBoundingClientRect().top > viewportHeight / 2) {
@@ -129,7 +166,8 @@ export const ItemMenu = ({
         <div
           onMouseLeave={closeMenu}
           className={classNames(menuWrapper, { flipDirection })}>
-          <ul className={classNames(overlayBase, menuContainer)}>
+          <ul ref={menuRef}
+            className={classNames(overlayBase, menuContainer)}>
             <PopupMenuGroup>
               <PopupMenuItem onClick={itemShare} icon={<IosShareIcon />}>
                 <Trans i18nKey="item-action:share">Share</Trans>
@@ -139,6 +177,7 @@ export const ItemMenu = ({
               </PopupMenuItem>
               <PopupMenuItem
                 target="_blank"
+                onClick={itemOriginalOpen}
                 href={urlWithPocketRedirect(openUrl)}
                 icon={<WebViewIcon />}>
                 <Trans i18nKey="item-action:view-original">View Original</Trans>
@@ -146,6 +185,7 @@ export const ItemMenu = ({
               {isPremium ? (
                 <PopupMenuItem
                   target="_blank"
+                  onClick={itemPermLibOpen}
                   href={urlWithPermanentLibrary(openId)}
                   icon={<PermanentCopyIcon />}>
                   <Trans i18nKey="item-action:permanent-copy">

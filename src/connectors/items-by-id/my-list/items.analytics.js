@@ -1,4 +1,5 @@
 import { takeEvery, put } from 'redux-saga/effects'
+import { urlWithPermanentLibrary } from 'common/utilities'
 import { trackContentImpression } from 'connectors/snowplow/snowplow.state'
 import { trackContentOpen } from 'connectors/snowplow/snowplow.state'
 import { trackContentEngagement } from 'connectors/snowplow/snowplow.state'
@@ -34,6 +35,28 @@ export const sendEngagementEvent = (identifier, position, item, save) => {
     position,
     item,
     identifier
+  )
+}
+export const trackOriginalOpen = (position, item) => {
+  const { save_url } = item
+  const linkTarget = getLinkOpenTarget(save_url)
+  return trackContentOpen(
+    linkTarget,
+    CONTENT_OPEN_TRIGGER_CLICK,
+    position,
+    item,
+    'my-list.card.view-original'
+  )
+}
+export const trackPermLibOpen = (position, item) => {
+  const { item_id } = item
+  const linkTarget = getLinkOpenTarget(urlWithPermanentLibrary(item_id))
+  return trackContentOpen(
+    linkTarget,
+    CONTENT_OPEN_TRIGGER_CLICK,
+    position,
+    item,
+    'my-list.card.permanent-library'
   )
 }
 
