@@ -37,12 +37,6 @@ const buttonStyles = css`
     cursor: pointer;
   }
 
-  &:active,
-  &:focus {
-    transition: none;
-    color: var(--color-navCurrentTabText);
-    outline: 1px auto var(--color-navCurrentTab);
-  }
 
   .icon {
     background-color: transparent;
@@ -64,15 +58,6 @@ const menuWrapper = css`
   &.flipDirection {
     top: 0;
     bottom: unset;
-  }
-
-  button:active,
-  button:focus,
-  a:active,
-  a:focus {
-    transition: none;
-    color: var(--color-navCurrentTabText);
-    outline: 1px auto var(--color-navCurrentTab);
   }
 `
 
@@ -122,7 +107,7 @@ export const ItemMenu = ({
   useCorrectEffect(() => {
     if (!menuOpen) return
 
-    // menuRef.current.querySelector('li button').focus()
+    menuRef.current.querySelector('li button').focus()
     menuRef.current.addEventListener('focusout', () => checkInnerFocus())
     return menuRef.current.removeEventListener('focusout', () => checkInnerFocus())
   }, [menuOpen, menuRef])

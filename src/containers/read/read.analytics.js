@@ -93,7 +93,6 @@ export const sendExternalLinkClick = (item, href) => {
 
 export const sendViewOriginalEvent = (item) => {
   const { save_url } = item
-  console.log({ save_url })
   const destination = getLinkOpenTarget(save_url)
   return trackContentOpen(
     destination,
