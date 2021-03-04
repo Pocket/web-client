@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/Pocket/web-client/compare/v1.1.1...v1.1.2) (2021-03-03)
+
+
+### Bug Fixes
+
+* **colors:** update colors for contrast for accessibility ([f533e3e](https://github.com/Pocket/web-client/commit/f533e3e4bbbfb58f3321199bba86a63660a4dabe))
+
 ## [1.1.1](https://github.com/Pocket/web-client/compare/v1.1.0...v1.1.1) (2021-03-02)
 
 
