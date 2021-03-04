@@ -156,7 +156,7 @@ export const Card = React.forwardRef(
                 {read_time ? ` · ${read_time} min` : null}
               </span>
               {syndicated ? (
-                <span className="syndicated">
+                <span className="syndicated" aria-label="Syndicated by Pocket">
                   <SyndicatedBadge />
                 </span>
               ) : null}
