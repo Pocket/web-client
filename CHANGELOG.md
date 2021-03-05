@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/Pocket/web-client/compare/v1.1.3...v1.1.4) (2021-03-05)
+
+
+### Bug Fixes
+
+* **home:** add action modals for recent saves ([6ac62ba](https://github.com/Pocket/web-client/commit/6ac62ba4bba1089844e8702c34664ab3875e16f2))
+
 ## [1.1.3](https://github.com/Pocket/web-client/compare/v1.1.2...v1.1.3) (2021-03-04)
 
 

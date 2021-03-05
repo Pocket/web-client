@@ -10,7 +10,6 @@ import { getTopicList } from 'connectors/topic-list/topic-list.state'
 import { getRecentSaves } from 'containers/home/home.state'
 import { getCollections } from 'containers/home/home.state'
 import { HomeJourneyHeader } from 'components/headers/home-header'
-import { HomeSectionHeader } from 'components/headers/home-header'
 import { TopicSelector } from 'components/topic-selector/topic-selector'
 
 import { HomeCollectionList } from 'connectors/item-card/home/listCollection'
@@ -32,6 +31,12 @@ import { topicOpenEvent } from './home.analytics'
 import { collectionImpressionEvent } from './home.analytics'
 import { collectionOpenEvent } from './home.analytics'
 
+import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
+import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
+import { ShareModal } from 'connectors/confirm-share/confirm-share'
+import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
+import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
+
 const selectionStyles = css`
   margin-bottom: 2.25rem;
 `
@@ -42,7 +47,6 @@ export default function Collection(props) {
   const dispatch = useDispatch()
 
   const collectionSet = useSelector((state) => state.home.collectionSet)
-  console.log({ collectionSet })
   const topicSections = useSelector((state) => state.home.topicSections)
   const recentSaves = useSelector((state) => state.home.recentSaves)
   const impressions = useSelector((state) => state.home.impressions)
@@ -96,7 +100,7 @@ export default function Collection(props) {
   useEffect(() => {
     dispatch(homeSetPreferences())
     dispatch(getTopicList())
-    // dispatch(getRecentSaves()) // Commenting this out to iterate on recent saves
+    dispatch(getRecentSaves()) // Commenting this out to iterate on recent saves
     dispatch(getCollections())
   }, [dispatch])
 
@@ -148,6 +152,11 @@ export default function Collection(props) {
           />
         </main>
       ) : null}
+      <DeleteModal />
+      <TaggingModal />
+      <ShareModal />
+      <ArchiveModal />
+      <FavoriteModal />
     </Layout>
   )
 }

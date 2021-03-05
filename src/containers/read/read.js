@@ -17,6 +17,7 @@ import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
 import { ReaderFonts } from '@pocket/web-ui'
+import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
@@ -39,7 +40,7 @@ import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archi
 
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
-import { genericRecsRequested } from '/connectors/recit/recit.state'
+import { ReaderRecommendations } from 'connectors/recit/reader.recs'
 
 import { sendDeleteEvent } from './read.analytics'
 import { sendArchiveEvent } from './read.analytics'
@@ -78,6 +79,10 @@ const articleWrapper = css`
     padding: 0 var(--spacing250);
     margin: var(--spacing250) auto;
   }
+`
+
+const recsWrapper = css`
+  margin: 0 auto;
 `
 
 export default function Reader() {
@@ -124,7 +129,6 @@ export default function Reader() {
   useEffect(() => {
     dispatch(itemDataRequest(id))
     dispatch(selectShortcutItem(id))
-    // dispatch(genericRecsRequested(id))
   }, [dispatch, id])
 
   if (!articleData) {
@@ -330,6 +334,15 @@ export default function Reader() {
           ) : null}
         </article>
       </main>
+      {articleContent ? (
+        <FeatureFlag flag="temp.web.client.reader.recommendations">
+          <section
+            className={recsWrapper}
+            style={{ maxWidth: customStyles.maxWidth }}>
+            <ReaderRecommendations id={item_id} />
+          </section>
+        </FeatureFlag>
+      ) : null}
       {!isPremium && articleContent ? (
         <BottomUpsell
           maxWidth={customStyles.maxWidth}

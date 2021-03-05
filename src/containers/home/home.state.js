@@ -56,7 +56,6 @@ export const setHomeImpression = (id) => ({ type: HOME_SET_IMPRESSION, id }) //p
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  itemsById: {},
   topicSections: [],
   collectionSet: [],
   recentSaves: [],
@@ -78,50 +77,26 @@ export const homeReducers = (state = initialState, action) => {
 
     case HOME_TOPIC_SECTION_UNSET: {
       const { topic } = action
-      const filteredTopicSections = state.topicSections.filter((section) => section.id !== topic.id)
+      const filteredTopicSections = state.topicSections.filter(
+        (section) => section.id !== topic.id
+      )
       return { ...state, topicSections: filteredTopicSections }
     }
 
     case HOME_TOPIC_SECTION_SUCCESS: {
-      const { topic, itemsById, items } = action
-      const newItemsById = { ...state.itemsById, ...itemsById }
-      return { ...state, itemsById: newItemsById, [`${topic}Topic`]: items }
-    }
-
-    case HOME_SAVE_REQUEST: {
-      const { id } = action
-      const itemsById = updateSaveStatus(state, id, 'saving')
-      return { ...state, itemsById }
-    }
-
-    case HOME_SAVE_SUCCESS: {
-      const { id } = action
-      const itemsById = updateSaveStatus(state, id, 'saved')
-      const recentSaves = new Set([id, ...state.recentSaves])
-      return { ...state, itemsById, recentSaves: Array.from(recentSaves) }
-    }
-
-    case HOME_SAVE_FAILURE: {
-      const { id } = action
-      const itemsById = updateSaveStatus(state, id, 'unsaved')
-      return { ...state, itemsById }
-    }
-
-    case HOME_UNSAVE_SUCCESS: {
-      const { id } = action
-      const itemsById = updateSaveStatus(state, id, 'unsaved')
-      return { ...state, itemsById }
-    }
-
-    case HOME_UNSAVE_FAILURE: {
-      const { id } = action
-      const itemsById = updateSaveStatus(state, id, 'saved')
-      return { ...state, itemsById }
+      const { topic, items } = action
+      return { ...state, [`${topic}Topic`]: items }
     }
 
     case HOME_COLLECTION_SUCCESS: {
       const { data: collectionSet } = action
       return { ...state, collectionSet }
+    }
+
+    case HOME_SAVE_SUCCESS: {
+      const { id } = action
+      const recentSaves = new Set([id, ...state.recentSaves])
+      return { ...state, recentSaves: Array.from(recentSaves) }
     }
 
     case HOME_RECENT_SAVES_SUCCESS: {
@@ -281,7 +256,10 @@ function* homeUnSaveRequest({ id, topic }) {
 
 function* storeTopicPreferences({ topic }) {
   const topicSections = yield select(getTopicSections)
-  localStore.setItem(CACHE_KEY_HOME_STORED_TOPICS, JSON.stringify(topicSections))
+  localStore.setItem(
+    CACHE_KEY_HOME_STORED_TOPICS,
+    JSON.stringify(topicSections)
+  )
 }
 
 /** ASYNC Functions

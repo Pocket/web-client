@@ -6,13 +6,15 @@ import {
   POCKET_RECS_REQUESTED,
   POCKET_RECS_SUCCESS,
   POCKET_RECS_FAILURE,
-  GENERIC_RECS_REQUESTED,
-  GENERIC_RECS_SUCCESS,
-  GENERIC_RECS_FAILURE
+  READER_RECS_REQUESTED,
+  READER_RECS_SUCCESS,
+  READER_RECS_FAILURE
 } from 'actions'
 import { getPublisherRecs, getPocketRecs, getRecommendations } from 'common/api/recit'
 import { saveItem } from 'common/api/saveItem'
 import { removeItem } from 'common/api/removeItem'
+import { arrayToObject } from 'common/utilities'
+import { deriveReaderRecitItems } from './recit.derive'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -24,8 +26,8 @@ export const pocketRecsRequested = (itemId) => ({
   type: POCKET_RECS_REQUESTED,
   itemId
 })
-export const genericRecsRequested = (itemId) =>  ({
-  type: GENERIC_RECS_REQUESTED,
+export const readerRecsRequested = (itemId) =>  ({
+  type: READER_RECS_REQUESTED,
   itemId
 })
 
@@ -38,7 +40,7 @@ const initialState = {
   pocketRecs: [],
   pocketRecId: null,
   pocketRecModel: null,
-  genericRecs: []
+  readerRecs: {}
 }
 
 export const recitReducers = (state = initialState, action) => {
@@ -75,13 +77,21 @@ export const recitReducers = (state = initialState, action) => {
       }
     }
 
-    case GENERIC_RECS_SUCCESS: {
+    case READER_RECS_SUCCESS: {
       const {
-        response
+        readerRecs
       } = action
       return {
         ...state,
-        // genericRecs: []
+        readerRecs
+      }
+    }
+
+    // Refreshes recommendations on each load
+    case READER_RECS_REQUESTED: {
+      return {
+        ...state,
+        readerRecs: {}
       }
     }
 
@@ -95,7 +105,7 @@ export const recitReducers = (state = initialState, action) => {
 export const recitSagas = [
   takeLatest(PUBLISHER_RECS_REQUESTED, fetchPublisherRecs),
   takeLatest(POCKET_RECS_REQUESTED, fetchPocketRecs),
-  takeLatest(GENERIC_RECS_REQUESTED, fetchGenericRecs)
+  takeLatest(READER_RECS_REQUESTED, fetchReaderRecs)
 ]
 
 function* fetchPublisherRecs({ itemId }) {
@@ -116,13 +126,16 @@ function* fetchPocketRecs({ itemId }) {
   }
 }
 
-function* fetchGenericRecs({ itemId }) {
+function* fetchReaderRecs({ itemId }) {
   try {
     if (!itemId) return
     const response = yield getRecommendations(itemId)
-    // console.log('Recit Response', { ...response })
-    yield put({ type: GENERIC_RECS_SUCCESS, response })
+
+    const derivedItems = yield deriveReaderRecitItems(response.recommendations)
+    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+
+    yield put({ type: READER_RECS_SUCCESS, readerRecs: itemsById })
   } catch (error) {
-    yield put({ type: GENERIC_RECS_FAILURE, error })
+    yield put({ type: READER_RECS_FAILURE, error })
   }
 }
