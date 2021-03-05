@@ -118,7 +118,7 @@ function* fireVariantEnroll({ variants }) {
 
 function* fireContentOpen({ destination, trigger, position, item, identifier }) {
   const contentOpenEvent = createContentOpenEvent(destination, trigger)
-  const contentEntity = createContentEntity(item?.save_url, item?.resolved_id)
+  const contentEntity = createContentEntity(item.save_url, item.item_id)
   const uiEntity = createUiEntity({
     type: UI_COMPONENT_CARD,
     hierarchy: 0,
@@ -132,7 +132,7 @@ function* fireContentOpen({ destination, trigger, position, item, identifier }) 
 
 function* fireContentImpression({ component, requirement, position, item, identifier }) {
   const impressionEvent = createImpressionEvent(component, requirement)
-  const contentEntity = createContentEntity(item?.save_url, item?.resolved_id)
+  const contentEntity = createContentEntity(item.save_url, item.item_id)
   const uiEntity = createUiEntity({
     type: UI_COMPONENT_CARD,
     hierarchy: 0,
@@ -163,7 +163,10 @@ function* fireContentEngagmenet({ component, ui, identifier, position, items }) 
   const contentEntities = (items.length) ? items : [items]
   // limit content entities to BATCH_SIZE = 30
   if (contentEntities.length > BATCH_SIZE) contentEntities.length = BATCH_SIZE
-  const contentEntity = contentEntities.map(item => createContentEntity(item?.save_url, item?.resolved_id))
+  const contentEntity = contentEntities.map(item => {
+    const { save_url, item_id, id } = item
+    return createContentEntity(save_url, item_id || id) // id is bulk edit value
+  })
 
   const uiEntity = createUiEntity({
     type: ui,
@@ -182,7 +185,8 @@ function* fireEngagement({ component, ui, identifier, position, value }) {
     type: ui,
     hierarchy: 0,
     identifier,
-    index: position
+    index: position,
+    value
   })
 
   const snowplowEntities = [uiEntity]

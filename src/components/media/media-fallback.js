@@ -117,6 +117,11 @@ export const useFallback = (image_src, title, id) => {
   const [imageState, setImageState] = useState('pending')
 
   useEffect(() => {
+    if (!image_src) {
+      setImageState('missing')
+      return
+    }
+
     const loader = document.createElement('img')
     const onError = () => setImageState('missing')
     const onComplete = () => {

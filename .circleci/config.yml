@@ -61,6 +61,37 @@ jobs:
           name: Run unit tests
           command: npm test
 
+
+  # ——————————————————————————————————————————————————————————————
+  # Release: This will tag the branch and generate a changelog
+  # ——————————————————————————————————————————————————————————————
+  release:
+    # CPU and RAM resources for the job.
+    resource_class: small
+    # Define the container we will run the task in (standard node)
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - setup
+      - add_ssh_keys:
+          fingerprints:
+            - '95:3f:a9:02:0d:06:71:f9:5d:90:1e:a0:e5:e3:c3:25'
+      # Semantic Release
+      - run: npx semantic-release
+      - run:
+          name: Check for new release
+          command: |
+            if [ -f ".version" ]; then
+              echo "We have a semantic release"
+            else
+              echo 'No semantically releasable changes.'
+              echo `git describe --abbrev=0 --tags` > .version
+            fi  
+            cp .version /tmp/workspace/.version
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - .version
   # ——————————————————————————————————————————————————————————————
   # Integration Test: Make sure our happy paths have not regressed
   # ——————————————————————————————————————————————————————————————
@@ -108,13 +139,17 @@ jobs:
           fingerprints:
             - "95:3f:a9:02:0d:06:71:f9:5d:90:1e:a0:e5:e3:c3:25"
       - run:
+          name: Setup common environment variables
+          command: |
+            echo 'export RELEASE_VERSION="$(cat /tmp/workspace/.version)"' >> $BASH_ENV
+      - run:
           name: Set version
           command: |
             mkdir -p config
             echo "module.exports = '$CIRCLE_SHA1';" > ./config/version.js
       - run:
           name: Build
-          command: ASSET_PREFIX=<<parameters.prefix>> SHOW_DEV=<<parameters.showdev>> NODE_ENV=production npm run build
+          command: RELEASE_VERSION=${RELEASE_VERSION} ASSET_PREFIX=<<parameters.prefix>> SHOW_DEV=<<parameters.showdev>> NODE_ENV=production npm run build
       # Copy built files to app_prod folder
       - run:
           name: Setup workspace
@@ -166,14 +201,18 @@ jobs:
     environment:
       MAIN_IMAGE_NAME: web-client
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: Setup common environment variables
           command: |
             echo 'export AWS_ECR_ACCOUNT_PROD_URL="${ACCOUNT_ID_PROD}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
             echo 'export AWS_ECR_ACCOUNT_DEV_URL="${ACCOUNT_ID_DEV}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
             echo 'export AWS_ECR_ACCOUNT_URL="${AWS_ECR_ACCOUNT_PROD_URL}"' >> $BASH_ENV
-      - attach_workspace:
-          at: /tmp/workspace
+            echo 'export RELEASE_VERSION="$(cat /tmp/workspace/.version)"' >> $BASH_ENV
+      - run: 
+          name: "What version is being built?"
+          command: echo ${RELEASE_VERSION}
       - run:
           name: Copy App
           command: |
@@ -187,6 +226,7 @@ jobs:
           tag: $CIRCLE_SHA1
           path: /tmp/workspace/app_prod
           dockerfile: /tmp/workspace/app_prod/Dockerfile
+          extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION}
       - assume-role/assume-role:
           account-id: $ACCOUNT_ID_DEV
       - run:
@@ -375,23 +415,30 @@ workflows:
       # unit test all the files
       - unit_tests:
           <<: *not_main
+      # Generate a changelog tag when main is updated
+      - release:
+          <<: *only_main
       # conditionally building deployment with or without asset prefix
       - build_deployment:
           <<: *only_main
           prefix: "https://assets.getpocket.com/web-client"
           showdev: ""
           name: build_production
+          requires:
+            - release
+      # we are building on branch to make sure there are no build errors
       - build_deployment:
           <<: *not_main
           prefix: ""
           showdev: "included"
-          name: build_feature
-      # Cypress Integration Tests on feature branches
+          name: build_test
+      # Cypress Integration Tests
       # - integration_tests:
-      #     <<: *not_main
+      #     <<: *only_main
       #     requires:
       #       - push_feature_assets
       #       - deploy_feature
+
       # conditional push production build and assets (css/js) for main branch
       - push_production_assets:
           <<: *only_main
@@ -404,7 +451,7 @@ workflows:
           <<: *only_main
           requires:
             - build_production_container
-      # conditional push production build and assets (css/js)
+      # Check to make sure our terraform is correct on branches
       - deploy:
           <<: *not_main
           deploy: false

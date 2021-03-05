@@ -144,7 +144,6 @@ export const Card = React.forwardRef(
         <a
           href={open_url}
           onClick={onOpen}
-          // eslint-disable-next-line react/jsx-no-target-blank
           target={syndicated ? undefined : '_blank'}>
           <CardMedia image_src={thumbnail} title={title} id={id} />
           <div className="content">

@@ -1,7 +1,6 @@
-import {
-  CallOutStartLibrary,
-  CallOutStartLibraryExplore
-} from './call-out-start-library'
+import { CallOutStartLibrary } from './call-out-start-library'
+import { CallOutStartLibraryExplore } from './call-out-start-library'
+
 import { css } from 'linaria'
 
 export default {
@@ -16,11 +15,11 @@ const storyWrapper = css`
 export const standard = () => {
   return (
     <div className={storyWrapper}>
-      <CallOutStartLibrary />
+      <CallOutStartLibrary onVisible={() => {}} />
     </div>
   )
 }
 
 export const ExplorePosition = () => {
-  return <CallOutStartLibraryExplore />
+  return <CallOutStartLibraryExplore handleImpression={() => {}} />
 }

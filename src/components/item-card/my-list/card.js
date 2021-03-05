@@ -236,7 +236,9 @@ export const Card = ({
     itemBulkSelect,
     itemBulkDeSelect,
     itemImpression,
-    itemCopy
+    itemCopy,
+    itemOriginalOpen,
+    itemPermLibOpen
   } = actions
 
   const cardClass = cx(
@@ -369,6 +371,8 @@ export const Card = ({
                   openUrl={open_url}
                   itemShare={itemShare}
                   itemCopy={itemCopy}
+                  itemOriginalOpen={itemOriginalOpen}
+                  itemPermLibOpen={itemPermLibOpen}
                   isPremium={isPremium}
                   title={title}
                 />

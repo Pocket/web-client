@@ -17,6 +17,8 @@ import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bu
 
 import { fireItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
 import { trackItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
+import { trackOriginalOpen } from 'connectors/items-by-id/my-list/items.analytics'
+import { trackPermLibOpen } from 'connectors/items-by-id/my-list/items.analytics'
 import { setImpression } from 'connectors/items-by-id/my-list/items.analytics'
 import { sendEngagementEvent } from 'connectors/items-by-id/my-list/items.analytics'
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
@@ -51,7 +53,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const shortcutSelected = shortcutId === id
 
   const itemImpression = () => {
-    if (!impression[position]) {
+    if (!impression[item.item_id]) {
       dispatch(setImpression(position, item))
     }
   }
@@ -103,6 +105,15 @@ export function ItemCard({ id, position, fluidHeight, type }) {
     fireItemOpen(position, item, dispatch)
   }
 
+  const itemOriginalOpen = () => {
+    trackItemOpen(position + 1, item, type) // legacy analytics uses 1 based position
+    dispatch(trackOriginalOpen(position, item))
+  }
+
+  const itemPermLibOpen = () => {
+    dispatch(trackPermLibOpen(position, item))
+  }
+
   const shortcutSelect = () => dispatch(selectShortcutItem(id, position))
 
   return item ? (
@@ -128,7 +139,9 @@ export function ItemCard({ id, position, fluidHeight, type }) {
         itemBulkSelect,
         itemBulkDeSelect,
         itemImpression,
-        itemCopy
+        itemCopy,
+        itemOriginalOpen,
+        itemPermLibOpen
       }}
       isPremium={isPremium}
     />

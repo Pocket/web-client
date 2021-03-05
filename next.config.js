@@ -8,10 +8,14 @@ const withSourceMaps = require('@zeit/next-source-maps')
 
 module.exports = withPlugins([withCSS, withSourceMaps], {
   env: {
-    SHOW_DEV: process.env.SHOW_DEV
+    SHOW_DEV: process.env.SHOW_DEV,
+    RELEASE_VERSION: process.env.RELEASE_VERSION
   },
   rewrites() {
-    return [{ source: '/web-client-health', destination: '/health' }]
+    return [
+      { source: '/web-client-health', destination: '/health' },
+      { source: '/web-client-api/:path*', destination: '/api/:path*' }
+    ]
   },
   async redirects() {
     return [

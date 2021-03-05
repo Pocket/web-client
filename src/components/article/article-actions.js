@@ -94,6 +94,7 @@ export const ArticleActions = function ({
   excerpt = '',
   title,
   handleShareClick,
+  trackSaveClick,
   slug
 }) {
   const url = `${BASE_URL}/explore/item/${slug}`
@@ -101,6 +102,7 @@ export const ArticleActions = function ({
   const onSave = () => {
     handleShareClick('Pocket')
     saveAction(url)
+    trackSaveClick('save-story-sidebar')
   }
 
   return (

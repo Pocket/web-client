@@ -28,6 +28,7 @@ const buttonStyles = css`
   background-color: transparent;
   color: var(--color-textSecondary);
   font-size: var(--size150);
+
   &:hover {
     color: var(--color-textPrimary);
     background-color: transparent;
@@ -76,6 +77,8 @@ export const ItemMenu = ({
   openUrl,
   itemShare,
   itemCopy,
+  itemOriginalOpen,
+  itemPermLibOpen,
   isPremium,
   title
 }) => {
@@ -139,6 +142,7 @@ export const ItemMenu = ({
               </PopupMenuItem>
               <PopupMenuItem
                 target="_blank"
+                onClick={itemOriginalOpen}
                 href={urlWithPocketRedirect(openUrl)}
                 icon={<WebViewIcon />}>
                 <Trans i18nKey="item-action:view-original">View Original</Trans>
@@ -146,6 +150,7 @@ export const ItemMenu = ({
               {isPremium ? (
                 <PopupMenuItem
                   target="_blank"
+                  onClick={itemPermLibOpen}
                   href={urlWithPermanentLibrary(openId)}
                   icon={<PermanentCopyIcon />}>
                   <Trans i18nKey="item-action:permanent-copy">

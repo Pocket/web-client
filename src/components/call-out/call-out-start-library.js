@@ -1,6 +1,5 @@
 import React from 'react'
 import { css } from 'linaria'
-import { useSelector } from 'react-redux'
 import { Button } from '@pocket/web-ui'
 import { CrossIcon } from '@pocket/web-ui'
 import { SIGNUP_URL } from 'common/constants'
@@ -22,11 +21,11 @@ const wrapper = css`
     height: 375px;
     width: 100%;
     content: ' ';
-    background-color: var(--color-coralLightest);
+    background-color: var(--color-calloutBackgroundSecondary);
   }
 
   div {
-    background-color: var(--color-teal100);
+    background-color: var(--color-calloutBackgroundPrimary);
     padding: 3.625rem var(--spacing150) var(--spacing150);
     width: 100%;
     position: relative;
@@ -42,6 +41,7 @@ const wrapper = css`
   }
 
   .zigzag {
+    stroke: var(--color-calloutAccent);
     margin-left: -78px;
     margin-bottom: var(--spacing150);
   }
@@ -64,6 +64,11 @@ const wrapper = css`
     background-position: center center;
     background-size: contain;
     margin: auto 0.125rem -0.25rem;
+  }
+
+  .start-button:hover {
+    background-color: var(--color-actionPrimary);
+    text-decoration: underline;
   }
 
   a {
@@ -139,6 +144,7 @@ export function CallOutStartLibrary({
             free in a quiet, calm space.
           </p>
           <Button
+            className="start-button"
             target="_blank"
             onClick={handleButtonClick}
             href={`${SIGNUP_URL}?utm_source=explore&utm_medium=web`}>
@@ -178,10 +184,9 @@ const ExplorePosition = css`
 export function CallOutStartLibraryExplore({
   handleImpression,
   handleDismiss,
-  handleComplete
+  handleComplete,
+  isAuthenticated
 }) {
-  const isAuthenticated = useSelector((state) => state.user.auth)
-
   return (
     <div className={ExplorePosition}>
       {isAuthenticated ? null : (

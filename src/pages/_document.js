@@ -5,8 +5,7 @@ class ClientDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
-        <body>
+        <Head>
           {/*
           This all sets us up for color themes without having a flash of
           light if the user has chosen another color mode as the default
@@ -14,7 +13,6 @@ class ClientDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `(function () {
-
               function setColorMode(colorMode) {
                 const htmlTag = document && document.documentElement
                 htmlTag.classList.toggle('${COLOR_MODE_PREFIX}-light', (!colorMode || colorMode === 'light'))
@@ -32,6 +30,40 @@ class ClientDocument extends Document {
             `
             }}
           />
+
+          {/* <!-- OneTrust Cookies Consent Notice start for getpocket.com --> */}
+          <script
+            type="text/javascript"
+            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e/OtAutoBlock.js"></script>
+          <script
+            src="https://cdn.cookielaw.org/consent/a7ff9c31-9f59-421f-9a8e-49b11a3eb24e/otSDKStub.js"
+            type="text/javascript"
+            charSet="UTF-8"
+            data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e"></script>
+
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              var timeHolder;
+
+              function dispatchOneTrust(groups){
+                if(typeof __NEXT_REDUX_STORE__ !== 'undefined') {
+                  __NEXT_REDUX_STORE__.dispatch({type: 'ONE_TRUST_DATA', groups})  
+                } else {
+                  clearTimeout(timeHolder); // clear for safety
+                  timeHolder = setTimeout(dispatchOneTrust, 50)
+                }
+              }
+
+              function OptanonWrapper() {
+                dispatchOneTrust(OptanonActiveGroups)
+              }
+              `
+            }}
+          />
+          {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
+        </Head>
+        <body>
           <Main />
           <NextScript />
         </body>

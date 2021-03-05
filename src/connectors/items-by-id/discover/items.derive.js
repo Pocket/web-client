@@ -58,8 +58,8 @@ function displayThumbnail({ item, curated_info }) {
     curated_info?.image_src ||
     item?.top_image_url ||
     item?.images?.[Object.keys(item.images)[0]]?.src ||
-    null
-  return correct_image ? correct_image : null
+    false
+  return correct_image ? correct_image : false
 }
 
 /** PUBLISHER
@@ -67,7 +67,7 @@ function displayThumbnail({ item, curated_info }) {
  * @returns {string} The best text to display as the publisher of this item
  */
 function displayPublisher({ item }) {
-  const urlToUse = openUrl({ item })
+  const urlToUse = saveUrl({ item })
   const derivedDomain = domainForUrl(urlToUse)
   const syndicatedPublisher = item?.syndicated_article?.publisher?.name
   return (
@@ -106,7 +106,7 @@ function openUrl({ item, redirect_url }) {
  * @returns {string} The url that should be saved or opened
  */
 function saveUrl({ item }) {
-  return item?.given_url || item?.resolved_url || null
+  return item?.given_url || item?.resolved_url || false
 }
 
 /** READ TIME
@@ -140,9 +140,7 @@ const syndicated = function ({ item }) {
 const devLink = function (item) {
   // In Dev, don't use redirect so we may test article view more easily
   const isSyndicated = syndicated({ item })
-  const isDev = process.env.SHOW_DEV === 'included'
-  const path = item?.resolved_url || false
-  return isSyndicated && isDev && path
-    ? `discover/item/${path.substring(path.lastIndexOf('/') + 1)}`
-    : false
+  const path = saveUrl({ item })
+  const url = path ? path.substring(path.lastIndexOf('/') + 1) : false
+  return isSyndicated && url ? `/discover/item/${url}` : false
 }

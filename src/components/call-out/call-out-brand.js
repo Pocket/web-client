@@ -24,7 +24,7 @@ const wrapper = css`
     position: relative;
     text-align: center;
     max-width: 833px;
-    background-color: #e8f7f6;
+    background-color: var(--color-calloutBackgroundPrimary);
     padding: var(--spacing250) var(--size400);
     margin: 0;
     font-family: var(--fontSerifAlt);
@@ -46,9 +46,12 @@ const wrapper = css`
     letter-spacing: 1px;
     z-index: var(--zIndexTooltip);
     padding: var(--spacing100);
-    background-color: #fdf2f5;
+    background-color: var(--color-calloutBackgroundSecondary);
   }
 
+  .squiggle {
+    stroke: var(--color-calloutAccent);
+  }
   .copy {
     position: relative;
   }
@@ -128,7 +131,7 @@ export function CallOutBrand() {
               fill="none">
               <defs />
               <path
-                stroke="#221F1F"
+                className="squiggle"
                 strokeMiterlimit="10"
                 strokeWidth="2"
                 d="M0 1.306c13.72 0 13.72 9.91 27.42 9.91 13.7 0 13.7-9.91 27.42-9.91 13.72 0 13.72 9.91 27.42 9.91 13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.42 9.91c13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.44 9.91"

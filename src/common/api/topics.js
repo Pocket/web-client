@@ -6,10 +6,10 @@ import { request } from 'common/utilities/request/request'
  * @param {int} (optional @default 5) curated_count Number of curated articles to return
  * @param {int} (optional @default 20) algorithmic_count Number of community sourced articles to return
  */
-export function getTopicFeed(topic, curated = 5, algorithmic = 20) {
+export function getTopicFeed(topic, curated = 5, algorithmic = 20, ssr = true) {
   return request({
     path: 'v3/discover/topics',
-    ssr: true,
+    ssr,
     params: {
       topics: topic,
       curated_count: curated,

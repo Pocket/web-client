@@ -1,7 +1,6 @@
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { MYLIST_DATA_SUCCESS } from 'actions'
 import { MYLIST_UPDATE_SUCCESS } from 'actions'
-import { HOME_DATA_LATEST_SUCCESS } from 'actions'
 import { ARTICLE_ITEM_SUCCESS } from 'actions'
 import { USER_TAGS_ITEM_SUCCESS } from 'actions'
 
@@ -12,6 +11,9 @@ import { ITEMS_DELETE_SUCCESS } from 'actions'
 import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_UNARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_TAG_SUCCESS } from 'actions'
+
+import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
+import { HOME_SAVE_SUCCESS } from 'actions'
 
 /* CONSOLIDATE
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -35,7 +37,8 @@ export const myListItemsReducers = (state = initialState, action) => {
     // This comes from the raw item /get calls
     case MYLIST_DATA_SUCCESS:
     case ARTICLE_ITEM_SUCCESS:
-    case HOME_DATA_LATEST_SUCCESS:
+    case HOME_RECENT_SAVES_SUCCESS:
+    case HOME_SAVE_SUCCESS:
     case USER_TAGS_ITEM_SUCCESS:
     case MYLIST_SEARCH_SUCCESS: {
       const { itemsById } = action

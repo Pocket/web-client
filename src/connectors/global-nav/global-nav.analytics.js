@@ -1,5 +1,3 @@
-import { takeEvery, put } from 'redux-saga/effects'
-import { trackContentImpression } from 'connectors/snowplow/snowplow.state'
 import { trackImpression } from 'connectors/snowplow/snowplow.state'
 import { trackContentEngagement } from 'connectors/snowplow/snowplow.state'
 import { trackEngagement } from 'connectors/snowplow/snowplow.state'

@@ -80,7 +80,9 @@ export default function Discover({ url }) {
 
   // Return error if no items are present
   // !! TODO: FIX THIS - This is a horrid error
-  return !items?.length ? <ErrorPage statusCode={503} /> : (
+  return !items?.length ? (
+    <ErrorPage statusCode={503} />
+  ) : (
     <Layout title={metaData.title} metaData={metaData}>
       <CardPageHeader
         title="Discover the best of the&nbsp;web"
@@ -130,6 +132,7 @@ export default function Discover({ url }) {
           handleImpression={trackSignupCalloutImpression}
           handleDismiss={trackSignupCalloutDismiss}
           handleComplete={trackSignupCalloutComplete}
+          isAuthenticated={isAuthenticated}
         />
 
         {/* Bottom List */}

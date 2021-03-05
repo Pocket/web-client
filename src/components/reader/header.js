@@ -124,7 +124,8 @@ export const ItemHeader = ({
   publisher,
   open_url,
   tags,
-  read_time
+  read_time,
+  viewOriginalEvent
 }) => {
   const authorList = listAuthors(authors)
 
@@ -148,6 +149,7 @@ export const ItemHeader = ({
         <a
           id="reader.external-link.view-original"
           className={viewOriginal}
+          onClick={viewOriginalEvent}
           href={open_url}
           target="_blank">
           <Trans i18nKey="reader:view-original">View Original</Trans>

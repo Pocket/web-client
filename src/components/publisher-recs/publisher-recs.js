@@ -4,12 +4,18 @@ import { css } from 'linaria'
 import { numberWithCommas } from 'common/utilities'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { PUBLISHER_MODULE } from 'connectors/recit/recit.analytics'
+import { darkMode, sepiaMode } from '@pocket/web-ui'
 
 const publisherStyles = css`
   img {
     width: 60px;
     height: 60px;
     margin-bottom: var(--spacing100);
+
+    ${darkMode},
+    ${sepiaMode} {
+      border-radius: 4px;
+    }
   }
   p {
     color: var(--color-textTertiary);
@@ -29,15 +35,9 @@ export const Publisher = ({ recommendationName, name, logo }) => {
   return (
     <div className={publisherStyles}>
       {logo ? (
-        <img
-          data-cy="publisher-logo"
-          src={logo.url}
-          alt={publisherName}
-        />
+        <img data-cy="publisher-logo" src={logo.url} alt={publisherName} />
       ) : null}
-      <h6
-        className="publisher-name"
-        data-cy="publisher-recs-publisher-name">
+      <h6 className="publisher-name" data-cy="publisher-recs-publisher-name">
         More from {publisherName}
       </h6>
     </div>

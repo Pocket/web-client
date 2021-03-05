@@ -25,6 +25,7 @@ import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
 import { appWithTranslation } from 'common/setup/i18n'
 import { initializeSnowplow } from 'common/setup/snowplow'
+import { signalTestsReady } from '../../cypress/support/utils'
 
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
@@ -50,6 +51,11 @@ function PocketWebClient({ Component, pageProps, err }) {
   const showDevTools = process.env.SHOW_DEV === 'included'
 
   useEffect(() => {
+    // Log out version for quick scan.  Can also help support get a read on
+    // what version a user is on when reporting an error
+    const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
+    console.log(`Pocket Web Client: ${RELEASE_VERSION}`)
+
     // Load any relevant polyfills
     loadPolyfills()
   }, [])
@@ -93,7 +99,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   // 3rd party initializations
   useEffect(() => {
-    if (user_status !== 'pending' || !sess_guid) return
+    if (user_status === 'pending' || !sess_guid) return
 
     // Set up Snowplow
     initializeSnowplow(user_id, sess_guid)
@@ -121,7 +127,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // signal to Cypress that React client side has loaded
     // Make sure this is the last thing we fire
-    // signalTestsReady()
+    signalTestsReady()
   }, [user_status, sess_guid, user_id, dispatch])
 
   // Track Page Views

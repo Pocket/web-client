@@ -9,6 +9,7 @@ import {
 } from '@pocket/web-ui'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { POCKET_MODULE } from 'connectors/recit/recit.analytics'
+import { darkMode, sepiaMode } from '@pocket/web-ui'
 
 const pocketRecsStyles = css`
   border-top: solid 3px var(--color-textPrimary);
@@ -36,6 +37,15 @@ const publisherStyles = css`
 
   img {
     max-height: 30px;
+
+    ${darkMode} {
+      mix-blend-mode: exclusion;
+      filter: invert(1);
+    }
+
+    ${sepiaMode} {
+      mix-blend-mode: multiply;
+    }
   }
 
   span {
@@ -53,7 +63,11 @@ const publisherStyles = css`
 export const Publisher = ({ name, logo }) => (
   <div className={publisherStyles}>
     {logo ? (
-      <img src={logo} data-cy="pocket-rec-publisher-logo" />
+      <img
+        src={logo}
+        data-cy="pocket-rec-publisher-logo"
+        alt={`Logo for ${name}`}
+      />
     ) : (
       <span data-cy="pocket-rec-publisher-name">{name}</span>
     )}

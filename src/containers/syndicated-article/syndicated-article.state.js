@@ -26,7 +26,7 @@ export const unSaveArticleItem = (id) => ({ type: ARTICLE_UNSAVE_REQUEST, id })
  --------------------------------------------------------------- */
 const initialState = {
   articleData: {},
-  saveStatus: null
+  saveStatus: 'unsaved'
 }
 
 export const syndicatedArticleReducers = (state = initialState, action) => {

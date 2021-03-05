@@ -15,10 +15,9 @@ const filterStyle = css`
   vertical-align: center;
   align-items: center;
   align-content: center;
-  color: var(--color-dividerSecondary);
   font-size: var(--fontSize085);
 
-  button {
+  .filter-menu button {
     display: flex;
     align-items: center;
     align-content: center;
@@ -26,7 +25,6 @@ const filterStyle = css`
     padding: 0 20px 0 30px;
     font-size: var(--fontSize085);
     font-weight: 300;
-    color: var(--color-dividerSecondary);
     line-height: 1.25;
     height: 30px;
     margin-bottom: 5px;

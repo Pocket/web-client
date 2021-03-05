@@ -9,6 +9,8 @@ import { ArticleIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
 import { VideoIcon } from '@pocket/web-ui'
 import { ChevronUpIcon } from '@pocket/web-ui'
+import { DiscoverIcon } from '@pocket/web-ui'
+import { ListViewIcon } from '@pocket/web-ui'
 
 import { css, cx } from 'linaria'
 
@@ -70,7 +72,7 @@ export const sideNavHeader = css`
   line-height: 0.8;
   padding: var(--spacing050);
   margin: 25px 0 5px;
-  color: var(--color-textTertiary);
+  color: var(--color-textSecondary);
 `
 
 export const sideNavItem = css`
@@ -122,7 +124,7 @@ export const sideNavItem = css`
   }
 `
 
-export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
+export function SideNav({ subset, tag, pinnedTags, isDisabled, showHome }) {
   const { t } = useTranslation()
 
   const [ref, inView] = useInView({ threshold: 0.5 })
@@ -146,12 +148,36 @@ export function SideNav({ subset, tag, pinnedTags, isDisabled }) {
   return (
     <div className={wrapperClass}>
       <nav role="navigation">
-        <Link href="/my-list">
-          <button className={subActive('unread')} ref={ref}>
-            <HomeIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:my-list">My List</Trans>
-          </button>
-        </Link>
+        {showHome ? (
+          <>
+            <Link href="/home">
+              <button className={subActive('home')} ref={ref}>
+                <HomeIcon className="side-nav-icon" />{' '}
+                <Trans i18nKey="nav:home">Home</Trans>
+              </button>
+            </Link>
+            <Link href="/explore">
+              <button className={subActive('discover')} ref={ref}>
+                <DiscoverIcon className="side-nav-icon" />{' '}
+                <Trans i18nKey="nav:discover">Discover</Trans>
+              </button>
+            </Link>
+            <Link href="/my-list">
+              <button className={subActive('unread')} ref={ref}>
+                <ListViewIcon className="side-nav-icon" />{' '}
+                <Trans i18nKey="nav:my-list">My List</Trans>
+              </button>
+            </Link>
+          </>
+        ) : (
+          <Link href="/my-list">
+            <button className={subActive('unread')} ref={ref}>
+              <HomeIcon className="side-nav-icon" />{' '}
+              <Trans i18nKey="nav:my-list">My List</Trans>
+            </button>
+          </Link>
+        )}
+
         <Link href="/my-list/archive">
           <button className={subActive('archive')}>
             <ArchiveIcon className="side-nav-icon" />{' '}
