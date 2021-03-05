@@ -1,3 +1,11 @@
+## [1.1.5](https://github.com/Pocket/web-client/compare/v1.1.4...v1.1.5) (2021-03-05)
+
+
+### Bug Fixes
+
+* **reader:** wrap recommendations in feature flag ([6cc6c5d](https://github.com/Pocket/web-client/commit/6cc6c5d9bf91451376a5671e396ebc407d5e99b6))
+* **recs:** adding reader recommendations ([d9c9647](https://github.com/Pocket/web-client/commit/d9c964787ef2a894eaaa0f3a70b820f8369d6d4e))
+
 ## [1.1.4](https://github.com/Pocket/web-client/compare/v1.1.3...v1.1.4) (2021-03-05)
 
 
