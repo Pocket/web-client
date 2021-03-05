@@ -169,15 +169,17 @@ function* homePreferences() {
 function* recentDataRequest() {
   try {
     const { items, itemsById, error } = yield fetchMyListData({
-      count: 5,
+      count: 1,
       offset: 0,
       state: 'unread',
       sort: 'newest'
     })
     if (error) yield put({ type: HOME_RECENT_SAVES_FAILURE, error })
 
-    // Deriving data from the response
-    yield put({ type: HOME_RECENT_SAVES_SUCCESS, items, itemsById })
+    // Remove default item for Home Experiment
+    const itemsNoDefault = items.filter((item) => item !== '2333373270')
+
+    yield put({ type: HOME_RECENT_SAVES_SUCCESS, items: itemsNoDefault, itemsById }) // prettier-ignore
   } catch (error) {
     console.log(error)
     yield put({ type: HOME_RECENT_SAVES_FAILURE, error })

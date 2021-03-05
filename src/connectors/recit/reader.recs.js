@@ -1,11 +1,10 @@
 import { css } from 'linaria'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { readerRecsRequested } from './recit.state'
+import { readerRecsRequest } from './recit.state'
 import { Card } from './card'
 
 import { breakpointLargeHandset } from '@pocket/web-ui'
-
 
 const readerRowStyles = css`
   display: grid;
@@ -39,7 +38,7 @@ export const ReaderRecommendations = ({ id }) => {
   const recommendations = useSelector((state) => state.recit.readerRecs)
 
   useEffect(() => {
-    dispatch(readerRecsRequested(id))
+    dispatch(readerRecsRequest(id))
   }, [dispatch])
 
   const onSave = (itemId) => {
@@ -59,7 +58,7 @@ export const ReaderRecommendations = ({ id }) => {
 
   return recommendations ? (
     <div className={readerRowStyles}>
-      {Object.keys(recommendations).map(itemId => (
+      {Object.keys(recommendations).map((itemId) => (
         <Card
           key={itemId}
           item={recommendations[itemId]}
@@ -69,5 +68,5 @@ export const ReaderRecommendations = ({ id }) => {
         />
       ))}
     </div>
-  ): null
+  ) : null
 }

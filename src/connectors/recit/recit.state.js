@@ -1,35 +1,32 @@
 import { takeLatest, put } from 'redux-saga/effects'
 import {
-  PUBLISHER_RECS_REQUESTED,
+  PUBLISHER_RECS_REQUEST,
   PUBLISHER_RECS_SUCCESS,
   PUBLISHER_RECS_FAILURE,
-  POCKET_RECS_REQUESTED,
+  POCKET_RECS_REQUEST,
   POCKET_RECS_SUCCESS,
   POCKET_RECS_FAILURE,
-  READER_RECS_REQUESTED,
+  READER_RECS_REQUEST,
   READER_RECS_SUCCESS,
-  READER_RECS_FAILURE
+  READER_RECS_FAILURE,
+  RECENT_RECS_REQUEST,
+  RECENT_RECS_SUCCESS,
+  RECENT_RECS_FAILURE
 } from 'actions'
-import { getPublisherRecs, getPocketRecs, getRecommendations } from 'common/api/recit'
-import { saveItem } from 'common/api/saveItem'
-import { removeItem } from 'common/api/removeItem'
+
+import { getPublisherRecs } from 'common/api/recit'
+import { getPocketRecs } from 'common/api/recit'
+import { getRecommendations } from 'common/api/recit'
+
 import { arrayToObject } from 'common/utilities'
 import { deriveReaderRecitItems } from './recit.derive'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const publisherRecsRequested = (itemId) => ({
-  type: PUBLISHER_RECS_REQUESTED,
-  itemId
-})
-export const pocketRecsRequested = (itemId) => ({
-  type: POCKET_RECS_REQUESTED,
-  itemId
-})
-export const readerRecsRequested = (itemId) =>  ({
-  type: READER_RECS_REQUESTED,
-  itemId
-})
+export const publisherRecsRequest = (itemId) => ({ type: PUBLISHER_RECS_REQUEST, itemId }) //prettier-ignore
+export const pocketRecsRequest = (itemId) => ({ type: POCKET_RECS_REQUEST, itemId }) //prettier-ignore
+export const readerRecsRequest = (itemId) =>  ({ type: READER_RECS_REQUEST, itemId }) //prettier-ignore
+export const recentRecsRequest = (itemId) => ({type: RECENT_RECS_REQUEST, itemId}) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -40,7 +37,9 @@ const initialState = {
   pocketRecs: [],
   pocketRecId: null,
   pocketRecModel: null,
-  readerRecs: {}
+  readerRecs: {},
+  recentRecId: null,
+  recentRecs: {}
 }
 
 export const recitReducers = (state = initialState, action) => {
@@ -78,9 +77,7 @@ export const recitReducers = (state = initialState, action) => {
     }
 
     case READER_RECS_SUCCESS: {
-      const {
-        readerRecs
-      } = action
+      const { readerRecs } = action
       return {
         ...state,
         readerRecs
@@ -88,10 +85,28 @@ export const recitReducers = (state = initialState, action) => {
     }
 
     // Refreshes recommendations on each load
-    case READER_RECS_REQUESTED: {
+    case READER_RECS_REQUEST: {
       return {
         ...state,
         readerRecs: {}
+      }
+    }
+
+    case RECENT_RECS_SUCCESS: {
+      const { recentRecs, recentRecId } = action
+      return {
+        ...state,
+        recentRecId,
+        recentRecs
+      }
+    }
+
+    // Refreshes recommendations on each load
+    case RECENT_RECS_REQUEST: {
+      return {
+        ...state,
+        recentRecId: null,
+        recentRecs: {}
       }
     }
 
@@ -103,9 +118,10 @@ export const recitReducers = (state = initialState, action) => {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const recitSagas = [
-  takeLatest(PUBLISHER_RECS_REQUESTED, fetchPublisherRecs),
-  takeLatest(POCKET_RECS_REQUESTED, fetchPocketRecs),
-  takeLatest(READER_RECS_REQUESTED, fetchReaderRecs)
+  takeLatest(PUBLISHER_RECS_REQUEST, fetchPublisherRecs),
+  takeLatest(POCKET_RECS_REQUEST, fetchPocketRecs),
+  takeLatest(READER_RECS_REQUEST, fetchReaderRecs),
+  takeLatest(RECENT_RECS_REQUEST, fetchRecentRecs)
 ]
 
 function* fetchPublisherRecs({ itemId }) {
@@ -137,5 +153,19 @@ function* fetchReaderRecs({ itemId }) {
     yield put({ type: READER_RECS_SUCCESS, readerRecs: itemsById })
   } catch (error) {
     yield put({ type: READER_RECS_FAILURE, error })
+  }
+}
+
+function* fetchRecentRecs({ itemId: recentRecId }) {
+  try {
+    if (!recentRecId) return
+    const response = yield getRecommendations(recentRecId)
+
+    const derivedItems = yield deriveReaderRecitItems(response.recommendations)
+    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+
+    yield put({ type: RECENT_RECS_SUCCESS, recentRecs: itemsById, recentRecId })
+  } catch (error) {
+    yield put({ type: RECENT_RECS_FAILURE, error })
   }
 }

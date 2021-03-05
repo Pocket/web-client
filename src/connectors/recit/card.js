@@ -124,7 +124,7 @@ export const Card = ({ item, onSave, onOpen, impressionEvent }) => {
     excerpt,
     open_url,
     read_time,
-    save_status
+    save_status = 'unsaved'
   } = item
 
   const onVisible = () => {
@@ -133,10 +133,7 @@ export const Card = ({ item, onSave, onOpen, impressionEvent }) => {
 
   return (
     <VisibilitySensor onVisible={onVisible}>
-      <article
-        className={card}
-        key={id}
-        data-cy={`article-card-${id}`}>
+      <article className={card} key={id} data-cy={`article-card-${id}`}>
         <a
           href={open_url}
           onClick={onOpen}

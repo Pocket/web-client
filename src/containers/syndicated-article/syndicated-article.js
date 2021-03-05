@@ -3,8 +3,8 @@ import ErrorPage from 'pages/_error'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
 import { saveArticleItem, unSaveArticleItem } from './syndicated-article.state'
-import { publisherRecsRequested } from '/connectors/recit/recit.state'
-import { pocketRecsRequested } from '/connectors/recit/recit.state'
+import { publisherRecsRequest } from '/connectors/recit/recit.state'
+import { pocketRecsRequest } from '/connectors/recit/recit.state'
 
 import { trackPageView } from './syndicated-article.analytics'
 import { trackShareClick } from './syndicated-article.analytics'
@@ -276,8 +276,8 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
 
   useEffect(() => {
     trackPageView()
-    dispatch(publisherRecsRequested(originalItemId))
-    dispatch(pocketRecsRequested(originalItemId))
+    dispatch(publisherRecsRequest(originalItemId))
+    dispatch(pocketRecsRequest(originalItemId))
   }, [dispatch])
 
   if (!articleData) {
