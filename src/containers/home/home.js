@@ -32,6 +32,12 @@ import { topicOpenEvent } from './home.analytics'
 import { collectionImpressionEvent } from './home.analytics'
 import { collectionOpenEvent } from './home.analytics'
 
+import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
+import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
+import { ShareModal } from 'connectors/confirm-share/confirm-share'
+import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
+import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
+
 const selectionStyles = css`
   margin-bottom: 2.25rem;
 `
@@ -148,6 +154,11 @@ export default function Collection(props) {
           />
         </main>
       ) : null}
+      <DeleteModal />
+      <TaggingModal />
+      <ShareModal />
+      <ArchiveModal />
+      <FavoriteModal />
     </Layout>
   )
 }
