@@ -48,7 +48,6 @@ export default function Collection(props) {
   const dispatch = useDispatch()
 
   const collectionSet = useSelector((state) => state.home.collectionSet)
-  console.log({ collectionSet })
   const topicSections = useSelector((state) => state.home.topicSections)
   const recentSaves = useSelector((state) => state.home.recentSaves)
   const impressions = useSelector((state) => state.home.impressions)
@@ -102,7 +101,7 @@ export default function Collection(props) {
   useEffect(() => {
     dispatch(homeSetPreferences())
     dispatch(getTopicList())
-    // dispatch(getRecentSaves()) // Commenting this out to iterate on recent saves
+    dispatch(getRecentSaves()) // Commenting this out to iterate on recent saves
     dispatch(getCollections())
   }, [dispatch])
 
