@@ -11,6 +11,13 @@ import { DISCOVER_ITEMS_UNSAVE_REQUEST } from 'actions'
 import { DISCOVER_ITEMS_UNSAVE_SUCCESS } from 'actions'
 import { DISCOVER_ITEMS_UNSAVE_FAILURE } from 'actions'
 
+import { HOME_TOPIC_SECTION_SUCCESS } from 'actions'
+import { HOME_SAVE_REQUEST } from 'actions'
+import { HOME_SAVE_SUCCESS } from 'actions'
+import { HOME_SAVE_FAILURE } from 'actions'
+import { HOME_UNSAVE_SUCCESS } from 'actions'
+import { HOME_UNSAVE_FAILURE } from 'actions'
+
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
@@ -30,27 +37,37 @@ export const discoverItemsReducers = (state = initialState, action) => {
       return { ...state, ...hydrated }
     }
 
-    case DISCOVER_ITEMS_SAVE_REQUEST: {
+    case HOME_TOPIC_SECTION_SUCCESS: {
+      const { itemsById } = action
+      return { ...state, ...itemsById }
+    }
+
+    case DISCOVER_ITEMS_SAVE_REQUEST:
+    case HOME_SAVE_REQUEST: {
       const { id } = action
       return updateSaveStatus(state, id, 'saving')
     }
 
-    case DISCOVER_ITEMS_SAVE_SUCCESS: {
+    case DISCOVER_ITEMS_SAVE_SUCCESS:
+    case HOME_SAVE_SUCCESS: {
       const { id } = action
       return updateSaveStatus(state, id, 'saved')
     }
 
-    case DISCOVER_ITEMS_SAVE_FAILURE: {
+    case DISCOVER_ITEMS_SAVE_FAILURE:
+    case HOME_SAVE_FAILURE: {
       const { id } = action
       return updateSaveStatus(state, id, 'unsaved')
     }
 
-    case DISCOVER_ITEMS_UNSAVE_SUCCESS: {
+    case DISCOVER_ITEMS_UNSAVE_SUCCESS:
+    case HOME_UNSAVE_SUCCESS: {
       const { id } = action
       return updateSaveStatus(state, id, 'unsaved')
     }
 
-    case DISCOVER_ITEMS_UNSAVE_FAILURE: {
+    case DISCOVER_ITEMS_UNSAVE_FAILURE:
+    case HOME_UNSAVE_FAILURE: {
       const { id } = action
       return updateSaveStatus(state, id, 'saved')
     }

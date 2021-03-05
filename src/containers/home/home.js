@@ -10,7 +10,6 @@ import { getTopicList } from 'connectors/topic-list/topic-list.state'
 import { getRecentSaves } from 'containers/home/home.state'
 import { getCollections } from 'containers/home/home.state'
 import { HomeJourneyHeader } from 'components/headers/home-header'
-import { HomeSectionHeader } from 'components/headers/home-header'
 import { TopicSelector } from 'components/topic-selector/topic-selector'
 
 import { HomeCollectionList } from 'connectors/item-card/home/listCollection'
