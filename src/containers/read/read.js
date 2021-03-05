@@ -17,6 +17,7 @@ import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
 import { ReaderFonts } from '@pocket/web-ui'
+import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
@@ -326,11 +327,13 @@ export default function Reader() {
         </article>
       </main>
       {articleContent ? (
-        <section
-          className={recsWrapper}
-          style={{ maxWidth: customStyles.maxWidth }}>
-          <ReaderRecommendations id={item_id} />
-        </section>
+        <FeatureFlag flag="temp.web.client.reader.recommendations">
+          <section
+            className={recsWrapper}
+            style={{ maxWidth: customStyles.maxWidth }}>
+            <ReaderRecommendations id={item_id} />
+          </section>
+        </FeatureFlag>
       ) : null}
       {!isPremium && articleContent ? (
         <BottomUpsell
