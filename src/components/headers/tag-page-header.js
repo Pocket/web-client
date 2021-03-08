@@ -13,6 +13,9 @@ import { WithTooltip } from '@pocket/web-ui'
 import { buttonReset } from 'components/buttons/button-reset'
 import { useTranslation } from 'common/setup/i18n'
 
+import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
+import { Button } from '@pocket/web-ui'
+
 const myListHeaderStyle = css`
   margin-bottom: var(--spacing100);
   font-family: 'Graphik Web';
@@ -59,6 +62,12 @@ const myListHeaderStyle = css`
       color: var(--color-textLinkHover);
     }
   }
+  a.share {
+    margin-left: 1.5rem;
+    &:hover {
+      color: var(--color-actionPrimaryText);
+    }
+  }
 `
 
 export const UnTaggedHeader = ({ subset, filter, tag }) => (
@@ -78,6 +87,7 @@ export const TaggedHeader = ({
   pinTag,
   editTag,
   deleteTag,
+  shareTag,
   isPinned
 }) => {
   const { t } = useTranslation()
@@ -87,6 +97,16 @@ export const TaggedHeader = ({
       <div>
         <h1 className="pageTitle">{capitalizeFirstLetter(title)}</h1>
         <FilterMenu subset={subset} filter={filter} tag={tag} />
+        <FeatureFlag flag="temp.web.client.tag.collection.share">
+          <Button
+            className="share"
+            size="small"
+            href="/public/configure"
+            target="_blank"
+            onClick={shareTag}>
+            Share
+          </Button>
+        </FeatureFlag>
       </div>
       <div className="tag-actions">
         <WithTooltip label={t('nav:pin-tag', 'Pin Tag')} delay={true}>
@@ -117,6 +137,7 @@ export const TagPageHeader = ({
   pinTag,
   editTag,
   deleteTag,
+  shareTag,
   isPinned
 }) => {
   const TagHeader = '_untagged_'.includes(title) ? UnTaggedHeader : TaggedHeader
@@ -130,6 +151,7 @@ export const TagPageHeader = ({
       pinTag={pinTag}
       editTag={editTag}
       deleteTag={deleteTag}
+      shareTag={shareTag}
       isPinned={isPinned}
     />
   ) : null
