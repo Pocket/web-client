@@ -31,7 +31,7 @@ export const ScrollTracker = (ComponentToWrap) => {
       }
 
       document.addEventListener('scroll', handleScroll)
-      return window.removeEventListener('scroll', handleScroll)
+      return () => document.removeEventListener('scroll', handleScroll)
     }, [])
 
     return (
