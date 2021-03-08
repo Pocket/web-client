@@ -3,19 +3,7 @@ import { pinUserTag } from './tags-page.state'
 import { editUserTag } from './tags-page.state'
 import { deleteUserTag } from './tags-page.state'
 import { useDispatch, useSelector } from 'react-redux'
-
-// Experiment analytics
-import { trackEngagement } from 'connectors/snowplow/snowplow.state'
-import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
-import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
-
-const shareEngagement = (tag) => (trackEngagement(
-  ENGAGEMENT_TYPE_GENERAL,
-  UI_COMPONENT_BUTTON,
-  0, // position in list (zero since it's not in list)
-  'tag.collection.share',
-  tag
-))
+import { sendShareEngagement } from './tags-page.analytics'
 
 export function TagPageHeader({ subset, title, filter, tag }) {
   const isPinned = useSelector(
@@ -25,7 +13,7 @@ export function TagPageHeader({ subset, title, filter, tag }) {
   const editTag = () => dispatch(editUserTag(tag))
   const deleteTag = () => dispatch(deleteUserTag(tag))
   const pinTag = () => dispatch(pinUserTag(tag))
-  const shareTag = () => dispatch(shareEngagement(tag))
+  const shareTag = () => dispatch(sendShareEngagement(tag))
 
   return subset && tag ? (
     <TagHeader

@@ -7,6 +7,7 @@ import { getUserTags } from './tags-page.state'
 import { MyListHeader } from 'components/headers/my-list-header'
 import { RecentTags } from 'components/tag-lists/recent-tags'
 import { TagList } from 'components/tag-lists/tags-list'
+import { sendShareEngagement } from './tags-page.analytics'
 
 export default function TagsPage(props) {
   const { metaData = {}, subset = 'active', filter } = props
@@ -22,6 +23,8 @@ export default function TagsPage(props) {
   const valueChange = (e) => setValue(e?.target?.value)
 
   const shouldRender = userStatus !== 'pending'
+
+  const shareTag = () => dispatch(sendShareEngagement('all-tags'))
 
   useEffect(() => {
     dispatch(getUserTags())

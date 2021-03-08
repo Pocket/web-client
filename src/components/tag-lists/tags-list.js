@@ -1,10 +1,12 @@
 import { css } from 'linaria'
 import Link from 'next/link'
 import { Pill } from '@pocket/web-ui'
+import { Button } from '@pocket/web-ui'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import { SectionHeader } from 'components/headers/section-header'
 import { matchSorter } from 'match-sorter'
 import { useTranslation, Trans } from 'common/setup/i18n'
+import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 
 const allTagStyle = css`
   .searchBlock {
@@ -25,7 +27,14 @@ const allTagStyle = css`
   }
 `
 
-export function TagList({ userTags, value, valueChange }) {
+const headerRow = css`
+  h4 {
+    display: inline-block;
+    margin-right: 1.5rem;
+  }
+`
+
+export function TagList({ userTags, value, valueChange, shareTag }) {
   const { t } = useTranslation()
 
   const sortedTags = matchSorter(userTags, value).slice(0, 5)
@@ -33,7 +42,20 @@ export function TagList({ userTags, value, valueChange }) {
 
   return (
     <div className={allTagStyle}>
-      <SectionHeader sectionTitle={t('tags:all-tags', 'All Tags')} />
+      <section className={headerRow}>
+        <SectionHeader sectionTitle={t('tags:all-tags', 'All Tags')} />
+        <FeatureFlag flag="temp.web.client.tag.collection.share">
+          <Button
+            className="share"
+            size="small"
+            href="/public/configure"
+            target="_blank"
+            onClick={shareTag}>
+            Share
+          </Button>
+        </FeatureFlag>
+      </section>
+
       <div className="searchBlock">
         <input
           value={value}
