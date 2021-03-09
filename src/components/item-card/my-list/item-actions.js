@@ -1,5 +1,5 @@
 import { css, cx } from 'linaria'
-import { WithTooltip } from '@pocket/web-ui'
+import { topTooltipDelayed } from 'components/tooltip/tooltip'
 
 const itemActionStyle = css`
   display: flex;
@@ -54,13 +54,15 @@ const menuItemStyle = css`
 `
 
 const MenuItem = ({ label, icon, onClick, active }) => {
-  const itemStyle = cx(menuItemStyle, active && 'active')
+  const itemStyle = cx(menuItemStyle, topTooltipDelayed, active && 'active')
   return (
-    <WithTooltip label={label} placement="top" delay={true}>
-      <button aria-label={label} className={itemStyle} onClick={onClick}>
-        {icon ? icon : null}
-      </button>
-    </WithTooltip>
+    <button
+      aria-label={label}
+      data-tooltip={label}
+      className={itemStyle}
+      onClick={onClick}>
+      {icon ? icon : null}
+    </button>
   )
 }
 
