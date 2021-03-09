@@ -39,6 +39,8 @@ import { HOME_SET_IMPRESSION } from 'actions'
 
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 
+import { ITEMS_ADD_SUCCESS } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const homeSetPreferences = () => ({ type: HOME_SET_PREFERENCES })
@@ -238,6 +240,7 @@ function* homeSaveRequest({ url, id, position }) {
     const itemsById = arrayToObject(derivedItems, 'resolved_id')
 
     yield put({ type: HOME_SAVE_SUCCESS, id, items, itemsById })
+    yield put({ type: ITEMS_ADD_SUCCESS })
   } catch (error) {
     yield put({ type: HOME_SAVE_FAILURE, error })
   }

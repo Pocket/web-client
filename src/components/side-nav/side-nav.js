@@ -19,9 +19,8 @@ import { useInView } from 'react-intersection-observer'
 export const sideNavWrapper = css`
   position: relative;
   grid-column: span 2;
-  min-height: 50vh;
   max-width: 165px;
-  min-height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -31,8 +30,6 @@ export const sideNavWrapper = css`
     pointer-events: none;
   }
 
-  .top-nav {
-  }
   .bottom-nav {
     margin: 0;
     position: sticky;

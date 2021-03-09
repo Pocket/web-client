@@ -36,6 +36,7 @@ import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
 import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
 import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
+import { Toasts } from 'connectors/toasts/toast-list'
 
 const selectionStyles = css`
   margin-bottom: 2.25rem;
@@ -157,6 +158,7 @@ export default function Collection(props) {
       <ShareModal />
       <ArchiveModal />
       <FavoriteModal />
+      <Toasts />
     </Layout>
   )
 }
