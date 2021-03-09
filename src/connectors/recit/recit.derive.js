@@ -12,19 +12,18 @@ export function deriveReaderRecitItems(recommendations) {
    * @read_time {string} An approximation of how long it takes to read the article based on
    * @save_status {string} A string value (unsaved, saving, saved)
    */
-  return recommendations.map((feedItem) => {
-    return {
-      resolved_id: feedItem.item?.resolved_id,
-      title: displayTitle(feedItem),
-      thumbnail: displayThumbnail(feedItem),
-      publisher: displayPublisher(feedItem),
-      excerpt: displayExcerpt(feedItem),
-      save_url: saveUrl(feedItem),
-      open_url: openUrl(feedItem),
-      read_time: readTime(feedItem),
-      save_status: 'unsaved'
-    }
-  })
+  return recommendations.map((feedItem) => ({
+    resolved_id: feedItem.item?.resolved_id,
+    item_id: feedItem.item?.item_id || feedItem.item?.resolved_id,
+    title: displayTitle(feedItem),
+    thumbnail: displayThumbnail(feedItem),
+    publisher: displayPublisher(feedItem),
+    excerpt: displayExcerpt(feedItem),
+    save_url: saveUrl(feedItem),
+    open_url: openUrl(feedItem),
+    read_time: readTime(feedItem),
+    save_status: 'unsaved'
+  }))
 }
 
 /** DERIVE Functions

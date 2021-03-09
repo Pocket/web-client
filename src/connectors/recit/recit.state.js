@@ -1,4 +1,4 @@
-import { takeLatest, put } from 'redux-saga/effects'
+import { takeLatest, takeEvery, put } from 'redux-saga/effects'
 import {
   PUBLISHER_RECS_REQUEST,
   PUBLISHER_RECS_SUCCESS,
@@ -11,12 +11,21 @@ import {
   READER_RECS_FAILURE,
   RECENT_RECS_REQUEST,
   RECENT_RECS_SUCCESS,
-  RECENT_RECS_FAILURE
+  RECENT_RECS_FAILURE,
+  RECENT_REC_SAVE_REQUEST,
+  RECENT_REC_SAVE_SUCCESS,
+  RECENT_REC_SAVE_FAILURE,
+  RECENT_REC_UNSAVE_REQUEST,
+  RECENT_REC_UNSAVE_SUCCESS,
+  RECENT_REC_UNSAVE_FAILURE
 } from 'actions'
 
 import { getPublisherRecs } from 'common/api/recit'
 import { getPocketRecs } from 'common/api/recit'
 import { getRecommendations } from 'common/api/recit'
+
+import { saveItem as saveItemAPI } from 'common/api/saveItem'
+import { removeItem as removeItemAPI } from 'common/api/removeItem'
 
 import { arrayToObject } from 'common/utilities'
 import { deriveReaderRecitItems } from './recit.derive'
@@ -27,6 +36,8 @@ export const publisherRecsRequest = (itemId) => ({ type: PUBLISHER_RECS_REQUEST,
 export const pocketRecsRequest = (itemId) => ({ type: POCKET_RECS_REQUEST, itemId }) //prettier-ignore
 export const readerRecsRequest = (itemId) =>  ({ type: READER_RECS_REQUEST, itemId }) //prettier-ignore
 export const recentRecsRequest = (itemId) => ({type: RECENT_RECS_REQUEST, itemId}) //prettier-ignore
+export const saveItem = (id, url, analytics) => ({type: RECENT_REC_SAVE_REQUEST, id, url, analytics}) //prettier-ignore
+export const unSaveItem = id => ({ type: RECENT_REC_UNSAVE_REQUEST, id }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -121,8 +132,39 @@ export const recitSagas = [
   takeLatest(PUBLISHER_RECS_REQUEST, fetchPublisherRecs),
   takeLatest(POCKET_RECS_REQUEST, fetchPocketRecs),
   takeLatest(READER_RECS_REQUEST, fetchReaderRecs),
-  takeLatest(RECENT_RECS_REQUEST, fetchRecentRecs)
+  takeLatest(RECENT_RECS_REQUEST, fetchRecentRecs),
+  takeEvery(RECENT_REC_SAVE_REQUEST, itemsSaveRequest),
+  takeEvery(RECENT_REC_UNSAVE_REQUEST, itemsUnSaveRequest)
 ]
+
+/** SAGA :: RESPONDERS
+ --------------------------------------------------------------- */
+
+function* itemsSaveRequest(action) {
+  try {
+    const { url, id, analytics } = action
+
+    const response = yield saveItemAPI(url, analytics)
+    if (response?.status !== 1) throw new Error('Unable to save')
+
+    yield put({ type: RECENT_REC_SAVE_SUCCESS, id })
+  } catch (error) {
+    yield put({ type: RECENT_REC_SAVE_FAILURE, error })
+  }
+}
+
+function* itemsUnSaveRequest(action) {
+  try {
+    const { id } = action
+
+    const response = yield removeItemAPI(id)
+    if (response?.status !== 1) throw new Error('Unable to remove item')
+
+    yield put({ type: RECENT_REC_UNSAVE_SUCCESS, id })
+  } catch (error) {
+    yield put({ type: RECENT_REC_UNSAVE_FAILURE, error })
+  }
+}
 
 function* fetchPublisherRecs({ itemId }) {
   try {
@@ -159,7 +201,7 @@ function* fetchReaderRecs({ itemId }) {
 function* fetchRecentRecs({ itemId: recentRecId }) {
   try {
     if (!recentRecId) return
-    const response = yield getRecommendations(recentRecId)
+    const response = yield getRecommendations(recentRecId, 4)
 
     const derivedItems = yield deriveReaderRecitItems(response.recommendations)
     const itemsById = arrayToObject(derivedItems, 'resolved_id')
