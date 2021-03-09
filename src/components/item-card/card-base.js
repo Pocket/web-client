@@ -1,7 +1,7 @@
 import { css } from 'linaria'
 
 // !! Caution
-// Changes to this file will change ALL cards across the app.
+// Changes to cardStyles will change ALL cards across the app (eventually).
 // The goal of these styles is to provide a baseline of styles which should/
 // be overridden for specific card types
 export const cardStyles = css`
@@ -164,14 +164,204 @@ export const cardStyles = css`
   &.subset {
     grid-column: span 8;
     a.cardLink {
+      .media {
+        grid-column: span 4;
+      }
+      .content {
+        grid-column: span 8;
+      }
+      .title {
+        white-space: initial;
+      }
+    }
+  }
+`
+export const cardBlock = css`
+  max-width: 552px;
+  grid-column: span 4;
+  &.noMedia {
+    a.cardLink .title {
+      margin-top: 0;
+    }
+  }
+`
+
+export const cardWide = css`
+  max-width: 745px;
+  grid-column: span 10;
+  a.cardLink {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-column-gap: var(--size150);
+    padding-bottom: 0;
+
     .media {
-      grid-column: span 4;
+      grid-column: span 3;
     }
     .content {
+      grid-column: span 5;
+      padding-bottom: var(--size200);
+    }
+    .title {
+      margin-top: 0;
+      font-size: var(--fontSize150);
+      line-height: 1.286;
+      max-height: 3.8em;
+    }
+  }
+
+  .footer {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-column-gap: var(--size150);
+    .actions {
+      grid-column: 4 / span 5;
+    }
+  }
+
+  &.noActions {
+    a.cardLink .content {
+      padding-bottom: 0;
+    }
+  }
+
+  &.noMedia {
+    a.cardLink .content,
+    .footer .actions {
       grid-column: span 8;
     }
-    .title{
-      white-space: initial;
+  }
+`
+
+export const cardList = css`
+  padding: var(--size100) 0;
+  grid-column: span 12;
+  a.cardLink {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: var(--size150);
+    padding-bottom: 0;
+
+    .media {
+      grid-column: span 1;
     }
+    .content {
+      grid-column: span 11;
+    }
+    .title {
+      margin-top: 0;
+      font-size: var(--fontSize100);
+      line-height: 1.286;
+      width: 70%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .details {
+      font-size: var(--fontSize075);
+      line-height: 1.5;
+      padding: 0;
+    }
+    .excerpt {
+      display: none;
+    }
+  }
+  .footer {
+    width: initial;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    .actions {
+      padding: 0;
+    }
+  }
+`
+
+export const cardDetail = css`
+  grid-column: span 12;
+  height: 155px;
+  padding: 1em 0;
+  border-bottom: 1px solid var(--color-dividerTertiary);
+
+  a.cardLink {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: var(--size150);
+    padding-bottom: 0;
+
+    .media {
+      grid-column: span 2;
+    }
+
+    .content {
+      grid-column: span 10;
+      position: relative;
+    }
+
+    .title {
+      margin-top: 0;
+      font-size: var(--fontSize100);
+      line-height: 1.286;
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .details {
+      font-size: var(--fontSize075);
+      line-height: 1.5;
+      padding: var(--size025) 0 0;
+    }
+
+    .excerpt {
+      font-size: var(--fontSize085);
+      max-height: 3.2em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+  }
+  .item-actions {
+    padding: 0;
+    &:after {
+      box-shadow: none;
+    }
+  }
+
+  .item-menu {
+    width: initial;
+  }
+
+  .footer {
+    align-items: center;
+    align-content: center;
+    padding-top: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: var(--size150);
+  }
+
+  .bulkBacking {
+    padding: 0 0.5em;
+    transform: translate(-0.5em, -1em);
+  }
+
+  .tags {
+    grid-column: 3 / span 7;
+    overflow: hidden;
+    white-space: nowrap;
+    a {
+      font-size: 14px;
+      margin-right: 0.5em;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+  .actions {
+    grid-column: 10 / span 3;
+    padding: 0;
+    justify-content: flex-end;
   }
 `

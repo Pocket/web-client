@@ -12,198 +12,13 @@ import { ActionsDiscover } from 'connectors/item-card/actions/discover'
 import { ActionsBulkEdit } from 'connectors/item-card/actions/bulk-edit'
 import { ActionsMessage } from 'connectors/item-card/actions/message'
 import { cardStyles } from './card-base'
-
+import { cardBlock } from './card-base'
+import { cardWide } from './card-base'
+import { cardList } from './card-base'
+import { cardDetail } from './card-base'
+import { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 import Link from 'next/link'
-
-const cardBlock = css`
-  max-width: 552px;
-  grid-column: span 4;
-  &.noMedia {
-    a.cardLink .title {
-      margin-top: 0;
-    }
-  }
-`
-
-const cardWide = css`
-  max-width: 745px;
-  grid-column: span 10;
-  a.cardLink {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-column-gap: var(--size150);
-    padding-bottom: 0;
-
-    .media {
-      grid-column: span 3;
-    }
-    .content {
-      grid-column: span 5;
-      padding-bottom: var(--size200);
-    }
-    .title {
-      margin-top: 0;
-      font-size: var(--fontSize150);
-      line-height: 1.286;
-      max-height: 3.8em;
-    }
-  }
-
-  .footer {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-column-gap: var(--size150);
-    .actions {
-      grid-column: 4 / span 5;
-    }
-  }
-
-  &.noActions {
-    a.cardLink .content {
-      padding-bottom: 0;
-    }
-  }
-
-  &.noMedia {
-    a.cardLink .content,
-    .footer .actions {
-      grid-column: span 8;
-    }
-  }
-`
-
-const cardList = css`
-  padding: var(--size100) 0;
-  grid-column: span 12;
-  a.cardLink {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-column-gap: var(--size150);
-    padding-bottom: 0;
-
-    .media {
-      grid-column: span 1;
-    }
-    .content {
-      grid-column: span 11;
-    }
-    .title {
-      margin-top: 0;
-      font-size: var(--fontSize100);
-      line-height: 1.286;
-      width: 70%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .details {
-      font-size: var(--fontSize075);
-      line-height: 1.5;
-      padding: 0;
-    }
-    .excerpt {
-      display: none;
-    }
-  }
-  .footer {
-    width: initial;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    .actions {
-      padding: 0;
-    }
-  }
-`
-
-const cardDetail = css`
-  grid-column: span 12;
-  height: 155px;
-  padding: 1em 0;
-  border-bottom: 1px solid var(--color-dividerTertiary);
-
-  a.cardLink {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-column-gap: var(--size150);
-    padding-bottom: 0;
-
-    .media {
-      grid-column: span 2;
-    }
-
-    .content {
-      grid-column: span 10;
-      position: relative;
-    }
-
-    .title {
-      margin-top: 0;
-      font-size: var(--fontSize100);
-      line-height: 1.286;
-      width: auto;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .details {
-      font-size: var(--fontSize075);
-      line-height: 1.5;
-      padding: var(--size025) 0 0;
-    }
-
-    .excerpt {
-      font-size: var(--fontSize085);
-      max-height: 3.2em;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: block;
-    }
-  }
-  .item-actions {
-    padding: 0;
-    &:after {
-      box-shadow: none;
-    }
-  }
-
-  .item-menu {
-    width: initial;
-  }
-
-  .footer {
-    align-items: center;
-    align-content: center;
-    padding-top: 0.5rem;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-column-gap: var(--size150);
-  }
-
-  .bulkBacking {
-    padding: 0 0.5em;
-    transform: translate(-0.5em, -1em);
-  }
-
-  .tags {
-    grid-column: 3 / span 7;
-    overflow: hidden;
-    white-space: nowrap;
-    a {
-      font-size: 14px;
-      margin-right: 0.5em;
-      cursor: pointer;
-      text-decoration: none;
-    }
-  }
-  .actions {
-    grid-column: 10 / span 3;
-    padding: 0;
-    justify-content: flex-end;
-  }
-`
 
 /** Card
  * Item card for display.
@@ -223,11 +38,19 @@ export const Card = ({
   showMedia = true,
   itemType,
   cardShape,
-  actions,
   bulkEdit,
   bulkSelected,
   position,
-  className
+  className,
+  isAuthenticated,
+  impressionAction,
+  engagementAction,
+  saveAction,
+  reportAction,
+  unSaveAction,
+  openAction,
+  itemBulkSelect,
+  itemBulkDeSelect
 }) => {
   const {
     item_id: id,
@@ -242,11 +65,37 @@ export const Card = ({
     open_url,
     openExternal,
     syndicated,
-    onOpen = () => {}
+    save_url,
+    save_status
   } = item
 
-  const { itemBulkSelect, itemBulkDeSelect } = actions
+  // Fire item impression
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
 
+  useEffect(() => {
+    if (inView) impressionAction(item, position, id)
+  }, [inView, id, impressionAction, item, position])
+
+  if (!item) return null
+
+  const onSave = () => {
+    if (isAuthenticated) {
+      if (save_status === 'saved') engagementAction(item, position)
+      if (save_status !== 'saved') saveAction(item, id, save_url, position)
+      return
+    }
+
+    // Not authenticated so just tracking the click
+    engagementAction(item, position)
+  }
+
+  const onReport = () => reportAction(item, position)
+  const onOpen = () => openAction(item, position)
+
+  /**
+   * Layout is defined here.
+   * ----------------------------------------------------------------
+   */
   const card = cx(
     cardStyles,
     cardShape === 'block' && `${cardBlock} block`,
@@ -284,6 +133,7 @@ export const Card = ({
 
   return (
     <article
+      ref={ref}
       className={card}
       key={id}
       data-id={`article-card-${id}`}
@@ -328,11 +178,14 @@ export const Card = ({
         {type ? (
           <ActionsMenu
             id={id}
+            isAuthenticated={isAuthenticated}
+            onSave={onSave}
+            onReport={onReport}
             selected={bulkSelected}
             position={position}
             showTags={showTags}
             tags={tags}
-            status={status}
+            saveStatus={save_status}
             favorite={favorite}
           />
         ) : null}
@@ -352,9 +205,27 @@ Card.propTypes = {
   actions: PropTypes.object,
   bulkEdit: PropTypes.bool,
   bulkSelected: PropTypes.bool,
-  position: PropTypes.number
+  position: PropTypes.number,
+  className: PropTypes.string,
+  isAuthenticated: PropTypes.bool,
+  impressionAction: PropTypes.func,
+  engagementAction: PropTypes.func,
+  saveAction: PropTypes.func,
+  reportAction: PropTypes.func,
+  unSaveAction: PropTypes.func,
+  openAction: PropTypes.func,
+  itemBulkSelect: PropTypes.func,
+  itemBulkDeSelect: PropTypes.func
 }
 
 Card.defaultProps = {
-  cardShape: 'block'
+  cardShape: 'block',
+  impressionAction: () => {},
+  engagementAction: () => {},
+  saveAction: () => {},
+  reportAction: () => {},
+  unSaveAction: () => {},
+  openAction: () => {},
+  itemBulkSelect: () => {},
+  itemBulkDeSelect: () => {}
 }
