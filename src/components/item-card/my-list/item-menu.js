@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react'
-import { WithTooltip } from '@pocket/web-ui'
 import { OverflowMenuIcon } from '@pocket/web-ui'
 import { WebViewIcon } from '@pocket/web-ui'
 import { IosShareIcon } from '@pocket/web-ui'
@@ -16,6 +15,7 @@ import { useViewport } from '@pocket/web-ui'
 import { PopupMenu, PopupMenuGroup, PopupMenuItem } from '@pocket/web-ui'
 import { screenLargeHandset, screenLargeTablet } from '@pocket/web-ui'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
+import { topTooltipDelayed } from 'components/tooltip/tooltip'
 
 const relativeWrapper = css`
   position: relative;
@@ -28,10 +28,21 @@ const buttonStyles = css`
   background-color: transparent;
   color: var(--color-textSecondary);
   font-size: var(--size150);
+  padding: var(--size025) var(--size050);
 
-  &:hover {
-    color: var(--color-textPrimary);
-    background-color: transparent;
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: var(--color-canvas);
+    color: var(--color-textLinkHover);
+    cursor: pointer;
+  }
+
+  &:active,
+  &:focus {
+    transition: none;
+    color: var(--color-navCurrentTabText);
+    outline: 1px auto var(--color-navCurrentTab);
   }
 
   .icon {
@@ -118,15 +129,14 @@ export const ItemMenu = ({
 
   return (
     <div className={`${relativeWrapper} item-menu`}>
-      <WithTooltip label={t('item-action:open-menu', 'Open Menu')}>
-        <button
-          ref={selfRef}
-          aria-label={t('item-action:open-menu', 'Open Menu')}
-          className={classNames(buttonReset, buttonStyles)}
-          onClick={openMenu}>
-          <OverflowMenuIcon />
-        </button>
-      </WithTooltip>
+      <button
+        ref={selfRef}
+        aria-label={t('item-action:open-menu', 'Open Menu')}
+        data-tooltip={t('item-action:open-menu', 'Open Menu')}
+        className={classNames(buttonReset, buttonStyles, topTooltipDelayed)}
+        onClick={openMenu}>
+        <OverflowMenuIcon />
+      </button>
 
       {menuOpen && !isMobile ? (
         <div
