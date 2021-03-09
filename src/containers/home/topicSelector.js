@@ -104,7 +104,7 @@ export const TopicSelector = () => {
             <TopicPill
               handleTopicClick={handleTopicClick}
               topic={topic}
-              active={topicSections.find((item) => item.id === topic.id)}
+              active={topicSections.find((item) => item.id === topic.id) || false } //prettier-ignore
               key={`topics-pillbox-${topic.topic}`}
             />
           ))}
