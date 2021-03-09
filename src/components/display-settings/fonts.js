@@ -37,6 +37,10 @@ const fontFamilyButton = css`
     height: var(--size150);
   }
 
+  &:hover img {
+    filter: invert(1);
+  }
+
   &.showPremium {
     pointer-events: none;
     opacity: 0.6;
@@ -70,6 +74,7 @@ export const FontSettings = ({ updateFontFamily, currentFont, isPremium }) => {
             className={classNames(fontFamilyButton, { showPremium })}
             icon={showPremium ? <PremiumIcon /> : null}
             onClick={click}
+            tabindex={showPremium ? "-1" : "0"}
             aria-label={FONT_TYPES[font].name}>
             <img src={FontImages[font]} aria-hidden="true" />
 
