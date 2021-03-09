@@ -37,6 +37,8 @@ import { HOME_RECENT_SAVES_FAILURE } from 'actions'
 
 import { HOME_SET_IMPRESSION } from 'actions'
 
+import { ITEMS_DELETE_SEND } from 'actions'
+
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 
 import { ITEMS_ADD_SUCCESS } from 'actions'
@@ -73,7 +75,7 @@ export const homeReducers = (state = initialState, action) => {
 
     case HOME_TOPIC_SECTION_SET: {
       const { topic } = action
-      const set = new Set([...state.topicSections, topic])
+      const set = new Set([topic, ...state.topicSections])
       return { ...state, topicSections: Array.from(set) }
     }
 
@@ -259,7 +261,7 @@ function* homeUnSaveRequest({ id, topic }) {
   }
 }
 
-function* storeTopicPreferences({ topic }) {
+function* storeTopicPreferences() {
   const topicSections = yield select(getTopicSections)
   localStore.setItem(
     CACHE_KEY_HOME_STORED_TOPICS,
