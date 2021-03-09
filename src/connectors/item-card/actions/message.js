@@ -1,21 +1,19 @@
 import React from 'react'
-import { ItemActions } from 'components/item-menus/flat'
-import { SaveIcon } from '@pocket/web-ui'
+import { SaveToPocket } from 'components/save-to-pocket/save-to-pocket'
 
-export function ActionsMessage({ id, isAuthenticated }) {
-  const onSaveClick = () => {}
-
+export function ActionsMessage({
+  id,
+  isAuthenticated,
+  onSave = () => {},
+  saveStatus
+}) {
   return (
     <div className="actions">
-      <ItemActions
-        menuItems={[
-          {
-            label: 'Save To Pocket',
-            actionText: 'Save',
-            icon: <SaveIcon />,
-            onClick: onSaveClick
-          }
-        ]}
+      <SaveToPocket
+        saveAction={onSave}
+        isAuthenticated={isAuthenticated}
+        saveStatus={saveStatus}
+        id={id}
       />
     </div>
   )
