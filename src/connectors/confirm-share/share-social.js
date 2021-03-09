@@ -32,7 +32,7 @@ const socialIcons = css`
 
   & > button {
     display: flex;
-    padding: 0;
+    padding: 4px;
     background: none;
     transition: background-color 0.1s ease-out;
     color: var(--color-textSecondary);

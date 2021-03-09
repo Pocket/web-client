@@ -20,6 +20,11 @@ const tabAction = css`
     background-color: var(--color-navCurrentTab);
     color: initial;
   }
+  &:focus {
+    transition: none;
+    color: var(--color-navCurrentTabText);
+    outline: 1px auto var(--color-navCurrentTab);
+  }
 
   &.active {
     border-bottom-color: var(--color-popoverCanvas);

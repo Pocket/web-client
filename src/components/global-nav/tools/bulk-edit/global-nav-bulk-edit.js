@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { css, cx } from 'linaria'
-import { WithTooltip } from '@pocket/web-ui'
 
 import { CrossIcon } from '@pocket/web-ui'
 
@@ -11,6 +10,7 @@ import { FavoriteIcon } from '@pocket/web-ui'
 import { FavoriteFilledIcon } from '@pocket/web-ui'
 import { TagIcon } from '@pocket/web-ui'
 import { breakpointMediumHandset } from '@pocket/web-ui'
+import { bottomTooltip } from 'components/tooltip/tooltip'
 
 import { Trans, useTranslation } from 'common/setup/i18n'
 import Mousetrap from 'mousetrap'
@@ -194,47 +194,61 @@ function GlobalNavBulkEdit({
       <div className={bulkContainerStyle}>
         <div className="bulk-container">
           <div className="bulk-actions">
-            <WithTooltip label={t('nav:tag', 'Tag')}>
-              <button className={buttonStyle} onClick={tagAction}>
-                <TagIcon className={bulkIconActions} />
-              </button>
-            </WithTooltip>
+            <button
+              aria-label={t('nav:tag', 'Tag')}
+              data-tooltip={t('nav:tag', 'Tag')}
+              className={cx(buttonStyle, bottomTooltip)}
+              onClick={tagAction}>
+              <TagIcon className={bulkIconActions} />
+            </button>
 
-            <WithTooltip
-              label={
+            <button
+              aria-label={
                 shouldFavorite
                   ? t('nav:favorite', 'Favorite')
                   : t('nav:unfavorite', 'Unfavorite')
-              }>
-              <button className={buttonStyle} onClick={favoriteAction}>
-                {shouldFavorite ? (
-                  <FavoriteIcon className={bulkIconActions} />
-                ) : (
-                  <FavoriteFilledIcon className={bulkIconActions} />
-                )}
-              </button>
-            </WithTooltip>
+              }
+              data-tooltip={
+                shouldFavorite
+                  ? t('nav:favorite', 'Favorite')
+                  : t('nav:unfavorite', 'Unfavorite')
+              }
+              className={cx(buttonStyle, bottomTooltip)}
+              onClick={favoriteAction}>
+              {shouldFavorite ? (
+                <FavoriteIcon className={bulkIconActions} />
+              ) : (
+                <FavoriteFilledIcon className={bulkIconActions} />
+              )}
+            </button>
 
-            <WithTooltip
-              label={
+            <button
+              aria-label={
                 shouldArchive
                   ? t('nav:archive-tooltip', 'Archive')
                   : t('nav:add-tooltip', 'Add')
-              }>
-              <button className={buttonStyle} onClick={archiveAction}>
-                {shouldArchive ? (
-                  <ArchiveIcon className={bulkIconActions} />
-                ) : (
-                  <AddIcon className={bulkIconActions} />
-                )}
-              </button>
-            </WithTooltip>
+              }
+              data-tooltip={
+                shouldArchive
+                  ? t('nav:archive-tooltip', 'Archive')
+                  : t('nav:add-tooltip', 'Add')
+              }
+              className={cx(buttonStyle, bottomTooltip)}
+              onClick={archiveAction}>
+              {shouldArchive ? (
+                <ArchiveIcon className={bulkIconActions} />
+              ) : (
+                <AddIcon className={bulkIconActions} />
+              )}
+            </button>
 
-            <WithTooltip label={t('nav:delete', 'Delete')}>
-              <button className={buttonStyle} onClick={deleteAction}>
-                <DeleteIcon className={bulkIconActions} />
-              </button>
-            </WithTooltip>
+            <button
+              aria-label={t('nav:delete', 'Delete')}
+              data-tooltip={t('nav:delete', 'Delete')}
+              className={cx(buttonStyle, bottomTooltip)}
+              onClick={deleteAction}>
+              <DeleteIcon className={bulkIconActions} />
+            </button>
 
             <div className="labelText">
               {bulkItemsCount ? (

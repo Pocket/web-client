@@ -7,7 +7,8 @@ import { ListViewIcon } from '@pocket/web-ui'
 import { DetailViewIcon } from '@pocket/web-ui'
 import { SortByNewestIcon } from '@pocket/web-ui'
 import { SortByOldestIcon } from '@pocket/web-ui'
-import { WithTooltip } from '@pocket/web-ui'
+
+import { bottomTooltip } from 'components/tooltip/tooltip'
 
 import { useTranslation } from 'common/setup/i18n'
 
@@ -61,62 +62,77 @@ export const ListSettings = ({
       <div className={listSettingStyle}>
         <div onClick={toggleSortOrder}>
           {sortOrder === 'newest' ? (
-            <WithTooltip
-              label={t(
+            <span
+              aria-label={t(
                 'settings:sort-items-by-oldest-first',
                 'Sort items by oldest first'
-              )}>
-              <span className="backing">
-                <SortByOldestIcon />
-              </span>
-            </WithTooltip>
+              )}
+              data-tooltip={t(
+                'settings:sort-items-by-oldest-first',
+                'Sort items by oldest first'
+              )}
+              className={cx(bottomTooltip, "backing")}>
+              <SortByOldestIcon />
+            </span>
           ) : (
-            <WithTooltip
-              label={t(
+            <span
+              aria-label={t(
                 'settings:sort-items-by-newest-first',
                 'Sort items by newest first'
-              )}>
-              <span className="backing">
-                <SortByNewestIcon />
-              </span>
-            </WithTooltip>
+              )}
+              data-tooltip={t(
+                'settings:sort-items-by-newest-first',
+                'Sort items by newest first'
+              )}
+              className={cx(bottomTooltip, "backing")}>
+              <SortByNewestIcon />
+            </span>
           )}
         </div>
 
         <div className={cx(isActive('list') && 'active')} onClick={setListMode}>
-          <WithTooltip
-            label={t(
+          <span
+            aria-label={t(
               'settings:display-items-as-a-list',
               'Display items as a list'
-            )}>
-            <span className="backing">
-              <ListViewIcon />
-            </span>
-          </WithTooltip>
+            )}
+            data-tooltip={t(
+              'settings:display-items-as-a-list',
+              'Display items as a list'
+            )}
+            className={cx(bottomTooltip, "backing")}>
+            <ListViewIcon />
+          </span>
         </div>
         <div
           className={cx(isActive('detail') && 'active')}
           onClick={setDetailMode}>
-          <WithTooltip
-            label={t(
+          <span
+            aria-label={t(
               'settings:display-items-in-detail',
               'Display items in detail'
-            )}>
-            <span className="backing">
-              <DetailViewIcon />
-            </span>
-          </WithTooltip>
+            )}
+            data-tooltip={t(
+              'settings:display-items-in-detail',
+              'Display items in detail'
+            )}
+            className={cx(bottomTooltip, "backing")}>
+            <DetailViewIcon />
+          </span>
         </div>
         <div className={cx(isActive('grid') && 'active')} onClick={setGridMode}>
-          <WithTooltip
-            label={t(
+          <span
+            aria-label={t(
               'settings:display-items-as-a-grid',
               'Display items as a grid'
-            )}>
-            <span className="backing">
-              <GridViewIcon />
-            </span>
-          </WithTooltip>
+            )}
+            data-tooltip={t(
+              'settings:display-items-as-a-grid',
+              'Display items as a grid'
+            )}
+            className={cx(bottomTooltip, "backing")}>
+            <GridViewIcon />
+          </span>
         </div>
       </div>
     </PopupMenuGroup>

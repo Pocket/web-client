@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { Trans, useTranslation } from 'common/setup/i18n'
 
 import { breakpointLargeHandset } from '@pocket/web-ui'
@@ -8,7 +8,7 @@ import { ProfileIcon, PremiumIcon } from '@pocket/web-ui'
 import { Button } from '@pocket/web-ui'
 import { AvatarButton } from 'components/avatar/avatar-button'
 import { PopupMenu, PopupMenuGroup, PopupMenuItem } from '@pocket/web-ui'
-import { WithTooltip } from '@pocket/web-ui'
+import { bottomTooltip } from 'components/tooltip/tooltip'
 import { ThemeSettings } from 'components/display-settings/theme'
 import { ListSettings } from 'components/display-settings/list-modes'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
@@ -121,6 +121,10 @@ const upgradeLinkStyle = css`
   }
 `
 
+const avatarWrapper = css`
+  position: relative;
+`
+
 const avatarStyle = css`
   vertical-align: middle;
   background-color: transparent;
@@ -220,20 +224,21 @@ const GlobalNavAccount = ({
           </a>
         </VisibilitySensor>
       ) : null}
-      <WithTooltip label={t('nav:account', 'Account')}>
+      <div className={avatarWrapper}>
         <AvatarButton
           aria-label={t('nav:open-account-menu', 'Open Account Menu')}
+          data-tooltip={t('nav:account', 'Account')}
           src={avatarSrc}
           ref={accountMenuTriggerRef}
           size="40px"
           label={null}
-          className={avatarStyle}
+          className={cx(avatarStyle, bottomTooltip)}
           data-cy="account-menu-avatar"
         />
         { showNotification ? (
           <FloatingNotification data-cy="notification-avatar" />
         ) : null}
-      </WithTooltip>
+      </div>
       <PopupMenu
         trigger={accountMenuTriggerRef}
         title={t('nav:account', 'Account')}

@@ -255,6 +255,11 @@ const closeButtonStyles = css`
     background-color: transparent;
     color: var(--color-textLinkHover);
   }
+  &:focus {
+    transition: none;
+    color: var(--color-navCurrentTabText);
+    outline: 1px auto var(--color-navCurrentTab);
+  }
 
   .visually-hidden {
     ${screenReaderOnly}
