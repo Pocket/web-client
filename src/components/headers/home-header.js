@@ -17,6 +17,12 @@ const cardPageHeaderStyle = css`
     margin-bottom: var(--spacing050);
   }
 
+  h3 {
+    font-size: var(--fontSize150);
+    line-height: 1.2;
+    margin-bottom: var(--spacing050);
+  }
+
   p {
     font-weight: 300;
     font-family: 'Graphik Web';
@@ -39,6 +45,15 @@ export const HomeSectionHeader = ({ sectionTitle, sectionDescription }) => {
   return sectionTitle ? (
     <header className={cardPageHeaderStyle}>
       <h2 className="sectionTitle">{sectionTitle}</h2>
+      {sectionDescription ? <p>{sectionDescription}</p> : null}
+    </header>
+  ) : null
+}
+
+export const HomeTopicHeader = ({ sectionTitle, sectionDescription }) => {
+  return sectionTitle ? (
+    <header className={cardPageHeaderStyle}>
+      <h3 className="sectionTitle">{sectionTitle}</h3>
       {sectionDescription ? <p>{sectionDescription}</p> : null}
     </header>
   ) : null
