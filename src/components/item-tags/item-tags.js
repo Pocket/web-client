@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { tagBase, tagWrapper } from 'components/tags/tag'
+import { tagBase } from 'components/tags/tag'
+import { tagWrapper } from 'components/tags/tag'
 
 export function ItemTags({ tags }) {
   return (
