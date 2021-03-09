@@ -1,19 +1,21 @@
-import { HomeSectionHeader } from 'components/headers/home-header'
+import { HomeTopicHeader } from 'components/headers/home-header'
 import { useSelector } from 'react-redux'
 import { css } from 'linaria'
-import { ItemCard } from './cardTopic'
+import { ItemCard } from 'connectors/item-card/home/cardTopic'
 import { cardGrid } from 'components/items-layout/virtualized-list'
 import classnames from 'classnames'
 import { Skeleton } from 'components/item-card/home/skeleton'
 
 const topicRowStyles = css`
   margin-bottom: 1.5rem;
+  &:last-of-type {
+    margin-bottom: 4rem;
+  }
 `
 
 const cardRowStyles = css`
   margin-bottom: var(--spacing100);
   padding-bottom: 2rem;
-  border-bottom: var(--dividerStyle);
 `
 
 const topicSubheadings = {
@@ -34,26 +36,13 @@ const topicSubheadings = {
   travel: false
 }
 
-export const HomeTopicsList = ({
-  display_name,
-  topic_slug,
-  topic,
-  saveAction,
-  unSaveAction,
-  impressionAction,
-  engagementAction,
-  openAction
-}) => {
+export const HomeTopicsRow = ({ display_name, topic_slug, topic }) => {
   const topicItems = useSelector((state) => state.home[`${topic}Topic`])
-  const recentSaves = useSelector((state) => state.home.recentSaves)
-
-  const displayItems = topicItems
-    ?.filter((id) => !recentSaves.includes(id))
-    .slice(0, 3)
+  const displayItems = topicItems?.slice(0, 3)
 
   return (
     <div className={topicRowStyles}>
-      <HomeSectionHeader
+      <HomeTopicHeader
         sectionTitle={display_name}
         topicSlug={topic_slug}
         sectionDescription={
@@ -64,17 +53,7 @@ export const HomeTopicsList = ({
       <section className={classnames(cardGrid, cardRowStyles)}>
         {displayItems?.length ? (
           displayItems.map((id, index) => (
-            <ItemCard
-              key={id}
-              id={id}
-              topic={topic}
-              saveAction={saveAction}
-              unSaveAction={unSaveAction}
-              impressionAction={impressionAction}
-              engagementAction={engagementAction}
-              openAction={openAction}
-              position={index}
-            />
+            <ItemCard key={id} id={id} topic={topic} position={index} />
           ))
         ) : (
           <Skeleton type="grid" name={`${topic_slug}Skeleton`} count={3} />
@@ -82,4 +61,14 @@ export const HomeTopicsList = ({
       </section>
     </div>
   )
+}
+
+export const HomeTopicsList = () => {
+  const topicSections = useSelector((state) => state.home.topicSections)
+
+  return topicSections?.length
+    ? topicSections.map((topic) => (
+        <HomeTopicsRow key={topic.display_name} {...topic} />
+      ))
+    : null
 }
