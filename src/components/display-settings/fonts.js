@@ -74,7 +74,7 @@ export const FontSettings = ({ updateFontFamily, currentFont, isPremium }) => {
             className={classNames(fontFamilyButton, { showPremium })}
             icon={showPremium ? <PremiumIcon /> : null}
             onClick={click}
-            tabindex={showPremium ? "-1" : "0"}
+            tabIndex={showPremium ? "-1" : "0"}
             aria-label={FONT_TYPES[font].name}>
             <img src={FontImages[font]} aria-hidden="true" />
 

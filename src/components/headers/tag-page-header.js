@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { breakpointSmallHandset } from '@pocket/web-ui'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { breakpointTinyTablet } from '@pocket/web-ui'
@@ -9,8 +9,8 @@ import { PinFilledIcon } from '@pocket/web-ui'
 import { PinIcon } from '@pocket/web-ui'
 import { EditIcon } from '@pocket/web-ui'
 import { DeleteIcon } from '@pocket/web-ui'
-import { WithTooltip } from '@pocket/web-ui'
 import { buttonReset } from 'components/buttons/button-reset'
+import { bottomTooltipDelayed } from 'components/tooltip/tooltip'
 import { useTranslation } from 'common/setup/i18n'
 
 const myListHeaderStyle = css`
@@ -89,21 +89,29 @@ export const TaggedHeader = ({
         <FilterMenu subset={subset} filter={filter} tag={tag} />
       </div>
       <div className="tag-actions">
-        <WithTooltip label={t('nav:pin-tag', 'Pin Tag')} delay={true}>
-          <button className={buttonReset} onClick={pinTag}>
-            {isPinned ? <PinFilledIcon /> : <PinIcon />}
-          </button>
-        </WithTooltip>
-        <WithTooltip label={t('nav:edit-tag', 'Edit Tag')} delay={true}>
-          <button className={buttonReset} onClick={editTag}>
-            <EditIcon />
-          </button>
-        </WithTooltip>
-        <WithTooltip label={t('nav:delete-tag', 'Delete Tag')} delay={true}>
-          <button className={buttonReset} onClick={deleteTag}>
-            <DeleteIcon />
-          </button>
-        </WithTooltip>
+        <button
+          aria-label={t('nav:pin-tag', 'Pin Tag')}
+          data-tooltip={t('nav:pin-tag', 'Pin Tag')}
+          className={cx(buttonReset, bottomTooltipDelayed)}
+          onClick={pinTag}>
+          {isPinned ? <PinFilledIcon /> : <PinIcon />}
+        </button>
+
+        <button
+          aria-label={t('nav:edit-tag', 'Edit Tag')}
+          data-tooltip={t('nav:edit-tag', 'Edit Tag')}
+          className={cx(buttonReset, bottomTooltipDelayed)}
+          onClick={editTag}>
+          <EditIcon />
+        </button>
+
+        <button
+          aria-label={t('nav:delete-tag', 'Delete Tag')}
+          data-tooltip={t('nav:delete-tag', 'Delete Tag')}
+          className={cx(buttonReset, bottomTooltipDelayed)}
+          onClick={deleteTag}>
+          <DeleteIcon />
+        </button>
       </div>
     </header>
   )

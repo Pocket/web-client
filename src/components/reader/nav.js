@@ -12,12 +12,12 @@ import {
   ArchiveIcon,
   AddCircledIcon,
   DeleteIcon,
-  WithTooltip,
   breakpointLargeTablet,
   breakpointMediumHandset
 } from '@pocket/web-ui'
 import { DisplaySettings } from 'components/display-settings/display-settings'
 import { buttonReset } from 'components/buttons/button-reset'
+import { bottomTooltip } from 'components/tooltip/tooltip'
 import {
   updateLineHeight,
   updateColumnWidth,
@@ -25,7 +25,6 @@ import {
   updateFontType
 } from 'containers/read/read.state'
 import { WrappedProgressBar } from 'components/progress-bar/progress-bar'
-
 import { useTranslation } from 'common/setup/i18n'
 import Mousetrap from 'mousetrap'
 
@@ -59,10 +58,6 @@ const navStyle = css`
     align-content: center;
   }
 
-  span[tooltip] {
-    background: transparent;
-  }
-
   ${breakpointLargeTablet} {
     padding: 0 var(--spacing150);
   }
@@ -75,8 +70,8 @@ const navStyle = css`
 const buttonStyles = css`
   background-color: transparent;
   color: var(--color-textSecondary);
-  font-size: var(--size150);
-  height: var(--size150);
+  font-size: var(--size100);
+  height: var(--size100);
   cursor: pointer;
 
   &.go-back {
@@ -136,7 +131,7 @@ export const ReaderNav = ({
     if (window.history.length > 1) return window.history.go(-1)
     document.location.href = '/my-list'
   }
-  const buttonClass = cx(buttonReset, buttonStyles)
+  const buttonClass = cx(buttonReset, buttonStyles, bottomTooltip)
 
   useEffect(() => {
     Mousetrap.bind('b', goBack)
@@ -147,97 +142,86 @@ export const ReaderNav = ({
     <header className={headerStyle}>
       <div className="global-nav-container">
         <nav className={navStyle}>
-          <WithTooltip label={t('nav:back-to-my-list', 'Back to My List')}>
-            <button
-              onClick={goBack}
-              aria-label={t('nav:back-to-my-list', 'Back to My List')}
-              className={cx(buttonClass, 'go-back')}>
-              <ArrowLeftIcon />
-            </button>
-          </WithTooltip>
+          <button
+            onClick={goBack}
+            aria-label={t('nav:back-to-my-list', 'Back to My List')}
+            data-tooltip={t('nav:back-to-my-list', 'Back to My List')}
+            className={cx(buttonClass, 'go-back')}>
+            <ArrowLeftIcon />
+          </button>
 
           <div className="nav-actions">
-            <WithTooltip
-              label={
+            <button
+              onClick={toggleSidebar}
+              aria-label={
                 sideBarOpen
                   ? t('nav:close-highlights-menu', 'Close Highlights Menu')
                   : t('nav:open-highlights-menu', 'Open Highlights Menu')
-              }>
-              <button
-                onClick={toggleSidebar}
-                aria-label={
-                  sideBarOpen
-                    ? t('nav:close-highlights-menu', 'Close Highlights Menu')
-                    : t('nav:open-highlights-menu', 'Open Highlights Menu')
-                }
-                className={buttonClass}>
-                <HighlightIcon />
-              </button>
-            </WithTooltip>
+              }
+              data-tooltip={
+                sideBarOpen
+                  ? t('nav:close-highlights-menu', 'Close Highlights Menu')
+                  : t('nav:open-highlights-menu', 'Open Highlights Menu')
+              }
+              className={buttonClass}>
+              <HighlightIcon />
+            </button>
 
-            <WithTooltip label={t('nav:tag-article', 'Tag Article')}>
-              <button
-                onClick={toggleTagging}
-                aria-label={t('nav:tag-article', 'Tag Article')}
-                className={buttonClass}>
-                <TagIcon />
-              </button>
-            </WithTooltip>
+            <button
+              onClick={toggleTagging}
+              aria-label={t('nav:tag-article', 'Tag Article')}
+              data-tooltip={t('nav:tag-article', 'Tag Article')}
+              className={buttonClass}>
+              <TagIcon />
+            </button>
 
-            <WithTooltip
-              label={
+            <button
+              onClick={toggleFavorite}
+              aria-label={
                 favorite
                   ? t('nav:remove-from-favorites', 'Remove from Favorites')
                   : t('nav:favorite-article', 'Favorite Article')
-              }>
-              <button
-                onClick={toggleFavorite}
-                aria-label={
-                  favorite
-                    ? t('nav:remove-from-favorites', 'Remove from Favorites')
-                    : t('nav:favorite-article', 'Favorite Article')
-                }
-                className={cx(buttonClass, favorite && 'favorite')}>
-                {favorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
-              </button>
-            </WithTooltip>
+              }
+              data-tooltip={
+                favorite
+                  ? t('nav:remove-from-favorites', 'Remove from Favorites')
+                  : t('nav:favorite-article', 'Favorite Article')
+              }
+              className={cx(buttonClass, favorite && 'favorite')}>
+              {favorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
+            </button>
 
-            <WithTooltip
-              label={
+            <button
+              onClick={archiveItem}
+              aria-label={
                 archive
                   ? t('nav:re-add-to-list', 'Re-add to List')
                   : t('nav:archive-article', 'Archive Article')
-              }>
-              <button
-                onClick={archiveItem}
-                aria-label={
-                  archive
-                    ? t('nav:re-add-to-list', 'Re-add to List')
-                    : t('nav:archive-article', 'Archive Article')
-                }
-                className={buttonClass}>
-                {archive ? <AddCircledIcon /> : <ArchiveIcon />}
-              </button>
-            </WithTooltip>
+              }
+              data-tooltip={
+                archive
+                  ? t('nav:re-add-to-list', 'Re-add to List')
+                  : t('nav:archive-article', 'Archive Article')
+              }
+              className={buttonClass}>
+              {archive ? <AddCircledIcon /> : <ArchiveIcon />}
+            </button>
 
-            <WithTooltip
-              label={t('nav:delete-from-library', 'Delete from Library')}>
-              <button
-                onClick={toggleDelete}
-                aria-label={t('nav:delete-from-library', 'Delete from Library')}
-                className={buttonClass}>
-                <DeleteIcon />
-              </button>
-            </WithTooltip>
+            <button
+              onClick={toggleDelete}
+              aria-label={t('nav:delete-from-library', 'Delete from Library')}
+              data-tooltip={t('nav:delete-from-library', 'Delete from Library')}
+              className={buttonClass}>
+              <DeleteIcon />
+            </button>
 
-            <WithTooltip label={t('nav:share-article', 'Share Article')}>
-              <button
-                onClick={toggleShare}
-                aria-label={t('nav:share-article', 'Share Article')}
-                className={buttonClass}>
-                <IosShareIcon />
-              </button>
-            </WithTooltip>
+            <button
+              onClick={toggleShare}
+              aria-label={t('nav:share-article', 'Share Article')}
+              data-tooltip={t('nav:share-article', 'Share Article')}
+              className={buttonClass}>
+              <IosShareIcon />
+            </button>
           </div>
 
           <DisplaySettings

@@ -14,7 +14,8 @@ import { TwitterColorIcon } from '@pocket/web-ui'
 import { LinkedinMonoIcon } from '@pocket/web-ui'
 import { BufferIcon } from '@pocket/web-ui'
 import { RedditMonoIcon } from '@pocket/web-ui'
-import { WithTooltip } from '@pocket/web-ui'
+
+import { topTooltipDelayed } from 'components/tooltip/tooltip'
 
 import { openWindow } from 'common/utilities'
 
@@ -46,6 +47,11 @@ const socialIcons = css`
     &:hover {
       color: var(--color-actionPrimaryHover);
     }
+    &:focus {
+      transition: none;
+      color: var(--color-navCurrentTabText);
+      outline: 1px auto var(--color-navCurrentTab);
+    }
   }
 
   .buffer-button {
@@ -55,7 +61,7 @@ const socialIcons = css`
   .icon {
     height: 1.5rem;
     line-height: 1rem;
-    margin-right: var(--spacing075);
+    margin-right: 0;
     margin-top: 1px;
   }
 `
@@ -64,7 +70,8 @@ export const BufferShareButton = ({
   url,
   text,
   onShareWindowClose,
-  children
+  children,
+  ...rest
 }) => {
   const prepareWindow = (url, quote, callback) => {
     const opts = {
@@ -86,9 +93,8 @@ export const BufferShareButton = ({
 
   return (
     <button
-      aria-label="Buffer"
-      className="buffer-button"
-      onClick={clickHandler}>
+      onClick={clickHandler}
+      {...rest}>
       {children}
     </button>
   )
@@ -108,75 +114,55 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
   return (
     <div className={`${socialIcons} content`}>
       <FacebookShareButton
+        aria-label={t('share:share-to-facebook', 'Share to Facebook')}
+        data-tooltip={t('share:share-to-facebook', 'Share to Facebook')}
+        className={topTooltipDelayed}
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('facebook')}
         quote={quote}
         url={open_url}>
-        <WithTooltip
-          label={t('share:share-to-facebook', 'Share to Facebook')}
-          placement="top"
-          delay={true}>
-          <span className="label">
-            <FacebookColorIcon />
-          </span>
-        </WithTooltip>
+        <FacebookColorIcon />
       </FacebookShareButton>
       <TwitterShareButton
+        aria-label={t('share:share-to-twitter', 'Share to Twitter')}
+        data-tooltip={t('share:share-to-facebook', 'Share to Twitter')}
+        className={topTooltipDelayed}
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('twitter')}
         title={title}
         url={open_url}>
-        <WithTooltip
-          label={t('share:share-to-twitter', 'Share to Twitter')}
-          placement="top"
-          delay={true}>
-          <span className="label">
-            <TwitterColorIcon />
-          </span>
-        </WithTooltip>
+        <TwitterColorIcon />
       </TwitterShareButton>
       <LinkedinShareButton
+        aria-label={t('share:share-to-linkedin', 'Share to LinkedIn')}
+        data-tooltip={t('share:share-to-linkedin', 'Share to LinkedIn')}
+        className={topTooltipDelayed}
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('linkedin')}
         title={title}
         summary={quote || excerpt}
         url={open_url}>
-        <WithTooltip
-          label={t('share:share-to-linkedin', 'Share to LinkedIn')}
-          placement="top"
-          delay={true}>
-          <span className="label">
-            <LinkedinMonoIcon />
-          </span>
-        </WithTooltip>
+        <LinkedinMonoIcon />
       </LinkedinShareButton>
       <RedditShareButton
+        aria-label={t('share:share-to-reddit', 'Share to Reddit')}
+        data-tooltip={t('share:share-to-reddit', 'Share to Reddit')}
+        className={topTooltipDelayed}
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('reddit')}
         title={title}
         url={open_url}>
-        <WithTooltip
-          label={t('share:share-to-reddit', 'Share to Reddit')}
-          placement="top"
-          delay={true}>
-          <span className="label">
-            <RedditMonoIcon />
-          </span>
-        </WithTooltip>
+        <RedditMonoIcon />
       </RedditShareButton>
       <BufferShareButton
+        aria-label={t('share:share-to-buffer', 'Share to Buffer')}
+        data-tooltip={t('share:share-to-buffer', 'Share to Buffer')}
+        className={topTooltipDelayed}
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('buffer')}
         quote={quote || excerpt}
         url={open_url}>
-        <WithTooltip
-          label={t('share:share-to-buffer', 'Share to Buffer')}
-          placement="top"
-          delay={true}>
-          <span className="label">
-            <BufferIcon />
-          </span>
-        </WithTooltip>
+        <BufferIcon />
       </BufferShareButton>
     </div>
   )

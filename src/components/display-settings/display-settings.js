@@ -8,11 +8,11 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   PremiumIcon,
-  ChevronLeftIcon,
-  WithTooltip
+  ChevronLeftIcon
 } from '@pocket/web-ui'
 import { css } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
+import { bottomTooltip } from 'components/tooltip/tooltip'
 import classNames from 'classnames'
 import { FontSettings } from './fonts'
 import { FontSizeSettings } from './font-size'
@@ -133,19 +133,14 @@ export const DisplaySettings = ({
 
   return (
     <div className={displayStyles}>
-      <WithTooltip
-        label={t('settings:open-display-settings', 'Open Display Settings')}>
-        <button
-          aria-label={t(
-            'settings:open-display-settings',
-            'Open Display Settings'
-          )}
-          className={classNames(buttonReset, buttonStyles)}
-          ref={displayMenuTriggerRef}>
-          <TextSizeIcon />
-          <ChevronDownIcon />
-        </button>
-      </WithTooltip>
+      <button
+        aria-label={t('settings:open-display-settings', 'Open Display Settings')}
+        data-tooltip={t('settings:open-display-settings', 'Open Display Settings')}
+        className={classNames(buttonReset, buttonStyles, bottomTooltip)}
+        ref={displayMenuTriggerRef}>
+        <TextSizeIcon />
+        <ChevronDownIcon />
+      </button>
       <PopupMenu
         forceShow={forceShow}
         id="display-settings"
