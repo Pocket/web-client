@@ -63,6 +63,7 @@ export const StepperRange = ({ range = [], current = 0, onChange }) => {
       lastindex={range.length - 1}>
       {range.map((step, index) => (
         <button
+          tabindex="-1"
           key={index}
           data-index-number={index}
           aria-hidden={true}

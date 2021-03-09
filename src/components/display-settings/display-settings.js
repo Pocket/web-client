@@ -54,6 +54,12 @@ const buttonStyles = css`
     color: var(--color-textPrimary);
     background-color: transparent;
   }
+  &:active,
+  &:focus {
+    transition: none;
+    color: var(--color-navCurrentTabText);
+    outline: 1px auto var(--color-navCurrentTab);
+  }
 
   .icon {
     background-color: transparent;
