@@ -147,9 +147,9 @@ export const Card = React.forwardRef(
           target={syndicated ? undefined : '_blank'}>
           <CardMedia image_src={thumbnail} title={title} id={id} />
           <div className="content">
-            <h2 className="title">
+            <h3 className="title">
               <span>{title}</span>
-            </h2>
+            </h3>
             <cite className="details">
               <span>{publisher}</span>
               <span className="readtime">

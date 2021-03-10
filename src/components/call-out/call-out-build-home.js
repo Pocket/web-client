@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { Button } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui' // 1023
 import { breakpointMediumTablet } from '@pocket/web-ui' // 959
@@ -43,14 +43,14 @@ const wrapper = css`
     text-align: center;
   }
 
-  h3 {
+  .title {
     font-size: var(--fontSize200);
     font-family: 'Doyle';
     font-style: normal;
     font-weight: 500;
   }
 
-  p {
+  .subtext {
     display: block;
     font-family: 'Graphik Web';
     font-size: var(--fontSize100);
@@ -70,19 +70,19 @@ const wrapper = css`
   }
 
   ${breakpointLargeTablet} {
-    h3 {
+    .title {
       font-size: var(--fontSize175);
     }
   }
   ${breakpointMediumTablet} {
     padding-bottom: var(--spacing150);
-    h3 {
+    .title {
       font-size: var(--fontSize150);
     }
     .img-wrapper img {
       max-width: 240px;
     }
-    p {
+    .subtext {
       display: none;
     }
   }
@@ -90,7 +90,7 @@ const wrapper = css`
   ${breakpointTinyTablet} {
     padding-bottom: var(--spacing100);
 
-    h3 {
+    .title {
       font-size: var(--fontSize125);
     }
     a {
@@ -110,7 +110,7 @@ const wrapper = css`
     .img-wrapper {
       display: none;
     }
-    h3 {
+    .title {
       margin-bottom: 0;
     }
     a {
@@ -126,7 +126,7 @@ const wrapper = css`
     aside {
       flex-direction: column;
     }
-    h3 {
+    .title {
       margin-bottom: var(--spacing075);
     }
     a {
@@ -140,8 +140,8 @@ export function CallOutBuildHome() {
   return (
     <div className={wrapper}>
       <aside>
-        <h3>Build a home for everything that interests&nbsp;you</h3>
-        <p>
+        <p className="h3 title">Build a home for everything that interests&nbsp;you</p>
+        <p className="subtext">
           Add the <span className="pocket-svg"></span> button to your browser to
           collect articles, videos, and links from across the web. Use our app
           to enjoy them on any device in a distraction-free environment.
