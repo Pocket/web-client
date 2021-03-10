@@ -123,6 +123,7 @@ const upgradeLinkStyle = css`
 
 const avatarWrapper = css`
   position: relative;
+  display: inline-clock;
 `
 
 const avatarStyle = css`
