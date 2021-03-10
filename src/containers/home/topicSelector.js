@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setTopicSection } from 'containers/home/home.state'
 import { unsetTopicSection } from 'containers/home/home.state'
 import { topicToggleEvent } from 'containers/home/home.analytics'
+import { topicHeadings } from './listTopics'
 
 const selectionStyles = css`
   margin-bottom: 2.25rem;
@@ -48,7 +49,7 @@ const TopicPill = ({ topic, handleTopicClick, active }) => {
       isChecked={active}
       onClick={handleClick}
       data-cy="topic-pill"
-      name={topic.display_name}
+      name={topicHeadings[topic.topic]?.title}
     />
   )
 }

@@ -18,37 +18,80 @@ const cardRowStyles = css`
   padding-bottom: 2rem;
 `
 
-const topicSubheadings = {
-  business: false,
-  career: false,
-  education: false,
-  entertainment: false,
-  food: 'Stories to fuel your body, curated by our editors.',
-  gaming: false,
-  health: false,
-  parenting: false,
-  'personal-finance': false,
-  politics: false,
-  science: false,
-  'self-improvement': 'Stories to level up your life, curated by our editors.',
-  sports: false,
-  technology: false,
-  travel: false
+//prettier-ignore
+export const topicHeadings = {
+  business: {
+    title: 'Business',
+    subtitle: 'The latest industry insights and fascinating stories. '
+  },
+  career: {
+    title: 'Career',
+    subtitle: 'Thoughtful advice and insights on making the most of your 9-to-5 — and beyond.'
+  },
+  education: {
+    title: 'Education & History',
+    subtitle: 'Learn something new, dive into the past, and explore the wide world of education.'
+  },
+  entertainment: {
+    title: 'Entertainment',
+    subtitle: 'Irresistible reads on film, music, TV, art, and design — as well as high- and low-brow delights. '
+  },
+  food: {
+    title: 'Food',
+   subtitle: 'Recipes, ruminations, and everything in between. Hungry yet?'
+  },
+  gaming: {
+    title: 'Gaming',
+    subtitle: 'Insider takes and captivating reads on the gaming industry.'
+  },
+  health: {
+    title: 'Health & Fitness',
+    subtitle: 'Fascinating stories about physical, emotional, and mental health. '
+  },
+  parenting: {
+    title: 'Parenting & Relationships',
+    subtitle: 'Helpful advice and intriguing stories about caring for children and connecting with others.'
+  },
+  'personal-finance': {
+    title: 'Personal Finance',
+    subtitle: 'Expert tips and thoughtful reads on retirement, investing, and more.'
+  },
+  politics: {
+    title: 'Politics & Law',
+    subtitle: 'Thoughtful analysis and helpful explainers on the world of politics, law, and crime.'
+  },
+  science: {
+    title: 'Science',
+    subtitle: 'Illuminating reads on the latest from top labs and the world around us.'
+  },
+  'self-improvement': {
+    title: 'Self Improvement',
+    subtitle: 'Practical tips and mindful reflections for a better life.'
+  },
+  sports: {
+    title: 'Sports',
+    subtitle: 'Gripping stories about sports and their impact on the greater culture. '
+  },
+  technology: {
+    title: 'Technology',
+    subtitle: 'The latest tech news and compelling stories about the digital world.'
+  },
+  travel: {
+    title: 'Travel & Exploration',
+    subtitle: 'Inspiring and informative stories about the places you’ll go.'
+  }
 }
 
-export const HomeTopicsRow = ({ display_name, topic_slug, topic }) => {
+export const HomeTopicsRow = ({ topic_slug, topic }) => {
   const topicItems = useSelector((state) => state.home[`${topic}Topic`])
   const displayItems = topicItems?.slice(0, 3)
 
   return (
     <div className={topicRowStyles}>
       <HomeTopicHeader
-        sectionTitle={display_name}
+        sectionTitle={topicHeadings[topic]?.title}
         topicSlug={topic_slug}
-        sectionDescription={
-          topicSubheadings[topic] ||
-          'We need something better here, curated by our editors.'
-        }
+        sectionDescription={topicHeadings[topic]?.subtitle}
       />
       <section className={classnames(cardGrid, cardRowStyles)}>
         {displayItems?.length ? (
