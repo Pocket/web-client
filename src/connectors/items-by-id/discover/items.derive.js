@@ -143,5 +143,5 @@ const devLink = function (item) {
   const isSyndicated = syndicated({ item })
   const path = saveUrl({ item })
   const url = path ? path.substring(path.lastIndexOf('/') + 1) : false
-  return isSyndicated && url ? `/discover/item/${url}` : false
+  return isSyndicated && url ? `/explore/item/${url}` : false
 }
