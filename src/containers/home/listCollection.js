@@ -1,5 +1,5 @@
 import { HomeSectionHeader } from 'components/headers/home-header'
-import { Skeleton } from 'components/item-card/home/skeleton'
+import { CardSkeleton } from 'components/item-card/card-skeleton'
 import { ItemCard } from 'connectors/item-card/home/cardCollection'
 import { css } from 'linaria'
 import { cardsGrid } from 'components/items-layout/base'
@@ -22,7 +22,7 @@ export const HomeCollectionList = () => {
       />
       <section className={homeCollections}>
         {showSkeleton ? (
-          <Skeleton type="grid" name="collectionSkeleton" count={2} />
+          <CardSkeleton type="grid" name="collectionSkeleton" count={2} />
         ) : (
           collectionSet.map((collection, index) => (
             <ItemCard

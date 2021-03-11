@@ -4,7 +4,7 @@ import { css } from 'linaria'
 import { ItemCard } from 'connectors/item-card/home/cardTopic'
 import { cardGrid } from 'components/items-layout/virtualized-list'
 import classnames from 'classnames'
-import { Skeleton } from 'components/item-card/home/skeleton'
+import { CardSkeleton } from 'components/item-card/card-skeleton'
 
 const topicRowStyles = css`
   margin-bottom: 1.5rem;
@@ -99,7 +99,7 @@ export const HomeTopicsRow = ({ topic_slug, topic }) => {
             <ItemCard key={id} id={id} topic={topic} position={index} />
           ))
         ) : (
-          <Skeleton type="grid" name={`${topic_slug}Skeleton`} count={3} />
+          <CardSkeleton type="grid" name={`${topic_slug}Skeleton`} count={3} />
         )}
       </section>
     </div>
