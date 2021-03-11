@@ -46,9 +46,9 @@ export default function Collection(props) {
       <SideNav subset="home" />
       {shouldRender ? (
         <main className="main">
-          <HomeGreeting />
+          {/* <HomeGreeting /> */}
 
-          <HomeRecentList />
+          {/* <HomeRecentList /> */}
 
           <HomeRecentRecsList />
 
