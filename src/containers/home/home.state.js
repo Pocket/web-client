@@ -171,7 +171,7 @@ function* homePreferences() {
 function* recentDataRequest() {
   try {
     const { items, itemsById, error } = yield fetchMyListData({
-      count: 1,
+      count: 12,
       offset: 0,
       state: 'unread',
       sort: 'newest'
