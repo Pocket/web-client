@@ -12,9 +12,8 @@ export const cardStyles = css`
   font-weight: 400;
   color: var(--color-textPrimary);
   position: relative;
-  border-bottom: 1px solid var(--color-dividerTertiary);
 
-  a.cardLink {
+  .cardLink {
     position: relative;
     display: block;
     height: 100%;
@@ -104,7 +103,7 @@ export const cardStyles = css`
     justify-content: space-between;
   }
 
-  &.noActions a.cardLink {
+  &.noActions .cardLink {
     padding-bottom: 0;
   }
 
@@ -163,24 +162,23 @@ export const cardStyles = css`
 
   &.subset {
     grid-column: span 8;
-    a.cardLink {
-      .media {
-        grid-column: span 4;
-      }
-      .content {
-        grid-column: span 8;
-      }
-      .title {
-        white-space: initial;
-      }
+    .media {
+      grid-column: span 4;
+    }
+    .content {
+      grid-column: span 8;
+    }
+    .title {
+      white-space: initial;
     }
   }
 `
+
 export const cardBlock = css`
   max-width: 552px;
   grid-column: span 4;
   &.noMedia {
-    a.cardLink .title {
+    .cardLink .title {
       margin-top: 0;
     }
   }
@@ -189,25 +187,25 @@ export const cardBlock = css`
 export const cardWide = css`
   max-width: 745px;
   grid-column: span 10;
-  a.cardLink {
+  .cardLink {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-column-gap: var(--size150);
     padding-bottom: 0;
+  }
 
-    .media {
-      grid-column: span 3;
-    }
-    .content {
-      grid-column: span 5;
-      padding-bottom: var(--size200);
-    }
-    .title {
-      margin-top: 0;
-      font-size: var(--fontSize150);
-      line-height: 1.286;
-      max-height: 3.8em;
-    }
+  .media {
+    grid-column: span 3;
+  }
+  .content {
+    grid-column: span 5;
+    padding-bottom: var(--size200);
+  }
+  .title {
+    margin-top: 0;
+    font-size: var(--fontSize150);
+    line-height: 1.286;
+    max-height: 3.8em;
   }
 
   .footer {
@@ -220,7 +218,7 @@ export const cardWide = css`
   }
 
   &.noActions {
-    a.cardLink .content {
+    .cardLink .content {
       padding-bottom: 0;
     }
   }
@@ -241,30 +239,29 @@ export const cardList = css`
     grid-template-columns: repeat(12, 1fr);
     grid-column-gap: var(--size150);
     padding-bottom: 0;
-
-    .media {
-      grid-column: span 1;
-    }
-    .content {
-      grid-column: span 11;
-    }
-    .title {
-      margin-top: 0;
-      font-size: var(--fontSize100);
-      line-height: 1.286;
-      width: 70%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .details {
-      font-size: var(--fontSize075);
-      line-height: 1.5;
-      padding: 0;
-    }
-    .excerpt {
-      display: none;
-    }
+  }
+  .media {
+    grid-column: span 1;
+  }
+  .content {
+    grid-column: span 11;
+  }
+  .title {
+    margin-top: 0;
+    font-size: var(--fontSize100);
+    line-height: 1.286;
+    width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .details {
+    font-size: var(--fontSize075);
+    line-height: 1.5;
+    padding: 0;
+  }
+  .excerpt {
+    display: none;
   }
   .footer {
     width: initial;
@@ -289,40 +286,41 @@ export const cardDetail = css`
     grid-template-columns: repeat(12, 1fr);
     grid-column-gap: var(--size150);
     padding-bottom: 0;
-
-    .media {
-      grid-column: span 2;
-    }
-
-    .content {
-      grid-column: span 10;
-      position: relative;
-    }
-
-    .title {
-      margin-top: 0;
-      font-size: var(--fontSize100);
-      line-height: 1.286;
-      width: auto;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .details {
-      font-size: var(--fontSize075);
-      line-height: 1.5;
-      padding: var(--size025) 0 0;
-    }
-
-    .excerpt {
-      font-size: var(--fontSize085);
-      max-height: 3.2em;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: block;
-    }
   }
+
+  .media {
+    grid-column: span 2;
+  }
+
+  .content {
+    grid-column: span 10;
+    position: relative;
+  }
+
+  .title {
+    margin-top: 0;
+    font-size: var(--fontSize100);
+    line-height: 1.286;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .details {
+    font-size: var(--fontSize075);
+    line-height: 1.5;
+    padding: var(--size025) 0 0;
+  }
+
+  .excerpt {
+    font-size: var(--fontSize085);
+    max-height: 3.2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+
   .item-actions {
     padding: 0;
     &:after {
