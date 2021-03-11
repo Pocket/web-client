@@ -32,22 +32,25 @@ export const CardSkeleton = ({
   cardShape,
   count
 }) => {
-  const card = cx(
-    cardStyles,
-    cardShape === 'block' && `${cardBlock} block`,
-    cardShape === 'wide' && `${cardWide} wide`,
-    cardShape === 'list' && `${cardList} list`,
-    cardShape === 'detail' && `${cardDetail} detail`,
-    'noActions',
-    !showExcerpt && 'noExcerpt',
-    !showMedia && 'noMedia',
-    skeletonStyle
-  )
+  const card = (index) => {
+    const shape = typeof cardShape === 'string' ? cardShape : cardShape[index]
+    return cx(
+      cardStyles,
+      shape === 'block' && `${cardBlock} block`,
+      shape === 'wide' && `${cardWide} wide`,
+      shape === 'list' && `${cardList} list`,
+      shape === 'detail' && `${cardDetail} detail`,
+      'noActions',
+      !showExcerpt && 'noExcerpt',
+      !showMedia && 'noMedia',
+      skeletonStyle
+    )
+  }
 
   return (
     <>
-      {Array.from({ length: count }, (x, i) => (
-        <article key={`${name}-${i}`} className={card}>
+      {Array.from({ length: count }, (x, index) => (
+        <article key={`${name}-${index}`} className={card(index)}>
           <div className="cardLink">
             <div className="media" />
             <div className="content">

@@ -189,7 +189,7 @@ export const cardWide = css`
   grid-column: span 10;
   .cardLink {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     grid-column-gap: var(--size150);
     padding-bottom: 0;
   }
@@ -198,22 +198,22 @@ export const cardWide = css`
     grid-column: span 3;
   }
   .content {
-    grid-column: span 5;
+    grid-column: span 9;
     padding-bottom: var(--size200);
   }
   .title {
     margin-top: 0;
-    font-size: var(--fontSize150);
+    font-size: var(--fontSize100);
     line-height: 1.286;
     max-height: 3.8em;
   }
 
   .footer {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     grid-column-gap: var(--size150);
     .actions {
-      grid-column: 4 / span 5;
+      grid-column: 4 / -1;
     }
   }
 

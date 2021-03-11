@@ -5,6 +5,7 @@ import { css } from 'linaria'
 import { RecCard } from 'connectors/item-card/home/cardRec'
 import { recentRecsRequest } from 'connectors/recit/recit.state'
 import { useInView } from 'react-intersection-observer'
+import { CardSkeleton } from 'components/item-card/card-skeleton'
 
 const recGrid = css`
   display: grid;
@@ -25,17 +26,13 @@ const recGrid = css`
     .content{
       grid-column: span 9;
     }
-    .title{
-      font-size: 1rem;
-    }
   }
-  article:nth-child(4) {
-    border-bottom: none;
-  }
+
   article:nth-child(1) {
     grid-row: span 3;
     padding-top: 1rem;
     border-bottom: none;
+    min-height: 473px;
     .excerpt {
       max-height: 4.4em;
       overflow: hidden;
@@ -73,23 +70,28 @@ export const HomeRecentRecsList = () => {
       {shouldPopulate ? (
         <>
           <HomeSectionHeader
-            sectionTitle="Recommendations"
+            sectionTitle="Discover new content"
             sectionDescription="Find new content based on your latest saves"
           />
           <section className={recGrid}>
-            {recentSaveId && recentRecsIds.length
-              ? recentRecsIds.map((itemId, index) => {
-                  const cardShape = index === 0 ? 'block' : 'detail'
-                  return (
-                    <RecCard
-                      cardShape={cardShape}
-                      key={`rec-${itemId}`}
-                      id={itemId}
-                      position={index}
-                    />
-                  )
-                })
-              : null}
+            {recentSaveId && recentRecsIds.length ? (
+              recentRecsIds.map((itemId, index) => {
+                const cardShape = index === 0 ? 'block' : 'detail'
+                return (
+                  <RecCard
+                    cardShape={cardShape}
+                    key={`rec-${itemId}`}
+                    id={itemId}
+                    position={index}
+                  />
+                )
+              })
+            ) : (
+              <CardSkeleton
+                count={4}
+                cardShape={['block', 'wide', 'wide', 'wide']}
+              />
+            )}
           </section>
         </>
       ) : null}
