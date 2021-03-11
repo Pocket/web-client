@@ -13,6 +13,7 @@ import {
 } from '@pocket/web-ui'
 import { Drawer } from '@pocket/web-ui'
 import { Button } from '@pocket/web-ui'
+import { bottomTooltip } from 'components/tooltip/tooltip'
 
 const premiumLinks = [
   {
@@ -120,6 +121,12 @@ const iconStyle = css`
   width: var(--size300);
   height: var(--size300);
 
+  &:focus {
+    transition: none;
+    color: var(--color-navCurrentTabText);
+    outline: 1px auto var(--color-navCurrentTab) !important;
+  }
+
   svg,
   span {
     width: var(--size150);
@@ -165,15 +172,16 @@ const DrawerHeader = ({ handleClose }) => {
 
   return (
     <div className={drawerHeaderStyles}>
-      <Button onClick={handleClose} variant="inline" className={iconStyle}>
-        <ChevronLeftIcon
-          id="mobile-menu-chevron-icon"
-          title={t('nav:close', 'Close')}
-          description={t(
-            'nav:close-the-pocket-mobile-menu',
-            'Close the Pocket mobile menu'
-          )}
-        />
+      <Button
+        aria-label={t(
+          'nav:close-the-pocket-mobile-menu',
+          'Close the Pocket mobile menu'
+        )}
+        data-tooltip={t('nav:close', 'Close')}
+        onClick={handleClose}
+        variant="inline"
+        className={classnames(iconStyle, bottomTooltip)}>
+        <ChevronLeftIcon />
       </Button>
     </div>
   )
@@ -278,16 +286,14 @@ const GlobalNavMobileMenu = ({
     <>
       <Button
         onClick={handleOpen}
+        aria-label={t(
+          'nav:open-the-pocket-mobile-menu',
+          'Open the Pocket mobile menu'
+        )}
+        data-tooltip={t('nav:open', 'Open')}
         variant="inline"
-        className={classnames(iconStyle, toggleClass)}>
-        <MenuIcon
-          id="mobile-menu-menu-icon"
-          title={t('nav:open', 'Open')}
-          description={t(
-            'nav:open-the-pocket-mobile-menu',
-            'Open the Pocket mobile menu'
-          )}
-        />
+        className={classnames(iconStyle, toggleClass, bottomTooltip)}>
+        <MenuIcon />
       </Button>
       <Drawer
         appRootSelector={appRootSelector}

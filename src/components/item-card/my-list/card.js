@@ -30,7 +30,8 @@ const card = css`
   position: relative;
 
   z-index: 0;
-  &:hover {
+  &:hover,
+  &:focus-within {
     z-index: 1;
   }
 

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { Trans, useTranslation } from 'common/setup/i18n'
 import {
   PopupMenu,
@@ -83,16 +84,36 @@ export const DisplaySettings = ({
   setLineHeight,
   setColumnWidth,
   isPremium,
-  forceShow,
+  forceShow = false,
   onVisible,
   colorMode,
   setColorMode
 }) => {
   const { t } = useTranslation()
 
+  const [menuOpen, setMenuOpen] = useState(forceShow)
   const [displayFonts, setDisplayFonts] = useState(false)
+  const [focus, setFocus] = useState(false)
 
-  const displayMenuTriggerRef = useRef(null)
+  const displayButtonRef = useRef(null)
+  const menuRef = useRef(null)
+
+  useCorrectEffect(() => {
+    if (!focus || !menuOpen) return
+    menuRef.current.querySelector('li button').focus()
+    menuRef.current.addEventListener('focusout', checkInnerFocus)
+
+    return () => {
+      menuRef.current.removeEventListener('focusout', checkInnerFocus)
+    }
+  }, [focus, menuOpen])
+
+  const checkInnerFocus = () => {
+    if (menuRef.current.querySelectorAll(':focus-within').length === 0) {
+      handleOnClose()
+      displayButtonRef.current.click()
+    }
+  }
 
   const decreaseFontSize = () => {
     setFontSize(parseInt(fontSize) - 1)
@@ -123,8 +144,19 @@ export const DisplaySettings = ({
     setFontFamily(family)
   }
 
+  const updateFocus = (e) => {
+    // enter and space keys
+    if (e.charCode === 13 || e.charCode === 32) setFocus(true)
+  }
+
+  const handleOpen = () => {
+    setMenuOpen(true)
+  }
+
   const handleOnClose = () => {
     setDisplayFonts(false)
+    setMenuOpen(false)
+    setFocus(false)
   }
 
   const handleVisible = () => {
@@ -132,20 +164,22 @@ export const DisplaySettings = ({
   }
 
   return (
-    <div className={displayStyles}>
+    <div className={displayStyles} ref={menuRef}>
       <button
         aria-label={t('settings:open-display-settings', 'Open Display Settings')}
         data-tooltip={t('settings:open-display-settings', 'Open Display Settings')}
         className={classNames(buttonReset, buttonStyles, bottomTooltip)}
-        ref={displayMenuTriggerRef}>
+        ref={displayButtonRef}
+        onClick={handleOpen}
+        onKeyPress={updateFocus}>
         <TextSizeIcon />
         <ChevronDownIcon />
       </button>
       <PopupMenu
-        forceShow={forceShow}
+        forceShow={menuOpen}
         id="display-settings"
         onClose={handleOnClose}
-        trigger={displayMenuTriggerRef}
+        trigger={displayButtonRef}
         title={t('settings:display-settings', 'Display Settings')}
         screenReaderLabel={t('settings:display-settings', 'Display Settings')}
         appRootSelector={appRootSelector}

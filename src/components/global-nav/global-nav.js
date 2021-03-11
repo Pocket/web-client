@@ -130,6 +130,11 @@ const navStyle = css`
 
   .hamburger-icon {
     display: none;
+    &:focus {
+      transition: none;
+      color: var(--color-navCurrentTabText);
+      outline: 1px auto var(--color-navCurrentTab);
+    }
   }
 
   ${breakpointLargeTablet} {

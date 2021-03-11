@@ -98,24 +98,47 @@ export const ItemMenu = ({
 
   const [menuOpen, setMenuOpen] = useState(false)
   const [flipDirection, setFlipDirection] = useState(false)
+  const [focus, setFocus] = useState(false)
 
   const viewportWidth = viewport ? viewport.width : screenLargeTablet + 1
   const viewportHeight = viewport ? viewport.height : 800
   const [isMobile, setIsMobile] = useState(viewportWidth <= screenLargeHandset)
 
-  const selfRef = useRef(null)
+  const buttonRef = useRef(null)
+  const menuRef = useRef(null)
 
   // effect for handling window resize
   useCorrectEffect(() => {
     setIsMobile(viewportWidth <= screenLargeHandset)
   }, [viewportWidth])
 
+  useCorrectEffect(() => {
+    if (!focus || !menuOpen) return
+    menuRef.current.querySelector('li button').focus()
+    menuRef.current.addEventListener('focusout', checkInnerFocus)
+
+    return () => {
+      menuRef.current.removeEventListener('focusout', checkInnerFocus)
+    }
+  }, [focus, menuOpen])
+
+  const checkInnerFocus = () => {
+    if (menuRef.current.querySelectorAll(':focus-within').length === 0) {
+      closeMenu()
+    }
+  }
+
   const checkDirection = () => {
-    if (selfRef.current.getBoundingClientRect().top > viewportHeight / 2) {
+    if (buttonRef.current.getBoundingClientRect().top > viewportHeight / 2) {
       setFlipDirection(false)
     } else {
       setFlipDirection(true)
     }
+  }
+
+  const updateFocus = (e) => {
+    // enter and space keys
+    if (e.charCode === 13 || e.charCode === 32) setFocus(true)
   }
 
   const openMenu = () => {
@@ -125,16 +148,18 @@ export const ItemMenu = ({
 
   const closeMenu = () => {
     setMenuOpen(false)
+    setFocus(false)
   }
 
   return (
-    <div className={`${relativeWrapper} item-menu`}>
+    <div className={`${relativeWrapper} item-menu`} ref={menuRef}>
       <button
-        ref={selfRef}
+        ref={buttonRef}
         aria-label={t('item-action:open-menu', 'Open Menu')}
         data-tooltip={t('item-action:open-menu', 'Open Menu')}
         className={classNames(buttonReset, buttonStyles, topTooltipDelayed)}
-        onClick={openMenu}>
+        onClick={openMenu}
+        onKeyPress={updateFocus}>
         <OverflowMenuIcon />
       </button>
 
@@ -175,7 +200,7 @@ export const ItemMenu = ({
 
       {isMobile ? (
         <PopupMenu
-          trigger={selfRef}
+          trigger={buttonRef}
           title={title}
           screenReaderLabel={title}
           appRootSelector="#__next"

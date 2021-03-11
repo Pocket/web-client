@@ -1,7 +1,8 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
 import { Trans, useTranslation } from 'common/setup/i18n'
+import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { ProfileIcon, PremiumIcon } from '@pocket/web-ui'
@@ -28,7 +29,7 @@ const accountLinkStyle = css`
   text-decoration: none;
 
   &:focus {
-    outline: 0;
+    outline: 1px auto var(--color-navCurrentTab);
 
     &::before {
       content: '';
@@ -124,6 +125,12 @@ const upgradeLinkStyle = css`
 const avatarWrapper = css`
   position: relative;
   display: inline-block;
+
+  button:focus {
+    transition: none;
+    color: var(--color-navCurrentTabText);
+    outline: 1px auto var(--color-navCurrentTab);
+  }
 `
 
 const avatarStyle = css`
@@ -167,6 +174,28 @@ const GlobalNavAccount = ({
   const { t } = useTranslation()
 
   const accountMenuTriggerRef = useRef(null)
+  const menuRef = useRef(null)
+
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [focus, setFocus] = useState(false)
+
+  useCorrectEffect(() => {
+    if (!focus || !menuOpen) return
+
+    menuRef.current.querySelector('li a').focus()
+    menuRef.current.addEventListener('focusout', checkInnerFocus)
+
+    return () => {
+      menuRef.current.removeEventListener('focusout', checkInnerFocus)
+    }
+  }, [focus, menuOpen])
+
+  const checkInnerFocus = () => {
+    if (menuRef.current.querySelectorAll(':focus-within').length === 0) {
+      handleClose()
+      accountMenuTriggerRef.current.click()
+    }
+  }
 
   function handleLinkClick(name, event) {
     onLinkClick(name, event)
@@ -174,6 +203,20 @@ const GlobalNavAccount = ({
 
   function handleVisible() {
     sendImpression('global-nav.upgrade-link')
+  }
+
+  const updateFocus = (e) => {
+    // enter and space keys
+    if (e.charCode === 13 || e.charCode === 32) setFocus(true)
+  }
+
+  const handleOpen = () => {
+    setMenuOpen(true)
+  }
+
+  const handleClose = () => {
+    setMenuOpen(false)
+    setFocus(false)
   }
 
   // Hold off on rendering until we have a clear response on user status
@@ -207,7 +250,7 @@ const GlobalNavAccount = ({
       </Button>
     </div>
   ) : (
-    <div>
+    <div ref={menuRef}>
       {!isPremium ? (
         <VisibilitySensor onVisible={handleVisible}>
           <a
@@ -235,6 +278,8 @@ const GlobalNavAccount = ({
           label={null}
           className={cx(avatarStyle, bottomTooltip)}
           data-cy="account-menu-avatar"
+          onClick={handleOpen}
+          onKeyPress={updateFocus}
         />
         { showNotification ? (
           <FloatingNotification data-cy="notification-avatar" />
@@ -246,6 +291,7 @@ const GlobalNavAccount = ({
         screenReaderLabel={t('nav:account-menu', 'Account Menu')}
         appRootSelector={appRootSelector}
         onOpen={onAccountClick}
+        onClose={handleClose}
         popperOptions={{
           placement: 'bottom-end',
           modifiers: [
@@ -260,8 +306,8 @@ const GlobalNavAccount = ({
         data-cy="account-menu">
         <PopupMenuGroup>
           <PopupMenuItem
-            helperText={t('nav:view-profile', 'View Profile')}
             href={profileUrl}
+            helperText={t('nav:view-profile', 'View Profile')}
             id="account-menu-profile-link"
             onClick={(event) => {
               handleLinkClick('view-profile', event)

@@ -7,6 +7,7 @@ import { ListViewIcon } from '@pocket/web-ui'
 import { DetailViewIcon } from '@pocket/web-ui'
 import { SortByNewestIcon } from '@pocket/web-ui'
 import { SortByOldestIcon } from '@pocket/web-ui'
+import { buttonReset } from 'components/buttons/button-reset'
 
 import { bottomTooltip } from 'components/tooltip/tooltip'
 
@@ -43,6 +44,11 @@ const listSettingStyle = css`
       color: var(--color-formFieldFocusLabel);
     }
   }
+  button:focus {
+    transition: none;
+    color: var(--color-navCurrentTabText);
+    outline: 1px auto var(--color-navCurrentTab);
+  }
 `
 
 export const ListSettings = ({
@@ -62,7 +68,7 @@ export const ListSettings = ({
       <div className={listSettingStyle}>
         <div onClick={toggleSortOrder}>
           {sortOrder === 'newest' ? (
-            <span
+            <button
               aria-label={t(
                 'settings:sort-items-by-oldest-first',
                 'Sort items by oldest first'
@@ -71,11 +77,11 @@ export const ListSettings = ({
                 'settings:sort-items-by-oldest-first',
                 'Sort items by oldest first'
               )}
-              className={cx(bottomTooltip, "backing")}>
+              className={cx(buttonReset, bottomTooltip, "backing")}>
               <SortByOldestIcon />
-            </span>
+            </button>
           ) : (
-            <span
+            <button
               aria-label={t(
                 'settings:sort-items-by-newest-first',
                 'Sort items by newest first'
@@ -84,14 +90,14 @@ export const ListSettings = ({
                 'settings:sort-items-by-newest-first',
                 'Sort items by newest first'
               )}
-              className={cx(bottomTooltip, "backing")}>
+              className={cx(buttonReset, bottomTooltip, "backing")}>
               <SortByNewestIcon />
-            </span>
+            </button>
           )}
         </div>
 
         <div className={cx(isActive('list') && 'active')} onClick={setListMode}>
-          <span
+          <button
             aria-label={t(
               'settings:display-items-as-a-list',
               'Display items as a list'
@@ -100,14 +106,14 @@ export const ListSettings = ({
               'settings:display-items-as-a-list',
               'Display items as a list'
             )}
-            className={cx(bottomTooltip, "backing")}>
+            className={cx(buttonReset, bottomTooltip, "backing")}>
             <ListViewIcon />
-          </span>
+          </button>
         </div>
         <div
           className={cx(isActive('detail') && 'active')}
           onClick={setDetailMode}>
-          <span
+          <button
             aria-label={t(
               'settings:display-items-in-detail',
               'Display items in detail'
@@ -116,12 +122,12 @@ export const ListSettings = ({
               'settings:display-items-in-detail',
               'Display items in detail'
             )}
-            className={cx(bottomTooltip, "backing")}>
+            className={cx(buttonReset, bottomTooltip, "backing")}>
             <DetailViewIcon />
-          </span>
+          </button>
         </div>
         <div className={cx(isActive('grid') && 'active')} onClick={setGridMode}>
-          <span
+          <button
             aria-label={t(
               'settings:display-items-as-a-grid',
               'Display items as a grid'
@@ -130,9 +136,9 @@ export const ListSettings = ({
               'settings:display-items-as-a-grid',
               'Display items as a grid'
             )}
-            className={cx(bottomTooltip, "backing")}>
+            className={cx(buttonReset, bottomTooltip, "backing")}>
             <GridViewIcon />
-          </span>
+          </button>
         </div>
       </div>
     </PopupMenuGroup>

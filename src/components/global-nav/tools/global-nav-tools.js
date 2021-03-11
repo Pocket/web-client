@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
+import { bottomTooltip } from 'components/tooltip/tooltip'
 
 const listStyle = css`
   list-style-type: none;
@@ -24,9 +25,14 @@ const listStyle = css`
     line-height: 1;
     padding: var(--spacing050);
 
-    &:hover,
-    &:focus {
+    &:hover {
       color: var(--color-textLinkHover);
+    }
+
+    &:focus {
+      transition: none;
+      color: var(--color-navCurrentTabText);
+      outline: 1px auto var(--color-navCurrentTab);
     }
 
     &:active {
@@ -57,10 +63,12 @@ const GlobalNavTools = ({ tools, onToolClick }) => {
           <li key={`global-nav-tool-${tool.name}`}>
             <button
               type="button"
-              title={tool.label}
+              aria-label={tool.label}
+              data-tooltip={tool.label}
               onClick={(event) => {
                 handleToolClick(event, tool.name)
-              }}>
+              }}
+              className={bottomTooltip}>
               {tool.icon}
             </button>
           </li>
