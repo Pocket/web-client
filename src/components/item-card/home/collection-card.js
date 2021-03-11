@@ -1,10 +1,11 @@
 import React from 'react'
 import { css } from 'linaria'
+import { SaveIcon, SaveFilledIcon } from '@pocket/web-ui'
 
 const collectionCardStyle = css`
   height: 100%;
   width: 100%;
-  padding: 0;
+  padding: 1rem 0 0;
   font-family: var(--fontSansSerif);
   font-weight: 400;
   color: var(--color-textPrimary);
@@ -15,7 +16,7 @@ const collectionCardStyle = css`
     display: block;
     height: 100%;
     width: 100%;
-    padding-bottom: var(--size400);
+    padding-bottom: 3rem;
     text-decoration: none;
     transition-property: color;
     transition-duration: 0.2s;
@@ -67,12 +68,58 @@ const collectionCardStyle = css`
     padding: var(--size050) 0;
     display: block;
     color: var(--color-textSecondary);
+    margin: 0;
+  }
+
+  .footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0.75rem;
+  }
+
+  .save-container {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: var(--fontSize150);
+    min-width: 3.913em;
+    color: var(--color-textSecondary);
+    cursor: pointer;
+    padding-top: 8px;
+
+    span {
+      margin-top: -0.15em;
+    }
+
+    svg {
+      transition: transform 200ms ease-out;
+      display: block;
+      margin-right: var(--size050);
+      height: 1.1em;
+    }
+
+    .actionCopy {
+      font-size: 0.667em;
+      height: var(--size150);
+      line-height: var(--size150);
+    }
+
+    a {
+      text-decoration: none;
+    }
   }
 `
 
 export const CollectionCard = React.forwardRef(
-  ({ collection, onOpen }, ref) => {
+  ({ collection, onOpen, id, saveStatus = 'unsaved' }, ref) => {
     const { title, url, image, subtitle } = collection
+
+    const saveCopy = {
+      unsaved: 'Save All',
+      saving: 'Save All',
+      saved: 'Saved to your list'
+    }
 
     return (
       <article
@@ -86,6 +133,12 @@ export const CollectionCard = React.forwardRef(
             <p className="subtitle">{subtitle}</p>
           </div>
         </a>
+        <footer className="footer">
+          <div className="save-container" data-cy={`collection-save-btn-${id}`}>
+            {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}
+            <div className="actionCopy">{saveCopy[saveStatus]}</div>
+          </div>
+        </footer>
       </article>
     )
   }
