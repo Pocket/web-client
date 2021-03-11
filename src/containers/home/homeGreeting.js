@@ -10,5 +10,5 @@ const homeCollections = css`
 `
 
 export const HomeGreeting = () => {
-  return <div className={homeCollections}>Good morning, Joel.</div>
+  return <div className={homeCollections}>Good morning</div>
 }
