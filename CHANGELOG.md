@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/Pocket/web-client/compare/v1.4.0...v1.4.1) (2021-03-11)
+
+
+### Bug Fixes
+
+* **accessibility:** update headers to make sense in a structrual sense ([daf6256](https://github.com/Pocket/web-client/commit/daf62567242d893457e5c3454fccc62af597ab66))
+
 # [1.4.0](https://github.com/Pocket/web-client/compare/v1.3.1...v1.4.0) (2021-03-10)
 
 
