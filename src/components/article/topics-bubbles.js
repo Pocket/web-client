@@ -6,7 +6,7 @@ const topicBubblesStyles = css`
   text-align: left;
   padding-bottom: var(--spacing050);
 
-  h3 {
+  h4 {
     font-size: var(--fontSize125);
   }
 

@@ -45,8 +45,7 @@ export const cardsContainer = css`
   }
 
   /* First container and containers following a header have no padding*/
-  header + &,
-  h4 + & {
+  header + & {
     padding-top: 0;
   }
 

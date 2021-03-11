@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { getImageCacheUrl } from 'common/utilities'
 import {
   breakpointTinyTablet,
@@ -29,7 +29,7 @@ const headingStyles = css`
   font-family: var(--fontSerifAlt);
 `
 const Heading = () => (
-  <h6 className={headingStyles}>More Stories from Pocket</h6>
+  <h3 className={cx('h6', headingStyles)}>More Stories from Pocket</h3>
 )
 
 const publisherStyles = css`
@@ -122,7 +122,7 @@ const recommendationStyles = css`
     max-width: 248px;
     margin-bottom: 0;
 
-    h5 {
+    h4 {
       line-height: 125%;
     }
 
@@ -146,7 +146,7 @@ export const Recommendation = ({
     <div className="details">
       <Publisher name={name} logo={logoWideBwUrl} />
       <a onClick={handleClick} href={url}>
-        <h5>{title}</h5>
+        <h4 className="h5">{title}</h4>
       </a>
     </div>
   </li>

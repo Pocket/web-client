@@ -31,7 +31,7 @@ const wrapper = css`
     position: relative;
   }
 
-  h3 {
+  h6 {
     font-family: var(--fontSerifAlt);
     font-size: 2.3125rem;
     font-weight: 500;
@@ -88,7 +88,7 @@ const wrapper = css`
   }
 
   ${breakpointSmallDesktop} {
-    h3 {
+    h6 {
       font-size: var(--fontSize175);
       line-height: 129%;
     }
@@ -123,7 +123,7 @@ export function CallOutStartLibrary({
             <CrossIcon />
           </Button>
 
-          <h3>Save these stories in a personal library</h3>
+          <h6>Save these stories in a personal library</h6>
           <svg
             className="zigzag"
             xmlns="http://www.w3.org/2000/svg"

@@ -7,7 +7,7 @@ import { Pill } from '@pocket/web-ui'
 import { headingSerifAlt } from '@pocket/web-ui'
 
 export const pillboxStyle = css`
-  h3 {
+  h4 {
     margin-bottom: var(--spacing150);
     ${headingSerifAlt}
   }
@@ -58,11 +58,11 @@ const TopicsPillbox = ({
 
   return (
     <div className={classnames(pillboxStyle, `align-${alignItems}`)}>
-      <h3
+      <h4
         className={classnames('h5', headingClassName)}
         data-cy="heading">
         {headingText}
-      </h3>
+      </h4>
       <ul>
         {sortedTopics.map((topic, index) => {
           return (

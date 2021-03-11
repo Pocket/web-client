@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import ReactMarkdown from 'react-markdown'
 import { breakpointSmallHandset } from '@pocket/web-ui'
 import { breakpointLargeHandset } from '@pocket/web-ui'
@@ -37,11 +37,11 @@ const cardPageHeaderStyle = css`
     }
   }
 
-  h3 {
+  h2 {
     margin-bottom: var(--spacing050);
   }
 
-  h4 {
+  .collectionSubTitle {
     font-family: 'Graphik Web';
     font-style: normal;
     font-weight: 500;
@@ -77,7 +77,7 @@ const cardPageHeaderStyle = css`
   }
 `
 
-// i.e., h3
+// i.e., h2
 const subHeadingStyle = css`
   font-family: 'Doyle';
   font-style: normal;
@@ -105,7 +105,7 @@ export const CardPageHeader = ({ title, subHeading }) => {
   return title ? (
     <header className={cardPageHeaderStyle}>
       <h1 className="pageTitle">{title}</h1>
-      {subHeading ? <h3 className={subHeadingStyle}>{subHeading}</h3> : null}
+      {subHeading ? <h2 className={cx('h3', subHeadingStyle)}>{subHeading}</h2> : null}
     </header>
   ) : null
 }
@@ -113,9 +113,9 @@ export const CardPageHeader = ({ title, subHeading }) => {
 export const CollectionPageHeader = ({ title, note }) => {
   return title ? (
     <header className={cardPageHeaderStyle}>
-      <h4>Collection</h4>
+      <p className="h4 collectionSubTitle">Collection</p>
       <h1 className="collectonTitle">{title}</h1>
-      <h3 className={subHeadingStyle}>Essential Reads</h3>
+      <h2 className={cx('h3', subHeadingStyle)}>Essential Reads</h2>
       <div className="descriptor">
         <ReactMarkdown source={note} />
       </div>
@@ -133,7 +133,7 @@ export const SearchPageHeader = ({ title }) => {
 
 export const CardListHeading = ({ children }) => {
   return (
-    <h3 className={`${subHeadingStyle} ${cardListHeadingStyle}`}>{children}</h3>
+    <h2 className={cx('h3', subHeadingStyle, cardListHeadingStyle)}>{children}</h2>
   )
 }
 
