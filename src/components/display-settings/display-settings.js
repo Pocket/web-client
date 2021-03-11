@@ -176,7 +176,6 @@ export const DisplaySettings = ({
         <ChevronDownIcon />
       </button>
       <PopupMenu
-        forceShow={menuOpen}
         id="display-settings"
         onClose={handleOnClose}
         trigger={displayButtonRef}
