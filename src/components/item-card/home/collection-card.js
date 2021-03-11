@@ -133,12 +133,12 @@ export const CollectionCard = React.forwardRef(
             <p className="subtitle">{subtitle}</p>
           </div>
         </a>
-        <footer className="footer">
+        {/* <footer className="footer">
           <div className="save-container" data-cy={`collection-save-btn-${id}`}>
             {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}
             <div className="actionCopy">{saveCopy[saveStatus]}</div>
           </div>
-        </footer>
+        </footer> */}
       </article>
     )
   }

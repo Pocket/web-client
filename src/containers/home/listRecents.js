@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { css } from 'linaria'
 import { RecentCard } from 'connectors/item-card/home/cardRecent'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
-import { EmptyCircledIcon, CheckFilledIcon } from '@pocket/web-ui'
 
 const recentGrid = css`
   display: grid;
@@ -15,9 +14,6 @@ const recentGrid = css`
     grid-column: span 4;
     border-bottom: none;
     padding: 0.5rem 0;
-    &:first-of-type {
-      border-bottom: 2px solid var(--color-actionPrimary);
-    }
     .title {
       font-size: 1rem;
     }
@@ -26,18 +22,6 @@ const recentGrid = css`
     }
   }
 `
-
-const recentSelection = css`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0 0 2rem;
-  .icon {
-    margin-left: 5px;
-    height: 24px;
-  }
-`
-
 export const HomeRecentList = () => {
   const recentSaves = useSelector((state) => state.home.recentSaves)
   const total = recentSaves?.length
@@ -58,13 +42,6 @@ export const HomeRecentList = () => {
           />
         ) : null}
       </section>
-      <div className={recentSelection}>
-        <CheckFilledIcon />
-        <EmptyCircledIcon />
-        <EmptyCircledIcon />
-        <EmptyCircledIcon />
-        <EmptyCircledIcon />
-      </div>
     </div>
   ) : null
 }
