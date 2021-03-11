@@ -23,7 +23,7 @@ import {
 import { getPublisherRecs } from 'common/api/recit'
 import { getPocketRecs } from 'common/api/recit'
 import { getRecommendations } from 'common/api/recit'
-
+import { getHomeRecommendations } from 'common/api/recit'
 import { saveItem as saveItemAPI } from 'common/api/saveItem'
 import { removeItem as removeItemAPI } from 'common/api/removeItem'
 
@@ -201,7 +201,7 @@ function* fetchReaderRecs({ itemId }) {
 function* fetchRecentRecs({ itemId: recentRecId }) {
   try {
     if (!recentRecId) return
-    const response = yield getRecommendations(recentRecId, 4)
+    const response = yield getHomeRecommendations(recentRecId, 4)
 
     const derivedItems = yield deriveReaderRecitItems(response.recommendations)
     const itemsById = arrayToObject(derivedItems, 'resolved_id')
