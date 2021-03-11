@@ -6,13 +6,16 @@ import { RecCard } from 'connectors/item-card/home/cardRec'
 import { recentRecsRequest } from 'connectors/recit/recit.state'
 import { useInView } from 'react-intersection-observer'
 
-const grid = css`
+const recGrid = css`
   display: grid;
   align-items: start;
-  grid-column-gap: var(--spacing150);
+  grid-column-gap: var(--spacing250);
   grid-template-columns: repeat(12, 1fr);
   padding-bottom: 4rem;
 
+  article {
+    border-bottom: none;
+  }
   //prettier-ignore
   article:nth-child(n+2) {
     grid-column: span 8;
@@ -70,10 +73,10 @@ export const HomeRecentRecsList = () => {
       {shouldPopulate ? (
         <>
           <HomeSectionHeader
-            sectionTitle="Based on your latest save"
-            sectionDescription="Recommendations based on the latest item you've saved"
+            sectionTitle="Recommendations"
+            sectionDescription="Find new content based on your latest saves"
           />
-          <section className={grid}>
+          <section className={recGrid}>
             {recentSaveId && recentRecsIds.length
               ? recentRecsIds.map((itemId, index) => {
                   const cardShape = index === 0 ? 'block' : 'detail'
