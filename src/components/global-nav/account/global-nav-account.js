@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
 import { Trans, useTranslation } from 'common/setup/i18n'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
+import { KEYS } from 'common/constants'
 
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { ProfileIcon, PremiumIcon } from '@pocket/web-ui'
@@ -29,7 +30,7 @@ const accountLinkStyle = css`
   text-decoration: none;
 
   &:focus {
-    outline: 1px auto var(--color-navCurrentTab);
+    outline: 0;
 
     &::before {
       content: '';
@@ -206,8 +207,7 @@ const GlobalNavAccount = ({
   }
 
   const updateFocus = (e) => {
-    // enter and space keys
-    if (e.charCode === 13 || e.charCode === 32) setFocus(true)
+    if (e.charCode === KEYS.SPACE || e.charCode === KEYS.ENTER) setFocus(true)
   }
 
   const handleOpen = () => {

@@ -69,15 +69,16 @@ export const INTERNAL_DOMAINS = [
 
 export const KEYS = {
   BACKSPACE: 8,
-  COMMA: 44,
   TAB: 9,
   ENTER: 13,
-  DELETE: 46,
   ESCAPE: 27,
+  SPACE: 32,
   LEFT: 37,
   UP: 38,
   RIGHT: 39,
-  DOWN: 40
+  DOWN: 40,
+  COMMA: 44,
+  DELETE: 46
 }
 
 export const API_ACTION_ADD = 'add'

@@ -30,8 +30,8 @@ describe('GlobalNavTools', () => {
     const tools = shallow(<GlobalNavTools {...baseProps} />)
     const toolButtons = tools.find('button')
 
-    assert.equal(toolButtons.at(0).prop('title'), baseProps.tools[0].label)
-    assert.equal(toolButtons.at(1).prop('title'), baseProps.tools[1].label)
+    assert.equal(toolButtons.at(0).prop('data-tooltip'), baseProps.tools[0].label)
+    assert.equal(toolButtons.at(1).prop('data-tooltip'), baseProps.tools[1].label)
   })
 
   it('renders the buttons with correct icons as specified in the `links` prop', () => {

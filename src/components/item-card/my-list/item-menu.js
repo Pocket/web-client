@@ -16,6 +16,7 @@ import { PopupMenu, PopupMenuGroup, PopupMenuItem } from '@pocket/web-ui'
 import { screenLargeHandset, screenLargeTablet } from '@pocket/web-ui'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { topTooltipDelayed } from 'components/tooltip/tooltip'
+import { KEYS } from 'common/constants'
 
 const relativeWrapper = css`
   position: relative;
@@ -137,8 +138,7 @@ export const ItemMenu = ({
   }
 
   const updateFocus = (e) => {
-    // enter and space keys
-    if (e.charCode === 13 || e.charCode === 32) setFocus(true)
+    if (e.charCode === KEYS.SPACE || e.charCode === KEYS.ENTER) setFocus(true)
   }
 
   const openMenu = () => {

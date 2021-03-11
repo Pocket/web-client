@@ -25,6 +25,7 @@ import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { FONT_RANGE } from 'common/constants'
 import { LINE_HEIGHT } from 'common/constants'
 import { COLUMN_WIDTH } from 'common/constants'
+import { KEYS } from 'common/constants'
 
 const displayStyles = css`
   & > span {
@@ -145,8 +146,7 @@ export const DisplaySettings = ({
   }
 
   const updateFocus = (e) => {
-    // enter and space keys
-    if (e.charCode === 13 || e.charCode === 32) setFocus(true)
+    if (e.charCode === KEYS.SPACE || e.charCode === KEYS.ENTER) setFocus(true)
   }
 
   const handleOpen = () => {
