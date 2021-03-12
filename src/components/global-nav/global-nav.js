@@ -234,6 +234,7 @@ const GlobalNav = ({
   showNotification,
   links,
   tools,
+  flagsReady,
   sendImpression,
   userStatus,
   children
@@ -295,17 +296,21 @@ const GlobalNav = ({
             children
           ) : (
             <>
-              <div
-                className={linksStyle}
-                aria-label={t('nav:page-navigation', 'Page navigation')}>
-                <GlobalNavLinks
-                  selectedLink={selectedLink}
-                  className="links"
-                  links={links}
-                  onLinkClick={onLinkClick}
-                  data-cy="primary-links"
-                />
-              </div>
+              {flagsReady ? (
+                <div
+                  className={linksStyle}
+                  aria-label={t('nav:page-navigation', 'Page navigation')}>
+                  <GlobalNavLinks
+                    selectedLink={selectedLink}
+                    className="links"
+                    links={links}
+                    onLinkClick={onLinkClick}
+                    data-cy="primary-links"
+                  />
+                </div>
+              ) : (
+                <div className={linksStyle}></div>
+              )}
 
               <div
                 className={classnames(toolsStyle, { 'is-premium': isPremium })}>

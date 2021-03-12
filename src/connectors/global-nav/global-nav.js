@@ -65,6 +65,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     selected !== undefined ? selected : getTopLevelPath(router.pathname)
 
   const appMode = useSelector((state) => state?.app?.mode)
+  const flagsReady = useSelector((state) => state.features.flagsReady)
   const userStatus = useSelector((state) => state?.user?.user_status)
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false) //prettier-ignore
   const isLoggedIn = useSelector((state) => !!state.user.auth)
@@ -261,7 +262,8 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       toggleListMode={toggleListMode}
       sendImpression={sendImpressionEvent}
       showNotification={showNotification}
-      tools={tools}>
+      tools={tools}
+      flagsReady={flagsReady}>
       {NavTakeover ? <NavTakeover onClose={resetNav} /> : null}
     </GlobalNavComponent>
   )
