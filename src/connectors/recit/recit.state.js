@@ -1,14 +1,12 @@
 import { takeLatest, takeEvery, put } from 'redux-saga/effects'
 import {
+  SET_REC_IMPRESSION,
   PUBLISHER_RECS_REQUEST,
   PUBLISHER_RECS_SUCCESS,
   PUBLISHER_RECS_FAILURE,
   POCKET_RECS_REQUEST,
   POCKET_RECS_SUCCESS,
   POCKET_RECS_FAILURE,
-  READER_RECS_REQUEST,
-  READER_RECS_SUCCESS,
-  READER_RECS_FAILURE,
   RECENT_RECS_REQUEST,
   RECENT_RECS_SUCCESS,
   RECENT_RECS_FAILURE,
@@ -18,6 +16,18 @@ import {
   RECENT_REC_UNSAVE_REQUEST,
   RECENT_REC_UNSAVE_SUCCESS,
   RECENT_REC_UNSAVE_FAILURE
+} from 'actions'
+
+import {
+  READER_RECS_REQUEST,
+  READER_RECS_SUCCESS,
+  READER_RECS_FAILURE,
+  READER_REC_SAVE_REQUEST,
+  READER_REC_SAVE_SUCCESS,
+  READER_REC_SAVE_FAILURE,
+  READER_REC_UNSAVE_REQUEST,
+  READER_REC_UNSAVE_SUCCESS,
+  READER_REC_UNSAVE_FAILURE
 } from 'actions'
 
 import { getPublisherRecs } from 'common/api/recit'
@@ -34,7 +44,13 @@ import { deriveReaderRecitItems } from './recit.derive'
  --------------------------------------------------------------- */
 export const publisherRecsRequest = (itemId) => ({ type: PUBLISHER_RECS_REQUEST, itemId }) //prettier-ignore
 export const pocketRecsRequest = (itemId) => ({ type: POCKET_RECS_REQUEST, itemId }) //prettier-ignore
+
+export const setRecImpression = (id) => ({ type: SET_REC_IMPRESSION, id }) //prettier-ignore
+
 export const readerRecsRequest = (itemId) =>  ({ type: READER_RECS_REQUEST, itemId }) //prettier-ignore
+export const readerRecSaveItem = (id, url, analytics) => ({ type: READER_REC_SAVE_REQUEST, id, url, analytics }) //prettier-ignore
+export const readerRecUnSaveItem = (id) => ({ type: READER_REC_UNSAVE_REQUEST, id }) //prettier-ignore
+
 export const recentRecsRequest = (itemId) => ({type: RECENT_RECS_REQUEST, itemId}) //prettier-ignore
 export const saveItem = (id, url, analytics) => ({type: RECENT_REC_SAVE_REQUEST, id, url, analytics}) //prettier-ignore
 export const unSaveItem = id => ({ type: RECENT_REC_UNSAVE_REQUEST, id }) //prettier-ignore
@@ -42,6 +58,7 @@ export const unSaveItem = id => ({ type: RECENT_REC_UNSAVE_REQUEST, id }) //pret
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
+  impressions: {},
   publisherRecs: [],
   publisherRecId: null,
   publisherRecModel: null,
@@ -55,6 +72,12 @@ const initialState = {
 
 export const recitReducers = (state = initialState, action) => {
   switch (action.type) {
+    case SET_REC_IMPRESSION: {
+      const { id } = action
+      const impressions = { ...state.impressions, [id]: true }
+      return { ...state, impressions }
+    }
+
     case PUBLISHER_RECS_SUCCESS: {
       const {
         response: {
@@ -103,6 +126,32 @@ export const recitReducers = (state = initialState, action) => {
       }
     }
 
+    case READER_REC_SAVE_REQUEST: {
+      const { id } = action
+      return {
+        ...state,
+        readerRecs: updateSaveStatus(state.readerRecs, id, 'saving')
+      }
+    }
+
+    case READER_REC_UNSAVE_REQUEST:
+    case READER_REC_SAVE_FAILURE: {
+      const { id } = action
+      return {
+        ...state,
+        readerRecs: updateSaveStatus(state.readerRecs, id, 'unsaved')
+      }
+    }
+
+    case READER_REC_UNSAVE_FAILURE:
+    case READER_REC_SAVE_SUCCESS: {
+      const { id } = action
+      return {
+        ...state,
+        readerRecs: updateSaveStatus(state.readerRecs, id, 'saved')
+      }
+    }
+
     case RECENT_RECS_SUCCESS: {
       const { recentRecs, recentRecId } = action
       return {
@@ -126,12 +175,25 @@ export const recitReducers = (state = initialState, action) => {
   }
 }
 
+/** UPDATE SAVE STATUS
+ * Helper function to update save status for a specific item based on id
+ * @param {object} state Redux state object
+ * @param {string} id Item id to operate on
+ * @param {string} save_status Value to update save status to
+ */
+export function updateSaveStatus(state, id, save_status) {
+  const updatedItem = { ...state[id], save_status }
+  return { ...state, [id]: updatedItem }
+}
+
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const recitSagas = [
   takeLatest(PUBLISHER_RECS_REQUEST, fetchPublisherRecs),
   takeLatest(POCKET_RECS_REQUEST, fetchPocketRecs),
   takeLatest(READER_RECS_REQUEST, fetchReaderRecs),
+  takeLatest(READER_REC_SAVE_REQUEST, readerItemSaveRequest),
+  takeLatest(READER_REC_UNSAVE_REQUEST, readerItemUnSaveRequest),
   takeLatest(RECENT_RECS_REQUEST, fetchRecentRecs),
   takeEvery(RECENT_REC_SAVE_REQUEST, itemsSaveRequest),
   takeEvery(RECENT_REC_UNSAVE_REQUEST, itemsUnSaveRequest)
@@ -209,5 +271,31 @@ function* fetchRecentRecs({ itemId: recentRecId }) {
     yield put({ type: RECENT_RECS_SUCCESS, recentRecs: itemsById, recentRecId })
   } catch (error) {
     yield put({ type: RECENT_RECS_FAILURE, error })
+  }
+}
+
+function* readerItemSaveRequest(action) {
+  try {
+    const { url, id, analytics } = action
+
+    const response = yield saveItemAPI(url, analytics)
+    if (response?.status !== 1) throw new Error('Unable to save')
+
+    yield put({ type: READER_REC_SAVE_SUCCESS, id })
+  } catch (error) {
+    yield put({ type: READER_REC_SAVE_FAILURE, error })
+  }
+}
+
+function* readerItemUnSaveRequest(action) {
+  try {
+    const { id } = action
+
+    const response = yield removeItemAPI(id)
+    if (response?.status !== 1) throw new Error('Unable to remove item')
+
+    yield put({ type: READER_REC_UNSAVE_SUCCESS, id })
+  } catch (error) {
+    yield put({ type: READER_REC_UNSAVE_FAILURE, error })
   }
 }
