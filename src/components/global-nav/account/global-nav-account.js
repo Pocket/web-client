@@ -268,15 +268,14 @@ const GlobalNavAccount = ({
           </a>
         </VisibilitySensor>
       ) : null}
-      <div className={avatarWrapper}>
+      <div className={cx(avatarWrapper, bottomTooltip)} data-tooltip={t('nav:account', 'Account')}>
         <AvatarButton
           aria-label={t('nav:open-account-menu', 'Open Account Menu')}
-          data-tooltip={t('nav:account', 'Account')}
           src={avatarSrc}
           ref={accountMenuTriggerRef}
           size="40px"
           label={null}
-          className={cx(avatarStyle, bottomTooltip)}
+          className={avatarStyle}
           data-cy="account-menu-avatar"
           onClick={handleOpen}
           onKeyPress={updateFocus}
