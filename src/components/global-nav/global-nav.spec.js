@@ -21,6 +21,7 @@ const baseProps = {
       url: 'http://chalupa.biz'
     }
   ],
+  flagsReady: true,
   selectedLink: 'chalupa',
   onLinkClick: handleLinkClick,
   appRootSelector: '#root'
@@ -28,7 +29,9 @@ const baseProps = {
 
 describe('GlobalNav', () => {
   it('renders the "Discover" and "My List" links by default', () => {
-    const globalNav = shallow(<GlobalNav appRootSelector="#root" />)
+    const globalNav = shallow(
+      <GlobalNav appRootSelector="#root" flagsReady={true} />
+    )
     const defaultLinks = globalNav.find("[data-cy='primary-links']")
 
     assert(defaultLinks.exists())
@@ -60,7 +63,7 @@ describe('GlobalNav', () => {
   it('renders elements passed in `children` prop instead of standard nav, if provided', () => {
     const CustomNav = () => {}
     const globalNav = shallow(
-      <GlobalNav appRootSelector="#root">
+      <GlobalNav appRootSelector="#root" flagsReady={true}>
         <CustomNav />
       </GlobalNav>
     )
@@ -70,7 +73,9 @@ describe('GlobalNav', () => {
 
   it('uses the correct URL when a user clicks the Pocket Logo', () => {
     // default value
-    const globalNav = shallow(<GlobalNav appRootSelector="#root" />)
+    const globalNav = shallow(
+      <GlobalNav appRootSelector="#root" flagsReady={true} />
+    )
     const defaultLogoUrl = globalNav.find("[data-cy='logo-link']")
 
     assert.equal(defaultLogoUrl.prop('href'), '/explore?src=navbar')
@@ -78,6 +83,7 @@ describe('GlobalNav', () => {
     // passed prop value
     const globalNav2 = shallow(
       <GlobalNav
+        flagsReady={true}
         appRootSelector="#root"
         pocketLogoOutboundUrl="https://cheeseburger.io"
       />

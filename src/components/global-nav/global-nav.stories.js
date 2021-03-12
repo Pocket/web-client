@@ -22,7 +22,8 @@ export default {
 const baseProps = {
   selectedLink: 'discover',
   appRootSelector: '#root',
-  accountName: 'Fluffers'
+  accountName: 'Fluffers',
+  flagsReady: true
 }
 
 export const standard = () => <GlobalNav {...baseProps} />
