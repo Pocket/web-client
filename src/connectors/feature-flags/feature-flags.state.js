@@ -16,7 +16,7 @@ export const featureReducers = (state = initialState, action) => {
   switch (action.type) {
     case FEATURES_HYDRATE: {
       const { hydrate } = action
-      return { ...state, ...hydrate }
+      return { ...state, ...hydrate, flagsReady: true }
     }
 
     case FEATURES_TOGGLE: {

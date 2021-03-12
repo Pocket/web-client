@@ -60,6 +60,10 @@ export const sideNavWrapper = css`
       }
     }
   }
+
+  .dummy-nav {
+    min-height: 550px;
+  }
 `
 
 export const sideNavHeader = css`
@@ -121,7 +125,14 @@ export const sideNavItem = css`
   }
 `
 
-export function SideNav({ subset, tag, pinnedTags, isDisabled, showHome }) {
+export function SideNav({
+  subset,
+  tag,
+  pinnedTags,
+  isDisabled,
+  showHome,
+  flagsReady
+}) {
   const { t } = useTranslation()
 
   const [ref, inView] = useInView({ threshold: 0.5 })
@@ -142,7 +153,7 @@ export function SideNav({ subset, tag, pinnedTags, isDisabled, showHome }) {
 
   const wrapperClass = cx(sideNavWrapper, 'side-nav', isDisabled && 'disabled')
 
-  return (
+  return flagsReady ? (
     <div className={wrapperClass}>
       <nav role="navigation">
         {showHome ? (
@@ -238,6 +249,10 @@ export function SideNav({ subset, tag, pinnedTags, isDisabled, showHome }) {
           <ChevronUpIcon />
         </button>
       </div>
+    </div>
+  ) : (
+    <div className={wrapperClass}>
+      <nav role="navigation" className="dummy-nav" />
     </div>
   )
 }
