@@ -30,7 +30,7 @@ const sectionWrapper = css`
 
   article {
     margin: 0 0.5rem;
-    padding: 0;
+    padding: 0 0 1.5rem;
     height: unset;
     border-bottom-color: transparent;
 
@@ -42,13 +42,18 @@ const sectionWrapper = css`
       margin-right: 0;
       border-bottom: none;
     }
+
+    footer {
+      bottom: 0;
+    }
   }
 
   ${breakpointTinyTablet} {
     flex-direction: column;
 
     article {
-      margin: 0.5rem;
+      max-width: unset;
+      margin: 0 0 1rem;
       border-bottom: 1px solid var(--color-dividerTertiary);
     }
   }

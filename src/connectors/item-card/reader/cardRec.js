@@ -1,4 +1,4 @@
-import { Card } from 'components/item-card/reader/rec-card'
+import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { setRecImpression } from 'connectors/recit/recit.state'
 import { readerRecSaveItem } from 'connectors/recit/recit.state'
@@ -19,14 +19,8 @@ export const RecCard = ({ id, position }) => {
   // Prep save action
   const { save_url, save_status } = item
   const onSave = () => {
-    if (save_status === 'saved') {
-      dispatch(readerRecUnSaveItem(id))
-      dispatch(readerRecEngagementEvent(item, position))
-    }
-    else {
-      dispatch(readerRecSaveItem(id, save_url, position))
-      dispatch(readerRecSaveEvent(item, position))
-    }
+    dispatch(readerRecSaveItem(id, save_url, position))
+    dispatch(readerRecSaveEvent(item, position))
   }
 
   const onOpen = () => {
@@ -40,15 +34,22 @@ export const RecCard = ({ id, position }) => {
     }
   }
 
-  const engagementAction = () => {}
+  const engagementAction = () => {
+    dispatch(readerRecUnSaveItem(id))
+    dispatch(readerRecEngagementEvent(item, position))
+  }
+
   return item ? (
     <Card
       item={item}
       position={position}
+      cardShape="block"
       itemType="message"
-      onSave={onSave}
+      showExcerpt={true}
+      saveAction={onSave}
       impressionAction={impressionAction}
-      onOpen={onOpen}
+      engagementAction={engagementAction}
+      openAction={onOpen}
       isAuthenticated={isAuthenticated}
     />
   ) : null

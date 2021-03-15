@@ -145,7 +145,7 @@ export const Card = ({
       </FeatureFlag>
 
       <Link href={openUrl}>
-        <a onClick={onOpen} className="cardLink">
+        <a onClick={onOpen} className="cardLink" target={openExternal ? "_blank" : undefined}>
           {showMedia ? (
             <CardMedia image_src={thumbnail} title={title} id={id} />
           ) : null}

@@ -22,7 +22,8 @@ export function deriveReaderRecitItems(recommendations) {
     save_url: saveUrl(feedItem),
     open_url: openUrl(feedItem),
     read_time: readTime(feedItem),
-    save_status: 'unsaved'
+    save_status: 'unsaved',
+    openExternal: true,
   }))
 }
 
@@ -89,13 +90,12 @@ function displayExcerpt({ item, curated_info }) {
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {string} The url that should be saved or opened
  */
-function openUrl({ item, redirect_url }) {
+function openUrl({ item }) {
   return (
     devLink(item) ||
-    redirect_url ||
     item?.given_url ||
     item?.resolved_url ||
-    null
+    false
   )
 }
 
@@ -104,7 +104,7 @@ function openUrl({ item, redirect_url }) {
  * @returns {string} The url that should be saved or opened
  */
 function saveUrl({ item }) {
-  return item?.given_url || item?.resolved_url || null
+  return item?.given_url || item?.resolved_url || false
 }
 
 /** READ TIME
