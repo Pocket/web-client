@@ -2,9 +2,7 @@ import SearchPage from 'containers/my-list/search-page/search-page'
 
 export async function getStaticProps() {
   return {
-    props: {
-      namespacesRequired: ['common']
-    }
+    props: { authRequired: true, namespacesRequired: ['common'] }
   }
 }
 
