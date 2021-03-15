@@ -75,7 +75,7 @@ export const Recommendations = ({ id }) => {
 
   useEffect(() => {
     dispatch(readerRecsRequest(id))
-  }, [dispatch])
+  }, [dispatch, id])
 
   return Object.keys(recommendations).length ? (
     <FeatureFlag flag="temp.web.client.reader.recommendations">
