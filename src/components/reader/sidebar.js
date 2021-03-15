@@ -6,6 +6,7 @@ import { QuoteList } from 'components/annotations/annotations.list'
 import { TicList } from 'components/annotations/annotations.tics'
 import classNames from 'classnames'
 import { useTranslation } from 'common/setup/i18n'
+import { breakpointSmallTablet } from '@pocket/web-ui'
 
 const sideBarWrapper = css`
   width: 110px;
@@ -20,7 +21,12 @@ const sideBarWrapper = css`
     padding-top: var(--size400);
   }
 
+  ${breakpointSmallTablet} {
+    pointer-events: none;
+  }
+
   &.active {
+    pointer-events: auto;
     width: 350px;
     .rail-wrapper {
       opacity: 1;
