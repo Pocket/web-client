@@ -31,9 +31,9 @@ export const Video = ({ videoData }) => {
       <iframe
         className="player"
         title="pocket-video-frame"
-        src={`${videoTypes[type]}${id}?autoplay=1&dnt=1`}
+        src={`${videoTypes[type]}${id}?autoplay=0&dnt=1`}
         frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; modestbranding; picture-in-picture"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; modestbranding; picture-in-picture"
         allowFullScreen></iframe>
     </div>
   )
