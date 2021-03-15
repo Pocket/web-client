@@ -155,7 +155,6 @@ function PocketWebClient({ Component, pageProps, err }) {
     ? user_status !== 'pending' && user_status !== 'invalid'
     : true
 
-  console.log(pageProps)
   return (
     <ViewportProvider>
       {showDevTools ? <DevTools /> : null}
