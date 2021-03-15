@@ -50,6 +50,8 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   const showDevTools = process.env.SHOW_DEV === 'included'
 
+  const { authRequired } = pageProps
+
   useEffect(() => {
     // Log out version for quick scan.  Can also help support get a read on
     // what version a user is on when reporting an error
@@ -99,7 +101,11 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   // 3rd party initializations
   useEffect(() => {
-    if (user_status === 'pending' || !sess_guid) return
+    // ?? Were we firing page views on logged out users in the past ??
+    // ?? Before redirecting them?
+    if (user_status === 'pending' || user_status === 'invalid' || !sess_guid) {
+      return
+    }
 
     // Set up Snowplow
     initializeSnowplow(user_id, sess_guid)
@@ -113,7 +119,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   // Hydrate user features
   useEffect(() => {
-    if (user_status === 'pending') return null
+    if (user_status === 'pending' || user_status === 'invalid') return null
 
     const hydrateFeatures = async () => {
       const features = await fetchUnleashData(user_id, sess_guid)
@@ -132,18 +138,28 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   // Track Page Views
   useEffect(() => {
-    if (user_status === 'pending') return null
+    if (user_status === 'pending' || user_status === 'invalid') return null
 
     dispatch(trackPageView())
     ReactGA.pageview(path)
   }, [user_status, sess_guid, user_id, path, dispatch])
 
+  useEffect(() => {
+    if (authRequired && user_status === 'invalid') {
+      window.location = 'https://getpocket.com/login?src=web-client'
+    }
+  }, [authRequired, user_status])
+
   // Provider is created automatically by the wrapper by next-redux-wrapper
+  const shouldRender = authRequired
+    ? user_status !== 'pending' && user_status !== 'invalid'
+    : true
+
   return (
     <ViewportProvider>
       {showDevTools ? <DevTools /> : null}
       <Shortcuts />
-      <Component {...pageProps} err={err} />
+      {shouldRender ? <Component {...pageProps} err={err} /> : null}
     </ViewportProvider>
   )
 }

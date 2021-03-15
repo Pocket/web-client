@@ -77,6 +77,11 @@ const articleWrapper = css`
     padding: 0 var(--spacing250);
     margin: var(--spacing250) auto;
   }
+
+  .is-video {
+    max-width: initial !important;
+    width: 80%;
+  }
 `
 
 export default function Reader() {
@@ -293,12 +298,14 @@ export default function Reader() {
           />
         </div>
         <article
-          className={classNames(ReaderFonts, GoogleFonts, 'reader')}
+          className={classNames(
+            ReaderFonts,
+            GoogleFonts,
+            'reader',
+            has_video === '2' && 'is-video'
+          )}
           style={customStyles}>
-          <ItemHeader
-            viewOriginalEvent={viewOriginalEvent}
-            {...headerData}
-          />
+          <ItemHeader viewOriginalEvent={viewOriginalEvent} {...headerData} />
           {articleContent ? (
             <Content
               {...contentData}

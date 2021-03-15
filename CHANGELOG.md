@@ -1,3 +1,24 @@
+# [1.6.0](https://github.com/Pocket/web-client/compare/v1.5.3...v1.6.0) (2021-03-15)
+
+
+### Features
+
+* **app:** adding auth required to specific pages ([7aee6cf](https://github.com/Pocket/web-client/commit/7aee6cf9b8950caa22f7f05accdbd0798d266e1e))
+
+## [1.5.3](https://github.com/Pocket/web-client/compare/v1.5.2...v1.5.3) (2021-03-15)
+
+
+### Bug Fixes
+
+* **video:** direct embeds ([029983e](https://github.com/Pocket/web-client/commit/029983e66f85e8c6e682c8ae0f2f1e9b76764584))
+
+## [1.5.2](https://github.com/Pocket/web-client/compare/v1.5.1...v1.5.2) (2021-03-15)
+
+
+### Bug Fixes
+
+* **nav:** account for flags in tests ([c048dc8](https://github.com/Pocket/web-client/commit/c048dc8fbdaf4f2fcbb4738bcd58c6973aba0296))
+
 ## [1.5.1](https://github.com/Pocket/web-client/compare/v1.5.0...v1.5.1) (2021-03-12)
 
 
