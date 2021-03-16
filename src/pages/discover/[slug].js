@@ -5,6 +5,8 @@ import { fetchTopicData } from 'containers/topic/topic.state'
 import { fetchSearchData } from 'containers/topic/topic.state'
 import { hydrateTopic } from 'containers/topic/topic.state'
 import { hydrateItems } from 'connectors/items-by-id/discover/items.state'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { LOCALE_COMMON } from 'common/constants'
 
 import { wrapper } from 'store'
 /**
@@ -23,7 +25,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = wrapper.getStaticProps(
-  async ({ store, params }) => {
+  async ({ store, params, locale }) => {
     const { slug } = params
 
     if (slug === 'null') return { props: { namespacesRequired: ['common'] } }
@@ -87,7 +89,12 @@ export const getStaticProps = wrapper.getStaticProps(
     )
 
     // Revalidate means this can be regenerated once every X seconds
-    return { props: { namespacesRequired: ['common'] }, revalidate: 60 }
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
+        revalidate: 60
+      }
+    }
   }
 )
 

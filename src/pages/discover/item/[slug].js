@@ -5,9 +5,11 @@ import { fetchTopicList } from 'connectors/topic-list/topic-list.state'
 import { hydrateTopicList } from 'connectors/topic-list/topic-list.state'
 import { wrapper } from 'store'
 import { END } from 'redux-saga'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { LOCALE_COMMON } from 'common/constants'
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  async ({ store, query, res, req }) => {
+  async ({ store, query, res, req, locale }) => {
     const { dispatch, sagaTask } = store
     const { slug } = query
 
@@ -36,7 +38,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
     dispatch(END)
     await sagaTask.toPromise()
 
-    return { props: {} }
+    return {
+      props: { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])) }
+    }
   }
 )
 
