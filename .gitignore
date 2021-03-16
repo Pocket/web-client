@@ -88,4 +88,5 @@ cypress/mochawesome
 # Locale files - We are pulling these from another repo and they are
 # copied over during the build step.
 public/static/locales/
+public/locales/
 .scripts/localization/config.json
