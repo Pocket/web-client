@@ -68,7 +68,6 @@ const card = css`
   }
 
   .title {
-    --color-underliner: var(--color-canvas);
     font-family: 'Graphik Web';
     font-weight: 600;
     line-height: 1.22;
