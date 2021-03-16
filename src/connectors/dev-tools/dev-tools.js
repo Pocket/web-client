@@ -43,8 +43,9 @@ const devToolStyle = css`
 
 export function DevTools() {
   const dispatch = useDispatch()
-
-  const showDevTools = localStore.getItem('showPocketDevTools') === 'true'
+  const isDevBuild = process.env.NODE_ENV !== 'production'
+  const showDevTools =
+    localStore.getItem('showPocketDevTools') === 'true' || isDevBuild
   const devMode = useSelector((state) => state.app.devMode)
   const handleKeyCombo = () => dispatch(devModeToggle())
 
