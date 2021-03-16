@@ -4,7 +4,7 @@ import { breakpointLargeHandset } from '@pocket/web-ui'
 import { breakpointTinyTablet } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
-import { Trans } from 'common/setup/i18n'
+import { Trans } from 'next-i18next'
 import { Loader } from 'components/loader/loader'
 
 const searchPageHeaderStyle = css`

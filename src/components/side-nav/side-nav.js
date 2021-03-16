@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Trans, useTranslation } from 'common/setup/i18n'
+import { Trans, useTranslation } from 'next-i18next'
 
 import { HomeIcon } from '@pocket/web-ui'
 import { FavoriteIcon } from '@pocket/web-ui'

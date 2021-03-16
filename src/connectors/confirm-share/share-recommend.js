@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Button } from '@pocket/web-ui'
 import { css } from 'linaria'
-import { Trans, useTranslation } from 'common/setup/i18n'
+import { Trans, useTranslation } from 'next-i18next'
 
 import { itemsRecommendConfirm } from 'connectors/items-by-id/my-list/items.share'
 

@@ -1,6 +1,6 @@
 import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
-import { Trans } from 'common/setup/i18n'
+import { Trans } from 'next-i18next'
 
 const tabAction = css`
   width: 100%;

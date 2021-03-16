@@ -1,5 +1,5 @@
 import { OverflowMenuIcon } from '@pocket/web-ui'
-import { Trans } from 'common/setup/i18n'
+import { Trans } from 'next-i18next'
 
 export default function ReleaseNotes() {
   return (

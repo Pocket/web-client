@@ -11,7 +11,7 @@ import { EditIcon } from '@pocket/web-ui'
 import { DeleteIcon } from '@pocket/web-ui'
 import { buttonReset } from 'components/buttons/button-reset'
 import { bottomTooltipDelayed } from 'components/tooltip/tooltip'
-import { useTranslation } from 'common/setup/i18n'
+import { useTranslation } from 'next-i18next'
 
 const myListHeaderStyle = css`
   margin-bottom: var(--spacing100);

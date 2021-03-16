@@ -1,6 +1,6 @@
 import { css, cx } from 'linaria'
 import { Modal, ModalBody } from 'components/modal/modal'
-import { useTranslation } from 'common/setup/i18n'
+import { useTranslation } from 'next-i18next'
 import { PremiumIcon } from '@pocket/web-ui'
 
 const shortcutsStyle = css`

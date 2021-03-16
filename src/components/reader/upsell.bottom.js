@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { css } from 'linaria'
-import { Trans } from 'common/setup/i18n'
+import { Trans } from 'next-i18next'
 import classNames from 'classnames'
 import BigDiamondDark from 'static/images/reader-upsells/BigDiamond-dark.svg'
 import BigDiamondLight from 'static/images/reader-upsells/BigDiamond-light.svg'

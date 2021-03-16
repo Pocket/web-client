@@ -20,7 +20,7 @@ import { ModalHeader } from './modal-header'
 import { ModalBody } from './modal-body'
 import { ModalFooter } from './modal-footer'
 import { ModalTabs } from './modal-tabs'
-import { useTranslation, Trans } from 'common/setup/i18n'
+import { useTranslation, Trans } from 'next-i18next'
 
 const MODAL_MAX_WIDTH = 552
 
@@ -221,10 +221,7 @@ const Modal = ({
         contentRef={(node) => (modalContentRef = node)}
         ref={modalContentRef}>
         {showCloseButton ? (
-          <CloseButton
-            handleClose={handleClose}
-            data-cy="close-modal-button"
-          />
+          <CloseButton handleClose={handleClose} data-cy="close-modal-button" />
         ) : null}
         {title ? <ModalHeader title={title} /> : null}
         <div onClick={onClick}>{children}</div>

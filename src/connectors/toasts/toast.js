@@ -5,7 +5,7 @@ import { CrossIcon } from '@pocket/web-ui'
 import { Fade } from 'common/utilities/animation/fade'
 import { useDispatch } from 'react-redux'
 import { clearToast } from './toast.state'
-import { Trans } from 'common/setup/i18n'
+import { Trans } from 'next-i18next'
 
 import { ITEMS_DELETE_SUCCESS } from 'actions'
 import { ITEMS_DELETE_FAILURE } from 'actions'

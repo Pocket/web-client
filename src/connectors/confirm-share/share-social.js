@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useTranslation } from 'common/setup/i18n'
+import { useTranslation } from 'next-i18next'
 
 import { FacebookShareButton } from 'react-share'
 import { TwitterShareButton } from 'react-share'
@@ -92,9 +92,7 @@ export const BufferShareButton = ({
   }
 
   return (
-    <button
-      onClick={clickHandler}
-      {...rest}>
+    <button onClick={clickHandler} {...rest}>
       {children}
     </button>
   )

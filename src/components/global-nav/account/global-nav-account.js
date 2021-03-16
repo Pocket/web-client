@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
-import { Trans, useTranslation } from 'common/setup/i18n'
+import { Trans, useTranslation } from 'next-i18next'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { KEYS } from 'common/constants'
 
@@ -268,7 +268,9 @@ const GlobalNavAccount = ({
           </a>
         </VisibilitySensor>
       ) : null}
-      <div className={cx(avatarWrapper, bottomTooltip)} data-tooltip={t('nav:account', 'Account')}>
+      <div
+        className={cx(avatarWrapper, bottomTooltip)}
+        data-tooltip={t('nav:account', 'Account')}>
         <AvatarButton
           aria-label={t('nav:open-account-menu', 'Open Account Menu')}
           src={avatarSrc}
@@ -280,7 +282,7 @@ const GlobalNavAccount = ({
           onClick={handleOpen}
           onKeyPress={updateFocus}
         />
-        { showNotification ? (
+        {showNotification ? (
           <FloatingNotification data-cy="notification-avatar" />
         ) : null}
       </div>
@@ -346,8 +348,8 @@ const GlobalNavAccount = ({
             onClick={(event) => {
               handleLinkClick('whats-new', event)
             }}>
-            <Trans i18nKey="nav:whats-new">What’s New</Trans>{" "}
-            { showNotification ? (
+            <Trans i18nKey="nav:whats-new">What’s New</Trans>{' '}
+            {showNotification ? (
               <InlineNotification data-cy="notification-whatsnew" />
             ) : null}
           </PopupMenuItem>

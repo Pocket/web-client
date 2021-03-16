@@ -6,7 +6,7 @@ import { screenMediumHandset } from '@pocket/web-ui'
 import { css } from 'linaria'
 import classnames from 'classnames'
 import isURL from 'validator/lib/isURL'
-import { Trans, useTranslation } from 'common/setup/i18n'
+import { Trans, useTranslation } from 'next-i18next'
 import { KEYS } from 'common/constants'
 import Mousetrap from 'mousetrap'
 
@@ -236,9 +236,7 @@ const GlobalNavAdd = ({
         data-cy="add-button">
         <Trans i18nKey="nav:add">Add</Trans>
       </button>
-      {onClose ? (
-        <CloseButton onClick={onClose} data-cy="add-close" />
-      ) : null}
+      {onClose ? <CloseButton onClick={onClose} data-cy="add-close" /> : null}
     </form>
   )
 }

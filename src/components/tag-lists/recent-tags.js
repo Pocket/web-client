@@ -2,7 +2,7 @@ import { SimpleCard } from 'components/item-card/my-list/card-simple'
 import { css } from 'linaria'
 import { SectionHeader } from 'components/headers/section-header'
 import { breakpointLargeHandset } from '@pocket/web-ui'
-import { useTranslation } from 'common/setup/i18n'
+import { useTranslation } from 'next-i18next'
 
 const recentTagStyle = css`
   border-bottom: var(--dividerStyle);

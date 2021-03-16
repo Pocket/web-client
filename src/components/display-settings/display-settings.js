@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
-import { Trans, useTranslation } from 'common/setup/i18n'
+import { Trans, useTranslation } from 'next-i18next'
 import {
   PopupMenu,
   PopupMenuGroup,
@@ -166,8 +166,14 @@ export const DisplaySettings = ({
   return (
     <div className={displayStyles} ref={menuRef}>
       <button
-        aria-label={t('settings:open-display-settings', 'Open Display Settings')}
-        data-tooltip={t('settings:open-display-settings', 'Open Display Settings')}
+        aria-label={t(
+          'settings:open-display-settings',
+          'Open Display Settings'
+        )}
+        data-tooltip={t(
+          'settings:open-display-settings',
+          'Open Display Settings'
+        )}
         className={classNames(buttonReset, buttonStyles, bottomTooltip)}
         ref={displayButtonRef}
         onClick={handleOpen}

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { itemsDeleteConfirm } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsDeleteCancel } from 'connectors/items-by-id/my-list/items.delete'
 import { BatchProcessing } from 'components/processing/processing'
-import { useTranslation, Trans } from 'common/setup/i18n'
+import { useTranslation, Trans } from 'next-i18next'
 
 export const DeleteModal = () => {
   const dispatch = useDispatch()

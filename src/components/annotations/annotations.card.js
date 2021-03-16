@@ -3,7 +3,7 @@ import { css } from 'linaria'
 import dayjs from 'dayjs'
 import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
-import { Trans } from 'common/setup/i18n'
+import { Trans } from 'next-i18next'
 
 export const cardStyles = css`
   font-family: 'Graphik Web';

@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { Trans } from 'common/setup/i18n'
+import { Trans } from 'next-i18next'
 
 const tagErrorWrapper = css`
   background: #ccc;

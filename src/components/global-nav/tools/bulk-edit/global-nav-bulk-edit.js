@@ -12,7 +12,7 @@ import { TagIcon } from '@pocket/web-ui'
 import { breakpointMediumHandset } from '@pocket/web-ui'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 
-import { Trans, useTranslation } from 'common/setup/i18n'
+import { Trans, useTranslation } from 'next-i18next'
 import Mousetrap from 'mousetrap'
 
 const bulkStyle = css`
@@ -265,9 +265,7 @@ function GlobalNavBulkEdit({
           data-cy="clear-button">
           {clearCopy}
         </button>
-        {onClose ? (
-          <CloseButton onClick={onClose} data-cy="add-close" />
-        ) : null}
+        {onClose ? <CloseButton onClick={onClose} data-cy="add-close" /> : null}
       </div>
     </div>
   )

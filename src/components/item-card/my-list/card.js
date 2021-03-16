@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { css, cx } from 'linaria'
 import { urlWithPocketRedirect } from 'common/utilities'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { useTranslation } from 'common/setup/i18n'
+import { useTranslation } from 'next-i18next'
 
 import { CardMedia } from 'components/media/card-media'
 import { ItemActions } from './item-actions'

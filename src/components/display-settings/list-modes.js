@@ -11,7 +11,7 @@ import { buttonReset } from 'components/buttons/button-reset'
 
 import { bottomTooltip } from 'components/tooltip/tooltip'
 
-import { useTranslation } from 'common/setup/i18n'
+import { useTranslation } from 'next-i18next'
 
 const listSettingStyle = css`
   display: grid;
@@ -77,7 +77,7 @@ export const ListSettings = ({
                 'settings:sort-items-by-oldest-first',
                 'Sort items by oldest first'
               )}
-              className={cx(buttonReset, bottomTooltip, "backing")}>
+              className={cx(buttonReset, bottomTooltip, 'backing')}>
               <SortByOldestIcon />
             </button>
           ) : (
@@ -90,7 +90,7 @@ export const ListSettings = ({
                 'settings:sort-items-by-newest-first',
                 'Sort items by newest first'
               )}
-              className={cx(buttonReset, bottomTooltip, "backing")}>
+              className={cx(buttonReset, bottomTooltip, 'backing')}>
               <SortByNewestIcon />
             </button>
           )}
@@ -106,7 +106,7 @@ export const ListSettings = ({
               'settings:display-items-as-a-list',
               'Display items as a list'
             )}
-            className={cx(buttonReset, bottomTooltip, "backing")}>
+            className={cx(buttonReset, bottomTooltip, 'backing')}>
             <ListViewIcon />
           </button>
         </div>
@@ -122,7 +122,7 @@ export const ListSettings = ({
               'settings:display-items-in-detail',
               'Display items in detail'
             )}
-            className={cx(buttonReset, bottomTooltip, "backing")}>
+            className={cx(buttonReset, bottomTooltip, 'backing')}>
             <DetailViewIcon />
           </button>
         </div>
@@ -136,7 +136,7 @@ export const ListSettings = ({
               'settings:display-items-as-a-grid',
               'Display items as a grid'
             )}
-            className={cx(buttonReset, bottomTooltip, "backing")}>
+            className={cx(buttonReset, bottomTooltip, 'backing')}>
             <GridViewIcon />
           </button>
         </div>

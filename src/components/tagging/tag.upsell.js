@@ -5,7 +5,7 @@ import { DivideHorizontal } from 'components/divider/divider'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { PREMIUM_URL } from 'common/constants'
 import { PremiumIcon } from '@pocket/web-ui'
-import { Trans } from 'common/setup/i18n'
+import { Trans } from 'next-i18next'
 
 const upsellWrapper = css`
   font-family: 'Graphik Web';

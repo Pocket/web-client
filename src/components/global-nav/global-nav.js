@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
-import { Trans, useTranslation } from 'common/setup/i18n'
+import { Trans, useTranslation } from 'next-i18next'
 
 import { breakpointSmallTablet } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'

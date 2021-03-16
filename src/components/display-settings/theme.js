@@ -1,7 +1,7 @@
 import React from 'react'
 import { PopupMenuGroup } from '@pocket/web-ui'
 import { css } from 'linaria'
-import { Trans } from 'common/setup/i18n'
+import { Trans } from 'next-i18next'
 
 const themeWrapper = css`
   padding: 0 var(--spacing100);

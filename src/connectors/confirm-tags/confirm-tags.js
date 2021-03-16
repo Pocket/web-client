@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Button } from '@pocket/web-ui'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
-import { useTranslation, Trans } from 'common/setup/i18n'
+import { useTranslation, Trans } from 'next-i18next'
 
 import { getUserTags } from 'containers/my-list/tags-page/tags-page.state'
 

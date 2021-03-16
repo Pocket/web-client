@@ -1,7 +1,7 @@
 // @refresh reset
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useTranslation } from 'common/setup/i18n'
+import { useTranslation } from 'next-i18next'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { getMessages } from './user-messages.state'

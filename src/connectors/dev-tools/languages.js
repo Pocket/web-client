@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useTranslation } from 'common/setup/i18n'
+import { useTranslation } from 'next-i18next'
 
 export function Languages() {
   const stuff = useTranslation()

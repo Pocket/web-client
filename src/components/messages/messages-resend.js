@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { Trans } from 'common/setup/i18n'
+import { Trans } from 'next-i18next'
 import { domainForUrl } from 'common/utilities'
 import Avatar from 'components/avatar/avatar'
 import { fontSansSerif, Button } from '@pocket/web-ui'

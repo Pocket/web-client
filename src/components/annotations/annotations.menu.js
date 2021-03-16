@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames'
 import { css } from 'linaria'
-import { Trans, useTranslation } from 'common/setup/i18n'
+import { Trans, useTranslation } from 'next-i18next'
 
 import { OverflowMenuIcon } from '@pocket/web-ui'
 import { IosShareIcon } from '@pocket/web-ui'

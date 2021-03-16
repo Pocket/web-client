@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { itemsFavoriteConfirm } from 'connectors/items-by-id/my-list/items.favorite'
 import { itemsFavoriteCancel } from 'connectors/items-by-id/my-list/items.favorite'
 import { BatchProcessing } from 'components/processing/processing'
-import { useTranslation, Trans } from 'common/setup/i18n'
+import { useTranslation, Trans } from 'next-i18next'
 
 export const FavoriteModal = () => {
   const dispatch = useDispatch()

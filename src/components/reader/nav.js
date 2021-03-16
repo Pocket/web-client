@@ -25,7 +25,7 @@ import {
   updateFontType
 } from 'containers/read/read.state'
 import { WrappedProgressBar } from 'components/progress-bar/progress-bar'
-import { useTranslation } from 'common/setup/i18n'
+import { useTranslation } from 'next-i18next'
 import Mousetrap from 'mousetrap'
 
 const headerStyle = css`

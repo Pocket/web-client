@@ -1,4 +1,4 @@
-import { Trans } from 'common/setup/i18n'
+import { Trans } from 'next-i18next'
 
 export default function ReleaseNotes() {
   return (
@@ -9,8 +9,8 @@ export default function ReleaseNotes() {
         <h6>🎉 What’s New</h6>
         <p>
           Detailed list view (with tags!) - we’ve added a third display option
-          for the list to give more context  to the items you’ve saved. Switch
-          to detailed list view in the account settings menu to see tags and
+          for the list to give more context to the items you’ve saved. Switch to
+          detailed list view in the account settings menu to see tags and
           preview text for your articles.
         </p>
 

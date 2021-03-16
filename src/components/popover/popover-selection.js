@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
 import { HighlightIcon, IosShareIcon } from '@pocket/web-ui'
-import { Trans } from 'common/setup/i18n'
+import { Trans } from 'next-i18next'
 
 const popupContainer = css`
   position: absolute;
@@ -95,9 +95,7 @@ export const SelectionPopover = ({
           top + window.scrollY
         )}px)`
       }}>
-      <div
-        className={classNames(overlayBase, popupWrapper)}
-        ref={ref}>
+      <div className={classNames(overlayBase, popupWrapper)} ref={ref}>
         <button
           className={classNames(buttonReset, buttonWrapper)}
           onClick={onHighlight}>

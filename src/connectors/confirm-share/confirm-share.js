@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { css } from 'linaria'
 import { useDispatch, useSelector } from 'react-redux'
-import { useTranslation } from 'common/setup/i18n'
+import { useTranslation } from 'next-i18next'
 
 import { Modal, ModalBody, ModalTabs } from 'components/modal/modal'
 
