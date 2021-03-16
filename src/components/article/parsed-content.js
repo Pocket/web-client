@@ -215,8 +215,6 @@ const contentWrapper = css`
         color: var(--color-textPrimary);
         &:hover {
           text-decoration: underline;
-          transition: background-color 300ms ease-in-out;
-          background-color: var(--color-textPrimary);
         }
       }
     }
