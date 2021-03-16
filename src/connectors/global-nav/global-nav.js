@@ -109,7 +109,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       name: 'home',
       id: 'global-nav-home-link',
       label: t('nav:home', 'Home'),
-      url: 'https://getpocket.com/home',
+      url: '/home',
       icon: <HomeIcon />
     },
     {
