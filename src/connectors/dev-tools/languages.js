@@ -5,8 +5,7 @@ export function Languages() {
   const stuff = useTranslation()
   const { i18n } = stuff
   const { options, language: currentLanguage } = i18n
-
-  const languages = options?.allLanguages
+  const languages = options?.locales
 
   // Set state for component
   const [language, setLanguage] = useState(currentLanguage)
@@ -21,7 +20,7 @@ export function Languages() {
     }
   }
 
-  return languages.length ? (
+  return languages?.length ? (
     <select onChange={handleChange} value={language}>
       {languages.map((languageOption) => (
         <option key={languageOption} value={languageOption}>
