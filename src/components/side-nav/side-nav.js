@@ -165,13 +165,13 @@ export function SideNav({
               </button>
             </Link>
             <Link href="/explore">
-              <button className={subActive('discover')} ref={ref}>
+              <button className={subActive('discover')}>
                 <DiscoverIcon className="side-nav-icon" />{' '}
                 <Trans i18nKey="nav:discover">Discover</Trans>
               </button>
             </Link>
             <Link href="/my-list">
-              <button className={subActive('unread')} ref={ref}>
+              <button className={subActive('unread')}>
                 <ListViewIcon className="side-nav-icon" />{' '}
                 <Trans i18nKey="nav:my-list">My List</Trans>
               </button>

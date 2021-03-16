@@ -74,3 +74,31 @@ export const collectionOpenEvent = (item, position) => {
     'home.collection.open'
   )
 }
+
+export const recImpressionEvent = (item, position) => (trackContentImpression(
+  IMPRESSION_COMPONENT_CARD,
+  IMPRESSION_REQUIREMENT_VIEWABLE,
+  position,
+  item,
+  'home.rec.impression'
+))
+
+export const recSaveEvent = (item, position) => (trackContentEngagement(
+  ENGAGEMENT_TYPE_SAVE,
+  UI_COMPONENT_BUTTON,
+  position,
+  item,
+  'home.rec.save'
+))
+
+export const recOpenEvent = (item, position) => {
+  const destination = getLinkOpenTarget(item?.save_url, item?.syndicated)
+
+  return trackContentOpen(
+    destination,
+    CONTENT_OPEN_TRIGGER_CLICK,
+    position,
+    item,
+    'home.rec.open'
+  )
+}
