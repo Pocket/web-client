@@ -112,3 +112,26 @@ export const ANALYTICS_UI = 'cxt_ui'
 export const ANALYTICS_VIEW = 'cxt_view'
 export const ANALYTICS_INDEX = 'cxt_index'
 export const ANALYTICS_LIST_MODE = 'cxt_list_view'
+
+// LOCALIZATION BLOCKS
+export const LOCALE_READER = [
+  'annotations',
+  'reader',
+]
+
+// Common translations
+export const LOCALE_COMMON = [
+  'common',
+  'save-to-pocket',
+  'confirm',
+  'item-action',
+  'messages',
+  'nav',
+  'release',
+  'search',
+  'settings',
+  'share',
+  'shortcuts',
+  'tags',
+  'whats-new',
+]
