@@ -1,5 +1,6 @@
 import '@pocket/web-ui/lib/pocket-web-ui.css'
 import { ViewportProvider } from '@pocket/web-ui'
+import { appWithTranslation } from 'next-i18next'
 
 import { useEffect } from 'react'
 import { wrapper } from 'store'
@@ -22,7 +23,6 @@ import { appSetPreferences } from 'connectors/app/app.state'
  --------------------------------------------------------------- */
 import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
-import { appWithTranslation } from 'common/setup/i18n'
 import { initializeSnowplow } from 'common/setup/snowplow'
 import { signalTestsReady } from '../../cypress/support/utils'
 

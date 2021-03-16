@@ -5,8 +5,10 @@ const nextBuildId = require('next-build-id')
 const assetRegEx = /\.(svg|ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/
 const assetPrefix = process.env.ASSET_PREFIX || ''
 const withSourceMaps = require('@zeit/next-source-maps')
+const { i18n } = require('./next-i18next.config.js')
 
 module.exports = withPlugins([withCSS, withSourceMaps], {
+  i18n,
   env: {
     SHOW_DEV: process.env.SHOW_DEV,
     RELEASE_VERSION: process.env.RELEASE_VERSION
@@ -27,7 +29,7 @@ module.exports = withPlugins([withCSS, withSourceMaps], {
     ]
   },
   //prettier-ignore
-  webpack: (config, { dev, isServer, webpack }) => {
+  webpack: (config, { isServer, webpack }) => {
 
         config.resolve.alias['static'] = path.join(__dirname, 'public/static')
         config.resolve.alias['common'] = path.join(__dirname, 'src/common')
