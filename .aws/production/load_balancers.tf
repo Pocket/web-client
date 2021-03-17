@@ -153,6 +153,25 @@ resource "aws_alb_listener_rule" "public_forward_110" {
   priority = 2110
 }
 
+resource "aws_alb_listener_rule" "public_forward_111" {
+  listener_arn = data.aws_alb_listener.web_client.arn
+  action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.public.arn
+  }
+
+  condition {
+    path_pattern {
+      values = [
+         "/waypoint",
+         "/waypoint/"
+      ]
+    }
+  }
+
+  priority = 2111
+}
+
 # Defining what the the load balancer should expect when routing to
 # the containers.
 # NOTE: Make sure your application has a route to pulse that returns 200

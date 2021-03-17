@@ -1,18 +1,14 @@
-import { getUserInfo } from 'common/api/user'
-export default function Waypoint() {}
+import { useEffect } from 'react'
+
+export default function Waypoint({ serverCookies }) {
+  useEffect(() => {
+    console.log(serverCookies)
+  }, [serverCookies])
+
+  return <div></div>
+}
 
 export async function getServerSideProps({ res, req }) {
-  console.log(req.cookies.sess_guid)
-
-  res.status = 200
-  res.end('ok')
-
-  return { props: {} }
-
-  // return {
-  //   redirect: {
-  //     destination: '/home',
-  //     permanent: false
-  //   }
-  // }
+  const serverCookies = req.cookies
+  return { props: { serverCookies } }
 }
