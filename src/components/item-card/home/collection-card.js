@@ -126,7 +126,8 @@ export const CollectionCard = React.forwardRef(
         ref={ref}
         className={collectionCardStyle}
         data-cy="home-collection">
-        <a href={url} onClick={onOpen}>
+        {/*eslint-disable-next-line react/jsx-no-target-blank*/}
+        <a href={url} onClick={onOpen} target="_blank">
           <img src={image} width="100%" alt="" aria-hidden="true" />
           <div className="content">
             <h2 className="title">{title}</h2>

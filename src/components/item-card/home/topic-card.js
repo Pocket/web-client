@@ -112,11 +112,8 @@ export const Card = React.forwardRef(
         key={id}
         ref={ref}
         data-cy={`home-card-${id}`}>
-        <a
-          href={open_url}
-          onClick={onOpen}
-          // eslint-disable-next-line react/jsx-no-target-blank
-          target="_blank">
+        {/*eslint-disable-next-line react/jsx-no-target-blank*/}
+        <a href={open_url} onClick={onOpen} target="_blank">
           <CardMedia image_src={thumbnail} title={title} id={id} />
           <div className="content">
             <h2 className="title">
