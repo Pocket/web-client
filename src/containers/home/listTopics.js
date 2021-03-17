@@ -5,6 +5,7 @@ import { ItemCard } from 'connectors/item-card/home/cardTopic'
 import { cardGrid } from 'components/items-layout/virtualized-list'
 import classnames from 'classnames'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
+import { breakpointLargeHandset } from '@pocket/web-ui'
 
 const topicRowStyles = css`
   margin-bottom: 1.5rem;
@@ -16,6 +17,15 @@ const topicRowStyles = css`
 const cardRowStyles = css`
   margin-bottom: var(--spacing100);
   padding-bottom: 2rem;
+  ${breakpointLargeHandset} {
+    article {
+      border-bottom: none;
+      margin-bottom: 1rem;
+    }
+    article .actions {
+      justify-content: flex-end;
+    }
+  }
 `
 
 //prettier-ignore

@@ -6,11 +6,12 @@ import { RecCard } from 'connectors/item-card/home/cardRec'
 import { recentRecsRequest } from 'connectors/recit/recit.state'
 import { useInView } from 'react-intersection-observer'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
+import { breakpointLargeHandset } from '@pocket/web-ui'
 
 const recGrid = css`
   display: grid;
   align-items: start;
-  grid-column-gap: var(--spacing250);
+  grid-column-gap: var(--spacing150);
   grid-template-columns: repeat(12, 1fr);
   padding-bottom: 4rem;
 
@@ -37,6 +38,26 @@ const recGrid = css`
       max-height: 4.4em;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+
+  ${breakpointLargeHandset} {
+    article:nth-child(n + 2),
+    article:nth-child(1) {
+      grid-column: span 12;
+      grid-row: span 1;
+
+      .media {
+        grid-column: span 4;
+      }
+      .content {
+        grid-column: span 8;
+      }
+    }
+    article:nth-child(1) {
+      .actions {
+        justify-content: flex-end;
+      }
     }
   }
 `

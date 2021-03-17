@@ -4,10 +4,14 @@ import { ItemCard } from 'connectors/item-card/home/cardCollection'
 import { css } from 'linaria'
 import { cardsGrid } from 'components/items-layout/base'
 import { useSelector } from 'react-redux'
+import { breakpointLargeHandset } from '@pocket/web-ui'
 
 const homeCollections = css`
   ${cardsGrid};
   grid-template-columns: repeat(2, 1fr);
+  ${breakpointLargeHandset} {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `
 
 export const HomeCollectionList = () => {
