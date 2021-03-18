@@ -32,7 +32,7 @@ export const request = ({
 
   const endpoint = `${apiToUse}/${path}?${queryParams}`
 
-  const ssrHeaders = cookie ? { cookie, 'user-agent': 'web-client' } : {}
+  const ssrHeaders = cookie ? { Cookie: cookie, Origin: 'getpocket.com' } : {}
   const headers = {
     'Content-Type': 'application/json',
     'X-Accept': 'application/json; charset=UTF8',
