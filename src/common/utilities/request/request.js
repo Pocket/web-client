@@ -37,7 +37,6 @@ export const request = ({
     ...cookies
   }
 
-  console.log(headers)
   // The Promise returned from fetch() won’t reject on HTTP error status even if
   // the response is an HTTP 404 or 500. Instead, it will resolve normally
   // (with ok status set to false), and it will only reject on network failure
