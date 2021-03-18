@@ -58,6 +58,10 @@ export const cardStyles = css`
     border-radius: var(--size025);
   }
 
+  .content {
+    width: 100%;
+  }
+
   .title {
     --color-underliner: var(--color-canvas);
     font-family: 'Graphik Web';
