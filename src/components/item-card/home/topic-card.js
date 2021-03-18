@@ -104,13 +104,8 @@ export const Card = React.forwardRef(
       open_url,
       read_time,
       save_status,
-      syndicated,
-      openExternal
+      syndicated
     } = item
-
-    console.log({ ...item })
-
-    const openUrl = openExternal ? open_url : `/read/${id}`
 
     return (
       <article
