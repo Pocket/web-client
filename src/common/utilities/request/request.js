@@ -14,7 +14,8 @@ export const request = ({
   method = 'GET',
   body,
   auth,
-  ssr
+  ssr,
+  cookie
 }) => {
   const credentials = 'include'
   const apiToUse = api_url
@@ -29,12 +30,14 @@ export const request = ({
   })
 
   const endpoint = `${apiToUse}/${path}?${queryParams}`
-
+  const cookies = cookie ? { cookie } : {}
   const headers = {
     'Content-Type': 'application/json',
-    'X-Accept': 'application/json; charset=UTF8'
+    'X-Accept': 'application/json; charset=UTF8',
+    ...cookies
   }
 
+  console.log(headers)
   // The Promise returned from fetch() won’t reject on HTTP error status even if
   // the response is an HTTP 404 or 500. Instead, it will resolve normally
   // (with ok status set to false), and it will only reject on network failure
