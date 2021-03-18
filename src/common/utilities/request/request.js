@@ -1,6 +1,7 @@
 import queryString from 'query-string'
 import { CONSUMER_KEY, API_URL } from 'common/constants'
 import { Headers } from 'node-fetch'
+import * as Sentry from '@sentry/node'
 
 /**
  * @param {Object} requestInfo Information about the request
@@ -36,7 +37,16 @@ export const request = ({
     'Content-Type': 'application/json',
     'X-Accept': 'application/json; charset=UTF8'
   })
-  if (cookie) headers.append('cookie', cookie)
+  if (cookie) {
+    headers.append('cookie', cookie)
+
+    Sentry.withScope((scope) => {
+      scope.setTag('ssr', 'Request')
+      scope.setExtra('headers', headers)
+      scope.setLevel('info')
+      Sentry.captureMessage('Request: With Cookies')
+    })
+  }
 
   // The Promise returned from fetch() won’t reject on HTTP error status even if
   // the response is an HTTP 404 or 500. Instead, it will resolve normally
