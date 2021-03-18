@@ -1,6 +1,5 @@
 import queryString from 'query-string'
 import { CONSUMER_KEY, API_URL } from 'common/constants'
-import { Headers } from 'node-fetch'
 import * as Sentry from '@sentry/node'
 
 /**
@@ -33,13 +32,14 @@ export const request = ({
 
   const endpoint = `${apiToUse}/${path}?${queryParams}`
 
-  const headers = new Headers({
+  const ssrHeaders = cookie ? { cookie, 'user-agent': 'web-client' } : {}
+  const headers = {
     'Content-Type': 'application/json',
-    'X-Accept': 'application/json; charset=UTF8'
-  })
-  if (cookie) {
-    headers.append('cookie', cookie)
+    'X-Accept': 'application/json; charset=UTF8',
+    ...ssrHeaders
+  }
 
+  if (cookie) {
     Sentry.withScope((scope) => {
       scope.setTag('ssr', 'Request')
       scope.setExtra('headers', headers)
