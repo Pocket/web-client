@@ -1,4 +1,4 @@
-import { takeLatest, takeEvery, put } from 'redux-saga/effects'
+import { takeLatest, takeEvery, put, select } from 'redux-saga/effects'
 import {
   SET_REC_IMPRESSION,
   PUBLISHER_RECS_REQUEST,
@@ -30,6 +30,8 @@ import {
   READER_REC_UNSAVE_FAILURE
 } from 'actions'
 
+import { ITEMS_ADD_SUCCESS } from 'actions'
+
 import { getPublisherRecs } from 'common/api/recit'
 import { getPocketRecs } from 'common/api/recit'
 import { getRecommendations } from 'common/api/recit'
@@ -38,7 +40,7 @@ import { saveItem as saveItemAPI } from 'common/api/saveItem'
 import { removeItem as removeItemAPI } from 'common/api/removeItem'
 
 import { arrayToObject } from 'common/utilities'
-import { deriveReaderRecitItems } from './recit.derive'
+import { deriveReaderRecitItems, checkExternal } from './recit.derive'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -134,7 +136,6 @@ export const recitReducers = (state = initialState, action) => {
       }
     }
 
-    case READER_REC_UNSAVE_REQUEST:
     case READER_REC_SAVE_FAILURE: {
       const { id } = action
       return {
@@ -143,12 +144,11 @@ export const recitReducers = (state = initialState, action) => {
       }
     }
 
-    case READER_REC_UNSAVE_FAILURE:
     case READER_REC_SAVE_SUCCESS: {
-      const { id } = action
+      const { id, openExternal } = action
       return {
         ...state,
-        readerRecs: updateSaveStatus(state.readerRecs, id, 'saved', false)
+        readerRecs: updateSaveStatus(state.readerRecs, id, 'saved', openExternal)
       }
     }
 
@@ -198,6 +198,10 @@ export const recitSagas = [
   takeEvery(RECENT_REC_SAVE_REQUEST, itemsSaveRequest),
   takeEvery(RECENT_REC_UNSAVE_REQUEST, itemsUnSaveRequest)
 ]
+
+/* SAGAS :: SELECTORS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+const getReaderRecById = (state, id) => state.recit.readerRecs[id]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -281,9 +285,14 @@ function* readerItemSaveRequest(action) {
     const response = yield saveItemAPI(url, analytics)
     if (response?.status !== 1) throw new Error('Unable to save')
 
-    yield put({ type: READER_REC_SAVE_SUCCESS, id })
+    const recommendation = yield select(getReaderRecById, id)
+    const openExternal = checkExternal(recommendation)
+
+    yield put({ type: READER_REC_SAVE_SUCCESS, id, openExternal })
+    yield put({ type: ITEMS_ADD_SUCCESS })
   } catch (error) {
-    yield put({ type: READER_REC_SAVE_FAILURE, error })
+    const { id } = action
+    yield put({ type: READER_REC_SAVE_FAILURE, error, id })
   }
 }
 

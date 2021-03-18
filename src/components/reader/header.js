@@ -29,7 +29,7 @@ const articleInfo = css`
   text-align: center;
   font-weight: 300;
   font-size: 18px;
-  line-height: 1;
+  line-height: 1.4;
   padding-bottom: 1em;
 `
 
@@ -110,7 +110,7 @@ function listAuthors(authors) {
     const current = authors[authorKey]
     return (
       <span className={authorNoLink} key={authorKey}>
-        {current.name}
+        {current.name}{' '}
       </span>
     )
   })

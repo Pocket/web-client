@@ -4,6 +4,7 @@ import { LOGIN_URL, SIGNUP_URL } from 'common/constants'
 import { SaveIcon } from '@pocket/web-ui'
 import { SaveFilledIcon } from '@pocket/web-ui'
 import classNames from 'classnames'
+import { buttonReset } from 'components/buttons/button-reset'
 
 const saveContainer = css`
   display: flex;
@@ -51,6 +52,10 @@ const saveContainer = css`
       color: var(--color-actionBrandHover);
     }
   }
+
+  &.saved.readNow {
+    cursor: default;
+  }
 `
 
 const popoverContainer = css`
@@ -88,12 +93,13 @@ export const SaveToPocket = function ({
   saveAction,
   isAuthenticated,
   saveStatus,
-  id
+  id,
+  readNow
 }) {
   const saveCopy = {
     unsaved: 'Save',
     saving: 'Save',
-    saved: 'Saved'
+    saved: readNow ? 'Read now' : 'Saved'
   }
 
   const handleClick = (event) => {
@@ -116,17 +122,24 @@ export const SaveToPocket = function ({
     ]
   })
 
-  const saveClasses = classNames(saveContainer, saveStatus, 'card-actions')
+  const saveClasses = classNames(
+    buttonReset,
+    saveContainer,
+    saveStatus,
+    'card-actions',
+    { readNow }
+  )
+
   return (
     <>
-      <div
+      <button
         className={saveClasses}
         onClick={handleClick}
         ref={popTrigger}
         data-cy={`article-save-btn-${id}`}>
         {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}
         <div className="actionCopy">{saveCopy[saveStatus]}</div>
-      </div>
+      </button>
       {!isAuthenticated && shown ? (
         <SavePopover popoverRef={popBody} id={id} />
       ) : null}

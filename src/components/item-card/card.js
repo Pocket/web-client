@@ -11,6 +11,7 @@ import { ActionsMyList } from 'connectors/item-card/actions/my-list'
 import { ActionsDiscover } from 'connectors/item-card/actions/discover'
 import { ActionsBulkEdit } from 'connectors/item-card/actions/bulk-edit'
 import { ActionsMessage } from 'connectors/item-card/actions/message'
+import { ActionsRecit } from 'connectors/item-card/actions/recit'
 import { cardStyles } from './card-base'
 import { cardBlock } from './card-base'
 import { cardWide } from './card-base'
@@ -123,7 +124,8 @@ export const Card = ({
   const actionsTypes = {
     myList: ActionsMyList,
     discover: ActionsDiscover,
-    message: ActionsMessage
+    message: ActionsMessage,
+    recit: ActionsRecit
   }
 
   const type = itemType === 'display' ? false : itemType
@@ -200,7 +202,7 @@ Card.propTypes = {
   */
   item: PropTypes.object,
   showExcerpt: PropTypes.bool,
-  itemType: PropTypes.oneOf(['display', 'myList', 'discover', 'message']),
+  itemType: PropTypes.oneOf(['display', 'myList', 'discover', 'message', 'recit']),
   cardShape: PropTypes.oneOf(['block', 'wide', 'list', 'detail']),
   actions: PropTypes.object,
   bulkEdit: PropTypes.bool,

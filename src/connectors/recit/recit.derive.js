@@ -22,6 +22,9 @@ export function deriveReaderRecitItems(recommendations) {
     save_url: saveUrl(feedItem),
     open_url: openUrl(feedItem),
     read_time: readTime(feedItem),
+    has_image: feedItem.item?.has_image,
+    has_video: feedItem.item?.has_video,
+    is_article: feedItem.item?.is_article,
     save_status: 'unsaved',
     openExternal: true,
   }))
@@ -143,4 +146,16 @@ const devLink = function (item) {
   return isSyndicated && isDev && path
     ? `discover/item/${path.substring(path.lastIndexOf('/') + 1)}`
     : false
+}
+
+/**
+ * CHECK EXTERNAL
+ * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
+ * @returns {bool} whether to open an item in a new tab
+ */
+export function checkExternal(item) {
+  if (item?.has_video === '2') return false
+  if (item?.has_image === '2') return false
+  if (item?.is_article === '1') return false
+  return true
 }

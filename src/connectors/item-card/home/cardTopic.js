@@ -32,10 +32,11 @@ export const ItemCard = ({ id, position }) => {
   }
 
   const onSave = () => {
-    if (save_status === 'saved') {
-      dispatch(unSaveHomeItem(id))
-      dispatch(topicEngagementEvent(item, position))
-    }
+    // preventing Unsaving for now
+    // if (save_status === 'saved') {
+    //   dispatch(unSaveHomeItem(id))
+    //   dispatch(topicEngagementEvent(item, position))
+    // }
     if (save_status !== 'saved') {
       dispatch(saveHomeItem(id, save_url, position))
       dispatch(topicSaveEvent(item, position))

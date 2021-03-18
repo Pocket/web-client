@@ -5,6 +5,7 @@ import { CardMedia } from 'components/media/card-media'
 import { SaveToPocket } from 'components/save-to-pocket/save-to-pocket'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { SyndicatedBadge } from 'components/item-card/discover/syndicated-badge'
+import { urlWithPocketRedirect } from 'common/utilities'
 
 export const cardStyle = css`
   height: 100%;
@@ -103,8 +104,13 @@ export const Card = React.forwardRef(
       open_url,
       read_time,
       save_status,
-      syndicated
+      syndicated,
+      openExternal
     } = item
+
+    console.log({ ...item })
+
+    const openUrl = openExternal ? open_url : `/read/${id}`
 
     return (
       <article
@@ -139,6 +145,7 @@ export const Card = React.forwardRef(
               isAuthenticated={isAuthenticated}
               saveStatus={save_status}
               id={id}
+              readNow={true}
             />
           </div>
         </footer>

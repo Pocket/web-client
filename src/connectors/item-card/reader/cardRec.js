@@ -35,7 +35,7 @@ export const RecCard = ({ id, position }) => {
   }
 
   const engagementAction = () => {
-    dispatch(readerRecUnSaveItem(id))
+    // dispatch(readerRecUnSaveItem(id))
     dispatch(readerRecEngagementEvent(item, position))
   }
 
@@ -44,7 +44,7 @@ export const RecCard = ({ id, position }) => {
       item={item}
       position={position}
       cardShape="block"
-      itemType="message"
+      itemType="recit"
       showExcerpt={true}
       saveAction={onSave}
       impressionAction={impressionAction}
