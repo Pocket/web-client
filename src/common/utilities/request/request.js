@@ -1,5 +1,6 @@
 import queryString from 'query-string'
 import { CONSUMER_KEY, API_URL } from 'common/constants'
+import { Headers } from 'node-fetch'
 
 /**
  * @param {Object} requestInfo Information about the request
@@ -30,12 +31,12 @@ export const request = ({
   })
 
   const endpoint = `${apiToUse}/${path}?${queryParams}`
-  const cookies = cookie ? { cookie } : {}
-  const headers = {
+
+  const headers = new Headers({
     'Content-Type': 'application/json',
-    'X-Accept': 'application/json; charset=UTF8',
-    ...cookies
-  }
+    'X-Accept': 'application/json; charset=UTF8'
+  })
+  if (cookie) headers.append('cookie', cookie)
 
   // The Promise returned from fetch() won’t reject on HTTP error status even if
   // the response is an HTTP 404 or 500. Instead, it will resolve normally
