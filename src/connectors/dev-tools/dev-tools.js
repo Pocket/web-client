@@ -43,7 +43,7 @@ const devToolStyle = css`
 
 export function DevTools() {
   const dispatch = useDispatch()
-  const isDevBuild = process.env.NODE_ENV !== 'production'
+  const isDevBuild = process.env.NODE_ENV === 'dev'
   const showDevTools =
     localStore.getItem('showPocketDevTools') === 'true' || isDevBuild
   const devMode = useSelector((state) => state.app.devMode)
