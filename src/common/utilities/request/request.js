@@ -21,24 +21,33 @@ export const request = ({
   const credentials = 'include'
   const apiToUse = api_url
 
-  const corsParameters = {}
-  corsParameters.enable_cors = 1
-
+  /**
+   * Build a full url with properly appended query params
+   * @param enable_cors {num} This tells the web server to use cookies vs oAuth
+   * @param consumer_key {string} This is specific to the web-client
+   */
   const queryParams = queryString.stringify({
     ...params,
-    ...corsParameters,
+    enable_cors: 1,
     consumer_key: CONSUMER_KEY
   })
-
   const endpoint = `${apiToUse}/${path}?${queryParams}`
 
-  const ssrHeaders = cookie ? { Cookie: cookie, Origin: 'getpocket.com' } : {}
-  const headers = {
+  /**
+   * Set proper headers for the request
+   * @option clientHeaders - These make sure our response is returned in JSON
+   *
+   * @option ssrHeaders - These append a passed in cookie and origin since
+   * that  is not set automatically on the server
+   */
+  const clientHeaders = {
     'Content-Type': 'application/json',
-    'X-Accept': 'application/json; charset=UTF8',
-    ...ssrHeaders
+    'X-Accept': 'application/json; charset=UTF8'
   }
+  const ssrHeaders = { Cookie: cookie, Origin: 'https://getpocket.com' }
+  const headers = ssr ? ssrHeaders : clientHeaders
 
+  // On the server side we are logging this request out temporarily
   if (cookie) {
     Sentry.withScope((scope) => {
       scope.setTag('ssr', 'Request')
