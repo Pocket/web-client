@@ -22,7 +22,7 @@ export const request = ({
   const apiToUse = api_url
 
   const corsParameters = {}
-  if (!ssr) corsParameters.enable_cors = 1
+  corsParameters.enable_cors = 1
 
   const queryParams = queryString.stringify({
     ...params,
