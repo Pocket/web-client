@@ -40,13 +40,13 @@ export const API_USER_ID = 89624 // Pocket backend identifier for an API user us
 export const SNOWPLOW_SCRIPT_URL = 'https://assets.getpocket.com/web-utilities/public/static/te.js'
 export const SNOWPLOW_COLLECTOR_URL = 'd.getpocket.com'
 export const SNOWPLOW_COLLECTOR_URL_DEV = 'com-getpocket-prod1.mini.snplow.net'
-export const SNOWPLOW_COLLECTOR = process.env.NODE_ENV === 'dev'
+export const SNOWPLOW_COLLECTOR = process.env.SHOW_DEV === 'included'
   ? SNOWPLOW_COLLECTOR_URL_DEV
   : SNOWPLOW_COLLECTOR_URL
 
 export const SNOWPLOW_APP_ID = 'pocket-web'
 export const SNOWPLOW_APP_ID_DEV = 'pocket-web-dev'
-export const SNOWPLOW_APP = process.env.NODE_ENV === 'dev'
+export const SNOWPLOW_APP = process.env.SHOW_DEV === 'included'
   ? SNOWPLOW_APP_ID_DEV
   : SNOWPLOW_APP_ID
 

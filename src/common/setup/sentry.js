@@ -1,4 +1,4 @@
-const isDev = process.env.NODE_ENV === 'dev'
+const isDev = process.env.SHOW_DEV === 'included'
 
 export const sentrySettings = {
   dsn:

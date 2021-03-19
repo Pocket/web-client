@@ -43,7 +43,7 @@ const devToolStyle = css`
 
 export function DevTools() {
   const dispatch = useDispatch()
-  const isDevBuild = process.env.NODE_ENV === 'dev'
+  const isDevBuild = process.env.SHOW_DEV === 'included'
   const showDevTools =
     localStore.getItem('showPocketDevTools') === 'true' || isDevBuild
   const devMode = useSelector((state) => state.app.devMode)

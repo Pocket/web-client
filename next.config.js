@@ -55,7 +55,7 @@ module.exports = withPlugins([withCSS, withSourceMaps], {
             {
               loader: 'linaria/loader',
               options: {
-                sourceMap: process.env.NODE_ENV === 'dev'
+                sourceMap: process.env.SHOW_DEV === 'included'
               }
             }
           ]
