@@ -116,7 +116,7 @@
     "@n8tb1t/use-scroll-position": "2.0.3",
     "@pocket/web-localization": "0.5.0",
     "@pocket/web-ui": "2.34.1",
-    "@pocket/web-utilities": "1.16.0",
+    "@pocket/web-utilities": "1.16.4",
     "@sentry/node": "6.2.2",
     "@sentry/react": "6.2.2",
     "@zeit/next-css": "1.0.1",
