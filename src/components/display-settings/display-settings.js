@@ -60,7 +60,7 @@ const buttonStyles = css`
   &:focus {
     transition: none;
     color: var(--color-navCurrentTabText);
-    outline: 1px auto var(--color-navCurrentTab);
+    outline: 1px auto var(--color-navCurrentTab) !important;
   }
 
   .icon {
