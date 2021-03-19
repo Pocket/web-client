@@ -121,7 +121,7 @@ const stepperButton = css`
 
   &:focus {
     transition: none;
-    outline: 1px auto var(--color-navCurrentTab) !important;
+    outline: 1px auto var(--color-navCurrentTab);
   }
 
   .icon {

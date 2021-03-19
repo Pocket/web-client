@@ -24,7 +24,7 @@ export const buttonReset = css`
     padding: 0;
   }
   &:focus {
-    outline: 0;
+    outline: 1px auto var(--color-navCurrentTab);
   }
   &:hover {
     background: transparent;
