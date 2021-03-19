@@ -10,6 +10,7 @@ const { i18n } = require('./next-i18next.config.js')
 module.exports = withPlugins([withCSS, withSourceMaps], {
   i18n,
   env: {
+    NODE_ENV: process.env.NODE_ENV,
     SHOW_DEV: process.env.SHOW_DEV,
     RELEASE_VERSION: process.env.RELEASE_VERSION
   },
