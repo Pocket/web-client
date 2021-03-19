@@ -18,7 +18,7 @@ export async function getServerSideProps({ req }) {
   const response = await getUserInfo(true, req?.headers?.cookie)
   // Not logged in, or something else went awry?
   // NOTE: this will redirect to my list 100% of the time on localhost
-  const { user_id } = response?.user_id || {}
+  const { user_id } = response?.user || {}
 
   Sentry.withScope((scope) => {
     scope.setTag('ssr', 'WayPoint')

@@ -1,3 +1,25 @@
+## [1.8.13](https://github.com/Pocket/web-client/compare/v1.8.12...v1.8.13) (2021-03-19)
+
+
+### Bug Fixes
+
+* **waypoint:** destructure properly ([e814dfd](https://github.com/Pocket/web-client/commit/e814dfd3e3930ef2529cce6a90a6492ef46ca7d2))
+
+## [1.8.12](https://github.com/Pocket/web-client/compare/v1.8.11...v1.8.12) (2021-03-19)
+
+
+### Bug Fixes
+
+* **request:** ssr/client specific headers ([642d02d](https://github.com/Pocket/web-client/commit/642d02d30f8d6970ef18e61ecdfe5029c4b7398e))
+
+## [1.8.11](https://github.com/Pocket/web-client/compare/v1.8.10...v1.8.11) (2021-03-19)
+
+
+### Bug Fixes
+
+* **accesibility:** setting the proper outline parameter on our button reset ([fa1e618](https://github.com/Pocket/web-client/commit/fa1e618dfcacc32e8d76b3ce6bda4544dc3513e8))
+* **accessibility:** adding important to focus styles to combat diff between local and prod ([728c3bc](https://github.com/Pocket/web-client/commit/728c3bc6a85d5c8a285e4e69121183baea3ab52c))
+
 ## [1.8.10](https://github.com/Pocket/web-client/compare/v1.8.9...v1.8.10) (2021-03-19)
 
 
