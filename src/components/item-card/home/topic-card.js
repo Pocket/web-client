@@ -6,6 +6,7 @@ import { SaveToPocket } from 'components/save-to-pocket/save-to-pocket'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { SyndicatedBadge } from 'components/item-card/discover/syndicated-badge'
 import { urlWithPocketRedirect } from 'common/utilities'
+import { SaveFilledIcon } from '@pocket/web-ui'
 
 export const cardStyle = css`
   height: 100%;
@@ -92,6 +93,33 @@ export const cardStyle = css`
   .actions {
     display: flex;
   }
+
+  .savedItem {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: var(--fontSize150);
+    min-width: 3.913em;
+    color: var(--color-textSecondary);
+    cursor: pointer;
+    padding-top: 8px;
+
+    span {
+      margin-top: 0;
+    }
+
+    svg {
+      color: var(--color-actionBrand);
+    }
+  }
+
+  .savedCopy {
+    font-size: 0.667em;
+    height: var(--size150);
+    line-height: var(--size150);
+    padding-left: 8px;
+  }
 `
 
 export const Card = React.forwardRef(
@@ -132,6 +160,19 @@ export const Card = React.forwardRef(
               ) : null}
             </cite>
           </div>
+          {(save_status === 'saved') ? (
+            <footer className="footer">
+              <div className="actions">
+                <div className="savedItem">
+                  <SaveFilledIcon />
+                  <div className="savedCopy">Read now</div>
+                </div>
+              </div>
+            </footer>
+          ) : null}
+        </a>
+
+        {(save_status !== 'saved') ? (
           <footer className="footer">
             <div className="actions">
               <SaveToPocket
@@ -143,7 +184,7 @@ export const Card = React.forwardRef(
               />
             </div>
           </footer>
-        </a>
+        ) : null}
       </article>
     )
   }
