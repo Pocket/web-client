@@ -7,6 +7,7 @@ import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { SyndicatedBadge } from 'components/item-card/discover/syndicated-badge'
 import { urlWithPocketRedirect } from 'common/utilities'
 import { SaveFilledIcon } from '@pocket/web-ui'
+import Link from 'next/link'
 
 export const cardStyle = css`
   height: 100%;
@@ -119,6 +120,10 @@ export const cardStyle = css`
     height: var(--size150);
     line-height: var(--size150);
     padding-left: 8px;
+
+    a {
+      text-decoration: none;
+    }
   }
 `
 
@@ -132,8 +137,11 @@ export const Card = React.forwardRef(
       open_url,
       read_time,
       save_status,
-      syndicated
+      syndicated,
+      openExternal
     } = item
+
+    const openUrl = openExternal ? open_url : `/read/${id}`
 
     return (
       <article
@@ -160,21 +168,20 @@ export const Card = React.forwardRef(
               ) : null}
             </cite>
           </div>
-          {(save_status === 'saved') ? (
-            <footer className="footer">
-              <div className="actions">
-                <div className="savedItem">
-                  <SaveFilledIcon />
-                  <div className="savedCopy">Read now</div>
-                </div>
-              </div>
-            </footer>
-          ) : null}
         </a>
 
-        {(save_status !== 'saved') ? (
-          <footer className="footer">
-            <div className="actions">
+        <footer className="footer">
+          <div className="actions">
+            {(save_status === 'saved') ? (
+              <div className="savedItem">
+                <SaveFilledIcon />
+                <div className="savedCopy">
+                  <Link href={`/read/${id}`}>
+                    <a target={openExternal ? "_blank" : undefined}>Read now</a>
+                  </Link>
+                </div>
+              </div>
+            ) : (
               <SaveToPocket
                 saveAction={onSave}
                 isAuthenticated={isAuthenticated}
@@ -182,9 +189,9 @@ export const Card = React.forwardRef(
                 id={id}
                 readNow={true}
               />
-            </div>
-          </footer>
-        ) : null}
+            )}
+          </div>
+        </footer>
       </article>
     )
   }

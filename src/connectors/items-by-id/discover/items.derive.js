@@ -13,6 +13,7 @@ export function deriveDiscoverItems(response) {
    * @save_status {string} A string value (unsaved, saving, saved)
    */
   return response.map((feedItem) => {
+    console.log({ ...feedItem.item })
     return {
       resolved_id: feedItem.item?.resolved_id,
       item_id: feedItem.item?.item_id || feedItem.item?.resolved_id,
@@ -24,7 +25,8 @@ export function deriveDiscoverItems(response) {
       open_url: openUrl(feedItem),
       read_time: readTime(feedItem),
       syndicated: syndicated(feedItem),
-      save_status: 'unsaved'
+      save_status: 'unsaved',
+      openExternal: openExternal(feedItem)
     }
   })
 }
@@ -144,4 +146,16 @@ const devLink = function (item) {
   const path = saveUrl({ item })
   const url = path ? path.substring(path.lastIndexOf('/') + 1) : false
   return isSyndicated && url ? `/explore/item/${url}` : false
+}
+
+/**
+ * OPEN EXTERNAL
+ * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
+ * @returns {bool} whether to open an item in a new tab
+ */
+function openExternal({ item }) {
+  if (item?.has_video === '2') return false
+  if (item?.has_image === '2') return false
+  if (item?.is_article === '1') return false
+  return true
 }
