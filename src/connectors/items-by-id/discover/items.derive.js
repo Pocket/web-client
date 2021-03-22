@@ -13,7 +13,6 @@ export function deriveDiscoverItems(response) {
    * @save_status {string} A string value (unsaved, saving, saved)
    */
   return response.map((feedItem) => {
-    console.log({ ...feedItem.item })
     return {
       resolved_id: feedItem.item?.resolved_id,
       item_id: feedItem.item?.item_id || feedItem.item?.resolved_id,
