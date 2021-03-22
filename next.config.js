@@ -4,10 +4,9 @@ const withCSS = require('./.scripts/with-css')
 const nextBuildId = require('next-build-id')
 const assetRegEx = /\.(svg|ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/
 const assetPrefix = process.env.ASSET_PREFIX || ''
-const withSourceMaps = require('@zeit/next-source-maps')
 const { i18n } = require('./next-i18next.config.js')
 
-module.exports = withPlugins([withCSS, withSourceMaps], {
+module.exports = withPlugins([withCSS], {
   i18n,
   env: {
     SHOW_DEV: process.env.SHOW_DEV,
