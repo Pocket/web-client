@@ -177,7 +177,7 @@ export const Card = React.forwardRef(
                 <SaveFilledIcon />
                 <div className="savedCopy">
                   <Link href={openUrl}>
-                    <a target={openExternal ? "_blank" : undefined}>Read now</a>
+                    <a onClick={onOpen} target={openExternal ? "_blank" : undefined}>Read now</a>
                   </Link>
                 </div>
               </div>
