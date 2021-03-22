@@ -91,8 +91,8 @@ export const HomeRecentRecsList = () => {
       {shouldPopulate ? (
         <>
           <HomeSectionHeader
-            sectionTitle="Discover new content"
-            sectionDescription="Find new content based on your latest saves"
+            sectionTitle="Recommended for you"
+            sectionDescription="Find more fascinating stories based on your latest Save"
           />
           <section className={recGrid}>
             {recentSaveId && recentRecsIds.length ? (
