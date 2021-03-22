@@ -107,10 +107,6 @@ export const Card = React.forwardRef(
       syndicated
     } = item
 
-    const handleClick = (props) => {
-      onSave(props)
-    }
-
     return (
       <article
         className={cardStyle}
