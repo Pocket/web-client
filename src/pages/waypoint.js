@@ -4,7 +4,7 @@ import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
 
 export default function Waypoint() {}
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req, locale }) {
   // Sentry.withScope((scope) => {
   //   scope.setTag('ssr', 'WayPoint')
   //   Object.keys(req.cookies).forEach((key) => {
@@ -28,7 +28,7 @@ export async function getServerSideProps({ req }) {
   //   Sentry.captureMessage('Waypoint: User Response')
   // })
 
-  if (!user_id || !birth) {
+  if (!user_id || !birth || locale !== 'en') {
     return {
       redirect: {
         permanent: false,
