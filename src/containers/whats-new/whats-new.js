@@ -9,6 +9,7 @@ import { SideNav } from 'connectors/side-nav/side-nav'
 import { WhatsNewHeader } from 'components/headers/whats-new-header'
 import Jan192021 from 'components/release-notes/jan-19-2021'
 import Feb032021 from 'components/release-notes/feb-03-2021'
+import Mar232021 from 'components/release-notes/mar-23-2021'
 import { RELEASE_NOTES_VERSION } from 'common/constants'
 import { setReleaseNotes } from 'connectors/app/app.state'
 
@@ -75,6 +76,7 @@ export default function Messages() {
       <main className={classNames('main', whatsNewStyles)}>
         <WhatsNewHeader title={t('whats-new:whats-new', "What's New")} />
 
+        <Mar232021 />
         <Feb032021 />
         <Jan192021 />
       </main>
