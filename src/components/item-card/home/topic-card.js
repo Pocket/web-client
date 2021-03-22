@@ -107,6 +107,10 @@ export const Card = React.forwardRef(
       syndicated
     } = item
 
+    const handleClick = (props) => {
+      onSave(props)
+    }
+
     return (
       <article
         className={cardStyle}
@@ -132,18 +136,18 @@ export const Card = React.forwardRef(
               ) : null}
             </cite>
           </div>
+          <footer className="footer">
+            <div className="actions">
+              <SaveToPocket
+                saveAction={onSave}
+                isAuthenticated={isAuthenticated}
+                saveStatus={save_status}
+                id={id}
+                readNow={true}
+              />
+            </div>
+          </footer>
         </a>
-        <footer className="footer">
-          <div className="actions">
-            <SaveToPocket
-              saveAction={onSave}
-              isAuthenticated={isAuthenticated}
-              saveStatus={save_status}
-              id={id}
-              readNow={true}
-            />
-          </div>
-        </footer>
       </article>
     )
   }

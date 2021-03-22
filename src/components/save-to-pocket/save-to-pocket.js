@@ -102,9 +102,18 @@ export const SaveToPocket = function ({
     saved: readNow ? 'Read now' : 'Saved'
   }
 
-  const handleClick = (event) => {
+  const preventEvents = (event) => {
     event.preventDefault()
     event.stopPropagation()
+  }
+
+  const handleClick = (event) => {
+    if (readNow && saveStatus !== 'saved') {
+      preventEvents(event)
+    }
+    else if (!readNow) {
+      preventEvents(event)
+    }
 
     saveAction(isAuthenticated)
   }
