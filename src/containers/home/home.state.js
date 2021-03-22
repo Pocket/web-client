@@ -179,7 +179,9 @@ function* recentDataRequest() {
     if (error) yield put({ type: HOME_RECENT_SAVES_FAILURE, error })
 
     // Remove default item for Home Experiment
-    const itemsNoDefault = items.filter((item) => item !== '2333373270')
+    const itemsNoDefault = items.filter(
+      (item) => item !== '2333373270' && item !== '3242033017'
+    )
 
     yield put({ type: HOME_RECENT_SAVES_SUCCESS, items: itemsNoDefault, itemsById }) // prettier-ignore
   } catch (error) {

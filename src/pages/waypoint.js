@@ -4,31 +4,44 @@ import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
 
 export default function Waypoint() {}
 
-export async function getServerSideProps({ req }) {
-  Sentry.withScope((scope) => {
-    scope.setTag('ssr', 'WayPoint')
-    Object.keys(req.cookies).forEach((key) => {
-      scope.setExtra(key, req.cookies[key])
-    })
-    scope.setLevel('info')
-    Sentry.captureMessage('Waypoint: Request Cookies')
-  })
+export async function getServerSideProps({ req, locale }) {
+  // Sentry.withScope((scope) => {
+  //   scope.setTag('ssr', 'WayPoint')
+  //   Object.keys(req.cookies).forEach((key) => {
+  //     scope.setExtra(key, req.cookies[key])
+  //   })
+  //   scope.setLevel('info')
+  //   Sentry.captureMessage('Waypoint: Request Cookies')
+  // })
 
   const { sess_guid } = req.cookies
   const response = await getUserInfo(true, req?.headers?.cookie)
   // Not logged in, or something else went awry?
   // NOTE: this will redirect to my list 100% of the time on localhost
-  const { user_id } = response?.user || {}
+  const { user_id, birth } = response?.user || {}
 
-  Sentry.withScope((scope) => {
-    scope.setTag('ssr', 'WayPoint')
-    scope.setExtra('user', response)
-    scope.setExtra('sessGuid', sess_guid)
-    scope.setLevel('info')
-    Sentry.captureMessage('Waypoint: User Response')
-  })
+  // Sentry.withScope((scope) => {
+  //   scope.setTag('ssr', 'WayPoint')
+  //   scope.setExtra('user', response)
+  //   scope.setExtra('sessGuid', sess_guid)
+  //   scope.setLevel('info')
+  //   Sentry.captureMessage('Waypoint: User Response')
+  // })
 
-  if (!user_id) {
+  if (!user_id || !birth || locale !== 'en') {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/my-list'
+      }
+    }
+  }
+
+  const eligibleDate = new Date('2021-03-25 10:00:00')
+  const birthDate = new Date(birth)
+  const eligibleForTest = eligibleDate - birthDate < 0
+
+  if (!eligibleForTest) {
     return {
       redirect: {
         permanent: false,

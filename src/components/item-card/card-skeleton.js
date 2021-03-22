@@ -67,7 +67,10 @@ export const CardSkeleton = ({
 CardSkeleton.propTypes = {
   showExcerpt: PropTypes.bool,
   itemType: PropTypes.oneOf(['display', 'myList', 'discover', 'message']),
-  cardShape: PropTypes.oneOf(['block', 'wide', 'list', 'detail'])
+  cardShape: PropTypes.oneOfType([
+    PropTypes.oneOf(['block', 'wide', 'list', 'detail']),
+    PropTypes.arrayOf(PropTypes.string)
+  ])
 }
 
 CardSkeleton.defaultProps = {

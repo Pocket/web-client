@@ -1,3 +1,20 @@
+# [1.9.0](https://github.com/Pocket/web-client/compare/v1.8.14...v1.9.0) (2021-03-22)
+
+
+### Bug Fixes
+
+* **app:** use default source maps with nextjs ([a7ecbcb](https://github.com/Pocket/web-client/commit/a7ecbcbd3e9015a82c91542f0662307008b54069))
+* **home:** filter initial items ([20c280b](https://github.com/Pocket/web-client/commit/20c280be1309a57e7aeeeb44b9a09f052dac1bdf))
+* **home:** update proptypes ([3e6857a](https://github.com/Pocket/web-client/commit/3e6857a9dad349b2ae31894315cf19b6ca177a3f))
+* **side nav:** adjusting order for home ([ed292a3](https://github.com/Pocket/web-client/commit/ed292a33f73e2ff7dbc5e99e9ea631745edaccbd))
+* **waypoint:** eligibility test base on new users ([fb9516a](https://github.com/Pocket/web-client/commit/fb9516a811e000d71de8df06eb5fed5d78ce6527))
+* **waypoint:** make home test `en` only ([2bf35cb](https://github.com/Pocket/web-client/commit/2bf35cb27a588397ecdcccb8052e300ce8102a28))
+
+
+### Features
+
+* **home:** adding route to alb ([13b8b3c](https://github.com/Pocket/web-client/commit/13b8b3ceccb5ff70a277457ea07954c0d0d9787b))
+
 ## [1.8.14](https://github.com/Pocket/web-client/compare/v1.8.13...v1.8.14) (2021-03-19)
 
 
