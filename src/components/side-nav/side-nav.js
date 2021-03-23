@@ -25,6 +25,10 @@ export const sideNavWrapper = css`
   flex-direction: column;
   justify-content: space-between;
 
+  a {
+    text-decoration: none;
+  }
+
   &.disabled {
     opacity: 0.6;
     pointer-events: none;
@@ -170,12 +174,12 @@ export function SideNav({
                 <Trans i18nKey="nav:my-list">My List</Trans>
               </button>
             </Link>
-            <Link href="https://getpocket.com/explore">
+            <a href="https://getpocket.com/explore?src=sidebar">
               <button className={subActive('discover')}>
                 <DiscoverIcon className="side-nav-icon" />{' '}
                 <Trans i18nKey="nav:discover">Discover</Trans>
               </button>
-            </Link>
+            </a>
           </>
         ) : (
           <Link href="/my-list">

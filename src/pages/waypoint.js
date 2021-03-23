@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/node'
 import { getUserInfo } from 'common/api/user'
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
+import { HOME_TEST_START } from 'common/constants'
 
 export default function Waypoint() {}
 
@@ -37,7 +38,7 @@ export async function getServerSideProps({ req, locale }) {
     }
   }
 
-  const eligibleDate = new Date('2021-03-22 19:30:00')
+  const eligibleDate = new Date(HOME_TEST_START)
   const birthDate = new Date(birth)
   const eligibleForTest = eligibleDate - birthDate < 0
 

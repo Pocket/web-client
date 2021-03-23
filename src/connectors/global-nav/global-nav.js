@@ -35,6 +35,8 @@ import { getTopLevelPath } from 'common/utilities'
 
 import { sendImpression } from './global-nav.analytics'
 import { sendEngagement } from './global-nav.analytics'
+import { isEligible } from 'connectors/feature-flags/feature-flags'
+import { HOME_TEST_START } from 'common/constants'
 
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
@@ -67,6 +69,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const appMode = useSelector((state) => state?.app?.mode)
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const userStatus = useSelector((state) => state?.user?.user_status)
+  const accountBirth = useSelector((state) => state?.user?.birth)
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false) //prettier-ignore
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const retrievedAvatar = useSelector((state) => state?.user?.profile?.avatar_url) // prettier-ignore
@@ -103,27 +106,29 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     }
   })
 
-  const showHome = useSelector((state) => state.features['temp.web.client.home.new_user'])?.assigned //prettier-ignore
+  const inHomeTest = useSelector((state) => state.features['temp.web.client.home.new_user'])?.assigned //prettier-ignore
+  const showHome = isEligible(accountBirth, HOME_TEST_START) && inHomeTest
+
   const homeLinks = [
     {
       name: 'home',
       id: 'global-nav-home-link',
       label: t('nav:home', 'Home'),
-      url: '/home',
+      url: '/home?src=navbar',
       icon: <HomeIcon />
     },
     {
       name: 'my-list',
       id: 'global-nav-my-list-link',
       label: t('nav:my-list', 'My List'),
-      url: '/my-list',
+      url: '/my-list?src=navbar',
       icon: <ListViewIcon />
     },
     {
       name: 'discover',
       id: 'global-nav-discover-link',
       label: t('nav:discover', 'Discover'),
-      url: '/explore',
+      url: '/explore?src=navbar',
       icon: <DiscoverIcon />
     }
   ]
@@ -133,14 +138,14 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       name: 'discover',
       id: 'global-nav-discover-link',
       label: t('nav:discover', 'Discover'),
-      url: '/explore',
+      url: '/explore?src=navbar',
       icon: <DiscoverIcon />
     },
     {
       name: 'my-list',
       id: 'global-nav-my-list-link',
       label: t('nav:my-list', 'My List'),
-      url: '/my-list',
+      url: '/my-list?src=navbar',
       icon: <ListViewIcon />
     }
   ]
