@@ -109,21 +109,21 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       name: 'home',
       id: 'global-nav-home-link',
       label: t('nav:home', 'Home'),
-      url: '/home',
+      url: '/home?src=navbar',
       icon: <HomeIcon />
     },
     {
       name: 'my-list',
       id: 'global-nav-my-list-link',
       label: t('nav:my-list', 'My List'),
-      url: '/my-list',
+      url: '/my-list?src=navbar',
       icon: <ListViewIcon />
     },
     {
       name: 'discover',
       id: 'global-nav-discover-link',
       label: t('nav:discover', 'Discover'),
-      url: '/explore',
+      url: '/explore?src=navbar',
       icon: <DiscoverIcon />
     }
   ]
@@ -133,14 +133,14 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       name: 'discover',
       id: 'global-nav-discover-link',
       label: t('nav:discover', 'Discover'),
-      url: '/explore',
+      url: '/explore?src=navbar',
       icon: <DiscoverIcon />
     },
     {
       name: 'my-list',
       id: 'global-nav-my-list-link',
       label: t('nav:my-list', 'My List'),
-      url: '/my-list',
+      url: '/my-list?src=navbar',
       icon: <ListViewIcon />
     }
   ]
