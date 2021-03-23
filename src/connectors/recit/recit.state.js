@@ -69,7 +69,8 @@ const initialState = {
   pocketRecModel: null,
   readerRecs: {},
   recentRecId: null,
-  recentRecs: {}
+  recentRecs: {},
+  recentRecsError: null
 }
 
 export const recitReducers = (state = initialState, action) => {
@@ -166,7 +167,16 @@ export const recitReducers = (state = initialState, action) => {
       return {
         ...state,
         recentRecId: null,
-        recentRecs: {}
+        recentRecs: {},
+        recentRecsError: null
+      }
+    }
+
+    case RECENT_RECS_FAILURE: {
+      const { error } = action
+      return {
+        ...state,
+        recentRecsError: error?.message
       }
     }
 
@@ -268,6 +278,7 @@ function* fetchRecentRecs({ itemId: recentRecId }) {
   try {
     if (!recentRecId) return
     const response = yield getHomeRecommendations(recentRecId, 4)
+    if (!response?.status) throw new Error('No items found')
 
     const derivedItems = yield deriveReaderRecitItems(response.recommendations)
     const itemsById = arrayToObject(derivedItems, 'resolved_id')
