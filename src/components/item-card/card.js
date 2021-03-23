@@ -189,6 +189,9 @@ export const Card = ({
             tags={tags}
             saveStatus={save_status}
             favorite={favorite}
+            openUrl={openUrl}
+            onOpen={onOpen}
+            openExternal={openExternal}
           />
         ) : null}
       </footer>

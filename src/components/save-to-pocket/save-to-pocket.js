@@ -52,10 +52,6 @@ const saveContainer = css`
       color: var(--color-actionBrandHover);
     }
   }
-
-  &.saved.readNow {
-    cursor: default;
-  }
 `
 
 const popoverContainer = css`
@@ -93,13 +89,12 @@ export const SaveToPocket = function ({
   saveAction,
   isAuthenticated,
   saveStatus,
-  id,
-  readNow
+  id
 }) {
   const saveCopy = {
     unsaved: 'Save',
     saving: 'Save',
-    saved: readNow ? 'Read now' : 'Saved'
+    saved: 'Saved'
   }
 
   const handleClick = (event) => {
@@ -126,8 +121,7 @@ export const SaveToPocket = function ({
     buttonReset,
     saveContainer,
     saveStatus,
-    'card-actions',
-    { readNow }
+    'card-actions'
   )
 
   return (
