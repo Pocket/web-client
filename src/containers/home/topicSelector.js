@@ -67,22 +67,20 @@ export const TopicSelector = () => {
   const sortedTopics = topicsArray.filter((topic) => !topic.is_promoted)
 
   const journeyTitles = [
-    'Start Your Journey Here',
-    'Continue building your page',
-    'Topics'
+    'Start your Pocket journey',
+    'Discover more topics',
   ]
 
   const journeySubTitles = [
-    'Select topics that interest you to start building your page.',
-    'Create a space to discover great content.',
-    'Discover great content based on your interests.'
+    'Select a topic to find fascinating stories from all across the web',
+    'Save today’s essential reads and find them later in My List',
   ]
 
   const journeyTitle =
-    journeyTitles[Math.min(topicSections?.length, Math.max(0, 2))]
+    journeyTitles[Math.min(topicSections?.length, Math.max(0, 1))]
 
   const journeySubTitle =
-    journeySubTitles[Math.min(topicSections?.length, Math.max(0, 2))]
+    journeySubTitles[Math.min(topicSections?.length, Math.max(0, 1))]
 
   const handleTopicClick = (topic) => {
     const topicAction = topicSections.find((item) => item.id === topic.id)

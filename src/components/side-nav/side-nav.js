@@ -170,7 +170,7 @@ export function SideNav({
                 <Trans i18nKey="nav:my-list">My List</Trans>
               </button>
             </Link>
-            <Link href="/explore">
+            <Link href="https://getpocket.com/explore">
               <button className={subActive('discover')}>
                 <DiscoverIcon className="side-nav-icon" />{' '}
                 <Trans i18nKey="nav:discover">Discover</Trans>

@@ -32,63 +32,63 @@ const cardRowStyles = css`
 export const topicHeadings = {
   business: {
     title: 'Business',
-    subtitle: 'The latest industry insights and fascinating stories. '
+    subtitle: 'Wall Street, market trends, economy, and the media.'
   },
   career: {
     title: 'Career',
-    subtitle: 'Thoughtful advice and insights on making the most of your 9-to-5 — and beyond.'
+    subtitle: 'Productivity tips, professional development, and the future of work.'
   },
   education: {
     title: 'Education & History',
-    subtitle: 'Learn something new, dive into the past, and explore the wide world of education.'
+    subtitle: 'Academia, schools, and lifelong learning.'
   },
   entertainment: {
     title: 'Entertainment',
-    subtitle: 'Irresistible reads on film, music, TV, art, and design — as well as high- and low-brow delights. '
+    subtitle: 'Movies, music, books, TV, art, and design.'
   },
   food: {
     title: 'Food',
-   subtitle: 'Recipes, ruminations, and everything in between. Hungry yet?'
+   subtitle: 'Time-tested recipes, kitchen tips, and why we eat the way we do.'
   },
   gaming: {
     title: 'Gaming',
-    subtitle: 'Insider takes and captivating reads on the gaming industry.'
+    subtitle: 'Video games, board games, and the players who play them.'
   },
   health: {
     title: 'Health & Fitness',
-    subtitle: 'Fascinating stories about physical, emotional, and mental health. '
+    subtitle: 'Wellness, exercise, and self-care.'
   },
   parenting: {
     title: 'Parenting & Relationships',
-    subtitle: 'Helpful advice and intriguing stories about caring for children and connecting with others.'
+    subtitle: 'Family guidance, advice, and personal stories.'
   },
   'personal-finance': {
     title: 'Personal Finance',
-    subtitle: 'Expert tips and thoughtful reads on retirement, investing, and more.'
+    subtitle: 'Saving, spending, and retirement planning.'
   },
   politics: {
     title: 'Politics & Law',
-    subtitle: 'Thoughtful analysis and helpful explainers on the world of politics, law, and crime.'
+    subtitle: 'Policy, government, and important debates.'
   },
   science: {
     title: 'Science',
-    subtitle: 'Illuminating reads on the latest from top labs and the world around us.'
+    subtitle: 'Exploring nature, the cosmos, and the human body.'
   },
   'self-improvement': {
     title: 'Self Improvement',
-    subtitle: 'Practical tips and mindful reflections for a better life.'
+    subtitle: 'Smarter living, better habits, and lasting happiness.'
   },
   sports: {
     title: 'Sports',
-    subtitle: 'Gripping stories about sports and their impact on the greater culture. '
+    subtitle: 'Slam dunks, corner goals, home runs, touchdowns and more.'
   },
   technology: {
     title: 'Technology',
-    subtitle: 'The latest tech news and compelling stories about the digital world.'
+    subtitle: 'Gadgets, the internet, and digital life.'
   },
   travel: {
     title: 'Travel & Exploration',
-    subtitle: 'Inspiring and informative stories about the places you’ll go.'
+    subtitle: 'What to pack and where to go.'
   }
 }
 

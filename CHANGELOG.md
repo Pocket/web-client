@@ -1,3 +1,44 @@
+## [1.9.5](https://github.com/Pocket/web-client/compare/v1.9.4...v1.9.5) (2021-03-22)
+
+
+### Bug Fixes
+
+* **topic:** update topic link to have onclick event for analytics ([a33670d](https://github.com/Pocket/web-client/commit/a33670deca1cf4d9e2e57746a58fb421f646c07e))
+
+## [1.9.4](https://github.com/Pocket/web-client/compare/v1.9.3...v1.9.4) (2021-03-22)
+
+
+### Bug Fixes
+
+* **home:** update home elegibility date ([992ab47](https://github.com/Pocket/web-client/commit/992ab479192b37fab346be3d5f1e3dd852fd5f50))
+
+## [1.9.3](https://github.com/Pocket/web-client/compare/v1.9.2...v1.9.3) (2021-03-22)
+
+
+### Bug Fixes
+
+* **discover:** update tests to include openexternal ([bb1df64](https://github.com/Pocket/web-client/commit/bb1df64086bd09ca1862ea398dbf01915452c995))
+* **home:** update save button to allow bubbling ([d45bef5](https://github.com/Pocket/web-client/commit/d45bef52c20a730cc65b7facdda18137421e84e5))
+* **topic:** open in reader once saved ([f740f86](https://github.com/Pocket/web-client/commit/f740f864d596e1d7b770e023bb64f5f56153bb9b))
+* **topic:** remove unneeded funciton ([f1d79bd](https://github.com/Pocket/web-client/commit/f1d79bd9d746337f8ef1c16618106cddb75141d8))
+* **topic:** update topic card so read now is in link ([9c2b8a1](https://github.com/Pocket/web-client/commit/9c2b8a1083e359b3735e551c930958c2f74ef0c0))
+* **topic:** use external link if needed ([642a130](https://github.com/Pocket/web-client/commit/642a13090e63ceac9df6be1d543bbd79733b0c38))
+* **topics:** remove sneaky console ([ce3d344](https://github.com/Pocket/web-client/commit/ce3d3445161c6d217a733274e906ec32c452373e))
+
+## [1.9.2](https://github.com/Pocket/web-client/compare/v1.9.1...v1.9.2) (2021-03-22)
+
+
+### Bug Fixes
+
+* **home:** make side nav discover explicit ([1f708d3](https://github.com/Pocket/web-client/commit/1f708d3ae617f03b2946fb7be470638de7ca394c))
+
+## [1.9.1](https://github.com/Pocket/web-client/compare/v1.9.0...v1.9.1) (2021-03-22)
+
+
+### Bug Fixes
+
+* **home:** copy updates ([ac00886](https://github.com/Pocket/web-client/commit/ac0088674bb820b6c0fea811bf7f36ee5d489531))
+
 # [1.9.0](https://github.com/Pocket/web-client/compare/v1.8.14...v1.9.0) (2021-03-22)
 
 

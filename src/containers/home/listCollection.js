@@ -21,8 +21,8 @@ export const HomeCollectionList = () => {
   return (
     <>
       <HomeSectionHeader
-        sectionTitle="Our most read Collections"
-        sectionDescription="Discover some of our most interesting reads in these collections."
+        sectionTitle="Our most-read Collections"
+        sectionDescription="Dive into our editors’ curated lists of stories around a unique subject"
       />
       <section className={homeCollections}>
         {showSkeleton ? (

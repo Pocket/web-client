@@ -37,7 +37,7 @@ export async function getServerSideProps({ req, locale }) {
     }
   }
 
-  const eligibleDate = new Date('2021-03-25 10:00:00')
+  const eligibleDate = new Date('2021-03-22 19:30:00')
   const birthDate = new Date(birth)
   const eligibleForTest = eligibleDate - birthDate < 0
 

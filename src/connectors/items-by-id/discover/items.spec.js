@@ -72,7 +72,8 @@ describe('Discover Items', function () {
         open_url: expectedOpenUrl,
         read_time: null,
         syndicated: false,
-        save_status: 'unsaved'
+        save_status: 'unsaved',
+        openExternal: true
       })
     })
   })
