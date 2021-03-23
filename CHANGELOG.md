@@ -1,3 +1,11 @@
+## [1.9.6](https://github.com/Pocket/web-client/compare/v1.9.5...v1.9.6) (2021-03-23)
+
+
+### Bug Fixes
+
+* **home:** limit test across the board ([fe6179b](https://github.com/Pocket/web-client/commit/fe6179b659a9cf756bab52b85ebb5e1441121356))
+* **nav:** update explore links to use direct links ([0b64648](https://github.com/Pocket/web-client/commit/0b646486b2feb8d1ae304ef83753aa42ab309ef3))
+
 ## [1.9.5](https://github.com/Pocket/web-client/compare/v1.9.4...v1.9.5) (2021-03-22)
 
 
