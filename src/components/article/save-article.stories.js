@@ -1,7 +1,7 @@
 import { SaveArticleTop, SaveArticleBottom } from './save-article'
 
 export default {
-  title: 'Components/Article/SaveArticle'
+  title: 'Article/SaveArticle'
 }
 
 export const Top = () => {

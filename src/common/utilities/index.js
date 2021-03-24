@@ -18,8 +18,6 @@ export { getValueFromCookie } from './cookies/cookies'
 export { arrayToObject } from './object-array/object-array'
 export { getObjectWithValidKeysOnly } from './object-array/object-array'
 
-export { addAmbientMotion } from './animation/animation'
-
 export { getScrollTop } from './scroll/scroll'
 export { atEndOfScroll } from './scroll/scroll'
 

@@ -1,10 +1,10 @@
 import { CallOutBuildHome } from './call-out-build-home'
 
 export default {
-  title: 'Components/Callouts/BuildHome',
+  title: 'Messaging/Home',
   component: CallOutBuildHome
 }
 
-export const normal = () => {
+export const Home = () => {
   return <CallOutBuildHome />
 }
