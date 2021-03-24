@@ -8,6 +8,7 @@ export default function Waypoint() {}
 
 export async function getServerSideProps({ req, locale, query }) {
   const myListLink = queryString.stringifyUrl({ url: '/my-list', query })
+  const homeLink = queryString.stringifyUrl({ url: '/home', query })
 
   const { sess_guid } = req.cookies
   const response = await getUserInfo(true, req?.headers?.cookie)
@@ -48,7 +49,7 @@ export async function getServerSideProps({ req, locale, query }) {
   })
 
   const destination = features['temp.web.client.home.new_user'].assigned
-    ? '/home'
+    ? homeLink
     : myListLink
 
   return {
