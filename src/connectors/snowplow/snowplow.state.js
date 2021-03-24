@@ -7,6 +7,7 @@ import { SNOWPLOW_TRACK_CONTENT_IMPRESSION } from 'actions'
 import { SNOWPLOW_TRACK_ENGAGEMENT } from 'actions'
 import { SNOWPLOW_TRACK_CONTENT_ENGAGEMENT } from 'actions'
 import { VARIANTS_SAVE } from 'actions'
+import { FEATURES_HYDRATE } from 'actions'
 
 import { createContentEntity } from 'connectors/snowplow/entities'
 import { createUiEntity } from 'connectors/snowplow/entities'
@@ -22,6 +23,7 @@ import { snowplowTrackPageView } from 'common/api/snowplow-analytics'
 import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
 
 import { BATCH_SIZE } from 'common/constants'
+import { CURRENT_TESTS } from 'common/constants'
 
 const initialState = {}
 
@@ -98,7 +100,8 @@ export const snowplowSagas = [
   takeEvery(SNOWPLOW_TRACK_CONTENT_IMPRESSION, fireContentImpression),
   takeEvery(SNOWPLOW_TRACK_CONTENT_ENGAGEMENT, fireContentEngagmenet),
   takeEvery(SNOWPLOW_TRACK_ENGAGEMENT, fireEngagement),
-  takeLatest(VARIANTS_SAVE, fireVariantEnroll)
+  takeLatest(VARIANTS_SAVE, fireVariantEnroll),
+  takeLatest(FEATURES_HYDRATE, fireFeatureEnroll)
 ]
 
 /** SAGA :: RESPONDERS
@@ -113,6 +116,18 @@ function* fireVariantEnroll({ variants }) {
     const featureFlagEntity = createFeatureFlagEntity(flag, variants[flag])
 
     yield sendCustomSnowplowEvent(variantEnrollEvent, [featureFlagEntity])
+  }
+}
+
+function* fireFeatureEnroll({ hydrate }) {
+  for (let flag in hydrate) {
+    if (CURRENT_TESTS[flag]) {
+      const variant = (hydrate[flag].assigned) ? CURRENT_TESTS[flag] : 'control'
+      const variantEnrollEvent = createVariantEnrollEvent()
+      const featureFlagEntity = createFeatureFlagEntity(flag, variant)
+
+      yield sendCustomSnowplowEvent(variantEnrollEvent, [featureFlagEntity])
+    }
   }
 }
 

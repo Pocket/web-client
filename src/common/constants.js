@@ -136,3 +136,8 @@ export const LOCALE_COMMON = [
   'tags',
   'whats-new',
 ]
+
+// Unleash tests and the human friendly names for them
+export const CURRENT_TESTS = {
+  "temp.web.client.home.new_user": "home_v1"
+}
