@@ -1,3 +1,11 @@
+## [1.9.9](https://github.com/Pocket/web-client/compare/v1.9.8...v1.9.9) (2021-03-24)
+
+
+### Bug Fixes
+
+* **waypoint:** pass query params to page ([47ba5a3](https://github.com/Pocket/web-client/commit/47ba5a3d7e5144215c80fc3a3db2c9e5b050c3a3))
+* **waypoint:** preserve query params to home ([58b5f2d](https://github.com/Pocket/web-client/commit/58b5f2da32c82f35120dd4e0e347fac3067552fa))
+
 ## [1.9.8](https://github.com/Pocket/web-client/compare/v1.9.7...v1.9.8) (2021-03-23)
 
 
