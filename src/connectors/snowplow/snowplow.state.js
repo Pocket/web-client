@@ -23,7 +23,6 @@ import { snowplowTrackPageView } from 'common/api/snowplow-analytics'
 import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
 
 import { BATCH_SIZE } from 'common/constants'
-import { CURRENT_TESTS } from 'common/constants'
 
 const initialState = {}
 
@@ -121,10 +120,12 @@ function* fireVariantEnroll({ variants }) {
 
 function* fireFeatureEnroll({ hydrate }) {
   for (let flag in hydrate) {
-    if (CURRENT_TESTS[flag]) {
-      const variant = (hydrate[flag].assigned) ? CURRENT_TESTS[flag] : 'control'
+    const { test: testName, variant, assigned } = hydrate[flag]
+    const hasVariant = variant !== 'disabled' && !!variant
+    if (hasVariant) {
+      const entityVariant = assigned ? variant : `control.${variant}`
       const variantEnrollEvent = createVariantEnrollEvent()
-      const featureFlagEntity = createFeatureFlagEntity(flag, variant)
+      const featureFlagEntity = createFeatureFlagEntity(testName, entityVariant)
 
       yield sendCustomSnowplowEvent(variantEnrollEvent, [featureFlagEntity])
     }
@@ -175,20 +176,16 @@ function* fireImpression({ component, requirement, ui, position, identifier }) {
 function* fireContentEngagmenet({ component, ui, identifier, position, items }) {
   const engagementEvent = createEngagementEvent(component)
 
-  const contentEntities = (items.length) ? items : [items]
+  const contentEntities = items.length ? items : [items]
   // limit content entities to BATCH_SIZE = 30
   if (contentEntities.length > BATCH_SIZE) contentEntities.length = BATCH_SIZE
-  const contentEntity = contentEntities.map(item => {
+
+  const contentEntity = contentEntities.map((item) => {
     const { save_url, item_id, id } = item
     return createContentEntity(save_url, item_id || id) // id is bulk edit value
   })
 
-  const uiEntity = createUiEntity({
-    type: ui,
-    hierarchy: 0,
-    identifier,
-    index: position
-  })
+  const uiEntity = createUiEntity({ type: ui, hierarchy: 0, identifier, index: position })
 
   const snowplowEntities = [...contentEntity, uiEntity]
   yield sendCustomSnowplowEvent(engagementEvent, snowplowEntities)
