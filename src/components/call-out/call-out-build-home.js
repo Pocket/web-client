@@ -6,6 +6,7 @@ import { breakpointMediumTablet } from '@pocket/web-ui' // 959
 import { breakpointTinyTablet } from '@pocket/web-ui' // 719
 import { breakpointMediumHandset } from '@pocket/web-ui' // 479
 import { breakpointSmallHandset } from '@pocket/web-ui' // 399
+import { SaveIcon } from '@pocket/web-ui'
 import { SIGNUP_URL } from 'common/constants'
 import laptopImg from 'static/images/laptop-mylist.png'
 
@@ -56,17 +57,9 @@ const wrapper = css`
     font-size: var(--fontSize100);
   }
 
-  .pocket-svg {
-    display: inline-block;
-    position: relative;
-    height: 1.125rem;
-    width: 1.25rem;
-    content: ' ';
-    background-image: url('data:image/svg+xml;utf8,<svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.46333 2.16671C2.244 2.16671 2.06283 2.34971 2.06283 2.57925V7.62041C2.06283 12.0431 5.6089 15.625 9.97949 15.625C14.3501 15.625 17.8962 12.0431 17.8962 7.62041V2.57925C17.8962 2.34971 17.715 2.16671 17.4957 2.16671H2.46333ZM2.46333 0.583374H17.4957C18.593 0.583374 19.4795 1.4788 19.4795 2.57925V7.62041C19.4795 12.9141 15.2281 17.2084 9.97949 17.2084C4.73086 17.2084 0.479492 12.9141 0.479492 7.62041V2.57925C0.479492 1.4788 1.36596 0.583374 2.46333 0.583374ZM13.3833 5.95582C13.6954 5.64959 14.1966 5.65432 14.5029 5.96639C14.8091 6.27846 14.8044 6.77969 14.4923 7.08592L10.534 10.9702C10.2261 11.2724 9.73292 11.2724 9.42501 10.9702L5.46668 7.08592C5.15461 6.77969 5.14987 6.27846 5.45611 5.96639C5.76234 5.65432 6.26357 5.64959 6.57564 5.95582L9.97949 9.29599L13.3833 5.95582Z" fill="%231A1A1A"/></svg>');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
-    margin: auto 0.125rem -0.25rem;
+  .icon {
+    font-size: 1.3rem;
+    margin-top: -.25rem;
   }
 
   ${breakpointLargeTablet} {
@@ -142,7 +135,7 @@ export function CallOutBuildHome() {
       <aside>
         <p className="h3 title">Build a home for everything that interests&nbsp;you</p>
         <p className="subtext">
-          Add the <span className="pocket-svg"></span> button to your browser to
+          Add the <SaveIcon id="Pocket" title="Pocket" /> button to your browser to
           collect articles, videos, and links from across the web. Use our app
           to enjoy them on any device in a distraction-free environment.
         </p>

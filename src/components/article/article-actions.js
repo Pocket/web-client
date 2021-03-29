@@ -24,18 +24,11 @@ const shareContainer = css`
   }
 
   .pocket-share {
-    & > div {
-      min-width: unset;
-      margin-bottom: 0;
-      margin-right: 0;
+    width: 1.5rem;
+    button {
+      color: var(--color-textPrimary);
     }
-    svg {
-      margin-right: 0;
-    }
-    & > div + div {
-      width: 200px;
-      font-family: var(--fontSansSerif);
-    }
+
     .actionCopy {
       display: none;
     }
@@ -100,7 +93,6 @@ export const ArticleActions = function ({
   const url = `${BASE_URL}/explore/item/${slug}`
 
   const onSave = () => {
-    handleShareClick('Pocket')
     saveAction(url)
     trackSaveClick('save-story-sidebar')
   }
@@ -112,6 +104,7 @@ export const ArticleActions = function ({
           saveAction={onSave}
           isAuthenticated={isAuthenticated}
           saveStatus={saveStatus}
+          id="sidebar"
         />
       </div>
 

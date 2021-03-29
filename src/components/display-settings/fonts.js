@@ -9,6 +9,7 @@ import { css } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import classNames from 'classnames'
 import { FONT_TYPES } from 'components/fonts/fonts'
+import { darkMode } from '@pocket/web-ui'
 
 import BlancoSVG from 'static/images/font-icons/blanco.svg'
 import GraphikSVG from 'static/images/font-icons/graphik.svg'
@@ -35,6 +36,10 @@ const fontFamilyButton = css`
 
   img {
     height: var(--size150);
+  }
+
+  ${darkMode} img {
+    filter: invert(1);
   }
 
   &:hover img {

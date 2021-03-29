@@ -4,7 +4,8 @@ import {
   breakpointMediumTablet,
   breakpointTinyTablet,
   breakpointLargeHandset,
-  breakpointTinyHandset
+  breakpointTinyHandset,
+  darkMode
 } from '@pocket/web-ui'
 
 const resetWrapper = css`
@@ -176,6 +177,10 @@ const contentWrapper = css`
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
+
+    ${darkMode} {
+      background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M1.643 2h20.714C23.264 2 24 2.715 24 3.597v7.736C24 17.777 18.628 23 12 23S0 17.777 0 11.333V3.597C0 2.715.736 2 1.643 2zm14.306 6.43L12 12.304 8.05 8.429a1.5 1.5 0 0 0-2.1 2.142l5 4.906a1.5 1.5 0 0 0 2.1 0l5-4.906a1.5 1.5 0 0 0-2.1-2.142z" fill="%23f2f2f2"/></svg>');
+    }
   }
   & > .article-card:last-of-type:after {
     display: none;
@@ -262,6 +267,14 @@ const contentWrapper = css`
         background-repeat: no-repeat;
         background-position: center center;
         background-size: contain;
+      }
+
+      ${darkMode} {
+        font-weight: 500;
+
+        &:before {
+          background-image: url('data:image/svg+xml;utf8,<svg width="24" height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5059 2C2.22885 2 2 2.23116 2 2.52111V8.88889C2 14.4755 6.47925 19 12 19C17.5208 19 22 14.4755 22 8.88889V2.52111C22 2.23116 21.7712 2 21.4941 2H2.5059ZM2.5059 0H21.4941C22.8802 0 24 1.13106 24 2.52111V8.88889C24 15.5756 18.6298 21 12 21C5.37015 21 0 15.5756 0 8.88889V2.52111C0 1.13106 1.11975 0 2.5059 0ZM16.2996 6.78625C16.6938 6.39943 17.3269 6.40541 17.7138 6.7996C18.1006 7.19379 18.0946 7.82693 17.7004 8.21375L12.7004 13.1202C12.3115 13.5019 11.6885 13.5019 11.2996 13.1202L6.2996 8.21375C5.90541 7.82693 5.89943 7.19379 6.28625 6.7996C6.67307 6.40541 7.30621 6.39943 7.7004 6.78625L12 11.0054L16.2996 6.78625Z" fill="%238c8c8c"/></svg>');
+        }
       }
 
       &:hover:before {

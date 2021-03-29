@@ -413,6 +413,7 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
                 saveAction={saveAction}
                 saveStatus={saveStatus}
                 isAuthenticated={isAuthenticated}
+                handleShareClick={trackShareClick}
                 trackSaveClick={trackSaveClick}
                 slug={slug}
               />
