@@ -5,8 +5,7 @@ export function SideNav({ subset, isLoggedIn, tag }) {
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const pinnedTags = useSelector((state) => state.userTags.pinnedTags)
   const appMode = useSelector((state) => state?.app?.mode)
-  const inHomeTest = useSelector((state) => state.features['home.new_user'])?.assigned //prettier-ignore
-  const showHome = inHomeTest
+  const showHome = useSelector((state) => state.features['home.new_user'])?.assigned
 
   const isDisabled = appMode === 'bulk'
   return (
