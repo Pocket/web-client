@@ -16,7 +16,6 @@ export const READING_WPM = 220
 export const BATCH_SIZE = 30
 export const COLOR_MODE_PREFIX = 'colormode'
 
-export const HOME_TEST_START = '2021-03-22 19:30:00'
 export const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
 export const LINE_HEIGHT = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
 export const COLUMN_WIDTH = [531, 574, 632, 718, 826, 933, 1041]
@@ -137,7 +136,3 @@ export const LOCALE_COMMON = [
   'whats-new',
 ]
 
-// Unleash tests and the human friendly names for them
-export const CURRENT_TESTS = {
-  "temp.web.client.home.new_user": "home.v1"
-}

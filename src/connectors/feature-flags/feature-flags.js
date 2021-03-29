@@ -9,9 +9,3 @@ export function FeatureFlag({ children, flag, dev }) {
     : feature?.assigned
   return isFeatureEnabled ? <>{children}</> : null
 }
-
-export function isEligible(birth, start) {
-  const eligibleDate = new Date(start)
-  const birthDate = new Date(birth)
-  return eligibleDate - birthDate < 0
-}
