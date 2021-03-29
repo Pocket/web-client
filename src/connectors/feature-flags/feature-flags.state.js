@@ -74,8 +74,7 @@ async function filterUnleashAssignments(response, birth) {
       return {
         ...payload,
         ...rest,
-        assigned,
-        eligible,
+        assigned: eligible,
         test: name,
         name: matches[1] || flag?.name //override the name
       }
