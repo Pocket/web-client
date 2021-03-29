@@ -44,7 +44,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const { user_status, user_id, sess_guid } = useSelector((state) => state.user)
+  const { user_status, user_id, sess_guid, birth } = useSelector((state) => state.user) //prettier-ignore
   const path = router.pathname
 
   const showDevTools = process.env.SHOW_DEV === 'included'
@@ -100,8 +100,6 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   // 3rd party initializations
   useEffect(() => {
-    // ?? Were we firing page views on logged out users in the past ??
-    // ?? Before redirecting them?
     if (user_status === 'pending' || user_status === 'invalid' || !sess_guid) {
       return
     }
@@ -114,14 +112,14 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // Load OptinMonster
     // loadOptinMonster()
-  }, [user_status, sess_guid])
+  }, [user_id, user_status, sess_guid])
 
   // Hydrate user features
   useEffect(() => {
     if (user_status === 'pending' || user_status === 'invalid') return null
 
     const hydrateFeatures = async () => {
-      const features = await fetchUnleashData(user_id, sess_guid)
+      const features = await fetchUnleashData(user_id, sess_guid, birth)
       if (features) dispatch(featuresHydrate(features))
     }
 

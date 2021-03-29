@@ -1,7 +1,6 @@
 import * as Sentry from '@sentry/node'
 import { getUserInfo } from 'common/api/user'
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
-import { HOME_TEST_START } from 'common/constants'
 import queryString from 'query-string'
 
 export default function Waypoint() {}
@@ -25,22 +24,9 @@ export async function getServerSideProps({ req, locale, query }) {
     }
   }
 
-  const eligibleDate = new Date(HOME_TEST_START)
-  const birthDate = new Date(birth)
-  const eligibleForTest = eligibleDate - birthDate < 0
-
-  if (!eligibleForTest) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: myListLink
-      }
-    }
-  }
-
   // This sets up the home test. If a user is assigned to the test we send them
   // from waypoint to home.  Otherwise they get sent to my-list
-  const features = await fetchUnleashData(user_id, sess_guid)
+  const features = await fetchUnleashData(user_id, sess_guid, birth)
   Sentry.withScope((scope) => {
     scope.setTag('ssr', 'WayPoint')
     scope.setExtra('features', features)
@@ -48,9 +34,7 @@ export async function getServerSideProps({ req, locale, query }) {
     Sentry.captureMessage('Waypoint: Feature Response')
   })
 
-  const destination = features['temp.web.client.home.new_user'].assigned
-    ? homeLink
-    : myListLink
+  const destination = features['home.new_user'].assigned ? homeLink : myListLink
 
   return {
     redirect: {
