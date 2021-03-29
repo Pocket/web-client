@@ -15,7 +15,7 @@ export default function Topic(props) {
   const { url = '', statusCode = 500 } = props
 
   // Is user logged in?
-  const isAuthenticated = useSelector((state) => state.user.auth)
+  const isAuthenticated = useSelector((state) => state.user?.auth)
 
   // Select state to use
   const topicList = useSelector((state) => state.topicList?.topicsByName)
