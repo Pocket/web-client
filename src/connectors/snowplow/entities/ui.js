@@ -1,6 +1,10 @@
 import { getSchemaUri } from 'common/api/snowplow-analytics'
 import { getObjectWithValidKeysOnly } from 'common/utilities'
 
+/**
+ * Schema information:
+ * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/c03c4f335d10a96c746b17e5271cd7760f2bb114973dbde0355d08881344abd5
+ */
 const UI_SCHEMA_URL = getSchemaUri('ui')
 
 export const UI_COMPONENT_BUTTON = 'button'

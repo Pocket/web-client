@@ -1,5 +1,9 @@
 import { getSchemaUri } from 'common/api/snowplow-analytics'
 
+/**
+ * Schema information:
+ * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/94f5d471bda9fff772fb3a36f675ca965d1ddd8d90eb4e9ced1a27ffe7f371e3
+ */
 const ENGAGEMENT_SCHEMA_URL = getSchemaUri('engagement')
 
 export const ENGAGEMENT_TYPE_GENERAL = 'general'
@@ -12,7 +16,8 @@ export const ENGAGEMENT_TYPE_REPORT = 'report'
  *          ENGAGEMENT_TYPE_GENERAL,
  *          ENGAGEMENT_TYPE_SAVE,
  *          ENGAGEMENT_TYPE_REPORT
- *         )} - Indicates the type of engagement
+ *         )} - Indicates the type of engagement. @required
+ * @param value {string} - The new value of a setting/filter, if the user engaged with something and modified its state in doing so. @optional
  * @returns {{schema: *, data: {type: *, value: *}}}
  */
 const createEngagementEvent = (type, value) => {

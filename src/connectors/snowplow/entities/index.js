@@ -27,7 +27,10 @@
 export { default as createApiUserEntity, apiUserEntity } from './api-user'
 export { default as createContentEntity } from './content'
 export { default as createFeatureFlagEntity } from './feature-flag'
+export { default as createRecommendationEntity } from './recommendation'
 export { default as createReportEntity } from './report'
+export { default as createSlateLineupEntity } from './slate-lineup'
+export { default as createSlateEntity } from './slate'
 export {
   default as createUiEntity,
   UI_COMPONENT_BUTTON,
