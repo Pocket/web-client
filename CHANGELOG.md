@@ -1,3 +1,10 @@
+## [1.9.13](https://github.com/Pocket/web-client/compare/v1.9.12...v1.9.13) (2021-03-30)
+
+
+### Bug Fixes
+
+* **snowplow:** adding new rec entities and  documentation ([5b4d5c5](https://github.com/Pocket/web-client/commit/5b4d5c5471eb8a69f1ddffc252c6685c5253936e))
+
 ## [1.9.12](https://github.com/Pocket/web-client/compare/v1.9.11...v1.9.12) (2021-03-29)
 
 
