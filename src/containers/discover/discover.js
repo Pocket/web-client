@@ -36,6 +36,7 @@ import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
 import { CardTopicsNav } from 'components/items-layout/topic-list'
 
 import ReportFeedbackModal from 'components/report-feedback-modal/report-feedback-modal'
+import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { CallOutStartLibraryExplore } from 'components/call-out/call-out-start-library'
 import { CallOutPocketHitsSignup } from 'components/call-out/call-out-pocket-hits'
@@ -84,6 +85,8 @@ export default function Discover({ url }) {
     <ErrorPage statusCode={503} />
   ) : (
     <Layout title={metaData.title} metaData={metaData}>
+      {!isAuthenticated ? <CallOutBuildHome /> : null}
+
       <CardPageHeader
         title="Discover the best of the&nbsp;web"
         subHeading="Today’s essential reads"

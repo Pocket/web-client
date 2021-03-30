@@ -1,6 +1,5 @@
 import queryString from 'query-string'
 import { CONSUMER_KEY, API_URL } from 'common/constants'
-import * as Sentry from '@sentry/node'
 
 /**
  * @param {Object} requestInfo Information about the request
@@ -46,16 +45,6 @@ export const request = ({
   }
   const ssrHeaders = { Cookie: cookie, Origin: 'https://getpocket.com' }
   const headers = ssr ? ssrHeaders : clientHeaders
-
-  // On the server side we are logging this request out temporarily
-  if (cookie) {
-    Sentry.withScope((scope) => {
-      scope.setTag('ssr', 'Request')
-      scope.setExtra('headers', headers)
-      scope.setLevel('info')
-      Sentry.captureMessage('Request: With Cookies')
-    })
-  }
 
   // The Promise returned from fetch() won’t reject on HTTP error status even if
   // the response is an HTTP 404 or 500. Instead, it will resolve normally

@@ -9,8 +9,13 @@ import TopicSearch from './topic-search'
 import { trackPageView } from './topic.analytics'
 import ReportFeedbackModal from 'components/report-feedback-modal/report-feedback-modal'
 
+import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
+
 export default function Topic(props) {
   const { url = '', statusCode = 500 } = props
+
+  // Is user logged in?
+  const isAuthenticated = useSelector((state) => state.user?.auth)
 
   // Select state to use
   const topicList = useSelector((state) => state.topicList?.topicsByName)
@@ -58,6 +63,8 @@ export default function Topic(props) {
 
   return (
     <Layout title={`Pocket: ${title}`} metaData={topicMetaData}>
+      {!isAuthenticated ? <CallOutBuildHome /> : null}
+
       <RenderComponent
         topic={topic}
         searchItems={searchItems}

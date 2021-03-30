@@ -39,15 +39,12 @@ import { sendEngagement } from './global-nav.analytics'
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
   const DISALLOWED_PROFILE_IMGS = ['profileBlue.png'] // file names of default urls returned by BE. If a user avatar url contains one of these, we prefer to return an empty string, in order to use the Web UI's Avatar default image instead
-  const hasInvalidDefaultImage = DISALLOWED_PROFILE_IMGS.reduce(
-    (isAvatarOk, disallowedImg) => {
-      if (!avatarUrl) return true // handle null
-      if (isAvatarOk === false) return isAvatarOk
+  const hasInvalidDefaultImage = DISALLOWED_PROFILE_IMGS.reduce((isAvatarOk, disallowedImg) => {
+    if (!avatarUrl) return true // handle null
+    if (isAvatarOk === false) return isAvatarOk
 
-      return avatarUrl.includes(disallowedImg)
-    },
-    true
-  )
+    return avatarUrl.includes(disallowedImg)
+  }, true)
 
   return hasInvalidDefaultImage ? '' : avatarUrl
 }
@@ -61,15 +58,14 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
-  const selectedLink =
-    selected !== undefined ? selected : getTopLevelPath(router.pathname)
+  const selectedLink = selected !== undefined ? selected : getTopLevelPath(router.pathname)
 
   const appMode = useSelector((state) => state?.app?.mode)
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const userStatus = useSelector((state) => state?.user?.user_status)
-  const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false) //prettier-ignore
+  const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
-  const retrievedAvatar = useSelector((state) => state?.user?.profile?.avatar_url) // prettier-ignore
+  const retrievedAvatar = useSelector((state) => state?.user?.profile?.avatar_url)
 
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.user?.first_name)
@@ -91,8 +87,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const setGridMode = () => dispatch(setListModeGrid())
   const setDetailMode = () => dispatch(setListModeDetail())
 
-  const sendImpressionEvent = (identifier) =>
-    dispatch(sendImpression(identifier))
+  const sendImpressionEvent = (identifier) => dispatch(sendImpression(identifier))
 
   const pinnedTags = useSelector((state) => state.userTags.pinnedTags)
   const pinnedLinks = pinnedTags.map((pin) => {
@@ -103,27 +98,28 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     }
   })
 
-  const showHome = useSelector((state) => state.features['temp.web.client.home.new_user'])?.assigned //prettier-ignore
+  const showHome = useSelector((state) => state.features['home.new_user'])?.assigned
+
   const homeLinks = [
     {
       name: 'home',
       id: 'global-nav-home-link',
       label: t('nav:home', 'Home'),
-      url: '/home',
+      url: '/home?src=navbar',
       icon: <HomeIcon />
     },
     {
       name: 'my-list',
       id: 'global-nav-my-list-link',
       label: t('nav:my-list', 'My List'),
-      url: '/my-list',
+      url: '/my-list?src=navbar',
       icon: <ListViewIcon />
     },
     {
       name: 'discover',
       id: 'global-nav-discover-link',
       label: t('nav:discover', 'Discover'),
-      url: '/explore',
+      url: '/explore?src=navbar',
       icon: <DiscoverIcon />
     }
   ]
@@ -133,14 +129,14 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       name: 'discover',
       id: 'global-nav-discover-link',
       label: t('nav:discover', 'Discover'),
-      url: '/explore',
+      url: '/explore?src=navbar',
       icon: <DiscoverIcon />
     },
     {
       name: 'my-list',
       id: 'global-nav-my-list-link',
       label: t('nav:my-list', 'My List'),
-      url: '/my-list',
+      url: '/my-list?src=navbar',
       icon: <ListViewIcon />
     }
   ]

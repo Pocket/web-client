@@ -142,7 +142,7 @@ export const Card = ({
       onClick={selectBulk}>
       <div className="selectedBack" />
 
-      <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
+      <FeatureFlag flag="item_id_overlay" dev={true}>
         <span className="idOverlay">{id}</span>
       </FeatureFlag>
 
@@ -189,6 +189,9 @@ export const Card = ({
             tags={tags}
             saveStatus={save_status}
             favorite={favorite}
+            openUrl={openUrl}
+            onOpen={onOpen}
+            openExternal={openExternal}
           />
         ) : null}
       </footer>

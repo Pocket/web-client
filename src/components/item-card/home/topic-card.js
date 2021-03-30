@@ -9,6 +9,8 @@ import { urlWithPocketRedirect } from 'common/utilities'
 import { SaveFilledIcon } from '@pocket/web-ui'
 import Link from 'next/link'
 
+import { ActionsRecit } from 'connectors/item-card/actions/recit'
+
 export const cardStyle = css`
   height: 100%;
   width: 100%;
@@ -90,41 +92,6 @@ export const cardStyle = css`
     left: 0;
     width: 100%;
   }
-
-  .actions {
-    display: flex;
-  }
-
-  .savedItem {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: var(--fontSize150);
-    min-width: 3.913em;
-    color: var(--color-textSecondary);
-    cursor: pointer;
-    padding-top: 8px;
-
-    span {
-      margin-top: 0;
-    }
-
-    svg {
-      color: var(--color-actionBrand);
-    }
-  }
-
-  .savedCopy {
-    font-size: 0.667em;
-    height: var(--size150);
-    line-height: var(--size150);
-    padding-left: 8px;
-
-    a {
-      text-decoration: none;
-    }
-  }
 `
 
 export const Card = React.forwardRef(
@@ -171,26 +138,15 @@ export const Card = React.forwardRef(
         </a>
 
         <footer className="footer">
-          <div className="actions">
-            {(save_status === 'saved') ? (
-              <div className="savedItem">
-                <SaveFilledIcon />
-                <div className="savedCopy">
-                  <Link href={openUrl}>
-                    <a onClick={onOpen} target={openExternal ? "_blank" : undefined}>Read now</a>
-                  </Link>
-                </div>
-              </div>
-            ) : (
-              <SaveToPocket
-                saveAction={onSave}
-                isAuthenticated={isAuthenticated}
-                saveStatus={save_status}
-                id={id}
-                readNow={true}
-              />
-            )}
-          </div>
+          <ActionsRecit
+            id={id}
+            isAuthenticated={isAuthenticated}
+            onSave={onSave}
+            saveStatus={save_status}
+            openUrl={openUrl}
+            onOpen={onOpen}
+            openExternal={openExternal}
+          />
         </footer>
       </article>
     )

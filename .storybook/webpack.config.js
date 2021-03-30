@@ -30,5 +30,7 @@ module.exports = ({ config, mode }) => {
     ]
   })
 
+  config.node = { fs: 'empty' }
+
   return config
 }

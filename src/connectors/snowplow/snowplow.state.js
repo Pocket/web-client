@@ -7,6 +7,7 @@ import { SNOWPLOW_TRACK_CONTENT_IMPRESSION } from 'actions'
 import { SNOWPLOW_TRACK_ENGAGEMENT } from 'actions'
 import { SNOWPLOW_TRACK_CONTENT_ENGAGEMENT } from 'actions'
 import { VARIANTS_SAVE } from 'actions'
+import { FEATURES_HYDRATE } from 'actions'
 
 import { createContentEntity } from 'connectors/snowplow/entities'
 import { createUiEntity } from 'connectors/snowplow/entities'
@@ -98,7 +99,8 @@ export const snowplowSagas = [
   takeEvery(SNOWPLOW_TRACK_CONTENT_IMPRESSION, fireContentImpression),
   takeEvery(SNOWPLOW_TRACK_CONTENT_ENGAGEMENT, fireContentEngagmenet),
   takeEvery(SNOWPLOW_TRACK_ENGAGEMENT, fireEngagement),
-  takeLatest(VARIANTS_SAVE, fireVariantEnroll)
+  takeLatest(VARIANTS_SAVE, fireVariantEnroll),
+  takeLatest(FEATURES_HYDRATE, fireFeatureEnroll)
 ]
 
 /** SAGA :: RESPONDERS
@@ -113,6 +115,20 @@ function* fireVariantEnroll({ variants }) {
     const featureFlagEntity = createFeatureFlagEntity(flag, variants[flag])
 
     yield sendCustomSnowplowEvent(variantEnrollEvent, [featureFlagEntity])
+  }
+}
+
+function* fireFeatureEnroll({ hydrate }) {
+  for (let flag in hydrate) {
+    const { test: testName, variant, assigned } = hydrate[flag]
+    const hasVariant = variant !== 'disabled' && !!variant
+    if (hasVariant) {
+      const entityVariant = assigned ? variant : `control.${variant}`
+      const variantEnrollEvent = createVariantEnrollEvent()
+      const featureFlagEntity = createFeatureFlagEntity(testName, entityVariant)
+
+      yield sendCustomSnowplowEvent(variantEnrollEvent, [featureFlagEntity])
+    }
   }
 }
 
@@ -160,20 +176,16 @@ function* fireImpression({ component, requirement, ui, position, identifier }) {
 function* fireContentEngagmenet({ component, ui, identifier, position, items }) {
   const engagementEvent = createEngagementEvent(component)
 
-  const contentEntities = (items.length) ? items : [items]
+  const contentEntities = items.length ? items : [items]
   // limit content entities to BATCH_SIZE = 30
   if (contentEntities.length > BATCH_SIZE) contentEntities.length = BATCH_SIZE
-  const contentEntity = contentEntities.map(item => {
+
+  const contentEntity = contentEntities.map((item) => {
     const { save_url, item_id, id } = item
     return createContentEntity(save_url, item_id || id) // id is bulk edit value
   })
 
-  const uiEntity = createUiEntity({
-    type: ui,
-    hierarchy: 0,
-    identifier,
-    index: position
-  })
+  const uiEntity = createUiEntity({ type: ui, hierarchy: 0, identifier, index: position })
 
   const snowplowEntities = [...contentEntity, uiEntity]
   yield sendCustomSnowplowEvent(engagementEvent, snowplowEntities)

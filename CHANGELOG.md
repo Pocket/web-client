@@ -1,3 +1,72 @@
+## [1.9.14](https://github.com/Pocket/web-client/compare/v1.9.13...v1.9.14) (2021-03-30)
+
+
+### Bug Fixes
+
+* **darkmode:** tweaks for discover in dark mode ([f398110](https://github.com/Pocket/web-client/commit/f39811066ee56da6fcc60d5ef1ab175ccde81e64))
+* **tests:** make user.auth conditional ([a6f3477](https://github.com/Pocket/web-client/commit/a6f34777fe8038c5654a92ff921b0b1a6587c304))
+
+## [1.9.13](https://github.com/Pocket/web-client/compare/v1.9.12...v1.9.13) (2021-03-30)
+
+
+### Bug Fixes
+
+* **snowplow:** adding new rec entities and  documentation ([5b4d5c5](https://github.com/Pocket/web-client/commit/5b4d5c5471eb8a69f1ddffc252c6685c5253936e))
+
+## [1.9.12](https://github.com/Pocket/web-client/compare/v1.9.11...v1.9.12) (2021-03-29)
+
+
+### Bug Fixes
+
+* **feature flag:** more robust assignment ([73142b7](https://github.com/Pocket/web-client/commit/73142b78a148a6d81345676d033b9553f91b3c04))
+* **feature flags:** assignment by passed variant ([400595d](https://github.com/Pocket/web-client/commit/400595ddad07c9d697005046daf6d0c38c769061))
+* **feature flags:** only assign if eligible ([cca3414](https://github.com/Pocket/web-client/commit/cca3414ac20d65efe6099ccea517153aa3e2b703))
+
+## [1.9.11](https://github.com/Pocket/web-client/compare/v1.9.10...v1.9.11) (2021-03-24)
+
+
+### Bug Fixes
+
+* **storybook:** load error in webpack ([b9f205e](https://github.com/Pocket/web-client/commit/b9f205e37bc472b46d2c3dade58ba45d8febe61c))
+
+## [1.9.10](https://github.com/Pocket/web-client/compare/v1.9.9...v1.9.10) (2021-03-24)
+
+
+### Bug Fixes
+
+* **snowplow:** add variant enroll event for unleash features ([b56bff9](https://github.com/Pocket/web-client/commit/b56bff97294785c9c1717b49dafdb97d67ec2492))
+* **snowplow:** update home test name ([8fc2154](https://github.com/Pocket/web-client/commit/8fc21549088db5e25161d7a93f381f5f66547142))
+
+## [1.9.9](https://github.com/Pocket/web-client/compare/v1.9.8...v1.9.9) (2021-03-24)
+
+
+### Bug Fixes
+
+* **waypoint:** pass query params to page ([47ba5a3](https://github.com/Pocket/web-client/commit/47ba5a3d7e5144215c80fc3a3db2c9e5b050c3a3))
+* **waypoint:** preserve query params to home ([58b5f2d](https://github.com/Pocket/web-client/commit/58b5f2da32c82f35120dd4e0e347fac3067552fa))
+
+## [1.9.8](https://github.com/Pocket/web-client/compare/v1.9.7...v1.9.8) (2021-03-23)
+
+
+### Bug Fixes
+
+* **recs:** add save action for reader recs and use that module on topcis ([745bb59](https://github.com/Pocket/web-client/commit/745bb599e27e33223528ee88757bf1536d3233a4))
+
+## [1.9.7](https://github.com/Pocket/web-client/compare/v1.9.6...v1.9.7) (2021-03-23)
+
+
+### Bug Fixes
+
+* **recs:** add release notes for recs and remove feature flag ([ada2d08](https://github.com/Pocket/web-client/commit/ada2d085968ec48d5dbbf09ff69fbb44e17bc6c0))
+
+## [1.9.6](https://github.com/Pocket/web-client/compare/v1.9.5...v1.9.6) (2021-03-23)
+
+
+### Bug Fixes
+
+* **home:** limit test across the board ([fe6179b](https://github.com/Pocket/web-client/commit/fe6179b659a9cf756bab52b85ebb5e1441121356))
+* **nav:** update explore links to use direct links ([0b64648](https://github.com/Pocket/web-client/commit/0b646486b2feb8d1ae304ef83753aa42ab309ef3))
+
 ## [1.9.5](https://github.com/Pocket/web-client/compare/v1.9.4...v1.9.5) (2021-03-22)
 
 

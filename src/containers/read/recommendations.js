@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { css } from 'linaria'
-import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { COLUMN_WIDTH_RANGE } from 'containers/read/read'
 import { RecCard } from 'connectors/item-card/reader/cardRec'
 import { readerRecsRequest } from 'connectors/recit/recit.state'
@@ -78,19 +77,17 @@ export const Recommendations = ({ id }) => {
   }, [dispatch, id])
 
   return Object.keys(recommendations).length ? (
-    <FeatureFlag flag="temp.web.client.reader.recommendations">
-      <aside className={asideWrapper}>
-        <h2 className={headerStyles}>You Might Also Like</h2>
-        <section className={sectionWrapper}>
-          {Object.keys(recommendations).map((itemId, index) => (
-            <RecCard
-              key={itemId}
-              id={itemId}
-              position={index}
-            />
-          ))}
-        </section>
-      </aside>
-    </FeatureFlag>
+    <aside className={asideWrapper}>
+      <h2 className={headerStyles}>You Might Also Like</h2>
+      <section className={sectionWrapper}>
+        {Object.keys(recommendations).map((itemId, index) => (
+          <RecCard
+            key={itemId}
+            id={itemId}
+            position={index}
+          />
+        ))}
+      </section>
+    </aside>
   ) : null
 }

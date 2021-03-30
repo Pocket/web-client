@@ -137,7 +137,7 @@ export const Card = React.forwardRef(
         key={id}
         ref={ref}
         data-cy={`article-card-${id}`}>
-        <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
+        <FeatureFlag flag="item_id_overlay" dev={true}>
           <span className="idOverlay">{id}</span>
         </FeatureFlag>
         <a

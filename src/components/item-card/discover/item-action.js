@@ -1,6 +1,7 @@
 import { css } from 'linaria'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import { OverflowMenuIcon } from '@pocket/web-ui'
+import { darkMode } from '@pocket/web-ui'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
@@ -55,6 +56,11 @@ export const popoverContainer = css`
     color: var(--color-textSecondary);
     text-decoration: none;
 
+    ${darkMode} {
+      color: var(--color-textPrimary);
+      background: var(--color-popoverCanvas);
+    }
+
     button {
       display: flex;
       justify-content: flex-start;
@@ -81,6 +87,11 @@ export const popoverContainer = css`
     &:hover {
       background-color: var(--color-actionPrimarySubdued);
       color: var(--color-actionPrimaryHover);
+
+      ${darkMode} {
+        font-weight: 500;
+        color: var(--color-textPrimary);
+      }
     }
   }
 `

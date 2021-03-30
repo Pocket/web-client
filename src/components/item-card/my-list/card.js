@@ -297,7 +297,7 @@ export const Card = ({
         data-cy={`article-card-${id}`}
         onClick={selectBulk}>
         <div className="bulkBacking" />
-        <FeatureFlag flag="temp.web.client.dev.card.item_id_overlay" dev={true}>
+        <FeatureFlag flag="item_id_overlay" dev={true}>
           <span className="idOverlay">
             {id}: {position}
           </span>
