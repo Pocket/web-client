@@ -19,6 +19,8 @@ import { hydrateUserTags } from 'containers/my-list/tags-page/tags-page.state'
 
 import { appSetPreferences } from 'connectors/app/app.state'
 
+import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
+
 /** Setup Files
  --------------------------------------------------------------- */
 import { sentrySettings } from 'common/setup/sentry'
@@ -52,6 +54,9 @@ function PocketWebClient({ Component, pageProps, err }) {
   const { authRequired } = pageProps
 
   useEffect(() => {
+    // Fired on componentDidMount in web-app-draft
+    legacyAnalyticsTrack({ action: 'opened_app' })
+
     // Log out version for quick scan.  Can also help support get a read on
     // what version a user is on when reporting an error
     const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
