@@ -1,5 +1,9 @@
 import { getSchemaUri } from 'common/api/snowplow-analytics'
 
+/**
+ * Schema information:
+ * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/f74e3dd14cdf3157fbced8f7f78061f62016bdbe1e75c85338f3767ea5f139e7
+ */
 const FEATURE_FLAG_SCHEMA_URL = getSchemaUri('feature_flag')
 
 /**

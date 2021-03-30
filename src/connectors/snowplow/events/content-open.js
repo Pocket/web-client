@@ -1,5 +1,9 @@
 import { getSchemaUri } from 'common/api/snowplow-analytics'
 
+/**
+ * Schema information:
+ * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/3a2233fd5e719db33bbcaf32aea1026f3709bcba837b0a1f4a7f034e2817c09d
+ */
 const CONTENT_OPEN_SCHEMA_URL = getSchemaUri('content_open')
 
 export const CONTENT_OPEN_TRIGGER_CLICK = 'click'

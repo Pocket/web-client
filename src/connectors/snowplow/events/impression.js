@@ -1,5 +1,9 @@
 import { getSchemaUri } from 'common/api/snowplow-analytics'
 
+/**
+ * Schema information:
+ * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/ee6a84772fc144d0e5b58ca5f461ebdccfbab784067c823e4a7a60744dc5235f
+ */
 const IMPRESSION_SCHEMA_URL = getSchemaUri('impression')
 
 export const IMPRESSION_COMPONENT_UI = 'ui'
@@ -22,7 +26,7 @@ export const IMPRESSION_REQUIREMENT_VIEWABLE = 'viewable'
  * @param requirement {(
         IMPRESSION_REQUIREMENT_INSTANT,
         IMPRESSION_REQUIREMENT_VIEWABLE
-        )} - Indicates the requirement before an impression can be triggered
+        )} - Indicates the requirement before an impression can be triggered @required
  (instant: any pixel displayed on screen; viewable: +50% of component
  displayed for 1+ seconds)
  * @returns {{schema: *, data: {component: *, requirement: *}}} @required
