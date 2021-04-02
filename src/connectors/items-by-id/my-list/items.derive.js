@@ -15,38 +15,38 @@ export function deriveMyListItems(response) {
   return response.map((item) => {
     // Status of 2 means it has been deleted and shouldn't be stored
     // Unclear why these items are being sent. This needs to be resolved by Backend
-    if (item?.status !== '2') {
-      return {
-        item_id: item?.item_id,
-        resolved_id: item?.resolved_id,
-        sort_id: item?.sort_id,
-        favorite: item?.favorite,
-        has_image: item?.has_image,
-        has_video: item?.has_video,
-        is_article: item?.is_article,
-        is_index: item?.is_index,
-        lang: item?.lang,
-        listen_duration_estimate: item?.listen_duration_estimate,
-        status: item?.status,
-        time_added: item?.time_added,
-        time_favorited: item?.time_favorited,
-        time_read: item?.time_read,
-        time_updated: item?.time_updated,
-        tags: item?.tags,
-        annotations: item?.annotations,
-        images: item?.images,
-        videos: item?.videos,
-        authors: item?.authors,
-        title: displayTitle({ item }),
-        thumbnail: displayThumbnail({ item }),
-        publisher: displayPublisher({ item }),
-        excerpt: displayExcerpt({ item }),
-        save_url: saveUrl({ item }),
-        open_url: openUrl({ item }),
-        read_time: readTime({ item }),
-        syndicated: syndicated({ item }),
-        openExternal: openExternal({ item })
-      }
+    if (item?.status === '2') return
+
+    return {
+      item_id: item?.item_id,
+      resolved_id: item?.resolved_id,
+      sort_id: item?.sort_id,
+      favorite: item?.favorite,
+      has_image: item?.has_image,
+      has_video: item?.has_video,
+      is_article: item?.is_article,
+      is_index: item?.is_index,
+      lang: item?.lang,
+      listen_duration_estimate: item?.listen_duration_estimate,
+      status: item?.status,
+      time_added: item?.time_added,
+      time_favorited: item?.time_favorited,
+      time_read: item?.time_read,
+      time_updated: item?.time_updated,
+      tags: item?.tags,
+      annotations: item?.annotations,
+      images: item?.images,
+      videos: item?.videos,
+      authors: item?.authors,
+      title: displayTitle({ item }),
+      thumbnail: displayThumbnail({ item }),
+      publisher: displayPublisher({ item }),
+      excerpt: displayExcerpt({ item }),
+      save_url: saveUrl({ item }),
+      open_url: openUrl({ item }),
+      read_time: readTime({ item }),
+      syndicated: syndicated({ item }),
+      openExternal: openExternal({ item })
     }
   })
 }
@@ -129,6 +129,9 @@ function openUrl({ item, redirect_url }) {
  * @returns {string} The url that should be saved or opened
  */
 function saveUrl({ item }) {
+  const test = item?.given_url || item?.resolved_url || false
+  // if (test === false) console.log(item)
+  console.log(test)
   return item?.given_url || item?.resolved_url || false
 }
 
