@@ -129,9 +129,6 @@ function openUrl({ item, redirect_url }) {
  * @returns {string} The url that should be saved or opened
  */
 function saveUrl({ item }) {
-  const test = item?.given_url || item?.resolved_url || false
-  // if (test === false) console.log(item)
-  console.log(test)
   return item?.given_url || item?.resolved_url || false
 }
 
