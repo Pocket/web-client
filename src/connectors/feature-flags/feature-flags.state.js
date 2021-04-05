@@ -48,8 +48,8 @@ export const featureSagas = []
 ---------------------------------------------------------------- */
 export async function fetchUnleashData(userId, sessionId, birth) {
   try {
-    const response = await getUnleash(sessionId, userId, 'web-discover')
-    const unleashData = filterUnleashAssignments(response, birth)
+    const response = await getUnleash(sessionId, userId, birth, 'web-client')
+    const unleashData = filterUnleashAssignments(response)
     return unleashData
   } catch (error) {
     console.log(error)
