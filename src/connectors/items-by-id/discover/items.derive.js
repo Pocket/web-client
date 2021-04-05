@@ -43,9 +43,9 @@ function displayTitle({ item, curated_info }) {
   return (
     curated_info?.title ||
     item?.title ||
-    item?.resolved_title ||
-    item?.given_title ||
-    item?.display_url ||
+    item?.resolved_title || // gone
+    item?.given_title || // gone
+    item?.display_url || // normalUrl?
     null
   )
 }
@@ -96,7 +96,7 @@ function displayExcerpt({ item, curated_info }) {
 function openUrl({ item, redirect_url }) {
   return (
     devLink(item) ||
-    redirect_url ||
+    redirect_url || // need to make our own
     item?.given_url ||
     item?.resolved_url ||
     null
@@ -136,7 +136,7 @@ function readTimeFromWordCount(wordCount) {
  */
 const syndicated = function ({ item }) {
   if (!item) return false
-  return 'syndicated_article' in item
+  return 'syndicated_article' in item //syndicatedArticle
 }
 
 const devLink = function (item) {
@@ -153,6 +153,7 @@ const devLink = function (item) {
  * @returns {bool} whether to open an item in a new tab
  */
 function openExternal({ item }) {
+  //HAS_IMAGES || NO_VIDEOS  || NO_IMAGES
   if (item?.has_video === '2') return false
   if (item?.has_image === '2') return false
   if (item?.is_article === '1') return false

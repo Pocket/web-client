@@ -8,6 +8,7 @@ export const OAUTH_URL = 'https://oauth-test.web.readitlater.com'
 export const LOGIN_URL = 'https://getpocket.com/login'
 export const SIGNUP_URL = 'https://getpocket.com/signup'
 export const PREMIUM_URL = 'https://getpocket.com/premium?ep='
+export const GRAPHQL_URL = 'https://getpocket.com'
 export const OAUTH_REDIRECT_URL = 'https://oauth-test.web.readitlater.com/auth/authorize'
 export const UNLEASH_API_URL = 'https://featureflags.readitlater.com/graphql'
 export const ARTICLE_API_URL = 'https://tz7snrninbak3oh36gjshbmdia.appsync-api.us-east-1.amazonaws.com/graphql' // ARTICLE_API_KEY is a secret and needs to be stored as such
@@ -136,3 +137,90 @@ export const LOCALE_COMMON = [
   'whats-new',
 ]
 
+export const TOPIC_IDS = {
+  business: {
+    id: 'c18b41d8-8100-4037-aa64-416994e1d4cf',
+    algorithmic: 'd9c6ddfa-a58d-402d-9664-4190ba197ea6',
+    curated: '505c0126-d54d-42ef-8fe7-0f6a6f24e3a5'
+  },
+  career: {
+    id: 'ff23f296-6c5e-4f53-a46a-3feb5006f261',
+    algorithmic: 'e6c8db8d-cae7-4947-a57e-872dec639472',
+    curated: 'b4032752-155b-4f09-ac1e-f5337df19e88'
+  },
+  education: {
+    id: '7bf5c80a-ffd1-436a-9dea-4f9badea463a',
+    algorithmic: '8aaac382-9c27-42ab-9470-ac1dfc666262',
+    curated: 'b0de37c0-81ef-4063-a432-1bb64270b039'
+  },
+  entertainment: {
+    id: 'cd1f803f-30bd-424b-9d75-6e8d3c8e8450',
+    algorithmic: 'ce96db55-f32e-48f1-929f-216eb2e8c082',
+    curated: 'e9df8a81-19af-48e2-a90f-05e9a37491ca'
+  },
+  food: {
+    id: 'c057d284-31e6-4ba0-ae09-3478f3d40ec7',
+    algorithmic: '884414d5-502d-4e1a-8e70-1dc8eb4a345a',
+    curated: '1a634351-361b-4115-a9d5-b79131b1f95a'
+  },
+  gaming: {
+    id: 'b966a787-d9f2-432a-bd30-741d1ac797d1',
+    algorithmic: '44dff273-3604-40e9-a0b5-bf3852581990',
+    curated: '4cc738f7-25a9-4511-9cc3-68a8f9be91f8'
+  },
+  health: {
+    id: '1abc55f1-75b1-44cb-b5bd-65c4282b158d',
+    algorithmic: '494eaa68-f048-4f52-bb9a-5e7d2526f5cb',
+    curated: '7cb4f497-fd05-42c5-9f78-3650e9ddba21'
+  },
+  parenting: {
+    id: 'd273a8e2-ab17-43e8-809d-0abde4d617d7',
+    algorithmic: 'e6600ffe-b65a-42d3-b570-f460f3d7326e',
+    curated: '90adee1c-7794-4f41-9645-2ff9cf91113c'
+  },
+  'personal-finance': {
+    id: '62585952-3eb8-4380-be06-266eca903cbc',
+    algorithmic: '72ce0827-9dbc-470f-9722-39476daaeb0f',
+    curated: '0c09627b-a409-4768-b87d-7e1d29259785'
+  },
+  politics: {
+    id: '72c3878f-c48b-413c-aff8-90d7a0d79d32',
+    algorithmic: '9901851d-ea76-4667-8dc7-0c1677ecb910',
+    curated: '9bece73b-4d54-43a6-bb10-d7b02abcd181'
+  },
+  science: {
+    id: 'c2829dc4-6a86-4c87-aa3e-f75f67ae8230',
+    algorithmic: 'ab6048ca-5c61-4e87-aefd-7a612b60ab7b',
+    curated: 'b64c873e-7f05-496e-8be4-bfae929c8a04'
+  },
+  'self-improvement': {
+    id: '63f24663-0e80-4c08-82aa-3fb0e06c4979',
+    algorithmic: '6d1273a5-055e-4de0-8a5b-5f2b79d37e5c',
+    curated: '47688fcf-2bbb-4e0e-a02e-1f68c248a67e'
+  },
+  sports: {
+    id: '695e39f3-62e8-4430-8d12-e8b457ac7751',
+    algorithmic: '8a495385-9972-4d0e-b93e-4234f4897939',
+    curated: 'ea40bef5-4406-488d-ad9d-915dfa1f0794'
+  },
+  technology: {
+    id: 'dc010ef1-1f34-473a-a4b5-4cc155e18a4a',
+    algorithmic: 'fa61096a-b681-4251-b299-2fda06c49ebf',
+    curated: 'e0d7063a-9421-4148-b548-446e9fbc8566'
+  },
+  travel: {
+    id: 'f16f670d-14f7-425d-a310-0bb8c267dba2',
+    algorithmic: 'd024ce9c-ed96-453f-a81e-8a0b850681e7',
+    curated: '9389d944-fdcf-4394-9ca3-4604c0af4fac'
+  },
+  coronavirus: {
+    id: '53ace46e-fd12-4744-9647-fa633a9a044c',
+    curated: '796ca16f-4cd4-4dcb-84d5-477715c41668'
+  },
+  home: {
+    id: '2a817ad0-cbba-4330-9559-291468145588'
+  },
+  explore: {
+    id: '9c3018a8-8aa9-4f91-81e9-ebcd95fc82da'
+  }
+}
