@@ -33,6 +33,8 @@ import { LOGIN_URL } from 'common/constants'
 import { RELEASE_NOTES_VERSION } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities'
 
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 import { sendImpression } from './global-nav.analytics'
 import { sendEngagement } from './global-nav.analytics'
 
@@ -98,7 +100,8 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     }
   })
 
-  const showHome = useSelector((state) => state.features['home.new_user'])?.assigned
+  const featureState = useSelector((state) => state.features)
+  const showHome = featureFlagActive({ flag: 'home.new_user', featureState })
 
   const homeLinks = [
     {
