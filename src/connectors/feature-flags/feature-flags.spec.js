@@ -1,39 +1,31 @@
 import assert from 'assert'
 
-import { isOldEnough } from './feature-flags.state'
-import { isNewUser } from './feature-flags.state'
+import { checkActive } from './feature-flags.state'
 
 describe('Feature Flags', () => {
-  describe('isNewUser', function () {
-    it('returns false if birth is before start', function () {
-      const start = '2021-03-22 19:30:00'
-      const birth = '2021-03-21 19:30:00'
-      const eligible = isNewUser({ start, birth })
+  describe('checkActive', function () {
+    it('returns false if not assigned', function () {
+      const eligible = checkActive(false, null)
       assert.ok(!eligible)
     })
 
-    it('returns true if start is before birth', function () {
-      const birth = '2021-03-22 19:30:00'
-      const start = '2021-03-21 19:30:00'
-      const eligible = isNewUser({ start, birth })
+    it('returns true if assigned with no variant', function () {
+      const eligible = checkActive(true, null)
       assert.ok(eligible)
     })
-  })
 
-  describe('isOldEnough', function () {
-    it('returns false if account is not old enough', function () {
-      const start = '2021-03-22 19:30:00'
-      const birth = '2021-03-21 19:30:00'
-      const accountAge = 7 // in days
-      const eligible = isOldEnough({ start, birth, accountAge })
+    it('returns false if assigned with control variant', function () {
+      const eligible = checkActive(true, 'control')
       assert.ok(!eligible)
     })
 
-    it('returns true account is older than offset', function () {
-      const start = '2021-03-22 19:30:00'
-      const birth = '2020-03-22 19:30:00'
-      const accountAge = 364 // in days
-      const eligible = isOldEnough({ start, birth, accountAge })
+    it('returns false if assigned with control-like variant', function () {
+      const eligible = checkActive(true, 'control.v.1.1')
+      assert.ok(!eligible)
+    })
+
+    it('returns true if assigned with non-control variant', function () {
+      const eligible = checkActive(true, 'rainbowKittens')
       assert.ok(eligible)
     })
   })
