@@ -1,5 +1,6 @@
 import { takeLatest, put, takeEvery } from 'redux-saga/effects'
 import { getTopicFeed } from 'common/api/topics'
+import { getNewTopicFeed } from 'common/api/topics'
 import { getSearchFeed } from 'common/api/search'
 import { getItemSaveAnalytics } from './topic.analytics'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
@@ -80,9 +81,15 @@ export async function fetchTopicData(topic, isCollection) {
     // between collections and topic pages in the url.  Collections are
     // 100% curated, so we need to ask for more `curated` and omit the
     // algorithmic results
+
+    const test = await getNewTopicFeed(topic, 30)
+    console.log(JSON.stringify(test))
+
     const response = isCollection
       ? await getTopicFeed(topic, 30, 0)
       : await getTopicFeed(topic, 5, 25)
+
+    // console.log(JSON.stringify(response))
 
     // Derive curated item data and create items by id
     const { curated = [] } = response
@@ -116,7 +123,7 @@ export async function fetchTopicData(topic, isCollection) {
 }
 
 /**
- * fetchTopicData
+ * fetchSearchData
  * Make and async request for a Pocket v3 feed and return best data
  * @return items {array} An array of derived items
  */

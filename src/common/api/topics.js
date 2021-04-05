@@ -1,5 +1,25 @@
 import { request } from 'common/utilities/request/request'
 
+import { GraphQLClient } from 'graphql-request'
+import getTopicForWeb from 'common/api/graphql-queries/get-topic-for-web'
+import { GRAPHQL_URL, TOPIC_IDS } from 'common/constants'
+
+export async function getNewTopicFeed(topic, recommendationCount = 30) {
+  const variables = { id: TOPIC_IDS[topic].id, recommendationCount }
+
+  return request({
+    api_url: GRAPHQL_URL,
+    path: 'graphql',
+    method: 'POST',
+    body: JSON.stringify({
+      query: getTopicForWeb,
+      variables
+    })
+  })
+  .then((response) => response.data)
+  .catch((error) => console.error(error))
+}
+
 /**
  * Get the topic page feed
  * @param {string} topic Topic to fetch

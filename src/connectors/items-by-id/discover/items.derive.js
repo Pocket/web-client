@@ -29,7 +29,7 @@ export function deriveDiscoverItems(response) {
       original_url: originalUrl(feedItem),
       permanent_url: permanentUrl(feedItem),
       openExternal: openExternal(feedItem),
-      save_status: 'unsaved',
+      save_status: 'unsaved'
     }
   })
 }
@@ -47,9 +47,9 @@ function displayTitle({ item, curated_info }) {
   return (
     curated_info?.title ||
     item?.title ||
-    item?.resolved_title ||
-    item?.given_title ||
-    item?.display_url ||
+    item?.resolved_title || // gone
+    item?.given_title || // gone
+    item?.display_url || // normalUrl?
     null
   )
 }
@@ -93,7 +93,13 @@ function displayExcerpt({ item, curated_info }) {
  * @returns {string} The url that should be saved or opened
  */
 function openUrl({ item, redirect_url }) {
-  return devLink(item) || redirect_url || item?.given_url || item?.resolved_url || null
+  return (
+    devLink(item) ||
+    redirect_url || // need to make our own
+    item?.given_url ||
+    item?.resolved_url ||
+    null
+  )
 }
 
 /** SAVE URL
@@ -108,10 +114,10 @@ function saveUrl({ item }) {
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {string} The url that should be opened when visiting the live page
  */
- function originalUrl({ item }) {
-  if(item?.save_url) return urlWithPocketRedirect(item?.save_url)
-  if(item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
-  if(item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
+function originalUrl({ item }) {
+  if (item?.save_url) return urlWithPocketRedirect(item?.save_url)
+  if (item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
+  if (item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
 }
 
 /** OPEN_PERMANENT
@@ -147,7 +153,7 @@ function readTimeFromWordCount(wordCount) {
  */
 const syndicated = function ({ item }) {
   if (!item) return false
-  return 'syndicated_article' in item
+  return 'syndicated_article' in item //syndicatedArticle
 }
 
 const devLink = function (item) {
@@ -164,6 +170,7 @@ const devLink = function (item) {
  * @returns {bool} whether to open an item in a new tab
  */
 function openExternal({ item }) {
+  //HAS_IMAGES || NO_VIDEOS  || NO_IMAGES
   if (item?.has_video === '2') return false
   if (item?.has_image === '2') return false
   if (item?.is_article === '1') return false
