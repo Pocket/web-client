@@ -103,17 +103,9 @@ function parsePayload(payload) {
  * Check assignment based on payload
  */
 export function checkActive(assigned, variant) {
+  const variantRegEx = /control/i
   if (!assigned) return false
   if (!variant || variant === 'disabled') return assigned // This is a straight toggle
-  if (variant === 'control') return false
+  if (variantRegEx.test(variant)) return false
   return true
-}
-
-export function isOldEnough({ start, birth, accountAge, accountAgeUnit = 'day' }) {
-  const inception = start ? start : undefined
-  return dayjs(birth).add(accountAge, accountAgeUnit).isBefore(dayjs(inception))
-}
-
-export function isNewUser({ start, birth }) {
-  return dayjs(start).isBefore(dayjs(birth))
 }
