@@ -18,6 +18,7 @@ import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 import { hydrateUserTags } from 'containers/my-list/tags-page/tags-page.state'
 
 import { appSetPreferences } from 'connectors/app/app.state'
+import { checkClientVersion } from 'connectors/app/app.state'
 
 import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 
@@ -144,6 +145,8 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     dispatch(trackPageView())
     ReactGA.pageview(path)
+
+    dispatch(checkClientVersion())
   }, [user_status, sess_guid, user_id, path, dispatch])
 
   useEffect(() => {

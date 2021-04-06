@@ -22,6 +22,8 @@ import { APP_COLOR_MODE_SET } from 'actions'
 import { APP_SET_RELEASE } from 'actions'
 import { APP_UPDATE_RELEASE } from 'actions'
 
+import { APP_CHECK_CLIENT_VERSION } from 'actions'
+
 import { ITEMS_BULK_CLEAR } from 'actions'
 
 import { HYDRATE } from 'actions'
@@ -32,6 +34,8 @@ import { CACHE_KEY_COLOR_MODE } from 'common/constants'
 import { CACHE_KEY_LIST_MODE } from 'common/constants'
 import { CACHE_KEY_SORT_ORDER } from 'common/constants'
 import { CACHE_KEY_RELEASE_VERSION } from 'common/constants'
+
+import { getClientVersion } from 'common/api/client-version'
 
 const initialState = {
   devMode: false,
@@ -67,6 +71,8 @@ export const setColorModeDark = () => ({ type: APP_COLOR_MODE_SET, colorMode: 'd
 export const setColorModeSepia = () => ({ type: APP_COLOR_MODE_SET, colorMode: 'sepia' }) //prettier-ignore
 
 export const setReleaseNotes = (releaseVersion) => ({ type: APP_UPDATE_RELEASE, releaseVersion }) //prettier-ignore
+
+export const checkClientVersion = () => ({ type: APP_CHECK_CLIENT_VERSION })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -137,7 +143,8 @@ export const appSagas = [
   takeLatest(APP_LIST_MODE_GRID, appListModeSet),
   takeLatest(APP_LIST_MODE_DETAIL, appListModeSet),
   takeLatest(APP_COLOR_MODE_SET, appColorModeSet),
-  takeLatest(APP_UPDATE_RELEASE, appReleaseNotesSet)
+  takeLatest(APP_UPDATE_RELEASE, appReleaseNotesSet),
+  takeLatest(APP_CHECK_CLIENT_VERSION, clientVersionValidation)
 ]
 
 /** SAGA :: RESPONDERS
@@ -183,6 +190,15 @@ function* appSortOrderToggle() {
 function* appReleaseNotesSet({ releaseVersion }) {
   localStore.setItem(CACHE_KEY_RELEASE_VERSION, releaseVersion)
   yield put({ type: APP_SET_RELEASE, releaseVersion })
+}
+
+function* clientVersionValidation() {
+  const clientVersion = process.env.RELEASE_VERSION || 'v0.0.0'
+  const serverClientVersion = yield getClientVersion()
+
+  if (clientVersion !== serverClientVersion) {
+    console.log(`You are using an outdated version of Pocket. Please reload the page to ensure the best experience.`) //prettier-ignore
+  }
 }
 
 function* appPreferences() {
