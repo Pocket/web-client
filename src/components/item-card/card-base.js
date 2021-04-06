@@ -7,25 +7,28 @@ import { css } from 'linaria'
 export const cardStyles = css`
   width: 100%;
   height: 100%;
-  padding: var(--spacing150) 0;
+  padding: 0;
   font-family: var(--fontSansSerif);
   font-weight: 400;
-  color: var(--color-textPrimary);
   position: relative;
+  z-index: 0;
 
-  .cardLink {
+  .cardWrap {
     position: relative;
     display: block;
     height: 100%;
     width: 100%;
     text-decoration: none;
     padding-bottom: 2.5rem;
-    @media (hover: hover) and (pointer: fine) {
+    a {
+      text-decoration: none;
       &:hover {
         color: var(--color-textPrimary);
-        .title span {
-          text-decoration: underline;
-        }
+        text-decoration: underline;
+      }
+    }
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
         .media {
           filter: brightness(0.95) saturate(0.8);
           transition: filter 300ms ease-in-out;
@@ -64,13 +67,13 @@ export const cardStyles = css`
 
   .title {
     --color-underliner: var(--color-canvas);
-    font-family: 'Graphik Web';
+    font-family: Graphik Web;
     font-weight: 600;
-    font-size: 1.1875em;
-    line-height: 1.212;
-    padding: 0;
-    margin: var(--spacing150) 0 0;
-    max-height: 3.6em;
+    font-size: var(--fontSize100);
+    line-height: 1.22;
+    padding: var(--size100) 0 0;
+    margin: 0;
+    max-height: 4.6em;
     overflow: hidden;
   }
 
@@ -79,6 +82,16 @@ export const cardStyles = css`
     padding: var(--size050) 0;
     display: block;
     color: var(--color-textSecondary);
+  }
+
+  .publisher {
+    font-style: normal;
+    padding: 0;
+    display: inline-block;
+    color: var(--color-textSecondary);
+    &:hover {
+      color: var(--color-textSecondary);
+    }
   }
 
   .readtime {
@@ -98,7 +111,7 @@ export const cardStyles = css`
   .footer {
     width: 100%;
     position: absolute;
-    bottom: 0.75rem;
+    bottom: 0.5rem;
   }
 
   .actions {
@@ -191,7 +204,7 @@ export const cardBlock = css`
 export const cardWide = css`
   max-width: 745px;
   grid-column: span 10;
-  .cardLink {
+  .cardWrap {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-column-gap: var(--size150);
@@ -238,7 +251,7 @@ export const cardWide = css`
 export const cardList = css`
   padding: var(--size100) 0;
   grid-column: span 12;
-  a.cardLink {
+  .cardWrap {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-column-gap: var(--size150);
@@ -285,7 +298,7 @@ export const cardDetail = css`
   padding: 1em 0;
   border-bottom: 1px solid var(--color-dividerTertiary);
 
-  a.cardLink {
+  .cardWrap {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-column-gap: var(--size150);
@@ -354,6 +367,7 @@ export const cardDetail = css`
     grid-column: 3 / span 7;
     overflow: hidden;
     white-space: nowrap;
+    padding: 4px 0;
     a {
       font-size: 14px;
       margin-right: 0.5em;

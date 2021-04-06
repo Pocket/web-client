@@ -145,41 +145,50 @@ export const Card = ({
       <FeatureFlag flag="item_id_overlay" dev={true}>
         <span className="idOverlay">{id}</span>
       </FeatureFlag>
+      <div className="cardWrap">
+        {showMedia ? (
+          <CardMedia
+            openUrl={openUrl}
+            image_src={thumbnail}
+            title={title}
+            id={id}
+            onOpen={onOpen}
+            openExternal={openExternal}
+          />
+        ) : null}
+        <div className="content">
+          <h2 className="title">
+            <Link href={openUrl}>
+              <a onClick={onOpen} target={openExternal ? '_blank' : undefined}>
+                <span>{title}</span>
+              </a>
+            </Link>
+          </h2>
 
-      <Link href={openUrl}>
-        <a onClick={onOpen} className="cardLink" target={openExternal ? "_blank" : undefined}>
-          {showMedia ? (
-            <CardMedia image_src={thumbnail} title={title} id={id} />
-          ) : null}
+          <cite className="details">
+            {/*eslint-disable-next-line */}
+            <a className="publisher" href={visitUrl} target="_blank" onClick={itemOriginalOpen}>
+              {publisher}
+            </a>
 
-          <div className="content">
-            <h2 className="title">
-              <span>{title}</span>
-            </h2>
+            {read_time ? <span className="readtime"> · {read_time} min</span> : null}
 
-            <cite className="details">
-              <span>{publisher}</span>
+            {syndicated ? (
+              <span className="syndicated">
+                <SyndicatedIcon />
+              </span>
+            ) : null}
+          </cite>
 
-              {read_time ? (
-                <span className="readtime">· {read_time} min</span>
-              ) : null}
-
-              {syndicated ? (
-                <span className="syndicated">
-                  <SyndicatedIcon />
-                </span>
-              ) : null}
-            </cite>
-
-            {showExcerpt ? <p className="excerpt">{excerpt}</p> : null}
-          </div>
-        </a>
-      </Link>
+          {showExcerpt ? <p className="excerpt">{excerpt}</p> : null}
+        </div>
+      </div>
       <footer className="footer">
         {showTags ? <ItemTags tags={tags} /> : null}
         {type ? (
           <ActionsMenu
             id={id}
+            isPremium={isPremium}
             isAuthenticated={isAuthenticated}
             onSave={onSave}
             onReport={onReport}
@@ -188,10 +197,13 @@ export const Card = ({
             showTags={showTags}
             tags={tags}
             saveStatus={save_status}
+            status={status}
             favorite={favorite}
             openUrl={openUrl}
             onOpen={onOpen}
             openExternal={openExternal}
+            permanentLibUrl={permanentLibUrl}
+            itemPermLibOpen={itemPermLibOpen}
           />
         ) : null}
       </footer>
@@ -206,7 +218,7 @@ Card.propTypes = {
   item: PropTypes.object,
   showExcerpt: PropTypes.bool,
   itemType: PropTypes.oneOf(['display', 'myList', 'discover', 'message', 'recit']),
-  cardShape: PropTypes.oneOf(['block', 'wide', 'list', 'detail']),
+  cardShape: PropTypes.oneOf(['block', 'grid', 'wide', 'list', 'detail']),
   actions: PropTypes.object,
   bulkEdit: PropTypes.bool,
   bulkSelected: PropTypes.bool,
