@@ -28,13 +28,6 @@ export async function getServerSideProps({ req, locale, query }) {
   // This sets up the home test. If a user is assigned to the test we send them
   // from waypoint to home.  Otherwise they get sent to my-list
   const featureState = await fetchUnleashData(user_id, sess_guid, birth)
-  Sentry.withScope((scope) => {
-    scope.setTag('ssr', 'WayPoint')
-    scope.setExtra('features', featureState)
-    scope.setLevel('info')
-    Sentry.captureMessage('Waypoint: Feature Response')
-  })
-
   const showHome = featureFlagActive({ flag: 'home.new_user', featureState })
   const destination = showHome ? homeLink : myListLink
 
