@@ -12,6 +12,7 @@ import {
   DISCOVER_ITEMS_SAVE_REQUEST,
   DISCOVER_ITEMS_UNSAVE_REQUEST
 } from 'actions'
+import { TOPIC_IDS } from 'common/constants'
 
 import { HYDRATE } from 'actions'
 
@@ -82,14 +83,11 @@ export async function fetchTopicData(topic, isCollection) {
     // 100% curated, so we need to ask for more `curated` and omit the
     // algorithmic results
 
-    const test = await getNewTopicFeed(topic, 30)
-    console.log(JSON.stringify(test))
+    // const { experimentId, id, slates } = await getNewTopicFeed(TOPIC_IDS[topic].id, 30)
 
     const response = isCollection
       ? await getTopicFeed(topic, 30, 0)
       : await getTopicFeed(topic, 5, 25)
-
-    // console.log(JSON.stringify(response))
 
     // Derive curated item data and create items by id
     const { curated = [] } = response
