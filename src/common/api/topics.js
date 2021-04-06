@@ -1,22 +1,22 @@
 import { request } from 'common/utilities/request/request'
 
 import { GraphQLClient } from 'graphql-request'
-import getTopicForWeb from 'common/api/graphql-queries/get-topic-for-web'
+import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
 import { GRAPHQL_URL, TOPIC_IDS } from 'common/constants'
 
-export async function getNewTopicFeed(topic, recommendationCount = 30) {
-  const variables = { id: TOPIC_IDS[topic].id, recommendationCount }
+export async function getNewTopicFeed(id, recommendationCount = 30) {
+  const variables = { id, recommendationCount }
 
   return request({
     api_url: GRAPHQL_URL,
     path: 'graphql',
     method: 'POST',
     body: JSON.stringify({
-      query: getTopicForWeb,
+      query: getSlateLineup,
       variables
     })
   })
-  .then((response) => response.data)
+  .then((response) => response.data?.getSlateLineup)
   .catch((error) => console.error(error))
 }
 

@@ -1,6 +1,6 @@
 /* GraphQL */
-const getTopicForWeb = `
-  query GetTopicForWeb($id: String!, $recommendationCount: Int) {
+const getSlateLineup = `
+  query GetSlateLineup($id: String!, $recommendationCount: Int) {
     getSlateLineup(slateLineupId: $id, recommendationCount: $recommendationCount) {
       experimentId
       id
@@ -51,7 +51,7 @@ const getTopicForWeb = `
   }
 `
 
-export default getTopicForWeb
+export default getSlateLineup
 
 
 /* Available parameters not used in the above request:
