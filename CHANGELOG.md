@@ -1,3 +1,10 @@
+## [1.9.19](https://github.com/Pocket/web-client/compare/v1.9.18...v1.9.19) (2021-04-06)
+
+
+### Bug Fixes
+
+* **waypoint:** remove sentry for features ([4a80dfe](https://github.com/Pocket/web-client/commit/4a80dfe697ad29a86d9c2543113458eb7a02c750))
+
 ## [1.9.18](https://github.com/Pocket/web-client/compare/v1.9.17...v1.9.18) (2021-04-05)
 
 
