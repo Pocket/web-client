@@ -94,7 +94,7 @@ function displayThumbnail({ item, curated_info }) {
  * @returns {string} The best text to display as the publisher of this item
  */
 export function displayPublisher({ item }) {
-  const urlToUse = openUrl({ item })
+  const urlToUse = item?.given_url || item?.resolved_url
   const derivedDomain = domainForUrl(urlToUse)
   const syndicatedPublisher = item?.syndicated_article?.publisher?.name
   return syndicatedPublisher || item?.domain_metadata?.name || item?.domain || derivedDomain || null
