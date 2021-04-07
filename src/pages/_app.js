@@ -22,6 +22,8 @@ import { checkClientVersion } from 'connectors/app/app.state'
 
 import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 /** Setup Files
  --------------------------------------------------------------- */
 import { sentrySettings } from 'common/setup/sentry'
@@ -53,6 +55,9 @@ function PocketWebClient({ Component, pageProps, err }) {
   const showDevTools = process.env.SHOW_DEV === 'included'
 
   const { authRequired } = pageProps
+
+  const featureState = useSelector((state) => state.features)
+  const checkVersion = featureFlagActive({ flag: 'app.version_check', featureState })
 
   useEffect(() => {
     // Fired on componentDidMount in web-app-draft
@@ -146,6 +151,7 @@ function PocketWebClient({ Component, pageProps, err }) {
     dispatch(trackPageView())
     ReactGA.pageview(path)
 
+    // if (checkVersion) dispatch(checkClientVersion())
     dispatch(checkClientVersion())
   }, [user_status, sess_guid, user_id, path, dispatch])
 

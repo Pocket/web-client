@@ -198,6 +198,7 @@ function* clientVersionValidation() {
 
   if (clientVersion !== serverClientVersion) {
     console.log(`You are using an outdated version of Pocket. Please reload the page to ensure the best experience.`) //prettier-ignore
+    console.log(`Local version: ${clientVersion}, Latest version: ${serverClientVersion}`) //prettier-ignore
   }
 }
 
