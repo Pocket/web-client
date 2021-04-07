@@ -18,6 +18,11 @@ import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 import { hydrateUserTags } from 'containers/my-list/tags-page/tags-page.state'
 
 import { appSetPreferences } from 'connectors/app/app.state'
+import { checkClientVersion } from 'connectors/app/app.state'
+
+import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
+
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 /** Setup Files
  --------------------------------------------------------------- */
@@ -51,7 +56,13 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   const { authRequired } = pageProps
 
+  const featureState = useSelector((state) => state.features)
+  const checkVersion = featureFlagActive({ flag: 'app.version_check', featureState })
+
   useEffect(() => {
+    // Fired on componentDidMount in web-app-draft
+    legacyAnalyticsTrack({ action: 'opened_app' })
+
     // Log out version for quick scan.  Can also help support get a read on
     // what version a user is on when reporting an error
     const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
@@ -139,6 +150,8 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     dispatch(trackPageView())
     ReactGA.pageview(path)
+
+    if (checkVersion) dispatch(checkClientVersion())
   }, [user_status, sess_guid, user_id, path, dispatch])
 
   useEffect(() => {

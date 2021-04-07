@@ -1,3 +1,53 @@
+## [1.9.20](https://github.com/Pocket/web-client/compare/v1.9.19...v1.9.20) (2021-04-07)
+
+
+### Bug Fixes
+
+* **app:** add check for local version compared to server version ([53dac0a](https://github.com/Pocket/web-client/commit/53dac0a10914a783e6ed6fe7230e69b237c9c848))
+* **app:** wrap call to version check in a feature flag ([a3de7a4](https://github.com/Pocket/web-client/commit/a3de7a4527ec5ada70047690595f5653dd6b58cf))
+* **app:** wrap call to version check in a feature flag ([860ea89](https://github.com/Pocket/web-client/commit/860ea89326086df77da1fb4c8270565b37cfbff9))
+* **constants:** remove unneeded constant ([476d62b](https://github.com/Pocket/web-client/commit/476d62be89b0dcaaabaec3b796d6dcead7949589))
+
+## [1.9.19](https://github.com/Pocket/web-client/compare/v1.9.18...v1.9.19) (2021-04-06)
+
+
+### Bug Fixes
+
+* **waypoint:** remove sentry for features ([4a80dfe](https://github.com/Pocket/web-client/commit/4a80dfe697ad29a86d9c2543113458eb7a02c750))
+
+## [1.9.18](https://github.com/Pocket/web-client/compare/v1.9.17...v1.9.18) (2021-04-05)
+
+
+### Bug Fixes
+
+* **unleash:** test for control with regex ([7b50a28](https://github.com/Pocket/web-client/commit/7b50a281a0c208a8b6b35f3eef72b345cfb60ca2))
+* **unleash:** update tests for active ([2fd6d60](https://github.com/Pocket/web-client/commit/2fd6d600daa9670295174f67515d8ce2d46b9b8c))
+
+## [1.9.17](https://github.com/Pocket/web-client/compare/v1.9.16...v1.9.17) (2021-04-05)
+
+
+### Bug Fixes
+
+* **unleash:**  allow array of flags / add utility ([0784ca5](https://github.com/Pocket/web-client/commit/0784ca5181f2d1bd1f96183b633c279fff34631a))
+* **unleash:** pass in birth for activation ([0b7c68f](https://github.com/Pocket/web-client/commit/0b7c68f2e628747f0135f025f1322087eaaf401f))
+
+## [1.9.16](https://github.com/Pocket/web-client/compare/v1.9.15...v1.9.16) (2021-04-02)
+
+
+### Bug Fixes
+
+* **items:** adding a status filter to no longer store deleted items ([dc6c3f2](https://github.com/Pocket/web-client/commit/dc6c3f230d7cc45eba46d4652ce01993c6838953))
+* **items:** adding a status filter to no longer store deleted items ([74143d6](https://github.com/Pocket/web-client/commit/74143d6cae4bb8eb5d383164653db881ba5f66f6))
+* **items:** adding a status filter to no longer store deleted items ([4e39c38](https://github.com/Pocket/web-client/commit/4e39c381915addcadc59874362619305c9fe26c5))
+* **items:** removing unneeded log ([046fa0f](https://github.com/Pocket/web-client/commit/046fa0ff3f9c80e29c3dd0dfe53b434861c7b0f0))
+
+## [1.9.15](https://github.com/Pocket/web-client/compare/v1.9.14...v1.9.15) (2021-03-30)
+
+
+### Bug Fixes
+
+* **analytics:** add legacy opened app event ([294712e](https://github.com/Pocket/web-client/commit/294712ed79e183a3b4b5872d4d3ef235caca3935))
+
 ## [1.9.14](https://github.com/Pocket/web-client/compare/v1.9.13...v1.9.14) (2021-03-30)
 
 

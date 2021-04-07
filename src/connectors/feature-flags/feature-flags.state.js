@@ -22,7 +22,7 @@ export const featureReducers = (state = initialState, action) => {
     case FEATURES_TOGGLE: {
       const { flag } = action
       const currentFlagState = state[flag]?.assigned
-      return { ...state, [flag]: { assigned: !currentFlagState } }
+      return { ...state, [flag]: { active: !currentFlagState } }
     }
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
@@ -48,8 +48,8 @@ export const featureSagas = []
 ---------------------------------------------------------------- */
 export async function fetchUnleashData(userId, sessionId, birth) {
   try {
-    const response = await getUnleash(sessionId, userId, 'web-discover')
-    const unleashData = filterUnleashAssignments(response, birth)
+    const response = await getUnleash(sessionId, userId, birth, 'web-client')
+    const unleashData = filterUnleashAssignments(response)
     return unleashData
   } catch (error) {
     console.log(error)
@@ -58,24 +58,26 @@ export async function fetchUnleashData(userId, sessionId, birth) {
 
 /** UTILITIES
 ---------------------------------------------------------------- */
-async function filterUnleashAssignments(response, birth) {
+async function filterUnleashAssignments(response) {
   if (!response?.assignments) return {}
   // Regex to only get flags for the web client
   const filterRegEx = /(?:temp|perm)\.web\.client\.(.+)/i
   const assignments = response.assignments
     .filter((flag) => filterRegEx.test(flag.name))
     .map((flag) => {
-      const { name, assigned, payload: passedPayload, ...rest } = flag
+      const { name, assigned, payload: passedPayload, variant, ...rest } = flag
 
       const matches = name?.match(filterRegEx)
       const payload = parsePayload(passedPayload)
-      const eligible = checkAssignment(assigned, payload, birth)
+      const active = checkActive(assigned, variant)
 
       return {
-        ...payload,
         ...rest,
-        assigned: eligible,
+        assigned,
+        active,
+        variant,
         test: name,
+        payload,
         name: matches[1] || flag?.name //override the name
       }
     })
@@ -100,29 +102,10 @@ function parsePayload(payload) {
 /**
  * Check assignment based on payload
  */
-export function checkAssignment(assigned, payload, birth) {
+export function checkActive(assigned, variant) {
+  const variantRegEx = /control/i
   if (!assigned) return false
-
-  const { start, accountAge, accountAgeUnit } = payload
-
-  // If new user is required for the test
-  if (accountAge === 0) return isNewUser({ start, birth })
-
-  // If account must be a certain age after start
-  if (accountAge > 0 && start) return isOldEnough({ start, birth, accountAge, accountAgeUnit })
-
-  // If account must be a certain age
-  if (accountAge > 0) return isOldEnough({ birth, accountAge, accountAgeUnit })
-
-  // Return the assignment with no eligibility check
-  return assigned
-}
-
-export function isOldEnough({ start, birth, accountAge, accountAgeUnit = 'day' }) {
-  const inception = start ? start : undefined
-  return dayjs(birth).add(accountAge, accountAgeUnit).isBefore(dayjs(inception))
-}
-
-export function isNewUser({ start, birth }) {
-  return dayjs(start).isBefore(dayjs(birth))
+  if (!variant || variant === 'disabled') return assigned // This is a straight toggle
+  if (variantRegEx.test(variant)) return false
+  return true
 }
