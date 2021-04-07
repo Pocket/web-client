@@ -151,8 +151,7 @@ function PocketWebClient({ Component, pageProps, err }) {
     dispatch(trackPageView())
     ReactGA.pageview(path)
 
-    // if (checkVersion) dispatch(checkClientVersion())
-    dispatch(checkClientVersion())
+    if (checkVersion) dispatch(checkClientVersion())
   }, [user_status, sess_guid, user_id, path, dispatch])
 
   useEffect(() => {
