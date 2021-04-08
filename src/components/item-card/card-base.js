@@ -29,7 +29,7 @@ export const cardStyles = css`
     }
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        .media {
+        .media img {
           filter: brightness(0.95) saturate(0.8);
           transition: filter 300ms ease-in-out;
         }
@@ -48,17 +48,40 @@ export const cardStyles = css`
   }
 
   .media {
-    overflow: hidden;
-    width: 100%;
-    height: 0;
-    padding-top: 66.66%;
-    background-repeat: 'no-repeat';
-    background-position: center;
-    background-size: cover;
-    transition-property: opacity;
-    transition-duration: 0.2s;
-    transition-timing-function: ease;
+    position: relative;
     border-radius: var(--size025);
+    overflow: hidden;
+    img {
+      aspect-ratio: 3 / 2;
+      width: 100%;
+      height: auto;
+      transition-property: opacity;
+      transition-duration: 0.2s;
+      transition-timing-function: ease;
+      position: relative;
+      &:before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, var(--fallbackBackground), var(--fallbackBackground)),
+          linear-gradient(to right, var(--color-canvas), var(--color-canvas));
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      &:after {
+        content: var(--fallbackLetter);
+        color: var(--fallbackColor);
+        font-size: 18rem;
+        font-weight: 500;
+        font-family: var(--fontSerifAlt);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: -4rem;
+        left: -1rem;
+      }
+    }
   }
 
   .content {

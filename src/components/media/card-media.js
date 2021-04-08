@@ -1,5 +1,3 @@
-import classNames from 'classnames'
-import { useFallback } from './media-fallback'
 import { getImageCacheUrl } from 'common/utilities'
 
 /**
@@ -10,7 +8,7 @@ import { getImageCacheUrl } from 'common/utilities'
  * the container.  This module simple represents the graceful fallback as opposed
  * to the layout.
  */
-export const CardMedia = function ({ image_src, title, id, width }) {
+export const CardMedia = function ({ image_src, title, id, setNoImage = () => {} }) {
   /**
    * Fallback images:
    * useFallback checks for imageLoad and if it fails, provides a class
@@ -35,28 +33,74 @@ export const CardMedia = function ({ image_src, title, id, width }) {
    *   0%	   = 00
    */
 
-  const cdn_image_src = image_src ? getImageCacheUrl(image_src) : false
-  const { fallbackClass, letter, color } = useFallback(cdn_image_src, title, id)
-  const className = classNames('media', fallbackClass)
+  const hasImage = !!image_src
 
+  const letter = getFirstLetter(title)
+  const color = getColorFromId(id)
   const mediaFallbackDetails = {
     '--fallbackBackground': `${color}80`,
     '--fallbackColor': `${color}`,
     '--fallbackLetter': `'${letter}'`
   }
 
+  const imageFailure = () => setNoImage()
+
   /**
    * We are setting these explicitly to avoid the image getting blocked by
    * ad/tracking blockers. They flag images set by JS as block-worthy
    */
-  return cdn_image_src ? (
-    <div
-      className={className}
-      style={{
-        ...mediaFallbackDetails,
-        backgroundImage: `url('${cdn_image_src}')`
-      }}></div>
+  return hasImage ? (
+    <div className="media">
+      <img
+        style={mediaFallbackDetails}
+        onError={imageFailure}
+        alt=""
+        src={getImageCacheUrl(image_src, { width: 300, height: 200 })}
+        srcSet={`
+          ${getImageCacheUrl(image_src, { width: 600, height: 400 })} 2x, 
+          ${getImageCacheUrl(image_src, { width: 900, height: 600 })} 3x
+        `}
+      />
+    </div>
   ) : (
-    <div className={className} style={mediaFallbackDetails} />
+    <div className="media">
+      <div className="no-image" data-letter={letter} data-color={color} />
+    </div>
   )
+}
+
+/**
+ * Avoid non alphanmericals
+ * @param {string} word
+ */
+function getFirstLetter(word) {
+  const firstLetterRegEx = /^(\W?)(\w)?/gu
+  const firstLetter = firstLetterRegEx.exec(word)[2]
+  return firstLetter ? firstLetter.toUpperCase() : false
+}
+
+/**
+ * Get a consistent color based on the item_id This should allow us
+ * to be consistent across platforms (in theory)
+ * @param {string} id
+ */
+function getColorFromId(id) {
+  const _colorCoral = '#EF4056'
+  const _colorTeal = '#1CB0A8'
+  const _colorAmber = '#FCB643'
+  const _colorMint = '#00CB77'
+
+  const colorArray = [
+    _colorCoral,
+    _colorTeal,
+    _colorAmber,
+    _colorMint,
+    _colorAmber,
+    _colorMint,
+    _colorCoral,
+    _colorTeal
+  ]
+  const idInt = parseInt(id, 10) // Item Id may not be an int
+  const colorIndex = idInt % colorArray.length
+  return colorArray[colorIndex || 0]
 }
