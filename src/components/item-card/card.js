@@ -1,17 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css, cx } from 'linaria'
+import { cx } from 'linaria'
 import { SyndicatedIcon } from '@pocket/web-ui'
 
-import { urlWithPocketRedirect } from 'common/utilities'
 import { CardMedia } from 'components/media/card-media'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { ItemTags } from 'components/item-tags/item-tags'
-import { ActionsMyList } from 'connectors/item-card/actions/my-list'
-import { ActionsDiscover } from 'connectors/item-card/actions/discover'
-import { ActionsBulkEdit } from 'connectors/item-card/actions/bulk-edit'
-import { ActionsMessage } from 'connectors/item-card/actions/message'
-import { ActionsRecit } from 'connectors/item-card/actions/recit'
 import { cardStyles } from './card-base'
 import { cardBlock } from './card-base'
 import { cardWide } from './card-base'
@@ -43,31 +37,24 @@ export const Card = ({
   bulkSelected,
   position,
   className,
-  isAuthenticated,
   impressionAction,
-  engagementAction,
-  saveAction,
-  reportAction,
-  unSaveAction,
-  openAction,
-  itemBulkSelect,
-  itemBulkDeSelect
+  itemOriginalOpen,
+  selectBulk,
+  onOpen,
+  openUrl,
+  ActionMenu
 }) => {
   const {
     item_id: id,
-    status,
     tags,
-    favorite,
     title,
     thumbnail,
     publisher,
     excerpt,
     read_time,
-    open_url,
     openExternal,
     syndicated,
-    save_url,
-    save_status
+    original_url
   } = item
 
   // Fire item impression
@@ -79,27 +66,13 @@ export const Card = ({
 
   if (!item) return null
 
-  const onSave = () => {
-    if (isAuthenticated) {
-      if (save_status === 'saved') engagementAction(item, position)
-      if (save_status !== 'saved') saveAction(item, id, save_url, position)
-      return
-    }
-
-    // Not authenticated so just tracking the click
-    engagementAction(item, position)
-  }
-
-  const onReport = () => reportAction(item, position)
-  const onOpen = () => openAction(item, position)
-
   /**
    * Layout is defined here.
    * ----------------------------------------------------------------
    */
   const card = cx(
     cardStyles,
-    cardShape === 'block' && `${cardBlock} block`,
+    cardShape === 'block' || (cardShape === 'grid' && `${cardBlock} block`),
     cardShape === 'wide' && `${cardWide} wide`,
     cardShape === 'list' && `${cardList} list`,
     cardShape === 'detail' && `${cardDetail} detail`,
@@ -110,26 +83,6 @@ export const Card = ({
     bulkSelected && 'selected',
     className
   )
-
-  const selectBulk = (event) => {
-    if (!bulkEdit) return
-
-    return bulkSelected
-      ? itemBulkDeSelect(event.shiftKey)
-      : itemBulkSelect(event.shiftKey)
-  }
-
-  const openUrl = openExternal ? urlWithPocketRedirect(open_url) : `/read/${id}`
-
-  const actionsTypes = {
-    myList: ActionsMyList,
-    discover: ActionsDiscover,
-    message: ActionsMessage,
-    recit: ActionsRecit
-  }
-
-  const type = itemType === 'display' ? false : itemType
-  const ActionsMenu = bulkEdit ? ActionsBulkEdit : actionsTypes[type]
 
   const showTags = cardShape === 'detail'
 
@@ -148,10 +101,10 @@ export const Card = ({
       <div className="cardWrap">
         {showMedia ? (
           <CardMedia
-            openUrl={openUrl}
             image_src={thumbnail}
             title={title}
             id={id}
+            openUrl={openUrl}
             onOpen={onOpen}
             openExternal={openExternal}
           />
@@ -160,19 +113,17 @@ export const Card = ({
           <h2 className="title">
             <Link href={openUrl}>
               <a onClick={onOpen} target={openExternal ? '_blank' : undefined}>
-                <span>{title}</span>
+                {title}
               </a>
             </Link>
           </h2>
 
           <cite className="details">
             {/*eslint-disable-next-line */}
-            <a className="publisher" href={visitUrl} target="_blank" onClick={itemOriginalOpen}>
+            <a className="publisher" href={original_url} target="_blank" onClick={itemOriginalOpen}>
               {publisher}
             </a>
-
             {read_time ? <span className="readtime"> · {read_time} min</span> : null}
-
             {syndicated ? (
               <span className="syndicated">
                 <SyndicatedIcon />
@@ -185,27 +136,7 @@ export const Card = ({
       </div>
       <footer className="footer">
         {showTags ? <ItemTags tags={tags} /> : null}
-        {type ? (
-          <ActionsMenu
-            id={id}
-            isPremium={isPremium}
-            isAuthenticated={isAuthenticated}
-            onSave={onSave}
-            onReport={onReport}
-            selected={bulkSelected}
-            position={position}
-            showTags={showTags}
-            tags={tags}
-            saveStatus={save_status}
-            status={status}
-            favorite={favorite}
-            openUrl={openUrl}
-            onOpen={onOpen}
-            openExternal={openExternal}
-            permanentLibUrl={permanentLibUrl}
-            itemPermLibOpen={itemPermLibOpen}
-          />
-        ) : null}
+        {ActionMenu ? <ActionMenu id={id} position={position} /> : null}
       </footer>
     </article>
   )

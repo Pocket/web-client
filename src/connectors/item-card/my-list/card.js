@@ -1,17 +1,6 @@
 import { memo } from 'react'
-import { Card } from 'components/item-card/my-list/card'
+import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
-
-import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
-import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
-
-import { itemsFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
-import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
-
-import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
-import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
-import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
-
 import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 
@@ -20,40 +9,37 @@ import { trackItemAction } from 'connectors/snowplow/snowplow.state'
 import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
 
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
-
-import copy from 'clipboard-copy'
-import { COPY_ITEM_URL } from 'actions'
+import { ActionsMyList } from 'connectors/item-card/my-list/card-actions'
 
 /**
  * Article Card
  * Creates a connected `Card` with the appropriate data and actions
  * @param {object} {id, position} item_id for data and position for analytics
  */
-export function ItemCard({ id, position, fluidHeight, type }) {
+export function ItemCard({ id, position, type }) {
   const dispatch = useDispatch()
-
   const appMode = useSelector((state) => state?.app?.mode)
   const bulkEdit = appMode === 'bulk'
 
-  const isPremium = useSelector((state) => state.user.premium_status === '1')
-
   // Get data from state
+  const isPremium = useSelector((state) => state.user.premium_status === '1')
   const item = useSelector((state) => state.myListItemsById[id])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
-
   const bulkList = useSelector((state) => state.bulkEdit.selected)
   const bulkCurrent = useSelector((state) => state.bulkEdit.currentId)
-
   const bulkIsCurrent = bulkCurrent === id
   const bulkSelected = bulkList?.map((item) => item.id).includes(id)
-
   const shortcutId = useSelector((state) => state.shortcuts.currentId)
   const shortcutSelected = shortcutId === id
 
-  /**
-   * ITEM TRACKING
-   * ----------------------------------------------------------------
-   */
+  const { openExternal, original_url } = item
+  const openUrl = openExternal ? original_url : `/read/${id}`
+
+  const ActionMenu = bulkEdit ? <div /> : ActionsMyList
+
+  /** ITEM TRACKING
+  --------------------------------------------------------------- */
+
   const itemImpression = () => {
     if (!impressionFired) dispatch(trackItemImpression(position, item, 'my-list.card'))
   }
@@ -66,13 +52,18 @@ export function ItemCard({ id, position, fluidHeight, type }) {
     dispatch(trackItemOpen(position, item, 'my-list.card.view-original'))
   }
 
-  const itemPermLibOpen = () => {
-    dispatch(trackItemOpen(position, item, 'my-list.card.permanent-library'))
+  /** ITEM BULK ACTIONS
+  --------------------------------------------------------------- */
+  const itemBulkSelect = (shift) => dispatch(itemsBulkSelectAction(id, shift))
+  const itemBulkDeSelect = (shift) => dispatch(itemsBulkDeSelectAction(id, shift))
+  const selectBulk = (event) => {
+    if (!bulkEdit) return
+    return bulkSelected ? itemBulkDeSelect(event.shiftKey) : itemBulkSelect(event.shiftKey)
   }
 
   /**
-   * ITEM ACTIONS
-   * ----------------------------------------------------------------
+  /** ITEM SELECT ACTIONS
+  --------------------------------------------------------------- */
    */
   const itemShare = () => {
     dispatch(trackItemAction(position, item, 'my-list.share'))
@@ -117,35 +108,26 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   }
 
   const shortcutSelect = () => dispatch(selectShortcutItem(id, position))
-
+  console.log(position, id)
   return item ? (
     <Card
       item={item}
       position={position}
-      fluidHeight={fluidHeight}
-      type={type}
+      itemType="myList"
+      cardShape={type}
+      showExcerpt={true}
       bulkEdit={bulkEdit}
       bulkSelected={bulkSelected}
       bulkIsCurrent={bulkIsCurrent}
       shortcutSelected={shortcutSelected}
       shortcutSelect={shortcutSelect}
       onOpen={onOpen}
-      actions={{
-        itemShare,
-        itemDelete,
-        itemArchive,
-        itemUnArchive,
-        itemFavorite,
-        itemUnFavorite,
-        itemTag,
-        itemBulkSelect,
-        itemBulkDeSelect,
-        itemImpression,
-        itemCopy,
-        itemOriginalOpen,
-        itemPermLibOpen
-      }}
+      openUrl={openUrl}
+      selectBulk={selectBulk}
+      itemImpression={itemImpression}
+      itemOriginalOpen={itemOriginalOpen}
       isPremium={isPremium}
+      ActionMenu={ActionMenu}
     />
   ) : null
 }
