@@ -2,11 +2,14 @@ version: 2.1
 
 # Orbs: Pre-configured bundled functionality
 orbs:
-  aws-cli: circleci/aws-cli@0.1.13
-  aws-ecr: circleci/aws-ecr@6.1.0
+  aws-cli: circleci/aws-cli@1.2.1
+  aws-ecr: circleci/aws-ecr@6.10.0
   assume-role: airswap/assume-role@0.2.0
-  cypress: cypress-io/cypress@1
+  # cypress: cypress-io/cypress@1
   slack: circleci/slack@3.4.0
+  aws-ecs: circleci/aws-ecs@2.0.0
+  pocket: pocket/circleci-orbs@1.0.0
+  queue: eddiewebb/queue@1.5.0
 
 # Commands: Setting up some tasks to avoid a lot of boilerplate
 commands:
