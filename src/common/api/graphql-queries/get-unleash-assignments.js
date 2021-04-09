@@ -1,11 +1,14 @@
 /* GraphQL */
 //
 const getUnleashAssignments = `
-  query GetUnleashAssignments($sessionId: String!, $userId: String, $appName: String) {
+  query GetUnleashAssignments($sessionId: String!, $userId: String, $accountCreatedAt: String, $appName: String) {
     getUnleashAssignments(context: {
       sessionId: $sessionId
       userId: $userId,
-      appName: $appName
+      appName: $appName,
+      properties: {
+        accountCreatedAt: $accountCreatedAt
+      }
     }){
       assignments {
         name
