@@ -28,7 +28,7 @@ export async function getServerSideProps({ req, locale, query }) {
   // This sets up the home test. If a user is assigned to the test we send them
   // from waypoint to home.  Otherwise they get sent to my-list
   const featureState = await fetchUnleashData(user_id, sess_guid, birth)
-  const showHome = featureFlagActive({ flag: 'home.new_user', featureState })
+  const showHome = featureFlagActive({ flag: 'home.retention', featureState })
   const destination = showHome ? homeLink : myListLink
 
   return {

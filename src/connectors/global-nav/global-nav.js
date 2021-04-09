@@ -101,7 +101,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   })
 
   const featureState = useSelector((state) => state.features)
-  const showHome = featureFlagActive({ flag: 'home.new_user', featureState })
+  const showHome = featureFlagActive({ flag: 'home.retention', featureState })
 
   const homeLinks = [
     {
