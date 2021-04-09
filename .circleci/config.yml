@@ -584,9 +584,7 @@ workflows:
 
        # Try building the ECS docker image on each branch
        # !! This pushes to a dev account
-       # !! Get rid of this To spite Kelvin
        # !! Change this to not_main instead of getting rid of it
-       # !! secretly get rid of it when kelvin isn't watching me
       - docker_build:
           <<: *not_dev_main
           context: pocket
