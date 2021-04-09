@@ -26,7 +26,7 @@ export function ActionsMyList({ id, position }) {
   const item = useSelector((state) => state.myListItemsById[id])
   const isPremium = useSelector((state) => state.user.premium_status === '1')
 
-  const { status, favorite } = item
+  const { permanent_url, status, favorite } = item
 
   /** ITEM MENU ITEMS
   --------------------------------------------------------------- */
@@ -106,6 +106,7 @@ export function ActionsMyList({ id, position }) {
           label: 'Permanent Copy',
           isPremium,
           onlyPremium: true,
+          href: permanent_url,
           icon: <PermanentCopyIcon />,
           onClick: itemPermLibOpen
         },
