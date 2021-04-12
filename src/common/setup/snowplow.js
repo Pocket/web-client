@@ -4,7 +4,7 @@ import { SNOWPLOW_HEARTBEAT_INTERVAL } from 'common/constants'
 import { SNOWPLOW_CONFIG } from 'common/constants'
 import { createUserEntity, apiUserEntity } from 'connectors/snowplow/entities'
 import { injectInlineScript } from 'common/utilities/inject-script'
-import { SNOWPLOW_SCRIPT_URL } from 'common/constants'
+import { SNOWPLOW_SCRIPT } from 'common/constants'
 
 /**
  * Load the Snowplow script onto the page. Should be called within the document <head>.
@@ -16,7 +16,7 @@ function loadSnowplow(snowplowInstanceName) {
   injectInlineScript(`;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
     p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
     };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
-    n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","${SNOWPLOW_SCRIPT_URL}","${snowplowInstanceName}"));`)
+    n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","${SNOWPLOW_SCRIPT}","${snowplowInstanceName}"));`)
 }
 
 export function initializeSnowplow(user_id, sess_guid) {
