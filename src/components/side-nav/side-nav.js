@@ -142,7 +142,8 @@ export function SideNav({
   isDisabled,
   showHome,
   showSharedLists,
-  flagsReady
+  flagsReady,
+  trackMenuClick
 }) {
   const { t } = useTranslation()
 
@@ -164,25 +165,27 @@ export function SideNav({
 
   const wrapperClass = cx(sideNavWrapper, 'side-nav', isDisabled && 'disabled')
 
+  const clickEvent = (e) => trackMenuClick(e.target.textContent)
+
   return flagsReady ? (
     <div className={wrapperClass}>
       <nav role="navigation">
         {showHome ? (
           <>
             <Link href="/home">
-              <button className={subActive('home')} ref={ref}>
+              <button className={subActive('home')} onClick={clickEvent} ref={ref}>
                 <HomeIcon className="side-nav-icon" />{' '}
                 <Trans i18nKey="nav:home">Home</Trans>
               </button>
             </Link>
             <Link href="/my-list">
-              <button className={subActive('unread')}>
+              <button className={subActive('unread')} onClick={clickEvent}>
                 <ListViewIcon className="side-nav-icon" />{' '}
                 <Trans i18nKey="nav:my-list">My List</Trans>
               </button>
             </Link>
             <a href="https://getpocket.com/explore?src=sidebar">
-              <button className={subActive('discover')}>
+              <button className={subActive('discover')} onClick={clickEvent}>
                 <DiscoverIcon className="side-nav-icon" />{' '}
                 <Trans i18nKey="nav:discover">Discover</Trans>
               </button>
@@ -190,7 +193,7 @@ export function SideNav({
           </>
         ) : (
           <Link href="/my-list">
-            <button className={subActive('unread')} ref={ref}>
+            <button className={subActive('unread')} onClick={clickEvent} ref={ref}>
               <HomeIcon className="side-nav-icon" />{' '}
               <Trans i18nKey="nav:my-list">My List</Trans>
             </button>
@@ -198,7 +201,7 @@ export function SideNav({
         )}
 
         <Link href="/my-list/archive">
-          <button className={subActive('archive')}>
+          <button className={subActive('archive')} onClick={clickEvent}>
             <ArchiveIcon className="side-nav-icon" />{' '}
             <Trans i18nKey="nav:archive">Archive</Trans>
           </button>
@@ -206,7 +209,7 @@ export function SideNav({
 
         {showSharedLists ? (
           <Link href="/shared-lists">
-            <button className={`${subActive('shared-lists')} wrap`}>
+            <button className={`${subActive('shared-lists')} wrap`} onClick={clickEvent}>
               <ReadingIcon className="side-nav-icon" />{' '}
               <Trans i18nKey="nav:shared-list">Share Your Lists</Trans>
             </button>
@@ -218,35 +221,35 @@ export function SideNav({
         </div>
 
         <Link href="/my-list/favorites">
-          <button className={subActive('favorites')}>
+          <button className={subActive('favorites')} onClick={clickEvent}>
             <FavoriteIcon className="side-nav-icon" />{' '}
             <Trans i18nKey="nav:favorites">Favorites</Trans>
           </button>
         </Link>
 
         <Link href="/my-list/highlights">
-          <button className={subActive('highlights')}>
+          <button className={subActive('highlights')} onClick={clickEvent}>
             <HighlightIcon className="side-nav-icon" />{' '}
             <Trans i18nKey="nav:highlights">Highlights</Trans>
           </button>
         </Link>
 
         <Link href="/my-list/articles">
-          <button className={subActive('articles')}>
+          <button className={subActive('articles')} onClick={clickEvent}>
             <ArticleIcon className="side-nav-icon" />{' '}
             <Trans i18nKey="nav:articles">Articles</Trans>
           </button>
         </Link>
 
         <Link href="/my-list/videos">
-          <button className={subActive('videos')}>
+          <button className={subActive('videos')} onClick={clickEvent}>
             <VideoIcon className="side-nav-icon" />{' '}
             <Trans i18nKey="nav:videos">Videos</Trans>
           </button>
         </Link>
         <div className={sideNavHeader}>Tags</div>
         <Link href="/my-list/tags">
-          <button className={subActive('tag')}>
+          <button className={subActive('tag')} onClick={clickEvent}>
             <TagIcon className="side-nav-icon" />{' '}
             <Trans i18nKey="nav:all-tags">All Tags</Trans>
           </button>
@@ -255,7 +258,7 @@ export function SideNav({
           ? pinnedTags.map((tag) => {
               return (
                 <Link href={`/my-list/tags/${tag}`} key={tag}>
-                  <button className={subActive(tag, true)}>{tag}</button>
+                  <button className={subActive(tag, true)} onClick={clickEvent}>{tag}</button>
                 </Link>
               )
             })

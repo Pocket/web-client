@@ -6,6 +6,7 @@ import { ENGAGEMENT_TYPE_SAVE } from 'connectors/snowplow/events'
 import { IMPRESSION_COMPONENT_UI } from 'connectors/snowplow/events'
 import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
 import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
+import { UI_COMPONENT_MENU } from 'connectors/snowplow/entities'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -77,4 +78,12 @@ export const sendEngagement = (identifier) => (trackEngagement(
   UI_COMPONENT_BUTTON,
   0, // position in list (zero since it's not in list)
   identifier
+))
+
+export const sendMenuEngagement = (label) => (trackEngagement(
+  ENGAGEMENT_TYPE_GENERAL,
+  UI_COMPONENT_MENU,
+  0, // position in list (zero since it's not in list)
+  'global-nav',
+  label
 ))
