@@ -15,7 +15,7 @@ export function deriveDiscoverItems(response) {
   return response.map((feedItem) => {
     return {
       resolved_id: feedItem.item?.resolved_id,
-      item_id: feedItem.item?.item_id || feedItem.item?.resolved_id,
+      item_id: feedItem.item?.item_id,
       title: displayTitle(feedItem),
       thumbnail: displayThumbnail(feedItem),
       publisher: displayPublisher(feedItem),
@@ -59,6 +59,7 @@ function displayThumbnail({ item, curated_info }) {
   const correct_image =
     curated_info?.image_src ||
     item?.top_image_url ||
+    item?.image?.src ||
     item?.images?.[Object.keys(item.images)[0]]?.src ||
     false
   return correct_image ? correct_image : false
@@ -72,13 +73,7 @@ function displayPublisher({ item }) {
   const urlToUse = saveUrl({ item })
   const derivedDomain = domainForUrl(urlToUse)
   const syndicatedPublisher = item?.syndicated_article?.publisher?.name
-  return (
-    syndicatedPublisher ||
-    item?.domain_metadata?.name ||
-    item?.domain ||
-    derivedDomain ||
-    null
-  )
+  return syndicatedPublisher || item?.domain_metadata?.name || item?.domain || derivedDomain || null
 }
 
 /** EXCERPT
@@ -94,13 +89,7 @@ function displayExcerpt({ item, curated_info }) {
  * @returns {string} The url that should be saved or opened
  */
 function openUrl({ item, redirect_url }) {
-  return (
-    devLink(item) ||
-    redirect_url ||
-    item?.given_url ||
-    item?.resolved_url ||
-    null
-  )
+  return devLink(item) || redirect_url || item?.given_url || item?.resolved_url || null
 }
 
 /** SAVE URL

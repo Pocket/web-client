@@ -71,6 +71,7 @@ function displayTitle({ item, curated_info }) {
     item?.resolved_title ||
     item?.given_title ||
     item?.display_url ||
+    displayPublisher({ item }) ||
     null
   )
 }
@@ -84,6 +85,7 @@ function displayThumbnail({ item, curated_info }) {
   const correct_image =
     curated_info?.image_src ||
     item?.top_image_url ||
+    item?.image?.src ||
     item?.images?.[Object.keys(item.images)[0]]?.src ||
     false
   return correct_image ? correct_image : false
