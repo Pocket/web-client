@@ -34,7 +34,6 @@ export const CardMedia = function ({ image_src, title, id, setNoImage = () => {}
    */
 
   const hasImage = !!image_src
-
   const letter = getFirstLetter(title)
   const color = getColorFromId(id)
   const mediaFallbackDetails = {
@@ -64,7 +63,7 @@ export const CardMedia = function ({ image_src, title, id, setNoImage = () => {}
     </div>
   ) : (
     <div className="media">
-      <div className="no-image" data-letter={letter} data-color={color} />
+      <div className="no-image" style={mediaFallbackDetails} />
     </div>
   )
 }
