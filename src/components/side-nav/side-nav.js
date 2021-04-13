@@ -2,12 +2,7 @@ import Link from 'next/link'
 import { Trans, useTranslation } from 'next-i18next'
 
 import { HomeIcon } from '@pocket/web-ui'
-import { FavoriteIcon } from '@pocket/web-ui'
-import { HighlightIcon } from '@pocket/web-ui'
-import { TagIcon } from '@pocket/web-ui'
-import { ArticleIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
-import { VideoIcon } from '@pocket/web-ui'
 import { ChevronUpIcon } from '@pocket/web-ui'
 import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
@@ -15,6 +10,9 @@ import { ReadingIcon } from '@pocket/web-ui'
 import { css, cx } from 'linaria'
 
 import { useInView } from 'react-intersection-observer'
+
+import { FiltersSideNav } from './filters'
+import { TopicsSideNav } from './topics'
 
 export const sideNavWrapper = css`
   position: relative;
@@ -139,9 +137,11 @@ export function SideNav({
   subset,
   tag,
   pinnedTags,
+  pinnedTopics,
   isDisabled,
   showHome,
   showSharedLists,
+  showLab,
   flagsReady,
   trackMenuClick
 }) {
@@ -192,20 +192,24 @@ export function SideNav({
             </a>
           </>
         ) : (
-          <Link href="/my-list">
-            <button className={subActive('unread')} onClick={clickEvent} ref={ref}>
-              <HomeIcon className="side-nav-icon" />{' '}
-              <Trans i18nKey="nav:my-list">My List</Trans>
-            </button>
-          </Link>
+          <>
+            <Link href="/my-list">
+              <button className={subActive('unread')} onClick={clickEvent} ref={ref}>
+                <HomeIcon className="side-nav-icon" />{' '}
+                <Trans i18nKey="nav:my-list">My List</Trans>
+              </button>
+            </Link>
+          </>
         )}
 
-        <Link href="/my-list/archive">
-          <button className={subActive('archive')} onClick={clickEvent}>
-            <ArchiveIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:archive">Archive</Trans>
-          </button>
-        </Link>
+        {!showLab ? (
+          <Link href="/my-list/archive">
+            <button className={subActive('archive')} onClick={clickEvent}>
+              <ArchiveIcon className="side-nav-icon" />{' '}
+              <Trans i18nKey="nav:archive">Archive</Trans>
+            </button>
+          </Link>
+        ) : null}
 
         {showSharedLists ? (
           <Link href="/shared-lists">
@@ -216,53 +220,19 @@ export function SideNav({
           </Link>
         ) : null}
 
-        <div className={sideNavHeader}>
-          <Trans i18nKey="nav:filters">Filters</Trans>
-        </div>
-
-        <Link href="/my-list/favorites">
-          <button className={subActive('favorites')} onClick={clickEvent}>
-            <FavoriteIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:favorites">Favorites</Trans>
-          </button>
-        </Link>
-
-        <Link href="/my-list/highlights">
-          <button className={subActive('highlights')} onClick={clickEvent}>
-            <HighlightIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:highlights">Highlights</Trans>
-          </button>
-        </Link>
-
-        <Link href="/my-list/articles">
-          <button className={subActive('articles')} onClick={clickEvent}>
-            <ArticleIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:articles">Articles</Trans>
-          </button>
-        </Link>
-
-        <Link href="/my-list/videos">
-          <button className={subActive('videos')} onClick={clickEvent}>
-            <VideoIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:videos">Videos</Trans>
-          </button>
-        </Link>
-        <div className={sideNavHeader}>Tags</div>
-        <Link href="/my-list/tags">
-          <button className={subActive('tag')} onClick={clickEvent}>
-            <TagIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:all-tags">All Tags</Trans>
-          </button>
-        </Link>
-        {pinnedTags.length
-          ? pinnedTags.map((tag) => {
-              return (
-                <Link href={`/my-list/tags/${tag}`} key={tag}>
-                  <button className={subActive(tag, true)} onClick={clickEvent}>{tag}</button>
-                </Link>
-              )
-            })
-          : null}
+        {subset === 'home' && showLab ? (
+          <TopicsSideNav
+            showLab={showLab}
+            subActive={subActive}
+            pinnedTopics={pinnedTopics}
+          />
+        ) : (
+          <FiltersSideNav
+            showLab={showLab}
+            subActive={subActive}
+            pinnedTags={pinnedTags}
+          />
+        )}
       </nav>
       <div className="bottom-nav">
         <button
