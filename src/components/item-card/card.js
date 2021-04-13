@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { cx } from 'linaria'
 import { SyndicatedIcon } from '@pocket/web-ui'
@@ -11,10 +11,9 @@ import { cardBlock } from './card-base'
 import { cardWide } from './card-base'
 import { cardList } from './card-base'
 import { cardDetail } from './card-base'
-import { useEffect } from 'react'
-import { useInView } from 'react-intersection-observer'
 import Link from 'next/link'
-
+import { useInView } from 'react-intersection-observer'
+//
 /** Card
  * Item card for display.
  * @param {Object} props Props passed in from React
@@ -22,28 +21,31 @@ import Link from 'next/link'
  * @param {boolean} props.showExcerpt  Show excerpt or not
  * @param {string} props.itemType  What kind of item (discover, mylist, message, etc.)
  * @param {string} props.cardShape  What shape should the card take (block, wide, list)
- * @param {object} props.actions  Passed in actions NOTE: may be moved
  * @param {boolean} props.bulkEdit  Are we in bulk edit?
  * @param {boolean} props.bulkSelected  Is this particular item selected?
  * @param {integer} props.position  Where does this sit in the collection
  */
-export const Card = ({
-  item,
-  showExcerpt,
-  showMedia = true,
-  itemType,
-  cardShape,
-  bulkEdit,
-  bulkSelected,
-  position,
-  className,
-  impressionAction,
-  itemOriginalOpen,
-  selectBulk,
-  onOpen,
-  openUrl,
-  ActionMenu
-}) => {
+export const Card = (props) => {
+  const {
+    item,
+    showExcerpt,
+    showMedia,
+    itemType,
+    cardShape,
+    bulkEdit,
+    bulkSelected,
+    position,
+    className,
+    selectBulk,
+    onItemInView,
+    onOpenOriginalUrl,
+    shortcutSelected,
+    shortcutSelect,
+    onOpen,
+    openUrl,
+    ActionMenu
+  } = props
+
   const {
     item_id: id,
     tags,
@@ -57,12 +59,30 @@ export const Card = ({
     original_url
   } = item
 
-  // Fire item impression
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
+  const linkRef = useRef(null)
+  const articleRef = useRef(null)
 
+  // Fire when item is in view
+  const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
+  useEffect(() => onItemInView(inView), [inView, onItemInView])
+
+  // Fire when item is selected by shortcut
+  // This allows us to keep shortcuts in sync with tab selection and in view
   useEffect(() => {
-    if (inView) impressionAction(item, position, id)
-  }, [inView, id, impressionAction, item, position])
+    if (!linkRef.current) return
+    const selectedAndNotActive = shortcutSelected && document.activeElement !== linkRef.current
+    const notSelectedAndActive = !shortcutSelected && document.activeElement === linkRef.current
+
+    if (notSelectedAndActive) linkRef.current.blur()
+    if (selectedAndNotActive) {
+      linkRef.current.focus()
+      articleRef.current.scrollIntoView({ block: 'end' })
+    }
+  }, [shortcutSelected, linkRef])
+
+  const handleFocus = () => {
+    if (!shortcutSelected) shortcutSelect()
+  }
 
   if (!item) return null
 
@@ -80,7 +100,7 @@ export const Card = ({
     (!itemType || itemType === 'display') && 'noActions',
     !showMedia && 'noMedia',
     bulkEdit && 'bulkEdit',
-    bulkSelected && 'selected',
+    (bulkSelected || shortcutSelected) && 'selected',
     className
   )
 
@@ -88,7 +108,7 @@ export const Card = ({
 
   return (
     <article
-      ref={ref}
+      ref={articleRef}
       className={card}
       key={id}
       data-id={`article-card-${id}`}
@@ -98,7 +118,7 @@ export const Card = ({
       <FeatureFlag flag="item_id_overlay" dev={true}>
         <span className="idOverlay">{id}</span>
       </FeatureFlag>
-      <div className="cardWrap">
+      <div className="cardWrap" ref={viewRef}>
         {showMedia ? (
           <CardMedia
             image_src={thumbnail}
@@ -111,18 +131,33 @@ export const Card = ({
         ) : null}
         <div className="content">
           <h2 className="title">
-            <Link href={openUrl}>
-              <a onClick={onOpen} target={openExternal ? '_blank' : undefined}>
-                {title}
-              </a>
-            </Link>
+            {openUrl ? (
+              <Link href={openUrl}>
+                <a
+                  ref={linkRef}
+                  onClick={onOpen}
+                  target={openExternal ? '_blank' : undefined}
+                  tabIndex={0}
+                  onFocus={handleFocus}>
+                  {title}
+                </a>
+              </Link>
+            ) : (
+              title
+            )}
           </h2>
 
           <cite className="details">
-            {/*eslint-disable-next-line */}
-            <a className="publisher" href={original_url} target="_blank" onClick={itemOriginalOpen}>
-              {publisher}
-            </a>
+            {publisher ? (
+              <a
+                className="publisher"
+                href={original_url}
+                target="_blank"
+                onClick={onOpenOriginalUrl}
+                tabIndex={0}>
+                {publisher}
+              </a>
+            ) : null}
             {read_time ? <span className="readtime"> · {read_time} min</span> : null}
             {syndicated ? (
               <span className="syndicated">
@@ -150,7 +185,6 @@ Card.propTypes = {
   showExcerpt: PropTypes.bool,
   itemType: PropTypes.oneOf(['display', 'myList', 'discover', 'message', 'recit']),
   cardShape: PropTypes.oneOf(['block', 'grid', 'wide', 'list', 'detail']),
-  actions: PropTypes.object,
   bulkEdit: PropTypes.bool,
   bulkSelected: PropTypes.bool,
   position: PropTypes.number,
@@ -168,12 +202,14 @@ Card.propTypes = {
 
 Card.defaultProps = {
   cardShape: 'block',
-  impressionAction: () => {},
+  showExcerpt: false,
+  showMedia: true,
   engagementAction: () => {},
   saveAction: () => {},
   reportAction: () => {},
   unSaveAction: () => {},
   openAction: () => {},
+  onItemInView: () => {},
   itemBulkSelect: () => {},
   itemBulkDeSelect: () => {}
 }

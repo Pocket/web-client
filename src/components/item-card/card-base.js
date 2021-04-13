@@ -22,6 +22,10 @@ export const cardStyles = css`
     padding-bottom: 2.5rem;
     a {
       text-decoration: none;
+      &:focus {
+        outline: none;
+        text-decoration: underline;
+      }
       &:hover {
         color: var(--color-textPrimary);
         text-decoration: underline;
@@ -51,7 +55,8 @@ export const cardStyles = css`
     position: relative;
     border-radius: var(--size025);
     overflow: hidden;
-    img {
+    img,
+    .no-image {
       aspect-ratio: 3 / 2;
       width: 100%;
       height: auto;
@@ -59,6 +64,7 @@ export const cardStyles = css`
       transition-duration: 0.2s;
       transition-timing-function: ease;
       position: relative;
+      overflow: hidden;
       &:before {
         content: '';
         width: 100%;
@@ -134,12 +140,12 @@ export const cardStyles = css`
   .footer {
     width: 100%;
     position: absolute;
-    bottom: 0.5rem;
+    bottom: 0;
   }
 
   .actions {
-    padding: var(--size100) 0 var(--size025);
     display: flex;
+    padding: var(--size100) 0 var(--size025);
     justify-content: space-between;
   }
 
@@ -159,10 +165,6 @@ export const cardStyles = css`
     .actions {
       pointer-events: none;
     }
-
-    &.selected .title {
-      --color-underliner: var(--color-navCurrentTab);
-    }
   }
 
   .selectedBack {
@@ -171,9 +173,9 @@ export const cardStyles = css`
     border-radius: var(--borderRadius);
     width: 100%;
     height: 100%;
-    transform: translate(-1.1em, -1.1em);
+    transform: translate(-0.625rem, -0.75rem);
     display: none;
-    padding: 0 1.1em 1.1em;
+    padding: 0 0.625rem 0.75rem;
     z-index: -1;
   }
 
@@ -181,6 +183,7 @@ export const cardStyles = css`
     padding: 0.125em 1.1em;
   }
 
+  &:focus-within .selectedBack,
   &.selected .selectedBack {
     background-color: var(--color-navCurrentTab);
     display: block;
@@ -217,6 +220,16 @@ export const cardStyles = css`
 export const cardBlock = css`
   max-width: 552px;
   grid-column: span 4;
+
+  .actions {
+    display: none;
+  }
+
+  &:focus-within .actions,
+  &:hover .actions {
+    display: flex;
+  }
+
   &.noMedia {
     .cardLink .title {
       margin-top: 0;
@@ -274,6 +287,7 @@ export const cardWide = css`
 export const cardList = css`
   padding: var(--size100) 0;
   grid-column: span 12;
+  border-bottom: 1px solid var(--color-dividerTertiary);
   .cardWrap {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -288,6 +302,7 @@ export const cardList = css`
   }
   .title {
     margin-top: 0;
+    padding-top: 0;
     font-size: var(--fontSize100);
     line-height: 1.286;
     width: 70%;
@@ -312,6 +327,10 @@ export const cardList = css`
     .actions {
       padding: 0;
     }
+  }
+  .selectedBack {
+    padding: 0.125em 0.625em;
+    transform: translate(-0.625rem, -1.1rem);
   }
 `
 
@@ -339,6 +358,7 @@ export const cardDetail = css`
 
   .title {
     margin-top: 0;
+    padding-top: 0;
     font-size: var(--fontSize100);
     line-height: 1.286;
     width: auto;
@@ -376,14 +396,16 @@ export const cardDetail = css`
     align-items: center;
     align-content: center;
     padding-top: 0.5rem;
+    bottom: 0.5rem;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-column-gap: var(--size150);
   }
 
-  .bulkBacking {
-    padding: 0 0.5em;
-    transform: translate(-0.5em, -1em);
+  .selectedBack {
+    height: calc(100% - 0.5rem);
+    transform: translate(-0.5rem, -1rem);
+    padding: 0.25rem 0.5rem;
   }
 
   .tags {
