@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Card } from 'components/item-card/discover/card'
+import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { useInView } from 'react-intersection-observer'
 import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
@@ -62,6 +62,8 @@ export function ItemCard({
       item={item}
       onOpen={onOpen}
       onSave={onSave}
+      itemType="message"
+      showExcerpt={true}
       onReportFeedback={() => reportFeedbackAction(item)}
       isAuthenticated={isAuthenticated}
     />

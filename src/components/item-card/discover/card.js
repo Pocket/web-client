@@ -4,7 +4,7 @@ import { css } from 'linaria'
 import { CardMedia } from 'components/media/card-media'
 import { ItemAction } from './item-action'
 import { SyndicatedBadge } from './syndicated-badge'
-import { SaveToPocket } from 'components/save-to-pocket/save-to-pocket'
+import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { ReportIcon } from '@pocket/web-ui'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 
@@ -132,18 +132,11 @@ export const Card = React.forwardRef(
     } = item
 
     return (
-      <article
-        className={card}
-        key={id}
-        ref={ref}
-        data-cy={`article-card-${id}`}>
+      <article className={card} key={id} ref={ref} data-cy={`article-card-${id}`}>
         <FeatureFlag flag="item_id_overlay" dev={true}>
           <span className="idOverlay">{id}</span>
         </FeatureFlag>
-        <a
-          href={open_url}
-          onClick={onOpen}
-          target={syndicated ? undefined : '_blank'}>
+        <a href={open_url} onClick={onOpen} target={syndicated ? undefined : '_blank'}>
           <CardMedia image_src={thumbnail} title={title} id={id} />
           <div className="content">
             <h3 className="title">
@@ -151,9 +144,7 @@ export const Card = React.forwardRef(
             </h3>
             <cite className="details">
               <span>{publisher}</span>
-              <span className="readtime">
-                {read_time ? ` · ${read_time} min` : null}
-              </span>
+              <span className="readtime">{read_time ? ` · ${read_time} min` : null}</span>
               {syndicated ? (
                 <span className="syndicated" aria-label="Syndicated by Pocket">
                   <SyndicatedBadge />
