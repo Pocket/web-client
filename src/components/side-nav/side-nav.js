@@ -192,14 +192,12 @@ export function SideNav({
             </a>
           </>
         ) : (
-          <>
-            <Link href="/my-list">
-              <button className={subActive('unread')} onClick={clickEvent} ref={ref}>
-                <HomeIcon className="side-nav-icon" />{' '}
-                <Trans i18nKey="nav:my-list">My List</Trans>
-              </button>
-            </Link>
-          </>
+          <Link href="/my-list">
+            <button className={subActive('unread')} onClick={clickEvent} ref={ref}>
+              <HomeIcon className="side-nav-icon" />{' '}
+              <Trans i18nKey="nav:my-list">My List</Trans>
+            </button>
+          </Link>
         )}
 
         {!showLab ? (
