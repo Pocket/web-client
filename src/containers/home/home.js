@@ -9,12 +9,12 @@ import { getTopicList } from 'connectors/topic-list/topic-list.state'
 import { getRecentSaves } from 'containers/home/home.state'
 import { getCollections } from 'containers/home/home.state'
 
-import { HomeGreeting } from './homeGreeting'
-import { HomeRecentRecsList } from 'containers/home/listRecentRecs'
-import { HomeRecentList } from 'containers/home/listRecents'
-import { TopicSelector } from 'containers/home/topicSelector'
-import { HomeTopicsList } from 'containers/home/listTopics'
-import { HomeCollectionList } from 'containers/home/listCollection'
+import { HomeGreeting } from 'containers/home/home-greeting'
+import { HomeRecentList } from 'containers/home/list-recent-saves'
+import { HomeRecentRecsList } from 'containers/home/list-recs'
+import { TopicSelector } from 'containers/home/topic-selector'
+import { HomeTopicsList } from 'containers/home/list-topics'
+import { HomeCollectionList } from 'containers/home/list-collection'
 
 import { homeSetPreferences } from './home.state'
 

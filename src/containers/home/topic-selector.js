@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setTopicSection } from 'containers/home/home.state'
 import { unsetTopicSection } from 'containers/home/home.state'
 import { topicToggleEvent } from 'containers/home/home.analytics'
-import { topicHeadings } from './listTopics'
+import { topicHeadings } from './list-topics'
 
 const selectionStyles = css`
   margin-bottom: 2.25rem;
@@ -66,21 +66,16 @@ export const TopicSelector = () => {
   // Don't display promoted topics
   const sortedTopics = topicsArray.filter((topic) => !topic.is_promoted)
 
-  const journeyTitles = [
-    'Start your Pocket journey',
-    'Discover more topics',
-  ]
+  const journeyTitles = ['Start your Pocket journey', 'Discover more topics']
 
   const journeySubTitles = [
     'Select a topic to find fascinating stories from all across the web',
-    'Save today’s essential reads and find them later in My List',
+    'Save today’s essential reads and find them later in My List'
   ]
 
-  const journeyTitle =
-    journeyTitles[Math.min(topicSections?.length, Math.max(0, 1))]
+  const journeyTitle = journeyTitles[Math.min(topicSections?.length, Math.max(0, 1))]
 
-  const journeySubTitle =
-    journeySubTitles[Math.min(topicSections?.length, Math.max(0, 1))]
+  const journeySubTitle = journeySubTitles[Math.min(topicSections?.length, Math.max(0, 1))]
 
   const handleTopicClick = (topic) => {
     const topicAction = topicSections.find((item) => item.id === topic.id)
@@ -93,10 +88,7 @@ export const TopicSelector = () => {
 
   return (
     <div className={selectionStyles}>
-      <HomeJourneyHeader
-        sectionTitle={journeyTitle}
-        sectionDescription={journeySubTitle}
-      />
+      <HomeJourneyHeader sectionTitle={journeyTitle} sectionDescription={journeySubTitle} />
       <div className={pillboxStyle}>
         <div className="pillContainer">
           {sortedTopics.map((topic) => (

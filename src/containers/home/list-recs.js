@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { HomeSectionHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'
 import { css } from 'linaria'
-import { RecCard } from 'connectors/item-card/home/cardRec'
+import { RecCard } from 'connectors/item-card/home/card-rec'
 import { recentRecsRequest } from 'connectors/recit/recit.state'
 import { useInView } from 'react-intersection-observer'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
@@ -31,6 +31,7 @@ const recGrid = css`
 
   article:nth-child(1) {
     grid-row: span 3;
+    grid-column: span 4;
     padding-top: 1rem;
     border-bottom: none;
     min-height: 473px;
@@ -108,10 +109,7 @@ export const HomeRecentRecsList = () => {
                 )
               })
             ) : (
-              <CardSkeleton
-                count={4}
-                cardShape={['block', 'wide', 'wide', 'wide']}
-              />
+              <CardSkeleton count={4} cardShape={['block', 'wide', 'wide', 'wide']} />
             )}
           </section>
         </>

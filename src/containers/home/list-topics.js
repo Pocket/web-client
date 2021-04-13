@@ -1,7 +1,7 @@
 import { HomeTopicHeader } from 'components/headers/home-header'
 import { useSelector } from 'react-redux'
 import { css } from 'linaria'
-import { ItemCard } from 'connectors/item-card/home/cardTopic'
+import { ItemCard } from 'connectors/item-card/home/card-topic'
 import { cardGrid } from 'components/items-layout/virtualized-list'
 import classnames from 'classnames'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
@@ -120,8 +120,6 @@ export const HomeTopicsList = () => {
   const topicSections = useSelector((state) => state.home.topicSections)
 
   return topicSections?.length
-    ? topicSections.map((topic) => (
-        <HomeTopicsRow key={topic.display_name} {...topic} />
-      ))
+    ? topicSections.map((topic) => <HomeTopicsRow key={topic.display_name} {...topic} />)
     : null
 }

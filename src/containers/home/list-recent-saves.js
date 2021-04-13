@@ -1,7 +1,7 @@
 import { HomeSectionHeader } from 'components/headers/home-header'
 import { useSelector } from 'react-redux'
 import { css } from 'linaria'
-import { RecentCard } from 'connectors/item-card/home/cardRecent'
+import { RecentCard } from 'connectors/item-card/home/card-recent'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
 
 const recentGrid = css`
@@ -35,11 +35,7 @@ export const HomeRecentList = () => {
           <RecentCard key={`recent-${itemId}`} id={itemId} position={index} />
         ))}
         {showSkeleton ? (
-          <CardSkeleton
-            cardShape="wide"
-            name="recentSkeleton"
-            count={skeletonCount}
-          />
+          <CardSkeleton cardShape="wide" name="recentSkeleton" count={skeletonCount} />
         ) : null}
       </section>
     </div>
