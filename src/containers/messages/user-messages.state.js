@@ -2,6 +2,8 @@ import { put, call, takeEvery, select } from 'redux-saga/effects'
 import { getShares } from 'common/api/messages'
 import { resendConfirmation } from 'common/api/messages'
 import { sendItemActions } from 'common/api/item-actions'
+import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 import { API_ACTION_SHARE_ADDED } from 'common/constants'
 import { API_ACTION_SHARE_IGNORED } from 'common/constants'
@@ -31,8 +33,9 @@ export const requestConfirmation = () => ({ type: RESEND_CONFIRMATION_REQUEST })
 
 /** REDUCERS
  --------------------------------------------------------------- */
- const initialState = {
+const initialState = {
   hydrated: false,
+  itemsById: {},
   notifications: [],
   unconfirmed_shares: null,
   confirmationStatus: null
@@ -41,11 +44,12 @@ export const requestConfirmation = () => ({ type: RESEND_CONFIRMATION_REQUEST })
 export const userMessageReducers = (state = initialState, action) => {
   switch (action.type) {
     case GET_SHARES_SUCCESS: {
-      const { notifications, unconfirmed_shares } = action
+      const { notifications, unconfirmed_shares, itemsById } = action
       return {
         ...state,
         notifications,
         unconfirmed_shares,
+        itemsById,
         hydrated: true
       }
     }
@@ -96,8 +100,13 @@ function* sharesRequest() {
     if (response?.status !== 1) throw new Error('Cannot get shares')
 
     const { notifications, unconfirmed_shares } = response
-
-    yield put({ type: GET_SHARES_SUCCESS, notifications, unconfirmed_shares })
+    const itemsArray = [
+      ...notifications.map((notification) => notification.item),
+      ...unconfirmed_shares.map((share) => share.item)
+    ]
+    const derivedItems = deriveMyListItems(itemsArray)
+    const itemsById = arrayToObject(derivedItems, 'item_id')
+    yield put({ type: GET_SHARES_SUCCESS, notifications, unconfirmed_shares, itemsById })
   } catch (error) {
     yield put({ type: GET_SHARES_FAILURE, error })
   }
@@ -105,18 +114,20 @@ function* sharesRequest() {
 
 function* addRequest({ share_id, item_id, item }) {
   try {
-    const actions = [{
-      action: API_ACTION_SHARE_ADDED,
-      share_id: parseInt(share_id, 10),
-      item_id,
-      item
-    }]
+    const actions = [
+      {
+        action: API_ACTION_SHARE_ADDED,
+        share_id: parseInt(share_id, 10),
+        item_id,
+        item
+      }
+    ]
 
     const response = yield call(sendItemActions, actions)
     if (response?.status !== 1) throw new Error('Cannot add message')
 
     const oldNotifications = yield select(getNotifications)
-    const notifications = oldNotifications.filter(item => item.share_id !== share_id)
+    const notifications = oldNotifications.filter((item) => item.share_id !== share_id)
 
     yield put({ type: ADD_SHARE_SUCCESS, notifications })
   } catch (error) {
@@ -126,18 +137,20 @@ function* addRequest({ share_id, item_id, item }) {
 
 function* ignoreRequest({ share_id, item_id, item }) {
   try {
-    const actions = [{
-      action: API_ACTION_SHARE_IGNORED,
-      share_id: parseInt(share_id, 10),
-      item_id,
-      item
-    }]
+    const actions = [
+      {
+        action: API_ACTION_SHARE_IGNORED,
+        share_id: parseInt(share_id, 10),
+        item_id,
+        item
+      }
+    ]
 
     const response = yield call(sendItemActions, actions)
     if (response?.status !== 1) throw new Error('Cannot ignore message')
 
     const oldNotifications = yield select(getNotifications)
-    const notifications = oldNotifications.filter(item => item.share_id !== share_id)
+    const notifications = oldNotifications.filter((item) => item.share_id !== share_id)
 
     yield put({ type: IGNORE_SHARE_SUCCESS, notifications })
   } catch (error) {
@@ -149,7 +162,7 @@ function* confirmationRequest() {
   try {
     const email = yield select(getUserEmail)
     const response = yield call(resendConfirmation, email)
-    const confirmationStatus = (response?.status !== 1) ? 'failed' : 'success'
+    const confirmationStatus = response?.status !== 1 ? 'failed' : 'success'
 
     yield put({ type: RESEND_CONFIRMATION_SUCCESS, confirmationStatus })
   } catch (error) {
