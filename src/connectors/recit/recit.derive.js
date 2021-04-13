@@ -14,7 +14,7 @@ export function deriveReaderRecitItems(recommendations) {
    */
   return recommendations.map((feedItem) => ({
     resolved_id: feedItem.item?.resolved_id,
-    item_id: feedItem.item?.item_id || feedItem.item?.resolved_id,
+    item_id: feedItem.item?.item_id,
     title: displayTitle(feedItem),
     thumbnail: displayThumbnail(feedItem),
     publisher: displayPublisher(feedItem),
@@ -26,7 +26,7 @@ export function deriveReaderRecitItems(recommendations) {
     has_video: feedItem.item?.has_video,
     is_article: feedItem.item?.is_article,
     save_status: 'unsaved',
-    openExternal: true,
+    openExternal: true
   }))
 }
 
@@ -72,13 +72,7 @@ function displayPublisher({ item }) {
   const urlToUse = openUrl({ item })
   const derivedDomain = domainForUrl(urlToUse)
   const syndicatedPublisher = item?.syndicated_article?.publisher?.name
-  return (
-    syndicatedPublisher ||
-    item?.domain_metadata?.name ||
-    item?.domain ||
-    derivedDomain ||
-    null
-  )
+  return syndicatedPublisher || item?.domain_metadata?.name || item?.domain || derivedDomain || null
 }
 
 /** EXCERPT
@@ -94,12 +88,7 @@ function displayExcerpt({ item, curated_info }) {
  * @returns {string} The url that should be saved or opened
  */
 function openUrl({ item }) {
-  return (
-    devLink(item) ||
-    item?.given_url ||
-    item?.resolved_url ||
-    false
-  )
+  return devLink(item) || item?.given_url || item?.resolved_url || false
 }
 
 /** SAVE URL
