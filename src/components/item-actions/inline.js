@@ -27,6 +27,7 @@ export const MenuItem = ({
           href={href}
           target="_blank"
           aria-label={label}
+          tabIndex={0}
           data-tooltip={label}>
           {icon ? icon : null}
           {actionText ? <span className="actionText">{actionText}</span> : null}

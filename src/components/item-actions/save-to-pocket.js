@@ -1,10 +1,13 @@
 import { css } from 'linaria'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import { LOGIN_URL, SIGNUP_URL } from 'common/constants'
-import { SaveIcon } from '@pocket/web-ui'
-import { SaveFilledIcon } from '@pocket/web-ui'
 import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
+import Link from 'next/link'
+
+import { SaveIcon } from '@pocket/web-ui'
+import { SaveFilledIcon } from '@pocket/web-ui'
+import { ReadingIcon } from '@pocket/web-ui'
 
 const saveContainer = css`
   display: flex;
@@ -15,21 +18,22 @@ const saveContainer = css`
   min-width: 3.913em;
   color: var(--color-textSecondary);
   cursor: pointer;
-  padding-top: 8px;
+  padding: 4px;
+  text-decoration: none;
 
-  span {
-    margin-top: -0.15em;
+  .icon {
+    margin-top: 0;
   }
 
   svg {
     transition: transform 200ms ease-out;
     display: block;
     margin-right: var(--size050);
-    height: 1.1em;
+    height: 1em;
   }
 
   .actionCopy {
-    font-size: 0.667em;
+    font-size: 1rem;
     height: var(--size150);
     line-height: var(--size150);
   }
@@ -38,8 +42,19 @@ const saveContainer = css`
     text-decoration: none;
   }
 
+  &.read-now.saved {
+    svg {
+      color: var(--color-textSecondary);
+    }
+  }
+
   &:hover,
-  &.saved {
+  &:focus,
+  &.saved,
+  &.read-now.saved:hover,
+  &.read-now.saved:focus {
+    text-decoration: none;
+    color: var(--color-textSecondary);
     svg {
       color: var(--color-actionBrand);
     }
@@ -86,9 +101,13 @@ export const SavePopover = function ({ popoverRef, id }) {
  * Pocket logomark with click interaction to save a story to Pocket.
  */
 export const SaveToPocket = function ({
+  url,
+  onOpen,
+  openExternal,
   saveAction,
   isAuthenticated,
   saveStatus = 'unsaved',
+  allowRead = false,
   id
 }) {
   const saveCopy = {
@@ -121,10 +140,18 @@ export const SaveToPocket = function ({
     buttonReset,
     saveContainer,
     saveStatus,
-    'card-actions'
+    'card-actions',
+    allowRead && 'read-now'
   )
 
-  return (
+  return saveStatus === 'saved' && allowRead ? (
+    <Link href={url}>
+      <a onClick={onOpen} className={saveClasses} target={openExternal ? '_blank' : undefined}>
+        <ReadingIcon />
+        <span className="actionCopy">Read now</span>
+      </a>
+    </Link>
+  ) : (
     <>
       <button
         className={saveClasses}
@@ -134,9 +161,7 @@ export const SaveToPocket = function ({
         {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}
         <div className="actionCopy">{saveCopy[saveStatus]}</div>
       </button>
-      {!isAuthenticated && shown ? (
-        <SavePopover popoverRef={popBody} id={id} />
-      ) : null}
+      {!isAuthenticated && shown ? <SavePopover popoverRef={popBody} id={id} /> : null}
     </>
   )
 }

@@ -5,10 +5,8 @@ export const itemActionStyle = css`
   justify-content: flex-start;
   align-items: center;
   align-content: center;
-  background-color: var(--color-canvas);
-  border-radius: 0 0 4px 4px;
   position: relative;
-  transform: translateX(-0.5rem);
+  transform: translateX(-0.25rem);
 `
 
 export const menuItemStyle = css`
@@ -16,9 +14,13 @@ export const menuItemStyle = css`
   height: 24px;
   background-color: transparent;
   border: medium none;
-  padding: var(--size025) var(--size050);
+  padding: var(--size025);
+  margin-right: var(--size025);
   box-sizing: content-box;
   white-space: nowrap;
+  display: flex;
+  border-radius: var(--borderRadius);
+  transition: all 0.15s ease-out;
 
   &.active {
     color: var(--color-amber);
