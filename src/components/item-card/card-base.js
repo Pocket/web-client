@@ -189,31 +189,24 @@ export const cardStyles = css`
     display: block;
   }
 
-  &.hero-block {
-    grid-row: span 3;
+  /** Below are specific to hero style lockups */
+  &.lockup {
+    grid-column: span 3;
   }
 
-  &.hero-list {
-    grid-column: span 5;
-    grid-row: span 5;
+  &.hero-center {
+    grid-row: span 2;
+    grid-column: 4 / span 6;
   }
 
-  &.hero-wide {
-    grid-column: span 5;
-    grid-row: span 3;
+  &.hero-left {
+    grid-row: span 2;
+    grid-column: 1 / span 6;
   }
 
-  &.subset {
-    grid-column: span 8;
-    .media {
-      grid-column: span 4;
-    }
-    .content {
-      grid-column: span 8;
-    }
-    .title {
-      white-space: initial;
-    }
+  &.hero-right {
+    grid-row: span 2;
+    grid-column: 7 / span 6;
   }
 `
 
