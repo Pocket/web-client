@@ -30,7 +30,6 @@ export const Card = (props) => {
     item,
     showExcerpt,
     showMedia,
-    itemType,
     cardShape,
     bulkEdit,
     bulkSelected,
@@ -97,7 +96,6 @@ export const Card = (props) => {
     cardShape === 'list' && `${cardList} list`,
     cardShape === 'detail' && `${cardDetail} detail`,
     !showExcerpt && 'noExcerpt',
-    (!itemType || itemType === 'display') && 'noActions',
     !showMedia && 'noMedia',
     bulkEdit && 'bulkEdit',
     (bulkSelected || shortcutSelected) && 'selected',
@@ -183,7 +181,6 @@ Card.propTypes = {
   */
   item: PropTypes.object,
   showExcerpt: PropTypes.bool,
-  itemType: PropTypes.oneOf(['display', 'myList', 'discover', 'message', 'recit']),
   cardShape: PropTypes.oneOf(['block', 'grid', 'wide', 'list', 'detail']),
   bulkEdit: PropTypes.bool,
   bulkSelected: PropTypes.bool,

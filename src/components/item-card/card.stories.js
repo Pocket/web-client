@@ -11,17 +11,12 @@ const discoverItems = deriveDiscoverItems(discoverResponse.feed).map((item) => {
   return item
 })
 
-const myListItems = deriveMyListItems(Object.values(myListResponse.list)).map(
-  (item) => {
-    item.story_name = `My List - ${item.title}`
-    return item
-  }
-)
+const myListItems = deriveMyListItems(Object.values(myListResponse.list)).map((item) => {
+  item.story_name = `My List - ${item.title}`
+  return item
+})
 
-const itemsToDisplay = arrayToObject(
-  [...myListItems, ...discoverItems],
-  'story_name'
-)
+const itemsToDisplay = arrayToObject([...myListItems, ...discoverItems], 'story_name')
 
 export default {
   title: 'Card/Card Shapes',
@@ -31,12 +26,6 @@ export default {
       control: {
         type: 'select',
         options: Object.keys(itemsToDisplay)
-      }
-    },
-    itemType: {
-      control: {
-        type: 'inline-radio',
-        options: ['display', 'myList', 'discover', 'message']
       }
     },
     cardShape: {
@@ -63,16 +52,13 @@ export default {
 }
 
 export const Card = (args) => {
-  const item =
-    itemsToDisplay[args.itemToDisplay] ||
-    itemsToDisplay[myListItems[0].story_name]
+  const item = itemsToDisplay[args.itemToDisplay] || itemsToDisplay[myListItems[0].story_name]
   return <CardComponent item={item} position={0} actions={{}} {...args} />
 }
 
 Card.args = {
   showExcerpt: true,
   showMedia: true,
-  itemType: null,
   tags: [],
   cardShape: 'block'
 }
