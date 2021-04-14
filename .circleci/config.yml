@@ -178,6 +178,8 @@ jobs:
           command: |
             echo 'export AWS_ECR_ACCOUNT_URL="${ACCOUNT_ID_PROD}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
       - assume-role/assume-role:
+          aws-access-key-id: $OLD_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: $OLD_AWS_SECRET_ACCESS_KEY
           account-id: $ACCOUNT_ID_PROD
       - aws-ecr/ecr-login
       - run:
@@ -218,6 +220,8 @@ jobs:
           command: |
             cp -r /tmp/workspace/app_prod/. .
       - assume-role/assume-role:
+          aws-access-key-id: $OLD_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: $OLD_AWS_SECRET_ACCESS_KEY
           account-id: $ACCOUNT_ID_PROD
       - aws-ecr/build-and-push-image:
           checkout: false
@@ -228,6 +232,8 @@ jobs:
           dockerfile: /tmp/workspace/app_prod/Dockerfile
           extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION}
       - assume-role/assume-role:
+          aws-access-key-id: $OLD_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: $OLD_AWS_SECRET_ACCESS_KEY
           account-id: $ACCOUNT_ID_DEV
       - run:
           name: Retag And Setup
@@ -249,6 +255,8 @@ jobs:
     steps:
       - aws-cli/install
       - assume-role/assume-role:
+          aws-access-key-id: $OLD_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: $OLD_AWS_SECRET_ACCESS_KEY
           account-id: $ACCOUNT_ID_PROD
       - attach_workspace:
           at: .
@@ -289,6 +297,8 @@ jobs:
             wget https://releases.hashicorp.com/terraform/${TERRAFORM}/terraform_${TERRAFORM}_linux_amd64.zip
             sudo unzip ./terraform_${TERRAFORM}_linux_amd64.zip -d /usr/local/bin/
       - assume-role/assume-role:
+          aws-access-key-id: $OLD_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: $OLD_AWS_SECRET_ACCESS_KEY
           account-id: $ACCOUNT_ID_PROD
       - run:
           name: Setup Stack
@@ -317,6 +327,8 @@ jobs:
                     -lock-timeout=600s \
                     -var-file="_globals.tfvars"
             - assume-role/assume-role:
+                aws-access-key-id: $OLD_AWS_ACCESS_KEY_ID
+                aws-secret-access-key: $OLD_AWS_SECRET_ACCESS_KEY
                 account-id: $ACCOUNT_ID_DEV
             - run:
                 name: Push Dev Variables
