@@ -4,7 +4,7 @@ version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@0.1.13
   aws-ecr: circleci/aws-ecr@6.1.0
-  assume-role: airswap/assume-role@0.2.0
+  assume-role: lbh-hackit/aws_assume_role@0.1.0
   cypress: cypress-io/cypress@1
   slack: circleci/slack@3.4.0
 
@@ -177,10 +177,11 @@ jobs:
           name: Setup common environment variables
           command: |
             echo 'export AWS_ECR_ACCOUNT_URL="${ACCOUNT_ID_PROD}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
-      - assume-role/assume-role:
-          aws-access-key-id: $OLD_AWS_ACCESS_KEY_ID
-          aws-secret-access-key: $OLD_AWS_SECRET_ACCESS_KEY
-          account-id: $ACCOUNT_ID_PROD
+      - assume-role/assume_role:
+          role: $ROLE_NAME
+          access_key_id: OLD_AWS_ACCESS_KEY_ID
+          secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
+          account: $ACCOUNT_ID_PROD
       - aws-ecr/ecr-login
       - run:
           name: Tag As latest
@@ -219,10 +220,11 @@ jobs:
           name: Copy App
           command: |
             cp -r /tmp/workspace/app_prod/. .
-      - assume-role/assume-role:
-          aws-access-key-id: $OLD_AWS_ACCESS_KEY_ID
-          aws-secret-access-key: $OLD_AWS_SECRET_ACCESS_KEY
-          account-id: $ACCOUNT_ID_PROD
+      - assume-role/assume_role:
+          role: $ROLE_NAME
+          access_key_id: OLD_AWS_ACCESS_KEY_ID
+          secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
+          account: $ACCOUNT_ID_PROD
       - aws-ecr/build-and-push-image:
           checkout: false
           repo: $MAIN_IMAGE_NAME
@@ -231,10 +233,11 @@ jobs:
           path: /tmp/workspace/app_prod
           dockerfile: /tmp/workspace/app_prod/Dockerfile
           extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION}
-      - assume-role/assume-role:
-          aws-access-key-id: $OLD_AWS_ACCESS_KEY_ID
-          aws-secret-access-key: $OLD_AWS_SECRET_ACCESS_KEY
-          account-id: $ACCOUNT_ID_DEV
+      - assume-role/assume_role:
+          role: $ROLE_NAME
+          access_key_id: OLD_AWS_ACCESS_KEY_ID
+          secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
+          account: $ACCOUNT_ID_DEV
       - run:
           name: Retag And Setup
           command: |
@@ -254,10 +257,11 @@ jobs:
       - image: circleci/python # for aws cli without fluff
     steps:
       - aws-cli/install
-      - assume-role/assume-role:
-          aws-access-key-id: $OLD_AWS_ACCESS_KEY_ID
-          aws-secret-access-key: $OLD_AWS_SECRET_ACCESS_KEY
-          account-id: $ACCOUNT_ID_PROD
+      - assume-role/assume_role:
+          role: $ROLE_NAME
+          access_key_id: OLD_AWS_ACCESS_KEY_ID
+          secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
+          account: $ACCOUNT_ID_PROD
       - attach_workspace:
           at: .
       - run:
@@ -296,10 +300,11 @@ jobs:
             #$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')
             wget https://releases.hashicorp.com/terraform/${TERRAFORM}/terraform_${TERRAFORM}_linux_amd64.zip
             sudo unzip ./terraform_${TERRAFORM}_linux_amd64.zip -d /usr/local/bin/
-      - assume-role/assume-role:
-          aws-access-key-id: $OLD_AWS_ACCESS_KEY_ID
-          aws-secret-access-key: $OLD_AWS_SECRET_ACCESS_KEY
-          account-id: $ACCOUNT_ID_PROD
+      - assume-role/assume_role:
+          role: $ROLE_NAME
+          access_key_id: OLD_AWS_ACCESS_KEY_ID
+          secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
+          account: $ACCOUNT_ID_PROD
       - run:
           name: Setup Stack
           command: |
@@ -326,10 +331,11 @@ jobs:
                     -auto-approve \
                     -lock-timeout=600s \
                     -var-file="_globals.tfvars"
-            - assume-role/assume-role:
-                aws-access-key-id: $OLD_AWS_ACCESS_KEY_ID
-                aws-secret-access-key: $OLD_AWS_SECRET_ACCESS_KEY
-                account-id: $ACCOUNT_ID_DEV
+            - assume-role/assume_role:
+                role: $ROLE_NAME
+                access_key_id: OLD_AWS_ACCESS_KEY_ID
+                secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
+                account: $ACCOUNT_ID_DEV
             - run:
                 name: Push Dev Variables
                 command: |
