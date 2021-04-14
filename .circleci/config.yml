@@ -2,8 +2,8 @@ version: 2.1
 
 # Orbs: Pre-configured bundled functionality
 orbs:
-  aws-cli: circleci/aws-cli@0.1.13
-  aws-ecr: circleci/aws-ecr@6.1.0
+  aws-cli: circleci/aws-cli@2.0.0
+  aws-ecr: circleci/aws-ecr@7.0.0
   assume-role: lbh-hackit/aws_assume_role@0.1.0
   cypress: cypress-io/cypress@1
   slack: circleci/slack@3.4.0
@@ -182,7 +182,9 @@ jobs:
           access_key_id: OLD_AWS_ACCESS_KEY_ID
           secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
           account: $ACCOUNT_ID_PROD
-      - aws-ecr/ecr-login
+      - aws-ecr/ecr-login:
+          aws-access-key-id: OLD_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: OLD_AWS_SECRET_ACCESS_KEY
       - run:
           name: Tag As latest
           command: |
@@ -227,6 +229,8 @@ jobs:
           account: $ACCOUNT_ID_PROD
       - aws-ecr/build-and-push-image:
           checkout: false
+          aws-access-key-id: OLD_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: OLD_AWS_SECRET_ACCESS_KEY
           repo: $MAIN_IMAGE_NAME
           setup-remote-docker: true
           tag: $CIRCLE_SHA1
@@ -243,7 +247,9 @@ jobs:
           command: |
             echo 'export AWS_ECR_ACCOUNT_URL="${AWS_ECR_ACCOUNT_DEV_URL}"' >> $BASH_ENV
             docker tag ${AWS_ECR_ACCOUNT_PROD_URL}/${MAIN_IMAGE_NAME}:$CIRCLE_SHA1 ${AWS_ECR_ACCOUNT_DEV_URL}/${MAIN_IMAGE_NAME}:$CIRCLE_SHA1
-      - aws-ecr/ecr-login
+      - aws-ecr/ecr-login:
+          aws-access-key-id: OLD_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: OLD_AWS_SECRET_ACCESS_KEY
       - aws-ecr/push-image:
           repo: $MAIN_IMAGE_NAME
           tag: $CIRCLE_SHA1
