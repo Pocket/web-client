@@ -131,9 +131,9 @@ function saveUrl({ item }) {
  * @returns {string} The url that should be opened when visiting the live page
  */
 function originalUrl({ item }) {
-  return (
-    urlWithPocketRedirect(item?.given_url) || urlWithPocketRedirect(item?.resolved_url) || false
-  )
+  if(item?.given_url) return urlWithPocketRedirect(item?.given_url)
+  if(item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
+  return false
 }
 
 /** OPEN_PERMANENT

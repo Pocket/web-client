@@ -1,5 +1,8 @@
 import { READING_WPM } from 'common/constants'
 import { domainForUrl } from 'common/utilities'
+import { urlWithPocketRedirect } from 'common/utilities'
+import { urlWithPermanentLibrary } from 'common/utilities'
+      
 
 export function deriveReaderRecitItems(recommendations) {
   /**
@@ -21,6 +24,8 @@ export function deriveReaderRecitItems(recommendations) {
     excerpt: displayExcerpt(feedItem),
     save_url: saveUrl(feedItem),
     open_url: openUrl(feedItem),
+    original_url: originalUrl(feedItem),
+      permanent_url: permanentUrl(feedItem),
     read_time: readTime(feedItem),
     has_image: feedItem.item?.has_image,
     has_video: feedItem.item?.has_video,
@@ -95,8 +100,26 @@ function openUrl({ item }) {
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {string} The url that should be saved or opened
  */
-function saveUrl({ item }) {
-  return item?.given_url || item?.resolved_url || false
+ function saveUrl({ item }) {
+  return item?.normal_url || item?.resolved_url || false
+}
+
+/** OPEN_ORIGINAL
+ * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
+ * @returns {string} The url that should be opened when visiting the live page
+ */
+ function originalUrl({ item }) {
+  if(item?.save_url) return urlWithPocketRedirect(item?.save_url)
+  if(item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
+  if(item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
+}
+
+/** OPEN_PERMANENT
+ * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
+ * @returns {string} The url for permanent library
+ */
+function permanentUrl({ item }) {
+  return urlWithPermanentLibrary(item?.item_id) || false
 }
 
 /** READ TIME
