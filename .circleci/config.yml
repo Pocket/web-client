@@ -225,14 +225,16 @@ jobs:
           access_key_id: OLD_AWS_ACCESS_KEY_ID
           secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
           account: $ACCOUNT_ID_PROD
-      - aws-ecr/build-and-push-image:
-          checkout: false
-          repo: $MAIN_IMAGE_NAME
-          setup-remote-docker: true
+      - aws-ecr/build-image:
           tag: $CIRCLE_SHA1
           path: /tmp/workspace/app_prod
           dockerfile: /tmp/workspace/app_prod/Dockerfile
           extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION}
+          repo: $MAIN_IMAGE_NAME
+      - aws-ecr/ecr-login
+      - aws-ecr/push-image:
+          repo: $MAIN_IMAGE_NAME
+          tag: $CIRCLE_SHA1
       - assume-role/assume_role:
           role: $ROLE_NAME
           access_key_id: OLD_AWS_ACCESS_KEY_ID
