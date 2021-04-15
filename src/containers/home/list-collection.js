@@ -8,12 +8,10 @@ import { breakpointLargeHandset } from '@pocket/web-ui'
 
 const homeCollections = css`
   ${cardsGrid};
-  grid-template-columns: repeat(2, 1fr);
-  article {
-    grid-column: span 1;
-  }
+  grid-template-columns: repeat(8, 1fr);
+
   ${breakpointLargeHandset} {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 `
 

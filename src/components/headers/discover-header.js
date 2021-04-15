@@ -17,7 +17,8 @@ const cardPageHeaderStyle = css`
     font-size: var(--fontSize250);
     line-height: 1.2;
     letter-spacing: -0.005em;
-    margin-bottom: var(--spacing150);
+    padding-bottom: var(--spacing150);
+    margin: 0;
 
     ${breakpointLargeTablet} {
       font-size: var(--fontSize200);
@@ -47,7 +48,8 @@ const cardPageHeaderStyle = css`
     font-weight: 500;
     font-size: var(--fontSize100);
     text-transform: uppercase;
-    margin-bottom: var(--spacing050);
+    padding-bottom: var(--spacing050);
+    margin: 0;
     color: var(--color-actionPrimary);
 
     ${breakpointTinyTablet} {
@@ -55,7 +57,8 @@ const cardPageHeaderStyle = css`
     }
 
     ${breakpointLargeHandset} {
-      margin-bottom: var(--spacing025);
+      padding-bottom: var(--spacing025);
+      margin: 0;
     }
   }
 
@@ -64,14 +67,16 @@ const cardPageHeaderStyle = css`
     p {
       font-family: 'Graphik Web';
       font-size: var(--fontSize100);
-      margin-bottom: var(--spacing050);
+      padding-bottom: var(--spacing050);
+      margin: 0;
 
       ${breakpointMediumTablet} {
         font-size: var(--fontSize085);
       }
 
       ${breakpointSmallTablet} {
-        margin-bottom: var(--spacing100);
+        padding-bottom: var(--spacing100);
+        margin: 0;
       }
     }
   }
@@ -84,20 +89,22 @@ const subHeadingStyle = css`
   font-weight: 500;
   font-size: var(--fontSize125);
   line-height: 1.2;
-  margin-bottom: var(--spacing050);
+  padding-bottom: var(--spacing050);
+  margin: 0;
 
   ${breakpointMediumTablet} {
     font-weight: 500;
     font-size: var(--fontSize100);
-    margin-bottom: var(--spacing025);
+    padding-bottom: var(--spacing025);
+    margin: 0;
   }
 `
 
 const cardListHeadingStyle = css`
-  margin: var(--spacing250) 0 calc(var(--spacing100) * -1);
+  padding: var(--spacing250) 0;
 
   ${breakpointLargeHandset} {
-    margin: var(--spacing150) 0 calc(var(--spacing050) * -1);
+    padding: var(--spacing150) 0;
   }
 `
 
@@ -132,9 +139,7 @@ export const SearchPageHeader = ({ title }) => {
 }
 
 export const CardListHeading = ({ children }) => {
-  return (
-    <h2 className={cx('h3', subHeadingStyle, cardListHeadingStyle)}>{children}</h2>
-  )
+  return <h2 className={cx('h3', subHeadingStyle, cardListHeadingStyle)}>{children}</h2>
 }
 
 function capitalizeFirstLetter(str) {

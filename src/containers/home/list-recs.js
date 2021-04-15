@@ -15,9 +15,17 @@ const recGrid = css`
   grid-template-columns: repeat(12, 1fr);
   padding-bottom: 4rem;
 
+  article.detail,
   article {
     border-bottom: none;
   }
+
+  article:nth-child(1) {
+      .actions {
+        display: flex;
+      }
+    }
+
   //prettier-ignore
   article:nth-child(n+2) {
     grid-column: span 8;

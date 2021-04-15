@@ -7,10 +7,6 @@ import { CardMedia } from 'components/media/card-media'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { ItemTags } from 'components/item-tags/item-tags'
 import { cardStyles } from './card-base'
-import { cardBlock } from './card-base'
-import { cardWide } from './card-base'
-import { cardList } from './card-base'
-import { cardDetail } from './card-base'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
 //
@@ -30,6 +26,7 @@ export const Card = (props) => {
     item,
     showExcerpt,
     showMedia,
+    hiddenActions,
     cardShape,
     bulkEdit,
     bulkSelected,
@@ -91,10 +88,8 @@ export const Card = (props) => {
    */
   const card = cx(
     cardStyles,
-    cardShape === 'block' || (cardShape === 'grid' && `${cardBlock} block`),
-    cardShape === 'wide' && `${cardWide} wide`,
-    cardShape === 'list' && `${cardList} list`,
-    cardShape === 'detail' && `${cardDetail} detail`,
+    cardShape,
+    hiddenActions && 'hiddenActions',
     !showExcerpt && 'noExcerpt',
     !showMedia && 'noMedia',
     bulkEdit && 'bulkEdit',
@@ -181,7 +176,8 @@ Card.propTypes = {
   */
   item: PropTypes.object,
   showExcerpt: PropTypes.bool,
-  cardShape: PropTypes.oneOf(['block', 'grid', 'wide', 'list', 'detail']),
+  cardShape: PropTypes.oneOf(['block', 'grid', 'wide', 'list', 'detail', 'discover']),
+  hiddenActions: PropTypes.bool,
   bulkEdit: PropTypes.bool,
   bulkSelected: PropTypes.bool,
   position: PropTypes.number,
@@ -201,6 +197,7 @@ Card.defaultProps = {
   cardShape: 'block',
   showExcerpt: false,
   showMedia: true,
+  hiddenActions: false,
   engagementAction: () => {},
   saveAction: () => {},
   reportAction: () => {},
