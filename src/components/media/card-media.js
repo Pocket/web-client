@@ -54,10 +54,9 @@ export const CardMedia = function ({ image_src, title, id, setNoImage = () => {}
         style={mediaFallbackDetails}
         onError={imageFailure}
         alt=""
-        src={getImageCacheUrl(image_src, { width: 300, height: 200 })}
+        src={getImageCacheUrl(image_src, { width: 562, height: 368 })}
         srcSet={`
-          ${getImageCacheUrl(image_src, { width: 600, height: 400 })} 2x, 
-          ${getImageCacheUrl(image_src, { width: 900, height: 600 })} 3x
+          ${getImageCacheUrl(image_src, { width: 1124, height: 736 })} 2x
         `}
       />
     </div>
