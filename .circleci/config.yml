@@ -4,7 +4,7 @@ version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@2.0.0
   aws-ecr: circleci/aws-ecr@6.1.0
-  assume-role: lbh-hackit/aws_assume_role@0.1.0
+  assume-role: airswap/assume-role@0.2.0
   cypress: cypress-io/cypress@1
   slack: circleci/slack@3.4.0
 
@@ -177,11 +177,10 @@ jobs:
           name: Setup common environment variables
           command: |
             echo 'export AWS_ECR_ACCOUNT_URL="${ACCOUNT_ID_PROD}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
-      - assume-role/assume_role:
-          role: $ROLE_NAME
-          access_key_id: OLD_AWS_ACCESS_KEY_ID
-          secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
-          account: $ACCOUNT_ID_PROD
+            echo 'export AWS_ACCESS_KEY_ID="${OLD_AWS_ACCESS_KEY_ID}"' >> $BASH_ENV
+            echo 'export AWS_SECRET_ACCESS_KEY="${OLD_AWS_SECRET_ACCESS_KEY}"' >> $BASH_ENV
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_PROD
       - aws-ecr/ecr-login
       - run:
           name: Tag As latest
@@ -212,34 +211,28 @@ jobs:
             echo 'export AWS_ECR_ACCOUNT_PROD_URL="${ACCOUNT_ID_PROD}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
             echo 'export AWS_ECR_ACCOUNT_DEV_URL="${ACCOUNT_ID_DEV}.dkr.ecr.us-east-1.amazonaws.com"' >> $BASH_ENV
             echo 'export AWS_ECR_ACCOUNT_URL="${AWS_ECR_ACCOUNT_PROD_URL}"' >> $BASH_ENV
+            echo 'export AWS_ACCESS_KEY_ID="${OLD_AWS_ACCESS_KEY_ID}"' >> $BASH_ENV
+            echo 'export AWS_SECRET_ACCESS_KEY="${OLD_AWS_SECRET_ACCESS_KEY}"' >> $BASH_ENV
             echo 'export RELEASE_VERSION="$(cat /tmp/workspace/.version)"' >> $BASH_ENV
-      - run: 
+      - run:
           name: "What version is being built?"
           command: echo ${RELEASE_VERSION}
       - run:
           name: Copy App
           command: |
             cp -r /tmp/workspace/app_prod/. .
-      - assume-role/assume_role:
-          role: $ROLE_NAME
-          access_key_id: OLD_AWS_ACCESS_KEY_ID
-          secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
-          account: $ACCOUNT_ID_PROD
-      - aws-ecr/build-image:
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_PROD
+      - aws-ecr/build-and-push-image:
+          checkout: false
+          repo: $MAIN_IMAGE_NAME
+          setup-remote-docker: true
           tag: $CIRCLE_SHA1
           path: /tmp/workspace/app_prod
           dockerfile: /tmp/workspace/app_prod/Dockerfile
           extra-build-args: --build-arg RELEASE_VERSION=${RELEASE_VERSION}
-          repo: $MAIN_IMAGE_NAME
-      - aws-ecr/ecr-login
-      - aws-ecr/push-image:
-          repo: $MAIN_IMAGE_NAME
-          tag: $CIRCLE_SHA1
-      - assume-role/assume_role:
-          role: $ROLE_NAME
-          access_key_id: OLD_AWS_ACCESS_KEY_ID
-          secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
-          account: $ACCOUNT_ID_DEV
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_DEV
       - run:
           name: Retag And Setup
           command: |
@@ -258,13 +251,14 @@ jobs:
     docker:
       - image: circleci/python # for aws cli without fluff
     steps:
-      - checkout
+      - run:
+          name: Setup environment variables
+          command: |
+            echo 'export AWS_ACCESS_KEY_ID="${OLD_AWS_ACCESS_KEY_ID}"' >> $BASH_ENV
+            echo 'export AWS_SECRET_ACCESS_KEY="${OLD_AWS_SECRET_ACCESS_KEY}"' >> $BASH_ENV
       - aws-cli/install
-      - assume-role/assume_role:
-          role: $ROLE_NAME
-          access_key_id: OLD_AWS_ACCESS_KEY_ID
-          secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
-          account: $ACCOUNT_ID_PROD
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_PROD
       - attach_workspace:
           at: .
       - run:
@@ -303,11 +297,13 @@ jobs:
             #$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')
             wget https://releases.hashicorp.com/terraform/${TERRAFORM}/terraform_${TERRAFORM}_linux_amd64.zip
             sudo unzip ./terraform_${TERRAFORM}_linux_amd64.zip -d /usr/local/bin/
-      - assume-role/assume_role:
-          role: $ROLE_NAME
-          access_key_id: OLD_AWS_ACCESS_KEY_ID
-          secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
-          account: $ACCOUNT_ID_PROD
+      - run:
+          name: Setup environment variables
+          command: |
+            echo 'export AWS_ACCESS_KEY_ID="${OLD_AWS_ACCESS_KEY_ID}"' >> $BASH_ENV
+            echo 'export AWS_SECRET_ACCESS_KEY="${OLD_AWS_SECRET_ACCESS_KEY}"' >> $BASH_ENV
+      - assume-role/assume-role:
+          account-id: $ACCOUNT_ID_PROD
       - run:
           name: Setup Stack
           command: |
@@ -334,11 +330,8 @@ jobs:
                     -auto-approve \
                     -lock-timeout=600s \
                     -var-file="_globals.tfvars"
-            - assume-role/assume_role:
-                role: $ROLE_NAME
-                access_key_id: OLD_AWS_ACCESS_KEY_ID
-                secret_access_key: OLD_AWS_SECRET_ACCESS_KEY
-                account: $ACCOUNT_ID_DEV
+            - assume-role/assume-role:
+                account-id: $ACCOUNT_ID_DEV
             - run:
                 name: Push Dev Variables
                 command: |
