@@ -27,6 +27,8 @@ export const RecCard = ({ id, position, cardShape = 'detail' }) => {
     dispatch(setHomeImpression(id))
   }
 
+  const { original_url } = item
+
   return item ? (
     <Card
       id={id}
@@ -37,6 +39,7 @@ export const RecCard = ({ id, position, cardShape = 'detail' }) => {
       showExcerpt={true}
       onItemInView={onItemInView}
       openAction={onOpen}
+      openUrl={original_url}
       isAuthenticated={isAuthenticated}
       ActionMenu={ActionMenu}
     />

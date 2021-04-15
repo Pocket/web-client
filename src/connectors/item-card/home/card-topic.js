@@ -16,7 +16,7 @@ export const ItemCard = ({ id, position }) => {
   const impressionFired = useSelector((state) => state.home.impressions[id])
   const item = useSelector((state) => state.discoverItemsById[id])
 
-  const { save_url, save_status } = item
+  const { save_url, save_status, original_url} = item
 
   const onItemInView = (inView) => {
     if (impressionFired || !inView) return
@@ -41,6 +41,7 @@ export const ItemCard = ({ id, position }) => {
       onSave={onSave}
       onItemInView={onItemInView}
       openAction={onOpen}
+      openUrl={original_url}
       ActionMenu={ActionsTopic}
     />
   )
