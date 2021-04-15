@@ -74,6 +74,7 @@ export function ItemCard({ id, position, type }) {
       position={position}
       itemType="myList"
       cardShape={type}
+      hiddenActions={true}
       showExcerpt={showExcerpt}
       bulkEdit={bulkEdit}
       bulkSelected={bulkSelected}
