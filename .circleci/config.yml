@@ -227,8 +227,6 @@ jobs:
           account: $ACCOUNT_ID_PROD
       - aws-ecr/build-and-push-image:
           checkout: false
-          aws-access-key-id: OLD_AWS_ACCESS_KEY_ID
-          aws-secret-access-key: OLD_AWS_SECRET_ACCESS_KEY
           repo: $MAIN_IMAGE_NAME
           setup-remote-docker: true
           tag: $CIRCLE_SHA1
