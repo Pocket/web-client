@@ -188,16 +188,10 @@ export function VirtualizedList(props) {
           paddingTop
         }}>
         <div className={sectionTypes[type]}>
-          {itemsToShow.map((id, index) => {
+          {itemsToShow.map((id) => {
             const positionOfItem = items.indexOf(id)
             return (
-              <MemoizedItem
-                id={id}
-                key={`${id}-${index}`}
-                position={positionOfItem}
-                type={type}
-                {...actions}
-              />
+              <MemoizedItem id={id} key={id} position={positionOfItem} type={type} {...actions} />
             )
           })}
         </div>
