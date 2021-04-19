@@ -1,4 +1,46 @@
 import { getImageCacheUrl } from 'common/utilities'
+import { css } from 'linaria'
+
+const cardMediaStyles = css`
+  position: relative;
+  border-radius: var(--size025);
+  overflow: hidden;
+  padding-bottom: 1rem;
+  img,
+  .no-image {
+    aspect-ratio: 3 / 2;
+    width: 100%;
+    height: auto;
+    transition-property: opacity;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--borderRadius);
+    &:before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, var(--fallbackBackground), var(--fallbackBackground)),
+        linear-gradient(to right, var(--color-canvas), var(--color-canvas));
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    &:after {
+      content: var(--fallbackLetter);
+      color: var(--fallbackColor);
+      font-size: 18rem;
+      font-weight: 500;
+      font-family: var(--fontSerifAlt);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: -4rem;
+      left: -1rem;
+    }
+  }
+`
 
 /**
  * Each card contains image/video thumbnails.  This is a separate component so we
@@ -49,7 +91,7 @@ export const CardMedia = function ({ image_src, title, id, setNoImage = () => {}
    * ad/tracking blockers. They flag images set by JS as block-worthy
    */
   return hasImage ? (
-    <div className="media">
+    <div className={`${cardMediaStyles} media`}>
       <img
         style={mediaFallbackDetails}
         onError={imageFailure}
@@ -61,7 +103,7 @@ export const CardMedia = function ({ image_src, title, id, setNoImage = () => {}
       />
     </div>
   ) : (
-    <div className="media">
+    <div className={`${cardMediaStyles} media`}>
       <div className="no-image" style={mediaFallbackDetails} />
     </div>
   )
