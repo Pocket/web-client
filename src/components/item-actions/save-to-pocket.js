@@ -36,6 +36,7 @@ const saveContainer = css`
     font-size: 1rem;
     height: var(--size150);
     line-height: var(--size150);
+    white-space: nowrap;
   }
 
   a {
