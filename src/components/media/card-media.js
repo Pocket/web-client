@@ -1,5 +1,6 @@
 import { getImageCacheUrl } from 'common/utilities'
 import { css } from 'linaria'
+import Link from 'next/link'
 
 const cardMediaStyles = css`
   position: relative;
@@ -50,7 +51,7 @@ const cardMediaStyles = css`
  * the container.  This module simple represents the graceful fallback as opposed
  * to the layout.
  */
-export const CardMedia = function ({ image_src, title, id, setNoImage = () => {} }) {
+export const CardMedia = function ({ image_src, title, id, setNoImage = () => {}, openUrl }) {
   /**
    * Fallback images:
    * useFallback checks for imageLoad and if it fails, provides a class
@@ -86,25 +87,35 @@ export const CardMedia = function ({ image_src, title, id, setNoImage = () => {}
 
   const imageFailure = () => setNoImage()
 
-  /**
-   * We are setting these explicitly to avoid the image getting blocked by
-   * ad/tracking blockers. They flag images set by JS as block-worthy
-   */
-  return hasImage ? (
-    <div className={`${cardMediaStyles} media`}>
+  const MediaImage = (hasImage) => {
+    return hasImage ? (
       <img
         style={mediaFallbackDetails}
         onError={imageFailure}
         alt=""
         src={getImageCacheUrl(image_src, { width: 562, height: 368 })}
-        srcSet={`
-          ${getImageCacheUrl(image_src, { width: 1124, height: 736 })} 2x
-        `}
+        srcSet={` ${getImageCacheUrl(image_src, { width: 1124, height: 736 })} 2x `}
       />
-    </div>
-  ) : (
-    <div className={`${cardMediaStyles} media`}>
+    ) : (
       <div className="no-image" style={mediaFallbackDetails} />
+    )
+  }
+
+  /**
+   * We are setting these explicitly to avoid the image getting blocked by
+   * ad/tracking blockers. They flag images set by JS as block-worthy
+   */
+  return (
+    <div className={`${cardMediaStyles} media`}>
+      {openUrl ? (
+        <Link href={openUrl ? openUrl : false}>
+          <a>
+            <MediaImage />
+          </a>
+        </Link>
+      ) : (
+        <MediaImage />
+      )}
     </div>
   )
 }

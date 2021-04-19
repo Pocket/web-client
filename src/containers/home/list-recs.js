@@ -21,10 +21,10 @@ const recGrid = css`
   }
 
   article:nth-child(1) {
-      .actions {
-        display: flex;
-      }
+    .actions {
+      display: flex;
     }
+  }
 
   //prettier-ignore
   article:nth-child(n+2) {

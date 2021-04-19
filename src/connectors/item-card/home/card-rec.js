@@ -32,6 +32,7 @@ export const RecCard = ({ id, position, cardShape = 'detail' }) => {
       id={id}
       item={item}
       position={position}
+      className="full"
       cardShape={cardShape}
       itemType="message"
       showExcerpt={true}

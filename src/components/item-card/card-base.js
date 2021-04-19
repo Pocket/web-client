@@ -340,6 +340,10 @@ export const cardStyles = css`
       white-space: nowrap;
     }
 
+    &.full .title {
+      width: 100%;
+    }
+
     .details {
       padding: var(--size025) 0;
     }
