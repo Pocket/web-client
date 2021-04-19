@@ -3,7 +3,8 @@ import { cardsGrid } from 'components/items-layout/base'
 
 export const offsetListStyle = css`
   ${cardsGrid};
-  padding: 1rem 0;
+  padding: 2.5rem 0;
+  grid-row-gap: 2.5rem;
   grid-column-gap: 0;
   border-bottom: 1px solid var(--color-dividerTertiary);
 `

@@ -5,23 +5,23 @@ const heroType = {
   center: {
     className: 'lockup hero-center',
     showExcerpt: true,
-    cardShape: 'grid'
+    cardShape: 'block'
   },
   right: {
     className: 'lockup hero-right',
     showExcerpt: true,
-    cardShape: 'grid'
+    cardShape: 'block'
   },
   left: {
     className: 'lockup hero-left',
     showExcerpt: true,
-    cardShape: 'grid'
+    cardShape: 'block'
   }
 }
 
 const base = {
   className: 'lockup',
-  cardShape: 'grid'
+  cardShape: 'block'
 }
 
 export const cardLockupStyle = css`
