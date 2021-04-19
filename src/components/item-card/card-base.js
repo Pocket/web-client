@@ -1,10 +1,22 @@
 import { css } from 'linaria'
+import { breakpointSmallDesktop } from '@pocket/web-ui'
+import { breakpointLargeTablet } from '@pocket/web-ui'
+import { breakpointMediumTablet } from '@pocket/web-ui'
+import { breakpointSmallTablet } from '@pocket/web-ui'
+import { breakpointTinyTablet } from '@pocket/web-ui'
+import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointSmallHandset } from '@pocket/web-ui'
+import { breakpointMediumHandset } from '@pocket/web-ui'
 
 // !! Caution
 // Changes to cardStyles will change ALL cards across the app (eventually).
 // The goal of these styles is to provide a baseline of styles which should/
 // be overridden for specific card types
 export const cardStyles = css`
+  --card-column-span: span 12;
+  --media-column-span: span 4;
+  --content-column-span: span 8;
+
   width: 100%;
   height: 100%;
   padding: 0;
@@ -12,14 +24,18 @@ export const cardStyles = css`
   font-weight: 400;
   position: relative;
   z-index: 0;
+  grid-column: var(--card-column-span);
 
   .cardWrap {
     position: relative;
-    display: block;
     height: 100%;
     width: 100%;
     text-decoration: none;
-    padding-bottom: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: var(--size150);
+    padding-bottom: 0;
+
     a {
       text-decoration: none;
       &:focus {
@@ -41,75 +57,32 @@ export const cardStyles = css`
     }
   }
 
-  .idOverlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: var(--spacing050);
-    border-radius: var(--size025);
-  }
-
   .media {
-    position: relative;
-    border-radius: var(--size025);
-    overflow: hidden;
-    img,
-    .no-image {
-      aspect-ratio: 3 / 2;
-      width: 100%;
-      height: auto;
-      transition-property: opacity;
-      transition-duration: 0.2s;
-      transition-timing-function: ease;
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--borderRadius);
-      &:before {
-        content: '';
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to right, var(--fallbackBackground), var(--fallbackBackground)),
-          linear-gradient(to right, var(--color-canvas), var(--color-canvas));
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-      &:after {
-        content: var(--fallbackLetter);
-        color: var(--fallbackColor);
-        font-size: 18rem;
-        font-weight: 500;
-        font-family: var(--fontSerifAlt);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: -4rem;
-        left: -1rem;
-      }
-    }
+    grid-column: var(--media-column-span);
   }
 
   .content {
     width: 100%;
+    grid-column: var(--content-column-span);
   }
 
   .title {
-    --color-underliner: var(--color-canvas);
-    font-family: Graphik Web;
+    font-family: var(--fontSansSerif);
     font-weight: 600;
-    font-size: var(--fontSize100);
-    line-height: 1.22;
+    font-size: 1rem;
+    line-height: 1.286;
     padding: 0;
     margin: 0;
-    max-height: 4.6em;
+    max-height: 3.858em;
     overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .details {
     font-style: normal;
     padding: var(--size050) 0;
+    font-size: var(--fontSize085);
+    line-height: 1.5;
     display: block;
     color: var(--color-textSecondary);
   }
@@ -142,16 +115,8 @@ export const cardStyles = css`
     width: 100%;
     position: absolute;
     bottom: 0;
-  }
-
-  .actions {
-    display: flex;
-    padding: var(--size100) 0 var(--size025);
-    justify-content: space-between;
-  }
-
-  &.noActions .cardLink {
-    padding-bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
   }
 
   &.noExcerpt .excerpt {
@@ -192,53 +157,71 @@ export const cardStyles = css`
 
   /** Block/Grid style
   --------------------------------------------------------------- */
-  &.block,
-  &.grid {
-    grid-column: span 4;
+  &.grid, /* my-list name for block elements */
+  &.block {
+    --card-column-span: span 4;
 
-    .title {
-      padding: var(--size100) 0 0;
+    .cardWrap {
+      display: block;
+      padding-bottom: 2.5rem;
     }
 
-    &.hiddenActions .actions {
-      display: none;
+    /* Hide actions on block cards only */
+    &.hiddenActions {
+      .actions {
+        display: none;
+      }
+      &:focus-within .actions,
+      &:hover .actions {
+        display: flex;
+      }
     }
 
-    &.hiddenActions:focus-within .actions,
-    &.hiddenActions:hover .actions {
-      display: flex;
-    }
+    /* ${breakpointMediumTablet} {
+      --card-column-span: span 6;
 
-    &.noMedia {
-      .cardLink .title {
-        margin-top: 0;
+    } */
+
+    ${breakpointTinyTablet} {
+      --card-column-span: span 12;
+      border-bottom: 1px solid var(--color-dividerTertiary);
+
+      &.hiddenActions .actions {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 0 1rem;
+      }
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+
+      .cardWrap {
+        display: grid;
+        padding-bottom: 1.85rem;
+      }
+
+      .footer .actions {
+        grid-column: 5 / span 8;
+        padding-bottom: 0.5rem;
+        .item-actions {
+          transform: none;
+        }
       }
     }
   }
 
-  /** Wide/Discover style
+  /** Wide style
   --------------------------------------------------------------- */
-  &.wide,
-  &.discover {
-    max-width: 745px;
-    grid-column: span 10;
-    .cardWrap {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-column-gap: var(--size150);
-      padding-bottom: 0;
+  &.wide {
+    --card-column-span: span 8;
+
+    .content {
+      padding-bottom: var(--size250);
     }
 
-    .media {
-      grid-column: span 3;
-    }
-    .content {
-      grid-column: span 9;
-      padding-bottom: var(--size200);
-    }
     .title {
-      margin-top: 0;
-      font-size: var(--fontSize100);
+      font-size: var(--fontSize150);
       line-height: 1.286;
       max-height: 3.8em;
     }
@@ -248,21 +231,12 @@ export const cardStyles = css`
       grid-template-columns: repeat(12, 1fr);
       grid-column-gap: var(--size150);
       .actions {
-        grid-column: 4 / -1;
+        grid-column: 5 / -1;
       }
     }
 
-    &.noActions {
-      .cardLink .content {
-        padding-bottom: 0;
-      }
-    }
-
-    &.noMedia {
-      a.cardLink .content,
-      .footer .actions {
-        grid-column: span 8;
-      }
+    &.noMedia .content {
+      grid-column: span 8;
     }
   }
 
@@ -270,29 +244,18 @@ export const cardStyles = css`
   --------------------------------------------------------------- */
   &.list {
     padding: var(--size100) 0;
-    grid-column: span 12;
     border-bottom: 1px solid var(--color-dividerTertiary);
-    .cardWrap {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-column-gap: var(--size150);
-      padding-bottom: 0;
-    }
+
     .media {
       grid-column: span 1;
+      padding-bottom: 0;
     }
     .content {
       grid-column: span 11;
     }
     .title {
-      margin-top: 0;
-      padding-top: 0;
-      font-size: var(--fontSize100);
-      line-height: 1.286;
       width: 70%;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
     .details {
       font-size: var(--fontSize085);
@@ -305,6 +268,7 @@ export const cardStyles = css`
     .footer {
       width: initial;
       position: absolute;
+      display: block;
       top: 50%;
       right: 0;
       transform: translateY(-50%);
@@ -316,6 +280,38 @@ export const cardStyles = css`
       padding: 0.125em 0.625em;
       transform: translate(-0.625rem, -1.1rem);
     }
+
+    /* 959 */
+    ${breakpointMediumTablet} {
+      .media {
+        display: none;
+      }
+      .content {
+        grid-column: span 12;
+      }
+    }
+
+    /* 719 */
+    ${breakpointTinyTablet} {
+      .cardWrap {
+        height: initial;
+      }
+      .title {
+        width: 100%;
+      }
+      .footer {
+        width: initial;
+        position: relative;
+        top: initial;
+        right: initial;
+        transform: translateY(0);
+      }
+      .actions {
+        grid-column: span 12;
+        padding-top: 0.5rem;
+        justify-content: flex-end;
+      }
+    }
   }
 
   /** Detail style
@@ -325,13 +321,6 @@ export const cardStyles = css`
     height: 155px;
     padding: 1em 0;
     border-bottom: 1px solid var(--color-dividerTertiary);
-
-    .cardWrap {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-column-gap: var(--size150);
-      padding-bottom: 0;
-    }
 
     .media {
       grid-column: span 2;
@@ -343,19 +332,11 @@ export const cardStyles = css`
     }
 
     .title {
-      margin-top: 0;
-      padding-top: 0;
-      font-size: var(--fontSize100);
-      line-height: 1.286;
-      width: auto;
+      width: 70%;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .details {
-      font-size: var(--fontSize085);
-      line-height: 1.5;
       padding: var(--size025) 0;
     }
 
@@ -365,17 +346,6 @@ export const cardStyles = css`
       overflow: hidden;
       text-overflow: ellipsis;
       display: block;
-    }
-
-    .item-actions {
-      padding: 0;
-      &:after {
-        box-shadow: none;
-      }
-    }
-
-    .item-menu {
-      width: initial;
     }
 
     .footer {
@@ -411,12 +381,75 @@ export const cardStyles = css`
       padding: 0;
       justify-content: flex-end;
     }
+
+    /* 1023 */
+    ${breakpointLargeTablet} {
+      .tags {
+        grid-column: 1 / span 9;
+      }
+      .actions {
+        grid-column: 10 / span 3;
+      }
+    }
+
+    /* 959 */
+    ${breakpointMediumTablet} {
+      .tags {
+        grid-column: 1 / span 8;
+      }
+      .actions {
+        grid-column: 9 / span 4;
+      }
+    }
+
+    /* 839 */
+    ${breakpointSmallTablet} {
+      .content {
+        grid-column: span 8;
+      }
+      .media {
+        grid-column: span 4;
+      }
+      .tags {
+        grid-column: 1 / span 8;
+      }
+      .actions {
+        grid-column: 9 / span 3;
+      }
+    }
+
+    /* 719 */
+    ${breakpointTinyTablet} {
+      height: 185px;
+      .tags {
+        grid-column: span 12;
+      }
+      .actions {
+        grid-column: span 12;
+        padding-top: 0.5rem;
+        justify-content: flex-end;
+      }
+    }
+
+    /* 599 */
+    ${breakpointLargeHandset} {
+      .content {
+        grid-column: span 12;
+      }
+      .media {
+        display: none;
+      }
+    }
   }
 
   /** Lockup style
   --------------------------------------------------------------- */
   &.lockup {
     grid-column: span 3;
+    .title {
+      font-size: var(--fontSize125);
+      line-height: 1.263;
+    }
   }
 
   &.hero-center,
@@ -425,6 +458,7 @@ export const cardStyles = css`
     .title {
       font-size: var(--fontSize200);
       line-height: 1.212;
+      max-height: 5.3em;
     }
   }
 
@@ -463,7 +497,7 @@ export const cardStyles = css`
       line-height: 1.286;
     }
 
-    .footer .actions{
+    .footer .actions {
       grid-column: 5 / span 8;
     }
   }
