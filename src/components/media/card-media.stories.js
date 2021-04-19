@@ -3,19 +3,6 @@ import { css } from 'linaria'
 
 const imageWrapper = css`
   width: 500px;
-
-  .media {
-    overflow: hidden;
-    width: 100%;
-    height: 0;
-    padding-top: 66.66%;
-    background-repeat: 'no-repeat';
-    background-position: center;
-    background-size: cover;
-    transition-property: opacity;
-    transition-duration: 0.2s;
-    transition-timing-function: ease;
-  }
 `
 
 export default {
