@@ -1,7 +1,7 @@
 import { cx } from 'linaria'
-import { itemActionStyle } from './base'
-import { menuItemStyle } from './base'
-import { OverflowAction } from './overflow'
+import { itemActionStyle } from 'components/item-actions/base'
+import { menuItemStyle } from 'components/item-actions/base'
+import { OverflowAction } from 'components/item-actions/overflow'
 import { topTooltipDelayed } from 'components/tooltip/tooltip'
 
 export const MenuItem = ({
@@ -47,10 +47,10 @@ export const MenuItem = ({
  */
 export function ItemActions({ menuItems, overflowItems }) {
   return (
-    <div className="actions">
+    <div className={`${itemActionStyle} actions`}>
       {/* Menu items sit to the left of the card footer */}
       {menuItems ? (
-        <div className={`${itemActionStyle} item-actions`}>
+        <div className="item-actions">
           {menuItems.map((item) => (
             <MenuItem key={item.label} {...item} />
           ))}
@@ -59,7 +59,7 @@ export function ItemActions({ menuItems, overflowItems }) {
 
       {/* Overflow items sit to the right.  Any items added to this array will sit behind the overflow menu */}
       {overflowItems ? (
-        <div className={`${itemActionStyle} item-actions`}>
+        <div className="item-actions">
           <OverflowAction menuItems={overflowItems} />
         </div>
       ) : null}

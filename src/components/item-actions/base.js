@@ -2,11 +2,16 @@ import { css } from 'linaria'
 
 export const itemActionStyle = css`
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  align-content: center;
-  position: relative;
-  transform: translateX(-0.25rem);
+  padding: var(--size100) 0 var(--size025);
+  justify-content: space-between;
+  .item-actions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    position: relative;
+    transform: translateX(-0.25rem);
+  }
 `
 
 export const menuItemStyle = css`
