@@ -5,6 +5,9 @@ import myListResponse from 'mock/my-list.json'
 import discoverResponse from 'mock/discover.json'
 import { css } from 'linaria'
 import { cardsGrid } from './base'
+import { Lockup } from 'components/items-layout/list-lockup'
+import { OffsetList } from 'components/items-layout/list-offset'
+import { arrayToObject } from 'common/utilities'
 
 const discoverItems = deriveDiscoverItems(discoverResponse.feed).map((item) => {
   item.story_name = `Discover - ${item.title}`
@@ -17,6 +20,8 @@ const myListItems = deriveMyListItems(Object.values(myListResponse.list)).map((i
 })
 
 const itemsToDisplay = [...myListItems, ...discoverItems]
+const items = arrayToObject(itemsToDisplay, 'item_id')
+const itemIds = Object.keys(items)
 
 const grid = css`
   max-width: 936px;
@@ -27,42 +32,23 @@ export default {
   title: 'Card/Card Layouts',
   component: CardComponent,
   argTypes: {
-    cardShape: {
-      control: {
-        type: 'inline-radio'
-      }
-    },
-    item: {
-      table: {
-        disable: true
-      }
-    },
-    actions: {
-      table: {
-        disable: true
-      }
-    },
-    position: {
-      table: {
-        disable: true
-      }
-    }
+    cardShape: { control: { type: 'inline-radio' } },
+    item: { table: { disable: true } },
+    actions: { table: { disable: true } },
+    position: { table: { disable: true } },
+    className: { table: { disable: true } },
+    impressionAction: { table: { disable: true } },
+    engagementAction: { table: { disable: true } },
+    saveAction: { table: { disable: true } },
+    reportAction: { table: { disable: true } },
+    unSaveAction: { table: { disable: true } },
+    openAction: { table: { disable: true } },
+    itemBulkSelect: { table: { disable: true } },
+    itemBulkDeSelect: { table: { disable: true } }
   }
 }
 
 export const ListOfCards = (args) => {
-  return itemsToDisplay.map((item) => (
-    <CardComponent item={item} position={0} actions={{}} {...args} />
-  ))
-}
-ListOfCards.args = {
-  showExcerpt: true,
-  showMedia: true,
-  itemType: null,
-  cardShape: 'block'
-}
-
-export const GridOfCards = (args) => {
   return (
     <div className={grid}>
       {itemsToDisplay.map((item) => (
@@ -71,141 +57,29 @@ export const GridOfCards = (args) => {
     </div>
   )
 }
-GridOfCards.args = {
+ListOfCards.args = {
   showExcerpt: true,
   showMedia: true,
-  itemType: 'myList',
   cardShape: 'block'
 }
 
-export const MixedLayout = (args) => {
-  const hero = {
-    cardShape: 'block',
-    className: 'hero-block',
-    showMedia: true
-  }
-  const subset = {
-    cardShape: 'detail',
-    className: 'subset',
-    showExcerpt: true,
-    showMedia: true,
-    itemType: 'discover'
-  }
-
-  const layout = {
-    0: hero,
-    1: subset,
-    2: subset,
-    3: subset
-  }
-
-  return (
-    <div className={grid}>
-      {itemsToDisplay.map((item, index) => {
-        const argsToPass = { ...args, ...layout[index] }
-        return <CardComponent item={item} position={0} actions={{}} {...argsToPass} />
-      })}
-    </div>
-  )
+// This emulates a connected item
+const ItemCard = ({ id, ...rest }) => {
+  return <CardComponent item={items[id]} {...rest} />
 }
 
-MixedLayout.args = {
-  showExcerpt: true,
-  showMedia: true,
-  itemType: 'discover',
-  cardShape: 'block'
-}
+export const HeroCenter = (args) => (
+  <Lockup items={itemIds} offset={0} heroPosition="center" ItemCard={ItemCard} />
+)
 
-export const CenterLockup = (args) => {
-  const hero = {
-    className: 'hero-center',
-    cardShape: 'grid',
-    itemType: 'discover',
-    showExcerpt: true
-  }
-  const base = {
-    className: 'lockup',
-    cardShape: 'grid',
-    itemType: 'discover'
-  }
+export const HeroLeft = (args) => (
+  <Lockup items={itemIds} offset={0} heroPosition="left" ItemCard={ItemCard} />
+)
 
-  const layout = {
-    0: hero,
-    1: base,
-    2: base,
-    3: base,
-    4: base
-  }
+export const HeroRight = (args) => (
+  <Lockup items={itemIds} offset={0} heroPosition="right" ItemCard={ItemCard} />
+)
 
-  return (
-    <div className={grid}>
-      {itemsToDisplay.slice(0, 5).map((item, index) => {
-        const argsToPass = { ...args, ...layout[index] }
-        return <CardComponent item={item} position={0} actions={{}} {...argsToPass} />
-      })}
-    </div>
-  )
-}
-
-export const LeftLockup = (args) => {
-  const hero = {
-    className: 'hero-left',
-    cardShape: 'grid',
-    itemType: 'discover',
-    showExcerpt: true
-  }
-
-  const base = {
-    className: 'lockup',
-    cardShape: 'grid',
-    itemType: 'discover'
-  }
-
-  const layout = {
-    0: hero,
-    1: base,
-    2: base,
-    3: base,
-    4: base
-  }
-
-  return (
-    <div className={grid}>
-      {itemsToDisplay.slice(0, 5).map((item, index) => {
-        const argsToPass = { ...args, ...layout[index] }
-        return <CardComponent item={item} position={0} actions={{}} {...argsToPass} />
-      })}
-    </div>
-  )
-}
-
-export const RightLockup = (args) => {
-  const hero = {
-    className: 'hero-right',
-    cardShape: 'grid',
-    itemType: 'discover',
-    showExcerpt: true
-  }
-  const base = {
-    className: 'lockup',
-    cardShape: 'grid',
-    itemType: 'discover'
-  }
-
-  const layout = {
-    0: hero,
-    1: base,
-    2: base,
-    3: base,
-    4: base
-  }
-
-  return (
-    <div className={grid}>
-      {itemsToDisplay.slice(0, 5).map((item, index) => {
-        const argsToPass = { ...args, ...layout[index] }
-        return <CardComponent item={item} position={0} actions={{}} {...argsToPass} />
-      })}
-    </div>
-  )
-}
+export const FiniteList = (args) => (
+  <OffsetList items={itemIds} offset={10} cardShape="wide" ItemCard={ItemCard} />
+)
