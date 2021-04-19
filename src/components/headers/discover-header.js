@@ -8,8 +8,6 @@ import { breakpointMediumTablet } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 
 const cardPageHeaderStyle = css`
-  margin-bottom: var(--spacing100);
-
   h1 {
     font-family: 'Graphik Web';
     font-style: normal;
@@ -38,17 +36,13 @@ const cardPageHeaderStyle = css`
     }
   }
 
-  h2 {
-    margin-bottom: var(--spacing050);
-  }
-
   .collectionSubTitle {
     font-family: 'Graphik Web';
     font-style: normal;
     font-weight: 500;
     font-size: var(--fontSize100);
     text-transform: uppercase;
-    padding-bottom: var(--spacing050);
+    padding-bottom: 0;
     margin: 0;
     color: var(--color-actionPrimary);
 
@@ -57,7 +51,7 @@ const cardPageHeaderStyle = css`
     }
 
     ${breakpointLargeHandset} {
-      padding-bottom: var(--spacing025);
+      padding-bottom: 0;
       margin: 0;
     }
   }
@@ -67,7 +61,7 @@ const cardPageHeaderStyle = css`
     p {
       font-family: 'Graphik Web';
       font-size: var(--fontSize100);
-      padding-bottom: var(--spacing050);
+      padding-bottom: 0;
       margin: 0;
 
       ${breakpointMediumTablet} {
@@ -75,7 +69,7 @@ const cardPageHeaderStyle = css`
       }
 
       ${breakpointSmallTablet} {
-        padding-bottom: var(--spacing100);
+        padding-bottom: 0;
         margin: 0;
       }
     }
@@ -89,22 +83,22 @@ const subHeadingStyle = css`
   font-weight: 500;
   font-size: var(--fontSize125);
   line-height: 1.2;
-  padding-bottom: var(--spacing050);
+  padding-bottom: 0;
   margin: 0;
 
   ${breakpointMediumTablet} {
     font-weight: 500;
     font-size: var(--fontSize100);
-    padding-bottom: var(--spacing025);
+    padding-bottom: 0;
     margin: 0;
   }
 `
 
 const cardListHeadingStyle = css`
-  padding: var(--spacing250) 0;
+  padding: var(--spacing250) 0 0;
 
   ${breakpointLargeHandset} {
-    padding: var(--spacing150) 0;
+    padding: var(--spacing150) 0 0;
   }
 `
 
