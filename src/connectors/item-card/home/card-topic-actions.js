@@ -1,4 +1,5 @@
 import React from 'react'
+import { itemActionStyle } from 'components/item-actions/base'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveHomeItem } from 'containers/home/home.state'
@@ -27,7 +28,7 @@ export function ActionsTopic({ id, position }) {
   const url = openExternal ? open_url : `/read/${id}`
 
   return (
-    <div className="actions">
+    <div className={`${itemActionStyle} actions`}>
       <SaveToPocket
         allowRead={true}
         url={url}

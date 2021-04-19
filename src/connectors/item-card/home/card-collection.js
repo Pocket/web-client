@@ -37,10 +37,10 @@ export const CollectionCard = ({ collection, position }) => {
       item={item}
       position={position}
       cardShape="grid"
-      itemType="message"
       showExcerpt={true}
       onItemInView={onItemInView}
       openAction={onOpen}
+      openUrl={collection?.url}
       isAuthenticated={isAuthenticated}
     />
   ) : null

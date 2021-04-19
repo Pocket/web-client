@@ -10,17 +10,6 @@ const recentGrid = css`
   grid-column-gap: var(--spacing150);
   grid-template-columns: repeat(12, 1fr);
   padding: 1rem 0;
-  article {
-    grid-column: span 4;
-    border-bottom: none;
-    padding: 0.5rem 0;
-    .title {
-      font-size: 1rem;
-    }
-    .details {
-      font-size: 0.75rem;
-    }
-  }
 `
 export const HomeRecentList = () => {
   const recentSaves = useSelector((state) => state.home.recentSaves)

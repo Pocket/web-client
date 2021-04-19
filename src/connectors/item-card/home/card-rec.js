@@ -13,8 +13,6 @@ export const RecCard = ({ id, position, cardShape = 'detail' }) => {
   const impressionFired = useSelector((state) => state.home.impressions[id])
   const item = useSelector((state) => state.recit.recentRecs[id])
 
-  const ActionMenu = ActionsRec
-
   /** ITEM TRACKING
   --------------------------------------------------------------- */
   const onOpen = () => {
@@ -41,7 +39,7 @@ export const RecCard = ({ id, position, cardShape = 'detail' }) => {
       openAction={onOpen}
       openUrl={original_url}
       isAuthenticated={isAuthenticated}
-      ActionMenu={ActionMenu}
+      ActionMenu={ActionsRec}
     />
   ) : null
 }
