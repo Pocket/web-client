@@ -1,3 +1,10 @@
+## [1.10.3](https://github.com/Pocket/web-client/compare/v1.10.2...v1.10.3) (2021-04-16)
+
+
+### Bug Fixes
+
+* **my list:** remove index causing lock in ([72af6cd](https://github.com/Pocket/web-client/commit/72af6cdefa2a6828c5948de5f6fe39d064a5aabd))
+
 ## [1.10.2](https://github.com/Pocket/web-client/compare/v1.10.1...v1.10.2) (2021-04-13)
 
 
