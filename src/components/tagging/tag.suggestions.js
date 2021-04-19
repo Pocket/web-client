@@ -26,10 +26,12 @@ function Loading() {
   )
 }
 
-function UpSell({ trackClick }) {
+function StartTagging() {
   return (
-    <div className={suggestedWrapper}>
-      <TagUpsell trackClick={trackClick} />
+    <div className={`${suggestedWrapper} subtext`}>
+      <Trans i18nKey="tags:start-tagging">
+        Start adding tags to your items in order to see them suggested here.
+      </Trans>
     </div>
   )
 }
@@ -49,8 +51,8 @@ function Suggestion({ tag, addTag }) {
 function NoSuggestions() {
   return (
     <div className={`${suggestedWrapper} subtext`}>
-      <Trans i18nKey="tags:could-not-find-suggested">
-        We didn't find any tag suggestions
+      <Trans i18nKey="tags:unable-to-find-suggested">
+        We were unable to find any tags to suggest for this item.
       </Trans>
     </div>
   )
@@ -60,14 +62,13 @@ export function TagSuggestions({
   suggestedTags,
   tags,
   addTag,
-  isPremium,
-  trackClick
+  allTags
 }) {
-  // UpSell if user is not premium
-  if (!isPremium) return <UpSell trackClick={trackClick} />
-
   // Loading if we don't have suggestedTags
   if (!suggestedTags) return <Loading />
+
+  // No suggestions and no user tags
+  if (suggestedTags?.length === 0 && allTags.length === 0) return <StartTagging />
 
   // No suggestions?
   if (suggestedTags?.length === 0) return <NoSuggestions />

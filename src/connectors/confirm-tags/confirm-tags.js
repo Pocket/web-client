@@ -174,7 +174,7 @@ export function TaggingModal() {
             />
           ) : null}
         </TagBox>
-        {!isPremium && isSingleTag ? (
+        {!isPremium ? (
           <TagUpsell onVisible={handleImpression} />
         ) : null}
         {isPremium && isSingleTag ? (
@@ -182,8 +182,7 @@ export function TaggingModal() {
             suggestedTags={suggestedTags}
             tags={currentTags}
             addTag={addTag}
-            isPremium={isPremium}
-            trackClick={() => {}}
+            allTags={allTags}
           />
         ) : null}
       </ModalBody>
