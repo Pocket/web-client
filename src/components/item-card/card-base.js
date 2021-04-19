@@ -458,7 +458,7 @@ export const cardStyles = css`
     .title {
       font-size: var(--fontSize200);
       line-height: 1.212;
-      max-height: 5.3em;
+      max-height: 4.848em;
     }
   }
 
