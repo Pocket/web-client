@@ -20,14 +20,15 @@ export const ReportFeedbackModal = () => {
   const id = useSelector((state) => state.itemToReport)
   const item = useSelector((state) => state.discoverItemsById[id])
 
-  const showModal = item
+  const showModal = !!item
 
-  const handleClose = dispatch(itemReportCancel())
+  const handleClose = () => dispatch(itemReportCancel())
   const handleRadioChange = (event) => updateReason(event.target.value)
   const handleTextAreaChange = (event) => {
+    event.preventDefault()
     const newOtherValue = event.target.value
     updateOtherText(newOtherValue)
-    if (!hasError()) updateErrorCode(null)
+    if (errorCode && !hasError()) updateErrorCode(null)
   }
   const handleAfterClose = () => {
     // clean up state
@@ -39,10 +40,10 @@ export const ReportFeedbackModal = () => {
 
   const hasError = () => {
     const isOther = reason === 'other'
-    const empty = !otherText || !otherText.trim()
+    const empty = otherText.trim().length === 0
     const tooLong = otherText.trim().length > OTHER_FIELD_CHAR_LIMIT
 
-    if (isOther) {
+    if (isOther && (empty || tooLong)) {
       if (empty) updateErrorCode('empty')
       if (tooLong) updateErrorCode('tooLong')
       return true
@@ -55,6 +56,7 @@ export const ReportFeedbackModal = () => {
     if (hasError()) return
     const { save_url, item_id } = item
     dispatch(itemReportConfirm({ reason, otherText, save_url, item_id }))
+    updateSubmitSuccess(true)
   }
 
   const reasons = [
@@ -73,6 +75,7 @@ export const ReportFeedbackModal = () => {
 
   const title = t('confirm:report-title', 'Report a Concern')
   const readerLabel = t('confirm:report-label', 'Request Feedback Modal')
+  const errorMessage = errors[errorCode]
 
   return item ? (
     <Modal
@@ -90,7 +93,7 @@ export const ReportFeedbackModal = () => {
           handleTextAreaChange={handleTextAreaChange}
           currentReason={reason}
           otherText={otherText}
-          otherErrorMessage={errors[errorCode]}
+          otherErrorMessage={errorMessage}
         />
       </ModalBody>
       {success ? null : (

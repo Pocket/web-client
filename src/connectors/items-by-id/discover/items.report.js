@@ -13,7 +13,7 @@ import { ITEMS_REPORT_FAILURE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const itemReportAction = (item) => ({ type: ITEMS_REPORT_REQUEST, item })
+export const itemReportAction = (id) => ({ type: ITEMS_REPORT_REQUEST, id })
 export const itemReportConfirm = () => ({ type: ITEMS_REPORT_CONFIRM })
 export const itemReportCancel = () => ({ type: ITEMS_REPORT_CANCEL })
 
@@ -24,8 +24,8 @@ const initialState = false
 export const itemReportReducers = (state = initialState, action) => {
   switch (action.type) {
     case ITEMS_REPORT_REQUEST: {
-      const { item } = action
-      return item
+      const { id } = action
+      return id
     }
 
     case ITEMS_REPORT_FAILURE:

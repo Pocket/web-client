@@ -77,7 +77,7 @@ export const Card = (props) => {
   }, [shortcutSelected, linkRef])
 
   const handleFocus = () => {
-    if (!shortcutSelected) shortcutSelect()
+    if (!shortcutSelected && shortcutSelect) shortcutSelect()
   }
 
   if (!item) return null

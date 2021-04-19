@@ -177,6 +177,10 @@ export const cardStyles = css`
       }
     }
 
+    .footer .actions {
+      grid-column: span 12;
+    }
+
     /* ${breakpointMediumTablet} {
       --card-column-span: span 6;
 
