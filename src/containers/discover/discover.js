@@ -27,8 +27,8 @@ import ErrorPage from 'pages/_error'
 import { CardPageHeader } from 'components/headers/discover-header'
 import { CardListHeading } from 'components/headers/discover-header'
 import { ItemCard } from 'connectors/item-card/discover/card'
-import { Lockup } from 'connectors/item-lists/list-lockup'
-import { OffsetList } from 'connectors/item-lists/list-offset'
+import { Lockup } from 'components/items-layout/list-lockup'
+import { OffsetList } from 'components/items-layout/list-offset'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
 import ReportFeedbackModal from 'components/report-feedback-modal/report-feedback-modal'
@@ -77,12 +77,12 @@ export default function Discover({ url }) {
         {/* Top List */}
       <CardListHeading>Fascinating stories</CardListHeading>
 
-      <OffsetList items={items} offset={5} cardShape="discover" ItemCard={ItemCard} />
+      <OffsetList items={items} offset={5} cardShape="wide" ItemCard={ItemCard} />
       <Lockup items={items} offset={10} heroPosition="left" ItemCard={ItemCard} />
 
       <CalloutBottom shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
 
-      <OffsetList items={items} offset={15} cardShape="discover" ItemCard={ItemCard} />
+      <OffsetList items={items} offset={15} cardShape="wide" ItemCard={ItemCard} />
 
       <CardTopicsNav topics={topics} track={trackTopicClick} className="no-border" />
 
