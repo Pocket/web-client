@@ -176,7 +176,7 @@ Card.propTypes = {
   */
   item: PropTypes.object,
   showExcerpt: PropTypes.bool,
-  cardShape: PropTypes.oneOf(['block', 'grid', 'wide', 'list', 'detail', 'discover']),
+  cardShape: PropTypes.oneOf(['grid', 'block', 'wide', 'detail', 'list']),
   hiddenActions: PropTypes.bool,
   bulkEdit: PropTypes.bool,
   bulkSelected: PropTypes.bool,
@@ -194,7 +194,7 @@ Card.propTypes = {
 }
 
 Card.defaultProps = {
-  cardShape: 'block',
+  cardShape: '',
   showExcerpt: false,
   showMedia: true,
   hiddenActions: false,
