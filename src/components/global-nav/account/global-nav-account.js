@@ -341,7 +341,8 @@ const GlobalNavAccount = ({
             id="account-menu-messages-link"
             onClick={(event) => {
               handleLinkClick('messages', event)
-            }}>
+            }}
+            data-cy="account-menu-messages-link">
             <Trans i18nKey="nav:messages">Messages</Trans>
           </PopupMenuItem>
           <PopupMenuItem

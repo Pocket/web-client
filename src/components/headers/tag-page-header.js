@@ -92,6 +92,7 @@ export const TaggedHeader = ({
         <button
           aria-label={t('nav:pin-tag', 'Pin Tag')}
           data-tooltip={t('nav:pin-tag', 'Pin Tag')}
+          data-cy="tag-pin"
           className={cx(buttonReset, bottomTooltipDelayed)}
           onClick={pinTag}>
           {isPinned ? <PinFilledIcon /> : <PinIcon />}
@@ -100,6 +101,7 @@ export const TaggedHeader = ({
         <button
           aria-label={t('nav:edit-tag', 'Edit Tag')}
           data-tooltip={t('nav:edit-tag', 'Edit Tag')}
+          data-cy="tag-edit"
           className={cx(buttonReset, bottomTooltipDelayed)}
           onClick={editTag}>
           <EditIcon />
@@ -108,6 +110,7 @@ export const TaggedHeader = ({
         <button
           aria-label={t('nav:delete-tag', 'Delete Tag')}
           data-tooltip={t('nav:delete-tag', 'Delete Tag')}
+          data-cy="tag-delete"
           className={cx(buttonReset, bottomTooltipDelayed)}
           onClick={deleteTag}>
           <DeleteIcon />
