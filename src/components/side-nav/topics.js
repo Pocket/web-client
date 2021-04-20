@@ -14,7 +14,8 @@ import { sideNavHeader } from './side-nav'
 export function TopicsSideNav({
   subActive,
   pinnedTopics,
-  showVoltron
+  showVoltron,
+  clickEvent
 }) {
   return (
     <>
@@ -25,7 +26,7 @@ export function TopicsSideNav({
       {pinnedTopics.length
         ? pinnedTopics.map((topic) => (
             <a href={`https://getpocket.com/explore/${topic.topic_slug}?src=sidebar`} key={topic.topic_slug}>
-              <button className={subActive(topic)}>{topic.display_name}</button>
+              <button className={subActive(topic)} onClick={clickEvent}>{topic.display_name}</button>
             </a>
           ))
         : null}

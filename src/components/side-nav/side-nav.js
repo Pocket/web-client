@@ -223,12 +223,14 @@ export function SideNav({
             showLab={showLab}
             subActive={subActive}
             pinnedTopics={pinnedTopics}
+            clickEvent={clickEvent}
           />
         ) : (
           <FiltersSideNav
             showLab={showLab}
             subActive={subActive}
             pinnedTags={pinnedTags}
+            clickEvent={clickEvent}
           />
         )}
       </nav>

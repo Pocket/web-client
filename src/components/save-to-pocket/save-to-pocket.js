@@ -88,7 +88,7 @@ export const SavePopover = function ({ popoverRef, id }) {
 export const SaveToPocket = function ({
   saveAction,
   isAuthenticated,
-  saveStatus,
+  saveStatus = 'unsaved',
   id
 }) {
   const saveCopy = {

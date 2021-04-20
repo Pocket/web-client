@@ -14,7 +14,8 @@ import { sideNavHeader } from './side-nav'
 export function FiltersSideNav({
   showLab,
   subActive,
-  pinnedTags
+  pinnedTags,
+  clickEvent
 }) {
   return (
     <>
@@ -24,7 +25,7 @@ export function FiltersSideNav({
 
       {showLab ? (
         <Link href="/my-list/archive">
-          <button className={subActive('archive')}>
+          <button className={subActive('archive')} onClick={clickEvent}>
             <ArchiveIcon className="side-nav-icon" />{' '}
             <Trans i18nKey="nav:archive">Archive</Trans>
           </button>
@@ -32,35 +33,35 @@ export function FiltersSideNav({
       ) : null}
 
       <Link href="/my-list/favorites">
-        <button className={subActive('favorites')}>
+        <button className={subActive('favorites')} onClick={clickEvent}>
           <FavoriteIcon className="side-nav-icon" />{' '}
           <Trans i18nKey="nav:favorites">Favorites</Trans>
         </button>
       </Link>
 
       <Link href="/my-list/highlights">
-        <button className={subActive('highlights')}>
+        <button className={subActive('highlights')} onClick={clickEvent}>
           <HighlightIcon className="side-nav-icon" />{' '}
           <Trans i18nKey="nav:highlights">Highlights</Trans>
         </button>
       </Link>
 
       <Link href="/my-list/articles">
-        <button className={subActive('articles')}>
+        <button className={subActive('articles')} onClick={clickEvent}>
           <ArticleIcon className="side-nav-icon" />{' '}
           <Trans i18nKey="nav:articles">Articles</Trans>
         </button>
       </Link>
 
       <Link href="/my-list/videos">
-        <button className={subActive('videos')}>
+        <button className={subActive('videos')} onClick={clickEvent}>
           <VideoIcon className="side-nav-icon" />{' '}
           <Trans i18nKey="nav:videos">Videos</Trans>
         </button>
       </Link>
       <div className={sideNavHeader}>Tags</div>
       <Link href="/my-list/tags">
-        <button className={subActive('tag')}>
+        <button className={subActive('tag')} onClick={clickEvent}>
           <TagIcon className="side-nav-icon" />{' '}
           <Trans i18nKey="nav:all-tags">All Tags</Trans>
         </button>
@@ -68,7 +69,7 @@ export function FiltersSideNav({
       {pinnedTags.length
         ? pinnedTags.map((tag) => (
             <Link href={`/my-list/tags/${tag}`} key={tag}>
-              <button className={subActive(tag, true)}>{tag}</button>
+              <button className={subActive(tag, true)} onClick={clickEvent}>{tag}</button>
             </Link>
           ))
         : null}
