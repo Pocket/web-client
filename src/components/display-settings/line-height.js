@@ -38,6 +38,7 @@ export const LineHeightSettings = ({
         <StepperButton
           active={minusActive()}
           onClick={handleDecrease}
+          data-cy="display-line-height-decrease"
           aria-label={t(
             'settings:decrease-line-height',
             'Decrease Line Height'
@@ -52,6 +53,7 @@ export const LineHeightSettings = ({
         <StepperButton
           active={plusActive()}
           onClick={handleIncrease}
+          data-cy="display-line-height-increase"
           aria-label={t(
             'settings:increase-line-height',
             'Increase Line Height'

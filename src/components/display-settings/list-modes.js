@@ -77,6 +77,7 @@ export const ListSettings = ({
                 'settings:sort-items-by-oldest-first',
                 'Sort items by oldest first'
               )}
+              data-cy="sort-oldest"
               className={cx(buttonReset, bottomTooltip, 'backing')}>
               <SortByOldestIcon />
             </button>
@@ -90,6 +91,7 @@ export const ListSettings = ({
                 'settings:sort-items-by-newest-first',
                 'Sort items by newest first'
               )}
+              data-cy="sort-newest"
               className={cx(buttonReset, bottomTooltip, 'backing')}>
               <SortByNewestIcon />
             </button>
@@ -106,6 +108,7 @@ export const ListSettings = ({
               'settings:display-items-as-a-list',
               'Display items as a list'
             )}
+            data-cy="display-list"
             className={cx(buttonReset, bottomTooltip, 'backing')}>
             <ListViewIcon />
           </button>
@@ -122,6 +125,7 @@ export const ListSettings = ({
               'settings:display-items-in-detail',
               'Display items in detail'
             )}
+            data-cy="display-detail"
             className={cx(buttonReset, bottomTooltip, 'backing')}>
             <DetailViewIcon />
           </button>
@@ -136,6 +140,7 @@ export const ListSettings = ({
               'settings:display-items-as-a-grid',
               'Display items as a grid'
             )}
+            data-cy="display-grid"
             className={cx(buttonReset, bottomTooltip, 'backing')}>
             <GridViewIcon />
           </button>

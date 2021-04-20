@@ -139,13 +139,14 @@ export const ReaderNav = ({
   }, [])
 
   return (
-    <header className={headerStyle}>
+    <header className={headerStyle} data-cy="reader-nav">
       <div className="global-nav-container">
         <nav className={navStyle}>
           <button
             onClick={goBack}
             aria-label={t('nav:back-to-my-list', 'Back to My List')}
             data-tooltip={t('nav:back-to-my-list', 'Back to My List')}
+            data-cy="reader-nav-go-back"
             className={cx(buttonClass, 'go-back')}>
             <ArrowLeftIcon />
           </button>
@@ -163,6 +164,7 @@ export const ReaderNav = ({
                   ? t('nav:close-highlights-menu', 'Close Highlights Menu')
                   : t('nav:open-highlights-menu', 'Open Highlights Menu')
               }
+              data-cy="reader-nav-highlights"
               className={buttonClass}>
               <HighlightIcon />
             </button>
@@ -171,6 +173,7 @@ export const ReaderNav = ({
               onClick={toggleTagging}
               aria-label={t('nav:tag-article', 'Tag Article')}
               data-tooltip={t('nav:tag-article', 'Tag Article')}
+              data-cy="reader-nav-tag"
               className={buttonClass}>
               <TagIcon />
             </button>
@@ -187,6 +190,7 @@ export const ReaderNav = ({
                   ? t('nav:remove-from-favorites', 'Remove from Favorites')
                   : t('nav:favorite-article', 'Favorite Article')
               }
+              data-cy="reader-nav-favorite"
               className={cx(buttonClass, favorite && 'favorite')}>
               {favorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
             </button>
@@ -203,6 +207,7 @@ export const ReaderNav = ({
                   ? t('nav:re-add-to-list', 'Re-add to List')
                   : t('nav:archive-article', 'Archive Article')
               }
+              data-cy="reader-nav-archive"
               className={buttonClass}>
               {archive ? <AddCircledIcon /> : <ArchiveIcon />}
             </button>
@@ -211,6 +216,7 @@ export const ReaderNav = ({
               onClick={toggleDelete}
               aria-label={t('nav:delete-from-library', 'Delete from Library')}
               data-tooltip={t('nav:delete-from-library', 'Delete from Library')}
+              data-cy="reader-nav-delete"
               className={buttonClass}>
               <DeleteIcon />
             </button>
@@ -219,6 +225,7 @@ export const ReaderNav = ({
               onClick={toggleShare}
               aria-label={t('nav:share-article', 'Share Article')}
               data-tooltip={t('nav:share-article', 'Share Article')}
+              data-cy="reader-nav-share"
               className={buttonClass}>
               <IosShareIcon />
             </button>

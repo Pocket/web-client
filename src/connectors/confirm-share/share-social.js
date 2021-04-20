@@ -114,6 +114,7 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
       <FacebookShareButton
         aria-label={t('share:share-to-facebook', 'Share to Facebook')}
         data-tooltip={t('share:share-to-facebook', 'Share to Facebook')}
+        data-cy="share-facebook"
         className={topTooltipDelayed}
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('facebook')}
@@ -124,6 +125,7 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
       <TwitterShareButton
         aria-label={t('share:share-to-twitter', 'Share to Twitter')}
         data-tooltip={t('share:share-to-facebook', 'Share to Twitter')}
+        data-cy="share-twitter"
         className={topTooltipDelayed}
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('twitter')}
@@ -134,6 +136,7 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
       <LinkedinShareButton
         aria-label={t('share:share-to-linkedin', 'Share to LinkedIn')}
         data-tooltip={t('share:share-to-linkedin', 'Share to LinkedIn')}
+        data-cy="share-linkedin"
         className={topTooltipDelayed}
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('linkedin')}
@@ -145,6 +148,7 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
       <RedditShareButton
         aria-label={t('share:share-to-reddit', 'Share to Reddit')}
         data-tooltip={t('share:share-to-reddit', 'Share to Reddit')}
+        data-cy="share-reddit"
         className={topTooltipDelayed}
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('reddit')}
@@ -155,6 +159,7 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
       <BufferShareButton
         aria-label={t('share:share-to-buffer', 'Share to Buffer')}
         data-tooltip={t('share:share-to-buffer', 'Share to Buffer')}
+        data-cy="share-buffer"
         className={topTooltipDelayed}
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('buffer')}

@@ -101,21 +101,21 @@ export function FilterMenu({ subset, filter, tag }) {
         <div className="filter-menu" ref={popBody}>
           <div>
             <Link href={`/my-list/${path}`}>
-              <button className={filterActive()}>
+              <button className={filterActive()} data-cy="filter-all-items">
                 <Trans i18nKey="nav:all-items">All items</Trans>
               </button>
             </Link>
           </div>
           <div>
             <Link href={`/my-list/${path}/unread`}>
-              <button className={filterActive('unread')}>
+              <button className={filterActive('unread')} data-cy="filter-unread">
                 <Trans i18nKey="nav:unread">Unread</Trans>
               </button>
             </Link>
           </div>
           <div>
             <Link href={`/my-list/${path}/archive`}>
-              <button className={filterActive('archive')}>
+              <button className={filterActive('archive')} data-cy="filter-archive">
                 <Trans i18nKey="nav:archive">Archive</Trans>
               </button>
             </Link>
@@ -123,7 +123,7 @@ export function FilterMenu({ subset, filter, tag }) {
           {path === 'favorites' ? null : (
             <div>
               <Link href={`/my-list/${path}/favorites`}>
-                <button className={filterActive('favorites')}>
+                <button className={filterActive('favorites')} data-cy="filter-favorites">
                   <Trans i18nKey="nav:favorites">Favorites</Trans>
                 </button>
               </Link>
