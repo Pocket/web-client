@@ -173,19 +173,29 @@ export function SideNav({
         {showHome ? (
           <>
             <Link href="/home">
-              <button className={subActive('home')} onClick={clickEvent} ref={ref}>
+              <button
+                className={subActive('home')}
+                onClick={clickEvent}
+                ref={ref}
+                data-cy="side-nav-home">
                 <HomeIcon className="side-nav-icon" />{' '}
                 <Trans i18nKey="nav:home">Home</Trans>
               </button>
             </Link>
             <Link href="/my-list">
-              <button className={subActive('unread')} onClick={clickEvent}>
+              <button
+                className={subActive('unread')}
+                onClick={clickEvent}
+                data-cy="side-nav-mylist">
                 <ListViewIcon className="side-nav-icon" />{' '}
                 <Trans i18nKey="nav:my-list">My List</Trans>
               </button>
             </Link>
             <a href="https://getpocket.com/explore?src=sidebar">
-              <button className={subActive('discover')} onClick={clickEvent}>
+              <button
+                className={subActive('discover')}
+                onClick={clickEvent}
+                data-cy="side-nav-discover">
                 <DiscoverIcon className="side-nav-icon" />{' '}
                 <Trans i18nKey="nav:discover">Discover</Trans>
               </button>
@@ -193,7 +203,11 @@ export function SideNav({
           </>
         ) : (
           <Link href="/my-list">
-            <button className={subActive('unread')} onClick={clickEvent} ref={ref}>
+            <button
+              className={subActive('unread')}
+              onClick={clickEvent}
+              ref={ref}
+              data-cy="side-nav-mylist">
               <HomeIcon className="side-nav-icon" />{' '}
               <Trans i18nKey="nav:my-list">My List</Trans>
             </button>
@@ -202,7 +216,10 @@ export function SideNav({
 
         {!showLab ? (
           <Link href="/my-list/archive">
-            <button className={subActive('archive')} onClick={clickEvent}>
+            <button
+              className={subActive('archive')}
+              onClick={clickEvent}
+              data-cy="side-nav-archive">
               <ArchiveIcon className="side-nav-icon" />{' '}
               <Trans i18nKey="nav:archive">Archive</Trans>
             </button>
@@ -238,7 +255,8 @@ export function SideNav({
         <button
           onClick={scrollToTop}
           aria-label={t('nav:return-to-top', 'Return to top')}
-          className={!inView ? 'visible' : 'hidden'}>
+          className={!inView ? 'visible' : 'hidden'}
+          data-cy="side-nav-scroll-to-top">
           <ChevronUpIcon />
         </button>
       </div>

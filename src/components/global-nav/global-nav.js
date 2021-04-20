@@ -266,7 +266,7 @@ const GlobalNav = ({
   return (
     <header className={classnames(headerStyle, { 'logged-in': isLoggedIn })}>
       <PageContainer className="global-nav-container">
-        <nav className={navStyle}>
+        <nav className={navStyle} data-cy="global-nav">
           <div className="site-nav">
             <GlobalNavMobileMenu
               appRootSelector={appRootSelector}

@@ -63,6 +63,7 @@ const GlobalNavTools = ({ tools, onToolClick }) => {
           <li key={`global-nav-tool-${tool.name}`}>
             <button
               type="button"
+              data-cy={`global-nav-tool-${tool.name}`}
               aria-label={tool.label}
               data-tooltip={tool.label}
               onClick={(event) => {
