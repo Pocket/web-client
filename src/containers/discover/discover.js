@@ -69,6 +69,7 @@ export default function Discover({ url }) {
         <CardList type="lockupCenter" count={5} items={items} classNames={['no-border']} />
 
       <Lockup items={items} offset={0} heroPosition="center" ItemCard={ItemCard} />
+
       <CardTopicsNav topics={topics} track={trackTopicClick} />
 
         {/* Pocket Brand Messaging */}
@@ -78,6 +79,7 @@ export default function Discover({ url }) {
       <CardListHeading>Fascinating stories</CardListHeading>
 
       <OffsetList items={items} offset={5} cardShape="wide" ItemCard={ItemCard} />
+
       <Lockup items={items} offset={10} heroPosition="left" ItemCard={ItemCard} />
 
       <CalloutBottom shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
@@ -86,7 +88,7 @@ export default function Discover({ url }) {
 
       <CardTopicsNav topics={topics} track={trackTopicClick} className="no-border" />
 
-      <ReportFeedbackModal isOpen={true} />
+      <ReportFeedbackModal />
     </Layout>
   )
 }
