@@ -18,7 +18,7 @@ import { userSearchSagas } from 'connectors/search/search.state'
 import { featureReducers } from 'connectors/feature-flags/feature-flags.state'
 import { featureSagas } from 'connectors/feature-flags/feature-flags.state'
 
-// import { snowplowReducers } from 'connectors/snowplow/snowplow.state'
+import { snowplowReducers } from 'connectors/snowplow/snowplow.state'
 import { snowplowSagas } from 'connectors/snowplow/snowplow.state'
 
 import { discoverItemsReducers } from 'connectors/items-by-id/discover/items.state'
@@ -113,7 +113,8 @@ const globalReducers = {
   topicList: topicListReducers, // Valid topics list and active topic
   recit: recitReducers, // Recommended articles, both publisher and pocket
   toasts: actionToastsReducers, // Notifications of action results,
-  shortcuts: shortcutReducers // Keyboard shortcuts
+  shortcuts: shortcutReducers, // Keyboard shortcuts,
+  analytics: snowplowReducers //Analytics
 }
 
 const rootReducer = combineReducers({
@@ -167,11 +168,7 @@ export const initializeStore = () => {
         })
       : compose
 
-  const store = createStore(
-    rootReducer,
-    {},
-    composeEnhancers(applyMiddleware(sagaMiddleware))
-  )
+  const store = createStore(rootReducer, {}, composeEnhancers(applyMiddleware(sagaMiddleware)))
 
   store.sagaTask = sagaMiddleware.run(rootSaga)
 

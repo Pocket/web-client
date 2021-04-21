@@ -88,8 +88,22 @@ export const trackEngagement = (component, ui, position, identifier, value) => {
 
 /** REDUCERS
  --------------------------------------------------------------- */
+const initialState = {
+  impressions: []
+}
+
 export const snowplowReducers = (state = initialState, action) => {
   switch (action.type) {
+    case SNOWPLOW_TRACK_ITEM_IMPRESSION: {
+      const { item_id } = action?.item
+      const set = new Set([...state.impressions, item_id])
+      return { ...state, impressions: Array.from(set) }
+    }
+
+    case SNOWPLOW_TRACK_PAGE_VIEW: {
+      return initialState
+    }
+
     default:
       return state
   }
