@@ -49,6 +49,8 @@ export default function Discover({ url }) {
 
   // Is user logged in?
   const isAuthenticated = useSelector((state) => state.user.auth)
+  const userStatus = useSelector((state) => state.user.user_status)
+  const shouldRender = userStatus !== 'pending'
 
   // Get topicList for sections that require it
   const topics = useSelector((state) => state.topicList?.topicsByName)
@@ -73,8 +75,7 @@ export default function Discover({ url }) {
   }
 
   const metaData = {
-    description:
-      'Discover fascinating stories from all across the web with Pocket.',
+    description: 'Discover fascinating stories from all across the web with Pocket.',
     title: 'Discover stories on Pocket',
     url
   }
@@ -85,7 +86,7 @@ export default function Discover({ url }) {
     <ErrorPage statusCode={503} />
   ) : (
     <Layout title={metaData.title} metaData={metaData}>
-      {!isAuthenticated ? <CallOutBuildHome /> : null}
+      {!isAuthenticated && shouldRender ? <CallOutBuildHome /> : null}
 
       <CardPageHeader
         title="Discover the best of the&nbsp;web"
@@ -93,50 +94,22 @@ export default function Discover({ url }) {
       />
       <DynamicCardLayout {...actions}>
         {/* Top Lockup (center)*/}
-        <CardList
-          type="lockupCenter"
-          count={5}
-          items={items}
-          classNames={['no-border']}
-        />
+        <CardList type="lockupCenter" count={5} items={items} classNames={['no-border']} />
 
         {/* Top TopicNav */}
         <CardTopicsNav topics={topics} track={trackTopicClick} />
 
         {/* Pocket Brand Messaging */}
-        {isAuthenticated ? (
-          <CallOutBrand />
-        ) : (
-          <CallOutPocketHitsSignup
-            onVisible={trackEmailImpression}
-            handleEmailInputFocus={trackEmailInputFocus}
-            handleSubmit={trackEmailSubmit}
-            handleSubmitSuccess={trackEmailSubmitSuccess}
-            handleSubmitFailure={trackEmailSubmitFailure}
-            handleValidationError={trackEmailValidationError}
-            utmCampaign="explore-inline"
-            utmSource="explore"
-          />
-        )}
+        <CalloutTop shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
 
         {/* Top List */}
         <CardListHeading>Fascinating stories</CardListHeading>
-        <CardList
-          type="list"
-          classNames={['no-border']}
-          count={5}
-          items={items}
-        />
+        <CardList type="list" classNames={['no-border']} count={5} items={items} />
 
         {/* Mid Lockup (left) */}
         <CardList type="lockupLeft" count={5} items={items} />
 
-        <CallOutStartLibraryExplore
-          handleImpression={trackSignupCalloutImpression}
-          handleDismiss={trackSignupCalloutDismiss}
-          handleComplete={trackSignupCalloutComplete}
-          isAuthenticated={isAuthenticated}
-        />
+        <CalloutBottom shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
 
         {/* Bottom List */}
         <CardList type="list" items={items} classNames={['no-border']} />
@@ -144,6 +117,7 @@ export default function Discover({ url }) {
         {/* Bottom TopicNav */}
         <CardTopicsNav topics={topics} track={trackTopicClick} />
       </DynamicCardLayout>
+
       <ReportFeedbackModal
         isOpen={isOpen}
         setModalOpen={setModalOpen}
@@ -152,4 +126,36 @@ export default function Discover({ url }) {
       />
     </Layout>
   )
+}
+
+function CalloutTop({ shouldRender, isAuthenticated }) {
+  return shouldRender ? (
+    <div>
+      {isAuthenticated ? (
+        <CallOutBrand />
+      ) : (
+        <CallOutPocketHitsSignup
+          onVisible={trackEmailImpression}
+          handleEmailInputFocus={trackEmailInputFocus}
+          handleSubmit={trackEmailSubmit}
+          handleSubmitSuccess={trackEmailSubmitSuccess}
+          handleSubmitFailure={trackEmailSubmitFailure}
+          handleValidationError={trackEmailValidationError}
+          utmCampaign="explore-inline"
+          utmSource="explore"
+        />
+      )}
+    </div>
+  ) : null
+}
+
+function CalloutBottom({ shouldRender, isAuthenticated }) {
+  return shouldRender ? (
+    <CallOutStartLibraryExplore
+      handleImpression={trackSignupCalloutImpression}
+      handleDismiss={trackSignupCalloutDismiss}
+      handleComplete={trackSignupCalloutComplete}
+      isAuthenticated={isAuthenticated}
+    />
+  ) : null
 }
