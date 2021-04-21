@@ -138,6 +138,7 @@ export const AnnotationMenu = ({
             'annotations:open-highlights-menu',
             'Open Highlights Menu'
           )}
+          data-cy={`highlight-menu-${id}`}
           ref={selfRef}
           onClick={toggleMenu}
           className={classNames(buttonReset, 'inline-button', {
@@ -155,10 +156,16 @@ export const AnnotationMenu = ({
               flipDirection
             })}>
             <PopupMenuGroup>
-              <PopupMenuItem onClick={handleDelete} icon={<DeleteIcon />}>
+              <PopupMenuItem
+                onClick={handleDelete}
+                data-cy={`highlight-delete-${id}`}
+                icon={<DeleteIcon />}>
                 <Trans i18nKey="delete">Delete</Trans>
               </PopupMenuItem>
-              <PopupMenuItem onClick={handleShare} icon={<IosShareIcon />}>
+              <PopupMenuItem
+                onClick={handleShare}
+                data-cy={`highlight-share-${id}`}
+                icon={<IosShareIcon />}>
                 <Trans i18nKey="share">Share</Trans>
               </PopupMenuItem>
             </PopupMenuGroup>

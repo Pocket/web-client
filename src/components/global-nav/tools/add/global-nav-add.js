@@ -129,7 +129,7 @@ const closeButtonStyle = css`
 
 const CloseButton = ({ onClick }) => {
   return (
-    <button className={closeButtonStyle} onClick={onClick}>
+    <button className={closeButtonStyle} onClick={onClick} data-cy="add-cancel">
       <CrossIcon className={closeIconStyle} />
       <CloseLabel>
         <Trans i18nKey="nav:cancel">Cancel</Trans>
@@ -233,7 +233,7 @@ const GlobalNavAdd = ({
       <button
         className="add-button"
         onClick={handleSubmit}
-        data-cy="add-button">
+        data-cy="add-submit">
         <Trans i18nKey="nav:add">Add</Trans>
       </button>
       {onClose ? <CloseButton onClick={onClose} data-cy="add-close" /> : null}

@@ -1,3 +1,20 @@
+## [1.10.7](https://github.com/Pocket/web-client/compare/v1.10.6...v1.10.7) (2021-04-21)
+
+
+### Bug Fixes
+
+* **discover:** avoid flash of callouts ([d157173](https://github.com/Pocket/web-client/commit/d15717351464fee66284c83d7a0b5c06cbac1769))
+
+## [1.10.6](https://github.com/Pocket/web-client/compare/v1.10.5...v1.10.6) (2021-04-21)
+
+
+### Bug Fixes
+
+* **cypress:** adding data attributes for cypress tests ([39a6ab6](https://github.com/Pocket/web-client/commit/39a6ab6936a72f9731dca5400824239aab4335f3))
+* **cypress:** adding data attributes for cypress tests ([0246db1](https://github.com/Pocket/web-client/commit/0246db1cdf4fd3b45fd2a758e7bf04eaac7643b2))
+* **cypress:** adding data attributes for cypress tests ([c82495f](https://github.com/Pocket/web-client/commit/c82495f7d8bf7e9856d785daae47d211f3b5bd08))
+* **cypress:** adding data attributes for cypress tests ([806d2e1](https://github.com/Pocket/web-client/commit/806d2e17a188f362050d1dfe8e708aa03d9796c1))
+
 ## [1.10.5](https://github.com/Pocket/web-client/compare/v1.10.4...v1.10.5) (2021-04-20)
 
 

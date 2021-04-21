@@ -141,6 +141,7 @@ export class TagInput extends Component {
     return (
       <div className={inputWrapper}>
         <AutosizeInput
+          data-cy="tagging-input"
           autoFocus={true} //eslint-disable-line
           className={autoWrapper}
           inputRef={this.props.inputRef}

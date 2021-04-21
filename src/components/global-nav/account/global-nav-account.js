@@ -323,7 +323,8 @@ const GlobalNavAccount = ({
             id="account-menu-manage-account-link"
             onClick={(event) => {
               handleLinkClick('manage-account', event)
-            }}>
+            }}
+            data-cy="account-menu-manage-account-link">
             <Trans i18nKey="nav:manage-account">Manage account</Trans>
           </PopupMenuItem>
           <PopupMenuItem
@@ -331,7 +332,8 @@ const GlobalNavAccount = ({
             id="account-menu-help-link"
             onClick={(event) => {
               handleLinkClick('help', event)
-            }}>
+            }}
+            data-cy="account-menu-help-link">
             <Trans i18nKey="nav:get-help">Get help</Trans>
           </PopupMenuItem>
           <PopupMenuItem
@@ -339,7 +341,8 @@ const GlobalNavAccount = ({
             id="account-menu-messages-link"
             onClick={(event) => {
               handleLinkClick('messages', event)
-            }}>
+            }}
+            data-cy="account-menu-messages-link">
             <Trans i18nKey="nav:messages">Messages</Trans>
           </PopupMenuItem>
           <PopupMenuItem
@@ -347,7 +350,8 @@ const GlobalNavAccount = ({
             id="account-menu-whats-new-link"
             onClick={(event) => {
               handleLinkClick('whats-new', event)
-            }}>
+            }}
+            data-cy="account-menu-whats-new-link">
             <Trans i18nKey="nav:whats-new">What’s New</Trans>{' '}
             {showNotification ? (
               <InlineNotification data-cy="notification-whatsnew" />
@@ -360,7 +364,8 @@ const GlobalNavAccount = ({
             id="account-menu-logout-link"
             onClick={(event) => {
               handleLinkClick('logout', event)
-            }}>
+            }}
+            data-cy="account-menu-logout-link">
             <Trans i18nKey="nav:log-out">Log out</Trans>
           </PopupMenuItem>
         </PopupMenuGroup>

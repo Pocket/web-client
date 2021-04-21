@@ -38,6 +38,7 @@ export const ColumnWidthSettings = ({
         <StepperButton
           active={minusActive()}
           onClick={handleDecrease}
+          data-cy="display-column-width-decrease"
           aria-label={t(
             'settings:decrease-column-width',
             'Decrease column width'
@@ -52,6 +53,7 @@ export const ColumnWidthSettings = ({
         <StepperButton
           active={plusActive()}
           onClick={handleIncrease}
+          data-cy="display-column-width-increase"
           aria-label={t(
             'settings:increase-column-width',
             'Increase column width'

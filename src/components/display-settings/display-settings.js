@@ -174,6 +174,7 @@ export const DisplaySettings = ({
           'settings:open-display-settings',
           'Open Display Settings'
         )}
+        data-cy="reader-nav-display-settings"
         className={classNames(buttonReset, buttonStyles, bottomTooltip)}
         ref={displayButtonRef}
         onClick={handleOpen}
@@ -202,12 +203,14 @@ export const DisplaySettings = ({
         <PopupMenuGroup>
           {displayFonts ? (
             <PopupMenuItem
+              data-cy="display-font-back"
               onClick={toggleDisplayFonts}
               icon={<ChevronLeftIcon />}>
               <Trans i18nKey="settings:font-options">Font Options</Trans>
             </PopupMenuItem>
           ) : (
             <PopupMenuItem
+              data-cy="display-select-font"
               className={fontFamilyButton}
               onClick={toggleDisplayFonts}>
               {FONT_TYPES[fontFamily].name}
@@ -254,6 +257,7 @@ export const DisplaySettings = ({
                 <PopupMenuGroup>
                   <PopupMenuItem
                     id="reader.display-settings"
+                    data-cy="display-premium-unlock"
                     href="https://getpocket.com/premium?ep=3"
                     target="_premium"
                     icon={<PremiumIcon />}>

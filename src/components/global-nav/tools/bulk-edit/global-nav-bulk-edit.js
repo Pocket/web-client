@@ -147,7 +147,10 @@ const buttonStyle = css`
 
 const CloseButton = ({ onClick }) => {
   return (
-    <button className={`${buttonStyle} cancel-button`} onClick={onClick}>
+    <button
+      className={`${buttonStyle} cancel-button`}
+      onClick={onClick}
+      data-cy="bulk-close">
       <CrossIcon className={navIconStyle} />
       <CloseLabel>
         <Trans i18nKey="nav:cancel">Cancel</Trans>
@@ -197,6 +200,7 @@ function GlobalNavBulkEdit({
             <button
               aria-label={t('nav:tag', 'Tag')}
               data-tooltip={t('nav:tag', 'Tag')}
+              data-cy="bulk-tag"
               className={cx(buttonStyle, bottomTooltip)}
               onClick={tagAction}>
               <TagIcon className={bulkIconActions} />
@@ -213,6 +217,7 @@ function GlobalNavBulkEdit({
                   ? t('nav:favorite', 'Favorite')
                   : t('nav:unfavorite', 'Unfavorite')
               }
+              data-cy="bulk-favorite"
               className={cx(buttonStyle, bottomTooltip)}
               onClick={favoriteAction}>
               {shouldFavorite ? (
@@ -233,6 +238,7 @@ function GlobalNavBulkEdit({
                   ? t('nav:archive-tooltip', 'Archive')
                   : t('nav:add-tooltip', 'Add')
               }
+              data-cy="bulk-archive"
               className={cx(buttonStyle, bottomTooltip)}
               onClick={archiveAction}>
               {shouldArchive ? (
@@ -245,6 +251,7 @@ function GlobalNavBulkEdit({
             <button
               aria-label={t('nav:delete', 'Delete')}
               data-tooltip={t('nav:delete', 'Delete')}
+              data-cy="bulk-delete"
               className={cx(buttonStyle, bottomTooltip)}
               onClick={deleteAction}>
               <DeleteIcon className={bulkIconActions} />
@@ -260,7 +267,7 @@ function GlobalNavBulkEdit({
           </div>
         </div>
         <button
-          className="bulk-button"
+          className="bulk-cancel"
           onClick={clearAction}
           data-cy="clear-button">
           {clearCopy}

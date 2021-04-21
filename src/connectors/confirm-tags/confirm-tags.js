@@ -192,6 +192,7 @@ export function TaggingModal() {
           <Button
             disabled={!value ? fresh : false}
             type="submit"
+            data-cy="tagging-confirm"
             onClick={saveTags}>
             <Trans i18nKey="confirm:save">Save</Trans>
           </Button>

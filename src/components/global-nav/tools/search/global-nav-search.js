@@ -128,7 +128,7 @@ const closeButtonStyle = css`
 
 const CloseButton = ({ onClick }) => {
   return (
-    <button className={closeButtonStyle} onClick={onClick}>
+    <button className={closeButtonStyle} onClick={onClick} data-cy="search-cancel">
       <CrossIcon className={closeIconStyle} />
       <CloseLabel>
         <Trans i18nKey="nav:cancel">Cancel</Trans>
@@ -279,7 +279,7 @@ const GlobalNavSearch = ({
           </div>
         ) : null}
       </div>
-      <button className="search-button" data-cy="search-button">
+      <button className="search-button" data-cy="search-submit">
         <Trans i18nKey="nav:search">Search</Trans>
       </button>
       {onClose ? (

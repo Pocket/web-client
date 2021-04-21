@@ -33,8 +33,9 @@ export function ShareRecommend() {
         placeholder={t('share:comment', 'Comment')}
         value={commentValue}
         onChange={(e) => setCommentValue(e?.target?.value)}
+        data-cy="share-recommend-input"
       />
-      <Button type="submit" onClick={onClick}>
+      <Button type="submit" onClick={onClick} data-cy="share-recommend-submit">
         <Trans i18nKey="share:recommend">Recommend</Trans>
       </Button>
     </div>
