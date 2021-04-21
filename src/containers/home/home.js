@@ -18,6 +18,7 @@ import { HomeCollectionList } from 'containers/home/listCollection'
 
 import { homeSetPreferences } from './home.state'
 
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
@@ -29,6 +30,9 @@ export default function Collection(props) {
   const { metaData = {} } = props
 
   const dispatch = useDispatch()
+
+  const featureState = useSelector((state) => state.features)
+  const showLab = featureFlagActive({ flag: 'lab', featureState })
 
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
@@ -46,7 +50,9 @@ export default function Collection(props) {
       <SideNav subset="home" />
       {shouldRender ? (
         <main className="main">
-          {/* <HomeGreeting /> */}
+          { showLab ? (
+            <HomeGreeting />
+          ) : null}
 
           {/* <HomeRecentList /> */}
 

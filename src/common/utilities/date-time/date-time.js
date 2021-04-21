@@ -41,3 +41,18 @@ export function timeRelativeToNow(val) {
   let date = timestamp.format('MMM D, YYYY')
   return `${date}`
 }
+
+export function getTimeOfDay() {
+  var morning = 4 // 4am
+  var afternoon = 12 // noon
+  var evening = 17 // 5pm
+  var currentHour = parseFloat(dayjs().format('HH'))
+
+  if (currentHour >= morning && currentHour < afternoon) {
+    return 'morning'
+  }
+  else if (currentHour >= afternoon && currentHour < evening) {
+    return 'afternoon'
+  }
+  return 'evening'
+}

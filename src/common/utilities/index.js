@@ -8,6 +8,7 @@ export { redirect } from './server-side/redirect'
 
 export { getPublishedDate } from './date-time/date-time'
 export { timeRelativeToNow } from './date-time/date-time'
+export { getTimeOfDay } from './date-time/date-time'
 
 export { getBool } from './get-bool/get-bool'
 
