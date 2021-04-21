@@ -15,11 +15,13 @@ import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
 import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 
+import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
+
 import { fireItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
 import { trackItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
 import { trackOriginalOpen } from 'connectors/items-by-id/my-list/items.analytics'
 import { trackPermLibOpen } from 'connectors/items-by-id/my-list/items.analytics'
-import { setImpression } from 'connectors/items-by-id/my-list/items.analytics'
+
 import { sendEngagementEvent } from 'connectors/items-by-id/my-list/items.analytics'
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
@@ -41,7 +43,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
 
   // Get data from state
   const item = useSelector((state) => state.myListItemsById[id])
-  const impression = useSelector((state) => state.itemsAnalytics.impressions)
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
   const bulkList = useSelector((state) => state.bulkEdit.selected)
   const bulkCurrent = useSelector((state) => state.bulkEdit.currentId)
@@ -53,9 +55,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const shortcutSelected = shortcutId === id
 
   const itemImpression = () => {
-    if (!impression[item.item_id]) {
-      dispatch(setImpression(position, item))
-    }
+    if (!impressionFired) dispatch(trackItemImpression(position, item, 'my-list.card'))
   }
 
   const itemShare = () => {
@@ -151,9 +151,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
 // This seems like an over-optimization so do some actual testing here
 const isEqual = (prev, next) => {
   const isTheSame =
-    prev.id === next.id &&
-    prev.position === next.position &&
-    prev.type === next.type
+    prev.id === next.id && prev.position === next.position && prev.type === next.type
   return isTheSame
 }
 
