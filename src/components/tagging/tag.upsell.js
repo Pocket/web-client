@@ -43,6 +43,7 @@ export const TagUpsell = ({ onVisible }) => {
         </p>
         <ArrowLink
           id="suggested-tags.upgrade-link"
+          data-cy="suggested-tags-upgrade"
           margin="10px 0"
           href={`${PREMIUM_URL}13`}
           target="_blank">

@@ -46,6 +46,7 @@ export const TagEditModal = () => {
         <div className={inputWrapper}>
           <input
             type="text"
+            data-cy="edit-tag-input"
             autoFocus={true}
             value={value}
             onChange={onChange}
@@ -59,7 +60,10 @@ export const TagEditModal = () => {
             items. Are you sure you want to proceed?
           </Trans>
         </em>
-        <Button type="submit" onClick={confirmTagEdit}>
+        <Button
+          type="submit"
+          data-cy="edit-tag-confirm"
+          onClick={confirmTagEdit}>
           <Trans i18nKey="confirm:confirm">Confirm</Trans>
         </Button>
       </ModalFooter>

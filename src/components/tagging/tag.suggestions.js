@@ -37,7 +37,10 @@ function UpSell({ trackClick }) {
 function Suggestion({ tag, addTag }) {
   const onClick = () => addTag(tag)
   return (
-    <SuggestedTag className={suggestionStyle} onClick={onClick}>
+    <SuggestedTag
+      className={suggestionStyle}
+      data-cy={`tag-suggestion-${tag}`}
+      onClick={onClick}>
       {tag}
     </SuggestedTag>
   )

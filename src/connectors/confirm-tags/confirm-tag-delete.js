@@ -39,7 +39,10 @@ export const TagDeleteModal = () => {
             items. Are you sure you want to proceed?
           </Trans>
         </em>
-        <Button type="submit" onClick={confirmTagDelete}>
+        <Button
+          type="submit"
+          data-cy="delete-tag-confirm"
+          onClick={confirmTagDelete}>
           <Trans i18nKey="confirm:delete">Delete</Trans>
         </Button>
       </ModalFooter>
