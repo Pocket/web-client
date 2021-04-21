@@ -9,7 +9,14 @@ export const offsetListStyle = css`
   border-bottom: 1px solid var(--color-dividerTertiary);
 `
 
-export function OffsetList({ items, offset = 0, count = 5, cardShape = 'wide', ItemCard }) {
+export function OffsetList({
+  items,
+  offset = 0,
+  count = 5,
+  cardShape = 'wide',
+  ItemCard,
+  children
+}) {
   const start = offset
   const end = offset + count
   return (
@@ -17,6 +24,7 @@ export function OffsetList({ items, offset = 0, count = 5, cardShape = 'wide', I
       {items.slice(start, end).map((id, index) => (
         <ItemCard id={id} key={id} position={index} cardShape={cardShape} showExcerpt={true} />
       ))}
+      {children}
     </div>
   )
 }
