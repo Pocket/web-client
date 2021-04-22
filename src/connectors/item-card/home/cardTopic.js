@@ -32,11 +32,6 @@ export const ItemCard = ({ id, position }) => {
   }
 
   const onSave = () => {
-    // preventing Unsaving for now
-    // if (save_status === 'saved') {
-    //   dispatch(unSaveHomeItem(id))
-    //   dispatch(topicEngagementEvent(item, position))
-    // }
     if (save_status !== 'saved') {
       dispatch(saveHomeItem(id, save_url, position))
       dispatch(topicSaveEvent(item, position))
@@ -52,12 +47,6 @@ export const ItemCard = ({ id, position }) => {
   }, [inView, id])
 
   return (
-    <Card
-      ref={ref}
-      item={item}
-      onOpen={onOpen}
-      onSave={onSave}
-      isAuthenticated={isAuthenticated}
-    />
+    <Card ref={ref} item={item} onOpen={onOpen} onSave={onSave} isAuthenticated={isAuthenticated} />
   )
 }

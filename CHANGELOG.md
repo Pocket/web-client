@@ -1,3 +1,12 @@
+## [1.10.10](https://github.com/Pocket/web-client/compare/v1.10.9...v1.10.10) (2021-04-22)
+
+
+### Bug Fixes
+
+* **analytics:** allow href overide in open track ([7afaee6](https://github.com/Pocket/web-client/commit/7afaee6fed57afd889a5b688a7d3562dd9d50a94))
+* **analytics:** handle syndicated open ([2ffa9a6](https://github.com/Pocket/web-client/commit/2ffa9a691bd448723b7459640f5207300b2ebf38))
+* **snowplow:** explict actions with context ([0c6218c](https://github.com/Pocket/web-client/commit/0c6218cbdd6930474db3c543ab3224b2897cbd2f))
+
 ## [1.10.9](https://github.com/Pocket/web-client/compare/v1.10.8...v1.10.9) (2021-04-22)
 
 

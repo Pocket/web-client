@@ -15,12 +15,10 @@ import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
 import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 
-import { fireItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
-import { trackItemOpen } from 'connectors/items-by-id/my-list/items.analytics'
-import { trackOriginalOpen } from 'connectors/items-by-id/my-list/items.analytics'
-import { trackPermLibOpen } from 'connectors/items-by-id/my-list/items.analytics'
-import { setImpression } from 'connectors/items-by-id/my-list/items.analytics'
-import { sendEngagementEvent } from 'connectors/items-by-id/my-list/items.analytics'
+import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
+import { trackItemAction } from 'connectors/snowplow/snowplow.state'
+import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
 import copy from 'clipboard-copy'
@@ -41,7 +39,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
 
   // Get data from state
   const item = useSelector((state) => state.myListItemsById[id])
-  const impression = useSelector((state) => state.itemsAnalytics.impressions)
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
   const bulkList = useSelector((state) => state.bulkEdit.selected)
   const bulkCurrent = useSelector((state) => state.bulkEdit.currentId)
@@ -52,42 +50,60 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const shortcutId = useSelector((state) => state.shortcuts.currentId)
   const shortcutSelected = shortcutId === id
 
+  /**
+   * ITEM TRACKING
+   * ----------------------------------------------------------------
+   */
   const itemImpression = () => {
-    if (!impression[item.item_id]) {
-      dispatch(setImpression(position, item))
-    }
+    if (!impressionFired) dispatch(trackItemImpression(position, item, 'my-list.card'))
   }
 
+  const onOpen = () => {
+    dispatch(trackItemOpen(position, item, 'my-list.card'))
+  }
+
+  const itemOriginalOpen = () => {
+    dispatch(trackItemOpen(position, item, 'my-list.card.view-original'))
+  }
+
+  const itemPermLibOpen = () => {
+    dispatch(trackItemOpen(position, item, 'my-list.card.permanent-library'))
+  }
+
+  /**
+   * ITEM ACTIONS
+   * ----------------------------------------------------------------
+   */
   const itemShare = () => {
-    dispatch(sendEngagementEvent('my-list.share', position, item))
+    dispatch(trackItemAction(position, item, 'my-list.share'))
     dispatch(itemsShareAction({ id, position }))
   }
   const itemDelete = () => {
-    dispatch(sendEngagementEvent('my-list.delete', position, item))
+    dispatch(trackItemAction(position, item, 'my-list.delete'))
     dispatch(itemsDeleteAction([{ id, position }]))
   }
 
   const itemArchive = () => {
-    dispatch(sendEngagementEvent('my-list.archive', position, item))
+    dispatch(trackItemAction(position, item, 'my-list.archive'))
     dispatch(itemsArchiveAction([{ id, position }]))
   }
   const itemUnArchive = () => {
     // bool to denote save action
-    dispatch(sendEngagementEvent('my-list.unarchive', position, item, true))
+    dispatch(trackItemAction(position, item, true, 'my-list.unarchive'))
     dispatch(itemsUnArchiveAction([{ id, position }]))
   }
 
   const itemFavorite = () => {
-    dispatch(sendEngagementEvent('my-list.favorite', position, item))
+    dispatch(trackItemAction(position, item, 'my-list.favorite'))
     dispatch(itemsFavoriteAction([{ id, position }]))
   }
   const itemUnFavorite = () => {
-    dispatch(sendEngagementEvent('my-list.un-favorite', position, item))
+    dispatch(trackItemAction(position, item, 'my-list.un-favorite'))
     dispatch(itemsUnFavoriteAction([{ id, position }])) //prettier-ignore
   }
 
   const itemTag = () => {
-    dispatch(sendEngagementEvent('my-list.tag', position, item))
+    dispatch(trackItemAction(position, item, 'my-list.tag'))
     dispatch(itemsTagAction([{ id, position }]))
   }
 
@@ -98,20 +114,6 @@ export function ItemCard({ id, position, fluidHeight, type }) {
   const itemCopy = async () => {
     await copy(item?.open_url)
     dispatch(copyAction())
-  }
-
-  const onOpen = () => {
-    trackItemOpen(position + 1, item, type) // legacy analytics uses 1 based position
-    fireItemOpen(position, item, dispatch)
-  }
-
-  const itemOriginalOpen = () => {
-    trackItemOpen(position + 1, item, type) // legacy analytics uses 1 based position
-    dispatch(trackOriginalOpen(position, item))
-  }
-
-  const itemPermLibOpen = () => {
-    dispatch(trackPermLibOpen(position, item))
   }
 
   const shortcutSelect = () => dispatch(selectShortcutItem(id, position))
@@ -151,9 +153,7 @@ export function ItemCard({ id, position, fluidHeight, type }) {
 // This seems like an over-optimization so do some actual testing here
 const isEqual = (prev, next) => {
   const isTheSame =
-    prev.id === next.id &&
-    prev.position === next.position &&
-    prev.type === next.type
+    prev.id === next.id && prev.position === next.position && prev.type === next.type
   return isTheSame
 }
 

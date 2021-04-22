@@ -1,11 +1,20 @@
-import { takeLatest, takeEvery } from 'redux-saga/effects'
+import { takeLatest, takeEvery, call, select } from 'redux-saga/effects'
+import { BATCH_SIZE } from 'common/constants'
+import { urlWithPermanentLibrary } from 'common/utilities'
 
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
-import { SNOWPLOW_TRACK_CONTENT_OPEN } from 'actions'
 import { SNOWPLOW_TRACK_IMPRESSION } from 'actions'
-import { SNOWPLOW_TRACK_CONTENT_IMPRESSION } from 'actions'
 import { SNOWPLOW_TRACK_ENGAGEMENT } from 'actions'
-import { SNOWPLOW_TRACK_CONTENT_ENGAGEMENT } from 'actions'
+
+import { SNOWPLOW_TRACK_ITEM_IMPRESSION } from 'actions'
+import { SNOWPLOW_TRACK_ITEM_ACTION } from 'actions'
+import { SNOWPLOW_TRACK_ITEM_SAVE } from 'actions'
+import { SNOWPLOW_TRACK_ITEM_OPEN } from 'actions'
+
+import { ANALYTICS_VIEW } from 'common/constants'
+import { ANALYTICS_LIST_MODE } from 'common/constants'
+import { ANALYTICS_INDEX } from 'common/constants'
+
 import { VARIANTS_SAVE } from 'actions'
 import { FEATURES_HYDRATE } from 'actions'
 
@@ -13,62 +22,77 @@ import { createContentEntity } from 'connectors/snowplow/entities'
 import { createUiEntity } from 'connectors/snowplow/entities'
 import { createFeatureFlagEntity } from 'connectors/snowplow/entities'
 import { UI_COMPONENT_CARD } from 'connectors/snowplow/entities'
+import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
+
+import { IMPRESSION_COMPONENT_CARD } from 'connectors/snowplow/events'
+import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
+import { CONTENT_OPEN_TRIGGER_CLICK } from 'connectors/snowplow/events'
+import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
+import { ENGAGEMENT_TYPE_SAVE } from 'connectors/snowplow/events'
 
 import { createImpressionEvent } from 'connectors/snowplow/events'
 import { createContentOpenEvent } from 'connectors/snowplow/events'
 import { createVariantEnrollEvent } from 'connectors/snowplow/events'
 import { createEngagementEvent } from 'connectors/snowplow/events'
+import { getLinkOpenTarget } from 'connectors/snowplow/events'
 
 import { snowplowTrackPageView } from 'common/api/snowplow-analytics'
 import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
-
-import { BATCH_SIZE } from 'common/constants'
-
-const initialState = {}
+import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
-export const trackContentOpen = (destination, trigger, position, item, identifier) => {
+
+export const trackItemOpen = (position, item, identifier, href) => {
+  const { save_url, item_id, syndicated } = item
+  const permanentLib = /permanent-library/.test(identifier)
+  const itemURL = permanentLib ? save_url : urlWithPermanentLibrary(item_id)
+  const linkTarget = href ? href : itemURL
+  const destination = getLinkOpenTarget(linkTarget, syndicated)
   return {
-    type: SNOWPLOW_TRACK_CONTENT_OPEN,
+    type: SNOWPLOW_TRACK_ITEM_OPEN,
+    trigger: CONTENT_OPEN_TRIGGER_CLICK,
     destination,
-    trigger,
     position,
     item,
     identifier
   }
 }
-export const trackContentImpression = (component, requirement, position, item, identifier) => {
+
+export const trackItemAction = (position, item, identifier) => {
   return {
-    type: SNOWPLOW_TRACK_CONTENT_IMPRESSION,
-    component,
-    requirement,
-    position,
-    item,
-    identifier
-  }
-}
-export const trackImpression = (component, requirement, ui, position, identifier) => {
-  return {
-    type: SNOWPLOW_TRACK_IMPRESSION,
-    component,
-    requirement,
-    ui,
-    position,
-    identifier
-  }
-}
-export const trackContentEngagement = (component, ui, position, items, identifier) => {
-  return {
-    type: SNOWPLOW_TRACK_CONTENT_ENGAGEMENT,
-    component,
-    ui,
+    type: SNOWPLOW_TRACK_ITEM_ACTION,
+    component: ENGAGEMENT_TYPE_GENERAL,
+    ui: UI_COMPONENT_BUTTON,
     identifier,
     position,
-    items
+    items: item
   }
 }
+
+export const trackItemSave = (position, item, identifier) => {
+  return {
+    type: SNOWPLOW_TRACK_ITEM_SAVE,
+    component: ENGAGEMENT_TYPE_SAVE,
+    ui: UI_COMPONENT_BUTTON,
+    identifier,
+    position,
+    items: item
+  }
+}
+
+export const trackItemImpression = (position, item, identifier) => {
+  return {
+    type: SNOWPLOW_TRACK_ITEM_IMPRESSION,
+    component: IMPRESSION_COMPONENT_CARD,
+    requirement: IMPRESSION_REQUIREMENT_VIEWABLE,
+    position,
+    item,
+    identifier
+  }
+}
+
 export const trackEngagement = (component, ui, position, identifier, value) => {
   return {
     type: SNOWPLOW_TRACK_ENGAGEMENT,
@@ -80,33 +104,62 @@ export const trackEngagement = (component, ui, position, identifier, value) => {
   }
 }
 
+export const trackImpression = (component, requirement, ui, position, identifier) => {
+  return {
+    type: SNOWPLOW_TRACK_IMPRESSION,
+    component,
+    requirement,
+    ui,
+    position,
+    identifier
+  }
+}
+
 /** REDUCERS
  --------------------------------------------------------------- */
+const initialState = {
+  impressions: []
+}
+
 export const snowplowReducers = (state = initialState, action) => {
   switch (action.type) {
+    case SNOWPLOW_TRACK_ITEM_IMPRESSION: {
+      const { item_id } = action?.item
+      const set = new Set([...state.impressions, item_id])
+      return { ...state, impressions: Array.from(set) }
+    }
+
+    case SNOWPLOW_TRACK_PAGE_VIEW: {
+      return initialState
+    }
+
     default:
       return state
   }
 }
 
+/* SAGAS :: SELECTORS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+const getListType = (state) => state.app.listMode
+
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-
 export const snowplowSagas = [
-  takeLatest(SNOWPLOW_TRACK_PAGE_VIEW, firePageView),
-  takeEvery(SNOWPLOW_TRACK_CONTENT_OPEN, fireContentOpen),
-  takeEvery(SNOWPLOW_TRACK_IMPRESSION, fireImpression),
-  takeEvery(SNOWPLOW_TRACK_CONTENT_IMPRESSION, fireContentImpression),
-  takeEvery(SNOWPLOW_TRACK_CONTENT_ENGAGEMENT, fireContentEngagmenet),
-  takeEvery(SNOWPLOW_TRACK_ENGAGEMENT, fireEngagement),
   takeLatest(VARIANTS_SAVE, fireVariantEnroll),
-  takeLatest(FEATURES_HYDRATE, fireFeatureEnroll)
+  takeLatest(FEATURES_HYDRATE, fireFeatureEnroll),
+  takeLatest(SNOWPLOW_TRACK_PAGE_VIEW, firePageView),
+  takeEvery(SNOWPLOW_TRACK_IMPRESSION, fireImpression),
+  takeEvery(SNOWPLOW_TRACK_ENGAGEMENT, fireEngagement),
+  takeEvery(SNOWPLOW_TRACK_ITEM_OPEN, fireContentOpen),
+  takeEvery(SNOWPLOW_TRACK_ITEM_IMPRESSION, fireItemImpression),
+  takeEvery(SNOWPLOW_TRACK_ITEM_ACTION, fireContentEngagement),
+  takeEvery(SNOWPLOW_TRACK_ITEM_SAVE, fireContentEngagement)
 ]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 function* firePageView() {
-  yield snowplowTrackPageView()
+  yield call(snowplowTrackPageView)
 }
 
 function* fireVariantEnroll({ variants }) {
@@ -114,7 +167,7 @@ function* fireVariantEnroll({ variants }) {
     const variantEnrollEvent = createVariantEnrollEvent()
     const featureFlagEntity = createFeatureFlagEntity(flag, variants[flag])
 
-    yield sendCustomSnowplowEvent(variantEnrollEvent, [featureFlagEntity])
+    yield call(sendCustomSnowplowEvent, variantEnrollEvent, [featureFlagEntity])
   }
 }
 
@@ -127,7 +180,7 @@ function* fireFeatureEnroll({ hydrate }) {
       const variantEnrollEvent = createVariantEnrollEvent()
       const featureFlagEntity = createFeatureFlagEntity(testName, entityVariant)
 
-      yield sendCustomSnowplowEvent(variantEnrollEvent, [featureFlagEntity])
+      yield call(sendCustomSnowplowEvent, variantEnrollEvent, [featureFlagEntity])
     }
   }
 }
@@ -143,10 +196,14 @@ function* fireContentOpen({ destination, trigger, position, item, identifier }) 
   })
 
   const snowplowEntities = [contentEntity, uiEntity]
-  yield sendCustomSnowplowEvent(contentOpenEvent, snowplowEntities)
+  yield call(sendCustomSnowplowEvent, contentOpenEvent, snowplowEntities)
+
+  // Track Legacy Opens
+  const listType = yield select(getListType)
+  yield call(legacyItemOpen, position, item, listType)
 }
 
-function* fireContentImpression({ component, requirement, position, item, identifier }) {
+function* fireItemImpression({ component, requirement, position, item, identifier }) {
   const impressionEvent = createImpressionEvent(component, requirement)
   const contentEntity = createContentEntity(item.save_url, item.item_id)
   const uiEntity = createUiEntity({
@@ -157,7 +214,7 @@ function* fireContentImpression({ component, requirement, position, item, identi
   })
 
   const snowplowEntities = [contentEntity, uiEntity]
-  yield sendCustomSnowplowEvent(impressionEvent, snowplowEntities)
+  yield call(sendCustomSnowplowEvent, impressionEvent, snowplowEntities)
 }
 
 function* fireImpression({ component, requirement, ui, position, identifier }) {
@@ -170,10 +227,10 @@ function* fireImpression({ component, requirement, ui, position, identifier }) {
   })
 
   const snowplowEntities = [uiEntity]
-  yield sendCustomSnowplowEvent(impressionEvent, snowplowEntities)
+  yield call(sendCustomSnowplowEvent, impressionEvent, snowplowEntities)
 }
 
-function* fireContentEngagmenet({ component, ui, identifier, position, items }) {
+function* fireContentEngagement({ component, ui, identifier, position, items }) {
   const engagementEvent = createEngagementEvent(component)
 
   const contentEntities = items.length ? items : [items]
@@ -188,7 +245,7 @@ function* fireContentEngagmenet({ component, ui, identifier, position, items }) 
   const uiEntity = createUiEntity({ type: ui, hierarchy: 0, identifier, index: position })
 
   const snowplowEntities = [...contentEntity, uiEntity]
-  yield sendCustomSnowplowEvent(engagementEvent, snowplowEntities)
+  yield call(sendCustomSnowplowEvent, engagementEvent, snowplowEntities)
 }
 
 function* fireEngagement({ component, ui, identifier, position, value }) {
@@ -202,5 +259,27 @@ function* fireEngagement({ component, ui, identifier, position, value }) {
   })
 
   const snowplowEntities = [uiEntity]
-  yield sendCustomSnowplowEvent(engagementEvent, snowplowEntities)
+  yield call(sendCustomSnowplowEvent, engagementEvent, snowplowEntities)
+}
+
+/** LEGACY ANALYTICS
+ * ----------------------------------------------------------------
+ */
+
+export function legacyItemOpen(position, item, listType) {
+  const { item_id } = item
+  legacyAnalyticsTrack({
+    action: itemContentType(item),
+    item_id,
+    [ANALYTICS_VIEW]: 'list',
+    [ANALYTICS_LIST_MODE]: listType,
+    [ANALYTICS_INDEX]: position + 1
+  })
+}
+
+function itemContentType({ has_video, has_image, is_article }) {
+  if (has_video === '2') return 'opened_video'
+  if (has_image === '2') return 'opened_image'
+  if (is_article === '1') return 'opened_article'
+  return 'opened_web'
 }

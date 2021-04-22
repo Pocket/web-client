@@ -18,7 +18,7 @@ import { userSearchSagas } from 'connectors/search/search.state'
 import { featureReducers } from 'connectors/feature-flags/feature-flags.state'
 import { featureSagas } from 'connectors/feature-flags/feature-flags.state'
 
-// import { snowplowReducers } from 'connectors/snowplow/snowplow.state'
+import { snowplowReducers } from 'connectors/snowplow/snowplow.state'
 import { snowplowSagas } from 'connectors/snowplow/snowplow.state'
 
 import { discoverItemsReducers } from 'connectors/items-by-id/discover/items.state'
@@ -56,9 +56,6 @@ import { itemTagReducers } from 'connectors/items-by-id/my-list/items.tag'
 import { itemShareReducers } from 'connectors/items-by-id/my-list/items.share'
 import { itemShareSagas } from 'connectors/items-by-id/my-list/items.share'
 
-import { itemAnalyticsReducers } from 'connectors/items-by-id/my-list/items.analytics'
-import { itemAnalyticsSagas } from 'connectors/items-by-id/my-list/items.analytics'
-
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
 
@@ -91,7 +88,6 @@ const collectionReducers = {
   itemsToArchive: itemArchiveReducers,
   itemsToTag: itemTagReducers,
   itemsToShare: itemShareReducers,
-  itemsAnalytics: itemAnalyticsReducers,
   userTags: userTagsReducers,
   userMessages: userMessageReducers,
   userSearch: userSearchReducers
@@ -113,7 +109,8 @@ const globalReducers = {
   topicList: topicListReducers, // Valid topics list and active topic
   recit: recitReducers, // Recommended articles, both publisher and pocket
   toasts: actionToastsReducers, // Notifications of action results,
-  shortcuts: shortcutReducers // Keyboard shortcuts
+  shortcuts: shortcutReducers, // Keyboard shortcuts,
+  analytics: snowplowReducers //Analytics
 }
 
 const rootReducer = combineReducers({
@@ -143,7 +140,6 @@ function* rootSaga() {
     ...recitSagas,
     ...myListSagas,
     ...myListItemsSagas,
-    ...itemAnalyticsSagas,
     ...itemShareSagas,
     ...readSagas,
     ...homeSagas,
@@ -167,11 +163,7 @@ export const initializeStore = () => {
         })
       : compose
 
-  const store = createStore(
-    rootReducer,
-    {},
-    composeEnhancers(applyMiddleware(sagaMiddleware))
-  )
+  const store = createStore(rootReducer, {}, composeEnhancers(applyMiddleware(sagaMiddleware)))
 
   store.sagaTask = sagaMiddleware.run(rootSaga)
 

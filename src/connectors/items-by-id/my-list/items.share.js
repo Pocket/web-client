@@ -7,40 +7,25 @@ import { ITEMS_SHARE_REQUEST } from 'actions'
 import { ITEMS_SHARE_CANCEL } from 'actions'
 import { ITEMS_SHARE_SUCCESS } from 'actions'
 import { ITEMS_SHARE_FAILURE } from 'actions'
-
 import { ITEMS_RECOMMEND_CONFIRM } from 'actions'
-
 import { ITEMS_SEND_TO_FRIEND_CONFIRM } from 'actions'
 import { ITEMS_SEND_TO_FRIEND_ADD } from 'actions'
 import { ITEMS_SEND_TO_FRIEND_REMOVE } from 'actions'
 
-import { ITEMS_SOCIAL_SHARE } from 'actions'
-
 import { API_ACTION_SHARE } from 'common/constants'
 import { API_ACTION_RECOMMEND } from 'common/constants'
 
-import { trackContentEngagement } from 'connectors/snowplow/snowplow.state'
-import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
-import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
+import { trackItemAction } from 'connectors/snowplow/snowplow.state'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const itemsShareAction = (item) => ({ type: ITEMS_SHARE_REQUEST, item }) //prettier-ignore
 export const itemsShareCancel = () => ({ type: ITEMS_SHARE_CANCEL })
-
 export const itemsRecommendConfirm = (comment) => ({ type: ITEMS_RECOMMEND_CONFIRM, comment }) //prettier-ignore
 export const itemsSendToFriendConfirm = (comment) => ({type: ITEMS_SEND_TO_FRIEND_CONFIRM, comment}) //prettier-ignore
-
 export const itemsShareAddFriend = (tag) => ({type: ITEMS_SEND_TO_FRIEND_ADD, tag}) //prettier-ignore
 export const itemsShareRemoveFriend = (tags) => ({type: ITEMS_SEND_TO_FRIEND_REMOVE, tags}) //prettier-ignore
-
-export const itemsSocialShare = (item, position, identifier) => (trackContentEngagement(
-  ENGAGEMENT_TYPE_GENERAL,
-  UI_COMPONENT_BUTTON,
-  position,
-  item,
-  identifier
-))
+export const itemsSocialShare = (item, position, identifier) => trackItemAction(position, item, identifier) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -91,7 +76,6 @@ export const itemShareSagas = [
   takeEvery(ITEMS_SHARE_REQUEST, fetchRecentFriends)
 ]
 
-
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getFriendList = (state) => state.itemsToShare.friendList
@@ -101,7 +85,7 @@ const getFriendList = (state) => state.itemsToShare.friendList
 function* fetchRecentFriends() {
   const response = yield getRecentFriends()
   const { auto_complete_emails, friends } = response
-  const autoCompleteEmails = auto_complete_emails.map(item => item.email)
+  const autoCompleteEmails = auto_complete_emails.map((item) => item.email)
   // console.log(response, auto_complete_emails, autoCompleteEmails)
 }
 
@@ -114,9 +98,7 @@ function* itemShare({ item }) {
   })
 
   if (cancel) return
-
   if (recommend) return yield itemRecommend({ item, response: recommend })
-
   if (sendToFriend) return yield itemShareToFriend({item, response: sendToFriend }) //prettier-ignore
 }
 
@@ -144,7 +126,7 @@ function* itemShareToFriend({ item, response }) {
   const { id, quote } = item
   const { comment } = response
   const friendList = yield select(getFriendList)
-  const to = friendList.map(email => { return { email }})
+  const to = friendList.map((email) => ({ email }))
 
   // Update the server
   const actions = [
@@ -161,7 +143,3 @@ function* itemShareToFriend({ item, response }) {
 
   if (data) return yield put({ type: ITEMS_SHARE_SUCCESS, data })
 }
-
-// function buildActions(items, action) {
-//   return items.map((item) => ({ action, item_id: item.id }))
-// }
