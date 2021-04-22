@@ -16,6 +16,8 @@ export default function Topic(props) {
 
   // Is user logged in?
   const isAuthenticated = useSelector((state) => state.user?.auth)
+  const userStatus = useSelector((state) => state.user?.user_status)
+  const shouldRender = userStatus !== 'pending'
 
   // Select state to use
   const topicList = useSelector((state) => state.topicList?.topicsByName)
@@ -40,11 +42,7 @@ export default function Topic(props) {
   }
 
   // Error if no items are available
-  if (
-    !curatedItems?.length &&
-    !algorithmicItems?.length &&
-    !searchItems?.length
-  ) {
+  if (!curatedItems?.length && !algorithmicItems?.length && !searchItems?.length) {
     return <ErrorPage statusCode={statusCode} />
   }
 
@@ -63,7 +61,7 @@ export default function Topic(props) {
 
   return (
     <Layout title={`Pocket: ${title}`} metaData={topicMetaData}>
-      {!isAuthenticated ? <CallOutBuildHome /> : null}
+      {!isAuthenticated && shouldRender ? <CallOutBuildHome /> : null}
 
       <RenderComponent
         topic={topic}
