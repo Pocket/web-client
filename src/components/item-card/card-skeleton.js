@@ -1,10 +1,6 @@
 import { css, cx } from 'linaria'
 import PropTypes from 'prop-types'
 import { cardStyles } from './card-base'
-import { cardBlock } from './card-base'
-import { cardWide } from './card-base'
-import { cardList } from './card-base'
-import { cardDetail } from './card-base'
 
 const skeletonStyle = css`
   .titles {
@@ -25,21 +21,11 @@ const skeletonStyle = css`
   }
 `
 
-export const CardSkeleton = ({
-  name,
-  showExcerpt,
-  showMedia,
-  cardShape,
-  count
-}) => {
+export const CardSkeleton = ({ name, showExcerpt, showMedia, cardShape, count }) => {
   const card = (index) => {
-    const shape = typeof cardShape === 'string' ? cardShape : cardShape[index]
     return cx(
       cardStyles,
-      shape === 'block' && `${cardBlock} block`,
-      shape === 'wide' && `${cardWide} wide`,
-      shape === 'list' && `${cardList} list`,
-      shape === 'detail' && `${cardDetail} detail`,
+      cardShape,
       'noActions',
       !showExcerpt && 'noExcerpt',
       !showMedia && 'noMedia',
