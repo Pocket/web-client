@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import { saveArticleItem, unSaveArticleItem } from './syndicated-article.state'
 import { publisherRecsRequest } from '/connectors/recit/recit.state'
 import { pocketRecsRequest } from '/connectors/recit/recit.state'
+import { pocketRecSaveItem } from '/connectors/recit/recit.state'
 
 import { trackPageView } from './syndicated-article.analytics'
 import { trackShareClick } from './syndicated-article.analytics'
@@ -312,6 +313,10 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
     if (saveStatus !== 'saved') dispatch(saveArticleItem(savedUrl))
   }
 
+  const savePocketRec = (id, url) => {
+    dispatch(pocketRecSaveItem(id, url))
+  }
+
   const adTargetingMetadata = {
     iabTopCategory,
     iabSubCategory,
@@ -494,10 +499,12 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
             {!isMobileWebView ? (
               <Fragment>
                 <PocketRecs
+                  isAuthenticated={isAuthenticated}
                   recommendations={pocketRecs}
                   maxRecommendations={5}
                   handleRecImpression={handleRecImpression}
                   handleRecClick={handleRecClick}
+                  saveRecommendation={savePocketRec}
                 />
                 <TopicsBubbles topics={topics} />
               </Fragment>

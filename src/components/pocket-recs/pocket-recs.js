@@ -10,6 +10,7 @@ import {
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { POCKET_MODULE } from 'connectors/recit/recit.analytics'
 import { darkMode, sepiaMode } from '@pocket/web-ui'
+import { ActionsRecit } from 'connectors/item-card/actions/recit'
 
 const pocketRecsStyles = css`
   border-top: solid 3px var(--color-textPrimary);
@@ -79,6 +80,8 @@ const recommendationStyles = css`
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 1.5rem;
   margin-bottom: var(--spacing150);
+  padding-bottom: var(--spacing150);
+  font-family: 'Graphik Web';
 
   &:last-child {
     margin-bottom: 0;
@@ -101,6 +104,10 @@ const recommendationStyles = css`
   }
   .title {
     line-height: 122%;
+  }
+
+  button, .actions a {
+    padding-top: 0;
   }
 
   ${breakpointMediumTablet} {
@@ -133,24 +140,42 @@ const recommendationStyles = css`
 `
 
 export const Recommendation = ({
+  id,
   title,
   url,
   thumbnailUrl,
+  saveStatus,
   publisher: { name, logoWideBwUrl },
-  handleClick
-}) => (
-  <li className={recommendationStyles}>
-    <a onClick={handleClick} className="thumbnail" href={url}>
-      <img src={thumbnailUrl} />
-    </a>
-    <div className="details">
-      <Publisher name={name} logo={logoWideBwUrl} />
-      <a onClick={handleClick} href={url}>
-        <h4 className="h5">{title}</h4>
+  handleClick,
+  saveRecommendation,
+  isAuthenticated,
+}) => {
+  const onSave = () => {
+    saveRecommendation(id, url)
+  }
+
+  return (
+    <li className={recommendationStyles}>
+      <a onClick={handleClick} className="thumbnail" href={url}>
+        <img src={thumbnailUrl} />
       </a>
-    </div>
-  </li>
-)
+      <div className="details">
+        <Publisher name={name} logo={logoWideBwUrl} />
+        <a onClick={handleClick} href={url}>
+          <h4 className="h5">{title}</h4>
+        </a>
+        <ActionsRecit
+          id={id}
+          isAuthenticated={isAuthenticated}
+          onSave={onSave}
+          saveStatus={saveStatus}
+          openUrl={url}
+          onOpen={handleClick}
+        />
+      </div>
+    </li>
+  )
+}
 
 const recommendationsStyles = css`
   font-size: 16px; /* sets root size for list */
@@ -166,28 +191,24 @@ const recommendationsStyles = css`
   }
 `
 export const Recommendations = ({
+  isAuthenticated,
   recommendations,
   maxRecommendations,
   handleRecImpression,
-  handleRecClick
+  handleRecClick,
+  saveRecommendation
 }) => {
   return (
     <ul className={recommendationsStyles}>
-      {recommendations.slice(0, maxRecommendations).map((r, position) => {
-        const { syndicated_article } = r
-        if (!syndicated_article) {
-          return null
-        }
-
+      {Object.keys(recommendations).map((rec, position) => {
         const {
           title,
-          slug,
-          topImageUrl,
+          save_url: url,
+          save_status,
+          thumbnail,
           publisher,
           resolvedItem
-        } = syndicated_article
-
-        const url = `/explore/item/${slug}`
+        } = recommendations[rec]
 
         function handleVisible() {
           handleRecImpression({
@@ -211,17 +232,22 @@ export const Recommendations = ({
         }
 
         const preferredThumbnailSize = { width: 270, height: 150 }
+
         return (
-          <VisibilitySensor key={slug} onVisible={handleVisible}>
+          <VisibilitySensor key={rec} onVisible={handleVisible}>
             <Recommendation
+              id={rec}
+              saveStatus={save_status}
               title={title}
               url={url}
               thumbnailUrl={getImageCacheUrl(
-                topImageUrl,
+                thumbnail,
                 preferredThumbnailSize
               )}
               publisher={publisher}
               handleClick={handleClick}
+              saveRecommendation={saveRecommendation}
+              isAuthenticated={isAuthenticated}
             />
           </VisibilitySensor>
         )
@@ -231,12 +257,14 @@ export const Recommendations = ({
 }
 
 const PocketRecs = ({
+  isAuthenticated,
   recommendations,
   maxRecommendations,
   handleRecImpression,
-  handleRecClick
+  handleRecClick,
+  saveRecommendation
 }) => {
-  if (recommendations.length === 0) return null
+  if (Object.keys(recommendations).length === 0) return null
 
   return (
     <div className={pocketRecsStyles}>
@@ -247,6 +275,8 @@ const PocketRecs = ({
         maxRecommendations={maxRecommendations}
         handleRecImpression={handleRecImpression}
         handleRecClick={handleRecClick}
+        isAuthenticated={isAuthenticated}
+        saveRecommendation={saveRecommendation}
       />
     </div>
   )
@@ -254,9 +284,14 @@ const PocketRecs = ({
 
 PocketRecs.propTypes = {
   /**
+   * Whether the user is logged in
+   */
+  isAuthenticated: PropTypes.bool,
+
+  /**
    * A list of recommended articles from the same publisher
    */
-  recommendations: PropTypes.arrayOf(PropTypes.object),
+  recommendations: PropTypes.object,
 
   /**
    * The max number of recommended articles to display
@@ -271,14 +306,21 @@ PocketRecs.propTypes = {
   /**
    * Callback function to fire on Rec click
    */
-  handleRecClick: PropTypes.func
+  handleRecClick: PropTypes.func,
+
+  /**
+   * Function that's fired when Save is clicked
+   */
+  saveRecommendation: PropTypes.func
 }
 
 PocketRecs.defaultProps = {
+  isAuthenticated: false,
   recommendations: [],
   maxRecommendations: 3,
   handleRecImpression() {},
-  handleRecClick() {}
+  handleRecClick() {},
+  saveRecommendation() {}
 }
 
 export default PocketRecs

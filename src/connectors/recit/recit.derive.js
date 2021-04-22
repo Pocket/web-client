@@ -1,5 +1,21 @@
 import { READING_WPM } from 'common/constants'
 import { domainForUrl } from 'common/utilities'
+import { BASE_URL } from 'common/constants'
+
+export function deriveSyndicatedRecitItems(recommendations) {
+  return recommendations.map((feedItem) => ({
+    resolved_id: feedItem.item?.resolved_id,
+    item_id: feedItem.item?.item_id || feedItem.item?.resolved_id,
+    title: feedItem.syndicated_article?.title,
+    thumbnail: feedItem.syndicated_article?.topImageUrl,
+    publisher: feedItem.syndicated_article?.publisher,
+    resolvedItem: feedItem.syndicated_article?.resolvedItem,
+    excerpt: feedItem.syndicated_article?.excerpt,
+    save_url: `${BASE_URL}/explore/item/${feedItem.syndicated_article?.slug}`,
+    // open_url: `/read/${feedItem.item?.item_id}`,
+    save_status: 'unsaved'
+  }))
+}
 
 export function deriveReaderRecitItems(recommendations) {
   /**
@@ -26,7 +42,7 @@ export function deriveReaderRecitItems(recommendations) {
     has_video: feedItem.item?.has_video,
     is_article: feedItem.item?.is_article,
     save_status: 'unsaved',
-    openExternal: true,
+    openExternal: true
   }))
 }
 

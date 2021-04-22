@@ -4,9 +4,6 @@ import {
   PUBLISHER_RECS_REQUEST,
   PUBLISHER_RECS_SUCCESS,
   PUBLISHER_RECS_FAILURE,
-  POCKET_RECS_REQUEST,
-  POCKET_RECS_SUCCESS,
-  POCKET_RECS_FAILURE,
   RECENT_RECS_REQUEST,
   RECENT_RECS_SUCCESS,
   RECENT_RECS_FAILURE,
@@ -16,6 +13,15 @@ import {
   RECENT_REC_UNSAVE_REQUEST,
   RECENT_REC_UNSAVE_SUCCESS,
   RECENT_REC_UNSAVE_FAILURE
+} from 'actions'
+
+import {
+  POCKET_RECS_REQUEST,
+  POCKET_RECS_SUCCESS,
+  POCKET_RECS_FAILURE,
+  POCKET_RECS_SAVE_REQUEST,
+  POCKET_RECS_SAVE_FAILURE,
+  POCKET_RECS_SAVE_SUCCESS
 } from 'actions'
 
 import {
@@ -41,11 +47,13 @@ import { removeItem as removeItemAPI } from 'common/api/removeItem'
 
 import { arrayToObject } from 'common/utilities'
 import { deriveReaderRecitItems, checkExternal } from './recit.derive'
+import { deriveSyndicatedRecitItems } from './recit.derive'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const publisherRecsRequest = (itemId) => ({ type: PUBLISHER_RECS_REQUEST, itemId }) //prettier-ignore
 export const pocketRecsRequest = (itemId) => ({ type: POCKET_RECS_REQUEST, itemId }) //prettier-ignore
+export const pocketRecSaveItem = (id, url) => ({ type: POCKET_RECS_SAVE_REQUEST, id, url }) //prettier-ignore
 
 export const setRecImpression = (id) => ({ type: SET_REC_IMPRESSION, id }) //prettier-ignore
 
@@ -64,7 +72,7 @@ const initialState = {
   publisherRecs: [],
   publisherRecId: null,
   publisherRecModel: null,
-  pocketRecs: [],
+  pocketRecs: {},
   pocketRecId: null,
   pocketRecModel: null,
   readerRecs: {},
@@ -99,10 +107,10 @@ export const recitReducers = (state = initialState, action) => {
 
     case POCKET_RECS_SUCCESS: {
       const {
-        response: {
-          recommendations: pocketRecs,
-          rec_id: pocketRecId,
-          model: pocketRecModel
+        data: {
+          pocketRecs,
+          pocketRecId,
+          pocketRecModel
         }
       } = action
       return {
@@ -110,6 +118,30 @@ export const recitReducers = (state = initialState, action) => {
         pocketRecs,
         pocketRecId,
         pocketRecModel
+      }
+    }
+
+    case POCKET_RECS_SAVE_REQUEST: {
+      const { id } = action
+      return {
+        ...state,
+        pocketRecs: updateSaveStatus(state.pocketRecs, id, 'saving')
+      }
+    }
+
+    case POCKET_RECS_SAVE_SUCCESS: {
+      const { id } = action
+      return {
+        ...state,
+        pocketRecs: updateSaveStatus(state.pocketRecs, id, 'saved')
+      }
+    }
+
+    case POCKET_RECS_SAVE_FAILURE: {
+      const { id } = action
+      return {
+        ...state,
+        pocketRecs: updateSaveStatus(state.pocketRecs, id, 'unsaved')
       }
     }
 
@@ -201,6 +233,7 @@ export function updateSaveStatus(state, id, save_status, openExternal = true) {
 export const recitSagas = [
   takeLatest(PUBLISHER_RECS_REQUEST, fetchPublisherRecs),
   takeLatest(POCKET_RECS_REQUEST, fetchPocketRecs),
+  takeLatest(POCKET_RECS_SAVE_REQUEST, pocketRecSaveRequest),
   takeLatest(READER_RECS_REQUEST, fetchReaderRecs),
   takeLatest(READER_REC_SAVE_REQUEST, readerItemSaveRequest),
   takeLatest(READER_REC_UNSAVE_REQUEST, readerItemUnSaveRequest),
@@ -242,6 +275,19 @@ function* itemsUnSaveRequest(action) {
   }
 }
 
+function* pocketRecSaveRequest({ id, url }) {
+  try {
+    const response = yield saveItemAPI(url)
+    if (response?.status !== 1) throw new Error('Unable to save')
+
+    yield put({ type: POCKET_RECS_SAVE_SUCCESS, id })
+    yield put({ type: ITEMS_ADD_SUCCESS })
+  } catch (error) {
+    const { id } = action
+    yield put({ type: POCKET_RECS_SAVE_FAILURE, error, id })
+  }
+}
+
 function* fetchPublisherRecs({ itemId }) {
   try {
     const response = yield getPublisherRecs(itemId)
@@ -254,7 +300,17 @@ function* fetchPublisherRecs({ itemId }) {
 function* fetchPocketRecs({ itemId }) {
   try {
     const response = yield getPocketRecs(itemId)
-    yield put({ type: POCKET_RECS_SUCCESS, response })
+    const { recommendations, rec_id, model } = response
+
+    const derivedItems = yield deriveSyndicatedRecitItems(recommendations)
+    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+    const data = {
+      pocketRecs: itemsById,
+      pocketRecId: rec_id,
+      pocketRecModel: model
+    }
+
+    yield put({ type: POCKET_RECS_SUCCESS, data })
   } catch (error) {
     yield put({ type: POCKET_RECS_FAILURE, error })
   }

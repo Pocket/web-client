@@ -16,7 +16,7 @@ describe('PocketRecs', () => {
     recommendations: pocketRecs.recommendations
   }
   it('does not render <Heading> or <Recommendations> when there are no recommendations', () => {
-    const noRecsInstance = shallow(<PocketRecs recommendations={[]} />)
+    const noRecsInstance = shallow(<PocketRecs recommendations={{}} />)
     const heading = noRecsInstance.find("[data-cy='pocket-recs-heading']")
     const recommendations = noRecsInstance.find(
       "[data-cy='pocket-recommended-articles']"

@@ -2,7 +2,6 @@ import React from 'react'
 import { css } from 'linaria'
 
 import { CardMedia } from 'components/media/card-media'
-import { SaveToPocket } from 'components/save-to-pocket/save-to-pocket'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { SyndicatedBadge } from 'components/item-card/discover/syndicated-badge'
 import { urlWithPocketRedirect } from 'common/utilities'
