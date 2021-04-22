@@ -131,7 +131,7 @@ const wrapper = css`
 
 export function CallOutBuildHome() {
   return (
-    <div className={wrapper}>
+    <div className={wrapper} data-cy="signup-module">
       <aside>
         <p className="h3 title">Build a home for everything that interests&nbsp;you</p>
         <p className="subtext">

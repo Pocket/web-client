@@ -25,8 +25,13 @@ export function TopicsSideNav({
 
       {pinnedTopics.length
         ? pinnedTopics.map((topic) => (
-            <a href={`https://getpocket.com/explore/${topic.topic_slug}?src=sidebar`} key={topic.topic_slug}>
-              <button className={subActive(topic)} onClick={clickEvent}>{topic.display_name}</button>
+            <a
+              data-cy={`side-nav-${topic.topic_slug}`}
+              href={`https://getpocket.com/explore/${topic.topic_slug}?src=sidebar`}
+              key={topic.topic_slug}>
+              <button className={subActive(topic)} onClick={clickEvent}>
+                {topic.display_name}
+              </button>
             </a>
           ))
         : null}

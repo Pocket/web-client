@@ -48,7 +48,7 @@ const TopicPill = ({ topic, handleTopicClick, active }) => {
     <PillCheckbox
       isChecked={active}
       onClick={handleClick}
-      data-cy="topic-pill"
+      data-cy={`topic-checkbox-${topic.topic}`}
       name={topicHeadings[topic.topic]?.title}
     />
   )

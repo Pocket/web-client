@@ -19,7 +19,7 @@ export const HomeCollectionList = () => {
   const showSkeleton = collectionSet?.length < 2
 
   return (
-    <>
+    <section data-cy="collections-row">
       <HomeSectionHeader
         sectionTitle="Our most-read Collections"
         sectionDescription="Dive into our editors’ curated lists of stories around a unique subject"
@@ -37,6 +37,6 @@ export const HomeCollectionList = () => {
           ))
         )}
       </section>
-    </>
+    </section>
   )
 }

@@ -151,7 +151,7 @@ function SaveStoryButton({
 
   return (
     <>
-      <Button onClick={handleClick} ref={popTrigger}>
+      <Button onClick={handleClick} ref={popTrigger} data-cy={id}>
         {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}
         {saveCopy[saveStatus]}
       </Button>

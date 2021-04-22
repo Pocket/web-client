@@ -110,6 +110,7 @@ export const ArticleActions = function ({
 
       <div className="facebook-share">
         <FacebookShareButton
+          data-cy="share-facebook"
           onShareWindowClose={() => handleShareClick('Facebook')}
           quote={excerpt}
           url={buildShareUrl(url, 'fbsynd')}>
@@ -119,6 +120,7 @@ export const ArticleActions = function ({
 
       <div className="twitter-share">
         <TwitterShareButton
+          data-cy="share-twitter"
           onShareWindowClose={() => handleShareClick('Twitter')}
           title={title}
           via="Pocket"
@@ -129,6 +131,7 @@ export const ArticleActions = function ({
 
       <div className="reddit-share">
         <RedditShareButton
+          data-cy="share-reddit"
           onShareWindowClose={() => handleShareClick('Reddit')}
           title={title}
           url={buildShareUrl(url, 'redditsynd')}>
@@ -138,6 +141,7 @@ export const ArticleActions = function ({
 
       <div className="linkedin-share">
         <LinkedinShareButton
+          data-cy="share-linkedin"
           onShareWindowClose={() => handleShareClick('Linkedin')}
           summary={excerpt}
           source="Pocket"
@@ -149,6 +153,7 @@ export const ArticleActions = function ({
 
       <div className="email-share">
         <EmailShareButton
+          data-cy="share-email"
           beforeOnClick={() => handleShareClick('Email')}
           subject={title}
           body={excerpt}

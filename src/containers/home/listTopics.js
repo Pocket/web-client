@@ -97,7 +97,7 @@ export const HomeTopicsRow = ({ topic_slug, topic }) => {
   const displayItems = topicItems?.slice(0, 3)
 
   return (
-    <div className={topicRowStyles}>
+    <div className={topicRowStyles} data-cy={`topic-row-${topic}`}>
       <HomeTopicHeader
         sectionTitle={topicHeadings[topic]?.title}
         topicSlug={topic_slug}
