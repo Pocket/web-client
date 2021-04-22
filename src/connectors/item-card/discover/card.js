@@ -32,11 +32,6 @@ export function ItemCard({
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onOpen = () => {
-    openAction(position, item)
-    dispatch(trackItemOpen(positionZeroIndex, item, 'web-discover-card'))
-  }
-
   // Fire item impression
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
   useEffect(() => {
@@ -54,6 +49,11 @@ export function ItemCard({
 
     // Not authenticated so just tracking the click
     unAuthSaveAction(position)
+  }
+
+  const onOpen = () => {
+    openAction(position, item)
+    dispatch(trackItemOpen(positionZeroIndex, item, 'web-discover-card'))
   }
 
   return (

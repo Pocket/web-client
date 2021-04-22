@@ -25,8 +25,6 @@ export const sendSearchEvent = (searchTerm) =>
 
 export const sendBulkDeleteEvent = (items) => trackItemAction(0, items, 'global-nav.bulk.delete')
 
-export const sendBulkTagEvent = (items) => trackItemAction(0, items, 'global-nav.bulk.tag')
-
 export const sendBulkFavoriteEvent = (items, status) => {
   const identifier = status ? 'global-nav.bulk.favorite' : 'global-nav.bulk.un-favorite'
   return trackItemAction(0, items, identifier)
@@ -37,6 +35,8 @@ export const sendBulkArchiveEvent = (items, status) => {
   const trackAction = status ? trackItemSave : trackItemAction
   return trackAction(0, items, identifier)
 }
+
+export const sendBulkTagEvent = (items) => trackItemAction(0, items, 'global-nav.bulk.tag')
 
 export const sendImpression = (identifier) =>
   trackImpression(
