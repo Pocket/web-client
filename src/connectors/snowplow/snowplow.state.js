@@ -45,10 +45,10 @@ import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
 
 export const trackItemOpen = (position, item, identifier) => {
-  const { save_url, item_id } = item
+  const { save_url, item_id, syndicated } = item
   const permanentLib = /permanent-library/.test(identifier)
   const linkTarget = permanentLib ? save_url : urlWithPermanentLibrary(item_id)
-  const destination = getLinkOpenTarget(linkTarget)
+  const destination = getLinkOpenTarget(linkTarget, syndicated)
   return {
     type: SNOWPLOW_TRACK_ITEM_OPEN,
     trigger: CONTENT_OPEN_TRIGGER_CLICK,
