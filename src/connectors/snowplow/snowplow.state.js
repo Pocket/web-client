@@ -126,7 +126,7 @@ export const snowplowSagas = [
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 function* firePageView() {
-  yield snowplowTrackPageView()
+  yield call(snowplowTrackPageView)
 }
 
 function* fireVariantEnroll({ variants }) {
@@ -134,7 +134,7 @@ function* fireVariantEnroll({ variants }) {
     const variantEnrollEvent = createVariantEnrollEvent()
     const featureFlagEntity = createFeatureFlagEntity(flag, variants[flag])
 
-    yield sendCustomSnowplowEvent(variantEnrollEvent, [featureFlagEntity])
+    yield call(sendCustomSnowplowEvent, variantEnrollEvent, [featureFlagEntity])
   }
 }
 
@@ -147,7 +147,7 @@ function* fireFeatureEnroll({ hydrate }) {
       const variantEnrollEvent = createVariantEnrollEvent()
       const featureFlagEntity = createFeatureFlagEntity(testName, entityVariant)
 
-      yield sendCustomSnowplowEvent(variantEnrollEvent, [featureFlagEntity])
+      yield call(sendCustomSnowplowEvent, variantEnrollEvent, [featureFlagEntity])
     }
   }
 }
@@ -163,7 +163,7 @@ function* fireContentOpen({ destination, trigger, position, item, identifier }) 
   })
 
   const snowplowEntities = [contentEntity, uiEntity]
-  yield sendCustomSnowplowEvent(contentOpenEvent, snowplowEntities)
+  yield call(sendCustomSnowplowEvent, contentOpenEvent, snowplowEntities)
 }
 
 function* fireItemImpression({ component, requirement, position, item, identifier }) {
@@ -177,7 +177,7 @@ function* fireItemImpression({ component, requirement, position, item, identifie
   })
 
   const snowplowEntities = [contentEntity, uiEntity]
-  yield sendCustomSnowplowEvent(impressionEvent, snowplowEntities)
+  yield call(sendCustomSnowplowEvent, impressionEvent, snowplowEntities)
 }
 
 function* fireImpression({ component, requirement, ui, position, identifier }) {
@@ -190,7 +190,7 @@ function* fireImpression({ component, requirement, ui, position, identifier }) {
   })
 
   const snowplowEntities = [uiEntity]
-  yield sendCustomSnowplowEvent(impressionEvent, snowplowEntities)
+  yield call(sendCustomSnowplowEvent, impressionEvent, snowplowEntities)
 }
 
 function* fireContentEngagmenet({ component, ui, identifier, position, items }) {
@@ -208,7 +208,7 @@ function* fireContentEngagmenet({ component, ui, identifier, position, items }) 
   const uiEntity = createUiEntity({ type: ui, hierarchy: 0, identifier, index: position })
 
   const snowplowEntities = [...contentEntity, uiEntity]
-  yield sendCustomSnowplowEvent(engagementEvent, snowplowEntities)
+  yield call(sendCustomSnowplowEvent, engagementEvent, snowplowEntities)
 }
 
 function* fireEngagement({ component, ui, identifier, position, value }) {
@@ -222,5 +222,5 @@ function* fireEngagement({ component, ui, identifier, position, value }) {
   })
 
   const snowplowEntities = [uiEntity]
-  yield sendCustomSnowplowEvent(engagementEvent, snowplowEntities)
+  yield call(sendCustomSnowplowEvent, engagementEvent, snowplowEntities)
 }
