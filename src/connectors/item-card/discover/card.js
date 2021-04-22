@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import { Card } from 'components/item-card/discover/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { useInView } from 'react-intersection-observer'
-import { fireItemImpression, fireItemOpen } from './card.analytics'
+import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
+import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
 
 /**
  * Article Card
@@ -15,7 +16,6 @@ export function ItemCard({
   positionZeroIndex,
   saveAction,
   unSaveAction,
-  impressionAction,
   unAuthSaveAction,
   openAction,
   reportFeedbackAction
@@ -23,17 +23,27 @@ export function ItemCard({
   // Get data from state
   const isAuthenticated = useSelector((state) => state.user.auth)
   const item = useSelector((state) => state.discoverItemsById[id])
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
   const { save_url, save_status } = item
   const dispatch = useDispatch()
 
+  /**
+   * ITEM TRACKING
+   * ----------------------------------------------------------------
+   */
+  const onOpen = () => {
+    openAction(position, item)
+    dispatch(trackItemOpen(positionZeroIndex, item, 'web-discover-card'))
+  }
+
   // Fire item impression
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
-  useEffect(
-    //prettier-ignore
-    () => fireItemImpression(position, positionZeroIndex,item,inView,impressionAction,dispatch),
-    [position, item, inView, impressionAction]
-  )
+  useEffect(() => {
+    if (impressionFired) {
+      dispatch(trackItemImpression(positionZeroIndex, item, 'web-discover-card'))
+    }
+  }, [positionZeroIndex, item, inView, impressionFired, dispatch])
 
   const onSave = (isAuthenticated) => {
     if (isAuthenticated) {
@@ -44,11 +54,6 @@ export function ItemCard({
 
     // Not authenticated so just tracking the click
     unAuthSaveAction(position)
-  }
-
-  const onOpen = () => {
-    openAction(position, item)
-    fireItemOpen(positionZeroIndex, item, dispatch)
   }
 
   return (
