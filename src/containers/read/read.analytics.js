@@ -2,13 +2,10 @@ import { trackItemAction } from 'connectors/snowplow/snowplow.state'
 import { trackItemSave } from 'connectors/snowplow/snowplow.state'
 import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
 import { trackImpression } from 'connectors/snowplow/snowplow.state'
-import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
-import { ENGAGEMENT_TYPE_SAVE } from 'connectors/snowplow/events'
 import { IMPRESSION_COMPONENT_UI } from 'connectors/snowplow/events'
 import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
-import { CONTENT_OPEN_TRIGGER_CLICK } from 'connectors/snowplow/events'
 import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
-import { getLinkOpenTarget } from 'connectors/snowplow/events'
+
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -47,7 +44,7 @@ export const sendImpression = (identifier) =>
   )
 
 export const sendExternalLinkClick = (item, href) => {
-  return trackItemOpen(0, item, 'reader.external-link')
+  return trackItemOpen(0, item, 'reader.external-link', href)
 }
 
 export const sendViewOriginalEvent = (item) => {
