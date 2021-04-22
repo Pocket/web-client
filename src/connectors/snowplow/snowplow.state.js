@@ -1,11 +1,11 @@
 import { takeLatest, takeEvery, call, select } from 'redux-saga/effects'
 import { BATCH_SIZE } from 'common/constants'
+import { urlWithPermanentLibrary } from 'common/utilities'
 
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 import { SNOWPLOW_TRACK_IMPRESSION } from 'actions'
 import { SNOWPLOW_TRACK_ENGAGEMENT } from 'actions'
 
-import { SNOWPLOW_TRACK_CONTENT_ENGAGEMENT } from 'actions'
 import { SNOWPLOW_TRACK_ITEM_IMPRESSION } from 'actions'
 import { SNOWPLOW_TRACK_ITEM_ACTION } from 'actions'
 import { SNOWPLOW_TRACK_ITEM_SAVE } from 'actions'
@@ -44,7 +44,10 @@ import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
  --------------------------------------------------------------- */
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
 
-export const trackItemOpen = (linkTarget, position, item, identifier) => {
+export const trackItemOpen = (position, item, identifier) => {
+  const { save_url, item_id } = item
+  const permanentLib = /permanent-library/.test(identifier)
+  const linkTarget = permanentLib ? save_url : urlWithPermanentLibrary(item_id)
   const destination = getLinkOpenTarget(linkTarget)
   return {
     type: SNOWPLOW_TRACK_ITEM_OPEN,
@@ -89,29 +92,6 @@ export const trackItemImpression = (position, item, identifier) => {
   }
 }
 
-export const trackImpression = (component, requirement, ui, position, identifier) => {
-  return {
-    type: SNOWPLOW_TRACK_IMPRESSION,
-    component,
-    requirement,
-    ui,
-    position,
-    identifier
-  }
-}
-
-// ?? Generics we can get rid of ??
-export const trackContentEngagement = (component, ui, position, items, identifier) => {
-  return {
-    type: SNOWPLOW_TRACK_CONTENT_ENGAGEMENT,
-    component,
-    ui,
-    identifier,
-    position,
-    items
-  }
-}
-
 export const trackEngagement = (component, ui, position, identifier, value) => {
   return {
     type: SNOWPLOW_TRACK_ENGAGEMENT,
@@ -120,6 +100,17 @@ export const trackEngagement = (component, ui, position, identifier, value) => {
     identifier,
     position,
     value
+  }
+}
+
+export const trackImpression = (component, requirement, ui, position, identifier) => {
+  return {
+    type: SNOWPLOW_TRACK_IMPRESSION,
+    component,
+    requirement,
+    ui,
+    position,
+    identifier
   }
 }
 
@@ -157,7 +148,6 @@ export const snowplowSagas = [
   takeLatest(FEATURES_HYDRATE, fireFeatureEnroll),
   takeLatest(SNOWPLOW_TRACK_PAGE_VIEW, firePageView),
   takeEvery(SNOWPLOW_TRACK_IMPRESSION, fireImpression),
-  takeEvery(SNOWPLOW_TRACK_CONTENT_ENGAGEMENT, fireContentEngagement),
   takeEvery(SNOWPLOW_TRACK_ENGAGEMENT, fireEngagement),
   takeEvery(SNOWPLOW_TRACK_ITEM_OPEN, fireContentOpen),
   takeEvery(SNOWPLOW_TRACK_ITEM_IMPRESSION, fireItemImpression),
