@@ -3,20 +3,17 @@ import { Construct } from 'constructs'
 import { config } from './config'
 
 import { App } from 'cdktf'
-import { DataTerraformRemoteState } from 'cdktf'
 import { RemoteBackend } from 'cdktf'
 import { TerraformStack } from 'cdktf'
 
 import { AwsProvider } from '../.gen/providers/aws'
-import { DataAwsCallerIdentity } from '../.gen/providers/aws'
 import { DataAwsKmsAlias } from '../.gen/providers/aws'
+import { DataAwsCallerIdentity } from '../.gen/providers/aws'
 import { DataAwsRegion } from '../.gen/providers/aws'
 import { DataAwsSnsTopic } from '../.gen/providers/aws'
 import { PagerdutyProvider } from '../.gen/providers/pagerduty'
 
 import { PocketALBApplication } from '@pocket/terraform-modules'
-import { PocketPagerDuty } from '@pocket/terraform-modules'
-import { PocketVPC } from '@pocket/terraform-modules'
 
 class WebClient extends TerraformStack {
   constructor(scope: Construct, name: string) {
@@ -30,40 +27,18 @@ class WebClient extends TerraformStack {
       workspaces: [{ prefix: `${config.name}-` }]
     })
 
-    const incidentManagement = new DataTerraformRemoteState(
-      this,
-      'incident_management',
-      {
-        organization: 'Pocket',
-        workspaces: { name: 'incident-management' }
-      }
-    )
-
-    const pagerDuty = new PocketPagerDuty(this, 'pagerduty', {
-      prefix: config.prefix,
-      service: {
-        criticalEscalationPolicyId: incidentManagement.get(
-          'policy_backend_critical_id'
-        ),
-        nonCriticalEscalationPolicyId: incidentManagement.get(
-          'policy_backend_non_critical_id'
-        )
-      }
-    })
-
-    const region = new DataAwsRegion(this, 'region')
-    const caller = new DataAwsCallerIdentity(this, 'caller')
+    const region = new DataAwsRegion(this, 'region');
+    const caller = new DataAwsCallerIdentity(this, 'caller');
     const secretsManager = new DataAwsKmsAlias(this, 'kms_alias', {
-      name: 'alias/aws/secretsmanager'
-    })
+      name: 'alias/aws/secretsmanager',
+    });
 
-    // !! Create this before deploying
-    const snsTopic = new DataAwsSnsTopic(this, 'backend_notifications', {
-      name: `Backend-${config.environment}-ChatBot`
-    })
+    // Created by shared infrastructure
+    const snsTopic = new DataAwsSnsTopic(this, 'frontend_notifications', {
+      name: `Frontend-${config.environment}-ChatBot`
+    });
 
     new PocketALBApplication(this, 'application', {
-      internal: true,
       prefix: config.prefix,
       alb6CharacterPrefix: config.shortName,
       tags: config.tags,
@@ -72,12 +47,34 @@ class WebClient extends TerraformStack {
       containerConfigs: [
         {
           name: 'app',
-          hostPort: 80,
-          containerPort: 80,
+          portMappings: [
+            {
+              hostPort: 80,
+              containerPort: 80,
+            },
+          ],
+          healthCheck: {
+            command: [
+              'CMD-SHELL',
+              'curl -f http://localhost/web-client-health || exit 1',
+            ],
+            interval: 15,
+            retries: 3,
+            timeout: 5,
+            startPeriod: 0,
+          },
           envVars: [
             {
               name: 'NODE_ENV',
               value: process.env.NODE_ENV // this gives us a nice lowercase production and development
+            },
+            {
+              name: 'DOMAIN',
+              value: config.domain
+            },
+            {
+              name: 'ASSET_PREFIX',
+              value: 'https://assets.getpocket.com/web-client'
             }
           ],
           secretEnvVars: [
@@ -90,10 +87,15 @@ class WebClient extends TerraformStack {
         {
           name: 'xray-daemon',
           containerImage: 'amazon/aws-xray-daemon',
-          hostPort: 2000,
-          containerPort: 2000,
-          protocol: 'udp',
-          command: ['--region', 'us-east-1', '--local-mode']
+          repositoryCredentialsParam: `arn:aws:secretsmanager:${region.name}:${caller.accountId}:secret:Shared/DockerHub`,
+          portMappings: [
+            {
+              hostPort: 2000,
+              containerPort: 2000,
+              protocol: 'udp',
+            },
+          ],
+          command: ['--region', 'us-east-1', '--local-mode'],
         }
       ],
       codeDeploy: {
@@ -109,6 +111,17 @@ class WebClient extends TerraformStack {
         prefix: config.prefix,
         taskExecutionRolePolicyStatements: [
           //This policy could probably go in the shared module in the future.
+          {
+            actions: ['secretsmanager:GetSecretValue', 'kms:Decrypt'],
+            resources: [
+              `arn:aws:secretsmanager:${region.name}:${caller.accountId}:secret:Shared`,
+              `arn:aws:secretsmanager:${region.name}:${caller.accountId}:secret:Shared/*`,
+              secretsManager.targetKeyArn,
+              `arn:aws:secretsmanager:${region.name}:${caller.accountId}:secret:${config.name}/${config.environment}`,
+              `arn:aws:secretsmanager:${region.name}:${caller.accountId}:secret:${config.name}/${config.environment}/*`,
+            ],
+            effect: 'Allow',
+          },
           {
             actions: ['ssm:GetParameter*'],
             resources: [
@@ -140,7 +153,6 @@ class WebClient extends TerraformStack {
         targetMaxCapacity: 30
       },
       alarms: {
-        // !! pagerDuty.snsNonCriticalAlarmTopic.arn USE this to annoy the backend team
         // TODO: Get a way to send this direct to Kelvin's neighbors phone
         http5xxError: {
           threshold: 10,
@@ -159,7 +171,7 @@ class WebClient extends TerraformStack {
           actions: []
         }
       }
-    })
+    });
   }
 }
 

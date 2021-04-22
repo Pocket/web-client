@@ -630,7 +630,7 @@ workflows:
           codedeploy-application-name: 'WebClient-Dev-ECS'
           codedeploy-deployment-group-name: 'WebClient-Dev-ECS'
           codedeploy-load-balanced-container-name: app
-          codedeploy-load-balanced-container-port: 4003
+          codedeploy-load-balanced-container-port: 80
           container-image-name-updates: 'container=app,image-and-tag=410318598490.dkr.ecr.us-east-1.amazonaws.com/webclient-dev-app:$CIRCLE_SHA1'
           aws-access-key-id: Dev_AWS_ACCESS_KEY
           aws-secret-access-key: Dev_AWS_SECRET_ACCESS_KEY
@@ -664,7 +664,7 @@ workflows:
           codedeploy-application-name: 'WebClient-Prod-ECS'
           codedeploy-deployment-group-name: 'WebClient-Prod-ECS'
           codedeploy-load-balanced-container-name: app
-          codedeploy-load-balanced-container-port: 4003
+          codedeploy-load-balanced-container-port: 80
           container-image-name-updates: 'container=app,image-and-tag=996905175585.dkr.ecr.us-east-1.amazonaws.com/webclient-prod-app:$CIRCLE_SHA1'
           aws-access-key-id: Prod_AWS_ACCESS_KEY
           aws-secret-access-key: Prod_AWS_SECRET_ACCESS_KEY
