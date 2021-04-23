@@ -1,7 +1,6 @@
 import { css, cx } from 'linaria'
 
 const cardPageHeaderStyle = css`
-  margin-bottom: var(--spacing100);
   h1,
   h2,
   h3,
@@ -52,9 +51,7 @@ export const HomeSectionHeader = ({ sectionTitle, sectionDescription }) => {
   return sectionTitle ? (
     <header className={cx(cardPageHeaderStyle, cardPageSectionStyle)}>
       <h2 className="sectionTitle">{sectionTitle}</h2>
-      {sectionDescription ? (
-        <p className="sectionSubTitle">{sectionDescription}</p>
-      ) : null}
+      {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
     </header>
   ) : null
 }

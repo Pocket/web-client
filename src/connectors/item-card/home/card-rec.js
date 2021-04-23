@@ -1,50 +1,39 @@
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
-import { saveHomeItem } from 'containers/home/home.state'
-import { recSaveEvent } from 'containers/home/home.analytics'
-import { recOpenEvent } from 'containers/home/home.analytics'
-import { recImpressionEvent } from 'containers/home/home.analytics'
-import { setHomeImpression } from 'containers/home/home.state'
+import { ActionsRec } from './card-rec-actions'
 
-export const RecCard = ({ id, position, cardShape = 'detail' }) => {
+import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
+import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+
+export const RecCard = ({ id, position, className, cardShape = 'detail', showExcerpt = true }) => {
   const dispatch = useDispatch()
 
   // Get data from state
-  const isAuthenticated = useSelector((state) => state.user.auth)
-  const impressions = useSelector((state) => state.home.impressions)
   const item = useSelector((state) => state.recit.recentRecs[id])
+  const { save_status, item_id, original_url, openExternal } = item
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
+  const openUrl = save_status && !openExternal ? `/read/${item_id}` : original_url
 
-  // Prep save action
-  const { save_url } = item
-  const onSave = (isAuthenticated) => {
-    dispatch(saveHomeItem(id, save_url, position))
-    dispatch(recSaveEvent(item, position))
-  }
-
-  // Prep open Action
-  const onOpen = () => {
-    dispatch(recOpenEvent(item, position))
-  }
-
-  // Prep analytics
-  const impressionAction = () => {
-    if (!impressions[id]) {
-      dispatch(recImpressionEvent(item, position))
-      dispatch(setHomeImpression(id))
-    }
-  }
+  /**
+   * ITEM TRACKING
+   * ----------------------------------------------------------------
+   */
+  const onImpression = () => dispatch(trackItemImpression(position, item, 'home.rec.impression'))
+  const onItemInView = (inView) => (impressionFired || !inView ? onImpression() : null)
+  const onOpen = () => dispatch(trackItemOpen(position, item, 'home.rec.open'))
 
   return item ? (
     <Card
       item={item}
       position={position}
+      className={className}
       cardShape={cardShape}
-      itemType="message"
-      showExcerpt={true}
-      saveAction={onSave}
-      impressionAction={impressionAction}
+      showExcerpt={showExcerpt}
+      openUrl={openUrl}
+      // Tracking
+      onItemInView={onItemInView}
       openAction={onOpen}
-      isAuthenticated={isAuthenticated}
+      ActionMenu={ActionsRec}
     />
   ) : null
 }

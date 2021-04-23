@@ -19,25 +19,28 @@ const heroType = {
   }
 }
 
-const base = {
-  className: 'lockup',
-  cardShape: 'block'
-}
-
 export const cardLockupStyle = css`
   ${cardsGrid};
   border-bottom: 1px solid var(--color-dividerTertiary);
   padding: 2rem 0;
 `
 
-export function Lockup({ items, offset = 0, count = 5, heroPosition = 'center', ItemCard }) {
+export function Lockup({
+  items,
+  offset = 0,
+  count = 5,
+  heroPosition = 'center',
+  cardShape = 'block',
+  lockupShape = 'hero',
+  ItemCard
+}) {
   const start = offset
   const end = offset + count
   const hero = heroType[heroPosition]
   return (
-    <div className={cardLockupStyle}>
+    <div className={`${cardLockupStyle} lockup-${lockupShape}`}>
       {items.slice(start, end).map((id, index) => {
-        const layoutProps = index === 0 ? hero : base
+        const layoutProps = index === 0 ? hero : { className: 'lockup', cardShape }
         return <ItemCard id={id} key={id} position={index} {...layoutProps} />
       })}
     </div>

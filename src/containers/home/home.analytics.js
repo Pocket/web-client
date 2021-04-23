@@ -34,13 +34,3 @@ export const collectionImpressionEvent = (item, position) => {
 export const collectionOpenEvent = (item, position) => {
   return trackItemOpen(position, { save_url: item?.url }, 'home.collection.open')
 }
-
-export const recImpressionEvent = (item, position) => {
-  return trackItemImpression(position, item, 'home.rec.impression')
-}
-export const recSaveEvent = (item, position) => {
-  return trackItemSave(position, item, 'home.rec.save')
-}
-export const recOpenEvent = (item, position) => {
-  return trackItemOpen(position, item, 'home.rec.open')
-}

@@ -14,6 +14,7 @@ import { breakpointMediumHandset } from '@pocket/web-ui'
 // be overridden for specific card types
 export const cardStyles = css`
   --card-column-span: span 12;
+  --card-row-span: span 1;
   --media-column-span: span 4;
   --content-column-span: span 8;
 
@@ -25,6 +26,7 @@ export const cardStyles = css`
   position: relative;
   z-index: 0;
   grid-column: var(--card-column-span);
+  grid-row: var(--card-row-span);
 
   .cardWrap {
     position: relative;
@@ -452,37 +454,88 @@ export const cardStyles = css`
 
   /** Lockup style
   --------------------------------------------------------------- */
-  &.lockup {
-    grid-column: span 3;
+  .lockup-hero & {
+    --card-column-span: span 3;
+
     .title {
       font-size: var(--fontSize125);
       line-height: 1.263;
     }
-  }
 
-  &.hero-center,
-  &.hero-left,
-  &.hero-right {
-    .title {
-      font-size: var(--fontSize200);
-      line-height: 1.212;
-      max-height: 4.848em;
+    &.hero-center,
+    &.hero-left,
+    &.hero-right {
+      .title {
+        font-size: var(--fontSize200);
+        line-height: 1.212;
+        max-height: 4.848em;
+      }
+    }
+
+    &.hero-center {
+      --card-row-span: span 2;
+      --card-column-span: 4 / span 6;
+    }
+
+    &.hero-left {
+      --card-row-span: span 2;
+      --card-column-span: 1 / span 6;
+    }
+
+    &.hero-right {
+      --card-row-span: span 2;
+      --card-column-span: 7 / span 6;
     }
   }
 
-  &.hero-center {
-    grid-row: span 2;
-    grid-column: 4 / span 6;
-  }
+  .lockup-showcase & {
+    --card-column-span: span 8;
+    --media-column-span: span 3;
 
-  &.hero-left {
-    grid-row: span 2;
-    grid-column: 1 / span 6;
-  }
+    .title {
+      font-size: var(--fontSize100);
+      line-height: 1.263;
+    }
 
-  &.hero-right {
-    grid-row: span 2;
-    grid-column: 7 / span 6;
+    .excerpt {
+      max-height: 3em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .footer .actions {
+      grid-column: 4 / -1;
+    }
+
+    &.hero-center,
+    &.hero-left,
+    &.hero-right {
+      .title {
+        font-size: var(--fontSize100);
+        line-height: 1.212;
+        max-height: 4.848em;
+      }
+      .excerpt {
+        max-height: 4.4em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .footer .actions {
+        grid-column: span 12;
+      }
+    }
+
+    &.hero-center,
+    &.hero-left {
+      --card-row-span: span 3;
+      --card-column-span: 1 / span 4;
+    }
+
+    &.hero-right {
+      --card-row-span: span 3;
+      --card-column-span: 8 / span 4;
+    }
   }
 
   /** Discover specific style

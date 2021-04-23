@@ -89,12 +89,12 @@ export const Card = (props) => {
   const card = cx(
     cardStyles,
     cardShape,
+    className,
     hiddenActions && 'hiddenActions',
     !showExcerpt && 'noExcerpt',
     !showMedia && 'noMedia',
     bulkEdit && 'bulkEdit',
-    (bulkSelected || shortcutSelected) && 'selected',
-    className
+    (bulkSelected || shortcutSelected) && 'selected'
   )
 
   const showTags = cardShape === 'detail'
