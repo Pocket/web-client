@@ -9,9 +9,9 @@ import { getTopicList } from 'connectors/topic-list/topic-list.state'
 import { getRecentSaves } from 'containers/home/home.state'
 import { getCollections } from 'containers/home/home.state'
 
-import { HomeGreeting } from './homeGreeting'
-import { HomeRecentRecsList } from 'containers/home/listRecentRecs'
-import { HomeRecentList } from 'containers/home/listRecents'
+import { HomeGreeting } from 'containers/home/homeGreeting'
+import { HomeRecentRecsList } from 'containers/home/list-recs'
+// import { HomeRecentList } from 'containers/home/listRecents'
 import { TopicSelector } from 'containers/home/topicSelector'
 import { HomeTopicsList } from 'containers/home/listTopics'
 import { HomeCollectionList } from 'containers/home/listCollection'
@@ -50,9 +50,7 @@ export default function Collection(props) {
       <SideNav subset="home" />
       {shouldRender ? (
         <main className="main">
-          { showLab ? (
-            <HomeGreeting />
-          ) : null}
+          { showLab ? <HomeGreeting /> : null }
 
           {/* <HomeRecentList /> */}
 
