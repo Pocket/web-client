@@ -24,7 +24,7 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
    * ----------------------------------------------------------------
    */
   const onImpression = () => dispatch(trackItemImpression(position, item, 'discover.impression'))
-  const onItemInView = (inView) => (impressionFired || !inView ? onImpression() : null)
+  const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
   const onOpen = () => dispatch(trackItemOpen(position, item, 'discover.open'))
 
   return (
