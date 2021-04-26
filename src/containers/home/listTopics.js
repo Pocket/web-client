@@ -95,6 +95,7 @@ export const topicHeadings = {
 export const HomeTopicsRow = ({ topic_slug, topic }) => {
   const topicItems = useSelector((state) => state.home[`${topic}Topic`])
   const displayItems = topicItems?.slice(0, 3)
+  const skeletonArray = [0, 1, 2]
 
   return (
     <div className={topicRowStyles} data-cy={`topic-row-${topic}`}>
@@ -104,13 +105,13 @@ export const HomeTopicsRow = ({ topic_slug, topic }) => {
         sectionDescription={topicHeadings[topic]?.subtitle}
       />
       <section className={classnames(cardGrid, cardRowStyles)}>
-        {displayItems?.length ? (
-          displayItems.map((id, index) => (
-            <CardTopic key={id} id={id} topic={topic} position={index} />
-          ))
-        ) : (
-          <CardSkeleton type="grid" name={`${topic_slug}Skeleton`} count={3} />
-        )}
+        {displayItems?.length
+          ? displayItems.map((id, index) => (
+              <CardTopic key={id} id={id} topic={topic} position={index} />
+            ))
+          : skeletonArray.map((id, index) => (
+              <CardSkeleton key={id + index} id={id} type="grid" name={`${topic_slug}Skeleton`} />
+            ))}
       </section>
     </div>
   )

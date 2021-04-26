@@ -37,6 +37,7 @@ export function Lockup({
   const start = offset
   const end = offset + count
   const hero = heroType[heroPosition]
+
   return (
     <div className={`${cardLockupStyle} lockup-${lockupShape}`}>
       {items.slice(start, end).map((id, index) => {

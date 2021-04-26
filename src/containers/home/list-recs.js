@@ -5,6 +5,7 @@ import { RecCard } from 'connectors/item-card/home/card-rec'
 import { recentRecsRequest } from 'connectors/recit/recit.state'
 import { useInView } from 'react-intersection-observer'
 import { Lockup } from 'components/items-layout/list-lockup'
+import { CardSkeleton } from 'components/item-card/card-skeleton'
 
 export const HomeRecentRecsList = () => {
   const dispatch = useDispatch()
@@ -38,14 +39,26 @@ export const HomeRecentRecsList = () => {
             sectionTitle="Recommended for you"
             sectionDescription="Find more fascinating stories based on your latest Save"
           />
-          <Lockup
-            items={recentRecsIds}
-            offset={0}
-            heroPosition="left"
-            lockupShape="showcase"
-            cardShape="wide"
-            ItemCard={RecCard}
-          />
+          {recentRecsIds.length ? (
+            <Lockup
+              items={recentRecsIds}
+              offset={0}
+              heroPosition="left"
+              lockupShape="showcase"
+              cardShape="wide"
+              ItemCard={RecCard}
+            />
+          ) : (
+            <Lockup
+              items={[0, 1, 2]}
+              offset={0}
+              heroPosition="left"
+              lockupShape="showcase"
+              cardShape="wide"
+              skeleton={true}
+              ItemCard={CardSkeleton}
+            />
+          )}
         </>
       ) : null}
     </div>

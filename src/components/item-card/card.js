@@ -129,6 +129,7 @@ export const Card = (props) => {
       <FeatureFlag flag="item_id_overlay" dev={true}>
         <span className="idOverlay">{id}</span>
       </FeatureFlag>
+
       <div className="cardWrap" ref={viewRef}>
         {showMedia ? (
           <CardMedia
