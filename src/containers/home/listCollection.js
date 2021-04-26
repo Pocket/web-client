@@ -1,4 +1,4 @@
-import { HomeSectionHeader } from 'components/headers/home-header'
+import { HomeCollectionHeader } from 'components/headers/home-header'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
 import { CollectionCard } from 'connectors/item-card/home/card-collection'
 import { css } from 'linaria'
@@ -8,9 +8,9 @@ import { breakpointLargeHandset } from '@pocket/web-ui'
 
 const homeCollections = css`
   ${cardsGrid};
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   ${breakpointLargeHandset} {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 `
 
@@ -20,7 +20,7 @@ export const HomeCollectionList = () => {
 
   return (
     <section data-cy="collections-row">
-      <HomeSectionHeader
+      <HomeCollectionHeader
         sectionTitle="Our most-read Collections"
         sectionDescription="Dive into our editors’ curated lists of stories around a unique subject"
       />
