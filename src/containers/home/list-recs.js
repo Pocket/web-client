@@ -50,7 +50,7 @@ export const HomeRecentRecsList = () => {
             />
           ) : (
             <Lockup
-              items={[0, 1, 2]}
+              items={[0, 1, 2, 4]}
               offset={0}
               heroPosition="left"
               lockupShape="showcase"
