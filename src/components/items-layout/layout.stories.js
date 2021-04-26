@@ -10,12 +10,10 @@ const discoverItems = deriveDiscoverItems(discoverResponse.feed).map((item) => {
   return item
 })
 
-const myListItems = deriveMyListItems(Object.values(myListResponse.list)).map(
-  (item) => {
-    item.story_name = `My List - ${item.title}`
-    return item
-  }
-)
+const myListItems = deriveMyListItems(Object.values(myListResponse.list)).map((item) => {
+  item.story_name = `My List - ${item.title}`
+  return item
+})
 
 const itemsToDisplay = [...myListItems, ...discoverItems]
 
@@ -31,11 +29,6 @@ export default {
   title: 'Card/Card Layouts',
   component: CardComponent,
   argTypes: {
-    itemType: {
-      control: {
-        type: 'inline-radio'
-      }
-    },
     cardShape: {
       control: {
         type: 'inline-radio'
@@ -61,13 +54,12 @@ export default {
 
 export const ListOfCards = (args) => {
   return itemsToDisplay.map((item) => (
-    <CardComponent item={item} position={0} actions={{}} {...args} />
+    <CardComponent key={item.item_id} item={item} position={0} actions={{}} {...args} />
   ))
 }
 ListOfCards.args = {
   showExcerpt: true,
   showMedia: true,
-  itemType: null,
   cardShape: 'block'
 }
 
@@ -75,7 +67,7 @@ export const GridOfCards = (args) => {
   return (
     <div className={grid}>
       {itemsToDisplay.map((item) => (
-        <CardComponent item={item} position={0} actions={{}} {...args} />
+        <CardComponent key={item.item_id} item={item} position={0} actions={{}} {...args} />
       ))}
     </div>
   )
@@ -83,7 +75,6 @@ export const GridOfCards = (args) => {
 GridOfCards.args = {
   showExcerpt: true,
   showMedia: true,
-  itemType: 'myList',
   cardShape: 'block'
 }
 
@@ -100,8 +91,7 @@ export const MixedLayout = (args) => {
           cardShape: 'detail',
           className: 'subset',
           showExcerpt: true,
-          showMedia: true,
-          itemType: 'discover'
+          showMedia: true
         }
 
         const layout = {
@@ -113,12 +103,7 @@ export const MixedLayout = (args) => {
 
         const argsToPass = { ...args, ...layout[index] }
         return (
-          <CardComponent
-            item={item}
-            position={0}
-            actions={{}}
-            {...argsToPass}
-          />
+          <CardComponent key={item.item_id} item={item} position={0} actions={{}} {...argsToPass} />
         )
       })}
     </div>
@@ -128,6 +113,5 @@ export const MixedLayout = (args) => {
 MixedLayout.args = {
   showExcerpt: true,
   showMedia: true,
-  itemType: 'discover',
   cardShape: 'block'
 }

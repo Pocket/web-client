@@ -9,37 +9,55 @@ import { ItemTags } from 'components/item-tags/item-tags'
 import { cardStyles } from './card-base'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
-//
+
 /** Card
  * Item card for display.
  * @param {Object} props Props passed in from React
+ * Data
  * @param {object} props.item  Item data
- * @param {boolean} props.showExcerpt  Show excerpt or not
- * @param {string} props.itemType  What kind of item (discover, mylist, message, etc.)
- * @param {string} props.cardShape  What shape should the card take (block, wide, list)
  * @param {boolean} props.bulkEdit  Are we in bulk edit?
  * @param {boolean} props.bulkSelected  Is this particular item selected?
+ * @param {boolean} props.shortcutSelected Is this particular item selected via shortcut
+ * @param {function} props.shortcutSelect Function to call when getting focus without select
  * @param {integer} props.position  Where does this sit in the collection
+ * @param {string} props.openUrl What is the url we will use when opening item
+ * UI
+ * @param {string} props.cardShape  What shape should the card take (block, wide, list)
+ * @param {string} props.className Any classnames passed down
+ * @param {boolean} props.showExcerpt  Show excerpt or not
+ * @param {boolean} props.showMedia Show image or not
+ * @param {boolean} props.hiddenActions Hide actions until hover or not
+ * Tracking
+ * @param {function} props.onItemInView Action to fire when item is in view
+ * @param {function} props.onOpen Action to fire when an item is opened
+ * @param {function} props.onOpenOriginalUrl Action to fire when user opens the original url
+ * Actions
+ * @param {component} props.ActionMenu A connected actions component
+
  */
 export const Card = (props) => {
   const {
     item,
+    // Data
+    bulkEdit,
+    bulkSelected,
+    shortcutSelected,
+    openUrl,
+    position,
+    // UI
+    cardShape,
+    className,
     showExcerpt,
     showMedia,
     hiddenActions,
-    cardShape,
-    bulkEdit,
-    bulkSelected,
-    position,
-    className,
-    selectBulk,
+    // Tracking
     onItemInView,
     onOpenOriginalUrl,
-    shortcutSelected,
-    shortcutSelect,
     onOpen,
-    openUrl,
-    ActionMenu
+    // Actions
+    ActionMenu,
+    shortcutSelect,
+    bulkSelect
   } = props
 
   const {
@@ -105,7 +123,7 @@ export const Card = (props) => {
       className={card}
       key={id}
       data-id={`article-card-${id}`}
-      onClick={selectBulk}>
+      onClick={bulkSelect}>
       <div className="selectedBack" />
 
       <FeatureFlag flag="item_id_overlay" dev={true}>
@@ -142,6 +160,7 @@ export const Card = (props) => {
 
           <cite className="details">
             {publisher ? (
+              //eslint-disable-next-line
               <a
                 className="publisher"
                 href={original_url}
@@ -171,39 +190,37 @@ export const Card = (props) => {
 }
 
 Card.propTypes = {
-  /**
-   Item data to populate the card content
-  */
+  // Data
   item: PropTypes.object,
-  showExcerpt: PropTypes.bool,
-  cardShape: PropTypes.oneOf(['grid', 'block', 'wide', 'detail', 'list']),
-  hiddenActions: PropTypes.bool,
   bulkEdit: PropTypes.bool,
   bulkSelected: PropTypes.bool,
-  position: PropTypes.number,
+  shortcutSelected: PropTypes.bool,
+  openUrl: PropTypes.string,
+  // UI
+  cardShape: PropTypes.oneOf(['grid', 'block', 'wide', 'detail', 'list']),
   className: PropTypes.string,
-  isAuthenticated: PropTypes.bool,
-  impressionAction: PropTypes.func,
-  engagementAction: PropTypes.func,
-  saveAction: PropTypes.func,
-  reportAction: PropTypes.func,
-  unSaveAction: PropTypes.func,
-  openAction: PropTypes.func,
-  itemBulkSelect: PropTypes.func,
-  itemBulkDeSelect: PropTypes.func
+  showExcerpt: PropTypes.bool,
+  showMedia: PropTypes.bool,
+  hiddenActions: PropTypes.bool,
+  position: PropTypes.number,
+  // Tracking
+  onItemInView: PropTypes.func,
+  onOpen: PropTypes.func,
+  onOpenOriginalUrl: PropTypes.func,
+  // Actions
+  ActionMenu: PropTypes.element,
+  shortcutSelect: PropTypes.func,
+  bulkSelect: PropTypes.func
 }
 
 Card.defaultProps = {
-  cardShape: '',
+  cardShape: 'grid',
   showExcerpt: false,
   showMedia: true,
   hiddenActions: false,
-  engagementAction: () => {},
-  saveAction: () => {},
-  reportAction: () => {},
-  unSaveAction: () => {},
-  openAction: () => {},
+
   onItemInView: () => {},
-  itemBulkSelect: () => {},
-  itemBulkDeSelect: () => {}
+  onOpen: () => {},
+  onOpenOriginalUrl: () => {},
+  bulkSelect: () => {}
 }

@@ -8,7 +8,6 @@ import { DeleteIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
 import { FavoriteIcon } from '@pocket/web-ui'
 import { TagIcon } from '@pocket/web-ui'
-import { PermanentCopyIcon } from '@pocket/web-ui'
 
 import myListResponse from 'mock/my-list.json'
 import discoverResponse from 'mock/discover.json'
@@ -33,58 +32,11 @@ const myListItems = deriveMyListItems(Object.values(myListResponse.list)).map((i
 
 const itemsToDisplay = arrayToObject([...myListItems, ...discoverItems], 'story_name')
 
-export default {
-  title: 'Card/Card Shapes',
-  component: CardComponent,
-  argTypes: {
-    itemToDisplay: {
-      control: {
-        type: 'select',
-        options: Object.keys(itemsToDisplay)
-      }
-    },
-    cardShape: {
-      control: {
-        type: 'inline-radio'
-      }
-    },
-    item: {
-      table: {
-        disable: true
-      }
-    },
-    actions: {
-      table: {
-        disable: true
-      }
-    },
-    position: {
-      table: {
-        disable: true
-      }
-    }
-  }
-}
-
-export const Card = (args) => {
-  const item = itemsToDisplay[args.itemToDisplay] || itemsToDisplay[myListItems[0].story_name]
-  return (
-    <div className={grid}>
-      <CardComponent item={item} position={0} actions={{}} {...args} ItemActions={dummyActions} />
-    </div>
-  )
-}
-
-Card.args = {
-  showExcerpt: true,
-  showMedia: true,
-  tags: []
-}
-
 const noop = function () {}
-const dummyActions = ({ id, position }) => (
+const DummyActions = ({ id, position }) => (
   <ItemActions
     menuItems={[
+      { key: `archive-${id}`, label: 'Archive', icon: <ArchiveIcon />, onClick: noop },
       {
         key: `favorite-${id}`,
         label: 'Favorite',
@@ -112,3 +64,86 @@ const dummyActions = ({ id, position }) => (
     ]}
   />
 )
+
+export default {
+  title: 'Card/Card Shapes',
+  component: CardComponent,
+  argTypes: {
+    itemToDisplay: {
+      control: {
+        type: 'select',
+        options: Object.keys(itemsToDisplay)
+      }
+    },
+    cardShape: {
+      control: {
+        type: 'inline-radio'
+      }
+    },
+    item: {
+      table: {
+        disable: true
+      }
+    },
+    position: {
+      table: {
+        disable: true
+      }
+    },
+    bulkEdit: {
+      table: {
+        disable: true
+      }
+    },
+    bulkSelect: {
+      table: {
+        disable: true
+      }
+    },
+    shortcutSelect: {
+      table: {
+        disable: true
+      }
+    },
+    openUrl: {
+      table: {
+        disable: true
+      }
+    },
+    onItemInView: {
+      table: {
+        disable: true
+      }
+    },
+    onOpen: {
+      table: {
+        disable: true
+      }
+    },
+    onOpenOriginalUrl: {
+      table: {
+        disable: true
+      }
+    },
+    ActionMenu: {
+      table: {
+        disable: true
+      }
+    }
+  }
+}
+
+export const Card = (args) => {
+  const item = itemsToDisplay[args.itemToDisplay] || itemsToDisplay[myListItems[0].story_name]
+  return (
+    <div className={grid}>
+      <CardComponent item={item} position={0} {...args} ItemActions={DummyActions} />
+    </div>
+  )
+}
+
+Card.args = {
+  showExcerpt: true,
+  showMedia: true,
+  tags: []
+}
