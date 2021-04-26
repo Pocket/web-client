@@ -183,11 +183,6 @@ export const cardStyles = css`
       grid-column: span 12;
     }
 
-    /* ${breakpointMediumTablet} {
-      --card-column-span: span 6;
-
-    } */
-
     ${breakpointTinyTablet} {
       --card-column-span: span 12;
       border-bottom: 1px solid var(--color-dividerTertiary);
@@ -498,6 +493,7 @@ export const cardStyles = css`
     }
 
     .excerpt {
+      display: none;
       max-height: 3em;
       overflow: hidden;
       text-overflow: ellipsis;

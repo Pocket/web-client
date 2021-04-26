@@ -99,11 +99,7 @@ export const recitReducers = (state = initialState, action) => {
 
     case POCKET_RECS_SUCCESS: {
       const {
-        response: {
-          recommendations: pocketRecs,
-          rec_id: pocketRecId,
-          model: pocketRecModel
-        }
+        response: { recommendations: pocketRecs, rec_id: pocketRecId, model: pocketRecModel }
       } = action
       return {
         ...state,
@@ -277,7 +273,7 @@ function* fetchReaderRecs({ itemId }) {
 function* fetchRecentRecs({ itemId: recentRecId }) {
   try {
     if (!recentRecId) return
-    const response = yield getHomeRecommendations(recentRecId, 3)
+    const response = yield getHomeRecommendations(recentRecId, 4)
     if (!response?.status) throw new Error('No items found')
 
     const derivedItems = yield deriveReaderRecitItems(response.recommendations)
