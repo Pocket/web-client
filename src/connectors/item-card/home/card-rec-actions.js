@@ -11,16 +11,16 @@ export function ActionsRec({ id, position }) {
 
   const isAuthenticated = useSelector((state) => state.user.auth)
   const item = useSelector((state) => state.recit.recentRecs[id])
-  const { save_url, save_status, open_url, openExternal } = item
 
   if (!item) return null
+  const { save_url, save_status, open_url, openExternal } = item
 
   // Prep save action
   const onSave = () => {
     dispatch(saveHomeItem(id, save_url, position))
     dispatch(trackItemSave(position, item, 'home.rec.save'))
   }
-  
+
   // Open action
   const url = openExternal ? open_url : `/read/${id}`
   const onOpen = () => dispatch(trackItemOpen(position, item, 'home.rec.open', url))
@@ -40,5 +40,3 @@ export function ActionsRec({ id, position }) {
     </div>
   ) : null
 }
-
-
