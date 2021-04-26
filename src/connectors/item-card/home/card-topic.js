@@ -19,7 +19,7 @@ export const CardTopic = ({ id, position }) => {
    * ----------------------------------------------------------------
    */
   const onImpression = () => dispatch(trackItemImpression(position, item, 'home.topic.impression'))
-  const onItemInView = (inView) => (impressionFired || !inView ? onImpression() : null)
+  const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
   const onOpen = () => dispatch(trackItemOpen(position, item, 'home.topic.open'))
 
   return (

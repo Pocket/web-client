@@ -19,7 +19,7 @@ export const RecCard = ({ id, position, className, cardShape = 'detail', showExc
    * ----------------------------------------------------------------
    */
   const onImpression = () => dispatch(trackItemImpression(position, item, 'home.rec.impression'))
-  const onItemInView = (inView) => (impressionFired || !inView ? onImpression() : null)
+  const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
   const onOpen = () => dispatch(trackItemOpen(position, item, 'home.rec.open'))
 
   return item ? (
