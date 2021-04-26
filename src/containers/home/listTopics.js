@@ -1,8 +1,8 @@
 import { HomeTopicHeader } from 'components/headers/home-header'
 import { useSelector } from 'react-redux'
 import { css } from 'linaria'
-import { ItemCard } from 'connectors/item-card/home/cardTopic'
-import { cardGrid } from 'components/items-layout/virtualized-list'
+import { CardTopic } from 'connectors/item-card/home/card-topic'
+import { cardGrid } from 'components/items-layout/base'
 import classnames from 'classnames'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
 import { breakpointLargeHandset } from '@pocket/web-ui'
@@ -106,7 +106,7 @@ export const HomeTopicsRow = ({ topic_slug, topic }) => {
       <section className={classnames(cardGrid, cardRowStyles)}>
         {displayItems?.length ? (
           displayItems.map((id, index) => (
-            <ItemCard key={id} id={id} topic={topic} position={index} />
+            <CardTopic key={id} id={id} topic={topic} position={index} />
           ))
         ) : (
           <CardSkeleton type="grid" name={`${topic_slug}Skeleton`} count={3} />
@@ -120,8 +120,6 @@ export const HomeTopicsList = () => {
   const topicSections = useSelector((state) => state.home.topicSections)
 
   return topicSections?.length
-    ? topicSections.map((topic) => (
-        <HomeTopicsRow key={topic.display_name} {...topic} />
-      ))
+    ? topicSections.map((topic) => <HomeTopicsRow key={topic.display_name} {...topic} />)
     : null
 }

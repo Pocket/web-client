@@ -1,6 +1,6 @@
 import { HomeSectionHeader } from 'components/headers/home-header'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
-import { ItemCard } from 'connectors/item-card/home/cardCollection'
+import { CollectionCard } from 'connectors/item-card/home/card-collection'
 import { css } from 'linaria'
 import { cardsGrid } from 'components/items-layout/base'
 import { useSelector } from 'react-redux'
@@ -29,11 +29,7 @@ export const HomeCollectionList = () => {
           <CardSkeleton type="grid" name="collectionSkeleton" count={2} />
         ) : (
           collectionSet.map((collection, index) => (
-            <ItemCard
-              key={collection.title}
-              collection={collection}
-              position={index}
-            />
+            <CollectionCard key={collection.title} collection={collection} position={index} />
           ))
         )}
       </section>
