@@ -8,7 +8,9 @@ import { shallow } from 'enzyme'
 import * as reactRedux from 'react-redux'
 
 import { ItemCard } from './card'
-import { Card } from 'components/item-card/discover/card'
+import { ActionsDiscover } from './card-actions'
+
+import { Card } from 'components/item-card/card'
 
 describe('ItemCard', function () {
   // redux dependencies are stubbed so that we don't need to set up a Provider/context,
@@ -58,81 +60,5 @@ describe('ItemCard', function () {
     // make sure it has rendered an Card
     const articleCard = topicCard.find(Card)
     assert(articleCard.exists())
-  })
-
-  it('saves an item when the item is in an unsaved state', () => {
-    const mockState = {
-      user: { auth: true },
-      analytics: {
-        impressions: []
-      },
-      discoverItemsById: {
-        12345: {
-          resolved_id: '12345',
-          save_url: 'https://isithalloween.com',
-          save_status: 'unsaved'
-        }
-      }
-    }
-
-    // tell useSelector to return state to the component via our stub
-    useSelectorStub.callsFake((fn) => fn(mockState))
-
-    // render the topic card
-    const topicCard = shallow(
-      <ItemCard
-        id="12345"
-        position="3"
-        unAuthSaveAction={unAuthSaveAction}
-        unSaveAction={unSaveAction}
-        saveAction={saveAction}
-      />
-    )
-    const articleCard = topicCard.find(Card)
-
-    // trigger the save handler
-    articleCard.prop('onSave')(true)
-
-    // assert action was called correctly
-    assert(articleCard.exists())
-    assert(saveAction.calledWith('12345', 'https://isithalloween.com', '3'))
-  })
-
-  it('unsaves an item when the item is in a saved state', () => {
-    const mockState = {
-      user: { auth: true },
-      analytics: {
-        impressions: []
-      },
-      discoverItemsById: {
-        12345: {
-          resolved_id: '12345',
-          save_url: 'https://isithalloween.com',
-          save_status: 'saved'
-        }
-      }
-    }
-
-    // tell useSelector to return state to the component via our stub
-    useSelectorStub.callsFake((fn) => fn(mockState))
-
-    // render the topic card
-    const topicCard = shallow(
-      <ItemCard
-        id="12345"
-        position="3"
-        unSaveAction={unSaveAction}
-        unAuthSaveAction={unAuthSaveAction}
-        saveAction={saveAction}
-      />
-    )
-    const articleCard = topicCard.find(Card)
-
-    // trigger the save handler
-    articleCard.prop('onSave')(true)
-
-    // assert action was called correctly
-    assert(articleCard.exists())
-    assert(unSaveAction.calledWith('12345'))
   })
 })
