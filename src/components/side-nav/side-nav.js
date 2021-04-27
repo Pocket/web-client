@@ -176,7 +176,6 @@ export function SideNav({
             <button
               className={subActive('home')}
               onClick={clickEvent}
-              ref={ref}
               data-cy="side-nav-home">
               <HomeIcon className="side-nav-icon" />{' '}
               <Trans i18nKey="nav:home">Home</Trans>
