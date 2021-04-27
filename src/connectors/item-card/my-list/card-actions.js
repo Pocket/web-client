@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'next-i18next'
 import { ItemActions } from 'components/item-actions/inline'
 import { IosShareIcon } from '@pocket/web-ui'
 import { DeleteIcon } from '@pocket/web-ui'
@@ -24,6 +25,8 @@ import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
 
 export function ActionsMyList({ id, position }) {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
+
   const item = useSelector((state) => state.myListItemsById[id])
   const isPremium = useSelector((state) => state.user.premium_status === '1')
 
@@ -65,12 +68,16 @@ export function ActionsMyList({ id, position }) {
     dispatch(itemsTagAction([{ id, position }]))
   }
 
-  const archiveAction = status === '0' ? itemArchive : itemUnArchive
-  const CorrectArchiveIcon = status === '0' ? ArchiveIcon : AddIcon
-  const archiveLabel = status === '0' ? 'Archive' : 'Add'
+  const isArchive = status === '0'
+  const archiveAction = isArchive ? itemArchive : itemUnArchive
+  const CorrectArchiveIcon = isArchive ? ArchiveIcon : AddIcon
+  const archiveLabel = isArchive ? t('item-action:archive', 'Archive') : t('item-action:add', 'Add')
 
   const isFavorite = favorite === '1'
   const favoriteAction = isFavorite ? itemUnFavorite : itemFavorite
+  const favoriteLabel = isFavorite
+    ? t('item-action:unfavorite', 'Un-Favorite')
+    : t('item-action:favorite', 'Favorite')
 
   const itemPermLibOpen = () => {
     dispatch(trackItemOpen(position, item, 'my-list.card.permanent-library'))
@@ -81,7 +88,7 @@ export function ActionsMyList({ id, position }) {
       menuItems={[
         {
           key: `favorite-${id}`,
-          label: 'Favorite',
+          label: favoriteLabel,
           icon: <FavoriteIcon />,
           onClick: favoriteAction,
           active: isFavorite
@@ -94,19 +101,19 @@ export function ActionsMyList({ id, position }) {
         },
         {
           key: `tag-${id}`,
-          label: 'Tag',
+          label: t('item-action:tag', 'Tag'),
           icon: <TagIcon />,
           onClick: itemTag
         },
         {
           key: `share-${id}`,
-          label: 'Share',
+          label: t('item-action:share', 'Share'),
           icon: <IosShareIcon />,
           onClick: itemShare
         },
         {
           key: `permanent-${id}`,
-          label: 'Permanent Copy',
+          label: t('item-action:permanent-copy', 'Permanent Copy'),
           isPremium,
           onlyPremium: true,
           href: permanent_url,
@@ -115,7 +122,7 @@ export function ActionsMyList({ id, position }) {
         },
         {
           key: `delete-${id}`,
-          label: 'Delete',
+          label: t('item-action:delete', 'Delete'),
           icon: <DeleteIcon />,
           onClick: itemDelete
         }
