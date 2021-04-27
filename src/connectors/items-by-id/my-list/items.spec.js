@@ -46,8 +46,7 @@ const itemWithMissingData = [
       1: {
         item_id: '3059000415',
         image_id: '1',
-        src:
-          'https://pocket-syndicated-images.s3.amazonaws.com/5f1b307571176.jpg',
+        src: 'https://pocket-syndicated-images.s3.amazonaws.com/5f1b307571176.jpg',
         width: '0',
         height: '0',
         credit: '© Marco Bottigelli / Getty Images',
@@ -57,8 +56,7 @@ const itemWithMissingData = [
     domain_metadata: {
       name: 'Pocket',
       logo: 'https://logo.clearbit.com/getpocket.com?size=800',
-      greyscale_logo:
-        'https://logo.clearbit.com/getpocket.com?size=800&greyscale=true'
+      greyscale_logo: 'https://logo.clearbit.com/getpocket.com?size=800&greyscale=true'
     },
     listen_duration_estimate: 457
   }
@@ -70,7 +68,9 @@ describe('My List Items', function () {
       const derivedItems = deriveMyListItems(itemWithMissingData)
       const expectedSaveUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
       const expectedOpenUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
-
+      const expectedOriginalUrl =
+        'https://getpocket.com/redirect?url=https%3A%2F%2Fgetpocket.com%2Fexplore%2Fitem%2Fthe-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential'
+      const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3059000416'
       assert.deepStrictEqual(derivedItems[0], {
         item_id: '3059000416',
         resolved_id: '3059000415',
@@ -97,6 +97,8 @@ describe('My List Items', function () {
           'Many of us work in an endless stream of tasks, emails, notifications, meetings, multitasking in the process, never pausing and never ending. Pursuing more and more every day. Information overload is killing our brains.',
         save_url: expectedSaveUrl,
         open_url: expectedOpenUrl,
+        original_url: expectedOriginalUrl,
+        permanent_url: expectedPermanentUrl,
         read_time: 5,
         syndicated: false,
         tags: undefined,
@@ -105,8 +107,7 @@ describe('My List Items', function () {
           1: {
             item_id: '3059000415',
             image_id: '1',
-            src:
-              'https://pocket-syndicated-images.s3.amazonaws.com/5f1b307571176.jpg',
+            src: 'https://pocket-syndicated-images.s3.amazonaws.com/5f1b307571176.jpg',
             width: '0',
             height: '0',
             credit: '© Marco Bottigelli / Getty Images',
