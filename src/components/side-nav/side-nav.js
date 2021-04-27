@@ -142,7 +142,6 @@ export function SideNav({
   isDisabled,
   newSaveCount,
   showHome,
-  showSharedLists,
   showLab,
   flagsReady,
   trackMenuClick
@@ -173,70 +172,38 @@ export function SideNav({
     <div className={wrapperClass}>
       <nav role="navigation">
         {showHome ? (
-          <>
-            <Link href="/home">
-              <button
-                className={subActive('home')}
-                onClick={clickEvent}
-                ref={ref}
-                data-cy="side-nav-home">
-                <HomeIcon className="side-nav-icon" />{' '}
-                <Trans i18nKey="nav:home">Home</Trans>
-              </button>
-            </Link>
-            <Link href="/my-list">
-              <button
-                className={subActive('unread')}
-                onClick={clickEvent}
-                data-cy="side-nav-mylist">
-                <ListViewIcon className="side-nav-icon" />{' '}
-                <Trans i18nKey="nav:my-list">My List</Trans>
-                { showLab ? <BookmarkIcon newSaveCount={newSaveCount} /> : null }
-              </button>
-            </Link>
-            <a href="https://getpocket.com/explore?src=sidebar">
-              <button
-                className={subActive('discover')}
-                onClick={clickEvent}
-                data-cy="side-nav-discover">
-                <DiscoverIcon className="side-nav-icon" />{' '}
-                <Trans i18nKey="nav:discover">Discover</Trans>
-              </button>
-            </a>
-          </>
-        ) : (
-          <Link href="/my-list">
+          <Link href="/home">
             <button
-              className={subActive('unread')}
+              className={subActive('home')}
               onClick={clickEvent}
               ref={ref}
-              data-cy="side-nav-mylist">
+              data-cy="side-nav-home">
               <HomeIcon className="side-nav-icon" />{' '}
-              <Trans i18nKey="nav:my-list">My List</Trans>
-            </button>
-          </Link>
-        )}
-
-        {!showLab ? (
-          <Link href="/my-list/archive">
-            <button
-              className={subActive('archive')}
-              onClick={clickEvent}
-              data-cy="side-nav-archive">
-              <ArchiveIcon className="side-nav-icon" />{' '}
-              <Trans i18nKey="nav:archive">Archive</Trans>
+              <Trans i18nKey="nav:home">Home</Trans>
             </button>
           </Link>
         ) : null}
 
-        {showSharedLists ? (
-          <Link href="/shared-lists">
-            <button className={`${subActive('shared-lists')} wrap`} onClick={clickEvent}>
-              <ReadingIcon className="side-nav-icon" />{' '}
-              <Trans i18nKey="nav:shared-list">Share Your Lists</Trans>
-            </button>
-          </Link>
-        ) : null}
+        <Link href="/my-list">
+          <button
+            className={subActive('unread')}
+            onClick={clickEvent}
+            ref={ref}
+            data-cy="side-nav-mylist">
+            <ListViewIcon className="side-nav-icon" />{' '}
+            <Trans i18nKey="nav:my-list">My List</Trans>
+            { showLab ? <BookmarkIcon newSaveCount={newSaveCount} /> : null }
+          </button>
+        </Link>
+        <a href="https://getpocket.com/explore?src=sidebar">
+          <button
+            className={subActive('discover')}
+            onClick={clickEvent}
+            data-cy="side-nav-discover">
+            <DiscoverIcon className="side-nav-icon" />{' '}
+            <Trans i18nKey="nav:discover">Discover</Trans>
+          </button>
+        </a>
 
         {subset === 'home' && showLab ? (
           <TopicsSideNav
@@ -246,7 +213,6 @@ export function SideNav({
           />
         ) : (
           <FiltersSideNav
-            showLab={showLab}
             subActive={subActive}
             pinnedTags={pinnedTags}
             clickEvent={clickEvent}
