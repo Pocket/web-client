@@ -102,8 +102,8 @@ export async function fetchDiscoverData(ssr) {
     const response = await getDiscoverFeed(ssr)
     const derivedItems = await deriveDiscoverItems(response.feed)
 
-    const items = derivedItems.map((item) => item.resolved_id)
-    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+    const items = derivedItems.map((item) => item.item_id)
+    const itemsById = arrayToObject(derivedItems, 'item_id')
 
     return { items, itemsById }
   } catch (error) {
