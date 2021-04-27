@@ -1,3 +1,14 @@
+## [1.11.3](https://github.com/Pocket/web-client/compare/v1.11.2...v1.11.3) (2021-04-27)
+
+
+### Bug Fixes
+
+* **home:** adding home v2 ([0a910d9](https://github.com/Pocket/web-client/commit/0a910d9ad2aa614b437eb2365ae360c44c5cc771))
+* **home:** resolving conflicts after cards update ([4300680](https://github.com/Pocket/web-client/commit/43006801a2381d0295981a025a45bc93702ff65c))
+* **home:** updating link in header so theres no conflict between discover and client ([b5c1cc4](https://github.com/Pocket/web-client/commit/b5c1cc4e99379aeba831f98241e933ba50d252da))
+* **home-header:** removing var for sizes ([d074454](https://github.com/Pocket/web-client/commit/d074454ebfddb5923cec8ddef06962dc02a07ea7))
+* **sidenav:** update bookmark icons timing and dont show when save count is reset ([2d6cc46](https://github.com/Pocket/web-client/commit/2d6cc46a0430cafb37f7c6e9aa33fda02168417d))
+
 ## [1.11.2](https://github.com/Pocket/web-client/compare/v1.11.1...v1.11.2) (2021-04-27)
 
 
