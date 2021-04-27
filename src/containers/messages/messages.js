@@ -21,20 +21,15 @@ export default function Messages(props) {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const hydrated = useSelector((state) => state.userMessages.hydrated)
   const notifications = useSelector((state) => state.userMessages.notifications)
-  const unconfirmedShares = useSelector(
-    (state) => state.userMessages.unconfirmed_shares
-  )
-  const confirmationStatus = useSelector(
-    (state) => state.userMessages.confirmationStatus
-  )
+  const unconfirmedShares = useSelector((state) => state.userMessages.unconfirmed_shares)
+  const confirmationStatus = useSelector((state) => state.userMessages.confirmationStatus)
+  const itemsById = useSelector((state) => state.userMessages.itemsById)
 
   useEffect(() => {
     dispatch(getMessages())
   }, [dispatch])
 
-  const unconfirmedArray = unconfirmedShares
-    ? Object.keys(unconfirmedShares)
-    : []
+  const unconfirmedArray = unconfirmedShares ? Object.keys(unconfirmedShares) : []
 
   const addItem = ({ share_id, item_id, item }) => {
     dispatch(addMessageItem({ share_id, item_id, item }))
@@ -61,6 +56,7 @@ export default function Messages(props) {
               <MessageItem
                 key={notification.share_id}
                 {...notification}
+                item={itemsById[notification.item_id]}
                 addItem={addItem}
                 ignoreItem={ignoreItem}
               />
