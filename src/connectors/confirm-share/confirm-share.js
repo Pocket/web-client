@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next'
 
 import { Modal, ModalBody, ModalTabs } from 'components/modal/modal'
 
-import { DisplayCard } from 'components/item-card/my-list/card-display-only'
+import { Card } from 'components/item-card/card'
 import { itemsShareCancel } from 'connectors/items-by-id/my-list/items.share'
 import { ShareSocial } from './share-social'
 import { SelectShareType } from './select-share-type'
@@ -56,20 +56,13 @@ export const ShareModal = () => {
       screenReaderLabel={t('share:share-item', 'Share Item')}
       handleClose={cancelShare}>
       <ModalBody>
-        <DisplayCard id={itemId} />
+        <Card item={item} itemType="display" cardShape="wide" />
         {quote ? <p className={shareQuote}>{quote}</p> : null}
       </ModalBody>
       <ModalTabs>
         <SelectShareType active={active} activate={activate} />
-        {active === 'social' ? (
-          <ShareSocial item={item} quote={quote} position={position} />
-        ) : null}
+        {active === 'social' ? <ShareSocial item={item} quote={quote} position={position} /> : null}
         {active === 'recommend' ? <ShareRecommend item={item} /> : null}
-
-        {/*
-          // Deprecated Feb 2, 2021
-          active === 'friend' ? <ShareToFriend item={item} /> : null
-        */}
       </ModalTabs>
     </Modal>
   )
