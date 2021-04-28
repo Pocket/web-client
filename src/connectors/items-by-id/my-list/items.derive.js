@@ -1,7 +1,5 @@
 import { READING_WPM } from 'common/constants'
 import { domainForUrl } from 'common/utilities'
-import { urlWithPocketRedirect } from 'common/utilities'
-import { urlWithPermanentLibrary } from 'common/utilities'
 
 export function deriveMyListItems(response) {
   /**
@@ -44,12 +42,10 @@ export function deriveMyListItems(response) {
       thumbnail: displayThumbnail({ item }),
       publisher: displayPublisher({ item }),
       excerpt: displayExcerpt({ item }),
-      read_time: readTime({ item }),
-      syndicated: syndicated({ item }),
       save_url: saveUrl({ item }),
       open_url: openUrl({ item }),
-      original_url: originalUrl({ item }),
-      permanent_url: permanentUrl({ item }),
+      read_time: readTime({ item }),
+      syndicated: syndicated({ item }),
       openExternal: openExternal({ item })
     }
   })
@@ -71,7 +67,6 @@ function displayTitle({ item, curated_info }) {
     item?.resolved_title ||
     item?.given_title ||
     item?.display_url ||
-    displayPublisher({ item }) ||
     null
   )
 }
@@ -85,7 +80,6 @@ function displayThumbnail({ item, curated_info }) {
   const correct_image =
     curated_info?.image_src ||
     item?.top_image_url ||
-    item?.image?.src ||
     item?.images?.[Object.keys(item.images)[0]]?.src ||
     false
   return correct_image ? correct_image : false
@@ -96,10 +90,16 @@ function displayThumbnail({ item, curated_info }) {
  * @returns {string} The best text to display as the publisher of this item
  */
 export function displayPublisher({ item }) {
-  const urlToUse = item?.given_url || item?.resolved_url
+  const urlToUse = openUrl({ item })
   const derivedDomain = domainForUrl(urlToUse)
   const syndicatedPublisher = item?.syndicated_article?.publisher?.name
-  return syndicatedPublisher || item?.domain_metadata?.name || item?.domain || derivedDomain || null
+  return (
+    syndicatedPublisher ||
+    item?.domain_metadata?.name ||
+    item?.domain ||
+    derivedDomain ||
+    null
+  )
 }
 
 /** EXCERPT
@@ -115,7 +115,13 @@ function displayExcerpt({ item, curated_info }) {
  * @returns {string} The url that should be saved or opened
  */
 function openUrl({ item, redirect_url }) {
-  return devLink(item) || redirect_url || item?.given_url || item?.resolved_url || null
+  return (
+    devLink(item) ||
+    redirect_url ||
+    item?.given_url ||
+    item?.resolved_url ||
+    null
+  )
 }
 
 /** SAVE URL
@@ -124,24 +130,6 @@ function openUrl({ item, redirect_url }) {
  */
 function saveUrl({ item }) {
   return item?.given_url || item?.resolved_url || false
-}
-
-/** OPEN_ORIGINAL
- * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
- * @returns {string} The url that should be opened when visiting the live page
- */
-function originalUrl({ item }) {
-  if(item?.given_url) return urlWithPocketRedirect(item?.given_url)
-  if(item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
-  return false
-}
-
-/** OPEN_PERMANENT
- * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
- * @returns {string} The url for permanent library
- */
-function permanentUrl({ item }) {
-  return urlWithPermanentLibrary(item?.item_id) || false
 }
 
 /** READ TIME
