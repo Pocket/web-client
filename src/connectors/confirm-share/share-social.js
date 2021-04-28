@@ -8,9 +8,6 @@ import { RedditShareButton } from 'react-share'
 
 import { css } from 'linaria'
 
-import copy from 'clipboard-copy'
-import { COPY_ITEM_URL } from 'actions'
-
 import { LinkCopyIcon } from '@pocket/web-ui'
 import { FacebookColorIcon } from '@pocket/web-ui'
 import { TwitterColorIcon } from '@pocket/web-ui'
@@ -69,7 +66,13 @@ const socialIcons = css`
   }
 `
 
-export const BufferShareButton = ({ url, text, onShareWindowClose, children, ...rest }) => {
+export const BufferShareButton = ({
+  url,
+  text,
+  onShareWindowClose,
+  children,
+  ...rest
+}) => {
   const prepareWindow = (url, quote, callback) => {
     const opts = {
       name: 'buffer',
@@ -77,7 +80,9 @@ export const BufferShareButton = ({ url, text, onShareWindowClose, children, ...
       width: 750
     }
     const text = quote ? `&text=${quote}` : ''
-    const link = `https://bufferapp.com/add?url=${encodeURIComponent(url)}${text}`
+    const link = `https://bufferapp.com/add?url=${encodeURIComponent(
+      url
+    )}${text}`
     openWindow(link, opts, callback)
   }
 
@@ -103,19 +108,9 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
     dispatch(itemsSocialShare(item, position, `share.${service}`))
     cancelShare()
   }
-  const copyAction = () => ({ type: COPY_ITEM_URL })
-  const copyUrl = async () => {
-    await copy(open_url)
-    dispatch(itemsSocialShare(item, position, `share.copy`))
-    dispatch(copyAction())
-    cancelShare()
-  }
 
   return (
     <div className={`${socialIcons} content`}>
-      <button aria-label={t('share:copy-link', 'Copy Link')} onClick={copyUrl}>
-        <LinkCopyIcon />
-      </button>
       <FacebookShareButton
         aria-label={t('share:share-to-facebook', 'Share to Facebook')}
         data-tooltip={t('share:share-to-facebook', 'Share to Facebook')}
