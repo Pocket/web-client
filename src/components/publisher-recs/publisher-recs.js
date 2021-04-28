@@ -114,12 +114,15 @@ const RecommendedArticles = ({
   return (
     <ul className={recommendationsStyles}>
       {recommendations.slice(0, maxRecommendations).map((r, position) => {
-        const { save_count: saveCount, target_url: targetUrl, item } = r
+        const { save_count: saveCount, target_url: targetUrl, item, syndicated_article } = r
         if (!item) {
           return null
         }
 
-        const { title, item_id: itemId, resolved_id: resolvedId } = item
+        const { title: itemTitle, item_id: itemId, resolved_id: resolvedId } = item
+
+        const title = syndicated_article?.title || itemTitle
+        const url = targetUrl.replace('getpocket.com/redirect?', 'getpocket.com/redirect?skipSyndication=1&')
 
         function handleVisible() {
           handleRecImpression({
@@ -144,7 +147,7 @@ const RecommendedArticles = ({
             <RecommendedArticle
               title={title}
               saveCount={saveCount}
-              targetUrl={targetUrl}
+              targetUrl={url}
               handleClick={handleClick}
             />
           </VisibilitySensor>
