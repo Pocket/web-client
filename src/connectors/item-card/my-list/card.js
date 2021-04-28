@@ -5,7 +5,7 @@ import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk
 import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 import { ActionsMyList } from 'connectors/item-card/my-list/card-actions'
-
+import { ActionsBulk } from 'connectors/item-card/my-list/card-actions'
 import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
 import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
 
@@ -34,7 +34,7 @@ export function ItemCard({ id, position, type }) {
   const openUrl = openExternal ? original_url : `/read/${id}`
 
   const showExcerpt = type === 'detail'
-  const ActionMenu = bulkEdit ? <div /> : ActionsMyList
+  const ActionMenu = bulkEdit ? ActionsBulk : ActionsMyList
 
   /** ITEM TRACKING
   --------------------------------------------------------------- */

@@ -2,6 +2,9 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import { ItemActions } from 'components/item-actions/inline'
+import { itemActionStyle } from 'components/item-actions/base'
+import { menuItemStyle } from 'components/item-actions/base'
+
 import { IosShareIcon } from '@pocket/web-ui'
 import { DeleteIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
@@ -9,6 +12,9 @@ import { AddIcon } from '@pocket/web-ui'
 import { FavoriteIcon } from '@pocket/web-ui'
 import { TagIcon } from '@pocket/web-ui'
 import { PermanentCopyIcon } from '@pocket/web-ui'
+
+import { EmptyCircledIcon } from '@pocket/web-ui'
+import { CheckCircledIcon } from '@pocket/web-ui'
 
 import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
@@ -27,9 +33,10 @@ export function ActionsMyList({ id, position }) {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const item = useSelector((state) => state.myListItemsById[id])
   const isPremium = useSelector((state) => state.user.premium_status === '1')
+  const item = useSelector((state) => state.myListItemsById[id])
 
+  if (!item) return null
   const { permanent_url, status, favorite } = item
 
   /** ITEM MENU ITEMS
@@ -128,5 +135,20 @@ export function ActionsMyList({ id, position }) {
         }
       ]}
     />
+  )
+}
+
+export function ActionsBulk({ id, position }) {
+  const bulkList = useSelector((state) => state.bulkEdit.selected)
+  const selected = bulkList?.map((item) => item.id).includes(id)
+
+  const BulkIcon = selected ? CheckCircledIcon : EmptyCircledIcon
+  return (
+    <div className={`${itemActionStyle} actions`}>
+      <div className="item-actions"></div>
+      <div>
+        <BulkIcon />
+      </div>
+    </div>
   )
 }

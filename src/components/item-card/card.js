@@ -57,7 +57,7 @@ export const Card = (props) => {
     // Actions
     ActionMenu,
     shortcutSelect,
-    bulkSelect
+    selectBulk
   } = props
 
   const {
@@ -108,7 +108,7 @@ export const Card = (props) => {
     cardStyles,
     cardShape,
     className,
-    hiddenActions && 'hiddenActions',
+    hiddenActions && !bulkEdit && 'hiddenActions',
     !showExcerpt && 'noExcerpt',
     !showMedia && 'noMedia',
     bulkEdit && 'bulkEdit',
@@ -123,7 +123,7 @@ export const Card = (props) => {
       className={card}
       key={id}
       data-id={`article-card-${id}`}
-      onClick={bulkSelect}>
+      onClick={selectBulk}>
       <div className="selectedBack" />
 
       <FeatureFlag flag="item_id_overlay" dev={true}>
@@ -209,7 +209,7 @@ Card.propTypes = {
   onOpen: PropTypes.func,
   onOpenOriginalUrl: PropTypes.func,
   // Actions
-  ActionMenu: PropTypes.element,
+  ActionMenu: PropTypes.func,
   shortcutSelect: PropTypes.func,
   bulkSelect: PropTypes.func
 }
