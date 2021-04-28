@@ -71,7 +71,7 @@ const buttonStyles = css`
   background-color: transparent;
   color: var(--color-textSecondary);
   font-size: var(--size100);
-  height: var(--size100);
+  height: var(--size150);
   cursor: pointer;
 
   &.go-back {
