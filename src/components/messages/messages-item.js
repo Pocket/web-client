@@ -1,8 +1,9 @@
 import { css } from 'linaria'
 import { Trans } from 'next-i18next'
 import dayjs from 'dayjs'
+import { domainForUrl } from 'common/utilities'
 import Avatar from 'components/avatar/avatar'
-import { Card } from 'components/item-card/card'
+import { Card } from 'components/item-card/my-list/card-message'
 import { fontSansSerif, Button } from '@pocket/web-ui'
 import { timeRelativeToNow } from 'common/utilities'
 
@@ -73,13 +74,20 @@ export const MessageItem = ({
   addItem,
   ignoreItem
 }) => {
+  const { resolved_title, resolved_url } = item
   const { avatar_url, name } = from_friend
   const time = dayjs.unix(time_shared).format('MMMM DD, YYYY h:mm a')
+  const domain = domainForUrl(resolved_url)
 
-  const handleSave = () => addItem({ share_id, item_id, item })
-  const handleIgnore = () => ignoreItem({ share_id, item_id, item })
+  const handleSave = () => {
+    addItem({ share_id, item_id, item })
+  }
 
-  return item ? (
+  const handleIgnore = () => {
+    ignoreItem({ share_id, item_id, item })
+  }
+
+  return (
     <div className={messageWrapper}>
       <Avatar src={avatar_url} size="72px" />
       <aside>
@@ -93,8 +101,8 @@ export const MessageItem = ({
           </Button>
         </header>
         <p className="comment">{comment}</p>
-        <Card item={item} itemType="message" cardShape="wide" onSave={handleSave} />
+        <Card item={item} onSave={handleSave} />
       </aside>
     </div>
-  ) : null
+  )
 }
