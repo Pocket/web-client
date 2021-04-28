@@ -106,6 +106,8 @@ To run the `web-client` site locally:
 npm run dev
 ```
 
+*Note:* If this is the first time you are running the app, you will need to run `npm run build` before you can run `npm run dev` in order to download the localization files.
+
 You will need to update your hosts file to point localhost (127.0.0.1) to the hostname `localhost.web-client.getpocket.com`. Some of our third party API keys are only enabled for `getpocket.com`, and so will not work at `localhost`. See: https://linuxize.com/post/how-to-edit-your-hosts-file/
 
 The discover pages will be deployed locally on `localhost.web-client.getpocket.com`.
