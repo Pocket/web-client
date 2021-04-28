@@ -35,7 +35,7 @@ export function RecentTags({ taggedItems }) {
       <SectionHeader sectionTitle={t('tags:recently-tagged-items', 'Recently Tagged Items')} />
       <div className="cards">
         {taggedItems.map((itemId) => (
-          <RecentCard key={itemId} itemId={itemId} />
+          <RecentCard itemId={itemId} />
         ))}
       </div>
     </div>
@@ -44,7 +44,6 @@ export function RecentTags({ taggedItems }) {
 
 function RecentCard({ itemId }) {
   const item = useSelector((state) => state.myListItemsById[itemId])
-  // We need the wrapper div to contain the wide article to the container grid
   return (
     <div>
       <Card item={item} cardShape="wide" itemType="display" />
