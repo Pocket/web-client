@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { CardTopicsNav } from 'connectors/topic-list/topic-list.js'
+import { CardTopicsNav } from 'components/items-layout/topic-list.js'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 
 const topicBubblesStyles = css`

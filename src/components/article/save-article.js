@@ -1,9 +1,9 @@
 import { css } from 'linaria'
 import classNames from 'classnames'
-import { usePopover } from 'components/popover/popover'
+import { usePopover, popoverBase } from 'components/popover/popover'
 import { SaveIcon } from '@pocket/web-ui'
 import { SaveFilledIcon } from '@pocket/web-ui'
-import { SavePopover } from 'components/item-actions/save-to-pocket'
+import { SavePopover } from 'components/save-to-pocket/save-to-pocket'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { Button } from '@pocket/web-ui'
 
@@ -66,7 +66,13 @@ const saveArticleStyles = css`
   }
 `
 
-export function SaveArticleTop({ url, saveAction, saveStatus, isAuthenticated, trackSaveClick }) {
+export function SaveArticleTop({
+  url,
+  saveAction,
+  saveStatus,
+  isAuthenticated,
+  trackSaveClick
+}) {
   return (
     <aside className={classNames(saveArticleStyles, 'top')}>
       <SaveStoryButton
@@ -106,7 +112,14 @@ export function SaveArticleBottom({
   )
 }
 
-function SaveStoryButton({ url, isAuthenticated, saveStatus, saveAction, id, trackSaveClick }) {
+function SaveStoryButton({
+  url,
+  isAuthenticated,
+  saveStatus,
+  saveAction,
+  id,
+  trackSaveClick
+}) {
   const saveCopy = {
     unsaved: 'Save Story',
     saving: 'Save Story',
@@ -142,7 +155,9 @@ function SaveStoryButton({ url, isAuthenticated, saveStatus, saveAction, id, tra
         {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}
         {saveCopy[saveStatus]}
       </Button>
-      {!isAuthenticated && shown ? <SavePopover popoverRef={popBody} id={id} /> : null}
+      {!isAuthenticated && shown ? (
+        <SavePopover popoverRef={popBody} id={id} />
+      ) : null}
     </>
   )
 }

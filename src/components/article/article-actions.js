@@ -1,6 +1,6 @@
 import { css } from 'linaria'
 import { BASE_URL } from 'common/constants'
-import { SaveToPocket } from 'components/item-actions/save-to-pocket'
+import { SaveToPocket } from 'components/save-to-pocket/save-to-pocket'
 import { FacebookMonoIcon } from '@pocket/web-ui'
 import { TwitterMonoIcon } from '@pocket/web-ui'
 import { RedditMonoIcon } from '@pocket/web-ui'
