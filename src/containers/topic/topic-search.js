@@ -6,11 +6,9 @@ import { trackItemImpression } from './topic.analytics'
 import { trackTopicClick } from './topic.analytics'
 
 import { SearchPageHeader } from 'components/headers/discover-header'
-import { CardTopicsNav } from 'connectors/topic-list/topic-list'
-
-import { ItemCard } from 'connectors/item-card/discover/card'
-import { Lockup } from 'components/items-layout/list-lockup'
-import { OffsetList } from 'components/items-layout/list-offset'
+import { CardList } from 'components/items-layout/dynamic-blocks'
+import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
+import { CardTopicsNav } from 'components/items-layout/topic-list'
 
 export default function TopicSearch({ searchItems, topic, sharedActions }) {
   // Get topicList for sections that require it
@@ -29,15 +27,25 @@ export default function TopicSearch({ searchItems, topic, sharedActions }) {
   return (
     <>
       <SearchPageHeader title={topic} />
-      <Lockup items={searchItems} offset={0} heroPosition="left" ItemCard={ItemCard} />
+      <DynamicCardLayout {...actions}>
+        {/* Top List */}
+        <CardList type="lockupLeft" count={5} items={searchItems} />
 
-      <OffsetList items={searchItems} offset={5} cardShape="wide" ItemCard={ItemCard}>
-        <CardTopicsNav topics={topics} track={trackTopicClick} rail={true} />
-      </OffsetList>
+        {/* Top List */}
+        <CardList type="list" count={10} items={searchItems}>
+          <CardTopicsNav topics={topics} track={trackTopicClick} rail={true} />
+        </CardList>
 
-      <OffsetList items={searchItems} offset={10} cardShape="wide" ItemCard={ItemCard} />
-      {/* Bottom TopicNav */}
-      <CardTopicsNav topics={topics} track={trackTopicClick} />
+        {/* Bottom List */}
+        <CardList type="list" items={searchItems} />
+
+        {/* Bottom TopicNav */}
+        <CardTopicsNav
+          topics={topics}
+          track={trackTopicClick}
+          classNames={['no-border']}
+        />
+      </DynamicCardLayout>
     </>
   )
 }
