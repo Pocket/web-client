@@ -15,6 +15,8 @@ import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
  * @param {object} {id, position} item_id for data and position for analytics
  */
 export function ItemCard({ id, position, type }) {
+  // console.log('🚀 ~ file: card.js ~ line 19 ~ ItemCard ~ id, position', id, position)
+
   const dispatch = useDispatch()
   const appMode = useSelector((state) => state?.app?.mode)
   const bulkEdit = appMode === 'bulk'
