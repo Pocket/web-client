@@ -1,5 +1,4 @@
-import { useSelector } from 'react-redux'
-import { Card } from 'components/item-card/card'
+import { SimpleCard } from 'components/item-card/my-list/card-simple'
 import { css } from 'linaria'
 import { SectionHeader } from 'components/headers/section-header'
 import { breakpointLargeHandset } from '@pocket/web-ui'
@@ -32,21 +31,14 @@ export function RecentTags({ taggedItems }) {
 
   return (
     <div className={recentTagStyle}>
-      <SectionHeader sectionTitle={t('tags:recently-tagged-items', 'Recently Tagged Items')} />
+      <SectionHeader
+        sectionTitle={t('tags:recently-tagged-items', 'Recently Tagged Items')}
+      />
       <div className="cards">
         {taggedItems.map((itemId) => (
-          <RecentCard itemId={itemId} />
+          <SimpleCard key={itemId} id={itemId} />
         ))}
       </div>
-    </div>
-  )
-}
-
-function RecentCard({ itemId }) {
-  const item = useSelector((state) => state.myListItemsById[itemId])
-  return (
-    <div>
-      <Card item={item} cardShape="wide" itemType="display" />
     </div>
   )
 }
