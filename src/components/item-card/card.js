@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { cx } from 'linaria'
 import { SyndicatedIcon } from '@pocket/web-ui'
 
-import { CardMedia } from 'components/items-media/card-media'
+import { CardMedia } from 'components/media/card-media'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { ItemTags } from 'components/item-tags/item-tags'
 import { cardStyles } from './card-base'
