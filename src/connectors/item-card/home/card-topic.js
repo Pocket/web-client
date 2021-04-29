@@ -12,7 +12,7 @@ export const CardTopic = ({ id, position }) => {
   const impressionFired = useSelector((state) => state.home.impressions[id])
   const item = useSelector((state) => state.discoverItemsById[id])
   const { save_status, item_id, original_url, openExternal } = item
-  const openUrl = save_status && !openExternal ? `/read/${item_id}` : original_url
+  const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : original_url
 
   /**
    * ITEM TRACKING

@@ -12,7 +12,7 @@ export const RecCard = ({ id, position, className, cardShape = 'detail', showExc
   const item = useSelector((state) => state.recit.recentRecs[id])
   const { save_status, item_id, original_url, openExternal } = item
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
-  const openUrl = save_status && !openExternal ? `/read/${item_id}` : original_url
+  const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : original_url
 
   /**
    * ITEM TRACKING
