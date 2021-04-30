@@ -1,3 +1,10 @@
+## [1.11.9](https://github.com/Pocket/web-client/compare/v1.11.8...v1.11.9) (2021-04-30)
+
+
+### Bug Fixes
+
+* **recs:** fixing reader recs to work with new card component ([a14c446](https://github.com/Pocket/web-client/commit/a14c4463033f2f143b610d827656e41792609f2a))
+
 ## [1.11.8](https://github.com/Pocket/web-client/compare/v1.11.7...v1.11.8) (2021-04-29)
 
 
