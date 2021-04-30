@@ -37,6 +37,10 @@ const getSlateLineup = `
             givenUrl
             syndicatedArticle {
               slug
+              publisher {
+                name
+                url
+              }
             }
           }
           id
@@ -52,7 +56,6 @@ const getSlateLineup = `
 `
 
 export default getSlateLineup
-
 
 /* Available parameters not used in the above request:
   item {
