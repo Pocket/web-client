@@ -10,6 +10,7 @@ const cardMediaStyles = css`
   img,
   .no-image {
     aspect-ratio: 3 / 2;
+    object-fit: cover;
     width: 100%;
     height: auto;
     transition-property: opacity;
