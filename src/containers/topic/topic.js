@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 import ErrorPage from 'pages/_error'
 import TopicCollection from './topic-collection'
 import TopicPage from './topic-page'
-import TopicSearch from './topic-search'
 import { trackPageView } from './topic.analytics'
 import ReportFeedbackModal from 'components/report-feedback-modal/report-feedback-modal'
 
@@ -42,7 +41,7 @@ export default function Topic(props) {
   }
 
   // Error if no items are available
-  if (!curatedItems?.length && !algorithmicItems?.length && !searchItems?.length) {
+  if (!curatedItems?.length && !algorithmicItems?.length) {
     return <ErrorPage statusCode={statusCode} />
   }
 
@@ -89,7 +88,7 @@ const PageToRender = (topicPage) => {
       return TopicPage
     }
     default: {
-      return TopicSearch
+      return ErrorPage
     }
   }
 }

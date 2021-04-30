@@ -1,7 +1,6 @@
-import { takeLatest, put, takeEvery } from 'redux-saga/effects'
 import { getTopicFeed } from 'common/api/topics'
+import { put, takeEvery } from 'redux-saga/effects'
 import { getNewTopicFeed } from 'common/api/topics'
-import { getSearchFeed } from 'common/api/search'
 import { getItemSaveAnalytics } from './topic.analytics'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { arrayToObject } from 'common/utilities'
@@ -112,33 +111,6 @@ export async function fetchTopicData(topic, isCollection) {
       curatedItemsById,
       algorithmicItems,
       algorithmicItemsById
-    }
-  } catch (error) {
-    //TODO: adjust this once error reporting strategy is defined.
-    console.log('topic-pages.topic-data.state', error)
-    return false
-  }
-}
-
-/**
- * fetchSearchData
- * Make and async request for a Pocket v3 feed and return best data
- * @return items {array} An array of derived items
- */
-export async function fetchSearchData(query) {
-  try {
-    const response = await getSearchFeed(query)
-
-    // Derive curated item data and create items by id
-    const { results = [] } = response
-    const derivedSearchItems = await deriveDiscoverItems(results)
-    const searchIds = derivedSearchItems.map(mapIds)
-    const searchItems = [...new Set(searchIds)] // Unique entries only
-    const searchItemsById = arrayToObject(derivedSearchItems, 'resolved_id')
-
-    return {
-      searchItems,
-      searchItemsById
     }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
