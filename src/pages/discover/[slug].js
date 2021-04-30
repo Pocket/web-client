@@ -18,84 +18,54 @@ import { wrapper } from 'store'
   --------------------------------------------------------------- */
 export const getStaticPaths = async () => {
   const topicsByName = await fetchTopicList(true)
-  const paths = Object.values(topicsByName).map(
-    (data) => `/discover/${data.topic_slug}`
-  )
+  const paths = Object.values(topicsByName).map((data) => `/discover/${data.topic_slug}`)
   return { paths, fallback: false }
 }
 
-export const getStaticProps = wrapper.getStaticProps(
-  async ({ store, params, locale }) => {
-    const { slug } = params
-
-    if (slug === 'null') return { props: { namespacesRequired: ['common'] } }
-
-    const { dispatch } = store
-
-    // Hydrating initial state with an async request. This will block the
-    // page from loading. Do this for SEO/crawler purposes
-    const topicsByName = await fetchTopicList(true)
-
-    // Invalid Topic
-    const searchDefault = { topic: slug, page_type: 'search' }
-    const activeTopic = topicsByName[slug] || searchDefault
-
-    // Get topic info
-    const { topic, page_type } = activeTopic
-    const isCollection = page_type === 'editorial_collection'
-
-    // We are not fully supporting search at the moment
-    if (page_type === 'search') {
-      return { props: { statusCode: 404 } }
-    }
-
-    // Get topic items from the correct endpoint
-    const response =
-      page_type === 'search'
-        ? await fetchSearchData(topic)
-        : await fetchTopicData(topic, isCollection)
-
-    if (!response) {
-      return { props: { statusCode: 500 } }
-    }
-
-    const {
-      searchItems = [],
-      curatedItems = [],
-      algorithmicItems = [],
-      searchItemsById = {},
-      curatedItemsById = {},
-      algorithmicItemsById = {}
-    } = response
-
-    // Hydrate the items array
-    dispatch(
-      hydrateItems({
-        ...searchItemsById,
-        ...curatedItemsById,
-        ...algorithmicItemsById
-      })
-    )
-
-    // Hydrate the topic list state
-    dispatch(hydrateTopicList({ activeTopic: slug, topicsByName }))
-
-    // Hydrate the topic page item arrays
-    dispatch(
-      hydrateTopic({
-        topic: slug,
-        data: { searchItems, curatedItems, algorithmicItems }
-      })
-    )
-
-    // Revalidate means this can be regenerated once every X seconds
-    return {
-      props: {
-        ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
-        revalidate: 60
-      }
-    }
+export const getStaticProps = wrapper.getStaticProps(async ({ store, params, locale }) => {
+  const defaultProps = {
+    ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
+    revalidate: 60 // Revalidate means this can be regenerated once every X seconds
   }
-)
+
+  const { slug } = params
+
+  if (slug === 'null') return { props: { ...defaultProps } }
+
+  const { dispatch } = store
+
+  // Hydrating initial state with an async request. This will block the
+  // page from loading. Do this for SEO/crawler purposes
+  const topicsByName = await fetchTopicList(true)
+  const activeTopic = topicsByName[slug]
+
+  // Invalid Topic
+  if (!activeTopic) return { props: { ...defaultProps, statusCode: 404 } }
+
+  // Get topic info
+  const { topic } = activeTopic
+
+  // Get topic items from the correct endpoint
+  const response = await fetchTopicData(topic)
+  if (!response) return { props: { ...defaultProps, statusCode: 500 } }
+
+  const {
+    curatedItems = [],
+    algorithmicItems = [],
+    curatedItemsById = {},
+    algorithmicItemsById = {}
+  } = response
+
+  // Hydrate the items array
+  dispatch(hydrateItems({ ...curatedItemsById, ...algorithmicItemsById }))
+
+  // Hydrate the topic list state
+  dispatch(hydrateTopicList({ activeTopic: slug, topicsByName }))
+
+  // Hydrate the topic page item arrays
+  dispatch(hydrateTopic({ topic: slug, data: { curatedItems, algorithmicItems } }))
+
+  return { props: { ...defaultProps } }
+})
 
 export default Topic
