@@ -67,15 +67,3 @@ export function trackRecClick({ model, recId, articleId, position, resolvedId, m
     nonInteraction: true
   })
 }
-
-export const readerRecImpressionEvent = (item, position) =>
-  trackItemImpression(position, item, 'reader.rec.impression')
-
-export const readerRecSaveEvent = (item, position) =>
-  trackItemSave(position, item, 'reader.rec.save')
-
-export const readerRecEngagementEvent = (item, position) =>
-  trackItemAction(position, item, 'reader.rec.click')
-
-export const readerRecOpenEvent = (item, position) =>
-  trackItemOpen(position, item, 'reader.rec.open')
