@@ -19,6 +19,10 @@ export const cardsGrid = {
   }
 }
 
+export const cardGrid = css`
+  ${cardsGrid};
+`
+
 export const cardsContainer = css`
   padding: var(--size250) 0 0;
   box-sizing: content-box;

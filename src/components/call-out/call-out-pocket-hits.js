@@ -234,7 +234,7 @@ const CallOutPocketHitsSignup = ({
 
   return hide ? null : (
     <VisibilitySensor onVisible={handleVisible}>
-      <div className={`${wrapper} brandingMessage`}>
+      <div className={`${wrapper} brandingMessage`} data-cy="pocket-hits-module">
         <div className="brandBlock">
           <aside>Get ready to fuel your&nbsp;mind.</aside>
           <blockquote>

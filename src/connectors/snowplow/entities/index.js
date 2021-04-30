@@ -38,6 +38,9 @@ export {
   UI_COMPONENT_MENU,
   UI_COMPONENT_CARD,
   UI_COMPONENT_LIST,
-  UI_COMPONENT_SCREEN
+  UI_COMPONENT_SCREEN,
+  UI_COMPONENT_READER,
+  UI_COMPONENT_PAGE,
+  UI_COMPONENT_LINK
 } from './ui'
 export { default as createUserEntity } from './user'

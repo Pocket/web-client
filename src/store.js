@@ -56,6 +56,9 @@ import { itemTagReducers } from 'connectors/items-by-id/my-list/items.tag'
 import { itemShareReducers } from 'connectors/items-by-id/my-list/items.share'
 import { itemShareSagas } from 'connectors/items-by-id/my-list/items.share'
 
+import { itemReportReducers } from 'connectors/items-by-id/discover/items.report'
+import { itemReportSagas } from 'connectors/items-by-id/discover/items.report'
+
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
 
@@ -76,6 +79,7 @@ const discoverReducers = {
   discoverItemsById: discoverItemsReducers, // Shared discover item store
   discoverHome: discoverHomeReducers,
   discoverTopic: topicReducers,
+  itemToReport: itemReportReducers,
   syndicatedArticle: syndicatedArticleReducers
 }
 
@@ -141,6 +145,7 @@ function* rootSaga() {
     ...myListSagas,
     ...myListItemsSagas,
     ...itemShareSagas,
+    ...itemReportSagas,
     ...readSagas,
     ...homeSagas,
     ...userMessageSagas,

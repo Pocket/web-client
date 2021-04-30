@@ -14,14 +14,21 @@ import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
 
 const error = console.error
+const originalConsoleError = global.console.error
 
 before(() => {
   /**
    * We're making console.error actually throw an error so that we can fail tests
    * when React throws propType warnings.
    */
-  console.error = (msg) => {
-    throw new Error(msg)
+  global.console.error = (...args) => {
+    const propTypeFailures = [/Failed prop type/, /Warning: Received/]
+
+    if (propTypeFailures.some((p) => p.test(args[0]))) {
+      throw new Error(args[0])
+    }
+
+    originalConsoleError(...args)
   }
 })
 

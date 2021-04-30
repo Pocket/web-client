@@ -8,7 +8,7 @@ const homeCollections = css`
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.2;
-  margin-bottom: var(--spacing100);
+  margin-bottom: 0;
 `
 
 export const HomeGreeting = () => {

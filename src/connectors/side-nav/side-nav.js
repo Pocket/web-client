@@ -23,10 +23,10 @@ export function SideNav({ subset, isLoggedIn, tag }) {
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const pinnedTags = useSelector((state) => state.userTags.pinnedTags)
   const pinnedTopics = useSelector((state) => state.home.topicSections)
+  const newSaveCount = useSelector((state) => state.home.newSaves)
   const appMode = useSelector((state) => state?.app?.mode)
   const featureState = useSelector((state) => state.features)
 
-  const showCollections = featureFlagActive({ flag: 'shared.lists', featureState }) //prettier-ignore
   const showHome = featureFlagActive({ flag: 'home.retention', featureState })
   const showLab = featureFlagActive({ flag: 'lab', featureState })
 
@@ -43,8 +43,8 @@ export function SideNav({ subset, isLoggedIn, tag }) {
       pinnedTags={pinnedTags}
       pinnedTopics={pinnedTopics}
       tag={tag}
+      newSaveCount={newSaveCount}
       showHome={showHome}
-      showSharedLists={showCollections}
       showLab={showLab}
       flagsReady={flagsReady}
       trackMenuClick={trackMenuClick}

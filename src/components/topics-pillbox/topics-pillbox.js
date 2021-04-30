@@ -73,7 +73,7 @@ const TopicsPillbox = ({
                 onClick={(event) => {
                   handleTopicClick(event, topic.topic, index)
                 }}
-                data-cy="topic-pill">
+                data-cy={`topic-pill-${topic.topic}`}>
                 {topic.display_name}
               </Pill>
             </li>

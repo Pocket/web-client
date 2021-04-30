@@ -58,8 +58,10 @@ describe('Discover Items', function () {
   describe('deriveItemData', function () {
     it('should not fail when incomplete item data is passed in', function () {
       const derivedItems = deriveDiscoverItems(itemWithMissingData)
-      const expectedSaveUrl = 'https://www.bloomberg.com/features/2020-carnival-cruise-coronavirus/?utm_source=pocket&utm_medium=email&utm_campaign=pockethits' //prettier-ignore
+      const expectedSaveUrl = 'http://bloomberg.com/features/2020-carnival-cruise-coronavirus' //prettier-ignore
       const expectedOpenUrl = 'https://getpocket.com/redirect?url=https%3A%2F%2Fwww.bloomberg.com%2Ffeatures%2F2020-carnival-cruise-coronavirus%2F%3Futm_source%3Dpocket%26utm_medium%3Demail%26utm_campaign%3Dpockethits&h=8f2057741c81b67e7964c83fcb945e25b2722814bab17193be67e2b45350ccf3&nt=0' //prettier-ignore
+      const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=2951848646' //prettier-ignore
+      const expectedOriginalUrl = 'https://getpocket.com/redirect?url=http%3A%2F%2Fbloomberg.com%2Ffeatures%2F2020-carnival-cruise-coronavirus' //prettier-ignore
 
       assert.deepStrictEqual(derivedItems[0], {
         title: null,
@@ -70,6 +72,8 @@ describe('Discover Items', function () {
         excerpt: null,
         save_url: expectedSaveUrl,
         open_url: expectedOpenUrl,
+        original_url: expectedOriginalUrl,
+        permanent_url: expectedPermanentUrl,
         read_time: null,
         syndicated: false,
         save_status: 'unsaved',

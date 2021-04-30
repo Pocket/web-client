@@ -1,11 +1,26 @@
 import { HomeTopicHeader } from 'components/headers/home-header'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { css } from 'linaria'
-import { ItemCard } from 'connectors/item-card/home/cardTopic'
-import { cardGrid } from 'components/items-layout/virtualized-list'
+import { CardTopic } from 'connectors/item-card/home/card-topic'
+import { cardGrid } from 'components/items-layout/base'
 import classnames from 'classnames'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
 import { breakpointLargeHandset } from '@pocket/web-ui'
+import { trackEngagement } from 'connectors/snowplow/snowplow.state'
+import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
+import { UI_COMPONENT_LINK } from 'connectors/snowplow/entities'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
+/* Analytics Event */
+export const sendEngagementEvent = (topic) =>
+  trackEngagement(
+    ENGAGEMENT_TYPE_GENERAL,
+    UI_COMPONENT_LINK,
+    0, // position in list (zero since it's not in list)
+    'home.topic.view-more',
+    topic
+  )
 
 const topicRowStyles = css`
   margin-bottom: 1.5rem;
@@ -92,36 +107,47 @@ export const topicHeadings = {
   }
 }
 
-export const HomeTopicsRow = ({ topic_slug, topic }) => {
+export const HomeTopicsRow = ({ topic_slug, topic, count = 3 }) => {
+  const dispatch = useDispatch()
+
+  const featureState = useSelector((state) => state.features)
+  const showLab = featureFlagActive({ flag: 'lab', featureState })
+
   const topicItems = useSelector((state) => state.home[`${topic}Topic`])
-  const displayItems = topicItems?.slice(0, 3)
+  const displayItems = topicItems?.slice(0, count)
+  const skeletonArray = [0, 1, 2, 3, 4, 5]
+  const displaySkeleton = skeletonArray.slice(0, count)
+
+  const clickEvent = () => {
+    dispatch(sendEngagementEvent(topic_slug))
+  }
 
   return (
-    <div className={topicRowStyles}>
+    <div className={topicRowStyles} data-cy={`topic-row-${topic}`}>
       <HomeTopicHeader
         sectionTitle={topicHeadings[topic]?.title}
         topicSlug={topic_slug}
         sectionDescription={topicHeadings[topic]?.subtitle}
+        clickEvent={clickEvent}
+        showLab={showLab}
       />
       <section className={classnames(cardGrid, cardRowStyles)}>
-        {displayItems?.length ? (
-          displayItems.map((id, index) => (
-            <ItemCard key={id} id={id} topic={topic} position={index} />
-          ))
-        ) : (
-          <CardSkeleton type="grid" name={`${topic_slug}Skeleton`} count={3} />
-        )}
+        {displayItems?.length
+          ? displayItems.map((id, index) => (
+              <CardTopic key={id} id={id} topic={topic} position={index} />
+            ))
+          : displaySkeleton.map((id, index) => (
+              <CardSkeleton key={id + index} id={id} type="grid" name={`${topic_slug}Skeleton`} />
+            ))}
       </section>
     </div>
   )
 }
 
-export const HomeTopicsList = () => {
+export const HomeTopicsList = ({ count }) => {
   const topicSections = useSelector((state) => state.home.topicSections)
 
   return topicSections?.length
-    ? topicSections.map((topic) => (
-        <HomeTopicsRow key={topic.display_name} {...topic} />
-      ))
+    ? topicSections.map((topic) => <HomeTopicsRow key={topic.display_name} count={count} {...topic} />)
     : null
 }

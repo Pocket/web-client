@@ -12,7 +12,6 @@ import { VideoIcon } from '@pocket/web-ui'
 import { sideNavHeader } from './side-nav'
 
 export function FiltersSideNav({
-  showLab,
   subActive,
   pinnedTags,
   clickEvent
@@ -23,17 +22,15 @@ export function FiltersSideNav({
         <Trans i18nKey="nav:filters">Filters</Trans>
       </div>
 
-      {showLab ? (
-        <Link href="/my-list/archive">
-          <button
-            className={subActive('archive')}
-            onClick={clickEvent}
-            data-cy="side-nav-archive">
-            <ArchiveIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:archive">Archive</Trans>
-          </button>
-        </Link>
-      ) : null}
+      <Link href="/my-list/archive">
+        <button
+          className={subActive('archive')}
+          onClick={clickEvent}
+          data-cy="side-nav-archive">
+          <ArchiveIcon className="side-nav-icon" />{' '}
+          <Trans i18nKey="nav:archive">Archive</Trans>
+        </button>
+      </Link>
 
       <Link href="/my-list/favorites">
         <button

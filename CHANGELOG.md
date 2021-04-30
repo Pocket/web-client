@@ -1,3 +1,145 @@
+## [1.11.11](https://github.com/Pocket/web-client/compare/v1.11.10...v1.11.11) (2021-04-30)
+
+
+### Bug Fixes
+
+* **home:** have topics selector key of slug instead of id ([40874e3](https://github.com/Pocket/web-client/commit/40874e383d638e1ba5d985cb689fee74d2ba866e))
+
+## [1.11.10](https://github.com/Pocket/web-client/compare/v1.11.9...v1.11.10) (2021-04-30)
+
+
+### Bug Fixes
+
+* **card-media:** add object-fit to preserve aspect ratio ([165c731](https://github.com/Pocket/web-client/commit/165c7317b3b4048e6a329e1d570c493afa1f68a9))
+
+## [1.11.9](https://github.com/Pocket/web-client/compare/v1.11.8...v1.11.9) (2021-04-30)
+
+
+### Bug Fixes
+
+* **recs:** fixing reader recs to work with new card component ([a14c446](https://github.com/Pocket/web-client/commit/a14c4463033f2f143b610d827656e41792609f2a))
+
+## [1.11.8](https://github.com/Pocket/web-client/compare/v1.11.7...v1.11.8) (2021-04-29)
+
+
+### Bug Fixes
+
+* **home:** updating save/read check ([9031617](https://github.com/Pocket/web-client/commit/903161726a08cdfdaab395587f3a419a17cc027b))
+
+## [1.11.7](https://github.com/Pocket/web-client/compare/v1.11.6...v1.11.7) (2021-04-28)
+
+
+### Bug Fixes
+
+* **publisher-recs:** update title field and redirect path ([29f6d4c](https://github.com/Pocket/web-client/commit/29f6d4ca2abbdd1ac26bda79f527641598a00224))
+
+## [1.11.6](https://github.com/Pocket/web-client/compare/v1.11.5...v1.11.6) (2021-04-28)
+
+
+### Reverts
+
+* Revert "fix(messages): use universal card" ([e6e5693](https://github.com/Pocket/web-client/commit/e6e569308f409f0e46e85c734caf4f925051e60c))
+* Revert "fix(my list): remove extraneous styling" ([8e8da1c](https://github.com/Pocket/web-client/commit/8e8da1c5f021704bad4130d2c6ce50dcc15b07c8))
+* Revert "fix(shortcuts): add key to components" ([4062a8a](https://github.com/Pocket/web-client/commit/4062a8acc82f7331b49a922e13d916274564c045))
+* Revert "fix(tags): use universal card for recent tagged" ([af11531](https://github.com/Pocket/web-client/commit/af11531c5d364301e0660ad9081cb7ea7490bf5f))
+* Revert "fix(social): universal card for share / copy icon" ([2cf5609](https://github.com/Pocket/web-client/commit/2cf5609a25a22550e63a4e6b1dc4ad53c2b6554d))
+* Revert "fix(my-list): universal card and updated actions" ([000495b](https://github.com/Pocket/web-client/commit/000495bd7c66af5d776a9fa0b7f00114e82e55c2))
+* Revert "chore(cleanup): removing old files" ([bf9b069](https://github.com/Pocket/web-client/commit/bf9b06926ac5327795ce9177f949092ee8a5d7e4))
+* Revert "fix(recents): add key and description" ([a1780d4](https://github.com/Pocket/web-client/commit/a1780d4cb415eb31ca9963c2122052cedf29614e))
+* Revert "fix(my-list): add action labels translated" ([9a5570a](https://github.com/Pocket/web-client/commit/9a5570a9ed1b21dc59437fc1acbcb57fc107fdd9))
+* Revert "chore(cleanup): sneaky console log" ([6f02777](https://github.com/Pocket/web-client/commit/6f027775085d1207fef3e4725e66c9c74554fcfe))
+* Revert "fix(topics): add lockups that got missed" ([fa0a526](https://github.com/Pocket/web-client/commit/fa0a526035623ec6b89ca97b00a18eb9648c146e))
+* Revert "fix(my list): update deriver" ([eafd1d2](https://github.com/Pocket/web-client/commit/eafd1d2038e9a06eff15d5bb06234e3b67cb9290))
+* Revert "fix(article): allow update to use modified structure" ([88cb52b](https://github.com/Pocket/web-client/commit/88cb52b32508381bd63f935cf519f2fb8e9f1b1c))
+* Revert "fix(discover): use item_id as the key" ([6ab4dac](https://github.com/Pocket/web-client/commit/6ab4dac140efca21801594d43df9179b42900f99))
+
+## [1.11.5](https://github.com/Pocket/web-client/compare/v1.11.4...v1.11.5) (2021-04-27)
+
+
+### Bug Fixes
+
+* **article:** allow update to use modified structure ([de86e72](https://github.com/Pocket/web-client/commit/de86e728f60493115e60184dc5897611ccfe3cae))
+* **discover:** use item_id as the key ([47360a5](https://github.com/Pocket/web-client/commit/47360a5b04de4e95e99fa0164d515a15fcc47475))
+* **messages:** use universal card ([6195fae](https://github.com/Pocket/web-client/commit/6195faef274966ea2e2938780910468d5eb4bf09))
+* **my list:** remove extraneous styling ([cbe4567](https://github.com/Pocket/web-client/commit/cbe4567163f14baae570d19023a924b3bec09a4d))
+* **my list:** update deriver ([5509e8b](https://github.com/Pocket/web-client/commit/5509e8bee20f5c9a2bd3e5baaa80cf0533f3e31f))
+* **my-list:** add action labels translated ([b66488a](https://github.com/Pocket/web-client/commit/b66488a955b009a2373971d104eb287a4ccfada3))
+* **my-list:** universal card and updated actions ([91928f5](https://github.com/Pocket/web-client/commit/91928f5babcb11f15a371fc5ea9289dbbd9a810c))
+* **recents:** add key and description ([02c34a8](https://github.com/Pocket/web-client/commit/02c34a8e6ec1e2c1311757e1ea9458e040007b47))
+* **shortcuts:** add key to components ([9e5e55e](https://github.com/Pocket/web-client/commit/9e5e55eb1b85b9fc4ef19b08ae62dfce99742c05))
+* **social:** universal card for share / copy icon ([263be84](https://github.com/Pocket/web-client/commit/263be8452f5377d34ea26c4394c789af375bfa1e))
+* **tags:** use universal card for recent tagged ([fdd3d08](https://github.com/Pocket/web-client/commit/fdd3d084f3611af227d00756de4754df1b8239c5))
+* **topics:** add lockups that got missed ([daef4f6](https://github.com/Pocket/web-client/commit/daef4f6edda5ad432996eb476771e3efe1b057b4))
+
+## [1.11.4](https://github.com/Pocket/web-client/compare/v1.11.3...v1.11.4) (2021-04-27)
+
+
+### Bug Fixes
+
+* **shared-lists:** remove page ([e1f4226](https://github.com/Pocket/web-client/commit/e1f4226f1f03112efb1d3ca110b0496e83a84c96))
+* **side-nav:** remove extra ref ([094845a](https://github.com/Pocket/web-client/commit/094845ac3db342c58e40795f709ce0701b019dbc))
+* **side-nav:** remove shared-lists and moving archive ([8fb3f80](https://github.com/Pocket/web-client/commit/8fb3f805d6fff9d4a0c0cfe13d9e7d31653459d2))
+
+## [1.11.3](https://github.com/Pocket/web-client/compare/v1.11.2...v1.11.3) (2021-04-27)
+
+
+### Bug Fixes
+
+* **home:** adding home v2 ([0a910d9](https://github.com/Pocket/web-client/commit/0a910d9ad2aa614b437eb2365ae360c44c5cc771))
+* **home:** resolving conflicts after cards update ([4300680](https://github.com/Pocket/web-client/commit/43006801a2381d0295981a025a45bc93702ff65c))
+* **home:** updating link in header so theres no conflict between discover and client ([b5c1cc4](https://github.com/Pocket/web-client/commit/b5c1cc4e99379aeba831f98241e933ba50d252da))
+* **home-header:** removing var for sizes ([d074454](https://github.com/Pocket/web-client/commit/d074454ebfddb5923cec8ddef06962dc02a07ea7))
+* **sidenav:** update bookmark icons timing and dont show when save count is reset ([2d6cc46](https://github.com/Pocket/web-client/commit/2d6cc46a0430cafb37f7c6e9aa33fda02168417d))
+
+## [1.11.2](https://github.com/Pocket/web-client/compare/v1.11.1...v1.11.2) (2021-04-27)
+
+
+### Bug Fixes
+
+* **discover:** adjust impression logic ([8205e1d](https://github.com/Pocket/web-client/commit/8205e1db1249fe1766a9754d5e07e7a679375a9d))
+* **discover:** save status check ([72740f7](https://github.com/Pocket/web-client/commit/72740f7f20784211bbeb1811f15c399a1e1879a3))
+* **discover:** update item deriver ([8b9cd8b](https://github.com/Pocket/web-client/commit/8b9cd8b0f4c72afa6285d6ff85006e5c33972e93))
+* **discover:** use universal card ([ea4a77d](https://github.com/Pocket/web-client/commit/ea4a77dd57544877dc3fa6fb11b753feced71da1))
+* **report:** separate item report functionality ([3903384](https://github.com/Pocket/web-client/commit/39033848ce06f5547321588aa64d1dfb807260df))
+* **snowplow:** allow for read tracking ([16c0b4f](https://github.com/Pocket/web-client/commit/16c0b4f7f82777da7be81340eac72bd38584de29))
+* **topic-list:** co-locate with state ([b2a161c](https://github.com/Pocket/web-client/commit/b2a161c7aa3a73cf7bbb1b3295b4dccab3f2ef3a))
+
+## [1.11.1](https://github.com/Pocket/web-client/compare/v1.11.0...v1.11.1) (2021-04-27)
+
+
+### Bug Fixes
+
+* **home:** adjust impression logic ([56911e9](https://github.com/Pocket/web-client/commit/56911e983654ad57d809a3addb2df068bacbe680))
+* **home:** card skeletons ([a773160](https://github.com/Pocket/web-client/commit/a773160e24a58a9a85d4cd83a4d4bdd3a2a6df82))
+* **home:** collection layout ([a534539](https://github.com/Pocket/web-client/commit/a5345399f20726008c492c91b48df5ced9a5964a))
+* **home:** update skeleton count on recs ([a1b1577](https://github.com/Pocket/web-client/commit/a1b1577bde60394ba5c81aa5b8befa8006566de7))
+* **home:** use universal card for topic/collection ([134d9bd](https://github.com/Pocket/web-client/commit/134d9bd2617bb69d3023291cb71bd5584627a481))
+
+# [1.11.0](https://github.com/Pocket/web-client/compare/v1.10.11...v1.11.0) (2021-04-27)
+
+
+### Bug Fixes
+
+* **card:** compatibility on all page types ([f9c6a71](https://github.com/Pocket/web-client/commit/f9c6a711210ae6e5df12bdc884d4dfd53731bb5a))
+* **card:** update stories and docs ([7486756](https://github.com/Pocket/web-client/commit/7486756700c747c50c89f96dc4664cb4fddff5ab))
+* **home:** cleanup discrepancies and old code ([1f6986f](https://github.com/Pocket/web-client/commit/1f6986fa236e0a1efd6149e9ef0a7c7197d71d1f))
+* **home:** recs file structure ([6e5086a](https://github.com/Pocket/web-client/commit/6e5086a1059f76e409f33a56c4d2736b94cd73cc))
+* **home:** update card-rec to use new patterns ([799f6c9](https://github.com/Pocket/web-client/commit/799f6c98d345af17492236de89d169f9cd80b812))
+* **home:** vet item before actions ([e4b23d0](https://github.com/Pocket/web-client/commit/e4b23d0eba7bb54e5c17e8cd4a411ae1d316fbfa))
+* **item actions:** consolidate for new card ([5460ef9](https://github.com/Pocket/web-client/commit/5460ef96c3766c16b7c72bbc321bf09ab2b84276))
+
+
+### Features
+
+* **lists:** adding new layout patterns ([fbafc3a](https://github.com/Pocket/web-client/commit/fbafc3a4352ead833febcf1ba4c9b4eae6f74f58))
+
+## [1.10.11](https://github.com/Pocket/web-client/compare/v1.10.10...v1.10.11) (2021-04-22)
+
+
+### Bug Fixes
+
+* **cypress:** adding data-cy attributes to syndicated and explore pages ([46b7d06](https://github.com/Pocket/web-client/commit/46b7d064f6056130a55eb902596fa3e425d5788d))
+
 ## [1.10.10](https://github.com/Pocket/web-client/compare/v1.10.9...v1.10.10) (2021-04-22)
 
 

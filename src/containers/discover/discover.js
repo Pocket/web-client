@@ -1,26 +1,19 @@
 // Vendor
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-// State
-import { saveDiscoverItem } from './discover.state'
-import { unSaveDiscoverItem } from './discover.state'
-
 // Analytics
-import { trackPageView } from './discover.analytics'
-import { trackItemImpression } from './discover.analytics'
-import { trackItemOpen } from './discover.analytics'
-import { trackEmailImpression } from './discover.analytics'
-import { trackEmailInputFocus } from './discover.analytics'
-import { trackEmailSubmit } from './discover.analytics'
-import { trackEmailSubmitSuccess } from './discover.analytics'
-import { trackEmailSubmitFailure } from './discover.analytics'
-import { trackEmailValidationError } from './discover.analytics'
-import { trackSignupCalloutImpression } from './discover.analytics'
-import { trackSignupCalloutDismiss } from './discover.analytics'
-import { trackSignupCalloutComplete } from './discover.analytics'
-import { trackTopicClick } from './discover.analytics'
-import { trackUnAuthSave } from './discover.analytics'
+import { trackPageView } from 'containers/discover/discover.analytics'
+import { trackEmailImpression } from 'containers/discover/discover.analytics'
+import { trackEmailInputFocus } from 'containers/discover/discover.analytics'
+import { trackEmailSubmit } from 'containers/discover/discover.analytics'
+import { trackEmailSubmitSuccess } from 'containers/discover/discover.analytics'
+import { trackEmailSubmitFailure } from 'containers/discover/discover.analytics'
+import { trackEmailValidationError } from 'containers/discover/discover.analytics'
+import { trackSignupCalloutImpression } from 'containers/discover/discover.analytics'
+import { trackSignupCalloutDismiss } from 'containers/discover/discover.analytics'
+import { trackSignupCalloutComplete } from 'containers/discover/discover.analytics'
+import { trackTopicClick } from 'containers/discover/discover.analytics'
 
 //Pages
 import Layout from 'layouts/main'
@@ -29,13 +22,12 @@ import ErrorPage from 'pages/_error'
 // Components
 import { CardPageHeader } from 'components/headers/discover-header'
 import { CardListHeading } from 'components/headers/discover-header'
+import { ItemCard } from 'connectors/item-card/discover/card'
+import { Lockup } from 'components/items-layout/list-lockup'
+import { OffsetList } from 'components/items-layout/list-offset'
+import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
-import { CardList } from 'components/items-layout/dynamic-blocks'
-import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
-
-import { CardTopicsNav } from 'components/items-layout/topic-list'
-
-import ReportFeedbackModal from 'components/report-feedback-modal/report-feedback-modal'
+import { ReportFeedbackModal } from 'connectors/confirm-report/confirm-report'
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { CallOutStartLibraryExplore } from 'components/call-out/call-out-start-library'
@@ -46,33 +38,10 @@ export default function Discover({ url }) {
 
   // Select items
   const items = useSelector((state) => state.discoverHome.items)
-
-  // Is user logged in?
   const isAuthenticated = useSelector((state) => state.user.auth)
+  const topics = useSelector((state) => state.topicList?.topicsByName)
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
-
-  // Get topicList for sections that require it
-  const topics = useSelector((state) => state.topicList?.topicsByName)
-
-  // Set some modal state for this page
-  const [isOpen, setModalOpen] = useState(false)
-  const [itemToReport, setItemToReport] = useState(null)
-
-  const reportFeedbackItem = (item) => {
-    setItemToReport(item)
-    setModalOpen(true)
-  }
-
-  const actions = {
-    saveAction: saveDiscoverItem,
-    unSaveAction: unSaveDiscoverItem,
-    openAction: trackItemOpen,
-    impressionAction: trackItemImpression,
-    topicClick: trackTopicClick,
-    unAuthSaveAction: trackUnAuthSave,
-    reportFeedbackAction: reportFeedbackItem
-  }
 
   const metaData = {
     description: 'Discover fascinating stories from all across the web with Pocket.',
@@ -80,8 +49,7 @@ export default function Discover({ url }) {
     url
   }
 
-  // Return error if no items are present
-  // !! TODO: FIX THIS - This is a horrid error
+  // Return error if no items are present !! TODO: FIX THIS - This is a horrid error
   return !items?.length ? (
     <ErrorPage statusCode={503} />
   ) : (
@@ -92,38 +60,29 @@ export default function Discover({ url }) {
         title="Discover the best of the&nbsp;web"
         subHeading="Today’s essential reads"
       />
-      <DynamicCardLayout {...actions}>
-        {/* Top Lockup (center)*/}
-        <CardList type="lockupCenter" count={5} items={items} classNames={['no-border']} />
 
-        {/* Top TopicNav */}
-        <CardTopicsNav topics={topics} track={trackTopicClick} />
+      {/* Top Lockup (center)*/}
+      <Lockup items={items} offset={0} heroPosition="center" ItemCard={ItemCard} />
 
-        {/* Pocket Brand Messaging */}
-        <CalloutTop shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
+      <CardTopicsNav topics={topics} track={trackTopicClick} />
 
-        {/* Top List */}
-        <CardListHeading>Fascinating stories</CardListHeading>
-        <CardList type="list" classNames={['no-border']} count={5} items={items} />
+      {/* Pocket Brand Messaging */}
+      <CalloutTop shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
 
-        {/* Mid Lockup (left) */}
-        <CardList type="lockupLeft" count={5} items={items} />
+      {/* Top List */}
+      <CardListHeading>Fascinating stories</CardListHeading>
 
-        <CalloutBottom shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
+      <OffsetList items={items} offset={5} cardShape="wide" ItemCard={ItemCard} />
 
-        {/* Bottom List */}
-        <CardList type="list" items={items} classNames={['no-border']} />
+      <Lockup items={items} offset={10} heroPosition="left" ItemCard={ItemCard} />
 
-        {/* Bottom TopicNav */}
-        <CardTopicsNav topics={topics} track={trackTopicClick} />
-      </DynamicCardLayout>
+      <CalloutBottom shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
 
-      <ReportFeedbackModal
-        isOpen={isOpen}
-        setModalOpen={setModalOpen}
-        itemToReport={itemToReport}
-        resetItem={() => setItemToReport(null)}
-      />
+      <OffsetList items={items} offset={15} cardShape="wide" ItemCard={ItemCard} />
+
+      <CardTopicsNav topics={topics} track={trackTopicClick} className="no-border" />
+
+      <ReportFeedbackModal />
     </Layout>
   )
 }

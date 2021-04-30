@@ -5,7 +5,7 @@ import { getObjectWithValidKeysOnly } from 'common/utilities'
  * Schema information:
  * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/c03c4f335d10a96c746b17e5271cd7760f2bb114973dbde0355d08881344abd5
  */
-const UI_SCHEMA_URL = getSchemaUri('ui')
+const UI_SCHEMA_URL = getSchemaUri('ui', '1-0-2')
 
 export const UI_COMPONENT_BUTTON = 'button'
 export const UI_COMPONENT_DIALOG = 'dialog'
@@ -13,6 +13,9 @@ export const UI_COMPONENT_MENU = 'menu'
 export const UI_COMPONENT_CARD = 'card'
 export const UI_COMPONENT_LIST = 'list'
 export const UI_COMPONENT_SCREEN = 'screen'
+export const UI_COMPONENT_READER = 'reader'
+export const UI_COMPONENT_PAGE = 'page'
+export const UI_COMPONENT_LINK = 'link'
 
 /**
  * Entity to describe a front-end user interface. Should be included with any impression, engagement, or custom engagement events.

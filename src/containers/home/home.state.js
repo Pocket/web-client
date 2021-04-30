@@ -63,7 +63,8 @@ const initialState = {
   topicSections: [],
   collectionSet: [],
   recentSaves: [],
-  impressions: {}
+  impressions: {},
+  newSaves: 0
 }
 
 export const homeReducers = (state = initialState, action) => {
@@ -82,7 +83,7 @@ export const homeReducers = (state = initialState, action) => {
     case HOME_TOPIC_SECTION_UNSET: {
       const { topic } = action
       const filteredTopicSections = state.topicSections.filter(
-        (section) => section.id !== topic.id
+        (section) => section.topic_slug !== topic.topic_slug
       )
       return { ...state, topicSections: filteredTopicSections }
     }
@@ -100,7 +101,7 @@ export const homeReducers = (state = initialState, action) => {
     case HOME_SAVE_SUCCESS: {
       const { id } = action
       const recentSaves = new Set([id, ...state.recentSaves])
-      return { ...state, recentSaves: Array.from(recentSaves) }
+      return { ...state, recentSaves: Array.from(recentSaves), newSaves: ++state.newSaves }
     }
 
     case HOME_RECENT_SAVES_SUCCESS: {
@@ -116,7 +117,7 @@ export const homeReducers = (state = initialState, action) => {
     }
 
     case SNOWPLOW_TRACK_PAGE_VIEW: {
-      return { ...state, impressions: {} }
+      return { ...state, impressions: {}, newSaves: 0 }
     }
 
     default:
