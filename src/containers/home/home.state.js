@@ -83,7 +83,7 @@ export const homeReducers = (state = initialState, action) => {
     case HOME_TOPIC_SECTION_UNSET: {
       const { topic } = action
       const filteredTopicSections = state.topicSections.filter(
-        (section) => section.id !== topic.id
+        (section) => section.topic_slug !== topic.topic_slug
       )
       return { ...state, topicSections: filteredTopicSections }
     }

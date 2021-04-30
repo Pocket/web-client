@@ -78,7 +78,7 @@ export const TopicSelector = () => {
   const journeySubTitle = journeySubTitles[Math.min(topicSections?.length, Math.max(0, 1))]
 
   const handleTopicClick = (topic) => {
-    const topicAction = topicSections.find((item) => item.id === topic.id)
+    const topicAction = topicSections.find((item) => item.topic_slug === topic.topic_slug)
       ? unsetTopicSection
       : setTopicSection
 
@@ -95,7 +95,7 @@ export const TopicSelector = () => {
             <TopicPill
               handleTopicClick={handleTopicClick}
               topic={topic}
-              active={topicSections.find((item) => item.id === topic.id) || false } //prettier-ignore
+              active={topicSections.find((item) => item.topic_slug === topic.topic_slug) || false } //prettier-ignore
               key={`topics-pillbox-${topic.topic}`}
             />
           ))}
