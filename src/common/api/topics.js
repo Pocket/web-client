@@ -1,11 +1,12 @@
 import { request } from 'common/utilities/request/request'
-
 import { GraphQLClient } from 'graphql-request'
-import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
-import { GRAPHQL_URL, TOPIC_IDS } from 'common/constants'
+import { GRAPHQL_URL } from 'common/constants'
+import { TOPIC_IDS } from 'common/constants'
 
-export async function getNewTopicFeed(id, recommendationCount = 30) {
-  const variables = { id, recommendationCount }
+import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
+
+export async function getNewTopicFeed(topic, recommendationCount = 30) {
+  const variables = { id: TOPIC_IDS[topic].id, recommendationCount }
 
   return request({
     api_url: GRAPHQL_URL,
@@ -16,8 +17,8 @@ export async function getNewTopicFeed(id, recommendationCount = 30) {
       variables
     })
   })
-  .then((response) => response.data?.getSlateLineup)
-  .catch((error) => console.error(error))
+    .then(processSlates)
+    .catch((error) => console.error(error))
 }
 
 /**
@@ -46,4 +47,11 @@ export function getTopicList(ssr) {
     ssr,
     path: 'v3/discover/topicList'
   })
+}
+
+function processSlates(response) {
+  const slates = response?.data?.getSlateLineup?.slates || []
+  const curated = slates[0]?.recommendations
+  const algorithmic = slates[1]?.recommendations
+  return { curated, algorithmic }
 }
