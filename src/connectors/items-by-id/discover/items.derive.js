@@ -17,8 +17,8 @@ export function deriveDiscoverItems(response) {
   return response.map((feedItem) => {
     console.log(feedItem)
     return {
-      resolved_id: feedItem.item?.resolvedId,
-      item_id: feedItem.item?.itemId,
+      resolved_id: feedItem.item?.resolved_id || feedItem.item?.resolvedId,
+      item_id: feedItem.item?.item_id || feedItem.item?.itemId,
       title: displayTitle(feedItem),
       thumbnail: displayThumbnail(feedItem),
       publisher: displayPublisher(feedItem),
@@ -44,8 +44,15 @@ export function deriveDiscoverItems(response) {
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {string} The most appropriate title to show
  */
-function displayTitle({ item, curatedInfo }) {
-  return curatedInfo?.title || item?.title || item?.normalUrl || null
+function displayTitle({ item, curatedInfo, curated_info }) {
+  return (
+    curatedInfo?.title ||
+    curated_info?.title ||
+    item?.title ||
+    item?.normalUrl ||
+    item?.normal_url ||
+    null
+  )
 }
 
 /** THUMBNAIL
@@ -56,7 +63,9 @@ function displayTitle({ item, curatedInfo }) {
 function displayThumbnail({ item, curatedInfo }) {
   const correct_image =
     curatedInfo?.imageSrc ||
+    curatedInfo?.image_src ||
     item?.topImageUrl ||
+    item?.top_image_url ||
     item?.images?.[Object.keys(item.images)[0]]?.src ||
     false
   return correct_image ? correct_image : false
@@ -69,16 +78,24 @@ function displayThumbnail({ item, curatedInfo }) {
 function displayPublisher({ item }) {
   const urlToUse = saveUrl({ item })
   const derivedDomain = domainForUrl(urlToUse)
-  const syndicatedPublisher = item?.syndicatedArticle?.publisher?.name
-  return syndicatedPublisher || item?.domainMetadata?.name || item?.domain || derivedDomain || null
+  const syndicatedPublisher =
+    item?.syndicatedArticle?.publisher?.name || item?.syndicated_article?.publisher?.name
+  return (
+    syndicatedPublisher ||
+    item?.domainMetadata?.name ||
+    item?.domain_metadata?.name ||
+    item?.domain ||
+    derivedDomain ||
+    null
+  )
 }
 
 /** EXCERPT
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {string} The most appropriate excerpt to show
  */
-function displayExcerpt({ item, curatedInfo }) {
-  return curatedInfo?.excerpt || item?.excerpt || null
+function displayExcerpt({ item, curatedInfo, curated_info }) {
+  return curatedInfo?.excerpt || curated_info?.excerpt || item?.excerpt || null
 }
 
 /** OPEN URL
@@ -94,7 +111,7 @@ function openUrl({ item }) {
  * @returns {string} The url that should be saved or opened
  */
 function saveUrl({ item }) {
-  return item?.normalUrl || item?.resolvedUrl || false
+  return item?.normalUrl || item?.normal_url || item?.resolvedUrl || item?.resolved_url || false
 }
 
 /** OPEN_ORIGINAL
@@ -103,8 +120,12 @@ function saveUrl({ item }) {
  */
 function originalUrl({ item }) {
   if (item?.givenUrl) return urlWithPocketRedirect(item?.givenUrl)
+  if (item?.given_url) return urlWithPocketRedirect(item?.given_url)
   if (item?.normalUrl) return urlWithPocketRedirect(item?.normalUrl)
+  if (item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
   if (item?.resolvedUrl) return urlWithPocketRedirect(item?.resolvedUrl)
+  if (item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
+  return false
 }
 
 /** OPEN_PERMANENT
@@ -112,7 +133,9 @@ function originalUrl({ item }) {
  * @returns {string} The url for permanent library
  */
 function permanentUrl({ item }) {
-  return urlWithPermanentLibrary(item?.itemId) || false
+  if (item?.itemId) return urlWithPermanentLibrary(item?.itemId)
+  if (item?.item_id) return urlWithPermanentLibrary(item?.item_id)
+  return false
 }
 
 /** READ TIME
@@ -120,7 +143,9 @@ function permanentUrl({ item }) {
  * @returns {int} average number of minutes to read the item
  */
 function readTime({ item }) {
-  return item?.timeToRead || readTimeFromWordCount(item?.wordCount) || null
+  const timeToRead = item?.timeToRead || item?.time_to_read
+  const wordCount = item?.wordCount || item?.word_count
+  return timeToRead || readTimeFromWordCount(wordCount) || null
 }
 
 /**
@@ -140,7 +165,7 @@ function readTimeFromWordCount(wordCount) {
  */
 const syndicated = function ({ item }) {
   if (!item) return false
-  return item?.syndicatedArticle
+  return 'syndicated_article' in item || typeof item?.syndicatedArticle !== 'undefined'
 }
 
 const devLink = function (item) {
@@ -157,6 +182,9 @@ const devLink = function (item) {
  * @returns {bool} whether to open an item in a new tab
  */
 function openExternal({ item }) {
+  if (item?.has_video === '2') return false
+  if (item?.has_image === '2') return false
+  if (item?.is_article === '1') return false
   if (item?.hasVideo === 'IS_VIDEO') return false // NO_VIDEOS || HAS_VIDEOS || IS_VIDEO
   if (item?.hasImage === 'IS_IMAGE') return false // NO_IMAGES || HAS_IMAGES || IS_IMAGE
   if (item?.isArticle) return false // Boolean
