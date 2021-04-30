@@ -79,7 +79,6 @@ export async function fetchTopicData(topic) {
     // algorithmic results
 
     const response = await getNewTopicFeed(topic, 30)
-    // console.log(JSON.stringify(response))
 
     // Derive curated item data and create items by id
     const { curated = [] } = response
