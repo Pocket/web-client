@@ -103,7 +103,13 @@ function displayExcerpt({ item, curatedInfo, curated_info }) {
  * @returns {string} The url that should be saved or opened
  */
 function openUrl({ item }) {
-  return devLink(item) || originalUrl({ item })
+  if (item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
+  if (item?.resolvedUrl) return urlWithPocketRedirect(item?.resolvedUrl)
+  if (item?.givenUrl) return urlWithPocketRedirect(item?.givenUrl)
+  if (item?.given_url) return urlWithPocketRedirect(item?.given_url)
+  if (item?.normalUrl) return urlWithPocketRedirect(item?.normalUrl)
+  if (item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
+  return false
 }
 
 /** SAVE URL
