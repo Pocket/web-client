@@ -1,6 +1,5 @@
 import { takeLatest, takeEvery, put, select } from 'redux-saga/effects'
 import {
-  SET_REC_IMPRESSION,
   PUBLISHER_RECS_REQUEST,
   PUBLISHER_RECS_SUCCESS,
   PUBLISHER_RECS_FAILURE,
@@ -47,8 +46,6 @@ import { deriveReaderRecitItems, checkExternal } from './recit.derive'
 export const publisherRecsRequest = (itemId) => ({ type: PUBLISHER_RECS_REQUEST, itemId }) //prettier-ignore
 export const pocketRecsRequest = (itemId) => ({ type: POCKET_RECS_REQUEST, itemId }) //prettier-ignore
 
-export const setRecImpression = (id) => ({ type: SET_REC_IMPRESSION, id }) //prettier-ignore
-
 export const readerRecsRequest = (itemId) =>  ({ type: READER_RECS_REQUEST, itemId }) //prettier-ignore
 export const readerRecSaveItem = (id, url, analytics) => ({ type: READER_REC_SAVE_REQUEST, id, url, analytics }) //prettier-ignore
 export const readerRecUnSaveItem = (id) => ({ type: READER_REC_UNSAVE_REQUEST, id }) //prettier-ignore
@@ -60,7 +57,6 @@ export const unSaveItem = id => ({ type: RECENT_REC_UNSAVE_REQUEST, id }) //pret
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  impressions: {},
   publisherRecs: [],
   publisherRecId: null,
   publisherRecModel: null,
@@ -75,12 +71,6 @@ const initialState = {
 
 export const recitReducers = (state = initialState, action) => {
   switch (action.type) {
-    case SET_REC_IMPRESSION: {
-      const { id } = action
-      const impressions = { ...state.impressions, [id]: true }
-      return { ...state, impressions }
-    }
-
     case PUBLISHER_RECS_SUCCESS: {
       const {
         response: {

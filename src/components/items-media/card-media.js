@@ -52,7 +52,15 @@ const cardMediaStyles = css`
  * the container.  This module simple represents the graceful fallback as opposed
  * to the layout.
  */
-export const CardMedia = function ({ image_src, title, id, setNoImage = () => {}, openUrl }) {
+export const CardMedia = function ({
+  image_src,
+  title,
+  id,
+  setNoImage = () => {},
+  openUrl,
+  onOpen,
+  openExternal
+}) {
   /**
    * Fallback images:
    * useFallback checks for imageLoad and if it fails, provides a class
@@ -110,7 +118,7 @@ export const CardMedia = function ({ image_src, title, id, setNoImage = () => {}
     <div className={`${cardMediaStyles} media`}>
       {openUrl ? (
         <Link href={openUrl ? openUrl : false}>
-          <a>
+          <a onClick={onOpen} target={openExternal ? '_blank' : undefined}>
             <MediaImage />
           </a>
         </Link>
