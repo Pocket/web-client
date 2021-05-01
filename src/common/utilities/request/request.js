@@ -1,5 +1,7 @@
 import queryString from 'query-string'
-import { CONSUMER_KEY, API_URL } from 'common/constants'
+import { CONSUMER_KEY } from 'common/constants'
+import { GRAPHQL_URL } from 'common/constants'
+import { API_URL } from 'common/constants'
 
 /**
  * @param {Object} requestInfo Information about the request
@@ -76,4 +78,13 @@ function handleErrors(response, auth) {
 
   // If all else we re returning the response to be parsed
   return response
+}
+
+export const requestGQL = (data) => {
+  return request({
+    api_url: GRAPHQL_URL,
+    path: 'graphql',
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
 }
