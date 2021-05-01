@@ -10,6 +10,10 @@ export const offsetListStyle = css`
   &.border {
     border-bottom: 1px solid var(--color-dividerTertiary);
   }
+
+  &.no-space {
+    padding-bottom: 0;
+  }
 `
 
 export function OffsetList({
@@ -24,7 +28,8 @@ export function OffsetList({
 }) {
   const start = offset
   const end = offset + count
-  const listClass = cx(offsetListStyle, border && 'border', className)
+  const hasChildren = !!children
+  const listClass = cx(offsetListStyle, border && 'border', hasChildren && 'no-space', className)
   return (
     <div className={listClass}>
       {items.slice(start, end).map((id, index) => (
