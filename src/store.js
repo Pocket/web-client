@@ -164,7 +164,8 @@ export const initializeStore = () => {
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-          name: 'Pocket Web Client'
+          name: 'Pocket Web Client',
+          actionsBlacklist: 'SNOWPLOW_'
         })
       : compose
 
