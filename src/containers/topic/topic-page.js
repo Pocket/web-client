@@ -8,7 +8,7 @@ import { ItemCard } from 'connectors/item-card/discover/card'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
 
-export default function TopicPage({ curatedItems, algorithmicItems, topic, sharedActions }) {
+export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
   // Get topicList for sections that require it
   const topics = useSelector((state) => state.topicList?.topicsByName)
 
