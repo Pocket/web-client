@@ -1,6 +1,4 @@
 import { CollectionPageHeader } from 'components/headers/discover-header'
-import { CardList } from 'components/items-layout/dynamic-blocks'
-import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
 import { CardTopicsNav } from 'components/items-layout/topic-list'
 
 import { useSelector } from 'react-redux'
