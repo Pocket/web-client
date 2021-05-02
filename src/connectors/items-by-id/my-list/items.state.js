@@ -11,7 +11,7 @@ import { ITEMS_DELETE_SUCCESS } from 'actions'
 import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_UNARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_TAG_SUCCESS } from 'actions'
-
+import { MYLIST_ITEMS_NO_IMAGE } from 'actions'
 import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
 import { HOME_SAVE_SUCCESS } from 'actions'
 
@@ -27,6 +27,7 @@ import { itemArchiveSagas } from './items.archive'
 /** ACTIONS
  --------------------------------------------------------------- */
 export { itemAddAction } from './items.add'
+export const setNoImage = (id) => ({ type: MYLIST_ITEMS_NO_IMAGE, id })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -59,6 +60,13 @@ export const myListItemsReducers = (state = initialState, action) => {
       const { actions } = action
       const itemsById = reconcileActions(state, actions)
       return itemsById
+    }
+
+    case MYLIST_ITEMS_NO_IMAGE: {
+      const { id } = action
+      const item = state[id]
+      const itemDraft = { ...item, noImage: true }
+      return { ...state, [id]: itemDraft }
     }
 
     case MYLIST_UPDATE_SUCCESS: {

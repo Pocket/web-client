@@ -61,18 +61,6 @@ export const cardStyles = css`
 
   .media {
     grid-column: var(--media-column-span);
-    overflow: hidden;
-    width: 100%;
-    height: 0;
-    padding-top: 66.66%;
-    background-repeat: 'no-repeat';
-    background-position: center;
-    background-size: cover;
-    transition-property: opacity;
-    transition-duration: 0.2s;
-    transition-timing-function: ease;
-    border-radius: 0.25rem;
-    margin-bottom: 1rem;
   }
 
   .content {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { cx } from 'linaria'
 import { SyndicatedIcon } from '@pocket/web-ui'
 
-import { CardMedia } from 'components/media/card-media'
+import { CardMedia } from 'components/items-media/card-media'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { ItemTags } from 'components/item-tags/item-tags'
 import { cardStyles } from './card-base'
@@ -27,6 +27,7 @@ import { useInView } from 'react-intersection-observer'
  * @param {boolean} props.showExcerpt  Show excerpt or not
  * @param {boolean} props.showMedia Show image or not
  * @param {boolean} props.hiddenActions Hide actions until hover or not
+ * @param {function} props.itemNoImage Action to fire if an item has no image
  * Tracking
  * @param {function} props.onItemInView Action to fire when item is in view
  * @param {function} props.onOpen Action to fire when an item is opened
@@ -50,6 +51,7 @@ export const Card = (props) => {
     showExcerpt,
     showMedia,
     hiddenActions,
+    onImageFail,
     // Tracking
     onItemInView,
     onOpenOriginalUrl,
@@ -70,7 +72,8 @@ export const Card = (props) => {
     read_time,
     openExternal,
     syndicated,
-    original_url
+    original_url,
+    noImage
   } = item
 
   const linkRef = useRef(null)
@@ -100,6 +103,7 @@ export const Card = (props) => {
 
   if (!item) return null
 
+  const itemImage = noImage ? '' : thumbnail
   /**
    * Layout is defined here.
    * ----------------------------------------------------------------
@@ -133,12 +137,13 @@ export const Card = (props) => {
       <div className="cardWrap" ref={viewRef}>
         {showMedia ? (
           <CardMedia
-            image_src={thumbnail}
+            image_src={itemImage}
             title={title}
             id={id}
             openUrl={openUrl}
             onOpen={onOpen}
             openExternal={openExternal}
+            onImageFail={onImageFail}
           />
         ) : null}
         <div className="content">
@@ -219,7 +224,7 @@ Card.defaultProps = {
   showExcerpt: false,
   showMedia: true,
   hiddenActions: false,
-
+  setNoImage: () => {},
   onItemInView: () => {},
   onOpen: () => {},
   onOpenOriginalUrl: () => {},

@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
+import { setNoImage } from 'connectors/items-by-id/my-list/items.state'
 import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
@@ -36,9 +37,10 @@ export function ItemCard({ id, position, type }) {
   const showExcerpt = type === 'detail'
   const ActionMenu = bulkEdit ? ActionsBulk : ActionsMyList
 
+  const onImageFail = () => dispatch(setNoImage(id))
+
   /** ITEM TRACKING
   --------------------------------------------------------------- */
-
   const onOpen = () => {
     dispatch(trackItemOpen(position, item, 'my-list.card'))
   }
@@ -79,6 +81,7 @@ export function ItemCard({ id, position, type }) {
       onOpenOriginalUrl={onOpenOriginalUrl}
       onItemInView={onItemInView}
       selectBulk={selectBulk}
+      onImageFail={onImageFail}
       isPremium={isPremium}
       ActionMenu={ActionMenu}
     />
