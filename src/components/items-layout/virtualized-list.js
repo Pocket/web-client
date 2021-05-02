@@ -1,5 +1,8 @@
 import { cardsGrid } from 'components/items-layout/base'
 import { css } from 'linaria'
+import { breakpointSmallTablet } from '@pocket/web-ui'
+import { breakpointTinyTablet } from '@pocket/web-ui'
+import { breakpointLargeHandset } from '@pocket/web-ui'
 
 export const ruler = css`
   position: absolute;
@@ -12,6 +15,24 @@ export const ruler = css`
 
 export const cardGrid = css`
   ${cardsGrid};
+  article {
+    height: 351px;
+  }
+  ${breakpointSmallTablet} {
+    article {
+      height: 326px;
+    }
+  }
+  ${breakpointTinyTablet} {
+    article {
+      height: 174px;
+    }
+  }
+  ${breakpointLargeHandset} {
+    article {
+      height: 154px;
+    }
+  }
 `
 
 export const cardList = css`
