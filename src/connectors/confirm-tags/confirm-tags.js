@@ -41,6 +41,7 @@ export function TaggingModal() {
   const itemsToTag = useSelector((state) => state.itemsToTag.itemList)
   const currentTags = useSelector((state) => state.itemsToTag.tags)
   const suggestedTags = useSelector((state) => state.itemsToTag.suggestedTags)
+  const since = useSelector((state) => state.userTags.since)
   const showModal = itemsToTag?.length > 0
 
   const allTags = useSelector((state) => state.userTags.tagsList)
@@ -174,7 +175,7 @@ export function TaggingModal() {
             />
           ) : null}
         </TagBox>
-        {!isPremium && isSingleTag ? (
+        {!isPremium ? (
           <TagUpsell onVisible={handleImpression} />
         ) : null}
         {isPremium && isSingleTag ? (
@@ -182,8 +183,8 @@ export function TaggingModal() {
             suggestedTags={suggestedTags}
             tags={currentTags}
             addTag={addTag}
-            isPremium={isPremium}
-            trackClick={() => {}}
+            allTags={allTags}
+            since={since}
           />
         ) : null}
       </ModalBody>
