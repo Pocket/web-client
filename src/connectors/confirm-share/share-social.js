@@ -124,7 +124,7 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
       </FacebookShareButton>
       <TwitterShareButton
         aria-label={t('share:share-to-twitter', 'Share to Twitter')}
-        data-tooltip={t('share:share-to-facebook', 'Share to Twitter')}
+        data-tooltip={t('share:share-to-twitter', 'Share to Twitter')}
         data-cy="share-twitter"
         className={topTooltipDelayed}
         resetButtonStyle={false}
