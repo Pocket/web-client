@@ -152,7 +152,7 @@ export const cardStyles = css`
   }
 
   &:focus-within .selectedBack,
-  &.selected .selectedBack {
+  &.selected:focus-within .selectedBack {
     background-color: var(--color-navCurrentTab);
     display: block;
   }

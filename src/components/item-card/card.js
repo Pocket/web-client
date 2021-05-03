@@ -144,6 +144,7 @@ export const Card = (props) => {
             onOpen={onOpen}
             openExternal={openExternal}
             onImageFail={onImageFail}
+            onFocus={handleFocus}
           />
         ) : null}
         <div className="content">
