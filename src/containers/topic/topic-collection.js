@@ -1,6 +1,4 @@
 import { CollectionPageHeader } from 'components/headers/discover-header'
-import { CardTopicsNav } from 'components/items-layout/topic-list'
-
 import { useSelector } from 'react-redux'
 import { trackTopicClick } from './topic.analytics'
 import { ItemCard } from 'connectors/item-card/discover/card'
