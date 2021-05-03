@@ -1,3 +1,11 @@
+## [1.12.1](https://github.com/Pocket/web-client/compare/v1.12.0...v1.12.1) (2021-05-03)
+
+
+### Bug Fixes
+
+* **copy:** update incorrect copy ([9967652](https://github.com/Pocket/web-client/commit/9967652829adb04f4ddeda6fda46314c45243adf))
+* **tags:** update suggested tag verbiage ([c173ebd](https://github.com/Pocket/web-client/commit/c173ebd82a8e45aeda7b4658804b3f6762e2ceb9))
+
 # [1.12.0](https://github.com/Pocket/web-client/compare/v1.11.11...v1.12.0) (2021-05-03)
 
 
