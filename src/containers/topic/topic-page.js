@@ -1,12 +1,11 @@
 import { useSelector } from 'react-redux'
 import { trackTopicClick } from './topic.analytics'
-
 import { CardPageHeader } from 'components/headers/discover-header'
 import { SectionHeader } from 'components/headers/section-header'
-import { CardTopicsNav } from 'components/items-layout/topic-list'
 import { ItemCard } from 'connectors/item-card/discover/card'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
+import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
 export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
   // Get topicList for sections that require it
@@ -31,18 +30,14 @@ export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
       />
 
       {/* Algorithmic */}
-      <OffsetList items={algorithmicItems} offset={5} cardShape="wide" ItemCard={ItemCard}>
+      <OffsetList items={algorithmicItems} offset={0} cardShape="wide" ItemCard={ItemCard}>
         <CardTopicsNav topics={topics} track={trackTopicClick} rail={true} />
       </OffsetList>
 
-      <OffsetList
-        items={algorithmicItems}
-        offset={10}
-        count={15}
-        cardShape="wide"
-        ItemCard={ItemCard}
-      />
+      <OffsetList items={algorithmicItems} offset={5} count={15} cardShape="wide" ItemCard={ItemCard} />
 
+
+      {/* Bottom TopicNav */}
       <CardTopicsNav topics={topics} track={trackTopicClick} />
     </>
   )

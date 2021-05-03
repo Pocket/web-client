@@ -6,6 +6,7 @@ import { trackTopicClick } from './topic.analytics'
 import { ItemCard } from 'connectors/item-card/discover/card'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
+import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
 export default function TopicCollection({ curatedItems, topic }) {
   // Get topicList for sections that require it
@@ -21,13 +22,8 @@ export default function TopicCollection({ curatedItems, topic }) {
         <CardTopicsNav topics={topics} track={trackTopicClick} rail={true} />
       </OffsetList>
 
-      <OffsetList
-        items={curatedItems}
-        offset={10}
-        count={15}
-        cardShape="wide"
-        ItemCard={ItemCard}
-      />
+      <OffsetList items={curatedItems} offset={10} cardShape="wide" ItemCard={ItemCard} />
+      <CardTopicsNav topics={topics} track={trackTopicClick} />
     </>
   )
 }
