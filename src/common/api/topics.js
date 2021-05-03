@@ -1,4 +1,15 @@
-import { request } from 'common/utilities/request/request'
+import { request, requestGQL } from 'common/utilities/request/request'
+import { TOPIC_IDS } from 'common/constants'
+import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
+
+export async function getNewTopicFeed(topic, recommendationCount = 30) {
+  return requestGQL({
+    query: getSlateLineup,
+    variables: { id: TOPIC_IDS[topic].id, recommendationCount }
+  })
+    .then(processSlates)
+    .catch((error) => console.error(error))
+}
 
 /**
  * Get the topic page feed
@@ -26,4 +37,11 @@ export function getTopicList(ssr) {
     ssr,
     path: 'v3/discover/topicList'
   })
+}
+
+function processSlates(response) {
+  const slates = response?.data?.getSlateLineup?.slates || []
+  const curated = slates[0]?.recommendations
+  const algorithmic = slates[1]?.recommendations
+  return { curated, algorithmic }
 }

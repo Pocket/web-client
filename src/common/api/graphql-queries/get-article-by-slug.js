@@ -1,5 +1,5 @@
-/* GraphQL */
-const getArticleBySlug = `
+import { gql } from 'graphql-request'
+const getArticleBySlug = gql`
   query GetArticleBySlug($slug: String) {
     getArticleBySlug(slug: $slug) {
       items {

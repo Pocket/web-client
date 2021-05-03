@@ -1,17 +1,14 @@
-import { takeLatest, put, takeEvery } from 'redux-saga/effects'
-import { getTopicFeed } from 'common/api/topics'
-import { getSearchFeed } from 'common/api/search'
+import { put, takeEvery } from 'redux-saga/effects'
+import { getNewTopicFeed } from 'common/api/topics'
 import { getItemSaveAnalytics } from './topic.analytics'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { arrayToObject } from 'common/utilities'
-import {
-  TOPIC_HYDRATE,
-  TOPIC_SAVE_REQUEST,
-  TOPIC_UNSAVE_REQUEST,
-  DISCOVER_ITEMS_SAVE_REQUEST,
-  DISCOVER_ITEMS_UNSAVE_REQUEST
-} from 'actions'
 
+import { TOPIC_HYDRATE } from 'actions'
+import { TOPIC_SAVE_REQUEST } from 'actions'
+import { TOPIC_UNSAVE_REQUEST } from 'actions'
+import { DISCOVER_ITEMS_SAVE_REQUEST } from 'actions'
+import { DISCOVER_ITEMS_UNSAVE_REQUEST } from 'actions'
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
@@ -74,15 +71,14 @@ const mapIds = (item) => item.resolved_id
  * Make and async request for a Pocket v3 feed and return best data
  * @return items {array} An array of derived items
  */
-export async function fetchTopicData(topic, isCollection) {
+export async function fetchTopicData(topic) {
   try {
     // Overloading the topic fetch since there is not a clear delineation
     // between collections and topic pages in the url.  Collections are
     // 100% curated, so we need to ask for more `curated` and omit the
     // algorithmic results
-    const response = isCollection
-      ? await getTopicFeed(topic, 30, 0)
-      : await getTopicFeed(topic, 5, 25)
+
+    const response = await getNewTopicFeed(topic, 30)
 
     // Derive curated item data and create items by id
     const { curated = [] } = response
@@ -96,10 +92,7 @@ export async function fetchTopicData(topic, isCollection) {
     const derivedAlgorithmicItems = await deriveDiscoverItems(algorithmic)
     const algorithmicIds = derivedAlgorithmicItems.map(mapIds)
     const algorithmicItems = [...new Set(algorithmicIds)] // Unique entries only
-    const algorithmicItemsById = arrayToObject(
-      derivedAlgorithmicItems,
-      'resolved_id'
-    )
+    const algorithmicItemsById = arrayToObject(derivedAlgorithmicItems, 'resolved_id')
 
     return {
       topic,
@@ -107,33 +100,6 @@ export async function fetchTopicData(topic, isCollection) {
       curatedItemsById,
       algorithmicItems,
       algorithmicItemsById
-    }
-  } catch (error) {
-    //TODO: adjust this once error reporting strategy is defined.
-    console.log('topic-pages.topic-data.state', error)
-    return false
-  }
-}
-
-/**
- * fetchTopicData
- * Make and async request for a Pocket v3 feed and return best data
- * @return items {array} An array of derived items
- */
-export async function fetchSearchData(query) {
-  try {
-    const response = await getSearchFeed(query)
-
-    // Derive curated item data and create items by id
-    const { results = [] } = response
-    const derivedSearchItems = await deriveDiscoverItems(results)
-    const searchIds = derivedSearchItems.map(mapIds)
-    const searchItems = [...new Set(searchIds)] // Unique entries only
-    const searchItemsById = arrayToObject(derivedSearchItems, 'resolved_id')
-
-    return {
-      searchItems,
-      searchItemsById
     }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.

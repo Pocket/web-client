@@ -1,3 +1,25 @@
+# [1.12.0](https://github.com/Pocket/web-client/compare/v1.11.11...v1.12.0) (2021-05-03)
+
+
+### Bug Fixes
+
+* **collection:** use new layouts ([502e44d](https://github.com/Pocket/web-client/commit/502e44d047e0895d9e084ba2b19a43cddedb2309))
+* **deriver:** update to allow for old format ([6c923d7](https://github.com/Pocket/web-client/commit/6c923d752c4c581d7fc21ba85bca00aabace5c54))
+* **discover:** remove search ([dc7caac](https://github.com/Pocket/web-client/commit/dc7caac0281ccca7fb3bdd3656cee0cadd1c5ef4))
+* **discover:** update derivers ([36061b4](https://github.com/Pocket/web-client/commit/36061b4f62f162753fd19c7c634569b85f5c4cc5))
+* **discover:** use rex for discover home ([aa48818](https://github.com/Pocket/web-client/commit/aa48818b585f120b39057c8d27520454e5f35717))
+* **layout:** conditional bottom padding on offset ([5251cee](https://github.com/Pocket/web-client/commit/5251cee32e435db37319b783189567cb36004103))
+* **lineups:** publisher to syndicated data ([cb81e0a](https://github.com/Pocket/web-client/commit/cb81e0a3449d50e3856b020c4b9926ec76f1510d))
+* **recs:** hook up the new recs api ([54abd35](https://github.com/Pocket/web-client/commit/54abd353b12693383415d8a6c0a2c3970c482d6f))
+* **recs:** update the query and how its returned ([8e7232e](https://github.com/Pocket/web-client/commit/8e7232e877d0789f7f30343910e13d163f91c93b))
+* **store:** stop snowplow events flood in devtools ([aca0f5d](https://github.com/Pocket/web-client/commit/aca0f5df5b5555de3156ca813359543614b2c4d8))
+* **topics:** use new layouts on topic pages ([6171e10](https://github.com/Pocket/web-client/commit/6171e10f963b7925511e24a906e5e905d7bd17ba))
+
+
+### Features
+
+* **topics:** use rex api for topic pages ([446b45c](https://github.com/Pocket/web-client/commit/446b45c8ec061dd2c6aacd47eeb123f6afba4b82))
+
 ## [1.11.11](https://github.com/Pocket/web-client/compare/v1.11.10...v1.11.11) (2021-04-30)
 
 

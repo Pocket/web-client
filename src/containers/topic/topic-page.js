@@ -1,33 +1,16 @@
 import { useSelector } from 'react-redux'
-import { saveTopicItem, unSaveTopicItem } from './topic.state'
-import { trackItemOpen, trackItemImpression } from './topic.analytics'
 import { trackTopicClick } from './topic.analytics'
-import { trackUnAuthSave } from './topic.analytics'
 
 import { CardPageHeader } from 'components/headers/discover-header'
 import { SectionHeader } from 'components/headers/section-header'
-import { CardList } from 'components/items-layout/dynamic-blocks'
-import { DynamicCardLayout } from 'components/items-layout/dynamic-blocks'
 import { CardTopicsNav } from 'components/items-layout/topic-list'
+import { ItemCard } from 'connectors/item-card/discover/card'
+import { Lockup } from 'components/items-layout/list-lockup'
+import { OffsetList } from 'components/items-layout/list-offset'
 
-export default function TopicPage({
-  curatedItems,
-  algorithmicItems,
-  topic,
-  sharedActions
-}) {
+export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
   // Get topicList for sections that require it
   const topics = useSelector((state) => state.topicList?.topicsByName)
-
-  const actions = {
-    ...sharedActions,
-    saveAction: saveTopicItem,
-    unSaveAction: unSaveTopicItem,
-    openAction: trackItemOpen,
-    impressionAction: trackItemImpression,
-    topicClick: trackTopicClick,
-    unAuthSaveAction: trackUnAuthSave
-  }
 
   return (
     <>
@@ -39,10 +22,7 @@ export default function TopicPage({
       />
 
       {/* Curated */}
-      <DynamicCardLayout {...actions}>
-        {/* Top Lockup (left)*/}
-        <CardList type="lockupLeft" count={5} items={curatedItems} />
-      </DynamicCardLayout>
+      <Lockup items={curatedItems} offset={0} heroPosition="left" ItemCard={ItemCard} />
 
       <SectionHeader
         sectionTitle="Popular with Pocket readers"
@@ -51,23 +31,19 @@ export default function TopicPage({
       />
 
       {/* Algorithmic */}
-      <DynamicCardLayout {...actions} initialOffset={5}>
-        {/* Top List */}
-        <CardList type="list" count={5} items={algorithmicItems}>
-          {/* Top TopicNav (in rail / inline list) */}
-          <CardTopicsNav topics={topics} track={trackTopicClick} rail={true} />
-        </CardList>
+      <OffsetList items={algorithmicItems} offset={5} cardShape="wide" ItemCard={ItemCard}>
+        <CardTopicsNav topics={topics} track={trackTopicClick} rail={true} />
+      </OffsetList>
 
-        {/* Bottom List */}
-        <CardList
-          type="list"
-          items={algorithmicItems}
-          classNames={['no-border']}
-        />
+      <OffsetList
+        items={algorithmicItems}
+        offset={10}
+        count={15}
+        cardShape="wide"
+        ItemCard={ItemCard}
+      />
 
-        {/* Bottom TopicNav */}
-        <CardTopicsNav topics={topics} track={trackTopicClick} />
-      </DynamicCardLayout>
+      <CardTopicsNav topics={topics} track={trackTopicClick} />
     </>
   )
 }

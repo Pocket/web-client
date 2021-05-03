@@ -1,14 +1,20 @@
-import { request } from 'common/utilities/request/request'
+import { requestGQL } from 'common/utilities/request/request'
+import { TOPIC_IDS } from 'common/constants'
 
-/**
- * Get the explore home feed
- */
-export const getDiscoverFeed = (ssr) => {
-  return request({
-    path: 'v3/discover',
-    ssr,
-    params: {
-      count: 20
-    }
+import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
+
+export async function getDiscoverFeed(recommendationCount = 30) {
+  return requestGQL({
+    query: getSlateLineup,
+    variables: { id: TOPIC_IDS['explore'].id, recommendationCount }
   })
+    .then(processSlates)
+    .catch((error) => console.error(error))
+}
+
+function processSlates(response) {
+  const slates = response?.data?.getSlateLineup?.slates || []
+  const top = slates[0]?.recommendations
+  const bottom = slates[1]?.recommendations
+  return [...top, ...bottom]
 }

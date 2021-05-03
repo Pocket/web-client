@@ -16,8 +16,8 @@ export function deriveDiscoverItems(response) {
    */
   return response.map((feedItem) => {
     return {
-      resolved_id: feedItem.item?.resolved_id,
-      item_id: feedItem.item?.item_id,
+      resolved_id: feedItem.item?.resolved_id || feedItem.item?.resolvedId,
+      item_id: feedItem.item?.item_id || feedItem.item?.itemId,
       title: displayTitle(feedItem),
       thumbnail: displayThumbnail(feedItem),
       publisher: displayPublisher(feedItem),
@@ -29,7 +29,7 @@ export function deriveDiscoverItems(response) {
       original_url: originalUrl(feedItem),
       permanent_url: permanentUrl(feedItem),
       openExternal: openExternal(feedItem),
-      save_status: 'unsaved',
+      save_status: 'unsaved'
     }
   })
 }
@@ -43,13 +43,13 @@ export function deriveDiscoverItems(response) {
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {string} The most appropriate title to show
  */
-function displayTitle({ item, curated_info }) {
+function displayTitle({ item, curatedInfo, curated_info }) {
   return (
+    curatedInfo?.title ||
     curated_info?.title ||
     item?.title ||
-    item?.resolved_title ||
-    item?.given_title ||
-    item?.display_url ||
+    item?.normalUrl ||
+    item?.normal_url ||
     null
   )
 }
@@ -59,11 +59,12 @@ function displayTitle({ item, curated_info }) {
  * @returns {string:url} The most appropriate image to show as a thumbnail
  */
 
-function displayThumbnail({ item, curated_info }) {
+function displayThumbnail({ item, curatedInfo }) {
   const correct_image =
-    curated_info?.image_src ||
+    curatedInfo?.imageSrc ||
+    curatedInfo?.image_src ||
+    item?.topImageUrl ||
     item?.top_image_url ||
-    item?.image?.src ||
     item?.images?.[Object.keys(item.images)[0]]?.src ||
     false
   return correct_image ? correct_image : false
@@ -76,24 +77,38 @@ function displayThumbnail({ item, curated_info }) {
 function displayPublisher({ item }) {
   const urlToUse = saveUrl({ item })
   const derivedDomain = domainForUrl(urlToUse)
-  const syndicatedPublisher = item?.syndicated_article?.publisher?.name
-  return syndicatedPublisher || item?.domain_metadata?.name || item?.domain || derivedDomain || null
+  const syndicatedPublisher =
+    item?.syndicatedArticle?.publisher?.name || item?.syndicated_article?.publisher?.name
+  return (
+    syndicatedPublisher ||
+    item?.domainMetadata?.name ||
+    item?.domain_metadata?.name ||
+    item?.domain ||
+    derivedDomain ||
+    null
+  )
 }
 
 /** EXCERPT
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {string} The most appropriate excerpt to show
  */
-function displayExcerpt({ item, curated_info }) {
-  return curated_info?.excerpt || item?.excerpt || null
+function displayExcerpt({ item, curatedInfo, curated_info }) {
+  return curatedInfo?.excerpt || curated_info?.excerpt || item?.excerpt || null
 }
 
 /** OPEN URL
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {string} The url that should be saved or opened
  */
-function openUrl({ item, redirect_url }) {
-  return devLink(item) || redirect_url || item?.given_url || item?.resolved_url || null
+function openUrl({ item }) {
+  if (item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
+  if (item?.resolvedUrl) return urlWithPocketRedirect(item?.resolvedUrl)
+  if (item?.givenUrl) return urlWithPocketRedirect(item?.givenUrl)
+  if (item?.given_url) return urlWithPocketRedirect(item?.given_url)
+  if (item?.normalUrl) return urlWithPocketRedirect(item?.normalUrl)
+  if (item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
+  return false
 }
 
 /** SAVE URL
@@ -101,17 +116,21 @@ function openUrl({ item, redirect_url }) {
  * @returns {string} The url that should be saved or opened
  */
 function saveUrl({ item }) {
-  return item?.normal_url || item?.resolved_url || false
+  return item?.normalUrl || item?.normal_url || item?.resolvedUrl || item?.resolved_url || false
 }
 
 /** OPEN_ORIGINAL
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {string} The url that should be opened when visiting the live page
  */
- function originalUrl({ item }) {
-  if(item?.save_url) return urlWithPocketRedirect(item?.save_url)
-  if(item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
-  if(item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
+function originalUrl({ item }) {
+  if (item?.givenUrl) return urlWithPocketRedirect(item?.givenUrl)
+  if (item?.given_url) return urlWithPocketRedirect(item?.given_url)
+  if (item?.normalUrl) return urlWithPocketRedirect(item?.normalUrl)
+  if (item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
+  if (item?.resolvedUrl) return urlWithPocketRedirect(item?.resolvedUrl)
+  if (item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
+  return false
 }
 
 /** OPEN_PERMANENT
@@ -119,7 +138,9 @@ function saveUrl({ item }) {
  * @returns {string} The url for permanent library
  */
 function permanentUrl({ item }) {
-  return urlWithPermanentLibrary(item?.item_id) || false
+  if (item?.itemId) return urlWithPermanentLibrary(item?.itemId)
+  if (item?.item_id) return urlWithPermanentLibrary(item?.item_id)
+  return false
 }
 
 /** READ TIME
@@ -127,7 +148,9 @@ function permanentUrl({ item }) {
  * @returns {int} average number of minutes to read the item
  */
 function readTime({ item }) {
-  return item?.time_to_read || readTimeFromWordCount(item?.word_count) || null
+  const timeToRead = item?.timeToRead || item?.time_to_read
+  const wordCount = item?.wordCount || item?.word_count
+  return timeToRead || readTimeFromWordCount(wordCount) || null
 }
 
 /**
@@ -147,7 +170,7 @@ function readTimeFromWordCount(wordCount) {
  */
 const syndicated = function ({ item }) {
   if (!item) return false
-  return 'syndicated_article' in item
+  return 'syndicated_article' in item || typeof item?.syndicatedArticle !== 'undefined'
 }
 
 const devLink = function (item) {
@@ -167,5 +190,8 @@ function openExternal({ item }) {
   if (item?.has_video === '2') return false
   if (item?.has_image === '2') return false
   if (item?.is_article === '1') return false
+  if (item?.hasVideo === 'IS_VIDEO') return false // NO_VIDEOS || HAS_VIDEOS || IS_VIDEO
+  if (item?.hasImage === 'IS_IMAGE') return false // NO_IMAGES || HAS_IMAGES || IS_IMAGE
+  if (item?.isArticle) return false // Boolean
   return true
 }

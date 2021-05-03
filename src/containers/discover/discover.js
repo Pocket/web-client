@@ -72,13 +72,13 @@ export default function Discover({ url }) {
       {/* Top List */}
       <CardListHeading>Fascinating stories</CardListHeading>
 
-      <OffsetList items={items} offset={5} cardShape="wide" ItemCard={ItemCard} />
+      <OffsetList items={items} offset={5} cardShape="wide" ItemCard={ItemCard} border={true} />
 
       <Lockup items={items} offset={10} heroPosition="left" ItemCard={ItemCard} />
 
       <CalloutBottom shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
 
-      <OffsetList items={items} offset={15} cardShape="wide" ItemCard={ItemCard} />
+      <OffsetList items={items} offset={15} cardShape="wide" ItemCard={ItemCard} border={true} />
 
       <CardTopicsNav topics={topics} track={trackTopicClick} className="no-border" />
 
