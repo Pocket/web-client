@@ -62,10 +62,11 @@ export function TagSuggestions({
   suggestedTags,
   tags,
   addTag,
-  allTags
+  allTags,
+  since
 }) {
   // Loading if we don't have suggestedTags
-  if (!suggestedTags) return <Loading />
+  if (!suggestedTags || !since) return <Loading />
 
   // No suggestions and no user tags
   if (suggestedTags?.length === 0 && allTags.length === 0) return <StartTagging />

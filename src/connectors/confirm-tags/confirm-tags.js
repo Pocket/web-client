@@ -41,6 +41,7 @@ export function TaggingModal() {
   const itemsToTag = useSelector((state) => state.itemsToTag.itemList)
   const currentTags = useSelector((state) => state.itemsToTag.tags)
   const suggestedTags = useSelector((state) => state.itemsToTag.suggestedTags)
+  const since = useSelector((state) => state.userTags.since)
   const showModal = itemsToTag?.length > 0
 
   const allTags = useSelector((state) => state.userTags.tagsList)
@@ -183,6 +184,7 @@ export function TaggingModal() {
             tags={currentTags}
             addTag={addTag}
             allTags={allTags}
+            since={since}
           />
         ) : null}
       </ModalBody>
