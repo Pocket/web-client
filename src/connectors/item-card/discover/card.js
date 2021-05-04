@@ -1,7 +1,7 @@
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { ActionsDiscover } from './card-actions'
-
+import { setNoImage } from 'connectors/items-by-id/discover/items.state'
 import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
 import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
 
@@ -18,6 +18,7 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
   const { save_status, item_id, original_url, openExternal } = item
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : original_url
+  const onImageFail = () => dispatch(setNoImage(id))
 
   /**
    * ITEM TRACKING
@@ -30,6 +31,7 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
   return (
     <Card
       item={item}
+      onImageFail={onImageFail}
       position={position}
       className={className}
       cardShape={cardShape}

@@ -7,18 +7,32 @@ const cardMediaStyles = css`
   border-radius: var(--size025);
   overflow: hidden;
   padding-bottom: 1rem;
+  a,
+  .no-link {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding-bottom: 66.66%;
+  }
+
   img,
   .no-image {
-    aspect-ratio: 3 / 2;
+    position: absolute;
     object-fit: cover;
     width: 100%;
     height: auto;
+    min-height: 66.66%;
     transition-property: opacity;
     transition-duration: 0.2s;
     transition-timing-function: ease;
-    position: relative;
     overflow: hidden;
     border-radius: var(--borderRadius);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  .no-image {
     &:before {
       content: '';
       width: 100%;
@@ -56,7 +70,7 @@ export const CardMedia = function ({
   image_src,
   title,
   id,
-  setNoImage = () => {},
+  onImageFail = () => {},
   openUrl,
   onOpen,
   openExternal
@@ -94,16 +108,14 @@ export const CardMedia = function ({
     '--fallbackLetter': `'${letter}'`
   }
 
-  const imageFailure = () => setNoImage()
-
-  const MediaImage = (hasImage) => {
+  const MediaImage = () => {
     return hasImage ? (
       <img
         style={mediaFallbackDetails}
-        onError={imageFailure}
+        onError={onImageFail}
         alt=""
-        src={getImageCacheUrl(image_src, { width: 562, height: 368 })}
-        srcSet={` ${getImageCacheUrl(image_src, { width: 1124, height: 736 })} 2x `}
+        src={getImageCacheUrl(image_src, { width: 600, height: 400 })}
+        srcSet={` ${getImageCacheUrl(image_src, { width: 1200, height: 800 })} 2x `}
       />
     ) : (
       <div className="no-image" style={mediaFallbackDetails} />
@@ -123,7 +135,9 @@ export const CardMedia = function ({
           </a>
         </Link>
       ) : (
-        <MediaImage />
+        <span className="no-link">
+          <MediaImage />
+        </span>
       )}
     </div>
   )

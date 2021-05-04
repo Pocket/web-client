@@ -10,7 +10,7 @@ import { DISCOVER_ITEMS_SAVE_FAILURE } from 'actions'
 import { DISCOVER_ITEMS_UNSAVE_REQUEST } from 'actions'
 import { DISCOVER_ITEMS_UNSAVE_SUCCESS } from 'actions'
 import { DISCOVER_ITEMS_UNSAVE_FAILURE } from 'actions'
-
+import { DISCOVER_ITEMS_NO_IMAGE } from 'actions'
 import { HOME_TOPIC_SECTION_SUCCESS } from 'actions'
 import { HOME_SAVE_REQUEST } from 'actions'
 import { HOME_SAVE_SUCCESS } from 'actions'
@@ -25,6 +25,7 @@ import { HYDRATE } from 'actions'
 export const hydrateItems = (hydrated) => ({ type: DISCOVER_ITEMS_HYDRATE, hydrated }) //prettier-ignore
 export const saveItem = (id, url, analytics) => ({type: DISCOVER_ITEMS_SAVE_REQUEST, id, url, analytics}) //prettier-ignore
 export const unSaveItem = id => ({ type: DISCOVER_ITEMS_UNSAVE_REQUEST, id }) //prettier-ignore
+export const setNoImage = (id) => ({ type: DISCOVER_ITEMS_NO_IMAGE, id })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -70,6 +71,13 @@ export const discoverItemsReducers = (state = initialState, action) => {
     case HOME_UNSAVE_FAILURE: {
       const { id } = action
       return updateSaveStatus(state, id, 'saved')
+    }
+
+    case DISCOVER_ITEMS_NO_IMAGE: {
+      const { id } = action
+      const item = state[id]
+      const itemDraft = { ...item, noImage: true }
+      return { ...state, [id]: itemDraft }
     }
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
