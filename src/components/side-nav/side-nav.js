@@ -26,6 +26,7 @@ export const sideNavWrapper = css`
 
   a {
     text-decoration: none;
+    text-align: left;
   }
 
   &.disabled {
@@ -92,6 +93,7 @@ export const sideNavItem = css`
   margin-bottom: 5px;
   border-radius: 4px;
   text-decoration: none;
+  text-align: left;
   color: var(--color-textPrimary);
   background-color: transparent;
 

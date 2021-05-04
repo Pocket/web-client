@@ -27,6 +27,7 @@ export function TopicsSideNav({
             <a
               data-cy={`side-nav-${topic.topic_slug}`}
               href={`https://getpocket.com/explore/${topic.topic_slug}?src=sidebar`}
+              target={`_${topic.topic_slug}`}
               key={topic.topic_slug}>
               <button className={subActive(topic)} onClick={clickEvent}>
                 {topic.display_name}
