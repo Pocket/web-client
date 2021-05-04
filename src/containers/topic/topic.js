@@ -1,13 +1,12 @@
 import Layout from 'layouts/main'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import ErrorPage from 'pages/_error'
 import TopicCollection from './topic-collection'
 import TopicPage from './topic-page'
 import { trackPageView } from './topic.analytics'
-import ReportFeedbackModal from 'components/report-feedback-modal/report-feedback-modal'
-
+import { ReportFeedbackModal } from 'connectors/confirm-report/confirm-report'
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 
 export default function Topic(props) {
@@ -32,14 +31,6 @@ export default function Topic(props) {
   // Track Page View
   useEffect(trackPageView, [])
 
-  const [isOpen, setModalOpen] = useState(false)
-  const [itemToReport, setItemToReport] = useState(null)
-
-  const reportFeedbackItem = (item) => {
-    setItemToReport(item)
-    setModalOpen(true)
-  }
-
   // Error if no items are available
   if (!curatedItems?.length && !algorithmicItems?.length) {
     return <ErrorPage statusCode={statusCode} />
@@ -54,10 +45,6 @@ export default function Topic(props) {
     title: topic?.social_title
   }
 
-  const sharedActions = {
-    reportFeedbackAction: reportFeedbackItem
-  }
-
   return (
     <Layout title={`Pocket: ${title}`} metaData={topicMetaData}>
       {!isAuthenticated && shouldRender ? <CallOutBuildHome /> : null}
@@ -67,14 +54,8 @@ export default function Topic(props) {
         searchItems={searchItems}
         curatedItems={curatedItems}
         algorithmicItems={algorithmicItems}
-        sharedActions={sharedActions}
       />
-      <ReportFeedbackModal
-        isOpen={isOpen}
-        setModalOpen={setModalOpen}
-        itemToReport={itemToReport}
-        resetItem={() => setItemToReport(null)}
-      />
+      <ReportFeedbackModal />
     </Layout>
   )
 }

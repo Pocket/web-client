@@ -85,6 +85,7 @@ export function ShortCutsView({
               {listShortcuts.map(({ copy, keyCopy, premium }) => (
                 <ShortCutDisplay
                   copy={copy}
+                  key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
@@ -103,6 +104,7 @@ export function ShortCutsView({
               {itemActions.map(({ copy, keyCopy, premium }) => (
                 <ShortCutDisplay
                   copy={copy}
+                  key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
@@ -121,6 +123,7 @@ export function ShortCutsView({
               {readerShortcuts.map(({ copy, keyCopy, premium }) => (
                 <ShortCutDisplay
                   copy={copy}
+                  key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}

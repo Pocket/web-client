@@ -152,7 +152,7 @@ export const cardStyles = css`
   }
 
   &:focus-within .selectedBack,
-  &.selected .selectedBack {
+  &.selected:focus-within .selectedBack {
     background-color: var(--color-navCurrentTab);
     display: block;
   }
@@ -170,12 +170,19 @@ export const cardStyles = css`
 
     /* Hide actions on block cards only */
     &.hiddenActions {
-      .actions {
+      .actions button,
+      .actions a {
         display: none;
+        &.active {
+          display: flex;
+        }
       }
-      &:focus-within .actions,
-      &:hover .actions {
-        display: flex;
+      &:focus-within,
+      &:hover {
+        .actions button,
+        .actions a {
+          display: flex;
+        }
       }
     }
 
@@ -191,6 +198,10 @@ export const cardStyles = css`
         display: flex;
         justify-content: flex-end;
         padding: 0 0 1rem;
+        button,
+        a {
+          display: flex;
+        }
       }
 
       &:last-of-type {
@@ -250,6 +261,7 @@ export const cardStyles = css`
     .media {
       grid-column: span 1;
       padding-bottom: 0;
+      margin-bottom: 0;
     }
     .content {
       grid-column: span 11;

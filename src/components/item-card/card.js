@@ -27,6 +27,7 @@ import { useInView } from 'react-intersection-observer'
  * @param {boolean} props.showExcerpt  Show excerpt or not
  * @param {boolean} props.showMedia Show image or not
  * @param {boolean} props.hiddenActions Hide actions until hover or not
+ * @param {function} props.itemNoImage Action to fire if an item has no image
  * Tracking
  * @param {function} props.onItemInView Action to fire when item is in view
  * @param {function} props.onOpen Action to fire when an item is opened
@@ -50,6 +51,7 @@ export const Card = (props) => {
     showExcerpt,
     showMedia,
     hiddenActions,
+    onImageFail,
     // Tracking
     onItemInView,
     onOpenOriginalUrl,
@@ -57,7 +59,7 @@ export const Card = (props) => {
     // Actions
     ActionMenu,
     shortcutSelect,
-    bulkSelect
+    selectBulk
   } = props
 
   const {
@@ -70,7 +72,8 @@ export const Card = (props) => {
     read_time,
     openExternal,
     syndicated,
-    original_url
+    original_url,
+    noImage
   } = item
 
   const linkRef = useRef(null)
@@ -100,6 +103,7 @@ export const Card = (props) => {
 
   if (!item) return null
 
+  const itemImage = noImage ? '' : thumbnail
   /**
    * Layout is defined here.
    * ----------------------------------------------------------------
@@ -108,7 +112,7 @@ export const Card = (props) => {
     cardStyles,
     cardShape,
     className,
-    hiddenActions && 'hiddenActions',
+    hiddenActions && !bulkEdit && 'hiddenActions',
     !showExcerpt && 'noExcerpt',
     !showMedia && 'noMedia',
     bulkEdit && 'bulkEdit',
@@ -123,7 +127,7 @@ export const Card = (props) => {
       className={card}
       key={id}
       data-id={`article-card-${id}`}
-      onClick={bulkSelect}>
+      onClick={selectBulk}>
       <div className="selectedBack" />
 
       <FeatureFlag flag="item_id_overlay" dev={true}>
@@ -133,12 +137,14 @@ export const Card = (props) => {
       <div className="cardWrap" ref={viewRef}>
         {showMedia ? (
           <CardMedia
-            image_src={thumbnail}
+            image_src={itemImage}
             title={title}
             id={id}
             openUrl={openUrl}
             onOpen={onOpen}
             openExternal={openExternal}
+            onImageFail={onImageFail}
+            onFocus={handleFocus}
           />
         ) : null}
         <div className="content">
@@ -209,7 +215,7 @@ Card.propTypes = {
   onOpen: PropTypes.func,
   onOpenOriginalUrl: PropTypes.func,
   // Actions
-  ActionMenu: PropTypes.element,
+  ActionMenu: PropTypes.func,
   shortcutSelect: PropTypes.func,
   bulkSelect: PropTypes.func
 }
@@ -219,7 +225,7 @@ Card.defaultProps = {
   showExcerpt: false,
   showMedia: true,
   hiddenActions: false,
-
+  setNoImage: () => {},
   onItemInView: () => {},
   onOpen: () => {},
   onOpenOriginalUrl: () => {},

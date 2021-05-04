@@ -1,3 +1,26 @@
+## [1.12.3](https://github.com/Pocket/web-client/compare/v1.12.2...v1.12.3) (2021-05-04)
+
+
+### Bug Fixes
+
+* **actions:** active actons show in hidden mode ([b99ef44](https://github.com/Pocket/web-client/commit/b99ef443debca42ae9c0cb97972f4a9ca39bec2e))
+* **article:** allow update to use modified structure ([3a29f57](https://github.com/Pocket/web-client/commit/3a29f57c908721e66f4061581af657d75d36d7b7))
+* **card:** cross browser image fallbacks ([c5a5293](https://github.com/Pocket/web-client/commit/c5a5293b8e33483bb3887c3b3101b2823a5d3a01))
+* **card:** make selected less visually sticky ([e41c61a](https://github.com/Pocket/web-client/commit/e41c61ae5ab9d9d8385af0aa4d3d794d21336a52))
+* **media:** use old media for now ([a62ba96](https://github.com/Pocket/web-client/commit/a62ba962cfe567ecacc955e354a895dd42a8e24e))
+* **messages:** use universal card ([dee2706](https://github.com/Pocket/web-client/commit/dee2706dc76b82abea50edff2812da5384127ebc))
+* **my list:** bulk edit ([d566bbb](https://github.com/Pocket/web-client/commit/d566bbbdd9a668e5fa3dcb47f094fa3bff364349))
+* **my list:** remove extraneous styling ([963a4bc](https://github.com/Pocket/web-client/commit/963a4bcf483cb1e1c623af645916681bb374d8fc))
+* **my list:** update deriver ([bf5f7d4](https://github.com/Pocket/web-client/commit/bf5f7d4a4fe6fec37a34e9c1f3b749c4747ea28e))
+* **my-list:** add action labels translated ([89945e8](https://github.com/Pocket/web-client/commit/89945e880efc579e94b9d20ca43af220c9b53f4c))
+* **my-list:** universal card and updated actions ([7b0220a](https://github.com/Pocket/web-client/commit/7b0220a149fff30174309c1ad03defec3d5e6904))
+* **recents:** add key and description ([5a9c3fc](https://github.com/Pocket/web-client/commit/5a9c3fcbc9b2eb7a367326306b93d098d179a273))
+* **shortcuts:** add key to components ([637b7b4](https://github.com/Pocket/web-client/commit/637b7b4e57fcf7f6b02e5e759e32e9f5b57b09f3))
+* **social:** universal card for share / copy icon ([207b798](https://github.com/Pocket/web-client/commit/207b798ab055897a0d528e99eded9697cf67d072))
+* **tags:** use universal card for recent tagged ([92a6936](https://github.com/Pocket/web-client/commit/92a693608671d2205f942a3460a1ad860347402e))
+* **topics:** add lockups that got missed ([2848f5a](https://github.com/Pocket/web-client/commit/2848f5a3c5d939b9fb4171a0d720519247577de5))
+* **virtualized:** add proper heights ([1701a5f](https://github.com/Pocket/web-client/commit/1701a5ff78338726d53f844b63aad0e201b2d45b))
+
 ## [1.12.2](https://github.com/Pocket/web-client/compare/v1.12.1...v1.12.2) (2021-05-03)
 
 

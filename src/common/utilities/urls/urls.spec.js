@@ -34,7 +34,7 @@ describe('getImageCacheUrl', function () {
 
     assert.strictEqual(
       imageCache,
-      'https://pocket-image-cache.com//filters:no_upscale():format(jpg):extract_cover()/https%3A%2F%2Fi.picsum.photos%2Fid%2F10%2F2500%2F1667.jpg'
+      'https://pocket-image-cache.com//filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F10%2F2500%2F1667.jpg'
     )
   })
 
@@ -44,7 +44,7 @@ describe('getImageCacheUrl', function () {
 
     assert.strictEqual(
       redirect,
-      'https://pocket-image-cache.com//filters:no_upscale():format(jpg):extract_cover()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1012%2F3973%2F2639.jpg%3Fgrayscale'
+      'https://pocket-image-cache.com//filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1012%2F3973%2F2639.jpg%3Fgrayscale'
     )
   })
 
@@ -54,7 +54,7 @@ describe('getImageCacheUrl', function () {
 
     assert.strictEqual(
       redirect,
-      'https://pocket-image-cache.com/400x250/filters:no_upscale():format(jpg):extract_cover()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+      'https://pocket-image-cache.com/400x250/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
     )
   })
 
@@ -64,7 +64,7 @@ describe('getImageCacheUrl', function () {
 
     assert.strictEqual(
       redirect,
-      'https://pocket-image-cache.com/400x/filters:no_upscale():format(jpg):extract_cover()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+      'https://pocket-image-cache.com/400x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
     )
   })
 
@@ -74,7 +74,7 @@ describe('getImageCacheUrl', function () {
 
     assert.strictEqual(
       redirect,
-      'https://pocket-image-cache.com/x250/filters:no_upscale():format(jpg):extract_cover()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+      'https://pocket-image-cache.com/x250/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
     )
   })
 })

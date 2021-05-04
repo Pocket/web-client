@@ -20,7 +20,7 @@ export function getImageCacheUrl(url, imageSize) {
   const encodedURL = encodeURIComponent(url.replace(/'/g, '%27'))
   const urlParam = `${encodedURL}`
   const cacheURL = 'https://pocket-image-cache.com' //direct'
-  return `${cacheURL}/${resizeParam}/filters:no_upscale():format(jpg):extract_cover()/${urlParam}`
+  return `${cacheURL}/${resizeParam}/filters:format(jpg):extract_focal()/${urlParam}`
 }
 
 /**
@@ -31,9 +31,7 @@ export function getImageCacheUrl(url, imageSize) {
  */
 export function domainForUrl(url) {
   if (!url) return false
-  const match = url.match(
-    /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:/\n?=]+)/im
-  )
+  const match = url.match(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:/\n?=]+)/im)
 
   return match[1]
 }
