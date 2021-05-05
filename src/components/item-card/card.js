@@ -126,7 +126,7 @@ export const Card = (props) => {
       ref={articleRef}
       className={card}
       key={id}
-      data-id={`article-card-${id}`}
+      data-cy={`article-card-${id}`}
       onClick={selectBulk}>
       <div className="selectedBack" />
 
