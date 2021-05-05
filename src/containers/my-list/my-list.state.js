@@ -33,6 +33,7 @@ import { ITEMS_DELETE_SEND } from 'actions'
 import { ITEMS_DELETE_SUCCESS } from 'actions'
 import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
 import { ITEMS_ADD_SUCCESS } from 'actions'
+import { ITEMS_TAG_SUCCESS } from 'actions'
 
 import { MYLIST_SEARCH_REQUEST } from 'actions'
 import { MYLIST_SEARCH_CLEAR } from 'actions'
@@ -221,6 +222,7 @@ export const myListReducers = (state = initialState, action) => {
       return { ...state, ...hydrated }
     }
 
+    case ITEMS_TAG_SUCCESS:
     case ITEMS_ADD_SUCCESS: {
       return { ...state, listState: 'dirty' }
     }
