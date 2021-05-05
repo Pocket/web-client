@@ -23,6 +23,7 @@ export const MenuItem = ({
         // eslint-disable-next-line
         <a
           className={itemStyle}
+          data-cy={label}
           onClick={onClick}
           href={href}
           target="_blank"
@@ -33,7 +34,7 @@ export const MenuItem = ({
           {actionText ? <span className="actionText">{actionText}</span> : null}
         </a>
       ) : (
-        <button className={itemStyle} onClick={onClick} aria-label={label} data-tooltip={label}>
+        <button data-cy={label} className={itemStyle} onClick={onClick} aria-label={label} data-tooltip={label}>
           {icon ? icon : null}
           {actionText ? <span className="actionText">{actionText}</span> : null}
         </button>

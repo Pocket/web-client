@@ -1,3 +1,10 @@
+## [1.12.5](https://github.com/Pocket/web-client/compare/v1.12.4...v1.12.5) (2021-05-05)
+
+
+### Bug Fixes
+
+* **qa:** adding data-cy elements to card actions ([0044c0b](https://github.com/Pocket/web-client/commit/0044c0ba8cbdbe719fd595c503bc4fe310716e6e))
+
 ## [1.12.4](https://github.com/Pocket/web-client/compare/v1.12.3...v1.12.4) (2021-05-04)
 
 
