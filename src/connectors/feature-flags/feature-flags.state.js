@@ -49,7 +49,16 @@ export const featureSagas = []
 export async function fetchUnleashData(userId, sessionId, birth) {
   try {
     const response = await getUnleash(sessionId, userId, birth, 'web-client')
-    const unleashData = filterUnleashAssignments(response)
+
+    // Filter and derive proper test values from the unleash response
+    const filteredAssignments = await filterUnleashAssignments(response)
+
+    // Adjust those responses based on any override payloads we have sent down
+    const adjustedAssignments = await checkOverrides(filteredAssignments)
+
+    // Format the data to add to state
+    const unleashData = arrayToObject(adjustedAssignments, 'name')
+
     return unleashData
   } catch (error) {
     console.log(error)
@@ -82,7 +91,7 @@ async function filterUnleashAssignments(response) {
       }
     })
 
-  return arrayToObject(assignments, 'name')
+  return assignments
 }
 
 /**
@@ -108,4 +117,28 @@ export function checkActive(assigned, variant) {
   if (!variant || variant === 'disabled') return assigned // This is a straight toggle
   if (variantRegEx.test(variant)) return false
   return true
+}
+
+export function checkOverrides(assignments) {
+  // If we are assigned, active, and not in control for a test that has an override
+  // add the override name to this array
+  const overrides = assignments
+    .filter(
+      (test) =>
+        test?.assigned && test?.active && test?.variant !== 'control' && test.payload?.override
+    )
+    .map((test) => test.payload?.override)
+
+  // Loop through the assignments and if the override test name exists, make sure
+  // assigned, active, and variant are set to an off state which will stop this
+  // test from being tracked
+  const adjustedAssignments = assignments.map((test) => {
+    if (overrides.includes(test?.name)) {
+      return { ...test, assigned: false, active: false, variant: null }
+    }
+
+    return test
+  })
+
+  return adjustedAssignments
 }
