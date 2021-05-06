@@ -123,10 +123,7 @@ export function checkOverrides(assignments) {
   // If we are assigned, active, and not in control for a test that has an override
   // add the override name to this array
   const overrides = assignments
-    .filter(
-      (test) =>
-        test?.assigned && test?.active && test?.variant !== 'control' && test.payload?.override
-    )
+    .filter((test) => test?.assigned && test.payload?.override)
     .map((test) => test.payload?.override)
 
   // Loop through the assignments and if the override test name exists, make sure
