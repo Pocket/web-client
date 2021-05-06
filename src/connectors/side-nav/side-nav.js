@@ -28,7 +28,7 @@ export function SideNav({ subset, isLoggedIn, tag }) {
   const featureState = useSelector((state) => state.features)
 
   const showHome = featureFlagActive({ flag: 'home.retention', featureState })
-  const showLab = featureFlagActive({ flag: 'lab', featureState })
+  const showV2 = featureFlagActive({ flag: 'home.v2', featureState })
 
   const trackMenuClick = (label) => {
     dispatch(sendEngagementEvent(label))
@@ -45,7 +45,8 @@ export function SideNav({ subset, isLoggedIn, tag }) {
       tag={tag}
       newSaveCount={newSaveCount}
       showHome={showHome}
-      showLab={showLab}
+      showBookmark={showV2}
+      showTopics={showV2}
       flagsReady={flagsReady}
       trackMenuClick={trackMenuClick}
     />

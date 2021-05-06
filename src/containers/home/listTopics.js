@@ -111,7 +111,7 @@ export const HomeTopicsRow = ({ topic_slug, topic, count = 3 }) => {
   const dispatch = useDispatch()
 
   const featureState = useSelector((state) => state.features)
-  const showLab = featureFlagActive({ flag: 'lab', featureState })
+  const showV2 = featureFlagActive({ flag: 'home.v2', featureState })
 
   const topicItems = useSelector((state) => state.home[`${topic}Topic`])
   const displayItems = topicItems?.slice(0, count)
@@ -129,7 +129,7 @@ export const HomeTopicsRow = ({ topic_slug, topic, count = 3 }) => {
         topicSlug={topic_slug}
         sectionDescription={topicHeadings[topic]?.subtitle}
         clickEvent={clickEvent}
-        showLab={showLab}
+        showViewMore={showV2}
       />
       <section className={classnames(cardGrid, cardRowStyles)}>
         {displayItems?.length

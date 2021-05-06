@@ -31,7 +31,7 @@ export default function Collection(props) {
   const dispatch = useDispatch()
 
   const featureState = useSelector((state) => state.features)
-  const showLab = featureFlagActive({ flag: 'lab', featureState })
+  const showV2 = featureFlagActive({ flag: 'home.v2', featureState })
 
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
@@ -49,13 +49,13 @@ export default function Collection(props) {
       <SideNav subset="home" />
       {shouldRender ? (
         <main className="main">
-          {showLab ? <HomeGreeting /> : null}
+          {showV2 ? <HomeGreeting /> : null}
 
-          { !showLab ? <HomeRecentRecsList /> : null }
+          { !showV2 ? <HomeRecentRecsList /> : null }
 
           <TopicSelector />
 
-          <HomeTopicsList count={showLab ? 6 : 3} />
+          <HomeTopicsList count={showV2 ? 6 : 3} />
 
           <HomeCollectionList />
         </main>

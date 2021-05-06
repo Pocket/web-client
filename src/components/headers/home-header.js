@@ -98,14 +98,14 @@ export const HomeTopicHeader = ({
   sectionTitle,
   sectionDescription,
   clickEvent,
-  showLab
+  showViewMore
 }) => {
   return sectionTitle ? (
     <header className={cardPageHeaderStyle}>
       <h3 className="sectionTitle">{sectionTitle}</h3>
       <div className={cardPageSubheaderLinkStyle}>
         {sectionDescription ? <p>{sectionDescription}</p> : null}
-        {showLab ? (
+        {showViewMore ? (
           <a
             href={`https://getpocket.com/explore/${topicSlug}?src=home-view-more`}
             target="_topic"

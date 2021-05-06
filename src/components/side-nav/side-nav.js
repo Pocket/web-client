@@ -144,7 +144,8 @@ export function SideNav({
   isDisabled,
   newSaveCount,
   showHome,
-  showLab,
+  showBookmark,
+  showTopics,
   flagsReady,
   trackMenuClick
 }) {
@@ -193,7 +194,7 @@ export function SideNav({
             data-cy="side-nav-mylist">
             <ListViewIcon className="side-nav-icon" />{' '}
             <Trans i18nKey="nav:my-list">My List</Trans>
-            { showLab ? <BookmarkIcon newSaveCount={newSaveCount} /> : null }
+            { showBookmark ? <BookmarkIcon newSaveCount={newSaveCount} /> : null }
           </button>
         </Link>
         <a href="https://getpocket.com/explore?src=sidebar">
@@ -206,7 +207,7 @@ export function SideNav({
           </button>
         </a>
 
-        {subset === 'home' && showLab ? (
+        {subset === 'home' && showTopics ? (
           <TopicsSideNav
             subActive={subActive}
             pinnedTopics={pinnedTopics}
