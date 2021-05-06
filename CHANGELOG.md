@@ -1,3 +1,10 @@
+## [1.12.8](https://github.com/Pocket/web-client/compare/v1.12.7...v1.12.8) (2021-05-06)
+
+
+### Bug Fixes
+
+* **feature flags:** add ability to override a test ([b625772](https://github.com/Pocket/web-client/commit/b625772a9cd471e56a6aff32b10ee128928f3d33))
+
 ## [1.12.7](https://github.com/Pocket/web-client/compare/v1.12.6...v1.12.7) (2021-05-06)
 
 
