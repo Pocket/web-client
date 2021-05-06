@@ -170,7 +170,7 @@ function readTimeFromWordCount(wordCount) {
  */
 const syndicated = function ({ item }) {
   if (!item) return false
-  return 'syndicated_article' in item || typeof item?.syndicatedArticle !== 'undefined'
+  return 'syndicated_article' in item || !!item?.syndicatedArticle
 }
 
 const devLink = function (item) {
