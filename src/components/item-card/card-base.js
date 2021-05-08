@@ -89,6 +89,26 @@ export const cardStyles = css`
     color: var(--color-textSecondary);
   }
 
+  .authors {
+    padding-right: 0.625rem;
+    display: inline-block;
+    span:after {
+      content: ',';
+      display: inline-block;
+      padding: 0 0.5rem 0 0;
+    }
+    span:last-of-type:after {
+      content: '';
+      display: none;
+      padding: 0;
+    }
+    &:after {
+      content: '·';
+      display: inline-block;
+      padding: 0 0 0 0.625rem;
+    }
+  }
+
   .publisher {
     font-style: normal;
     padding: 0;
