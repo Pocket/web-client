@@ -2,6 +2,25 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
 import { Trans } from 'next-i18next'
+import { DiscoverIcon } from '@pocket/web-ui'
+import { ListViewIcon } from '@pocket/web-ui'
+
+export const DEFAULT_LINKS = [
+  {
+    name: 'discover',
+    id: 'global-nav-discover-link',
+    label: <Trans i18nKey="nav:discover">Discover</Trans>,
+    url: 'https://getpocket.com/explore?src=navbar',
+    icon: <DiscoverIcon />
+  },
+  {
+    name: 'my-list',
+    id: 'global-nav-my-list-link',
+    label: <Trans i18nKey="nav:my-list">My List</Trans>,
+    url: 'https://getpocket.com/my-list?src=navbar',
+    icon: <ListViewIcon />
+  }
+]
 
 const listStyle = css`
   display: flex;
@@ -140,20 +159,7 @@ GlobalNavLinks.propTypes = {
 }
 
 GlobalNavLinks.defaultProps = {
-  links: [
-    {
-      name: 'discover',
-      id: 'discover',
-      label: <Trans i18nKey="nav:discover">Discover</Trans>,
-      url: 'https://getpocket.com/explore?src=navbar'
-    },
-    {
-      name: 'my-list',
-      id: 'my-list',
-      label: <Trans i18nKey="nav:my-list">My List</Trans>,
-      url: 'https://getpocket.com/my-list?src=navbar'
-    }
-  ],
+  links: DEFAULT_LINKS,
   selectedLink: null,
   onLinkClick(event, linkName, linkUrl) {}
 }

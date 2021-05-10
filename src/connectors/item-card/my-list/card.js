@@ -31,6 +31,7 @@ export function ItemCard({ id, position, type }) {
   const shortcutId = useSelector((state) => state.shortcuts.currentId)
   const shortcutSelected = shortcutId === id
 
+  if (!item) return null
   const { openExternal, original_url } = item
   const openUrl = openExternal ? original_url : `/read/${id}`
 

@@ -14,31 +14,12 @@ import { screenLargeTablet } from '@pocket/web-ui'
 import { PageContainer } from '@pocket/web-ui'
 import { Logo } from '@pocket/web-ui'
 import { LogoMark } from '@pocket/web-ui'
-import { DiscoverIcon } from '@pocket/web-ui'
-import { ListViewIcon } from '@pocket/web-ui'
 import { useViewport } from '@pocket/web-ui'
 
 import GlobalNavLinks from './links/global-nav-links'
 import GlobalNavMobileMenu from './mobile/global-nav-mobile-menu'
 import GlobalNavTools from './tools/global-nav-tools'
 import GlobalNavAccount from './account/global-nav-account'
-
-export const DEFAULT_LINKS = [
-  {
-    name: 'discover',
-    id: 'global-nav-discover-link',
-    label: <Trans i18nKey="nav:discover">Discover</Trans>,
-    url: 'https://getpocket.com/explore?src=navbar',
-    icon: <DiscoverIcon />
-  },
-  {
-    name: 'my-list',
-    id: 'global-nav-my-list-link',
-    label: <Trans i18nKey="nav:my-list">My List</Trans>,
-    url: 'https://getpocket.com/my-list?src=navbar',
-    icon: <ListViewIcon />
-  }
-]
 
 const headerStyle = css`
   width: 100%;

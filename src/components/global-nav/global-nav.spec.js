@@ -2,7 +2,8 @@ import assert from 'assert'
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import GlobalNav, { DEFAULT_LINKS } from './global-nav'
+import GlobalNav from './global-nav'
+import { DEFAULT_LINKS } from './links/global-nav-links'
 
 const handleLinkClick = () => {}
 

@@ -5,14 +5,13 @@ import { css } from 'linaria'
 import classnames from 'classnames'
 import { Trans, useTranslation } from 'next-i18next'
 import {
-  DiscoverIcon,
-  ListViewIcon,
   PremiumIcon,
   MenuIcon,
   ChevronLeftIcon
 } from '@pocket/web-ui'
 import { Drawer } from '@pocket/web-ui'
 import { Button } from '@pocket/web-ui'
+import { DEFAULT_LINKS } from 'components/global-nav/links/global-nav-links'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 
 const premiumLinks = [
@@ -377,22 +376,7 @@ GlobalNavMobileMenu.propTypes = {
 }
 
 GlobalNavMobileMenu.defaultProps = {
-  links: [
-    {
-      name: 'discover',
-      id: 'global-nav-discover-link',
-      label: <Trans i18nKey="nav:discover">Discover</Trans>,
-      url: 'https://getpocket.com/explore?src=navbar',
-      icon: <DiscoverIcon />
-    },
-    {
-      name: 'my-list',
-      id: 'global-nav-my-list-link',
-      label: <Trans i18nKey="nav:my-list">My List</Trans>,
-      url: 'https://getpocket.com/my-list?src=navbar',
-      icon: <ListViewIcon />
-    }
-  ],
+  links: DEFAULT_LINKS,
   selectedLink: null,
   onLinkClick(event, linkName, linkUrl) {},
   onOpen() {},
