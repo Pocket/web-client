@@ -24,9 +24,9 @@ export const CollectionCard = ({ collection, position }) => {
   const item = {
     item_id: collection?.title,
     title: collection?.title,
-    thumbnail: collection?.image,
+    thumbnail: collection?.imageUrl,
     // publisher: collection?.curator,
-    excerpt: collection?.subtitle,
+    excerpt: collection?.intro,
     openExternal: true,
     original_url: collection?.url
   }
