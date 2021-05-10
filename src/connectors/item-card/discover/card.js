@@ -15,9 +15,9 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
 
   // Get data from state
   const item = useSelector((state) => state.discoverItemsById[id])
-  const { save_status, item_id, original_url, openExternal } = item
+  const { save_status, item_id, open_url, openExternal } = item
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
-  const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : original_url
+  const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : open_url
   const onImageFail = () => dispatch(setNoImage(id))
 
   /**

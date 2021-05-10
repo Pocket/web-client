@@ -124,12 +124,12 @@ function saveUrl({ item }) {
  * @returns {string} The url that should be opened when visiting the live page
  */
 function originalUrl({ item }) {
-  if (item?.givenUrl) return urlWithPocketRedirect(item?.givenUrl)
-  if (item?.given_url) return urlWithPocketRedirect(item?.given_url)
-  if (item?.normalUrl) return urlWithPocketRedirect(item?.normalUrl)
-  if (item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
-  if (item?.resolvedUrl) return urlWithPocketRedirect(item?.resolvedUrl)
-  if (item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
+  if (item?.givenUrl) return item?.givenUrl
+  if (item?.given_url) return item?.given_url
+  if (item?.normalUrl) return item?.normalUrl
+  if (item?.normal_url) return item?.normal_url
+  if (item?.resolvedUrl) return item?.resolvedUrl
+  if (item?.resolved_url) return item?.resolved_url
   return false
 }
 
