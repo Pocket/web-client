@@ -1,0 +1,982 @@
+{
+  "how-to-start-a-new-career": {
+    "data": {
+      "getCollectionBySlug": {
+        "slug": "how-to-start-a-new-career",
+        "title": "How To Start a New Career",
+        "intro": "Everything you need to know before you update your resume.",
+        "excerpt": "It’s never too early—or late—to consider your next act. We’ve brought together the best resources to help you explore new career paths, research pandemic-friendly industries, and draw inspiration from those who’ve pivoted successfully. ",
+        "authors": [
+          {
+            "name": "Amy Maoz",
+            "slug": "amy-maoz"
+          }
+        ],
+        "imageUrl": "https://pocket-syndicated-images.s3.amazonaws.com/5f99eb75864ed.png",
+        "url": "https://getpocket.com/explore/item/how-to-start-a-new-career",
+        "stories": [
+          {
+            "item_id": "11234abcd",
+            "title": "4 Rules for Identifying Your Life’s Work",
+            "url": "https://www.theatlantic.com/family/archive/2020/05/how-choose-fulfilling-career/611920/",
+            "excerpt": "What shape your professional path should take depends on how you define success.",
+            "authors": [
+              {
+                "name": "Arthur C. Brooks "
+              }
+            ],
+            "publisher": "The Atlantic",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f9a417990b24.png"
+          },
+          {
+            "item_id": "21234abcd",
+            "title": "The Best Way to Follow Your Dreams Is by Keeping Your Day Job",
+            "url": "https://www.thecut.com/2017/04/the-best-way-to-follow-your-dreams-is-keeping-your-day-job.html",
+            "excerpt": "Having a safety net gives you the freedom and flexibility to take bigger risks.",
+            "authors": [
+              {
+                "name": "Brad Stulberg"
+              }
+            ],
+            "publisher": "The Cut",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f9a418d9487e.jpg"
+          },
+          {
+            "item_id": "31234abcd",
+            "title": "How to Gain Credibility When You Have Little Experience",
+            "url": "https://hbr.org/2017/10/how-to-gain-credibility-when-you-have-little-experience",
+            "excerpt": "Here are five common activities that you can do as a young professional to jump-start your career and catalyze your leadership trajectory.",
+            "authors": [
+              {
+                "name": "Andy Molinsky"
+              },
+              {
+                "name": "Jake Newfield"
+              }
+            ],
+            "publisher": "Harvard Business Review",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f9a4199cb2a9.jpg"
+          },
+          {
+            "item_id": "41234abcd",
+            "title": "How to Realistically Change Careers When Your Current Job Totally Drains You",
+            "url": "https://www.themuse.com/advice/how-to-realistically-change-careers-when-your-current-job-totally-drains-you",
+            "excerpt": "How do you tackle a major transition when your time is nil and your energy levels are already low?",
+            "authors": [
+              {
+                "name": "Melody J. Wilding "
+              }
+            ],
+            "publisher": "The Muse",
+            "thumbnail": "https://cms-assets.themuse.com/media/lead/_1200x630_crop_center-center_82_none/23106.jpg?mtime=1568831695"
+          },
+          {
+            "item_id": "51234abcd",
+            "title": "7 Steps To Rebrand Yourself for a Career Change",
+            "url": "https://www.fastcompany.com/40585926/7-steps-to-rebrand-yourself-for-a-career-change",
+            "excerpt": "Just because you don’t have experience in a new field doesn’t mean your skills aren’t valuable in that field. Here’s what to do before you make a move.",
+            "authors": [
+              {
+                "name": "Lisa Evans "
+              }
+            ],
+            "publisher": "Fast Company",
+            "thumbnail": "https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/wp-cms/uploads/2018/06/p-1-branding.jpg"
+          },
+          {
+            "item_id": "61234abcd",
+            "title": "Want to Switch Career Lanes (or Make a Total U-Turn)? Here’s How, Even When You’re Far on One Path",
+            "url": "https://www.wellandgood.com/changing-career-paths-how-to/",
+            "excerpt": "With some savvy strategizing and expectation management, you can have that dream job. Here’s how, according to a career coach.",
+            "authors": [
+              {
+                "name": "Amy Wilkinson "
+              }
+            ],
+            "publisher": "Well + Good",
+            "thumbnail": "https://www.wellandgood.com/wp-content/uploads/2019/01/RenewYear_FeatureImage_1400px-Getty-Images-Mauro-Grigollo.jpg"
+          },
+          {
+            "item_id": "71234abcd",
+            "title": "How To Do a Career Pivot, According To the Experts",
+            "url": "https://www.today.com/tmrw/how-do-career-pivot-according-experts-t190865",
+            "excerpt": "It’s never too late to go for your dream job.",
+            "authors": [
+              {
+                "name": "Julie Pennell "
+              }
+            ],
+            "publisher": "Today",
+            "thumbnail": "https://media2.s-nbcnews.com/j/newscms/2021_02/1660047/pivot-career-jc-210111_e41437acc7574cc8f0e1342fc1c42903.social_share_1200x630_center.png"
+          },
+          {
+            "item_id": "81234abcd",
+            "title": "From Passion To Profit: How To Make Money Doing What You Love",
+            "url": "https://getpocket.com/explore/item/from-passion-to-profit-how-to-make-money-doing-what-you-love",
+            "excerpt": "These people used technology to turn their passions into careers. Here’s what they learned along the way.",
+            "authors": [
+              {
+                "name": "Elizabeth Segran "
+              }
+            ],
+            "publisher": "Fast Company",
+            "thumbnail": "https://pocket-image-cache.com/1200x/filters:no_upscale():format(jpg):extract_cover()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F1557%2F1619227084_GettyImages-1255377948.jpg"
+          },
+          {
+            "item_id": "91234abcd",
+            "title": "Reinventing Your Career in the Time of Coronavirus",
+            "url": "https://hbr.org/2020/04/reinventing-your-career-in-the-time-of-coronavirus",
+            "excerpt": "How do we balance the pressing need to ensure basic survival — of our families and firms — with what may well be a growing urge to do something new after this crisis has subsided?",
+            "authors": [
+              {
+                "name": "Herminia Ibarra Harvard "
+              }
+            ],
+            "publisher": "Business Review",
+            "thumbnail": "https://hbr.org/resources/images/article_assets/2020/04/Apr20_27_1165397961.jpg"
+          },
+          {
+            "item_id": "101234abcd",
+            "title": "How to Switch Careers Even if You Think It’s Impossible",
+            "url": "https://money.com/switch-careers-advice-covid/",
+            "excerpt": "The current recession is also an opportunity to zoom out on the bigger picture.",
+            "authors": [
+              {
+                "name": "Paul Schrodt "
+              }
+            ],
+            "publisher": "Money",
+            "thumbnail": "https://img.money.com/2020/09/money_t_a-copy.jpg?quality=85"
+          },
+          {
+            "item_id": "111234abcd",
+            "title": "Want To Get—and Stay—Employed Through 2030? 10 Jobs To Consider",
+            "url": "https://ideas.ted.com/want-to-get-and-stay-employed-through-2030-10-jobs-to-consider/",
+            "excerpt": "It’s an understandably disorienting time — but it’s also one in which new careers and jobs are emerging.",
+            "authors": [
+              {
+                "name": "Kara Cutruzzula "
+              }
+            ],
+            "publisher": "TED Ideas",
+            "thumbnail": "https://ideas.ted.com/wp-content/uploads/sites/3/2020/07/final_10-jobs-of-the-future_2000px.jpg"
+          }
+        ]
+      }
+    }
+  },
+  "how-to-talk-to-people-you-disagree-with": {
+    "data": {
+      "getCollectionBySlug": {
+        "slug": "how-to-talk-to-people-you-disagree-with",
+        "title": "How to Talk to People You Disagree With",
+        "intro": "Bridge the divide with thoughtful conversation techniques, next-level listening, and a dip into the science of changing minds.",
+        "excerpt": "In polarized times, it’s tempting to retreat further into our echo chambers. Instead, consider how much we all have to gain by connecting with those who see things differently than we do. We’ve brought together some of the best advice on how to have a productive conversation with someone you disagree with, as well as proven tips for how to change someone’s mind, and the science behind how our brains process different methods of persuasion.<br/><br/>Whether you’re trying to see eye to eye with a colleague, repair a relationship, or attempt to untangle a loved one’s problematic beliefs, our guide will arm you with the techniques you need.",
+        "authors": [
+          {
+            "name": "Amy Maoz",
+            "slug": "amy-maoz"
+          }
+        ],
+        "imageUrl": "https://pocket-syndicated-images.s3.amazonaws.com/600b270be8f92.png",
+        "url": "https://getpocket.com/explore/item/how-to-talk-to-people-you-disagree-with",
+        "stories": [
+          {
+            "item_id": "ab1",
+            "title": "How to Listen — Really Listen — to Someone You Don’t Agree With",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Tania Israel"
+              }
+            ],
+            "publisher": "TED",
+            "excerpt": "Listening may not be the most exciting part of conversation, but it’s essential if you want to have a meaningful exchange with another person.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2aee423ee.jpg"
+          },
+          {
+            "item_id": "ab2",
+            "title": "How to Find Common Ground When It Seems Impossible",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Gwen Moran"
+              }
+            ],
+            "publisher": "Fast Company",
+            "excerpt": "Sometimes, workplace conflict seems insurmountable. Here’s how to get to a place of agreement.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2af20ec52.png"
+          },
+          {
+            "item_id": "ab3",
+            "title": "How to Stop Getting Defensive",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Ellen Hendriksen, Ph.D."
+              }
+            ],
+            "publisher": "Psychology Today",
+            "excerpt": "Learn graceful ways to cope with feeling defensive.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2af602d5b.png"
+          },
+          {
+            "item_id": "ab4",
+            "title": "How to Change a Mind",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Eleanor Gordon-Smith"
+              }
+            ],
+            "publisher": "Forge",
+            "excerpt": "Missy spent more than five years getting her husband to leave a cult, but the breakthrough was simple.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2afe236ad.png"
+          },
+          {
+            "item_id": "ab5",
+            "title": "Conversations on Polarizing Topics Are Possible. If You’re Up for It, Here’s How to Start",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Caitlyn Finton"
+              }
+            ],
+            "publisher": "Behavioral Scientist",
+            "excerpt": "Although they make me feel like I’m treading on thin ice, these difficult conversations are important to have.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2afed631a.jpg"
+          },
+          {
+            "item_id": "ab6",
+            "title": "Why Hostility Can Bring People Closer Together",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Francesca Gino"
+              }
+            ],
+            "publisher": "Scientific American",
+            "excerpt": "“Hostile mediators“ can be a surprisingly powerful tool in resolving conflict.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2b9729361.jpg"
+          },
+          {
+            "item_id": "ab7",
+            "title": "How to (Actually) Change Someone’s Mind",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Laura Huang"
+              },
+              {
+                "name": "Ryan Yu"
+              }
+            ],
+            "publisher": "Harvard Business Review",
+            "excerpt": "Much of leadership boils down to turning adversaries into allies.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2b0895f8c.jpg"
+          },
+          {
+            "item_id": "ab8",
+            "title": "How to Talk to Friends With Different Political Views",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Sarah Levy"
+              }
+            ],
+            "publisher": "Teen Vogue",
+            "excerpt": "Here’s some advice on how to go about it.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2b0f0786b.png"
+          },
+          {
+            "item_id": "ab9",
+            "title": "How Therapists Talk To Their Family Members With Different Political Views",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Brittany Wong"
+              }
+            ],
+            "publisher": "Huffington Post",
+            "excerpt": "How to avoid a big argument about politics with your loved ones.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2b11c6a75.png"
+          },
+          {
+            "item_id": "ab10",
+            "title": "Keeping It Civil: How To Talk Politics Without Letting Things Turn Ugly",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Caroline Kelly"
+              }
+            ],
+            "publisher": "NPR",
+            "excerpt": "Talking about controversial topics with your political opposite can feel like an exercise in futility. One tip, experts say, is to establish common ground as quickly as you can.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2b169f660.jpg"
+          },
+          {
+            "item_id": "ab11",
+            "title": "How Political Opinions Change",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Philip Pärnamets and Jay Van Bavel"
+              }
+            ],
+            "publisher": "Scientific American",
+            "excerpt": "A clever experiment shows it's surprisingly easy to change someone’s political views, revealing how flexible we are.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2b386028d.jpg"
+          },
+          {
+            "item_id": "ab12",
+            "title": "Why Facts Don’t Change Our Minds",
+            "url": "something",
+            "authors": [
+              {
+                "name": "James Clear"
+              }
+            ],
+            "publisher": "",
+            "excerpt": "Truth and accuracy are not the only things that matter to the human mind. Humans also seem to have a deep desire to belong.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2b4925814.png"
+          },
+          {
+            "item_id": "ab13",
+            "title": "Can Empathy Bridge Political Divides?",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Alex Shashkevich"
+              }
+            ],
+            "publisher": "Greater Good",
+            "excerpt": "Yes, says sociologist Robb Willer—but the effort needs to be respectful and mutual.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2b4dd231f.jpg"
+          },
+          {
+            "item_id": "ab14",
+            "title": "How to Talk Someone Out of Bigotry",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Brian Resnick"
+              }
+            ],
+            "publisher": "Vox",
+            "excerpt": "These scientists keep proving that reducing prejudice is possible. It’s just not easy.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2b5bb0603.png"
+          },
+          {
+            "item_id": "ab15",
+            "title": "How Twitter Helped Change The Mind Of A Westboro Baptist Church Member [LISTEN]",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Terry Gross"
+              }
+            ],
+            "publisher": "NPR",
+            "excerpt": "“I started to feel like I was becoming part of this community on Twitter. And that was the first time that I really felt ashamed of what I was doing.”",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2b5c9360a.jpg"
+          },
+          {
+            "item_id": "ab16",
+            "title": "We Need to Talk About Talking About QAnon",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Whitney Phillips"
+              }
+            ],
+            "publisher": "Wired",
+            "excerpt": "Not talking about it is no longer an option, so we need to find a way to talk about it better.",
+            "imageURL": "https://pocket-syndicated-images.s3.amazonaws.com/600b2b6074d99.jpg"
+          }
+        ]
+      }
+    }
+  },
+  "10-incredible-long-reads-that-ll-transport-you-to-another-time-and-place": {
+    "data": {
+      "getCollectionBySlug": {
+        "slug": "10-incredible-long-reads-that-ll-transport-you-to-another-time-and-place",
+        "item_id": "ab17",
+        "title": "10 Incredible Long-Reads That’ll Transport You to Another Time and Place",
+        "intro": "There’s nothing like getting lost in a fascinating story — and now is a better time than any to dive into another world.",
+        "excerpt": "There’s nothing like getting lost in a fascinating story — and now is a better time than any to dive into another world. From the gripping account of a 64-year-old woman who swam from Florida to Cuba to the mysterious life of a hermit who lived in the woods undisturbed for 30 years — you won’t be able to put these articles down.",
+        "authors": [
+          {
+            "name": "Mary O'Regan",
+            "slug": "mary-o-regan"
+          }
+        ],
+        "imageUrl": "https://pocket-image-cache.com/direct?resize=w2000&url=https%3A%2F%2Fblog.getpocket.com%2Fwp-content%2Fuploads%2F2020%2F04%2Fnice-blog-1200x643.png",
+        "url": "https://getpocket.com/explore/item/10-incredible-long-reads-that-ll-transport-you-to-another-time-and-place",
+        "stories": [
+          {
+            "item_id": "ab18",
+            "title": "The Strange & Curious Tale of the Last True Hermit",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Michael Finkel"
+              }
+            ],
+            "publisher": "GQ ",
+            "excerpt": "For nearly thirty years, a phantom haunted the woods of Central Maine. Unseen and unknown, he lived in secret, creeping into homes in the dead of night and surviving on what he could steal.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f11ceccc82cb.png"
+          },
+          {
+            "item_id": "ab19",
+            "title": "How I Became A Minor Celebrity In China (After My Stolen Phone Ended Up There)",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Matt Stopera"
+              }
+            ],
+            "publisher": "BuzzFeed ",
+            "excerpt": "This really weird thing happened to me. Then it got even weirder. Then it turned insane. Do I have a story for you.",
+            "thumbnail": "https://pocket-image-cache.com/direct?resize=w2000&url=https%3A%2F%2Fblog.getpocket.com%2Fwp-content%2Fuploads%2F2020%2F04%2FScreen-Shot-2020-04-17-at-11.41.43-AM-600x600.png"
+          },
+          {
+            "item_id": "ab20",
+            "title": "The Case of the Stolen Ruby Slippers",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Elizabeth Evitts Dickinson"
+              }
+            ],
+            "publisher": "The Washington Post Magazine ",
+            "excerpt": "How a big crime in a small town produced a whodunit as gripping and colorful as “The Wizard of Oz” itself.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f3184d00bf56.jpg"
+          },
+          {
+            "item_id": "ab21",
+            "title": "Jerry and Marge Go Large",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Jason Fagone"
+              }
+            ],
+            "publisher": "HuffPost ",
+            "excerpt": "Gaming the lottery seemed as good a retirement plan as any.",
+            "thumbnail": "https://pocket-image-cache.com/direct?resize=w2000&url=https%3A%2F%2Fblog.getpocket.com%2Fwp-content%2Fuploads%2F2020%2F04%2Fjerry-600x434.jpg"
+          },
+          {
+            "item_id": "ab22",
+            "title": "The Man Who Walked Backwards",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Ben Montgomery"
+              }
+            ],
+            "publisher": "Texas Monthly",
+            "excerpt": "When the Great Depression put Plennie Wingo’s Texas cafe out of business, he tried to find fame and fortune by embarking on an audacious trip around the world on foot. In reverse.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f3185031592e.jpg"
+          },
+          {
+            "item_id": "ab23",
+            "title": "Breaking the Waves",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Ariel Levy"
+              }
+            ],
+            "publisher": "The New Yorker",
+            "excerpt": "In her sixties, a swimmer revives an old dream: to swim from Florida to Cuba—111 miles—no matter how many curious sharks and stinging jellyfish get in her way.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f3185366dd49.png"
+          },
+          {
+            "item_id": "ab24",
+            "title": "In Search of the Heart of the Online Cat-Industrial Complex",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Gideon Lewis-Kraus"
+              }
+            ],
+            "publisher": "Wired",
+            "excerpt": "If you want to know why the Internet chose cats, you must go to Japan.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f31855ad750b.png"
+          },
+          {
+            "item_id": "ab25",
+            "title": "We’re All In This Together",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Caity Weaver"
+              }
+            ],
+            "publisher": "The New York Times Magazine ",
+            "excerpt": "Tell your fellow Americans that you plan to cross the United States by train, and their reactions will range from amusement at your spellbinding eccentricity to naked horror.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f31858152155.png"
+          },
+          {
+            "item_id": "ab26",
+            "title": "Framed: A Mystery in Six Parts",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Christopher Goffard"
+              }
+            ],
+            "publisher": "Los Angeles Times ",
+            "excerpt": "She was the PTA mom everyone knew. Who would want to harm her?",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f31859e26f50.jpg"
+          },
+          {
+            "item_id": "ab27",
+            "title": "Bellagio Bandit: How One Man Robbed Vegas’ Biggest Casino and Almost Got Away",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Keith Romer"
+              }
+            ],
+            "publisher": "Rolling Stone ",
+            "excerpt": "Tony Carleo stole $1 million in chips – then checked himself into the casino’s hotel to live like a king.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f3185c548172.png"
+          }
+        ]
+      }
+    }
+  },
+  "how-to-write-almost-anything-from-a-great-joke-to-a-killer-cover-letter": {
+    "data": {
+      "getCollectionBySlug": {
+        "slug": "how-to-write-almost-anything-from-a-great-joke-to-a-killer-cover-letter",
+        "item_id": "ab28",
+        "title": "How to Write (Almost) Anything, From a Great Joke to a Killer Cover Letter",
+        "intro": "Whether you’re just looking to punch up your tweets or have ambitions to write the Great American Novel, we’ve got you covered.",
+        "excerpt": "There’s an old saying attributed to legendary sports journalist Red Smith: “There’s nothing to writing. All you do is sit down at a typewriter and open a vein.” The technology may have changed since the 1940s; the painful parts, unfortunately, haven’t. But that’s no reason for despair. Whether you’re just looking to punch up your tweets or have ambitions to write the Great American Novel, we’ve got you covered with this collection of great articles about the craft of writing, well, just about anything.",
+        "authors": [
+          {
+            "name": "Alex Dalenberg",
+            "slug": "alex-dalenberg"
+          }
+        ],
+        "imageUrl": "https://pocket-syndicated-images.s3.amazonaws.com/5f50ea7df2a5e.png",
+        "url": "https://getpocket.com/explore/item/how-to-write-almost-anything-from-a-great-joke-to-a-killer-cover-letter",
+        "stories": [
+          {
+            "item_id": "ab29",
+            "title": "How to Write the Perfect Sentence",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Joe Moran"
+              }
+            ],
+            "publisher": "The Guardian",
+            "excerpt": "Orwell advised cutting as many words as possible, Woolf found energy in verbs, and Baldwin aimed for ‘a sentence as clean as a bone’. What can we learn from celebrated authors about the art of writing well?",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f50f0cf8e772.png"
+          },
+          {
+            "item_id": "ab30",
+            "title": "How to Write a Jeopardy Clue",
+            "url": "something",
+            "authors": [
+              {
+                "name": "John Wenz"
+              }
+            ],
+            "publisher": "Popular Mechanics",
+            "excerpt": "What is, “very carefully?”",
+            "thumbnail": "https://pocket-image-cache.com/direct?resize=w2000&url=https%3A%2F%2Fblog.getpocket.com%2Fwp-content%2Fuploads%2F2020%2F09%2Fjeopardy-1521217203-600x339.jpg"
+          },
+          {
+            "item_id": "ab31",
+            "title": "A Linguist Explains How to Write Protest Signs That Everyone Will Remember",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Daniel Midgley"
+              }
+            ],
+            "publisher": "Quartz",
+            "excerpt": "When you make a protest sign, you’re working with considerable linguistic constraints.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f50f0d44c1f8.png"
+          },
+          {
+            "item_id": "ab32",
+            "title": "How to Write a Joke [VIDEO]",
+            "url": "something",
+            "authors": [
+              {
+                "name": "The New York Times"
+              }
+            ],
+            "publisher": "The New York Times",
+            "excerpt": "Jerry Seinfeld describes the anatomy of his Pop-Tart joke, still a work in progress, and shows his longhand writing process.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f50f0e944f6d.png"
+          },
+          {
+            "item_id": "ab33",
+            "title": "7 Expert-Approved Ways to Write a Better To-Do List",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Virginia Hughes"
+              }
+            ],
+            "publisher": "Mental Floss",
+            "excerpt": "Organizing tasks on paper is a tried and true method for getting things done. Here are some types of to-do lists that may be right for you.",
+            "thumbnail": "https://pocket-image-cache.com/direct?resize=w2000&url=https%3A%2F%2Fblog.getpocket.com%2Fwp-content%2Fuploads%2F2020%2F09%2F5d4c557a9ab07-600x416.jpg"
+          },
+          {
+            "item_id": "ab34",
+            "title": "How to Write a Poem",
+            "url": "something",
+            "authors": [
+              {
+                "name": "T. Rachel Cole"
+              }
+            ],
+            "publisher": "The Creative Independent",
+            "excerpt": "A guide to reading and writing poetry for people who don’t (yet) read or write poetry.",
+            "thumbnail": "https://pocket-image-cache.com/direct?resize=w2000&url=https%3A%2F%2Fblog.getpocket.com%2Fwp-content%2Fuploads%2F2020%2F09%2FHeader_1-600x329.png"
+          },
+          {
+            "item_id": "ab35",
+            "title": "How to Write Email with Military Precision",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Kabir Sehgal"
+              }
+            ],
+            "publisher": "Harvard Business Review",
+            "excerpt": "A few tips on how to quickly and clearly relay information and avoid miscommunication.",
+            "thumbnail": "https://pocket-image-cache.com/direct?resize=w2000&url=https%3A%2F%2Fblog.getpocket.com%2Fwp-content%2Fuploads%2F2020%2F09%2Fdirect-600x338.jpg"
+          },
+          {
+            "item_id": "ab36",
+            "title": "Perfect Thank You Notes: Heartfelt And Handwritten",
+            "url": "something",
+            "authors": [
+              {
+                "name": ""
+              }
+            ],
+            "publisher": "NPR Weekend Edition",
+            "excerpt": "Ten tips for writing the perfect thank you note from John Kralik, author of 365 Thank Yous.",
+            "thumbnail": "https://pocket-image-cache.com/direct?resize=w2000&url=https%3A%2F%2Fblog.getpocket.com%2Fwp-content%2Fuploads%2F2020%2F09%2Fthanks_custom-53b38742e001ba9eb918411b44f7bc25178d4fad-s700-c85-600x447.jpg"
+          },
+          {
+            "item_id": "ab37",
+            "title": "How to Write — and Read — Recipes Better",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Bonnie S. Benwick"
+              }
+            ],
+            "publisher": "Heated",
+            "excerpt": "It’s a two-way street toward clarity and comprehension.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f50f0f819683.jpeg"
+          },
+          {
+            "item_id": "ab38",
+            "title": "How to Write a Condolence Note",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Joanna Goddard "
+              }
+            ],
+            "publisher": "Cup of Jo",
+            "excerpt": "When a person is bereaved, the simple, sincere expressions of sympathy you write are deeply felt and appreciated. At this time of withdrawal from the world, your letter can be a warm and understanding handclasp.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f50f0fd7f43c.jpg"
+          },
+          {
+            "item_id": "ab39",
+            "title": "How to Write a Great Song, According to Singer-Songwriter Neko Case",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Emily VanDerWerff"
+              }
+            ],
+            "publisher": "Vox",
+            "excerpt": "“[Songwriting] is work. Experience, selection, taste. None of those things are something that happens to you. You’re not just an antenna.”",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f50f10676e9d.png"
+          },
+          {
+            "item_id": "ab40",
+            "title": "How to Write a Letter ",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Brett & Kate McKay"
+              }
+            ],
+            "publisher": "Art of Manliness",
+            "excerpt": "While email and texts have become the standard form of written communication in today’s fast-paced, digital world, there’s still a place for old-fashioned, snail mail letters.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f50f10a26aab.jpg"
+          },
+          {
+            "item_id": "ab41",
+            "title": "How to Write Genuinely Useful Reviews Online",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Alan Henry "
+              }
+            ],
+            "publisher": "Lifehacker",
+            "excerpt": "The best online reviews offer up the kind of information that’s invaluable when making a decision.",
+            "thumbnail": "https://pocket-image-cache.com/direct?resize=w2000&url=https%3A%2F%2Fblog.getpocket.com%2Fwp-content%2Fuploads%2F2020%2F09%2FScreen-Shot-2020-09-01-at-2.42.43-PM-600x338.png"
+          },
+          {
+            "item_id": "ab42",
+            "title": "How to Write a Cover Letter That Will Get You a Job",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Alison Green"
+              }
+            ],
+            "publisher": "The Cut",
+            "excerpt": "Ten personalized, compelling cover letters are likely to get you far more interview invitations than 50 generic ones will.",
+            "thumbnail": "https://pocket-image-cache.com/direct?resize=w2000&url=https%3A%2F%2Fblog.getpocket.com%2Fwp-content%2Fuploads%2F2020%2F09%2F9b377014de088ea7cfd990ae038f565eae-13-cover-letter-art.rhorizontal.w700-600x400.jpg"
+          },
+          {
+            "item_id": "ab43",
+            "title": "How to Write a Killer Commencement Speech",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Kara Alaimo"
+              }
+            ],
+            "publisher": "Bloomberg",
+            "excerpt": "Be personal. Be clear-sighted. And don’t be afraid to laugh at yourself.",
+            "thumbnail": "https://pocket-image-cache.com/direct?resize=w2000&url=https%3A%2F%2Fblog.getpocket.com%2Fwp-content%2Fuploads%2F2020%2F09%2F1800x-1-600x403.jpg"
+          },
+          {
+            "item_id": "ab44",
+            "title": "How to Write a Bestselling Novel",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Emma Cook "
+              }
+            ],
+            "publisher": "The Guardian",
+            "excerpt": "Everyone has a book in them, but how do you get it out? Here are some great tips from the ‘book doctor’ Philippa Pride.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f50f12f65222.png"
+          },
+          {
+            "item_id": "ab45",
+            "title": "How to Write a Book Without Losing Your Mind",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Olga Khazan"
+              }
+            ],
+            "publisher": "The Atlantic",
+            "excerpt": "Expert advice on ending procrastination and finishing that manuscript, dissertation, or other big project.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5f50f132e7b3c.jpg"
+          },
+          {
+            "item_id": "ab46",
+            "title": "How to Write 10,000 Words a Week",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Drew Magary"
+              }
+            ],
+            "publisher": "Forge",
+            "excerpt": "The most productive writers know that writing is only one step in a larger process.",
+            "thumbnail": "https://pocket-image-cache.com/direct?resize=w2000&url=https%3A%2F%2Fblog.getpocket.com%2Fwp-content%2Fuploads%2F2020%2F09%2F10IvxT3wEuzY6KO64cAi-EA-600x375.png"
+          }
+        ]
+      }
+    }
+  },
+  "what-everyone-can-learn-from-introverts": {
+    "data": {
+      "getCollectionBySlug": {
+        "slug": "what-everyone-can-learn-from-introverts",
+        "item_id": "ab47",
+        "title": "What Everyone Can Learn from Introverts",
+        "intro": "The workplace is changing. Your introverted colleagues have some ideas on how you can keep up.",
+        "excerpt": "Historically, the workplace has been set up in a way for extroverts to thrive. Now, with record numbers of office workers punching in from home, often on their own, there’s an opportunity to find success in new ways and tap into different aspects of our personalities.",
+        "authors": [
+          {
+            "name": "Amy Maoz",
+            "slug": "amy-maoz"
+          }
+        ],
+        "imageUrl": "https://pocket-syndicated-images.s3.amazonaws.com/5fd2748b702c7.png",
+        "url": "https://getpocket.com/explore/item/what-we-can-learn-from-introverts",
+        "stories": [
+          {
+            "item_id": "ab48",
+            "title": "Introvert Isle",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Laurie Helgoe Ph.D."
+              }
+            ],
+            "publisher": "Psychology Today",
+            "excerpt": "How Japan made me feel more at home than home.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5fd26dc864664.JPG"
+          },
+          {
+            "item_id": "ab49",
+            "title": "Your Hidden Personality [LISTEN]",
+            "url": "something",
+            "authors": [
+              {
+                "name": "WorkLife with Adam Grant"
+              }
+            ],
+            "publisher": "TED",
+            "excerpt": "You might not know yourself as well as you think.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5fd26dc994b83.png"
+          },
+          {
+            "item_id": "ab50",
+            "title": "Have You Ever Felt That You’re in the Wrong Place in Your Career, in Your Life? ",
+            "url": "something",
+            "authors": [
+              {
+                "name": "David Epstein"
+              }
+            ],
+            "publisher": "Quiet Revolution",
+            "excerpt": "Our work preferences and our life preferences do not stay the same, because we do not stay the same.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5fd26dce80736.jpg"
+          },
+          {
+            "item_id": "ab51",
+            "title": "How to Create Introvert-Friendly Workplaces During and Post Covid-19",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Jennifer Kahnweiler"
+              }
+            ],
+            "publisher": "Thrive Global",
+            "excerpt": "These seven key organizational practices will help to create more introvert-inclusive cultures and work practices.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5fd26dd42ba0d.png"
+          },
+          {
+            "item_id": "ab52",
+            "title": "An Introvert’s Advice for Networking",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Karen Wickre"
+              }
+            ],
+            "publisher": "TED Ideas",
+            "excerpt": "Self-described introvert and veteran tech executive Karen Wickre shares her secret to cultivating professional connections with a minimum of anxiety and awkwardness.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5fd26dd70861d.jpg"
+          },
+          {
+            "item_id": "ab53",
+            "title": "Hard Work Isn’t Enough: How To Find Your Edge?",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Dina Gerdeman"
+              }
+            ],
+            "publisher": "Working Knowledge",
+            "excerpt": "A new strategy for uncovering and showcasing your unique value in the face of obstacles.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5fd26dd963cca.jpg"
+          },
+          {
+            "item_id": "ab54",
+            "title": "Introverts, Extroverts, and the Complexities of Team Dynamics",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Francesca Gino"
+              }
+            ],
+            "publisher": "Harvard Business Review",
+            "excerpt": "Most workplaces are set up exclusively with extroverts in mind, a fact that becomes clear when you look at traits associated with the two personality types.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5fd26e933e41f.jpg"
+          },
+          {
+            "item_id": "ab55",
+            "title": "Yes, Even Introverts Can Be Lonely Right Now",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Adam Grant"
+              }
+            ],
+            "publisher": "The New York Times",
+            "excerpt": "Introverts crave connection, too — we just need more boundaries.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5fd26de11ccb3.png"
+          },
+          {
+            "item_id": "ab56",
+            "title": "Here’s How Ambitious Introverts Are Secret Weapons in Negotiations",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Tanya Tarr"
+              }
+            ],
+            "publisher": "Forbes",
+            "excerpt": "“Ambition is not limited by personality type.”",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5fd26de2c69b0.jpg"
+          },
+          {
+            "item_id": "ab57",
+            "title": "How Introverts Flourish at Work with Morra Aarons-Mele [LISTEN]",
+            "url": "something",
+            "authors": [
+              {
+                "name": "How to be Amazing at Your Job"
+              }
+            ],
+            "publisher": " ",
+            "excerpt": "Morra Aarons-Mele provides tips for the ambitious introvert to succeed at work and strategies on how extroverts and introverts can best work together.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5fd26df41a5ce.png"
+          },
+          {
+            "item_id": "ab58",
+            "title": "How International Students Succeed at U.S. Job Searches",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Nancy Ancowitz"
+              }
+            ],
+            "publisher": "Psychology Today",
+            "excerpt": "Introverts have unexpected advantages in even the toughest job markets.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5fd26e231ed7d.jpg"
+          },
+          {
+            "item_id": "ab59",
+            "title": "BONUS VIDEO: Quiet Is The New Superpower: Voices From The Introvert Revolution",
+            "url": "something",
+            "authors": [
+              {
+                "name": "Weaving Influence"
+              }
+            ],
+            "publisher": "",
+            "excerpt": "Join authors Jennifer Kahnweiler and Jill Chang as they share their insights into how to use your strengths as an introvert to become more successful within your career, and learn how to navigate extroverted settings without compromising comfort or personality.",
+            "thumbnail": "https://pocket-syndicated-images.s3.amazonaws.com/5fd26e7f5cc49.png"
+          }
+        ]
+      }
+    }
+  }
+}
