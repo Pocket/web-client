@@ -17,6 +17,8 @@ import { ITEMS_FAVORITE_FAILURE } from 'actions'
 import { ITEMS_UNFAVORITE_SUCCESS } from 'actions'
 import { ITEMS_UNFAVORITE_FAILURE } from 'actions'
 
+import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
+
 import { ITEMS_SHARE_SUCCESS } from 'actions'
 import { ITEMS_SHARE_FAILURE } from 'actions'
 
@@ -60,9 +62,10 @@ export const actionToastsReducers = (state = initialState, action) => {
     case ITEMS_TAG_FAILURE:
     case ADD_SHARE_SUCCESS:
     case ADD_SHARE_FAILURE:
+    case COLLECTIONS_SAVE_SUCCESS:
     case COPY_ITEM_URL: {
-      const { actions } = action
-      const itemCount = actions?.length
+      const { actions, count } = action
+      const itemCount = actions ? actions?.length : count
       const stamp = Date.now()
       return [...state, { stamp, type: action.type, itemCount }]
     }

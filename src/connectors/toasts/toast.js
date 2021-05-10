@@ -35,6 +35,8 @@ import { ITEMS_TAG_FAILURE } from 'actions'
 import { ADD_SHARE_SUCCESS } from 'actions'
 import { ADD_SHARE_FAILURE } from 'actions'
 
+import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
+
 const toastWrapper = css`
   text-align: left;
   width: 100%;
@@ -102,7 +104,8 @@ const messages = {
   [ITEMS_TAG_FAILURE]: 'error-tagging',
   [ADD_SHARE_SUCCESS]: 'added',
   [ADD_SHARE_FAILURE]: 'error-adding',
-  [COPY_ITEM_URL]: 'url-copied'
+  [COPY_ITEM_URL]: 'url-copied',
+  [COLLECTIONS_SAVE_SUCCESS]: 'added'
 }
 
 export function Toast({ stamp, type, itemCount = 1 }) {
@@ -112,10 +115,7 @@ export function Toast({ stamp, type, itemCount = 1 }) {
   const mount = () => setShow(true)
   const unmount = () => setShow(false)
 
-  const remove = useCallback(() => dispatch(clearToast(stamp)), [
-    stamp,
-    dispatch
-  ])
+  const remove = useCallback(() => dispatch(clearToast(stamp)), [stamp, dispatch])
 
   useEffect(() => {
     if (!show) return
