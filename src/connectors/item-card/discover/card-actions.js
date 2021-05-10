@@ -16,9 +16,9 @@ export function ActionsDiscover({ id, position }) {
 
   const isAuthenticated = useSelector((state) => state.user.auth)
   const item = useSelector((state) => state.discoverItemsById[id])
-  const { save_url, save_status, open_url, openExternal } = item
 
   if (!item) return null
+  const { save_url, save_status, open_url, openExternal } = item
 
   // Prep save action
   const onSave = () => {
