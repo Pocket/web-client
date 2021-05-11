@@ -151,6 +151,11 @@ export const cardStyles = css`
     padding: 0.125em 1.1em;
   }
 
+  &.selected .selectedBack {
+    background-color: var(--color-navCurrentTab);
+    display: block;
+  }
+
   &:focus-within .selectedBack,
   &.selected:focus-within .selectedBack {
     background-color: var(--color-navCurrentTab);
