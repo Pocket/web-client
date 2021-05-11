@@ -1,10 +1,16 @@
 import React from 'react'
-import { PopupMenuGroup } from '@pocket/web-ui'
+import { PopupMenuGroup, breakpointSmallHandset } from '@pocket/web-ui'
 import { css } from 'linaria'
 import { Trans } from 'next-i18next'
 
 const themeWrapper = css`
+  display: flex;
+  flex-direction: row;
   padding: 0 var(--spacing100);
+  
+  ${breakpointSmallHandset} {
+    flex-direction: column;
+  }
 `
 
 const themeRadioButtons = css`
