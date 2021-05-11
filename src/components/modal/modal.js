@@ -49,6 +49,7 @@ const modalMobileStyles = `
 const modalStyles = css`
   position: absolute;
   overflow: auto;
+  overflow-x: hidden;
   max-width: ${MODAL_MAX_WIDTH}px;
   padding: 0;
   background: var(--color-popoverCanvas);
