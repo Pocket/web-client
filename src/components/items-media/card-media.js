@@ -130,7 +130,7 @@ export const CardMedia = function ({
     <div className={`${cardMediaStyles} media`}>
       {openUrl ? (
         <Link href={openUrl ? openUrl : false}>
-          <a onClick={onOpen} target={openExternal ? '_blank' : undefined}>
+          <a tabindex="-1" onClick={onOpen} target={openExternal ? '_blank' : undefined}>
             <MediaImage />
           </a>
         </Link>

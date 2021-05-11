@@ -48,6 +48,21 @@ export const tooltipStyles = css`
     background-color: var(--color-tooltipCanvas);
     color: var(--color-tooltipText);
   }
+
+  /* Safari focus/active styles are super buggy
+   * and show focus outline around pseudo elements.
+   * Hide tooltip if button has focus/active */
+  &[data-tooltip]:active:before,
+  &[data-tooltip]:active:after,
+  &[data-tooltip]:focus:before,
+  &[data-tooltip]:focus:after {
+    display: none;
+  }
+  /* Re-show tooltip if hovering over focused element */
+  &[data-tooltip]:focus:hover:before,
+  &[data-tooltip]:focus:hover:after {
+    display: inline-block;
+  }
 `
 
 export const placementBottom = css`

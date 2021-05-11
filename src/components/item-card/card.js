@@ -72,7 +72,7 @@ export const Card = (props) => {
     read_time,
     openExternal,
     syndicated,
-    original_url,
+    open_url,
     noImage
   } = item
 
@@ -170,7 +170,7 @@ export const Card = (props) => {
               //eslint-disable-next-line
               <a
                 className="publisher"
-                href={original_url}
+                href={open_url}
                 target="_blank"
                 onClick={onOpenOriginalUrl}
                 tabIndex={0}>

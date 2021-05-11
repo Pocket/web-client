@@ -1,3 +1,35 @@
+## [1.12.15](https://github.com/Pocket/web-client/compare/v1.12.14...v1.12.15) (2021-05-11)
+
+
+### Bug Fixes
+
+* **card:** update focus states on card media, card when action is selected, and tooltip ([1a7809d](https://github.com/Pocket/web-client/commit/1a7809d22c4572c92474b5dde8a99d231eaed313))
+
+## [1.12.14](https://github.com/Pocket/web-client/compare/v1.12.13...v1.12.14) (2021-05-11)
+
+
+### Bug Fixes
+
+* **bulk edit:** allow selected state in bulk edit ([b6cb6bd](https://github.com/Pocket/web-client/commit/b6cb6bdeda5341c381358cea973706cba483cbb7))
+
+## [1.12.13](https://github.com/Pocket/web-client/compare/v1.12.12...v1.12.13) (2021-05-11)
+
+
+### Bug Fixes
+
+* **deriver:** make sure original url is pure ([cfa4755](https://github.com/Pocket/web-client/commit/cfa47558141eff654204fad51a67253556b51f8f))
+* **discover:**  check syndication on open external ([b8f6acb](https://github.com/Pocket/web-client/commit/b8f6acb3c082e5e5cc00d915f4361b45d6af5223))
+* **discover:** publisher click to open_url ([7de1c7c](https://github.com/Pocket/web-client/commit/7de1c7ce7bc223f225f6ea8d098e5a6529692374))
+
+## [1.12.12](https://github.com/Pocket/web-client/compare/v1.12.11...v1.12.12) (2021-05-11)
+
+
+### Bug Fixes
+
+* **discover:** if item doesnt exist, dont render action ([21f4476](https://github.com/Pocket/web-client/commit/21f4476a9f0316d20f70b512d9cbb33557bfe7fd))
+* **home:** if item doesnt exist, dont render action ([8295d53](https://github.com/Pocket/web-client/commit/8295d53bab26314afedec9758c1438902f4ed207))
+* **tags:** tags page actions ([153c5e8](https://github.com/Pocket/web-client/commit/153c5e8919a2defad63697f3559bf273357ff1e6))
+
 ## [1.12.11](https://github.com/Pocket/web-client/compare/v1.12.10...v1.12.11) (2021-05-06)
 
 
