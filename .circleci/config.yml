@@ -2,7 +2,7 @@ version: 2.1
 
 # Orbs: Pre-configured bundled functionality
 orbs:
-  aws-cli: circleci/aws-cli@1.2.1
+  aws-cli: circleci/aws-cli@2.0.0
   aws-ecr: circleci/aws-ecr@6.10.0
   assume-role: airswap/assume-role@0.2.0
   # cypress: cypress-io/cypress@1
