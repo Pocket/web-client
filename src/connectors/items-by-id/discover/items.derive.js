@@ -13,8 +13,11 @@ export function deriveDiscoverItems(response) {
    * @share_url {url} The url that should be shared if the user shares this item
    * @read_time {string} An approximation of how long it takes to read the article based on
    * @save_status {string} A string value (unsaved, saving, saved)
+   * @recommendation_id {string} A string value needed for snowplow recommendation entity
+   * @slateLineup {object} A object needed for snowplow slate-lineup entity
+   * @slate {object} A object needed for snowplow slate entity
    */
-  return response.map((feedItem) => {
+  return response.map((feedItem, index) => {
     return {
       resolved_id: feedItem.item?.resolved_id || feedItem.item?.resolvedId,
       item_id: feedItem.item?.item_id || feedItem.item?.itemId,
@@ -29,7 +32,10 @@ export function deriveDiscoverItems(response) {
       original_url: originalUrl(feedItem),
       permanent_url: permanentUrl(feedItem),
       openExternal: openExternal(feedItem),
-      save_status: 'unsaved'
+      save_status: 'unsaved',
+      recommendationId: feedItem.id || feedItem.item?.resolved_id,
+      slateLineup: feedItem.slateLineup,
+      slate: feedItem.slate
     }
   })
 }

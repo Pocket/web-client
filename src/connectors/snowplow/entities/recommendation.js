@@ -13,7 +13,7 @@ const RECOMMENDATION_SCHEMA_URL = getSchemaUri('recommendation')
  * @param index {int} - The zero-based index value of the recommendation’s display position among other recommendations in the same slate. @required
  * @returns {{schema: *, data: {recommendation_id: string, index: int}}}
  */
-export const createRecommendationEntity = (recommendation_id, index) => ({
+export const createRecommendationEntity = ({ recommendation_id, index }) => ({
   schema: RECOMMENDATION_SCHEMA_URL,
   data: {
     recommendation_id,

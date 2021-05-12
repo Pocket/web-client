@@ -2,7 +2,7 @@ import { getSchemaUri } from 'common/api/snowplow-analytics'
 
 /**
  * Schema information:
- * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/9f608b11d56b7ce7c2637fb2d16e2502173d0c924c099653522750aed7d0604f
+ * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/bbaa9fbd5b94ab5ad1bebbebd1d12d659f50d8a6345766e517f53057f82723b4
  */
 const SLATE_SCHEMA_URL = getSchemaUri('slate_lineup')
 
@@ -15,7 +15,7 @@ const SLATE_SCHEMA_URL = getSchemaUri('slate_lineup')
  *
  * @returns {{schema: *, data: {slate_lineup_id: string, request_id: string, experiment: string }}}
  */
-export const createSlateLineupEntity = (slate_lineup_id, request_id, experiment) => ({
+export const createSlateLineupEntity = ({ slate_lineup_id, request_id, experiment }) => ({
   schema: SLATE_SCHEMA_URL,
   data: {
     slate_lineup_id,

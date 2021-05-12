@@ -39,9 +39,32 @@ export function getTopicList(ssr) {
   })
 }
 
+function getIdsForAnalytics(data) {
+  const { id, experimentId, requestId } = data
+  return {
+    requestId,
+    experimentId,
+    id
+  }
+}
+
 function processSlates(response) {
+  const slateLineup = getIdsForAnalytics(response?.data?.getSlateLineup)
   const slates = response?.data?.getSlateLineup?.slates || []
-  const curated = slates[0]?.recommendations
-  const algorithmic = slates[1]?.recommendations
+  const curated = slates[0]?.recommendations.map(item => {
+    return {
+      ...item,
+      slateLineup,
+      slate: getIdsForAnalytics(slates[0])
+    }
+  })
+  const algorithmic = slates[1]?.recommendations.map(item => {
+    return {
+      ...item,
+      slateLineup,
+      slate: getIdsForAnalytics(slates[1])
+    }
+  })
+
   return { curated, algorithmic }
 }

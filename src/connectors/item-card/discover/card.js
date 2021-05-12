@@ -2,8 +2,8 @@ import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { ActionsDiscover } from './card-actions'
 import { setNoImage } from 'connectors/items-by-id/discover/items.state'
-import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+import { trackRecImpression } from 'connectors/snowplow/snowplow.state'
+import { trackRecOpen } from 'connectors/snowplow/snowplow.state'
 
 /**
  * Article Card
@@ -24,9 +24,9 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onImpression = () => dispatch(trackItemImpression(position, item, 'discover.impression'))
+  const onImpression = () => dispatch(trackRecImpression(position, item, 'discover.impression'))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
-  const onOpen = () => dispatch(trackItemOpen(position, item, 'discover.open'))
+  const onOpen = () => dispatch(trackRecOpen(position, item, 'discover.open'))
 
   return (
     <Card
@@ -39,7 +39,7 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
       openUrl={openUrl}
       // Tracking
       onItemInView={onItemInView}
-      openAction={onOpen}
+      onOpen={onOpen}
       ActionMenu={ActionsDiscover}
     />
   )

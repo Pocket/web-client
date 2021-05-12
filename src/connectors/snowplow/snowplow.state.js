@@ -6,6 +6,10 @@ import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 import { SNOWPLOW_TRACK_IMPRESSION } from 'actions'
 import { SNOWPLOW_TRACK_ENGAGEMENT } from 'actions'
 
+import { SNOWPLOW_TRACK_REC_OPEN } from 'actions'
+import { SNOWPLOW_TRACK_REC_SAVE } from 'actions'
+import { SNOWPLOW_TRACK_REC_IMPRESSION } from 'actions'
+
 import { SNOWPLOW_TRACK_ITEM_IMPRESSION } from 'actions'
 import { SNOWPLOW_TRACK_ITEM_ACTION } from 'actions'
 import { SNOWPLOW_TRACK_ITEM_SAVE } from 'actions'
@@ -21,6 +25,9 @@ import { FEATURES_HYDRATE } from 'actions'
 import { createContentEntity } from 'connectors/snowplow/entities'
 import { createUiEntity } from 'connectors/snowplow/entities'
 import { createFeatureFlagEntity } from 'connectors/snowplow/entities'
+import { createRecommendationEntity } from 'connectors/snowplow/entities'
+import { createSlateEntity } from 'connectors/snowplow/entities'
+import { createSlateLineupEntity } from 'connectors/snowplow/entities'
 import { UI_COMPONENT_CARD } from 'connectors/snowplow/entities'
 import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
 
@@ -43,6 +50,42 @@ import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
+
+export const trackRecOpen = (position, item, identifier, href) => {
+  const { save_url, item_id, syndicated } = item
+  const linkTarget = href ? href : save_url
+  const destination = getLinkOpenTarget(linkTarget, syndicated)
+  return {
+    type: SNOWPLOW_TRACK_REC_OPEN,
+    trigger: CONTENT_OPEN_TRIGGER_CLICK,
+    destination,
+    position,
+    item,
+    identifier
+  }
+}
+
+export const trackRecSave = (position, item, identifier) => {
+  return {
+    type: SNOWPLOW_TRACK_REC_SAVE,
+    component: ENGAGEMENT_TYPE_SAVE,
+    ui: UI_COMPONENT_BUTTON,
+    identifier,
+    position,
+    item
+  }
+}
+
+export const trackRecImpression = (position, item, identifier) => {
+  return {
+    type: SNOWPLOW_TRACK_REC_IMPRESSION,
+    component: IMPRESSION_COMPONENT_CARD,
+    requirement: IMPRESSION_REQUIREMENT_VIEWABLE,
+    position,
+    item,
+    identifier
+  }
+}
 
 export const trackItemOpen = (position, item, identifier, href) => {
   const { save_url, item_id, syndicated } = item
@@ -148,6 +191,9 @@ export const snowplowSagas = [
   takeLatest(VARIANTS_SAVE, fireVariantEnroll),
   takeLatest(FEATURES_HYDRATE, fireFeatureEnroll),
   takeLatest(SNOWPLOW_TRACK_PAGE_VIEW, firePageView),
+  takeEvery(SNOWPLOW_TRACK_REC_OPEN, fireRecOpen),
+  takeEvery(SNOWPLOW_TRACK_REC_SAVE, fireRecEngagement),
+  takeEvery(SNOWPLOW_TRACK_REC_IMPRESSION, fireRecImpression),
   takeEvery(SNOWPLOW_TRACK_IMPRESSION, fireImpression),
   takeEvery(SNOWPLOW_TRACK_ENGAGEMENT, fireEngagement),
   takeEvery(SNOWPLOW_TRACK_ITEM_OPEN, fireContentOpen),
@@ -183,6 +229,51 @@ function* fireFeatureEnroll({ hydrate }) {
       yield call(sendCustomSnowplowEvent, variantEnrollEvent, [featureFlagEntity])
     }
   }
+}
+
+function* fireRecOpen({ destination, trigger, position, item, identifier }) {
+  const contentOpenEvent = createContentOpenEvent(destination, trigger)
+  const contentEntity = createContentEntity(item.save_url, item.item_id)
+  const recEntities = buildRecEntities(item, position)
+  const uiEntity = createUiEntity({
+    type: UI_COMPONENT_CARD,
+    hierarchy: 0,
+    identifier,
+    index: position
+  })
+
+  const snowplowEntities = [contentEntity, uiEntity, ...recEntities]
+  yield call(sendCustomSnowplowEvent, contentOpenEvent, snowplowEntities)
+}
+
+function* fireRecEngagement({ component, ui, identifier, position, item }) {
+  const engagementEvent = createEngagementEvent(component)
+  const contentEntity = createContentEntity(item.save_url, item.item_id)
+  const recEntities = buildRecEntities(item, position)
+  const uiEntity = createUiEntity({
+    type: ui,
+    hierarchy: 0,
+    identifier,
+    index: position
+  })
+
+  const snowplowEntities = [contentEntity, uiEntity, ...recEntities]
+  yield call(sendCustomSnowplowEvent, engagementEvent, snowplowEntities)
+}
+
+function* fireRecImpression({ component, requirement, position, item, identifier }) {
+  const impressionEvent = createImpressionEvent(component, requirement)
+  const contentEntity = createContentEntity(item.save_url, item.item_id)
+  const recEntities = buildRecEntities(item, position)
+  const uiEntity = createUiEntity({
+    type: UI_COMPONENT_CARD,
+    hierarchy: 0,
+    identifier,
+    index: position
+  })
+
+  const snowplowEntities = [contentEntity, uiEntity, ...recEntities]
+  yield call(sendCustomSnowplowEvent, impressionEvent, snowplowEntities)
 }
 
 function* fireContentOpen({ destination, trigger, position, item, identifier }) {
@@ -282,4 +373,26 @@ function itemContentType({ has_video, has_image, is_article }) {
   if (has_image === '2') return 'opened_image'
   if (is_article === '1') return 'opened_article'
   return 'opened_web'
+}
+
+/** HELPERS
+ --------------------------------------------------------------- */
+function buildRecEntities(item, position) {
+  const recommendationEntity = createRecommendationEntity({
+    recommendation_id: item.recommendationId,
+    index: position
+  })
+  const slateLineupEntity = createSlateLineupEntity({
+    slate_lineup_id: item.slateLineup.id,
+    request_id: item.slateLineup.requestId,
+    experiment: item.slateLineup.experimentId
+  })
+  const slateEntity = createSlateEntity({
+    slate_id: item.slate.id,
+    request_id: item.slate.requestId,
+    experiment: item.slate.experimenId,
+    index: position
+  })
+
+  return [recommendationEntity, slateLineupEntity, slateEntity]
 }

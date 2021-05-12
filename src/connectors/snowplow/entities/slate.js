@@ -19,14 +19,14 @@ const SLATE_SCHEMA_URL = getSchemaUri('slate')
  *
  * @returns {{schema: *, data: {slate_id: string, request_id: string, experiment: string, index: int, ?display_name: string, ?description: string }}}
  */
-export const createSlateEntity = (
+export const createSlateEntity = ({
   slate_id,
   request_id,
   experiment,
   index,
   display_name,
   description
-) => ({
+}) => ({
   schema: SLATE_SCHEMA_URL,
   data: getObjectWithValidKeysOnly({
     slate_id,

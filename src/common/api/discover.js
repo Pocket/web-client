@@ -12,9 +12,32 @@ export async function getDiscoverFeed(recommendationCount = 30) {
     .catch((error) => console.error(error))
 }
 
+function getIdsForAnalytics(data) {
+  const { id, experimentId, requestId } = data
+  return {
+    requestId,
+    experimentId,
+    id
+  }
+}
+
 function processSlates(response) {
+  const slateLineup = getIdsForAnalytics(response?.data?.getSlateLineup)
   const slates = response?.data?.getSlateLineup?.slates || []
-  const top = slates[0]?.recommendations
-  const bottom = slates[1]?.recommendations
+  const top = slates[0]?.recommendations.map(item => {
+    return {
+      ...item,
+      slateLineup,
+      slate: getIdsForAnalytics(slates[0])
+    }
+  })
+  const bottom = slates[1]?.recommendations.map(item => {
+    return {
+      ...item,
+      slateLineup,
+      slate: getIdsForAnalytics(slates[1])
+    }
+  })
+
   return [...top, ...bottom]
 }

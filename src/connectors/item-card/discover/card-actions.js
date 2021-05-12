@@ -8,8 +8,8 @@ import { saveDiscoverItem } from 'containers/discover/discover.state'
 import { itemActionStyle } from 'components/item-actions/base'
 import { itemReportAction } from 'connectors/items-by-id/discover/items.report'
 
-import { trackItemSave } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+import { trackRecSave } from 'connectors/snowplow/snowplow.state'
+import { trackRecOpen } from 'connectors/snowplow/snowplow.state'
 
 export function ActionsDiscover({ id, position }) {
   const dispatch = useDispatch()
@@ -23,12 +23,12 @@ export function ActionsDiscover({ id, position }) {
   // Prep save action
   const onSave = () => {
     dispatch(saveDiscoverItem(id, save_url, position))
-    dispatch(trackItemSave(position, item, 'discover.save'))
+    dispatch(trackRecSave(position, item, 'discover.save'))
   }
 
   // Open action
   const url = openExternal ? open_url : `/read/${id}`
-  const onOpen = () => dispatch(trackItemOpen(position, item, 'discover.open', url))
+  const onOpen = () => dispatch(trackRecOpen(position, item, 'discover.open', url))
 
   // On Report
   const onReport = () => dispatch(itemReportAction(id))

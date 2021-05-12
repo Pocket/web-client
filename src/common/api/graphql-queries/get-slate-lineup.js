@@ -14,9 +14,12 @@ const getSlateLineup = gql`
   query GetSlateLineup($id: String!, $recommendationCount: Int) {
     getSlateLineup(slateLineupId: $id, recommendationCount: $recommendationCount) {
       experimentId
+      requestId
       id
       slates {
         id
+        requestId
+        experimentId
         displayName
         description
         recommendations {
