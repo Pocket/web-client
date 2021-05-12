@@ -1,5 +1,8 @@
 import { CollectionPage } from 'containers/collections/collection-page'
 import { fetchCollectionBySlug } from 'containers/collections/collections.state'
+import { fetchTopicList } from 'connectors/topic-list/topic-list.state'
+import { hydrateTopicList } from 'connectors/topic-list/topic-list.state'
+
 import { hydrateCollections } from 'containers/collections/collections.state'
 import { hydrateItems } from 'connectors/items-by-id/collection/items.state'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -22,11 +25,12 @@ export const getServerSideProps = wrapper.getServerSideProps(
     // page from loading. Do this for SEO/crawler purposes
     const baseUrl = req.headers.host
     const { itemsById, collection } = await fetchCollectionBySlug({ slug, baseUrl })
-
+    const topicsByName = await fetchTopicList(true)
     // No article found
     if (!collection || !itemsById) res.statusCode = 404
 
     // Since ssr will not wait for side effects to resolve this dispatch needs to be pure
+    dispatch(hydrateTopicList({ topicsByName }))
     dispatch(hydrateCollections(collection))
     dispatch(hydrateItems(itemsById))
 

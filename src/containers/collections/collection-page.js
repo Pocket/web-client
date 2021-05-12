@@ -51,6 +51,7 @@ export function CollectionPage({ queryParams = {}, slug }) {
 
   const isAuthenticated = useSelector((state) => state.user.auth)
   const data = useSelector((state) => state.collections[slug]) || {}
+  const topics = useSelector((state) => state.topicList?.topicsByName)
 
   const { mobile_web_view: isMobileWebView } = queryParams
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
@@ -87,6 +88,8 @@ export function CollectionPage({ queryParams = {}, slug }) {
           </section>
 
           <OffsetList items={stories} offset={0} count={20} cardShape="wide" ItemCard={ItemCard} />
+
+          <TopicsBubbles topics={topics} className="no-border" />
         </div>
       </main>
       <Toasts />
