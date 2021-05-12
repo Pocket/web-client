@@ -2,13 +2,20 @@ import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
 import { cardGrid } from 'components/items-layout/base'
 import { useDispatch, useSelector } from 'react-redux'
-import { PocketWorthy } from 'components/article/pocket-worthy'
-import { ParsedHeadline } from 'components/article/parsed-headline'
-import { AuthorByline } from 'components/article/author-byline'
+
+import { PocketWorthy } from 'components/content-headline/pocket-worthy'
+import { ParsedHeadline } from 'components/content-headline/parsed-headline'
+import { AuthorByline } from 'components/content-author/author-byline'
+import { ArticleActions } from 'components/content-actions/article-actions'
+import { PublisherAttribution } from 'components/content-publisher/publisher-attribution'
+import { SaveArticleTop } from 'components/content-saving/save-article'
+import { SaveArticleBottom } from 'components/content-saving/save-article'
+import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
+
 import { css, cx } from 'linaria'
 import { OffsetList } from 'components/items-layout/list-offset'
 import { ItemCard } from 'connectors/item-card/collection/story-card'
-import { SaveFullCollection } from 'components/save-prompts/collection'
+
 import { saveCollection } from 'containers/collections/collections.state'
 import { Toasts } from 'connectors/toasts/toast-list'
 
@@ -78,20 +85,8 @@ export function CollectionPage({ queryParams = {}, slug }) {
             </div>
             <p className="collection-info">{excerpt}</p>
           </section>
-          <SaveFullCollection
-            saveAction={saveCollectionTop}
-            isAuthenticated={isAuthenticated}
-            count={count}
-            saveStatus={saveStatus}
-          />
+
           <OffsetList items={stories} offset={0} count={20} cardShape="wide" ItemCard={ItemCard} />
-          <SaveFullCollection
-            count={count}
-            position="bottom"
-            saveAction={saveCollectionBottom}
-            isAuthenticated={isAuthenticated}
-            saveStatus={saveStatus}
-          />
         </div>
       </main>
       <Toasts />
