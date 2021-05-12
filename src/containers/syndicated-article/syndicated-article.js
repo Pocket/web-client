@@ -41,9 +41,9 @@ import { ArticleActions } from 'components/content-actions/article-actions'
 import { PublisherAttribution } from 'components/content-publisher/publisher-attribution'
 import { SaveArticleTop } from 'components/content-saving/save-article'
 import { SaveArticleBottom } from 'components/content-saving/save-article'
+import { ParsedContent } from 'components/content-parsed/parsed-content'
+import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 
-import { TopicsBubbles } from 'components/article/topics-bubbles'
-import { ParsedContent } from 'components/article/parsed-content'
 import PublisherRecs from 'components/publisher-recs/publisher-recs'
 import PocketRecs from 'components/pocket-recs/pocket-recs'
 import { DepthTracking } from 'components/depth-tracking/depth-tracking'
@@ -487,7 +487,7 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
                   handleRecImpression={handleRecImpression}
                   handleRecClick={handleRecClick}
                 />
-                <TopicsBubbles topics={topics} />
+                <TopicsBubbles topics={topics} className="no-border" />
               </Fragment>
             ) : null}
           </div>
