@@ -1,6 +1,6 @@
 import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
-import { cardGrid } from 'components/items-layout/base'
+import { cardsGrid } from 'components/items-layout/base'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { PocketWorthy } from 'components/content-headline/pocket-worthy'
@@ -20,25 +20,33 @@ import { saveCollection } from 'containers/collections/collections.state'
 import { Toasts } from 'connectors/toasts/toast-list'
 
 const collectionDetail = css`
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-
-  .collection-body {
-    grid-column: 2 / -1;
+  ${cardsGrid};
+  .left-aside {
+    grid-column: 1 / 2;
   }
 
-  .hero-image {
-    position: relative;
-    grid-column: span 8;
-    img {
-      width: 100%;
-    }
+  .right-aside {
+    grid-column: 9 / -1;
   }
-  .collection-info {
-    grid-column: span 8;
-    color: var(--color-textPrimary);
-    font-size: 1.5rem;
-    font-family: var(--fontSerif);
+
+  .content-body {
+    grid-column: 2 / 9;
+  }
+
+  .hero-image img {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .content-excerpt {
+    font-weight: 400;
+    font-size: 1.4375rem;
+    line-height: 160%;
+    margin-bottom: 2.5rem;
+  }
+
+  article {
+    margin-bottom: 3rem;
   }
 `
 
@@ -58,6 +66,9 @@ export function CollectionPage({ queryParams = {}, slug }) {
 
   const { title, intro, excerpt, authors, stories, imageUrl, urls, saveStatus } = data
   const authorNames = authors?.map((author) => author.name)
+
+  const saveAction = () => {}
+
   const count = urls.length
   const saveCollectionTop = () => dispatch(saveCollection(slug))
   const saveCollectionBottom = () => dispatch(saveCollection(slug))
@@ -65,7 +76,9 @@ export function CollectionPage({ queryParams = {}, slug }) {
   return (
     <ArticleLayout title={metaData.title} metaData={metaData}>
       <main className={cx('main', collectionDetail)}>
-        <div className="collection-body">
+        <aside className="left-aside">Hi</aside>
+        <aside className="right-aside">Hi</aside>
+        <div className="content-body">
           <header>
             <div className={cx('spacing', isMobileWebView && 'mobile')}>
               <PocketWorthy />
@@ -79,15 +92,30 @@ export function CollectionPage({ queryParams = {}, slug }) {
                 />
               ) : null}
             </div>
-          </header>
-          <section className={cardGrid}>
+
             <div className="hero-image">
               <img src={imageUrl} alt="" />
             </div>
-            <p className="collection-info">{excerpt}</p>
-          </section>
 
-          <OffsetList items={stories} offset={0} count={20} cardShape="wide" ItemCard={ItemCard} />
+            <p className="content-excerpt">{excerpt}</p>
+
+            <SaveArticleTop
+              isAuthenticated={isAuthenticated}
+              saveAction={saveAction}
+              saveStatus={saveStatus}
+            />
+          </header>
+
+          {/* Collection Stories */}
+          {stories.map((id, index) => (
+            <ItemCard id={id} key={id} position={index} cardShape="wide" showExcerpt={true} />
+          ))}
+
+          <SaveArticleBottom
+            isAuthenticated={isAuthenticated}
+            saveAction={saveAction}
+            saveStatus={saveStatus}
+          />
 
           <TopicsBubbles topics={topics} className="no-border" />
         </div>
