@@ -14,15 +14,6 @@ export async function getDiscoverFeed(recommendationCount = 30) {
     .catch((error) => console.error(error))
 }
 
-function getIdsForAnalytics(data) {
-  const { id, experimentId, requestId } = data
-  return {
-    requestId,
-    experimentId,
-    id
-  }
-}
-
 function processSlates(response) {
   const slateLineup = getRecIds(response?.data?.getSlateLineup)
   const slates = response?.data?.getSlateLineup?.slates || []
