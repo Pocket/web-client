@@ -17,7 +17,7 @@ export function deriveDiscoverItems(response) {
    * @slateLineup {object} A object needed for snowplow slate-lineup entity
    * @slate {object} A object needed for snowplow slate entity
    */
-  return response.map((feedItem, index) => {
+  return response.map((feedItem) => {
     return {
       resolved_id: feedItem.item?.resolved_id || feedItem.item?.resolvedId,
       item_id: feedItem.item?.item_id || feedItem.item?.itemId,
