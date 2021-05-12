@@ -35,7 +35,18 @@ const itemWithMissingData = [
         greyscale_logo: 'https://logo.clearbit.com/bloomberg.com?size=800&greyscale=true'
       }
     },
-    redirect_url: 'https://getpocket.com/redirect?url=https%3A%2F%2Fwww.bloomberg.com%2Ffeatures%2F2020-carnival-cruise-coronavirus%2F%3Futm_source%3Dpocket%26utm_medium%3Demail%26utm_campaign%3Dpockethits&h=8f2057741c81b67e7964c83fcb945e25b2722814bab17193be67e2b45350ccf3&nt=0'
+    redirect_url: 'https://getpocket.com/redirect?url=https%3A%2F%2Fwww.bloomberg.com%2Ffeatures%2F2020-carnival-cruise-coronavirus%2F%3Futm_source%3Dpocket%26utm_medium%3Demail%26utm_campaign%3Dpockethits&h=8f2057741c81b67e7964c83fcb945e25b2722814bab17193be67e2b45350ccf3&nt=0',
+    id: "RecommendationAPI/3296676960",
+    slateLineup: {
+      requestId: "4bf3d704-1f73-4d39-9a97-935a4c982e5d",
+      experimentId: "fc6d7d9",
+      id: "9c3018a8-8aa9-4f91-81e9-ebcd95fc82da"
+    },
+    slate: {
+      requestId: "344a9e86-80e1-4c01-820f-17940d1628f4",
+      experimentId: "3ec8c48",
+      id: "48e766be-5e96-46fb-acbf-55fee3ae8a28"
+    }
   }
 ]
 
@@ -77,7 +88,18 @@ describe('Discover Items', function () {
         read_time: null,
         syndicated: false,
         save_status: 'unsaved',
-        openExternal: true
+        openExternal: true,
+        recommendationId: "RecommendationAPI/3296676960",
+        slateLineup: {
+          requestId: "4bf3d704-1f73-4d39-9a97-935a4c982e5d",
+          experimentId: "fc6d7d9",
+          id: "9c3018a8-8aa9-4f91-81e9-ebcd95fc82da"
+        },
+        slate: {
+          requestId: "344a9e86-80e1-4c01-820f-17940d1628f4",
+          experimentId: "3ec8c48",
+          id: "48e766be-5e96-46fb-acbf-55fee3ae8a28"
+        }
       })
     })
   })
