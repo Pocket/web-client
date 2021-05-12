@@ -34,19 +34,20 @@ import { breakpointMediumTablet } from '@pocket/web-ui'
 import { breakpointSmallTablet } from '@pocket/web-ui'
 import { breakpointTinyTablet } from '@pocket/web-ui'
 
-import { PocketWorthy } from 'components/article/pocket-worthy'
-import { ParsedHeadline } from 'components/article/parsed-headline'
-import { AuthorByline } from 'components/article/author-byline'
-import { ArticleActions } from 'components/article/article-actions'
-import { ParsedContent } from 'components/article/parsed-content'
-import { PublisherAttribution } from 'components/article/publisher-attribution'
+import { PocketWorthy } from 'components/content-headline/pocket-worthy'
+import { ParsedHeadline } from 'components/content-headline/parsed-headline'
+import { AuthorByline } from 'components/content-author/author-byline'
+import { ArticleActions } from 'components/content-actions/article-actions'
+import { PublisherAttribution } from 'components/content-publisher/publisher-attribution'
+import { SaveArticleTop } from 'components/content-saving/save-article'
+import { SaveArticleBottom } from 'components/content-saving/save-article'
+
 import { TopicsBubbles } from 'components/article/topics-bubbles'
+import { ParsedContent } from 'components/article/parsed-content'
 import PublisherRecs from 'components/publisher-recs/publisher-recs'
 import PocketRecs from 'components/pocket-recs/pocket-recs'
 import { DepthTracking } from 'components/depth-tracking/depth-tracking'
 import { ScrollPocketHitsChyron } from 'components/pocket-hits-chyron/scroll-pocket-hits-chyron'
-import { SaveArticleTop } from 'components/article/save-article'
-import { SaveArticleBottom } from 'components/article/save-article'
 
 import ProgrammaticAd, {
   AD_TYPE_VERTICAL,
@@ -232,9 +233,7 @@ const stickyContainerStyles = css`
 `
 
 const StickyContainer = ({ children, className }) => (
-  <div className={cx(stickyContainerStyles, className, 'sticky')}>
-    {children}
-  </div>
+  <div className={cx(stickyContainerStyles, className, 'sticky')}>{children}</div>
 )
 
 // Possible query params passed via url
@@ -258,9 +257,7 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
   const isMobileWebView = mobile_web_view === 'true'
   const isPremiumUser = premium_user === 'true' || isPremium === '1'
 
-  const articleData = useSelector(
-    (state) => state.syndicatedArticle.articleData
-  )
+  const articleData = useSelector((state) => state.syndicatedArticle.articleData)
   const saveStatus = useSelector((state) => state.syndicatedArticle.saveStatus)
   const publisherRecs = useSelector((state) => state.recit.publisherRecs)
   const pocketRecs = useSelector((state) => state.recit.pocketRecs)
@@ -360,18 +357,13 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
     image: mainImage,
     type: 'article'
   }
-  const canonical = publisher?.attributeCanonicalToPublisher
-    ? publisherUrl
-    : url
+  const canonical = publisher?.attributeCanonicalToPublisher ? publisherUrl : url
 
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
 
   return (
     <Fragment>
-      <ArticleLayout
-        title={title}
-        metaData={articleMetaData}
-        canonical={canonical}>
+      <ArticleLayout title={title} metaData={articleMetaData} canonical={canonical}>
         <section className={main}>
           <div className="spacing">
             <ProgrammaticAd
@@ -429,9 +421,7 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
           <section className={SidebarWrapper}>
             {allowAds ? (
               <StickyContainer
-                className={
-                  shouldShowAds ? rightRailAdWithLabelStyles : rightRailAdStyles
-                }>
+                className={shouldShowAds ? rightRailAdWithLabelStyles : rightRailAdStyles}>
                 <ProgrammaticAd
                   id={RIGHT_RAIL_1_ID}
                   positionAlias="RightRail1"
@@ -452,9 +442,7 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
             </StickyContainer>
             {allowAds ? (
               <StickyContainer
-                className={
-                  shouldShowAds ? rightRailAdWithLabelStyles : rightRailAdStyles
-                }>
+                className={shouldShowAds ? rightRailAdWithLabelStyles : rightRailAdStyles}>
                 <ProgrammaticAd
                   id={RIGHT_RAIL_2_ID}
                   positionAlias="RightRail2"
