@@ -1,5 +1,7 @@
 import { requestGQL } from 'common/utilities/request/request'
 import { TOPIC_IDS } from 'common/constants'
+import { getRecIds } from 'common/utilities'
+import { recommendationsFromSlate } from 'common/utilities'
 
 import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
 
@@ -22,22 +24,10 @@ function getIdsForAnalytics(data) {
 }
 
 function processSlates(response) {
-  const slateLineup = getIdsForAnalytics(response?.data?.getSlateLineup)
+  const slateLineup = getRecIds(response?.data?.getSlateLineup)
   const slates = response?.data?.getSlateLineup?.slates || []
-  const top = slates[0]?.recommendations.map(item => {
-    return {
-      ...item,
-      slateLineup,
-      slate: getIdsForAnalytics(slates[0])
-    }
-  })
-  const bottom = slates[1]?.recommendations.map(item => {
-    return {
-      ...item,
-      slateLineup,
-      slate: getIdsForAnalytics(slates[1])
-    }
-  })
+  const top = recommendationsFromSlate(slates[0], slateLineup)
+  const bottom = recommendationsFromSlate(slates[1], slateLineup)
 
   return [...top, ...bottom]
 }

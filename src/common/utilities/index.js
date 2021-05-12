@@ -26,6 +26,9 @@ export { capitalizeFirstLetter } from './strings/strings'
 
 export { openWindow } from './open-window/open-window'
 
+export { getRecIds } from './recommendations/recommendations'
+export { recommendationsFromSlate } from './recommendations/recommendations'
+
 export { validateEmail } from './validate-email/validate-email'
 
 export { getTimeToRead } from './time-to-read/time-to-read'
