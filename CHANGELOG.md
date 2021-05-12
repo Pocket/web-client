@@ -1,3 +1,10 @@
+## [1.12.17](https://github.com/Pocket/web-client/compare/v1.12.16...v1.12.17) (2021-05-12)
+
+
+### Bug Fixes
+
+* **publisher image:** add alt text for publisher image ([03ecca7](https://github.com/Pocket/web-client/commit/03ecca799f53d64df0d9297fe4cac68297295a0c))
+
 ## [1.12.16](https://github.com/Pocket/web-client/compare/v1.12.15...v1.12.16) (2021-05-11)
 
 

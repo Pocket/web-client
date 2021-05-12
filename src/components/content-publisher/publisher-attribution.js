@@ -82,7 +82,7 @@ function PublisherInfo({ logoWide, publishedAt, name }) {
     <React.Fragment>
       <hr />
       {logoWide ? (
-        <img src={logoWide.url} data-cy="publisher-img" />
+        <img src={logoWide.url} data-cy="publisher-img" alt={`Logo for ${name}`} />
       ) : null}
       <p>
         This post originally appeared on {name} and was published{' '}
