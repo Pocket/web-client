@@ -5,8 +5,6 @@ import { PopupMenuGroup } from '@pocket/web-ui'
 import { GridViewIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
 import { DetailViewIcon } from '@pocket/web-ui'
-// import { SortByNewestIcon } from '@pocket/web-ui'
-// import { SortByOldestIcon } from '@pocket/web-ui'
 import { buttonReset } from 'components/buttons/button-reset'
 
 import { bottomTooltip } from 'components/tooltip/tooltip'
