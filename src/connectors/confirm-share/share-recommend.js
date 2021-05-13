@@ -27,7 +27,7 @@ export function ShareRecommend({ item, position = 0 }) {
   const [commentValue, setCommentValue] = useState('')
   const confirmShare = (comment) => {
     dispatch(itemsRecommendConfirm(comment))
-    dispatch(trackItemAction(item, position, 'share.recommend'))
+    dispatch(trackItemAction(position, item, 'share.recommend'))
   }
   const onClick = () => confirmShare(commentValue)
 
