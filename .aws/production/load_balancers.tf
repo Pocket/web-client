@@ -26,18 +26,18 @@ resource "aws_alb_listener_rule" "public_forward_101" {
     target_group_arn = aws_alb_target_group.public.arn
   }
 
-# Remove host condition so we can test with dotcom gateway
-#
-#  condition {
-#    host_header {
-#      values = [var.domain_name]
-#    }
-#  }
+  # Remove host condition so we can test with dotcom gateway
+  #
+  #  condition {
+  #    host_header {
+  #      values = [var.domain_name]
+  #    }
+  #  }
 
   condition {
     path_pattern {
       values = [
-         "/_next/*"
+        "/_next/*"
       ]
     }
   }
@@ -56,7 +56,7 @@ resource "aws_alb_listener_rule" "public_forward_102" {
   condition {
     path_pattern {
       values = [
-         "/web-client-api/*"
+        "/web-client-api/*"
       ]
     }
   }
@@ -71,20 +71,20 @@ resource "aws_alb_listener_rule" "public_forward_103" {
     target_group_arn = aws_alb_target_group.public.arn
   }
 
- # Remove host condition so we can test with dotcom gateway
- #
- # condition {
- #   host_header {
- #     values = [var.domain_name]
- #   }
- # }
+  # Remove host condition so we can test with dotcom gateway
+  #
+  # condition {
+  #   host_header {
+  #     values = [var.domain_name]
+  #   }
+  # }
 
   condition {
     path_pattern {
       values = [
-         "/read",
-         "/read/",
-         "/read/*"
+        "/read",
+        "/read/",
+        "/read/*"
       ]
     }
   }
@@ -102,23 +102,23 @@ resource "aws_alb_listener_rule" "public_forward_104" {
       path        = "/explore"
       protocol    = "HTTPS"
       status_code = "HTTP_302"
-      query = "#{query}"
+      query       = "#{query}"
     }
   }
 
-# Remove host condition so we can test with dotcom gateway
-#  condition {
-#    host_header {
-#      values = [var.domain_name]
-#    }
-#  }
+  # Remove host condition so we can test with dotcom gateway
+  #  condition {
+  #    host_header {
+  #      values = [var.domain_name]
+  #    }
+  #  }
 
   condition {
     path_pattern {
       values = [
-         "/discover",
-         "/discover/",
-         "/discover/*"
+        "/discover",
+        "/discover/",
+        "/discover/*"
       ]
     }
   }
@@ -133,19 +133,19 @@ resource "aws_alb_listener_rule" "public_forward_110" {
     target_group_arn = aws_alb_target_group.public.arn
   }
 
-# Remove host condition so we can test with dotcom gateway
-#  condition {
-#    host_header {
-#      values = [var.domain_name]
-#    }
-#  }
+  # Remove host condition so we can test with dotcom gateway
+  #  condition {
+  #    host_header {
+  #      values = [var.domain_name]
+  #    }
+  #  }
 
   condition {
     path_pattern {
       values = [
-         "/my-list",
-         "/my-list/",
-         "/my-list/*"
+        "/my-list",
+        "/my-list/",
+        "/my-list/*"
       ]
     }
   }
@@ -163,8 +163,8 @@ resource "aws_alb_listener_rule" "public_forward_111" {
   condition {
     path_pattern {
       values = [
-         "/waypoint",
-         "/waypoint/"
+        "/waypoint",
+        "/waypoint/"
       ]
     }
   }
