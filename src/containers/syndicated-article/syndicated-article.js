@@ -306,7 +306,10 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
 
   const saveAction = (savedUrl) => {
     if (saveStatus === 'saved') dispatch(unSaveArticleItem(itemId))
-    if (saveStatus !== 'saved') dispatch(saveArticleItem(savedUrl))
+    if (saveStatus !== 'saved') {
+      dispatch(saveArticleItem(savedUrl))
+      trackSaveClick(savedUrl)
+    }
   }
 
   const adTargetingMetadata = {
@@ -402,11 +405,10 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
               <ArticleActions
                 title={title}
                 excerpt={excerpt}
-                saveAction={saveAction}
+                onSave={saveAction}
+                onShare={trackShareClick}
                 saveStatus={saveStatus}
                 isAuthenticated={isAuthenticated}
-                handleShareClick={trackShareClick}
-                trackSaveClick={trackSaveClick}
                 slug={slug}
               />
             </aside>

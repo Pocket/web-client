@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { BASE_URL } from 'common/constants'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { FacebookMonoIcon } from '@pocket/web-ui'
@@ -15,12 +15,25 @@ import {
 } from 'react-share'
 
 const shareContainer = css`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  position: sticky;
+  top: 6rem;
+  margin-bottom: var(--spacing400);
+
+  & > div {
+    margin-bottom: 1rem;
+  }
+
   button {
     line-height: 100%;
+    padding: 0;
   }
 
   svg {
-    height: 22px;
+    height: 24px;
   }
 
   .pocket-share {
@@ -82,26 +95,21 @@ function buildShareUrl(url, source) {
 
 export const ArticleActions = function ({
   isAuthenticated,
-  saveAction,
+  onSave,
+  onShare,
   saveStatus,
   excerpt = '',
   title,
-  handleShareClick,
-  trackSaveClick,
-  slug
+  url,
+  className
 }) {
-  const url = `${BASE_URL}/explore/item/${slug}`
-
-  const onSave = () => {
-    saveAction(url)
-    trackSaveClick('save-story-sidebar')
-  }
+  const saveAction = () => onSave(url)
 
   return (
-    <aside className={shareContainer}>
+    <aside className={cx(shareContainer, className)}>
       <div className="pocket-share">
         <SaveToPocket
-          saveAction={onSave}
+          saveAction={saveAction}
           isAuthenticated={isAuthenticated}
           saveStatus={saveStatus}
           id="sidebar"
@@ -111,7 +119,7 @@ export const ArticleActions = function ({
       <div className="facebook-share">
         <FacebookShareButton
           data-cy="share-facebook"
-          onShareWindowClose={() => handleShareClick('Facebook')}
+          onShareWindowClose={() => onShare('Facebook')}
           quote={excerpt}
           url={buildShareUrl(url, 'fbsynd')}>
           <FacebookMonoIcon />
@@ -121,7 +129,7 @@ export const ArticleActions = function ({
       <div className="twitter-share">
         <TwitterShareButton
           data-cy="share-twitter"
-          onShareWindowClose={() => handleShareClick('Twitter')}
+          onShareWindowClose={() => onShare('Twitter')}
           title={title}
           via="Pocket"
           url={buildShareUrl(url, 'twtrsynd')}>
@@ -132,7 +140,7 @@ export const ArticleActions = function ({
       <div className="reddit-share">
         <RedditShareButton
           data-cy="share-reddit"
-          onShareWindowClose={() => handleShareClick('Reddit')}
+          onShareWindowClose={() => onShare('Reddit')}
           title={title}
           url={buildShareUrl(url, 'redditsynd')}>
           <RedditMonoIcon />
@@ -142,7 +150,7 @@ export const ArticleActions = function ({
       <div className="linkedin-share">
         <LinkedinShareButton
           data-cy="share-linkedin"
-          onShareWindowClose={() => handleShareClick('Linkedin')}
+          onShareWindowClose={() => onShare('Linkedin')}
           summary={excerpt}
           source="Pocket"
           title={title}
@@ -154,7 +162,7 @@ export const ArticleActions = function ({
       <div className="email-share">
         <EmailShareButton
           data-cy="share-email"
-          beforeOnClick={() => handleShareClick('Email')}
+          beforeOnClick={() => onShare('Email')}
           subject={title}
           body={excerpt}
           url={buildShareUrl(url, 'emailsynd')}
