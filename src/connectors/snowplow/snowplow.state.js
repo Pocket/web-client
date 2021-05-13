@@ -390,7 +390,7 @@ function buildRecEntities(item, position) {
   const slateEntity = createSlateEntity({
     slate_id: item.slate.id,
     request_id: item.slate.requestId,
-    experiment: item.slate.experimenId,
+    experiment: item.slate.experimentId,
     index: position
   })
 
