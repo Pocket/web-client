@@ -21,7 +21,7 @@ const recommendStyle = css`
   }
 `
 
-export function ShareRecommend({ item, position = 0 }) {
+export function ShareRecommend({ item, position }) {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [commentValue, setCommentValue] = useState('')

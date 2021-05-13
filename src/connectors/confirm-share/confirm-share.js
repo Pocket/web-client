@@ -62,7 +62,7 @@ export const ShareModal = () => {
       <ModalTabs>
         <SelectShareType active={active} activate={activate} />
         {active === 'social' ? <ShareSocial item={item} quote={quote} position={position} /> : null}
-        {active === 'recommend' ? <ShareRecommend item={item} /> : null}
+        {active === 'recommend' ? <ShareRecommend item={item} position={position} /> : null}
       </ModalTabs>
     </Modal>
   )
