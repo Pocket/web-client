@@ -29,7 +29,7 @@ export const CardTopic = ({ id, position }) => {
       position={position}
       item={item}
       onItemInView={onItemInView}
-      openAction={onOpen}
+      onOpen={onOpen}
       hiddenActions={false}
       openUrl={openUrl}
       ActionMenu={ActionsTopic}
