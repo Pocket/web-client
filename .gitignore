@@ -90,3 +90,10 @@ cypress/mochawesome
 public/static/locales/
 public/locales/
 .scripts/localization/config.json
+
+# TS Terraform build 
+.terraform/
+node_modules/
+cdktf.out/
+.gen/
+.aws/dist/
