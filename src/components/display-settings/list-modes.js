@@ -5,8 +5,8 @@ import { PopupMenuGroup } from '@pocket/web-ui'
 import { GridViewIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
 import { DetailViewIcon } from '@pocket/web-ui'
-import { SortByNewestIcon } from '@pocket/web-ui'
-import { SortByOldestIcon } from '@pocket/web-ui'
+// import { SortByNewestIcon } from '@pocket/web-ui'
+// import { SortByOldestIcon } from '@pocket/web-ui'
 import { buttonReset } from 'components/buttons/button-reset'
 
 import { bottomTooltip } from 'components/tooltip/tooltip'
@@ -15,16 +15,13 @@ import { useTranslation } from 'next-i18next'
 
 const listSettingStyle = css`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   div {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
     padding: var(--size050);
-    &:first-of-type {
-      border-right: var(--dividerStyle);
-    }
   }
   .backing {
     padding: 0.5rem 1rem;
@@ -53,8 +50,6 @@ const listSettingStyle = css`
 
 export const ListSettings = ({
   listMode = 'grid',
-  sortOrder = 'newest',
-  toggleSortOrder,
   setListMode,
   setGridMode,
   setDetailMode
@@ -66,38 +61,6 @@ export const ListSettings = ({
   return (
     <PopupMenuGroup>
       <div className={listSettingStyle}>
-        <div onClick={toggleSortOrder}>
-          {sortOrder === 'newest' ? (
-            <button
-              aria-label={t(
-                'settings:sort-items-by-oldest-first',
-                'Sort items by oldest first'
-              )}
-              data-tooltip={t(
-                'settings:sort-items-by-oldest-first',
-                'Sort items by oldest first'
-              )}
-              data-cy="sort-oldest"
-              className={cx(buttonReset, bottomTooltip, 'backing')}>
-              <SortByOldestIcon />
-            </button>
-          ) : (
-            <button
-              aria-label={t(
-                'settings:sort-items-by-newest-first',
-                'Sort items by newest first'
-              )}
-              data-tooltip={t(
-                'settings:sort-items-by-newest-first',
-                'Sort items by newest first'
-              )}
-              data-cy="sort-newest"
-              className={cx(buttonReset, bottomTooltip, 'backing')}>
-              <SortByNewestIcon />
-            </button>
-          )}
-        </div>
-
         <div className={cx(isActive('list') && 'active')} onClick={setListMode}>
           <button
             aria-label={t(

@@ -1,7 +1,8 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { ChevronDownIcon } from '@pocket/web-ui'
 import { capitalizeFirstLetter } from 'common/utilities'
 import { usePopover, popoverBase } from 'components/popover/popover'
+import { buttonReset } from 'components/buttons/button-reset'
 import Link from 'next/link'
 import { Trans } from 'next-i18next'
 
@@ -54,6 +55,7 @@ const filterStyle = css`
 
   .filter-trigger {
     cursor: pointer;
+    outline-offset: 4px;
   }
   .filter-menu {
     ${popoverBase};
@@ -92,11 +94,11 @@ export function FilterMenu({ subset, filter, tag }) {
   const path = tag ? `tags/${tag}` : subset
 
   return hasFilter ? (
-    <div className={filterStyle}>
-      <span ref={popTrigger} className="filter-trigger">
+    <div className={cx(filterStyle, 'filter-wrapper')}>
+      <button ref={popTrigger} className={cx(buttonReset, 'filter-trigger')}>
         {capitalizeFirstLetter(activeTitle)}
         <ChevronDownIcon style={{ marginTop: 0, paddingLeft: '3px' }} />
-      </span>
+      </button>
       {shown ? (
         <div className="filter-menu" ref={popBody}>
           <div>

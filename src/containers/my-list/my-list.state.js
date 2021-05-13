@@ -15,7 +15,6 @@ import { sortSelector } from './my-list.sorters'
 import { sortByOrder } from './my-list.sorters'
 
 import { MYLIST_DATA_REQUEST } from 'actions'
-import { APP_SORT_ORDER_TOGGLE } from 'actions'
 import { MYLIST_DATA_SUCCESS } from 'actions'
 import { MYLIST_DATA_FAILURE } from 'actions'
 import { MYLIST_UPDATE_REQUEST } from 'actions'
@@ -41,6 +40,8 @@ import { MYLIST_SEARCH_SUCCESS } from 'actions'
 import { MYLIST_SEARCH_FAILURE } from 'actions'
 
 import { APP_SET_MODE } from 'actions'
+
+import { APP_SORT_ORDER_TOGGLE } from 'actions'
 import { APP_SORT_ORDER_OLD } from 'actions'
 import { APP_SORT_ORDER_NEW } from 'actions'
 
@@ -343,7 +344,7 @@ export const myListSagas = [
 
 /** SAGA :: SELECTORS
  --------------------------------------------------------------- */
-const getSortOrder = (state) => state.app.sortOrder
+const getSortOptionsBySubset = (state, subset) => state.app.sortOptions[subset] || 'newest'
 const getMyListItemsById = (state) => state.myListItemsById
 const getSearchSortOrder = (state) => state.myList.searchSortOrder
 const getState = (state) => state.myList || {}
@@ -356,7 +357,7 @@ function* myListDataRequest(action) {
     const { count = 15, offset = 0, subset = 'active', tag, filter } = action
 
     const parameters = {}
-    const sortOrder = yield select(getSortOrder)
+    const sortOrder = yield select(getSortOptionsBySubset, subset)
 
     // Set appropriate subset
     if (subset === 'unread') parameters.state = 'unread'
@@ -414,7 +415,7 @@ function* myListDataRequest(action) {
 function* myListUpdate(action) {
   try {
     const { since, subset = 'active', filter, tag } = action
-    const sortOrder = yield select(getSortOrder)
+    const sortOrder = yield select(getSortOptionsBySubset, subset)
 
     const data = yield fetchMyListUpdate({ since })
 

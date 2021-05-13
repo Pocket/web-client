@@ -7,7 +7,6 @@ import { listModeToggle } from 'connectors/app/app.state'
 import { setListModeList } from 'connectors/app/app.state'
 import { setListModeGrid } from 'connectors/app/app.state'
 import { setListModeDetail } from 'connectors/app/app.state'
-import { sortOrderToggle } from 'connectors/app/app.state'
 import { setColorMode } from 'connectors/app/app.state'
 
 import GlobalNavComponent from 'components/global-nav/global-nav'
@@ -76,7 +75,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const profileUrl = `${BASE_URL}/@${userId}?src=navbar`
 
   const listMode = useSelector((state) => state?.app?.listMode)
-  const sortOrder = useSelector((state) => state?.app?.sortOrder)
   const colorMode = useSelector((state) => state?.app?.colorMode)
 
   const showNotification = useSelector(
@@ -84,7 +82,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   )
 
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
-  const toggleSortOrder = () => dispatch(sortOrderToggle())
   const toggleListMode = () => dispatch(listModeToggle())
   const setListMode = () => dispatch(setListModeList())
   const setGridMode = () => dispatch(setListModeGrid())
@@ -259,8 +256,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       onLoginClick={onLoginClick}
       onLinkClick={onLinkClick}
       listMode={listMode}
-      sortOrder={sortOrder}
-      toggleSortOrder={toggleSortOrder}
       colorMode={colorMode}
       setColorMode={setAppColorMode}
       setListMode={setListMode}

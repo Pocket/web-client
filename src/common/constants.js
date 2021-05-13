@@ -23,7 +23,7 @@ export const COLUMN_WIDTH = [531, 574, 632, 718, 826, 933, 1041]
 
 export const CACHE_KEY_COLOR_MODE = 'pocket-color-mode'
 export const CACHE_KEY_LIST_MODE = 'pocket-list-mode'
-export const CACHE_KEY_SORT_ORDER = 'pocket-sort-order'
+export const CACHE_KEY_SORT_OPTIONS = 'pocket-sort-options'
 export const CACHE_KEY_RELEASE_VERSION = 'pocket-release-version'
 
 export const CACHE_KEY_HOME_STORED_TOPICS = 'pocket-home-stored-topics'

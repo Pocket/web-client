@@ -161,8 +161,6 @@ const GlobalNavAccount = ({
   onAccountClick,
   userStatus,
   listMode,
-  sortOrder,
-  toggleSortOrder,
   toggleListMode,
   colorMode,
   setColorMode,
@@ -372,8 +370,6 @@ const GlobalNavAccount = ({
         <ThemeSettings setColorMode={setColorMode} colorMode={colorMode} />
         <ListSettings
           listMode={listMode}
-          sortOrder={sortOrder}
-          toggleSortOrder={toggleSortOrder}
           toggleListMode={toggleListMode}
           setListMode={setListMode}
           setGridMode={setGridMode}

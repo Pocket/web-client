@@ -8,10 +8,11 @@ import { APP_SET_SECTION } from 'actions'
 import { APP_SET_PREFERENCES } from 'actions'
 import { APP_LIST_MODE_TOGGLE } from 'actions'
 import { APP_LIST_MODE_SET } from 'actions'
+
 import { APP_SORT_ORDER_TOGGLE } from 'actions'
-import { APP_SORT_ORDER_SET } from 'actions'
 import { APP_SORT_ORDER_OLD } from 'actions'
 import { APP_SORT_ORDER_NEW } from 'actions'
+import { APP_SORT_ORDER_SET } from 'actions'
 
 import { APP_LIST_MODE_LIST } from 'actions'
 import { APP_LIST_MODE_GRID } from 'actions'
@@ -32,7 +33,7 @@ import { parseCookies, destroyCookie } from 'nookies'
 import { COLOR_MODE_PREFIX } from 'common/constants'
 import { CACHE_KEY_COLOR_MODE } from 'common/constants'
 import { CACHE_KEY_LIST_MODE } from 'common/constants'
-import { CACHE_KEY_SORT_ORDER } from 'common/constants'
+import { CACHE_KEY_SORT_OPTIONS } from 'common/constants'
 import { CACHE_KEY_RELEASE_VERSION } from 'common/constants'
 
 import { getClientVersion } from 'common/api/client-version'
@@ -42,7 +43,7 @@ const initialState = {
   mode: 'default',
   listMode: 'grid',
   colorMode: 'light',
-  sortOrder: 'initial',
+  sortOptions: {},
   releaseVersion: null
 }
 
@@ -61,9 +62,8 @@ export const setListModeGrid = () => ({type: APP_LIST_MODE_GRID, listMode: 'grid
 export const setListModeDetail = () => ({type: APP_LIST_MODE_DETAIL, listMode: 'detail'}) //prettier-ignore
 
 export const sortOrderToggle = () => ({ type: APP_SORT_ORDER_TOGGLE })
-export const sortOrderSetOld = () => ({ type: APP_SORT_ORDER_OLD, sortOrder: 'oldest'}) //prettier-ignore
-export const sortOrderSetNew = () => ({ type: APP_SORT_ORDER_NEW, sortOrder: 'newest'}) //prettier-ignore
-export const sortOrderSet = (sortOrder) => ({type: APP_SORT_ORDER_SET, sortOrder}) //prettier-ignore
+export const sortOrderSetOld = () => ({ type: APP_SORT_ORDER_OLD, sortOrder: 'oldest' }) //prettier-ignore
+export const sortOrderSetNew = () => ({ type: APP_SORT_ORDER_NEW, sortOrder: 'newest' }) //prettier-ignore
 
 export const setColorMode = (colorMode) => ({ type: APP_COLOR_MODE_SET, colorMode }) //prettier-ignore
 export const setColorModeLight = () => ({ type: APP_COLOR_MODE_SET, colorMode: 'light' }) //prettier-ignore
@@ -89,8 +89,9 @@ export const appReducers = (state = initialState, action) => {
     }
 
     case APP_SORT_ORDER_SET: {
-      const { sortOrder } = action
-      return { ...state, sortOrder }
+      const { sortOrder, subset } = action
+      const sortOptions = { ...state.sortOptions, [subset]: sortOrder }
+      return { ...state, sortOptions }
     }
 
     case APP_SET_BASE_URL: {
@@ -150,7 +151,9 @@ export const appSagas = [
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 const getListMode = (state) => state.app.listMode
-const getSortOrder = (state) => state.app.sortOrder
+const getSubset = (state) => state.app.section
+const getSortOptions = (state) => state.app.sortOptions
+const getSortOptionsBySubset = (state, subset) => state.app.sortOptions[subset] || 'newest'
 
 function* appModeSwitch(action) {
   const { mode } = action
@@ -175,16 +178,19 @@ function* appListModeToggle() {
   yield call(appListModeSet, { listMode: newListMode })
 }
 
-function* appSortOrderSet(action) {
-  const { sortOrder } = action
-  localStore.setItem(CACHE_KEY_SORT_ORDER, sortOrder)
-  yield put({ type: APP_SORT_ORDER_SET, sortOrder })
+function* appSortOrderSet({ sortOrder }) {
+  const subset = yield select(getSubset)
+  const oldSortOptions = yield select(getSortOptions)
+  const updatedSortOptions = { ...oldSortOptions, [subset]: sortOrder }
+  localStore.setItem(CACHE_KEY_SORT_OPTIONS, JSON.stringify(updatedSortOptions))
+  yield put({ type: APP_SORT_ORDER_SET, sortOrder, subset })
 }
 
 function* appSortOrderToggle() {
-  const sortOrder = yield select(getSortOrder)
-  const newSortOrder = sortOrder === 'newest' ? 'oldest' : 'newest'
-  yield call(appSortOrderSet, { sortOrder: newSortOrder })
+  const subset = yield select(getSubset)
+  const currentOrder = yield select(getSortOptionsBySubset, subset)
+  const sortOrder = currentOrder === 'newest' ? 'oldest' : 'newest'
+  yield call(appSortOrderSet, { sortOrder, subset})
 }
 
 function* appReleaseNotesSet({ releaseVersion }) {
@@ -208,13 +214,19 @@ function* appPreferences() {
 
   const colorMode = localStore.getItem(CACHE_KEY_COLOR_MODE) || 'light'
   const listMode = localStore.getItem(CACHE_KEY_LIST_MODE) || 'grid'
-  const sortOrder = localStore.getItem(CACHE_KEY_SORT_ORDER) || 'newest'
   const releaseVersion = localStore.getItem(CACHE_KEY_RELEASE_VERSION)
+
+  const storedSortOrder = localStore.getItem(CACHE_KEY_SORT_OPTIONS)
+  const sortOrderParsed = storedSortOrder ? JSON.parse(storedSortOrder) : {}
+  const sortList = Object.keys(sortOrderParsed)
+  for (var i = 0; i < sortList.length; i++) {
+    const subset = sortList[i]
+    yield put({ type: APP_SORT_ORDER_SET, sortOrder: sortOrderParsed[subset], subset })
+  }
 
   yield put({ type: APP_SET_RELEASE, releaseVersion })
   yield put({ type: APP_COLOR_MODE_SET, colorMode })
   yield put({ type: APP_LIST_MODE_SET, listMode })
-  yield put({ type: APP_SORT_ORDER_SET, sortOrder })
 }
 
 export function convertToLocalStorage() {
@@ -223,10 +235,6 @@ export function convertToLocalStorage() {
     list_mode: {
       key: CACHE_KEY_LIST_MODE,
       valid: ['grid', 'list', 'detail']
-    },
-    sort_order: {
-      key: CACHE_KEY_SORT_ORDER,
-      valid: ['newest', 'oldest']
     },
     theme: {
       key: CACHE_KEY_COLOR_MODE,
