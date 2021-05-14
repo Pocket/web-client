@@ -1,54 +1,25 @@
 import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
-import { cardsGrid } from 'components/items-layout/base'
+
 import { useDispatch, useSelector } from 'react-redux'
 
+import { contentLayout } from 'components/content-layout/content-layout'
 import { PocketWorthy } from 'components/content-headline/pocket-worthy'
 import { ParsedHeadline } from 'components/content-headline/parsed-headline'
 import { AuthorByline } from 'components/content-author/author-byline'
 import { ArticleActions } from 'components/content-actions/article-actions'
-import { PublisherAttribution } from 'components/content-publisher/publisher-attribution'
 import { SaveArticleTop } from 'components/content-saving/save-article'
 import { SaveArticleBottom } from 'components/content-saving/save-article'
+import { AdAboveTheFold } from 'components/content-ads/content-ads'
+import { AdBelowTheFold } from 'components/content-ads/content-ads'
+import { AdRailTop } from 'components/content-ads/content-ads'
+import { AdRailBottom } from 'components/content-ads/content-ads'
+
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
-
-import { css, cx } from 'linaria'
-import { OffsetList } from 'components/items-layout/list-offset'
 import { ItemCard } from 'connectors/item-card/collection/story-card'
-
 import { saveCollection } from 'containers/collections/collections.state'
+import { saveCollectionPage } from 'containers/collections/collections.state'
 import { Toasts } from 'connectors/toasts/toast-list'
-
-const collectionDetail = css`
-  ${cardsGrid};
-  .left-aside {
-    grid-column: 1 / 2;
-  }
-
-  .right-aside {
-    grid-column: 9 / -1;
-  }
-
-  .content-body {
-    grid-column: 2 / 9;
-  }
-
-  .hero-image img {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .content-excerpt {
-    font-weight: 400;
-    font-size: 1.4375rem;
-    line-height: 160%;
-    margin-bottom: 2.5rem;
-  }
-
-  article {
-    margin-bottom: 3rem;
-  }
-`
 
 export function CollectionPage({ queryParams = {}, slug }) {
   const metaData = {
@@ -64,10 +35,10 @@ export function CollectionPage({ queryParams = {}, slug }) {
   const { mobile_web_view: isMobileWebView } = queryParams
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
 
-  const { title, intro, excerpt, authors, stories, imageUrl, urls, saveStatus } = data
+  const { title, intro, excerpt, authors, stories, imageUrl, urls, pageSaveStatus } = data
   const authorNames = authors?.map((author) => author.name)
 
-  const saveAction = () => {}
+  const saveAction = () => dispatch(saveCollectionPage(slug))
 
   const count = urls.length
   const saveCollectionTop = () => dispatch(saveCollection(slug))
@@ -75,50 +46,85 @@ export function CollectionPage({ queryParams = {}, slug }) {
 
   return (
     <ArticleLayout title={metaData.title} metaData={metaData}>
-      <main className={cx('main', collectionDetail)}>
-        <aside className="left-aside">Hi</aside>
-        <aside className="right-aside">Hi</aside>
-        <div className="content-body">
+      <main className={contentLayout}>
+        <section>
+          <AdAboveTheFold />
+        </section>
+        {/* Content header information */}
+        <section className="content-section">
           <header>
-            <div className={cx('spacing', isMobileWebView && 'mobile')}>
-              <PocketWorthy />
-              <ParsedHeadline title={title} description={intro} />
-              {authors ? (
-                <AuthorByline
-                  url="/collections"
-                  name="Pocket Collections"
-                  showAuthors={true}
-                  authorNames={authorNames}
-                />
-              ) : null}
-            </div>
-
-            <div className="hero-image">
-              <img src={imageUrl} alt="" />
-            </div>
-
-            <p className="content-excerpt">{excerpt}</p>
-
+            <PocketWorthy />
+            <ParsedHeadline title={title} description={intro} />
+            {authors ? (
+              <AuthorByline
+                url="/collections"
+                name="Pocket Collections"
+                showAuthors={true}
+                authorNames={authorNames}
+              />
+            ) : null}
             <SaveArticleTop
               isAuthenticated={isAuthenticated}
               saveAction={saveAction}
-              saveStatus={saveStatus}
+              saveStatus={pageSaveStatus}
             />
           </header>
+        </section>
 
-          {/* Collection Stories */}
-          {stories.map((id, index) => (
-            <ItemCard id={id} key={id} position={index} cardShape="wide" showExcerpt={true} />
-          ))}
+        {/* Content body like a syndicated article or collection */}
+        <section className="content-section">
+          {/* Left side content actions */}
+          <aside className="left-aside">
+            <ArticleActions
+              isMobileWebView={isMobileWebView}
+              title={title}
+              excerpt={excerpt}
+              saveAction={saveAction}
+              saveStatus={pageSaveStatus}
+              isAuthenticated={isAuthenticated}
+              handleShareClick={() => {}}
+              className="sticky"
+              slug={slug}
+            />
+          </aside>
 
-          <SaveArticleBottom
-            isAuthenticated={isAuthenticated}
-            saveAction={saveAction}
-            saveStatus={saveStatus}
-          />
+          {/* Right aside content such as ads and recs */}
+          <aside className="right-aside">
+            <AdRailTop />
+            {/* <PublisherRecs
+                recommendations={publisherRecs}
+                publisher={publisher}
+                maxRecommendations={3}
+                handleRecImpression={handleRecImpression}
+                handleRecClick={handleRecClick}
+              /> */}
+            <AdRailBottom />
+          </aside>
 
-          <TopicsBubbles topics={topics} className="no-border" />
-        </div>
+          <div className="content-body">
+            <img src={imageUrl} alt="" className="hero-image" />
+            <p className="content-excerpt">{excerpt}</p>
+
+            {/* Collection Stories */}
+            {stories.map((id, index) => (
+              <ItemCard id={id} key={id} position={index} cardShape="wide" showExcerpt={true} />
+            ))}
+          </div>
+        </section>
+
+        <section className="content-section">
+          <footer>
+            <SaveArticleBottom
+              isAuthenticated={isAuthenticated}
+              saveAction={saveAction}
+              saveStatus={pageSaveStatus}
+            />
+
+            <AdBelowTheFold />
+
+            <TopicsBubbles topics={topics} className="no-border" />
+          </footer>
+        </section>
       </main>
       <Toasts />
     </ArticleLayout>
