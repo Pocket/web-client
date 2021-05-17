@@ -168,7 +168,7 @@ Each branch will have a subsequent feature branch that will deployed.
 > _Details to follow_
 
 #### Production Release
-Production release will happen automatically when a PR is merged to `master`.  Master is a protected branch and can only be modified with an approved PR.
+Production release will happen automatically when a PR is merged to `main`.  Main is a protected branch and can only be modified with an approved PR.
 > _Details to follow_
 
 ---
