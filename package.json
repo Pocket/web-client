@@ -129,7 +129,7 @@
     "linaria": "2.1.0",
     "match-sorter": "6.3.0",
     "mousetrap": "1.6.5",
-    "next": "^10.0.9",
+    "next": "^10.2.0",
     "next-i18next": "8.1.2",
     "next-redux-saga": "4.1.2",
     "next-redux-wrapper": "6.0.2",

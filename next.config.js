@@ -16,6 +16,7 @@ module.exports = withPlugins([withCSS], {
     return [
       { source: '/explore', destination: '/discover' },
       { source: '/explore/item/:slug', destination: '/discover/item/:slug' },
+      { source: '/explore/:slug', destination: '/discover/:slug' },
       { source: '/web-client-health', destination: '/health' },
       { source: '/web-client-api/:path*', destination: '/api/:path*' }
     ]
