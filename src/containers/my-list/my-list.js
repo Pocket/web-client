@@ -43,7 +43,8 @@ export default function MyList(props) {
   const total = useSelector((state) => state.myList[`${section}Total`])
   const since = useSelector((state) => state.myList[`${section}Since`])
   const listMode = useSelector((state) => state.app.listMode)
-  const sortOrder = useSelector((state) => state.app.sortOptions[subset] || 'newest')
+  const sortSubset = useSelector((state) => state.app.section)
+  const sortOrder = useSelector((state) => state.app.sortOptions[sortSubset] || 'newest')
   const routeChange = useHasChanged(router.pathname)
 
   const isLoggedIn = useSelector((state) => !!state.user.auth)
@@ -139,7 +140,7 @@ export default function MyList(props) {
     dispatch(getMylistData(45, offset, subset, filter, tag))
   }
 
-  const toggleSortOrder = () => dispatch(sortOrderToggle(subset))
+  const toggleSortOrder = () => dispatch(sortOrderToggle())
 
   const shouldRender = userStatus !== 'pending'
 

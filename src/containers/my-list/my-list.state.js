@@ -348,6 +348,7 @@ const getSortOptionsBySubset = (state, subset) => state.app.sortOptions[subset] 
 const getMyListItemsById = (state) => state.myListItemsById
 const getSearchSortOrder = (state) => state.myList.searchSortOrder
 const getState = (state) => state.myList || {}
+const getSubset = (state) => state.app.section
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -357,7 +358,8 @@ function* myListDataRequest(action) {
     const { count = 15, offset = 0, subset = 'active', tag, filter } = action
 
     const parameters = {}
-    const sortOrder = yield select(getSortOptionsBySubset, subset)
+    const sortSubset = yield select(getSubset)
+    const sortOrder = yield select(getSortOptionsBySubset, sortSubset)
 
     // Set appropriate subset
     if (subset === 'unread') parameters.state = 'unread'
@@ -415,7 +417,8 @@ function* myListDataRequest(action) {
 function* myListUpdate(action) {
   try {
     const { since, subset = 'active', filter, tag } = action
-    const sortOrder = yield select(getSortOptionsBySubset, subset)
+    const sortSubset = yield select(getSubset)
+    const sortOrder = yield select(getSortOptionsBySubset, sortSubset)
 
     const data = yield fetchMyListUpdate({ since })
 
