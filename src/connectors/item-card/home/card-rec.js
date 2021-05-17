@@ -32,7 +32,7 @@ export const RecCard = ({ id, position, className, cardShape = 'detail', showExc
       openUrl={openUrl}
       // Tracking
       onItemInView={onItemInView}
-      openAction={onOpen}
+      onOpen={onOpen}
       ActionMenu={ActionsRec}
     />
   ) : null
