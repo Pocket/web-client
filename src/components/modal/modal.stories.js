@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { css } from 'linaria'
-import { text, boolean } from '@storybook/addon-knobs'
 import { Button } from '@pocket/web-ui'
 import Modal, { ModalBody, ModalFooter } from './modal'
 import { TextArea } from '@pocket/web-ui'
@@ -22,9 +21,7 @@ const testChildStyles = css`
 `
 
 const OverflowElement = () => (
-  <div className={testChildStyles}>
-    Placeholder content block (can overflow)
-  </div>
+  <div className={testChildStyles}>Placeholder content block (can overflow)</div>
 )
 
 export const Basic = () => (
@@ -51,15 +48,13 @@ export const StaticModal = () => (
     appRootSelector={APP_ROOT_SELECTOR}
     screenReaderLabel="Modal in Storybook"
     handleClose={() => {}}
-    isOpen={boolean('isOpen', true)}
-    forceMobile={boolean('forceMobile', false)}
-    showCloseButton={boolean('showCloseButton', true)}>
+    isOpen={true}
+    forceMobile={false}
+    showCloseButton={true}>
     <ModalBody>Wocka wocka</ModalBody>
-    {boolean('withModalFooter', true) ? (
-      <ModalFooter>
-        <Button>Primary Action</Button>
-      </ModalFooter>
-    ) : null}
+    <ModalFooter>
+      <Button>Primary Action</Button>
+    </ModalFooter>
   </Modal>
 )
 
@@ -109,19 +104,13 @@ export const WithForm = () => {
       appRootSelector={APP_ROOT_SELECTOR}
       screenReaderLabel="Modal in Storybook"
       handleClose={() => {}}
-      isOpen={boolean('isOpen', true)}
-      showCloseButton={boolean('showCloseButton', true)}>
+      isOpen={true}
+      showCloseButton={true}>
       <ModalBody>
         <form>
           {standardReasons.map(({ id, label }) => (
             <div key={id}>
-              <input
-                type="radio"
-                name="reason"
-                value={id}
-                id={id}
-                onChange={handleRadioChange}
-              />
+              <input type="radio" name="reason" value={id} id={id} onChange={handleRadioChange} />
               <label htmlFor={id}>{label}</label>
             </div>
           ))}
@@ -163,15 +152,13 @@ export const LengthyContentModal = () => (
     appRootSelector={APP_ROOT_SELECTOR}
     screenReaderLabel="Modal in Storybook"
     handleClose={() => {}}
-    isOpen={boolean('isOpen', true)}>
+    isOpen={true}>
     <ModalBody>
       <LongContent />
     </ModalBody>
-    {boolean('withModalFooter', true) ? (
-      <ModalFooter>
-        <Button>Primary Action</Button>
-      </ModalFooter>
-    ) : null}
+    <ModalFooter>
+      <Button>Primary Action</Button>
+    </ModalFooter>
   </Modal>
 )
 
@@ -190,8 +177,8 @@ export const NoBackgroundScroll = () => {
         handleClose={() => setOpen(false)}
         isOpen={isOpen}>
         <ModalBody>
-          The background should not scroll. If this modal is closed, background
-          will be scrollable again.
+          The background should not scroll. If this modal is closed, background will be scrollable
+          again.
         </ModalBody>
         <ModalFooter>
           <Button>Primary Action</Button>
@@ -216,13 +203,13 @@ export const Interactive = () => {
         isOpen={modalIsOpen}
         screenReaderLabel="Modal in Storybook"
         handleClose={handleCloseModal}
-        shouldCloseOnOverlayClick={boolean('shouldCloseOnOverlayClick', true)}
-        showCloseButton={boolean('showCloseButton', true)}>
+        shouldCloseOnOverlayClick={true}
+        showCloseButton={true}>
         <ModalBody>
           <button onClick={handleCloseModal}>Please close the modal</button>
           <OverflowElement />
         </ModalBody>
-        <ModalFooter isSticky={boolean('stickyFooter', true)}>
+        <ModalFooter isSticky={true}>
           <Button>Primary Action</Button>
         </ModalFooter>
       </Modal>
@@ -232,52 +219,43 @@ export const Interactive = () => {
 
 const LongContent = () => (
   <div>
-    I love cheese, especially red leicester ricotta. Cheese and wine cream
-    cheese cheddar boursin melted cheese cream cheese bocconcini everyone loves.
-    Queso manchego say cheese cheesy feet macaroni cheese cut the cheese fromage
-    who moved my cheese. Roquefort red leicester swiss rubber cheese hard cheese
-    taleggio port-salut cauliflower cheese. Halloumi macaroni cheese emmental
-    cauliflower cheese hard cheese st. agur blue cheese macaroni cheese cut the
-    cheese. Squirty cheese cheesecake who moved my cheese paneer cheesy feet
-    bocconcini cheese and wine cut the cheese. Who moved my cheese gouda gouda
-    croque monsieur cream cheese ricotta monterey jack cottage cheese. Bavarian
-    bergkase monterey jack chalk and cheese gouda feta bavarian bergkase paneer
-    everyone loves. Everyone loves.
+    I love cheese, especially red leicester ricotta. Cheese and wine cream cheese cheddar boursin
+    melted cheese cream cheese bocconcini everyone loves. Queso manchego say cheese cheesy feet
+    macaroni cheese cut the cheese fromage who moved my cheese. Roquefort red leicester swiss rubber
+    cheese hard cheese taleggio port-salut cauliflower cheese. Halloumi macaroni cheese emmental
+    cauliflower cheese hard cheese st. agur blue cheese macaroni cheese cut the cheese. Squirty
+    cheese cheesecake who moved my cheese paneer cheesy feet bocconcini cheese and wine cut the
+    cheese. Who moved my cheese gouda gouda croque monsieur cream cheese ricotta monterey jack
+    cottage cheese. Bavarian bergkase monterey jack chalk and cheese gouda feta bavarian bergkase
+    paneer everyone loves. Everyone loves.
     <br />
     <br />
-    Parmesan airedale paneer. Cauliflower cheese lancashire cheese on toast
-    camembert de normandie cheese strings who moved my cheese cheese on toast
-    ricotta. Stilton halloumi the big cheese cheesy grin jarlsberg camembert de
-    normandie cheesy feet manchego. Roquefort cow who moved my cheese port-salut
-    edam cheese on toast rubber cheese smelly cheese. Cauliflower cheese
-    jarlsberg cheesy grin roquefort fromage when the cheese comes out
-    everybody's happy halloumi lancashire. Fromage frais brie ricotta cheesy
-    feet camembert de normandie roquefort dolcelatte brie. Cheese strings
-    cheddar when the cheese comes out everybody's happy fromage frais monterey
-    jack.
+    Parmesan airedale paneer. Cauliflower cheese lancashire cheese on toast camembert de normandie
+    cheese strings who moved my cheese cheese on toast ricotta. Stilton halloumi the big cheese
+    cheesy grin jarlsberg camembert de normandie cheesy feet manchego. Roquefort cow who moved my
+    cheese port-salut edam cheese on toast rubber cheese smelly cheese. Cauliflower cheese jarlsberg
+    cheesy grin roquefort fromage when the cheese comes out everybody's happy halloumi lancashire.
+    Fromage frais brie ricotta cheesy feet camembert de normandie roquefort dolcelatte brie. Cheese
+    strings cheddar when the cheese comes out everybody's happy fromage frais monterey jack.
     <br />
     <br />
-    Brie roquefort gouda. St. agur blue cheese cheeseburger feta the big cheese
-    swiss feta boursin cheesy feet. Danish fontina taleggio fromage babybel
-    queso the big cheese the big cheese cheese slices. Pecorino when the cheese
-    comes out everybody's happy edam pepper jack red leicester cheesy feet feta
-    mascarpone. Halloumi mozzarella blue castello cheese strings cheesecake
-    cheddar paneer cheese triangles. Stinking bishop squirty cheese boursin
-    fromage frais cheese triangles halloumi monterey jack cauliflower cheese.
-    Monterey jack cheesy feet babybel pecorino say cheese cheese strings cheese
-    on toast cottage cheese. Cut the cheese cheese and biscuits rubber cheese
+    Brie roquefort gouda. St. agur blue cheese cheeseburger feta the big cheese swiss feta boursin
+    cheesy feet. Danish fontina taleggio fromage babybel queso the big cheese the big cheese cheese
+    slices. Pecorino when the cheese comes out everybody's happy edam pepper jack red leicester
+    cheesy feet feta mascarpone. Halloumi mozzarella blue castello cheese strings cheesecake cheddar
+    paneer cheese triangles. Stinking bishop squirty cheese boursin fromage frais cheese triangles
+    halloumi monterey jack cauliflower cheese. Monterey jack cheesy feet babybel pecorino say cheese
+    cheese strings cheese on toast cottage cheese. Cut the cheese cheese and biscuits rubber cheese
     st. agur blue cheese say cheese halloumi.
     <br />
     <br />
-    Cheese slices halloumi cheesecake. Bocconcini cheesecake manchego emmental
-    cheeseburger bocconcini boursin cheese on toast. Pepper jack edam cheesecake
-    the big cheese goat babybel cheese triangles goat. Babybel paneer cheddar
-    fromage cheeseburger squirty cheese macaroni cheese cheese and wine. Paneer
-    paneer hard cheese bocconcini chalk and cheese macaroni cheese melted cheese
-    st. agur blue cheese. Cottage cheese cheese strings gouda brie bavarian
-    bergkase brie cheese and wine ricotta. Squirty cheese mascarpone paneer
-    cheese on toast cheese slices camembert de normandie cheese and wine squirty
-    cheese. Blue castello cheesy feet. Hard Cheese
+    Cheese slices halloumi cheesecake. Bocconcini cheesecake manchego emmental cheeseburger
+    bocconcini boursin cheese on toast. Pepper jack edam cheesecake the big cheese goat babybel
+    cheese triangles goat. Babybel paneer cheddar fromage cheeseburger squirty cheese macaroni
+    cheese cheese and wine. Paneer paneer hard cheese bocconcini chalk and cheese macaroni cheese
+    melted cheese st. agur blue cheese. Cottage cheese cheese strings gouda brie bavarian bergkase
+    brie cheese and wine ricotta. Squirty cheese mascarpone paneer cheese on toast cheese slices
+    camembert de normandie cheese and wine squirty cheese. Blue castello cheesy feet. Hard Cheese
     <br />
     <br />
     <div>

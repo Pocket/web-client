@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import { DepthTracking } from './depth-tracking'
 import { css } from 'linaria'
-import { ParsedContent } from 'components/article/parsed-content'
+import { ParsedContent } from 'components/content-parsed/parsed-content'
 import { articleContent } from 'mock/article'
 
 export default {
