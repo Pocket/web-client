@@ -5,10 +5,11 @@ import { recommendationsFromSlate } from 'common/utilities'
 
 import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
 
-export async function getDiscoverFeed(recommendationCount = 30) {
+export async function getDiscoverFeed({ recommendationCount = 30, locale }) {
+  const id = getLocaleId(locale)
   return requestGQL({
     query: getSlateLineup,
-    variables: { id: TOPIC_IDS['explore'].id, recommendationCount }
+    variables: { id, recommendationCount }
   })
     .then(processSlates)
     .catch((error) => console.error(error))
@@ -17,8 +18,20 @@ export async function getDiscoverFeed(recommendationCount = 30) {
 function processSlates(response) {
   const slateLineup = getRecIds(response?.data?.getSlateLineup)
   const slates = response?.data?.getSlateLineup?.slates || []
-  const top = recommendationsFromSlate(slates[0], slateLineup)
-  const bottom = recommendationsFromSlate(slates[1], slateLineup)
+  const top = slates[0] ? recommendationsFromSlate(slates[0], slateLineup) : []
+  const bottom = slates[1] ? recommendationsFromSlate(slates[1], slateLineup) : []
 
   return [...top, ...bottom]
+}
+
+const getLocaleId = function (locale) {
+  switch (locale) {
+    case 'de': {
+      return TOPIC_IDS['explore']['de'].id
+    }
+
+    default: {
+      return TOPIC_IDS['explore']['en'].id
+    }
+  }
 }

@@ -15,28 +15,26 @@ import { LOCALE_COMMON } from 'common/constants'
  * until they are resolved, which is fine if we need the data for
  * SEO/Crawlers
   --------------------------------------------------------------- */
-export const getStaticProps = wrapper.getStaticProps(
-  async ({ store, locale }) => {
-    const { dispatch } = store
+export const getStaticProps = wrapper.getStaticProps(async ({ store, locale }) => {
+  const { dispatch } = store
 
-    // Hydrating initial state with an async request. This will block the
-    // page from loading. Do this for SEO/crawler purposes
-    const response = await fetchDiscoverData(true)
-    const { items, itemsById } = response
-    const topicsByName = await fetchTopicList(true)
+  // Hydrating initial state with an async request. This will block the
+  // page from loading. Do this for SEO/crawler purposes
+  const response = await fetchDiscoverData({ locale })
+  const { items, itemsById } = response
+  const topicsByName = await fetchTopicList(true)
 
-    // Since ssr will not wait for side effects to resolve this dispatch
-    // needs to be pure as well.
-    dispatch(hydrateDiscover({ items }))
-    dispatch(hydrateItems(itemsById))
-    dispatch(hydrateTopicList({ topicsByName }))
+  // Since ssr will not wait for side effects to resolve this dispatch
+  // needs to be pure as well.
+  dispatch(hydrateDiscover({ items }))
+  dispatch(hydrateItems(itemsById))
+  dispatch(hydrateTopicList({ topicsByName }))
 
-    // Revalidate means this can be regenerated once every X seconds
-    return {
-      props: { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])) },
-      revalidate: 60
-    }
+  // Revalidate means this can be regenerated once every X seconds
+  return {
+    props: { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])) },
+    revalidate: 60
   }
-)
+})
 
 export default Discover
