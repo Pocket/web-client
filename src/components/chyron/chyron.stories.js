@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Chyron, getChyronId, getChyronDismissalDate } from './chyron'
 import { ScrollChyron } from './chyron-scroll'
-import { ParsedContent } from 'components/article/parsed-content'
+import { ParsedContent } from 'components/content-parsed/parsed-content'
 import { articleContent } from 'mock/article'
 import { css } from 'linaria'
 

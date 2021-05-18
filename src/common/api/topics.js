@@ -44,8 +44,8 @@ export function getTopicList(ssr) {
 function processSlates(response) {
   const slateLineup = getRecIds(response?.data?.getSlateLineup)
   const slates = response?.data?.getSlateLineup?.slates || []
-  const curated = recommendationsFromSlate(slates[0], slateLineup)
-  const algorithmic = recommendationsFromSlate(slates[1], slateLineup)
+  const curated = slates[0] ? recommendationsFromSlate(slates[0], slateLineup) : []
+  const algorithmic = slates[1] ? recommendationsFromSlate(slates[1], slateLineup) : []
 
   return { curated, algorithmic }
 }

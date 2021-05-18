@@ -1,3 +1,28 @@
+## [1.13.1](https://github.com/Pocket/web-client/compare/v1.13.0...v1.13.1) (2021-05-18)
+
+
+### Bug Fixes
+
+* **share recommend:** add share.recommend snowplow event when user recommends an item ([0d06826](https://github.com/Pocket/web-client/commit/0d068263c6adaa39b7ec43aa6e811bae94925959))
+* **share recommend:** order of trackItemAction params ([2e46aea](https://github.com/Pocket/web-client/commit/2e46aea62f8a33c9e7febb7b4cdec1cb31418780))
+* **share recommend:** pass position to ShareRecommend ([f84aeb9](https://github.com/Pocket/web-client/commit/f84aeb9ef97158950b8875429679c1165975d6e6))
+
+# [1.13.0](https://github.com/Pocket/web-client/compare/v1.12.21...v1.13.0) (2021-05-18)
+
+
+### Features
+
+* **discover:** add locale based feeds (de) ([add8c4a](https://github.com/Pocket/web-client/commit/add8c4aaf0401a3d84ca21f2f4cd8336f91efce4))
+
+## [1.12.21](https://github.com/Pocket/web-client/compare/v1.12.20...v1.12.21) (2021-05-17)
+
+
+### Bug Fixes
+
+* **dependency:** react-markdown with api change ([50794ad](https://github.com/Pocket/web-client/commit/50794ad939cc1fc0d8a47a1c0e497f40a8cb0440))
+* **storybook:** update/cleanup addons ([f3c1c33](https://github.com/Pocket/web-client/commit/f3c1c335f3869fadfda82445b93475169d1033dc))
+* **topics:** update for curated only collection ([2b7aeb9](https://github.com/Pocket/web-client/commit/2b7aeb9f4246457c0527bcea318aca2a67fdd2db))
+
 ## [1.12.20](https://github.com/Pocket/web-client/compare/v1.12.19...v1.12.20) (2021-05-13)
 
 

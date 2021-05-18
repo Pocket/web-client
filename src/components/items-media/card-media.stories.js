@@ -1,4 +1,4 @@
-import { CardMedia } from 'components/media/card-media'
+import { CardMedia } from 'components/items-media/card-media'
 import { css } from 'linaria'
 
 const imageWrapper = css`

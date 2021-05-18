@@ -5,6 +5,7 @@ import { css } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
 
 import { itemsRecommendConfirm } from 'connectors/items-by-id/my-list/items.share'
+import { trackItemAction } from 'connectors/snowplow/snowplow.state'
 
 const recommendStyle = css`
   display: flex;
@@ -20,11 +21,14 @@ const recommendStyle = css`
   }
 `
 
-export function ShareRecommend() {
+export function ShareRecommend({ item, position }) {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [commentValue, setCommentValue] = useState('')
-  const confirmShare = (comment) => dispatch(itemsRecommendConfirm(comment))
+  const confirmShare = (comment) => {
+    dispatch(itemsRecommendConfirm(comment))
+    dispatch(trackItemAction(position, item, 'share.recommend'))
+  }
   const onClick = () => confirmShare(commentValue)
 
   return (

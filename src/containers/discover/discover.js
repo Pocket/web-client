@@ -33,7 +33,7 @@ import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { CallOutStartLibraryExplore } from 'components/call-out/call-out-start-library'
 import { CallOutPocketHitsSignup } from 'components/call-out/call-out-pocket-hits'
 
-export default function Discover({ url }) {
+export default function Discover({ url, locale }) {
   useEffect(trackPageView, [])
 
   // Select items
@@ -42,6 +42,7 @@ export default function Discover({ url }) {
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
+  const showTopics = locale === 'en'
 
   const metaData = {
     description: 'Discover fascinating stories from all across the web with Pocket.',
@@ -64,7 +65,7 @@ export default function Discover({ url }) {
       {/* Top Lockup (center)*/}
       <Lockup items={items} offset={0} heroPosition="center" ItemCard={ItemCard} />
 
-      <CardTopicsNav topics={topics} track={trackTopicClick} />
+      {showTopics ? <CardTopicsNav topics={topics} track={trackTopicClick} /> : null}
 
       {/* Pocket Brand Messaging */}
       <CalloutTop shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
@@ -78,9 +79,17 @@ export default function Discover({ url }) {
 
       <CalloutBottom shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
 
-      <OffsetList items={items} offset={15} cardShape="wide" ItemCard={ItemCard} border={true} />
+      <OffsetList
+        items={items}
+        offset={15}
+        cardShape="wide"
+        ItemCard={ItemCard}
+        border={showTopics}
+      />
 
-      <CardTopicsNav topics={topics} track={trackTopicClick} className="no-border" />
+      {showTopics ? (
+        <CardTopicsNav topics={topics} track={trackTopicClick} className="no-border" />
+      ) : null}
 
       <ReportFeedbackModal />
     </Layout>
