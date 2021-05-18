@@ -91,13 +91,6 @@ export function CollectionPage({ queryParams = {}, slug }) {
           {/* Right aside content such as ads and recs */}
           <aside className="right-aside">
             <AdRailTop />
-            {/* <PublisherRecs
-                recommendations={publisherRecs}
-                publisher={publisher}
-                maxRecommendations={3}
-                handleRecImpression={handleRecImpression}
-                handleRecClick={handleRecClick}
-              /> */}
             <AdRailBottom />
           </aside>
 
