@@ -7,6 +7,7 @@ import { useHasChanged } from 'common/utilities/hooks/has-changed'
 import Layout from 'layouts/with-sidebar'
 import { getMylistSearchData } from 'containers/my-list/my-list.state'
 import { appSetSection } from 'connectors/app/app.state'
+import { sortOrderToggle } from 'connectors/app/app.state'
 import { SearchPageHeader } from 'components/headers/search-page-header'
 
 import { VirtualizedList } from 'connectors/virtualized/virtualized-list'
@@ -33,9 +34,10 @@ export default function Collection(props) {
   const offset = useSelector((state) => state.myList[`${section}Offset`])
   const total = useSelector((state) => state.myList[`${section}Total`])
   const listMode = useSelector((state) => state.app.listMode)
-  const sortOrder = useSelector((state) => state.myList.searchSortOrder)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
+  const sortSubset = useSelector((state) => state.app.section)
+  const sortOrder = useSelector((state) => state.app.sortOptions[sortSubset] || 'newest')
 
   const [hasLoaded, setHasLoaded] = useState(false)
 
@@ -76,6 +78,8 @@ export default function Collection(props) {
     dispatch(getMylistSearchData(filter, query))
   }
 
+  const toggleSortOrder = () => dispatch(sortOrderToggle())
+
   const shouldRender = userStatus !== 'pending'
   const type = listMode
 
@@ -87,7 +91,13 @@ export default function Collection(props) {
         <main className="main">
           {isLoggedIn ? (
             <>
-              <SearchPageHeader filter={filter} query={query} total={total} />
+              <SearchPageHeader
+                subset={subset}
+                filter={filter}
+                query={query}
+                total={total}
+                sortOrder={sortOrder}
+                toggleSortOrder={toggleSortOrder} />
               {items?.length ? (
                 <VirtualizedList
                   type={type}
