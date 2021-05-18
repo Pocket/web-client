@@ -32,7 +32,7 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store, locale }) =
 
   // Revalidate means this can be regenerated once every X seconds
   return {
-    props: { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])) },
+    props: { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])), locale },
     revalidate: 60
   }
 })
