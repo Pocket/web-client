@@ -159,9 +159,6 @@ const initialState = {
   videosfavoritesSince: 0,
   videosfavoritesTotal: false,
 
-  // State for search and search filters
-  searchSortOrder: 'relevance',
-
   search: [],
   searchOffset: 0,
   searchSince: 0,
@@ -346,7 +343,6 @@ export const myListSagas = [
  --------------------------------------------------------------- */
 const getSortOptionsBySubset = (state, subset) => state.app.sortOptions[subset] || 'newest'
 const getMyListItemsById = (state) => state.myListItemsById
-const getSearchSortOrder = (state) => state.myList.searchSortOrder
 const getState = (state) => state.myList || {}
 const getSubset = (state) => state.app.section
 
@@ -360,6 +356,8 @@ function* myListDataRequest(action) {
     const parameters = {}
     const sortSubset = yield select(getSubset)
     const sortOrder = yield select(getSortOptionsBySubset, sortSubset)
+
+    console.log({ subset, filter })
 
     // Set appropriate subset
     if (subset === 'unread') parameters.state = 'unread'
@@ -466,7 +464,7 @@ function* myListSearchRequest(action) {
     const section = filter ? 'search' + filter : 'search'
 
     const parameters = { search: query }
-    const sortOrder = yield select(getSearchSortOrder)
+    const sortOrder = yield select(getSortOptionsBySubset, 'search')
 
     // Apply filters
     if (filter === 'active') parameters.state = 'unread'

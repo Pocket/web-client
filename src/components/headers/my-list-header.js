@@ -1,13 +1,12 @@
 import { css } from 'linaria'
 import { breakpointSmallHandset } from '@pocket/web-ui'
 import { breakpointLargeHandset } from '@pocket/web-ui'
-import { breakpointTinyTablet } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { ListSort } from 'components/list-sort/list-sort'
 import { capitalizeFirstLetter } from 'common/utilities'
 
-const myListHeaderStyle = css`
+export const myListHeaderStyle = css`
   margin-bottom: var(--spacing150);
   font-family: 'Graphik Web';
   border-bottom: 1px solid var(--color-dividerTertiary);
