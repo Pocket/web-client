@@ -4,6 +4,7 @@ import { LOGIN_URL, SIGNUP_URL } from 'common/constants'
 import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
 import Link from 'next/link'
+import { useTranslation, Trans } from 'next-i18next'
 
 import { SaveIcon } from '@pocket/web-ui'
 import { SaveFilledIcon } from '@pocket/web-ui'
@@ -92,8 +93,10 @@ export const SavePopover = function ({ popoverRef, id }) {
   return (
     //prettier-ignore
     <div className={popoverContainer} ref={popoverRef} data-cy={`article-save-login-popup-${id}`}>
-      <a className="popoverLink" href={loginUrl}>Log in</a> or{' '}
-      <a className="popoverLink" href={signupUrl}>Sign up</a> to save this article.
+      <Trans i18nKey="userMessagesUnread">
+        <a className="popoverLink" href={loginUrl}>Log in</a> or{' '}
+        <a className="popoverLink" href={signupUrl}>Sign up</a> to save this article.    
+      </Trans>
     </div>
   )
 }
@@ -111,10 +114,12 @@ export const SaveToPocket = function ({
   allowRead = false,
   id
 }) {
+  const { t } = useTranslation()
+
   const saveCopy = {
-    unsaved: 'Save',
-    saving: 'Save',
-    saved: 'Saved'
+    unsaved: t('item-action:save-unsaved', 'Save'),
+    saving: t('item-action:save-saving', 'Save'),
+    saved: t('item-action:save-saved', 'Saved')
   }
 
   const handleClick = (event) => {
@@ -147,9 +152,13 @@ export const SaveToPocket = function ({
 
   return saveStatus === 'saved' && allowRead ? (
     <Link href={url}>
-      <a data-cy={`article-read-now-${id}`} onClick={onOpen} className={saveClasses} target={openExternal ? '_blank' : undefined}>
+      <a
+        data-cy={`article-read-now-${id}`}
+        onClick={onOpen}
+        className={saveClasses}
+        target={openExternal ? '_blank' : undefined}>
         <ReadingIcon />
-        <span className="actionCopy">Read now</span>
+        <span className="actionCopy">{t('item-action:read-now', 'Read Now')}</span>
       </a>
     </Link>
   ) : (
