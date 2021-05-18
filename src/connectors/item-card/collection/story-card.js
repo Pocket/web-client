@@ -38,7 +38,7 @@ export function ItemCard({ id, position }) {
       openUrl={openUrl}
       // Tracking
       onItemInView={onItemInView}
-      openAction={onOpen}
+      onOpen={onOpen}
       ActionMenu={ActionsCollection}
     />
   )
