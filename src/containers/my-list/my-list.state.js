@@ -357,8 +357,6 @@ function* myListDataRequest(action) {
     const sortSubset = yield select(getSubset)
     const sortOrder = yield select(getSortOptionsBySubset, sortSubset)
 
-    console.log({ subset, filter })
-
     // Set appropriate subset
     if (subset === 'unread') parameters.state = 'unread'
     if (subset === 'archive') parameters.state = 'read'
