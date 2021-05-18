@@ -151,9 +151,7 @@ async function locateRepo() {
     return location
   } catch (error) {
     console.log('')
-    console.log(
-      chalk.magenta(`Oops — Can't find or access ${chalk.red(error.path)}`)
-    )
+    console.log(chalk.magenta(`Oops — Can't find or access ${chalk.red(error.path)}`))
     console.log(
       `Try cloning the repo manually from ${chalk.blue(
         localizationRepo
@@ -184,12 +182,12 @@ async function cloneRepo(location) {
 }
 
 /**
- * updateRepo just checks out master and pulls the latest changes
+ * updateRepo just checks out main and pulls the latest changes
  */
 async function updateRepo() {
   try {
     console.log(chalk.blue('Updating Repo'))
-    await git.checkout('master')
+    await git.checkout('main')
     return git.pull()
   } catch (error) {
     console.log(error)
@@ -226,10 +224,7 @@ async function selectBranch(localBranches) {
     const selectInitOption = new Select({
       name: 'which-branch',
       message: `What branch would you like to use?`,
-      choices: [
-        'Create a new branch',
-        ...localBranches.all.filter((branch) => branch !== 'master')
-      ]
+      choices: ['Create a new branch', ...localBranches.all.filter((branch) => branch !== 'main')]
     })
 
     const answer = await selectInitOption.run()
@@ -242,8 +237,7 @@ async function selectBranch(localBranches) {
           message: 'What would you like to call your branch?'
         })
 
-        if (!branchName.length)
-          throw new Error('You must select a branch name.')
+        if (!branchName.length) throw new Error('You must select a branch name.')
         return branchName
       }
 
@@ -308,7 +302,7 @@ async function submitPR(token, branchName, changedFiles) {
   ${changedFiles.join(`,
   `)}`,
         head: branchName,
-        base: 'master'
+        base: 'main'
       })
     }).then((response) => response.json())
 
@@ -341,9 +335,7 @@ async function parseLocalizationChanges(location) {
       config = require(path.resolve('i18next-parser.config.js'))
     } catch (err) {
       if (err.code === 'MODULE_NOT_FOUND') {
-        console.log(
-          '  [error] ' + 'Config file does not exist: i18next-parser.config.js'
-        )
+        console.log('  [error] ' + 'Config file does not exist: i18next-parser.config.js')
       } else {
         throw err
       }

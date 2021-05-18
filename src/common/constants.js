@@ -226,6 +226,11 @@ export const TOPIC_IDS = {
     id: '2a817ad0-cbba-4330-9559-291468145588'
   },
   explore: {
-    id: '9c3018a8-8aa9-4f91-81e9-ebcd95fc82da'
+    de: {
+      id: '507d215c-4776-4f8e-af49-2ed6f3309aff'
+    },
+    en: {
+      id: '9c3018a8-8aa9-4f91-81e9-ebcd95fc82da'
+    }
   }
 }

@@ -1,15 +1,6 @@
 import React from 'react'
-import { object, text } from '@storybook/addon-knobs'
-import defineKnobs from 'helpers/define-knobs'
 import GlobalNavMobileMenu from './global-nav-mobile-menu'
 import { DiscoverIcon, ListViewIcon } from '@pocket/web-ui'
-
-const globalNavLinksKnobs = defineKnobs((props) => {
-  return {
-    links: object('links', props.links),
-    selectedLink: text('selectedLink', props.selectedLink || 'discover')
-  }
-})
 
 const baseProps = {
   appRootSelector: '#root',
@@ -46,15 +37,10 @@ const baseProps = {
 
 export default {
   title: 'GlobalNav/GlobalNavMobileMenu',
-  component: GlobalNavMobileMenu,
-  decorators: [globalNavLinksKnobs]
+  component: GlobalNavMobileMenu
 }
 
 export const standard = () => <GlobalNavMobileMenu {...baseProps} />
 export const premiumNudge = () => (
-  <GlobalNavMobileMenu
-    isUserLoggedIn={true}
-    isUserPremium={false}
-    {...baseProps}
-  />
+  <GlobalNavMobileMenu isUserLoggedIn={true} isUserPremium={false} {...baseProps} />
 )

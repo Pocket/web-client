@@ -39,7 +39,7 @@ export const CollectionCard = ({ collection, position }) => {
       cardShape="grid"
       showExcerpt={true}
       onItemInView={onItemInView}
-      openAction={onOpen}
+      onOpen={onOpen}
       openUrl={collection?.url}
       isAuthenticated={isAuthenticated}
     />

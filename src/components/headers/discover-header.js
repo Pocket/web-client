@@ -117,7 +117,7 @@ export const CollectionPageHeader = ({ title, note }) => {
       <h1 className="collectonTitle">{title}</h1>
       <h2 className={cx('h3', subHeadingStyle)}>Essential Reads</h2>
       <div className="descriptor">
-        <ReactMarkdown source={note} />
+        <ReactMarkdown>{note}</ReactMarkdown>
       </div>
     </header>
   ) : null
@@ -132,9 +132,7 @@ export const SearchPageHeader = ({ title }) => {
 }
 
 export const CardListHeading = ({ children }) => {
-  return (
-    <h2 className={cx('h3', subHeadingStyle, cardListHeadingStyle)}>{children}</h2>
-  )
+  return <h2 className={cx('h3', subHeadingStyle, cardListHeadingStyle)}>{children}</h2>
 }
 
 function capitalizeFirstLetter(str) {
