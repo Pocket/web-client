@@ -14,9 +14,7 @@ const adRailStyle = css`
     position: sticky;
     top: 6rem;
     margin: 0 0 4rem;
-    &.with-label {
-      margin-top: -22px;
-    }
+    margin-top: -22px;
   }
 `
 const belowTheFoldStyle = css`
