@@ -7,6 +7,7 @@ import { Chyron } from 'components/chyron/chyron'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { breakpointSmallDesktop } from '@pocket/web-ui' // 1023
 import { breakpointLargeTablet } from '@pocket/web-ui' // 1023
+import { useTranslation, Trans } from 'next-i18next'
 
 const INSTANCE_ID = 'call-out-start-library'
 
@@ -102,6 +103,8 @@ export function CallOutStartLibrary({
   handleComplete,
   onVisible
 }) {
+  const { t } = useTranslation()
+
   function handleCloseClick() {
     handleDismiss()
     dismissChyron()
@@ -116,14 +119,16 @@ export function CallOutStartLibrary({
     <VisibilitySensor onVisible={onVisible}>
       <aside className={wrapper}>
         <div>
-          <Button
-            onClick={handleCloseClick}
-            className="close-button"
-            variant="inline">
+          <Button onClick={handleCloseClick} className="close-button" variant="inline">
             <CrossIcon />
           </Button>
 
-          <h6>Save these stories in a personal library</h6>
+          <h6>
+            {t(
+              'discover:save-these-to-personal-library',
+              'Save these stories in a personal library'
+            )}
+          </h6>
           <svg
             className="zigzag"
             xmlns="http://www.w3.org/2000/svg"
@@ -139,16 +144,17 @@ export function CallOutStartLibrary({
             />
           </svg>
           <p>
-            Use the <span className="pocket-svg"></span> button to build your
-            personal library of articles right in Pocket. Read them when you’re
-            free in a quiet, calm space.
+            <Trans i18nKey="discover:build-your-library">
+              Use the <span className="pocket-svg"></span> button to build your personal library of
+              articles right in Pocket. Read them when you’re free in a quiet, calm space.
+            </Trans>
           </p>
           <Button
             className="start-button"
             target="_blank"
             onClick={handleButtonClick}
             href={`${SIGNUP_URL}?utm_source=explore&utm_medium=web`}>
-            Start your library
+            {t('discover:start-your-library', 'Start your library')}
           </Button>
         </div>
       </aside>
