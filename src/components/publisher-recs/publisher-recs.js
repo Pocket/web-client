@@ -37,7 +37,7 @@ export const Publisher = ({ recommendationName, name, logo }) => {
     <div className={publisherStyles}>
       {logo ? <img data-cy="publisher-logo" src={logo.url} alt={publisherName} /> : null}
       <h6 className="publisher-name" data-cy="publisher-recs-publisher-name">
-        <Trans i18nKey="discover:more-from-publisher">More from {publisherName}</Trans>
+        <Trans i18nKey="discover:more-from-publisher">More from {{ publisherName }}</Trans>
       </h6>
     </div>
   )
