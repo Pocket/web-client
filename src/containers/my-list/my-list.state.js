@@ -431,7 +431,7 @@ function* myListUpdate(action) {
     // Update all items in need of update
     const itemsById = { ...existingItemsById, ...updatedItemsById }
 
-    const filterFunction = filterSelector(subset)
+    const filterFunction = filterSelector(subset, filter)
     const sortFunction = sortSelector(subset, sortOrder) //TODO: hook this to selector
     const items = Object.values(itemsById)
       .filter((item) => filterFunction(item, tag))
