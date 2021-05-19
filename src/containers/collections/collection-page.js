@@ -20,11 +20,17 @@ import { ItemCard } from 'connectors/item-card/collection/story-card'
 import { saveCollection } from 'containers/collections/collections.state'
 import { saveCollectionPage } from 'containers/collections/collections.state'
 import { Toasts } from 'connectors/toasts/toast-list'
+import { useTranslation } from 'next-i18next'
 
 export function CollectionPage({ queryParams = {}, slug }) {
+  const { t } = useTranslation()
+
   const metaData = {
-    description: 'Discover fascinating stories from all across the web with Pocket.',
-    title: 'Discover stories on Pocket'
+    description: t(
+      'discover:page-description',
+      'Discover fascinating stories from all across the web with Pocket.'
+    ),
+    title: t('discover:page-title', 'Discover stories on Pocket')
   }
   const dispatch = useDispatch()
 

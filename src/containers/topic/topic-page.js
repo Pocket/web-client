@@ -6,8 +6,11 @@ import { ItemCard } from 'connectors/item-card/discover/card'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
+import { useTranslation } from 'next-i18next'
 
 export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
+  const { t } = useTranslation()
+
   // Get topicList for sections that require it
   const topics = useSelector((state) => state.topicList?.topicsByName)
 
@@ -16,16 +19,16 @@ export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
       <CardPageHeader title={topic.display_name} />
 
       <SectionHeader
-        sectionTitle="Curated by our editors"
-        sectionDescription="Stories to fuel your mind"
+        sectionTitle={t('discover:curated-by-our-editors', 'Curated by our editors')}
+        sectionDescription={t('discover:stories-to-fuel-your-mind', 'Stories to fuel your mind')}
       />
 
       {/* Curated */}
       <Lockup items={curatedItems} offset={0} heroPosition="left" ItemCard={ItemCard} />
 
       <SectionHeader
-        sectionTitle="Popular with Pocket readers"
-        sectionDescription="Stories from across the web"
+        sectionTitle={t('discover:popular-with-readers', 'Popular with Pocket readers')}
+        sectionDescription={t('discover:stories-from-the-web', 'Stories from across the web')}
         addPadding={true}
       />
 
@@ -34,8 +37,13 @@ export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
         <CardTopicsNav topics={topics} track={trackTopicClick} rail={true} />
       </OffsetList>
 
-      <OffsetList items={algorithmicItems} offset={5} count={15} cardShape="wide" ItemCard={ItemCard} />
-
+      <OffsetList
+        items={algorithmicItems}
+        offset={5}
+        count={15}
+        cardShape="wide"
+        ItemCard={ItemCard}
+      />
 
       {/* Bottom TopicNav */}
       <CardTopicsNav topics={topics} track={trackTopicClick} />

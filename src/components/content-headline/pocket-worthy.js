@@ -2,6 +2,7 @@ import React from 'react'
 import { css } from 'linaria'
 
 import { breakpointLargeHandset } from '@pocket/web-ui'
+import { useTranslation } from 'next-i18next'
 
 const PocketWorthyWrapper = css`
   font-family: var(--fontSansSerif);
@@ -31,10 +32,12 @@ const PocketWorthyWrapper = css`
 `
 
 export function PocketWorthy() {
+  const { t } = useTranslation()
+
   return (
     <div className={PocketWorthyWrapper}>
-      Pocket worthy
-      <span>Stories to fuel your mind.</span>
+      {t('discover:pocket-worthy', 'Pocket worthy')}
+      <span>{t('discover:stories-to-fuel-your-mind', 'Stories to fuel your mind.')}</span>
     </div>
   )
 }

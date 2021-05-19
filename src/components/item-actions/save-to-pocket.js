@@ -93,7 +93,7 @@ export const SavePopover = function ({ popoverRef, id }) {
   return (
     //prettier-ignore
     <div className={popoverContainer} ref={popoverRef} data-cy={`article-save-login-popup-${id}`}>
-      <Trans i18nKey="userMessagesUnread">
+      <Trans i18nKey="item-action:no-auth-save">
         <a className="popoverLink" href={loginUrl}>Log in</a> or{' '}
         <a className="popoverLink" href={signupUrl}>Sign up</a> to save this article.    
       </Trans>

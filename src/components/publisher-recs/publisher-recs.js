@@ -5,7 +5,7 @@ import { numberWithCommas } from 'common/utilities'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { PUBLISHER_MODULE } from 'connectors/recit/recit.analytics'
 import { darkMode, sepiaMode } from '@pocket/web-ui'
-
+import { useTranslation, Trans } from 'next-i18next'
 const publisherStyles = css`
   img {
     width: 60px;
@@ -34,11 +34,9 @@ export const Publisher = ({ recommendationName, name, logo }) => {
   const publisherName = recommendationName || name || 'Publisher'
   return (
     <div className={publisherStyles}>
-      {logo ? (
-        <img data-cy="publisher-logo" src={logo.url} alt={publisherName} />
-      ) : null}
+      {logo ? <img data-cy="publisher-logo" src={logo.url} alt={publisherName} /> : null}
       <h6 className="publisher-name" data-cy="publisher-recs-publisher-name">
-        More from {publisherName}
+        <Trans i18nKey="discover:more-from-publisher">More from {publisherName}</Trans>
       </h6>
     </div>
   )
@@ -53,7 +51,11 @@ const saveCountStyles = css`
 `
 
 const SaveCount = ({ count }) => (
-  <div className={saveCountStyles}>{numberWithCommas(count)} saves</div>
+  <div className={saveCountStyles}>
+    <Trans i18nKey="discover:save-count" count={numberWithCommas(count)}>
+      {{ count }} saves
+    </Trans>
+  </div>
 )
 
 const recommendedArticleStyles = css`
@@ -80,12 +82,7 @@ const recommendedArticleStyles = css`
   }
 `
 
-export const RecommendedArticle = ({
-  title,
-  saveCount,
-  targetUrl,
-  handleClick
-}) => (
+export const RecommendedArticle = ({ title, saveCount, targetUrl, handleClick }) => (
   <li className={recommendedArticleStyles}>
     <a
       onClick={handleClick}
@@ -122,7 +119,10 @@ const RecommendedArticles = ({
         const { title: itemTitle, item_id: itemId, resolved_id: resolvedId } = item
 
         const title = syndicated_article?.title || itemTitle
-        const url = targetUrl.replace('getpocket.com/redirect?', 'getpocket.com/redirect?skipSyndication=1&')
+        const url = targetUrl.replace(
+          'getpocket.com/redirect?',
+          'getpocket.com/redirect?skipSyndication=1&'
+        )
 
         function handleVisible() {
           handleRecImpression({
