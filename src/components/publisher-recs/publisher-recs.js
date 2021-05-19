@@ -5,7 +5,8 @@ import { numberWithCommas } from 'common/utilities'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { PUBLISHER_MODULE } from 'connectors/recit/recit.analytics'
 import { darkMode, sepiaMode } from '@pocket/web-ui'
-import { useTranslation, Trans } from 'next-i18next'
+import { Trans } from 'next-i18next'
+
 const publisherStyles = css`
   img {
     width: 60px;
