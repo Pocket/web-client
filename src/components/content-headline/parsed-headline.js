@@ -32,9 +32,9 @@ const Description = css`
  */
 export function ParsedHeadline({ title, description }) {
   return (
-    <header>
+    <>
       <h1 className={Headline}>{title}</h1>
       <h2 className={Description}>{description}</h2>
-    </header>
+    </>
   )
 }

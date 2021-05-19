@@ -8,7 +8,7 @@ import { breakpointLargeHandset } from '@pocket/web-ui'
 import { Button } from '@pocket/web-ui'
 
 const saveArticleStyles = css`
-  padding-bottom: var(--spacing250);
+  padding-bottom: var(--spacing150);
   font-family: 'Graphik Web';
 
   p {
@@ -68,7 +68,7 @@ const saveArticleStyles = css`
 
 export function SaveArticleTop({ url, saveAction, saveStatus, isAuthenticated, trackSaveClick }) {
   return (
-    <aside className={classNames(saveArticleStyles, 'top')}>
+    <div className={classNames(saveArticleStyles, 'top')}>
       <SaveStoryButton
         trackSaveClick={trackSaveClick}
         isAuthenticated={isAuthenticated}
@@ -79,7 +79,7 @@ export function SaveArticleTop({ url, saveAction, saveStatus, isAuthenticated, t
         onClick={saveAction}
       />
       <p>Read when you’ve got time to spare.</p>
-    </aside>
+    </div>
   )
 }
 

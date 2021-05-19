@@ -1,3 +1,36 @@
+## [1.14.1](https://github.com/Pocket/web-client/compare/v1.14.0...v1.14.1) (2021-05-18)
+
+
+### Bug Fixes
+
+* **package:** bump @pocket/web-ui to 2.35.1 to grab new footer link ([6b2b5a0](https://github.com/Pocket/web-client/commit/6b2b5a0812007ea084566a282081685484e467c9))
+
+# [1.14.0](https://github.com/Pocket/web-client/compare/v1.13.1...v1.14.0) (2021-05-18)
+
+
+### Bug Fixes
+
+* **ads:** use label always ([1feaedb](https://github.com/Pocket/web-client/commit/1feaedb30c4531418e0cb0732d11e95a790b707a))
+* **card:** add authors to card ([1c05e4c](https://github.com/Pocket/web-client/commit/1c05e4c28fd942b505da290fc38500fd56cc79c3))
+* **collections:** card action onOpen ([0b56c89](https://github.com/Pocket/web-client/commit/0b56c897755715014167f7f8d89d11cb56d833c8))
+* **collections:** remove publisher recs ([5b8eb62](https://github.com/Pocket/web-client/commit/5b8eb62793bc07f42252bc5d1be6707f896d0479))
+* **collections:** update component locations ([89cb19d](https://github.com/Pocket/web-client/commit/89cb19d42acc4555a352aa5dc831f42ae0728bdd))
+* **content actions:** more modularity ([a06e12e](https://github.com/Pocket/web-client/commit/a06e12eff2979bdff079637b9532f5429f049ca1))
+
+
+### Features
+
+* **collections:** add ability to save page ([9a051d2](https://github.com/Pocket/web-client/commit/9a051d29ae95cede38e644e96a5ed922151b7969))
+* **collections:** add topics to collection page ([7f11faf](https://github.com/Pocket/web-client/commit/7f11fafdf4216c5465b2a791879762e7e42bbacf))
+* **collections:** adding ads/actions ([c865c31](https://github.com/Pocket/web-client/commit/c865c3103be0df4eeb5e5ad026fe744e11a9f73c))
+* **collections:** adding collection actions ([d3a6c65](https://github.com/Pocket/web-client/commit/d3a6c65a218d10278fc0038e07819b3e726ff0d4))
+* **collections:** adding state for collections ([8a32767](https://github.com/Pocket/web-client/commit/8a32767dba5ec3a147ee21feb29158f42f165d37))
+* **collections:** endpoint for saving group of urls ([f83baae](https://github.com/Pocket/web-client/commit/f83baae8aff8b8e13163f67a1a98347b76360b8f))
+* **collections:** hook up toasts for collections ([7f69036](https://github.com/Pocket/web-client/commit/7f69036164c990efd2b799d58b05d4470556adbc))
+* **collections:** set up individual collections page ([a010f95](https://github.com/Pocket/web-client/commit/a010f956a7f0e076cb24ebd24dc6da5d31672dd9))
+* **collections:** update collections page layout ([0cf7c9c](https://github.com/Pocket/web-client/commit/0cf7c9c4931ebb4c886b2e69d681711f6a977301))
+* **collections:** web-client api for mock data ([2f20e95](https://github.com/Pocket/web-client/commit/2f20e95af381cf1bddeb808c5bb5878c442cf04d))
+
 ## [1.13.1](https://github.com/Pocket/web-client/compare/v1.13.0...v1.13.1) (2021-05-18)
 
 

@@ -13,3 +13,20 @@ export const saveItem = (url, analytics) => {
     auth: true
   })
 }
+
+/**
+ * Save a collection of URLs
+ */
+export const saveItems = (urls) => {
+  const actions = urls.map((url) => ({
+    action: 'add',
+    url
+  }))
+
+  return request({
+    path: 'v3/send',
+    method: 'POST',
+    body: JSON.stringify({ actions }),
+    auth: true
+  })
+}

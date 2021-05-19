@@ -24,7 +24,7 @@ const AttributionWrapper = css`
     font-style: italic;
     font-size: 1.25em;
   }
-  aside {
+  .publisher-follow {
     p {
       color: var(--color-textPrimary);
       font-family: var(--fontSansSerif);
@@ -51,10 +51,8 @@ const AttributionWrapper = css`
       margin: var(--spacing100) 0 1.3125rem;
       font-size: 0.875em;
     }
-    aside {
-      p {
-        margin: 0 0 var(--spacing075);
-      }
+    .publisher-follow p {
+      margin: 0 0 var(--spacing075);
     }
   }
 `
@@ -62,7 +60,7 @@ const AttributionWrapper = css`
 function FollowPublisher({ leadIn, text, url, handleImpression, handleClick }) {
   return (
     <VisibilitySensor onVisible={handleImpression}>
-      <aside data-cy="follow-publisher">
+      <div className="publisher-follow" data-cy="follow-publisher">
         <p>{leadIn}</p>
         <Button
           variant="secondary"
@@ -72,7 +70,7 @@ function FollowPublisher({ leadIn, text, url, handleImpression, handleClick }) {
           target="_blank">
           {text}
         </Button>
-      </aside>
+      </div>
     </VisibilitySensor>
   )
 }
@@ -85,9 +83,8 @@ function PublisherInfo({ logoWide, publishedAt, name }) {
         <img src={logoWide.url} data-cy="publisher-img" alt={`Logo for ${name}`} />
       ) : null}
       <p>
-        This post originally appeared on {name} and was published{' '}
-        {getPublishedDate(publishedAt)}. This article is republished here with
-        permission.
+        This post originally appeared on {name} and was published {getPublishedDate(publishedAt)}.
+        This article is republished here with permission.
       </p>
     </React.Fragment>
   ) : null

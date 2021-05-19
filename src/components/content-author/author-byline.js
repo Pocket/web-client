@@ -3,6 +3,8 @@ import { css } from 'linaria'
 
 const BylineWrapper = css`
   font-family: var(--fontSansSerif);
+  font-style: normal;
+  display: block;
   line-height: 143%;
   color: var(--textPrimary);
   margin-bottom: var(--spacing150);
@@ -76,10 +78,10 @@ function Authors({ authors }) {
  */
 function AuthorByline({ url, name, showAuthors, authorNames }) {
   return (
-    <div className={BylineWrapper}>
+    <cite className={BylineWrapper}>
       <a href={url}>{name}</a>
       {showAuthors ? <Authors authors={authorNames} /> : null}
-    </div>
+    </cite>
   )
 }
 

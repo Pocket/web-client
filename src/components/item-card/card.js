@@ -68,6 +68,7 @@ export const Card = (props) => {
     title,
     thumbnail,
     publisher,
+    authors,
     excerpt,
     read_time,
     openExternal,
@@ -166,6 +167,13 @@ export const Card = (props) => {
           </h2>
 
           <cite className="details">
+            {authors?.length ? (
+              <div className="authors">
+                {authors.map((author) => (
+                  <span key={author.name}>{author.name}</span>
+                ))}
+              </div>
+            ) : null}
             {publisher ? (
               //eslint-disable-next-line
               <a

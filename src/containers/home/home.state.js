@@ -180,9 +180,7 @@ function* recentDataRequest() {
     if (error) yield put({ type: HOME_RECENT_SAVES_FAILURE, error })
 
     // Remove default item for Home Experiment
-    const itemsNoDefault = items.filter(
-      (item) => item !== '2333373270' && item !== '3242033017'
-    )
+    const itemsNoDefault = items.filter((item) => item !== '2333373270' && item !== '3242033017')
 
     yield put({ type: HOME_RECENT_SAVES_SUCCESS, items: itemsNoDefault, itemsById }) // prettier-ignore
   } catch (error) {
@@ -239,9 +237,7 @@ function* homeSaveRequest({ url, id, position }) {
     const response = yield saveItem(url, analytics)
     if (response?.status !== 1) throw new Error('Unable to save')
 
-    const derivedItems = yield deriveMyListItems(
-      Object.values(response.action_results)
-    )
+    const derivedItems = yield deriveMyListItems(Object.values(response.action_results))
 
     const items = derivedItems.map((item) => item.resolved_id)
     const itemsById = arrayToObject(derivedItems, 'resolved_id')
@@ -266,10 +262,7 @@ function* homeUnSaveRequest({ id, topic }) {
 
 function* storeTopicPreferences() {
   const topicSections = yield select(getTopicSections)
-  localStore.setItem(
-    CACHE_KEY_HOME_STORED_TOPICS,
-    JSON.stringify(topicSections)
-  )
+  localStore.setItem(CACHE_KEY_HOME_STORED_TOPICS, JSON.stringify(topicSections))
 }
 
 /** ASYNC Functions
@@ -289,9 +282,7 @@ export async function fetchMyListData(params) {
 
     const derivedItems = await deriveMyListItems(Object.values(response.list))
 
-    const items = derivedItems
-      .sort((a, b) => a.sort_id - b.sort_id)
-      .map((item) => item.resolved_id)
+    const items = derivedItems.sort((a, b) => a.sort_id - b.sort_id).map((item) => item.resolved_id)
 
     const itemsById = arrayToObject(derivedItems, 'resolved_id')
 
@@ -328,15 +319,18 @@ export async function fetchTopicData({ topic }) {
 }
 
 /**
- * fetchTopicData
- * Make and async request for a Pocket v3 feed and return best data
+ * fetchCollectionData
+ * Make and async request for a Pocket Client API (mocked) and return best data
  * @return items {array} An array of derived items
  */
 export async function fetchCollectionData({ count }) {
   try {
     const response = await getCollectionSet(count)
-    if (response.length) return { data: response }
-    return { error: 'No data found' }
+    const collections = response?.data?.getCollections?.collections
+    if (!collections.length) return { error: 'No data found' }
+
+    const data = collections.sort(() => 0.5 - Math.random()).slice(0, count)
+    return { data }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.log('home.state.topics', error)
