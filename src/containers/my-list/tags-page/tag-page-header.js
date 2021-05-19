@@ -4,7 +4,7 @@ import { editUserTag } from './tags-page.state'
 import { deleteUserTag } from './tags-page.state'
 import { useDispatch, useSelector } from 'react-redux'
 
-export function TagPageHeader({ subset, title, filter, tag }) {
+export function TagPageHeader({ subset, title, filter, tag, sortOrder, toggleSortOrder }) {
   const isPinned = useSelector(
     (state) => !!state.userTags.pinnedTags.includes(tag)
   )
@@ -23,6 +23,8 @@ export function TagPageHeader({ subset, title, filter, tag }) {
       deleteTag={deleteTag}
       pinTag={pinTag}
       isPinned={isPinned}
+      sortOrder={sortOrder}
+      toggleSortOrder={toggleSortOrder}
     />
   ) : null
 }

@@ -12,61 +12,44 @@ import { DeleteIcon } from '@pocket/web-ui'
 import { buttonReset } from 'components/buttons/button-reset'
 import { bottomTooltipDelayed } from 'components/tooltip/tooltip'
 import { useTranslation } from 'next-i18next'
+import { myListHeaderStyle } from './my-list-header'
+import { ListSort } from 'components/list-sort/list-sort'
 
-const myListHeaderStyle = css`
-  margin-bottom: var(--spacing100);
-  font-family: 'Graphik Web';
+const tagPageHeaderStyle = css`
+  header {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
 
   h1 {
-    display: inline-block;
-    font-family: 'Graphik Web';
-    font-style: normal;
-    font-weight: 500;
-    font-size: var(--fontSize150);
-    line-height: 1.2;
-    letter-spacing: -0.005em;
     margin-bottom: 0;
-
-    ${breakpointLargeTablet} {
-      font-size: var(--fontSize200);
-    }
-
-    ${breakpointTinyTablet} {
-      margin-bottom: var(--spacing100);
-    }
-
-    ${breakpointLargeHandset} {
-      font-size: var(--fontSize150);
-    }
-
-    ${breakpointSmallHandset} {
-      font-size: var(--fontSize125);
-      margin-bottom: var(--spacing100);
-    }
   }
 
   .tag-actions {
+    width: 100%;
     display: inline-block;
-    margin-bottom: var(--spacing050);
-  }
-  .icon {
-    margin-right: var(--size050);
-  }
-  button {
-    font-size: 16px;
-    color: var(--color-textTertiary);
-    &:hover {
-      color: var(--color-textLinkHover);
+    padding-bottom: var(--spacing050);
+    border-bottom: 1px solid var(--color-dividerTertiary);
+
+    .icon {
+      margin-right: var(--size050);
+    }
+
+    button {
+      font-size: 16px;
+      color: var(--color-textTertiary);
+      &:hover {
+        color: var(--color-textLinkHover);
+      }
     }
   }
 `
 
-export const UnTaggedHeader = ({ subset, filter, tag }) => (
+export const UnTaggedHeader = ({ subset, filter, tag, sortOrder, toggleSortOrder }) => (
   <header className={myListHeaderStyle}>
-    <div>
-      <h1 className="pageTitle">not tagged</h1>
-      <FilterMenu subset={subset} filter={filter} tag={tag} />
-    </div>
+    <h1 className="pageTitle">not tagged</h1>
+    <FilterMenu subset={subset} filter={filter} tag={tag} />
+    <ListSort toggleSortOrder={toggleSortOrder} sortOrder={sortOrder} />
   </header>
 )
 
@@ -78,16 +61,19 @@ export const TaggedHeader = ({
   pinTag,
   editTag,
   deleteTag,
-  isPinned
+  isPinned,
+  sortOrder,
+  toggleSortOrder
 }) => {
   const { t } = useTranslation()
 
   return (
-    <header className={myListHeaderStyle}>
-      <div>
+    <div className={tagPageHeaderStyle}>
+      <header className={myListHeaderStyle}>
         <h1 className="pageTitle">{capitalizeFirstLetter(title)}</h1>
         <FilterMenu subset={subset} filter={filter} tag={tag} />
-      </div>
+        <ListSort toggleSortOrder={toggleSortOrder} sortOrder={sortOrder} />
+      </header>
       <div className="tag-actions">
         <button
           aria-label={t('nav:pin-tag', 'Pin Tag')}
@@ -116,7 +102,7 @@ export const TaggedHeader = ({
           <DeleteIcon />
         </button>
       </div>
-    </header>
+    </div>
   )
 }
 
@@ -128,7 +114,9 @@ export const TagPageHeader = ({
   pinTag,
   editTag,
   deleteTag,
-  isPinned
+  isPinned,
+  sortOrder,
+  toggleSortOrder
 }) => {
   const TagHeader = '_untagged_'.includes(title) ? UnTaggedHeader : TaggedHeader
 
@@ -142,6 +130,8 @@ export const TagPageHeader = ({
       editTag={editTag}
       deleteTag={deleteTag}
       isPinned={isPinned}
+      sortOrder={sortOrder}
+      toggleSortOrder={toggleSortOrder}
     />
   ) : null
 }
