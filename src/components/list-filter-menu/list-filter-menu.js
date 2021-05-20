@@ -126,7 +126,7 @@ export function FilterMenu({ subset, filter, tag, query }) {
           </div>
           {path === 'favorites' || subset === 'search' ? null : (
             <div>
-              <Link href={`/my-list/${path}/favorites${searchQuery}`}>
+              <Link href={`/my-list/${path}/favorites`}>
                 <button className={filterActive('favorites')} data-cy="filter-favorites">
                   <Trans i18nKey="nav:favorites">Favorites</Trans>
                 </button>
