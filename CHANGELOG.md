@@ -1,3 +1,29 @@
+## [1.14.7](https://github.com/Pocket/web-client/compare/v1.14.6...v1.14.7) (2021-05-20)
+
+
+### Bug Fixes
+
+* **explore:** add rewrite for topic pages ([278da58](https://github.com/Pocket/web-client/commit/278da58bf46383b90848db4ac165c6390881c282))
+
+## [1.14.6](https://github.com/Pocket/web-client/compare/v1.14.5...v1.14.6) (2021-05-20)
+
+
+### Bug Fixes
+
+* **discover:** don’t allow read now for now ([28cb240](https://github.com/Pocket/web-client/commit/28cb24089cac1b0cbbb4bb696a9fec5d619a3a73))
+
+## [1.14.5](https://github.com/Pocket/web-client/compare/v1.14.4...v1.14.5) (2021-05-20)
+
+
+### Bug Fixes
+
+* **call out:** wrap for translation ([a5a557e](https://github.com/Pocket/web-client/commit/a5a557e4811842e52b6f5c2deb2722680beaa46a))
+* **discover:** pass locale from page ([5808495](https://github.com/Pocket/web-client/commit/5808495c4023961414b23d8b4765697f279850e8))
+* **discover:** translation wrap for publisher recs ([16eb0f1](https://github.com/Pocket/web-client/commit/16eb0f1d9682e4c477cb599bd02ba8a4026c6675))
+* **discover:** wrap copy for translation ([37d903a](https://github.com/Pocket/web-client/commit/37d903a9acf067f57f469c08704e661e786b2eee))
+* **item:** wrapping actions for localization ([271c471](https://github.com/Pocket/web-client/commit/271c471c753caa4b1fba704506e45cb55342450d))
+* **locale:** update parser ([95bdbb3](https://github.com/Pocket/web-client/commit/95bdbb3deecc7de867a102bb6cb692ec532b21b3))
+
 ## [1.14.4](https://github.com/Pocket/web-client/compare/v1.14.3...v1.14.4) (2021-05-19)
 
 

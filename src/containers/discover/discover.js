@@ -33,7 +33,10 @@ import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { CallOutStartLibraryExplore } from 'components/call-out/call-out-start-library'
 import { CallOutPocketHitsSignup } from 'components/call-out/call-out-pocket-hits'
 
+import { useTranslation } from 'next-i18next'
+
 export default function Discover({ url, locale }) {
+  const { t } = useTranslation()
   useEffect(trackPageView, [])
 
   // Select items
@@ -45,8 +48,11 @@ export default function Discover({ url, locale }) {
   const showTopics = locale === 'en'
 
   const metaData = {
-    description: 'Discover fascinating stories from all across the web with Pocket.',
-    title: 'Discover stories on Pocket',
+    description: t(
+      'discover:page-description',
+      'Discover fascinating stories from all across the web with Pocket.'
+    ),
+    title: t('discover:page-title', 'Discover stories on Pocket'),
     url
   }
 
@@ -58,8 +64,8 @@ export default function Discover({ url, locale }) {
       {!isAuthenticated && shouldRender ? <CallOutBuildHome /> : null}
 
       <CardPageHeader
-        title="Discover the best of the&nbsp;web"
-        subHeading="Today’s essential reads"
+        title={t('discover:best-of-the-web', 'Discover the best of the web')}
+        subHeading={t('discover:essential-reads', 'Today’s essential reads')}
       />
 
       {/* Top Lockup (center)*/}
@@ -71,7 +77,7 @@ export default function Discover({ url, locale }) {
       <CalloutTop shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
 
       {/* Top List */}
-      <CardListHeading>Fascinating stories</CardListHeading>
+      <CardListHeading>{t('discover:fascinating-stories', 'Fascinating stories')}</CardListHeading>
 
       <OffsetList items={items} offset={5} cardShape="wide" ItemCard={ItemCard} border={true} />
 

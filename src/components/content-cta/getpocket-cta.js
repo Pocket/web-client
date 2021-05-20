@@ -1,6 +1,7 @@
 // Component last used on 9/14/20 -- delete if stale
 import { css } from 'linaria'
 import { breakpointLargeHandset } from '@pocket/web-ui'
+import { Trans } from 'next-i18next'
 
 const GetPocketLink = css`
   padding: var(--spacing100) 0 var(--spacing150);
@@ -18,13 +19,15 @@ const GetPocketLink = css`
 export function GetPocketCTA() {
   return (
     <aside className={GetPocketLink}>
-      Discover more great stories — get{' '}
-      <a
-        target="pocket-signup"
-        href="https://getpocket.com/?utm_source=syndarticles&utm_medium=web">
-        Pocket
-      </a>
-      .
+      <Trans i18nKey="discover:pocket-cta">
+        Discover more great stories — get{' '}
+        <a
+          target="pocket-signup"
+          href="https://getpocket.com/?utm_source=syndarticles&utm_medium=web">
+          Pocket
+        </a>
+        .
+      </Trans>
     </aside>
   )
 }

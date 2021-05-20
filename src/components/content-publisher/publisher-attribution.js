@@ -5,6 +5,7 @@ import { Button } from '@pocket/web-ui'
 import { getPublishedDate } from 'common/utilities'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { Trans } from 'next-i18next'
 
 const AttributionWrapper = css`
   hr {
@@ -76,17 +77,20 @@ function FollowPublisher({ leadIn, text, url, handleImpression, handleClick }) {
 }
 
 function PublisherInfo({ logoWide, publishedAt, name }) {
+  const publishedDate = getPublishedDate(publishedAt)
   return name ? (
-    <React.Fragment>
+    <>
       <hr />
       {logoWide ? (
         <img src={logoWide.url} data-cy="publisher-img" alt={`Logo for ${name}`} />
       ) : null}
       <p>
-        This post originally appeared on {name} and was published {getPublishedDate(publishedAt)}.
-        This article is republished here with permission.
+        <Trans i18nKey="discover:publisher-attribution">
+          This post originally appeared on {{ name }} and was published {{ publishedDate }}. This
+          article is republished here with permission.
+        </Trans>
       </p>
-    </React.Fragment>
+    </>
   ) : null
 }
 

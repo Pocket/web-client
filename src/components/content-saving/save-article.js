@@ -6,6 +6,7 @@ import { SaveFilledIcon } from '@pocket/web-ui'
 import { SavePopover } from 'components/item-actions/save-to-pocket'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { Button } from '@pocket/web-ui'
+import { useTranslation } from 'next-i18next'
 
 const saveArticleStyles = css`
   padding-bottom: var(--spacing150);
@@ -67,6 +68,7 @@ const saveArticleStyles = css`
 `
 
 export function SaveArticleTop({ url, saveAction, saveStatus, isAuthenticated, trackSaveClick }) {
+  const { t } = useTranslation()
   return (
     <div className={classNames(saveArticleStyles, 'top')}>
       <SaveStoryButton
@@ -78,7 +80,7 @@ export function SaveArticleTop({ url, saveAction, saveStatus, isAuthenticated, t
         url={url}
         onClick={saveAction}
       />
-      <p>Read when you’ve got time to spare.</p>
+      <p> {t('item-action:save-article-bottom', 'Read when you’ve got time to spare.')}</p>
     </div>
   )
 }
@@ -90,9 +92,16 @@ export function SaveArticleBottom({
   isAuthenticated,
   trackSaveClick
 }) {
+  const { t } = useTranslation()
+
   return (
     <aside className={classNames(saveArticleStyles, 'bottom')}>
-      <p>How was it? Save stories you love and never lose&nbsp;them.</p>
+      <p>
+        {t(
+          'item-action:save-article-bottom',
+          'How was it? Save stories you love and never lose them.'
+        )}
+      </p>
       <SaveStoryButton
         trackSaveClick={trackSaveClick}
         isAuthenticated={isAuthenticated}
@@ -107,10 +116,12 @@ export function SaveArticleBottom({
 }
 
 function SaveStoryButton({ url, isAuthenticated, saveStatus, saveAction, id, trackSaveClick }) {
+  const { t } = useTranslation()
+
   const saveCopy = {
-    unsaved: 'Save Story',
-    saving: 'Save Story',
-    saved: 'Saved'
+    unsaved: t('item-action:save-unsaved', 'Save'),
+    saving: t('item-action:save-saving', 'Save'),
+    saved: t('item-action:save-saved', 'Saved')
   }
 
   const handleClick = (event) => {

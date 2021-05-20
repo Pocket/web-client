@@ -2,6 +2,7 @@
 import { css } from 'linaria'
 import { ArrowRightIcon } from '@pocket/web-ui'
 import { breakpointLargeHandset } from '@pocket/web-ui'
+import { Trans } from 'next-i18next'
 
 const topicsLinkStyles = css`
   padding: var(--spacing100) 0 var(--spacing150);
@@ -38,11 +39,13 @@ export function TopicsCTA({ topic }) {
 
   return topic_slug && display_name ? (
     <aside className={topicsLinkStyles}>
-      Discover more stories in{' '}
-      <a href={`/explore/${topic.topic_slug}`}>
-        {topic.display_name}
-        <ArrowRightIcon className="arrow-icon" />
-      </a>
+      <Trans i18nKey="discover:topic-cta">
+        Discover more stories in{' '}
+        <a href={`/explore/${topic_slug}`}>
+          {{ display_name }}
+          <ArrowRightIcon className="arrow-icon" />
+        </a>
+      </Trans>
     </aside>
   ) : null
 }
