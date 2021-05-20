@@ -1,3 +1,10 @@
+## [1.14.8](https://github.com/Pocket/web-client/compare/v1.14.7...v1.14.8) (2021-05-20)
+
+
+### Bug Fixes
+
+* **share:** increase specificity for button styles ([44a487e](https://github.com/Pocket/web-client/commit/44a487e5715884c583e83ece05ba72b07004d534))
+
 ## [1.14.7](https://github.com/Pocket/web-client/compare/v1.14.6...v1.14.7) (2021-05-20)
 
 
