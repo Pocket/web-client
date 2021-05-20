@@ -38,7 +38,7 @@ export function ActionsDiscover({ id, position }) {
   return item ? (
     <div className={`${itemActionStyle} actions`}>
       <SaveToPocket
-        allowRead={true}
+        allowRead={false}
         url={url}
         onOpen={onOpen}
         openExternal={openExternal}
