@@ -9,7 +9,6 @@ import { ListSort } from 'components/list-sort/list-sort'
 import { myListHeaderStyle } from './my-list-header'
 
 const searchStyles = css`
-
   ${breakpointLargeTablet} {
     flex-wrap: wrap;
 
@@ -20,7 +19,6 @@ const searchStyles = css`
       width: 100%;
     }
   }
-
 `
 
 export const SearchPageHeader = ({ filter, total, query, sortOrder, toggleSortOrder }) => {
