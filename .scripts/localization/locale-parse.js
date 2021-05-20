@@ -12,6 +12,7 @@ var sort = require('gulp-sort')
 
 // Constants
 const localizationRepo = 'https://github.com/Pocket/web-localization'
+const localizationRepoTest = /https\:\/\/([\w\d]+@)?github.com\/Pocket\/web-localization(\.git)?/
 const scriptConfig = './.scripts/localization/config.json'
 const defaultLocation = '../web-localization/'
 const githubApiUrl = 'https://api.github.com'
@@ -86,7 +87,7 @@ async function validateRepo(location) {
   // If it is a repo, get some more details and confirm it's the localization repo
   const listConfig = await git.listConfig()
   const { 'remote.origin.url': remoteUrl } = listConfig.values['.git/config']
-  return isRepo && remoteUrl === localizationRepo
+  return isRepo && localizationRepoTest.test(remoteUrl)
 }
 
 /**
