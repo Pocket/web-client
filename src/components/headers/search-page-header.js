@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { breakpointSmallHandset } from '@pocket/web-ui'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
@@ -8,10 +8,25 @@ import { Loader } from 'components/loader/loader'
 import { ListSort } from 'components/list-sort/list-sort'
 import { myListHeaderStyle } from './my-list-header'
 
+const searchStyles = css`
+
+  ${breakpointLargeTablet} {
+    flex-wrap: wrap;
+
+    .filter-wrapper {
+      margin-bottom: 1rem;
+      padding-left: 0;
+      order: 3;
+      width: 100%;
+    }
+  }
+
+`
+
 export const SearchPageHeader = ({ filter, total, query, sortOrder, toggleSortOrder }) => {
   const isLoading = total === false
   return query ? (
-    <header className={myListHeaderStyle}>
+    <header className={cx(myListHeaderStyle, searchStyles)}>
       <h1 className="pageTitle">
         <em>"{query}"</em> —{' '}
         {isLoading ? (

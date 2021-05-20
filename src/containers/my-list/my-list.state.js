@@ -465,7 +465,7 @@ function* myListSearchRequest(action) {
     const sortOrder = yield select(getSortOptionsBySubset, 'search')
 
     // Apply filters
-    if (filter === 'active') parameters.state = 'unread'
+    if (filter === 'unread') parameters.state = 'unread'
     if (filter === 'archive') parameters.state = 'read'
     if (filter === 'favorites') parameters.favorite = 1
 
