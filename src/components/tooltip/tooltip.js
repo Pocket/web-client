@@ -33,6 +33,7 @@ export const tooltipStyles = css`
     z-index: var(--zIndexTooltip);
     font-family: var(--fontSansSerif);
     text-align: center;
+    width: 0;
 
     /* Constrain edge case sizes */
     min-width: 3rem;
@@ -47,6 +48,10 @@ export const tooltipStyles = css`
 
     background-color: var(--color-tooltipCanvas);
     color: var(--color-tooltipText);
+  }
+
+  &[data-tooltip]:hover:after {
+    width: unset;
   }
 
   /* Safari focus/active styles are super buggy
