@@ -94,12 +94,8 @@ const recommendedArticleStyles = css`
 
 export const RecommendedArticle = ({ title, saveCount, targetUrl, handleClick }) => (
   <li className={recommendedArticleStyles}>
-    <a
-      onClick={handleClick}
-      className="title"
-      href={targetUrl}
-      /*eslint-disable-next-line*/
-      target="_blank">
+    {/*eslint-disable-next-line*/}
+    <a onClick={handleClick} className="title" href={targetUrl} target="_blank">
       {title}
     </a>
     <SaveCount count={saveCount} />
@@ -114,7 +110,6 @@ const recommendationsStyles = css`
 const RecommendedArticles = ({
   recommendations,
   maxRecommendations,
-  handleRecInteraction,
   handleRecImpression,
   handleRecClick
 }) => {
@@ -226,5 +221,5 @@ PublisherRecs.defaultProps = {
   recommendations: [],
   maxRecommendations: 3,
   handleRecImpression() {},
-  handleRecClicl() {}
+  handleRecClick() {}
 }
