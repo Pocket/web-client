@@ -42,6 +42,11 @@ const searchStyle = css`
     }
   }
 
+  .mobile-submit {
+    visibility: hidden;
+    position: absolute;
+  }
+
   .error-message {
     position: absolute;
     width: 100%;
@@ -269,6 +274,7 @@ const GlobalNavSearch = ({
           onKeyUp={handleKeyUp}
           placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
           data-cy="search-input"
+          enterKeyHint="search"
         />
         <RecentSearches searchTerms={recentSearches} />
         {inputError ? (
@@ -282,6 +288,7 @@ const GlobalNavSearch = ({
       <button className="search-button" data-cy="search-submit">
         <Trans i18nKey="nav:search">Search</Trans>
       </button>
+      <input type="submit" className="mobile-submit" />
       {onClose ? (
         <CloseButton onClick={onClose} data-cy="search-close" />
       ) : null}
