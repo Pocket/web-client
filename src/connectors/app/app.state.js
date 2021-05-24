@@ -192,8 +192,6 @@ function* appReleaseNotesSet({ releaseVersion }) {
 }
 
 function* appPreferences() {
-  yield convertToWebStorage()
-
   // This is a temporary measure to transfer cookies to local storage
   yield convertToLocalStorage()
 
@@ -212,10 +210,6 @@ function* appPreferences() {
   yield put({ type: APP_SET_RELEASE, releaseVersion })
   yield put({ type: APP_COLOR_MODE_SET, colorMode })
   yield put({ type: APP_LIST_MODE_SET, listMode })
-}
-
-function convertToWebStorage() {
-
 }
 
 export function convertToLocalStorage() {
