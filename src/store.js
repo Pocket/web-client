@@ -74,6 +74,12 @@ import { readSagas } from 'containers/read/read.state'
 import { userMessageReducers } from 'containers/messages/user-messages.state'
 import { userMessageSagas } from 'containers/messages/user-messages.state'
 
+import { profileReducers } from 'containers/profile/profile.state'
+import { profileSagas } from 'containers/profile/profile.state'
+
+import { profileItemsReducers } from 'connectors/items-by-id/profile/items.state'
+import { profileItemsSagas } from 'connectors/items-by-id/profile/items.state'
+
 import { actionToastsReducers } from 'connectors/toasts/toast.state'
 
 import { shortcutReducers } from 'connectors/shortcuts/shortcuts.state.js'
@@ -102,7 +108,9 @@ const libraryReducers = {
   itemsToShare: itemShareReducers,
   userTags: userTagsReducers,
   userMessages: userMessageReducers,
-  userSearch: userSearchReducers
+  userSearch: userSearchReducers,
+  userProfile: profileReducers,
+  profileItemsByIds: profileItemsReducers
 }
 
 const readerReducers = {
@@ -160,6 +168,8 @@ function* rootSaga() {
     ...homeSagas,
     ...userMessageSagas,
     ...userSearchSagas,
+    ...profileSagas,
+    ...profileItemsSagas,
     ...shortcutSagas
   ])
 }

@@ -34,7 +34,7 @@ export function timeRelativeToNow(val) {
     return `${date} hours ago`
   } else if (diff < 24 * 14) {
     // 14 days
-    let date = diff
+    let date = Math.round(diff / 24)
     return `${date} days ago`
   }
 

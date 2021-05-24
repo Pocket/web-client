@@ -43,7 +43,7 @@ describe('timeRelativeToNow', function () {
 
     const timeFromNow = timeRelativeToNow(timestamp)
 
-    assert.strictEqual(timeFromNow, `${howLongAgo} days ago`)
+    assert.strictEqual(timeFromNow, `${howLongAgo / 24} days ago`)
   })
 
   it('pure date', function () {

@@ -62,8 +62,9 @@ const filterStyle = css`
   }
 `
 
-export function FilterMenu({ subset, filter, tag }) {
+export function FilterMenu({ subset, filter, tag, query }) {
   const hasFilter = [
+    'search',
     'favorites',
     'highlights',
     'articles',
@@ -92,6 +93,7 @@ export function FilterMenu({ subset, filter, tag }) {
   })
 
   const path = tag ? `tags/${tag}` : subset
+  const searchQuery = query ? `?query=${query}` : ''
 
   return hasFilter ? (
     <div className={cx(filterStyle, 'filter-wrapper')}>
@@ -102,27 +104,27 @@ export function FilterMenu({ subset, filter, tag }) {
       {shown ? (
         <div className="filter-menu" ref={popBody}>
           <div>
-            <Link href={`/my-list/${path}`}>
+            <Link href={`/my-list/${path}${searchQuery}`}>
               <button className={filterActive()} data-cy="filter-all-items">
                 <Trans i18nKey="nav:all-items">All items</Trans>
               </button>
             </Link>
           </div>
           <div>
-            <Link href={`/my-list/${path}/unread`}>
+            <Link href={`/my-list/${path}/unread${searchQuery}`}>
               <button className={filterActive('unread')} data-cy="filter-unread">
                 <Trans i18nKey="nav:unread">Unread</Trans>
               </button>
             </Link>
           </div>
           <div>
-            <Link href={`/my-list/${path}/archive`}>
+            <Link href={`/my-list/${path}/archive${searchQuery}`}>
               <button className={filterActive('archive')} data-cy="filter-archive">
                 <Trans i18nKey="nav:archive">Archive</Trans>
               </button>
             </Link>
           </div>
-          {path === 'favorites' ? null : (
+          {path === 'favorites' || subset === 'search' ? null : (
             <div>
               <Link href={`/my-list/${path}/favorites`}>
                 <button className={filterActive('favorites')} data-cy="filter-favorites">

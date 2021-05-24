@@ -1,3 +1,51 @@
+## [1.14.11](https://github.com/Pocket/web-client/compare/v1.14.10...v1.14.11) (2021-05-24)
+
+
+### Bug Fixes
+
+* **account-nav:** update view profile link for labs ([609c603](https://github.com/Pocket/web-client/commit/609c603ca53d588f28401a696bdda860b7f236ba))
+* **date:** update tests to account for bug ([b733aa5](https://github.com/Pocket/web-client/commit/b733aa5e09aa3db3ed77cbf81019af0042ea4d4a))
+* **profile:** add temp share button function ([8b4e34b](https://github.com/Pocket/web-client/commit/8b4e34bd78c1bc05065152b90d5e31d741d91ac4))
+* **profile:** adding profile page for testing purposes ([ee5c7a5](https://github.com/Pocket/web-client/commit/ee5c7a54b43c7f4146c34affb4c13dd27d96a6e9))
+* **profile:** hook up delete post action and toasts ([b0e7567](https://github.com/Pocket/web-client/commit/b0e75671e8d3aae351f1a38855ec8382e1a5b162))
+* **profile:** remove unneeded variables ([e0da511](https://github.com/Pocket/web-client/commit/e0da5114dd1bd086ee9087e62a0e6c3b2b9c508a))
+* **profile:** rename recommended to profile ([74ca726](https://github.com/Pocket/web-client/commit/74ca726d5fe8cb6db1b153f5767ab9a833be298e))
+* **profile:** update recommend actions to new card style ([432d2dc](https://github.com/Pocket/web-client/commit/432d2dc08f4f25118c943aa2ac265a8a967bffdf))
+* **recommended:** remove unneeded selectors ([55fe750](https://github.com/Pocket/web-client/commit/55fe7509492b397423bf01bc996ff05ace14b85e))
+
+## [1.14.10](https://github.com/Pocket/web-client/compare/v1.14.9...v1.14.10) (2021-05-24)
+
+
+### Bug Fixes
+
+* **app:** removing unused code ([10404f1](https://github.com/Pocket/web-client/commit/10404f1b2ab6d226d069c5fa4c7f6421be1c3e5f))
+* **version:** remove old attempt to verify users cached version of application ([b101843](https://github.com/Pocket/web-client/commit/b1018437db2ae02637803c06b7c4b7ede8081532))
+
+## [1.14.9](https://github.com/Pocket/web-client/compare/v1.14.8...v1.14.9) (2021-05-21)
+
+
+### Bug Fixes
+
+* **filter:** remove unneeded query param from favorites link ([2f08ff3](https://github.com/Pocket/web-client/commit/2f08ff3ab1b42d0aa11d9c864d416c5c95589e8b))
+* **search:** add filters to search page ([57dbcd5](https://github.com/Pocket/web-client/commit/57dbcd5cd5ae99cd271d9cd36149edb50cf63b6f))
+* **search:** remove unneeded imports ([d3a9aec](https://github.com/Pocket/web-client/commit/d3a9aecfa7ad92176c890cebc19f1376e5168dba))
+* **search:** update formatting of css on search header ([ab30bd0](https://github.com/Pocket/web-client/commit/ab30bd04be6ef02003b0ba9fa65b73db40ce0f3a))
+* **tooltip:** tooltip shouldn't take up width in non hovered state ([fb17c09](https://github.com/Pocket/web-client/commit/fb17c09432dfae3df8256b0848d36db3e5836d39))
+
+## [1.14.8](https://github.com/Pocket/web-client/compare/v1.14.7...v1.14.8) (2021-05-20)
+
+
+### Bug Fixes
+
+* **share:** increase specificity for button styles ([44a487e](https://github.com/Pocket/web-client/commit/44a487e5715884c583e83ece05ba72b07004d534))
+
+## [1.14.7](https://github.com/Pocket/web-client/compare/v1.14.6...v1.14.7) (2021-05-20)
+
+
+### Bug Fixes
+
+* **explore:** add rewrite for topic pages ([278da58](https://github.com/Pocket/web-client/commit/278da58bf46383b90848db4ac165c6390881c282))
+
 ## [1.14.6](https://github.com/Pocket/web-client/compare/v1.14.5...v1.14.6) (2021-05-20)
 
 

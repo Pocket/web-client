@@ -35,6 +35,12 @@ import { ITEMS_TAG_FAILURE } from 'actions'
 import { ADD_SHARE_SUCCESS } from 'actions'
 import { ADD_SHARE_FAILURE } from 'actions'
 
+import { PROFILE_ITEM_SAVE_SUCCESS } from 'actions'
+import { PROFILE_ITEM_SAVE_FAILURE } from 'actions'
+
+import { PROFILE_ITEM_DELETE_SUCCESS } from 'actions'
+import { PROFILE_ITEM_DELETE_FAILURE } from 'actions'
+
 import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
 
 const toastWrapper = css`
@@ -104,6 +110,10 @@ const messages = {
   [ITEMS_TAG_FAILURE]: 'error-tagging',
   [ADD_SHARE_SUCCESS]: 'added',
   [ADD_SHARE_FAILURE]: 'error-adding',
+  [PROFILE_ITEM_SAVE_SUCCESS]: 'added',
+  [PROFILE_ITEM_SAVE_FAILURE]: 'error-adding',
+  [PROFILE_ITEM_DELETE_SUCCESS]: 'deleted',
+  [PROFILE_ITEM_DELETE_FAILURE]: 'error-deleting',
   [COPY_ITEM_URL]: 'url-copied',
   [COLLECTIONS_SAVE_SUCCESS]: 'added'
 }
