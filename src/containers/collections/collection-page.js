@@ -24,6 +24,7 @@ import { useTranslation } from 'next-i18next'
 
 export function CollectionPage({ queryParams = {}, slug }) {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
 
   const metaData = {
     description: t(
@@ -32,29 +33,33 @@ export function CollectionPage({ queryParams = {}, slug }) {
     ),
     title: t('discover:page-title', 'Discover stories on Pocket')
   }
-  const dispatch = useDispatch()
-
-  const isAuthenticated = useSelector((state) => state.user.auth)
-  const data = useSelector((state) => state.collections[slug]) || {}
-  const topics = useSelector((state) => state.topicList?.topicsByName)
-
   const { mobile_web_view: isMobileWebView } = queryParams
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
 
-  const { title, intro, excerpt, authors, stories, imageUrl, urls, pageSaveStatus } = data
+  const isAuthenticated = useSelector((state) => state.user?.auth)
+  const isPremium = useSelector((state) => state.user?.premium_status)
+  const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
+  const trackingEnabled = useSelector((state) => state.oneTrust?.tracking?.enabled)
+  const data = useSelector((state) => state.collections[slug]) || {}
+  const topics = useSelector((state) => state.topicList?.topicsByName)
+
+  const { title, intro, excerpt, authors, stories, imageUrl, pageSaveStatus } = data
+  const { showAds = true } = data
   const authorNames = authors?.map((author) => author.name)
+  const allowAds = isPremium ? false : showAds && oneTrustReady
+  const usePersonalized = allowAds && trackingEnabled
 
   const saveAction = () => dispatch(saveCollectionPage(slug))
 
-  const count = urls.length
-  const saveCollectionTop = () => dispatch(saveCollection(slug))
-  const saveCollectionBottom = () => dispatch(saveCollection(slug))
+  // const count = urls?.length
+  // const saveCollectionTop = () => dispatch(saveCollection(slug))
+  // const saveCollectionBottom = () => dispatch(saveCollection(slug))
 
   return (
     <ArticleLayout title={metaData.title} metaData={metaData}>
       <main className={contentLayout}>
         <section>
-          <AdAboveTheFold />
+          <AdAboveTheFold allowAds={allowAds} usePersonalized={usePersonalized} />
         </section>
         {/* Content header information */}
         <section className="content-section">
@@ -96,8 +101,8 @@ export function CollectionPage({ queryParams = {}, slug }) {
 
           {/* Right aside content such as ads and recs */}
           <aside className="right-aside">
-            <AdRailTop />
-            <AdRailBottom />
+            <AdRailTop allowAds={allowAds} usePersonalized={usePersonalized} />
+            <AdRailBottom allowAds={allowAds} usePersonalized={usePersonalized} />
           </aside>
 
           <div className="content-body">
@@ -105,9 +110,11 @@ export function CollectionPage({ queryParams = {}, slug }) {
             <p className="content-excerpt">{excerpt}</p>
 
             {/* Collection Stories */}
-            {stories.map((id, index) => (
-              <ItemCard id={id} key={id} position={index} cardShape="wide" showExcerpt={true} />
-            ))}
+            {stories
+              ? stories.map((id, index) => (
+                  <ItemCard id={id} key={id} position={index} cardShape="wide" showExcerpt={true} />
+                ))
+              : null}
           </div>
         </section>
 
@@ -119,7 +126,7 @@ export function CollectionPage({ queryParams = {}, slug }) {
               saveStatus={pageSaveStatus}
             />
 
-            <AdBelowTheFold />
+            <AdBelowTheFold allowAds={allowAds} usePersonalized={usePersonalized} />
 
             <TopicsBubbles topics={topics} className="no-border" />
           </footer>

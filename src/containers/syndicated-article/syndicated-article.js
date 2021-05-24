@@ -44,7 +44,7 @@ import { SaveArticleBottom } from 'components/content-saving/save-article'
 import { ParsedContent } from 'components/content-parsed/parsed-content'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 
-import PublisherRecs from 'components/publisher-recs/publisher-recs'
+import { PublisherRecs } from 'components/content-recs/content-recs'
 import PocketRecs from 'components/pocket-recs/pocket-recs'
 import { DepthTracking } from 'components/depth-tracking/depth-tracking'
 import { ScrollPocketHitsChyron } from 'components/pocket-hits-chyron/scroll-pocket-hits-chyron'
@@ -250,7 +250,7 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
   const isAuthenticated = useSelector((state) => state.user?.auth)
   const isPremium = useSelector((state) => state.user?.premium_status)
   const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
-  const adsEnabled = useSelector((state) => state.oneTrust?.advertising.enabled)
+  const trackingEnabled = useSelector((state) => state.oneTrust?.tracking?.enabled)
 
   // modify rendered elements when query params are passed in
   const { mobile_web_view, premium_user } = queryParams
@@ -301,8 +301,8 @@ export default function SyndicatedArticle({ url, queryParams = ValidParams }) {
     showAds
   } = articleData
 
-  const allowAds = isPremiumUser ? false : showAds
-  const shouldShowAds = allowAds && oneTrustReady && adsEnabled
+  const allowAds = isPremium ? false : showAds && oneTrustReady
+  const usePersonalized = allowAds && trackingEnabled
 
   const saveAction = (savedUrl) => {
     if (saveStatus === 'saved') dispatch(unSaveArticleItem(itemId))
