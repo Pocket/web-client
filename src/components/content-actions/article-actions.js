@@ -27,6 +27,9 @@ const shareContainer = css`
   button {
     line-height: 100%;
     padding: 0;
+    &:focus {
+      outline: none;
+    }
   }
 
   svg {
@@ -41,6 +44,11 @@ const shareContainer = css`
 
     .actionCopy {
       display: none;
+    }
+
+    div {
+      width: 200px;
+      font-family: var(--fontSansSerif);
     }
   }
 
