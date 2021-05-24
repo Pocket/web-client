@@ -5,11 +5,7 @@ const loadAdLibraries = () => {
   const attributes = null
 
   // Load Google Publisher Tags (GPT)
-  injectLibScript(
-    'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
-    attributes,
-    makeAsync
-  )
+  injectLibScript('https://securepubads.g.doubleclick.net/tag/js/gpt.js', attributes, makeAsync)
 
   /**
    * Add global defaults for GPT
@@ -25,17 +21,17 @@ const loadAdLibraries = () => {
    * Downloads the apstag library, the library provided by Amazon Publisher Services (https://aps.amazon.com/aps/index.html).
    * We are using their Unified Ad Marketplace (UAM) product in our ads bidding for syndicated articles.
    * **/
-  injectInlineScript(`
-      !function(a9,a,p,s,t,A,g){if(a[a9])return;function q(c,r){a[a9]._Q.push([c,r])}a[a9]={init:function(){q("i",arguments)},fetchBids:function() {q("f",arguments)},setDisplayBids:function(){},targetingKeys:function(){return[]},_Q: []};A=p.createElement(s);A.async=!0;A.src=t;g=p.getElementsByTagName(s)[0];g.parentNode.insertBefore(A ,g)}("apstag",window,document,"script","//c.amazon-adsystem.com/aax2/apstag.js");
-        `)
+  // injectInlineScript(`
+  //     !function(a9,a,p,s,t,A,g){if(a[a9])return;function q(c,r){a[a9]._Q.push([c,r])}a[a9]={init:function(){q("i",arguments)},fetchBids:function() {q("f",arguments)},setDisplayBids:function(){},targetingKeys:function(){return[]},_Q: []};A=p.createElement(s);A.async=!0;A.src=t;g=p.getElementsByTagName(s)[0];g.parentNode.insertBefore(A ,g)}("apstag",window,document,"script","//c.amazon-adsystem.com/aax2/apstag.js");
+  //       `)
 
-  // Initialize apstag
-  injectInlineScript(`
-      apstag.init({
-        pubID: 'b5681c2d-be1e-4459-80b9-044ba5354b39', adServer: 'googletag',
-        simplerGPT: true
-      });
-        `)
+  // // Initialize apstag
+  // injectInlineScript(`
+  //     apstag.init({
+  //       pubID: 'b5681c2d-be1e-4459-80b9-044ba5354b39', adServer: 'googletag',
+  //       simplerGPT: true
+  //     });
+  //       `)
 
   // Downloads the preliminary Pubwise library code
   injectLibScript(
