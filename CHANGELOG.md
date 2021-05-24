@@ -1,3 +1,18 @@
+## [1.14.11](https://github.com/Pocket/web-client/compare/v1.14.10...v1.14.11) (2021-05-24)
+
+
+### Bug Fixes
+
+* **account-nav:** update view profile link for labs ([609c603](https://github.com/Pocket/web-client/commit/609c603ca53d588f28401a696bdda860b7f236ba))
+* **date:** update tests to account for bug ([b733aa5](https://github.com/Pocket/web-client/commit/b733aa5e09aa3db3ed77cbf81019af0042ea4d4a))
+* **profile:** add temp share button function ([8b4e34b](https://github.com/Pocket/web-client/commit/8b4e34bd78c1bc05065152b90d5e31d741d91ac4))
+* **profile:** adding profile page for testing purposes ([ee5c7a5](https://github.com/Pocket/web-client/commit/ee5c7a54b43c7f4146c34affb4c13dd27d96a6e9))
+* **profile:** hook up delete post action and toasts ([b0e7567](https://github.com/Pocket/web-client/commit/b0e75671e8d3aae351f1a38855ec8382e1a5b162))
+* **profile:** remove unneeded variables ([e0da511](https://github.com/Pocket/web-client/commit/e0da5114dd1bd086ee9087e62a0e6c3b2b9c508a))
+* **profile:** rename recommended to profile ([74ca726](https://github.com/Pocket/web-client/commit/74ca726d5fe8cb6db1b153f5767ab9a833be298e))
+* **profile:** update recommend actions to new card style ([432d2dc](https://github.com/Pocket/web-client/commit/432d2dc08f4f25118c943aa2ac265a8a967bffdf))
+* **recommended:** remove unneeded selectors ([55fe750](https://github.com/Pocket/web-client/commit/55fe7509492b397423bf01bc996ff05ace14b85e))
+
 ## [1.14.10](https://github.com/Pocket/web-client/compare/v1.14.9...v1.14.10) (2021-05-24)
 
 
