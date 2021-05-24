@@ -43,10 +43,12 @@ export const contentLayout = css`
   }
 
   .content-excerpt {
-    font-weight: 400;
-    font-size: 1.4375rem;
-    line-height: 160%;
-    margin-bottom: 2.5rem;
+    font-family: var(--fontSansSerif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.25em;
+    line-height: 140%;
+    margin-bottom: var(--spacing100);
   }
 
   article {
