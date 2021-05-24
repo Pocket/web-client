@@ -1,4 +1,4 @@
-import { takeLatest, takeEvery, call, take, select } from 'redux-saga/effects'
+import { takeLatest, takeEvery, call, take, select, cancel } from 'redux-saga/effects'
 import { BATCH_SIZE } from 'common/constants'
 import { urlWithPermanentLibrary } from 'common/utilities'
 
@@ -187,6 +187,7 @@ export const snowplowReducers = (state = initialState, action) => {
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getListType = (state) => state.app.listMode
+const trustReady = (state) => state.oneTrust?.trustReady
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
@@ -363,7 +364,11 @@ function* fireEngagement({ component, ui, identifier, position, value }) {
 }
 
 function* waitForInitialization() {
-  yield take(SNOWPLOW_INITIALIZED)
+  while (true) {
+    const isReady = yield select(trustReady)
+    if (!isReady) yield take(SNOWPLOW_INITIALIZED)
+    yield cancel()
+  }
 }
 
 /** LEGACY ANALYTICS
