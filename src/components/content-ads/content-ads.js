@@ -31,7 +31,7 @@ const MIDDLE_OF_ARTICLE = 'div-gpt-ad-6843487-3'
 const NATIVE_SYNDICATION = 'div-gpt-ad-6843487-5'
 const NATIVE_FRONT_DOOR = 'div-gpt-ad-6843487-6'
 
-export function AdAboveTheFold({ adTargetingMetadata = {}, allowAds, usePersonalized }) {
+export function AdAboveTheFold({ allowAds, usePersonalized, ...adTargetingMetadata }) {
   return (
     <ProgrammaticAd
       usePersonalized={usePersonalized}
@@ -45,7 +45,7 @@ export function AdAboveTheFold({ adTargetingMetadata = {}, allowAds, usePersonal
   )
 }
 
-export function AdBelowTheFold({ adTargetingMetadata = {}, allowAds, usePersonalized }) {
+export function AdBelowTheFold({ allowAds, usePersonalized, ...adTargetingMetadata }) {
   return (
     <ProgrammaticAd
       usePersonalized={usePersonalized}
@@ -59,7 +59,7 @@ export function AdBelowTheFold({ adTargetingMetadata = {}, allowAds, usePersonal
   )
 }
 
-export function AdRailTop({ adTargetingMetadata = {}, allowAds, usePersonalized }) {
+export function AdRailTop({ allowAds, usePersonalized, ...adTargetingMetadata }) {
   return (
     <div className={adRailStyle}>
       <ProgrammaticAd
@@ -74,7 +74,7 @@ export function AdRailTop({ adTargetingMetadata = {}, allowAds, usePersonalized 
   )
 }
 
-export function AdRailBottom({ adTargetingMetadata = {}, allowAds, usePersonalized }) {
+export function AdRailBottom({ allowAds, usePersonalized, ...adTargetingMetadata }) {
   return (
     <div className={adRailStyle}>
       <ProgrammaticAd
