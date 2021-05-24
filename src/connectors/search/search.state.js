@@ -30,10 +30,8 @@ export const userSearchReducers = (state = initialState, action) => {
 
     case USER_SEARCH_RECENT_ADD: {
       const { searchTerm } = action
-      const newArray = [searchTerm, ...state.recent]
-      const recent = newArray
-        .filter((item, index) => newArray.indexOf(item) === index)
-        .slice(0, 5)
+      const set = new Set([searchTerm, ...state.recent])
+      const recent = Array.from(set).slice(0,5)
       return { ...state, recent }
     }
 
