@@ -57,7 +57,6 @@ function PocketWebClient({ Component, pageProps, err }) {
   const showDevTools = process.env.SHOW_DEV === 'included'
 
   const { authRequired } = pageProps
-  const finalizeInit = () => dispatch(finalizeSnowplow())
 
   useEffect(() => {
     // Fired on componentDidMount in web-app-draft
@@ -111,11 +110,10 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   // 3rd party initializations
   useEffect(() => {
-    if (user_status === 'pending' || user_status === 'invalid' || !sess_guid) {
-      return
-    }
+    if (user_status === 'pending' || user_status === 'invalid' || !sess_guid) return
 
     // Set up Snowplow
+    const finalizeInit = () => dispatch(finalizeSnowplow())
     initializeSnowplow(user_id, sess_guid, finalizeInit)
 
     // Set up Google Analytics
@@ -123,7 +121,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // Load OptinMonster
     loadOptinMonster()
-  }, [user_id, user_status, sess_guid, finalizeInit])
+  }, [user_id, user_status, sess_guid, dispatch])
 
   // Hydrate user features
   useEffect(() => {
@@ -142,7 +140,7 @@ function PocketWebClient({ Component, pageProps, err }) {
     // signal to Cypress that React client side has loaded
     // Make sure this is the last thing we fire
     signalTestsReady()
-  }, [user_status, sess_guid, user_id, dispatch])
+  }, [user_status, sess_guid, user_id, birth, dispatch])
 
   // Track Page Views
   useEffect(() => {
