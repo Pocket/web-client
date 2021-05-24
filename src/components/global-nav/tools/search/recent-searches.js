@@ -54,8 +54,8 @@ export function RecentSearches({ searchTerms }) {
     <div className={recentSearchStyle}>
       <h4 className="title">Recent Searches</h4>
 
-      {searchTerms.map((search, index) => (
-        <div key={search + index}>
+      {searchTerms.map((search) => (
+        <div key={search}>
           <Link href={`/my-list/search?query=${search}`}>
             <a tabIndex={0}>{search}</a>
           </Link>
