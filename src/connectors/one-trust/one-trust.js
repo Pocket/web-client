@@ -3,8 +3,7 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 
 import ReactGA from 'react-ga'
-import { initializeSnowplow } from 'common/utilities/snowplow'
-import { loadOptinMonster } from 'common/utilities/external-libraries'
+import { loadOptinMonster } from 'common/utilities/third-party/opt-in-monster'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
 
@@ -18,18 +17,12 @@ export function PostTrustInit({ path }) {
   const dispatch = useDispatch()
 
   const [analyticsInit, analyticsInitSet] = useState(false)
-  const [functionalInit, functionalInitSet] = useState(false)
 
-  const { user_id, sess_guid } = useSelector((state) => state.user)
   const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
-  const functionalEnabled = useSelector( (state) => state.oneTrust?.functional.enabled ) //prettier-ignore
   const analyticsEnabled = useSelector( (state) => state.oneTrust?.analytics.enabled ) //prettier-ignore
 
   useEffect(() => {
     if (!analyticsEnabled || !oneTrustReady || analyticsInit) return
-
-    // Set up Snowplow
-    initializeSnowplow(user_id, sess_guid)
 
     // Track Page View
     dispatch(trackPageView())
@@ -38,29 +31,13 @@ export function PostTrustInit({ path }) {
     ReactGA.initialize(GOOGLE_ANALYTICS_ID)
     ReactGA.pageview(path)
 
-    // Setting this so we don't get a glut of false positives with shifting
-    // cookie preferences
-    analyticsInitSet(true)
-  }, [
-    oneTrustReady,
-    analyticsEnabled,
-    user_id,
-    sess_guid,
-    dispatch,
-    path,
-    analyticsInit
-  ])
-
-  useEffect(() => {
-    if (!functionalEnabled || !oneTrustReady || functionalInit) return
-
-    // Load OptinMonster
+    // Load Opt In Monster for marketing/conversion adventurers
     loadOptinMonster()
 
     // Setting this so we don't get a glut of false positives with shifting
     // cookie preferences
-    functionalInitSet(true)
-  }, [functionalEnabled, oneTrustReady, functionalInit])
+    analyticsInitSet(true)
+  }, [oneTrustReady, analyticsEnabled, dispatch, path, analyticsInit])
 
   return <></>
 }

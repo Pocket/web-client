@@ -21,14 +21,19 @@ import { appSetPreferences } from 'connectors/app/app.state'
 
 import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 
+import { PostTrustInit } from 'connectors/one-trust/one-trust'
+
 /** Setup Files
  --------------------------------------------------------------- */
 import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
 import { initializeSnowplow } from 'common/setup/snowplow'
+import { loadOptinMonster } from 'common/utilities/third-party/opt-in-monster'
 import { signalTestsReady } from '../../cypress/support/utils'
 
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
+import { finalizeSnowplow } from 'connectors/snowplow/snowplow.state'
+
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 import ReactGA from 'react-ga'
 
@@ -52,6 +57,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   const showDevTools = process.env.SHOW_DEV === 'included'
 
   const { authRequired } = pageProps
+  const finalizeInit = () => dispatch(finalizeSnowplow())
 
   useEffect(() => {
     // Fired on componentDidMount in web-app-draft
@@ -110,14 +116,14 @@ function PocketWebClient({ Component, pageProps, err }) {
     }
 
     // Set up Snowplow
-    initializeSnowplow(user_id, sess_guid)
+    initializeSnowplow(user_id, sess_guid, finalizeInit)
 
     // Set up Google Analytics
     ReactGA.initialize(GOOGLE_ANALYTICS_ID)
 
     // Load OptinMonster
-    // loadOptinMonster()
-  }, [user_id, user_status, sess_guid])
+    loadOptinMonster()
+  }, [user_id, user_status, sess_guid, finalizeInit])
 
   // Hydrate user features
   useEffect(() => {
@@ -153,12 +159,11 @@ function PocketWebClient({ Component, pageProps, err }) {
   }, [authRequired, user_status])
 
   // Provider is created automatically by the wrapper by next-redux-wrapper
-  const shouldRender = authRequired
-    ? user_status !== 'pending' && user_status !== 'invalid'
-    : true
+  const shouldRender = authRequired ? user_status !== 'pending' && user_status !== 'invalid' : true
 
   return (
     <ViewportProvider>
+      <PostTrustInit path={path} />
       {showDevTools ? <DevTools /> : null}
       <Shortcuts />
       {shouldRender ? <Component {...pageProps} err={err} /> : null}

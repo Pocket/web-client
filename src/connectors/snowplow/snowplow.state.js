@@ -1,7 +1,8 @@
-import { takeLatest, takeEvery, call, select } from 'redux-saga/effects'
+import { takeLatest, takeEvery, call, take, select } from 'redux-saga/effects'
 import { BATCH_SIZE } from 'common/constants'
 import { urlWithPermanentLibrary } from 'common/utilities'
 
+import { SNOWPLOW_INITIALIZED } from 'actions'
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 import { SNOWPLOW_TRACK_IMPRESSION } from 'actions'
 import { SNOWPLOW_TRACK_ENGAGEMENT } from 'actions'
@@ -49,6 +50,8 @@ import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 
 /** ACTIONS
  --------------------------------------------------------------- */
+export const finalizeSnowplow = () => ({ type: SNOWPLOW_INITIALIZED })
+
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
 
 export const trackRecOpen = (position, item, identifier, href) => {
@@ -205,10 +208,12 @@ export const snowplowSagas = [
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 function* firePageView() {
+  yield waitForInitialization()
   yield call(snowplowTrackPageView)
 }
 
 function* fireVariantEnroll({ variants }) {
+  yield waitForInitialization()
   for (let flag in variants) {
     const variantEnrollEvent = createVariantEnrollEvent()
     const featureFlagEntity = createFeatureFlagEntity(flag, variants[flag])
@@ -218,6 +223,7 @@ function* fireVariantEnroll({ variants }) {
 }
 
 function* fireFeatureEnroll({ hydrate }) {
+  yield waitForInitialization()
   for (let flag in hydrate) {
     const { test: testName, variant, assigned } = hydrate[flag]
     const hasVariant = variant !== 'disabled' && !!variant
@@ -262,6 +268,7 @@ function* fireRecEngagement({ component, ui, identifier, position, item }) {
 }
 
 function* fireRecImpression({ component, requirement, position, item, identifier }) {
+  yield waitForInitialization()
   const impressionEvent = createImpressionEvent(component, requirement)
   const contentEntity = createContentEntity(item.save_url, item.item_id)
   const recEntities = buildRecEntities(item, position)
@@ -295,6 +302,7 @@ function* fireContentOpen({ destination, trigger, position, item, identifier }) 
 }
 
 function* fireItemImpression({ component, requirement, position, item, identifier }) {
+  yield waitForInitialization()
   const impressionEvent = createImpressionEvent(component, requirement)
   const contentEntity = createContentEntity(item.save_url, item.item_id)
   const uiEntity = createUiEntity({
@@ -309,6 +317,7 @@ function* fireItemImpression({ component, requirement, position, item, identifie
 }
 
 function* fireImpression({ component, requirement, ui, position, identifier }) {
+  yield waitForInitialization()
   const impressionEvent = createImpressionEvent(component, requirement)
   const uiEntity = createUiEntity({
     type: ui,
@@ -351,6 +360,10 @@ function* fireEngagement({ component, ui, identifier, position, value }) {
 
   const snowplowEntities = [uiEntity]
   yield call(sendCustomSnowplowEvent, engagementEvent, snowplowEntities)
+}
+
+function* waitForInitialization() {
+  yield take(SNOWPLOW_INITIALIZED)
 }
 
 /** LEGACY ANALYTICS
