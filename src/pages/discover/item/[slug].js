@@ -1,4 +1,4 @@
-import SyndicatedArticle from 'containers/syndicated-article/syndicated-article'
+import { SyndicatedArticle } from 'containers/syndicated-article/syndicated-article'
 import { fetchHydrationData } from 'containers/syndicated-article/syndicated-article.state'
 import { hydrateArticle } from 'containers/syndicated-article/syndicated-article.state'
 import { fetchTopicList } from 'connectors/topic-list/topic-list.state'
