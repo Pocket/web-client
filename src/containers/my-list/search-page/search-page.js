@@ -33,13 +33,14 @@ export default function Collection(props) {
   const items = useSelector((state) => state.myList[section])
   const offset = useSelector((state) => state.myList[`${section}Offset`])
   const total = useSelector((state) => state.myList[`${section}Total`])
+  const prevQuery = useSelector((state) => state.myList.query)
   const listMode = useSelector((state) => state.app.listMode)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
   const sortSubset = useSelector((state) => state.app.section)
   const sortOrder = useSelector((state) => state.app.sortOptions[sortSubset] || 'newest')
 
-  const [hasLoaded, setHasLoaded] = useState(false)
+  // const [hasLoaded, setHasLoaded] = useState(false)
 
   // Check for initial items so we don't over request
   const initialItemsPopulated = items?.length || total === 0
@@ -65,18 +66,21 @@ export default function Collection(props) {
   ])
 
   useEffect(() => {
-    if (queryChange) dispatch(getMylistSearchData(filter, query))
-  }, [queryChange])
+    if (queryChange || prevQuery !== query) {
+      dispatch(getMylistSearchData(filter, query))
+    }
+  }, [queryChange, prevQuery])
 
   /**
    * FUNCTIONAL ACTIONS
    * ------------------------------------------------------------------------
    */
-  const loadMore = () => {
-    if (hasLoaded) return
-    setHasLoaded(true)
-    dispatch(getMylistSearchData(filter, query))
-  }
+  // Unable to lazy load; setting offset to search query breaks backend request
+  // const loadMore = () => {
+  //   if (hasLoaded) return
+  //   setHasLoaded(true)
+  //   dispatch(getMylistSearchData(filter, query))
+  // }
 
   const toggleSortOrder = () => dispatch(sortOrderToggle())
 
@@ -102,7 +106,7 @@ export default function Collection(props) {
                 <VirtualizedList
                   type={type}
                   section={section}
-                  loadMore={loadMore}
+                  // loadMore={loadMore}
                 />
               ) : null}
               <DeleteModal />
