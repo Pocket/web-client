@@ -139,9 +139,9 @@ export async function fetchCollections({ baseUrl }) {
  * Make and async request for a Pocket Client API (mocked) and return best data
  * @return data {object} An object representing the collection
  */
-export async function fetchCollectionBySlug({ slug, baseUrl }) {
+export async function fetchCollectionBySlug({ slug }) {
   try {
-    const response = await getCollectionBySlug(slug, baseUrl)
+    const response = await getCollectionBySlug(slug)
     if (!response) return { error: 'No data found' }
 
     const { stories: passedStories, ...rest } = response

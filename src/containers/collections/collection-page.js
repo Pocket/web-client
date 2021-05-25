@@ -107,7 +107,7 @@ export function CollectionPage({ queryParams = {}, slug }) {
 
           <div className="content-body">
             <img src={imageUrl} alt="" className="hero-image" />
-            <p className="content-excerpt">{excerpt}</p>
+            <p className="collection-excerpt">{excerpt}</p>
 
             {/* Collection Stories */}
             {stories

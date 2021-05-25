@@ -136,6 +136,7 @@ export function SyndicatedArticle({ url, queryParams = validParams }) {
               <ArticleActions
                 isMobileWebView={isMobileWebView}
                 title={title}
+                url={url}
                 excerpt={excerpt}
                 onSave={saveAction}
                 saveStatus={saveStatus}
