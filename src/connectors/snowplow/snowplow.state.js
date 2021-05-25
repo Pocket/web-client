@@ -214,12 +214,12 @@ export const snowplowSagas = [
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 function* firePageView() {
-  yield waitForInitialization()
+  yield call(waitForInitialization)
   yield call(snowplowTrackPageView)
 }
 
 function* fireVariantEnroll({ variants }) {
-  yield waitForInitialization()
+  yield call(waitForInitialization)
   for (let flag in variants) {
     const variantEnrollEvent = createVariantEnrollEvent()
     const featureFlagEntity = createFeatureFlagEntity(flag, variants[flag])
@@ -229,7 +229,7 @@ function* fireVariantEnroll({ variants }) {
 }
 
 function* fireFeatureEnroll({ hydrate }) {
-  yield waitForInitialization()
+  yield call(waitForInitialization)
   for (let flag in hydrate) {
     const { test: testName, variant, assigned } = hydrate[flag]
     const hasVariant = variant !== 'disabled' && !!variant
@@ -274,7 +274,7 @@ function* fireRecEngagement({ component, ui, identifier, position, item }) {
 }
 
 function* fireRecImpression({ component, requirement, position, item, identifier }) {
-  yield waitForInitialization()
+  yield call(waitForInitialization)
   const impressionEvent = createImpressionEvent(component, requirement)
   const contentEntity = createContentEntity(item.save_url, item.item_id)
   const recEntities = buildRecEntities(item, position)
@@ -308,7 +308,7 @@ function* fireContentOpen({ destination, trigger, position, item, identifier }) 
 }
 
 function* fireItemImpression({ component, requirement, position, item, identifier }) {
-  yield waitForInitialization()
+  yield call(waitForInitialization)
   const impressionEvent = createImpressionEvent(component, requirement)
   const contentEntity = createContentEntity(item.save_url, item.item_id)
   const uiEntity = createUiEntity({
@@ -323,7 +323,7 @@ function* fireItemImpression({ component, requirement, position, item, identifie
 }
 
 function* fireImpression({ component, requirement, ui, position, identifier }) {
-  yield waitForInitialization()
+  yield call(waitForInitialization)
   const impressionEvent = createImpressionEvent(component, requirement)
   const uiEntity = createUiEntity({
     type: ui,
@@ -372,7 +372,7 @@ function* waitForInitialization() {
   while (true) {
     const isReady = yield select(snowplowReady)
     if (!isReady) yield take(SNOWPLOW_INITIALIZED)
-    yield cancel()
+    return true
   }
 }
 
