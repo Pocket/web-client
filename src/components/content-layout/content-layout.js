@@ -42,18 +42,13 @@ export const contentLayout = css`
     margin-bottom: 1rem;
   }
 
-  .content-excerpt,
-  .collection-excerpt {
+  .content-excerpt {
     font-family: var(--fontSansSerif);
     font-style: italic;
     font-weight: 300;
     font-size: 1.25rem;
     line-height: 140%;
     margin-bottom: 2.5rem;
-  }
-
-  .collection-excerpt {
-    margin-bottom: 4rem;
   }
 
   article {

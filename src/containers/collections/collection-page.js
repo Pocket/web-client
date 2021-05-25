@@ -14,6 +14,7 @@ import { AdAboveTheFold } from 'components/content-ads/content-ads'
 import { AdBelowTheFold } from 'components/content-ads/content-ads'
 import { AdRailTop } from 'components/content-ads/content-ads'
 import { AdRailBottom } from 'components/content-ads/content-ads'
+import { ContentIntro } from 'components/content-intro/content-intro'
 
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { ItemCard } from 'connectors/item-card/collection/story-card'
@@ -65,7 +66,7 @@ export function CollectionPage({ queryParams = {}, slug }) {
         <section className="content-section">
           <header>
             <PocketWorthy />
-            <ParsedHeadline title={title} description={intro} />
+            <ParsedHeadline title={title} description={excerpt} />
             {authors ? (
               <AuthorByline
                 url="/collections"
@@ -107,7 +108,8 @@ export function CollectionPage({ queryParams = {}, slug }) {
 
           <div className="content-body">
             <img src={imageUrl} alt="" className="hero-image" />
-            <p className="collection-excerpt">{excerpt}</p>
+
+            <ContentIntro intro={intro} />
 
             {/* Collection Stories */}
             {stories
