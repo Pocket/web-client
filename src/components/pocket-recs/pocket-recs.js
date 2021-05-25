@@ -11,7 +11,11 @@ import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { POCKET_MODULE } from 'connectors/recit/recit.analytics'
 import { darkMode, sepiaMode } from '@pocket/web-ui'
 import Link from 'next/link'
+import { useTranslation } from 'next-i18next'
 
+{
+  t('discover:pocket-worthy', 'Pocket worthy')
+}
 const pocketRecsStyles = css`
   border-top: solid 3px var(--color-textPrimary);
   margin-top: var(--spacing250);
@@ -29,7 +33,14 @@ const pocketRecsStyles = css`
 const headingStyles = css`
   font-family: var(--fontSerifAlt);
 `
-const Heading = () => <h3 className={cx('h6', headingStyles)}>More Stories from Pocket</h3>
+const Heading = () => {
+  const { t } = useTranslation()
+  return (
+    <h3 className={cx('h6', headingStyles)}>
+      {t('discover:more-stories-from-pocket', 'More Stories from Pocket')}
+    </h3>
+  )
+}
 
 const publisherStyles = css`
   margin-bottom: var(--spacing050);
