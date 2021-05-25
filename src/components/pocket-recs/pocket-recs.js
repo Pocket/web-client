@@ -145,7 +145,7 @@ export const Recommendation = ({
   <li className={recommendationStyles}>
     <Link href={url} onClick={handleClick}>
       <a className="thumbnail">
-        <img src={thumbnailUrl} alt="" />
+        <img src={thumbnailUrl} alt={`Logo for ${name}`} />
       </a>
     </Link>
     <div className="details">
