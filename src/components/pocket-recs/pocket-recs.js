@@ -13,9 +13,6 @@ import { darkMode, sepiaMode } from '@pocket/web-ui'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 
-{
-  t('discover:pocket-worthy', 'Pocket worthy')
-}
 const pocketRecsStyles = css`
   border-top: solid 3px var(--color-textPrimary);
   margin-top: var(--spacing250);
