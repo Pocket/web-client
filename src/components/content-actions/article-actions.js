@@ -29,6 +29,9 @@ const shareContainer = css`
       align-items: center;
     }
     & > div {
+      svg {
+        height: 24px;
+      }
       margin-bottom: 1rem;
       ${breakpointMediumTablet} {
         font-size: 1.6rem;
