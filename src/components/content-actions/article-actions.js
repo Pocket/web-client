@@ -13,6 +13,7 @@ import {
   LinkedinShareButton,
   EmailShareButton
 } from 'react-share'
+import { breakpointMediumTablet } from '@pocket/web-ui'
 
 const shareContainer = css`
   display: flex;
@@ -20,8 +21,21 @@ const shareContainer = css`
   flex: 1;
   width: 100%;
 
-  .social-actions > div {
-    margin-bottom: 1rem;
+  .social-actions {
+    ${breakpointMediumTablet} {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+    }
+    & > div {
+      margin-bottom: 1rem;
+      ${breakpointMediumTablet} {
+        font-size: 1.6rem;
+        margin-bottom: 0;
+        margin-right: 1rem;
+      }
+    }
   }
 
   button {
