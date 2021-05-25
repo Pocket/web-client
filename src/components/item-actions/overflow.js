@@ -37,7 +37,7 @@ const popoverMenuItem = css`
   }
   &:hover {
     background-color: var(--color-actionPrimarySubdued);
-    color: var(---color-actionPrimaryText);
+    color: var(--color-actionPrimaryText);
   }
 `
 

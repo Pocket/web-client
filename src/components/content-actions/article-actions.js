@@ -27,9 +27,6 @@ const shareContainer = css`
   button {
     line-height: 100%;
     padding: 0;
-    &:focus {
-      outline: none;
-    }
   }
 
   svg {

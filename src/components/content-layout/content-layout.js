@@ -46,9 +46,9 @@ export const contentLayout = css`
     font-family: var(--fontSansSerif);
     font-style: italic;
     font-weight: 300;
-    font-size: 1.25em;
+    font-size: 1.25rem;
     line-height: 140%;
-    margin-bottom: var(--spacing100);
+    margin-bottom: 1rem;
   }
 
   article {
