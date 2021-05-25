@@ -2,7 +2,7 @@ import { put, takeEvery, select } from 'redux-saga/effects'
 import { localStore } from 'common/utilities/browser-storage/browser-storage'
 import { getMyList } from 'common/api/my-list'
 import { getTopicFeed } from 'common/api/topics'
-import { getCollectionSet } from 'common/api/collections'
+import { getCollections as apiGetCollections } from 'common/api/collections'
 import { saveItem } from 'common/api/saveItem'
 import { removeItem } from 'common/api/removeItem'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
@@ -325,11 +325,14 @@ export async function fetchTopicData({ topic }) {
  */
 export async function fetchCollectionData({ count }) {
   try {
-    const response = await getCollectionSet(count)
-    const collections = response?.data?.getCollections?.collections
+    const collections = await apiGetCollections()
     if (!collections.length) return { error: 'No data found' }
 
-    const data = collections.sort(() => 0.5 - Math.random()).slice(0, count)
+    const collectionsWithUrl = collections.map((collection) => ({
+      ...collection,
+      url: `/collections/${collection.slug}`
+    }))
+    const data = collectionsWithUrl.sort(() => 0.5 - Math.random()).slice(0, count)
     return { data }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
