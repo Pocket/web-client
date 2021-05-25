@@ -109,7 +109,7 @@ function PublisherAttribution({
   }
 
   return publisher ? (
-    <footer className={AttributionWrapper}>
+    <cite className={AttributionWrapper}>
       <PublisherInfo
         logoWide={publisher.logoWide}
         publishedAt={publishedAt}
@@ -122,7 +122,7 @@ function PublisherAttribution({
           handleClick={handleClick}
         />
       ) : null}
-    </footer>
+    </cite>
   ) : null
 }
 
