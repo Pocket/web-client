@@ -1,11 +1,11 @@
 import { ONE_TRUST_DATA } from 'actions'
 import { arrayToObject } from 'common/utilities'
 
-// ID C0001: Necessary Cookies
-// ID C0002: Analytics Cookies
-// ID C0003: Functional Cookies
-// ID C0004: Advertising Cookies (Targeting)
-// ID C0005: Social Media Cookies
+// ID C0001 Necessary Cookies
+// ID C0002 Analytics Cookies
+// ID C0003 Functional Cookies
+// ID C0004 Targeting/Tracking Cookies
+// ID C0005 Social Media Cookies
 
 const categories = [
   { name: 'necessary', id: 'C0001', enabled: true }, // Necessary Cookies
