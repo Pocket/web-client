@@ -27,15 +27,7 @@ import { PostTrustInit } from 'connectors/one-trust/one-trust'
  --------------------------------------------------------------- */
 import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
-import { initializeSnowplow } from 'common/setup/snowplow'
-import { loadOptinMonster } from 'common/utilities/third-party/opt-in-monster'
 import { signalTestsReady } from '../../cypress/support/utils'
-
-import { trackPageView } from 'connectors/snowplow/snowplow.state'
-import { finalizeSnowplow } from 'connectors/snowplow/snowplow.state'
-
-import { GOOGLE_ANALYTICS_ID } from 'common/constants'
-import ReactGA from 'react-ga'
 
 import { Shortcuts } from 'connectors/shortcuts/shortcuts'
 import { DevTools } from 'connectors/dev-tools/dev-tools'
@@ -108,21 +100,6 @@ function PocketWebClient({ Component, pageProps, err }) {
     if (sess_guid) validateUser()
   }, [user_status, dispatch])
 
-  // 3rd party initializations
-  useEffect(() => {
-    if (user_status === 'pending' || user_status === 'invalid' || !sess_guid) return
-
-    // Set up Snowplow
-    const finalizeInit = () => dispatch(finalizeSnowplow())
-    initializeSnowplow(user_id, sess_guid, finalizeInit)
-
-    // Set up Google Analytics
-    ReactGA.initialize(GOOGLE_ANALYTICS_ID)
-
-    // Load OptinMonster
-    loadOptinMonster()
-  }, [user_id, user_status, sess_guid, dispatch])
-
   // Hydrate user features
   useEffect(() => {
     if (user_status === 'pending' || user_status === 'invalid') return null
@@ -141,14 +118,6 @@ function PocketWebClient({ Component, pageProps, err }) {
     // Make sure this is the last thing we fire
     signalTestsReady()
   }, [user_status, sess_guid, user_id, birth, dispatch])
-
-  // Track Page Views
-  useEffect(() => {
-    if (user_status === 'pending' || user_status === 'invalid') return null
-
-    dispatch(trackPageView())
-    ReactGA.pageview(path)
-  }, [user_status, sess_guid, user_id, path, dispatch])
 
   useEffect(() => {
     if (authRequired && user_status === 'invalid') {
