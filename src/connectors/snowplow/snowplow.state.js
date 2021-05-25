@@ -164,11 +164,16 @@ export const trackImpression = (component, requirement, ui, position, identifier
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
+  initialized: false,
   impressions: []
 }
 
 export const snowplowReducers = (state = initialState, action) => {
   switch (action.type) {
+    case SNOWPLOW_INITIALIZED: {
+      return { ...state, initialized: true }
+    }
+
     case SNOWPLOW_TRACK_ITEM_IMPRESSION: {
       const { item_id } = action?.item
       const set = new Set([...state.impressions, item_id])
@@ -176,7 +181,7 @@ export const snowplowReducers = (state = initialState, action) => {
     }
 
     case SNOWPLOW_TRACK_PAGE_VIEW: {
-      return initialState
+      return { ...state, impressions: [] }
     }
 
     default:
@@ -187,7 +192,7 @@ export const snowplowReducers = (state = initialState, action) => {
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getListType = (state) => state.app.listMode
-const trustReady = (state) => state.oneTrust?.trustReady
+const snowplowReady = (state) => state.analytics?.initialized
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
@@ -365,7 +370,7 @@ function* fireEngagement({ component, ui, identifier, position, value }) {
 
 function* waitForInitialization() {
   while (true) {
-    const isReady = yield select(trustReady)
+    const isReady = yield select(snowplowReady)
     if (!isReady) yield take(SNOWPLOW_INITIALIZED)
     yield cancel()
   }
