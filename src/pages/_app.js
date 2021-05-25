@@ -5,7 +5,6 @@ import { appWithTranslation } from 'next-i18next'
 import { useEffect } from 'react'
 import { wrapper } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
-import { useRouter } from 'next/router'
 import * as Sentry from '@sentry/node'
 import { parseCookies } from 'nookies'
 
@@ -41,13 +40,9 @@ Sentry.init(sentrySettings)
 function PocketWebClient({ Component, pageProps, err }) {
   // Initialize app once per page load
   const dispatch = useDispatch()
-  const router = useRouter()
 
   const { user_status, user_id, sess_guid, birth } = useSelector((state) => state.user) //prettier-ignore
-  const path = router.pathname
-
   const showDevTools = process.env.SHOW_DEV === 'included'
-
   const { authRequired } = pageProps
 
   useEffect(() => {
@@ -130,7 +125,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   return (
     <ViewportProvider>
-      <PostTrustInit path={path} />
+      <PostTrustInit />
       {showDevTools ? <DevTools /> : null}
       <Shortcuts />
       {shouldRender ? <Component {...pageProps} err={err} /> : null}
