@@ -20,7 +20,7 @@ const Description = css`
   font-weight: 300;
   font-size: 1.25em;
   line-height: 140%;
-  margin-bottom: var(--spacing100);
+  margin-bottom: 1rem;
 `
 
 /**
