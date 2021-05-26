@@ -16,6 +16,7 @@ import { AdRailTop } from 'components/content-ads/content-ads'
 import { AdRailBottom } from 'components/content-ads/content-ads'
 import { ContentIntro } from 'components/content-intro/content-intro'
 
+import { getImageCacheUrl } from 'common/utilities'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { ItemCard } from 'connectors/item-card/collection/story-card'
 import { saveCollection } from 'containers/collections/collections.state'
@@ -53,7 +54,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
   const authorNames = authors?.map((author) => author.name)
   const allowAds = isPremium ? false : showAds && oneTrustReady
   const usePersonalized = allowAds && trackingEnabled
-
+  const heroImage = getImageCacheUrl(imageUrl, { width: 648 })
   const saveAction = () => dispatch(saveCollectionPage(slug))
 
   // const count = urls?.length
@@ -111,7 +112,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
           </aside>
 
           <div className="content-body">
-            <img src={imageUrl} alt="" className="hero-image" />
+            <img src={heroImage} alt="" className="hero-image" />
 
             <ContentIntro intro={intro} />
 
