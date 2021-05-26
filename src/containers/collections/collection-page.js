@@ -22,8 +22,9 @@ import { saveCollection } from 'containers/collections/collections.state'
 import { saveCollectionPage } from 'containers/collections/collections.state'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { useTranslation } from 'next-i18next'
+import ErrorPage from 'pages/_error'
 
-export function CollectionPage({ queryParams = {}, slug }) {
+export function CollectionPage({ queryParams = {}, slug, statusCode }) {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -43,6 +44,9 @@ export function CollectionPage({ queryParams = {}, slug }) {
   const trackingEnabled = useSelector((state) => state.oneTrust?.tracking?.enabled)
   const data = useSelector((state) => state.collections[slug]) || {}
   const topics = useSelector((state) => state.topicList?.topicsByName)
+
+  // Show error page if things have gone awry
+  if (statusCode) return <ErrorPage statusCode={statusCode} />
 
   const { title, intro, excerpt, authors, stories, imageUrl, pageSaveStatus } = data
   const { showAds = true } = data

@@ -9,6 +9,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
 import { END } from 'redux-saga'
 import { wrapper } from 'store'
+
 /**
  * Server Side State Hydration
  * This is where we are defining initial state for this page.
@@ -17,17 +18,24 @@ import { wrapper } from 'store'
  * SEO/Crawlers
   --------------------------------------------------------------- */
 export const getServerSideProps = wrapper.getServerSideProps(
-  async ({ store, query, res, req, locale }) => {
+  async ({ store, query, req, locale }) => {
     const { dispatch, sagaTask } = store
     const { slug } = query
+
+    const defaultProps = {
+      ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
+      slug,
+      revalidate: 60 // Revalidate means this can be regenerated once every X seconds
+    }
 
     // Hydrating initial state with an async request. This will block the
     // page from loading. Do this for SEO/crawler purposes
     const baseUrl = req.headers.host
     const { itemsById, collection } = await fetchCollectionBySlug({ slug, baseUrl })
     const topicsByName = await fetchTopicList(true)
+
     // No article found
-    if (!collection || !itemsById) res.statusCode = 404
+    if (!collection || !itemsById) return { props: { ...defaultProps, statusCode: 404 } }
 
     // Since ssr will not wait for side effects to resolve this dispatch needs to be pure
     dispatch(hydrateTopicList({ topicsByName }))
@@ -39,7 +47,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     await sagaTask.toPromise()
 
     return {
-      props: { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])), slug }
+      props: defaultProps
     }
   }
 )
