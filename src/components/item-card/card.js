@@ -9,6 +9,7 @@ import { ItemTags } from 'components/item-tags/item-tags'
 import { cardStyles } from './card-base'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
+import ReactMarkdown from 'react-markdown'
 
 /** Card
  * Item card for display.
@@ -193,7 +194,11 @@ export const Card = (props) => {
             ) : null}
           </cite>
 
-          {showExcerpt ? <p className="excerpt">{excerpt}</p> : null}
+          {showExcerpt ? (
+            <div className="excerpt">
+              <ReactMarkdown>{excerpt}</ReactMarkdown>
+            </div>
+          ) : null}
         </div>
       </div>
       <footer className="footer">

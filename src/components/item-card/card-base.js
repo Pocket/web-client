@@ -128,9 +128,12 @@ export const cardStyles = css`
     padding-left: var(--spacing050);
   }
 
-  .excerpt {
+  .excerpt p {
     font-size: var(--fontSize100);
-    margin: 0;
+    margin: 0 0 1rem 0;
+    strong {
+      font-weight: 500;
+    }
   }
 
   .footer {
@@ -170,7 +173,7 @@ export const cardStyles = css`
   &.list .selectedBack {
     padding: 0.125em 1.1em;
   }
-  
+
   &.selected .selectedBack,
   &.selected:focus-within .selectedBack {
     background-color: var(--color-navCurrentTab);
