@@ -69,7 +69,7 @@ export const Card = (props) => {
     title,
     thumbnail,
     publisher,
-    authors,
+    authors: passedAuthors,
     excerpt,
     read_time,
     openExternal,
@@ -122,6 +122,9 @@ export const Card = (props) => {
   )
 
   const showTags = cardShape === 'detail'
+  const authors = Array.isArray(passedAuthors)
+    ? passedAuthors?.filter((author) => author.name.length)
+    : false
 
   return (
     <article
