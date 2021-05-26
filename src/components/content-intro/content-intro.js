@@ -3,12 +3,10 @@ import { css } from 'linaria'
 
 const introStyles = css`
   font-family: var(--fontSansSerif);
-  font-style: italic;
   font-weight: 300;
   font-size: 1.25rem;
   line-height: 140%;
   margin-bottom: 2.5rem;
-  margin-bottom: 4rem;
 `
 
 export const ContentIntro = function ({ intro }) {
