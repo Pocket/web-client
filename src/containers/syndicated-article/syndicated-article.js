@@ -111,8 +111,7 @@ export function SyndicatedArticle({ url, queryParams = validParams }) {
           <section className="content-section">
             <header>
               <PocketWorthy />
-              <ParsedHeadline title={title} />
-              <p className="content-excerpt">{excerpt}</p>
+              <ParsedHeadline title={title} description={excerpt} />
               {authorNames ? (
                 <AuthorByline
                   url={publisher?.url}
