@@ -129,7 +129,7 @@ function SaveStoryButton({ url, isAuthenticated, saveStatus, saveAction, id, tra
     event.stopPropagation()
 
     saveAction(url)
-    trackSaveClick(id)
+    if (trackSaveClick) trackSaveClick(id) // Legacy method: Remove on analytics confirmation
   }
 
   // Popover Effect
