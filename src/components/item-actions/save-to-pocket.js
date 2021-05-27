@@ -118,7 +118,6 @@ export const SaveToPocket = function ({
 }) {
   const { t } = useTranslation()
 
-  console.log(hideCopy)
   const saveCopy = {
     unsaved: t('item-action:save-unsaved', 'Save'),
     saving: t('item-action:save-saving', 'Save'),

@@ -54,18 +54,10 @@ const shareContainer = css`
     width: 24px;
     height: 24px;
     position: relative;
+    border-radius: var(--borderRadius);
     &:focus {
-      outline: none;
-    }
-    &:focus::before {
-      content: '';
-      position: absolute;
-      border: 2px solid var(--color-actionFocus);
-      top: -4px;
-      bottom: -4px;
-      left: -4px;
-      right: -4px;
-      border-radius: 0.5rem;
+      outline-offset: 2px;
+      outline-color: var(--color-actionFocus);
     }
     span.icon {
       display: block;
