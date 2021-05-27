@@ -72,7 +72,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
             <ParsedHeadline title={title} description={excerpt} />
             {authors ? (
               <AuthorByline
-                url="/collections"
+                url="/explore"
                 name="Pocket Collections"
                 showAuthors={true}
                 authorNames={authorNames}

@@ -1,3 +1,10 @@
+## [1.14.28](https://github.com/Pocket/web-client/compare/v1.14.27...v1.14.28) (2021-05-27)
+
+
+### Bug Fixes
+
+* **collections:** link to explore for now ([a7b8682](https://github.com/Pocket/web-client/commit/a7b8682048c1e37a9fc88a6e2d7e90eb15990f91))
+
 ## [1.14.27](https://github.com/Pocket/web-client/compare/v1.14.26...v1.14.27) (2021-05-27)
 
 
