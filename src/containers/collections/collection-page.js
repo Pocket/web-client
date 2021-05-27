@@ -22,13 +22,14 @@ import { getImageCacheUrl } from 'common/utilities'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { ItemCard } from 'connectors/item-card/collection/story-card'
 import { saveCollection } from 'containers/collections/collections.state'
+
+import { unSaveCollectionPage } from 'containers/collections/collections.state'
 import { saveCollectionPage } from 'containers/collections/collections.state'
+
 import { Toasts } from 'connectors/toasts/toast-list'
-import { useTranslation } from 'next-i18next'
 import ErrorPage from 'pages/_error'
 
 export function CollectionPage({ queryParams = {}, slug, statusCode }) {
-  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const { mobile_web_view: isMobileWebView } = queryParams
@@ -52,13 +53,17 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
   const allowAds = isPremium ? false : showAds && shouldRender && oneTrustReady
   const usePersonalized = allowAds && trackingEnabled
   const heroImage = getImageCacheUrl(imageUrl, { width: 648 })
-  const saveAction = () => dispatch(saveCollectionPage(slug))
 
   // const count = urls?.length
   // const saveCollectionTop = () => dispatch(saveCollection(slug))
   // const saveCollectionBottom = () => dispatch(saveCollection(slug))
   const url = `${BASE_URL}/collections/${slug}`
   const metaData = { description: excerpt, title, url, image: imageUrl }
+
+  const saveAction = () => {
+    if (pageSaveStatus === 'saved') dispatch(unSaveCollectionPage(slug))
+    if (pageSaveStatus !== 'saved') dispatch(saveCollectionPage(slug))
+  }
 
   return (
     <ArticleLayout title={metaData.title} metaData={metaData} className={printLayout}>
@@ -95,7 +100,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
               isMobileWebView={isMobileWebView}
               title={title}
               excerpt={excerpt}
-              saveAction={saveAction}
+              onSave={saveAction}
               saveStatus={pageSaveStatus}
               isAuthenticated={isAuthenticated}
               handleShareClick={() => {}}
