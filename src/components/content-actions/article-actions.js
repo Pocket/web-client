@@ -15,6 +15,13 @@ import {
 } from 'react-share'
 import { breakpointMediumTablet } from '@pocket/web-ui'
 
+const saveButton = css`
+  min-width: 0;
+  svg {
+    margin-right: 0;
+  }
+`
+
 const shareContainer = css`
   display: flex;
   flex-direction: column;
@@ -44,22 +51,33 @@ const shareContainer = css`
   button {
     line-height: 100%;
     padding: 0;
-  }
-
-  svg {
+    width: 24px;
     height: 24px;
+    position: relative;
+    &:focus {
+      outline: none;
+    }
+    &:focus::before {
+      content: '';
+      position: absolute;
+      border: 2px solid var(--color-actionFocus);
+      top: -4px;
+      bottom: -4px;
+      left: -4px;
+      right: -4px;
+      border-radius: 0.5rem;
+    }
+    span.icon {
+      display: block;
+      margin-top: 0;
+      height: 24px;
+    }
   }
 
   .pocket-share {
-    width: 1.5rem;
     button {
       color: var(--color-textPrimary);
     }
-
-    .actionCopy {
-      display: none;
-    }
-
     div {
       width: 200px;
       font-family: var(--fontSansSerif);
@@ -132,6 +150,8 @@ export const ArticleActions = function ({
             saveAction={saveAction}
             isAuthenticated={isAuthenticated}
             saveStatus={saveStatus}
+            hideCopy={true}
+            className={saveButton}
             id="sidebar"
           />
         </div>
