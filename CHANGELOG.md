@@ -1,3 +1,12 @@
+## [1.14.31](https://github.com/Pocket/web-client/compare/v1.14.30...v1.14.31) (2021-05-27)
+
+
+### Bug Fixes
+
+* **collections:** allow unsaving/sidebar saving ([3f64580](https://github.com/Pocket/web-client/commit/3f6458021eae39f11782956bcc6a99d47f05cbca))
+* **content actions:** update styles ([43bbbc0](https://github.com/Pocket/web-client/commit/43bbbc0b0acfc6193da563bf306dbd6d39e280e6))
+* **save:** allow for cleaner item actions ([56596b4](https://github.com/Pocket/web-client/commit/56596b4406868cc657939a705f41b7e3e65a8f88))
+
 ## [1.14.30](https://github.com/Pocket/web-client/compare/v1.14.29...v1.14.30) (2021-05-27)
 
 
