@@ -1,3 +1,4 @@
+import { BASE_URL } from 'common/constants'
 import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
 
@@ -29,13 +30,6 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
-  const metaData = {
-    description: t(
-      'discover:page-description',
-      'Discover fascinating stories from all across the web with Pocket.'
-    ),
-    title: t('discover:page-title', 'Discover stories on Pocket')
-  }
   const { mobile_web_view: isMobileWebView } = queryParams
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
 
@@ -60,6 +54,8 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
   // const count = urls?.length
   // const saveCollectionTop = () => dispatch(saveCollection(slug))
   // const saveCollectionBottom = () => dispatch(saveCollection(slug))
+  const url = `${BASE_URL}/collections/${slug}`
+  const metaData = { description: excerpt, title, url, image: imageUrl }
 
   return (
     <ArticleLayout title={metaData.title} metaData={metaData}>

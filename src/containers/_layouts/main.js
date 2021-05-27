@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { GlobalFooter, PageContainer } from '@pocket/web-ui'
 import GlobalNav from 'connectors/global-nav/global-nav'
 import { css } from 'linaria'
+import { SocialMetaData } from 'components/social-meta-data/social-meta-data'
 
 const fixedNavContainer = css`
   padding-top: 65px;
@@ -16,22 +17,21 @@ function mainLayout({
   selectedNavLink,
   isFullWidthLayout
 }) {
+  const renderSocialMeta = metaData?.description && metaData?.title
+
   return (
     <>
       <Head>
         <title>{title}</title>
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         {canonical ? <link rel="canonical" href={canonical} /> : null}
+        {!!renderSocialMeta ? <SocialMetaData {...metaData} /> : null}
       </Head>
 
       <GlobalNav selectedLink={selectedNavLink} />
 
       <div className={fixedNavContainer}>
-        {isFullWidthLayout ? (
-          children
-        ) : (
-          <PageContainer>{children}</PageContainer>
-        )}
+        {isFullWidthLayout ? children : <PageContainer>{children}</PageContainer>}
       </div>
 
       <GlobalFooter />
