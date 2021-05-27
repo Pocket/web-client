@@ -1,3 +1,11 @@
+## [1.14.30](https://github.com/Pocket/web-client/compare/v1.14.29...v1.14.30) (2021-05-27)
+
+
+### Bug Fixes
+
+* **package:** undo port change ([a993a1d](https://github.com/Pocket/web-client/commit/a993a1df52c47167a9122e6f796558a59dc602c8))
+* **print:** adding print styles to reader, syndicated articles, and collections ([6b336ad](https://github.com/Pocket/web-client/commit/6b336ade6169e99cccdd3e728680421aa10b9a00))
+
 ## [1.14.29](https://github.com/Pocket/web-client/compare/v1.14.28...v1.14.29) (2021-05-27)
 
 

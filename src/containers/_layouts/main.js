@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import Head from 'next/head'
 import { GlobalFooter, PageContainer } from '@pocket/web-ui'
 import GlobalNav from 'connectors/global-nav/global-nav'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { SocialMetaData } from 'components/social-meta-data/social-meta-data'
 
 const fixedNavContainer = css`
@@ -15,7 +15,8 @@ function mainLayout({
   title = 'Pocket',
   canonical,
   selectedNavLink,
-  isFullWidthLayout
+  isFullWidthLayout,
+  className = ''
 }) {
   const renderSocialMeta = metaData?.description && metaData?.title
 
@@ -30,7 +31,7 @@ function mainLayout({
 
       <GlobalNav selectedLink={selectedNavLink} />
 
-      <div className={fixedNavContainer}>
+      <div className={cx(fixedNavContainer, className)}>
         {isFullWidthLayout ? children : <PageContainer>{children}</PageContainer>}
       </div>
 

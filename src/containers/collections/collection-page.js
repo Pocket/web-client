@@ -5,6 +5,7 @@ import MobileLayout from 'layouts/mobile-web'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { contentLayout } from 'components/content-layout/content-layout'
+import { printLayout } from 'components/content-layout/print-layout'
 import { PocketWorthy } from 'components/content-headline/pocket-worthy'
 import { ParsedHeadline } from 'components/content-headline/parsed-headline'
 import { AuthorByline } from 'components/content-author/author-byline'
@@ -60,7 +61,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
   const metaData = { description: excerpt, title, url, image: imageUrl }
 
   return (
-    <ArticleLayout title={metaData.title} metaData={metaData}>
+    <ArticleLayout title={metaData.title} metaData={metaData} className={printLayout}>
       <main className={contentLayout}>
         <section>
           <AdAboveTheFold allowAds={allowAds} usePersonalized={usePersonalized} />

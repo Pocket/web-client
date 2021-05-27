@@ -237,7 +237,7 @@ const PocketRecs = ({
   if (recommendations.length === 0) return null
 
   return (
-    <div className={pocketRecsStyles}>
+    <div className={cx(pocketRecsStyles, 'pocket-recs')}>
       <Heading data-cy="pocket-recs-heading" />
       <Recommendations
         data-cy="pocket-recommended-articles"

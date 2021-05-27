@@ -10,9 +10,6 @@ import { ARTICLE_ITEM_FAILURE } from 'actions'
 import { ARTICLE_CONTENT_SUCCESS } from 'actions'
 import { ARTICLE_CONTENT_FAILURE } from 'actions'
 
-import { SUGGESTED_TAGS_SUCCESS } from 'actions'
-import { SUGGESTED_TAGS_FAILURE } from 'actions'
-
 import { ANNOTATION_SAVE_REQUEST } from 'actions'
 import { ANNOTATION_SAVE_SUCCESS } from 'actions'
 import { ANNOTATION_SAVE_FAILURE } from 'actions'
@@ -94,11 +91,6 @@ export const readReducers = (state = initialState, action) => {
     case ARTICLE_CONTENT_SUCCESS: {
       const { article } = action
       return { ...state, articleContent: article }
-    }
-
-    case SUGGESTED_TAGS_SUCCESS: {
-      const { tags } = action
-      return { ...state, suggestedTags: tags }
     }
 
     case ANNOTATION_SAVE_SUCCESS: {
