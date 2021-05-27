@@ -14,6 +14,7 @@ export const request = ({
   params = {},
   path,
   method = 'GET',
+  clientInfo = {},
   body,
   auth,
   ssr,
@@ -34,9 +35,6 @@ export const request = ({
   })
   const endpoint = `${apiToUse}/${path}?${queryParams}`
 
-
-  const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
-
   /**
    * Set proper headers for the request
    * @option clientHeaders - These make sure our response is returned in JSON
@@ -47,12 +45,8 @@ export const request = ({
    * @option apolloHeaders - These allow us to see our graphql specific requests
    * separated out in Apollo Studio.
    */
-  const apolloHeaders = {
-    'apollographql-client-name': 'web-client',
-    'apollographql-client-version': RELEASE_VERSION,
-  }
   const clientHeaders = {
-    ...apolloHeaders,
+    ...clientInfo,
     'Content-Type': 'application/json',
     'X-Accept': 'application/json; charset=UTF8'
   }
@@ -92,10 +86,18 @@ function handleErrors(response, auth) {
 }
 
 export const requestGQL = (data) => {
+  const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
+
+  const clientInfo = {
+    'apollographql-client-name': 'web-client',
+    'apollographql-client-version': RELEASE_VERSION
+  }
+
   return request({
     api_url: GRAPHQL_URL,
     path: 'graphql',
     method: 'POST',
+    clientInfo,
     body: JSON.stringify(data)
   })
 }
