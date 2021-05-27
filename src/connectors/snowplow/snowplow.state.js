@@ -174,6 +174,7 @@ export const snowplowReducers = (state = initialState, action) => {
       return { ...state, initialized: true }
     }
 
+    case SNOWPLOW_TRACK_REC_IMPRESSION:
     case SNOWPLOW_TRACK_ITEM_IMPRESSION: {
       const { item_id } = action?.item
       const set = new Set([...state.impressions, item_id])
@@ -274,7 +275,9 @@ function* fireRecEngagement({ component, ui, identifier, position, item }) {
 }
 
 function* fireRecImpression({ component, requirement, position, item, identifier }) {
-  yield call(waitForInitialization)
+  const isReady = yield select(snowplowReady)
+  if (!isReady) return
+
   const impressionEvent = createImpressionEvent(component, requirement)
   const contentEntity = createContentEntity(item.save_url, item.item_id)
   const recEntities = buildRecEntities(item, position)
@@ -308,7 +311,9 @@ function* fireContentOpen({ destination, trigger, position, item, identifier }) 
 }
 
 function* fireItemImpression({ component, requirement, position, item, identifier }) {
-  yield call(waitForInitialization)
+  const isReady = yield select(snowplowReady)
+  if (!isReady) return
+
   const impressionEvent = createImpressionEvent(component, requirement)
   const contentEntity = createContentEntity(item.save_url, item.item_id)
   const uiEntity = createUiEntity({
