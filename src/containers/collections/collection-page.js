@@ -39,6 +39,8 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
   const trackingEnabled = useSelector((state) => state.oneTrust?.tracking?.enabled)
   const data = useSelector((state) => state.collections[slug]) || {}
   const topics = useSelector((state) => state.topicList?.topicsByName)
+  const userStatus = useSelector((state) => state.user.user_status)
+  const shouldRender = userStatus !== 'pending'
 
   // Show error page if things have gone awry
   if (statusCode) return <ErrorPage statusCode={statusCode} />
@@ -46,7 +48,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
   const { title, intro, excerpt, authors, stories, imageUrl, pageSaveStatus } = data
   const { showAds = true } = data
   const authorNames = authors?.map((author) => author.name)
-  const allowAds = isPremium ? false : showAds && oneTrustReady
+  const allowAds = isPremium ? false : showAds && shouldRender && oneTrustReady
   const usePersonalized = allowAds && trackingEnabled
   const heroImage = getImageCacheUrl(imageUrl, { width: 648 })
   const saveAction = () => dispatch(saveCollectionPage(slug))
