@@ -17,6 +17,7 @@ import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 import { hydrateUserTags } from 'containers/my-list/tags-page/tags-page.state'
 
 import { appSetPreferences } from 'connectors/app/app.state'
+import { hydrateSettings } from 'connectors/settings/settings.state'
 
 import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 
@@ -67,6 +68,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // Set up defaults/user pref in state
     dispatch(appSetPreferences())
+    dispatch(hydrateSettings())
 
     /**
      * First time user
