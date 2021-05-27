@@ -102,7 +102,6 @@ function* collectionPageSave(action) {
     const { slug } = action
     const url = `${BASE_URL}/collections/${slug}`
 
-    console.log(url)
     const response = yield saveItem(url)
     if (response?.status !== 1) throw new Error('Unable to save')
 
