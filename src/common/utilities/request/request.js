@@ -42,6 +42,8 @@ export const request = ({
    * that  is not set automatically on the server
    */
   const clientHeaders = {
+    'apollographql-client-name': 'web-client',
+    'apollographql-client-version': '1.0', //Ideally this would be the web-client version number
     'Content-Type': 'application/json',
     'X-Accept': 'application/json; charset=UTF8'
   }
