@@ -28,18 +28,18 @@ export const contentLayout = css`
     }
 
     ${breakpointTinyTablet} {
-      grid-column: 1 / 12;
+      grid-column: 1 / -1;
     }
 
     &.isMobileWebView {
       grid-column: 1 / 8;
 
       ${breakpointMediumTablet} {
-        grid-column: 1 / 11;
+        grid-column: 1 / 12;
       }
 
       ${breakpointTinyTablet} {
-        grid-column: 1 / 12;
+        grid-column: 1 / -1;
       }
     }
   }
@@ -54,10 +54,10 @@ export const contentLayout = css`
 
     ${breakpointMediumTablet} {
       position: static;
-      grid-column: 2 / 12;
+      grid-column: 2 / -1;
     }
     ${breakpointTinyTablet} {
-      grid-column: 1 / 12;
+      grid-column: 1 / -1;
     }
   }
 
