@@ -34,16 +34,25 @@ export const request = ({
   })
   const endpoint = `${apiToUse}/${path}?${queryParams}`
 
+
+  const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
+
   /**
    * Set proper headers for the request
    * @option clientHeaders - These make sure our response is returned in JSON
    *
    * @option ssrHeaders - These append a passed in cookie and origin since
    * that  is not set automatically on the server
+   *
+   * @option apolloHeaders - These allow us to see our graphql specific requests
+   * separated out in Apollo Studio.
    */
-  const clientHeaders = {
+  const apolloHeaders = {
     'apollographql-client-name': 'web-client',
-    'apollographql-client-version': '1.0', //Ideally this would be the web-client version number
+    'apollographql-client-version': RELEASE_VERSION,
+  }
+  const clientHeaders = {
+    ...apolloHeaders,
     'Content-Type': 'application/json',
     'X-Accept': 'application/json; charset=UTF8'
   }
