@@ -12,8 +12,6 @@ import { USER_TAGS_ITEM_SUCCESS } from 'actions'
 import { USER_TAGS_PIN } from 'actions'
 import { USER_TAGS_PINS_SET } from 'actions'
 
-// import { USER_TAGS_HYDRATE } from 'actions'
-
 import { USER_TAGS_EDIT } from 'actions'
 import { USER_TAGS_EDIT_CONFIRM } from 'actions'
 import { USER_TAGS_EDIT_CANCEL } from 'actions'
