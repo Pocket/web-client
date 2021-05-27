@@ -14,8 +14,6 @@ import { getSessGuid, sessGuidHydrate } from 'connectors/user/user.state'
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
 import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 
-import { hydrateUserTags } from 'containers/my-list/tags-page/tags-page.state'
-
 import { appSetPreferences } from 'connectors/app/app.state'
 import { hydrateSettings } from 'connectors/settings/settings.state'
 
@@ -107,9 +105,6 @@ function PocketWebClient({ Component, pageProps, err }) {
     }
 
     hydrateFeatures()
-
-    // Hydrate locally stored values
-    dispatch(hydrateUserTags())
 
     // signal to Cypress that React client side has loaded
     // Make sure this is the last thing we fire

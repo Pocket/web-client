@@ -97,7 +97,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
 
   const sendImpressionEvent = (identifier) => dispatch(sendImpression(identifier))
 
-  const pinnedTags = useSelector((state) => state.userTags.pinnedTags)
+  const pinnedTags = useSelector((state) => state.settings.pinnedTags)
   const pinnedLinks = pinnedTags.map((pin) => {
     return {
       label: pin,
