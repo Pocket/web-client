@@ -36,6 +36,7 @@ export function ItemCard({ id, position }) {
       cardShape="wide"
       showExcerpt={true}
       openUrl={openUrl}
+      className="collection"
       // Tracking
       onItemInView={onItemInView}
       onOpen={onOpen}

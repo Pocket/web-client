@@ -1,7 +1,7 @@
 import { gql } from 'graphql-request'
 
 const getCollectionBySlug = gql`
-  query Query($getCollectionBySlugSlug: String!) {
+  query GetCollectionBySlug($getCollectionBySlugSlug: String!) {
     getCollectionBySlug(slug: $getCollectionBySlugSlug) {
       slug
       title

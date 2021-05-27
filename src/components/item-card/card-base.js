@@ -593,4 +593,26 @@ export const cardStyles = css`
       grid-column: 5 / span 8;
     }
   }
+
+  /** Collection specific style
+  --------------------------------------------------------------- */
+  &.collection {
+    ${breakpointTinyTablet} {
+      --card-column-span: span 12;
+      .media {
+        grid-column: span 12;
+      }
+      .content {
+        grid-column: span 12;
+      }
+      .title {
+        font-size: 1.25rem;
+        line-height: 1.286;
+        max-height: 4.825em;
+      }
+      .footer .actions {
+        grid-column: 1 / -1;
+      }
+    }
+  }
 `

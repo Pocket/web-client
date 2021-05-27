@@ -14,6 +14,7 @@ export const request = ({
   params = {},
   path,
   method = 'GET',
+  clientInfo = {},
   body,
   auth,
   ssr,
@@ -40,8 +41,12 @@ export const request = ({
    *
    * @option ssrHeaders - These append a passed in cookie and origin since
    * that  is not set automatically on the server
+   *
+   * @option apolloHeaders - These allow us to see our graphql specific requests
+   * separated out in Apollo Studio.
    */
   const clientHeaders = {
+    ...clientInfo,
     'Content-Type': 'application/json',
     'X-Accept': 'application/json; charset=UTF8'
   }
@@ -81,10 +86,18 @@ function handleErrors(response, auth) {
 }
 
 export const requestGQL = (data) => {
+  // const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
+
+  // const clientInfo = {
+  //   'apollographql-client-name': 'web-client',
+  //   'apollographql-client-version': RELEASE_VERSION
+  // }
+
   return request({
     api_url: GRAPHQL_URL,
     path: 'graphql',
     method: 'POST',
+    // clientInfo,
     body: JSON.stringify(data)
   })
 }

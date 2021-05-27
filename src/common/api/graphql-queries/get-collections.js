@@ -1,7 +1,7 @@
 import { gql } from 'graphql-request'
 
 const getCollections = gql`
-  query Query {
+  query GetCollections {
     getCollections {
       collections {
         slug
