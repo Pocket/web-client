@@ -4,7 +4,7 @@
   "description": "Pocket front end client",
   "main": "index.js",
   "scripts": {
-    "dev": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included next dev -p 80",
+    "dev": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included next dev -p 8080",
     "build": "npm run locale-inject && next build",
     "start": "next start -p 80",
     "cypress:launch": "CYPRESS_BASE_URL=http://localhost.web-client.getpocket.com cypress open",
@@ -113,7 +113,7 @@
   "dependencies": {
     "@n8tb1t/use-scroll-position": "2.0.3",
     "@pocket/web-localization": "0.9.2",
-    "@pocket/web-ui": "2.35.1",
+    "@pocket/web-ui": "2.35.2",
     "@pocket/web-utilities": "1.16.4",
     "@sentry/node": "6.4.0",
     "@sentry/react": "6.4.0",

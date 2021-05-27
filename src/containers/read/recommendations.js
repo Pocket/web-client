@@ -15,6 +15,10 @@ const asideWrapper = css`
   ${breakpointTinyTablet} {
     padding-bottom: 0;
   }
+
+  @media print {
+    display: none;
+  }
 `
 
 const sectionWrapper = css`

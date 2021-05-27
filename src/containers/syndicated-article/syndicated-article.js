@@ -3,6 +3,7 @@ import MobileLayout from 'layouts/mobile-web'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { contentLayout } from 'components/content-layout/content-layout'
+import { printLayout } from 'components/content-layout/print-layout'
 import { PocketWorthy } from 'components/content-headline/pocket-worthy'
 import { ParsedHeadline } from 'components/content-headline/parsed-headline'
 import { AuthorByline } from 'components/content-author/author-byline'
@@ -95,7 +96,7 @@ export function SyndicatedArticle({ url, queryParams = validParams }) {
 
   return (
     <>
-      <ArticleLayout metaData={articleMetaData} canonical={canonical}>
+      <ArticleLayout metaData={articleMetaData} canonical={canonical} className={printLayout}>
         <main className={contentLayout}>
           <section>
             <AdAboveTheFold

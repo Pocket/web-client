@@ -118,7 +118,7 @@ export function FilterMenu({ subset, filter, tag, query }) {
           </div>
           <div>
             <Link href={`/my-list/${path}/unread${searchQuery}`}>
-              <button className={filterActive('unread')} data-cy="filter-unread">
+              <button className={filterActive('unread')} data-cy="filter-mylist">
                 <Trans i18nKey="nav:my-list">My List</Trans>
               </button>
             </Link>
