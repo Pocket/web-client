@@ -58,6 +58,7 @@ export const settingsReducers = (state = initialState, action) => {
 export const settingsSagas = [
   takeLatest(SETTINGS_FETCH_REQUEST, fetchSettings),
   takeLatest(SETTINGS_FETCH_SUCCESS, convertLocalSettings),
+  takeLatest(SETTINGS_UPDATE, saveSettings),
   takeLatest(USER_TAGS_EDIT_SUCCESS, saveSettings),
   takeLatest(USER_TAGS_DELETE_SUCCESS, saveSettings),
   takeLatest(USER_TAGS_PINS_SET, saveSettings)
