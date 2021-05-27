@@ -86,18 +86,18 @@ function handleErrors(response, auth) {
 }
 
 export const requestGQL = (data) => {
-  const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
+  // const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
 
-  const clientInfo = {
-    'apollographql-client-name': 'web-client',
-    'apollographql-client-version': RELEASE_VERSION
-  }
+  // const clientInfo = {
+  //   'apollographql-client-name': 'web-client',
+  //   'apollographql-client-version': RELEASE_VERSION
+  // }
 
   return request({
     api_url: GRAPHQL_URL,
     path: 'graphql',
     method: 'POST',
-    clientInfo,
+    // clientInfo,
     body: JSON.stringify(data)
   })
 }
