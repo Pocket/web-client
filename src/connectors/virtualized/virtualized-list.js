@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { useSelector } from 'react-redux'
-import { getScrollTop, atEndOfScroll } from 'common/utilities'
+import { getScrollTop } from 'common/utilities'
 import { cardsContainer } from 'components/items-layout/base'
 import { cx } from 'linaria'
 import { MemoizedItem } from 'connectors/item-card/my-list/card'
@@ -9,19 +9,20 @@ import { cardList } from 'components/items-layout/virtualized-list'
 import { cardGrid } from 'components/items-layout/virtualized-list'
 import { ruler } from 'components/items-layout/virtualized-list'
 import { useViewport } from '@pocket/web-ui'
-
+import { LoadMore } from 'connectors/virtualized/load-more'
 /**
  * CardLayout
  * @param {array} items Array of items to split up into sections
  * @param {array} sections Array of section definitions with count and classname
  * @param {object} actions Object of actions specific to the items being built
  */
-export function VirtualizedList(props) {
+export function VirtualizedList({ type = 'grid', section, actions, loadMore = () => {} }) {
   /** SETUP
  --------------------------------------------------------------- */
   const viewport = useViewport()
-  const { type = 'grid', section, actions, loadMore = () => {} } = props
   const items = useSelector((state) => state.myList[section])
+  const total = useSelector((state) => state.myList[`${section}Total`])
+  const count = items.length
 
   // Set up ref to ruler so we can get height of the container
   const rulerRef = useRef(null)
@@ -75,13 +76,9 @@ export function VirtualizedList(props) {
   const [height, columnCount] = dimensions[type][breakpoint]
 
   const itemOnScreen = type === 'list' ? 25 : 20 // total items to render minus one
-  const buffer = type === 'list' ? height * 8 : height * 4
 
   const [hasScrolled, setHasScrolled] = useState(false)
-  const [scrollPosition, setScrollPosition] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
-
-  const [loading, setLoading] = useState(false)
   const [range, setRange] = useState({ start: -1, end: -1 })
   const [list, setList] = useState({
     listHeight: 0,
@@ -95,12 +92,10 @@ export function VirtualizedList(props) {
 
   const { itemsToShow, paddingTop, listHeight } = list
 
-  const hasItems = itemsToShow.length > 0
-
   /** FUNCTIONS
  --------------------------------------------------------------- */
   const checkRange = useCallback(
-    (event) => {
+    () => {
       // Set up the fact that we are scrolling
       setIsScrolling(true)
       scrollTracker.current = setTimeout(() => setIsScrolling(false), 500)
@@ -111,7 +106,6 @@ export function VirtualizedList(props) {
       const newIndex = Math.max(naturalStart - columnCount * 2, 0)
       setRange({ start: newIndex, end: newIndex + itemOnScreen })
 
-      if (event) setScrollPosition(window.scrollY)
     },
     [columnCount, height, itemOnScreen]
   )
@@ -154,18 +148,6 @@ export function VirtualizedList(props) {
   }, [items, range, height, columnCount])
 
   useEffect(() => {
-    // Don't run this when there are no items yet.  Avoid doubling up.
-    if (!hasItems || loading) return
-    const listEnd = atEndOfScroll(buffer)
-
-    if (listEnd && !loading) {
-      setLoading(true)
-      loadMore()
-    }
-  }, [scrollPosition, loading, height, hasItems, buffer, loadMore])
-
-  useEffect(() => {
-    setLoading(false)
     checkRange()
   }, [items, checkRange])
 
@@ -196,6 +178,7 @@ export function VirtualizedList(props) {
           })}
         </div>
       </div>
+      <LoadMore count={count} total={total} loadMore={loadMore}/>
       <div className={ruler} ref={rulerRef} />
     </div>
   )
