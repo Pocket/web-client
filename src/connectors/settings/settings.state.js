@@ -17,8 +17,13 @@ import { USER_TAGS_EDIT_SUCCESS } from 'actions'
 import { USER_TAGS_DELETE_SUCCESS } from 'actions'
 import { USER_TAGS_PINS_SET } from 'actions'
 
+import { PINNED_TOPICS_SET } from 'actions'
+
+import { CACHE_KEY_HOME_STORED_TOPICS } from 'common/constants'
+
 const initialState = {
-  pinnedTags: []
+  pinnedTags: [],
+  pinnedTopics: []
 }
 
 /** ACTIONS
@@ -48,6 +53,14 @@ export const settingsReducers = (state = initialState, action) => {
       }
     }
 
+    case PINNED_TOPICS_SET: {
+      const { pinnedTopics } = action
+      return {
+        ...state,
+        pinnedTopics
+      }
+    }
+
     default:
       return state
   }
@@ -61,7 +74,8 @@ export const settingsSagas = [
   takeLatest(SETTINGS_UPDATE, saveSettings),
   takeLatest(USER_TAGS_EDIT_SUCCESS, saveSettings),
   takeLatest(USER_TAGS_DELETE_SUCCESS, saveSettings),
-  takeLatest(USER_TAGS_PINS_SET, saveSettings)
+  takeLatest(USER_TAGS_PINS_SET, saveSettings),
+  takeLatest(PINNED_TOPICS_SET, saveSettings)
 ]
 
  /** SAGA :: RESPONDERS
@@ -93,10 +107,11 @@ function* saveSettings() {
 
 function* convertLocalSettings() {
   const localSettings = {
-    pinnedTags: yield JSON.parse(localStore.getItem('user_tags_pinned'))
+    pinnedTags: yield JSON.parse(localStore.getItem('user_tags_pinned')),
+    pinnedTopics: yield JSON.parse(localStore.getItem(CACHE_KEY_HOME_STORED_TOPICS))
   }
 
-  const keysToDelete = ['user_tags_pinned']
+  const keysToDelete = ['user_tags_pinned', CACHE_KEY_HOME_STORED_TOPICS]
   keysToDelete.forEach(val => {
     localStore.removeItem(val)
   })

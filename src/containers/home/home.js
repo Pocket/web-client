@@ -15,7 +15,7 @@ import { TopicSelector } from 'containers/home/topicSelector'
 import { HomeTopicsList } from 'containers/home/listTopics'
 import { HomeCollectionList } from 'containers/home/listCollection'
 
-import { homeSetPreferences } from './home.state'
+import { homeHydrate } from './home.state'
 
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
@@ -39,7 +39,7 @@ export default function Collection(props) {
   // Initialize data
   useEffect(() => {
     dispatch(getRecentSaves())
-    dispatch(homeSetPreferences())
+    dispatch(homeHydrate())
     dispatch(getTopicList())
     dispatch(getCollections())
   }, [dispatch])

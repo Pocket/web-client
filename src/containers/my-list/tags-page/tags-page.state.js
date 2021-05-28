@@ -1,5 +1,4 @@
 import { put, call, takeEvery, select } from 'redux-saga/effects'
-import { localStore } from 'common/utilities/browser-storage/browser-storage'
 import { fetchStoredTags } from 'common/api/tags'
 import { renameStoredTag } from 'common/api/tags'
 import { deleteStoredTag } from 'common/api/tags'
