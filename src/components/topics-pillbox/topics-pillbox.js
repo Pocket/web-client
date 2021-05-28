@@ -58,9 +58,7 @@ const TopicsPillbox = ({
 
   return (
     <div className={classnames(pillboxStyle, `align-${alignItems}`)}>
-      <h4
-        className={classnames('h5', headingClassName)}
-        data-cy="heading">
+      <h4 className={classnames('h5', headingClassName)} data-cy="heading">
         {headingText}
       </h4>
       <ul>
@@ -68,7 +66,7 @@ const TopicsPillbox = ({
           return (
             <li key={`topics-pillbox-${id}-${topic.topic}`}>
               <Pill
-                href={`/discover/${topic.topic_slug}`}
+                href={`/explore/${topic.topic_slug}`}
                 promoted={topic.is_promoted}
                 onClick={(event) => {
                   handleTopicClick(event, topic.topic, index)

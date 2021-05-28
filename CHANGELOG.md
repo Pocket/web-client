@@ -1,3 +1,10 @@
+## [1.14.32](https://github.com/Pocket/web-client/compare/v1.14.31...v1.14.32) (2021-05-28)
+
+
+### Bug Fixes
+
+* **topics:** discover is really explore is really discover ([776609f](https://github.com/Pocket/web-client/commit/776609f3f833cb928d8278f47ad986a24abaf90e))
+
 ## [1.14.31](https://github.com/Pocket/web-client/compare/v1.14.30...v1.14.31) (2021-05-27)
 
 

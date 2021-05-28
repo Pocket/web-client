@@ -40,18 +40,14 @@ const baseProps = {
 
 describe('TopicsPillbox', () => {
   it('applies the center alignment css class if props.alignItems="center"', () => {
-    const pillbox = shallow(
-      <TopicsPillbox {...baseProps} alignItems="center" />
-    )
+    const pillbox = shallow(<TopicsPillbox {...baseProps} alignItems="center" />)
 
     assert(pillbox.hasClass('align-center'))
   })
 
   it('renders custom heading text if props.headingText is provided', () => {
     const pillbox1 = shallow(<TopicsPillbox {...baseProps} />)
-    const pillbox2 = shallow(
-      <TopicsPillbox {...baseProps} headingText="Nom nom nom" />
-    )
+    const pillbox2 = shallow(<TopicsPillbox {...baseProps} headingText="Nom nom nom" />)
     const heading1 = pillbox1.find("[data-cy='heading']")
     const heading2 = pillbox2.find("[data-cy='heading']")
 
@@ -60,18 +56,14 @@ describe('TopicsPillbox', () => {
   })
 
   it('adds a custom heading css class if props.headingClassName is provided', () => {
-    const pillbox = shallow(
-      <TopicsPillbox {...baseProps} headingClassName="the-sweetness" />
-    )
+    const pillbox = shallow(<TopicsPillbox {...baseProps} headingClassName="the-sweetness" />)
     const heading = pillbox.find("[data-cy='heading']")
 
     assert(heading.hasClass('the-sweetness'))
   })
 
   it('renders a pill for each topic in the topics data map', () => {
-    const pillbox = shallow(
-      <TopicsPillbox {...baseProps} headingClassName="the-sweetness" />
-    )
+    const pillbox = shallow(<TopicsPillbox {...baseProps} headingClassName="the-sweetness" />)
     const pills = pillbox.find("[data-cy^='topic-pill']")
 
     assert.equal(pills.length, 3)
@@ -87,17 +79,15 @@ describe('TopicsPillbox', () => {
     )
     const pill = pillbox.find("[data-cy^='topic-pill']").first()
 
-    assert.equal(pill.prop('href'), '/discover/classics')
+    assert.equal(pill.prop('href'), '/explore/classics')
   })
 
   it('puts promoted topic items at the front of the list', () => {
-    const pillbox = shallow(
-      <TopicsPillbox {...baseProps} headingClassName="the-sweetness" />
-    )
+    const pillbox = shallow(<TopicsPillbox {...baseProps} headingClassName="the-sweetness" />)
     const pill = pillbox.find("[data-cy^='topic-pill']").first()
 
     assert.equal(pill.prop('promoted'), true)
-    assert.equal(pill.prop('href'), '/discover/superheroes')
+    assert.equal(pill.prop('href'), '/explore/superheroes')
   })
 
   it('calls props.onTopicClick when the user clicks on a topic, passing through expected params', () => {
