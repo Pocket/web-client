@@ -1,7 +1,6 @@
 import { storageFactory } from 'storage-factory'
 
 /*
-import * as storage from 'common/utilities'
 import { localStore } from 'common/utilities'
 
 function foo(token) {
