@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { collectionImpressionEvent } from 'containers/home/home.analytics'
 import { collectionOpenEvent } from 'containers/home/home.analytics'
 
-export const CollectionCard = ({ collection, position }) => {
+export const CollectionCard = ({ collection: item, position }) => {
   const dispatch = useDispatch()
 
   // Get data from state
@@ -12,35 +12,23 @@ export const CollectionCard = ({ collection, position }) => {
 
   /** ITEM TRACKING
   --------------------------------------------------------------- */
-  const onOpen = () => dispatch(collectionOpenEvent(collection, position))
+  const onOpen = () => dispatch(collectionOpenEvent(item, position))
 
   const onItemInView = (inView) => {
     if (!inView) return
-    dispatch(collectionImpressionEvent(collection, position))
+    dispatch(collectionImpressionEvent(item, position))
   }
 
-  // Mini Deriver. We should make this more official when we hook up slates for
-  // this.  CollectionsById and arrays.
-  const item = {
-    item_id: collection?.title,
-    title: collection?.title,
-    thumbnail: collection?.imageUrl,
-    // publisher: collection?.curator,
-    excerpt: collection?.excerpt,
-    openExternal: false,
-    original_url: collection?.url
-  }
-
-  return collection ? (
+  return item ? (
     <Card
-      id={collection.id}
+      id={item.id}
       item={item}
       position={position}
       cardShape="grid"
       showExcerpt={true}
       onItemInView={onItemInView}
       onOpen={onOpen}
-      openUrl={collection?.url}
+      openUrl={item?.url}
       useMarkdown={true}
       isAuthenticated={isAuthenticated}
     />
