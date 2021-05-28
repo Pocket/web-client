@@ -9,7 +9,7 @@ const getCollections = gql`
         excerpt
         status
         intro
-        imageUrl
+        thumbnail: imageUrl
         authors {
           name
         }
