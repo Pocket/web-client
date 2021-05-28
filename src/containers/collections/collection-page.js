@@ -75,7 +75,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
         <section className="content-section">
           <header>
             <PocketWorthy />
-            <ParsedHeadline title={title} description={excerpt} />
+            <ParsedHeadline title={title} description={excerpt} useMarkdown={true} />
             {authors ? (
               <AuthorByline
                 url="/explore"
