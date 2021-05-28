@@ -59,9 +59,9 @@ export function VirtualizedList(props) {
       screenTinyHandset: [154, 1]
     },
     detail: {
-      screenLargeDesktop: [155, 1],
-      screenMediumDesktop: [155, 1],
-      screenSmallDesktop: [155, 1],
+      screenLargeDesktop: [160, 1],
+      screenMediumDesktop: [160, 1],
+      screenSmallDesktop: [160, 1],
       screenTinyTablet: [185, 1],
       screenSmallTablet: [185, 1],
       screenMediumTablet: [185, 1],
