@@ -53,6 +53,7 @@ export const Card = (props) => {
     showMedia,
     hiddenActions,
     onImageFail,
+    useMarkdown,
     // Tracking
     onItemInView,
     onOpenOriginalUrl,
@@ -199,7 +200,16 @@ export const Card = (props) => {
 
           {showExcerpt ? (
             <div className="excerpt">
-              <ReactMarkdown>{excerpt}</ReactMarkdown>
+              {useMarkdown ? (
+                <ReactMarkdown
+                  skipHtml={true}
+                  unwrapDisallowed={true}
+                  allowedElements={['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em']}>
+                  {excerpt}
+                </ReactMarkdown>
+              ) : (
+                <p>{excerpt}</p>
+              )}
             </div>
           ) : null}
         </div>
