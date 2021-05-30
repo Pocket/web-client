@@ -97,3 +97,4 @@ node_modules/
 cdktf.out/
 .gen/
 .aws/dist/
+certificates
