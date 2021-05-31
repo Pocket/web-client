@@ -1,5 +1,5 @@
 import React from 'react'
-import { ContentParsed } from './parsed-content'
+import { ContentParsed } from './content-parsed'
 
 import { articleContent } from 'mock/article'
 
