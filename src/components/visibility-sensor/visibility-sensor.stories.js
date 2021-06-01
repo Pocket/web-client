@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import VisibilitySensor from './visibility-sensor'
-import { ParsedContent } from 'components/content-parsed/content-parsed'
+import { ContentParsed } from 'components/content-parsed/content-parsed'
 import { ScrollChyron } from 'components/chyron/chyron-scroll'
 import { articleContent } from 'mock/article'
 import { css } from 'linaria'
@@ -33,7 +33,7 @@ export const Normal = () => {
   return (
     <Fragment>
       <div className={displayCase}>{isVisible ? 'You found it!' : 'hiding...'}</div>
-      <ParsedContent content={articleContent.quotes} />
+      <ContentParsed content={articleContent.quotes} />
       <VisibilitySensor onVisible={() => setVisible(true)}>
         <h1 className={ChildContainer}>Surprise, a pink box!</h1>
       </VisibilitySensor>
@@ -47,7 +47,7 @@ export const WithChyron = () => {
   return (
     <Fragment>
       <div className={displayCase}>{isVisible ? 'You found it!' : 'hiding...'}</div>
-      <ParsedContent content={articleContent.photosAndCaptions} />
+      <ContentParsed content={articleContent.photosAndCaptions} />
       <ScrollChyron instanceId={'test-visibility'}>
         <VisibilitySensor onVisible={() => setVisible(true)}>
           <h1 className={ChildContainer}>Surprise, a pink box!</h1>

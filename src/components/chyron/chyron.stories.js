@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Chyron, getChyronId, getChyronDismissalDate } from './chyron'
 import { ScrollChyron } from './chyron-scroll'
-import { ParsedContent } from 'components/content-parsed/content-parsed'
+import { ContentParsed } from 'components/content-parsed/content-parsed'
 import { articleContent } from 'mock/article'
 import { css } from 'linaria'
 
@@ -47,7 +47,7 @@ export const normal = () => (
     <button className={DevReset} onClick={() => resetLocalStorage(INSTANCE_ID)}>
       Reset localStorage
     </button>
-    <ParsedContent content={articleContent.photosAndCaptions} />
+    <ContentParsed content={articleContent.photosAndCaptions} />
     <Chyron instanceId={INSTANCE_ID}>
       <SimpleChild />
     </Chyron>
@@ -59,7 +59,7 @@ export const dismissed = () => (
     <button className={DevReset} onClick={() => resetLocalStorage(INSTANCE_ID)}>
       Reset localStorage
     </button>
-    <ParsedContent content={articleContent.photosAndCaptions} />
+    <ContentParsed content={articleContent.photosAndCaptions} />
     <Chyron instanceId={INSTANCE_ID} initialDismissed={true}>
       <SimpleChild />
     </Chyron>
@@ -71,7 +71,7 @@ export const succeeded = () => (
     <button className={DevReset} onClick={() => resetLocalStorage(INSTANCE_ID)}>
       Reset localStorage
     </button>
-    <ParsedContent content={articleContent.photosAndCaptions} />
+    <ContentParsed content={articleContent.photosAndCaptions} />
     <Chyron instanceId={INSTANCE_ID} initialSuccess={true}>
       <SimpleChild />
     </Chyron>
@@ -83,7 +83,7 @@ export const scrollChryron = () => (
     <button className={DevReset} onClick={() => resetLocalStorage(INSTANCE_ID)}>
       Reset localStorage
     </button>
-    <ParsedContent content={articleContent.photosAndCaptions} />
+    <ContentParsed content={articleContent.photosAndCaptions} />
     <ScrollChyron instanceId={INSTANCE_ID}>
       <SimpleChild />
     </ScrollChyron>
@@ -95,7 +95,7 @@ export const scrollChryronSuppressed = () => (
     <button className={DevReset} onClick={() => resetLocalStorage(INSTANCE_ID)}>
       Reset localStorage
     </button>
-    <ParsedContent content={articleContent.photosAndCaptions} />
+    <ContentParsed content={articleContent.photosAndCaptions} />
     <ScrollChyron instanceId={INSTANCE_ID} shouldHide>
       <SimpleChild />
     </ScrollChyron>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { DepthTracking } from './depth-tracking'
 import { css } from 'linaria'
-import { ParsedContent } from 'components/content-parsed/content-parsed'
+import { ContentParsed } from 'components/content-parsed/content-parsed'
 import { articleContent } from 'mock/article'
 
 export default {
@@ -26,7 +26,7 @@ export const Normal = () => {
   return (
     <DepthTracking onScrollDepth={setDepth}>
       <div className={displayCase}>Latest depth reading... {depth}</div>
-      <ParsedContent content={articleContent.quotes} />
+      <ContentParsed content={articleContent.quotes} />
     </DepthTracking>
   )
 }

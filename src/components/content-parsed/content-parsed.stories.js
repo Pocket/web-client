@@ -4,7 +4,7 @@ import { ContentParsed } from './content-parsed'
 import { articleContent } from 'mock/article'
 
 export default {
-  title: 'Article/ParsedContent',
+  title: 'Article/ContentParsed',
   component: ContentParsed
 }
 
