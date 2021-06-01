@@ -8,15 +8,89 @@ import { I18nextProvider } from 'react-i18next'
 import i18n from './i18n'
 
 const store = initializeStore()
+const customViewports = {
+  screenTinyHandset: {
+    name: 'screenTinyHandset',
+    styles: {
+      width: '359px',
+      height: '100%'
+    }
+  },
+  screenSmallHandset: {
+    name: 'screenSmallHandset',
+    styles: {
+      width: '399px',
+      height: '100%'
+    }
+  },
+  screenMediumHandset: {
+    name: 'screenMediumHandset',
+    styles: {
+      width: '479px',
+      height: '100%'
+    }
+  },
+  screenLargeHandset: {
+    name: 'screenLargeHandset',
+    styles: {
+      width: '599px',
+      height: '100%'
+    }
+  },
+  screenTinyTablet: {
+    name: 'screenTinyTablet',
+    styles: {
+      width: '719px',
+      height: '100%'
+    }
+  },
+  screenSmallTablet: {
+    name: 'screenSmallTablet',
+    styles: {
+      width: '839px',
+      height: '100%'
+    }
+  },
+  screenMediumTablet: {
+    name: 'screenMediumTablet',
+    styles: {
+      width: '959px',
+      height: '100%'
+    }
+  },
+  screenLargeTablet: {
+    name: 'screenLargeTablet',
+    styles: {
+      width: '1023px',
+      height: '100%'
+    }
+  },
+  screenSmallDesktop: {
+    name: 'screenSmallDesktop',
+    styles: {
+      width: '1279px',
+      height: '100%'
+    }
+  },
+  screenMediumDesktop: {
+    name: 'screenMediumDesktop',
+    styles: {
+      width: '1439px',
+      height: '100%'
+    }
+  }
+}
 
 export const parameters = {
   backgrounds: { disable: true },
   actions: { argTypesRegex: '^on[A-Z].*' },
   options: {
     storySort: (a, b) =>
-      a[1].kind === b[1].kind
-        ? 0
-        : a[1].id.localeCompare(b[1].id, undefined, { numeric: true })
+      a[1].kind === b[1].kind ? 0 : a[1].id.localeCompare(b[1].id, undefined, { numeric: true })
+  },
+  viewport: {
+    viewports: customViewports,
+    defaultViewport: 'responsive'
   }
 }
 
