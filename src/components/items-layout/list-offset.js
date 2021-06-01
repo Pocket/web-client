@@ -1,5 +1,6 @@
 import { css, cx } from 'linaria'
 import { cardsGrid } from 'components/items-layout/base'
+import { breakpointLargeHandset } from '@pocket/web-ui'
 
 export const offsetListStyle = css`
   ${cardsGrid};
@@ -9,6 +10,9 @@ export const offsetListStyle = css`
 
   &.border {
     border-bottom: 1px solid var(--color-dividerTertiary);
+    ${breakpointLargeHandset} {
+      border-bottom: 0;
+    }
   }
 
   &.no-space {

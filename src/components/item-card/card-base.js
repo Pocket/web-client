@@ -215,7 +215,6 @@ export const cardStyles = css`
 
     ${breakpointTinyTablet} {
       --card-column-span: span 12;
-      border-bottom: 1px solid var(--color-dividerTertiary);
 
       &.hiddenActions .actions {
         display: flex;
@@ -272,6 +271,23 @@ export const cardStyles = css`
 
     &.noMedia .content {
       grid-column: span 8;
+    }
+
+    ${breakpointMediumTablet} {
+      --card-column-span: span 10;
+    }
+
+    ${breakpointLargeHandset} {
+      --card-column-span: span 12;
+      .title {
+        font-size: 1rem;
+        line-height: 1.25;
+      }
+    }
+    ${breakpointMediumHandset} {
+      .excerpt {
+        display: none;
+      }
     }
   }
 
@@ -486,6 +502,7 @@ export const cardStyles = css`
   --------------------------------------------------------------- */
   .lockup-hero & {
     --card-column-span: span 3;
+    border-bottom: 0;
 
     .title {
       font-size: var(--fontSize125);
@@ -515,6 +532,127 @@ export const cardStyles = css`
     &.hero-right {
       --card-row-span: span 2;
       --card-column-span: 7 / span 6;
+    }
+
+    ${breakpointLargeTablet} {
+      &.hero-center,
+      &.hero-left,
+      &.hero-right {
+        .title {
+          font-size: 1.75rem;
+          line-height: 1.179;
+        }
+      }
+      .details,
+      .excerpt {
+        font-size: 0.85rem;
+        line-height: 1.429;
+      }
+    }
+
+    /*
+      ┌───────┐ ┌───┐
+      │       │ └───┘
+      │       │ ┌───┐
+      └───────┘ └───┘
+      ┌─────┐ ┌─────┐
+      └─────┘ └─────┘
+    */
+
+    ${breakpointMediumTablet} {
+      &.hero-center,
+      &.hero-left,
+      &.hero-right {
+        --card-row-span: span 2;
+        --card-column-span: 1 / span 6;
+      }
+    }
+
+    /*
+      ┌─────────────┐
+      │             │
+      │             │
+      └─────────────┘
+      ┌─────┐ ┌─────┐
+      └─────┘ └─────┘
+      ┌─────┐ ┌─────┐
+      └─────┘ └─────┘
+    */
+
+    ${breakpointTinyTablet} {
+      --card-column-span: span 6;
+      &.hero-center,
+      &.hero-left,
+      &.hero-right {
+        --card-row-span: span 2;
+        --card-column-span: 1 / -1;
+        .details {
+          padding: var(--spacing050) 0;
+        }
+        .title {
+          padding: var(--spacing100) 0 0;
+          max-height: calc(1em * 5.25);
+        }
+      }
+    }
+
+    ${breakpointLargeHandset} {
+      --card-column-span: span 12;
+
+      &.hero-center,
+      &.hero-left,
+      &.hero-right {
+        .title {
+          font-size: 1.125rem;
+          line-height: 1.286;
+          max-height: 4.725em;
+        }
+      }
+      &:nth-child(n + 2) {
+        .excerpt {
+          display: none;
+        }
+        .title {
+          font-size: 1rem;
+          line-height: 1.25;
+        }
+      }
+    }
+
+    ${breakpointMediumHandset} {
+      &.hero-center,
+      &.hero-left,
+      &.hero-right {
+        --card-row-span: span 2;
+        --card-column-span: 1 / -1;
+        .media {
+          grid-column: span 12;
+        }
+        .content {
+          grid-column: span 12;
+        }
+        .title {
+          font-size: 1.25rem;
+          line-height: 1.286;
+          max-height: 4.725em;
+        }
+        .footer .actions {
+          grid-column: 1 / -1;
+        }
+        .details {
+          padding: var(--spacing050) 0;
+        }
+      }
+    }
+
+    ${breakpointSmallHandset} {
+      &.hero-center,
+      &.hero-left,
+      &.hero-right {
+        .title {
+          font-size: 1.25rem;
+        }
+      }
     }
   }
 
