@@ -1,3 +1,12 @@
+## [1.14.33](https://github.com/Pocket/web-client/compare/v1.14.32...v1.14.33) (2021-05-29)
+
+
+### Bug Fixes
+
+* **cards:** use markdown excerpts explicitly ([bafc975](https://github.com/Pocket/web-client/commit/bafc97574ebaa8af3b61e47117ca670a52f000af))
+* **collections:** allow some styling in header ([4306392](https://github.com/Pocket/web-client/commit/4306392b8204530af4cccd08ec3a24ef4b836a42))
+* **collections:** useMarkdown in excerpts ([0a25859](https://github.com/Pocket/web-client/commit/0a25859a714ad680a124d084bf3e45f2eaa78608))
+
 ## [1.14.32](https://github.com/Pocket/web-client/compare/v1.14.31...v1.14.32) (2021-05-28)
 
 

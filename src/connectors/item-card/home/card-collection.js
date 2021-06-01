@@ -41,6 +41,7 @@ export const CollectionCard = ({ collection, position }) => {
       onItemInView={onItemInView}
       onOpen={onOpen}
       openUrl={collection?.url}
+      useMarkdown={true}
       isAuthenticated={isAuthenticated}
     />
   ) : null
