@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
@@ -263,17 +264,18 @@ const GlobalNav = ({
               isOpen={isMobileMenuOpen}
               toggleMenuOpen={setMobileMenuOpen}
             />
-            <a
-              id="pocket-logo-nav"
-              className="pocket-logo"
-              href={pocketLogoOutboundUrl}
-              onClick={(event) => {
-                handleLinkClick('pocket', event)
-              }}
-              data-cy="logo-link">
-              <Logo className="logo" />
-              {isLoggedIn ? <LogoMark className="logo-mark" /> : null}
-            </a>
+            <Link href={pocketLogoOutboundUrl}>
+              <a
+                id="pocket-logo-nav"
+                className="pocket-logo"
+                onClick={(event) => {
+                  handleLinkClick('pocket', event)
+                }}
+                data-cy="logo-link">
+                <Logo className="logo" />
+                {isLoggedIn ? <LogoMark className="logo-mark" /> : null}
+              </a>
+            </Link>
           </div>
           {children ? (
             children

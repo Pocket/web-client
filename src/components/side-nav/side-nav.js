@@ -197,7 +197,7 @@ export function SideNav({
             { showBookmark ? <BookmarkIcon newSaveCount={newSaveCount} /> : null }
           </button>
         </Link>
-        <a href="https://getpocket.com/explore?src=sidebar">
+        <Link href="/explore?src=sidebar">
           <button
             className={subActive('discover')}
             onClick={clickEvent}
@@ -205,7 +205,7 @@ export function SideNav({
             <DiscoverIcon className="side-nav-icon" />{' '}
             <Trans i18nKey="nav:discover">Discover</Trans>
           </button>
-        </a>
+        </Link>
 
         {subset === 'home' && showTopics ? (
           <TopicsSideNav
