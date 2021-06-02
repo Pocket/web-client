@@ -1,3 +1,10 @@
+## [1.14.40](https://github.com/Pocket/web-client/compare/v1.14.39...v1.14.40) (2021-06-02)
+
+
+### Bug Fixes
+
+* **one-trust:** init snowplow even when user is logged out ([d9aaa10](https://github.com/Pocket/web-client/commit/d9aaa101870b67a3bb97df1b6bc350fb7fa3bd82))
+
 ## [1.14.39](https://github.com/Pocket/web-client/compare/v1.14.38...v1.14.39) (2021-06-02)
 
 

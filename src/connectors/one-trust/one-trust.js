@@ -30,7 +30,7 @@ export function PostTrustInit() {
 
   useEffect(() => {
     if (analyticsInit) return
-    if (user_status === 'pending' || user_status === 'invalid' || !sess_guid) return
+    if (user_status === 'pending' || !sess_guid) return
 
     // Set up Snowplow
     const finalizeInit = () => dispatch(finalizeSnowplow())
@@ -53,7 +53,7 @@ export function PostTrustInit() {
 
   // Track Page Views
   useEffect(() => {
-    if (user_status === 'pending' || user_status === 'invalid') return null
+    if (user_status === 'pending') return null
     if (!analyticsInit) return null
 
     dispatch(trackPageView())
