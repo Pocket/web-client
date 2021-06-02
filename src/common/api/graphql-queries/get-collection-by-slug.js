@@ -10,6 +10,8 @@ const getCollectionBySlug = gql`
       imageUrl
       authors {
         name
+        bio
+        imageUrl
       }
       stories {
         url

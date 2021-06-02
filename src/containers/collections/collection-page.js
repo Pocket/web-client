@@ -17,6 +17,7 @@ import { AdBelowTheFold } from 'components/content-ads/content-ads'
 import { AdRailTop } from 'components/content-ads/content-ads'
 import { AdRailBottom } from 'components/content-ads/content-ads'
 import { ContentIntro } from 'components/content-intro/content-intro'
+import { AuthorBio } from 'components/content-author/author-bio'
 
 import { getImageCacheUrl } from 'common/utilities'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
@@ -130,6 +131,8 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
                   <ItemCard id={id} key={id} position={index} cardShape="wide" showExcerpt={true} />
                 ))
               : null}
+
+            {authors ? authors?.map((author) => <AuthorBio {...author} />) : null}
           </div>
         </section>
 
