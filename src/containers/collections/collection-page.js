@@ -25,6 +25,7 @@ import { saveCollection } from 'containers/collections/collections.state'
 
 import { unSaveCollectionPage } from 'containers/collections/collections.state'
 import { saveCollectionPage } from 'containers/collections/collections.state'
+import { trackItemSave } from 'connectors/snowplow/snowplow.state'
 
 import { Toasts } from 'connectors/toasts/toast-list'
 import ErrorPage from 'pages/_error'
@@ -60,9 +61,12 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
   const url = `${BASE_URL}/collections/${slug}`
   const metaData = { description: excerpt, title, url, image: imageUrl }
 
-  const saveAction = () => {
+  const saveAction = (saveUrl, id) => {
     if (pageSaveStatus === 'saved') dispatch(unSaveCollectionPage(slug))
-    if (pageSaveStatus !== 'saved') dispatch(saveCollectionPage(slug))
+    if (pageSaveStatus !== 'saved') {
+      dispatch(saveCollectionPage(slug))
+      dispatch(trackItemSave(0, { url, id: slug }, id))
+    }
   }
 
   return (

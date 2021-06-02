@@ -305,7 +305,7 @@ function* fireRecImpression({ component, requirement, position, item, identifier
 
 function* fireContentOpen({ destination, trigger, position, item, identifier }) {
   const contentOpenEvent = createContentOpenEvent(destination, trigger)
-  const contentEntity = createContentEntity(item.save_url, item.item_id)
+  const contentEntity = createContentEntity(item.save_url || item.url, item.item_id)
   const uiEntity = createUiEntity({
     type: UI_COMPONENT_CARD,
     hierarchy: 0,
@@ -326,7 +326,7 @@ function* fireItemImpression({ component, requirement, position, item, identifie
   if (!isReady) return
 
   const impressionEvent = createImpressionEvent(component, requirement)
-  const contentEntity = createContentEntity(item.save_url, item.item_id)
+  const contentEntity = createContentEntity(item.save_url || item.url, item.item_id)
   const uiEntity = createUiEntity({
     type: UI_COMPONENT_CARD,
     hierarchy: 0,
@@ -360,8 +360,8 @@ function* fireContentEngagement({ component, ui, identifier, position, items }) 
   if (contentEntities.length > BATCH_SIZE) contentEntities.length = BATCH_SIZE
 
   const contentEntity = contentEntities.map((item) => {
-    const { save_url, item_id, id } = item
-    return createContentEntity(save_url, item_id || id) // id is bulk edit value
+    const { save_url, url, item_id, id } = item
+    return createContentEntity(save_url || url, item_id || id) // id is bulk edit value
   })
 
   const uiEntity = createUiEntity({ type: ui, hierarchy: 0, identifier, index: position })

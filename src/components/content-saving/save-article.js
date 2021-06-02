@@ -128,7 +128,7 @@ function SaveStoryButton({ url, isAuthenticated, saveStatus, saveAction, id, tra
     event.preventDefault()
     event.stopPropagation()
 
-    saveAction(url)
+    saveAction(url, id)
     if (trackSaveClick) trackSaveClick(id) // Legacy method: Remove on analytics confirmation
   }
 

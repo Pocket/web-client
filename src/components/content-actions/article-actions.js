@@ -1,5 +1,4 @@
 import { css, cx } from 'linaria'
-import { BASE_URL } from 'common/constants'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { FacebookMonoIcon } from '@pocket/web-ui'
 import { TwitterMonoIcon } from '@pocket/web-ui'
@@ -132,7 +131,7 @@ export const ArticleActions = function ({
   url,
   className
 }) {
-  const saveAction = () => onSave(url)
+  const saveAction = () => onSave(url, 'save-story-side')
 
   return (
     <div className={cx(shareContainer, className)}>
