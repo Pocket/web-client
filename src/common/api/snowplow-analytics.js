@@ -26,6 +26,20 @@ export const snowplowTrackPageView = () => {
   }
 }
 
+export const snowplowAnonymousTracking = (track) => {
+  try {
+    if (track) {
+      global.snowplow('disableAnonymousTracking', 'cookieAndLocalStorage')
+    }
+    else {
+      global.snowplow('enableAnonymousTracking', { withServerAnonymisation: true })
+      global.snowplow('clearUserData') // Clear client side cookies
+    }
+  } catch {
+    console.warn('AnonymousTracking: snowplow library is not available')
+  }
+}
+
 export const SCHEMA_VENDOR = 'com.pocket'
 
 // iglu: vendor_name / event_name / jsonschema / schema version

@@ -95,13 +95,7 @@ export function SaveArticleBottom({
   const { t } = useTranslation()
 
   return (
-    <aside className={classNames(saveArticleStyles, 'bottom', 'save-article')}>
-      <p>
-        {t(
-          'item-action:save-article-bottom',
-          'How was it? Save stories you love and never lose them.'
-        )}
-      </p>
+    <div className={classNames(saveArticleStyles, 'top', 'save-article')}>
       <SaveStoryButton
         trackSaveClick={trackSaveClick}
         isAuthenticated={isAuthenticated}
@@ -111,7 +105,13 @@ export function SaveArticleBottom({
         url={url}
         onClick={saveAction}
       />
-    </aside>
+      <p>
+        {t(
+          'item-action:save-article-bottom',
+          'How was it? Save stories you love and never lose them.'
+        )}
+      </p>
+    </div>
   )
 }
 
@@ -128,7 +128,7 @@ function SaveStoryButton({ url, isAuthenticated, saveStatus, saveAction, id, tra
     event.preventDefault()
     event.stopPropagation()
 
-    saveAction(url)
+    saveAction(url, id)
     if (trackSaveClick) trackSaveClick(id) // Legacy method: Remove on analytics confirmation
   }
 

@@ -1,6 +1,7 @@
 import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
 import { useDispatch, useSelector } from 'react-redux'
+import { BASE_URL } from 'common/constants'
 
 import { contentLayout } from 'components/content-layout/content-layout'
 import { printLayout } from 'components/content-layout/print-layout'
@@ -37,7 +38,7 @@ const validParams = {
   premium_user: false // external state being managed by native apps
 }
 
-export function SyndicatedArticle({ url, queryParams = validParams }) {
+export function SyndicatedArticle({ queryParams = validParams }) {
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user?.auth)
@@ -68,6 +69,8 @@ export function SyndicatedArticle({ url, queryParams = validParams }) {
     showAds
   } = articleData
 
+  const url = `${BASE_URL}/explore/item/${slug}`
+
   const articleMetaData = {
     url,
     title,
@@ -86,11 +89,11 @@ export function SyndicatedArticle({ url, queryParams = validParams }) {
 
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
 
-  const saveAction = (savedUrl) => {
+  const saveAction = (savedUrl, identifier) => {
     if (saveStatus === 'saved') dispatch(unSaveArticleItem(itemId))
     if (saveStatus !== 'saved') {
       dispatch(saveArticleItem(savedUrl))
-      sendSaveToSnowplow({ itemId, url })
+      sendSaveToSnowplow({ itemId, url: savedUrl, identifier })
     }
   }
 
@@ -125,6 +128,7 @@ export function SyndicatedArticle({ url, queryParams = validParams }) {
                 isAuthenticated={isAuthenticated}
                 saveAction={saveAction}
                 saveStatus={saveStatus}
+                url={url}
               />
             </header>
           </section>
@@ -177,6 +181,7 @@ export function SyndicatedArticle({ url, queryParams = validParams }) {
                 isAuthenticated={isAuthenticated}
                 saveAction={saveAction}
                 saveStatus={saveStatus}
+                url={url}
               />
               <PublisherAttribution
                 publisher={publisher}

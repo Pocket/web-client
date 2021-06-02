@@ -17,6 +17,7 @@ import { AdBelowTheFold } from 'components/content-ads/content-ads'
 import { AdRailTop } from 'components/content-ads/content-ads'
 import { AdRailBottom } from 'components/content-ads/content-ads'
 import { ContentIntro } from 'components/content-intro/content-intro'
+import { AuthorBio } from 'components/content-author/author-bio'
 
 import { getImageCacheUrl } from 'common/utilities'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
@@ -25,6 +26,7 @@ import { saveCollection } from 'containers/collections/collections.state'
 
 import { unSaveCollectionPage } from 'containers/collections/collections.state'
 import { saveCollectionPage } from 'containers/collections/collections.state'
+import { trackItemSave } from 'connectors/snowplow/snowplow.state'
 
 import { Toasts } from 'connectors/toasts/toast-list'
 import ErrorPage from 'pages/_error'
@@ -60,9 +62,12 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
   const url = `${BASE_URL}/collections/${slug}`
   const metaData = { description: excerpt, title, url, image: imageUrl }
 
-  const saveAction = () => {
+  const saveAction = (saveUrl, id) => {
     if (pageSaveStatus === 'saved') dispatch(unSaveCollectionPage(slug))
-    if (pageSaveStatus !== 'saved') dispatch(saveCollectionPage(slug))
+    if (pageSaveStatus !== 'saved') {
+      dispatch(saveCollectionPage(slug))
+      dispatch(trackItemSave(0, { url, id: slug }, id))
+    }
   }
 
   return (
@@ -126,6 +131,8 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
                   <ItemCard id={id} key={id} position={index} cardShape="wide" showExcerpt={true} />
                 ))
               : null}
+
+            {authors ? authors?.map((author) => <AuthorBio {...author} />) : null}
           </div>
         </section>
 

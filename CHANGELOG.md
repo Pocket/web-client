@@ -1,3 +1,41 @@
+## [1.14.39](https://github.com/Pocket/web-client/compare/v1.14.38...v1.14.39) (2021-06-02)
+
+
+### Bug Fixes
+
+* **nav:** update nav links to use next/link component ([d428f9b](https://github.com/Pocket/web-client/commit/d428f9b72d8d7c66641c38a7b3f72eb846b953f5))
+* **nav:** update tests for new link components ([2370e3d](https://github.com/Pocket/web-client/commit/2370e3d36c3104a2a4f4740532c30be4e7fbea7c))
+
+## [1.14.38](https://github.com/Pocket/web-client/compare/v1.14.37...v1.14.38) (2021-06-02)
+
+
+### Bug Fixes
+
+* **collections:** add conditonal author bio ([591292c](https://github.com/Pocket/web-client/commit/591292cc8a13e6651a60188af1dfc0612db232db))
+* **collections:** allow for bio without image ([1992c75](https://github.com/Pocket/web-client/commit/1992c754934c42a402f9d82aa9dd558780511fb8))
+
+## [1.14.37](https://github.com/Pocket/web-client/compare/v1.14.36...v1.14.37) (2021-06-02)
+
+
+### Bug Fixes
+
+* **print:** sneaking in update to hide bottom upsell when printing ([0f2d4d7](https://github.com/Pocket/web-client/commit/0f2d4d7ae776b06891117b9210fc2d5f55dd9023))
+* **snowplow:** fixing snowplow errors from the migration ([26e73c0](https://github.com/Pocket/web-client/commit/26e73c00ec9fb41c4efb97a851097122d6dcf3c6))
+
+## [1.14.36](https://github.com/Pocket/web-client/compare/v1.14.35...v1.14.36) (2021-06-02)
+
+
+### Bug Fixes
+
+* **settings:** re-add settings ([d4449a4](https://github.com/Pocket/web-client/commit/d4449a4c42063d7faf0459a91f442d82f13ea7e4))
+* **settings:** re-add settings ([3fc7873](https://github.com/Pocket/web-client/commit/3fc7873c8205f68874c6bb8fb5c6a9d4091ac178))
+* **snowplow:** add postpath to snowplow config ([92166a5](https://github.com/Pocket/web-client/commit/92166a55c948189a14e599c6213dc1a3e5e0832d))
+* **snowplow:** add postpath to snowplow config ([0b857ca](https://github.com/Pocket/web-client/commit/0b857caae8c91d56ec2f58c85c3a65ee2a31ddce))
+* **snowplow:** add postpath to snowplow config ([ee7883b](https://github.com/Pocket/web-client/commit/ee7883b91b7787f3d6ea778edf029e1aa9af2458))
+* **snowplow:** update snowplow config to handle anonymous tracking ([a5e070f](https://github.com/Pocket/web-client/commit/a5e070fa142e9c1f537d62ed12063456c2c39d58))
+* **snowplow:** update snowplow config to handle anonymous tracking ([ca48fd7](https://github.com/Pocket/web-client/commit/ca48fd78a35067cf19f2c1626b30b42b12270d3c))
+* **snowplow:** update snowplow config to handle anonymous tracking ([de6b6e0](https://github.com/Pocket/web-client/commit/de6b6e084ce8032936939260c720ba6e7e43b300))
+
 ## [1.14.35](https://github.com/Pocket/web-client/compare/v1.14.34...v1.14.35) (2021-06-01)
 
 

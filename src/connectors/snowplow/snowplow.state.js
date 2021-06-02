@@ -3,6 +3,8 @@ import { BATCH_SIZE } from 'common/constants'
 import { urlWithPermanentLibrary } from 'common/utilities'
 
 import { SNOWPLOW_INITIALIZED } from 'actions'
+import { SNOWPLOW_UPDATE_ANONYMOUS_TRACKING } from 'actions'
+
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 import { SNOWPLOW_TRACK_IMPRESSION } from 'actions'
 import { SNOWPLOW_TRACK_ENGAGEMENT } from 'actions'
@@ -46,11 +48,14 @@ import { getLinkOpenTarget } from 'connectors/snowplow/events'
 
 import { snowplowTrackPageView } from 'common/api/snowplow-analytics'
 import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
+import { snowplowAnonymousTracking } from 'common/api/snowplow-analytics'
 import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const finalizeSnowplow = () => ({ type: SNOWPLOW_INITIALIZED })
+
+export const updateAnonymousTracking = (track) => ({ type: SNOWPLOW_UPDATE_ANONYMOUS_TRACKING, track })
 
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
 
@@ -200,6 +205,7 @@ const snowplowReady = (state) => state.analytics?.initialized
 export const snowplowSagas = [
   takeLatest(VARIANTS_SAVE, fireVariantEnroll),
   takeLatest(FEATURES_HYDRATE, fireFeatureEnroll),
+  takeLatest(SNOWPLOW_UPDATE_ANONYMOUS_TRACKING, anonymousTracking),
   takeLatest(SNOWPLOW_TRACK_PAGE_VIEW, firePageView),
   takeEvery(SNOWPLOW_TRACK_REC_OPEN, fireRecOpen),
   takeEvery(SNOWPLOW_TRACK_REC_SAVE, fireRecEngagement),
@@ -242,6 +248,11 @@ function* fireFeatureEnroll({ hydrate }) {
       yield call(sendCustomSnowplowEvent, variantEnrollEvent, [featureFlagEntity])
     }
   }
+}
+
+function* anonymousTracking({ track }) {
+  yield call(waitForInitialization)
+  yield call(snowplowAnonymousTracking, track)
 }
 
 function* fireRecOpen({ destination, trigger, position, item, identifier }) {
@@ -294,7 +305,7 @@ function* fireRecImpression({ component, requirement, position, item, identifier
 
 function* fireContentOpen({ destination, trigger, position, item, identifier }) {
   const contentOpenEvent = createContentOpenEvent(destination, trigger)
-  const contentEntity = createContentEntity(item.save_url, item.item_id)
+  const contentEntity = createContentEntity(item.save_url || item.url, item.item_id)
   const uiEntity = createUiEntity({
     type: UI_COMPONENT_CARD,
     hierarchy: 0,
@@ -315,7 +326,7 @@ function* fireItemImpression({ component, requirement, position, item, identifie
   if (!isReady) return
 
   const impressionEvent = createImpressionEvent(component, requirement)
-  const contentEntity = createContentEntity(item.save_url, item.item_id)
+  const contentEntity = createContentEntity(item.save_url || item.url, item.item_id)
   const uiEntity = createUiEntity({
     type: UI_COMPONENT_CARD,
     hierarchy: 0,
@@ -349,8 +360,8 @@ function* fireContentEngagement({ component, ui, identifier, position, items }) 
   if (contentEntities.length > BATCH_SIZE) contentEntities.length = BATCH_SIZE
 
   const contentEntity = contentEntities.map((item) => {
-    const { save_url, item_id, id } = item
-    return createContentEntity(save_url, item_id || id) // id is bulk edit value
+    const { save_url, url, item_id, id } = item
+    return createContentEntity(save_url || url, item_id || id) // id is bulk edit value
   })
 
   const uiEntity = createUiEntity({ type: ui, hierarchy: 0, identifier, index: position })

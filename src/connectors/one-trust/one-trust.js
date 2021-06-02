@@ -6,6 +6,7 @@ import ReactGA from 'react-ga'
 import { loadOptinMonster } from 'common/utilities/third-party/opt-in-monster'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
+import { updateAnonymousTracking } from 'connectors/snowplow/snowplow.state'
 import { initializeSnowplow } from 'common/setup/snowplow'
 import { finalizeSnowplow } from 'connectors/snowplow/snowplow.state'
 import { useRouter } from 'next/router'
@@ -41,6 +42,8 @@ export function PostTrustInit() {
     // Setting this so we don't get a glut of false positives with shifting
     // cookie preferences
     analyticsInitSet(true)
+
+    dispatch(updateAnonymousTracking(analyticsReady))
   }, [analyticsReady, analyticsInit, dispatch, user_status, sess_guid, user_id])
 
   useEffect(() => {

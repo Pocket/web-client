@@ -34,7 +34,7 @@ describe('GlobalNavLinks', () => {
 
   it('renders the links with correct urls as specified in the `links` prop', () => {
     const links = shallow(<GlobalNavLinks {...baseProps} />)
-    const linkAnchors = links.find('a')
+    const linkAnchors = links.find('Link')
 
     assert.equal(linkAnchors.at(0).prop('href'), baseProps.links[0].url)
     assert.equal(linkAnchors.at(1).prop('href'), baseProps.links[1].url)
