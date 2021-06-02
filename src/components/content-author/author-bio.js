@@ -47,10 +47,10 @@ const authorBioStyle = css`
 
 export function AuthorBio({ name, bio, imageUrl }) {
   const shouldShow = bio?.length
-  const image = getImageCacheUrl(imageUrl, { width: 200, height: 200 })
+  const image = imageUrl.length ? getImageCacheUrl(imageUrl, { width: 200, height: 200 }) : false
   return shouldShow ? (
     <cite className={authorBioStyle}>
-      <img src={image} alt="" />
+      {image ? <img src={image} alt="" /> : null}
       <div className="bio">
         <h4>{name}</h4>
         <ReactMarkdown>{bio}</ReactMarkdown>

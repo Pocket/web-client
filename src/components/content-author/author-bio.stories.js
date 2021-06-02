@@ -18,12 +18,12 @@ const mockAuthors = [
       'https://s3.amazonaws.com/pocket-collectionapi-prod-images/a8a9a5be-5c7e-4c65-9752-533e90b605b3.jpeg'
   },
   {
-    name: 'Pocket Editors',
-    bio: '',
+    name: 'Alex Dalenberg',
+    bio: 'Affogato edison bulb lo-fi cronut. Direct trade photo booth keffiyeh skateboard 90s locavore YOLO iPhone craft beer sustainable echo park la croix fanny pack beard. Kale chips mustache williamsburg keffiyeh chartreuse keytar live-edge photo booth. Activated charcoal yr neutra cred. Chambray leggings yr ethical stumptown narwhal vice shabby chic. Mumblecore bitters thundercats pinterest, synth bushwick ugh photo booth hashtag chartreuse ennui before they sold out normcore four dollar toast gastropub. Godard cloud bread vice, ramps PBR&B hell of selfies 8-bit adaptogen keffiyeh chia woke knausgaard vegan synth.',
     imageUrl: ''
   },
   {
-    name: 'Alex Dalenberg',
+    name: 'Pocket Editors',
     bio: '',
     imageUrl: ''
   }
@@ -37,6 +37,11 @@ export const multipleAuthor = () => {
   return mockAuthors.map((author) => <AuthorBio {...author} />)
 }
 
-export const incompleteAuthor = () => {
+export const authorWithoutImage = () => {
+  console.log(mockAuthors.slice(2, 1))
+  return mockAuthors.slice(2, 3).map((author) => <AuthorBio {...author} />)
+}
+
+export const noAuthor = () => {
   return mockAuthors.slice(-1, 1).map((author) => <AuthorBio {...author} />)
 }
