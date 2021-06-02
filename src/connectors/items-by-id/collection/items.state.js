@@ -107,7 +107,7 @@ function* itemsSaveRequest(action) {
   }
 }
 
-function* collectionItemsRequest(action) {
+function* collectionItemsRequest() {
   try {
     const collectionItemsById = yield fetchCollections()
     yield put({ type: COLLECTION_ITEMS_REQUEST_SUCCESS, collectionItemsById })

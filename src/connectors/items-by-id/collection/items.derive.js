@@ -1,5 +1,3 @@
-import { BASE_URL } from 'common/constants'
-
 export function deriveCollectionItems(response) {
   /**
  * @title {string} The most appropriate title to show
@@ -12,6 +10,7 @@ export function deriveCollectionItems(response) {
  */
     return response.map((collectionItem) => {
     return {
+      item_id: collectionItem.slug,
       slug: collectionItem.slug,
       title: collectionItem.title,
       thumbnail: collectionItem.thumbnail,
