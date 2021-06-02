@@ -46,10 +46,6 @@ export default function Collections({ locale }) {
       <Lockup items={itemIds} offset={10} heroPosition="left" ItemCard={ItemCard} />
 
       <OffsetList items={itemIds} offset={15} cardShape="wide" ItemCard={ItemCard} border={true} />
-
-      <Lockup items={itemIds} offset={20} heroPosition="right" ItemCard={ItemCard} />
-
-      <OffsetList items={itemIds} offset={25} cardShape="wide" ItemCard={ItemCard} border={true} />
     </Layout>
   )
 }
