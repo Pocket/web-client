@@ -3,7 +3,6 @@ import Layout from 'layouts/main'
 import { useSelector } from 'react-redux'
 
 import { CardPageHeader } from 'components/headers/discover-header'
-import { CardListHeading } from 'components/headers/discover-header'
 import { ItemCard } from 'connectors/item-card/collection/story-card'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
@@ -23,9 +22,9 @@ export default function Collections({ locale }) {
   const metaData = {
     description: t(
       'collections:page-description',
-      'Pink elephants and lava lamps'
+      'Curated guides to the best of the web'
     ),
-    title: t('collections:page-title', 'Page title for collections')
+    title: t('collections:page-title', 'Collections for Your Pocket')
   }
 
   return (
@@ -38,8 +37,6 @@ export default function Collections({ locale }) {
       <Lockup items={itemIds} offset={0} heroPosition="center" ItemCard={ItemCard} />
 
       {showTopics ? <CardTopicsNav topics={topics} track={trackTopicClick} /> : null}
-
-      <CardListHeading>{t('collections:collections-are-cool', 'Collections are cool')}</CardListHeading>
 
       <OffsetList items={itemIds} offset={5} cardShape="wide" ItemCard={ItemCard} border={true} />
 
