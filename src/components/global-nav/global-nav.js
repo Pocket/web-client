@@ -264,7 +264,7 @@ const GlobalNav = ({
               isOpen={isMobileMenuOpen}
               toggleMenuOpen={setMobileMenuOpen}
             />
-            <Link href={pocketLogoOutboundUrl}>
+            <Link href={pocketLogoOutboundUrl} data-test="logo-link">
               <a
                 id="pocket-logo-nav"
                 className="pocket-logo"
