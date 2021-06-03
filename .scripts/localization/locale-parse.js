@@ -32,13 +32,13 @@ async function processLocalization() {
     let { location = defaultLocation } = settings
 
     // Make sure we have a token stored in our config
-    const token = settings.token ? settings.token : await setToken()
+    const token = settings.token ? settings.token : await setToken(settings)
 
     // Does the repo exists and is valid
     const isValidLocation = await validateRepo(location)
 
     // If the location is valid set up the repo
-    location = isValidLocation ? location : await setupRepo(location)
+    location = isValidLocation ? location : await setupRepo(location, settings)
 
     // Update our repo
     await updateRepo()
@@ -55,7 +55,23 @@ async function processLocalization() {
     await commitChanges(changedFiles, branchName, location)
 
     // Submit PR if one does not already exist
-    await submitPR(token, branchName, changedFiles)
+    const selectPROption = new Select({
+      name: 'pr-status',
+      message: `Would you like to make a PR?`,
+      choices: ['Yep!', 'Nope']
+    })
+    const answer = await selectPROption.run()
+
+    switch (answer) {
+      case 'Yep!': {
+        return await submitPR(token, branchName, changedFiles)
+      }
+
+      default: {
+        console.log('Cool. You`re all set.')
+        process.exit(0)
+      }
+    }
   } catch (error) {
     console.log(error)
   }
@@ -96,7 +112,7 @@ async function validateRepo(location) {
  * a previously checked out version
  * @param {string} location: Location of cloned repo
  */
-async function setupRepo(location) {
+async function setupRepo(location, settings) {
   try {
     const selectInitOption = new Select({
       name: 'repo-status',
@@ -107,11 +123,11 @@ async function setupRepo(location) {
 
     switch (answer) {
       case 'Locate my copy': {
-        return locateRepo()
+        return locateRepo(settings)
       }
 
       case 'Clone the repo': {
-        return cloneRepo(location)
+        return cloneRepo(location, settings)
       }
 
       default: {
@@ -129,7 +145,7 @@ async function setupRepo(location) {
  * version of the repo. It does some additional validation and provides some
  * feedback if it can't complete the task
  */
-async function locateRepo() {
+async function locateRepo(settings) {
   try {
     const { location } = await prompt({
       type: 'input',
@@ -143,7 +159,7 @@ async function locateRepo() {
     if (!locationExists) throw new Error('Not a valid location')
 
     // Write preferences to file
-    await fs.outputJson(scriptConfig, { location: location })
+    await fs.outputJson(scriptConfig, { ...settings, location: location })
     console.log(`Setting localization repo to ${location}`)
 
     const isValid = validateRepo(location)
@@ -167,13 +183,15 @@ async function locateRepo() {
  * location relative to the repo this is being run in (../web-localization)
  * @param {string} location: Location of cloned repo
  */
-async function cloneRepo(location) {
+async function cloneRepo(location, settings) {
   try {
     await fs.emptyDir(location)
     await git.cwd(location)
 
     console.log('Checking out localization to ../web-localization')
     await git.clone(localizationRepo, './')
+
+    await fs.outputJson(scriptConfig, { ...settings, location: location })
     console.log(chalk.green('Repo checked out!'))
 
     return location
@@ -441,7 +459,7 @@ function sha1(buffer) {
  * setToken is used to help the user set a github access token locally.  This is
  * required in order to create a PR on Github
  */
-async function setToken() {
+async function setToken(settings) {
   try {
     console.log('You need an auth token to use the parser.')
     console.log('Please set one up by following the instructions here:')
@@ -457,7 +475,7 @@ async function setToken() {
     if (!token.length) throw new Error('Token is required.')
 
     // Write preferences to file
-    await fs.outputJson(scriptConfig, { token })
+    await fs.outputJson(scriptConfig, { ...settings, token })
     console.log('Saving token to config')
 
     return token

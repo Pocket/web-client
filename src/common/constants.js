@@ -132,6 +132,7 @@ export const LOCALE_READER = [
 // Common translations
 export const LOCALE_COMMON = [
   'common',
+  'discover',
   'save-to-pocket',
   'confirm',
   'item-action',

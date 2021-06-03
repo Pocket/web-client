@@ -1,3 +1,29 @@
+## [1.14.43](https://github.com/Pocket/web-client/compare/v1.14.42...v1.14.43) (2021-06-03)
+
+
+### Bug Fixes
+
+* **locale:** include discover in common ([32760f0](https://github.com/Pocket/web-client/commit/32760f01b98cd3afdee1a84cd4fee9b83006a04b))
+* **locale:** infer international languages ([e611f58](https://github.com/Pocket/web-client/commit/e611f589baeb24ed6279b17eadbe9256912892d6))
+
+## [1.14.42](https://github.com/Pocket/web-client/compare/v1.14.41...v1.14.42) (2021-06-03)
+
+
+### Bug Fixes
+
+* **git:** update git ignore ([8e9d544](https://github.com/Pocket/web-client/commit/8e9d54470648d849682aeefd51077e378f3c1a22))
+* **local:** allow ssl cert on local dev ([2570a4e](https://github.com/Pocket/web-client/commit/2570a4ea02f5916dc554b9b59f366cdd77141f11))
+* **server:** add local server to root ([a820d69](https://github.com/Pocket/web-client/commit/a820d69458c8bf4c028fbd82b320b35fa9de62ab))
+* **server:** update to run http(s) from dev ([84aca06](https://github.com/Pocket/web-client/commit/84aca06232bee60e463ac12e41daf2534bb79d9b))
+
+## [1.14.41](https://github.com/Pocket/web-client/compare/v1.14.40...v1.14.41) (2021-06-02)
+
+
+### Bug Fixes
+
+* **collections:** don't pass slug through as id ([80f2ef7](https://github.com/Pocket/web-client/commit/80f2ef760e53a6d817ea3527b45bc1e85772cd1c))
+* **snowplow:** run item id through parseint ([fb63ed2](https://github.com/Pocket/web-client/commit/fb63ed28be851b6516f406481de6e3a314fc80f0))
+
 ## [1.14.40](https://github.com/Pocket/web-client/compare/v1.14.39...v1.14.40) (2021-06-02)
 
 

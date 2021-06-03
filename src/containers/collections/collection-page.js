@@ -66,7 +66,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
     if (pageSaveStatus === 'saved') dispatch(unSaveCollectionPage(slug))
     if (pageSaveStatus !== 'saved') {
       dispatch(saveCollectionPage(slug))
-      dispatch(trackItemSave(0, { url, id: slug }, id))
+      dispatch(trackItemSave(0, { url }, id))
     }
   }
 
