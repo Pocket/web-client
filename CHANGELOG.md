@@ -1,3 +1,10 @@
+## [1.14.44](https://github.com/Pocket/web-client/compare/v1.14.43...v1.14.44) (2021-06-03)
+
+
+### Bug Fixes
+
+* **analytics:** update collections events to pass in custom items ([94c5184](https://github.com/Pocket/web-client/commit/94c518427e81bd3d6f90aff465d1e85febb660d3))
+
 ## [1.14.43](https://github.com/Pocket/web-client/compare/v1.14.42...v1.14.43) (2021-06-03)
 
 
