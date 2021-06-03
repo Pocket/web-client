@@ -16,7 +16,7 @@ export function deriveCollectionItems(response) {
       slug: collectionItem.slug,
       title: collectionItem.title,
       thumbnail: collectionItem.thumbnail,
-      publisher: 'Pocket',
+      publisher: false,
       excerpt: collectionItem.excerpt,
       save_url: saveUrl(collectionItem),
       open_url: collectionUrl(collectionItem),
