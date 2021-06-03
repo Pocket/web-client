@@ -1,10 +1,10 @@
 var https = require('https')
+var http = require('http')
 var fs = require('fs')
 const path = require('path')
 const { parse } = require('url')
 
 const next = require('next')
-const port = 443
 const app = next({ dev: true })
 const handle = app.getRequestHandler()
 
@@ -13,14 +13,19 @@ var options = {
   cert: fs.readFileSync('./localhost.web-client.getpocket.com.pem')
 }
 
+function runServer(req, res) {
+  const parsedUrl = parse(req.url, true)
+  handle(req, res, parsedUrl)
+}
+
 app.prepare().then(() => {
-  https
-    .createServer(options, (req, res) => {
-      const parsedUrl = parse(req.url, true)
-      handle(req, res, parsedUrl)
-    })
-    .listen(port, (err) => {
-      if (err) throw err
-      console.log('🚀 — Ready on https://localhost.web-client.getpocket.com')
-    })
+  https.createServer(options, runServer).listen(443, (err) => {
+    if (err) throw err
+    console.log('🔑 — Secure server at https://localhost.web-client.getpocket.com')
+  })
+
+  http.createServer(runServer).listen(80, (err) => {
+    if (err) throw err
+    console.log('😐 — Regular old server on http://localhost.web-client.getpocket.com')
+  })
 })
