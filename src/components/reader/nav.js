@@ -41,6 +41,10 @@ const headerStyle = css`
     padding-bottom: 0;
     height: var(--size400);
   }
+
+  @media print {
+    display: none;
+  }
 `
 
 const navStyle = css`

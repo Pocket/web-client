@@ -98,9 +98,26 @@ cd web-client
 npm install
 ```
 
+#### Setting up local certificate
+
+Chromium browser now require SSL to access cookies that will allow the site to auth and run locally.
+
+There are some challenges to doing this properly but we can streamline it quite a bit with a package called [mkcert](https://github.com/FiloSottile/mkcert). Visit the site and follow instructions to install it on your machine (for both chrome and firefox)
+
+Once installed run the following to install a valid certificate on your machine.:
+```bash
+mkcert -install
+``` 
+
+Finalize things by running the following command from the root of the web-client folder. This will generate the certificates that the `server.local` is expecting.
+```bash
+mkcert localhost.web-client.getpocket.com
+```
+
+
 #### Running Locally
 
-To run the `web-client` site locally:
+To run the `web-client` site locally :
 
 ```bash
 npm run dev

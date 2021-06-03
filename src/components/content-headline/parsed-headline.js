@@ -1,5 +1,6 @@
 import { css } from 'linaria'
 import { breakpointLargeHandset } from '@pocket/web-ui'
+import ReactMarkdown from 'react-markdown'
 
 const Headline = css`
   color: var(--color-textPrimary);
@@ -20,7 +21,7 @@ const Description = css`
   font-weight: 300;
   font-size: 1.25em;
   line-height: 140%;
-  margin-bottom: var(--spacing100);
+  margin-bottom: 1rem;
 `
 
 /**
@@ -30,11 +31,19 @@ const Description = css`
  * Editors look at the syndicated stories so they adjust headlines and dek in the
  * admin tool if it is too long or more than than 3 lines
  */
-export function ParsedHeadline({ title, description }) {
+export function ParsedHeadline({ title, description, useMarkdown }) {
   return (
     <>
       <h1 className={Headline}>{title}</h1>
-      <h2 className={Description}>{description}</h2>
+      <h2 className={Description}>
+        {useMarkdown ? (
+          <ReactMarkdown skipHtml={true} unwrapDisallowed={true} allowedElements={['strong', 'em']}>
+            {description}
+          </ReactMarkdown>
+        ) : (
+          <p>{description}</p>
+        )}
+      </h2>
     </>
   )
 }

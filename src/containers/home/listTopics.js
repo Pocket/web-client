@@ -145,9 +145,9 @@ export const HomeTopicsRow = ({ topic_slug, topic, count = 3 }) => {
 }
 
 export const HomeTopicsList = ({ count }) => {
-  const topicSections = useSelector((state) => state.home.topicSections)
+  const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
 
-  return topicSections?.length
-    ? topicSections.map((topic) => <HomeTopicsRow key={topic.display_name} count={count} {...topic} />)
+  return pinnedTopics?.length
+    ? pinnedTopics.map((topic) => <HomeTopicsRow key={topic.display_name} count={count} {...topic} />)
     : null
 }

@@ -43,6 +43,11 @@ const addStyle = css`
     }
   }
 
+  .mobile-submit {
+    visibility: hidden;
+    position: absolute;
+  }
+
   .error-message {
     position: absolute;
     width: 100%;
@@ -221,6 +226,7 @@ const GlobalNavAdd = ({
           onKeyUp={handleKeyUp}
           placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
           data-cy="add-input"
+          enterKeyHint="send"
         />
         {inputError ? (
           <div className="error-message">
@@ -236,6 +242,7 @@ const GlobalNavAdd = ({
         data-cy="add-submit">
         <Trans i18nKey="nav:add">Add</Trans>
       </button>
+      <input type="submit" className="mobile-submit" />
       {onClose ? <CloseButton onClick={onClose} data-cy="add-close" /> : null}
     </form>
   )

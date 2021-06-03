@@ -1,10 +1,9 @@
 import { css, cx } from 'linaria'
 import { ChevronDownIcon } from '@pocket/web-ui'
-import { capitalizeFirstLetter } from 'common/utilities'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import { buttonReset } from 'components/buttons/button-reset'
 import Link from 'next/link'
-import { Trans } from 'next-i18next'
+import { Trans, useTranslation } from 'next-i18next'
 
 // i.e., h3
 const filterStyle = css`
@@ -63,6 +62,8 @@ const filterStyle = css`
 `
 
 export function FilterMenu({ subset, filter, tag, query }) {
+  const { t } = useTranslation()
+
   const hasFilter = [
     'search',
     'favorites',
@@ -77,7 +78,12 @@ export function FilterMenu({ subset, filter, tag, query }) {
     return `${activeClass}`
   }
 
-  const activeTitle = filter ? filter : 'All items'
+  const filterTitles = {
+    unread: t('nav:my-list', 'My List'),
+    archive: t('nav:archive', 'Archive'),
+    favorites: t('nav:favorites', 'Favorites'),
+  }
+  const activeTitle = filterTitles[filter] || t('nav:all-items', 'All items')
 
   // Popover Effect
   const { popTrigger, popBody, shown } = usePopover({
@@ -98,7 +104,7 @@ export function FilterMenu({ subset, filter, tag, query }) {
   return hasFilter ? (
     <div className={cx(filterStyle, 'filter-wrapper')}>
       <button ref={popTrigger} className={cx(buttonReset, 'filter-trigger')}>
-        {capitalizeFirstLetter(activeTitle)}
+        {activeTitle}
         <ChevronDownIcon style={{ marginTop: 0, paddingLeft: '3px' }} />
       </button>
       {shown ? (
@@ -112,8 +118,8 @@ export function FilterMenu({ subset, filter, tag, query }) {
           </div>
           <div>
             <Link href={`/my-list/${path}/unread${searchQuery}`}>
-              <button className={filterActive('unread')} data-cy="filter-unread">
-                <Trans i18nKey="nav:unread">Unread</Trans>
+              <button className={filterActive('unread')} data-cy="filter-mylist">
+                <Trans i18nKey="nav:my-list">My List</Trans>
               </button>
             </Link>
           </div>

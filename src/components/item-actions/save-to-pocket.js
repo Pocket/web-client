@@ -112,6 +112,8 @@ export const SaveToPocket = function ({
   isAuthenticated,
   saveStatus = 'unsaved',
   allowRead = false,
+  hideCopy = false,
+  className,
   id
 }) {
   const { t } = useTranslation()
@@ -147,7 +149,8 @@ export const SaveToPocket = function ({
     saveContainer,
     saveStatus,
     'card-actions',
-    allowRead && 'read-now'
+    allowRead && 'read-now',
+    className
   )
 
   return saveStatus === 'saved' && allowRead ? (
@@ -158,7 +161,9 @@ export const SaveToPocket = function ({
         className={saveClasses}
         target={openExternal ? '_blank' : undefined}>
         <ReadingIcon />
-        <span className="actionCopy">{t('item-action:read-now', 'Read Now')}</span>
+        {hideCopy ? null : (
+          <span className="actionCopy">{t('item-action:read-now', 'Read Now')}</span>
+        )}
       </a>
     </Link>
   ) : (
@@ -169,7 +174,7 @@ export const SaveToPocket = function ({
         ref={popTrigger}
         data-cy={`article-save-btn-${id}`}>
         {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}
-        <div className="actionCopy">{saveCopy[saveStatus]}</div>
+        {hideCopy ? null : <div className="actionCopy">{saveCopy[saveStatus]}</div>}
       </button>
       {!isAuthenticated && shown ? <SavePopover popoverRef={popBody} id={id} /> : null}
     </>

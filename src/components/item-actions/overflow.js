@@ -19,6 +19,7 @@ const popoverMenuItem = css`
   padding: 0 1rem;
   color: var(--color-textSecondary);
   text-decoration: none;
+  border-radius: var(--borderRadius);
 
   svg {
     fill: currentColor;
@@ -36,7 +37,7 @@ const popoverMenuItem = css`
   }
   &:hover {
     background-color: var(--color-actionPrimarySubdued);
-    color: var(--color-actionPrimaryHover);
+    color: var(--color-actionPrimaryText);
   }
 `
 
@@ -84,9 +85,7 @@ export const OverflowAction = function ({ toggleLabel, menuItems, placement }) {
         <OverflowMenuIcon />
         {toggleLabel ? <div className="actionCopy">{toggleLabel}</div> : null}
       </button>
-      {shown ? (
-        <MenuPopover popoverRef={popBody} menuItems={menuItems} />
-      ) : null}
+      {shown ? <MenuPopover popoverRef={popBody} menuItems={menuItems} /> : null}
     </>
   )
 }

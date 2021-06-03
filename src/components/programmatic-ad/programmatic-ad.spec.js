@@ -2,11 +2,7 @@ import 'jsdom-global/register'
 import React from 'react'
 import assert from 'assert'
 import sinon from 'sinon'
-import {
-  initPageAdConfig,
-  getAdDefaults,
-  AD_TYPE_VERTICAL
-} from './programmatic-ad'
+import { initPageAdConfig, getAdDefaults, AD_TYPE_VERTICAL } from './programmatic-ad'
 import { verticalSidebarAd } from './ad-sizes'
 import { defineAdSlot, loadAd, createSizeMapping } from './ad-helpers'
 import * as adHelpers from './ad-helpers'
@@ -14,28 +10,37 @@ import * as adHelpers from './ad-helpers'
 describe('<ProgrammaticAd>', () => {
   describe('initPageAdConfig()', () => {
     let setTargetingSpy = sinon.stub().returnsThis()
+    let addEventListenerSpy = sinon.stub().returnsThis()
+    let disableInitialLoadSpy = sinon.stub().returnsThis()
+    let setRequestNonPersonalizedAdsSpy = sinon.stub().returnsThis()
+
     let pubadsSpy = sinon.fake.returns({
-      setTargeting: setTargetingSpy // allows for chaining
+      setTargeting: setTargetingSpy, // allows for chaining
+      addEventListener: addEventListenerSpy, // allows for chaining
+      disableInitialLoad: disableInitialLoadSpy, // allows for chaining
+      setRequestNonPersonalizedAds: setRequestNonPersonalizedAdsSpy // allows for chaining
     })
     let enableServicesSpy = sinon.spy()
-    let fetchBidsSpy = sinon.spy()
+    // let fetchBidsSpy = sinon.spy()
 
     const cachedGoogletag = global.googletag
-    const cachedApstag = global.apstag
+    // const cachedApstag = global.apstag
 
     beforeEach(() => {
       global.googletag = {
         pubads: pubadsSpy,
         enableServices: enableServicesSpy,
+        disableInitialLoad: disableInitialLoadSpy,
+        setRequestNonPersonalizedAds: setRequestNonPersonalizedAdsSpy,
         cmd: []
       }
-      global.apstag = {
-        fetchBids: fetchBidsSpy
-      }
+      // global.apstag = {
+      //   fetchBids: fetchBidsSpy
+      // }
     })
     after(() => {
       global.googletag = cachedGoogletag
-      global.apstag = cachedApstag
+      // global.apstag = cachedApstag
     })
     it('initializes ad metadata', () => {
       const pageMetadata = {
@@ -48,10 +53,12 @@ describe('<ProgrammaticAd>', () => {
       }
       initPageAdConfig(pageMetadata)
 
-      assert(pubadsSpy.calledOnce)
-      assert.equal(setTargetingSpy.callCount, Object.keys(pageMetadata).length)
+      assert(pubadsSpy.callCount === 4)
+      assert(setTargetingSpy.callCount === Object.keys(pageMetadata).length)
       assert(enableServicesSpy.calledOnce)
-      assert(fetchBidsSpy.calledOnce)
+      assert(disableInitialLoadSpy.calledOnce)
+      assert(setRequestNonPersonalizedAdsSpy.calledOnce)
+      // assert(fetchBidsSpy.calledOnce)
     })
   })
   describe('defineAdSlot()', () => {
@@ -102,11 +109,7 @@ describe('<ProgrammaticAd>', () => {
           adSlotParams.id
         )
       )
-      assert(
-        defineSlotSpy().setTargeting.calledWith('POS', [
-          adSlotParams.positionAlias
-        ])
-      )
+      assert(defineSlotSpy().setTargeting.calledWith('POS', [adSlotParams.positionAlias]))
       assert(addServiceSpy.calledOnce)
     })
 

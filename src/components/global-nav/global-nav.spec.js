@@ -37,11 +37,11 @@ describe('GlobalNav', () => {
 
     assert(defaultLinks.exists())
     assert.equal(
-      defaultLinks.shallow().find('a').get(0).props['href'],
+      defaultLinks.shallow().find('Link').get(0).props['href'],
       DEFAULT_LINKS[0].url
     )
     assert.equal(
-      defaultLinks.shallow().find('a').get(1).props['href'],
+      defaultLinks.shallow().find('Link').get(1).props['href'],
       DEFAULT_LINKS[1].url
     )
   })
@@ -52,11 +52,11 @@ describe('GlobalNav', () => {
 
     assert(passedLinks.exists())
     assert.equal(
-      passedLinks.shallow().find('a').get(0).props['href'],
+      passedLinks.shallow().find('Link').get(0).props['href'],
       baseProps.links[0].url
     )
     assert.equal(
-      passedLinks.shallow().find('a').get(1).props['href'],
+      passedLinks.shallow().find('Link').get(1).props['href'],
       baseProps.links[1].url
     )
   })
@@ -77,7 +77,7 @@ describe('GlobalNav', () => {
     const globalNav = shallow(
       <GlobalNav appRootSelector="#root" flagsReady={true} />
     )
-    const defaultLogoUrl = globalNav.find("[data-cy='logo-link']")
+    const defaultLogoUrl = globalNav.find("[data-test='logo-link']")
 
     assert.equal(defaultLogoUrl.prop('href'), '/explore?src=navbar')
 
@@ -89,7 +89,7 @@ describe('GlobalNav', () => {
         pocketLogoOutboundUrl="https://cheeseburger.io"
       />
     )
-    const customLogoUrl = globalNav2.find("[data-cy='logo-link']")
+    const customLogoUrl = globalNav2.find("[data-test='logo-link']")
     assert.equal(customLogoUrl.prop('href'), 'https://cheeseburger.io')
   })
 })

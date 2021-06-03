@@ -1,6 +1,9 @@
-import { takeLatest, takeEvery, call, select } from 'redux-saga/effects'
+import { takeLatest, takeEvery, call, take, select, cancel } from 'redux-saga/effects'
 import { BATCH_SIZE } from 'common/constants'
 import { urlWithPermanentLibrary } from 'common/utilities'
+
+import { SNOWPLOW_INITIALIZED } from 'actions'
+import { SNOWPLOW_UPDATE_ANONYMOUS_TRACKING } from 'actions'
 
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 import { SNOWPLOW_TRACK_IMPRESSION } from 'actions'
@@ -45,10 +48,15 @@ import { getLinkOpenTarget } from 'connectors/snowplow/events'
 
 import { snowplowTrackPageView } from 'common/api/snowplow-analytics'
 import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
+import { snowplowAnonymousTracking } from 'common/api/snowplow-analytics'
 import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 
 /** ACTIONS
  --------------------------------------------------------------- */
+export const finalizeSnowplow = () => ({ type: SNOWPLOW_INITIALIZED })
+
+export const updateAnonymousTracking = (track) => ({ type: SNOWPLOW_UPDATE_ANONYMOUS_TRACKING, track })
+
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
 
 export const trackRecOpen = (position, item, identifier, href) => {
@@ -161,11 +169,17 @@ export const trackImpression = (component, requirement, ui, position, identifier
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
+  initialized: false,
   impressions: []
 }
 
 export const snowplowReducers = (state = initialState, action) => {
   switch (action.type) {
+    case SNOWPLOW_INITIALIZED: {
+      return { ...state, initialized: true }
+    }
+
+    case SNOWPLOW_TRACK_REC_IMPRESSION:
     case SNOWPLOW_TRACK_ITEM_IMPRESSION: {
       const { item_id } = action?.item
       const set = new Set([...state.impressions, item_id])
@@ -173,7 +187,7 @@ export const snowplowReducers = (state = initialState, action) => {
     }
 
     case SNOWPLOW_TRACK_PAGE_VIEW: {
-      return initialState
+      return { ...state, impressions: [] }
     }
 
     default:
@@ -184,12 +198,14 @@ export const snowplowReducers = (state = initialState, action) => {
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getListType = (state) => state.app.listMode
+const snowplowReady = (state) => state.analytics?.initialized
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const snowplowSagas = [
   takeLatest(VARIANTS_SAVE, fireVariantEnroll),
   takeLatest(FEATURES_HYDRATE, fireFeatureEnroll),
+  takeLatest(SNOWPLOW_UPDATE_ANONYMOUS_TRACKING, anonymousTracking),
   takeLatest(SNOWPLOW_TRACK_PAGE_VIEW, firePageView),
   takeEvery(SNOWPLOW_TRACK_REC_OPEN, fireRecOpen),
   takeEvery(SNOWPLOW_TRACK_REC_SAVE, fireRecEngagement),
@@ -205,10 +221,12 @@ export const snowplowSagas = [
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 function* firePageView() {
+  yield call(waitForInitialization)
   yield call(snowplowTrackPageView)
 }
 
 function* fireVariantEnroll({ variants }) {
+  yield call(waitForInitialization)
   for (let flag in variants) {
     const variantEnrollEvent = createVariantEnrollEvent()
     const featureFlagEntity = createFeatureFlagEntity(flag, variants[flag])
@@ -218,6 +236,7 @@ function* fireVariantEnroll({ variants }) {
 }
 
 function* fireFeatureEnroll({ hydrate }) {
+  yield call(waitForInitialization)
   for (let flag in hydrate) {
     const { test: testName, variant, assigned } = hydrate[flag]
     const hasVariant = variant !== 'disabled' && !!variant
@@ -229,6 +248,11 @@ function* fireFeatureEnroll({ hydrate }) {
       yield call(sendCustomSnowplowEvent, variantEnrollEvent, [featureFlagEntity])
     }
   }
+}
+
+function* anonymousTracking({ track }) {
+  yield call(waitForInitialization)
+  yield call(snowplowAnonymousTracking, track)
 }
 
 function* fireRecOpen({ destination, trigger, position, item, identifier }) {
@@ -262,6 +286,9 @@ function* fireRecEngagement({ component, ui, identifier, position, item }) {
 }
 
 function* fireRecImpression({ component, requirement, position, item, identifier }) {
+  const isReady = yield select(snowplowReady)
+  if (!isReady) return
+
   const impressionEvent = createImpressionEvent(component, requirement)
   const contentEntity = createContentEntity(item.save_url, item.item_id)
   const recEntities = buildRecEntities(item, position)
@@ -278,7 +305,7 @@ function* fireRecImpression({ component, requirement, position, item, identifier
 
 function* fireContentOpen({ destination, trigger, position, item, identifier }) {
   const contentOpenEvent = createContentOpenEvent(destination, trigger)
-  const contentEntity = createContentEntity(item.save_url, item.item_id)
+  const contentEntity = createContentEntity(item.save_url || item.url, item.item_id)
   const uiEntity = createUiEntity({
     type: UI_COMPONENT_CARD,
     hierarchy: 0,
@@ -295,8 +322,11 @@ function* fireContentOpen({ destination, trigger, position, item, identifier }) 
 }
 
 function* fireItemImpression({ component, requirement, position, item, identifier }) {
+  const isReady = yield select(snowplowReady)
+  if (!isReady) return
+
   const impressionEvent = createImpressionEvent(component, requirement)
-  const contentEntity = createContentEntity(item.save_url, item.item_id)
+  const contentEntity = createContentEntity(item.save_url || item.url, item.item_id)
   const uiEntity = createUiEntity({
     type: UI_COMPONENT_CARD,
     hierarchy: 0,
@@ -309,6 +339,7 @@ function* fireItemImpression({ component, requirement, position, item, identifie
 }
 
 function* fireImpression({ component, requirement, ui, position, identifier }) {
+  yield call(waitForInitialization)
   const impressionEvent = createImpressionEvent(component, requirement)
   const uiEntity = createUiEntity({
     type: ui,
@@ -329,8 +360,8 @@ function* fireContentEngagement({ component, ui, identifier, position, items }) 
   if (contentEntities.length > BATCH_SIZE) contentEntities.length = BATCH_SIZE
 
   const contentEntity = contentEntities.map((item) => {
-    const { save_url, item_id, id } = item
-    return createContentEntity(save_url, item_id || id) // id is bulk edit value
+    const { save_url, url, item_id, id } = item
+    return createContentEntity(save_url || url, item_id || id) // id is bulk edit value
   })
 
   const uiEntity = createUiEntity({ type: ui, hierarchy: 0, identifier, index: position })
@@ -351,6 +382,14 @@ function* fireEngagement({ component, ui, identifier, position, value }) {
 
   const snowplowEntities = [uiEntity]
   yield call(sendCustomSnowplowEvent, engagementEvent, snowplowEntities)
+}
+
+function* waitForInitialization() {
+  while (true) {
+    const isReady = yield select(snowplowReady)
+    if (!isReady) yield take(SNOWPLOW_INITIALIZED)
+    return true
+  }
 }
 
 /** LEGACY ANALYTICS

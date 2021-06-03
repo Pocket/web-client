@@ -2,7 +2,7 @@ import 'jsdom-global/register'
 import React from 'react'
 import assert from 'assert'
 import { shallow, mount } from 'enzyme'
-import PublisherRecs, { Publisher, RecommendedArticle } from './publisher-recs'
+import { PublisherRecs, Publisher, RecommendedArticle } from './publisher-recs'
 import { publisher, publisherRecommendations as publisherRecs } from 'mock/article'
 
 describe('PublisherRecs', () => {
@@ -10,14 +10,12 @@ describe('PublisherRecs', () => {
     publisher: publisher.theVerge,
     recommendations: publisherRecs.recommendations
   }
+
   it('does not render <Publisher> or <RecommendedArticles> when there are no recommendations', () => {
     const noRecsInstance = shallow(<PublisherRecs publisher={baseProps.publisher} />)
-    const publisherHeader = noRecsInstance.find("[data-cy='publisher-header']")
-    const recommendations = noRecsInstance.find("[data-cy='recommended-articles']")
-
-    assert(!publisherHeader.exists())
-    assert(!recommendations.exists())
+    assert(noRecsInstance.isEmptyRender())
   })
+
   describe('Publisher', () => {
     it('renders a Publisher with a logo image, when available', () => {
       const { recommendationName, logo } = publisher.theVerge

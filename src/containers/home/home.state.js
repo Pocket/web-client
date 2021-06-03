@@ -1,8 +1,7 @@
 import { put, takeEvery, select } from 'redux-saga/effects'
-import { localStore } from 'common/utilities/browser-storage/browser-storage'
 import { getMyList } from 'common/api/my-list'
 import { getTopicFeed } from 'common/api/topics'
-import { getCollectionSet } from 'common/api/collections'
+import { getCollections as apiGetCollections } from 'common/api/collections'
 import { saveItem } from 'common/api/saveItem'
 import { removeItem } from 'common/api/removeItem'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
@@ -10,7 +9,7 @@ import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { arrayToObject } from 'common/utilities'
 
 import { CACHE_KEY_HOME_STORED_TOPICS } from 'common/constants'
-import { HOME_SET_PREFERENCES } from 'actions'
+
 import { HOME_HYDRATE } from 'actions'
 
 import { HOME_SAVE_REQUEST } from 'actions'
@@ -43,9 +42,11 @@ import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 
 import { ITEMS_ADD_SUCCESS } from 'actions'
 
+import { PINNED_TOPICS_SET } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
-export const homeSetPreferences = () => ({ type: HOME_SET_PREFERENCES })
+export const homeHydrate = () => ({ type: HOME_HYDRATE })
 
 export const getCollections = () => ({ type: HOME_COLLECTION_REQUEST })
 export const getRecentSaves = () => ({ type: HOME_RECENT_SAVES_REQUEST })
@@ -60,7 +61,6 @@ export const setHomeImpression = (id) => ({ type: HOME_SET_IMPRESSION, id }) //p
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  topicSections: [],
   collectionSet: [],
   recentSaves: [],
   impressions: {},
@@ -72,20 +72,6 @@ export const homeReducers = (state = initialState, action) => {
     case HOME_HYDRATE: {
       const { topicSections } = action
       return { ...state, topicSections }
-    }
-
-    case HOME_TOPIC_SECTION_SET: {
-      const { topic } = action
-      const set = new Set([topic, ...state.topicSections])
-      return { ...state, topicSections: Array.from(set) }
-    }
-
-    case HOME_TOPIC_SECTION_UNSET: {
-      const { topic } = action
-      const filteredTopicSections = state.topicSections.filter(
-        (section) => section.topic_slug !== topic.topic_slug
-      )
-      return { ...state, topicSections: filteredTopicSections }
     }
 
     case HOME_TOPIC_SECTION_SUCCESS: {
@@ -140,33 +126,30 @@ export function updateSaveStatus(state, id, save_status) {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const homeSagas = [
-  takeEvery(HOME_SET_PREFERENCES, homePreferences),
+  takeEvery(HOME_HYDRATE, homePreferences),
   takeEvery(HOME_RECENT_SAVES_REQUEST, recentDataRequest),
   takeEvery(HOME_COLLECTION_REQUEST, collectionDataRequest),
   takeEvery(HOME_TOPIC_SECTION_REQUEST, topicDataRequest),
   takeEvery(HOME_TOPIC_SECTION_SET, topicDataRequest),
   takeEvery(HOME_SAVE_REQUEST, homeSaveRequest),
   takeEvery(HOME_UNSAVE_REQUEST, homeUnSaveRequest),
-  takeEvery(HOME_TOPIC_SECTION_SET, storeTopicPreferences),
-  takeEvery(HOME_TOPIC_SECTION_UNSET, storeTopicPreferences)
+  takeEvery(HOME_TOPIC_SECTION_SET, setTopicPreferences),
+  takeEvery(HOME_TOPIC_SECTION_UNSET, unsetTopicPreferences)
 ]
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getTopicData = (state, topic) => state.home[`${topic}Topic`]
-const getTopicSections = (state) => state.home.topicSections
+const getTopicSections = (state) => state.settings.pinnedTopics
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 function* homePreferences() {
-  const storedSections = localStore.getItem(CACHE_KEY_HOME_STORED_TOPICS)
-  const topicSections = storedSections ? JSON.parse(storedSections) : []
+  const topicSections = yield select(getTopicSections)
 
   for (var i = 0; i < topicSections.length; i++) {
     yield put({ type: HOME_TOPIC_SECTION_REQUEST, topic: topicSections[i] })
   }
-
-  yield put({ type: HOME_HYDRATE, topicSections })
 }
 
 function* recentDataRequest() {
@@ -260,9 +243,20 @@ function* homeUnSaveRequest({ id, topic }) {
   }
 }
 
-function* storeTopicPreferences() {
+function* setTopicPreferences({ topic }) {
   const topicSections = yield select(getTopicSections)
-  localStore.setItem(CACHE_KEY_HOME_STORED_TOPICS, JSON.stringify(topicSections))
+  const set = new Set([topic, ...topicSections])
+
+  yield put({ type: PINNED_TOPICS_SET, pinnedTopics: Array.from(set) })
+}
+
+function* unsetTopicPreferences({ topic }) {
+  const topicSections = yield select(getTopicSections)
+  const pinnedTopics = topicSections.filter(
+    (section) => section.topic_slug !== topic.topic_slug
+  )
+
+  yield put({ type: PINNED_TOPICS_SET, pinnedTopics })
 }
 
 /** ASYNC Functions
@@ -325,11 +319,14 @@ export async function fetchTopicData({ topic }) {
  */
 export async function fetchCollectionData({ count }) {
   try {
-    const response = await getCollectionSet(count)
-    const collections = response?.data?.getCollections?.collections
+    const collections = await apiGetCollections()
     if (!collections.length) return { error: 'No data found' }
 
-    const data = collections.sort(() => 0.5 - Math.random()).slice(0, count)
+    const collectionsWithUrl = collections.map((collection) => ({
+      ...collection,
+      url: `/collections/${collection.slug}`
+    }))
+    const data = collectionsWithUrl.sort(() => 0.5 - Math.random()).slice(0, count)
     return { data }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.

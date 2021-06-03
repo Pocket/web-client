@@ -3,64 +3,62 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 
 import ReactGA from 'react-ga'
-import { initializeSnowplow } from 'common/utilities/snowplow'
-import { loadOptinMonster } from 'common/utilities/external-libraries'
+import { loadOptinMonster } from 'common/utilities/third-party/opt-in-monster'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
+import { updateAnonymousTracking } from 'connectors/snowplow/snowplow.state'
+import { initializeSnowplow } from 'common/setup/snowplow'
+import { finalizeSnowplow } from 'connectors/snowplow/snowplow.state'
+import { useRouter } from 'next/router'
 
 /**
  * Initialization file. We are using this because of the way the _app file
  * is wrapped in this version. This problem will not exist when we move
  * fully to web-client
  */
-export function PostTrustInit({ path }) {
+export function PostTrustInit() {
   // Initialize app once per page load
   const dispatch = useDispatch()
+  const router = useRouter()
 
+  const path = router.pathname
   const [analyticsInit, analyticsInitSet] = useState(false)
-  const [functionalInit, functionalInitSet] = useState(false)
-
-  const { user_id, sess_guid } = useSelector((state) => state.user)
+  const { user_status, user_id, sess_guid } = useSelector((state) => state.user)
   const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
-  const functionalEnabled = useSelector( (state) => state.oneTrust?.functional.enabled ) //prettier-ignore
   const analyticsEnabled = useSelector( (state) => state.oneTrust?.analytics.enabled ) //prettier-ignore
+  const analyticsReady = analyticsEnabled && oneTrustReady
 
   useEffect(() => {
-    if (!analyticsEnabled || !oneTrustReady || analyticsInit) return
+    if (analyticsInit) return
+    if (user_status === 'pending' || !sess_guid) return
 
     // Set up Snowplow
-    initializeSnowplow(user_id, sess_guid)
-
-    // Track Page View
-    dispatch(trackPageView())
+    const finalizeInit = () => dispatch(finalizeSnowplow())
+    initializeSnowplow(user_id, sess_guid, finalizeInit)
 
     // Set up Google Analytics
     ReactGA.initialize(GOOGLE_ANALYTICS_ID)
-    ReactGA.pageview(path)
 
     // Setting this so we don't get a glut of false positives with shifting
     // cookie preferences
     analyticsInitSet(true)
-  }, [
-    oneTrustReady,
-    analyticsEnabled,
-    user_id,
-    sess_guid,
-    dispatch,
-    path,
-    analyticsInit
-  ])
+
+    dispatch(updateAnonymousTracking(analyticsReady))
+  }, [analyticsReady, analyticsInit, dispatch, user_status, sess_guid, user_id])
 
   useEffect(() => {
-    if (!functionalEnabled || !oneTrustReady || functionalInit) return
-
-    // Load OptinMonster
+    // Load Opt In Monster for marketing/conversion adventurers
     loadOptinMonster()
+  }, [])
 
-    // Setting this so we don't get a glut of false positives with shifting
-    // cookie preferences
-    functionalInitSet(true)
-  }, [functionalEnabled, oneTrustReady, functionalInit])
+  // Track Page Views
+  useEffect(() => {
+    if (user_status === 'pending') return null
+    if (!analyticsInit) return null
+
+    dispatch(trackPageView())
+    ReactGA.pageview(path)
+  }, [user_status, sess_guid, user_id, path, dispatch, analyticsInit])
 
   return <></>
 }

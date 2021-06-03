@@ -3,6 +3,8 @@
 /* In practice, initialization of these ad libraries should be wrapped logic that checks for their existence */
 
 export const POCKET_AD_UNIT_PATH = '/21741047832/Pocket'
+export const REFRESH_KEY = 'refresh'
+export const REFRESH_VALUE = 'true'
 /**
  *
  * @param sizes(array): Array holding configuration of what ad sizes to use ad different browser sizes
@@ -11,9 +13,7 @@ export const POCKET_AD_UNIT_PATH = '/21741047832/Pocket'
 export const createSizeMapping = (sizes) => {
   const mapping = googletag.sizeMapping()
 
-  sizes.forEach(({ browserSize, adSizes }) =>
-    mapping.addSize(browserSize, adSizes)
-  )
+  sizes.forEach(({ browserSize, adSizes }) => mapping.addSize(browserSize, adSizes))
 
   return mapping.build()
 }
@@ -34,9 +34,21 @@ export const defineAdSlot = ({
   adUnitPath,
   defaultAdSize,
   positionAlias,
-  sizeMap = {}
+  sizeMap = {},
+  refreshRate
 }) => {
   const sizeMapping = createSizeMapping(sizeMap)
+
+  if (refreshRate) {
+    global.gptadslots[id] = global.googletag
+      .defineSlot(adUnitPath, defaultAdSize, id)
+      ?.setTargeting('POS', [positionAlias])
+      ?.setTargeting(REFRESH_KEY, REFRESH_VALUE)
+      .defineSizeMapping(sizeMapping)
+      .addService(global.googletag.pubads())
+
+    return
+  }
 
   global.gptadslots[id] = global.googletag
     .defineSlot(adUnitPath, defaultAdSize, id)
@@ -86,19 +98,9 @@ export const domLoadedPromise = () => {
  */
 export const loadAd = (slotId) => {
   global.googletag.display(slotId)
-  if (
-    typeof global.pubwise !== 'undefined' &&
-    global.pubwise.enabled === true
-  ) {
+  if (typeof global.pubwise !== 'undefined' && global.pubwise.enabled === true) {
     global.pwpbjs.que.push(function () {
-      global.pwRegisterLazyLoad(
-        global.gptadslots[slotId],
-        2,
-        [50, 0, 50, 0],
-        0,
-        768,
-        2
-      )
+      global.pwRegisterLazyLoad(global.gptadslots[slotId], 2, [50, 0, 50, 0], 0, 768, 2)
     })
   } else {
     global.googletag.pubads().refresh([global.gptadslots[slotId]])

@@ -31,55 +31,59 @@ const MIDDLE_OF_ARTICLE = 'div-gpt-ad-6843487-3'
 const NATIVE_SYNDICATION = 'div-gpt-ad-6843487-5'
 const NATIVE_FRONT_DOOR = 'div-gpt-ad-6843487-6'
 
-export function AdAboveTheFold({ adTargetingMetadata = {}, showAd = true }) {
+export function AdAboveTheFold({ allowAds, usePersonalized, ...adTargetingMetadata }) {
   return (
     <ProgrammaticAd
+      usePersonalized={usePersonalized}
       id={ABOVE_THE_FOLD}
       positionAlias="ATF"
       type={AD_TYPE_HORIZONTAL_LG}
       adTargetingMetadata={adTargetingMetadata}
-      showAd={showAd}
+      showAd={allowAds}
       instanceStyles={aboveTheFoldStyle}
     />
   )
 }
 
-export function AdBelowTheFold({ adTargetingMetadata = {}, showAd = true }) {
+export function AdBelowTheFold({ allowAds, usePersonalized, ...adTargetingMetadata }) {
   return (
     <ProgrammaticAd
+      usePersonalized={usePersonalized}
       id={BELOW_THE_FOLD}
       positionAlias="BTF"
       type={AD_TYPE_HORIZONTAL_M}
       adTargetingMetadata={adTargetingMetadata}
-      showAd={showAd}
+      showAd={allowAds}
       instanceStyles={belowTheFoldStyle}
     />
   )
 }
 
-export function AdRailTop({ adTargetingMetadata = {}, showAd = true }) {
+export function AdRailTop({ allowAds, usePersonalized, ...adTargetingMetadata }) {
   return (
     <div className={adRailStyle}>
       <ProgrammaticAd
+        usePersonalized={usePersonalized}
         id={RIGHT_RAIL_1_ID}
         positionAlias="RightRail1"
         type={AD_TYPE_VERTICAL}
         adTargetingMetadata={adTargetingMetadata}
-        showAd={showAd}
+        showAd={allowAds}
       />
     </div>
   )
 }
 
-export function AdRailBottom({ adTargetingMetadata = {}, showAd = true }) {
+export function AdRailBottom({ allowAds, usePersonalized, ...adTargetingMetadata }) {
   return (
     <div className={adRailStyle}>
       <ProgrammaticAd
+        usePersonalized={usePersonalized}
         id={RIGHT_RAIL_2_ID}
         positionAlias="RightRail2"
         type={AD_TYPE_VERTICAL}
         adTargetingMetadata={adTargetingMetadata}
-        showAd={showAd}
+        showAd={allowAds}
       />
     </div>
   )

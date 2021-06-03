@@ -1,3 +1,285 @@
+## [1.14.43](https://github.com/Pocket/web-client/compare/v1.14.42...v1.14.43) (2021-06-03)
+
+
+### Bug Fixes
+
+* **locale:** include discover in common ([32760f0](https://github.com/Pocket/web-client/commit/32760f01b98cd3afdee1a84cd4fee9b83006a04b))
+* **locale:** infer international languages ([e611f58](https://github.com/Pocket/web-client/commit/e611f589baeb24ed6279b17eadbe9256912892d6))
+
+## [1.14.42](https://github.com/Pocket/web-client/compare/v1.14.41...v1.14.42) (2021-06-03)
+
+
+### Bug Fixes
+
+* **git:** update git ignore ([8e9d544](https://github.com/Pocket/web-client/commit/8e9d54470648d849682aeefd51077e378f3c1a22))
+* **local:** allow ssl cert on local dev ([2570a4e](https://github.com/Pocket/web-client/commit/2570a4ea02f5916dc554b9b59f366cdd77141f11))
+* **server:** add local server to root ([a820d69](https://github.com/Pocket/web-client/commit/a820d69458c8bf4c028fbd82b320b35fa9de62ab))
+* **server:** update to run http(s) from dev ([84aca06](https://github.com/Pocket/web-client/commit/84aca06232bee60e463ac12e41daf2534bb79d9b))
+
+## [1.14.41](https://github.com/Pocket/web-client/compare/v1.14.40...v1.14.41) (2021-06-02)
+
+
+### Bug Fixes
+
+* **collections:** don't pass slug through as id ([80f2ef7](https://github.com/Pocket/web-client/commit/80f2ef760e53a6d817ea3527b45bc1e85772cd1c))
+* **snowplow:** run item id through parseint ([fb63ed2](https://github.com/Pocket/web-client/commit/fb63ed28be851b6516f406481de6e3a314fc80f0))
+
+## [1.14.40](https://github.com/Pocket/web-client/compare/v1.14.39...v1.14.40) (2021-06-02)
+
+
+### Bug Fixes
+
+* **one-trust:** init snowplow even when user is logged out ([d9aaa10](https://github.com/Pocket/web-client/commit/d9aaa101870b67a3bb97df1b6bc350fb7fa3bd82))
+
+## [1.14.39](https://github.com/Pocket/web-client/compare/v1.14.38...v1.14.39) (2021-06-02)
+
+
+### Bug Fixes
+
+* **nav:** update nav links to use next/link component ([d428f9b](https://github.com/Pocket/web-client/commit/d428f9b72d8d7c66641c38a7b3f72eb846b953f5))
+* **nav:** update tests for new link components ([2370e3d](https://github.com/Pocket/web-client/commit/2370e3d36c3104a2a4f4740532c30be4e7fbea7c))
+
+## [1.14.38](https://github.com/Pocket/web-client/compare/v1.14.37...v1.14.38) (2021-06-02)
+
+
+### Bug Fixes
+
+* **collections:** add conditonal author bio ([591292c](https://github.com/Pocket/web-client/commit/591292cc8a13e6651a60188af1dfc0612db232db))
+* **collections:** allow for bio without image ([1992c75](https://github.com/Pocket/web-client/commit/1992c754934c42a402f9d82aa9dd558780511fb8))
+
+## [1.14.37](https://github.com/Pocket/web-client/compare/v1.14.36...v1.14.37) (2021-06-02)
+
+
+### Bug Fixes
+
+* **print:** sneaking in update to hide bottom upsell when printing ([0f2d4d7](https://github.com/Pocket/web-client/commit/0f2d4d7ae776b06891117b9210fc2d5f55dd9023))
+* **snowplow:** fixing snowplow errors from the migration ([26e73c0](https://github.com/Pocket/web-client/commit/26e73c00ec9fb41c4efb97a851097122d6dcf3c6))
+
+## [1.14.36](https://github.com/Pocket/web-client/compare/v1.14.35...v1.14.36) (2021-06-02)
+
+
+### Bug Fixes
+
+* **settings:** re-add settings ([d4449a4](https://github.com/Pocket/web-client/commit/d4449a4c42063d7faf0459a91f442d82f13ea7e4))
+* **settings:** re-add settings ([3fc7873](https://github.com/Pocket/web-client/commit/3fc7873c8205f68874c6bb8fb5c6a9d4091ac178))
+* **snowplow:** add postpath to snowplow config ([92166a5](https://github.com/Pocket/web-client/commit/92166a55c948189a14e599c6213dc1a3e5e0832d))
+* **snowplow:** add postpath to snowplow config ([0b857ca](https://github.com/Pocket/web-client/commit/0b857caae8c91d56ec2f58c85c3a65ee2a31ddce))
+* **snowplow:** add postpath to snowplow config ([ee7883b](https://github.com/Pocket/web-client/commit/ee7883b91b7787f3d6ea778edf029e1aa9af2458))
+* **snowplow:** update snowplow config to handle anonymous tracking ([a5e070f](https://github.com/Pocket/web-client/commit/a5e070fa142e9c1f537d62ed12063456c2c39d58))
+* **snowplow:** update snowplow config to handle anonymous tracking ([ca48fd7](https://github.com/Pocket/web-client/commit/ca48fd78a35067cf19f2c1626b30b42b12270d3c))
+* **snowplow:** update snowplow config to handle anonymous tracking ([de6b6e0](https://github.com/Pocket/web-client/commit/de6b6e084ce8032936939260c720ba6e7e43b300))
+
+## [1.14.35](https://github.com/Pocket/web-client/compare/v1.14.34...v1.14.35) (2021-06-01)
+
+
+### Bug Fixes
+
+* **card layouts:** add responsive to discover layouts ([ab7d5ba](https://github.com/Pocket/web-client/commit/ab7d5bac1529cf459c73a975014d377bbe8f30ba))
+* **layouts:** lockup/offset stories ([55efdee](https://github.com/Pocket/web-client/commit/55efdeed92e0cf37398798618b2946a29b9be0ed))
+* **stories:** update content-parsed ([ebb546a](https://github.com/Pocket/web-client/commit/ebb546aeffaf17e538e51e71f17f99bc5bb9e344))
+* **stories:** update parsed-content stories ([6ee16d0](https://github.com/Pocket/web-client/commit/6ee16d0c03c59cf4e9fb33935b41ae992c2f005b))
+* **storybook:** add viewport ([5fe4848](https://github.com/Pocket/web-client/commit/5fe4848b89ea19d815e619bb0109c71590366d68))
+
+## [1.14.34](https://github.com/Pocket/web-client/compare/v1.14.33...v1.14.34) (2021-06-01)
+
+
+### Bug Fixes
+
+* **settings:** adding pinned topics from home to settings ([98c44a0](https://github.com/Pocket/web-client/commit/98c44a0b2f254a457e8d06e5bca73d339868c603))
+* **settings:** adding server storage for pinned tags ([ce50c6d](https://github.com/Pocket/web-client/commit/ce50c6d7b412922079a31c0136fdcdecf98b45d7))
+* **settings:** adding settings state ([0a2926e](https://github.com/Pocket/web-client/commit/0a2926edb26b2604e8c3ad6b870fe2fff6eeda81))
+* **settings:** make sure to save immediately after converting ([7910ab4](https://github.com/Pocket/web-client/commit/7910ab452d308279ac4fe972e9a00fa107a534d5))
+* **tags-state:** removing uneeded imports ([a2b078a](https://github.com/Pocket/web-client/commit/a2b078a509d43ed36d8a7fc15146e3484ccbe833))
+* **utilities:** remove outdated comment ([8946dbb](https://github.com/Pocket/web-client/commit/8946dbb3ec9c956f76861a123c4809e0e3134497))
+
+## [1.14.33](https://github.com/Pocket/web-client/compare/v1.14.32...v1.14.33) (2021-05-29)
+
+
+### Bug Fixes
+
+* **cards:** use markdown excerpts explicitly ([bafc975](https://github.com/Pocket/web-client/commit/bafc97574ebaa8af3b61e47117ca670a52f000af))
+* **collections:** allow some styling in header ([4306392](https://github.com/Pocket/web-client/commit/4306392b8204530af4cccd08ec3a24ef4b836a42))
+* **collections:** useMarkdown in excerpts ([0a25859](https://github.com/Pocket/web-client/commit/0a25859a714ad680a124d084bf3e45f2eaa78608))
+
+## [1.14.32](https://github.com/Pocket/web-client/compare/v1.14.31...v1.14.32) (2021-05-28)
+
+
+### Bug Fixes
+
+* **topics:** discover is really explore is really discover ([776609f](https://github.com/Pocket/web-client/commit/776609f3f833cb928d8278f47ad986a24abaf90e))
+
+## [1.14.31](https://github.com/Pocket/web-client/compare/v1.14.30...v1.14.31) (2021-05-27)
+
+
+### Bug Fixes
+
+* **collections:** allow unsaving/sidebar saving ([3f64580](https://github.com/Pocket/web-client/commit/3f6458021eae39f11782956bcc6a99d47f05cbca))
+* **content actions:** update styles ([43bbbc0](https://github.com/Pocket/web-client/commit/43bbbc0b0acfc6193da563bf306dbd6d39e280e6))
+* **save:** allow for cleaner item actions ([56596b4](https://github.com/Pocket/web-client/commit/56596b4406868cc657939a705f41b7e3e65a8f88))
+
+## [1.14.30](https://github.com/Pocket/web-client/compare/v1.14.29...v1.14.30) (2021-05-27)
+
+
+### Bug Fixes
+
+* **package:** undo port change ([a993a1d](https://github.com/Pocket/web-client/commit/a993a1df52c47167a9122e6f796558a59dc602c8))
+* **print:** adding print styles to reader, syndicated articles, and collections ([6b336ad](https://github.com/Pocket/web-client/commit/6b336ade6169e99cccdd3e728680421aa10b9a00))
+
+## [1.14.29](https://github.com/Pocket/web-client/compare/v1.14.28...v1.14.29) (2021-05-27)
+
+
+### Bug Fixes
+
+* **snowplow:** update impressions so theres no race condition ([2173c2f](https://github.com/Pocket/web-client/commit/2173c2f167fa3c0e9b41fef3957630925b53a43d))
+
+## [1.14.28](https://github.com/Pocket/web-client/compare/v1.14.27...v1.14.28) (2021-05-27)
+
+
+### Bug Fixes
+
+* **collections:** link to explore for now ([a7b8682](https://github.com/Pocket/web-client/commit/a7b8682048c1e37a9fc88a6e2d7e90eb15990f91))
+
+## [1.14.27](https://github.com/Pocket/web-client/compare/v1.14.26...v1.14.27) (2021-05-27)
+
+
+### Bug Fixes
+
+* **request:** remove client info for now ([c5f7ca7](https://github.com/Pocket/web-client/commit/c5f7ca7a4d0372863c365714f6fb021314d0b9ef))
+
+## [1.14.26](https://github.com/Pocket/web-client/compare/v1.14.25...v1.14.26) (2021-05-27)
+
+
+### Bug Fixes
+
+* **request:** conditional client identifier ([e938b8c](https://github.com/Pocket/web-client/commit/e938b8c831ba9fe35d640ffda5176b9952c8fd24))
+
+## [1.14.25](https://github.com/Pocket/web-client/compare/v1.14.24...v1.14.25) (2021-05-27)
+
+
+### Bug Fixes
+
+* **collection:** mobile layout adjustments ([3b66b14](https://github.com/Pocket/web-client/commit/3b66b1403802fa1c196348946c750097cd6be28d))
+* **collections:** only show ads once init is done ([15017c4](https://github.com/Pocket/web-client/commit/15017c46471f0cdff85975866a1fc9a631eedbd5))
+
+## [1.14.24](https://github.com/Pocket/web-client/compare/v1.14.23...v1.14.24) (2021-05-27)
+
+
+### Bug Fixes
+
+* **apollo:** adding in release version ([99d13c2](https://github.com/Pocket/web-client/commit/99d13c210e9a3e038d0556318b15b852a3b10aee))
+* **apollo:** adding in some apollo studio based headers ([2297086](https://github.com/Pocket/web-client/commit/2297086346495cda2fc1f78ea97bea67b7e4f465))
+
+## [1.14.23](https://github.com/Pocket/web-client/compare/v1.14.22...v1.14.23) (2021-05-27)
+
+
+### Bug Fixes
+
+* **content:** conditional save tracking ([299b450](https://github.com/Pocket/web-client/commit/299b450e7721463d4302b2f0088a64166741dcfe))
+* **layouts:** render metadata if it exists ([cfe46a5](https://github.com/Pocket/web-client/commit/cfe46a58cbfa73fb222afd33d072c0934ceb7e2b))
+
+## [1.14.22](https://github.com/Pocket/web-client/compare/v1.14.21...v1.14.22) (2021-05-26)
+
+
+### Bug Fixes
+
+* **collections:** make collections static ([2980912](https://github.com/Pocket/web-client/commit/2980912ba752b81460f3a7e039db9bc853c727ad))
+* **collections:** use image cache for hero ([b48788b](https://github.com/Pocket/web-client/commit/b48788be75b24ca64fdd5c62d91547716c3e2db7))
+
+## [1.14.21](https://github.com/Pocket/web-client/compare/v1.14.20...v1.14.21) (2021-05-26)
+
+
+### Bug Fixes
+
+* **content:** parity with styles (should revisit) ([4d31f9f](https://github.com/Pocket/web-client/commit/4d31f9f18d6a6dad0aaf3a84e448b7aef9375f47))
+* **syndicated:** use standard page description ([38474a4](https://github.com/Pocket/web-client/commit/38474a4d19c1c51cb71e317938c1eaa7a61b6dd5))
+
+## [1.14.20](https://github.com/Pocket/web-client/compare/v1.14.19...v1.14.20) (2021-05-26)
+
+
+### Bug Fixes
+
+* **card:** support markdown in excerpt ([6b2251d](https://github.com/Pocket/web-client/commit/6b2251d717c701ab7c0feaa4d17ca0fe41dbef25))
+* **collections:** error on null collection ([41d57bf](https://github.com/Pocket/web-client/commit/41d57bfa9a7b5e7b0bde24f52f9771a89d56e30a))
+* **collections:** filter authors ([7e930b4](https://github.com/Pocket/web-client/commit/7e930b424689ae71aceb1639b3ba4a5d6a209961))
+
+## [1.14.19](https://github.com/Pocket/web-client/compare/v1.14.18...v1.14.19) (2021-05-26)
+
+
+### Bug Fixes
+
+* **app:** single source of truth for init/trust ([d496c59](https://github.com/Pocket/web-client/commit/d496c59fc6c3f21c0e6d2e2795d0b73800211343))
+* **snowplow:** yield wait properly ([976bb2b](https://github.com/Pocket/web-client/commit/976bb2b363f1a59fabd6edf2f55e85d3e6f78d6d))
+
+## [1.14.18](https://github.com/Pocket/web-client/compare/v1.14.17...v1.14.18) (2021-05-25)
+
+
+### Bug Fixes
+
+* **content actions:** specificity on svg height ([084696f](https://github.com/Pocket/web-client/commit/084696fe1f5c52c2b746ca4a9018aef2b6947b86))
+
+## [1.14.17](https://github.com/Pocket/web-client/compare/v1.14.16...v1.14.17) (2021-05-25)
+
+
+### Bug Fixes
+
+* **syndicated:** video sizing ([0368796](https://github.com/Pocket/web-client/commit/0368796751058ade21842c48e425ed10199c0db0))
+
+## [1.14.16](https://github.com/Pocket/web-client/compare/v1.14.15...v1.14.16) (2021-05-25)
+
+
+### Bug Fixes
+
+* **collections:** add markdown parsing for intro ([f464de1](https://github.com/Pocket/web-client/commit/f464de175c8a868c5306dfcf4d1b1dbcef4a2a24))
+* **collections:** responsive fixes ([61beec0](https://github.com/Pocket/web-client/commit/61beec06c6236c45f5dd385694aab46d5de4b733))
+* **collections:** switch to live endpoints ([fafbaa8](https://github.com/Pocket/web-client/commit/fafbaa8504a4a8ac1beb010f2e6ae248ad0c42f8))
+* **home:** use live collections ([baa8d94](https://github.com/Pocket/web-client/commit/baa8d947d6db59fd3d98d516573ae5fb5ec20372))
+
+## [1.14.15](https://github.com/Pocket/web-client/compare/v1.14.14...v1.14.15) (2021-05-25)
+
+
+### Bug Fixes
+
+* **app:** adjust use effect inits ([9e02a49](https://github.com/Pocket/web-client/commit/9e02a495334791ceb4d3e5bf7820a31d60187b39))
+* **app:** update init/privacy race ([5b7cc23](https://github.com/Pocket/web-client/commit/5b7cc23ad8aaef9475fd3cf4abf3b83525f1815a))
+* **content:** clean up publisher recs ([ec1e7c9](https://github.com/Pocket/web-client/commit/ec1e7c9713da9f14f6c318287ac79e9a16aaa3ac))
+* **content-ads:** aligning with web-discover ([091cca4](https://github.com/Pocket/web-client/commit/091cca49edc2f9b93a8123d3dd42e9929f1eb739))
+* **discover:** minor ui tweaks ([aa1702f](https://github.com/Pocket/web-client/commit/aa1702f709b96564442b57069ad8bba1c821a982))
+* **onetrust:** updating comments ([43fd824](https://github.com/Pocket/web-client/commit/43fd824817a16060a8b93a4187d1ef7473c9ca83))
+* **pocket recs:** adding alt to publisher link ([58e0ba7](https://github.com/Pocket/web-client/commit/58e0ba7e4cdbe8e5c04967fa171dd7387be89715))
+* **pocket recs:** localize headlines ([51a05f6](https://github.com/Pocket/web-client/commit/51a05f6fdfcc8d70494551f71a4ca5d9f33c0d46))
+* **publisher recs:** testing ([aeae166](https://github.com/Pocket/web-client/commit/aeae166fc31fbd3674ee69ce3d4d10f8539a9211))
+* **publisher recs:** use Link ([c256b20](https://github.com/Pocket/web-client/commit/c256b2066b9b6cd70209453c8d1179e34ec26cd0))
+* **snowplow:** spa pages should still load ads ([0d27d2a](https://github.com/Pocket/web-client/commit/0d27d2a3a27675911df976934c36b1e31f4b67d4))
+* **snowplow:** track on snowplow not onetrust ([20bff8b](https://github.com/Pocket/web-client/commit/20bff8b27e27bdaa3129babb8c0a5713a133ca33))
+* **syndicated:** break up syndicated article ([205f1ed](https://github.com/Pocket/web-client/commit/205f1ed433536b7dd1b41416c182b8db28c49dac))
+* **syndicated:** clean up ad implimentation ([cb4ea02](https://github.com/Pocket/web-client/commit/cb4ea02b1ef24680b7204635d3517c7cbb5a9e1a))
+* **syndicated:** clean up article actions ([c81c95a](https://github.com/Pocket/web-client/commit/c81c95a061943ab7d9f06bcecb86bf6f743b5964))
+* **syndicated:** tweaks based on feedback ([d62a7cc](https://github.com/Pocket/web-client/commit/d62a7cc5d249a4a23ba68ba241687606732a125b))
+* **third-party-scripts:** sync with web-discover ([9fdcaa2](https://github.com/Pocket/web-client/commit/9fdcaa2695213eb00e82e893fdd414910801a388))
+
+## [1.14.14](https://github.com/Pocket/web-client/compare/v1.14.13...v1.14.14) (2021-05-25)
+
+
+### Bug Fixes
+
+* **filters:** update filter titles so unread is now my list ([6b60abc](https://github.com/Pocket/web-client/commit/6b60abc97dca63debd355766d2049ac862efd57e))
+
+## [1.14.13](https://github.com/Pocket/web-client/compare/v1.14.12...v1.14.13) (2021-05-24)
+
+
+### Bug Fixes
+
+* **mobile:** update search and add so it works on smaller devices ([c534d7b](https://github.com/Pocket/web-client/commit/c534d7bbb8738851660c171f1f764893c0ec926b))
+* **search:** add filter to remove dupes from recent searches ([5ea5751](https://github.com/Pocket/web-client/commit/5ea575172d621b5e26f3247ff1b7fd7e2e122bda))
+* **search:** update filter for dupes ([d7c2204](https://github.com/Pocket/web-client/commit/d7c2204873672bd74028bce21ab092060e42482f))
+
+## [1.14.12](https://github.com/Pocket/web-client/compare/v1.14.11...v1.14.12) (2021-05-24)
+
+
+### Bug Fixes
+
+* **search:** enable second search from pages other than searcxh ([e975503](https://github.com/Pocket/web-client/commit/e975503ad9fd0c80ab00577eaad437725adcc81c))
+
 ## [1.14.11](https://github.com/Pocket/web-client/compare/v1.14.10...v1.14.11) (2021-05-24)
 
 

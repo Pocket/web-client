@@ -6,6 +6,9 @@ export { urlWithPermanentLibrary } from './urls/urls'
 
 export { redirect } from './server-side/redirect'
 
+export { localStore } from './browser-storage/browser-storage'
+export { sessionStore } from './browser-storage/browser-storage'
+
 export { getPublishedDate } from './date-time/date-time'
 export { timeRelativeToNow } from './date-time/date-time'
 export { getTimeOfDay } from './date-time/date-time'

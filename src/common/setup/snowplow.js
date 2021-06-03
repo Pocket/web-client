@@ -19,7 +19,7 @@ function loadSnowplow(snowplowInstanceName) {
     n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","${SNOWPLOW_SCRIPT}","${snowplowInstanceName}"));`)
 }
 
-export function initializeSnowplow(user_id, sess_guid) {
+export function initializeSnowplow(user_id, sess_guid, finalizeInit) {
   // load snowplow scripts
   loadSnowplow('snowplow')
 
@@ -27,11 +27,7 @@ export function initializeSnowplow(user_id, sess_guid) {
   snowplow('newTracker', 'sp', SNOWPLOW_COLLECTOR, SNOWPLOW_CONFIG)
 
   // enable activity monitoring (heartbeat)
-  snowplow(
-    'enableActivityTracking',
-    SNOWPLOW_HEARTBEAT_DELAY,
-    SNOWPLOW_HEARTBEAT_INTERVAL
-  )
+  snowplow('enableActivityTracking', SNOWPLOW_HEARTBEAT_DELAY, SNOWPLOW_HEARTBEAT_INTERVAL)
 
   // automatic link tracking
   snowplow('enableLinkClickTracking')
@@ -43,4 +39,6 @@ export function initializeSnowplow(user_id, sess_guid) {
   const userEntity = createUserEntity(user_id, sess_guid)
   const globalContexts = [userEntity, apiUserEntity]
   snowplow('addGlobalContexts', globalContexts)
+
+  finalizeInit()
 }

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export function TagPageHeader({ subset, title, filter, tag, sortOrder, toggleSortOrder }) {
   const isPinned = useSelector(
-    (state) => !!state.userTags.pinnedTags.includes(tag)
+    (state) => !!state.settings.pinnedTags.includes(tag)
   )
   const dispatch = useDispatch()
   const editTag = () => dispatch(editUserTag(tag))

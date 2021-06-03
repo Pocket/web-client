@@ -1,5 +1,6 @@
 import { css } from 'linaria'
 import { cardsGrid } from 'components/items-layout/base'
+import { breakpointLargeHandset } from '@pocket/web-ui'
 
 const heroType = {
   center: {
@@ -23,6 +24,11 @@ export const cardLockupStyle = css`
   ${cardsGrid};
   border-bottom: 1px solid var(--color-dividerTertiary);
   padding: 2rem 0;
+
+  ${breakpointLargeHandset} {
+    border-bottom: 0;
+    padding: 1rem 0;
+  }
 `
 
 export function Lockup({

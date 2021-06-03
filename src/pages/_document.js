@@ -47,8 +47,8 @@ class ClientDocument extends Document {
               var timeHolder;
 
               function dispatchOneTrust(groups){
-                if(typeof __NEXT_REDUX_STORE__ !== 'undefined') {
-                  __NEXT_REDUX_STORE__.dispatch({type: 'ONE_TRUST_DATA', groups})  
+                if(typeof __NEXT_REDUX_WRAPPER_STORE__ !== 'undefined') {
+                  __NEXT_REDUX_WRAPPER_STORE__.dispatch({type: 'ONE_TRUST_DATA', groups})  
                 } else {
                   clearTimeout(timeHolder); // clear for safety
                   timeHolder = setTimeout(dispatchOneTrust, 50)

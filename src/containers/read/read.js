@@ -82,6 +82,26 @@ const articleWrapper = css`
     max-width: initial !important;
     width: 80%;
   }
+
+  @media print {
+    display: block;
+    padding: 0;
+
+    .sidebar-anchor {
+      display: none;
+    }
+
+    .reader {
+      padding: 0;
+      margin: 0;
+      max-width: unset !important;
+    }
+
+    :after {
+      margin-top: 1rem;
+      content: 'Printed with ❤️ from Pocket'
+    }
+  }
 `
 
 export default function Reader() {

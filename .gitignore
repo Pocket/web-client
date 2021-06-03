@@ -97,3 +97,7 @@ node_modules/
 cdktf.out/
 .gen/
 .aws/dist/
+
+# Certificates 
+/localhost.web-client.getpocket.com-key.pem
+/localhost.web-client.getpocket.com.pem

@@ -46,7 +46,7 @@ export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
       />
 
       {/* Bottom TopicNav */}
-      <CardTopicsNav topics={topics} track={trackTopicClick} />
+      <CardTopicsNav topics={topics} track={trackTopicClick} className="no-border" />
     </>
   )
 }

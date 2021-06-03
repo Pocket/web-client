@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
 import { Trans } from 'next-i18next'
@@ -113,16 +114,17 @@ const GlobalNavLinks = ({
         const isSelected = link.name === selectedLink
         return (
           <li key={`global-nav-link-${link.name}`}>
-            <a
-              id={link.id}
-              data-cy={link.id}
-              className={isSelected ? 'selected' : ''}
-              href={link.url}
-              onClick={(event) => {
-                handleClick(event, link.name, link.url)
-              }}>
-              {link.label}
-            </a>
+            <Link href={link.url}>
+              <a
+                id={link.id}
+                data-cy={link.id}
+                className={isSelected ? 'selected' : ''}
+                onClick={(event) => {
+                  handleClick(event, link.name, link.url)
+                }}>
+                {link.label}
+              </a>
+            </Link>
           </li>
         )
       })}

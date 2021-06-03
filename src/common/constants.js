@@ -25,7 +25,6 @@ export const CACHE_KEY_COLOR_MODE = 'pocket-color-mode'
 export const CACHE_KEY_LIST_MODE = 'pocket-list-mode'
 export const CACHE_KEY_SORT_OPTIONS = 'pocket-sort-options'
 export const CACHE_KEY_RELEASE_VERSION = 'pocket-release-version'
-
 export const CACHE_KEY_HOME_STORED_TOPICS = 'pocket-home-stored-topics'
 
 export const RELEASE_NOTES_VERSION = 'mar-23-2021'
@@ -38,11 +37,10 @@ export const GREENHOUSE_JOBS_URL = 'https://boards-api.greenhouse.io/v1/boards/p
 
 // SNOWPLOW
 export const API_USER_ID = 89624 // Pocket backend identifier for an API user used in Snowplow analytic events
-export const SNOWPLOW_SCRIPT_URL = 'https://assets.getpocket.com/web-utilities/public/static/te.js'
-export const SNOWPLOW_SCRIPT_URL_DEV = 'https://assets.getpocket.com/web-utilities/public/static/sp.js'
-export const SNOWPLOW_SCRIPT = process.env.SHOW_DEV === 'included'
-  ? SNOWPLOW_SCRIPT_URL_DEV
-  : SNOWPLOW_SCRIPT_URL
+export const SNOWPLOW_SCRIPT = 'https://assets.getpocket.com/web-utilities/public/static/te-2.18.js'
+export const SNOWPLOW_POST_PATH = process.env.SHOW_DEV === 'included'
+  ? '/com.snowplowanalytics.snowplow/tp2'
+  : '/t/e'
 
 export const SNOWPLOW_COLLECTOR_URL = 'd.getpocket.com'
 export const SNOWPLOW_COLLECTOR_URL_DEV = 'com-getpocket-prod1.mini.snplow.net'
@@ -61,9 +59,12 @@ export const SNOWPLOW_HEARTBEAT_INTERVAL = 10 // in seconds
 export const SNOWPLOW_CONFIG = {
   appId: SNOWPLOW_APP,
   platform: 'web',
-  eventMethod: 'beacon',
+  eventMethod: 'post',
   respectDoNotTrack: false, // temporary to determine impact
-  contexts: { webPage: true, performanceTiming: true }
+  stateStorageStrategy: 'none',
+  anonymousTracking: { withServerAnonymisation: true },
+  contexts: { webPage: true, performanceTiming: true },
+  postPath: SNOWPLOW_POST_PATH
 }
 
 export const INTERNAL_DOMAINS = [
@@ -131,6 +132,7 @@ export const LOCALE_READER = [
 // Common translations
 export const LOCALE_COMMON = [
   'common',
+  'discover',
   'save-to-pocket',
   'confirm',
   'item-action',

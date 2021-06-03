@@ -9,6 +9,7 @@ import { ItemTags } from 'components/item-tags/item-tags'
 import { cardStyles } from './card-base'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
+import ReactMarkdown from 'react-markdown'
 
 /** Card
  * Item card for display.
@@ -52,6 +53,7 @@ export const Card = (props) => {
     showMedia,
     hiddenActions,
     onImageFail,
+    useMarkdown,
     // Tracking
     onItemInView,
     onOpenOriginalUrl,
@@ -68,7 +70,7 @@ export const Card = (props) => {
     title,
     thumbnail,
     publisher,
-    authors,
+    authors: passedAuthors,
     excerpt,
     read_time,
     openExternal,
@@ -121,6 +123,9 @@ export const Card = (props) => {
   )
 
   const showTags = cardShape === 'detail'
+  const authors = Array.isArray(passedAuthors)
+    ? passedAuthors?.filter((author) => author.name.length)
+    : false
 
   return (
     <article
@@ -193,7 +198,20 @@ export const Card = (props) => {
             ) : null}
           </cite>
 
-          {showExcerpt ? <p className="excerpt">{excerpt}</p> : null}
+          {showExcerpt ? (
+            <div className="excerpt">
+              {useMarkdown ? (
+                <ReactMarkdown
+                  skipHtml={true}
+                  unwrapDisallowed={true}
+                  allowedElements={['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em']}>
+                  {excerpt}
+                </ReactMarkdown>
+              ) : (
+                <p>{excerpt}</p>
+              )}
+            </div>
+          ) : null}
         </div>
       </div>
       <footer className="footer">

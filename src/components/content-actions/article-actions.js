@@ -1,5 +1,4 @@
 import { css, cx } from 'linaria'
-import { BASE_URL } from 'common/constants'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { FacebookMonoIcon } from '@pocket/web-ui'
 import { TwitterMonoIcon } from '@pocket/web-ui'
@@ -13,6 +12,14 @@ import {
   LinkedinShareButton,
   EmailShareButton
 } from 'react-share'
+import { breakpointMediumTablet } from '@pocket/web-ui'
+
+const saveButton = css`
+  min-width: 0;
+  svg {
+    margin-right: 0;
+  }
+`
 
 const shareContainer = css`
   display: flex;
@@ -20,27 +27,51 @@ const shareContainer = css`
   flex: 1;
   width: 100%;
 
-  .social-actions > div {
-    margin-bottom: 1rem;
+  .social-actions {
+    ${breakpointMediumTablet} {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+    }
+    & > div {
+      svg {
+        height: 24px;
+      }
+      margin-bottom: 1rem;
+      ${breakpointMediumTablet} {
+        font-size: 1.6rem;
+        margin-bottom: 0;
+        margin-right: 1rem;
+      }
+    }
   }
 
   button {
     line-height: 100%;
     padding: 0;
-  }
-
-  svg {
+    width: 24px;
     height: 24px;
+    position: relative;
+    border-radius: var(--borderRadius);
+    &:focus {
+      outline-offset: 2px;
+      outline-color: var(--color-actionFocus);
+    }
+    span.icon {
+      display: block;
+      margin-top: 0;
+      height: 24px;
+    }
   }
 
   .pocket-share {
-    width: 1.5rem;
     button {
       color: var(--color-textPrimary);
     }
-
-    .actionCopy {
-      display: none;
+    div {
+      width: 200px;
+      font-family: var(--fontSansSerif);
     }
   }
 
@@ -100,7 +131,7 @@ export const ArticleActions = function ({
   url,
   className
 }) {
-  const saveAction = () => onSave(url)
+  const saveAction = () => onSave(url, 'save-story-side')
 
   return (
     <div className={cx(shareContainer, className)}>
@@ -110,6 +141,8 @@ export const ArticleActions = function ({
             saveAction={saveAction}
             isAuthenticated={isAuthenticated}
             saveStatus={saveStatus}
+            hideCopy={true}
+            className={saveButton}
             id="sidebar"
           />
         </div>

@@ -59,7 +59,7 @@ export const TopicSelector = () => {
 
   // Get topicList for sections that require it
   const topics = useSelector((state) => state.topicList?.topicsByName)
-  const topicSections = useSelector((state) => state.home.topicSections)
+  const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
   const topicsKeys = Object.keys(topics)
   const topicsArray = topicsKeys.map((key) => topics[key])
 
@@ -73,12 +73,12 @@ export const TopicSelector = () => {
     'Save today’s essential reads and find them later in My List'
   ]
 
-  const journeyTitle = journeyTitles[Math.min(topicSections?.length, Math.max(0, 1))]
+  const journeyTitle = journeyTitles[Math.min(pinnedTopics?.length, Math.max(0, 1))]
 
-  const journeySubTitle = journeySubTitles[Math.min(topicSections?.length, Math.max(0, 1))]
+  const journeySubTitle = journeySubTitles[Math.min(pinnedTopics?.length, Math.max(0, 1))]
 
   const handleTopicClick = (topic) => {
-    const topicAction = topicSections.find((item) => item.topic_slug === topic.topic_slug)
+    const topicAction = pinnedTopics.find((item) => item.topic_slug === topic.topic_slug)
       ? unsetTopicSection
       : setTopicSection
 
@@ -95,7 +95,7 @@ export const TopicSelector = () => {
             <TopicPill
               handleTopicClick={handleTopicClick}
               topic={topic}
-              active={topicSections.find((item) => item.topic_slug === topic.topic_slug) || false } //prettier-ignore
+              active={pinnedTopics.find((item) => item.topic_slug === topic.topic_slug) || false } //prettier-ignore
               key={`topics-pillbox-${topic.topic}`}
             />
           ))}

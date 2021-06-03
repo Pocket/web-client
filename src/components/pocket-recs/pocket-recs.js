@@ -10,6 +10,8 @@ import {
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { POCKET_MODULE } from 'connectors/recit/recit.analytics'
 import { darkMode, sepiaMode } from '@pocket/web-ui'
+import Link from 'next/link'
+import { useTranslation } from 'next-i18next'
 
 const pocketRecsStyles = css`
   border-top: solid 3px var(--color-textPrimary);
@@ -28,9 +30,14 @@ const pocketRecsStyles = css`
 const headingStyles = css`
   font-family: var(--fontSerifAlt);
 `
-const Heading = () => (
-  <h3 className={cx('h6', headingStyles)}>More Stories from Pocket</h3>
-)
+const Heading = () => {
+  const { t } = useTranslation()
+  return (
+    <h3 className={cx('h6', headingStyles)}>
+      {t('discover:more-stories-from-pocket', 'More Stories from Pocket')}
+    </h3>
+  )
+}
 
 const publisherStyles = css`
   margin-bottom: var(--spacing050);
@@ -63,11 +70,7 @@ const publisherStyles = css`
 export const Publisher = ({ name, logo }) => (
   <div className={publisherStyles}>
     {logo ? (
-      <img
-        src={logo}
-        data-cy="pocket-rec-publisher-logo"
-        alt={`Logo for ${name}`}
-      />
+      <img src={logo} data-cy="pocket-rec-publisher-logo" alt={`Logo for ${name}`} />
     ) : (
       <span data-cy="pocket-rec-publisher-name">{name}</span>
     )}
@@ -140,14 +143,18 @@ export const Recommendation = ({
   handleClick
 }) => (
   <li className={recommendationStyles}>
-    <a onClick={handleClick} className="thumbnail" href={url}>
-      <img src={thumbnailUrl} />
-    </a>
+    <Link href={url} onClick={handleClick}>
+      <a className="thumbnail">
+        <img src={thumbnailUrl} alt={`Logo for ${name}`} />
+      </a>
+    </Link>
     <div className="details">
       <Publisher name={name} logo={logoWideBwUrl} />
-      <a onClick={handleClick} href={url}>
-        <h4 className="h5">{title}</h4>
-      </a>
+      <Link href={url} onClick={handleClick}>
+        <a>
+          <h4 className="h5">{title}</h4>
+        </a>
+      </Link>
     </div>
   </li>
 )
@@ -179,13 +186,7 @@ export const Recommendations = ({
           return null
         }
 
-        const {
-          title,
-          slug,
-          topImageUrl,
-          publisher,
-          resolvedItem
-        } = syndicated_article
+        const { title, slug, topImageUrl, publisher, resolvedItem } = syndicated_article
 
         const url = `/explore/item/${slug}`
 
@@ -216,10 +217,7 @@ export const Recommendations = ({
             <Recommendation
               title={title}
               url={url}
-              thumbnailUrl={getImageCacheUrl(
-                topImageUrl,
-                preferredThumbnailSize
-              )}
+              thumbnailUrl={getImageCacheUrl(topImageUrl, preferredThumbnailSize)}
               publisher={publisher}
               handleClick={handleClick}
             />
@@ -239,7 +237,7 @@ const PocketRecs = ({
   if (recommendations.length === 0) return null
 
   return (
-    <div className={pocketRecsStyles}>
+    <div className={cx(pocketRecsStyles, 'pocket-recs')}>
       <Heading data-cy="pocket-recs-heading" />
       <Recommendations
         data-cy="pocket-recommended-articles"

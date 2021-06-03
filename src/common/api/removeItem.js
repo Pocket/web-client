@@ -13,3 +13,14 @@ export const removeItem = (item_id) => {
     auth: true
   })
 }
+
+export const removeItemByUrl = (url) => {
+  return request({
+    path: 'v3/send',
+    method: 'POST',
+    body: JSON.stringify({
+      actions: [{ action: 'delete', url }]
+    }),
+    auth: true
+  })
+}

@@ -9,19 +9,21 @@ import PropTypes from 'prop-types'
 
 import { horizontalLargeAd } from './ad-sizes'
 import { horizontalMediumAd } from './ad-sizes'
+import { horizontalSmallAd } from './ad-sizes'
 import { verticalSidebarAd } from './ad-sizes'
 
 import { POCKET_AD_UNIT_PATH } from './ad-helpers'
+import { REFRESH_KEY } from './ad-helpers'
+import { REFRESH_VALUE } from './ad-helpers'
 import { gtagPromise } from './ad-helpers'
 import { defineAdSlot } from './ad-helpers'
 import { loadAd } from './ad-helpers'
+import { createSizeMapping } from './ad-helpers'
 
 import loadAdLibraries from './load-third-party-scripts'
-
 import { getEtpValue } from 'common/utilities/third-party/etp-checker'
-import { once } from 'common/utilities/once/once'
-
 import { fontSansSerif, fontSize085, spacing050 } from '@pocket/web-ui'
+import { once } from '@pocket/web-utilities/once'
 
 export const AD_TYPE_VERTICAL = 'vertical'
 export const AD_TYPE_HORIZONTAL_LG = 'horizontal-large'
@@ -40,11 +42,13 @@ export const initPageAdConfig = ({
   urlPath,
   iabTopCategory,
   iabSubCategory,
+  usePersonalized,
   legacyId: syndicatedArticleId,
   nav,
   etpValue
 }) => {
   // values here have character length max of 20 for keys, 40 for values
+  const personalized = usePersonalized ? 0 : 1
   global.googletag
     .pubads()
     .setTargeting('URL', [`${urlPath}`])
@@ -54,17 +58,28 @@ export const initPageAdConfig = ({
     .setTargeting('Nav', [])
     .setTargeting('ETPType', [`${etpValue}`])
 
-  global.googletag.enableServices()
+  // Number of seconds to wait after the slot becomes viewable.
+  const SECONDS_TO_WAIT_AFTER_VIEWABILITY = 8
 
-  global.apstag.fetchBids(
-    {
-      timeout: 2e3
-    },
-    function (bids) {
-      // Initializes apstag bids, leveraging the Google size mapping for ad slots defined above
-      apstag.setDisplayBids()
+  // adds a listener for ad slots that have a refresh attribute on them,
+  // so they don't fire a refresh until having been viewable on the page
+  // for at least N number of seconds
+  const refreshFunction = once((event) => {
+    let slot = event.slot
+    if (slot.getTargeting(REFRESH_KEY).indexOf(REFRESH_VALUE) > -1) {
+      setTimeout(function () {
+        pwpbjs.que.push(function () {
+          pubwiseLazyLoad([slot], false)
+        })
+      }, SECONDS_TO_WAIT_AFTER_VIEWABILITY * 1000)
     }
-  )
+  })
+
+  global.googletag.pubads().addEventListener('impressionViewable', refreshFunction)
+
+  global.googletag.pubads().disableInitialLoad()
+  global.googletag.pubads().setRequestNonPersonalizedAds(personalized)
+  global.googletag.enableServices()
 }
 
 export const getAdDefaults = (type) => {
@@ -93,14 +108,12 @@ const initAdMetadata = (targetingMetadata) => {
   // load third-party ad scripts
   loadAdLibraries()
 
-  return Promise.all([getEtpValue(maxWaitTilAdsLoad), gtagPromise()]).then(
-    ([etpValue]) => {
-      initPageAdConfig({
-        ...targetingMetadata,
-        etpValue
-      })
-    }
-  )
+  return Promise.all([getEtpValue(maxWaitTilAdsLoad), gtagPromise()]).then(([etpValue]) => {
+    initPageAdConfig({
+      ...targetingMetadata,
+      etpValue
+    })
+  })
 }
 
 const initAdMetadataOnce = once(initAdMetadata)
@@ -128,9 +141,11 @@ const ProgrammaticAd = ({
   positionAlias,
   adUnitPath,
   adTargetingMetadata,
+  usePersonalized,
   showAd,
   adLabel,
-  instanceStyles
+  instanceStyles,
+  refreshRate
 }) => {
   if (!showAd) return null
 
@@ -143,16 +158,19 @@ const ProgrammaticAd = ({
         ...getAdDefaults(type),
         id,
         positionAlias,
-        adUnitPath
+        adUnitPath,
+        refreshRate
       })
     })
 
     // attempt to init ad code here if it hasn't run already
     initAdMetadataOnce({
       ...adTargetingMetadata,
+      usePersonalized,
       urlPath: window.location.pathname
     })
       .then(() => {
+        global.googletag.pubads()
         setLoaded(true)
         loadAd(id)
       })
@@ -162,14 +180,9 @@ const ProgrammaticAd = ({
   return showAd && isLoaded ? (
     <React.Fragment>
       {/*'syndication-ad' here helps ad team target an ad's label and hide if the ad is an in-house ad*/}
-      <div
-        className={cx(
-          programmaticAdWrapperStyles,
-          instanceStyles,
-          'syndication-ad'
-        )}>
+      <div className={cx(programmaticAdWrapperStyles, 'syndication-ad', instanceStyles)}>
         <p className="label">{adLabel}</p>
-        <div id={id} />
+        <div id={id} data-refreshrate={refreshRate} />
       </div>
     </React.Fragment>
   ) : null
@@ -183,11 +196,7 @@ ProgrammaticAd.propTypes = {
   /**
    * A string describing which ad sizes to map to this ad slot
    */
-  type: PropTypes.oneOf([
-    AD_TYPE_VERTICAL,
-    AD_TYPE_HORIZONTAL_M,
-    AD_TYPE_HORIZONTAL_LG
-  ]).isRequired,
+  type: PropTypes.oneOf([AD_TYPE_VERTICAL, AD_TYPE_HORIZONTAL_M, AD_TYPE_HORIZONTAL_LG]).isRequired,
   /**
    * A name given to the ad, able to be tracked by the programmatic team for their forecasting and analytics
    */
@@ -203,14 +212,20 @@ ProgrammaticAd.propTypes = {
   /**
    * A Linaria css`` ruleset to be used as additional styling for the ad instance
    */
-  instanceStyles: PropTypes.string
+  instanceStyles: PropTypes.string,
+  /**
+   * Refresh rate of an ad slot in seconds. If provided, this ad is
+   * permitted to refresh at the given interval
+   */
+  refreshRate: PropTypes.number
 }
 
 ProgrammaticAd.defaultProps = {
   positionAlias: 'NO-POSITION-GIVEN',
   adUnitPath: POCKET_AD_UNIT_PATH,
   adLabel: 'Advertisement',
-  instanceStyles: null
+  instanceStyles: null,
+  refreshRate: null
 }
 
 export default ProgrammaticAd

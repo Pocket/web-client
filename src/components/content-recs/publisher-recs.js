@@ -7,6 +7,15 @@ import { PUBLISHER_MODULE } from 'connectors/recit/recit.analytics'
 import { darkMode, sepiaMode } from '@pocket/web-ui'
 import { Trans } from 'next-i18next'
 
+const publisherWrap = css`
+  & > div {
+    position: sticky;
+    top: 6rem;
+    margin: 0 0 4rem;
+    margin-top: -22px;
+  }
+`
+
 const publisherStyles = css`
   img {
     width: 60px;
@@ -85,12 +94,8 @@ const recommendedArticleStyles = css`
 
 export const RecommendedArticle = ({ title, saveCount, targetUrl, handleClick }) => (
   <li className={recommendedArticleStyles}>
-    <a
-      onClick={handleClick}
-      className="title"
-      href={targetUrl}
-      /*eslint-disable-next-line*/
-      target="_blank">
+    {/*eslint-disable-next-line*/}
+    <a onClick={handleClick} className="title" href={targetUrl} target="_blank">
       {title}
     </a>
     <SaveCount count={saveCount} />
@@ -105,7 +110,6 @@ const recommendationsStyles = css`
 const RecommendedArticles = ({
   recommendations,
   maxRecommendations,
-  handleRecInteraction,
   handleRecImpression,
   handleRecClick
 }) => {
@@ -158,7 +162,7 @@ const RecommendedArticles = ({
   )
 }
 
-const PublisherRecs = ({
+export const PublisherRecs = ({
   publisher,
   recommendations,
   maxRecommendations,
@@ -168,15 +172,17 @@ const PublisherRecs = ({
   if (recommendations.length === 0) return null
 
   return (
-    <div>
-      <Publisher {...publisher} data-cy="publisher-header" />
-      <RecommendedArticles
-        data-cy="recommended-articles"
-        recommendations={recommendations}
-        maxRecommendations={maxRecommendations}
-        handleRecImpression={handleRecImpression}
-        handleRecClick={handleRecClick}
-      />
+    <div className={publisherWrap}>
+      <div>
+        <Publisher {...publisher} data-cy="publisher-header" />
+        <RecommendedArticles
+          data-cy="recommended-articles"
+          recommendations={recommendations}
+          maxRecommendations={maxRecommendations}
+          handleRecImpression={handleRecImpression}
+          handleRecClick={handleRecClick}
+        />
+      </div>
     </div>
   )
 }
@@ -215,7 +221,5 @@ PublisherRecs.defaultProps = {
   recommendations: [],
   maxRecommendations: 3,
   handleRecImpression() {},
-  handleRecClicl() {}
+  handleRecClick() {}
 }
-
-export default PublisherRecs

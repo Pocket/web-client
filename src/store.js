@@ -12,6 +12,9 @@ import { userReducers, userSagas } from 'connectors/user/user.state'
 import { userTagsSagas } from 'containers/my-list/tags-page/tags-page.state'
 import { userTagsReducers } from 'containers/my-list/tags-page/tags-page.state'
 
+import { settingsReducers } from 'connectors/settings/settings.state'
+import { settingsSagas } from 'connectors/settings/settings.state'
+
 import { userSearchReducers } from 'connectors/search/search.state'
 import { userSearchSagas } from 'connectors/search/search.state'
 
@@ -125,6 +128,7 @@ const globalReducers = {
   app: appReducers, // App wide (mostly example at this time)
   oneTrust: oneTrustReducers, // One Trust Readiness
   user: userReducers, // User profile and auth,
+  settings: settingsReducers, // User defined settings
   features: featureReducers, // Feature flags (very basic start)
   topicList: topicListReducers, // Valid topics list and active topic
   recit: recitReducers, // Recommended articles, both publisher and pocket
@@ -148,6 +152,7 @@ function* rootSaga() {
   yield all([
     ...appSagas,
     ...userSagas,
+    ...settingsSagas,
     ...userTagsSagas,
     ...featureSagas,
     ...snowplowSagas,
@@ -184,8 +189,8 @@ export const initializeStore = () => {
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-          name: 'Pocket Web Client',
-          actionsBlacklist: 'SNOWPLOW_'
+          name: 'Pocket Web Client'
+          // actionsBlacklist: 'SNOWPLOW_'
         })
       : compose
 

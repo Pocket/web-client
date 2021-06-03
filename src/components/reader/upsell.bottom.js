@@ -30,6 +30,10 @@ import { PREMIUM_URL } from 'common/constants'
 
 const borderStyles = css`
   border-top: 2px solid var(--color-dividerTertiary);
+
+  @media print {
+    display: none;
+  }
 `
 
 const upsellWrapper = css`
