@@ -15,7 +15,7 @@ export function ActionsCollection({ id, position }) {
 
   if (!item) return null
 
-  const { url, save_status = 'unsaved' } = item
+  const { save_url: url, save_status = 'unsaved' } = item
 
   // Prep save action
   const onSave = () => {

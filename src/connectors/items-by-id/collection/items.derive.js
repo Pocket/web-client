@@ -1,3 +1,5 @@
+import { BASE_URL } from 'common/constants'
+
 export function deriveCollectionItems(response) {
   /**
  * @title {string} The most appropriate title to show
@@ -16,7 +18,7 @@ export function deriveCollectionItems(response) {
       thumbnail: collectionItem.thumbnail,
       publisher: 'Pocket',
       excerpt: collectionItem.excerpt,
-      save_url: collectionUrl(collectionItem),
+      save_url: saveUrl(collectionItem),
       open_url: collectionUrl(collectionItem),
       syndicated: false,
       original_url: collectionUrl(collectionItem),
@@ -29,5 +31,9 @@ export function deriveCollectionItems(response) {
 
 function collectionUrl(collectionItem) {
   return `/collections/${collectionItem.slug}`
+}
+
+function saveUrl(collectionItem) {
+  return `${BASE_URL}/collections/${collectionItem.slug}`
 }
 
