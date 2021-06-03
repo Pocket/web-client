@@ -97,7 +97,8 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   // Hydrate user features
   useEffect(() => {
-    if (user_status === 'pending' || user_status === 'invalid') return null
+    if (user_status === 'pending') return null
+    if (user_status === 'invalid') return dispatch(featuresHydrate({}))
 
     const hydrateFeatures = async () => {
       const features = await fetchUnleashData(user_id, sess_guid, birth)
