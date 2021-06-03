@@ -9,8 +9,8 @@ const app = next({ dev: true })
 const handle = app.getRequestHandler()
 
 var options = {
-  key: fs.readFileSync('.scripts/certificates/key.pem'),
-  cert: fs.readFileSync('.scripts/certificates/cert.pem')
+  key: fs.readFileSync('./localhost.web-client.getpocket.com-key.pem'),
+  cert: fs.readFileSync('./localhost.web-client.getpocket.com.pem')
 }
 
 app.prepare().then(() => {
