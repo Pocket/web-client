@@ -9,6 +9,7 @@ import { breakpointSmallHandset } from '@pocket/web-ui' // 399
 import { SaveIcon } from '@pocket/web-ui'
 import { SIGNUP_URL } from 'common/constants'
 import laptopImg from 'static/images/laptop-mylist.png'
+import { Trans, useTranslation } from 'next-i18next'
 
 const wrapper = css`
   display: grid;
@@ -59,7 +60,7 @@ const wrapper = css`
 
   .icon {
     font-size: 1.3rem;
-    margin-top: -.25rem;
+    margin-top: -0.25rem;
   }
 
   ${breakpointLargeTablet} {
@@ -130,14 +131,19 @@ const wrapper = css`
 `
 
 export function CallOutBuildHome() {
+  const { t } = useTranslation()
   return (
     <div className={wrapper} data-cy="signup-module">
       <aside>
-        <p className="h3 title">Build a home for everything that interests&nbsp;you</p>
+        <p className="h3 title">
+          {t('call-out:build-a-home', 'Build a home for everything that interests&nbsp;you')}
+        </p>
         <p className="subtext">
-          Add the <SaveIcon id="Pocket" title="Pocket" /> button to your browser to
-          collect articles, videos, and links from across the web. Use our app
-          to enjoy them on any device in a distraction-free environment.
+          <Trans i18nKey="call-out:add-pocket-button">
+            Add the <SaveIcon id="Pocket" title="Pocket" /> button to your browser to collect
+            articles, videos, and links from across the web. Use our app to enjoy them on any device
+            in a distraction-free environment.
+          </Trans>
         </p>
         <Button
           id="explore-signup-hero" // needed for snowplow identifier
@@ -148,7 +154,7 @@ export function CallOutBuildHome() {
         </Button>
       </aside>
       <div className="img-wrapper">
-        <img src={laptopImg} />
+        <img src={laptopImg} alt="" />
       </div>
     </div>
   )
