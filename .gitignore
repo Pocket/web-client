@@ -99,4 +99,5 @@ cdktf.out/
 .aws/dist/
 
 # Certificates 
-certificates/
+/localhost.web-client.getpocket.com-key.pem
+/localhost.web-client.getpocket.com.pem
