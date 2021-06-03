@@ -102,10 +102,13 @@ export const cardStyles = css`
       display: none;
       padding: 0;
     }
-    &:after {
+  }
+
+  .authors + .publisher {
+    &:before {
       content: '·';
       display: inline-block;
-      padding: 0 0 0 0.625rem;
+      padding: 0 0.625rem 0 0;
     }
   }
 
