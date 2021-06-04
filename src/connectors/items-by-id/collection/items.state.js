@@ -1,26 +1,22 @@
 import { put, takeEvery } from 'redux-saga/effects'
-
-import { arrayToObject } from 'common/utilities'
-import { getCollections as apiFetchCollections } from 'common/api/collections'
-import { deriveCollectionItems } from 'connectors/items-by-id/collection/items.derive'
-
 import { saveItem as saveItemAPI } from 'common/api/saveItem'
+import { deriveCollectionStories } from './items.derive.js'
+import { arrayToObject } from 'common/utilities'
 
 import { COLLECTION_ITEMS_REQUEST } from 'actions'
-import { COLLECTION_ITEMS_REQUEST_SUCCESS } from 'actions'
-import { COLLECTION_ITEMS_REQUEST_FAILURE } from 'actions'
 import { COLLECTION_ITEMS_HYDRATE } from 'actions'
+import { COLLECTION_ITEMS_HYDRATE_SUCCESS } from 'actions'
+import { COLLECTION_ITEMS_HYDRATE_FAILURE } from 'actions'
 import { COLLECTION_ITEMS_SAVE_REQUEST } from 'actions'
 import { COLLECTION_ITEMS_SAVE_SUCCESS } from 'actions'
 import { COLLECTION_ITEMS_SAVE_FAILURE } from 'actions'
 import { COLLECTION_ITEMS_NO_IMAGE } from 'actions'
-
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getCollectionsItems = () => ({ type: COLLECTION_ITEMS_REQUEST })
-export const hydrateItems = (hydrated) => ({ type: COLLECTION_ITEMS_HYDRATE, hydrated }) //prettier-ignore
+export const hydrateItems = (stories) => ({ type: COLLECTION_ITEMS_HYDRATE, stories }) //prettier-ignore
 export const saveItem = (id, url) => ({type: COLLECTION_ITEMS_SAVE_REQUEST, id, url}) //prettier-ignore
 export const setNoImage = (id) => ({ type: COLLECTION_ITEMS_NO_IMAGE, id })
 
@@ -30,9 +26,9 @@ const initialState = {}
 
 export const collectionItemsReducers = (state = initialState, action) => {
   switch (action.type) {
-    case COLLECTION_ITEMS_HYDRATE: {
-      const { hydrated } = action
-      return { ...state, ...hydrated }
+    case COLLECTION_ITEMS_HYDRATE_SUCCESS: {
+      const { storiesById } = action
+      return { ...state, ...storiesById }
     }
 
     case COLLECTION_ITEMS_SAVE_REQUEST: {
@@ -55,11 +51,6 @@ export const collectionItemsReducers = (state = initialState, action) => {
       const item = state[id]
       const itemDraft = { ...item, noImage: true }
       return { ...state, [id]: itemDraft }
-    }
-
-    case COLLECTION_ITEMS_REQUEST_SUCCESS: {
-      const { collectionItemsById } = action
-      return { ...state, ...collectionItemsById }
     }
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
@@ -88,7 +79,7 @@ export function updateSaveStatus(state, id, save_status) {
  --------------------------------------------------------------- */
 export const collectionItemsSagas = [
   takeEvery(COLLECTION_ITEMS_SAVE_REQUEST, itemsSaveRequest),
-  takeEvery(COLLECTION_ITEMS_REQUEST, collectionItemsRequest)
+  takeEvery(COLLECTION_ITEMS_HYDRATE, itemsDerive)
 ]
 
 /** SAGA :: RESPONDERS
@@ -107,26 +98,14 @@ function* itemsSaveRequest(action) {
   }
 }
 
-function* collectionItemsRequest() {
+function* itemsDerive(action) {
   try {
-    const collectionItemsById = yield fetchCollections()
-    yield put({ type: COLLECTION_ITEMS_REQUEST_SUCCESS, collectionItemsById })
+    const { stories } = action
+    const derivedStories = deriveCollectionStories(stories)
+    const storiesById = arrayToObject(derivedStories, 'item_id')
+
+    yield put({ type: COLLECTION_ITEMS_HYDRATE_SUCCESS, storiesById })
   } catch (error) {
-    yield put({ type: COLLECTION_ITEMS_REQUEST_FAILURE, error })
-  }
-}
-
-export async function fetchCollections() {
-  try {
-    const response = await apiFetchCollections()
-
-    if (!response) return { error: 'No data found' }
-
-    const derivedCollections = await deriveCollectionItems(response)
-    const collectionItemsById = arrayToObject(derivedCollections, 'slug')
-
-    return collectionItemsById
-  } catch (error) {
-    console.log('items.state.fetchCollections', error)
+    yield put({ type: COLLECTION_ITEMS_HYDRATE_FAILURE, error })
   }
 }

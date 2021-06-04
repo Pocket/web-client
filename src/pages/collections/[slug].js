@@ -20,7 +20,8 @@ import { wrapper } from 'store'
   --------------------------------------------------------------- */
 export const getStaticPaths = async () => {
   const collections = await fetchCollections()
-  const paths = collections.map((collection) => `/collections/${collection.slug}`)
+  const paths = Object.keys(collections).map((collection) => `/collections/${collection.slug}`)
+
   return { paths, fallback: 'blocking' }
 }
 
@@ -36,16 +37,16 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store, params, loc
 
   // Hydrating initial state with an async request. This will block the
   // page from loading. Do this for SEO/crawler purposes
-  const { itemsById, collection } = await fetchCollectionBySlug({ slug })
+  const { stories, collection } = await fetchCollectionBySlug({ slug })
   const topicsByName = await fetchTopicList(true)
 
   // No article found
-  if (!collection || !itemsById) return { props: { ...defaultProps, statusCode: 404 } }
+  if (!collection || !stories) return { props: { ...defaultProps, statusCode: 404 } }
 
   // Since ssr will not wait for side effects to resolve this dispatch needs to be pure
   dispatch(hydrateTopicList({ topicsByName }))
   dispatch(hydrateCollections(collection))
-  dispatch(hydrateItems(itemsById))
+  dispatch(hydrateItems(stories))
 
   // end the saga
   dispatch(END)
