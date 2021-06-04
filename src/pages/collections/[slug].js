@@ -5,7 +5,7 @@ import { fetchTopicList } from 'connectors/topic-list/topic-list.state'
 import { hydrateTopicList } from 'connectors/topic-list/topic-list.state'
 
 import { hydrateCollections } from 'containers/collections/collections.state'
-import { hydrateItems } from 'connectors/items-by-id/collection/items.state'
+import { hydrateStories } from 'connectors/items-by-id/collection/stories.state'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
 import { END } from 'redux-saga'
@@ -46,7 +46,7 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store, params, loc
   // Since ssr will not wait for side effects to resolve this dispatch needs to be pure
   dispatch(hydrateTopicList({ topicsByName }))
   dispatch(hydrateCollections(collection))
-  dispatch(hydrateItems(stories))
+  dispatch(hydrateStories(stories))
 
   // end the saga
   dispatch(END)

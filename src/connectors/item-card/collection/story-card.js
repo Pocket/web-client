@@ -13,7 +13,7 @@ import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
 export function ItemCard({ id, cardShape, className, showExcerpt = false, position }) {
   const dispatch = useDispatch()
   // Get data from state
-  const item = useSelector((state) => state.collectionItemsById[id])
+  const item = useSelector((state) => state.collectionStoriesById[id])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
   if (!item) return null
