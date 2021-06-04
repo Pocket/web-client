@@ -132,7 +132,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
                 ))
               : null}
 
-            {authors ? authors?.map((author) => <AuthorBio {...author} />) : null}
+            {authors ? authors?.map((author) => <AuthorBio key={author.name} {...author} />) : null}
           </div>
         </section>
 

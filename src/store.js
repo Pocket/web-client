@@ -33,8 +33,8 @@ import { discoverHomeSagas } from 'containers/discover/discover.state'
 import { collectionsReducers } from 'containers/collections/collections.state'
 import { collectionsSagas } from 'containers/collections/collections.state'
 
-import { collectionItemsReducers } from 'connectors/items-by-id/collection/items.state'
-import { collectionItemsSagas } from 'connectors/items-by-id/collection/items.state'
+import { collectionStoriesReducers } from 'connectors/items-by-id/collection/stories.state'
+import { collectionStoriesSagas } from 'connectors/items-by-id/collection/stories.state'
 
 import { topicListReducers } from 'connectors/topic-list/topic-list.state'
 import { topicListSagas } from 'connectors/topic-list/topic-list.state'
@@ -100,7 +100,7 @@ const discoverReducers = {
 
 const collectionReducer = {
   collectionsBySlug: collectionsReducers,
-  collectionItemsById: collectionItemsReducers
+  collectionStoriesById: collectionStoriesReducers
 }
 
 const libraryReducers = {
@@ -163,7 +163,7 @@ function* rootSaga() {
     ...discoverItemsSagas,
     ...discoverHomeSagas,
     ...collectionsSagas,
-    ...collectionItemsSagas,
+    ...collectionStoriesSagas,
     ...topicListSagas,
     ...topicSagas,
     ...pocketHitsSagas,

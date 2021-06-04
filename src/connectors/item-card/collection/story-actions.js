@@ -1,7 +1,7 @@
 import React from 'react'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { useSelector, useDispatch } from 'react-redux'
-import { saveItem } from 'connectors/items-by-id/collection/items.state'
+import { saveStory } from 'connectors/items-by-id/collection/stories.state'
 
 import { itemActionStyle } from 'components/item-actions/base'
 
@@ -11,7 +11,7 @@ import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
 export function ActionsCollection({ id, position }) {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const item = useSelector((state) => state.collectionItemsById[id])
+  const item = useSelector((state) => state.collectionStoriesById[id])
 
   if (!item) return null
 
@@ -19,7 +19,7 @@ export function ActionsCollection({ id, position }) {
 
   // Prep save action
   const onSave = () => {
-    dispatch(saveItem(id, url))
+    dispatch(saveStory(id, url))
     dispatch(trackItemSave(position, { url }, 'collection.story.save'))
   }
 
