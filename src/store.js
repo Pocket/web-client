@@ -95,8 +95,11 @@ const discoverReducers = {
   discoverHome: discoverHomeReducers,
   discoverTopic: topicReducers,
   itemToReport: itemReportReducers,
-  syndicatedArticle: syndicatedArticleReducers,
-  collections: collectionsReducers,
+  syndicatedArticle: syndicatedArticleReducers
+}
+
+const collectionReducer = {
+  collectionsBySlug: collectionsReducers,
   collectionItemsById: collectionItemsReducers
 }
 
@@ -141,6 +144,7 @@ const rootReducer = combineReducers({
   ...globalReducers,
   ...marketingReducers,
   ...discoverReducers,
+  ...collectionReducer,
   ...libraryReducers,
   ...readerReducers,
   home: homeReducers
