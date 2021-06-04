@@ -24,7 +24,7 @@ export function ItemCard({ id, position }) {
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onImpression = () => dispatch(trackItemImpression(position, item, 'collection.impression'))
+  const onImpression = () => dispatch(trackItemImpression(position, { url }, 'collection.impression'))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
   const onOpen = () => dispatch(trackItemOpen(position, { url }, 'collection.open', url))
 
