@@ -1,3 +1,10 @@
+## [1.14.47](https://github.com/Pocket/web-client/compare/v1.14.46...v1.14.47) (2021-06-04)
+
+
+### Bug Fixes
+
+* **discover:** localize callouts ([4dd2e78](https://github.com/Pocket/web-client/commit/4dd2e78ff835ee4865b76387ef207a7fa3a720e1))
+
 ## [1.14.46](https://github.com/Pocket/web-client/compare/v1.14.45...v1.14.46) (2021-06-04)
 
 
