@@ -1,3 +1,18 @@
+## [1.14.46](https://github.com/Pocket/web-client/compare/v1.14.45...v1.14.46) (2021-06-04)
+
+
+### Bug Fixes
+
+* **features:** hydrate features with empty object when logged out ([f37c0d2](https://github.com/Pocket/web-client/commit/f37c0d2eaaa94a36d951eb8dc7a3f2aa31f1dc40))
+
+## [1.14.45](https://github.com/Pocket/web-client/compare/v1.14.44...v1.14.45) (2021-06-03)
+
+
+### Bug Fixes
+
+* **list:** update spacing on detail mode ([4cc2e04](https://github.com/Pocket/web-client/commit/4cc2e0495caccc3b6f6ae50d3bac0f3ee45668c8))
+* **my-list:** use lazy-loading instead of polling ([ac11f0c](https://github.com/Pocket/web-client/commit/ac11f0c8d0eaef945304b01f16b0f5546c238cd2))
+
 ## [1.14.44](https://github.com/Pocket/web-client/compare/v1.14.43...v1.14.44) (2021-06-03)
 
 

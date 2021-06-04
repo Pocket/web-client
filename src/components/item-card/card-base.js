@@ -373,9 +373,13 @@ export const cardStyles = css`
   --------------------------------------------------------------- */
   &.detail {
     grid-column: span 12;
-    height: 155px;
+    height: 160px;
     padding: 1em 0;
     border-bottom: 1px solid var(--color-dividerTertiary);
+
+    &:last-of-type{
+      border-bottom: none;
+    }
 
     .media {
       grid-column: span 2;
