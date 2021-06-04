@@ -12,11 +12,13 @@ import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
  */
 export function ItemCard({ id, cardShape, className, showExcerpt = false, position }) {
   const dispatch = useDispatch()
-
   // Get data from state
   const item = useSelector((state) => state.collectionItemsById[id])
-  const { open_url } = item
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
+
+  if (!item) return null
+
+  const { url } = item
   const onImageFail = () => dispatch(setNoImage(id))
 
   /**
@@ -35,7 +37,7 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
       className={className}
       cardShape={cardShape}
       showExcerpt={showExcerpt}
-      openUrl={open_url}
+      openUrl={url}
       useMarkdown={true}
       // Tracking
       onItemInView={onItemInView}

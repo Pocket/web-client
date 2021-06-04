@@ -41,7 +41,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
   const isPremium = useSelector((state) => state.user?.premium_status)
   const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
   const trackingEnabled = useSelector((state) => state.oneTrust?.tracking?.enabled)
-  const data = useSelector((state) => state.collections[slug]) || {}
+  const data = useSelector((state) => state.collectionsBySlug[slug]) || {}
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
@@ -83,7 +83,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
             <ParsedHeadline title={title} description={excerpt} useMarkdown={true} />
             {authors ? (
               <AuthorByline
-                url="/explore"
+                url="/collections"
                 name="Pocket Collections"
                 showAuthors={true}
                 authorNames={authorNames}
