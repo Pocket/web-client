@@ -22,7 +22,9 @@ const getCollectionBySlug = gql`
           name
         }
         publisher
-        item_id: externalId
+        item {
+          itemId
+        }
       }
     }
   }
