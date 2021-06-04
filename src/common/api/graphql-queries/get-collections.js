@@ -7,11 +7,15 @@ const getCollections = gql`
         slug
         title
         excerpt
-        status
         intro
         thumbnail: imageUrl
         authors {
           name
+          bio
+          imageUrl
+        }
+        stories {
+          thumbnail: imageUrl
         }
       }
     }

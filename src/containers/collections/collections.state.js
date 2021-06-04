@@ -44,8 +44,8 @@ export const collectionsReducers = (state = initialState, action) => {
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE:
-      const { collections } = action.payload
-      return { ...state, ...collections }
+      const { collectionsBySlug } = action.payload
+      return { ...state, ...collectionsBySlug }
 
     case COLLECTION_PAGE_SAVE_REQUEST: {
       const { slug } = action
@@ -149,7 +149,15 @@ export async function fetchCollections() {
   try {
     const response = await getCollections()
     if (!response) return { error: 'No data found' }
-    return response
+
+    const derivedCollections = response.map((collection) => {
+      const slug = collection.slug
+      const url = `/collections/${slug}`
+      const firstImage = collection.stories[0].thumbnail
+      const authorImage = collection.authors[0].imageUrl
+      return { ...collection, thumbnail: authorImage || firstImage, url, item_id: slug }
+    })
+    return arrayToObject(derivedCollections, 'slug')
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.log('collection.state.collections', error)
@@ -167,17 +175,25 @@ export async function fetchCollectionBySlug({ slug }) {
     if (!response) return { error: 'No data found' }
 
     const { stories: passedStories, ...rest } = response
+    const url = `/collections/${slug}`
 
     // Derive items
-    const stories = passedStories.map((item) => item.item_id)
+    const stories = passedStories.map((item) => item.item.itemId)
     const urls = passedStories.map((item) => item.url)
-    const itemsById = arrayToObject(passedStories, 'item_id')
 
     return {
       collection: {
-        [slug]: { stories, urls, pageSaveStatus: 'unsaved', saveStatus: 'unsaved', ...rest }
+        [slug]: {
+          itemId: slug,
+          stories,
+          url,
+          urls,
+          pageSaveStatus: 'unsaved',
+          saveStatus: 'unsaved',
+          ...rest
+        }
       },
-      itemsById
+      stories: passedStories
     }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
