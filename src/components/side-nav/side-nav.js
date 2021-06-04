@@ -8,6 +8,7 @@ import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
 import { ReadingIcon } from '@pocket/web-ui'
 import { css, cx } from 'linaria'
+import { CollectionsIcon } from '@pocket/web-ui'
 
 import { useInView } from 'react-intersection-observer'
 
@@ -176,12 +177,8 @@ export function SideNav({
       <nav role="navigation">
         {showHome ? (
           <Link href="/home">
-            <button
-              className={subActive('home')}
-              onClick={clickEvent}
-              data-cy="side-nav-home">
-              <HomeIcon className="side-nav-icon" />{' '}
-              <Trans i18nKey="nav:home">Home</Trans>
+            <button className={subActive('home')} onClick={clickEvent} data-cy="side-nav-home">
+              <HomeIcon className="side-nav-icon" /> <Trans i18nKey="nav:home">Home</Trans>
             </button>
           </Link>
         ) : null}
@@ -192,9 +189,8 @@ export function SideNav({
             onClick={clickEvent}
             ref={ref}
             data-cy="side-nav-mylist">
-            <ListViewIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:my-list">My List</Trans>
-            { showBookmark ? <BookmarkIcon newSaveCount={newSaveCount} /> : null }
+            <ListViewIcon className="side-nav-icon" /> <Trans i18nKey="nav:my-list">My List</Trans>
+            {showBookmark ? <BookmarkIcon newSaveCount={newSaveCount} /> : null}
           </button>
         </Link>
         <Link href="/explore?src=sidebar">
@@ -206,7 +202,16 @@ export function SideNav({
             <Trans i18nKey="nav:discover">Discover</Trans>
           </button>
         </Link>
-
+        <Link href="/collections">
+          <button
+            className={subActive('collections')}
+            onClick={clickEvent}
+            ref={ref}
+            data-cy="side-nav-collections">
+            <CollectionsIcon className="side-nav-icon" />{' '}
+            <Trans i18nKey="nav:collections">Collections</Trans>
+          </button>
+        </Link>
         {subset === 'home' && showTopics ? (
           <TopicsSideNav
             subActive={subActive}
@@ -214,11 +219,7 @@ export function SideNav({
             clickEvent={clickEvent}
           />
         ) : (
-          <FiltersSideNav
-            subActive={subActive}
-            pinnedTags={pinnedTags}
-            clickEvent={clickEvent}
-          />
+          <FiltersSideNav subActive={subActive} pinnedTags={pinnedTags} clickEvent={clickEvent} />
         )}
       </nav>
       <div className="bottom-nav">

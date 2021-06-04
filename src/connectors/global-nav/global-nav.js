@@ -26,6 +26,7 @@ import { TagIcon } from '@pocket/web-ui'
 import { ArticleIcon } from '@pocket/web-ui'
 import { ArchiveIcon } from '@pocket/web-ui'
 import { VideoIcon } from '@pocket/web-ui'
+import { CollectionsIcon } from '@pocket/web-ui'
 
 import { BASE_URL } from 'common/constants'
 import { LOGIN_URL } from 'common/constants'
@@ -78,9 +79,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.user?.first_name)
   const userId = useSelector((state) => state?.user?.user_id)
-  const profileUrl = showLab
-    ? `/profile/${userId}?src=navbar`
-    : `${BASE_URL}/@${userId}?src=navbar`
+  const profileUrl = showLab ? `/profile/${userId}?src=navbar` : `${BASE_URL}/@${userId}?src=navbar`
 
   const listMode = useSelector((state) => state?.app?.listMode)
   const colorMode = useSelector((state) => state?.app?.colorMode)
@@ -127,6 +126,13 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       label: t('nav:discover', 'Discover'),
       url: '/explore?src=navbar',
       icon: <DiscoverIcon />
+    },
+    {
+      name: 'collections',
+      id: 'global-nav-collections-link',
+      label: t('nav:collections', 'Collections'),
+      url: '/collections?src=navbar',
+      icon: <CollectionsIcon />
     }
   ]
 
@@ -144,6 +150,13 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       label: t('nav:my-list', 'My List'),
       url: '/my-list?src=navbar',
       icon: <ListViewIcon />
+    },
+    {
+      name: 'collections',
+      id: 'global-nav-collections-link',
+      label: t('nav:collections', 'Collections'),
+      url: '/collections?src=navbar',
+      icon: <CollectionsIcon />
     }
   ]
 
