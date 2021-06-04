@@ -59,6 +59,7 @@ export const Card = (props) => {
     onOpenOriginalUrl,
     onOpen,
     // Actions
+    actionId,
     ActionMenu,
     shortcutSelect,
     selectBulk
@@ -216,7 +217,7 @@ export const Card = (props) => {
       </div>
       <footer className="footer">
         {showTags ? <ItemTags tags={tags} /> : null}
-        {ActionMenu ? <ActionMenu id={id} position={position} /> : null}
+        {ActionMenu ? <ActionMenu id={actionId || id} position={position} /> : null}
       </footer>
     </article>
   )
