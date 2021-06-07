@@ -136,7 +136,7 @@ export function CallOutBuildHome() {
     <div className={wrapper} data-cy="signup-module">
       <aside>
         <p className="h3 title">
-          {t('call-out:build-a-home', 'Build a home for everything that interests&nbsp;you')}
+          {t('call-out:build-a-home', 'Build a home for everything that interests you')}
         </p>
         <p className="subtext">
           <Trans i18nKey="call-out:add-pocket-button">
