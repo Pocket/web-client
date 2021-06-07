@@ -20,11 +20,11 @@ export function ActionsCollection({ id, position }) {
   // Prep save action
   const onSave = () => {
     dispatch(saveItem(id, url))
-    dispatch(trackItemSave(position, item, 'collection.save'))
+    dispatch(trackItemSave(position, { url }, 'collection.save'))
   }
 
   // Open action
-  const onOpen = () => dispatch(trackItemOpen(position, item, 'collection.open', url))
+  const onOpen = () => dispatch(trackItemOpen(position, { url }, 'collection.open', url))
 
   return item ? (
     <div className={`${itemActionStyle} actions`}>

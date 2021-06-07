@@ -130,6 +130,10 @@ const contentWrapper = css`
       border-radius: 8px;
       overflow: hidden;
     }
+    embed {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .description,

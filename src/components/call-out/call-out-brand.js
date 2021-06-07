@@ -4,6 +4,7 @@ import { breakpointLargeTablet } from '@pocket/web-ui' // 1023
 import { breakpointSmallTablet } from '@pocket/web-ui' // 839
 import { breakpointLargeHandset } from '@pocket/web-ui' // 599
 import { breakpointSmallHandset } from '@pocket/web-ui' // 399
+import { useTranslation } from 'next-i18next'
 
 const wrapper = css`
   color: var(--color-textPrimary);
@@ -117,10 +118,14 @@ const wrapper = css`
 `
 
 export function CallOutBrand() {
+  const { t } = useTranslation()
+
   return (
     <div className={`${wrapper} brandingMessage`}>
       <div className="brandBlock">
-        <aside>Interesting stories for interesting people</aside>
+        <aside>
+          {t('call-out:interesting-stories', 'Interesting stories for interesting people')}
+        </aside>
         <blockquote>
           <span className="copy">
             <svg
@@ -137,8 +142,10 @@ export function CallOutBrand() {
                 d="M0 1.306c13.72 0 13.72 9.91 27.42 9.91 13.7 0 13.7-9.91 27.42-9.91 13.72 0 13.72 9.91 27.42 9.91 13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.42 9.91c13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.44 9.91"
               />
             </svg>
-            Pocket is where you’ll find fascinating stories from all across the
-            web, right here in one place.
+            {t(
+              'call-out:pocket-is-where',
+              'Pocket is where you’ll find fascinating stories from all across the web, right here in one place.'
+            )}
           </span>
         </blockquote>
       </div>

@@ -10,6 +10,7 @@ import { breakpointSmallDesktop } from '@pocket/web-ui' // 1279
 import { breakpointSmallTablet } from '@pocket/web-ui' // 839
 import { breakpointTinyTablet } from '@pocket/web-ui' // 719
 import { breakpointLargeHandset } from '@pocket/web-ui' // 599
+import { Trans, useTranslation } from 'next-i18next'
 
 const DEFAULT_ERROR = 'Oops! Something went wrong.'
 const FORM_ID = 'explore-engagement-signup'
@@ -190,11 +191,11 @@ const CallOutPocketHitsSignup = ({
   utmCampaign,
   utmSource
 }) => {
+  const { t } = useTranslation()
+
   /* Variables */
   const dispatch = useDispatch()
-  const signupRequestState = useSelector(
-    (state) => state.pocketHits.signupRequestState
-  )
+  const signupRequestState = useSelector((state) => state.pocketHits.signupRequestState)
   const signupError = useSelector((state) => state.pocketHits.signupError)
 
   const isProcessing = signupRequestState === 'pending'
@@ -218,14 +219,7 @@ const CallOutPocketHitsSignup = ({
     handleSubmit(formId)
     setActiveForm(formId)
     // track submit event here
-    dispatch(
-      pocketHitsSignupRequested(
-        email,
-        recaptchaResponseKey,
-        utmCampaign,
-        utmSource
-      )
-    )
+    dispatch(pocketHitsSignupRequested(email, recaptchaResponseKey, utmCampaign, utmSource))
   }
 
   function handleVisible() {
@@ -253,13 +247,19 @@ const CallOutPocketHitsSignup = ({
                 />
               </svg>
               {isSuccessful ? (
-                <React.Fragment>
-                  All set. You’ll get your first email from us tomorrow. Enjoy!
-                </React.Fragment>
+                <>
+                  {t(
+                    'call-out:pocket-hits-success',
+                    'All set. You’ll get your first email from us tomorrow. Enjoy!'
+                  )}
+                </>
               ) : (
-                <React.Fragment>
-                  Get a steady stream of Pocket stories that dig deep into a
-                  subject, offer a new perspective, or make you&nbsp;think.
+                <>
+                  {t(
+                    'call-out:pocket-hits-description',
+                    'Get a steady stream of Pocket stories that dig deep into a subject, offer a new perspective, or make you think.'
+                  )}
+
                   <div id="pocket-hits-call-out-signup">
                     <EmailSignupForm
                       instanceId={FORM_ID}
@@ -274,24 +274,24 @@ const CallOutPocketHitsSignup = ({
                     />
                   </div>
                   <div className="captchaDisclaimer">
-                    This site is protected by reCAPTCHA.&nbsp;
+                    {t('call-out:pocket-hits-description', 'This site is protected by reCAPTCHA.')}
                     <span>
                       <a
                         href="https://policies.google.com/privacy"
                         target="_blank"
                         rel="noopener noreferrer">
-                        Privacy
+                        {t('call-out:privacy', 'Privacy')}
                       </a>
                       &nbsp;·&nbsp;
                       <a
                         href="https://policies.google.com/terms"
                         target="_blank"
                         rel="noopener noreferrer">
-                        Terms
+                        {t('call-out:terms', 'Terms')}
                       </a>
                     </span>
                   </div>
-                </React.Fragment>
+                </>
               )}
             </span>
           </blockquote>
