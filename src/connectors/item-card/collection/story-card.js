@@ -18,7 +18,7 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
 
   if (!item) return null
 
-  const { url } = item
+  const { open_url: url } = item
   const onImageFail = () => dispatch(setNoImage(id))
 
   /**
