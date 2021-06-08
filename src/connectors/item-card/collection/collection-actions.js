@@ -1,7 +1,7 @@
 import React from 'react'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { useSelector, useDispatch } from 'react-redux'
-import { saveCollection } from 'containers/collections/collections.state'
+import { saveCollectionPage } from 'containers/collections/collections.state'
 
 import { itemActionStyle } from 'components/item-actions/base'
 
@@ -15,11 +15,11 @@ export function ActionsCollection({ id, position }) {
 
   if (!item) return null
 
-  const { save_url: url, save_status = 'unsaved' } = item
+  const { url, pageSaveStatus } = item
 
   // Prep save action
   const onSave = () => {
-    dispatch(saveCollection(id, url))
+    dispatch(saveCollectionPage(id))
     dispatch(trackItemSave(position, { url }, 'collection.save'))
   }
 
@@ -35,7 +35,7 @@ export function ActionsCollection({ id, position }) {
         openExternal={false}
         saveAction={onSave}
         isAuthenticated={isAuthenticated}
-        saveStatus={save_status}
+        saveStatus={pageSaveStatus}
         id={id}
       />
     </div>
