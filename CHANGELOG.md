@@ -1,3 +1,25 @@
+## [1.14.49](https://github.com/Pocket/web-client/compare/v1.14.48...v1.14.49) (2021-06-07)
+
+
+### Bug Fixes
+
+* **discover:** remove nbsp for widows in localized ([7e1ef3b](https://github.com/Pocket/web-client/commit/7e1ef3b1145d2d4ab4708e8b80348d5a6d2125a8))
+* **syndicated:** explicit embed width for FF ([4d38e9f](https://github.com/Pocket/web-client/commit/4d38e9f3cbd3212e13a0bce0dfdec82f9a53bdbf))
+
+## [1.14.48](https://github.com/Pocket/web-client/compare/v1.14.47...v1.14.48) (2021-06-04)
+
+
+### Bug Fixes
+
+* **snowplow:** update item object passed to collection impression ([27564cb](https://github.com/Pocket/web-client/commit/27564cb08f8bf185581c245b7a57067fbf1f1fe3))
+
+## [1.14.47](https://github.com/Pocket/web-client/compare/v1.14.46...v1.14.47) (2021-06-04)
+
+
+### Bug Fixes
+
+* **discover:** localize callouts ([4dd2e78](https://github.com/Pocket/web-client/commit/4dd2e78ff835ee4865b76387ef207a7fa3a720e1))
+
 ## [1.14.46](https://github.com/Pocket/web-client/compare/v1.14.45...v1.14.46) (2021-06-04)
 
 
