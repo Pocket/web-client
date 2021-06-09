@@ -7,7 +7,7 @@ export const CardTopic = ({ id, position }) => {
   const dispatch = useDispatch()
 
   // Get data from state
-  const impressionFired = useSelector((state) => state.home.impressions[id])
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const item = useSelector((state) => state.discoverItemsById[id])
   const { save_status, item_id, original_url, openExternal } = item
   const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : original_url

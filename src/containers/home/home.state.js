@@ -32,8 +32,6 @@ import { HOME_RECENT_SAVES_REQUEST } from 'actions'
 import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
 import { HOME_RECENT_SAVES_FAILURE } from 'actions'
 
-import { HOME_SET_IMPRESSION } from 'actions'
-
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 
 import { ITEMS_ADD_SUCCESS } from 'actions'
@@ -52,14 +50,11 @@ export const unSaveHomeItem = (id, topic) => ({ type: HOME_UNSAVE_REQUEST, id, t
 export const setTopicSection = (topic) => ({type : HOME_TOPIC_SECTION_SET, topic}) //prettier-ignore
 export const unsetTopicSection = (topic) => ({type : HOME_TOPIC_SECTION_UNSET, topic}) //prettier-ignore
 
-export const setHomeImpression = (id) => ({ type: HOME_SET_IMPRESSION, id }) //prettier-ignore
-
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
   collectionSet: [],
   recentSaves: [],
-  impressions: {},
   newSaves: 0
 }
 
@@ -90,12 +85,6 @@ export const homeReducers = (state = initialState, action) => {
       const { items } = action
       const recentSaves = new Set([...items, ...state.recentSaves])
       return { ...state, recentSaves: Array.from(recentSaves) }
-    }
-
-    case HOME_SET_IMPRESSION: {
-      const { id } = action
-      const impressions = { ...state.impressions, [id]: true }
-      return { ...state, impressions }
     }
 
     case SNOWPLOW_TRACK_PAGE_VIEW: {
