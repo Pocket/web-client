@@ -29,12 +29,12 @@ const { save_status, item_id, open_url, openExternal, recommendationId, slateLin
     position,
     destination: (save_status === 'saved' && !openExternal) ? 'internal' : 'external',
     recommendationId,
-    slateLineupId: slateLineup.id,
-    slateLineupRequestId: slateLineup.requestId,
-    slateLineupExperiment: slateLineup.experimentId,
-    slateId: slate.id,
-    slateRequestId: slate.requestId,
-    slateExperiment: slate.experimentId
+    slateLineupId: slateLineup?.id,
+    slateLineupRequestId: slateLineup?.requestId,
+    slateLineupExperiment: slateLineup?.experimentId,
+    slateId: slate?.id,
+    slateRequestId: slate?.requestId,
+    slateExperiment: slate?.experimentId
   }
 
   /**

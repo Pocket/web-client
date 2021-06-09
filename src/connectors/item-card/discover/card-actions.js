@@ -25,12 +25,12 @@ export function ActionsDiscover({ id, position }) {
     url: save_url,
     position,
     recommendationId,
-    slateLineupId: slateLineup.id,
-    slateLineupRequestId: slateLineup.requestId,
-    slateLineupExperiment: slateLineup.experimentId,
-    slateId: slate.id,
-    slateRequestId: slate.requestId,
-    slateExperiment: slate.experimentId
+    slateLineupId: slateLineup?.id,
+    slateLineupRequestId: slateLineup?.requestId,
+    slateLineupExperiment: slateLineup?.experimentId,
+    slateId: slate?.id,
+    slateRequestId: slate?.requestId,
+    slateExperiment: slate?.experimentId
   }
 
   // Prep save action
