@@ -31,7 +31,7 @@ export const IMPRESSION_REQUIREMENT_VIEWABLE = 'viewable'
  displayed for 1+ seconds)
  * @returns {{schema: *, data: {component: *, requirement: *}}} @required
  */
-const createImpressionEvent = (component, requirement) => ({
+const createImpressionEvent = ({ component, requirement = 'viewable' }) => ({
   schema: IMPRESSION_SCHEMA_URL,
   data: {
     component,

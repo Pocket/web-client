@@ -25,8 +25,7 @@ import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
 import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
 
-import { trackItemAction } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export function ActionsMyList({ id, position }) {
   const dispatch = useDispatch()
@@ -36,42 +35,52 @@ export function ActionsMyList({ id, position }) {
   const item = useSelector((state) => state.myListItemsById[id])
 
   if (!item) return null
-  const { permanent_url, status, favorite } = item
+  const { permanent_url, original_url, status, favorite } = item
+
+  const analyticsData = {
+    id,
+    url: original_url,
+    position
+  }
 
   /** ITEM MENU ITEMS
   --------------------------------------------------------------- */
   const itemShare = () => {
-    dispatch(trackItemAction(position, item, 'my-list.share'))
+    dispatch(sendSnowplowEvent('my-list.share', analyticsData))
     dispatch(itemsShareAction({ id, position }))
   }
 
   const itemDelete = () => {
-    dispatch(trackItemAction(position, item, 'my-list.delete'))
+    dispatch(sendSnowplowEvent('my-list.delete', analyticsData))
     dispatch(itemsDeleteAction([{ id, position }]))
   }
 
   const itemArchive = () => {
-    dispatch(trackItemAction(position, item, 'my-list.archive'))
+    dispatch(sendSnowplowEvent('my-list.archive', analyticsData))
     dispatch(itemsArchiveAction([{ id, position }]))
   }
   const itemUnArchive = () => {
-    // bool to denote save action
-    dispatch(trackItemAction(position, item, 'my-list.unarchive', true))
+    dispatch(sendSnowplowEvent('my-list.unarchive', analyticsData))
     dispatch(itemsUnArchiveAction([{ id, position }]))
   }
 
   const itemFavorite = () => {
-    dispatch(trackItemAction(position, item, 'my-list.favorite'))
+    dispatch(sendSnowplowEvent('my-list.favorite', analyticsData))
     dispatch(itemsFavoriteAction([{ id, position }]))
   }
   const itemUnFavorite = () => {
-    dispatch(trackItemAction(position, item, 'my-list.un-favorite'))
-    dispatch(itemsUnFavoriteAction([{ id, position }])) //prettier-ignore
+    dispatch(sendSnowplowEvent('my-list.un-favorite', analyticsData))
+    dispatch(itemsUnFavoriteAction([{ id, position }]))
   }
 
   const itemTag = () => {
-    dispatch(trackItemAction(position, item, 'my-list.tag'))
+    dispatch(sendSnowplowEvent('my-list.tag', analyticsData))
     dispatch(itemsTagAction([{ id, position }]))
+  }
+
+  const itemPermLibOpen = () => {
+    const data = { ...analyticsData, url: permanent_url }
+    dispatch(sendSnowplowEvent('my-list.card.permanent-library', data))
   }
 
   const isArchive = status === '0'
@@ -84,10 +93,6 @@ export function ActionsMyList({ id, position }) {
   const favoriteLabel = isFavorite
     ? t('item-action:unfavorite', 'Un-Favorite')
     : t('item-action:favorite', 'Favorite')
-
-  const itemPermLibOpen = () => {
-    dispatch(trackItemOpen(position, item, 'my-list.card.permanent-library'))
-  }
 
   return (
     <ItemActions

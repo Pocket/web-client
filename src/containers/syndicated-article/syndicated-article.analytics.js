@@ -135,7 +135,7 @@ export function sendSaveToSnowplow({ identifier, itemId, url }) {
   const snowplowEvent = createEngagementEvent(ENGAGEMENT_TYPE_SAVE)
 
   const uiEntity = createUiEntity({
-    type: UI_COMPONENT_BUTTON,
+    uiType: UI_COMPONENT_BUTTON,
     hierarchy: 0,
     identifier
   })

@@ -1,4 +1,5 @@
 import { getSchemaUri } from 'common/api/snowplow-analytics'
+import { getObjectWithValidKeysOnly } from 'common/utilities'
 
 /**
  * Schema information:
@@ -12,7 +13,7 @@ export const ENGAGEMENT_TYPE_REPORT = 'report'
 /**
  * Event triggered when a user engages with a UI element. Entities included:
  * always api_user, user, ui; sometimes content, ad, report.
- * @param type {(
+ * @param engagementType {(
  *          ENGAGEMENT_TYPE_GENERAL,
  *          ENGAGEMENT_TYPE_SAVE,
  *          ENGAGEMENT_TYPE_REPORT
@@ -20,14 +21,12 @@ export const ENGAGEMENT_TYPE_REPORT = 'report'
  * @param value {string} - The new value of a setting/filter, if the user engaged with something and modified its state in doing so. @optional
  * @returns {{schema: *, data: {type: *, value: *}}}
  */
-const createEngagementEvent = (type, value) => {
-  const data = { type }
-  if (value) data.value = value
-
-  return {
-    schema: ENGAGEMENT_SCHEMA_URL,
-    data
-  }
-}
+const createEngagementEvent = ({ engagementType = 'general', value }) => ({
+  schema: ENGAGEMENT_SCHEMA_URL,
+  data: getObjectWithValidKeysOnly({
+    type: engagementType,
+    value
+  })
+})
 
 export default createEngagementEvent

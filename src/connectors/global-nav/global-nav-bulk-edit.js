@@ -10,10 +10,10 @@ import { itemsUnFavoriteBatch } from 'connectors/items-by-id/my-list/items.favor
 import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
 
-import { sendBulkDeleteEvent } from './global-nav.analytics'
-import { sendBulkFavoriteEvent } from './global-nav.analytics'
-import { sendBulkArchiveEvent } from './global-nav.analytics'
-import { sendBulkTagEvent } from './global-nav.analytics'
+// import { sendBulkDeleteEvent } from './global-nav.analytics'
+// import { sendBulkFavoriteEvent } from './global-nav.analytics'
+// import { sendBulkArchiveEvent } from './global-nav.analytics'
+// import { sendBulkTagEvent } from './global-nav.analytics'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -29,14 +29,14 @@ function GlobalNavBulkEditConnected({ onClose }) {
 
   const deleteAction = () => {
     if (bulkItemsCount) {
-      dispatch(sendBulkDeleteEvent(bulkItems))
+      // dispatch(sendBulkDeleteEvent(bulkItems))
       dispatch(itemsDeleteAction(bulkItems))
     }
   }
 
   const tagAction = () => {
     if (bulkItemsCount) {
-      dispatch(sendBulkTagEvent(bulkItems))
+      // dispatch(sendBulkTagEvent(bulkItems))
       dispatch(itemsTagAction(bulkItems))
     }
   }
@@ -45,7 +45,7 @@ function GlobalNavBulkEditConnected({ onClose }) {
     batchStatus === 'archive' ? itemsArchiveBatch : itemsUnarchiveBatch
   const archiveAction = () => {
     if (bulkItemsCount) {
-      dispatch(sendBulkArchiveEvent(bulkItems, batchStatus === 'archive'))
+      // dispatch(sendBulkArchiveEvent(bulkItems, batchStatus === 'archive'))
       dispatch(archiveFunction(bulkItems))
     }
   }
@@ -54,7 +54,7 @@ function GlobalNavBulkEditConnected({ onClose }) {
     batchFavorite === 'favorite' ? itemsFavoriteBatch : itemsUnFavoriteBatch
   const favoriteAction = () => {
     if (bulkItemsCount) {
-      dispatch(sendBulkFavoriteEvent(bulkItems, batchFavorite === 'favorite'))
+      // dispatch(sendBulkFavoriteEvent(bulkItems, batchFavorite === 'favorite'))
       dispatch(favoriteFunction(bulkItems))
     }
   }

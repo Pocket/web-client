@@ -2,19 +2,7 @@ import { SideNav as SideNavComponent } from 'components/side-nav/side-nav'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 
-import { trackEngagement } from 'connectors/snowplow/snowplow.state'
-import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
-import { UI_COMPONENT_MENU } from 'connectors/snowplow/entities'
-
-/* Analytics Event */
-export const sendEngagementEvent = (label) =>
-  trackEngagement(
-    ENGAGEMENT_TYPE_GENERAL,
-    UI_COMPONENT_MENU,
-    0, // position in list (zero since it's not in list)
-    'side-nav',
-    label
-  )
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export function SideNav({ subset, isLoggedIn, tag }) {
   const dispatch = useDispatch()
@@ -25,9 +13,7 @@ export function SideNav({ subset, isLoggedIn, tag }) {
   const newSaveCount = useSelector((state) => state.home.newSaves)
   const appMode = useSelector((state) => state?.app?.mode)
 
-  const trackMenuClick = (label) => {
-    dispatch(sendEngagementEvent(label))
-  }
+  const trackMenuClick = (label) => dispatch(sendSnowplowEvent('side-nav', { label }))
 
   const isDisabled = appMode === 'bulk'
   return (

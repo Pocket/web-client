@@ -1,4 +1,5 @@
 import { getSchemaUri } from 'common/api/snowplow-analytics'
+import { getObjectWithValidKeysOnly } from 'common/utilities'
 
 /**
  * Schema information:
@@ -10,17 +11,15 @@ export const CONTENT_SCHEMA_URL = getSchemaUri('content')
  * A unique piece of content (item) within Pocket, usually represented by a URL. Should be included in all events that relate to content (primarily recommendation card impressions/engagements and item page impressions/engagements).
  *
  * @param url {string} - The full URL of the content. @required
- * @param itemId {int} - The backend identifier for a URL. @optional
+ * @param id {int} - The backend identifier for a URL. @optional
  * @returns {{schema: *, data: {url: string, ?item_id: int}}}
  */
-const createContentEntity = (url, itemId) => {
-  const data = { url }
-  if (itemId) data.item_id = parseInt(itemId, 10)
-
-  return {
-    schema: CONTENT_SCHEMA_URL,
-    data
-  }
-}
+const createContentEntity = ({ url, id }) => ({
+  schema: CONTENT_SCHEMA_URL,
+  data: getObjectWithValidKeysOnly({
+    url,
+    item_id: (id) ? parseInt(id, 10) : null
+  })
+})
 
 export default createContentEntity

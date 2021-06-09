@@ -40,15 +40,7 @@ import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archi
 
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
-import { sendDeleteEvent } from './read.analytics'
-import { sendArchiveEvent } from './read.analytics'
-import { sendTagEvent } from './read.analytics'
-import { sendFavoriteEvent } from './read.analytics'
-import { sendAnnotationEvent } from './read.analytics'
-import { sendShareEvent } from './read.analytics'
-import { sendImpression } from './read.analytics'
-import { sendExternalLinkClick } from './read.analytics'
-import { sendViewOriginalEvent } from './read.analytics'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
@@ -122,22 +114,6 @@ export default function Reader() {
   const fontSize = useSelector((state) => state.reader.fontSize)
   const fontFamily = useSelector((state) => state.reader.fontFamily)
   const colorMode = useSelector((state) => state?.app?.colorMode)
-
-  const itemDelete = () => {
-    dispatch(sendDeleteEvent(articleData))
-    dispatch(itemsDeleteAction([{ id }]))
-  }
-  const itemTag = () => {
-    dispatch(sendTagEvent(articleData))
-    dispatch(itemsTagAction([{ id }]))
-  }
-  const itemShare = ({ quote }) => {
-    dispatch(sendShareEvent(articleData))
-    dispatch(itemsShareAction({ id, quote }))
-  }
-  const handleImpression = (identifier) => {
-    dispatch(sendImpression(identifier))
-  }
 
   const [sideBarOpen, setSideBar] = useState(false)
   const [annotationLimitModal, setAnnotationLimitModal] = useState(false)
@@ -235,11 +211,13 @@ export default function Reader() {
     setHighlightList(compiled)
   }
 
+  const analyticsData = { id: item_id, url: open_url }
+
   const addAnnotation = () => {
     if (annotations.length === 3 && !isPremium) {
       setAnnotationLimitModal(true)
     } else {
-      dispatch(sendAnnotationEvent(articleData, false))
+      dispatch(sendSnowplowEvent('reader.add-highlight', analyticsData))
       dispatch(
         saveAnnotation({
           item_id,
@@ -251,7 +229,7 @@ export default function Reader() {
   }
 
   const removeAnnotation = (annotation_id) => {
-    dispatch(sendAnnotationEvent(articleData, true))
+    dispatch(sendSnowplowEvent('reader.remove-highlight', analyticsData))
     dispatch(
       deleteAnnotation({
         item_id,
@@ -260,24 +238,43 @@ export default function Reader() {
     )
   }
 
+  const itemDelete = () => {
+    dispatch(sendSnowplowEvent('reader.delete', analyticsData))
+    dispatch(itemsDeleteAction([{ id }]))
+  }
+  const itemTag = () => {
+    dispatch(sendSnowplowEvent('reader.tag', analyticsData))
+    dispatch(itemsTagAction([{ id }]))
+  }
+  const itemShare = ({ quote }) => {
+    dispatch(sendSnowplowEvent('reader.share', analyticsData))
+    dispatch(itemsShareAction({ id, quote }))
+  }
+  const handleImpression = (identifier) => {
+    dispatch(sendSnowplowEvent(identifier))
+  }
+
   const archiveItem = () => {
-    const archiveAction = archiveStatus ? itemsUnArchiveAction : itemsArchiveAction //prettier-ignore
-    dispatch(sendArchiveEvent(articleData, archiveStatus))
+    const archiveAction = archiveStatus ? itemsUnArchiveAction : itemsArchiveAction
+    const identifier = archiveStatus ? 'reader.un-archive' : 'reader.archive'
+    dispatch(sendSnowplowEvent(identifier, analyticsData))
     dispatch(archiveAction([{ id }]))
   }
 
   const toggleFavorite = () => {
-    const favoriteAction = favStatus ? itemsUnFavoriteAction : itemsFavoriteAction //prettier-ignore
-    dispatch(sendFavoriteEvent(articleData, favStatus))
+    const favoriteAction = favStatus ? itemsUnFavoriteAction : itemsFavoriteAction
+    const identifier = favStatus ? 'reader.un-favorite' : 'reader.favorite'
+    dispatch(sendSnowplowEvent(identifier, analyticsData))
     dispatch(favoriteAction([{ id }]))
   }
 
   const externalLinkClick = (href) => {
-    dispatch(sendExternalLinkClick(articleData, href))
+    const data = { id: item_id, url: href }
+    dispatch(sendSnowplowEvent('reader.external-link', data))
   }
 
   const viewOriginalEvent = () => {
-    dispatch(sendViewOriginalEvent(articleData))
+    dispatch(sendSnowplowEvent('reader.view-original', analyticsData))
   }
 
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))

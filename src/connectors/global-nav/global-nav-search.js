@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRecentSearch } from 'connectors/search/search.state'
 import { saveRecentSearch } from 'connectors/search/search.state'
-import { sendSearchEvent } from './global-nav.analytics'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import escape from 'validator/lib/escape'
 
 function GlobalNavSearchConnected({ onClose }) {
@@ -14,7 +14,7 @@ function GlobalNavSearchConnected({ onClose }) {
   const recentSearches = useSelector((state) => state?.userSearch?.recent ) //prettier-ignore
 
   const onSubmit = (searchTerm) => {
-    dispatch(sendSearchEvent(searchTerm))
+    dispatch(sendSnowplowEvent('global-nav.search.submit', { value: searchTerm }))
     dispatch(saveRecentSearch(searchTerm))
     router.push(`/my-list/search/?query=${escape(searchTerm)}`)
   }
