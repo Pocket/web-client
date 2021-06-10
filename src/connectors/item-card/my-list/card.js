@@ -32,8 +32,8 @@ export function ItemCard({ id, position, type }) {
   const shortcutSelected = shortcutId === id
 
   if (!item) return null
-  const { openExternal, original_url } = item
-  const openUrl = openExternal ? original_url : `/read/${id}`
+  const { openExternal, original_url, isCollection } = item
+  const openUrl = ( openExternal || isCollection ) ? original_url : `/read/${id}`
 
   const showExcerpt = type === 'detail'
   const ActionMenu = bulkEdit ? ActionsBulk : ActionsMyList
