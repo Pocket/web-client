@@ -21,7 +21,7 @@ export function PostTrustInit() {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const path = router.pathname
+  const path = router.asPath
   const [analyticsInit, analyticsInitSet] = useState(false)
   const { user_status, user_id, sess_guid } = useSelector((state) => state.user)
   const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
