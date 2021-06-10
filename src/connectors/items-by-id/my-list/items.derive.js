@@ -50,7 +50,8 @@ export function deriveMyListItems(response) {
       open_url: openUrl({ item }),
       original_url: originalUrl({ item }),
       permanent_url: permanentUrl({ item }),
-      openExternal: openExternal({ item })
+      openExternal: openExternal({ item }),
+      isCollection: isCollection({ item }),
     }
   })
 }
@@ -192,4 +193,21 @@ function openExternal({ item }) {
   if (item?.has_image === '2') return false
   if (item?.is_article === '1') return false
   return true
+}
+
+/**
+ * IS COLLECTION
+ * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
+ * @returns {bool} whether an item is a collection 
+ * 
+ * https://regexr.com/5volt - A place to test the regular expression
+ */
+
+function isCollection({ item }) {
+  const pattern = /.+?getpocket\.com\/(?:[a-zA-Z0-9\-]+?\/)?collections\/(?!\?).+/gi
+  if (item?.given_url.match(pattern)) {
+    return true
+  } else {
+    return false
+  }
 }
