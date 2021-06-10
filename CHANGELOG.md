@@ -1,3 +1,10 @@
+## [1.14.50](https://github.com/Pocket/web-client/compare/v1.14.49...v1.14.50) (2021-06-10)
+
+
+### Bug Fixes
+
+* **ga:** track google analytics pageview with router.aspath ([7450bf6](https://github.com/Pocket/web-client/commit/7450bf60e6d0505b62e1be5ff467c843c2a6c3c6))
+
 ## [1.14.49](https://github.com/Pocket/web-client/compare/v1.14.48...v1.14.49) (2021-06-07)
 
 
