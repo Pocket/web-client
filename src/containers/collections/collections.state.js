@@ -155,7 +155,8 @@ export async function fetchCollections() {
       const url = `/collections/${slug}`
       const firstImage = collection.stories[0].thumbnail
       const authorImage = collection.authors[0].imageUrl
-      return { ...collection, thumbnail: authorImage || firstImage, url, item_id: slug }
+      const heroImage = collection.thumbnail
+      return { ...collection, heroImage: heroImage, thumbnail: authorImage || firstImage, url, item_id: slug }
     })
     return arrayToObject(derivedCollections, 'slug')
   } catch (error) {
