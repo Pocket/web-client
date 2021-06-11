@@ -81,6 +81,7 @@ describe('My List Items', function () {
         time_read: '0',
         time_favorited: '0',
         sort_id: 1,
+        isCollection: false,
         is_article: '1',
         is_index: '0',
         has_video: '0',
