@@ -33,12 +33,23 @@ export function ItemCard({ id, position, type }) {
 
   if (!item) return null
   const { openExternal, original_url, isCollection } = item
-  const openUrl = ( openExternal || isCollection ) ? original_url : `/read/${id}`
 
   const showExcerpt = type === 'detail'
   const ActionMenu = bulkEdit ? ActionsBulk : ActionsMyList
 
   const onImageFail = () => dispatch(setNoImage(id))
+
+  const openUrl = (item) => {
+    const { openExternal, original_url, isCollection, open_url } = item
+    if (openExternal) return original_url
+
+    if (isCollection) {
+      const path = open_url
+      return `/collections/${path.substring(path.lastIndexOf('/') + 1)}`
+    }
+
+    return `/read/${id}`
+  }
 
   /** ITEM TRACKING
   --------------------------------------------------------------- */
@@ -77,7 +88,7 @@ export function ItemCard({ id, position, type }) {
       bulkIsCurrent={bulkIsCurrent}
       shortcutSelected={shortcutSelected}
       shortcutSelect={shortcutSelect}
-      openUrl={openUrl}
+      openUrl={openUrl(item)}
       onOpen={onOpen}
       onOpenOriginalUrl={onOpenOriginalUrl}
       onItemInView={onItemInView}
