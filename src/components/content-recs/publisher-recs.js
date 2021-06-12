@@ -93,7 +93,7 @@ const recommendedArticleStyles = css`
 `
 
 export const RecommendedArticle = ({ title, saveCount, targetUrl, handleClick }) => (
-  <li className={recommendedArticleStyles}>
+  <li className={recommendedArticleStyles} data-cy="publisher-recs-article">
     {/*eslint-disable-next-line*/}
     <a onClick={handleClick} className="title" href={targetUrl} target="_blank">
       {title}

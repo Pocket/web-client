@@ -196,9 +196,14 @@ const GlobalNavAccount = ({
     }
   }
 
-  function handleLinkClick(name, event) {
-    onLinkClick(name, event)
-  }
+  const handleSignupCase = () => onLinkClick('signup')
+  const handlePremiumCase = () => onLinkClick('premium')
+  const handleViewProfileCase = () => onLinkClick('view-profile')
+  const handleManageAccountCase = () => onLinkClick('manage-account')
+  const handleHelpCase = () => onLinkClick('help')
+  const handleMessagesCase = () => onLinkClick('messages')
+  const handleWhatsNewCase = () => onLinkClick('whats-new')
+  const handleLogoutCase = () => onLinkClick('logout')
 
   function handleVisible() {
     sendImpression('global-nav.upgrade-link')
@@ -208,10 +213,7 @@ const GlobalNavAccount = ({
     if (e.charCode === KEYS.SPACE || e.charCode === KEYS.ENTER) setFocus(true)
   }
 
-  const handleOpen = () => {
-    setMenuOpen(true)
-  }
-
+  const handleOpen = () => setMenuOpen(true)
   const handleClose = () => {
     setMenuOpen(false)
     setFocus(false)
@@ -226,9 +228,7 @@ const GlobalNavAccount = ({
         href="https://getpocket.com/login?src=navbar"
         id="global-nav-login-link"
         className={`${accountLinkStyle} login-link`}
-        onClick={(event) => {
-          onLoginClick(event)
-        }}
+        onClick={onLoginClick}
         data-cy="login-link">
         <Trans i18nKey="nav:log-in">Log in</Trans>
       </a>
@@ -237,9 +237,7 @@ const GlobalNavAccount = ({
         id="global-nav-signup-link"
         className={signupLinkStyle}
         variant="secondary"
-        onClick={(event) => {
-          handleLinkClick('signup', event)
-        }}
+        onClick={handleSignupCase}
         data-cy="signup-link">
         <ProfileIcon />
         <span className="label">
@@ -255,9 +253,7 @@ const GlobalNavAccount = ({
             href="https://getpocket.com/premium?src=navbar"
             id="global-nav.upgrade-link"
             className={`${accountLinkStyle} ${upgradeLinkStyle}`}
-            onClick={(event) => {
-              handleLinkClick('premium', event)
-            }}
+            onClick={handlePremiumCase}
             data-cy="upgrade-link">
             <PremiumIcon />
             <span className="label">
@@ -266,9 +262,7 @@ const GlobalNavAccount = ({
           </a>
         </VisibilitySensor>
       ) : null}
-      <div
-        className={cx(avatarWrapper, bottomTooltip)}
-        data-tooltip={t('nav:account', 'Account')}>
+      <div className={cx(avatarWrapper, bottomTooltip)} data-tooltip={t('nav:account', 'Account')}>
         <AvatarButton
           aria-label={t('nav:open-account-menu', 'Open Account Menu')}
           src={avatarSrc}
@@ -280,9 +274,7 @@ const GlobalNavAccount = ({
           onClick={handleOpen}
           onKeyPress={updateFocus}
         />
-        {showNotification ? (
-          <FloatingNotification data-cy="notification-avatar" />
-        ) : null}
+        {showNotification ? <FloatingNotification data-cy="notification-avatar" /> : null}
       </div>
       <PopupMenu
         trigger={accountMenuTriggerRef}
@@ -308,9 +300,7 @@ const GlobalNavAccount = ({
             href={profileUrl}
             helperText={t('nav:view-profile', 'View Profile')}
             id="account-menu-profile-link"
-            onClick={(event) => {
-              handleLinkClick('view-profile', event)
-            }}
+            onClick={handleViewProfileCase}
             data-cy="account-menu-profile-link">
             {accountName}
           </PopupMenuItem>
@@ -319,50 +309,38 @@ const GlobalNavAccount = ({
           <PopupMenuItem
             href="https://getpocket.com/options?src=navbar"
             id="account-menu-manage-account-link"
-            onClick={(event) => {
-              handleLinkClick('manage-account', event)
-            }}
+            onClick={handleManageAccountCase}
             data-cy="account-menu-manage-account-link">
             <Trans i18nKey="nav:manage-account">Manage account</Trans>
           </PopupMenuItem>
           <PopupMenuItem
             href="https://help.getpocket.com/category/847-category?src=navbar"
             id="account-menu-help-link"
-            onClick={(event) => {
-              handleLinkClick('help', event)
-            }}
+            onClick={handleHelpCase}
             data-cy="account-menu-help-link">
             <Trans i18nKey="nav:get-help">Get help</Trans>
           </PopupMenuItem>
           <PopupMenuItem
             href="/my-list/messages"
             id="account-menu-messages-link"
-            onClick={(event) => {
-              handleLinkClick('messages', event)
-            }}
+            onClick={handleMessagesCase}
             data-cy="account-menu-messages-link">
             <Trans i18nKey="nav:messages">Messages</Trans>
           </PopupMenuItem>
           <PopupMenuItem
             href="/my-list/whats-new"
             id="account-menu-whats-new-link"
-            onClick={(event) => {
-              handleLinkClick('whats-new', event)
-            }}
+            onClick={handleWhatsNewCase}
             data-cy="account-menu-whats-new-link">
             <Trans i18nKey="nav:whats-new">What’s New</Trans>{' '}
-            {showNotification ? (
-              <InlineNotification data-cy="notification-whatsnew" />
-            ) : null}
+            {showNotification ? <InlineNotification data-cy="notification-whatsnew" /> : null}
           </PopupMenuItem>
         </PopupMenuGroup>
         <PopupMenuGroup>
           <PopupMenuItem
             href="https://getpocket.com/lo?src=navbar"
             id="account-menu-logout-link"
-            onClick={(event) => {
-              handleLinkClick('logout', event)
-            }}
+            onClick={handleLogoutCase}
             data-cy="account-menu-logout-link">
             <Trans i18nKey="nav:log-out">Log out</Trans>
           </PopupMenuItem>

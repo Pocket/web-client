@@ -13,7 +13,7 @@ function getBaseParams() {
     action: 'pv_wt',
     view: 'web',
     section: 'syndicated',
-    page: window.location.pathname + window.location.search
+    page: window?.location?.pathname + window?.location?.search
   }
 }
 

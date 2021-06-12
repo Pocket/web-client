@@ -42,7 +42,7 @@ export function domainForUrl(url) {
  * @return {string} base path `/some/long/url` returns `some`
  */
 export function getTopLevelPath(path) {
-  return path.split('/')[1]
+  return path?.split('/')[1]
 }
 
 /**

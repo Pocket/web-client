@@ -60,7 +60,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
-  const selectedLink = selected !== undefined ? selected : getTopLevelPath(router.pathname)
+  const selectedLink = selected !== undefined ? selected : getTopLevelPath(router?.pathname)
 
   const appMode = useSelector((state) => state?.app?.mode)
   const flagsReady = useSelector((state) => state.features.flagsReady)
@@ -78,9 +78,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.user?.first_name)
   const userId = useSelector((state) => state?.user?.user_id)
-  const profileUrl = showLab
-    ? `/profile/${userId}?src=navbar`
-    : `${BASE_URL}/@${userId}?src=navbar`
+  const profileUrl = showLab ? `/profile/${userId}?src=navbar` : `${BASE_URL}/@${userId}?src=navbar`
 
   const listMode = useSelector((state) => state?.app?.listMode)
   const colorMode = useSelector((state) => state?.app?.colorMode)
