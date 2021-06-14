@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Pocket front end client",
   "main": "index.js",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=7.0.0"
+  },
   "scripts": {
     "dev": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
     "build": "npm run locale-inject && next build",
