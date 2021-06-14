@@ -30,6 +30,7 @@ export function ItemCard({ id, position, type }) {
   const bulkSelected = bulkList?.map((item) => item.id).includes(id)
   const shortcutId = useSelector((state) => state.shortcuts.currentId)
   const shortcutSelected = shortcutId === id
+  const openUrl = determineUrl(item, id)
 
   if (!item) return null
 
@@ -37,18 +38,6 @@ export function ItemCard({ id, position, type }) {
   const ActionMenu = bulkEdit ? ActionsBulk : ActionsMyList
 
   const onImageFail = () => dispatch(setNoImage(id))
-
-  const openUrl = (item) => {
-    const { openExternal, original_url, isCollection, open_url } = item
-    if (openExternal) return original_url
-
-    if (isCollection) {
-      const path = open_url
-      return `/collections/${path.substring(path.lastIndexOf('/') + 1)}`
-    }
-
-    return `/read/${id}`
-  }
 
   /** ITEM TRACKING
   --------------------------------------------------------------- */
@@ -75,6 +64,7 @@ export function ItemCard({ id, position, type }) {
   --------------------------------------------------------------- */
   const shortcutSelect = () => dispatch(selectShortcutItem(id, position))
 
+
   return item ? (
     <Card
       item={item}
@@ -87,7 +77,7 @@ export function ItemCard({ id, position, type }) {
       bulkIsCurrent={bulkIsCurrent}
       shortcutSelected={shortcutSelected}
       shortcutSelect={shortcutSelect}
-      openUrl={openUrl(item)}
+      openUrl={openUrl}
       onOpen={onOpen}
       onOpenOriginalUrl={onOpenOriginalUrl}
       onItemInView={onItemInView}
@@ -104,6 +94,18 @@ const isEqual = (prev, next) => {
   const isTheSame =
     prev.id === next.id && prev.position === next.position && prev.type === next.type
   return isTheSame
+}
+
+const determineUrl = (item, id) => {
+  const { openExternal, original_url, isCollection, open_url } = item
+  if (openExternal) return original_url
+
+  if (isCollection) {
+    const path = open_url
+    return `/collections/${path.substring(path.lastIndexOf('/') + 1)}`
+  }
+
+  return `/read/${id}`
 }
 
 export const MemoizedItem = memo(ItemCard, isEqual)
