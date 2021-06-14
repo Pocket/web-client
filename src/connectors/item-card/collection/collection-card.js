@@ -10,19 +10,18 @@ import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
  * Creates a connected `Card` with the appropriate data and actions
  * @param {object} {id, position} item_id for data and position for analytics
  */
-export function ItemCard({ id, cardShape, lockup, className, showExcerpt = false, position }) {
+export function ItemCard({ id, cardShape, className, showExcerpt = false, position, lockup }) {
   const dispatch = useDispatch()
 
   // Get data from state
-  const item = useSelector((state) => state.collectionsBySlug[id])
-  const { url, heroImage } = item
+  const storedItem = useSelector((state) => state.collectionsBySlug[id])
+  const { url } = storedItem
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const onImageFail = () => dispatch(setNoImage(id))
 
-  // use the heroImage instead of thumbnail for the first item in a Lockup
-  if (position === 0 && lockup) {
-    item.thumbnail = heroImage
-  }
+  // for hero items in a lockup, use the heroImage instead of thumbnail
+  const thumbnail = lockup ? storedItem.heroImage : storedItem.thumbnail
+  const item = { ...storedItem, thumbnail }
 
   /**
    * ITEM TRACKING
