@@ -6,17 +6,20 @@ const heroType = {
   center: {
     className: 'lockup hero-center',
     showExcerpt: true,
-    cardShape: 'block'
+    cardShape: 'block',
+    lockup: true
   },
   right: {
     className: 'lockup hero-right',
     showExcerpt: true,
-    cardShape: 'block'
+    cardShape: 'block',
+    lockup: true
   },
   left: {
     className: 'lockup hero-left',
     showExcerpt: true,
-    cardShape: 'block'
+    cardShape: 'block',
+    lockup: true
   }
 }
 
@@ -38,7 +41,6 @@ export function Lockup({
   heroPosition = 'center',
   cardShape = 'block',
   lockupShape = 'hero',
-  lockup = true,
   ItemCard
 }) {
   const start = offset
@@ -49,7 +51,7 @@ export function Lockup({
     <div className={`${cardLockupStyle} lockup-${lockupShape}`}>
       {items.slice(start, end).map((id, index) => {
         const layoutProps = index === 0 ? hero : { className: 'lockup', cardShape }
-        return <ItemCard id={id} key={id} position={index} lockup={lockup} {...layoutProps} />
+        return <ItemCard id={id} key={id} position={index} {...layoutProps} />
       })}
     </div>
   )
