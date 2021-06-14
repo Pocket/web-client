@@ -21,7 +21,7 @@ const REPORT_SCHEMA_URL = getSchemaUri('report')
  * @param otherText {string} - An optional user-provided comment on the reason for the report. @optional
  * @returns {{schema: *, data: {reason: string, ?comment: string}}}
  */
-const createReportEntity = (reason, otherText) => ({
+const createReportEntity = ({ reason, otherText }) => ({
   schema: REPORT_SCHEMA_URL,
   data: getObjectWithValidKeysOnly({
     comment: otherText,

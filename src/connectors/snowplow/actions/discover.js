@@ -61,5 +61,14 @@ export const discoverActions = {
       uiType: 'button'
     },
     description: 'Dismissable Signup section in the right side for logged-out users is clicked through'
-  }
+  },
+  'discover.report': {
+    eventType: 'engagement',
+    entityTypes: ['report', 'content'],
+    eventData: {
+      engagementType: 'report'
+    },
+    expects: ['id', 'url', 'reason', 'otherText'],
+    description: '`otherText` is an optional field'
+  },
 }

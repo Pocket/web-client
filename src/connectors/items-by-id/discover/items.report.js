@@ -1,9 +1,5 @@
 import { put, takeLatest, take, race } from 'redux-saga/effects'
-import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
-import { createReportEntity } from 'connectors/snowplow/entities'
-import { createContentEntity } from 'connectors/snowplow/entities'
-import { createEngagementEvent } from 'connectors/snowplow/events'
-import { ENGAGEMENT_TYPE_REPORT } from 'connectors/snowplow/events'
+import { fireSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 import { ITEMS_REPORT_REQUEST } from 'actions'
 import { ITEMS_REPORT_CONFIRM } from 'actions'
@@ -14,7 +10,7 @@ import { ITEMS_REPORT_FAILURE } from 'actions'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const itemReportAction = (id) => ({ type: ITEMS_REPORT_REQUEST, id })
-export const itemReportConfirm = () => ({ type: ITEMS_REPORT_CONFIRM })
+export const itemReportConfirm = (data) => ({ type: ITEMS_REPORT_CONFIRM, data })
 export const itemReportCancel = () => ({ type: ITEMS_REPORT_CANCEL })
 
 /** REDUCERS
@@ -44,22 +40,23 @@ export const itemReportSagas = [takeLatest(ITEMS_REPORT_REQUEST, itemsReport)]
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-function* itemsReport({ save_url, item_id, reason, otherText }) {
+function* itemsReport() {
   // Wait for the user to confirm or cancel
-  const { cancel } = yield race({
+  const { cancel, confirm } = yield race({
     confirm: take(ITEMS_REPORT_CONFIRM),
     cancel: take(ITEMS_REPORT_CANCEL)
   })
 
   if (cancel) return
-
   // Send snowplow actions
   try {
-    const snowplowEvent = createEngagementEvent(ENGAGEMENT_TYPE_REPORT)
-    const reportEntity = createReportEntity(reason, otherText)
-    const contentEntity = createContentEntity(save_url, item_id)
-    const snowplowEntities = [reportEntity, contentEntity]
-    sendCustomSnowplowEvent(snowplowEvent, snowplowEntities)
+    const { data } = confirm
+    const analyticsData = {
+      identifier: 'discover.report',
+      data
+    }
+
+    yield fireSnowplowEvent(analyticsData)
     return yield put({ type: ITEMS_REPORT_SUCCESS })
   } catch {
     return yield put({ type: ITEMS_REPORT_FAILURE })

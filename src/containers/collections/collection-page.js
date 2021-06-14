@@ -64,7 +64,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
     if (pageSaveStatus === 'saved') dispatch(unSaveCollectionPage(slug))
     if (pageSaveStatus !== 'saved') {
       dispatch(saveCollectionPage(slug))
-      dispatch(sendSnowplowEvent('collection.page.save', { url, value: id }))
+      dispatch(sendSnowplowEvent('collection.page.save', { url: saveUrl, value: id }))
     }
   }
 

@@ -56,7 +56,8 @@ export const ReportFeedbackModal = () => {
   const confirmReport = () => {
     if (hasError()) return
     const { save_url, item_id } = item
-    dispatch(itemReportConfirm({ reason, otherText, save_url, item_id }))
+    const analyticsData = { id: item_id, url: save_url, reason, otherText }
+    dispatch(itemReportConfirm(analyticsData))
     updateSubmitSuccess(true)
   }
 

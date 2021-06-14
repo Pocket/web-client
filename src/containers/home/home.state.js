@@ -88,7 +88,7 @@ export const homeReducers = (state = initialState, action) => {
     }
 
     case SNOWPLOW_TRACK_PAGE_VIEW: {
-      return { ...state, impressions: {}, newSaves: 0 }
+      return { ...state, newSaves: 0 }
     }
 
     default:

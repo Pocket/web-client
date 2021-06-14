@@ -14,6 +14,7 @@ import { createVariantEnrollEvent } from 'connectors/snowplow/events'
 import { createContentEntity } from 'connectors/snowplow/entities'
 import { createUiEntity } from 'connectors/snowplow/entities'
 import { createRecommendationEntity } from 'connectors/snowplow/entities'
+import { createReportEntity } from 'connectors/snowplow/entities'
 import { createSlateEntity } from 'connectors/snowplow/entities'
 import { createSlateLineupEntity } from 'connectors/snowplow/entities'
 import { createFeatureFlagEntity } from 'connectors/snowplow/entities'
@@ -130,6 +131,7 @@ const entityBuilders = {
   ui: createUiEntity,
   content: createContentEntity,
   recommendation: createRecommendationEntity,
+  report: createReportEntity,
   slate: createSlateEntity,
   slateLineup: createSlateLineupEntity
 }
@@ -140,10 +142,12 @@ const expectationTypes = {
   position: 'int',
   label: 'string',
   destination: 'string',
-  value: 'string'
+  value: 'string',
+  reason: 'string',
+  otherText: 'string'
 }
 
-function* fireSnowplowEvent({ identifier, data }) {
+export function* fireSnowplowEvent({ identifier, data }) {
   yield call(waitForInitialization)
 
   const { eventType, entityTypes, eventData } = analyticsActions[identifier]
