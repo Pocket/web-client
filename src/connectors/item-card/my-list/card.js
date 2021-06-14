@@ -64,7 +64,6 @@ export function ItemCard({ id, position, type }) {
   --------------------------------------------------------------- */
   const shortcutSelect = () => dispatch(selectShortcutItem(id, position))
 
-
   return item ? (
     <Card
       item={item}
