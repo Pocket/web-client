@@ -2,8 +2,9 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { publisherRecsRequest } from '/connectors/recit/recit.state'
 import { PublisherRecs as RecsComponent } from 'components/content-recs/publisher-recs'
-import { trackRecImpression } from '/connectors/recit/recit.analytics'
-import { trackRecClick } from '/connectors/recit/recit.analytics'
+import { trackRecImpression } from './syndicated-article.analytics'
+import { trackRecClick } from './syndicated-article.analytics'
+import { PUBLISHER_MODULE } from './syndicated-article.analytics'
 
 export function PublisherRecs({ publisher, itemId, legacyId }) {
   const dispatch = useDispatch()
@@ -12,14 +13,20 @@ export function PublisherRecs({ publisher, itemId, legacyId }) {
   const recId = useSelector((state) => state.recit.publisherRecId)
   const model = useSelector((state) => state.recit.publisherRecModel)
 
-  const trackBase = { model, recId, articleId: legacyId }
-
-  const handleRecImpression = ({ position, resolvedId, module, location }) => {
-    trackRecImpression({ position, resolvedId, module, location, ...trackBase })
+  const analyticsData = {
+    model,
+    recId,
+    articleId: legacyId,
+    module: PUBLISHER_MODULE,
+    location: 'Right Rail'
   }
 
-  const handleRecClick = ({ position, resolvedId, module, location }) => {
-    trackRecClick({ position, resolvedId, module, location, ...trackBase })
+  const handleRecImpression = ({ position, resolvedId }) => {
+    trackRecImpression({ position, resolvedId, ...analyticsData })
+  }
+
+  const handleRecClick = ({ position, resolvedId }) => {
+    trackRecClick({ position, resolvedId, ...analyticsData })
   }
 
   useEffect(() => {

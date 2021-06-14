@@ -7,6 +7,7 @@ import { myListActions } from './my-list'
 import { profileActions } from './profile'
 import { readerActions } from './reader'
 import { sideNavActions } from './side-nav'
+import { syndicatedArticleActions } from './syndicated-article'
 
 export const analyticsActions = {
   ...collectionsActions,
@@ -17,5 +18,6 @@ export const analyticsActions = {
   ...myListActions,
   ...profileActions,
   ...readerActions,
-  ...sideNavActions
+  ...sideNavActions,
+  ...syndicatedArticleActions
 }

@@ -26,7 +26,7 @@ import { PocketHitsCta } from './pocket-hits-cta'
 import { PublisherRecs } from './publisher-recs'
 import { PocketRecs } from './pocket-recs'
 
-import { sendSaveToSnowplow } from './syndicated-article.analytics'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { trackScrollDepth } from './syndicated-article.analytics'
 
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
@@ -94,8 +94,9 @@ export function SyndicatedArticle({ queryParams = validParams }) {
   const saveAction = (savedUrl, identifier) => {
     if (saveStatus === 'saved') dispatch(unSaveArticleItem(itemId))
     if (saveStatus !== 'saved') {
+      const analyticsData = { id: itemId, url: savedUrl }
+      dispatch(sendSnowplowEvent('syndicated.article.save', analyticsData))
       dispatch(saveArticleItem(savedUrl))
-      sendSaveToSnowplow({ itemId, url: savedUrl, identifier })
     }
   }
 

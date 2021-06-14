@@ -36,5 +36,30 @@ export const discoverActions = {
       'slateLineupId', 'slateLineupRequestId', 'slateLineupExperiment',
       'slateId', 'slateRequestId', 'slateExperiment'
     ]
+  },
+  'discover.signup.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'button'
+    },
+    description: 'Dismissable Signup section in the right side for logged-out users is seen'
+  },
+  'discover.signup.dismiss': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Dismissable Signup section in the right side for logged-out users is dismissed'
+  },
+  'discover.signup.click': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Dismissable Signup section in the right side for logged-out users is clicked through'
   }
 }

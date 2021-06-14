@@ -67,7 +67,7 @@ const snowplowReady = (state) => state.analytics?.initialized
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
- export const snowplowSagas = [
+export const snowplowSagas = [
   takeLatest(VARIANTS_SAVE, fireVariantEnroll),
   takeLatest(FEATURES_HYDRATE, fireFeatureEnroll),
   takeLatest(SNOWPLOW_UPDATE_ANONYMOUS_TRACKING, anonymousTracking),

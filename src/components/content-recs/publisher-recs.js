@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import { numberWithCommas } from 'common/utilities'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { PUBLISHER_MODULE } from 'connectors/recit/recit.analytics'
 import { darkMode, sepiaMode } from '@pocket/web-ui'
 import { Trans } from 'next-i18next'
 
@@ -131,8 +130,6 @@ const RecommendedArticles = ({
 
         function handleVisible() {
           handleRecImpression({
-            location: 'Right Rail',
-            module: PUBLISHER_MODULE,
             resolvedId,
             position
           })
@@ -140,8 +137,6 @@ const RecommendedArticles = ({
 
         function handleClick() {
           handleRecClick({
-            location: 'Right Rail',
-            module: PUBLISHER_MODULE,
             resolvedId,
             position
           })

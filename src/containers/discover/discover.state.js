@@ -1,6 +1,5 @@
 import { takeLatest, put, takeEvery } from 'redux-saga/effects'
 import { getDiscoverFeed } from 'common/api/discover'
-import { getItemSaveAnalytics } from './discover.analytics'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { arrayToObject } from 'common/utilities'
 
@@ -79,7 +78,13 @@ function* discoverDataRequest() {
 // This is just a passthrough that adds analytics toe the item save request
 function* discoverSaveRequest(action) {
   const { url, id, position } = action
-  const analytics = getItemSaveAnalytics(position)
+  const analytics = {
+    view: 'web',
+    section: 'explore',
+    page: '/explore/',
+    cxt_item_position: position
+  }
+
   yield put({ type: DISCOVER_ITEMS_SAVE_REQUEST, id, url, analytics })
 }
 
