@@ -1,7 +1,7 @@
 {
   "parser": "@babel/eslint-parser",
   "extends": ["react-app", "prettier", "plugin:cypress/recommended"],
-  "plugins": ["prettier", "jsx-a11y"],
+  "plugins": ["prettier", "jsx-a11y", "testing-library", "jest-dom"],
   "globals": {
     "React": false,
     "snowplow": true
