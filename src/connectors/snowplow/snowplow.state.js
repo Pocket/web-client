@@ -168,6 +168,7 @@ export function* fireSnowplowEvent({ identifier, data }) {
     return entityFunction({ ...eventData, ...data, identifier })
   })
 
+  // Build bulk entities if they exist, limit to BATCH_SIZE
   const batchEntities = batchEntityTypes ? batchEntityTypes.map(entity => {
     const entityFunction = entityBuilders[entity]
     if (data.length > BATCH_SIZE) data.length = BATCH_SIZE
