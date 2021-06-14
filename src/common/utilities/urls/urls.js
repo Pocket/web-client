@@ -53,3 +53,20 @@ export function getTopLevelPath(path) {
 export function urlWithPermanentLibrary(item_id) {
   return `https://getpocket.com/library/?pl_i=${item_id}`
 }
+
+/**
+ * determineOpenUrl
+ * @param {object} item article item
+ * @return {string} url to open based on openExternal, isCollection & default
+ */
+export function determineOpenUrl(item) {
+  const { openExternal, original_url, isCollection, open_url } = item
+  if (openExternal) return original_url
+
+  if (isCollection) {
+    const path = open_url
+    return `/collections/${path.substring(path.lastIndexOf('/') + 1)}`
+  }
+
+  return `/read/${item.item_id}`
+}

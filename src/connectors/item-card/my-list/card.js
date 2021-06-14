@@ -9,6 +9,7 @@ import { ActionsMyList } from 'connectors/item-card/my-list/card-actions'
 import { ActionsBulk } from 'connectors/item-card/my-list/card-actions'
 import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
 import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+import { determineOpenUrl } from 'common/utilities/urls/urls'
 
 /**
  * Article Card
@@ -93,18 +94,6 @@ const isEqual = (prev, next) => {
   const isTheSame =
     prev.id === next.id && prev.position === next.position && prev.type === next.type
   return isTheSame
-}
-
-const determineUrl = (item, id) => {
-  const { openExternal, original_url, isCollection, open_url } = item
-  if (openExternal) return original_url
-
-  if (isCollection) {
-    const path = open_url
-    return `/collections/${path.substring(path.lastIndexOf('/') + 1)}`
-  }
-
-  return `/read/${id}`
 }
 
 export const MemoizedItem = memo(ItemCard, isEqual)
