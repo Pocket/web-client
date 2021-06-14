@@ -65,14 +65,14 @@ export class CreatedDate extends Component {
       let date = diff
       return (
         <Trans i18nKey="annotations:added-one-day-ago" date={date}>
-          Added {date} day ago
+          Added {{date}} day ago
         </Trans>
       )
     } else if (diff < 7) {
       let date = diff
       return (
         <Trans i18nKey="annotations:added-many-days-ago" date={date}>
-          Added {date} days ago
+          Added {{date}} days ago
         </Trans>
       )
     }
@@ -80,7 +80,7 @@ export class CreatedDate extends Component {
     let date = ts.format('MMM D, YYYY')
     return (
       <Trans i18nKey="annotations:added-date" date={date}>
-        Added {date}
+        Added {{date}}
       </Trans>
     )
   }

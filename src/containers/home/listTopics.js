@@ -1,6 +1,5 @@
 import { HomeTopicHeader } from 'components/headers/home-header'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { css } from 'linaria'
 import { CardTopic } from 'connectors/item-card/home/card-topic'
 import { cardGrid } from 'components/items-layout/base'
@@ -148,6 +147,8 @@ export const HomeTopicsList = ({ count }) => {
   const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
 
   return pinnedTopics?.length
-    ? pinnedTopics.map((topic) => <HomeTopicsRow key={topic.display_name} count={count} {...topic} />)
+    ? pinnedTopics.map((topic) => (
+        <HomeTopicsRow key={topic.display_name} count={count} {...topic} />
+      ))
     : null
 }

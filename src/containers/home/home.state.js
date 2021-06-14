@@ -1,6 +1,6 @@
 import { put, takeEvery, select } from 'redux-saga/effects'
 import { getMyList } from 'common/api/my-list'
-import { getTopicFeed } from 'common/api/topics'
+import { getHomeTopicFeed } from 'common/api/topics'
 import { getCollections as apiGetCollections } from 'common/api/collections'
 import { saveItem } from 'common/api/saveItem'
 import { removeItem } from 'common/api/removeItem'
@@ -35,8 +35,6 @@ import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
 import { HOME_RECENT_SAVES_FAILURE } from 'actions'
 
 import { HOME_SET_IMPRESSION } from 'actions'
-
-import { ITEMS_DELETE_SEND } from 'actions'
 
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 
@@ -252,9 +250,7 @@ function* setTopicPreferences({ topic }) {
 
 function* unsetTopicPreferences({ topic }) {
   const topicSections = yield select(getTopicSections)
-  const pinnedTopics = topicSections.filter(
-    (section) => section.topic_slug !== topic.topic_slug
-  )
+  const pinnedTopics = topicSections.filter((section) => section.topic_slug !== topic.topic_slug)
 
   yield put({ type: PINNED_TOPICS_SET, pinnedTopics })
 }
@@ -294,7 +290,7 @@ export async function fetchMyListData(params) {
  */
 export async function fetchTopicData({ topic }) {
   try {
-    const response = await getTopicFeed(topic, 12, 0, false)
+    const response = await getHomeTopicFeed(topic)
 
     if (!response.curated) return { error: 'No Items Returned' }
 
