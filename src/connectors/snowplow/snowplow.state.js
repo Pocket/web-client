@@ -27,6 +27,8 @@ import { SNOWPLOW_SEND_EVENT } from 'actions'
 import { VARIANTS_SAVE } from 'actions'
 import { FEATURES_HYDRATE } from 'actions'
 
+import { BATCH_SIZE } from 'common/constants'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const finalizeSnowplow = () => ({ type: SNOWPLOW_INITIALIZED })
@@ -150,7 +152,7 @@ const expectationTypes = {
 export function* fireSnowplowEvent({ identifier, data }) {
   yield call(waitForInitialization)
 
-  const { eventType, entityTypes, eventData } = analyticsActions[identifier]
+  const { eventType, entityTypes, eventData, batchEntityTypes } = analyticsActions[identifier]
   if (!eventType) return console.warn('No action for this event!')
 
   // tracking impressions using id or url
@@ -161,10 +163,17 @@ export function* fireSnowplowEvent({ identifier, data }) {
   const event = eventFunction({ ...eventData, ...data })
 
   // Build entities
-  const entities = entityTypes.map(entity => {
+  const singleEntities = entityTypes.map(entity => {
     const entityFunction = entityBuilders[entity]
     return entityFunction({ ...eventData, ...data, identifier })
   })
 
+  const batchEntities = batchEntityTypes ? batchEntityTypes.map(entity => {
+    const entityFunction = entityBuilders[entity]
+    if (data.length > BATCH_SIZE) data.length = BATCH_SIZE
+    return data.map((item) => entityFunction(item))
+  }).flat() : []
+
+  const entities = [...singleEntities, ...batchEntities]
   yield call(sendCustomSnowplowEvent, event, entities)
 }

@@ -53,5 +53,60 @@ export const globalNavActions = {
     eventData: {
       uiType: 'button'
     }
+  },
+  'global-nav.bulk.delete': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    batchEntityTypes: ['content'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['id', 'url', 'position']
+  },
+  'global-nav.bulk.tag': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    batchEntityTypes: ['content'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['id', 'url', 'position']
+  },
+  'global-nav.bulk.archive': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    batchEntityTypes: ['content'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['id', 'url', 'position']
+  },
+  'global-nav.bulk.un-archive': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    batchEntityTypes: ['content'],
+    eventData: {
+      engagementType: 'save',
+      uiType: 'button'
+    },
+    expects: ['id', 'url', 'position']
+  },
+  'global-nav.bulk.favorite': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    batchEntityTypes: ['content'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['id', 'url', 'position']
+  },
+  'global-nav.bulk.un-favorite': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    batchEntityTypes: ['content'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['id', 'url', 'position']
   }
 }
