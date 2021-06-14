@@ -2,7 +2,7 @@
  * setup/teardown file for mocha unit tests
  */
 import Enzyme from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17'
 
 // Keep asset imports from breaking unit tests by mapping
 // their import logic to a noop function:
