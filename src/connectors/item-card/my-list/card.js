@@ -31,10 +31,10 @@ export function ItemCard({ id, position, type }) {
   const bulkSelected = bulkList?.map((item) => item.id).includes(id)
   const shortcutId = useSelector((state) => state.shortcuts.currentId)
   const shortcutSelected = shortcutId === id
-  const openUrl = determineUrl(item, id)
-
+  
   if (!item) return null
 
+  const openUrl = determineOpenUrl(item)
   const showExcerpt = type === 'detail'
   const ActionMenu = bulkEdit ? ActionsBulk : ActionsMyList
 
