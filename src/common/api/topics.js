@@ -1,8 +1,22 @@
 import { request, requestGQL } from 'common/utilities/request/request'
-import { TOPIC_IDS } from 'common/constants'
+import { TOPIC_IDS, HOME_TOPIC_SLATES } from 'common/constants'
 import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
+import getSlate from 'common/api/graphql-queries/get-slate'
 import { getRecIds } from 'common/utilities'
 import { recommendationsFromSlate } from 'common/utilities'
+
+export async function getHomeTopicFeed(topic, recommendationCount = 6) {
+  return requestGQL({
+    query: getSlate,
+    variables: { id: HOME_TOPIC_SLATES[topic], recommendationCount }
+  })
+    .then((response) => {
+      const slate = response?.data?.getSlate
+      const curated = recommendationsFromSlate(slate, topic)
+      return { curated }
+    })
+    .catch((error) => console.error(error))
+}
 
 export async function getNewTopicFeed(topic, recommendationCount = 30) {
   return requestGQL({
