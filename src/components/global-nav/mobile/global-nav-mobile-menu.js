@@ -4,11 +4,7 @@ import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
 import { Trans, useTranslation } from 'next-i18next'
-import {
-  PremiumIcon,
-  MenuIcon,
-  ChevronLeftIcon
-} from '@pocket/web-ui'
+import { PremiumIcon, MenuIcon, ChevronLeftIcon } from '@pocket/web-ui'
 import { Drawer } from '@pocket/web-ui'
 import { Button } from '@pocket/web-ui'
 import { DEFAULT_LINKS } from 'components/global-nav/links/global-nav-links'
@@ -172,10 +168,8 @@ const DrawerHeader = ({ handleClose }) => {
   return (
     <div className={drawerHeaderStyles}>
       <Button
-        aria-label={t(
-          'nav:close-the-pocket-mobile-menu',
-          'Close the Pocket mobile menu'
-        )}
+        aria-label={t('nav:close-the-pocket-mobile-menu', 'Close the Pocket mobile menu')}
+        data-cy="mobile-menu"
         data-tooltip={t('nav:close', 'Close')}
         onClick={handleClose}
         variant="inline"
@@ -285,10 +279,7 @@ const GlobalNavMobileMenu = ({
     <>
       <Button
         onClick={handleOpen}
-        aria-label={t(
-          'nav:open-the-pocket-mobile-menu',
-          'Open the Pocket mobile menu'
-        )}
+        aria-label={t('nav:open-the-pocket-mobile-menu', 'Open the Pocket mobile menu')}
         data-tooltip={t('nav:open', 'Open')}
         variant="inline"
         className={classnames(iconStyle, toggleClass, bottomTooltip)}>

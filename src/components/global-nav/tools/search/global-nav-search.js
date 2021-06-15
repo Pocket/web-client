@@ -105,9 +105,7 @@ const closeLabelStyle = css`
   }
 `
 
-const CloseLabel = ({ children }) => (
-  <span className={closeLabelStyle}>{children}</span>
-)
+const CloseLabel = ({ children }) => <span className={closeLabelStyle}>{children}</span>
 
 const closeButtonStyle = css`
   margin-left: auto;
@@ -183,8 +181,7 @@ const GlobalNavSearch = ({
     e.stopPropagation()
     e.preventDefault()
 
-    if (!searchTerm)
-      return updateInputError(t('nav:please-enter-a-search-term'))
+    if (!searchTerm) return updateInputError(t('nav:please-enter-a-search-term'))
 
     onSubmit(searchTerm)
   }
@@ -252,20 +249,13 @@ const GlobalNavSearch = ({
   }, [recentSearches])
 
   return (
-    <form
-      className={searchStyle}
-      onSubmit={handleSubmit}
-      autoComplete="off"
-      ref={formRef}>
+    <form className={searchStyle} onSubmit={handleSubmit} autoComplete="off" ref={formRef}>
       <div className={searchContainerStyle}>
         <SearchIcon className={searchIconStyle} />
         <input
           name="search-input"
           ref={inputEl}
-          className={classnames([
-            'search-input',
-            { 'has-value': !!searchTerm }
-          ])}
+          className={classnames(['search-input', { 'has-value': !!searchTerm }])}
           aria-label={t('nav:search-your-collection', 'Search your collection')}
           value={searchTerm}
           onChange={handleInputChange}
@@ -289,9 +279,7 @@ const GlobalNavSearch = ({
         <Trans i18nKey="nav:search">Search</Trans>
       </button>
       <input type="submit" className="mobile-submit" />
-      {onClose ? (
-        <CloseButton onClick={onClose} data-cy="search-close" />
-      ) : null}
+      {onClose ? <CloseButton onClick={onClose} data-cy="search-close" /> : null}
     </form>
   )
 }

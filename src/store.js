@@ -140,7 +140,7 @@ const globalReducers = {
   analytics: snowplowReducers //Analytics
 }
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   ...globalReducers,
   ...marketingReducers,
   ...discoverReducers,

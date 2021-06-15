@@ -4,11 +4,10 @@ import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
-import { Trans, useTranslation } from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 
 import { breakpointSmallTablet } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
-import { breakpointTinyTablet } from '@pocket/web-ui'
 import { fontSansSerif } from '@pocket/web-ui'
 import { fontSize100 } from '@pocket/web-ui'
 import { screenLargeTablet } from '@pocket/web-ui'
@@ -297,8 +296,7 @@ const GlobalNav = ({
                 <div className={linksStyle}></div>
               )}
 
-              <div
-                className={classnames(toolsStyle, { 'is-premium': isPremium })}>
+              <div className={classnames(toolsStyle, { 'is-premium': isPremium })}>
                 <GlobalNavTools tools={tools} onToolClick={onToolClick} />
               </div>
 

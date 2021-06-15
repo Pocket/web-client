@@ -167,7 +167,7 @@ const ProgrammaticAd = ({
     initAdMetadataOnce({
       ...adTargetingMetadata,
       usePersonalized,
-      urlPath: window.location.pathname
+      urlPath: window?.location?.pathname
     })
       .then(() => {
         global.googletag.pubads()

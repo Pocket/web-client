@@ -61,7 +61,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
-  const selectedLink = selected !== undefined ? selected : getTopLevelPath(router.pathname)
+  const selectedLink = selected !== undefined ? selected : getTopLevelPath(router?.pathname)
 
   const appMode = useSelector((state) => state?.app?.mode)
   const flagsReady = useSelector((state) => state.features.flagsReady)

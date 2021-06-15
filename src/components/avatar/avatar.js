@@ -80,17 +80,9 @@ const Avatar = ({ id, src, altText, size, className }) => {
       )}
       style={avatarStyleVariables}>
       {src ? (
-        <img
-          src={src}
-          alt={altText}
-          className={imageStyle}
-          data-cy={`avatar-image-${id}`}
-        />
+        <img src={src} alt={altText} className={imageStyle} data-cy={`avatar-image-${id}`} />
       ) : (
-        <ProfileIcon
-          className={defaultStyle}
-          data-cy={`avatar-default-${id}`}
-        />
+        <ProfileIcon className={defaultStyle} data-cy={`avatar-default-${id}`} />
       )}
     </span>
   )

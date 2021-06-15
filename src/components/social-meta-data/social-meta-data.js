@@ -24,9 +24,7 @@ export function SocialMetaData({ url, title, description, image, type }) {
   const ogType = type || 'website'
 
   const preferredImageSize = { width: 1200 }
-  const imageCacheUrl = image
-    ? getImageCacheUrl(image, preferredImageSize)
-    : null
+  const imageCacheUrl = image ? getImageCacheUrl(image, preferredImageSize) : null
 
   return (
     // prettier-ignore

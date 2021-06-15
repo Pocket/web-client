@@ -33,7 +33,7 @@ const headingStyles = css`
 const Heading = () => {
   const { t } = useTranslation()
   return (
-    <h3 className={cx('h6', headingStyles)}>
+    <h3 className={cx('h6', headingStyles)} data-cy="pocket-recs-heading">
       {t('discover:more-stories-from-pocket', 'More Stories from Pocket')}
     </h3>
   )
@@ -135,30 +135,6 @@ const recommendationStyles = css`
   }
 `
 
-export const Recommendation = ({
-  title,
-  url,
-  thumbnailUrl,
-  publisher: { name, logoWideBwUrl },
-  handleClick
-}) => (
-  <li className={recommendationStyles}>
-    <Link href={url} onClick={handleClick}>
-      <a className="thumbnail">
-        <img src={thumbnailUrl} alt={`Logo for ${name}`} />
-      </a>
-    </Link>
-    <div className="details">
-      <Publisher name={name} logo={logoWideBwUrl} />
-      <Link href={url} onClick={handleClick}>
-        <a>
-          <h4 className="h5">{title}</h4>
-        </a>
-      </Link>
-    </div>
-  </li>
-)
-
 const recommendationsStyles = css`
   font-size: 16px; /* sets root size for list */
   list-style: none;
@@ -172,63 +148,57 @@ const recommendationsStyles = css`
     margin-bottom: 0;
   }
 `
-export const Recommendations = ({
-  recommendations,
-  maxRecommendations,
-  handleRecImpression,
-  handleRecClick
-}) => {
+
+export const Recommendation = ({ rec, position, handleRecImpression, handleRecClick }) => {
+  if (!rec) return null
+  const { title, slug, topImageUrl, publisher, resolvedItem } = rec
+  const { logoWideBwUrl, name } = publisher
+  const url = `/explore/item/${slug}`
+  const thumbnailUrl = getImageCacheUrl(topImageUrl, { width: 270, height: 150 })
+
+  function handleVisible() {
+    handleRecImpression({
+      location: 'Bottom',
+      module: POCKET_MODULE,
+      resolvedId: resolvedItem.resolvedId,
+      position
+    })
+  }
+
+  function handleClick(e) {
+    e.preventDefault()
+    handleRecClick({
+      location: 'Bottom',
+      module: POCKET_MODULE,
+      resolvedId: resolvedItem.resolvedId,
+      position
+    })
+    // timeout ensures analytics event completes
+    setTimeout(() => (document.location.href = url), 250)
+  }
+
   return (
-    <ul className={recommendationsStyles}>
-      {recommendations.slice(0, maxRecommendations).map((r, position) => {
-        const { syndicated_article } = r
-        if (!syndicated_article) {
-          return null
-        }
-
-        const { title, slug, topImageUrl, publisher, resolvedItem } = syndicated_article
-
-        const url = `/explore/item/${slug}`
-
-        function handleVisible() {
-          handleRecImpression({
-            location: 'Bottom',
-            module: POCKET_MODULE,
-            resolvedId: resolvedItem.resolvedId,
-            position
-          })
-        }
-
-        function handleClick(e) {
-          e.preventDefault()
-          handleRecClick({
-            location: 'Bottom',
-            module: POCKET_MODULE,
-            resolvedId: resolvedItem.resolvedId,
-            position
-          })
-          // timeout ensures analytics event completes
-          setTimeout(() => (document.location.href = url), 250)
-        }
-
-        const preferredThumbnailSize = { width: 270, height: 150 }
-        return (
-          <VisibilitySensor key={slug} onVisible={handleVisible}>
-            <Recommendation
-              title={title}
-              url={url}
-              thumbnailUrl={getImageCacheUrl(topImageUrl, preferredThumbnailSize)}
-              publisher={publisher}
-              handleClick={handleClick}
-            />
-          </VisibilitySensor>
-        )
-      })}
-    </ul>
+    <VisibilitySensor onVisible={handleVisible}>
+      <li className={recommendationStyles} data-cy="pocket-recommended-article">
+        <Link href={url}>
+          <a className="thumbnail" onClick={handleClick}>
+            <img src={thumbnailUrl} alt={`Logo for ${name}`} />
+          </a>
+        </Link>
+        <div className="details">
+          <Publisher name={name} logo={logoWideBwUrl} />
+          <Link href={url}>
+            <a onClick={handleClick}>
+              <h4 className="h5">{title}</h4>
+            </a>
+          </Link>
+        </div>
+      </li>
+    </VisibilitySensor>
   )
 }
 
-const PocketRecs = ({
+export const PocketRecs = ({
   recommendations,
   maxRecommendations,
   handleRecImpression,
@@ -236,16 +206,22 @@ const PocketRecs = ({
 }) => {
   if (recommendations.length === 0) return null
 
+  const recsToDisplay = recommendations.slice(0, maxRecommendations)
+
   return (
     <div className={cx(pocketRecsStyles, 'pocket-recs')}>
-      <Heading data-cy="pocket-recs-heading" />
-      <Recommendations
-        data-cy="pocket-recommended-articles"
-        recommendations={recommendations}
-        maxRecommendations={maxRecommendations}
-        handleRecImpression={handleRecImpression}
-        handleRecClick={handleRecClick}
-      />
+      <Heading />
+      <ul className={recommendationsStyles} data-cy="pocket-recommended-articles">
+        {recsToDisplay.map(({ syndicated_article }, index) => (
+          <Recommendation
+            key={syndicated_article?.slug}
+            rec={syndicated_article}
+            position={index}
+            handleRecImpression={handleRecImpression}
+            handleRecClick={handleRecClick}
+          />
+        ))}
+      </ul>
     </div>
   )
 }
@@ -275,8 +251,8 @@ PocketRecs.propTypes = {
 PocketRecs.defaultProps = {
   recommendations: [],
   maxRecommendations: 3,
-  handleRecImpression() {},
-  handleRecClick() {}
+  handleRecImpression: () => {},
+  handleRecClick: () => {}
 }
 
 export default PocketRecs
