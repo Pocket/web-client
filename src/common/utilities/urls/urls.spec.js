@@ -5,8 +5,8 @@ import { getImageCacheUrl } from 'common/utilities'
 import { domainForUrl } from 'common/utilities'
 import { getTopLevelPath } from 'common/utilities'
 
-describe('urlWithPocketRedirect', function () {
-  it('returns a properly formatted pocket redirect url.', function () {
+describe('urlWithPocketRedirect', () => {
+  it('returns a properly formatted pocket redirect url.', () => {
     const url = 'http://www.hasthelargehadroncolliderdestroyedtheworldyet.com'
     const redirect = urlWithPocketRedirect(url)
 
@@ -16,7 +16,7 @@ describe('urlWithPocketRedirect', function () {
     )
   })
 
-  it('escapes problematic characters in the original url.', function () {
+  it('escapes problematic characters in the original url.', () => {
     const url = 'http://www.example.com?something=wicked&thiswaycomes'
     const redirect = urlWithPocketRedirect(url)
 
@@ -27,8 +27,8 @@ describe('urlWithPocketRedirect', function () {
   })
 })
 
-describe('getImageCacheUrl', function () {
-  it('returns a properly formatted pocket image cache url.', function () {
+describe('getImageCacheUrl', () => {
+  it('returns a properly formatted pocket image cache url.', () => {
     const url = 'https://i.picsum.photos/id/10/2500/1667.jpg'
     const imageCache = getImageCacheUrl(url)
 
@@ -38,7 +38,7 @@ describe('getImageCacheUrl', function () {
     )
   })
 
-  it('escapes problematic characters in the original url.', function () {
+  it('escapes problematic characters in the original url.', () => {
     const url = 'https://i.picsum.photos/id/1012/3973/2639.jpg?grayscale' //eslint-disable-line
     const redirect = getImageCacheUrl(url)
 
@@ -48,7 +48,7 @@ describe('getImageCacheUrl', function () {
     )
   })
 
-  it('sets width and height if they are optionally passed in', function () {
+  it('sets width and height if they are optionally passed in', () => {
     const url = 'https://i.picsum.photos/id/1015/6000/4000.jpg'
     const redirect = getImageCacheUrl(url, { width: 400, height: 250 })
 
@@ -58,7 +58,7 @@ describe('getImageCacheUrl', function () {
     )
   })
 
-  it('sets only width if it is optionally passed in', function () {
+  it('sets only width if it is optionally passed in', () => {
     const url = 'https://i.picsum.photos/id/1015/6000/4000.jpg'
     const redirect = getImageCacheUrl(url, { width: 400 })
 
@@ -68,7 +68,7 @@ describe('getImageCacheUrl', function () {
     )
   })
 
-  it('sets only height if it is optionally passed in', function () {
+  it('sets only height if it is optionally passed in', () => {
     const url = 'https://i.picsum.photos/id/1015/6000/4000.jpg'
     const redirect = getImageCacheUrl(url, { height: 250 })
 
@@ -79,8 +79,8 @@ describe('getImageCacheUrl', function () {
   })
 })
 
-describe('domainForUrl', function () {
-  it('returns a domain with extra info stripped', function () {
+describe('domainForUrl', () => {
+  it('returns a domain with extra info stripped', () => {
     const domain = domainForUrl(
       'http://www.example.com/extraurl/other?param=12341234&otherParam=nopenope'
     )
@@ -88,7 +88,7 @@ describe('domainForUrl', function () {
     assert.strictEqual(domain, 'example.com')
   })
 
-  it('returns handles https and http', function () {
+  it('returns handles https and http', () => {
     const secureDomain = domainForUrl('https://www.example.com')
     const regularDomain = domainForUrl('http://www.example.com')
 
@@ -96,7 +96,7 @@ describe('domainForUrl', function () {
     assert.strictEqual(regularDomain, 'example.com')
   })
 
-  it('returns handles top level domains properly', function () {
+  it('returns handles top level domains properly', () => {
     const noTLD = domainForUrl('https://example.com')
     const wwwTLD = domainForUrl('http://www.example.com')
     const altTLD = domainForUrl('http://thegreatestshow.example.com')
@@ -106,14 +106,14 @@ describe('domainForUrl', function () {
     assert.strictEqual(altTLD, 'thegreatestshow.example.com')
   })
 
-  it('returns false if no url is passed', function () {
+  it('returns false if no url is passed', () => {
     const falseUrl = domainForUrl()
 
     assert.ok(!falseUrl)
   })
 })
 
-describe('getTopLevelPath()', function () {
+describe('getTopLevelPath', () => {
   it('returns top level path regardless of depth', () => {
     assert.equal(getTopLevelPath('/discover/syndicated-article'), 'discover')
     assert.equal(getTopLevelPath('/discover/topic'), 'discover')

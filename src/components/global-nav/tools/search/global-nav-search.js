@@ -172,6 +172,7 @@ const GlobalNavSearch = ({
   const [isMobile, updateIsMobile] = useState(false)
   const [inputError, updateInputError] = useState(false)
 
+  const width = global?.innerWidth
   const handleInputChange = (e) => {
     updateInputError(false)
     updateSearchTerm(e?.target?.value)
@@ -196,14 +197,14 @@ const GlobalNavSearch = ({
   }, [onClose])
 
   useEffect(() => {
-    updateIsMobile(window.innerWidth < screenMediumHandset)
-  }, [window.innerWidth])
+    updateIsMobile(width < screenMediumHandset)
+  }, [width])
 
   /**
    * This block finds all the relevant elements and traps focus for them.
    */
   useLayoutEffect(() => {
-    if (!recentSearches.length) return
+    if (!recentSearches?.length) return
 
     const focusableElements =
       'a, button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'

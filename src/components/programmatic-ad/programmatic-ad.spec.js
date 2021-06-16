@@ -1,4 +1,3 @@
-import 'jsdom-global/register'
 import React from 'react'
 import assert from 'assert'
 import sinon from 'sinon'
@@ -7,8 +6,8 @@ import { verticalSidebarAd } from './ad-sizes'
 import { defineAdSlot, loadAd, createSizeMapping } from './ad-helpers'
 import * as adHelpers from './ad-helpers'
 
-describe('<ProgrammaticAd>', () => {
-  describe('initPageAdConfig()', () => {
+describe('ProgrammaticAd', () => {
+  describe('initPageAdConfig', () => {
     let setTargetingSpy = sinon.stub().returnsThis()
     let addEventListenerSpy = sinon.stub().returnsThis()
     let disableInitialLoadSpy = sinon.stub().returnsThis()
@@ -38,7 +37,7 @@ describe('<ProgrammaticAd>', () => {
       //   fetchBids: fetchBidsSpy
       // }
     })
-    after(() => {
+    afterAll(() => {
       global.googletag = cachedGoogletag
       // global.apstag = cachedApstag
     })
@@ -61,7 +60,7 @@ describe('<ProgrammaticAd>', () => {
       // assert(fetchBidsSpy.calledOnce)
     })
   })
-  describe('defineAdSlot()', () => {
+  describe('defineAdSlot', () => {
     let addServiceSpy = sinon.spy()
     let defineSlotSpy = sinon.fake.returns({
       setTargeting: sinon.fake.returns({
@@ -86,7 +85,7 @@ describe('<ProgrammaticAd>', () => {
       }
       global.gptadslots = []
     })
-    after(() => {
+    afterAll(() => {
       global.googletag = cachedGoogletag
       global.gptadslots = cachedGptAdSlots
     })
@@ -124,7 +123,7 @@ describe('<ProgrammaticAd>', () => {
       })
     })
   })
-  describe('loadAd()', () => {
+  describe('loadAd', () => {
     let displaySpy = sinon.spy()
     let refreshSpy = sinon.spy()
     let pubAdsSpy = sinon.fake.returns({
@@ -148,7 +147,7 @@ describe('<ProgrammaticAd>', () => {
       }
       global.pwRegisterLazyLoad = pwRegisterLazyLoadSpy
     })
-    after(() => {
+    afterAll(() => {
       global.googletag = cachedGoogletag
       global.gptadslots = cachedGptAdSlots
       global.pwpbjs = cachedPwpbjs

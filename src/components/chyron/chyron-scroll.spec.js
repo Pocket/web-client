@@ -1,25 +1,30 @@
-import React from 'react'
-import assert from 'assert'
-import { shallow } from 'enzyme'
+import { render } from 'test-utils'
+import '@testing-library/jest-dom/extend-expect'
+
 import { ScrollChyron } from './chyron-scroll'
+
+const TestComponent = () => <h1>Testing!</h1>
 
 describe('ScrollChyron', () => {
   const baseProps = {
-    instanceId: 'chyron-scroll.spec',
-    children: <h1>testing!</h1>
+    instanceId: 'chyron-scroll.spec'
   }
 
   it('renders with children without problem', () => {
-    const element = shallow(<ScrollChyron {...baseProps} />)
-    let chyron = element.find("[data-cy='scroll-chyron-wrapper']")
-    assert(element.exists())
-    assert(chyron.exists())
+    const { queryByCy } = render(
+      <ScrollChyron {...baseProps}>
+        <TestComponent />
+      </ScrollChyron>
+    )
+    expect(queryByCy('scroll-chyron-wrapper')).toBeTruthy()
   })
 
   it('does not render when shouldHide is true', () => {
-    const element = shallow(<ScrollChyron {...baseProps} shouldHide />)
-    let chyron = element.find("[data-cy='scroll-chyron-wrapper']")
-    assert(element.exists())
-    assert(!chyron.exists())
+    const { queryByCy } = render(
+      <ScrollChyron {...baseProps} shouldHide>
+        <TestComponent />
+      </ScrollChyron>
+    )
+    expect(queryByCy('scroll-chyron-wrapper')).toBeFalsy()
   })
 })

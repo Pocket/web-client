@@ -1,6 +1,5 @@
-import React from 'react'
-import assert from 'assert'
-import { shallow } from 'enzyme'
+import { render } from 'test-utils'
+import '@testing-library/jest-dom/extend-expect'
 import { SocialMetaData } from './social-meta-data'
 
 const mockMetaContentData = {
@@ -35,72 +34,33 @@ const optionalTags = ['itemprop-image', 'twitter-image', 'og-image']
 
 describe('SocialMetaData', () => {
   it('renders tags when complete meta data is passed in', () => {
-    const mockMetaData = Object.assign(
-      {},
-      mockMetaContentData,
-      mockMetaImageData
-    )
-    const socialMetaTags = shallow(<SocialMetaData {...mockMetaData} />)
+    const mockMetaData = { ...mockMetaContentData, ...mockMetaImageData }
+    const { getByCy } = render(<SocialMetaData {...mockMetaData} />)
 
-    const expectedTagsMissing = expectedTags.filter((tag) => {
-      const foundTag = socialMetaTags.find(`[data-cy='${tag}']`)
-      return !foundTag.exists()
-    })
-
-    const optionalTagsMissing = optionalTags.filter((tag) => {
-      const foundTag = socialMetaTags.find(`[data-cy='${tag}']`)
-      return !foundTag.exists()
-    })
-
-    assert(expectedTagsMissing.length === 0)
-    assert(optionalTagsMissing.length === 0)
+    expectedTags.forEach((tag) => expect(getByCy(tag)))
+    optionalTags.forEach((tag) => expect(getByCy(tag)))
   })
 
   it('renders text only tags when meta data is passed in without an image', () => {
-    const mockMetaData = Object.assign({}, mockMetaContentData)
-    const socialMetaTags = shallow(<SocialMetaData {...mockMetaData} />)
+    const { queryByCy, getByCy } = render(<SocialMetaData {...mockMetaContentData} />)
 
-    const expectedTagsMissing = expectedTags.filter((tag) => {
-      const foundTag = socialMetaTags.find(`[data-cy='${tag}']`)
-      return !foundTag.exists()
-    })
-
-    const optionalTagsMissing = optionalTags.filter((tag) => {
-      const foundTag = socialMetaTags.find(`[data-cy='${tag}']`)
-      return !foundTag.exists()
-    })
-
-    assert(expectedTagsMissing.length === 0)
-    assert(optionalTagsMissing.length > 0)
+    expectedTags.forEach((tag) => expect(getByCy(tag)).toBeTruthy())
+    optionalTags.forEach((tag) => expect(queryByCy(tag)).toBeFalsy())
   })
 
   it('renders nothing when title, description, or url are not present', () => {
-    const mockMetaData = Object.assign({}, mockMetaImageData)
-    const socialMetaTags = shallow(<SocialMetaData {...mockMetaData} />)
-
-    assert(socialMetaTags.type() === null)
+    const { container } = render(<SocialMetaData {...mockMetaImageData} />)
+    expect(container).toBeEmptyDOMElement()
   })
 
   it('displays default og:type element when type not included as a prop', () => {
-    const mockMetaData = Object.assign({}, mockMetaContentData)
-    const socialMetaTags = shallow(<SocialMetaData {...mockMetaData} />)
-    const typeTag = socialMetaTags
-      .find("[data-cy='og-type']")
-      .prop('content')
-
-    assert(typeTag === 'website')
+    const { getByCy } = render(<SocialMetaData {...mockMetaContentData} />)
+    expect(getByCy('og-type')).toHaveAttribute('content', 'website')
   })
 
   it('updates og:type element when including type prop', () => {
     const customTypeTag = 'gorgonzola'
-    const mockMetaData = Object.assign({}, mockMetaContentData)
-    const socialMetaTags = shallow(
-      <SocialMetaData {...mockMetaData} type={customTypeTag} />
-    )
-    const typeTag = socialMetaTags
-      .find("[data-cy='og-type']")
-      .prop('content')
-
-    assert(typeTag === customTypeTag)
+    const { getByCy } = render(<SocialMetaData {...mockMetaContentData} type={customTypeTag} />)
+    expect(getByCy('og-type')).toHaveAttribute('content', customTypeTag)
   })
 })

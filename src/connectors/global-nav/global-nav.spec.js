@@ -2,14 +2,9 @@ import assert from 'assert'
 
 import { enforceDefaultAvatar } from './global-nav'
 
-describe('GlobalNav:enforceDefaultAvatar()', function () {
+describe('GlobalNavAvatar', () => {
   it('returns an empty string when passed a default avatar url we want to override', () => {
-    assert.equal(
-      enforceDefaultAvatar(
-        'https://mydomain.com/profile-images/profileBlue.png'
-      ),
-      ''
-    )
+    assert.equal(enforceDefaultAvatar('https://mydomain.com/profile-images/profileBlue.png'), '')
   })
 
   it('passes through the avatar url, when that url contains no substring in the disallowed list', () => {

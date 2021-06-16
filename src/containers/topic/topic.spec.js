@@ -1,16 +1,30 @@
-import * as React from 'react'
-import assert from 'assert'
-import sinon from 'sinon'
-import { shallow } from 'enzyme'
+import { wrappedRender, fireEvent } from 'test-utils'
+import '@testing-library/jest-dom/extend-expect'
 
-// imported dependencies for stubbing. We have to `import * as Foo from 'foo'`
-// so that we're importing an object whose methods can be stubbed by sinon.
-import * as reactRedux from 'react-redux'
-
-import ErrorPage from 'pages/_error'
 import TopicCollection from './topic-collection'
 import TopicPage from './topic-page'
 import Topic from 'containers/topic/topic'
+
+const setAppElementStub = jest.fn()
+const ReactModalMock = ({ children }) => <div>{children}</div>
+ReactModalMock.setAppElement = setAppElementStub
+jest.mock('react-modal', () => ReactModalMock)
+
+let portalRoot = document.getElementById('portal')
+if (!portalRoot) {
+  const portalRoot = document.createElement('div')
+  portalRoot.setAttribute('id', '__next')
+  document.body.appendChild(portalRoot)
+}
+
+jest.mock('next/head', () => {
+  return {
+    __esModule: true,
+    default: ({ children }) => {
+      return <>{children}</>
+    }
+  }
+})
 
 const mockEmpty = {
   discoverTopic: {
@@ -25,8 +39,7 @@ const mockEmpty = {
       'broken-dreams': {
         curator_label: 'TwitBookFaceGram',
         display_name: 'TwitBookFaceGram',
-        display_note:
-          'Come for the social connection.  Stay for the crippling FOMA.',
+        display_note: 'Come for the social connection.  Stay for the crippling FOMA.',
         page_type: 'editorial_collection',
         topic: 'broken_dreams',
         topic_slug: 'broken-dreams'
@@ -84,56 +97,18 @@ const mockPageTopic = {
 }
 
 describe('TopicPage', function () {
-  // redux dependencies are stubbed so that we don't need to set up a Provider/context,
-  // and can mock the result of the dependencies when called.
-  const noop = () => {}
-  let useSelectorStub
-  let useDispatchStub // eslint-disable-line no-unused-vars
-  let useEffectStub // eslint-disable-line no-unused-vars
-
-  beforeEach(function () {
-    useDispatchStub = sinon.stub(reactRedux, 'useDispatch').returns(noop)
-    useSelectorStub = sinon.stub(reactRedux, 'useSelector')
-    useEffectStub = sinon.stub(React, 'useEffect')
-  })
-
-  afterEach(function () {
-    // restore the original dependencies once all tests have run.
-    sinon.restore()
-  })
-
   it('renders an error when no results are returned', () => {
-    // tell useSelector to return the pending state to the component via our stub
-    useSelectorStub.callsFake((fn) => fn(mockEmpty))
-    const topicContainer = shallow(<Topic />)
-    const errorRendered = topicContainer.find(ErrorPage)
-
-    assert(errorRendered.exists())
+    const { getByText } = wrappedRender(<Topic />, { initialState: mockEmpty })
+    expect(getByText('Oops', { exact: false }))
   })
 
   it('renders a topic collection when `page_type` is `editorial_collection`', () => {
-    const mockState = mockCollectionTopic
-
-    // tell useSelector to return the pending state to the component via our stub
-    useSelectorStub.callsFake((fn) => fn(mockState))
-    const topicContainer = shallow(<Topic />)
-    const topicCollectionRendered = topicContainer.find(TopicCollection)
-    const topicPageRendered = topicContainer.find(TopicPage)
-
-    assert(topicCollectionRendered.exists())
-    assert(!topicPageRendered.exists())
+    const { getByRole } = wrappedRender(<Topic />, { initialState: mockCollectionTopic })
+    expect(getByRole('heading', { level: 1 })).toHaveTextContent('Laser Cats!')
   })
 
   it('renders a topic page when `page_type` is not `editorial_collection`', () => {
-    const mockState = mockPageTopic
-
-    // tell useSelector to return the pending state to the component via our stub
-    useSelectorStub.callsFake((fn) => fn(mockState))
-    const topicContainer = shallow(<Topic />)
-    const topicPageRendered = topicContainer.find(TopicPage)
-    const topicCollectionRendered = topicContainer.find(TopicCollection)
-
-    assert(topicPageRendered.exists())
-    assert(!topicCollectionRendered.exists())
+    const { getByRole } = wrappedRender(<Topic />, { initialState: mockPageTopic })
+    expect(getByRole('heading', { level: 1 })).toHaveTextContent('Badgers & Badges')
   })
 })

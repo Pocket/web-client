@@ -3,11 +3,7 @@ import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 import classnames from 'classnames'
 import { css } from 'linaria'
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks
-} from 'body-scroll-lock'
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import {
   breakpointSmallDesktop,
   breakpointTinyTablet,
@@ -219,13 +215,15 @@ const Modal = ({
         portalClassName={classnames([portalClassName])}
         closeTimeoutMS={closeTimeoutMS} // necessary to make outgoing animation display
         data-cy="modal"
-        contentRef={(node) => (modalContentRef = node)}
-        ref={modalContentRef}>
-        {showCloseButton ? (
-          <CloseButton handleClose={handleClose} data-cy="close-modal-button" />
-        ) : null}
-        {title ? <ModalHeader title={title} /> : null}
-        <div onClick={onClick}>{children}</div>
+        contentRef={(node) => (modalContentRef = node)}>
+        <div ref={modalContentRef}>
+          {/** Error on this ref */}
+          {showCloseButton ? (
+            <CloseButton handleClose={handleClose} data-cy="close-modal-button" />
+          ) : null}
+          {title ? <ModalHeader title={title} /> : null}
+          <div onClick={onClick}>{children}</div>
+        </div>
       </ReactModal>
     </React.Fragment>
   )

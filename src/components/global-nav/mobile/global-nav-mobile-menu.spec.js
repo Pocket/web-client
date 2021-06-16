@@ -1,11 +1,6 @@
-import assert from 'assert'
-import React from 'react'
-import sinon from 'sinon'
-import { shallow } from 'enzyme'
-import { mockEvent } from '@pocket/web-utilities/test-utils'
-import GlobalNavMobileMenu, { Menu, MobileLink } from './global-nav-mobile-menu'
-import { Drawer } from '@pocket/web-ui'
-import Router from 'next/router'
+import { render, fireEvent } from 'test-utils'
+import '@testing-library/jest-dom/extend-expect'
+import GlobalNavMobileMenu from './global-nav-mobile-menu'
 
 const baseProps = {
   appRootSelector: '#root',
@@ -26,97 +21,75 @@ const baseProps = {
   ]
 }
 
+const { links } = baseProps
+
+// Mock modal
+const setAppElementStub = jest.fn()
+const ReactModalMock = ({ children }) => <div>{children}</div>
+ReactModalMock.setAppElement = setAppElementStub
+jest.mock('react-modal', () => ReactModalMock)
+
+let portalRoot = document.getElementById('portal')
+if (!portalRoot) {
+  const portalRoot = document.createElement('div')
+  portalRoot.setAttribute('id', 'root')
+  document.body.appendChild(portalRoot)
+}
+
 describe('GlobalNavMobileMenu', () => {
-  it('shows the menu when reflecting the `isOpen` prop', () => {
+  it('shows the menu when `isOpen` is true', () => {
+    const { getByCy } = render(<GlobalNavMobileMenu {...baseProps} isOpen={true} />)
+    expect(getByCy('mobile-menu'))
+  })
+
+  it('does not show the menu when `isOpen` is false', () => {
     // Menu is held in the drawer component
-    const wrapper = shallow(
-      <GlobalNavMobileMenu {...baseProps} isOpen={true} />
-    )
-    const drawer = wrapper.find(Drawer)
-
-    assert.equal(drawer.prop('isOpen'), true)
-
-    const wrapper2 = shallow(
-      <GlobalNavMobileMenu {...baseProps} isOpen={false} />
-    )
-    const drawer2 = wrapper2.find(Drawer)
-
-    assert.equal(drawer2.prop('isOpen'), false)
+    const { queryByCy } = render(<GlobalNavMobileMenu {...baseProps} isOpen={false} />)
+    expect(queryByCy('mobile-menu')).toBeFalsy()
   })
 
   it('renders a premium section only when a user is logged in, but NOT premium', () => {
-    const wrapper = shallow(
-      <GlobalNavMobileMenu
-        {...baseProps}
-        isUserLoggedIn={true}
-        isUserPremium={false}
-      />
+    const { getByCy } = render(
+      <GlobalNavMobileMenu {...baseProps} isUserLoggedIn={true} isUserPremium={false} />
     )
-    const menu = wrapper.find(Menu).shallow()
+    expect(getByCy('premium-nudge-section'))
+  })
 
-    assert(menu.find("[data-cy='premium-nudge-section']").exists())
-
-    const wrapper2 = shallow(
-      <GlobalNavMobileMenu
-        {...baseProps}
-        isUserLoggedIn={true}
-        isUserPremium={true}
-      />
+  it('does not renders a premium section when a user is premium', () => {
+    const { queryByCy } = render(
+      <GlobalNavMobileMenu {...baseProps} isUserLoggedIn={true} isUserPremium={true} />
     )
-    const menu2 = wrapper2.find(Menu).shallow()
-
-    assert(!menu2.find("[data-cy='premium-nudge-section']").exists())
+    expect(queryByCy('premium-nudge-section')).toBeFalsy()
   })
 
   it('renders the correct number of links', () => {
-    const wrapper = shallow(<GlobalNavMobileMenu {...baseProps} />)
-    const links = wrapper.find(Menu).dive().find(MobileLink)
-
-    assert.equal(links.length, 2)
+    const { getAllByRole } = render(<GlobalNavMobileMenu {...baseProps} />)
+    expect(getAllByRole('link')).toHaveLength(2)
   })
 
   it('renders the links with correct labels as specified in the `links` prop', () => {
-    // Mock router
-    Router.router = {
-      push: () => {},
-      prefetch: () => new Promise((resolve, reject) => {})
-    }
-
-    const wrapper = shallow(<GlobalNavMobileMenu {...baseProps} />)
-    const links = wrapper.find(Menu).dive().find(MobileLink)
-
-    const firstLink = links.at(0).dive().find('a')
-    const secondLink = links.at(1).dive().find('a')
-
-    assert.equal(firstLink.text(), baseProps.links[0].label)
-    assert.equal(secondLink.text(), baseProps.links[1].label)
+    const { getByText } = render(<GlobalNavMobileMenu {...baseProps} />)
+    links.forEach((link) => {
+      expect(getByText(link.label)).toHaveAttribute('href', link.url)
+    })
   })
 
   it('applies the "selected" link state correctly based on props.selectedLink', () => {
-    const wrapper = shallow(
-      <GlobalNavMobileMenu
-        {...baseProps}
-        selectedLink={baseProps.links[0].name}
-      />
+    const { getByText } = render(
+      <GlobalNavMobileMenu {...baseProps} selectedLink={links[0].name} />
     )
-    const links = wrapper.find(Menu).dive().find(MobileLink)
 
-    const firstLink = links.at(0).dive().find('a')
-
-    assert.equal(firstLink.prop('className'), 'selected')
+    expect(getByText(links[0].label)).toHaveClass('selected')
+    expect(getByText(links[1].label)).not.toHaveClass('selected')
   })
 
   it('calls the props.onLinkClick callback with the name and url of a link when clicked', () => {
-    const spy = sinon.spy()
-    const wrapper = shallow(
-      <GlobalNavMobileMenu {...baseProps} onLinkClick={spy} />
+    const onLinkClick = jest.fn()
+    const { getAllByRole } = render(
+      <GlobalNavMobileMenu {...baseProps} onLinkClick={onLinkClick} />
     )
-    const links = wrapper.find(Menu).dive().find(MobileLink)
-
-    const firstLink = links.at(0).dive().find('a')
-
-    firstLink.simulate('click', mockEvent)
-
-    assert(spy.calledWith(baseProps.links[0].name, baseProps.links[0].url))
+    const linkAnchors = getAllByRole('link')
+    fireEvent.click(linkAnchors[0])
+    expect(onLinkClick).toHaveBeenCalledWith(links[0].name, links[0].url)
   })
 })

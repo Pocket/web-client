@@ -1,32 +1,37 @@
-import React from 'react'
-import assert from 'assert'
-import { shallow } from 'enzyme'
+import { render } from 'test-utils'
+import '@testing-library/jest-dom/extend-expect'
+
 import { Chyron } from './chyron'
 
+const TestComponent = () => <h1>Testing!</h1>
+
 describe('Chyron', () => {
-  const baseProps = {
-    instanceId: 'chyron.spec',
-    children: <h1>testing!</h1>
-  }
+  const baseProps = { instanceId: 'chyron.spec' }
 
   it('renders with children without problem', () => {
-    const element = shallow(<Chyron {...baseProps} />)
-    let chyron = element.find("[data-cy='chyron-wrapper']")
-    assert(element.exists())
-    assert(chyron.exists())
+    const { queryByCy } = render(
+      <Chyron {...baseProps}>
+        <TestComponent />
+      </Chyron>
+    )
+    expect(queryByCy('chyron-wrapper')).toBeTruthy()
   })
 
   it('does not render when initialDismissed is true', () => {
-    const element = shallow(<Chyron {...baseProps} initialDismissed />)
-    let chyron = element.find("[data-cy='chyron-wrapper']")
-    assert(element.exists())
-    assert(!chyron.exists())
+    const { queryByCy } = render(
+      <Chyron {...baseProps} initialDismissed>
+        <TestComponent />
+      </Chyron>
+    )
+    expect(queryByCy('chyron-wrapper')).toBeFalsy()
   })
 
   it('does not render when initialSuccess is true', () => {
-    const element = shallow(<Chyron {...baseProps} initialSuccess />)
-    let chyron = element.find("[data-cy='chyron-wrapper']")
-    assert(element.exists())
-    assert(!chyron.exists())
+    const { queryByCy } = render(
+      <Chyron {...baseProps} initialSuccess>
+        <TestComponent />
+      </Chyron>
+    )
+    expect(queryByCy('chyron-wrapper')).toBeFalsy()
   })
 })

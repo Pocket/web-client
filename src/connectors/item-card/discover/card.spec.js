@@ -1,42 +1,10 @@
-import * as React from 'react'
-import assert from 'assert'
-import sinon from 'sinon'
-import { shallow } from 'enzyme'
-
-// imported dependencies for stubbing. We have to `import * as Foo from 'foo'`
-// so that we're importing an object whose methods can be stubbed by sinon.
-import * as reactRedux from 'react-redux'
-
+import { wrappedRender } from 'test-utils'
+import '@testing-library/jest-dom/extend-expect'
+import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils'
 import { ItemCard } from './card'
-import { ActionsDiscover } from './card-actions'
 
-import { Card } from 'components/item-card/card'
-
-describe('ItemCard', function () {
-  // redux dependencies are stubbed so that we don't need to set up a Provider/context,
-  // and can mock the result of the dependencies when called.
-  const noop = () => {}
-  let useSelectorStub
-  let useDispatchStub // eslint-disable-line no-unused-vars
-  let useEffectStub // eslint-disable-line no-unused-vars
-  let unAuthSaveAction
-  let unSaveAction
-  let saveAction
-
-  beforeEach(function () {
-    useDispatchStub = sinon.stub(reactRedux, 'useDispatch').returns(noop)
-    useSelectorStub = sinon.stub(reactRedux, 'useSelector')
-    useEffectStub = sinon.stub(React, 'useEffect')
-    unSaveAction = sinon.stub()
-    unAuthSaveAction = sinon.stub()
-    saveAction = sinon.stub()
-  })
-
-  afterEach(function () {
-    // restore the original dependencies once all tests have run.
-    sinon.restore()
-  })
-
+//!! This test is not very effective.  Keeping it for parity as we switch to jest
+describe('ItemCard', () => {
   it('renders an article card', () => {
     const mockState = {
       user: { auth: true },
@@ -51,14 +19,14 @@ describe('ItemCard', function () {
         }
       }
     }
-    // tell useSelector to return state to the component via our stub
-    useSelectorStub.callsFake((fn) => fn(mockState))
+
+    mockAllIsIntersecting()
 
     // render the topic card
-    const topicCard = shallow(<ItemCard id="12345" position="3" />)
+    const { getByCy } = wrappedRender(<ItemCard id="12345" position={3} />, {
+      initialState: mockState
+    })
 
-    // make sure it has rendered an Card
-    const articleCard = topicCard.find(Card)
-    assert(articleCard.exists())
+    expect(getByCy('article-card-', { exact: false }))
   })
 })

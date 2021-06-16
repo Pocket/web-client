@@ -62,9 +62,9 @@ const itemWithMissingData = [
   }
 ]
 
-describe('My List Items', function () {
-  describe('deriveItemData', function () {
-    it('should derive data as expected', function () {
+describe('My List Items', () => {
+  describe('deriveItemData', () => {
+    it('should derive data as expected', () => {
       const derivedItems = deriveMyListItems(itemWithMissingData)
       const expectedSaveUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
       const expectedOpenUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore

@@ -112,7 +112,7 @@ const listToSort = [
   }
 ]
 
-describe('Filtering', function () {
+describe('Filtering', () => {
   it('should filterUnread', () => {
     const filteredList = listToSort.filter(filterByUnread)
     assert.deepStrictEqual(
@@ -133,13 +133,7 @@ describe('Filtering', function () {
     const filteredList = listToSort.filter(filterByFavorites)
     assert.deepStrictEqual(
       filteredList.map((item) => item.hero),
-      [
-        'Spider-Man',
-        'CAPTAIN MARVEL',
-        'Black Widow',
-        'Captain America',
-        'Black Cat'
-      ]
+      ['Spider-Man', 'CAPTAIN MARVEL', 'Black Widow', 'Captain America', 'Black Cat']
     )
   })
 
@@ -186,7 +180,7 @@ describe('Filtering', function () {
   })
 })
 
-describe('Sorting', function () {
+describe('Sorting', () => {
   it('should sortByNewest', () => {
     const sortedList = listToSort.sort(sortByNewest)
     const totalItems = sortedList.length - 1
@@ -202,36 +196,28 @@ describe('Sorting', function () {
   })
 
   it('should sortByNewestArchive', () => {
-    const sortedList = listToSort
-      .filter(filterByArchived)
-      .sort(sortByNewestArchive)
+    const sortedList = listToSort.filter(filterByArchived).sort(sortByNewestArchive)
     const totalItems = sortedList.length - 1
     assert.strictEqual(sortedList[0].name, 'Thanos')
     assert.strictEqual(sortedList[totalItems].name, 'Peter Benjamin Parker')
   })
 
   it('should sortByOldestArchive', () => {
-    const sortedList = listToSort
-      .filter(filterByArchived)
-      .sort(sortByOldestArchive)
+    const sortedList = listToSort.filter(filterByArchived).sort(sortByOldestArchive)
     const totalItems = sortedList.length - 1
     assert.strictEqual(sortedList[0].name, 'Peter Benjamin Parker')
     assert.strictEqual(sortedList[totalItems].name, 'Thanos')
   })
 
   it('should sortByNewestFavorite', () => {
-    const sortedList = listToSort
-      .filter(filterByFavorites)
-      .sort(sortByNewestFavorite)
+    const sortedList = listToSort.filter(filterByFavorites).sort(sortByNewestFavorite)
     const totalItems = sortedList.length - 1
     assert.strictEqual(sortedList[0].name, 'Peter Benjamin Parker')
     assert.strictEqual(sortedList[totalItems].name, 'Felicia Hardy')
   })
 
   it('should sortByOldestFavorite', () => {
-    const sortedList = listToSort
-      .filter(filterByFavorites)
-      .sort(sortByOldestFavorite)
+    const sortedList = listToSort.filter(filterByFavorites).sort(sortByOldestFavorite)
     const totalItems = sortedList.length - 1
     assert.strictEqual(sortedList[0].name, 'Felicia Hardy')
     assert.strictEqual(sortedList[totalItems].name, 'Peter Benjamin Parker')

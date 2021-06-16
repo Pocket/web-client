@@ -49,7 +49,7 @@ const recentSearchStyle = css`
   }
 `
 
-export function RecentSearches({ searchTerms }) {
+export function RecentSearches({ searchTerms = [] }) {
   return searchTerms.length ? (
     <div className={recentSearchStyle}>
       <h4 className="title">Recent Searches</h4>

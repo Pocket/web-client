@@ -50,24 +50,26 @@ const itemWithMissingData = [
   }
 ]
 
-describe('Discover Items', function () {
-  describe('updateSaveStatus', function () {
-    beforeEach(function () {
-      this.currentTest.state = {
+describe('Discover Items', () => {
+  let state = {}
+
+  describe('updateSaveStatus', () => {
+    beforeEach(() => {
+      state = {
         abc123: { name: 'mittens', save_status: 'unsaved' },
         def456: { name: 'kittens', save_status: 'unsaved' }
       }
     })
 
-    it('updates save status for a specific id correctly', function () {
-      const newState = updateSaveStatus(this.test.state, 'abc123', 'saved')
+    it('updates save status for a specific id correctly', () => {
+      const newState = updateSaveStatus(state, 'abc123', 'saved')
       assert.strictEqual(newState['abc123'].save_status, 'saved')
       assert.strictEqual(newState['def456'].save_status, 'unsaved')
     })
   })
 
-  describe('deriveItemData', function () {
-    it('should not fail when incomplete item data is passed in', function () {
+  describe('deriveItemData', () => {
+    it('should not fail when incomplete item data is passed in', () => {
       const derivedItems = deriveDiscoverItems(itemWithMissingData)
       const expectedSaveUrl = 'http://bloomberg.com/features/2020-carnival-cruise-coronavirus' //prettier-ignore
       const expectedOpenUrl = 'https://getpocket.com/redirect?url=https%3A%2F%2Fwww.bloomberg.com%2Ffeatures%2F2020-carnival-cruise-coronavirus%2F%3Futm_source%3Dpocket%26utm_medium%3Demail%26utm_campaign%3Dpockethits' //prettier-ignore
@@ -89,16 +91,16 @@ describe('Discover Items', function () {
         syndicated: false,
         save_status: 'unsaved',
         openExternal: true,
-        recommendationId: "RecommendationAPI/3296676960",
+        recommendationId: 'RecommendationAPI/3296676960',
         slateLineup: {
-          requestId: "4bf3d704-1f73-4d39-9a97-935a4c982e5d",
-          experimentId: "fc6d7d9",
-          id: "9c3018a8-8aa9-4f91-81e9-ebcd95fc82da"
+          requestId: '4bf3d704-1f73-4d39-9a97-935a4c982e5d',
+          experimentId: 'fc6d7d9',
+          id: '9c3018a8-8aa9-4f91-81e9-ebcd95fc82da'
         },
         slate: {
-          requestId: "344a9e86-80e1-4c01-820f-17940d1628f4",
-          experimentId: "3ec8c48",
-          id: "48e766be-5e96-46fb-acbf-55fee3ae8a28"
+          requestId: '344a9e86-80e1-4c01-820f-17940d1628f4',
+          experimentId: '3ec8c48',
+          id: '48e766be-5e96-46fb-acbf-55fee3ae8a28'
         }
       })
     })
