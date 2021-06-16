@@ -41,7 +41,7 @@ const whatsNewHeaderStyle = css`
 export const WhatsNewHeader = ({ title }) => {
   return (
     <header className={whatsNewHeaderStyle}>
-      <h1 className="pageTitle">{capitalizeFirstLetter(title)}</h1>
+      <h1 className="pageTitle" data-cy="page-title">{capitalizeFirstLetter(title)}</h1>
     </header>
   )
 }

@@ -70,7 +70,7 @@ export const TaggedHeader = ({
   return (
     <div className={tagPageHeaderStyle}>
       <header className={myListHeaderStyle}>
-        <h1 className="pageTitle">{capitalizeFirstLetter(title)}</h1>
+        <h1 className="pageTitle" data-cy="page-title">{capitalizeFirstLetter(title)}</h1>
         <FilterMenu subset={subset} filter={filter} tag={tag} />
         <ListSort toggleSortOrder={toggleSortOrder} sortOrder={sortOrder} />
       </header>

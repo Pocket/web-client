@@ -23,6 +23,7 @@ const modalHeaderStyles = css`
 export const ModalHeader = ({ title, hasBorder, isSticky, className }) => {
   return (
     <h6
+      data-cy="modal-header"
       className={classnames(
         modalHeaderStyles,
         {

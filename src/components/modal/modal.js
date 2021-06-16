@@ -269,6 +269,7 @@ const CloseButton = ({ handleClose }) => {
 
   return (
     <button
+      data-cy="close-modal"
       className={closeButtonStyles}
       aria-label={t('common:close-label', 'Close')}
       onClick={handleClose}>

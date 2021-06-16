@@ -160,6 +160,7 @@ export const Card = (props) => {
                 <a
                   ref={linkRef}
                   onClick={onOpen}
+                  data-cy="title-link"
                   target={openExternal ? '_blank' : undefined}
                   tabIndex={0}
                   onFocus={handleFocus}>
@@ -186,11 +187,14 @@ export const Card = (props) => {
                 href={open_url}
                 target="_blank"
                 onClick={onOpenOriginalUrl}
+                data-cy="publisher-link"
                 tabIndex={0}>
                 {publisher}
               </a>
             ) : null}
-            {read_time ? <span className="readtime"> · {read_time} min</span> : null}
+            {read_time ? (
+              <span className="readtime" data-cy="read-time"> · {read_time} min</span>
+            ) : null}
             {syndicated ? (
               <span className="syndicated">
                 <SyndicatedIcon />

@@ -1,4 +1,5 @@
-import { Modal, ModalBody, ModalFooter, Button, TextArea } from '@pocket/web-ui'
+import { Button } from '@pocket/web-ui'
+import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { itemReportConfirm } from 'connectors/items-by-id/discover/items.report'
@@ -98,7 +99,7 @@ export const ReportFeedbackModal = () => {
       </ModalBody>
       {success ? null : (
         <ModalFooter>
-          <Button type="submit" onClick={confirmReport} autoFocus={true}>
+          <Button type="submit" data-cy="submit-report-feedback" onClick={confirmReport} autoFocus={true}>
             <Trans i18nKey="confirm:report-feedback">Report Feedback</Trans>
           </Button>
         </ModalFooter>

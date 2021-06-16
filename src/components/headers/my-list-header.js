@@ -69,7 +69,7 @@ export const myListHeaderStyle = css`
 export const MyListHeader = ({ subset, filter, title, sortOrder, toggleSortOrder }) => {
   return subset ? (
     <header className={myListHeaderStyle}>
-      <h1 className="pageTitle">{capitalizeFirstLetter(title)}</h1>
+      <h1 className="pageTitle" data-cy="page-title">{capitalizeFirstLetter(title)}</h1>
       <FilterMenu subset={subset} filter={filter} />
       { subset !== 'tag-page' ? (
         <ListSort toggleSortOrder={toggleSortOrder} sortOrder={sortOrder} />

@@ -104,7 +104,7 @@ const cardListHeadingStyle = css`
 export const CardPageHeader = ({ title, subHeading }) => {
   return title ? (
     <header className={cardPageHeaderStyle}>
-      <h1 className="pageTitle">{title}</h1>
+      <h1 className="pageTitle" data-cy="page-title">{title}</h1>
       {subHeading ? <h2 className={cx('h3', subHeadingStyle)}>{subHeading}</h2> : null}
     </header>
   ) : null

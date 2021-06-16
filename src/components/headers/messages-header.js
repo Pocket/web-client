@@ -41,7 +41,7 @@ const messagesHeaderStyle = css`
 export const MessagesHeader = ({ title }) => {
   return (
     <header className={messagesHeaderStyle}>
-      <h1 className="pageTitle">{capitalizeFirstLetter(title)}</h1>
+      <h1 className="pageTitle" data-cy="page-title">{capitalizeFirstLetter(title)}</h1>
     </header>
   )
 }
