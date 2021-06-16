@@ -16,7 +16,7 @@
     "cypress:ci": "cypress run",
     "lint": "./node_modules/.bin/eslint $(find src/ -name '*.js' ! -name '*.stories.js' ! -name '*.spec.js')",
     "lint-diff": "./node_modules/.bin/eslint $(git diff main --name-only -- components/*.js connectors/*.js containers/*.js) --quiet",
-    "test": "jest",
+    "test": "jest --reporters='default'",
     "test:ci": "jest --ci",
     "storybook": "start-storybook -p 9009 -s ./public -h localhost.web-client.getpocket.com",
     "build-storybook": "build-storybook",
