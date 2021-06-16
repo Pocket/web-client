@@ -53,7 +53,8 @@ jobs:
   # ——————————————————————————————————————————————————————————————
   unit_tests:
     # CPU and RAM resources for the job.
-    resource_class: small
+    resource_class: medium
+    parallelism: 5
     # Define the container we will run the task in (standard node)
     docker:
       - image: circleci/node:16
