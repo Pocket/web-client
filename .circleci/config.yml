@@ -63,7 +63,9 @@ jobs:
       # Run tests
       - run:
           name: Run unit tests
-          command: npm run test:ci
+          command: |
+              TEST=$(circleci tests glob src/**/*.spec.js | circleci tests split)
+              npm run test --maxWorkers=50% $TEST
 
   # ——————————————————————————————————————————————————————————————
   # Release: This will tag the branch and generate a changelog
