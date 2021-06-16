@@ -17,10 +17,14 @@
     "lint": "./node_modules/.bin/eslint $(find src/ -name '*.js' ! -name '*.stories.js' ! -name '*.spec.js')",
     "lint-diff": "./node_modules/.bin/eslint $(git diff main --name-only -- components/*.js connectors/*.js containers/*.js) --quiet",
     "test": "jest",
+    "test:ci": "jest --ci",
     "storybook": "start-storybook -p 9009 -s ./public -h localhost.web-client.getpocket.com",
     "build-storybook": "build-storybook",
     "locale-inject": "node ./.scripts/localization/locale-inject",
     "locale-parse": "node ./.scripts/localization/locale-parse"
+  },
+  "jest-junit": {
+    "addFileAttribute": "true"
   },
   "repository": {
     "type": "git",
@@ -107,6 +111,7 @@
     "i18next-parser": "4.0.1",
     "isomorphic-unfetch": "3.1.0",
     "jest": "27.0.4",
+    "jest-junit": "12.2.0",
     "jsdom": "16.5.3",
     "jsdom-global": "3.0.2",
     "mocha": "8.4.0",

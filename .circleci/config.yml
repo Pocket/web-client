@@ -61,13 +61,20 @@ jobs:
     steps:
       # Setup Environment
       - setup
+      - run: mkdir ~/junit
       # Run tests
       - run:
           name: Run unit tests
           command: |
-              TEST=$(circleci tests glob src/**/*.spec.js | circleci tests split)
-              npm run test --maxWorkers=50% $TEST
-
+              TEST=$(circleci tests glob src/**/*.spec.js | circleci tests split --split-by=timings)
+              npm run test:ci $TEST
+      - run:
+          command: cp junit.xml ~/junit/
+          when: always
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit
   # ——————————————————————————————————————————————————————————————
   # Release: This will tag the branch and generate a changelog
   # ——————————————————————————————————————————————————————————————  
