@@ -1,23 +1,12 @@
-import { render, fireEvent } from 'test-utils'
+import { render, fireEvent, mockModal } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
 import { PlayIcon, TagIcon } from '@pocket/web-ui'
 
 import GlobalNavTools from './global-nav-tools'
 
-// Mock modal
-const setAppElementStub = jest.fn()
-const ReactModalMock = ({ children }) => <div>{children}</div>
-ReactModalMock.setAppElement = setAppElementStub
-jest.mock('react-modal', () => ReactModalMock)
-
-let portalRoot = document.getElementById('portal')
-if (!portalRoot) {
-  const portalRoot = document.createElement('div')
-  portalRoot.setAttribute('id', 'root')
-  document.body.appendChild(portalRoot)
-}
-
 describe('GlobalNavTools', () => {
+  mockModal()
+
   const baseProps = {
     tools: [
       {

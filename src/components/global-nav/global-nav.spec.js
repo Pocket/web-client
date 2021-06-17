@@ -1,4 +1,4 @@
-import { wrappedRender } from 'test-utils'
+import { wrappedRender, mockModal } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
 
 import GlobalNav from './global-nav'
@@ -27,20 +27,8 @@ const baseProps = {
   appRootSelector: '#root'
 }
 
-// Mock modal
-const setAppElementStub = jest.fn()
-const ReactModalMock = ({ children }) => <div>{children}</div>
-ReactModalMock.setAppElement = setAppElementStub
-jest.mock('react-modal', () => ReactModalMock)
-
-let portalRoot = document.getElementById('portal')
-if (!portalRoot) {
-  const portalRoot = document.createElement('div')
-  portalRoot.setAttribute('id', 'root')
-  document.body.appendChild(portalRoot)
-}
-
 describe('GlobalNav', () => {
+  mockModal()
   it('renders the "Discover" and "My List" links by default', () => {
     const { getAllByCy } = wrappedRender(<GlobalNav appRootSelector="#root" flagsReady={true} />)
     const defaultLinks = getAllByCy(/global-nav-(.+)-link/)

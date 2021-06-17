@@ -93,3 +93,19 @@ export const mockGrecaptcha = ({
     execute: execute
   }
 }
+
+export const mockModal = () => {
+  // Mock modal
+  const setAppElementStub = jest.fn()
+  const ReactModalMock = ({ children }) => <div>{children}</div>
+  ReactModalMock.setAppElement = setAppElementStub
+  jest.mock('react-modal', () => ReactModalMock)
+
+  let portalRoot = document.getElementById('portal')
+  if (!portalRoot) {
+    const portalRoot = document.createElement('div')
+    portalRoot.setAttribute('id', 'root')
+    document.body.appendChild(portalRoot)
+  }
+  return { setAppElementStub }
+}

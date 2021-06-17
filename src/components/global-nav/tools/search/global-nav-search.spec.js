@@ -1,4 +1,4 @@
-import { wrappedRender, logRoles } from 'test-utils'
+import { wrappedRender, mockModal } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 
@@ -9,20 +9,8 @@ const baseProps = {
   placeholder: 'Storybook placeholder text'
 }
 
-// Mock modal
-const setAppElementStub = jest.fn()
-const ReactModalMock = ({ children }) => <div>{children}</div>
-ReactModalMock.setAppElement = setAppElementStub
-jest.mock('react-modal', () => ReactModalMock)
-
-let portalRoot = document.getElementById('portal')
-if (!portalRoot) {
-  const portalRoot = document.createElement('div')
-  portalRoot.setAttribute('id', 'root')
-  document.body.appendChild(portalRoot)
-}
-
 describe('GlobalNavSearch', () => {
+  mockModal()
   it('applies the `placeholder` prop value correctly to the input', () => {
     const { getByPlaceholderText } = wrappedRender(<GlobalNavSearch {...baseProps} />)
     expect(getByPlaceholderText(baseProps.placeholder))
