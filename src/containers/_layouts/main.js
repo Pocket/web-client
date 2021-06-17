@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import Head from 'next/head'
-import { GlobalFooter, PageContainer } from '@pocket/web-ui'
+import { GlobalFooter } from 'components/global-footer/global-footer'
+import { PageContainer } from '@pocket/web-ui'
 import GlobalNav from 'connectors/global-nav/global-nav'
 import { css, cx } from 'linaria'
 import { SocialMetaData } from 'components/social-meta-data/social-meta-data'
