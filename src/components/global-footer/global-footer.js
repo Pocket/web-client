@@ -249,7 +249,10 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
       key="footer-app-store-badge"
       target="_blank"
       rel="noopener noreferrer">
-      <img src={appStoreBadge} alt={t('global-nav:app-store', 'Download On the Apple App Store')} />
+      <img
+        src={appStoreBadge}
+        alt={t('global-footer:app-store', 'Download On the Apple App Store')}
+      />
     </a>,
     <a
       href="https://play.google.com/store/apps/details?id=com.ideashower.readitlater.pro"
@@ -257,7 +260,7 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
       key="footer-google-play-badge"
       target="_blank"
       rel="noopener noreferrer">
-      <img src={googlePlayBadge} alt={t('global-nav:google-play', 'Get It On Google Play')} />
+      <img src={googlePlayBadge} alt={t('global-footer:google-play', 'Get It On Google Play')} />
     </a>
   ]
 
@@ -276,85 +279,85 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
       <PageContainer className="footer-container">
         <div className={footerPrimaryStyle}>
           <div className={footerPrimaryGroupStyle}>
-            <h6>{t('global-nav:products', 'Products')}</h6>
+            <h6>{t('global-footer:products', 'Products')}</h6>
             <nav aria-label="Products">
               <ul>
                 <li>
                   <a href="https://getpocket.com/explore?src=footer_v2">
-                    {t('global-nav:must-read-articles', 'Must-read articles')}
+                    {t('global-footer:must-read-articles', 'Must-read articles')}
                   </a>
                 </li>
                 <li>
                   <a href="https://getpocket.com/explore/pocket-hits?src=footer_v2">
-                    {t('global-nav:daily-newsletter', 'Daily newsletter')}
+                    {t('global-footer:daily-newsletter', 'Daily newsletter')}
                   </a>
                 </li>
                 <li>
                   <a href="https://getpocket.com/premium?ep=1&src=footer_v2">
-                    {t('global-nav:pocket-premium', 'Pocket Premium')}
+                    {t('global-footer:pocket-premium', 'Pocket Premium')}
                   </a>
                 </li>
 
                 <li>
                   <a href="https://getpocket.com/welcome?src=footer_v2">
-                    {t('global-nav:save-to-pocket-extensions', 'Save to Pocket extensions')}
+                    {t('global-footer:save-to-pocket-extensions', 'Save to Pocket extensions')}
                   </a>
                 </li>
               </ul>
             </nav>
           </div>
           <div className={footerPrimaryGroupStyle}>
-            <h6>{t('global-nav:company', 'Company')}</h6>
+            <h6>{t('global-footer:company', 'Company')}</h6>
             <nav aria-label="Company">
               <ul>
                 <li>
                   <a href="https://getpocket.com/about?src=footer_v2">
-                    {t('global-nav:about', 'About')}
+                    {t('global-footer:about', 'About')}
                   </a>
                 </li>
                 <li>
                   <a href="https://getpocket.com/jobs?src=footer_v2">
-                    {t('global-nav:careers', 'Careers')}
+                    {t('global-footer:careers', 'Careers')}
                   </a>
                 </li>
                 <li>
                   <a href="https://blog.getpocket.com?src=footer_v2">
-                    {t('global-nav:blog', 'Blog')}
+                    {t('global-footer:blog', 'Blog')}
                   </a>
                 </li>
               </ul>
             </nav>
           </div>
           <div className={footerPrimaryGroupStyle}>
-            <h6>{t('global-nav:resources', 'Resources')}</h6>
+            <h6>{t('global-footer:resources', 'Resources')}</h6>
             <nav aria-label="Resources">
               <ul>
                 <li>
                   <a href="https://help.getpocket.com/?src=footer_v2">
-                    {t('global-nav:get-help', 'Get help')}
+                    {t('global-footer:get-help', 'Get help')}
                   </a>
                 </li>
                 <li>
                   <a href="https://getpocket.com/developer?src=footer_v2">
-                    {t('global-nav:developer-api', 'Developer API')}
+                    {t('global-footer:developer-api', 'Developer API')}
                   </a>
                 </li>
                 <li>
                   <a href="https://getpocket.com/publisher?src=footer_v2">
-                    {t('global-nav:pocket-for-publishers', 'Pocket for publishers')}
+                    {t('global-footer:pocket-for-publishers', 'Pocket for publishers')}
                   </a>
                 </li>
 
                 <li>
                   <a href="https://getpocket.com/sponsor?src=footer_v2">
-                    {t('global-nav:advertise', 'Advertise')}
+                    {t('global-footer:advertise', 'Advertise')}
                   </a>
                 </li>
               </ul>
             </nav>
           </div>
           <div className={cx(footerPrimaryGroupStyle, footerPrimaryAppButtonsStyle)}>
-            <h6>{t('global-nav:get-the-app', 'Get the app')}</h6>
+            <h6>{t('global-footer:get-the-app', 'Get the app')}</h6>
             {appBadges}
           </div>
         </div>
@@ -373,16 +376,16 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
             <nav aria-label="Legal">
               <span>
                 &copy; {new Date().getFullYear()}{' '}
-                {t('global-nav:read-it-later-inc', 'Read It Later, Inc.')}
+                {t('global-footer:read-it-later-inc', 'Read It Later, Inc.')}
               </span>
               <a href="https://getpocket.com/privacy?src=footer_v2">
-                {t('global-nav:privacy-policy', 'Privacy policy')}
+                {t('global-footer:privacy-policy', 'Privacy policy')}
               </a>
               <a href="https://getpocket.com/tos?src=footer_v2">
-                {t('global-nav:terms-of-service', 'Terms of service')}
+                {t('global-footer:terms-of-service', 'Terms of service')}
               </a>
               <button id="ot-sdk-btn" className="ot-sdk-show-settings">
-                {t('global-nav:cookie-preferences', 'Cookie preferences')}
+                {t('global-footer:cookie-preferences', 'Cookie preferences')}
               </button>
             </nav>
           </div>
