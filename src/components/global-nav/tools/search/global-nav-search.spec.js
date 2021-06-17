@@ -1,8 +1,6 @@
-import assert from 'assert'
-import React from 'react'
-import sinon from 'sinon'
-import { shallow } from 'enzyme'
-import { mockEvent } from '@pocket/web-utilities/test-utils'
+import { wrappedRender, mockModal } from 'test-utils'
+import '@testing-library/jest-dom/extend-expect'
+import userEvent from '@testing-library/user-event'
 
 import GlobalNavSearch from './global-nav-search'
 
@@ -11,84 +9,55 @@ const baseProps = {
   placeholder: 'Storybook placeholder text'
 }
 
-let defaultSearch
-
 describe('GlobalNavSearch', () => {
-  beforeEach(() => {
-    // we'll use this default output to compare expected changes based on props
-    defaultSearch = shallow(<GlobalNavSearch {...baseProps} />)
-  })
+  mockModal()
   it('applies the `placeholder` prop value correctly to the input', () => {
-    const input = defaultSearch.find("[data-cy='search-input']")
-
-    assert.strictEqual(input.prop('placeholder'), baseProps.placeholder)
+    const { getByPlaceholderText } = wrappedRender(<GlobalNavSearch {...baseProps} />)
+    expect(getByPlaceholderText(baseProps.placeholder))
   })
 
-  it('calls the props.onSubmit callback when the form is submitted', () => {
-    const spy = sinon.spy()
-    const search = shallow(
-      <GlobalNavSearch
-        {...baseProps}
-        onSubmit={spy}
-        value="pursuit of happiness"
-      />
+  it('calls the onSubmit callback when the form is submitted', () => {
+    const mockSubmit = jest.fn()
+    const { getByCy } = wrappedRender(
+      <GlobalNavSearch {...baseProps} onSubmit={mockSubmit} value="for a moment like this" />
     )
-
-    const form = search.find('form')
-
-    // this is meant to test the submit via keypress. Adding an event is a
-    // workaround for https://github.com/enzymejs/enzyme/issues/308
-    form.simulate('submit', mockEvent)
-
-    assert(spy.calledOnce)
+    userEvent.click(getByCy('search-submit'))
+    expect(mockSubmit).toHaveBeenCalledWith('for a moment like this')
   })
 
-  it('does not render a close button when no props.onClose is provided', () => {
-    const closeButton = defaultSearch.find("[data-cy='search-close']")
-
-    assert(!closeButton.exists())
+  it('does not render a close button when no onClose is provided', () => {
+    const { queryByCy } = wrappedRender(<GlobalNavSearch {...baseProps} />)
+    expect(queryByCy('search-close')).toBeFalsy()
   })
 
-  it('calls the props.onClose callback when the Close button is clicked', () => {
-    const spy = sinon.spy()
-    const search = shallow(<GlobalNavSearch {...baseProps} onClose={spy} />)
-    const closeButton = search.find("[data-cy='search-close']")
-
-    closeButton.simulate('click')
-
-    assert(spy.calledOnce)
+  it('calls the onClose callback when the Close button is clicked', () => {
+    const mockClose = jest.fn()
+    const { getByCy } = wrappedRender(<GlobalNavSearch {...baseProps} onClose={mockClose} />)
+    userEvent.click(getByCy('search-cancel'))
+    expect(mockClose).toHaveBeenCalled()
   })
 
-  it('calls the props.onFocus callback when the search input is focused, passing the Event object', () => {
-    const spy = sinon.spy()
-    const search = shallow(<GlobalNavSearch {...baseProps} onFocus={spy} />)
-    const searchInput = search.find("[data-cy='search-input']")
+  it('calls the onFocus callback when the search input is focused, passing the Event object', () => {
+    const mockFocus = jest.fn()
+    wrappedRender(<GlobalNavSearch {...baseProps} onFocus={mockFocus} />)
 
-    searchInput.simulate('focus', mockEvent)
-
-    assert(spy.calledWith(mockEvent))
+    userEvent.tab()
+    expect(mockFocus).toHaveBeenCalled()
   })
 
-  it('calls the props.onFocus callback when the search input is blurred, passing the Event object', () => {
-    const spy = sinon.spy()
-    const search = shallow(<GlobalNavSearch {...baseProps} onBlur={spy} />)
-    const searchInput = search.find("[data-cy='search-input']")
+  it('calls the onBlur callback when the search input is blurred, passing the Event object', () => {
+    const mockBlur = jest.fn()
+    wrappedRender(<GlobalNavSearch {...baseProps} onFocus={mockBlur} />)
 
-    searchInput.simulate('blur', mockEvent)
-
-    assert(spy.calledWith(mockEvent))
+    userEvent.tab()
+    userEvent.tab()
+    expect(mockBlur).toHaveBeenCalled()
   })
 
   it('supplies the search input with a value if a `value` prop was passed in', () => {
-    const searchInput = defaultSearch.find("[data-cy='search-input']")
-
-    assert.equal(searchInput.prop('value'), '')
-
-    const searchWithValue = shallow(
-      <GlobalNavSearch {...baseProps} value="pursuit of happiness" />
+    const { getByCy } = wrappedRender(
+      <GlobalNavSearch {...baseProps} value="for a moment like this" />
     )
-    const searchInput2 = searchWithValue.find("[data-cy='search-input']")
-
-    assert.equal(searchInput2.prop('value'), 'pursuit of happiness')
+    expect(getByCy('search-input').value).toBe('for a moment like this')
   })
 })

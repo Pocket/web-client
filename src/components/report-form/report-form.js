@@ -49,6 +49,7 @@ export function ReportForm({
             name="reason"
             value={id}
             id={id}
+            data-cy={id}
             onChange={handleRadioChange}
             checked={currentReason === id}
           />

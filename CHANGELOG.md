@@ -1,3 +1,10 @@
+## [1.14.53](https://github.com/Pocket/web-client/compare/v1.14.52...v1.14.53) (2021-06-16)
+
+
+### Bug Fixes
+
+* **qa:** adding new data-cy attributes to headers, report form, and toasts ([781a9a6](https://github.com/Pocket/web-client/commit/781a9a6a4f95594c880c451e47ebbd5c20dbfe5c))
+
 ## [1.14.52](https://github.com/Pocket/web-client/compare/v1.14.51...v1.14.52) (2021-06-14)
 
 

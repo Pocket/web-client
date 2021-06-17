@@ -93,7 +93,7 @@ Avatar.propTypes = {
    * Width/height of the avatar, in px or % (or other css string value). Since the
    * avatar will be square, this value is both width and height.
    */
-  size: PropTypes.string.isRequired,
+  size: PropTypes.string,
 
   /**
    * Provide an id if you have multiple instances per page and need unique
@@ -120,6 +120,7 @@ Avatar.propTypes = {
 
 Avatar.defaultProps = {
   id: '',
+  size: '100px',
   src: null,
   altText: 'Your avatar'
 }

@@ -194,7 +194,7 @@ PublisherRecs.propTypes = {
   publisher: PropTypes.shape({
     recommendationName: PropTypes.string,
     logo: PropTypes.object
-  }).isRequired,
+  }),
 
   /**
    * A list of recommended articles from the same publisher

@@ -13,23 +13,21 @@ export const normal = () => {
 }
 
 export const noPublisherLogo = () => {
-  const recommendationsWithNoPublisherLogo = pocketRecs.recommendations.map(
-    (recommendation) => {
-      const { syndicated_article } = recommendation
-      const syndicatedArticleNoPublisherLogo = {
-        ...syndicated_article,
-        publisher: {
-          ...syndicated_article.publisher,
-          logoWideBwUrl: null
-        }
-      }
-
-      return {
-        ...recommendation,
-        syndicated_article: syndicatedArticleNoPublisherLogo
+  const recommendationsWithNoPublisherLogo = pocketRecs.recommendations.map((recommendation) => {
+    const { syndicated_article } = recommendation
+    const syndicatedArticleNoPublisherLogo = {
+      ...syndicated_article,
+      publisher: {
+        ...syndicated_article.publisher,
+        logoWideBwUrl: null
       }
     }
-  )
+
+    return {
+      ...recommendation,
+      syndicated_article: syndicatedArticleNoPublisherLogo
+    }
+  })
   return <PocketRecs recommendations={recommendationsWithNoPublisherLogo} />
 }
 

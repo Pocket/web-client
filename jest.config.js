@@ -27,7 +27,7 @@ module.exports = {
   },
 
   // Use this configuration option to add custom reporters to Jest
-  reporters: ['@jest/reporters/build/SummaryReporter'],
+  reporters: ['default', 'jest-junit'],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   setupFilesAfterEnv: [],

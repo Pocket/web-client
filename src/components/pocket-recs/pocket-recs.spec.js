@@ -1,94 +1,50 @@
-import 'jsdom-global/register'
-import React from 'react'
-import assert from 'assert'
-import { shallow, mount } from 'enzyme'
-import PocketRecs, {
-  Heading,
-  Publisher,
-  Recommendations,
-  Recommendation
-} from './pocket-recs'
+import { render } from 'test-utils'
+import '@testing-library/jest-dom/extend-expect'
 
+import PocketRecs, { Publisher } from './pocket-recs'
 import { pocketRecommendations as pocketRecs, publisher } from 'mock/article'
 
 describe('PocketRecs', () => {
-  const baseProps = {
-    recommendations: pocketRecs.recommendations
-  }
-  it('does not render <Heading> or <Recommendations> when there are no recommendations', () => {
-    const noRecsInstance = shallow(<PocketRecs recommendations={[]} />)
-    const heading = noRecsInstance.find("[data-cy='pocket-recs-heading']")
-    const recommendations = noRecsInstance.find(
-      "[data-cy='pocket-recommended-articles']"
-    )
+  const { recommendations } = pocketRecs
 
-    assert(!heading.exists())
-    assert(!recommendations.exists())
+  it('does not render <Heading> or <Recommendations> when there are no recommendations', () => {
+    const { queryByCy } = render(<Publisher recommendations={[]} />)
+    expect(queryByCy('pocket-recs-heading')).toBeFalsy()
+    expect(queryByCy('pocket-recommended-articles')).toBeFalsy()
   })
+
   describe('Publisher', () => {
     it('renders a Publisher with a logo image, when available', () => {
       const { name, logoWideBlack } = publisher.theVerge
-      const publisherWithLogo = shallow(
-        <Publisher name={name} logo={logoWideBlack} />
-      )
-
-      assert.equal(
-        publisherWithLogo
-          .find("[data-cy='pocket-rec-publisher-logo']")
-          .prop('src'),
-        logoWideBlack
-      )
+      const { queryByCy } = render(<Publisher name={name} logo={logoWideBlack} />)
+      expect(queryByCy('pocket-rec-publisher-logo')).toBeTruthy()
     })
+
     it('renders the name of the Publisher when its logo url is not available', () => {
       const { name } = publisher.theVerge
-      const publisherNoLogo = shallow(<Publisher name={name} logo={null} />)
-
-      assert(
-        !publisherNoLogo
-          .find("[data-cy='pocket-rec-publisher-logo']")
-          .exists()
-      )
-      assert.equal(
-        publisherNoLogo
-          .find("[data-cy='pocket-rec-publisher-name']")
-          .text(),
-        name
-      )
+      const { queryByCy } = render(<Publisher name={name} logo={null} />)
+      expect(queryByCy('pocket-rec-publisher-logo')).toBeFalsy()
+      expect(queryByCy('pocket-rec-publisher-name')).toHaveTextContent(name)
     })
   })
-  describe.skip('Recommendations', () => {
+
+  describe('Recommendations', () => {
+    const tooManyRecs = [...recommendations, ...recommendations]
+    const tooFewRecs = recommendations.slice(0, 2)
     const maxRecs = 3
 
     it('limits the displayed articles to the max count if more than the max was passed in', () => {
-      const moreRecommendationsThanNeeded = [
-        ...baseProps.recommendations,
-        ...baseProps.recommendations
-      ] // total 6
-      const publisherRecsOverloaded = mount(
-        <PocketRecs
-          recommendations={moreRecommendationsThanNeeded}
-          maxRecommendations={maxRecs}
-        />
+      const { queryAllByCy } = render(
+        <PocketRecs recommendations={tooManyRecs} maxRecommendations={maxRecs} />
       )
-      assert.equal(moreRecommendationsThanNeeded.length > maxRecs, true)
-      assert.equal(publisherRecsOverloaded.find(Recommendation).length, maxRecs)
-      // VisibilitySensor needs to be manually unmounted
-      publisherRecsOverloaded.unmount()
+      expect(queryAllByCy('pocket-recommended-article')).toHaveLength(3)
     })
+
     it('displays all articles passed in if less than the max number of articles', () => {
-      const shortenedRecs = baseProps.recommendations.slice(0, 2)
-      const publisherRecsLessThanMax = mount(
-        <PocketRecs
-          recommendations={shortenedRecs}
-          maxRecommendations={maxRecs}
-        />
+      const { queryAllByCy } = render(
+        <PocketRecs recommendations={tooFewRecs} maxRecommendations={maxRecs} />
       )
-      assert.equal(
-        publisherRecsLessThanMax.find(Recommendation).length,
-        shortenedRecs.length
-      )
-      // VisibilitySensor needs to be manually unmounted
-      publisherRecsLessThanMax.unmount()
+      expect(queryAllByCy('pocket-recommended-article')).toHaveLength(2)
     })
   })
 })

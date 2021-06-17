@@ -1,6 +1,5 @@
-import assert from 'assert'
-import React from 'react'
-import { shallow } from 'enzyme'
+import { wrappedRender, mockModal } from 'test-utils'
+import '@testing-library/jest-dom/extend-expect'
 
 import GlobalNav from './global-nav'
 import { DEFAULT_LINKS } from './links/global-nav-links'
@@ -17,7 +16,7 @@ const baseProps = {
     },
     {
       name: 'chalupa',
-      id: 'chulupa-id',
+      id: 'chalupa-id',
       label: 'Chalupa',
       url: 'http://chalupa.biz'
     }
@@ -29,67 +28,43 @@ const baseProps = {
 }
 
 describe('GlobalNav', () => {
+  mockModal()
   it('renders the "Discover" and "My List" links by default', () => {
-    const globalNav = shallow(
-      <GlobalNav appRootSelector="#root" flagsReady={true} />
-    )
-    const defaultLinks = globalNav.find("[data-cy='primary-links']")
-
-    assert(defaultLinks.exists())
-    assert.equal(
-      defaultLinks.shallow().find('Link').get(0).props['href'],
-      DEFAULT_LINKS[0].url
-    )
-    assert.equal(
-      defaultLinks.shallow().find('Link').get(1).props['href'],
-      DEFAULT_LINKS[1].url
-    )
+    const { getAllByCy } = wrappedRender(<GlobalNav appRootSelector="#root" flagsReady={true} />)
+    const defaultLinks = getAllByCy(/global-nav-(.+)-link/)
+    expect(defaultLinks).toHaveLength(2)
+    expect(defaultLinks[0]).toHaveAttribute('href', DEFAULT_LINKS[0].url)
+    expect(defaultLinks[1]).toHaveAttribute('href', DEFAULT_LINKS[1].url)
   })
 
   it('renders the custom links when `links` prop is passed', () => {
-    const globalNav = shallow(<GlobalNav {...baseProps} />)
-    const passedLinks = globalNav.find("[data-cy='primary-links']")
-
-    assert(passedLinks.exists())
-    assert.equal(
-      passedLinks.shallow().find('Link').get(0).props['href'],
-      baseProps.links[0].url
+    const { queryAllByCy, getByCy } = wrappedRender(
+      <GlobalNav appRootSelector="#root" flagsReady={true} {...baseProps} />
     )
-    assert.equal(
-      passedLinks.shallow().find('Link').get(1).props['href'],
-      baseProps.links[1].url
-    )
+    const defaultLinks = queryAllByCy(/global-nav-(.+)-link/)
+    expect(defaultLinks).toHaveLength(0)
+    expect(getByCy('cheeseburger-id')).toHaveAttribute('href', baseProps.links[0].url)
+    expect(getByCy('chalupa-id')).toHaveAttribute('href', baseProps.links[1].url)
   })
 
   it('renders elements passed in `children` prop instead of standard nav, if provided', () => {
-    const CustomNav = () => {}
-    const globalNav = shallow(
+    const CustomNav = () => <button>Testing</button>
+    const { getByText } = wrappedRender(
       <GlobalNav appRootSelector="#root" flagsReady={true}>
         <CustomNav />
       </GlobalNav>
     )
-
-    assert(globalNav.find(CustomNav).exists())
+    expect(getByText('Testing'))
   })
 
-  it('uses the correct URL when a user clicks the Pocket Logo', () => {
-    // default value
-    const globalNav = shallow(
-      <GlobalNav appRootSelector="#root" flagsReady={true} />
-    )
-    const defaultLogoUrl = globalNav.find("[data-test='logo-link']")
-
-    assert.equal(defaultLogoUrl.prop('href'), '/explore?src=navbar')
-
-    // passed prop value
-    const globalNav2 = shallow(
+  it('uses the correct custom URL when a user clicks the Pocket Logo', () => {
+    const { getByCy } = wrappedRender(
       <GlobalNav
-        flagsReady={true}
         appRootSelector="#root"
+        flagsReady={true}
         pocketLogoOutboundUrl="https://cheeseburger.io"
       />
     )
-    const customLogoUrl = globalNav2.find("[data-test='logo-link']")
-    assert.equal(customLogoUrl.prop('href'), 'https://cheeseburger.io')
+    expect(getByCy('logo-link')).toHaveAttribute('href', 'https://cheeseburger.io')
   })
 })

@@ -61,7 +61,7 @@ function Authors({ authors }) {
   return (
     <ul>
       {authors.map((author) => (
-        <li key={`author-byline-${author}`} itemProp="author">
+        <li key={`author-byline-${author}`} itemProp="author" data-cy="author">
           {author}
         </li>
       ))}

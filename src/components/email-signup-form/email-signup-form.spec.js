@@ -1,13 +1,7 @@
-import React from 'react'
-import assert from 'assert'
-import sinon from 'sinon'
-import { shallow } from 'enzyme'
-import { mockEvent } from '@pocket/web-utilities/test-utils'
+import { render, fireEvent, mockGrecaptcha } from 'test-utils'
+import '@testing-library/jest-dom/extend-expect'
 
-import EmailSignupForm, {
-  PROCESSING_MESSAGE,
-  INVALID_EMAIL_ERROR
-} from './email-signup-form'
+import EmailSignupForm, { PROCESSING_MESSAGE, INVALID_EMAIL_ERROR } from './email-signup-form'
 
 describe('EmailSignupForm', () => {
   const baseProps = {
@@ -16,162 +10,113 @@ describe('EmailSignupForm', () => {
 
   describe('checkbox', () => {
     it('renders the checkbox if props.showCheckbox is true', () => {
-      const form = shallow(<EmailSignupForm {...baseProps} showCheckbox />)
-      const checkbox = form.find("[data-cy='checkbox']")
-
-      assert(checkbox.exists())
+      const { getByRole } = render(<EmailSignupForm {...baseProps} showCheckbox />)
+      expect(getByRole('checkbox')).toBeTruthy()
     })
 
     it('uses the checkbox label passed as prop', () => {
-      const form = shallow(
-        <EmailSignupForm
-          {...baseProps}
-          showCheckbox
-          checkboxLabel="I want extra cheese"
-        />
+      const { getByLabelText } = render(
+        <EmailSignupForm {...baseProps} showCheckbox checkboxLabel="I want extra cheese" />
       )
-      const checkbox = form.find("[data-cy='checkbox']")
-
-      assert.equal(
-        checkbox.find('label').text('checkboxLabel'),
-        'I want extra cheese'
-      )
+      expect(getByLabelText('I want extra cheese')).toBeTruthy()
     })
   })
 
+  // !! The following tests are really just testing props are being passed, which seems extraneous
   it('uses the input label passed as a prop', () => {
-    const form = shallow(
-      <EmailSignupForm {...baseProps} inputLabel="Email Address" />
-    )
-    const input = form.find("[data-cy='email-input']")
-
-    assert.equal(input.prop('labelText'), 'Email Address')
+    const { queryByText } = render(<EmailSignupForm {...baseProps} inputLabel="Email In A Dress" />)
+    expect(queryByText('Email In A Dress')).toBeTruthy()
   })
 
   it('uses the button label passed as a prop', () => {
-    const form = shallow(<EmailSignupForm {...baseProps} buttonLabel="Gimme" />)
-    const button = form.find("[data-cy='submit-button']")
-
-    assert.equal(button.prop('children'), 'Gimme')
+    const { queryByText } = render(<EmailSignupForm {...baseProps} buttonLabel="Button Magic!" />)
+    expect(queryByText('Button Magic!')).toBeTruthy()
   })
 
   it('uses the button variant passed as a prop', () => {
-    const form = shallow(
-      <EmailSignupForm {...baseProps} buttonVariant="emphasized" />
-    )
-    const button = form.find("[data-cy='submit-button']")
-
-    assert.equal(button.prop('variant'), 'emphasized')
+    const { queryByCy } = render(<EmailSignupForm {...baseProps} buttonVariant="emphasized" />)
+    expect(queryByCy('submit-button')).toHaveClass('emphasized')
   })
 
   it('renders a disabled/processing state if props.isProcessing is true', () => {
-    const form = shallow(<EmailSignupForm {...baseProps} isProcessing />)
-    const input = form.find("[data-cy='email-input']")
-    const button = form.find("[data-cy='submit-button']")
-
-    assert.equal(input.prop('disabled'), true)
-    assert.equal(button.prop('disabled'), true)
-    assert.equal(button.prop('children'), PROCESSING_MESSAGE)
+    const { getByText, getByRole } = render(<EmailSignupForm {...baseProps} isProcessing />)
+    expect(getByRole('button')).toBeDisabled()
+    expect(getByText(PROCESSING_MESSAGE)).toBeTruthy()
   })
 
-  it('displays an invalid email error if an invalid email was submitted', () => {
-    const form = shallow(<EmailSignupForm {...baseProps} />)
-    let input = form.find("[data-cy='email-input']")
-
-    // first trigger change event on the input with an invalid value
-    // since input is another component, we'll just call its onChange prop
-    input.prop('onChange')({ target: { value: 'cheesemail' } })
-    // then submit the form
-    form.simulate('submit', mockEvent)
-    // get the updated value for the input
-    input = form.find("[data-cy='email-input']")
-
-    assert.equal(input.prop('error'), INVALID_EMAIL_ERROR)
-  })
-
-  it('calls the onValidationError prop if an invalid email was submitted', () => {
-    const spy = sinon.spy()
-    const form = shallow(
-      <EmailSignupForm {...baseProps} onValidationError={spy} />
+  it('handles invalid emails gracefully', () => {
+    const onValidationError = jest.fn()
+    const { queryByText, getByCy, getByText, getByRole } = render(
+      <EmailSignupForm {...baseProps} onValidationError={onValidationError} />
     )
-    let input = form.find("[data-cy='email-input']")
 
-    // first trigger change event on the input with an invalid value
-    // since input is another component, we'll just call its onChange prop
-    input.prop('onChange')({ target: { value: 'cheesemail' } })
-    // then submit the form
-    form.simulate('submit', mockEvent)
+    const submitButton = getByCy('submit-button')
+    const emailInput = getByRole('textbox')
+    fireEvent.change(emailInput, { target: { value: 'cheesemail' } })
+    fireEvent.click(submitButton)
+    expect(getByText(INVALID_EMAIL_ERROR)).toBeTruthy()
 
-    assert(spy.calledWith(baseProps.instanceId))
-  })
+    fireEvent.change(emailInput, { target: { value: 'valid@email.com' } })
 
-  it('clears the validation error message once the input changes again', () => {
-    const form = shallow(<EmailSignupForm {...baseProps} />)
-    let input = form.find("[data-cy='email-input']")
-
-    // first trigger change event on the input with an invalid value
-    // since input is another component, we'll just call its onChange prop
-    input.simulate('change', { target: { value: 'cheesemail' } })
-    // then submit the form
-    form.simulate('submit', mockEvent)
-    // then change the input value again
-    input.simulate('change', { target: { value: 'cheese' } })
-    // get the updated value for the input
-    input = form.find("[data-cy='email-input']")
-
-    assert.equal(input.prop('error'), '')
+    expect(queryByText(INVALID_EMAIL_ERROR)).toBeFalsy()
+    expect(onValidationError).toBeCalled()
   })
 
   it('displays an error message if passed as props.errorMessage', () => {
-    const form = shallow(
-      <EmailSignupForm {...baseProps} errorMessage="Not enough cheese" />
+    const onValidationError = jest.fn()
+    const { getByRole, getByText } = render(
+      <EmailSignupForm
+        {...baseProps}
+        onValidationError={onValidationError}
+        errorMessage="Not enough cheese"
+      />
     )
-    const input = form.find("[data-cy='email-input']")
 
-    assert.equal(input.prop('error'), 'Not enough cheese')
+    const emailInput = getByRole('textbox')
+    fireEvent.change(emailInput, { target: { value: 'cheesemail' } })
+    expect(getByText('Not enough cheese')).toBeTruthy()
   })
 
   it('calls props.onFocus, passing the instanceId, when the input is focused', () => {
-    const spy = sinon.spy()
-    const form = shallow(<EmailSignupForm {...baseProps} onFocus={spy} />)
-    const input = form.find("[data-cy='email-input']")
-    input.simulate('focus', mockEvent)
-
-    assert(spy.calledWith(baseProps.instanceId))
+    const onFocus = jest.fn()
+    const { getByRole } = render(<EmailSignupForm {...baseProps} onFocus={onFocus} />)
+    const emailInput = getByRole('textbox')
+    fireEvent.focus(emailInput)
+    expect(onFocus).toBeCalledWith(baseProps.instanceId)
   })
 
   it('calls props.onChange, passing the instanceId and value, when the input changes', () => {
-    const spy = sinon.spy()
-    const form = shallow(<EmailSignupForm {...baseProps} onChange={spy} />)
-    const input = form.find("[data-cy='email-input']")
-    // since input is another component, we'll just call its onChange prop to simulate a change
-    input.simulate('change', { target: { value: 'pep' } })
-
-    assert(spy.calledWith(baseProps.instanceId, 'pep'))
+    const onChange = jest.fn()
+    const { getByRole } = render(<EmailSignupForm {...baseProps} onChange={onChange} />)
+    const emailInput = getByRole('textbox')
+    fireEvent.change(emailInput, { target: { value: 'pep' } })
+    expect(onChange).toBeCalledWith(baseProps.instanceId, 'pep')
   })
 
   it('calls props.onValidSubmit, passing the instanceId and recaptcha response, when the user successfully completes the recaptcha', () => {
-    const spy = sinon.spy()
-    const form = shallow(<EmailSignupForm {...baseProps} onValidSubmit={spy} />)
-    const input = form.find("[data-cy='email-input']")
+    mockGrecaptcha({ forceCallbackType: 'success', token: 'cheese-response-token' })
+    const onValidSubmit = jest.fn()
+    const { getByCy, getByRole } = render(
+      <EmailSignupForm {...baseProps} onValidSubmit={onValidSubmit} />
+    )
 
-    input.simulate('change', { target: { value: 'gouda@cheese.com' } })
+    const submitButton = getByCy('submit-button')
+    const emailInput = getByRole('textbox')
 
-    const recaptcha = form.find("[data-cy='recaptcha']")
-    recaptcha.simulate('change', 'recaptcha-response-string')
+    fireEvent.change(emailInput, { target: { value: 'gouda@cheese.com' } })
+    fireEvent.click(submitButton)
 
-    assert(
-      spy.calledWith(
-        baseProps.instanceId,
-        'gouda@cheese.com',
-        'recaptcha-response-string'
-      )
+    expect(onValidSubmit).toBeCalled()
+    expect(onValidSubmit).toBeCalledWith(
+      baseProps.instanceId,
+      'gouda@cheese.com',
+      'cheese-response-token',
+      true
     )
   })
 
   it('applies a class to the form hide the recaptcha badge if props.hideRecaptchaBadge is true', () => {
-    const form = shallow(<EmailSignupForm {...baseProps} hideCaptchaBadge />)
-
-    assert(form.hasClass('hidden-captcha-badge'))
+    const { container } = render(<EmailSignupForm {...baseProps} hideCaptchaBadge />)
+    expect(container.firstChild).toHaveClass('hidden-captcha-badge')
   })
 })

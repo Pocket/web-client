@@ -5,6 +5,7 @@ import * as customQueries from './custom-queries'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { rootReducer } from '../src/store'
+import { ViewportProvider } from '@pocket/web-ui'
 
 /**
  * Custom basic render
@@ -32,7 +33,11 @@ const wrappedRender = (ui, renderOptions = {}) => {
   } = renderOptions
 
   const wrapper = ({ children }) => {
-    return <Provider store={store}>{children}</Provider>
+    return (
+      <ViewportProvider>
+        <Provider store={store}>{children}</Provider>
+      </ViewportProvider>
+    )
   }
 
   return render(ui, { wrapper, queries: { ...queries, ...customQueries }, ...options })
@@ -53,3 +58,54 @@ export * from '@testing-library/react'
 
 // export our enhanced elements
 export { customScreen as screen, customRender as render, wrappedRender }
+
+//Google ReCaptcha
+// https://gist.github.com/Bartuz/baa4cb3cff45286a519acc5ad0313bd7
+const nop = () => {}
+
+const reaptchaCallbackName = (type) => {
+  switch (type) {
+    case 'success':
+      return 'callback'
+      break
+    case 'error':
+      return 'error-callback'
+    case 'expire':
+      return 'expired-callback'
+    default:
+      throw `Unknown callback type ${type}. Supported types: success, error, expire`
+  }
+}
+
+export const mockGrecaptcha = ({
+  forceCallbackType = 'success',
+  reset = nop,
+  execute = nop,
+  token = 'g-token'
+} = {}) => {
+  window.grecaptcha = {
+    ready: (callback) => callback(),
+    render: (_html, reaptchaConfig) => {
+      const callback = reaptchaConfig[reaptchaCallbackName(forceCallbackType)]
+      callback(token)
+    },
+    reset: reset,
+    execute: execute
+  }
+}
+
+export const mockModal = () => {
+  // Mock modal
+  const setAppElementStub = jest.fn()
+  const ReactModalMock = ({ children }) => <div>{children}</div>
+  ReactModalMock.setAppElement = setAppElementStub
+  jest.mock('react-modal', () => ReactModalMock)
+
+  let portalRoot = document.getElementById('portal')
+  if (!portalRoot) {
+    const portalRoot = document.createElement('div')
+    portalRoot.setAttribute('id', 'root')
+    document.body.appendChild(portalRoot)
+  }
+  return { setAppElementStub }
+}

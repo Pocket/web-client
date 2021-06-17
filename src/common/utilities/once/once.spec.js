@@ -1,26 +1,25 @@
 import { once } from './once'
-import assert from 'assert'
-import sinon from 'sinon'
 
 describe('once', () => {
   it('only runs its wrapped function one time', () => {
-    const childFunc = sinon.spy()
-    const initChildfunc = once(childFunc)
+    const testFunction = jest.fn()
+    const runChildFunction = once(testFunction)
 
-    initChildfunc()
-    initChildfunc()
-    initChildfunc()
-    initChildfunc()
+    runChildFunction()
+    runChildFunction()
+    runChildFunction()
+    runChildFunction()
 
-    assert.equal(childFunc.callCount, 1)
+    expect(testFunction).toBeCalledTimes(1)
   })
+
   it('correctly passes arguments to its child function', () => {
     const exampleParam = 42
-    const childFunc = sinon.spy()
-    const initChildfunc = once(childFunc)
+    const testFunction = jest.fn()
+    const runChildFunction = once(testFunction)
 
-    initChildfunc(42)
+    runChildFunction(exampleParam)
 
-    assert(childFunc.calledWith(exampleParam))
+    expect(testFunction).toBeCalledWith(exampleParam)
   })
 })

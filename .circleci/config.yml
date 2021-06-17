@@ -53,18 +53,28 @@ jobs:
   # ——————————————————————————————————————————————————————————————
   unit_tests:
     # CPU and RAM resources for the job.
-    resource_class: small
+    resource_class: medium
+    parallelism: 5
     # Define the container we will run the task in (standard node)
     docker:
       - image: circleci/node:16
     steps:
       # Setup Environment
       - setup
+      - run: mkdir ~/junit
       # Run tests
       - run:
           name: Run unit tests
-          command: npm test
-
+          command: |
+              TEST=$(circleci tests glob src/**/*.spec.js | circleci tests split --split-by=timings)
+              npm run test:ci $TEST
+      - run:
+          command: cp junit.xml ~/junit/
+          when: always
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit
   # ——————————————————————————————————————————————————————————————
   # Release: This will tag the branch and generate a changelog
   # ——————————————————————————————————————————————————————————————  

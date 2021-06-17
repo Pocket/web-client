@@ -140,7 +140,7 @@ export function Toast({ stamp, type, itemCount = 1 }) {
   return (
     <Fade show={show} remove={remove}>
       <div className={toastWrapper}>
-        <div className={cx(toastBlock, `${type}`)}>
+        <div className={cx(toastBlock, `${type}`)} data-cy={messages[type]}>
           <div>
             <Trans i18nKey={messages[type]} count={itemCount} />
           </div>

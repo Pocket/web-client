@@ -23,8 +23,8 @@ export const SearchPageHeader = ({ filter, total, query, sortOrder, toggleSortOr
   const isLoading = total === false
   return query ? (
     <header className={cx(myListHeaderStyle, searchStyles)}>
-      <h1 className="pageTitle">
-        <em>"{query}"</em> —{' '}
+      <h1 className="pageTitle" data-cy="page-title">
+        <em data-cy="search-query">"{query}"</em> —{' '}
         {isLoading ? (
           <span>
             Searching <Loader />{' '}

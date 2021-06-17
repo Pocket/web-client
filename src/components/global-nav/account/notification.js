@@ -24,14 +24,10 @@ const floatingBubble = css`
   width: 0.625rem;
 `
 
-export const InlineNotification = () => (
-  <span
-    aria-hidden="true"
-    className={bubbleStyles} />
+export const InlineNotification = (props) => (
+  <span {...props} aria-hidden="true" className={bubbleStyles} />
 )
 
-export const FloatingNotification = () => (
-  <span
-    aria-hidden="true"
-    className={classNames(bubbleStyles, floatingBubble)} />
+export const FloatingNotification = (props) => (
+  <span {...props} aria-hidden="true" className={classNames(bubbleStyles, floatingBubble)} />
 )

@@ -143,7 +143,7 @@ npm run storybook
 
 #### Unit Tests
 
-For unit testing, we use `mocha` and `assert` with Enzyme's shallow rendering. The primary goal with our unit tests is to flex an isolated chunk of code (e.g. a function, component, or class), and ensure that it satisfies all requirements - verify expected output, given possible inputs. It also serves as documentation for expected behavior of that unit.
+For unit testing, we use `jest` and `react-test-library` for rendering. The primary goal with our unit tests is to flex an isolated chunk of code (e.g. a function, component, or class), and ensure that it satisfies all requirements - verify expected output, given possible inputs. It also serves as documentation for expected behavior of that unit.
 
 Unit test files are co-located alongside our JS files, named as `*.spec.js`. Any file ending in `.spec.js` in the `src` folder will get picked up by mocha and included in tests.
 
@@ -151,17 +151,6 @@ Unit tests can be run locally and are also run via CI as a requirement for PR me
 
 ```bash
 npm test
-```
-
-To see "verbose" output, meaning the name and status of every test that is run:
-
-```bash
-npm run test-verbose
-```
-
-To see test results for only a particular spec file (where "MyComponent" is the `describe()` statement for the spec file):
-```bash
-npm run test -- --grep "MyComponent"
 ```
 
 ##### Test Users

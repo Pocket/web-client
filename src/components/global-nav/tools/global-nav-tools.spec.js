@@ -1,54 +1,45 @@
-import assert from 'assert'
-import React from 'react'
-import sinon from 'sinon'
-import { shallow } from 'enzyme'
-import { mockEvent } from '@pocket/web-utilities/test-utils'
+import { render, fireEvent, mockModal } from 'test-utils'
+import '@testing-library/jest-dom/extend-expect'
 import { PlayIcon, TagIcon } from '@pocket/web-ui'
 
 import GlobalNavTools from './global-nav-tools'
 
 describe('GlobalNavTools', () => {
+  mockModal()
+
   const baseProps = {
     tools: [
       {
         name: 'cheeses',
         label: 'Cheeses',
-        icon: <PlayIcon />
+        icon: <PlayIcon data-cy="play-icon" />
       },
-      { name: 'chocolates', label: 'Chocolates', icon: <TagIcon /> }
+      { name: 'chocolates', label: 'Chocolates', icon: <TagIcon data-cy="tag-icon" /> }
     ]
   }
 
   it('renders the correct number of buttons', () => {
-    const tools = shallow(<GlobalNavTools {...baseProps} />)
-    const toolButtons = tools.find('button')
-
-    assert.equal(toolButtons.length, 2)
+    const { getAllByRole } = render(<GlobalNavTools {...baseProps} />)
+    expect(getAllByRole('button')).toHaveLength(2)
   })
 
   it('renders the buttons with correct title attributes as specified in the `tools` prop', () => {
-    const tools = shallow(<GlobalNavTools {...baseProps} />)
-    const toolButtons = tools.find('button')
-
-    assert.equal(toolButtons.at(0).prop('data-tooltip'), baseProps.tools[0].label)
-    assert.equal(toolButtons.at(1).prop('data-tooltip'), baseProps.tools[1].label)
+    const { queryByLabelText } = render(<GlobalNavTools {...baseProps} />)
+    expect(queryByLabelText(baseProps.tools[0].label)).toBeTruthy()
+    expect(queryByLabelText(baseProps.tools[1].label)).toBeTruthy()
   })
 
   it('renders the buttons with correct icons as specified in the `links` prop', () => {
-    const tools = shallow(<GlobalNavTools {...baseProps} />)
-    const toolButtons = tools.find('button')
-
-    assert(toolButtons.at(0).find(PlayIcon).exists())
-    assert(toolButtons.at(1).find(TagIcon).exists())
+    const { queryByCy } = render(<GlobalNavTools {...baseProps} />)
+    expect(queryByCy('play-icon')).toBeTruthy()
+    expect(queryByCy('tag-icon')).toBeTruthy()
   })
 
   it('calls the props.onToolClick callback with the name of the tool when clicked', () => {
-    const spy = sinon.spy()
-    const tools = shallow(<GlobalNavTools {...baseProps} onToolClick={spy} />)
-    const firstButton = tools.find('button').at(0)
-
-    firstButton.simulate('click', mockEvent)
-
-    assert(spy.calledWith(baseProps.tools[0].name))
+    const handleClick = jest.fn()
+    const { getAllByRole } = render(<GlobalNavTools {...baseProps} onToolClick={handleClick} />)
+    const buttons = getAllByRole('button')
+    fireEvent.click(buttons[0])
+    expect(handleClick).toHaveBeenCalledTimes(1)
   })
 })

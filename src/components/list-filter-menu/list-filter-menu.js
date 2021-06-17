@@ -103,7 +103,7 @@ export function FilterMenu({ subset, filter, tag, query }) {
 
   return hasFilter ? (
     <div className={cx(filterStyle, 'filter-wrapper')}>
-      <button ref={popTrigger} className={cx(buttonReset, 'filter-trigger')}>
+      <button ref={popTrigger} data-cy="filter-trigger" className={cx(buttonReset, 'filter-trigger')}>
         {activeTitle}
         <ChevronDownIcon style={{ marginTop: 0, paddingLeft: '3px' }} />
       </button>
