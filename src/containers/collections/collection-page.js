@@ -110,7 +110,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
               isAuthenticated={isAuthenticated}
               handleShareClick={() => {}}
               className="sticky"
-              slug={slug}
+              url={url}
             />
           </aside>
 
