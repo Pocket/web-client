@@ -1,5 +1,3 @@
-import assert from 'assert'
-
 import { sortByNewest } from './my-list.sorters'
 import { sortByOldest } from './my-list.sorters'
 import { sortByNewestArchive } from './my-list.sorters'
@@ -115,68 +113,67 @@ const listToSort = [
 describe('Filtering', () => {
   it('should filterUnread', () => {
     const filteredList = listToSort.filter(filterByUnread)
-    assert.deepStrictEqual(
-      filteredList.map((item) => item.hero),
-      ['Black Widow', 'Captain America', 'Magneto', 'Black Cat']
-    )
+    expect(filteredList.map((item) => item.hero)).toStrictEqual([
+      'Black Widow',
+      'Captain America',
+      'Magneto',
+      'Black Cat'
+    ])
   })
 
   it('should filterArchived', () => {
     const filteredList = listToSort.filter(filterByArchived)
-    assert.deepStrictEqual(
-      filteredList.map((item) => item.hero),
-      ['Spider-Man', 'CAPTAIN MARVEL', 'Wolverine', 'Thanos']
-    )
+    expect(filteredList.map((item) => item.hero)).toStrictEqual([
+      'Spider-Man',
+      'CAPTAIN MARVEL',
+      'Wolverine',
+      'Thanos'
+    ])
   })
 
   it('should filterByFavorited', () => {
     const filteredList = listToSort.filter(filterByFavorites)
-    assert.deepStrictEqual(
-      filteredList.map((item) => item.hero),
-      ['Spider-Man', 'CAPTAIN MARVEL', 'Black Widow', 'Captain America', 'Black Cat']
-    )
+    expect(filteredList.map((item) => item.hero)).toStrictEqual([
+      'Spider-Man',
+      'CAPTAIN MARVEL',
+      'Black Widow',
+      'Captain America',
+      'Black Cat'
+    ])
   })
 
   it('should filterByHighlights', () => {
     const filteredList = listToSort.filter(filterByHighlights)
-    assert.deepStrictEqual(
-      filteredList.map((item) => item.hero),
-      ['Wolverine', 'Thanos']
-    )
+    expect(filteredList.map((item) => item.hero)).toStrictEqual(['Wolverine', 'Thanos'])
   })
 
   it('should filterByArticles', () => {
     const filteredList = listToSort.filter(filterByArticles)
-    assert.deepStrictEqual(
-      filteredList.map((item) => item.hero),
-      [
-        'Spider-Man',
-        'CAPTAIN MARVEL',
-        'Black Widow',
-        'Wolverine',
-        'Captain America',
-        'Magneto',
-        'Black Cat'
-      ]
-    )
+    expect(filteredList.map((item) => item.hero)).toStrictEqual([
+      'Spider-Man',
+      'CAPTAIN MARVEL',
+      'Black Widow',
+      'Wolverine',
+      'Captain America',
+      'Magneto',
+      'Black Cat'
+    ])
   })
 
   it('should filterByVideos', () => {
     const filteredList = listToSort.filter(filterByVideos)
-    assert.deepStrictEqual(
-      filteredList.map((item) => item.hero),
-      ['Black Widow', 'Thanos']
-    )
+    expect(filteredList.map((item) => item.hero)).toStrictEqual(['Black Widow', 'Thanos'])
   })
 
   it('should filterByTags', () => {
     const tag = 'hero'
 
     const filteredList = listToSort.filter((item) => filterByTags(item, tag))
-    assert.deepStrictEqual(
-      filteredList.map((item) => item.hero),
-      ['Spider-Man', 'CAPTAIN MARVEL', 'Wolverine']
-    )
+    expect(filteredList.map((item) => item.hero)).toStrictEqual([
+      'Spider-Man',
+      'CAPTAIN MARVEL',
+      'Wolverine'
+    ])
   })
 })
 
@@ -184,42 +181,42 @@ describe('Sorting', () => {
   it('should sortByNewest', () => {
     const sortedList = listToSort.sort(sortByNewest)
     const totalItems = sortedList.length - 1
-    assert.strictEqual(sortedList[0].name, 'Felicia Hardy')
-    assert.strictEqual(sortedList[totalItems].name, 'Peter Benjamin Parker')
+    expect(sortedList[0].name).toBe('Felicia Hardy')
+    expect(sortedList[totalItems].name).toBe('Peter Benjamin Parker')
   })
 
   it('should sortByOldest', () => {
     const sortedList = listToSort.sort(sortByOldest)
     const totalItems = sortedList.length - 1
-    assert.strictEqual(sortedList[totalItems].name, 'Felicia Hardy')
-    assert.strictEqual(sortedList[0].name, 'Peter Benjamin Parker')
+    expect(sortedList[totalItems].name).toBe('Felicia Hardy')
+    expect(sortedList[0].name).toBe('Peter Benjamin Parker')
   })
 
   it('should sortByNewestArchive', () => {
     const sortedList = listToSort.filter(filterByArchived).sort(sortByNewestArchive)
     const totalItems = sortedList.length - 1
-    assert.strictEqual(sortedList[0].name, 'Thanos')
-    assert.strictEqual(sortedList[totalItems].name, 'Peter Benjamin Parker')
+    expect(sortedList[0].name).toBe('Thanos')
+    expect(sortedList[totalItems].name).toBe('Peter Benjamin Parker')
   })
 
   it('should sortByOldestArchive', () => {
     const sortedList = listToSort.filter(filterByArchived).sort(sortByOldestArchive)
     const totalItems = sortedList.length - 1
-    assert.strictEqual(sortedList[0].name, 'Peter Benjamin Parker')
-    assert.strictEqual(sortedList[totalItems].name, 'Thanos')
+    expect(sortedList[0].name).toBe('Peter Benjamin Parker')
+    expect(sortedList[totalItems].name).toBe('Thanos')
   })
 
   it('should sortByNewestFavorite', () => {
     const sortedList = listToSort.filter(filterByFavorites).sort(sortByNewestFavorite)
     const totalItems = sortedList.length - 1
-    assert.strictEqual(sortedList[0].name, 'Peter Benjamin Parker')
-    assert.strictEqual(sortedList[totalItems].name, 'Felicia Hardy')
+    expect(sortedList[0].name).toBe('Peter Benjamin Parker')
+    expect(sortedList[totalItems].name).toBe('Felicia Hardy')
   })
 
   it('should sortByOldestFavorite', () => {
     const sortedList = listToSort.filter(filterByFavorites).sort(sortByOldestFavorite)
     const totalItems = sortedList.length - 1
-    assert.strictEqual(sortedList[0].name, 'Felicia Hardy')
-    assert.strictEqual(sortedList[totalItems].name, 'Peter Benjamin Parker')
+    expect(sortedList[0].name).toBe('Felicia Hardy')
+    expect(sortedList[totalItems].name).toBe('Peter Benjamin Parker')
   })
 })

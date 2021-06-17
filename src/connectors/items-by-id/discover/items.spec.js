@@ -1,4 +1,3 @@
-import assert from 'assert'
 import { updateSaveStatus } from './items.state'
 import { deriveDiscoverItems } from './items.derive'
 
@@ -36,16 +35,16 @@ const itemWithMissingData = [
       }
     },
     redirect_url: 'https://getpocket.com/redirect?url=https%3A%2F%2Fwww.bloomberg.com%2Ffeatures%2F2020-carnival-cruise-coronavirus%2F%3Futm_source%3Dpocket%26utm_medium%3Demail%26utm_campaign%3Dpockethits&h=8f2057741c81b67e7964c83fcb945e25b2722814bab17193be67e2b45350ccf3&nt=0',
-    id: "RecommendationAPI/3296676960",
+    id: 'RecommendationAPI/3296676960',
     slateLineup: {
-      requestId: "4bf3d704-1f73-4d39-9a97-935a4c982e5d",
-      experimentId: "fc6d7d9",
-      id: "9c3018a8-8aa9-4f91-81e9-ebcd95fc82da"
+      requestId: '4bf3d704-1f73-4d39-9a97-935a4c982e5d',
+      experimentId: 'fc6d7d9',
+      id: '9c3018a8-8aa9-4f91-81e9-ebcd95fc82da'
     },
     slate: {
-      requestId: "344a9e86-80e1-4c01-820f-17940d1628f4",
-      experimentId: "3ec8c48",
-      id: "48e766be-5e96-46fb-acbf-55fee3ae8a28"
+      requestId: '344a9e86-80e1-4c01-820f-17940d1628f4',
+      experimentId: '3ec8c48',
+      id: '48e766be-5e96-46fb-acbf-55fee3ae8a28'
     }
   }
 ]
@@ -63,8 +62,8 @@ describe('Discover Items', () => {
 
     it('updates save status for a specific id correctly', () => {
       const newState = updateSaveStatus(state, 'abc123', 'saved')
-      assert.strictEqual(newState['abc123'].save_status, 'saved')
-      assert.strictEqual(newState['def456'].save_status, 'unsaved')
+      expect(newState['abc123'].save_status).toBe('saved')
+      expect(newState['def456'].save_status).toBe('unsaved')
     })
   })
 
@@ -76,7 +75,7 @@ describe('Discover Items', () => {
       const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=2951848646' //prettier-ignore
       const expectedOriginalUrl = 'http://bloomberg.com/features/2020-carnival-cruise-coronavirus' //prettier-ignore
 
-      assert.deepStrictEqual(derivedItems[0], {
+      expect(derivedItems[0]).toStrictEqual({
         title: 'http://bloomberg.com/features/2020-carnival-cruise-coronavirus',
         item_id: '2951848646',
         resolved_id: '2954307210',

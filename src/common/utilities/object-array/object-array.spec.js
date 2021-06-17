@@ -1,4 +1,3 @@
-import assert from 'assert'
 import { arrayToObject } from 'common/utilities'
 import { getObjectWithValidKeysOnly } from 'common/utilities'
 
@@ -21,16 +20,13 @@ describe('arrayToObject', () => {
 
   it('returns an object with key/value pairs based on passed in id.', () => {
     const keyObjectFromArray = arrayToObject(arrayOfObjects, 'odd_id_name')
-
-    assert.deepStrictEqual(keyObjectFromArray, expectedObjectFromArray)
+    expect(keyObjectFromArray).toStrictEqual(expectedObjectFromArray)
   })
 
   it('ignores un-keyed data.', () => {
     const modifiedArrayOfObjects = ['Power of:', ...arrayOfObjects, 'Powdered Toast Man!']
-
     const keyObjectFromArray = arrayToObject(modifiedArrayOfObjects, 'odd_id_name')
-
-    assert.deepStrictEqual(keyObjectFromArray, expectedObjectFromArray)
+    expect(keyObjectFromArray).toStrictEqual(expectedObjectFromArray)
   })
 })
 
@@ -42,7 +38,7 @@ describe('getObjectWithValidKeysOnly', () => {
       invalid2: undefined
     }
     const filteredObject = getObjectWithValidKeysOnly(originalObject) // no specific validator function passed
-    assert.deepStrictEqual(filteredObject, {
+    expect(filteredObject).toStrictEqual({
       valid: 'hello there'
     })
   })
@@ -56,6 +52,6 @@ describe('getObjectWithValidKeysOnly', () => {
 
     const myValidatorFunction = (url) => url === 'https://pocket.com'
     const filteredObject = getObjectWithValidKeysOnly(originalObject, myValidatorFunction)
-    assert.deepStrictEqual(filteredObject, { two: 'https://pocket.com' })
+    expect(filteredObject).toStrictEqual({ two: 'https://pocket.com' })
   })
 })

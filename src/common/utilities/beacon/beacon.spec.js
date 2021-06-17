@@ -1,5 +1,3 @@
-import assert from 'assert'
-
 import { buildBeaconUrl } from './beacon'
 
 describe('beacon', () => {
@@ -11,8 +9,7 @@ describe('beacon', () => {
       }
       const url = buildBeaconUrl('abcd1234', options)
 
-      assert.equal(
-        url,
+      expect(url).toBe(
         'https://getpocket.com/v3/pv?consumer_key=abcd1234&size=x-large&soda[]=Dr%20Pepper&soda[]=Coca%20Cola&soda[]=Fanta'
       )
     })

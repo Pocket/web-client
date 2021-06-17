@@ -1,4 +1,3 @@
-import assert from 'assert'
 import { deriveMyListItems } from './items.derive'
 
 // An item without expected values that make up the bulk of the visuals in a card
@@ -71,7 +70,7 @@ describe('My List Items', () => {
       const expectedOriginalUrl =
         'https://getpocket.com/redirect?url=https%3A%2F%2Fgetpocket.com%2Fexplore%2Fitem%2Fthe-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential'
       const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3059000416'
-      assert.deepStrictEqual(derivedItems[0], {
+      expect(derivedItems[0]).toStrictEqual({
         item_id: '3059000416',
         resolved_id: '3059000415',
         favorite: '0',
