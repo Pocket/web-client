@@ -176,14 +176,14 @@ export function SideNav({
     <div className={wrapperClass}>
       <nav role="navigation">
         {showHome ? (
-          <Link href="/home">
+          <Link href="/home?src=sidebar">
             <button className={subActive('home')} onClick={clickEvent} data-cy="side-nav-home">
               <HomeIcon className="side-nav-icon" /> <Trans i18nKey="nav:home">Home</Trans>
             </button>
           </Link>
         ) : null}
 
-        <Link href="/my-list">
+        <Link href="/my-list?src=sidebar">
           <button
             className={subActive('unread')}
             onClick={clickEvent}
@@ -202,7 +202,7 @@ export function SideNav({
             <Trans i18nKey="nav:discover">Discover</Trans>
           </button>
         </Link>
-        <Link href="/collections">
+        <Link href="/collections?src=sidebar">
           <button
             className={subActive('collections')}
             onClick={clickEvent}
