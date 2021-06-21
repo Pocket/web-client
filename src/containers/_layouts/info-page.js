@@ -2,7 +2,8 @@ import Head from 'next/head'
 import { useSelector } from 'react-redux'
 import { css } from 'linaria'
 import { breakpointMediumTablet, breakpointTinyTablet } from '@pocket/web-ui'
-import { GlobalFooter, PageContainer } from '@pocket/web-ui'
+import { GlobalFooter } from 'components/global-footer/global-footer'
+import { PageContainer } from '@pocket/web-ui'
 import GlobalNav from 'connectors/global-nav/global-nav'
 
 export const InfoPageStyles = css`

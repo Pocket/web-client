@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 import Head from 'next/head'
 import { css } from 'linaria'
-import { GlobalFooter, PageContainer } from '@pocket/web-ui'
+import { GlobalFooter } from 'components/global-footer/global-footer'
+import { PageContainer } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 import GlobalNav from 'connectors/global-nav/global-nav'
 

@@ -1,3 +1,11 @@
+## [1.14.54](https://github.com/Pocket/web-client/compare/v1.14.53...v1.14.54) (2021-06-21)
+
+
+### Bug Fixes
+
+* **global-footer:** use natively ([91c2ce7](https://github.com/Pocket/web-client/commit/91c2ce71454a1d40e646a92d981623d4cf75ce18))
+* **global-footer:** use proper id for localization ([fc77bdd](https://github.com/Pocket/web-client/commit/fc77bddd6503cc9338542e8f2ad8641e20423652))
+
 ## [1.14.53](https://github.com/Pocket/web-client/compare/v1.14.52...v1.14.53) (2021-06-16)
 
 
