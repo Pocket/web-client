@@ -94,7 +94,7 @@ const listStyle = css`
 
   .beta {
     padding: 5px;
-    margin-left: 0.25rem;
+    margin-left: 0.5rem;
     font-size: 0.65rem;
     font-weight: 500;
     background-color: var(--color-canvas);
