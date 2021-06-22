@@ -127,7 +127,7 @@ export const sideNavItem = css`
     background-color: var(--color-canvas);
     color: #1eabf9;
     border: 1px solid #1eabf9;
-    border-radius: 4px;
+    border-radius: var(--borderRadius);
   }
 
   &:hover {
