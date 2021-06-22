@@ -10,13 +10,12 @@ import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
 import { UI_COMPONENT_LINK } from 'connectors/snowplow/entities'
 
 /* Analytics Event */
-export const sendEngagementEvent = (topic) =>
+export const sendEngagementEvent = () =>
   trackEngagement(
     ENGAGEMENT_TYPE_GENERAL,
     UI_COMPONENT_LINK,
     0, // position in list (zero since it's not in list)
-    'home.topic.view-more',
-    topic
+    'home.collection.view-more'
   )
 
 const homeCollections = css`

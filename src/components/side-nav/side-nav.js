@@ -13,7 +13,6 @@ import { useInView } from 'react-intersection-observer'
 import { FiltersSideNav } from './filters'
 import { TopicsSideNav } from './topics'
 import { BookmarkIcon } from './bookmark-icon'
-import { BetaTag } from 'components/tags/tags'
 
 export const sideNavWrapper = css`
   position: relative;
