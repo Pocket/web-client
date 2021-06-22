@@ -1,4 +1,3 @@
-import { css } from 'linaria'
 import { Tag, tagBase } from './tag'
 import { HighlightsTag } from './tag-highlights'
 import { WebOnlyTag } from './tag-web-only'

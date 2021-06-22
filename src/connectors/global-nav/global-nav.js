@@ -72,9 +72,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
 
   const featureState = useSelector((state) => state.features)
   const showLab = featureFlagActive({ flag: 'lab', featureState })
-  const showV1 = featureFlagActive({ flag: 'home.retention', featureState })
-  const showV2 = featureFlagActive({ flag: 'home.v2', featureState })
-  const showHome = showV1 || showV2
 
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.user?.first_name)
@@ -105,11 +102,13 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     }
   })
 
-  const homeLinks = [
+  const homeLabel = <>{t('nav:home', 'Home')} <span className='beta'>BETA</span></>
+
+  const links = [
     {
       name: 'home',
       id: 'global-nav-home-link',
-      label: t('nav:home', 'Home'),
+      label: homeLabel,
       url: '/home?src=navbar',
       icon: <HomeIcon />
     },
@@ -126,30 +125,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       label: t('nav:discover', 'Discover'),
       url: '/explore?src=navbar',
       icon: <DiscoverIcon />
-    },
-    {
-      name: 'collections',
-      id: 'global-nav-collections-link',
-      label: t('nav:collections', 'Collections'),
-      url: '/collections?src=navbar',
-      icon: <CollectionsIcon />
-    }
-  ]
-
-  const links = [
-    {
-      name: 'discover',
-      id: 'global-nav-discover-link',
-      label: t('nav:discover', 'Discover'),
-      url: '/explore?src=navbar',
-      icon: <DiscoverIcon />
-    },
-    {
-      name: 'my-list',
-      id: 'global-nav-my-list-link',
-      label: t('nav:my-list', 'My List'),
-      url: '/my-list?src=navbar',
-      icon: <ListViewIcon />
     },
     {
       name: 'collections',
@@ -251,13 +226,11 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
     window.location.assign(`${LOGIN_URL}?src=navbar`)
   }
 
-  const linksToUse = showHome ? homeLinks : links
-
   return (
     <GlobalNavComponent
       pocketLogoOutboundUrl={'/'}
       appRootSelector="#__next"
-      links={linksToUse}
+      links={links}
       subLinks={subLinks}
       subset={subset}
       tag={tag}

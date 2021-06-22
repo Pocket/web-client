@@ -3,7 +3,6 @@ import { css, cx } from 'linaria'
 import { BookmarkFilledIcon } from '@pocket/web-ui'
 import { useInView } from 'react-intersection-observer'
 import { useHasChanged } from 'common/utilities/hooks/has-changed'
-import { usePrevious } from 'common/utilities/hooks/has-changed'
 
 const bookmarkStyles = css`
   @keyframes fadeIn {

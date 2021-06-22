@@ -91,6 +91,17 @@ const listStyle = css`
       }
     }
   }
+
+  .beta {
+    padding: 5px;
+    margin-left: 0.25rem;
+    font-size: 0.65rem;
+    font-weight: 500;
+    background-color: var(--color-canvas);
+    color: #1eabf9;
+    border: 1px solid #1eabf9;
+    border-radius: 4px;
+  }
 `
 
 /**

@@ -1,5 +1,6 @@
 import { css, cx } from 'linaria'
 import { breakpointSmallTablet } from '@pocket/web-ui'
+import Link from 'next/link'
 
 const cardPageHeaderStyle = css`
   margin-bottom: 1rem;
@@ -37,9 +38,6 @@ const cardPageSectionStyle = css`
   margin-bottom: 0;
   .sectionSubTitle {
     margin: 0;
-  }
-  .collectionSubTitle {
-    margin: 0 0 1rem;
   }
 `
 
@@ -84,11 +82,18 @@ export const HomeSectionHeader = ({ sectionTitle, sectionDescription }) => {
   ) : null
 }
 
-export const HomeCollectionHeader = ({ sectionTitle, sectionDescription }) => {
+export const HomeCollectionHeader = ({ sectionTitle, sectionDescription, clickEvent }) => {
   return sectionTitle ? (
     <header className={cx(cardPageHeaderStyle, cardPageSectionStyle)}>
       <h2 className="sectionTitle">{sectionTitle}</h2>
-      {sectionDescription ? <p className="collectionSubTitle">{sectionDescription}</p> : null}
+      <div className={cardPageSubheaderLinkStyle}>
+        {sectionDescription ? <p>{sectionDescription}</p> : null}
+        <Link href={`/collections/?src=home-view-more`}>
+          <a onClick={clickEvent}>
+            View More Collections
+          </a>
+        </Link>
+      </div>
     </header>
   ) : null
 }
@@ -97,22 +102,18 @@ export const HomeTopicHeader = ({
   topicSlug,
   sectionTitle,
   sectionDescription,
-  clickEvent,
-  showViewMore
+  clickEvent
 }) => {
   return sectionTitle ? (
     <header className={cardPageHeaderStyle}>
       <h3 className="sectionTitle">{sectionTitle}</h3>
       <div className={cardPageSubheaderLinkStyle}>
         {sectionDescription ? <p>{sectionDescription}</p> : null}
-        {showViewMore ? (
-          <a
-            href={`https://getpocket.com/explore/${topicSlug}?src=home-view-more`}
-            target="_topic"
-            onClick={clickEvent}>
+        <Link href={`/explore/${topicSlug}?src=home-view-more`}>
+          <a onClick={clickEvent}>
             View More Articles
           </a>
-        ) : null}
+        </Link>
       </div>
     </header>
   ) : null

@@ -139,7 +139,6 @@ export const ItemHeader = ({
             <Trans i18nKey="reader:by">By</Trans>
           </div>
         ) : null}{' '}
-        {/*"reader.header.by"*/}
         {authorList ? <div className={authorWrapper}>{authorList}</div> : null}
         {publisher ? <div className={domainWrapper}>{publisher}</div> : null}
         {read_time ? <div className={timeWrapper}>{read_time} min</div> : null}
