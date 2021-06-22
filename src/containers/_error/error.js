@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import Head from 'next/head'
 import { css } from 'linaria'
 
-import { GlobalFooter } from '@pocket/web-ui'
+import { GlobalFooter } from 'components/global-footer/global-footer'
 import { PageContainer } from '@pocket/web-ui'
 import { ErrorPage as ErrorPageComponent } from '@pocket/web-ui'
 
