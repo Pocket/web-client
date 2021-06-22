@@ -9,6 +9,7 @@ import { Drawer } from '@pocket/web-ui'
 import { Button } from '@pocket/web-ui'
 import { DEFAULT_LINKS } from 'components/global-nav/links/global-nav-links'
 import { bottomTooltip } from 'components/tooltip/tooltip'
+import { BetaTag } from 'components/tags/tags'
 
 const premiumLinks = [
   {
@@ -115,12 +116,6 @@ const listStyle = css`
   .beta {
     padding: 0 5px;
     margin-left: 0.5rem;
-    font-size: 0.65rem;
-    font-weight: 500;
-    background-color: var(--color-canvas);
-    color: #1eabf9;
-    border: 1px solid #1eabf9;
-    border-radius: var(--borderRadius);
   }
 `
 const iconStyle = css`
@@ -159,7 +154,7 @@ export const MobileLink = ({
         }}>
         {icon ? icon : null}
         {label}
-        {beta ? <span className='beta'>BETA</span> : null}
+        {beta ? <BetaTag>BETA</BetaTag> : null}
       </a>
     </Link>
   </li>

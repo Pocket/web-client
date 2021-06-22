@@ -7,6 +7,7 @@ import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
 import { css, cx } from 'linaria'
 import { CollectionsIcon } from '@pocket/web-ui'
+import { BetaTag } from 'components/tags/tags'
 
 import { useInView } from 'react-intersection-observer'
 
@@ -122,12 +123,6 @@ export const sideNavItem = css`
   .beta {
     padding: 0 5px;
     margin-left: 0.75rem;
-    font-size: 0.65rem;
-    font-weight: 500;
-    background-color: var(--color-canvas);
-    color: #1eabf9;
-    border: 1px solid #1eabf9;
-    border-radius: var(--borderRadius);
   }
 
   &:hover {
@@ -188,7 +183,7 @@ export function SideNav({
             data-cy="side-nav-home">
             <HomeIcon className="side-nav-icon" />{' '}
             <Trans i18nKey="nav:home">Home</Trans>
-            <span className="beta">BETA</span>
+            <BetaTag>BETA</BetaTag>
           </button>
         </Link>
         <Link href="/my-list?src=sidebar">

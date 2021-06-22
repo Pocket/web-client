@@ -5,6 +5,7 @@ import { css, cx } from 'linaria'
 import { Trans } from 'next-i18next'
 import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
+import { BetaTag } from 'components/tags/tags'
 
 export const DEFAULT_LINKS = [
   {
@@ -93,14 +94,7 @@ const listStyle = css`
   }
 
   .beta {
-    padding: 5px;
     margin-left: 0.5rem;
-    font-size: 0.65rem;
-    font-weight: 500;
-    background-color: var(--color-canvas);
-    color: #1eabf9;
-    border: 1px solid #1eabf9;
-    border-radius: var(--borderRadius);
   }
 `
 
@@ -134,7 +128,7 @@ const GlobalNavLinks = ({
                   handleClick(event, link.name, link.url)
                 }}>
                 {link.label}
-                {link.beta ? <span className='beta'>BETA</span> : null}
+                {link.beta ? <BetaTag>BETA</BetaTag> : null}
               </a>
             </Link>
           </li>
