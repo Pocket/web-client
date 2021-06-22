@@ -1,3 +1,17 @@
+## [1.14.58](https://github.com/Pocket/web-client/compare/v1.14.57...v1.14.58) (2021-06-22)
+
+
+### Bug Fixes
+
+* **home:** don’t allow read-now ([a2a7eaa](https://github.com/Pocket/web-client/commit/a2a7eaa47fe76a4856e8d85b34551450e7a84197))
+
+## [1.14.57](https://github.com/Pocket/web-client/compare/v1.14.56...v1.14.57) (2021-06-22)
+
+
+### Bug Fixes
+
+* **localizations:** globa footer localizations ([d148c20](https://github.com/Pocket/web-client/commit/d148c20f60ba5bbb84be1428aa78c921ede69483))
+
 ## [1.14.56](https://github.com/Pocket/web-client/compare/v1.14.55...v1.14.56) (2021-06-22)
 
 
