@@ -1,6 +1,5 @@
 import { READING_WPM } from 'common/constants'
 import { domainForUrl } from 'common/utilities'
-import { urlWithPocketRedirect } from 'common/utilities'
 import { urlWithPermanentLibrary } from 'common/utilities'
 
 export function deriveMyListItems(response) {
@@ -50,7 +49,7 @@ export function deriveMyListItems(response) {
       open_url: openUrl({ item }),
       original_url: originalUrl({ item }),
       permanent_url: permanentUrl({ item }),
-      openExternal: openExternal({ item }),
+      openExternal: false,
       isCollection: isCollection({ item }),
     }
   })
@@ -132,8 +131,8 @@ function saveUrl({ item }) {
  * @returns {string} The url that should be opened when visiting the live page
  */
 function originalUrl({ item }) {
-  if(item?.given_url) return urlWithPocketRedirect(item?.given_url)
-  if(item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
+  if (item?.given_url) return item?.given_url
+  if (item?.resolved_url) return item?.resolved_url
   return false
 }
 

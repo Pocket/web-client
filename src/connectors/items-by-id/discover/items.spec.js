@@ -71,7 +71,7 @@ describe('Discover Items', () => {
     it('should not fail when incomplete item data is passed in', () => {
       const derivedItems = deriveDiscoverItems(itemWithMissingData)
       const expectedSaveUrl = 'http://bloomberg.com/features/2020-carnival-cruise-coronavirus' //prettier-ignore
-      const expectedOpenUrl = 'https://getpocket.com/redirect?url=https%3A%2F%2Fwww.bloomberg.com%2Ffeatures%2F2020-carnival-cruise-coronavirus%2F%3Futm_source%3Dpocket%26utm_medium%3Demail%26utm_campaign%3Dpockethits' //prettier-ignore
+      const expectedOpenUrl = 'https://www.bloomberg.com/features/2020-carnival-cruise-coronavirus/?utm_source=pocket&utm_medium=email&utm_campaign=pockethits' //prettier-ignore
       const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=2951848646' //prettier-ignore
       const expectedOriginalUrl = 'http://bloomberg.com/features/2020-carnival-cruise-coronavirus' //prettier-ignore
 
@@ -89,7 +89,7 @@ describe('Discover Items', () => {
         read_time: null,
         syndicated: false,
         save_status: 'unsaved',
-        openExternal: true,
+        openExternal: false,
         recommendationId: 'RecommendationAPI/3296676960',
         slateLineup: {
           requestId: '4bf3d704-1f73-4d39-9a97-935a4c982e5d',

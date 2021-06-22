@@ -68,7 +68,7 @@ describe('My List Items', () => {
       const expectedSaveUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
       const expectedOpenUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
       const expectedOriginalUrl =
-        'https://getpocket.com/redirect?url=https%3A%2F%2Fgetpocket.com%2Fexplore%2Fitem%2Fthe-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential'
+        'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential'
       const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3059000416'
       expect(derivedItems[0]).toStrictEqual({
         item_id: '3059000416',

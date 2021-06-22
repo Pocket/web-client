@@ -50,12 +50,7 @@ export function deriveItems(response) {
  * @returns {string} The most appropriate title to show
  */
 function displayTitle({ item }) {
-  return (
-    item?.title ||
-    item?.given_title ||
-    item?.resolved_url ||
-    null
-  )
+  return item?.title || item?.given_title || item?.resolved_url || null
 }
 
 /** THUMBNAIL
@@ -112,10 +107,10 @@ function saveUrl({ item }) {
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {string} The url that should be opened when visiting the live page
  */
- function originalUrl({ item }) {
-  if(item?.save_url) return urlWithPocketRedirect(item?.save_url)
-  if(item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
-  if(item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
+function originalUrl({ item }) {
+  if (item?.save_url) return urlWithPocketRedirect(item?.save_url)
+  if (item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
+  if (item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
 }
 
 /** READ TIME
@@ -141,9 +136,6 @@ function readTimeFromWordCount(wordCount) {
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {bool} whether to open an item in a new tab
  */
-export function checkExternal({ item }) {
-  if (item?.has_video === '2') return false
-  if (item?.has_image === '2') return false
-  if (item?.is_article === '1') return false
+export function checkExternal() {
   return true
 }

@@ -106,9 +106,9 @@ function saveUrl({ item }) {
  * @returns {string} The url that should be opened when visiting the live page
  */
 function originalUrl({ item }) {
-  if (item?.save_url) return urlWithPocketRedirect(item?.save_url)
-  if (item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
-  if (item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
+  if (item?.save_url) return item?.save_url
+  if (item?.normal_url) return item?.normal_url
+  if (item?.resolved_url) return item?.resolved_url
 }
 
 /** READ TIME

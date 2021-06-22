@@ -1,6 +1,5 @@
 import { READING_WPM } from 'common/constants'
 import { domainForUrl } from 'common/utilities'
-import { urlWithPocketRedirect } from 'common/utilities'
 import { urlWithPermanentLibrary } from 'common/utilities'
 
 export function deriveDiscoverItems(response) {
@@ -31,7 +30,7 @@ export function deriveDiscoverItems(response) {
       syndicated: syndicated(feedItem),
       original_url: originalUrl(feedItem),
       permanent_url: permanentUrl(feedItem),
-      openExternal: openExternal(feedItem),
+      openExternal: false,
       save_status: 'unsaved',
       recommendationId: feedItem.id || feedItem.item?.resolved_id,
       slateLineup: feedItem.slateLineup,
@@ -108,12 +107,12 @@ function displayExcerpt({ item, curatedInfo, curated_info }) {
  * @returns {string} The url that should be saved or opened
  */
 function openUrl({ item }) {
-  if (item?.resolved_url) return urlWithPocketRedirect(item?.resolved_url)
-  if (item?.resolvedUrl) return urlWithPocketRedirect(item?.resolvedUrl)
-  if (item?.givenUrl) return urlWithPocketRedirect(item?.givenUrl)
-  if (item?.given_url) return urlWithPocketRedirect(item?.given_url)
-  if (item?.normalUrl) return urlWithPocketRedirect(item?.normalUrl)
-  if (item?.normal_url) return urlWithPocketRedirect(item?.normal_url)
+  if (item?.resolved_url) return item?.resolved_url
+  if (item?.resolvedUrl) return item?.resolvedUrl
+  if (item?.givenUrl) return item?.givenUrl
+  if (item?.given_url) return item?.given_url
+  if (item?.normalUrl) return item?.normalUrl
+  if (item?.normal_url) return item?.normal_url
   return false
 }
 
@@ -177,19 +176,4 @@ function readTimeFromWordCount(wordCount) {
 const syndicated = function ({ item }) {
   if (!item) return false
   return 'syndicated_article' in item || !!item?.syndicatedArticle
-}
-
-/**
- * OPEN EXTERNAL
- * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
- * @returns {bool} whether to open an item in a new tab
- */
-function openExternal({ item }) {
-  if (item?.has_video === '2') return false
-  if (item?.has_image === '2') return false
-  if (item?.is_article === '1') return false
-  if (item?.hasVideo === 'IS_VIDEO') return false // NO_VIDEOS || HAS_VIDEOS || IS_VIDEO
-  if (item?.hasImage === 'IS_IMAGE') return false // NO_IMAGES || HAS_IMAGES || IS_IMAGE
-  if (item?.isArticle && !!item?.syndicatedArticle) return false // Boolean
-  return true
 }
