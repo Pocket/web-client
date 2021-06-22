@@ -15,10 +15,9 @@ export function TopicsSideNav({
 
       {pinnedTopics.length
         ? pinnedTopics.map((topic) => (
-            <Link href={`/explore/${topic.topic_slug}?src=sidebar`}>
+            <Link href={`/explore/${topic.topic_slug}?src=sidebar`} key={topic.topic_slug}>
               <button
                 data-cy={`side-nav-${topic.topic_slug}`}
-                key={topic.topic_slug}
                 className={subActive(topic)}
                 onClick={clickEvent}>
                   {topic.display_name}

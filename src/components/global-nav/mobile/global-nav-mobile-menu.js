@@ -142,7 +142,7 @@ const iconStyle = css`
 `
 
 export const MobileLink = ({
-  link: { name, isDisabled = false, url, icon, label, id },
+  link: { name, isDisabled = false, url, icon, label, id, beta },
   isSelected,
   handleClick
 }) => (
@@ -159,6 +159,7 @@ export const MobileLink = ({
         }}>
         {icon ? icon : null}
         {label}
+        {beta ? <span className='beta'>BETA</span> : null}
       </a>
     </Link>
   </li>

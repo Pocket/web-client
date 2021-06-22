@@ -134,6 +134,7 @@ const GlobalNavLinks = ({
                   handleClick(event, link.name, link.url)
                 }}>
                 {link.label}
+                {link.beta ? <span className='beta'>BETA</span> : null}
               </a>
             </Link>
           </li>
