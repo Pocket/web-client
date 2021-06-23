@@ -74,7 +74,6 @@ export const Card = (props) => {
     authors: passedAuthors,
     excerpt,
     read_time,
-    openExternal,
     syndicated,
     open_url,
     noImage
@@ -149,7 +148,6 @@ export const Card = (props) => {
             id={id}
             openUrl={openUrl}
             onOpen={onOpen}
-            openExternal={openExternal}
             onImageFail={onImageFail}
             onFocus={handleFocus}
           />

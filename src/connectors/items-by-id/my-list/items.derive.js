@@ -49,7 +49,7 @@ export function deriveMyListItems(response) {
       open_url: openUrl({ item }),
       original_url: originalUrl({ item }),
       permanent_url: permanentUrl({ item }),
-      openExternal: false,
+      openExternal: openExternal({ item }),
       isCollection: isCollection({ item })
     }
   })

@@ -72,8 +72,7 @@ export const CardMedia = function ({
   id,
   onImageFail = () => {},
   openUrl,
-  onOpen,
-  openExternal
+  onOpen
 }) {
   /**
    * Fallback images:
@@ -130,7 +129,7 @@ export const CardMedia = function ({
     <div className={`${cardMediaStyles} media`}>
       {openUrl ? (
         <Link href={openUrl ? openUrl : false}>
-          <a tabIndex="-1" data-cy="image-link" onClick={onOpen} target={openExternal ? '_blank' : undefined}>
+          <a tabIndex="-1" data-cy="image-link" onClick={onOpen}>
             <MediaImage />
           </a>
         </Link>
