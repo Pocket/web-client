@@ -8,6 +8,8 @@ import { itemActionStyle } from 'components/item-actions/base'
 import { trackItemSave } from 'connectors/snowplow/snowplow.state'
 import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
 
+import { BASE_URL } from 'common/constants'
+
 export function ActionsCollection({ id, position }) {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector((state) => state.user.auth)
@@ -16,15 +18,16 @@ export function ActionsCollection({ id, position }) {
   if (!item) return null
 
   const { url, pageSaveStatus } = item
+  const analyticsItem = { url: `${BASE_URL}${url}` }
 
   // Prep save action
   const onSave = () => {
     dispatch(saveCollectionPage(id))
-    dispatch(trackItemSave(position, { url }, 'collection.save'))
+    dispatch(trackItemSave(position, analyticsItem, 'collection.save'))
   }
 
   // Open action
-  const onOpen = () => dispatch(trackItemOpen(position, { url }, 'collection.open', url))
+  const onOpen = () => dispatch(trackItemOpen(position, analyticsItem, 'collection.open', url))
 
   return item ? (
     <div className={`${itemActionStyle} actions`}>

@@ -4,6 +4,7 @@ import { ActionsCollection } from './collection-actions'
 import { setNoImage } from 'connectors/items-by-id/discover/items.state'
 import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
 import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+import { BASE_URL } from 'common/constants'
 
 /**
  * Article Card
@@ -22,14 +23,15 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
   // for hero items in a lockup, use the heroImage instead of thumbnail
   const thumbnail = lockup ? storedItem.heroImage : storedItem.thumbnail
   const item = { ...storedItem, thumbnail }
+  const analyticsItem = { url: `${BASE_URL}${url}` }
 
   /**
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onImpression = () => dispatch(trackItemImpression(position, item, 'collection.impression'))
+  const onImpression = () => dispatch(trackItemImpression(position, analyticsItem, 'collection.impression'))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
-  const onOpen = () => dispatch(trackItemOpen(position, item, 'collection.open'))
+  const onOpen = () => dispatch(trackItemOpen(position, analyticsItem, 'collection.open'))
 
   return (
     <Card
