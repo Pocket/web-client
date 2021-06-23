@@ -3,6 +3,7 @@ export { getImageCacheUrl } from './urls/urls'
 export { domainForUrl } from './urls/urls'
 export { getTopLevelPath } from './urls/urls'
 export { urlWithPermanentLibrary } from './urls/urls'
+export { replaceUTM } from './urls/urls'
 
 export { redirect } from './server-side/redirect'
 

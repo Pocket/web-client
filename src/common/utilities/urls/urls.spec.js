@@ -2,6 +2,7 @@ import { urlWithPocketRedirect } from 'common/utilities'
 import { getImageCacheUrl } from 'common/utilities'
 import { domainForUrl } from 'common/utilities'
 import { getTopLevelPath } from 'common/utilities'
+import { replaceUTM } from 'common/utilities'
 
 describe('urlWithPocketRedirect', () => {
   it('returns a properly formatted pocket redirect url.', () => {
@@ -107,5 +108,19 @@ describe('getTopLevelPath', () => {
     expect(getTopLevelPath('/discover/syndicated-article')).toBe('discover')
     expect(getTopLevelPath('/discover/topic')).toBe('discover')
     expect(getTopLevelPath('/')).toBe('')
+  })
+})
+
+describe('replaceUTM', () => {
+  const url = 'http://www.isithalloweenyet.com/?candy=no&utm_source=isitchristmas&utm_campaign=jacks+takeover' //prettier-ignore
+
+  it('should strip out utm codes without crushing other query params', () => {
+    expect(replaceUTM(url)).toBe('http://www.isithalloweenyet.com/?candy=no')
+  })
+
+  it('should add utm source if passed', () => {
+    expect(replaceUTM(url, 'pocket')).toBe(
+      'http://www.isithalloweenyet.com/?candy=no&utm_source=pocket'
+    )
   })
 })
