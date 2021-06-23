@@ -79,6 +79,7 @@ export function determineOpenUrl(item) {
  */
 export function replaceUTM(passedUrl, source) {
   if (!passedUrl) return false
+  if (/(craigslist\.(org|com))/.test(passedUrl)) return passedUrl
 
   const { url, query, fragmentIdentifier } = queryString.parseUrl(passedUrl)
   delete query.utm_medium //	Identifies what type of link was used, such as cost per click or email.	utm_medium=cpc

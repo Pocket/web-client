@@ -113,7 +113,8 @@ describe('getTopLevelPath', () => {
 
 describe('replaceUTM', () => {
   const url = 'http://www.isithalloweenyet.com/?candy=no&utm_source=isitchristmas&utm_campaign=jacks+takeover' //prettier-ignore
-
+  const craigslist =
+    'https://monterey.craigslist.org/grd/d/king-city-doe-boer-goats/7340745902.html'
   it('should strip out utm codes without crushing other query params', () => {
     expect(replaceUTM(url)).toBe('http://www.isithalloweenyet.com/?candy=no')
   })
@@ -122,5 +123,9 @@ describe('replaceUTM', () => {
     expect(replaceUTM(url, 'pocket')).toBe(
       'http://www.isithalloweenyet.com/?candy=no&utm_source=pocket'
     )
+  })
+
+  it('should leave craigslist alone', () => {
+    expect(replaceUTM(craigslist, 'pocket')).toBe(craigslist)
   })
 })
