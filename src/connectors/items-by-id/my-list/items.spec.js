@@ -66,7 +66,7 @@ describe('My List Items', () => {
     it('should derive data as expected', () => {
       const derivedItems = deriveMyListItems(itemWithMissingData)
       const expectedSaveUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
-      const expectedOpenUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
+      const expectedOpenUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential?utm_source=pocket_mylist' //prettier-ignore
       const expectedOriginalUrl =
         'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential'
       const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3059000416'

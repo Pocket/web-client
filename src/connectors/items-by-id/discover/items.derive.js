@@ -1,6 +1,5 @@
 import { READING_WPM } from 'common/constants'
 import { domainForUrl } from 'common/utilities'
-import { urlWithPermanentLibrary } from 'common/utilities'
 
 export function deriveDiscoverItems(response) {
   /**
@@ -29,7 +28,6 @@ export function deriveDiscoverItems(response) {
       read_time: readTime(feedItem),
       syndicated: syndicated(feedItem),
       original_url: originalUrl(feedItem),
-      permanent_url: permanentUrl(feedItem),
       openExternal: false,
       save_status: 'unsaved',
       recommendationId: feedItem.id || feedItem.item?.resolved_id,
@@ -105,14 +103,26 @@ function displayExcerpt({ item, curatedInfo, curated_info }) {
 /** OPEN URL
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
  * @returns {string} The url that should be saved or opened
+ * When to use given_url or item_id:
+ * When using it as an identifier with the API (actions, saving, etc)
+ * When opening an item in a web browser
+ * When sharing a link
+ * NOT as a display url, unless no resolved_url exists
+ * NOT as the display domain, unless no resolved_url exists
+ *
+ * When to use resolved_url or resolved_id:
+ * When displaying a url to a user
+ * When displaying a domain to a user
+ * NOT when communicating with the API or for saving
+ * NOT for opening in a web browser
+ *
+ * Do NOT use the following for syncing or opening content:
+ * normal_urls - They are meant for internal database syncing only
+ * resolved_ids - They are just links to resolved_urls
  */
 function openUrl({ item }) {
-  if (item?.resolved_url) return item?.resolved_url
-  if (item?.resolvedUrl) return item?.resolvedUrl
-  if (item?.givenUrl) return item?.givenUrl
-  if (item?.given_url) return item?.given_url
-  if (item?.normalUrl) return item?.normalUrl
-  if (item?.normal_url) return item?.normal_url
+  const url = originalUrl({ item })
+  if (url) return `${url}?utm_source=pocket_discover`
   return false
 }
 
@@ -121,7 +131,7 @@ function openUrl({ item }) {
  * @returns {string} The url that should be saved or opened
  */
 function saveUrl({ item }) {
-  return item?.normalUrl || item?.normal_url || item?.resolvedUrl || item?.resolved_url || false
+  return item?.givenUrl || false
 }
 
 /** OPEN_ORIGINAL
@@ -129,23 +139,7 @@ function saveUrl({ item }) {
  * @returns {string} The url that should be opened when visiting the live page
  */
 function originalUrl({ item }) {
-  if (item?.givenUrl) return item?.givenUrl
-  if (item?.given_url) return item?.given_url
-  if (item?.normalUrl) return item?.normalUrl
-  if (item?.normal_url) return item?.normal_url
-  if (item?.resolvedUrl) return item?.resolvedUrl
-  if (item?.resolved_url) return item?.resolved_url
-  return false
-}
-
-/** OPEN_PERMANENT
- * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
- * @returns {string} The url for permanent library
- */
-function permanentUrl({ item }) {
-  if (item?.itemId) return urlWithPermanentLibrary(item?.itemId)
-  if (item?.item_id) return urlWithPermanentLibrary(item?.item_id)
-  return false
+  return item?.givenUrl || false
 }
 
 /** READ TIME

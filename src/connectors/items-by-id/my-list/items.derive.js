@@ -1,5 +1,5 @@
 import { READING_WPM } from 'common/constants'
-import { domainForUrl } from 'common/utilities'
+import { domainForUrl, replaceUTM } from 'common/utilities'
 import { urlWithPermanentLibrary } from 'common/utilities'
 
 export function deriveMyListItems(response) {
@@ -50,7 +50,7 @@ export function deriveMyListItems(response) {
       original_url: originalUrl({ item }),
       permanent_url: permanentUrl({ item }),
       openExternal: false,
-      isCollection: isCollection({ item }),
+      isCollection: isCollection({ item })
     }
   })
 }
@@ -115,7 +115,8 @@ function displayExcerpt({ item, curated_info }) {
  * @returns {string} The url that should be saved or opened
  */
 function openUrl({ item, redirect_url }) {
-  return devLink(item) || redirect_url || item?.given_url || item?.resolved_url || null
+  const linkWithUTM = replaceUTM(item?.given_url, 'pocket_mylist')
+  return devLink(item) || redirect_url || linkWithUTM
 }
 
 /** SAVE URL
@@ -131,9 +132,7 @@ function saveUrl({ item }) {
  * @returns {string} The url that should be opened when visiting the live page
  */
 function originalUrl({ item }) {
-  if (item?.given_url) return item?.given_url
-  if (item?.resolved_url) return item?.resolved_url
-  return false
+  return item?.given_url || item?.resolved_url || false
 }
 
 /** OPEN_PERMANENT
@@ -197,8 +196,8 @@ function openExternal({ item }) {
 /**
  * IS COLLECTION
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
- * @returns {bool} whether an item is a collection 
- * 
+ * @returns {bool} whether an item is a collection
+ *
  * https://regexr.com/5volt - A place to test the regular expression
  */
 
