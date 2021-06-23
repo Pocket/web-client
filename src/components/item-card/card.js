@@ -162,7 +162,6 @@ export const Card = (props) => {
                   ref={linkRef}
                   onClick={onOpen}
                   data-cy="title-link"
-                  target={openExternal ? '_blank' : undefined}
                   tabIndex={0}
                   onFocus={handleFocus}>
                   {title}
@@ -186,7 +185,6 @@ export const Card = (props) => {
               <a
                 className="publisher"
                 href={open_url}
-                target="_blank"
                 onClick={onOpenOriginalUrl}
                 data-cy="publisher-link"
                 tabIndex={0}>
