@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { Trans } from 'next-i18next'
-import { css } from 'linaria'
 
 import { FavoriteIcon } from '@pocket/web-ui'
 import { HighlightIcon } from '@pocket/web-ui'

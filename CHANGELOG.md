@@ -1,3 +1,19 @@
+# [1.15.0](https://github.com/Pocket/web-client/compare/v1.14.58...v1.15.0) (2021-06-23)
+
+
+### Bug Fixes
+
+* **beta:** adding reusable beta tag component ([57bb208](https://github.com/Pocket/web-client/commit/57bb20818d702ceb5c3e2210b7c1e49ca2389ca4))
+* **beta:** update beta class to use border radius variable ([c6b5d65](https://github.com/Pocket/web-client/commit/c6b5d654b16c19f5516eb608a929ddf45ec4daef))
+* **home:** add beta option to global nav links ([0fd88bc](https://github.com/Pocket/web-client/commit/0fd88bc9da6cbeb2443ecd03ab630a6579586ef6))
+* **home:** remove unused component and update analytics id ([45484cf](https://github.com/Pocket/web-client/commit/45484cf8d393a55d6406f6459482e25c1f518d6b))
+* **home:** update beta styles on global nav ([8a4c874](https://github.com/Pocket/web-client/commit/8a4c874b2423058a86a8a2fadb3b950bc928a0d5))
+
+
+### Features
+
+* **home:** adding home for all users ([8e6481d](https://github.com/Pocket/web-client/commit/8e6481d1316206da454fbe281a5a191d9300c0c2))
+
 ## [1.14.58](https://github.com/Pocket/web-client/compare/v1.14.57...v1.14.58) (2021-06-22)
 
 

@@ -1,5 +1,5 @@
-import { css } from 'linaria'
 import { Tag, tagBase } from './tag'
+import { BetaTag } from './tag-beta'
 import { HighlightsTag } from './tag-highlights'
 import { WebOnlyTag } from './tag-web-only'
 import { TrendingTag } from './tag-trending'
@@ -11,6 +11,7 @@ import { SuggestedTag } from './tag-suggested'
 export {
   tagBase,
   Tag,
+  BetaTag,
   SuggestedTag,
   BestOfTag,
   FavoriteTag,

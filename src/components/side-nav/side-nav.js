@@ -2,13 +2,12 @@ import Link from 'next/link'
 import { Trans, useTranslation } from 'next-i18next'
 
 import { HomeIcon } from '@pocket/web-ui'
-import { ArchiveIcon } from '@pocket/web-ui'
 import { ChevronUpIcon } from '@pocket/web-ui'
 import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
-import { ReadingIcon } from '@pocket/web-ui'
 import { css, cx } from 'linaria'
 import { CollectionsIcon } from '@pocket/web-ui'
+import { BetaTag } from 'components/tags/tags'
 
 import { useInView } from 'react-intersection-observer'
 
@@ -75,7 +74,7 @@ export const sideNavHeader = css`
   font-family: var(--fontSansSerif);
   font-size: var(--fontSize100);
   font-weight: 500;
-  line-height: 0.8;
+  line-height: 1;
   padding: var(--spacing050);
   margin: 25px 0 5px;
   color: var(--color-textSecondary);
@@ -121,6 +120,11 @@ export const sideNavItem = css`
     margin-top: 0;
   }
 
+  .beta {
+    padding: 0 5px;
+    margin-left: 0.75rem;
+  }
+
   &:hover {
     color: var(--color-actionPrimary);
     background-color: transparent;
@@ -144,9 +148,6 @@ export function SideNav({
   pinnedTopics,
   isDisabled,
   newSaveCount,
-  showHome,
-  showBookmark,
-  showTopics,
   flagsReady,
   trackMenuClick
 }) {
@@ -175,22 +176,25 @@ export function SideNav({
   return flagsReady ? (
     <div className={wrapperClass}>
       <nav role="navigation">
-        {showHome ? (
-          <Link href="/home?src=sidebar">
-            <button className={subActive('home')} onClick={clickEvent} data-cy="side-nav-home">
-              <HomeIcon className="side-nav-icon" /> <Trans i18nKey="nav:home">Home</Trans>
-            </button>
-          </Link>
-        ) : null}
-
+        <Link href="/home?src=sidebar">
+          <button
+            className={subActive('home')}
+            onClick={clickEvent}
+            data-cy="side-nav-home">
+            <HomeIcon className="side-nav-icon" />{' '}
+            <Trans i18nKey="nav:home">Home</Trans>
+            <BetaTag>BETA</BetaTag>
+          </button>
+        </Link>
         <Link href="/my-list?src=sidebar">
           <button
             className={subActive('unread')}
             onClick={clickEvent}
             ref={ref}
             data-cy="side-nav-mylist">
-            <ListViewIcon className="side-nav-icon" /> <Trans i18nKey="nav:my-list">My List</Trans>
-            {showBookmark ? <BookmarkIcon newSaveCount={newSaveCount} /> : null}
+            <ListViewIcon className="side-nav-icon" />{' '}
+            <Trans i18nKey="nav:my-list">My List</Trans>
+            <BookmarkIcon newSaveCount={newSaveCount} />
           </button>
         </Link>
         <Link href="/explore?src=sidebar">
@@ -212,7 +216,7 @@ export function SideNav({
             <Trans i18nKey="nav:collections">Collections</Trans>
           </button>
         </Link>
-        {subset === 'home' && showTopics ? (
+        {subset === 'home' ? (
           <TopicsSideNav
             subActive={subActive}
             pinnedTopics={pinnedTopics}

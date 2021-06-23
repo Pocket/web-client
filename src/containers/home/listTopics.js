@@ -9,7 +9,6 @@ import { breakpointLargeHandset } from '@pocket/web-ui'
 import { trackEngagement } from 'connectors/snowplow/snowplow.state'
 import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
 import { UI_COMPONENT_LINK } from 'connectors/snowplow/entities'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 /* Analytics Event */
 export const sendEngagementEvent = (topic) =>
@@ -106,11 +105,8 @@ export const topicHeadings = {
   }
 }
 
-export const HomeTopicsRow = ({ topic_slug, topic, count = 3 }) => {
+export const HomeTopicsRow = ({ topic_slug, topic, count = 6 }) => {
   const dispatch = useDispatch()
-
-  const featureState = useSelector((state) => state.features)
-  const showV2 = featureFlagActive({ flag: 'home.v2', featureState })
 
   const topicItems = useSelector((state) => state.home[`${topic}Topic`])
   const displayItems = topicItems?.slice(0, count)
@@ -128,7 +124,6 @@ export const HomeTopicsRow = ({ topic_slug, topic, count = 3 }) => {
         topicSlug={topic_slug}
         sectionDescription={topicHeadings[topic]?.subtitle}
         clickEvent={clickEvent}
-        showViewMore={showV2}
       />
       <section className={classnames(cardGrid, cardRowStyles)}>
         {displayItems?.length
@@ -143,12 +138,12 @@ export const HomeTopicsRow = ({ topic_slug, topic, count = 3 }) => {
   )
 }
 
-export const HomeTopicsList = ({ count }) => {
+export const HomeTopicsList = () => {
   const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
 
   return pinnedTopics?.length
     ? pinnedTopics.map((topic) => (
-        <HomeTopicsRow key={topic.display_name} count={count} {...topic} />
+        <HomeTopicsRow key={topic.display_name} {...topic} />
       ))
     : null
 }

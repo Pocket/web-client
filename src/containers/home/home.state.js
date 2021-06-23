@@ -8,8 +8,6 @@ import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.deriv
 import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { arrayToObject } from 'common/utilities'
 
-import { CACHE_KEY_HOME_STORED_TOPICS } from 'common/constants'
-
 import { HOME_HYDRATE } from 'actions'
 
 import { HOME_SAVE_REQUEST } from 'actions'
