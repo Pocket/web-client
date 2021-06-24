@@ -206,14 +206,13 @@ export const Card = (props) => {
           {showExcerpt ? (
             <div className="excerpt">
               {useMarkdown ? (
-                <div className="markdown">
-                  <ReactMarkdown
-                    skipHtml={true}
-                    unwrapDisallowed={true}
-                    allowedElements={['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']}>
-                    {excerpt}
-                  </ReactMarkdown>
-                </div>
+                <ReactMarkdown
+                  skipHtml={true}
+                  unwrapDisallowed={true}
+                  className="markdown"
+                  allowedElements={['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']}>
+                  {excerpt}
+                </ReactMarkdown>
               ) : (
                 <p>{excerpt}</p>
               )}
