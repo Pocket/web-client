@@ -5,7 +5,6 @@ import { breakpointLargeHandset } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { ListSort } from 'components/list-sort/list-sort'
-import { capitalizeFirstLetter } from 'common/utilities'
 
 export const myListHeaderStyle = css`
   margin-bottom: var(--spacing150);
