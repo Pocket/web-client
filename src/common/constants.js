@@ -27,7 +27,7 @@ export const CACHE_KEY_SORT_OPTIONS = 'pocket-sort-options'
 export const CACHE_KEY_RELEASE_VERSION = 'pocket-release-version'
 export const CACHE_KEY_HOME_STORED_TOPICS = 'pocket-home-stored-topics'
 
-export const RELEASE_NOTES_VERSION = 'jun-21-2021'
+export const RELEASE_NOTES_VERSION = 'jun-25-2021'
 
 // THIRD PARTY
 export const CAPTCHA_SITE_KEY = '6LfIpyYUAAAAAPtNSKafudr16odFL1eQte0vR0Py' // API key used with Google's ReCaptcha service
@@ -145,10 +145,11 @@ export const LOCALE_COMMON = [
   'shortcuts',
   'tags',
   'whats-new',
-  'global-footer'
+  'global-footer',
+  'collections'
 ]
 
-    
+
 export const HOME_TOPIC_SLATES = {
   'business': 'af2cc2c0-1286-47a3-b8ce-187b905f94af',
   'career': '00f0c593-3c99-4d5a-9297-c66f8b00be01',

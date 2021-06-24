@@ -1,3 +1,18 @@
+## [1.15.4](https://github.com/Pocket/web-client/compare/v1.15.3...v1.15.4) (2021-06-24)
+
+
+### Bug Fixes
+
+* **whats-new:** adding home and collections release notes ([1eb9b1f](https://github.com/Pocket/web-client/commit/1eb9b1fcfed22ce77380c00afe6cbe63fd2cd400))
+
+## [1.15.3](https://github.com/Pocket/web-client/compare/v1.15.2...v1.15.3) (2021-06-24)
+
+
+### Bug Fixes
+
+* **constants:** add collections namespace to locale common ([ada4882](https://github.com/Pocket/web-client/commit/ada4882eac17a0779c20ce673676690a39fc0d80))
+* **version:** use web-localization 0.10.5 ([dafad0f](https://github.com/Pocket/web-client/commit/dafad0f19a8f6de06425d08f4c58613445af5ea0))
+
 ## [1.15.2](https://github.com/Pocket/web-client/compare/v1.15.1...v1.15.2) (2021-06-24)
 
 
