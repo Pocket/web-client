@@ -1,3 +1,10 @@
+## [1.15.4](https://github.com/Pocket/web-client/compare/v1.15.3...v1.15.4) (2021-06-24)
+
+
+### Bug Fixes
+
+* **whats-new:** adding home and collections release notes ([1eb9b1f](https://github.com/Pocket/web-client/commit/1eb9b1fcfed22ce77380c00afe6cbe63fd2cd400))
+
 ## [1.15.3](https://github.com/Pocket/web-client/compare/v1.15.2...v1.15.3) (2021-06-24)
 
 
