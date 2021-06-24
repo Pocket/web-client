@@ -145,7 +145,8 @@ export const LOCALE_COMMON = [
   'shortcuts',
   'tags',
   'whats-new',
-  'global-footer'
+  'global-footer',
+  'collections'
 ]
 
     
