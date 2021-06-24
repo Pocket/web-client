@@ -139,6 +139,15 @@ export const cardStyles = css`
     }
   }
 
+  .markdown {
+    a {
+      text-decoration: underline;
+      &:hover {
+        color: var(--color-textLinkHover);
+      }
+    }
+  }
+
   .footer {
     width: 100%;
     position: absolute;

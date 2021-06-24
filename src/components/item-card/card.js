@@ -209,7 +209,8 @@ export const Card = (props) => {
                 <ReactMarkdown
                   skipHtml={true}
                   unwrapDisallowed={true}
-                  allowedElements={['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em']}>
+                  className="markdown"
+                  allowedElements={['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']}>
                   {excerpt}
                 </ReactMarkdown>
               ) : (
