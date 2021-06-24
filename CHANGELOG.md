@@ -1,3 +1,14 @@
+## [1.15.5](https://github.com/Pocket/web-client/compare/v1.15.4...v1.15.5) (2021-06-24)
+
+
+### Bug Fixes
+
+* **card:** add ul and ol to allowed elements for markdown in excerpt ([2a0926e](https://github.com/Pocket/web-client/commit/2a0926e1053f4c4cb8933abf46b43f58fe7c31b8))
+* **card:** adjust styles for links in markdown ([bffbfaf](https://github.com/Pocket/web-client/commit/bffbfafdedb4f56607c14b59b85c8f78420abf5d))
+* **card:** pass className to reactMarkdown instead of creating a new div ([d5b26c4](https://github.com/Pocket/web-client/commit/d5b26c49adaacfe9b63ff69a2a7227a085b50518))
+* **content-intro:** add blockquote styling ([9af7a6e](https://github.com/Pocket/web-client/commit/9af7a6e6ae1b8d0bcf4af69d0148ff36c8a994a6))
+* **content-intro:** use rem instead of spacing variable ([37776f9](https://github.com/Pocket/web-client/commit/37776f97c89c9e75104c59484d2b0285bfd85770))
+
 ## [1.15.4](https://github.com/Pocket/web-client/compare/v1.15.3...v1.15.4) (2021-06-24)
 
 
