@@ -11,7 +11,7 @@ const introStyles = css`
   blockquote {
     color: var(--color-textSecondary);
     font-family: var(--fontSansSerif);
-    padding-left: var(--spacing250);
+    padding-left: 2.5rem;
   }
 `
 
