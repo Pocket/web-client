@@ -27,7 +27,7 @@ export const SearchPageHeader = ({ filter, total, query, sortOrder, toggleSortOr
         <em data-cy="search-query">"{query}"</em> —{' '}
         {isLoading ? (
           <span>
-            Searching <Loader />{' '}
+            <Trans i18nKey="search:searching">Searching</Trans> <Loader />{' '}
           </span>
         ) : (
           <span>

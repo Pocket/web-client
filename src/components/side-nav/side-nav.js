@@ -178,6 +178,7 @@ export function SideNav({
       <nav role="navigation">
         <Link href="/home?src=sidebar">
           <button
+            ref={ref} // when ref offscreen, show "Return to top" button
             className={subActive('home')}
             onClick={clickEvent}
             data-cy="side-nav-home">
@@ -190,7 +191,6 @@ export function SideNav({
           <button
             className={subActive('unread')}
             onClick={clickEvent}
-            ref={ref}
             data-cy="side-nav-mylist">
             <ListViewIcon className="side-nav-icon" />{' '}
             <Trans i18nKey="nav:my-list">My List</Trans>

@@ -1,4 +1,5 @@
 import { css } from 'linaria'
+import { Trans } from 'next-i18next'
 import { breakpointMediumHandset } from '@pocket/web-ui'
 import Link from 'next/link'
 
@@ -52,7 +53,9 @@ const recentSearchStyle = css`
 export function RecentSearches({ searchTerms = [] }) {
   return searchTerms.length ? (
     <div className={recentSearchStyle}>
-      <h4 className="title">Recent Searches</h4>
+      <h4 className="title">
+        <Trans i18nKey="search:recent-searches">Recent Searches</Trans>
+      </h4>
 
       {searchTerms.map((search) => (
         <div key={search}>

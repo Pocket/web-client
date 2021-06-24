@@ -148,8 +148,6 @@ export default function MyList(props) {
 
   const Header = tag ? TagPageHeader : MyListHeader
 
-  const title = selector === 'unread' ? 'My List' : selector
-
   return (
     <Layout
       title={metaData.title}
@@ -164,7 +162,7 @@ export default function MyList(props) {
             <>
               <Header
                 subset={subset}
-                title={title}
+                title={selector}
                 filter={filter}
                 tag={tag}
                 sortOrder={sortOrder}

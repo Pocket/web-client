@@ -1,4 +1,5 @@
 import { css } from 'linaria'
+import { useTranslation } from 'next-i18next'
 import { breakpointSmallHandset } from '@pocket/web-ui'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
@@ -66,10 +67,24 @@ export const myListHeaderStyle = css`
   }
 `
 
+
+
 export const MyListHeader = ({ subset, filter, title, sortOrder, toggleSortOrder }) => {
+  const { t } = useTranslation()
+
+  const translatedHeaders = {
+    unread: t('headers:my-list', 'My List'),
+    archive: t('headers:archive', 'Archive'),
+    favorites: t('headers:favorites', 'Favorites'),
+    highlights: t('headers:highlights', 'Highlights'),
+    articles: t('headers:articles', 'Articles'),
+    videos: t('headers:videos', 'Videos'),
+    tags: t('headers:tags', 'Tags')
+  }
+
   return subset ? (
     <header className={myListHeaderStyle}>
-      <h1 className="pageTitle" data-cy="page-title">{capitalizeFirstLetter(title)}</h1>
+      <h1 className="pageTitle" data-cy="page-title">{translatedHeaders[title]}</h1>
       <FilterMenu subset={subset} filter={filter} />
       { subset !== 'tag-page' ? (
         <ListSort toggleSortOrder={toggleSortOrder} sortOrder={sortOrder} />

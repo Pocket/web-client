@@ -70,7 +70,9 @@ export function FiltersSideNav({
           <Trans i18nKey="nav:videos">Videos</Trans>
         </button>
       </Link>
-      <div className={sideNavHeader}>Tags</div>
+      <div className={sideNavHeader}>
+        <Trans i18nKey="nav:tags">Tags</Trans>
+      </div>
       <Link href="/my-list/tags">
         <button
           className={subActive('tag')}
