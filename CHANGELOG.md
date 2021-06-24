@@ -1,3 +1,12 @@
+## [1.15.2](https://github.com/Pocket/web-client/compare/v1.15.1...v1.15.2) (2021-06-24)
+
+
+### Bug Fixes
+
+* **header:** remove extra line breaks ([30c5a84](https://github.com/Pocket/web-client/commit/30c5a84f490da921bed9591c415078f30c76d7e2))
+* **headers:** add header translations wrappers ([aa6d32e](https://github.com/Pocket/web-client/commit/aa6d32ef0dec0c4fdc7c735ef033d492b71681c2))
+* **trans:** update trans component to use t function ([7ecba57](https://github.com/Pocket/web-client/commit/7ecba57952b86755f9a5c66f7ee643d79a2f9eb9))
+
 ## [1.15.1](https://github.com/Pocket/web-client/compare/v1.15.0...v1.15.1) (2021-06-24)
 
 

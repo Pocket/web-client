@@ -1,7 +1,7 @@
 import { css, cx } from 'linaria'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
-import { Trans } from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 import { Loader } from 'components/loader/loader'
 import { ListSort } from 'components/list-sort/list-sort'
 import { myListHeaderStyle } from './my-list-header'
@@ -20,6 +20,8 @@ const searchStyles = css`
 `
 
 export const SearchPageHeader = ({ filter, total, query, sortOrder, toggleSortOrder }) => {
+  const { t } = useTranslation()
+
   const isLoading = total === false
   return query ? (
     <header className={cx(myListHeaderStyle, searchStyles)}>
@@ -27,12 +29,12 @@ export const SearchPageHeader = ({ filter, total, query, sortOrder, toggleSortOr
         <em data-cy="search-query">"{query}"</em> —{' '}
         {isLoading ? (
           <span>
-            Searching <Loader />{' '}
+            {t('search:searching', 'Searching')} <Loader />{' '}
           </span>
         ) : (
           <span>
             {total || 0}{' '}
-            <Trans i18nKey="search:search-results">Search Results</Trans>
+            {t('search:search-results', 'Search Results')}
           </span>
         )}
       </h1>

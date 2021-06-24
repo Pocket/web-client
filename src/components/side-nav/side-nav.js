@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Trans, useTranslation } from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 
 import { HomeIcon } from '@pocket/web-ui'
 import { ChevronUpIcon } from '@pocket/web-ui'
@@ -178,11 +178,12 @@ export function SideNav({
       <nav role="navigation">
         <Link href="/home?src=sidebar">
           <button
+            ref={ref} // when ref offscreen, show "Return to top" button
             className={subActive('home')}
             onClick={clickEvent}
             data-cy="side-nav-home">
             <HomeIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:home">Home</Trans>
+            {t('nav:home', 'Home')}
             <BetaTag>BETA</BetaTag>
           </button>
         </Link>
@@ -190,10 +191,9 @@ export function SideNav({
           <button
             className={subActive('unread')}
             onClick={clickEvent}
-            ref={ref}
             data-cy="side-nav-mylist">
             <ListViewIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:my-list">My List</Trans>
+            {t('nav:my-list', 'My List')}
             <BookmarkIcon newSaveCount={newSaveCount} />
           </button>
         </Link>
@@ -203,7 +203,7 @@ export function SideNav({
             onClick={clickEvent}
             data-cy="side-nav-discover">
             <DiscoverIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:discover">Discover</Trans>
+            {t('nav:discover', 'Discover')}
           </button>
         </Link>
         <Link href="/collections?src=sidebar">
@@ -213,7 +213,7 @@ export function SideNav({
             ref={ref}
             data-cy="side-nav-collections">
             <CollectionsIcon className="side-nav-icon" />{' '}
-            <Trans i18nKey="nav:collections">Collections</Trans>
+            {t('nav:collections', 'Collections')}
           </button>
         </Link>
         {subset === 'home' ? (
