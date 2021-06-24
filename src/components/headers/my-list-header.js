@@ -67,8 +67,6 @@ export const myListHeaderStyle = css`
   }
 `
 
-
-
 export const MyListHeader = ({ subset, filter, title, sortOrder, toggleSortOrder }) => {
   const { t } = useTranslation()
 
