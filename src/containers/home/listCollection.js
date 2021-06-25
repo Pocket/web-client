@@ -38,7 +38,7 @@ export const HomeCollectionList = () => {
     <section data-cy="collections-row">
       <HomeCollectionHeader
         sectionTitle="Our most-read Collections"
-        sectionDescription="Dive into our editors’ curated lists of stories around a unique subject"
+        sectionDescription="Fill your Pocket with our curated guides to the best of the web"
         clickEvent={clickEvent}
       />
       <section className={homeCollections}>
