@@ -133,6 +133,7 @@ export const LOCALE_READER = [
 export const LOCALE_COMMON = [
   'common',
   'discover',
+  'call-out',
   'save-to-pocket',
   'confirm',
   'item-action',
