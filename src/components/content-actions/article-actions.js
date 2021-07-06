@@ -25,7 +25,7 @@ const shareContainer = css`
   display: flex;
   flex-direction: column;
   flex: 1;
-  width: 100%;
+  width: 24px;
 
   .social-actions {
     ${breakpointMediumTablet} {
