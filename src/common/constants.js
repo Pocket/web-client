@@ -136,6 +136,7 @@ export const LOCALE_COMMON = [
   'call-out',
   'save-to-pocket',
   'confirm',
+  'headers',
   'item-action',
   'messages',
   'nav',
