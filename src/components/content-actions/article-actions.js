@@ -66,12 +66,12 @@ const shareContainer = css`
   }
 
   .pocket-share {
+    width: 24px;
     button {
       color: var(--color-textPrimary);
     }
-    div {
-      width: 200px;
-      font-family: var(--fontSansSerif);
+    ${breakpointMediumTablet} {
+      margin-top: 0.625rem;
     }
   }
 
@@ -123,8 +123,8 @@ function buildShareUrl(url, source) {
 
 export const ArticleActions = function ({
   isAuthenticated,
-  onSave,
-  onShare,
+  onSave = () => {},
+  onShare = () => {},
   saveStatus,
   excerpt = '',
   title,

@@ -171,7 +171,6 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
         data-tooltip={t('share:share-to-buffer', 'Share to Buffer')}
         data-cy="share-buffer"
         className={topTooltipDelayed}
-        resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('buffer')}
         quote={quote || excerpt}
         url={open_url}>

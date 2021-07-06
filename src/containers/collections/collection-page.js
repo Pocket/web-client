@@ -108,7 +108,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
               onSave={saveAction}
               saveStatus={pageSaveStatus}
               isAuthenticated={isAuthenticated}
-              handleShareClick={() => {}}
+              onShare={() => {}}
               className="sticky"
               url={url}
             />

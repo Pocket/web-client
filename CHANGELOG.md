@@ -1,3 +1,13 @@
+## [1.15.11](https://github.com/Pocket/web-client/compare/v1.15.10...v1.15.11) (2021-07-06)
+
+
+### Bug Fixes
+
+* **actions:** add width to pocket-share icon ([d583d93](https://github.com/Pocket/web-client/commit/d583d93da564e4efee8229cfd1968f71addeb979))
+* **article-actions:** update styles on pocket icon ([99a1193](https://github.com/Pocket/web-client/commit/99a119377f42820b18d965524c78b900b82a2a29))
+* **share:** update errors thrown by the share process ([95c5771](https://github.com/Pocket/web-client/commit/95c57712ac440df566eafecf8ee7ad53f4f01bf0))
+* **share-actions:** add width to actions container ([1eedf24](https://github.com/Pocket/web-client/commit/1eedf245868b752123e13177be686b02bbf2ffc2))
+
 ## [1.15.10](https://github.com/Pocket/web-client/compare/v1.15.9...v1.15.10) (2021-07-06)
 
 
