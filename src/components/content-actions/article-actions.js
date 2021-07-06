@@ -123,8 +123,8 @@ function buildShareUrl(url, source) {
 
 export const ArticleActions = function ({
   isAuthenticated,
-  onSave,
-  onShare,
+  onSave = () => {},
+  onShare = () => {},
   saveStatus,
   excerpt = '',
   title,

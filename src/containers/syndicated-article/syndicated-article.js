@@ -145,7 +145,7 @@ export function SyndicatedArticle({ queryParams = validParams }) {
                 onSave={saveAction}
                 saveStatus={saveStatus}
                 isAuthenticated={isAuthenticated}
-                handleShareClick={() => {}}
+                onShare={() => {}}
                 className="sticky"
                 slug={slug}
               />
