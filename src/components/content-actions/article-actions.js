@@ -25,7 +25,7 @@ const shareContainer = css`
   display: flex;
   flex-direction: column;
   flex: 1;
-  width: 24px;
+  width: 100%;
 
   .social-actions {
     ${breakpointMediumTablet} {
@@ -66,6 +66,7 @@ const shareContainer = css`
   }
 
   .pocket-share {
+    width: 24px;
     button {
       color: var(--color-textPrimary);
     }
