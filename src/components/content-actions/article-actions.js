@@ -70,9 +70,8 @@ const shareContainer = css`
     button {
       color: var(--color-textPrimary);
     }
-    div {
-      width: 200px;
-      font-family: var(--fontSansSerif);
+    ${breakpointMediumTablet} {
+      margin-top: 0.625rem;
     }
   }
 
