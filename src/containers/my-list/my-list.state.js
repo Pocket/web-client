@@ -54,7 +54,7 @@ export const updateMyListData = (since, subset, filter, tag) => ({ type: MYLIST_
 export const hydrateMylist = (hydrated) => ({ type: MYLIST_HYDRATE, hydrated }) //prettier-ignore
 export const saveMylistItem = (id, url, position) => ({type: MYLIST_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const unSaveMylistItem = (id) => ({ type: MYLIST_UNSAVE_REQUEST, id }) //prettier-ignore
-export const getMylistSearchData = (filter, query) => ({ type: MYLIST_SEARCH_REQUEST, filter, query }) //prettier-ignore
+export const getMylistSearchData = (filter, query, offset) => ({ type: MYLIST_SEARCH_REQUEST, filter, query, offset }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -345,6 +345,7 @@ const getSortOptionsBySubset = (state, subset) => state.app.sortOptions[subset] 
 const getMyListItemsById = (state) => state.myListItemsById
 const getState = (state) => state.myList || {}
 const getSubset = (state) => state.app.section
+const getQuery = (state) => state.myList.query || ''
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -458,24 +459,26 @@ function* myListSearchRequest(action) {
   yield put({ type: APP_SET_MODE, mode: 'default' })
 
   try {
-    const { filter, query } = action
+    const { filter, query, offset = 0 } = action
     const section = filter ? 'search' + filter : 'search'
 
     const parameters = { search: query }
     const sortOrder = yield select(getSortOptionsBySubset, 'search')
+    const savedQuery = yield select(getQuery)
 
     // Apply filters
     if (filter === 'unread') parameters.state = 'unread'
     if (filter === 'archive') parameters.state = 'read'
     if (filter === 'favorites') parameters.favorite = 1
 
-    yield put({ type: MYLIST_SEARCH_CLEAR, query })
+    // If queries don't match, it's fresh so reset search
+    if (query !== savedQuery) yield put({ type: MYLIST_SEARCH_CLEAR, query })
 
     const { itemsById, total = 0, since, error } = yield fetchMyListSearch({
       locale_lang: 'en-US',
       state: 'all',
-      count: 150,
-      offset: 0,
+      count: 100,
+      offset,
       sort: sortOrder,
       ...parameters
     })
@@ -573,7 +576,8 @@ export async function fetchMyListSearch(params) {
     const response = await searchMyList(params)
     if (!response.list) return { error: 'No Items Returned' }
 
-    const { total, since } = response
+    const { since, search_meta } = response
+    const total = search_meta?.total_result_count
 
     const derivedItems = await deriveMyListItems(Object.values(response.list))
     const itemsById = arrayToObject(derivedItems, 'item_id')

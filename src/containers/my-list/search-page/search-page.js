@@ -40,8 +40,6 @@ export default function Collection(props) {
   const sortSubset = useSelector((state) => state.app.section)
   const sortOrder = useSelector((state) => state.app.sortOptions[sortSubset] || 'newest')
 
-  // const [hasLoaded, setHasLoaded] = useState(false)
-
   // Check for initial items so we don't over request
   const initialItemsPopulated = items?.length || total === 0
 
@@ -75,12 +73,10 @@ export default function Collection(props) {
    * FUNCTIONAL ACTIONS
    * ------------------------------------------------------------------------
    */
-  // Unable to lazy load; setting offset to search query breaks backend request
-  // const loadMore = () => {
-  //   if (hasLoaded) return
-  //   setHasLoaded(true)
-  //   dispatch(getMylistSearchData(filter, query))
-  // }
+  const loadMore = () => {
+    if (offset >= total) return
+    dispatch(getMylistSearchData(filter, query, offset))
+  }
 
   const toggleSortOrder = () => dispatch(sortOrderToggle())
 
@@ -106,7 +102,7 @@ export default function Collection(props) {
                 <VirtualizedList
                   type={type}
                   section={section}
-                  // loadMore={loadMore}
+                  loadMore={loadMore}
                 />
               ) : null}
               <DeleteModal />
