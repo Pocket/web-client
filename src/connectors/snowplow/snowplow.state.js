@@ -55,7 +55,10 @@ import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
  --------------------------------------------------------------- */
 export const finalizeSnowplow = () => ({ type: SNOWPLOW_INITIALIZED })
 
-export const updateAnonymousTracking = (track) => ({ type: SNOWPLOW_UPDATE_ANONYMOUS_TRACKING, track })
+export const updateAnonymousTracking = (track) => ({
+  type: SNOWPLOW_UPDATE_ANONYMOUS_TRACKING,
+  track
+})
 
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
 
@@ -355,7 +358,7 @@ function* fireImpression({ component, requirement, ui, position, identifier }) {
 function* fireContentEngagement({ component, ui, identifier, position, items }) {
   const engagementEvent = createEngagementEvent(component)
 
-  const contentEntities = items.length ? items : [items]
+  const contentEntities = items.length ? [...items] : [items]
   // limit content entities to BATCH_SIZE = 30
   if (contentEntities.length > BATCH_SIZE) contentEntities.length = BATCH_SIZE
 
