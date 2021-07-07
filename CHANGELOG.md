@@ -1,3 +1,10 @@
+## [1.15.12](https://github.com/Pocket/web-client/compare/v1.15.11...v1.15.12) (2021-07-06)
+
+
+### Bug Fixes
+
+* **app:** allow page to be saved as a progressive web app ([2582e8b](https://github.com/Pocket/web-client/commit/2582e8bbd9874bfd6e80ffbc0c7bb23cfcdf73a4))
+
 ## [1.15.11](https://github.com/Pocket/web-client/compare/v1.15.10...v1.15.11) (2021-07-06)
 
 
