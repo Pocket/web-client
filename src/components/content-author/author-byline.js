@@ -79,7 +79,7 @@ function Authors({ authors }) {
 function AuthorByline({ url, name, showAuthors, authorNames }) {
   return (
     <cite className={BylineWrapper}>
-      <a href={url}>{name}</a>
+      <a href={url} data-cy="author-url">{name}</a>
       {showAuthors ? <Authors authors={authorNames} /> : null}
     </cite>
   )

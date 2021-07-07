@@ -76,9 +76,9 @@ export const TaggedHeader = ({
       </header>
       <div className="tag-actions">
         <button
-          aria-label={t('nav:pin-tag', 'Pin Tag')}
-          data-tooltip={t('nav:pin-tag', 'Pin Tag')}
-          data-cy="tag-pin"
+          aria-label={isPinned ? t('nav:unpin-tag', 'Unpin Tag') : t('nav:pin-tag', 'Pin Tag')}
+          data-tooltip={isPinned ? t('nav:unpin-tag', 'Unpin Tag') : t('nav:pin-tag', 'Pin Tag')}
+          data-cy={isPinned ? 'tag-unpin' : 'tag-pin'}
           className={cx(buttonReset, bottomTooltipDelayed)}
           onClick={pinTag}>
           {isPinned ? <PinFilledIcon /> : <PinIcon />}
