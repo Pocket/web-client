@@ -113,6 +113,7 @@
     "next-compose-plugins": "2.2.1",
     "optimize-css-assets-webpack-plugin": "5.0.5",
     "prettier": "2.3.0",
+    "react-test-renderer": "17.0.2",
     "simple-git": "2.39.0",
     "storybook-addon-next-router": "2.0.4",
     "vinyl-fs": "3.0.3"
