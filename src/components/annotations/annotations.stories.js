@@ -3,7 +3,6 @@ import {
   cardStyles,
   Quote,
   CreatedDate,
-  CardPositioning
 } from './annotations.card'
 import { EmptyList } from './annotations.empty-list'
 import { QuoteList } from './annotations.list'
