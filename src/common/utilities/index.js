@@ -5,8 +5,6 @@ export { getTopLevelPath } from './urls/urls'
 export { urlWithPermanentLibrary } from './urls/urls'
 export { replaceUTM } from './urls/urls'
 
-export { redirect } from './server-side/redirect'
-
 export { localStore } from './browser-storage/browser-storage'
 export { sessionStore } from './browser-storage/browser-storage'
 
@@ -24,7 +22,6 @@ export { arrayToObject } from './object-array/object-array'
 export { getObjectWithValidKeysOnly } from './object-array/object-array'
 
 export { getScrollTop } from './scroll/scroll'
-export { atEndOfScroll } from './scroll/scroll'
 
 export { capitalizeFirstLetter } from './strings/strings'
 
