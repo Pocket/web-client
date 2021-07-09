@@ -97,7 +97,6 @@
     "eslint-plugin-react": "7.24.0",
     "eslint-plugin-react-hooks": "4.2.0",
     "eslint-plugin-testing-library": "4.9.0",
-    "extract-css-chunks-webpack-plugin": "4.9.0",
     "file-loader": "6.2.0",
     "fs-extra": "10.0.0",
     "graphql": "15.5.1",
