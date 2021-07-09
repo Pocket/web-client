@@ -23,6 +23,7 @@ module.exports = withPlugins([withCSS], {
   },
   async redirects() {
     return [
+      { source: '/', destination: '/home', permanent: false },
       {
         source: '/my-list/read/:slug',
         destination: '/read/:slug',
