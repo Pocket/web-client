@@ -1,12 +1,11 @@
 const path = require('path')
-const withPlugins = require('next-compose-plugins')
-const withCSS = require('./.scripts/with-css')
+const withLinaria = require('next-linaria')
 const nextBuildId = require('next-build-id')
 const assetRegEx = /\.(svg|ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/
 const assetPrefix = process.env.ASSET_PREFIX || ''
 const { i18n } = require('./next-i18next.config.js')
 
-module.exports = withPlugins([withCSS], {
+module.exports = withLinaria({
   i18n,
   env: {
     SHOW_DEV: process.env.SHOW_DEV,
@@ -48,19 +47,6 @@ module.exports = withPlugins([withCSS], {
         if (!isServer) {
           config.resolve.alias['@sentry/node'] = '@sentry/react'
         }
-
-        config.module.rules.push({
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: 'linaria/loader',
-              options: {
-                sourceMap: process.env.SHOW_DEV === 'included'
-              }
-            }
-          ]
-        })
 
         config.module.rules.push({
           test: assetRegEx,
