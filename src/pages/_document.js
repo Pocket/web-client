@@ -5,10 +5,11 @@ class ClientDocument extends Document {
   render() {
     return (
       <Html>
+        {/* prettier-ignore */}
         <Head>
           {/* Progressive Web App based on https://github.com/gokulkrishh/awesome-meta-and-manifest */}
-          <meta charset="utf-8" />
-          <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+          <meta charSet="utf-8" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge, chrome=1" />
           <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
           {/* Android  */}
           <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
