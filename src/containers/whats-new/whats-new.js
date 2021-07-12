@@ -69,13 +69,15 @@ export default function Messages() {
 
   useEffect(() => {
     dispatch(setReleaseNotes(RELEASE_NOTES_VERSION))
-  }, [])
+  }, [dispatch])
 
   return (
+    // eslint-disable-next-line
     <Layout title={`Pocket - ${t('whats-new:whats-new', "What's New")}`}>
       <SideNav isLoggedIn={isLoggedIn} />
 
       <main className={classNames('main', whatsNewStyles)}>
+        {/* eslint-disable-next-line   */}
         <WhatsNewHeader title={t('whats-new:whats-new', "What's New")} />
 
         <Jun242021 />

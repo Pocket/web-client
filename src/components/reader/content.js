@@ -26,56 +26,50 @@ export const Content = ({
   const [loaded, setLoaded] = useState(false)
   const [linkList, setLinkList] = useState([])
 
-  const processAnnotations = (annotations) => {
-    removeAllHighlights()
-    let itemsProcessed = 0
-    annotations.forEach((highlight, index, array) => {
-      highlightAnnotation(
-        highlight,
-        onHighlightHover,
-        articleRef.current,
-        () => {
-          itemsProcessed++
-          if (itemsProcessed === array.length) {
-            annotationsBuilt()
-          }
-        }
-      )
-    })
-  }
-
-  const sendExternalLinkClick = (e) => {
-    const link = e.target.closest('a[href]')
-    const href = link.getAttribute('href')
-
-    externalLinkClick(href)
-  }
-
-  const externalizeLinks = () => {
-    const links = articleRef.current.querySelectorAll('a[href]')
-    links.forEach((link, index) => {
-      link.setAttribute('target', '_blank')
-      link.setAttribute('rel', 'noopener noreferrer')
-      link.setAttribute('id', `reader.external-link.num-${index}`)
-      link.addEventListener('click', sendExternalLinkClick)
-    })
-
-    setLinkList(links)
-  }
-
   useEffect(() => {
+    const sendExternalLinkClick = (e) => {
+      const link = e.target.closest('a[href]')
+      const href = link.getAttribute('href')
+
+      externalLinkClick(href)
+    }
+
+    const externalizeLinks = () => {
+      const links = articleRef.current.querySelectorAll('a[href]')
+      links.forEach((link, index) => {
+        link.setAttribute('target', '_blank')
+        link.setAttribute('rel', 'noopener noreferrer')
+        link.setAttribute('id', `reader.external-link.num-${index}`)
+        link.addEventListener('click', sendExternalLinkClick)
+      })
+
+      setLinkList(links)
+    }
     if (content) externalizeLinks()
     if (images) loadParsedImages(images)
     if (videos) loadParsedVideos(videos)
 
     return () => {
-      linkList.forEach((link, index) => {
+      linkList.forEach((link) => {
         link.removeEventListener('click', sendExternalLinkClick)
       })
     }
-  }, [])
+  }, [content, externalLinkClick, images, linkList, videos])
 
   useEffect(() => {
+    const processAnnotations = (annotations) => {
+      removeAllHighlights()
+      let itemsProcessed = 0
+      annotations.forEach((highlight, index, array) => {
+        highlightAnnotation(highlight, onHighlightHover, articleRef.current, () => {
+          itemsProcessed++
+          if (itemsProcessed === array.length) {
+            annotationsBuilt()
+          }
+        })
+      })
+    }
+
     if (annotations) {
       let timer = !loaded ? 500 : 0
       setTimeout(() => {
@@ -84,7 +78,7 @@ export const Content = ({
     }
 
     setLoaded(true)
-  }, [annotations.length])
+  }, [annotations, annotationsBuilt, loaded, onHighlightHover])
 
   return (
     <article

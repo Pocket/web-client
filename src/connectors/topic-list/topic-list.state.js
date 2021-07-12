@@ -6,7 +6,7 @@ import { TOPICLIST_REQUEST } from 'actions'
 import { TOPICLIST_SUCCESS } from 'actions'
 import { TOPICLIST_FAILURE } from 'actions'
 import { HYDRATE } from 'actions'
-import { takeLatest, put, takeEvery } from 'redux-saga/effects'
+import { takeLatest, put } from 'redux-saga/effects'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -55,7 +55,7 @@ export const topicListSagas = [takeLatest(TOPICLIST_REQUEST, topicListRequest)]
 
 /** ASYNC Functions
  --------------------------------------------------------------- */
-function* topicListRequest(action) {
+function* topicListRequest() {
   try {
     const topicsByName = yield fetchTopicList()
     yield put({ type: TOPICLIST_SUCCESS, topicsByName })

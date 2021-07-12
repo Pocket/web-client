@@ -18,7 +18,6 @@ import { ITEMS_ARCHIVE_CANCEL } from 'actions'
 
 import { API_ACTION_ARCHIVE } from 'common/constants'
 import { API_ACTION_UNARCHIVE } from 'common/constants'
-import { ANALYTICS_INDEX } from 'common/constants'
 
 /** ACTIONS
  --------------------------------------------------------------- */

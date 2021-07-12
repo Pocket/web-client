@@ -64,7 +64,7 @@ export const contentStyles = css`
   .hyphenate *[lang] p,
   .hyphenate p[lang] {
     text-align: justify;
-    -webkit-hyphens: auto;
+    hyphens: auto;
   }
   .force_left *[lang] p,
   .force_left p[lang] {
@@ -295,8 +295,7 @@ export const highlightStyles = css`
   }
   a .highlight,
   a.highlight {
-    text-shadow: -1px -1px 0 #fee8c3, 1px -1px 0 #fee8c3, -1px 1px 0 #fee8c3,
-      1px 1px 0 #fee8c3 !important;
+    text-shadow: -1px -1px 0 #fee8c3, 1px -1px 0 #fee8c3, -1px 1px 0 #fee8c3, 1px 1px 0 #fee8c3 !important;
     background-image: linear-gradient(
       to top,
       rgba(0, 0, 0, 0),
@@ -320,8 +319,7 @@ export const highlightStyles = css`
     }
     a .highlight,
     a.highlight {
-      text-shadow: -1px -1px 0 #fee8c3, 1px -1px 0 #fee8c3, -1px 1px 0 #fee8c3,
-        1px 1px 0 #fee8c3 !important;
+      text-shadow: -1px -1px 0 #fee8c3, 1px -1px 0 #fee8c3, -1px 1px 0 #fee8c3, 1px 1px 0 #fee8c3 !important;
       background-image: linear-gradient(
         to top,
         rgba(0, 0, 0, 0),
@@ -346,8 +344,7 @@ export const highlightStyles = css`
     }
     a .highlight,
     a.highlight {
-      text-shadow: -1px -1px 0 #fedda7, 1px -1px 0 #fedda7, -1px 1px 0 #fedda7,
-        1px 1px 0 #fedda7 !important;
+      text-shadow: -1px -1px 0 #fedda7, 1px -1px 0 #fedda7, -1px 1px 0 #fedda7, 1px 1px 0 #fedda7 !important;
       background-image: linear-gradient(
         to top,
         rgba(0, 0, 0, 0),

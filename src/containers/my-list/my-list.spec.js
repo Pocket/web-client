@@ -40,7 +40,7 @@ const listToSort = [
   },
   {
     hero: 'Black Widow',
-    name: "Natalia 'Natasha' Alianovna Romanova",
+    name: 'Natalia `Natasha` Alianovna Romanova',
     time_added: '4',
     time_favorited: '99622',
     time_read: '0',

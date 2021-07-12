@@ -106,9 +106,7 @@ const closeLabelStyle = css`
   }
 `
 
-const CloseLabel = ({ children }) => (
-  <span className={closeLabelStyle}>{children}</span>
-)
+const CloseLabel = ({ children }) => <span className={closeLabelStyle}>{children}</span>
 
 const closeButtonStyle = css`
   margin-left: auto;
@@ -203,7 +201,7 @@ const GlobalNavAdd = ({
 
   useEffect(() => {
     updateIsMobile(window.innerWidth < screenMediumHandset)
-  }, [window.innerWidth])
+  }, [])
 
   useEffect(() => {
     inputEl.current.focus()
@@ -236,10 +234,7 @@ const GlobalNavAdd = ({
           </div>
         ) : null}
       </div>
-      <button
-        className="add-button"
-        onClick={handleSubmit}
-        data-cy="add-submit">
+      <button className="add-button" onClick={handleSubmit} data-cy="add-submit">
         <Trans i18nKey="nav:add">Add</Trans>
       </button>
       <input type="submit" className="mobile-submit" />

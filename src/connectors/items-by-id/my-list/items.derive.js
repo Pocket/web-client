@@ -16,7 +16,7 @@ export function deriveMyListItems(response) {
   return response.map((item) => {
     // Status of 2 means it has been deleted and shouldn't be stored
     // Unclear why these items are being sent. This needs to be resolved by Backend
-    if (item?.status === '2') return
+    if (item?.status === '2') return false
 
     return {
       item_id: item?.item_id,

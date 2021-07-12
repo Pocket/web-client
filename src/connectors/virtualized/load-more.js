@@ -19,16 +19,14 @@ const loadMoreStyle = css`
   }
 `
 
-export function LoadMore({ count, total, loadMore, isLoading } ) {
+export function LoadMore({ count, total, loadMore }) {
   const { ref, inView } = useInView()
 
   useEffect(() => {
     if (!inView) return
 
     // There are more items to load! Let's do it
-    if (count < total) {
-      loadMore()
-    }
+    if (count < total) loadMore()
   }, [inView, count, total, loadMore])
 
   return count < total ? (

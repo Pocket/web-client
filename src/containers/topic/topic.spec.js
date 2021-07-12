@@ -1,8 +1,5 @@
-import { wrappedRender, fireEvent } from 'test-utils'
+import { wrappedRender } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
-
-import TopicCollection from './topic-collection'
-import TopicPage from './topic-page'
 import Topic from 'containers/topic/topic'
 
 const setAppElementStub = jest.fn()
@@ -70,7 +67,7 @@ const mockCollectionTopic = {
         curator_label: 'Laser-Cats',
         display_name: 'Laser Cats!',
         display_note:
-          'Stay informed about lazer cats.  For official U.S. guidelines visit [laser-cats.gov](http://www.laser-cats.gov).',
+          'Stay informed about laser cats.  For official U.S. guidelines visit [laser-cats.gov](http://www.laser-cats.gov).',
         page_type: 'editorial_collection',
         topic: 'laser_cats',
         topic_slug: 'laser-cats'

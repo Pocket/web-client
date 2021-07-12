@@ -16,36 +16,32 @@ const getTriggers = (depthIncrements, callback) => {
 
 const DepthTracking = ({ depthIncrements, onScrollDepth, children }) => {
   const [positions, setPositions] = useState(null)
-  const [triggers, setTriggers] = useState(
-    getTriggers(depthIncrements, onScrollDepth)
-  )
+  const triggers = getTriggers(depthIncrements, onScrollDepth)
   const ref = useRef(null)
 
-  function buildPositions() {
-    const elementHeight = ref.current.getBoundingClientRect().height
-    const elementToTop =
-      ref.current.getBoundingClientRect().top + window.scrollY
-
-    const positionMap = depthIncrements.map((percent) => ({
-      pixels: elementHeight * (percent / 100) + elementToTop,
-      callback: triggers[percent]
-    }))
-
-    setPositions(positionMap)
-  }
-
-  function checkScrollPosition() {
-    const windowY = window.pageYOffset + window.innerHeight
-
-    positions.forEach((increment) => {
-      const { pixels, callback } = increment
-      if (pixels < windowY) {
-        callback()
-      }
-    })
-  }
-
   useEffect(() => {
+    function buildPositions() {
+      const elementHeight = ref.current.getBoundingClientRect().height
+      const elementToTop = ref.current.getBoundingClientRect().top + window.scrollY
+
+      const positionMap = depthIncrements.map((percent) => ({
+        pixels: elementHeight * (percent / 100) + elementToTop,
+        callback: triggers[percent]
+      }))
+
+      setPositions(positionMap)
+    }
+
+    function checkScrollPosition() {
+      const windowY = window.pageYOffset + window.innerHeight
+
+      positions.forEach((increment) => {
+        const { pixels, callback } = increment
+        if (pixels < windowY) {
+          callback()
+        }
+      })
+    }
     const resizeListener = () => buildPositions()
 
     // timeoutId to debounce the scrollListener
@@ -70,7 +66,7 @@ const DepthTracking = ({ depthIncrements, onScrollDepth, children }) => {
       window.removeEventListener('resize', resizeListener)
       window.removeEventListener('scroll', scrollListener)
     }
-  }, [positions])
+  }, [depthIncrements, positions, triggers])
 
   return <div ref={ref}>{children}</div>
 }

@@ -100,9 +100,7 @@ const Card = ({ annotation, shareItem, deleteAnnotation }) => {
       onClick={(e) => e.stopPropagation()}
       key={annotation.annotation_id}
       addedStyles={floatingCardStyles}>
-      <Quote>
-        {annotation.quote}
-      </Quote>
+      <Quote>{annotation.quote}</Quote>
       <CreatedDate>{annotation.created_at}</CreatedDate>
       <div className={menuWrapper}>
         <AnnotationMenu
@@ -126,15 +124,13 @@ const HighlightIndex = ({
   children
 }) => {
   const [hoverOpen, setHover] = useState(false)
-  const [shareOpen, setShare] = useState(false)
   const [loading, setLoading] = useState(!annotation?.created_at)
   let timer
 
   useEffect(() => {
     setLoading(false)
-
     return () => clearTimeout(timer)
-  }, [])
+  }, []) // eslint-disable-line
 
   const itemHoverOn = () => {
     clearTimeout(timer)
@@ -150,7 +146,6 @@ const HighlightIndex = ({
   const closeMenu = () => {
     if (hoverOpen) {
       setHover(false)
-      setShare(false)
     }
   }
 
@@ -192,8 +187,7 @@ export const TicList = ({
   annotationCount,
   shareItem,
   deleteAnnotation,
-  visible,
-  isPremium
+  visible
 }) => {
   const renderTics = () => {
     let body = document.body
@@ -208,8 +202,7 @@ export const TicList = ({
     )
 
     const screenHeight =
-      Math.max(document.documentElement.clientHeight, window.innerHeight || 0) -
-      115 // 85 for navbar height, 30 for extra top and bottom padding
+      Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 115 // 85 for navbar height, 30 for extra top and bottom padding
 
     const tics = []
 

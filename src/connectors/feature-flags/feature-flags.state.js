@@ -1,4 +1,3 @@
-import dayjs from 'dayjs'
 import { getUnleash } from 'common/api/unleash'
 import { arrayToObject } from 'common/utilities'
 import { FEATURES_HYDRATE, FEATURES_TOGGLE, HYDRATE } from 'actions'

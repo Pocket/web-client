@@ -124,7 +124,7 @@ AvatarButton.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Classname to be applied to the outer node that can be used to override
+   * ClassName to be applied to the outer node that can be used to override
    * or supplement styles.
    */
   className: PropTypes.string

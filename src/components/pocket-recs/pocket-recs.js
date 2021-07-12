@@ -143,7 +143,7 @@ const recommendationsStyles = css`
   ${breakpointTinyTablet} {
     width: 100%;
     overflow-x: scroll;
-    overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch;
     display: flex;
     margin-bottom: 0;
   }

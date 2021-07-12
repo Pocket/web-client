@@ -145,8 +145,6 @@ function SaveStoryButton({ url, isAuthenticated, saveStatus, saveAction, id, tra
     ]
   })
 
-  const saveClasses = classNames(saveStatus, 'card-actions')
-
   return (
     <>
       <Button onClick={handleClick} ref={popTrigger} data-cy={id}>

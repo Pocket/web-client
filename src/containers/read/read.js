@@ -4,7 +4,6 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
-import { domainForUrl, getBool } from 'common/utilities'
 import { Loader, LoaderCentered } from 'components/loader/loader'
 import { ReaderNav } from 'components/reader/nav'
 import { ItemHeader } from 'components/reader/header'
@@ -18,6 +17,7 @@ import { requestAnnotationPatch } from 'components/annotations/utilities'
 import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
 import { ReaderFonts } from '@pocket/web-ui'
 import { Recommendations } from 'containers/read/recommendations'
+import { getBool } from 'common/utilities'
 
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
@@ -99,7 +99,7 @@ const articleWrapper = css`
 
     :after {
       margin-top: 1rem;
-      content: 'Printed with ❤️ from Pocket'
+      content: 'Printed with ❤️ from Pocket';
     }
   }
 `
@@ -355,14 +355,9 @@ export default function Reader() {
           ) : null}
         </article>
       </main>
-      {articleContent ? (
-        <Recommendations id={item_id} />
-      ) : null}
+      {articleContent ? <Recommendations id={item_id} /> : null}
       {!isPremium && articleContent ? (
-        <BottomUpsell
-          maxWidth={customStyles.maxWidth}
-          onVisible={handleImpression}
-        />
+        <BottomUpsell maxWidth={customStyles.maxWidth} onVisible={handleImpression} />
       ) : null}
       <AnnotationsLimitModal
         showModal={annotationLimitModal}

@@ -1,7 +1,7 @@
 import { render } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
 
-import { PublisherRecs, Publisher, RecommendedArticle } from './publisher-recs'
+import { PublisherRecs, Publisher } from './publisher-recs'
 import { publisher, publisherRecommendations as publisherRecs } from 'mock/article'
 
 describe('PublisherRecs', () => {

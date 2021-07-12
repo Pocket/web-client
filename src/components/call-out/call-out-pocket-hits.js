@@ -10,7 +10,7 @@ import { breakpointSmallDesktop } from '@pocket/web-ui' // 1279
 import { breakpointSmallTablet } from '@pocket/web-ui' // 839
 import { breakpointTinyTablet } from '@pocket/web-ui' // 719
 import { breakpointLargeHandset } from '@pocket/web-ui' // 599
-import { Trans, useTranslation } from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 
 const DEFAULT_ERROR = 'Oops! Something went wrong.'
 const FORM_ID = 'explore-engagement-signup'
@@ -212,7 +212,7 @@ const CallOutPocketHitsSignup = ({
     } else if (signupRequestState === 'failure') {
       handleSubmitFailure(activeForm)
     }
-  }, [signupRequestState])
+  }, [signupRequestState, activeForm, handleSubmitSuccess, handleSubmitFailure])
 
   // /* Event Handlers */
   function handleEmailSubmit(formId, email, recaptchaResponseKey) {
@@ -344,12 +344,12 @@ CallOutPocketHitsSignup.propTypes = {
   handleValidationError: PropTypes.func,
 
   /**
-   * Paramater for the utmCampaign analytics field when submitting
+   * Parameter for the utmCampaign analytics field when submitting
    */
   utmCampaign: PropTypes.string,
 
   /**
-   * Paramater for the utmSource analytics field when submitting
+   * Parameter for the utmSource analytics field when submitting
    */
   utmSource: PropTypes.string
 }

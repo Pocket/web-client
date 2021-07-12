@@ -1,9 +1,6 @@
 import { css } from 'linaria'
 import { Trans } from 'next-i18next'
-import { domainForUrl } from 'common/utilities'
-import Avatar from 'components/avatar/avatar'
 import { fontSansSerif, Button } from '@pocket/web-ui'
-import { timeRelativeToNow } from 'common/utilities'
 
 const messageWrapper = css`
   font-family: ${fontSansSerif};
@@ -14,9 +11,7 @@ export const MessageResend = ({ email, resendAction, status }) => {
     return (
       <div className={messageWrapper}>
         <p>
-          <Trans i18nKey="messages:oops">
-            Oops! Something went wrong. Please try again later.
-          </Trans>
+          <Trans i18nKey="messages:oops">Oops! Something went wrong. Please try again later.</Trans>
         </p>
       </div>
     )
@@ -24,9 +19,7 @@ export const MessageResend = ({ email, resendAction, status }) => {
     return (
       <div className={messageWrapper}>
         <p>
-          <Trans i18nKey="messages:confirmation">
-            Confirmation sent! Please check your email.
-          </Trans>
+          <Trans i18nKey="messages:confirmation">Confirmation sent! Please check your email.</Trans>
         </p>
       </div>
     )
@@ -35,16 +28,13 @@ export const MessageResend = ({ email, resendAction, status }) => {
     <div className={messageWrapper}>
       <p>
         <Trans i18nKey="messages:a-friend-shared">
-          A friend has shared something with you in Pocket. To view it, please
-          confirm your email:
+          A friend has shared something with you in Pocket. To view it, please confirm your email:
         </Trans>{' '}
         {email}
       </p>
 
       <Button onClick={resendAction}>
-        <Trans i18nKey="messages:resend-confirmation">
-          Resend Confirmation
-        </Trans>
+        <Trans i18nKey="messages:resend-confirmation">Resend Confirmation</Trans>
       </Button>
     </div>
   )

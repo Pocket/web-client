@@ -39,9 +39,12 @@ import { sendImpression } from './global-nav.analytics'
 import { sendEngagement } from './global-nav.analytics'
 import { sendMenuEngagement } from './global-nav.analytics'
 
-// check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
+// check empty avatar value coming from endpoint (sample default avatar url to
+// overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
-  const DISALLOWED_PROFILE_IMGS = ['profileBlue.png'] // file names of default urls returned by BE. If a user avatar url contains one of these, we prefer to return an empty string, in order to use the Web UI's Avatar default image instead
+  // file names of default urls returned by BE. If a user avatar url contains one of these,
+  // we prefer to return an empty string, in order to use the Web UI's Avatar default image instead
+  const DISALLOWED_PROFILE_IMGS = ['profileBlue.png']
   const hasInvalidDefaultImage = DISALLOWED_PROFILE_IMGS.reduce((isAvatarOk, disallowedImg) => {
     if (!avatarUrl) return true // handle null
     if (isAvatarOk === false) return isAvatarOk

@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 
 import { FacebookShareButton } from 'react-share'
@@ -106,7 +106,7 @@ export const ShareSocial = function ({ item, quote, position = 0 }) {
   const copyAction = () => ({ type: COPY_ITEM_URL })
   const copyUrl = async () => {
     await copy(open_url)
-    dispatch(itemsSocialShare(item, position, `share.copy`))
+    dispatch(itemsSocialShare(item, position, 'share.copy'))
     dispatch(copyAction())
     cancelShare()
   }

@@ -419,9 +419,9 @@ GlobalNav.defaultProps = {
   avatarSrc: null,
   accountName: undefined,
   profileUrl: null,
-  onLinkClick(linkId, event) {},
-  onToolClick(linkId, event) {},
-  onAccountClick(event) {},
+  onLinkClick() {},
+  onToolClick() {},
+  onAccountClick() {},
   tools: [],
   children: null
 }

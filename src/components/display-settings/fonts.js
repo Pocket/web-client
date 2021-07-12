@@ -1,12 +1,5 @@
-import {
-  PopupMenuGroup,
-  PopupMenuItem,
-  CheckCircledIcon,
-  ChevronLeftIcon,
-  PremiumIcon
-} from '@pocket/web-ui'
+import { PopupMenuGroup, PopupMenuItem, CheckCircledIcon, PremiumIcon } from '@pocket/web-ui'
 import { css } from 'linaria'
-import { buttonReset } from 'components/buttons/button-reset'
 import classNames from 'classnames'
 import { FONT_TYPES } from 'components/fonts/fonts'
 import { darkMode } from '@pocket/web-ui'
@@ -80,9 +73,9 @@ export const FontSettings = ({ updateFontFamily, currentFont, isPremium }) => {
             className={classNames(fontFamilyButton, { showPremium })}
             icon={showPremium ? <PremiumIcon /> : null}
             onClick={click}
-            tabIndex={showPremium ? "-1" : "0"}
+            tabIndex={showPremium ? '-1' : '0'}
             aria-label={FONT_TYPES[font].name}>
-            <img src={FontImages[font]} aria-hidden="true" />
+            <img alt="" src={FontImages[font]} aria-hidden="true" />
 
             {isActive ? <CheckCircledIcon /> : null}
           </PopupMenuItem>

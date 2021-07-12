@@ -3,7 +3,7 @@ import { CardSkeleton } from 'components/item-card/card-skeleton'
 import { CollectionCard } from 'connectors/item-card/home/card-collection'
 import { css } from 'linaria'
 import { cardsGrid } from 'components/items-layout/base'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { trackEngagement } from 'connectors/snowplow/snowplow.state'
 import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
@@ -29,6 +29,7 @@ const homeCollections = css`
 export const HomeCollectionList = () => {
   const collectionSet = useSelector((state) => state.home.collectionSet)
   const showSkeleton = collectionSet?.length < 2
+  const dispatch = useDispatch()
 
   const clickEvent = () => {
     dispatch(sendEngagementEvent())

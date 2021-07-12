@@ -1,7 +1,5 @@
 import { css } from 'linaria'
-import { cardsGrid } from 'components/items-layout/base'
 import { RecommendedFeedCard } from 'connectors/item-card/profile/card'
-import { breakpointLargeHandset } from '@pocket/web-ui'
 
 const cardRowStyles = css`
   max-width: 980px;
@@ -22,11 +20,7 @@ export const ProfileFeed = ({ items }) => {
   return (
     <section className={cardRowStyles}>
       {items.map((itemId, index) => (
-        <RecommendedFeedCard
-          key={`${itemId}-${index}`}
-          id={itemId}
-          position={index}
-        />
+        <RecommendedFeedCard key={`${itemId}-${index}`} id={itemId} position={index} />
       ))}
     </section>
   )

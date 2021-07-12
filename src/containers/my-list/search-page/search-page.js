@@ -1,5 +1,5 @@
 // Vendor
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { useHasChanged } from 'common/utilities/hooks/has-changed'
@@ -52,22 +52,13 @@ export default function Collection(props) {
     if (userStatus === 'pending' || !query || initialItemsPopulated) return
     dispatch(getMylistSearchData(filter, query))
     dispatch(appSetSection(section))
-  }, [
-    userStatus,
-    subset,
-    sortOrder,
-    filter,
-    section,
-    query,
-    initialItemsPopulated,
-    dispatch
-  ])
+  }, [userStatus, subset, sortOrder, filter, section, query, initialItemsPopulated, dispatch])
 
   useEffect(() => {
     if (queryChange || prevQuery !== query) {
       dispatch(getMylistSearchData(filter, query))
     }
-  }, [queryChange, prevQuery])
+  }, [queryChange, prevQuery, dispatch, filter, query])
 
   /**
    * FUNCTIONAL ACTIONS
@@ -97,13 +88,10 @@ export default function Collection(props) {
                 query={query}
                 total={total}
                 sortOrder={sortOrder}
-                toggleSortOrder={toggleSortOrder} />
+                toggleSortOrder={toggleSortOrder}
+              />
               {items?.length ? (
-                <VirtualizedList
-                  type={type}
-                  section={section}
-                  loadMore={loadMore}
-                />
+                <VirtualizedList type={type} section={section} loadMore={loadMore} />
               ) : null}
               <DeleteModal />
               <TaggingModal />

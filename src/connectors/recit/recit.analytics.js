@@ -2,13 +2,6 @@ import ReactGA from 'react-ga'
 import { v4 as uuid } from 'uuid'
 import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
 
-import { trackItemAction } from 'connectors/snowplow/snowplow.state'
-import { trackItemSave } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
-import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
-import { IMPRESSION_COMPONENT_CARD } from 'connectors/snowplow/events'
-import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
-
 export const PUBLISHER_MODULE = 'syndicated_publisher'
 export const POCKET_MODULE = 'syndicated_article'
 

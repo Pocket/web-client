@@ -25,7 +25,7 @@ export const LoggedIn = () => {
 
   useEffect(() => {
     return () => clearTimeout(timer)
-  }, [])
+  }, [timer])
 
   const startTimer = () => {
     setSaveStatus('saving')
@@ -37,10 +37,7 @@ export const LoggedIn = () => {
 
   return (
     <div className={styles}>
-      <SaveToPocket
-        saveStatus={saveStatus}
-        isAuthenticated={true}
-        saveAction={startTimer} />
+      <SaveToPocket saveStatus={saveStatus} isAuthenticated={true} saveAction={startTimer} />
     </div>
   )
 }

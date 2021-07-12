@@ -1,4 +1,4 @@
-import { takeLatest, takeEvery, call, take, select, cancel } from 'redux-saga/effects'
+import { takeLatest, takeEvery, call, take, select } from 'redux-saga/effects'
 import { BATCH_SIZE } from 'common/constants'
 import { urlWithPermanentLibrary } from 'common/utilities'
 
@@ -63,7 +63,7 @@ export const updateAnonymousTracking = (track) => ({
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
 
 export const trackRecOpen = (position, item, identifier, href) => {
-  const { save_url, item_id, syndicated } = item
+  const { save_url, syndicated } = item
   const linkTarget = href ? href : save_url
   const destination = getLinkOpenTarget(linkTarget, syndicated)
   return {

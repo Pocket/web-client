@@ -44,9 +44,8 @@ export const ProfileHeader = () => {
   const isSelf = useSelector((state) => state.user.user_id === uid)
 
   const followStatus = getBool(isFollowing)
-  const followAction = () => (!followStatus)
-    ? dispatch(followUser(uid))
-    : dispatch(unFollowUser(uid)) // Not currently reachable due to disabled button
+  const followAction = () =>
+    !followStatus ? dispatch(followUser(uid)) : dispatch(unFollowUser(uid)) // Not currently reachable due to disabled button
 
   return (
     <header className={headerStyles}>
@@ -55,12 +54,14 @@ export const ProfileHeader = () => {
       </div>
 
       <h1>{name}</h1>
-      { bio ? <p>{bio}</p> : null}
-      <p className="followers">{followerCount} Followers | {followCount} Following</p>
+      {bio ? <p>{bio}</p> : null}
+      <p className="followers">
+        {followerCount} Followers | {followCount} Following
+      </p>
 
-      { !isSelf ? (
+      {!isSelf ? (
         <Button disabled={followStatus} onClick={followAction}>
-          {followStatus ? `Following` : `Follow`}
+          {followStatus ? 'Following' : 'Follow'}
         </Button>
       ) : null}
     </header>

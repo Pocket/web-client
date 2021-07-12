@@ -1,7 +1,5 @@
-import { css } from 'linaria'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProfile } from 'containers/profile/profile.state'
 import { getProfileItems } from 'connectors/items-by-id/profile/items.state'
@@ -16,7 +14,6 @@ export default function Profile() {
   const router = useRouter()
   const { slug: id } = router.query
 
-  const isSelf = useSelector((state) => state.user.user_id === id)
   const profileName = useSelector((state) => state.userProfile.name)
   const items = useSelector((state) => state.profileItemsByIds.items)
 
@@ -25,7 +22,7 @@ export default function Profile() {
     dispatch(getProfileItems(id))
   }, [dispatch, id])
 
-  return (!profileName || items.length === 0) ? (
+  return !profileName || items.length === 0 ? (
     <LoaderCentered>
       <Loader isVisible />
     </LoaderCentered>

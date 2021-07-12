@@ -1,10 +1,5 @@
 import { PopupMenuGroup } from '@pocket/web-ui'
-import { css } from 'linaria'
-import {
-  StepperWrapper,
-  IconWrapper,
-  StepperButton
-} from 'components/stepper/stepper'
+import { StepperWrapper, IconWrapper, StepperButton } from 'components/stepper/stepper'
 import { StepperRange } from 'components/stepper/stepper-range'
 import { AddIcon, RemoveIcon, LineHeightIcon } from '@pocket/web-ui'
 import { useTranslation } from 'next-i18next'
@@ -39,14 +34,8 @@ export const LineHeightSettings = ({
           active={minusActive()}
           onClick={handleDecrease}
           data-cy="display-line-height-decrease"
-          aria-label={t(
-            'settings:decrease-line-height',
-            'Decrease Line Height'
-          )}
-          data-tooltip={t(
-            'settings:decrease-line-height',
-            'Decrease Line Height'
-          )}>
+          aria-label={t('settings:decrease-line-height', 'Decrease Line Height')}
+          data-tooltip={t('settings:decrease-line-height', 'Decrease Line Height')}>
           <RemoveIcon />
         </StepperButton>
         <StepperRange current={current} range={range} onChange={setCurrent} />
@@ -54,14 +43,8 @@ export const LineHeightSettings = ({
           active={plusActive()}
           onClick={handleIncrease}
           data-cy="display-line-height-increase"
-          aria-label={t(
-            'settings:increase-line-height',
-            'Increase Line Height'
-          )}
-          data-tooltip={t(
-            'settings:increase-line-height',
-            'Increase Line Height'
-          )}>
+          aria-label={t('settings:increase-line-height', 'Increase Line Height')}
+          data-tooltip={t('settings:increase-line-height', 'Increase Line Height')}>
           <AddIcon />
         </StepperButton>
       </StepperWrapper>

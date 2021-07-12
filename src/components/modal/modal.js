@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 import classnames from 'classnames'
@@ -165,13 +165,12 @@ const Modal = ({
 }) => {
   // aids in accessibility, http://reactcommunity.org/react-modal/accessibility/
   ReactModal.setAppElement(appRootSelector)
-  const { t } = useTranslation()
 
   const [readyAnimate, setReadyAnimate] = useState(false)
   let modalContentRef = useRef(null)
 
   return (
-    <React.Fragment>
+    <>
       <ReactModal
         isOpen={isOpen}
         contentLabel={screenReaderLabel}
@@ -225,7 +224,7 @@ const Modal = ({
           <div onClick={onClick}>{children}</div>
         </div>
       </ReactModal>
-    </React.Fragment>
+    </>
   )
 }
 

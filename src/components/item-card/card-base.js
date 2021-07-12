@@ -1,5 +1,4 @@
 import { css } from 'linaria'
-import { breakpointSmallDesktop } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 import { breakpointMediumTablet } from '@pocket/web-ui'
 import { breakpointSmallTablet } from '@pocket/web-ui'
@@ -386,7 +385,7 @@ export const cardStyles = css`
     padding: 1em 0;
     border-bottom: 1px solid var(--color-dividerTertiary);
 
-    &:last-of-type{
+    &:last-of-type {
       border-bottom: none;
     }
 

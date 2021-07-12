@@ -194,9 +194,9 @@ const buttonWrapper = css`
 const LibraryAd = () => (
   <>
     <div className={classNames(imgStyles, 'library')}>
-      <img className="dark" src={LibraryDark} />
-      <img className="light" src={LibraryLight} />
-      <img className="sepia" src={LibrarySepia} />
+      <img alt="" className="dark" src={LibraryDark} />
+      <img alt="" className="light" src={LibraryLight} />
+      <img alt="" className="sepia" src={LibrarySepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
@@ -204,8 +204,7 @@ const LibraryAd = () => (
       </h5>
       <p>
         <Trans i18nKey="reader:permanent">
-          Build a permanent library of every article you’ve saved with Pocket
-          Premium.
+          Build a permanent library of every article you’ve saved with Pocket Premium.
         </Trans>
       </p>
       <p className="small">
@@ -216,7 +215,7 @@ const LibraryAd = () => (
           id="reader.bottom.premium.library"
           data-cy="reader-bottom-premium"
           href={`${PREMIUM_URL}12`}
-          target="_blank" >
+          target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
@@ -237,15 +236,13 @@ const LibraryAd = () => (
 const SearchAd = () => (
   <>
     <div className={classNames(imgStyles, 'search')}>
-      <img className="dark" src={SearchDark} />
-      <img className="light" src={SearchLight} />
-      <img className="sepia" src={SearchSepia} />
+      <img alt="" className="dark" src={SearchDark} />
+      <img alt="" className="light" src={SearchLight} />
+      <img alt="" className="sepia" src={SearchSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
-        <Trans i18nKey="reader:search-every-word">
-          Search every word in your Pocket
-        </Trans>
+        <Trans i18nKey="reader:search-every-word">Search every word in your Pocket</Trans>
       </h5>
       <p>
         <Trans i18nKey="reader:unlock-search">
@@ -281,9 +278,9 @@ const SearchAd = () => (
 const FocusedAd = () => (
   <>
     <div className={classNames(imgStyles, 'focused')}>
-      <img className="dark" src={FocusedDark} />
-      <img className="light" src={FocusedLight} />
-      <img className="sepia" src={FocusedSepia} />
+      <img alt="" className="dark" src={FocusedDark} />
+      <img alt="" className="light" src={FocusedLight} />
+      <img alt="" className="sepia" src={FocusedSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
@@ -323,9 +320,9 @@ const FocusedAd = () => (
 const TypeAd = () => (
   <>
     <div className={classNames(imgStyles, 'type')}>
-      <img className="dark" src={TypeDark} />
-      <img className="light" src={TypeLight} />
-      <img className="sepia" src={TypeSepia} />
+      <img alt="" className="dark" src={TypeDark} />
+      <img alt="" className="light" src={TypeLight} />
+      <img alt="" className="sepia" src={TypeSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
@@ -365,20 +362,17 @@ const TypeAd = () => (
 const BigDiamondAd = () => (
   <>
     <div className={classNames(imgStyles, 'features')}>
-      <img className="dark" src={BigDiamondDark} />
-      <img className="light" src={BigDiamondLight} />
-      <img className="sepia" src={BigDiamondSepia} />
+      <img alt="" className="dark" src={BigDiamondDark} />
+      <img alt="" className="light" src={BigDiamondLight} />
+      <img alt="" className="sepia" src={BigDiamondSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
-        <Trans i18nKey="reader:unlock-exclusive-features">
-          Unlock exclusive features
-        </Trans>
+        <Trans i18nKey="reader:unlock-exclusive-features">Unlock exclusive features</Trans>
       </h5>
       <p>
         <Trans i18nKey="reader:next-level">
-          Take your reading experience to the next level when you join Pocket
-          Premium.
+          Take your reading experience to the next level when you join Pocket Premium.
         </Trans>
       </p>
       <p className="small">
@@ -410,20 +404,17 @@ const BigDiamondAd = () => (
 const HighlightAd = () => (
   <>
     <div className={classNames(imgStyles, 'highlights')}>
-      <img className="dark" src={HighlightDark} />
-      <img className="light" src={HighlightLight} />
-      <img className="sepia" src={HighlightSepia} />
+      <img alt="" className="dark" src={HighlightDark} />
+      <img alt="" className="light" src={HighlightLight} />
+      <img alt="" className="sepia" src={HighlightSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
-        <Trans i18nKey="reader:unlimited-highlights">
-          Unlock unlimited highlights
-        </Trans>
+        <Trans i18nKey="reader:unlimited-highlights">Unlock unlimited highlights</Trans>
       </h5>
       <p>
         <Trans i18nKey="reader:capture-ideas">
-          Capture as many ideas as you’d like in every article with Pocket
-          Premium.
+          Capture as many ideas as you’d like in every article with Pocket Premium.
         </Trans>
       </p>
       <p className="small">
@@ -455,15 +446,13 @@ const HighlightAd = () => (
 const TagsAd = () => (
   <>
     <div className={classNames(imgStyles, 'tags')}>
-      <img className="dark" src={TagsDark} />
-      <img className="light" src={TagsLight} />
-      <img className="sepia" src={TagsSepia} />
+      <img alt="" className="dark" src={TagsDark} />
+      <img alt="" className="light" src={TagsLight} />
+      <img alt="" className="sepia" src={TagsSepia} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
-        <Trans i18nKey="reader:tag-stories-faster">
-          Tag stories faster than ever
-        </Trans>
+        <Trans i18nKey="reader:tag-stories-faster">Tag stories faster than ever</Trans>
       </h5>
       <p>
         <Trans i18nKey="reader:save-time-tagging">

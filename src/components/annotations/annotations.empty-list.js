@@ -59,9 +59,9 @@ export const EmptyList = () => {
   return (
     <div className={list}>
       <div className={imageWrapper}>
-        <img aria-hidden="true" className="dark" src={HighlightDark} />
-        <img aria-hidden="true" className="light" src={HighlightLight} />
-        <img aria-hidden="true" className="sepia" src={HighlightSepia} />
+        <img aria-hidden="true" alt="" className="dark" src={HighlightDark} />
+        <img aria-hidden="true" alt="" className="light" src={HighlightLight} />
+        <img aria-hidden="true" alt="" className="sepia" src={HighlightSepia} />
       </div>
       <h4 className={heading}>
         <Trans i18nKey="annotations:you-havent-highlighted">

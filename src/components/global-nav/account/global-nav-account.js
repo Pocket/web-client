@@ -408,7 +408,7 @@ GlobalNavAccount.defaultProps = {
   avatarSrc: null,
   accountName: 'You',
   profileUrl: null,
-  onLinkClick(linkName) {},
+  onLinkClick() {},
   onAccountClick() {}
 }
 

@@ -13,7 +13,7 @@ import { LoadMore } from 'connectors/virtualized/load-more'
 /**
  * CardLayout
  * @param {array} items Array of items to split up into sections
- * @param {array} sections Array of section definitions with count and classname
+ * @param {array} sections Array of section definitions with count and className
  * @param {object} actions Object of actions specific to the items being built
  */
 export function VirtualizedList({ type = 'grid', section, actions, loadMore = () => {} }) {
@@ -94,21 +94,17 @@ export function VirtualizedList({ type = 'grid', section, actions, loadMore = ()
 
   /** FUNCTIONS
  --------------------------------------------------------------- */
-  const checkRange = useCallback(
-    () => {
-      // Set up the fact that we are scrolling
-      setIsScrolling(true)
-      scrollTracker.current = setTimeout(() => setIsScrolling(false), 500)
+  const checkRange = useCallback(() => {
+    // Set up the fact that we are scrolling
+    setIsScrolling(true)
+    scrollTracker.current = setTimeout(() => setIsScrolling(false), 500)
 
-      // Get scroll direction.
-      const top = getScrollTop()
-      const naturalStart = Math.floor(top / height) * columnCount
-      const newIndex = Math.max(naturalStart - columnCount * 2, 0)
-      setRange({ start: newIndex, end: newIndex + itemOnScreen })
-
-    },
-    [columnCount, height, itemOnScreen]
-  )
+    // Get scroll direction.
+    const top = getScrollTop()
+    const naturalStart = Math.floor(top / height) * columnCount
+    const newIndex = Math.max(naturalStart - columnCount * 2, 0)
+    setRange({ start: newIndex, end: newIndex + itemOnScreen })
+  }, [columnCount, height, itemOnScreen])
 
   /** EFFECTS
  --------------------------------------------------------------- */
@@ -178,7 +174,7 @@ export function VirtualizedList({ type = 'grid', section, actions, loadMore = ()
           })}
         </div>
       </div>
-      <LoadMore count={count} total={total} loadMore={loadMore}/>
+      <LoadMore count={count} total={total} loadMore={loadMore} />
       <div className={ruler} ref={rulerRef} />
     </div>
   )

@@ -21,10 +21,7 @@ export function compileAnnotations(highlightList) {
  * @return {RegExp}      [description]
  */
 function highlightRegex(text) {
-  return new RegExp(
-    text.replace(/[.*+?|()[\]{}\\$^]/g, '\\$&').replace(/\s+/g, '\\s+'),
-    'ig'
-  )
+  return new RegExp(text.replace(/[.*+?|()[\]{}\\$^]/g, '\\$&').replace(/\s+/g, '\\s+'), 'ig')
 }
 
 export function highlightAnnotation(annotation, onHover, element, callback) {
@@ -159,26 +156,18 @@ function highlight(node, className, annotation, tapListener, callback) {
     textEnd
 
   if (annotation.version === 2 || annotation.version === '2') {
-    let pktTagRegex = new RegExp(
-      '<pkt_tag_annotation>([\\s\\S]*)</pkt_tag_annotation>'
-    )
+    let pktTagRegex = new RegExp('<pkt_tag_annotation>([\\s\\S]*)</pkt_tag_annotation>')
     which = 1 // Highlight only the part inside parens (in regex-speak: the first group).
     // Use diff-match-patch library.
     const dmp = new DiffMatchPatch()
-    let patchResult = dmp.patch_apply(
-      dmp.patch_fromText(annotation.patch),
-      text
-    )
+    let patchResult = dmp.patch_apply(dmp.patch_fromText(annotation.patch), text)
     if (patchResult[1][0]) {
       matchingText = pktTagRegex.exec(patchResult[0])
     } else {
       // deeper search
       dmp.Match_Distance = 3000
       dmp.Match_Threshold = 0.5
-      let secondPatchResult = dmp.patch_apply(
-        dmp.patch_fromText(annotation.patch),
-        text
-      )
+      let secondPatchResult = dmp.patch_apply(dmp.patch_fromText(annotation.patch), text)
       if (secondPatchResult[1][0]) {
         matchingText = pktTagRegex.exec(secondPatchResult[0])
       }
@@ -287,8 +276,8 @@ function highlight(node, className, annotation, tapListener, callback) {
 /**
  * Remove all tags where added to the dom while highlighting
  * @param  {Mixed}  element   Element where to remove the tags
- * @param  {string} className The class name of the elments to remove
- * @return {Boolean}          Boolean that describes if remove was successfull
+ * @param  {string} className The class name of the elements to remove
+ * @return {Boolean}          Boolean that describes if remove was successful
  */
 export function removeHighlight(element, className) {
   // No element given just bail out
@@ -296,7 +285,7 @@ export function removeHighlight(element, className) {
     return false
   }
 
-  // Go through all elements recusively and remove all tags with the
+  // Go through all elements recursively and remove all tags with the
   // given className
   if (element.nodeType === 1) {
     if (element.getAttribute('class') === className) {

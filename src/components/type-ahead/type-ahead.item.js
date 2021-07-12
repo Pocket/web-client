@@ -35,14 +35,12 @@ export const TypeAheadItem = ({ item, index, action, isActive }) => {
   useEffect(() => {
     if (prevActive) return
     if (isActive) ref.current.scrollIntoView({ block: 'center' })
-  }, [isActive])
+  }, [isActive, prevActive])
 
   const clickAction = () => action(index)
 
   return (
-    <div
-      className={classNames(itemWrapper, { isActive })}
-      onClick={clickAction}>
+    <div className={classNames(itemWrapper, { isActive })} onClick={clickAction}>
       <span ref={ref}>{item}</span>
     </div>
   )

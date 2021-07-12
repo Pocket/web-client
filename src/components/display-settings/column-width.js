@@ -1,10 +1,5 @@
 import { PopupMenuGroup } from '@pocket/web-ui'
-import { css } from 'linaria'
-import {
-  StepperWrapper,
-  IconWrapper,
-  StepperButton
-} from 'components/stepper/stepper'
+import { StepperWrapper, IconWrapper, StepperButton } from 'components/stepper/stepper'
 import { StepperRange } from 'components/stepper/stepper-range'
 import { AddIcon, RemoveIcon, MarginsIcon } from '@pocket/web-ui'
 import { useTranslation } from 'next-i18next'
@@ -39,14 +34,8 @@ export const ColumnWidthSettings = ({
           active={minusActive()}
           onClick={handleDecrease}
           data-cy="display-column-width-decrease"
-          aria-label={t(
-            'settings:decrease-column-width',
-            'Decrease column width'
-          )}
-          data-tooltip={t(
-            'settings:decrease-column-width',
-            'Decrease column width'
-          )}>
+          aria-label={t('settings:decrease-column-width', 'Decrease column width')}
+          data-tooltip={t('settings:decrease-column-width', 'Decrease column width')}>
           <RemoveIcon />
         </StepperButton>
         <StepperRange current={current} range={range} onChange={setCurrent} />
@@ -54,14 +43,8 @@ export const ColumnWidthSettings = ({
           active={plusActive()}
           onClick={handleIncrease}
           data-cy="display-column-width-increase"
-          aria-label={t(
-            'settings:increase-column-width',
-            'Increase column width'
-          )}
-          data-tooltip={t(
-            'settings:increase-column-width',
-            'Increase column width'
-          )}>
+          aria-label={t('settings:increase-column-width', 'Increase column width')}
+          data-tooltip={t('settings:increase-column-width', 'Increase column width')}>
           <AddIcon />
         </StepperButton>
       </StepperWrapper>

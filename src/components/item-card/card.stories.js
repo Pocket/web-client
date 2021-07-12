@@ -33,7 +33,7 @@ const myListItems = deriveMyListItems(Object.values(myListResponse.list)).map((i
 const itemsToDisplay = arrayToObject([...myListItems, ...discoverItems], 'story_name')
 
 const noop = function () {}
-const DummyActions = ({ id, position }) => (
+const DummyActions = ({ id }) => (
   <ItemActions
     menuItems={[
       { key: `archive-${id}`, label: 'Archive', icon: <ArchiveIcon />, onClick: noop },

@@ -1,5 +1,5 @@
 import React from 'react'
-import { css, cx } from 'linaria'
+import { css } from 'linaria'
 import { Button } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui' // 1023
 import { breakpointMediumTablet } from '@pocket/web-ui' // 959

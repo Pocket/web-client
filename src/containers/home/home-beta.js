@@ -51,7 +51,7 @@ export const sendEngagementEvent = (value) =>
     value
   )
 
-export const HomeBeta = ({ dismissChyron, completeChyron }) => {
+export const HomeBeta = ({ dismissChyron }) => {
   const dispatch = useDispatch()
 
   const complete = () => {
@@ -67,8 +67,8 @@ export const HomeBeta = ({ dismissChyron, completeChyron }) => {
     <Chyron instanceId={INSTANCE_ID}>
       <div className={bannerWrapper} data-cy={'home-beta-notice'}>
         <p>
-            Welcome to our Beta for <i>Home</i>. Watch this space as we look to help you build
-            your own slice of the curated web.{' '}
+          Welcome to our Beta for <i>Home</i>. Watch this space as we look to help you build your
+          own slice of the curated web.{' '}
           <a href="#" onClick={complete}>
             Please let us know how we can improve this experience.
           </a>

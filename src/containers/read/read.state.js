@@ -40,8 +40,6 @@ import { API_ACTION_ADD_ANNOTATION } from 'common/constants'
 import { API_ACTION_DELETE_ANNOTATION } from 'common/constants'
 
 import { getArticleText } from 'common/api/reader'
-import { getSuggestedTags } from 'common/api/reader'
-import { getRecentFriends } from 'common/api/reader'
 import { getArticleFromId } from 'common/api/reader'
 import { sendItemActions } from 'common/api/item-actions'
 
@@ -136,7 +134,9 @@ export const readReducers = (state = initialState, action) => {
     // optimistic update
     case ITEMS_TAG_SEND: {
       const { tags } = action
-      const newTags = tags.reduce((obj, key) => { return { ...obj, [key]:{} }}, {})
+      const newTags = tags.reduce((obj, key) => {
+        return { ...obj, [key]: {} }
+      }, {})
       return { ...state, tags: newTags }
     }
 
@@ -180,7 +180,6 @@ export const readSagas = [
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getAnnotations = (state) => state.reader.annotations
-const getPremiumStatus = (state) => parseInt(state.user.premium_status, 10) === 1 || false //prettier-ignore
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -274,10 +273,9 @@ function* annotationDeleteRequest({ item_id, annotation_id }) {
 
 function redirectToList() {
   if (document.location.href.indexOf('/read/') !== -1) {
-    if (history.length > 1) {
-      history.go(-1)
-    }
-    else {
+    if (global.history.length > 1) {
+      global.history.go(-1)
+    } else {
       document.location.href = '/my-list'
     }
   }
@@ -286,7 +284,7 @@ function redirectToList() {
 function* hydrateDisplaySettings() {
   const displaySettings = ['lineHeight', 'columnWidth', 'fontSize', 'fontFamily']
 
-  const settings = displaySettings.reduce((obj, val)  => {
+  const settings = displaySettings.reduce((obj, val) => {
     obj[val] = localStore.getItem(val) || initialState[val]
     return obj
   }, {})
@@ -294,8 +292,9 @@ function* hydrateDisplaySettings() {
   yield put({ type: HYDRATE_DISPLAY_SETTINGS, settings })
 }
 
-function* saveDisplaySettings({ type, ...settings }) {
-  Object.keys(settings).forEach(val => {
+//eslint-disable-next-line no-unused-vars
+function saveDisplaySettings({ type, ...settings }) {
+  Object.keys(settings).forEach((val) => {
     localStore.setItem(val.toString(), settings[val])
   })
 }

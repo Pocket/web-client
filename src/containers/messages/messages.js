@@ -1,5 +1,5 @@
 // @refresh reset
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import Layout from 'layouts/with-sidebar'
@@ -14,7 +14,7 @@ import { MessageResend } from 'components/messages/messages-resend'
 import { MessageEmpty } from 'components/messages/messages-empty'
 import { Toasts } from 'connectors/toasts/toast-list'
 
-export default function Messages(props) {
+export default function Messages() {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 

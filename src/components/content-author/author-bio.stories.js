@@ -13,7 +13,7 @@ const mockAuthors = [
   },
   {
     name: 'Simran Jeet Singh',
-    bio: "Simran Jeet Singh loves sports and signed up for his first marathon after being inspired by Fauja Singh—and like Fauja, he hasn't stopped running since. Simran is an activist, writer, and scholar who believes deeply in the divine goodness of all people. He was born and raised in San Antonio, Texas, and now lives in New York City with his wife and two daughters. ",
+    bio: 'Simran Jeet Singh loves sports and signed up for his first marathon after being inspired by Fauja Singh—and like Fauja, he hasn`t stopped running since. Simran is an activist, writer, and scholar who believes deeply in the divine goodness of all people. He was born and raised in San Antonio, Texas, and now lives in New York City with his wife and two daughters.',
     imageUrl:
       'https://s3.amazonaws.com/pocket-collectionapi-prod-images/a8a9a5be-5c7e-4c65-9752-533e90b605b3.jpeg'
   },
