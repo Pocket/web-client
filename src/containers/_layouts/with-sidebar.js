@@ -5,6 +5,7 @@ import { GlobalFooter } from 'components/global-footer/global-footer'
 import { PageContainer } from '@pocket/web-ui'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 import GlobalNav from 'connectors/global-nav/global-nav'
+import { SocialMetaData } from 'components/social-meta-data/social-meta-data'
 
 const myListContainer = css`
   display: grid;
@@ -50,12 +51,14 @@ function mainLayout({
   selectedNavLink,
   isFullWidthLayout
 }) {
+  const renderSocialMeta = metaData?.description && metaData?.title
   return (
     <>
       <Head>
         <title>{title}</title>
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         {canonical ? <link rel="canonical" href={canonical} /> : null}
+        {!!renderSocialMeta ? <SocialMetaData {...metaData} /> : null}
       </Head>
 
       <GlobalNav selectedLink={selectedNavLink} subset={subset} tag={tag} />
