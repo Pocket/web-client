@@ -117,7 +117,6 @@
     "vinyl-fs": "3.0.3"
   },
   "dependencies": {
-    "@n8tb1t/use-scroll-position": "2.0.3",
     "@pocket/web-localization": "0.11.1",
     "@pocket/web-ui": "2.35.2",
     "@pocket/web-utilities": "1.16.5",
