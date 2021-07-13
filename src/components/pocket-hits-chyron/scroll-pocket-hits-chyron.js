@@ -56,14 +56,9 @@ const ScrollPocketHitsChyron = ({
 
   useEffect(() => {
     // event: request success
-    if (signupRequestState === 'success') {
-      handleSubmitSuccess(activeForm)
-
-      // event: request error
-    } else if (signupRequestState === 'failure') {
-      handleSubmitFailure(activeForm)
-    }
-  }, [signupRequestState, activeForm, handleSubmitFailure, handleSubmitSuccess])
+    if (signupRequestState === 'success') handleSubmitSuccess(activeForm)
+    if (signupRequestState === 'failure') handleSubmitFailure(activeForm)
+  }, [activeForm, handleSubmitFailure, handleSubmitSuccess, signupRequestState])
 
   // /* Event Handlers */
   function handleEmailSubmit(formId, email, recaptchaResponseKey) {
