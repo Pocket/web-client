@@ -1,6 +1,4 @@
 import { render } from 'test-utils'
-import '@testing-library/jest-dom/extend-expect'
-
 import { Chyron } from './chyron'
 
 const TestComponent = () => <h1>Testing!</h1>

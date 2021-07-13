@@ -24,9 +24,7 @@ const ScrollChyron = ({ threshold, shouldHide, instanceId, children }) => {
 
   useScrollPosition(
     ({ currPos }) => {
-      if (currPos.y > threshold) {
-        setVisible(true)
-      }
+      if (currPos.y > threshold) setVisible(true)
     },
     [isVisible],
     false,
@@ -36,9 +34,7 @@ const ScrollChyron = ({ threshold, shouldHide, instanceId, children }) => {
 
   const chyronClassNames = classNames(scrollChyronStyles, { isVisible })
   return shouldHide ? null : (
-    <div
-      className={chyronClassNames}
-      data-cy="scroll-chyron-wrapper">
+    <div className={chyronClassNames} data-cy="scroll-chyron-wrapper">
       <Chyron instanceId={instanceId}>{children}</Chyron>
     </div>
   )
