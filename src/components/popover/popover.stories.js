@@ -37,10 +37,9 @@ const PopoverBlock = function ({ popoverRef }) {
   return (
     <Portal>
       <div className={popoverContainer} ref={popoverRef}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam animi
-        minima explicabo tenetur expedita nobis asperiores sapiente distinctio
-        reiciendis ipsa ad temporibus consequuntur rem necessitatibus accusamus
-        fuga minus, voluptatibus soluta.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam animi minima explicabo
+        tenetur expedita nobis asperiores sapiente distinctio reiciendis ipsa ad temporibus
+        consequuntur rem necessitatibus accusamus fuga minus, voluptatibus soluta.
       </div>
     </Portal>
   )
@@ -56,10 +55,7 @@ const PopoverAction = function ({ popoverOptions, copy }) {
   const { popTrigger, popBody, shown } = usePopover(popoverOptions)
 
   return (
-    <a
-      className={wrapperLink}
-      href="https://www.merriam-webster.com/dictionary/oops"
-      target="_blank">
+    <a className={wrapperLink} href="https://www.merriam-webster.com/dictionary/oops">
       <div> {copy}</div>
       <div className="trigger" onClick={handleClick} ref={popTrigger}>
         Click me
