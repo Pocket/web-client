@@ -42,7 +42,6 @@ const DepthTracking = ({ depthIncrements, onScrollDepth, children }) => {
         }
       })
     }
-    const resizeListener = () => buildPositions()
 
     // timeoutId to debounce the scrollListener
     let timeoutId = null
@@ -55,15 +54,13 @@ const DepthTracking = ({ depthIncrements, onScrollDepth, children }) => {
 
     // Build positions first load and on resize
     // otherwise addEventListener
-    if (!positions) {
-      buildPositions()
-    } else {
-      window.addEventListener('resize', resizeListener)
-      window.addEventListener('scroll', scrollListener)
-    }
+    if (!positions) buildPositions()
+
+    window.addEventListener('resize', buildPositions)
+    window.addEventListener('scroll', scrollListener)
 
     return () => {
-      window.removeEventListener('resize', resizeListener)
+      window.removeEventListener('resize', buildPositions)
       window.removeEventListener('scroll', scrollListener)
     }
   }, [depthIncrements, positions, triggers])
