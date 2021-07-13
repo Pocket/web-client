@@ -1,44 +1,25 @@
 import { useState, useEffect } from 'react'
 
-export const ScrollTracker = (ComponentToWrap) => {
-  return ((props) => {
-    let checking = false
-    const [scrollPercentage, setPercentage] = useState(0)
+export const useScrollPercentage = () => {
+  const [scrollPercentage, setPercentage] = useState(0)
 
-    const getScrollPercent = () => {
-      // https://stackoverflow.com/a/8028584
-      const h = document.documentElement,
-        b = document.body,
-        st = 'scrollTop',
-        sh = 'scrollHeight'
+  useEffect(() => {
+    const calculateScrollPercentage = () => {
+      const htmlContainer = document.documentElement
+      const bodyContainer = document.body
 
-      var val = ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100
-      return isFinite(val) ? val : 0
+      const scrollTop = htmlContainer.scrollTop || bodyContainer.scrollTop
+      const scrollHeight = htmlContainer.scrollHeight || bodyContainer.scrollHeight
+      const scrollDistance = scrollHeight - htmlContainer.clientHeight
+      const scrollPercent = (scrollTop / scrollDistance) * 100
+
+      setPercentage(scrollPercent)
     }
 
-    const update = () => {
-      checking = false
-      const percent = getScrollPercent()
-      setPercentage(percent)
-    }
+    window.addEventListener('scroll', calculateScrollPercentage)
 
-    useEffect(() => {
-      update()
-
-      const handleScroll = () => {
-        if (!checking) requestAnimationFrame(update)
-        checking = true
-      }
-
-      document.addEventListener('scroll', handleScroll)
-      return () => document.removeEventListener('scroll', handleScroll)
-    }, [])
-
-    return (
-      <ComponentToWrap
-        {...props}
-        scrollPercentage={scrollPercentage}
-      />
-    )
+    return () => window.removeEventListener('scroll', calculateScrollPercentage)
   })
+
+  return scrollPercentage
 }

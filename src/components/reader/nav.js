@@ -23,7 +23,7 @@ import {
   updateFontSize,
   updateFontType
 } from 'containers/read/read.state'
-import { WrappedProgressBar } from 'components/progress-bar/progress-bar'
+import { ProgressBar } from 'components/progress-bar/progress-bar'
 import { useTranslation } from 'next-i18next'
 import Mousetrap from 'mousetrap'
 
@@ -248,7 +248,7 @@ export const ReaderNav = ({
           />
         </nav>
       </div>
-      <WrappedProgressBar />
+      <ProgressBar />
     </header>
   )
 }
