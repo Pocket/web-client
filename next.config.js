@@ -1,12 +1,18 @@
 const path = require('path')
-const withPlugins = require('next-compose-plugins')
-const withCSS = require('./.scripts/with-css')
 const nextBuildId = require('next-build-id')
 const assetRegEx = /\.(svg|ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/
 const assetPrefix = process.env.ASSET_PREFIX || ''
 const { i18n } = require('./next-i18next.config.js')
+const withLinaria = require('next-linaria')
+const { withSentryConfig } = require('@sentry/nextjs')
 
-module.exports = withPlugins([withCSS], {
+// For all available options, see:
+// https://github.com/getsentry/sentry-webpack-plugin#options.
+const SentryWebpackPluginOptions = {
+  silent: true // Suppresses all logs
+}
+
+const nextOptions = {
   i18n,
   env: {
     SHOW_DEV: process.env.SHOW_DEV,
@@ -49,19 +55,6 @@ module.exports = withPlugins([withCSS], {
         }
 
         config.module.rules.push({
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: 'linaria/loader',
-              options: {
-                sourceMap: process.env.SHOW_DEV === 'included'
-              }
-            }
-          ]
-        })
-
-        config.module.rules.push({
           test: assetRegEx,
           use: [
             {
@@ -86,4 +79,6 @@ module.exports = withPlugins([withCSS], {
   crossOrigin: 'anonymous',
   generateBuildId: () => nextBuildId({ dir: __dirname }),
   assetPrefix
-})
+}
+
+module.exports = withSentryConfig(withLinaria(nextOptions), SentryWebpackPluginOptions)

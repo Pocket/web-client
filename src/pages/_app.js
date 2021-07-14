@@ -6,7 +6,6 @@ import { appWithTranslation } from 'next-i18next'
 import { useEffect } from 'react'
 import { wrapper } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
-import * as Sentry from '@sentry/node'
 import { parseCookies } from 'nookies'
 
 import { setUser } from 'connectors/user/user.state'
@@ -24,16 +23,11 @@ import { PostTrustInit } from 'connectors/one-trust/one-trust'
 
 /** Setup Files
  --------------------------------------------------------------- */
-import { sentrySettings } from 'common/setup/sentry'
 import { loadPolyfills } from 'common/setup/polyfills'
 import { signalTestsReady } from '../../cypress/support/utils'
 
 import { Shortcuts } from 'connectors/shortcuts/shortcuts'
 import { DevTools } from 'connectors/dev-tools/dev-tools'
-
-/** Set up Sentry so we may catch errors
- --------------------------------------------------------------- */
-Sentry.init(sentrySettings)
 
 /** App
  --------------------------------------------------------------- */
