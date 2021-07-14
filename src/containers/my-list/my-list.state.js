@@ -576,13 +576,13 @@ export async function fetchMyListSearch(params) {
     const response = await searchMyList(params)
     if (!response.list) return { error: 'No Items Returned' }
 
-    const { since, search_meta } = response
-    const total = search_meta?.total_result_count
+    const { since, search_meta, total } = response
+    const computedTotal = search_meta?.total_result_count || total
 
     const derivedItems = await deriveMyListItems(Object.values(response.list))
     const itemsById = arrayToObject(derivedItems, 'item_id')
 
-    return { itemsById, total, since }
+    return { itemsById, total: computedTotal, since }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.log('discover.state', error)
