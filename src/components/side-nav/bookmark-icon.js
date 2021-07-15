@@ -6,10 +6,12 @@ import { useHasChanged } from 'common/utilities/hooks/has-changed'
 
 const bookmarkStyles = css`
   @keyframes fadeIn {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 0;
     }
-    20%, 80% {
+    20%,
+    80% {
       opacity: 1;
     }
   }
@@ -25,7 +27,10 @@ const bookmarkStyles = css`
   }
 
   &.visible {
-    animation: 2500ms ease-in-out 500ms fadeIn;
+    animation-name: fadeIn;
+    animation-delay: 500ms;
+    animation-timing-function: ease-in-out;
+    animation-duration: 2500ms;
   }
 `
 
@@ -48,10 +53,7 @@ export const BookmarkIcon = ({ newSaveCount = 0 }) => {
     }
   }, [inView, saveCountChange])
 
-  const bookmarkClassName = cx(
-    bookmarkStyles,
-    show && 'visible'
-  )
+  const bookmarkClassName = cx(bookmarkStyles, show && 'visible')
 
   return (
     <span ref={ref} className={bookmarkClassName}>
