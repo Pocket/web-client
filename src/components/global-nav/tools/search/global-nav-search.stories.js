@@ -7,7 +7,8 @@ export default {
 }
 
 const baseProps = {
-  onSubmit: () => {}
+  onSubmit: () => {},
+  onClose: () => {}
 }
 
 export const globalNavSearch = () => <GlobalNavSearch {...baseProps} />
