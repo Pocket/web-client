@@ -1,5 +1,6 @@
 import { listShortcuts } from 'connectors/shortcuts/shortcuts.state'
 import { readerShortcuts } from 'connectors/shortcuts/shortcuts.state'
+import { itemActions } from 'connectors/shortcuts/shortcuts.state'
 import { ShortCutsView } from './shortcuts-view'
 
 export default {
@@ -14,6 +15,7 @@ export const Shortcuts = () => {
     <ShortCutsView
       listShortcuts={listShortcuts}
       readerShortcuts={readerShortcuts}
+      itemActions={itemActions}
       showModal={true}
       appRootSelector={APP_ROOT_SELECTOR}
       cancelShortcutView={() => {}}
