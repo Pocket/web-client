@@ -19,13 +19,15 @@ import { PROFILE_ITEM_DELETE_REQUEST } from 'actions'
 import { PROFILE_ITEM_DELETE_SUCCESS } from 'actions'
 import { PROFILE_ITEM_DELETE_FAILURE } from 'actions'
 
+import { ITEMS_ADD_SUCCESS } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getProfileItems = (id) => ({ type: GET_PROFILE_FEED_REQUEST, id })
 export const saveRecommendedItem = (id, url) => ({ type: PROFILE_ITEM_SAVE_REQUEST, id, url })
 export const deleteRecommendedItem = (postId, itemId) => ({ type: PROFILE_ITEM_DELETE_REQUEST, postId, itemId }) //prettier-ignore
 
- /** REDUCERS
+/** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
   items: []
@@ -104,7 +106,7 @@ function* saveRecommendedItemRequest({ url, id }) {
     if (response?.status !== 1) throw new Error('Unable to save')
 
     const item = yield select(getRecommendedItemById, id)
-    const openExternal = checkExternal({item})
+    const openExternal = checkExternal({ item })
 
     yield put({ type: PROFILE_ITEM_SAVE_SUCCESS, id, openExternal })
     yield put({ type: ITEMS_ADD_SUCCESS })

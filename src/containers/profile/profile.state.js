@@ -24,7 +24,7 @@ export const getProfile = (id) => ({ type: GET_PROFILE_REQUEST, id })
 export const followUser = (id) => ({ type: FOLLOW_PROFILE_REQUEST, id })
 export const unFollowUser = (id) => ({ type: UNFOLLOW_PROFILE_REQUEST, id })
 
- /** REDUCERS
+/** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {}
 
