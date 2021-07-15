@@ -1,10 +1,6 @@
 import React from 'react'
-import PublisherRecs from './publisher-recs'
-
-import {
-  publisher,
-  publisherRecommendations as publisherRecs
-} from 'mock/article'
+import { PublisherRecs } from './publisher-recs'
+import { publisher, publisherRecommendations as publisherRecs } from 'mock/article'
 
 export default {
   title: 'Recommendations/Publisher',
