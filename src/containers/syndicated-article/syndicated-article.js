@@ -50,6 +50,8 @@ export function SyndicatedArticle({ queryParams = validParams }) {
   const articleData = useSelector((state) => state.syndicatedArticle.articleData)
   const saveStatus = useSelector((state) => state.syndicatedArticle.saveStatus)
 
+  if (!articleData) return
+
   const {
     itemId,
     originalItemId,
