@@ -123,6 +123,7 @@
     "@pocket/web-localization": "0.11.0",
     "@pocket/web-ui": "2.35.2",
     "@pocket/web-utilities": "1.16.6",
+    "@sentry/integrations": "6.9.0",
     "@sentry/nextjs": "6.9.0",
     "@sentry/node": "6.4.0",
     "@sentry/react": "6.4.0",
