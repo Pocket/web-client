@@ -3,6 +3,7 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from '@sentry/nextjs'
+import { Dedupe as DedupeIntegration } from '@sentry/integrations'
 
 const isDev = process.env.SHOW_DEV === 'included'
 const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
@@ -10,7 +11,7 @@ const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
 Sentry.init({
   dsn: SENTRY_DSN || 'https://cc3aea2dd5ca4aefb5a18c671a229237@o28549.ingest.sentry.io/5436250',
   // Adjust this value in production, or use tracesSampler for greater control
-  tracesSampleRate: 1.0,
+  tracesSampleRate: 0.5,
   // ...
   // Note: if you want to override the automatic release value, do not set a
   // `release` value here - use the environment variable `SENTRY_RELEASE`, so
@@ -23,6 +24,7 @@ Sentry.init({
     }
     return event
   },
+  whitelistUrls: [/https:\/\/(.+)?getpocket\.com/],
   ignoreErrors: [
     // Random plugins/extensions
     'top.GLOBALS',
@@ -51,5 +53,6 @@ Sentry.init({
     /^chrome:\/\//i
   ],
   release: process.env.BUILD_ID,
-  environment: isDev ? 'Development' : 'Production'
+  environment: isDev ? 'Development' : 'Production',
+  integrations: [new DedupeIntegration()]
 })
