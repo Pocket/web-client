@@ -1,3 +1,10 @@
+## [1.15.21](https://github.com/Pocket/web-client/compare/v1.15.20...v1.15.21) (2021-07-16)
+
+
+### Bug Fixes
+
+* **sentry:** remove userAgent block - add release ([72fde73](https://github.com/Pocket/web-client/commit/72fde73d28d300d4867c3e000836f942a3274205))
+
 ## [1.15.20](https://github.com/Pocket/web-client/compare/v1.15.19...v1.15.20) (2021-07-15)
 
 

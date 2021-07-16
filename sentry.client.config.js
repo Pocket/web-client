@@ -18,8 +18,9 @@ Sentry.init({
   beforeSend(event, hint) {
     const error = hint.originalException
     // Snowplow trys to adjust userAgent which is a problem client side
-    if (error?.message?.match(/userAgent/i)) return null
-    if (error?.message?.match(/pubads_impl/i)) return null
+    if (error && error.message) {
+      if (error.message.match(/pubads_impl/i)) return null
+    }
     return event
   },
   ignoreErrors: [
@@ -49,5 +50,6 @@ Sentry.init({
     /extensions\//i,
     /^chrome:\/\//i
   ],
+  release: process.env.BUILD_ID,
   environment: isDev ? 'Development' : 'Production'
 })

@@ -1,7 +1,6 @@
 var https = require('https')
 var http = require('http')
 var fs = require('fs')
-const path = require('path')
 const { parse } = require('url')
 
 const next = require('next')
