@@ -54,6 +54,6 @@ Sentry.init({
     /^chrome:\/\//i
   ],
   release: process.env.BUILD_ID,
-  environment: isDev ? 'Development' : 'Production',
+  environment: isDev ? 'development' : 'production',
   integrations: [new DedupeIntegration()]
 })

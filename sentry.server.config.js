@@ -19,5 +19,5 @@ Sentry.init({
   // that it will also get attached to your source maps
 
   release: process.env.BUILD_ID,
-  environment: isDev ? 'Development' : 'Production'
+  environment: isDev ? 'development' : 'production'
 })
