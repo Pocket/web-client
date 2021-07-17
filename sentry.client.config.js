@@ -27,6 +27,8 @@ Sentry.init({
   },
   whitelistUrls: [/https:\/\/(.+)?getpocket\.com/],
   ignoreErrors: [
+    // Firefox Extension misbehaving
+    "TypeError: can't access dead object", //eslint-disable-line
     // Random plugins/extensions
     'top.GLOBALS',
     // See: http://blog.errorception.com/2012/03/tale-of-unfindable-js-error.html
