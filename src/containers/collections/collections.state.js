@@ -156,7 +156,13 @@ export async function fetchCollections() {
       const firstImage = collection.stories[0].thumbnail
       const authorImage = collection.authors[0].imageUrl
       const heroImage = collection.thumbnail
-      return { ...collection, heroImage: heroImage, thumbnail: authorImage || firstImage, url, item_id: slug }
+      return {
+        ...collection,
+        heroImage: heroImage,
+        thumbnail: authorImage || firstImage,
+        url,
+        item_id: slug
+      }
     })
     return arrayToObject(derivedCollections, 'slug')
   } catch (error) {
@@ -179,8 +185,9 @@ export async function fetchCollectionBySlug({ slug }) {
     const url = `/collections/${slug}`
 
     // Derive items
-    const stories = passedStories.map((item) => item.item.itemId)
-    const urls = passedStories.map((item) => item.url)
+    const validStories = passedStories.filter(validateStory)
+    const stories = validStories.map((story) => story?.item?.itemId)
+    const urls = validStories.map((story) => story.url)
 
     return {
       collection: {
@@ -194,10 +201,14 @@ export async function fetchCollectionBySlug({ slug }) {
           ...rest
         }
       },
-      stories: passedStories
+      stories: validStories
     }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.log('collection.state.collectionBySlug', error)
   }
+}
+
+const validateStory = function (story) {
+  return story?.item?.itemId?.length && story?.url?.length
 }
