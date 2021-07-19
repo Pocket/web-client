@@ -2,9 +2,10 @@ var https = require('https')
 var http = require('http')
 var fs = require('fs')
 const { parse } = require('url')
+const dev = process.env.AS_PRODUCTION ? false : true //eslint-disable-line
 
 const next = require('next')
-const app = next({ dev: true })
+const app = next({ dev })
 const handle = app.getRequestHandler()
 
 var options = {

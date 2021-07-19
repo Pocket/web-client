@@ -11,6 +11,7 @@
     "dev": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
     "build": "npm run locale-inject && next build",
     "start": "next start -p 80",
+    "start-local": "AS_PRODUCTION=true node ./server.local.js",
     "cypress:launch": "CYPRESS_BASE_URL=http://localhost.web-client.getpocket.com cypress open",
     "cypress:run": "CYPRESS_BASE_URL=http://localhost.web-client.getpocket.com cypress run",
     "cypress:ci": "cypress run",
