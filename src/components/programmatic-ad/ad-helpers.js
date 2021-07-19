@@ -11,11 +11,20 @@ export const REFRESH_VALUE = 'true'
  * @returns {object} a size mapping instance, to be used with the googletag library
  */
 export const createSizeMapping = (sizes) => {
-  const mapping = googletag.sizeMapping()
+  try {
+    const mapping = googletag.sizeMapping()
 
-  sizes.forEach(({ browserSize, adSizes }) => mapping.addSize(browserSize, adSizes))
+    sizes.forEach(({ browserSize, adSizes }) => mapping.addSize(browserSize, adSizes))
 
-  return mapping.build()
+    return mapping.build()
+  } catch (err) {
+    Sentry.withScope((scope) => {
+      scope.setTag('third party', 'google ads')
+      scope.setExtra('ad error type', 'size mapping')
+      scope.setFingerprint('Ad Error')
+      Sentry.captureMessage(err)
+    })
+  }
 }
 
 /**
@@ -37,37 +46,55 @@ export const defineAdSlot = ({
   sizeMap = {},
   refreshRate
 }) => {
-  const sizeMapping = createSizeMapping(sizeMap)
+  try {
+    const sizeMapping = createSizeMapping(sizeMap)
 
-  if (refreshRate) {
+    if (refreshRate) {
+      global.gptadslots[id] = global.googletag
+        .defineSlot(adUnitPath, defaultAdSize, id)
+        ?.setTargeting('POS', [positionAlias])
+        ?.setTargeting(REFRESH_KEY, REFRESH_VALUE)
+        .defineSizeMapping(sizeMapping)
+        .addService(global.googletag.pubads())
+
+      return
+    }
+
     global.gptadslots[id] = global.googletag
       .defineSlot(adUnitPath, defaultAdSize, id)
       ?.setTargeting('POS', [positionAlias])
-      ?.setTargeting(REFRESH_KEY, REFRESH_VALUE)
       .defineSizeMapping(sizeMapping)
       .addService(global.googletag.pubads())
-
-    return
+  } catch (err) {
+    Sentry.withScope((scope) => {
+      scope.setTag('third party', 'google ads')
+      scope.setExtra('ad error type', 'define ad slot')
+      scope.setFingerprint('Ad Error')
+      Sentry.captureMessage(err)
+    })
   }
-
-  global.gptadslots[id] = global.googletag
-    .defineSlot(adUnitPath, defaultAdSize, id)
-    ?.setTargeting('POS', [positionAlias])
-    .defineSizeMapping(sizeMapping)
-    .addService(global.googletag.pubads())
 }
 /**
  * @type {Promise} creates a new promise that resolves once the googletag library is loaded
  */
 export const gtagPromise = () => {
-  const DEFAULT_GOOGLETAG = { cmd: [] }
+  try {
+    const DEFAULT_GOOGLETAG = { cmd: [] }
 
-  global.gptadslots = global.gptadslots || []
-  global.googletag = global.googletag || DEFAULT_GOOGLETAG
+    global.gptadslots = global.gptadslots || []
+    global.googletag = global.googletag || DEFAULT_GOOGLETAG
 
-  return new Promise((resolve, reject) => {
-    googletag.cmd.push(resolve)
-  })
+    return new Promise((resolve, reject) => {
+      googletag.cmd.push(resolve)
+    })
+  } catch (err) {
+    Sentry.withScope((scope) => {
+      scope.setTag('third party', 'google ads')
+      scope.setExtra('ad error type', 'gtag promise')
+      scope.setFingerprint('Ad Error')
+      Sentry.captureMessage(err)
+    })
+  }
 }
 
 /**
@@ -97,12 +124,21 @@ export const domLoadedPromise = () => {
  * Tip: To verify an ad attempting to load in browser, filter the network traffic by `gdfp` and reload the tab
  */
 export const loadAd = (slotId) => {
-  global.googletag.display(slotId)
-  if (typeof global.pubwise !== 'undefined' && global.pubwise.enabled === true) {
-    global.pwpbjs.que.push(function () {
-      global.pwRegisterLazyLoad(global.gptadslots[slotId], 2, [50, 0, 50, 0], 0, 768, 2)
+  try {
+    global.googletag.display(slotId)
+    if (typeof global.pubwise !== 'undefined' && global.pubwise.enabled === true) {
+      global.pwpbjs.que.push(function () {
+        global.pwRegisterLazyLoad(global.gptadslots[slotId], 2, [50, 0, 50, 0], 0, 768, 2)
+      })
+    } else {
+      global.googletag.pubads().refresh([global.gptadslots[slotId]])
+    }
+  } catch (err) {
+    Sentry.withScope((scope) => {
+      scope.setTag('third party', 'google ads')
+      scope.setExtra('ad error type', 'load ad')
+      scope.setFingerprint('Ad Error')
+      Sentry.captureMessage(err)
     })
-  } else {
-    global.googletag.pubads().refresh([global.gptadslots[slotId]])
   }
 }
