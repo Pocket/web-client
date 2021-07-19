@@ -24,7 +24,6 @@ import { PostTrustInit } from 'connectors/one-trust/one-trust'
 /** Setup Files
  --------------------------------------------------------------- */
 import { loadPolyfills } from 'common/setup/polyfills'
-import { signalTestsReady } from '../../cypress/support/utils'
 
 import { Shortcuts } from 'connectors/shortcuts/shortcuts'
 import { DevTools } from 'connectors/dev-tools/dev-tools'
@@ -101,10 +100,6 @@ function PocketWebClient({ Component, pageProps, err }) {
     }
 
     hydrateFeatures()
-
-    // signal to Cypress that React client side has loaded
-    // Make sure this is the last thing we fire
-    signalTestsReady()
   }, [user_status, sess_guid, user_id, birth, dispatch])
 
   useEffect(() => {
