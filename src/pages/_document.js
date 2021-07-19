@@ -5,6 +5,7 @@ class ClientDocument extends Document {
   render() {
     return (
       <Html>
+        {/* prettier-ignore */}
         <Head>
           {/*
           This all sets us up for color themes without having a flash of
@@ -62,6 +63,45 @@ class ClientDocument extends Document {
             }}
           />
           {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
+
+          {/* Progressive Web App based on https://github.com/gokulkrishh/awesome-meta-and-manifest */}
+          <meta charSet="utf-8" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+          
+          {/* Android  */}
+          <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
+          <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+          <meta name="mobile-web-app-capable" content="yes" />
+          
+          {/* iOS */}
+          <meta name="apple-mobile-web-app-title" content="Pocket" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+          
+          {/* Windows */}
+          <meta name="msapplication-TileColor" content="#ef4056" />
+          <meta name="msapplication-TileImage" content="/i/apple-touch-icon/Pocket_AppIcon_@144.png" />
+          
+          {/* Pinned Sites */}
+          <meta name="application-name" content="Pocket" />
+          <meta name="msapplication-tooltip" content="Pocket" />
+          <meta name="msapplication-starturl" content="/" />
+          
+          {/* UC Mobile Browser */}
+          <meta name="full-screen" content="yes" />
+          <meta name="browsermode" content="application" />
+          <meta name="viewport" content="uc-fitscreen=yes" />
+          <meta name="layoutmode" content="fitscreen/standard" />
+          
+          {/* manifest.json provides metadata used when your web app is added to the homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/ */}
+          <link rel="manifest" href="/manifest.json" />
+
+          {/* Icons */}
+          <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/i/apple-touch-icon/Pocket_AppIcon_@57.png" />
+          <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/i/apple-touch-icon/Pocket_AppIcon_@72.png" />
+          <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/i/apple-touch-icon/Pocket_AppIcon_@114.png" />
+          <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/i/apple-touch-icon/Pocket_AppIcon_@144.png" />
         </Head>
         <body>
           <Main />
