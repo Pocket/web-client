@@ -14,9 +14,17 @@ Sentry.init({
   sampleRate: 0.5,
   beforeSend(event, hint) {
     const error = hint.originalException
-    // Per this thread https://github.com/getsentry/sentry-javascript/issues/1811
+
     if (window && window.location && window.location.search) {
+      // Per this thread https://github.com/getsentry/sentry-javascript/issues/1811
       if (window.location.search.indexOf('fbclid') !== -1) return null
+
+      // This will group the article not found errors as it seems to be another ios injection error
+      // We are not gonna ignore it until that's confirmed but it will give us a clearer sense
+      // of volume
+      if (window.location.search.indexIf('mobile_web_view') !== -1) {
+        event.fingerprint = ['mobile-web-view']
+      }
     }
 
     // Pocket IOS injection error
