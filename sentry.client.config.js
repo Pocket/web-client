@@ -19,6 +19,11 @@ Sentry.init({
   // that it will also get attached to your source maps
   beforeSend(event, hint) {
     const error = hint.originalException
+    // Per this thread https://github.com/getsentry/sentry-javascript/issues/1811
+    if (window && window.location && window.location.search) {
+      if (window.location.search.indexOf('fbclid') !== -1) return null
+    }
+
     // Snowplow trys to adjust userAgent which is a problem client side
     if (error && error.message) {
       if (error.message.match(/pubads_impl/i)) return null
