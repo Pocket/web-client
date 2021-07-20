@@ -5,7 +5,6 @@
 import * as Sentry from '@sentry/nextjs'
 import { Dedupe as DedupeIntegration } from '@sentry/integrations'
 
-const isDev = process.env.SHOW_DEV === 'included'
 const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN
 
 Sentry.init({
@@ -13,10 +12,6 @@ Sentry.init({
   // Adjust this value in production, or use tracesSampler for greater control
   tracesSampleRate: 0.5,
   sampleRate: 0.5,
-  // ...
-  // Note: if you want to override the automatic release value, do not set a
-  // `release` value here - use the environment variable `SENTRY_RELEASE`, so
-  // that it will also get attached to your source maps
   beforeSend(event, hint) {
     const error = hint.originalException
     // Per this thread https://github.com/getsentry/sentry-javascript/issues/1811
@@ -60,7 +55,5 @@ Sentry.init({
     /extensions\//i,
     /^chrome:\/\//i
   ],
-  release: process.env.BUILD_ID,
-  environment: isDev ? 'development' : 'production',
   integrations: [new DedupeIntegration()]
 })
