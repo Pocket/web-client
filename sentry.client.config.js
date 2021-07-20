@@ -19,9 +19,9 @@ Sentry.init({
       if (window.location.search.indexOf('fbclid') !== -1) return null
     }
 
-    // Snowplow trys to adjust userAgent which is a problem client side
+    // Pocket IOS injection error
     if (error && error.message) {
-      if (error.message.match(/pubads_impl/i)) return null
+      if (error.message.match(/pktAnnotationHighlighter/i)) return null
     }
     return event
   },
