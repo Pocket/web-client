@@ -80,7 +80,7 @@ export function SaveArticleTop({ url, saveAction, saveStatus, isAuthenticated, t
         url={url}
         onClick={saveAction}
       />
-      <p> {t('item-action:save-article-bottom', 'Read when you’ve got time to spare.')}</p>
+      <p> {t('item-action:save-article-top', 'Read when you’ve got time to spare.')}</p>
     </div>
   )
 }
