@@ -189,6 +189,13 @@ export async function fetchCollectionBySlug({ slug }) {
     const stories = validStories.map((story) => story?.item?.itemId)
     const urls = validStories.map((story) => story.url)
 
+    const partnerInfo = {
+      name: 'WSJ',
+      url: 'http://www.mozilla.org',
+      imageUrl: 'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5eaad25b31b5d.png',
+      type: 'sponsor'
+    }
+
     return {
       collection: {
         [slug]: {
@@ -198,6 +205,7 @@ export async function fetchCollectionBySlug({ slug }) {
           urls,
           pageSaveStatus: 'unsaved',
           saveStatus: 'unsaved',
+          partnerInfo,
           ...rest
         }
       },
