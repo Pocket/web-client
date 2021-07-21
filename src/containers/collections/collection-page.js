@@ -129,7 +129,14 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
             {/* Collection Stories */}
             {stories
               ? stories.map((id, index) => (
-                  <ItemCard id={id} key={id} position={index} cardShape="wide" showExcerpt={true} />
+                  <ItemCard
+                    id={id}
+                    key={id}
+                    position={index}
+                    cardShape="wide"
+                    showExcerpt={true}
+                    partnerType={index === 2 ? partnerInfo.type : null}
+                  />
                 ))
               : null}
 

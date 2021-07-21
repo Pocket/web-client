@@ -6,6 +6,7 @@ import { SyndicatedIcon } from '@pocket/web-ui'
 import { CardMedia } from 'components/items-media/card-media'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { ItemTags } from 'components/item-tags/item-tags'
+import { PartnerOverline } from 'components/content-partner/partner'
 import { cardStyles } from './card-base'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
@@ -54,6 +55,7 @@ export const Card = (props) => {
     hiddenActions,
     onImageFail,
     useMarkdown,
+    partnerType,
     // Tracking
     onItemInView,
     onOpenOriginalUrl,
@@ -153,6 +155,7 @@ export const Card = (props) => {
           />
         ) : null}
         <div className="content">
+          <PartnerOverline partnerType={partnerType} />
           <h2 className="title">
             {openUrl ? (
               <Link href={openUrl}>
