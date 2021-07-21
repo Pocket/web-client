@@ -27,20 +27,21 @@ Sentry.init({
       }
     }
 
-    // Pocket IOS injection error
     if (error && error.message) {
+      // Pocket IOS injection error
       if (error.message.match(/pktAnnotationHighlighter/i)) return null
-    }
 
-    // Firefox Extension misbehaving
-    if (error && error.message) {
+      // Firefox Extension misbehaving
       if (error.message.match(/can't access dead object/i)) return null
+
+      // Apple mail peek error (we don't use a raw variable `article`)
+      if (error.message.match(/Can't find variable: article/i)) return null
+
+      // Snowplow trying to redefine the user agent
+      // !! NOTE: we should remove this once we upgrade snowplow for the browser
+      if (error.message.match(/can't redefine non-configurable property "userAgent"/i)) return null
     }
 
-    // Apple mail peek error (we don't use a raw variable `article`)
-    if (error && error.message) {
-      if (error.message.match(/Can't find variable: article/i)) return null
-    }
     return event
   },
   whitelistUrls: [/https:\/\/(.+)?getpocket\.com/],
