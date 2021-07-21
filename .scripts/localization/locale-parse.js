@@ -463,19 +463,6 @@ function handleFinish(count) {
 }
 
 /**
- * handleNotChanges is a helper function to display some info and exit if no
- * changes have been made
- */
-async function handleNoChanges(branchName) {
-  const branches = await git.branch()
-  if (branches.all.includes(`remotes/origin/${branchName}`))
-    console.log(chalk.red(JSON.stringify(status, null, 2)))
-  console.log(chalk.green(`  [commit]: No files have been changed`))
-  console.log(chalk.blue('  [exit]: 👋'))
-  process.exit(0)
-}
-
-/**
  * sha1 returns a sha1 of the passed file for easy, general comparison
  * @param {*} buffer Vinyl buffer or file to get the sha1 for
  */
