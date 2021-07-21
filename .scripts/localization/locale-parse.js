@@ -47,31 +47,16 @@ async function processLocalization() {
     const branchName = await setBranch()
 
     // Extract any new strings and add them to a new branch
-    // This will exit the process if no changes are found
     const changedFiles = await parseLocalizationChanges(location, token)
-    if (!changedFiles.length) return handleNoChanges()
 
     // Commit changes to the proper branch
-    await commitChanges(changedFiles, branchName, location)
+    if (changedFiles.length) await commitChanges(changedFiles, branchName, location)
 
-    // Submit PR if one does not already exist
-    const selectPROption = new Select({
-      name: 'pr-status',
-      message: `Would you like to make a PR?`,
-      choices: ['Yep!', 'Nope']
-    })
-    const answer = await selectPROption.run()
+    // Push changes if you want
+    await pushChanges(branchName, location)
 
-    switch (answer) {
-      case 'Yep!': {
-        return await submitPR(token, branchName, changedFiles)
-      }
-
-      default: {
-        console.log('Cool. You`re all set.')
-        process.exit(0)
-      }
-    }
+    // Go ahead and submit PR if one does not already exist
+    await submitPR(token, branchName, changedFiles)
   } catch (error) {
     console.log(error)
   }
@@ -278,11 +263,34 @@ async function selectBranch(localBranches) {
  */
 async function commitChanges(changedFiles, branchName, location) {
   console.log(chalk.green('  [commit] making commit to branch'))
+  changedFiles.forEach((filename) => console.log(chalk.green(`  [commit]: ${filename}`)))
+
   const addLocation = path.resolve(location, 'locales')
   await git.cwd(addLocation)
   await git.add(changedFiles)
-  await git.commit(['feat(localization): updating strings', ...changedFiles])
-  await git.push(localizationRepo, branchName)
+  return git.commit(['feat(localization): updating strings', ...changedFiles])
+}
+
+/**
+ * pushChanges pushes changes to the remote repo — it is optional
+ * @param {string} branchName Name of the branch we will be operating in
+ * @param {string} location This is the passed in location required to resolve locales folder
+ */
+async function pushChanges(branchName, location) {
+  // Push changes to your branch
+  const selectPushOption = new Select({
+    name: 'push-status',
+    message: `Would you like to push these changes?`,
+    choices: ['Yep!', 'Nope']
+  })
+  const answer = await selectPushOption.run()
+  if (answer === 'Yep!') {
+    console.log(chalk.blue('  [commit] Pushing changes to branch'))
+    const addLocation = path.resolve(location, 'locales')
+    await git.cwd(addLocation)
+    return await git.push(localizationRepo, branchName)
+  }
+
   return
 }
 
@@ -296,6 +304,19 @@ async function commitChanges(changedFiles, branchName, location) {
  */
 async function submitPR(token, branchName, changedFiles) {
   try {
+    const selectPROption = new Select({
+      name: 'pr-status',
+      message: `Would you like to make a PR?`,
+      choices: ['Yep!', 'Nope']
+    })
+    const answer = await selectPROption.run()
+
+    // Bail if you want
+    if (answer === 'Nope') {
+      console.log('Cool. You`re all set.')
+      process.exit(0)
+    }
+
     const prEndpoint = `${githubApiUrl}/repos/Pocket/web-localization/pulls`
     const prTitle = `feat(localization): from branch '${branchName}'`
     console.log(chalk.blue(chalk.blue('  [PR] Checking for existing PR')))
@@ -415,6 +436,10 @@ function handleData(file, location) {
       return file.relative
     }
   }
+
+  //Add new files
+  if (!existingFile) return file.relative
+
   return false
 }
 
@@ -441,7 +466,10 @@ function handleFinish(count) {
  * handleNotChanges is a helper function to display some info and exit if no
  * changes have been made
  */
-function handleNoChanges() {
+async function handleNoChanges(branchName) {
+  const branches = await git.branch()
+  if (branches.all.includes(`remotes/origin/${branchName}`))
+    console.log(chalk.red(JSON.stringify(status, null, 2)))
   console.log(chalk.green(`  [commit]: No files have been changed`))
   console.log(chalk.blue('  [exit]: 👋'))
   process.exit(0)
