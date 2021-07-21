@@ -31,12 +31,20 @@ Sentry.init({
     if (error && error.message) {
       if (error.message.match(/pktAnnotationHighlighter/i)) return null
     }
+
+    // Firefox Extension misbehaving
+    if (error && error.message) {
+      if (error.message.match(/can't access dead object/i)) return null
+    }
+
+    // Apple mail peek error (we don't use a raw variable `article`)
+    if (error && error.message) {
+      if (error.message.match(/Can't find variable: article/i)) return null
+    }
     return event
   },
   whitelistUrls: [/https:\/\/(.+)?getpocket\.com/],
   ignoreErrors: [
-    // Firefox Extension misbehaving
-    "TypeError: can't access dead object", //eslint-disable-line
     // Random plugins/extensions
     'top.GLOBALS',
     // See: http://blog.errorception.com/2012/03/tale-of-unfindable-js-error.html

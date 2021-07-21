@@ -11,5 +11,24 @@ Sentry.init({
   // Adjust this value in production, or use tracesSampler for greater control
   tracesSampleRate: 0.5,
   sampleRate: 0.5,
-  whitelistUrls: [/https:\/\/(.+)?getpocket\.com/]
+  whitelistUrls: [/https:\/\/(.+)?getpocket\.com/],
+  beforeSend(event, hint) {
+    const error = hint.originalException
+
+    // Pocket IOS injection error
+    if (error && error.message) {
+      if (error.message.match(/pktAnnotationHighlighter/i)) return null
+    }
+
+    // Firefox Extension misbehaving
+    if (error && error.message) {
+      if (error.message.match(/can't access dead object/i)) return null
+    }
+
+    // Apple mail peek error (we don't use a raw variable `article`)
+    if (error && error.message) {
+      if (error.message.match(/Can't find variable: article/i)) return null
+    }
+    return event
+  }
 })
