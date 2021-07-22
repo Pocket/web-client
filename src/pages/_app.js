@@ -57,10 +57,6 @@ function PocketWebClient({ Component, pageProps, err }) {
     const cookies = parseCookies()
     const { sess_guid } = cookies
 
-    // Set up defaults/user pref in state
-    dispatch(appSetPreferences())
-    dispatch(hydrateSettings())
-
     /**
      * First time user
      * We don't have a sess_guid for this users so we are gonna
@@ -88,11 +84,16 @@ function PocketWebClient({ Component, pageProps, err }) {
     if (sess_guid) validateUser()
   }, [user_status, dispatch])
 
-  // Hydrate user features
+  // Hydrate user features/settings
   useEffect(() => {
     if (user_status === 'pending') return null
     if (user_status === 'invalid') return dispatch(featuresHydrate({}))
 
+    // Set up defaults/user pref in state
+    dispatch(appSetPreferences())
+    dispatch(hydrateSettings())
+
+    // Sets up feature flags for this user
     const hydrateFeatures = async () => {
       const features = await fetchUnleashData(user_id, sess_guid, birth)
       if (features) dispatch(featuresHydrate(features))
