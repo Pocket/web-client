@@ -1,7 +1,5 @@
 import '@pocket/web-ui/lib/pocket-web-ui.css'
-import { withNextRouter } from 'storybook-addon-next-router'
 
-import React from 'react'
 import { Provider } from 'react-redux'
 import { initializeStore } from 'store'
 import { I18nextProvider } from 'react-i18next'
@@ -91,6 +89,12 @@ export const parameters = {
   viewport: {
     viewports: customViewports,
     defaultViewport: 'responsive'
+  },
+  controls: {
+    matchers: {
+      color: /(background|color)$/i,
+      date: /Date$/
+    }
   }
 }
 
@@ -121,6 +125,5 @@ export const decorators = [
         </Provider>
       </I18nextProvider>
     )
-  },
-  withNextRouter
+  }
 ]
