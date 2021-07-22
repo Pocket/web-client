@@ -11,7 +11,7 @@ export const CollectionCard = ({ collection: item, position }) => {
   const isAuthenticated = useSelector((state) => state.user.auth)
 
   const analyticsData = {
-    url: `${BASE_URL}/collection?.url`,
+    url: `${BASE_URL}${item?.url}`,
     position
   }
 

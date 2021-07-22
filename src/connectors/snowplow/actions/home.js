@@ -86,4 +86,20 @@ export const homeActions = {
     },
     expects: ['url', 'position']
   },
+  'home.collection.view-more': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'link'
+    },
+    description: 'Fired when a user clicks the `View More Articles` link within each topic section'
+  },
+  'home.beta.notice': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'link'
+    },
+    expects: ['value']
+  }
 }

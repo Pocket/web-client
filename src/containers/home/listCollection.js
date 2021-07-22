@@ -5,18 +5,7 @@ import { css } from 'linaria'
 import { cardsGrid } from 'components/items-layout/base'
 import { useSelector, useDispatch } from 'react-redux'
 import { breakpointLargeHandset } from '@pocket/web-ui'
-import { trackEngagement } from 'connectors/snowplow/snowplow.state'
-import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
-import { UI_COMPONENT_LINK } from 'connectors/snowplow/entities'
-
-/* Analytics Event */
-export const sendEngagementEvent = () =>
-  trackEngagement(
-    ENGAGEMENT_TYPE_GENERAL,
-    UI_COMPONENT_LINK,
-    0, // position in list (zero since it's not in list)
-    'home.collection.view-more'
-  )
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 const homeCollections = css`
   ${cardsGrid};
@@ -32,7 +21,7 @@ export const HomeCollectionList = () => {
   const showSkeleton = collectionSet?.length < 2
 
   const clickEvent = () => {
-    dispatch(sendEngagementEvent())
+    dispatch(sendSnowplowEvent('home.collection.view-more'))
   }
 
   return (

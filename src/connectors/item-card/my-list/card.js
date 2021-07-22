@@ -43,7 +43,7 @@ export function ItemCard({ id, position, type }) {
     id,
     url: openUrl,
     position,
-    destination: openExternal ? 'external' : 'internal'
+    destination: item?.openExternal ? 'external' : 'internal'
   }
 
   /** ITEM TRACKING
