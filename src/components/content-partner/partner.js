@@ -3,13 +3,14 @@ import { useTranslation } from 'next-i18next'
 
 const partnerStyles = css`
   font-family: 'Graphik Web';
+  color: var(--color-textTertiary);
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
 
   img {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     width: 60px;
     height: 60px;
   }
@@ -18,9 +19,8 @@ const partnerStyles = css`
 const overlineStyles = css`
   color: var(--color-textTertiary);
   font-weight: 300;
-  font-size: 1.25em;
-  margin-bottom: 0.5rem;
   text-transform: uppercase;
+  letter-spacing: 0.014em;
 `
 
 export function Partner({partnerInfo}) {
@@ -31,8 +31,8 @@ export function Partner({partnerInfo}) {
 
   return (
     <div className={partnerStyles}>
-      { type === 'partner' ? <div>{t('partner-info:partner-copy', 'In partnership with:')}</div> : null}
-      { type === 'sponsor' ? <div>{t('partner-info:sponsor-copy', 'Brought to you by:')}</div> : null}
+      { type === 'partner' ? <div>{t('partner-info:partner-copy', 'In partnership with')}</div> : null}
+      { type === 'sponsor' ? <div>{t('partner-info:sponsor-copy', 'Brought to you by')}</div> : null}
       <a href={partnerInfo.url} target='_blank' rel='noopener noreferrer'>
         <img src={partnerInfo.imageUrl} alt="" />
       </a>
