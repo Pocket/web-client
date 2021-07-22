@@ -57,9 +57,7 @@ export default function Discover({ url, locale }) {
   }
 
   // Return error if no items are present !! TODO: FIX THIS - This is a horrid error
-  return !items?.length ? (
-    <ErrorPage statusCode={503} />
-  ) : (
+  return items?.length ? (
     <Layout title={metaData.title} metaData={metaData}>
       {!isAuthenticated && shouldRender ? <CallOutBuildHome /> : null}
 
@@ -99,6 +97,8 @@ export default function Discover({ url, locale }) {
 
       <ReportFeedbackModal />
     </Layout>
+  ) : (
+    <Layout title={metaData.title} metaData={metaData}></Layout>
   )
 }
 
