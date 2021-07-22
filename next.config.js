@@ -13,6 +13,7 @@ const SentryWebpackPluginOptions = {
 }
 
 const nextOptions = {
+  webpack5: false,
   i18n,
   env: {
     SHOW_DEV: process.env.SHOW_DEV,
