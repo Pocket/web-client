@@ -16,7 +16,6 @@ import { ITEMS_TAG_FAILURE } from 'actions'
 import { ITEMS_TAG_EDIT } from 'actions'
 import { ITEMS_TAG_SUGGEST_REQUEST } from 'actions'
 import { ITEMS_TAG_SUGGEST_SUCCESS } from 'actions'
-import { ITEMS_TAG_SUGGEST_FAILURE } from 'actions'
 
 import { API_ACTION_ADD_TAGS, API_ACTION_REPLACE_TAGS } from 'common/constants'
 

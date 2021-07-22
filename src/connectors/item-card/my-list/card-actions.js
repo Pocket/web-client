@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import { ItemActions } from 'components/item-actions/inline'
 import { itemActionStyle } from 'components/item-actions/base'
-import { menuItemStyle } from 'components/item-actions/base'
 
 import { IosShareIcon } from '@pocket/web-ui'
 import { DeleteIcon } from '@pocket/web-ui'
@@ -138,7 +137,7 @@ export function ActionsMyList({ id, position }) {
   )
 }
 
-export function ActionsBulk({ id, position }) {
+export function ActionsBulk({ id }) {
   const bulkList = useSelector((state) => state.bulkEdit.selected)
   const selected = bulkList?.map((item) => item.id).includes(id)
 

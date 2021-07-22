@@ -1,8 +1,4 @@
 import { css, cx } from 'linaria'
-import { breakpointSmallHandset } from '@pocket/web-ui'
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { breakpointTinyTablet } from '@pocket/web-ui'
-import { breakpointLargeTablet } from '@pocket/web-ui'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { capitalizeFirstLetter } from 'common/utilities'
 import { PinFilledIcon } from '@pocket/web-ui'
@@ -70,7 +66,9 @@ export const TaggedHeader = ({
   return (
     <div className={tagPageHeaderStyle}>
       <header className={myListHeaderStyle}>
-        <h1 className="pageTitle" data-cy="page-title">{capitalizeFirstLetter(title)}</h1>
+        <h1 className="pageTitle" data-cy="page-title">
+          {capitalizeFirstLetter(title)}
+        </h1>
         <FilterMenu subset={subset} filter={filter} tag={tag} />
         <ListSort toggleSortOrder={toggleSortOrder} sortOrder={sortOrder} />
       </header>

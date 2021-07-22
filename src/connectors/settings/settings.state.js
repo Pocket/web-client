@@ -1,4 +1,4 @@
-import { put, takeLatest, call, select } from 'redux-saga/effects'
+import { put, takeLatest, select } from 'redux-saga/effects'
 import { getAppSettings } from 'common/api/settings'
 import { putAppSettings } from 'common/api/settings'
 
@@ -8,7 +8,6 @@ import { getObjectWithValidKeysOnly } from 'common/utilities'
 import { SETTINGS_FETCH_REQUEST } from 'actions'
 import { SETTINGS_FETCH_SUCCESS } from 'actions'
 import { SETTINGS_FETCH_FAILURE } from 'actions'
-import { SETTINGS_SAVE_REQUEST } from 'actions'
 import { SETTINGS_SAVE_SUCCESS } from 'actions'
 import { SETTINGS_SAVE_FAILURE } from 'actions'
 import { SETTINGS_UPDATE } from 'actions'
@@ -30,7 +29,7 @@ const initialState = {
  --------------------------------------------------------------- */
 export const hydrateSettings = () => ({ type: SETTINGS_FETCH_REQUEST })
 
- /** REDUCERS
+/** REDUCERS
  --------------------------------------------------------------- */
 export const settingsReducers = (state = initialState, action) => {
   switch (action.type) {
@@ -66,7 +65,7 @@ export const settingsReducers = (state = initialState, action) => {
   }
 }
 
- /** SAGAS :: WATCHERS
+/** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const settingsSagas = [
   takeLatest(SETTINGS_FETCH_REQUEST, fetchSettings),
@@ -78,14 +77,14 @@ export const settingsSagas = [
   takeLatest(PINNED_TOPICS_SET, saveSettings)
 ]
 
- /** SAGA :: RESPONDERS
+/** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 const getSettings = (state) => state.settings
 
 function* fetchSettings() {
   try {
     const { error, status, ...settings } = yield getAppSettings()
-    if (status !== 1) throw new Error('Unable to fetch settings')
+    if (status !== 1) throw new Error(`Unable to fetch settings: ${error}`)
 
     yield put({ type: SETTINGS_FETCH_SUCCESS, settings })
   } catch (error) {
@@ -97,11 +96,11 @@ function* saveSettings() {
   try {
     const settings = yield select(getSettings)
     const { error, status } = yield putAppSettings(settings)
-    if (status !== 1) throw new Error('Unable to save settings')
+    if (status !== 1) throw new Error(`Unable to save settings: ${error}`)
 
     yield put({ type: SETTINGS_SAVE_SUCCESS })
   } catch (error) {
-    yield put({ type: SETTINGS_SAVE_FAILURE, error})
+    yield put({ type: SETTINGS_SAVE_FAILURE, error })
   }
 }
 
@@ -112,7 +111,7 @@ function* convertLocalSettings() {
   }
 
   const keysToDelete = ['user_tags_pinned', CACHE_KEY_HOME_STORED_TOPICS]
-  keysToDelete.forEach(val => {
+  keysToDelete.forEach((val) => {
     localStore.removeItem(val)
   })
 

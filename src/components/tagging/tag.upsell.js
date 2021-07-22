@@ -1,7 +1,5 @@
-import React, { Component } from 'react'
 import { css } from 'linaria'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
-import { DivideHorizontal } from 'components/divider/divider'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { PREMIUM_URL } from 'common/constants'
 import { PremiumIcon } from '@pocket/web-ui'

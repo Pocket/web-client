@@ -16,15 +16,12 @@ const getTriggers = (depthIncrements, callback) => {
 
 const DepthTracking = ({ depthIncrements, onScrollDepth, children }) => {
   const [positions, setPositions] = useState(null)
-  const [triggers, setTriggers] = useState(
-    getTriggers(depthIncrements, onScrollDepth)
-  )
+  const triggers = getTriggers(depthIncrements, onScrollDepth)
   const ref = useRef(null)
 
   function buildPositions() {
     const elementHeight = ref.current.getBoundingClientRect().height
-    const elementToTop =
-      ref.current.getBoundingClientRect().top + window.scrollY
+    const elementToTop = ref.current.getBoundingClientRect().top + window.scrollY
 
     const positionMap = depthIncrements.map((percent) => ({
       pixels: elementHeight * (percent / 100) + elementToTop,

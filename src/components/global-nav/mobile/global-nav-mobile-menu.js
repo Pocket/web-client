@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
@@ -253,8 +252,6 @@ export const Menu = ({
 const GlobalNavMobileMenu = ({
   links,
   subLinks,
-  subset,
-  tag,
   selectedLink,
   onLinkClick,
   isUserLoggedIn,
@@ -376,7 +373,7 @@ GlobalNavMobileMenu.propTypes = {
 GlobalNavMobileMenu.defaultProps = {
   links: DEFAULT_LINKS,
   selectedLink: null,
-  onLinkClick(event, linkName, linkUrl) {},
+  onLinkClick() {},
   onOpen() {},
   onClosed() {},
   isUserLoggedIn: false,

@@ -116,7 +116,7 @@ const EmailSignupForm = ({
   const [isRecaptchaProcessing, setIsRecaptchaProcessing] = useState(false)
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(!showCheckbox)
 
-  function handleInputFocus(event) {
+  function handleInputFocus() {
     onFocus(instanceId)
   }
 
@@ -183,24 +183,18 @@ const EmailSignupForm = ({
           disabled={isProcessing || isRecaptchaProcessing}
           variant={buttonVariant}
           data-cy="submit-button">
-          {isProcessing || isRecaptchaProcessing
-            ? buttonLabelProcessing
-            : buttonLabel}
+          {isProcessing || isRecaptchaProcessing ? buttonLabelProcessing : buttonLabel}
         </Button>
       </div>
       {showCheckbox ? (
-        <div
-          className={classnames(checkboxStyle)}
-          data-cy="checkbox">
+        <div className={classnames(checkboxStyle)} data-cy="checkbox">
           <input
             type="checkbox"
             onChange={handleCheckboxClick}
             name={`${instanceId}-signup-checkbox`}
             id={`${instanceId}-confirm-subscription`}
           />
-          <label htmlFor={`${instanceId}-confirm-subscription`}>
-            {checkboxLabel}
-          </label>
+          <label htmlFor={`${instanceId}-confirm-subscription`}>{checkboxLabel}</label>
         </div>
       ) : null}
       <Recaptcha
@@ -329,11 +323,11 @@ EmailSignupForm.propTypes = {
 EmailSignupForm.defaultProps = {
   isProcessing: false,
   errorMessage: null,
-  onValidSubmit(instanceId, email, recaptchaResponseKey) {},
-  onValidationError(instanceId) {},
-  onFocus(instanceId) {},
-  onCheckboxChecked(instanceId, isCheckboxChecked) {},
-  onChange(instanceId, value) {},
+  onValidSubmit() {},
+  onValidationError() {},
+  onFocus() {},
+  onCheckboxChecked() {},
+  onChange() {},
   formClassName: null,
   inputClassName: null,
   buttonClassName: null,

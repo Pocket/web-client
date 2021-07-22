@@ -10,7 +10,7 @@ import { breakpointSmallDesktop } from '@pocket/web-ui' // 1279
 import { breakpointSmallTablet } from '@pocket/web-ui' // 839
 import { breakpointTinyTablet } from '@pocket/web-ui' // 719
 import { breakpointLargeHandset } from '@pocket/web-ui' // 599
-import { Trans, useTranslation } from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 
 const DEFAULT_ERROR = 'Oops! Something went wrong.'
 const FORM_ID = 'explore-engagement-signup'

@@ -1,21 +1,10 @@
 import { PopupMenuGroup } from '@pocket/web-ui'
-import { css } from 'linaria'
-import {
-  StepperWrapper,
-  IconWrapper,
-  StepperButton
-} from 'components/stepper/stepper'
+import { StepperWrapper, IconWrapper, StepperButton } from 'components/stepper/stepper'
 import { StepperRange } from 'components/stepper/stepper-range'
 import { AddIcon, RemoveIcon, TextSettingsIcon } from '@pocket/web-ui'
 import { useTranslation } from 'next-i18next'
 
-export const FontSizeSettings = ({
-  clickDecrease,
-  clickIncrease,
-  range,
-  current,
-  setCurrent
-}) => {
+export const FontSizeSettings = ({ clickDecrease, clickIncrease, range, current, setCurrent }) => {
   const { t } = useTranslation()
 
   const plusActive = () => current < range.length - 1

@@ -17,7 +17,6 @@ import { trackTopicClick } from 'containers/discover/discover.analytics'
 
 //Pages
 import Layout from 'layouts/main'
-import ErrorPage from 'pages/_error'
 
 // Components
 import { CardPageHeader } from 'components/headers/discover-header'

@@ -1,5 +1,4 @@
 import { GraphQLClient } from 'graphql-request'
-import { request } from 'common/utilities/request/request'
 import getArticleBySlug from 'common/api/graphql-queries/get-article-by-slug'
 import { ARTICLE_API_URL, ARTICLE_API_KEY } from 'common/constants'
 import fetch from 'isomorphic-unfetch'
@@ -24,9 +23,9 @@ export async function getSyndicatedArticle(slug) {
 
 export async function getRandomSyndicatedArticle(baseUrl) {
   try {
-    const { title } = await fetch(
-      `http://${baseUrl}/mockAPI/article/random`
-    ).then((response) => response.json())
+    const { title } = await fetch(`http://${baseUrl}/mockAPI/article/random`).then((response) =>
+      response.json()
+    )
 
     return getSyndicatedArticle(title)
   } catch {

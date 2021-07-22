@@ -165,7 +165,6 @@ const Modal = ({
 }) => {
   // aids in accessibility, http://reactcommunity.org/react-modal/accessibility/
   ReactModal.setAppElement(appRootSelector)
-  const { t } = useTranslation()
 
   const [readyAnimate, setReadyAnimate] = useState(false)
   let modalContentRef = useRef(null)

@@ -19,7 +19,7 @@ const loadMoreStyle = css`
   }
 `
 
-export function LoadMore({ count, total, loadMore, isLoading } ) {
+export function LoadMore({ count, total, loadMore }) {
   const { ref, inView } = useInView()
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { takeLatest, put, takeEvery } from 'redux-saga/effects'
+import { put, takeEvery } from 'redux-saga/effects'
 import {
   ARTICLE_HYDRATE,
   ARTICLE_SAVE_REQUEST,
@@ -8,10 +8,7 @@ import {
   ARTICLE_UNSAVE_SUCCESS,
   ARTICLE_UNSAVE_FAILURE
 } from 'actions'
-import {
-  getSyndicatedArticle,
-  getRandomSyndicatedArticle
-} from 'common/api/syndicated-article'
+import { getSyndicatedArticle, getRandomSyndicatedArticle } from 'common/api/syndicated-article'
 import { saveItem } from 'common/api/saveItem'
 import { removeItem } from 'common/api/removeItem'
 import { HYDRATE } from 'actions'

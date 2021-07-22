@@ -17,8 +17,6 @@ const isDismissalExpired = (timeDismissed) =>
 
 const Chyron = ({ instanceId, initialDismissed, initialSuccess, children }) => {
   const [isDismissed, setDismissed] = useState(initialDismissed)
-  const [ctaIsSuccessful, setSuccessful] = useState(initialSuccess)
-
   const chyronId = getChyronId(instanceId)
   const chyronDismissalDate = getChyronDismissalDate(instanceId)
 
@@ -30,16 +28,13 @@ const Chyron = ({ instanceId, initialDismissed, initialSuccess, children }) => {
     // A chyron is considered completed if it's main use case has been fulfilled. For example,
     // if a chyron is being used to gather pocket hits signups, it would be completed upon a
     // user successfully signing up for pocket hits
-    if (chyronCompleted === CHYRON_COMPLETED || ctaIsSuccessful) {
+    if (chyronCompleted === CHYRON_COMPLETED || initialSuccess) {
       setDismissed(true)
       return
     }
 
     //  check if the dismissal date > 30 days
-    if (
-      chyronCompleted === CHYRON_NOT_COMPLETED &&
-      chyronDismissedDate !== null
-    ) {
+    if (chyronCompleted === CHYRON_NOT_COMPLETED && chyronDismissedDate !== null) {
       if (isDismissalExpired(chyronDismissedDate)) {
         setDismissed(false)
         localStore.removeItem(chyronDismissalDate)
@@ -59,7 +54,7 @@ const Chyron = ({ instanceId, initialDismissed, initialSuccess, children }) => {
     resolveDismissedState()
   }, [])
 
-  return isDismissed || ctaIsSuccessful ? null : (
+  return isDismissed || initialSuccess ? null : (
     <div data-cy="chyron-wrapper">
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, {

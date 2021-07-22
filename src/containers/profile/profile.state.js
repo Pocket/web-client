@@ -1,6 +1,5 @@
 import { put, call, takeEvery } from 'redux-saga/effects'
 import { getUserProfile } from 'common/api/profile'
-import { arrayToObject } from 'common/utilities'
 import { sendItemActions } from 'common/api/item-actions'
 
 import { API_ACTION_FOLLOW_USER } from 'common/constants'

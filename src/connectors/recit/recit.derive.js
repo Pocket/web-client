@@ -1,6 +1,5 @@
 import { READING_WPM } from 'common/constants'
 import { domainForUrl } from 'common/utilities'
-import { urlWithPocketRedirect } from 'common/utilities'
 
 export function deriveReaderRecitItems(recommendations) {
   /**
@@ -127,26 +126,6 @@ function readTime({ item }) {
 function readTimeFromWordCount(wordCount) {
   if (!wordCount) return false
   return Math.ceil(parseInt(wordCount, 10) / READING_WPM)
-}
-
-/**
- * SYNDICATION
- * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
- * @returns {bool} if the item is syndicated or not
- */
-const syndicated = function ({ item }) {
-  if (!item) return false
-  return 'syndicated_article' in item
-}
-
-const devLink = function (item) {
-  // In Dev, don't use redirect so we may test article view more easily
-  const isSyndicated = syndicated({ item })
-  const isDev = process.env.SHOW_DEV === 'included'
-  const path = item?.resolved_url || false
-  return isSyndicated && isDev && path
-    ? `discover/item/${path.substring(path.lastIndexOf('/') + 1)}`
-    : false
 }
 
 /**

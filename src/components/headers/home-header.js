@@ -88,31 +88,22 @@ export const HomeCollectionHeader = ({ sectionTitle, sectionDescription, clickEv
       <h2 className="sectionTitle">{sectionTitle}</h2>
       <div className={cardPageSubheaderLinkStyle}>
         {sectionDescription ? <p>{sectionDescription}</p> : null}
-        <Link href={`/collections/?src=home-view-more`}>
-          <a onClick={clickEvent}>
-            View More Collections
-          </a>
+        <Link href="/collections/?src=home-view-more">
+          <a onClick={clickEvent}>View More Collections</a>
         </Link>
       </div>
     </header>
   ) : null
 }
 
-export const HomeTopicHeader = ({
-  topicSlug,
-  sectionTitle,
-  sectionDescription,
-  clickEvent
-}) => {
+export const HomeTopicHeader = ({ topicSlug, sectionTitle, sectionDescription, clickEvent }) => {
   return sectionTitle ? (
     <header className={cardPageHeaderStyle}>
       <h3 className="sectionTitle">{sectionTitle}</h3>
       <div className={cardPageSubheaderLinkStyle}>
         {sectionDescription ? <p>{sectionDescription}</p> : null}
         <Link href={`/explore/${topicSlug}?src=home-view-more`}>
-          <a onClick={clickEvent}>
-            View More Articles
-          </a>
+          <a onClick={clickEvent}>View More Articles</a>
         </Link>
       </div>
     </header>

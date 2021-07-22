@@ -40,9 +40,7 @@ export const TypeAheadItem = ({ item, index, action, isActive }) => {
   const clickAction = () => action(index)
 
   return (
-    <div
-      className={classNames(itemWrapper, { isActive })}
-      onClick={clickAction}>
+    <div className={classNames(itemWrapper, { isActive })} onClick={clickAction}>
       <span ref={ref}>{item}</span>
     </div>
   )

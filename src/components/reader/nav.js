@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import Link from 'next/link'
 import { css, cx } from 'linaria'
 import {
   ArrowLeftIcon,

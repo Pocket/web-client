@@ -51,7 +51,7 @@ export const BookmarkIcon = ({ newSaveCount = 0 }) => {
       setHasChanged(false)
       setShow(true)
     }
-  }, [inView, saveCountChange])
+  }, [hasChanged, inView, newSaveCount, saveCountChange])
 
   const bookmarkClassName = cx(bookmarkStyles, show && 'visible')
 

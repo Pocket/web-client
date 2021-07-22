@@ -1,4 +1,3 @@
-import { css } from 'linaria'
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { ActionsFeed } from './card-actions'
@@ -22,7 +21,8 @@ export const RecommendedFeedCard = ({ id, position }) => {
    * ----------------------------------------------------------------
    */
   const onOpen = () => dispatch(trackItemOpen(position, item, 'recommended.feed.open'))
-  const onImpression = () => dispatch(trackItemImpression(position, item, 'recommended.feed.impression'))
+  const onImpression = () =>
+    dispatch(trackItemImpression(position, item, 'recommended.feed.impression'))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
 
   return item ? (

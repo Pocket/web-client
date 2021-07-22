@@ -139,7 +139,7 @@ TopicsPillbox.defaultProps = {
   headingText: 'Discover Articles By Topic',
   headingClassName: null,
   alignItems: 'left',
-  onTopicClick(topicId, topicIndex, componentId) {}
+  onTopicClick() {}
 }
 
 export default TopicsPillbox

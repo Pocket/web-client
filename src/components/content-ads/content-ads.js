@@ -1,4 +1,4 @@
-import { cx, css } from 'linaria'
+import { css } from 'linaria'
 import ProgrammaticAd from 'components/programmatic-ad/programmatic-ad'
 import { AD_TYPE_VERTICAL } from 'components/programmatic-ad/programmatic-ad'
 import { AD_TYPE_HORIZONTAL_LG } from 'components/programmatic-ad/programmatic-ad'
@@ -27,9 +27,9 @@ const RIGHT_RAIL_1_ID = 'div-gpt-ad-6843487-2'
 const RIGHT_RAIL_2_ID = 'div-gpt-ad-6843487-7'
 const BELOW_THE_FOLD = 'div-gpt-ad-6843487-4'
 // unused ad slots
-const MIDDLE_OF_ARTICLE = 'div-gpt-ad-6843487-3'
-const NATIVE_SYNDICATION = 'div-gpt-ad-6843487-5'
-const NATIVE_FRONT_DOOR = 'div-gpt-ad-6843487-6'
+// const MIDDLE_OF_ARTICLE = 'div-gpt-ad-6843487-3'
+// const NATIVE_SYNDICATION = 'div-gpt-ad-6843487-5'
+// const NATIVE_FRONT_DOOR = 'div-gpt-ad-6843487-6'
 
 export function AdAboveTheFold({ allowAds, usePersonalized, ...adTargetingMetadata }) {
   return (

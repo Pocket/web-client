@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react'
 import { css, cx } from 'linaria'
 
 import { PopupMenuGroup } from '@pocket/web-ui'
@@ -46,12 +45,7 @@ const listSettingStyle = css`
   }
 `
 
-export const ListSettings = ({
-  listMode = 'grid',
-  setListMode,
-  setGridMode,
-  setDetailMode
-}) => {
+export const ListSettings = ({ listMode = 'grid', setListMode, setGridMode, setDetailMode }) => {
   const { t } = useTranslation()
 
   const isActive = (current) => current === listMode
@@ -61,31 +55,17 @@ export const ListSettings = ({
       <div className={listSettingStyle}>
         <div className={cx(isActive('list') && 'active')} onClick={setListMode}>
           <button
-            aria-label={t(
-              'settings:display-items-as-a-list',
-              'Display items as a list'
-            )}
-            data-tooltip={t(
-              'settings:display-items-as-a-list',
-              'Display items as a list'
-            )}
+            aria-label={t('settings:display-items-as-a-list', 'Display items as a list')}
+            data-tooltip={t('settings:display-items-as-a-list', 'Display items as a list')}
             data-cy="display-list"
             className={cx(buttonReset, bottomTooltip, 'backing')}>
             <ListViewIcon />
           </button>
         </div>
-        <div
-          className={cx(isActive('detail') && 'active')}
-          onClick={setDetailMode}>
+        <div className={cx(isActive('detail') && 'active')} onClick={setDetailMode}>
           <button
-            aria-label={t(
-              'settings:display-items-in-detail',
-              'Display items in detail'
-            )}
-            data-tooltip={t(
-              'settings:display-items-in-detail',
-              'Display items in detail'
-            )}
+            aria-label={t('settings:display-items-in-detail', 'Display items in detail')}
+            data-tooltip={t('settings:display-items-in-detail', 'Display items in detail')}
             data-cy="display-detail"
             className={cx(buttonReset, bottomTooltip, 'backing')}>
             <DetailViewIcon />
@@ -93,14 +73,8 @@ export const ListSettings = ({
         </div>
         <div className={cx(isActive('grid') && 'active')} onClick={setGridMode}>
           <button
-            aria-label={t(
-              'settings:display-items-as-a-grid',
-              'Display items as a grid'
-            )}
-            data-tooltip={t(
-              'settings:display-items-as-a-grid',
-              'Display items as a grid'
-            )}
+            aria-label={t('settings:display-items-as-a-grid', 'Display items as a grid')}
+            data-tooltip={t('settings:display-items-as-a-grid', 'Display items as a grid')}
             data-cy="display-grid"
             className={cx(buttonReset, bottomTooltip, 'backing')}>
             <GridViewIcon />

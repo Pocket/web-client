@@ -1,4 +1,5 @@
 // @refresh reset
+// eslint-disable quotes
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
@@ -69,15 +70,13 @@ export default function Messages() {
 
   useEffect(() => {
     dispatch(setReleaseNotes(RELEASE_NOTES_VERSION))
-  }, [])
+  }, [dispatch])
 
   return (
     <Layout title={`Pocket - ${t('whats-new:whats-new', "What's New")}`}>
       <SideNav isLoggedIn={isLoggedIn} />
-
       <main className={classNames('main', whatsNewStyles)}>
         <WhatsNewHeader title={t('whats-new:whats-new', "What's New")} />
-
         <Jun242021 />
         <Jun212021 />
         <Mar232021 />

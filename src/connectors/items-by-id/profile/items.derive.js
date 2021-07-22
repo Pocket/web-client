@@ -1,7 +1,6 @@
 import { READING_WPM } from 'common/constants'
 import { domainForUrl } from 'common/utilities'
 import { urlWithPocketRedirect } from 'common/utilities'
-import { urlWithPermanentLibrary } from 'common/utilities'
 
 export function deriveItems(response) {
   /**

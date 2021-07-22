@@ -1,6 +1,5 @@
 import { css } from 'linaria'
 import { SuggestedTag } from 'components/tags/tags'
-import { TagUpsell } from './tag.upsell'
 import { Trans } from 'next-i18next'
 
 const suggestedWrapper = css`
@@ -39,10 +38,7 @@ function StartTagging() {
 function Suggestion({ tag, addTag }) {
   const onClick = () => addTag(tag)
   return (
-    <SuggestedTag
-      className={suggestionStyle}
-      data-cy={`tag-suggestion-${tag}`}
-      onClick={onClick}>
+    <SuggestedTag className={suggestionStyle} data-cy={`tag-suggestion-${tag}`} onClick={onClick}>
       {tag}
     </SuggestedTag>
   )
@@ -58,13 +54,7 @@ function NoSuggestions() {
   )
 }
 
-export function TagSuggestions({
-  suggestedTags,
-  tags,
-  addTag,
-  allTags,
-  since
-}) {
+export function TagSuggestions({ suggestedTags, tags, addTag, allTags, since }) {
   // Loading if we don't have suggestedTags
   if (!suggestedTags || !since) return <Loading />
 

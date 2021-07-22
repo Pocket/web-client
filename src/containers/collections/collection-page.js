@@ -22,7 +22,6 @@ import { AuthorBio } from 'components/content-author/author-bio'
 import { getImageCacheUrl } from 'common/utilities'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { ItemCard } from 'connectors/item-card/collection/story-card'
-import { saveCollection } from 'containers/collections/collections.state'
 
 import { unSaveCollectionPage } from 'containers/collections/collections.state'
 import { saveCollectionPage } from 'containers/collections/collections.state'

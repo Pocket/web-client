@@ -30,17 +30,12 @@ export const Content = ({
     removeAllHighlights()
     let itemsProcessed = 0
     annotations.forEach((highlight, index, array) => {
-      highlightAnnotation(
-        highlight,
-        onHighlightHover,
-        articleRef.current,
-        () => {
-          itemsProcessed++
-          if (itemsProcessed === array.length) {
-            annotationsBuilt()
-          }
+      highlightAnnotation(highlight, onHighlightHover, articleRef.current, () => {
+        itemsProcessed++
+        if (itemsProcessed === array.length) {
+          annotationsBuilt()
         }
-      )
+      })
     })
   }
 
@@ -69,7 +64,7 @@ export const Content = ({
     if (videos) loadParsedVideos(videos)
 
     return () => {
-      linkList.forEach((link, index) => {
+      linkList.forEach((link) => {
         link.removeEventListener('click', sendExternalLinkClick)
       })
     }

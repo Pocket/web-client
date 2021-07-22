@@ -1,4 +1,4 @@
-import { put, takeEvery, take, race, select, call } from 'redux-saga/effects'
+import { put, takeEvery, select, call } from 'redux-saga/effects'
 
 import { ITEMS_BULK_SELECT } from 'actions'
 import { ITEMS_BULK_DESELECT } from 'actions'
@@ -52,10 +52,7 @@ export const itemBulkReducers = (state = initialState, action) => {
         endPosition,
         batchFavorite,
         batchStatus,
-        selected: [
-          ...state.selected,
-          ...items.filter((item) => !selectedIds.includes(item.id))
-        ]
+        selected: [...state.selected, ...items.filter((item) => !selectedIds.includes(item.id))]
       }
     }
 
@@ -148,10 +145,7 @@ export function* itemBulkSelect(action) {
           }
         ]
 
-    const [batchFavorite, batchStatus] = yield setBatchActions([
-      ...items,
-      ...selected
-    ])
+    const [batchFavorite, batchStatus] = yield setBatchActions([...items, ...selected])
 
     yield put({
       type: ITEMS_BULK_ADD,
@@ -177,9 +171,7 @@ export function* itemBulkDeSelect(action) {
 
     const sectionItems = myList[appSection]
     const position = sectionItems.indexOf(id)
-    const itemIds = shift
-      ? sectionItems.slice(position + 1, endPosition + 1)
-      : [id]
+    const itemIds = shift ? sectionItems.slice(position + 1, endPosition + 1) : [id]
     const draftSelected = selected.filter((item) => !itemIds.includes(item.id))
     const [batchFavorite, batchStatus] = yield setBatchActions(draftSelected)
 
@@ -201,9 +193,7 @@ function* itemsBulkToggle(action) {
   const { id } = action
   const selected = yield select(getSelected)
   const isSelected = selected.filter((item) => item.id === id)
-  yield isSelected.length
-    ? call(itemBulkDeSelect, { id })
-    : call(itemBulkSelect, { id })
+  yield isSelected.length ? call(itemBulkDeSelect, { id }) : call(itemBulkSelect, { id })
 }
 
 function setBatchActions(draft) {
@@ -211,13 +201,9 @@ function setBatchActions(draft) {
     return [initialState.batchFavorite, initialState.batchStatus]
   }
 
-  const batchFavorite = draft.every((item) => item.favorite === '1')
-    ? 'unfavorite'
-    : 'favorite'
+  const batchFavorite = draft.every((item) => item.favorite === '1') ? 'unfavorite' : 'favorite'
 
-  const batchStatus = draft.every((item) => item.status === '0')
-    ? 'archive'
-    : 'add'
+  const batchStatus = draft.every((item) => item.status === '0') ? 'archive' : 'add'
 
   return [batchFavorite, batchStatus]
 }

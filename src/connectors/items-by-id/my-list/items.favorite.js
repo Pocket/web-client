@@ -19,8 +19,6 @@ import { ITEMS_FAVORITE_CANCEL } from 'actions'
 import { API_ACTION_FAVORITE } from 'common/constants'
 import { API_ACTION_UNFAVORITE } from 'common/constants'
 
-import { ANALYTICS_INDEX } from 'common/constants'
-
 /** ACTIONS
  --------------------------------------------------------------- */
 export const itemsFavoriteAction = (items) => ({ type: ITEMS_FAVORITE_REQUEST, items }) //prettier-ignore

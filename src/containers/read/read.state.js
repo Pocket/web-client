@@ -40,8 +40,6 @@ import { API_ACTION_ADD_ANNOTATION } from 'common/constants'
 import { API_ACTION_DELETE_ANNOTATION } from 'common/constants'
 
 import { getArticleText } from 'common/api/reader'
-import { getSuggestedTags } from 'common/api/reader'
-import { getRecentFriends } from 'common/api/reader'
 import { getArticleFromId } from 'common/api/reader'
 import { sendItemActions } from 'common/api/item-actions'
 
@@ -182,7 +180,6 @@ export const readSagas = [
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getAnnotations = (state) => state.reader.annotations
-const getPremiumStatus = (state) => parseInt(state.user.premium_status, 10) === 1 || false //prettier-ignore
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */

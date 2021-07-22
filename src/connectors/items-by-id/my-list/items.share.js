@@ -1,7 +1,6 @@
 import { put, call, takeEvery, take, race, select } from 'redux-saga/effects'
 
 import { sendItemActions } from 'common/api/item-actions'
-import { getRecentFriends } from 'common/api/reader'
 
 import { ITEMS_SHARE_REQUEST } from 'actions'
 import { ITEMS_SHARE_CANCEL } from 'actions'
@@ -71,10 +70,7 @@ export const itemShareReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-export const itemShareSagas = [
-  takeEvery(ITEMS_SHARE_REQUEST, itemShare),
-  takeEvery(ITEMS_SHARE_REQUEST, fetchRecentFriends)
-]
+export const itemShareSagas = [takeEvery(ITEMS_SHARE_REQUEST, itemShare)]
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -82,13 +78,6 @@ const getFriendList = (state) => state.itemsToShare.friendList
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-function* fetchRecentFriends() {
-  const response = yield getRecentFriends()
-  const { auto_complete_emails, friends } = response
-  const autoCompleteEmails = auto_complete_emails.map((item) => item.email)
-  // console.log(response, auto_complete_emails, autoCompleteEmails)
-}
-
 function* itemShare({ item }) {
   // Wait for the user to confirm or cancel
   const { cancel, recommend, sendToFriend } = yield race({
