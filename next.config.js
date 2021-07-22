@@ -18,7 +18,7 @@ const nextOptions = {
     SHOW_DEV: process.env.SHOW_DEV,
     RELEASE_VERSION: process.env.RELEASE_VERSION
   },
-  rewrites() {
+  async rewrites() {
     return [
       { source: '/explore', destination: '/discover' },
       { source: '/explore/item/:slug', destination: '/discover/item/:slug' },
