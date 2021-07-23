@@ -129,6 +129,10 @@ export default {
       table: {
         disable: true
       }
+    },
+    partnerType: {
+      options: ['partner', 'sponsor', null],
+      control: { type: 'radio' }
     }
   }
 }
