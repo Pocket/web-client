@@ -30,6 +30,7 @@ import ReactMarkdown from 'react-markdown'
  * @param {boolean} props.showMedia Show image or not
  * @param {boolean} props.hiddenActions Hide actions until hover or not
  * @param {function} props.itemNoImage Action to fire if an item has no image
+ * @param {string} props.partnerType Partner or sponsor
  * Tracking
  * @param {function} props.onItemInView Action to fire when item is in view
  * @param {function} props.onOpen Action to fire when an item is opened
@@ -155,7 +156,7 @@ export const Card = (props) => {
           />
         ) : null}
         <div className="content">
-          <PartnerOverline partnerType={partnerType} />
+          { partnerType ? <PartnerOverline partnerType={partnerType} /> : null }
           <h2 className="title">
             {openUrl ? (
               <Link href={openUrl}>
@@ -241,6 +242,7 @@ Card.propTypes = {
   showMedia: PropTypes.bool,
   hiddenActions: PropTypes.bool,
   position: PropTypes.number,
+  partnerType: PropTypes.string,
   // Tracking
   onItemInView: PropTypes.func,
   onOpen: PropTypes.func,
