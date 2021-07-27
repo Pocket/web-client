@@ -88,6 +88,9 @@ import { actionToastsReducers } from 'connectors/toasts/toast.state'
 import { shortcutReducers } from 'connectors/shortcuts/shortcuts.state.js'
 import { shortcutSagas } from 'connectors/shortcuts/shortcuts.state.js'
 
+import { onboardingReducers } from 'connectors/onboarding/onboarding.state'
+import { onboardingSagas } from 'connectors/onboarding/onboarding.state'
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const discoverReducers = {
@@ -137,7 +140,8 @@ const globalReducers = {
   recit: recitReducers, // Recommended articles, both publisher and pocket
   toasts: actionToastsReducers, // Notifications of action results,
   shortcuts: shortcutReducers, // Keyboard shortcuts,
-  analytics: snowplowReducers //Analytics
+  analytics: snowplowReducers, //Analytics
+  onboarding: onboardingReducers, // Onboarding
 }
 
 export const rootReducer = combineReducers({
@@ -179,7 +183,8 @@ function* rootSaga() {
     ...userSearchSagas,
     ...profileSagas,
     ...profileItemsSagas,
-    ...shortcutSagas
+    ...shortcutSagas,
+    ...onboardingSagas
   ])
 }
 
