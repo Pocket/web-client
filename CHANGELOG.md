@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/Pocket/web-client/compare/v1.16.0...v1.16.1) (2021-07-27)
+
+
+### Bug Fixes
+
+* **onboarding:** adding the dev unleash feature flag for the waypoint ([9558089](https://github.com/Pocket/web-client/commit/9558089b31a3eabb3f1ee0dda701a0f396df7492))
+
 # [1.16.0](https://github.com/Pocket/web-client/compare/v1.15.34...v1.16.0) (2021-07-27)
 
 
