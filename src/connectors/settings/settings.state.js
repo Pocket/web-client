@@ -38,7 +38,7 @@ export const settingsReducers = (state = initialState, action) => {
       const { settings } = action
       return {
         ...state,
-        ...settings
+        ...filterSettings(settings)
       }
     }
 
@@ -63,6 +63,19 @@ export const settingsReducers = (state = initialState, action) => {
     default:
       return state
   }
+}
+
+/** FILTER SETTINGS
+ * Helper function to filter server settings to match keys defined in initialState
+ * @param {object} settings Settings as they were returned from the server
+ */
+const filterSettings = (settings) => {
+  return Object.keys(settings)
+    .filter(key => Object.keys(initialState).includes(key))
+    .reduce((newObj, key) => {
+      newObj[key] = settings[key]
+      return newObj
+    }, {})
 }
 
 /** SAGAS :: WATCHERS
@@ -94,7 +107,8 @@ function* fetchSettings() {
 
 function* saveSettings() {
   try {
-    const settings = yield select(getSettings)
+    const storedSettings = yield select(getSettings)
+    const settings = { ...storedSettings }
     const { error, status } = yield putAppSettings(settings)
     if (status !== 1) throw new Error(`Unable to save settings: ${error}`)
 

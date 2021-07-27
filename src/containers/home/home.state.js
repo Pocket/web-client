@@ -40,7 +40,7 @@ import { PINNED_TOPICS_SET } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const homeHydrate = () => ({ type: HOME_HYDRATE })
+export const homeHydrate = (topicSections) => ({ type: HOME_HYDRATE, topicSections })
 
 export const getCollections = () => ({ type: HOME_COLLECTION_REQUEST })
 export const getRecentSaves = () => ({ type: HOME_RECENT_SAVES_REQUEST })
@@ -60,11 +60,6 @@ const initialState = {
 
 export const homeReducers = (state = initialState, action) => {
   switch (action.type) {
-    case HOME_HYDRATE: {
-      const { topicSections } = action
-      return { ...state, topicSections }
-    }
-
     case HOME_TOPIC_SECTION_SUCCESS: {
       const { topic, items } = action
       return { ...state, [`${topic}Topic`]: items }
@@ -115,7 +110,6 @@ export const homeSagas = [
   takeEvery(HOME_RECENT_SAVES_REQUEST, recentDataRequest),
   takeEvery(HOME_COLLECTION_REQUEST, collectionDataRequest),
   takeEvery(HOME_TOPIC_SECTION_REQUEST, topicDataRequest),
-  takeEvery(HOME_TOPIC_SECTION_SET, topicDataRequest),
   takeEvery(HOME_SAVE_REQUEST, homeSaveRequest),
   takeEvery(HOME_UNSAVE_REQUEST, homeUnSaveRequest),
   takeEvery(HOME_TOPIC_SECTION_SET, setTopicPreferences),
@@ -129,9 +123,7 @@ const getTopicSections = (state) => state.settings.pinnedTopics
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-function* homePreferences() {
-  const topicSections = yield select(getTopicSections)
-
+function* homePreferences({ topicSections }) {
   for (var i = 0; i < topicSections.length; i++) {
     yield put({ type: HOME_TOPIC_SECTION_REQUEST, topic: topicSections[i] })
   }

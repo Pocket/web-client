@@ -6,7 +6,6 @@ import { SideNav } from 'connectors/side-nav/side-nav'
 import Layout from 'layouts/with-sidebar'
 
 import { getTopicList } from 'connectors/topic-list/topic-list.state'
-import { getRecentSaves } from 'containers/home/home.state'
 import { getCollections } from 'containers/home/home.state'
 
 import { HomeGreeting } from 'containers/home/homeGreeting'
@@ -29,15 +28,18 @@ export default function Collection(props) {
   const dispatch = useDispatch()
 
   const userStatus = useSelector((state) => state.user.user_status)
+  const selectedTopics = useSelector((state) => state.settings.pinnedTopics)
   const shouldRender = userStatus !== 'pending'
 
   // Initialize data
   useEffect(() => {
-    dispatch(getRecentSaves())
-    dispatch(homeHydrate())
     dispatch(getTopicList())
     dispatch(getCollections())
   }, [dispatch])
+
+  useEffect(() => {
+    dispatch(homeHydrate(selectedTopics))
+  }, [selectedTopics.length])
 
   return (
     <Layout title={metaData.title} metaData={metaData}>
