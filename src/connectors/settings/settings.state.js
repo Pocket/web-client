@@ -4,6 +4,7 @@ import { putAppSettings } from 'common/api/settings'
 
 import { localStore } from 'common/utilities'
 import { getObjectWithValidKeysOnly } from 'common/utilities'
+import { filterSettings } from 'common/utilities'
 
 import { SETTINGS_FETCH_REQUEST } from 'actions'
 import { SETTINGS_FETCH_SUCCESS } from 'actions'
@@ -38,7 +39,7 @@ export const settingsReducers = (state = initialState, action) => {
       const { settings } = action
       return {
         ...state,
-        ...filterSettings(settings)
+        ...filterSettings(settings, initialState)
       }
     }
 
@@ -63,19 +64,6 @@ export const settingsReducers = (state = initialState, action) => {
     default:
       return state
   }
-}
-
-/** FILTER SETTINGS
- * Helper function to filter server settings to match keys defined in initialState
- * @param {object} settings Settings as they were returned from the server
- */
-const filterSettings = (settings) => {
-  return Object.keys(settings)
-    .filter(key => Object.keys(initialState).includes(key))
-    .reduce((newObj, key) => {
-      newObj[key] = settings[key]
-      return newObj
-    }, {})
 }
 
 /** SAGAS :: WATCHERS

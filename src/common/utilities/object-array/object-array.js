@@ -73,3 +73,16 @@ export function chunk(array, size = 1) {
   }
   return result
 }
+
+/** FILTER SETTINGS
+ * Helper function to filter server settings to match keys defined in initialState
+ * @param {object} settings Settings as they were returned from the server
+ */
+export const filterSettings = (settings, initialState) => {
+  return Object.keys(settings)
+    .filter(key => Object.keys(initialState).includes(key))
+    .reduce((newObj, key) => {
+      newObj[key] = settings[key]
+      return newObj
+    }, {})
+}
