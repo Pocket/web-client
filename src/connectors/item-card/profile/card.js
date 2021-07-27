@@ -17,7 +17,7 @@ export const RecommendedFeedCard = ({ id, position }) => {
     id,
     url: openUrl,
     position,
-    destination: (save_status === 'saved' && !openExternal) ? 'internal' : 'external'
+    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external'
   }
 
   /**
@@ -26,7 +26,6 @@ export const RecommendedFeedCard = ({ id, position }) => {
    */
   const onOpen = () => dispatch(sendSnowplowEvent('profile.feed.open', analyticsData))
   const onImpression = () => dispatch(sendSnowplowEvent('profile.feed.impression', analyticsData))
-    dispatch(trackItemImpression(position, item, 'recommended.feed.impression'))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
 
   return item ? (

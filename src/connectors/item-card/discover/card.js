@@ -14,20 +14,21 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
 
   // Get data from state
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
+  const analyticsInitialized = useSelector((state) => state.analytics.initialized)
 
   const item = useSelector((state) => state.discoverItemsById[id])
   if (!item) return null
-  
-const { save_status, item_id, open_url, openExternal, recommendationId, slateLineup, slate } = item 
 
-  const analyticsInitialized = useSelector((state) => state.analytics.initialized)
+  const { save_status, item_id, open_url, openExternal, recommendationId, slateLineup, slate } =
+    item
+
   const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : open_url
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
     id,
     url: open_url,
     position,
-    destination: (save_status === 'saved' && !openExternal) ? 'internal' : 'external',
+    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external',
     recommendationId,
     slateLineupId: slateLineup?.id,
     slateLineupRequestId: slateLineup?.requestId,
@@ -42,7 +43,8 @@ const { save_status, item_id, open_url, openExternal, recommendationId, slateLin
    * ----------------------------------------------------------------
    */
   const onImpression = () => dispatch(sendSnowplowEvent('discover.impression', analyticsData))
-  const onItemInView = (inView) => (!impressionFired && inView && analyticsInitialized ? onImpression() : null)
+  const onItemInView = (inView) =>
+    !impressionFired && inView && analyticsInitialized ? onImpression() : null
   const onOpen = () => dispatch(sendSnowplowEvent('discover.open', analyticsData))
 
   return (

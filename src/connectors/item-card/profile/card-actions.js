@@ -22,7 +22,7 @@ export function ActionsFeed({ id, position }) {
     id,
     url: save_url,
     position,
-    destination: (save_status === 'saved' && !openExternal) ? 'internal' : 'external'
+    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external'
   }
 
   // Prep save action
@@ -40,7 +40,7 @@ export function ActionsFeed({ id, position }) {
   const url = openExternal ? open_url : `/read/${id}`
   const onOpen = () => {
     const data = { ...analyticsData, url }
-    dispatch(sendSnowplowEvent('profile.feed.open'))
+    dispatch(sendSnowplowEvent('profile.feed.open', data))
   }
 
   return item ? (
@@ -55,7 +55,7 @@ export function ActionsFeed({ id, position }) {
         saveStatus={save_status}
         id={id}
       />
-      { isSelf ? (
+      {isSelf ? (
         <OverflowAction
           menuItems={[
             {

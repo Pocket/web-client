@@ -12,14 +12,15 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 export function ItemCard({ id, cardShape, className, showExcerpt = false, position }) {
   const dispatch = useDispatch()
   // Get data from state
-  const impressionFired = useSelector((state) => state.analytics.impressions.includes(item?.open_url))
   const analyticsInitialized = useSelector((state) => state.analytics.initialized)
 
   const item = useSelector((state) => state.collectionStoriesById[id])
- if (!item) return null
+  const impressionFired = useSelector((state) =>
+    state.analytics.impressions.includes(item?.open_url)
+  )
 
+  if (!item) return null
   const { url } = item
-  const openUrl = url
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
     url,
@@ -32,7 +33,8 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
    * ----------------------------------------------------------------
    */
   const onImpression = () => dispatch(sendSnowplowEvent('collection.impression', analyticsData))
-  const onItemInView = (inView) => (!impressionFired && inView && analyticsInitialized ? onImpression() : null)
+  const onItemInView = (inView) =>
+    !impressionFired && inView && analyticsInitialized ? onImpression() : null
   const onOpen = () => dispatch(sendSnowplowEvent('collection.open', analyticsData))
 
   return (
