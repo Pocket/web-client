@@ -16,8 +16,6 @@ import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 import { appSetPreferences } from 'connectors/app/app.state'
 import { hydrateSettings } from 'connectors/settings/settings.state'
 
-import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
-
 import { PostTrustInit } from 'connectors/one-trust/one-trust'
 
 /** Setup Files
@@ -38,9 +36,6 @@ function PocketWebClient({ Component, pageProps, err }) {
   const { authRequired } = pageProps
 
   useEffect(() => {
-    // Fired on componentDidMount in web-app-draft
-    legacyAnalyticsTrack({ action: 'opened_app' })
-
     // Log out version for quick scan.  Can also help support get a read on
     // what version a user is on when reporting an error
     const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'

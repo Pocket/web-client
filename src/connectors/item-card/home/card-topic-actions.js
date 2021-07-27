@@ -3,8 +3,7 @@ import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { itemActionStyle } from 'components/item-actions/base'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveHomeItem } from 'containers/home/home.state'
-import { trackItemSave } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export function ActionsTopic({ id, position }) {
   const dispatch = useDispatch()
@@ -17,13 +16,17 @@ export function ActionsTopic({ id, position }) {
 
   // Prep save action
   const onSave = () => {
+    const data = { id, url: save_url, position }
     dispatch(saveHomeItem(id, save_url, position))
-    dispatch(trackItemSave(position, item, 'home.topic.save'))
+    dispatch(sendSnowplowEvent('home.topic.save', data))
   }
 
   // Open action
   const url = openExternal ? open_url : `/read/${id}`
-  const onOpen = () => dispatch(trackItemOpen(position, item, 'home.topic.open', url))
+  const onOpen = () => {
+    const data = { id, url, position, destination: 'internal' }
+    dispatch(sendSnowplowEvent('home.topic.open', data))
+  }
 
   return item ? (
     <div className={`${itemActionStyle} actions`}>

@@ -22,8 +22,8 @@ import { topTooltipDelayed } from 'components/tooltip/tooltip'
 
 import { openWindow } from 'common/utilities'
 
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { itemsShareCancel } from 'connectors/items-by-id/my-list/items.share'
-import { itemsSocialShare } from 'connectors/items-by-id/my-list/items.share'
 
 const socialIcons = css`
   margin: 0;
@@ -96,17 +96,22 @@ export const BufferShareButton = ({ url, text, onShareWindowClose, children, ...
 export const ShareSocial = function ({ item, quote, position = 0 }) {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const { open_url, excerpt, title } = item
+  const { open_url, excerpt, title, item_id } = item
+  const analyticsData = {
+    id: item_id,
+    url: open_url,
+    position
+  }
 
   const cancelShare = () => dispatch(itemsShareCancel())
   const onSocialShare = (service) => {
-    dispatch(itemsSocialShare(item, position, `share.${service}`))
+    dispatch(sendSnowplowEvent(`share.${service}`, analyticsData))
     cancelShare()
   }
   const copyAction = () => ({ type: COPY_ITEM_URL })
   const copyUrl = async () => {
     await copy(open_url)
-    dispatch(itemsSocialShare(item, position, 'share.copy'))
+    dispatch(sendSnowplowEvent('share.copy', analyticsData))
     dispatch(copyAction())
     cancelShare()
   }

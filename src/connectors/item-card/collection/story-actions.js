@@ -5,8 +5,7 @@ import { saveStory } from 'connectors/items-by-id/collection/stories.state'
 
 import { itemActionStyle } from 'components/item-actions/base'
 
-import { trackItemSave } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export function ActionsCollection({ id, position }) {
   const dispatch = useDispatch()
@@ -16,15 +15,20 @@ export function ActionsCollection({ id, position }) {
   if (!item) return null
 
   const { save_url: url, save_status = 'unsaved' } = item
+  const analyticsData = {
+    url,
+    position,
+    destination: 'external'
+  }
 
   // Prep save action
   const onSave = () => {
     dispatch(saveStory(id, url))
-    dispatch(trackItemSave(position, { url }, 'collection.story.save'))
+    dispatch(sendSnowplowEvent('collection.save', analyticsData))
   }
 
   // Open action
-  const onOpen = () => dispatch(trackItemOpen(position, { url }, 'collection.story.open', url))
+  const onOpen = () => dispatch(sendSnowplowEvent('collection.open', analyticsData))
 
   return item ? (
     <div className={`${itemActionStyle} actions`}>

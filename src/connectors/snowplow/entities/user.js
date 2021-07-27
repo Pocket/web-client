@@ -1,4 +1,5 @@
 import { getSchemaUri } from 'common/api/snowplow-analytics'
+import { getObjectWithValidKeysOnly } from 'common/utilities'
 
 /**
  * Schema information:
@@ -13,20 +14,12 @@ const USER_SCHEMA_URL = getSchemaUri('user')
  * @param hashedSessionGuid {string} - The hashed backend cookie-based identifier for a user (logged in or out). @required
  * @returns {{schema: *, data: {hashed_guid: string, ?hashed_user_id: string}}}
  */
-const createUserEntity = (hashedUserId = false, hashedSessionGuid) => {
-  const data = hashedUserId
-    ? {
-        hashed_user_id: hashedUserId,
-        hashed_guid: hashedSessionGuid
-      }
-    : {
-        hashed_guid: hashedSessionGuid
-      }
-
-  return {
-    schema: USER_SCHEMA_URL,
-    data
-  }
-}
+const createUserEntity = (hashedUserId = null, hashedSessionGuid) => ({
+  schema: USER_SCHEMA_URL,
+  data: getObjectWithValidKeysOnly({
+    hashed_user_id: hashedUserId,
+    hashed_guid: hashedSessionGuid
+  })
+})
 
 export default createUserEntity

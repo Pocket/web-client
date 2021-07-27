@@ -5,7 +5,7 @@ const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
 
 /**
  * Schema information:
- * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/f74e3dd14cdf3157fbced8f7f78061f62016bdbe1e75c85338f3767ea5f139e7
+ * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/da71630eac419a8fe06a5b6ff7b4030d53f07713feb23d0d72adf61fc950377b
  */
 const API_USER_SCHEMA_URL = getSchemaUri('api_user', '1-0-1')
 

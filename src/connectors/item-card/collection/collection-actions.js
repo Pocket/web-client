@@ -2,12 +2,8 @@ import React from 'react'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveCollectionPage } from 'containers/collections/collections.state'
-
 import { itemActionStyle } from 'components/item-actions/base'
-
-import { trackItemSave } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
-
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { BASE_URL } from 'common/constants'
 
 export function ActionsCollection({ id, position }) {
@@ -18,16 +14,19 @@ export function ActionsCollection({ id, position }) {
   if (!item) return null
 
   const { url, pageSaveStatus } = item
-  const analyticsItem = { url: `${BASE_URL}${url}` }
+  const analyticsItem = {
+    url: `${BASE_URL}${url}`,
+    position
+  }
 
   // Prep save action
   const onSave = () => {
     dispatch(saveCollectionPage(id))
-    dispatch(trackItemSave(position, analyticsItem, 'collection.save'))
+    dispatch(sendSnowplowEvent('collection.save', analyticsItem))
   }
 
   // Open action
-  const onOpen = () => dispatch(trackItemOpen(position, analyticsItem, 'collection.open', url))
+  const onOpen = () => dispatch(sendSnowplowEvent('collection.open', analyticsItem))
 
   return item ? (
     <div className={`${itemActionStyle} actions`}>

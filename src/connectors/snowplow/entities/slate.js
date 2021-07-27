@@ -10,29 +10,29 @@ const SLATE_SCHEMA_URL = getSchemaUri('slate')
 /**
  * Entity to describe a slate of recommendations. Should be included with any impression or engagement events with recommendations.
  *
- * @param slate_id {string} - A unique slug/id that is used to identify a slate and its specific configuration. @required
- * @param request_id {string} - A guid that is unique to every API request that returns slates. @required
- * @param experiment {string} - A string identifier of a recommendation experiment. @required
- * @param index {int} - The zero-based index value of the slate’s display position among other slates in the same lineup. @required
+ * @param slateId {string} - A unique slug/id that is used to identify a slate and its specific configuration. @required
+ * @param slateRequestId {string} - A guid that is unique to every API request that returns slates. @required
+ * @param slateExperiment {string} - A string identifier of a recommendation experiment. @required
+ * @param position {int} - The zero-based index value of the slate’s display position among other slates in the same lineup. @required
  * @param display_name {string} - The name to show the user for a slate. @optional
  * @param description {string} - The description of the slate. @optional
  *
  * @returns {{schema: *, data: {slate_id: string, request_id: string, experiment: string, index: int, ?display_name: string, ?description: string }}}
  */
 export const createSlateEntity = ({
-  slate_id,
-  request_id,
-  experiment,
-  index,
+  slateId,
+  slateRequestId,
+  slateExperiment,
+  position,
   display_name,
   description
 }) => ({
   schema: SLATE_SCHEMA_URL,
   data: getObjectWithValidKeysOnly({
-    slate_id,
-    request_id,
-    experiment,
-    index,
+    slate_id: slateId,
+    request_id: slateRequestId,
+    experiment: slateExperiment,
+    index: position,
     display_name,
     description
   })

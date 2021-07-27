@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux'
-import { trackTopicClick } from './topic.analytics'
 import { CardPageHeader } from 'components/headers/discover-header'
 import { SectionHeader } from 'components/headers/section-header'
 import { ItemCard } from 'connectors/item-card/discover/card'
@@ -34,7 +33,7 @@ export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
 
       {/* Algorithmic */}
       <OffsetList items={algorithmicItems} offset={0} cardShape="wide" ItemCard={ItemCard}>
-        <CardTopicsNav topics={topics} track={trackTopicClick} rail={true} />
+        <CardTopicsNav topics={topics} rail={true} />
       </OffsetList>
 
       <OffsetList
@@ -46,7 +45,7 @@ export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
       />
 
       {/* Bottom TopicNav */}
-      <CardTopicsNav topics={topics} track={trackTopicClick} className="no-border" />
+      <CardTopicsNav topics={topics} className="no-border" />
     </>
   )
 }

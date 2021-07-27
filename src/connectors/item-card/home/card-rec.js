@@ -1,9 +1,7 @@
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { ActionsRec } from './card-rec-actions'
-
-import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const RecCard = ({ id, position, className, cardShape = 'detail', showExcerpt = true }) => {
   const dispatch = useDispatch()
@@ -13,14 +11,20 @@ export const RecCard = ({ id, position, className, cardShape = 'detail', showExc
   const { save_status, item_id, original_url, openExternal } = item
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : original_url
+  const analyticsData = {
+    id,
+    url: openUrl,
+    position,
+    destination: (save_status === 'saved' && !openExternal) ? 'internal' : 'external'
+  }
 
   /**
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onImpression = () => dispatch(trackItemImpression(position, item, 'home.rec.impression'))
+  const onOpen = () => dispatch(sendSnowplowEvent('home.rec.open', analyticsData))
+  const onImpression = () => dispatch(sendSnowplowEvent('home.rec.impression', analyticsData))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
-  const onOpen = () => dispatch(trackItemOpen(position, item, 'home.rec.open'))
 
   return item ? (
     <Card

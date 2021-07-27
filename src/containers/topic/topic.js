@@ -1,11 +1,9 @@
 import Layout from 'layouts/main'
-import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import ErrorPage from 'pages/_error'
 import TopicCollection from './topic-collection'
 import TopicPage from './topic-page'
-import { trackPageView } from './topic.analytics'
 import { ReportFeedbackModal } from 'connectors/confirm-report/confirm-report'
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 
@@ -27,9 +25,6 @@ export default function Topic(props) {
 
   const topic = topicList[activeTopic] || activeTopic
   const title = topic?.display_name || topic
-
-  // Track Page View
-  useEffect(trackPageView, [])
 
   // Error if no items are available
   if (!curatedItems?.length && !algorithmicItems?.length) {

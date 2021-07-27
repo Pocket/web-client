@@ -1,3 +1,21 @@
+# [1.16.0](https://github.com/Pocket/web-client/compare/v1.15.34...v1.16.0) (2021-07-27)
+
+
+### Bug Fixes
+
+* **analytics:** adding batch items for snowplow ([ec4d7d5](https://github.com/Pocket/web-client/commit/ec4d7d5b8f2709b7dfc3ddc01e673b6a8f6acc10))
+* **analytics:** adding batch items for snowplow ([0061eee](https://github.com/Pocket/web-client/commit/0061eee971ddb461a5d53cc0e5c6ff3459bd635a))
+* **analytics:** adding report analytics event ([931bed3](https://github.com/Pocket/web-client/commit/931bed3dd2b032768cbdf3f38bdb47341918ebca))
+* **analytics:** update legacy and google analytics ([6a0839c](https://github.com/Pocket/web-client/commit/6a0839c0ae24b563d1befa9b2340b98bd2039569))
+* **discover:** update discover card so slate and sladeid info is conditional ([877863e](https://github.com/Pocket/web-client/commit/877863e83e670a9b216e4c42a62c785d8ab9c4a7))
+* **snowplow:** reconcile all updates into branch after a month of staleness ([9965a76](https://github.com/Pocket/web-client/commit/9965a7622546be3a7b72eacb923603298aa6bec2))
+* **snowplow:** remove unneeded actions and home impression state ([e0a1688](https://github.com/Pocket/web-client/commit/e0a1688424467fb40335eccd768fb12e7c388f32))
+
+
+### Features
+
+* **snowplow:** analytics overhaul ([6393f4c](https://github.com/Pocket/web-client/commit/6393f4c30754f2a193991fb6563e2e0290e48ec1))
+
 ## [1.15.34](https://github.com/Pocket/web-client/compare/v1.15.33...v1.15.34) (2021-07-22)
 
 

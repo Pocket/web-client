@@ -14,8 +14,6 @@ import { ITEMS_SEND_TO_FRIEND_REMOVE } from 'actions'
 import { API_ACTION_SHARE } from 'common/constants'
 import { API_ACTION_RECOMMEND } from 'common/constants'
 
-import { trackItemAction } from 'connectors/snowplow/snowplow.state'
-
 /** ACTIONS
  --------------------------------------------------------------- */
 export const itemsShareAction = (item) => ({ type: ITEMS_SHARE_REQUEST, item }) //prettier-ignore
@@ -24,7 +22,6 @@ export const itemsRecommendConfirm = (comment) => ({ type: ITEMS_RECOMMEND_CONFI
 export const itemsSendToFriendConfirm = (comment) => ({type: ITEMS_SEND_TO_FRIEND_CONFIRM, comment}) //prettier-ignore
 export const itemsShareAddFriend = (tag) => ({type: ITEMS_SEND_TO_FRIEND_ADD, tag}) //prettier-ignore
 export const itemsShareRemoveFriend = (tags) => ({type: ITEMS_SEND_TO_FRIEND_REMOVE, tags}) //prettier-ignore
-export const itemsSocialShare = (item, position, identifier) => trackItemAction(position, item, identifier) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */

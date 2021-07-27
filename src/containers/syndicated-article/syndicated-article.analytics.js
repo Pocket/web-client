@@ -1,37 +1,11 @@
 import ReactGA from 'react-ga'
+import { v4 as uuid } from 'uuid'
 import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
-import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
-import { createUiEntity } from 'connectors/snowplow/entities'
-import { createContentEntity } from 'connectors/snowplow/entities'
-import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
-import { createEngagementEvent } from 'connectors/snowplow/events'
-import { ENGAGEMENT_TYPE_SAVE } from 'connectors/snowplow/events'
 
-// common params used for a number of events in this view
-function getBaseParams() {
-  return {
-    action: 'pv_wt',
-    view: 'web',
-    section: 'syndicated',
-    page: window?.location?.pathname + window?.location?.search
-  }
-}
+export const PUBLISHER_MODULE = 'syndicated_publisher'
+export const POCKET_MODULE = 'syndicated_article'
 
-export function trackPageView() {
-  legacyAnalyticsTrack({
-    ...getBaseParams(),
-    type_id: 'view'
-  })
-}
-
-export function trackShareClick(service) {
-  ReactGA.event({
-    category: 'Storypage',
-    action: 'Clicked Share Button',
-    label: service,
-    nonInteraction: true
-  })
-}
+let PAGE_LOAD_ID = uuid()
 
 export function trackPublisherCTAImpression(publisher) {
   ReactGA.event({
@@ -51,74 +25,13 @@ export function trackPublisherCTAClick(publisher) {
   })
 }
 
-export function trackEmailImpression(formId) {
-  legacyAnalyticsTrack({
-    ...getBaseParams(),
-    identifier: 'newsletter_email',
-    type_id: 'view',
-    extra_content: formId
-  })
-}
-
-export function trackEmailInputFocus(formId) {
-  legacyAnalyticsTrack({
-    ...getBaseParams(),
-    identifier: 'newsletter_email_focus',
-    type_id: 'click',
-    extra_content: formId
-  })
-}
-
-export function trackEmailSubmit(formId) {
-  legacyAnalyticsTrack({
-    ...getBaseParams(),
-    identifier: 'newsletter_email_submit',
-    type_id: 'click',
-    extra_content: formId
-  })
-}
-
 export function trackEmailSubmitSuccess(formId) {
-  legacyAnalyticsTrack({
-    ...getBaseParams(),
-    identifier: 'newsletter_email_success',
-    type_id: 'interact',
-    extra_content: formId
-  })
-
   ReactGA.event({
     category: 'Storypage',
     action: 'Newsletter Signup',
     label: 'Pocket Hits',
     value: 1,
     nonInteraction: false
-  })
-}
-
-export function trackEmailSubmitFailure(formId) {
-  legacyAnalyticsTrack({
-    ...getBaseParams(),
-    identifier: 'newsletter_email_error_submission',
-    type_id: 'interact',
-    extra_content: formId
-  })
-}
-
-export function trackEmailValidationError(formId) {
-  legacyAnalyticsTrack({
-    ...getBaseParams(),
-    identifier: 'newsletter_email_error_validation',
-    type_id: 'interact',
-    extra_content: formId
-  })
-}
-
-export function trackEmailDismiss(formId) {
-  legacyAnalyticsTrack({
-    ...getBaseParams(),
-    identifier: 'newsletter_email_dismiss',
-    type_id: 'click',
-    extra_content: formId
   })
 }
 
@@ -131,18 +44,56 @@ export function trackScrollDepth(depth) {
   })
 }
 
-export function sendSaveToSnowplow({ identifier, itemId, url }) {
-  const snowplowEvent = createEngagementEvent(ENGAGEMENT_TYPE_SAVE)
-
-  const uiEntity = createUiEntity({
-    type: UI_COMPONENT_BUTTON,
-    hierarchy: 0,
-    identifier
+export function trackRecImpression({
+  model,
+  recId,
+  articleId,
+  position,
+  resolvedId,
+  module,
+  location
+}) {
+  legacyAnalyticsTrack({
+    time: Math.round(new Date() / 1000), // unix timestamp
+    action: 'pv_wt',
+    view: 'syndicated_rec_test',
+    cxt_page_load_id: PAGE_LOAD_ID,
+    cxt_model: model,
+    cxt_rec_id: recId,
+    cxt_synd_id: articleId,
+    cxt_position: position,
+    cxt_rec_item_id: resolvedId,
+    cxt_module: module,
+    type_id: 0
   })
 
-  const contentEntity = createContentEntity(url, itemId)
+  ReactGA.event({
+    category: 'Storypage',
+    action: 'Viewed Recommendation',
+    label: `${location} - ${position}`,
+    nonInteraction: true
+  })
+}
 
-  const snowplowEntities = [uiEntity, contentEntity]
+export function trackRecClick({ model, recId, articleId, position, resolvedId, module, location }) {
+  legacyAnalyticsTrack({
+    time: Math.round(new Date() / 1000), // unix timestamp
+    action: 'pv_wt',
+    view: 'syndicated_rec_test',
+    cxt_page_load_id: PAGE_LOAD_ID,
+    cxt_model: model,
+    cxt_rec_id: recId,
+    cxt_synd_id: articleId,
+    cxt_position: position,
+    cxt_rec_item_id: resolvedId,
+    cxt_module: module,
+    type_id: 1
+  })
 
-  sendCustomSnowplowEvent(snowplowEvent, snowplowEntities)
+  ReactGA.event({
+    category: 'Storypage',
+    action: 'Clicked Recommendation',
+    label: `${location} - ${position}`,
+    nonInteraction: true
+  })
 }

@@ -2,8 +2,7 @@ import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { ActionsCollection } from './collection-actions'
 import { setNoImage } from 'connectors/items-by-id/discover/items.state'
-import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { BASE_URL } from 'common/constants'
 
 /**
@@ -17,21 +16,27 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
   // Get data from state
   const storedItem = useSelector((state) => state.collectionsBySlug[id])
   const { url } = storedItem
-  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
+  const fullUrl = `${BASE_URL}${url}`
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(fullUrl))
+  const analyticsInitialized = useSelector((state) => state.analytics.initialized)
   const onImageFail = () => dispatch(setNoImage(id))
 
   // for hero items in a lockup, use the heroImage instead of thumbnail
   const thumbnail = lockup ? storedItem.heroImage : storedItem.thumbnail
   const item = { ...storedItem, thumbnail }
-  const analyticsItem = { url: `${BASE_URL}${url}` }
+  const analyticsItem = {
+    url: fullUrl,
+    position,
+    destination: 'internal'
+  }
 
   /**
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onImpression = () => dispatch(trackItemImpression(position, analyticsItem, 'collection.impression'))
-  const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
-  const onOpen = () => dispatch(trackItemOpen(position, analyticsItem, 'collection.open'))
+  const onImpression = () => dispatch(sendSnowplowEvent('collection.impression', analyticsItem))
+  const onItemInView = (inView) => (!impressionFired && inView && analyticsInitialized ? onImpression() : null)
+  const onOpen = () => dispatch(sendSnowplowEvent('collection.open', analyticsItem))
 
   return (
     <Card

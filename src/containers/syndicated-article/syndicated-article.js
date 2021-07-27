@@ -26,7 +26,7 @@ import { PocketHitsCta } from './pocket-hits-cta'
 import { PublisherRecs } from './publisher-recs'
 import { PocketRecs } from './pocket-recs'
 
-import { sendSaveToSnowplow } from './syndicated-article.analytics'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { trackScrollDepth } from './syndicated-article.analytics'
 
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
@@ -91,12 +91,18 @@ export function SyndicatedArticle({ queryParams = validParams }) {
 
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
 
-  const saveAction = (savedUrl, identifier) => {
+  const saveAction = (savedUrl, value) => {
     if (saveStatus === 'saved') dispatch(unSaveArticleItem(itemId))
     if (saveStatus !== 'saved') {
+      const analyticsData = { id: itemId, url: savedUrl, value }
+      dispatch(sendSnowplowEvent('syndicated.article.save', analyticsData))
       dispatch(saveArticleItem(savedUrl))
-      sendSaveToSnowplow({ itemId, url: savedUrl, identifier })
     }
+  }
+
+  const shareAction = (platform) => {
+    const analyticsData = { id: itemId, url }
+    dispatch(sendSnowplowEvent(`syndicated.share.${platform}`, analyticsData))
   }
 
   return (
@@ -145,9 +151,9 @@ export function SyndicatedArticle({ queryParams = validParams }) {
                 url={url}
                 excerpt={excerpt}
                 onSave={saveAction}
+                onShare={shareAction}
                 saveStatus={saveStatus}
                 isAuthenticated={isAuthenticated}
-                onShare={() => {}}
                 className="sticky"
                 slug={slug}
               />

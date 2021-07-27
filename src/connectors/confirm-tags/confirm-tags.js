@@ -11,10 +11,7 @@ import { itemsTagCancel } from 'connectors/items-by-id/my-list/items.tag'
 import { itemsTagAdd } from 'connectors/items-by-id/my-list/items.tag'
 import { itemsTagRemove } from 'connectors/items-by-id/my-list/items.tag'
 
-import { trackImpression } from 'connectors/snowplow/snowplow.state'
-import { IMPRESSION_COMPONENT_UI } from 'connectors/snowplow/events'
-import { IMPRESSION_REQUIREMENT_VIEWABLE } from 'connectors/snowplow/events'
-import { UI_COMPONENT_BUTTON } from 'connectors/snowplow/entities'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 import { TagList } from 'components/tagging/tag.list'
 import { TagInput } from 'components/tagging/tag.input'
@@ -115,16 +112,7 @@ export function TaggingModal() {
     ? t('confirm:edit-tags', 'Edit Tags')
     : t('confirm:add-tags', 'Add Tags')
 
-  const handleImpression = (identifier) =>
-    dispatch(
-      trackImpression(
-        IMPRESSION_COMPONENT_UI,
-        IMPRESSION_REQUIREMENT_VIEWABLE,
-        UI_COMPONENT_BUTTON,
-        0,
-        identifier
-      )
-    )
+  const handleImpression = (identifier) => dispatch(sendSnowplowEvent(identifier))
 
   return (
     <Modal

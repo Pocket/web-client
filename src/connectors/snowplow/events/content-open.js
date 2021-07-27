@@ -27,7 +27,7 @@ export const CONTENT_OPEN_DESTINATION_EXTERNAL = 'external'
           )} - Indicates whether content was opened with direct intent (e.g. user taps vs. next-up in Listen playlist or infinite scroll) @required
  * @returns {{schema: *, data: {destination: *, trigger: *}}}
  */
-const createContentOpenEvent = (destination, trigger) => ({
+const createContentOpenEvent = ({ destination, trigger = 'click' }) => ({
   schema: CONTENT_OPEN_SCHEMA_URL,
   data: {
     destination,

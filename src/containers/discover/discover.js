@@ -1,19 +1,8 @@
 // Vendor
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 // Analytics
-import { trackPageView } from 'containers/discover/discover.analytics'
-import { trackEmailImpression } from 'containers/discover/discover.analytics'
-import { trackEmailInputFocus } from 'containers/discover/discover.analytics'
-import { trackEmailSubmit } from 'containers/discover/discover.analytics'
-import { trackEmailSubmitSuccess } from 'containers/discover/discover.analytics'
-import { trackEmailSubmitFailure } from 'containers/discover/discover.analytics'
-import { trackEmailValidationError } from 'containers/discover/discover.analytics'
-import { trackSignupCalloutImpression } from 'containers/discover/discover.analytics'
-import { trackSignupCalloutDismiss } from 'containers/discover/discover.analytics'
-import { trackSignupCalloutComplete } from 'containers/discover/discover.analytics'
-import { trackTopicClick } from 'containers/discover/discover.analytics'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 //Pages
 import Layout from 'layouts/main'
@@ -36,7 +25,7 @@ import { useTranslation } from 'next-i18next'
 
 export default function Discover({ url, locale }) {
   const { t } = useTranslation()
-  useEffect(trackPageView, [])
+  const dispatch = useDispatch()
 
   // Select items
   const items = useSelector((state) => state.discoverHome.items)
@@ -55,6 +44,10 @@ export default function Discover({ url, locale }) {
     url
   }
 
+  const trackEvent = (id) => {
+    dispatch(sendSnowplowEvent(id))
+  }
+
   // Return error if no items are present !! TODO: FIX THIS - This is a horrid error
   return items?.length ? (
     <Layout title={metaData.title} metaData={metaData}>
@@ -68,7 +61,7 @@ export default function Discover({ url, locale }) {
       {/* Top Lockup (center)*/}
       <Lockup items={items} offset={0} heroPosition="center" ItemCard={ItemCard} />
 
-      {showTopics ? <CardTopicsNav topics={topics} track={trackTopicClick} /> : null}
+      {showTopics ? <CardTopicsNav topics={topics} /> : null}
 
       {/* Pocket Brand Messaging */}
       <CalloutTop shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
@@ -80,7 +73,7 @@ export default function Discover({ url, locale }) {
 
       <Lockup items={items} offset={10} heroPosition="left" ItemCard={ItemCard} />
 
-      <CalloutBottom shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
+      <CalloutBottom shouldRender={shouldRender} isAuthenticated={isAuthenticated} trackEvent={trackEvent} />
 
       <OffsetList
         items={items}
@@ -91,7 +84,7 @@ export default function Discover({ url, locale }) {
       />
 
       {showTopics ? (
-        <CardTopicsNav topics={topics} track={trackTopicClick} className="no-border" />
+        <CardTopicsNav topics={topics} className="no-border" />
       ) : null}
 
       <ReportFeedbackModal />
@@ -108,12 +101,6 @@ function CalloutTop({ shouldRender, isAuthenticated }) {
         <CallOutBrand />
       ) : (
         <CallOutPocketHitsSignup
-          onVisible={trackEmailImpression}
-          handleEmailInputFocus={trackEmailInputFocus}
-          handleSubmit={trackEmailSubmit}
-          handleSubmitSuccess={trackEmailSubmitSuccess}
-          handleSubmitFailure={trackEmailSubmitFailure}
-          handleValidationError={trackEmailValidationError}
           utmCampaign="explore-inline"
           utmSource="explore"
         />
@@ -122,12 +109,16 @@ function CalloutTop({ shouldRender, isAuthenticated }) {
   ) : null
 }
 
-function CalloutBottom({ shouldRender, isAuthenticated }) {
+function CalloutBottom({ shouldRender, isAuthenticated, trackEvent }) {
+  const impressionEvent = () => trackEvent('discover.signup.impression')
+  const dismissEvent = () => trackEvent('discover.signup.dismiss')
+  const completeEvent = () => trackEvent('discover.signup.click')
+
   return shouldRender ? (
     <CallOutStartLibraryExplore
-      handleImpression={trackSignupCalloutImpression}
-      handleDismiss={trackSignupCalloutDismiss}
-      handleComplete={trackSignupCalloutComplete}
+      handleImpression={impressionEvent}
+      handleDismiss={dismissEvent}
+      handleComplete={completeEvent}
       isAuthenticated={isAuthenticated}
     />
   ) : null

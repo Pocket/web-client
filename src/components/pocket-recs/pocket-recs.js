@@ -8,7 +8,6 @@ import {
   breakpointLargeHandset
 } from '@pocket/web-ui'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { POCKET_MODULE } from 'connectors/recit/recit.analytics'
 import { darkMode, sepiaMode } from '@pocket/web-ui'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
@@ -158,8 +157,6 @@ export const Recommendation = ({ rec, position, handleRecImpression, handleRecCl
 
   function handleVisible() {
     handleRecImpression({
-      location: 'Bottom',
-      module: POCKET_MODULE,
       resolvedId: resolvedItem.resolvedId,
       position
     })
@@ -168,8 +165,6 @@ export const Recommendation = ({ rec, position, handleRecImpression, handleRecCl
   function handleClick(e) {
     e.preventDefault()
     handleRecClick({
-      location: 'Bottom',
-      module: POCKET_MODULE,
       resolvedId: resolvedItem.resolvedId,
       position
     })

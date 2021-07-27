@@ -35,9 +35,7 @@ import { getTopLevelPath } from 'common/utilities'
 
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
-import { sendImpression } from './global-nav.analytics'
-import { sendEngagement } from './global-nav.analytics'
-import { sendMenuEngagement } from './global-nav.analytics'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
@@ -91,7 +89,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const setGridMode = () => dispatch(setListModeGrid())
   const setDetailMode = () => dispatch(setListModeDetail())
 
-  const sendImpressionEvent = (identifier) => dispatch(sendImpression(identifier))
+  const sendImpressionEvent = (identifier) => dispatch(sendSnowplowEvent(identifier))
 
   const pinnedTags = useSelector((state) => state.settings.pinnedTags)
   const pinnedLinks = pinnedTags.map((pin) => {
@@ -198,12 +196,10 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       ]
     : []
 
-  const onLinkClick = (label) => {
-    dispatch(sendMenuEngagement(label))
-  }
+  const onLinkClick = (label) => dispatch(sendSnowplowEvent('global-nav', { label }))
 
   const toolClick = (name) => {
-    dispatch(sendEngagement(`global-nav.${name}`))
+    dispatch(sendSnowplowEvent(`global-nav.${name}`))
     if (name === 'search') dispatch(appSetMode('search'))
     if (name === 'add-item') dispatch(appSetMode('add'))
     if (name === 'bulk-edit') dispatch(appSetMode('bulk'))

@@ -6,7 +6,7 @@ import { HomeJourneyHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTopicSection } from 'containers/home/home.state'
 import { unsetTopicSection } from 'containers/home/home.state'
-import { topicToggleEvent } from 'containers/home/home.analytics'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { topicHeadings } from './listTopics'
 
 const selectionStyles = css`
@@ -83,7 +83,7 @@ export const TopicSelector = () => {
       : setTopicSection
 
     dispatch(topicAction(topic))
-    dispatch(topicToggleEvent(topic.topic))
+    dispatch(sendSnowplowEvent('home.topic.toggle', { label: topicHeadings[topic.topic]?.title }))
   }
 
   return (

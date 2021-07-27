@@ -6,19 +6,8 @@ import { cardGrid } from 'components/items-layout/base'
 import classnames from 'classnames'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
 import { breakpointLargeHandset } from '@pocket/web-ui'
-import { trackEngagement } from 'connectors/snowplow/snowplow.state'
-import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
-import { UI_COMPONENT_LINK } from 'connectors/snowplow/entities'
-
-/* Analytics Event */
-export const sendEngagementEvent = (topic) =>
-  trackEngagement(
-    ENGAGEMENT_TYPE_GENERAL,
-    UI_COMPONENT_LINK,
-    0, // position in list (zero since it's not in list)
-    'home.topic.view-more',
-    topic
-  )
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 const topicRowStyles = css`
   margin-bottom: 1.5rem;
@@ -113,9 +102,7 @@ export const HomeTopicsRow = ({ topic_slug, topic, count = 6 }) => {
   const skeletonArray = [0, 1, 2, 3, 4, 5]
   const displaySkeleton = skeletonArray.slice(0, count)
 
-  const clickEvent = () => {
-    dispatch(sendEngagementEvent(topic_slug))
-  }
+  const clickEvent = () => dispatch(sendSnowplowEvent('home.topic.view-more', { label: topic_slug }))
 
   return (
     <div className={topicRowStyles} data-cy={`topic-row-${topic}`}>

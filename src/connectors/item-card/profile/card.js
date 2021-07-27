@@ -2,9 +2,7 @@ import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { ActionsFeed } from './card-actions'
 import { PostHeader } from 'components/post-header/post-header'
-
-import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const RecommendedFeedCard = ({ id, position }) => {
   const dispatch = useDispatch()
@@ -15,14 +13,19 @@ export const RecommendedFeedCard = ({ id, position }) => {
 
   const { save_status, item_id, original_url, openExternal, post } = item
   const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : original_url
+  const analyticsData = {
+    id,
+    url: openUrl,
+    position,
+    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external'
+  }
 
   /**
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onOpen = () => dispatch(trackItemOpen(position, item, 'recommended.feed.open'))
-  const onImpression = () =>
-    dispatch(trackItemImpression(position, item, 'recommended.feed.impression'))
+  const onOpen = () => dispatch(sendSnowplowEvent('profile.feed.open', analyticsData))
+  const onImpression = () => dispatch(sendSnowplowEvent('profile.feed.impression', analyticsData))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
 
   return item ? (

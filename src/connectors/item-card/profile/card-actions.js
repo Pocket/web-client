@@ -5,9 +5,7 @@ import { itemActionStyle } from 'components/item-actions/base'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveRecommendedItem } from 'connectors/items-by-id/profile/items.state'
 import { deleteRecommendedItem } from 'connectors/items-by-id/profile/items.state'
-import { trackItemSave } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
-import { trackItemAction } from 'connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { DeleteIcon } from '@pocket/web-ui'
 
 export function ActionsFeed({ id, position }) {
@@ -20,21 +18,30 @@ export function ActionsFeed({ id, position }) {
 
   if (!item) return null
   const { save_url, save_status, open_url, openExternal, post } = item
+  const analyticsData = {
+    id,
+    url: save_url,
+    position,
+    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external'
+  }
 
   // Prep save action
   const onSave = () => {
+    dispatch(sendSnowplowEvent('profile.feed.save', analyticsData))
     dispatch(saveRecommendedItem(id, save_url, position))
-    dispatch(trackItemSave(position, item, 'profile.feed.save'))
   }
 
   const onDelete = () => {
+    dispatch(sendSnowplowEvent('profile.feed.delete', analyticsData))
     dispatch(deleteRecommendedItem(post?.post_id, id))
-    dispatch(trackItemAction(position, item, 'profile.feed.delete'))
   }
 
   // Open action
   const url = openExternal ? open_url : `/read/${id}`
-  const onOpen = () => dispatch(trackItemOpen(position, item, 'profile.feed.open', url))
+  const onOpen = () => {
+    const data = { ...analyticsData, url }
+    dispatch(sendSnowplowEvent('profile.feed.open', data))
+  }
 
   return item ? (
     <div className={`${itemActionStyle} actions`}>
@@ -48,7 +55,7 @@ export function ActionsFeed({ id, position }) {
         saveStatus={save_status}
         id={id}
       />
-      { isSelf ? (
+      {isSelf ? (
         <OverflowAction
           menuItems={[
             {

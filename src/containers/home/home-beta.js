@@ -3,10 +3,7 @@ import { useDispatch } from 'react-redux'
 import { buttonReset } from 'components/buttons/button-reset'
 import { CrossIcon } from '@pocket/web-ui'
 import { Chyron } from 'components/chyron/chyron'
-
-import { trackEngagement } from 'connectors/snowplow/snowplow.state'
-import { ENGAGEMENT_TYPE_GENERAL } from 'connectors/snowplow/events'
-import { UI_COMPONENT_LINK } from 'connectors/snowplow/entities'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 const bannerWrapper = css`
   display: inline-grid;
@@ -41,26 +38,16 @@ const closeWrapper = css`
 
 const INSTANCE_ID = 'home.beta.notice'
 
-/* Analytics Event, to be replaced once the new analytics system goes live */
-export const sendEngagementEvent = (value) =>
-  trackEngagement(
-    ENGAGEMENT_TYPE_GENERAL,
-    UI_COMPONENT_LINK,
-    0, // position in list (zero since it's not in list)
-    INSTANCE_ID,
-    value
-  )
-
 export const HomeBeta = ({ dismissChyron }) => {
   const dispatch = useDispatch()
 
   const complete = () => {
-    dispatch(sendEngagementEvent('complete'))
+    dispatch(sendSnowplowEvent(INSTANCE_ID), { value: 'complete' })
   }
 
   const dismiss = () => {
     dismissChyron()
-    dispatch(sendEngagementEvent('dismiss'))
+    dispatch(sendSnowplowEvent(INSTANCE_ID), { value: 'dismiss' })
   }
 
   return (

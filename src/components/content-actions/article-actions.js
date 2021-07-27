@@ -150,7 +150,7 @@ export const ArticleActions = function ({
         <div className="facebook-share">
           <FacebookShareButton
             data-cy="share-facebook"
-            onShareWindowClose={() => onShare('Facebook')}
+            onShareWindowClose={() => onShare('facebook')}
             quote={excerpt}
             url={buildShareUrl(url, 'fbsynd')}>
             <FacebookMonoIcon />
@@ -160,7 +160,7 @@ export const ArticleActions = function ({
         <div className="twitter-share">
           <TwitterShareButton
             data-cy="share-twitter"
-            onShareWindowClose={() => onShare('Twitter')}
+            onShareWindowClose={() => onShare('twitter')}
             title={title}
             via="Pocket"
             url={buildShareUrl(url, 'twtrsynd')}>
@@ -171,7 +171,7 @@ export const ArticleActions = function ({
         <div className="reddit-share">
           <RedditShareButton
             data-cy="share-reddit"
-            onShareWindowClose={() => onShare('Reddit')}
+            onShareWindowClose={() => onShare('reddit')}
             title={title}
             url={buildShareUrl(url, 'redditsynd')}>
             <RedditMonoIcon />
@@ -181,7 +181,7 @@ export const ArticleActions = function ({
         <div className="linkedin-share">
           <LinkedinShareButton
             data-cy="share-linkedin"
-            onShareWindowClose={() => onShare('Linkedin')}
+            onShareWindowClose={() => onShare('linkedin')}
             summary={excerpt}
             source="Pocket"
             title={title}
@@ -193,7 +193,7 @@ export const ArticleActions = function ({
         <div className="email-share">
           <EmailShareButton
             data-cy="share-email"
-            beforeOnClick={() => onShare('Email')}
+            beforeOnClick={() => onShare('email')}
             subject={title}
             body={excerpt}
             url={buildShareUrl(url, 'emailsynd')}

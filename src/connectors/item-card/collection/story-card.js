@@ -2,8 +2,7 @@ import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { ActionsCollection } from './story-actions'
 import { setNoImage } from 'connectors/items-by-id/discover/items.state'
-import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 /**
  * Article Card
@@ -13,21 +12,30 @@ import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
 export function ItemCard({ id, cardShape, className, showExcerpt = false, position }) {
   const dispatch = useDispatch()
   // Get data from state
+  const analyticsInitialized = useSelector((state) => state.analytics.initialized)
+
   const item = useSelector((state) => state.collectionStoriesById[id])
-  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
+  const impressionFired = useSelector((state) =>
+    state.analytics.impressions.includes(item?.open_url)
+  )
 
   if (!item) return null
-
-  const { open_url: url } = item
+  const { url } = item
   const onImageFail = () => dispatch(setNoImage(id))
+  const analyticsData = {
+    url,
+    position,
+    destination: 'external'
+  }
 
   /**
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onImpression = () => dispatch(trackItemImpression(position, { url }, 'collection.impression'))
-  const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
-  const onOpen = () => dispatch(trackItemOpen(position, { url }, 'collection.open', url))
+  const onImpression = () => dispatch(sendSnowplowEvent('collection.impression', analyticsData))
+  const onItemInView = (inView) =>
+    !impressionFired && inView && analyticsInitialized ? onImpression() : null
+  const onOpen = () => dispatch(sendSnowplowEvent('collection.open', analyticsData))
 
   return (
     <Card

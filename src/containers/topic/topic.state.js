@@ -1,6 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { getNewTopicFeed } from 'common/api/topics'
-import { getItemSaveAnalytics } from './topic.analytics'
 import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { arrayToObject } from 'common/utilities'
 
@@ -51,7 +50,16 @@ export const topicSagas = [
  --------------------------------------------------------------- */
 function* topicsSaveRequest(action) {
   const { url, id, position } = action
-  const analytics = getItemSaveAnalytics(position)
+  const page = global?.location?.pathname
+  const topic = page.match(/\/explore\/(.*)(\?.*)?/)
+  const analytics = {
+    view: 'web',
+    section: 'topics',
+    page,
+    cxt_item_position: position,
+    extra_content: topic ? topic[1] : false
+  }
+
   yield put({ type: DISCOVER_ITEMS_SAVE_REQUEST, id, url, analytics })
 }
 

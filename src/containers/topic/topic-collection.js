@@ -1,6 +1,5 @@
 import { CollectionPageHeader } from 'components/headers/discover-header'
 import { useSelector } from 'react-redux'
-import { trackTopicClick } from './topic.analytics'
 import { ItemCard } from 'connectors/item-card/discover/card'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
@@ -17,11 +16,11 @@ export default function TopicCollection({ curatedItems, topic }) {
       <Lockup items={curatedItems} offset={0} heroPosition="left" ItemCard={ItemCard} />
 
       <OffsetList items={curatedItems} offset={5} cardShape="wide" ItemCard={ItemCard}>
-        <CardTopicsNav topics={topics} track={trackTopicClick} rail={true} />
+        <CardTopicsNav topics={topics} rail={true} />
       </OffsetList>
 
       <OffsetList items={curatedItems} offset={10} cardShape="wide" ItemCard={ItemCard} />
-      <CardTopicsNav topics={topics} track={trackTopicClick} />
+      <CardTopicsNav topics={topics} />
     </>
   )
 }

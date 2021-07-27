@@ -7,8 +7,7 @@ import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bu
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 import { ActionsMyList } from 'connectors/item-card/my-list/card-actions'
 import { ActionsBulk } from 'connectors/item-card/my-list/card-actions'
-import { trackItemImpression } from 'connectors/snowplow/snowplow.state'
-import { trackItemOpen } from 'connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { determineOpenUrl } from 'common/utilities/urls/urls'
 
 /**
@@ -40,18 +39,24 @@ export function ItemCard({ id, position, type }) {
 
   const onImageFail = () => dispatch(setNoImage(id))
 
-  /** ITEM TRACKING
-  --------------------------------------------------------------- */
-  const onOpen = () => {
-    dispatch(trackItemOpen(position, item, 'my-list.card'))
+  const analyticsData = {
+    id,
+    url: openUrl,
+    position,
+    destination: item?.openExternal ? 'external' : 'internal'
   }
 
+  /** ITEM TRACKING
+  --------------------------------------------------------------- */
+  const onOpen = () => dispatch(sendSnowplowEvent('my-list.card.open', analyticsData))
+
   const onOpenOriginalUrl = () => {
-    dispatch(trackItemOpen(position, item, 'my-list.card.view-original'))
+    const data = { ...analyticsData, destination: 'external' }
+    dispatch(sendSnowplowEvent('my-list.card.view-original', data))
   }
 
   const onItemInView = (inView) => {
-    if (!impressionFired && inView) dispatch(trackItemImpression(position, item, 'my-list.card'))
+    if (!impressionFired && inView) dispatch(sendSnowplowEvent('my-list.card.impression', analyticsData))
   }
 
   /** ITEM BULK ACTIONS

@@ -10,10 +10,7 @@ import { itemsUnFavoriteBatch } from 'connectors/items-by-id/my-list/items.favor
 import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
 
-import { sendBulkDeleteEvent } from './global-nav.analytics'
-import { sendBulkFavoriteEvent } from './global-nav.analytics'
-import { sendBulkArchiveEvent } from './global-nav.analytics'
-import { sendBulkTagEvent } from './global-nav.analytics'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -27,34 +24,46 @@ function GlobalNavBulkEditConnected({ onClose }) {
 
   const clearBulkItems = () => dispatch(itemsBulkClear())
 
+  const buildBulkForAnalytics = () => {
+    return bulkItems.map(item => ({
+      id: item.id,
+      url: item.save_url,
+      position: item.position
+    }))
+  }
+
   const deleteAction = () => {
     if (bulkItemsCount) {
-      dispatch(sendBulkDeleteEvent(bulkItems))
+      const items = buildBulkForAnalytics()
+      dispatch(sendSnowplowEvent('global-nav.bulk.delete', items))
       dispatch(itemsDeleteAction(bulkItems))
     }
   }
 
   const tagAction = () => {
     if (bulkItemsCount) {
-      dispatch(sendBulkTagEvent(bulkItems))
+      const items = buildBulkForAnalytics()
+      dispatch(sendSnowplowEvent('global-nav.bulk.tag', items))
       dispatch(itemsTagAction(bulkItems))
     }
   }
 
-  const archiveFunction =
-    batchStatus === 'archive' ? itemsArchiveBatch : itemsUnarchiveBatch
+  const archiveFunction = batchStatus === 'archive' ? itemsArchiveBatch : itemsUnarchiveBatch
   const archiveAction = () => {
     if (bulkItemsCount) {
-      dispatch(sendBulkArchiveEvent(bulkItems, batchStatus === 'archive'))
+      const identifier = (batchStatus === 'archive') ? 'global-nav.bulk.archive' : 'global-nav.bulk.un-archive'
+      const items = buildBulkForAnalytics()
+      dispatch(sendSnowplowEvent(identifier, items))
       dispatch(archiveFunction(bulkItems))
     }
   }
 
-  const favoriteFunction =
-    batchFavorite === 'favorite' ? itemsFavoriteBatch : itemsUnFavoriteBatch
+  const favoriteFunction = batchFavorite === 'favorite' ? itemsFavoriteBatch : itemsUnFavoriteBatch
   const favoriteAction = () => {
     if (bulkItemsCount) {
-      dispatch(sendBulkFavoriteEvent(bulkItems, batchFavorite === 'favorite'))
+      const identifier = (batchFavorite === 'favorite') ? 'global-nav.bulk.favorite' : 'global-nav.bulk.un-favorite'
+      const items = buildBulkForAnalytics()
+      dispatch(sendSnowplowEvent(identifier, items))
       dispatch(favoriteFunction(bulkItems))
     }
   }

@@ -1,8 +1,8 @@
 /** ----------------------------------------------------------- */
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
-import { collectionImpressionEvent } from 'containers/home/home.analytics'
-import { collectionOpenEvent } from 'containers/home/home.analytics'
+import { BASE_URL } from 'common/constants'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const CollectionCard = ({ collection: item, position }) => {
   const dispatch = useDispatch()
@@ -10,13 +10,18 @@ export const CollectionCard = ({ collection: item, position }) => {
   // Get data from state
   const isAuthenticated = useSelector((state) => state.user.auth)
 
+  const analyticsData = {
+    url: `${BASE_URL}${item?.url}`,
+    position
+  }
+
   /** ITEM TRACKING
   --------------------------------------------------------------- */
-  const onOpen = () => dispatch(collectionOpenEvent(item, position))
+  const onOpen = () => dispatch(sendSnowplowEvent('home.collection.open', analyticsData))
 
   const onItemInView = (inView) => {
     if (!inView) return
-    dispatch(collectionImpressionEvent(item, position))
+    dispatch(sendSnowplowEvent('home.collection.impression', analyticsData))
   }
 
   return item ? (
