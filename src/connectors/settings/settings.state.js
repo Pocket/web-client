@@ -81,6 +81,7 @@ export const settingsSagas = [
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 const getSettings = (state) => state.settings
+const getOnboarding = (state) => state.onboarding
 
 function* fetchSettings() {
   try {
@@ -96,7 +97,8 @@ function* fetchSettings() {
 function* saveSettings() {
   try {
     const storedSettings = yield select(getSettings)
-    const settings = { ...storedSettings }
+    const onboarding = yield select(getOnboarding)
+    const settings = { ...storedSettings, onboarding }
     const { error, status } = yield putAppSettings(settings)
     if (status !== 1) throw new Error(`Unable to save settings: ${error}`)
 
