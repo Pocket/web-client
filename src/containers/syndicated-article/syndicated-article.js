@@ -107,7 +107,7 @@ export function SyndicatedArticle({ queryParams = validParams }) {
 
   return (
     <>
-      <ArticleLayout metaData={articleMetaData} canonical={canonical} className={printLayout}>
+      <ArticleLayout title={title} metaData={articleMetaData} canonical={canonical} className={printLayout}>
         <main className={contentLayout}>
           <section>
             <AdAboveTheFold
