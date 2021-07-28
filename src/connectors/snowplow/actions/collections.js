@@ -25,6 +25,32 @@ export const collectionsActions = {
     },
     expects: ['url', 'position']
   },
+  'collection.story.impression': {
+    eventType: 'impression',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: ['url', 'position']
+  },
+  'collection.story.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: ['url', 'position', 'destination']
+  },
+  'collection.story.save': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      engagementType: 'save',
+      uiType: 'button'
+    },
+    expects: ['url', 'position']
+  },
   'collection.page.save': {
     eventType: 'engagement',
     entityTypes: ['content', 'ui'],

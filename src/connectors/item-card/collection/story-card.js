@@ -20,10 +20,10 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
   )
 
   if (!item) return null
-  const { url } = item
+  const { open_url } = item
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
-    url,
+    url: open_url,
     position,
     destination: 'external'
   }
@@ -32,10 +32,10 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onImpression = () => dispatch(sendSnowplowEvent('collection.impression', analyticsData))
+  const onImpression = () => dispatch(sendSnowplowEvent('collection.story.impression', analyticsData))
   const onItemInView = (inView) =>
     !impressionFired && inView && analyticsInitialized ? onImpression() : null
-  const onOpen = () => dispatch(sendSnowplowEvent('collection.open', analyticsData))
+  const onOpen = () => dispatch(sendSnowplowEvent('collection.story.open', analyticsData))
 
   return (
     <Card
@@ -45,7 +45,7 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
       className={className}
       cardShape={cardShape}
       showExcerpt={showExcerpt}
-      openUrl={url}
+      openUrl={open_url}
       useMarkdown={true}
       // Tracking
       onItemInView={onItemInView}

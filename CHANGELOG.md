@@ -1,3 +1,10 @@
+## [1.16.3](https://github.com/Pocket/web-client/compare/v1.16.2...v1.16.3) (2021-07-28)
+
+
+### Bug Fixes
+
+* **collections:** add custom events for collection stories ([c0e9204](https://github.com/Pocket/web-client/commit/c0e92046eadb33c173b421cfe629a3acbd30f35f))
+
 ## [1.16.2](https://github.com/Pocket/web-client/compare/v1.16.1...v1.16.2) (2021-07-27)
 
 
