@@ -24,11 +24,11 @@ export function ActionsCollection({ id, position }) {
   // Prep save action
   const onSave = () => {
     dispatch(saveStory(id, url))
-    dispatch(sendSnowplowEvent('collection.save', analyticsData))
+    dispatch(sendSnowplowEvent('collection.story.save', analyticsData))
   }
 
   // Open action
-  const onOpen = () => dispatch(sendSnowplowEvent('collection.open', analyticsData))
+  const onOpen = () => dispatch(sendSnowplowEvent('collection.story.open', analyticsData))
 
   return item ? (
     <div className={`${itemActionStyle} actions`}>
