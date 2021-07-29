@@ -301,7 +301,7 @@ export async function fetchCollectionData({ count }) {
       ...collection,
       url: `/collections/${collection.slug}`
     }))
-    const data = collectionsWithUrl.sort(() => 0.5 - Math.random()).slice(0, count)
+    const data = collectionsWithUrl.slice(0, count)
     return { data }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
