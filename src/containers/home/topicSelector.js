@@ -8,6 +8,7 @@ import { setTopicSection } from 'containers/home/home.state'
 import { unsetTopicSection } from 'containers/home/home.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { topicHeadings } from './listTopics'
+import { breakpointLargeHandset } from '@pocket/web-ui'
 
 const selectionStyles = css`
   padding: 2rem 0;
@@ -15,6 +16,10 @@ const selectionStyles = css`
 
 export const pillboxStyle = css`
   padding: 0 3rem 1.5rem;
+
+  ${breakpointLargeHandset} {
+    padding: 0 0 1.5rem;
+  }
 
   .pillContainer {
     display: flex;
