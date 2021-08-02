@@ -23,14 +23,8 @@ export const HomeTopicSelector = () => {
 
   const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
 
-  const journeyTitles = ['Start your Pocket journey', 'Discover more topics']
-  const journeySubTitles = [
-    'Select a topic to find fascinating stories from all across the web',
-    'Save today’s essential reads and find them later in My List'
-  ]
-
-  const journeyTitle = journeyTitles[Math.min(pinnedTopics?.length, Math.max(0, 1))]
-  const journeySubTitle = journeySubTitles[Math.min(pinnedTopics?.length, Math.max(0, 1))]
+  const title = `Discover more topics`
+  const description = `Select topics to see popular articles and our editors’ top picks.`
 
   const toggleCallback = (label) => {
     dispatch(sendSnowplowEvent('home.topic.toggle', { label }))
@@ -38,7 +32,7 @@ export const HomeTopicSelector = () => {
 
   return (
     <div className={selectionStyles}>
-      <HomeJourneyHeader sectionTitle={journeyTitle} sectionDescription={journeySubTitle} />
+      { (pinnedTopics?.length > 0) ? <HomeJourneyHeader sectionTitle={title} sectionDescription={description} /> : null }
       <div className={pillboxStyle}>
         <TopicSelector toggleCallback={toggleCallback}/>
       </div>

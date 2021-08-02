@@ -53,9 +53,9 @@ export default function Collection(props) {
         <main className="main">
           <HomeGreeting />
 
-          <HomeTopicSelector />
-
           <HomeTopicsList />
+
+          <HomeTopicSelector />
 
           <HomeCollectionList />
         </main>
