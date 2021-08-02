@@ -130,7 +130,7 @@ const wrapper = css`
   }
 `
 
-export function CallOutBuildHome() {
+export function CallOutBuildHome({ source = 'explore' }) {
   const { t } = useTranslation()
   return (
     <div className={wrapper} data-cy="signup-module">
@@ -149,7 +149,7 @@ export function CallOutBuildHome() {
           id="explore-signup-hero" // needed for snowplow identifier
           variant="brand"
           target="_blank"
-          href={`${SIGNUP_URL}?utm_source=explore&utm_medium=web`}>
+          href={`${SIGNUP_URL}?utm_source=${source}&utm_medium=web`}>
           Sign&nbsp;Up
         </Button>
       </aside>
