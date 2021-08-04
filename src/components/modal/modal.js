@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 import classnames from 'classnames'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import {
   breakpointSmallDesktop,
@@ -267,7 +267,7 @@ const CloseButton = ({ handleClose }) => {
   return (
     <button
       data-cy="close-modal"
-      className={closeButtonStyles}
+      className={cx('close', closeButtonStyles)}
       aria-label={t('common:close-label', 'Close')}
       onClick={handleClose}>
       <CrossIcon />

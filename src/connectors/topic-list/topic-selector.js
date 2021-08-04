@@ -1,7 +1,6 @@
 import React from 'react'
 import { css } from 'linaria'
 import { PillCheckbox } from '@pocket/web-ui'
-import { darkMode } from '@pocket/web-ui'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTopicSection } from 'containers/home/home.state'
 import { unsetTopicSection } from 'containers/home/home.state'
@@ -15,20 +14,6 @@ export const pillboxStyle = css`
   label {
     white-space: nowrap;
     margin-right: 0.5rem;
-  }
-
-  .active button,
-  button:focus {
-    border-color: var(--color-actionPrimaryHover);
-    background: var(--color-actionPrimarySubdued);
-    color: var(--color-actionPrimaryHover);
-    text-decoration: none;
-
-    ${darkMode} {
-      border-color: var(--color-textLinkHover);
-      color: var(--color-textLinkHover);
-      background: none;
-    }
   }
 `
 
