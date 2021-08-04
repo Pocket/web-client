@@ -28,7 +28,7 @@ const modalBodyStyles = css`
     background-color: var(--color-apricotLightest);
 
     ${darkMode} {
-      background-color: var(--color-grey25);
+      background-color: var(--color-grey40);
     }
 
     ${sepiaMode} {
