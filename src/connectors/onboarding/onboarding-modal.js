@@ -113,7 +113,8 @@ export const OnboardingModal = () => {
     dispatch(sendSnowplowEvent('onboarding.topic.toggle', { label }))
   }
 
-  const buttonLabel = pinnedTopics.length === 0
+  const noTopicsSelected = pinnedTopics.length === 0
+  const buttonLabel = noTopicsSelected
     ? t('confirm:skip', 'Skip')
     : t('confirm:continue', 'Continue')
 
@@ -142,6 +143,7 @@ export const OnboardingModal = () => {
       <ModalFooter>
         <Button
           type="submit"
+          variant={noTopicsSelected ? 'secondary' : 'primary'}
           data-cy="onboarding-cta"
           onClick={handleContinue}>
           { buttonLabel }
