@@ -20,7 +20,7 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store, locale }) =
 
   // Hydrating initial state with an async request. This will block the
   // page from loading. Do this for SEO/crawler purposes
-  const collections = await fetchCollections()
+  const collections = await fetchCollections(locale)
   const topicsByName = await fetchTopicList(true)
 
   // No article found
