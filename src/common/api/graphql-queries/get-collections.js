@@ -1,8 +1,8 @@
 import { gql } from 'graphql-request'
 
 const getCollections = gql`
-  query GetCollections {
-    getCollections {
+  query GetCollections($getCollectionLang: String!) {
+    getCollections(filters: { language: $getCollectionLang }) {
       collections {
         slug
         title
