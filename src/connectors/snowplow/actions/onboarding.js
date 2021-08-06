@@ -13,6 +13,13 @@ export const onboardingActions = {
       uiType: 'button'
     }
   },
+  'onboarding.welcome.skip': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    }
+  },
   'onboarding.welcome.impression': {
     eventType: 'impression',
     entityTypes: ['ui'],

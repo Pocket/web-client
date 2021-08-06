@@ -99,15 +99,14 @@ export const OnboardingModal = () => {
     if (showModal) dispatch(sendSnowplowEvent('onboarding.welcome.impression'))
   }, [showModal])
 
-  const handleClose = () => {
-    dispatch(sendSnowplowEvent('onboarding.welcome.close'))
+  const closeModal = (identifier) => {
+    dispatch(sendSnowplowEvent(identifier))
     dispatch(onboardingCloseTopicSelectionModal())
   }
 
-  const handleContinue = () => {
-    dispatch(sendSnowplowEvent('onboarding.welcome.continue'))
-    dispatch(onboardingCloseTopicSelectionModal())
-  }
+  const handleClose = () => closeModal('onboarding.welcome.close')
+  const handleContinue = () => closeModal('onboarding.welcome.continue')
+  const handleSkip = () => closeModal('onboarding.welcome.skip')
 
   const toggleCallback = (label) => {
     dispatch(sendSnowplowEvent('onboarding.topic.toggle', { label }))
@@ -145,7 +144,7 @@ export const OnboardingModal = () => {
           type="submit"
           variant={noTopicsSelected ? 'secondary' : 'primary'}
           data-cy="onboarding-cta"
-          onClick={handleContinue}>
+          onClick={noTopicsSelected ? handleSkip : handleContinue}>
           { buttonLabel }
         </Button>
       </ModalFooter>
