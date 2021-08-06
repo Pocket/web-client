@@ -30,7 +30,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { Toasts } from 'connectors/toasts/toast-list'
 import ErrorPage from 'pages/_error'
 
-export function CollectionPage({ queryParams = {}, slug, statusCode }) {
+export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const dispatch = useDispatch()
 
   const { mobile_web_view: isMobileWebView } = queryParams
@@ -44,6 +44,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
+  const showTopics = locale === 'en'
 
   // Show error page if things have gone awry
   if (statusCode) return <ErrorPage statusCode={statusCode} />
@@ -144,7 +145,7 @@ export function CollectionPage({ queryParams = {}, slug, statusCode }) {
 
             <AdBelowTheFold allowAds={allowAds} usePersonalized={usePersonalized} />
 
-            <TopicsBubbles topics={topics} className="no-border" />
+            {showTopics ? <TopicsBubbles topics={topics} className="no-border" /> : null}
           </footer>
         </section>
       </main>
