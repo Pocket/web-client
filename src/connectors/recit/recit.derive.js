@@ -22,6 +22,7 @@ export function deriveReaderRecitItems(recommendations) {
     save_url: saveUrl(feedItem),
     open_url: openUrl(feedItem),
     original_url: originalUrl(feedItem),
+    resolved_url: feedItem.item?.resolved_url,
     read_time: readTime(feedItem),
     has_image: feedItem.item?.has_image,
     has_video: feedItem.item?.has_video,

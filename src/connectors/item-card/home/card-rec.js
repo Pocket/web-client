@@ -8,14 +8,14 @@ export const RecCard = ({ id, position, className, cardShape = 'detail', showExc
 
   // Get data from state
   const item = useSelector((state) => state.recit.recentRecs[id])
-  const { save_status, item_id, original_url, openExternal } = item
+  const { save_status, item_id, resolved_url, original_url, openExternal } = item
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : original_url
   const analyticsData = {
     id,
-    url: openUrl,
+    url: resolved_url,
     position,
-    destination: (save_status === 'saved' && !openExternal) ? 'internal' : 'external'
+    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external'
   }
 
   /**
