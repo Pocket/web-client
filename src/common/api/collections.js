@@ -3,10 +3,10 @@ import { requestGQL } from 'common/utilities/request/request'
 import getCollectionBySlugQuery from 'common/api/graphql-queries/get-collection-by-slug'
 import getCollectionsQuery from 'common/api/graphql-queries/get-collections'
 
-export function getCollections() {
+export function getCollections(lang = 'en') {
   return requestGQL({
     query: getCollectionsQuery,
-    variables: {}
+    variables: { getCollectionLang: lang }
   })
     .then((response) => response?.data?.getCollections?.collections)
     .catch((error) => console.error(error))

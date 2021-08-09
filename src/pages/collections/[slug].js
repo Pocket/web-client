@@ -32,6 +32,7 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store, params, loc
   const defaultProps = {
     ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
     slug,
+    locale,
     revalidate: 60 // Revalidate means this can be regenerated once every X seconds
   }
 

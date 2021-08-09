@@ -148,7 +148,6 @@ export function SideNav({
   pinnedTopics,
   isDisabled,
   newSaveCount,
-  flagsReady,
   trackMenuClick
 }) {
   const { t } = useTranslation()
@@ -173,7 +172,7 @@ export function SideNav({
 
   const clickEvent = (e) => trackMenuClick(e.target.textContent)
 
-  return flagsReady ? (
+  return (
     <div className={wrapperClass}>
       <nav role="navigation">
         <Link href="/home?src=sidebar">
@@ -182,18 +181,13 @@ export function SideNav({
             className={subActive('home')}
             onClick={clickEvent}
             data-cy="side-nav-home">
-            <HomeIcon className="side-nav-icon" />{' '}
-            {t('nav:home', 'Home')}
+            <HomeIcon className="side-nav-icon" /> {t('nav:home', 'Home')}
             <BetaTag>BETA</BetaTag>
           </button>
         </Link>
         <Link href="/my-list?src=sidebar">
-          <button
-            className={subActive('unread')}
-            onClick={clickEvent}
-            data-cy="side-nav-mylist">
-            <ListViewIcon className="side-nav-icon" />{' '}
-            {t('nav:my-list', 'My List')}
+          <button className={subActive('unread')} onClick={clickEvent} data-cy="side-nav-mylist">
+            <ListViewIcon className="side-nav-icon" /> {t('nav:my-list', 'My List')}
             <BookmarkIcon newSaveCount={newSaveCount} />
           </button>
         </Link>
@@ -202,8 +196,7 @@ export function SideNav({
             className={subActive('discover')}
             onClick={clickEvent}
             data-cy="side-nav-discover">
-            <DiscoverIcon className="side-nav-icon" />{' '}
-            {t('nav:discover', 'Discover')}
+            <DiscoverIcon className="side-nav-icon" /> {t('nav:discover', 'Discover')}
           </button>
         </Link>
         <Link href="/collections?src=sidebar">
@@ -212,8 +205,7 @@ export function SideNav({
             onClick={clickEvent}
             ref={ref}
             data-cy="side-nav-collections">
-            <CollectionsIcon className="side-nav-icon" />{' '}
-            {t('nav:collections', 'Collections')}
+            <CollectionsIcon className="side-nav-icon" /> {t('nav:collections', 'Collections')}
           </button>
         </Link>
         {subset === 'home' ? (
@@ -235,10 +227,6 @@ export function SideNav({
           <ChevronUpIcon />
         </button>
       </div>
-    </div>
-  ) : (
-    <div className={wrapperClass}>
-      <nav role="navigation" className="dummy-nav" />
     </div>
   )
 }
