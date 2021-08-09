@@ -1,3 +1,11 @@
+## [1.17.2](https://github.com/Pocket/web-client/compare/v1.17.1...v1.17.2) (2021-08-09)
+
+
+### Bug Fixes
+
+* **onboarding:** move onboarding modal to own component to ease checking flags ([c7fc92e](https://github.com/Pocket/web-client/commit/c7fc92e92bb86a7b2b51b8002e2d9da4dd3b4bef))
+* **waypoint:** add onboarding.release flag ([41ac453](https://github.com/Pocket/web-client/commit/41ac45344314c80ce51577b23cfe323c07711f33))
+
 ## [1.17.1](https://github.com/Pocket/web-client/compare/v1.17.0...v1.17.1) (2021-08-09)
 
 

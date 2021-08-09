@@ -20,9 +20,8 @@ import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
 import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
 import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
-import { OnboardingModal } from 'connectors/onboarding/onboarding-modal'
+import { Onboarding } from 'connectors/onboarding/onboarding'
 import { Toasts } from 'connectors/toasts/toast-list'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export default function Collection(props) {
   const { metaData = {} } = props
@@ -32,9 +31,6 @@ export default function Collection(props) {
   const userStatus = useSelector((state) => state.user.user_status)
   const selectedTopics = useSelector((state) => state.settings.pinnedTopics)
   const shouldRender = userStatus !== 'pending'
-
-  const featureState = useSelector((state) => state.features)
-  const onboardingDev = featureFlagActive({ flag: 'onboarding.dev', featureState })
 
   // Initialize data
   useEffect(() => {
@@ -65,7 +61,7 @@ export default function Collection(props) {
       <ShareModal />
       <ArchiveModal />
       <FavoriteModal />
-      { onboardingDev ? <OnboardingModal /> : null }
+      <Onboarding type="home.modal" />
       <Toasts />
     </Layout>
   )
