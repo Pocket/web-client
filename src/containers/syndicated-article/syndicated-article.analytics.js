@@ -44,6 +44,9 @@ export function trackScrollDepth(depth) {
   })
 }
 
+// ?? Do we need to update this legacy callback?
+// ?? AND/OR
+// ?? Does this need to be adjusted to accept resolved_url
 export function trackRecImpression({
   model,
   recId,
@@ -75,6 +78,9 @@ export function trackRecImpression({
   })
 }
 
+// ?? Do we need to update this legacy callback?
+// ?? AND/OR
+// ?? Does this need to be adjusted to accept resolved_url
 export function trackRecClick({ model, recId, articleId, position, resolvedId, module, location }) {
   legacyAnalyticsTrack({
     time: Math.round(new Date() / 1000), // unix timestamp

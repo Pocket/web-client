@@ -12,11 +12,11 @@ export function ActionsTopic({ id, position }) {
   const item = useSelector((state) => state.discoverItemsById[id])
 
   if (!item) return null
-  const { save_url, save_status, open_url, openExternal } = item
+  const { save_url, save_status, open_url, resolved_url, openExternal } = item
 
   // Prep save action
   const onSave = () => {
-    const data = { id, url: save_url, position }
+    const data = { id, url: resolved_url, position }
     dispatch(saveHomeItem(id, save_url, position))
     dispatch(sendSnowplowEvent('home.topic.save', data))
   }

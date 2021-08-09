@@ -28,6 +28,7 @@ export function deriveDiscoverItems(response) {
       read_time: readTime(feedItem),
       syndicated: syndicated(feedItem),
       original_url: originalUrl(feedItem),
+      resolved_url: feedItem.item?.resolvedUrl,
       openExternal: false,
       save_status: 'unsaved',
       recommendationId: feedItem.id || feedItem.item?.resolved_id,

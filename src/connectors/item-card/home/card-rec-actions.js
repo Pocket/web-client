@@ -12,11 +12,11 @@ export function ActionsRec({ id, position }) {
   const item = useSelector((state) => state.recit.recentRecs[id])
 
   if (!item) return null
-  const { save_url, save_status, open_url, openExternal } = item
+  const { save_url, save_status, open_url, openExternal, resolved_url } = item
 
   // Prep save action
   const onSave = () => {
-    const data = { id, url: save_url, position }
+    const data = { id, url: resolved_url, position }
     dispatch(sendSnowplowEvent('home.rec.save', data))
     dispatch(saveHomeItem(id, save_url, position))
   }

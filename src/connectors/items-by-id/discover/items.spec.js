@@ -119,7 +119,7 @@ describe('Discover Items', () => {
       const expectedSaveUrl = 'http://glamour.com/story/simone-biles-finds-her-balance' //prettier-ignore
       const expectedOpenUrl = 'http://glamour.com/story/simone-biles-finds-her-balance?utm_source=pocket_discover' //prettier-ignore
       const expectedOriginalUrl = 'http://glamour.com/story/simone-biles-finds-her-balance' //prettier-ignore
-
+      const expectedResolvedUrl = 'https://www.glamour.com/story/simone-biles-finds-her-balance'
       expect(derivedItems[0]).toStrictEqual({
         title: 'Simone Biles Finds Her Balance',
         item_id: '3357439790',
@@ -132,6 +132,7 @@ describe('Discover Items', () => {
         save_url: expectedSaveUrl,
         open_url: expectedOpenUrl,
         original_url: expectedOriginalUrl,
+        resolved_url: expectedResolvedUrl,
         read_time: 10,
         syndicated: false,
         save_status: 'unsaved',

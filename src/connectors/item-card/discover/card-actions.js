@@ -19,10 +19,19 @@ export function ActionsDiscover({ id, position }) {
   const item = useSelector((state) => state.discoverItemsById[id])
 
   if (!item) return null
-  const { save_url, save_status, open_url, openExternal, recommendationId, slateLineup, slate } = item
+  const {
+    save_url,
+    save_status,
+    resolved_url,
+    open_url,
+    openExternal,
+    recommendationId,
+    slateLineup,
+    slate
+  } = item
   const analyticsData = {
     id,
-    url: save_url,
+    url: resolved_url,
     position,
     recommendationId,
     slateLineupId: slateLineup?.id,

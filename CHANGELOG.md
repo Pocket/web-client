@@ -1,3 +1,10 @@
+## [1.17.3](https://github.com/Pocket/web-client/compare/v1.17.2...v1.17.3) (2021-08-09)
+
+
+### Bug Fixes
+
+* **profile analytics:** rec event use resolved url ([cb004ab](https://github.com/Pocket/web-client/commit/cb004abc58c1dfd63bc22de4755d6bb5290eafbb))
+
 ## [1.17.2](https://github.com/Pocket/web-client/compare/v1.17.1...v1.17.2) (2021-08-09)
 
 
