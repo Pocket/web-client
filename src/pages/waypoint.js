@@ -26,8 +26,8 @@ export async function getServerSideProps({ req, locale, query }) {
 
   const featureState = await fetchUnleashData(user_id, sess_guid, birth)
   const onboardingDev = featureFlagActive({ flag: 'onboarding.dev', featureState })
-  //const onboardingRelease = featureFlagActive({ flag: 'onboarding.release', featureState })
-  const showOnboarding = onboardingDev // || onboardingRelease
+  const onboardingRelease = featureFlagActive({ flag: 'onboarding.release', featureState })
+  const showOnboarding = onboardingDev || onboardingRelease
   const destination = showOnboarding ? homeLink : myListLink
 
   return {
