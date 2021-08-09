@@ -5,7 +5,7 @@ import { devModeToggle } from 'connectors/app/app.state'
 import { Features } from 'connectors/dev-tools/features'
 import { localStore } from 'common/utilities/browser-storage/browser-storage'
 import { resetOnboarding } from 'connectors/onboarding/onboarding.state'
-
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { css } from 'linaria'
 import { headingSansSerif } from '@pocket/web-ui'
 import { Languages } from './languages'
@@ -45,8 +45,9 @@ const devToolStyle = css`
 export function DevTools() {
   const dispatch = useDispatch()
   const isDevBuild = process.env.SHOW_DEV === 'included'
-  const showDevTools =
-    localStore.getItem('showPocketDevTools') === 'true' || isDevBuild
+  const featureState = useSelector((state) => state.features)
+  const labUser = featureFlagActive({ flag: 'lab', featureState })
+  const showDevTools = labUser || isDevBuild
   const devMode = useSelector((state) => state.app.devMode)
   const handleKeyCombo = () => dispatch(devModeToggle())
   const onboardingReset = () => dispatch(resetOnboarding())

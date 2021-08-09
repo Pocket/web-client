@@ -32,7 +32,6 @@ function PocketWebClient({ Component, pageProps, err }) {
   const dispatch = useDispatch()
 
   const { user_status, user_id, sess_guid, birth } = useSelector((state) => state.user) //prettier-ignore
-  const showDevTools = process.env.SHOW_DEV === 'included'
   const { authRequired } = pageProps
 
   useEffect(() => {
@@ -110,7 +109,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   return (
     <ViewportProvider>
       <PostTrustInit />
-      {showDevTools ? <DevTools /> : null}
+      <DevTools />
       <Shortcuts />
       {shouldRender ? <Component {...pageProps} err={err} /> : null}
     </ViewportProvider>
