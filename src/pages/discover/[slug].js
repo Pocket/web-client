@@ -18,14 +18,11 @@ import { wrapper } from 'store'
 export const getStaticPaths = async () => {
   const topicsByName = await fetchTopicList(true)
   const paths = Object.values(topicsByName).map((data) => `/discover/${data.topic_slug}`)
-  return { paths, fallback: false }
+  return { paths, fallback: 'blocking' }
 }
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store, params, locale }) => {
-  const defaultProps = {
-    ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
-    revalidate: 60 // Revalidate means this can be regenerated once every X seconds
-  }
+  const defaultProps = { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])) }
 
   const { slug } = params
 
@@ -39,14 +36,18 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store, params, loc
   const activeTopic = topicsByName[slug]
 
   // Invalid Topic
-  if (!activeTopic) return { props: { ...defaultProps, statusCode: 404 } }
+  // ?? NOTE: We may need to adjust the revalidation on these errored responses
+  // ?? Set at 5 minutes now to avoid crawlers crushing our servers
+  if (!activeTopic) return { props: { ...defaultProps, statusCode: 404 }, revalidate: 300 }
 
   // Get topic info
   const { topic } = activeTopic
 
   // Get topic items from the correct endpoint
+  // ?? NOTE: We may need to adjust the revalidation on these errored responses
+  // ?? Set at 5 minutes now to avoid crawlers crushing our servers
   const response = await fetchTopicData(topic)
-  if (!response) return { props: { ...defaultProps, statusCode: 500 } }
+  if (!response) return { props: { ...defaultProps, statusCode: 500 }, revalidate: 300 }
 
   const {
     curatedItems = [],
@@ -64,7 +65,8 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store, params, loc
   // Hydrate the topic page item arrays
   dispatch(hydrateTopic({ topic: slug, data: { curatedItems, algorithmicItems } }))
 
-  return { props: { ...defaultProps } }
+  // Revalidate means this can be regenerated once every X seconds
+  return { props: defaultProps, revalidate: 60 }
 })
 
 export default Topic

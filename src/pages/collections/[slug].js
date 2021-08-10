@@ -32,8 +32,7 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store, params, loc
   const defaultProps = {
     ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
     slug,
-    locale,
-    revalidate: 60 // Revalidate means this can be regenerated once every X seconds
+    locale
   }
 
   // Hydrating initial state with an async request. This will block the
@@ -42,7 +41,9 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store, params, loc
   const topicsByName = await fetchTopicList(true)
 
   // No article found
-  if (!collection || !stories) return { props: { ...defaultProps, statusCode: 404 } }
+  if (!collection || !stories) {
+    return { props: { ...defaultProps, statusCode: 404 }, revalidate: 60 }
+  }
 
   // Since ssr will not wait for side effects to resolve this dispatch needs to be pure
   dispatch(hydrateTopicList({ topicsByName }))
@@ -53,9 +54,8 @@ export const getStaticProps = wrapper.getStaticProps(async ({ store, params, loc
   dispatch(END)
   await sagaTask.toPromise()
 
-  return {
-    props: defaultProps
-  }
+  // Revalidate means this can be regenerated once every X seconds
+  return { props: defaultProps, revalidate: 60 }
 })
 
 export default CollectionPage
