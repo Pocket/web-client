@@ -23,7 +23,7 @@ import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { Onboarding } from 'connectors/onboarding/onboarding'
 import { Toasts } from 'connectors/toasts/toast-list'
 
-export default function Collection(props) {
+export default function Home(props) {
   const { metaData = {} } = props
 
   const dispatch = useDispatch()
