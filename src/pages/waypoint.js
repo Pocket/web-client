@@ -5,9 +5,12 @@ import queryString from 'query-string'
 
 export default function Waypoint() {}
 
-export async function getServerSideProps({ req, locale, query }) {
+export async function getServerSideProps({ req, locale, query, defaultLocale }) {
   const myListLink = queryString.stringifyUrl({ url: '/my-list', query })
   const homeLink = queryString.stringifyUrl({ url: '/home', query })
+
+  // returns first two letters of browser defined language settings
+  const lang = req.headers['accept-language'].toString().substring(0, 2)
 
   const { sess_guid } = req.cookies
   const response = await getUserInfo(true, req?.headers?.cookie)
@@ -15,7 +18,7 @@ export async function getServerSideProps({ req, locale, query }) {
   // NOTE: this will redirect to my list 100% of the time on localhost
   const { user_id, birth } = response?.user || {}
 
-  if (!user_id || !birth || locale !== 'en') {
+  if (!user_id || !birth || locale !== defaultLocale || lang !== defaultLocale) {
     return {
       redirect: {
         permanent: false,
