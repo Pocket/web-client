@@ -9,14 +9,12 @@ import {
   breakpointTinyTablet,
   breakpointLargeHandset
 } from '@pocket/web-ui'
-import { CrossIcon } from '@pocket/web-ui'
-import { screenReaderOnly } from '@pocket/web-ui'
 
 import { ModalHeader } from './modal-header'
 import { ModalBody } from './modal-body'
 import { ModalFooter } from './modal-footer'
 import { ModalTabs } from './modal-tabs'
-import { useTranslation, Trans } from 'next-i18next'
+import { CloseButton } from 'components/close-button/close-button'
 
 const MODAL_MAX_WIDTH = 552
 
@@ -218,63 +216,13 @@ const Modal = ({
         <div ref={modalContentRef}>
           {/** Error on this ref */}
           {showCloseButton ? (
-            <CloseButton handleClose={handleClose} data-cy="close-modal-button" />
+            <CloseButton handleClose={handleClose} dataCy="close-modal-button" />
           ) : null}
           {title ? <ModalHeader title={title} /> : null}
           <div onClick={onClick}>{children}</div>
         </div>
       </ReactModal>
     </React.Fragment>
-  )
-}
-
-const closeButtonStyles = css`
-  cursor: pointer;
-  span,
-  span:hover {
-    width: 20px;
-    height: 20px;
-    background-color: transparent;
-  }
-  color: var(--color-textPrimary);
-  background-color: transparent;
-
-  padding: var(--spacing150);
-  position: sticky;
-  float: right;
-  top: 0;
-  z-index: 2;
-
-  &:hover,
-  &:active {
-    background-color: transparent;
-    color: var(--color-textLinkHover);
-  }
-  &:focus {
-    transition: none;
-    color: var(--color-navCurrentTabText);
-    outline: 1px auto var(--color-navCurrentTab);
-  }
-
-  .visually-hidden {
-    ${screenReaderOnly}
-  }
-`
-
-const CloseButton = ({ handleClose }) => {
-  const { t } = useTranslation()
-
-  return (
-    <button
-      data-cy="close-modal"
-      className={cx('close', closeButtonStyles)}
-      aria-label={t('common:close-label', 'Close')}
-      onClick={handleClose}>
-      <CrossIcon />
-      <span className="visually-hidden">
-        <Trans i18nKey="common:close">Close</Trans>
-      </span>
-    </button>
   )
 }
 
