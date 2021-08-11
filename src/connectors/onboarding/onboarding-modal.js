@@ -1,6 +1,6 @@
 import { css } from 'linaria'
 import { Button } from '@pocket/web-ui'
-import { breakpointMediumHandset } from '@pocket/web-ui'
+import { breakpointMediumHandset, breakpointLargeHandset } from '@pocket/web-ui'
 import { darkMode, sepiaMode } from '@pocket/web-ui'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useEffect } from 'react'
@@ -85,6 +85,14 @@ const modalBodyStyles = css`
   }
 `
 
+// overrides the mobile styling due to an issue in chrome/safari where the
+// modal is too tall and gets cut off when the address bar is shown
+const modalContentClass = css`
+  ${breakpointLargeHandset} {
+    max-height: 100%;
+  }
+`
+
 export const OnboardingModal = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -122,6 +130,7 @@ export const OnboardingModal = () => {
       appRootSelector={appRootSelector}
       isOpen={showModal}
       portalClassName={modalBodyStyles}
+      modalContentClassName={modalContentClass}
       screenReaderLabel={t('onboarding:welcome-to-pocket', 'Welcome to Pocket')}
       shouldCloseOnOverlayClick={false}
       handleClose={handleClose}>
