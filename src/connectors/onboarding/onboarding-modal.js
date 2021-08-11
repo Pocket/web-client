@@ -86,7 +86,7 @@ const modalBodyStyles = css`
 `
 
 // overrides the mobile styling due to an issue in chrome/safari where the
-// modal is too tall and gets cut off when the address bar is shown
+// modal is too tall and gets cut off on smaller devices
 const modalContentClass = css`
   ${breakpointLargeHandset} {
     max-height: 100%;
