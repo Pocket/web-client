@@ -63,7 +63,7 @@ export default function Home(props) {
       <ArchiveModal />
       <FavoriteModal />
       <Onboarding type="home.modal" />
-      <Flyaway title="Save articles you like" description="Browse the best articles from across the web. Click Save to read one later." />
+      <Onboarding type="home.flyaway.save" />
       <Toasts />
     </Layout>
   )
