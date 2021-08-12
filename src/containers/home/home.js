@@ -22,6 +22,7 @@ import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
 import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { Onboarding } from 'connectors/onboarding/onboarding'
 import { Toasts } from 'connectors/toasts/toast-list'
+import { Flyaway } from 'components/flyaway/flyaway'
 
 export default function Home(props) {
   const { metaData = {} } = props
@@ -62,6 +63,7 @@ export default function Home(props) {
       <ArchiveModal />
       <FavoriteModal />
       <Onboarding type="home.modal" />
+      <Flyaway title="Save articles you like" description="Browse the best articles from across the web. Click Save to read one later." />
       <Toasts />
     </Layout>
   )
