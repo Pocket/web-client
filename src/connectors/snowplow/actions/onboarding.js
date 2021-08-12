@@ -40,7 +40,7 @@ export const onboardingActions = {
     eventType: 'impression',
     entityTypes: ['ui'],
     eventData: {
-      uiType: 'button'
+      uiType: 'dialog'
     },
   },
   'onboarding.flyaway.save.close': {
