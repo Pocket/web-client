@@ -35,5 +35,12 @@ export const onboardingActions = {
       uiType: 'button'
     },
     expects: ['label']
+  },
+  'onboarding.flyaway.save.close': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
   }
 }
