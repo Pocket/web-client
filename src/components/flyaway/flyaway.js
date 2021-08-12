@@ -58,12 +58,14 @@ const closeButtonOverrides = css`
 export function Flyaway({ title, description }) {
   const dispatch = useDispatch()
 
+  // if (!title || !description) return null
+
   const handleClose = () => {
     dispatch(sendSnowplowEvent('onboarding.flyaway.save.close'))
   }
 
   return (
-    <div class={flyawayWrapper}>
+    <div className={flyawayWrapper}>
       <div className={flyaway}>
         <div className="flyaway_title">
           <h5>{title}</h5>
