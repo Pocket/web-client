@@ -1,7 +1,5 @@
 import { css } from 'linaria'
-import { useDispatch } from 'react-redux'
 import { breakpointLargeHandset } from '@pocket/web-ui'
-import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { CloseButton } from 'components/close-button/close-button'
 
 const flyawayWrapper = css`
@@ -55,14 +53,8 @@ const closeButtonOverrides = css`
   }
 `
 
-export function Flyaway({ title, description }) {
-  const dispatch = useDispatch()
-
+export function Flyaway({ title, description, handleClose }) {
   // if (!title || !description) return null
-
-  const handleClose = () => {
-    dispatch(sendSnowplowEvent('onboarding.flyaway.save.close'))
-  }
 
   return (
     <div className={flyawayWrapper}>
