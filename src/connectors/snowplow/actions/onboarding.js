@@ -36,6 +36,13 @@ export const onboardingActions = {
     },
     expects: ['label']
   },
+  'onboarding.flyaway.save.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+  },
   'onboarding.flyaway.save.close': {
     eventType: 'engagement',
     entityTypes: ['ui'],
