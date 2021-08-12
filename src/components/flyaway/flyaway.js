@@ -4,7 +4,7 @@ import { CloseButton } from 'components/close-button/close-button'
 
 const flyawayWrapper = css`
   position: sticky;
-  bottom: 100px;
+  bottom: 30px;
   grid-column: span 12;
   max-width: 350px;
 
@@ -16,19 +16,19 @@ const flyawayWrapper = css`
 
 const flyaway = css`
   font-family: var(--fontSansSerif);
-  background-color: #008078;
   background-color: var(--color-actionPrimary);
   color: #ffffff;
   padding: 1rem;
-  border-radius: 4px;
+  border-radius: var(--borderRadius);
 
   .flyaway_title {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
   }
-  
-  h5, p {
+
+  h5 {
+    font-weight: 600;
     margin-bottom: 0.5rem;
   }
 
@@ -54,8 +54,6 @@ const closeButtonOverrides = css`
 `
 
 export function Flyaway({ title, description, handleClose }) {
-  // if (!title || !description) return null
-
   return (
     <div className={flyawayWrapper}>
       <div className={flyaway}>
