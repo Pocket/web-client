@@ -17,7 +17,7 @@ const flyawayWrapper = css`
 const flyaway = css`
   font-family: var(--fontSansSerif);
   background-color: var(--color-actionPrimary);
-  color: #ffffff;
+  color: var(--color-canvas);
   padding: 1rem;
   border-radius: var(--borderRadius);
 
@@ -30,6 +30,10 @@ const flyaway = css`
   h5 {
     font-weight: 600;
     margin-bottom: 0.5rem;
+
+    ${breakpointLargeHandset} {
+      font-size: 1.2rem;
+    }
   }
 
   p {
@@ -42,14 +46,14 @@ const flyaway = css`
 `
 
 const closeButtonOverrides = css`
-  color: #ffffff;
+  color: var(--color-canvas);
 
   &:hover,
   &:active {
-    color: #ffffff;
+    color: var(--color-canvas);
   }
   &:focus {
-    color: #ffffff;
+    color: var(--color-canvas);
   }
 `
 

@@ -7,11 +7,23 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseSaveFlyaway } from '../onboarding.state'
 
 const homeSaveStyles = css`
-  box-shadow: 0 0 0 0.5rem var(--color-actionPrimary);
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0.5rem 0.02rem var(--color-actionPrimary);
+    }
+    50% {
+      box-shadow: 0 0 0.5rem 0.25rem var(--color-actionPrimary);
+    }
+    100% {
+      box-shadow: 0 0 0.5rem 0.02rem var(--color-actionPrimary);
+    }
+  }
+
   border-radius: 2.75rem;
+  animation: pulse 1s infinite;
 `
 
-const homeSaveQuery = "button[data-cy^='article-save-btn']"
+const homeSaveQuery = 'button[data-cy^="article-save-btn"]'
 
 export const HomeFlyawaySave = () => {
   const dispatch = useDispatch()
