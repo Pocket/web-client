@@ -26,7 +26,7 @@ const flyaway = css`
 
   .flyaway_title {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
   }
   
