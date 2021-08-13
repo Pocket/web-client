@@ -4,7 +4,7 @@ import { CloseButton } from 'components/close-button/close-button'
 
 const flyawayWrapper = css`
   position: sticky;
-  bottom: 30px;
+  bottom: 50px;
   grid-column: span 12;
   max-width: 350px;
 
@@ -38,6 +38,7 @@ const flyaway = css`
 
   p {
     font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   button {

@@ -9,18 +9,18 @@ import { onboardingCloseSaveFlyaway } from '../onboarding.state'
 const homeSaveStyles = css`
   @keyframes pulse {
     0% {
-      box-shadow: 0 0 0.5rem 0.02rem var(--color-actionPrimary);
+      box-shadow: 0 0 0 0.3rem rgba(0,128,120,0);
     }
     50% {
-      box-shadow: 0 0 0.5rem 0.25rem var(--color-actionPrimary);
+      box-shadow: 0 0 0 0.3rem rgba(0,128,120,1);
     }
     100% {
-      box-shadow: 0 0 0.5rem 0.02rem var(--color-actionPrimary);
+      box-shadow: 0 0 0 0.3rem rgba(0,128,120,0);
     }
   }
 
   border-radius: 2.75rem;
-  animation: pulse 1s infinite;
+  animation: pulse 1.7s linear infinite;
 `
 
 const homeSaveQuery = 'button[data-cy^="article-save-btn"]'
