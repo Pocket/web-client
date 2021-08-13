@@ -8,10 +8,10 @@ import Layout from 'layouts/with-sidebar'
 import { getTopicList } from 'connectors/topic-list/topic-list.state'
 import { getCollections } from 'containers/home/home.state'
 
-import { HomeGreeting } from 'containers/home/homeGreeting'
-import { HomeTopicSelector } from 'containers/home/topicSelector'
-import { HomeTopicsList } from 'containers/home/listTopics'
-import { HomeCollectionList } from 'containers/home/listCollection'
+import { HomeGreeting } from 'containers/home/home-greeting'
+import { HomeTopicSelector } from 'containers/home/topic-selector'
+import { HomeTopicsList } from 'containers/home/list-topics'
+import { HomeCollectionList } from 'containers/home/list-collection'
 
 import { homeHydrate } from './home.state'
 
