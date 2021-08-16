@@ -141,7 +141,7 @@ const globalReducers = {
   toasts: actionToastsReducers, // Notifications of action results,
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
-  onboarding: onboardingReducers, // Onboarding
+  onboarding: onboardingReducers // Onboarding
 }
 
 export const rootReducer = combineReducers({
@@ -198,8 +198,8 @@ export const initializeStore = () => {
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-          name: 'Pocket Web Client'
-          // actionsBlacklist: 'SNOWPLOW_'
+          name: 'Pocket Web Client',
+          actionsBlacklist: 'SNOWPLOW_'
         })
       : compose
 
