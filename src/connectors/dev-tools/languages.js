@@ -1,20 +1,19 @@
-import { useState } from 'react'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 
 export function Languages() {
-  const stuff = useTranslation()
-  const { i18n } = stuff
-  const { options, language: currentLanguage } = i18n
+  const translation = useTranslation()
+  const router = useRouter()
+
+  const { i18n } = translation
+  const { options, language } = i18n
   const languages = options?.locales
 
-  // Set state for component
-  const [language, setLanguage] = useState(currentLanguage)
-
   const handleChange = async (event) => {
-    const selectedValue = event.currentTarget.value
+    const locale = event.currentTarget.value
+    const currentPath = router?.pathname
     try {
-      await i18n.changeLanguage(selectedValue)
-      setLanguage(selectedValue)
+      router.push(currentPath, currentPath, { locale })
     } catch (err) {
       console.warn(err)
     }
