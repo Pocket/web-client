@@ -20,8 +20,9 @@ export const featureReducers = (state = initialState, action) => {
 
     case FEATURES_TOGGLE: {
       const { flag } = action
-      const currentFlagState = state[flag]?.assigned
-      return { ...state, [flag]: { active: !currentFlagState } }
+      const currentFlagState = state[flag]
+      const activeState = currentFlagState?.active
+      return { ...state, [flag]: { ...currentFlagState, active: !activeState } }
     }
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
