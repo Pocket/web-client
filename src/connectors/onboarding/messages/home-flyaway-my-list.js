@@ -44,7 +44,7 @@ export const HomeFlyawayMyList = () => {
   const { t } = useTranslation()
 
   const myListFlyawayReady = useSelector((state) => state.onboarding.homeFlyawayMyList)
-  const saveFlyawayStatus = useSelector((state) => state.onboarding.saveFlyaway)
+  const saveFlyawayStatus = useSelector((state) => state.onboarding.homeFlyawaySave)
   const saveFlyawayDismissed = saveFlyawayStatus === false
   const showFlyaway = (saveFlyawayDismissed && myListFlyawayReady)
 

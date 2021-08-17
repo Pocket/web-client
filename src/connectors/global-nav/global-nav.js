@@ -69,7 +69,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const retrievedAvatar = useSelector((state) => state?.user?.profile?.avatar_url)
 
   const myListFlyawayReady = useSelector((state) => state.onboarding.homeFlyawayMyList)
-  const saveFlyawayStatus = useSelector((state) => state.onboarding.saveFlyaway)
+  const saveFlyawayStatus = useSelector((state) => state.onboarding.homeFlyawaySave)
   const saveFlyawayDismissed = saveFlyawayStatus === false
   const showOnboardingHighlight = (saveFlyawayDismissed && myListFlyawayReady)
 

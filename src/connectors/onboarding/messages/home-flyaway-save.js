@@ -20,7 +20,7 @@ export const HomeFlyawaySave = () => {
   const { t } = useTranslation()
 
   const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
-  const flyawayReady = useSelector((state) => state.onboarding.saveFlyaway)
+  const flyawayReady = useSelector((state) => state.onboarding.homeFlyawaySave)
   const modalStatus = useSelector((state) => state.onboarding.topicSelectionModal)
   const topicsSelected = pinnedTopics.length !== 0
   const modalFinished = modalStatus === false
