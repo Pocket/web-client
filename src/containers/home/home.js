@@ -3,7 +3,7 @@ import { SideNav } from 'connectors/side-nav/side-nav'
 import Layout from 'layouts/with-sidebar'
 
 import { HomeStandard } from 'containers/home/home-standard'
-import { HomePersonalized } from 'containers/home/home-personalized'
+import { HomePersonalized } from 'containers/home/personalized/home-personalized'
 
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
@@ -24,9 +24,12 @@ export default function Home(props) {
   const shouldRender = userStatus !== 'pending' && flagsReady
   const showPersonalized = featureFlagActive({ flag: 'profiles.home', featureState })
 
+  // Just setting this up to use in future
+  const sideNavSubset = showPersonalized ? 'home' : 'home'
+
   return (
     <Layout title={metaData.title} metaData={metaData}>
-      <SideNav subset="home" />
+      <SideNav subset={sideNavSubset} />
       {shouldRender ? (
         <main className="main">{showPersonalized ? <HomePersonalized /> : <HomeStandard />}</main>
       ) : null}

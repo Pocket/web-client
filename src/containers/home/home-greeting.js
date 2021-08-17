@@ -1,22 +1,19 @@
 import { useSelector } from 'react-redux'
 import { getTimeOfDay } from 'common/utilities'
-import { css } from 'linaria'
-
-const homeCollections = css`
-  font-family: 'Graphik Web';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.2;
-  margin-bottom: 0;
-`
+import { CardPageHeader } from 'components/headers/discover-header'
 
 export const HomeGreeting = () => {
   const firstName = useSelector((state) => state.user.first_name)
+  const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
   const timeOfDay = getTimeOfDay()
 
   const showName = firstName && firstName.length < 15
   const greeting = showName ? `Good ${timeOfDay}, ${firstName}!` : `Good ${timeOfDay}!`
 
-  return <div className={homeCollections}>{greeting}</div>
+  const description =
+    pinnedTopics?.length === 0
+      ? `Select topics to see popular articles and our editors’ top picks.`
+      : null
+
+  return <CardPageHeader title={greeting} subHeading={description} />
 }
