@@ -5,22 +5,12 @@ import { css } from 'linaria'
 import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseSaveFlyaway } from '../onboarding.state'
+import { onboardingHighlight } from './highlight-animation'
 
 const homeSaveStyles = css`
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0.3rem rgba(0,128,120,0);
-    }
-    50% {
-      box-shadow: 0 0 0 0.3rem rgba(0,128,120,1);
-    }
-    100% {
-      box-shadow: 0 0 0 0.3rem rgba(0,128,120,0);
-    }
-  }
-
+  ${onboardingHighlight}
   border-radius: 2.75rem;
-  animation: pulse 1.7s linear infinite;
+  animation: onboardingPulse 1.7s linear infinite;
 `
 
 const homeSaveQuery = 'button[data-cy^="article-save-btn"]'
