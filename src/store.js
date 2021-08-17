@@ -71,6 +71,9 @@ import { itemReportSagas } from 'connectors/items-by-id/discover/items.report'
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
 
+import { homeItemsReducers } from 'connectors/items-by-id/home/items.state'
+import { homeItemsSagas } from 'connectors/items-by-id/home/items.state'
+
 import { readReducers } from 'containers/read/read.state'
 import { readSagas } from 'containers/read/read.state'
 
@@ -151,7 +154,8 @@ export const rootReducer = combineReducers({
   ...collectionReducer,
   ...libraryReducers,
   ...readerReducers,
-  home: homeReducers
+  home: homeReducers,
+  homeItemsById: homeItemsReducers
 })
 
 /* SAGAS
@@ -179,6 +183,7 @@ function* rootSaga() {
     ...itemReportSagas,
     ...readSagas,
     ...homeSagas,
+    ...homeItemsSagas,
     ...userMessageSagas,
     ...userSearchSagas,
     ...profileSagas,

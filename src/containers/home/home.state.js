@@ -1,5 +1,6 @@
-import { put, takeEvery, select } from 'redux-saga/effects'
+import { put, takeEvery, select, call } from 'redux-saga/effects'
 import { getMyList } from 'common/api/my-list'
+import { getHomeLineup as apiGetHomeLineup } from 'common/api/home'
 import { getHomeTopicFeed } from 'common/api/topics'
 import { getCollections as apiGetCollections } from 'common/api/collections'
 import { saveItem } from 'common/api/saveItem'
@@ -32,6 +33,10 @@ import { HOME_RECENT_SAVES_REQUEST } from 'actions'
 import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
 import { HOME_RECENT_SAVES_FAILURE } from 'actions'
 
+import { HOME_LINEUP_REQUEST } from 'actions'
+import { HOME_LINEUP_SUCCESS } from 'actions'
+import { HOME_LINEUP_FAILURE } from 'actions'
+
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 
 import { ITEMS_ADD_SUCCESS } from 'actions'
@@ -42,6 +47,7 @@ import { PINNED_TOPICS_SET } from 'actions'
  --------------------------------------------------------------- */
 export const homeHydrate = (topicSections) => ({ type: HOME_HYDRATE, topicSections })
 
+export const getHomeLineup = () => ({ type: HOME_LINEUP_REQUEST })
 export const getCollections = () => ({ type: HOME_COLLECTION_REQUEST })
 export const getRecentSaves = () => ({ type: HOME_RECENT_SAVES_REQUEST })
 export const saveHomeItem = (id, url, position) => ({type: HOME_SAVE_REQUEST, id, url, position}) //prettier-ignore
@@ -55,11 +61,18 @@ export const unsetTopicSection = (topic) => ({type : HOME_TOPIC_SECTION_UNSET, t
 const initialState = {
   collectionSet: [],
   recentSaves: [],
+  slates: [],
+  slatesById: {},
   newSaves: 0
 }
 
 export const homeReducers = (state = initialState, action) => {
   switch (action.type) {
+    case HOME_LINEUP_SUCCESS: {
+      const { slates, slatesById } = action
+      return { ...state, slates, slatesById }
+    }
+
     case HOME_TOPIC_SECTION_SUCCESS: {
       const { topic, items } = action
       return { ...state, [`${topic}Topic`]: items }
@@ -107,6 +120,7 @@ export function updateSaveStatus(state, id, save_status) {
  --------------------------------------------------------------- */
 export const homeSagas = [
   takeEvery(HOME_HYDRATE, homePreferences),
+  takeEvery(HOME_LINEUP_REQUEST, homeLineupRequest),
   takeEvery(HOME_RECENT_SAVES_REQUEST, recentDataRequest),
   takeEvery(HOME_COLLECTION_REQUEST, collectionDataRequest),
   takeEvery(HOME_TOPIC_SECTION_REQUEST, topicDataRequest),
@@ -126,6 +140,15 @@ const getTopicSections = (state) => state.settings.pinnedTopics
 function* homePreferences({ topicSections }) {
   for (var i = 0; i < topicSections.length; i++) {
     yield put({ type: HOME_TOPIC_SECTION_REQUEST, topic: topicSections[i] })
+  }
+}
+
+function* homeLineupRequest() {
+  try {
+    const data = yield call(fetchLineupData)
+    yield put({ type: HOME_LINEUP_SUCCESS, ...data })
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -306,5 +329,21 @@ export async function fetchCollectionData({ count }) {
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.log('home.state.topics', error)
+  }
+}
+
+/**
+ * fetchLineupData
+ * Make and async request the home lineup
+ */
+export async function fetchLineupData() {
+  try {
+    const { slates, slatesById, itemsById, slateLineup } = await apiGetHomeLineup({})
+    if (!slates?.length || !slatesById || !itemsById) return {}
+
+    return { slates, slatesById, itemsById, slateLineup }
+  } catch (error) {
+    //TODO: adjust this once error reporting strategy is defined.
+    console.log('home.state.lineup', error)
   }
 }
