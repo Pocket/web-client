@@ -4,6 +4,7 @@ import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 import { HomeWelcomeModal } from './messages/home-welcome-modal'
 import { HomeFlyawaySave } from './messages/home-flyaway-save'
+import { HomeFlyawayMyList } from './messages/home-flyaway-my-list'
 
 export const Onboarding = ({ type, ...rest }) => {
   const translations = useTranslation()
@@ -18,7 +19,8 @@ export const Onboarding = ({ type, ...rest }) => {
 
   const onboardingTypes = {
     'home.modal': HomeWelcomeModal,
-    'home.flyaway.save': HomeFlyawaySave
+    'home.flyaway.save': HomeFlyawaySave,
+    'home.flyaway.my-list': HomeFlyawayMyList
   }
 
   const OnboardingComponent = onboardingTypes[type]

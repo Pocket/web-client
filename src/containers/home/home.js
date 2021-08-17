@@ -40,6 +40,7 @@ export default function Home(props) {
       <FavoriteModal />
       <Onboarding type="home.modal" />
       <Onboarding type="home.flyaway.save" />
+      <Onboarding type="home.flyaway.my-list" />
       <Toasts />
     </Layout>
   )
