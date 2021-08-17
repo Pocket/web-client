@@ -41,6 +41,13 @@ const cardPageSectionStyle = css`
   }
 `
 
+const cardPageLineupStyle = css`
+  margin: 2rem 0 0;
+  .sectionSubTitle {
+    margin: 0;
+  }
+`
+
 const cardPageSubheaderLinkStyle = css`
   display: flex;
   justify-content: space-between;
@@ -106,6 +113,15 @@ export const HomeTopicHeader = ({ topicSlug, sectionTitle, sectionDescription, c
           <a onClick={clickEvent}>View More Articles</a>
         </Link>
       </div>
+    </header>
+  ) : null
+}
+
+export const HomeLineupHeader = ({ sectionTitle, sectionDescription }) => {
+  return sectionTitle ? (
+    <header className={cx(cardPageHeaderStyle, cardPageLineupStyle)}>
+      <h2 className="sectionTitle">{sectionTitle}</h2>
+      {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
     </header>
   ) : null
 }

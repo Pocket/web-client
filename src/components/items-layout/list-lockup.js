@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { cardsGrid } from 'components/items-layout/base'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 
@@ -25,12 +25,20 @@ const heroType = {
 
 export const cardLockupStyle = css`
   ${cardsGrid};
-  border-bottom: 1px solid var(--color-dividerTertiary);
-  padding: 2rem 0;
+  padding: 2rem 0 0;
 
   ${breakpointLargeHandset} {
     border-bottom: 0;
-    padding: 1rem 0;
+    padding: 1rem 0 0;
+  }
+`
+
+const withBorder = css`
+  border-bottom: 1px solid var(--color-dividerTertiary);
+  padding-bottom: 2rem;
+  ${breakpointLargeHandset} {
+    border-bottom: 0;
+    padding-bottom: 1rem;
   }
 `
 
@@ -41,14 +49,17 @@ export function Lockup({
   heroPosition = 'center',
   cardShape = 'block',
   lockupShape = 'hero',
+  border = true,
   ItemCard
 }) {
   const start = offset
   const end = offset + count
   const hero = heroType[heroPosition]
+  const lockupShapeClass = `lockup-${lockupShape}`
+  const lockupClass = cx(cardLockupStyle, lockupShapeClass, border && withBorder)
 
   return (
-    <div className={`${cardLockupStyle} lockup-${lockupShape}`}>
+    <div className={lockupClass}>
       {items.slice(start, end).map((id, index) => {
         const layoutProps = index === 0 ? hero : { className: 'lockup', cardShape }
         return <ItemCard id={id} key={id} position={index} {...layoutProps} />

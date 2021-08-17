@@ -190,7 +190,10 @@ export const Card = (props) => {
               </a>
             ) : null}
             {read_time ? (
-              <span className="readtime" data-cy="read-time"> · {read_time} min</span>
+              <span className="readtime" data-cy="read-time">
+                {' '}
+                · {read_time} min
+              </span>
             ) : null}
             {syndicated ? (
               <span className="syndicated">
@@ -232,7 +235,7 @@ Card.propTypes = {
   shortcutSelected: PropTypes.bool,
   openUrl: PropTypes.string,
   // UI
-  cardShape: PropTypes.oneOf(['grid', 'block', 'wide', 'detail', 'list']),
+  cardShape: PropTypes.oneOf(['grid', 'block', 'wide', 'full', 'detail', 'list']),
   className: PropTypes.string,
   showExcerpt: PropTypes.bool,
   showMedia: PropTypes.bool,
