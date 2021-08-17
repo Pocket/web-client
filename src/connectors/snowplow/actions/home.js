@@ -101,5 +101,31 @@ export const homeActions = {
       uiType: 'link'
     },
     expects: ['value']
+  },
+  'home.lineup.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: ['id', 'url', 'position', 'destination']
+  },
+  'home.lineup.impression': {
+    eventType: 'impression',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: ['id', 'url', 'position']
+  },
+  'home.lineup.save': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      engagementType: 'save',
+      uiType: 'button'
+    },
+    expects: ['id', 'url', 'position']
   }
 }
