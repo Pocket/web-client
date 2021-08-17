@@ -13,7 +13,7 @@ import { filterSettings } from 'common/utilities'
 
 const initialState = {
   topicSelectionModal: true,
-  saveFlyaway: true,
+  homeFlyawaySave: true,
   homeFlyawayMyList: true,
 }
 
@@ -48,7 +48,7 @@ export const onboardingReducers = (state = initialState, action) => {
     case HOME_SAVE_REQUEST:
       return {
         ...state,
-        saveFlyaway: false
+        homeFlyawaySave: false
       }
 
     case ONBOARDING_CLOSE_MY_LIST_FLYAWAY:
@@ -81,7 +81,7 @@ export const onboardingSagas = [
  --------------------------------------------------------------- */
 
 const getHomeFlyawayMyList = (state) => state.onboarding.homeFlyawayMyList
-const getHomeFlyawaySave = (state) => state.onboarding.saveFlyaway
+const getHomeFlyawaySave = (state) => state.onboarding.homeFlyawaySave
 
 function* saveSettings() {
   yield put({ type: SETTINGS_UPDATE })
