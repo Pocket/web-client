@@ -20,16 +20,16 @@ export async function getHomeLineup({ recommendationCount = 5 }) {
 function processLineup(response) {
   const slateLineup = getRecIds(response?.data?.getSlateLineup)
   const slatesResponse = response?.data?.getSlateLineup.slates
-  const itemsById = getRecsById(slatesResponse)
+  const itemsById = getRecsById(slatesResponse, slateLineup)
   const slatesById = processSlates(slatesResponse)
   const slates = slatesResponse.map((slate) => slate?.id)
 
   return { slates, slatesById, itemsById, slateLineup }
 }
 
-function getRecsById(slates) {
+function getRecsById(slates, slateLineup) {
   return slates.reduce((accumulator, current) => {
-    const recommendations = deriveItems(current?.recommendations)
+    const recommendations = deriveItems(current, slateLineup)
     const recsById = arrayToObject(recommendations, 'item_id')
     return { ...accumulator, ...recsById }
   }, {})
@@ -42,7 +42,7 @@ function processSlates(slates) {
   return arrayToObject(slateWithIds, 'id')
 }
 
-export function deriveItems(recommendations) {
+export function deriveItems(slate, slateLineup) {
   /**
    * @title {string} The most appropriate title to show
    * @thumbnail {url} The most appropriate image to show as a thumbnail
@@ -56,6 +56,16 @@ export function deriveItems(recommendations) {
    * @slateLineup {object} A object needed for snowplow slate-lineup entity
    * @slate {object} A object needed for snowplow slate entity
    */
+  const recommendations = slate?.recommendations
+  const analyticsData = {
+    slateLineupId: slateLineup?.id,
+    slateLineupRequestId: slateLineup?.requestId,
+    slateLineupExperiment: slateLineup?.experimentId,
+    slateId: slate?.id,
+    slateRequestId: slate?.requestId,
+    slateExperiment: slate?.experimentId
+  }
+
   return recommendations.map((recommendation) => {
     return {
       resolved_id: recommendation.item?.resolvedId,
@@ -70,7 +80,11 @@ export function deriveItems(recommendations) {
       resolved_url: recommendation.item?.resolvedUrl,
       syndicated: syndicated(recommendation),
       openExternal: false,
-      save_status: 'unsaved'
+      save_status: 'unsaved',
+      analyticsData: {
+        ...analyticsData,
+        recommendationId: recommendation.id || recommendation.item?.resolved_id
+      }
     }
   })
 }

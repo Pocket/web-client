@@ -9,20 +9,22 @@ export const CardLineup = ({ id, position, className, cardShape, showExcerpt = f
   // Get data from state
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const item = useSelector((state) => state.homeItemsById[id])
-  const { save_status, item_id, resolved_url, open_url, openExternal } = item
-  const analyticsData = {
+  const { save_status, item_id, resolved_url, open_url, openExternal, analyticsData } = item
+
+  const data = {
     id: item_id,
     url: resolved_url,
     position,
-    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external'
+    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external',
+    ...analyticsData
   }
 
   /**
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onOpen = () => dispatch(sendSnowplowEvent('home.lineup.open', analyticsData))
-  const onImpression = () => dispatch(sendSnowplowEvent('home.lineup.impression', analyticsData))
+  const onOpen = () => dispatch(sendSnowplowEvent('home.lineup.open', data))
+  const onImpression = () => dispatch(sendSnowplowEvent('home.lineup.impression', data))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
 
   return (
