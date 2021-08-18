@@ -1,15 +1,20 @@
 import { css } from 'linaria'
-import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointLargeHandset, breakpointLargeTablet } from '@pocket/web-ui'
 import { CloseButton } from 'components/close-button/close-button'
 
 const flyawayWrapper = css`
   position: sticky;
   bottom: 50px;
-  grid-column: span 12;
-  max-width: 350px;
+  grid-column: 9 / span 4;
+  z-index: 100;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+
+  ${breakpointLargeTablet} {
+    grid-column: 7 / span 6;
+  }
 
   ${breakpointLargeHandset} {
-    max-width: 600px;
+    grid-column: span 12;
     bottom: 20px;
   }
 `
@@ -31,7 +36,7 @@ const flyaway = css`
     font-weight: 600;
     margin-bottom: 0.5rem;
 
-    ${breakpointLargeHandset} {
+    ${breakpointLargeTablet} {
       font-size: 1.2rem;
     }
   }
