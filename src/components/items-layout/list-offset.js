@@ -6,7 +6,7 @@ export const offsetListStyle = css`
   ${cardsGrid};
   padding: 2.5rem 0;
   grid-row-gap: 2.5rem;
-  grid-column-gap: 0;
+  grid-column-gap: 1rem;
 
   &.border {
     border-bottom: 1px solid var(--color-dividerTertiary);
@@ -28,6 +28,7 @@ export function OffsetList({
   className,
   cardShape = 'wide',
   ItemCard,
+  showExcerpt = true,
   children
 }) {
   const start = offset
@@ -37,7 +38,13 @@ export function OffsetList({
   return (
     <div className={listClass}>
       {items.slice(start, end).map((id, index) => (
-        <ItemCard id={id} key={id} position={index} cardShape={cardShape} showExcerpt={true} />
+        <ItemCard
+          id={id}
+          key={id}
+          position={index}
+          cardShape={cardShape}
+          showExcerpt={showExcerpt}
+        />
       ))}
       {children}
     </div>
