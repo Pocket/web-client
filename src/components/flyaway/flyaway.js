@@ -1,16 +1,17 @@
-import { css } from 'linaria'
+import { useState, useEffect } from 'react'
+import { css, cx } from 'linaria'
 import { breakpointLargeHandset, breakpointLargeTablet } from '@pocket/web-ui'
 import { CloseButton } from 'components/close-button/close-button'
-import { fadeStyles } from 'connectors/onboarding/messages/onboarding-animations'
 
 const flyawayWrapper = css`
-  ${fadeStyles}
   position: sticky;
   bottom: 50px;
   grid-column: 9 / span 4;
   z-index: 100;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
-  animation: fade 0.7s linear;
+  transition: opacity 700ms linear;
+  opacity: 0;
+  pointer-events: none;
 
   ${breakpointLargeTablet} {
     grid-column: 7 / span 6;
@@ -19,6 +20,11 @@ const flyawayWrapper = css`
   ${breakpointLargeHandset} {
     grid-column: span 12;
     bottom: 20px;
+  }
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
   }
 `
 
@@ -66,9 +72,20 @@ const closeButtonOverrides = css`
   }
 `
 
-export function Flyaway({ title, description, handleClose }) {
+export function Flyaway({ title, description, handleClose, show }) {
+  const [flyawayOpen, setFlyawayOpen] = useState(false)
+
+  useEffect(() => {
+    let timer
+    if (show) timer = setTimeout(() => setFlyawayOpen(true), 700)
+    else setFlyawayOpen(false)
+
+    return () => clearTimeout(timer)
+  }, [show])
+
+  const flyawayClassNames = cx(flyawayWrapper, flyawayOpen && 'show')
   return (
-    <div className={flyawayWrapper}>
+    <div className={flyawayClassNames}>
       <div className={flyaway}>
         <div className="flyaway_title">
           <h5>{title}</h5>
