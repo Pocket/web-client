@@ -55,6 +55,7 @@ export const onboardingActions = {
     eventType: 'impression',
     entityTypes: ['ui'],
     eventData: {
+      component: 'ui',
       uiType: 'dialog'
     },
   },
