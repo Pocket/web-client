@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import { TopicSelector } from 'connectors/topic-list/topic-selector'
-import { onboardingCloseTopicSelectionModal } from './onboarding.state'
+import { onboardingCloseTopicSelectionModal } from '../onboarding.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { SaveFilledIcon } from '@pocket/web-ui'
 import RainbowReader from 'static/images/rainbow-reader-transparent.svg'
@@ -93,7 +93,7 @@ const modalContentClass = css`
   }
 `
 
-export const OnboardingModal = () => {
+export const HomeWelcomeModal = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 

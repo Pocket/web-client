@@ -1,3 +1,46 @@
+# [1.18.0](https://github.com/Pocket/web-client/compare/v1.17.9...v1.18.0) (2021-08-18)
+
+
+### Bug Fixes
+
+* **cards:** cards/layouts/headers for lineups ([b848e00](https://github.com/Pocket/web-client/commit/b848e00118381179562d550f113bb0ab91157343))
+* **greeting:** revert greeting to an addendum ([b02106a](https://github.com/Pocket/web-client/commit/b02106a6e550fcd184c77ac3630bac62cb3084a3))
+* **home:** add lineup snowplow action ([55560ee](https://github.com/Pocket/web-client/commit/55560ee2b96d4b4a71d6dacb4a9cbbfd2df4621c))
+* **home:** passing proper lineup data to analytics ([31f9387](https://github.com/Pocket/web-client/commit/31f9387ba6ae7b49bf5d47a272fa7586f0b71c74))
+* **home:** split classic from profile driven ([c894ff5](https://github.com/Pocket/web-client/commit/c894ff505b9794f99895309c60c86bbd4672bbe3))
+* **offset list:** pass through showExcerpt ([4e3135c](https://github.com/Pocket/web-client/commit/4e3135cad19b503e971b6ff3ea10ef8de2030add))
+
+
+### Features
+
+* **home:** adding lineup cards/actions ([59cf346](https://github.com/Pocket/web-client/commit/59cf34694f150add38d01fa8dbb239617c425eb2))
+* **home:** adding lineup state ([cdac7d8](https://github.com/Pocket/web-client/commit/cdac7d82c1858572d209310492de438e88afeb63))
+* **home:** better separation of files ([353fc1b](https://github.com/Pocket/web-client/commit/353fc1b2579807699b88b7cb343b184d434c2dbe))
+
+## [1.17.9](https://github.com/Pocket/web-client/compare/v1.17.8...v1.17.9) (2021-08-18)
+
+
+### Bug Fixes
+
+* **close-button:** extract CloseButton out from Modal so it can be reused ([dca9bd2](https://github.com/Pocket/web-client/commit/dca9bd229b2c73482a77e16f560481f42c287b90))
+* **flyaway:** add flyaway component and story ([657cad1](https://github.com/Pocket/web-client/commit/657cad19a9bfa05e35b8bd09eb60a60ad88b98a1))
+* **flyaway:** add highlight feature to save flyaway ([fd40191](https://github.com/Pocket/web-client/commit/fd40191962bfafa7637b59f6d7fea82f9a17f5b9))
+* **flyaway:** add pulse animation, cleanup css ([69ac588](https://github.com/Pocket/web-client/commit/69ac5881c851a28a18dd923ce3785901960f54ea))
+* **flyaway:** className instead of class ([caaa524](https://github.com/Pocket/web-client/commit/caaa52405690eeccf5a6cb81098750a9d5fcf79c))
+* **flyaway:** close button should sit at top when there is a long title ([6bf43b1](https://github.com/Pocket/web-client/commit/6bf43b1672f067e52c834e77a51f36bc20471be9))
+* **flyaway:** update placement, grid column sizing and responsiveness ([963e576](https://github.com/Pocket/web-client/commit/963e576bfa904b3dcc272844ff5d48fdb2418fc1))
+* **onboarding:** add analytics event for flyaway.save.close ([da89ce8](https://github.com/Pocket/web-client/commit/da89ce8c7b57762c1eb0bb1883ab5a4326acac5b))
+* **onboarding:** add component to onboarding.flyaway.save.impression snowplow event ([4c383db](https://github.com/Pocket/web-client/commit/4c383db55f437bfd8c8ce66f0ddbe4137596e1dd))
+* **onboarding:** add translations and snowplow events ([c6890e9](https://github.com/Pocket/web-client/commit/c6890e9b61a2441961e524ef61376dc1b9cfbcb3))
+* **onboarding:** adjusting styles per VQA session ([f0196a5](https://github.com/Pocket/web-client/commit/f0196a53e8d50e6c2ffc5d655d59bddd1b8445ab))
+* **onboarding:** hook save flyaway up to onboarding state, allow for dismissal of message ([a558eb7](https://github.com/Pocket/web-client/commit/a558eb772ae1238885a584696cc19c666f28350b))
+* **onboarding:** pass handleClose to Flyaway ([0265f5e](https://github.com/Pocket/web-client/commit/0265f5e0a9fa121504be4c23c195326fd9fddd0c))
+* **onboarding:** remove flyaway import from home ([1ed8a02](https://github.com/Pocket/web-client/commit/1ed8a023d99cd884f4d5233bf01bfbf549bbbdfe))
+* **onboarding:** rename OnboardingModal to be HomeWelcomeModal ([7487166](https://github.com/Pocket/web-client/commit/7487166c8a3d4b1f5fe354a739cab1a0a0ba4cad))
+* **onboarding:** show home.flyaway.save via the onboarding connector ([5a95fbc](https://github.com/Pocket/web-client/commit/5a95fbc59f57405b856e9227bdc88024bf8812b2))
+* **onboarding:** temporarily add flyaway to home to test it ([54a25e7](https://github.com/Pocket/web-client/commit/54a25e75d7f15577e5792180904b0ffc8b2d761a))
+* **onboarding:** update save flyaway impression event to be dialog uiType ([30d6b5f](https://github.com/Pocket/web-client/commit/30d6b5fb8d3f76f84ddd996514a354642feba521))
+
 ## [1.17.8](https://github.com/Pocket/web-client/compare/v1.17.7...v1.17.8) (2021-08-16)
 
 

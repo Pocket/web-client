@@ -101,5 +101,53 @@ export const homeActions = {
       uiType: 'link'
     },
     expects: ['value']
+  },
+  'home.lineup.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: ['id', 'url', 'position', 'destination']
+  },
+  'home.lineup.impression': {
+    eventType: 'impression',
+    entityTypes: ['content', 'recommendation', 'slate', 'slateLineup', 'ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: [
+      'id',
+      'url',
+      'position',
+      'recommendationId',
+      'slateLineupId',
+      'slateLineupRequestId',
+      'slateLineupExperiment',
+      'slateId',
+      'slateRequestId',
+      'slateExperiment'
+    ]
+  },
+  'home.lineup.save': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'recommendation', 'slate', 'slateLineup', 'ui'],
+    eventData: {
+      engagementType: 'save',
+      uiType: 'button'
+    },
+    expects: [
+      'id',
+      'url',
+      'position',
+      'recommendationId',
+      'slateLineupId',
+      'slateLineupRequestId',
+      'slateLineupExperiment',
+      'slateId',
+      'slateRequestId',
+      'slateExperiment'
+    ]
   }
 }

@@ -35,5 +35,20 @@ export const onboardingActions = {
       uiType: 'button'
     },
     expects: ['label']
+  },
+  'onboarding.flyaway.save.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'dialog'
+    },
+  },
+  'onboarding.flyaway.save.close': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
   }
 }

@@ -282,6 +282,7 @@ const GlobalNavMobileMenu = ({
   return (
     <>
       <Button
+        data-cy="nav-hamburger"
         onClick={handleOpen}
         aria-label={t('nav:open-the-pocket-mobile-menu', 'Open the Pocket mobile menu')}
         data-tooltip={t('nav:open', 'Open')}

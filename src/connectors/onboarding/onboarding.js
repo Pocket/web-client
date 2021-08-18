@@ -2,7 +2,8 @@ import { useTranslation } from 'next-i18next'
 import { useSelector } from 'react-redux'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
-import { OnboardingModal } from './onboarding-modal'
+import { HomeWelcomeModal } from './messages/home-welcome-modal'
+import { HomeFlyawaySave } from './messages/home-flyaway-save'
 
 export const Onboarding = ({ type, ...rest }) => {
   const translations = useTranslation()
@@ -16,7 +17,8 @@ export const Onboarding = ({ type, ...rest }) => {
   const showOnboarding = currentLanguage === 'en' && enrolled
 
   const onboardingTypes = {
-    'home.modal': OnboardingModal
+    'home.modal': HomeWelcomeModal,
+    'home.flyaway.save': HomeFlyawaySave
   }
 
   const OnboardingComponent = onboardingTypes[type]
