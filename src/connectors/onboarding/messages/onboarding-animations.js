@@ -11,3 +11,14 @@ export const onboardingHighlight = `
     }
   }
 `
+
+export const fadeStyles = `
+  @keyframes fade {
+    0% { 
+      opacity: 0;
+    }
+    100% {
+      opacity: 1
+    }
+  }
+`

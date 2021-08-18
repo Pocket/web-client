@@ -9,7 +9,7 @@ import { Button } from '@pocket/web-ui'
 import { DEFAULT_LINKS } from 'components/global-nav/links/global-nav-links'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 import { BetaTag } from 'components/tags/tags'
-import { onboardingHighlight } from 'connectors/onboarding/messages/highlight-animation'
+import { onboardingHighlight } from 'connectors/onboarding/messages/onboarding-animations'
 
 const premiumLinks = [
   {

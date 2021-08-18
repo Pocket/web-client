@@ -6,7 +6,7 @@ import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseMyListFlyaway } from '../onboarding.state'
 import { breakpointLargeTablet } from '@pocket/web-ui'
-import { onboardingHighlight } from './highlight-animation'
+import { onboardingHighlight } from './onboarding-animations'
 
 const sideNavStyles = css`
   ${onboardingHighlight}
@@ -30,8 +30,10 @@ const hamburgerStyles = css`
       animation: onboardingPulse 1.7s linear infinite;
     }
 
+    // removing the focus styling only when the onboarding highlight is shown
+    // !important here to override another !important
     .hamburger-icon:focus {
-      outline: none !important; // removing the focus styling only when the onboarding highlight is shown
+      outline: none !important;
     }
   }
 `

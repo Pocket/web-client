@@ -1,13 +1,16 @@
 import { css } from 'linaria'
 import { breakpointLargeHandset, breakpointLargeTablet } from '@pocket/web-ui'
 import { CloseButton } from 'components/close-button/close-button'
+import { fadeStyles } from 'connectors/onboarding/messages/onboarding-animations'
 
 const flyawayWrapper = css`
+  ${fadeStyles}
   position: sticky;
   bottom: 50px;
   grid-column: 9 / span 4;
   z-index: 100;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+  animation: fade 0.7s linear;
 
   ${breakpointLargeTablet} {
     grid-column: 7 / span 6;
