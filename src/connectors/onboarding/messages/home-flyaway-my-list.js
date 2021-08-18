@@ -83,8 +83,6 @@ export const HomeFlyawayMyList = () => {
     'Everything you save goes straight to My List – the library of your faves.')
 
   return (
-    ( showFlyaway ?
-      <Flyaway title={title} description={description} handleClose={handleClose} />
-    : null )
+    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} />
   )
 }

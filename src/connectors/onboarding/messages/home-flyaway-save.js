@@ -55,8 +55,6 @@ export const HomeFlyawaySave = () => {
     'Home is filled with the best articles from across the web. Save one to read it later.')
 
   return (
-    ( showFlyaway ?
-      <Flyaway title={title} description={description} handleClose={handleClose} />
-    : null )
+    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} />
   )
 }
