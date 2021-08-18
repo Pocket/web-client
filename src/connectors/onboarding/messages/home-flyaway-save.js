@@ -5,7 +5,7 @@ import { css } from 'linaria'
 import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseSaveFlyaway } from '../onboarding.state'
-import { onboardingHighlight } from './highlight-animation'
+import { onboardingHighlight } from './onboarding-animations'
 
 const homeSaveStyles = css`
   ${onboardingHighlight}
