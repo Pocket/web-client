@@ -25,8 +25,8 @@ export function PostTrustInit() {
   const [analyticsInit, analyticsInitSet] = useState(false)
   const { user_status, user_id, sess_guid } = useSelector((state) => state.user)
   const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
-  const analyticsEnabled = useSelector( (state) => state.oneTrust?.analytics.enabled ) //prettier-ignore
-  const analyticsReady = analyticsEnabled && oneTrustReady
+  const analyticsEnabled = useSelector( (state) => state.oneTrust?.analytics ) //prettier-ignore
+  const analyticsReady = analyticsEnabled?.enabled && oneTrustReady
 
   useEffect(() => {
     if (analyticsInit) return
@@ -42,9 +42,11 @@ export function PostTrustInit() {
     // Setting this so we don't get a glut of false positives with shifting
     // cookie preferences
     analyticsInitSet(true)
+  }, [analyticsInit, dispatch, user_status, sess_guid, user_id])
 
+  useEffect(() => {
     dispatch(updateAnonymousTracking(analyticsReady))
-  }, [analyticsReady, analyticsInit, dispatch, user_status, sess_guid, user_id])
+  }, [analyticsReady])
 
   useEffect(() => {
     // Load Opt In Monster for marketing/conversion adventurers

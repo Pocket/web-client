@@ -27,7 +27,10 @@ export function initializeSnowplow(user_id, sess_guid, finalizeInit) {
   snowplow('newTracker', 'sp', SNOWPLOW_COLLECTOR, SNOWPLOW_CONFIG)
 
   // enable activity monitoring (heartbeat)
-  snowplow('enableActivityTracking', SNOWPLOW_HEARTBEAT_DELAY, SNOWPLOW_HEARTBEAT_INTERVAL)
+  snowplow('enableActivityTracking', {
+    minimumVisitLength: SNOWPLOW_HEARTBEAT_DELAY,
+    heartbeatDelay: SNOWPLOW_HEARTBEAT_INTERVAL
+  })
 
   // automatic link tracking
   snowplow('enableLinkClickTracking')

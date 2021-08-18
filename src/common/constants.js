@@ -37,7 +37,7 @@ export const GREENHOUSE_JOBS_URL = 'https://boards-api.greenhouse.io/v1/boards/p
 
 // SNOWPLOW
 export const API_USER_ID = 89624 // Pocket backend identifier for an API user used in Snowplow analytic events
-export const SNOWPLOW_SCRIPT = 'https://assets.getpocket.com/web-utilities/public/static/te-2.18.js'
+export const SNOWPLOW_SCRIPT = 'https://assets.getpocket.com/web-utilities/public/static/te-3.1.2.js'
 export const SNOWPLOW_POST_PATH = process.env.SHOW_DEV === 'included'
   ? '/com.snowplowanalytics.snowplow/tp2'
   : '/t/e'

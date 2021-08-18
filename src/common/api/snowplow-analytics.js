@@ -10,9 +10,9 @@
  * @param {Object} snowplowEvent - self-describing JSON detailing the user event
  * @param {Object[]} [snowplowEntities=[]] - self-describing JSON detailing the context in which the event happened
  */
-export const sendCustomSnowplowEvent = (snowplowEvent, snowplowEntities = []) => {
+export const sendCustomSnowplowEvent = (event, context = []) => {
   try {
-    global.snowplow('trackSelfDescribingEvent', snowplowEvent, snowplowEntities)
+    global.snowplow('trackSelfDescribingEvent', { event, context })
   } catch {
     console.warn('CustomEvent: snowplow library is not available')
   }
