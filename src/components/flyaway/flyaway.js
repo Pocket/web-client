@@ -9,7 +9,7 @@ const flyawayWrapper = css`
   grid-column: 9 / span 4;
   z-index: 100;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
-  transition: opacity 700ms linear;
+  transition: opacity 700ms ease-in-out;
   opacity: 0;
   pointer-events: none;
 
