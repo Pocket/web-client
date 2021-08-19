@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/Pocket/web-client/compare/v1.18.0...v1.18.1) (2021-08-19)
+
+
+### Bug Fixes
+
+* **snowplow:** upgrade snowplow to 3.1.2 and update onetrust toggle ([1ac1665](https://github.com/Pocket/web-client/commit/1ac1665e6075cce50325edb8d53b94a32c8465f3))
+
 # [1.18.0](https://github.com/Pocket/web-client/compare/v1.17.9...v1.18.0) (2021-08-18)
 
 
