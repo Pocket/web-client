@@ -42,6 +42,9 @@ import { PROFILE_ITEM_DELETE_SUCCESS } from 'actions'
 import { PROFILE_ITEM_DELETE_FAILURE } from 'actions'
 
 import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
+import { COLLECTION_PAGE_SAVE_SUCCESS } from 'actions'
+import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
+import { ARTICLE_SAVE_SUCCESS } from 'actions'
 
 const toastWrapper = css`
   text-align: left;
@@ -115,7 +118,10 @@ const messages = {
   [PROFILE_ITEM_DELETE_SUCCESS]: 'deleted',
   [PROFILE_ITEM_DELETE_FAILURE]: 'error-deleting',
   [COPY_ITEM_URL]: 'url-copied',
-  [COLLECTIONS_SAVE_SUCCESS]: 'added'
+  [COLLECTIONS_SAVE_SUCCESS]: 'added',
+  [COLLECTION_PAGE_SAVE_SUCCESS]: 'added',
+  [DISCOVER_ITEMS_SAVE_SUCCESS]: 'added',
+  [ARTICLE_SAVE_SUCCESS]: 'added'
 }
 
 export function Toast({ stamp, type, itemCount = 1 }) {

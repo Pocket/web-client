@@ -21,6 +21,8 @@ import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { CallOutStartLibraryExplore } from 'components/call-out/call-out-start-library'
 import { CallOutPocketHitsSignup } from 'components/call-out/call-out-pocket-hits'
 
+import { Toasts } from 'connectors/toasts/toast-list'
+
 import { useTranslation } from 'next-i18next'
 
 export default function Discover({ url, locale }) {
@@ -88,6 +90,7 @@ export default function Discover({ url, locale }) {
       ) : null}
 
       <ReportFeedbackModal />
+      <Toasts />
     </Layout>
   ) : (
     <Layout title={metaData.title} metaData={metaData}></Layout>

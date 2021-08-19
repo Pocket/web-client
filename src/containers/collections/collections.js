@@ -8,6 +8,8 @@ import { ItemCard } from 'connectors/item-card/collection/collection-card'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
 
+import { Toasts } from 'connectors/toasts/toast-list'
+
 import { useTranslation } from 'next-i18next'
 
 export default function Collections() {
@@ -37,6 +39,8 @@ export default function Collections() {
       <Lockup items={itemIds} offset={10} heroPosition="left" ItemCard={ItemCard} />
 
       <OffsetList items={itemIds} offset={15} cardShape="wide" ItemCard={ItemCard} />
+
+      <Toasts />
     </Layout>
   )
 }

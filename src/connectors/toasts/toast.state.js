@@ -18,6 +18,9 @@ import { ITEMS_UNFAVORITE_SUCCESS } from 'actions'
 import { ITEMS_UNFAVORITE_FAILURE } from 'actions'
 
 import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
+import { COLLECTION_PAGE_SAVE_SUCCESS } from 'actions'
+import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
+import { ARTICLE_SAVE_SUCCESS } from 'actions'
 
 import { ITEMS_SHARE_SUCCESS } from 'actions'
 import { ITEMS_SHARE_FAILURE } from 'actions'
@@ -73,6 +76,9 @@ export const actionToastsReducers = (state = initialState, action) => {
     case PROFILE_ITEM_DELETE_SUCCESS:
     case PROFILE_ITEM_DELETE_FAILURE:
     case COLLECTIONS_SAVE_SUCCESS:
+    case COLLECTION_PAGE_SAVE_SUCCESS:
+    case DISCOVER_ITEMS_SAVE_SUCCESS:
+    case ARTICLE_SAVE_SUCCESS:
     case COPY_ITEM_URL: {
       const { actions, count } = action
       const itemCount = actions ? actions?.length : count

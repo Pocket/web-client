@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import { useHasChanged } from 'common/utilities/hooks/has-changed'
+import { useHasChanged, usePrevious } from 'common/utilities/hooks/has-changed'
 import Layout from 'layouts/with-sidebar'
 import { getMylistData } from './my-list.state'
 import { updateMyListData } from './my-list.state'
@@ -46,6 +46,7 @@ export default function MyList(props) {
   const sortSubset = useSelector((state) => state.app.section)
   const sortOrder = useSelector((state) => state.app.sortOptions[sortSubset] || 'newest')
   const routeChange = useHasChanged(router.pathname)
+  const oldRoute = usePrevious(router.pathname)
 
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
@@ -93,7 +94,8 @@ export default function MyList(props) {
   ])
 
   /**
-   * Update list if we are navigating here from another area in the app
+   * Update list if we are navigating here from another my-list type page:
+   * (archive/favorites/search/etc)
    * ------------------------------------------------------------------------
    */
   useEffect(() => {
@@ -112,6 +114,15 @@ export default function MyList(props) {
     filter,
     tag
   ])
+
+  /**
+   * Update list if we are navigating here from another page in the app
+   * (home/discover/collections/etc)
+   * ------------------------------------------------------------------------
+   */
+  useEffect(() => {
+    if (!oldRoute) dispatch(updateMyListData(since, subset, filter, tag))
+  }, [oldRoute])
 
   /**
    * When an item is added we get back sub par data from the return
