@@ -72,6 +72,7 @@ export const onboardingSagas = [
   takeLatest(ONBOARDING_RESET, saveSettings),
   takeLatest(ONBOARDING_CLOSE_TOPICS_MODAL, saveSettings),
   takeLatest(ONBOARDING_CLOSE_SAVE_FLYAWAY, saveSettings),
+  takeLatest(ONBOARDING_CLOSE_MY_LIST_FLYAWAY, saveSettings),
   takeLatest(HOME_SAVE_REQUEST, saveSettings),
   takeLatest(APP_SET_SECTION, confirmFlyawayStatus)
 ]
