@@ -18,6 +18,10 @@ export const offsetListStyle = css`
   &.no-space {
     padding-bottom: 0;
   }
+
+  &.compact {
+    padding: 1.5rem 0 0;
+  }
 `
 
 export function OffsetList({
@@ -25,16 +29,24 @@ export function OffsetList({
   offset = 0,
   count = 5,
   border = false,
+  compact = false,
   className,
   cardShape = 'wide',
   ItemCard,
   showExcerpt = true,
+  showMedia,
   children
 }) {
   const start = offset
   const end = offset + count
   const hasChildren = !!children
-  const listClass = cx(offsetListStyle, border && 'border', hasChildren && 'no-space', className)
+  const listClass = cx(
+    offsetListStyle,
+    compact && 'compact',
+    border && 'border',
+    hasChildren && 'no-space',
+    className
+  )
   return (
     <div className={listClass}>
       {items.slice(start, end).map((id, index) => (
@@ -43,6 +55,7 @@ export function OffsetList({
           key={id}
           position={index}
           cardShape={cardShape}
+          showMedia={showMedia}
           showExcerpt={showExcerpt}
         />
       ))}

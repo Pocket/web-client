@@ -48,6 +48,18 @@ const cardPageLineupStyle = css`
   }
 `
 
+const cardPageSimilarStyle = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  .sectionSubTitle {
+    margin: 0;
+  }
+  .close {
+  }
+`
+
 const cardPageSubheaderLinkStyle = css`
   display: flex;
   justify-content: space-between;
@@ -69,6 +81,10 @@ const cardPageSubheaderLinkStyle = css`
       margin-bottom: 0.5rem;
     }
   }
+`
+
+const lineupSpacerStyle = css`
+  padding: 2rem 0;
 `
 
 export const HomeJourneyHeader = ({ sectionTitle, sectionDescription }) => {
@@ -124,4 +140,20 @@ export const HomeLineupHeader = ({ sectionTitle, sectionDescription }) => {
       {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
     </header>
   ) : null
+}
+
+export const HomeSimilarHeader = ({ sectionTitle, sectionDescription, closeAction = () => {} }) => {
+  return sectionTitle ? (
+    <header className={cx(cardPageHeaderStyle, cardPageSimilarStyle)}>
+      <div>
+        <h3 className="sectionTitle">{sectionTitle}</h3>
+        {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
+      </div>
+      <button onClick={closeAction}>Dismiss</button>
+    </header>
+  ) : null
+}
+
+export const HomeLineupSpacer = () => {
+  return <div className={lineupSpacerStyle} />
 }

@@ -3,7 +3,9 @@ import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { itemActionStyle } from 'components/item-actions/base'
 import { useSelector, useDispatch } from 'react-redux'
 import { saveHomeItem } from 'containers/home/home.state'
+import { getSimilarRecs } from 'containers/home/home.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { ShowSimilar } from 'components/item-actions/show-similar'
 
 export function ActionsLineup({ id, position }) {
   const dispatch = useDispatch()
@@ -39,6 +41,11 @@ export function ActionsLineup({ id, position }) {
     dispatch(sendSnowplowEvent('home.lineup.open', data))
   }
 
+  // Similar action
+  const onSimilar = () => {
+    dispatch(getSimilarRecs(id))
+  }
+
   return item ? (
     <div className={`${itemActionStyle} actions`}>
       <SaveToPocket
@@ -51,6 +58,7 @@ export function ActionsLineup({ id, position }) {
         saveStatus={save_status}
         id={id}
       />
+      <ShowSimilar similarAction={onSimilar} />
     </div>
   ) : null
 }

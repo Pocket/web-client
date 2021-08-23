@@ -37,6 +37,9 @@ import { HOME_LINEUP_REQUEST } from 'actions'
 import { HOME_LINEUP_SUCCESS } from 'actions'
 import { HOME_LINEUP_FAILURE } from 'actions'
 
+import { HOME_SIMILAR_REC_REQUEST } from 'actions'
+import { HOME_SIMILAR_RECS_CLEAR } from 'actions'
+
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 
 import { ITEMS_ADD_SUCCESS } from 'actions'
@@ -48,6 +51,8 @@ import { PINNED_TOPICS_SET } from 'actions'
 export const homeHydrate = (topicSections) => ({ type: HOME_HYDRATE, topicSections })
 
 export const getHomeLineup = () => ({ type: HOME_LINEUP_REQUEST })
+export const getSimilarRecs = (id) => ({ type: HOME_SIMILAR_REC_REQUEST, id })
+export const clearSimilarRecs = () => ({ type: HOME_SIMILAR_RECS_CLEAR })
 export const getCollections = () => ({ type: HOME_COLLECTION_REQUEST })
 export const getRecentSaves = () => ({ type: HOME_RECENT_SAVES_REQUEST })
 export const saveHomeItem = (id, url, position) => ({type: HOME_SAVE_REQUEST, id, url, position}) //prettier-ignore
@@ -71,6 +76,15 @@ export const homeReducers = (state = initialState, action) => {
     case HOME_LINEUP_SUCCESS: {
       const { slates, slatesById } = action
       return { ...state, slates, slatesById }
+    }
+
+    case HOME_SIMILAR_REC_REQUEST: {
+      const { id } = action
+      return { ...state, similarRecId: id }
+    }
+
+    case HOME_SIMILAR_RECS_CLEAR: {
+      return { ...state, similarRecId: false }
     }
 
     case HOME_TOPIC_SECTION_SUCCESS: {
@@ -155,7 +169,7 @@ function* homeLineupRequest() {
 function* recentDataRequest() {
   try {
     const { items, itemsById, error } = yield fetchMyListData({
-      count: 1,
+      count: 3,
       offset: 0,
       state: 'unread',
       sort: 'newest'

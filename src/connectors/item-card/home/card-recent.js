@@ -1,34 +1,30 @@
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
-import { ActionsRec } from './card-rec-actions'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { css } from 'linaria'
 
-const recStyle = css`
-  h2.title {
-    font-size: 1.34rem;
-  }
-`
-
-export const RecCard = ({
+export const RecentCard = ({
   id,
   position,
-  cardShape = 'detail',
-  showExcerpt = true,
-  showMedia = true
+  className,
+  cardShape = 'block',
+  showMedia = true,
+  showExcerpt = false
 }) => {
   const dispatch = useDispatch()
 
   // Get data from state
-  const item = useSelector((state) => state.recit.recentRecs[id])
-  const { save_status, item_id, resolved_url, original_url, openExternal } = item
+  const item = useSelector((state) => state.myListItemsById[id])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
-  const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : original_url
+
+  if (!item) return null
+
+  const { item_id, resolved_url, original_url, openExternal } = item
+  const openUrl = !openExternal ? `/read/${item_id}` : original_url
   const analyticsData = {
     id,
     url: resolved_url,
     position,
-    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external'
+    destination: !openExternal ? 'internal' : 'external'
   }
 
   /**
@@ -43,7 +39,7 @@ export const RecCard = ({
     <Card
       item={item}
       position={position}
-      className={recStyle}
+      className={className}
       cardShape={cardShape}
       showExcerpt={showExcerpt}
       showMedia={showMedia}
@@ -51,7 +47,6 @@ export const RecCard = ({
       // Tracking
       onItemInView={onItemInView}
       onOpen={onOpen}
-      ActionMenu={ActionsRec}
     />
   ) : null
 }
