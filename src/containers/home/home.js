@@ -1,17 +1,6 @@
 import { useSelector } from 'react-redux'
-import { SideNav } from 'connectors/side-nav/side-nav'
-import Layout from 'layouts/with-sidebar'
-
 import { HomeStandard } from 'containers/home/home-standard'
 import { HomePersonalized } from 'containers/home/personalized/home-personalized'
-
-import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
-import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
-import { ShareModal } from 'connectors/confirm-share/confirm-share'
-import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
-import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
-import { Onboarding } from 'connectors/onboarding/onboarding'
-import { Toasts } from 'connectors/toasts/toast-list'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export default function Home(props) {
@@ -24,24 +13,11 @@ export default function Home(props) {
   const shouldRender = userStatus !== 'pending' && flagsReady
   const showPersonalized = featureFlagActive({ flag: 'profiles.home', featureState })
 
-  // Just setting this up to use in future
-  const sideNavSubset = showPersonalized ? 'home' : 'home'
+  if (!shouldRender) return null
 
-  return (
-    <Layout title={metaData.title} metaData={metaData}>
-      <SideNav subset={sideNavSubset} />
-      {shouldRender ? (
-        <main className="main">{showPersonalized ? <HomePersonalized /> : <HomeStandard />}</main>
-      ) : null}
-      <DeleteModal />
-      <TaggingModal />
-      <ShareModal />
-      <ArchiveModal />
-      <FavoriteModal />
-      <Onboarding type="home.modal" />
-      <Onboarding type="home.flyaway.save" />
-      <Onboarding type="home.flyaway.my-list" />
-      <Toasts />
-    </Layout>
+  return showPersonalized ? (
+    <HomePersonalized metaData={metaData} />
+  ) : (
+    <HomeStandard metaData={metaData} />
   )
 }

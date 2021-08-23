@@ -6,8 +6,15 @@ import { CardLineup } from 'connectors/item-card/home/card-lineup'
 import { HomeLineupHeader } from 'components/headers/home-header'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
+import Layout from 'layouts/main'
+import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
+import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
+import { ShareModal } from 'connectors/confirm-share/confirm-share'
+import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
+import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
+import { Toasts } from 'connectors/toasts/toast-list'
 
-export const HomePersonalized = () => {
+export const HomePersonalized = ({ metaData }) => {
   const dispatch = useDispatch()
   const slates = useSelector((state) => state.home.slates)
   const slatesNoTopics = slates.slice(0, -3)
@@ -16,12 +23,19 @@ export const HomePersonalized = () => {
   useEffect(() => dispatch(getHomeLineup()), [dispatch])
 
   return (
-    <>
+    <Layout metaData={metaData}>
       <HomeGreeting />
       {slatesNoTopics.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} pagePosition={index} />
       ))}
-    </>
+
+      <DeleteModal />
+      <TaggingModal />
+      <ShareModal />
+      <ArchiveModal />
+      <FavoriteModal />
+      <Toasts />
+    </Layout>
   )
 }
 
