@@ -235,7 +235,7 @@ Card.propTypes = {
   shortcutSelected: PropTypes.bool,
   openUrl: PropTypes.string,
   // UI
-  cardShape: PropTypes.oneOf(['grid', 'block', 'wide', 'full', 'detail', 'list']),
+  cardShape: PropTypes.oneOf(['grid', 'block', 'display', 'wide', 'full', 'detail', 'list']),
   className: PropTypes.string,
   showExcerpt: PropTypes.bool,
   showMedia: PropTypes.bool,

@@ -258,7 +258,8 @@ export const cardStyles = css`
 
   /** Wide style
   --------------------------------------------------------------- */
-  &.wide {
+  &.wide,
+  &.display {
     --card-column-span: span 8;
 
     .content {
@@ -299,6 +300,15 @@ export const cardStyles = css`
       .excerpt {
         display: none;
       }
+    }
+  }
+
+  &.display {
+    --card-column-span: span 4;
+    .title {
+      font-size: 0.85rem;
+      line-height: 1.286;
+      max-height: 3.8em;
     }
   }
 
