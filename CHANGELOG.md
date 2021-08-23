@@ -1,3 +1,18 @@
+## [1.18.3](https://github.com/Pocket/web-client/compare/v1.18.2...v1.18.3) (2021-08-23)
+
+
+### Bug Fixes
+
+* **flyaway:** add fade in animation on flyaway ([0b71fa0](https://github.com/Pocket/web-client/commit/0b71fa0784d6d91718dac0bec77f6b9184f1433b))
+* **flyaway:** update animation to ease-in-out ([e385aa9](https://github.com/Pocket/web-client/commit/e385aa90716167133847ae7b4fc1d780c607958a))
+* **flyaway:** update flyaway to take show prop and use that for animation ([54e857f](https://github.com/Pocket/web-client/commit/54e857f98b9458ba78d15016c2247793c2cf2797))
+* **onboarding:** add ability to show onboarding highlight in mobile nav menu ([e463d3b](https://github.com/Pocket/web-client/commit/e463d3b776e1c4210c7897672660846065106ec7))
+* **onboarding:** add component to fix impression event ([1bd2c99](https://github.com/Pocket/web-client/commit/1bd2c995e025489e112ef1e96b62083fc858bcc3))
+* **onboarding:** add HomeFlyawayMyList ([3ba7568](https://github.com/Pocket/web-client/commit/3ba75688e6ce106e0efaa1eca280f88eab72b82b))
+* **onboarding:** extract onboarding highlight animation so it can be reused ([63135e0](https://github.com/Pocket/web-client/commit/63135e07b87985398441f8c552c8c942fffbf233))
+* **onboarding:** rename saveFlyaway to homeFlyawaySave for consistency ([b5a5e42](https://github.com/Pocket/web-client/commit/b5a5e421b68b2675dc1cf8d9e1855362789228f5))
+* **onboarding:** save settings when My List Flyaway is closed ([e53c3b7](https://github.com/Pocket/web-client/commit/e53c3b7964315ec97cc04b781c53c682281421eb))
+
 ## [1.18.2](https://github.com/Pocket/web-client/compare/v1.18.1...v1.18.2) (2021-08-19)
 
 

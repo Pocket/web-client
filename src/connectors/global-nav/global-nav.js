@@ -68,6 +68,11 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const retrievedAvatar = useSelector((state) => state?.user?.profile?.avatar_url)
 
+  const myListFlyawayReady = useSelector((state) => state.onboarding.homeFlyawayMyList)
+  const saveFlyawayStatus = useSelector((state) => state.onboarding.homeFlyawaySave)
+  const saveFlyawayDismissed = saveFlyawayStatus === false
+  const showOnboardingHighlight = (saveFlyawayDismissed && myListFlyawayReady)
+
   const featureState = useSelector((state) => state.features)
   const showLab = featureFlagActive({ flag: 'lab', featureState })
 
@@ -114,7 +119,8 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       id: 'global-nav-my-list-link',
       label: t('nav:my-list', 'My List'),
       url: '/my-list?src=navbar',
-      icon: <ListViewIcon />
+      icon: <ListViewIcon />,
+      onboarding: showOnboardingHighlight
     },
     {
       name: 'discover',

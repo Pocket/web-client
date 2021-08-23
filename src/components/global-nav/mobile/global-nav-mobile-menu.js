@@ -9,6 +9,7 @@ import { Button } from '@pocket/web-ui'
 import { DEFAULT_LINKS } from 'components/global-nav/links/global-nav-links'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 import { BetaTag } from 'components/tags/tags'
+import { onboardingHighlight } from 'connectors/onboarding/messages/onboarding-animations'
 
 const premiumLinks = [
   {
@@ -116,6 +117,22 @@ const listStyle = css`
     padding: 0 5px;
     margin-left: 0.5rem;
   }
+
+  .onboardingHighlight {
+    ${onboardingHighlight}
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 8px;
+      width: 90%;
+      height: 100%;
+      pointer-events: none;
+      border-radius: 2.75rem;
+      animation: onboardingPulse 1.7s linear infinite;
+    }
+  }
 `
 const iconStyle = css`
   width: var(--size300);
@@ -136,7 +153,7 @@ const iconStyle = css`
 `
 
 export const MobileLink = ({
-  link: { name, isDisabled = false, url, icon, label, id, beta },
+  link: { name, isDisabled = false, url, icon, label, id, beta, onboarding },
   isSelected,
   handleClick
 }) => (
@@ -146,7 +163,8 @@ export const MobileLink = ({
         id={id}
         className={classnames({
           selected: isSelected,
-          disabled: isDisabled
+          disabled: isDisabled,
+          onboardingHighlight: onboarding
         })}
         onClick={(event) => {
           handleClick(event, name, url)

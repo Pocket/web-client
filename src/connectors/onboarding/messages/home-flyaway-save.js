@@ -5,22 +5,12 @@ import { css } from 'linaria'
 import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseSaveFlyaway } from '../onboarding.state'
+import { onboardingHighlight } from './onboarding-animations'
 
 const homeSaveStyles = css`
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0.3rem rgba(0,128,120,0);
-    }
-    50% {
-      box-shadow: 0 0 0 0.3rem rgba(0,128,120,1);
-    }
-    100% {
-      box-shadow: 0 0 0 0.3rem rgba(0,128,120,0);
-    }
-  }
-
+  ${onboardingHighlight}
   border-radius: 2.75rem;
-  animation: pulse 1.7s linear infinite;
+  animation: onboardingPulse 1.7s linear infinite;
 `
 
 const homeSaveQuery = 'button[data-cy^="article-save-btn"]'
@@ -30,7 +20,7 @@ export const HomeFlyawaySave = () => {
   const { t } = useTranslation()
 
   const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
-  const flyawayReady = useSelector((state) => state.onboarding.saveFlyaway)
+  const flyawayReady = useSelector((state) => state.onboarding.homeFlyawaySave)
   const modalStatus = useSelector((state) => state.onboarding.topicSelectionModal)
   const topicsSelected = pinnedTopics.length !== 0
   const modalFinished = modalStatus === false
@@ -65,8 +55,6 @@ export const HomeFlyawaySave = () => {
     'Home is filled with the best articles from across the web. Save one to read it later.')
 
   return (
-    ( showFlyaway ?
-      <Flyaway title={title} description={description} handleClose={handleClose} />
-    : null )
+    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} />
   )
 }
