@@ -27,7 +27,7 @@ export const getRecommendations = (itemId, count = 3) => {
   })
 }
 
-export const getHomeRecommendations = (itemId, count = 4) => {
+export const getHomeRecommendations = (itemId, count = 6) => {
   const lang = 'en' // Gotta be a good way to pass this in
   return request({
     path: 'v3/discover/recIt',

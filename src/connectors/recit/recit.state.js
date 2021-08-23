@@ -263,7 +263,7 @@ function* fetchReaderRecs({ itemId }) {
 function* fetchRecentRecs({ itemId: recentRecId }) {
   try {
     if (!recentRecId) return
-    const response = yield getHomeRecommendations(recentRecId, 3)
+    const response = yield getHomeRecommendations(recentRecId, 6)
     if (!response?.status) throw new Error('No items found')
 
     const derivedItems = yield deriveReaderRecitItems(response.recommendations)

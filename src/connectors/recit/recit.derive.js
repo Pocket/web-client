@@ -12,7 +12,7 @@ export function deriveReaderRecitItems(recommendations) {
    * @read_time {string} An approximation of how long it takes to read the article based on
    * @save_status {string} A string value (unsaved, saving, saved)
    */
-  return recommendations.map((feedItem) => ({
+  const recs = recommendations.map((feedItem) => ({
     resolved_id: feedItem.item?.resolved_id,
     item_id: feedItem.item?.item_id,
     title: displayTitle(feedItem),
@@ -30,6 +30,9 @@ export function deriveReaderRecitItems(recommendations) {
     save_status: 'unsaved',
     openExternal: true
   }))
+
+  // This is to make sure we don't promote borked content
+  return recs.filter((item) => item?.title && item?.excerpt)
 }
 
 /** DERIVE Functions
