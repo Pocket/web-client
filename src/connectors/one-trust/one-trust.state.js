@@ -22,6 +22,7 @@ const updateCategories = (groups) => {
 /** ACTIONS
  --------------------------------------------------------------- */
 let OptanonAnalyticsCookie
+// This function is called automatically by OneTrusts script
 global.OptanonWrapper = () => {
   const onetrustCookies = arrayToObject(updateCategories(global.OptanonActiveGroups), 'name')
   const analyticsEnabled = onetrustCookies.analytics.enabled
