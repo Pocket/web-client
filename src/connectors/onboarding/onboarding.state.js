@@ -7,6 +7,7 @@ import { ONBOARDING_CLOSE_MY_LIST_FLYAWAY } from 'actions'
 import { ONBOARDING_CLOSE_READER_FLYAWAY } from 'actions'
 import { ONBOARDING_RESET } from 'actions'
 import { APP_SET_SECTION } from 'actions'
+import { ARTICLE_ITEM_SUCCESS } from 'actions'
 
 import { HOME_SAVE_REQUEST } from 'actions'
 
@@ -61,6 +62,7 @@ export const onboardingReducers = (state = initialState, action) => {
       }
     
     case ONBOARDING_CLOSE_READER_FLYAWAY:
+    case ARTICLE_ITEM_SUCCESS:
       return {
         ...state,
         myListFlyawayReader: false,
@@ -83,6 +85,7 @@ export const onboardingSagas = [
   takeLatest(ONBOARDING_CLOSE_SAVE_FLYAWAY, saveSettings),
   takeLatest(ONBOARDING_CLOSE_MY_LIST_FLYAWAY, saveSettings),
   takeLatest(ONBOARDING_CLOSE_READER_FLYAWAY, saveSettings),
+  takeLatest(ARTICLE_ITEM_SUCCESS, saveSettings),
   takeLatest(HOME_SAVE_REQUEST, saveSettings),
   takeLatest(APP_SET_SECTION, confirmFlyawayStatus)
 ]
