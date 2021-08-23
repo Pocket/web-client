@@ -23,6 +23,7 @@ import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
 import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
+import { Onboarding } from 'connectors/onboarding/onboarding'
 
 export default function MyList(props) {
   const { metaData = {}, subset: sub = 'active', filter: propFilter } = props
@@ -168,36 +169,39 @@ export default function MyList(props) {
       <SideNav subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
 
       {shouldRender ? (
-        <main className="main">
-          {isLoggedIn ? (
-            <>
-              <Header
-                subset={subset}
-                title={selector}
-                filter={filter}
-                tag={tag}
-                sortOrder={sortOrder}
-                toggleSortOrder={toggleSortOrder} />
-              {items?.length ? (
-                <VirtualizedList
-                  type={type}
-                  section={section}
-                  loadMore={loadMore}
-                />
-              ) : null}
-              <DeleteModal />
-              <TaggingModal />
-              <ShareModal />
-              <ArchiveModal />
-              <FavoriteModal />
-              <TagDeleteModal />
-              <TagEditModal />
-              <Toasts />
-            </>
-          ) : (
-            <CallOutBrand />
-          )}
-        </main>
+        <>
+          <main className="main">
+            {isLoggedIn ? (
+              <>
+                <Header
+                  subset={subset}
+                  title={selector}
+                  filter={filter}
+                  tag={tag}
+                  sortOrder={sortOrder}
+                  toggleSortOrder={toggleSortOrder} />
+                {items?.length ? (
+                  <VirtualizedList
+                    type={type}
+                    section={section}
+                    loadMore={loadMore}
+                  />
+                ) : null}
+                <DeleteModal />
+                <TaggingModal />
+                <ShareModal />
+                <ArchiveModal />
+                <FavoriteModal />
+                <TagDeleteModal />
+                <TagEditModal />
+                <Toasts />
+              </>
+            ) : (
+              <CallOutBrand />
+              )}
+          </main>
+          <Onboarding type="my-list.flyaway.reader" />
+        </>
       ) : null}
     </Layout>
   )

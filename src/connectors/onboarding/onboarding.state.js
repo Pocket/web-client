@@ -4,6 +4,7 @@ import { SETTINGS_UPDATE } from 'actions'
 import { ONBOARDING_CLOSE_TOPICS_MODAL } from 'actions'
 import { ONBOARDING_CLOSE_SAVE_FLYAWAY } from 'actions'
 import { ONBOARDING_CLOSE_MY_LIST_FLYAWAY } from 'actions'
+import { ONBOARDING_CLOSE_READER_FLYAWAY } from 'actions'
 import { ONBOARDING_RESET } from 'actions'
 import { APP_SET_SECTION } from 'actions'
 
@@ -15,6 +16,7 @@ const initialState = {
   topicSelectionModal: true,
   homeFlyawaySave: true,
   homeFlyawayMyList: true,
+  myListFlyawayReader: true,
 }
 
 /** ACTIONS
@@ -23,6 +25,7 @@ const initialState = {
 export const onboardingCloseTopicSelectionModal = () => ({ type: ONBOARDING_CLOSE_TOPICS_MODAL })
 export const onboardingCloseSaveFlyaway = () => ({ type: ONBOARDING_CLOSE_SAVE_FLYAWAY })
 export const onboardingCloseMyListFlyaway = () => ({ type: ONBOARDING_CLOSE_MY_LIST_FLYAWAY })
+export const onboardingCloseReaderFlyaway = () => ({ type: ONBOARDING_CLOSE_READER_FLYAWAY })
 export const resetOnboarding = () => ({ type: ONBOARDING_RESET })
 
 /** REDUCERS
@@ -56,6 +59,12 @@ export const onboardingReducers = (state = initialState, action) => {
         ...state,
         homeFlyawayMyList: false,
       }
+    
+    case ONBOARDING_CLOSE_READER_FLYAWAY:
+      return {
+        ...state,
+        myListFlyawayReader: false,
+      }
 
     case ONBOARDING_RESET:
       return initialState
@@ -73,6 +82,7 @@ export const onboardingSagas = [
   takeLatest(ONBOARDING_CLOSE_TOPICS_MODAL, saveSettings),
   takeLatest(ONBOARDING_CLOSE_SAVE_FLYAWAY, saveSettings),
   takeLatest(ONBOARDING_CLOSE_MY_LIST_FLYAWAY, saveSettings),
+  takeLatest(ONBOARDING_CLOSE_READER_FLYAWAY, saveSettings),
   takeLatest(HOME_SAVE_REQUEST, saveSettings),
   takeLatest(APP_SET_SECTION, confirmFlyawayStatus)
 ]
