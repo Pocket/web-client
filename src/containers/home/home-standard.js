@@ -51,6 +51,7 @@ export const HomeStandard = ({ metaData }) => {
       <FavoriteModal />
       <Onboarding type="home.modal" />
       <Onboarding type="home.flyaway.save" />
+      <Onboarding type="home.flyaway.my-list" />
       <Toasts />
     </Layout>
   )
