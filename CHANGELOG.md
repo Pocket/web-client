@@ -1,3 +1,10 @@
+## [1.18.2](https://github.com/Pocket/web-client/compare/v1.18.1...v1.18.2) (2021-08-19)
+
+
+### Bug Fixes
+
+* **reader:** hide sidebar unless open ([139f751](https://github.com/Pocket/web-client/commit/139f751a0a7847cf3ca929870cb3aec57a7c8802))
+
 ## [1.18.1](https://github.com/Pocket/web-client/compare/v1.18.0...v1.18.1) (2021-08-19)
 
 
