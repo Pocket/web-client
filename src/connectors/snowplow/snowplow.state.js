@@ -1,7 +1,6 @@
 import { take, takeEvery, takeLatest, call, put, select } from 'redux-saga/effects'
 
 import { snowplowTrackPageView } from 'common/api/snowplow-analytics'
-import { snowplowAnonymousTracking } from 'common/api/snowplow-analytics'
 import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
 
 import { analyticsActions } from 'connectors/snowplow/actions'
@@ -20,7 +19,6 @@ import { createSlateLineupEntity } from 'connectors/snowplow/entities'
 import { createFeatureFlagEntity } from 'connectors/snowplow/entities'
 
 import { SNOWPLOW_INITIALIZED } from 'actions'
-import { SNOWPLOW_UPDATE_ANONYMOUS_TRACKING } from 'actions'
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 import { SNOWPLOW_TRACK_ITEM_IMPRESSION } from 'actions'
 import { SNOWPLOW_SEND_EVENT } from 'actions'
@@ -32,7 +30,6 @@ import { BATCH_SIZE } from 'common/constants'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const finalizeSnowplow = () => ({ type: SNOWPLOW_INITIALIZED })
-export const updateAnonymousTracking = (track) => ({ type: SNOWPLOW_UPDATE_ANONYMOUS_TRACKING, track })
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
 export const sendSnowplowEvent = (identifier, data) => ({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 
@@ -73,7 +70,6 @@ const snowplowReady = (state) => state.analytics?.initialized
 export const snowplowSagas = [
   takeLatest(VARIANTS_SAVE, fireVariantEnroll),
   takeLatest(FEATURES_HYDRATE, fireFeatureEnroll),
-  takeLatest(SNOWPLOW_UPDATE_ANONYMOUS_TRACKING, anonymousTracking),
   takeLatest(SNOWPLOW_TRACK_PAGE_VIEW, firePageView),
   takeEvery(SNOWPLOW_SEND_EVENT, fireSnowplowEvent)
 ]
@@ -116,11 +112,6 @@ function* fireFeatureEnroll({ hydrate }) {
       yield call(sendCustomSnowplowEvent, variantEnrollEvent, [featureFlagEntity])
     }
   }
-}
-
-function* anonymousTracking({ track }) {
-  yield call(waitForInitialization)
-  yield call(snowplowAnonymousTracking, track)
 }
 
 const eventBuilders = {

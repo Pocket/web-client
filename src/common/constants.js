@@ -59,12 +59,17 @@ export const SNOWPLOW_HEARTBEAT_INTERVAL = 10 // in seconds
 export const SNOWPLOW_CONFIG = {
   appId: SNOWPLOW_APP,
   platform: 'web',
-  eventMethod: 'post',
+  eventMethod: 'beacon',
   respectDoNotTrack: false, // temporary to determine impact
-  stateStorageStrategy: 'none',
-  anonymousTracking: { withServerAnonymisation: true },
+  stateStorageStrategy: 'cookieAndLocalStorage',
   contexts: { webPage: true, performanceTiming: true },
   postPath: SNOWPLOW_POST_PATH
+}
+export const SNOWPLOW_ANONYMOUS_CONFIG = {
+  ...SNOWPLOW_CONFIG,
+  eventMethod: 'post', // over-rides eventMethod: post
+  stateStorageStrategy: 'none', // over-rides stateStorageStrategy: cookieAndLocalStorage
+  anonymousTracking: { withServerAnonymisation: true },
 }
 
 export const INTERNAL_DOMAINS = [
@@ -94,6 +99,8 @@ export const KEYS = {
   COMMA: 44,
   DELETE: 46
 }
+
+export const ONETRUST_EMPTY_DEFAULT = ',,'
 
 export const API_ACTION_ADD = 'add'
 export const API_ACTION_ADD_FAIL = 'add_failed'

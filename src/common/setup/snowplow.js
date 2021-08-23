@@ -2,6 +2,7 @@ import { SNOWPLOW_COLLECTOR } from 'common/constants'
 import { SNOWPLOW_HEARTBEAT_DELAY } from 'common/constants'
 import { SNOWPLOW_HEARTBEAT_INTERVAL } from 'common/constants'
 import { SNOWPLOW_CONFIG } from 'common/constants'
+import { SNOWPLOW_ANONYMOUS_CONFIG } from 'common/constants'
 import { createUserEntity, apiUserEntity } from 'connectors/snowplow/entities'
 import { injectInlineScript } from 'common/utilities/inject-script'
 import { SNOWPLOW_SCRIPT } from 'common/constants'
@@ -19,12 +20,13 @@ function loadSnowplow(snowplowInstanceName) {
     n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","${SNOWPLOW_SCRIPT}","${snowplowInstanceName}"));`)
 }
 
-export function initializeSnowplow(user_id, sess_guid, finalizeInit) {
+export function initializeSnowplow(user_id, sess_guid, cookied, finalizeInit) {
   // load snowplow scripts
   loadSnowplow('snowplow')
 
   // configure snowplow
-  snowplow('newTracker', 'sp', SNOWPLOW_COLLECTOR, SNOWPLOW_CONFIG)
+  const snowplowConfig = (cookied) ? SNOWPLOW_CONFIG : SNOWPLOW_ANONYMOUS_CONFIG
+  snowplow('newTracker', 'sp', SNOWPLOW_COLLECTOR, snowplowConfig)
 
   // enable activity monitoring (heartbeat)
   snowplow('enableActivityTracking', {
@@ -42,6 +44,9 @@ export function initializeSnowplow(user_id, sess_guid, finalizeInit) {
   const userEntity = createUserEntity(user_id, sess_guid)
   const globalContexts = [userEntity, apiUserEntity]
   snowplow('addGlobalContexts', globalContexts)
+
+  // no analytics cookies allowed, make sure user data is clean
+  if (!cookied) snowplow('clearUserData')
 
   finalizeInit()
 }

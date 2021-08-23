@@ -5,11 +5,12 @@ import { useDispatch } from 'react-redux'
 import ReactGA from 'react-ga'
 import { loadOptinMonster } from 'common/utilities/third-party/opt-in-monster'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
+import { ONETRUST_EMPTY_DEFAULT } from 'common/constants'
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
-import { updateAnonymousTracking } from 'connectors/snowplow/snowplow.state'
 import { initializeSnowplow } from 'common/setup/snowplow'
 import { finalizeSnowplow } from 'connectors/snowplow/snowplow.state'
 import { useRouter } from 'next/router'
+import { updateOnetrustData } from './one-trust.state'
 
 /**
  * Initialization file. We are using this because of the way the _app file
@@ -25,16 +26,31 @@ export function PostTrustInit() {
   const [analyticsInit, analyticsInitSet] = useState(false)
   const { user_status, user_id, sess_guid } = useSelector((state) => state.user)
   const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
-  const analyticsEnabled = useSelector( (state) => state.oneTrust?.analytics ) //prettier-ignore
-  const analyticsReady = analyticsEnabled?.enabled && oneTrustReady
+  const analytics = useSelector((state) => state.oneTrust?.analytics) //prettier-ignore
+  const analyticsCookie = analytics?.enabled
 
   useEffect(() => {
-    if (analyticsInit) return
+    function checkCookies() {
+      if (global.OptanonActiveGroups !== ONETRUST_EMPTY_DEFAULT) {
+        dispatch(updateOnetrustData(global.OptanonActiveGroups))
+      }
+      else {
+        setTimeout(checkCookies, 50)
+      }
+    }
+
+    let timer = setTimeout(checkCookies, 50)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    if (analyticsInit || !oneTrustReady) return
     if (user_status === 'pending' || !sess_guid) return
 
     // Set up Snowplow
     const finalizeInit = () => dispatch(finalizeSnowplow())
-    initializeSnowplow(user_id, sess_guid, finalizeInit)
+    initializeSnowplow(user_id, sess_guid, analyticsCookie, finalizeInit)
 
     // Set up Google Analytics
     ReactGA.initialize(GOOGLE_ANALYTICS_ID)
@@ -42,11 +58,15 @@ export function PostTrustInit() {
     // Setting this so we don't get a glut of false positives with shifting
     // cookie preferences
     analyticsInitSet(true)
-  }, [analyticsInit, dispatch, user_status, sess_guid, user_id])
-
-  useEffect(() => {
-    dispatch(updateAnonymousTracking(analyticsReady))
-  }, [analyticsReady])
+  }, [
+    oneTrustReady,
+    analyticsCookie,
+    analyticsInit,
+    dispatch,
+    user_status,
+    sess_guid,
+    user_id
+  ])
 
   useEffect(() => {
     // Load Opt In Monster for marketing/conversion adventurers
