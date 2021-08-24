@@ -198,7 +198,7 @@ export default function MyList(props) {
             </>
           ) : (
             <CallOutBrand />
-            )}
+          )}
         </main>
       ) : null}
     </Layout>
