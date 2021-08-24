@@ -47,7 +47,7 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
       showExcerpt={showExcerpt}
       openUrl={open_url}
       useMarkdown={true}
-      partnerType={partnerType ? partnerType : null}
+      partnerType={partnerType}
       // Tracking
       onItemInView={onItemInView}
       onOpen={onOpen}

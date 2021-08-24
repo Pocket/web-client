@@ -153,8 +153,8 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
                     position={index}
                     cardShape="wide"
                     showExcerpt={true}
-                    classNames={itemStyles}
-                    partnerType={partnership ? partnership.type : null}
+                    className={itemStyles}
+                    partnerType={partnership?.type}
                   />
                 ))
               : null}
