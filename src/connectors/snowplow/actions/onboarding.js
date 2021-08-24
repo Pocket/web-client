@@ -95,5 +95,19 @@ export const onboardingActions = {
     eventData: {
       uiType: 'button'
     },
+  },
+  'onboarding.flyaway.apps.apple-badge.open': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+  },
+  'onboarding.flyaway.apps.google-play-badge.open': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
   }
 }

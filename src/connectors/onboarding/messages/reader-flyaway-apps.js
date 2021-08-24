@@ -52,7 +52,13 @@ export const ReaderFlyawayApps = ({ ...rest }) => {
     dispatch(onboardingCloseAppsFlyaway())
   }
 
-  /// ADD ANALYTICS FOR APP BADGES
+  const handleApple = () => {
+    dispatch(sendSnowplowEvent('onboarding.flyaway.apps.apple-badge.open'))
+  }
+
+  const handleGoogle = () => {
+    dispatch(sendSnowplowEvent('onboarding.flyaway.apps.google-play-badge.open'))
+  }
 
   const appStoreBadge =
     'https://assets.getpocket.com/web-ui/assets/apple-app-store-badge.2928664fe1fc6aca88583a6f606d60ba.svg'
@@ -71,7 +77,8 @@ export const ReaderFlyawayApps = ({ ...rest }) => {
         <a
           href="https://apps.apple.com/us/app/pocket-save-read-grow/id309601447"
           className={appStoreBadgeStyle}
-          key="footer-app-store-badge"
+          onClick={handleApple}
+          key="apps-flyaway-app-store-badge"
           target="_blank"
           rel="noopener noreferrer">
           <img
@@ -82,7 +89,8 @@ export const ReaderFlyawayApps = ({ ...rest }) => {
         <a
           href="https://play.google.com/store/apps/details?id=com.ideashower.readitlater.pro"
           className={`${appStoreBadgeStyle} google-play-badge`}
-          key="footer-google-play-badge"
+          onClick={handleGoogle}
+          key="apps-flyaway-google-play-badge"
           target="_blank"
           rel="noopener noreferrer">
           <img src={googlePlayBadge} alt={t('global-footer:google-play', 'Get It On Google Play')} />
