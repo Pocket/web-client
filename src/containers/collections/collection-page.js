@@ -38,6 +38,12 @@ const itemStyles = css`
     &.wide .excerpt {
       display: block;
     }
+
+    &.wide .media,
+    &.wide .content,
+    &.wide footer.footer .actions {
+      grid-column: span 12;
+    }
   }
 `
 
