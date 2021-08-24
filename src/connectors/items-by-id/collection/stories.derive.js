@@ -21,7 +21,8 @@ export function deriveCollectionStories(stories) {
       original_url: story.url,
       openExternal: false,
       save_status: 'unsaved',
-      authors: story.authors
+      authors: story.authors,
+      fromPartner: story.fromPartner
     }
   })
 }

@@ -6,6 +6,7 @@ import { SyndicatedIcon } from '@pocket/web-ui'
 import { CardMedia } from 'components/items-media/card-media'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { ItemTags } from 'components/item-tags/item-tags'
+import { PartnerOverline } from 'components/content-partner/partner'
 import { cardStyles } from './card-base'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
@@ -29,6 +30,7 @@ import ReactMarkdown from 'react-markdown'
  * @param {boolean} props.showMedia Show image or not
  * @param {boolean} props.hiddenActions Hide actions until hover or not
  * @param {function} props.itemNoImage Action to fire if an item has no image
+ * @param {string} props.partnerType PARTNERED or SPONSORED
  * Tracking
  * @param {function} props.onItemInView Action to fire when item is in view
  * @param {function} props.onOpen Action to fire when an item is opened
@@ -54,6 +56,7 @@ export const Card = (props) => {
     hiddenActions,
     onImageFail,
     useMarkdown,
+    partnerType,
     // Tracking
     onItemInView,
     onOpenOriginalUrl,
@@ -76,7 +79,8 @@ export const Card = (props) => {
     read_time,
     syndicated,
     open_url,
-    noImage
+    noImage,
+    fromPartner
   } = item
 
   const linkRef = useRef(null)
@@ -153,6 +157,7 @@ export const Card = (props) => {
           />
         ) : null}
         <div className="content">
+          { fromPartner ? <PartnerOverline partnerType={partnerType} /> : null }
           <h2 className="title">
             {openUrl ? (
               <Link href={openUrl}>
@@ -241,6 +246,7 @@ Card.propTypes = {
   showMedia: PropTypes.bool,
   hiddenActions: PropTypes.bool,
   position: PropTypes.number,
+  partnerType: PropTypes.string,
   // Tracking
   onItemInView: PropTypes.func,
   onOpen: PropTypes.func,
