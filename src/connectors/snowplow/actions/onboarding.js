@@ -80,5 +80,20 @@ export const onboardingActions = {
     eventData: {
       uiType: 'button'
     },
+  },
+  'onboarding.flyaway.apps.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'dialog'
+    },
+  },
+  'onboarding.flyaway.apps.close': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
   }
 }

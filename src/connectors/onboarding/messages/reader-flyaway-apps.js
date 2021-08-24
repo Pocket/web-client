@@ -1,0 +1,97 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useTranslation } from 'next-i18next'
+import { css } from 'linaria'
+import { Flyaway } from 'components/flyaway/flyaway'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { onboardingCloseAppsFlyaway } from '../onboarding.state'
+
+const appStoreBadgeWrapper = css`
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+`
+
+const appStoreBadgeStyle = css`
+  margin-top: 0.5rem;
+
+  &.google-play-badge {
+    height: 40px;
+    overflow: hidden;
+
+    img {
+      /* google badge image includes margin so we have to adjust to make it
+      consistent with apple badge */
+      margin: -10px 0 0 -10px;
+      max-height: 60px;
+    }
+  }
+
+  img {
+    max-height: 40px;
+  }
+`
+
+export const ReaderFlyawayApps = ({ ...rest }) => {
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
+
+  const readerFlyawayDismissed = useSelector((state) => state.onboarding.myListFlyawayReader) === false
+  const appsFlyawayReady = useSelector((state) => state.onboarding.readerFlyawayApps)
+  const showFlyaway = readerFlyawayDismissed && appsFlyawayReady
+
+  useEffect(() => {
+    if (showFlyaway) {
+      dispatch(sendSnowplowEvent('onboarding.flyaway.apps.impression'))
+    }
+  }, [showFlyaway])
+
+  const handleClose = () => {
+    dispatch(sendSnowplowEvent('onboarding.flyaway.apps.close'))
+    dispatch(onboardingCloseAppsFlyaway())
+  }
+
+  /// ADD ANALYTICS FOR APP BADGES
+
+  const appStoreBadge =
+    'https://assets.getpocket.com/web-ui/assets/apple-app-store-badge.2928664fe1fc6aca88583a6f606d60ba.svg'
+  const googlePlayBadge =
+    'https://assets.getpocket.com/web-ui/assets/google-play-badge.db9b21a1c41f3dcd9731e1e7acfdbb57.png'
+
+  const title = t('onboarding:flyaway-apps-title', 'Read anytime, anywhere')
+
+  const description = (
+    <div>
+      <p>{t('onboarding:flyaway-apps-description',
+        `If it's in your Pocket, it's on your phone and tablet, too – even when you're offline.`)}
+      </p>
+
+      <div className={appStoreBadgeWrapper}>
+        <a
+          href="https://apps.apple.com/us/app/pocket-save-read-grow/id309601447"
+          className={appStoreBadgeStyle}
+          key="footer-app-store-badge"
+          target="_blank"
+          rel="noopener noreferrer">
+          <img
+            src={appStoreBadge}
+            alt={t('global-footer:app-store', 'Download On the Apple App Store')}
+          />
+        </a>
+        <a
+          href="https://play.google.com/store/apps/details?id=com.ideashower.readitlater.pro"
+          className={`${appStoreBadgeStyle} google-play-badge`}
+          key="footer-google-play-badge"
+          target="_blank"
+          rel="noopener noreferrer">
+          <img src={googlePlayBadge} alt={t('global-footer:google-play', 'Get It On Google Play')} />
+        </a>
+      </div>
+    </div>
+  )
+
+  return (
+    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} {...rest} />
+  )
+}

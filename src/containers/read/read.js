@@ -16,7 +16,7 @@ import { Toasts } from 'connectors/toasts/toast-list'
 import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
-import { ReaderFonts } from '@pocket/web-ui'
+import { ReaderFonts, breakpointLargeHandset, breakpointSmallDesktop } from '@pocket/web-ui'
 import { Recommendations } from 'containers/read/recommendations'
 
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
@@ -38,6 +38,8 @@ import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favo
 import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 
+import { Onboarding } from 'connectors/onboarding/onboarding'
+
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
@@ -45,6 +47,32 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
 export const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
+
+const flyawayWrapper = css`
+  position: sticky;
+  bottom: 50px;
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  padding: 0 2.5rem;
+  margin-bottom: 1rem;
+
+  ${breakpointLargeHandset} {
+    padding: 0 1rem;
+    bottom: 20px;
+  }
+`
+
+const flyawayOverrides = css`
+  grid-column: 10 / span 4;
+
+  ${breakpointSmallDesktop} {
+    grid-column: 8 / span 6;
+  }
+
+  ${breakpointLargeHandset} {
+    grid-column: span 12;
+  }
+`
 
 const articleWrapper = css`
   p {
@@ -354,6 +382,9 @@ export default function Reader() {
           ) : null}
         </article>
       </main>
+      <div className={flyawayWrapper}>
+        <Onboarding type="reader.flyaway.apps" flyawayStyleOverrides={flyawayOverrides}/>
+      </div>
       {articleContent ? <Recommendations id={item_id} /> : null}
       {!isPremium && articleContent ? (
         <BottomUpsell maxWidth={customStyles.maxWidth} onVisible={handleImpression} />

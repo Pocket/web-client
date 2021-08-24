@@ -6,6 +6,7 @@ import { HomeWelcomeModal } from './messages/home-welcome-modal'
 import { HomeFlyawaySave } from './messages/home-flyaway-save'
 import { HomeFlyawayMyList } from './messages/home-flyaway-my-list'
 import { MyListFlyawayReader } from './messages/my-list-flyaway-reader'
+import { ReaderFlyawayApps } from './messages/reader-flyaway-apps'
 
 export const Onboarding = ({ type, ...rest }) => {
   const translations = useTranslation()
@@ -22,7 +23,8 @@ export const Onboarding = ({ type, ...rest }) => {
     'home.modal': HomeWelcomeModal,
     'home.flyaway.save': HomeFlyawaySave,
     'home.flyaway.my-list': HomeFlyawayMyList,
-    'my-list.flyaway.reader': MyListFlyawayReader
+    'my-list.flyaway.reader': MyListFlyawayReader,
+    'reader.flyaway.apps': ReaderFlyawayApps
   }
 
   const OnboardingComponent = onboardingTypes[type]
