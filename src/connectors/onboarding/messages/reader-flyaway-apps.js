@@ -83,7 +83,7 @@ export const ReaderFlyawayApps = ({ ...rest }) => {
           rel="noopener noreferrer">
           <img
             src={appStoreBadge}
-            alt={t('global-footer:app-store', 'Download On the Apple App Store')}
+            alt={t('onboarding:app-store', 'Download On the Apple App Store')}
           />
         </a>
         <a
@@ -93,7 +93,7 @@ export const ReaderFlyawayApps = ({ ...rest }) => {
           key="apps-flyaway-google-play-badge"
           target="_blank"
           rel="noopener noreferrer">
-          <img src={googlePlayBadge} alt={t('global-footer:google-play', 'Get It On Google Play')} />
+          <img src={googlePlayBadge} alt={t('onboarding:google-play', 'Get It On Google Play')} />
         </a>
       </div>
     </div>
