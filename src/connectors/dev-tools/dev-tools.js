@@ -3,12 +3,11 @@ import Mousetrap from 'mousetrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { devModeToggle } from 'connectors/app/app.state'
 import { Features } from 'connectors/dev-tools/features'
-import { localStore } from 'common/utilities/browser-storage/browser-storage'
 import { resetOnboarding } from 'connectors/onboarding/onboarding.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { css } from 'linaria'
 import { headingSansSerif } from '@pocket/web-ui'
-import { Languages } from './languages'
+import { Languages } from 'connectors/languages/languages'
 
 const devToolStyle = css`
   padding: var(--spacing150);

@@ -1,6 +1,25 @@
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 
+const LANGUAGE_BY_LOCALE = {
+  'zh-TW': 'Chinese (Taiwan)',
+  zh: 'Chinese',
+  nl: 'Dutch',
+  en: 'English',
+  fr: 'French',
+  'fr-CA': 'French (Canada)',
+  de: 'German',
+  it: 'Italian',
+  ja: 'Japanese',
+  ko: 'Korean',
+  pl: 'Polish',
+  pt: 'Portuguese',
+  'pt-BR': 'Portuguese (Brazil)',
+  ru: 'Russian',
+  es: 'Spanish (Spain)',
+  'es-XL': 'Spanish (Latin America)'
+}
+
 export function Languages() {
   const translation = useTranslation()
   const router = useRouter()
@@ -8,6 +27,7 @@ export function Languages() {
   const { i18n } = translation
   const { options, language } = i18n
   const languages = options?.locales
+  const locales = Object.keys(LANGUAGE_BY_LOCALE)
 
   const handleChange = async (event) => {
     const locale = event.currentTarget.value
@@ -21,9 +41,9 @@ export function Languages() {
 
   return languages?.length ? (
     <select onChange={handleChange} value={language}>
-      {languages.map((languageOption) => (
+      {locales.map((languageOption) => (
         <option key={languageOption} value={languageOption}>
-          {languageOption}
+          {LANGUAGE_BY_LOCALE[languageOption]}
         </option>
       ))}
     </select>
