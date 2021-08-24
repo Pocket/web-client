@@ -27,10 +27,15 @@ export function Partner({partnerInfo}) {
 
   if (!type) return null
 
+  const partnerTypes = {
+    'PARTNERED' : t('partner:partner-copy', 'In partnership with'),
+    'SPONSORED' : t('partner:sponsor-copy', 'Brought to you by')
+  }
+  const attribution = partnerTypes[type] || ''
+
   return (
     <div className={partnerStyles}>
-      { type === 'PARTNERED' ? <div>{t('partner:partner-copy', 'In partnership with')}</div> : null}
-      { type === 'SPONSORED' ? <div>{t('partner:sponsor-copy', 'Brought to you by')}</div> : null}
+      <div>{attribution}</div>
       <a href={partnerInfo.url} target='_blank' rel='noopener noreferrer'>
         <img src={partnerInfo.imageUrl} alt={partnerInfo.name} />
       </a>
@@ -43,10 +48,15 @@ export function PartnerOverline({partnerType}) {
 
   if (!partnerType) return null
 
+  const partnerTypes = {
+    'PARTNERED' : t('partner:partner-overline', 'From our partners'),
+    'SPONSORED' : t('partner:sponsor-overline', 'Sponsored')
+  }
+  const overline = partnerTypes[partnerType] || ''
+
   return (
     <div className={overlineStyles}>
-      { partnerType === 'PARTNERED' ? t('partner:partner-overline', 'From our partners') : null}
-      { partnerType === 'SPONSORED' ? t('partner:sponsor-overline', 'Sponsored') : null}
+      {overline}
     </div>
   )
 }
