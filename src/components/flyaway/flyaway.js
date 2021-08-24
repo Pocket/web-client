@@ -72,7 +72,7 @@ const closeButtonOverrides = css`
   }
 `
 
-export function Flyaway({ title, description, handleClose, show }) {
+export function Flyaway({ title, description, handleClose, show, flyawayStyleOverrides }) {
   const [flyawayOpen, setFlyawayOpen] = useState(false)
 
   useEffect(() => {
@@ -83,7 +83,7 @@ export function Flyaway({ title, description, handleClose, show }) {
     return () => clearTimeout(timer)
   }, [show])
 
-  const flyawayClassNames = cx(flyawayWrapper, flyawayOpen && 'show')
+  const flyawayClassNames = cx(flyawayWrapper, flyawayStyleOverrides, flyawayOpen && 'show')
   return (
     <div className={flyawayClassNames}>
       <div className={flyaway}>

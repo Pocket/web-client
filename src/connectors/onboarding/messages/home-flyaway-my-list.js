@@ -41,7 +41,7 @@ const hamburgerStyles = css`
 const sideNavMyListQuery = 'button[data-cy^="side-nav-mylist"]'
 const hamburgerQuery = '.site-nav'
 
-export const HomeFlyawayMyList = () => {
+export const HomeFlyawayMyList = ({ ...rest }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -83,6 +83,6 @@ export const HomeFlyawayMyList = () => {
     'Everything you save goes straight to My List – the library of your faves.')
 
   return (
-    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} />
+    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} {...rest} />
   )
 }
