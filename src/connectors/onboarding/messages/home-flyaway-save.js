@@ -15,7 +15,7 @@ const homeSaveStyles = css`
 
 const homeSaveQuery = 'button[data-cy^="article-save-btn"]'
 
-export const HomeFlyawaySave = ({ ...rest }) => {
+export const HomeFlyawaySave = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -55,6 +55,6 @@ export const HomeFlyawaySave = ({ ...rest }) => {
     'Home is filled with the best articles from across the web. Save one to read it later.')
 
   return (
-    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} {...rest} />
+    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} />
   )
 }

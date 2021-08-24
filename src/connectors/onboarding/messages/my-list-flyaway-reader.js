@@ -23,7 +23,7 @@ const myListCardStyles = css`
 `
 const myListCardQuery = 'article[data-cy^="article-card"]'
 
-export const MyListFlyawayReader = ({ ...rest }) => {
+export const MyListFlyawayReader = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -60,6 +60,6 @@ export const MyListFlyawayReader = ({ ...rest }) => {
     'Open a saved story to experience Pocket\'s calm reading zone.')
 
   return (
-    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} {...rest} />
+    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} />
   )
 }
