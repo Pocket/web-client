@@ -55,9 +55,9 @@ export const HomeSimilarRecs = () => {
           offset={0}
           ItemCard={RecCard}
           count={3}
-          cardShape="grid"
-          showMedia={false}
-          showExcerpt={true}
+          cardShape="display"
+          showMedia={true}
+          showExcerpt={false}
           border={false}
           compact={true}
         />
