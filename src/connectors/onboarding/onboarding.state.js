@@ -7,7 +7,7 @@ import { ONBOARDING_CLOSE_MY_LIST_FLYAWAY } from 'actions'
 import { ONBOARDING_CLOSE_READER_FLYAWAY } from 'actions'
 import { ONBOARDING_CLOSE_APPS_FLYAWAY } from 'actions'
 import { ONBOARDING_RESET } from 'actions'
-import { APP_SET_SECTION } from 'actions'
+import { MYLIST_UPDATE_REQUEST } from 'actions'
 import { ARTICLE_ITEM_SUCCESS } from 'actions'
 
 import { HOME_SAVE_REQUEST } from 'actions'
@@ -97,7 +97,7 @@ export const onboardingSagas = [
   takeLatest(ONBOARDING_CLOSE_APPS_FLYAWAY, saveSettings),
   takeLatest(ARTICLE_ITEM_SUCCESS, saveSettings),
   takeLatest(HOME_SAVE_REQUEST, saveSettings),
-  takeLatest(APP_SET_SECTION, confirmFlyawayStatus)
+  takeLatest(MYLIST_UPDATE_REQUEST, confirmFlyawayStatus)
 ]
 
 
@@ -111,11 +111,11 @@ function* saveSettings() {
   yield put({ type: SETTINGS_UPDATE })
 }
 
-function* confirmFlyawayStatus({ section }) {
+function* confirmFlyawayStatus() {
   const homeFlyawayMyList = yield select(getHomeFlyawayMyList)
   const homeFlyawaySave = yield select(getHomeFlyawaySave)
  
-  if (homeFlyawayMyList && !homeFlyawaySave && section === 'unread') {
+  if (homeFlyawayMyList && !homeFlyawaySave) {
     yield put({ type: ONBOARDING_CLOSE_MY_LIST_FLYAWAY })
   }
 }
