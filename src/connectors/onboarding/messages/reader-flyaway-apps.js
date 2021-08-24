@@ -2,9 +2,22 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import { css } from 'linaria'
+import { breakpointLargeTablet } from '@pocket/web-ui'
 import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseAppsFlyaway } from '../onboarding.state'
+
+// These styles are needed because there is no max-width set on /read
+// Adjusting the grid columns keep the flyaway from getting too wide
+// The additional margin keeps the flyaway from sitting too close to the edge of the screen
+const flyawayOverrides = css`
+  grid-template-columns: repeat(11,1fr);
+  margin-right: 3rem;
+
+  ${breakpointLargeTablet} {
+    margin: 1rem;
+  }
+`
 
 const appStoreBadgeWrapper = css`
   display: flex;
@@ -33,7 +46,7 @@ const appStoreBadgeStyle = css`
   }
 `
 
-export const ReaderFlyawayApps = ({ ...rest }) => {
+export const ReaderFlyawayApps = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -100,6 +113,6 @@ export const ReaderFlyawayApps = ({ ...rest }) => {
   )
 
   return (
-    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} {...rest} />
+    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} styleOverrides={flyawayOverrides}/>
   )
 }

@@ -4,29 +4,24 @@ import { breakpointLargeHandset, breakpointLargeTablet } from '@pocket/web-ui'
 import { CloseButton } from 'components/close-button/close-button'
 
 const flyawayWrapper = css`
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
   position: sticky;
   bottom: 50px;
-  grid-column: 9 / span 4;
   z-index: 100;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
   transition: opacity 700ms ease-in-out;
   opacity: 0;
   pointer-events: none;
 
-  ${breakpointLargeTablet} {
-    grid-column: 7 / span 6;
-  }
-
   ${breakpointLargeHandset} {
-    grid-column: span 12;
     bottom: 20px;
   }
-
+  
   &.show {
     opacity: 1;
     pointer-events: auto;
   }
-`
+  `
 
 const flyaway = css`
   font-family: var(--fontSansSerif);
@@ -34,7 +29,17 @@ const flyaway = css`
   color: var(--color-canvas);
   padding: 1rem;
   border-radius: var(--borderRadius);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+  grid-column: 9 / span 4;
 
+  ${breakpointLargeTablet} {
+    grid-column: 7 / span 6;
+  }
+  
+  ${breakpointLargeHandset} {
+    grid-column: span 12;
+  }
+  
   .flyaway_title {
     display: flex;
     align-items: flex-start;
@@ -72,7 +77,7 @@ const closeButtonOverrides = css`
   }
 `
 
-export function Flyaway({ title, description, handleClose, show, flyawayStyleOverrides }) {
+export function Flyaway({ title, description, handleClose, show, styleOverrides }) {
   const [flyawayOpen, setFlyawayOpen] = useState(false)
 
   useEffect(() => {
@@ -83,7 +88,7 @@ export function Flyaway({ title, description, handleClose, show, flyawayStyleOve
     return () => clearTimeout(timer)
   }, [show])
 
-  const flyawayClassNames = cx(flyawayWrapper, flyawayStyleOverrides, flyawayOpen && 'show')
+  const flyawayClassNames = cx(flyawayWrapper, styleOverrides, flyawayOpen && 'show')
   return (
     <div className={flyawayClassNames}>
       <div className={flyaway}>

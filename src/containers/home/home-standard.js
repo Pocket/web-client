@@ -43,6 +43,8 @@ export const HomeStandard = ({ metaData }) => {
         <HomeTopicSelector />
 
         <HomeCollectionList />
+        <Onboarding type="home.flyaway.save" />
+        <Onboarding type="home.flyaway.my-list" />
       </main>
       <DeleteModal />
       <TaggingModal />
@@ -50,8 +52,6 @@ export const HomeStandard = ({ metaData }) => {
       <ArchiveModal />
       <FavoriteModal />
       <Onboarding type="home.modal" />
-      <Onboarding type="home.flyaway.save" />
-      <Onboarding type="home.flyaway.my-list" />
       <Toasts />
     </Layout>
   )
