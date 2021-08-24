@@ -359,7 +359,7 @@ export default function Reader() {
       {articleContent ? <Recommendations id={item_id} /> : null}
       {!isPremium && articleContent ? (
         <BottomUpsell maxWidth={customStyles.maxWidth} onVisible={handleImpression} />
-        ) : null}
+      ) : null}
       <AnnotationsLimitModal
         showModal={annotationLimitModal}
         closeModal={closeAnnotationLimit}
