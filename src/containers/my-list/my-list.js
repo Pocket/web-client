@@ -169,39 +169,37 @@ export default function MyList(props) {
       <SideNav subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
 
       {shouldRender ? (
-        <>
-          <main className="main">
-            {isLoggedIn ? (
-              <>
-                <Header
-                  subset={subset}
-                  title={selector}
-                  filter={filter}
-                  tag={tag}
-                  sortOrder={sortOrder}
-                  toggleSortOrder={toggleSortOrder} />
-                {items?.length ? (
-                  <VirtualizedList
-                    type={type}
-                    section={section}
-                    loadMore={loadMore}
-                  />
-                ) : null}
-                <DeleteModal />
-                <TaggingModal />
-                <ShareModal />
-                <ArchiveModal />
-                <FavoriteModal />
-                <TagDeleteModal />
-                <TagEditModal />
-                <Toasts />
-                <Onboarding type="my-list.flyaway.reader" />
-              </>
-            ) : (
-              <CallOutBrand />
-              )}
-          </main>
-        </>
+        <main className="main">
+          {isLoggedIn ? (
+            <>
+              <Header
+                subset={subset}
+                title={selector}
+                filter={filter}
+                tag={tag}
+                sortOrder={sortOrder}
+                toggleSortOrder={toggleSortOrder} />
+              {items?.length ? (
+                <VirtualizedList
+                  type={type}
+                  section={section}
+                  loadMore={loadMore}
+                />
+              ) : null}
+              <DeleteModal />
+              <TaggingModal />
+              <ShareModal />
+              <ArchiveModal />
+              <FavoriteModal />
+              <TagDeleteModal />
+              <TagEditModal />
+              <Toasts />
+              <Onboarding type="my-list.flyaway.reader" />
+            </>
+          ) : (
+            <CallOutBrand />
+            )}
+        </main>
       ) : null}
     </Layout>
   )
