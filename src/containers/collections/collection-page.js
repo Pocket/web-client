@@ -30,6 +30,17 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { Toasts } from 'connectors/toasts/toast-list'
 import ErrorPage from 'pages/_error'
 
+import { css } from 'linaria'
+import { breakpointMediumHandset } from '@pocket/web-ui' // 479
+
+const itemStyles = css`
+  ${breakpointMediumHandset} {
+    &.wide .excerpt {
+      display: block;
+    }
+  }
+`
+
 export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const dispatch = useDispatch()
 
@@ -127,7 +138,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
             {/* Collection Stories */}
             {stories
               ? stories.map((id, index) => (
-                  <ItemCard id={id} key={id} position={index} cardShape="wide" showExcerpt={true} />
+                  <ItemCard id={id} key={id} position={index} cardShape="wide" showExcerpt={true} className={itemStyles} />
                 ))
               : null}
 
