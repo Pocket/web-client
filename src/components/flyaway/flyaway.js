@@ -16,12 +16,12 @@ const flyawayWrapper = css`
   ${breakpointLargeHandset} {
     bottom: 20px;
   }
-  
+
   &.show {
     opacity: 1;
     pointer-events: auto;
   }
-  `
+`
 
 const flyaway = css`
   font-family: var(--fontSansSerif);
