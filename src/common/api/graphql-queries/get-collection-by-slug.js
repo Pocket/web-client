@@ -13,11 +13,18 @@ const getCollectionBySlug = gql`
         bio
         imageUrl
       }
+      partnership {
+        type
+        name
+        url
+        imageUrl
+      }
       stories {
         url
         title
         excerpt
         thumbnail: imageUrl
+        fromPartner
         authors {
           name
         }

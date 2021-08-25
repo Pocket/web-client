@@ -1,3 +1,30 @@
+## [1.19.5](https://github.com/Pocket/web-client/compare/v1.19.4...v1.19.5) (2021-08-25)
+
+
+### Bug Fixes
+
+* **collections:** update localization file for german translation of collections ([1fbc633](https://github.com/Pocket/web-client/commit/1fbc6335c58e685c0b017fd91b5a86a9d63ea469))
+
+## [1.19.4](https://github.com/Pocket/web-client/compare/v1.19.3...v1.19.4) (2021-08-25)
+
+
+### Bug Fixes
+
+* **partner:** styling fixes for dark and sepia modes ([0c78921](https://github.com/Pocket/web-client/commit/0c7892104a2066af3365f92f2c5a6e7d2918e872))
+
+## [1.19.3](https://github.com/Pocket/web-client/compare/v1.19.2...v1.19.3) (2021-08-25)
+
+
+### Bug Fixes
+
+* **collection:** remove unnecessary check of partnership presence ([7e45749](https://github.com/Pocket/web-client/commit/7e457493048c4c5e647db97cb383fc35ba48b828))
+* **collections:** add partner components and stories ([7dcea61](https://github.com/Pocket/web-client/commit/7dcea61dceff3f1592d99caad406a7479cbb52bd))
+* **collections:** add partner locale to constants ([e9991fb](https://github.com/Pocket/web-client/commit/e9991fb68d8fe72428da38d0cddd1ed9cc5085ba))
+* **collections:** add partnership info to collection page ([6db9d7a](https://github.com/Pocket/web-client/commit/6db9d7a7b340fcdc740306c0dc2bcb2cef05910c))
+* **collections:** update getCollectionBySlug graphQL query to grab partnership info ([3435692](https://github.com/Pocket/web-client/commit/34356926eb235341d10c380657b73f6788b65651))
+* **partner:** refactor to allow for more partner types in the future ([350d32b](https://github.com/Pocket/web-client/commit/350d32b157aeb363a101ad0b50bbaef16d204f2c))
+* **save-article:** fix localization pulling the wrong text ([e73489c](https://github.com/Pocket/web-client/commit/e73489ced46265181a2fed2d5ef58591cb32db6c))
+
 ## [1.19.2](https://github.com/Pocket/web-client/compare/v1.19.1...v1.19.2) (2021-08-24)
 
 

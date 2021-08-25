@@ -18,6 +18,7 @@ import { AdRailTop } from 'components/content-ads/content-ads'
 import { AdRailBottom } from 'components/content-ads/content-ads'
 import { ContentIntro } from 'components/content-intro/content-intro'
 import { AuthorBio } from 'components/content-author/author-bio'
+import { Partner } from 'components/content-partner/partner'
 
 import { getImageCacheUrl } from 'common/utilities'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
@@ -66,7 +67,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   // Show error page if things have gone awry
   if (statusCode) return <ErrorPage statusCode={statusCode} />
 
-  const { title, intro, excerpt, authors, stories, imageUrl, pageSaveStatus } = data
+  const { title, intro, excerpt, authors, stories, imageUrl, pageSaveStatus, partnership } = data
   const { showAds = true } = data
   const authorNames = authors?.map((author) => author.name)
   const allowAds = isPremium ? false : showAds && shouldRender && oneTrustReady
@@ -139,12 +140,22 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
           <div className="content-body">
             <img src={heroImage} alt="" className="hero-image" />
 
+            { partnership ? <Partner partnerInfo={partnership} /> : null }
+
             <ContentIntro intro={intro} />
 
             {/* Collection Stories */}
             {stories
               ? stories.map((id, index) => (
-                  <ItemCard id={id} key={id} position={index} cardShape="wide" showExcerpt={true} className={itemStyles} />
+                  <ItemCard
+                    id={id}
+                    key={id}
+                    position={index}
+                    cardShape="wide"
+                    showExcerpt={true}
+                    className={itemStyles}
+                    partnerType={partnership?.type}
+                  />
                 ))
               : null}
 

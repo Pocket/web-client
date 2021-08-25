@@ -155,7 +155,8 @@ export const LOCALE_COMMON = [
   'tags',
   'whats-new',
   'global-footer',
-  'collections'
+  'collections',
+  'partner'
 ]
 
 
