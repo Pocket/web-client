@@ -83,6 +83,12 @@ export const HomeFlyawayMyList = () => {
     'Everything you save goes straight to My List – the library of your faves.')
 
   return (
-    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} />
+    <Flyaway
+      dataCy="home-flyaway-mylist"
+      title={title}
+      description={description}
+      handleClose={handleClose}
+      show={showFlyaway}
+    />
   )
 }

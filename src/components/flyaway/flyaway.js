@@ -35,11 +35,11 @@ const flyaway = css`
   ${breakpointLargeTablet} {
     grid-column: 7 / span 6;
   }
-  
+
   ${breakpointLargeHandset} {
     grid-column: span 12;
   }
-  
+
   .flyaway_title {
     display: flex;
     align-items: flex-start;
@@ -77,7 +77,7 @@ const closeButtonOverrides = css`
   }
 `
 
-export function Flyaway({ title, description, handleClose, show, styleOverrides }) {
+export function Flyaway({ dataCy, title, description, handleClose, show, styleOverrides }) {
   const [flyawayOpen, setFlyawayOpen] = useState(false)
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export function Flyaway({ title, description, handleClose, show, styleOverrides 
 
   const flyawayClassNames = cx(flyawayWrapper, styleOverrides, flyawayOpen && 'show')
   return (
-    <div className={flyawayClassNames}>
+    <div className={flyawayClassNames} data-cy={dataCy}>
       <div className={flyaway}>
         <div className="flyaway_title">
           <h5>{title}</h5>

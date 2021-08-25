@@ -113,6 +113,13 @@ export const ReaderFlyawayApps = () => {
   )
 
   return (
-    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} styleOverrides={flyawayOverrides}/>
+    <Flyaway
+      dataCy="reader-flyaway-apps"
+      title={title}
+      description={description}
+      handleClose={handleClose}
+      show={showFlyaway}
+      styleOverrides={flyawayOverrides}
+    />
   )
 }

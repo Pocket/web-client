@@ -60,6 +60,12 @@ export const MyListFlyawayReader = () => {
     'Open a saved story to experience Pocket\'s calm reading zone.')
 
   return (
-    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} />
+    <Flyaway
+      dataCy="mylist-flyaway-reader"
+      title={title}
+      description={description}
+      handleClose={handleClose}
+      show={showFlyaway}
+    />
   )
 }

@@ -55,6 +55,12 @@ export const HomeFlyawaySave = () => {
     'Home is filled with the best articles from across the web. Save one to read it later.')
 
   return (
-    <Flyaway title={title} description={description} handleClose={handleClose} show={showFlyaway} />
+    <Flyaway
+      dataCy="home-flyaway-save"
+      title={title}
+      description={description}
+      handleClose={handleClose}
+      show={showFlyaway}
+    />
   )
 }
