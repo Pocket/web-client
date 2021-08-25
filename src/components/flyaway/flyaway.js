@@ -19,7 +19,6 @@ const flyawayWrapper = css`
 
   &.show {
     opacity: 1;
-    pointer-events: auto;
   }
 `
 
@@ -38,6 +37,10 @@ const flyaway = css`
 
   ${breakpointLargeHandset} {
     grid-column: span 12;
+  }
+
+  .show & {
+    pointer-events: auto;
   }
 
   .flyaway_title {
