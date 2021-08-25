@@ -1,3 +1,22 @@
+## [1.19.6](https://github.com/Pocket/web-client/compare/v1.19.5...v1.19.6) (2021-08-25)
+
+
+### Bug Fixes
+
+* **onboarding:** add ability to pass style overrides to flyaway component ([b21cc70](https://github.com/Pocket/web-client/commit/b21cc70bdfd2eb117199c8ffea3b0dd52180f5fa))
+* **onboarding:** add Apps Flyaway to reader ([f1da377](https://github.com/Pocket/web-client/commit/f1da377ad940897379297b78b200447f3fc6094b))
+* **onboarding:** add reader flyaway to my list page ([a8db928](https://github.com/Pocket/web-client/commit/a8db9282eb7e4f45a04ca37992346b5c5a44633e))
+* **onboarding:** add snowplow events when apple or google badge is opened ([64ac8f6](https://github.com/Pocket/web-client/commit/64ac8f63f24f228da68c770d818f1e4fa573d248))
+* **onboarding:** cleanup flyaway styles, wrappers ([15aa382](https://github.com/Pocket/web-client/commit/15aa382aa1288d32c2ca7e13ef9e89eaa266207f))
+* **onboarding:** close reader flyaway when user opens an item in reader ([ee2cac7](https://github.com/Pocket/web-client/commit/ee2cac72a7bf671393fa50519dfe2b87ca4097ca))
+* **onboarding:** fix translation ([e017d98](https://github.com/Pocket/web-client/commit/e017d989dbac92820ff9be139ce6d1ff947da3fc))
+* **onboarding:** forgot some more whitespace ([d01c284](https://github.com/Pocket/web-client/commit/d01c284ad90cf64e243df7c39bd9ff29e677be8d))
+* **onboarding:** remove extra <> ([cc83b1b](https://github.com/Pocket/web-client/commit/cc83b1b8e40d94b5787d312504c4ac2eb7e1b08f))
+* **onboarding:** remove unnecessary props being passed to flyaway ([c8249c0](https://github.com/Pocket/web-client/commit/c8249c0e1af9cd398fdb8ea47b65600fda8ebf49))
+* **onboarding:** remove whitespace ([173ca1e](https://github.com/Pocket/web-client/commit/173ca1e6955e240ce1e05b9e4b9fb99cdece8e01))
+* **onboarding:** removing more whitespace ([f5e2d66](https://github.com/Pocket/web-client/commit/f5e2d66d3d3945b6b48b628726c9fc4dcb233fb9))
+* **onboarding:** update My List flyaway to close based on MYLIST_UPDATE_REQUEST ([0e08a85](https://github.com/Pocket/web-client/commit/0e08a85062a33fbc9a2dd99ccb22147c8e2a9e89))
+
 ## [1.19.5](https://github.com/Pocket/web-client/compare/v1.19.4...v1.19.5) (2021-08-25)
 
 
