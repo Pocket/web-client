@@ -1,9 +1,10 @@
 import { css } from 'linaria'
 import { useTranslation } from 'next-i18next'
+import { darkMode, sepiaMode } from '@pocket/web-ui'
 
 const partnerStyles = css`
   font-family: 'Graphik Web';
-  color: var(--color-textTertiary);
+  color: var(--color-textSecondary);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,11 +12,20 @@ const partnerStyles = css`
   img {
     margin-left: 0.5rem;
     max-width: 8rem;
+
+    ${darkMode} {
+      mix-blend-mode: exclusion;
+      filter: invert(1);
+    }
+
+    ${sepiaMode} {
+      mix-blend-mode: multiply;
+    }
   }
 `
 
 const overlineStyles = css`
-  color: var(--color-textTertiary);
+  color: var(--color-textSecondary);
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.014em;
