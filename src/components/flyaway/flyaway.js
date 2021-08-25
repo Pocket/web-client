@@ -77,7 +77,7 @@ const closeButtonOverrides = css`
   }
 `
 
-export function Flyaway({ dataCy, title, description, handleClose, show, styleOverrides }) {
+export function Flyaway({ dataCy = 'flyaway', title, description, handleClose, show, styleOverrides }) {
   const [flyawayOpen, setFlyawayOpen] = useState(false)
 
   useEffect(() => {
