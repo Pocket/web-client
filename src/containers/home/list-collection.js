@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { HomeCollectionHeader } from 'components/headers/home-header'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
 import { CollectionCard } from 'connectors/item-card/home/card-collection'
@@ -17,6 +18,8 @@ const homeCollections = css`
 
 export const HomeCollectionList = () => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
+
   const collectionSet = useSelector((state) => state.home.collectionSet)
   const showSkeleton = collectionSet?.length < 2
 
@@ -24,11 +27,14 @@ export const HomeCollectionList = () => {
     dispatch(sendSnowplowEvent('home.collection.view-more'))
   }
 
+  const title = t('home:most-read-collections', 'Our most-read Collections')
+  const description = t('home:fill-pocket-collections', 'Fill your Pocket with our curated guides to the best of the web')
+
   return (
     <section data-cy="collections-row">
       <HomeCollectionHeader
-        sectionTitle="Our most-read Collections"
-        sectionDescription="Fill your Pocket with our curated guides to the best of the web"
+        sectionTitle={title}
+        sectionDescription={description}
         clickEvent={clickEvent}
       />
       <section className={homeCollections}>

@@ -4,7 +4,7 @@ import { PillCheckbox } from '@pocket/web-ui'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTopicSection } from 'containers/home/home.state'
 import { unsetTopicSection } from 'containers/home/home.state'
-import { topicHeadings } from './topic-headings'
+import { TopicHeadings, headingsEnglishPlainText } from './topic-headings'
 
 export const pillboxStyle = css`
   display: flex;
@@ -18,13 +18,16 @@ export const pillboxStyle = css`
 `
 
 const TopicPill = ({ topic, handleTopicClick, active }) => {
-  const handleClick = () => handleTopicClick(topic)
+  const name = <TopicHeadings topic={topic.topic} type="title" />
+  const labelPlainText = headingsEnglishPlainText[topic.topic]
+  const handleClick = () => handleTopicClick(topic, labelPlainText)
+
   return (
     <PillCheckbox
       isChecked={active}
       onClick={handleClick}
       data-cy={`topic-checkbox-${topic.topic}`}
-      name={topicHeadings[topic.topic]?.title}
+      name={name}
     />
   )
 }
@@ -43,13 +46,13 @@ export const TopicSelector = ({
   // Don't display promoted topics
   const sortedTopics = topicsArray.filter((topic) => !topic.is_promoted)
 
-  const handleTopicClick = (topic) => {
+  const handleTopicClick = (topic, label) => {
     const topicAction = pinnedTopics.find((item) => item.topic_slug === topic.topic_slug)
       ? unsetTopicSection
       : setTopicSection
 
     dispatch(topicAction(topic))
-    toggleCallback(topicHeadings[topic.topic]?.title)
+    toggleCallback(label)
   }
 
   return (

@@ -7,7 +7,7 @@ import classnames from 'classnames'
 import { CardSkeleton } from 'components/item-card/card-skeleton'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { topicHeadings } from 'connectors/topic-list/topic-headings'
+import { TopicHeadings } from 'connectors/topic-list/topic-headings'
 
 const topicRowStyles = css`
   margin-bottom: 1.5rem;
@@ -38,14 +38,17 @@ export const HomeTopicsRow = ({ topic_slug, topic, count = 6 }) => {
   const skeletonArray = [0, 1, 2, 3, 4, 5]
   const displaySkeleton = skeletonArray.slice(0, count)
 
+  const title = <TopicHeadings topic={topic} type="title" />
+  const description = <TopicHeadings topic={topic} type="subtitle" />
+
   const clickEvent = () => dispatch(sendSnowplowEvent('home.topic.view-more', { label: topic_slug }))
 
   return (
     <div className={topicRowStyles} data-cy={`topic-row-${topic}`}>
       <HomeTopicHeader
-        sectionTitle={topicHeadings[topic]?.title}
+        sectionTitle={title}
         topicSlug={topic_slug}
-        sectionDescription={topicHeadings[topic]?.subtitle}
+        sectionDescription={description}
         clickEvent={clickEvent}
       />
       <section className={classnames(cardGrid, cardRowStyles)}>

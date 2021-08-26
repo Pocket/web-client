@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'next-i18next'
 import { css } from 'linaria'
 import { HomeJourneyHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,11 +21,12 @@ export const pillboxStyle = css`
 
 export const HomeTopicSelector = () => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
 
-  const title = `Discover more topics`
-  const description = `Select topics to see popular articles and our editors’ top picks.`
+  const title = t('home:discover-topics', 'Discover more topics')
+  const description = t('home:select-topics', 'Select topics to see popular articles and our editors’ top picks.')
 
   const toggleCallback = (label) => {
     dispatch(sendSnowplowEvent('home.topic.toggle', { label }))

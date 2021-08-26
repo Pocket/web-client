@@ -1,4 +1,5 @@
 import { css, cx } from 'linaria'
+import { useTranslation } from 'next-i18next'
 import { breakpointSmallTablet } from '@pocket/web-ui'
 import Link from 'next/link'
 
@@ -106,13 +107,15 @@ export const HomeSectionHeader = ({ sectionTitle, sectionDescription }) => {
 }
 
 export const HomeCollectionHeader = ({ sectionTitle, sectionDescription, clickEvent }) => {
+  const { t } = useTranslation()
+
   return sectionTitle ? (
     <header className={cx(cardPageHeaderStyle, cardPageSectionStyle)}>
       <h2 className="sectionTitle">{sectionTitle}</h2>
       <div className={cardPageSubheaderLinkStyle}>
         {sectionDescription ? <p>{sectionDescription}</p> : null}
         <Link href="/collections/?src=home-view-more">
-          <a onClick={clickEvent}>View More Collections</a>
+          <a onClick={clickEvent}>{t('home:view-more-collections', 'View More Collections')}</a>
         </Link>
       </div>
     </header>
@@ -120,13 +123,15 @@ export const HomeCollectionHeader = ({ sectionTitle, sectionDescription, clickEv
 }
 
 export const HomeTopicHeader = ({ topicSlug, sectionTitle, sectionDescription, clickEvent }) => {
+  const { t } = useTranslation()
+
   return sectionTitle ? (
     <header className={cardPageHeaderStyle}>
       <h3 className="sectionTitle">{sectionTitle}</h3>
       <div className={cardPageSubheaderLinkStyle}>
         {sectionDescription ? <p>{sectionDescription}</p> : null}
         <Link href={`/explore/${topicSlug}?src=home-view-more`}>
-          <a onClick={clickEvent}>View More Articles</a>
+          <a onClick={clickEvent}>{t('home:view-more-articles', 'View More Articles')}</a>
         </Link>
       </div>
     </header>
@@ -143,13 +148,15 @@ export const HomeLineupHeader = ({ sectionTitle, sectionDescription }) => {
 }
 
 export const HomeSimilarHeader = ({ sectionTitle, sectionDescription, closeAction = () => {} }) => {
+  const { t } = useTranslation()
+
   return sectionTitle ? (
     <header className={cx(cardPageHeaderStyle, cardPageSimilarStyle)}>
       <div>
         <h3 className="sectionTitle">{sectionTitle}</h3>
         {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
       </div>
-      <button onClick={closeAction}>Dismiss</button>
+      <button onClick={closeAction}>{t('home:simliar-dismiss', 'Dismiss')}</button>
     </header>
   ) : null
 }
