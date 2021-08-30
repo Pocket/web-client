@@ -86,7 +86,7 @@ export function FiltersSideNav({
       </Link>
       {pinnedTags.length
         ? pinnedTags.map((tag) => (
-            <Link href={`/my-list/tags/${tag}`} key={tag}>
+            <Link href={`/my-list/tags/${encodeURIComponent(tag)}`} key={tag}>
               <button
                 className={subActive(tag, true)}
                 onClick={clickEvent}
