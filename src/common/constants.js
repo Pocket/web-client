@@ -144,9 +144,11 @@ export const LOCALE_COMMON = [
   'save-to-pocket',
   'confirm',
   'headers',
+  'home',
   'item-action',
   'messages',
   'nav',
+  'onboarding',
   'release',
   'search',
   'settings',
@@ -156,7 +158,8 @@ export const LOCALE_COMMON = [
   'whats-new',
   'global-footer',
   'collections',
-  'partner'
+  'partner',
+  'topic'
 ]
 
 

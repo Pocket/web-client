@@ -83,7 +83,7 @@ export const ReaderFlyawayApps = () => {
   const description = (
     <div>
       <p>{t('onboarding:flyaway-apps-description',
-        `If it's in your Pocket, it's on your phone and tablet, too – even when you're offline.`)}
+        'If it’s in your Pocket, it’s on your phone and tablet, too – even when you’re offline.')}
       </p>
 
       <div className={appStoreBadgeWrapper}>
