@@ -1,3 +1,10 @@
+## [1.19.8](https://github.com/Pocket/web-client/compare/v1.19.7...v1.19.8) (2021-08-30)
+
+
+### Bug Fixes
+
+* **global-nav:** update pocket logo link depending on logged in status ([c8932c6](https://github.com/Pocket/web-client/commit/c8932c67948251c9343c7581b50e0eb1daa19853))
+
 ## [1.19.7](https://github.com/Pocket/web-client/compare/v1.19.6...v1.19.7) (2021-08-25)
 
 

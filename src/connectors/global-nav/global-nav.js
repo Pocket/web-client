@@ -67,6 +67,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const retrievedAvatar = useSelector((state) => state?.user?.profile?.avatar_url)
+  const pocketLogoOutboundUrl = isLoggedIn ? '/my-list' : '//getpocket.com'
 
   const myListFlyawayReady = useSelector((state) => state.onboarding.homeFlyawayMyList)
   const saveFlyawayStatus = useSelector((state) => state.onboarding.homeFlyawaySave)
@@ -229,7 +230,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
 
   return (
     <GlobalNavComponent
-      pocketLogoOutboundUrl={'/'}
+      pocketLogoOutboundUrl={pocketLogoOutboundUrl}
       appRootSelector="#__next"
       links={links}
       subLinks={subLinks}
