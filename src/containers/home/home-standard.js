@@ -18,7 +18,7 @@ import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { Onboarding } from 'connectors/onboarding/onboarding'
 import { Toasts } from 'connectors/toasts/toast-list'
 
-export const HomeStandard = ({ metaData }) => {
+export const HomeStandard = ({ metaData, showLanguages }) => {
   const dispatch = useDispatch()
   const selectedTopics = useSelector((state) => state.settings.pinnedTopics)
 
@@ -33,7 +33,7 @@ export const HomeStandard = ({ metaData }) => {
   }, [selectedTopics, dispatch])
 
   return (
-    <Layout title={metaData.title} metaData={metaData}>
+    <Layout title={metaData.title} metaData={metaData} showLanguages={showLanguages}>
       <SideNav subset="home" />
       <main className="main">
         <HomeGreeting />

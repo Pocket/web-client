@@ -5,11 +5,13 @@ import { headingSansSerif } from '@pocket/web-ui'
 import { fontSansSerif, fontSizeRoot } from '@pocket/web-ui'
 import { breakpointSmallTablet } from '@pocket/web-ui'
 import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointLargeTablet } from '@pocket/web-ui'
 import { breakpointTinyTablet } from '@pocket/web-ui'
 import { breakpointTinyHandset } from '@pocket/web-ui'
 import { PageContainer } from '@pocket/web-ui'
 import { FacebookMonoIcon, TwitterMonoIcon } from '@pocket/web-ui'
 import { Trans, useTranslation } from 'next-i18next'
+import { Languages } from 'connectors/languages/languages'
 
 const appStoreBadge =
   'https://assets.getpocket.com/web-ui/assets/apple-app-store-badge.2928664fe1fc6aca88583a6f606d60ba.svg'
@@ -223,15 +225,27 @@ const legalLinksStyle = css`
   }
 `
 
-const socialLinksStyle = css`
-  white-space: nowrap;
+const engagementBlockStyle = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  ${breakpointLargeTablet} {
+    padding: 1rem 0;
+  }
 
-  span {
-    margin: 0 0 1.5rem 1.5rem;
-    height: 24px;
+  .social {
+    white-space: nowrap;
+    span {
+      height: 24px;
+      margin-left: 1rem;
+    }
+  }
 
-    ${breakpointTinyTablet} {
-      margin: 0 1.5rem 0.75rem 0;
+  .languages {
+    select {
+      display: inline-block;
+      padding: 0.25rem 2rem 0.25rem 0.5rem;
     }
   }
 `
@@ -239,7 +253,7 @@ const socialLinksStyle = css`
 /**
  * The `GlobalFooter` component appears at the bottom of every screen in our web applications.
  */
-export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
+export const GlobalFooter = ({ device, hasBorder, hasColorBorder, showLanguages }) => {
   const { t } = useTranslation()
 
   let appBadges = [
@@ -389,21 +403,28 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
               </button>
             </nav>
           </div>
-          <div className={socialLinksStyle}>
-            <a href="https://facebook.com/pocket" target="_blank" rel="noopener noreferrer">
-              <FacebookMonoIcon
-                id="facebook-footer-icon"
-                title="Facebook"
-                description="Visit our Facebook page"
-              />
-            </a>
-            <a href="https://twitter.com/pocket" target="_blank" rel="noopener noreferrer">
-              <TwitterMonoIcon
-                id="twitter-footer-icon"
-                title="Twitter"
-                description="View our Twitter profile"
-              />
-            </a>
+          <div className={engagementBlockStyle}>
+            {showLanguages ? (
+              <div className="languages">
+                <Languages />
+              </div>
+            ) : null}
+            <div className="social">
+              <a href="https://facebook.com/pocket" target="_blank" rel="noopener noreferrer">
+                <FacebookMonoIcon
+                  id="facebook-footer-icon"
+                  title="Facebook"
+                  description="Visit our Facebook page"
+                />
+              </a>
+              <a href="https://twitter.com/pocket" target="_blank" rel="noopener noreferrer">
+                <TwitterMonoIcon
+                  id="twitter-footer-icon"
+                  title="Twitter"
+                  description="View our Twitter profile"
+                />
+              </a>
+            </div>
           </div>
         </div>
       </PageContainer>
