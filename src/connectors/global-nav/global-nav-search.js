@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getRecentSearch } from 'connectors/search/search.state'
 import { saveRecentSearch } from 'connectors/search/search.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import escape from 'validator/lib/escape'
 
 function GlobalNavSearchConnected({ onClose }) {
   const router = useRouter()
@@ -16,7 +15,7 @@ function GlobalNavSearchConnected({ onClose }) {
   const onSubmit = (searchTerm) => {
     dispatch(sendSnowplowEvent('global-nav.search.submit', { value: searchTerm }))
     dispatch(saveRecentSearch(searchTerm))
-    router.push(`/my-list/search/?query=${escape(searchTerm)}`)
+    router.push(`/my-list/search/?query=${encodeURIComponent(searchTerm)}`)
   }
 
   useEffect(() => {
