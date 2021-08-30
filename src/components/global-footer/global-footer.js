@@ -253,7 +253,7 @@ const engagementBlockStyle = css`
 /**
  * The `GlobalFooter` component appears at the bottom of every screen in our web applications.
  */
-export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
+export const GlobalFooter = ({ device, hasBorder, hasColorBorder, showLanguages }) => {
   const { t } = useTranslation()
 
   let appBadges = [
@@ -404,9 +404,11 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
             </nav>
           </div>
           <div className={engagementBlockStyle}>
-            <div className="languages">
-              <Languages />
-            </div>
+            {showLanguages ? (
+              <div className="languages">
+                <Languages />
+              </div>
+            ) : null}
             <div className="social">
               <a href="https://facebook.com/pocket" target="_blank" rel="noopener noreferrer">
                 <FacebookMonoIcon

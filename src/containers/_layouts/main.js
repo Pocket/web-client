@@ -17,7 +17,8 @@ function mainLayout({
   canonical,
   selectedNavLink,
   isFullWidthLayout,
-  className = ''
+  className = '',
+  showLanguages
 }) {
   const renderSocialMeta = metaData?.description && metaData?.title
 
@@ -36,7 +37,7 @@ function mainLayout({
         {isFullWidthLayout ? children : <PageContainer>{children}</PageContainer>}
       </div>
 
-      <GlobalFooter />
+      <GlobalFooter showLanguages={showLanguages} />
     </>
   )
 }

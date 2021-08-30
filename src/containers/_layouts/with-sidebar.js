@@ -49,7 +49,8 @@ function mainLayout({
   subset,
   tag,
   selectedNavLink,
-  isFullWidthLayout
+  isFullWidthLayout,
+  showLanguages
 }) {
   const renderSocialMeta = metaData?.description && metaData?.title
   return (
@@ -73,7 +74,7 @@ function mainLayout({
         )}
       </div>
 
-      <GlobalFooter />
+      <GlobalFooter showLanguages={showLanguages} />
     </>
   )
 }

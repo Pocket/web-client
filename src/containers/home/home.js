@@ -13,11 +13,13 @@ export default function Home(props) {
   const shouldRender = userStatus !== 'pending' && flagsReady
   const showPersonalized = featureFlagActive({ flag: 'profiles.home', featureState })
 
+  const showLanguages = featureFlagActive({ flag: 'app.language.selector', featureState })
+
   if (!shouldRender) return null
 
   return showPersonalized ? (
-    <HomePersonalized metaData={metaData} />
+    <HomePersonalized metaData={metaData} showLanguages={showLanguages} />
   ) : (
-    <HomeStandard metaData={metaData} />
+    <HomeStandard metaData={metaData} showLanguages={showLanguages} />
   )
 }
