@@ -61,11 +61,9 @@ const articleWrapper = css`
   .sidebar-anchor {
     position: relative;
     width: 0;
-    opacity: 0;
     transition: width 150ms ease-in-out;
     &.active {
       width: 350px;
-      opacity: 1;
     }
   }
 
@@ -369,7 +367,7 @@ export default function Reader() {
       <TaggingModal />
       <ShareModal />
       <Toasts />
-      <Onboarding type="reader.flyaway.apps" />
+      {articleContent ? <Onboarding type="reader.flyaway.apps" /> : null}
     </>
   )
 }
