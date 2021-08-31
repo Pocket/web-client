@@ -4,6 +4,7 @@ import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { useTranslation } from 'next-i18next'
 import { Loader } from 'components/loader/loader'
 import { ListSort } from 'components/list-sort/list-sort'
+import { SearchSortPremium } from 'components/list-sort/search-sort-premium'
 import { myListHeaderStyle } from './my-list-header'
 
 const searchStyles = css`
@@ -19,7 +20,14 @@ const searchStyles = css`
   }
 `
 
-export const SearchPageHeader = ({ filter, total, query, sortOrder, toggleSortOrder }) => {
+export const SearchPageHeader = ({
+  filter,
+  total,
+  query,
+  sortOrder,
+  toggleSortOrder,
+  isPremium
+}) => {
   const { t } = useTranslation()
 
   const isLoading = total === false
@@ -39,7 +47,11 @@ export const SearchPageHeader = ({ filter, total, query, sortOrder, toggleSortOr
         )}
       </h1>
       <FilterMenu subset="search" query={query} filter={filter} />
-      <ListSort toggleSortOrder={toggleSortOrder} sortOrder={sortOrder} />
+      { isPremium ? (
+        <SearchSortPremium sortOrder={sortOrder} />
+        ): (
+        <ListSort toggleSortOrder={toggleSortOrder} sortOrder={sortOrder} />
+      )}
     </header>
   ) : null
 }

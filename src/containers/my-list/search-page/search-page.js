@@ -39,6 +39,7 @@ export default function Collection(props) {
   const userStatus = useSelector((state) => state.user.user_status)
   const sortSubset = useSelector((state) => state.app.section)
   const sortOrder = useSelector((state) => state.app.sortOptions[sortSubset] || 'newest')
+  const isPremium = useSelector((state) => state.user.premium_status === '1')
 
   // Check for initial items so we don't over request
   const initialItemsPopulated = items?.length || total === 0
@@ -89,6 +90,7 @@ export default function Collection(props) {
                 total={total}
                 sortOrder={sortOrder}
                 toggleSortOrder={toggleSortOrder}
+                isPremium={isPremium}
               />
               {items?.length ? (
                 <VirtualizedList type={type} section={section} loadMore={loadMore} />
