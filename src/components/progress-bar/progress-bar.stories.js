@@ -1,5 +1,4 @@
 import React from 'react'
-import Lorem from 'react-lorem-component'
 import { ProgressBar } from './progress-bar'
 import { css } from 'linaria'
 import { ScrollTracker } from 'components/scroll/scroll-tracker'
@@ -28,11 +27,6 @@ const ProgressBarStory = ({ scrollPercentage, noScroll, loremCount }) => (
       <ProgressBar scrollPercentage={scrollPercentage} noScroll={noScroll} />
     </div>
     <div className={longPageStyles}>
-      <Lorem
-        count={loremCount}
-        paragraphLowerBound={8}
-        paragraphUpperBound={20}
-      />
     </div>
   </React.Fragment>
 )
