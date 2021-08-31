@@ -305,16 +305,18 @@ export default function Reader() {
 
       <main className={articleWrapper}>
         <div className={classNames('sidebar-anchor', { active: sideBarOpen })}>
-          <Sidebar
-            isPremium={isPremium}
-            sideBarOpen={sideBarOpen}
-            toggleSidebar={toggleSidebar}
-            highlightList={highlightList}
-            annotationCount={annotations.length}
-            shareItem={itemShare}
-            deleteAnnotation={removeAnnotation}
-            handleImpression={handleImpression}
-          />
+          {articleContent ? (
+            <Sidebar
+              isPremium={isPremium}
+              sideBarOpen={sideBarOpen}
+              toggleSidebar={toggleSidebar}
+              highlightList={highlightList}
+              annotationCount={annotations.length}
+              shareItem={itemShare}
+              deleteAnnotation={removeAnnotation}
+              handleImpression={handleImpression}
+            />
+          ) : null}
         </div>
         <article
           className={classNames(
