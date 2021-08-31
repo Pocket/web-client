@@ -12,6 +12,7 @@ import { APP_LIST_MODE_SET } from 'actions'
 import { APP_SORT_ORDER_TOGGLE } from 'actions'
 import { APP_SORT_ORDER_OLD } from 'actions'
 import { APP_SORT_ORDER_NEW } from 'actions'
+import { APP_SORT_ORDER_RELEVANCE } from 'actions'
 import { APP_SORT_ORDER_SET } from 'actions'
 
 import { APP_LIST_MODE_LIST } from 'actions'
@@ -60,6 +61,7 @@ export const setListModeDetail = () => ({type: APP_LIST_MODE_DETAIL, listMode: '
 export const sortOrderToggle = () => ({ type: APP_SORT_ORDER_TOGGLE })
 export const sortOrderSetOld = () => ({ type: APP_SORT_ORDER_OLD, sortOrder: 'oldest' }) //prettier-ignore
 export const sortOrderSetNew = () => ({ type: APP_SORT_ORDER_NEW, sortOrder: 'newest' }) //prettier-ignore
+export const sortOrderSetRelevance = () => ({ type: APP_SORT_ORDER_RELEVANCE, sortOrder: 'relevance' }) //prettier-ignore
 
 export const setColorMode = (colorMode) => ({ type: APP_COLOR_MODE_SET, colorMode }) //prettier-ignore
 export const setColorModeLight = () => ({ type: APP_COLOR_MODE_SET, colorMode: 'light' }) //prettier-ignore
@@ -134,6 +136,7 @@ export const appSagas = [
   takeLatest(APP_SORT_ORDER_TOGGLE, appSortOrderToggle),
   takeLatest(APP_SORT_ORDER_OLD, appSortOrderSet),
   takeLatest(APP_SORT_ORDER_NEW, appSortOrderSet),
+  takeLatest(APP_SORT_ORDER_RELEVANCE, appSortOrderSet),
   takeLatest(APP_LIST_MODE_LIST, appListModeSet),
   takeLatest(APP_LIST_MODE_GRID, appListModeSet),
   takeLatest(APP_LIST_MODE_DETAIL, appListModeSet),

@@ -44,6 +44,7 @@ import { APP_SET_MODE } from 'actions'
 import { APP_SORT_ORDER_TOGGLE } from 'actions'
 import { APP_SORT_ORDER_OLD } from 'actions'
 import { APP_SORT_ORDER_NEW } from 'actions'
+import { APP_SORT_ORDER_RELEVANCE } from 'actions'
 
 import { HYDRATE } from 'actions'
 
@@ -227,7 +228,8 @@ export const myListReducers = (state = initialState, action) => {
 
     case APP_SORT_ORDER_TOGGLE:
     case APP_SORT_ORDER_OLD:
-    case APP_SORT_ORDER_NEW: {
+    case APP_SORT_ORDER_NEW:
+    case APP_SORT_ORDER_RELEVANCE: {
       return initialState
     }
 
