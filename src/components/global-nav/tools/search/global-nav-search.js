@@ -200,6 +200,10 @@ const GlobalNavSearch = ({
     updateIsMobile(width < screenMediumHandset)
   }, [width])
 
+  useEffect(() => {
+    inputEl.current.focus()
+  })
+
   /**
    * This block finds all the relevant elements and traps focus for them.
    */
@@ -245,7 +249,6 @@ const GlobalNavSearch = ({
       }
     })
 
-    firstFocusableElement.focus()
     return () => Mousetrap.unbind(['shift+tab', 'up', 'tab', 'down'])
   }, [recentSearches])
 
