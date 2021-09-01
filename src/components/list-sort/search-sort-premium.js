@@ -1,13 +1,15 @@
 import { css, cx } from 'linaria'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { SortByNewestIcon } from '@pocket/web-ui'
 import { SortByOldestIcon } from '@pocket/web-ui'
 import { RelevanceIcon } from '@pocket/web-ui'
+import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { buttonReset } from 'components/buttons/button-reset'
 import { useTranslation } from 'next-i18next'
 import { PopupMenu, PopupMenuItem } from '@pocket/web-ui'
 import { sortOrderSetNew, sortOrderSetOld, sortOrderSetRelevance } from 'connectors/app/app.state'
+import { KEYS } from 'common/constants'
 
 const sortStyles = css`
   display: inline-block;
@@ -32,22 +34,52 @@ export const SearchSortPremium = ({ sortOrder = 'newest' }) => {
   const appRootSelector = '#__next'
 
   const sortOptionsRef = useRef(null)
+  const menuRef = useRef(null)
 
-  const sortIcon = {
-    'newest': <SortByNewestIcon />,
-    'oldest': <SortByOldestIcon />,
-    'relevance': <RelevanceIcon />
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [focus, setFocus] = useState(false)
+
+  useCorrectEffect(() => {
+    if (!focus || !menuOpen) return
+
+    console.log('i made it here')
+    menuRef.current.querySelector('li button').focus()
+    menuRef.current.addEventListener('focusout', checkInnerFocus)
+
+    return () => {
+      menuRef.current.removeEventListener('focusout', checkInnerFocus)
+    }
+  }, [focus, menuOpen])
+
+  const checkInnerFocus = () => {
+    if (menuRef.current.querySelectorAll(':focus-within').length === 0) {
+      handleClose()
+      sortOptionsRef.current.click()
+    }
   }
 
+  const updateFocus = (e) => {
+    if (e.charCode === KEYS.SPACE || e.charCode === KEYS.ENTER) setFocus(true)
+  }
+
+  const handleOpen = () => setMenuOpen(true)
+
+  const handleClose = () => {
+    setMenuOpen(false)
+    setFocus(false)
+  }
+  
   const handleNewest = () => dispatch(sortOrderSetNew())
   const handleOldest = () => dispatch(sortOrderSetOld())
   const handleRelevance = () => dispatch(sortOrderSetRelevance())
 
   return (
-    <div>
+    <div ref={menuRef}>
       <button
         ref={sortOptionsRef}
-        className={cx(buttonReset, sortStyles)}>
+        className={cx(buttonReset, sortStyles)}
+        onClick={handleOpen}
+        onKeyPress={updateFocus}>
         {sortIcon[sortOrder]}
       </button>
       <PopupMenu
