@@ -73,6 +73,12 @@ export const SearchSortPremium = ({ sortOrder = 'newest' }) => {
   const handleOldest = () => dispatch(sortOrderSetOld())
   const handleRelevance = () => dispatch(sortOrderSetRelevance())
 
+  const sortIcon = {
+    'newest': <SortByNewestIcon />,
+    'oldest': <SortByOldestIcon />,
+    'relevance': <RelevanceIcon />
+  }
+
   return (
     <div ref={menuRef}>
       <button
