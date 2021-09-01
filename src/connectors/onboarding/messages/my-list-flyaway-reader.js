@@ -57,7 +57,7 @@ export const MyListFlyawayReader = () => {
 
   const title = t('onboarding:flyaway-reader-title', 'Read distraction-free')
   const description = t('onboarding:flyaway-reader-description',
-    'Open a saved story to experience Pocket\'s calm reading zone.')
+    'Open a saved story to experience Pocket’s calm reading zone.')
 
   return (
     <Flyaway

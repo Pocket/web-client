@@ -19,14 +19,14 @@ const flyawayOverrides = css`
   }
 `
 
-const appStoreBadgeWrapper = css`
+export const appStoreBadgeWrapper = css`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
   gap: 0 0.5rem;
 `
 
-const appStoreBadgeStyle = css`
+export const appStoreBadgeStyle = css`
   margin-top: 0.5rem;
 
   &.google-play-badge {

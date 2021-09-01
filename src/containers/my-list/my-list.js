@@ -195,6 +195,7 @@ export default function MyList(props) {
               <TagEditModal />
               <Toasts />
               <Onboarding type="my-list.flyaway.reader" />
+              <Onboarding type="my-list.flyaway.extensions" />
             </>
           ) : (
             <CallOutBrand />
