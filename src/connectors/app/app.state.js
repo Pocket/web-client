@@ -9,7 +9,6 @@ import { APP_SET_PREFERENCES } from 'actions'
 import { APP_LIST_MODE_TOGGLE } from 'actions'
 import { APP_LIST_MODE_SET } from 'actions'
 
-import { APP_SORT_ORDER_TOGGLE } from 'actions'
 import { APP_SORT_ORDER_OLD } from 'actions'
 import { APP_SORT_ORDER_NEW } from 'actions'
 import { APP_SORT_ORDER_RELEVANCE } from 'actions'
@@ -58,7 +57,6 @@ export const setListModeList = () => ({type: APP_LIST_MODE_LIST, listMode: 'list
 export const setListModeGrid = () => ({type: APP_LIST_MODE_GRID, listMode: 'grid'}) //prettier-ignore
 export const setListModeDetail = () => ({type: APP_LIST_MODE_DETAIL, listMode: 'detail'}) //prettier-ignore
 
-export const sortOrderToggle = () => ({ type: APP_SORT_ORDER_TOGGLE })
 export const sortOrderSetOld = () => ({ type: APP_SORT_ORDER_OLD, sortOrder: 'oldest' }) //prettier-ignore
 export const sortOrderSetNew = () => ({ type: APP_SORT_ORDER_NEW, sortOrder: 'newest' }) //prettier-ignore
 export const sortOrderSetRelevance = () => ({ type: APP_SORT_ORDER_RELEVANCE, sortOrder: 'relevance' }) //prettier-ignore
@@ -133,7 +131,6 @@ export const appSagas = [
   takeLatest(APP_SET_PREFERENCES, appPreferences),
   takeLatest(APP_SET_MODE, appModeSwitch),
   takeLatest(APP_LIST_MODE_TOGGLE, appListModeToggle),
-  takeLatest(APP_SORT_ORDER_TOGGLE, appSortOrderToggle),
   takeLatest(APP_SORT_ORDER_OLD, appSortOrderSet),
   takeLatest(APP_SORT_ORDER_NEW, appSortOrderSet),
   takeLatest(APP_SORT_ORDER_RELEVANCE, appSortOrderSet),
@@ -180,13 +177,6 @@ function* appSortOrderSet({ sortOrder }) {
   const updatedSortOptions = { ...oldSortOptions, [subset]: sortOrder }
   localStore.setItem(CACHE_KEY_SORT_OPTIONS, JSON.stringify(updatedSortOptions))
   yield put({ type: APP_SORT_ORDER_SET, sortOrder, subset })
-}
-
-function* appSortOrderToggle() {
-  const subset = yield select(getSubset)
-  const currentOrder = yield select(getSortOptionsBySubset, subset)
-  const sortOrder = currentOrder === 'newest' ? 'oldest' : 'newest'
-  yield call(appSortOrderSet, { sortOrder, subset})
 }
 
 function* appReleaseNotesSet({ releaseVersion }) {

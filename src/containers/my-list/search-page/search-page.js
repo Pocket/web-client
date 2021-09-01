@@ -7,7 +7,6 @@ import { useHasChanged } from 'common/utilities/hooks/has-changed'
 import Layout from 'layouts/with-sidebar'
 import { getMylistSearchData } from 'containers/my-list/my-list.state'
 import { appSetSection } from 'connectors/app/app.state'
-import { sortOrderToggle } from 'connectors/app/app.state'
 import { SearchPageHeader } from 'components/headers/search-page-header'
 
 import { VirtualizedList } from 'connectors/virtualized/virtualized-list'
@@ -69,8 +68,6 @@ export default function Collection(props) {
     if (offset >= total) return
     dispatch(getMylistSearchData(filter, query, offset))
   }
-
-  const toggleSortOrder = () => dispatch(sortOrderToggle())
 
   const shouldRender = userStatus !== 'pending'
   const type = listMode
