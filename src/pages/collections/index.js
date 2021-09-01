@@ -9,7 +9,7 @@ import { LOCALE_COMMON } from 'common/constants'
 import { END } from 'redux-saga'
 import { wrapper } from 'store'
 
-export const getStaticProps = wrapper.getStaticProps(async ({ store, locale }) => {
+export const getStaticProps = wrapper.getStaticProps((store) => async ({ locale }) => {
   const { dispatch, sagaTask } = store
 
   const defaultProps = {
