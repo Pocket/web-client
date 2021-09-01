@@ -89,7 +89,6 @@ export default function Collection(props) {
                 query={query}
                 total={total}
                 sortOrder={sortOrder}
-                toggleSortOrder={toggleSortOrder}
                 isPremium={isPremium}
               />
               {items?.length ? (

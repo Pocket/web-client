@@ -66,7 +66,7 @@ export const myListHeaderStyle = css`
   }
 `
 
-export const MyListHeader = ({ subset, filter, title, sortOrder, toggleSortOrder }) => {
+export const MyListHeader = ({ subset, filter, title, sortOrder }) => {
   const { t } = useTranslation()
 
   const translatedHeaders = {
@@ -84,7 +84,7 @@ export const MyListHeader = ({ subset, filter, title, sortOrder, toggleSortOrder
       <h1 className="pageTitle" data-cy="page-title">{translatedHeaders[title]}</h1>
       <FilterMenu subset={subset} filter={filter} />
       { subset !== 'tag-page' ? (
-        <ListSort toggleSortOrder={toggleSortOrder} sortOrder={sortOrder} />
+        <ListSort sortOrder={sortOrder} />
       ) : null}
     </header>
   ) : null

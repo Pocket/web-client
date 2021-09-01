@@ -177,8 +177,7 @@ export default function MyList(props) {
                 title={selector}
                 filter={filter}
                 tag={tag}
-                sortOrder={sortOrder}
-                toggleSortOrder={toggleSortOrder} />
+                sortOrder={sortOrder} />
               {items?.length ? (
                 <VirtualizedList
                   type={type}
