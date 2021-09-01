@@ -94,10 +94,10 @@ export const ListSort = ({ sortOrder, showRelevance }) => {
       </button>
       <PopupMenu
         trigger={sortOptionsRef}
-        title={t('settings:search-sort-options', 'Search sort options')}
-        screenReaderLabel={t('settings:search-sort-options', 'Search sort options')}
+        title={t('settings:sort-options', 'Sorting options')}
+        screenReaderLabel={t('settings:sort-options', 'Sorting options')}
         appRootSelector={appRootSelector}
-        data-cy='search-sort-options'
+        data-cy='sort-options'
         popperOptions={{
           placement: 'bottom-end',
           modifiers: [
@@ -110,23 +110,23 @@ export const ListSort = ({ sortOrder, showRelevance }) => {
           ]
         }}>
         <PopupMenuItem
-          data-cy="search-sort-oldest"
+          data-cy="sort-oldest"
           onClick={handleOldest}>
             <SortByOldestIcon />
-            {t('settings:search-sort-oldest', 'Oldest first')}
+            {t('settings:sort-oldest', 'Oldest first')}
         </PopupMenuItem>
         <PopupMenuItem
-          data-cy="search-sort-newest"
+          data-cy="sort-newest"
           onClick={handleNewest}>
             <SortByNewestIcon />
-            {t('settings:search-sort-newest', 'Newest first')}
+            {t('settings:sort-newest', 'Newest first')}
         </PopupMenuItem>
         { showRelevance ? (
           <PopupMenuItem
-            data-cy="search-sort-relevance"
+            data-cy="sort-relevance"
             onClick={handleRelevance}>
               <RelevanceIcon />
-              {t('settings:search-sort-relevance', 'By relevance')}
+              {t('settings:sort-relevance', 'By relevance')}
           </PopupMenuItem>
         ) : null }
       </PopupMenu>
