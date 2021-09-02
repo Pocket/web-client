@@ -1,6 +1,5 @@
 import { SelectionPopover } from './popover-selection'
 import { useState } from 'react'
-import Lorem from 'react-lorem-component'
 
 export default {
   title: 'Article/Annotation Selection'
@@ -25,7 +24,6 @@ export const Normal = () => {
 
   return (
     <div onMouseUp={toggleHighlight}>
-      <Lorem count={4} paragraphLowerBound={8} paragraphUpperBound={20} />
       {highlight ? (
         <SelectionPopover anchor={highlight} disablePopup={clearSelection} />
       ) : null}

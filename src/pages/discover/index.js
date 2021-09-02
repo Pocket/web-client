@@ -15,7 +15,7 @@ import { LOCALE_COMMON } from 'common/constants'
  * until they are resolved, which is fine if we need the data for
  * SEO/Crawlers
   --------------------------------------------------------------- */
-export const getStaticProps = wrapper.getStaticProps(async ({ store, locale }) => {
+export const getStaticProps = wrapper.getStaticProps((store) => async ({ locale }) => {
   const { dispatch } = store
 
   // Hydrating initial state with an async request. This will block the

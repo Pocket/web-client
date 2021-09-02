@@ -1,3 +1,10 @@
+## [1.20.5](https://github.com/Pocket/web-client/compare/v1.20.4...v1.20.5) (2021-09-02)
+
+
+### Bug Fixes
+
+* **dependencies:** update next-redux-wrapper ([c31ca24](https://github.com/Pocket/web-client/commit/c31ca24cda57c988e805f03b33cead21675a7218))
+
 ## [1.20.4](https://github.com/Pocket/web-client/compare/v1.20.3...v1.20.4) (2021-09-01)
 
 

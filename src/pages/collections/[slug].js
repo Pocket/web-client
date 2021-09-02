@@ -25,7 +25,7 @@ export const getStaticPaths = async () => {
   return { paths, fallback: 'blocking' }
 }
 
-export const getStaticProps = wrapper.getStaticProps(async ({ store, params, locale }) => {
+export const getStaticProps = wrapper.getStaticProps((store) => async ({ params, locale }) => {
   const { dispatch, sagaTask } = store
   const { slug } = params
 
