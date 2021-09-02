@@ -42,7 +42,6 @@ export const ListSort = ({ sortOrder, showRelevance }) => {
   useCorrectEffect(() => {
     if (!focus || !menuOpen) return
 
-    console.log('i made it here')
     menuRef.current.querySelector('li button').focus()
     menuRef.current.addEventListener('focusout', checkInnerFocus)
 
@@ -76,10 +75,6 @@ export const ListSort = ({ sortOrder, showRelevance }) => {
   const sortIcon = {
     'newest': <SortByNewestIcon />,
     'oldest': <SortByOldestIcon />,
-  }
-
-  const sortIconWithRelevance = {
-    ...sortIcon,
     'relevance': <RelevanceIcon />
   }
 
@@ -90,7 +85,7 @@ export const ListSort = ({ sortOrder, showRelevance }) => {
         className={cx(buttonReset, sortStyles)}
         onClick={handleOpen}
         onKeyPress={updateFocus}>
-        {showRelevance ? (sortIconWithRelevance[sortOrder]) : (sortIcon[sortOrder])}
+        {sortIcon[sortOrder]}
       </button>
       <PopupMenu
         trigger={sortOptionsRef}
