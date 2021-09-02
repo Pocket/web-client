@@ -89,7 +89,7 @@ export const MyListFlyawayExtensions = () => {
   const desktopDescription = t('onboarding:flyaway-extensions-description-desktop',
     'Install our browser extension to add anything to your Pocket.')
   const mobileDescription = t('onboarding:flyaway-extensions-description-mobile',
-    'Download Pocket’s mobile apps to read from anywhere.')
+    'Download one of our mobile apps.')
 
   const description = (
     <>
