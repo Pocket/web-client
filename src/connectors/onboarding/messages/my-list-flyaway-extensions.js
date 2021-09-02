@@ -76,7 +76,7 @@ export const MyListFlyawayExtensions = () => {
   const firefoxExtensionLink = 'https://support.mozilla.org/en-US/kb/save-web-pages-later-pocket-firefox'
   const chromeExtensionLink = 'https://getpocket.com/apps/link/pocket-chrome/?ep=4&s=WELCOME_PAGE'
   const safariExtensionLink = 'https://apps.apple.com/us/app/save-to-pocket/id1477385213?ls=1&mt=12'
-  const edgeExtensionLink = 'https://getpocket.com/apps/link/pocket-edge/?ep=4&s=WELCOME_PAGE'
+  const edgeExtensionLink = 'https://microsoftedge.microsoft.com/addons/detail/save-to-pocket/jicacccodjjgmghnmekophahpmddeemd'
   const appleLink = 'https://apps.apple.com/us/app/pocket-save-read-grow/id309601447'
   const googleLink = 'https://play.google.com/store/apps/details?id=com.ideashower.readitlater.pro'
 
