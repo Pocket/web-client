@@ -57,7 +57,7 @@ export function DevTools() {
   }, []) //eslint-disable-line
 
   return showDevTools && devMode ? (
-    <div className={devToolStyle}>
+    <div className={devToolStyle} data-cy="qa-panel">
       <h6>Dev Settings</h6>
       <Features />
       <Languages />
