@@ -24,7 +24,10 @@ export const SearchPageHeader = ({
   total,
   query,
   sortOrder,
-  isPremium
+  isPremium,
+  handleNewest,
+  handleOldest,
+  handleRelevance
 }) => {
   const { t } = useTranslation()
 
@@ -45,7 +48,12 @@ export const SearchPageHeader = ({
         )}
       </h1>
       <FilterMenu subset="search" query={query} filter={filter} />
-      <ListSort sortOrder={sortOrder} showRelevance={isPremium} />
+      <ListSort
+        sortOrder={sortOrder}
+        showRelevance={isPremium}
+        handleNewest={handleNewest}
+        handleOldest={handleOldest}
+        handleRelevance={handleRelevance} />
     </header>
   ) : null
 }

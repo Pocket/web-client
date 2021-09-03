@@ -16,6 +16,7 @@ import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
 import { Toasts } from 'connectors/toasts/toast-list'
+import { sortOrderSetNew, sortOrderSetOld, sortOrderSetRelevance } from 'connectors/app/app.state'
 
 export default function Collection(props) {
   const { metaData = {}, filter } = props
@@ -39,6 +40,10 @@ export default function Collection(props) {
   const sortSubset = useSelector((state) => state.app.section)
   const sortOrder = useSelector((state) => state.app.sortOptions[sortSubset] || 'newest')
   const isPremium = useSelector((state) => state.user.premium_status === '1')
+
+  const handleNewest = () => dispatch(sortOrderSetNew())
+  const handleOldest = () => dispatch(sortOrderSetOld())
+  const handleRelevance = () => dispatch(sortOrderSetRelevance())
 
   // Check for initial items so we don't over request
   const initialItemsPopulated = items?.length || total === 0
@@ -87,6 +92,9 @@ export default function Collection(props) {
                 total={total}
                 sortOrder={sortOrder}
                 isPremium={isPremium}
+                handleNewest={handleNewest}
+                handleOldest={handleOldest}
+                handleRelevance={handleRelevance}
               />
               {items?.length ? (
                 <VirtualizedList type={type} section={section} loadMore={loadMore} />

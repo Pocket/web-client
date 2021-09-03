@@ -41,11 +41,11 @@ const tagPageHeaderStyle = css`
   }
 `
 
-export const UnTaggedHeader = ({ subset, filter, tag, sortOrder }) => (
+export const UnTaggedHeader = ({ subset, filter, tag, sortOrder, handleNewest, handleOldest }) => (
   <header className={myListHeaderStyle}>
     <h1 className="pageTitle">not tagged</h1>
     <FilterMenu subset={subset} filter={filter} tag={tag} />
-    <ListSort sortOrder={sortOrder} />
+    <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
   </header>
 )
 
@@ -59,6 +59,8 @@ export const TaggedHeader = ({
   deleteTag,
   isPinned,
   sortOrder,
+  handleNewest,
+  handleOldest
 }) => {
   const { t } = useTranslation()
 
@@ -69,7 +71,7 @@ export const TaggedHeader = ({
           {capitalizeFirstLetter(title)}
         </h1>
         <FilterMenu subset={subset} filter={filter} tag={tag} />
-        <ListSort sortOrder={sortOrder} />
+        <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
       </header>
       <div className="tag-actions">
         <button
@@ -113,6 +115,8 @@ export const TagPageHeader = ({
   deleteTag,
   isPinned,
   sortOrder,
+  handleNewest,
+  handleOldest
 }) => {
   const TagHeader = '_untagged_'.includes(title) ? UnTaggedHeader : TaggedHeader
 
@@ -127,6 +131,8 @@ export const TagPageHeader = ({
       deleteTag={deleteTag}
       isPinned={isPinned}
       sortOrder={sortOrder}
+      handleNewest={handleNewest}
+      handleOldest={handleOldest}
     />
   ) : null
 }

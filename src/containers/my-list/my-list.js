@@ -23,6 +23,7 @@ import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 import { Onboarding } from 'connectors/onboarding/onboarding'
+import { sortOrderSetNew, sortOrderSetOld } from 'connectors/app/app.state'
 
 export default function MyList(props) {
   const { metaData = {}, subset: sub = 'active', filter: propFilter } = props
@@ -53,6 +54,9 @@ export default function MyList(props) {
 
   // Check for initial items so we don't over request
   const initialItemsPopulated = items?.length || total === 0
+
+  const handleNewest = () => dispatch(sortOrderSetNew())
+  const handleOldest = () => dispatch(sortOrderSetOld())
 
   /**
    * Set up listeners for focus shifts.  When the window gains focus check if
@@ -174,7 +178,9 @@ export default function MyList(props) {
                 title={selector}
                 filter={filter}
                 tag={tag}
-                sortOrder={sortOrder} />
+                sortOrder={sortOrder}
+                handleNewest={handleNewest}
+                handleOldest={handleOldest} />
               {items?.length ? (
                 <VirtualizedList
                   type={type}

@@ -1,6 +1,5 @@
 import { css, cx } from 'linaria'
 import { useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { SortByNewestIcon } from '@pocket/web-ui'
 import { SortByOldestIcon } from '@pocket/web-ui'
 import { RelevanceIcon } from '@pocket/web-ui'
@@ -8,7 +7,6 @@ import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { buttonReset } from 'components/buttons/button-reset'
 import { useTranslation } from 'next-i18next'
 import { PopupMenu, PopupMenuItem } from '@pocket/web-ui'
-import { sortOrderSetNew, sortOrderSetOld, sortOrderSetRelevance } from 'connectors/app/app.state'
 import { KEYS } from 'common/constants'
 
 const sortStyles = css`
@@ -28,9 +26,8 @@ const sortStyles = css`
   }
 `
 
-export const ListSort = ({ sortOrder, showRelevance }) => {
+export const ListSort = ({ sortOrder, showRelevance, handleNewest, handleOldest, handleRelevance }) => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
   const appRootSelector = '#__next'
 
   const sortOptionsRef = useRef(null)
@@ -68,10 +65,6 @@ export const ListSort = ({ sortOrder, showRelevance }) => {
     setFocus(false)
   }
   
-  const handleNewest = () => dispatch(sortOrderSetNew())
-  const handleOldest = () => dispatch(sortOrderSetOld())
-  const handleRelevance = () => dispatch(sortOrderSetRelevance())
-
   const sortIcon = {
     'newest': <SortByNewestIcon />,
     'oldest': <SortByOldestIcon />,
