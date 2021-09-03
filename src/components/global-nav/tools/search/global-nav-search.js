@@ -202,7 +202,7 @@ const GlobalNavSearch = ({
 
   useEffect(() => {
     inputEl.current.focus()
-  })
+  }, [])
 
   /**
    * This block finds all the relevant elements and traps focus for them.
