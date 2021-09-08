@@ -17,7 +17,7 @@ import { Toasts } from 'connectors/toasts/toast-list'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { HomeSimilarRecs } from 'containers/home/personalized/home-similar-recs'
 
-export const HomePersonalized = ({ metaData, showLanguages }) => {
+export const HomePersonalized = ({ metaData }) => {
   const dispatch = useDispatch()
   const slates = useSelector((state) => state.home.slates)
   const slatesNoTopics = slates
@@ -26,7 +26,7 @@ export const HomePersonalized = ({ metaData, showLanguages }) => {
   useEffect(() => dispatch(getHomeLineup()), [dispatch])
 
   return (
-    <Layout metaData={metaData} isFullWidthLayout={true} showLanguages={showLanguages}>
+    <Layout metaData={metaData} isFullWidthLayout={true}>
       <SectionWrapper>
         <HomeGreeting />
         <HomeRecentSaves />

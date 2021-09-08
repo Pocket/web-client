@@ -4,9 +4,8 @@ import { css, cx } from 'linaria'
 import { headingSansSerif } from '@pocket/web-ui'
 import { fontSansSerif, fontSizeRoot } from '@pocket/web-ui'
 import { breakpointSmallTablet } from '@pocket/web-ui'
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { breakpointLargeTablet } from '@pocket/web-ui'
 import { breakpointTinyTablet } from '@pocket/web-ui'
+import { breakpointLargeHandset } from '@pocket/web-ui'
 import { breakpointTinyHandset } from '@pocket/web-ui'
 import { PageContainer } from '@pocket/web-ui'
 import { FacebookMonoIcon, TwitterMonoIcon } from '@pocket/web-ui'
@@ -52,6 +51,10 @@ const footerStyle = css`
 
   ${breakpointTinyHandset} {
     font-size: 0.85rem;
+
+    #ot-sdk-btn.ot-sdk-show-settings {
+      font-size: 0.85rem;
+    }
   }
 
   @media print {
@@ -184,7 +187,7 @@ const footerSecondaryStyle = css`
   display: flex;
   flex-wrap: wrap-reverse;
   border-top: var(--dividerStyle);
-  padding: 1.5rem 0;
+  padding: 1.5rem 0 0;
 
   ${breakpointSmallTablet} {
     margin-top: 2.5rem;
@@ -197,6 +200,7 @@ const footerSecondaryStyle = css`
 
 const legalLinksStyle = css`
   flex-grow: 2;
+  padding: 0 0 2.5rem;
 
   a {
     text-decoration: underline;
@@ -210,7 +214,8 @@ const legalLinksStyle = css`
 
   nav {
     & > span,
-    & > a {
+    & > a,
+    & > button {
       margin-right: 1rem;
     }
   }
@@ -227,23 +232,36 @@ const legalLinksStyle = css`
 
 const engagementBlockStyle = css`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
-  ${breakpointLargeTablet} {
-    padding: 1rem 0;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0 0 2.5rem;
+
+  .social-wrapper {
+    font-size: 0.875rem;
   }
 
   .social {
     white-space: nowrap;
     span {
       height: 24px;
-      margin-left: 1rem;
+      margin-right: 1.5rem;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .languages-wrapper {
+    font-size: 0.875rem;
+    margin-right: 60px;
+
+    ${breakpointTinyHandset} {
+      margin-right: 40px;
     }
   }
 
   .languages {
     select {
+      margin-top: 0.25rem;
+      font-size: 1rem;
       display: inline-block;
       padding: 0.25rem 2rem 0.25rem 0.5rem;
     }
@@ -253,7 +271,7 @@ const engagementBlockStyle = css`
 /**
  * The `GlobalFooter` component appears at the bottom of every screen in our web applications.
  */
-export const GlobalFooter = ({ device, hasBorder, hasColorBorder, showLanguages }) => {
+export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
   const { t } = useTranslation()
 
   let appBadges = [
@@ -404,26 +422,30 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder, showLanguages 
             </nav>
           </div>
           <div className={engagementBlockStyle}>
-            {showLanguages ? (
+            <div className="languages-wrapper">
+              {t('global-footer:language', 'Language')}
               <div className="languages">
                 <Languages />
               </div>
-            ) : null}
-            <div className="social">
-              <a href="https://facebook.com/pocket" target="_blank" rel="noopener noreferrer">
-                <FacebookMonoIcon
-                  id="facebook-footer-icon"
-                  title="Facebook"
-                  description="Visit our Facebook page"
-                />
-              </a>
-              <a href="https://twitter.com/pocket" target="_blank" rel="noopener noreferrer">
-                <TwitterMonoIcon
-                  id="twitter-footer-icon"
-                  title="Twitter"
-                  description="View our Twitter profile"
-                />
-              </a>
+            </div>
+            <div className="social-wrapper">
+              {t('global-footer:follow-pocket', 'Follow Pocket')}
+              <div className="social">
+                <a href="https://facebook.com/pocket" target="_blank" rel="noopener noreferrer">
+                  <FacebookMonoIcon
+                    id="facebook-footer-icon"
+                    title="Facebook"
+                    description={t('global-footer:visit-facebook', 'Visit our Facebook page')}
+                  />
+                </a>
+                <a href="https://twitter.com/pocket" target="_blank" rel="noopener noreferrer">
+                  <TwitterMonoIcon
+                    id="twitter-footer-icon"
+                    title="Twitter"
+                    description={t('global-footer:view-twitter', 'View our Twitter profile')}
+                  />
+                </a>
+              </div>
             </div>
           </div>
         </div>
