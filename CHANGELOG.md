@@ -1,3 +1,10 @@
+## [1.20.8](https://github.com/Pocket/web-client/compare/v1.20.7...v1.20.8) (2021-09-07)
+
+
+### Bug Fixes
+
+* **home:** add proper personalized lineup ([280831a](https://github.com/Pocket/web-client/commit/280831a15259df3a85bf5af2fc2da95cc8fa8815))
+
 ## [1.20.7](https://github.com/Pocket/web-client/compare/v1.20.6...v1.20.7) (2021-09-02)
 
 

@@ -2,13 +2,10 @@ import { requestGQL } from 'common/utilities/request/request'
 import { getRecIds, arrayToObject } from 'common/utilities'
 import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
 
-// ?? NOTE: Do not use this in production.  Should be switch to the `homeLineup`
-// ?? which will fall back to this.
-const fallbackLineup = '249850f0-61c0-46f9-a16a-f0553c222800'
-// const homeLineup = '05027beb-0053-4020-8bdc-4da2fcc0cb68'
+const homeLineup = '05027beb-0053-4020-8bdc-4da2fcc0cb68'
 
 export async function getHomeLineup({ recommendationCount = 5 }) {
-  const id = fallbackLineup
+  const id = homeLineup
   return requestGQL({
     query: getSlateLineup,
     variables: { id, recommendationCount }
