@@ -10,7 +10,7 @@ import { appStoreBadgeWrapper } from './reader-flyaway-apps'
 import { appStoreBadgeStyle } from './reader-flyaway-apps'
 import ChromeIcon from 'static/images/browser-icons/chrome.png'
 import SafariIcon from 'static/images/browser-icons/safari.png'
-import FirefoxIcon from 'static/images/browser-icons/firefox.png'
+import FirefoxIconSVG from 'static/images/browser-icons/firefox.svg'
 import EdgeIcon from 'static/images/browser-icons/edge.png'
 
 const desktopStyles = css`
@@ -96,6 +96,14 @@ export const MyListFlyawayExtensions = () => {
       <div className={desktopStyles}>
         <p>{desktopDescription}</p>
         <a
+          href={firefoxExtensionLink}
+          onClick={handleFirefox}
+          target="_blank"
+          rel="noopener noreferrer">
+            <img src={FirefoxIconSVG} alt="" />
+            Firefox
+        </a>
+        <a
           href={chromeExtensionLink}
           onClick={handleChrome}
           className="top-row"
@@ -112,14 +120,6 @@ export const MyListFlyawayExtensions = () => {
           rel="noopener noreferrer">
             <img src={SafariIcon} alt="" />
             Safari
-        </a>
-        <a
-          href={firefoxExtensionLink}
-          onClick={handleFirefox}
-          target="_blank"
-          rel="noopener noreferrer">
-            <img src={FirefoxIcon} alt="" />
-            Firefox
         </a>
         <a
           href={edgeExtensionLink}
