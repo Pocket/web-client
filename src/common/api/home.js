@@ -113,7 +113,7 @@ function displayThumbnail({ item, curatedInfo }) {
  * @returns {string} The best text to display as the publisher of this item
  */
 function displayPublisher({ item, publisher }) {
-  return item.domainMetadata?.name || publisher
+  return item?.syndicatedArticle?.publisher?.name || item.domainMetadata?.name || publisher
 }
 
 /** EXCERPT
