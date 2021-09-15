@@ -1,3 +1,10 @@
+## [1.20.14](https://github.com/Pocket/web-client/compare/v1.20.13...v1.20.14) (2021-09-15)
+
+
+### Bug Fixes
+
+* **home:** prefer syndicated article publisher ([383bfde](https://github.com/Pocket/web-client/commit/383bfde281dd7c7590f748bf68e66cffc3ac30b5))
+
 ## [1.20.13](https://github.com/Pocket/web-client/compare/v1.20.12...v1.20.13) (2021-09-14)
 
 
