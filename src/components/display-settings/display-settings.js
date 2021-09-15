@@ -9,7 +9,8 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   PremiumIcon,
-  ChevronLeftIcon
+  ChevronLeftIcon,
+  breakpointMediumHandset
 } from '@pocket/web-ui'
 import { css } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
@@ -66,11 +67,23 @@ const buttonStyles = css`
   .icon {
     background-color: transparent;
     color: var(--color-textSecondary);
-    font-size: var(--size150);
+    height: 1.5rem;
+
     &:hover {
       color: var(--color-textPrimary);
       background-color: transparent;
     }
+
+    ${breakpointMediumHandset} {
+      height: 1.2rem;
+    }
+  }
+`
+
+const mobileStyles = css`
+  ${breakpointMediumHandset} {
+    display: flex;
+    margin-left: 1rem;
   }
 `
 
@@ -175,7 +188,7 @@ export const DisplaySettings = ({
           'Open Display Settings'
         )}
         data-cy="reader-nav-display-settings"
-        className={classNames(buttonReset, buttonStyles, bottomTooltip)}
+        className={classNames(buttonReset, buttonStyles, bottomTooltip, mobileStyles)}
         ref={displayButtonRef}
         onClick={handleOpen}
         onKeyPress={updateFocus}>

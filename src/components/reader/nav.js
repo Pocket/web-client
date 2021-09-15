@@ -99,10 +99,15 @@ const buttonStyles = css`
   .icon {
     background-color: transparent;
     color: var(--color-textSecondary);
-    font-size: var(--size150);
+    height: 1.5rem;
+
     &:hover {
       color: var(--color-textPrimary);
       background-color: transparent;
+    }
+
+    ${breakpointMediumHandset} {
+      height: 1.2rem;
     }
   }
 `
