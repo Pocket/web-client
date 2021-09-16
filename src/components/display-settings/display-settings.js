@@ -73,16 +73,17 @@ const buttonStyles = css`
       color: var(--color-textPrimary);
       background-color: transparent;
     }
+  }
 
+  .chevron-icon {
     ${breakpointMediumHandset} {
-      height: 1.2rem;
+      display: none;
     }
   }
 `
 
 const mobileStyles = css`
   ${breakpointMediumHandset} {
-    display: flex;
     margin-left: 1rem;
   }
 `
@@ -193,7 +194,7 @@ export const DisplaySettings = ({
         onClick={handleOpen}
         onKeyPress={updateFocus}>
         <TextSizeIcon />
-        <ChevronDownIcon />
+        <ChevronDownIcon className="chevron-icon" />
       </button>
       <PopupMenu
         id="display-settings"
