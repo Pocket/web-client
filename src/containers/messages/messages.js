@@ -45,7 +45,7 @@ export default function Messages() {
 
   return (
     <Layout title={`Pocket - ${t('messages:messages', 'Messages')}`}>
-      <SideNav isLoggedIn={isLoggedIn} />
+      <SideNav type="messages" isLoggedIn={isLoggedIn} />
 
       {hydrated ? (
         notifications.length || unconfirmedArray.length ? (

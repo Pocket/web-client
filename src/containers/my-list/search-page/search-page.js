@@ -79,7 +79,7 @@ export default function Collection(props) {
 
   return (
     <Layout title={metaData.title} metaData={metaData}>
-      <SideNav subset={subset} isLoggedIn={isLoggedIn} search={query} />
+      <SideNav type="my-list" subset={subset} isLoggedIn={isLoggedIn} search={query} />
 
       {shouldRender ? (
         <main className="main">

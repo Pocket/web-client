@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export function SideNav({ subset, isLoggedIn, tag }) {
+export function SideNav({ type, subset, isLoggedIn, tag }) {
   const dispatch = useDispatch()
 
   const flagsReady = useSelector((state) => state.features.flagsReady)
@@ -16,13 +16,20 @@ export function SideNav({ subset, isLoggedIn, tag }) {
   const trackMenuClick = (label) => dispatch(sendSnowplowEvent('side-nav', { label }))
 
   const isDisabled = appMode === 'bulk'
+
+  const pinTypes = {
+    home: pinnedTopics,
+    'my-list': pinnedTags
+  }
+  const pinned = pinTypes[type]
+
   return (
     <SideNavComponent
+      type={type}
       isDisabled={isDisabled}
       subset={subset}
       isLoggedIn={isLoggedIn}
-      pinnedTags={pinnedTags}
-      pinnedTopics={pinnedTopics}
+      pinned={pinned}
       tag={tag}
       newSaveCount={newSaveCount}
       flagsReady={flagsReady}
