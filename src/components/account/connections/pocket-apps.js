@@ -4,9 +4,6 @@ import { Button } from '@pocket/web-ui'
 const pocketAppsStyle = css`
   padding-bottom: 3rem;
   border-bottom: var(--dividerStyle);
-
-  .pocketAppsBody {
-  }
 `
 
 export const PocketApps = () => {

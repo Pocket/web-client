@@ -15,8 +15,6 @@ export const EmailNotifications = () => {
         </label>
         <input type="checkbox" name="productUpdates" id="productUpdates" className="toggle" />
 
-        <div></div>
-
         <label htmlFor="pockethits" className="flush">
           Pocket Hits:
         </label>

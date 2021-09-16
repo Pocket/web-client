@@ -67,6 +67,7 @@ export const accountStyles = css`
     &.flush {
       justify-content: flex-start;
       grid-column: 2 / span 6;
+      margin-left: 0;
     }
   }
   .contentDisplay {

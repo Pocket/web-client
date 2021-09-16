@@ -15,18 +15,16 @@ export const Privacy = () => {
       <h2>Privacy</h2>
       <div className="sectionBody">
         <label htmlFor="profilePrivate" className="flush">
-          Make my profile private updates
+          Make my profile private
         </label>
         <input type="checkbox" name="profilePrivate" id="profilePrivate" className="toggle" />
-        <div></div>
 
         <label htmlFor="rssPasswords" className="flush">
           Disable password protection on my RSS feeds
         </label>
         <input type="checkbox" name="rssPasswords" id="rssPasswords" className="toggle" />
-        <div></div>
 
-        <label htmlFor="something" className="connectionLabel labelWithContext">
+        <label htmlFor="something" className="flush connectionLabel labelWithContext">
           Export my Pocket data
           <div className="helperText">Export your Pocket data in a portable HTML file</div>
         </label>
