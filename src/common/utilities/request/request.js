@@ -85,6 +85,38 @@ function handleErrors(response, auth) {
   return response
 }
 
+export const postMime = ({ api_url = API_URL, params = {}, path, method = 'POST', body, auth }) => {
+  const credentials = 'include'
+  const apiToUse = api_url
+
+  /**
+   * Build a full url with properly appended query params
+   * @param enable_cors {num} This tells the web server to use cookies vs oAuth
+   * @param consumer_key {string} This is specific to the web-client
+   */
+  const queryParams = queryString.stringify({
+    ...params,
+    enable_cors: 1,
+    consumer_key: CONSUMER_KEY
+  })
+  const endpoint = `${apiToUse}/${path}?${queryParams}`
+
+  // The Promise returned from fetch() won’t reject on HTTP error status even if
+  // the response is an HTTP 404 or 500. Instead, it will resolve normally
+  // (with ok status set to false), and it will only reject on network failure
+  // or if anything prevented the request from completing.
+  // To that end, we catch errors here to pass them on without malformed
+  // json parsing errors
+  return fetch(endpoint, {
+    credentials,
+    method,
+    body
+  })
+    .then((response) => handleErrors(response, auth))
+    .then((response) => response.json())
+    .catch((error) => error)
+}
+
 export const requestGQL = (data) => {
   // const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
 
