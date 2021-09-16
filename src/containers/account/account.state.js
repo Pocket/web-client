@@ -1,18 +1,22 @@
+import { put, takeLatest } from 'redux-saga/effects'
+
 import { getUserInfo } from 'common/api/user'
 import { createGuid } from 'common/api/user'
+
 import { setCookie } from 'nookies'
-import { put, takeLatest } from 'redux-saga/effects'
 
 import { USER_REQUEST } from 'actions'
 import { USER_SUCCESS } from 'actions'
 import { USER_FAILURE } from 'actions'
 import { SESS_GUID_HYDRATE } from 'actions'
 
+import { userProfileReducers, userProfileSagas } from 'containers/account/profile/profile.state'
 const initialState = {
   auth: false,
   sess_guid: null,
   user_status: 'pending'
 }
+
 const yearInMs = 60 * 60 * 24 * 365
 
 /** ACTIONS
@@ -53,9 +57,13 @@ export const userReducers = (state = initialState, action) => {
   }
 }
 
+export const accountReducers = {
+  userProfile: userProfileReducers
+}
+
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const userSagas = [takeLatest(USER_REQUEST, userRequest)]
+export const userSagas = [takeLatest(USER_REQUEST, userRequest), ...userProfileSagas]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -73,7 +81,16 @@ function* userRequest(action) {
 
   // Yay we have a user
   const { user } = response
-  if (user) return yield put({ type: USER_SUCCESS, user })
+  const { username, first_name, last_name, profile, email, aliases, friend, ...rest } = user
+  if (user)
+    return yield put({
+      type: USER_SUCCESS,
+      user: rest,
+      profile: { username, first_name, last_name, ...profile },
+      aliases,
+      email,
+      friend
+    })
 }
 
 /** ASYNC Functions

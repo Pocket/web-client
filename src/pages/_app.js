@@ -7,8 +7,8 @@ import { wrapper } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
 import { parseCookies } from 'nookies'
 
-import { setUser } from 'connectors/user/user.state'
-import { getSessGuid, sessGuidHydrate } from 'connectors/user/user.state'
+import { setUser } from 'containers/account/account.state'
+import { getSessGuid, sessGuidHydrate } from 'containers/account/account.state'
 
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
 import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
