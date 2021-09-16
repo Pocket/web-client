@@ -1,3 +1,10 @@
+## [1.20.16](https://github.com/Pocket/web-client/compare/v1.20.15...v1.20.16) (2021-09-16)
+
+
+### Bug Fixes
+
+* **collections:** updating raw // ([5bd6402](https://github.com/Pocket/web-client/commit/5bd6402bcc0c551a02fd7e429e4669d38b9e1165))
+
 ## [1.20.15](https://github.com/Pocket/web-client/compare/v1.20.14...v1.20.15) (2021-09-15)
 
 
