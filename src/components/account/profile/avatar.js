@@ -32,7 +32,6 @@ const avatarPreviewStyle = css`
   overflow: hidden;
   img {
     display: block;
-    width: 134px;
     height: 134px;
     border-radius: 67px;
   }

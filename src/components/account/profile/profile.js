@@ -13,6 +13,8 @@ export const Profile = ({
   onChangeFirstName,
   onChangeLastName,
   onChangeBio,
+  onChangeUsername,
+  onChangePassword,
   firstName,
   lastName,
   userName,
@@ -40,10 +42,10 @@ export const Profile = ({
         <div className="contentDisplay">@{userName}</div>
 
         <div className="actionBlock">
-          <Button variant="primary" className="action">
+          <Button variant="primary" className="action" onClick={onChangeUsername}>
             Change Username
           </Button>
-          <Button variant="primary" className="action">
+          <Button variant="primary" className="action" onClick={onChangePassword}>
             Change Password
           </Button>
         </div>
