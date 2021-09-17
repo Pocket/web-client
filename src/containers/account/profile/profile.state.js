@@ -6,6 +6,9 @@ import { ACCOUNT_FIRST_NAME_UPDATE } from 'actions'
 import { ACCOUNT_LAST_NAME_UPDATE } from 'actions'
 import { ACCOUNT_BIO_UPDATE } from 'actions'
 
+import { ACCOUNT_DETAIL_UPDATE_SUCCESS } from 'actions'
+import { ACCOUNT_DETAIL_UPDATE_FAILURE } from 'actions'
+
 import { ACCOUNT_AVATAR_UPDATE_REQUEST } from 'actions'
 import { ACCOUNT_AVATAR_UPDATE_CANCEL } from 'actions'
 import { ACCOUNT_AVATAR_UPDATE_CONFIRM } from 'actions'
@@ -25,6 +28,7 @@ import { ACCOUNT_PASSWORD_UPDATE_SUCCESS } from 'actions'
 import { ACCOUNT_PASSWORD_UPDATE_FAILURE } from 'actions'
 
 const initialState = {
+  updatingDetailsError: false,
   updatingAvatar: false,
   updatingAvatarError: false,
   updatingPassword: false,
@@ -76,6 +80,15 @@ export const userProfileReducers = (state = initialState, action) => {
     case ACCOUNT_BIO_UPDATE: {
       const { value } = action
       return { ...state, description: value }
+    }
+
+    case ACCOUNT_DETAIL_UPDATE_SUCCESS: {
+      return { ...state, updatingDetailsError: false }
+    }
+
+    case ACCOUNT_DETAIL_UPDATE_FAILURE: {
+      const { err } = action
+      return { ...state, updatingDetailsError: err }
     }
 
     case ACCOUNT_AVATAR_UPDATE_REQUEST: {
@@ -154,7 +167,6 @@ function* accountDetailsUpdate() {
   yield delay(1000)
 
   const userDetails = yield select(getUserDetails)
-
   const { first_name, last_name, description } = userDetails
   const { status, error } = yield call(putAccountChange, {
     newfirst_name: first_name,
@@ -162,8 +174,9 @@ function* accountDetailsUpdate() {
     newbio: description
   })
 
-  if (status === 1) console.log('success')
-  if (error !== 0) console.log('Hol` Up')
+  if (status === 1) return yield put({ type: ACCOUNT_DETAIL_UPDATE_SUCCESS })
+
+  yield put({ type: ACCOUNT_DETAIL_UPDATE_FAILURE, err: error })
 }
 
 function* accountAvatarUpdate(action) {
