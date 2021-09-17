@@ -9,6 +9,24 @@ export const putAccountChange = (data) => {
   })
 }
 
+export const addEmailAlias = (data) => {
+  return request({
+    method: 'POST',
+    path: 'v3/addAlias',
+    body: JSON.stringify({ ...data }),
+    auth: true
+  })
+}
+
+export const removeEmailAlias = (data) => {
+  return request({
+    method: 'POST',
+    path: 'v3/deleteAlias',
+    body: JSON.stringify({ ...data }),
+    auth: true
+  })
+}
+
 export const setAvatar = (data) => {
   return postMime({
     path: 'v3/setAvatar',

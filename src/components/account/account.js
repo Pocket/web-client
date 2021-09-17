@@ -78,6 +78,12 @@ export const accountStyles = css`
     color: var(--color-textSecondary);
     grid-column: 3 / span 5;
     max-width: 100%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+  }
+  .subButton {
+    grid-column: span 2;
   }
   input[type='text'] {
     grid-column: 3 / span 5;

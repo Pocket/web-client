@@ -11,6 +11,8 @@ import { USER_FAILURE } from 'actions'
 import { SESS_GUID_HYDRATE } from 'actions'
 
 import { userProfileReducers, userProfileSagas } from 'containers/account/profile/profile.state'
+import { userEmailReducers, userEmailSagas } from 'containers/account/email/email.state'
+
 const initialState = {
   auth: false,
   sess_guid: null,
@@ -58,12 +60,17 @@ export const userReducers = (state = initialState, action) => {
 }
 
 export const accountReducers = {
-  userProfile: userProfileReducers
+  userProfile: userProfileReducers,
+  userEmail: userEmailReducers
 }
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const userSagas = [takeLatest(USER_REQUEST, userRequest), ...userProfileSagas]
+export const userSagas = [
+  takeLatest(USER_REQUEST, userRequest),
+  ...userProfileSagas,
+  ...userEmailSagas
+]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
