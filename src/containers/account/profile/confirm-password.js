@@ -51,7 +51,12 @@ export const PasswordModal = () => {
   const onChangeConfirmPassword = (e) => setConfirmation(e.target.value)
   const onShowPassword = () => setShowPassword(!showPassword)
 
-  const cancelPassword = () => dispatch(cancelPasswordUpdate())
+  const cancelPassword = () => {
+    setOldPassword('')
+    setNewPassword('')
+    setConfirmation('')
+    dispatch(cancelPasswordUpdate())
+  }
   const confirmPassword = () => {
     if (newpassword !== confirmation) return dispatch(setPasswordError(6000))
     dispatch(confirmPasswordUpdate(newpassword, oldpassword))

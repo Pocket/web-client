@@ -57,15 +57,6 @@ const uploadStyles = css`
     color: var(--color-actionSecondaryText);
     margin: 0;
 
-    &:focus {
-      &::before {
-        /* offsets adjusted for space taken by outline */
-        top: -6px;
-        bottom: -6px;
-        left: -6px;
-        right: -6px;
-      }
-    }
     &:hover {
       background-color: var(--color-actionSecondaryHover);
       color: var(--color-actionSecondaryHoverText);
@@ -138,7 +129,7 @@ export const AvatarModal = () => {
       </ModalBody>
       <ModalFooter className={uploadStyles}>
         <div className="actions">
-          <label htmlFor="file-upload" class="inputLabel">
+          <label htmlFor="file-upload" className="inputLabel">
             Choose file
             <input id="file-upload" type="file" onChange={onChange} />
           </label>
