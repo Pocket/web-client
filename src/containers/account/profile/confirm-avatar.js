@@ -135,7 +135,7 @@ export const AvatarModal = () => {
           </label>
           <Button
             type="submit"
-            data-cy="delete-confirm"
+            data-cy="avatar-confirm"
             onClick={confirmAvatar}
             autoFocus={true}
             disabled={!imagePreview}>

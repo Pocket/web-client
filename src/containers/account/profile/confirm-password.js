@@ -103,7 +103,7 @@ export const PasswordModal = () => {
         <div>{passwordError ? <span className="errorText">{error}</span> : null}</div>
       </ModalBody>
       <ModalFooter>
-        <Button type="submit" data-cy="update-Password-confirm" onClick={confirmPassword}>
+        <Button type="submit" data-cy="update-password-confirm" onClick={confirmPassword}>
           Update Password
         </Button>
       </ModalFooter>
