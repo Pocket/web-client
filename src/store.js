@@ -7,7 +7,8 @@ import { all } from 'redux-saga/effects'
  --------------------------------------------------------------- */
 import { appReducers, appSagas } from 'connectors/app/app.state'
 import { oneTrustReducers } from 'connectors/one-trust/one-trust.state'
-import { userReducers, userSagas } from 'connectors/user/user.state'
+
+import { userReducers, userSagas, accountReducers } from 'containers/account/account.state'
 
 import { userTagsSagas } from 'containers/my-list/tags-page/tags-page.state'
 import { userTagsReducers } from 'containers/my-list/tags-page/tags-page.state'
@@ -121,7 +122,7 @@ const libraryReducers = {
   userTags: userTagsReducers,
   userMessages: userMessageReducers,
   userSearch: userSearchReducers,
-  userProfile: profileReducers,
+  userPublicProfile: profileReducers,
   profileItemsByIds: profileItemsReducers
 }
 
@@ -136,7 +137,6 @@ const marketingReducers = {
 const globalReducers = {
   app: appReducers, // App wide (mostly example at this time)
   oneTrust: oneTrustReducers, // One Trust Readiness
-  user: userReducers, // User profile and auth,
   settings: settingsReducers, // User defined settings
   features: featureReducers, // Feature flags (very basic start)
   topicList: topicListReducers, // Valid topics list and active topic
@@ -147,6 +147,11 @@ const globalReducers = {
   onboarding: onboardingReducers // Onboarding
 }
 
+const userAccountReducers = {
+  user: userReducers, // User profile and auth,
+  ...accountReducers
+}
+
 export const rootReducer = combineReducers({
   ...globalReducers,
   ...marketingReducers,
@@ -154,6 +159,7 @@ export const rootReducer = combineReducers({
   ...collectionReducer,
   ...libraryReducers,
   ...readerReducers,
+  ...userAccountReducers,
   home: homeReducers,
   homeItemsById: homeItemsReducers
 })

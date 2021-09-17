@@ -66,7 +66,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const userStatus = useSelector((state) => state?.user?.user_status)
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
-  const retrievedAvatar = useSelector((state) => state?.user?.profile?.avatar_url)
+  const retrievedAvatar = useSelector((state) => state?.userProfile?.avatar_url)
   const pocketLogoOutboundUrl = isLoggedIn ? '/my-list' : 'https://getpocket.com'
 
   const myListFlyawayReady = useSelector((state) => state.onboarding.homeFlyawayMyList)
@@ -78,7 +78,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const showLab = featureFlagActive({ flag: 'lab', featureState })
 
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
-  const accountName = useSelector((state) => state?.user?.first_name)
+  const accountName = useSelector((state) => state?.userProfile?.first_name)
   const userId = useSelector((state) => state?.user?.user_id)
   const profileUrl = showLab ? `/profile/${userId}?src=navbar` : `${BASE_URL}/@${userId}?src=navbar`
 

@@ -33,15 +33,11 @@ export default function TagsPage(props) {
 
       {shouldRender ? (
         <main className="main">
-          <MyListHeader subset={'tag-page'} filter={filter} title="tags" />
+          <MyListHeader type="my-list" subset={'tag-page'} filter={filter} title="tags" />
 
           {userTagsRecent ? <RecentTags taggedItems={taggedItems} /> : null}
           {userTags ? (
-            <TagList
-              userTags={userTags}
-              value={value}
-              valueChange={valueChange}
-            />
+            <TagList userTags={userTags} value={value} valueChange={valueChange} />
           ) : null}
         </main>
       ) : null}

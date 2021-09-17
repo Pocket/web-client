@@ -14,7 +14,7 @@ export default function Profile() {
   const router = useRouter()
   const { slug: id } = router.query
 
-  const profileName = useSelector((state) => state.userProfile.name)
+  const profileName = useSelector((state) => state.userPublicProfile.name)
   const items = useSelector((state) => state.profileItemsByIds.items)
 
   useEffect(() => {

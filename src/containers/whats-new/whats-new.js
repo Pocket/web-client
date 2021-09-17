@@ -74,7 +74,7 @@ export default function Messages() {
 
   return (
     <Layout title={`Pocket - ${t('whats-new:whats-new', "What's New")}`}>
-      <SideNav isLoggedIn={isLoggedIn} />
+      <SideNav type="whats-new" isLoggedIn={isLoggedIn} />
       <main className={classNames('main', whatsNewStyles)}>
         <WhatsNewHeader title={t('whats-new:whats-new', "What's New")} />
         <Jun242021 />

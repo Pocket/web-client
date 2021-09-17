@@ -77,6 +77,7 @@ export const ListSort = ({ sortOrder, showRelevance, handleNewest, handleOldest,
         ref={sortOptionsRef}
         className={cx(buttonReset, sortStyles)}
         onClick={handleOpen}
+        data-cy='sort-options'
         onKeyPress={updateFocus}>
         {sortIcon[sortOrder]}
       </button>
@@ -85,7 +86,6 @@ export const ListSort = ({ sortOrder, showRelevance, handleNewest, handleOldest,
         title={t('settings:sort-options', 'Sorting options')}
         screenReaderLabel={t('settings:sort-options', 'Sorting options')}
         appRootSelector={appRootSelector}
-        data-cy='sort-options'
         popperOptions={{
           placement: 'bottom-end',
           modifiers: [
@@ -98,20 +98,20 @@ export const ListSort = ({ sortOrder, showRelevance, handleNewest, handleOldest,
           ]
         }}>
         <PopupMenuItem
-          data-cy="sort-oldest"
+          data-cy='sort-oldest'
           onClick={handleOldest}>
             <SortByOldestIcon />
             {t('settings:sort-oldest', 'Oldest first')}
         </PopupMenuItem>
         <PopupMenuItem
-          data-cy="sort-newest"
+          data-cy='sort-newest'
           onClick={handleNewest}>
             <SortByNewestIcon />
             {t('settings:sort-newest', 'Newest first')}
         </PopupMenuItem>
         { showRelevance ? (
           <PopupMenuItem
-            data-cy="sort-relevance"
+            data-cy='sort-relevance'
             onClick={handleRelevance}>
               <RelevanceIcon />
               {t('settings:sort-relevance', 'By relevance')}

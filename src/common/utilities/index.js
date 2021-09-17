@@ -1,3 +1,5 @@
+export { enforceDefaultAvatar } from './account/avatar'
+
 export { urlWithPocketRedirect } from './urls/urls'
 export { getImageCacheUrl } from './urls/urls'
 export { domainForUrl } from './urls/urls'

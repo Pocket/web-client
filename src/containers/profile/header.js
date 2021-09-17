@@ -34,13 +34,13 @@ const headerStyles = css`
 export const ProfileHeader = () => {
   const dispatch = useDispatch()
 
-  const name = useSelector((state) => state.userProfile.name)
-  const avatarUrl = useSelector((state) => state.userProfile.avatar_url)
-  const bio = useSelector((state) => state.userProfile.description)
-  const followCount = useSelector((state) => state.userProfile.follow_count)
-  const followerCount = useSelector((state) => state.userProfile.follower_count)
-  const isFollowing = useSelector((state) => state.userProfile.is_following)
-  const uid = useSelector((state) => state.userProfile.uid)
+  const name = useSelector((state) => state.userPublicProfile.name)
+  const avatarUrl = useSelector((state) => state.userPublicProfile.avatar_url)
+  const bio = useSelector((state) => state.userPublicProfile.description)
+  const followCount = useSelector((state) => state.userPublicProfile.follow_count)
+  const followerCount = useSelector((state) => state.userPublicProfile.follower_count)
+  const isFollowing = useSelector((state) => state.userPublicProfile.is_following)
+  const uid = useSelector((state) => state.userPublicProfile.uid)
   const isSelf = useSelector((state) => state.user.user_id === uid)
 
   const followStatus = getBool(isFollowing)

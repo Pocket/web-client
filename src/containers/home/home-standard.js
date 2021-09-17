@@ -34,7 +34,7 @@ export const HomeStandard = ({ metaData }) => {
 
   return (
     <Layout title={metaData.title} metaData={metaData}>
-      <SideNav subset="home" />
+      <SideNav type="home" />
       <main className="main">
         <HomeGreeting />
 

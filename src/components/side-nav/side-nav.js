@@ -13,6 +13,7 @@ import { useInView } from 'react-intersection-observer'
 
 import { FiltersSideNav } from './filters'
 import { TopicsSideNav } from './topics'
+import { AccountSideNav } from './account'
 import { BookmarkIcon } from './bookmark-icon'
 
 export const sideNavWrapper = css`
@@ -141,15 +142,7 @@ export const sideNavItem = css`
   }
 `
 
-export function SideNav({
-  subset,
-  tag,
-  pinnedTags,
-  pinnedTopics,
-  isDisabled,
-  newSaveCount,
-  trackMenuClick
-}) {
+export function SideNav({ type, subset, tag, pinned, isDisabled, newSaveCount, trackMenuClick }) {
   const { t } = useTranslation()
 
   const [ref, inView] = useInView({ threshold: 0.5 })
@@ -161,16 +154,16 @@ export function SideNav({
     return `${sideNavItem} ${activeClass} ${tagClass}`
   }
 
-  const scrollToTop = () => {
-    window.scroll({
-      top: 0,
-      left: 0
-    })
-  }
-
+  const scrollToTop = () => window.scroll({ top: 0, left: 0 })
   const wrapperClass = cx(sideNavWrapper, 'side-nav', isDisabled && 'disabled')
-
   const clickEvent = (e) => trackMenuClick(e.target.textContent)
+
+  const navTypes = {
+    home: TopicsSideNav,
+    'my-list': FiltersSideNav,
+    account: AccountSideNav
+  }
+  const SubNav = navTypes[type]
 
   return (
     <div className={wrapperClass}>
@@ -208,15 +201,7 @@ export function SideNav({
             <CollectionsIcon className="side-nav-icon" /> {t('nav:collections', 'Collections')}
           </button>
         </Link>
-        {subset === 'home' ? (
-          <TopicsSideNav
-            subActive={subActive}
-            pinnedTopics={pinnedTopics}
-            clickEvent={clickEvent}
-          />
-        ) : (
-          <FiltersSideNav subActive={subActive} pinnedTags={pinnedTags} clickEvent={clickEvent} />
-        )}
+        {SubNav ? <SubNav subActive={subActive} pinned={pinned} clickEvent={clickEvent} /> : null}
       </nav>
       <div className="bottom-nav">
         <button

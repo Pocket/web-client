@@ -86,16 +86,7 @@ export default function MyList(props) {
     if (initialItemsPopulated || userStatus === 'pending') return
     dispatch(appSetSection(section))
     dispatch(getMylistData(30, 0, subset, filter, tag))
-  }, [
-    userStatus,
-    initialItemsPopulated,
-    subset,
-    sortOrder,
-    filter,
-    section,
-    tag,
-    dispatch
-  ])
+  }, [userStatus, initialItemsPopulated, subset, sortOrder, filter, section, tag, dispatch])
 
   /**
    * Update list if we are navigating here from another my-list type page:
@@ -108,16 +99,7 @@ export default function MyList(props) {
     // since the last time we fetched the list (operations in other pages or apps)
     dispatch(appSetSection(section))
     dispatch(updateMyListData(since, subset, filter, tag))
-  }, [
-    routeChange,
-    initialItemsPopulated,
-    dispatch,
-    section,
-    since,
-    subset,
-    filter,
-    tag
-  ])
+  }, [routeChange, initialItemsPopulated, dispatch, section, since, subset, filter, tag])
 
   /**
    * Update list if we are navigating here from another page in the app
@@ -162,12 +144,8 @@ export default function MyList(props) {
   const Header = tag ? TagPageHeader : MyListHeader
 
   return (
-    <Layout
-      title={metaData.title}
-      metaData={metaData}
-      subset={subset}
-      tag={tag}>
-      <SideNav subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
+    <Layout title={metaData.title} metaData={metaData} subset={subset} tag={tag}>
+      <SideNav type="my-list" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
 
       {shouldRender ? (
         <main className="main">
@@ -180,13 +158,10 @@ export default function MyList(props) {
                 tag={tag}
                 sortOrder={sortOrder}
                 handleNewest={handleNewest}
-                handleOldest={handleOldest} />
+                handleOldest={handleOldest}
+              />
               {items?.length ? (
-                <VirtualizedList
-                  type={type}
-                  section={section}
-                  loadMore={loadMore}
-                />
+                <VirtualizedList type={type} section={section} loadMore={loadMore} />
               ) : null}
               <DeleteModal />
               <TaggingModal />

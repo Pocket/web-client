@@ -1,3 +1,39 @@
+## [1.21.2](https://github.com/Pocket/web-client/compare/v1.21.1...v1.21.2) (2021-09-17)
+
+
+### Bug Fixes
+
+* **account:** add profile container ([f5b4943](https://github.com/Pocket/web-client/commit/f5b4943bf1cbb85748e1bdefe0cf837710a54c74))
+* **account:** cleanup data-cy and regression ([614f1fc](https://github.com/Pocket/web-client/commit/614f1fc8f267cce66a35f401a7014ac8739ef161))
+* **account:** profile actions ([e9d3627](https://github.com/Pocket/web-client/commit/e9d3627d0ab629df303bc90912b7ad462008aa64))
+* **account:** profile api ([f6f6ba0](https://github.com/Pocket/web-client/commit/f6f6ba0e9e0e1a63e1cc5c1e47816ab4d2ecc956))
+* **account:** update profile/avatar components ([db3ebc0](https://github.com/Pocket/web-client/commit/db3ebc07e7c688915748ec89f12f387a7eee35fc))
+* **acount:** cleanup profile ([e648a34](https://github.com/Pocket/web-client/commit/e648a34b0ff39c951dac18865b3d3d6d95889b71))
+* **acount:** profile details actions ([bc7c3d8](https://github.com/Pocket/web-client/commit/bc7c3d80379b173f16138955313e5a065f568272))
+* **errors:** add error keys from backend ([c2e96f4](https://github.com/Pocket/web-client/commit/c2e96f42149a55b49893ae58c46441bf849ec3ed))
+
+## [1.21.1](https://github.com/Pocket/web-client/compare/v1.21.0...v1.21.1) (2021-09-16)
+
+
+### Bug Fixes
+
+* **account:** add component scaffold and stories ([3df70a6](https://github.com/Pocket/web-client/commit/3df70a672522070bd489e194694e9d7d59b95080))
+* **account:** remove extraneous divs / cleanup ([120bbf5](https://github.com/Pocket/web-client/commit/120bbf588479d9aae90591391e11e5af399416fb))
+
+# [1.21.0](https://github.com/Pocket/web-client/compare/v1.20.17...v1.21.0) (2021-09-16)
+
+
+### Features
+
+* **account:** adding account page /w sidenav ([7754a8c](https://github.com/Pocket/web-client/commit/7754a8cf5223c827301560cf16319f4d58f02647))
+
+## [1.20.17](https://github.com/Pocket/web-client/compare/v1.20.16...v1.20.17) (2021-09-16)
+
+
+### Bug Fixes
+
+* **list-sort:** add data-cy ([3e6a06d](https://github.com/Pocket/web-client/commit/3e6a06da1ad8c94f37985c73b5484a145beb6a31))
+
 ## [1.20.16](https://github.com/Pocket/web-client/compare/v1.20.15...v1.20.16) (2021-09-16)
 
 
