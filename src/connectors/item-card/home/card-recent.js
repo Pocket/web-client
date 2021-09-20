@@ -1,6 +1,7 @@
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { ActionsRecent } from './card-recent-actions'
 
 export const RecentCard = ({
   id,
@@ -47,6 +48,7 @@ export const RecentCard = ({
       // Tracking
       onItemInView={onItemInView}
       onOpen={onOpen}
+      ActionMenu={ActionsRecent}
     />
   ) : null
 }

@@ -60,7 +60,6 @@ export const Slate = ({ slateId, pagePosition }) => {
 
   const { displayName, description, topicSlug, type } = slate
 
-  console.log(type)
   const recCounts = [5, 5, 3]
   const recCount = recCounts[pagePosition] || 5
   const recSlice = recs.slice(0, recCount)
