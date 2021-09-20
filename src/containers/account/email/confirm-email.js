@@ -60,7 +60,7 @@ export const EmailModal = () => {
       screenReaderLabel={t('profile:change-primary-email', 'Change Primary Email')}
       handleClose={cancelEmail}>
       <ModalBody className={updateEmailStyles}>
-        <label htmlFor="email">Email Address</label>
+        <label htmlFor="email">New Email Address</label>
         <input
           type="text"
           id="email"

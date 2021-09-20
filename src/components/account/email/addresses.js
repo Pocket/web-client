@@ -31,7 +31,7 @@ const Alias = ({ onRemoveAlias, onResendConfirmation, alias, confirmed }) => {
       <div className="contentDisplay">
         {alias}{' '}
         {unconfirmed ? (
-          <ErrorIcon className={`unconfirmed ${topTooltip}`} data-tooltip="Email is unconfirmed." />
+          <ErrorIcon className={`unconfirmed ${topTooltip}`} data-tooltip="Email is unconfirmed" />
         ) : null}
       </div>
       <Button variant="secondary" className="actionInline" onClick={onRemove}>
@@ -39,7 +39,7 @@ const Alias = ({ onRemoveAlias, onResendConfirmation, alias, confirmed }) => {
       </Button>
       {unconfirmed ? (
         <Button variant="inline" onClick={onResend} className="subButton">
-          re-send email confirmation
+          Re-send email confirmation
         </Button>
       ) : null}
     </>
@@ -58,7 +58,6 @@ export const EmailAddresses = ({
   aliases = {}
 }) => {
   const aliasArray = Object.keys(aliases).filter((alias) => alias !== primaryEmail)
-  console.log(aliases[primaryEmail]?.confirmed)
   const primaryUnConfirmed = aliases[primaryEmail]?.confirmed === '0'
 
   return (
@@ -82,7 +81,7 @@ export const EmailAddresses = ({
 
         {primaryUnConfirmed ? (
           <Button variant="inline" onClick={onResendConfirmation} className="subButton">
-            re-send email confirmation
+            Re-send email confirmation
           </Button>
         ) : null}
 
