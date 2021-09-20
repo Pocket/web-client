@@ -58,7 +58,7 @@ const similarContainer = css`
 /**
  * Pocket logomark with click interaction to save a story to Pocket.
  */
-export const ShowSimilar = function ({ id, similarAction, className }) {
+export const ShowSimilar = function ({ id, similarAction, className, hideCopy = false }) {
   const { t } = useTranslation()
 
   const handleClick = (event) => {
@@ -83,6 +83,9 @@ export const ShowSimilar = function ({ id, similarAction, className }) {
       data-cy={`article-similar-btn-${id}`}
       data-tooltip={t('item-action:show-similar', 'Show Similar Items')}>
       <SimilarIcon />
+      {hideCopy ? null : (
+        <span className="actionCopy">{t('item-action:show-similar-copy', 'Show Similar')}</span>
+      )}
     </button>
   )
 }
