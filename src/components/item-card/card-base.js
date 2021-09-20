@@ -308,7 +308,18 @@ export const cardStyles = css`
     .title {
       font-size: 0.85rem;
       line-height: 1.286;
-      max-height: 3.8em;
+      max-height: 2.6em;
+    }
+    .details {
+      padding: 0 0 var(--size050);
+      font-size: 0.725rem;
+    }
+    .actions {
+      .actionCopy {
+        font-size: 0.85rem;
+      }
+      padding: 0 0 0.725rem;
+      transform: translateX(-0.25rem);
     }
   }
 
