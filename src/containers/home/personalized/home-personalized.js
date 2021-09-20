@@ -85,7 +85,7 @@ export const Slate = ({ slateId, pagePosition }) => {
   const HomeHeader = headerTypes[type] || HomeLineupHeader
 
   const topicClickEvent =  () => dispatch(sendSnowplowEvent('home.topic.view-more', { label: topicSlug })) //prettier-ignore
-  const collectionClickEvent = () => dispatch(sendSnowplowEvent())
+  const collectionClickEvent = () => dispatch(sendSnowplowEvent('home.collection.view-more'))
   const onClickEvent = type === 'collection' ? collectionClickEvent : topicClickEvent
 
   return (
