@@ -1,6 +1,7 @@
 import { requestGQL } from 'common/utilities/request/request'
 import { getRecIds, arrayToObject } from 'common/utilities'
 import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
+import { slateMeta } from 'common/slate-meta'
 
 const homeLineup = '05027beb-0053-4020-8bdc-4da2fcc0cb68'
 
@@ -34,7 +35,10 @@ function getRecsById(slates, slateLineup) {
 
 function processSlates(slates) {
   const slateWithIds = slates.map((slate) => {
-    return { ...slate, recommendations: slate?.recommendations?.map((rec) => rec?.item?.itemId) }
+    return {
+      ...deriveSlate(slate),
+      recommendations: slate?.recommendations?.map((rec) => rec?.item?.itemId)
+    }
   })
   return arrayToObject(slateWithIds, 'id')
 }
@@ -84,6 +88,23 @@ export function deriveItems(slate, slateLineup) {
       }
     }
   })
+}
+
+export function deriveSlate(slate) {
+  const currentMeta = slateMeta[slate.id]
+  const displayName =
+    currentMeta?.curatorTopicLabel || currentMeta?.displayName || slate?.displayName
+  const description = currentMeta?.description || slate?.displayName
+  const type = currentMeta?.type || null
+  const topicSlug = currentMeta?.slug || false
+
+  return {
+    ...slate,
+    type,
+    topicSlug,
+    displayName: displayName || slate?.displayName,
+    description: type === 'topic' ? null : description || slate?.description
+  }
 }
 
 /** DERIVE Functions
