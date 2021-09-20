@@ -1,6 +1,6 @@
 import { css, cx } from 'linaria'
 import { useTranslation } from 'next-i18next'
-import { breakpointSmallTablet } from '@pocket/web-ui'
+import { CrossIcon } from '@pocket/web-ui'
 import Link from 'next/link'
 
 const cardPageHeaderStyle = css`
@@ -33,6 +33,20 @@ const cardPageHeaderStyle = css`
     font-size: 1rem;
     color: var(--color-textSecondary);
   }
+  a {
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: 'Graphik Web';
+    text-decoration: none;
+    color: var(--color-textSecondary);
+    &:hover {
+      color: var(--color-textLinkHover);
+      text-decoration: underline;
+    }
+    &:active {
+      color: var(--color-textLinkPressed);
+    }
+  }
 `
 
 const cardPageSectionStyle = css`
@@ -42,11 +56,22 @@ const cardPageSectionStyle = css`
   }
 `
 
-const cardPageLineupStyle = css`
-  margin: 2rem 0 0;
+const cardPageCollectionStyle = css`
+  margin-bottom: 0;
+  margin-top: 2rem;
   .sectionSubTitle {
     margin: 0;
   }
+`
+
+const cardPageLineupStyle = css`
+  margin: 3rem 0 0;
+  .sectionSubTitle {
+    margin: 0;
+  }
+`
+const cardPageTopicStyle = css`
+  margin-top: 3rem;
 `
 
 const cardPageSimilarStyle = css`
@@ -58,29 +83,8 @@ const cardPageSimilarStyle = css`
     margin: 0;
   }
   .close {
-  }
-`
-
-const cardPageSubheaderLinkStyle = css`
-  display: flex;
-  justify-content: space-between;
-
-  a {
-    margin-bottom: 1.5rem;
-    font-family: 'Graphik Web';
-    text-decoration: none;
-    color: var(--color-actionPrimary);
-    &:hover {
-      text-decoration: underline;
-      color: var(--color-actionPrimaryHover);
-    }
-  }
-
-  ${breakpointSmallTablet} {
-    flex-direction: column;
-    p {
-      margin-bottom: 0.5rem;
-    }
+    cursor: pointer;
+    font-size: 1.5rem;
   }
 `
 
@@ -106,14 +110,13 @@ export const HomeSectionHeader = ({ sectionTitle, sectionDescription }) => {
   ) : null
 }
 
-export const HomeCollectionHeader = ({ sectionTitle, sectionDescription, clickEvent }) => {
+export const HomeCollectionHeader = ({ sectionTitle, clickEvent }) => {
   const { t } = useTranslation()
 
   return sectionTitle ? (
-    <header className={cx(cardPageHeaderStyle, cardPageSectionStyle)}>
+    <header className={cx(cardPageHeaderStyle, cardPageCollectionStyle)}>
       <h2 className="sectionTitle">{sectionTitle}</h2>
-      <div className={cardPageSubheaderLinkStyle}>
-        {sectionDescription ? <p>{sectionDescription}</p> : null}
+      <div className="sectionSubtitle">
         <Link href="/collections/?src=home-view-more">
           <a onClick={clickEvent}>{t('home:view-more-collections', 'View More Collections')}</a>
         </Link>
@@ -122,18 +125,17 @@ export const HomeCollectionHeader = ({ sectionTitle, sectionDescription, clickEv
   ) : null
 }
 
-export const HomeTopicHeader = ({ topicSlug, sectionTitle, sectionDescription, clickEvent }) => {
-  const { t } = useTranslation()
-
+export const HomeTopicHeader = ({ topicSlug, sectionTitle, clickEvent }) => {
   return sectionTitle ? (
-    <header className={cardPageHeaderStyle}>
-      <h3 className="sectionTitle">{sectionTitle}</h3>
-      <div className={cardPageSubheaderLinkStyle}>
-        {sectionDescription ? <p>{sectionDescription}</p> : null}
-        <Link href={`/explore/${topicSlug}?src=home-view-more`}>
-          <a onClick={clickEvent}>{t('home:view-more-articles', 'View More Articles')}</a>
-        </Link>
-      </div>
+    <header className={cx(cardPageHeaderStyle, cardPageTopicStyle)}>
+      <h3 className="sectionTitle">
+        {sectionTitle}
+        <div className="sectionSubtitle">
+          <Link href={`/explore/${topicSlug}?src=home-view-more`}>
+            <a onClick={clickEvent}>Find more articles on {sectionTitle}</a>
+          </Link>
+        </div>
+      </h3>
     </header>
   ) : null
 }
@@ -148,15 +150,13 @@ export const HomeLineupHeader = ({ sectionTitle, sectionDescription }) => {
 }
 
 export const HomeSimilarHeader = ({ sectionTitle, sectionDescription, closeAction = () => {} }) => {
-  const { t } = useTranslation()
-
   return sectionTitle ? (
     <header className={cx(cardPageHeaderStyle, cardPageSimilarStyle)}>
       <div>
         <h3 className="sectionTitle">{sectionTitle}</h3>
         {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
       </div>
-      <button onClick={closeAction}>{t('home:simliar-dismiss', 'Dismiss')}</button>
+      <CrossIcon className="close" onClick={closeAction} />
     </header>
   ) : null
 }

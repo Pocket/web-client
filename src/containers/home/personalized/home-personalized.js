@@ -4,7 +4,9 @@ import { HomeGreeting } from 'containers/home/personalized/home-greeting'
 import { HomeRecentSaves } from 'containers/home/personalized/home-recent-saves'
 import { getHomeLineup } from 'containers/home/home.state'
 import { CardLineup } from 'connectors/item-card/home/card-lineup'
-import { HomeLineupHeader, HomeLineupSpacer } from 'components/headers/home-header'
+import { HomeCollectionHeader } from 'components/headers/home-header'
+import { HomeLineupHeader } from 'components/headers/home-header'
+import { HomeTopicHeader } from 'components/headers/home-header'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
 import Layout from 'layouts/main'
@@ -16,6 +18,7 @@ import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { HomeSimilarRecs } from 'containers/home/personalized/home-similar-recs'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const HomePersonalized = ({ metaData }) => {
   const dispatch = useDispatch()
@@ -48,17 +51,16 @@ export const HomePersonalized = ({ metaData }) => {
 }
 
 export const Slate = ({ slateId, pagePosition }) => {
+  const dispatch = useDispatch()
+
   const slate = useSelector((state) => state.home.slatesById[slateId])
   const recs = slate?.recommendations
 
   if (!slate) return null
-  const { displayName, description } = slate
-  const positionsWithHeadlines = [0, 2, 3, 4]
-  const showHeader = positionsWithHeadlines.includes(pagePosition)
 
-  const positionsWithSpacers = [1]
-  const showSpacer = positionsWithSpacers.includes(pagePosition)
+  const { displayName, description, topicSlug, type } = slate
 
+  console.log(type)
   const recCounts = [5, 5, 3]
   const recCount = recCounts[pagePosition] || 5
   const recSlice = recs.slice(0, recCount)
@@ -76,12 +78,26 @@ export const Slate = ({ slateId, pagePosition }) => {
   const displayFull = displaysFull.includes(pagePosition)
   const wrapperClass = displayFull ? 'highlight' : ''
 
+  const headerTypes = {
+    collection: HomeCollectionHeader,
+    topic: HomeTopicHeader
+  }
+
+  const HomeHeader = headerTypes[type] || HomeLineupHeader
+
+  const topicClickEvent =  () => dispatch(sendSnowplowEvent('home.topic.view-more', { label: topicSlug })) //prettier-ignore
+  const collectionClickEvent = () => dispatch(sendSnowplowEvent())
+  const onClickEvent = type === 'collection' ? collectionClickEvent : topicClickEvent
+
   return (
     <SectionWrapper className={wrapperClass}>
-      {showHeader ? (
-        <HomeLineupHeader sectionTitle={displayName} sectionDescription={description} />
-      ) : null}
-      {showSpacer ? <HomeLineupSpacer /> : null}
+      <HomeHeader
+        sectionTitle={displayName}
+        sectionDescription={description}
+        topicSlug={topicSlug}
+        onClickEvent={onClickEvent}
+      />
+
       <LayoutType
         items={recSlice}
         offset={0}
