@@ -1,3 +1,11 @@
+## [1.21.3](https://github.com/Pocket/web-client/compare/v1.21.2...v1.21.3) (2021-09-20)
+
+
+### Bug Fixes
+
+* **account:** add email state / component update ([29a048b](https://github.com/Pocket/web-client/commit/29a048ba236b2ab0002b41a360913597d61641fe))
+* **account:** copy fixes ([ff26f6f](https://github.com/Pocket/web-client/commit/ff26f6f698bee5d06dc933b4b891611f6d24c54f))
+
 ## [1.21.2](https://github.com/Pocket/web-client/compare/v1.21.1...v1.21.2) (2021-09-17)
 
 
