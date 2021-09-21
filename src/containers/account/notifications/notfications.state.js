@@ -1,4 +1,4 @@
-import { put, takeLatest, delay, call } from 'redux-saga/effects'
+import { put, takeLatest, call } from 'redux-saga/effects'
 
 import { getAccountNotifications, setAccountNotifications } from 'common/api/account'
 
@@ -57,8 +57,6 @@ export const userNotificationSagas = [
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-// const getUserDetails = (state) => state.user
-
 function* getNotificationsData() {
   const response = yield call(getAccountNotifications)
   const { status, error, checkMarketing, hitsFrequency } = response
