@@ -34,3 +34,19 @@ export const setAvatar = (data) => {
     auth: true
   })
 }
+
+export const getAccountNotifications = () => {
+  return request({
+    path: 'v3/getEmailNotificationSettings',
+    auth: true
+  })
+}
+
+export const setAccountNotifications = (data) => {
+  return request({
+    method: 'POST',
+    path: 'v3/setEmailNotificationSettings',
+    body: JSON.stringify({ ...data }),
+    auth: true
+  })
+}

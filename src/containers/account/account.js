@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { accountStyles } from 'components/account/account'
 import { Profile } from 'containers/account/profile/profile'
 import { Email } from 'containers/account/email/email'
+import { Notifications } from 'containers/account/notifications/notifications'
 
 export const Account = () => {
   // Profile content
@@ -17,6 +18,7 @@ export const Account = () => {
         <h1>Manage your account</h1>
         <Profile />
         <Email />
+        <Notifications />
       </main>
       <Toasts />
     </Layout>
