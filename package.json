@@ -15,7 +15,7 @@
     "cypress:launch": "CYPRESS_BASE_URL=http://localhost.web-client.getpocket.com cypress open",
     "cypress:run": "CYPRESS_BASE_URL=http://localhost.web-client.getpocket.com cypress run",
     "cypress:ci": "cypress run",
-    "lint": "./node_modules/.bin/eslint $(find src/ -name '*.js' ! -name '*.stories.js' ! -name '*.spec.js')",
+    "lint": "eslint src/**",
     "lint-diff": "./node_modules/.bin/eslint $(git diff main --name-only -- components/*.js connectors/*.js containers/*.js) --quiet",
     "test": "jest --reporters='default'",
     "test:ci": "jest --ci",

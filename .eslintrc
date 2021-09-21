@@ -1,5 +1,6 @@
 {
   "parser": "@babel/eslint-parser",
+  "ignorePatterns": ["*.stories.js", "*.spec.js"],
   "extends": [
     "react-app",
     "prettier",
