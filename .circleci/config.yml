@@ -48,6 +48,25 @@ commands:
 jobs:
 
   # ——————————————————————————————————————————————————————————————
+  # Lint: Make sure code is free from silly mistakes
+  # ——————————————————————————————————————————————————————————————
+  lint:
+    # CPU and RAM resources for the job.
+    resource_class: small
+    # Define the container we will run the task in (standard node)
+    docker:
+      - image: circleci/node:16
+    steps:
+      # Setup Environment
+      - setup
+      - run: mkdir ~/junit
+      # Run tests
+      - run:
+          name: Eslint
+          command: npm run lint
+
+
+  # ——————————————————————————————————————————————————————————————
   # Unit Test: Make sure code is free from testable errors
   # ——————————————————————————————————————————————————————————————
   unit_tests:
@@ -74,6 +93,8 @@ jobs:
           path: ~/junit
       - store_artifacts:
           path: ~/junit
+
+
   # ——————————————————————————————————————————————————————————————
   # Release: This will tag the branch and generate a changelog
   # ——————————————————————————————————————————————————————————————  
@@ -300,6 +321,9 @@ workflows:
   version: 2
   all:
     jobs:
+      # lint all the files
+      - lint:
+          <<: *not_main
       # unit test all the files
       - unit_tests:
           <<: *not_main
