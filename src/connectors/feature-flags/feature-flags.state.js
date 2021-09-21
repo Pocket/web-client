@@ -61,7 +61,7 @@ export async function fetchUnleashData(userId, sessionId, birth) {
 
     return unleashData
   } catch (error) {
-    console.log(error)
+    console.warn(error)
   }
 }
 

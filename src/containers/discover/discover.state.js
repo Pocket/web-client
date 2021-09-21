@@ -113,6 +113,6 @@ export async function fetchDiscoverData({ locale }) {
     return { items, itemsById }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.log('discover.state', error)
+    console.warn('discover.state', error)
   }
 }

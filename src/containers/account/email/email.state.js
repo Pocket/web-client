@@ -1,4 +1,4 @@
-import { put, takeLatest, select, delay, call } from 'redux-saga/effects'
+import { put, takeLatest, call } from 'redux-saga/effects'
 
 import { putAccountChange, addEmailAlias, removeEmailAlias } from 'common/api/account'
 

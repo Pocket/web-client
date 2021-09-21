@@ -32,6 +32,6 @@ export function* itemAdd(action) {
 
     yield put({ type: ITEMS_ADD_SUCCESS })
   } catch (error) {
-    console.log(error)
+    console.warn(error)
   }
 }

@@ -27,7 +27,7 @@ global.OptanonWrapper = () => {
   const onetrustCookies = arrayToObject(updateCategories(global.OptanonActiveGroups), 'name')
   const analyticsEnabled = onetrustCookies.analytics.enabled
 
-  if (OptanonAnalyticsCookie && !analyticsEnabled) return location.reload()
+  if (OptanonAnalyticsCookie && !analyticsEnabled) return window.location.reload()
   OptanonAnalyticsCookie = analyticsEnabled
 }
 

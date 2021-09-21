@@ -162,7 +162,7 @@ function* homeLineupRequest() {
     const data = yield call(fetchLineupData)
     yield put({ type: HOME_LINEUP_SUCCESS, ...data })
   } catch (error) {
-    console.log(error)
+    console.warn(error)
   }
 }
 
@@ -181,7 +181,7 @@ function* recentDataRequest() {
 
     yield put({ type: HOME_RECENT_SAVES_SUCCESS, items: itemsNoDefault, itemsById }) // prettier-ignore
   } catch (error) {
-    console.log(error)
+    console.warn(error)
     yield put({ type: HOME_RECENT_SAVES_FAILURE, error })
   }
 }
@@ -203,7 +203,7 @@ function* topicDataRequest({ topic }) {
       itemsById
     })
   } catch (error) {
-    console.log('catch', error)
+    console.warn('catch', error)
     yield put({ type: HOME_TOPIC_SECTION_FAILURE, error })
   }
 }
@@ -217,7 +217,7 @@ function* collectionDataRequest() {
 
     yield put({ type: HOME_COLLECTION_SUCCESS, data })
   } catch (error) {
-    console.log('catch', error)
+    console.warn('catch', error)
     yield put({ type: HOME_COLLECTION_FAILURE, error })
   }
 }
@@ -295,7 +295,7 @@ export async function fetchMyListData(params) {
     return { items, itemsById, total }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.log('discover.state', error)
+    console.warn('discover.state', error)
   }
 }
 
@@ -320,7 +320,7 @@ export async function fetchTopicData({ topic }) {
     return { items, itemsById }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.log('home.state.topics', error)
+    console.warn('home.state.topics', error)
   }
 }
 
@@ -342,7 +342,7 @@ export async function fetchCollectionData({ count }) {
     return { data }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.log('home.state.topics', error)
+    console.warn('home.state.topics', error)
   }
 }
 
@@ -358,6 +358,6 @@ export async function fetchLineupData() {
     return { slates, slatesById, itemsById, slateLineup }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.log('home.state.lineup', error)
+    console.warn('home.state.lineup', error)
   }
 }

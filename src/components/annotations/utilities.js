@@ -265,7 +265,7 @@ function highlight(node, className, annotation, tapListener, callback) {
         newNode.addEventListener('touchstart', tapListener, false)
         // newNode.addEventListener('touchend', tapListener, false)
       } catch (e) {
-        console.log(e)
+        console.warn(e)
       }
     }
     // return;

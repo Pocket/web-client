@@ -60,7 +60,7 @@ function* topicListRequest(action) {
     const topicsByName = yield fetchTopicList()
     yield put({ type: TOPICLIST_SUCCESS, topicsByName })
   } catch (error) {
-    console.log(error)
+    console.warn(error)
     yield put({ type: TOPICLIST_FAILURE, error })
   }
 }
@@ -80,6 +80,6 @@ export async function fetchTopicList(ssr) {
 
     return topicsByName
   } catch (error) {
-    console.log('topic-pages.topic-list.state', error)
+    console.warn('topic-pages.topic-list.state', error)
   }
 }

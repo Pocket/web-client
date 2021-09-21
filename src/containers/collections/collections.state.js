@@ -167,7 +167,7 @@ export async function fetchCollections(lang = 'en') {
     return arrayToObject(derivedCollections, 'slug')
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.log('collection.state.collections', error)
+    console.warn('collection.state.collections', error)
   }
 }
 
@@ -205,7 +205,7 @@ export async function fetchCollectionBySlug({ slug }) {
     }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.log('collection.state.collectionBySlug', error)
+    console.warn('collection.state.collectionBySlug', error)
   }
 }
 

@@ -38,7 +38,7 @@ function PocketWebClient({ Component, pageProps, err }) {
     // Log out version for quick scan.  Can also help support get a read on
     // what version a user is on when reporting an error
     const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
-    console.log(`Pocket Web Client: ${RELEASE_VERSION}`)
+    console.info(`Pocket Web Client: ${RELEASE_VERSION}`)
 
     // Load any relevant polyfills
     loadPolyfills()

@@ -111,7 +111,7 @@ export async function fetchTopicData(topic) {
     }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.log('topic-pages.topic-data.state', error)
+    console.warn('topic-pages.topic-data.state', error)
     return false
   }
 }

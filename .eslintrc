@@ -1,7 +1,16 @@
 {
   "parser": "@babel/eslint-parser",
-  "extends": ["react-app", "prettier", "plugin:cypress/recommended"],
-  "plugins": ["prettier", "jsx-a11y", "testing-library", "jest-dom"],
+  "extends": [
+    "react-app",
+    "prettier",
+    "plugin:cypress/recommended"
+  ],
+  "plugins": [
+    "prettier",
+    "jsx-a11y",
+    "testing-library",
+    "jest-dom"
+  ],
   "globals": {
     "React": false,
     "snowplow": true
@@ -10,9 +19,28 @@
     "react/react-in-jsx-scope": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "no-unneeded-ternary": "warn",
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["warn", "single"],
-    "semi": ["error", "never"],
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "warn",
+          "error",
+          "info"
+        ]
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "warn",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
     "no-unused-vars": [
       "warn",
       {

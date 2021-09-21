@@ -58,7 +58,7 @@ async function processLocalization() {
     // Go ahead and submit PR if one does not already exist
     await submitPR(token, branchName, changedFiles)
   } catch (error) {
-    console.log(error)
+    console.warn(error)
   }
 }
 
@@ -121,7 +121,7 @@ async function setupRepo(location, settings) {
       }
     }
   } catch (error) {
-    console.log(error)
+    console.warn(error)
   }
 }
 
@@ -194,7 +194,7 @@ async function updateRepo() {
     await git.checkout('main')
     return git.pull()
   } catch (error) {
-    console.log(error)
+    console.warn(error)
   }
 }
 
@@ -250,7 +250,7 @@ async function selectBranch(localBranches) {
       }
     }
   } catch (error) {
-    console.log(error)
+    console.warn(error)
   }
 }
 
@@ -495,7 +495,7 @@ async function setToken(settings) {
 
     return token
   } catch (error) {
-    console.log(error)
+    console.warn(error)
   }
 }
 

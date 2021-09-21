@@ -406,7 +406,7 @@ function* myListDataRequest(action) {
       since
     })
   } catch (error) {
-    console.log(error)
+    console.warn(error)
     yield put({ type: MYLIST_DATA_FAILURE, error })
   }
 }
@@ -450,7 +450,7 @@ function* myListUpdate(action) {
       since: updatedSince
     })
   } catch (error) {
-    console.log(error)
+    console.warn(error)
     yield put({ type: MYLIST_UPDATE_FAILURE, error })
   }
 }
@@ -511,7 +511,7 @@ function* myListSearchRequest(action) {
       since
     })
   } catch (error) {
-    console.log(error)
+    console.warn(error)
     yield put({ type: MYLIST_SEARCH_FAILURE, error })
   }
 }
@@ -538,7 +538,7 @@ export async function fetchMyListData(params) {
     return { itemsById, total, since }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.log('discover.state', error)
+    console.warn('my-list.state', error)
   }
 }
 
@@ -562,7 +562,7 @@ export async function fetchMyListUpdate(params) {
     return { updatedItemsById, itemsToDelete, total, updatedSince: since }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.log('discover.state', error)
+    console.warn('my-list.state', error)
   }
 }
 
@@ -585,6 +585,6 @@ export async function fetchMyListSearch(params) {
     return { itemsById, total: computedTotal, since }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.log('discover.state', error)
+    console.warn('my-list.state', error)
   }
 }

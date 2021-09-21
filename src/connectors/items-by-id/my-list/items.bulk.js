@@ -156,7 +156,7 @@ export function* itemBulkSelect(action) {
       items
     })
   } catch (error) {
-    console.log(error)
+    console.warn(error)
   }
 }
 
@@ -185,7 +185,7 @@ export function* itemBulkDeSelect(action) {
       batchStatus
     })
   } catch (error) {
-    console.log(error)
+    console.warn(error)
   }
 }
 
