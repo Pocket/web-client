@@ -8,7 +8,7 @@ import { Profile as ProfileComp } from './profile/profile'
 import { PocketApps as PocketAppsComp } from './connections/pocket-apps'
 import { Services as ServicesComp } from './connections/services'
 import { ThirdParty as ThirdPartyComp } from './connections/third-party-apps'
-import { RSSFeeds as RSSFeedsComp } from './connections/rss'
+import { RSSFeeds as RSSFeedsComp } from './rss/rss'
 
 export default {
   title: 'Components/Account',

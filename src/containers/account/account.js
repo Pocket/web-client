@@ -6,6 +6,7 @@ import { accountStyles } from 'components/account/account'
 import { Profile } from 'containers/account/profile/profile'
 import { Email } from 'containers/account/email/email'
 import { Notifications } from 'containers/account/notifications/notifications'
+import { RSSFeeds } from 'containers/account/rss/rss'
 
 export const Account = () => {
   // Profile content
@@ -19,6 +20,7 @@ export const Account = () => {
         <Profile />
         <Email />
         <Notifications />
+        <RSSFeeds />
       </main>
       <Toasts />
     </Layout>

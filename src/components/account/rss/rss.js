@@ -4,12 +4,16 @@ import { Button } from '@pocket/web-ui'
 const pocketAppsStyle = css`
   padding-bottom: 3rem;
   border-bottom: var(--dividerStyle);
-
-  .pocketAppsBody {
+  .button {
+    text-align: center;
   }
 `
 
-export const RSSFeeds = () => {
+export const RSSFeeds = ({ userName }) => {
+  const unreadLink = `https://getpocket.com/users/${userName}/feed/unread`
+  const readLink = `https://getpocket.com/users/${userName}/feed/read`
+  const allLink = `https://getpocket.com/users/${userName}/feed/all`
+
   return (
     <section className={pocketAppsStyle}>
       <h2>RSS Feeds</h2>
@@ -17,21 +21,36 @@ export const RSSFeeds = () => {
         <label htmlFor="something" className="connectionLabel">
           View my Unread RSS feed
         </label>
-        <Button variant="secondary" className="actionInline">
+        <Button
+          href={unreadLink}
+          variant="secondary"
+          className="button actionInline"
+          target="_blank"
+          rel="noopener noreferrer">
           Open Feed
         </Button>
 
         <label htmlFor="something" className="connectionLabel">
           View my Archive RSS feed
         </label>
-        <Button variant="secondary" className="actionInline">
+        <Button
+          href={readLink}
+          variant="secondary"
+          className="button actionInline"
+          target="_blank"
+          rel="noopener noreferrer">
           Open Feed
         </Button>
 
         <label htmlFor="something" className="connectionLabel">
           View my All Items RSS feed
         </label>
-        <Button variant="secondary" className="actionInline">
+        <Button
+          href={allLink}
+          variant="secondary"
+          className="button actionInline"
+          target="_blank"
+          rel="noopener noreferrer">
           Open Feed
         </Button>
         <div className="helperText full">
