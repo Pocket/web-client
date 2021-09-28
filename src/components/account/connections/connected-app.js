@@ -20,7 +20,7 @@ export const ConnectedApp = ({ slug, name, api_id, platform_id, onRevoke, Fallba
 
   return (
     <>
-      <label htmlFor="something" className={`${serviceStyle} flush`}>
+      <label className={`${serviceStyle} flush`}>
         {validImage ? (
           <img src={serviceIcon} className="serviceIcon" onError={onImageError} alt="" />
         ) : (
