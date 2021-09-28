@@ -6,7 +6,7 @@ const notficationsStyle = css`
 `
 
 export const Notifications = ({
-  sendMarketing,
+  sendMarketing = false,
   hitsFrequency,
   onMarketingToggle,
   onFrequencyChange

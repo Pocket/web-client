@@ -90,7 +90,7 @@ export const accountStyles = css`
     max-width: 100%;
   }
   input[type='checkbox'] {
-    margin: 0 1rem 0 0;
+    margin: 0;
     &:before {
       margin-top: 2px;
     }

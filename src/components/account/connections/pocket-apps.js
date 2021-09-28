@@ -6,7 +6,7 @@ const pocketAppsStyle = css`
 `
 
 export const PocketApps = ({ appIds, ConnectedApp }) => {
-  return appIds.length ? (
+  return appIds?.length ? (
     <section className={pocketAppsStyle}>
       <h2>Pocket Applications</h2>
       <div className="sectionBody">
@@ -14,7 +14,7 @@ export const PocketApps = ({ appIds, ConnectedApp }) => {
           You are currently logged in to Pocket in these applications:
         </div>
         {appIds.map((appId) => (
-          <ConnectedApp appId={appId} />
+          <ConnectedApp key={appId} appId={appId} />
         ))}
       </div>
     </section>

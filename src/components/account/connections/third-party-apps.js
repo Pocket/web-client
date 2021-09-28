@@ -3,18 +3,18 @@ import { css } from 'linaria'
 const thirdPartyStyle = css`
   padding-bottom: 3rem;
   border-bottom: var(--dividerStyle);
+  .helperText {
+    padding-top: 2rem;
+  }
 `
 
 export const ThirdParty = ({ appIds, ConnectedApp }) => {
-  return appIds ? (
+  return appIds?.length ? (
     <section className={thirdPartyStyle}>
       <h2>Third Party Applications</h2>
       <div className="sectionBody thirdPartyBody">
-        <label htmlFor="something" className="connectionLabel">
-          Something
-        </label>
         {appIds.map((appId) => (
-          <ConnectedApp appId={appId} />
+          <ConnectedApp key={appId} appId={appId} />
         ))}
         <div className="helperText full">
           This page will not list 3rd party applications where you have entered your Pocket

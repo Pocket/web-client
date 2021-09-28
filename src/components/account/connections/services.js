@@ -6,13 +6,13 @@ const servicesStyle = css`
 `
 
 export const Services = ({ appIds, ConnectedApp }) => {
-  return appIds ? (
+  return appIds?.length ? (
     <section className={servicesStyle}>
-      <h2>Services</h2>
+      <h2>Connected Services</h2>
       <div className="sectionBody">
         <div className="helperText full">You have authorized Pocket to access these services:</div>
         {appIds.map((appId) => (
-          <ConnectedApp appId={appId} />
+          <ConnectedApp key={appId} appId={appId} />
         ))}
       </div>
     </section>
