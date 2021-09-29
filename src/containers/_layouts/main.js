@@ -9,6 +9,9 @@ import { SocialMetaData } from 'components/social-meta-data/social-meta-data'
 const fixedNavContainer = css`
   padding-top: 65px;
 `
+const noContainerStyle = css`
+  padding-bottom: 65px;
+`
 
 function mainLayout({
   metaData,
@@ -17,6 +20,7 @@ function mainLayout({
   canonical,
   selectedNavLink,
   isFullWidthLayout,
+  noContainer = false,
   className = ''
 }) {
   const renderSocialMeta = metaData?.description && metaData?.title
@@ -32,7 +36,7 @@ function mainLayout({
 
       <GlobalNav selectedLink={selectedNavLink} />
 
-      <div className={cx(fixedNavContainer, className)}>
+      <div className={cx(fixedNavContainer, noContainer && noContainerStyle, className)}>
         {isFullWidthLayout ? children : <PageContainer>{children}</PageContainer>}
       </div>
 
