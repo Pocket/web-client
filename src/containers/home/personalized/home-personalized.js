@@ -19,24 +19,30 @@ import { Toasts } from 'connectors/toasts/toast-list'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { HomeSimilarRecs } from 'containers/home/personalized/home-similar-recs'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+// import { Onboarding } from 'connectors/onboarding/onboarding'
 
 export const HomePersonalized = ({ metaData }) => {
   const dispatch = useDispatch()
-  const slates = useSelector((state) => state.home.slates)
-  const slatesNoTopics = slates
+  const generalSlates = useSelector((state) => state.home.generalSlates)
+  const topicSlates = useSelector((state) => state.home.topicSlates)
+  const offset = generalSlates?.length || 0
 
   // Initialize data
   useEffect(() => dispatch(getHomeLineup()), [dispatch])
 
   return (
-    <Layout metaData={metaData} isFullWidthLayout={true}>
+    <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
       <SectionWrapper>
         <HomeGreeting />
         <HomeRecentSaves />
       </SectionWrapper>
 
-      {slatesNoTopics?.map((slateId, index) => (
-        <Slate key={slateId} slateId={slateId} pagePosition={index} />
+      {generalSlates?.map((slateId, index) => (
+        <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />
+      ))}
+
+      {topicSlates?.map((slateId, index) => (
+        <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
       ))}
 
       <HomeSimilarRecs />
@@ -50,7 +56,7 @@ export const HomePersonalized = ({ metaData }) => {
   )
 }
 
-export const Slate = ({ slateId, pagePosition }) => {
+export const Slate = ({ slateId, pagePosition, offset }) => {
   const dispatch = useDispatch()
 
   const slate = useSelector((state) => state.home.slatesById[slateId])
@@ -58,23 +64,24 @@ export const Slate = ({ slateId, pagePosition }) => {
 
   if (!slate) return null
 
+  const position = offset + pagePosition
   const { displayName, description, topicSlug, type } = slate
 
   const recCounts = [5, 5, 3]
-  const recCount = recCounts[pagePosition] || 5
+  const recCount = recCounts[position] || 5
   const recSlice = recs.slice(0, recCount)
 
-  const layoutTypes = [Lockup, OffsetList, OffsetList, Lockup, OffsetList, OffsetList, OffsetList]
-  const LayoutType = layoutTypes[pagePosition] || Lockup
+  const layoutTypes = [Lockup, OffsetList, OffsetList, Lockup]
+  const LayoutType = layoutTypes[position] || OffsetList
 
   const heroPositions = ['center', '', 'left', 'right']
-  const heroPosition = heroPositions[pagePosition]
+  const heroPosition = heroPositions[position]
 
   const cardShapes = [undefined, 'wide', 'block']
-  const cardShape = cardShapes[pagePosition]
+  const cardShape = cardShapes[position]
 
   const displaysFull = [2]
-  const displayFull = displaysFull.includes(pagePosition)
+  const displayFull = displaysFull.includes(position)
   const wrapperClass = displayFull ? 'highlight' : ''
 
   const headerTypes = {

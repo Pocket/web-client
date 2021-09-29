@@ -3,28 +3,32 @@ import { getRecIds, arrayToObject } from 'common/utilities'
 import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
 import { slateMeta } from 'common/slate-meta'
 
-// const personalized = '05027beb-0053-4020-8bdc-4da2fcc0cb68'
-const unpersonalized = '249850f0-61c0-46f9-a16a-f0553c222800'
-const homeLineup = unpersonalized
+const personalized = '05027beb-0053-4020-8bdc-4da2fcc0cb68'
+// const unpersonalized = '249850f0-61c0-46f9-a16a-f0553c222800'
+const homeLineup = personalized
 
 export async function getHomeLineup({ recommendationCount = 5 }) {
   const id = homeLineup
   return requestGQL({
     query: getSlateLineup,
-    variables: { id, recommendationCount }
+    variables: { id, recommendationCount, slateCount: 20 }
   })
     .then(processLineup)
     .catch((error) => console.error(error))
 }
 
 function processLineup(response) {
+  const isPersonalized = response?.data?.getSlateLineup.id === homeLineup
+
   const slateLineup = getRecIds(response?.data?.getSlateLineup)
   const slatesResponse = response?.data?.getSlateLineup.slates
   const itemsById = getRecsById(slatesResponse, slateLineup)
-  const slatesById = processSlates(slatesResponse)
-  const slates = slatesResponse.map((slate) => slate?.id)
+  const slatesById = processSlates(slatesResponse, isPersonalized)
 
-  return { slates, slatesById, itemsById, slateLineup }
+  const generalSlates = Object.keys(slatesById).filter((id) => slatesById[id].type !== 'topic')
+  const topicSlates = Object.keys(slatesById).filter((id) => slatesById[id].type === 'topic')
+
+  return { generalSlates, topicSlates, slatesById, itemsById, slateLineup, isPersonalized }
 }
 
 function getRecsById(slates, slateLineup) {
@@ -35,12 +39,15 @@ function getRecsById(slates, slateLineup) {
   }, {})
 }
 
-function processSlates(slates) {
+function processSlates(slates, isPersonalized) {
   const slateWithIds = slates.map((slate) => {
-    return {
-      ...deriveSlate(slate),
-      recommendations: slate?.recommendations?.map((rec) => rec?.item?.itemId)
-    }
+    const derivedSlate = deriveSlate(slate, isPersonalized)
+    return derivedSlate
+      ? {
+          ...derivedSlate,
+          recommendations: slate?.recommendations?.map((rec) => rec?.item?.itemId)
+        }
+      : undefined
   })
   return arrayToObject(slateWithIds, 'id')
 }
@@ -92,27 +99,46 @@ export function deriveItems(slate, slateLineup) {
   })
 }
 
-export function deriveSlate(slate) {
+export function deriveSlate(slate, isPersonalized) {
   const currentMeta = slateMeta[slate.id]
-  const displayName =
-    currentMeta?.curatorTopicLabel || currentMeta?.displayName || slate?.displayName
-  const description = currentMeta?.description || slate?.displayName
-  const type = currentMeta?.type || null
-  const topicSlug = currentMeta?.slug || false
+  const isTopic = currentMeta?.slug || false
 
-  return {
-    ...slate,
-    type,
-    topicSlug,
-    displayName: displayName || slate?.displayName,
-    description: type === 'topic' ? null : description || slate?.description
-  }
+  // Don't return topics on unpersonalized
+  if (!isPersonalized && isTopic) return false
+
+  const updatedMeta = derivedMeta(currentMeta, slate)
+  return { ...slate, ...updatedMeta }
 }
 
 /** DERIVE Functions
   * ? Derived fields to help clarify logic for what values to use in some common cases
   * ? The data we receive this is not normalized yet.
  --------------------------------------------------------------- */
+/** SLATE META
+ * @param {object} currentMeta MetaData from a slate
+ * @returns {object} The most appropriate meta for the slate
+ */
+function derivedMeta(currentMeta, slate) {
+  const topicSlug = currentMeta?.slug || false
+
+  // Adjust the topic returns since the data is imperfect
+  if (topicSlug) {
+    return {
+      displayName: currentMeta?.curatorTopicLabel,
+      description: currentMeta?.description,
+      type: currentMeta?.type,
+      topicSlug
+    }
+  }
+
+  // This is a regular old slate so use the supplied meta
+  return {
+    displayName: slate?.displayName,
+    description: slate?.description,
+    type: currentMeta?.type || null,
+    topicSlug: currentMeta?.slug || false
+  }
+}
 
 /** TITLE
  * @param {object} feedItem An unreliable item returned from a v3 feed endpoint

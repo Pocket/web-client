@@ -74,8 +74,8 @@ const initialState = {
 export const homeReducers = (state = initialState, action) => {
   switch (action.type) {
     case HOME_LINEUP_SUCCESS: {
-      const { slates, slatesById } = action
-      return { ...state, slates, slatesById }
+      const { generalSlates, topicSlates, slatesById, isPersonalized } = action
+      return { ...state, generalSlates, topicSlates, slatesById, isPersonalized }
     }
 
     case HOME_SIMILAR_REC_REQUEST: {
@@ -352,10 +352,14 @@ export async function fetchCollectionData({ count }) {
  */
 export async function fetchLineupData() {
   try {
-    const { slates, slatesById, itemsById, slateLineup } = await apiGetHomeLineup({})
-    if (!slates?.length || !slatesById || !itemsById) return {}
+    const response = await apiGetHomeLineup({})
 
-    return { slates, slatesById, itemsById, slateLineup }
+    const { slatesById, itemsById, slateLineup, isPersonalized } = response
+    const { generalSlates, topicSlates } = response
+
+    if (!generalSlates?.length || !slatesById || !itemsById) return {}
+
+    return { generalSlates, topicSlates, slatesById, itemsById, slateLineup, isPersonalized }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.warn('home.state.lineup', error)

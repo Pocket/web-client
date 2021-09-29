@@ -12,7 +12,7 @@ const homeCollections = css`
 `
 
 export const HomeGreeting = () => {
-  const firstName = useSelector((state) => state.user.first_name)
+  const firstName = useSelector((state) => state.userProfile.first_name)
   const timeOfDay = getTimeOfDay()
 
   const showName = firstName && firstName.length < 30
