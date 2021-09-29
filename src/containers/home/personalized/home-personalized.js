@@ -35,7 +35,7 @@ export const HomePersonalized = ({ metaData }) => {
         <HomeRecentSaves />
       </SectionWrapper>
 
-      {slatesNoTopics.map((slateId, index) => (
+      {slatesNoTopics?.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} pagePosition={index} />
       ))}
 

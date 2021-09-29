@@ -3,7 +3,9 @@ import { getRecIds, arrayToObject } from 'common/utilities'
 import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
 import { slateMeta } from 'common/slate-meta'
 
-const homeLineup = '05027beb-0053-4020-8bdc-4da2fcc0cb68'
+// const personalized = '05027beb-0053-4020-8bdc-4da2fcc0cb68'
+const unpersonalized = '249850f0-61c0-46f9-a16a-f0553c222800'
+const homeLineup = unpersonalized
 
 export async function getHomeLineup({ recommendationCount = 5 }) {
   const id = homeLineup
