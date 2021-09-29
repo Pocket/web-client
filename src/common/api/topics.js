@@ -21,7 +21,7 @@ export async function getHomeTopicFeed(topic, recommendationCount = 6) {
 export async function getNewTopicFeed(topic, recommendationCount = 30) {
   return requestGQL({
     query: getSlateLineup,
-    variables: { id: TOPIC_IDS[topic].id, recommendationCount }
+    variables: { id: TOPIC_IDS[topic].id, recommendationCount, slateCount: 2 }
   })
     .then(processSlates)
     .catch((error) => console.error(error))

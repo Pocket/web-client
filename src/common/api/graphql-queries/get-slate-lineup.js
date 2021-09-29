@@ -11,8 +11,12 @@
 
 import { gql } from 'graphql-request'
 const getSlateLineup = gql`
-  query GetSlateLineup($id: String!, $recommendationCount: Int) {
-    getSlateLineup(slateLineupId: $id, recommendationCount: $recommendationCount) {
+  query GetSlateLineup($id: String!, $recommendationCount: Int, $slateCount: Int) {
+    getSlateLineup(
+      slateLineupId: $id
+      recommendationCount: $recommendationCount
+      slateCount: $slateCount
+    ) {
       experimentId
       requestId
       id

@@ -9,7 +9,7 @@ export async function getDiscoverFeed({ recommendationCount = 30, locale }) {
   const id = getLocaleId(locale)
   return requestGQL({
     query: getSlateLineup,
-    variables: { id, recommendationCount }
+    variables: { id, recommendationCount, slateCount: 2 }
   })
     .then(processSlates)
     .catch((error) => console.error(error))
