@@ -50,3 +50,29 @@ export const setAccountNotifications = (data) => {
     auth: true
   })
 }
+
+export const setRssProtection = (isOn) => {
+  const feed_protected = isOn ? '1' : '0'
+  return request({
+    method: 'POST',
+    path: 'v3/setPrivacySettings.php ',
+    body: JSON.stringify({ feed_protected }),
+    auth: true
+  })
+}
+
+export const clearAccount = () => {
+  return request({
+    method: 'POST',
+    path: 'v3/clearAccount',
+    auth: true
+  })
+}
+
+export const deleteAccount = () => {
+  return request({
+    method: 'POST',
+    path: 'v3/deleteAccount',
+    auth: true
+  })
+}

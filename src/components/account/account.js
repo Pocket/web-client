@@ -89,8 +89,18 @@ export const accountStyles = css`
     grid-column: 3 / span 5;
     max-width: 100%;
   }
+  .toggleWrap {
+    grid-column: 1 /-1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-row-gap: 0.5rem;
+    grid-column-gap: 1rem;
+    margin-bottom: 0.725rem;
+  }
+
   input[type='checkbox'] {
     margin: 0;
+
     &:before {
       margin-top: 2px;
     }

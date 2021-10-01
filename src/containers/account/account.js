@@ -8,6 +8,7 @@ import { Email } from 'containers/account/email/email'
 import { Notifications } from 'containers/account/notifications/notifications'
 import { ConnectedServices } from 'containers/account/connections/connections'
 import { RSSFeeds } from 'containers/account/rss/rss'
+import { Privacy } from 'containers/account/privacy/privacy'
 
 export const Account = () => {
   // Profile content
@@ -23,6 +24,7 @@ export const Account = () => {
         <Notifications />
         <ConnectedServices />
         <RSSFeeds />
+        <Privacy />
       </main>
       <Toasts />
     </Layout>

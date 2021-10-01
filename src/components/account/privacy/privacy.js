@@ -4,26 +4,37 @@ import { Button } from '@pocket/web-ui'
 const privacyStyle = css`
   padding-bottom: 3rem;
   border-bottom: var(--dividerStyle);
-
-  .privacyBody {
-  }
 `
 
-export const Privacy = () => {
+export const Privacy = ({ accountClear, accountDelete, rssProtect, rssProtected }) => {
   return (
     <section className={privacyStyle}>
       <h2>Privacy</h2>
       <div className="sectionBody">
-        <label htmlFor="profilePrivate" className="flush">
-          Make my profile private
-        </label>
-        <input type="checkbox" name="profilePrivate" id="profilePrivate" className="toggle" />
+        {/* Leaving this here until the endpoint is properly sorted out
+        <div className="toggleWrap">
+          <label htmlFor="profilePrivate" className="flush">
+            Make my profile private
+          </label>
+          <input type="checkbox" name="profilePrivate" id="profilePrivate" className="toggle" />
+        </div> 
+        */}
 
-        <label htmlFor="rssPasswords" className="flush">
-          Disable password protection on my RSS feeds
-        </label>
-        <input type="checkbox" name="rssPasswords" id="rssPasswords" className="toggle" />
+        <div className="toggleWrap">
+          <label htmlFor="rssPasswords" className="flush">
+            Disable password protection on my RSS feeds
+          </label>
+          <input
+            type="checkbox"
+            name="rssPasswords"
+            id="rssPasswords"
+            className="toggle"
+            checked={rssProtected}
+            onChange={rssProtect}
+          />
+        </div>
 
+        {/* Leaving this here until the export strat is revisited
         <label htmlFor="something" className="flush connectionLabel labelWithContext">
           Export my Pocket data
           <div className="helperText">Export your Pocket data in a portable HTML file</div>
@@ -31,6 +42,7 @@ export const Privacy = () => {
         <div className="actionInline">
           <Button variant="secondary">Export data</Button>
         </div>
+        */}
 
         <label htmlFor="something" className="connectionLabel labelWithContext">
           Clear my Pocket data
@@ -39,7 +51,9 @@ export const Privacy = () => {
           </div>
         </label>
         <div className="actionInline">
-          <Button variant="secondary">Clear data</Button>
+          <Button variant="secondary" onClick={accountClear}>
+            Clear data
+          </Button>
         </div>
 
         <label htmlFor="something" className="connectionLabel labelWithContext">
@@ -49,7 +63,9 @@ export const Privacy = () => {
           </div>
         </label>
         <div className="actionInline">
-          <Button variant="secondary">Delete Account</Button>
+          <Button variant="secondary" onClick={accountDelete}>
+            Delete Account
+          </Button>
         </div>
       </div>
     </section>

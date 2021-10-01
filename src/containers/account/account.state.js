@@ -14,6 +14,7 @@ import { userProfileReducers, userProfileSagas } from 'containers/account/profil
 import { userEmailReducers, userEmailSagas } from 'containers/account/email/email.state'
 import { userNotificationReducers, userNotificationSagas } from 'containers/account/notifications/notfications.state' // prettier-ignore
 import { userConnectedServicesReducers, userConnectedServicesSagas } from 'containers/account/connections/connections.state' // prettier-ignore
+import { userPrivacyReducers, userPrivacySagas } from 'containers/account/privacy/privacy.state'
 
 const initialState = {
   auth: false,
@@ -65,7 +66,8 @@ export const accountReducers = {
   userProfile: userProfileReducers,
   userEmail: userEmailReducers,
   userNotifications: userNotificationReducers,
-  userConnectedServices: userConnectedServicesReducers
+  userConnectedServices: userConnectedServicesReducers,
+  userPrivacy: userPrivacyReducers
 }
 
 /** SAGAS :: WATCHERS
@@ -75,7 +77,8 @@ export const userSagas = [
   ...userProfileSagas,
   ...userEmailSagas,
   ...userNotificationSagas,
-  ...userConnectedServicesSagas
+  ...userConnectedServicesSagas,
+  ...userPrivacySagas
 ]
 
 /** SAGA :: RESPONDERS
