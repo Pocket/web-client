@@ -19,7 +19,7 @@ const premiumStyle = css`
   }
 `
 
-export const Premium = () => {
+export const Premium = ({ isPremium }) => {
   return (
     <section className={premiumStyle}>
       <h2>Premium</h2>
@@ -34,7 +34,15 @@ export const Premium = () => {
             It’s a wild internet out there. Pocket Premium gives you a beautiful, ad-free space to
             absorb stories at your own pace—and keep them for however long you’d like.
           </p>
-          <Button variant="brand">Get Pocket Premium</Button>
+          {isPremium ? (
+            <a href="https://getpocket.com/premium/settings">
+              <Button variant="brand">Manage Subscription</Button>
+            </a>
+          ) : (
+            <a href="https://getpocket.com/premium">
+              <Button variant="brand">Get Pocket Premium</Button>
+            </a>
+          )}
         </div>
       </div>
     </section>
