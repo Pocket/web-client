@@ -99,12 +99,9 @@ export const EmailAddresses = ({
           name="addEmail"
           placeholder="Add new email address"
           onChange={onChangeEmailAlias}
+          value={emailAlias}
         />
-        <Button
-          variant="primary"
-          className="actionInline"
-          onClick={onAddEmailAlias}
-          value={emailAlias}>
+        <Button variant="primary" className="actionInline" onClick={onAddEmailAlias}>
           Add Email
         </Button>
         {emailAliasError ? <span className="errorText">{emailAliasError}</span> : null}

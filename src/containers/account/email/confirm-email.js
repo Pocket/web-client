@@ -44,7 +44,11 @@ export const EmailModal = () => {
   const [password, setPassword] = useState(null)
 
   const confirmEmail = () => dispatch(confirmPrimaryEmailUpdate(email, password))
-  const cancelEmail = () => dispatch(cancelPrimaryEmailUpdate())
+  const cancelEmail = () => {
+    setEmail(currentEmail)
+    setPassword('')
+    dispatch(cancelPrimaryEmailUpdate())
+  }
 
   const onChangeEmail = (e) => setEmail(e.target.value)
   const onChangePassword = (e) => setPassword(e.target.value)

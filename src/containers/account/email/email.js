@@ -20,7 +20,10 @@ export const Email = () => {
   const onChangeEmailAlias = (e) => setEmailAlias(e.target.value)
 
   const onChangeEmail = () => dispatch(updatePrimaryEmail())
-  const onAddEmailAlias = () => dispatch(addEmailAliasRequest(emailAlias))
+  const onAddEmailAlias = () => {
+    dispatch(addEmailAliasRequest(emailAlias))
+    setEmailAlias('')
+  }
   const onRemoveAlias = (email) => dispatch(removeEmailAliasRequest(email))
 
   const emailAliasError = errorCodes[aliasError]?.desc || false
