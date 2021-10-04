@@ -103,7 +103,7 @@ export const AvatarModal = () => {
     // Make sure the file isn't ridiculously big
     if (file.size > 2000000) {
       return dispatch(
-        updateAvatarError(`${file.type} is too large. Please keep files size under 2Mb`)
+        dispatch(updateAvatarError(`${file.type} is too large. Please keep files size under 2Mb`))
       )
     }
 
