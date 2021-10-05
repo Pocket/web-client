@@ -2,7 +2,7 @@ import React from 'react'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { itemActionStyle } from 'components/item-actions/base'
 import { useSelector, useDispatch } from 'react-redux'
-import { saveHomeItem } from 'containers/home/home.state'
+import { saveSimilarRec } from 'containers/home/home.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export function ActionsRec({ id, position }) {
@@ -18,7 +18,7 @@ export function ActionsRec({ id, position }) {
   const onSave = () => {
     const data = { id, url: resolved_url, position }
     dispatch(sendSnowplowEvent('home.rec.save', data))
-    dispatch(saveHomeItem(id, save_url, position))
+    dispatch(saveSimilarRec(id, save_url, position))
   }
 
   // Open action

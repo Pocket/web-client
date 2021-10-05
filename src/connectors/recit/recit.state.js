@@ -29,7 +29,7 @@ import {
   READER_REC_UNSAVE_FAILURE
 } from 'actions'
 
-import { ITEMS_ADD_SUCCESS, HOME_SAVE_SUCCESS } from 'actions'
+import { ITEMS_ADD_SUCCESS, HOME_SIMILAR_REC_SAVE_SUCCESS } from 'actions'
 
 import { getPublisherRecs } from 'common/api/recit'
 import { getPocketRecs } from 'common/api/recit'
@@ -115,7 +115,7 @@ export const recitReducers = (state = initialState, action) => {
       }
     }
 
-    case HOME_SAVE_SUCCESS: {
+    case HOME_SIMILAR_REC_SAVE_SUCCESS: {
       const { id } = action
       return {
         ...state,
