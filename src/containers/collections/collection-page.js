@@ -77,7 +77,10 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   // const count = urls?.length
   // const saveCollectionTop = () => dispatch(saveCollection(slug))
   // const saveCollectionBottom = () => dispatch(saveCollection(slug))
-  const url = `${BASE_URL}/collections/${slug}`
+  const languagePrefix = locale === 'en' ? '' : `/${locale}`
+  const canonical = `${BASE_URL}${languagePrefix}/collections/${slug}`
+  const url = canonical
+
   const metaData = { description: excerpt, title, url, image: imageUrl }
   const saveAction = (saveUrl, id) => {
     if (pageSaveStatus === 'saved') dispatch(unSaveCollectionPage(slug))
@@ -88,7 +91,11 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   }
 
   return (
-    <ArticleLayout title={metaData.title} metaData={metaData} className={printLayout}>
+    <ArticleLayout
+      title={metaData.title}
+      canonical={canonical}
+      metaData={metaData}
+      className={printLayout}>
       <main className={contentLayout}>
         <section>
           <AdAboveTheFold allowAds={allowAds} usePersonalized={usePersonalized} />
@@ -140,7 +147,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
           <div className="content-body">
             <img src={heroImage} alt="" className="hero-image" />
 
-            { partnership ? <Partner partnerInfo={partnership} /> : null }
+            {partnership ? <Partner partnerInfo={partnership} /> : null}
 
             <ContentIntro intro={intro} />
 

@@ -38,7 +38,7 @@ const validParams = {
   premium_user: false // external state being managed by native apps
 }
 
-export function SyndicatedArticle({ queryParams = validParams }) {
+export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user?.auth)
@@ -71,7 +71,8 @@ export function SyndicatedArticle({ queryParams = validParams }) {
     showAds
   } = articleData
 
-  const url = `${BASE_URL}/explore/item/${slug}`
+  const languagePrefix = locale === 'en' ? '' : `/${locale}`
+  const url = `${BASE_URL}${languagePrefix}/explore/item/${slug}`
 
   const articleMetaData = {
     url,
@@ -107,7 +108,11 @@ export function SyndicatedArticle({ queryParams = validParams }) {
 
   return (
     <>
-      <ArticleLayout title={title} metaData={articleMetaData} canonical={canonical} className={printLayout}>
+      <ArticleLayout
+        title={title}
+        metaData={articleMetaData}
+        canonical={canonical}
+        className={printLayout}>
         <main className={contentLayout}>
           <section>
             <AdAboveTheFold

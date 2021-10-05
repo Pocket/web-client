@@ -1,4 +1,5 @@
 import Layout from 'layouts/main'
+import { BASE_URL } from 'common/constants'
 
 import { useSelector } from 'react-redux'
 
@@ -12,7 +13,7 @@ import { Toasts } from 'connectors/toasts/toast-list'
 
 import { useTranslation } from 'next-i18next'
 
-export default function Collections() {
+export default function Collections({ locale }) {
   const { t } = useTranslation()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
@@ -21,13 +22,18 @@ export default function Collections() {
   const itemIds = Object.keys(items)
   const shouldRender = userStatus !== 'pending'
 
+  const languagePrefix = locale === 'en' ? '' : `/${locale}`
+  const canonical = `${BASE_URL}${languagePrefix}/collections`
+  const url = canonical
+
   const metaData = {
     description: t('collections:page-description', 'Curated guides to the best of the web'),
-    title: t('collections:page-title', 'Collections for Your Pocket')
+    title: t('collections:page-title', 'Collections for Your Pocket'),
+    url
   }
 
   return (
-    <Layout title={metaData.title} metaData={metaData}>
+    <Layout title={metaData.title} metaData={metaData} canonical={canonical}>
       {!isAuthenticated && shouldRender ? <CallOutBuildHome source="collections" /> : null}
 
       <CardPageHeader title={metaData.title} subHeading={metaData.description} />

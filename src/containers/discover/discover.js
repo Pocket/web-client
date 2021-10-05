@@ -6,6 +6,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 //Pages
 import Layout from 'layouts/main'
+import { BASE_URL } from 'common/constants'
 
 // Components
 import { CardPageHeader } from 'components/headers/discover-header'
@@ -25,7 +26,7 @@ import { Toasts } from 'connectors/toasts/toast-list'
 
 import { useTranslation } from 'next-i18next'
 
-export default function Discover({ url, locale }) {
+export default function Discover({ locale }) {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -36,6 +37,10 @@ export default function Discover({ url, locale }) {
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
   const showTopics = locale === 'en'
+
+  const languagePrefix = locale === 'en' ? '' : `/${locale}`
+  const canonical = `${BASE_URL}${languagePrefix}/explore`
+  const url = canonical
 
   const metaData = {
     description: t(
@@ -75,7 +80,11 @@ export default function Discover({ url, locale }) {
 
       <Lockup items={items} offset={10} heroPosition="left" ItemCard={ItemCard} />
 
-      <CalloutBottom shouldRender={shouldRender} isAuthenticated={isAuthenticated} trackEvent={trackEvent} />
+      <CalloutBottom
+        shouldRender={shouldRender}
+        isAuthenticated={isAuthenticated}
+        trackEvent={trackEvent}
+      />
 
       <OffsetList
         items={items}
@@ -85,9 +94,7 @@ export default function Discover({ url, locale }) {
         border={showTopics}
       />
 
-      {showTopics ? (
-        <CardTopicsNav topics={topics} className="no-border" />
-      ) : null}
+      {showTopics ? <CardTopicsNav topics={topics} className="no-border" /> : null}
 
       <ReportFeedbackModal />
       <Toasts />
@@ -103,10 +110,7 @@ function CalloutTop({ shouldRender, isAuthenticated }) {
       {isAuthenticated ? (
         <CallOutBrand />
       ) : (
-        <CallOutPocketHitsSignup
-          utmCampaign="explore-inline"
-          utmSource="explore"
-        />
+        <CallOutPocketHitsSignup utmCampaign="explore-inline" utmSource="explore" />
       )}
     </div>
   ) : null

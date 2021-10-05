@@ -7,9 +7,9 @@ import TopicPage from './topic-page'
 import { ReportFeedbackModal } from 'connectors/confirm-report/confirm-report'
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 
-export default function Topic(props) {
-  const { url = '', statusCode = 500 } = props
+import { BASE_URL } from 'common/constants'
 
+export default function Topic({ locale, statusCode = 500 }) {
   // Is user logged in?
   const isAuthenticated = useSelector((state) => state.user?.auth)
   const userStatus = useSelector((state) => state.user?.user_status)
@@ -25,6 +25,7 @@ export default function Topic(props) {
 
   const topic = topicList[activeTopic] || activeTopic
   const title = topic?.display_name || topic
+  const slug = topic?.topic_slug || topic
 
   // Error if no items are available
   if (!curatedItems?.length && !algorithmicItems?.length) {
@@ -32,6 +33,10 @@ export default function Topic(props) {
   }
 
   const RenderComponent = PageToRender(topic?.page_type)
+
+  const languagePrefix = locale === 'en' ? '' : `/${locale}`
+  const canonical = `${BASE_URL}${languagePrefix}/explore/${slug}`
+  const url = canonical
 
   const topicMetaData = {
     url,
@@ -41,7 +46,7 @@ export default function Topic(props) {
   }
 
   return (
-    <Layout title={`Pocket: ${title}`} metaData={topicMetaData}>
+    <Layout title={`Pocket: ${title}`} metaData={topicMetaData} canonical={canonical}>
       {!isAuthenticated && shouldRender ? <CallOutBuildHome /> : null}
 
       <RenderComponent
