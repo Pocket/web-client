@@ -40,7 +40,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       await sagaTask.toPromise()
 
       return {
-        props: { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])) }
+        props: { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])), locale }
       }
     }
 )

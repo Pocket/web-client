@@ -22,7 +22,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = wrapper.getStaticProps((store) => async ({ params, locale }) => {
-  const defaultProps = { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])) }
+  const defaultProps = { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])), locale }
 
   const { slug } = params
 
