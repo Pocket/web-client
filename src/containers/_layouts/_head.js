@@ -2,11 +2,11 @@ import Head from 'next/head'
 import { getImageCacheUrl } from 'common/utilities'
 import { FACEBOOK_APP_ID } from 'common/constants'
 
-export const PocketHead = ({ metaData, title: pageTitle, canonical }) => {
-  const { url = '', description = '', title = '', type, image } = metaData
+export const PocketHead = ({ metaData = {}, title: pageTitle, canonical }) => {
+  const { url = '', description = '', title = '', type = 'website', image } = metaData
 
   const twitterCardType = image ? 'summary_large_image' : 'summary'
-  const ogType = type || 'website'
+  const ogType = type
 
   const preferredImageSize = { width: 1200 }
   const imageCacheUrl = image ? getImageCacheUrl(image, preferredImageSize) : null
