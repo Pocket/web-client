@@ -1,11 +1,10 @@
-import Head from 'next/head'
 import { useSelector } from 'react-redux'
 import { css } from 'linaria'
 import { breakpointMediumTablet, breakpointTinyTablet } from '@pocket/web-ui'
 import { GlobalFooter } from 'components/global-footer/global-footer'
 import { PageContainer } from '@pocket/web-ui'
 import GlobalNav from 'connectors/global-nav/global-nav'
-import { SocialMetaData } from 'components/social-meta-data/social-meta-data'
+import { PocketHead } from 'containers/_layouts/_head'
 
 export const InfoPageStyles = css`
   .page-container {
@@ -55,17 +54,12 @@ export const InfoPageStyles = css`
   }
 `
 
-const InfoPageLayout = ({ metaData, children, title = 'Pocket' }) => {
+const InfoPageLayout = ({ metaData, children, canonical, title = 'Pocket' }) => {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
-  const renderSocialMeta = metaData?.description && metaData?.title
 
   return (
     <main className={InfoPageStyles}>
-      <Head>
-        <title>{title}</title>
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        {!!renderSocialMeta ? <SocialMetaData {...metaData} /> : null}
-      </Head>
+      <PocketHead title={title} canonical={canonical} metaData={metaData} />
 
       <GlobalNav isLoggedIn={isLoggedIn} />
 
