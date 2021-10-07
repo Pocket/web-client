@@ -1,16 +1,15 @@
 {
   "parser": "@babel/eslint-parser",
-  "ignorePatterns": ["*.stories.js", "*.spec.js"],
+  "ignorePatterns": [
+    "*.stories.js",
+    "*.spec.js"
+  ],
   "extends": [
-    "react-app",
     "prettier",
     "plugin:cypress/recommended"
   ],
   "plugins": [
-    "prettier",
-    "jsx-a11y",
-    "testing-library",
-    "jest-dom"
+    "prettier"
   ],
   "globals": {
     "React": false,
