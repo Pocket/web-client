@@ -1,4 +1,4 @@
-import { injectLibScript, injectInlineScript } from '@pocket/web-utilities'
+import { injectLibScript, injectInlineScript } from 'common/utilities/inject-script'
 
 const loadAdLibraries = () => {
   const makeAsync = true

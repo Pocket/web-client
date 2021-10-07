@@ -23,7 +23,7 @@ import { createSizeMapping } from './ad-helpers'
 import loadAdLibraries from './load-third-party-scripts'
 import { getEtpValue } from 'common/utilities/third-party/etp-checker'
 import { fontSansSerif, fontSize085, spacing050 } from '@pocket/web-ui'
-import { once } from '@pocket/web-utilities/once'
+import { once } from 'common/utilities/once/once'
 
 export const AD_TYPE_VERTICAL = 'vertical'
 export const AD_TYPE_HORIZONTAL_LG = 'horizontal-large'

@@ -9,7 +9,7 @@ These scripts can be used to load third party scripts or execute code snippets i
 Appends a `<script>` to the `<body>` and assigns a url as its `src attribute, for loading external scripts.
 
 ```js
-import { injectLibScript } from '@pocket/web-utilities'
+import { injectLibScript } from 'common/utilities/inject-script'
 
 injectLibScript('https://catscripts.com/meow.js', true)
 ```
@@ -19,7 +19,7 @@ injectLibScript('https://catscripts.com/meow.js', true)
 Appends a `<script>` to the `<body>` and inserts JS code (as a string) into it to execute.
 
 ```js
-import { injectInlinecript } from '@pocket/web-utilities'
+import { injectInlinecript  } from 'common/utilities/inject-script'
 
 injectInlineScript('alert("meow")', true)
 ```

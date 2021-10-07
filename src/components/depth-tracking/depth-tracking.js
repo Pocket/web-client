@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import { once } from '@pocket/web-utilities/once'
+import { once } from 'common/utilities/once'
 
 const DEPTHS_TO_TRACK = [25, 50, 75, 100]
 
