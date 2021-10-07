@@ -19,7 +19,7 @@ import { Toasts } from 'connectors/toasts/toast-list'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { HomeSimilarRecs } from 'containers/home/personalized/home-similar-recs'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-// import { Onboarding } from 'connectors/onboarding/onboarding'
+import { Onboarding } from 'connectors/onboarding/onboarding'
 
 export const HomePersonalized = ({ metaData }) => {
   const dispatch = useDispatch()
@@ -44,6 +44,10 @@ export const HomePersonalized = ({ metaData }) => {
       {topicSlates?.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
       ))}
+
+      <Onboarding type="home.flyaway.save.alt" />
+      <Onboarding type="home.flyaway.my-list.alt" />
+      <Onboarding type="home.modal.alt" />
 
       <HomeSimilarRecs />
       <DeleteModal />
