@@ -14,7 +14,7 @@ export const HomeRecentSaves = () => {
     dispatch(getRecentSaves())
   }, [dispatch])
 
-  return recentSaves?.length ? (
+  return recentSaves?.length > 2 ? (
     <>
       <HomeSectionHeader
         sectionTitle="Recent Saves"
