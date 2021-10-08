@@ -5,8 +5,11 @@ import { breakpointSmallHandset, breakpointMediumTablet } from '@pocket/web-ui'
 import EmailSignupForm from 'components/email-signup-form/email-signup-form'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import Border from 'static/images/pocket-hits-chyron/border.svg'
-import EnvelopeGreen from 'static/images/pocket-hits-chyron/envelope-green.svg'
-import EnvelopeRed from 'static/images/pocket-hits-chyron/envelope-red.svg'
+import Green from 'static/images/pocket-hits-chyron/envelope-green.svg'
+import Red from 'static/images/pocket-hits-chyron/envelope-red.svg'
+
+const EnvelopeGreen = Green.src || ''
+const EnvelopeRed = Red.src || ''
 
 const DEFAULT_ERROR = 'Oops! Something went wrong.'
 const FORM_ID = 'syndicated-article-illustrated-chyron'
@@ -49,7 +52,7 @@ const ctaBox = css`
       height: 186px;
       width: 169px;
       content: '';
-      background-image: url(${EnvelopeGreen.src});
+      background-image: url(${EnvelopeGreen});
       background-repeat: no-repeat;
       background-position: center center;
       background-size: contain;
@@ -87,7 +90,7 @@ const ctaBox = css`
         height: 196px;
         width: 178px;
         content: '';
-        background-image: url(${EnvelopeGreen.src});
+        background-image: url(${EnvelopeGreen});
         background-repeat: no-repeat;
         background-position: center center;
         background-size: contain;
@@ -129,7 +132,7 @@ const closeIcon = css`
 const illustration = css`
   width: 178px;
   height: 196px;
-  background-image: url(${EnvelopeRed.src});
+  background-image: url(${EnvelopeRed});
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
