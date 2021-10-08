@@ -49,7 +49,7 @@ const ctaBox = css`
       height: 186px;
       width: 169px;
       content: '';
-      background-image: url(${EnvelopeGreen});
+      background-image: url(${EnvelopeGreen.src});
       background-repeat: no-repeat;
       background-position: center center;
       background-size: contain;
@@ -87,7 +87,7 @@ const ctaBox = css`
         height: 196px;
         width: 178px;
         content: '';
-        background-image: url(${EnvelopeGreen});
+        background-image: url(${EnvelopeGreen.src});
         background-repeat: no-repeat;
         background-position: center center;
         background-size: contain;
@@ -129,7 +129,7 @@ const closeIcon = css`
 const illustration = css`
   width: 178px;
   height: 196px;
-  background-image: url(${EnvelopeRed});
+  background-image: url(${EnvelopeRed.src});
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;

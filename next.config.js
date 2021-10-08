@@ -13,12 +13,12 @@ const SentryWebpackPluginOptions = {
 }
 
 const nextOptions = {
-  webpack5: false,
   i18n,
   env: {
     SHOW_DEV: process.env.SHOW_DEV,
     RELEASE_VERSION: process.env.RELEASE_VERSION
   },
+  assetPrefix,
   async rewrites() {
     return [
       { source: '/explore', destination: '/discover' },
@@ -55,24 +55,11 @@ const nextOptions = {
           config.resolve.alias['@sentry/node'] = '@sentry/react'
         }
 
-        config.module.rules.push({
-          test: assetRegEx,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                publicPath: `${assetPrefix}/_next/static/images/`,
-                outputPath: `${isServer ? '../' : ''}static/images/`,
-                name: '[name].[hash].[ext]'
-              }
-            }
-          ]
-        })
-
         config.plugins.push(
           new webpack.DefinePlugin({
             'process.env.BUILD_ID':  JSON.stringify(nextBuildId.sync({ dir: __dirname }))
-          })
+          }),
+          new webpack.ContextReplacementPlugin(/power-assert-formatter/)
         )
 
         return config
