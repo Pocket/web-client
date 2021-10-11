@@ -1,24 +1,16 @@
 {
-  "parser": "@babel/eslint-parser",
+  "extends": "next/core-web-vitals",
   "ignorePatterns": [
     "*.stories.js",
     "*.spec.js"
   ],
-  "extends": [
-    "prettier",
-    "plugin:cypress/recommended"
-  ],
-  "plugins": [
-    "prettier"
-  ],
   "globals": {
-    "React": false,
     "snowplow": true
   },
   "rules": {
-    "react/react-in-jsx-scope": "off",
-    "jsx-a11y/anchor-is-valid": "off",
-    "no-unneeded-ternary": "warn",
+    "react/no-unescaped-entities": "off",
+    "react/no-deprecated": "off",
+    "@next/next/no-sync-scripts": "off",
     "no-console": [
       "error",
       {
@@ -40,26 +32,6 @@
     "semi": [
       "error",
       "never"
-    ],
-    "no-unused-vars": [
-      "warn",
-      {
-        "vars": "all",
-        "args": "after-used"
-      }
     ]
-  },
-  "overrides": [
-    {
-      "files": [
-        "src/**/*.stories.js"
-      ],
-      "rules": {
-        "import/no-anonymous-default-export": "off"
-      }
-    }
-  ],
-  "env": {
-    "mocha": true
   }
 }
