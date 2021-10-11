@@ -4,10 +4,11 @@ import { CrossIcon } from '@pocket/web-ui'
 import { breakpointSmallHandset, breakpointMediumTablet } from '@pocket/web-ui'
 import EmailSignupForm from 'components/email-signup-form/email-signup-form'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import Border from 'static/images/pocket-hits-chyron/border.svg'
+import BorderSVG from 'static/images/pocket-hits-chyron/border.svg'
 import Green from 'static/images/pocket-hits-chyron/envelope-green.svg'
 import Red from 'static/images/pocket-hits-chyron/envelope-red.svg'
 
+const Border = BorderSVG.src || ''
 const EnvelopeGreen = Green.src || ''
 const EnvelopeRed = Red.src || ''
 
