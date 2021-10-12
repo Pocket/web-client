@@ -68,6 +68,42 @@ export const homeActions = {
     },
     expects: ['id', 'url', 'position']
   },
+  'home.similar.impression': {
+    eventType: 'impression',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: ['id', 'url', 'position']
+  },
+  'home.similar.save': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      engagementType: 'save',
+      uiType: 'button'
+    },
+    expects: ['id', 'url', 'position']
+  },
+  'home.recent.impression': {
+    eventType: 'impression',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: ['id', 'url', 'position']
+  },
+  'home.recent.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      destination: 'internal',
+      uiType: 'card'
+    },
+    expects: ['url', 'position']
+  },
   'home.collection.open': {
     eventType: 'contentOpen',
     entityTypes: ['content', 'ui'],
@@ -104,11 +140,43 @@ export const homeActions = {
   },
   'home.lineup.open': {
     eventType: 'contentOpen',
-    entityTypes: ['content', 'ui'],
+    entityTypes: ['content', 'recommendation', 'slate', 'slateLineup', 'ui'],
     eventData: {
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position', 'destination']
+    expects: [
+      'id',
+      'url',
+      'position',
+      'destination',
+      'recommendationId',
+      'slateLineupId',
+      'slateLineupRequestId',
+      'slateLineupExperiment',
+      'slateId',
+      'slateRequestId',
+      'slateExperiment'
+    ]
+  },
+  'home.lineup.view-original': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'recommendation', 'slate', 'slateLineup', 'ui'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'id',
+      'url',
+      'position',
+      'destination',
+      'recommendationId',
+      'slateLineupId',
+      'slateLineupRequestId',
+      'slateLineupExperiment',
+      'slateId',
+      'slateRequestId',
+      'slateExperiment'
+    ]
   },
   'home.lineup.impression': {
     eventType: 'impression',
