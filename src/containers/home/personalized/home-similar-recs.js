@@ -7,6 +7,9 @@ import { RecCard } from 'connectors/item-card/home/card-rec'
 import { OffsetList } from 'components/items-layout/list-offset'
 import { css } from 'linaria'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
+import SimilarSearchSVG from 'static/images/home/similarSearch.svg'
+
+const SimilarSearch = SimilarSearchSVG.src || ''
 
 const similarRecsContainer = css`
   position: fixed;
@@ -27,15 +30,32 @@ const similarRecsContainer = css`
   }
 `
 
+const noSimilarRecs = css`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-column-gap: 1rem;
+  align-content: center;
+  align-items: center;
+  .visuals {
+    grid-column: span 3;
+  }
+
+  .contentBody {
+    grid-column: 5 / span 8;
+  }
+`
+
 export const HomeSimilarRecs = () => {
   const dispatch = useDispatch()
 
   const similarRecId = useSelector((state) => state.home.similarRecId)
+  const similarRecsResolved = useSelector((state) => state.home.similarRecsResolved)
   const similarRecs = useSelector((state) => state.recit.recentRecs)
   const similarRecIds = similarRecs ? Object.keys(similarRecs) : []
   const closeAction = () => dispatch(clearSimilarRecs())
 
-  const sectionClass = similarRecId && similarRecIds.length ? 'active' : 'inactive'
+  const sectionClass = similarRecsResolved ? 'active' : 'inactive'
 
   useEffect(() => {
     if (!similarRecId) return
@@ -44,13 +64,13 @@ export const HomeSimilarRecs = () => {
 
   return (
     <div className={`${similarRecsContainer} ${sectionClass}`}>
-      <SectionWrapper>
-        <HomeSimilarHeader
-          closeAction={closeAction}
-          sectionTitle="Similar Content"
-          sectionDescription="Recommended stories base on your selection"
-        />
-        {similarRecIds.length ? (
+      {similarRecIds.length ? (
+        <SectionWrapper>
+          <HomeSimilarHeader
+            closeAction={closeAction}
+            sectionTitle="Similar Content"
+            sectionDescription="Recommended stories base on your selection"
+          />
           <OffsetList
             items={similarRecIds}
             offset={0}
@@ -62,8 +82,29 @@ export const HomeSimilarRecs = () => {
             border={false}
             compact={true}
           />
-        ) : null}
-      </SectionWrapper>
+        </SectionWrapper>
+      ) : (
+        <NoResults closeAction={closeAction} similarRecsResolved={similarRecsResolved} />
+      )}
     </div>
+  )
+}
+
+const NoResults = ({ closeAction, similarRecsResolved }) => {
+  return similarRecsResolved ? (
+    <SectionWrapper>
+      <div className={noSimilarRecs}>
+        <img className="visuals" src={SimilarSearch} alt="" />
+        <div className="contentBody">
+          <HomeSimilarHeader
+            closeAction={closeAction}
+            sectionTitle="You’re such a trendsetter!"
+            sectionDescription="We don’t have any recommendations for this content yet. We will get right on that!"
+          />
+        </div>
+      </div>
+    </SectionWrapper>
+  ) : (
+    <SectionWrapper>Loading...</SectionWrapper>
   )
 }
