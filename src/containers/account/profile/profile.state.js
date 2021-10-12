@@ -1,5 +1,6 @@
 import { put, takeLatest, select, delay, call } from 'redux-saga/effects'
 import { putAccountChange, setAvatar } from 'common/api/account'
+import { LOGIN_URL } from 'common/constants'
 import { USER_SUCCESS } from 'actions'
 
 import { ACCOUNT_FIRST_NAME_UPDATE } from 'actions'
@@ -197,9 +198,10 @@ function* accountUsernameUpdate(action) {
   })
 
   if (status === 1) {
-    return yield put({ type: ACCOUNT_USERNAME_UPDATE_SUCCESS })
+    yield put({ type: ACCOUNT_USERNAME_UPDATE_SUCCESS })
+    document.location.href = LOGIN_URL
+    return
   }
-
   yield put({ type: ACCOUNT_USERNAME_UPDATE_FAILURE, err: error })
 }
 
@@ -212,7 +214,9 @@ function* accountPasswordUpdate(action) {
   })
 
   if (status === 1) {
-    return yield put({ type: ACCOUNT_PASSWORD_UPDATE_SUCCESS })
+    yield put({ type: ACCOUNT_PASSWORD_UPDATE_SUCCESS })
+    document.location.href = LOGIN_URL
+    return
   }
 
   yield put({ type: ACCOUNT_PASSWORD_UPDATE_FAILURE, err: error })

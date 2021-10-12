@@ -20,7 +20,7 @@ export const Profile = () => {
   const firstName = useSelector((state) => state?.userProfile?.first_name)
   const lastName = useSelector((state) => state?.userProfile?.last_name)
   const userName = useSelector((state) => state?.userProfile?.username)
-  const bio = useSelector((state) => state?.userProfile?.description)
+  const bio = useSelector((state) => state?.userProfile?.description) || ''
 
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
 
