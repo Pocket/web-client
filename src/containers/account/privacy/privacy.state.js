@@ -2,6 +2,7 @@ import { put, takeLatest, call } from 'redux-saga/effects'
 import { setRssProtection } from 'common/api/account'
 import { clearAccount } from 'common/api/account'
 import { deleteAccount } from 'common/api/account'
+import { LOGIN_URL } from 'common/constants'
 
 import { ACCOUNT_FEED_PROTECTION_REQUEST } from 'actions'
 import { ACCOUNT_FEED_PROTECTION_SUCCESS } from 'actions'
@@ -25,6 +26,7 @@ const initialState = {
   deleteRequestError: false,
   clearRequest: false,
   clearRequestError: false,
+  clearRequestSuccess: true,
   rssProtected: true
 }
 
@@ -52,11 +54,15 @@ export const userPrivacyReducers = (state = initialState, action) => {
     }
 
     case ACCOUNT_CLEAR_REQUEST: {
-      return { ...state, clearRequest: true }
+      return { ...state, clearRequest: true, clearRequestSuccess: false }
     }
 
     case ACCOUNT_CLEAR_CANCEL: {
-      return { ...state, clearRequest: false }
+      return { ...state, clearRequest: false, clearRequestSuccess: false }
+    }
+
+    case ACCOUNT_CLEAR_SUCCESS: {
+      return { ...state, clearRequest: true, clearRequestSuccess: true }
     }
 
     case ACCOUNT_CLEAR_FAILURE: {
@@ -106,6 +112,7 @@ function* accountDeleteProcess() {
   const { status, error } = response
 
   if (status === 1) {
+    document.location.href = LOGIN_URL
     return yield put({ type: ACCOUNT_DELETE_SUCCESS })
   }
 

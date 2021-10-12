@@ -1,3 +1,12 @@
+## [1.23.9](https://github.com/Pocket/web-client/compare/v1.23.8...v1.23.9) (2021-10-12)
+
+
+### Bug Fixes
+
+* **account:** add warnings and completions ([3cd338e](https://github.com/Pocket/web-client/commit/3cd338ebe6ab341ab023563dd916e8c03b1cf9d1))
+* **account:** appropriate endpoint clear/delete ([4e7db4a](https://github.com/Pocket/web-client/commit/4e7db4a9ed20f1e754212362605e10cd7922e692))
+* **account:** privacy warnings and actions ([e803cd5](https://github.com/Pocket/web-client/commit/e803cd5f5d6a1fda22fc0539c4cbdc01499833d4))
+
 ## [1.23.8](https://github.com/Pocket/web-client/compare/v1.23.7...v1.23.8) (2021-10-12)
 
 
