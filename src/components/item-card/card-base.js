@@ -321,6 +321,48 @@ export const cardStyles = css`
       padding: 0 0 0.725rem;
       transform: translateX(-0.25rem);
     }
+
+    ${breakpointTinyTablet} {
+      --card-column-span: span 12;
+      .title {
+        font-size: 1rem;
+        line-height: 1.25;
+      }
+      .details {
+        font-style: normal;
+        padding: var(--size050) 0;
+        font-size: var(--fontSize085);
+        line-height: 1.5;
+        display: block;
+        color: var(--color-textSecondary);
+      }
+      &.hiddenActions .actions {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 0 1rem;
+        button,
+        a {
+          display: flex;
+        }
+      }
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+
+      .cardWrap {
+        display: grid;
+        padding-bottom: 1.85rem;
+      }
+
+      .footer .actions {
+        grid-column: 5 / span 8;
+        padding-bottom: 0.5rem;
+        .item-actions {
+          transform: none;
+        }
+      }
+    }
   }
 
   /** List style

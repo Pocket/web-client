@@ -43,25 +43,27 @@ export const HomeSimilarRecs = () => {
   }, [similarRecId, dispatch])
 
   return (
-    <SectionWrapper className={`${similarRecsContainer} ${sectionClass}`}>
-      <HomeSimilarHeader
-        closeAction={closeAction}
-        sectionTitle="Similar Content"
-        sectionDescription="Recommended stories base on your selection"
-      />
-      {similarRecIds.length ? (
-        <OffsetList
-          items={similarRecIds}
-          offset={0}
-          ItemCard={RecCard}
-          count={3}
-          cardShape="display"
-          showMedia={true}
-          showExcerpt={false}
-          border={false}
-          compact={true}
+    <div className={`${similarRecsContainer} ${sectionClass}`}>
+      <SectionWrapper>
+        <HomeSimilarHeader
+          closeAction={closeAction}
+          sectionTitle="Similar Content"
+          sectionDescription="Recommended stories base on your selection"
         />
-      ) : null}
-    </SectionWrapper>
+        {similarRecIds.length ? (
+          <OffsetList
+            items={similarRecIds}
+            offset={0}
+            ItemCard={RecCard}
+            count={3}
+            cardShape="display"
+            showMedia={true}
+            showExcerpt={false}
+            border={false}
+            compact={true}
+          />
+        ) : null}
+      </SectionWrapper>
+    </div>
   )
 }
