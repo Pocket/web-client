@@ -86,6 +86,29 @@ export const homeActions = {
     },
     expects: ['id', 'url', 'position']
   },
+  'home.similar.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      destination: 'internal',
+      uiType: 'card'
+    },
+    expects: ['url', 'position']
+  },
+  'home.similar.view-original': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'recommendation', 'ui'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'id',
+      'url',
+      'position',
+      'destination',
+      'recommendationId',
+    ]
+  },
   'home.recent.impression': {
     eventType: 'impression',
     entityTypes: ['content', 'ui'],
@@ -103,6 +126,19 @@ export const homeActions = {
       uiType: 'card'
     },
     expects: ['url', 'position']
+  },
+  'home.recent.view-original': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'id',
+      'url',
+      'position',
+      'destination',
+    ]
   },
   'home.collection.open': {
     eventType: 'contentOpen',

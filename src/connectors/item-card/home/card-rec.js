@@ -36,10 +36,14 @@ export const RecCard = ({
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
+   const onOpenOriginalUrl = () => {
+    const data = { ...analyticsData, destination: 'external' }
+    dispatch(sendSnowplowEvent('home.similar.view-original', data))
+  }
   const onOpen = () => dispatch(sendSnowplowEvent('home.similar.open', analyticsData))
   const onImpression = () => dispatch(sendSnowplowEvent('home.similar.impression', analyticsData))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
-
+  
   return item ? (
     <Card
       item={item}
@@ -53,6 +57,7 @@ export const RecCard = ({
       // Tracking
       onItemInView={onItemInView}
       onOpen={onOpen}
+      onOpenOriginalUrl={onOpenOriginalUrl}
       ActionMenu={ActionsRec}
     />
   ) : null
