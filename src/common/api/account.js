@@ -64,7 +64,7 @@ export const setRssProtection = (isOn) => {
 export const clearAccount = () => {
   return request({
     method: 'POST',
-    path: 'v3/clearAccount',
+    path: 'v3/accountClear',
     auth: true
   })
 }
@@ -72,7 +72,7 @@ export const clearAccount = () => {
 export const deleteAccount = () => {
   return request({
     method: 'POST',
-    path: 'v3/deleteAccount',
+    path: 'v3/accountDelete',
     auth: true
   })
 }
