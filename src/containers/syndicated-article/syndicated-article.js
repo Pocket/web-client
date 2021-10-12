@@ -202,18 +202,23 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
                 handlePublisherImpression={trackPublisherCTAImpression}
                 handlePublisherClick={trackPublisherCTAClick}
               />
-              <AdBelowTheFold
-                allowAds={allowAds}
-                usePersonalized={usePersonalized}
-                iabTopCategory={iabTopCategory}
-                iabSubCategory={iabSubCategory}
-                curationCategory={curationCategory}
-                legacyId={legacyId}
-              />
-
-              {!isMobileWebView ? <PocketRecs itemId={originalItemId} legacyId={legacyId} /> : null}
-              {!isMobileWebView ? <TopicsBubbles topics={topics} className="no-border" /> : null}
             </footer>
+          </section>
+
+          <section>
+            <AdBelowTheFold
+              allowAds={allowAds}
+              usePersonalized={usePersonalized}
+              iabTopCategory={iabTopCategory}
+              iabSubCategory={iabSubCategory}
+              curationCategory={curationCategory}
+              legacyId={legacyId}
+            />
+          </section>
+
+          <section className="content-section">
+            {!isMobileWebView ? <PocketRecs itemId={originalItemId} legacyId={legacyId} /> : null}
+            {!isMobileWebView ? <TopicsBubbles topics={topics} className="no-border" /> : null}
           </section>
         </main>
         <Toasts />
