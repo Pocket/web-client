@@ -3,11 +3,8 @@ import { useSelector } from 'react-redux'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 import { HomeWelcomeModal } from './messages/home-welcome-modal'
-import { HomeWelcomeModalAlt } from './messages/home-welcome-modal-alt'
 import { HomeFlyawaySave } from './messages/home-flyaway-save'
-import { HomeFlyawaySaveAlt } from './messages/home-flyaway-save-alt'
 import { HomeFlyawayMyList } from './messages/home-flyaway-my-list'
-import { HomeFlyawayMyListAlt } from './messages/home-flyaway-my-list-alt'
 import { MyListFlyawayReader } from './messages/my-list-flyaway-reader'
 import { MyListFlyawayExtensions } from './messages/my-list-flyaway-extensions'
 import { ReaderFlyawayApps } from './messages/reader-flyaway-apps'
@@ -25,10 +22,7 @@ export const Onboarding = ({ type, ...rest }) => {
 
   const onboardingTypes = {
     'home.modal': HomeWelcomeModal,
-    'home.modal.alt': HomeWelcomeModalAlt,
-    'home.flyaway.save.alt': HomeFlyawaySaveAlt,
     'home.flyaway.save': HomeFlyawaySave,
-    'home.flyaway.my-list.alt': HomeFlyawayMyListAlt,
     'home.flyaway.my-list': HomeFlyawayMyList,
     'my-list.flyaway.reader': MyListFlyawayReader,
     'my-list.flyaway.extensions': MyListFlyawayExtensions,

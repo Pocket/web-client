@@ -12,7 +12,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { SaveFilledIcon } from '@pocket/web-ui'
 import RainbowReader from 'static/images/rainbow-reader-transparent.svg'
 
-export const modalBodyStyles = css`
+const modalBodyStyles = css`
   .onboarding-modal-body {
     padding: 0;
   }
@@ -87,7 +87,7 @@ export const modalBodyStyles = css`
 
 // overrides the mobile styling due to an issue in chrome/safari where the
 // modal is too tall and gets cut off on smaller devices
-export const modalContentClass = css`
+const modalContentClass = css`
   ${breakpointLargeHandset} {
     max-height: 100%;
   }
