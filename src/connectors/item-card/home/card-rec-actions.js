@@ -17,7 +17,7 @@ export function ActionsRec({ id, position }) {
   // Prep save action
   const onSave = () => {
     const data = { id, url: resolved_url, position }
-    dispatch(sendSnowplowEvent('home.rec.save', data))
+    dispatch(sendSnowplowEvent('home.similar.save', data))
     dispatch(saveSimilarRec(id, save_url, position))
   }
 
@@ -25,7 +25,7 @@ export function ActionsRec({ id, position }) {
   const url = openExternal ? open_url : `/read/${id}`
   const onOpen = () => {
     const data = { id, url, position, destination: 'internal' }
-    dispatch(sendSnowplowEvent('home.rec.open', data))
+    dispatch(sendSnowplowEvent('home.similar.open', data))
   }
 
   return item ? (
