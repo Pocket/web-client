@@ -322,8 +322,25 @@ export const cardStyles = css`
       transform: translateX(-0.25rem);
     }
 
+    ${breakpointLargeTablet} {
+      --media-column-span: span 12;
+      --content-column-span: span 12;
+      .cardWrap {
+        grid-column-gap: 0;
+      }
+      .footer .actions {
+        grid-column: span 12;
+      }
+    }
+
     ${breakpointTinyTablet} {
       --card-column-span: span 12;
+      --media-column-span: span 4;
+      --content-column-span: span 8;
+      .cardWrap {
+        grid-column-gap: 1rem;
+        padding-bottom: 0.25rem;
+      }
       .title {
         font-size: 1rem;
         line-height: 1.25;
@@ -350,14 +367,9 @@ export const cardStyles = css`
         border-bottom: none;
       }
 
-      .cardWrap {
-        display: grid;
-        padding-bottom: 1.85rem;
-      }
-
       .footer .actions {
         grid-column: 5 / span 8;
-        padding-bottom: 0.5rem;
+        padding-bottom: 1rem;
         .item-actions {
           transform: none;
         }
