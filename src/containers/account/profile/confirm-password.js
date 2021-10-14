@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button } from '@pocket/web-ui'
+import { Button, ErrorIcon } from '@pocket/web-ui'
 import { css } from 'linaria'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
@@ -33,6 +33,28 @@ const updatePasswordStyles = css`
   }
 `
 
+const updatePasswordFooter = css`
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  .footerWarning {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    color: var(--color-error);
+    font-family: var(--fontSansSerif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.875rem;
+    line-height: 24px;
+    .icon {
+      margin-top: 0;
+      margin-right: 0.5rem;
+      height: 24px;
+    }
+  }
+`
+
 export const PasswordModal = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -41,9 +63,9 @@ export const PasswordModal = () => {
   const showModal = useSelector((state) => state.userProfile?.updatingPassword)
   const passwordError = useSelector((state) => state.userProfile?.updatingPasswordError)
 
-  const [oldpassword, setOldPassword] = useState(null)
-  const [newpassword, setNewPassword] = useState(null)
-  const [confirmation, setConfirmation] = useState(null)
+  const [oldpassword, setOldPassword] = useState('')
+  const [newpassword, setNewPassword] = useState('')
+  const [confirmation, setConfirmation] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
   const onChangeOldPassword = (e) => setOldPassword(e.target.value)
@@ -102,7 +124,10 @@ export const PasswordModal = () => {
 
         <div>{passwordError ? <span className="errorText">{error}</span> : null}</div>
       </ModalBody>
-      <ModalFooter>
+      <ModalFooter className={updatePasswordFooter}>
+        <div className="footerWarning">
+          <ErrorIcon /> Changing your password will log you out.
+        </div>
         <Button type="submit" data-cy="update-password-confirm" onClick={confirmPassword}>
           Update Password
         </Button>

@@ -9,7 +9,7 @@ for tracking and security reasons. The url is uri encoded and appended
 to `https://getpocket.com/redirect` as a `url` parameter
 
 ```js
-import { urlWithPocketRedirect } from '@pocket/web-utilities/pocket-redirect-url'
+import { urlWithPocketRedirect } from 'common/utilities/urls/urls'
 
 const url = urlWithPocketRedirect(articleUrl)
 ```

@@ -1,4 +1,4 @@
-import { Button } from '@pocket/web-ui'
+import { Button, ErrorIcon } from '@pocket/web-ui'
 import { css } from 'linaria'
 
 import { useState } from 'react'
@@ -31,6 +31,29 @@ const updateUsernameStyles = css`
     line-height: 1;
   }
 `
+
+const updatePasswordFooter = css`
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  .footerWarning {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    color: var(--color-error);
+    font-family: var(--fontSansSerif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.875rem;
+    line-height: 24px;
+    .icon {
+      margin-top: 0;
+      margin-right: 0.5rem;
+      height: 24px;
+    }
+  }
+`
+
 export const UsernameModal = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -39,8 +62,8 @@ export const UsernameModal = () => {
   const showModal = useSelector((state) => state.userProfile?.updatingUsername)
   const usernameError = useSelector((state) => state.userProfile?.updatingUsernameError)
 
-  const [username, setUsername] = useState(null)
-  const [password, setPassword] = useState(null)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   const confirmUsernmame = () => dispatch(confirmUsernameUpdate(username, password))
   const cancelUsername = () => dispatch(cancelUsernameUpdate())
@@ -70,7 +93,10 @@ export const UsernameModal = () => {
 
         <div>{usernameError ? <span className="errorText">{error}</span> : null}</div>
       </ModalBody>
-      <ModalFooter>
+      <ModalFooter className={updatePasswordFooter}>
+        <div className="footerWarning">
+          <ErrorIcon /> Changing your username will log you out.
+        </div>
         <Button type="submit" data-cy="update-username-confirm" onClick={confirmUsernmame}>
           Update Username
         </Button>

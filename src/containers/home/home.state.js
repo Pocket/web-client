@@ -37,6 +37,8 @@ import { HOME_LINEUP_REQUEST } from 'actions'
 import { HOME_LINEUP_SUCCESS } from 'actions'
 import { HOME_LINEUP_FAILURE } from 'actions'
 
+import { RECENT_RECS_SUCCESS } from 'actions'
+import { RECENT_RECS_FAILURE } from 'actions'
 import { HOME_SIMILAR_REC_REQUEST } from 'actions'
 import { HOME_SIMILAR_RECS_CLEAR } from 'actions'
 
@@ -73,7 +75,8 @@ const initialState = {
   recentSaves: [],
   slates: [],
   slatesById: {},
-  newSaves: 0
+  newSaves: 0,
+  similarRecsResolved: false
 }
 
 export const homeReducers = (state = initialState, action) => {
@@ -85,11 +88,16 @@ export const homeReducers = (state = initialState, action) => {
 
     case HOME_SIMILAR_REC_REQUEST: {
       const { id } = action
-      return { ...state, similarRecId: id }
+      return { ...state, similarRecId: id, similarRecsResolved: false }
+    }
+
+    case RECENT_RECS_SUCCESS:
+    case RECENT_RECS_FAILURE: {
+      return { ...state, similarRecsResolved: true }
     }
 
     case HOME_SIMILAR_RECS_CLEAR: {
-      return { ...state, similarRecId: false }
+      return { ...state, similarRecId: false, similarRecsResolved: false }
     }
 
     case HOME_TOPIC_SECTION_SUCCESS: {

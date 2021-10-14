@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { getTimeOfDay } from 'common/utilities'
 import { css } from 'linaria'
+import { useTranslation, Trans } from 'next-i18next'
 
 const homeCollections = css`
   font-family: 'Graphik Web';
@@ -12,11 +13,38 @@ const homeCollections = css`
 `
 
 export const HomeGreeting = () => {
+  const { t } = useTranslation()
+  const recentSaves = useSelector((state) => state.home.recentSaves)
+
   const firstName = useSelector((state) => state.userProfile.first_name)
   const timeOfDay = getTimeOfDay()
 
-  const showName = firstName && firstName.length < 30
-  const greeting = showName ? `Good ${timeOfDay}, ${firstName}!` : `Good ${timeOfDay}!`
+  const noNameGreeting = {
+    morning: t('home:good-morning', 'Good morning!'),
+    afternoon: t('home:good-afternoon', 'Good afternoon!'),
+    evening: t('home:good-evening', 'Good evening!')
+  }
 
-  return <div className={homeCollections}>{greeting}</div>
+  const withNameGreeting = {
+    morning: (
+      <Trans i18nKey="home:good-morning-name" firstName={firstName}>
+        Good morning, {{ firstName }}!
+      </Trans>
+    ),
+    afternoon: (
+      <Trans i18nKey="home:good-afternoon-name" firstName={firstName}>
+        Good afternoon, {{ firstName }}!
+      </Trans>
+    ),
+    evening: (
+      <Trans i18nKey="home:good-evening-name" firstName={firstName}>
+        Good evening, {{ firstName }}!
+      </Trans>
+    )
+  }
+
+  const showName = firstName && firstName.length < 30
+  const greeting = showName ? withNameGreeting[timeOfDay] : noNameGreeting[timeOfDay]
+
+  return recentSaves?.length > 2 ? <div className={homeCollections}>{greeting}</div> : null
 }

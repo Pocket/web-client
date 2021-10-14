@@ -23,6 +23,10 @@ export const CardLineup = ({ id, position, className, cardShape, showExcerpt = f
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
+  const onOpenOriginalUrl = () => {
+    const data = { ...analyticsData, destination: 'external' }
+    dispatch(sendSnowplowEvent('home.lineup.view-original', data))
+  }
   const onOpen = () => dispatch(sendSnowplowEvent('home.lineup.open', data))
   const onImpression = () => dispatch(sendSnowplowEvent('home.lineup.impression', data))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
@@ -36,9 +40,11 @@ export const CardLineup = ({ id, position, className, cardShape, showExcerpt = f
       cardShape={cardShape}
       showExcerpt={showExcerpt}
       openUrl={open_url}
+      titleFlow={true}
       hiddenActions={false}
       onItemInView={onItemInView}
       onOpen={onOpen}
+      onOpenOriginalUrl={onOpenOriginalUrl}
       ActionMenu={ActionsLineup}
     />
   )

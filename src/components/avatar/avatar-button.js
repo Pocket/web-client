@@ -80,6 +80,7 @@ const buttonStyles = css`
  * Component that wraps the avatar component in a <button> and handles the interaction
  * styles of that button.
  */
+// eslint-disable-next-line react/display-name
 export const AvatarButton = React.forwardRef(
   ({ id, size, label, src, onClick, className, ...rest }, ref) => {
     return (

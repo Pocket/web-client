@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react'
 import { css, cx } from 'linaria'
 import { breakpointLargeHandset, breakpointLargeTablet } from '@pocket/web-ui'
 import { CloseButton } from 'components/close-button/close-button'
+import { containerMaxWidth } from '@pocket/web-ui'
 
 const flyawayWrapper = css`
+  margin: 0 auto;
+  max-width: ${containerMaxWidth}px;
   display: grid;
-  grid-template-columns: repeat(12,1fr);
+  grid-template-columns: repeat(12, 1fr);
   position: sticky;
   bottom: 50px;
   z-index: 100;
@@ -80,7 +83,14 @@ const closeButtonOverrides = css`
   }
 `
 
-export function Flyaway({ dataCy = 'flyaway', title, description, handleClose, show, styleOverrides }) {
+export function Flyaway({
+  dataCy = 'flyaway',
+  title,
+  description,
+  handleClose,
+  show,
+  styleOverrides
+}) {
   const [flyawayOpen, setFlyawayOpen] = useState(false)
 
   useEffect(() => {

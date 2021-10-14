@@ -1,3 +1,92 @@
+# [1.24.0](https://github.com/Pocket/web-client/compare/v1.23.16...v1.24.0) (2021-10-14)
+
+
+### Bug Fixes
+
+* **home:** update greeting ([44b5233](https://github.com/Pocket/web-client/commit/44b52333a2dba0356bdc2ad3373a4e846aa016f8))
+
+
+### Features
+
+* **home:** make personalized home the default ([6a6de8e](https://github.com/Pocket/web-client/commit/6a6de8e7f9724022b8a3cb1464af6aae79d2dfea))
+
+## [1.23.16](https://github.com/Pocket/web-client/compare/v1.23.15...v1.23.16) (2021-10-14)
+
+
+### Bug Fixes
+
+* **cards:** allow for unclamped titles ([38bbc9a](https://github.com/Pocket/web-client/commit/38bbc9aca4bdeec207f23340c80408b724b704b0))
+
+## [1.23.15](https://github.com/Pocket/web-client/compare/v1.23.14...v1.23.15) (2021-10-14)
+
+
+### Bug Fixes
+
+* **home:** adjust ipad breakpoint for display card ([67e8513](https://github.com/Pocket/web-client/commit/67e85132383f6c483512011d75a27e3a02171d23))
+* **home:** analytics for similar footer actions ([530b4b2](https://github.com/Pocket/web-client/commit/530b4b2b506a33a42b80eaf74f5c2b124c714529))
+
+## [1.23.14](https://github.com/Pocket/web-client/compare/v1.23.13...v1.23.14) (2021-10-13)
+
+
+### Bug Fixes
+
+* **home:** snowplow add domain actions and missing ([a4c7279](https://github.com/Pocket/web-client/commit/a4c727913dc6f687b97a4ca6401bdd081e0cf782))
+* **home:** update snowplow for home ([0a62601](https://github.com/Pocket/web-client/commit/0a626015d0faeecc64155819eb02f89f2246fa8a))
+
+## [1.23.13](https://github.com/Pocket/web-client/compare/v1.23.12...v1.23.13) (2021-10-13)
+
+
+### Bug Fixes
+
+* **syndicated:** wrap bottom ad in its own section tag ([a7f0df1](https://github.com/Pocket/web-client/commit/a7f0df13fc5d9fe20580882f824c2967208ae894))
+
+## [1.23.12](https://github.com/Pocket/web-client/compare/v1.23.11...v1.23.12) (2021-10-12)
+
+
+### Bug Fixes
+
+* **home:** add empty result state for similar recs ([d87f056](https://github.com/Pocket/web-client/commit/d87f056a91ef38a76d842a1cfcf3328b5cc69c54))
+* **home:** add onboarding for personalized home ([dbf2f8d](https://github.com/Pocket/web-client/commit/dbf2f8d414fb2775bce4033a6ac0bc38828df388))
+* **home:** mobile friendly similar/recent ([9076e45](https://github.com/Pocket/web-client/commit/9076e45c5da2cab4a25b7085523ca6eb60922c88))
+* **home:** remove personalized onboarding ([dcc6f22](https://github.com/Pocket/web-client/commit/dcc6f228e393c46cc4c0b6e25679017fa3de328c))
+* **home:** remove topic squash in deriver ([901ce2e](https://github.com/Pocket/web-client/commit/901ce2e98e9e5c72f7843bf64c9816e45aa58f33))
+
+## [1.23.11](https://github.com/Pocket/web-client/compare/v1.23.10...v1.23.11) (2021-10-12)
+
+
+### Reverts
+
+* Revert "fix(syndicated): fix bottm ad breaking layout of page" ([1373765](https://github.com/Pocket/web-client/commit/1373765042ecb2247941e92250f8b451f4d40d9c))
+
+## [1.23.10](https://github.com/Pocket/web-client/compare/v1.23.9...v1.23.10) (2021-10-12)
+
+
+### Bug Fixes
+
+* **syndicated:** fix bottm ad breaking layout of page ([458ac70](https://github.com/Pocket/web-client/commit/458ac7057368e20f32bc9052b9d5fd373bfc5e6c))
+
+## [1.23.9](https://github.com/Pocket/web-client/compare/v1.23.8...v1.23.9) (2021-10-12)
+
+
+### Bug Fixes
+
+* **account:** add warnings and completions ([3cd338e](https://github.com/Pocket/web-client/commit/3cd338ebe6ab341ab023563dd916e8c03b1cf9d1))
+* **account:** appropriate endpoint clear/delete ([4e7db4a](https://github.com/Pocket/web-client/commit/4e7db4a9ed20f1e754212362605e10cd7922e692))
+* **account:** privacy warnings and actions ([e803cd5](https://github.com/Pocket/web-client/commit/e803cd5f5d6a1fda22fc0539c4cbdc01499833d4))
+
+## [1.23.8](https://github.com/Pocket/web-client/compare/v1.23.7...v1.23.8) (2021-10-12)
+
+
+### Bug Fixes
+
+* **chyron:**  make imports test-safe ([ef25ba1](https://github.com/Pocket/web-client/commit/ef25ba13ab53fcbd1375faccd0de977c2b7799ad))
+* **chyron:** image loading direct ([8ec8617](https://github.com/Pocket/web-client/commit/8ec8617f2180f10e357bcc28f0ed058cb7ce9671))
+* **dependency:** node-fetch ([ed39a9f](https://github.com/Pocket/web-client/commit/ed39a9f60a9cfdbad45e45fea361fa44edb11450))
+* **dependency:** react-markdown/webpack5 ([84b51ba](https://github.com/Pocket/web-client/commit/84b51ba574e919f450eb7608c1de464c081ed923))
+* **dependency:** remove @pocket/web-utilites ([77080bd](https://github.com/Pocket/web-client/commit/77080bd9d4c9e197c7bf5bb167254200b38fddec))
+* **lint:** adjust to use next config ([cee73db](https://github.com/Pocket/web-client/commit/cee73db3a876d9cf91421e80ba0eef24139cdfdc))
+* **storybook:** working storybooks ([c4a64a9](https://github.com/Pocket/web-client/commit/c4a64a9581c0e50c92ec21886d9ce11021f558bc))
+
 ## [1.23.7](https://github.com/Pocket/web-client/compare/v1.23.6...v1.23.7) (2021-10-05)
 
 

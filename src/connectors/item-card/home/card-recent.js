@@ -20,10 +20,11 @@ export const RecentCard = ({
   if (!item) return null
 
   const { item_id, resolved_url, original_url, openExternal } = item
+  const url = resolved_url || original_url
   const openUrl = !openExternal ? `/read/${item_id}` : original_url
   const analyticsData = {
     id,
-    url: resolved_url,
+    url,
     position,
     destination: !openExternal ? 'internal' : 'external'
   }
@@ -32,8 +33,12 @@ export const RecentCard = ({
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onOpen = () => dispatch(sendSnowplowEvent('home.rec.open', analyticsData))
-  const onImpression = () => dispatch(sendSnowplowEvent('home.rec.impression', analyticsData))
+   const onOpenOriginalUrl = () => {
+    const data = { ...analyticsData, destination: 'external' }
+    dispatch(sendSnowplowEvent('home.recent.view-original', data))
+  }
+  const onOpen = () => dispatch(sendSnowplowEvent('home.recent.open', analyticsData))
+  const onImpression = () => dispatch(sendSnowplowEvent('home.recent.impression', analyticsData))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
 
   return item ? (
@@ -48,6 +53,7 @@ export const RecentCard = ({
       // Tracking
       onItemInView={onItemInView}
       onOpen={onOpen}
+      onOpenOriginalUrl={onOpenOriginalUrl}
       ActionMenu={ActionsRecent}
     />
   ) : null

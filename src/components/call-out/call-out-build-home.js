@@ -154,7 +154,7 @@ export function CallOutBuildHome({ source = 'explore' }) {
         </Button>
       </aside>
       <div className="img-wrapper">
-        <img src={laptopImg} alt="" />
+        <img src={laptopImg.src} alt="" />
       </div>
     </div>
   )

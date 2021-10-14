@@ -61,19 +61,17 @@ export const AccountClearModal = () => {
   const { t } = useTranslation()
   const [clearCheck, setClearCheck] = useState(false)
 
+  // Account Clear Actions
+  const setClearChecked = () => setClearCheck(!clearCheck)
   const confirmClearAccount = () => dispatch(accountClearConfirm())
   const cancelClearAccount = () => {
     setClearCheck(false)
     dispatch(accountClearCancel())
   }
-  const setClearChecked = () => setClearCheck(!clearCheck)
 
   const appRootSelector = '#__next'
   const showModal = useSelector((state) => state.userPrivacy?.clearRequest)
-  const clearError = useSelector((state) => state.userProfile?.clearRequestError)
-
-  const error =
-    errorCodes[clearError]?.desc || 'We are experiencing some issues, please try again later'
+  const clearSuccess = useSelector((state) => state.userPrivacy?.clearRequestSuccess)
 
   return (
     <Modal
@@ -82,6 +80,29 @@ export const AccountClearModal = () => {
       isOpen={showModal}
       screenReaderLabel={t('profile:clear-account', 'Clear Account')}
       handleClose={cancelClearAccount}>
+      {clearSuccess ? (
+        <PostClear cancelClearAccount={cancelClearAccount} />
+      ) : (
+        <PreClear
+          cancelClearAccount={cancelClearAccount}
+          confirmClearAccount={confirmClearAccount}
+          setClearChecked={setClearChecked}
+          clearCheck={clearCheck}
+        />
+      )}
+    </Modal>
+  )
+}
+
+const PreClear = ({ cancelClearAccount, confirmClearAccount, setClearChecked, clearCheck }) => {
+  // const { t } = useTranslation()
+
+  const clearError = useSelector((state) => state.userPrivacy?.clearRequestError)
+  const error =
+    errorCodes[clearError]?.desc || 'We are experiencing some issues, please try again later'
+
+  return (
+    <>
       <ModalBody className={accountClearStyles}>
         <p>
           It's your data and you have control over it. If you wish, you can remove any data that has
@@ -119,6 +140,23 @@ export const AccountClearModal = () => {
           Clear Account
         </Button>
       </ModalFooter>
-    </Modal>
+    </>
+  )
+}
+
+const PostClear = ({ cancelClearAccount }) => {
+  // const { t } = useTranslation()
+  return (
+    <>
+      <ModalBody className={accountClearStyles}>
+        <p>Your data is in the queue to be cleared.</p>
+      </ModalBody>
+      <ModalFooter className={clearFooterStyle}>
+        <div></div>
+        <Button variant="primary" data-cy="clear-account-finalize" onClick={cancelClearAccount}>
+          Continue
+        </Button>
+      </ModalFooter>
+    </>
   )
 }

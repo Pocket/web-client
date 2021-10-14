@@ -46,16 +46,16 @@ const fontFamilyButton = css`
 `
 
 const FontImages = {
-  blanco: BlancoSVG,
-  graphik: GraphikSVG,
-  ideal: IdealSansSVG,
-  inter: InterSVG,
-  plex: PlexSansSVG,
-  sentinel: SentinelSVG,
-  tiempos: TiemposSVG,
-  vollkorn: VollkornSVG,
-  whitney: WhitneySVG,
-  zilla: ZillaSlabSVG
+  blanco: BlancoSVG.src,
+  graphik: GraphikSVG.src,
+  ideal: IdealSansSVG.src,
+  inter: InterSVG.src,
+  plex: PlexSansSVG.src,
+  sentinel: SentinelSVG.src,
+  tiempos: TiemposSVG.src,
+  vollkorn: VollkornSVG.src,
+  whitney: WhitneySVG.src,
+  zilla: ZillaSlabSVG.src
 }
 
 export const FontSettings = ({ updateFontFamily, currentFont, isPremium }) => {

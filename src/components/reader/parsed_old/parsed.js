@@ -78,7 +78,9 @@ export class Parsed extends Component {
 
         window.scrollTo(0, top)
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   checkPositioning(val) {

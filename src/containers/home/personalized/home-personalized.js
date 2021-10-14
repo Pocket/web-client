@@ -19,7 +19,6 @@ import { Toasts } from 'connectors/toasts/toast-list'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { HomeSimilarRecs } from 'containers/home/personalized/home-similar-recs'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-// import { Onboarding } from 'connectors/onboarding/onboarding'
 
 export const HomePersonalized = ({ metaData }) => {
   const dispatch = useDispatch()

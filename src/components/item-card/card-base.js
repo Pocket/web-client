@@ -77,6 +77,9 @@ export const cardStyles = css`
     max-height: 3.858em;
     overflow: hidden;
     text-overflow: ellipsis;
+    &.flow {
+      max-height: initial;
+    }
   }
 
   .details {
@@ -270,6 +273,9 @@ export const cardStyles = css`
       font-size: var(--fontSize150);
       line-height: 1.286;
       max-height: 3.8em;
+      &.flow {
+        max-height: initial;
+      }
     }
 
     .footer {
@@ -309,6 +315,9 @@ export const cardStyles = css`
       font-size: 0.85rem;
       line-height: 1.286;
       max-height: 2.6em;
+      &.flow {
+        max-height: initial;
+      }
     }
     .details {
       padding: 0 0 var(--size050);
@@ -320,6 +329,60 @@ export const cardStyles = css`
       }
       padding: 0 0 0.725rem;
       transform: translateX(-0.25rem);
+    }
+
+    ${breakpointLargeTablet} {
+      --media-column-span: span 12;
+      --content-column-span: span 12;
+      .cardWrap {
+        grid-column-gap: 0;
+      }
+      .footer .actions {
+        grid-column: span 12;
+      }
+    }
+
+    ${breakpointTinyTablet} {
+      --card-column-span: span 12;
+      --media-column-span: span 4;
+      --content-column-span: span 8;
+      .cardWrap {
+        grid-column-gap: 1rem;
+        padding-bottom: 0.25rem;
+      }
+      .title {
+        font-size: 1rem;
+        line-height: 1.25;
+      }
+      .details {
+        font-style: normal;
+        padding: var(--size050) 0;
+        font-size: var(--fontSize085);
+        line-height: 1.5;
+        display: block;
+        color: var(--color-textSecondary);
+      }
+      &.hiddenActions .actions {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 0 1rem;
+        button,
+        a {
+          display: flex;
+        }
+      }
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+
+      .footer .actions {
+        grid-column: 5 / span 8;
+        padding-bottom: 1rem;
+        .item-actions {
+          transform: none;
+        }
+      }
     }
   }
 
@@ -552,6 +615,9 @@ export const cardStyles = css`
         font-size: var(--fontSize200);
         line-height: 1.212;
         max-height: 4.848em;
+        &.flow {
+          max-height: initial;
+        }
       }
     }
 
@@ -628,6 +694,9 @@ export const cardStyles = css`
         .title {
           padding: var(--spacing100) 0 0;
           max-height: calc(1em * 5.25);
+          &.flow {
+            max-height: initial;
+          }
         }
       }
     }
@@ -642,6 +711,9 @@ export const cardStyles = css`
           font-size: 1.125rem;
           line-height: 1.286;
           max-height: 4.725em;
+          &.flow {
+            max-height: initial;
+          }
         }
       }
       &:nth-child(n + 2) {
@@ -671,6 +743,9 @@ export const cardStyles = css`
           font-size: 1.25rem;
           line-height: 1.286;
           max-height: 4.725em;
+          &.flow {
+            max-height: initial;
+          }
         }
         .footer .actions {
           grid-column: 1 / -1;
@@ -719,6 +794,9 @@ export const cardStyles = css`
         font-size: var(--fontSize100);
         line-height: 1.212;
         max-height: 4.848em;
+        &.flow {
+          max-height: initial;
+        }
       }
       .excerpt {
         max-height: 4.4em;
@@ -783,6 +861,9 @@ export const cardStyles = css`
         font-size: 1.25rem;
         line-height: 1.286;
         max-height: 4.825em;
+        &.flow {
+          max-height: initial;
+        }
       }
       .footer .actions {
         grid-column: 1 / -1;

@@ -137,14 +137,15 @@ export const HomeWelcomeModal = () => {
       <ModalBody className="onboarding-modal-body">
         <header>
           <h2>
-            <SaveFilledIcon /><br />
-            { t('onboarding:welcome-to-pocket', 'Welcome to Pocket') }
+            <SaveFilledIcon />
+            <br />
+            {t('onboarding:welcome-to-pocket', 'Welcome to Pocket')}
           </h2>
-          <img alt="" src={RainbowReader} />
+          <img alt="" src={RainbowReader.src} />
         </header>
         <section>
-          <h4>{ t('onboarding:curate-corner', 'Curate your personal corner of the web') }</h4>
-          <p>{ t('onboarding:tell-us', 'Tell us what you’re interested in') }</p>
+          <h4>{t('onboarding:curate-corner', 'Curate your personal corner of the web')}</h4>
+          <p>{t('onboarding:tell-us', 'Tell us what you’re interested in')}</p>
           <TopicSelector toggleCallback={toggleCallback} />
         </section>
       </ModalBody>
@@ -154,7 +155,7 @@ export const HomeWelcomeModal = () => {
           variant={noTopicsSelected ? 'secondary' : 'primary'}
           data-cy="onboarding-cta"
           onClick={noTopicsSelected ? handleSkip : handleContinue}>
-          { buttonLabel }
+          {buttonLabel}
         </Button>
       </ModalFooter>
     </Modal>

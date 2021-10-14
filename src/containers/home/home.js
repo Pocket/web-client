@@ -1,7 +1,5 @@
 import { useSelector } from 'react-redux'
-import { HomeStandard } from 'containers/home/home-standard'
 import { HomePersonalized } from 'containers/home/personalized/home-personalized'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export default function Home(props) {
   const { metaData = {} } = props
@@ -11,13 +9,8 @@ export default function Home(props) {
   const flagsReady = featureState.flagsReady
 
   const shouldRender = userStatus !== 'pending' && flagsReady
-  const showPersonalized = featureFlagActive({ flag: 'profiles.home', featureState })
 
   if (!shouldRender) return null
 
-  return showPersonalized ? (
-    <HomePersonalized metaData={metaData} />
-  ) : (
-    <HomeStandard metaData={metaData} />
-  )
+  return <HomePersonalized metaData={metaData} />
 }

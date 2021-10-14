@@ -1,4 +1,4 @@
-import { track as trackRequest } from '@pocket/web-utilities/legacy-analytics'
+import { legacyAnalyticsTrack as trackRequest } from 'common/utilities/legacy-analytics'
 import { CONSUMER_KEY } from 'common/constants'
 
 export const legacyAnalyticsTrack = (params) => {

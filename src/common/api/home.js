@@ -99,13 +99,8 @@ export function deriveItems(slate, slateLineup) {
   })
 }
 
-export function deriveSlate(slate, isPersonalized) {
+export function deriveSlate(slate) {
   const currentMeta = slateMeta[slate.id]
-  const isTopic = currentMeta?.slug || false
-
-  // Don't return topics on unpersonalized
-  if (!isPersonalized && isTopic) return false
-
   const updatedMeta = derivedMeta(currentMeta, slate)
   return { ...slate, ...updatedMeta }
 }

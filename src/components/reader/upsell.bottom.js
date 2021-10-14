@@ -194,9 +194,9 @@ const buttonWrapper = css`
 const LibraryAd = () => (
   <>
     <div className={classNames(imgStyles, 'library')}>
-      <img className="dark" alt="" src={LibraryDark} />
-      <img className="light" alt="" src={LibraryLight} />
-      <img className="sepia" alt="" src={LibrarySepia} />
+      <img className="dark" alt="" src={LibraryDark.src} />
+      <img className="light" alt="" src={LibraryLight.src} />
+      <img className="sepia" alt="" src={LibrarySepia.src} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
@@ -236,9 +236,9 @@ const LibraryAd = () => (
 const SearchAd = () => (
   <>
     <div className={classNames(imgStyles, 'search')}>
-      <img className="dark" alt="" src={SearchDark} />
-      <img className="light" alt="" src={SearchLight} />
-      <img className="sepia" alt="" src={SearchSepia} />
+      <img className="dark" alt="" src={SearchDark.src} />
+      <img className="light" alt="" src={SearchLight.src} />
+      <img className="sepia" alt="" src={SearchSepia.src} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
@@ -278,9 +278,9 @@ const SearchAd = () => (
 const FocusedAd = () => (
   <>
     <div className={classNames(imgStyles, 'focused')}>
-      <img className="dark" alt="" src={FocusedDark} />
-      <img className="light" alt="" src={FocusedLight} />
-      <img className="sepia" alt="" src={FocusedSepia} />
+      <img className="dark" alt="" src={FocusedDark.src} />
+      <img className="light" alt="" src={FocusedLight.src} />
+      <img className="sepia" alt="" src={FocusedSepia.src} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
@@ -320,9 +320,9 @@ const FocusedAd = () => (
 const TypeAd = () => (
   <>
     <div className={classNames(imgStyles, 'type')}>
-      <img className="dark" alt="" src={TypeDark} />
-      <img className="light" alt="" src={TypeLight} />
-      <img className="sepia" alt="" src={TypeSepia} />
+      <img className="dark" alt="" src={TypeDark.src} />
+      <img className="light" alt="" src={TypeLight.src} />
+      <img className="sepia" alt="" src={TypeSepia.src} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
@@ -362,9 +362,9 @@ const TypeAd = () => (
 const BigDiamondAd = () => (
   <>
     <div className={classNames(imgStyles, 'features')}>
-      <img className="dark" alt="" src={BigDiamondDark} />
-      <img className="light" alt="" src={BigDiamondLight} />
-      <img className="sepia" alt="" src={BigDiamondSepia} />
+      <img className="dark" alt="" src={BigDiamondDark.src} />
+      <img className="light" alt="" src={BigDiamondLight.src} />
+      <img className="sepia" alt="" src={BigDiamondSepia.src} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
@@ -404,9 +404,9 @@ const BigDiamondAd = () => (
 const HighlightAd = () => (
   <>
     <div className={classNames(imgStyles, 'highlights')}>
-      <img className="dark" alt="" src={HighlightDark} />
-      <img className="light" alt="" src={HighlightLight} />
-      <img className="sepia" alt="" src={HighlightSepia} />
+      <img className="dark" alt="" src={HighlightDark.src} />
+      <img className="light" alt="" src={HighlightLight.src} />
+      <img className="sepia" alt="" src={HighlightSepia.src} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
@@ -446,9 +446,9 @@ const HighlightAd = () => (
 const TagsAd = () => (
   <>
     <div className={classNames(imgStyles, 'tags')}>
-      <img className="dark" alt="" src={TagsDark} />
-      <img className="light" alt="" src={TagsLight} />
-      <img className="sepia" alt="" src={TagsSepia} />
+      <img className="dark" alt="" src={TagsDark.src} />
+      <img className="light" alt="" src={TagsLight.src} />
+      <img className="sepia" alt="" src={TagsSepia.src} />
     </div>
     <div className={classNames(copyWrapper, 'specificity')}>
       <h5>
