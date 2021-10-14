@@ -1,3 +1,4 @@
+import { gql } from 'graphql-request'
 export const DEFAULT_SLATE_LINEUP = gql`
     fragment DefaultSlateLineup on getSlateLineup {
         isArticle
