@@ -34,4 +34,4 @@ export const DEFAULT_SLATE_LINEUP = gql`
             }
         }
     }
-`;
+`
