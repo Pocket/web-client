@@ -8,7 +8,7 @@ import { breakpointTinyTablet } from '@pocket/web-ui'
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { breakpointTinyHandset } from '@pocket/web-ui'
 import { PageContainer } from '@pocket/web-ui'
-import { FacebookMonoIcon, TwitterMonoIcon } from '@pocket/web-ui'
+import { FacebookMonoIcon, TwitterMonoIcon, InstagramMonoIcon } from '@pocket/web-ui'
 import { Trans, useTranslation } from 'next-i18next'
 import { Languages } from 'connectors/languages/languages'
 
@@ -443,6 +443,13 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
                     id="twitter-footer-icon"
                     title="Twitter"
                     description={t('global-footer:view-twitter', 'View our Twitter profile')}
+                  />
+                </a>
+                <a href="https://instagram.com/pocket" target="_blank" rel="noopener noreferrer">
+                  <InstagramMonoIcon
+                    id="instagram-footer-icon"
+                    title="Instagram"
+                    description={t('global-footer:view-instagram', 'Find us on Instagram')}
                   />
                 </a>
               </div>
