@@ -57,6 +57,7 @@ export const Card = (props) => {
     onImageFail,
     useMarkdown,
     partnerType,
+    titleFlow = false,
     // Tracking
     onItemInView,
     onOpenOriginalUrl,
@@ -157,8 +158,8 @@ export const Card = (props) => {
           />
         ) : null}
         <div className="content">
-          { fromPartner ? <PartnerOverline partnerType={partnerType} /> : null }
-          <h2 className="title">
+          {fromPartner ? <PartnerOverline partnerType={partnerType} /> : null}
+          <h2 className={cx('title', titleFlow && 'flow')}>
             {openUrl ? (
               <Link href={openUrl}>
                 <a

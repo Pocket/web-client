@@ -40,6 +40,7 @@ export const CardLineup = ({ id, position, className, cardShape, showExcerpt = f
       cardShape={cardShape}
       showExcerpt={showExcerpt}
       openUrl={open_url}
+      titleFlow={true}
       hiddenActions={false}
       onItemInView={onItemInView}
       onOpen={onOpen}

@@ -77,6 +77,9 @@ export const cardStyles = css`
     max-height: 3.858em;
     overflow: hidden;
     text-overflow: ellipsis;
+    &.flow {
+      max-height: initial;
+    }
   }
 
   .details {
@@ -270,6 +273,9 @@ export const cardStyles = css`
       font-size: var(--fontSize150);
       line-height: 1.286;
       max-height: 3.8em;
+      &.flow {
+        max-height: initial;
+      }
     }
 
     .footer {
@@ -309,6 +315,9 @@ export const cardStyles = css`
       font-size: 0.85rem;
       line-height: 1.286;
       max-height: 2.6em;
+      &.flow {
+        max-height: initial;
+      }
     }
     .details {
       padding: 0 0 var(--size050);
@@ -606,6 +615,9 @@ export const cardStyles = css`
         font-size: var(--fontSize200);
         line-height: 1.212;
         max-height: 4.848em;
+        &.flow {
+          max-height: initial;
+        }
       }
     }
 
@@ -682,6 +694,9 @@ export const cardStyles = css`
         .title {
           padding: var(--spacing100) 0 0;
           max-height: calc(1em * 5.25);
+          &.flow {
+            max-height: initial;
+          }
         }
       }
     }
@@ -696,6 +711,9 @@ export const cardStyles = css`
           font-size: 1.125rem;
           line-height: 1.286;
           max-height: 4.725em;
+          &.flow {
+            max-height: initial;
+          }
         }
       }
       &:nth-child(n + 2) {
@@ -725,6 +743,9 @@ export const cardStyles = css`
           font-size: 1.25rem;
           line-height: 1.286;
           max-height: 4.725em;
+          &.flow {
+            max-height: initial;
+          }
         }
         .footer .actions {
           grid-column: 1 / -1;
@@ -773,6 +794,9 @@ export const cardStyles = css`
         font-size: var(--fontSize100);
         line-height: 1.212;
         max-height: 4.848em;
+        &.flow {
+          max-height: initial;
+        }
       }
       .excerpt {
         max-height: 4.4em;
@@ -837,6 +861,9 @@ export const cardStyles = css`
         font-size: 1.25rem;
         line-height: 1.286;
         max-height: 4.825em;
+        &.flow {
+          max-height: initial;
+        }
       }
       .footer .actions {
         grid-column: 1 / -1;
