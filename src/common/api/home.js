@@ -1,6 +1,6 @@
 import { requestGQL } from 'common/utilities/request/request'
 import { getRecIds, arrayToObject } from 'common/utilities'
-import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
+import getHomeSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
 import { slateMeta } from 'common/slate-meta'
 
 const personalized = '05027beb-0053-4020-8bdc-4da2fcc0cb68'
@@ -10,7 +10,7 @@ const homeLineup = personalized
 export async function getHomeLineup({ recommendationCount = 5 }) {
   const id = homeLineup
   return requestGQL({
-    query: getSlateLineup,
+    query: getHomeSlateLineup,
     variables: { id, recommendationCount, slateCount: 20 }
   })
     .then(processLineup)

@@ -12,9 +12,9 @@
 import { gql } from 'graphql-request'
 import { DEFAULT_SLATE_LINEUP } from 'common/api/graphql-queries/fragements'
 
-const getSlateLineup = gql`
+const getHomeSlateLineup = gql`
   ${DEFAULT_SLATE_LINEUP}
-  query GetSlateLineup($id: String!, $recommendationCount: Int, $slateCount: Int) {
+  query GetHomeSlateLineup($id: String!, $recommendationCount: Int, $slateCount: Int) {
     getSlateLineup(
       slateLineupId: $id
       recommendationCount: $recommendationCount
@@ -25,4 +25,4 @@ const getSlateLineup = gql`
   }
 `
 
-export default getSlateLineup
+export default getHomeSlateLineup
