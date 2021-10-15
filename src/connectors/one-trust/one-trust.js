@@ -28,13 +28,13 @@ export function PostTrustInit() {
   const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
   const analytics = useSelector((state) => state.oneTrust?.analytics) //prettier-ignore
   const analyticsCookie = analytics?.enabled
+  const isProduction = process.env.NODE_ENV === 'production'
 
   useEffect(() => {
     function checkCookies() {
       if (global.OptanonActiveGroups !== ONETRUST_EMPTY_DEFAULT) {
         dispatch(updateOnetrustData(global.OptanonActiveGroups))
-      }
-      else {
+      } else {
         setTimeout(checkCookies, 50)
       }
     }
@@ -42,7 +42,7 @@ export function PostTrustInit() {
     let timer = setTimeout(checkCookies, 50)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     if (analyticsInit || !oneTrustReady) return
@@ -58,20 +58,13 @@ export function PostTrustInit() {
     // Setting this so we don't get a glut of false positives with shifting
     // cookie preferences
     analyticsInitSet(true)
-  }, [
-    oneTrustReady,
-    analyticsCookie,
-    analyticsInit,
-    dispatch,
-    user_status,
-    sess_guid,
-    user_id
-  ])
+  }, [oneTrustReady, analyticsCookie, analyticsInit, dispatch, user_status, sess_guid, user_id])
 
   useEffect(() => {
-    // Load Opt In Monster for marketing/conversion adventurers
+    // Load Opt In Monster for marketing/conversion adventurers ... but not during dev
+    if (!isProduction) return
     loadOptinMonster()
-  }, [])
+  }, [isProduction])
 
   // Track Page Views
   useEffect(() => {
