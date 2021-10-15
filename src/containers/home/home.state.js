@@ -52,6 +52,10 @@ import { ITEMS_ADD_SUCCESS } from 'actions'
 
 import { PINNED_TOPICS_SET } from 'actions'
 
+import { MYLIST_DATA_REQUEST } from 'actions'
+import { MYLIST_UPDATE_REQUEST } from 'actions'
+import { HYDRATE } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const homeHydrate = (topicSections) => ({ type: HOME_HYDRATE, topicSections })
@@ -96,7 +100,10 @@ export const homeReducers = (state = initialState, action) => {
       return { ...state, similarRecsResolved: true }
     }
 
-    case HOME_SIMILAR_RECS_CLEAR: {
+    case HOME_SIMILAR_RECS_CLEAR:
+    case MYLIST_DATA_REQUEST:
+    case MYLIST_UPDATE_REQUEST:
+    case HYDRATE: {
       return { ...state, similarRecId: false, similarRecsResolved: false }
     }
 
