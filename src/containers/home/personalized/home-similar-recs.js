@@ -8,6 +8,7 @@ import { OffsetList } from 'components/items-layout/list-offset'
 import { css } from 'linaria'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import SimilarSearchSVG from 'static/images/home/similarSearch.svg'
+import { breakpointSmallHandset } from '@pocket/web-ui'
 
 const SimilarSearch = SimilarSearchSVG.src || ''
 
@@ -16,7 +17,7 @@ const similarRecsContainer = css`
   bottom: 0;
   width: 100%;
   background-color: var(--color-canvas);
-  padding: 2.5rem 0;
+  padding: 1.5rem 0;
   border-top: var(--borderStyle);
 
   &.active {
@@ -39,10 +40,22 @@ const noSimilarRecs = css`
   align-items: center;
   .visuals {
     grid-column: span 3;
+
+    ${breakpointSmallHandset} {
+      grid-column: span 12;
+      max-height: 5rem;
+      margin: 2rem auto 0;
+      order: 2;
+    }
   }
 
   .contentBody {
     grid-column: 5 / span 8;
+
+    ${breakpointSmallHandset} {
+      grid-column: span 12;
+      order: 1;
+    }
   }
 `
 
