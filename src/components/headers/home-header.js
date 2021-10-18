@@ -77,7 +77,7 @@ const cardPageTopicStyle = css`
 const cardPageSimilarStyle = css`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin: 0;
   .sectionSubTitle {
     margin: 0;
@@ -85,6 +85,7 @@ const cardPageSimilarStyle = css`
   .close {
     cursor: pointer;
     font-size: 1.5rem;
+    margin-top: 0;
   }
 `
 
