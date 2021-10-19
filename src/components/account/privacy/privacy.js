@@ -1,15 +1,16 @@
 import { css } from 'linaria'
 import { Button } from '@pocket/web-ui'
-
+import { useTranslation } from 'next-i18next'
 const privacyStyle = css`
   padding-bottom: 3rem;
   border-bottom: var(--dividerStyle);
 `
 
 export const Privacy = ({ accountClear, accountDelete, rssProtect, rssProtected }) => {
+  const { t } = useTranslation()
   return (
     <section className={privacyStyle}>
-      <h2>Privacy</h2>
+      <h2>{t('account:privacy', 'Privacy')}</h2>
       <div className="sectionBody">
         {/* Leaving this here until the endpoint is properly sorted out
         <div className="toggleWrap">
@@ -22,7 +23,7 @@ export const Privacy = ({ accountClear, accountDelete, rssProtect, rssProtected 
 
         <div className="toggleWrap">
           <label htmlFor="rssPasswords" className="flush">
-            Disable password protection on my RSS feeds
+            {t('account:privacy-rss', 'Disable password protection on my RSS feeds')}
           </label>
           <input
             type="checkbox"
@@ -45,26 +46,32 @@ export const Privacy = ({ accountClear, accountDelete, rssProtect, rssProtected 
         */}
 
         <label htmlFor="something" className="connectionLabel labelWithContext">
-          Clear my Pocket data
+          {t('account:privacy-clear-header', 'Clear my Pocket data')}
           <div className="helperText full">
-            This will irrevocably delete the items in your list & archive.
+            {t(
+              'account:privacy-clear-helper',
+              'This will irrevocably delete the items in your list & archive.'
+            )}
           </div>
         </label>
         <div className="actionInline">
           <Button variant="secondary" onClick={accountClear}>
-            Clear data
+            {t('account:privacy-clear-data', 'Clear data')}
           </Button>
         </div>
 
         <label htmlFor="something" className="connectionLabel labelWithContext">
-          Delete my Pocket account
+          {t('account:privacy-delete-my-account', 'Delete my Pocket account')}
           <div className="helperText full">
-            This will delete your account and all items within it.
+            {t(
+              'account:privacy-delete-helper',
+              'This will delete your account and all items within it.'
+            )}
           </div>
         </label>
         <div className="actionInline">
           <Button variant="secondary" onClick={accountDelete}>
-            Delete Account
+            {t('account:privacy-delete-account', 'Delete Account')}
           </Button>
         </div>
       </div>

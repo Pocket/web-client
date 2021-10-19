@@ -54,17 +54,18 @@ export const EmailModal = () => {
   const onChangePassword = (e) => setPassword(e.target.value)
 
   const error =
-    errorCodes[emailError]?.desc || 'We are experiencing some issues, please try again later'
+    errorCodes[emailError]?.desc ||
+    t('account:error-generic', 'We are experiencing some issues, please try again later')
 
   return (
     <Modal
-      title={t('profile:change-primary-email', 'Change Primary Email')}
+      title={t('account:change-primary-email', 'Change Primary Email')}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t('profile:change-primary-email', 'Change Primary Email')}
+      screenReaderLabel={t('account:change-primary-email', 'Change Primary Email')}
       handleClose={cancelEmail}>
       <ModalBody className={updateEmailStyles}>
-        <label htmlFor="email">New Email Address</label>
+        <label htmlFor="email">{t('account:new-email-address', 'New Email Address')}</label>
         <input
           type="text"
           id="email"
@@ -72,14 +73,14 @@ export const EmailModal = () => {
           value={email}
           onChange={onChangeEmail}
         />
-        <label htmlFor="password">Enter password</label>
+        <label htmlFor="password">{t('account:enter-password', 'Enter password')}</label>
         <input type="password" id="password" value={password} onChange={onChangePassword} />
 
         <div>{emailError ? <span className="errorText">{error}</span> : null}</div>
       </ModalBody>
       <ModalFooter>
         <Button type="submit" data-cy="update-primary-email-confirm" onClick={confirmEmail}>
-          Update Email
+          {t('account:update-email', 'Update Email')}
         </Button>
       </ModalFooter>
     </Modal>

@@ -1,4 +1,5 @@
 import { css } from 'linaria'
+import { useTranslation } from 'next-i18next'
 
 const notficationsStyle = css`
   padding-bottom: 3rem;
@@ -11,12 +12,14 @@ export const Notifications = ({
   onMarketingToggle,
   onFrequencyChange
 }) => {
+  const { t } = useTranslation()
+
   return (
     <section className={notficationsStyle}>
-      <h2>Notifications</h2>
+      <h2>{t('account:notifications', 'Notifications')}</h2>
       <div className="sectionBody emailBody">
         <label htmlFor="productUpdates" className="flush">
-          Notify me of product updates
+          {t('account:notifications-product', 'Notify me of product updates')}
         </label>
         <input
           type="checkbox"
@@ -28,19 +31,21 @@ export const Notifications = ({
         />
 
         <label htmlFor="pockethits" className="flush">
-          Pocket Hits
+          {t('account:pocket-hits', 'Pocket Hits')}
         </label>
         <select value={hitsFrequency} onChange={onFrequencyChange}>
           <option disabled>———</option>
-          <option value="daily">Daily</option>
-          <option value="triweekly">Three times a week</option>
-          <option value="weekly">Once a week</option>
-          <option value="monthly">Once a month</option>
-          <option value="never">Unsubscribe: Opt out of Pocket Hits</option>
+          <option value="daily">{t('account:pocket-hits-daily', 'Daily')}</option>
+          <option value="weekly">{t('account:pocket-hits-weekly', 'Once a week')}</option>
+          <option value="never">
+            {t('account:pocket-hits-never', 'Unsubscribe: Opt out of Pocket Hits')}
+          </option>
         </select>
         <div className="helperText full">
-          Pocket Hits is a curated newsletter showcasing the very best stories in Pocket delivered
-          by email.
+          {t(
+            'account:pocket-hits-disclaimer',
+            'Pocket Hits is a curated newsletter showcasing the very best stories in Pocket delivered by email.'
+          )}
         </div>
       </div>
     </section>

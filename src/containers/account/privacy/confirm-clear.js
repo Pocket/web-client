@@ -6,7 +6,7 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { accountClearConfirm } from './privacy.state'
 import { accountClearCancel } from './privacy.state'
-import { useTranslation } from 'next-i18next'
+import { useTranslation, Trans } from 'next-i18next'
 import { errorCodes } from 'common/errors'
 
 const accountClearStyles = css`
@@ -95,27 +95,31 @@ export const AccountClearModal = () => {
 }
 
 const PreClear = ({ cancelClearAccount, confirmClearAccount, setClearChecked, clearCheck }) => {
-  // const { t } = useTranslation()
+  const { t } = useTranslation()
 
   const clearError = useSelector((state) => state.userPrivacy?.clearRequestError)
   const error =
-    errorCodes[clearError]?.desc || 'We are experiencing some issues, please try again later'
+    errorCodes[clearError]?.desc ||
+    t('account:error-generic', 'We are experiencing some issues, please try again later')
 
   return (
     <>
       <ModalBody className={accountClearStyles}>
-        <p>
-          It's your data and you have control over it. If you wish, you can remove any data that has
-          been saved for your account.
-        </p>
-        <p>
-          This will only remove the content in your account, not the account itself. You will still
-          be able to log in with your account.
-        </p>
-
+        <Trans i18nKey="account:clear-copy">
+          <p>
+            It's your data and you have control over it. If you wish, you can remove any data that
+            has been saved for your account.
+          </p>
+          <p>
+            This will only remove the content in your account, not the account itself. You will
+            still be able to log in with your account.
+          </p>
+        </Trans>
         <div className="toggleWrap warn">
           <label htmlFor="rssPasswords" className="flush">
-            I understand this will remove the data in my Pocket account <em>Permanently!</em>
+            <Trans i18nKey="account:clear-comply">
+              I understand this will remove the data in my Pocket account <em>Permanently!</em>
+            </Trans>
           </label>
           <input
             onChange={setClearChecked}
@@ -130,14 +134,14 @@ const PreClear = ({ cancelClearAccount, confirmClearAccount, setClearChecked, cl
       </ModalBody>
       <ModalFooter className={clearFooterStyle}>
         <Button variant="secondary" data-cy="clear-account-confirm" onClick={cancelClearAccount}>
-          Get me out of here!
+          {t('account:cancel-clear', 'Get me out of here!')}
         </Button>
         <Button
           variant="brand"
           data-cy="clear-account-confirm"
           onClick={confirmClearAccount}
           disabled={!clearCheck}>
-          Clear Account
+          {t('account:clear-account-confirm', 'Clear Account')}
         </Button>
       </ModalFooter>
     </>

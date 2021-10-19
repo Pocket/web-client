@@ -76,18 +76,18 @@ export const AvatarModal = () => {
   const showModal = useSelector((state) => state.userProfile?.updatingAvatar)
   const avatarError = useSelector((state) => state.userProfile?.updatingAvatarError)
   const retrievedAvatar = useSelector((state) => state?.userProfile?.avatar_url)
-  const [imagePreview, setImagePreview] = useState(false)
+  const [imagePreview, setImagePreview] = useState('')
   const [imageFile, setImageFile] = useState(false)
 
   const confirmAvatar = () => {
     const formData = new FormData()
     formData.append('image', imageFile)
     dispatch(confirmAvatarUpdate(formData))
-    setImagePreview(false)
+    setImagePreview('')
   }
 
   const cancelAvatar = () => {
-    setImagePreview(false)
+    setImagePreview('')
     return dispatch(cancelAvatarUpdate())
   }
 
@@ -97,14 +97,21 @@ export const AvatarModal = () => {
 
     // Make sure we support the file type
     if (!types.includes(file.type)) {
-      return dispatch(updateAvatarError(`We don't support that file type: ${file.type}`))
+      const fileErrorCopy = t(
+        'account:avatar-error-file',
+        "We don't support that file type: {{fileType}}",
+        { fileType: file.type }
+      )
+      return dispatch(updateAvatarError(fileErrorCopy))
     }
 
     // Make sure the file isn't ridiculously big
     if (file.size > 2000000) {
-      return dispatch(
-        dispatch(updateAvatarError(`${file.type} is too large. Please keep files size under 2Mb`))
+      const sizeErrorCopy = t(
+        'account:avatar-error-size',
+        'The file you chose is too large. Please keep files size under 2Mb'
       )
+      return dispatch(dispatch(updateAvatarError(sizeErrorCopy)))
     }
 
     dispatch(updateAvatarError(false))
@@ -114,10 +121,10 @@ export const AvatarModal = () => {
 
   return (
     <Modal
-      title={t('profile:change-avatar', 'Change Avatar')}
+      title={t('account:change-avatar', 'Change Avatar')}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t('profile:change-avatar', 'Change Avatar')}
+      screenReaderLabel={t('account:change-avatar', 'Change Avatar')}
       handleClose={cancelAvatar}>
       <ModalBody className={avatarSelector}>
         <div className="display">
@@ -130,7 +137,7 @@ export const AvatarModal = () => {
       <ModalFooter className={uploadStyles}>
         <div className="actions">
           <label htmlFor="file-upload" className="inputLabel">
-            Choose file
+            {t('account:choose-file', 'Choose file')}
             <input id="file-upload" type="file" onChange={onChange} />
           </label>
           <Button
@@ -139,7 +146,7 @@ export const AvatarModal = () => {
             onClick={confirmAvatar}
             autoFocus={true}
             disabled={!imagePreview}>
-            Save
+            {t('account:save', 'Save')}
           </Button>
         </div>
       </ModalFooter>
