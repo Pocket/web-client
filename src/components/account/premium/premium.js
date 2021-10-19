@@ -12,6 +12,7 @@ const premiumStyle = css`
   }
   .premiumBody {
     img {
+      width: 100%;
       grid-column: span 5;
     }
     .premiumCopy {
