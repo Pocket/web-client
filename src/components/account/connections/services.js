@@ -1,4 +1,5 @@
 import { css } from 'linaria'
+import { useTranslation } from 'next-i18next'
 
 const servicesStyle = css`
   padding-bottom: 3rem;
@@ -6,11 +7,17 @@ const servicesStyle = css`
 `
 
 export const Services = ({ appIds, ConnectedApp }) => {
+  const { t } = useTranslation()
   return appIds?.length ? (
     <section className={servicesStyle}>
-      <h2>Connected Services</h2>
+      <h2>{t('account:connected-services', 'Connected Services')}</h2>
       <div className="sectionBody">
-        <div className="helperText full">You have authorized Pocket to access these services:</div>
+        <div className="helperText full">
+          {t(
+            'account:connected-services-logged-in',
+            'You have authorized Pocket to access these services:'
+          )}
+        </div>
         {appIds.map((appId) => (
           <ConnectedApp key={appId} appId={appId} />
         ))}

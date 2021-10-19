@@ -10,17 +10,19 @@ import { Notifications } from 'containers/account/notifications/notifications'
 import { ConnectedServices } from 'containers/account/connections/connections'
 import { RSSFeeds } from 'containers/account/rss/rss'
 import { Privacy } from 'containers/account/privacy/privacy'
+import { useTranslation } from 'next-i18next'
 
 export const Account = () => {
   // Profile content
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const isPremium = useSelector((state) => state.user.premium_status === '1')
+  const { t } = useTranslation()
 
   return isLoggedIn ? (
     <Layout title="Pocket - Account">
       <SideNav type="account" isLoggedIn={isLoggedIn} />
       <main className={`main ${accountStyles}`}>
-        <h1>Manage your account</h1>
+        <h1>{t('account:manage-your-account', 'Manage your account')}</h1>
         <Premium isPremium={isPremium} />
         <Profile />
         <Email />

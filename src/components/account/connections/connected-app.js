@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Button } from '@pocket/web-ui'
 import { css } from 'linaria'
+import { useTranslation } from 'next-i18next'
 
 const serviceStyle = css`
   .serviceIcon {
@@ -13,6 +14,7 @@ const serviceStyle = css`
 
 export const ConnectedApp = ({ slug, name, api_id, platform_id, onRevoke, FallbackImage }) => {
   const [validImage, setValidImage] = useState(true)
+  const { t } = useTranslation()
 
   const onClick = () => onRevoke(slug)
   const onImageError = () => setValidImage(false)
@@ -29,7 +31,7 @@ export const ConnectedApp = ({ slug, name, api_id, platform_id, onRevoke, Fallba
         {name}
       </label>
       <Button variant="secondary" className="actionInline" onClick={onClick}>
-        Revoke Access
+        {t('account:revoke-access', 'Revoke Access')}
       </Button>
     </>
   )

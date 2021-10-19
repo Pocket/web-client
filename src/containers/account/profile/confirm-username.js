@@ -1,4 +1,4 @@
-import { Button, ErrorIcon } from '@pocket/web-ui'
+import { Button } from '@pocket/web-ui'
 import { css } from 'linaria'
 
 import { useState } from 'react'
@@ -32,25 +32,24 @@ const updateUsernameStyles = css`
   }
 `
 
-const updatePasswordFooter = css`
+const updateUsernameFooter = css`
   justify-content: space-between;
   align-items: center;
   align-content: center;
+  button {
+    white-space: nowrap;
+    margin-left: 2rem;
+  }
   .footerWarning {
     display: flex;
     align-content: center;
     align-items: center;
-    color: var(--color-error);
+    color: var(--color-textTertiary);
     font-family: var(--fontSansSerif);
     font-weight: 400;
     font-style: italic;
     font-size: 0.875rem;
-    line-height: 24px;
-    .icon {
-      margin-top: 0;
-      margin-right: 0.5rem;
-      height: 24px;
-    }
+    line-height: 1.2;
   }
 `
 
@@ -72,7 +71,8 @@ export const UsernameModal = () => {
   const onChangePassword = (e) => setPassword(e.target.value)
 
   const error =
-    errorCodes[usernameError]?.desc || 'We are experiencing some issues, please try again later'
+    errorCodes[usernameError]?.desc ||
+    t('account:error-generic', 'We are experiencing some issues, please try again later')
 
   return (
     <Modal
@@ -82,23 +82,28 @@ export const UsernameModal = () => {
       screenReaderLabel={t('profile:change-username', 'Change Username')}
       handleClose={cancelUsername}>
       <ModalBody className={updateUsernameStyles}>
-        <label htmlFor="new-username">New Username</label>
+        <label htmlFor="new-username">{t('account:new-username', 'New Username')}</label>
         <input type="text" id="new-username" value={username} onChange={onChangeUsername} />
         <span className="helperText">
-          Usernames must be alphanumeric and have a length of 3 or more characters. After changing
-          your username, you will need to log back in again.
+          {t(
+            'account:new-username-helper',
+            'Usernames must be alphanumeric and have a length of 3 or more characters. After changing your username, you will need to log back in again.'
+          )}
         </span>
-        <label htmlFor="password">Enter password</label>
+        <label htmlFor="password">{t('account:enter-password', 'Enter password')}</label>
         <input type="password" id="password" value={password} onChange={onChangePassword} />
 
         <div>{usernameError ? <span className="errorText">{error}</span> : null}</div>
       </ModalBody>
-      <ModalFooter className={updatePasswordFooter}>
+      <ModalFooter className={updateUsernameFooter}>
         <div className="footerWarning">
-          <ErrorIcon /> Changing your username will log you out.
+          {t(
+            'account:password-change-warning',
+            'You will need to log in again after you update your username.'
+          )}
         </div>
         <Button type="submit" data-cy="update-username-confirm" onClick={confirmUsernmame}>
-          Update Username
+          {t('account:update-username', 'Update Username')}
         </Button>
       </ModalFooter>
     </Modal>

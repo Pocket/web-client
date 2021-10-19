@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { errorCodes } from 'common/errors'
 import { Notifications as NotificationComp } from 'components/account/notifications/notifications'
 import { useSelector, useDispatch } from 'react-redux'
 import { getNotifications, setFrequency, setMarketing } from './notfications.state'

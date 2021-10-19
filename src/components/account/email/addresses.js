@@ -2,6 +2,7 @@ import { css } from 'linaria'
 import { Button } from '@pocket/web-ui'
 import { ErrorIcon } from '@pocket/web-ui'
 import { topTooltip } from 'components/tooltip/tooltip'
+import { useTranslation, Trans } from 'next-i18next'
 
 const emailStyle = css`
   padding-bottom: 3rem;
@@ -23,23 +24,28 @@ const emailStyle = css`
 `
 
 const Alias = ({ onRemoveAlias, onResendConfirmation, alias, confirmed }) => {
+  const { t } = useTranslation()
   const onRemove = () => onRemoveAlias(alias)
   const onResend = () => onResendConfirmation(alias)
   const unconfirmed = confirmed === '0'
+
   return (
     <>
       <div className="contentDisplay">
         {alias}{' '}
         {unconfirmed ? (
-          <ErrorIcon className={`unconfirmed ${topTooltip}`} data-tooltip="Email is unconfirmed" />
+          <ErrorIcon
+            className={`unconfirmed ${topTooltip}`}
+            data-tooltip={t('account:email-unconfirmed', 'Email is unconfirmed')}
+          />
         ) : null}
       </div>
       <Button variant="secondary" className="actionInline" onClick={onRemove}>
-        Remove alias
+        {t('account:remove-alias', 'Remove alias')}
       </Button>
       {unconfirmed ? (
         <Button variant="inline" onClick={onResend} className="subButton">
-          Re-send email confirmation
+          {t('account:email-resend-confirmation', 'Re-send email confirmation')}
         </Button>
       ) : null}
     </>
@@ -57,31 +63,33 @@ export const EmailAddresses = ({
   onRemoveAlias,
   aliases = {}
 }) => {
+  const { t } = useTranslation()
+
   const aliasArray = Object.keys(aliases).filter((alias) => alias !== primaryEmail)
   const primaryUnConfirmed = aliases[primaryEmail]?.confirmed === '0'
 
   return (
     <section className={emailStyle}>
-      <h2>Email Addresses</h2>
+      <h2>{t('account:email-addresses', 'Email Addresses')}</h2>
       <div className="sectionBody emailBody">
-        <label htmlFor="primaryEmail">Primary Email</label>
+        <label htmlFor="primaryEmail">{t('account:email-primary', 'Primary Email')}</label>
         <div className="contentDisplay">
           {primaryEmail}{' '}
           {primaryUnConfirmed ? (
             <ErrorIcon
               className={`unconfirmed ${topTooltip}`}
-              data-tooltip="Email is unconfirmed."
+              data-tooltip={t('account:email-unconfirmed', 'Email is unconfirmed')}
             />
           ) : null}
         </div>
 
         <Button variant="secondary" className="actionInline" onClick={onChangeEmail}>
-          Change Email
+          {t('account:change-email', 'Change Email')}
         </Button>
 
         {primaryUnConfirmed ? (
           <Button variant="inline" onClick={onResendConfirmation} className="subButton">
-            Re-send email confirmation
+            {t('account:email-resend-confirmation', 'Re-send email confirmation')}
           </Button>
         ) : null}
 
@@ -97,21 +105,23 @@ export const EmailAddresses = ({
         <input
           type="text"
           name="addEmail"
-          placeholder="Add new email address"
+          placeholder={t('account:add-new-email', 'Add new email address')}
           onChange={onChangeEmailAlias}
           value={emailAlias}
         />
         <Button variant="primary" className="actionInline" onClick={onAddEmailAlias}>
-          Add Email
+          {t('account:add-email', 'Add Email')}
         </Button>
         {emailAliasError ? <span className="errorText">{emailAliasError}</span> : null}
         <div className="contextCopy">
-          Adding additional email addresses to your account will:
-          <ul>
-            <li>Allow you to log in with that email as well as your primary email </li>
-            <li>Allow friends to share pocket links to any of your account emails </li>
-            <li>Save links emailed to add@getpocket.com from any account email</li>
-          </ul>
+          <Trans i18nKey="account:additional-email-disclaimer">
+            Adding additional email addresses to your account will:
+            <ul>
+              <li>Allow you to log in with that email as well as your primary email </li>
+              <li>Allow friends to share pocket links to any of your account emails </li>
+              <li>Save links emailed to add@getpocket.com from any account email</li>
+            </ul>
+          </Trans>
         </div>
       </div>
     </section>

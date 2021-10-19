@@ -1,6 +1,7 @@
 import { css } from 'linaria'
 import { Avatar } from './avatar'
 import { Button } from '@pocket/web-ui'
+import { useTranslation } from 'next-i18next'
 
 const profileStyle = css`
   padding-bottom: 3rem;
@@ -20,33 +21,34 @@ export const Profile = ({
   userName,
   bio
 }) => {
+  const { t } = useTranslation()
   return (
     <section className={profileStyle}>
-      <h2>Profile Information</h2>
+      <h2>{t('account:profile-header', 'Profile Information')}</h2>
 
       <div className="sectionBody profileBody">
         <Avatar avatarSrc={avatarSrc} onChangePhoto={onChangePhoto} />
-        <label htmlFor="firstname">First name</label>
+        <label htmlFor="firstname">{t('account:profile-first-name', 'First name')}</label>
         <input type="text" name="firstname" value={firstName} onChange={onChangeFirstName} />
-        <label htmlFor="lastname">Last name</label>
+        <label htmlFor="lastname">{t('account:profile-last-name', 'Last name')}</label>
         <input type="text" name="lastname" value={lastName} onChange={onChangeLastName} />
-        <label htmlFor="bio">Profile bio</label>
+        <label htmlFor="bio">{t('account:profile-bio', 'Profile bio')}</label>
         <input
           type="text"
           name="bio"
           value={bio}
           onChange={onChangeBio}
-          placeholder="There is only one you..."
+          placeholder={t('account:profile-bio-placeholder', 'There is only one you...')}
         />
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username">{t('account:profile-username', 'Username')}</label>
         <div className="contentDisplay">@{userName}</div>
 
         <div className="actionBlock">
           <Button variant="primary" className="action" onClick={onChangeUsername}>
-            Change Username
+            {t('account:profile-change-username', 'Change Username')}
           </Button>
           <Button variant="primary" className="action" onClick={onChangePassword}>
-            Change Password
+            {t('account:profile-chage-password', 'Change Password')}
           </Button>
         </div>
       </div>

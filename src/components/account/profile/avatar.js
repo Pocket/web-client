@@ -1,5 +1,6 @@
 import { css } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
+import { useTranslation } from 'next-i18next'
 
 const avatarStyle = css`
   grid-column: 8 / 11;
@@ -38,12 +39,14 @@ const avatarPreviewStyle = css`
 `
 
 export const Avatar = ({ avatarSrc, onChangePhoto }) => {
+  const { t } = useTranslation()
+
   return (
     <div className={avatarStyle}>
       <div className="avatarBody">
         <AvatarPreview avatarSrc={avatarSrc} />
         <button onClick={onChangePhoto} className={`${buttonReset} updateLink`}>
-          Change photo
+          {t('avatar:change-photo', 'Change photo')}
         </button>
       </div>
     </div>

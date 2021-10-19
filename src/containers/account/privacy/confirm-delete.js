@@ -6,7 +6,7 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { accountDeleteConfirm } from './privacy.state'
 import { accountDeleteCancel } from './privacy.state'
-import { useTranslation } from 'next-i18next'
+import { useTranslation, Trans } from 'next-i18next'
 import { errorCodes } from 'common/errors'
 
 const accountDeleteStyles = css`
@@ -69,7 +69,8 @@ export const AccountDeleteModal = () => {
   const deleteError = useSelector((state) => state.userProfile?.deleteRequestError)
 
   const error =
-    errorCodes[deleteError]?.desc || 'We are experiencing some issues, please try again later'
+    errorCodes[deleteError]?.desc ||
+    t('account:error-generic', 'We are experiencing some issues, please try again later')
 
   return (
     <Modal
@@ -79,19 +80,22 @@ export const AccountDeleteModal = () => {
       screenReaderLabel={t('profile:delete-account', 'Delete Account')}
       handleClose={cancelDeleteAccount}>
       <ModalBody className={accountDeleteStyles}>
-        <p>
-          This will remove your account and all associated data. You will not be able to log in with
-          your account or access any data you have saved.
-        </p>
-        <p>
-          If you subscribe to Pocket Premium, please make sure that you{' '}
-          <a href="https://getpocket.com/premium_manage_subscription">cancel your subscription</a>{' '}
-          before deleting your account.
-        </p>
-
+        <Trans i18nKey="account:delete-copy">
+          <p>
+            This will remove your account and all associated data. You will not be able to log in
+            with your account or access any data you have saved.
+          </p>
+          <p>
+            If you subscribe to Pocket Premium, please make sure that you{' '}
+            <a href="https://getpocket.com/premium_manage_subscription">cancel your subscription</a>{' '}
+            before deleting your account.
+          </p>
+        </Trans>
         <div className="toggleWrap warn">
           <label htmlFor="deleteCheck" className="flush">
-            I understand this will remove my Pocket account <em>Permanently!</em>
+            <Trans i18nKey="account:delete-comply">
+              I understand this will remove my Pocket account <em>Permanently!</em>
+            </Trans>
           </label>
           <input
             onChange={setDeleteChecked}
@@ -106,14 +110,14 @@ export const AccountDeleteModal = () => {
       </ModalBody>
       <ModalFooter className={deleteFooterStyle}>
         <Button variant="secondary" data-cy="delete-account-confirm" onClick={cancelDeleteAccount}>
-          Get me out of here!
+          {t('account:cancel-delete', 'Get me out of here!')}
         </Button>
         <Button
           variant="brand"
           data-cy="delete-account-confirm"
           onClick={confirmDeleteAccount}
           disabled={!deleteCheck}>
-          Delete Account
+          {t('account:delete-account-confirm', 'Delete Account')}
         </Button>
       </ModalFooter>
     </Modal>

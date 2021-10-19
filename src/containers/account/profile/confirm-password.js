@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, ErrorIcon } from '@pocket/web-ui'
+import { Button } from '@pocket/web-ui'
 import { css } from 'linaria'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
@@ -37,21 +37,20 @@ const updatePasswordFooter = css`
   justify-content: space-between;
   align-items: center;
   align-content: center;
+  button {
+    white-space: nowrap;
+    margin-left: 2rem;
+  }
   .footerWarning {
     display: flex;
     align-content: center;
     align-items: center;
-    color: var(--color-error);
+    color: var(--color-textTertiary);
     font-family: var(--fontSansSerif);
     font-weight: 400;
     font-style: italic;
     font-size: 0.875rem;
-    line-height: 24px;
-    .icon {
-      margin-top: 0;
-      margin-right: 0.5rem;
-      height: 24px;
-    }
+    line-height: 1.2;
   }
 `
 
@@ -85,17 +84,18 @@ export const PasswordModal = () => {
   }
 
   const error =
-    errorCodes[passwordError]?.desc || 'We are experiencing some issues, please try again later'
+    errorCodes[passwordError]?.desc ||
+    t('account:error-generic', 'We are experiencing some issues, please try again later')
 
   return (
     <Modal
-      title={t('profile:change-password', 'Change Password')}
+      title={t('account:change-password', 'Change Password')}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t('profile:change-password', 'Change Password')}
+      screenReaderLabel={t('account:change-password', 'Change Password')}
       handleClose={cancelPassword}>
       <ModalBody className={updatePasswordStyles}>
-        <label htmlFor="old-password">Old Password</label>
+        <label htmlFor="old-password">{t('account:old-password', 'Old Password')}</label>
         <input
           type="password"
           id="old-password"
@@ -103,7 +103,7 @@ export const PasswordModal = () => {
           onChange={onChangeOldPassword}
         />
 
-        <label htmlFor="new-password">New Password</label>
+        <label htmlFor="new-password">{t('account:new-password', 'New Password')}</label>
         <input
           type={showPassword ? 'text' : 'password'}
           id="new-Password"
@@ -111,10 +111,14 @@ export const PasswordModal = () => {
           onChange={onChangePassword}
         />
         <span className="helperText" onClick={onShowPassword}>
-          {showPassword ? 'hide password' : 'show password'}
+          {showPassword
+            ? t('account:hide-password', 'hide password')
+            : t('account:show-password', 'show password')}
         </span>
 
-        <label htmlFor="confirm-new-password">Confirm New Password</label>
+        <label htmlFor="confirm-new-password">
+          {t('account:confirm-password', 'Confirm New Password')}
+        </label>
         <input
           type="password"
           id="confirm-new-Password"
@@ -126,10 +130,13 @@ export const PasswordModal = () => {
       </ModalBody>
       <ModalFooter className={updatePasswordFooter}>
         <div className="footerWarning">
-          <ErrorIcon /> Changing your password will log you out.
+          {t(
+            'account:username-change-warning',
+            'You will need to log in again after you update your pasword.'
+          )}
         </div>
         <Button type="submit" data-cy="update-password-confirm" onClick={confirmPassword}>
-          Update Password
+          {t('account:update-password', 'Update Password')}
         </Button>
       </ModalFooter>
     </Modal>
