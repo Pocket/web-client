@@ -22,7 +22,7 @@ export const RSSFeeds = ({ userName }) => {
       <h2>{t('account:rss', 'RSS Feeds')}</h2>
       <div className="sectionBody">
         <label htmlFor="something" className="connectionLabel">
-          {t('account:rss-view-unread', 'View my Unread RSS feed')}
+          {t('account:rss-view-unread', 'View RSS feed of unread items')}
         </label>
         <Button
           href={unreadLink}
@@ -34,7 +34,7 @@ export const RSSFeeds = ({ userName }) => {
         </Button>
 
         <label htmlFor="something" className="connectionLabel">
-          {t('account:rss-view-archived', 'View my Archive RSS feed')}
+          {t('account:rss-view-archived', 'View RSS feed of archived items')}
         </label>
         <Button
           href={readLink}
@@ -46,7 +46,7 @@ export const RSSFeeds = ({ userName }) => {
         </Button>
 
         <label htmlFor="something" className="connectionLabel">
-          {t('account:rss-view-all', 'View my All Items RSS feed')}
+          {t('account:rss-view-all', 'View RSS feed of all items')}
         </label>
         <Button
           href={allLink}
@@ -57,10 +57,7 @@ export const RSSFeeds = ({ userName }) => {
           {t('account:rss-open-feed', 'Open Feed')}
         </Button>
         <div className="helperText full">
-          {t(
-            'account:rss-feed-helper',
-            'Your RSS feeds are private and password protected by default. If your feed reader does not support password protected feeds, you can <a href="#">disable password protection</a>.'
-          )}
+          {t('account:rss-feed-helper', 'Your RSS feeds are private and password protected.')}
         </div>
       </div>
     </section>

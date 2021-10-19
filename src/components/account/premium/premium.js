@@ -45,7 +45,7 @@ export const Premium = ({ isPremium }) => {
           ) : (
             <a href="https://getpocket.com/premium">
               <Button variant="brand">
-                {t('account:premium-subscrive', 'Get Pocket Premium')}
+                {t('account:premium-subscribe', 'Get Pocket Premium')}
               </Button>
             </a>
           )}

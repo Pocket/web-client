@@ -98,7 +98,7 @@ export const UsernameModal = () => {
       <ModalFooter className={updateUsernameFooter}>
         <div className="footerWarning">
           {t(
-            'account:password-change-warning',
+            'account:username-change-warning',
             'You will need to log in again after you update your username.'
           )}
         </div>

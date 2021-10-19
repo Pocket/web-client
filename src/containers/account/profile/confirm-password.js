@@ -132,7 +132,7 @@ export const PasswordModal = () => {
         <div className="footerWarning">
           {t(
             'account:username-change-warning',
-            'You will need to log in again after you update your pasword.'
+            'You will need to log in again after you update your password.'
           )}
         </div>
         <Button type="submit" data-cy="update-password-confirm" onClick={confirmPassword}>

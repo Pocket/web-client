@@ -109,7 +109,7 @@ export const AvatarModal = () => {
     if (file.size > 2000000) {
       const sizeErrorCopy = t(
         'account:avatar-error-size',
-        'The file you choose is too large. Please keep files size under 2Mb'
+        'The file you chose is too large. Please keep files size under 2Mb'
       )
       return dispatch(dispatch(updateAvatarError(sizeErrorCopy)))
     }
