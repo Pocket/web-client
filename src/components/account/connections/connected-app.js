@@ -25,9 +25,9 @@ export const ConnectedApp = ({ slug, name, api_id, platform_id, onRevoke, Fallba
       <label className={`${serviceStyle} flush`}>
         {validImage ? (
           <img src={serviceIcon} className="serviceIcon" onError={onImageError} alt="" />
-        ) : (
-          <FallbackImage className="serviceIcon" />
-        )}
+        ) : null}
+
+        {FallbackImage && !validImage ? <FallbackImage className="serviceIcon" /> : null}
         {name}
       </label>
       <Button variant="secondary" className="actionInline" onClick={onClick}>
