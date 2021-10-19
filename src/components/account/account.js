@@ -99,6 +99,10 @@ export const accountStyles = css`
   }
 
   input[type='checkbox'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     margin: 0;
 
     &:before {
