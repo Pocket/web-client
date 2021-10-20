@@ -1,13 +1,22 @@
 import { useSelector } from 'react-redux'
-import { useTranslation, Trans } from 'next-i18next'
 import { getTimeOfDay } from 'common/utilities'
-import { CardPageHeader } from 'components/headers/discover-header'
+import { css } from 'linaria'
+import { useTranslation, Trans } from 'next-i18next'
+
+const homeCollections = css`
+  font-family: 'Graphik Web';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+  padding: 2.5rem 0 1rem;
+`
 
 export const HomeGreeting = () => {
   const { t } = useTranslation()
+  const recentSaves = useSelector((state) => state.home.recentSaves)
 
-  const firstName = useSelector((state) => state.user.first_name)
-  const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
+  const firstName = useSelector((state) => state.userProfile.first_name)
   const timeOfDay = getTimeOfDay()
 
   const noNameGreeting = {
@@ -17,18 +26,25 @@ export const HomeGreeting = () => {
   }
 
   const withNameGreeting = {
-    morning: <Trans i18nKey="home:good-morning-name" firstName={firstName}>Good morning, {{firstName}}!</Trans>,
-    afternoon: <Trans i18nKey="home:good-afternoon-name" firstName={firstName}>Good afternoon, {{firstName}}!</Trans>,
-    evening: <Trans i18nKey="home:good-evening-name" firstName={firstName}>Good evening, {{firstName}}!</Trans>
+    morning: (
+      <Trans i18nKey="home:good-morning-name" firstName={firstName}>
+        Good morning, {{ firstName }}!
+      </Trans>
+    ),
+    afternoon: (
+      <Trans i18nKey="home:good-afternoon-name" firstName={firstName}>
+        Good afternoon, {{ firstName }}!
+      </Trans>
+    ),
+    evening: (
+      <Trans i18nKey="home:good-evening-name" firstName={firstName}>
+        Good evening, {{ firstName }}!
+      </Trans>
+    )
   }
 
-  const showName = firstName && firstName.length < 15
+  const showName = firstName && firstName.length < 30
   const greeting = showName ? withNameGreeting[timeOfDay] : noNameGreeting[timeOfDay]
 
-  const description =
-    pinnedTopics?.length === 0
-      ? t('home:select-topics', 'Select topics to see popular articles and our editors’ top picks.')
-      : null
-
-  return <CardPageHeader title={greeting} subHeading={description} />
+  return recentSaves?.length > 2 ? <div className={homeCollections}>{greeting}</div> : null
 }

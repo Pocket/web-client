@@ -1,4 +1,4 @@
-import Main from 'containers/home/home'
+import { Home } from 'containers/home/home'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
 
@@ -12,4 +12,4 @@ export async function getStaticProps({ locale }) {
   }
 }
 
-export default Main
+export default Home
