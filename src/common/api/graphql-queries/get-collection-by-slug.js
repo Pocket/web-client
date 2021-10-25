@@ -33,6 +33,16 @@ const getCollectionBySlug = gql`
           itemId
         }
       }
+      externalId
+      IABParentCategory {
+        slug
+      }
+      IABChildCategory {
+        slug
+      }
+      curationCategory {
+        slug
+      }
     }
   }
 `

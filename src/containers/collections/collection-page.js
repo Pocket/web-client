@@ -68,7 +68,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   if (statusCode) return <ErrorPage statusCode={statusCode} />
 
   const { title, intro, excerpt, authors, stories, imageUrl, pageSaveStatus, partnership } = data
-  const { showAds = true } = data
+  const { showAds = true, IABParentCategory, IABChildCategory, curationCategory, externalId } = data
   const authorNames = authors?.map((author) => author.name)
   const allowAds = isPremium ? false : showAds && shouldRender && oneTrustReady
   const usePersonalized = allowAds && trackingEnabled
@@ -98,7 +98,14 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
       className={printLayout}>
       <main className={contentLayout}>
         <section>
-          <AdAboveTheFold allowAds={allowAds} usePersonalized={usePersonalized} />
+          <AdAboveTheFold
+            allowAds={allowAds}
+            usePersonalized={usePersonalized}
+            iabTopCategory={IABParentCategory.slug}
+            iabSubCategory={IABChildCategory.slug}
+            curationCategory={curationCategory.slug}
+            legacyId={externalId}
+          />
         </section>
         {/* Content header information */}
         <section className="content-section">
@@ -140,8 +147,22 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
 
           {/* Right aside content such as ads and recs */}
           <aside className="right-aside">
-            <AdRailTop allowAds={allowAds} usePersonalized={usePersonalized} />
-            <AdRailBottom allowAds={allowAds} usePersonalized={usePersonalized} />
+            <AdRailTop
+              allowAds={allowAds}
+              usePersonalized={usePersonalized}
+              iabTopCategory={IABParentCategory.slug}
+              iabSubCategory={IABChildCategory.slug}
+              curationCategory={curationCategory.slug}
+              legacyId={externalId}
+            />
+            <AdRailBottom
+              allowAds={allowAds}
+              usePersonalized={usePersonalized}
+              iabTopCategory={IABParentCategory.slug}
+              iabSubCategory={IABChildCategory.slug}
+              curationCategory={curationCategory.slug}
+              legacyId={externalId}
+            />
           </aside>
 
           <div className="content-body">
@@ -178,7 +199,14 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
               saveStatus={pageSaveStatus}
             />
 
-            <AdBelowTheFold allowAds={allowAds} usePersonalized={usePersonalized} />
+            <AdBelowTheFold
+              allowAds={allowAds}
+              usePersonalized={usePersonalized}
+              iabTopCategory={IABParentCategory.slug}
+              iabSubCategory={IABChildCategory.slug}
+              curationCategory={curationCategory.slug}
+              legacyId={externalId}
+            />
 
             {showTopics ? <TopicsBubbles topics={topics} className="no-border" /> : null}
           </footer>
