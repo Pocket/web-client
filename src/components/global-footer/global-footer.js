@@ -320,7 +320,7 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
                   </a>
                 </li>
                 <li>
-                  <a href="https://getpocket.com/explore/pocket-hits?src=footer_v2">
+                  <a href="https://getpocket.com/en/explore/pocket-hits-signup?src=footer_v2">
                     {t('global-footer:daily-newsletter', 'Daily newsletter')}
                   </a>
                 </li>
