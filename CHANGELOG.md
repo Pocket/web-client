@@ -1,3 +1,10 @@
+## [1.24.9](https://github.com/Pocket/web-client/compare/v1.24.8...v1.24.9) (2021-10-25)
+
+
+### Bug Fixes
+
+* **utilities:** update getpublisheddate function to return correct day of month ([b961d8b](https://github.com/Pocket/web-client/commit/b961d8b2f35c58c57f9bf7634258936d770fa1ab))
+
 ## [1.24.8](https://github.com/Pocket/web-client/compare/v1.24.7...v1.24.8) (2021-10-20)
 
 

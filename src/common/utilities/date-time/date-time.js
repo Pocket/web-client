@@ -6,7 +6,7 @@ import dayjs from 'dayjs'
  */
 export function getPublishedDate(publishedAt = null) {
   const date = new Date(publishedAt)
-  return dayjs(date).format('MMMM d, YYYY')
+  return dayjs(date).format('MMMM D, YYYY')
 }
 
 /**
