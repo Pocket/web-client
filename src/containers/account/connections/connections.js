@@ -7,7 +7,7 @@ import { ThirdParty } from 'components/account/connections/third-party-apps'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { SaveIcon } from '@pocket/web-ui'
-import { GoogleMonoIcon } from '@pocket/web-ui'
+import { GoogleColorIcon } from '@pocket/web-ui'
 import { TwitterColorIcon } from '@pocket/web-ui'
 import { FacebookColorIcon } from '@pocket/web-ui'
 
@@ -19,15 +19,14 @@ export const ConnectedServices = () => {
   useEffect(() => dispatch(getConnections()), [dispatch])
 
   const officialApps = useSelector((state) => state?.userConnectedServices?.officialApps)
-  const socialServices = useSelector((state) => state?.userConnectedServices?.socialServices)
-  const googleServices = useSelector((state) => state?.userConnectedServices?.googleServices)
+  const socialServices = useSelector((state) => state?.userConnectedServices?.socialServices) || []
+  const googleServices = useSelector((state) => state?.userConnectedServices?.googleServices) || []
   const thirdParty = useSelector((state) => state?.userConnectedServices?.thirdPartyApps)
 
   return (
     <>
       <Services
-        appIds={socialServices}
-        googleServices={googleServices}
+        appIds={[...socialServices, ...googleServices]}
         ConnectedApp={ConnectedAppComponent}
       />
 
@@ -50,6 +49,7 @@ const ConnectedAppComponent = ({ appId }) => {
 
   const isPocketApp = is_native && is_native !== '0'
   const isGoogle = !!google_id
+  const passedName = isGoogle ? 'Google' : name
 
   const FallbackImage = getFallbackImage(isGoogle, isPocketApp, name)
 
@@ -76,7 +76,7 @@ const ConnectedAppComponent = ({ appId }) => {
   return (
     <ConnectedApp
       api_id={api_id}
-      name={name}
+      name={passedName}
       onRevoke={onRevoke}
       platform_id={platform_id}
       slug={slug}
@@ -87,7 +87,7 @@ const ConnectedAppComponent = ({ appId }) => {
 
 const getFallbackImage = function (isGoogle, isPocketApp, name) {
   if (isPocketApp) return SaveIcon
-  if (isGoogle) return GoogleMonoIcon
+  if (isGoogle) return GoogleColorIcon
   if (name === 'Twitter') return TwitterColorIcon
   if (name === 'Facebook') return FacebookColorIcon
 

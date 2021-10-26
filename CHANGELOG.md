@@ -1,3 +1,10 @@
+## [1.24.12](https://github.com/Pocket/web-client/compare/v1.24.11...v1.24.12) (2021-10-26)
+
+
+### Bug Fixes
+
+* **account:** google connected app ([bf0a145](https://github.com/Pocket/web-client/commit/bf0a14571cab3d00e598ea77bf31f245598749a9))
+
 ## [1.24.11](https://github.com/Pocket/web-client/compare/v1.24.10...v1.24.11) (2021-10-26)
 
 
