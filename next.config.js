@@ -16,7 +16,8 @@ const nextOptions = {
   i18n,
   env: {
     SHOW_DEV: process.env.SHOW_DEV,
-    RELEASE_VERSION: process.env.RELEASE_VERSION
+    RELEASE_VERSION: process.env.RELEASE_VERSION,
+    TEST_SNOWPLOW: process.env.TEST_SNOWPLOW
   },
   assetPrefix,
   async rewrites() {
