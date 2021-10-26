@@ -101,9 +101,9 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
           <AdAboveTheFold
             allowAds={allowAds}
             usePersonalized={usePersonalized}
-            iabTopCategory={IABParentCategory.slug}
-            iabSubCategory={IABChildCategory.slug}
-            curationCategory={curationCategory.slug}
+            iabTopCategory={IABParentCategory?.slug}
+            iabSubCategory={IABChildCategory?.slug}
+            curationCategory={curationCategory?.slug}
             legacyId={externalId}
           />
         </section>
@@ -150,17 +150,17 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
             <AdRailTop
               allowAds={allowAds}
               usePersonalized={usePersonalized}
-              iabTopCategory={IABParentCategory.slug}
-              iabSubCategory={IABChildCategory.slug}
-              curationCategory={curationCategory.slug}
+              iabTopCategory={IABParentCategory?.slug}
+              iabSubCategory={IABChildCategory?.slug}
+              curationCategory={curationCategory?.slug}
               legacyId={externalId}
             />
             <AdRailBottom
               allowAds={allowAds}
               usePersonalized={usePersonalized}
-              iabTopCategory={IABParentCategory.slug}
-              iabSubCategory={IABChildCategory.slug}
-              curationCategory={curationCategory.slug}
+              iabTopCategory={IABParentCategory?.slug}
+              iabSubCategory={IABChildCategory?.slug}
+              curationCategory={curationCategory?.slug}
               legacyId={externalId}
             />
           </aside>
@@ -202,9 +202,9 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
             <AdBelowTheFold
               allowAds={allowAds}
               usePersonalized={usePersonalized}
-              iabTopCategory={IABParentCategory.slug}
-              iabSubCategory={IABChildCategory.slug}
-              curationCategory={curationCategory.slug}
+              iabTopCategory={IABParentCategory?.slug}
+              iabSubCategory={IABChildCategory?.slug}
+              curationCategory={curationCategory?.slug}
               legacyId={externalId}
             />
 
