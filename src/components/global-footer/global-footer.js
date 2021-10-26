@@ -272,7 +272,11 @@ const engagementBlockStyle = css`
  * The `GlobalFooter` component appears at the bottom of every screen in our web applications.
  */
 export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const { language } = i18n
+
+  const languagePrefix = language === 'de' ? 'de' : 'en'
+  const newsletterLink = `https://getpocket.com/${languagePrefix}/explore/pocket-hits-signup?src=footer_v2`
 
   let appBadges = [
     <a
@@ -320,7 +324,7 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
                   </a>
                 </li>
                 <li>
-                  <a href="https://getpocket.com/explore/pocket-hits?src=footer_v2">
+                  <a href={newsletterLink}>
                     {t('global-footer:daily-newsletter', 'Daily newsletter')}
                   </a>
                 </li>

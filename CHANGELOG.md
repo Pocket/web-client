@@ -1,3 +1,12 @@
+## [1.24.10](https://github.com/Pocket/web-client/compare/v1.24.9...v1.24.10) (2021-10-26)
+
+
+### Bug Fixes
+
+* **footer:** add support for en and de locales ([978979e](https://github.com/Pocket/web-client/commit/978979e2cae76824a2e3b8c7f683c1e3b8f00359))
+* **footer:** update link for Daily Newsletter in Footer ([aba8fcb](https://github.com/Pocket/web-client/commit/aba8fcbab0dd45a0ca8e45e42274e25d7f0dc540))
+* **onboarding:** do not show onboarding highlight in side nav ([ba91374](https://github.com/Pocket/web-client/commit/ba913744c6edafc560e8ff85606c78b50a556395))
+
 ## [1.24.9](https://github.com/Pocket/web-client/compare/v1.24.8...v1.24.9) (2021-10-25)
 
 
