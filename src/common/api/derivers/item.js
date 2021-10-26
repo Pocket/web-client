@@ -57,7 +57,6 @@ import { BASE_URL } from 'common/constants'
  *
  * URLS to use
  * ————————————————————————————————————
- * @param openUrl — if readUrl exists, use that otherwise use externalUrl
  * @param externalUrl — open original action from the publisher link with added UTM
  * @param readUrl — item action when the user clicks on the image or title of a saved item
  * @param saveUrl — the url to use when an item is to be saved from a save action
