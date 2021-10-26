@@ -1,0 +1,408 @@
+import { domainForUrl, replaceUTM, readTimeFromWordCount } from 'common/utilities'
+import { urlWithPermanentLibrary, getBool, getImageCacheUrl } from 'common/utilities'
+import { BASE_URL } from 'common/constants'
+/**
+ * ————————————————————————————————————————————————————————————————————————
+ * ITEM — as it exists in the graphQL (minus some fields we don't use)
+ * ————————————————————————————————————————————————————————————————————————
+ *
+ * IDENTIFIERS
+ * ————————————————————————————————————
+ * @param {string} itemId — A server generated unique id for this item.
+ * @param {string} resolvedId — The item id of the resolved_url
+ *
+ * URLS
+ * ————————————————————————————————————
+ * @param {URL} givenUrl — The url as provided by the user when saving. Only http or https schemes allowed.
+ * @param {URL} resolvedUrl — If the givenUrl redirects (once or many times), this is the final url. Otherwise, same as givenUrl
+ *
+ * ITEM INFO
+ * ————————————————————————————————————
+ * @param {Array} authors — List of Authors involved with this article
+ *   @param {string} id — Unique id for that Author
+ *   @param {string} name — Display name
+ *   @param {URL} url - A url to that Author's site
+ * @param {string} domain The domain, such as 'getpocket.com' of the {.resolved_url}
+ * @param {object} domainMetadata — Additional information about the item domain, when present, use this for displaying the domain name
+ *   @param {string} name — The name of the domain (e.g., The New York Times)
+ *   @param {URL} logo — Url for the logo image
+ * @param {string} excerpt — A snippet of text from the article
+ * @param {enum} hasImage — (1) NO_IMAGES=no images, (2) HAS_IMAGES=contains images, (3) IS_IMAGE=is an image
+ * @param {enum} hasVideo  — (1) NO_VIDEOS=no images, (2) HAS_VIDEOS=contains images, (3) IS_VIDEO=is an image
+ * @param {array} images — Array of images within an article NOTE: more image data is available from the server, but we only use this for the item
+ *   @param {URL} src — Absolute url to the image
+ * @param {Boolean} isArticle — true if the item is an article
+ * @param {Boolean} isIndex — true if the item is an index / home page, rather than a specific single piece of content
+ * @param {String} title — The title as determined by the parser.
+ * @param {URL} topImageUrl — The page's / publisher's preferred thumbnail image
+ * @param {int} wordCount — Number of words in the article (we use this to derive read time)
+ * @param {DateString} datePublished — The date the article was published
+ * @param {string} language — The detected language of the article
+ * @param {int} timeToRead — How long it will take to read the article (WordCount / 220 WPM)
+ *
+ * INCLUDED ITEM ENRICHMENT
+ * ————————————————————————————————————
+ * @param {object} syndicatedArticle — If the item has a syndicated counterpart the syndication information
+ *   @param {string} slug — Slug that pocket uses for this article in the url
+ *   @param {object} publisher — The manually set publisher information for this article
+ *     @param {string} name — Name of the publisher of the article
+ *     @param {string} logo — Logo to use for the publisher
+ *     @param {URL} url — Url of the publisher
+ */
+
+/**
+ * ————————————————————————————————————————————————————————————————————————
+ * DERIVED ITEM — urls and display information based on return from the server
+ * ————————————————————————————————————————————————————————————————————————
+ *
+ * URLS to use
+ * ————————————————————————————————————
+ * @param openUrl — if readUrl exists, use that otherwise use externalUrl
+ * @param externalUrl — open original action from the publisher link with added UTM
+ * @param readUrl — item action when the user clicks on the image or title of a saved item
+ * @param saveUrl — the url to use when an item is to be saved from a save action
+ * @param permanentUrl — url for Pockets internal library [premium feature]
+ *
+ * Display Properties
+ * ————————————————————————————————————
+ * @param title — the best title to display
+ * @param thumbnail — the best image to display
+ * @param publisher — original article publisher
+ * @param excerpt — curated excerpt, and if not, given excerpt
+ * @param isReadable — true if the content type is video, image, or article
+ * @param isSyndicated — true if this article is syndicated by pocket
+ * @param isCollection — ?? Is this needed?
+ *
+ * Analytics Properties
+ * ————————————————————————————————————
+ * @param analyticsData {Object} this is the static item analytics
+ *   @param analyticsData.url — the url to add to analytics data
+ *
+ */
+
+export function deriveListItem(passedItem, legacy) {
+  // if a legacy flag is passed, first we need to modernize the item
+  const edge = legacy ? modernizeItem(passedItem) : passedItem
+
+  // node contains user-item data as well as the item itself
+  const { node = {}, cursor = null } = edge
+  const { item, ...rest } = node
+  return deriveItem({ item, node: rest, cursor })
+}
+
+export function deriveRecommendation(recommendation) {
+  const { item, publisher: passedPublisher, curatedInfo: itemEnrichment } = recommendation
+  return deriveItem({ item, itemEnrichment, passedPublisher })
+}
+
+export function deriveCollection(collection) {
+  const collectionUrl = `/collections/${collection?.slug}`
+
+  return deriveItem({
+    item: {
+      ...collection,
+      status: false,
+      givenUrl: `${BASE_URL}${collectionUrl}`,
+      collectionUrl,
+      isArticle: true
+    },
+    passedPublisher: 'Pocket'
+  })
+}
+
+export function deriveStory(story) {
+  const { item, ...itemEnrichment } = story
+  return deriveItem({ item, itemEnrichment })
+}
+
+export function deriveItem({ item, cursor, node, itemEnrichment, passedPublisher }) {
+  const derived = {
+    cursor,
+    ...node,
+    ...item,
+    title: title({ item, itemEnrichment }),
+    thumbnail: thumbnail({ item, itemEnrichment }),
+    excerpt: excerpt({ item, itemEnrichment }),
+    publisher: publisher({ item, passedPublisher }),
+    externalUrl: externalUrl({ item }),
+    readUrl: readUrl({ item, status: node?.status }),
+    saveUrl: saveUrl({ item }),
+    permanentUrl: permanentUrl({ item, status: node?.status }),
+    isSyndicated: syndicated({ item }),
+    isReadable: isReadable({ item }),
+    isCollection: isCollection({ item }),
+    timeToRead: readTime({ item }),
+    analyticsData: {
+      url: item.resolvedUrl || item.givenUrl
+    }
+  }
+
+  return derived
+}
+
+/** TITLE
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @param {object} curatedInfo Additional information provided by the curation team
+ * @returns {string} The most appropriate title to show
+ */
+function title({ item, itemEnrichment }) {
+  // This is for matching images/files
+  const urlToUse = item?.collectionUrl || item?.givenUrl || item?.resolvedUrl
+  const file = urlToUse?.substring(urlToUse.lastIndexOf('/') + 1)
+  const fileName = file ? file.replace(/\.[^/.]+$/, '') : false
+  return (
+    itemEnrichment?.title ||
+    item?.title ||
+    item?.resolvedTitle ||
+    item?.givenTitle ||
+    fileName ||
+    item?.resolvedUrl ||
+    publisher({ item })
+  )
+}
+
+/** THUMBNAIL
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @param {object} curatedInfo Additional information provided by the curation team
+ * @returns {string:url} The most appropriate image to show as a thumbnail
+ */
+function thumbnail({ item, itemEnrichment }) {
+  const passedImage = itemEnrichment?.image_src || item?.thumbnail || item?.topImageUrl || false
+  if (passedImage) return passedImage
+
+  const firstImage = item?.images?.[Object.keys(item?.images)[0]]?.src
+  if (firstImage) return getImageCacheUrl(firstImage, { width: 1200 })
+  return false
+}
+
+/** PUBLISHER
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @returns {string} The best text to display as the publisher of this item
+ */
+function publisher({ item, passedPublisher }) {
+  const urlToUse = item?.givenUrl || item?.resolvedUrl
+  const derivedDomain = domainForUrl(urlToUse)
+  const syndicatedPublisher = item?.syndicatedArticle?.publisher?.name
+  return (
+    syndicatedPublisher ||
+    passedPublisher ||
+    item?.domainMetadata?.name ||
+    item?.domain ||
+    derivedDomain ||
+    null
+  )
+}
+
+/** EXCERPT
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @param {object} curatedInfo Additional information provided by the curation team
+ * @returns {string} The most appropriate excerpt to show
+ */
+function excerpt({ item, itemEnrichment }) {
+  return itemEnrichment?.excerpt || item?.excerpt || null
+}
+
+/**
+ * SYNDICATION
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @returns {bool} if the item is syndicated or not
+ */
+const syndicated = function ({ item }) {
+  if (item?.syndicatedArticle) return true
+  return false
+}
+
+/** READ TIME
+ * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
+ * @returns {int} average number of minutes to read the item
+ */
+export function readTime({ item }) {
+  return item?.timeToRead || readTimeFromWordCount(item?.wordCount) || null
+}
+
+/**
+ * READABLE
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @returns {bool} whether to open an item in a new tab
+ */
+function isReadable({ item }) {
+  return item?.hasVideo === 'IS_VIDEO' || item?.hasImage === 'IS_IMAGE' || item?.isArticle
+}
+
+/** EXTERNAL URL
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @returns {string} The url that opens to a non-pocket site
+ */
+function externalUrl({ item }) {
+  //!! Note: Add identifier var
+  const linkWithUTM = replaceUTM(item?.givenUrl, 'pocket_mylist')
+  return linkWithUTM
+}
+
+/** SAVE URL
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @returns {string} The url that should be saved or opened
+ */
+function saveUrl({ item }) {
+  return item?.givenUrl || item?.resolvedUrl || false
+}
+
+/** READ URl
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @return {string} url to use when reading
+ */
+export function readUrl({ item, status }) {
+  const external = externalUrl({ item })
+  const readable = isReadable({ item })
+  const collection = isCollection({ item })
+
+  // It's a collection, it should always open the original
+  if (collection) return `/collections/${collectionSlug(external)}`
+
+  // If item has no status if should have a false readURL
+  if (!status) return false
+
+  // No reader view exists, return the external url
+  if (!readable) return external
+
+  // Otherwise we are gonna open it in reader view
+  return `/read/${item.itemId}`
+}
+
+/** PERMANENT URL
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @returns {string} The url for permanent library
+ */
+function permanentUrl({ item, status }) {
+  return status ? urlWithPermanentLibrary(item?.itemId) || false : false
+}
+
+/**
+ * IS COLLECTION
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @returns {bool} whether an item is a collection
+ * https://regexr.com/5volt - A place to test the regular expression
+ */
+function isCollection({ item }) {
+  if (item.collection) return true
+
+  const urlToTest = item?.givenUrl || item?.resolvedUrl
+  if (!urlToTest) return false
+
+  const pattern = /.+?getpocket\.com\/(?:[a-z]{2}(?:-[a-zA-Z]{2})?\/)?collections\/(?!\?).+/gi
+  return !!urlToTest.match(pattern)
+}
+
+function collectionSlug(url) {
+  return url.substring(url.lastIndexOf('/') + 1)
+}
+
+// !! TEMPORARY FUNCTION while we transition to API next
+// !! THIS SHOULD BE DELETED SHORTLY
+function modernizeItem(item) {
+  const {
+    item_id,
+    resolved_id,
+    resolved_title,
+    sort_id,
+    has_image,
+    has_video,
+    is_article,
+    is_index,
+    favorite,
+    status,
+    time_added,
+    time_favorited,
+    time_read,
+    time_updated,
+    time_to_read,
+    word_count,
+    top_image_url,
+    syndicated_article,
+    domain_metadata,
+    given_url,
+    given_title,
+    resolved_url,
+    tags = [],
+    authors,
+    images,
+    lang,
+    ...rest
+  } = item
+
+  const statusEnum = {
+    0: 'UNREAD',
+    1: 'ARCHIVED',
+    2: 'DELETED'
+  }
+
+  const imagesEnum = {
+    0: 'NO_IMAGES',
+    1: 'HAS_IMAGES',
+    2: 'IS_IMAGE'
+  }
+
+  const videosEnum = {
+    0: 'NO_VIDEOS',
+    1: 'HAS_VIDEOS',
+    2: 'IS_VIDEO'
+  }
+
+  const base = {
+    cursor: '',
+    node: {
+      _createdAt: parseInt(time_added, 10),
+      _updatedAt: parseInt(time_updated, 10),
+      url: given_url,
+      status: statusEnum[parseInt(status, 10)],
+      isFavorite: favorite === '1',
+      favoritedAt: parseInt(time_favorited),
+      isArchived: status === '1',
+      archivedAt: parseInt(time_read),
+      tags
+    }
+  }
+
+  const syndicatedObject = syndicated_article ? { syndicatedArticle: syndicated_article } : {}
+  const collectionObject = isCollection({ item })
+    ? { collection: { slug: collectionSlug(given_url) } }
+    : {}
+
+  const convertedItem = {
+    itemId: item_id,
+    resolvedId: resolved_id,
+    resolvedTitle: resolved_title,
+    sortId: sort_id,
+    language: lang,
+    hasImage: imagesEnum[parseInt(has_image, 10)],
+    hasVideo: videosEnum[parseInt(has_video, 10)],
+    isArticle: getBool(is_article),
+    isIndex: getBool(is_index),
+    timeToRead: time_to_read,
+    wordCount: word_count,
+    topImageUrl: top_image_url,
+    domainMetadata: domain_metadata,
+    givenUrl: given_url,
+    givenTitle: given_title,
+    resolvedUrl: resolved_url,
+    authors: authors ? Object.values(authors) : [],
+    images: images ? Object.values(images) : [],
+    ...syndicatedObject,
+    ...collectionObject,
+    ...rest
+  }
+
+  // Derive checks if this key exists, so adding it without condition gives a false positive
+  return { ...base, node: { ...base.node, item: convertedItem } }
+}
