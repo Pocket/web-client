@@ -122,53 +122,54 @@ describe('My List - Original Deriver', () => {
   const expectedExternalUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential?utm_source=pocket_mylist' //prettier-ignore
   const expectedReadUrl = '/read/3059000415'
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3059000415'
+  const expectedAnalyticsUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
 
   it('should derive legacy data as expected', () => {
-    const derivedItem = deriveListItem(legacyListItem, true)
+    const item = deriveListItem(legacyListItem, true)
 
-    expect(derivedItem._createdAt).toBe(1634852432)
-    expect(derivedItem._updatedAt).toBe(1634852432)
-    expect(derivedItem.status).toBe('UNREAD')
-    expect(derivedItem.isFavorite).toBe(true)
-    expect(derivedItem.favoritedAt).toBe(1602888587)
-    expect(derivedItem.isArchived).toBe(false)
-    expect(derivedItem.archivedAt).toBe(0)
+    expect(item._createdAt).toBe(1634852432)
+    expect(item._updatedAt).toBe(1634852432)
+    expect(item.status).toBe('UNREAD')
+    expect(item.isFavorite).toBe(true)
+    expect(item.favoritedAt).toBe(1602888587)
+    expect(item.isArchived).toBe(false)
+    expect(item.archivedAt).toBe(0)
 
-    expect(derivedItem.itemId).toBe('3059000415')
-    expect(derivedItem.resolvedId).toBe('3059000415')
+    expect(item.itemId).toBe('3059000415')
+    expect(item.resolvedId).toBe('3059000415')
 
-    expect(derivedItem.isSyndicated).toBe(false)
-    expect(derivedItem.isReadable).toBe(true)
-    expect(derivedItem.isCollection).toBe(false)
-    expect(derivedItem.isArticle).toBeTruthy()
-    expect(derivedItem.isIndex).toBeFalsy()
-    expect(derivedItem.hasVideo).toBe('NO_VIDEOS')
-    expect(derivedItem.hasImage).toBe('HAS_IMAGES')
-    expect(derivedItem.language).toBe('en')
-    expect(derivedItem.title).toBe(
+    expect(item.isSyndicated).toBe(false)
+    expect(item.isReadable).toBe(true)
+    expect(item.isCollection).toBe(false)
+    expect(item.isArticle).toBeTruthy()
+    expect(item.isIndex).toBeFalsy()
+    expect(item.hasVideo).toBe('NO_VIDEOS')
+    expect(item.hasImage).toBe('HAS_IMAGES')
+    expect(item.language).toBe('en')
+    expect(item.title).toBe(
       'The Undisciplined Pursuit of More (The Art of Limiting Yourself to Only The Essential)'
     )
-    expect(derivedItem.thumbnail).toBe(
+    expect(item.thumbnail).toBe(
       'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5173%2F1595617454_GettyImages-1168909015.jpgcrop.jpg'
     )
-    expect(derivedItem.publisher).toBe('Pocket')
-    expect(derivedItem.excerpt).toBe(
+    expect(item.publisher).toBe('Pocket')
+    expect(item.excerpt).toBe(
       'For too long, we have overemphasized the external aspect of choices and underemphasized our internal ability to choose.'
     )
-    expect(derivedItem.saveUrl).toBe(expectedSaveUrl)
-    expect(derivedItem.externalUrl).toBe(expectedExternalUrl)
-    expect(derivedItem.readUrl).toBe(expectedReadUrl)
-    expect(derivedItem.permanentUrl).toBe(expectedPermanentUrl)
-    expect(derivedItem.timeToRead).toBe(5)
-    expect(derivedItem.tags).toStrictEqual([])
-    expect(derivedItem.annotations).toBe(undefined)
-    expect(derivedItem.images).toStrictEqual([
+    expect(item.saveUrl).toBe(expectedSaveUrl)
+    expect(item.externalUrl).toBe(expectedExternalUrl)
+    expect(item.readUrl).toBe(expectedReadUrl)
+    expect(item.permanentUrl).toBe(expectedPermanentUrl)
+    expect(item.timeToRead).toBe(5)
+    expect(item.tags).toStrictEqual([])
+    expect(item.annotations).toBe(undefined)
+    expect(item.images).toStrictEqual([
       {
         src: 'https://pocket-syndicated-images.s3.amazonaws.com/5f1b307571176.jpg'
       }
     ])
-    expect(derivedItem.videos).toBe(undefined)
-    expect(derivedItem.authors).toStrictEqual([
+    expect(item.videos).toBe(undefined)
+    expect(item.authors).toStrictEqual([
       {
         item_id: '3059000415',
         author_id: '148370955',
@@ -176,64 +177,64 @@ describe('My List - Original Deriver', () => {
         url: 'https://learn.thomasoppong.com/'
       }
     ])
-    expect(derivedItem.analyticsData).toStrictEqual({
-      url: expectedSaveUrl
+    expect(item.analyticsData).toStrictEqual({
+      url: expectedAnalyticsUrl
     })
   })
 
   it('should derive client api data as expected', () => {
-    const derivedItem = deriveListItem(legacyListItemFromClientApi)
+    const item = deriveListItem(legacyListItemFromClientApi)
 
-    expect(derivedItem._createdAt).toBe(1634852432)
-    expect(derivedItem._updatedAt).toBe(1634852432)
-    expect(derivedItem.status).toBe('UNREAD')
-    expect(derivedItem.isFavorite).toBe(true)
-    expect(derivedItem.favoritedAt).toBe(1602888587)
-    expect(derivedItem.isArchived).toBe(false)
-    expect(derivedItem.archivedAt).toBeFalsy()
+    expect(item._createdAt).toBe(1634852432)
+    expect(item._updatedAt).toBe(1634852432)
+    expect(item.status).toBe('UNREAD')
+    expect(item.isFavorite).toBe(true)
+    expect(item.favoritedAt).toBe(1602888587)
+    expect(item.isArchived).toBe(false)
+    expect(item.archivedAt).toBeFalsy()
 
-    expect(derivedItem.itemId).toBe('3059000415')
-    expect(derivedItem.resolvedId).toBe('3059000415')
+    expect(item.itemId).toBe('3059000415')
+    expect(item.resolvedId).toBe('3059000415')
 
-    expect(derivedItem.isSyndicated).toBe(true)
-    expect(derivedItem.isReadable).toBe(true)
-    expect(derivedItem.isCollection).toBe(false)
-    expect(derivedItem.isArticle).toBe(true)
-    expect(derivedItem.isIndex).toBe(false)
-    expect(derivedItem.hasVideo).toBe('NO_VIDEOS')
-    expect(derivedItem.hasImage).toBe('HAS_IMAGES')
-    expect(derivedItem.language).toBe('en')
-    expect(derivedItem.title).toBe(
+    expect(item.isSyndicated).toBe(true)
+    expect(item.isReadable).toBe(true)
+    expect(item.isCollection).toBe(false)
+    expect(item.isArticle).toBe(true)
+    expect(item.isIndex).toBe(false)
+    expect(item.hasVideo).toBe('NO_VIDEOS')
+    expect(item.hasImage).toBe('HAS_IMAGES')
+    expect(item.language).toBe('en')
+    expect(item.title).toBe(
       'The Undisciplined Pursuit of More (The Art of Limiting Yourself to Only The Essential)'
     )
-    expect(derivedItem.thumbnail).toBe(
+    expect(item.thumbnail).toBe(
       'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5173%2F1595617454_GettyImages-1168909015.jpgcrop.jpg'
     )
-    expect(derivedItem.publisher).toBe('Thomas Oppong')
-    expect(derivedItem.excerpt).toBe(
+    expect(item.publisher).toBe('Thomas Oppong')
+    expect(item.excerpt).toBe(
       'For too long, we have overemphasized the external aspect of choices and underemphasized our internal ability to choose.'
     )
-    expect(derivedItem.saveUrl).toBe(expectedSaveUrl)
-    expect(derivedItem.externalUrl).toBe(expectedExternalUrl)
-    expect(derivedItem.readUrl).toBe(expectedReadUrl)
-    expect(derivedItem.permanentUrl).toBe(expectedPermanentUrl)
-    expect(derivedItem.timeToRead).toBe(5)
-    expect(derivedItem.tags).toStrictEqual([])
-    expect(derivedItem.images).toStrictEqual([
+    expect(item.saveUrl).toBe(expectedSaveUrl)
+    expect(item.externalUrl).toBe(expectedExternalUrl)
+    expect(item.readUrl).toBe(expectedReadUrl)
+    expect(item.permanentUrl).toBe(expectedPermanentUrl)
+    expect(item.timeToRead).toBe(5)
+    expect(item.tags).toStrictEqual([])
+    expect(item.images).toStrictEqual([
       {
         src: 'https://pocket-syndicated-images.s3.amazonaws.com/5f1b307571176.jpg'
       }
     ])
-    expect(derivedItem.videos).toBe(null)
-    expect(derivedItem.authors).toStrictEqual([
+    expect(item.videos).toBe(null)
+    expect(item.authors).toStrictEqual([
       {
         id: '148370955',
         name: 'Thomas Oppong',
         url: 'https://learn.thomasoppong.com/'
       }
     ])
-    expect(derivedItem.analyticsData).toStrictEqual({
-      url: expectedSaveUrl
+    expect(item.analyticsData).toStrictEqual({
+      url: expectedAnalyticsUrl
     })
   })
 })

@@ -90,6 +90,7 @@ describe('My List - Image', () => {
   const expectedExternalUrl = 'https://cdn.dribbble.com/users/59947/screenshots/16700535/media/335d386abb459f49570030e830429cef.jpg?utm_source=pocket_mylist' //prettier-ignore
   const expectedReadUrl = '/read/3462094779' //prettier-ignore
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3462094779'
+  const expectedAnalyticsUrl = 'https://cdn.dribbble.com/users/59947/screenshots/16700535/media/335d386abb459f49570030e830429cef.jpg' //prettier-ignore
 
   it('should derive v3 as expected', () => {
     const item = deriveListItem(imageFromV3, true)
@@ -129,6 +130,9 @@ describe('My List - Image', () => {
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
     expect(item.timeToRead).toBeFalsy()
     expect(item.authors).toStrictEqual([])
+    expect(item.analyticsData).toStrictEqual({
+      url: expectedAnalyticsUrl
+    })
   })
 
   it('should derive clientAPI as expected', () => {
@@ -169,5 +173,8 @@ describe('My List - Image', () => {
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
     expect(item.timeToRead).toBeFalsy()
     expect(item.authors).toStrictEqual([])
+    expect(item.analyticsData).toStrictEqual({
+      url: expectedAnalyticsUrl
+    })
   })
 })

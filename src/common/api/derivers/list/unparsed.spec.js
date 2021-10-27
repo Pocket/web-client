@@ -107,6 +107,7 @@ describe('My List - Unparsed', () => {
   const expectedExternalUrl = 'https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_mylist' //prettier-ignore
   const expectedReadUrl = 'https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_mylist' //prettier-ignore
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3117582481'
+  const expectedAnalyticsUrl = 'https://www.myswitzerland.com/en-us/destinations/blausee/'
 
   it('should derive v3 as expected', () => {
     const item = deriveListItem(unparsedFromV3, true)
@@ -153,6 +154,9 @@ describe('My List - Unparsed', () => {
         url: ''
       }
     ])
+    expect(item.analyticsData).toStrictEqual({
+      url: expectedAnalyticsUrl
+    })
   })
 
   it('should derive clientAPI as expected', () => {
@@ -200,5 +204,8 @@ describe('My List - Unparsed', () => {
         url: ''
       }
     ])
+    expect(item.analyticsData).toStrictEqual({
+      url: expectedAnalyticsUrl
+    })
   })
 })

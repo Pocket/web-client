@@ -77,6 +77,7 @@ describe('Collection — Page', () => {
   const expectedExternalUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021?utm_source=pocket_mylist' //prettier-ignore
   const expectedReadUrl = '/collections/making-sense-of-cybersecurity-in-2021?utm_source=pocket_mylist' //prettier-ignore
   const expectedPermanentUrl = false
+  const expectedAnalyticsUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021' //prettier-ignore
 
   it('should derive clientAPI as expected', () => {
     const item = deriveCollection(collectionFromClientApi)
@@ -125,5 +126,8 @@ describe('Collection — Page', () => {
           'https://s3.amazonaws.com/pocket-collectionapi-prod-images/51ebddac-b680-4162-bf8c-78a48dbd4a61.png'
       }
     ])
+    expect(item.analyticsData).toStrictEqual({
+      url: expectedAnalyticsUrl
+    })
   })
 })

@@ -84,7 +84,8 @@ describe('Collection — Story', () => {
   const expectedSaveUrl = 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html' //prettier-ignore
   const expectedExternalUrl = 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_mylist' //prettier-ignore
   const expectedReadUrl = false //prettier-ignore
-  const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=1731163180'
+  const expectedPermanentUrl = false
+  const expectedAnalyticsUrl = 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html' //prettier-ignore
 
   it('should derive clientAPI as expected', () => {
     const item = deriveStory(storyFromClientApi)
@@ -122,7 +123,7 @@ describe('Collection — Story', () => {
     expect(item.saveUrl).toBe(expectedSaveUrl)
     expect(item.externalUrl).toBe(expectedExternalUrl)
     expect(item.readUrl).toBe(expectedReadUrl)
-    expect(item.permanentUrl).toBe(false)
+    expect(item.permanentUrl).toBe(expectedPermanentUrl)
     expect(item.timeToRead).toBe(14)
     expect(item.authors).toStrictEqual([
       {
@@ -130,5 +131,8 @@ describe('Collection — Story', () => {
         url: 'https://www.nytimes.com/by/jack-ewing'
       }
     ])
+    expect(item.analyticsData).toStrictEqual({
+      url: expectedAnalyticsUrl
+    })
   })
 })

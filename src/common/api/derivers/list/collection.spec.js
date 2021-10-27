@@ -119,6 +119,7 @@ describe('My List - Collection', () => {
   const expectedExternalUrl = 'https://getpocket.com/collections/delicious-reads-about-your-favorite-candy?utm_source=pocket_mylist' //prettier-ignore
   const expectedReadUrl = '/collections/delicious-reads-about-your-favorite-candy?utm_source=pocket_mylist' //prettier-ignore
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3453456445'
+  const expectedAnalyticsUrl = 'https://getpocket.com/collections/delicious-reads-about-your-favorite-candy' //prettier-ignore
 
   it('should derive v3 as expected', () => {
     const item = deriveListItem(collectionFromV3, true)
@@ -165,6 +166,9 @@ describe('My List - Collection', () => {
         url: ''
       }
     ])
+    expect(item.analyticsData).toStrictEqual({
+      url: expectedAnalyticsUrl
+    })
   })
 
   it('should derive clientAPI as expected', () => {
@@ -213,5 +217,8 @@ describe('My List - Collection', () => {
         url: ''
       }
     ])
+    expect(item.analyticsData).toStrictEqual({
+      url: expectedAnalyticsUrl
+    })
   })
 })

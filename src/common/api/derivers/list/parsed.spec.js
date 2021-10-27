@@ -118,6 +118,7 @@ describe('My List - Parsed', () => {
   const expectedExternalUrl = 'http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html?utm_source=pocket_mylist' //prettier-ignore
   const expectedReadUrl = '/read/3362121180' //prettier-ignore
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3362121180'
+  const expectedAnalyticsUrl = 'https://www.nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html' //prettier-ignore
 
   it('should derive v3 as expected', () => {
     const item = deriveListItem(parsedFromV3, true)
@@ -164,6 +165,9 @@ describe('My List - Parsed', () => {
         url: 'https://www.nytimes.com/by/jane-e-brody'
       }
     ])
+    expect(item.analyticsData).toStrictEqual({
+      url: expectedAnalyticsUrl
+    })
   })
 
   it('should derive clientAPI as expected', () => {
@@ -211,5 +215,8 @@ describe('My List - Parsed', () => {
         url: 'https://www.nytimes.com/by/jane-e-brody'
       }
     ])
+    expect(item.analyticsData).toStrictEqual({
+      url: expectedAnalyticsUrl
+    })
   })
 })

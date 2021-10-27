@@ -89,9 +89,9 @@ export function deriveListItem(passedItem, legacy) {
   return deriveItem({ item, node: rest, cursor })
 }
 
-export function deriveRecommendation(recommendation) {
-  const { item, publisher: passedPublisher, curatedInfo: itemEnrichment } = recommendation
-  return deriveItem({ item, itemEnrichment, passedPublisher })
+export function deriveRecommendation(recommendationsFromSlate, analyticsData) {
+  const { item, curatedInfo: itemEnrichment } = recommendationsFromSlate
+  return deriveItem({ item, itemEnrichment, analyticsData })
 }
 
 export function deriveCollection(collection) {
@@ -114,7 +114,14 @@ export function deriveStory(story) {
   return deriveItem({ item, itemEnrichment })
 }
 
-export function deriveItem({ item, cursor, node, itemEnrichment, passedPublisher }) {
+export function deriveItem({
+  item,
+  cursor,
+  node,
+  itemEnrichment,
+  passedPublisher,
+  analyticsData = {}
+}) {
   const derived = {
     cursor,
     ...node,
@@ -132,7 +139,8 @@ export function deriveItem({ item, cursor, node, itemEnrichment, passedPublisher
     isCollection: isCollection({ item }),
     timeToRead: readTime({ item }),
     analyticsData: {
-      url: item.resolvedUrl || item.givenUrl
+      url: item.resolvedUrl || item.givenUrl,
+      ...analyticsData
     }
   }
 
