@@ -1,3 +1,10 @@
+## [1.24.13](https://github.com/Pocket/web-client/compare/v1.24.12...v1.24.13) (2021-10-26)
+
+
+### Bug Fixes
+
+* **collections:** optional chaining on ad category ([c7e7818](https://github.com/Pocket/web-client/commit/c7e7818de3e240535b43972c7e39ce45b8e7cc62))
+
 ## [1.24.12](https://github.com/Pocket/web-client/compare/v1.24.11...v1.24.12) (2021-10-26)
 
 
