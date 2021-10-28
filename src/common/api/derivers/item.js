@@ -116,7 +116,7 @@ export function deriveStory(story) {
 
 export function deriveItem({
   item,
-  cursor,
+  cursor = '',
   node,
   itemEnrichment,
   passedPublisher,
@@ -130,16 +130,16 @@ export function deriveItem({
     thumbnail: thumbnail({ item, itemEnrichment }),
     excerpt: excerpt({ item, itemEnrichment }),
     publisher: publisher({ item, passedPublisher }),
-    externalUrl: externalUrl({ item }),
+    externalUrl: externalUrl({ item, itemEnrichment }),
     readUrl: readUrl({ item, status: node?.status }),
-    saveUrl: saveUrl({ item }),
+    saveUrl: saveUrl({ item, itemEnrichment }),
     permanentUrl: permanentUrl({ item, status: node?.status }),
     isSyndicated: syndicated({ item }),
     isReadable: isReadable({ item }),
     isCollection: isCollection({ item }),
     timeToRead: readTime({ item }),
     analyticsData: {
-      url: item.resolvedUrl || item.givenUrl,
+      url: analyticsUrl({ item, itemEnrichment }),
       ...analyticsData
     }
   }
@@ -176,7 +176,7 @@ function title({ item, itemEnrichment }) {
  * @returns {string:url} The most appropriate image to show as a thumbnail
  */
 function thumbnail({ item, itemEnrichment }) {
-  const passedImage = itemEnrichment?.image_src || item?.thumbnail || item?.topImageUrl || false
+  const passedImage = itemEnrichment?.thumbnail || item?.thumbnail || item?.topImageUrl || false
   if (passedImage) return passedImage
 
   const firstImage = item?.images?.[Object.keys(item?.images)[0]]?.src
@@ -239,7 +239,7 @@ export function readTime({ item }) {
  * @returns {bool} whether to open an item in a new tab
  */
 function isReadable({ item }) {
-  return item?.hasVideo === 'IS_VIDEO' || item?.hasImage === 'IS_IMAGE' || item?.isArticle
+  return item?.hasVideo === 'IS_VIDEO' || item?.hasImage === 'IS_IMAGE' || item?.isArticle || false
 }
 
 /** EXTERNAL URL
@@ -247,9 +247,10 @@ function isReadable({ item }) {
  * @param {object} item An item returned from the server
  * @returns {string} The url that opens to a non-pocket site
  */
-function externalUrl({ item }) {
+function externalUrl({ item, itemEnrichment }) {
   //!! Note: Add identifier var
-  const linkWithUTM = replaceUTM(item?.givenUrl, 'pocket_mylist')
+  const urlToUse = itemEnrichment?.url || item?.givenUrl || item?.resolvedUrl
+  const linkWithUTM = replaceUTM(urlToUse, 'pocket_mylist')
   return linkWithUTM
 }
 
@@ -258,8 +259,17 @@ function externalUrl({ item }) {
  * @param {object} item An item returned from the server
  * @returns {string} The url that should be saved or opened
  */
-function saveUrl({ item }) {
-  return item?.givenUrl || item?.resolvedUrl || false
+function saveUrl({ item, itemEnrichment }) {
+  return itemEnrichment?.url || item?.givenUrl || item?.resolvedUrl || false
+}
+
+/** ANALYTICS URL
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @returns {string} The url that should be saved or opened
+ */
+function analyticsUrl({ item, itemEnrichment }) {
+  return itemEnrichment?.url || item?.resolvedUrl || item?.givenUrl || false
 }
 
 /** READ URl
@@ -267,8 +277,8 @@ function saveUrl({ item }) {
  * @param {object} item An item returned from the server
  * @return {string} url to use when reading
  */
-export function readUrl({ item, status }) {
-  const external = externalUrl({ item })
+export function readUrl({ item, itemEnrichment, status }) {
+  const external = externalUrl({ item, itemEnrichment })
   const readable = isReadable({ item })
   const collection = isCollection({ item })
 

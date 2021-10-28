@@ -114,7 +114,7 @@ describe('Collection — Story', () => {
     // Derived content
     expect(item.title).toBe('Inside VW’s Campaign of Trickery')
     expect(item.thumbnail).toBe(
-      'https://static01.nyt.com/images/2017/05/07/business/07vwexcerpt1-web/07vwexcerpt1-web-facebookJumbo.jpg?year=2017&h=549&w=1050&s=9040da8dc525be00827fd1625a9bb1e954d7d895d974cec2d8a8395682209f60&k=ZQJBKqZ0VN'
+      'https://s3.amazonaws.com/pocket-collectionapi-prod-images/914953af-15fd-46b9-ba3c-eed3ed278f9a.jpeg'
     )
     expect(item.publisher).toBe('The New York Times')
     expect(item.excerpt).toBe(
