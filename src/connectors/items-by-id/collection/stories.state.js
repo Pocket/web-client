@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { saveItem as saveItemAPI } from 'common/api/saveItem'
-import { deriveCollectionStories } from './stories.derive.js'
+import { deriveStory } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
 
 import { COLLECTION_STORIES_REQUEST } from 'actions'
@@ -55,9 +55,10 @@ export const collectionStoriesReducers = (state = initialState, action) => {
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
-    case HYDRATE:
+    case HYDRATE: {
       const { collectionStoriesById } = action.payload
       return { ...state, ...collectionStoriesById }
+    }
 
     default:
       return state
@@ -101,8 +102,8 @@ function* storiesSaveRequest(action) {
 function* storiesDerive(action) {
   try {
     const { stories } = action
-    const derivedStories = deriveCollectionStories(stories)
-    const storiesById = arrayToObject(derivedStories, 'item_id')
+    const derivedStories = stories.map((story) => deriveStory(story))
+    const storiesById = arrayToObject(derivedStories, 'itemId')
 
     yield put({ type: COLLECTION_STORIES_HYDRATE_SUCCESS, storiesById })
   } catch (error) {
