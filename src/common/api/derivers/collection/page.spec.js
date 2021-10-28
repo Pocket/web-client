@@ -8,7 +8,7 @@ const collectionFromClientApi = {
     'Technologist and Mozilla Fellow Alex Argüelles breaks down how governments and corporations can intrude on digital privacy, and how to protect yourself from the worst offenders. ',
   intro:
     'October is Cybersecurity Awareness Month, which deserves more than a calendar notification to update your passwords. This year, it comes at a time when technology companies play an increasingly prominent part of our lives—and not always for the better. \n\nIn this collection of articles and tools, I want to dwell on the complexities and inequalities of our hyper-connected world. It can be thorny out there, but it’s more important than ever to pay attention, investigate, and fight back where we can. So… let’s dig in! --*Alex Argüelles (Alex K.)*',
-  topImageUrl:
+  thumbnail:
     'https://s3.amazonaws.com/pocket-collectionapi-prod-images/10751de5-8574-4802-9988-e958b38ad72c.png',
   authors: [
     {
@@ -30,6 +30,24 @@ const collectionFromClientApi = {
     externalId: 'cd9e9740-f5da-4658-81ec-9f3278c77423'
   },
   publishedAt: '2021-10-25T19:28:45.000Z',
+  stories: [
+    {
+      url: 'https://forbiddenstories.org/spying-on-mexican-journalists-investigating-the-lucrative-market-of-cyber-surveillance/',
+      title:
+        'Spying on Mexican Journalists: Investigating the Lucrative Market of Cyber-Surveillance',
+      excerpt:
+        '**Alex K.**: “I’m a deep admirer of the investigative journalism and international collaboration ethics from the people at Forbidden Stories, especially ‘The Cartel Project’ series that this piece is from. Here, Cécile Schilis-Gallego explores how easily state-deployed surveillance mechanisms can be used by organized crime to silence and harass journalists, human rights defenders, and activists with impunity.”',
+      thumbnail:
+        'https://s3.amazonaws.com/pocket-collectionapi-prod-images/a4a794d2-2e5d-41d9-a913-05d0b1c52a69.jpeg',
+      fromPartner: false,
+      authors: [
+        {
+          name: 'Cécile Schilis-Gallego'
+        }
+      ],
+      publisher: 'Forbidden Stories'
+    }
+  ],
   partnership: null
 }
 
@@ -106,8 +124,9 @@ describe('Collection — Page', () => {
 
     // Derived content
     expect(item.title).toBe('Making Sense of Cybersecurity in 2021')
+    // Expect this to be author image
     expect(item.thumbnail).toBe(
-      'https://s3.amazonaws.com/pocket-collectionapi-prod-images/10751de5-8574-4802-9988-e958b38ad72c.png'
+      'https://s3.amazonaws.com/pocket-collectionapi-prod-images/51ebddac-b680-4162-bf8c-78a48dbd4a61.png'
     )
     expect(item.publisher).toBe('Pocket')
     expect(item.excerpt).toBe(

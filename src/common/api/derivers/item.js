@@ -96,10 +96,14 @@ export function deriveRecommendation(recommendationsFromSlate, analyticsData) {
 
 export function deriveCollection(collection) {
   const collectionUrl = `/collections/${collection?.slug}`
+  const firstImage = collection?.stories[0]?.thumbnail
+  const authorImage = collection?.authors[0]?.imageUrl
 
   return deriveItem({
     item: {
       ...collection,
+      heroImage: collection.thumbnail,
+      thumbnail: authorImage || firstImage,
       status: false,
       givenUrl: `${BASE_URL}${collectionUrl}`,
       collectionUrl,
