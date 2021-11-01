@@ -1,16 +1,14 @@
-import { arrayToObject } from 'common/utilities'
-import { getTopicList as apiTopicList } from 'common/api/topics'
+import { TOPICS } from 'common/constants'
 import { TOPICLIST_HYDRATE } from 'actions'
 import { TOPICLIST_SET_ACTIVE } from 'actions'
 import { TOPICLIST_REQUEST } from 'actions'
 import { TOPICLIST_SUCCESS } from 'actions'
 import { TOPICLIST_FAILURE } from 'actions'
 import { HYDRATE } from 'actions'
-import { takeLatest, put, takeEvery } from 'redux-saga/effects'
+import { takeLatest, put } from 'redux-saga/effects'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getTopicList = () => ({ type: TOPICLIST_REQUEST })
 export const hydrateTopicList = (hydrated) => ({ type: TOPICLIST_HYDRATE, hydrated }) /*prettier-ignore */
 export const setActiveTopic = (topic) => ({ type: TOPICLIST_SET_ACTIVE, topic })
 
@@ -55,31 +53,22 @@ export const topicListSagas = [takeLatest(TOPICLIST_REQUEST, topicListRequest)]
 
 /** ASYNC Functions
  --------------------------------------------------------------- */
-function* topicListRequest(action) {
+function* topicListRequest() {
   try {
-    const topicsByName = yield fetchTopicList()
+    const topicsByName = fetchTopicList()
     yield put({ type: TOPICLIST_SUCCESS, topicsByName })
   } catch (error) {
     console.warn(error)
     yield put({ type: TOPICLIST_FAILURE, error })
   }
 }
+
 /**
  * fetchTopicList
- * Make and async request for a Pocket v3 feed and return best data
- * @return topics {array} An array of derived items
+ * @return topics {object} An object of topics keyed by name
  */
-export async function fetchTopicList(ssr) {
-  try {
-    const response = await apiTopicList(ssr)
+export const fetchTopicList = () => {
+  const topicsByName = TOPICS
 
-    if (!response || response.status !== 1) return {}
-
-    const { topics } = response
-    const topicsByName = arrayToObject(topics, 'topic_slug')
-
-    return topicsByName
-  } catch (error) {
-    console.warn('topic-pages.topic-list.state', error)
-  }
+  return topicsByName
 }
