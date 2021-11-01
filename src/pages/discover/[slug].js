@@ -16,7 +16,7 @@ import { wrapper } from 'store'
  * SEO/Crawlers
   --------------------------------------------------------------- */
 export const getStaticPaths = async () => {
-  const topicsByName = await fetchTopicList(true)
+  const topicsByName = fetchTopicList()
   const paths = Object.values(topicsByName).map((data) => `/discover/${data.topic_slug}`)
   return { paths, fallback: 'blocking' }
 }
@@ -32,7 +32,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ params,
 
   // Hydrating initial state with an async request. This will block the
   // page from loading. Do this for SEO/crawler purposes
-  const topicsByName = await fetchTopicList(true)
+  const topicsByName = fetchTopicList()
   const activeTopic = topicsByName[slug]
 
   // Invalid Topic

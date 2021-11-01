@@ -22,7 +22,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ locale 
   // page from loading. Do this for SEO/crawler purposes
   const response = await fetchDiscoverData({ locale })
   const { items, itemsById } = response
-  const topicsByName = await fetchTopicList(true)
+  const topicsByName = fetchTopicList()
 
   // Since ssr will not wait for side effects to resolve this dispatch
   // needs to be pure as well.

@@ -18,7 +18,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       // page from loading. Do this for SEO/crawler purposes
       const baseUrl = req.headers.host
       const response = await fetchHydrationData({ slug, baseUrl })
-      const topicsByName = await fetchTopicList(true)
+      const topicsByName = fetchTopicList()
 
       // No article found
       if (response.items?.length === 0) {

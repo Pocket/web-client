@@ -38,7 +38,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ params,
   // Hydrating initial state with an async request. This will block the
   // page from loading. Do this for SEO/crawler purposes
   const { stories, collection } = await fetchCollectionBySlug({ slug })
-  const topicsByName = await fetchTopicList(true)
+  const topicsByName = fetchTopicList()
 
   // No article found
   if (!collection || !stories) {
