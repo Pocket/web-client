@@ -488,9 +488,7 @@ function* myListSearchRequest(action) {
     const searchState = yield select(getState)
     const currentItems = searchState[section]
 
-    const newItemIds = Object.values(itemsById)
-      .sort(sortByOrder)
-      .map((item) => item.item_id)
+    const newItemIds = Object.values(itemsById).map((item) => item.itemId)
 
     const items =
       searchState.query !== query
