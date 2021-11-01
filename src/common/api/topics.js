@@ -1,5 +1,5 @@
 import { request, requestGQL } from 'common/utilities/request/request'
-import { TOPIC_IDS } from 'common/constants'
+import { TOPICS } from 'common/constants'
 import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
 import { getRecIds } from 'common/utilities'
 import { recommendationsFromSlate } from 'common/utilities'
@@ -7,7 +7,7 @@ import { recommendationsFromSlate } from 'common/utilities'
 export async function getNewTopicFeed(topic, recommendationCount = 30) {
   return requestGQL({
     query: getSlateLineup,
-    variables: { id: TOPIC_IDS[topic].id, recommendationCount, slateCount: 2 }
+    variables: { id: TOPICS[topic].id, recommendationCount, slateCount: 2 }
   })
     .then(processSlates)
     .catch((error) => console.error(error))
