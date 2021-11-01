@@ -182,6 +182,157 @@ export const HOME_TOPIC_SLATES = {
   'travel': '4345efa7-2c89-4884-b836-3260757a3a97'
 }
 
+export const TOPICS = {
+  business: {
+    'id': 'c18b41d8-8100-4037-aa64-416994e1d4cf',
+    'curator_label': 'Business',
+    'display_name': 'Business',
+    'page_type': 'topic_page',
+    'topic': 'business',
+    'topic_slug': 'business',
+    'is_promoted': false
+  },
+  career: {
+    'id': 'ff23f296-6c5e-4f53-a46a-3feb5006f261',
+    'curator_label': 'Career',
+    'display_name': 'Career',
+    'page_type': 'topic_page',
+    'topic': 'career',
+    'topic_slug': 'career',
+    'is_promoted': false
+  },
+  coronavirus: {
+    'id': '53ace46e-fd12-4744-9647-fa633a9a044c',
+    'curator_label': 'COVID-19',
+    'display_name': 'Coronavirus',
+    'display_note': 'Stay informed with this curated guide to the global outbreak.  For official U.S. guidelines and health updates, visit [cdc.gov](http://www.cdc.gov).',
+    'page_type': 'editorial_collection',
+    'social_description': 'The latest analysis and in-depth reporting on the global COVID-19 outbreak, curated from around the web.',
+    'social_image': 'https://pocket-image-cache.com//filters:no_upscale():format(jpg):extract_cover()/https%3A%2F%2Fpocket-spoc-images.s3.amazonaws.com%2FEditorial_Images%2FGettyImages-1212213050.jpg',
+    'social_title': 'Essential Reads on the Coronavirus',
+    'topic': 'coronavirus',
+    'topic_slug': 'coronavirus',
+    'is_promoted': true
+  },
+  education: {
+    'id': '7bf5c80a-ffd1-436a-9dea-4f9badea463a',
+    'curator_label': 'Education',
+    'display_name': 'Education',
+    'page_type': 'topic_page',
+    'topic': 'education',
+    'topic_slug': 'education',
+    'is_promoted': false
+  },
+  entertainment: {
+    'id': 'cd1f803f-30bd-424b-9d75-6e8d3c8e8450',
+    'curator_label': 'Entertainment',
+    'display_name': 'Entertainment',
+    'page_type': 'topic_page',
+    'topic': 'entertainment',
+    'topic_slug': 'entertainment',
+    'is_promoted': false
+  },
+  food: {
+    'id': 'c057d284-31e6-4ba0-ae09-3478f3d40ec7',
+    'curator_label': 'Food',
+    'display_name': 'Food',
+    'page_type': 'topic_page',
+    'topic': 'food',
+    'topic_slug': 'food',
+    'is_promoted': false
+  },
+  gaming: {
+    'id': 'b966a787-d9f2-432a-bd30-741d1ac797d1',
+    'curator_label': 'Gaming',
+    'display_name': 'Gaming',
+    'page_type': 'topic_page',
+    'topic': 'gaming',
+    'topic_slug': 'gaming',
+    'is_promoted': false
+  },
+  health: {
+    'id': '1abc55f1-75b1-44cb-b5bd-65c4282b158d',
+    'curator_label': 'Health & Fitness',
+    'display_name': 'Health & Fitness',
+    'page_type': 'topic_page',
+    'topic': 'health',
+    'topic_slug': 'health',
+    'is_promoted': false
+  },
+  parenting: {
+    'id': 'd273a8e2-ab17-43e8-809d-0abde4d617d7',
+    'curator_label': 'Parenting',
+    'display_name': 'Parenting',
+    'page_type': 'topic_page',
+    'topic': 'parenting',
+    'topic_slug': 'parenting',
+    'is_promoted': false
+  },
+  'personal-finance': {
+    'id': '62585952-3eb8-4380-be06-266eca903cbc',
+    'curator_label': 'Personal Finance',
+    'display_name': 'Personal Finance',
+    'page_type': 'topic_page',
+    'topic': 'personal-finance',
+    'topic_slug': 'personal-finance',
+    'is_promoted': false
+  },
+  politics: {
+    'id': '72c3878f-c48b-413c-aff8-90d7a0d79d32',
+    'curator_label': 'Politics',
+    'display_name': 'Politics',
+    'page_type': 'topic_page',
+    'topic': 'politics',
+    'topic_slug': 'politics',
+    'is_promoted': false
+  },
+  science: {
+    'id': 'c2829dc4-6a86-4c87-aa3e-f75f67ae8230',
+    'curator_label': 'Science',
+    'display_name': 'Science',
+    'page_type': 'topic_page',
+    'topic': 'science',
+    'topic_slug': 'science',
+    'is_promoted': false
+  },
+  'self-improvement': {
+    'id': '63f24663-0e80-4c08-82aa-3fb0e06c4979',
+    'curator_label': 'Self Improvement',
+    'display_name': 'Self Improvement',
+    'page_type': 'topic_page',
+    'topic': 'self-improvement',
+    'topic_slug': 'self-improvement',
+    'is_promoted': false
+  },
+  sports: {
+    'id': '695e39f3-62e8-4430-8d12-e8b457ac7751',
+    'curator_label': 'Sports',
+    'display_name': 'Sports',
+    'page_type': 'topic_page',
+    'topic': 'sports',
+    'topic_slug': 'sports',
+    'is_promoted': false
+  },
+  technology: {
+    'id': 'dc010ef1-1f34-473a-a4b5-4cc155e18a4a',
+    'curator_label': 'Technology',
+    'display_name': 'Technology',
+    'page_type': 'topic_page',
+    'topic': 'technology',
+    'topic_slug': 'technology',
+    'is_promoted': false
+  },
+  travel: {
+    'id': 'f16f670d-14f7-425d-a310-0bb8c267dba2',
+    'curator_label': 'Travel',
+    'display_name': 'Travel',
+    'page_type': 'topic_page',
+    'topic': 'travel',
+    'topic_slug': 'travel',
+    'is_promoted': false
+  }
+}
+
 export const TOPIC_IDS = {
   business: {
     id: 'c18b41d8-8100-4037-aa64-416994e1d4cf',
