@@ -1,7 +1,7 @@
 import { takeLatest, put, select } from 'redux-saga/effects'
 import { getMyList } from 'common/api/my-list'
 import { searchMyList } from 'common/api/my-list'
-import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
+import { deriveListItem } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
 
 import { reconcileItemsBatch } from './my-list.reconcilers'
@@ -12,7 +12,6 @@ import { reconcileItemsDeleted } from './my-list.reconcilers'
 
 import { filterSelector } from './my-list.filters'
 import { sortSelector } from './my-list.sorters'
-import { sortByOrder } from './my-list.sorters'
 
 import { MYLIST_DATA_REQUEST } from 'actions'
 import { MYLIST_DATA_SUCCESS } from 'actions'
@@ -233,10 +232,10 @@ export const myListReducers = (state = initialState, action) => {
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
-    case HYDRATE:
+    case HYDRATE: {
       const { mylist } = action.payload
       return { ...state, ...mylist }
-
+    }
     // Reconcilers
     case ITEMS_ARCHIVE_SUCCESS:
     case ITEMS_UNARCHIVE_SUCCESS: {
@@ -390,7 +389,7 @@ function* myListDataRequest(action) {
     const items = Object.values(itemsByIdDraft)
       .filter((item) => filterFunction(item, tag))
       .sort(sortFunction)
-      .map((item) => item.item_id)
+      .map((item) => item.itemId)
 
     const newOffset = offset + Object.keys(itemsById).length
 
@@ -437,7 +436,7 @@ function* myListUpdate(action) {
     const items = Object.values(itemsById)
       .filter((item) => filterFunction(item, tag))
       .sort(sortFunction)
-      .map((item) => item.item_id)
+      .map((item) => item.itemId)
 
     // Update our item store
     yield put({
@@ -474,7 +473,12 @@ function* myListSearchRequest(action) {
     // If queries don't match, it's fresh so reset search
     if (query !== savedQuery) yield put({ type: MYLIST_SEARCH_CLEAR, query })
 
-    const { itemsById, total = 0, since, error } = yield fetchMyListSearch({
+    const {
+      itemsById,
+      total = 0,
+      since,
+      error
+    } = yield fetchMyListSearch({
       locale_lang: 'en-US',
       state: 'all',
       count: 100,
@@ -530,8 +534,8 @@ export async function fetchMyListData(params) {
     const total = response.total
     const since = response.since
 
-    const derivedItems = await deriveMyListItems(Object.values(response.list))
-    const itemsById = arrayToObject(derivedItems, 'item_id')
+    const derivedItems = Object.values(response.list).map((item) => deriveListItem(item, true))
+    const itemsById = arrayToObject(derivedItems, 'itemId')
 
     return { itemsById, total, since }
   } catch (error) {
@@ -551,11 +555,11 @@ export async function fetchMyListUpdate(params) {
     // Find all items that have been deleted
     const itemsToDelete = Object.values(list)
       .filter((item) => item.status === '2')
-      .map((item) => item.item_id)
+      .map((item) => item.itemId)
 
     const itemsToUpdate = Object.values(list)
-    const derivedItems = await deriveMyListItems(itemsToUpdate)
-    const updatedItemsById = arrayToObject(derivedItems, 'item_id')
+    const derivedItems = itemsToUpdate.map((item) => deriveListItem(item, true))
+    const updatedItemsById = arrayToObject(derivedItems, 'itemId')
 
     return { updatedItemsById, itemsToDelete, total, updatedSince: since }
   } catch (error) {
@@ -577,8 +581,8 @@ export async function fetchMyListSearch(params) {
     const { since, search_meta, total } = response
     const computedTotal = search_meta?.total_result_count || total
 
-    const derivedItems = await deriveMyListItems(Object.values(response.list))
-    const itemsById = arrayToObject(derivedItems, 'item_id')
+    const derivedItems = Object.values(response.list).map((item) => deriveListItem(item, true))
+    const itemsById = arrayToObject(derivedItems, 'itemId')
 
     return { itemsById, total: computedTotal, since }
   } catch (error) {
