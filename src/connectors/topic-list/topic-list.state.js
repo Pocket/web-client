@@ -17,7 +17,7 @@ export const topicListReducers = (state = initialState, action) => {
   switch (action.type) {
     case TOPICLIST_SET_ACTIVE: {
       const { topic } = action
-      return { ...state, activeTopic: topic }
+      return { ...state, ...topic }
     }
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
