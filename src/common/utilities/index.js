@@ -39,3 +39,4 @@ export { recommendationsFromSlate } from './recommendations/recommendations'
 export { validateEmail } from './validate-email/validate-email'
 
 export { getTimeToRead } from './time-to-read/time-to-read'
+export { readTimeFromWordCount } from './time-to-read/time-to-read'

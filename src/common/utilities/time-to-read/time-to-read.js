@@ -27,3 +27,13 @@ export function getTimeToRead({ word_count, has_video, videos }, abbr) {
   const isVideo = has_video === '2'
   return isVideo ? getWatchTime(videos, abbr) : getReadTime(word_count, abbr)
 }
+
+/**
+ * READ TIME FROM WORD COUNT
+ * @param {int} wordCount number of words in an article
+ * @returns {int} number of words per minute in minutes
+ */
+export function readTimeFromWordCount(wordCount) {
+  if (!wordCount) return false
+  return Math.ceil(parseInt(wordCount, 10) / READING_WPM)
+}

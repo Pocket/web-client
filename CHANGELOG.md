@@ -1,3 +1,17 @@
+# [1.25.0](https://github.com/Pocket/web-client/compare/v1.24.13...v1.25.0) (2021-11-01)
+
+
+### Bug Fixes
+
+* **derivers:** better collection behavior ([a638922](https://github.com/Pocket/web-client/commit/a6389223d8abb745849b32d84a3a5d7fb6a71632))
+* **derivers:** better enrichment for urls/images ([a9afcbe](https://github.com/Pocket/web-client/commit/a9afcbec45b73ea6b22b5138ce7275b41c3269ce))
+
+
+### Features
+
+* **derivers:** adding analytics to derivers ([90157f2](https://github.com/Pocket/web-client/commit/90157f20e446177c1a4a14e66de0fbb1f8f2586a))
+* **derivers:** adding common item derivers ([f687ac9](https://github.com/Pocket/web-client/commit/f687ac91fbac133100ebd6ba60b480daecf22196))
+
 ## [1.24.13](https://github.com/Pocket/web-client/compare/v1.24.12...v1.24.13) (2021-10-26)
 
 
