@@ -1,8 +1,6 @@
 import Discover from 'containers/discover/discover'
 import { hydrateDiscover } from 'containers/discover/discover.state'
 import { fetchDiscoverData } from 'containers/discover/discover.state'
-import { fetchTopicList } from 'connectors/topic-list/topic-list.state'
-import { hydrateTopicList } from 'connectors/topic-list/topic-list.state'
 import { hydrateItems } from 'connectors/items-by-id/discover/items.state'
 import { wrapper } from 'store'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -22,13 +20,11 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ locale 
   // page from loading. Do this for SEO/crawler purposes
   const response = await fetchDiscoverData({ locale })
   const { items, itemsById } = response
-  const topicsByName = fetchTopicList()
 
   // Since ssr will not wait for side effects to resolve this dispatch
   // needs to be pure as well.
   dispatch(hydrateDiscover({ items }))
   dispatch(hydrateItems(itemsById))
-  dispatch(hydrateTopicList({ topicsByName }))
 
   // Revalidate means this can be regenerated once every X seconds
   return {

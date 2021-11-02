@@ -1,9 +1,6 @@
 import { CollectionPage } from 'containers/collections/collection-page'
 import { fetchCollections } from 'containers/collections/collections.state'
 import { fetchCollectionBySlug } from 'containers/collections/collections.state'
-import { fetchTopicList } from 'connectors/topic-list/topic-list.state'
-import { hydrateTopicList } from 'connectors/topic-list/topic-list.state'
-
 import { hydrateCollections } from 'containers/collections/collections.state'
 import { hydrateStories } from 'connectors/items-by-id/collection/stories.state'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -38,7 +35,6 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ params,
   // Hydrating initial state with an async request. This will block the
   // page from loading. Do this for SEO/crawler purposes
   const { stories, collection } = await fetchCollectionBySlug({ slug })
-  const topicsByName = fetchTopicList()
 
   // No article found
   if (!collection || !stories) {
@@ -46,7 +42,6 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ params,
   }
 
   // Since ssr will not wait for side effects to resolve this dispatch needs to be pure
-  dispatch(hydrateTopicList({ topicsByName }))
   dispatch(hydrateCollections(collection))
   dispatch(hydrateStories(stories))
 
