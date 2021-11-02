@@ -1,4 +1,4 @@
-import { TOPICS } from 'common/constants'
+import { TOPICS_BY_NAME } from 'common/constants'
 import { TOPICLIST_SET_ACTIVE } from 'actions'
 import { HYDRATE } from 'actions'
 
@@ -10,7 +10,7 @@ export const setActiveTopic = (topic) => ({ type: TOPICLIST_SET_ACTIVE, topic })
   --------------------------------------------------------------- */
 const initialState = {
   activeTopic: '',
-  topicsByName: TOPICS
+  topicsByName: TOPICS_BY_NAME
 }
 
 export const topicListReducers = (state = initialState, action) => {

@@ -182,7 +182,7 @@ export const HOME_TOPIC_SLATES = {
   'travel': '4345efa7-2c89-4884-b836-3260757a3a97'
 }
 
-export const TOPICS = {
+export const TOPICS_BY_NAME = {
   business: {
     'id': 'c18b41d8-8100-4037-aa64-416994e1d4cf',
     'curator_label': 'Business',

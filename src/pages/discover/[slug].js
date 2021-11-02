@@ -1,5 +1,5 @@
 import Topic from 'containers/topic/topic'
-import { TOPICS } from 'common/constants'
+import { TOPICS_BY_NAME } from 'common/constants'
 import { setActiveTopic } from 'connectors/topic-list/topic-list.state'
 import { fetchTopicData } from 'containers/topic/topic.state'
 import { hydrateTopic } from 'containers/topic/topic.state'
@@ -16,7 +16,7 @@ import { wrapper } from 'store'
  * SEO/Crawlers
   --------------------------------------------------------------- */
 export const getStaticPaths = async () => {
-  const topicsByName = TOPICS
+  const topicsByName = TOPICS_BY_NAME
   const paths = Object.values(topicsByName).map((data) => `/discover/${data.topic_slug}`)
   return { paths, fallback: 'blocking' }
 }
@@ -30,7 +30,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ params,
 
   const { dispatch } = store
 
-  const activeTopic = TOPICS[slug]
+  const activeTopic = TOPICS_BY_NAME[slug]
 
   // Invalid Topic
   // ?? NOTE: We may need to adjust the revalidation on these errored responses
