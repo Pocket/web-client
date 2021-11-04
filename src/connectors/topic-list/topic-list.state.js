@@ -4,7 +4,7 @@ import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const setActiveTopic = (topic) => ({ type: TOPICLIST_SET_ACTIVE, topic })
+export const setActiveTopic = (activeTopic) => ({ type: TOPICLIST_SET_ACTIVE, activeTopic })
 
 /** REDUCERS
   --------------------------------------------------------------- */
@@ -16,8 +16,8 @@ const initialState = {
 export const topicListReducers = (state = initialState, action) => {
   switch (action.type) {
     case TOPICLIST_SET_ACTIVE: {
-      const { topic } = action
-      return { ...state, ...topic }
+      const { activeTopic } = action
+      return { ...state, activeTopic }
     }
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
