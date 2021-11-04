@@ -39,6 +39,7 @@ import { BASE_URL } from 'common/constants'
  * @param {DateString} datePublished — The date the article was published
  * @param {string} language — The detected language of the article
  * @param {int} timeToRead — How long it will take to read the article (WordCount / 220 WPM)
+ * @param {Boolean} fromPartner — If a story is sponsored/partnered
  *
  * INCLUDED ITEM ENRICHMENT
  * ————————————————————————————————————
@@ -95,7 +96,7 @@ export function deriveRecommendation(recommendationsFromSlate, analyticsData) {
 }
 
 export function deriveReccit(recommendation) {
-  const { item: passedItem, ...rest } = recommendation
+  const { item: passedItem, ...rest } = recommendation //eslint-disable-line no-unused-vars
   const {
     node: { item }
   } = modernizeItem(passedItem)
@@ -152,6 +153,7 @@ export function deriveItem({
     isReadable: isReadable({ item }),
     isCollection: isCollection({ item }),
     timeToRead: readTime({ item }),
+    fromPartner: fromPartner({ item, itemEnrichment }),
     analyticsData: {
       url: analyticsUrl({ item, itemEnrichment }),
       ...analyticsData
@@ -319,6 +321,10 @@ export function readUrl({ item, itemEnrichment, status }) {
  */
 function permanentUrl({ item, status }) {
   return status ? urlWithPermanentLibrary(item?.itemId) || false : false
+}
+
+function fromPartner({ itemEnrichment }) {
+  return itemEnrichment?.fromPartner || false
 }
 
 /**

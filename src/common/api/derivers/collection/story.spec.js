@@ -14,6 +14,7 @@ export const storyFromClientApi = {
     }
   ],
   publisher: 'The New York Times',
+  fromPartner: true,
   item: {
     isArticle: true,
     title: 'Inside VW’s Campaign of Trickery',
@@ -110,6 +111,7 @@ describe('Collection — Story', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBeFalsy()
+    expect(item.fromPartner).toBeTruthy()
 
     // Derived content
     expect(item.title).toBe('Inside VW’s Campaign of Trickery')
