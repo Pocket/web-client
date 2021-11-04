@@ -164,7 +164,8 @@ describe('My List - Original Deriver', () => {
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
     expect(item.timeToRead).toBe(5)
     expect(item.tags).toStrictEqual([])
-    expect(item.annotations).toBe(undefined)
+    expect(item.annotations).toStrictEqual([])
+    expect(item.hasAnnotation).toBeFalsy()
     expect(item.images).toStrictEqual([
       {
         src: 'https://pocket-syndicated-images.s3.amazonaws.com/5f1b307571176.jpg'
