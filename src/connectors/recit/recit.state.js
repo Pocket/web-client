@@ -186,8 +186,8 @@ export const recitReducers = (state = initialState, action) => {
  * @param {string} id Item id to operate on
  * @param {string} save_status Value to update save status to
  */
-export function updateSaveStatus(state, id, save_status, openExternal = true) {
-  const updatedItem = { ...state[id], save_status, openExternal }
+export function updateSaveStatus(state, id, saveStatus, openExternal = true) {
+  const updatedItem = { ...state[id], saveStatus, openExternal }
   return { ...state, [id]: updatedItem }
 }
 
