@@ -8,10 +8,21 @@ import { onboardingCloseMyListFlyaway } from '../onboarding.state'
 import { breakpointLargeTablet } from '@pocket/web-ui'
 import { onboardingHighlight } from './onboarding-animations'
 
-const sideNavStyles = css`
+const topNavStyles = css`
   ${onboardingHighlight}
-  border-radius: 2.75rem;
-  animation: onboardingPulse 1.7s linear infinite;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    width: 90%;
+    height: 70%;
+    pointer-events: none;
+    border-radius: 2.75rem;
+    animation: onboardingPulse 1.7s linear infinite;
+  }
 `
 
 const hamburgerStyles = css`
@@ -38,7 +49,7 @@ const hamburgerStyles = css`
   }
 `
 
-const sideNavMyListQuery = 'button[data-cy^="side-nav-mylist"]'
+const topNavMyListQuery = 'a[data-cy^="global-nav-my-list-link"]'
 const hamburgerQuery = '.site-nav'
 
 export const HomeFlyawayMyList = () => {
@@ -52,12 +63,12 @@ export const HomeFlyawayMyList = () => {
 
   useEffect(() => {
     let timer
-    let elementSideNav
+    let elementTopNav
     let elementHamburger
     const highlightElement = () => {
-      elementSideNav = document.querySelector(sideNavMyListQuery)
+      elementTopNav = document.querySelector(topNavMyListQuery)
       elementHamburger = document.querySelector(hamburgerQuery)
-      if (elementSideNav) elementSideNav.classList.add(sideNavStyles)
+      if (elementTopNav) elementTopNav.classList.add(topNavStyles)
       if (elementHamburger) elementHamburger.classList.add(hamburgerStyles)
     }
 
@@ -68,7 +79,7 @@ export const HomeFlyawayMyList = () => {
 
     return () => {
       clearTimeout(timer)
-      elementSideNav?.classList.remove(sideNavStyles)
+      elementTopNav?.classList.remove(topNavStyles)
       elementHamburger?.classList.remove(hamburgerStyles)
     }
   }, [showFlyaway])
