@@ -21,6 +21,7 @@ import { ShareModal } from 'connectors/confirm-share/confirm-share'
 import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
 import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { Toasts } from 'connectors/toasts/toast-list'
+import { Onboarding } from 'connectors/onboarding/onboarding'
 
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
@@ -64,6 +65,8 @@ export const Home = ({ metaData }) => {
       <ShareModal />
       <ArchiveModal />
       <FavoriteModal />
+      <Onboarding type="home.flyaway.save" />
+      <Onboarding type="home.flyaway.my-list" />
       <Toasts />
     </Layout>
   )
