@@ -103,21 +103,7 @@ export const onboardingActions = {
       uiType: 'link'
     }
   },
-  'onboarding.flyaway.extension.safari.open': {
-    eventType: 'engagement',
-    entityTypes: ['ui'],
-    eventData: {
-      uiType: 'link'
-    }
-  },
   'onboarding.flyaway.extension.firefox.open': {
-    eventType: 'engagement',
-    entityTypes: ['ui'],
-    eventData: {
-      uiType: 'link'
-    }
-  },
-  'onboarding.flyaway.extension.edge.open': {
     eventType: 'engagement',
     entityTypes: ['ui'],
     eventData: {
