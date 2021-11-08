@@ -94,8 +94,8 @@ export const MyListFlyawayExtensions = () => {
   const googlePlayBadge =
     'https://assets.getpocket.com/web-ui/assets/google-play-badge.db9b21a1c41f3dcd9731e1e7acfdbb57.png'
 
-  const desktopTitle = t('onboarding:flyaway-extensions-title', 'Save anything from across the web with our extension')
-  const mobileTitle = t('onboarding:flyaway-extensions-title', 'Save anything, anywhere')
+  const desktopTitle = t('onboarding:flyaway-extensions-title-desktop', 'Save anything from across the web with our extension')
+  const mobileTitle = t('onboarding:flyaway-extensions-title-mobile', 'Save anything, anywhere')
 
   const title = (
     <>
