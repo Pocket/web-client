@@ -13,18 +13,14 @@ const homeSaveStyles = css`
   animation: onboardingPulse 1.7s linear infinite;
 `
 
-const homeSaveQuery = 'button[data-cy^="article-save-btn"]'
+const homeSaveQuery = 'article:not(.hero-center) button[data-cy^="article-save-btn"]'
 
 export const HomeFlyawaySave = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
   const flyawayReady = useSelector((state) => state.onboarding.homeFlyawaySave)
-  const modalStatus = useSelector((state) => state.onboarding.topicSelectionModal)
-  const topicsSelected = pinnedTopics.length !== 0
-  const modalFinished = modalStatus === false
-  const showFlyaway = (topicsSelected && flyawayReady && modalFinished)
+  const showFlyaway = flyawayReady
 
   useEffect(() => {
     let timer
