@@ -3,18 +3,22 @@ import { css, cx } from 'linaria'
 import { breakpointLargeHandset, breakpointLargeTablet } from '@pocket/web-ui'
 import { CloseButton } from 'components/close-button/close-button'
 import { containerMaxWidth } from '@pocket/web-ui'
+import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
+
+const sectionWrapper = css`
+  position: sticky;
+  bottom: 50px;
+  pointer-events: none;
+`
 
 const flyawayWrapper = css`
   margin: 0 auto;
   max-width: ${containerMaxWidth}px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  position: sticky;
-  bottom: 50px;
-  z-index: 100;
+  z-index: 1000;
   transition: opacity 700ms ease-in-out;
   opacity: 0;
-  pointer-events: none;
 
   ${breakpointLargeHandset} {
     bottom: 20px;
@@ -54,16 +58,16 @@ const flyaway = css`
 
   h5 {
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
 
     ${breakpointLargeTablet} {
       font-size: 1.2rem;
     }
   }
 
-  p {
+  .description {
     font-size: 1rem;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem 0;
   }
 
   button {
@@ -103,18 +107,20 @@ export function Flyaway({
 
   const flyawayClassNames = cx(flyawayWrapper, styleOverrides, flyawayOpen && 'show')
   return (
-    <div className={flyawayClassNames} data-cy={dataCy}>
-      <div className={flyaway}>
-        <div className="flyaway_title">
-          <h5>{title}</h5>
-          <CloseButton
-            handleClose={handleClose}
-            dataCy="close-flyaway-button"
-            closeButtonOverrides={closeButtonOverrides}
-          />
+    <SectionWrapper className={sectionWrapper}>
+      <div className={flyawayClassNames} data-cy={dataCy}>
+        <div className={flyaway}>
+          <div className="flyaway_title">
+            <h5>{title}</h5>
+            <CloseButton
+              handleClose={handleClose}
+              dataCy="close-flyaway-button"
+              closeButtonOverrides={closeButtonOverrides}
+            />
+          </div>
+          { description ? <div className="description">{description}</div> : null }
         </div>
-        <p>{description}</p>
       </div>
-    </div>
+    </SectionWrapper>
   )
 }
