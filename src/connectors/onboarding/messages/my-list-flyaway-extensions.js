@@ -80,20 +80,23 @@ export const MyListFlyawayExtensions = () => {
   const googlePlayBadge =
     'https://assets.getpocket.com/web-ui/assets/google-play-badge.db9b21a1c41f3dcd9731e1e7acfdbb57.png'
 
-  const title = t('onboarding:flyaway-extensions-title', 'Save anything, anywhere')
-  const desktopDescription = t(
-    'onboarding:flyaway-extensions-description-desktop',
-    'Install our browser extension to add anything to your Pocket.'
-  )
-  const mobileDescription = t(
-    'onboarding:flyaway-extensions-description-mobile',
-    'Download one of our mobile apps.'
+  const desktopTitle = t('onboarding:flyaway-extensions-title', 'Save anything from across the web with our extension')
+  const mobileTitle = t('onboarding:flyaway-extensions-title', 'Save anything, anywhere')
+
+  const title = (
+    <>
+      <div className={desktopStyles}>
+        {desktopTitle}
+      </div>
+      <div className={mobileStyles}>
+        {mobileTitle}
+      </div>
+    </>
   )
 
   const description = (
     <>
       <div className={desktopStyles}>
-        <p>{desktopDescription}</p>
         <a
           href={firefoxExtensionLink}
           onClick={handleFirefox}
@@ -113,7 +116,6 @@ export const MyListFlyawayExtensions = () => {
         </a>
       </div>
       <div className={mobileStyles}>
-        <p>{mobileDescription}</p>
         <div className={appStoreBadgeWrapper}>
           <a
             href={appleLink}
