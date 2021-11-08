@@ -50,15 +50,12 @@ export const HomeFlyawaySave = () => {
     dispatch(onboardingCloseSaveFlyaway())
   }
 
-  const title = t('onboarding:flyaway-save-title', 'Save articles you like')
-  const description = t('onboarding:flyaway-save-description',
-    'Home is filled with the best articles from across the web. Save one to read it later.')
+  const title = t('onboarding:flyaway-save-title', 'Save articles to read them later')
 
   return (
     <Flyaway
       dataCy="home-flyaway-save"
       title={title}
-      description={description}
       handleClose={handleClose}
       show={showFlyaway}
     />

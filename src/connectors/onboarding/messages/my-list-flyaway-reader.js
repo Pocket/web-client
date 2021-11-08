@@ -55,15 +55,12 @@ export const MyListFlyawayReader = () => {
     dispatch(onboardingCloseReaderFlyaway())
   }
 
-  const title = t('onboarding:flyaway-reader-title', 'Read distraction-free')
-  const description = t('onboarding:flyaway-reader-description',
-    'Open a saved story to experience Pocket’s calm reading zone.')
+  const title = t('onboarding:flyaway-reader-title', 'Open saved articles in our calm reading zone')
 
   return (
     <Flyaway
       dataCy="mylist-flyaway-reader"
       title={title}
-      description={description}
       handleClose={handleClose}
       show={showFlyaway}
     />

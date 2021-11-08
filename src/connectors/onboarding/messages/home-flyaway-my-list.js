@@ -78,15 +78,12 @@ export const HomeFlyawayMyList = () => {
     dispatch(onboardingCloseMyListFlyaway())
   }
 
-  const title = t('onboarding:flyaway-my-list-title', 'Find Saves in My List')
-  const description = t('onboarding:flyaway-my-list-description',
-    'Everything you save goes straight to My List – the library of your faves.')
+  const title = t('onboarding:flyaway-my-list-title', 'Find saved articles in My List')
 
   return (
     <Flyaway
       dataCy="home-flyaway-mylist"
       title={title}
-      description={description}
       handleClose={handleClose}
       show={showFlyaway}
     />

@@ -78,14 +78,10 @@ export const ReaderFlyawayApps = () => {
   const googlePlayBadge =
     'https://assets.getpocket.com/web-ui/assets/google-play-badge.db9b21a1c41f3dcd9731e1e7acfdbb57.png'
 
-  const title = t('onboarding:flyaway-apps-title', 'Read anytime, anywhere')
+  const title = t('onboarding:flyaway-apps-title', 'Read anytime, anywhere – even when you’re offline')
 
   const description = (
     <div>
-      <p>{t('onboarding:flyaway-apps-description',
-        'If it’s in your Pocket, it’s on your phone and tablet, too – even when you’re offline.')}
-      </p>
-
       <div className={appStoreBadgeWrapper}>
         <a
           href="https://apps.apple.com/us/app/pocket-save-read-grow/id309601447"
