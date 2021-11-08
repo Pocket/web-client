@@ -2,18 +2,33 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import { css } from 'linaria'
+import { breakpointTinyTablet } from '@pocket/web-ui'
 import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseSaveFlyaway } from '../onboarding.state'
 import { onboardingHighlight } from './onboarding-animations'
 
-const homeSaveStyles = css`
+const desktopHighlight = css`
   ${onboardingHighlight}
   border-radius: 2.75rem;
   animation: onboardingPulse 1.7s linear infinite;
+
+  ${breakpointTinyTablet} {
+    display: none;
+  }
 `
 
-const homeSaveQuery = 'article:not(.hero-center) button[data-cy^="article-save-btn"]'
+const tabletHighlight = css`
+  ${onboardingHighlight}
+  
+  ${breakpointTinyTablet} {
+    border-radius: 2.75rem;
+    animation: onboardingPulse 1.7s linear infinite;
+  }
+`
+
+const homeSaveQueryDesktop = 'article:not(.hero-center) button[data-cy^="article-save-btn"]'
+const homeSaveQueryTablet = 'button[data-cy^="article-save-btn"]'
 
 export const HomeFlyawaySave = () => {
   const dispatch = useDispatch()
@@ -24,10 +39,13 @@ export const HomeFlyawaySave = () => {
 
   useEffect(() => {
     let timer
-    let element
+    let desktopElement
+    let tabletElement
     const highlightElement = () => {
-      element = document.querySelector(homeSaveQuery)
-      if (element) element.classList.add(homeSaveStyles)
+      desktopElement = document.querySelector(homeSaveQueryDesktop)
+      tabletElement = document.querySelector(homeSaveQueryTablet)
+      if (desktopElement) desktopElement.classList.add(desktopHighlight)
+      if (tabletElement) tabletElement.classList.add(tabletHighlight)
     }
 
     if (showFlyaway) {
@@ -37,7 +55,8 @@ export const HomeFlyawaySave = () => {
 
     return () => {
       clearTimeout(timer)
-      element?.classList.remove(homeSaveStyles)
+      desktopElement?.classList.remove(desktopHighlight)
+      tabletElement?.classList.remove(tabletHighlight)
     }
   }, [showFlyaway])
 
