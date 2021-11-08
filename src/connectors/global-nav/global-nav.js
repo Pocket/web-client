@@ -69,12 +69,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const retrievedAvatar = useSelector((state) => state?.userProfile?.avatar_url)
   const pocketLogoOutboundUrl = isLoggedIn ? '/my-list' : 'https://getpocket.com'
 
-  // const myListFlyawayReady = useSelector((state) => state.onboarding.homeFlyawayMyList)
-  // const saveFlyawayStatus = useSelector((state) => state.onboarding.homeFlyawaySave)
-  // const saveFlyawayDismissed = saveFlyawayStatus === false
-  // const showOnboardingHighlight = saveFlyawayDismissed && myListFlyawayReady
-  const showOnboardingHighlight = false
-
   const featureState = useSelector((state) => state.features)
   const showLab = featureFlagActive({ flag: 'lab', featureState })
 
@@ -122,7 +116,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       label: t('nav:my-list', 'My List'),
       url: '/my-list?src=navbar',
       icon: <ListViewIcon />,
-      onboarding: showOnboardingHighlight
     },
     {
       name: 'discover',
