@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import { css } from 'linaria'
+import { breakpointLargeTablet, breakpointLargeHandset } from '@pocket/web-ui'
 import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseReaderFlyaway } from '../onboarding.state'
@@ -21,6 +22,21 @@ const myListCardStyles = css`
     animation: onboardingPulse 1.7s linear infinite;
   }
 `
+
+// negative margin here to account for the padding added by
+// sectionWrapper, makes flyaway alignment match the content
+const styleOverrides = css`
+  margin-right: -2.5rem;
+
+  ${breakpointLargeTablet} {
+    margin: auto -1.5rem;
+  }
+
+  ${breakpointLargeHandset} {
+    margin: auto -1rem;
+  }
+`
+
 const myListCardQuery = 'article[data-cy^="article-card"]'
 
 export const MyListFlyawayReader = () => {
@@ -63,6 +79,7 @@ export const MyListFlyawayReader = () => {
       title={title}
       handleClose={handleClose}
       show={showFlyaway}
+      styleOverrides={styleOverrides}
     />
   )
 }

@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next'
 import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseExtensionFlyaway } from '../onboarding.state'
-import { breakpointLargeTablet } from '@pocket/web-ui' // 1023
+import { breakpointLargeTablet, breakpointLargeHandset } from '@pocket/web-ui'
 import { appStoreBadgeWrapper } from './reader-flyaway-apps'
 import { appStoreBadgeStyle } from './reader-flyaway-apps'
 import ChromeIcon from 'static/images/browser-icons/chrome.png'
@@ -38,6 +38,20 @@ const mobileStyles = css`
   display: none;
   ${breakpointLargeTablet} {
     display: block;
+  }
+`
+
+// negative margin here to account for the padding added by
+// sectionWrapper, makes flyaway alignment match the content
+const styleOverrides = css`
+  margin-right: -2.5rem;
+
+  ${breakpointLargeTablet} {
+    margin: auto -1.5rem;
+  }
+
+  ${breakpointLargeHandset} {
+    margin: auto -1rem;
   }
 `
 
@@ -108,7 +122,6 @@ export const MyListFlyawayExtensions = () => {
         <a
           href={chromeExtensionLink}
           onClick={handleChrome}
-          className="top-row"
           target="_blank"
           rel="noopener noreferrer">
           <img src={ChromeIcon.src} alt="" />
@@ -150,6 +163,7 @@ export const MyListFlyawayExtensions = () => {
       description={description}
       handleClose={handleClose}
       show={showFlyaway}
+      styleOverrides={styleOverrides}
     />
   )
 }
