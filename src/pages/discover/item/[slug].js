@@ -1,8 +1,6 @@
 import { SyndicatedArticle } from 'containers/syndicated-article/syndicated-article'
 import { fetchHydrationData } from 'containers/syndicated-article/syndicated-article.state'
 import { hydrateArticle } from 'containers/syndicated-article/syndicated-article.state'
-import { fetchTopicList } from 'connectors/topic-list/topic-list.state'
-import { hydrateTopicList } from 'connectors/topic-list/topic-list.state'
 import { wrapper } from 'store'
 import { END } from 'redux-saga'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -18,7 +16,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
       // page from loading. Do this for SEO/crawler purposes
       const baseUrl = req.headers.host
       const response = await fetchHydrationData({ slug, baseUrl })
-      const topicsByName = await fetchTopicList(true)
 
       // No article found
       if (response.items?.length === 0) {
@@ -33,7 +30,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
       // Since ssr will not wait for side effects to resolve this dispatch
       // needs to be pure as well.
       dispatch(hydrateArticle({ articleData: response.items[0] }))
-      dispatch(hydrateTopicList({ topicsByName }))
 
       // end the saga
       dispatch(END)

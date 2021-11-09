@@ -1,3 +1,20 @@
+## [1.25.2](https://github.com/Pocket/web-client/compare/v1.25.1...v1.25.2) (2021-11-09)
+
+
+### Bug Fixes
+
+* **api:** remove getTopicList and getHomeTopicFeed ([e58cf66](https://github.com/Pocket/web-client/commit/e58cf667c13a71392459d9b30aa307166db65a30))
+* **api:** use new TOPICS constant in getNewTopicFeed ([f3e973a](https://github.com/Pocket/web-client/commit/f3e973a0506fd4dc1a58dde9c62813661ec00e90))
+* **collections:** remove topics from collection index - no longer used ([3ea1b44](https://github.com/Pocket/web-client/commit/3ea1b44e4a29b4e7b8b7207842193aa3299e42c1))
+* **constants:** add new TOPICS object ([ba37034](https://github.com/Pocket/web-client/commit/ba37034e018261bc52b59b3931d748644569f2f2))
+* **constants:** remove duplicate named topics from TOPIC_IDS ([c4cbba8](https://github.com/Pocket/web-client/commit/c4cbba8b5842fb2c07241f6d7f98712902a88616))
+* **constants:** rename TOPICS to be TOPICS_BY_NAME ([9ceefac](https://github.com/Pocket/web-client/commit/9ceefac4830bc0811dbf20dd9341999014732322))
+* **discover:** use TOPICS constant, dispatch setActiveTopic instead of hydrateTopicList ([3d24513](https://github.com/Pocket/web-client/commit/3d24513d6c5d025fb19bff96d3fc4a3f1b3a3d10))
+* **topicList:** fetchTopicList is no longer async ([e075f4e](https://github.com/Pocket/web-client/commit/e075f4e46378737a2dc7dcba4a1ebfcc15d9600d))
+* **topicList:** pass slug directly to set activeTopic ([01f6c33](https://github.com/Pocket/web-client/commit/01f6c33cf30b7725115473d2b09971a58b366429))
+* **topicList:** use new TOPICS constant to fetch topic list ([27520c9](https://github.com/Pocket/web-client/commit/27520c99165979094b26ddd4590140533b2fea2d))
+* **topics:** use TOPICS constant for initialState, remove unnecessary functions ([db5da88](https://github.com/Pocket/web-client/commit/db5da88bb447f3ba41dc807fc0552f2231ff02ac))
+
 ## [1.25.1](https://github.com/Pocket/web-client/compare/v1.25.0...v1.25.1) (2021-11-03)
 
 

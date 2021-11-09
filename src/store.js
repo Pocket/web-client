@@ -38,7 +38,6 @@ import { collectionStoriesReducers } from 'connectors/items-by-id/collection/sto
 import { collectionStoriesSagas } from 'connectors/items-by-id/collection/stories.state'
 
 import { topicListReducers } from 'connectors/topic-list/topic-list.state'
-import { topicListSagas } from 'connectors/topic-list/topic-list.state'
 
 import { topicReducers } from 'containers/topic/topic.state'
 import { topicSagas } from 'containers/topic/topic.state'
@@ -178,7 +177,6 @@ function* rootSaga() {
     ...discoverHomeSagas,
     ...collectionsSagas,
     ...collectionStoriesSagas,
-    ...topicListSagas,
     ...topicSagas,
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
