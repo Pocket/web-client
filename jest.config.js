@@ -36,5 +36,8 @@ module.exports = {
   testEnvironment: 'jsdom',
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-  testPathIgnorePatterns: ['/node_modules/', '/cypress/']
+  testPathIgnorePatterns: ['/node_modules/', '/cypress/'],
+
+  //Where do we put snapshot files
+  snapshotResolver: '<rootDir>/.test-setup/snapshot-resolver.js'
 }
