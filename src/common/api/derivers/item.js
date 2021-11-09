@@ -287,7 +287,10 @@ export function readUrl({ item, itemEnrichment, status }) {
   const collection = isCollection({ item })
 
   // It's a collection, it should always open the original
-  if (collection) return `/collections/${collectionSlug(external)}`
+  if (collection) {
+    const slug = collectionSlug({ item })
+    return `/collections/${slug}`
+  }
 
   // If item has no status if should have a false readURL
   if (!status) return false
@@ -316,16 +319,18 @@ function permanentUrl({ item, status }) {
  * https://regexr.com/5volt - A place to test the regular expression
  */
 function isCollection({ item }) {
-  if (item.collection) return true
+  if (item?.collection) return true
 
-  const urlToTest = item?.givenUrl || item?.resolvedUrl
+  const urlToTest = item?.resolvedUrl
   if (!urlToTest) return false
 
   const pattern = /.+?getpocket\.com\/(?:[a-z]{2}(?:-[a-zA-Z]{2})?\/)?collections\/(?!\?).+/gi
   return !!urlToTest.match(pattern)
 }
 
-function collectionSlug(url) {
+function collectionSlug({ item }) {
+  // We test for collection with the resolved and should use it to construct the slug
+  const url = item?.resolvedUrl
   return url.substring(url.lastIndexOf('/') + 1)
 }
 
