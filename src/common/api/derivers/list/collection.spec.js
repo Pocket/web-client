@@ -1,6 +1,6 @@
 import { deriveListItem } from 'common/api/derivers/item'
 
-const collectionFromV3 = {
+export const savedCollectionFromV3 = {
   item_id: '3453456445',
   resolved_id: '3453456445',
   given_url: 'https://getpocket.com/collections/delicious-reads-about-your-favorite-candy',
@@ -48,7 +48,7 @@ const collectionFromV3 = {
   listen_duration_estimate: 150
 }
 
-const collectionFromClientApi = {
+export const savedCollectionFromClientApi = {
   node: {
     _createdAt: 1634839848,
     _updatedAt: 1634839847,
@@ -117,12 +117,12 @@ const collectionFromClientApi = {
 describe('My List - Collection', () => {
   const expectedSaveUrl = 'https://getpocket.com/collections/delicious-reads-about-your-favorite-candy' //prettier-ignore
   const expectedExternalUrl = 'https://getpocket.com/collections/delicious-reads-about-your-favorite-candy?utm_source=pocket_mylist' //prettier-ignore
-  const expectedReadUrl = '/collections/delicious-reads-about-your-favorite-candy?utm_source=pocket_mylist' //prettier-ignore
+  const expectedReadUrl = '/collections/delicious-reads-about-your-favorite-candy' //prettier-ignore
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3453456445'
   const expectedAnalyticsUrl = 'https://getpocket.com/collections/delicious-reads-about-your-favorite-candy' //prettier-ignore
 
   it('should derive v3 as expected', () => {
-    const item = deriveListItem(collectionFromV3, true)
+    const item = deriveListItem(savedCollectionFromV3, true)
 
     // User driven data points
     expect(item._createdAt).toBe(1634839848)
@@ -172,7 +172,7 @@ describe('My List - Collection', () => {
   })
 
   it('should derive clientAPI as expected', () => {
-    const item = deriveListItem(collectionFromClientApi)
+    const item = deriveListItem(savedCollectionFromClientApi)
 
     // User driven data points
     expect(item._createdAt).toBe(1634839848)

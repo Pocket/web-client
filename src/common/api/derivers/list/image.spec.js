@@ -1,6 +1,6 @@
 import { deriveListItem } from 'common/api/derivers/item'
 
-const imageFromV3 = {
+export const savedImageFromV3 = {
   item_id: '3462094779',
   resolved_id: '3462094779',
   given_url:
@@ -37,7 +37,7 @@ const imageFromV3 = {
   listen_duration_estimate: 0
 }
 
-const imageFromClientApi = {
+export const savedImageFromClientApi = {
   node: {
     _createdAt: 1634839678,
     _updatedAt: 1634839679,
@@ -93,7 +93,7 @@ describe('My List - Image', () => {
   const expectedAnalyticsUrl = 'https://cdn.dribbble.com/users/59947/screenshots/16700535/media/335d386abb459f49570030e830429cef.jpg' //prettier-ignore
 
   it('should derive v3 as expected', () => {
-    const item = deriveListItem(imageFromV3, true)
+    const item = deriveListItem(savedImageFromV3, true)
 
     // User driven data points
     expect(item._createdAt).toBe(1634839678)
@@ -136,7 +136,7 @@ describe('My List - Image', () => {
   })
 
   it('should derive clientAPI as expected', () => {
-    const item = deriveListItem(imageFromClientApi)
+    const item = deriveListItem(savedImageFromClientApi)
 
     // User driven data points
     expect(item._createdAt).toBe(1634839678)

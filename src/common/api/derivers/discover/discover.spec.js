@@ -1,14 +1,14 @@
 import { deriveRecommendation } from 'common/api/derivers/item'
 
 // This comes from the lineup containing the slate
-const lineupAnalytics = {
+export const lineupAnalytics = {
   slateLineupExperiment: 'fc6d7d9',
   slateLineupRequestId: '31fac7b5-1d6a-4b51-ae1b-d193912a2b8b',
   slateLineupId: '9c3018a8-8aa9-4f91-81e9-ebcd95fc82da'
 }
 
 // This comes from the slate containing the recommendations
-const slateAnalytics = {
+export const slateAnalytics = {
   slateId: '48e766be-5e96-46fb-acbf-55fee3ae8a28',
   slateRequestId: '9d76c3e8-5e12-4a62-a174-5912dac93f33',
   slateExperimentId: '5ef3cfd',
@@ -16,7 +16,7 @@ const slateAnalytics = {
   description: 'Essential articles to save to your Pocket'
 }
 
-const recommendationsFromSlate = {
+export const recommendationsFromSlate = {
   item: {
     ampUrl:
       'https://www.theverge.com/22734645/apple-macbook-pro-2021-ports-magsafe-touch-bar-usb-c-future',

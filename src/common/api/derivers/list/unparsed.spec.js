@@ -1,6 +1,6 @@
 import { deriveListItem } from 'common/api/derivers/item'
 
-const unparsedFromV3 = {
+export const savedUnparsedFromV3 = {
   item_id: '3117582481',
   resolved_id: '3117582481',
   given_url: 'https://www.myswitzerland.com/en-us/destinations/blausee/',
@@ -44,7 +44,7 @@ const unparsedFromV3 = {
   listen_duration_estimate: 101
 }
 
-const unparsedFromClientApi = {
+export const savedUnparsedFromClientApi = {
   node: {
     _createdAt: 1634839845,
     _updatedAt: 1634839845,
@@ -110,7 +110,7 @@ describe('My List - Unparsed', () => {
   const expectedAnalyticsUrl = 'https://www.myswitzerland.com/en-us/destinations/blausee/'
 
   it('should derive v3 as expected', () => {
-    const item = deriveListItem(unparsedFromV3, true)
+    const item = deriveListItem(savedUnparsedFromV3, true)
 
     // User driven data points
     expect(item._createdAt).toBe(1634839845)
@@ -160,7 +160,7 @@ describe('My List - Unparsed', () => {
   })
 
   it('should derive clientAPI as expected', () => {
-    const item = deriveListItem(unparsedFromClientApi)
+    const item = deriveListItem(savedUnparsedFromClientApi)
 
     // User driven data points
     expect(item._createdAt).toBe(1634839845)

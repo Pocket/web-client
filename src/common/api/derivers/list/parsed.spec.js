@@ -1,6 +1,6 @@
 import { deriveListItem } from 'common/api/derivers/item'
 
-const parsedFromV3 = {
+export const savedParsedFromV3 = {
   item_id: '3362121180',
   resolved_id: '3362121180',
   given_url: 'http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html',
@@ -62,7 +62,7 @@ const parsedFromV3 = {
 }
 
 //prettier-ignore
-const parsedFromClientApi =   {
+export const savedParsedFromClientApi =   {
   "node": {
       "_createdAt": 1634765628,
       "_updatedAt": 1634765628,
@@ -121,7 +121,7 @@ describe('My List - Parsed', () => {
   const expectedAnalyticsUrl = 'https://www.nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html' //prettier-ignore
 
   it('should derive v3 as expected', () => {
-    const item = deriveListItem(parsedFromV3, true)
+    const item = deriveListItem(savedParsedFromV3, true)
 
     // User driven data points
     expect(item._createdAt).toBe(1634765628)
@@ -171,7 +171,7 @@ describe('My List - Parsed', () => {
   })
 
   it('should derive clientAPI as expected', () => {
-    const item = deriveListItem(parsedFromClientApi)
+    const item = deriveListItem(savedParsedFromClientApi)
 
     // User driven data points
     expect(item._createdAt).toBe(1634765628)

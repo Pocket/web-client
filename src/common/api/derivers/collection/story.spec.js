@@ -1,6 +1,6 @@
 import { deriveStory } from 'common/api/derivers/item'
 
-const storyFromClientApi = {
+export const storyFromClientApi = {
   url: 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html',
   title: 'Inside VW’s Campaign of Trickery',
   excerpt:

@@ -1,6 +1,6 @@
 import { deriveCollection } from 'common/api/derivers/item'
 
-const collectionFromClientApi = {
+export const collectionFromClientApi = {
   externalId: 'f856e771-13c9-42b6-b483-6670c4080c62',
   slug: 'making-sense-of-cybersecurity-in-2021',
   title: 'Making Sense of Cybersecurity in 2021',
@@ -51,7 +51,7 @@ const collectionFromClientApi = {
   partnership: null
 }
 
-const partnerCollectionFromClientApi = {
+export const partnerCollectionFromClientApi = {
   externalId: '06deb7d1-b341-47fe-bf01-a0ebe829a701',
   slug: 'napping-is-not-what-lazy-people-do-how-to-take-a-proper-nap',
   title: '‘Napping Is Not What Lazy People Do:’ How to Take a Proper Nap',
@@ -93,7 +93,7 @@ const partnerCollectionFromClientApi = {
 describe('Collection — Page', () => {
   const expectedSaveUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021' //prettier-ignore
   const expectedExternalUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021?utm_source=pocket_mylist' //prettier-ignore
-  const expectedReadUrl = '/collections/making-sense-of-cybersecurity-in-2021?utm_source=pocket_mylist' //prettier-ignore
+  const expectedReadUrl = false
   const expectedPermanentUrl = false
   const expectedAnalyticsUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021' //prettier-ignore
 
@@ -115,7 +115,7 @@ describe('Collection — Page', () => {
     expect(item.slug).toBe('making-sense-of-cybersecurity-in-2021')
     expect(item.isSyndicated).toBeFalsy()
     expect(item.isReadable).toBeTruthy()
-    expect(item.isCollection).toBeTruthy()
+    expect(item.isCollection).toBeFalsy()
     expect(item.isArticle).toBeTruthy()
     expect(item.isIndex).toBeFalsy()
     expect(item.hasVideo).toBeFalsy()

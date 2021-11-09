@@ -4,7 +4,7 @@ import { deriveListItem } from 'common/api/derivers/item'
 // EX: title, excerpt, images.  These are assumed to always be there, but there
 // is a possibility they may be missing
 
-const legacyListItem = {
+export const savedLegacyListItem = {
   item_id: '3059000415',
   resolved_id: '3059000415',
   given_url:
@@ -53,7 +53,7 @@ const legacyListItem = {
   listen_duration_estimate: 461
 }
 
-const legacyListItemFromClientApi = {
+export const savedLegacyListItemFromClientApi = {
   node: {
     _createdAt: 1634852432,
     _updatedAt: 1634852432,
@@ -125,7 +125,7 @@ describe('My List - Original Deriver', () => {
   const expectedAnalyticsUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
 
   it('should derive legacy data as expected', () => {
-    const item = deriveListItem(legacyListItem, true)
+    const item = deriveListItem(savedLegacyListItem, true)
 
     expect(item._createdAt).toBe(1634852432)
     expect(item._updatedAt).toBe(1634852432)
@@ -183,7 +183,7 @@ describe('My List - Original Deriver', () => {
   })
 
   it('should derive client api data as expected', () => {
-    const item = deriveListItem(legacyListItemFromClientApi)
+    const item = deriveListItem(savedLegacyListItemFromClientApi)
 
     expect(item._createdAt).toBe(1634852432)
     expect(item._updatedAt).toBe(1634852432)

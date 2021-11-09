@@ -1,6 +1,6 @@
 import { deriveListItem } from 'common/api/derivers/item'
 
-const videoFromV3 = {
+export const videoFromV3 = {
   item_id: '2815325547',
   resolved_id: '2815325547',
   given_url: 'https://www.youtube.com/watch?v=1AnG04qnLqI',
@@ -58,7 +58,7 @@ const videoFromV3 = {
   listen_duration_estimate: 0
 }
 
-const videoFromClientApi = {
+export const videoFromClientApi = {
   node: {
     _createdAt: 1634839759,
     _updatedAt: 1634839759,
