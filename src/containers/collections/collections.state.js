@@ -4,6 +4,7 @@ import { getCollections } from 'common/api/collections'
 import { saveItem } from 'common/api/saveItem'
 import { removeItemByUrl } from 'common/api/removeItem'
 import { saveItems } from 'common/api/saveItem'
+import { deriveCollectionPage } from 'connectors/items-by-id/collection/page.derive'
 
 import { HYDRATE } from 'actions'
 import { COLLECTIONS_HYDRATE } from 'actions'
@@ -43,9 +44,10 @@ export const collectionsReducers = (state = initialState, action) => {
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
-    case HYDRATE:
+    case HYDRATE: {
       const { collectionsBySlug } = action.payload
       return { ...state, ...collectionsBySlug }
+    }
 
     case COLLECTION_PAGE_SAVE_REQUEST: {
       const { slug } = action
@@ -150,20 +152,8 @@ export async function fetchCollections(lang = 'en') {
     const response = await getCollections(lang)
     if (!response) return { error: 'No data found' }
 
-    const derivedCollections = response.map((collection) => {
-      const slug = collection.slug
-      const url = `/collections/${slug}`
-      const firstImage = collection.stories[0].thumbnail
-      const authorImage = collection.authors[0].imageUrl
-      const heroImage = collection.thumbnail
-      return {
-        ...collection,
-        heroImage: heroImage,
-        thumbnail: authorImage || firstImage,
-        url,
-        item_id: slug
-      }
-    })
+    const derivedCollections = deriveCollectionPage(response)
+
     return arrayToObject(derivedCollections, 'slug')
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
