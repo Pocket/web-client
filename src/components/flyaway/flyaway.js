@@ -7,6 +7,7 @@ import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
 const sectionWrapper = css`
   position: sticky;
+  grid-column: span 12;
   bottom: 50px;
   pointer-events: none;
 `

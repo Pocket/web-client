@@ -171,14 +171,14 @@ export default function MyList(props) {
               <TagDeleteModal />
               <TagEditModal />
               <Toasts />
-              <Onboarding type="my-list.flyaway.reader" />
-              <Onboarding type="my-list.flyaway.extensions" />
             </>
           ) : (
             <CallOutBrand />
           )}
         </main>
       ) : null}
+      <Onboarding type="my-list.flyaway.extensions" />
+      <Onboarding type="my-list.flyaway.reader" />
     </Layout>
   )
 }
