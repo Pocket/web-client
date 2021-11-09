@@ -62,11 +62,12 @@ export function urlWithPermanentLibrary(item_id) {
  * @return {string} url to open based on openExternal, isCollection & default
  */
 export function determineOpenUrl(item) {
-  const { openExternal, original_url, isCollection, open_url } = item
+  const { openExternal, original_url, isCollection, resolved_url } = item
+
   if (openExternal) return original_url
 
   if (isCollection) {
-    const path = open_url
+    const path = resolved_url
     return `/collections/${path.substring(path.lastIndexOf('/') + 1)}`
   }
 

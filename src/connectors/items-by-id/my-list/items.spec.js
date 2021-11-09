@@ -99,6 +99,8 @@ describe('My List Items', () => {
         open_url: expectedOpenUrl,
         original_url: expectedOriginalUrl,
         permanent_url: expectedPermanentUrl,
+        resolved_url:
+          'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential',
         read_time: 5,
         syndicated: false,
         tags: undefined,

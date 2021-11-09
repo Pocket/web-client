@@ -21,6 +21,7 @@ export function deriveMyListItems(response) {
     return {
       item_id: item?.item_id,
       resolved_id: item?.resolved_id,
+      resolved_url: item?.resolved_url,
       sort_id: item?.sort_id,
       favorite: item?.favorite,
       has_image: item?.has_image,
@@ -202,6 +203,7 @@ function openExternal({ item }) {
  */
 
 function isCollection({ item }) {
+  const url = item?.resolved_url || item?.given_url
   const pattern = /.+?getpocket\.com\/(?:[a-z]{2}(?:-[a-zA-Z]{2})?\/)?collections\/(?!\?).+/gi
-  return !!item?.given_url.match(pattern)
+  return !!url.match(pattern)
 }
