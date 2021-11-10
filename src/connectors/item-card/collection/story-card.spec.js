@@ -2,24 +2,21 @@ import { wrappedRender } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
 import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils'
 
-import { lineupAnalytics } from 'common/api/derivers/discover/discover.spec'
-import { slateAnalytics } from 'common/api/derivers/discover/discover.spec'
-import { recommendationsFromSlate } from 'common/api/derivers/discover/discover.spec'
-
-import { ItemCard as DiscoverCard } from 'connectors/item-card/discover/card'
-import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
+import { storyFromClientApi } from 'common/api/derivers/collection/story.spec'
+import { ItemCard as StoryCard } from 'connectors/item-card/collection/story-card'
+import { deriveCollectionStories } from 'connectors/items-by-id/collection/stories.derive'
 
 describe('ItemCard', () => {
   //Legacy Derivers
-  const derivedDiscoverItem = deriveDiscoverItems([recommendationsFromSlate])[0]
+  const derivedStory = deriveCollectionStories([storyFromClientApi])[0]
 
   const initialState = {
     user: { auth: true },
     analytics: {
       impressions: []
     },
-    discoverItemsById: {
-      [derivedDiscoverItem.item_id]: derivedDiscoverItem
+    collectionStoriesById: {
+      [derivedStory.item_id]: derivedStory
     }
   }
 
@@ -27,9 +24,8 @@ describe('ItemCard', () => {
     mockAllIsIntersecting()
   })
 
-  // Discover card
-  it('renders a discover item', () => {
-    const { getByCy } = wrappedRender(<DiscoverCard id={derivedDiscoverItem.item_id} position={3} />, { initialState }) //prettier-ignore
+  it('renders a story', () => {
+    const { getByCy } = wrappedRender(<StoryCard id={derivedStory.item_id} position={3} />, { initialState }) //prettier-ignore
     /**
      * ===============================================================
      * !! IMPORTANT !!
@@ -44,7 +40,7 @@ describe('ItemCard', () => {
     expect(getByCy('article-card-', { exact: false })).toMatchInlineSnapshot(`
       <article
         class="c18o9ext grid noExcerpt"
-        data-cy="article-card-3460462323"
+        data-cy="article-card-1731163180"
       >
         <div
           class="selectedBack"
@@ -57,14 +53,14 @@ describe('ItemCard', () => {
           >
             <a
               data-cy="image-link"
-              href="http://theverge.com/22734645/apple-macbook-pro-2021-ports-magsafe-touch-bar-usb-c-future?utm_source=pocket_discover"
+              href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html"
               tabindex="-1"
             >
               <img
                 alt=""
-                src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.vox-cdn.com%2Fthumbor%2F26f5VRT9jvt6JW6WB4Nohu849cI%3D%2F0x137%3A1911x1138%2Ffit-in%2F1200x630%2Fcdn.vox-cdn.com%2Fuploads%2Fchorus_asset%2Ffile%2F22938855%2FApple_MacBook_Pro_Ports_10182021.jpg"
-                srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.vox-cdn.com%2Fthumbor%2F26f5VRT9jvt6JW6WB4Nohu849cI%3D%2F0x137%3A1911x1138%2Ffit-in%2F1200x630%2Fcdn.vox-cdn.com%2Fuploads%2Fchorus_asset%2Ffile%2F22938855%2FApple_MacBook_Pro_Ports_10182021.jpg 2x "
-                style="--fallbackBackground: #00CB7780; --fallbackColor: #00CB77; --fallbackLetter: 'A';"
+                src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F914953af-15fd-46b9-ba3c-eed3ed278f9a.jpeg"
+                srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F914953af-15fd-46b9-ba3c-eed3ed278f9a.jpeg 2x "
+                style="--fallbackBackground: #FCB64380; --fallbackColor: #FCB643; --fallbackLetter: 'I';"
               />
             </a>
           </div>
@@ -76,32 +72,30 @@ describe('ItemCard', () => {
             >
               <a
                 data-cy="title-link"
-                href="http://theverge.com/22734645/apple-macbook-pro-2021-ports-magsafe-touch-bar-usb-c-future?utm_source=pocket_discover"
+                href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html"
                 tabindex="0"
               >
-                Apple is ready to admit it was wrong about the future of laptops
+                Inside VW’s Campaign of Trickery
               </a>
             </h2>
             <cite
               class="details"
             >
+              <div
+                class="authors"
+              >
+                <span>
+                  Jack Ewing
+                </span>
+              </div>
               <a
                 class="publisher"
                 data-cy="publisher-link"
-                href="http://theverge.com/22734645/apple-macbook-pro-2021-ports-magsafe-touch-bar-usb-c-future?utm_source=pocket_discover"
+                href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html"
                 tabindex="0"
               >
-                The Verge
+                The New York Times
               </a>
-              <span
-                class="readtime"
-                data-cy="read-time"
-              >
-                 
-                · 
-                7
-                 min
-              </span>
             </cite>
           </div>
         </div>
@@ -113,7 +107,7 @@ describe('ItemCard', () => {
           >
             <button
               class="b5bt6fr sb4ns5w unsaved card-actions"
-              data-cy="article-save-btn-3460462323"
+              data-cy="article-save-btn-1731163180"
             >
               <span
                 class="igxbmuu icon "
@@ -142,26 +136,6 @@ describe('ItemCard', () => {
               >
                 item-action:save-unsaved
               </div>
-            </button>
-            <button
-              class="m11fpiro"
-              data-cy="overflow"
-            >
-              <span
-                class="igxbmuu icon "
-              >
-                <svg
-                  aria-hidden="true"
-                  aria-labelledby=" "
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM6 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM22 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"
-                  />
-                </svg>
-              </span>
             </button>
           </div>
         </footer>
