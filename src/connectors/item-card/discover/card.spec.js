@@ -1,32 +1,35 @@
 import { wrappedRender } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
 import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils'
-import { ItemCard } from './card'
 
-//!! This test is not very effective.  Keeping it for parity as we switch to jest
+import { lineupAnalytics } from 'common/api/derivers/discover/discover.spec'
+import { slateAnalytics } from 'common/api/derivers/discover/discover.spec'
+import { recommendationsFromSlate } from 'common/api/derivers/discover/discover.spec'
+
+import { ItemCard as DiscoverCard } from 'connectors/item-card/discover/card'
+import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
+
 describe('ItemCard', () => {
-  it('renders an article card', () => {
-    const mockState = {
-      user: { auth: true },
-      analytics: {
-        impressions: []
-      },
-      discoverItemsById: {
-        12345: {
-          resolved_id: '12345',
-          save_url: 'https://isithalloween.com',
-          save_status: 'saved'
-        }
-      }
+  //Legacy Derivers
+  const derivedDiscoverItem = deriveDiscoverItems([recommendationsFromSlate])[0]
+
+  const initialState = {
+    user: { auth: true },
+    analytics: {
+      impressions: []
+    },
+    discoverItemsById: {
+      [derivedDiscoverItem.item_id]: derivedDiscoverItem
     }
+  }
 
+  beforeAll(() => {
     mockAllIsIntersecting()
+  })
 
-    // render the topic card
-    const { getByCy } = wrappedRender(<ItemCard id="12345" position={3} />, {
-      initialState: mockState
-    })
-
-    expect(getByCy('article-card-', { exact: false }))
+  // Discover card
+  it('renders a discover item', () => {
+    const { getByCy } = wrappedRender(<DiscoverCard id={derivedDiscoverItem.item_id} position={3} />, { initialState }) //prettier-ignore
+    expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
   })
 })
