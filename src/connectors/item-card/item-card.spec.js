@@ -106,7 +106,7 @@ describe('ItemCard', () => {
     expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
   })
 
-  it('renders a savedvideo', () => {
+  it('renders a saved video', () => {
     const { getByCy } = wrappedRender(<MyListCard id={derivedSavedVideo.item_id} position={3} />, { initialState }) //prettier-ignore
     expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
   })

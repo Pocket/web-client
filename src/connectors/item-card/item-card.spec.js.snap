@@ -1375,7 +1375,7 @@ exports[`ItemCard renders a saved image 1`] = `
 </article>
 `;
 
-exports[`ItemCard renders a savedvideo 1`] = `
+exports[`ItemCard renders a saved video 1`] = `
 <article
   class="c18o9ext grid hiddenActions noExcerpt"
   data-cy="article-card-2815325547"
