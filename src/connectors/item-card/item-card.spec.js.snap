@@ -936,7 +936,7 @@ exports[`ItemCard renders a saved collection 1`] = `
     >
       <a
         data-cy="image-link"
-        href="/collections/delicious-reads-about-your-favorite-candy?utm_source=pocket_mylist"
+        href="/collections/delicious-reads-about-your-favorite-candy"
         tabindex="-1"
       >
         <img
@@ -955,7 +955,7 @@ exports[`ItemCard renders a saved collection 1`] = `
       >
         <a
           data-cy="title-link"
-          href="/collections/delicious-reads-about-your-favorite-candy?utm_source=pocket_mylist"
+          href="/collections/delicious-reads-about-your-favorite-candy"
           tabindex="0"
         >
           Delicious Reads About Your Favorite Candy
@@ -1378,7 +1378,7 @@ exports[`ItemCard renders a saved image 1`] = `
 exports[`ItemCard renders a savedvideo 1`] = `
 <article
   class="c18o9ext grid hiddenActions noExcerpt"
-  data-cy="article-card-undefined"
+  data-cy="article-card-2815325547"
 >
   <div
     class="selectedBack"
@@ -1389,24 +1389,45 @@ exports[`ItemCard renders a savedvideo 1`] = `
     <div
       class="c97c5c media"
     >
-      <span
-        class="no-link"
+      <a
+        data-cy="image-link"
+        href="/read/2815325547"
+        tabindex="-1"
       >
-        <div
-          class="no-image"
-          style="--fallbackBackground: #EF405680; --fallbackColor: #EF4056; --fallbackLetter: 'N';"
+        <img
+          alt=""
+          src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg"
+          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg 2x "
+          style="--fallbackBackground: #00CB7780; --fallbackColor: #00CB77; --fallbackLetter: 'M';"
         />
-      </span>
+      </a>
     </div>
     <div
       class="content"
     >
       <h2
         class="title"
-      />
+      >
+        <a
+          data-cy="title-link"
+          href="/read/2815325547"
+          tabindex="0"
+        >
+          Mufasa- its friday then.
+        </a>
+      </h2>
       <cite
         class="details"
-      />
+      >
+        <a
+          class="publisher"
+          data-cy="publisher-link"
+          href="https://www.youtube.com/watch?utm_source=pocket_mylist&v=1AnG04qnLqI"
+          tabindex="0"
+        >
+          YouTube
+        </a>
+      </cite>
     </div>
   </div>
   <footer
@@ -1446,10 +1467,10 @@ exports[`ItemCard renders a savedvideo 1`] = `
         </span>
         <span>
           <button
-            aria-label="item-action:add"
+            aria-label="item-action:archive"
             class="m11fpiro t1221eea pmdugmx d1ihjjkq"
-            data-cy="item-action:add"
-            data-tooltip="item-action:add"
+            data-cy="item-action:archive"
+            data-tooltip="item-action:archive"
           >
             <span
               class="igxbmuu icon "
@@ -1463,7 +1484,17 @@ exports[`ItemCard renders a savedvideo 1`] = `
               >
                 <path
                   clip-rule="evenodd"
-                  d="M12 3a1 1 0 0 1 1 1v7h7a1 1 0 1 1 0 2h-7v7a1 1 0 1 1-2 0v-7H4a1 1 0 1 1 0-2h7V4a1 1 0 0 1 1-1Z"
+                  d="M1 4a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4Zm2 0v2h18V4H3Z"
+                  fill-rule="evenodd"
+                />
+                <path
+                  clip-rule="evenodd"
+                  d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8Zm2 10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8H5v10Z"
+                  fill-rule="evenodd"
+                />
+                <path
+                  clip-rule="evenodd"
+                  d="M15.707 11.293a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L11 14.586l3.293-3.293a1 1 0 0 1 1.414 0Z"
                   fill-rule="evenodd"
                 />
               </svg>

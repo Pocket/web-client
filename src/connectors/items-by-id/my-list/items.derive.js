@@ -204,6 +204,8 @@ function openExternal({ item }) {
 
 function isCollection({ item }) {
   const url = item?.resolved_url || item?.given_url
+  if (!url) return false
+
   const pattern = /.+?getpocket\.com\/(?:[a-z]{2}(?:-[a-zA-Z]{2})?\/)?collections\/(?!\?).+/gi
   return !!url.match(pattern)
 }

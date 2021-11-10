@@ -1,6 +1,6 @@
 import { deriveListItem } from 'common/api/derivers/item'
 
-export const videoFromV3 = {
+export const savedVideoFromV3 = {
   item_id: '2815325547',
   resolved_id: '2815325547',
   given_url: 'https://www.youtube.com/watch?v=1AnG04qnLqI',
@@ -58,7 +58,7 @@ export const videoFromV3 = {
   listen_duration_estimate: 0
 }
 
-export const videoFromClientApi = {
+export const savedVideoFromClientApi = {
   node: {
     _createdAt: 1634839759,
     _updatedAt: 1634839759,
@@ -132,7 +132,7 @@ describe('My List - Videos', () => {
   const expectedAnalyticsUrl = 'http://www.youtube.com/watch?v=1AnG04qnLqI'
 
   it('should derive v3 as expected', () => {
-    const item = deriveListItem(videoFromV3, true)
+    const item = deriveListItem(savedVideoFromV3, true)
 
     // User driven data points
     expect(item._createdAt).toBe(1634839759)
@@ -180,7 +180,7 @@ describe('My List - Videos', () => {
   })
 
   it('should derive clientAPI as expected', () => {
-    const item = deriveListItem(videoFromClientApi)
+    const item = deriveListItem(savedVideoFromClientApi)
 
     // User driven data points
     expect(item._createdAt).toBe(1634839759)
