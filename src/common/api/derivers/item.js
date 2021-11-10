@@ -319,7 +319,7 @@ function permanentUrl({ item, status }) {
  * https://regexr.com/5volt - A place to test the regular expression
  */
 function isCollection({ item }) {
-  if (item?.collection) return true
+  if (item?.stories) return true
 
   const urlToTest = item?.resolvedUrl
   if (!urlToTest) return false
@@ -329,6 +329,7 @@ function isCollection({ item }) {
 }
 
 function collectionSlug({ item }) {
+  if (item?.stories) return item?.slug
   // We test for collection with the resolved and should use it to construct the slug
   const url = item?.resolvedUrl
   return url.substring(url.lastIndexOf('/') + 1)
