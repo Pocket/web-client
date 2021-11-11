@@ -16,7 +16,7 @@ exports[`ItemCard renders a story 1`] = `
     >
       <a
         data-cy="image-link"
-        href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html"
+        href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_collection_story"
         tabindex="-1"
       >
         <img
@@ -35,7 +35,7 @@ exports[`ItemCard renders a story 1`] = `
       >
         <a
           data-cy="title-link"
-          href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html"
+          href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_collection_story"
           tabindex="0"
         >
           Inside VW’s Campaign of Trickery
@@ -54,7 +54,7 @@ exports[`ItemCard renders a story 1`] = `
         <a
           class="publisher"
           data-cy="publisher-link"
-          href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html"
+          href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_collection_story"
           tabindex="0"
         >
           The New York Times
