@@ -28,9 +28,9 @@ const sectionWrapperStyle = css`
   }
 `
 
-export const SectionWrapper = ({ children, className }) => {
+export const SectionWrapper = ({ children, className, ...rest }) => {
   return (
-    <div className={`${sectionWrapperStyle} ${className}`}>
+    <div className={`${sectionWrapperStyle} ${className}`} {...rest}>
       <div className="inner">{children}</div>
     </div>
   )
