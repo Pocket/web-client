@@ -4,12 +4,14 @@ import { breakpointLargeHandset, breakpointLargeTablet } from '@pocket/web-ui'
 import { CloseButton } from 'components/close-button/close-button'
 import { containerMaxWidth } from '@pocket/web-ui'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
+import { getValueFromCookie } from 'common/utilities'
 
 const sectionWrapper = css`
   position: sticky;
   grid-column: span 12;
   bottom: 50px;
   pointer-events: none;
+  z-index: 1000;
 `
 
 const flyawayWrapper = css`
@@ -17,7 +19,6 @@ const flyawayWrapper = css`
   max-width: ${containerMaxWidth}px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  z-index: 1000;
   transition: opacity 700ms ease-in-out;
   opacity: 0;
 
@@ -98,6 +99,15 @@ export function Flyaway({
 }) {
   const [flyawayOpen, setFlyawayOpen] = useState(false)
 
+  // check whether the OptanonAlertBoxClosed cookie has been set
+  // if it has, the cookie consent banner has been closed
+  const cookie = document.cookie
+  const bannerClosed = !!getValueFromCookie('OptanonAlertBoxClosed', cookie)
+
+  // if cookie consent banner is open, grab its height so we 
+  // can determine the placement for the flyaway
+  const bannerHeight = !bannerClosed ? document.querySelector('#onetrust-banner-sdk').offsetHeight + 30 : null
+
   useEffect(() => {
     let timer
     if (show) timer = setTimeout(() => setFlyawayOpen(true), 700)
@@ -108,7 +118,9 @@ export function Flyaway({
 
   const flyawayClassNames = cx(flyawayWrapper, styleOverrides, flyawayOpen && 'show')
   return (
-    <SectionWrapper className={sectionWrapper}>
+    <SectionWrapper
+      style={{ bottom: bannerClosed ? '50px' : `${bannerHeight}px` }}
+      className={sectionWrapper} >
       <div className={flyawayClassNames} data-cy={dataCy}>
         <div className={flyaway}>
           <div className="flyaway_title">
