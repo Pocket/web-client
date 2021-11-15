@@ -65,8 +65,12 @@ export const Home = ({ metaData }) => {
       <ShareModal />
       <ArchiveModal />
       <FavoriteModal />
-      <Onboarding type="home.flyaway.save" />
-      <Onboarding type="home.flyaway.my-list" />
+      { generalSlates || topicSlates ? (
+        <>
+          <Onboarding type="home.flyaway.save" />
+          <Onboarding type="home.flyaway.my-list" />
+        </>
+      ) : null}
       <Toasts />
     </Layout>
   )
