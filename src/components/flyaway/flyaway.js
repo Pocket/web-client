@@ -106,19 +106,7 @@ export function Flyaway({
 
   // If cookie consent banner is open, grab its height so we can
   // determine the position of the flyaway
-  const [bannerHeight, setBannerHeight] = useState(!bannerClosed ? document.querySelector('#onetrust-banner-sdk')?.offsetHeight + 30 : 50)
-
-  useEffect(() => {
-    const handleResize = () => {
-      setBannerHeight(!bannerClosed ? document.querySelector('#onetrust-banner-sdk')?.offsetHeight + 30 : 50)
-    }
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [bannerHeight, bannerClosed])
+  const bannerHeight = !bannerClosed ? document.querySelector('#onetrust-banner-sdk')?.offsetHeight + 30 : 50
 
   useEffect(() => {
     let timer
