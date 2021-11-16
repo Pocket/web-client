@@ -104,9 +104,21 @@ export function Flyaway({
   const cookie = document.cookie
   const bannerClosed = !!getValueFromCookie('OptanonAlertBoxClosed', cookie)
 
-  // if cookie consent banner is open, grab its height so we 
-  // can determine the placement for the flyaway
-  const bannerHeight = !bannerClosed ? document.querySelector('#onetrust-banner-sdk').offsetHeight + 30 : null
+  // If cookie consent banner is open, grab its height so we can
+  // determine the position of the flyaway
+  const [bannerHeight, setBannerHeight] = useState(!bannerClosed ? document.querySelector('#onetrust-banner-sdk')?.offsetHeight + 30 : 50)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setBannerHeight(!bannerClosed ? document.querySelector('#onetrust-banner-sdk')?.offsetHeight + 30 : 50)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [bannerHeight, bannerClosed])
 
   useEffect(() => {
     let timer
@@ -119,7 +131,7 @@ export function Flyaway({
   const flyawayClassNames = cx(flyawayWrapper, styleOverrides, flyawayOpen && 'show')
   return (
     <SectionWrapper
-      style={{ bottom: bannerClosed ? '50px' : `${bannerHeight}px` }}
+      style={{ bottom: `${bannerHeight}px` }}
       className={sectionWrapper} >
       <div className={flyawayClassNames} data-cy={dataCy}>
         <div className={flyaway}>
