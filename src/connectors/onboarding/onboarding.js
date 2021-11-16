@@ -10,9 +10,9 @@ import { ReaderFlyawayApps } from './messages/reader-flyaway-apps'
 export const Onboarding = ({ type, ...rest }) => {
   const featureState = useSelector((state) => state.features)
   const onboardingDev = featureFlagActive({ flag: 'onboarding.dev', featureState })
-  const onboardingRelease = featureFlagActive({ flag: 'onboarding.release', featureState })
-
-  const showOnboarding = onboardingDev || onboardingRelease
+  // const onboardingRelease = featureFlagActive({ flag: 'onboarding.release', featureState })
+  // const showOnboarding = onboardingDev || onboardingRelease
+  const showOnboarding = onboardingDev
 
   const onboardingTypes = {
     'home.flyaway.save': HomeFlyawaySave,
