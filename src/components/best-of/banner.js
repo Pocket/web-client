@@ -207,7 +207,7 @@ const EnglishBanner = ({ clickAction }) => {
         <div className="sub-wrapper">
           <Button
             variant="secondary"
-            href="/collections"
+            href="/collections?utm_campaign=best-of-us&src=home"
             onClick={clickAction}>
             Read Pocket’s Best of 2021
           </Button>
@@ -229,7 +229,7 @@ const GermanBanner = ({ clickAction }) => {
         <div className="sub-wrapper">
           <Button
             variant="secondary"
-            href="/de/collections"
+            href="/de/collections?utm_campaign=best-of-de&src=home"
             onClick={clickAction}>
             Jetzt auf Pocket lesen
           </Button>
