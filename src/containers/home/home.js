@@ -24,10 +24,11 @@ import { Toasts } from 'connectors/toasts/toast-list'
 import { Onboarding } from 'connectors/onboarding/onboarding'
 
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
+import { BestOfBanner } from 'connectors/best-of/banner'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export const Home = ({ metaData }) => {
+export const Home = ({ metaData, locale }) => {
   const dispatch = useDispatch()
 
   const userStatus = useSelector((state) => state.user.user_status)
@@ -46,6 +47,8 @@ export const Home = ({ metaData }) => {
 
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
+      <BestOfBanner />
+
       <SectionWrapper>
         <HomeGreeting />
         <HomeRecentSaves />
