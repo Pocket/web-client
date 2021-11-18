@@ -28,7 +28,7 @@ import { BestOfBanner } from 'connectors/best-of/banner'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export const Home = ({ metaData, locale }) => {
+export const Home = ({ metaData }) => {
   const dispatch = useDispatch()
 
   const userStatus = useSelector((state) => state.user.user_status)
