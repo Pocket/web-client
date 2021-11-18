@@ -26,8 +26,10 @@ export const BestOfBanner = () => {
   const clickAction = () => dispatch(sendSnowplowEvent('home.bestof.engagement'))
 
   return labEnrolled ? (
-    <SectionWrapper ref={viewRef}>
-      <Banner locale={locale} clickAction={clickAction} />
+    <SectionWrapper>
+      <div ref={viewRef}>
+        <Banner locale={locale} clickAction={clickAction} />
+      </div>
     </SectionWrapper>
   ) : null
 }
