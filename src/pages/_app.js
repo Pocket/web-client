@@ -89,7 +89,11 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // Sets up feature flags for this user
     const hydrateFeatures = async () => {
-      const response = await fetchUnleashData(user_id, sess_guid, birth)
+      const locale = navigator.languages
+        ? navigator.languages[0]
+        : navigator.language || navigator.userLanguage
+
+      const response = await fetchUnleashData(user_id, sess_guid, birth, locale)
       const features = response ? response : {}
       if (features) dispatch(featuresHydrate(features))
     }

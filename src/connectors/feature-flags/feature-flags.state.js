@@ -27,10 +27,10 @@ export const featureReducers = (state = initialState, action) => {
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
-    case HYDRATE:
+    case HYDRATE: {
       const { features } = action.payload
       return { ...state, ...features }
-
+    }
     default:
       return state
   }
@@ -46,9 +46,9 @@ export const featureSagas = []
 
 /** ASYNC Functions
 ---------------------------------------------------------------- */
-export async function fetchUnleashData(userId, sessionId, birth) {
+export async function fetchUnleashData(userId, sessionId, birth, locale) {
   try {
-    const response = await getUnleash(sessionId, userId, birth, 'web-client')
+    const response = await getUnleash(sessionId, userId, birth, 'web-client', locale)
 
     // Filter and derive proper test values from the unleash response
     const filteredAssignments = await filterUnleashAssignments(response)

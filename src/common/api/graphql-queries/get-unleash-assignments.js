@@ -4,6 +4,7 @@ const getUnleashAssignments = gql`
     $sessionId: String!
     $userId: String
     $accountCreatedAt: String
+    $locale: String
     $appName: String
   ) {
     getUnleashAssignments(
@@ -11,7 +12,7 @@ const getUnleashAssignments = gql`
         sessionId: $sessionId
         userId: $userId
         appName: $appName
-        properties: { accountCreatedAt: $accountCreatedAt }
+        properties: { accountCreatedAt: $accountCreatedAt, locale: $locale }
       }
     ) {
       assignments {
