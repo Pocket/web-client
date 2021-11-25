@@ -49,13 +49,7 @@ const initialState = {
 export const userTagsReducers = (state = initialState, action) => {
   switch (action.type) {
     case USER_TAGS_GET_SUCCESS: {
-      const {
-        tagsList,
-        tagsWithItems,
-        since,
-        recentTags,
-        itemsWithTags
-      } = action
+      const { tagsList, tagsWithItems, since, recentTags, itemsWithTags } = action
       return {
         ...state,
         tagsList,
@@ -147,19 +141,17 @@ function* userTagsRequest() {
 
   // This just finds which of the most recent items have tags
   const itemsWithTags = Object.values(itemsById)
-    .filter((item) => item?.tags)
+    .filter((item) => item?.tags.length > 0)
     .slice(0, 4)
   const itemsWithTagsArray = itemsWithTags.map((item) => item?.tags)
-  const itemsWithTagsList = itemsWithTags.map((item) => item?.item_id)
+  const itemsWithTagsList = itemsWithTags.map((item) => item?.itemId)
 
   // This fun jumble of code makes an object of tags, with their corresponding
   // items.  We have to do this since the endpoint does not natively support
   // advanced tagging data ... yet
   const tagsWithItems = itemsWithTagsArray.reduce((previous, current) => {
     Object.keys(current).map((tag) => {
-      previous[tag] = previous[tag]
-        ? [...previous[tag], current[tag]]
-        : [current[tag]]
+      previous[tag] = previous[tag] ? [...previous[tag], current[tag]] : [current[tag]]
       return tag
     })
     return previous
@@ -182,9 +174,7 @@ function* userTagsTogglePin(actions) {
   const storedTags = yield select(getPinnedTags)
   const isPinned = storedTags.includes(tag)
   const tags = storedTags.slice()
-  const pinnedTags = isPinned
-    ? tags.filter((current) => current !== tag)
-    : [...tags, tag]
+  const pinnedTags = isPinned ? tags.filter((current) => current !== tag) : [...tags, tag]
 
   yield put({ type: USER_TAGS_PINS_SET, pinnedTags })
 }
