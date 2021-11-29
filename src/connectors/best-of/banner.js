@@ -17,16 +17,17 @@ export const BestOfBanner = () => {
   // Fire when item is in view
   const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
   useEffect(() => {
-    dispatch(sendSnowplowEvent('home.bestof.impression'))
+    if (inView) dispatch(sendSnowplowEvent('home.bestof.impression'))
   }, [inView, sendSnowplowEvent])
 
   const clickAction = () => dispatch(sendSnowplowEvent('home.bestof.engagement'))
+  const showBanner = locale === 'en' || locale === 'de'
 
-  return (
+  return showBanner ? (
     <SectionWrapper>
       <div ref={viewRef}>
         <Banner locale={locale} clickAction={clickAction} />
       </div>
     </SectionWrapper>
-  )
+  ) : null
 }
