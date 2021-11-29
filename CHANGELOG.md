@@ -1,3 +1,22 @@
+# [1.27.0](https://github.com/Pocket/web-client/compare/v1.26.0...v1.27.0) (2021-11-29)
+
+
+### Bug Fixes
+
+* **collections:** add thumbnail field ([2263e77](https://github.com/Pocket/web-client/commit/2263e778b739804c663fb7c5ec99480910718a8e))
+
+
+### Features
+
+* **collections:** eoy 2021 takeover ([15e8844](https://github.com/Pocket/web-client/commit/15e88448dc3ec3e3c9db04f38e8a1f10ef50a921))
+
+# [1.26.0](https://github.com/Pocket/web-client/compare/v1.25.9...v1.26.0) (2021-11-29)
+
+
+### Features
+
+* **collections:** force web view on collections ([2f6886c](https://github.com/Pocket/web-client/commit/2f6886c241ffae1f6d2af19f5a6b60fa77bf121a))
+
 ## [1.25.9](https://github.com/Pocket/web-client/compare/v1.25.8...v1.25.9) (2021-11-18)
 
 

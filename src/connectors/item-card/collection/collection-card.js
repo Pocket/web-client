@@ -10,7 +10,15 @@ import { BASE_URL } from 'common/constants'
  * Creates a connected `Card` with the appropriate data and actions
  * @param {object} {id, position} item_id for data and position for analytics
  */
-export function ItemCard({ id, cardShape, className, showExcerpt = false, position, lockup }) {
+export function ItemCard({
+  id,
+  cardShape,
+  className,
+  showExcerpt = false,
+  position,
+  lockup,
+  useHero = false
+}) {
   const dispatch = useDispatch()
 
   // Get data from state
@@ -22,7 +30,7 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
   const onImageFail = () => dispatch(setNoImage(id))
 
   // for hero items in a lockup, use the heroImage instead of thumbnail
-  const thumbnail = lockup ? storedItem.heroImage : storedItem.thumbnail
+  const thumbnail = lockup || useHero ? storedItem.heroImage : storedItem.thumbnail
   const item = { ...storedItem, thumbnail }
   const analyticsItem = {
     url: fullUrl,
@@ -35,7 +43,8 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
    * ----------------------------------------------------------------
    */
   const onImpression = () => dispatch(sendSnowplowEvent('collection.impression', analyticsItem))
-  const onItemInView = (inView) => (!impressionFired && inView && analyticsInitialized ? onImpression() : null)
+  const onItemInView = (inView) =>
+    !impressionFired && inView && analyticsInitialized ? onImpression() : null
   const onOpen = () => dispatch(sendSnowplowEvent('collection.open', analyticsItem))
 
   return (

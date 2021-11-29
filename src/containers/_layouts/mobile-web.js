@@ -1,10 +1,15 @@
 import { PageContainer } from '@pocket/web-ui'
 import { PocketHead } from 'containers/_layouts/_head'
 
-function mobileLayout({ metaData, children, canonical, title = 'Pocket' }) {
+function mobileLayout({ metaData, children, canonical, title = 'Pocket', forceWebView = false }) {
   return (
     <>
-      <PocketHead title={title} canonical={canonical} metaData={metaData} />
+      <PocketHead
+        title={title}
+        canonical={canonical}
+        metaData={metaData}
+        forceWebView={forceWebView}
+      />
 
       <PageContainer>{children}</PageContainer>
     </>

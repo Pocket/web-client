@@ -8,6 +8,7 @@ const getCollectionBySlug = gql`
       excerpt
       intro
       imageUrl
+      thumbnail: imageUrl
       authors {
         name
         bio

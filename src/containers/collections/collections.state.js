@@ -202,3 +202,19 @@ export async function fetchCollectionBySlug({ slug }) {
 const validateStory = function (story) {
   return story?.item?.itemId?.length && story?.url?.length
 }
+
+export async function fetchArrayOfCollectionSlugs(slugs) {
+  try {
+    const getSlugsCollections = async () => {
+      return Promise.all(slugs.map((slug) => getCollectionBySlug(slug)))
+    }
+
+    const response = await getSlugsCollections()
+    const derivedCollections = deriveCollectionPage(response)
+    const collections = arrayToObject(derivedCollections, 'slug')
+    return collections
+  } catch (error) {
+    //TODO: adjust this once error reporting strategy is defined.
+    console.warn('collection.state.collectionBySlug', error)
+  }
+}

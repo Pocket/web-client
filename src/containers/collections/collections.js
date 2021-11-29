@@ -2,6 +2,7 @@ import Layout from 'layouts/main'
 import { BASE_URL } from 'common/constants'
 
 import { useSelector } from 'react-redux'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 import { CardPageHeader } from 'components/headers/discover-header'
@@ -15,6 +16,9 @@ import { useTranslation } from 'next-i18next'
 
 export default function Collections({ locale }) {
   const { t } = useTranslation()
+
+  const featureState = useSelector((state) => state.features)
+  const eoyCollections = featureFlagActive({ flag: 'eoy.2021', featureState })
 
   const isAuthenticated = useSelector((state) => state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
@@ -32,13 +36,22 @@ export default function Collections({ locale }) {
     url
   }
 
+  const startingOffset = eoyCollections ? 0 : 5
+  const useHero = eoyCollections
+
   return (
-    <Layout title={metaData.title} metaData={metaData} canonical={canonical}>
+    <Layout title={metaData.title} metaData={metaData} canonical={canonical} forceWebView={true}>
       {!isAuthenticated && shouldRender ? <CallOutBuildHome source="collections" /> : null}
 
       <CardPageHeader title={metaData.title} subHeading={metaData.description} />
 
-      <Lockup items={itemIds} offset={0} heroPosition="center" ItemCard={ItemCard} />
+      <Lockup
+        items={itemIds}
+        offset={startingOffset}
+        heroPosition="center"
+        ItemCard={ItemCard}
+        useHero={useHero}
+      />
 
       <OffsetList items={itemIds} offset={5} cardShape="wide" ItemCard={ItemCard} />
 
