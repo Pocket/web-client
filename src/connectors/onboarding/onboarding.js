@@ -13,9 +13,6 @@ export const Onboarding = ({ type, ...rest }) => {
   const onboardingExperiment = featureFlagActive({ flag: 'onboarding.experiment', featureState })
   const showOnboarding = onboardingDev || onboardingExperiment
 
-  // keeping this console.log in for now to help Mini and her testing
-  console.log({onboardingDev, onboardingExperiment})
-
   const onboardingTypes = {
     'home.flyaway.save': HomeFlyawaySave,
     'home.flyaway.my-list': HomeFlyawayMyList,
