@@ -1,4 +1,5 @@
 import { takeLatest, takeEvery, put, select } from 'redux-saga/effects'
+import { deriveReccit } from 'common/api/derivers/item'
 import {
   PUBLISHER_RECS_REQUEST,
   PUBLISHER_RECS_SUCCESS,
@@ -39,7 +40,7 @@ import { saveItem as saveItemAPI } from 'common/api/saveItem'
 import { removeItem as removeItemAPI } from 'common/api/removeItem'
 
 import { arrayToObject } from 'common/utilities'
-import { deriveReaderRecitItems, checkExternal } from './recit.derive'
+import { checkExternal } from './recit.derive'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -259,8 +260,8 @@ function* fetchReaderRecs({ itemId }) {
     if (!itemId) return
     const response = yield getRecommendations(itemId)
 
-    const derivedItems = yield deriveReaderRecitItems(response.recommendations)
-    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+    const derivedItems = Object.values(response.recommendations).map(deriveReccit)
+    const itemsById = arrayToObject(derivedItems, 'resolvedId')
 
     yield put({ type: READER_RECS_SUCCESS, readerRecs: itemsById })
   } catch (error) {
@@ -274,8 +275,8 @@ function* fetchRecentRecs({ itemId: recentRecId }) {
     const response = yield getHomeRecommendations(recentRecId, 6)
     if (!response?.status) throw new Error('No items found')
 
-    const derivedItems = yield deriveReaderRecitItems(response.recommendations)
-    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+    const derivedItems = Object.values(response.recommendations).map(deriveReccit)
+    const itemsById = arrayToObject(derivedItems, 'resolvedId')
 
     yield put({ type: RECENT_RECS_SUCCESS, recentRecs: itemsById, recentRecId })
   } catch (error) {
