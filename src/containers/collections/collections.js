@@ -54,11 +54,26 @@ export default function Collections({ locale }) {
         useHero={useHero}
       />
 
-      <OffsetList items={itemIds} offset={5} cardShape="wide" ItemCard={ItemCard} />
+      <OffsetList
+        items={itemIds}
+        offset={startingOffset + 5}
+        cardShape="wide"
+        ItemCard={ItemCard}
+      />
 
-      <Lockup items={itemIds} offset={10} heroPosition="left" ItemCard={ItemCard} />
+      <Lockup
+        items={itemIds}
+        offset={startingOffset + 10}
+        heroPosition="left"
+        ItemCard={ItemCard}
+      />
 
-      <OffsetList items={itemIds} offset={15} cardShape="wide" ItemCard={ItemCard} />
+      <OffsetList
+        items={itemIds}
+        offset={startingOffset + 15}
+        cardShape="wide"
+        ItemCard={ItemCard}
+      />
 
       <Toasts />
     </Layout>
