@@ -27,7 +27,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ locale 
     'mood-of-the-year-languishing',
     'what-we-learned-in-2021',
     '12-stories-that-defined-2021',
-    'the-top-feel-good-stories-of-2021'
+    'pockets-top-2021-authors-articles-we-loved-this-year'
   ]
   const heroCollections = await fetchArrayOfCollectionSlugs(heroCollectionSlugs)
 
