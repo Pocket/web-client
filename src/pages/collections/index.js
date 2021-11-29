@@ -23,7 +23,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ locale 
 
   // !! TEMPORARILY SUPERSEDE THE HERO WITH SPECIFIC COLLECTIONS
   const heroCollectionSlugs = [
-    'pockets-best-articles-of-2021',
+    'pockets-best-of-2021',
     'mood-of-the-year-languishing',
     'what-we-learned-in-2021',
     '12-stories-that-defined-2021',
