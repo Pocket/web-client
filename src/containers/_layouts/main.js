@@ -20,11 +20,17 @@ function mainLayout({
   selectedNavLink,
   isFullWidthLayout,
   noContainer = false,
-  className = ''
+  className = '',
+  forceWebView = false
 }) {
   return (
     <>
-      <PocketHead title={title} canonical={canonical} metaData={metaData} />
+      <PocketHead
+        title={title}
+        canonical={canonical}
+        metaData={metaData}
+        forceWebView={forceWebView}
+      />
       <GlobalNav selectedLink={selectedNavLink} />
       <div className={cx(fixedNavContainer, noContainer && noContainerStyle, className)}>
         {isFullWidthLayout ? children : <PageContainer>{children}</PageContainer>}

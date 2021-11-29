@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/Pocket/web-client/compare/v1.25.9...v1.26.0) (2021-11-29)
+
+
+### Features
+
+* **collections:** force web view on collections ([2f6886c](https://github.com/Pocket/web-client/commit/2f6886c241ffae1f6d2af19f5a6b60fa77bf121a))
+
 ## [1.25.9](https://github.com/Pocket/web-client/compare/v1.25.8...v1.25.9) (2021-11-18)
 
 
