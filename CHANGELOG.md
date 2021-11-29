@@ -1,3 +1,13 @@
+## [1.27.2](https://github.com/Pocket/web-client/compare/v1.27.1...v1.27.2) (2021-11-29)
+
+
+### Bug Fixes
+
+* **best-of:** add proper params to collections links ([89c48f4](https://github.com/Pocket/web-client/commit/89c48f4b6f9d2681a7e00ef2ae421c444d1d5e08))
+* **best-of:** adding best of banner behind feature flag ([77a2245](https://github.com/Pocket/web-client/commit/77a224562686b0c52f3e8996eee0b73564d33f74))
+* **bestof:** moving ref to div instead of sectionwrapper ([ba84b2a](https://github.com/Pocket/web-client/commit/ba84b2a95706d56f16273271bc4cf382e7363b46))
+* **home:** removing locale prop which wasnt being used ([6d02664](https://github.com/Pocket/web-client/commit/6d026647a5a229e95190ad86481e7961c643005e))
+
 ## [1.27.1](https://github.com/Pocket/web-client/compare/v1.27.0...v1.27.1) (2021-11-29)
 
 

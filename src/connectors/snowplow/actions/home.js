@@ -253,5 +253,20 @@ export const homeActions = {
       'slateRequestId',
       'slateExperiment'
     ]
+  },
+  'home.bestof.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'button'
+    }
+  },
+  'home.bestof.engagement': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    }
   }
 }
