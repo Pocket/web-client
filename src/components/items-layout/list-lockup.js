@@ -50,6 +50,7 @@ export function Lockup({
   cardShape = 'block',
   lockupShape = 'hero',
   border = true,
+  useHero,
   ItemCard
 }) {
   const start = offset
@@ -62,7 +63,7 @@ export function Lockup({
     <div className={lockupClass}>
       {items.slice(start, end).map((id, index) => {
         const layoutProps = index === 0 ? hero : { className: 'lockup', cardShape }
-        return <ItemCard id={id} key={id} position={index} {...layoutProps} />
+        return <ItemCard id={id} key={id} position={index} useHero={useHero} {...layoutProps} />
       })}
     </div>
   )
