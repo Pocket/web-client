@@ -14,9 +14,6 @@ export const BestOfBanner = () => {
   const { i18n } = translations
   const { language: locale } = i18n
 
-  const featureState = useSelector((state) => state.features)
-  const labEnrolled = featureFlagActive({ flag: 'lab', featureState })
-
   // Fire when item is in view
   const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
   useEffect(() => {
@@ -25,11 +22,11 @@ export const BestOfBanner = () => {
 
   const clickAction = () => dispatch(sendSnowplowEvent('home.bestof.engagement'))
 
-  return labEnrolled ? (
+  return (
     <SectionWrapper>
       <div ref={viewRef}>
         <Banner locale={locale} clickAction={clickAction} />
       </div>
     </SectionWrapper>
-  ) : null
+  )
 }
