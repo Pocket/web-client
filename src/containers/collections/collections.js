@@ -33,7 +33,7 @@ export default function Collections({ locale }) {
   }
 
   return (
-    <Layout title={metaData.title} metaData={metaData} canonical={canonical}>
+    <Layout title={metaData.title} metaData={metaData} canonical={canonical} forceWebView={true}>
       {!isAuthenticated && shouldRender ? <CallOutBuildHome source="collections" /> : null}
 
       <CardPageHeader title={metaData.title} subHeading={metaData.description} />

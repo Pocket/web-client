@@ -92,6 +92,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
 
   return (
     <ArticleLayout
+      forceWebView={true}
       title={metaData.title}
       canonical={canonical}
       metaData={metaData}
