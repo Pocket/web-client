@@ -1,3 +1,10 @@
+## [1.27.1](https://github.com/Pocket/web-client/compare/v1.27.0...v1.27.1) (2021-11-29)
+
+
+### Bug Fixes
+
+* **collections:** fixing maoz effect ([9bd3641](https://github.com/Pocket/web-client/commit/9bd364120377e49003df95f7e8156ae572dd9d37))
+
 # [1.27.0](https://github.com/Pocket/web-client/compare/v1.26.0...v1.27.0) (2021-11-29)
 
 
