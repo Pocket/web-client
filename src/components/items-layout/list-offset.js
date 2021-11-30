@@ -35,6 +35,7 @@ export function OffsetList({
   ItemCard,
   showExcerpt = true,
   showMedia,
+  dataCy = 'offset',
   children
 }) {
   const start = offset
@@ -48,7 +49,7 @@ export function OffsetList({
     className
   )
   return (
-    <div className={listClass}>
+    <div className={listClass} data-cy={dataCy}>
       {items.slice(start, end).map((id, index) => (
         <ItemCard
           id={id}

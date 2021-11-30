@@ -157,7 +157,7 @@ export const HomeSimilarHeader = ({ sectionTitle, sectionDescription, closeActio
         <h3 className="sectionTitle">{sectionTitle}</h3>
         {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
       </div>
-      <CrossIcon className="close" onClick={closeAction} />
+      <CrossIcon className="close" data-cy="close-similar" onClick={closeAction} />
     </header>
   ) : null
 }

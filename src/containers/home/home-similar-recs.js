@@ -76,7 +76,7 @@ export const HomeSimilarRecs = () => {
   }, [similarRecId, dispatch])
 
   return (
-    <div className={`${similarRecsContainer} ${sectionClass}`}>
+    <div className={`${similarRecsContainer} ${sectionClass}`} data-cy="similar-recs">
       {similarRecIds.length ? (
         <SectionWrapper>
           <HomeSimilarHeader
