@@ -17,9 +17,6 @@ import { useTranslation } from 'next-i18next'
 export default function Collections({ locale }) {
   const { t } = useTranslation()
 
-  const featureState = useSelector((state) => state.features)
-  const eoyCollections = featureFlagActive({ flag: 'eoy.2021', featureState })
-
   const isAuthenticated = useSelector((state) => state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
   const items = useSelector((state) => state.collectionsBySlug)
@@ -36,7 +33,7 @@ export default function Collections({ locale }) {
     url
   }
 
-  const showEoyCollections = locale !== 'de' && eoyCollections
+  const showEoyCollections = locale !== 'de'
   const startingOffset = showEoyCollections ? 0 : 5
   const useHero = showEoyCollections
 
