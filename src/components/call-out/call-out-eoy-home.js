@@ -133,7 +133,7 @@ export function CallOutEOYHome() {
     <div className={wrapper} data-cy="signup-module">
       <aside>
         <p className="h3 title">
-          What articles make your best-of list?
+          What articles make your best‑of list?
         </p>
         <p className="subtext">
           Save the stories that inspire you, inform you or spark your curiosity
