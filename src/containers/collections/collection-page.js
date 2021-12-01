@@ -72,7 +72,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const authorNames = authors?.map((author) => author.name)
   const allowAds = isPremium ? false : showAds && shouldRender && oneTrustReady
   const usePersonalized = allowAds && trackingEnabled
-  const heroImage = getImageCacheUrl(imageUrl, { width: 648 })
+  const heroImage = getImageCacheUrl(imageUrl, { width: 648 }, 'png')
 
   // const count = urls?.length
   // const saveCollectionTop = () => dispatch(saveCollection(slug))
