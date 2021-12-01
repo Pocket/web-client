@@ -35,7 +35,7 @@ export default function Collections({ locale }) {
 
   const showEoyCollections = locale !== 'de'
   const startingOffset = showEoyCollections ? 0 : 5
-  const useHero = showEoyCollections
+  const useHero = true
 
   return (
     <Layout title={metaData.title} metaData={metaData} canonical={canonical} forceWebView={true}>
