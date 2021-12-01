@@ -1,3 +1,10 @@
+## [1.28.2](https://github.com/Pocket/web-client/compare/v1.28.1...v1.28.2) (2021-12-01)
+
+
+### Bug Fixes
+
+* **collection:** hero images format ([6aadb9d](https://github.com/Pocket/web-client/commit/6aadb9db0a919e21014dd6f82fddca8a6ec37696))
+
 ## [1.28.1](https://github.com/Pocket/web-client/compare/v1.28.0...v1.28.1) (2021-11-29)
 
 
