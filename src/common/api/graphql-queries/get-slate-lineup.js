@@ -28,6 +28,11 @@ const getSlateLineup = gql`
         description
         recommendations {
           item {
+            collection {
+              imageUrl
+              intro
+              title
+            }
             isArticle
             title
             itemId

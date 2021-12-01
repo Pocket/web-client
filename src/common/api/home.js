@@ -149,7 +149,7 @@ function displayTitle({ item, curatedInfo }) {
  */
 
 function displayThumbnail({ item, curatedInfo }) {
-  return curatedInfo?.imageSrc || item?.topImageUrl || false
+  return item?.collection?.imageUrl || curatedInfo?.imageSrc || item?.topImageUrl || false
 }
 
 /** PUBLISHER
