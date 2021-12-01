@@ -17,9 +17,6 @@ import { useTranslation } from 'next-i18next'
 export default function Collections({ locale }) {
   const { t } = useTranslation()
 
-  const featureState = useSelector((state) => state.features)
-  const eoyCollections = featureFlagActive({ flag: 'eoy.2021', featureState })
-
   const isAuthenticated = useSelector((state) => state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
   const items = useSelector((state) => state.collectionsBySlug)
@@ -36,9 +33,9 @@ export default function Collections({ locale }) {
     url
   }
 
-  const showEoyCollections = locale !== 'de' && eoyCollections
+  const showEoyCollections = locale !== 'de'
   const startingOffset = showEoyCollections ? 0 : 5
-  const useHero = showEoyCollections
+  const useHero = true
 
   return (
     <Layout title={metaData.title} metaData={metaData} canonical={canonical} forceWebView={true}>
@@ -54,11 +51,26 @@ export default function Collections({ locale }) {
         useHero={useHero}
       />
 
-      <OffsetList items={itemIds} offset={5} cardShape="wide" ItemCard={ItemCard} />
+      <OffsetList
+        items={itemIds}
+        offset={startingOffset + 5}
+        cardShape="wide"
+        ItemCard={ItemCard}
+      />
 
-      <Lockup items={itemIds} offset={10} heroPosition="left" ItemCard={ItemCard} />
+      <Lockup
+        items={itemIds}
+        offset={startingOffset + 10}
+        heroPosition="left"
+        ItemCard={ItemCard}
+      />
 
-      <OffsetList items={itemIds} offset={15} cardShape="wide" ItemCard={ItemCard} />
+      <OffsetList
+        items={itemIds}
+        offset={startingOffset + 15}
+        cardShape="wide"
+        ItemCard={ItemCard}
+      />
 
       <Toasts />
     </Layout>

@@ -1,3 +1,38 @@
+## [1.28.5](https://github.com/Pocket/web-client/compare/v1.28.4...v1.28.5) (2021-12-01)
+
+
+### Bug Fixes
+
+* **home:** use collection image if it exists ([7ec6552](https://github.com/Pocket/web-client/commit/7ec65529bc9c3d1a5ead8cb66c5978272a309bf1))
+
+## [1.28.4](https://github.com/Pocket/web-client/compare/v1.28.3...v1.28.4) (2021-12-01)
+
+
+### Bug Fixes
+
+* **heros:** show heros at top of page for all locales ([58eede4](https://github.com/Pocket/web-client/commit/58eede421c4c3b4f7833e00f9e8ff1804378d1e4))
+
+## [1.28.3](https://github.com/Pocket/web-client/compare/v1.28.2...v1.28.3) (2021-12-01)
+
+
+### Bug Fixes
+
+* **collections:** remove eoy feature flag ([02c7469](https://github.com/Pocket/web-client/commit/02c74697c6c0517d015a77b9bbe6138f4506569b))
+
+## [1.28.2](https://github.com/Pocket/web-client/compare/v1.28.1...v1.28.2) (2021-12-01)
+
+
+### Bug Fixes
+
+* **collection:** hero images format ([6aadb9d](https://github.com/Pocket/web-client/commit/6aadb9db0a919e21014dd6f82fddca8a6ec37696))
+
+## [1.28.1](https://github.com/Pocket/web-client/compare/v1.28.0...v1.28.1) (2021-11-29)
+
+
+### Bug Fixes
+
+* **collections:** offset should fully propegate ([7f14192](https://github.com/Pocket/web-client/commit/7f14192317c32db3eb1420891a33436969c37e58))
+
 # [1.28.0](https://github.com/Pocket/web-client/compare/v1.27.3...v1.28.0) (2021-11-29)
 
 
