@@ -1,3 +1,10 @@
+## [1.28.8](https://github.com/Pocket/web-client/compare/v1.28.7...v1.28.8) (2021-12-06)
+
+
+### Bug Fixes
+
+* **qa:** adding data-cy attributes for automated testing ([e52d917](https://github.com/Pocket/web-client/commit/e52d917903209342d8075920f596b768c1db0f55))
+
 ## [1.28.7](https://github.com/Pocket/web-client/compare/v1.28.6...v1.28.7) (2021-12-01)
 
 

@@ -30,6 +30,7 @@ export const HomeRecentSaves = () => {
         showExcerpt={false}
         border={false}
         compact={true}
+        dataCy="recent-saves"
       />
     </>
   ) : null
