@@ -2,9 +2,9 @@ import Layout from 'layouts/main'
 import { BASE_URL } from 'common/constants'
 
 import { useSelector } from 'react-redux'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
+import { CallOutEOYHome } from 'components/call-out/call-out-eoy-home'
 import { CardPageHeader } from 'components/headers/discover-header'
 import { ItemCard } from 'connectors/item-card/collection/collection-card'
 import { Lockup } from 'components/items-layout/list-lockup'
@@ -16,9 +16,6 @@ import { useTranslation } from 'next-i18next'
 
 export default function Collections({ locale }) {
   const { t } = useTranslation()
-
-  const featureState = useSelector((state) => state.features)
-  const eoyCollections = featureFlagActive({ flag: 'eoy.2021', featureState })
 
   const isAuthenticated = useSelector((state) => state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
@@ -36,13 +33,14 @@ export default function Collections({ locale }) {
     url
   }
 
-  const showEoyCollections = locale !== 'de' && eoyCollections
+  const showEoyCollections = locale !== 'de'
   const startingOffset = showEoyCollections ? 0 : 5
-  const useHero = showEoyCollections
+  const useHero = true
+  const SignUpCallout = locale === 'en' ? CallOutEOYHome : CallOutBuildHome
 
   return (
     <Layout title={metaData.title} metaData={metaData} canonical={canonical} forceWebView={true}>
-      {!isAuthenticated && shouldRender ? <CallOutBuildHome source="collections" /> : null}
+      {!isAuthenticated && shouldRender ? <SignUpCallout source="collections" /> : null}
 
       <CardPageHeader title={metaData.title} subHeading={metaData.description} />
 
@@ -54,11 +52,26 @@ export default function Collections({ locale }) {
         useHero={useHero}
       />
 
-      <OffsetList items={itemIds} offset={5} cardShape="wide" ItemCard={ItemCard} />
+      <OffsetList
+        items={itemIds}
+        offset={startingOffset + 5}
+        cardShape="wide"
+        ItemCard={ItemCard}
+      />
 
-      <Lockup items={itemIds} offset={10} heroPosition="left" ItemCard={ItemCard} />
+      <Lockup
+        items={itemIds}
+        offset={startingOffset + 10}
+        heroPosition="left"
+        ItemCard={ItemCard}
+      />
 
-      <OffsetList items={itemIds} offset={15} cardShape="wide" ItemCard={ItemCard} />
+      <OffsetList
+        items={itemIds}
+        offset={startingOffset + 15}
+        cardShape="wide"
+        ItemCard={ItemCard}
+      />
 
       <Toasts />
     </Layout>

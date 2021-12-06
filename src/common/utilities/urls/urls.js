@@ -15,14 +15,15 @@ export function urlWithPocketRedirect(url) {
  * @param {string} url Url of image we want to get from the image cache
  * @param {object} imageSize {width:value, height:value} @optional
  */
-export function getImageCacheUrl(url, imageSize) {
+export function getImageCacheUrl(url, imageSize, passedFormat) {
   if (!url) return
+  const format = passedFormat || 'jpg'
   const { width = '', height = '' } = imageSize || {}
   const resizeParam = imageSize ? `${width}x${height}` : ''
   const encodedURL = encodeURIComponent(url.replace(/'/g, '%27'))
   const urlParam = `${encodedURL}`
   const cacheURL = 'https://pocket-image-cache.com' //direct'
-  return `${cacheURL}/${resizeParam}/filters:format(jpg):extract_focal()/${urlParam}`
+  return `${cacheURL}/${resizeParam}/filters:format(${format}):extract_focal()/${urlParam}`
 }
 
 /**
