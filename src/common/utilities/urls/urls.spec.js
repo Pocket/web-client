@@ -69,6 +69,33 @@ describe('getImageCacheUrl', () => {
       'https://pocket-image-cache.com/x250/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
     )
   })
+
+  it('sets the format if it is optionally passed in', () => {
+    const url = 'https://i.picsum.photos/id/1015/6000/4000.jpg'
+    const redirect = getImageCacheUrl(url, { height: 250 }, 'png')
+
+    expect(redirect).toBe(
+      'https://pocket-image-cache.com/x250/filters:format(png):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    )
+  })
+
+  it('does not encode the image if it has been encoded already', () => {
+    const url = 'https://pocket-image-cache.com/400x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    const redirect = getImageCacheUrl(url)
+
+    expect(redirect).toBe(
+      'https://pocket-image-cache.com/400x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    )
+  })
+
+  it('updates optional params of an already encoded image', () => {
+    const url = 'https://pocket-image-cache.com/400x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    const redirect = getImageCacheUrl(url, { height: 500 }, 'png')
+
+    expect(redirect).toBe(
+      'https://pocket-image-cache.com/400x500/filters:format(png):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    )
+  })
 })
 
 describe('domainForUrl', () => {

@@ -21,8 +21,8 @@ exports[`ItemCard renders a legacy saved item 1`] = `
       >
         <img
           alt=""
-          src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-image-cache.com%2F1200x%2Ffilters%3Aformat(jpg)%3Aextract_focal()%2Fhttps%253A%252F%252Fpocket-syndicated-images.s3.amazonaws.com%252Farticles%252F5173%252F1595617454_GettyImages-1168909015.jpgcrop.jpg"
-          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-image-cache.com%2F1200x%2Ffilters%3Aformat(jpg)%3Aextract_focal()%2Fhttps%253A%252F%252Fpocket-syndicated-images.s3.amazonaws.com%252Farticles%252F5173%252F1595617454_GettyImages-1168909015.jpgcrop.jpg 2x "
+          src="https://pocket-image-cache.com/1200x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5173%2F1595617454_GettyImages-1168909015.jpgcrop.jpg"
+          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5173%2F1595617454_GettyImages-1168909015.jpgcrop.jpg 2x "
           style="--fallbackBackground: #1CB0A880; --fallbackColor: #1CB0A8; --fallbackLetter: 'T';"
         />
       </a>
@@ -717,8 +717,8 @@ exports[`ItemCard renders a saved collection 1`] = `
       >
         <img
           alt=""
-          src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-image-cache.com%2F1200x%2Ffilters%3Aformat(jpg)%3Aextract_focal()%2Fhttps%253A%252F%252Fs3.amazonaws.com%252Fpocket-collectionapi-prod-images%252F756e1877-8857-45c4-b9f6-84c62a0700b5.png"
-          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-image-cache.com%2F1200x%2Ffilters%3Aformat(jpg)%3Aextract_focal()%2Fhttps%253A%252F%252Fs3.amazonaws.com%252Fpocket-collectionapi-prod-images%252F756e1877-8857-45c4-b9f6-84c62a0700b5.png 2x "
+          src="https://pocket-image-cache.com/1200x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F756e1877-8857-45c4-b9f6-84c62a0700b5.png"
+          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F756e1877-8857-45c4-b9f6-84c62a0700b5.png 2x "
           style="--fallbackBackground: #00CB7780; --fallbackColor: #00CB77; --fallbackLetter: 'D';"
         />
       </a>
