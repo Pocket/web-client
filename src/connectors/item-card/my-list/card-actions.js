@@ -35,8 +35,7 @@ export function ActionsMyList({ id, position }) {
   const item = useSelector((state) => state.myListItemsById[id])
 
   if (!item) return null
-  const { permanentUrl, isFavorite, isArchive, analyticsData: passedAnalyticsData } = item
-
+  const { permanentUrl, isFavorite, isArchived, analyticsData: passedAnalyticsData } = item
   const analyticsData = { ...passedAnalyticsData, id, position }
 
   /** ITEM MENU ITEMS
@@ -79,9 +78,11 @@ export function ActionsMyList({ id, position }) {
     dispatch(sendSnowplowEvent('my-list.card.permanent-library', data))
   }
 
-  const archiveAction = isArchive ? itemUnArchive : itemArchive
-  const CorrectArchiveIcon = isArchive ? AddIcon : ArchiveIcon
-  const archiveLabel = isArchive ? t('item-action:add', 'Add') : t('item-action:archive', 'Archive')
+  const archiveAction = isArchived ? itemUnArchive : itemArchive
+  const CorrectArchiveIcon = isArchived ? AddIcon : ArchiveIcon
+  const archiveLabel = isArchived
+    ? t('item-action:add', 'Add')
+    : t('item-action:archive', 'Archive')
 
   const favoriteAction = isFavorite ? itemUnFavorite : itemFavorite
   const favoriteLabel = isFavorite

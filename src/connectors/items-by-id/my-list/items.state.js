@@ -98,10 +98,10 @@ const reconcileActions = function (state, actions) {
   const stateDraft = JSON.parse(JSON.stringify(state))
 
   actions.forEach(({ action, item_id, tags }) => {
-    if (action === 'favorite') stateDraft[item_id].favorite = '1'
-    if (action === 'unfavorite') stateDraft[item_id].favorite = '0'
-    if (action === 'archive') stateDraft[item_id].status = '1'
-    if (action === 'unarchive') stateDraft[item_id].status = '0'
+    if (action === 'favorite') stateDraft[item_id].isFavorite = true
+    if (action === 'unfavorite') stateDraft[item_id].isFavorite = false
+    if (action === 'archive') stateDraft[item_id].isArchived = true
+    if (action === 'unarchive') stateDraft[item_id].isArchived = false
     if (action === 'tags_replace') {
       stateDraft[item_id].tags = getTagsObject(item_id, tags)
     }

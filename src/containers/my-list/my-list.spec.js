@@ -36,7 +36,7 @@ const listToSort = [
     isFavorite: true,
     status: 'ARCHIVED',
     hasAnnotations: false,
-    tags: { hero: '' }
+    tags: [{ name: 'hero' }]
   },
   {
     hero: 'CAPTAIN MARVEL',
@@ -49,7 +49,7 @@ const listToSort = [
     isFavorite: true,
     status: 'ARCHIVED',
     hasAnnotations: false,
-    tags: { hero: '' }
+    tags: [{ name: 'hero' }]
   },
   {
     hero: 'Black Widow',
@@ -74,7 +74,7 @@ const listToSort = [
     favorite: '0',
     status: 'ARCHIVED',
     hasAnnotations: true,
-    tags: { hero: '' }
+    tags: [{ name: 'hero' }]
   },
   {
     hero: 'Captain America',
@@ -123,7 +123,7 @@ const listToSort = [
     isFavorite: true,
     status: 'UNREAD',
     hasAnnotations: false,
-    tags: { villan: '' }
+    tags: [{ name: 'villan' }]
   }
 ]
 
