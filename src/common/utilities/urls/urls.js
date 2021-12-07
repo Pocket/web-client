@@ -14,16 +14,43 @@ export function urlWithPocketRedirect(url) {
  * GET IMAGE CACHE URL
  * @param {string} url Url of image we want to get from the image cache
  * @param {object} imageSize {width:value, height:value} @optional
+ * @param {string} passedFormat format you would like the image to be, defaults to jpg @optional
  */
 export function getImageCacheUrl(url, imageSize, passedFormat) {
   if (!url) return
   const format = passedFormat || 'jpg'
   const { width = '', height = '' } = imageSize || {}
   const resizeParam = imageSize ? `${width}x${height}` : ''
-  const encodedURL = encodeURIComponent(url.replace(/'/g, '%27'))
-  const urlParam = `${encodedURL}`
   const cacheURL = 'https://pocket-image-cache.com' //direct'
-  return `${cacheURL}/${resizeParam}/filters:format(${format}):extract_focal()/${urlParam}`
+  
+  const urlCheck = /^https\:\/\/pocket-image-cache\.com\//
+  const isEncoded = url.match(urlCheck)
+
+  if (isEncoded) {
+    const cachedImageData = extractImageCacheUrl(url)
+
+    const widthToUse = cachedImageData.width || width
+    const heightToUse = cachedImageData.height || height
+    const urlToUse = cachedImageData.url
+
+    return `${cacheURL}/${widthToUse}x${heightToUse}/filters:format(${format}):extract_focal()/${urlToUse}`
+  } else {
+    const urlToUse = `${encodeURIComponent(url.replace(/'/g, '%27'))}`
+
+    return `${cacheURL}/${resizeParam}/filters:format(${format}):extract_focal()/${urlToUse}`
+  }
+}
+
+export function extractImageCacheUrl(url) {
+  let matchObject = {}
+  const cachedUrlTest =
+  /(?:^https\:\/\/pocket-image-cache\.com\/)(?:([0-9]+)?x([0-9]+)?\/filters:format\((?:jpe?g|png|webp)\):extract_focal\(\)\/)(.+)/
+  const match = url.match(cachedUrlTest)
+  
+  matchObject.width = match ? match[1] : ''
+  matchObject.height = match ? match[2] : ''
+  matchObject.url = match ? match[3] : url
+  return matchObject
 }
 
 /**
