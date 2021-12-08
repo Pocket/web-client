@@ -27,6 +27,15 @@ export const removeEmailAlias = (data) => {
   })
 }
 
+export const resendConfirmation = (data) => {
+  return request({
+    method: 'POST',
+    path: 'v3/resendEmailConfirmation',
+    body: JSON.stringify({ ...data }),
+    auth: true
+  })
+}
+
 export const setAvatar = (data) => {
   return postMime({
     path: 'v3/setAvatar',

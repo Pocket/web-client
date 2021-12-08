@@ -67,6 +67,7 @@ export const EmailAddresses = ({
 
   const aliasArray = Object.keys(aliases).filter((alias) => alias !== primaryEmail)
   const primaryUnConfirmed = aliases[primaryEmail]?.confirmed === '0'
+  const resendPrimaryConfirmation = () => onResendConfirmation(primaryEmail)
 
   return (
     <section className={emailStyle}>
@@ -88,7 +89,7 @@ export const EmailAddresses = ({
         </Button>
 
         {primaryUnConfirmed ? (
-          <Button variant="inline" onClick={onResendConfirmation} className="subButton">
+          <Button variant="inline" onClick={resendPrimaryConfirmation} className="subButton">
             {t('account:email-resend-confirmation', 'Re-send email confirmation')}
           </Button>
         ) : null}
