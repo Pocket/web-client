@@ -64,7 +64,7 @@ export const setRssProtection = (isOn) => {
   const feed_protected = isOn ? '1' : '0'
   return request({
     method: 'POST',
-    path: 'v3/setPrivacySettings.php ',
+    path: 'v3/setPrivacySettings',
     body: JSON.stringify({ feed_protected }),
     auth: true
   })

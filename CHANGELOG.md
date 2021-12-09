@@ -1,3 +1,10 @@
+## [1.28.13](https://github.com/Pocket/web-client/compare/v1.28.12...v1.28.13) (2021-12-09)
+
+
+### Bug Fixes
+
+* **account:** adjust malformed endpoint ([d35e6cb](https://github.com/Pocket/web-client/commit/d35e6cbacd0592b643c49cd32bbde25cbee6c21f))
+
 ## [1.28.12](https://github.com/Pocket/web-client/compare/v1.28.11...v1.28.12) (2021-12-09)
 
 
