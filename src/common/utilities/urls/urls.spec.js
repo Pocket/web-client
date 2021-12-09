@@ -80,7 +80,8 @@ describe('getImageCacheUrl', () => {
   })
 
   it('does not encode the image if it has been encoded already', () => {
-    const url = 'https://pocket-image-cache.com/400x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    const url =
+      'https://pocket-image-cache.com/400x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
     const redirect = getImageCacheUrl(url)
 
     expect(redirect).toBe(
@@ -89,11 +90,42 @@ describe('getImageCacheUrl', () => {
   })
 
   it('updates optional params of an already encoded image', () => {
-    const url = 'https://pocket-image-cache.com/400x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    const url =
+      'https://pocket-image-cache.com/400x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
     const redirect = getImageCacheUrl(url, { height: 500 }, 'png')
 
     expect(redirect).toBe(
-      'https://pocket-image-cache.com/400x500/filters:format(png):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+      'https://pocket-image-cache.com/x500/filters:format(png):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    )
+  })
+
+  it('does not add extra dimensions from previously encoded images', () => {
+    const url =
+      'https://pocket-image-cache.com/400x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    const redirect = getImageCacheUrl(url, { height: 600 }, 'png')
+
+    expect(redirect).toBe(
+      'https://pocket-image-cache.com/x600/filters:format(png):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    )
+  })
+
+  it('does does not use dimensions if none exist or are passed in', () => {
+    const url =
+      'https://pocket-image-cache.com//filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    const redirect = getImageCacheUrl(url)
+
+    expect(redirect).toBe(
+      'https://pocket-image-cache.com//filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    )
+  })
+
+  it('does preserves dimensions from previously encoded images if no image size is passed in', () => {
+    const url =
+      'https://pocket-image-cache.com/400x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
+    const redirect = getImageCacheUrl(url)
+
+    expect(redirect).toBe(
+      'https://pocket-image-cache.com/400x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.picsum.photos%2Fid%2F1015%2F6000%2F4000.jpg'
     )
   })
 })
