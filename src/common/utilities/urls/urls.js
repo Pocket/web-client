@@ -38,6 +38,12 @@ export function getImageCacheUrl(url, imageSize, passedFormat) {
   return `${cacheURL}/${resizeParam}/filters:format(${format}):extract_focal()/${urlToUse}`
 }
 
+/**
+ * This extracts original url if they are pre-encoded as well as dimensions
+ * REGEX for extractions: https://regexr.com/6b8j4
+ * @param {string} url
+ * @returns {object} urlToUse, dimensions
+ */
 export function extractImageCacheUrl(url) {
   const cachedUrlTest = /(?:^https:\/\/pocket-image-cache\.com\/)(?:((?:[0-9]+)?x(?:[0-9]+)?)?\/filters:format\((?:jpe?g|png|webp)\):extract_focal\(\)\/)(.+)/ //prettier-ignore
   const match = url.match(cachedUrlTest)
