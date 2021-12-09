@@ -22,35 +22,29 @@ export function getImageCacheUrl(url, imageSize, passedFormat) {
   const { width = '', height = '' } = imageSize || {}
   const resizeParam = imageSize ? `${width}x${height}` : ''
   const cacheURL = 'https://pocket-image-cache.com' //direct'
-  
-  const urlCheck = /^https\:\/\/pocket-image-cache\.com\//
+
+  const urlCheck = /^https:\/\/pocket-image-cache\.com\//
   const isEncoded = url.match(urlCheck)
 
+  // If we have an encoded url we make sure it meets parameters, but don't double encode
   if (isEncoded) {
-    const cachedImageData = extractImageCacheUrl(url)
-
-    const widthToUse = cachedImageData.width || width
-    const heightToUse = cachedImageData.height || height
-    const urlToUse = cachedImageData.url
-
-    return `${cacheURL}/${widthToUse}x${heightToUse}/filters:format(${format}):extract_focal()/${urlToUse}`
-  } else {
-    const urlToUse = `${encodeURIComponent(url.replace(/'/g, '%27'))}`
-
-    return `${cacheURL}/${resizeParam}/filters:format(${format}):extract_focal()/${urlToUse}`
+    const { urlToUse, originalDimensions } = extractImageCacheUrl(url)
+    const dimensions = imageSize ? resizeParam : originalDimensions || ''
+    return `${cacheURL}/${dimensions}/filters:format(${format}):extract_focal()/${urlToUse}`
   }
+
+  // Otherwise encode the image
+  const urlToUse = `${encodeURIComponent(url.replace(/'/g, '%27'))}`
+  return `${cacheURL}/${resizeParam}/filters:format(${format}):extract_focal()/${urlToUse}`
 }
 
 export function extractImageCacheUrl(url) {
-  let matchObject = {}
-  const cachedUrlTest =
-  /(?:^https\:\/\/pocket-image-cache\.com\/)(?:([0-9]+)?x([0-9]+)?\/filters:format\((?:jpe?g|png|webp)\):extract_focal\(\)\/)(.+)/
+  const cachedUrlTest = /(?:^https:\/\/pocket-image-cache\.com\/)(?:((?:[0-9]+)?x(?:[0-9]+)?)?\/filters:format\((?:jpe?g|png|webp)\):extract_focal\(\)\/)(.+)/ //prettier-ignore
   const match = url.match(cachedUrlTest)
-  
-  matchObject.width = match ? match[1] : ''
-  matchObject.height = match ? match[2] : ''
-  matchObject.url = match ? match[3] : url
-  return matchObject
+  return {
+    originalDimensions: match ? match[1] : '',
+    urlToUse: match ? match[2] : url
+  }
 }
 
 /**
