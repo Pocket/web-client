@@ -74,10 +74,10 @@ export const AccountDeleteModal = () => {
 
   return (
     <Modal
-      title={t('profile:delete-account', 'Delete Account')}
+      title={t('account:delete-account', 'Delete Account')}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t('profile:delete-account', 'Delete Account')}
+      screenReaderLabel={t('account:delete-account', 'Delete Account')}
       handleClose={cancelDeleteAccount}>
       <ModalBody className={accountDeleteStyles}>
         <Trans i18nKey="account:delete-copy">

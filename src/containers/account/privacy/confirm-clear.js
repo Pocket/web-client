@@ -75,10 +75,10 @@ export const AccountClearModal = () => {
 
   return (
     <Modal
-      title={t('profile:clear-account', 'Clear Account')}
+      title={t('account:clear-account', 'Clear Account')}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t('profile:clear-account', 'Clear Account')}
+      screenReaderLabel={t('account:clear-account', 'Clear Account')}
       handleClose={cancelClearAccount}>
       {clearSuccess ? (
         <PostClear cancelClearAccount={cancelClearAccount} />
