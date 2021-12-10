@@ -1,3 +1,33 @@
+## [1.28.14](https://github.com/Pocket/web-client/compare/v1.28.13...v1.28.14) (2021-12-09)
+
+
+### Bug Fixes
+
+* **image url:** add some comments and regex ref ([929a809](https://github.com/Pocket/web-client/commit/929a80962bcc67bc1440bba885c27cc57c4cc696))
+* **image url:** dont make dimensions additive ([f71de6e](https://github.com/Pocket/web-client/commit/f71de6e4e2bcf74b7b2450e6d3436b9da31bfb11))
+
+## [1.28.13](https://github.com/Pocket/web-client/compare/v1.28.12...v1.28.13) (2021-12-09)
+
+
+### Bug Fixes
+
+* **account:** adjust malformed endpoint ([d35e6cb](https://github.com/Pocket/web-client/commit/d35e6cbacd0592b643c49cd32bbde25cbee6c21f))
+
+## [1.28.12](https://github.com/Pocket/web-client/compare/v1.28.11...v1.28.12) (2021-12-09)
+
+
+### Bug Fixes
+
+* **account:** add resend confirmations ([6051575](https://github.com/Pocket/web-client/commit/60515759eb64bc95676bf87a75f32057f88966dc))
+
+## [1.28.11](https://github.com/Pocket/web-client/compare/v1.28.10...v1.28.11) (2021-12-08)
+
+
+### Bug Fixes
+
+* **urls:** add and update tests and snapshots ([da46e16](https://github.com/Pocket/web-client/commit/da46e168c6df8d5beda12b8d51e4b948483dd433))
+* **urls:** don't re-encode images if they've already been encoded ([d01ebd8](https://github.com/Pocket/web-client/commit/d01ebd859a459ab9ca949af3d3dd3fa9692a2378))
+
 ## [1.28.10](https://github.com/Pocket/web-client/compare/v1.28.9...v1.28.10) (2021-12-07)
 
 

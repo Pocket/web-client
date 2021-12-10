@@ -27,6 +27,15 @@ export const removeEmailAlias = (data) => {
   })
 }
 
+export const resendConfirmation = (data) => {
+  return request({
+    method: 'POST',
+    path: 'v3/resendEmailConfirmation',
+    body: JSON.stringify({ ...data }),
+    auth: true
+  })
+}
+
 export const setAvatar = (data) => {
   return postMime({
     path: 'v3/setAvatar',
@@ -55,7 +64,7 @@ export const setRssProtection = (isOn) => {
   const feed_protected = isOn ? '1' : '0'
   return request({
     method: 'POST',
-    path: 'v3/setPrivacySettings.php ',
+    path: 'v3/setPrivacySettings',
     body: JSON.stringify({ feed_protected }),
     auth: true
   })

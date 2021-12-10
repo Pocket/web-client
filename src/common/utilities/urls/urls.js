@@ -14,16 +14,43 @@ export function urlWithPocketRedirect(url) {
  * GET IMAGE CACHE URL
  * @param {string} url Url of image we want to get from the image cache
  * @param {object} imageSize {width:value, height:value} @optional
+ * @param {string} passedFormat format you would like the image to be, defaults to jpg @optional
  */
 export function getImageCacheUrl(url, imageSize, passedFormat) {
   if (!url) return
   const format = passedFormat || 'jpg'
   const { width = '', height = '' } = imageSize || {}
   const resizeParam = imageSize ? `${width}x${height}` : ''
-  const encodedURL = encodeURIComponent(url.replace(/'/g, '%27'))
-  const urlParam = `${encodedURL}`
   const cacheURL = 'https://pocket-image-cache.com' //direct'
-  return `${cacheURL}/${resizeParam}/filters:format(${format}):extract_focal()/${urlParam}`
+
+  const urlCheck = /^https:\/\/pocket-image-cache\.com\//
+  const isEncoded = url.match(urlCheck)
+
+  // If we have an encoded url we make sure it meets parameters, but don't double encode
+  if (isEncoded) {
+    const { urlToUse, originalDimensions } = extractImageCacheUrl(url)
+    const dimensions = imageSize ? resizeParam : originalDimensions || ''
+    return `${cacheURL}/${dimensions}/filters:format(${format}):extract_focal()/${urlToUse}`
+  }
+
+  // Otherwise encode the image
+  const urlToUse = `${encodeURIComponent(url.replace(/'/g, '%27'))}`
+  return `${cacheURL}/${resizeParam}/filters:format(${format}):extract_focal()/${urlToUse}`
+}
+
+/**
+ * This extracts original url if they are pre-encoded as well as dimensions
+ * REGEX for extractions: https://regexr.com/6b8j4
+ * @param {string} url
+ * @returns {object} urlToUse, dimensions
+ */
+export function extractImageCacheUrl(url) {
+  const cachedUrlTest = /(?:^https:\/\/pocket-image-cache\.com\/)(?:((?:[0-9]+)?x(?:[0-9]+)?)?\/filters:format\((?:jpe?g|png|webp)\):extract_focal\(\)\/)(.+)/ //prettier-ignore
+  const match = url.match(cachedUrlTest)
+  return {
+    originalDimensions: match ? match[1] : '',
+    urlToUse: match ? match[2] : url
+  }
 }
 
 /**
