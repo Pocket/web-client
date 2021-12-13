@@ -122,9 +122,9 @@ export const ItemHeader = ({
   authors,
   title,
   publisher,
-  open_url,
+  externalUrl,
   tags,
-  read_time,
+  timeToRead,
   viewOriginalEvent
 }) => {
   const authorList = listAuthors(authors)
@@ -141,7 +141,7 @@ export const ItemHeader = ({
         ) : null}{' '}
         {authorList ? <div className={authorWrapper}>{authorList}</div> : null}
         {publisher ? <div className={domainWrapper}>{publisher}</div> : null}
-        {read_time ? <div className={timeWrapper}>{read_time} min</div> : null}
+        {timeToRead ? <div className={timeWrapper}>{timeToRead} min</div> : null}
       </div>
 
       <div className={pocketInfo}>
@@ -150,7 +150,7 @@ export const ItemHeader = ({
           data-cy="view-original"
           className={viewOriginal}
           onClick={viewOriginalEvent}
-          href={open_url}
+          href={externalUrl}
           target="_blank">
           <Trans i18nKey="reader:view-original">View Original</Trans>
         </a>
