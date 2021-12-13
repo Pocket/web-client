@@ -151,8 +151,6 @@ export default function Reader() {
     analyticsData
   } = articleData
 
-  // console.log(articleData)
-
   const tagList = tags ? Object.keys(tags) : []
 
   const headerData = {
