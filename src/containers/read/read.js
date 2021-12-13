@@ -140,30 +140,26 @@ export default function Reader() {
     itemId,
     authors,
     title,
-    open_url,
-    read_time,
-    syndicated,
+    externalUrl,
+    timeToRead,
     publisher,
-    has_video,
+    hasVideo,
     videos,
     images,
-    status
+    isFavorite,
+    isArchived,
+    analyticsData
   } = articleData
 
   const tagList = tags ? Object.keys(tags) : []
-  const favStatus = getBool(favorite)
-  const archiveStatus = getBool(status)
 
   const headerData = {
     authors,
     title,
-    open_url,
+    externalUrl,
     publisher,
-    syndicated,
     tags: tagList,
-    has_video,
-    read_time,
-    videos
+    timeToRead
   }
 
   const contentData = {
@@ -213,13 +209,13 @@ export default function Reader() {
     setHighlightList(compiled)
   }
 
-  const analyticsData = { id: itemId, url: open_url }
+  const analyticsInfo = { ...analyticsData, id: item_id }
 
   const addAnnotation = () => {
     if (annotations.length === 3 && !isPremium) {
       setAnnotationLimitModal(true)
     } else {
-      dispatch(sendSnowplowEvent('reader.add-highlight', analyticsData))
+      dispatch(sendSnowplowEvent('reader.add-highlight', analyticsInfo))
       dispatch(
         saveAnnotation({
           itemId,
@@ -231,7 +227,7 @@ export default function Reader() {
   }
 
   const removeAnnotation = (annotation_id) => {
-    dispatch(sendSnowplowEvent('reader.remove-highlight', analyticsData))
+    dispatch(sendSnowplowEvent('reader.remove-highlight', analyticsInfo))
     dispatch(
       deleteAnnotation({
         itemId,
@@ -241,15 +237,15 @@ export default function Reader() {
   }
 
   const itemDelete = () => {
-    dispatch(sendSnowplowEvent('reader.delete', analyticsData))
+    dispatch(sendSnowplowEvent('reader.delete', analyticsInfo))
     dispatch(itemsDeleteAction([{ id }]))
   }
   const itemTag = () => {
-    dispatch(sendSnowplowEvent('reader.tag', analyticsData))
+    dispatch(sendSnowplowEvent('reader.tag', analyticsInfo))
     dispatch(itemsTagAction([{ id }]))
   }
   const itemShare = ({ quote }) => {
-    dispatch(sendSnowplowEvent('reader.share', analyticsData))
+    dispatch(sendSnowplowEvent('reader.share', analyticsInfo))
     dispatch(itemsShareAction({ id, quote }))
   }
   const handleImpression = (identifier) => {
@@ -257,16 +253,16 @@ export default function Reader() {
   }
 
   const archiveItem = () => {
-    const archiveAction = archiveStatus ? itemsUnArchiveAction : itemsArchiveAction
-    const identifier = archiveStatus ? 'reader.un-archive' : 'reader.archive'
-    dispatch(sendSnowplowEvent(identifier, analyticsData))
+    const archiveAction = isArchived ? itemsUnArchiveAction : itemsArchiveAction
+    const identifier = isArchived ? 'reader.un-archive' : 'reader.archive'
+    dispatch(sendSnowplowEvent(identifier, analyticsInfo))
     dispatch(archiveAction([{ id }]))
   }
 
   const toggleFavorite = () => {
-    const favoriteAction = favStatus ? itemsUnFavoriteAction : itemsFavoriteAction
-    const identifier = favStatus ? 'reader.un-favorite' : 'reader.favorite'
-    dispatch(sendSnowplowEvent(identifier, analyticsData))
+    const favoriteAction = isFavorite ? itemsUnFavoriteAction : itemsFavoriteAction
+    const identifier = isFavorite ? 'reader.un-favorite' : 'reader.favorite'
+    dispatch(sendSnowplowEvent(identifier, analyticsInfo))
     dispatch(favoriteAction([{ id }]))
   }
 
@@ -276,7 +272,7 @@ export default function Reader() {
   }
 
   const viewOriginalEvent = () => {
-    dispatch(sendSnowplowEvent('reader.view-original', analyticsData))
+    dispatch(sendSnowplowEvent('reader.view-original', analyticsInfo))
   }
 
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
@@ -295,8 +291,8 @@ export default function Reader() {
         toggleFavorite={toggleFavorite}
         archiveItem={archiveItem}
         displaySettings={{ columnWidth, lineHeight, fontSize, fontFamily }}
-        favorite={favStatus}
-        archive={archiveStatus}
+        favorite={isFavorite}
+        archive={isArchived}
         onVisible={handleImpression}
         sideBarOpen={sideBarOpen}
         colorMode={colorMode}
@@ -323,7 +319,7 @@ export default function Reader() {
             ReaderFonts,
             GoogleFonts,
             'reader',
-            has_video === '2' && 'is-video'
+            hasVideo === 'IS_VIDEO' && 'is-video'
           )}
           style={customStyles}>
           <ItemHeader viewOriginalEvent={viewOriginalEvent} {...headerData} />
