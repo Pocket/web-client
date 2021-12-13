@@ -5,11 +5,11 @@ import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils'
 import { collectionFromClientApi } from 'common/api/derivers/collection/page.spec'
 import { partnerCollectionFromClientApi } from 'common/api/derivers/collection/page.spec'
 import { ItemCard as CollectionCard } from 'connectors/item-card/collection/collection-card'
-import { deriveCollectionPage } from 'connectors/items-by-id/collection/page.derive'
+import { deriveCollection } from 'common/api/derivers/item'
 
 describe('ItemCard', () => {
   //Legacy Derivers
-  const derivedCollection = deriveCollectionPage([collectionFromClientApi])[0]
+  const derivedCollection = deriveCollection(collectionFromClientApi)
 
   const initialState = {
     user: { auth: true },
@@ -17,14 +17,14 @@ describe('ItemCard', () => {
       impressions: []
     },
     collectionsBySlug: {
-      [derivedCollection.item_id]: derivedCollection
+      [derivedCollection.slug]: derivedCollection
     }
   }
 
   beforeAll(() => mockAllIsIntersecting())
 
   it('renders a collection', () => {
-    const { getByCy } = wrappedRender(<CollectionCard id={derivedCollection.item_id} position={3} />, { initialState }) //prettier-ignore
+    const { getByCy } = wrappedRender(<CollectionCard id={derivedCollection.slug} position={3} />, { initialState }) //prettier-ignore
     expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
   })
 })

@@ -21,14 +21,13 @@ const recommendStyle = css`
   }
 `
 
-export function ShareRecommend({ item, position }) {
+export function ShareRecommend({ itemId, openUrl, position }) {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [commentValue, setCommentValue] = useState('')
-  const { open_url, item_id } = item
 
   const confirmShare = (comment) => {
-    const data = { id: item_id, url: open_url, position }
+    const data = { id: itemId, url: openUrl, position }
     dispatch(itemsRecommendConfirm(comment))
     dispatch(sendSnowplowEvent('share.recommend', data))
   }

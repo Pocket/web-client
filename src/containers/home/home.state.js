@@ -3,8 +3,9 @@ import { getMyList } from 'common/api/my-list'
 import { getHomeLineup as apiGetHomeLineup } from 'common/api/home'
 import { saveItem } from 'common/api/saveItem'
 import { removeItem } from 'common/api/removeItem'
-import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
+
 import { arrayToObject } from 'common/utilities'
+import { deriveListItem } from 'common/api/derivers/item'
 
 import { HOME_SAVE_REQUEST } from 'actions'
 import { HOME_SAVE_SUCCESS } from 'actions'
@@ -112,10 +113,10 @@ export const homeReducers = (state = initialState, action) => {
  * @param {string} id Item id to operate on
  * @param {string} save_status Value to update save status to
  */
-export function updateSaveStatus(state, id, save_status) {
+export function updateSaveStatus(state, id, saveStatus) {
   const itemsById = state.itemsById
   const item = itemsById[id]
-  return { ...itemsById, [id]: { ...item, save_status } }
+  return { ...itemsById, [id]: { ...item, saveStatus } }
 }
 
 /** SAGAS :: WATCHERS
@@ -174,10 +175,12 @@ function* homeSaveRequest({ url, id, position }) {
     const response = yield saveItem(url, analytics)
     if (response?.status !== 1) throw new Error('Unable to save')
 
-    const derivedItems = yield deriveMyListItems(Object.values(response.action_results))
+    const derivedItems = yield Object.values(response.action_results).map((item) =>
+      deriveListItem(item, true)
+    )
 
-    const items = derivedItems.map((item) => item.resolved_id)
-    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+    const items = derivedItems.map((item) => item.resolvedId)
+    const itemsById = arrayToObject(derivedItems, 'resolvedId')
 
     yield put({ type: HOME_SAVE_SUCCESS, id, items, itemsById })
     yield put({ type: ITEMS_ADD_SUCCESS })
@@ -209,10 +212,12 @@ function* homeSimilarRecSaveRequest({ url, id, position }) {
     const response = yield saveItem(url, analytics)
     if (response?.status !== 1) throw new Error('Unable to save')
 
-    const derivedItems = yield deriveMyListItems(Object.values(response.action_results))
+    const derivedItems = Object.values(response.action_results).map((item) =>
+      deriveListItem(item, true)
+    )
 
-    const items = derivedItems.map((item) => item.resolved_id)
-    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+    const items = derivedItems.map((item) => item.resolvedId)
+    const itemsById = arrayToObject(derivedItems, 'resolvedId')
 
     yield put({ type: HOME_SIMILAR_REC_SAVE_SUCCESS, id, items, itemsById })
     yield put({ type: ITEMS_ADD_SUCCESS })
@@ -236,11 +241,11 @@ export async function fetchMyListData(params) {
 
     const total = response.total
 
-    const derivedItems = await deriveMyListItems(Object.values(response.list))
+    const derivedItems = Object.values(response.list).map((item) => deriveListItem(item, true))
 
-    const items = derivedItems.sort((a, b) => a.sort_id - b.sort_id).map((item) => item.resolved_id)
+    const items = derivedItems.map((item) => item.itemId)
 
-    const itemsById = arrayToObject(derivedItems, 'resolved_id')
+    const itemsById = arrayToObject(derivedItems, 'itemId')
 
     return { items, itemsById, total }
   } catch (error) {

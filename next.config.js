@@ -38,6 +38,17 @@ const nextOptions = {
       }
     ]
   },
+  async headers() {
+    return [
+      {
+        // Apply these headers to all routes in your application.
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' }
+        ]
+      }
+    ]
+  },
   //prettier-ignore
   webpack: (config, { isServer, webpack }) => {
 

@@ -14,16 +14,16 @@ export function ActionsCollection({ id, position }) {
 
   if (!item) return null
 
-  const { save_url: url, save_status = 'unsaved' } = item
+  const { saveUrl, saveStatus = 'unsaved' } = item
   const analyticsData = {
-    url,
     position,
-    destination: 'external'
+    destination: 'external',
+    ...item?.analyticsData
   }
 
   // Prep save action
   const onSave = () => {
-    dispatch(saveStory(id, url))
+    dispatch(saveStory(id, saveUrl))
     dispatch(sendSnowplowEvent('collection.story.save', analyticsData))
   }
 
@@ -34,12 +34,12 @@ export function ActionsCollection({ id, position }) {
     <div className={`${itemActionStyle} actions`}>
       <SaveToPocket
         allowRead={false}
-        url={url}
+        url={saveUrl}
         onOpen={onOpen}
         openExternal={false}
         saveAction={onSave}
         isAuthenticated={isAuthenticated}
-        saveStatus={save_status}
+        saveStatus={saveStatus}
         id={id}
       />
     </div>
