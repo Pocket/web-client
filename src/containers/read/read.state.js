@@ -189,7 +189,7 @@ function* articleItemRequest({ itemId }) {
     const response = yield getArticleFromId(itemId)
     const item = response?.list[itemId]
     const { resolved_url: url } = item
-    const derivedItem = deriveListItem(item)
+    const derivedItem = deriveListItem(item, true)
     const itemsById = arrayToObject([derivedItem], 'itemId')
 
     if (item)

@@ -137,7 +137,7 @@ export default function Reader() {
   }
 
   const {
-    item_id,
+    itemId,
     authors,
     title,
     externalUrl,
@@ -218,7 +218,7 @@ export default function Reader() {
       dispatch(sendSnowplowEvent('reader.add-highlight', analyticsInfo))
       dispatch(
         saveAnnotation({
-          item_id,
+          itemId,
           patch: requestAnnotationPatch(highlight),
           quote: highlight.toString()
         })
@@ -230,7 +230,7 @@ export default function Reader() {
     dispatch(sendSnowplowEvent('reader.remove-highlight', analyticsInfo))
     dispatch(
       deleteAnnotation({
-        item_id,
+        itemId,
         annotation_id
       })
     )
@@ -267,7 +267,7 @@ export default function Reader() {
   }
 
   const externalLinkClick = (href) => {
-    const data = { id: item_id, url: href }
+    const data = { id: itemId, url: href }
     dispatch(sendSnowplowEvent('reader.external-link', data))
   }
 
@@ -352,7 +352,7 @@ export default function Reader() {
           ) : null}
         </article>
       </main>
-      {articleContent ? <Recommendations id={item_id} /> : null}
+      {articleContent ? <Recommendations id={itemId} /> : null}
       {!isPremium && articleContent ? (
         <BottomUpsell maxWidth={customStyles.maxWidth} onVisible={handleImpression} />
       ) : null}
