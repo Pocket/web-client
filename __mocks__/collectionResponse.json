@@ -1,0 +1,601 @@
+{
+  "data": {
+    "getCollectionBySlug": {
+      "slug": "the-top-feel-good-stories-of-2021",
+      "title": "The Top Feel-Good Stories of 2021",
+      "excerpt": "Pause your doomscrolling and take in something more uplifting: NextDraft newsletter guru Dave Pell revisits the most heartwarming news this year. ",
+      "intro": "2021 was supposed to be the perfect do-over year after the unprecedented horrors of 2020—one of them, the ubiquity of the word “unprecedented.” It’s probably too much pressure to put on a single calendar year, especially one that, in America, kicked off with an insurrection and, by October, has seen a higher Covid-19 death toll than 2020. \n\nThrough all the highs and lows, Dave Pell has sent out his daily newsletter, [NextDraft](https://nextdraft.com/), the media- and tech-industry favorite that combs the internet for the best stories to read daily. He’s also written *[Please Scream Inside Your Heart: Breaking News and Nervous Breakdowns in the Year That Wouldn’t End](https://www.amazon.com/Please-Scream-Inside-Your-Heart/dp/0306847396/)*, a new book that manages to catalog the roller coaster of the 2020 newscycle, and explain how our relationship with media got out of hand, all buoyed by his signature pace and humor.\n\nBut if *Please Scream* is all about the worst of 2020, what shall we make of the best of 2021? We’re handing the curatorial reins to Pell, the self-appointed Managing Editor of the Internet, to share his favorite, most heartwarming stories from this year. Consider this some inspiration for what we hope for in 2022.",
+      "thumbnail": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/3cc20d7d-ea86-42e6-ade9-0683574e2f74.png",
+      "partnership": null,
+      "authors": [
+        {
+          "imageUrl": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/2741e34f-3e5b-4185-aae9-3072e4a56a93.jpeg",
+          "bio": "**Dave Pell** writes [NextDraft](https://nextdraft.com/), a newsletter offering a quick and entertaining look at the day’s most fascinating news. He’s been news-obsessed since he was a child and is known to his readers as the Internet’s Managing Editor, since he visits 75 news sites a day and narrows that deluge down to the day’s top ten news items. More importantly, Dave is the author of *[Please Scream Inside Your Heart: Breaking News and Nervous Breakdowns in the Year That Wouldn’t End](https://www.amazon.com/Please-Scream-Inside-Your-Heart/dp/0306847396/)*, a real-time ride through the maddening hell that was the 2020 news cycle—when historic turmoil and media mania stretched American sanity, democracy, and toilet paper. From Norman Lear: “I can’t recall a more engaging read.”",
+          "slug": "dave-pell",
+          "name": "Dave Pell"
+        }
+      ],
+      "stories": [
+        {
+          "url": "https://www.nytimes.com/2021/09/24/dining/pennsylvania-carversville-farm-food-donation.html",
+          "title": "Their Produce Is Pristine Enough for Picky Chefs. But They Give It Away.",
+          "excerpt": "**Dave Pell**: “Steve Tomlinson is one of those organic farmers who fixates on every detail at Carversville Farm. He spent five years restoring the topsoil that now grows his Bolero carrots. Nearby, a 10-foot-long steel barrel washer gently buffs a pile of freshly dug Lehigh potatoes. You would be forgiven for assuming that Carversville Farm caters to the finest restaurants in the world. But these highest of high-quality foods go to soup kitchens and food pantries throughout the Philadelphia area. For free.”",
+          "thumbnail": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/7d2d2e16-6326-4ca8-953f-0738e1bb0e37.jpeg",
+          "authors": [
+            {
+              "name": "Rachel Wharton"
+            }
+          ],
+          "publisher": "The New York Times",
+          "fromPartner": false,
+          "item": {
+            "itemId": "3439611508",
+            "isArticle": true,
+            "title": "Their Produce Is Pristine Enough for Picky Chefs. But They Give It Away.",
+            "normalUrl": "http://nytimes.com/2021/09/24/dining/pennsylvania-carversville-farm-food-donation.html",
+            "resolvedId": "3439611508",
+            "resolvedUrl": "https://www.nytimes.com/2021/09/24/dining/pennsylvania-carversville-farm-food-donation.html",
+            "domain": null,
+            "domainMetadata": {
+              "name": "The New York Times"
+            },
+            "excerpt": "MECHANICSVILLE, Pa. — Steve Tomlinson takes pride in the details at Carversville Farm, the 388-acre certified-organic spread he manages here in bucolic Bucks County.",
+            "hasImage": "HAS_IMAGES",
+            "hasVideo": "NO_VIDEOS",
+            "images": [
+              {
+                "caption": "",
+                "credit": "",
+                "height": 400,
+                "imageId": 1,
+                "src": "https://static01.nyt.com/images/2021/09/29/dining/29free-farm1/13free-farm1-articleLarge.jpg?quality=75&auto=webp&disable=upscale",
+                "width": 600
+              },
+              {
+                "caption": "",
+                "credit": "",
+                "height": 400,
+                "imageId": 2,
+                "src": "https://static01.nyt.com/images/2021/09/29/dining/29free-farm4/merlin_194328339_bb69f8ea-1d97-4800-ad6f-837f1c23d883-articleLarge.jpg?quality=75&auto=webp&disable=upscale",
+                "width": 600
+              }
+            ],
+            "topImageUrl": "https://static01.nyt.com/images/2021/09/29/dining/29free-farm1/13free-farm1-facebookJumbo.jpg",
+            "wordCount": 1552,
+            "timeToRead": 7,
+            "givenUrl": "https://www.nytimes.com/2021/09/24/dining/pennsylvania-carversville-farm-food-donation.html",
+            "syndicatedArticle": null
+          }
+        },
+        {
+          "url": "https://www.latimes.com/california/story/2021-03-10/thirty-five-years-ago-she-was-the-only-survivor",
+          "title": "As a 9-Year-Old, She Was Saved at Sea. Thirty-Five Years Later, She Reunited With Her Rescuers",
+          "excerpt": "**DP**: “‘I don’t think I would have lived, I’ll be honest with you. I think at that point, I was just kind of done.’ That's how Desireé Rodriguez describes the moment when, as a 9 year-old, she was near death in the open sea. By a twist of fate, she was rescued and saved. But that’s just the beginning of this uplifting story.”",
+          "thumbnail": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/df5d8a95-e8d6-4b52-9157-d3f0cc4e5f45.jpeg",
+          "authors": [
+            {
+              "name": "Faith E. Pinho"
+            }
+          ],
+          "publisher": "Los Angeles Times",
+          "fromPartner": false,
+          "item": {
+            "itemId": "3277053276",
+            "isArticle": true,
+            "title": "As a 9-year-old, she was saved at sea. Thirty-five years later, she reunited with her rescuers",
+            "normalUrl": "http://latimes.com/california/story/2021-03-10/thirty-five-years-ago-she-was-the-only-survivor",
+            "resolvedId": "3277053276",
+            "resolvedUrl": "https://www.latimes.com/california/story/2021-03-10/thirty-five-years-ago-she-was-the-only-survivor",
+            "domain": null,
+            "domainMetadata": {
+              "name": "Los Angeles Times"
+            },
+            "excerpt": "She had been drifting in the cold Pacific water for a night and most of a day. Kept afloat by her orange life jacket and the bow of her family’s capsized boat, 9-year-old Desireé Rodriguez had watched helplessly as one family member after another let go of life.",
+            "hasImage": "HAS_IMAGES",
+            "hasVideo": "NO_VIDEOS",
+            "images": [
+              {
+                "caption": "",
+                "credit": "",
+                "height": 560,
+                "imageId": 1,
+                "src": "https://ca-times.brightspotcdn.com/dims4/default/df49e7c/2147483647/strip/true/crop/6720x4480+0+0/resize/840x560!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F9c%2F70%2F625590cd4aeea3b3497fe731d82a%2Fla-photos-1staff-710031-me-finding-desiree-01-cmc.jpg",
+                "width": 840
+              }
+            ],
+            "topImageUrl": "https://ca-times.brightspotcdn.com/dims4/default/5627fb3/2147483647/strip/true/crop/6720x3528+0+476/resize/1200x630!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F50%2Fce%2F85bd9e844d7cbfba2008cd5af509%2Fla-photos-1staff-710031-me-finding-desiree-03-cmc.jpg",
+            "wordCount": 2615,
+            "timeToRead": 12,
+            "givenUrl": "https://www.latimes.com/california/story/2021-03-10/thirty-five-years-ago-she-was-the-only-survivor",
+            "syndicatedArticle": null
+          }
+        },
+        {
+          "url": "https://www.washingtonpost.com/lifestyle/2021/07/12/dog-stolen-thief-rehab/",
+          "title": "A Man’s Dog Was Stolen. He Found the Thief, and Instead of Calling the Police, He Got Her Into Rehab.",
+          "excerpt": "**DP**: “Brayden Morton heard some rustling and ran out to his deck to see that his beloved dog had just been stolen by someone who was now speeding off in a pickup truck. Morton immediately put the word out about his dog and the tips started flowing in. Finally, he caught the thief. And when he did, it was good news... for both of them.”\n",
+          "thumbnail": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/0be95a54-60b2-4058-8692-82a17ef4273d.jpeg",
+          "authors": [
+            {
+              "name": "Sydney Page"
+            }
+          ],
+          "publisher": "The Washington Post",
+          "fromPartner": false,
+          "item": {
+            "itemId": "3379514832",
+            "isArticle": false,
+            "title": "A man’s dog was stolen. He found the thief, and instead of calling police, he got her into rehab.",
+            "normalUrl": "http://washingtonpost.com/lifestyle/2021/07/12/dog-stolen-thief-rehab",
+            "resolvedId": "3379514832",
+            "resolvedUrl": "https://www.washingtonpost.com/lifestyle/2021/07/12/dog-stolen-thief-rehab/",
+            "domain": null,
+            "domainMetadata": {
+              "name": "The Washington Post"
+            },
+            "excerpt": "Face-to-face with the woman who stole his dog, Brayden Morton told her: \"Listen, I’ve messed up a lot in my life, and I’ve been forgiven for a lot of things I did. I’m not mad at you.\"",
+            "hasImage": "NO_IMAGES",
+            "hasVideo": "NO_VIDEOS",
+            "images": null,
+            "topImageUrl": "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/XFDAJNMKXVGYDKUFELXK42LTKM.PNG&w=1440",
+            "wordCount": 0,
+            "timeToRead": null,
+            "givenUrl": "https://www.washingtonpost.com/lifestyle/2021/07/12/dog-stolen-thief-rehab/",
+            "syndicatedArticle": null
+          }
+        },
+        {
+          "url": "https://www.baltimoresun.com/food-drink/bs-ekiben-founders-drive-to-vermont-to-cook-for-customer-on-deathbed-20210316-7glx2w2smjemlkzm5mpmn7abjy-story.html",
+          "title": "Inside Ekiben’s Six-Hour Trip to Make a Special Dish for Customer Dying of Cancer",
+          "excerpt": "**DP**: “Everyone loves good customer service from a restaurant. But this is a customer service story like no other. It starts with a dying woman who has a craving for her favorite dish, tempura broccoli, from her favorite restaurant. This story will make you hungry for takeout, but sated when it comes to feel good stories.”",
+          "thumbnail": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/b5b438c8-cedf-4ff4-ae9d-0f16a4c57544.jpeg",
+          "authors": [
+            {
+              "name": "Christina Tkacik"
+            }
+          ],
+          "publisher": "The Baltimore Sun",
+          "fromPartner": false,
+          "item": {
+            "itemId": "3282536470",
+            "isArticle": true,
+            "title": "Inside Ekiben’s six-hour trip to make a special dish for customer dying of cancer",
+            "normalUrl": "http://baltimoresun.com/food-drink/bs-ekiben-founders-drive-to-vermont-to-cook-for-customer-on-deathbed-20210316-7glx2w2smjemlkzm5mpmn7abjy-story.html",
+            "resolvedId": "3282536470",
+            "resolvedUrl": "https://www.baltimoresun.com/food-drink/bs-ekiben-founders-drive-to-vermont-to-cook-for-customer-on-deathbed-20210316-7glx2w2smjemlkzm5mpmn7abjy-story.html",
+            "domain": null,
+            "domainMetadata": {
+              "name": "The Baltimore Sun"
+            },
+            "excerpt": "This is the story of how the owners of Baltimore’s most popular fusion restaurant drove to Vermont over the weekend to cook a meal. It’s also a story about food and love and dying. And really, really amazing customer service. It started out simply enough.",
+            "hasImage": "NO_IMAGES",
+            "hasVideo": "NO_VIDEOS",
+            "images": null,
+            "topImageUrl": "https://www.baltimoresun.com/resizer/S386uMJ7GqScn6h_15U_J5YOYgI=/1200x0/top/cloudfront-us-east-1.images.arcpublishing.com/tronc/GQFD7ILH6FHHBEIT4LF3XDARJA.JPG",
+            "wordCount": 777,
+            "timeToRead": 4,
+            "givenUrl": "https://www.baltimoresun.com/food-drink/bs-ekiben-founders-drive-to-vermont-to-cook-for-customer-on-deathbed-20210316-7glx2w2smjemlkzm5mpmn7abjy-story.html",
+            "syndicatedArticle": null
+          }
+        },
+        {
+          "url": "https://www.espn.com/mlb/story/_/id/30800732/san-francisco-giants-outfielder-drew-robinson-remarkable-second-act",
+          "title": "‘I’m Meant to Be Alive’: How Drew Robinson Is Learning to Live",
+          "excerpt": "**DP**: “‘He knows there are a million questions. Such as: How did he live for nearly an entire day with a giant hole on the right side of his head, and another wound where the bullet exited on the left side, with no medical attention? Few people survive self-inflicted gunshot wounds to the head. Even rarer are those who emerge with clarity, purpose.’ By any measure, San Francisco Giants outfielder Drew Robinson should have died after shooting himself in the head. But somehow, and I’m still not quite sure how, he survived. He lost an eye, but he gained a remarkable perspective on his life and depression. And he set out to return to baseball, not just as a player, but as a mental health advocate.”",
+          "thumbnail": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/4e8151f6-db11-4d43-a684-eb96fa1ce853.jpeg",
+          "authors": [
+            {
+              "name": "Jeff Passan"
+            }
+          ],
+          "publisher": "ESPN",
+          "fromPartner": false,
+          "item": {
+            "itemId": "3246300236",
+            "isArticle": true,
+            "title": "'I'm meant to be alive': How Drew Robinson is learning to live",
+            "normalUrl": "http://espn.com/mlb/story/_/id/30800732/san-francisco-giants-outfielder-drew-robinson-remarkable-second-act",
+            "resolvedId": "3246300236",
+            "resolvedUrl": "https://www.espn.com/mlb/story/_/id/30800732/san-francisco-giants-outfielder-drew-robinson-remarkable-second-act",
+            "domain": null,
+            "domainMetadata": {
+              "name": "ESPN"
+            },
+            "excerpt": "NOTE: This story was originally published on Feb. 2, 2021. On May 5, 2021, Drew Robinson was named to the San Francisco Giants' Triple-A roster. He made his debut with the Sacramento Rivercats on May 6.",
+            "hasImage": "HAS_IMAGES",
+            "hasVideo": "NO_VIDEOS",
+            "images": [
+              {
+                "caption": "Drew Robinson's suicide attempt should have been the end of his story. Instead, it was the start of another. Bridget Bennett for ESPN",
+                "credit": "Bridget Bennett for ESPN",
+                "height": 0,
+                "imageId": 1,
+                "src": "https://a2.espncdn.com/combiner/i?img=%2Fphoto%2F2021%2F0129%2Fr808114_1295x1814cc.jpg&w=1140&cquality=40&format=jpg",
+                "width": 0
+              },
+              {
+                "caption": "Drew Robinson's life looked perfect: a baseball contract, a loving fiancée, a big family. Inside, though, he had been battling depression and self-doubt for years. Rob Tringali/Getty Images",
+                "credit": "Rob Tringali/Getty Images",
+                "height": 0,
+                "imageId": 2,
+                "src": "https://a2.espncdn.com/combiner/i?img=%2Fphoto%2F2021%2F0129%2Fr808096_1296x1878cc.jpg&w=1140&cquality=40&format=jpg",
+                "width": 0
+              },
+              {
+                "caption": "Even after making it to the big leagues after years in the minors, Drew's self-doubt was \"paralyzing,\" he says; he constantly second-guessed his decisions on and off the field. Rick Yeatts/Getty Images",
+                "credit": "Rick Yeatts/Getty Images",
+                "height": 0,
+                "imageId": 3,
+                "src": "https://a3.espncdn.com/combiner/i?img=%2Fphoto%2F2021%2F0129%2Fr808097_1296x935cc.jpg&w=1140&cquality=40&format=jpg",
+                "width": 0
+              },
+              {
+                "caption": "After leaving the hospital, Drew wanted to return to his old house, where he still lives with his dog, Ellie. \"I wanted to feel it again,\" he says. \"I wanted to feel the power. I'm still here.\" Bridget Bennett for ESPN",
+                "credit": "Bridget Bennett for ESPN",
+                "height": 0,
+                "imageId": 4,
+                "src": "https://a.espncdn.com/combiner/i?img=%2Fphoto%2F2021%2F0129%2Fr808101_1296x945cc.jpg&w=1140&cquality=40&format=jpg",
+                "width": 0
+              },
+              {
+                "caption": "",
+                "credit": "fall, Drew's days had taken on a familiar rhythm: He meditates, plays with his dogs, works out and makes at least three calls to people he loves. Bridget Bennett for ESPN",
+                "height": 0,
+                "imageId": 5,
+                "src": "https://a1.espncdn.com/combiner/i?img=%2Fphoto%2F2021%2F0129%2Fr808099_1296x864cc.jpg&w=1140&cquality=40&format=jpg",
+                "width": 0
+              },
+              {
+                "caption": "Drew began playing baseball again in July, progressing from batting indoors off a tee to live pitching in a stadium. Bridget Bennett for ESPN",
+                "credit": "Bridget Bennett for ESPN",
+                "height": 0,
+                "imageId": 6,
+                "src": "https://a2.espncdn.com/combiner/i?img=%2Fphoto%2F2021%2F0129%2Fr808105_1296x1304cc.jpg&w=1140&cquality=40&format=jpg",
+                "width": 0
+              },
+              {
+                "caption": "Only one man has lost an eye and played in the major leagues. Drew is attempting to become the second. Bridget Bennett for ESPN",
+                "credit": "Bridget Bennett for ESPN",
+                "height": 0,
+                "imageId": 7,
+                "src": "https://a.espncdn.com/combiner/i?img=%2Fphoto%2F2021%2F0129%2Fr808106_1296x864cc.jpg&w=1140&cquality=40&format=jpg",
+                "width": 0
+              },
+              {
+                "caption": "In September, Drew returned to San Francisco to speak with the team, including Pablo Sandoval, about his experience for World Suicide Prevention Day. Courtesy Drew Robinson",
+                "credit": "Courtesy Drew Robinson",
+                "height": 0,
+                "imageId": 8,
+                "src": "https://a4.espncdn.com/combiner/i?img=%2Fphoto%2F2021%2F0129%2Fr808108_1296x893cc.jpg&w=1140&cquality=40&format=jpg",
+                "width": 0
+              },
+              {
+                "caption": "Drew doesn't see this as his regeneration alone. The Robinsons started to heal together, over family Zoom therapy sessions and long conversations. Courtesy Drew Robinson",
+                "credit": "Courtesy Drew Robinson",
+                "height": 0,
+                "imageId": 9,
+                "src": "https://a.espncdn.com/combiner/i?img=%2Fphoto%2F2021%2F0129%2Fr808109_1296x749cc.jpg&w=1140&cquality=40&format=jpg",
+                "width": 0
+              },
+              {
+                "caption": "\"He has so much more to say and do in his life,\" Drew's father, Darryl, says. \"We're all learning from Drew right now. To be better people.\" Courtesy Drew Robinson",
+                "credit": "Courtesy Drew Robinson",
+                "height": 0,
+                "imageId": 10,
+                "src": "https://a4.espncdn.com/combiner/i?img=%2Fphoto%2F2021%2F0129%2Fr808110_1296x2296cc.jpg&w=1140&cquality=40&format=jpg",
+                "width": 0
+              }
+            ],
+            "topImageUrl": "https://a3.espncdn.com/combiner/i?img=%2Fphoto%2F2021%2F0201%2Fr809137_1296x729_16%2D9.jpg",
+            "wordCount": 10738,
+            "timeToRead": 49,
+            "givenUrl": "https://www.espn.com/mlb/story/_/id/30800732/san-francisco-giants-outfielder-drew-robinson-remarkable-second-act",
+            "syndicatedArticle": null
+          }
+        },
+        {
+          "url": "https://kfor.com/news/local/dont-miss-oklahoma-siblings-find-each-other-after-40-years/",
+          "title": "Oklahoma Siblings Separated as Young Children, Find Each Other After 40 Years, Living Just One Mile Apart",
+          "excerpt": "**DP**: “‘I just remember they packed her stuff in a grocery bag, you know the typical paper bag, and I just remember her crying, me crying, they took her out the door.’ That was how Kitt Wakeley described the moment he was separated from his sister as they were sent to different homes in the Oklahoma foster care system. He would spend much of his life trying to find her. For decades, that search didn’t go well. It turned out, he just needed to look a little closer to home.”",
+          "thumbnail": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/100a6b75-d415-4eb3-bc95-ed290b5a59f0.jpeg",
+          "authors": [
+            {
+              "name": "Heather Holeman"
+            }
+          ],
+          "publisher": "kfor.com",
+          "fromPartner": false,
+          "item": {
+            "itemId": "3337711904",
+            "isArticle": true,
+            "title": "Oklahoma siblings separated as young children, find each other after 40 years, living just one mile apart",
+            "normalUrl": "http://kfor.com/news/local/dont-miss-oklahoma-siblings-find-each-other-after-40-years",
+            "resolvedId": "3337711904",
+            "resolvedUrl": "https://kfor.com/news/local/dont-miss-oklahoma-siblings-find-each-other-after-40-years/",
+            "domain": null,
+            "domainMetadata": {
+              "name": "kfor.com"
+            },
+            "excerpt": "EDMOND, Okla. (KFOR) – A young brother and sister, separated during childhood in the Oklahoma foster care system, spent more than 40 years trying to find one other again.",
+            "hasImage": "HAS_IMAGES",
+            "hasVideo": "NO_VIDEOS",
+            "images": [
+              {
+                "caption": "",
+                "credit": "",
+                "height": 0,
+                "imageId": 1,
+                "src": "https://kfor.com/wp-content/uploads/sites/3/2021/05/kitt2.jpeg",
+                "width": 739
+              },
+              {
+                "caption": "",
+                "credit": "",
+                "height": 0,
+                "imageId": 2,
+                "src": "https://kfor.com/wp-content/uploads/sites/3/2021/05/Kitt1.jpeg",
+                "width": 717
+              },
+              {
+                "caption": "",
+                "credit": "",
+                "height": 890,
+                "imageId": 3,
+                "src": "https://kfor.com/wp-content/uploads/sites/3/2021/05/Screen-Shot-2021-05-18-at-11.17.34-AM.png",
+                "width": 1756
+              },
+              {
+                "caption": "",
+                "credit": "",
+                "height": 0,
+                "imageId": 4,
+                "src": "https://kfor.com/wp-content/uploads/sites/3/2021/05/melissa.jpeg",
+                "width": 721
+              },
+              {
+                "caption": "",
+                "credit": "",
+                "height": 516,
+                "imageId": 5,
+                "src": "https://kfor.com/wp-content/uploads/sites/3/2021/05/kitt3.jpeg",
+                "width": 302
+              },
+              {
+                "caption": "",
+                "credit": "",
+                "height": 518,
+                "imageId": 6,
+                "src": "https://kfor.com/wp-content/uploads/sites/3/2021/05/reunion.jpeg",
+                "width": 391
+              },
+              {
+                "caption": "",
+                "credit": "",
+                "height": 0,
+                "imageId": 7,
+                "src": "https://kfor.com/wp-content/uploads/sites/3/2021/05/adults-kitt-and-tasha-1.jpeg",
+                "width": 543
+              }
+            ],
+            "topImageUrl": "https://kfor.com/wp-content/uploads/sites/3/2021/05/featured-image-for-Kitt.png?w=1280",
+            "wordCount": 1044,
+            "timeToRead": 5,
+            "givenUrl": "https://kfor.com/news/local/dont-miss-oklahoma-siblings-find-each-other-after-40-years/",
+            "syndicatedArticle": null
+          }
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=j1wI4T9SKGA",
+          "title": "One Woman’s Mission to Get Vaccines to Her Rural Alabama Town [WATCH]",
+          "excerpt": "**DP**: “You’ve probably read a thousand stories about antivax crusaders and people who would prefer to take horse dewormer than get a Covid-19 vaccine. These are the extreme stories and they make for a lot of clicks. But many of those who are vaccine hesitant just need a little push from a trusted local source. That’s where a convenience store owner named Dorothy Oliver comes in. The right person at the right place at the right time can make all the difference - sometimes between life and death.”",
+          "thumbnail": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/8d18dbd5-c35c-46ba-9dd2-b676c47af248.jpeg",
+          "authors": [
+            {
+              "name": "Jeremy Levine and Rachael DeCru"
+            }
+          ],
+          "publisher": "The New Yorker",
+          "fromPartner": false,
+          "item": {
+            "itemId": "3405882566",
+            "isArticle": false,
+            "title": "One Woman’s Mission to Get Vaccines to Her Rural Alabama Town | The New Yorker Documentary",
+            "normalUrl": "http://youtube.com/watch?v=j1wI4T9SKGA",
+            "resolvedId": "3405882566",
+            "resolvedUrl": "https://www.youtube.com/watch?v=j1wI4T9SKGA",
+            "domain": null,
+            "domainMetadata": {
+              "name": "YouTube"
+            },
+            "excerpt": "“The Panola Project,” a film by Jeremy Levine and Rachael DeCruz, follows Dorothy, a convenience-store owner, as she goes door to door in order to convince her neighbors to get their COVID-19 vaccines.\n\nStill haven’t subscribed to The New Yorker on YouTube ►► \r\nhttp://bit.ly/newyorkeryoutu",
+            "hasImage": "HAS_IMAGES",
+            "hasVideo": "IS_VIDEO",
+            "images": [
+              {
+                "caption": "",
+                "credit": "",
+                "height": 720,
+                "imageId": 1,
+                "src": "https://i.ytimg.com/vi/j1wI4T9SKGA/maxresdefault.jpg",
+                "width": 1280
+              }
+            ],
+            "topImageUrl": null,
+            "wordCount": 0,
+            "timeToRead": null,
+            "givenUrl": "https://www.youtube.com/watch?v=j1wI4T9SKGA",
+            "syndicatedArticle": null
+          }
+        },
+        {
+          "url": "https://blockclubchicago.org/2021/05/05/wrongly-convicted-of-murder-juan-rivera-uses-20m-settlement-to-open-barber-college-with-his-former-prison-guard-in-rogers-park/",
+          "title": "Wrongly Convicted Of Murder, Juan Rivera Uses Settlement Money To Open Barber College With His Former Prison Guard In Rogers Park",
+          "excerpt": "**DP**: “Juan Rivera was convicted of a crime he didn’t commit. Bobby Mattison was a prison guard who knew Rivera was innocent. So they both started to prepare for the day when this wrong would be righted.”\n",
+          "thumbnail": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/1b89c08b-f4a5-4c0b-b929-8ef3183dace3.jpeg",
+          "authors": [
+            {
+              "name": "Joe Ward"
+            }
+          ],
+          "publisher": "Block Club Chicago",
+          "fromPartner": false,
+          "item": {
+            "itemId": "3324222051",
+            "isArticle": true,
+            "title": "Wrongly Convicted Of Murder, Juan Rivera Uses Settlement Money To Open Barber College With His Former Prison Guard In Rogers Park",
+            "normalUrl": "http://blockclubchicago.org/2021/05/05/wrongly-convicted-of-murder-juan-rivera-uses-20m-settlement-to-open-barber-college-with-his-former-prison-guard-in-rogers-park",
+            "resolvedId": "3324222051",
+            "resolvedUrl": "https://blockclubchicago.org/2021/05/05/wrongly-convicted-of-murder-juan-rivera-uses-20m-settlement-to-open-barber-college-with-his-former-prison-guard-in-rogers-park/",
+            "domain": null,
+            "domainMetadata": {
+              "name": "blockclubchicago.org"
+            },
+            "excerpt": "ROGERS PARK — Juan Rivera was fighting for his freedom from Stateville Correctional Center — serving a sentence for a rape and murder he didn’t commit — when he began to consider what his life would look like were he to be exonerated.",
+            "hasImage": "HAS_IMAGES",
+            "hasVideo": "NO_VIDEOS",
+            "images": [
+              {
+                "caption": "",
+                "credit": "Legacy Barber College",
+                "height": 323,
+                "imageId": 1,
+                "src": "https://lede-admin.blockclubchicago.org/wp-content/uploads/sites/5/2021/05/Juan-1.jpg?w=710",
+                "width": 323
+              }
+            ],
+            "topImageUrl": "https://lede-admin.blockclubchicago.org/wp-content/uploads/sites/5/2021/05/Barber2.jpg?resize=1080,608",
+            "wordCount": 969,
+            "timeToRead": 4,
+            "givenUrl": "https://blockclubchicago.org/2021/05/05/wrongly-convicted-of-murder-juan-rivera-uses-20m-settlement-to-open-barber-college-with-his-former-prison-guard-in-rogers-park/",
+            "syndicatedArticle": null
+          }
+        },
+        {
+          "url": "https://www.washingtonpost.com/world/interactive/2021/brazil-indigenous-tik-tok-star/?pwapi_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
+          "title": "Taking Indigenous Culture Viral",
+          "excerpt": "**DP**: “The internet was supposed to be a network that brought people closer together and allowed us all to learn about different cultures, embrace our differences, and realize that it really is a small world after all. Well, as you may have noticed, things haven’t gone exactly according to plan. But the internet still occasionally does what we meant it to do. For example, when Cunhaporanga Tatuyo went viral.”\n",
+          "thumbnail": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/170ab11f-d7ea-4f93-a0e2-cfd45c5008db.png",
+          "authors": [
+            {
+              "name": "Terrence McCoy"
+            }
+          ],
+          "publisher": "The Washington Post",
+          "fromPartner": false,
+          "item": {
+            "itemId": "3466195061",
+            "isArticle": false,
+            "title": "Taking Indigenous culture viral",
+            "normalUrl": "http://washingtonpost.com/world/interactive/2021/brazil-indigenous-tik-tok-star?pwapi_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
+            "resolvedId": "3432507243",
+            "resolvedUrl": "https://www.washingtonpost.com/world/interactive/2021/brazil-indigenous-tik-tok-star/",
+            "domain": null,
+            "domainMetadata": {
+              "name": "The Washington Post"
+            },
+            "excerpt": "Cunhaporanga Tatuyo became a TikTok star by sharing glimpses of her life in a remote indigenous community in the Amazon.",
+            "hasImage": "NO_IMAGES",
+            "hasVideo": "NO_VIDEOS",
+            "images": null,
+            "topImageUrl": "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/GBROT2XPDMI6XANSTNYGDJMC3A.jpg&w=1200",
+            "wordCount": 0,
+            "timeToRead": null,
+            "givenUrl": "https://www.washingtonpost.com/world/interactive/2021/brazil-indigenous-tik-tok-star/?pwapi_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9",
+            "syndicatedArticle": null
+          }
+        },
+        {
+          "url": "https://www.cnn.com/2021/10/01/us/arizona-police-officer-adopts-abused-girl-btc/index.html",
+          "title": "The Police Officer Took a Bruised Toddler From an Abusive Home. She Took His Heart.",
+          "excerpt": "**DP**: “There are plenty of stories focused on misdeeds of police officers. But there are also plenty of stories of cops and detectives who go far beyond the call of duty to give often horrifying stories a happy ending. This one is definitely worth your time.”",
+          "thumbnail": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/bfd8714c-713e-4b41-9e23-bfce2b74eae7.jpeg",
+          "authors": [
+            {
+              "name": "Adrienne Broaddus"
+            }
+          ],
+          "publisher": "CNN",
+          "fromPartner": false,
+          "item": {
+            "itemId": "3445535913",
+            "isArticle": true,
+            "title": "The police officer took a bruised toddler from an abusive home. She took his heart.",
+            "normalUrl": "http://cnn.com/2021/10/01/us/arizona-police-officer-adopts-abused-girl-btc",
+            "resolvedId": "3445535913",
+            "resolvedUrl": "https://www.cnn.com/2021/10/01/us/arizona-police-officer-adopts-abused-girl-btc/index.html",
+            "domain": null,
+            "domainMetadata": {
+              "name": "CNN"
+            },
+            "excerpt": "A Christmas tree full of ornaments inside Lt. Brian Zach's office tells you Christmas is his favorite time of year.",
+            "hasImage": "HAS_IMAGES",
+            "hasVideo": "NO_VIDEOS",
+            "images": [
+              {
+                "caption": "Police officer adopts child he consoled on duty  02:44",
+                "credit": "",
+                "height": 0,
+                "imageId": 1,
+                "src": "https://cdn.cnn.com/cnnnext/dam/assets/211001084028-the-zach-family-btc-vpx-exlarge-169.jpg",
+                "width": 0
+              },
+              {
+                "caption": "Brian Zach was responding to a police call when he first saw the girl who'd become his daughter.",
+                "credit": "",
+                "height": 0,
+                "imageId": 2,
+                "src": "https://cdn.cnn.com/cnnnext/dam/assets/211001090703-kingman-btc-brian-zach-large-169.jpg",
+                "width": 0
+              },
+              {
+                "caption": "Kaila was taken from an abusive situation when she was just two years old.",
+                "credit": "",
+                "height": 0,
+                "imageId": 3,
+                "src": "https://cdn.cnn.com/cnnnext/dam/assets/211001090553-kingman-btc-young-kaila-large-169.jpeg",
+                "width": 0
+              },
+              {
+                "caption": "Kaila was embraced by the whole Zach family, and now has a big brother and a big sister.",
+                "credit": "",
+                "height": 0,
+                "imageId": 4,
+                "src": "https://cdn.cnn.com/cnnnext/dam/assets/211001095929-kingman-btc-family-large-169.jpg",
+                "width": 0
+              },
+              {
+                "caption": "Kingman, Arizona, is known as the heart of the historic Route 66.",
+                "credit": "",
+                "height": 0,
+                "imageId": 5,
+                "src": "https://cdn.cnn.com/cnnnext/dam/assets/211001090555-kingman-btc-old-car-large-169.jpg",
+                "width": 0
+              },
+              {
+                "caption": "Brian Zach and Kaila share a father-daughter moment.",
+                "credit": "",
+                "height": 0,
+                "imageId": 6,
+                "src": "https://cdn.cnn.com/cnnnext/dam/assets/211001090556-kingman-btc-brian-and-kaila-large-169.jpeg",
+                "width": 0
+              },
+              {
+                "caption": "Kaila is thriving in her new family.",
+                "credit": "",
+                "height": 0,
+                "imageId": 7,
+                "src": "https://cdn.cnn.com/cnnnext/dam/assets/211001090554-kingman-btc-kaila-graduate-large-169.jpeg",
+                "width": 0
+              }
+            ],
+            "topImageUrl": "https://cdn.cnn.com/cnnnext/dam/assets/211001090556-kingman-btc-brian-and-kaila-super-tease.jpeg",
+            "wordCount": 602,
+            "timeToRead": 3,
+            "givenUrl": "https://www.cnn.com/2021/10/01/us/arizona-police-officer-adopts-abused-girl-btc/index.html",
+            "syndicatedArticle": null
+          }
+        }
+      ]
+    }
+  }
+}

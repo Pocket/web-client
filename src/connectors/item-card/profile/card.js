@@ -11,13 +11,16 @@ export const RecommendedFeedCard = ({ id, position }) => {
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const item = useSelector((state) => state.profileItemsByIds.itemsById[id])
 
-  const { save_status, item_id, original_url, openExternal, post } = item
-  const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : original_url
+  if (!item) return null
+
+  const { readUrl, externalUrl, analyticsData: passedAnalytics, openExternal } = item
+  const openUrl = readUrl || externalUrl
+  const itemImage = item?.noImage ? '' : item?.thumbnail
+  const {title, publisher, excerpt, timeToRead, isSyndicated, post} = item //prettier-ignore
   const analyticsData = {
     id,
-    url: openUrl,
     position,
-    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external'
+    ...passedAnalytics
   }
 
   /**
@@ -32,10 +35,17 @@ export const RecommendedFeedCard = ({ id, position }) => {
     <div className="recommendedWrapper">
       <PostHeader {...post} />
       <Card
-        id={id}
+        itemId={id}
+        title={title}
+        publisher={publisher}
+        excerpt={excerpt}
+        timeToRead={timeToRead}
+        isSyndicated={isSyndicated}
+        itemImage={itemImage}
+        externalUrl={externalUrl}
+        openExternal={openExternal}
         cardShape="wide"
         position={position}
-        item={item}
         showExcerpt={true}
         onItemInView={onItemInView}
         onOpen={onOpen}

@@ -1,9 +1,9 @@
 export function filterByUnread(item) {
-  return item.status === '0'
+  return item.status === 'UNREAD'
 }
 
 export function filterByArchived(item) {
-  return item.status === '1'
+  return item.status === 'ARCHIVED'
 }
 
 /**
@@ -11,15 +11,15 @@ export function filterByArchived(item) {
  * ---------------------------------------------------------
  */
 export function filterByFavorites(item) {
-  return item.favorite === '1'
+  return item.isFavorite
 }
 
 export function filterByFavoritesUnread(item) {
-  return item.favorite === '1' && item.status === '0'
+  return item.isFavorite && item.status === 'UNREAD'
 }
 
 export function filterByFavoritesArchived(item) {
-  return item.favorite === '1' && item.status === '1'
+  return item.isFavorite && item.status === 'ARCHIVED'
 }
 
 /**
@@ -27,19 +27,19 @@ export function filterByFavoritesArchived(item) {
  * ---------------------------------------------------------
  */
 export function filterByHighlights(item) {
-  return item.annotations
+  return item.hasAnnotations
 }
 
 export function filterByHighlightsUnread(item) {
-  return item.status === '0' && item.annotations
+  return item.status === 'UNREAD' && item.hasAnnotations
 }
 
 export function filterByHighlightsArchived(item) {
-  return item.status === '1' && item.annotations
+  return item.status === 'ARCHIVED' && item.hasAnnotations
 }
 
 export function filterByHighlightsFavorites(item) {
-  return item.favorite === '1' && item.annotations
+  return item.isFavorite && item.hasAnnotations
 }
 
 /**
@@ -47,18 +47,18 @@ export function filterByHighlightsFavorites(item) {
  * ---------------------------------------------------------
  */
 export function filterByArticles(item) {
-  return item.is_article === '1'
+  return item.isArticle
 }
 export function filterByArticlesUnread(item) {
-  return item.status === '0' && item.is_article === '1'
+  return item.status === 'UNREAD' && item.isArticle
 }
 
 export function filterByArticlesArchived(item) {
-  return item.status === '1' && item.is_article === '1'
+  return item.status === 'ARCHIVED' && item.isArticle
 }
 
 export function filterByArticlesFavorites(item) {
-  return item.favorite === '1' && item.is_article === '1'
+  return item.isFavorite && item.isArticle
 }
 
 /**
@@ -66,18 +66,18 @@ export function filterByArticlesFavorites(item) {
  * ---------------------------------------------------------
  */
 export function filterByVideos(item) {
-  return item.has_video === '2'
+  return item.hasVideo === 'IS_VIDEO'
 }
 export function filterByVideosUnread(item) {
-  return item.status === '0' && item.has_video === '2'
+  return item.status === 'UNREAD' && item.hasVideo === 'IS_VIDEO'
 }
 
 export function filterByVideosArchived(item) {
-  return item.status === '1' && item.has_video === '2'
+  return item.status === 'ARCHIVED' && item.hasVideo === 'IS_VIDEO'
 }
 
 export function filterByVideosFavorites(item) {
-  return item.favorite === '1' && item.has_video === '2'
+  return item.isFavorite && item.hasVideo === 'IS_VIDEO'
 }
 
 /**
@@ -86,20 +86,19 @@ export function filterByVideosFavorites(item) {
  */
 export function filterByTags(item, tag) {
   if (tag === '_untagged_') return !item.tags
-
-  const itemTags = item.tags ? Object.keys(item.tags) : []
+  const itemTags = item.tags ? item.tags.map((tag) => tag.name) : []
   return itemTags.includes(tag)
 }
 export function filterByTagsUnread(item, tag) {
-  return item.status === '0' && filterByTags(item, tag)
+  return item.status === 'UNREAD' && filterByTags(item, tag)
 }
 
 export function filterByTagsArchived(item, tag) {
-  return item.status === '1' && filterByTags(item, tag)
+  return item.status === 'ARCHIVED' && filterByTags(item, tag)
 }
 
 export function filterByTagsFavorites(item, tag) {
-  return item.favorite === '1' && filterByTags(item, tag)
+  return item.isFavorite && filterByTags(item, tag)
 }
 
 /**

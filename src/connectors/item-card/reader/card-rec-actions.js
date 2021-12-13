@@ -12,17 +12,17 @@ export function ActionsRec({ id, position }) {
   const item = useSelector((state) => state.recit.readerRecs[id])
 
   if (!item) return null
-  const { save_url, save_status, open_url, openExternal } = item
+  const { saveUrl, saveStatus, readUrl, externalUrl, openExternal } = item
 
   // Prep save action
   const onSave = () => {
-    const data = { id, url: save_url, position }
-    dispatch(readerRecSaveItem(id, save_url, position))
+    const data = { id, url: saveUrl, position }
+    dispatch(readerRecSaveItem(id, saveUrl, position))
     dispatch(sendSnowplowEvent('reader.rec.save', data))
   }
 
   // Open action
-  const url = openExternal ? open_url : `/read/${id}`
+  const url = openExternal ? externalUrl : readUrl
   const onOpen = () => {
     const data = { id, url, position, destination: 'internal' }
     dispatch(sendSnowplowEvent('reader.rec.open', data))
@@ -31,13 +31,13 @@ export function ActionsRec({ id, position }) {
   return item ? (
     <div className={`${itemActionStyle} actions`}>
       <SaveToPocket
-        allowRead={true}
+        allowRead={false}
         url={url}
         onOpen={onOpen}
         openExternal={openExternal}
         saveAction={onSave}
         isAuthenticated={isAuthenticated}
-        saveStatus={save_status}
+        saveStatus={saveStatus}
         id={id}
       />
     </div>
