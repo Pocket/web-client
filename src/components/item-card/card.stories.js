@@ -1,16 +1,18 @@
 import { Card as CardComponent } from './card'
-import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
-import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
-import { arrayToObject } from 'common/utilities'
-import { ItemActions } from 'components/item-actions/inline'
-import { IosShareIcon } from '@pocket/web-ui'
-import { DeleteIcon } from '@pocket/web-ui'
-import { ArchiveIcon } from '@pocket/web-ui'
-import { FavoriteIcon } from '@pocket/web-ui'
-import { TagIcon } from '@pocket/web-ui'
+import { deriveListItem } from 'common/api/derivers/item'
+import { deriveRecommendation } from 'common/api/derivers/item'
+import { deriveCollection } from 'common/api/derivers/item'
+import { deriveStory } from 'common/api/derivers/item'
 
-import myListResponse from 'mock/my-list.json'
-import discoverResponse from 'mock/discover.json'
+import { arrayToObject } from 'common/utilities'
+import { MyList as MyListActions } from 'components/item-actions/item-actions.stories'
+import { Recommendation as RecommendationActions } from 'components/item-actions/item-actions.stories'
+import { Home as HomeActions } from 'components/item-actions/item-actions.stories'
+import { Similar as SimilarActions } from 'components/item-actions/item-actions.stories'
+
+import myListResponse from 'mocks/savedItems.json'
+import discoverResponse from 'mocks/slateLineupResponse.json'
+import collectionResponse from 'mocks/collectionResponse.json'
 
 import { css } from 'linaria'
 import { cardsGrid } from 'components/items-layout/base'
@@ -20,54 +22,105 @@ const grid = css`
   ${cardsGrid};
 `
 
-const discoverItems = deriveDiscoverItems(discoverResponse.feed).map((item) => {
-  item.story_name = `Discover - ${item.title}`
-  return item
-})
-
-const myListItems = deriveMyListItems(Object.values(myListResponse.list)).map((item) => {
-  item.story_name = `My List - ${item.title}`
-  return item
-})
-
-const itemsToDisplay = arrayToObject([...myListItems, ...discoverItems], 'story_name')
-
-const noop = function () {}
-const DummyActions = ({ id, position }) => (
-  <ItemActions
-    menuItems={[
-      { key: `archive-${id}`, label: 'Archive', icon: <ArchiveIcon />, onClick: noop },
-      {
-        key: `favorite-${id}`,
-        label: 'Favorite',
-        icon: <FavoriteIcon />,
-        onClick: noop
-      },
-      {
-        key: `tag-${id}`,
-        label: 'Tag',
-        icon: <TagIcon />,
-        onClick: noop
-      },
-      {
-        key: `share-${id}`,
-        label: 'Share',
-        icon: <IosShareIcon />,
-        onClick: noop
-      },
-      {
-        key: `delete-${id}`,
-        label: 'Delete',
-        icon: <DeleteIcon />,
-        onClick: noop
-      }
-    ]}
-  />
+const discoverItems = discoverResponse?.data?.getSlateLineup?.slates[0].recommendations?.map(
+  (node) => {
+    let derivedItem = deriveRecommendation(node)
+    derivedItem['storyName'] = `Discover - ${sanitizeString(derivedItem.title)}`
+    return derivedItem
+  }
 )
+
+const myListItems = Object.values(myListResponse.edges).map((item) => {
+  let derivedItem = deriveListItem(item)
+  derivedItem['storyName'] = `My List - ${sanitizeString(derivedItem.title)}`
+  return derivedItem
+})
+
+const collections = () => {
+  let derivedItem = deriveCollection(collectionResponse.data.getCollectionBySlug)
+  derivedItem['storyName'] = `Collection - ${sanitizeString(derivedItem.title)}`
+  return [derivedItem]
+}
+const collectionItems = collections()
+
+const storyItems = collectionResponse.data.getCollectionBySlug.stories.map((item) => {
+  let derivedItem = deriveStory(item)
+  derivedItem['storyName'] = `Story - ${sanitizeString(derivedItem.title)}`
+  return derivedItem
+})
+
+const itemsToDisplay = arrayToObject(
+  [...myListItems, ...discoverItems, ...collectionItems, ...storyItems],
+  'storyName'
+)
+
+export const Card = (args) => {
+  const itemToDisplay = args.itemToDisplay
+  const item = itemsToDisplay[itemToDisplay]
+
+  if (!item) return <div>No card to display</div>
+
+  const { itemId, readUrl, externalUrl, openExternal } = item
+  const { tags, title, authors, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item
+  const openUrl = readUrl && !openExternal ? readUrl : externalUrl
+  const getShownImage = () => {
+    if (item?.noImage) return ''
+    if (args.useHeroImage) return item?.heroImage || item?.thumbnail
+    return item?.thumbnail
+  }
+  const itemImage = getShownImage()
+  const shownPublisher = args.showAuthors ? false : publisher
+  const shownAuthors = args.showAuthors ? authors : false
+
+  return (
+    <div className={grid}>
+      <CardComponent
+        itemId={itemId}
+        externalUrl={externalUrl}
+        tags={tags}
+        title={title}
+        itemImage={itemImage}
+        publisher={shownPublisher}
+        excerpt={excerpt}
+        authors={shownAuthors}
+        timeToRead={timeToRead}
+        isSyndicated={isSyndicated}
+        openUrl={openUrl}
+        position={0}
+        fromPartner={fromPartner}
+        useMarkdown={true}
+        ActionMenu={MyListActions}
+        {...args}
+      />
+    </div>
+  )
+}
+
+Card.args = {
+  itemToDisplay: myListItems[0].storyName,
+  ActionMenu: 'myList',
+  showExcerpt: false,
+  showMedia: true,
+  hiddenActions: false,
+  bulkSelected: false,
+  shortcutSelected: false,
+  isSyndicated: false,
+  showAuthors: false,
+  useHeroImage: true,
+  fromPartner: true, // This is so we can superseded this with the selector
+  partnerType: 'FALSE'
+}
 
 export default {
   title: 'Card/Card Shapes',
   component: CardComponent,
+  decorators: [
+    (Story) => (
+      <div style={{ margin: '2em 1rem' }}>
+        <Story />
+      </div>
+    )
+  ],
   argTypes: {
     itemToDisplay: {
       control: {
@@ -80,70 +133,67 @@ export default {
         type: 'inline-radio'
       }
     },
-    item: {
-      table: {
-        disable: true
-      }
-    },
-    position: {
-      table: {
-        disable: true
-      }
-    },
-    bulkEdit: {
-      table: {
-        disable: true
-      }
-    },
-    bulkSelect: {
-      table: {
-        disable: true
-      }
-    },
-    shortcutSelect: {
-      table: {
-        disable: true
-      }
-    },
-    openUrl: {
-      table: {
-        disable: true
-      }
-    },
-    onItemInView: {
-      table: {
-        disable: true
-      }
-    },
-    onOpen: {
-      table: {
-        disable: true
-      }
-    },
-    onOpenOriginalUrl: {
-      table: {
-        disable: true
+    tags: {
+      control: {
+        type: 'inline-radio',
+        options: ['none', 'one', 'a few', 'ridiculous']
+      },
+      mapping: {
+        none: [],
+        one: [{ name: 'i am a tag' }],
+        'a few': [{ name: 'philosophy' }, { name: 'science' }],
+        ridiculous: [
+          { name: 'things' },
+          { name: 'stuff' },
+          { name: 'whatnot' },
+          { name: 'thing a ma bobs' },
+          { name: 'such organize' },
+          { name: 'much wow' }
+        ]
       }
     },
     ActionMenu: {
-      table: {
-        disable: true
+      control: {
+        type: 'inline-radio',
+        options: ['myList', 'recommendation', 'home', 'recent']
+      },
+      mapping: {
+        myList: MyListActions,
+        recommendation: RecommendationActions,
+        home: HomeActions,
+        recent: SimilarActions
       }
-    }
+    },
+    partnerType: {
+      control: {
+        type: 'inline-radio',
+        options: ['FALSE', 'PARTNERED', 'SPONSORED']
+      }
+    },
+    itemId: { table: { disable: true } },
+    title: { table: { disable: true } },
+    publisher: { table: { disable: true } },
+    timeToRead: { table: { disable: true } },
+    excerpt: { table: { disable: true } },
+    hiddenActions: { table: { disable: true } },
+    bulkSelected: { table: { disable: true } },
+    authors: { table: { disable: true } },
+    fromPartner: { table: { disable: true } },
+    itemImage: { table: { disable: true } },
+    className: { table: { disable: true } },
+    position: { table: { disable: true } },
+    bulkEdit: { table: { disable: true } },
+    bulkSelect: { table: { disable: true } },
+    shortcutSelect: { table: { disable: true } },
+    openUrl: { table: { disable: true } },
+    externalUrl: { table: { disable: true } },
+    onItemInView: { table: { disable: true } },
+    onOpen: { table: { disable: true } },
+    onOpenOriginalUrl: { table: { disable: true } }
   }
 }
 
-export const Card = (args) => {
-  const item = itemsToDisplay[args.itemToDisplay] || itemsToDisplay[myListItems[0].story_name]
-  return (
-    <div className={grid}>
-      <CardComponent item={item} position={0} {...args} ItemActions={DummyActions} />
-    </div>
-  )
-}
-
-Card.args = {
-  showExcerpt: true,
-  showMedia: true,
-  tags: []
+function sanitizeString(str) {
+  str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim, '')
+  return str.trim()
 }

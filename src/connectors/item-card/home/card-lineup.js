@@ -9,13 +9,14 @@ export const CardLineup = ({ id, position, className, cardShape, showExcerpt = f
   // Get data from state
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const item = useSelector((state) => state.homeItemsById[id])
-  const { save_status, item_id, resolved_url, open_url, openExternal, analyticsData } = item
+
+  if (!item) return null
+  const { saveStatus, itemId, readUrl, externalUrl, openExternal, analyticsData } = item
 
   const data = {
-    id: item_id,
-    url: resolved_url,
+    id,
     position,
-    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external',
+    destination: saveStatus === 'saved' && !openExternal ? 'internal' : 'external',
     ...analyticsData
   }
 
@@ -31,15 +32,28 @@ export const CardLineup = ({ id, position, className, cardShape, showExcerpt = f
   const onImpression = () => dispatch(sendSnowplowEvent('home.lineup.impression', data))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
 
+  /** ITEM DETAILS
+  --------------------------------------------------------------- */
+  const itemImage = item?.noImage ? '' : item?.thumbnail
+  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
+  const openUrl = readUrl || externalUrl
   return (
     <Card
-      item={item}
-      id={id}
+      itemId={itemId}
+      externalUrl={externalUrl}
+      tags={tags}
+      title={title}
+      itemImage={itemImage}
+      publisher={publisher}
+      excerpt={excerpt}
+      timeToRead={timeToRead}
+      isSyndicated={isSyndicated}
+      fromPartner={fromPartner}
       position={position}
       className={className}
       cardShape={cardShape}
       showExcerpt={showExcerpt}
-      openUrl={open_url}
+      openUrl={openUrl}
       titleFlow={true}
       hiddenActions={false}
       onItemInView={onItemInView}

@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { getNewTopicFeed } from 'common/api/topics'
-import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
+import { deriveRecommendation } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
 
 import { TOPIC_HYDRATE } from 'actions'
@@ -30,9 +30,10 @@ export const topicReducers = (state = initialState, action) => {
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
-    case HYDRATE:
+    case HYDRATE: {
       const { discoverTopic } = action.payload
       return { ...state, ...discoverTopic }
+    }
 
     default:
       return state
@@ -72,7 +73,7 @@ function* topicsUnSaveRequest(action) {
  --------------------------------------------------------------- */
 
 // Async helper for cleaner code
-const mapIds = (item) => item.resolved_id
+const mapIds = (item) => item.resolvedId
 
 /**
  * fetchTopicData
@@ -90,17 +91,17 @@ export async function fetchTopicData(topic) {
 
     // Derive curated item data and create items by id
     const { curated = [] } = response
-    const derivedCuratedItems = await deriveDiscoverItems(curated)
+    const derivedCuratedItems = curated.map((item) => deriveRecommendation(item))
     const curatedIds = derivedCuratedItems.map(mapIds)
     const curatedItems = [...new Set(curatedIds)] // Unique entries only
-    const curatedItemsById = arrayToObject(derivedCuratedItems, 'resolved_id')
+    const curatedItemsById = arrayToObject(derivedCuratedItems, 'resolvedId')
 
     // Derive algorithmic item data and create items by id
     const { algorithmic = [] } = response
-    const derivedAlgorithmicItems = await deriveDiscoverItems(algorithmic)
+    const derivedAlgorithmicItems = algorithmic.map((item) => deriveRecommendation(item))
     const algorithmicIds = derivedAlgorithmicItems.map(mapIds)
     const algorithmicItems = [...new Set(algorithmicIds)] // Unique entries only
-    const algorithmicItemsById = arrayToObject(derivedAlgorithmicItems, 'resolved_id')
+    const algorithmicItemsById = arrayToObject(derivedAlgorithmicItems, 'resolvedId')
 
     return {
       topic,
