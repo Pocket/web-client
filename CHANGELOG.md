@@ -1,3 +1,10 @@
+# [1.29.0](https://github.com/Pocket/web-client/compare/v1.28.16...v1.29.0) (2021-12-13)
+
+
+### Features
+
+* **dependencies:** upgrade nextjs  major version ([b9aeafb](https://github.com/Pocket/web-client/commit/b9aeafb378987250a3a51b162a384f435f83ef93))
+
 ## [1.28.16](https://github.com/Pocket/web-client/compare/v1.28.15...v1.28.16) (2021-12-13)
 
 
