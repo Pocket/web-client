@@ -2,11 +2,6 @@ import { gql } from 'graphql-request'
 
 export const FRAGMENT_ITEM = gql`
   fragment ItemDetails on Item {
-    collection {
-      imageUrl
-      intro
-      title
-    }
     isArticle
     title
     itemId
