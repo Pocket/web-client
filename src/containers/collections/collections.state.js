@@ -1,5 +1,4 @@
 import { select, takeLatest, put } from 'redux-saga/effects'
-import { deriveCollection } from 'common/api/derivers/item'
 import { getCollectionBySlug } from 'common/api/collections'
 import { getCollections } from 'common/api/collections'
 import { saveItem } from 'common/api/saveItem'
@@ -153,7 +152,8 @@ export async function fetchCollections(lang = 'en') {
     const response = await getCollections(lang)
     if (!response) return { error: 'No data found' }
 
-    const derivedCollections = response.map((collection) => deriveCollection(collection))
+    const derivedCollections = deriveCollectionPage(response)
+
     return arrayToObject(derivedCollections, 'slug')
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
