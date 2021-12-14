@@ -1,33 +1,3 @@
-## [1.28.15](https://github.com/Pocket/web-client/compare/v1.28.14...v1.28.15) (2021-12-13)
-
-
-### Bug Fixes
-
-* **card:** don't pass item data ([2569c6c](https://github.com/Pocket/web-client/commit/2569c6c9129aeed672fcc1da7b37230cd163e1ad))
-* **collections:** use deriver for takeover content ([df33ef3](https://github.com/Pocket/web-client/commit/df33ef33b35cb1d59d5d4556abe507651e495b13))
-* **collections:** use new deriver for pages ([b57a5cf](https://github.com/Pocket/web-client/commit/b57a5cf3d4307458f59773a76403c58fa2d5b82c))
-* **collection:** use new deriver for stories ([6c9388c](https://github.com/Pocket/web-client/commit/6c9388cd6632de117399a683f8ddf0fc0ec325d4))
-* **discover:** use new deriver for recs ([c82499c](https://github.com/Pocket/web-client/commit/c82499c87c8878983f81aa75c7f8ae0324f9dea6))
-* **home:** derive items with new derivers ([3f7c766](https://github.com/Pocket/web-client/commit/3f7c766526eb5c6cfbf3c2f8666530ca38406b92))
-* **home:** get correct slate meta [FRONT-1510] ([2d2b511](https://github.com/Pocket/web-client/commit/2d2b511076176377ea71473c99c81a4a3385776e))
-* **item tags:** adjust format for display ([e57c7f9](https://github.com/Pocket/web-client/commit/e57c7f9d6ee2aa42316fcd77ae86658b0481ad3e))
-* **item:** add annotations ([4193a10](https://github.com/Pocket/web-client/commit/4193a1040921fb055eff059b993e0b64d256d858))
-* **item:** add collection data to fragment ([45dfe62](https://github.com/Pocket/web-client/commit/45dfe62d905a8f3e9a9108b023d59538ab8f0263))
-* **item:** add fromPartner ([85632f2](https://github.com/Pocket/web-client/commit/85632f21c4f6eb9f30adf3074c9366d2e2105591))
-* **item:** default to false for authors ([b0b55a9](https://github.com/Pocket/web-client/commit/b0b55a97797120a54b9f0337a7b9524a60e4db94))
-* **item:** no item pass to frompartner function ([6ef69ee](https://github.com/Pocket/web-client/commit/6ef69eebd2742a9f4fce2190e8c8981b6950865e))
-* **item:** recently tagged items ([a281e41](https://github.com/Pocket/web-client/commit/a281e4173b8d12ebfdfe06aea5eb0d9afe1fcc79))
-* **item:** rectify inequities in the item render ([9289d44](https://github.com/Pocket/web-client/commit/9289d44251c7dbf6411fbaec2bd694c5c446f5c0))
-* **item:** refactor share for new item shape ([2cdf712](https://github.com/Pocket/web-client/commit/2cdf712ec2352ae5e1db97a96fc7fad1001118b9))
-* **items:** profile and tags ([4c0ecf9](https://github.com/Pocket/web-client/commit/4c0ecf910ebfea216dd9ec31b8822a14af13afb9))
-* **items:** update item card expectations ([e81b0d6](https://github.com/Pocket/web-client/commit/e81b0d6311fa0887827b2dc4c4ea2f0ef439457c))
-* **item:** update discover/reccit card/actions ([cf1b8cb](https://github.com/Pocket/web-client/commit/cf1b8cb30d98a40e0e1db42bc3f0d6101a23e295))
-* **item:** update item expectation propegation ([65f078e](https://github.com/Pocket/web-client/commit/65f078e0df0412d3b4959ebedc5624d043feb733))
-* **my-list:** moderinze sort/filter functions ([345816f](https://github.com/Pocket/web-client/commit/345816fd00b584259d9aa47a30778454728d2377))
-* **my-list:** use new derivers for list items ([421689c](https://github.com/Pocket/web-client/commit/421689c466d0b59031e4eca32e94e0191e42a88a))
-* **slate gql:** alias analytics names ([5fd11c9](https://github.com/Pocket/web-client/commit/5fd11c9dd529b4823832285466ca97bb2858509c))
-* **topic:** use new deriver for topic pages ([3d3c1ef](https://github.com/Pocket/web-client/commit/3d3c1efea7e56744659872af8da72d9135d28af3))
-
 ## [1.28.14](https://github.com/Pocket/web-client/compare/v1.28.13...v1.28.14) (2021-12-09)
 
 
