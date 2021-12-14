@@ -49,7 +49,9 @@ import { BASE_URL } from 'common/constants'
  *     @param {string} name — Name of the publisher of the article
  *     @param {string} logo — Logo to use for the publisher
  *     @param {URL} url — Url of the publisher
- *
+ */
+
+/**
  * ————————————————————————————————————————————————————————————————————————
  * DERIVED ITEM — urls and display information based on return from the server
  * ————————————————————————————————————————————————————————————————————————
@@ -86,12 +88,12 @@ export function deriveListItem(passedItem, legacy) {
   // node contains user-item data as well as the item itself
   const { node = {}, cursor = null } = edge
   const { item, ...rest } = node
-  return deriveItem({ item, node: rest, cursor, utmId: 'pocket_mylist' })
+  return deriveItem({ item, node: rest, cursor })
 }
 
 export function deriveRecommendation(recommendationsFromSlate, analyticsData) {
   const { item, curatedInfo: itemEnrichment } = recommendationsFromSlate
-  return deriveItem({ item, itemEnrichment, analyticsData, utmId: 'pocket_discover' })
+  return deriveItem({ item, itemEnrichment, analyticsData })
 }
 
 export function deriveReccit(recommendation) {
@@ -99,7 +101,7 @@ export function deriveReccit(recommendation) {
   const {
     node: { item }
   } = modernizeItem(passedItem)
-  const derivedItem = deriveItem({ item, utmId: 'pocket_rec' })
+  const derivedItem = deriveItem({ item })
 
   return derivedItem
 }
@@ -119,14 +121,13 @@ export function deriveCollection(collection) {
       collectionUrl,
       isArticle: true
     },
-    passedPublisher: 'Pocket',
-    utmId: 'pocket_collection'
+    passedPublisher: 'Pocket'
   })
 }
 
 export function deriveStory(story) {
   const { item, ...itemEnrichment } = story
-  return deriveItem({ item, itemEnrichment, utmId: 'pocket_collection_story' })
+  return deriveItem({ item, itemEnrichment })
 }
 
 export function deriveItem({
@@ -135,19 +136,17 @@ export function deriveItem({
   node,
   itemEnrichment,
   passedPublisher,
-  analyticsData = {},
-  utmId
+  analyticsData = {}
 }) {
   const derived = {
     cursor,
     ...node,
     ...item,
-    authors: itemEnrichment?.authors || item?.authors,
     title: title({ item, itemEnrichment }),
     thumbnail: thumbnail({ item, itemEnrichment }),
     excerpt: excerpt({ item, itemEnrichment }),
     publisher: publisher({ item, passedPublisher }),
-    externalUrl: externalUrl({ item, itemEnrichment, utmId }),
+    externalUrl: externalUrl({ item, itemEnrichment }),
     readUrl: readUrl({ item, status: node?.status }),
     saveUrl: saveUrl({ item, itemEnrichment }),
     permanentUrl: permanentUrl({ item, status: node?.status }),
@@ -198,7 +197,7 @@ function thumbnail({ item, itemEnrichment }) {
   if (passedImage) return passedImage
 
   const firstImage = item?.images?.[Object.keys(item?.images)[0]]?.src
-  if (firstImage) return getImageCacheUrl(firstImage, { width: 600 })
+  if (firstImage) return getImageCacheUrl(firstImage, { width: 1200 })
   return false
 }
 
@@ -265,9 +264,10 @@ function isReadable({ item }) {
  * @param {object} item An item returned from the server
  * @returns {string} The url that opens to a non-pocket site
  */
-function externalUrl({ item, itemEnrichment, utmId = 'pocket_mylist' }) {
+function externalUrl({ item, itemEnrichment }) {
+  //!! Note: Add identifier var
   const urlToUse = itemEnrichment?.url || item?.givenUrl || item?.resolvedUrl
-  const linkWithUTM = replaceUTM(urlToUse, utmId)
+  const linkWithUTM = replaceUTM(urlToUse, 'pocket_mylist')
   return linkWithUTM
 }
 
