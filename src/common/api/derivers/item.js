@@ -129,17 +129,6 @@ export function deriveStory(story) {
   return deriveItem({ item, itemEnrichment, utmId: 'pocket_collection_story' })
 }
 
-export function deriveProfile(feedItem, legacy) {
-  const { item: passedItem, post } = feedItem
-  // if a legacy flag is passed, first we need to modernize the item
-  const edge = legacy ? modernizeItem(passedItem) : passedItem
-  // node contains user-item data as well as the item itself
-  const { node = {}, cursor = null } = edge
-  const { item: nodeItem, ...rest } = node
-  const item = { ...nodeItem, readUrl: false, openExternal: true, post }
-  return deriveItem({ item, node: { ...rest, status: false }, cursor, utmId: 'pocket_profile' })
-}
-
 export function deriveItem({
   item,
   cursor = '',
@@ -365,12 +354,6 @@ function collectionSlug({ item }) {
 
 // !! TEMPORARY FUNCTION while we transition to API next
 // !! THIS SHOULD BE DELETED SHORTLY
-
-function convertTags(tags) {
-  if (!tags) return []
-  return Object.values(tags).map((tag) => ({ name: tag.tag }))
-}
-
 function modernizeItem(item) {
   const {
     item_id,
@@ -434,7 +417,7 @@ function modernizeItem(item) {
       archivedAt: parseInt(time_read),
       hasAnnotations: annotations?.length,
       annotations,
-      tags: convertTags(tags)
+      tags
     }
   }
 

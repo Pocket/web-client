@@ -5,7 +5,7 @@ import { tagWrapper } from 'components/tags/tag'
 export function ItemTags({ tags }) {
   return (
     <div className="tags">
-      {tags && Array.isArray(tags)
+      {tags
         ? tags.map((tag) => (
             <span key={tag.name}>
               <Link href={`/my-list/tags/${encodeURIComponent(tag.name)}`}>
