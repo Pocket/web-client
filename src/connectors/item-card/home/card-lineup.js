@@ -9,8 +9,6 @@ export const CardLineup = ({ id, position, className, cardShape, showExcerpt = f
   // Get data from state
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const item = useSelector((state) => state.homeItemsById[id])
-
-  if (!item) return null
   const { saveStatus, itemId, readUrl, externalUrl, openExternal, analyticsData } = item
 
   const data = {
