@@ -72,7 +72,6 @@ import { BASE_URL } from 'common/constants'
  * @param isReadable — true if the content type is video, image, or article
  * @param isSyndicated — true if this article is syndicated by pocket
  * @param isCollection — ?? Is this needed?
- * @param hasAnnotations — for filtering by annotation/highlights
  *
  * Analytics Properties
  * ————————————————————————————————————
@@ -379,7 +378,6 @@ function modernizeItem(item) {
     given_title,
     resolved_url,
     tags = [],
-    annotations = [],
     authors,
     images,
     lang,
@@ -415,8 +413,6 @@ function modernizeItem(item) {
       favoritedAt: parseInt(time_favorited),
       isArchived: status === '1',
       archivedAt: parseInt(time_read),
-      hasAnnotations: annotations?.length,
-      annotations,
       tags
     }
   }
