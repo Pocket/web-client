@@ -133,7 +133,6 @@ describe('My List - Unparsed', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('en')
-    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Blausee')
@@ -184,7 +183,6 @@ describe('My List - Unparsed', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('en')
-    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Blausee')

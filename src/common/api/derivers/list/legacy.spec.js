@@ -146,8 +146,6 @@ describe('My List - Original Deriver', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('en')
-    expect(item.fromPartner).toBeFalsy()
-
     expect(item.title).toBe(
       'The Undisciplined Pursuit of More (The Art of Limiting Yourself to Only The Essential)'
     )
