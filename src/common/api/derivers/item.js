@@ -169,6 +169,7 @@ export function deriveItem({
     fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
       url: analyticsUrl({ item, itemEnrichment }),
+      id: item.itemId,
       ...analyticsData
     }
   }
