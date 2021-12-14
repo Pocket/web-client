@@ -1,10 +1,3 @@
-## [1.28.16](https://github.com/Pocket/web-client/compare/v1.28.15...v1.28.16) (2021-12-13)
-
-
-### Bug Fixes
-
-* **headers:** adding x-frame-options header to all pages to prevent clickjacking ([8bd03bd](https://github.com/Pocket/web-client/commit/8bd03bdcc66b4ef67f5cfdb961e50beb3e8d245d))
-
 ## [1.28.15](https://github.com/Pocket/web-client/compare/v1.28.14...v1.28.15) (2021-12-13)
 
 
