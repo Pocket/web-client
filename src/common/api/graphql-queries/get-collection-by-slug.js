@@ -1,5 +1,4 @@
 import { gql } from 'graphql-request'
-import { FRAGMENT_ITEM } from './fragment.item'
 
 const getCollectionBySlug = gql`
   query GetCollectionBySlug($getCollectionBySlugSlug: String!) {
@@ -32,7 +31,7 @@ const getCollectionBySlug = gql`
         }
         publisher
         item {
-          ...ItemDetails
+          itemId
         }
       }
       externalId
@@ -47,7 +46,6 @@ const getCollectionBySlug = gql`
       }
     }
   }
-  ${FRAGMENT_ITEM}
 `
 
 export default getCollectionBySlug
