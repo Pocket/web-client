@@ -35,9 +35,13 @@ export function ActionsMyList({ id, position }) {
   const item = useSelector((state) => state.myListItemsById[id])
 
   if (!item) return null
-  const { permanentUrl, isFavorite, isArchive, analyticsData: passedAnalyticsData } = item
+  const { permanent_url, original_url, status, favorite } = item
 
-  const analyticsData = { ...passedAnalyticsData, id, position }
+  const analyticsData = {
+    id,
+    url: original_url,
+    position
+  }
 
   /** ITEM MENU ITEMS
   --------------------------------------------------------------- */
@@ -75,14 +79,16 @@ export function ActionsMyList({ id, position }) {
   }
 
   const itemPermLibOpen = () => {
-    const data = { ...analyticsData, url: permanentUrl }
+    const data = { ...analyticsData, url: permanent_url }
     dispatch(sendSnowplowEvent('my-list.card.permanent-library', data))
   }
 
-  const archiveAction = isArchive ? itemUnArchive : itemArchive
-  const CorrectArchiveIcon = isArchive ? AddIcon : ArchiveIcon
-  const archiveLabel = isArchive ? t('item-action:add', 'Add') : t('item-action:archive', 'Archive')
+  const isArchive = status === '0'
+  const archiveAction = isArchive ? itemArchive : itemUnArchive
+  const CorrectArchiveIcon = isArchive ? ArchiveIcon : AddIcon
+  const archiveLabel = isArchive ? t('item-action:archive', 'Archive') : t('item-action:add', 'Add')
 
+  const isFavorite = favorite === '1'
   const favoriteAction = isFavorite ? itemUnFavorite : itemFavorite
   const favoriteLabel = isFavorite
     ? t('item-action:unfavorite', 'Un-Favorite')
@@ -121,7 +127,7 @@ export function ActionsMyList({ id, position }) {
           label: t('item-action:permanent-copy', 'Permanent Copy'),
           isPremium,
           onlyPremium: true,
-          href: permanentUrl,
+          href: permanent_url,
           icon: <PermanentCopyIcon />,
           onClick: itemPermLibOpen
         },

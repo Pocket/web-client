@@ -8,6 +8,7 @@ import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 import { ActionsMyList } from 'connectors/item-card/my-list/card-actions'
 import { ActionsBulk } from 'connectors/item-card/my-list/card-actions'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { determineOpenUrl } from 'common/utilities/urls/urls'
 
 /**
  * Article Card
@@ -29,20 +30,20 @@ export function ItemCard({ id, position, type }) {
   const bulkSelected = bulkList?.map((item) => item.id).includes(id)
   const shortcutId = useSelector((state) => state.shortcuts.currentId)
   const shortcutSelected = shortcutId === id
-
+  
   if (!item) return null
 
-  const { readUrl, externalUrl, analyticsData: passedAnalytics } = item
-  const openUrl = readUrl || externalUrl
+  const openUrl = determineOpenUrl(item)
   const showExcerpt = type === 'detail'
   const ActionMenu = bulkEdit ? ActionsBulk : ActionsMyList
 
   const onImageFail = () => dispatch(setNoImage(id))
 
   const analyticsData = {
-    ...passedAnalytics,
+    id,
+    url: openUrl,
     position,
-    destination: readUrl ? 'internal' : 'external'
+    destination: item?.openExternal ? 'external' : 'internal'
   }
 
   /** ITEM TRACKING
@@ -55,8 +56,7 @@ export function ItemCard({ id, position, type }) {
   }
 
   const onItemInView = (inView) => {
-    if (!impressionFired && inView)
-      dispatch(sendSnowplowEvent('my-list.card.impression', analyticsData))
+    if (!impressionFired && inView) dispatch(sendSnowplowEvent('my-list.card.impression', analyticsData))
   }
 
   /** ITEM BULK ACTIONS
@@ -70,23 +70,9 @@ export function ItemCard({ id, position, type }) {
   --------------------------------------------------------------- */
   const shortcutSelect = () => dispatch(selectShortcutItem(id, position))
 
-  /** ITEM DETAILS
-  --------------------------------------------------------------- */
-  const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {itemId, tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
-
   return item ? (
     <Card
-      itemId={itemId}
-      externalUrl={externalUrl}
-      tags={tags}
-      title={title}
-      itemImage={itemImage}
-      publisher={publisher}
-      excerpt={excerpt}
-      timeToRead={timeToRead}
-      isSyndicated={isSyndicated}
-      fromPartner={fromPartner}
+      item={item}
       position={position}
       cardShape={type}
       hiddenActions={true}
@@ -96,7 +82,6 @@ export function ItemCard({ id, position, type }) {
       bulkIsCurrent={bulkIsCurrent}
       shortcutSelected={shortcutSelected}
       shortcutSelect={shortcutSelect}
-      // Open Actions
       openUrl={openUrl}
       onOpen={onOpen}
       onOpenOriginalUrl={onOpenOriginalUrl}
