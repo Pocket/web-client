@@ -237,18 +237,8 @@ export const Card = (props) => {
 }
 
 Card.propTypes = {
-  // Item Data
-  itemId: PropTypes.number,
-  tags: PropTypes.array,
-  title: PropTypes.string,
-  itemImage: PropTypes.string,
-  publisher: PropTypes.string,
-  authors: PropTypes.array,
-  excerpt: PropTypes.string,
-  timeToRead: PropTypes.number,
-  isSyndicated: PropTypes.bool,
-  externalUrl: PropTypes.url,
-  fromPartner: PropTypes.bool,
+  // Data
+  item: PropTypes.object,
   bulkEdit: PropTypes.bool,
   bulkSelected: PropTypes.bool,
   shortcutSelected: PropTypes.bool,
