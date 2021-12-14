@@ -92,7 +92,7 @@ export const partnerCollectionFromClientApi = {
 
 describe('Collection — Page', () => {
   const expectedSaveUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021' //prettier-ignore
-  const expectedExternalUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021?utm_source=pocket_collection' //prettier-ignore
+  const expectedExternalUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021?utm_source=pocket_mylist' //prettier-ignore
   const expectedReadUrl = '/collections/making-sense-of-cybersecurity-in-2021'
   const expectedPermanentUrl = false
   const expectedAnalyticsUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021' //prettier-ignore
