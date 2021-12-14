@@ -950,7 +950,7 @@ exports[`ItemCard renders a saved image 1`] = `
         <img
           alt=""
           src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F59947%2Fscreenshots%2F16700535%2Fmedia%2F335d386abb459f49570030e830429cef.jpg"
-          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F59947%2Fscreenshots%2F16700535%2Fmedia%2F335d386abb459f49570030e830429cef.jpg 2x "
+          srcset=" https://pocket-image-cache.com/600x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F59947%2Fscreenshots%2F16700535%2Fmedia%2F335d386abb459f49570030e830429cef.jpg 2x "
           style="--fallbackBackground: #00CB7780; --fallbackColor: #00CB77; --fallbackLetter: '3';"
         />
       </a>
@@ -1173,7 +1173,7 @@ exports[`ItemCard renders a saved video 1`] = `
         <img
           alt=""
           src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg"
-          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg 2x "
+          srcset=" https://pocket-image-cache.com/600x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg 2x "
           style="--fallbackBackground: #00CB7780; --fallbackColor: #00CB77; --fallbackLetter: 'M';"
         />
       </a>
