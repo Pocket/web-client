@@ -209,7 +209,7 @@ export default function Reader() {
     setHighlightList(compiled)
   }
 
-  const analyticsInfo = { ...analyticsData, id: itemId }
+  const analyticsInfo = { ...analyticsData, id: item_id }
 
   const addAnnotation = () => {
     if (annotations.length === 3 && !isPremium) {
