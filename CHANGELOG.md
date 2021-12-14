@@ -1,12 +1,3 @@
-## [1.29.2](https://github.com/Pocket/web-client/compare/v1.29.1...v1.29.2) (2021-12-14)
-
-
-### Bug Fixes
-
-* **tagging:** adjust how we grab stored tags ([f48b0a4](https://github.com/Pocket/web-client/commit/f48b0a4891b975a0389c1e9bb1393ad6bcc9cde2))
-* **tagging:** adjust reconciler on tag action ([737b5c5](https://github.com/Pocket/web-client/commit/737b5c5ebf08623964b587e54191a876bca9774b))
-* **tags:** _untagged_ logic update ([911c654](https://github.com/Pocket/web-client/commit/911c654345c75cf32b7beb7a199eaff7f9e056a3))
-
 ## [1.29.1](https://github.com/Pocket/web-client/compare/v1.29.0...v1.29.1) (2021-12-13)
 
 
