@@ -128,20 +128,20 @@ export function* itemBulkSelect(action) {
           return {
             id,
             position: itemPosition,
-            isFavorite: itemsById[id]?.isFavorite,
-            isArchived: itemsById[id]?.isArchived,
-            resolvedId: itemsById[id]?.resolvedId,
-            saveUrl: itemsById[id]?.saveUrl
+            favorite: itemsById[id]?.favorite,
+            status: itemsById[id]?.status,
+            resolved_id: itemsById[id]?.resolved_id,
+            save_url: itemsById[id]?.save_url
           }
         })
       : [
           {
             id,
             position,
-            isFavorite: itemsById[id]?.isFavorite,
-            isArchived: itemsById[id]?.isArchived,
-            resolvedId: itemsById[id]?.resolvedId,
-            saveUrl: itemsById[id]?.saveUrl
+            favorite: itemsById[id]?.favorite,
+            status: itemsById[id]?.status,
+            resolved_id: itemsById[id]?.resolved_id,
+            save_url: itemsById[id]?.save_url
           }
         ]
 
@@ -201,8 +201,9 @@ function setBatchActions(draft) {
     return [initialState.batchFavorite, initialState.batchStatus]
   }
 
-  const batchFavorite = draft.every((item) => item.isFavorite) ? 'unfavorite' : 'favorite'
-  const batchStatus = draft.every((item) => item.isArchived) ? 'add' : 'archive'
+  const batchFavorite = draft.every((item) => item.favorite === '1') ? 'unfavorite' : 'favorite'
+
+  const batchStatus = draft.every((item) => item.status === '0') ? 'archive' : 'add'
 
   return [batchFavorite, batchStatus]
 }
