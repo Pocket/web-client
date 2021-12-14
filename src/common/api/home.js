@@ -70,7 +70,7 @@ export function deriveItems(slate, lineupAnalytics) {
 }
 
 export function deriveSlate(slate) {
-  const currentMeta = slateMeta[slate.slateId]
+  const currentMeta = slateMeta[slate.id]
   const updatedMeta = derivedMeta(currentMeta, slate)
   return { ...slate, ...updatedMeta }
 }
@@ -85,6 +85,7 @@ export function deriveSlate(slate) {
  */
 function derivedMeta(currentMeta, slate) {
   const topicSlug = currentMeta?.slug || false
+
   // Adjust the topic returns since the data is imperfect
   if (topicSlug) {
     return {
