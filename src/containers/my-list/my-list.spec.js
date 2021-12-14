@@ -13,116 +13,99 @@ import { filterByArticles } from './my-list.filters'
 import { filterByVideos } from './my-list.filters'
 import { filterByTags } from './my-list.filters'
 
-/** Node data
- * _createdAt
- * _updatedAt
- * url
- * status
- * isFavorite
- * favoritedAt
- * isArchived
- * archivedAt
- **/
-
 const listToSort = [
   {
     hero: 'Spider-Man',
     name: 'Peter Benjamin Parker',
-    _createdAt: '1',
-    favoritedAt: '100000',
-    archivedAt: '10',
-    isArticle: true,
-    hasVideo: 'NO_VIDEOS',
-    isFavorite: true,
-    status: 'ARCHIVED',
-    hasAnnotations: false,
+    time_added: '1',
+    time_favorited: '100000',
+    time_read: '10',
+    is_article: '1',
+    has_video: '0',
+    favorite: '1',
+    status: '1',
     tags: { hero: '' }
   },
   {
     hero: 'CAPTAIN MARVEL',
     name: 'Carol Danvers',
-    _createdAt: '2',
-    favoritedAt: '99874',
-    archivedAt: '20',
-    isArticle: true,
-    hasVideo: 'HAS_VIDEOS',
-    isFavorite: true,
-    status: 'ARCHIVED',
-    hasAnnotations: false,
+    time_added: '2',
+    time_favorited: '99874',
+    time_read: '20',
+    is_article: '1',
+    has_video: '1',
+    favorite: '1',
+    status: '1',
     tags: { hero: '' }
   },
   {
     hero: 'Black Widow',
     name: "Natalia 'Natasha' Alianovna Romanova",
-    _createdAt: '4',
-    favoritedAt: '99622',
-    archivedAt: '0',
-    isArticle: true,
-    hasVideo: 'IS_VIDEO',
-    isFavorite: true,
-    status: 'UNREAD',
-    hasAnnotations: false
+    time_added: '4',
+    time_favorited: '99622',
+    time_read: '0',
+    is_article: '1',
+    has_video: '2',
+    favorite: '1',
+    status: '0'
   },
   {
     hero: 'Wolverine',
     name: 'James Howlett',
-    _createdAt: '6',
-    favoritedAt: '0',
-    archivedAt: '60',
-    isArticle: true,
-    hasVideo: 'NO_VIDEOS',
+    time_added: '6',
+    time_favorited: '0',
+    time_read: '60',
+    is_article: '1',
+    has_video: '0',
     favorite: '0',
-    status: 'ARCHIVED',
-    hasAnnotations: true,
-    tags: { hero: '' }
+    status: '1',
+    tags: { hero: '' },
+    annotations: {}
   },
   {
     hero: 'Captain America',
     name: 'Steven Rogers',
-    _createdAt: '7',
-    favoritedAt: '99244',
-    archivedAt: '0',
-    isArticle: true,
-    hasVideo: 'NO_VIDEOS',
-    isFavorite: true,
-    status: 'UNREAD',
-    hasAnnotations: false
+    time_added: '7',
+    time_favorited: '99244',
+    time_read: '0',
+    is_article: '1',
+    has_video: '0',
+    favorite: '1',
+    status: '0'
   },
   {
     hero: 'Magneto',
     name: 'Max Eisenhardt',
-    _createdAt: '14',
-    favoritedAt: '0',
-    archivedAt: '0',
-    isArticle: true,
-    hasVideo: 'HAS_VIDEOS',
+    time_added: '14',
+    time_favorited: '0',
+    time_read: '0',
+    is_article: '1',
+    has_video: '1',
     favorite: '0',
-    status: 'UNREAD',
-    hasAnnotations: false
+    status: '0'
   },
   {
     hero: 'Thanos',
     name: 'Thanos',
-    _createdAt: '15',
-    favoritedAt: '0',
-    archivedAt: '150',
-    isArticle: false,
-    hasVideo: 'IS_VIDEO',
-    isFavorite: false,
-    status: 'ARCHIVED',
-    hasAnnotations: true
+    time_added: '15',
+    time_favorited: '0',
+    time_read: '150',
+    is_article: '0',
+    has_video: '2',
+    favorite: '0',
+    status: '1',
+    annotations: {}
   },
   {
     hero: 'Black Cat',
     name: 'Felicia Hardy',
-    _createdAt: '16',
-    favoritedAt: '98110',
-    archivedAt: '0',
-    isArticle: true,
-    hasVideo: 'NO_VIDEOS',
-    isFavorite: true,
-    status: 'UNREAD',
-    hasAnnotations: false,
+    time_added: '16',
+    time_favorited: '98110',
+    time_read: '0',
+    is_article: '1',
+    has_video: '0',
+    favorite: '1',
+    status: '0',
     tags: { villan: '' }
   }
 ]
