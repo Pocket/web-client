@@ -18,13 +18,13 @@ const getSlateLineup = gql`
       recommendationCount: $recommendationCount
       slateCount: $slateCount
     ) {
-      slateLineupExperiment: experimentId
-      slateLineupRequestId: requestId
-      slateLineupId: id
+      experimentId
+      requestId
+      id
       slates {
-        slateId: id
-        slateRequestId: requestId
-        slateExperimentId: experimentId
+        id
+        requestId
+        experimentId
         displayName
         description
         recommendations {
