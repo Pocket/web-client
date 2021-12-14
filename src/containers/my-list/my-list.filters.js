@@ -85,7 +85,7 @@ export function filterByVideosFavorites(item) {
  * ---------------------------------------------------------
  */
 export function filterByTags(item, tag) {
-  if (tag === '_untagged_') return !item.tags.length
+  if (tag === '_untagged_') return !item.tags
   const itemTags = item.tags ? item.tags.map((tag) => tag.name) : []
   return itemTags.includes(tag)
 }
