@@ -45,15 +45,11 @@ export const SNOWPLOW_COLLECTOR_URL = 'getpocket.com'
 export const SNOWPLOW_COLLECTOR_URL_DEV = process.env.TEST_SNOWPLOW === 'included'
   ? 'http://localhost:9090'
   : 'com-getpocket-prod1.mini.snplow.net'
-export const SNOWPLOW_COLLECTOR = process.env.SHOW_DEV === 'included'
-  ? SNOWPLOW_COLLECTOR_URL_DEV
-  : SNOWPLOW_COLLECTOR_URL
+export const SNOWPLOW_COLLECTOR = SNOWPLOW_COLLECTOR_URL
 
 export const SNOWPLOW_APP_ID = 'pocket-web'
 export const SNOWPLOW_APP_ID_DEV = 'pocket-web-dev'
-export const SNOWPLOW_APP = process.env.SHOW_DEV === 'included'
-  ? SNOWPLOW_APP_ID_DEV
-  : SNOWPLOW_APP_ID
+export const SNOWPLOW_APP = 'pocket-web-snowplow-test'
 
 export const SNOWPLOW_HEARTBEAT_DELAY = 10 // in seconds
 export const SNOWPLOW_HEARTBEAT_INTERVAL = 10 // in seconds
