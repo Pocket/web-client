@@ -1,13 +1,3 @@
-## [1.29.1](https://github.com/Pocket/web-client/compare/v1.29.0...v1.29.1) (2021-12-13)
-
-
-### Bug Fixes
-
-* **reader:** adding missing item_id shift ([3dfdefe](https://github.com/Pocket/web-client/commit/3dfdefe7bb3ab744ea433606f9c3a8499ba18abe))
-* **reader:** mark v3 reader item data as legacy ([3c86c51](https://github.com/Pocket/web-client/commit/3c86c51c9bb905c73a20c84f88be978ccc722e95))
-* **reader:** udpate header to use new item data ([a42d85a](https://github.com/Pocket/web-client/commit/a42d85aba2af747c43e5e97f9fd23a426a46927f))
-* **reader:** update to itemId ([7e8e6ec](https://github.com/Pocket/web-client/commit/7e8e6ecf9b819bad36314f0dcecfc484537c8dbb))
-
 # [1.29.0](https://github.com/Pocket/web-client/compare/v1.28.16...v1.29.0) (2021-12-13)
 
 
