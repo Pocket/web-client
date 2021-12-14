@@ -89,8 +89,9 @@ export function deriveListItem(passedItem, legacy) {
   return deriveItem({ item, node: rest, cursor, utmId: 'pocket_mylist' })
 }
 
-export function deriveRecommendation(recommendationsFromSlate, analyticsData) {
-  const { item, curatedInfo: itemEnrichment } = recommendationsFromSlate
+export function deriveRecommendation(recommendationsFromSlate, analytics) {
+  const { item, curatedInfo: itemEnrichment, id: recommendationId } = recommendationsFromSlate
+  const analyticsData = { recommendationId, ...analytics }
   return deriveItem({ item, itemEnrichment, analyticsData, utmId: 'pocket_discover' })
 }
 
