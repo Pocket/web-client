@@ -181,6 +181,7 @@ describe('My List - Original Deriver', () => {
       }
     ])
     expect(item.analyticsData).toStrictEqual({
+      id: '3059000415',
       url: expectedAnalyticsUrl
     })
   })
@@ -237,6 +238,7 @@ describe('My List - Original Deriver', () => {
       }
     ])
     expect(item.analyticsData).toStrictEqual({
+      id: '3059000415',
       url: expectedAnalyticsUrl
     })
   })

@@ -147,6 +147,7 @@ describe('Collection — Page', () => {
       }
     ])
     expect(item.analyticsData).toStrictEqual({
+      id: undefined,
       url: expectedAnalyticsUrl
     })
   })

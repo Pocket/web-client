@@ -156,6 +156,7 @@ describe('My List - Unparsed', () => {
       }
     ])
     expect(item.analyticsData).toStrictEqual({
+      id: '3117582481',
       url: expectedAnalyticsUrl
     })
   })
@@ -207,6 +208,7 @@ describe('My List - Unparsed', () => {
       }
     ])
     expect(item.analyticsData).toStrictEqual({
+      id: '3117582481',
       url: expectedAnalyticsUrl
     })
   })

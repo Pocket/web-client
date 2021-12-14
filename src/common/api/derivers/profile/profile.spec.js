@@ -161,6 +161,7 @@ describe('Profile - Parsed', () => {
       }
     ])
     expect(item.analyticsData).toStrictEqual({
+      id: '1224052564',
       url: expectedAnalyticsUrl
     })
   })

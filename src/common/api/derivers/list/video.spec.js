@@ -176,6 +176,7 @@ describe('My List - Videos', () => {
       }
     ])
     expect(item.analyticsData).toStrictEqual({
+      id: '2815325547',
       url: expectedAnalyticsUrl
     })
   })
@@ -225,6 +226,7 @@ describe('My List - Videos', () => {
       }
     ])
     expect(item.analyticsData).toStrictEqual({
+      id: '2815325547',
       url: expectedAnalyticsUrl
     })
   })

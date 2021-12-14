@@ -168,6 +168,7 @@ describe('My List - Collection', () => {
       }
     ])
     expect(item.analyticsData).toStrictEqual({
+      id: '3453456445',
       url: expectedAnalyticsUrl
     })
   })
@@ -220,6 +221,7 @@ describe('My List - Collection', () => {
       }
     ])
     expect(item.analyticsData).toStrictEqual({
+      id: '3453456445',
       url: expectedAnalyticsUrl
     })
   })

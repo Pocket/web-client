@@ -129,6 +129,7 @@ describe('Collection — Story', () => {
     expect(item.timeToRead).toBe(14)
     expect(item.authors).toStrictEqual([{ name: 'Jack Ewing' }])
     expect(item.analyticsData).toStrictEqual({
+      id: '1731163180',
       url: expectedAnalyticsUrl
     })
   })

@@ -132,6 +132,7 @@ describe('My List - Image', () => {
     expect(item.timeToRead).toBeFalsy()
     expect(item.authors).toStrictEqual([])
     expect(item.analyticsData).toStrictEqual({
+      id: '3462094779',
       url: expectedAnalyticsUrl
     })
   })
@@ -176,6 +177,7 @@ describe('My List - Image', () => {
     expect(item.timeToRead).toBeFalsy()
     expect(item.authors).toStrictEqual([])
     expect(item.analyticsData).toStrictEqual({
+      id: '3462094779',
       url: expectedAnalyticsUrl
     })
   })
