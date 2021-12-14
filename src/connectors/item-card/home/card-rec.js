@@ -21,42 +21,32 @@ export const RecCard = ({
 
   // Get data from state
   const item = useSelector((state) => state.recit.recentRecs[id])
-  const { saveStatus, itemId, readUrl, externalUrl, openExternal } = item
+  const { save_status, item_id, resolved_url, original_url, openExternal } = item
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
-  const openUrl = readUrl && !openExternal ? readUrl : externalUrl
+  const url = resolved_url || original_url
+  const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : original_url
   const analyticsData = {
     id,
+    url,
     position,
-    destination: saveStatus === 'saved' && !openExternal ? 'internal' : 'external'
+    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external'
   }
 
   /**
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onOpenOriginalUrl = () => {
+   const onOpenOriginalUrl = () => {
     const data = { ...analyticsData, destination: 'external' }
     dispatch(sendSnowplowEvent('home.similar.view-original', data))
   }
   const onOpen = () => dispatch(sendSnowplowEvent('home.similar.open', analyticsData))
   const onImpression = () => dispatch(sendSnowplowEvent('home.similar.impression', analyticsData))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
-
-  const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
-
+  
   return item ? (
     <Card
-      itemId={itemId}
-      externalUrl={externalUrl}
-      tags={tags}
-      title={title}
-      itemImage={itemImage}
-      publisher={publisher}
-      excerpt={excerpt}
-      timeToRead={timeToRead}
-      isSyndicated={isSyndicated}
-      fromPartner={fromPartner}
+      item={item}
       position={position}
       className={recStyle}
       cardShape={cardShape}

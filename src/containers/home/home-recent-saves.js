@@ -10,7 +10,9 @@ export const HomeRecentSaves = () => {
   const recentSaves = useSelector((state) => state.home.recentSaves)
 
   // Initialize data
-  useEffect(() => dispatch(getRecentSaves()), [dispatch])
+  useEffect(() => {
+    dispatch(getRecentSaves())
+  }, [dispatch])
 
   return recentSaves?.length > 2 ? (
     <>
