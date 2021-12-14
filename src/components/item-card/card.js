@@ -238,7 +238,7 @@ export const Card = (props) => {
 
 Card.propTypes = {
   // Item Data
-  itemId: PropTypes.string,
+  itemId: PropTypes.number,
   tags: PropTypes.array,
   title: PropTypes.string,
   itemImage: PropTypes.string,
