@@ -140,32 +140,49 @@ const expectationTypes = {
   otherText: 'string'
 }
 
-export function* fireSnowplowEvent({ identifier, data }) {
-  yield call(waitForInitialization)
-
+export function* buildSnowplowCustomEvent({ identifier, data }) {
   const { eventType, entityTypes, eventData, batchEntityTypes } = analyticsActions[identifier]
-  if (!eventType) return console.warn('No action for this event!')
-
-  // tracking impressions using id or url
-  if (eventType === 'impression') yield put({ type: SNOWPLOW_TRACK_ITEM_IMPRESSION, ...eventData, ...data })
 
   // Build event
   const eventFunction = eventBuilders[eventType]
   const event = eventFunction({ ...eventData, ...data })
 
   // Build entities
-  const singleEntities = entityTypes.map(entity => {
+  const singleEntities = entityTypes.map((entity) => {
     const entityFunction = entityBuilders[entity]
     return entityFunction({ ...eventData, ...data, identifier })
   })
 
   // Build bulk entities if they exist, limit to BATCH_SIZE
-  const batchEntities = batchEntityTypes ? batchEntityTypes.map(entity => {
-    const entityFunction = entityBuilders[entity]
-    if (data.length > BATCH_SIZE) data.length = BATCH_SIZE
-    return data.map((item) => entityFunction(item))
-  }).flat() : []
+  const batchEntities = batchEntityTypes
+    ? batchEntityTypes
+        .map((entity) => {
+          const entityFunction = entityBuilders[entity]
+          if (data.length > BATCH_SIZE) data.length = BATCH_SIZE
+          return data.map((item) => entityFunction(item))
+        })
+        .flat()
+    : []
 
   const entities = [...singleEntities, ...batchEntities]
+
+  return yield { event, entities }
+}
+
+export function* fireSnowplowEvent({ identifier, data }) {
+  yield call(waitForInitialization)
+
+  // Check events are valid
+  const { eventType, eventData } = analyticsActions[identifier]
+  if (!eventType) return console.warn('No action for this event!')
+
+  // Build custom events
+  const { event, entities } = buildSnowplowCustomEvent({ identifier, data })
+
+  // Tracking impressions using id or url
+  if (eventType === 'impression') {
+    yield put({ type: SNOWPLOW_TRACK_ITEM_IMPRESSION, ...eventData, ...data })
+  }
+
   yield call(sendCustomSnowplowEvent, event, entities)
 }
