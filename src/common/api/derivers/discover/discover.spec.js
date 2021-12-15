@@ -1,4 +1,6 @@
 import { deriveRecommendation } from 'common/api/derivers/item'
+import { analyticsActions } from 'connectors/snowplow/actions'
+import { validateSnowplowExpectations } from 'connectors/snowplow/snowplow.state'
 
 // This comes from the lineup containing the slate
 export const lineupAnalytics = {
@@ -11,7 +13,7 @@ export const lineupAnalytics = {
 export const slateAnalytics = {
   slateId: '48e766be-5e96-46fb-acbf-55fee3ae8a28',
   slateRequestId: '9d76c3e8-5e12-4a62-a174-5912dac93f33',
-  slateExperimentId: '5ef3cfd',
+  slateExperiment: '5ef3cfd',
   displayName: 'Spotlight',
   description: 'Essential articles to save to your Pocket'
 }
@@ -112,9 +114,12 @@ describe('Discover', () => {
   const expectedPermanentUrl = false
   const expectedAnalyticsUrl = 'https://www.theverge.com/22734645/apple-macbook-pro-2021-ports-magsafe-touch-bar-usb-c-future' //prettier-ignore
 
-  it('should derive clientAPI as expected', () => {
-    const item = deriveRecommendation(recommendationsFromSlate, { lineupAnalytics, slateAnalytics })
+  const item = deriveRecommendation(recommendationsFromSlate, {
+    ...lineupAnalytics,
+    ...slateAnalytics
+  })
 
+  it('should derive clientAPI as expected', () => {
     // User driven data points
     expect(item._createdAt).toBeFalsy()
     expect(item._updatedAt).toBeFalsy()
@@ -159,17 +164,44 @@ describe('Discover', () => {
     expect(item.analyticsData.id).toBe('3460462323')
     expect(item.analyticsData.recommendationId).toBe('RecommendationAPI/3460462323')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
-    expect(item.analyticsData.lineupAnalytics).toStrictEqual({
-      slateLineupExperiment: 'fc6d7d9',
-      slateLineupRequestId: '31fac7b5-1d6a-4b51-ae1b-d193912a2b8b',
-      slateLineupId: '9c3018a8-8aa9-4f91-81e9-ebcd95fc82da'
-    })
-    expect(item.analyticsData.slateAnalytics).toStrictEqual({
-      slateId: '48e766be-5e96-46fb-acbf-55fee3ae8a28',
-      slateRequestId: '9d76c3e8-5e12-4a62-a174-5912dac93f33',
-      slateExperimentId: '5ef3cfd',
-      displayName: 'Spotlight',
-      description: 'Essential articles to save to your Pocket'
+
+    expect(item.analyticsData.slateLineupExperiment).toBe('fc6d7d9')
+    expect(item.analyticsData.slateLineupRequestId).toBe('31fac7b5-1d6a-4b51-ae1b-d193912a2b8b')
+    expect(item.analyticsData.slateLineupId).toBe('9c3018a8-8aa9-4f91-81e9-ebcd95fc82da')
+
+    expect(item.analyticsData.slateId).toBe('48e766be-5e96-46fb-acbf-55fee3ae8a28')
+    expect(item.analyticsData.slateRequestId).toBe('9d76c3e8-5e12-4a62-a174-5912dac93f33')
+    expect(item.analyticsData.slateExperiment).toBe('5ef3cfd')
+    expect(item.analyticsData.displayName).toBe('Spotlight')
+    expect(item.analyticsData.description).toBe('Essential articles to save to your Pocket')
+  })
+
+  describe('Snowplow', () => {
+    const whitelist = /^discover./
+    const blacklist = [
+      'discover.report' // report requires runtime user interaction
+    ]
+
+    const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))
+    const relevantActions = sectionActions.filter(
+      (action) =>
+        analyticsActions[action].entityTypes.includes('content') && !blacklist.includes(action)
+    )
+
+    relevantActions.map((identifier) => {
+      it(`${identifier} should be valid`, () => {
+        const { expects } = analyticsActions[identifier]
+        const isValid = validateSnowplowExpectations({
+          identifier,
+          expects,
+          data: {
+            position: 0,
+            destination: 'external',
+            ...item.analyticsData
+          }
+        })
+        expect(isValid).toBeTruthy()
+      })
     })
   })
 })
