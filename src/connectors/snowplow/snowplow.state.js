@@ -31,11 +31,11 @@ import { BATCH_SIZE } from 'common/constants'
  --------------------------------------------------------------- */
 export const finalizeSnowplow = () => ({ type: SNOWPLOW_INITIALIZED })
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
-export const sendSnowplowEvent = (identifier, data) => ({ type: SNOWPLOW_SEND_EVENT, identifier, data })
+export const sendSnowplowEvent = (identifier, data) => ({ type: SNOWPLOW_SEND_EVENT, identifier, data }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
- const initialState = {
+const initialState = {
   initialized: false,
   impressions: []
 }
@@ -140,8 +140,27 @@ const expectationTypes = {
   otherText: 'string'
 }
 
-export function* buildSnowplowCustomEvent({ identifier, data }) {
-  const { eventType, entityTypes, eventData, batchEntityTypes } = analyticsActions[identifier]
+export function validateSnowplowExpectations({ identifier, expects, data }) {
+  // Make sure we are not missing any entities
+  try {
+    const missingValues = data
+      ? expects?.filter((expectation) => !Object.prototype.hasOwnProperty.call(data, expectation))
+      : []
+
+    if (missingValues.length > 0) throw new Error(`Missing expected values for : ${missingValues}`)
+
+    return true
+  } catch (error) {
+    console.info({ identifier, error: error.message })
+    return false
+  }
+}
+
+export function buildSnowplowCustomEvent({ identifier, data }) {
+  const { eventType, entityTypes, eventData, batchEntityTypes, expects } = analyticsActions[identifier] //prettier-ignore
+
+  // Run a test against expectations
+  validateSnowplowExpectations({ identifier, expects, data })
 
   // Build event
   const eventFunction = eventBuilders[eventType]
@@ -166,7 +185,7 @@ export function* buildSnowplowCustomEvent({ identifier, data }) {
 
   const entities = [...singleEntities, ...batchEntities]
 
-  return yield { event, entities }
+  return { event, entities, expects }
 }
 
 export function* fireSnowplowEvent({ identifier, data }) {
@@ -177,7 +196,7 @@ export function* fireSnowplowEvent({ identifier, data }) {
   if (!eventType) return console.warn('No action for this event!')
 
   // Build custom events
-  const { event, entities } = buildSnowplowCustomEvent({ identifier, data })
+  const { event, entities } = yield buildSnowplowCustomEvent({ identifier, data })
 
   // Tracking impressions using id or url
   if (eventType === 'impression') {
