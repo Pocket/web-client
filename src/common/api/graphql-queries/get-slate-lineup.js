@@ -20,13 +20,26 @@ const getSlateLineup = gql`
       experimentId
       requestId
       id
+      slateLineupExperiment: experimentId
+      slateLineupRequestId: requestId
+      slateLineupId: id
       slates {
         id
         requestId
         experimentId
+        slateId: id
+        slateRequestId: requestId
+        slateExperimentId: experimentId
         displayName
         description
         recommendations {
+          recommendationId: id
+          id
+          curatedInfo {
+            title
+            excerpt
+            imageSrc
+          }
           item {
             collection {
               imageUrl
@@ -65,12 +78,6 @@ const getSlateLineup = gql`
                 url
               }
             }
-          }
-          id
-          curatedInfo {
-            title
-            excerpt
-            imageSrc
           }
         }
       }
