@@ -112,7 +112,7 @@ describe('Collection — Page', () => {
     expect(item.tags).toBeFalsy()
 
     // UnDerived content should come from the server
-    expect(item.itemId).toBe('f856e771-13c9-42b6-b483-6670c4080c62')
+    expect(item.itemId).toBeFalsy()
     expect(item.resolvedId).toBeFalsy()
     expect(item.slug).toBe('making-sense-of-cybersecurity-in-2021')
     expect(item.isSyndicated).toBeFalsy()
@@ -147,7 +147,7 @@ describe('Collection — Page', () => {
           'https://s3.amazonaws.com/pocket-collectionapi-prod-images/51ebddac-b680-4162-bf8c-78a48dbd4a61.png'
       }
     ])
-    expect(item.analyticsData.id).toBe('f856e771-13c9-42b6-b483-6670c4080c62')
+    expect(item.analyticsData.id).toBeFalsy()
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 

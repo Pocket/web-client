@@ -102,7 +102,6 @@ export function deriveCollection(collection) {
   return deriveItem({
     item: {
       ...collection,
-      itemId: collection?.externalId,
       heroImage: collection.thumbnail,
       thumbnail: authorImage || firstImage,
       status: false,
@@ -144,7 +143,7 @@ export function deriveItem({
     isCollection: isCollection({ item }),
     timeToRead: readTime({ item }),
     analyticsData: {
-      id: item?.itemId,
+      id: item?.itemId || false,
       url: analyticsUrl({ item, itemEnrichment }),
       ...analyticsData
     }
