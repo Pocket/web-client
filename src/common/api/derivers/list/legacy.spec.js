@@ -1,4 +1,6 @@
 import { deriveListItem } from 'common/api/derivers/item'
+import { analyticsActions } from 'connectors/snowplow/actions'
+import { validateSnowplowExpectations } from 'connectors/snowplow/snowplow.state'
 
 // An item without expected values that make up the bulk of the visuals in a card
 // EX: title, excerpt, images.  These are assumed to always be there, but there
@@ -234,5 +236,33 @@ describe('My List - Original Deriver', () => {
     ])
     expect(item.analyticsData.id).toBe('3059000415')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
+  })
+
+  describe('Snowplow', () => {
+    const item = deriveListItem(savedLegacyListItemFromClientApi)
+    const whitelist = /^my-list./
+    const blacklist = []
+
+    const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))
+    const relevantActions = sectionActions.filter(
+      (action) =>
+        analyticsActions[action].entityTypes.includes('content') && !blacklist.includes(action)
+    )
+
+    relevantActions.map((identifier) => {
+      it(`${identifier} should be valid`, () => {
+        const { expects } = analyticsActions[identifier]
+        const isValid = validateSnowplowExpectations({
+          identifier,
+          expects,
+          data: {
+            position: 0,
+            destination: 'external',
+            ...item.analyticsData
+          }
+        })
+        expect(isValid).toBeTruthy()
+      })
+    })
   })
 })

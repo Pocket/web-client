@@ -1,4 +1,6 @@
 import { deriveListItem } from 'common/api/derivers/item'
+import { analyticsActions } from 'connectors/snowplow/actions'
+import { validateSnowplowExpectations } from 'connectors/snowplow/snowplow.state'
 
 export const savedImageFromV3 = {
   item_id: '3462094779',
@@ -174,5 +176,33 @@ describe('My List - Image', () => {
     expect(item.authors).toStrictEqual([])
     expect(item.analyticsData.id).toBe('3462094779')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
+  })
+
+  describe('Snowplow', () => {
+    const item = deriveListItem(savedImageFromClientApi)
+    const whitelist = /^my-list./
+    const blacklist = []
+
+    const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))
+    const relevantActions = sectionActions.filter(
+      (action) =>
+        analyticsActions[action].entityTypes.includes('content') && !blacklist.includes(action)
+    )
+
+    relevantActions.map((identifier) => {
+      it(`${identifier} should be valid`, () => {
+        const { expects } = analyticsActions[identifier]
+        const isValid = validateSnowplowExpectations({
+          identifier,
+          expects,
+          data: {
+            position: 0,
+            destination: 'external',
+            ...item.analyticsData
+          }
+        })
+        expect(isValid).toBeTruthy()
+      })
+    })
   })
 })
