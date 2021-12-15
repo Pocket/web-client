@@ -143,9 +143,14 @@ const expectationTypes = {
 export function validateSnowplowExpectations({ identifier, expects, data }) {
   // Make sure we are not missing any entities
   try {
-    const missingValues = data
-      ? expects?.filter((expectation) => !Object.prototype.hasOwnProperty.call(data, expectation))
-      : []
+    if (!data) return true
+
+    const missingValues = expects?.filter((expectation) => {
+      return (
+        !Object.prototype.hasOwnProperty.call(data, expectation) ||
+        typeof data[expectation] === 'undefined' // We shouldn't have undefined fields if data is passed
+      )
+    })
 
     if (missingValues.length > 0) throw new Error(`Missing expected values for : ${missingValues}`)
 
