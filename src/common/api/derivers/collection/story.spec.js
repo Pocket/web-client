@@ -131,8 +131,7 @@ describe('Collection — Story', () => {
         url: 'https://www.nytimes.com/by/jack-ewing'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('1731163180')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 })

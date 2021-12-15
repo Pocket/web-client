@@ -177,9 +177,8 @@ describe('My List - Original Deriver', () => {
         url: 'https://learn.thomasoppong.com/'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('3059000415')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 
   it('should derive client api data as expected', () => {
@@ -233,8 +232,7 @@ describe('My List - Original Deriver', () => {
         url: 'https://learn.thomasoppong.com/'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('3059000415')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 })

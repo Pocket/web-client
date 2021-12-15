@@ -174,9 +174,8 @@ describe('My List - Videos', () => {
         url: 'https://www.youtube.com/channel/UCpJ9wxRuDnq1DxMDoKHrJlg'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('2815325547')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 
   it('should derive clientAPI as expected', () => {
@@ -222,8 +221,7 @@ describe('My List - Videos', () => {
         url: 'https://www.youtube.com/channel/UCpJ9wxRuDnq1DxMDoKHrJlg'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('2815325547')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 })

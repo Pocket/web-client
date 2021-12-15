@@ -90,8 +90,8 @@ export function deriveListItem(passedItem, legacy) {
 }
 
 export function deriveRecommendation(recommendationsFromSlate, analyticsData) {
-  const { item, curatedInfo: itemEnrichment } = recommendationsFromSlate
-  return deriveItem({ item, itemEnrichment, analyticsData })
+  const { item, recommendationId, curatedInfo: itemEnrichment } = recommendationsFromSlate
+  return deriveItem({ item, itemEnrichment, analyticsData: { ...analyticsData, recommendationId } })
 }
 
 export function deriveCollection(collection) {
@@ -102,6 +102,7 @@ export function deriveCollection(collection) {
   return deriveItem({
     item: {
       ...collection,
+      itemId: collection?.externalId,
       heroImage: collection.thumbnail,
       thumbnail: authorImage || firstImage,
       status: false,
@@ -143,6 +144,7 @@ export function deriveItem({
     isCollection: isCollection({ item }),
     timeToRead: readTime({ item }),
     analyticsData: {
+      id: item?.itemId,
       url: analyticsUrl({ item, itemEnrichment }),
       ...analyticsData
     }

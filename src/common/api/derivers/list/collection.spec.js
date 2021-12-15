@@ -166,9 +166,8 @@ describe('My List - Collection', () => {
         url: ''
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('3453456445')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 
   it('should derive clientAPI as expected', () => {
@@ -217,8 +216,7 @@ describe('My List - Collection', () => {
         url: ''
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('3453456445')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 })

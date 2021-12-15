@@ -154,9 +154,8 @@ describe('My List - Unparsed', () => {
         url: ''
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('3117582481')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 
   it('should derive clientAPI as expected', () => {
@@ -204,8 +203,7 @@ describe('My List - Unparsed', () => {
         url: ''
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('3117582481')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 })

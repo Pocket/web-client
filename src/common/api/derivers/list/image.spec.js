@@ -130,9 +130,8 @@ describe('My List - Image', () => {
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
     expect(item.timeToRead).toBeFalsy()
     expect(item.authors).toStrictEqual([])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('3462094779')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 
   it('should derive clientAPI as expected', () => {
@@ -173,8 +172,7 @@ describe('My List - Image', () => {
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
     expect(item.timeToRead).toBeFalsy()
     expect(item.authors).toStrictEqual([])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('3462094779')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 })

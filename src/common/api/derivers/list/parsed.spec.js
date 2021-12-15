@@ -1,4 +1,5 @@
 import { deriveListItem } from 'common/api/derivers/item'
+import { validateSnowplowExpectations } from 'connectors/snowplow/snowplow.state'
 
 export const savedParsedFromV3 = {
   item_id: '3362121180',
@@ -165,9 +166,8 @@ describe('My List - Parsed', () => {
         url: 'https://www.nytimes.com/by/jane-e-brody'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('3362121180')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 
   it('should derive clientAPI as expected', () => {
@@ -215,8 +215,7 @@ describe('My List - Parsed', () => {
         url: 'https://www.nytimes.com/by/jane-e-brody'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('3362121180')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 })

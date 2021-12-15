@@ -15,8 +15,14 @@ export const slateAnalytics = {
   displayName: 'Spotlight',
   description: 'Essential articles to save to your Pocket'
 }
-
 export const recommendationsFromSlate = {
+  recommendationId: 'RecommendationAPI/3460462323',
+  curatedInfo: {
+    title: 'Apple is ready to admit it was wrong about the future of laptops',
+    excerpt: 'It’s fixed the faults, but it created many of them in the first place.',
+    imageSrc:
+      'https://cdn.vox-cdn.com/thumbor/26f5VRT9jvt6JW6WB4Nohu849cI=/0x137:1911x1138/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/22938855/Apple_MacBook_Pro_Ports_10182021.jpg'
+  },
   item: {
     ampUrl:
       'https://www.theverge.com/22734645/apple-macbook-pro-2021-ports-magsafe-touch-bar-usb-c-future',
@@ -96,14 +102,6 @@ export const recommendationsFromSlate = {
     givenUrl:
       'http://theverge.com/22734645/apple-macbook-pro-2021-ports-magsafe-touch-bar-usb-c-future',
     syndicatedArticle: null
-  },
-  id: 'RecommendationAPI/3460462323',
-  recSrc: 'RecommendationAPI',
-  curatedInfo: {
-    title: 'Apple is ready to admit it was wrong about the future of laptops',
-    excerpt: 'It’s fixed the faults, but it created many of them in the first place.',
-    imageSrc:
-      'https://cdn.vox-cdn.com/thumbor/26f5VRT9jvt6JW6WB4Nohu849cI=/0x137:1911x1138/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/22938855/Apple_MacBook_Pro_Ports_10182021.jpg'
   }
 }
 
@@ -158,20 +156,20 @@ describe('Discover', () => {
         name: 'Jon Porter'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl,
-      lineupAnalytics: {
-        slateLineupExperiment: 'fc6d7d9',
-        slateLineupRequestId: '31fac7b5-1d6a-4b51-ae1b-d193912a2b8b',
-        slateLineupId: '9c3018a8-8aa9-4f91-81e9-ebcd95fc82da'
-      },
-      slateAnalytics: {
-        slateId: '48e766be-5e96-46fb-acbf-55fee3ae8a28',
-        slateRequestId: '9d76c3e8-5e12-4a62-a174-5912dac93f33',
-        slateExperimentId: '5ef3cfd',
-        displayName: 'Spotlight',
-        description: 'Essential articles to save to your Pocket'
-      }
+    expect(item.analyticsData.id).toBe('3460462323')
+    expect(item.analyticsData.recommendationId).toBe('RecommendationAPI/3460462323')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
+    expect(item.analyticsData.lineupAnalytics).toStrictEqual({
+      slateLineupExperiment: 'fc6d7d9',
+      slateLineupRequestId: '31fac7b5-1d6a-4b51-ae1b-d193912a2b8b',
+      slateLineupId: '9c3018a8-8aa9-4f91-81e9-ebcd95fc82da'
+    })
+    expect(item.analyticsData.slateAnalytics).toStrictEqual({
+      slateId: '48e766be-5e96-46fb-acbf-55fee3ae8a28',
+      slateRequestId: '9d76c3e8-5e12-4a62-a174-5912dac93f33',
+      slateExperimentId: '5ef3cfd',
+      displayName: 'Spotlight',
+      description: 'Essential articles to save to your Pocket'
     })
   })
 })
