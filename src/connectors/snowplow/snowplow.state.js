@@ -143,16 +143,17 @@ const expectationTypes = {
 export function validateSnowplowExpectations({ identifier, expects, data }) {
   // Make sure we are not missing any entities
   try {
-    if (!data) return true
+    if (!data || !expects) return true
 
-    const missingValues = expects?.filter((expectation) => {
-      return (
-        !Object.prototype.hasOwnProperty.call(data, expectation) ||
-        typeof data[expectation] === 'undefined' // We shouldn't have undefined fields if data is passed
-      )
-    })
+    const missingValues =
+      expects?.filter((expectation) => {
+        return (
+          !Object.prototype.hasOwnProperty.call(data, expectation) ||
+          typeof data[expectation] === 'undefined' // We shouldn't have undefined fields if data is passed
+        )
+      }) || []
 
-    if (missingValues.length > 0) throw new Error(`Missing expected values for : ${missingValues}`)
+    if (missingValues?.length > 0) throw new Error(`Missing expected values for : ${missingValues}`)
 
     return true
   } catch (error) {
