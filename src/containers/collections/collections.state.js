@@ -5,7 +5,6 @@ import { getCollections } from 'common/api/collections'
 import { saveItem } from 'common/api/saveItem'
 import { removeItemByUrl } from 'common/api/removeItem'
 import { saveItems } from 'common/api/saveItem'
-import { deriveCollectionPage } from 'connectors/items-by-id/collection/page.derive'
 
 import { HYDRATE } from 'actions'
 import { COLLECTIONS_HYDRATE } from 'actions'

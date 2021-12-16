@@ -71,15 +71,19 @@ export const recommendationsFromSlate = {
 
 describe('Home', () => {
   const expectedSaveUrl = 'http://getpocket.com/explore/item/people-think-what-you-do-with-your-shopping-cart-when-you-re-done-with-it-says-a-lot-about-you' //prettier-ignore
-  const expectedExternalUrl = 'http://getpocket.com/explore/item/people-think-what-you-do-with-your-shopping-cart-when-you-re-done-with-it-says-a-lot-about-you?utm_source=pocket_mylist' //prettier-ignore
+  const expectedExternalUrl = 'http://getpocket.com/explore/item/people-think-what-you-do-with-your-shopping-cart-when-you-re-done-with-it-says-a-lot-about-you?utm_source=pocket_home' //prettier-ignore
   const expectedReadUrl = false
   const expectedPermanentUrl = false
   const expectedAnalyticsUrl = 'https://getpocket.com/explore/item/people-think-what-you-do-with-your-shopping-cart-when-you-re-done-with-it-says-a-lot-about-you' //prettier-ignore
 
-  const item = deriveRecommendation(recommendationsFromSlate, {
-    ...lineupAnalytics,
-    ...slateAnalytics
-  })
+  const item = deriveRecommendation(
+    recommendationsFromSlate,
+    {
+      ...lineupAnalytics,
+      ...slateAnalytics
+    },
+    'pocket_home'
+  )
 
   it('should derive clientAPI as expected', () => {
     // User driven data points

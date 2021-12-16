@@ -41,9 +41,9 @@ function getRecsById(slates, lineupAnalytics) {
   }, {})
 }
 
-function processSlates(slates, isPersonalized) {
+function processSlates(slates) {
   const slateWithIds = slates.map((slate) => {
-    const derivedSlate = deriveSlate(slate, isPersonalized)
+    const derivedSlate = deriveSlate(slate)
     return derivedSlate
       ? {
           ...derivedSlate,
@@ -56,12 +56,12 @@ function processSlates(slates, isPersonalized) {
 
 export function deriveItems(slate, lineupAnalytics) {
   const recommendations = slate?.recommendations
-  const { slateId, slateRequestId, slateExperimentId, displayName, description } = slate
+  const { slateId, slateRequestId, slateExperiment, displayName, description } = slate
   const analyticsData = {
     ...lineupAnalytics,
     slateId,
     slateRequestId,
-    slateExperimentId,
+    slateExperiment,
     displayName,
     description
   }

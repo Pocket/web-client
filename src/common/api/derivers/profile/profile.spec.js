@@ -160,8 +160,7 @@ describe('Profile - Parsed', () => {
         url: 'https://medium.com/@isaacmorehouse'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
+    expect(item.analyticsData.id).toBe('1224052564')
   })
 })
