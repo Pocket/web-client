@@ -15,37 +15,54 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
   const analyticsInitialized = useSelector((state) => state.analytics.initialized)
 
   const item = useSelector((state) => state.collectionStoriesById[id])
-  const impressionFired = useSelector((state) =>
-    state.analytics.impressions.includes(item?.open_url)
-  )
+  const { itemId, readUrl, externalUrl, openExternal } = item
+
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(externalUrl))
 
   if (!item) return null
-  const { open_url } = item
+
+  const openUrl = readUrl && !openExternal ? readUrl : externalUrl
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
-    url: open_url,
+    id,
     position,
-    destination: 'external'
+    destination: 'external',
+    ...item?.analyticsData
   }
 
   /**
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onImpression = () => dispatch(sendSnowplowEvent('collection.story.impression', analyticsData))
+  const onImpression = () =>
+    dispatch(sendSnowplowEvent('collection.story.impression', analyticsData))
   const onItemInView = (inView) =>
     !impressionFired && inView && analyticsInitialized ? onImpression() : null
   const onOpen = () => dispatch(sendSnowplowEvent('collection.story.open', analyticsData))
 
+  /** ITEM DETAILS
+  --------------------------------------------------------------- */
+  const itemImage = item?.noImage ? '' : item?.thumbnail
+  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
+
   return (
     <Card
-      item={item}
+      itemId={itemId}
+      externalUrl={externalUrl}
+      tags={tags}
+      title={title}
+      itemImage={itemImage}
+      publisher={publisher}
+      excerpt={excerpt}
+      timeToRead={timeToRead}
+      isSyndicated={isSyndicated}
+      fromPartner={fromPartner}
       onImageFail={onImageFail}
       position={position}
       className={className}
       cardShape={cardShape}
       showExcerpt={showExcerpt}
-      openUrl={open_url}
+      openUrl={openUrl}
       useMarkdown={true}
       partnerType={partnerType}
       // Tracking

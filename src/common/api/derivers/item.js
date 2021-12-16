@@ -94,6 +94,16 @@ export function deriveRecommendation(recommendationsFromSlate, analyticsData) {
   return deriveItem({ item, itemEnrichment, analyticsData: { ...analyticsData, recommendationId } })
 }
 
+export function deriveReccit(recommendation) {
+  const { item: passedItem, ...rest } = recommendation
+  const {
+    node: { item }
+  } = modernizeItem(passedItem)
+  const derivedItem = deriveItem({ item })
+
+  return derivedItem
+}
+
 export function deriveCollection(collection) {
   const collectionUrl = `/collections/${collection?.slug}`
   const firstImage = collection?.stories[0]?.thumbnail

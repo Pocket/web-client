@@ -71,8 +71,8 @@ export const collectionStoriesReducers = (state = initialState, action) => {
  * @param {string} id Item id to operate on
  * @param {string} save_status Value to update save status to
  */
-export function updateSaveStatus(state, id, save_status) {
-  const updatedItem = { ...state[id], save_status }
+export function updateSaveStatus(state, id, saveStatus) {
+  const updatedItem = { ...state[id], saveStatus }
   return { ...state, [id]: updatedItem }
 }
 

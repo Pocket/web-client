@@ -85,24 +85,6 @@ export function urlWithPermanentLibrary(item_id) {
 }
 
 /**
- * determineOpenUrl
- * @param {object} item article item
- * @return {string} url to open based on openExternal, isCollection & default
- */
-export function determineOpenUrl(item) {
-  const { openExternal, original_url, isCollection, resolved_url } = item
-
-  if (openExternal) return original_url
-
-  if (isCollection) {
-    const path = resolved_url
-    return `/collections/${path.substring(path.lastIndexOf('/') + 1)}`
-  }
-
-  return `/read/${item.item_id}`
-}
-
-/**
  * Clear UTM values from a url while preserving other query params
  * @param {string} url
  */
