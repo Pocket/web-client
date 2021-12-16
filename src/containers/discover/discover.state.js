@@ -105,11 +105,7 @@ function* discoverUnSaveRequest(action) {
  */
 export async function fetchDiscoverData({ locale }) {
   try {
-    const response = await getDiscoverFeed({ locale })
-    const derivedItems = response.map((item) => deriveRecommendation(item))
-
-    const items = derivedItems.map((item) => item.itemId)
-    const itemsById = arrayToObject(derivedItems, 'itemId')
+    const { itemsById, items } = await getDiscoverFeed({ locale })
 
     return { items, itemsById }
   } catch (error) {
