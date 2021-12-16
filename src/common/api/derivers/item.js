@@ -142,7 +142,7 @@ export function deriveItem({
     cursor,
     ...node,
     ...item,
-    authors: itemEnrichment?.authors || item?.authors,
+    authors: itemEnrichment?.authors || item?.authors || false,
     title: title({ item, itemEnrichment }),
     thumbnail: thumbnail({ item, itemEnrichment }),
     excerpt: excerpt({ item, itemEnrichment }),
