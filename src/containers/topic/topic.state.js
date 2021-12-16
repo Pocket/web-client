@@ -72,9 +72,6 @@ function* topicsUnSaveRequest(action) {
 /** ASYNC Functions
  --------------------------------------------------------------- */
 
-// Async helper for cleaner code
-const mapIds = (item) => item.resolvedId
-
 /**
  * fetchTopicData
  * Make and async request for a Pocket v3 feed and return best data
@@ -87,28 +84,13 @@ export async function fetchTopicData(topic) {
     // 100% curated, so we need to ask for more `curated` and omit the
     // algorithmic results
 
-    const response = await getNewTopicFeed(topic, 30)
-
-    // Derive curated item data and create items by id
-    const { curated = [] } = response
-    const derivedCuratedItems = curated.map((item) => deriveRecommendation(item))
-    const curatedIds = derivedCuratedItems.map(mapIds)
-    const curatedItems = [...new Set(curatedIds)] // Unique entries only
-    const curatedItemsById = arrayToObject(derivedCuratedItems, 'resolvedId')
-
-    // Derive algorithmic item data and create items by id
-    const { algorithmic = [] } = response
-    const derivedAlgorithmicItems = algorithmic.map((item) => deriveRecommendation(item))
-    const algorithmicIds = derivedAlgorithmicItems.map(mapIds)
-    const algorithmicItems = [...new Set(algorithmicIds)] // Unique entries only
-    const algorithmicItemsById = arrayToObject(derivedAlgorithmicItems, 'resolvedId')
+    const { itemsById, curatedItems, algorithmicItems } = await getNewTopicFeed(topic, 30)
 
     return {
       topic,
+      itemsById,
       curatedItems,
-      curatedItemsById,
-      algorithmicItems,
-      algorithmicItemsById
+      algorithmicItems
     }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.

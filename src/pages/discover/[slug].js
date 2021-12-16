@@ -46,15 +46,10 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ params,
   const response = await fetchTopicData(topic)
   if (!response) return { props: { ...defaultProps, statusCode: 500 }, revalidate: 300 }
 
-  const {
-    curatedItems = [],
-    algorithmicItems = [],
-    curatedItemsById = {},
-    algorithmicItemsById = {}
-  } = response
+  const { curatedItems = [], algorithmicItems = [], itemsById = {} } = response
 
   // Hydrate the items array
-  dispatch(hydrateItems({ ...curatedItemsById, ...algorithmicItemsById }))
+  dispatch(hydrateItems(itemsById))
 
   // Set the active topic
   dispatch(setActiveTopic(slug))
