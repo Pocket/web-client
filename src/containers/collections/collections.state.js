@@ -210,7 +210,7 @@ export async function fetchArrayOfCollectionSlugs(slugs) {
     }
 
     const response = await getSlugsCollections()
-    const derivedCollections = deriveCollectionPage(response)
+    const derivedCollections = response.map((collection) => deriveCollection(collection))
     const collections = arrayToObject(derivedCollections, 'slug')
     return collections
   } catch (error) {
