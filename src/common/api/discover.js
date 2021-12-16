@@ -16,8 +16,8 @@ export async function getDiscoverFeed({ recommendationCount = 30, locale }) {
 
 function handleResponse(response) {
   const { slateItemArrays, itemsById } = processLineup(response)
-  const top = slateItemArrays[0]
-  const bottom = slateItemArrays[1]
+  const top = slateItemArrays[0] || []
+  const bottom = slateItemArrays[1] || []
 
   return { items: [...top, ...bottom], itemsById }
 }
