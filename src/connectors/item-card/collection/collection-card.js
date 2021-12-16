@@ -22,7 +22,7 @@ export function ItemCard({
 
   // Get data from state
   const item = useSelector((state) => state.collectionsBySlug[id])
-  const { itemId, readUrl, externalUrl, openExternal } = item
+  const { slug, readUrl, externalUrl, openExternal } = item
 
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(openExternal))
   const analyticsInitialized = useSelector((state) => state.analytics.initialized)
@@ -55,7 +55,7 @@ export function ItemCard({
 
   return (
     <Card
-      itemId={itemId}
+      itemId={slug}
       externalUrl={externalUrl}
       tags={tags}
       title={title}
