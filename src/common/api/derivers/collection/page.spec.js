@@ -123,6 +123,7 @@ describe('Collection — Page', () => {
     expect(item.hasVideo).toBeFalsy()
     expect(item.hasImage).toBeFalsy()
     expect(item.language).toBe('en')
+    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Making Sense of Cybersecurity in 2021')

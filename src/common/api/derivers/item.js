@@ -39,6 +39,7 @@ import { BASE_URL } from 'common/constants'
  * @param {DateString} datePublished — The date the article was published
  * @param {string} language — The detected language of the article
  * @param {int} timeToRead — How long it will take to read the article (WordCount / 220 WPM)
+ * @param {Boolean} fromPartner — If a story is sponsored/partnered
  *
  * INCLUDED ITEM ENRICHMENT
  * ————————————————————————————————————
@@ -71,6 +72,7 @@ import { BASE_URL } from 'common/constants'
  * @param isReadable — true if the content type is video, image, or article
  * @param isSyndicated — true if this article is syndicated by pocket
  * @param isCollection — ?? Is this needed?
+ * @param hasAnnotations — for filtering by annotation/highlights
  *
  * Analytics Properties
  * ————————————————————————————————————
@@ -95,7 +97,7 @@ export function deriveRecommendation(recommendationsFromSlate, analyticsData) {
 }
 
 export function deriveReccit(recommendation) {
-  const { item: passedItem, ...rest } = recommendation
+  const { item: passedItem, ...rest } = recommendation //eslint-disable-line no-unused-vars
   const {
     node: { item }
   } = modernizeItem(passedItem)
@@ -152,6 +154,7 @@ export function deriveItem({
     isReadable: isReadable({ item }),
     isCollection: isCollection({ item }),
     timeToRead: readTime({ item }),
+    fromPartner: fromPartner({ item, itemEnrichment }),
     analyticsData: {
       id: item?.itemId || false,
       url: analyticsUrl({ item, itemEnrichment }),
@@ -322,6 +325,10 @@ function permanentUrl({ item, status }) {
   return status ? urlWithPermanentLibrary(item?.itemId) || false : false
 }
 
+function fromPartner({ itemEnrichment }) {
+  return itemEnrichment?.fromPartner || false
+}
+
 /**
  * IS COLLECTION
  * ————————————————————————————————————
@@ -373,6 +380,7 @@ function modernizeItem(item) {
     given_title,
     resolved_url,
     tags = [],
+    annotations = [],
     authors,
     images,
     lang,
@@ -408,6 +416,8 @@ function modernizeItem(item) {
       favoritedAt: parseInt(time_favorited),
       isArchived: status === '1',
       archivedAt: parseInt(time_read),
+      hasAnnotations: annotations?.length,
+      annotations,
       tags
     }
   }

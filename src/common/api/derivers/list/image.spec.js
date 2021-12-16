@@ -118,6 +118,7 @@ describe('My List - Image', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('IS_IMAGE')
     expect(item.language).toBe('')
+    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('335d386abb459f49570030e830429cef.jpg (1600×1200)')
@@ -160,6 +161,7 @@ describe('My List - Image', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('IS_IMAGE')
     expect(item.language).toBe('')
+    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('335d386abb459f49570030e830429cef')

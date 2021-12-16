@@ -157,6 +157,7 @@ describe('My List - Videos', () => {
     expect(item.hasVideo).toBe('IS_VIDEO')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('')
+    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Mufasa- its friday then.')
@@ -204,6 +205,7 @@ describe('My List - Videos', () => {
     expect(item.hasVideo).toBe('IS_VIDEO')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('')
+    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Mufasa- its friday then.')
