@@ -154,7 +154,7 @@ export function deriveItem({
     isReadable: isReadable({ item }),
     isCollection: isCollection({ item }),
     timeToRead: readTime({ item }),
-    fromPartner: fromPartner({ item, itemEnrichment }),
+    fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
       id: item?.itemId || false,
       url: analyticsUrl({ item, itemEnrichment }),
