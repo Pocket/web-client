@@ -3,22 +3,17 @@ import { getRecIds, arrayToObject } from 'common/utilities'
 import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
 import { slateMeta } from 'common/slate-meta'
 
-const personalized = '05027beb-0053-4020-8bdc-4da2fcc0cb68'
-// const unpersonalized = '249850f0-61c0-46f9-a16a-f0553c222800'
-const homeLineup = personalized
-
-export async function getHomeLineup({ recommendationCount = 5 }) {
-  const id = homeLineup
+export async function getHomeLineup({ personalizedId, id, recommendationCount = 5 }) {
   return requestGQL({
     query: getSlateLineup,
-    variables: { id, recommendationCount, slateCount: 20 }
+    variables: { id: personalizedId, recommendationCount, slateCount: 20 }
   })
-    .then(processLineup)
+    .then((response) => processLineup(response, personalizedId))
     .catch((error) => console.error(error))
 }
 
-function processLineup(response) {
-  const isPersonalized = response?.data?.getSlateLineup.id === homeLineup
+function processLineup(response, personalizedID) {
+  const isPersonalized = response?.data?.getSlateLineup.id === personalizedID
 
   const slateLineup = getRecIds(response?.data?.getSlateLineup)
   const slatesResponse = response?.data?.getSlateLineup.slates

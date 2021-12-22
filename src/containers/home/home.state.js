@@ -41,7 +41,7 @@ import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getHomeLineup = () => ({ type: HOME_LINEUP_REQUEST })
+export const getHomeLineup = (id, personalizedId) => ({ type: HOME_LINEUP_REQUEST,  id, personalizedId}) //prettier-ignore
 export const getSimilarRecs = (id) => ({ type: HOME_SIMILAR_REC_REQUEST, id })
 export const saveSimilarRec = (id, url, position) => ({type: HOME_SIMILAR_REC_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const clearSimilarRecs = () => ({ type: HOME_SIMILAR_RECS_CLEAR })
@@ -133,9 +133,10 @@ export const homeSagas = [
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-function* homeLineupRequest() {
+function* homeLineupRequest(action) {
   try {
-    const data = yield call(fetchLineupData)
+    const { id, personalizedId } = action
+    const data = yield call(fetchLineupData, id, personalizedId)
     yield put({ type: HOME_LINEUP_SUCCESS, ...data })
   } catch (error) {
     console.warn(error)
@@ -253,9 +254,9 @@ export async function fetchMyListData(params) {
  * fetchLineupData
  * Make and async request the home lineup
  */
-export async function fetchLineupData() {
+export async function fetchLineupData(id, personalizedId) {
   try {
-    const response = await apiGetHomeLineup({})
+    const response = await apiGetHomeLineup({ personalizedId, id })
 
     const { slatesById, itemsById, slateLineup, isPersonalized } = response
     const { generalSlates, topicSlates } = response
