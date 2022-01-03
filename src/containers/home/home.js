@@ -34,19 +34,15 @@ export const Home = ({ metaData }) => {
   const featureState = useSelector((state) => state.features) || {}
   const generalSlates = useSelector((state) => state.home.generalSlates)
   const topicSlates = useSelector((state) => state.home.topicSlates)
+  const fallback = '249850f0-61c0-46f9-a16a-f0553c222800'
 
-  // Initialize data
-  // OG unpersonalized — 249850f0-61c0-46f9-a16a-f0553c222800
-  // OG personalized — 05027beb-0053-4020-8bdc-4da2fcc0cb68
   const lineupFlag = featureState['home.lineup']
-  const lineupPayload = lineupFlag?.payload || {}
-  const { unpersonalized, personalized } = lineupPayload
-  const lineupId = personalized || unpersonalized
+  const lineupId = lineupFlag?.payload?.slateLineupId || fallback
 
   useEffect(() => {
-    if (!lineupId) return
-    dispatch(getHomeLineup(lineupId, personalized))
-  }, [lineupId, personalized, dispatch])
+    if (userStatus !== 'valid' || !lineupFlag) return
+    dispatch(getHomeLineup(lineupId))
+  }, [lineupFlag, lineupId, userStatus, dispatch])
 
   const flagsReady = featureState.flagsReady
   const shouldRender = userStatus !== 'pending' && flagsReady
