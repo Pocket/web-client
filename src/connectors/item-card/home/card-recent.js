@@ -19,20 +19,21 @@ export const RecentCard = ({
 
   if (!item) return null
 
-  const { itemId, openExternal, readUrl, externalUrl } = item
-  const openUrl = readUrl && !openExternal ? readUrl : externalUrl
+  const { item_id, resolved_url, original_url, openExternal } = item
+  const url = resolved_url || original_url
+  const openUrl = !openExternal ? `/read/${item_id}` : original_url
   const analyticsData = {
     id,
+    url,
     position,
-    destination: !openExternal ? 'internal' : 'external',
-    ...item?.analyticsData
+    destination: !openExternal ? 'internal' : 'external'
   }
 
   /**
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onOpenOriginalUrl = () => {
+   const onOpenOriginalUrl = () => {
     const data = { ...analyticsData, destination: 'external' }
     dispatch(sendSnowplowEvent('home.recent.view-original', data))
   }
@@ -40,21 +41,9 @@ export const RecentCard = ({
   const onImpression = () => dispatch(sendSnowplowEvent('home.recent.impression', analyticsData))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
 
-  const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
-
   return item ? (
     <Card
-      itemId={itemId}
-      externalUrl={externalUrl}
-      tags={tags}
-      title={title}
-      itemImage={itemImage}
-      publisher={publisher}
-      excerpt={excerpt}
-      timeToRead={timeToRead}
-      isSyndicated={isSyndicated}
-      fromPartner={fromPartner}
+      item={item}
       position={position}
       className={className}
       cardShape={cardShape}

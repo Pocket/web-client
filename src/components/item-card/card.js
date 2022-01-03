@@ -14,19 +14,9 @@ import ReactMarkdown from 'react-markdown'
 
 /** Card
  * Item card for display.
- * @param itemId
- * @param tags
- * @param title
- * @param itemImage
- * @param publisher
- * @param authors
- * @param excerpt
- * @param readTime
- * @param isSyndicated
- * @param openUrl
- * @param fromPartner
-
+ * @param {Object} props Props passed in from React
  * Data
+ * @param {object} props.item  Item data
  * @param {boolean} props.bulkEdit  Are we in bulk edit?
  * @param {boolean} props.bulkSelected  Is this particular item selected?
  * @param {boolean} props.shortcutSelected Is this particular item selected via shortcut
@@ -51,23 +41,12 @@ import ReactMarkdown from 'react-markdown'
  */
 export const Card = (props) => {
   const {
-    itemId,
-    tags,
-    title,
-    itemImage,
-    publisher,
-    authors: passedAuthors,
-    excerpt,
-    timeToRead,
-    isSyndicated,
-    openUrl,
-    externalUrl,
-    fromPartner,
-
+    item,
     // Data
     bulkEdit,
     bulkSelected,
     shortcutSelected,
+    openUrl,
     position,
     // UI
     cardShape,
@@ -89,6 +68,21 @@ export const Card = (props) => {
     shortcutSelect,
     selectBulk
   } = props
+
+  const {
+    item_id: id,
+    tags,
+    title,
+    thumbnail,
+    publisher,
+    authors: passedAuthors,
+    excerpt,
+    read_time,
+    syndicated,
+    open_url,
+    noImage,
+    fromPartner
+  } = item
 
   const linkRef = useRef(null)
   const articleRef = useRef(null)
@@ -115,6 +109,9 @@ export const Card = (props) => {
     if (!shortcutSelected && shortcutSelect) shortcutSelect()
   }
 
+  if (!item) return null
+
+  const itemImage = noImage ? '' : thumbnail
   /**
    * Layout is defined here.
    * ----------------------------------------------------------------
@@ -139,13 +136,13 @@ export const Card = (props) => {
     <article
       ref={articleRef}
       className={card}
-      key={itemId}
-      data-cy={`article-card-${itemId}`}
+      key={id}
+      data-cy={`article-card-${id}`}
       onClick={selectBulk}>
       <div className="selectedBack" />
 
       <FeatureFlag flag="item_id_overlay" dev={true}>
-        <span className="idOverlay">{itemId}</span>
+        <span className="idOverlay">{id}</span>
       </FeatureFlag>
 
       <div className="cardWrap" ref={viewRef}>
@@ -153,7 +150,7 @@ export const Card = (props) => {
           <CardMedia
             image_src={itemImage}
             title={title}
-            id={itemId}
+            id={id}
             openUrl={openUrl}
             onOpen={onOpen}
             onImageFail={onImageFail}
@@ -191,20 +188,20 @@ export const Card = (props) => {
               //eslint-disable-next-line
               <a
                 className="publisher"
-                href={externalUrl}
+                href={open_url}
                 onClick={onOpenOriginalUrl}
                 data-cy="publisher-link"
                 tabIndex={0}>
                 {publisher}
               </a>
             ) : null}
-            {timeToRead ? (
+            {read_time ? (
               <span className="readtime" data-cy="read-time">
                 {' '}
-                · {timeToRead} min
+                · {read_time} min
               </span>
             ) : null}
-            {isSyndicated ? (
+            {syndicated ? (
               <span className="syndicated">
                 <SyndicatedIcon />
               </span>
@@ -230,25 +227,15 @@ export const Card = (props) => {
       </div>
       <footer className="footer">
         {showTags ? <ItemTags tags={tags} /> : null}
-        {ActionMenu ? <ActionMenu id={actionId || itemId} position={position} /> : null}
+        {ActionMenu ? <ActionMenu id={actionId || id} position={position} /> : null}
       </footer>
     </article>
   )
 }
 
 Card.propTypes = {
-  // Item Data
-  itemId: PropTypes.string,
-  tags: PropTypes.array,
-  title: PropTypes.string,
-  itemImage: PropTypes.string,
-  publisher: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  authors: PropTypes.array,
-  excerpt: PropTypes.string,
-  timeToRead: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
-  isSyndicated: PropTypes.bool,
-  externalUrl: PropTypes.string,
-  fromPartner: PropTypes.bool,
+  // Data
+  item: PropTypes.object,
   bulkEdit: PropTypes.bool,
   bulkSelected: PropTypes.bool,
   shortcutSelected: PropTypes.bool,

@@ -1,6 +1,6 @@
 import { takeLatest, put, takeEvery } from 'redux-saga/effects'
 import { getDiscoverFeed } from 'common/api/discover'
-import { deriveRecommendation } from 'common/api/derivers/item'
+import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { arrayToObject } from 'common/utilities'
 
 import { DISCOVER_DATA_REQUEST } from 'actions'
@@ -45,10 +45,9 @@ export const discoverHomeReducers = (state = initialState, action) => {
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
-    case HYDRATE: {
+    case HYDRATE:
       const { discoverHome } = action.payload
       return { ...state, ...discoverHome }
-    }
 
     default:
       return state
@@ -106,10 +105,10 @@ function* discoverUnSaveRequest(action) {
 export async function fetchDiscoverData({ locale }) {
   try {
     const response = await getDiscoverFeed({ locale })
-    const derivedItems = response.map((item) => deriveRecommendation(item))
+    const derivedItems = await deriveDiscoverItems(response)
 
-    const items = derivedItems.map((item) => item.itemId)
-    const itemsById = arrayToObject(derivedItems, 'itemId')
+    const items = derivedItems.map((item) => item.item_id)
+    const itemsById = arrayToObject(derivedItems, 'item_id')
 
     return { items, itemsById }
   } catch (error) {

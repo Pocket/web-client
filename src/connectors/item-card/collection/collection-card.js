@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { ActionsCollection } from './collection-actions'
 import { setNoImage } from 'connectors/items-by-id/discover/items.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { BASE_URL } from 'common/constants'
 
 /**
  * Article Card
@@ -21,57 +22,40 @@ export function ItemCard({
   const dispatch = useDispatch()
 
   // Get data from state
-  const item = useSelector((state) => state.collectionsBySlug[id])
-  const { slug, readUrl, externalUrl, openExternal } = item
-
-  const impressionFired = useSelector((state) => state.analytics.impressions.includes(openExternal))
+  const storedItem = useSelector((state) => state.collectionsBySlug[id])
+  const { url } = storedItem
+  const fullUrl = `${BASE_URL}${url}`
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(fullUrl))
   const analyticsInitialized = useSelector((state) => state.analytics.initialized)
   const onImageFail = () => dispatch(setNoImage(id))
 
-  if (!item) return null
-
-  const openUrl = readUrl && !openExternal ? readUrl : externalUrl
-  const analyticsData = {
-    id,
-    position,
-    destination: 'internal',
-    ...item?.analyticsData
-  }
-  /** ITEM DETAILS
-   --------------------------------------------------------------- */
   // for hero items in a lockup, use the heroImage instead of thumbnail
-  const preferredImage = lockup || useHero ? item.heroImage : item.thumbnail
-  const itemImage = item?.noImage ? '' : preferredImage
-  const {tags, title, authors, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
+  const thumbnail = lockup || useHero ? storedItem.heroImage : storedItem.thumbnail
+  const item = { ...storedItem, thumbnail }
+  const analyticsItem = {
+    url: fullUrl,
+    position,
+    destination: 'internal'
+  }
 
   /**
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onImpression = () => dispatch(sendSnowplowEvent('collection.impression', analyticsData))
+  const onImpression = () => dispatch(sendSnowplowEvent('collection.impression', analyticsItem))
   const onItemInView = (inView) =>
     !impressionFired && inView && analyticsInitialized ? onImpression() : null
-  const onOpen = () => dispatch(sendSnowplowEvent('collection.open', analyticsData))
+  const onOpen = () => dispatch(sendSnowplowEvent('collection.open', analyticsItem))
 
   return (
     <Card
-      itemId={slug}
-      externalUrl={externalUrl}
-      tags={tags}
-      title={title}
-      itemImage={itemImage}
-      publisher={false}
-      excerpt={excerpt}
-      timeToRead={timeToRead}
-      isSyndicated={isSyndicated}
-      fromPartner={fromPartner}
-      authors={authors}
+      item={item}
       onImageFail={onImageFail}
       position={position}
       className={className}
       cardShape={cardShape}
       showExcerpt={showExcerpt}
-      openUrl={openUrl}
+      openUrl={url}
       useMarkdown={true}
       // Tracking
       onItemInView={onItemInView}

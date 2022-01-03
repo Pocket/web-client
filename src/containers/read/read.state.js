@@ -43,7 +43,7 @@ import { getArticleText } from 'common/api/reader'
 import { getArticleFromId } from 'common/api/reader'
 import { sendItemActions } from 'common/api/item-actions'
 
-import { deriveListItem } from 'common/api/derivers/item'
+import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 
 import { HYDRATE } from 'actions'
 
@@ -82,7 +82,7 @@ export const readReducers = (state = initialState, action) => {
         articleData: item,
         favorite: item?.favorite,
         annotations: item?.annotations || [],
-        tags: item?.tags || []
+        tags: item?.tags || {}
       }
     }
 
@@ -151,10 +151,9 @@ export const readReducers = (state = initialState, action) => {
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
-    case HYDRATE: {
+    case HYDRATE:
       const { reader } = action.payload
       return { ...state, ...reader }
-    }
 
     default:
       return state
@@ -189,8 +188,8 @@ function* articleItemRequest({ itemId }) {
     const response = yield getArticleFromId(itemId)
     const item = response?.list[itemId]
     const { resolved_url: url } = item
-    const derivedItem = deriveListItem(item)
-    const itemsById = arrayToObject([derivedItem], 'itemId')
+    const derivedItems = deriveMyListItems([item])
+    const itemsById = arrayToObject(derivedItems, 'item_id')
 
     if (item)
       return yield put({
@@ -294,7 +293,7 @@ function* hydrateDisplaySettings() {
 }
 
 function* saveDisplaySettings({ type, ...settings }) {
-  yield Object.keys(settings).forEach((val) => {
+  Object.keys(settings).forEach((val) => {
     localStore.setItem(val.toString(), settings[val])
   })
 }

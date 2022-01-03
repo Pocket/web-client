@@ -39,7 +39,6 @@ import { BASE_URL } from 'common/constants'
  * @param {DateString} datePublished — The date the article was published
  * @param {string} language — The detected language of the article
  * @param {int} timeToRead — How long it will take to read the article (WordCount / 220 WPM)
- * @param {Boolean} fromPartner — If a story is sponsored/partnered
  *
  * INCLUDED ITEM ENRICHMENT
  * ————————————————————————————————————
@@ -49,7 +48,9 @@ import { BASE_URL } from 'common/constants'
  *     @param {string} name — Name of the publisher of the article
  *     @param {string} logo — Logo to use for the publisher
  *     @param {URL} url — Url of the publisher
- *
+ */
+
+/**
  * ————————————————————————————————————————————————————————————————————————
  * DERIVED ITEM — urls and display information based on return from the server
  * ————————————————————————————————————————————————————————————————————————
@@ -70,7 +71,6 @@ import { BASE_URL } from 'common/constants'
  * @param isReadable — true if the content type is video, image, or article
  * @param isSyndicated — true if this article is syndicated by pocket
  * @param isCollection — ?? Is this needed?
- * @param hasAnnotations — for filtering by annotation/highlights
  *
  * Analytics Properties
  * ————————————————————————————————————
@@ -86,22 +86,12 @@ export function deriveListItem(passedItem, legacy) {
   // node contains user-item data as well as the item itself
   const { node = {}, cursor = null } = edge
   const { item, ...rest } = node
-  return deriveItem({ item, node: rest, cursor, utmId: 'pocket_mylist' })
+  return deriveItem({ item, node: rest, cursor })
 }
 
 export function deriveRecommendation(recommendationsFromSlate, analyticsData) {
-  const { item, curatedInfo: itemEnrichment } = recommendationsFromSlate
-  return deriveItem({ item, itemEnrichment, analyticsData, utmId: 'pocket_discover' })
-}
-
-export function deriveReccit(recommendation) {
-  const { item: passedItem, ...rest } = recommendation //eslint-disable-line no-unused-vars
-  const {
-    node: { item }
-  } = modernizeItem(passedItem)
-  const derivedItem = deriveItem({ item, utmId: 'pocket_rec' })
-
-  return derivedItem
+  const { item, recommendationId, curatedInfo: itemEnrichment } = recommendationsFromSlate
+  return deriveItem({ item, itemEnrichment, analyticsData: { ...analyticsData, recommendationId } })
 }
 
 export function deriveCollection(collection) {
@@ -119,25 +109,13 @@ export function deriveCollection(collection) {
       collectionUrl,
       isArticle: true
     },
-    passedPublisher: 'Pocket',
-    utmId: 'pocket_collection'
+    passedPublisher: 'Pocket'
   })
 }
 
 export function deriveStory(story) {
   const { item, ...itemEnrichment } = story
-  return deriveItem({ item, itemEnrichment, utmId: 'pocket_collection_story' })
-}
-
-export function deriveProfile(feedItem, legacy) {
-  const { item: passedItem, post } = feedItem
-  // if a legacy flag is passed, first we need to modernize the item
-  const edge = legacy ? modernizeItem(passedItem) : passedItem
-  // node contains user-item data as well as the item itself
-  const { node = {}, cursor = null } = edge
-  const { item: nodeItem, ...rest } = node
-  const item = { ...nodeItem, readUrl: false, openExternal: true, post }
-  return deriveItem({ item, node: { ...rest, status: false }, cursor, utmId: 'pocket_profile' })
+  return deriveItem({ item, itemEnrichment })
 }
 
 export function deriveItem({
@@ -146,19 +124,17 @@ export function deriveItem({
   node,
   itemEnrichment,
   passedPublisher,
-  analyticsData = {},
-  utmId
+  analyticsData = {}
 }) {
   const derived = {
     cursor,
     ...node,
     ...item,
-    authors: itemEnrichment?.authors || item?.authors || false,
     title: title({ item, itemEnrichment }),
     thumbnail: thumbnail({ item, itemEnrichment }),
     excerpt: excerpt({ item, itemEnrichment }),
     publisher: publisher({ item, passedPublisher }),
-    externalUrl: externalUrl({ item, itemEnrichment, utmId }),
+    externalUrl: externalUrl({ item, itemEnrichment }),
     readUrl: readUrl({ item, status: node?.status }),
     saveUrl: saveUrl({ item, itemEnrichment }),
     permanentUrl: permanentUrl({ item, status: node?.status }),
@@ -166,8 +142,8 @@ export function deriveItem({
     isReadable: isReadable({ item }),
     isCollection: isCollection({ item }),
     timeToRead: readTime({ item }),
-    fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
+      id: item?.itemId || false,
       url: analyticsUrl({ item, itemEnrichment }),
       ...analyticsData
     }
@@ -209,7 +185,7 @@ function thumbnail({ item, itemEnrichment }) {
   if (passedImage) return passedImage
 
   const firstImage = item?.images?.[Object.keys(item?.images)[0]]?.src
-  if (firstImage) return getImageCacheUrl(firstImage, { width: 600 })
+  if (firstImage) return getImageCacheUrl(firstImage, { width: 1200 })
   return false
 }
 
@@ -276,9 +252,10 @@ function isReadable({ item }) {
  * @param {object} item An item returned from the server
  * @returns {string} The url that opens to a non-pocket site
  */
-function externalUrl({ item, itemEnrichment, utmId = 'pocket_mylist' }) {
+function externalUrl({ item, itemEnrichment }) {
+  //!! Note: Add identifier var
   const urlToUse = itemEnrichment?.url || item?.givenUrl || item?.resolvedUrl
-  const linkWithUTM = replaceUTM(urlToUse, utmId)
+  const linkWithUTM = replaceUTM(urlToUse, 'pocket_mylist')
   return linkWithUTM
 }
 
@@ -335,10 +312,6 @@ function permanentUrl({ item, status }) {
   return status ? urlWithPermanentLibrary(item?.itemId) || false : false
 }
 
-function fromPartner({ itemEnrichment }) {
-  return itemEnrichment?.fromPartner || false
-}
-
 /**
  * IS COLLECTION
  * ————————————————————————————————————
@@ -365,12 +338,6 @@ function collectionSlug({ item }) {
 
 // !! TEMPORARY FUNCTION while we transition to API next
 // !! THIS SHOULD BE DELETED SHORTLY
-
-function convertTags(tags) {
-  if (!tags) return []
-  return Object.values(tags).map((tag) => ({ name: tag.tag }))
-}
-
 function modernizeItem(item) {
   const {
     item_id,
@@ -396,7 +363,6 @@ function modernizeItem(item) {
     given_title,
     resolved_url,
     tags = [],
-    annotations = [],
     authors,
     images,
     lang,
@@ -432,9 +398,7 @@ function modernizeItem(item) {
       favoritedAt: parseInt(time_favorited),
       isArchived: status === '1',
       archivedAt: parseInt(time_read),
-      hasAnnotations: annotations?.length,
-      annotations,
-      tags: convertTags(tags)
+      tags
     }
   }
 

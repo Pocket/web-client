@@ -1,4 +1,6 @@
 import { deriveListItem } from 'common/api/derivers/item'
+import { analyticsActions } from 'connectors/snowplow/actions'
+import { validateSnowplowExpectations } from 'connectors/snowplow/snowplow.state'
 
 export const savedParsedFromV3 = {
   item_id: '3362121180',
@@ -144,7 +146,6 @@ describe('My List - Parsed', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('en')
-    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('The Secrets of \u2018Cognitive Super-Agers\u2019')
@@ -166,9 +167,8 @@ describe('My List - Parsed', () => {
         url: 'https://www.nytimes.com/by/jane-e-brody'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('3362121180')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 
   it('should derive clientAPI as expected', () => {
@@ -195,7 +195,6 @@ describe('My List - Parsed', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('en')
-    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('The Secrets of \u2018Cognitive Super-Agers\u2019')
@@ -217,8 +216,35 @@ describe('My List - Parsed', () => {
         url: 'https://www.nytimes.com/by/jane-e-brody'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
+    expect(item.analyticsData.id).toBe('3362121180')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
+  })
+
+  describe('Snowplow', () => {
+    const item = deriveListItem(savedParsedFromClientApi)
+    const whitelist = /^my-list./
+    const blacklist = []
+
+    const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))
+    const relevantActions = sectionActions.filter(
+      (action) =>
+        analyticsActions[action].entityTypes.includes('content') && !blacklist.includes(action)
+    )
+
+    relevantActions.map((identifier) => {
+      it(`${identifier} should be valid`, () => {
+        const { expects } = analyticsActions[identifier]
+        const isValid = validateSnowplowExpectations({
+          identifier,
+          expects,
+          data: {
+            position: 0,
+            destination: 'external',
+            ...item.analyticsData
+          }
+        })
+        expect(isValid).toBeTruthy()
+      })
     })
   })
 })

@@ -40,13 +40,14 @@ export const resetOnboarding = () => ({ type: ONBOARDING_RESET })
 
 export const onboardingReducers = (state = initialState, action) => {
   switch (action.type) {
-    case SETTINGS_FETCH_SUCCESS: {
+
+    case SETTINGS_FETCH_SUCCESS:
       const { settings } = action
       return {
         ...state,
         ...filterSettings(settings?.onboarding, initialState)
       }
-    }
+
     case ONBOARDING_CLOSE_TOPICS_MODAL:
       return {
         ...state,
@@ -108,6 +109,7 @@ export const onboardingSagas = [
   takeLatest(HOME_SAVE_REQUEST, saveSettings),
   takeLatest(MYLIST_UPDATE_REQUEST, confirmFlyawayStatus)
 ]
+
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */

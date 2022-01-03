@@ -13,7 +13,6 @@ module.exports = {
 
     const alias = {
       mock: path.join(__dirname, './_data'),
-      mocks: path.join(__dirname, '../__mocks__'),
       media: path.join(__dirname, '../public/static'),
       common: path.join(__dirname, '../src/common'),
       containers: path.join(__dirname, '../src/containers'),

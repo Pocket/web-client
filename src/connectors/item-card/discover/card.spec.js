@@ -7,14 +7,11 @@ import { slateAnalytics } from 'common/api/derivers/discover/discover.spec'
 import { recommendationsFromSlate } from 'common/api/derivers/discover/discover.spec'
 
 import { ItemCard as DiscoverCard } from 'connectors/item-card/discover/card'
-import { deriveRecommendation } from 'common/api/derivers/item'
+import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 
 describe('ItemCard', () => {
   //Legacy Derivers
-  const derivedDiscoverItem = deriveRecommendation(recommendationsFromSlate, {
-    lineupAnalytics,
-    slateAnalytics
-  })
+  const derivedDiscoverItem = deriveDiscoverItems([recommendationsFromSlate])[0]
 
   const initialState = {
     user: { auth: true },
@@ -22,7 +19,7 @@ describe('ItemCard', () => {
       impressions: []
     },
     discoverItemsById: {
-      [derivedDiscoverItem.itemId]: derivedDiscoverItem
+      [derivedDiscoverItem.item_id]: derivedDiscoverItem
     }
   }
 
@@ -32,7 +29,7 @@ describe('ItemCard', () => {
 
   // Discover card
   it('renders a discover item', () => {
-    const { getByCy } = wrappedRender(<DiscoverCard id={derivedDiscoverItem.itemId} position={3} />, { initialState }) //prettier-ignore
+    const { getByCy } = wrappedRender(<DiscoverCard id={derivedDiscoverItem.item_id} position={3} />, { initialState }) //prettier-ignore
     expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
   })
 })

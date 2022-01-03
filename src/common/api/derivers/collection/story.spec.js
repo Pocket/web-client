@@ -1,4 +1,6 @@
 import { deriveStory } from 'common/api/derivers/item'
+import { analyticsActions } from 'connectors/snowplow/actions'
+import { validateSnowplowExpectations } from 'connectors/snowplow/snowplow.state'
 
 export const storyFromClientApi = {
   url: 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html',
@@ -14,7 +16,6 @@ export const storyFromClientApi = {
     }
   ],
   publisher: 'The New York Times',
-  fromPartner: true,
   item: {
     isArticle: true,
     title: 'Inside VW’s Campaign of Trickery',
@@ -83,14 +84,14 @@ export const storyFromClientApi = {
 
 describe('Collection — Story', () => {
   const expectedSaveUrl = 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html' //prettier-ignore
-  const expectedExternalUrl = 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_collection_story' //prettier-ignore
+  const expectedExternalUrl = 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_mylist' //prettier-ignore
   const expectedReadUrl = false //prettier-ignore
   const expectedPermanentUrl = false
   const expectedAnalyticsUrl = 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html' //prettier-ignore
 
-  it('should derive clientAPI as expected', () => {
-    const item = deriveStory(storyFromClientApi)
+  const item = deriveStory(storyFromClientApi)
 
+  it('should derive clientAPI as expected', () => {
     // User driven data points
     expect(item._createdAt).toBeFalsy()
     expect(item._updatedAt).toBeFalsy()
@@ -111,7 +112,6 @@ describe('Collection — Story', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBeFalsy()
-    expect(item.fromPartner).toBeTruthy()
 
     // Derived content
     expect(item.title).toBe('Inside VW’s Campaign of Trickery')
@@ -127,9 +127,40 @@ describe('Collection — Story', () => {
     expect(item.readUrl).toBe(expectedReadUrl)
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
     expect(item.timeToRead).toBe(14)
-    expect(item.authors).toStrictEqual([{ name: 'Jack Ewing' }])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
+    expect(item.authors).toStrictEqual([
+      {
+        name: 'JACK EWING',
+        url: 'https://www.nytimes.com/by/jack-ewing'
+      }
+    ])
+    expect(item.analyticsData.id).toBe('1731163180')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
+  })
+
+  describe('Snowplow', () => {
+    const whitelist = /^collection.story/
+    const blacklist = []
+
+    const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))
+    const relevantActions = sectionActions.filter(
+      (action) =>
+        analyticsActions[action].entityTypes.includes('content') && !blacklist.includes(action)
+    )
+
+    relevantActions.map((identifier) => {
+      it(`${identifier} should be valid`, () => {
+        const { expects } = analyticsActions[identifier]
+        const isValid = validateSnowplowExpectations({
+          identifier,
+          expects,
+          data: {
+            position: 0,
+            destination: 'external',
+            ...item.analyticsData
+          }
+        })
+        expect(isValid).toBeTruthy()
+      })
     })
   })
 })

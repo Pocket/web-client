@@ -12,17 +12,17 @@ export function ActionsRec({ id, position }) {
   const item = useSelector((state) => state.recit.recentRecs[id])
 
   if (!item) return null
-  const { saveUrl, saveStatus, readUrl, externalUrl, openExternal } = item
+  const { save_url, save_status, open_url, openExternal, resolved_url } = item
 
   // Prep save action
   const onSave = () => {
-    const data = { id, position, ...item?.analyticsData }
+    const data = { id, url: resolved_url, position }
     dispatch(sendSnowplowEvent('home.similar.save', data))
-    dispatch(saveSimilarRec(id, saveUrl, position))
+    dispatch(saveSimilarRec(id, save_url, position))
   }
 
   // Open action
-  const url = readUrl && !openExternal ? readUrl : externalUrl
+  const url = openExternal ? open_url : `/read/${id}`
   const onOpen = () => {
     const data = { id, url, position, destination: 'internal' }
     dispatch(sendSnowplowEvent('home.similar.open', data))
@@ -37,7 +37,7 @@ export function ActionsRec({ id, position }) {
         openExternal={openExternal}
         saveAction={onSave}
         isAuthenticated={isAuthenticated}
-        saveStatus={saveStatus}
+        saveStatus={save_status}
         id={id}
       />
     </div>

@@ -44,29 +44,10 @@ export function RecentTags({ taggedItems }) {
 
 function RecentCard({ itemId }) {
   const item = useSelector((state) => state.myListItemsById[itemId])
-  if (!item) return null
-
-  const { externalUrl, title, publisher, excerpt, timeToRead, isSyndicated } = item
-  const openUrl = externalUrl
-  const showExcerpt = false
-  const itemImage = item?.noImage ? '' : item?.thumbnail
-
   // We need the wrapper div to contain the wide article to the container grid
   return (
     <div>
-      <Card
-        title={title}
-        publisher={publisher}
-        excerpt={excerpt}
-        timeToRead={timeToRead}
-        isSyndicated={isSyndicated}
-        openUrl={openUrl}
-        externalUrl={externalUrl}
-        showExcerpt={showExcerpt}
-        itemImage={itemImage}
-        cardShape="wide"
-        itemType="display"
-      />
+      <Card item={item} cardShape="wide" itemType="display" />
     </div>
   )
 }

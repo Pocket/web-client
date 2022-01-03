@@ -1,46 +1,85 @@
-# [1.29.0](https://github.com/Pocket/web-client/compare/v1.28.16...v1.29.0) (2021-12-13)
+## [1.30.2](https://github.com/Pocket/web-client/compare/v1.30.1...v1.30.2) (2021-12-15)
+
+
+### Bug Fixes
+
+* **syndicated:** ensure query params are passed to page ([4a39d66](https://github.com/Pocket/web-client/commit/4a39d6606640b920e819cf6e5864a1e29814317c))
+
+## [1.30.1](https://github.com/Pocket/web-client/compare/v1.30.0...v1.30.1) (2021-12-15)
+
+
+### Bug Fixes
+
+* **collection:** remove externalId as itemId ([b453156](https://github.com/Pocket/web-client/commit/b4531564fa9ecdd8aa6a9f7d00941f76de8d9df7))
+* **discover:** future forward response variables ([6689d9c](https://github.com/Pocket/web-client/commit/6689d9c36b222d5298fa8f7af13dd9701a6ffc56))
+* **item:** update analytics data ([66ab288](https://github.com/Pocket/web-client/commit/66ab2884fabc6d7d3461eb2951ad508b6279419a))
+* **snowplow:** create validator with warnings ([0db2d62](https://github.com/Pocket/web-client/commit/0db2d622ed8452a485877e4d768a9561af51ea7b))
+* **snowplow:** sane defaults for validation ([abb9851](https://github.com/Pocket/web-client/commit/abb985147a5d8bc585f28fd6e9eb820daa33a072))
+* **snowplow:** validate expected has value ([c5d4a94](https://github.com/Pocket/web-client/commit/c5d4a94230d2bfe1ea30d6de4a2f457feabe2bef))
+
+# [1.30.0](https://github.com/Pocket/web-client/compare/v1.29.2...v1.30.0) (2021-12-14)
 
 
 ### Features
 
-* **dependencies:** upgrade nextjs  major version ([b9aeafb](https://github.com/Pocket/web-client/commit/b9aeafb378987250a3a51b162a384f435f83ef93))
-
-## [1.28.16](https://github.com/Pocket/web-client/compare/v1.28.15...v1.28.16) (2021-12-13)
+* **rollback:** format trigger deployment ([8c43e7f](https://github.com/Pocket/web-client/commit/8c43e7f638aae8077977073d6ba4cccf7deae837))
 
 
-### Bug Fixes
+### Reverts
 
-* **headers:** adding x-frame-options header to all pages to prevent clickjacking ([8bd03bd](https://github.com/Pocket/web-client/commit/8bd03bdcc66b4ef67f5cfdb961e50beb3e8d245d))
-
-## [1.28.15](https://github.com/Pocket/web-client/compare/v1.28.14...v1.28.15) (2021-12-13)
-
-
-### Bug Fixes
-
-* **card:** don't pass item data ([2569c6c](https://github.com/Pocket/web-client/commit/2569c6c9129aeed672fcc1da7b37230cd163e1ad))
-* **collections:** use deriver for takeover content ([df33ef3](https://github.com/Pocket/web-client/commit/df33ef33b35cb1d59d5d4556abe507651e495b13))
-* **collections:** use new deriver for pages ([b57a5cf](https://github.com/Pocket/web-client/commit/b57a5cf3d4307458f59773a76403c58fa2d5b82c))
-* **collection:** use new deriver for stories ([6c9388c](https://github.com/Pocket/web-client/commit/6c9388cd6632de117399a683f8ddf0fc0ec325d4))
-* **discover:** use new deriver for recs ([c82499c](https://github.com/Pocket/web-client/commit/c82499c87c8878983f81aa75c7f8ae0324f9dea6))
-* **home:** derive items with new derivers ([3f7c766](https://github.com/Pocket/web-client/commit/3f7c766526eb5c6cfbf3c2f8666530ca38406b92))
-* **home:** get correct slate meta [FRONT-1510] ([2d2b511](https://github.com/Pocket/web-client/commit/2d2b511076176377ea71473c99c81a4a3385776e))
-* **item tags:** adjust format for display ([e57c7f9](https://github.com/Pocket/web-client/commit/e57c7f9d6ee2aa42316fcd77ae86658b0481ad3e))
-* **item:** add annotations ([4193a10](https://github.com/Pocket/web-client/commit/4193a1040921fb055eff059b993e0b64d256d858))
-* **item:** add collection data to fragment ([45dfe62](https://github.com/Pocket/web-client/commit/45dfe62d905a8f3e9a9108b023d59538ab8f0263))
-* **item:** add fromPartner ([85632f2](https://github.com/Pocket/web-client/commit/85632f21c4f6eb9f30adf3074c9366d2e2105591))
-* **item:** default to false for authors ([b0b55a9](https://github.com/Pocket/web-client/commit/b0b55a97797120a54b9f0337a7b9524a60e4db94))
-* **item:** no item pass to frompartner function ([6ef69ee](https://github.com/Pocket/web-client/commit/6ef69eebd2742a9f4fce2190e8c8981b6950865e))
-* **item:** recently tagged items ([a281e41](https://github.com/Pocket/web-client/commit/a281e4173b8d12ebfdfe06aea5eb0d9afe1fcc79))
-* **item:** rectify inequities in the item render ([9289d44](https://github.com/Pocket/web-client/commit/9289d44251c7dbf6411fbaec2bd694c5c446f5c0))
-* **item:** refactor share for new item shape ([2cdf712](https://github.com/Pocket/web-client/commit/2cdf712ec2352ae5e1db97a96fc7fad1001118b9))
-* **items:** profile and tags ([4c0ecf9](https://github.com/Pocket/web-client/commit/4c0ecf910ebfea216dd9ec31b8822a14af13afb9))
-* **items:** update item card expectations ([e81b0d6](https://github.com/Pocket/web-client/commit/e81b0d6311fa0887827b2dc4c4ea2f0ef439457c))
-* **item:** update discover/reccit card/actions ([cf1b8cb](https://github.com/Pocket/web-client/commit/cf1b8cb30d98a40e0e1db42bc3f0d6101a23e295))
-* **item:** update item expectation propegation ([65f078e](https://github.com/Pocket/web-client/commit/65f078e0df0412d3b4959ebedc5624d043feb733))
-* **my-list:** moderinze sort/filter functions ([345816f](https://github.com/Pocket/web-client/commit/345816fd00b584259d9aa47a30778454728d2377))
-* **my-list:** use new derivers for list items ([421689c](https://github.com/Pocket/web-client/commit/421689c466d0b59031e4eca32e94e0191e42a88a))
-* **slate gql:** alias analytics names ([5fd11c9](https://github.com/Pocket/web-client/commit/5fd11c9dd529b4823832285466ca97bb2858509c))
-* **topic:** use new deriver for topic pages ([3d3c1ef](https://github.com/Pocket/web-client/commit/3d3c1efea7e56744659872af8da72d9135d28af3))
+* Revert "refactor(graphql): add/use item fragment" ([7e4bd3e](https://github.com/Pocket/web-client/commit/7e4bd3e24e44ee66e285e5dded5be02e0248e6aa))
+* Revert "fix(collection): use new deriver for stories" ([21c6d49](https://github.com/Pocket/web-client/commit/21c6d495d3488093e39c67e0496b95561ae887b9))
+* Revert "fix(collections): use new deriver for pages" ([ad9f89c](https://github.com/Pocket/web-client/commit/ad9f89c822c4046bf986a83dba3f03b27f00e642))
+* Revert "fix(discover): use new deriver for recs" ([58c1b79](https://github.com/Pocket/web-client/commit/58c1b79dfecc5683f75b5d5f6b203751af85dda5))
+* Revert "fix(slate gql): alias analytics names" ([7760171](https://github.com/Pocket/web-client/commit/7760171d6a7b5ee0829ff63db007299f30f4c636))
+* Revert "fix(home): derive items with new derivers" ([ca0c78b](https://github.com/Pocket/web-client/commit/ca0c78b49bcc80aa0e2f2c9025003a9c4771cb6c))
+* Revert "fix(topic): use new deriver for topic pages" ([8a7f4b1](https://github.com/Pocket/web-client/commit/8a7f4b12a1e17dbd712b73d9a47851fd46a60dce))
+* Revert "fix(my-list): moderinze sort/filter functions" ([c457e1d](https://github.com/Pocket/web-client/commit/c457e1d3502f5d5d8c03b42d42eec6547a8d7d62))
+* Revert "fix(my-list): use new derivers for list items" ([afc4c4b](https://github.com/Pocket/web-client/commit/afc4c4baca345212018b6788ea011422b5794db5))
+* Revert "chore(derivers): remove old derivers" ([074f50f](https://github.com/Pocket/web-client/commit/074f50fae78b97dbeb9f63bfbb34fd7395be993a))
+* Revert "fix(card): don't pass item data" ([26158f4](https://github.com/Pocket/web-client/commit/26158f40d2b0f0620e25f8a92052b3ec7ceac713))
+* Revert "fix(items): update item card expectations" ([ed1c6a3](https://github.com/Pocket/web-client/commit/ed1c6a325e25aba0cfc3cd10f0c83b00d4277bc1))
+* Revert "fix(item): add fromPartner" ([8ca0bf3](https://github.com/Pocket/web-client/commit/8ca0bf3620dde4bcf6afe9215cba026114b49e7b))
+* Revert "fix(item): add annotations" ([fd768e0](https://github.com/Pocket/web-client/commit/fd768e0b762dfc4c188e84fe2019f124cc3405eb))
+* Revert "fix(item): update discover/reccit card/actions" ([e01cbeb](https://github.com/Pocket/web-client/commit/e01cbeb1d43f055ecca5a3229b397ea9327b022f))
+* Revert "fix(item): no item pass to frompartner function" ([fe29ff5](https://github.com/Pocket/web-client/commit/fe29ff5aefcc0e01ba9cd98c9be499bb7d85c301))
+* Revert "fix(item): rectify inequities in the item render" ([dfe511f](https://github.com/Pocket/web-client/commit/dfe511f05472e1d59aca5e4e43e33e538f290dc5))
+* Revert "test(item): updating snap shots to use new deriver" ([b7e55d4](https://github.com/Pocket/web-client/commit/b7e55d44e8a238c3ed9127a5fd41bb2bf802be91))
+* Revert "fix(item): default to false for authors" ([8324dca](https://github.com/Pocket/web-client/commit/8324dca223bdbd7688cdaffce53cf3532b278c82))
+* Revert "refactor(card): adding props" ([98bf4e9](https://github.com/Pocket/web-client/commit/98bf4e98ca9315c6f8d46f4535cb04aa2633dfbe))
+* Revert "chore(partner overline): auto formatting" ([2bcc829](https://github.com/Pocket/web-client/commit/2bcc8292dc2e1f49dee8abde0bd26c6a0cbc525d))
+* Revert "refactor(stories): adding item action stories" ([bb6af86](https://github.com/Pocket/web-client/commit/bb6af86f3b1be4cd9af4f447183b6db53111563e))
+* Revert "refactor(storybook): adding next api mock data" ([39d9bf3](https://github.com/Pocket/web-client/commit/39d9bf302394f86c34d0ddc97ca6641eb3e2a813))
+* Revert "test(stories): updating list stories" ([9de54f0](https://github.com/Pocket/web-client/commit/9de54f0a365b653869ae996af32502e03733eddc))
+* Revert "test(stories): updating card story" ([1a1a7f6](https://github.com/Pocket/web-client/commit/1a1a7f6fc8cbe2b60bd6f905a99ae25e8deb9549))
+* Revert "fix(item tags): adjust format for display" ([4624f0d](https://github.com/Pocket/web-client/commit/4624f0d586fdfb5c77a3de71b1d3c809952b5ca3))
+* Revert "fix(items): profile and tags" ([9e11683](https://github.com/Pocket/web-client/commit/9e116834edc1fe1cbc315031c5ba75894d7d9cf6))
+* Revert "test(item): add profile item" ([b12643f](https://github.com/Pocket/web-client/commit/b12643f7cb461db93d068d9737db37e10b6bb573))
+* Revert "fix(item): refactor share for new item shape" ([fe175c7](https://github.com/Pocket/web-client/commit/fe175c76c8c671a64c836d96ed4f8265401fc4b9))
+* Revert "fix(item): recently tagged items" ([31a3a36](https://github.com/Pocket/web-client/commit/31a3a36978ed89189dea479a134c21c4e171fc60))
+* Revert "fix(home): get correct slate meta [FRONT-1510]" ([ded2482](https://github.com/Pocket/web-client/commit/ded2482d18e3056e88f6122ed790aa16d2c45d58))
+* Revert "fix(collections): use deriver for takeover content" ([1b275f8](https://github.com/Pocket/web-client/commit/1b275f84f1371aba3a876785a15e938f339b53b0))
+* Revert "fix(item): update item expectation propegation" ([b39ae73](https://github.com/Pocket/web-client/commit/b39ae73452fa88938cd35208a85bda2e640fe8c6))
+* Revert "fix(item): add collection data to fragment" ([4039a5b](https://github.com/Pocket/web-client/commit/4039a5b10d91b61ea5a479745fda568144e1594b))
+* Revert "test(item): update snapshots for non double encode" ([627d643](https://github.com/Pocket/web-client/commit/627d643b4c6f65a11b2c09b042976ce4fc2afe52))
+* Revert "test(items): update snapshot to reflect cache function" ([6dc40ba](https://github.com/Pocket/web-client/commit/6dc40baad7bc76a1b572f274b7ee86dd5996620e))
+* Revert "chore(release): 1.28.15 [skip ci]" ([fa14db5](https://github.com/Pocket/web-client/commit/fa14db5bf47b5c6002d58b0c6f8e1359f37ec85f))
+* Revert "chore(release): 1.28.16 [skip ci]" ([701cd82](https://github.com/Pocket/web-client/commit/701cd823837461d6add79e9fb52f1cc453a838c9))
+* Revert "chore(dependencies): updating safe dependencies" ([f84e10b](https://github.com/Pocket/web-client/commit/f84e10b93fe45839a7485f3b62d04aacebf64e36))
+* Revert "chore(dependencies): update semi-safe dependencies" ([0f9fc9c](https://github.com/Pocket/web-client/commit/0f9fc9cf07055910b77b3f96da40c8c2013857a9))
+* Revert "chore(dependency): update eslint/jsdom" ([cd13f46](https://github.com/Pocket/web-client/commit/cd13f46bcbdc8ca8ed2ada2b01dca5db5ccc49a7))
+* Revert "chore(dependencies): update storybook" ([fc8615b](https://github.com/Pocket/web-client/commit/fc8615bb00d0997c34379b05c0ff3ed422501bad))
+* Revert "feat(dependencies): upgrade nextjs  major version" ([725d71d](https://github.com/Pocket/web-client/commit/725d71db4e5b559b89a2a5ba06b806f19d308113))
+* Revert "chore(release): 1.29.0 [skip ci]" ([5a64cd3](https://github.com/Pocket/web-client/commit/5a64cd369771ff826ca76b6c3db46d23eb875652))
+* Revert "fix(reader): mark v3 reader item data as legacy" ([face0e4](https://github.com/Pocket/web-client/commit/face0e40130088c9101a2e4534c6d832f686a3d2))
+* Revert "fix(reader): update to itemId" ([07c3c87](https://github.com/Pocket/web-client/commit/07c3c870d9d69efb043a6d23b01ca5506bf12a33))
+* Revert "fix(reader): udpate header to use new item data" ([1e35c8c](https://github.com/Pocket/web-client/commit/1e35c8c2d3ef957c94267d5dd607adb4cf0539e9))
+* Revert "fix(reader): adding missing item_id shift" ([cc8da99](https://github.com/Pocket/web-client/commit/cc8da99b972f1ccb5aa4fe4f65cfa8b41fc44438))
+* Revert "chore(release): 1.29.1 [skip ci]" ([91f7592](https://github.com/Pocket/web-client/commit/91f759230114d76ad391d7561b86dca937dfaf34))
+* Revert "fix(tagging): adjust how we grab stored tags" ([d133555](https://github.com/Pocket/web-client/commit/d133555061610afd6714429eec21ad3ec862dc7e))
+* Revert "fix(tagging): adjust reconciler on tag action" ([c81db8b](https://github.com/Pocket/web-client/commit/c81db8b021c95bdeffe2592edd7577fe5a571571))
+* Revert "fix(tags): _untagged_ logic update" ([b4ae14d](https://github.com/Pocket/web-client/commit/b4ae14d9f7fbb37dd2190190c5b93f873b409117))
+* Revert "chore(release): 1.29.2 [skip ci]" ([004e9a9](https://github.com/Pocket/web-client/commit/004e9a908f8fc7b212a024d58a04564e96f9f3a1))
 
 ## [1.28.14](https://github.com/Pocket/web-client/compare/v1.28.13...v1.28.14) (2021-12-09)
 
