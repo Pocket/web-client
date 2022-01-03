@@ -24,7 +24,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ locale 
   if (!collections) return { props: { ...defaultProps, statusCode: 404 }, revalidate: 60 }
 
   // Since ssr will not wait for side effects to resolve this dispatch needs to be pure
-  dispatch(hydrateCollections({ ...collections }))
+  dispatch(hydrateCollections(collections))
 
   // end the saga
   dispatch(END)
