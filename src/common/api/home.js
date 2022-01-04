@@ -3,25 +3,27 @@ import { getRecIds, arrayToObject } from 'common/utilities'
 import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
 import { slateMeta } from 'common/slate-meta'
 
-export async function getHomeLineup({ id, recommendationCount = 5 }) {
+export async function getHomeLineup({ personalizedId, id, recommendationCount = 5 }) {
   return requestGQL({
     query: getSlateLineup,
-    variables: { id, recommendationCount, slateCount: 20 }
+    variables: { id: personalizedId, recommendationCount, slateCount: 20 }
   })
-    .then((response) => processLineup(response))
+    .then((response) => processLineup(response, personalizedId))
     .catch((error) => console.error(error))
 }
 
-function processLineup(response) {
+function processLineup(response, personalizedID) {
+  const isPersonalized = response?.data?.getSlateLineup.id === personalizedID
+
   const slateLineup = getRecIds(response?.data?.getSlateLineup)
   const slatesResponse = response?.data?.getSlateLineup.slates
   const itemsById = getRecsById(slatesResponse, slateLineup)
-  const slatesById = processSlates(slatesResponse)
+  const slatesById = processSlates(slatesResponse, isPersonalized)
 
   const generalSlates = Object.keys(slatesById).filter((id) => slatesById[id].type !== 'topic')
   const topicSlates = Object.keys(slatesById).filter((id) => slatesById[id].type === 'topic')
 
-  return { generalSlates, topicSlates, slatesById, itemsById, slateLineup }
+  return { generalSlates, topicSlates, slatesById, itemsById, slateLineup, isPersonalized }
 }
 
 function getRecsById(slates, slateLineup) {
@@ -32,9 +34,9 @@ function getRecsById(slates, slateLineup) {
   }, {})
 }
 
-function processSlates(slates) {
+function processSlates(slates, isPersonalized) {
   const slateWithIds = slates.map((slate) => {
-    const derivedSlate = deriveSlate(slate)
+    const derivedSlate = deriveSlate(slate, isPersonalized)
     return derivedSlate
       ? {
           ...derivedSlate,
