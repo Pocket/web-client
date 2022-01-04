@@ -41,7 +41,7 @@ import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getHomeLineup = (id) => ({ type: HOME_LINEUP_REQUEST, id })
+export const getHomeLineup = (id) => ({ type: HOME_LINEUP_REQUEST,  id}) //prettier-ignore
 export const getSimilarRecs = (id) => ({ type: HOME_SIMILAR_REC_REQUEST, id })
 export const saveSimilarRec = (id, url, position) => ({type: HOME_SIMILAR_REC_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const clearSimilarRecs = () => ({ type: HOME_SIMILAR_RECS_CLEAR })
