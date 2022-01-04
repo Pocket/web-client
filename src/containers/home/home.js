@@ -31,12 +31,18 @@ export const Home = ({ metaData }) => {
   const dispatch = useDispatch()
 
   const userStatus = useSelector((state) => state.user.user_status)
-  const featureState = useSelector((state) => state.features)
+  const featureState = useSelector((state) => state.features) || {}
   const generalSlates = useSelector((state) => state.home.generalSlates)
   const topicSlates = useSelector((state) => state.home.topicSlates)
+  const fallback = '249850f0-61c0-46f9-a16a-f0553c222800'
 
-  // Initialize data
-  useEffect(() => dispatch(getHomeLineup()), [dispatch])
+  const lineupFlag = featureState['home.lineup']
+  const lineupId = lineupFlag?.payload?.slateLineupId || fallback
+
+  useEffect(() => {
+    if (userStatus !== 'valid' || !lineupFlag) return
+    dispatch(getHomeLineup(lineupId))
+  }, [lineupFlag, lineupId, userStatus, dispatch])
 
   const flagsReady = featureState.flagsReady
   const shouldRender = userStatus !== 'pending' && flagsReady
@@ -65,7 +71,7 @@ export const Home = ({ metaData }) => {
       <ShareModal />
       <ArchiveModal />
       <FavoriteModal />
-      { generalSlates || topicSlates ? (
+      {generalSlates || topicSlates ? (
         <>
           <Onboarding type="home.flyaway.save" />
           <Onboarding type="home.flyaway.my-list" />

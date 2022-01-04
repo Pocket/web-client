@@ -41,7 +41,7 @@ import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getHomeLineup = () => ({ type: HOME_LINEUP_REQUEST })
+export const getHomeLineup = (id) => ({ type: HOME_LINEUP_REQUEST, id })
 export const getSimilarRecs = (id) => ({ type: HOME_SIMILAR_REC_REQUEST, id })
 export const saveSimilarRec = (id, url, position) => ({type: HOME_SIMILAR_REC_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const clearSimilarRecs = () => ({ type: HOME_SIMILAR_RECS_CLEAR })
@@ -63,8 +63,8 @@ const initialState = {
 export const homeReducers = (state = initialState, action) => {
   switch (action.type) {
     case HOME_LINEUP_SUCCESS: {
-      const { generalSlates, topicSlates, slatesById, isPersonalized } = action
-      return { ...state, generalSlates, topicSlates, slatesById, isPersonalized }
+      const { generalSlates, topicSlates, slatesById } = action
+      return { ...state, generalSlates, topicSlates, slatesById }
     }
 
     case HOME_SIMILAR_REC_REQUEST: {
@@ -133,9 +133,10 @@ export const homeSagas = [
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-function* homeLineupRequest() {
+function* homeLineupRequest(action) {
   try {
-    const data = yield call(fetchLineupData)
+    const { id } = action
+    const data = yield call(fetchLineupData, id)
     yield put({ type: HOME_LINEUP_SUCCESS, ...data })
   } catch (error) {
     console.warn(error)
@@ -253,16 +254,16 @@ export async function fetchMyListData(params) {
  * fetchLineupData
  * Make and async request the home lineup
  */
-export async function fetchLineupData() {
+export async function fetchLineupData(id) {
   try {
-    const response = await apiGetHomeLineup({})
+    const response = await apiGetHomeLineup({ id })
 
-    const { slatesById, itemsById, slateLineup, isPersonalized } = response
+    const { slatesById, itemsById, slateLineup } = response
     const { generalSlates, topicSlates } = response
 
     if (!generalSlates?.length || !slatesById || !itemsById) return {}
 
-    return { generalSlates, topicSlates, slatesById, itemsById, slateLineup, isPersonalized }
+    return { generalSlates, topicSlates, slatesById, itemsById, slateLineup }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.warn('home.state.lineup', error)
