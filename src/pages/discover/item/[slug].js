@@ -10,7 +10,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ query, res, req, locale }) => {
       const { dispatch, sagaTask } = store
-      const { slug } = query
+      const { slug, ...queryParams } = query
 
       // Hydrating initial state with an async request. This will block the
       // page from loading. Do this for SEO/crawler purposes
@@ -36,7 +36,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
       await sagaTask.toPromise()
 
       return {
-        props: { ...(await serverSideTranslations(locale, [...LOCALE_COMMON])), locale }
+        props: {
+          ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
+          locale,
+          queryParams
+        }
       }
     }
 )

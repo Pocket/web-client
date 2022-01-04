@@ -137,29 +137,33 @@ export default function Reader() {
   }
 
   const {
-    itemId,
+    item_id,
     authors,
     title,
-    externalUrl,
-    timeToRead,
+    open_url,
+    read_time,
+    syndicated,
     publisher,
-    hasVideo,
+    has_video,
     videos,
     images,
-    isFavorite,
-    isArchived,
-    analyticsData
+    status
   } = articleData
 
   const tagList = tags ? Object.keys(tags) : []
+  const favStatus = getBool(favorite)
+  const archiveStatus = getBool(status)
 
   const headerData = {
     authors,
     title,
-    externalUrl,
+    open_url,
     publisher,
+    syndicated,
     tags: tagList,
-    timeToRead
+    has_video,
+    read_time,
+    videos
   }
 
   const contentData = {
@@ -209,16 +213,16 @@ export default function Reader() {
     setHighlightList(compiled)
   }
 
-  const analyticsInfo = { ...analyticsData, id: itemId }
+  const analyticsData = { id: item_id, url: open_url }
 
   const addAnnotation = () => {
     if (annotations.length === 3 && !isPremium) {
       setAnnotationLimitModal(true)
     } else {
-      dispatch(sendSnowplowEvent('reader.add-highlight', analyticsInfo))
+      dispatch(sendSnowplowEvent('reader.add-highlight', analyticsData))
       dispatch(
         saveAnnotation({
-          itemId,
+          item_id,
           patch: requestAnnotationPatch(highlight),
           quote: highlight.toString()
         })
@@ -227,25 +231,25 @@ export default function Reader() {
   }
 
   const removeAnnotation = (annotation_id) => {
-    dispatch(sendSnowplowEvent('reader.remove-highlight', analyticsInfo))
+    dispatch(sendSnowplowEvent('reader.remove-highlight', analyticsData))
     dispatch(
       deleteAnnotation({
-        itemId,
+        item_id,
         annotation_id
       })
     )
   }
 
   const itemDelete = () => {
-    dispatch(sendSnowplowEvent('reader.delete', analyticsInfo))
+    dispatch(sendSnowplowEvent('reader.delete', analyticsData))
     dispatch(itemsDeleteAction([{ id }]))
   }
   const itemTag = () => {
-    dispatch(sendSnowplowEvent('reader.tag', analyticsInfo))
+    dispatch(sendSnowplowEvent('reader.tag', analyticsData))
     dispatch(itemsTagAction([{ id }]))
   }
   const itemShare = ({ quote }) => {
-    dispatch(sendSnowplowEvent('reader.share', analyticsInfo))
+    dispatch(sendSnowplowEvent('reader.share', analyticsData))
     dispatch(itemsShareAction({ id, quote }))
   }
   const handleImpression = (identifier) => {
@@ -253,26 +257,26 @@ export default function Reader() {
   }
 
   const archiveItem = () => {
-    const archiveAction = isArchived ? itemsUnArchiveAction : itemsArchiveAction
-    const identifier = isArchived ? 'reader.un-archive' : 'reader.archive'
-    dispatch(sendSnowplowEvent(identifier, analyticsInfo))
+    const archiveAction = archiveStatus ? itemsUnArchiveAction : itemsArchiveAction
+    const identifier = archiveStatus ? 'reader.un-archive' : 'reader.archive'
+    dispatch(sendSnowplowEvent(identifier, analyticsData))
     dispatch(archiveAction([{ id }]))
   }
 
   const toggleFavorite = () => {
-    const favoriteAction = isFavorite ? itemsUnFavoriteAction : itemsFavoriteAction
-    const identifier = isFavorite ? 'reader.un-favorite' : 'reader.favorite'
-    dispatch(sendSnowplowEvent(identifier, analyticsInfo))
+    const favoriteAction = favStatus ? itemsUnFavoriteAction : itemsFavoriteAction
+    const identifier = favStatus ? 'reader.un-favorite' : 'reader.favorite'
+    dispatch(sendSnowplowEvent(identifier, analyticsData))
     dispatch(favoriteAction([{ id }]))
   }
 
   const externalLinkClick = (href) => {
-    const data = { id: itemId, url: href }
+    const data = { id: item_id, url: href }
     dispatch(sendSnowplowEvent('reader.external-link', data))
   }
 
   const viewOriginalEvent = () => {
-    dispatch(sendSnowplowEvent('reader.view-original', analyticsInfo))
+    dispatch(sendSnowplowEvent('reader.view-original', analyticsData))
   }
 
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
@@ -291,8 +295,8 @@ export default function Reader() {
         toggleFavorite={toggleFavorite}
         archiveItem={archiveItem}
         displaySettings={{ columnWidth, lineHeight, fontSize, fontFamily }}
-        favorite={isFavorite}
-        archive={isArchived}
+        favorite={favStatus}
+        archive={archiveStatus}
         onVisible={handleImpression}
         sideBarOpen={sideBarOpen}
         colorMode={colorMode}
@@ -319,7 +323,7 @@ export default function Reader() {
             ReaderFonts,
             GoogleFonts,
             'reader',
-            hasVideo === 'IS_VIDEO' && 'is-video'
+            has_video === '2' && 'is-video'
           )}
           style={customStyles}>
           <ItemHeader viewOriginalEvent={viewOriginalEvent} {...headerData} />
@@ -352,7 +356,7 @@ export default function Reader() {
           ) : null}
         </article>
       </main>
-      {articleContent ? <Recommendations id={itemId} /> : null}
+      {articleContent ? <Recommendations id={item_id} /> : null}
       {!isPremium && articleContent ? (
         <BottomUpsell maxWidth={customStyles.maxWidth} onVisible={handleImpression} />
       ) : null}

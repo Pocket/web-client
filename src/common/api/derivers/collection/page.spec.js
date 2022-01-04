@@ -1,4 +1,6 @@
 import { deriveCollection } from 'common/api/derivers/item'
+import { analyticsActions } from 'connectors/snowplow/actions'
+import { validateSnowplowExpectations } from 'connectors/snowplow/snowplow.state'
 
 export const collectionFromClientApi = {
   externalId: 'f856e771-13c9-42b6-b483-6670c4080c62',
@@ -92,14 +94,14 @@ export const partnerCollectionFromClientApi = {
 
 describe('Collection — Page', () => {
   const expectedSaveUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021' //prettier-ignore
-  const expectedExternalUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021?utm_source=pocket_collection' //prettier-ignore
+  const expectedExternalUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021?utm_source=pocket_mylist' //prettier-ignore
   const expectedReadUrl = '/collections/making-sense-of-cybersecurity-in-2021'
   const expectedPermanentUrl = false
   const expectedAnalyticsUrl = 'https://getpocket.com/collections/making-sense-of-cybersecurity-in-2021' //prettier-ignore
 
-  it('should derive clientAPI as expected', () => {
-    const item = deriveCollection(collectionFromClientApi)
+  const item = deriveCollection(collectionFromClientApi)
 
+  it('should derive clientAPI as expected', () => {
     // User driven data points
     expect(item._createdAt).toBeFalsy()
     expect(item._updatedAt).toBeFalsy()
@@ -121,7 +123,6 @@ describe('Collection — Page', () => {
     expect(item.hasVideo).toBeFalsy()
     expect(item.hasImage).toBeFalsy()
     expect(item.language).toBe('en')
-    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Making Sense of Cybersecurity in 2021')
@@ -146,8 +147,39 @@ describe('Collection — Page', () => {
           'https://s3.amazonaws.com/pocket-collectionapi-prod-images/51ebddac-b680-4162-bf8c-78a48dbd4a61.png'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
+    expect(item.analyticsData.id).toBeFalsy()
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
+  })
+
+  describe('Snowplow', () => {
+    const whitelist = /^collection./
+    const blacklist = [
+      'collection.story.impression',
+      'collection.story.open',
+      'collection.story.save'
+    ]
+
+    const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))
+    const relevantActions = sectionActions.filter(
+      (action) =>
+        analyticsActions[action].entityTypes.includes('content') && !blacklist.includes(action)
+    )
+
+    relevantActions.map((identifier) => {
+      it(`${identifier} should be valid`, () => {
+        const { expects } = analyticsActions[identifier]
+        const isValid = validateSnowplowExpectations({
+          identifier,
+          expects,
+          data: {
+            position: 0,
+            destination: 'external',
+            value: 'save-story-top', //'Fired when a user clicks the `Save` button, value is one of three: save-story-top, save-story-side, or save-story-bottom'
+            ...item.analyticsData
+          }
+        })
+        expect(isValid).toBeTruthy()
+      })
     })
   })
 })

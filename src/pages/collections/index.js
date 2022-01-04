@@ -2,7 +2,6 @@ import Collections from 'containers/collections/collections'
 
 import { fetchCollections } from 'containers/collections/collections.state'
 import { hydrateCollections } from 'containers/collections/collections.state'
-import { fetchArrayOfCollectionSlugs } from 'containers/collections/collections.state'
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
@@ -21,24 +20,11 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ locale 
   // page from loading. Do this for SEO/crawler purposes
   const collections = await fetchCollections(locale)
 
-  // !! TEMPORARILY SUPERSEDE THE HERO WITH SPECIFIC COLLECTIONS
-  const heroCollectionSlugs = [
-    'pockets-best-of-2021',
-    'mood-of-the-year-languishing',
-    'what-we-learned-in-2021',
-    '12-stories-that-defined-2021',
-    'pockets-top-2021-authors-articles-we-loved-this-year'
-  ]
-  const heroCollections = await fetchArrayOfCollectionSlugs(heroCollectionSlugs)
-
-  //De-Duplicate the collections
-  heroCollectionSlugs.forEach((key) => delete collections[key])
-
   // No article found
   if (!collections) return { props: { ...defaultProps, statusCode: 404 }, revalidate: 60 }
 
   // Since ssr will not wait for side effects to resolve this dispatch needs to be pure
-  dispatch(hydrateCollections({ ...heroCollections, ...collections }))
+  dispatch(hydrateCollections(collections))
 
   // end the saga
   dispatch(END)

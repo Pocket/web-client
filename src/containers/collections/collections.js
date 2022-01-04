@@ -4,7 +4,6 @@ import { BASE_URL } from 'common/constants'
 import { useSelector } from 'react-redux'
 
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
-import { CallOutEOYHome } from 'components/call-out/call-out-eoy-home'
 import { CardPageHeader } from 'components/headers/discover-header'
 import { ItemCard } from 'connectors/item-card/collection/collection-card'
 import { Lockup } from 'components/items-layout/list-lockup'
@@ -35,12 +34,11 @@ export default function Collections({ locale }) {
 
   const showEoyCollections = locale !== 'de'
   const startingOffset = showEoyCollections ? 0 : 5
-  const useHero = true
-  const SignUpCallout = locale === 'en' ? CallOutEOYHome : CallOutBuildHome
+  const useHero = false
 
   return (
     <Layout title={metaData.title} metaData={metaData} canonical={canonical} forceWebView={true}>
-      {!isAuthenticated && shouldRender ? <SignUpCallout source="collections" /> : null}
+      {!isAuthenticated && shouldRender ? <CallOutBuildHome source="collections" /> : null}
 
       <CardPageHeader title={metaData.title} subHeading={metaData.description} />
 

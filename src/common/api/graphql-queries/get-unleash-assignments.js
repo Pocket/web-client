@@ -6,13 +6,18 @@ const getUnleashAssignments = gql`
     $accountCreatedAt: String
     $locale: String
     $appName: String
+    $recItUserProfile: RecItUserProfile
   ) {
     getUnleashAssignments(
       context: {
         sessionId: $sessionId
         userId: $userId
         appName: $appName
-        properties: { accountCreatedAt: $accountCreatedAt, locale: $locale }
+        properties: {
+          accountCreatedAt: $accountCreatedAt
+          locale: $locale
+          recItUserProfile: $recItUserProfile
+        }
       }
     ) {
       assignments {

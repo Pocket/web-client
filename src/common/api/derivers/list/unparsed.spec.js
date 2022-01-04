@@ -1,4 +1,6 @@
 import { deriveListItem } from 'common/api/derivers/item'
+import { analyticsActions } from 'connectors/snowplow/actions'
+import { validateSnowplowExpectations } from 'connectors/snowplow/snowplow.state'
 
 export const savedUnparsedFromV3 = {
   item_id: '3117582481',
@@ -133,7 +135,6 @@ describe('My List - Unparsed', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('en')
-    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Blausee')
@@ -155,9 +156,8 @@ describe('My List - Unparsed', () => {
         url: ''
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('3117582481')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 
   it('should derive clientAPI as expected', () => {
@@ -184,7 +184,6 @@ describe('My List - Unparsed', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('en')
-    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Blausee')
@@ -206,8 +205,35 @@ describe('My List - Unparsed', () => {
         url: ''
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
+    expect(item.analyticsData.id).toBe('3117582481')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
+  })
+
+  describe('Snowplow', () => {
+    const item = deriveListItem(savedUnparsedFromClientApi)
+    const whitelist = /^my-list./
+    const blacklist = []
+
+    const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))
+    const relevantActions = sectionActions.filter(
+      (action) =>
+        analyticsActions[action].entityTypes.includes('content') && !blacklist.includes(action)
+    )
+
+    relevantActions.map((identifier) => {
+      it(`${identifier} should be valid`, () => {
+        const { expects } = analyticsActions[identifier]
+        const isValid = validateSnowplowExpectations({
+          identifier,
+          expects,
+          data: {
+            position: 0,
+            destination: 'external',
+            ...item.analyticsData
+          }
+        })
+        expect(isValid).toBeTruthy()
+      })
     })
   })
 })

@@ -1,19 +1,23 @@
 import { Card as CardComponent } from 'components/item-card/card'
-import { deriveRecommendation } from 'common/api/derivers/item'
+import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
+import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
 import { OffsetList as OffsetComponent } from './list-offset'
-import discoverResponse from 'mocks/slateLineupResponse.json'
+import myListResponse from 'mock/my-list.json'
+import discoverResponse from 'mock/discover.json'
 import { arrayToObject } from 'common/utilities'
 
-const discoverItems = discoverResponse?.data?.getSlateLineup?.slates[0].recommendations?.map(
-  (item) => {
-    let derivedItem = deriveRecommendation(item)
-    derivedItem.story_name = `Discover - ${item.title}`
-    return derivedItem
-  }
-)
+const discoverItems = deriveDiscoverItems(discoverResponse.feed).map((item) => {
+  item.story_name = `Discover - ${item.title}`
+  return item
+})
 
-const itemsToDisplay = discoverItems
-const itemsById = arrayToObject(itemsToDisplay, 'itemId')
+const myListItems = deriveMyListItems(Object.values(myListResponse.list)).map((item) => {
+  item.story_name = `My List - ${item.title}`
+  return item
+})
+
+const itemsToDisplay = [...myListItems, ...discoverItems]
+const itemsById = arrayToObject(itemsToDisplay, 'item_id')
 const items = Object.keys(itemsById)
 
 export default {
@@ -22,35 +26,11 @@ export default {
 }
 
 const ItemCard = ({ id, position, ...rest }) => {
-  console.log(itemsById[id])
-  const item = itemsById[id]
-  if (!item) return <div>No card to display</div>
-
-  const { itemId, readUrl, externalUrl, openExternal } = item
-  const { tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item
-  const openUrl = readUrl && !openExternal ? readUrl : externalUrl
-  const itemImage = item?.noImage ? '' : item?.thumbnail
-
-  return (
-    <CardComponent
-      key={id}
-      itemId={itemId}
-      externalUrl={externalUrl}
-      tags={tags}
-      title={title}
-      itemImage={itemImage}
-      publisher={publisher}
-      excerpt={excerpt}
-      timeToRead={timeToRead}
-      isSyndicated={isSyndicated}
-      fromPartner={fromPartner}
-      openUrl={openUrl}
-      position={position}
-      {...rest}
-    />
-  )
+  return <CardComponent key={id} item={itemsById[id]} position={position} {...rest} />
 }
 
 export const OffsetList = () => {
-  return <OffsetComponent items={items} cardShape="wide" ItemCard={ItemCard} border={true} />
+  return (
+    <OffsetComponent items={items} offset={5} cardShape="wide" ItemCard={ItemCard} border={true} />
+  )
 }

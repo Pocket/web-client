@@ -15,39 +15,44 @@ export function ActionsFeed({ id, position }) {
   const isSelf = useSelector((state) => state.user.user_id === uid)
   const isAuthenticated = useSelector((state) => state.user.auth)
   const item = useSelector((state) => state.profileItemsByIds.itemsById[id])
-  if (!item) return null
 
-  const { saveUrl, saveStatus, readUrl, externalUrl, openExternal } = item
-  const { post, analyticsData } = item
+  if (!item) return null
+  const { save_url, save_status, open_url, openExternal, post } = item
+  const analyticsData = {
+    id,
+    url: save_url,
+    position,
+    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external'
+  }
 
   // Prep save action
   const onSave = () => {
-    const data = { id, position, ...item?.analyticsData }
-    dispatch(sendSnowplowEvent('profile.feed.save', data))
-    dispatch(saveRecommendedItem(id, saveUrl, position))
-  }
-
-  // Open action
-  const url = readUrl && !openExternal ? readUrl : externalUrl
-  const onOpen = () => {
-    const data = { ...analyticsData, url, destination: 'internal' }
-    dispatch(sendSnowplowEvent('profile.feed.open', data))
+    dispatch(sendSnowplowEvent('profile.feed.save', analyticsData))
+    dispatch(saveRecommendedItem(id, save_url, position))
   }
 
   const onDelete = () => {
     dispatch(sendSnowplowEvent('profile.feed.delete', analyticsData))
     dispatch(deleteRecommendedItem(post?.post_id, id))
   }
+
+  // Open action
+  const url = openExternal ? open_url : `/read/${id}`
+  const onOpen = () => {
+    const data = { ...analyticsData, url }
+    dispatch(sendSnowplowEvent('profile.feed.open', data))
+  }
+
   return item ? (
     <div className={`${itemActionStyle} actions`}>
       <SaveToPocket
-        allowRead={false}
+        allowRead={true}
         url={url}
         onOpen={onOpen}
         openExternal={openExternal}
         saveAction={onSave}
         isAuthenticated={isAuthenticated}
-        saveStatus={saveStatus}
+        saveStatus={save_status}
         id={id}
       />
       {isSelf ? (

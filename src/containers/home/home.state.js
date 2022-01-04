@@ -3,9 +3,8 @@ import { getMyList } from 'common/api/my-list'
 import { getHomeLineup as apiGetHomeLineup } from 'common/api/home'
 import { saveItem } from 'common/api/saveItem'
 import { removeItem } from 'common/api/removeItem'
-
+import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { arrayToObject } from 'common/utilities'
-import { deriveListItem } from 'common/api/derivers/item'
 
 import { HOME_SAVE_REQUEST } from 'actions'
 import { HOME_SAVE_SUCCESS } from 'actions'
@@ -42,7 +41,7 @@ import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getHomeLineup = () => ({ type: HOME_LINEUP_REQUEST })
+export const getHomeLineup = (id) => ({ type: HOME_LINEUP_REQUEST, id })
 export const getSimilarRecs = (id) => ({ type: HOME_SIMILAR_REC_REQUEST, id })
 export const saveSimilarRec = (id, url, position) => ({type: HOME_SIMILAR_REC_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const clearSimilarRecs = () => ({ type: HOME_SIMILAR_RECS_CLEAR })
@@ -64,8 +63,8 @@ const initialState = {
 export const homeReducers = (state = initialState, action) => {
   switch (action.type) {
     case HOME_LINEUP_SUCCESS: {
-      const { generalSlates, topicSlates, slatesById, isPersonalized } = action
-      return { ...state, generalSlates, topicSlates, slatesById, isPersonalized }
+      const { generalSlates, topicSlates, slatesById } = action
+      return { ...state, generalSlates, topicSlates, slatesById }
     }
 
     case HOME_SIMILAR_REC_REQUEST: {
@@ -113,10 +112,10 @@ export const homeReducers = (state = initialState, action) => {
  * @param {string} id Item id to operate on
  * @param {string} save_status Value to update save status to
  */
-export function updateSaveStatus(state, id, saveStatus) {
+export function updateSaveStatus(state, id, save_status) {
   const itemsById = state.itemsById
   const item = itemsById[id]
-  return { ...itemsById, [id]: { ...item, saveStatus } }
+  return { ...itemsById, [id]: { ...item, save_status } }
 }
 
 /** SAGAS :: WATCHERS
@@ -134,9 +133,10 @@ export const homeSagas = [
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-function* homeLineupRequest() {
+function* homeLineupRequest(action) {
   try {
-    const data = yield call(fetchLineupData)
+    const { id } = action
+    const data = yield call(fetchLineupData, id)
     yield put({ type: HOME_LINEUP_SUCCESS, ...data })
   } catch (error) {
     console.warn(error)
@@ -175,12 +175,10 @@ function* homeSaveRequest({ url, id, position }) {
     const response = yield saveItem(url, analytics)
     if (response?.status !== 1) throw new Error('Unable to save')
 
-    const derivedItems = yield Object.values(response.action_results).map((item) =>
-      deriveListItem(item, true)
-    )
+    const derivedItems = yield deriveMyListItems(Object.values(response.action_results))
 
-    const items = derivedItems.map((item) => item.resolvedId)
-    const itemsById = arrayToObject(derivedItems, 'resolvedId')
+    const items = derivedItems.map((item) => item.resolved_id)
+    const itemsById = arrayToObject(derivedItems, 'resolved_id')
 
     yield put({ type: HOME_SAVE_SUCCESS, id, items, itemsById })
     yield put({ type: ITEMS_ADD_SUCCESS })
@@ -212,12 +210,10 @@ function* homeSimilarRecSaveRequest({ url, id, position }) {
     const response = yield saveItem(url, analytics)
     if (response?.status !== 1) throw new Error('Unable to save')
 
-    const derivedItems = Object.values(response.action_results).map((item) =>
-      deriveListItem(item, true)
-    )
+    const derivedItems = yield deriveMyListItems(Object.values(response.action_results))
 
-    const items = derivedItems.map((item) => item.resolvedId)
-    const itemsById = arrayToObject(derivedItems, 'resolvedId')
+    const items = derivedItems.map((item) => item.resolved_id)
+    const itemsById = arrayToObject(derivedItems, 'resolved_id')
 
     yield put({ type: HOME_SIMILAR_REC_SAVE_SUCCESS, id, items, itemsById })
     yield put({ type: ITEMS_ADD_SUCCESS })
@@ -241,11 +237,11 @@ export async function fetchMyListData(params) {
 
     const total = response.total
 
-    const derivedItems = Object.values(response.list).map((item) => deriveListItem(item, true))
+    const derivedItems = await deriveMyListItems(Object.values(response.list))
 
-    const items = derivedItems.map((item) => item.itemId)
+    const items = derivedItems.sort((a, b) => a.sort_id - b.sort_id).map((item) => item.resolved_id)
 
-    const itemsById = arrayToObject(derivedItems, 'itemId')
+    const itemsById = arrayToObject(derivedItems, 'resolved_id')
 
     return { items, itemsById, total }
   } catch (error) {
@@ -258,16 +254,16 @@ export async function fetchMyListData(params) {
  * fetchLineupData
  * Make and async request the home lineup
  */
-export async function fetchLineupData() {
+export async function fetchLineupData(id) {
   try {
-    const response = await apiGetHomeLineup({})
+    const response = await apiGetHomeLineup({ id })
 
-    const { slatesById, itemsById, slateLineup, isPersonalized } = response
+    const { slatesById, itemsById, slateLineup } = response
     const { generalSlates, topicSlates } = response
 
     if (!generalSlates?.length || !slatesById || !itemsById) return {}
 
-    return { generalSlates, topicSlates, slatesById, itemsById, slateLineup, isPersonalized }
+    return { generalSlates, topicSlates, slatesById, itemsById, slateLineup }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.warn('home.state.lineup', error)

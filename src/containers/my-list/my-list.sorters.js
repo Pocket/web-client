@@ -1,25 +1,29 @@
 export function sortByNewest(itemA, itemB) {
-  return itemB._createdAt - itemA._createdAt
+  return itemB.time_added - itemA.time_added
 }
 
 export function sortByOldest(itemA, itemB) {
-  return itemA._createdAt - itemB._createdAt
+  return itemA.time_added - itemB.time_added
 }
 
 export function sortByNewestArchive(itemA, itemB) {
-  return itemB.archivedAt - itemA.archivedAt
+  return itemB.time_read - itemA.time_read
 }
 
 export function sortByOldestArchive(itemA, itemB) {
-  return itemA.archivedAt - itemB.archivedAt
+  return itemA.time_read - itemB.time_read
 }
 
 export function sortByNewestFavorite(itemA, itemB) {
-  return itemB.favoritedAt - itemA.favoritedAt
+  return itemB.time_favorited - itemA.time_favorited
 }
 
 export function sortByOldestFavorite(itemA, itemB) {
-  return itemA.favoritedAt - itemB.favoritedAt
+  return itemA.time_favorited - itemB.time_favorited
+}
+
+export function sortByOrder(itemA, itemB) {
+  return itemA.sort_id - itemB.sort_id
 }
 
 export function sortSelector(type, direction) {

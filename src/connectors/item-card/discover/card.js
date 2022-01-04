@@ -19,15 +19,31 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
   const item = useSelector((state) => state.discoverItemsById[id])
   if (!item) return null
 
-  const { saveStatus, itemId, readUrl, externalUrl, openExternal } = item
+  const {
+    save_status,
+    item_id,
+    resolved_url,
+    open_url,
+    openExternal,
+    recommendationId,
+    slateLineup,
+    slate
+  } = item
 
-  const openUrl = readUrl && !openExternal ? readUrl : externalUrl
+  const openUrl = save_status === 'saved' && !openExternal ? `/read/${item_id}` : open_url
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
     id,
+    url: resolved_url,
     position,
-    destination: saveStatus === 'saved' && !openExternal ? 'internal' : 'external',
-    ...item?.analyticsData
+    destination: save_status === 'saved' && !openExternal ? 'internal' : 'external',
+    recommendationId,
+    slateLineupId: slateLineup?.id,
+    slateLineupRequestId: slateLineup?.requestId,
+    slateLineupExperiment: slateLineup?.experimentId,
+    slateId: slate?.id,
+    slateRequestId: slate?.requestId,
+    slateExperiment: slate?.experimentId
   }
 
   /**
@@ -39,23 +55,9 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
     !impressionFired && inView && analyticsInitialized ? onImpression() : null
   const onOpen = () => dispatch(sendSnowplowEvent('discover.open', analyticsData))
 
-  /** ITEM DETAILS
-  --------------------------------------------------------------- */
-  const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
-
   return (
     <Card
-      itemId={itemId}
-      externalUrl={externalUrl}
-      tags={tags}
-      title={title}
-      itemImage={itemImage}
-      publisher={publisher}
-      excerpt={excerpt}
-      timeToRead={timeToRead}
-      isSyndicated={isSyndicated}
-      fromPartner={fromPartner}
+      item={item}
       onImageFail={onImageFail}
       position={position}
       className={className}

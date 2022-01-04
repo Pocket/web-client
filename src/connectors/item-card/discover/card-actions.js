@@ -19,18 +19,37 @@ export function ActionsDiscover({ id, position }) {
   const item = useSelector((state) => state.discoverItemsById[id])
 
   if (!item) return null
-  const { saveStatus, saveUrl, externalUrl, openExternal } = item
-  const analyticsData = { position, ...item?.analyticsData }
+  const {
+    save_url,
+    save_status,
+    resolved_url,
+    open_url,
+    openExternal,
+    recommendationId,
+    slateLineup,
+    slate
+  } = item
+  const analyticsData = {
+    id,
+    url: resolved_url,
+    position,
+    recommendationId,
+    slateLineupId: slateLineup?.id,
+    slateLineupRequestId: slateLineup?.requestId,
+    slateLineupExperiment: slateLineup?.experimentId,
+    slateId: slate?.id,
+    slateRequestId: slate?.requestId,
+    slateExperiment: slate?.experimentId
+  }
 
   // Prep save action
   const onSave = () => {
-    dispatch(saveDiscoverItem(id, saveUrl, position))
+    dispatch(saveDiscoverItem(id, save_url, position))
     dispatch(sendSnowplowEvent('discover.save', analyticsData))
   }
 
   // Open action
-  const url = externalUrl
-
+  const url = openExternal ? open_url : `/read/${id}`
   const onOpen = () => {
     const data = {
       ...analyticsData,
@@ -52,7 +71,7 @@ export function ActionsDiscover({ id, position }) {
         openExternal={openExternal}
         saveAction={onSave}
         isAuthenticated={isAuthenticated}
-        saveStatus={saveStatus}
+        saveStatus={save_status}
         id={id}
       />
 

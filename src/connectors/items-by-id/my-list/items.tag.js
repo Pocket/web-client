@@ -83,8 +83,8 @@ export const getPremiumStatus = (state) => state.user.premium_status === '1'
 function* itemsTag({ items }) {
   // If there is only one item being operated on display current tags
   const itemId = items.length === 1 ? items[0].id : false
-  const storedTags = itemId ? yield select(getItemTags, itemId) : []
-  const currentTags = storedTags.map((tag) => tag.name)
+  const tagObject = itemId ? yield select(getItemTags, itemId) : {}
+  const currentTags = tagObject ? Object.keys(tagObject) : [] // Tags
 
   // Set the stage for editing tags
   yield put({ type: ITEMS_TAG_EDIT, items, tags: currentTags })

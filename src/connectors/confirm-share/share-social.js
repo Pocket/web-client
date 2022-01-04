@@ -93,12 +93,13 @@ export const BufferShareButton = ({ url, text, onShareWindowClose, children, ...
   )
 }
 
-export const ShareSocial = ({ openUrl, excerpt, title, itemId, quote, position = 0 }) => {
+export const ShareSocial = function ({ item, quote, position = 0 }) {
   const dispatch = useDispatch()
   const { t } = useTranslation()
+  const { open_url, excerpt, title, item_id } = item
   const analyticsData = {
-    id: itemId,
-    url: openUrl,
+    id: item_id,
+    url: open_url,
     position
   }
 
@@ -109,7 +110,7 @@ export const ShareSocial = ({ openUrl, excerpt, title, itemId, quote, position =
   }
   const copyAction = () => ({ type: COPY_ITEM_URL })
   const copyUrl = async () => {
-    await copy(openUrl)
+    await copy(open_url)
     dispatch(sendSnowplowEvent('share.copy', analyticsData))
     dispatch(copyAction())
     cancelShare()
@@ -133,7 +134,7 @@ export const ShareSocial = ({ openUrl, excerpt, title, itemId, quote, position =
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('facebook')}
         quote={quote}
-        url={openUrl}>
+        url={open_url}>
         <FacebookColorIcon />
       </FacebookShareButton>
       <TwitterShareButton
@@ -144,7 +145,7 @@ export const ShareSocial = ({ openUrl, excerpt, title, itemId, quote, position =
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('twitter')}
         title={title}
-        url={openUrl}>
+        url={open_url}>
         <TwitterColorIcon />
       </TwitterShareButton>
       <LinkedinShareButton
@@ -156,7 +157,7 @@ export const ShareSocial = ({ openUrl, excerpt, title, itemId, quote, position =
         onShareWindowClose={() => onSocialShare('linkedin')}
         title={title}
         summary={quote || excerpt}
-        url={openUrl}>
+        url={open_url}>
         <LinkedinMonoIcon />
       </LinkedinShareButton>
       <RedditShareButton
@@ -167,7 +168,7 @@ export const ShareSocial = ({ openUrl, excerpt, title, itemId, quote, position =
         resetButtonStyle={false}
         onShareWindowClose={() => onSocialShare('reddit')}
         title={title}
-        url={openUrl}>
+        url={open_url}>
         <RedditMonoIcon />
       </RedditShareButton>
       <BufferShareButton
@@ -177,7 +178,7 @@ export const ShareSocial = ({ openUrl, excerpt, title, itemId, quote, position =
         className={topTooltipDelayed}
         onShareWindowClose={() => onSocialShare('buffer')}
         quote={quote || excerpt}
-        url={openUrl}>
+        url={open_url}>
         <BufferIcon />
       </BufferShareButton>
     </div>

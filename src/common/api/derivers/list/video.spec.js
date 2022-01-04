@@ -1,4 +1,6 @@
 import { deriveListItem } from 'common/api/derivers/item'
+import { analyticsActions } from 'connectors/snowplow/actions'
+import { validateSnowplowExpectations } from 'connectors/snowplow/snowplow.state'
 
 export const savedVideoFromV3 = {
   item_id: '2815325547',
@@ -155,12 +157,11 @@ describe('My List - Videos', () => {
     expect(item.hasVideo).toBe('IS_VIDEO')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('')
-    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Mufasa- its friday then.')
     expect(item.thumbnail).toBe(
-      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg'
+      'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg'
     )
     expect(item.publisher).toBe('YouTube')
     expect(item.excerpt).toBe('Original song: push the feeling on.')
@@ -175,9 +176,8 @@ describe('My List - Videos', () => {
         url: 'https://www.youtube.com/channel/UCpJ9wxRuDnq1DxMDoKHrJlg'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
-    })
+    expect(item.analyticsData.id).toBe('2815325547')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 
   it('should derive clientAPI as expected', () => {
@@ -204,12 +204,11 @@ describe('My List - Videos', () => {
     expect(item.hasVideo).toBe('IS_VIDEO')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('')
-    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Mufasa- its friday then.')
     expect(item.thumbnail).toBe(
-      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg'
+      'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg'
     )
     expect(item.publisher).toBe('YouTube')
     expect(item.excerpt).toBe('Original song: push the feeling on.')
@@ -224,8 +223,35 @@ describe('My List - Videos', () => {
         url: 'https://www.youtube.com/channel/UCpJ9wxRuDnq1DxMDoKHrJlg'
       }
     ])
-    expect(item.analyticsData).toStrictEqual({
-      url: expectedAnalyticsUrl
+    expect(item.analyticsData.id).toBe('2815325547')
+    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
+  })
+
+  describe('Snowplow', () => {
+    const item = deriveListItem(savedVideoFromClientApi)
+    const whitelist = /^my-list./
+    const blacklist = []
+
+    const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))
+    const relevantActions = sectionActions.filter(
+      (action) =>
+        analyticsActions[action].entityTypes.includes('content') && !blacklist.includes(action)
+    )
+
+    relevantActions.map((identifier) => {
+      it(`${identifier} should be valid`, () => {
+        const { expects } = analyticsActions[identifier]
+        const isValid = validateSnowplowExpectations({
+          identifier,
+          expects,
+          data: {
+            position: 0,
+            destination: 'external',
+            ...item.analyticsData
+          }
+        })
+        expect(isValid).toBeTruthy()
+      })
     })
   })
 })

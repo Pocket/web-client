@@ -38,11 +38,6 @@ export const ShareModal = () => {
   const cancelShare = () => dispatch(itemsShareCancel())
 
   if (!item) return null
-  const { externalUrl } = item
-  const openUrl = externalUrl
-  const showExcerpt = false
-  const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {title, publisher, excerpt, timeToRead, isSyndicated } = item //prettier-ignore
 
   const showModal = itemId !== false
 
@@ -61,36 +56,13 @@ export const ShareModal = () => {
       screenReaderLabel={t('share:share-item', 'Share Item')}
       handleClose={cancelShare}>
       <ModalBody>
-        <Card
-          openUrl={openUrl}
-          externalUrl={externalUrl}
-          showExcerpt={showExcerpt}
-          itemImage={itemImage}
-          title={title}
-          publisher={publisher}
-          excerpt={excerpt}
-          timeToRead={timeToRead}
-          isSyndicated={isSyndicated}
-          itemType="display"
-          cardShape="wide"
-        />
+        <Card item={item} itemType="display" cardShape="wide" />
         {quote ? <p className={shareQuote}>{quote}</p> : null}
       </ModalBody>
       <ModalTabs>
         <SelectShareType active={active} activate={activate} />
-        {active === 'social' ? (
-          <ShareSocial
-            openUrl={openUrl}
-            excerpt={excerpt}
-            title={title}
-            itemId={itemId}
-            quote={quote}
-            position={position}
-          />
-        ) : null}
-        {active === 'recommend' ? (
-          <ShareRecommend openUrl={openUrl} itemId={itemId} position={position} />
-        ) : null}
+        {active === 'social' ? <ShareSocial item={item} quote={quote} position={position} /> : null}
+        {active === 'recommend' ? <ShareRecommend item={item} position={position} /> : null}
       </ModalTabs>
     </Modal>
   )

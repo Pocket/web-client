@@ -43,9 +43,7 @@ const nextOptions = {
       {
         // Apply these headers to all routes in your application.
         source: '/(.*)',
-        headers: [
-          { key: 'X-Frame-Options', value: 'SAMEORIGIN' }
-        ]
+        headers: [{ key: 'X-Frame-Options', value: 'SAMEORIGIN' }]
       }
     ]
   },
@@ -77,8 +75,7 @@ const nextOptions = {
         return config
       },
   crossOrigin: 'anonymous',
-  generateBuildId: () => nextBuildId({ dir: __dirname }),
-  assetPrefix
+  generateBuildId: () => nextBuildId({ dir: __dirname })
 }
 
 module.exports = withSentryConfig(withLinaria(nextOptions), SentryWebpackPluginOptions)
