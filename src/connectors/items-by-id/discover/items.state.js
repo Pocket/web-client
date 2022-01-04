@@ -82,9 +82,10 @@ export const discoverItemsReducers = (state = initialState, action) => {
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
-    case HYDRATE:
+    case HYDRATE: {
       const { discoverItemsById } = action.payload
       return { ...state, ...discoverItemsById }
+    }
 
     default:
       return state
