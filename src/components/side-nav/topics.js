@@ -10,10 +10,10 @@ export function TopicsSideNav({ subActive, pinned, clickEvent }) {
       </div>
 
       {pinned.length
-        ? pinned.map((topic) => (
-            <Link href={`/explore/${topic.topic_slug}?src=sidebar`} key={topic.topic_slug}>
+        ? pinned.map((topic, index) => (
+            <Link key={index} href={`/explore/${topic.topic_slug}?src=sidebar`}>
               <button
-                data-cy={`side-nav-${topic.topic_slug}`}
+                data-cy={`side-nav-topic-${topic.topic_slug}`}
                 className={subActive(topic)}
                 onClick={clickEvent}>
                 {topic.display_name}
