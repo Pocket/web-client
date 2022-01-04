@@ -29,7 +29,7 @@ export default function TagsPage(props) {
 
   return (
     <Layout title={metaData.title} metaData={metaData}>
-      <SideNav subset={subset} isLoggedIn={isLoggedIn} />
+      <SideNav type="my-list" subset={subset} isLoggedIn={isLoggedIn} />
 
       {shouldRender ? (
         <main className="main">
