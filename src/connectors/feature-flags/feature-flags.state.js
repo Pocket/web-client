@@ -46,9 +46,9 @@ export const featureSagas = []
 
 /** ASYNC Functions
 ---------------------------------------------------------------- */
-export async function fetchUnleashData(userId, sessionId, birth, locale, userModels) {
+export async function fetchUnleashData(userId, sessionId, birth, locale) {
   try {
-    const response = await getUnleash(sessionId, userId, birth, 'web-client', locale, userModels)
+    const response = await getUnleash(sessionId, userId, birth, 'web-client', locale)
 
     // Filter and derive proper test values from the unleash response
     const filteredAssignments = await filterUnleashAssignments(response)
