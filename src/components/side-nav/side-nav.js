@@ -166,7 +166,7 @@ export function SideNav({ type, subset, tag, pinned, isDisabled, newSaveCount, t
   const SubNav = navTypes[type]
 
   return (
-    <div className={wrapperClass}>
+    <div className={wrapperClass} data-cy="side-nav">
       <nav role="navigation">
         <Link href="/home?src=sidebar">
           <button
