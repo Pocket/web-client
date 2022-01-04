@@ -9,14 +9,14 @@ import getUnleashAssignments from './graphql-queries/get-unleash-assignments'
  * @param {string} birth account creation date if available
  * @param {string} appName name of the app asking for features
  */
-export async function getUnleash(sessionId, userId, birth, appName, locale, recItUserProfile) {
+export async function getUnleash(sessionId, userId, birth, appName, locale, userModels) {
   const variables = {
     sessionId,
     userId,
     accountCreatedAt: birth,
     appName,
     locale,
-    recItUserProfile
+    recItUserProfile: JSON.stringify({ userModels })
   }
   const url = UNLEASH_API_URL
   const client = new GraphQLClient(url)
