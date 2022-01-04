@@ -1,7 +1,8 @@
-import { put, takeLatest } from 'redux-saga/effects'
+import { put, takeLatest, call } from 'redux-saga/effects'
 
 import { getUserInfo } from 'common/api/user'
 import { createGuid } from 'common/api/user'
+import { getRecItProfile } from 'common/api/user'
 
 import { setCookie } from 'nookies'
 
@@ -34,13 +35,14 @@ export const sessGuidHydrate = (sess_guid) => ({type: SESS_GUID_HYDRATE,sess_gui
 export const userReducers = (state = initialState, action) => {
   switch (action.type) {
     case USER_SUCCESS: {
-      const { user, recent_searches } = action
+      const { user, recent_searches, user_models = [] } = action
       return {
         ...state,
         ...user,
         recent_searches,
         auth: true,
-        user_status: 'valid'
+        user_status: 'valid',
+        user_models
       }
     }
 
@@ -48,6 +50,7 @@ export const userReducers = (state = initialState, action) => {
       return {
         ...state,
         user_status: 'invalid',
+        user_models: [],
         auth: false // force auth to false
       }
     }
@@ -90,7 +93,7 @@ function* userRequest(action) {
   if (newVisitor) return yield put({ type: USER_FAILURE })
 
   // Otherwise let's grab the user info use
-  const response = yield getUserInfo()
+  const response = yield call(getUserInfo)
 
   // Not logged in, or something else went awry?
   if (response?.xErrorCode) return yield put({ type: USER_FAILURE })
@@ -98,11 +101,17 @@ function* userRequest(action) {
   // Yay we have a user
   const { user } = response
   const { username, first_name, last_name, profile, email, aliases, friend, ...rest } = user
+
+  // Check to see if the user has a personalization profile
+  const recitProfileResponse = yield call(getRecItProfile)
+  const { user_models = [] } = recitProfileResponse || {}
+
   if (user)
     return yield put({
       type: USER_SUCCESS,
       user: rest,
       profile: { username, first_name, last_name, ...profile },
+      user_models,
       aliases,
       email,
       friend

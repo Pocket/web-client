@@ -1,3 +1,52 @@
+# [1.32.0](https://github.com/Pocket/web-client/compare/v1.31.1...v1.32.0) (2022-01-04)
+
+
+### Bug Fixes
+
+* **unleash:** adding a default for user models ([f2a812e](https://github.com/Pocket/web-client/commit/f2a812e6ce834a124a85e344f85d7dd356a9cbc1))
+
+
+### Features
+
+* **unleash:** recit user models ([c939d22](https://github.com/Pocket/web-client/commit/c939d22c4052e131526a7bcc4e09afbed49081f0))
+
+## [1.31.1](https://github.com/Pocket/web-client/compare/v1.31.0...v1.31.1) (2022-01-04)
+
+
+### Reverts
+
+* Revert "feat(home): get lineup ids from feature flags" ([5a0a745](https://github.com/Pocket/web-client/commit/5a0a7450ca342701fb65d94019a7d35449804179))
+* Revert "fix(home): remove personalized marker" ([66c8bfe](https://github.com/Pocket/web-client/commit/66c8bfed03111bea6cd0b07d9b3cede5e06e8b2a))
+* Revert "feat(user): add reccit profile call for user models" ([289d771](https://github.com/Pocket/web-client/commit/289d771cc52463e5c7a5ac40cd6afb0f0e11117b))
+* Revert "feat(user): include reccit profile in feature flags" ([cba47df](https://github.com/Pocket/web-client/commit/cba47df6da6f70ea374af2a380e3ef72eacca40b))
+* Revert "fix(unleash): user model shape" ([0d19a7f](https://github.com/Pocket/web-client/commit/0d19a7f730b0a0ce96b8f530424b42321c724fa5))
+* Revert "fix(unleash): recit query shape" ([3af3b72](https://github.com/Pocket/web-client/commit/3af3b720e2bbbb9824f33da56305caf54508db12))
+* Revert "chore(home): code format" ([08710de](https://github.com/Pocket/web-client/commit/08710de2475da4568c20075b107e0f3c8ccc3f0d))
+
+# [1.31.0](https://github.com/Pocket/web-client/compare/v1.30.3...v1.31.0) (2022-01-04)
+
+
+### Bug Fixes
+
+* **home:** remove personalized marker ([0602d0d](https://github.com/Pocket/web-client/commit/0602d0d03b58338f1fd06ac20f4808d8e1870d90))
+* **unleash:** recit query shape ([28ae677](https://github.com/Pocket/web-client/commit/28ae677164f15947ced64cbf0fc9ed8813f8b2d6))
+* **unleash:** user model shape ([a568c3e](https://github.com/Pocket/web-client/commit/a568c3e830f7c589a5dab75aa72b1883013924a6))
+
+
+### Features
+
+* **home:** get lineup ids from feature flags ([0011f8a](https://github.com/Pocket/web-client/commit/0011f8a9a6535f8e7b700277a47db144dcf6d28e))
+* **user:** add reccit profile call for user models ([77dde28](https://github.com/Pocket/web-client/commit/77dde28d723a2822ca26f0e26698e4c0b6f71960))
+* **user:** include reccit profile in feature flags ([8d838d1](https://github.com/Pocket/web-client/commit/8d838d1456b1c8a964d00789f75799fc1671bbc6))
+
+## [1.30.3](https://github.com/Pocket/web-client/compare/v1.30.2...v1.30.3) (2022-01-03)
+
+
+### Bug Fixes
+
+* **collections:** no need to destructure response ([59089a2](https://github.com/Pocket/web-client/commit/59089a259d580e2f4e22bb2d500be1cf2b5fe444))
+* **eoy:** remove eoy banners, callouts, and pinned articles ([c9f8c65](https://github.com/Pocket/web-client/commit/c9f8c65771e91416f95eadd55f723b138a93db3e))
+
 ## [1.30.2](https://github.com/Pocket/web-client/compare/v1.30.1...v1.30.2) (2021-12-15)
 
 
