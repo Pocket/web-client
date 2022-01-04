@@ -16,7 +16,7 @@ export async function getUnleash(sessionId, userId, birth, appName, locale, user
     accountCreatedAt: birth,
     appName,
     locale,
-    recItUserProfile: { userModels }
+    recItUserProfile: JSON.stringify({ userModels })
   }
   const url = UNLEASH_API_URL
   const client = new GraphQLClient(url)
