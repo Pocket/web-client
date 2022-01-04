@@ -46,7 +46,7 @@ export const featureSagas = []
 
 /** ASYNC Functions
 ---------------------------------------------------------------- */
-export async function fetchUnleashData(userId, sessionId, birth, locale) {
+export async function fetchUnleashData(userId, sessionId, birth, locale, userModels = []) {
   try {
     const response = await getUnleash(sessionId, userId, birth, 'web-client', locale, userModels)
 
