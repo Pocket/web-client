@@ -35,7 +35,8 @@ export const sessGuidHydrate = (sess_guid) => ({type: SESS_GUID_HYDRATE,sess_gui
 export const userReducers = (state = initialState, action) => {
   switch (action.type) {
     case USER_SUCCESS: {
-      const { user, recent_searches, user_models = [] } = action
+      const { user, recent_searches, user_models: passedModels } = action
+      const user_models = passedModels ? JSON.stringify(passedModels) : false
       return {
         ...state,
         ...user,
@@ -50,7 +51,7 @@ export const userReducers = (state = initialState, action) => {
       return {
         ...state,
         user_status: 'invalid',
-        user_models: [],
+        user_models: false,
         auth: false // force auth to false
       }
     }
@@ -104,7 +105,7 @@ function* userRequest(action) {
 
   // Check to see if the user has a personalization profile
   const recitProfileResponse = yield call(getRecItProfile)
-  const { user_models = [] } = recitProfileResponse || {}
+  const { user_models = false } = recitProfileResponse || {}
 
   if (user)
     return yield put({
