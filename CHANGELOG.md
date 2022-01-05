@@ -1,3 +1,10 @@
+## [1.32.2](https://github.com/Pocket/web-client/compare/v1.32.1...v1.32.2) (2022-01-05)
+
+
+### Bug Fixes
+
+* **snowplow:** update collector path to getpocket.com ([42e242c](https://github.com/Pocket/web-client/commit/42e242cd7e7c49099a861b014b0ad272074a5504))
+
 ## [1.32.1](https://github.com/Pocket/web-client/compare/v1.32.0...v1.32.1) (2022-01-04)
 
 

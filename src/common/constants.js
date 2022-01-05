@@ -41,7 +41,7 @@ export const SNOWPLOW_SCRIPT = 'https://assets.getpocket.com/web-utilities/publi
 export const SNOWPLOW_POST_PATH = process.env.TEST_SNOWPLOW === 'included'
   ? '/com.snowplowanalytics.snowplow/tp2'
   : '/t/e'
-export const SNOWPLOW_COLLECTOR_URL = 'd.getpocket.com'
+export const SNOWPLOW_COLLECTOR_URL = 'getpocket.com'
 export const SNOWPLOW_COLLECTOR_URL_DEV = process.env.TEST_SNOWPLOW === 'included'
   ? 'http://localhost:9090'
   : 'com-getpocket-prod1.mini.snplow.net'
