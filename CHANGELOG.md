@@ -1,3 +1,12 @@
+## [1.32.1](https://github.com/Pocket/web-client/compare/v1.32.0...v1.32.1) (2022-01-04)
+
+
+### Bug Fixes
+
+* **account:** localization files for account page ([a26f413](https://github.com/Pocket/web-client/commit/a26f4134e089a089dacc9139b558779dfb2ef2a7))
+* **account:** update localization namespace ([3013271](https://github.com/Pocket/web-client/commit/3013271e7d9802905d868cf2b2def7f161544f30))
+* **localization:** bump to latest ([7b4fd7f](https://github.com/Pocket/web-client/commit/7b4fd7f4442de2580517daac2b2a8ee5a7771ace))
+
 # [1.32.0](https://github.com/Pocket/web-client/compare/v1.31.1...v1.32.0) (2022-01-04)
 
 

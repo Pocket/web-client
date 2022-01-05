@@ -46,7 +46,7 @@ export const Avatar = ({ avatarSrc, onChangePhoto }) => {
       <div className="avatarBody">
         <AvatarPreview avatarSrc={avatarSrc} />
         <button onClick={onChangePhoto} className={`${buttonReset} updateLink`}>
-          {t('avatar:change-photo', 'Change photo')}
+          {t('account:change-photo', 'Change photo')}
         </button>
       </div>
     </div>

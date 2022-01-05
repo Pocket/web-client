@@ -163,6 +163,7 @@ export const LOCALE_COMMON = [
   'topic'
 ]
 
+export const LOCALE_ACCOUNT = ['account']
 
 export const HOME_TOPIC_SLATES = {
   'business': 'af2cc2c0-1286-47a3-b8ce-187b905f94af',

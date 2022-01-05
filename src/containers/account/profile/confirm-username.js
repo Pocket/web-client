@@ -76,10 +76,10 @@ export const UsernameModal = () => {
 
   return (
     <Modal
-      title={t('profile:change-username', 'Change Username')}
+      title={t('account:confirm-change-username', 'Change Username')}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t('profile:change-username', 'Change Username')}
+      screenReaderLabel={t('account:confirm-change-username', 'Change Username')}
       handleClose={cancelUsername}>
       <ModalBody className={updateUsernameStyles}>
         <label htmlFor="new-username">{t('account:new-username', 'New Username')}</label>
