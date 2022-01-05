@@ -72,30 +72,4 @@ describe('SideNav', () => {
     // Snapshot
     expect(queryByCy('side-nav')).toMatchSnapshot()
   })
-
-  it('renders the Home side nav and shows topics', () => {
-    const { queryByCy, queryAllByCy } = wrappedRender(<SideNav type='home' {...baseProps} />)
-
-    // Main section
-    expect(queryByCy('side-nav-home')).toBeInTheDocument()
-    expect(queryByCy('side-nav-mylist')).toBeInTheDocument()
-    expect(queryByCy('side-nav-discover')).toBeInTheDocument()
-    expect(queryByCy('side-nav-collections')).toBeInTheDocument()
-
-    // Filters section
-    expect(queryByCy('side-nav-archive')).not.toBeInTheDocument()
-    expect(queryByCy('side-nav-favorites')).not.toBeInTheDocument()
-    expect(queryByCy('side-nav-highlights')).not.toBeInTheDocument()
-    expect(queryByCy('side-nav-articles')).not.toBeInTheDocument()
-    expect(queryByCy('side-nav-videos')).not.toBeInTheDocument()
-
-    // Tags section
-    expect(queryByCy('side-nav-all-tags')).not.toBeInTheDocument()
-
-    // Topics section
-    expect(queryAllByCy(/side-nav-topic-(.+)/)).toHaveLength(2)
-
-    // Snapshot
-    expect(queryByCy('side-nav')).toMatchSnapshot()
-  })
 })

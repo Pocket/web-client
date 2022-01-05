@@ -12,7 +12,6 @@ import { BetaTag } from 'components/tags/tags'
 import { useInView } from 'react-intersection-observer'
 
 import { FiltersSideNav } from './filters'
-import { TopicsSideNav } from './topics'
 import { AccountSideNav } from './account'
 import { BookmarkIcon } from './bookmark-icon'
 
@@ -159,7 +158,6 @@ export function SideNav({ type, subset, tag, pinned, isDisabled, newSaveCount, t
   const clickEvent = (e) => trackMenuClick(e.target.textContent)
 
   const navTypes = {
-    home: TopicsSideNav,
     'my-list': FiltersSideNav,
     account: AccountSideNav
   }
