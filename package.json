@@ -101,7 +101,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "file-loader": "6.2.0",
     "fs-extra": "10.0.0",
-    "graphql": "15.6.1",
+    "graphql": "16.2.0",
     "gulp-sort": "2.0.0",
     "i18next-parser": "5.3.0",
     "isomorphic-unfetch": "3.1.0",
