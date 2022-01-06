@@ -9,6 +9,8 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
   // returns first two letters of browser defined language settings
   const lang = req.headers['accept-language'].toString().substring(0, 2)
   const langPrefix = lang !== defaultLocale && locales.includes(lang) ? `/${lang}` : ''
+  const authToken = query?.access_token || false
+  delete query.access_token
 
   const myListLink = queryString.stringifyUrl({ url: `${langPrefix}/my-list`, query })
   const homeLink = queryString.stringifyUrl({ url: '/home', query })
@@ -31,7 +33,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
   // EN users who signed up after 08-09-2021 will be assigned to 'home.release'
   // feature flag and therefore will be sent to Home after sign up
   const featureState = await fetchUnleashData(user_id, sess_guid, birth, lang)
-  const homeRelease = featureFlagActive({ flag: 'home.release', featureState})
+  const homeRelease = featureFlagActive({ flag: 'home.release', featureState })
   const destination = homeRelease ? homeLink : myListLink
 
   return {
