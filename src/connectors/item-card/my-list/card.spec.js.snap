@@ -480,7 +480,7 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
     >
       <a
         data-cy="image-link"
-        href="https://www.myswitzerland.com/en-us/destinations/blausee/"
+        href="https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_mylist"
         tabindex="-1"
       >
         <img
@@ -499,7 +499,7 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
       >
         <a
           data-cy="title-link"
-          href="https://www.myswitzerland.com/en-us/destinations/blausee/"
+          href="https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_mylist"
           tabindex="0"
         >
           Blausee

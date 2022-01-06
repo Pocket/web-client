@@ -16,6 +16,7 @@ export const storyFromClientApi = {
     }
   ],
   publisher: 'The New York Times',
+  fromPartner: true,
   item: {
     isArticle: true,
     title: 'Inside VW’s Campaign of Trickery',
@@ -84,7 +85,7 @@ export const storyFromClientApi = {
 
 describe('Collection — Story', () => {
   const expectedSaveUrl = 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html' //prettier-ignore
-  const expectedExternalUrl = 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_mylist' //prettier-ignore
+  const expectedExternalUrl = 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_collection_story' //prettier-ignore
   const expectedReadUrl = false //prettier-ignore
   const expectedPermanentUrl = false
   const expectedAnalyticsUrl = 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html' //prettier-ignore
@@ -112,6 +113,7 @@ describe('Collection — Story', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBeFalsy()
+    expect(item.fromPartner).toBeTruthy()
 
     // Derived content
     expect(item.title).toBe('Inside VW’s Campaign of Trickery')
@@ -127,12 +129,7 @@ describe('Collection — Story', () => {
     expect(item.readUrl).toBe(expectedReadUrl)
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
     expect(item.timeToRead).toBe(14)
-    expect(item.authors).toStrictEqual([
-      {
-        name: 'JACK EWING',
-        url: 'https://www.nytimes.com/by/jack-ewing'
-      }
-    ])
+    expect(item.authors).toStrictEqual([{ name: 'Jack Ewing' }])
     expect(item.analyticsData.id).toBe('1731163180')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })

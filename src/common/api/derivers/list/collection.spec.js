@@ -147,6 +147,7 @@ describe('My List - Collection', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('en')
+    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Delicious Reads About Your Favorite Candy')
@@ -196,6 +197,7 @@ describe('My List - Collection', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('en')
+    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Delicious Reads About Your Favorite Candy')

@@ -1,9 +1,9 @@
-import { put, select, call, takeLatest } from 'redux-saga/effects'
+import { put, call, takeLatest } from 'redux-saga/effects'
 import { getFeedByUser } from 'common/api/profile'
 import { sendItemActions } from 'common/api/item-actions'
 import { arrayToObject } from 'common/utilities'
 import { saveItem as saveItemAPI } from 'common/api/saveItem'
-import { deriveItems, checkExternal } from 'connectors/items-by-id/profile/items.derive'
+import { deriveProfile } from 'common/api/derivers/item'
 
 import { API_ACTION_DELETE_RECOMMEND } from 'common/constants'
 
@@ -35,10 +35,10 @@ const initialState = {
 
 export const profileItemsReducers = (state = initialState, action) => {
   switch (action.type) {
-    case GET_PROFILE_FEED_SUCCESS:
+    case GET_PROFILE_FEED_SUCCESS: {
       const { items, itemsById } = action
       return { ...state, items, itemsById }
-
+    }
     case PROFILE_ITEM_SAVE_SUCCESS: {
       const { id, openExternal } = action
       return {
@@ -79,10 +79,6 @@ export const profileItemsSagas = [
   takeLatest(PROFILE_ITEM_DELETE_REQUEST, deleteRecommendedItemRequest)
 ]
 
-/* SAGAS :: SELECTORS
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-const getRecommendedItemById = (state, id) => state.profileItemsByIds.itemsById[id]
-
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 function* getProfileFeedRequest({ id }) {
@@ -90,9 +86,9 @@ function* getProfileFeedRequest({ id }) {
     const { feed, error } = yield getFeedByUser(id)
     if (error) throw new Error('Cannot get profile feed')
 
-    const derivedItems = yield deriveItems(feed)
-    const items = derivedItems.map((item) => item.item_id)
-    const itemsById = arrayToObject(derivedItems, 'item_id')
+    const derivedItems = feed.map((feed) => deriveProfile(feed, true))
+    const items = derivedItems.map((node) => node.itemId)
+    const itemsById = arrayToObject(derivedItems, 'itemId')
 
     yield put({ type: GET_PROFILE_FEED_SUCCESS, items, itemsById })
   } catch (error) {
@@ -105,10 +101,7 @@ function* saveRecommendedItemRequest({ url, id }) {
     const response = yield saveItemAPI(url)
     if (response?.status !== 1) throw new Error('Unable to save')
 
-    const item = yield select(getRecommendedItemById, id)
-    const openExternal = checkExternal({ item })
-
-    yield put({ type: PROFILE_ITEM_SAVE_SUCCESS, id, openExternal })
+    yield put({ type: PROFILE_ITEM_SAVE_SUCCESS, id, openExternal: true })
     yield put({ type: ITEMS_ADD_SUCCESS })
   } catch (error) {
     yield put({ type: PROFILE_ITEM_SAVE_FAILURE, error, id })

@@ -1,15 +1,14 @@
 import { request, requestGQL } from 'common/utilities/request/request'
 import { TOPICS_BY_NAME } from 'common/constants'
 import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
-import { getRecIds } from 'common/utilities'
-import { recommendationsFromSlate } from 'common/utilities'
+import { processLineup } from 'common/api/derivers/lineups'
 
 export async function getNewTopicFeed(topic, recommendationCount = 30) {
   return requestGQL({
     query: getSlateLineup,
     variables: { id: TOPICS_BY_NAME[topic].id, recommendationCount, slateCount: 2 }
   })
-    .then(processSlates)
+    .then(handleResponse)
     .catch((error) => console.error(error))
 }
 
@@ -31,11 +30,10 @@ export function getTopicFeed(topic, curated = 5, algorithmic = 20, ssr = true) {
   })
 }
 
-function processSlates(response) {
-  const slateLineup = getRecIds(response?.data?.getSlateLineup)
-  const slates = response?.data?.getSlateLineup?.slates || []
-  const curated = slates[0] ? recommendationsFromSlate(slates[0], slateLineup) : []
-  const algorithmic = slates[1] ? recommendationsFromSlate(slates[1], slateLineup) : []
+function handleResponse(response) {
+  const { slateItemArrays, itemsById } = processLineup(response)
+  const curatedItems = slateItemArrays[0]
+  const algorithmicItems = slateItemArrays[1]
 
-  return { curated, algorithmic }
+  return { curatedItems, algorithmicItems, itemsById }
 }

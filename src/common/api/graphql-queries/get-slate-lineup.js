@@ -8,8 +8,9 @@
  * Lineup: Set of slates generated from different sources (curation, algorithms, etc.)
  *
  */
-
 import { gql } from 'graphql-request'
+import { FRAGMENT_ITEM } from './fragment.item'
+
 const getSlateLineup = gql`
   query GetSlateLineup($id: String!, $recommendationCount: Int, $slateCount: Int) {
     getSlateLineup(
@@ -17,19 +18,13 @@ const getSlateLineup = gql`
       recommendationCount: $recommendationCount
       slateCount: $slateCount
     ) {
-      experimentId
-      requestId
-      id
       slateLineupExperiment: experimentId
       slateLineupRequestId: requestId
       slateLineupId: id
       slates {
-        id
-        requestId
-        experimentId
         slateId: id
         slateRequestId: requestId
-        slateExperimentId: experimentId
+        slateExperiment: experimentId
         displayName
         description
         recommendations {
@@ -41,48 +36,13 @@ const getSlateLineup = gql`
             imageSrc
           }
           item {
-            collection {
-              imageUrl
-              intro
-              title
-            }
-            isArticle
-            title
-            itemId
-            normalUrl
-            resolvedId
-            resolvedUrl
-            domain
-            domainMetadata {
-              name
-            }
-            excerpt
-            hasImage
-            hasVideo
-            images {
-              caption
-              credit
-              height
-              imageId
-              src
-              width
-            }
-            topImageUrl
-            wordCount
-            timeToRead
-            givenUrl
-            syndicatedArticle {
-              slug
-              publisher {
-                name
-                url
-              }
-            }
+            ...ItemDetails
           }
         }
       }
     }
   }
+  ${FRAGMENT_ITEM}
 `
 
 export default getSlateLineup

@@ -12,31 +12,20 @@ export function ActionsLineup({ id, position }) {
   const item = useSelector((state) => state.homeItemsById[id])
 
   if (!item) return null
-  const { save_url, save_status, open_url, openExternal, resolved_url, analyticsData } = item
+  const { saveUrl, readUrl, externalUrl, saveStatus, openExternal } = item
+  const analyticsData = { id, position, ...item?.analyticsData }
 
   // Prep save action
   const onSave = () => {
-    const data = {
-      id,
-      url: resolved_url,
-      position,
-      ...analyticsData
-    }
-    dispatch(sendSnowplowEvent('home.lineup.save', data))
-    dispatch(saveHomeItem(id, save_url, position))
+    dispatch(sendSnowplowEvent('home.lineup.save', analyticsData))
+    dispatch(saveHomeItem(id, saveUrl, position))
   }
 
   // Open action
-  const url = openExternal ? open_url : `/read/${id}`
+  const url = readUrl && !openExternal ? readUrl : externalUrl
   const onOpen = () => {
-    const data = {
-      id,
-      url,
-      position,
-      destination: save_status === 'saved' && !openExternal ? 'internal' : 'external',
-      ...analyticsData
-    }
-    dispatch(sendSnowplowEvent('home.lineup.open', data))
+    const destination = saveStatus === 'saved' && !openExternal ? 'internal' : 'external'
+    dispatch(sendSnowplowEvent('home.lineup.open', { destination, ...analyticsData }))
   }
 
   return item ? (
@@ -48,7 +37,7 @@ export function ActionsLineup({ id, position }) {
         openExternal={openExternal}
         saveAction={onSave}
         isAuthenticated={isAuthenticated}
-        saveStatus={save_status}
+        saveStatus={saveStatus}
         id={id}
       />
     </div>

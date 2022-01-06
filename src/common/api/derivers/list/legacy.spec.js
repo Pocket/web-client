@@ -148,6 +148,8 @@ describe('My List - Original Deriver', () => {
     expect(item.hasVideo).toBe('NO_VIDEOS')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('en')
+    expect(item.fromPartner).toBeFalsy()
+
     expect(item.title).toBe(
       'The Undisciplined Pursuit of More (The Art of Limiting Yourself to Only The Essential)'
     )
@@ -164,7 +166,8 @@ describe('My List - Original Deriver', () => {
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
     expect(item.timeToRead).toBe(5)
     expect(item.tags).toStrictEqual([])
-    expect(item.annotations).toBe(undefined)
+    expect(item.annotations).toStrictEqual([])
+    expect(item.hasAnnotation).toBeFalsy()
     expect(item.images).toStrictEqual([
       {
         src: 'https://pocket-syndicated-images.s3.amazonaws.com/5f1b307571176.jpg'

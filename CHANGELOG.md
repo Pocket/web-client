@@ -1,3 +1,32 @@
+# [1.33.0](https://github.com/Pocket/web-client/compare/v1.32.3...v1.33.0) (2022-01-06)
+
+
+### Bug Fixes
+
+* **discover:** add defaults to slate arrays ([ad35fae](https://github.com/Pocket/web-client/commit/ad35faec4b2e2724185b23d18f919e92d3bdddb9))
+* **item:** add profile/tags ([152907c](https://github.com/Pocket/web-client/commit/152907cfe22cfb354a04036cd61daabac0849b8b))
+* **item:** reader updates ([8ac1468](https://github.com/Pocket/web-client/commit/8ac1468c75b97db5a1ac874f125db2629670b9ac))
+* **item:** tags and tagging ([55761f6](https://github.com/Pocket/web-client/commit/55761f671a65179348f1675587b6517e71780c13))
+* **item:** update confirmations ([a6da8bd](https://github.com/Pocket/web-client/commit/a6da8bd91f29d98fa2d74976a7e11b3cc0ef2d70))
+* **item:** update connections with item expectations ([308eb0e](https://github.com/Pocket/web-client/commit/308eb0ef52857e34d22b4349c08def172e3d8760))
+* **item:** update image for double encoding ([38499e0](https://github.com/Pocket/web-client/commit/38499e082be009d46af2a6ffc79c46f0485e73ae))
+* **item:** update render attributes ([0bfb988](https://github.com/Pocket/web-client/commit/0bfb9887f24de16a78e47915c780b513b0cd0006))
+* **item:** update render params ([bdb312c](https://github.com/Pocket/web-client/commit/bdb312c636e225e1c66a42153a4787e9a27460b9))
+
+
+### Features
+
+* **items:** update grapql to use itemFragment ([cf83147](https://github.com/Pocket/web-client/commit/cf8314760b69e04951f436512978af0e9b2e85a6))
+* **item:** use new derivers ([1428db5](https://github.com/Pocket/web-client/commit/1428db5a82af1f4aba5e78dbb9a106b27a23c33d))
+* **lineups:** add central processing functions ([8ef53b3](https://github.com/Pocket/web-client/commit/8ef53b39e1075e68479f3c6429e20f6952ec7149))
+
+## [1.32.3](https://github.com/Pocket/web-client/compare/v1.32.2...v1.32.3) (2022-01-06)
+
+
+### Bug Fixes
+
+* **account:** add impression to premium button on account settings page ([5d8f733](https://github.com/Pocket/web-client/commit/5d8f733ca317c97d27f1b4ff5641751f90a41a92))
+
 ## [1.32.2](https://github.com/Pocket/web-client/compare/v1.32.1...v1.32.2) (2022-01-05)
 
 

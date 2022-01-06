@@ -4,11 +4,11 @@ import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils'
 
 import { storyFromClientApi } from 'common/api/derivers/collection/story.spec'
 import { ItemCard as StoryCard } from 'connectors/item-card/collection/story-card'
-import { deriveCollectionStories } from 'connectors/items-by-id/collection/stories.derive'
+import { deriveStory } from 'common/api/derivers/item'
 
 describe('ItemCard', () => {
   //Legacy Derivers
-  const derivedStory = deriveCollectionStories([storyFromClientApi])[0]
+  const derivedStory = deriveStory(storyFromClientApi)
 
   const initialState = {
     user: { auth: true },
@@ -16,7 +16,7 @@ describe('ItemCard', () => {
       impressions: []
     },
     collectionStoriesById: {
-      [derivedStory.item_id]: derivedStory
+      [derivedStory.itemId]: derivedStory
     }
   }
 
@@ -25,7 +25,7 @@ describe('ItemCard', () => {
   })
 
   it('renders a story', () => {
-    const { getByCy } = wrappedRender(<StoryCard id={derivedStory.item_id} position={3} />, { initialState }) //prettier-ignore
+    const { getByCy } = wrappedRender(<StoryCard id={derivedStory.itemId} position={3} />, { initialState }) //prettier-ignore
     expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
   })
 })

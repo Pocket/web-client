@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { getNewTopicFeed } from 'common/api/topics'
-import { deriveDiscoverItems } from 'connectors/items-by-id/discover/items.derive'
+import { deriveRecommendation } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
 
 import { TOPIC_HYDRATE } from 'actions'
@@ -30,9 +30,10 @@ export const topicReducers = (state = initialState, action) => {
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
-    case HYDRATE:
+    case HYDRATE: {
       const { discoverTopic } = action.payload
       return { ...state, ...discoverTopic }
+    }
 
     default:
       return state
@@ -71,9 +72,6 @@ function* topicsUnSaveRequest(action) {
 /** ASYNC Functions
  --------------------------------------------------------------- */
 
-// Async helper for cleaner code
-const mapIds = (item) => item.resolved_id
-
 /**
  * fetchTopicData
  * Make and async request for a Pocket v3 feed and return best data
@@ -86,28 +84,13 @@ export async function fetchTopicData(topic) {
     // 100% curated, so we need to ask for more `curated` and omit the
     // algorithmic results
 
-    const response = await getNewTopicFeed(topic, 30)
-
-    // Derive curated item data and create items by id
-    const { curated = [] } = response
-    const derivedCuratedItems = await deriveDiscoverItems(curated)
-    const curatedIds = derivedCuratedItems.map(mapIds)
-    const curatedItems = [...new Set(curatedIds)] // Unique entries only
-    const curatedItemsById = arrayToObject(derivedCuratedItems, 'resolved_id')
-
-    // Derive algorithmic item data and create items by id
-    const { algorithmic = [] } = response
-    const derivedAlgorithmicItems = await deriveDiscoverItems(algorithmic)
-    const algorithmicIds = derivedAlgorithmicItems.map(mapIds)
-    const algorithmicItems = [...new Set(algorithmicIds)] // Unique entries only
-    const algorithmicItemsById = arrayToObject(derivedAlgorithmicItems, 'resolved_id')
+    const { itemsById, curatedItems, algorithmicItems } = await getNewTopicFeed(topic, 30)
 
     return {
       topic,
+      itemsById,
       curatedItems,
-      curatedItemsById,
-      algorithmicItems,
-      algorithmicItemsById
+      algorithmicItems
     }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.

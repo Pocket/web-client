@@ -157,11 +157,12 @@ describe('My List - Videos', () => {
     expect(item.hasVideo).toBe('IS_VIDEO')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('')
+    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Mufasa- its friday then.')
     expect(item.thumbnail).toBe(
-      'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg'
+      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg'
     )
     expect(item.publisher).toBe('YouTube')
     expect(item.excerpt).toBe('Original song: push the feeling on.')
@@ -204,11 +205,12 @@ describe('My List - Videos', () => {
     expect(item.hasVideo).toBe('IS_VIDEO')
     expect(item.hasImage).toBe('HAS_IMAGES')
     expect(item.language).toBe('')
+    expect(item.fromPartner).toBeFalsy()
 
     // Derived content
     expect(item.title).toBe('Mufasa- its friday then.')
     expect(item.thumbnail).toBe(
-      'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg'
+      'https://pocket-image-cache.com/600x/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg'
     )
     expect(item.publisher).toBe('YouTube')
     expect(item.excerpt).toBe('Original song: push the feeling on.')
