@@ -1,6 +1,8 @@
 import { css } from 'linaria'
 import { Button } from '@pocket/web-ui'
 import { useTranslation } from 'next-i18next'
+import { useInView } from 'react-intersection-observer'
+import { useEffect } from 'react'
 
 const premiumStyle = css`
   h2 {
@@ -21,8 +23,13 @@ const premiumStyle = css`
   }
 `
 
-export const Premium = ({ isPremium }) => {
+export const Premium = ({ isPremium, onPremiumImpression }) => {
   const { t } = useTranslation()
+
+  // Fire when item is in view
+  const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
+  useEffect(() => onPremiumImpression(inView), [inView, onPremiumImpression])
+
   return (
     <section className={premiumStyle}>
       <h2>{t('account:premium', 'Premium')}</h2>
@@ -44,7 +51,7 @@ export const Premium = ({ isPremium }) => {
               <Button variant="brand">{t('account:premium-manage', 'Manage Subscription')}</Button>
             </a>
           ) : (
-            <a href="https://getpocket.com/premium">
+            <a href="https://getpocket.com/premium" ref={viewRef}>
               <Button variant="brand">
                 {t('account:premium-subscribe', 'Get Pocket Premium')}
               </Button>

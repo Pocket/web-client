@@ -307,7 +307,7 @@ const GlobalNavAccount = ({
         </PopupMenuGroup>
         <PopupMenuGroup>
           <PopupMenuItem
-            href="https://getpocket.com/account?src=navbar"
+            href="/account?src=navbar"
             id="account-menu-manage-account-link"
             onClick={handleManageAccountCase}
             data-cy="account-menu-manage-account-link">

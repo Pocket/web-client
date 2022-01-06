@@ -1,3 +1,4 @@
+import { accountActions } from './account'
 import { collectionsActions } from './collections'
 import { discoverActions } from './discover'
 import { globalNavActions } from './global-nav'
@@ -11,6 +12,7 @@ import { sideNavActions } from './side-nav'
 import { syndicatedArticleActions } from './syndicated-article'
 
 export const analyticsActions = {
+  ...accountActions,
   ...collectionsActions,
   ...discoverActions,
   ...globalNavActions,

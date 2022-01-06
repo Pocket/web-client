@@ -1,3 +1,10 @@
+## [1.32.3](https://github.com/Pocket/web-client/compare/v1.32.2...v1.32.3) (2022-01-06)
+
+
+### Bug Fixes
+
+* **account:** add impression to premium button on account settings page ([5d8f733](https://github.com/Pocket/web-client/commit/5d8f733ca317c97d27f1b4ff5641751f90a41a92))
+
 ## [1.32.2](https://github.com/Pocket/web-client/compare/v1.32.1...v1.32.2) (2022-01-05)
 
 
