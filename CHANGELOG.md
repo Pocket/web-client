@@ -1,3 +1,10 @@
+## [1.34.1](https://github.com/Pocket/web-client/compare/v1.34.0...v1.34.1) (2022-01-07)
+
+
+### Bug Fixes
+
+* **waypoint:** strip access token from query param ([530a107](https://github.com/Pocket/web-client/commit/530a1078319475f818f3767885bdc335f852e355))
+
 # [1.34.0](https://github.com/Pocket/web-client/compare/v1.33.1...v1.34.0) (2022-01-07)
 
 
