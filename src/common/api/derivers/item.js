@@ -304,10 +304,10 @@ function saveUrl({ item, itemEnrichment }) {
 /** ANALYTICS URL
  * ————————————————————————————————————
  * @param {object} item An item returned from the server
- * @returns {string} The url that should be saved or opened
+ * @returns {string} The url that should be passed to analytics
  */
-function analyticsUrl({ item, itemEnrichment }) {
-  return itemEnrichment?.url || item?.resolvedUrl || item?.givenUrl || false
+function analyticsUrl({ item }) {
+  return item?.resolvedUrl || item?.givenUrl || false
 }
 
 /** READ URl
