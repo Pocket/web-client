@@ -1,3 +1,19 @@
+# [1.34.0](https://github.com/Pocket/web-client/compare/v1.33.1...v1.34.0) (2022-01-07)
+
+
+### Features
+
+* **dependency:** update nextjs to 12 ([ca91333](https://github.com/Pocket/web-client/commit/ca913335578eeb6609864f1da99125d919722cb3))
+
+## [1.33.1](https://github.com/Pocket/web-client/compare/v1.33.0...v1.33.1) (2022-01-06)
+
+
+### Bug Fixes
+
+* **data-cy:** add data-cy attributes to side nav and account ([b99fa34](https://github.com/Pocket/web-client/commit/b99fa34a914365c7ca6d1810731e79337f855b34))
+* **tags page:** add my-list type to SideNav so it renders the tags ([eb8c81e](https://github.com/Pocket/web-client/commit/eb8c81eab7cd85a72055a2ce8c7c7a36a1a6fb02))
+* **TopicsSideNav:** use index instead of topic.topic_slug for key ([25ec58c](https://github.com/Pocket/web-client/commit/25ec58c367be9a517d5fbf5276a7c90748c0df47))
+
 # [1.33.0](https://github.com/Pocket/web-client/compare/v1.32.3...v1.33.0) (2022-01-06)
 
 

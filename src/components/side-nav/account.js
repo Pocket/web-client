@@ -3,7 +3,7 @@ import { sideNavHeader } from './side-nav'
 export function AccountSideNav() {
   return (
     <>
-      <div className={sideNavHeader}></div>
+      <div data-cy='side-nav-account' className={sideNavHeader}></div>
     </>
   )
 }
