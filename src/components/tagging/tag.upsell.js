@@ -1,7 +1,7 @@
 import { css } from 'linaria'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { PREMIUM_URL } from 'common/constants'
+import { NEW_PREMIUM_URL } from 'common/constants'
 import { PremiumIcon } from '@pocket/web-ui'
 import { Trans } from 'next-i18next'
 
@@ -41,9 +41,9 @@ export const TagUpsell = ({ onVisible }) => {
         </p>
         <ArrowLink
           id="suggested-tags.upgrade-link"
-          data-cy="suggested-tags-upgrade"
+          dataCy="suggested-tags-upgrade"
           margin="10px 0"
-          href={`${PREMIUM_URL}13`}
+          href={`${NEW_PREMIUM_URL}&utm_campaign=suggested-tags`}
           target="_blank">
           <Trans i18nKey="tags:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
