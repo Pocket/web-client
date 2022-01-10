@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
-import { KEYS } from 'common/constants'
+import { KEYS, NEW_PREMIUM_URL } from 'common/constants'
 
 import { breakpointLargeHandset } from '@pocket/web-ui'
 import { ProfileIcon, PremiumIcon } from '@pocket/web-ui'
@@ -250,7 +250,7 @@ const GlobalNavAccount = ({
       {!isPremium ? (
         <VisibilitySensor onVisible={handleVisible}>
           <a
-            href="https://getpocket.com/premium?src=navbar"
+            href={`${NEW_PREMIUM_URL}&utm_campaign=global-nav&src=navbar`}
             id="global-nav.upgrade-link"
             className={`${accountLinkStyle} ${upgradeLinkStyle}`}
             onClick={handlePremiumCase}
