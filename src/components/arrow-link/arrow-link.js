@@ -21,12 +21,14 @@ const linkWrapper = css`
   }
 `
 
-export const ArrowLink = ({ href, target, margin, onClick, children }) => (
+export const ArrowLink = ({ href, target, margin, onClick, children, id, dataCy }) => (
   <a
     className={linkWrapper}
     style={{ margin }}
     href={href}
     target={target}
+    id={id}
+    data-cy={dataCy}
     onClick={onClick}>
     {children}
     <ArrowRightIcon className="arrow-icon" />
