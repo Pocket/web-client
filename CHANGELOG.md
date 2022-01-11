@@ -1,3 +1,10 @@
+## [1.34.2](https://github.com/Pocket/web-client/compare/v1.34.1...v1.34.2) (2022-01-10)
+
+
+### Bug Fixes
+
+* **collections:** remove offset for de ([4273769](https://github.com/Pocket/web-client/commit/427376978fcec88faeae1436a41d67b370407485))
+
 ## [1.34.1](https://github.com/Pocket/web-client/compare/v1.34.0...v1.34.1) (2022-01-07)
 
 

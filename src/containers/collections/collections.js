@@ -32,8 +32,7 @@ export default function Collections({ locale }) {
     url
   }
 
-  const showEoyCollections = locale !== 'de'
-  const startingOffset = showEoyCollections ? 0 : 5
+  const startingOffset = 0
   const useHero = false
 
   return (
