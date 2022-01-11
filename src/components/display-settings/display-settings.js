@@ -27,6 +27,7 @@ import { FONT_RANGE } from 'common/constants'
 import { LINE_HEIGHT } from 'common/constants'
 import { COLUMN_WIDTH } from 'common/constants'
 import { KEYS } from 'common/constants'
+import { PREMIUM_URL } from 'common/constants'
 
 const displayStyles = css`
   & > span {
@@ -272,7 +273,7 @@ export const DisplaySettings = ({
                   <PopupMenuItem
                     id="reader.display-settings"
                     data-cy="display-premium-unlock"
-                    href="https://getpocket.com/premium?ep=3"
+                    href={`${PREMIUM_URL}&utm_campaign=reader-display-settings`}
                     target="_premium"
                     icon={<PremiumIcon />}>
                     <Trans i18nKey="settings:unlock-more-options">

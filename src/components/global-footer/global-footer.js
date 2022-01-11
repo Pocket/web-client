@@ -11,6 +11,7 @@ import { PageContainer } from '@pocket/web-ui'
 import { FacebookMonoIcon, TwitterMonoIcon, InstagramMonoIcon } from '@pocket/web-ui'
 import { Trans, useTranslation } from 'next-i18next'
 import { Languages } from 'connectors/languages/languages'
+import { PREMIUM_URL } from 'common/constants'
 
 const appStoreBadge =
   'https://assets.getpocket.com/web-ui/assets/apple-app-store-badge.2928664fe1fc6aca88583a6f606d60ba.svg'
@@ -329,7 +330,7 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
                   </a>
                 </li>
                 <li>
-                  <a href="https://getpocket.com/premium?ep=1&src=footer_v2">
+                  <a href={`${PREMIUM_URL}&utm_campaign=global-bottom&src=footer_v2`}>
                     {t('global-footer:pocket-premium', 'Pocket Premium')}
                   </a>
                 </li>

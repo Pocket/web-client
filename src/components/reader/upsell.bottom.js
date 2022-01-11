@@ -191,6 +191,8 @@ const buttonWrapper = css`
   }
 `
 
+const premiumURL = `${PREMIUM_URL}&utm_campaign=reader-bottom`
+
 const LibraryAd = () => (
   <>
     <div className={classNames(imgStyles, 'library')}>
@@ -214,7 +216,7 @@ const LibraryAd = () => (
         <ArrowLink
           id="reader.bottom.premium.library"
           data-cy="reader-bottom-premium"
-          href={`${PREMIUM_URL}12`}
+          href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
@@ -226,7 +228,7 @@ const LibraryAd = () => (
         id="reader.bottom.premium.library"
         data-cy="reader-bottom-premium"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>
+        href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </Button>
     </div>
@@ -256,7 +258,7 @@ const SearchAd = () => (
         <ArrowLink
           id="reader.bottom.premium.search"
           data-cy="reader-bottom-premium"
-          href={`${PREMIUM_URL}12`}
+          href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
@@ -268,7 +270,7 @@ const SearchAd = () => (
         id="reader.bottom.premium.search"
         data-cy="reader-bottom-premium"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>
+        href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </Button>
     </div>
@@ -298,7 +300,7 @@ const FocusedAd = () => (
         <ArrowLink
           id="reader.bottom.premium.focused"
           data-cy="reader-bottom-premium"
-          href={`${PREMIUM_URL}12`}
+          href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
@@ -310,7 +312,7 @@ const FocusedAd = () => (
         id="reader.bottom.premium.focused"
         data-cy="reader-bottom-premium"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>
+        href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </Button>
     </div>
@@ -340,7 +342,7 @@ const TypeAd = () => (
         <ArrowLink
           id="reader.bottom.premium.type"
           data-cy="reader-bottom-premium"
-          href={`${PREMIUM_URL}12`}
+          href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
@@ -352,7 +354,7 @@ const TypeAd = () => (
         id="reader.bottom.premium.type"
         data-cy="reader-bottom-premium"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>
+        href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </Button>
     </div>
@@ -382,7 +384,7 @@ const BigDiamondAd = () => (
         <ArrowLink
           id="reader.bottom.premium.features"
           data-cy="reader-bottom-premium"
-          href={`${PREMIUM_URL}12`}
+          href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
@@ -394,7 +396,7 @@ const BigDiamondAd = () => (
         id="reader.bottom.premium.features"
         data-cy="reader-bottom-premium"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>
+        href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </Button>
     </div>
@@ -424,7 +426,7 @@ const HighlightAd = () => (
         <ArrowLink
           id="reader.bottom.premium.highlights"
           data-cy="reader-bottom-premium"
-          href={`${PREMIUM_URL}12`}
+          href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
@@ -436,7 +438,7 @@ const HighlightAd = () => (
         id="reader.bottom.premium.highlights"
         data-cy="reader-bottom-premium"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>
+        href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </Button>
     </div>
@@ -466,7 +468,7 @@ const TagsAd = () => (
         <ArrowLink
           id="reader.bottom.premium.tags"
           data-cy="reader-bottom-premium"
-          href={`${PREMIUM_URL}12`}
+          href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
@@ -478,7 +480,7 @@ const TagsAd = () => (
         id="reader.bottom.premium.tags"
         data-cy="reader-bottom-premium"
         target="_blank"
-        href={`${PREMIUM_URL}12`}>
+        href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </Button>
     </div>

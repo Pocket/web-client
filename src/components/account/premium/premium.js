@@ -3,6 +3,7 @@ import { Button } from '@pocket/web-ui'
 import { useTranslation } from 'next-i18next'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
+import { PREMIUM_URL } from 'common/constants'
 
 const premiumStyle = css`
   h2 {
@@ -51,7 +52,7 @@ export const Premium = ({ isPremium, onPremiumImpression }) => {
               <Button variant="brand">{t('account:premium-manage', 'Manage Subscription')}</Button>
             </a>
           ) : (
-            <a href="https://getpocket.com/premium" ref={viewRef}>
+            <a href={`${PREMIUM_URL}&utm_campaign=account-settings`} ref={viewRef}>
               <Button variant="brand">
                 {t('account:premium-subscribe', 'Get Pocket Premium')}
               </Button>
