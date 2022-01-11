@@ -215,7 +215,7 @@ const LibraryAd = () => (
         </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.library"
-          data-cy="reader-bottom-premium"
+          dataCy="reader-bottom-premium"
           href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
@@ -257,7 +257,7 @@ const SearchAd = () => (
         </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.search"
-          data-cy="reader-bottom-premium"
+          dataCy="reader-bottom-premium"
           href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
@@ -299,7 +299,7 @@ const FocusedAd = () => (
         </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.focused"
-          data-cy="reader-bottom-premium"
+          dataCy="reader-bottom-premium"
           href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
@@ -341,7 +341,7 @@ const TypeAd = () => (
         </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.type"
-          data-cy="reader-bottom-premium"
+          dataCy="reader-bottom-premium"
           href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
@@ -383,7 +383,7 @@ const BigDiamondAd = () => (
         </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.features"
-          data-cy="reader-bottom-premium"
+          dataCy="reader-bottom-premium"
           href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
@@ -425,7 +425,7 @@ const HighlightAd = () => (
         </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.highlights"
-          data-cy="reader-bottom-premium"
+          dataCy="reader-bottom-premium"
           href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
@@ -467,7 +467,7 @@ const TagsAd = () => (
         </Trans>{' '}
         <ArrowLink
           id="reader.bottom.premium.tags"
-          data-cy="reader-bottom-premium"
+          dataCy="reader-bottom-premium"
           href={premiumURL}
           target="_blank">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
