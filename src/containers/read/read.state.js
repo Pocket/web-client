@@ -50,8 +50,8 @@ import { HYDRATE } from 'actions'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const itemDataRequest = (itemId) => ({ type: ARTICLE_ITEM_REQUEST, itemId }) //prettier-ignore
-export const saveAnnotation = ({ item_id, quote, patch }) => ({ type: ANNOTATION_SAVE_REQUEST, item_id, quote, patch }) //prettier-ignore
-export const deleteAnnotation = ({ item_id, annotation_id }) => ({ type: ANNOTATION_DELETE_REQUEST, item_id, annotation_id }) //prettier-ignore
+export const saveAnnotation = ({ itemId, quote, patch }) => ({ type: ANNOTATION_SAVE_REQUEST, item_id: itemId, quote, patch }) //prettier-ignore
+export const deleteAnnotation = ({ itemId, annotation_id }) => ({ type: ANNOTATION_DELETE_REQUEST, item_id: itemId, annotation_id }) //prettier-ignore
 export const updateLineHeight = (lineHeight) => ({ type: UPDATE_LINE_HEIGHT, lineHeight }) //prettier-ignore
 export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, columnWidth }) //prettier-ignore
 export const updateFontSize = (fontSize) => ({ type: UPDATE_FONT_SIZE, fontSize }) //prettier-ignore
