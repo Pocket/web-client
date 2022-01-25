@@ -104,10 +104,11 @@ export function deriveRecommendation(
 }
 
 export function deriveReccit(recommendation) {
-  const { item: passedItem, ...rest } = recommendation //eslint-disable-line no-unused-vars
+  const { item: passedItem, sort_id, ...rest } = recommendation //eslint-disable-line no-unused-vars
   const {
-    node: { item }
-  } = modernizeItem(passedItem)
+    node: { item },
+  } = modernizeItem({...passedItem, sort_id})
+
   const derivedItem = deriveItem({ item, utmId: 'pocket_rec' })
 
   return derivedItem
