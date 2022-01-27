@@ -8,7 +8,8 @@ export default function Waypoint() {}
 export async function getServerSideProps({ req, locale, query, defaultLocale, locales }) {
   // returns first two letters of browser defined language settings
   const lang = req.headers['accept-language'].toString().substring(0, 2)
-  const langPrefix = lang !== defaultLocale && locales.includes(lang) ? `/${lang}` : ''
+  const supportedLocale = locales.includes(lang)
+  const langPrefix = lang !== defaultLocale && supportedLocale ? `/${lang}` : ''
   const authToken = query?.access_token || false
   delete query.access_token
 
@@ -21,7 +22,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
   // NOTE: this will redirect to my list 100% of the time on localhost
   const { user_id, birth } = response?.user || {}
 
-  if (!user_id || !birth || locale !== defaultLocale || lang !== defaultLocale) {
+  if (!user_id || !birth || locale !== defaultLocale || lang !== defaultLocale && supportedLocale) {
     return {
       redirect: {
         permanent: false,
