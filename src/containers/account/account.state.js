@@ -1,8 +1,8 @@
 import { put, takeLatest, call } from 'redux-saga/effects'
 
-import { getUserInfo } from 'common/api/user'
-import { createGuid } from 'common/api/user'
-import { getRecItProfile } from 'common/api/user'
+import { getUserInfo } from 'common/api/_legacy/user'
+import { createGuid } from 'common/api/_legacy/user'
+import { getRecItProfile } from 'common/api/_legacy/user'
 
 import { setCookie } from 'nookies'
 

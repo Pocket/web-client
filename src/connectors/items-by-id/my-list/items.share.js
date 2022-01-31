@@ -1,6 +1,6 @@
 import { put, call, takeEvery, take, race, select } from 'redux-saga/effects'
 
-import { sendItemActions } from 'common/api/item-actions'
+import { sendItemActions } from 'common/api/_legacy/item-actions'
 
 import { ITEMS_SHARE_REQUEST } from 'actions'
 import { ITEMS_SHARE_CANCEL } from 'actions'

@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects'
 
-import { getAccountNotifications, setAccountNotifications } from 'common/api/account'
+import { getAccountNotifications, setAccountNotifications } from 'common/api/_legacy/account'
 
 import { ACCOUNT_GET_NOTIFICATIONS_REQUEST } from 'actions'
 import { ACCOUNT_GET_NOTIFICATIONS_SUCCESS } from 'actions'

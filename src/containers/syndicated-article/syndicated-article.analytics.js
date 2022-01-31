@@ -1,6 +1,6 @@
 import ReactGA from 'react-ga'
 import { v4 as uuid } from 'uuid'
-import { legacyAnalyticsTrack } from 'common/api/legacy-analytics'
+import { legacyAnalyticsTrack } from 'common/api/_legacy/legacy-analytics'
 
 export const PUBLISHER_MODULE = 'syndicated_publisher'
 export const POCKET_MODULE = 'syndicated_article'

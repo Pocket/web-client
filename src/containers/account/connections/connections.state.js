@@ -1,6 +1,9 @@
 import { put, takeLatest, call } from 'redux-saga/effects'
 
-import { getConnectedServices, revokeConnectedServices } from 'common/api/connected-services'
+import {
+  getConnectedServices,
+  revokeConnectedServices
+} from 'common/api/_legacy/connected-services'
 
 import { ACCOUNT_GET_CONNECTIONS_REQUEST } from 'actions'
 import { ACCOUNT_GET_CONNECTIONS_SUCCESS } from 'actions'

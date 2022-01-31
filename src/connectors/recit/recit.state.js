@@ -32,12 +32,12 @@ import {
 
 import { ITEMS_ADD_SUCCESS, HOME_SIMILAR_REC_SAVE_SUCCESS } from 'actions'
 
-import { getPublisherRecs } from 'common/api/recit'
-import { getPocketRecs } from 'common/api/recit'
-import { getRecommendations } from 'common/api/recit'
-import { getHomeRecommendations } from 'common/api/recit'
-import { saveItem as saveItemAPI } from 'common/api/saveItem'
-import { removeItem as removeItemAPI } from 'common/api/removeItem'
+import { getPublisherRecs } from 'common/api/_legacy/recit'
+import { getPocketRecs } from 'common/api/_legacy/recit'
+import { getRecommendations } from 'common/api/_legacy/recit'
+import { getHomeRecommendations } from 'common/api/_legacy/recit'
+import { saveItem as saveItemAPI } from 'common/api/_legacy/saveItem'
+import { removeItem as removeItemAPI } from 'common/api/_legacy/removeItem'
 
 import { arrayToObject } from 'common/utilities'
 import { checkExternal } from './recit.derive'

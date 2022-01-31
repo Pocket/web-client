@@ -1,5 +1,5 @@
 import { takeLatest, put } from 'redux-saga/effects'
-import { pocketHitsSignup } from 'common/api/pocket-hits'
+import { pocketHitsSignup } from 'common/api/_legacy/pocket-hits'
 
 import {
   POCKET_HITS_SIGNUP_REQUESTED,
@@ -74,9 +74,7 @@ export const pocketHitsReducers = (state = initialState, action) => {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 
-export const pocketHitsSagas = [
-  takeLatest(POCKET_HITS_SIGNUP_REQUESTED, signupRequest)
-]
+export const pocketHitsSagas = [takeLatest(POCKET_HITS_SIGNUP_REQUESTED, signupRequest)]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */

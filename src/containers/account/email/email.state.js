@@ -1,7 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects'
 
-import { putAccountChange, addEmailAlias, removeEmailAlias } from 'common/api/account'
-import { resendConfirmation } from 'common/api/account'
+import { putAccountChange, addEmailAlias, removeEmailAlias } from 'common/api/_legacy/account'
+import { resendConfirmation } from 'common/api/_legacy/account'
 
 import { USER_SUCCESS } from 'actions'
 import { ACCOUNT_EMAIL_UPDATE_REQUEST } from 'actions'

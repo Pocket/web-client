@@ -1,4 +1,4 @@
-import { getUserInfo } from 'common/api/user'
+import { getUserInfo } from 'common/api/_legacy/user'
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import queryString from 'query-string'
@@ -22,7 +22,12 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
   // NOTE: this will redirect to my list 100% of the time on localhost
   const { user_id, birth } = response?.user || {}
 
-  if (!user_id || !birth || locale !== defaultLocale || lang !== defaultLocale && supportedLocale) {
+  if (
+    !user_id ||
+    !birth ||
+    locale !== defaultLocale ||
+    (lang !== defaultLocale && supportedLocale)
+  ) {
     return {
       redirect: {
         permanent: false,

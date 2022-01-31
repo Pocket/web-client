@@ -1,8 +1,8 @@
 import { put, call, takeLatest } from 'redux-saga/effects'
-import { getFeedByUser } from 'common/api/profile'
-import { sendItemActions } from 'common/api/item-actions'
+import { getFeedByUser } from 'common/api/_legacy/profile'
+import { sendItemActions } from 'common/api/_legacy/item-actions'
 import { arrayToObject } from 'common/utilities'
-import { saveItem as saveItemAPI } from 'common/api/saveItem'
+import { saveItem as saveItemAPI } from 'common/api/_legacy/saveItem'
 import { deriveProfile } from 'common/api/derivers/item'
 
 import { API_ACTION_DELETE_RECOMMEND } from 'common/constants'

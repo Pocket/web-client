@@ -1,7 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects'
-import { setRssProtection } from 'common/api/account'
-import { clearAccount } from 'common/api/account'
-import { deleteAccount } from 'common/api/account'
+import { setRssProtection } from 'common/api/_legacy/account'
+import { clearAccount } from 'common/api/_legacy/account'
+import { deleteAccount } from 'common/api/_legacy/account'
 import { LOGIN_URL } from 'common/constants'
 
 import { ACCOUNT_FEED_PROTECTION_REQUEST } from 'actions'

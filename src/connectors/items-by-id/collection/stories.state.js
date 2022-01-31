@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import { saveItem as saveItemAPI } from 'common/api/saveItem'
+import { saveItem as saveItemAPI } from 'common/api/_legacy/saveItem'
 import { deriveStory } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
 

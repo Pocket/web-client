@@ -1,7 +1,7 @@
 import { put, call, takeEvery, select } from 'redux-saga/effects'
-import { getShares } from 'common/api/messages'
-import { resendConfirmation } from 'common/api/messages'
-import { sendItemActions } from 'common/api/item-actions'
+import { getShares } from 'common/api/_legacy/messages'
+import { resendConfirmation } from 'common/api/_legacy/messages'
+import { sendItemActions } from 'common/api/_legacy/item-actions'
 import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 

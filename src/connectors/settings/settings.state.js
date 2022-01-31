@@ -1,6 +1,6 @@
 import { put, takeLatest, select } from 'redux-saga/effects'
-import { getAppSettings } from 'common/api/settings'
-import { putAppSettings } from 'common/api/settings'
+import { getAppSettings } from 'common/api/_legacy/settings'
+import { putAppSettings } from 'common/api/_legacy/settings'
 
 import { localStore } from 'common/utilities'
 import { getObjectWithValidKeysOnly } from 'common/utilities'
@@ -24,7 +24,7 @@ import { CACHE_KEY_HOME_STORED_TOPICS } from 'common/constants'
 const initialState = {
   pinnedTags: [],
   pinnedTopics: [],
-  settingsFetched: false,
+  settingsFetched: false
 }
 
 /** ACTIONS
@@ -41,7 +41,7 @@ export const settingsReducers = (state = initialState, action) => {
       return {
         ...state,
         ...filterSettings(settings, initialState),
-        settingsFetched: true,
+        settingsFetched: true
       }
     }
 

@@ -1,7 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects'
 
-import { saveItem as saveItemAPI } from 'common/api/saveItem'
-import { removeItem as removeItemAPI } from 'common/api/removeItem'
+import { saveItem as saveItemAPI } from 'common/api/_legacy/saveItem'
+import { removeItem as removeItemAPI } from 'common/api/_legacy/removeItem'
 
 import { HOME_LINEUP_SUCCESS } from 'actions'
 import { HOME_SAVE_REQUEST } from 'actions'

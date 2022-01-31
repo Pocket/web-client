@@ -1,5 +1,5 @@
 import { put, call, take, takeLatest, race } from 'redux-saga/effects'
-import { sendItemActions } from 'common/api/item-actions'
+import { sendItemActions } from 'common/api/_legacy/item-actions'
 import { buildActions } from 'connectors/items-by-id/my-list/build-actions'
 import { batchSendActions } from 'connectors/items-by-id/my-list/build-actions'
 

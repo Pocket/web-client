@@ -1,5 +1,5 @@
 import { put, takeLatest, select, delay, call } from 'redux-saga/effects'
-import { putAccountChange, setAvatar } from 'common/api/account'
+import { putAccountChange, setAvatar } from 'common/api/_legacy/account'
 import { LOGIN_URL } from 'common/constants'
 import { USER_SUCCESS } from 'actions'
 

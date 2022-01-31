@@ -1,7 +1,7 @@
 import { put, call, takeEvery, select } from 'redux-saga/effects'
-import { fetchStoredTags } from 'common/api/tags'
-import { renameStoredTag } from 'common/api/tags'
-import { deleteStoredTag } from 'common/api/tags'
+import { fetchStoredTags } from 'common/api/_legacy/tags'
+import { renameStoredTag } from 'common/api/_legacy/tags'
+import { deleteStoredTag } from 'common/api/_legacy/tags'
 import { fetchMyListData } from 'containers/my-list/my-list.state'
 
 import { USER_TAGS_GET_REQUEST } from 'actions'

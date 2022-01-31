@@ -1,7 +1,7 @@
 import { put, call, take, race, select } from 'redux-saga/effects'
 import { takeLatest, takeEvery } from 'redux-saga/effects'
-import { sendItemActions } from 'common/api/item-actions'
-import { getSuggestedTags } from 'common/api/tags'
+import { sendItemActions } from 'common/api/_legacy/item-actions'
+import { getSuggestedTags } from 'common/api/_legacy/tags'
 import { buildActions } from 'connectors/items-by-id/my-list/build-actions'
 import { batchSendActions } from 'connectors/items-by-id/my-list/build-actions'
 

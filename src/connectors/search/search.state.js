@@ -1,4 +1,4 @@
-import { getRecentSearches, saveRecentSearches } from 'common/api/search'
+import { getRecentSearches, saveRecentSearches } from 'common/api/_legacy/search'
 import { put, takeLatest, call } from 'redux-saga/effects'
 
 import { USER_SEARCH_RECENT_GET } from 'actions'
@@ -31,7 +31,7 @@ export const userSearchReducers = (state = initialState, action) => {
     case USER_SEARCH_RECENT_ADD: {
       const { searchTerm } = action
       const set = new Set([searchTerm, ...state.recent])
-      const recent = Array.from(set).slice(0,5)
+      const recent = Array.from(set).slice(0, 5)
       return { ...state, recent }
     }
 

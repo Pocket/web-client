@@ -1,5 +1,5 @@
 import { put, call, takeEvery } from 'redux-saga/effects'
-import { sendItemActions } from 'common/api/item-actions'
+import { sendItemActions } from 'common/api/_legacy/item-actions'
 
 import { ITEMS_ADD_REQUEST } from 'actions'
 import { ITEMS_ADD_SUCCESS } from 'actions'

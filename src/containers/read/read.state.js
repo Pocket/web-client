@@ -39,9 +39,9 @@ import { ITEMS_TAG_SEND } from 'actions'
 import { API_ACTION_ADD_ANNOTATION } from 'common/constants'
 import { API_ACTION_DELETE_ANNOTATION } from 'common/constants'
 
-import { getArticleText } from 'common/api/reader'
-import { getArticleFromId } from 'common/api/reader'
-import { sendItemActions } from 'common/api/item-actions'
+import { getArticleText } from 'common/api/_legacy/reader'
+import { getArticleFromId } from 'common/api/_legacy/reader'
+import { sendItemActions } from 'common/api/_legacy/item-actions'
 
 import { deriveListItem } from 'common/api/derivers/item'
 

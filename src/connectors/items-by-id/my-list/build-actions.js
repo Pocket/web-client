@@ -1,5 +1,5 @@
 import { put, call } from 'redux-saga/effects'
-import { sendItemActions } from 'common/api/item-actions'
+import { sendItemActions } from 'common/api/_legacy/item-actions'
 import { chunk } from 'common/utilities/object-array/object-array'
 
 import { ITEMS_BULK_BATCH_BEGIN } from 'actions'
