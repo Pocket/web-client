@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request'
 import { UNLEASH_API_URL } from 'common/constants'
-import getUnleashAssignments from './graphql-queries/get-unleash-assignments'
+import getUnleashAssignments from './queries/get-unleash-assignments'
 
 /**
  * getUnleash

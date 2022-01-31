@@ -9,7 +9,7 @@
  *
  */
 import { gql } from 'graphql-request'
-import { FRAGMENT_ITEM } from './fragment.item'
+import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const getSlateLineup = gql`
   query GetSlateLineup($id: String!, $recommendationCount: Int, $slateCount: Int) {

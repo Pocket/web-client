@@ -2,7 +2,7 @@ import { requestGQL } from 'common/utilities/request/request'
 import { TOPIC_IDS } from 'common/constants'
 import { processLineup } from 'common/api/derivers/lineups'
 
-import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
+import getSlateLineup from 'common/api/queries/get-slate-lineup'
 
 export async function getDiscoverFeed({ recommendationCount = 30, locale }) {
   const id = getLocaleId(locale)

@@ -1,5 +1,5 @@
 import { gql } from 'graphql-request'
-import { FRAGMENT_ITEM } from './fragment.item'
+import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const getSlate = gql`
   query GetSlate($id: String!, $recommendationCount: Int) {

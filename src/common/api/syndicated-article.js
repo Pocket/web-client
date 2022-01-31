@@ -1,5 +1,5 @@
 import { GraphQLClient } from 'graphql-request'
-import getArticleBySlug from 'common/api/graphql-queries/get-article-by-slug'
+import getArticleBySlug from 'common/api/queries/get-article-by-slug'
 import { ARTICLE_API_URL, ARTICLE_API_KEY } from 'common/constants'
 import fetch from 'isomorphic-unfetch'
 

@@ -1,6 +1,6 @@
 import { request, requestGQL } from 'common/utilities/request/request'
 import { TOPICS_BY_NAME } from 'common/constants'
-import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
+import getSlateLineup from 'common/api/queries/get-slate-lineup'
 import { processLineup } from 'common/api/derivers/lineups'
 
 export async function getNewTopicFeed(topic, recommendationCount = 30) {

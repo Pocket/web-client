@@ -1,5 +1,5 @@
 import { requestGQL } from 'common/utilities/request/request'
-import getSlateLineup from 'common/api/graphql-queries/get-slate-lineup'
+import getSlateLineup from 'common/api/queries/get-slate-lineup'
 import { processLineup } from 'common/api/derivers/lineups'
 
 export async function getHomeLineup({ id, recommendationCount = 5 }) {
