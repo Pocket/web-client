@@ -11,11 +11,10 @@
 import { gql } from 'graphql-request'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 import { requestGQL } from 'common/utilities/request/request'
-import getSlateLineup from 'common/api/queries/get-slate-lineup'
 import { processLineup } from 'common/api/derivers/lineups'
 
 const getHomeLineupQuery = gql`
-  query GetSlateLineup($id: String!, $recommendationCount: Int, $slateCount: Int) {
+  query GetHomeLineup($id: String!, $recommendationCount: Int, $slateCount: Int) {
     getSlateLineup(
       slateLineupId: $id
       recommendationCount: $recommendationCount
