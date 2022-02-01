@@ -6,6 +6,6 @@ export const SuccessFXA = () => {
   const queryParams = window.location.search
   const showMessage = queryParams.includes('fxa_migration=1')
 
-  const title = t('Your account has been migrated successfully.')
+  const title = t('fxa:success', 'Your account has been migrated successfully.')
   return showMessage ? <Snackbar title={title} /> : null
 }
