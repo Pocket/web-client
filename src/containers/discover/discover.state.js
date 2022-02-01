@@ -1,7 +1,5 @@
 import { takeLatest, put, takeEvery } from 'redux-saga/effects'
-import { getDiscoverFeed } from 'common/api/discover'
-import { deriveRecommendation } from 'common/api/derivers/item'
-import { arrayToObject } from 'common/utilities'
+import { getDiscoverLineup } from 'common/api'
 
 import { DISCOVER_DATA_REQUEST } from 'actions'
 import { DISCOVER_DATA_SUCCESS } from 'actions'
@@ -105,7 +103,7 @@ function* discoverUnSaveRequest(action) {
  */
 export async function fetchDiscoverData({ locale }) {
   try {
-    const { itemsById, items } = await getDiscoverFeed({ locale })
+    const { itemsById, items } = await getDiscoverLineup({ locale })
 
     return { items, itemsById }
   } catch (error) {

@@ -8,6 +8,7 @@ export { getCollections } from './queries/get-collections'
 export { getCollectionBySlug } from './queries/get-collection-by-slug'
 
 // Discover
+export { getDiscoverLineup } from './queries/get-discover'
 
 // Discover Topic Pages
 export { getTopicLineup } from './queries/get-topic-lineup'
