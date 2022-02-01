@@ -1,7 +1,8 @@
 import { gql } from 'graphql-request'
+import { requestGQL } from 'common/utilities/request/request'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
-const getCollectionBySlug = gql`
+const getCollectionBySlugQuery = gql`
   query GetCollectionBySlug($getCollectionBySlugSlug: String!) {
     getCollectionBySlug(slug: $getCollectionBySlugSlug) {
       slug
@@ -50,4 +51,11 @@ const getCollectionBySlug = gql`
   ${FRAGMENT_ITEM}
 `
 
-export default getCollectionBySlug
+export function getCollectionBySlug(slug) {
+  return requestGQL({
+    query: getCollectionBySlugQuery,
+    variables: { getCollectionBySlugSlug: slug }
+  })
+    .then((response) => response?.data?.getCollectionBySlug)
+    .catch((error) => console.error(error))
+}

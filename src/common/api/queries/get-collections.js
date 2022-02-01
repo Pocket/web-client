@@ -1,6 +1,7 @@
 import { gql } from 'graphql-request'
+import { requestGQL } from 'common/utilities/request/request'
 
-const getCollections = gql`
+const getCollectionsQuery = gql`
   query GetCollections($getCollectionLang: String!) {
     getCollections(filters: { language: $getCollectionLang }) {
       collections {
@@ -22,4 +23,11 @@ const getCollections = gql`
   }
 `
 
-export default getCollections
+export function getCollections(lang = 'en') {
+  return requestGQL({
+    query: getCollectionsQuery,
+    variables: { getCollectionLang: lang }
+  })
+    .then((response) => response?.data?.getCollections?.collections)
+    .catch((error) => console.error(error))
+}
