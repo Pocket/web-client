@@ -1,5 +1,7 @@
 import { gql } from 'graphql-request'
-const getUnleashAssignments = gql`
+import { requestGQL } from 'common/utilities/request/request'
+
+const getUnleashAssignmentsQuery = gql`
   query GetUnleashAssignments(
     $sessionId: String!
     $userId: String
@@ -30,4 +32,23 @@ const getUnleashAssignments = gql`
   }
 `
 
-export default getUnleashAssignments
+/**
+ * getUnleash
+ * @param {string} sessionId unique identifier (sess_guid)
+ * @param {string} userId user id if available
+ * @param {string} birth account creation date if available
+ * @param {string} appName name of the app asking for features
+ */
+export async function getUnleashAssignments(sessionId, userId, birth, appName, locale, userModels) {
+  const variables = {
+    sessionId,
+    userId,
+    accountCreatedAt: birth,
+    appName,
+    locale,
+    recItUserProfile: { userModels }
+  }
+  return requestGQL({ query: getUnleashAssignmentsQuery, variables })
+    .then((response) => response.data.getUnleashAssignments)
+    .catch((error) => console.error(error))
+}

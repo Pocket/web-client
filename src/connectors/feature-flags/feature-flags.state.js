@@ -1,4 +1,4 @@
-import { getUnleash } from 'common/api/unleash'
+import { getUnleashAssignments } from 'common/api'
 import { arrayToObject } from 'common/utilities'
 import { FEATURES_HYDRATE, FEATURES_TOGGLE, HYDRATE } from 'actions'
 
@@ -48,7 +48,14 @@ export const featureSagas = []
 ---------------------------------------------------------------- */
 export async function fetchUnleashData(userId, sessionId, birth, locale, userModels = []) {
   try {
-    const response = await getUnleash(sessionId, userId, birth, 'web-client', locale, userModels)
+    const response = await getUnleashAssignments(
+      sessionId,
+      userId,
+      birth,
+      'web-client',
+      locale,
+      userModels
+    )
 
     // Filter and derive proper test values from the unleash response
     const filteredAssignments = await filterUnleashAssignments(response)
