@@ -1,6 +1,10 @@
 import { gql } from 'graphql-request'
-const getArticleBySlug = gql`
-  query GetArticleBySlug($slug: String) {
+import { GraphQLClient } from 'graphql-request'
+import { ARTICLE_API_URL, ARTICLE_API_KEY } from 'common/constants'
+import fetch from 'isomorphic-unfetch'
+
+const getSyndicatedArticleQuery = gql`
+  query GetSyndicatedArticle($slug: String) {
     getArticleBySlug(slug: $slug) {
       items {
         id
@@ -59,5 +63,32 @@ const getArticleBySlug = gql`
     }
   }
 `
+/**
+ * Fetches the content related to an article
+ * @param {String} slug  title of article
+ */
+export async function getSyndicatedArticle(slug) {
+  const variables = { slug }
+  const url = ARTICLE_API_URL
+  const headers = {
+    'x-api-key': ARTICLE_API_KEY
+  }
 
-export default getArticleBySlug
+  const client = new GraphQLClient(url, { headers })
+  return await client
+    .request(getSyndicatedArticleQuery, variables)
+    .then((response) => response.getArticleBySlug)
+    .catch((error) => console.error(error))
+}
+
+export async function getRandomSyndicatedArticle(baseUrl) {
+  try {
+    const { title } = await fetch(`http://${baseUrl}/mockAPI/article/random`).then((response) =>
+      response.json()
+    )
+
+    return getSyndicatedArticle(title)
+  } catch {
+    throw new Error('All the things have gone wrong')
+  }
+}

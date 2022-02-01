@@ -16,4 +16,10 @@ export { getTopicLineup } from './queries/get-topic-lineup'
 // Home Endpoints
 export { getHomeLineup } from './queries/get-home'
 
+// Syndicated Article
+export { getSyndicatedArticle } from './queries/get-syndicated-article'
+
+// Random Syndicated Article (dev)
+export { getRandomSyndicatedArticle } from './queries/get-syndicated-article'
+
 // MyList

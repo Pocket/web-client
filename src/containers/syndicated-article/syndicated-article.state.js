@@ -8,7 +8,7 @@ import {
   ARTICLE_UNSAVE_SUCCESS,
   ARTICLE_UNSAVE_FAILURE
 } from 'actions'
-import { getSyndicatedArticle, getRandomSyndicatedArticle } from 'common/api/syndicated-article'
+import { getSyndicatedArticle, getRandomSyndicatedArticle } from 'common/api'
 import { saveItem } from 'common/api/_legacy/saveItem'
 import { removeItem } from 'common/api/_legacy/removeItem'
 import { HYDRATE } from 'actions'
@@ -55,9 +55,10 @@ export const syndicatedArticleReducers = (state = initialState, action) => {
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
-    case HYDRATE:
+    case HYDRATE: {
       const { syndicatedArticle } = action.payload
       return { ...state, ...syndicatedArticle }
+    }
 
     default:
       return state
