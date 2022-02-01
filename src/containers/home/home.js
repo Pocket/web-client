@@ -21,6 +21,7 @@ import { ShareModal } from 'connectors/confirm-share/confirm-share'
 import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
 import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { Toasts } from 'connectors/toasts/toast-list'
+import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 import { Onboarding } from 'connectors/onboarding/onboarding'
 
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
@@ -52,6 +53,7 @@ export const Home = ({ metaData }) => {
 
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
+      <SuccessFXA />
       <SectionWrapper>
         <HomeGreeting />
         <HomeRecentSaves />
