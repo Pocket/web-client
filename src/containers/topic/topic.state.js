@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import { getTopicFeed } from 'common/api/topics'
+import { getTopicLineup } from 'common/api'
 
 import { TOPIC_HYDRATE } from 'actions'
 import { TOPIC_SAVE_REQUEST } from 'actions'
@@ -82,7 +82,7 @@ export async function fetchTopicData(topic) {
     // 100% curated, so we need to ask for more `curated` and omit the
     // algorithmic results
 
-    const { itemsById, curatedItems, algorithmicItems } = await getTopicFeed(topic, 30)
+    const { itemsById, curatedItems, algorithmicItems } = await getTopicLineup(topic, 30)
 
     return {
       topic,
