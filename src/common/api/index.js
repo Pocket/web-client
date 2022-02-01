@@ -12,4 +12,7 @@ export { getCollectionBySlug } from './queries/get-collection-by-slug'
 // Discover Topic Pages
 export { getTopicLineup } from './queries/get-topic-lineup'
 
+// Home Endpoints
+export { getHomeLineup } from './queries/get-home'
+
 // MyList

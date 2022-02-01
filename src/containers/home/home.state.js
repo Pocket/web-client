@@ -1,6 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects'
 import { getMyList } from 'common/api/my-list'
-import { getHomeLineup as apiGetHomeLineup } from 'common/api/home'
+import { getHomeLineup as apiGetHomeLineup } from 'common/api'
 import { saveItem } from 'common/api/_legacy/saveItem'
 import { removeItem } from 'common/api/_legacy/removeItem'
 
