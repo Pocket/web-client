@@ -1,8 +1,4 @@
 import { take, takeEvery, takeLatest, call, put, select } from 'redux-saga/effects'
-
-import { snowplowTrackPageView } from 'common/api/snowplow-analytics'
-import { sendCustomSnowplowEvent } from 'common/api/snowplow-analytics'
-
 import { analyticsActions } from 'connectors/snowplow/actions'
 
 import { createContentOpenEvent } from 'connectors/snowplow/events'
@@ -210,4 +206,35 @@ export function* fireSnowplowEvent({ identifier, data }) {
   }
 
   yield call(sendCustomSnowplowEvent, event, entities)
+}
+
+/** UTILITIES :: THIRD PARTY SEND
+ --------------------------------------------------------------- 
+ * functions here assume snowplow has already been loaded in, e.g. for automatic tracking
+ */
+
+/**
+ * Send a custom event to Snowplow
+ *
+ * Likely formatted from one of the following utilities, so far:
+ *   - src/common/snowplow/events/[ event ].js
+ *   - src/common/snowplow/entities/[ entity ].js
+ *
+ * @param {Object} snowplowEvent - self-describing JSON detailing the user event
+ * @param {Object[]} [snowplowEntities=[]] - self-describing JSON detailing the context in which the event happened
+ */
+const sendCustomSnowplowEvent = (event, context = []) => {
+  try {
+    global.snowplow('trackSelfDescribingEvent', { event, context })
+  } catch {
+    console.warn('CustomEvent: snowplow library is not available')
+  }
+}
+
+const snowplowTrackPageView = () => {
+  try {
+    global.snowplow('trackPageView')
+  } catch {
+    console.warn('PageView: snowplow library is not available')
+  }
 }

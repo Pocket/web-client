@@ -1,4 +1,4 @@
-import { getSchemaUri } from 'common/api/snowplow-analytics'
+import { getSchemaUri } from 'connectors/snowplow/snowplow.utilities'
 import { getObjectWithValidKeysOnly } from 'common/utilities'
 
 /**
@@ -18,7 +18,7 @@ const createContentEntity = ({ url, id }) => ({
   schema: CONTENT_SCHEMA_URL,
   data: getObjectWithValidKeysOnly({
     url,
-    item_id: (id) ? parseInt(id, 10) : null
+    item_id: id ? parseInt(id, 10) : null
   })
 })
 

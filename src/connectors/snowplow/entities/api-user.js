@@ -1,5 +1,5 @@
 import { API_USER_ID } from 'common/constants'
-import { getSchemaUri } from 'common/api/snowplow-analytics'
+import { getSchemaUri } from 'connectors/snowplow/snowplow.utilities'
 
 const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
 

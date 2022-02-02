@@ -1,4 +1,4 @@
-import { getSchemaUri } from 'common/api/snowplow-analytics'
+import { getSchemaUri } from 'connectors/snowplow/snowplow.utilities'
 
 /**
  * Schema information:
@@ -15,7 +15,11 @@ const SLATE_SCHEMA_URL = getSchemaUri('slate_lineup')
  *
  * @returns {{schema: *, data: {slate_lineup_id: string, request_id: string, experiment: string }}}
  */
-export const createSlateLineupEntity = ({ slateLineupId, slateLineupRequestId, slateLineupExperiment }) => ({
+export const createSlateLineupEntity = ({
+  slateLineupId,
+  slateLineupRequestId,
+  slateLineupExperiment
+}) => ({
   schema: SLATE_SCHEMA_URL,
   data: {
     slate_lineup_id: slateLineupId,

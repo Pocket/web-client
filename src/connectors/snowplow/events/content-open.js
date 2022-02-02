@@ -1,4 +1,4 @@
-import { getSchemaUri } from 'common/api/snowplow-analytics'
+import { getSchemaUri } from 'connectors/snowplow/snowplow.utilities'
 
 /**
  * Schema information:
