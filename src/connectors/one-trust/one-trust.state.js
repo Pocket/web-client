@@ -22,10 +22,19 @@ const updateCategories = (groups) => {
 /** ACTIONS
  --------------------------------------------------------------- */
 let OptanonAnalyticsCookie
+let OptanonTrackingCookie
 // This function is called automatically by OneTrusts script
 global.OptanonWrapper = () => {
   const onetrustCookies = arrayToObject(updateCategories(global.OptanonActiveGroups), 'name')
   const analyticsEnabled = onetrustCookies.analytics.enabled
+  const trackingEnabled = onetrustCookies.tracking.enabled
+
+  if (OptanonTrackingCookie !== trackingEnabled) {
+    const personalized = trackingEnabled ? 0 : 1
+    googletag.pubads().setRequestNonPersonalizedAds(personalized)
+    googletag.pubads().refresh()
+    OptanonTrackingCookie = trackingEnabled
+  }
 
   if (OptanonAnalyticsCookie && !analyticsEnabled) return window.location.reload()
   OptanonAnalyticsCookie = analyticsEnabled
