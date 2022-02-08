@@ -241,7 +241,7 @@ Card.propTypes = {
   itemId: PropTypes.string,
   tags: PropTypes.array,
   title: PropTypes.string,
-  itemImage: PropTypes.string,
+  itemImage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   publisher: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   authors: PropTypes.array,
   excerpt: PropTypes.string,
