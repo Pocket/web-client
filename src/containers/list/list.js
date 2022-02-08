@@ -13,6 +13,7 @@ import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
 import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
+import { Onboarding } from 'connectors/onboarding/onboarding'
 
 import MyList from 'containers/my-list/my-list'
 
@@ -42,6 +43,8 @@ export const List = (props) => {
       <TagDeleteModal />
       <TagEditModal />
       <Toasts />
+      <Onboarding type="my-list.flyaway.extensions" />
+      <Onboarding type="my-list.flyaway.reader" />
     </Layout>
   )
 }

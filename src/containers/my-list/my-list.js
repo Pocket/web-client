@@ -14,7 +14,6 @@ import { VirtualizedList } from 'connectors/virtualized/virtualized-list'
 
 import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
-import { Onboarding } from 'connectors/onboarding/onboarding'
 
 import { sortOrderSetNew, sortOrderSetOld } from 'connectors/app/app.state'
 
@@ -152,8 +151,6 @@ export default function MyList(props) {
           {items?.length ? (
             <VirtualizedList type={type} section={section} loadMore={loadMore} />
           ) : null}
-          <Onboarding type="my-list.flyaway.extensions" />
-          <Onboarding type="my-list.flyaway.reader" />
         </>
       ) : (
         <CallOutBrand />
