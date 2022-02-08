@@ -4,29 +4,21 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { useHasChanged, usePrevious } from 'common/utilities/hooks/has-changed'
-import Layout from 'layouts/with-sidebar'
+
 import { getMylistData } from './my-list.state'
 import { updateMyListData } from './my-list.state'
 import { appSetSection } from 'connectors/app/app.state'
 import { MyListHeader } from 'components/headers/my-list-header'
 import { TagPageHeader } from './tags-page/tag-page-header'
 import { VirtualizedList } from 'connectors/virtualized/virtualized-list'
-import { SideNav } from 'connectors/side-nav/side-nav'
+
 import { CallOutBrand } from 'components/call-out/call-out-brand'
-import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
-import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
-import { ShareModal } from 'connectors/confirm-share/confirm-share'
-import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
-import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
-import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
-import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
-import { Toasts } from 'connectors/toasts/toast-list'
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
-import { Onboarding } from 'connectors/onboarding/onboarding'
+
 import { sortOrderSetNew, sortOrderSetOld } from 'connectors/app/app.state'
 
 export default function MyList(props) {
-  const { metaData = {}, subset: sub = 'active', filter: propFilter } = props
+  const { subset: sub = 'active', filter: propFilter } = props
 
   const dispatch = useDispatch()
   const router = useRouter()
@@ -143,42 +135,26 @@ export default function MyList(props) {
 
   const Header = tag ? TagPageHeader : MyListHeader
 
-  return (
-    <Layout title={metaData.title} metaData={metaData} subset={subset} tag={tag}>
-      <SideNav type="my-list" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
-
-      {shouldRender ? (
-        <main className="main">
-          {isLoggedIn ? (
-            <>
-              <Header
-                subset={subset}
-                title={selector}
-                filter={filter}
-                tag={tag}
-                sortOrder={sortOrder}
-                handleNewest={handleNewest}
-                handleOldest={handleOldest}
-              />
-              {items?.length ? (
-                <VirtualizedList type={type} section={section} loadMore={loadMore} />
-              ) : null}
-              <DeleteModal />
-              <TaggingModal />
-              <ShareModal />
-              <ArchiveModal />
-              <FavoriteModal />
-              <TagDeleteModal />
-              <TagEditModal />
-              <Toasts />
-            </>
-          ) : (
-            <CallOutBrand />
-          )}
-        </main>
-      ) : null}
-      <Onboarding type="my-list.flyaway.extensions" />
-      <Onboarding type="my-list.flyaway.reader" />
-    </Layout>
-  )
+  return shouldRender ? (
+    <main className="main">
+      {isLoggedIn ? (
+        <>
+          <Header
+            subset={subset}
+            title={selector}
+            filter={filter}
+            tag={tag}
+            sortOrder={sortOrder}
+            handleNewest={handleNewest}
+            handleOldest={handleOldest}
+          />
+          {items?.length ? (
+            <VirtualizedList type={type} section={section} loadMore={loadMore} />
+          ) : null}
+        </>
+      ) : (
+        <CallOutBrand />
+      )}
+    </main>
+  ) : null
 }
