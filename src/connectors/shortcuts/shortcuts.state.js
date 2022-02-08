@@ -341,8 +341,8 @@ function* shortcutViewOriginal() {
   const item = yield select(getItem, selectedId)
   if (!item) return
 
-  const { open_url } = item
-  if (open_url) yield call(window.open, open_url, '_blank')
+  const { externalUrl } = item
+  if (externalUrl) yield call(window.open, externalUrl, '_blank')
 }
 
 function* shortcutDeleteItem({ appMode }) {
