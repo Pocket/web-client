@@ -157,7 +157,8 @@ export const LOCALE_COMMON = [
   'global-footer',
   'collections',
   'partner',
-  'topic'
+  'topic',
+  'fxa'
 ]
 
 export const LOCALE_ACCOUNT = ['account']
