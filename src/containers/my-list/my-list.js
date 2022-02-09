@@ -16,6 +16,7 @@ import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
 import { sortOrderSetNew, sortOrderSetOld } from 'connectors/app/app.state'
+import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 
 export default function MyList(props) {
   const { subset: sub = 'active', filter: propFilter } = props
@@ -139,6 +140,7 @@ export default function MyList(props) {
     <main className="main">
       {isLoggedIn ? (
         <>
+          <SuccessFXA type="my-list" />
           <Header
             subset={subset}
             title={selector}

@@ -53,7 +53,7 @@ export const Home = ({ metaData }) => {
 
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
-      <SuccessFXA />
+      <SuccessFXA type="home" />
       <SectionWrapper>
         <HomeGreeting />
         <HomeRecentSaves />

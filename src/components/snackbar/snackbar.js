@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { css} from 'linaria'
+import { css, cx } from 'linaria'
 import { CloseButton } from 'components/close-button/close-button'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { Fade } from 'common/utilities/animation/fade'
@@ -11,7 +11,6 @@ const snackbar = css`
   padding: 1rem;
   border-radius: var(--borderRadius);
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
-  margin-top: 2rem;
 
   p {
     font-size: var(--fontsize100);
@@ -29,6 +28,17 @@ const snackbar = css`
   }
 `
 
+const wrapper = css`
+  &.my-list {
+    padding: 0 0;
+    margin-bottom: 2rem;
+  }
+
+  &.home {
+    margin-top: 2rem;
+  }
+`
+
 const closeButtonOverrides = css`
   color: var(--color-white100);
 
@@ -41,7 +51,8 @@ const closeButtonOverrides = css`
 
 export function Snackbar({
   showMessage,
-  title
+  title,
+  type
 }) {
   const [isVisible, setVisible] = useState(showMessage)
 
@@ -51,7 +62,7 @@ export function Snackbar({
 
   return (
     <Fade show={isVisible} remove={remove}>
-      <SectionWrapper>
+      <SectionWrapper className={cx(wrapper, type)}>
         <div className={snackbar}>
           <div className="snackbar_title">
             <p>{title}</p>
