@@ -7,5 +7,5 @@ export const SuccessFXA = () => {
   const showMessage = queryParams.includes('fxa_migration=1')
 
   const title = t('fxa:success', 'Your account has been migrated successfully.')
-  return showMessage ? <Snackbar title={title} /> : null
+  return showMessage ? <Snackbar title={title} showMessage={showMessage} /> : null
 }

@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { css} from 'linaria'
 import { CloseButton } from 'components/close-button/close-button'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
+import { Fade } from 'common/utilities/animation/fade'
 
 const snackbar = css`
   font-family: var(--fontSansSerif);
@@ -12,12 +14,13 @@ const snackbar = css`
   margin-top: 2rem;
 
   p {
+    font-size: var(--fontsize100);
     margin-bottom: 0;
   }
 
   .snackbar_title {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
   }
 
@@ -37,21 +40,28 @@ const closeButtonOverrides = css`
 `
 
 export function Snackbar({
-  title,
-  handleClose,
+  showMessage,
+  title
 }) {
+  const [isVisible, setVisible] = useState(showMessage)
+
+  const remove = () => {
+    setVisible(false)
+  }
 
   return (
-    <SectionWrapper>
-      <div className={snackbar}>
-        <div className="snackbar_title">
-          <p>{title}</p>
-          <CloseButton
-            handleClose={handleClose}
-            closeButtonOverrides={closeButtonOverrides}
-          />
+    <Fade show={isVisible} remove={remove}>
+      <SectionWrapper>
+        <div className={snackbar}>
+          <div className="snackbar_title">
+            <p>{title}</p>
+            <CloseButton
+              handleClose={remove}
+              closeButtonOverrides={closeButtonOverrides}
+            />
+          </div>
         </div>
-      </div>
-    </SectionWrapper>
+      </SectionWrapper>
+    </Fade>
   )
 }
