@@ -125,6 +125,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
               isAuthenticated={isAuthenticated}
               saveAction={saveAction}
               saveStatus={pageSaveStatus}
+              url={url}
             />
           </header>
         </section>
@@ -198,6 +199,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
               isAuthenticated={isAuthenticated}
               saveAction={saveAction}
               saveStatus={pageSaveStatus}
+              url={url}
             />
 
             <AdBelowTheFold

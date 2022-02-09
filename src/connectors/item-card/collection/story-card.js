@@ -17,7 +17,7 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
   const item = useSelector((state) => state.collectionStoriesById[id])
   const { itemId, readUrl, externalUrl, openExternal } = item
 
-  const impressionFired = useSelector((state) => state.analytics.impressions.includes(externalUrl))
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(itemId))
 
   if (!item) return null
 
