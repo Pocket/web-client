@@ -25,8 +25,8 @@ export const CardLineup = ({ id, position, className, cardShape, showExcerpt = f
    * ----------------------------------------------------------------
    */
   const onOpenOriginalUrl = () => {
-    const data = { ...analyticsData, destination: 'external' }
-    dispatch(sendSnowplowEvent('home.lineup.view-original', data))
+    const openData = { ...data, destination: 'external' }
+    dispatch(sendSnowplowEvent('home.lineup.view-original', openData))
   }
   const onOpen = () => dispatch(sendSnowplowEvent('home.lineup.open', data))
   const onImpression = () => dispatch(sendSnowplowEvent('home.lineup.impression', data))

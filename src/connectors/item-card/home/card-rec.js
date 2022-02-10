@@ -27,7 +27,8 @@ export const RecCard = ({
   const analyticsData = {
     id,
     position,
-    destination: saveStatus === 'saved' && !openExternal ? 'internal' : 'external'
+    destination: saveStatus === 'saved' && !openExternal ? 'internal' : 'external',
+    ...item?.analyticsData
   }
 
   /**
