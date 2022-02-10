@@ -13,7 +13,7 @@ const snackbar = css`
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
 
   p {
-    font-size: var(--fontsize100);
+    font-size: var(--fontSize100);
     margin-bottom: 0;
   }
 
