@@ -1,5 +1,6 @@
 import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
+import * as Sentry from '@sentry/nextjs'
 
 const getUnleashAssignmentsQuery = gql`
   query GetUnleashAssignments(
@@ -49,6 +50,11 @@ export async function getUnleashAssignments(sessionId, userId, birth, appName, l
     recItUserProfile: { userModels }
   }
   return requestGQL({ query: getUnleashAssignmentsQuery, variables })
-    .then((response) => response.data.getUnleashAssignments)
-    .catch((error) => console.error(error))
+    .then((response) => response?.data?.getUnleashAssignments)
+    .catch((error) => {
+      Sentry.withScope((scope) => {
+        scope.setFingerprint('Unleash')
+        Sentry.captureMessage(error)
+      })
+    })
 }
