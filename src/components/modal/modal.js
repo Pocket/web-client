@@ -184,7 +184,7 @@ const Modal = ({
         }}
         onAfterClose={() => {
           setReadyAnimate(false)
-          enableBodyScroll(modalContentRef)
+          if (modalContentRef) enableBodyScroll(modalContentRef)
           clearAllBodyScrollLocks()
           onAfterClose()
         }}
