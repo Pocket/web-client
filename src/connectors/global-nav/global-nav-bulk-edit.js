@@ -27,7 +27,7 @@ function GlobalNavBulkEditConnected({ onClose }) {
   const buildBulkForAnalytics = () => {
     return bulkItems.map(item => ({
       id: item.id,
-      url: item.save_url,
+      url: item.saveUrl,
       position: item.position
     }))
   }

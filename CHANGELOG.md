@@ -1,3 +1,10 @@
+## [1.35.3](https://github.com/Pocket/web-client/compare/v1.35.2...v1.35.3) (2022-02-10)
+
+
+### Bug Fixes
+
+* **snowplow:** fix broken content entities on bulk edit, save on collections, and collection impressions ([b4d5706](https://github.com/Pocket/web-client/commit/b4d5706f4259f126ae09f4b02194a4626d97e196))
+
 ## [1.35.2](https://github.com/Pocket/web-client/compare/v1.35.1...v1.35.2) (2022-02-08)
 
 
