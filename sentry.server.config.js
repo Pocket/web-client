@@ -10,7 +10,6 @@ Sentry.init({
   dsn: SENTRY_DSN || 'https://cc3aea2dd5ca4aefb5a18c671a229237@o28549.ingest.sentry.io/5436250',
   // Adjust this value in production, or use tracesSampler for greater control
   sampleRate: 0.5,
-  whitelistUrls: [/https:\/\/(.+)?getpocket\.com/],
   beforeSend(event, hint) {
     const error = hint.originalException
 
