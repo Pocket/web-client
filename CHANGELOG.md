@@ -1,3 +1,17 @@
+## [1.36.1](https://github.com/Pocket/web-client/compare/v1.36.0...v1.36.1) (2022-02-10)
+
+
+### Bug Fixes
+
+* **constants:** add fxa locale ([7fd0ffe](https://github.com/Pocket/web-client/commit/7fd0ffe2abc0c34b1438fed6075c615bc0290912))
+* **fxa snackbar:** add ability to dismiss snackbar using Fade component ([798cb44](https://github.com/Pocket/web-client/commit/798cb448ab24f7fb8cf3ed72611fb7799bdbfa78))
+* **fxa snackbar:** add message to my list, update styles for differing layouts ([50cd2d3](https://github.com/Pocket/web-client/commit/50cd2d3bdd165fd8f1fac281cde652bbd3de45e1))
+* **fxa:** add snackbar message for fxa migration success ([51f8132](https://github.com/Pocket/web-client/commit/51f81325f736ad8de502f590cf246bf4b9992a19))
+* **localization:** bump package version for new strings ([b945463](https://github.com/Pocket/web-client/commit/b94546352cbfafcf0c57c952fe8ace30e1257462))
+* **localization:** bump package version for new strings ([d7d3a65](https://github.com/Pocket/web-client/commit/d7d3a65e22a7890243e2a540fbea4b6c6e74f659))
+* **snackbar:** typo ([c12a1a3](https://github.com/Pocket/web-client/commit/c12a1a3cd0a858f3423c0c5502355fe588bfee20))
+* **translation:** add fxa key ([a6041a8](https://github.com/Pocket/web-client/commit/a6041a82a79f16e17f07edc0e81383cb68d4f221))
+
 # [1.36.0](https://github.com/Pocket/web-client/compare/v1.35.3...v1.36.0) (2022-02-10)
 
 
