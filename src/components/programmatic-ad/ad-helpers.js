@@ -1,6 +1,5 @@
-/* eslint-disable */
-/* disabling eslint here because of references to global variable defined by libraries */
-/* In practice, initialization of these ad libraries should be wrapped logic that checks for their existence */
+/* global googletag */
+import * as Sentry from '@sentry/nextjs'
 
 export const POCKET_AD_UNIT_PATH = '/21741047832/Pocket'
 export const REFRESH_KEY = 'refresh'

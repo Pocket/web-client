@@ -1,3 +1,13 @@
+## [1.36.2](https://github.com/Pocket/web-client/compare/v1.36.1...v1.36.2) (2022-02-10)
+
+
+### Bug Fixes
+
+* **ads:** un-disabled eslint / add Sentry and globals ([772f18d](https://github.com/Pocket/web-client/commit/772f18d36a53ad38b6cea5e02191e10637f13c0e))
+* **sentry:** remove whitelist on server side ([d5c6193](https://github.com/Pocket/web-client/commit/d5c6193dbe0187b06ca2f0eca3c1dcca9502538e))
+* **unleash:** add better error on unleash calls ([5dff733](https://github.com/Pocket/web-client/commit/5dff733485d440619e71ee1fe7b2d595eeb3bcb8))
+* **waypoint:** add failover with sentry ([264821a](https://github.com/Pocket/web-client/commit/264821ab9607d18762f4c80ef0decaf4242fed0e))
+
 ## [1.36.1](https://github.com/Pocket/web-client/compare/v1.36.0...v1.36.1) (2022-02-10)
 
 
