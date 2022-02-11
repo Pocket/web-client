@@ -31,7 +31,7 @@ export function Languages() {
 
   const handleChange = async (event) => {
     const locale = event.currentTarget.value
-    const currentPath = router?.pathname
+    const currentPath = router?.asPath
     try {
       router.push(currentPath, currentPath, { locale })
     } catch (err) {
