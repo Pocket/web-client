@@ -191,7 +191,9 @@ export const homeActions = {
       'slateLineupExperiment',
       'slateId',
       'slateRequestId',
-      'slateExperiment'
+      'slateExperiment',
+      'displayName',
+      'description'
     ]
   },
   'home.lineup.view-original': {
@@ -211,7 +213,9 @@ export const homeActions = {
       'slateLineupExperiment',
       'slateId',
       'slateRequestId',
-      'slateExperiment'
+      'slateExperiment',
+      'displayName',
+      'description'
     ]
   },
   'home.lineup.impression': {
@@ -231,7 +235,9 @@ export const homeActions = {
       'slateLineupExperiment',
       'slateId',
       'slateRequestId',
-      'slateExperiment'
+      'slateExperiment',
+      'displayName',
+      'description'
     ]
   },
   'home.lineup.save': {
@@ -251,7 +257,9 @@ export const homeActions = {
       'slateLineupExperiment',
       'slateId',
       'slateRequestId',
-      'slateExperiment'
+      'slateExperiment',
+      'displayName',
+      'description'
     ]
   },
   'home.bestof.impression': {

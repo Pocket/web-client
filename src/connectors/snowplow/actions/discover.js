@@ -8,7 +8,8 @@ export const discoverActions = {
     expects: [
       'id', 'url', 'position', 'destination', 'recommendationId',
       'slateLineupId', 'slateLineupRequestId', 'slateLineupExperiment',
-      'slateId', 'slateRequestId', 'slateExperiment'
+      'slateId', 'slateRequestId', 'slateExperiment',
+      'displayName', 'description'
     ]
   },
   'discover.impression': {
@@ -21,7 +22,8 @@ export const discoverActions = {
     expects: [
       'id', 'url', 'position', 'recommendationId',
       'slateLineupId', 'slateLineupRequestId', 'slateLineupExperiment',
-      'slateId', 'slateRequestId', 'slateExperiment'
+      'slateId', 'slateRequestId', 'slateExperiment',
+      'displayName', 'description'
     ]
   },
   'discover.save': {
@@ -34,7 +36,8 @@ export const discoverActions = {
     expects: [
       'id', 'url', 'position', 'recommendationId',
       'slateLineupId', 'slateLineupRequestId', 'slateLineupExperiment',
-      'slateId', 'slateRequestId', 'slateExperiment'
+      'slateId', 'slateRequestId', 'slateExperiment',
+      'displayName', 'description'
     ]
   },
   'discover.signup.impression': {

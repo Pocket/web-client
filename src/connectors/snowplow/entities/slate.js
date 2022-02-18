@@ -24,7 +24,7 @@ export const createSlateEntity = ({
   slateRequestId,
   slateExperiment,
   position,
-  display_name,
+  displayName,
   description
 }) => ({
   schema: SLATE_SCHEMA_URL,
@@ -33,7 +33,7 @@ export const createSlateEntity = ({
     request_id: slateRequestId,
     experiment: slateExperiment,
     index: position,
-    display_name,
+    display_name: displayName,
     description
   })
 })
