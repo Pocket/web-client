@@ -1,3 +1,10 @@
+## [1.36.5](https://github.com/Pocket/web-client/compare/v1.36.4...v1.36.5) (2022-02-22)
+
+
+### Bug Fixes
+
+* **onetrust:** use tracking cookie to set googletag values ([c346ecc](https://github.com/Pocket/web-client/commit/c346ecca7d4a1a1fbdd399658d5904d66bfcbdf2))
+
 ## [1.36.4](https://github.com/Pocket/web-client/compare/v1.36.3...v1.36.4) (2022-02-14)
 
 
