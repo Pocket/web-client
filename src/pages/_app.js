@@ -32,6 +32,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   const dispatch = useDispatch()
 
   const { user_status, user_id, sess_guid, birth, user_models } = useSelector((state) => state.user) //prettier-ignore
+  const { flagsReady } = useSelector((state) => state.features)
   const { authRequired } = pageProps
 
   useEffect(() => {
@@ -82,6 +83,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   useEffect(() => {
     if (user_status === 'pending') return null
     if (user_status === 'invalid') return dispatch(featuresHydrate({}))
+    if (flagsReady) return null
 
     // Set up defaults/user pref in state
     dispatch(appSetPreferences())
@@ -99,7 +101,7 @@ function PocketWebClient({ Component, pageProps, err }) {
     }
 
     hydrateFeatures()
-  }, [user_status, sess_guid, user_id, birth, dispatch, user_models])
+  }, [user_status, sess_guid, user_id, birth, dispatch, user_models, flagsReady])
 
   useEffect(() => {
     if (authRequired && user_status === 'invalid') {
