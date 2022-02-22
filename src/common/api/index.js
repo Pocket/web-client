@@ -23,3 +23,12 @@ export { getSyndicatedArticle } from './queries/get-syndicated-article'
 export { getRandomSyndicatedArticle } from './queries/get-syndicated-article'
 
 // MyList
+export { getSavedItems } from './queries/get-saved-items'
+export { searchSavedItems } from './queries/search-saved-items'
+
+// Item Mutations
+export { itemFavorite } from './mutations/favoriteItem'
+export { itemUnFavorite } from './mutations/unfavoriteItem'
+export { itemArchive } from './mutations/archiveItem'
+export { itemUnArchive } from './mutations/unArchiveItem'
+export { itemDelete } from './mutations/deleteItem'
