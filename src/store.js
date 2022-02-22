@@ -94,13 +94,44 @@ import { shortcutSagas } from 'connectors/shortcuts/shortcuts.state.js'
 import { onboardingReducers } from 'connectors/onboarding/onboarding.state'
 import { onboardingSagas } from 'connectors/onboarding/onboarding.state'
 
+//Items (From the graph)
+import { itemsReducers } from 'connectors/items/items.state'
+import { itemsSavedReducers } from 'connectors/items/items-saved.state'
+import { itemsSavedSagas } from 'connectors/items/items-saved.state'
+
+import { listSavedReducers } from 'containers/list-saved/list-saved.state'
+import { listSavedSagas } from 'containers/list-saved/list-saved.state'
+import { listSavedPageInfoReducers } from 'containers/list-saved/list-saved.state'
+
 /* REDUCERS
  --------------------------------------------------------------- */
+const itemReducers = {
+  items: itemsReducers,
+  itemsSaved: itemsSavedReducers
+}
+
+const listReducers = {
+  listHome: [],
+  listSaved: listSavedReducers,
+  listSavedPageInfo: listSavedPageInfoReducers,
+  listDiscover: [],
+  listCollection: [],
+  listCollectionStories: []
+}
+
+const itemActionReducers = {
+  itemsToFavorite: itemFavoriteReducers,
+  itemsToDelete: itemDeleteReducers,
+  itemsToArchive: itemArchiveReducers,
+  itemsToTag: itemTagReducers,
+  itemToReport: itemReportReducers,
+  itemsToShare: itemShareReducers
+}
+
 const discoverReducers = {
   discoverItemsById: discoverItemsReducers, // Shared discover item store
   discoverHome: discoverHomeReducers,
   discoverTopic: topicReducers,
-  itemToReport: itemReportReducers,
   syndicatedArticle: syndicatedArticleReducers
 }
 
@@ -113,11 +144,6 @@ const libraryReducers = {
   myListItemsById: myListItemsReducers,
   myList: myListReducers,
   bulkEdit: itemBulkReducers,
-  itemsToFavorite: itemFavoriteReducers,
-  itemsToDelete: itemDeleteReducers,
-  itemsToArchive: itemArchiveReducers,
-  itemsToTag: itemTagReducers,
-  itemsToShare: itemShareReducers,
   userTags: userTagsReducers,
   userMessages: userMessageReducers,
   userSearch: userSearchReducers,
@@ -160,7 +186,10 @@ export const rootReducer = combineReducers({
   ...readerReducers,
   ...userAccountReducers,
   home: homeReducers,
-  homeItemsById: homeItemsReducers
+  homeItemsById: homeItemsReducers,
+  ...itemReducers,
+  ...listReducers,
+  ...itemActionReducers
 })
 
 /* SAGAS
@@ -193,7 +222,9 @@ function* rootSaga() {
     ...profileSagas,
     ...profileItemsSagas,
     ...shortcutSagas,
-    ...onboardingSagas
+    ...onboardingSagas,
+    ...listSavedSagas,
+    ...itemsSavedSagas
   ])
 }
 
@@ -208,7 +239,7 @@ export const initializeStore = () => {
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
           name: 'Pocket Web Client',
-          actionsBlacklist: 'SNOWPLOW_'
+          actionsDenylist: 'SNOWPLOW_'
         })
       : compose
 
