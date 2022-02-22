@@ -79,6 +79,15 @@ import { BASE_URL } from 'common/constants'
  *
  */
 
+/*------------------------------- */
+
+export function deriveSavedItem(node) {
+  const { item, ...nodeDetails } = node
+  // node contains user-item data as well as the item itself
+  const derivedItem = deriveItemData({ item, utmId: 'pocket_mylist', node: nodeDetails })
+  return { item: derivedItem, node: nodeDetails }
+}
+
 export function deriveListItem(passedItem, legacy) {
   // if a legacy flag is passed, first we need to modernize the item
   const edge = legacy ? modernizeItem(passedItem) : passedItem
@@ -106,9 +115,8 @@ export function deriveRecommendation(
 export function deriveReccit(recommendation) {
   const { item: passedItem, sort_id, ...rest } = recommendation //eslint-disable-line no-unused-vars
   const {
-    node: { item },
-  } = modernizeItem({...passedItem, sort_id})
-
+    node: { item }
+  } = modernizeItem({ ...passedItem, sort_id })
   const derivedItem = deriveItem({ item, utmId: 'pocket_rec' })
 
   return derivedItem
@@ -153,15 +161,37 @@ export function deriveProfile(feedItem, legacy) {
 export function deriveItem({
   item,
   cursor = '',
-  node,
+  node = {},
   itemEnrichment,
   passedPublisher,
   analyticsData = {},
   utmId
 }) {
+  const derivedItem = deriveItemData({
+    item,
+    node,
+    itemEnrichment,
+    passedPublisher,
+    utmId,
+    analyticsData
+  })
   const derived = {
     cursor,
     ...node,
+    ...derivedItem
+  }
+
+  return derived
+}
+export function deriveItemData({
+  item,
+  node,
+  itemEnrichment,
+  passedPublisher,
+  utmId,
+  analyticsData
+}) {
+  return {
     ...item,
     authors: itemEnrichment?.authors || item?.authors || false,
     title: title({ item, itemEnrichment }),
@@ -183,8 +213,6 @@ export function deriveItem({
       ...analyticsData
     }
   }
-
-  return derived
 }
 
 /** TITLE
