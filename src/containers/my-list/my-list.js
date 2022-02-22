@@ -42,14 +42,10 @@ export default function MyList(props) {
   const routeChange = useHasChanged(router.pathname)
   const oldRoute = usePrevious(router.pathname)
 
-  const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
 
   // Check for initial items so we don't over request
   const initialItemsPopulated = items?.length || total === 0
-
-  const handleNewest = () => dispatch(sortOrderSetNew())
-  const handleOldest = () => dispatch(sortOrderSetOld())
 
   /**
    * Set up listeners for focus shifts.  When the window gains focus check if
@@ -130,33 +126,9 @@ export default function MyList(props) {
     dispatch(getMylistData(45, offset, subset, filter, tag))
   }
 
-  const shouldRender = userStatus !== 'pending'
-
   const type = listMode
 
-  const Header = tag ? TagPageHeader : MyListHeader
-
-  return shouldRender ? (
-    <main className="main">
-      {isLoggedIn ? (
-        <>
-          <SuccessFXA type="my-list" />
-          <Header
-            subset={subset}
-            title={selector}
-            filter={filter}
-            tag={tag}
-            sortOrder={sortOrder}
-            handleNewest={handleNewest}
-            handleOldest={handleOldest}
-          />
-          {items?.length ? (
-            <VirtualizedList type={type} section={section} loadMore={loadMore} />
-          ) : null}
-        </>
-      ) : (
-        <CallOutBrand />
-      )}
-    </main>
+  return items?.length ? (
+    <VirtualizedList type={type} section={section} loadMore={loadMore} />
   ) : null
 }

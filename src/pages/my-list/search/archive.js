@@ -1,4 +1,4 @@
-import SearchPage from 'containers/my-list/search-page/search-page'
+import { List } from 'containers/list/list'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
 
@@ -12,4 +12,4 @@ export async function getStaticProps({ locale }) {
   }
 }
 
-export default SearchPage
+export default List

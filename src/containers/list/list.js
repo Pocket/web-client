@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from 'layouts/with-sidebar'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { useRouter } from 'next/router'
@@ -14,27 +14,71 @@ import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
 import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { Onboarding } from 'connectors/onboarding/onboarding'
+import { sortOrderSetNew, sortOrderSetOld, sortOrderSetRelevance } from 'connectors/app/app.state'
+import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
+
+import { TagPageHeader } from 'containers/my-list/tags-page/tag-page-header'
+import { MyListHeader } from 'components/headers/my-list-header'
+import { SearchPageHeader } from 'components/headers/search-page-header'
 
 import MyList from 'containers/my-list/my-list'
+import SearchList from 'containers/my-list/search-page/search-page'
 
 export const List = (props) => {
   const router = useRouter()
+  const dispatch = useDispatch()
 
-  const { metaData = {}, subset: sub = 'active' } = props
-  const { tag } = router.query
+  const { metaData = {}, subset: sub = 'active', filter: propFilter } = props
+  const { tag, filter: queryFilter, query: searchTerm } = router.query
   const subset = tag ? 'tag' : sub
+  const filter = tag ? queryFilter : propFilter
+  const selector = tag ? tag : sub
+  const section = filter ? subset + filter : subset
 
+  // Selectors
+  const isLoggedIn = useSelector((state) => !!state.user.auth)
+  const userStatus = useSelector((state) => state.user.user_status)
+  const sortSubset = useSelector((state) => state.app.section)
+  const sortOrder = useSelector((state) => state.app.sortOptions[sortSubset] || 'newest')
   const featureState = useSelector((state) => state.features)
+  const isPremium = useSelector((state) => state.user.premium_status === '1')
+  const total = useSelector((state) => state.myList[`${section}Total`])
+
+  // Actions
+  const handleNewest = () => dispatch(sortOrderSetNew())
+  const handleOldest = () => dispatch(sortOrderSetOld())
+  const handleRelevance = () => dispatch(sortOrderSetRelevance())
+
+  // Derived Values
+  const shouldRender = userStatus !== 'pending'
   const useApiNext = featureFlagActive({ flag: 'api.next', featureState })
   const { flagsReady } = featureState
+  const LegacyList = searchTerm ? SearchList : MyList
+  const ListToRender = useApiNext ? ListSaved : LegacyList
 
-  const isLoggedIn = false
-  const ListToRender = useApiNext ? ListSaved : MyList
+  const ListHeader = searchTerm ? SearchPageHeader : MyListHeader
+  const Header = tag ? TagPageHeader : ListHeader
 
   return (
     <Layout title={metaData.title} metaData={metaData} subset={subset} tag={tag}>
       <SideNav type="my-list" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
-      {flagsReady ? <ListToRender {...props} /> : null}
+      <main className="main">
+        <SuccessFXA type="my-list" />
+        <Header
+          subset={subset}
+          title={selector}
+          filter={filter}
+          tag={tag}
+          total={total}
+          query={searchTerm}
+          sortOrder={sortOrder}
+          handleNewest={handleNewest}
+          handleOldest={handleOldest}
+          isPremium={isPremium}
+          handleRelevance={handleRelevance}
+        />
+        {flagsReady && shouldRender ? <ListToRender {...props} /> : null}
+      </main>
       <DeleteModal />
       <TaggingModal />
       <ShareModal />
