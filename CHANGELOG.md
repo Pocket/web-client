@@ -1,3 +1,10 @@
+## [1.36.7](https://github.com/Pocket/web-client/compare/v1.36.6...v1.36.7) (2022-02-22)
+
+
+### Bug Fixes
+
+* **app:** reduce calls to feature ([80fad2c](https://github.com/Pocket/web-client/commit/80fad2c3bbf726e656cbd04411b8f1e5c57f185d))
+
 ## [1.36.6](https://github.com/Pocket/web-client/compare/v1.36.5...v1.36.6) (2022-02-22)
 
 
