@@ -30,7 +30,7 @@ export const List = (props) => {
 
   const { metaData = {}, subset: sub = 'active', filter: propFilter } = props
   const { tag, filter: queryFilter, query: searchTerm } = router.query
-  const subset = tag ? 'tag' : sub
+  const subset = tag ? 'tag' : searchTerm ? 'search' : sub
   const filter = tag ? queryFilter : propFilter
   const selector = tag ? tag : sub
   const section = filter ? subset + filter : subset
