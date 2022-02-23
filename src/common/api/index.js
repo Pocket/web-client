@@ -26,6 +26,9 @@ export { getRandomSyndicatedArticle } from './queries/get-syndicated-article'
 export { getSavedItems } from './queries/get-saved-items'
 export { searchSavedItems } from './queries/search-saved-items'
 
+// Reader
+export { getMarticleByItemId } from './queries/get-marticle-by-item-id'
+
 // Item Mutations
 export { itemFavorite } from './mutations/favoriteItem'
 export { itemUnFavorite } from './mutations/unfavoriteItem'
