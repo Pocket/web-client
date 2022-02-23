@@ -11,6 +11,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
     async ({ query, res, req, locale }) => {
       const { dispatch, sagaTask } = store
       const { slug, ...queryParams } = query
+      const defaultProps = {
+        ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
+        locale,
+        queryParams
+      }
 
       // Hydrating initial state with an async request. This will block the
       // page from loading. Do this for SEO/crawler purposes
@@ -18,8 +23,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
       const response = await fetchHydrationData({ slug, baseUrl })
 
       // No article found
-      if (response.items?.length === 0) {
-        res.statusCode = 404
+      if (!response || response?.items?.length === 0) {
+        return { props: defaultProps, notFound: true }
       }
 
       if (response.items?.[0]?.status === 'EXPIRED') {
@@ -29,19 +34,13 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
       // Since ssr will not wait for side effects to resolve this dispatch
       // needs to be pure as well.
-      dispatch(hydrateArticle({ articleData: response.items[0] }))
+      dispatch(hydrateArticle({ articleData: response?.items[0] }))
 
       // end the saga
       dispatch(END)
       await sagaTask.toPromise()
 
-      return {
-        props: {
-          ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
-          locale,
-          queryParams
-        }
-      }
+      return { props: defaultProps }
     }
 )
 
