@@ -10,6 +10,9 @@ import { ARTICLE_ITEM_FAILURE } from 'actions'
 import { ARTICLE_CONTENT_SUCCESS } from 'actions'
 import { ARTICLE_CONTENT_FAILURE } from 'actions'
 
+import { MARTICLE_CONTENT_SUCCESS } from 'actions'
+import { MARTICLE_CONTENT_FAILURE } from 'actions'
+
 import { ANNOTATION_SAVE_REQUEST } from 'actions'
 import { ANNOTATION_SAVE_SUCCESS } from 'actions'
 import { ANNOTATION_SAVE_FAILURE } from 'actions'
@@ -42,6 +45,7 @@ import { API_ACTION_DELETE_ANNOTATION } from 'common/constants'
 import { getArticleText } from 'common/api/_legacy/reader'
 import { getArticleFromId } from 'common/api/_legacy/reader'
 import { sendItemActions } from 'common/api/_legacy/item-actions'
+import { getMarticleByItemId } from 'common/api'
 
 import { deriveListItem } from 'common/api/derivers/item'
 
@@ -91,6 +95,11 @@ export const readReducers = (state = initialState, action) => {
     case ARTICLE_CONTENT_SUCCESS: {
       const { article } = action
       return { ...state, articleContent: article }
+    }
+
+    case MARTICLE_CONTENT_SUCCESS: {
+      const { marticle } = action
+      return { ...state, marticleContent: marticle }
     }
 
     case ANNOTATION_SAVE_SUCCESS: {
@@ -169,6 +178,7 @@ export const readSagas = [
   takeEvery(ARTICLE_ITEM_REQUEST, articleItemRequest),
   takeEvery(ARTICLE_ITEM_SUCCESS, hydrateDisplaySettings),
   takeEvery(ARTICLE_ITEM_SUCCESS, articleContentRequest),
+  takeEvery(ARTICLE_ITEM_SUCCESS, marticleContentRequest),
   takeEvery(ANNOTATION_SAVE_REQUEST, annotationSaveRequest),
   takeEvery(ANNOTATION_DELETE_REQUEST, annotationDeleteRequest),
   takeEvery(ITEMS_DELETE_SUCCESS, redirectToList),
@@ -218,6 +228,17 @@ function* articleContentRequest({ url }) {
     yield put({ type: ARTICLE_CONTENT_SUCCESS, article })
   } catch (error) {
     yield put({ type: ARTICLE_CONTENT_FAILURE, error })
+  }
+}
+
+function* marticleContentRequest({ itemId }) {
+  try {
+    const response = yield getMarticleByItemId(itemId)
+
+    const { marticle } = response
+    yield put({ type: MARTICLE_CONTENT_SUCCESS, marticle })
+  } catch (error) {
+    yield put({ type: MARTICLE_CONTENT_FAILURE, error })
   }
 }
 

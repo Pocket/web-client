@@ -22,12 +22,15 @@ import { Recommendations } from 'containers/read/recommendations'
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
 import { itemDataRequest, saveAnnotation, deleteAnnotation } from './read.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 import { setColorMode } from 'connectors/app/app.state'
 
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
+
+import { Marticle } from './read.marticle'
 
 import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
@@ -108,6 +111,7 @@ export default function Reader() {
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false ) //prettier-ignore
   const articleData = useSelector((state) => state.myListItemsById[id])
   const articleContent = useSelector((state) => state.reader.articleContent)
+  const marticleContent = useSelector((state) => state.reader.marticleContent)
   const annotations = useSelector((state) => state.reader.annotations)
   const tags = useSelector((state) => state.reader.tags)
   const favorite = useSelector((state) => state.reader.favorite)
@@ -123,6 +127,9 @@ export default function Reader() {
   const [highlight, setHighlight] = useState(null)
   const [highlightList, setHighlightList] = useState([])
   const [highlightHovered, setHighlightHovered] = useState(null)
+
+  const featureState = useSelector((state) => state.features)
+  const useMarticle = featureFlagActive({ flag: 'api.marticle', featureState })
 
   useEffect(() => {
     dispatch(itemDataRequest(id))
@@ -324,7 +331,10 @@ export default function Reader() {
           )}
           style={customStyles}>
           <ItemHeader viewOriginalEvent={viewOriginalEvent} {...headerData} />
-          {articleContent ? (
+          { marticleContent && useMarticle ? (
+            <Marticle marticleContent={marticleContent} />
+          ) : null } 
+          { articleContent && !useMarticle ? (
             <Content
               {...contentData}
               externalLinkClick={externalLinkClick}
