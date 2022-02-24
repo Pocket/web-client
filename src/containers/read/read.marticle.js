@@ -1,5 +1,10 @@
-import ReactMarkdown from 'react-markdown'
 import { css } from 'linaria'
+import { useEffect } from 'react'
+import ReactMarkdown from 'react-markdown'
+import { useDispatch, useSelector } from 'react-redux'
+import { marticleDataRequest } from './read.state'
+
+import { Loader, LoaderCentered } from 'components/loader/loader'
 
 const figure = css`
   width: 110%;
@@ -31,7 +36,25 @@ const ImageAndCaption = ({block}) => {
   )
 }
 
-export const Marticle = ({marticleContent}) => {
+export const Marticle = (itemId) => {
+  const dispatch = useDispatch()
+  const marticleContent = useSelector((state) => state.reader.marticleContent)
+
+  useEffect(() => {
+    console.log({itemId})
+    dispatch(marticleDataRequest(itemId))
+  }, [dispatch, itemId])
+
+  if (!marticleContent) {
+    return (
+      <LoaderCentered>
+        <Loader isVisible />
+      </LoaderCentered>
+    )
+  }
+
+  // return <div>WTF</div>
+
   return marticleContent.map((block, index) => (
     <>
       {block.content && <ReactMarkdown key={index}>{block.content}</ReactMarkdown> }

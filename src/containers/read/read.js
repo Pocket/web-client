@@ -111,7 +111,6 @@ export default function Reader() {
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false ) //prettier-ignore
   const articleData = useSelector((state) => state.myListItemsById[id])
   const articleContent = useSelector((state) => state.reader.articleContent)
-  const marticleContent = useSelector((state) => state.reader.marticleContent)
   const annotations = useSelector((state) => state.reader.annotations)
   const tags = useSelector((state) => state.reader.tags)
   const favorite = useSelector((state) => state.reader.favorite)
@@ -128,14 +127,17 @@ export default function Reader() {
   const [highlightList, setHighlightList] = useState([])
   const [highlightHovered, setHighlightHovered] = useState(null)
 
+  const flagsReady = useSelector((state) => state.features.flagsReady)
   const featureState = useSelector((state) => state.features)
-  const useMarticle = featureFlagActive({ flag: 'api.marticle', featureState })
+  const useMarticle = flagsReady && featureFlagActive({ flag: 'api.marticle', featureState })
+  // const useMarticle = false
 
   useEffect(() => {
     dispatch(itemDataRequest(id))
     dispatch(selectShortcutItem(id))
   }, [dispatch, id])
 
+  // check for flagsReady here, check for article/marticle data
   if (!articleData) {
     return (
       <LoaderCentered>
@@ -331,9 +333,11 @@ export default function Reader() {
           )}
           style={customStyles}>
           <ItemHeader viewOriginalEvent={viewOriginalEvent} {...headerData} />
-          { marticleContent && useMarticle ? (
-            <Marticle marticleContent={marticleContent} />
+
+          { useMarticle ? (
+            <Marticle itemId={itemId}/>
           ) : null } 
+
           { articleContent && !useMarticle ? (
             <Content
               {...contentData}

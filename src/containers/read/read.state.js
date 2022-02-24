@@ -10,6 +10,7 @@ import { ARTICLE_ITEM_FAILURE } from 'actions'
 import { ARTICLE_CONTENT_SUCCESS } from 'actions'
 import { ARTICLE_CONTENT_FAILURE } from 'actions'
 
+import { MARTICLE_CONTENT_REQUEST } from 'actions'
 import { MARTICLE_CONTENT_SUCCESS } from 'actions'
 import { MARTICLE_CONTENT_FAILURE } from 'actions'
 
@@ -62,6 +63,7 @@ export const updateLineHeight = (lineHeight) => ({ type: UPDATE_LINE_HEIGHT, lin
 export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, columnWidth }) //prettier-ignore
 export const updateFontSize = (fontSize) => ({ type: UPDATE_FONT_SIZE, fontSize }) //prettier-ignore
 export const updateFontType = (fontFamily) => ({ type: UPDATE_FONT_TYPE, fontFamily }) //prettier-ignore
+export const marticleDataRequest = ({ itemId }) => ({ type: MARTICLE_CONTENT_REQUEST, itemId })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -69,6 +71,7 @@ const initialState = {
   articleState: 'pending',
   articleData: null,
   articleContent: null,
+  marticleContent: null,
   favorite: null,
   tags: {},
   annotations: [],
@@ -160,6 +163,10 @@ export const readReducers = (state = initialState, action) => {
       return initialState
     }
 
+    case MARTICLE_CONTENT_REQUEST: {
+      return initialState
+    }
+
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE: {
@@ -176,9 +183,9 @@ export const readReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const readSagas = [
   takeEvery(ARTICLE_ITEM_REQUEST, articleItemRequest),
+  takeEvery(MARTICLE_CONTENT_REQUEST, marticleContentRequest),
   takeEvery(ARTICLE_ITEM_SUCCESS, hydrateDisplaySettings),
   takeEvery(ARTICLE_ITEM_SUCCESS, articleContentRequest),
-  takeEvery(ARTICLE_ITEM_SUCCESS, marticleContentRequest),
   takeEvery(ANNOTATION_SAVE_REQUEST, annotationSaveRequest),
   takeEvery(ANNOTATION_DELETE_REQUEST, annotationDeleteRequest),
   takeEvery(ITEMS_DELETE_SUCCESS, redirectToList),
