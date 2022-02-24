@@ -210,7 +210,6 @@ const GlobalNav = ({
   listMode,
   colorMode,
   setColorMode,
-  toggleListMode,
   setListMode,
   setGridMode,
   setDetailMode,
@@ -307,7 +306,6 @@ const GlobalNav = ({
                 listMode={listMode}
                 colorMode={colorMode}
                 setColorMode={setColorMode}
-                toggleListMode={toggleListMode}
                 sendImpression={sendImpression}
                 setListMode={setListMode}
                 setGridMode={setGridMode}

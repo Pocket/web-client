@@ -6,7 +6,6 @@ import { APP_SET_BASE_URL } from 'actions'
 import { APP_SET_MODE } from 'actions'
 import { APP_SET_SECTION } from 'actions'
 import { APP_SET_PREFERENCES } from 'actions'
-import { APP_LIST_MODE_TOGGLE } from 'actions'
 import { APP_LIST_MODE_SET } from 'actions'
 
 import { APP_SORT_ORDER_OLD } from 'actions'
@@ -22,6 +21,8 @@ import { APP_COLOR_MODE_SET } from 'actions'
 
 import { APP_SET_RELEASE } from 'actions'
 import { APP_UPDATE_RELEASE } from 'actions'
+
+import { SNOWPLOW_SEND_EVENT } from 'actions'
 
 import { ITEMS_BULK_CLEAR } from 'actions'
 
@@ -51,7 +52,6 @@ export const appSetMode = (mode) => ({ type: APP_SET_MODE, mode })
 export const appSetSection = (section) => ({ type: APP_SET_SECTION, section })
 export const appSetPreferences = () => ({ type: APP_SET_PREFERENCES })
 
-export const listModeToggle = () => ({ type: APP_LIST_MODE_TOGGLE })
 export const listModeSet = (listMode) => ({ type: APP_LIST_MODE_SET, listMode }) //prettier-ignore
 export const setListModeList = () => ({type: APP_LIST_MODE_LIST, listMode: 'list'}) //prettier-ignore
 export const setListModeGrid = () => ({type: APP_LIST_MODE_GRID, listMode: 'grid'}) //prettier-ignore
@@ -130,7 +130,6 @@ export const appReducers = (state = initialState, action) => {
 export const appSagas = [
   takeLatest(APP_SET_PREFERENCES, appPreferences),
   takeLatest(APP_SET_MODE, appModeSwitch),
-  takeLatest(APP_LIST_MODE_TOGGLE, appListModeToggle),
   takeLatest(APP_SORT_ORDER_OLD, appSortOrderSet),
   takeLatest(APP_SORT_ORDER_NEW, appSortOrderSet),
   takeLatest(APP_SORT_ORDER_RELEVANCE, appSortOrderSet),
@@ -143,10 +142,8 @@ export const appSagas = [
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-const getListMode = (state) => state.app.listMode
 const getSubset = (state) => state.app.section
 const getSortOptions = (state) => state.app.sortOptions
-const getSortOptionsBySubset = (state, subset) => state.app.sortOptions[subset] || 'newest'
 
 function* appModeSwitch(action) {
   const { mode } = action
@@ -163,12 +160,10 @@ function* appListModeSet(action) {
   const { listMode } = action
   localStore.setItem(CACHE_KEY_LIST_MODE, listMode)
   yield put({ type: APP_LIST_MODE_SET, listMode })
-}
 
-function* appListModeToggle() {
-  const listMode = yield select(getListMode)
-  const newListMode = listMode === 'grid' ? 'list' : 'grid'
-  yield call(appListModeSet, { listMode: newListMode })
+  const identifier = 'my-list.display.view'
+  const data = { value: listMode }
+  yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 }
 
 function* appSortOrderSet({ sortOrder }) {

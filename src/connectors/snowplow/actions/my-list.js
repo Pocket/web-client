@@ -89,5 +89,13 @@ export const myListActions = {
       uiType: 'button'
     },
     expects: ['id', 'url', 'position']
+  },
+  'my-list.display.view': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['value']
   }
 }

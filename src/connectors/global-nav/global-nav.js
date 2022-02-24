@@ -85,7 +85,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   )
 
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
-  const toggleListMode = () => dispatch(listModeToggle())
   const setListMode = () => dispatch(setListModeList())
   const setGridMode = () => dispatch(setListModeGrid())
   const setDetailMode = () => dispatch(setListModeDetail())
@@ -246,7 +245,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       setListMode={setListMode}
       setGridMode={setGridMode}
       setDetailMode={setDetailMode}
-      toggleListMode={toggleListMode}
       sendImpression={sendImpressionEvent}
       showNotification={showNotification}
       tools={tools}
