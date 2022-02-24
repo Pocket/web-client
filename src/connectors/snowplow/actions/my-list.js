@@ -97,5 +97,13 @@ export const myListActions = {
       uiType: 'button'
     },
     expects: ['value']
-  }
+  },
+  'my-list.sort': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'menu'
+    },
+    expects: ['value']
+  },
 }

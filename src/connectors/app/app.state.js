@@ -172,6 +172,10 @@ function* appSortOrderSet({ sortOrder }) {
   const updatedSortOptions = { ...oldSortOptions, [subset]: sortOrder }
   localStore.setItem(CACHE_KEY_SORT_OPTIONS, JSON.stringify(updatedSortOptions))
   yield put({ type: APP_SORT_ORDER_SET, sortOrder, subset })
+
+  const identifier = 'my-list.sort'
+  const data = { value: sortOrder }
+  yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 }
 
 function* appReleaseNotesSet({ releaseVersion }) {
