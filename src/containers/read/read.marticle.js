@@ -23,10 +23,10 @@ const preformattedText = css`
   white-space: normal;
 `
 
-const ImageAndCaption = ({block}) => {
+const ImageAndCaption = ({ block }) => {
   return (
     <figure className={figure}>
-      <img src={block.src} />
+      <img src={block.src} alt="" />
       {block.caption && (
         <figcaption>
           <ReactMarkdown>{block.caption}</ReactMarkdown>
@@ -41,7 +41,6 @@ export const Marticle = (itemId) => {
   const marticleContent = useSelector((state) => state.reader.marticleContent)
 
   useEffect(() => {
-    console.log({itemId})
     dispatch(marticleDataRequest(itemId))
   }, [dispatch, itemId])
 
@@ -53,16 +52,14 @@ export const Marticle = (itemId) => {
     )
   }
 
-  // return <div>WTF</div>
-
   return marticleContent.map((block, index) => (
     <>
-      {block.content && <ReactMarkdown key={index}>{block.content}</ReactMarkdown> }
+      {block.content && <ReactMarkdown key={index}>{block.content}</ReactMarkdown>}
 
-      {block.src && <ImageAndCaption block={block} /> }
+      {block.src && <ImageAndCaption key={index} block={block} />}
 
       {block.text && (
-        <pre className={preformattedText}>
+        <pre key={index} className={preformattedText}>
           {block.text}
         </pre>
       )}
