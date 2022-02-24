@@ -31,6 +31,7 @@ import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
 
 import { Marticle } from './read.marticle'
+import { Article } from './read.article'
 
 import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
 import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
@@ -334,19 +335,18 @@ export default function Reader() {
           style={customStyles}>
           <ItemHeader viewOriginalEvent={viewOriginalEvent} {...headerData} />
 
-          { useMarticle ? (
-            <Marticle itemId={itemId}/>
-          ) : null } 
-
-          { articleContent && !useMarticle ? (
-            <Content
-              {...contentData}
+          {useMarticle ? (
+            <Marticle itemId={itemId} />
+          ) : (
+            <Article
+              itemId={itemId}
               externalLinkClick={externalLinkClick}
               onMouseUp={toggleHighlight}
               onHighlightHover={toggleHighlightHover}
               annotationsBuilt={buildAnnotations}
             />
-          ) : null}
+          )}
+
           {highlight ? (
             <SelectionPopover
               anchor={highlight}
