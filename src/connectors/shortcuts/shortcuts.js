@@ -6,6 +6,7 @@ import { ShortCutsView } from 'components/shortcuts-view/shortcuts-view'
 import { listShortcuts } from './shortcuts.state'
 import { readerShortcuts } from './shortcuts.state'
 import { itemActions } from './shortcuts.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 import { closeHelpOverlay } from './shortcuts.state'
 
@@ -24,12 +25,14 @@ export function Shortcuts() {
     const shortCuts = [...listShortcuts, ...itemActions, ...readerShortcuts]
     Mousetrap.addKeycodes({ 173: '-' }) // For FF hyphen code
 
-    shortCuts.forEach(({ keys, action, omit, prevent, premium }) => {
+    shortCuts.forEach(({ keys, action, omit, prevent, premium, keyCopy, copy }) => {
       if (omit) return // We want in the list but not bound
       if (premium && !isPremium) return // It is a premium feature
       const actionPayload = action({ router, appMode })
+      const analyticsData = { label: copy, value: keyCopy }
       const boundAction = (event) => {
         if (prevent) event.preventDefault()
+        dispatch(sendSnowplowEvent('shortcut', analyticsData))
         dispatch(actionPayload)
       }
       Mousetrap.bind(keys, boundAction)

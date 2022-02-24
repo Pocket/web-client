@@ -26,6 +26,7 @@ import {
 import { ProgressBar } from 'components/progress-bar/progress-bar'
 import { useTranslation } from 'next-i18next'
 import Mousetrap from 'mousetrap'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 const headerStyle = css`
   position: fixed;
@@ -136,6 +137,9 @@ export const ReaderNav = ({
   const setLineHeight = (val) => dispatch(updateLineHeight(val))
   const setColumnWidth = (val) => dispatch(updateColumnWidth(val))
   const goBack = () => {
+    const analyticsData = { label: 'Back to List', value: 'b' }
+    dispatch(sendSnowplowEvent('shortcut', analyticsData))
+
     if (window.history.length > 1) return window.history.go(-1)
     document.location.href = '/my-list'
   }

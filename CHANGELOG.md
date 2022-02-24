@@ -1,3 +1,10 @@
+## [1.38.2](https://github.com/Pocket/web-client/compare/v1.38.1...v1.38.2) (2022-02-24)
+
+
+### Bug Fixes
+
+* **snowplow:** adding generic shortcuts related engagement event ([5fa419c](https://github.com/Pocket/web-client/commit/5fa419c2d985ba773cc8ce89b0d5c7a8e0a4af1a))
+
 ## [1.38.1](https://github.com/Pocket/web-client/compare/v1.38.0...v1.38.1) (2022-02-23)
 
 
