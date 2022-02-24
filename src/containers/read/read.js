@@ -4,11 +4,9 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
-import { getBool } from 'common/utilities'
 import { Loader, LoaderCentered } from 'components/loader/loader'
 import { ReaderNav } from 'components/reader/nav'
 import { ItemHeader } from 'components/reader/header'
-import { Content } from 'components/reader/content'
 import { SelectionPopover } from 'components/popover/popover-selection'
 import { Sidebar } from 'components/reader/sidebar'
 import { BottomUpsell } from 'components/reader/upsell.bottom'
@@ -114,7 +112,6 @@ export default function Reader() {
   const articleContent = useSelector((state) => state.reader.articleContent)
   const annotations = useSelector((state) => state.reader.annotations)
   const tags = useSelector((state) => state.reader.tags)
-  const favorite = useSelector((state) => state.reader.favorite)
 
   const lineHeight = useSelector((state) => state.reader.lineHeight)
   const columnWidth = useSelector((state) => state.reader.columnWidth)
@@ -131,14 +128,12 @@ export default function Reader() {
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const featureState = useSelector((state) => state.features)
   const useMarticle = flagsReady && featureFlagActive({ flag: 'api.marticle', featureState })
-  // const useMarticle = false
 
   useEffect(() => {
     dispatch(itemDataRequest(id))
     dispatch(selectShortcutItem(id))
   }, [dispatch, id])
 
-  // check for flagsReady here, check for article/marticle data
   if (!articleData) {
     return (
       <LoaderCentered>
@@ -155,8 +150,6 @@ export default function Reader() {
     timeToRead,
     publisher,
     hasVideo,
-    videos,
-    images,
     isFavorite,
     isArchived,
     analyticsData
@@ -171,13 +164,6 @@ export default function Reader() {
     publisher,
     tags: tagList,
     timeToRead
-  }
-
-  const contentData = {
-    content: articleContent,
-    annotations,
-    images,
-    videos
   }
 
   const customStyles = {
@@ -277,11 +263,6 @@ export default function Reader() {
     dispatch(favoriteAction([{ id }]))
   }
 
-  const externalLinkClick = (href) => {
-    const data = { id: itemId, url: href }
-    dispatch(sendSnowplowEvent('reader.external-link', data))
-  }
-
   const viewOriginalEvent = () => {
     dispatch(sendSnowplowEvent('reader.view-original', analyticsInfo))
   }
@@ -340,7 +321,6 @@ export default function Reader() {
           ) : (
             <Article
               itemId={itemId}
-              externalLinkClick={externalLinkClick}
               onMouseUp={toggleHighlight}
               onHighlightHover={toggleHighlightHover}
               annotationsBuilt={buildAnnotations}
