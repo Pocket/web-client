@@ -1,3 +1,10 @@
+## [1.38.4](https://github.com/Pocket/web-client/compare/v1.38.3...v1.38.4) (2022-02-25)
+
+
+### Bug Fixes
+
+* **onetrust:** remove refresh of google ads ([62bddc7](https://github.com/Pocket/web-client/commit/62bddc710e31a8ff4b4652d56a9f5110fd90ec4b))
+
 ## [1.38.3](https://github.com/Pocket/web-client/compare/v1.38.2...v1.38.3) (2022-02-24)
 
 

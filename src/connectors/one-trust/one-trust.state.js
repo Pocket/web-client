@@ -41,7 +41,6 @@ const checkPersonalizedAds = (personalized) => {
   if (global.googletag.apiReady) {
     global.googletag.pubads().disableInitialLoad()
     global.googletag.pubads().setRequestNonPersonalizedAds(personalized)
-    global.googletag.pubads().refresh()
   }
   else {
     setTimeout(() => {
