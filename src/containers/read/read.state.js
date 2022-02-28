@@ -47,6 +47,8 @@ import { deriveListItem } from 'common/api/derivers/item'
 
 import { HYDRATE } from 'actions'
 
+import { SNOWPLOW_SEND_EVENT } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const itemDataRequest = (itemId) => ({ type: ARTICLE_ITEM_REQUEST, itemId }) //prettier-ignore
@@ -297,6 +299,13 @@ function* saveDisplaySettings({ type, ...settings }) {
   yield Object.keys(settings).forEach((val) => {
     localStore.setItem(val.toString(), settings[val])
   })
+
+  const identifier = 'reader.display'
+  const data = Object.keys(settings).map((label) => ({
+    value: settings[label],
+    label
+  }))
+  yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 }
 
 /** ASYNC REQUESTS

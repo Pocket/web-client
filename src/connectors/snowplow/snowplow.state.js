@@ -169,10 +169,13 @@ export function buildSnowplowCustomEvent({ identifier, data }) {
   const event = eventFunction({ ...eventData, ...data })
 
   // Build entities
-  const singleEntities = entityTypes.map((entity) => {
-    const entityFunction = entityBuilders[entity]
-    return entityFunction({ ...eventData, ...data, identifier })
-  })
+  const singleEntities = entityTypes
+    ? entityTypes
+        .map((entity) => {
+          const entityFunction = entityBuilders[entity]
+          return entityFunction({ ...eventData, ...data, identifier })
+        })
+    : []
 
   // Build bulk entities if they exist, limit to BATCH_SIZE
   const batchEntities = batchEntityTypes
@@ -180,7 +183,7 @@ export function buildSnowplowCustomEvent({ identifier, data }) {
         .map((entity) => {
           const entityFunction = entityBuilders[entity]
           if (data.length > BATCH_SIZE) data.length = BATCH_SIZE
-          return data.map((item) => entityFunction(item))
+          return data.map((item) => entityFunction({ ...eventData, ...item, identifier }))
         })
         .flat()
     : []
@@ -209,7 +212,7 @@ export function* fireSnowplowEvent({ identifier, data }) {
 }
 
 /** UTILITIES :: THIRD PARTY SEND
- --------------------------------------------------------------- 
+ ---------------------------------------------------------------
  * functions here assume snowplow has already been loaded in, e.g. for automatic tracking
  */
 
