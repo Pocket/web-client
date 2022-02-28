@@ -1,8 +1,8 @@
 import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
 
-const getMarticleByItemIdQuery = gql`
-  query GetMarticleByItemId($itemId: ID!) {
+const getItemByIdQuery = gql`
+  query GetItemById($itemId: ID!) {
     getItemByItemId(id: $itemId) {
       marticle {
         ... on MarticleText {
@@ -57,7 +57,7 @@ const getMarticleByItemIdQuery = gql`
 
 export async function getMarticleByItemId(itemId) {
   return requestGQL({
-    query: getMarticleByItemIdQuery,
+    query: getItemByIdQuery,
     variables: { itemId }
   })
     .then(handleResponse)
