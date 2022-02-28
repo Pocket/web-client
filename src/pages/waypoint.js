@@ -12,8 +12,11 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     const lang = req.headers['accept-language'].toString().substring(0, 2)
     const supportedLocale = locales.includes(lang)
     const langPrefix = lang !== defaultLocale && supportedLocale ? `/${lang}` : ''
-    const authToken = query?.access_token || false
-    delete query.access_token
+
+    // query parameters returned after auth that are currently not used.
+    // remove from the list of query parameters
+    const unusedQueryParams = ['access_token', 'id', 'guid', 'type']
+    unusedQueryParams.forEach(param => delete query[param])
 
     const myListLink = queryString.stringifyUrl({ url: `${langPrefix}/my-list`, query })
     const homeLink = queryString.stringifyUrl({ url: '/home', query })
