@@ -1,3 +1,11 @@
+## [1.38.6](https://github.com/Pocket/web-client/compare/v1.38.5...v1.38.6) (2022-02-28)
+
+
+### Bug Fixes
+
+* **queries:** add getMarticleByItemIdQuery ([1d6893e](https://github.com/Pocket/web-client/commit/1d6893e1144a950b68a151c3788947d81daf2736))
+* **query:** rename to be more generic ([8d1ddc5](https://github.com/Pocket/web-client/commit/8d1ddc51082d48f8e95ea7f6d00e776672214727))
+
 ## [1.38.5](https://github.com/Pocket/web-client/compare/v1.38.4...v1.38.5) (2022-02-28)
 
 
