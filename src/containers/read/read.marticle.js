@@ -36,6 +36,14 @@ const ImageAndCaption = ({ block }) => {
   )
 }
 
+const CodeBlock = ({ block }) => {
+  return (
+    <pre className={preformattedText}>
+      <code>{block.text}</code>
+    </pre>
+  )
+}
+
 export const Marticle = (itemId) => {
   const dispatch = useDispatch()
   const marticleContent = useSelector((state) => state.reader.marticleContent)
@@ -58,11 +66,7 @@ export const Marticle = (itemId) => {
 
       {block.src && <ImageAndCaption key={index} block={block} />}
 
-      {block.text && (
-        <pre key={index} className={preformattedText}>
-          {block.text}
-        </pre>
-      )}
+      {block.text && <CodeBlock key={index} block={block} />}
     </>
   ))
 }
