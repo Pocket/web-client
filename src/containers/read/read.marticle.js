@@ -1,48 +1,12 @@
-import { css } from 'linaria'
 import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { useDispatch, useSelector } from 'react-redux'
 import { marticleDataRequest } from './read.state'
 
 import { Loader, LoaderCentered } from 'components/loader/loader'
-
-const figure = css`
-  width: 110%;
-  margin: 0 -5%;
-  padding-bottom: 1.667em;
-  text-align: center;
-
-  img {
-    max-width: 100%;
-    border-radius: 8px;
-    margin: 0 auto;
-  }
-`
-
-const preformattedText = css`
-  white-space: normal;
-`
-
-const ImageAndCaption = ({ block }) => {
-  return (
-    <figure className={figure}>
-      <img src={block.src} alt="" />
-      {block.caption && (
-        <figcaption>
-          <ReactMarkdown>{block.caption}</ReactMarkdown>
-        </figcaption>
-      )}
-    </figure>
-  )
-}
-
-const CodeBlock = ({ block }) => {
-  return (
-    <pre className={preformattedText}>
-      <code>{block.text}</code>
-    </pre>
-  )
-}
+import { ImageAndCaption } from 'components/marticle/image-and-caption'
+import { CodeBlock } from 'components/marticle/code-block'
+import { BuildList } from 'components/marticle/lists'
 
 export const Marticle = (itemId) => {
   const dispatch = useDispatch()
@@ -67,6 +31,8 @@ export const Marticle = (itemId) => {
       {block.src && <ImageAndCaption key={index} block={block} />}
 
       {block.text && <CodeBlock key={index} block={block} />}
+
+      {block.rows && <BuildList key={index} block={block} />}
     </>
   ))
 }
