@@ -35,6 +35,5 @@ export async function getSavedItemByItemId(itemId) {
 
 function handleResponse(response) {
   const responseData = response?.data?.user?.savedItemById
-  console.log({ response })
   return responseData
 }
