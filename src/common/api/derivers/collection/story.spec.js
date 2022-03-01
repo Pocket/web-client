@@ -15,7 +15,7 @@ export const storyFromClientApi = {
       name: 'Jack Ewing'
     }
   ],
-  publisher: 'The New York Times',
+  publisher: 'New York Times',
   fromPartner: true,
   item: {
     isArticle: true,
@@ -120,7 +120,7 @@ describe('Collection — Story', () => {
     expect(item.thumbnail).toBe(
       'https://s3.amazonaws.com/pocket-collectionapi-prod-images/914953af-15fd-46b9-ba3c-eed3ed278f9a.jpeg'
     )
-    expect(item.publisher).toBe('The New York Times')
+    expect(item.publisher).toBe('New York Times')
     expect(item.excerpt).toBe(
       '**SS**: “One of the guests in our Volkswagen episode was *New York Times* reporter Jack Ewing. Jack knows everything about VW, and it’s always wonderful to have the most authoritative voices on our show. He described for us what it’s like to visit VW’s headquarters in Germany, and talked about the company’s complicated history there. He also covered the VW emissions scandal from its beginning; you can read an excerpt of his book in this *NYT* article.”'
     )
