@@ -1,3 +1,10 @@
+## [1.38.7](https://github.com/Pocket/web-client/compare/v1.38.6...v1.38.7) (2022-03-01)
+
+
+### Bug Fixes
+
+* **snowplow:** add engagement events for display settings and theme ([99e7683](https://github.com/Pocket/web-client/commit/99e7683892a7b5d5593fe253b3803d39e5c0d996))
+
 ## [1.38.6](https://github.com/Pocket/web-client/compare/v1.38.5...v1.38.6) (2022-02-28)
 
 

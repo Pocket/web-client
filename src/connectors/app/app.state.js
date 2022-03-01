@@ -1,5 +1,5 @@
 import { localStore } from 'common/utilities/browser-storage/browser-storage'
-import { takeLatest, put, select, call } from 'redux-saga/effects'
+import { takeLatest, put, select } from 'redux-saga/effects'
 
 import { APP_DEV_MODE_TOGGLE } from 'actions'
 import { APP_SET_BASE_URL } from 'actions'
@@ -150,14 +150,17 @@ function* appModeSwitch(action) {
   if (mode !== 'bulk') yield put({ type: ITEMS_BULK_CLEAR })
 }
 
-function appColorModeSet(action) {
-  const { colorMode } = action
+function* appColorModeSet({ colorMode, skipAnalytics = false }) {
   localStore.setItem(CACHE_KEY_COLOR_MODE, colorMode)
   setColorClass(colorMode)
+
+  if (skipAnalytics) return
+  const identifier = 'my-list.theme'
+  const data = { value: colorMode }
+  yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 }
 
-function* appListModeSet(action) {
-  const { listMode } = action
+function* appListModeSet({ listMode }) {
   localStore.setItem(CACHE_KEY_LIST_MODE, listMode)
   yield put({ type: APP_LIST_MODE_SET, listMode })
 
@@ -200,7 +203,7 @@ function* appPreferences() {
   }
 
   yield put({ type: APP_SET_RELEASE, releaseVersion })
-  yield put({ type: APP_COLOR_MODE_SET, colorMode })
+  yield put({ type: APP_COLOR_MODE_SET, colorMode, skipAnalytics: true })
   yield put({ type: APP_LIST_MODE_SET, listMode })
 }
 

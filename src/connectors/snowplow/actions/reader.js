@@ -151,5 +151,13 @@ export const readerActions = {
       uiType: 'button'
     },
     expects: ['id', 'url']
+  },
+  'reader.display': {
+    eventType: 'engagement',
+    batchEntityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['value', 'label']
   }
 }
