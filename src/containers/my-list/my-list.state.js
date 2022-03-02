@@ -413,6 +413,8 @@ function* myListDataRequest(action) {
 function* myListUpdate(action) {
   try {
     const { since, subset = 'active', filter, tag } = action
+    if (!since) return
+
     const sortSubset = yield select(getSubset)
     const sortOrder = yield select(getSortOptionsBySubset, sortSubset)
 
