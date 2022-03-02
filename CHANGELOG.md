@@ -1,3 +1,10 @@
+## [1.38.9](https://github.com/Pocket/web-client/compare/v1.38.8...v1.38.9) (2022-03-02)
+
+
+### Bug Fixes
+
+* **snowplow:** ensure settings value sent is string ([5901e30](https://github.com/Pocket/web-client/commit/5901e309cf844772822a0c25e4c96eba6861a33f))
+
 ## [1.38.8](https://github.com/Pocket/web-client/compare/v1.38.7...v1.38.8) (2022-03-01)
 
 
