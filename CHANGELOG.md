@@ -1,3 +1,25 @@
+## [1.38.11](https://github.com/Pocket/web-client/compare/v1.38.10...v1.38.11) (2022-03-03)
+
+
+### Bug Fixes
+
+* **snowplow:** add snowplow event for go back button ([5e20b74](https://github.com/Pocket/web-client/commit/5e20b7435284644d20b78deac8d6e2075cfef520))
+* **snowplow:** fix reader back shortcut ([2b2926f](https://github.com/Pocket/web-client/commit/2b2926fd82c433b19789e6fcc1c78cc9e9af8a47))
+
+## [1.38.10](https://github.com/Pocket/web-client/compare/v1.38.9...v1.38.10) (2022-03-02)
+
+
+### Bug Fixes
+
+* **list:** limit updates if since doesn’t exist ([a7773f0](https://github.com/Pocket/web-client/commit/a7773f0b27a85507db24b75385bb5c2674a7633c))
+
+## [1.38.9](https://github.com/Pocket/web-client/compare/v1.38.8...v1.38.9) (2022-03-02)
+
+
+### Bug Fixes
+
+* **snowplow:** ensure settings value sent is string ([5901e30](https://github.com/Pocket/web-client/commit/5901e309cf844772822a0c25e4c96eba6861a33f))
+
 ## [1.38.8](https://github.com/Pocket/web-client/compare/v1.38.7...v1.38.8) (2022-03-01)
 
 

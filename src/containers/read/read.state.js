@@ -302,7 +302,7 @@ function* saveDisplaySettings({ type, ...settings }) {
 
   const identifier = 'reader.display'
   const data = Object.keys(settings).map((label) => ({
-    value: settings[label],
+    value: settings[label]?.toString(),
     label
   }))
   yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
