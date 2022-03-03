@@ -159,5 +159,12 @@ export const readerActions = {
       uiType: 'button'
     },
     expects: ['value', 'label']
+  },
+  'reader.goback': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    }
   }
 }

@@ -140,6 +140,10 @@ export const ReaderNav = ({
     if (window.history.length > 1) return window.history.go(-1)
     document.location.href = '/my-list'
   }
+  const clickGoBack = () => {
+    dispatch(sendSnowplowEvent('reader.goback'))
+    goBack()
+  }
   const shortcutGoBack = () => {
     const analyticsData = { label: 'Back to List', value: 'b' }
     dispatch(sendSnowplowEvent('shortcut', analyticsData))
@@ -157,7 +161,7 @@ export const ReaderNav = ({
       <div className="global-nav-container">
         <nav className={navStyle}>
           <button
-            onClick={goBack}
+            onClick={clickGoBack}
             aria-label={t('nav:back-to-my-list', 'Back to My List')}
             data-tooltip={t('nav:back-to-my-list', 'Back to My List')}
             data-cy="reader-nav-go-back"
