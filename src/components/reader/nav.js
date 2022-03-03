@@ -137,16 +137,18 @@ export const ReaderNav = ({
   const setLineHeight = (val) => dispatch(updateLineHeight(val))
   const setColumnWidth = (val) => dispatch(updateColumnWidth(val))
   const goBack = () => {
-    const analyticsData = { label: 'Back to List', value: 'b' }
-    dispatch(sendSnowplowEvent('shortcut', analyticsData))
-
     if (window.history.length > 1) return window.history.go(-1)
     document.location.href = '/my-list'
+  }
+  const shortcutGoBack = () => {
+    const analyticsData = { label: 'Back to List', value: 'b' }
+    dispatch(sendSnowplowEvent('shortcut', analyticsData))
+    goBack()
   }
   const buttonClass = cx(buttonReset, buttonStyles, bottomTooltip)
 
   useEffect(() => {
-    Mousetrap.bind('b', goBack)
+    Mousetrap.bind('b', shortcutGoBack)
     return () => Mousetrap.unbind('b')
   }, [])
 
