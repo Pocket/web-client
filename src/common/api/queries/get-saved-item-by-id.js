@@ -1,27 +1,36 @@
 import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
 import { FRAGMENT_SAVED_ITEM } from 'common/api/fragments/fragment.savedItem'
-import { FRAGMENT_ANNOTATIONS } from 'common/api/fragments/fragment.savedItem.annotations'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
-import { FRAGMENT_MARTICLE } from 'common/api/fragments/fragment.item.marticle'
 
 const getSavedItemByIdQuery = gql`
   query GetSavedItemById($itemId: ID!) {
     user {
       savedItemById(id: $itemId) {
         ...SavedItemDetails
-        ...Annotations
+        annotations {
+          highlights {
+            id
+            quote
+            patch
+            version
+            _createdAt
+            _updatedAt
+            note {
+              text
+              _createdAt
+              _updatedAt
+            }
+          }
+        }
         item {
           ...ItemDetails
-          ...Marticle
         }
       }
     }
   }
   ${FRAGMENT_SAVED_ITEM}
-  ${FRAGMENT_ANNOTATIONS}
   ${FRAGMENT_ITEM}
-  ${FRAGMENT_MARTICLE}
 `
 
 export async function getSavedItemByItemId(itemId) {
@@ -34,6 +43,6 @@ export async function getSavedItemByItemId(itemId) {
 }
 
 function handleResponse(response) {
-  const responseData = response?.data?.user?.savedItemById
-  return responseData
+  const { item, ...savedData } = response?.data?.user?.savedItemById
+  return { item, savedData }
 }
