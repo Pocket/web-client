@@ -25,6 +25,14 @@ const getSavedItemByIdQuery = gql`
         }
         item {
           ...ItemDetails
+          ... on Item {
+            article
+            authors {
+              id
+              name
+              url
+            }
+          }
         }
       }
     }
