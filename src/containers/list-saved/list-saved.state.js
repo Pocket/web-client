@@ -134,13 +134,18 @@ export const listSavedReducers = (state = [], action) => {
 const initialState = {
   filter: { status: 'UNREAD' },
   sort: {
-    sortBy: 'CREATED_AT',
+    sortBy: 'UPDATED_AT',
     sortOrder: 'DESC'
   },
   count: 30
 }
 export const listSavedPageInfoReducers = (state = initialState, action) => {
   switch (action.type) {
+    case ITEMS_SAVED_REQUEST: {
+      const { filters } = action
+      return { ...state, ...filters }
+    }
+
     case ITEMS_SAVED_PAGE_SET_FILTERS: {
       const { filter } = action
       return { ...state, filter }
@@ -202,7 +207,9 @@ function* reconcileMutation(action) {
   const pageInfo = yield select(getSavedPageInfo)
   const { filter } = pageInfo
 
-  if (filter?.status !== item?.status) yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id })
+  if (filter?.isHighlighted && !item?.isHighlighted) return yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id }) //prettier-ignore
+  if (filter?.isFavorite && !item?.isFavorite) return yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id }) //prettier-ignore
+  if (filter?.status && filter?.status !== item?.status) yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id }) //prettier-ignore
 }
 
 function* requestItemsWithFilter(action) {
