@@ -303,7 +303,7 @@ function* annotationDeleteRequest({ item_id, annotation_id }) {
 function* highlightSaveRequest({ itemId, quote, patch }) {
   try {
     const highlight = {
-      version: '2',
+      version: 2,
       itemId,
       quote,
       patch
