@@ -1,3 +1,10 @@
+## [1.38.13](https://github.com/Pocket/web-client/compare/v1.38.12...v1.38.13) (2022-03-08)
+
+
+### Bug Fixes
+
+* **api:** update get saved item query to include authors and article ([002b514](https://github.com/Pocket/web-client/commit/002b514c3ae45c36cf5a157d493493b4ae530c5e))
+
 ## [1.38.12](https://github.com/Pocket/web-client/compare/v1.38.11...v1.38.12) (2022-03-03)
 
 
