@@ -1,3 +1,10 @@
+## [1.38.14](https://github.com/Pocket/web-client/compare/v1.38.13...v1.38.14) (2022-03-08)
+
+
+### Bug Fixes
+
+* **onboarding:** limit all onboarding by settings ([cee6c5d](https://github.com/Pocket/web-client/commit/cee6c5d5a9da72096cc689978535858dbb87d774))
+
 ## [1.38.13](https://github.com/Pocket/web-client/compare/v1.38.12...v1.38.13) (2022-03-08)
 
 

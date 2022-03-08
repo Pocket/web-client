@@ -11,7 +11,8 @@ export const Onboarding = ({ type, ...rest }) => {
   const featureState = useSelector((state) => state.features)
   const onboardingDev = featureFlagActive({ flag: 'onboarding.dev', featureState })
   const onboardingRollout = featureFlagActive({ flag: 'onboarding.rollout', featureState })
-  const showOnboarding = onboardingDev || onboardingRollout
+  const settingsFetched = useSelector((state) => state.settings.settingsFetched)
+  const showOnboarding = (onboardingDev || onboardingRollout) && settingsFetched
 
   const onboardingTypes = {
     'home.flyaway.save': HomeFlyawaySave,
