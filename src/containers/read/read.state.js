@@ -75,8 +75,8 @@ export const saveAnnotation = ({ itemId, quote, patch }) => ({ type: ANNOTATION_
 export const deleteAnnotation = ({ itemId, annotation_id }) => ({ type: ANNOTATION_DELETE_REQUEST, item_id: itemId, annotation_id }) //prettier-ignore
 // client-api actions
 export const readItemRequest = (itemId) => ({ type: READ_ITEM_REQUEST, itemId }) //prettier-ignore
-export const saveHighlight = ({ itemId, quote, patch }) => ({ type: HIGHLIGHT_SAVE_REQUEST, itemId, quote, patch }) //prettier-ignore
-export const deleteHighlight = ({ id }) => ({ type: HIGHLIGHT_DELETE_REQUEST, id }) //prettier-ignore
+export const saveHighlightRequest = ({ itemId, quote, patch }) => ({ type: HIGHLIGHT_SAVE_REQUEST, itemId, quote, patch }) //prettier-ignore
+export const deleteHighlightRequest = ({ id }) => ({ type: HIGHLIGHT_DELETE_REQUEST, id }) //prettier-ignore
 // Settings actions
 export const updateLineHeight = (lineHeight) => ({ type: UPDATE_LINE_HEIGHT, lineHeight }) //prettier-ignore
 export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, columnWidth }) //prettier-ignore
