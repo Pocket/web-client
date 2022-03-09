@@ -6,12 +6,14 @@ import { itemUnFavorite } from 'common/api'
 import { itemArchive } from 'common/api'
 import { itemUnArchive } from 'common/api'
 import { itemDelete } from 'common/api'
+import { itemUpsert } from 'common/api'
 
 import { deriveSavedItem } from 'common/api/derivers/item'
 
 import { ITEMS_SAVED_REQUEST } from 'actions'
 import { ITEMS_SAVED_SUCCESS } from 'actions'
 import { ITEMS_SAVED_FAILURE } from 'actions'
+import { ITEMS_UPSERT_SUCCESS } from 'actions'
 
 import { ITEMS_SAVED_SEARCH_REQUEST } from 'actions'
 import { ITEMS_SAVED_SEARCH_FAILURE } from 'actions'
@@ -21,6 +23,7 @@ import { ITEMS_SAVED_PAGE_INFO_FAILURE } from 'actions'
 
 import { ITEMS_SUCCESS } from 'actions'
 
+import { MUTATION_UPSERT } from 'actions'
 import { MUTATION_FAVORITE } from 'actions'
 import { MUTATION_UNFAVORITE } from 'actions'
 import { MUTATION_ARCHIVE } from 'actions'
@@ -37,12 +40,14 @@ export const mutationUnFavorite = (itemId) => ({ type: MUTATION_UNFAVORITE, item
 export const mutationArchive = (itemId) => ({ type: MUTATION_ARCHIVE, itemId })
 export const mutationUnArchive = (itemId) => ({ type: MUTATION_UNARCHIVE, itemId })
 export const mutationDelete = (itemId) => ({ type: MUTATION_DELETE, itemId })
+export const mutationUpsert = (url, filters, sort) => ({ type: MUTATION_UPSERT, url, filters, sort }) //prettier-ignore
 
 /** ITEM REDUCERS
  --------------------------------------------------------------- */
 export const itemsSavedReducers = (state = {}, action) => {
   switch (action.type) {
-    case ITEMS_SAVED_SUCCESS: {
+    case ITEMS_SAVED_SUCCESS:
+    case ITEMS_UPSERT_SUCCESS: {
       return { ...state, ...action.nodes }
     }
 
@@ -61,6 +66,7 @@ export const itemsSavedReducers = (state = {}, action) => {
 export const itemsSavedSagas = [
   takeEvery(ITEMS_SAVED_REQUEST, savedItemRequest),
   takeEvery(ITEMS_SAVED_SEARCH_REQUEST, savedItemSearchRequest),
+  takeEvery(MUTATION_UPSERT, savedItemUpsert),
   takeEvery(MUTATION_FAVORITE, savedItemFavorite),
   takeEvery(MUTATION_UNFAVORITE, savedItemUnFavorite),
   takeEvery(MUTATION_ARCHIVE, savedItemArchive),
@@ -101,6 +107,18 @@ function* savedItemSearchRequest(action) {
   yield put({ type: ITEMS_SUCCESS, itemsById })
   yield put({ type: ITEMS_SAVED_PAGE_INFO_SUCCESS, pageInfo: { ...pageInfo, totalCount, searchTerm} }) //prettier-ignore
   yield put({ type: ITEMS_SAVED_SUCCESS, nodes, savedItemIds })
+}
+
+function* savedItemUpsert(action) {
+  const { url, sort } = action
+  const upsertResponse = yield call(itemUpsert, url)
+
+  if (!upsertResponse) return // Do better here
+  const { item, node } = deriveSavedItem(upsertResponse)
+  const { itemId } = item
+  const savedItemIds = [itemId] // HERE WE NEED TO DETERMINE IF THE CURRENT URL FALLS INTO THE CURRENT FILTERS
+  yield put({ type: ITEMS_SUCCESS, itemsById: { [itemId]: item } })
+  yield put({ type: ITEMS_UPSERT_SUCCESS, nodes: { [itemId]: node }, savedItemIds, sort })
 }
 
 function* savedItemFavorite(action) {

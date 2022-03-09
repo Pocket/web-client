@@ -29,6 +29,7 @@ export { searchSavedItems } from './queries/search-saved-items'
 export { getSavedItemByItemId } from './queries/get-saved-item-by-id'
 
 // Item Mutations
+export { itemUpsert } from './mutations/upsertItem'
 export { itemFavorite } from './mutations/favoriteItem'
 export { itemUnFavorite } from './mutations/unfavoriteItem'
 export { itemArchive } from './mutations/archiveItem'
