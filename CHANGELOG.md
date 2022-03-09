@@ -1,3 +1,10 @@
+# [1.39.0](https://github.com/Pocket/web-client/compare/v1.38.15...v1.39.0) (2022-03-09)
+
+
+### Features
+
+* **saved:** add item manually to list ([dfa6737](https://github.com/Pocket/web-client/commit/dfa6737a20f61499979e9ab3a794fdfefd63ef6c))
+
 ## [1.38.15](https://github.com/Pocket/web-client/compare/v1.38.14...v1.38.15) (2022-03-09)
 
 

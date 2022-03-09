@@ -1,6 +1,7 @@
 import { put, select, takeEvery } from 'redux-saga/effects'
 import { ITEMS_SAVED_REQUEST } from 'actions'
 import { ITEMS_SAVED_SUCCESS } from 'actions'
+import { ITEMS_UPSERT_SUCCESS } from 'actions'
 import { ITEMS_SAVED_FAILURE } from 'actions'
 import { ITEMS_SAVED_RECONCILED } from 'actions'
 import { MUTATION_SUCCESS } from 'actions'
@@ -91,6 +92,16 @@ export const listSavedReducers = (state = [], action) => {
       const items = new Set([...state, ...itemIds])
       return [...items]
     }
+    case ITEMS_UPSERT_SUCCESS: {
+      const sort = action?.sort || { sortOrder: 'DESC' }
+      const { sortOrder } = sort
+      const itemIds = action?.savedItemIds || []
+
+      const itemArray = sortOrder === 'DESC' ? [...itemIds, ...state] : [...state, ...itemIds]
+      const items = new Set(itemArray)
+      return [...items]
+    }
+
     case SEARCH_SAVED_ITEMS:
     case SEARCH_SAVED_ITEMS_UNREAD:
     case SEARCH_SAVED_ITEMS_ARCHIVED:
