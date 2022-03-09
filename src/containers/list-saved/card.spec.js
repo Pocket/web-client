@@ -2,22 +2,11 @@ import { wrappedRender } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
 import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils'
 
-import { savedParsedFromV3 } from 'common/api/derivers/list/parsed.spec'
 import { savedParsedFromClientApi } from 'common/api/derivers/list/parsed.spec'
-
-import { savedUnparsedFromV3 } from 'common/api/derivers/list/unparsed.spec'
 import { savedUnparsedFromClientApi } from 'common/api/derivers/list/unparsed.spec'
-
-import { savedVideoFromV3 } from 'common/api/derivers/list/video.spec'
 import { savedVideoFromClientApi } from 'common/api/derivers/list/video.spec'
-
-import { savedImageFromV3 } from 'common/api/derivers/list/image.spec'
 import { savedImageFromClientApi } from 'common/api/derivers/list/image.spec'
-
-import { savedLegacyListItem } from 'common/api/derivers/list/legacy.spec'
 import { savedLegacyListItemFromClientApi } from 'common/api/derivers/list/legacy.spec'
-
-import { savedCollectionFromV3 } from 'common/api/derivers/list/collection.spec'
 import { savedCollectionFromClientApi } from 'common/api/derivers/list/collection.spec'
 
 import { ItemCard as MyListCard } from 'connectors/item-card/my-list/card'
@@ -26,12 +15,12 @@ import { deriveListItem } from 'common/api/derivers/item'
 describe('ItemCard', () => {
   //Legacy Derivers
 
-  const derivedSavedParsed = deriveListItem(savedParsedFromV3, true)
-  const derivedSavedUnparsed = deriveListItem(savedUnparsedFromV3, true)
-  const derivedSavedVideo = deriveListItem(savedVideoFromV3, true)
-  const derivedSavedImage = deriveListItem(savedImageFromV3, true)
-  const derivedSavedLegacy = deriveListItem(savedLegacyListItem, true)
-  const deriveSavedCollection = deriveListItem(savedCollectionFromV3, true)
+  const derivedSavedParsed = deriveListItem(savedParsedFromClientApi)
+  const derivedSavedUnparsed = deriveListItem(savedUnparsedFromClientApi)
+  const derivedSavedVideo = deriveListItem(savedVideoFromClientApi)
+  const derivedSavedImage = deriveListItem(savedImageFromClientApi)
+  const derivedSavedLegacy = deriveListItem(savedLegacyListItemFromClientApi)
+  const deriveSavedCollection = deriveListItem(savedCollectionFromClientApi)
 
   const initialState = {
     user: { auth: true },
