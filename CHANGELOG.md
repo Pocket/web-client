@@ -1,3 +1,14 @@
+## [1.38.15](https://github.com/Pocket/web-client/compare/v1.38.14...v1.38.15) (2022-03-09)
+
+
+### Bug Fixes
+
+* **highlight:** pass version as int to create highlight function ([ccb9304](https://github.com/Pocket/web-client/commit/ccb93040d3a4d1a141644715242362410a09d035))
+* **highlights:** adding graphql mutations for adding, removing, and updating highlights ([dd98760](https://github.com/Pocket/web-client/commit/dd98760026d315cad52538ed3fd3b19d930408d1))
+* **highlights:** update mutation names to be less generic ([fe787b8](https://github.com/Pocket/web-client/commit/fe787b8f8d5aa20c60b7732d80f06a53cc5cb3ca))
+* **highlights:** update mutations names to be more concise ([82e0ec4](https://github.com/Pocket/web-client/commit/82e0ec458d2e4d20c20f6f36f6e236e1c48e7a10))
+* **read:** rename read actions for highlights ([be6b796](https://github.com/Pocket/web-client/commit/be6b7968c515d9a76cb211a6dcd6b5a809bea411))
+
 ## [1.38.14](https://github.com/Pocket/web-client/compare/v1.38.13...v1.38.14) (2022-03-08)
 
 

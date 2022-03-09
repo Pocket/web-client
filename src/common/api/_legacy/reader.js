@@ -35,38 +35,3 @@ export const getArticleText = (url) => {
     auth: true
   })
 }
-
-export const getSuggestedTags = (itemId) => {
-  return request({
-    path: 'v3/getSuggestedTags',
-    params: {
-      version: 2,
-      item_id: itemId
-    },
-    auth: true
-  })
-}
-
-// Can this scope be limited? Or include it with the item request?
-export const getRecentFriends = () => {
-  return request({
-    path: 'v3/get',
-    params: {
-      images: 1,
-      videos: 1,
-      tags: 1,
-      rediscovery: 1,
-      annotations: 1,
-      authors: 1,
-      itemTopics: 1,
-      meta: 1,
-      posts: 1,
-      total: 1,
-      state: 'all',
-      shares: 'recent_friends',
-      count: 1,
-      locale_lang: 'en-US'
-    },
-    auth: true
-  })
-}

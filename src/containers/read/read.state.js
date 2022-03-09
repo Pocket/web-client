@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid'
 import { arrayToObject } from 'common/utilities'
 import { localStore } from 'common/utilities/browser-storage/browser-storage'
 
+// V3 actions
 import { ARTICLE_ITEM_REQUEST } from 'actions'
 import { ARTICLE_ITEM_SUCCESS } from 'actions'
 import { ARTICLE_ITEM_FAILURE } from 'actions'
@@ -18,6 +19,7 @@ import { ANNOTATION_DELETE_REQUEST } from 'actions'
 import { ANNOTATION_DELETE_SUCCESS } from 'actions'
 import { ANNOTATION_DELETE_FAILURE } from 'actions'
 
+// Settings actions
 import { HYDRATE_DISPLAY_SETTINGS } from 'actions'
 import { UPDATE_LINE_HEIGHT } from 'actions'
 import { UPDATE_COLUMN_WIDTH } from 'actions'
@@ -49,11 +51,33 @@ import { HYDRATE } from 'actions'
 
 import { SNOWPLOW_SEND_EVENT } from 'actions'
 
+// Client API actions
+import { READ_ITEM_REQUEST } from 'actions'
+import { READ_ITEM_SUCCESS } from 'actions'
+import { READ_ITEM_FAILURE } from 'actions'
+
+import { HIGHLIGHT_SAVE_REQUEST } from 'actions'
+import { HIGHLIGHT_SAVE_SUCCESS } from 'actions'
+import { HIGHLIGHT_SAVE_FAILURE } from 'actions'
+
+import { HIGHLIGHT_DELETE_REQUEST } from 'actions'
+import { HIGHLIGHT_DELETE_SUCCESS } from 'actions'
+import { HIGHLIGHT_DELETE_FAILURE } from 'actions'
+
+import { createHighlight } from 'common/api'
+import { deleteHighlight } from 'common/api'
+
 /** ACTIONS
  --------------------------------------------------------------- */
+// v3 actions
 export const itemDataRequest = (itemId) => ({ type: ARTICLE_ITEM_REQUEST, itemId }) //prettier-ignore
 export const saveAnnotation = ({ itemId, quote, patch }) => ({ type: ANNOTATION_SAVE_REQUEST, item_id: itemId, quote, patch }) //prettier-ignore
 export const deleteAnnotation = ({ itemId, annotation_id }) => ({ type: ANNOTATION_DELETE_REQUEST, item_id: itemId, annotation_id }) //prettier-ignore
+// client-api actions
+export const readItemRequest = (itemId) => ({ type: READ_ITEM_REQUEST, itemId }) //prettier-ignore
+export const saveHighlightRequest = ({ itemId, quote, patch }) => ({ type: HIGHLIGHT_SAVE_REQUEST, itemId, quote, patch }) //prettier-ignore
+export const deleteHighlightRequest = ({ id }) => ({ type: HIGHLIGHT_DELETE_REQUEST, id }) //prettier-ignore
+// Settings actions
 export const updateLineHeight = (lineHeight) => ({ type: UPDATE_LINE_HEIGHT, lineHeight }) //prettier-ignore
 export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, columnWidth }) //prettier-ignore
 export const updateFontSize = (fontSize) => ({ type: UPDATE_FONT_SIZE, fontSize }) //prettier-ignore
@@ -177,7 +201,9 @@ export const readSagas = [
   takeEvery(UPDATE_LINE_HEIGHT, saveDisplaySettings),
   takeEvery(UPDATE_COLUMN_WIDTH, saveDisplaySettings),
   takeEvery(UPDATE_FONT_SIZE, saveDisplaySettings),
-  takeEvery(UPDATE_FONT_TYPE, saveDisplaySettings)
+  takeEvery(UPDATE_FONT_TYPE, saveDisplaySettings),
+  takeEvery(HIGHLIGHT_SAVE_REQUEST, highlightSaveRequest),
+  takeEvery(HIGHLIGHT_DELETE_REQUEST, highlightDeleteRequest)
 ]
 
 /* SAGAS :: SELECTORS
@@ -271,6 +297,39 @@ function* annotationDeleteRequest({ item_id, annotation_id }) {
     if (data) return yield put({ type: ANNOTATION_DELETE_SUCCESS, annotations })
   } catch (error) {
     yield put({ type: ANNOTATION_DELETE_FAILURE, error })
+  }
+}
+
+function* highlightSaveRequest({ itemId, quote, patch }) {
+  try {
+    const highlight = {
+      version: 2,
+      itemId,
+      quote,
+      patch
+    }
+
+    const storedHighlights = yield select(getAnnotations)
+    const annotations = [...storedHighlights, highlight]
+
+    const data = yield call(createHighlight, highlight)
+
+    if (data) return yield put({ type: HIGHLIGHT_SAVE_SUCCESS, annotations })
+  } catch (error) {
+    yield put({ type: HIGHLIGHT_SAVE_FAILURE, error })
+  }
+}
+
+function* highlightDeleteRequest({ id }) {
+  try {
+    const storedAnnotations = yield select(getAnnotations)
+    const annotations = storedAnnotations.filter(i => i.id !== id) //prettier-ignore
+
+    const data = yield call(deleteHighlight, id)
+
+    if (data) return yield put({ type: HIGHLIGHT_DELETE_SUCCESS, annotations })
+  } catch (error) {
+    yield put({ type: HIGHLIGHT_DELETE_FAILURE, error })
   }
 }
 
