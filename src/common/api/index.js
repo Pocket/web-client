@@ -35,3 +35,8 @@ export { itemUnFavorite } from './mutations/unfavoriteItem'
 export { itemArchive } from './mutations/archiveItem'
 export { itemUnArchive } from './mutations/unArchiveItem'
 export { itemDelete } from './mutations/deleteItem'
+
+// Highlight Mutations
+export { createHighlight } from './mutations/savedItemHighlights'
+export { deleteHighlight } from './mutations/savedItemHighlights'
+export { updateHighlight } from './mutations/savedItemHighlights'
