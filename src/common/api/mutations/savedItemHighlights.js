@@ -5,8 +5,8 @@ import { requestGQL } from 'common/utilities/request/request'
  * Create new highlight annotation(s). Returns the data for the created Highlight object(s).
  * https://studio.apollographql.com/graph/pocket-client-api/schema/reference/objects/Mutation?variant=current#createSavedItemHighlights
  */
-const CreateHighlight = gql`
-  mutation Mutation($input: [CreateHighlightInput!]!) {
+const createHighlightQuery = gql`
+  mutation CreateHighlight($input: [CreateHighlightInput!]!) {
     createSavedItemHighlights(input: $input) {
       id
       quote
@@ -31,7 +31,7 @@ const CreateHighlight = gql`
  */
 export function createHighlight(highlight) {
   return requestGQL({
-    query: CreateHighlight,
+    query: createHighlightQuery,
     variables: { input: [highlight] }
   })
     .then((response) => response?.data?.createSavedItemHighlights)
@@ -42,15 +42,15 @@ export function createHighlight(highlight) {
  * Delete a highlight by its ID.
  * https://studio.apollographql.com/graph/pocket-client-api/schema/reference/objects/Mutation?variant=current#deleteSavedItemHighlight
  */
-const DeleteHighlight = gql`
-  mutation Mutation($highlightId: ID!) {
+const deleteHighlightQuery = gql`
+  mutation DeleteHighlight($highlightId: ID!) {
     deleteSavedItemHighlight(id: $highlightId)
   }
 `
 
 export function deleteHighlight(highlightId) {
   return requestGQL({
-    query: DeleteHighlight,
+    query: deleteHighlightQuery,
     variables: { highlightId }
   })
     .then((response) => response?.data?.deleteSavedItemHighlight)
@@ -61,8 +61,8 @@ export function deleteHighlight(highlightId) {
  * Update an existing highlight annotation, by its ID. If the given highlight ID does not exist, will return error data and the highlight will not be created.
  * https://studio.apollographql.com/graph/pocket-client-api/schema/reference/objects/Mutation?variant=current#updateSavedItemHighlight
  */
-const UpdateHighlight = gql`
-  mutation Mutation($highlightId: ID!, $input: CreateHighlightInput!) {
+const updateHighlightQuery = gql`
+  mutation UpdateHighlight($highlightId: ID!, $input: CreateHighlightInput!) {
     updateSavedItemHighlight(id: $highlightId, input: $input) {
       id
       quote
@@ -81,7 +81,7 @@ const UpdateHighlight = gql`
 
 export function updateHighlight(highlightId, input) {
   return requestGQL({
-    query: UpdateHighlight,
+    query: updateHighlightQuery,
     variables: { highlightId, input }
   })
     .then((response) => response?.data?.updateSavedItemHighlight)
