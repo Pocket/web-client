@@ -159,20 +159,24 @@ function* savedItemDelete(action) {
 
 const getNodeFromEdge = (previous, current) => {
   const { item, ...node } = current.node
+  if (node.status === 'DELETED') return previous // REMOVE DELETED ITEMS FROM THE RESPONSE
   return { ...previous, [node.id]: node }
 }
 
 const getItemFromEdge = (previous, current) => {
   const { item, node } = deriveSavedItem(current.node)
-  return { ...previous, [node.id]: item }
+  if (node.status === 'DELETED') return previous
+  return { ...previous, [node.id]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
 }
 
 const getSearchNodeFromEdge = (previous, current) => {
   const { item, ...node } = current.node.savedItem
-  return { ...previous, [node.id]: node }
+  if (node.status === 'DELETED') return previous
+  return { ...previous, [node.id]: node } // REMOVE DELETED ITEMS FROM THE RESPONSE
 }
 
 const getSearchItemFromEdge = (previous, current) => {
   const { item, node } = deriveSavedItem(current.node.savedItem)
-  return { ...previous, [node.id]: item }
+  if (node.status === 'DELETED') return previous
+  return { ...previous, [node.id]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
 }
