@@ -46,8 +46,8 @@ const UNREAD = { status: 'UNREAD' }
 const ARCHIVED = { status: 'ARCHIVED' }
 const FAVORITED = { isFavorite: true }
 const ANNOTATATED = { isHighlighted: true }
-const ARTICLE = { contentType: 'ARTICLE' }
-const VIDEOS = { contentType: 'VIDEO' }
+const ARTICLE = { contentType: 'IS_READABLE' }
+const VIDEOS = { contentType: 'IS_VIDEO' }
 
 /** ACTIONS
  --------------------------------------------------------------- */
