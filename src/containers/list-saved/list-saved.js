@@ -78,6 +78,7 @@ export function filterSelector(subset, filter) {
 export const ListSaved = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
+  const sortOrder = useSelector((state) => state.listSavedPageInfo.sortOrder)
 
   const { subset: sub = 'active', filter: propFilter } = props
   const { tag, filter: queryFilter, query: searchTerm } = router.query
@@ -87,8 +88,8 @@ export const ListSaved = (props) => {
   // Get items based on location
   useEffect(() => {
     const itemFilterFunction = filterSelector(subset, filter)
-    dispatch(itemFilterFunction(searchTerm))
-  }, [dispatch, subset, filter, searchTerm])
+    dispatch(itemFilterFunction(searchTerm, sortOrder))
+  }, [dispatch, subset, filter, searchTerm, sortOrder])
 
   const listSaved = useSelector((state) => state.listSaved)
 
