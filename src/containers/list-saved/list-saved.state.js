@@ -53,16 +53,16 @@ const VIDEOS = { contentType: 'IS_VIDEO' }
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getItemsUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_UNREAD, filter: {...UNREAD}, searchTerm, sortOrder}) //prettier-ignore
-export const getItemsArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ARCHIVED, filter: {...ARCHIVED}, searchTerm, sortOrder}) //prettier-ignore
+export const getItemsArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ARCHIVED, filter: {...ARCHIVED}, sortBy: 'ARCHIVED_AT', searchTerm, sortOrder}) //prettier-ignore
 
 export const getItemsFavorites = (searchTerm, sortOrder) => ({ type: GET_ITEMS_FAVORITES, filter: {...FAVORITED}, sortBy: 'FAVORITED_AT', searchTerm, sortOrder}) //prettier-ignore
 export const getItemsFavoritesUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_FAVORITES_UNREAD, filter: {...FAVORITED, ...UNREAD}, sortBy: 'FAVORITED_AT', searchTerm, sortOrder}) //prettier-ignore
 export const getItemsFavoritesArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_FAVORITES_ARCHIVED, filter: {...FAVORITED, ...ARCHIVED}, sortBy: 'FAVORITED_AT', searchTerm, sortOrder}) //prettier-ignore
 
-export const getItemsAnnotated = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED, filter: { ...ANNOTATATED }, sortBy: 'ARCHIVED_AT' , searchTerm, sortOrder}) //prettier-ignore
-export const getItemsAnnotatedUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_UNREAD, filter: {...ANNOTATATED, ...UNREAD}, sortBy: 'ARCHIVED_AT', searchTerm, sortOrder}) //prettier-ignore
-export const getItemsAnnotatedArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_ARCHIVED, filter: {...ANNOTATATED, ...ARCHIVED }, sortBy: 'ARCHIVED_AT', searchTerm, sortOrder}) //prettier-ignore
-export const getItemsAnnotatedFavorites = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_FAVORITES, filter: {...ANNOTATATED, ...FAVORITED }, sortBy: 'ARCHIVED_AT', searchTerm, sortOrder}) //prettier-ignore
+export const getItemsAnnotated = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED, filter: { ...ANNOTATATED }, sortBy: 'UPDATED_AT' , searchTerm, sortOrder}) //prettier-ignore
+export const getItemsAnnotatedUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_UNREAD, filter: {...ANNOTATATED, ...UNREAD}, sortBy: 'UPDATED_AT', searchTerm, sortOrder}) //prettier-ignore
+export const getItemsAnnotatedArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_ARCHIVED, filter: {...ANNOTATATED, ...ARCHIVED }, sortBy: 'UPDATED_AT', searchTerm, sortOrder}) //prettier-ignore
+export const getItemsAnnotatedFavorites = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_FAVORITES, filter: {...ANNOTATATED, ...FAVORITED }, sortBy: 'UPDATED_AT', searchTerm, sortOrder}) //prettier-ignore
 
 export const getItemsArticles = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ARTICLES, filter: { ...ARTICLE} , searchTerm, sortOrder}) //prettier-ignore
 export const getItemsArticlesUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ARTICLES_UNREAD, filter: { ...ARTICLE, ...UNREAD} , searchTerm, sortOrder}) //prettier-ignore
@@ -146,7 +146,7 @@ export const listSavedReducers = (state = [], action) => {
 /** PAGINATION REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  filter: { status: 'UNREAD' },
+  filter: {},
   sortBy: 'UPDATED_AT',
   sortOrder: 'DESC',
   count: 30

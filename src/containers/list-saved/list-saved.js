@@ -41,10 +41,10 @@ export function filterSelector(subset, filter) {
   }
 
   if (subset === 'highlights') {
-    if (filter === 'unread') return getItemsAnnotated
+    if (filter === 'unread') return getItemsAnnotatedUnread
     if (filter === 'archive') return getItemsAnnotatedArchived
     if (filter === 'favorites') return getItemsAnnotatedFavorites
-    return getItemsAnnotatedUnread
+    return getItemsAnnotated
   }
   if (subset === 'articles') {
     if (filter === 'unread') return getItemsArticlesUnread
