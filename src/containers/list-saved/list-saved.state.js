@@ -11,6 +11,7 @@ import { ITEMS_SAVED_PAGE_INFO_SUCCESS } from 'actions'
 import { ITEMS_SAVED_PAGE_INFO_FAILURE } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_FILTERS } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_ORDER } from 'actions'
+import { ITEMS_SAVED_PAGE_SET_SORT_BY } from 'actions'
 import { ITEMS_SAVED_SEARCH_REQUEST } from 'actions'
 
 import { ITEM_SAVED_REMOVE_FROM_LIST } from 'actions'
@@ -86,6 +87,7 @@ export const searchItemsArchived = (searchTerm, sortOrder) => ({ type: SEARCH_SA
 export const searchItemsFavorites = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_FAVORITES, filter: {...FAVORITED}, searchTerm, sortOrder }) //prettier-ignore
 
 export const savedItemsSetSortOrder = (sortOrder) => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER, sortOrder}) //prettier-ignore
+export const savedItemsSetSortBy = (sortBy) => ({ type: ITEMS_SAVED_PAGE_SET_SORT_BY, sortBy })
 
 /** LIST SAVED REDUCERS
  --------------------------------------------------------------- */
@@ -164,6 +166,12 @@ export const listSavedPageInfoReducers = (state = initialState, action) => {
     case ITEMS_SAVED_PAGE_SET_SORT_ORDER: {
       const { sortOrder } = action
       return { ...state, sortOrder }
+    }
+
+    case ITEMS_SAVED_PAGE_SET_SORT_BY: {
+      const { sortBy } = action
+      const sortOrder = sortBy === 'RELEVANCE' ? { sortOrder: 'DESC' } : {}
+      return { ...state, ...sortOrder, sortBy }
     }
 
     case ITEMS_SAVED_PAGE_INFO_SUCCESS: {

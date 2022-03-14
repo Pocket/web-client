@@ -74,6 +74,7 @@ export const ListSort = ({
   const sortIcon = {
     ASC: <SortByOldestIcon />,
     DESC: <SortByNewestIcon />,
+    RELEVANCE: <RelevanceIcon />,
     newest: <SortByNewestIcon />,
     oldest: <SortByOldestIcon />,
     relevance: <RelevanceIcon />
