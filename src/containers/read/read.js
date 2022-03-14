@@ -4,11 +4,9 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
-import { getBool } from 'common/utilities'
 import { Loader, LoaderCentered } from 'components/loader/loader'
 import { ReaderNav } from 'components/reader/nav'
 import { ItemHeader } from 'components/reader/header'
-import { Content } from 'components/reader/content'
 import { SelectionPopover } from 'components/popover/popover-selection'
 import { Sidebar } from 'components/reader/sidebar'
 import { BottomUpsell } from 'components/reader/upsell.bottom'
@@ -22,8 +20,12 @@ import { Recommendations } from 'containers/read/recommendations'
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
 import { itemDataRequest, saveAnnotation, deleteAnnotation } from './read.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 import { setColorMode } from 'connectors/app/app.state'
+
+import { Article } from './article'
+import { LegacyArticle } from './legacy'
 
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
@@ -124,6 +126,10 @@ export default function Reader() {
   const [highlightList, setHighlightList] = useState([])
   const [highlightHovered, setHighlightHovered] = useState(null)
 
+  const flagsReady = useSelector((state) => state.features.flagsReady)
+  const featureState = useSelector((state) => state.features)
+  const useClientAPI = flagsReady && featureFlagActive({ flag: 'reader.client-api', featureState })
+
   useEffect(() => {
     dispatch(itemDataRequest(id))
     dispatch(selectShortcutItem(id))
@@ -145,8 +151,6 @@ export default function Reader() {
     timeToRead,
     publisher,
     hasVideo,
-    videos,
-    images,
     isFavorite,
     isArchived,
     analyticsData
@@ -161,13 +165,6 @@ export default function Reader() {
     publisher,
     tags: tagList,
     timeToRead
-  }
-
-  const contentData = {
-    content: articleContent,
-    annotations,
-    images,
-    videos
   }
 
   const customStyles = {
@@ -267,11 +264,6 @@ export default function Reader() {
     dispatch(favoriteAction([{ id }]))
   }
 
-  const externalLinkClick = (href) => {
-    const data = { id: itemId, url: href }
-    dispatch(sendSnowplowEvent('reader.external-link', data))
-  }
-
   const viewOriginalEvent = () => {
     dispatch(sendSnowplowEvent('reader.view-original', analyticsInfo))
   }
@@ -324,15 +316,16 @@ export default function Reader() {
           )}
           style={customStyles}>
           <ItemHeader viewOriginalEvent={viewOriginalEvent} {...headerData} />
-          {articleContent ? (
-            <Content
-              {...contentData}
-              externalLinkClick={externalLinkClick}
+          {useClientAPI ? (
+            <Article itemId={itemId} />
+          ) : (
+            <LegacyArticle
+              itemId={itemId}
               onMouseUp={toggleHighlight}
               onHighlightHover={toggleHighlightHover}
               annotationsBuilt={buildAnnotations}
             />
-          ) : null}
+          )}
           {highlight ? (
             <SelectionPopover
               anchor={highlight}
