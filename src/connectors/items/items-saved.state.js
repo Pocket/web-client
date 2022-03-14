@@ -117,8 +117,6 @@ function* savedItemUpsert(action) {
   const { item, node } = deriveSavedItem(upsertResponse)
   const { itemId } = item
 
-  // HERE WE NEED TO DETERMINE IF THE CURRENT URL FALLS INTO THE CURRENT FILTERS ONCE SORT IS RESPECTED
-  // NOTE ON FILTERING BY SORT ASC.  IF THE ITEMS DOESN'T FALL IN THE CURRENT LIST WE WILL IGNORE IT
   const savedItemIds = [itemId]
   yield put({ type: ITEMS_SUCCESS, itemsById: { [itemId]: item } })
   yield put({ type: ITEMS_UPSERT_SUCCESS, nodes: { [itemId]: node }, savedItemIds, sort })

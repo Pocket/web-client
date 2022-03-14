@@ -2,6 +2,7 @@ import { put, select, takeEvery } from 'redux-saga/effects'
 import { ITEMS_SAVED_REQUEST } from 'actions'
 import { ITEMS_SAVED_SUCCESS } from 'actions'
 import { ITEMS_UPSERT_SUCCESS } from 'actions'
+import { ITEMS_UPSERT_INJECT } from 'actions'
 import { ITEMS_SAVED_FAILURE } from 'actions'
 import { ITEMS_SAVED_RECONCILED } from 'actions'
 import { MUTATION_SUCCESS } from 'actions'
@@ -95,13 +96,10 @@ export const listSavedReducers = (state = [], action) => {
       const items = new Set([...state, ...itemIds])
       return [...items]
     }
-    case ITEMS_UPSERT_SUCCESS: {
-      const sort = action?.sort || { sortOrder: 'DESC' }
-      const { sortOrder } = sort
-      const itemIds = action?.savedItemIds || []
 
-      const itemArray = sortOrder === 'DESC' ? [...itemIds, ...state] : [...state, ...itemIds]
-      const items = new Set(itemArray)
+    case ITEMS_UPSERT_INJECT: {
+      const itemIds = action?.savedItemIds || []
+      const items = new Set([...itemIds, ...state])
       return [...items]
     }
 
@@ -181,6 +179,7 @@ export const listSavedPageInfoReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const listSavedSagas = [
   takeEvery(MUTATION_SUCCESS, reconcileMutation),
+  takeEvery(ITEMS_UPSERT_SUCCESS, reconcileUpsert),
   takeEvery(
     [
       SEARCH_SAVED_ITEMS,
@@ -221,12 +220,27 @@ const getSavedPageInfo = (state) => state.listSavedPageInfo
  --------------------------------------------------------------- */
 function* reconcileMutation(action) {
   const { item, id } = action
-  const pageInfo = yield select(getSavedPageInfo)
-  const { filter } = pageInfo
+  const { filter } = yield select(getSavedPageInfo)
+  const removeItem = shouldBeFiltered(item, filter)
 
-  if (filter?.isHighlighted && !item?.isHighlighted) return yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id }) //prettier-ignore
-  if (filter?.isFavorite && !item?.isFavorite) return yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id }) //prettier-ignore
-  if (filter?.status && filter?.status !== item?.status) yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id }) //prettier-ignore
+  if (removeItem) yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id })
+}
+
+function* reconcileUpsert(action) {
+  const { sortOrder, filter } = yield select(getSavedPageInfo)
+
+  // When sort order is ASC we will ignore this since it will be picked up in future requests
+  if (sortOrder === 'ASC') return
+
+  // Does this item belong in ths list?
+  const { nodes, savedItemIds } = action
+
+  const itemId = savedItemIds[0] || false
+  const item = nodes[itemId]
+  if (!item) return
+
+  const notInFilter = shouldBeFiltered(item, filter)
+  if (!notInFilter) yield put({ type: ITEMS_UPSERT_INJECT, savedItemIds })
 }
 
 function* requestItemsWithFilter(action) {
@@ -234,4 +248,10 @@ function* requestItemsWithFilter(action) {
   const { sortOrder, count } = yield select(getSavedPageInfo)
   const type = searchTerm ? ITEMS_SAVED_SEARCH_REQUEST : ITEMS_SAVED_REQUEST
   yield put({ type, filters: { filter, sort: { sortOrder, sortBy }, count, searchTerm } })
+}
+
+function shouldBeFiltered(item, filter) {
+  if (filter?.isHighlighted && !item?.isHighlighted) return true
+  if (filter?.isFavorite && !item?.isFavorite) return true
+  if (filter?.status && filter?.status !== item?.status) return true
 }
