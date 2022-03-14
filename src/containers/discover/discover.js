@@ -71,7 +71,7 @@ export default function Discover({ locale }) {
       {showTopics ? <CardTopicsNav topics={topics} /> : null}
 
       {/* Pocket Brand Messaging */}
-      <CalloutTop shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
+      <CalloutTop locale={locale} shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
 
       {/* Top List */}
       <CardListHeading>{t('discover:fascinating-stories', 'Fascinating stories')}</CardListHeading>
@@ -104,13 +104,13 @@ export default function Discover({ locale }) {
   )
 }
 
-function CalloutTop({ shouldRender, isAuthenticated }) {
+function CalloutTop({ shouldRender, isAuthenticated, locale }) {
   return shouldRender ? (
     <div>
       {isAuthenticated ? (
         <CallOutBrand />
       ) : (
-        <CallOutPocketHitsSignup utmCampaign="explore-inline" utmSource="explore" />
+          <CallOutPocketHitsSignup locale={locale} utmCampaign="explore-inline" utmSource="explore" />
       )}
     </div>
   ) : null

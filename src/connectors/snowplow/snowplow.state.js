@@ -4,9 +4,11 @@ import { analyticsActions } from 'connectors/snowplow/actions'
 import { createContentOpenEvent } from 'connectors/snowplow/events'
 import { createEngagementEvent } from 'connectors/snowplow/events'
 import { createImpressionEvent } from 'connectors/snowplow/events'
+import { createObjectUpdateEvent } from 'connectors/snowplow/events'
 import { createVariantEnrollEvent } from 'connectors/snowplow/events'
 
 import { createContentEntity } from 'connectors/snowplow/entities'
+import { createNewsletterSubscriberEntity } from 'connectors/snowplow/entities'
 import { createUiEntity } from 'connectors/snowplow/entities'
 import { createRecommendationEntity } from 'connectors/snowplow/entities'
 import { createReportEntity } from 'connectors/snowplow/entities'
@@ -113,12 +115,14 @@ function* fireFeatureEnroll({ hydrate }) {
 const eventBuilders = {
   contentOpen: createContentOpenEvent,
   engagement: createEngagementEvent,
-  impression: createImpressionEvent
+  impression: createImpressionEvent,
+  objectUpdate: createObjectUpdateEvent
 }
 
 const entityBuilders = {
   ui: createUiEntity,
   content: createContentEntity,
+  newsletterSubscriber: createNewsletterSubscriberEntity,
   recommendation: createRecommendationEntity,
   report: createReportEntity,
   slate: createSlateEntity,
