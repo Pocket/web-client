@@ -28,6 +28,7 @@ import { MUTATION_FAVORITE } from 'actions'
 import { MUTATION_UNFAVORITE } from 'actions'
 import { MUTATION_ARCHIVE } from 'actions'
 import { MUTATION_UNARCHIVE } from 'actions'
+import { MUTATION_RE_ADD } from 'actions'
 import { MUTATION_DELETE } from 'actions'
 import { MUTATION_SUCCESS } from 'actions'
 import { MUTATION_FAILURE } from 'actions'
@@ -41,6 +42,7 @@ export const mutationArchive = (itemId) => ({ type: MUTATION_ARCHIVE, itemId })
 export const mutationUnArchive = (itemId) => ({ type: MUTATION_UNARCHIVE, itemId })
 export const mutationDelete = (itemId) => ({ type: MUTATION_DELETE, itemId })
 export const mutationUpsert = (url, filters, sort) => ({ type: MUTATION_UPSERT, url, filters, sort }) //prettier-ignore
+export const mutationReAdd = (url) => ({ type: MUTATION_RE_ADD, url })
 
 /** ITEM REDUCERS
  --------------------------------------------------------------- */
@@ -67,6 +69,7 @@ export const itemsSavedSagas = [
   takeEvery(ITEMS_SAVED_REQUEST, savedItemRequest),
   takeEvery(ITEMS_SAVED_SEARCH_REQUEST, savedItemSearchRequest),
   takeEvery(MUTATION_UPSERT, savedItemUpsert),
+  takeEvery(MUTATION_RE_ADD, savedItemReAdd),
   takeEvery(MUTATION_FAVORITE, savedItemFavorite),
   takeEvery(MUTATION_UNFAVORITE, savedItemUnFavorite),
   takeEvery(MUTATION_ARCHIVE, savedItemArchive),
@@ -120,6 +123,17 @@ function* savedItemUpsert(action) {
   const savedItemIds = [itemId]
   yield put({ type: ITEMS_SUCCESS, itemsById: { [itemId]: item } })
   yield put({ type: ITEMS_UPSERT_SUCCESS, nodes: { [itemId]: node }, savedItemIds, sort })
+}
+
+function* savedItemReAdd(action) {
+  const { url } = action
+  const upsertResponse = yield call(itemUpsert, url)
+
+  if (!upsertResponse) return // Do better here
+  const { item, node } = deriveSavedItem(upsertResponse)
+  const { itemId } = item
+
+  return yield put({ type: MUTATION_SUCCESS, item: node, id: itemId })
 }
 
 function* savedItemFavorite(action) {

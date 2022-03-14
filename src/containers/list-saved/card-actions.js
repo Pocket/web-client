@@ -18,8 +18,9 @@ import { CheckCircledIcon } from '@pocket/web-ui'
 import { mutationFavorite } from 'connectors/items/items-saved.state'
 import { mutationUnFavorite } from 'connectors/items/items-saved.state'
 import { mutationArchive } from 'connectors/items/items-saved.state'
-import { mutationUnArchive } from 'connectors/items/items-saved.state'
+// import { mutationUnArchive } from 'connectors/items/items-saved.state'
 import { mutationDelete } from 'connectors/items/items-saved.state'
+import { mutationReAdd } from 'connectors/items/items-saved.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -29,9 +30,11 @@ export function ActionsMyList({ id, position }) {
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const itemSaved = useSelector((state) => state.itemsSaved[id])
+  const item = useSelector((state) => state.items[id])
 
-  if (!itemSaved) return null
+  if (!itemSaved || !item) return null
   const { permanentUrl, isFavorite, isArchived, analyticsData: passedAnalyticsData } = itemSaved
+  const { givenUrl } = item
   const analyticsData = { ...passedAnalyticsData, id, position }
 
   /** ITEM MENU ITEMS
@@ -40,7 +43,8 @@ export function ActionsMyList({ id, position }) {
 
   const itemDelete = () => dispatch(mutationDelete(id))
   const itemArchive = () => dispatch(mutationArchive(id))
-  const itemUnArchive = () => dispatch(mutationUnArchive(id))
+  const itemUpsert = () => dispatch(mutationReAdd(givenUrl))
+  // const itemUnArchive = () => dispatch(mutationUnArchive(id)) // This is more of an undo
   const itemFavorite = () => dispatch(mutationFavorite(id))
   const itemUnFavorite = () => dispatch(mutationUnFavorite(id))
 
@@ -51,7 +55,7 @@ export function ActionsMyList({ id, position }) {
     dispatch(sendSnowplowEvent('my-list.card.permanent-library', data))
   }
 
-  const archiveAction = isArchived ? itemUnArchive : itemArchive
+  const archiveAction = isArchived ? itemUpsert : itemArchive
   const CorrectArchiveIcon = isArchived ? AddIcon : ArchiveIcon
   const archiveLabel = isArchived
     ? t('item-action:add', 'Add')
