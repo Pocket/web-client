@@ -3,9 +3,9 @@ import { gql } from 'graphql-request'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const searchSavedItemsQuery = gql`
-  query SearchSavedItems($filter: SearchFilterInput, $pagination: PaginationInput, $term: String!) {
+  query SearchSavedItems($filter: SearchFilterInput, $sort: SavedItemsSort, $term: String!) {
     user {
-      searchSavedItems(filter: $filter, pagination: $pagination, term: $term) {
+      searchSavedItems(filter: $filter, sort: $sort, pagination: $pagination, term: $term) {
         edges {
           cursor
           node {

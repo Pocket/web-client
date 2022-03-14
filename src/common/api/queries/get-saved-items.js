@@ -3,9 +3,13 @@ import { gql } from 'graphql-request'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const getSavedItemsQuery = gql`
-  query GetSavedItems($filter: SavedItemsFilter, $pagination: PaginationInput) {
+  query GetSavedItems(
+    $filter: SavedItemsFilter
+    $sort: SavedItemsSort
+    $pagination: PaginationInput
+  ) {
     user {
-      savedItems(filter: $filter, pagination: $pagination) {
+      savedItems(filter: $filter, sort: $sort, pagination: $pagination) {
         edges {
           cursor
           node {

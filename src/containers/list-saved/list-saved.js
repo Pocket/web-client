@@ -41,10 +41,10 @@ export function filterSelector(subset, filter) {
   }
 
   if (subset === 'highlights') {
-    if (filter === 'unread') return getItemsAnnotated
+    if (filter === 'unread') return getItemsAnnotatedUnread
     if (filter === 'archive') return getItemsAnnotatedArchived
     if (filter === 'favorites') return getItemsAnnotatedFavorites
-    return getItemsAnnotatedUnread
+    return getItemsAnnotated
   }
   if (subset === 'articles') {
     if (filter === 'unread') return getItemsArticlesUnread
@@ -78,6 +78,7 @@ export function filterSelector(subset, filter) {
 export const ListSaved = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
+  const sortOrder = useSelector((state) => state.listSavedPageInfo.sortOrder)
 
   const { subset: sub = 'active', filter: propFilter } = props
   const { tag, filter: queryFilter, query: searchTerm } = router.query
@@ -87,8 +88,8 @@ export const ListSaved = (props) => {
   // Get items based on location
   useEffect(() => {
     const itemFilterFunction = filterSelector(subset, filter)
-    dispatch(itemFilterFunction(searchTerm))
-  }, [dispatch, subset, filter, searchTerm])
+    dispatch(itemFilterFunction(searchTerm, sortOrder))
+  }, [dispatch, subset, filter, searchTerm, sortOrder])
 
   const listSaved = useSelector((state) => state.listSaved)
 

@@ -1,3 +1,19 @@
+# [1.41.0](https://github.com/Pocket/web-client/compare/v1.40.0...v1.41.0) (2022-03-14)
+
+
+### Bug Fixes
+
+* **saved:** filter upsert mutation ([21ab0a6](https://github.com/Pocket/web-client/commit/21ab0a6bac11bd3fd4d00d9172663873c5850ad1))
+* **saved:** omit delete items ([1d10296](https://github.com/Pocket/web-client/commit/1d10296839000986343119adb98ab40f86633838))
+* **saved:** sortBy/Filters for annotated ([12e9093](https://github.com/Pocket/web-client/commit/12e90932413b6b0a068c34a5bd08d12974bef415))
+* **saved:** use new content types ([1637a46](https://github.com/Pocket/web-client/commit/1637a4611333d6498ba937a9e587cc03956566ec))
+* **saved:** use re-add instead of unarchive ([a54cd04](https://github.com/Pocket/web-client/commit/a54cd04a46296d0150021b093cc8a345bba8207c))
+
+
+### Features
+
+* **saved:** wire up sort order ([fd208a5](https://github.com/Pocket/web-client/commit/fd208a512ec482fa96fe4703e0fb9bd7a27c7bfc))
+
 # [1.40.0](https://github.com/Pocket/web-client/compare/v1.39.0...v1.40.0) (2022-03-09)
 
 
