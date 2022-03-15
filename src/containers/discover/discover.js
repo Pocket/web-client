@@ -110,7 +110,7 @@ function CalloutTop({ shouldRender, isAuthenticated, locale }) {
       {isAuthenticated ? (
         <CallOutBrand />
       ) : (
-          <CallOutPocketHitsSignup locale={locale} utmCampaign="explore-inline" utmSource="explore" />
+        <CallOutPocketHitsSignup locale={locale} utmCampaign="explore-inline" utmSource="explore" />
       )}
     </div>
   ) : null
