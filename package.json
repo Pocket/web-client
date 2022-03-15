@@ -9,21 +9,20 @@
   },
   "scripts": {
     "dev": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
-    "build": "npm run locale-inject && next build",
+    "build": "npm run locale:inject && next build",
     "start": "next start -p 80",
-    "start-local": "AS_PRODUCTION=true node ./server.local.js",
+    "start:local": "AS_PRODUCTION=true node ./server.local.js",
     "cypress:launch": "CYPRESS_BASE_URL=http://localhost.web-client.getpocket.com cypress open",
     "cypress:run": "CYPRESS_BASE_URL=http://localhost.web-client.getpocket.com cypress run",
     "cypress:ci": "cypress run",
-    "lint": "next lint --quiet",
-    "lint-diff": "./node_modules/.bin/eslint $(git diff main --name-only -- components/*.js connectors/*.js containers/*.js) --quiet",
+    "lint": "next lint",
     "test": "jest --reporters='default'",
     "test:ci": "jest --ci",
     "test:snowplow": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included TEST_SNOWPLOW=included node ./server.local.js",
     "storybook": "start-storybook -p 9009 -s ./public -h localhost.web-client.getpocket.com",
-    "build-storybook": "build-storybook",
-    "locale-inject": "node ./.scripts/localization/locale-inject",
-    "locale-parse": "node ./.scripts/localization/locale-parse"
+    "storybook:build": "build-storybook",
+    "locale:inject": "node ./.scripts/localization/locale-inject",
+    "locale:parse": "node ./.scripts/localization/locale-parse"
   },
   "jest-junit": {
     "addFileAttribute": "true"
