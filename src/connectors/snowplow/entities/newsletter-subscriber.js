@@ -3,6 +3,15 @@ import { getSchemaUri } from 'connectors/snowplow/snowplow.utilities'
 const NEWSLETTER_SUBSCRIBER_SCHEMA_URL = getSchemaUri('newsletter_subscriber', '1-0-2')
 
 /**
+ * We currently offer Pocket Hits to `de` or `en` subscribers only. All other
+ * locales default to `en`
+ */
+const filterLocale = (locale) => {
+  if (locale.substring(0, 2) === 'de') return 'de'
+  return 'en'
+}
+
+/**
  * Entity to describe a subscriber to a Pocket newsletter. Expected (new and old)
  * on all object_update events where object = newsletter_subscriber.
  *
@@ -22,7 +31,7 @@ const createNewsletterSubscriberEntity = ({
     object_version: objectVersion,
     frequency,
     email,
-    newsletter: `pocket_hits_${locale}`
+    newsletter: `pocket_hits_${filterLocale(locale)}`
   }
 })
 
