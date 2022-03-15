@@ -235,10 +235,10 @@ function* reconcileMutation(action) {
 }
 
 function* reconcileUpsert(action) {
-  const { sortOrder, filter } = yield select(getSavedPageInfo)
+  const { sortOrder, sortBy, filter } = yield select(getSavedPageInfo)
 
   // When sort order is ASC we will ignore this since it will be picked up in future requests
-  if (sortOrder === 'ASC') return
+  if (sortOrder === 'ASC' || sortBy === 'RELEVANCE') return
 
   // Does this item belong in ths list?
   const { nodes, savedItemIds } = action
