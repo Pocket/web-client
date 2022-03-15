@@ -52,25 +52,5 @@
       "error",
       "never"
     ]
-  },
-  "overrides": [
-    {
-      "files": [
-        "*.js"
-      ],
-      "processor": "@graphql-eslint/graphql"
-    },
-    {
-      "files": [
-        "*.graphql"
-      ],
-      "extends": "plugin:@graphql-eslint/schema-recommended",
-      "rules": {
-        "@graphql-eslint/known-type-names": "error"
-      },
-      "parserOptions": {
-        "schema": "./schema.graphql"
-      }
-    }
-  ]
+  }
 }
