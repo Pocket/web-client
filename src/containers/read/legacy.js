@@ -2,9 +2,14 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { itemDataRequest } from './read.state'
 import { Content } from 'components/reader/content'
-import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export const LegacyArticle = ({ itemId, onMouseUp, onHighlightHover, annotationsBuilt }) => {
+export const LegacyArticle = ({
+  itemId,
+  onMouseUp,
+  onHighlightHover,
+  annotationsBuilt,
+  externalLinkClick
+}) => {
   const dispatch = useDispatch()
   const articleData = useSelector((state) => state.myListItemsById[itemId])
   const articleContent = useSelector((state) => state.reader.articleContent)
@@ -15,11 +20,6 @@ export const LegacyArticle = ({ itemId, onMouseUp, onHighlightHover, annotations
   useEffect(() => {
     dispatch(itemDataRequest(itemId))
   }, [dispatch, itemId])
-
-  const externalLinkClick = (href) => {
-    const data = { id: itemId, url: href }
-    dispatch(sendSnowplowEvent('reader.external-link', data))
-  }
 
   return (
     <Content

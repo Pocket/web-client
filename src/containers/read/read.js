@@ -270,6 +270,11 @@ export default function Reader() {
 
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
 
+  const externalLinkClick = (href) => {
+    const data = { id: itemId, url: href }
+    dispatch(sendSnowplowEvent('reader.external-link', data))
+  }
+
   return (
     <>
       <Head>
@@ -317,13 +322,20 @@ export default function Reader() {
           style={customStyles}>
           <ItemHeader viewOriginalEvent={viewOriginalEvent} {...headerData} />
           {useClientAPI ? (
-            <Article itemId={itemId} />
+            <Article
+              itemId={itemId}
+              onMouseUp={toggleHighlight}
+              onHighlightHover={toggleHighlightHover}
+              annotationsBuilt={buildAnnotations}
+              externalLinkClick={externalLinkClick}
+            />
           ) : (
             <LegacyArticle
               itemId={itemId}
               onMouseUp={toggleHighlight}
               onHighlightHover={toggleHighlightHover}
               annotationsBuilt={buildAnnotations}
+              externalLinkClick={externalLinkClick}
             />
           )}
           {highlight ? (

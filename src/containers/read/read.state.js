@@ -88,7 +88,7 @@ export const updateLineHeight = (lineHeight) => ({ type: UPDATE_LINE_HEIGHT, lin
 export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, columnWidth }) //prettier-ignore
 export const updateFontSize = (fontSize) => ({ type: UPDATE_FONT_SIZE, fontSize }) //prettier-ignore
 export const updateFontType = (fontFamily) => ({ type: UPDATE_FONT_TYPE, fontFamily }) //prettier-ignore
-export const nextItemRequest = ({ itemId }) => ({ type: NEXT_ARTICLE_REQUEST, itemId })
+export const nextItemRequest = (itemId) => ({ type: NEXT_ARTICLE_REQUEST, itemId })
 
 /** REDUCERS
  --------------------------------------------------------------- */
