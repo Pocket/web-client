@@ -66,6 +66,7 @@
     ]
   },
   "devDependencies": {
+    "@apollo/rover": "0.4.6",
     "@babel/cli": "7.17.6",
     "@babel/core": "7.17.7",
     "@babel/eslint-parser": "7.17.0",
@@ -73,6 +74,7 @@
     "@babel/preset-react": "7.16.7",
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
+    "@graphql-eslint/eslint-plugin": "3.9.1",
     "@next/eslint-plugin-next": "12.1.0",
     "@semantic-release/changelog": "6.0.1",
     "@semantic-release/commit-analyzer": "9.0.2",
