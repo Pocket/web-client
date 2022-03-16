@@ -23,6 +23,12 @@ export const FRAGMENT_ITEM = gql`
       src
       width
     }
+    videos {
+      vid
+      videoId
+      type
+      src
+    }
     topImageUrl
     wordCount
     timeToRead
