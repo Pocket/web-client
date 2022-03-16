@@ -71,6 +71,9 @@ Temporary Items
 .vscode/
 .idea
 
+# Local .env
+.env
+
 # Local .terraform directories
 **/.terraform/*
 **/.terraform.lock.hcl

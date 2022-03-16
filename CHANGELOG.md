@@ -1,3 +1,11 @@
+## [1.41.1](https://github.com/Pocket/web-client/compare/v1.41.0...v1.41.1) (2022-03-15)
+
+
+### Bug Fixes
+
+* **reconcile:** sort by relevance upsert ([00032cd](https://github.com/Pocket/web-client/commit/00032cddf46ce437614c61ee1736cb01ad3a0d98))
+* **search:** relevance search from client API ([3a52ac1](https://github.com/Pocket/web-client/commit/3a52ac1faba4930ec68188f6442a8f57825b8b7d))
+
 # [1.41.0](https://github.com/Pocket/web-client/compare/v1.40.0...v1.41.0) (2022-03-14)
 
 
