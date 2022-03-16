@@ -50,14 +50,11 @@ function buildImageMarkup(data) {
 }
 
 async function replaceImageMarkup(data) {
-  const id = `#RIL_IMG_${data.imageId}`
-  const element = document.getElementById(id)
+  const id = `RIL_IMG_${data.imageId}`
+  const element = document.getElementById(id) || (await waitForElement(`#${id}`))
 
   if (element) {
     element.innerHTML = data.markup
-  } else {
-    const elementOnPage = await waitForElement(id)
-    elementOnPage.innerHTML = data.markup
   }
 }
 
