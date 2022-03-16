@@ -22,7 +22,7 @@ export const LegacyArticle = ({
     dispatch(itemDataRequest(itemId))
   }, [dispatch, itemId])
 
-  if (!articleData) {
+  if (!articleContent) {
     return (
       <LoaderCentered>
         <Loader isVisible />
@@ -30,16 +30,19 @@ export const LegacyArticle = ({
     )
   }
 
-  return (
-    <Content
-      images={images}
-      videos={videos}
-      content={articleContent}
-      annotations={annotations}
-      externalLinkClick={externalLinkClick}
-      onMouseUp={onMouseUp}
-      onHighlightHover={onHighlightHover}
-      annotationsBuilt={annotationsBuilt}
-    />
-  )
+  if (articleContent) {
+    console.log('Legacy v3')
+    return (
+      <Content
+        images={images}
+        videos={videos}
+        content={articleContent}
+        annotations={annotations}
+        externalLinkClick={externalLinkClick}
+        onMouseUp={onMouseUp}
+        onHighlightHover={onHighlightHover}
+        annotationsBuilt={annotationsBuilt}
+      />
+    )
+  }
 }

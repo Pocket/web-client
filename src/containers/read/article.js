@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { nextItemRequest } from './read.state'
+import { getReadItem } from './read.state'
 import { Content } from 'components/reader/content'
 import { Loader, LoaderCentered } from 'components/loader/loader'
 
@@ -13,18 +13,18 @@ export const Article = ({
   externalLinkClick
 }) => {
   const dispatch = useDispatch()
-  const item = useSelector((state) => state.reader.item)
+  const articleItem = useSelector((state) => state.reader.articleItem)
   const savedData = useSelector((state) => state.reader.savedData)
-  const articleContent = item?.article
+  const articleContent = articleItem?.article
   const annotations = savedData?.annotations.highlights
-  const images = item?.images
-  const videos = item?.videos
+  const images = articleItem?.images
+  const videos = articleItem?.videos
 
   useEffect(() => {
-    dispatch(nextItemRequest(itemId))
+    dispatch(getReadItem(itemId))
   }, [dispatch, itemId])
 
-  if (!item) {
+  if (!articleItem) {
     return (
       <LoaderCentered>
         <Loader isVisible />
@@ -32,7 +32,8 @@ export const Article = ({
     )
   }
 
-  if (item) {
+  if (articleItem) {
+    console.log('Client API')
     return (
       <Content
         images={images}

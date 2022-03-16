@@ -36,10 +36,6 @@ import { ITEMS_UNFAVORITE_FAILURE } from 'actions'
 import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_UNARCHIVE_SUCCESS } from 'actions'
 
-import { NEXT_ARTICLE_REQUEST } from 'actions'
-import { NEXT_ARTICLE_CONTENT_SUCCESS } from 'actions'
-import { NEXT_ARTICLE_CONTENT_FAILURE } from 'actions'
-
 import { ITEMS_TAG_SEND } from 'actions'
 
 import { API_ACTION_ADD_ANNOTATION } from 'common/constants'
@@ -48,7 +44,6 @@ import { API_ACTION_DELETE_ANNOTATION } from 'common/constants'
 import { getArticleText } from 'common/api/_legacy/reader'
 import { getArticleFromId } from 'common/api/_legacy/reader'
 import { sendItemActions } from 'common/api/_legacy/item-actions'
-import { getArticleByItemId } from 'common/api'
 import { getSavedItemByItemId } from 'common/api'
 
 import { deriveListItem } from 'common/api/derivers/item'
@@ -80,7 +75,7 @@ export const itemDataRequest = (itemId) => ({ type: ARTICLE_ITEM_REQUEST, itemId
 export const saveAnnotation = ({ itemId, quote, patch }) => ({ type: ANNOTATION_SAVE_REQUEST, item_id: itemId, quote, patch }) //prettier-ignore
 export const deleteAnnotation = ({ itemId, annotation_id }) => ({ type: ANNOTATION_DELETE_REQUEST, item_id: itemId, annotation_id }) //prettier-ignore
 // client-api actions
-export const readItemRequest = (itemId) => ({ type: READ_ITEM_REQUEST, itemId }) //prettier-ignore
+export const getReadItem = (itemId) => ({ type: READ_ITEM_REQUEST, itemId }) //prettier-ignore
 export const saveHighlightRequest = ({ itemId, quote, patch }) => ({ type: HIGHLIGHT_SAVE_REQUEST, itemId, quote, patch }) //prettier-ignore
 export const deleteHighlightRequest = ({ id }) => ({ type: HIGHLIGHT_DELETE_REQUEST, id }) //prettier-ignore
 // Settings actions
@@ -88,7 +83,6 @@ export const updateLineHeight = (lineHeight) => ({ type: UPDATE_LINE_HEIGHT, lin
 export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, columnWidth }) //prettier-ignore
 export const updateFontSize = (fontSize) => ({ type: UPDATE_FONT_SIZE, fontSize }) //prettier-ignore
 export const updateFontType = (fontFamily) => ({ type: UPDATE_FONT_TYPE, fontFamily }) //prettier-ignore
-export const nextItemRequest = (itemId) => ({ type: NEXT_ARTICLE_REQUEST, itemId })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -124,9 +118,9 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, articleContent: article }
     }
 
-    case NEXT_ARTICLE_CONTENT_SUCCESS: {
+    case READ_ITEM_SUCCESS: {
       const { item, savedData } = action
-      return { ...state, item, savedData }
+      return { ...state, articleItem: item, savedData }
     }
 
     case ANNOTATION_SAVE_SUCCESS: {
@@ -216,7 +210,7 @@ export const readSagas = [
   takeEvery(UPDATE_FONT_TYPE, saveDisplaySettings),
   takeEvery(HIGHLIGHT_SAVE_REQUEST, highlightSaveRequest),
   takeEvery(HIGHLIGHT_DELETE_REQUEST, highlightDeleteRequest),
-  takeEvery(NEXT_ARTICLE_REQUEST, nextArticleRequest)
+  takeEvery(READ_ITEM_REQUEST, readItemRequest)
 ]
 
 /* SAGAS :: SELECTORS
@@ -260,14 +254,14 @@ function* articleContentRequest({ url }) {
   }
 }
 
-function* nextArticleRequest({ itemId }) {
+function* readItemRequest({ itemId }) {
   try {
     const response = yield getSavedItemByItemId(itemId)
 
     const { item, savedData } = response
-    yield put({ type: NEXT_ARTICLE_CONTENT_SUCCESS, item, savedData })
+    yield put({ type: READ_ITEM_SUCCESS, item, savedData })
   } catch (error) {
-    yield put({ type: NEXT_ARTICLE_CONTENT_FAILURE, error })
+    yield put({ type: READ_ITEM_FAILURE, error })
   }
 }
 
