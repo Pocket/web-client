@@ -129,6 +129,7 @@ export default function Reader() {
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const featureState = useSelector((state) => state.features)
   const useClientAPI = flagsReady && featureFlagActive({ flag: 'reader.client-api', featureState })
+  const ContentToRender = useClientAPI ? Article : LegacyArticle
 
   useEffect(() => {
     dispatch(itemDataRequest(id))
@@ -321,23 +322,13 @@ export default function Reader() {
           )}
           style={customStyles}>
           <ItemHeader viewOriginalEvent={viewOriginalEvent} {...headerData} />
-          {useClientAPI ? (
-            <Article
-              itemId={itemId}
-              onMouseUp={toggleHighlight}
-              onHighlightHover={toggleHighlightHover}
-              annotationsBuilt={buildAnnotations}
-              externalLinkClick={externalLinkClick}
-            />
-          ) : (
-            <LegacyArticle
-              itemId={itemId}
-              onMouseUp={toggleHighlight}
-              onHighlightHover={toggleHighlightHover}
-              annotationsBuilt={buildAnnotations}
-              externalLinkClick={externalLinkClick}
-            />
-          )}
+          <ContentToRender
+            itemId={itemId}
+            onMouseUp={toggleHighlight}
+            onHighlightHover={toggleHighlightHover}
+            annotationsBuilt={buildAnnotations}
+            externalLinkClick={externalLinkClick}
+          />
           {highlight ? (
             <SelectionPopover
               anchor={highlight}
