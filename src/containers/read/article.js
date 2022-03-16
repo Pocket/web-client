@@ -34,19 +34,16 @@ export const Article = ({
 
   if (item) {
     return (
-      <>
-        <div>HELLO WORLD</div>
-        <Content
-          images={images}
-          videos={videos}
-          content={articleContent}
-          annotations={annotations}
-          externalLinkClick={externalLinkClick}
-          onMouseUp={onMouseUp}
-          onHighlightHover={onHighlightHover}
-          annotationsBuilt={annotationsBuilt}
-        />
-      </>
+      <Content
+        images={images}
+        videos={videos}
+        content={articleContent}
+        annotations={annotations}
+        externalLinkClick={externalLinkClick}
+        onMouseUp={onMouseUp}
+        onHighlightHover={onHighlightHover}
+        annotationsBuilt={annotationsBuilt}
+      />
     )
   }
 }
