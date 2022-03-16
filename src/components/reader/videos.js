@@ -1,10 +1,14 @@
 import ReactDOM from 'react-dom'
 import { Video } from 'components/video/video'
+import { waitForElement } from 'common/utilities'
 
-function replaceVideo(video) {
-  const element = document.getElementById(`RIL_VIDEO_${video.video_id}`)
+async function replaceVideo(video) {
+  const videoID = video.video_id || video.videoId
+  const elementID = `RIL_VIDEO_${videoID}`
+  const element = document.getElementById(elementID) || (await waitForElement(`#${elementID}`))
+
   if (element) {
-    ReactDOM.render(<Video videoData={video} video_id={video.video_id} />, element)
+    ReactDOM.render(<Video videoData={video} />, element)
   }
 }
 
