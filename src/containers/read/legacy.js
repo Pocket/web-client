@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { itemDataRequest } from './read.state'
 import { Content } from 'components/reader/content'
+import { Loader, LoaderCentered } from 'components/loader/loader'
 
 export const LegacyArticle = ({
   itemId,
@@ -20,6 +21,14 @@ export const LegacyArticle = ({
   useEffect(() => {
     dispatch(itemDataRequest(itemId))
   }, [dispatch, itemId])
+
+  if (!articleData) {
+    return (
+      <LoaderCentered>
+        <Loader isVisible />
+      </LoaderCentered>
+    )
+  }
 
   return (
     <Content
