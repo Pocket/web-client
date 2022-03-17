@@ -265,16 +265,16 @@ export default function Reader() {
     dispatch(favoriteAction([{ id }]))
   }
 
+  const externalLinkClick = (href) => {
+    const data = { id: itemId, url: href }
+    dispatch(sendSnowplowEvent('reader.external-link', data))
+  }
+
   const viewOriginalEvent = () => {
     dispatch(sendSnowplowEvent('reader.view-original', analyticsInfo))
   }
 
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
-
-  const externalLinkClick = (href) => {
-    const data = { id: itemId, url: href }
-    dispatch(sendSnowplowEvent('reader.external-link', data))
-  }
 
   return (
     <>
