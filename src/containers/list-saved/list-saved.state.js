@@ -261,7 +261,7 @@ function* requestItemsWithFilter(action) {
 function shouldBeFiltered(node, filter) {
   const { item } = node
   if (filter?.contentType === 'IS_READABLE' && !item?.isArticle) return true
-  if (filter?.contentType === 'IS_VIDEO' && !item?.hasVideo !== 'IS_VIDEO') return true
+  if (filter?.contentType === 'IS_VIDEO' && item?.hasVideo !== 'IS_VIDEO') return true
 
   if (filter?.isHighlighted && !node?.isHighlighted) return true
   if (filter?.isFavorite && !node?.isFavorite) return true
