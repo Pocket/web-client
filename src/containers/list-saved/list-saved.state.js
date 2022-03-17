@@ -227,9 +227,9 @@ const getSavedPageInfo = (state) => state.listSavedPageInfo
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 function* reconcileMutation(action) {
-  const { item, id } = action
+  const { node, id } = action
   const { filter } = yield select(getSavedPageInfo)
-  const removeItem = shouldBeFiltered(item, filter)
+  const removeItem = shouldBeFiltered(node, filter)
 
   if (removeItem) yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id })
 }
@@ -244,10 +244,10 @@ function* reconcileUpsert(action) {
   const { nodes, savedItemIds } = action
 
   const itemId = savedItemIds[0] || false
-  const item = nodes[itemId]
-  if (!item) return
+  const node = nodes[itemId]
+  if (!node) return
 
-  const notInFilter = shouldBeFiltered(item, filter)
+  const notInFilter = shouldBeFiltered(node, filter)
   if (!notInFilter) yield put({ type: ITEMS_UPSERT_INJECT, savedItemIds })
 }
 
@@ -258,8 +258,12 @@ function* requestItemsWithFilter(action) {
   yield put({ type, filters: { filter, sort: { sortOrder, sortBy }, count, searchTerm } })
 }
 
-function shouldBeFiltered(item, filter) {
-  if (filter?.isHighlighted && !item?.isHighlighted) return true
-  if (filter?.isFavorite && !item?.isFavorite) return true
-  if (filter?.status && filter?.status !== item?.status) return true
+function shouldBeFiltered(node, filter) {
+  const { item } = node
+  if (filter?.contentType === 'IS_READABLE' && !item?.isArticle) return true
+  if (filter?.contentType === 'IS_VIDEO' && !item?.hasVideo !== 'IS_VIDEO') return true
+
+  if (filter?.isHighlighted && !node?.isHighlighted) return true
+  if (filter?.isFavorite && !node?.isFavorite) return true
+  if (filter?.status && filter?.status !== node?.status) return true
 }

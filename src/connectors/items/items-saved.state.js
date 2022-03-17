@@ -54,8 +54,9 @@ export const itemsSavedReducers = (state = {}, action) => {
     }
 
     case MUTATION_SUCCESS: {
-      const { item, id } = action
-      return { ...state, [id]: item }
+      const { node, id } = action
+      const { item, ...savedNode } = node
+      return { ...state, [id]: savedNode }
     }
 
     default:
@@ -133,31 +134,31 @@ function* savedItemReAdd(action) {
   const { item, node } = deriveSavedItem(upsertResponse)
   const { itemId } = item
 
-  return yield put({ type: MUTATION_SUCCESS, item: node, id: itemId })
+  return yield put({ type: MUTATION_SUCCESS, node, id: itemId })
 }
 
 function* savedItemFavorite(action) {
   const { itemId } = action
-  const updatedItem = yield call(itemFavorite, itemId)
-  return yield put({ type: MUTATION_SUCCESS, item: updatedItem, id: updatedItem.id })
+  const node = yield call(itemFavorite, itemId)
+  return yield put({ type: MUTATION_SUCCESS, node, id: node.id })
 }
 
 function* savedItemUnFavorite(action) {
   const { itemId } = action
-  const updatedItem = yield call(itemUnFavorite, itemId)
-  return yield put({ type: MUTATION_SUCCESS, item: updatedItem, id: updatedItem.id })
+  const node = yield call(itemUnFavorite, itemId)
+  return yield put({ type: MUTATION_SUCCESS, node, id: node.id })
 }
 
 function* savedItemArchive(action) {
   const { itemId } = action
-  const updatedItem = yield call(itemArchive, itemId)
-  return yield put({ type: MUTATION_SUCCESS, item: updatedItem, id: updatedItem.id })
+  const node = yield call(itemArchive, itemId)
+  return yield put({ type: MUTATION_SUCCESS, node, id: node.id })
 }
 
 function* savedItemUnArchive(action) {
   const { itemId } = action
-  const updatedItem = yield call(itemUnArchive, itemId)
-  return yield put({ type: MUTATION_SUCCESS, item: updatedItem, id: updatedItem.id })
+  const node = yield call(itemUnArchive, itemId)
+  return yield put({ type: MUTATION_SUCCESS, node, id: node.id })
 }
 
 function* savedItemDelete(action) {

@@ -1,5 +1,6 @@
 import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
+import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const itemUnArchiveQuery = gql`
   mutation ItemUnArchive($itemId: ID!) {
@@ -16,8 +17,12 @@ const itemUnArchiveQuery = gql`
         id
         name
       }
+      item {
+        ...ItemDetails
+      }
     }
   }
+  ${FRAGMENT_ITEM}
 `
 
 // ?? NOTE:  THis is not functionality we currently use in web-client
