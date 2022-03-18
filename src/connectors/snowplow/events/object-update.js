@@ -1,5 +1,9 @@
 import { getSchemaUri } from 'connectors/snowplow/snowplow.utilities'
 
+/**
+ * Schema information:
+ * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/a30c8f05ecf12d2b53202ed1cf161a4c578fab653f846550a20392659449dbad
+ */
 const OBJECT_UPDATE_SCHEMA_URL = getSchemaUri('object_update', '1-0-5')
 
 /**

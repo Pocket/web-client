@@ -1,5 +1,11 @@
 import { getSchemaUri } from 'connectors/snowplow/snowplow.utilities'
+import { getObjectWithValidKeysOnly } from 'common/utilities'
 
+
+/**
+ * Schema information:
+ * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/2f56902d3fb80ca6f5dcb8aed41cdadac4173e2e884214917751710439ff8a09
+ */
 const NEWSLETTER_SUBSCRIBER_SCHEMA_URL = getSchemaUri('newsletter_subscriber', '1-0-2')
 
 /**
@@ -27,12 +33,12 @@ const createNewsletterSubscriberEntity = ({
   locale = 'en'
 }) => ({
   schema: NEWSLETTER_SUBSCRIBER_SCHEMA_URL,
-  data: {
+  data: getObjectWithValidKeysOnly({
     object_version: objectVersion,
     frequency,
     email,
     newsletter: `pocket_hits_${filterLocale(locale)}`
-  }
+  })
 })
 
 export default createNewsletterSubscriberEntity
