@@ -150,7 +150,7 @@ export function CallOutBuildHome({ source = 'explore' }) {
           variant="brand"
           target="_blank"
           href={`${SIGNUP_URL}?utm_source=${source}&utm_medium=web`}>
-          Sign&nbsp;Up
+          {t('call-out:sign-up', 'Sign Up')}
         </Button>
       </aside>
       <div className="img-wrapper">

@@ -13,7 +13,6 @@ import { breakpointTinyTablet } from '@pocket/web-ui' // 719
 import { breakpointLargeHandset } from '@pocket/web-ui' // 599
 import { useTranslation } from 'next-i18next'
 
-const DEFAULT_ERROR = 'Oops! Something went wrong.'
 const FORM_ID = 'explore-engagement-signup'
 
 const wrapper = css`
@@ -233,7 +232,9 @@ const CallOutPocketHitsSignup = ({
     <VisibilitySensor onVisible={handleVisible}>
       <div className={`${wrapper} brandingMessage`} data-cy="pocket-hits-module">
         <div className="brandBlock">
-          <aside>Get ready to fuel your&nbsp;mind.</aside>
+          <aside>
+            {t('call-out:fuel-your-mind', 'Get ready to fuel your mind.')}
+          </aside>
           <blockquote>
             <span className={classNames('copy', { isSuccessful })}>
               <svg
@@ -267,11 +268,13 @@ const CallOutPocketHitsSignup = ({
                     <EmailSignupForm
                       instanceId={FORM_ID}
                       isProcessing={isProcessing}
+                      buttonLabel={t('call-out:subscribe', 'Subscribe')}
                       buttonLabelProcessing={'...'}
+                      inputLabel={t('call-out:email-address', 'Your email address')}
                       onFocus={handleEmailInputFocus}
                       onValidSubmit={handleEmailSubmit}
                       onValidationError={handleValidationError}
-                      errorMessage={signupError ? DEFAULT_ERROR : null}
+                      errorMessage={signupError ? t('call-out:error', 'Oops! Something went wrong.') : null}
                       displayErrorInline
                       hideCaptchaBadge
                     />
