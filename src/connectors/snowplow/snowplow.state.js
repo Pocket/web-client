@@ -4,9 +4,11 @@ import { analyticsActions } from 'connectors/snowplow/actions'
 import { createContentOpenEvent } from 'connectors/snowplow/events'
 import { createEngagementEvent } from 'connectors/snowplow/events'
 import { createImpressionEvent } from 'connectors/snowplow/events'
+import { createObjectUpdateEvent } from 'connectors/snowplow/events'
 import { createVariantEnrollEvent } from 'connectors/snowplow/events'
 
 import { createContentEntity } from 'connectors/snowplow/entities'
+import { createNewsletterSubscriberEntity } from 'connectors/snowplow/entities'
 import { createUiEntity } from 'connectors/snowplow/entities'
 import { createRecommendationEntity } from 'connectors/snowplow/entities'
 import { createReportEntity } from 'connectors/snowplow/entities'
@@ -113,12 +115,14 @@ function* fireFeatureEnroll({ hydrate }) {
 const eventBuilders = {
   contentOpen: createContentOpenEvent,
   engagement: createEngagementEvent,
-  impression: createImpressionEvent
+  impression: createImpressionEvent,
+  objectUpdate: createObjectUpdateEvent
 }
 
 const entityBuilders = {
   ui: createUiEntity,
   content: createContentEntity,
+  newsletterSubscriber: createNewsletterSubscriberEntity,
   recommendation: createRecommendationEntity,
   report: createReportEntity,
   slate: createSlateEntity,
@@ -169,10 +173,13 @@ export function buildSnowplowCustomEvent({ identifier, data }) {
   const event = eventFunction({ ...eventData, ...data })
 
   // Build entities
-  const singleEntities = entityTypes.map((entity) => {
-    const entityFunction = entityBuilders[entity]
-    return entityFunction({ ...eventData, ...data, identifier })
-  })
+  const singleEntities = entityTypes
+    ? entityTypes
+        .map((entity) => {
+          const entityFunction = entityBuilders[entity]
+          return entityFunction({ ...eventData, ...data, identifier })
+        })
+    : []
 
   // Build bulk entities if they exist, limit to BATCH_SIZE
   const batchEntities = batchEntityTypes
@@ -180,7 +187,7 @@ export function buildSnowplowCustomEvent({ identifier, data }) {
         .map((entity) => {
           const entityFunction = entityBuilders[entity]
           if (data.length > BATCH_SIZE) data.length = BATCH_SIZE
-          return data.map((item) => entityFunction(item))
+          return data.map((item) => entityFunction({ ...eventData, ...item, identifier }))
         })
         .flat()
     : []
@@ -209,7 +216,7 @@ export function* fireSnowplowEvent({ identifier, data }) {
 }
 
 /** UTILITIES :: THIRD PARTY SEND
- --------------------------------------------------------------- 
+ ---------------------------------------------------------------
  * functions here assume snowplow has already been loaded in, e.g. for automatic tracking
  */
 

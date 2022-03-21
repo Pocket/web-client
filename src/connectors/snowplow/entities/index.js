@@ -27,6 +27,7 @@
 export { default as createApiUserEntity, apiUserEntity } from './api-user'
 export { default as createContentEntity } from './content'
 export { default as createFeatureFlagEntity } from './feature-flag'
+export { default as createNewsletterSubscriberEntity } from './newsletter-subscriber'
 export { default as createRecommendationEntity } from './recommendation'
 export { default as createReportEntity } from './report'
 export { default as createSlateLineupEntity } from './slate-lineup'

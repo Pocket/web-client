@@ -1,3 +1,141 @@
+## [1.41.4](https://github.com/Pocket/web-client/compare/v1.41.3...v1.41.4) (2022-03-21)
+
+
+### Bug Fixes
+
+* **snowplow:** remove invalid keys from newsletter_subscriber entity ([310bdff](https://github.com/Pocket/web-client/commit/310bdffbc65c2f2b3680650c4a8e7af2b548eae9))
+
+## [1.41.3](https://github.com/Pocket/web-client/compare/v1.41.2...v1.41.3) (2022-03-17)
+
+
+### Bug Fixes
+
+* **filters:** remove double negative ([3ef6600](https://github.com/Pocket/web-client/commit/3ef660090b8f830f983ea22ac250b7eec6d1ee3f))
+* **mutations:** mutations to use content type ([6e94800](https://github.com/Pocket/web-client/commit/6e9480080a779bcc31b39e30b08bb3da55f7bd30))
+
+## [1.41.2](https://github.com/Pocket/web-client/compare/v1.41.1...v1.41.2) (2022-03-16)
+
+
+### Bug Fixes
+
+* **explore:** adjust code whitespace ([a82848a](https://github.com/Pocket/web-client/commit/a82848a346e63ab82f5c8aa3ba523defef96ce69))
+* **snowplow:** add a language filter to the newsletter subscriber entity ([08c1598](https://github.com/Pocket/web-client/commit/08c159878583d18c628ae06a827afb54cfa066e5))
+* **snowplow:** add object update event to pocket hits signup ([72694c6](https://github.com/Pocket/web-client/commit/72694c65a16cbec6adf6381c9605bf96028d6883))
+
+## [1.41.1](https://github.com/Pocket/web-client/compare/v1.41.0...v1.41.1) (2022-03-15)
+
+
+### Bug Fixes
+
+* **reconcile:** sort by relevance upsert ([00032cd](https://github.com/Pocket/web-client/commit/00032cddf46ce437614c61ee1736cb01ad3a0d98))
+* **search:** relevance search from client API ([3a52ac1](https://github.com/Pocket/web-client/commit/3a52ac1faba4930ec68188f6442a8f57825b8b7d))
+
+# [1.41.0](https://github.com/Pocket/web-client/compare/v1.40.0...v1.41.0) (2022-03-14)
+
+
+### Bug Fixes
+
+* **saved:** filter upsert mutation ([21ab0a6](https://github.com/Pocket/web-client/commit/21ab0a6bac11bd3fd4d00d9172663873c5850ad1))
+* **saved:** omit delete items ([1d10296](https://github.com/Pocket/web-client/commit/1d10296839000986343119adb98ab40f86633838))
+* **saved:** sortBy/Filters for annotated ([12e9093](https://github.com/Pocket/web-client/commit/12e90932413b6b0a068c34a5bd08d12974bef415))
+* **saved:** use new content types ([1637a46](https://github.com/Pocket/web-client/commit/1637a4611333d6498ba937a9e587cc03956566ec))
+* **saved:** use re-add instead of unarchive ([a54cd04](https://github.com/Pocket/web-client/commit/a54cd04a46296d0150021b093cc8a345bba8207c))
+
+
+### Features
+
+* **saved:** wire up sort order ([fd208a5](https://github.com/Pocket/web-client/commit/fd208a512ec482fa96fe4703e0fb9bd7a27c7bfc))
+
+# [1.40.0](https://github.com/Pocket/web-client/compare/v1.39.0...v1.40.0) (2022-03-09)
+
+
+### Bug Fixes
+
+* **list:** update and store filters ([999a62a](https://github.com/Pocket/web-client/commit/999a62a6f2d3fc2fe5c01fa394bcecc74b31fb19))
+
+
+### Features
+
+* **list:** add super basic layout ([df38361](https://github.com/Pocket/web-client/commit/df38361ac3e6cbe9ee1986e85fde65265492666c))
+* **saved-items:** basic list render for dev ([d03a242](https://github.com/Pocket/web-client/commit/d03a242d9cb7dcac59b6c631ca38f945ed51cfd5))
+
+# [1.39.0](https://github.com/Pocket/web-client/compare/v1.38.15...v1.39.0) (2022-03-09)
+
+
+### Features
+
+* **saved:** add item manually to list ([dfa6737](https://github.com/Pocket/web-client/commit/dfa6737a20f61499979e9ab3a794fdfefd63ef6c))
+
+## [1.38.15](https://github.com/Pocket/web-client/compare/v1.38.14...v1.38.15) (2022-03-09)
+
+
+### Bug Fixes
+
+* **highlight:** pass version as int to create highlight function ([ccb9304](https://github.com/Pocket/web-client/commit/ccb93040d3a4d1a141644715242362410a09d035))
+* **highlights:** adding graphql mutations for adding, removing, and updating highlights ([dd98760](https://github.com/Pocket/web-client/commit/dd98760026d315cad52538ed3fd3b19d930408d1))
+* **highlights:** update mutation names to be less generic ([fe787b8](https://github.com/Pocket/web-client/commit/fe787b8f8d5aa20c60b7732d80f06a53cc5cb3ca))
+* **highlights:** update mutations names to be more concise ([82e0ec4](https://github.com/Pocket/web-client/commit/82e0ec458d2e4d20c20f6f36f6e236e1c48e7a10))
+* **read:** rename read actions for highlights ([be6b796](https://github.com/Pocket/web-client/commit/be6b7968c515d9a76cb211a6dcd6b5a809bea411))
+
+## [1.38.14](https://github.com/Pocket/web-client/compare/v1.38.13...v1.38.14) (2022-03-08)
+
+
+### Bug Fixes
+
+* **onboarding:** limit all onboarding by settings ([cee6c5d](https://github.com/Pocket/web-client/commit/cee6c5d5a9da72096cc689978535858dbb87d774))
+
+## [1.38.13](https://github.com/Pocket/web-client/compare/v1.38.12...v1.38.13) (2022-03-08)
+
+
+### Bug Fixes
+
+* **api:** update get saved item query to include authors and article ([002b514](https://github.com/Pocket/web-client/commit/002b514c3ae45c36cf5a157d493493b4ae530c5e))
+
+## [1.38.12](https://github.com/Pocket/web-client/compare/v1.38.11...v1.38.12) (2022-03-03)
+
+
+### Bug Fixes
+
+* **api:** adding a request for getting a saved item by id ([a4e1e94](https://github.com/Pocket/web-client/commit/a4e1e94fd6d735296880d901a2594d202ce63e3b))
+* **api:** remove sneaky console log ([2331445](https://github.com/Pocket/web-client/commit/23314452d854b76dbab63c2358635408d82bd8a7))
+* **api:** update get saved item by id graphql call ([49c6db8](https://github.com/Pocket/web-client/commit/49c6db80d6741273b70fddeee38c8bc747ae6c3c))
+
+## [1.38.11](https://github.com/Pocket/web-client/compare/v1.38.10...v1.38.11) (2022-03-03)
+
+
+### Bug Fixes
+
+* **snowplow:** add snowplow event for go back button ([5e20b74](https://github.com/Pocket/web-client/commit/5e20b7435284644d20b78deac8d6e2075cfef520))
+* **snowplow:** fix reader back shortcut ([2b2926f](https://github.com/Pocket/web-client/commit/2b2926fd82c433b19789e6fcc1c78cc9e9af8a47))
+
+## [1.38.10](https://github.com/Pocket/web-client/compare/v1.38.9...v1.38.10) (2022-03-02)
+
+
+### Bug Fixes
+
+* **list:** limit updates if since doesn’t exist ([a7773f0](https://github.com/Pocket/web-client/commit/a7773f0b27a85507db24b75385bb5c2674a7633c))
+
+## [1.38.9](https://github.com/Pocket/web-client/compare/v1.38.8...v1.38.9) (2022-03-02)
+
+
+### Bug Fixes
+
+* **snowplow:** ensure settings value sent is string ([5901e30](https://github.com/Pocket/web-client/commit/5901e309cf844772822a0c25e4c96eba6861a33f))
+
+## [1.38.8](https://github.com/Pocket/web-client/compare/v1.38.7...v1.38.8) (2022-03-01)
+
+
+### Bug Fixes
+
+* **reader:** content getting cut off on mobile ([71742c4](https://github.com/Pocket/web-client/commit/71742c4fa910d1c6dc475b4cb9eb835476bd0f94))
+
+## [1.38.7](https://github.com/Pocket/web-client/compare/v1.38.6...v1.38.7) (2022-03-01)
+
+
+### Bug Fixes
+
+* **snowplow:** add engagement events for display settings and theme ([99e7683](https://github.com/Pocket/web-client/commit/99e7683892a7b5d5593fe253b3803d39e5c0d996))
+
 ## [1.38.6](https://github.com/Pocket/web-client/compare/v1.38.5...v1.38.6) (2022-02-28)
 
 

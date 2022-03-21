@@ -15,6 +15,8 @@ import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { Onboarding } from 'connectors/onboarding/onboarding'
 import { sortOrderSetNew, sortOrderSetOld, sortOrderSetRelevance } from 'connectors/app/app.state'
+import { savedItemsSetSortOrder } from 'containers/list-saved/list-saved.state'
+import { savedItemsSetSortBy } from 'containers/list-saved/list-saved.state'
 import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 
 import { TagPageHeader } from 'containers/my-list/tags-page/tag-page-header'
@@ -39,25 +41,31 @@ export const List = (props) => {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
   const sortSubset = useSelector((state) => state.app.section)
-  const sortOrder = useSelector((state) => state.app.sortOptions[sortSubset] || 'newest')
+  const legacySortOrder = useSelector((state) => state.app.sortOptions[sortSubset] || 'newest')
+  const savedSortOrder = useSelector((state) => state.listSavedPageInfo.sortOrder)
   const featureState = useSelector((state) => state.features)
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const total = useSelector((state) => state.myList[`${section}Total`])
 
-  // Actions
-  const handleNewest = () => dispatch(sortOrderSetNew())
-  const handleOldest = () => dispatch(sortOrderSetOld())
-  const handleRelevance = () => dispatch(sortOrderSetRelevance())
-
   // Derived Values
   const shouldRender = userStatus !== 'pending'
   const useApiNext = featureFlagActive({ flag: 'api.next', featureState })
+  const sortOrder = useApiNext ? savedSortOrder : legacySortOrder
+
   const { flagsReady } = featureState
   const LegacyList = searchTerm ? SearchList : MyList
   const ListToRender = useApiNext ? ListSaved : LegacyList
 
   const ListHeader = searchTerm ? SearchPageHeader : MyListHeader
   const Header = tag ? TagPageHeader : ListHeader
+
+  // Actions
+  const setNewest = useApiNext ? savedItemsSetSortOrder : sortOrderSetNew
+  const setOldest = useApiNext ? savedItemsSetSortOrder : sortOrderSetOld
+  const setRelevance = useApiNext ? savedItemsSetSortBy : sortOrderSetRelevance
+  const handleNewest = () => dispatch(setNewest('DESC'))
+  const handleOldest = () => dispatch(setOldest('ASC'))
+  const handleRelevance = () => dispatch(setRelevance('RELEVANCE'))
 
   return (
     <Layout title={metaData.title} metaData={metaData} subset={subset} tag={tag}>

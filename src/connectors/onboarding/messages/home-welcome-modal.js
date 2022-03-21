@@ -100,8 +100,7 @@ export const HomeWelcomeModal = () => {
   const appRootSelector = '#__next'
   const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
   const modalReady = useSelector((state) => state.onboarding.topicSelectionModal)
-  const settingsFetched = useSelector((state) => state.settings.settingsFetched)
-  const showModal = modalReady && settingsFetched
+  const showModal = modalReady
 
   useEffect(() => {
     if (showModal) dispatch(sendSnowplowEvent('onboarding.welcome.impression'))

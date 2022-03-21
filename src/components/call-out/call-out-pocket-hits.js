@@ -6,6 +6,7 @@ import { css } from 'linaria'
 import EmailSignupForm from 'components/email-signup-form/email-signup-form'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { pocketHitsSignupRequested } from 'connectors/pocket-hits/pocket-hits.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { breakpointSmallDesktop } from '@pocket/web-ui' // 1279
 import { breakpointSmallTablet } from '@pocket/web-ui' // 839
 import { breakpointTinyTablet } from '@pocket/web-ui' // 719
@@ -189,7 +190,8 @@ const CallOutPocketHitsSignup = ({
   handleSubmitFailure,
   handleValidationError,
   utmCampaign,
-  utmSource
+  utmSource,
+  locale = 'en'
 }) => {
   const { t } = useTranslation()
 
@@ -219,6 +221,7 @@ const CallOutPocketHitsSignup = ({
     handleSubmit(formId)
     setActiveForm(formId)
     // track submit event here
+    dispatch(sendSnowplowEvent('pocket-hits.signup', { email, locale }))
     dispatch(pocketHitsSignupRequested(email, recaptchaResponseKey, utmCampaign, utmSource))
   }
 

@@ -137,16 +137,22 @@ export const ReaderNav = ({
   const setLineHeight = (val) => dispatch(updateLineHeight(val))
   const setColumnWidth = (val) => dispatch(updateColumnWidth(val))
   const goBack = () => {
-    const analyticsData = { label: 'Back to List', value: 'b' }
-    dispatch(sendSnowplowEvent('shortcut', analyticsData))
-
     if (window.history.length > 1) return window.history.go(-1)
     document.location.href = '/my-list'
+  }
+  const clickGoBack = () => {
+    dispatch(sendSnowplowEvent('reader.goback'))
+    goBack()
+  }
+  const shortcutGoBack = () => {
+    const analyticsData = { label: 'Back to List', value: 'b' }
+    dispatch(sendSnowplowEvent('shortcut', analyticsData))
+    goBack()
   }
   const buttonClass = cx(buttonReset, buttonStyles, bottomTooltip)
 
   useEffect(() => {
-    Mousetrap.bind('b', goBack)
+    Mousetrap.bind('b', shortcutGoBack)
     return () => Mousetrap.unbind('b')
   }, [])
 
@@ -155,7 +161,7 @@ export const ReaderNav = ({
       <div className="global-nav-container">
         <nav className={navStyle}>
           <button
-            onClick={goBack}
+            onClick={clickGoBack}
             aria-label={t('nav:back-to-my-list', 'Back to My List')}
             data-tooltip={t('nav:back-to-my-list', 'Back to My List')}
             data-cy="reader-nav-go-back"

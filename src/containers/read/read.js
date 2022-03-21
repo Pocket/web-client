@@ -70,6 +70,7 @@ const articleWrapper = css`
   .reader {
     padding: 0 var(--spacing250);
     margin: var(--spacing250) auto;
+    width: 100%;
   }
 
   .is-video {

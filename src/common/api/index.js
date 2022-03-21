@@ -26,9 +26,17 @@ export { getRandomSyndicatedArticle } from './queries/get-syndicated-article'
 export { getSavedItems } from './queries/get-saved-items'
 export { searchSavedItems } from './queries/search-saved-items'
 
+export { getSavedItemByItemId } from './queries/get-saved-item-by-id'
+
 // Item Mutations
+export { itemUpsert } from './mutations/upsertItem'
 export { itemFavorite } from './mutations/favoriteItem'
 export { itemUnFavorite } from './mutations/unfavoriteItem'
 export { itemArchive } from './mutations/archiveItem'
 export { itemUnArchive } from './mutations/unArchiveItem'
 export { itemDelete } from './mutations/deleteItem'
+
+// Highlight Mutations
+export { createHighlight } from './mutations/savedItemHighlights'
+export { deleteHighlight } from './mutations/savedItemHighlights'
+export { updateHighlight } from './mutations/savedItemHighlights'

@@ -6,6 +6,7 @@ import { homeActions } from './home'
 import { modalActions } from './modals'
 import { myListActions } from './my-list'
 import { onboardingActions } from './onboarding'
+import { pocketHitsActions } from './pocket-hits'
 import { profileActions } from './profile'
 import { readerActions } from './reader'
 import { shortcutActions } from './shortcuts'
@@ -21,6 +22,7 @@ export const analyticsActions = {
   ...modalActions,
   ...myListActions,
   ...onboardingActions,
+  ...pocketHitsActions,
   ...profileActions,
   ...shortcutActions,
   ...readerActions,

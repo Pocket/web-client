@@ -1,5 +1,6 @@
 import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
+import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const itemFavoriteQuery = gql`
   mutation ItemFavorite($itemId: ID!) {
@@ -16,8 +17,12 @@ const itemFavoriteQuery = gql`
         id
         name
       }
+      item {
+        ...ItemDetails
+      }
     }
   }
+  ${FRAGMENT_ITEM}
 `
 
 export function itemFavorite(itemId) {

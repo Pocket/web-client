@@ -49,4 +49,5 @@ export {
 
 export { getLinkOpenTarget } from './link-target'
 
+export { default as createObjectUpdateEvent } from './object-update'
 export { default as createVariantEnrollEvent } from './variant-enroll'

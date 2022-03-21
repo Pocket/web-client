@@ -26,7 +26,13 @@ const sortStyles = css`
   }
 `
 
-export const ListSort = ({ sortOrder, showRelevance, handleNewest, handleOldest, handleRelevance }) => {
+export const ListSort = ({
+  sortOrder,
+  showRelevance,
+  handleNewest,
+  handleOldest,
+  handleRelevance
+}) => {
   const { t } = useTranslation()
   const appRootSelector = '#__next'
 
@@ -64,11 +70,14 @@ export const ListSort = ({ sortOrder, showRelevance, handleNewest, handleOldest,
     setMenuOpen(false)
     setFocus(false)
   }
-  
+
   const sortIcon = {
-    'newest': <SortByNewestIcon />,
-    'oldest': <SortByOldestIcon />,
-    'relevance': <RelevanceIcon />
+    ASC: <SortByOldestIcon />,
+    DESC: <SortByNewestIcon />,
+    RELEVANCE: <RelevanceIcon />,
+    newest: <SortByNewestIcon />,
+    oldest: <SortByOldestIcon />,
+    relevance: <RelevanceIcon />
   }
 
   return (
@@ -77,7 +86,7 @@ export const ListSort = ({ sortOrder, showRelevance, handleNewest, handleOldest,
         ref={sortOptionsRef}
         className={cx(buttonReset, sortStyles)}
         onClick={handleOpen}
-        data-cy='sort-options'
+        data-cy="sort-options"
         onKeyPress={updateFocus}>
         {sortIcon[sortOrder]}
       </button>
@@ -97,26 +106,20 @@ export const ListSort = ({ sortOrder, showRelevance, handleNewest, handleOldest,
             }
           ]
         }}>
-        <PopupMenuItem
-          data-cy='sort-oldest'
-          onClick={handleOldest}>
-            <SortByOldestIcon />
-            {t('settings:sort-oldest', 'Oldest first')}
+        <PopupMenuItem data-cy="sort-oldest" onClick={handleOldest}>
+          <SortByOldestIcon />
+          {t('settings:sort-oldest', 'Oldest first')}
         </PopupMenuItem>
-        <PopupMenuItem
-          data-cy='sort-newest'
-          onClick={handleNewest}>
-            <SortByNewestIcon />
-            {t('settings:sort-newest', 'Newest first')}
+        <PopupMenuItem data-cy="sort-newest" onClick={handleNewest}>
+          <SortByNewestIcon />
+          {t('settings:sort-newest', 'Newest first')}
         </PopupMenuItem>
-        { showRelevance ? (
-          <PopupMenuItem
-            data-cy='sort-relevance'
-            onClick={handleRelevance}>
-              <RelevanceIcon />
-              {t('settings:sort-relevance', 'By relevance')}
+        {showRelevance ? (
+          <PopupMenuItem data-cy="sort-relevance" onClick={handleRelevance}>
+            <RelevanceIcon />
+            {t('settings:sort-relevance', 'By relevance')}
           </PopupMenuItem>
-        ) : null }
+        ) : null}
       </PopupMenu>
     </div>
   )

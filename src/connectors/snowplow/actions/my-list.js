@@ -106,4 +106,12 @@ export const myListActions = {
     },
     expects: ['value']
   },
+  'my-list.theme': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['value']
+  }
 }
