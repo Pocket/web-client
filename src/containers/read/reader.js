@@ -58,7 +58,7 @@ export default function Reader() {
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
 
-  // TODO: Remove articleData - still needed right now for externalUrl and analyticsData
+  // TODO: Remove articleData - still needed right now for analyticsData
   const articleData = useSelector((state) => state.myListItemsById[id])
 
   const articleItem = useSelector((state) => state.reader.articleItem)
@@ -90,8 +90,18 @@ export default function Reader() {
     )
   }
 
-  const { itemId, article, authors, title, timeToRead, hasVideo, domainMetadata, images, videos } =
-    articleItem
+  const {
+    itemId,
+    article,
+    authors,
+    title,
+    timeToRead,
+    hasVideo,
+    domainMetadata,
+    images,
+    videos,
+    givenUrl
+  } = articleItem
 
   const { isArchived, isFavorite, tags } = savedData
   const annotations = savedData.annotations.highlights
@@ -106,7 +116,8 @@ export default function Reader() {
   // TODO: figure out what to do with these
   //       - derive item?
   //       - use another state besides reader?
-  const { externalUrl, analyticsData } = articleData
+  const { analyticsData } = articleData
+  const externalUrl = givenUrl // this is missing UTM params
 
   const headerData = {
     authors,
