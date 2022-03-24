@@ -197,7 +197,7 @@ export function deriveItemData({
     title: title({ item, itemEnrichment }),
     thumbnail: thumbnail({ item, itemEnrichment }),
     excerpt: excerpt({ item, itemEnrichment }),
-    publisher: publisher({ item, passedPublisher }),
+    publisher: publisher({ item, itemEnrichment, passedPublisher }),
     externalUrl: externalUrl({ item, itemEnrichment, utmId }),
     readUrl: readUrl({ item, status: node?.status }),
     saveUrl: saveUrl({ item, itemEnrichment }),
@@ -257,16 +257,17 @@ function thumbnail({ item, itemEnrichment }) {
  * @param {object} item An item returned from the server
  * @returns {string} The best text to display as the publisher of this item
  */
-function publisher({ item, passedPublisher }) {
+function publisher({ item, itemEnrichment, passedPublisher }) {
   const urlToUse = item?.givenUrl || item?.resolvedUrl
   const derivedDomain = domainForUrl(urlToUse)
   const syndicatedPublisher = item?.syndicatedArticle?.publisher?.name
   return (
-    syndicatedPublisher ||
-    passedPublisher ||
-    item?.domainMetadata?.name ||
-    item?.domain ||
-    derivedDomain ||
+    syndicatedPublisher ||        // Syndicated - provided by curation
+    passedPublisher ||            // Collections - hardcoded as 'Pocket'
+    itemEnrichment?.publisher ||  // Home - curatedInfo: provided by curation || Collection - publisher: provided by curation
+    item?.domainMetadata?.name || // Metadata from a domain, originally populated from ClearBit. Takes precedence
+    item?.domain ||               // Domain, such as 'getpocket.com' of the {.resolved_url}
+    derivedDomain ||              // Regex - givenUrl: The url as provided by the user when saving. Only http or https schemes allowed || resolvedUrl: If the givenUrl redirects (once or many times), this is the final url. Otherwise, same as givenUrl
     null
   )
 }
