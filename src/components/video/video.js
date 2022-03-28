@@ -17,21 +17,35 @@ const videoWrapper = css`
   }
 `
 
+const getVideoType = (type) => {
+  switch (type) {
+    case '1':
+    case 'YOUTUBE': {
+      return 'https://www.youtube-nocookie.com/embed/'
+    }
+    case '2':
+    case '3':
+    case 'VIMEO': {
+      return 'https://player.vimeo.com/video/'
+    }
+    default: {
+      break
+    }
+  }
+}
+
 export const Video = ({ videoData }) => {
   const id = videoData.vid
   const type = videoData.type
-  const videoTypes = {
-    1: 'https://www.youtube-nocookie.com/embed/',
-    2: 'https://player.vimeo.com/video/',
-    3: 'https://player.vimeo.com/video/'
-  }
+  const videoType = getVideoType(type)
+  const src = `${videoType}${id}?autoplay=0&dnt=1`
 
   return (
     <div className={videoWrapper}>
       <iframe
         className="player"
         title="pocket-video-frame"
-        src={`${videoTypes[type]}${id}?autoplay=0&dnt=1`}
+        src={src}
         frameBorder="0"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; modestbranding; picture-in-picture"
         allowFullScreen></iframe>

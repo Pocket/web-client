@@ -44,6 +44,7 @@ import { API_ACTION_DELETE_ANNOTATION } from 'common/constants'
 import { getArticleText } from 'common/api/_legacy/reader'
 import { getArticleFromId } from 'common/api/_legacy/reader'
 import { sendItemActions } from 'common/api/_legacy/item-actions'
+import { getSavedItemByItemId } from 'common/api'
 
 import { deriveListItem } from 'common/api/derivers/item'
 
@@ -74,7 +75,7 @@ export const itemDataRequest = (itemId) => ({ type: ARTICLE_ITEM_REQUEST, itemId
 export const saveAnnotation = ({ itemId, quote, patch }) => ({ type: ANNOTATION_SAVE_REQUEST, item_id: itemId, quote, patch }) //prettier-ignore
 export const deleteAnnotation = ({ itemId, annotation_id }) => ({ type: ANNOTATION_DELETE_REQUEST, item_id: itemId, annotation_id }) //prettier-ignore
 // client-api actions
-export const readItemRequest = (itemId) => ({ type: READ_ITEM_REQUEST, itemId }) //prettier-ignore
+export const getReadItem = (itemId) => ({ type: READ_ITEM_REQUEST, itemId }) //prettier-ignore
 export const saveHighlightRequest = ({ itemId, quote, patch }) => ({ type: HIGHLIGHT_SAVE_REQUEST, itemId, quote, patch }) //prettier-ignore
 export const deleteHighlightRequest = ({ id }) => ({ type: HIGHLIGHT_DELETE_REQUEST, id }) //prettier-ignore
 // Settings actions
@@ -115,6 +116,11 @@ export const readReducers = (state = initialState, action) => {
     case ARTICLE_CONTENT_SUCCESS: {
       const { article } = action
       return { ...state, articleContent: article }
+    }
+
+    case READ_ITEM_SUCCESS: {
+      const { item, savedData } = action
+      return { ...state, articleItem: item, savedData }
     }
 
     case ANNOTATION_SAVE_SUCCESS: {
@@ -203,7 +209,8 @@ export const readSagas = [
   takeEvery(UPDATE_FONT_SIZE, saveDisplaySettings),
   takeEvery(UPDATE_FONT_TYPE, saveDisplaySettings),
   takeEvery(HIGHLIGHT_SAVE_REQUEST, highlightSaveRequest),
-  takeEvery(HIGHLIGHT_DELETE_REQUEST, highlightDeleteRequest)
+  takeEvery(HIGHLIGHT_DELETE_REQUEST, highlightDeleteRequest),
+  takeEvery(READ_ITEM_REQUEST, readItemRequest)
 ]
 
 /* SAGAS :: SELECTORS
@@ -244,6 +251,17 @@ function* articleContentRequest({ url }) {
     yield put({ type: ARTICLE_CONTENT_SUCCESS, article })
   } catch (error) {
     yield put({ type: ARTICLE_CONTENT_FAILURE, error })
+  }
+}
+
+function* readItemRequest({ itemId }) {
+  try {
+    const response = yield getSavedItemByItemId(itemId)
+
+    const { item, savedData } = response
+    yield put({ type: READ_ITEM_SUCCESS, item, savedData })
+  } catch (error) {
+    yield put({ type: READ_ITEM_FAILURE, error })
   }
 }
 

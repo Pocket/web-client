@@ -1,3 +1,32 @@
+## [1.42.1](https://github.com/Pocket/web-client/compare/v1.42.0...v1.42.1) (2022-03-28)
+
+
+### Bug Fixes
+
+* **highlights:** create and delete highlights correctly ([950c04d](https://github.com/Pocket/web-client/commit/950c04df4f075bc1ac03267ae830119515d6d737))
+
+# [1.42.0](https://github.com/Pocket/web-client/compare/v1.41.5...v1.42.0) (2022-03-28)
+
+
+### Bug Fixes
+
+* **article:** remove hello world testing div ([d8533a4](https://github.com/Pocket/web-client/commit/d8533a4291c6cb0bfac43197255e2032b4c9e806))
+* **images:** add observer for element to replace image markup ([4d39e25](https://github.com/Pocket/web-client/commit/4d39e257da99a3c9a06d86dbb65931bbd99e94a7))
+* **legacy article:** add loader when !articleData ([4c197ae](https://github.com/Pocket/web-client/commit/4c197ae9f296bc08ad9bf18e9c23d67592d7f412))
+* **read:** DRY things up a bit ([8df8051](https://github.com/Pocket/web-client/commit/8df8051bd4da1a613161867c56fd8097e552a601))
+* **reader:** use givenUrl for externalUrl ([f0ce1d7](https://github.com/Pocket/web-client/commit/f0ce1d7f892131c21cd0bd61660528b678114833))
+* **read:** reduce whitespace change ([728575f](https://github.com/Pocket/web-client/commit/728575f4333c0be372fa30520c55d972b3e67b34))
+
+
+### Features
+
+* **images:** optimize image replacement a bit more ([567873b](https://github.com/Pocket/web-client/commit/567873b383ad87522e0785e13215a1fb0ce229cc))
+* **item fragment:** add video data to item fragment query ([22ffa90](https://github.com/Pocket/web-client/commit/22ffa904158a3b3d8d4c2b494e614a45d1bb5a79))
+* **reader:** make videos work ([baf49de](https://github.com/Pocket/web-client/commit/baf49de0c0bd08d36524cdb983b07408382c92dc))
+* **reader:** move external link click function to read so it can be shared ([e8458dd](https://github.com/Pocket/web-client/commit/e8458dd8c006f5309f721f52444a8e981029a4aa))
+* **reader:** rename some things and remove unused actions ([d38c63e](https://github.com/Pocket/web-client/commit/d38c63e3214a98f68a9d2df121a5efe05a964b00))
+* **reader:** split reader content based on reader.client-api feature flag ([1847af6](https://github.com/Pocket/web-client/commit/1847af6bf3676915e34b1f730285fcc2c24c925b))
+
 ## [1.41.5](https://github.com/Pocket/web-client/compare/v1.41.4...v1.41.5) (2022-03-22)
 
 

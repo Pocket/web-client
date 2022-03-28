@@ -40,3 +40,5 @@ export { validateEmail } from './validate-email/validate-email'
 
 export { getTimeToRead } from './time-to-read/time-to-read'
 export { readTimeFromWordCount } from './time-to-read/time-to-read'
+
+export { waitForElement } from './elements/wait-for-element'

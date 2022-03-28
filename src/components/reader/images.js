@@ -1,4 +1,4 @@
-import { getImageCacheUrl } from 'common/utilities'
+import { getImageCacheUrl, waitForElement } from 'common/utilities'
 import DOMPurify from 'dompurify'
 
 function loadImage(imageObject) {
@@ -7,8 +7,7 @@ function loadImage(imageObject) {
   return new Promise((resolve, reject) => {
     const imageLoader = new Image()
     imageLoader.onload = () => resolve({ imageObject, imageSource })
-    imageLoader.onerror = () =>
-      reject({ error: 'Image failed to load', imageObject })
+    imageLoader.onerror = () => reject({ error: 'Image failed to load', imageObject })
     imageLoader.src = imageSource
   })
 }
@@ -26,21 +25,20 @@ function invalidateImage(data) {
 }
 
 function buildImageMarkup(data) {
-  const { caption, credit, image_id } = data.imageObject
+  const { caption, credit, image_id, imageId } = data.imageObject
+  const id = image_id || imageId
   const imageSource = data.imageSource
   const cleanCaption = DOMPurify.sanitize(caption)
   const cleanCredit = DOMPurify.sanitize(caption)
 
-  const captionMarkup = caption.length
-    ? `<figcaption>${cleanCaption}</figcaption>`
-    : ''
+  const captionMarkup = caption.length ? `<figcaption>${cleanCaption}</figcaption>` : ''
   const creditMarkup =
     credit.length && cleanCaption !== cleanCredit
       ? `<cite>photo by: ${cleanCredit}</cite>` // translate?
       : ''
 
   return Promise.resolve({
-    imageId: image_id,
+    imageId: id,
     markup: DOMPurify.sanitize(`
         <figure>
           <img src='${imageSource}' alt='${cleanCaption}'/>
@@ -51,8 +49,10 @@ function buildImageMarkup(data) {
   })
 }
 
-function replaceImageMarkup(data) {
-  const element = document.getElementById(`RIL_IMG_${data.imageId}`)
+async function replaceImageMarkup(data) {
+  const id = `RIL_IMG_${data.imageId}`
+  const element = document.getElementById(id) || (await waitForElement(`#${id}`))
+
   if (element) {
     element.innerHTML = data.markup
   }
