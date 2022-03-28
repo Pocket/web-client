@@ -168,7 +168,7 @@ export default function LegacyReader() {
       dispatch(sendSnowplowEvent('reader.add-highlight', analyticsInfo))
       dispatch(
         saveAnnotation({
-          id,
+          itemId,
           patch: requestAnnotationPatch(highlight),
           quote: highlight.toString()
         })
@@ -180,7 +180,7 @@ export default function LegacyReader() {
     dispatch(sendSnowplowEvent('reader.remove-highlight', analyticsInfo))
     dispatch(
       deleteAnnotation({
-        id,
+        itemId,
         annotation_id
       })
     )
