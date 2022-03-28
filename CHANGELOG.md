@@ -1,3 +1,11 @@
+## [1.41.5](https://github.com/Pocket/web-client/compare/v1.41.4...v1.41.5) (2022-03-22)
+
+
+### Bug Fixes
+
+* **item:** use enrichment publisher if present ([9776d38](https://github.com/Pocket/web-client/commit/9776d38be92b1a6796348ad55eef97817b60424d))
+* **publisher:** adding notes for publisher deriver ([1c63a34](https://github.com/Pocket/web-client/commit/1c63a346044f2e8da3248f9aef8b702f1717ae89))
+
 ## [1.41.4](https://github.com/Pocket/web-client/compare/v1.41.3...v1.41.4) (2022-03-21)
 
 
