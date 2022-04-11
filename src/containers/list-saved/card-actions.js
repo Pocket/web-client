@@ -15,12 +15,11 @@ import { PermanentCopyIcon } from '@pocket/web-ui'
 import { EmptyCircledIcon } from '@pocket/web-ui'
 import { CheckCircledIcon } from '@pocket/web-ui'
 
-import { mutationFavorite } from 'connectors/items/items-saved.state'
-import { mutationUnFavorite } from 'connectors/items/items-saved.state'
-import { mutationArchive } from 'connectors/items/items-saved.state'
-// import { mutationUnArchive } from 'connectors/items/items-saved.state'
-import { mutationDelete } from 'connectors/items/items-saved.state'
-import { mutationReAdd } from 'connectors/items/items-saved.state'
+import { mutationFavorite } from 'connectors/items/mutation-favorite.state'
+import { mutationUnFavorite } from 'connectors/items/mutation-favorite.state'
+import { mutationArchive } from 'connectors/items/mutation-archive.state'
+import { mutationDelete } from 'connectors/items/mutation-delete.state'
+import { mutationReAdd } from 'connectors/items/mutation-archive.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 

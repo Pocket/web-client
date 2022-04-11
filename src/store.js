@@ -99,6 +99,11 @@ import { itemsReducers } from 'connectors/items/items.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
 import { itemsSavedSagas } from 'connectors/items/items-saved.state'
 
+import { mutationArchiveSagas } from 'connectors/items/mutation-archive.state'
+import { mutationDeleteSagas } from 'connectors/items/mutation-delete.state'
+import { mutationFavoriteSagas } from 'connectors/items/mutation-favorite.state'
+import { mutationUpsertSagas } from 'connectors/items/mutation-upsert.state'
+
 import { listSavedReducers } from 'containers/list-saved/list-saved.state'
 import { listSavedSagas } from 'containers/list-saved/list-saved.state'
 import { listSavedPageInfoReducers } from 'containers/list-saved/list-saved.state'
@@ -224,7 +229,11 @@ function* rootSaga() {
     ...shortcutSagas,
     ...onboardingSagas,
     ...listSavedSagas,
-    ...itemsSavedSagas
+    ...itemsSavedSagas,
+    ...mutationArchiveSagas,
+    ...mutationDeleteSagas,
+    ...mutationFavoriteSagas,
+    ...mutationUpsertSagas
   ])
 }
 
