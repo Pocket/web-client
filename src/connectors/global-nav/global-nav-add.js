@@ -1,7 +1,7 @@
 import GlobalNavAdd from 'components/global-nav/tools/add/global-nav-add'
 import { useDispatch, useSelector } from 'react-redux'
 import { itemAddAction } from 'connectors/items-by-id/my-list/items.add'
-import { mutationUpsert } from 'connectors/items/items-saved.state'
+import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
