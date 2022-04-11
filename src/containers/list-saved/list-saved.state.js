@@ -6,6 +6,7 @@ import { ITEMS_UPSERT_INJECT } from 'actions'
 import { ITEMS_SAVED_FAILURE } from 'actions'
 import { ITEMS_SAVED_RECONCILED } from 'actions'
 import { MUTATION_SUCCESS } from 'actions'
+import { MUTATION_DELETE_SUCCESS } from 'actions'
 
 import { ITEMS_SAVED_PAGE_INFO_SUCCESS } from 'actions'
 import { ITEMS_SAVED_PAGE_INFO_FAILURE } from 'actions'
@@ -187,6 +188,7 @@ export const listSavedPageInfoReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const listSavedSagas = [
   takeEvery(MUTATION_SUCCESS, reconcileMutation),
+  takeEvery(MUTATION_DELETE_SUCCESS, reconcileDeleteMutation),
   takeEvery(ITEMS_UPSERT_SUCCESS, reconcileUpsert),
   takeEvery(
     [
@@ -232,6 +234,11 @@ function* reconcileMutation(action) {
   const removeItem = shouldBeFiltered(node, filter)
 
   if (removeItem) yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id })
+}
+
+function* reconcileDeleteMutation(action) {
+  const { id } = action
+  yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id })
 }
 
 function* reconcileUpsert(action) {
