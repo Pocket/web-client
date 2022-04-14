@@ -97,7 +97,7 @@ export const homeActions = {
   },
   'home.similar.view-original': {
     eventType: 'contentOpen',
-    entityTypes: ['content', 'recommendation', 'ui'],
+    entityTypes: ['content', 'ui'],
     eventData: {
       uiType: 'card'
     },
@@ -105,8 +105,7 @@ export const homeActions = {
       'id',
       'url',
       'position',
-      'destination',
-      'recommendationId',
+      'destination'
     ]
   },
   'home.recent.impression': {
