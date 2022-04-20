@@ -104,6 +104,9 @@ import { mutationDeleteSagas } from 'connectors/items/mutation-delete.state'
 import { mutationFavoriteSagas } from 'connectors/items/mutation-favorite.state'
 import { mutationUpsertSagas } from 'connectors/items/mutation-upsert.state'
 
+import { mutationBulkReducers } from 'connectors/items/mutations-bulk.state'
+import { mutationBulkSagas } from 'connectors/items/mutations-bulk.state'
+
 import { listSavedReducers } from 'containers/list-saved/list-saved.state'
 import { listSavedSagas } from 'containers/list-saved/list-saved.state'
 import { listSavedPageInfoReducers } from 'containers/list-saved/list-saved.state'
@@ -112,7 +115,8 @@ import { listSavedPageInfoReducers } from 'containers/list-saved/list-saved.stat
  --------------------------------------------------------------- */
 const itemReducers = {
   items: itemsReducers,
-  itemsSaved: itemsSavedReducers
+  itemsSaved: itemsSavedReducers,
+  mutationBulk: mutationBulkReducers,
 }
 
 const listReducers = {
@@ -233,7 +237,8 @@ function* rootSaga() {
     ...mutationArchiveSagas,
     ...mutationDeleteSagas,
     ...mutationFavoriteSagas,
-    ...mutationUpsertSagas
+    ...mutationUpsertSagas,
+    ...mutationBulkSagas
   ])
 }
 

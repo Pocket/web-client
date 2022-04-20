@@ -2,8 +2,9 @@ import { memo } from 'react'
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { setNoImage } from 'connectors/items-by-id/my-list/items.state'
-import { itemsBulkSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
-import { itemsBulkDeSelectAction } from 'connectors/items-by-id/my-list/items.bulk'
+import { mutationBulkSelectAction } from 'connectors/items/mutations-bulk.state'
+import { mutationBulkDeSelectAction } from 'connectors/items/mutations-bulk.state'
+
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 import { ActionsMyList } from './card-actions'
 import { ActionsBulk } from './card-actions'
@@ -23,10 +24,10 @@ export function ItemCard({ id, position, type }) {
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const item = useSelector((state) => state.items[id])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
-  const bulkList = useSelector((state) => state.bulkEdit.selected)
-  const bulkCurrent = useSelector((state) => state.bulkEdit.currentId)
+  const bulkList = useSelector((state) => state.mutationBulk.itemIds)
+  const bulkCurrent = useSelector((state) => state.mutationBulk.currentId)
   const bulkIsCurrent = bulkCurrent === id
-  const bulkSelected = bulkList?.map((item) => item.id).includes(id)
+  const bulkSelected = bulkList?.includes(id)
   const shortcutId = useSelector((state) => state.shortcuts.currentId)
   const shortcutSelected = shortcutId === id
 
@@ -61,8 +62,8 @@ export function ItemCard({ id, position, type }) {
 
   /** ITEM BULK ACTIONS
   --------------------------------------------------------------- */
-  const itemBulkSelect = (shift) => dispatch(itemsBulkSelectAction(id, shift))
-  const itemBulkDeSelect = (shift) => dispatch(itemsBulkDeSelectAction(id, shift))
+  const itemBulkSelect = (shift) => dispatch(mutationBulkSelectAction(id, shift))
+  const itemBulkDeSelect = (shift) => dispatch(mutationBulkDeSelectAction(id, shift))
   const bulkAction = bulkSelected ? itemBulkDeSelect : itemBulkSelect
   const selectBulk = (event) => (bulkEdit ? bulkAction(event.shiftKey) : null)
 
