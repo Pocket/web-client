@@ -48,7 +48,7 @@ export const FavoriteModal = () => {
         {batchStart ? (
           <BatchProcessing batchTotal={batchTotal} batchCount={batchCount} />
         ) : (
-          <p>{favoriteCopy} these items? This cannot be undone.</p>
+          <p>{favoriteCopy}</p>
         )}
       </ModalBody>
       {batchStart ? null : (
