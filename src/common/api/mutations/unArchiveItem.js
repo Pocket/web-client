@@ -1,28 +1,16 @@
 import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
-import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const itemUnArchiveQuery = gql`
   mutation ItemUnArchive($itemId: ID!) {
     updateSavedItemUnArchive(id: $itemId) {
-      _createdAt
       _updatedAt
       id
       status
-      isFavorite
-      favoritedAt
       isArchived
       archivedAt
-      tags {
-        id
-        name
-      }
-      item {
-        ...ItemDetails
-      }
     }
   }
-  ${FRAGMENT_ITEM}
 `
 
 // ?? NOTE:  THis is not functionality we currently use in web-client
@@ -34,5 +22,27 @@ export function itemUnArchive(itemId) {
     variables: { itemId }
   })
     .then((response) => response?.data?.updateSavedItemUnArchive)
+    .catch((error) => console.error(error))
+}
+
+export function bulkUnArchive(items) {
+  const arrayOfQueries = items.map(
+    (itemId) => `
+    unarchive${itemId}: updateSavedItemUnArchive(id: "${itemId}"){
+      _updatedAt
+      id
+      status
+      isArchived
+      archivedAt
+    }
+  `
+  )
+
+  const query = `mutation ItemsBulkUnArchive{
+    ${arrayOfQueries.join('')}
+  }`
+
+  return requestGQL({ query })
+    .then((response) => response?.data)
     .catch((error) => console.error(error))
 }

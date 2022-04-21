@@ -1,28 +1,16 @@
 import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
-import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const itemArchiveQuery = gql`
   mutation ItemArchive($itemId: ID!) {
     updateSavedItemArchive(id: $itemId) {
-      _createdAt
       _updatedAt
       id
       status
-      isFavorite
-      favoritedAt
       isArchived
       archivedAt
-      tags {
-        id
-        name
-      }
-      item {
-        ...ItemDetails
-      }
     }
   }
-  ${FRAGMENT_ITEM}
 `
 
 export function itemArchive(itemId) {
@@ -31,5 +19,27 @@ export function itemArchive(itemId) {
     variables: { itemId }
   })
     .then((response) => response?.data?.updateSavedItemArchive)
+    .catch((error) => console.error(error))
+}
+
+export function bulkArchive(items) {
+  const arrayOfQueries = items.map(
+    (itemId) => `
+    archive${itemId}: updateSavedItemArchive(id: "${itemId}"){
+      _updatedAt
+      id
+      status
+      isArchived
+      archivedAt
+    }
+  `
+  )
+
+  const query = `mutation ItemsBulkArchive{
+    ${arrayOfQueries.join('')}
+  }`
+
+  return requestGQL({ query })
+    .then((response) => response?.data)
     .catch((error) => console.error(error))
 }

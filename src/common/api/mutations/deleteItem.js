@@ -15,3 +15,19 @@ export function itemDelete(itemId) {
     .then((response) => response.data.deleteSavedItem)
     .catch((error) => console.error(error))
 }
+
+export function bulkDelete(items) {
+  const arrayOfQueries = items.map(
+    (itemId) => `
+    delete${itemId}: deleteSavedItem(id: "${itemId}")
+  `
+  )
+
+  const query = `mutation ItemsBulkDelete{
+    ${arrayOfQueries.join('')}
+  }`
+
+  return requestGQL({ query })
+    .then((response) => response?.data)
+    .catch((error) => console.error(error))
+}
