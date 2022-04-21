@@ -13,6 +13,7 @@ import GlobalNavComponent from 'components/global-nav/global-nav'
 import GlobalNavSearch from './global-nav-search'
 import GlobalNavAdd from './global-nav-add'
 import GlobalNavBulkEdit from './global-nav-bulk-edit'
+import GlobalNavBulkMutations from './global-nav-bulk-mutations'
 
 import { HomeIcon } from '@pocket/web-ui'
 import { DiscoverIcon } from '@pocket/web-ui'
@@ -71,6 +72,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
 
   const featureState = useSelector((state) => state.features)
   const showLab = featureFlagActive({ flag: 'lab', featureState })
+  const useApiNext = featureFlagActive({ flag: 'api.next', featureState })
 
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.userProfile?.first_name)
@@ -114,7 +116,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       id: 'global-nav-my-list-link',
       label: t('nav:my-list', 'My List'),
       url: '/my-list?src=navbar',
-      icon: <ListViewIcon />,
+      icon: <ListViewIcon />
     },
     {
       name: 'discover',
@@ -210,7 +212,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
   const navChildren = {
     search: GlobalNavSearch,
     add: GlobalNavAdd,
-    bulk: GlobalNavBulkEdit
+    bulk: useApiNext ? GlobalNavBulkMutations : GlobalNavBulkEdit
   }
 
   const NavTakeover = navChildren[appMode]

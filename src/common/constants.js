@@ -10,7 +10,7 @@ export const GRAPHQL_URL = 'https://getpocket.com'
 export const ARTICLE_API_URL = 'https://tz7snrninbak3oh36gjshbmdia.appsync-api.us-east-1.amazonaws.com/graphql' // ARTICLE_API_KEY is a secret and needs to be stored as such
 export const ARTICLE_API_KEY = 'da2-shleiiw7qzcnlkjwg3v7rfkpte' // Currently set to expire Thu, 04 Mar 2021 16:00:00 GMT
 export const READING_WPM = 220
-export const BATCH_SIZE = 30
+export const BATCH_SIZE = 2
 export const COLOR_MODE_PREFIX = 'colormode'
 
 export const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]

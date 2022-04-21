@@ -19,7 +19,7 @@ import { mutationFavorite } from 'connectors/items/mutation-favorite.state'
 import { mutationUnFavorite } from 'connectors/items/mutation-favorite.state'
 import { mutationArchive } from 'connectors/items/mutation-archive.state'
 import { mutationDelete } from 'connectors/items/mutation-delete.state'
-import { mutationReAdd } from 'connectors/items/mutation-archive.state'
+import { mutationUnArchive } from 'connectors/items/mutation-archive.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -42,7 +42,7 @@ export function ActionsMyList({ id, position }) {
 
   const itemDelete = () => dispatch(mutationDelete(id))
   const itemArchive = () => dispatch(mutationArchive(id))
-  const itemUpsert = () => dispatch(mutationReAdd(givenUrl))
+  const itemUpsert = () => dispatch(mutationUnArchive(givenUrl))
   // const itemUnArchive = () => dispatch(mutationUnArchive(id)) // This is more of an undo
   const itemFavorite = () => dispatch(mutationFavorite(id))
   const itemUnFavorite = () => dispatch(mutationUnFavorite(id))

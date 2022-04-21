@@ -25,6 +25,7 @@ import { APP_UPDATE_RELEASE } from 'actions'
 import { SNOWPLOW_SEND_EVENT } from 'actions'
 
 import { ITEMS_BULK_CLEAR } from 'actions'
+import { MUTATION_BULK_CLEAR } from 'actions'
 
 import { HYDRATE } from 'actions'
 import { parseCookies, destroyCookie } from 'nookies'
@@ -116,9 +117,10 @@ export const appReducers = (state = initialState, action) => {
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
-    case HYDRATE:
+    case HYDRATE: {
       const { app } = action.payload
       return { ...state, baseURL: app.baseURL }
+    }
 
     default:
       return state
@@ -147,7 +149,10 @@ const getSortOptions = (state) => state.app.sortOptions
 
 function* appModeSwitch(action) {
   const { mode } = action
-  if (mode !== 'bulk') yield put({ type: ITEMS_BULK_CLEAR })
+  if (mode !== 'bulk') {
+    yield put({ type: ITEMS_BULK_CLEAR })
+    yield put({ type: MUTATION_BULK_CLEAR })
+  }
 }
 
 function* appColorModeSet({ colorMode, skipAnalytics = false }) {
@@ -240,9 +245,7 @@ export function convertToLocalStorage() {
       // If not we want to convert it to local storage
       const key = setting.key
       // Check for a valid value and if not set it to the default
-      const value = setting.valid.includes(cookieValue)
-        ? cookieValue
-        : setting.valid[0]
+      const value = setting.valid.includes(cookieValue) ? cookieValue : setting.valid[0]
 
       //Kill and cookies that exist in favor of local storage
       localStore.setItem(key, value)

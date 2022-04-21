@@ -135,8 +135,8 @@ export const listSavedReducers = (state = [], action) => {
     }
 
     case ITEM_SAVED_REMOVE_FROM_LIST: {
-      const { id } = action
-      return state.filter((itemId) => itemId !== id)
+      const { idsToRemove } = action
+      return state.filter((itemId) => !idsToRemove.includes(itemId))
     }
 
     default:
@@ -225,24 +225,30 @@ export const listSavedSagas = [
 /** SAGA :: SELECTORS
  --------------------------------------------------------------- */
 const getSavedPageInfo = (state) => state.listSavedPageInfo
+const getItems = (state) => state.items
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 function* reconcileMutation(action) {
-  const { node, id } = action
+  const { nodes } = action
   const { filter } = yield select(getSavedPageInfo)
-  const removeItem = shouldBeFiltered(node, filter)
+  const items = yield select(getItems)
 
-  if (removeItem) yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id })
+  const idsToRemove = nodes
+    .filter((node) => shouldBeFiltered({ item: items[node?.id], node }, filter))
+    .map((node) => node.id)
+
+  if (idsToRemove) yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, idsToRemove })
 }
 
 function* reconcileDeleteMutation(action) {
   const { id } = action
-  yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, id })
+  yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, idsToRemove: [id] })
 }
 
 function* reconcileUpsert(action) {
   const { sortOrder, sortBy, filter } = yield select(getSavedPageInfo)
+  const items = yield select(getItems)
 
   // When sort order is ASC we will ignore this since it will be picked up in future requests
   if (sortOrder === 'ASC' || sortBy === 'RELEVANCE') return
@@ -252,9 +258,10 @@ function* reconcileUpsert(action) {
 
   const itemId = savedItemIds[0] || false
   const node = nodes[itemId]
+  const item = items[itemId]
   if (!node) return
 
-  const notInFilter = shouldBeFiltered(node, filter)
+  const notInFilter = shouldBeFiltered({ item, node }, filter)
   if (!notInFilter) yield put({ type: ITEMS_UPSERT_INJECT, savedItemIds })
 }
 
@@ -265,8 +272,8 @@ function* requestItemsWithFilter(action) {
   yield put({ type, filters: { filter, sort: { sortOrder, sortBy }, count, searchTerm } })
 }
 
-function shouldBeFiltered(node, filter) {
-  const { item } = node
+function shouldBeFiltered(itemDetails, filter) {
+  const { item, node } = itemDetails
   if (filter?.contentType === 'IS_READABLE' && !item?.isArticle) return true
   if (filter?.contentType === 'IS_VIDEO' && item?.hasVideo !== 'IS_VIDEO') return true
 

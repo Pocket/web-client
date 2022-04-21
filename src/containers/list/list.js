@@ -26,6 +26,10 @@ import { SearchPageHeader } from 'components/headers/search-page-header'
 import MyList from 'containers/my-list/my-list'
 import SearchList from 'containers/my-list/search-page/search-page'
 
+import { BulkFavoriteModal } from 'connectors/confirm-favorite/confirm-bulk-favorite'
+import { BulkDeleteModal } from 'connectors/confirm-delete/confirm-bulk-delete'
+import { BulkArchiveModal } from 'connectors/confirm-archive/confirm-bulk-archive'
+
 export const List = (props) => {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -94,6 +98,11 @@ export const List = (props) => {
       <FavoriteModal />
       <TagDeleteModal />
       <TagEditModal />
+
+      <BulkFavoriteModal />
+      <BulkDeleteModal />
+      <BulkArchiveModal />
+
       <Toasts />
       <Onboarding type="my-list.flyaway.extensions" />
       <Onboarding type="my-list.flyaway.reader" />
