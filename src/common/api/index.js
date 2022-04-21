@@ -31,14 +31,14 @@ export { getSavedItemByItemId } from './queries/get-saved-item-by-id'
 // Item Mutations
 export { itemUpsert } from './mutations/upsertItem'
 export { itemFavorite } from './mutations/favoriteItem'
-export { itemUnFavorite } from './mutations/unFavoriteItem'
+export { itemUnFavorite } from './mutations/unfavoriteItem'
 export { itemArchive } from './mutations/archiveItem'
 export { itemUnArchive } from './mutations/unArchiveItem'
 export { itemDelete } from './mutations/deleteItem'
 
 // Bulk Mutations
 export { bulkFavorite } from './mutations/favoriteItem'
-export { bulkUnFavorite } from './mutations/unFavoriteItem'
+export { bulkUnFavorite } from './mutations/unfavoriteItem'
 export { bulkArchive } from './mutations/archiveItem'
 export { bulkUnArchive } from './mutations/unArchiveItem'
 
