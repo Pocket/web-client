@@ -39,9 +39,12 @@ export const itemsSavedReducers = (state = {}, action) => {
     }
 
     case MUTATION_SUCCESS: {
-      const { node, id } = action
-      const { item, ...savedNode } = node
-      return { ...state, [id]: savedNode }
+      const { nodes } = action
+      const updatedItems = nodes.reduce((previous, current) => {
+        const { id, ...changes } = current
+        return { ...previous, [id]: { ...state[id], ...changes } }
+      }, {})
+      return { ...state, ...updatedItems }
     }
 
     default:
@@ -58,6 +61,7 @@ export const itemsSavedSagas = [
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
+
 function* savedItemRequest(action) {
   const { filters } = action
   const { pageInfo, edges, totalCount } = yield getSavedItems(filters) || {}

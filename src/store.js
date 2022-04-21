@@ -99,9 +99,15 @@ import { itemsReducers } from 'connectors/items/items.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
 import { itemsSavedSagas } from 'connectors/items/items-saved.state'
 
+import { mutationArchiveReducers } from 'connectors/items/mutation-archive.state'
 import { mutationArchiveSagas } from 'connectors/items/mutation-archive.state'
+
+import { mutationDeleteReducers } from 'connectors/items/mutation-delete.state'
 import { mutationDeleteSagas } from 'connectors/items/mutation-delete.state'
+
+import { mutationFavoriteReducers } from 'connectors/items/mutation-favorite.state'
 import { mutationFavoriteSagas } from 'connectors/items/mutation-favorite.state'
+
 import { mutationUpsertSagas } from 'connectors/items/mutation-upsert.state'
 
 import { mutationBulkReducers } from 'connectors/items/mutations-bulk.state'
@@ -117,6 +123,10 @@ const itemReducers = {
   items: itemsReducers,
   itemsSaved: itemsSavedReducers,
   mutationBulk: mutationBulkReducers,
+  mutationFavorite: mutationFavoriteReducers,
+  mutationArchive: mutationArchiveReducers,
+  mutationDelete: mutationDeleteReducers,
+  mutationsTags: []
 }
 
 const listReducers = {

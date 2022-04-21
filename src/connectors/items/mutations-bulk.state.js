@@ -125,6 +125,33 @@ export function* itemBulkSelect(action) {
   }
 }
 
+export function* batchSendMutations(itemIds, apiCall) {
+  const batches = yield chunk(itemIds, BATCH_SIZE)
+  let response
+  let batchCount = batches.length
+  let totalResponses = {}
+
+  yield put({ type: MUTATION_BULK_BATCH_BEGIN, batchCount, batchTotal: batchCount })
+
+  for (var batch of batches) {
+    batchCount -= 1
+    response = yield call(apiCall, batch)
+
+    // Break out of the loop when a batch fails
+    if (response.errorCode) {
+      yield put({ type: MUTATION_BULK_BATCH_FAILURE, batchCount: 0 })
+      break
+    }
+
+    totalResponses = { ...totalResponses, ...response }
+
+    yield put({ type: MUTATION_BULK_BATCH_SUCCESS, batchCount, response })
+  }
+
+  yield put({ type: MUTATION_BULK_BATCH_COMPLETE })
+
+  return yield Object.values(totalResponses)
+}
 
 /** UTILITIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
