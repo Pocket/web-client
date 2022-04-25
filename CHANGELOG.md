@@ -1,3 +1,16 @@
+# [1.43.0](https://github.com/Pocket/web-client/compare/v1.42.5...v1.43.0) (2022-04-25)
+
+
+### Bug Fixes
+
+* **api:** back to the orignial case for now ([f0d989a](https://github.com/Pocket/web-client/commit/f0d989a90ad67d8ac1ee74addffc13b6b31d46f4))
+
+
+### Features
+
+* **api:** add bulk mutations functions ([b1a107e](https://github.com/Pocket/web-client/commit/b1a107e6d42ba51b6875c7b7d26804a58cbbb09f))
+* **bulk:**  add select functionality ([1dfec11](https://github.com/Pocket/web-client/commit/1dfec11be3c8f336d735b34a3604fd032b6c6261))
+
 ## [1.42.5](https://github.com/Pocket/web-client/compare/v1.42.4...v1.42.5) (2022-04-25)
 
 
