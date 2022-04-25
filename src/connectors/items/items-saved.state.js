@@ -63,19 +63,24 @@ export const itemsSavedSagas = [
  --------------------------------------------------------------- */
 
 function* savedItemRequest(action) {
-  const { filters } = action
-  const { pageInfo, edges, totalCount } = yield getSavedItems(filters) || {}
+  try {
+    const { filters } = action
+    const { pageInfo, edges, totalCount } = yield getSavedItems(filters) || {}
 
-  if (!pageInfo) return yield put({ type: ITEMS_SAVED_PAGE_INFO_FAILURE })
-  if (!edges) return yield put({ type: ITEMS_SAVED_FAILURE })
+    if (!pageInfo) return yield put({ type: ITEMS_SAVED_PAGE_INFO_FAILURE })
+    if (!edges) return yield put({ type: ITEMS_SAVED_FAILURE })
 
-  const savedItemIds = edges.map((edge) => edge.node.id)
-  const nodes = edges.reduce(getNodeFromEdge, {})
-  const itemsById = edges.reduce(getItemFromEdge, {})
+    const savedItemIds = edges.map((edge) => edge.node.id)
+    const nodes = edges.reduce(getNodeFromEdge, {})
+    const itemsById = edges.reduce(getItemFromEdge, {})
+    const itemsCount = savedItemIds.length
 
-  yield put({ type: ITEMS_SUCCESS, itemsById })
-  yield put({ type: ITEMS_SAVED_PAGE_INFO_SUCCESS, pageInfo: { ...pageInfo, totalCount } })
-  yield put({ type: ITEMS_SAVED_SUCCESS, nodes, savedItemIds })
+    yield put({ type: ITEMS_SUCCESS, itemsById })
+    yield put({ type: ITEMS_SAVED_PAGE_INFO_SUCCESS, pageInfo: { ...pageInfo, totalCount }, itemsCount }) //prettier-ignore
+    yield put({ type: ITEMS_SAVED_SUCCESS, nodes, savedItemIds })
+  } catch (errors) {
+    yield put({ type: ITEMS_SAVED_FAILURE, errors })
+  }
 }
 
 function* savedItemSearchRequest(action) {
@@ -89,9 +94,10 @@ function* savedItemSearchRequest(action) {
   const savedItemIds = edges.map((edge) => edge.node.savedItem.id)
   const nodes = edges.reduce(getSearchNodeFromEdge, {})
   const itemsById = edges.reduce(getSearchItemFromEdge, {})
+  const itemsCount = savedItemIds.length
 
   yield put({ type: ITEMS_SUCCESS, itemsById })
-  yield put({ type: ITEMS_SAVED_PAGE_INFO_SUCCESS, pageInfo: { ...pageInfo, totalCount, searchTerm} }) //prettier-ignore
+  yield put({ type: ITEMS_SAVED_PAGE_INFO_SUCCESS, pageInfo: { ...pageInfo, totalCount, searchTerm}, itemsCount }) //prettier-ignore
   yield put({ type: ITEMS_SAVED_SUCCESS, nodes, savedItemIds })
 }
 

@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-import { ItemCard } from './card'
-import { listFullStyle } from 'components/items-layout/list-full'
+import { ListOfItems } from './list-of-items'
 
 import { searchItems } from 'containers/list-saved/list-saved.state'
 import { searchItemsUnread } from 'containers/list-saved/list-saved.state'
@@ -92,13 +91,5 @@ export const ListSaved = (props) => {
     dispatch(itemFilterFunction(searchTerm, sortOrder))
   }, [dispatch, subset, filter, searchTerm, sortOrder, sortBy])
 
-  const listSaved = useSelector((state) => state.listSaved)
-
-  return (
-    <div className={listFullStyle}>
-      {listSaved
-        ? listSaved.map((itemId, index) => <ItemCard key={itemId} id={itemId} position={index} />)
-        : null}
-    </div>
-  )
+  return <ListOfItems />
 }

@@ -15,7 +15,16 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
  * Creates a connected `Card` with the appropriate data and actions
  * @param {object} {id, position} item_id for data and position for analytics
  */
-export function ItemCard({ id, position, type }) {
+export function ItemCard({
+  id,
+  position,
+  type,
+  columnCount,
+  horizontalPadding,
+  verticalPadding,
+  width,
+  height
+}) {
   const dispatch = useDispatch()
   const appMode = useSelector((state) => state?.app?.mode)
   const bulkEdit = appMode === 'bulk'
@@ -77,8 +86,21 @@ export function ItemCard({ id, position, type }) {
   const itemImage = item?.noImage ? '' : item?.thumbnail
   const { tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
 
+  /** ITEM DIMENSIONS
+  --------------------------------------------------------------- */
+
+  const columnPosition = position % columnCount
+  const rowPosition = Math.floor(position / columnCount)
+
+  const horizontalSpacing = columnPosition * horizontalPadding
+  const veriticalSpacing = rowPosition * verticalPadding
+  const left = columnPosition * width + horizontalSpacing
+  const top = rowPosition * height + veriticalSpacing
+  const positionStyle = { position: 'absolute', left, top, width, height }
+
   return item ? (
     <Card
+      style={positionStyle}
       itemId={id}
       externalUrl={externalUrl}
       tags={tags}
@@ -111,11 +133,4 @@ export function ItemCard({ id, position, type }) {
   ) : null
 }
 
-// This seems like an over-optimization so do some actual testing here
-const isEqual = (prev, next) => {
-  const isTheSame =
-    prev.id === next.id && prev.position === next.position && prev.type === next.type
-  return isTheSame
-}
-
-export const MemoizedItem = memo(ItemCard, isEqual)
+export const MemoizedItemCard = memo(ItemCard)

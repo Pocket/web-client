@@ -43,6 +43,7 @@ import { GET_ITEMS_TAGS } from 'actions'
 import { GET_ITEMS_TAGS_UNREAD } from 'actions'
 import { GET_ITEMS_TAGS_ARCHIVED } from 'actions'
 import { GET_ITEMS_TAGS_FAVORITES } from 'actions'
+import { LOAD_MORE_ITEMS } from 'actions'
 
 /** FILTERS
  --------------------------------------------------------------- */
@@ -89,6 +90,8 @@ export const searchItemsFavorites = (searchTerm, sortOrder) => ({ type: SEARCH_S
 
 export const savedItemsSetSortOrder = (sortOrder) => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER, sortOrder}) //prettier-ignore
 export const savedItemsSetSortBy = (sortBy) => ({ type: ITEMS_SAVED_PAGE_SET_SORT_BY, sortBy })
+
+export const loadMoreListItems = () => ({ type: LOAD_MORE_ITEMS })
 
 /** LIST SAVED REDUCERS
  --------------------------------------------------------------- */
@@ -150,13 +153,14 @@ const initialState = {
   filter: {},
   sortBy: 'UPDATED_AT',
   sortOrder: 'DESC',
-  count: 30
+  count: 30,
+  error: false
 }
 export const listSavedPageInfoReducers = (state = initialState, action) => {
   switch (action.type) {
     case ITEMS_SAVED_REQUEST: {
       const { filters } = action
-      return { ...state, ...filters }
+      return { ...state, error: false, loading: true, ...filters }
     }
 
     case ITEMS_SAVED_PAGE_SET_FILTERS: {
@@ -177,8 +181,17 @@ export const listSavedPageInfoReducers = (state = initialState, action) => {
 
     case ITEMS_SAVED_PAGE_INFO_SUCCESS: {
       const { pageInfo, searchTerm } = action
-      return { ...state, ...pageInfo, searchTerm }
+      return { ...state, loading: false, ...pageInfo, searchTerm }
     }
+
+    case ITEMS_SAVED_SUCCESS: {
+      return { ...state, loading: false }
+    }
+
+    case ITEMS_SAVED_FAILURE: {
+      return { ...state, loading: false, error: true }
+    }
+
     default:
       return state
   }
@@ -190,6 +203,7 @@ export const listSavedSagas = [
   takeEvery(MUTATION_SUCCESS, reconcileMutation),
   takeEvery(MUTATION_DELETE_SUCCESS, reconcileDeleteMutation),
   takeEvery(ITEMS_UPSERT_SUCCESS, reconcileUpsert),
+  takeEvery(LOAD_MORE_ITEMS, loadMoreItems),
   takeEvery(
     [
       SEARCH_SAVED_ITEMS,
@@ -270,6 +284,28 @@ function* requestItemsWithFilter(action) {
   const { sortOrder, count } = yield select(getSavedPageInfo)
   const type = searchTerm ? ITEMS_SAVED_SEARCH_REQUEST : ITEMS_SAVED_REQUEST
   yield put({ type, filters: { filter, sort: { sortOrder, sortBy }, count, searchTerm } })
+}
+
+function* loadMoreItems() {
+  try {
+    const { searchTerm, filter, sort, endCursor } = yield select(getSavedPageInfo)
+    const { sortOrder, sortBy } = sort
+    const type = searchTerm ? ITEMS_SAVED_SEARCH_REQUEST : ITEMS_SAVED_REQUEST
+    yield put({
+      type,
+      filters: {
+        filter,
+        sort: { sortOrder, sortBy },
+        count: 30,
+        searchTerm,
+        pagination: {
+          after: endCursor
+        }
+      }
+    })
+  } catch (err) {
+    console.warn(err)
+  }
 }
 
 function shouldBeFiltered(itemDetails, filter) {

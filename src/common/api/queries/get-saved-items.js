@@ -58,6 +58,9 @@ export async function getSavedItems({ filter, sort, pagination }) {
 
 function handleResponse(response) {
   const responseData = response?.data?.user?.savedItems
+
+  if (!responseData) throw new Error(response?.errors)
+
   const { pageInfo, edges, totalCount } = responseData
   return { pageInfo, edges, totalCount }
 }

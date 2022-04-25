@@ -79,6 +79,7 @@ export const Card = (props) => {
     useMarkdown,
     partnerType,
     titleFlow = false,
+    style,
     // Tracking
     onItemInView,
     onOpenOriginalUrl,
@@ -137,6 +138,7 @@ export const Card = (props) => {
 
   return (
     <article
+      style={style}
       ref={articleRef}
       className={card}
       key={itemId}
