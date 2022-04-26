@@ -94,7 +94,7 @@ export function ItemCard({
 
   const horizontalSpacing = columnPosition * horizontalPadding
   const veriticalSpacing = rowPosition * verticalPadding
-  const left = columnPosition * width + horizontalSpacing
+  const left = columnCount > 1 ? columnPosition * width + horizontalSpacing : 0
   const top = rowPosition * height + veriticalSpacing
   const positionStyle = { position: 'absolute', left, top, width, height }
 
