@@ -4,6 +4,7 @@ import { MemoizedItemCard as ItemCard } from './card'
 import { useSelector, useDispatch } from 'react-redux'
 import { loadMoreListItems } from './list-saved.state'
 import { getScrollTop } from 'common/utilities'
+import { useViewport } from '@pocket/web-ui'
 
 import { css } from 'linaria'
 
@@ -11,23 +12,67 @@ const listSavedStyle = css`
   position: relative;
 `
 
+const LIST_DIMENSIONS = {
+  list: {
+    screenLargeDesktop: ['100%', 75, 1],
+    screenMediumDesktop: ['100%', 75, 1],
+    screenSmallDesktop: ['100%', 75, 1],
+    screenTinyTablet: ['100%', 75, 1],
+    screenSmallTablet: ['100%', 75, 1],
+    screenMediumTablet: ['100%', 75, 1],
+    screenLargeTablet: ['100%', 75, 1],
+    screenLargeHandset: ['100%', 75, 1],
+    screenMediumHandset: ['100%', 130, 1],
+    screenTinyHandset: ['100%', 130, 1],
+    screenSmallHandset: ['100%', 130, 1]
+  },
+  grid: {
+    screenLargeDesktop: [295, 361, 3],
+    screenMediumDesktop: [295, 361, 3],
+    screenSmallDesktop: [295, 361, 3],
+    screenLargeTablet: [295, 361, 3],
+    screenMediumTablet: [295, 361, 3],
+    screenSmallTablet: [295, 326, 3],
+    screenTinyTablet: ['100%', 174, 1],
+    screenLargeHandset: ['100%', 154, 1],
+    screenMediumHandset: ['100%', 154, 1],
+    screenSmallHandset: ['100%', 154, 1],
+    screenTinyHandset: ['100%', 154, 1]
+  },
+  detail: {
+    screenLargeDesktop: ['100%', 160, 1],
+    screenMediumDesktop: ['100%', 160, 1],
+    screenSmallDesktop: ['100%', 160, 1],
+    screenTinyTablet: ['100%', 185, 1],
+    screenSmallTablet: ['100%', 185, 1],
+    screenMediumTablet: ['100%', 185, 1],
+    screenLargeTablet: ['100%', 185, 1],
+    screenLargeHandset: ['100%', 185, 1],
+    screenMediumHandset: ['100%', 180, 1],
+    screenTinyHandset: ['100%', 185, 1],
+    screenSmallHandset: ['100%', 185, 1]
+  }
+}
+
 export const ListOfItems = () => {
   const dispatch = useDispatch()
+  const viewport = useViewport()
 
   const listSaved = useSelector((state) => state.listSaved)
   const totalCount = useSelector((state) => state.listSavedPageInfo.totalCount)
+  const type = useSelector((state) => state.app.listMode)
 
   const [startingIndex, setStartingIndex] = useState(0)
 
+  // Set up state to track for virtualization
+  const breakpoint = getBreakpoint(viewport.width)
+  const [width, height, columnCount] = LIST_DIMENSIONS[type][breakpoint]
+
   const itemsOnScreen = 30
-  const columnCount = 3
-  const width = 295
-  const height = 350
   const verticalPadding = 15
   const horizontalPadding = 25
-  const totalColumns = 3
 
-  const blockRows = listSaved.length / totalColumns
+  const blockRows = listSaved.length / columnCount
   const totalHeight = blockRows * height + blockRows * verticalPadding
 
   /** FUNCTIONS
@@ -73,6 +118,7 @@ export const ListOfItems = () => {
                   key={itemId}
                   id={itemId}
                   position={positionOfItem}
+                  type={type}
                   columnCount={columnCount}
                   width={width}
                   height={height}
@@ -87,4 +133,22 @@ export const ListOfItems = () => {
       <LoadMore loadMore={loadMore} />
     </>
   )
+}
+
+// !! We can do better
+// Currently viewport provider just polls screen resizes
+// We can listen for breakpoint changes instead so there is less churn of these
+// values. But we can do that when the virtualization switches to absolute
+function getBreakpoint(width) {
+  if (width <= 359) return 'screenTinyHandset'
+  if (width <= 399) return 'screenSmallHandset'
+  if (width <= 479) return 'screenMediumHandset'
+  if (width <= 599) return 'screenLargeHandset'
+  if (width <= 719) return 'screenTinyTablet'
+  if (width <= 839) return 'screenSmallTablet'
+  if (width <= 959) return 'screenMediumTablet'
+  if (width <= 1023) return 'screenLargeTablet'
+  if (width <= 1279) return 'screenSmallDesktop'
+  if (width <= 1439) return 'screenMediumDesktop'
+  return 'screenLargeDesktop'
 }
