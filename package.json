@@ -23,7 +23,7 @@
     "storybook:build": "build-storybook",
     "locale:inject": "node ./.scripts/localization/locale-inject",
     "locale:parse": "node ./.scripts/localization/locale-parse",
-    "schema": "rover graph introspect https://client-api.getpocket.com >| schema.graphql"
+    "schema": "rover graph fetch pocket-client-api@current >| schema.graphql"
   },
   "jest-junit": {
     "addFileAttribute": "true"
