@@ -22,7 +22,8 @@
     "storybook": "start-storybook -p 9009 -s ./public -h localhost.web-client.getpocket.com",
     "storybook:build": "build-storybook",
     "locale:inject": "node ./.scripts/localization/locale-inject",
-    "locale:parse": "node ./.scripts/localization/locale-parse"
+    "locale:parse": "node ./.scripts/localization/locale-parse",
+    "schema": "rover graph introspect https://client-api.getpocket.com >| schema.graphql"
   },
   "jest-junit": {
     "addFileAttribute": "true"
