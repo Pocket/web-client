@@ -26,6 +26,7 @@ import { SearchPageHeader } from 'components/headers/search-page-header'
 import MyList from 'containers/my-list/my-list'
 import SearchList from 'containers/my-list/search-page/search-page'
 
+import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
 import { BulkFavoriteModal } from 'connectors/confirm-favorite/confirm-bulk-favorite'
 import { BulkDeleteModal } from 'connectors/confirm-delete/confirm-bulk-delete'
 import { BulkArchiveModal } from 'connectors/confirm-archive/confirm-bulk-archive'
@@ -102,6 +103,7 @@ export const List = (props) => {
       <BulkFavoriteModal />
       <BulkDeleteModal />
       <BulkArchiveModal />
+      <MutationTaggingModal />
 
       <Toasts />
       <Onboarding type="my-list.flyaway.extensions" />

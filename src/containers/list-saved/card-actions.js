@@ -20,6 +20,7 @@ import { mutationUnFavorite } from 'connectors/items/mutation-favorite.state'
 import { mutationArchive } from 'connectors/items/mutation-archive.state'
 import { mutationDelete } from 'connectors/items/mutation-delete.state'
 import { mutationUnArchive } from 'connectors/items/mutation-archive.state'
+import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -32,7 +33,7 @@ export function ActionsMyList({ id, position }) {
   const item = useSelector((state) => state.items[id])
 
   if (!itemSaved || !item) return null
-  const { permanentUrl, isFavorite, isArchived, analyticsData: passedAnalyticsData } = itemSaved
+  const { permanentUrl, isFavorite, isArchived, analyticsData: passedAnalyticsData, tags} = itemSaved //prettier-ignore
   const { givenUrl } = item
   const analyticsData = { ...passedAnalyticsData, id, position }
 
@@ -46,8 +47,7 @@ export function ActionsMyList({ id, position }) {
   // const itemUnArchive = () => dispatch(mutationUnArchive(id)) // This is more of an undo
   const itemFavorite = () => dispatch(mutationFavorite(id))
   const itemUnFavorite = () => dispatch(mutationUnFavorite(id))
-
-  const itemTag = () => {}
+  const itemTag = () => dispatch(mutationTagItem(id, tags))
 
   const itemPermLibOpen = () => {
     const data = { ...analyticsData, url: permanentUrl }

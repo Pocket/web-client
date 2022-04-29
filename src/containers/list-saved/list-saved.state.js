@@ -253,7 +253,7 @@ function* reconcileMutation(action) {
     .filter((node) => shouldBeFiltered({ item: items[node?.id], node }, filter))
     .map((node) => node.id)
 
-  if (idsToRemove) yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, idsToRemove })
+  if (idsToRemove.length) yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, idsToRemove })
 }
 
 function* reconcileDeleteMutation(action) {
@@ -311,6 +311,7 @@ function* loadMoreItems() {
 
 function shouldBeFiltered(itemDetails, filter) {
   const { item, node } = itemDetails
+
   if (node?.status === 'DELETED') return true
   if (filter?.contentType === 'IS_READABLE' && !item?.isArticle) return true
   if (filter?.contentType === 'IS_VIDEO' && item?.hasVideo !== 'IS_VIDEO') return true
