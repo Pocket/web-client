@@ -19,7 +19,7 @@ export const Content = ({
   annotations = [],
   annotationsBuilt = () => {},
   onHighlightHover,
-  externalLinkClick,
+  externalLinkClick = () => {},
   ...args
 }) => {
   const articleRef = useRef(null)

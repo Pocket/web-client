@@ -104,7 +104,6 @@ export const deleteAnnotation = ({ itemId, annotation_id }) => ({ type: ANNOTATI
 export const getReadItem = (id) => ({ type: READ_ITEM_REQUEST, id }) //prettier-ignore
 export const favoriteItem = (id) => ({ type: READ_FAVORITE_REQUEST, id }) //prettier-ignore
 export const unFavoriteItem = (id) => ({ type: READ_UNFAVORITE_REQUEST, id }) //prettier-ignore
-// export const deleteItem = (id) => ({ type: READ_DELETE_REQUEST, id }) //prettier-ignore
 export const archiveItem = (id) => ({ type: READ_ARCHIVE_REQUEST, id }) //prettier-ignore
 export const unArchiveItem = (id) => ({ type: READ_UNARCHIVE_REQUEST, id }) //prettier-ignore
 export const setHighlightList = (highlightList) => ({ type: READ_SET_HIGHLIGHTS, highlightList }) //prettier-ignore

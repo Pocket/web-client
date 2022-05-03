@@ -96,8 +96,6 @@ export const Highlights = ({ children, id }) => {
     annotationsBuilt: buildAnnotations
   }
 
-  console.log(highlights)
-
   return (
     <>
       {React.cloneElement(children, passedProps)}
