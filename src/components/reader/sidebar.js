@@ -100,6 +100,8 @@ export const Sidebar = ({
     })
   }
 
+  const testCklick = () => console.log('testclick')
+
   return (
     <aside className={classNames(sideBarWrapper, { active: sideBarOpen })}>
       <Rail
@@ -119,7 +121,7 @@ export const Sidebar = ({
         <div className={classNames(buttonRail, 'button-rail')}>
           <div className={verticallyCentered}>
             <button
-              onClick={toggleSidebar}
+              onClick={sideBarOpen ? toggleSidebar: null}
               aria-label={
                 sideBarOpen
                   ? t('nav:close-highlights-menu', 'Close Highlights Menu')
