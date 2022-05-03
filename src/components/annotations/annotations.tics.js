@@ -95,7 +95,7 @@ const floatingCardStyles = css`
 
 const Card = ({ annotation, shareItem, deleteAnnotation }) => {
   const id = annotation.annotation_id || annotation.id
-  const createdAt = annotation.created_at || annotation._createdAt
+  const createdAt = annotation.created_at || annotation._createdAt * 1000
 
   return annotation ? (
     <CardPositioning

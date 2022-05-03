@@ -70,7 +70,7 @@ export class QuoteList extends Component {
         // const active = annot.coordY > viewPort.top && annot.coordY < viewPort.bottom
         const active = false
         const id = annot.annotation_id || annot.id
-        const createdAt = annot.created_at || annot._createdAt
+        const createdAt = annot.created_at || annot._createdAt * 1000
 
         cards.push(
           <div
