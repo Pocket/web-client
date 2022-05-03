@@ -150,17 +150,6 @@ function* getTagSuggestions(action) {
   yield put({ type: MUTATION_TAG_SUGGESTION_SUCCESS, tagSuggestions })
 }
 
-export function getIdsForRemoval(tags, tagsWithId) {
-  const existingTags = Object.keys(tagsWithId)
-  const tagsToRemove = existingTags.filter((tag) => !tags.includes(tag))
-  return tagsToRemove.map((tag) => tagsWithId[tag]?.id)
-}
-
-export function getTagsToAdd(tags, tagsWithId) {
-  const tagNames = Object.keys(tagsWithId)
-  return tags.filter((tag) => !tagNames.includes(tag))
-}
-
 function getTaggingFunction(tagNames, isBulk) {
   if (isBulk) return bulkTagging
   if (!tagNames.length) return itemTagsRemove
