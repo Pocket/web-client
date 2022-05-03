@@ -1,9 +1,11 @@
 import { put, call, select, takeEvery, takeLatest } from 'redux-saga/effects'
 import { arrayToObject } from 'common/utilities'
-import { itemTagsReplace, itemTagsRemove } from 'common/api/mutations/tagItem'
+import { itemTagsReplace, itemTagsRemove, bulkTagging } from 'common/api/mutations/tagItem'
 import { getTagSuggestionById } from 'common/api/queries/get-tag-suggestions'
 
 import { MUTATION_TAGGING } from 'actions'
+import { MUTATION_BULK_TAGGING } from 'actions'
+
 import { MUTATION_TAG_ADD } from 'actions'
 import { MUTATION_TAG_REMOVE } from 'actions'
 import { MUTATION_SUCCESS } from 'actions'
@@ -23,6 +25,7 @@ import { MUTATION_TAG_SUGGESTION_FAILURE } from 'actions'
 export const mutationTagConfirm = (value) => ({ type: MUTATION_TAG_CONFIRM, value })
 export const mutationTagCancel = () => ({ type: MUTATION_TAG_CANCEL })
 export const mutationTagItem = (itemId, tags) => ({ type: MUTATION_TAGGING, itemId, tags })
+export const mutationBulkTag = (itemIds) => ({ type: MUTATION_BULK_TAGGING, itemIds })
 export const mutationTagAdd = (tag) => ({ type: MUTATION_TAG_ADD, tag })
 export const mutationTagRemove = (tags) => ({ type: MUTATION_TAG_REMOVE, tags })
 export const mutationTagSelect = (tag) => ({ type: MUTATION_TAG_SELECT, tag })
@@ -37,7 +40,8 @@ const initialTaggingState = {
   itemIds: [],
   tagSuggestions: [],
   tagSuggestionRequest: 'idle',
-  needsSaving: false
+  needsSaving: false,
+  isBulk: false
 }
 
 export const mutationTaggingReducers = (state = initialTaggingState, action) => {
@@ -53,6 +57,11 @@ export const mutationTaggingReducers = (state = initialTaggingState, action) => 
         tagNames,
         tagsWithId
       }
+    }
+
+    case MUTATION_BULK_TAGGING: {
+      const { itemIds } = action
+      return { ...state, itemIds, isBulk: true }
     }
 
     case MUTATION_TAG_ADD: {
@@ -124,8 +133,8 @@ const getTagMutationState = (state) => state.mutationTagging
 function* confirmTagMutations() {
   try {
     const tagMutationState = yield select(getTagMutationState)
-    const { tagNames, itemIds } = tagMutationState
-    const taggingFunction = tagNames.length ? itemTagsReplace : itemTagsRemove
+    const { tagNames, itemIds, isBulk } = tagMutationState
+    const taggingFunction = getTaggingFunction(tagNames, isBulk)
 
     const nodes = yield call(taggingFunction, itemIds, tagNames)
 
@@ -150,4 +159,10 @@ export function getIdsForRemoval(tags, tagsWithId) {
 export function getTagsToAdd(tags, tagsWithId) {
   const tagNames = Object.keys(tagsWithId)
   return tags.filter((tag) => !tagNames.includes(tag))
+}
+
+function getTaggingFunction(tagNames, isBulk) {
+  if (!tagNames.length) return itemTagsRemove
+  if (!isBulk) return itemTagsReplace
+  return bulkTagging
 }

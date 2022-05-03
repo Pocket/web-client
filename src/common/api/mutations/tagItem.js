@@ -1,6 +1,18 @@
 import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
 
+const itemsTagsAddQuery = gql`
+  mutation ItemsTagsAdd($input: [SavedItemTagsInput!]!) {
+    createSavedItemTags(input: $input) {
+      id
+      tags {
+        name
+        id
+      }
+    }
+  }
+`
+
 const itemTagsReplaceQuery = gql`
   mutation ItemTagsReplace($input: [SavedItemTagsInput!]!) {
     replaceSavedItemTags(input: $input) {
@@ -27,85 +39,6 @@ const itemTagsRemoveQuery = gql`
   }
 `
 
-const itemTagDeleteQuery = gql`
-  mutation ItemTagsDelete($deleteInput: [DeleteSavedItemTagsInput!]!) {
-    deleteSavedItemTags(input: $deleteInput) {
-      savedItemId
-      tagId
-    }
-  }
-`
-
-const itemTagAddQuery = gql`
-  mutation ItemTagsCreate($addInput: [TagCreateInput!]!) {
-    createTags(input: $addInput) {
-      _updatedAt
-      savedItems {
-        edges {
-          node {
-            itemId: id
-            tags {
-              name
-              id
-            }
-          }
-        }
-      }
-    }
-  }
-`
-
-const itemTagUpdateQuery = gql`
-  mutation ItemTagsUpdate(
-    $addInput: [TagCreateInput!]!
-    $deleteInput: [DeleteSavedItemTagsInput!]!
-  ) {
-    createTags(input: $addInput) {
-      _updatedAt
-      savedItems {
-        edges {
-          node {
-            itemId: id
-            tags {
-              name
-              id
-            }
-          }
-        }
-      }
-    }
-    deleteSavedItemTags(input: $deleteInput) {
-      savedItemId
-      tagId
-    }
-  }
-`
-
-export function itemTagUpdate(itemIds, idsToRemove, tagsToAdd) {
-  const query =
-    idsToRemove.length && tagsToAdd.length
-      ? itemTagUpdateQuery
-      : tagsToAdd.length
-      ? itemTagAddQuery
-      : itemTagDeleteQuery
-
-  const addInput = itemIds.map((savedItemId) =>
-    tagsToAdd.map((name) => ({
-      name,
-      savedItemId
-    }))
-  )
-
-  const deleteInput = itemIds.map((savedItemId) => ({ savedItemId, tagIds: idsToRemove }))
-
-  return requestGQL({
-    query,
-    variables: { addInput: addInput.flat(), deleteInput }
-  })
-    .then((response) => response?.data)
-    .catch((error) => console.error(error))
-}
-
 export function itemTagsReplace(itemIds, tags) {
   const input = itemIds.map((id) => ({ savedItemId: id, tags }))
 
@@ -124,5 +57,13 @@ export function itemTagsRemove(itemIds) {
   })
     .then((response) => response?.data?.updateSavedItemRemoveTags)
     .then((node) => [node])
+    .catch((error) => console.error(error))
+}
+
+export function bulkTagging(itemIds, tags) {
+  const input = itemIds.map((itemId) => ({ savedItemId: itemId, tags }))
+  return requestGQL({ query: itemsTagsAddQuery, variables: { input } })
+    .then((response) => response?.data?.createSavedItemTags)
+    .then((nodes) => nodes)
     .catch((error) => console.error(error))
 }
