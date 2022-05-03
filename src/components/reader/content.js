@@ -16,8 +16,8 @@ export const Content = ({
   content,
   images,
   videos,
-  annotations,
-  annotationsBuilt,
+  annotations = [],
+  annotationsBuilt = () => {},
   onHighlightHover,
   externalLinkClick,
   ...args

@@ -94,18 +94,21 @@ const floatingCardStyles = css`
 `
 
 const Card = ({ annotation, shareItem, deleteAnnotation }) => {
+  const id = annotation.annotation_id || annotation.id
+  const createdAt = annotation.created_at || annotation._createdAt
+
   return annotation ? (
     <CardPositioning
       show
       onClick={(e) => e.stopPropagation()}
-      key={annotation.annotation_id}
+      key={id}
       addedStyles={floatingCardStyles}>
       <Quote>{annotation.quote}</Quote>
-      <CreatedDate>{annotation.created_at}</CreatedDate>
+      <CreatedDate>{createdAt}</CreatedDate>
       <div className={menuWrapper}>
         <AnnotationMenu
           visible
-          id={annotation.annotation_id}
+          id={id}
           shareItem={shareItem}
           quote={annotation.quote}
           deleteAnnotation={deleteAnnotation}
@@ -124,7 +127,7 @@ const HighlightIndex = ({
   children
 }) => {
   const [hoverOpen, setHover] = useState(false)
-  const [loading, setLoading] = useState(!annotation?.created_at)
+  const [loading, setLoading] = useState(!annotation?.created_at || !annotation._createdAt)
   let timer
 
   useEffect(() => {

@@ -13,8 +13,9 @@ export const HighlightInlineMenu = ({
   if (annotationCount === 0) return null
 
   highlightList.forEach((highlight) => {
+    const id = highlight.annotation_id || highlight.id
     const el = document.querySelector(
-      `[annotation_id="${highlight.annotation_id}"]`
+      `[annotation_id="${id}"]`
     )
 
     if (el) {
@@ -22,9 +23,9 @@ export const HighlightInlineMenu = ({
       inlineMenus.push(
         <AnnotationMenu
           isPremium={isPremium}
-          key={highlight.annotation_id}
-          id={highlight.annotation_id}
-          visible={highlightHovered?.id === highlight.annotation_id}
+          key={id}
+          id={id}
+          visible={highlightHovered?.id === id}
           top={Math.round(y + window.pageYOffset)}
           left={x + el.offsetLeft}
           shareItem={shareItem}

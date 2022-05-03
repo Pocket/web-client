@@ -158,6 +158,11 @@ export function deriveProfile(feedItem, legacy) {
   return deriveItem({ item, node: { ...rest, status: false }, cursor, utmId: 'pocket_profile' })
 }
 
+export function deriveReaderItem(item) {
+  const derivedItem = deriveItemData({ item, utmId: 'pocket_reader' })
+  return derivedItem
+}
+
 export function deriveItem({
   item,
   cursor = '',

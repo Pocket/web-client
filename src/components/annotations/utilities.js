@@ -4,7 +4,8 @@ export function compileAnnotations(highlightList) {
   const listWithPosition = []
 
   highlightList.forEach((item) => {
-    const el = document.querySelector(`[annotation_id="${item.annotation_id}"]`)
+    const id = item.annotation_id || item.id
+    const el = document.querySelector(`[annotation_id="${id}"]`)
     listWithPosition.push({
       ...item,
       position: Math.round(el.getBoundingClientRect().top + window.pageYOffset)
@@ -251,8 +252,9 @@ function highlight(node, className, annotation, tapListener, callback) {
     } else {
       parentNode.removeChild(node)
     }
+    const id = annotation.annotation_id || annotation.id
     newNode = doc.createElement('span')
-    newNode.setAttribute('annotation_id', annotation.annotation_id)
+    newNode.setAttribute('annotation_id', id)
 
     newNode.appendChild(doc.createTextNode(textMiddle))
     newNode.className = className

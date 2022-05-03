@@ -69,24 +69,26 @@ export class QuoteList extends Component {
       .forEach((annot) => {
         // const active = annot.coordY > viewPort.top && annot.coordY < viewPort.bottom
         const active = false
+        const id = annot.annotation_id || annot.id
+        const createdAt = annot.created_at || annot._createdAt
 
         cards.push(
           <div
             onClick={(e) => e.stopPropagation()}
-            key={annot.annotation_id}
+            key={id}
             className={classNames(cardStyles, activeCardStyles, { active })}>
             <Quote
               // aria-label={translate('annotations.scrollTo')}
               onClick={() => onClickEvent(annot.position)}>
               {annot.quote}
             </Quote>
-            <CreatedDate>{annot.created_at}</CreatedDate>
+            <CreatedDate>{createdAt}</CreatedDate>
 
             <div className={menuWrapper}>
               <AnnotationMenu
                 visible
                 alignRight
-                id={annot.annotation_id}
+                id={id}
                 shareItem={shareItem}
                 deleteAnnotation={deleteAnnotation}
                 quote={annot.quote}
