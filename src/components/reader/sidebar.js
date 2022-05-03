@@ -100,8 +100,6 @@ export const Sidebar = ({
     })
   }
 
-  const testCklick = () => console.log('testclick')
-
   return (
     <aside className={classNames(sideBarWrapper, { active: sideBarOpen })}>
       <Rail
