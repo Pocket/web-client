@@ -26,6 +26,7 @@ export const ContentWrapper = ({ id }) => {
         videos={videos}
         content={article}
         externalLinkClick={externalLinkClick}
+        style={{ padding: '40px' }}
       />
     </Highlights>
   )

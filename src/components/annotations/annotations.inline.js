@@ -20,6 +20,7 @@ export const HighlightInlineMenu = ({
 
     if (el) {
       const { x, y } = el.getBoundingClientRect()
+
       inlineMenus.push(
         <AnnotationMenu
           isPremium={isPremium}
@@ -27,7 +28,7 @@ export const HighlightInlineMenu = ({
           id={id}
           visible={highlightHovered?.id === id}
           top={Math.round(y + window.pageYOffset)}
-          left={x + el.offsetLeft}
+          left={x}
           shareItem={shareItem}
           quote={highlight.quote}
           deleteAnnotation={deleteAnnotation}

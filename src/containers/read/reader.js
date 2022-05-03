@@ -45,8 +45,6 @@ export const articleWrapperStyles = css`
   }
 
   .reader {
-    position: relative;
-    padding: 0 var(--spacing250);
     margin: var(--spacing250) auto;
     width: 100%;
   }
