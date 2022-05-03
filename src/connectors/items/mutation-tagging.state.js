@@ -162,7 +162,7 @@ export function getTagsToAdd(tags, tagsWithId) {
 }
 
 function getTaggingFunction(tagNames, isBulk) {
+  if (isBulk) return bulkTagging
   if (!tagNames.length) return itemTagsRemove
-  if (!isBulk) return itemTagsReplace
-  return bulkTagging
+  return itemTagsReplace
 }
