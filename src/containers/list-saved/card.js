@@ -32,6 +32,7 @@ export function ItemCard({
   // Get data from state
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const item = useSelector((state) => state.items[id])
+  const itemSaved = useSelector((state) => state.itemsSaved[id])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const bulkList = useSelector((state) => state.mutationBulk.itemIds)
   const bulkCurrent = useSelector((state) => state.mutationBulk.currentId)
@@ -84,8 +85,8 @@ export function ItemCard({
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const { tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
-
+  const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
+  const { tags } = itemSaved
   /** ITEM DIMENSIONS
   --------------------------------------------------------------- */
 
