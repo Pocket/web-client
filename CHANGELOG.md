@@ -1,3 +1,11 @@
+## [1.45.3](https://github.com/Pocket/web-client/compare/v1.45.2...v1.45.3) (2022-05-04)
+
+
+### Bug Fixes
+
+* **one trust:** remove check for personalized ([8260f87](https://github.com/Pocket/web-client/commit/8260f8775c7ef1d3c5acc2b44dc41d8739c45202))
+* **one trust:** remove personalized checks ([a7641f9](https://github.com/Pocket/web-client/commit/a7641f9d78cb053415b7d0cddeb4417f4c61eeb5))
+
 ## [1.45.2](https://github.com/Pocket/web-client/compare/v1.45.1...v1.45.2) (2022-05-03)
 
 
