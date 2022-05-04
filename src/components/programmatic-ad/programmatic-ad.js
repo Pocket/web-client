@@ -42,13 +42,11 @@ export const initPageAdConfig = ({
   urlPath,
   iabTopCategory,
   iabSubCategory,
-  usePersonalized,
   legacyId: syndicatedArticleId,
   nav,
   etpValue
 }) => {
   // values here have character length max of 20 for keys, 40 for values
-  const personalized = usePersonalized ? 0 : 1
   global.googletag
     .pubads()
     .setTargeting('URL', [`${urlPath}`])
@@ -77,8 +75,6 @@ export const initPageAdConfig = ({
 
   global.googletag.pubads().addEventListener('impressionViewable', refreshFunction)
 
-  global.googletag.pubads().disableInitialLoad()
-  global.googletag.pubads().setRequestNonPersonalizedAds(personalized)
   global.googletag.enableServices()
 }
 
