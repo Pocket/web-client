@@ -37,10 +37,6 @@ const inputStyle = css`
 export class TagInput extends Component {
   /* Input Events
   –––––––––––––––––––––––––––––––––––––––––––––––––––– */
-  onFocus = (event) => {
-    this.props.onFocus(event)
-  }
-
   onBlur = (event) => {
     this.props.onBlur && this.props.onBlur(event)
   }
