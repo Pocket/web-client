@@ -1,6 +1,5 @@
 import React from 'react'
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import { CrossIcon } from '@pocket/web-ui'
 
@@ -62,37 +61,26 @@ const closeWrapper = css`
   }
 `
 
-export class Tag extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.removeClick = () => {
-      const { removeClick, children } = props
-      if (removeClick) removeClick(children)
-    }
-
-    this.selectClick = () => {
-      const { selectClick, children } = props
-      if (selectClick) selectClick(children)
-    }
+export function Tag({ removeClick, selectClick, children, selected, margin }) {
+  const onRemoveClick = (e) => {
+    e.stopPropagation()
+    if (removeClick) removeClick(children)
   }
 
-  render() {
-    const { children, removeClick, selected, action, margin } = this.props
-    return (
-      <div
-        className={classNames(tagBase, tagWrapper, { action, selected })}
-        style={{ margin }}
-        onClick={this.selectClick}>
-        {children}
-        {removeClick ? (
-          <button
-            className={classNames(buttonReset, closeWrapper, { selected })}
-            onClick={this.removeClick}>
-            <CrossIcon />
-          </button>
-        ) : null}
-      </div>
-    )
-  }
+  const onSelectClick = () => (selectClick ? selectClick(children) : null)
+
+  const action = selectClick ? true : false
+  const tagClass = cx(tagBase, tagWrapper, action && 'action', selected && 'selected')
+  const removeClass = cx(buttonReset, closeWrapper, selected && 'selected')
+
+  return (
+    <div className={tagClass} style={{ margin }} onClick={onSelectClick}>
+      {children}
+      {removeClick ? (
+        <button className={removeClass} onClick={onRemoveClick}>
+          <CrossIcon />
+        </button>
+      ) : null}
+    </div>
+  )
 }

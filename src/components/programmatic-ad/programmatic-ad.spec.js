@@ -82,8 +82,6 @@ describe('ProgrammaticAd', () => {
 
       expect(setTargetingSpy).toHaveBeenCalledTimes(metaDataCount)
       expect(enableServicesSpy).toHaveBeenCalledTimes(1)
-      expect(disableInitialLoadSpy).toHaveBeenCalledTimes(1)
-      expect(setRequestNonPersonalizedAdsSpy).toHaveBeenCalledTimes(1)
     })
   })
 

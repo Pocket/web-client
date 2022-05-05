@@ -37,10 +37,6 @@ const inputStyle = css`
 export class TagInput extends Component {
   /* Input Events
   –––––––––––––––––––––––––––––––––––––––––––––––––––– */
-  onFocus = (event) => {
-    this.props.onFocus(event)
-  }
-
   onBlur = (event) => {
     this.props.onBlur && this.props.onBlur(event)
   }
@@ -104,8 +100,7 @@ export class TagInput extends Component {
 
       if (this.props.value.trim()) {
         this.props.addTag(`${this.props.value}`)
-      }
-      else {
+      } else {
         this.props.submitForm()
       }
       return
@@ -148,7 +143,6 @@ export class TagInput extends Component {
           inputClassName={inputStyle}
           value={this.props.value}
           onChange={this.onChange}
-          onFocus={this.onFocus}
           onBlur={this.onBlur}
           onKeyUp={this.onKeyUp}
           onKeyDown={this.onInput}

@@ -26,27 +26,9 @@ let OptanonAnalyticsCookie
 global.OptanonWrapper = () => {
   const onetrustCookies = arrayToObject(updateCategories(global.OptanonActiveGroups), 'name')
   const analyticsEnabled = onetrustCookies?.analytics.enabled
-  const trackingEnabled = onetrustCookies?.tracking.enabled
 
   if (OptanonAnalyticsCookie && !analyticsEnabled) return window.location.reload()
   OptanonAnalyticsCookie = analyticsEnabled
-
-  const personalized = trackingEnabled ? 0 : 1
-  checkPersonalizedAds(personalized)
-}
-
-const checkPersonalizedAds = (personalized) => {
-  if (!global.googletag) return // Google ads aren't on page
-
-  if (global.googletag.apiReady) {
-    global.googletag.pubads().disableInitialLoad()
-    global.googletag.pubads().setRequestNonPersonalizedAds(personalized)
-  }
-  else {
-    setTimeout(() => {
-      checkPersonalizedAds(personalized)
-    }, 50)
-  }
 }
 
 export const updateOnetrustData = (groups) => ({ type: ONE_TRUST_DATA, groups })

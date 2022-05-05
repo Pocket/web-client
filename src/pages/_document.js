@@ -36,7 +36,7 @@ class ClientDocument extends Document {
           <script 
             src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  
             type="text/javascript" 
-            charset="UTF-8" 
+            charSet="UTF-8" 
             data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e"></script>
           {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
         </Head>

@@ -6,8 +6,7 @@ import { mutationBulkUnArchive } from 'connectors/items/mutation-archive.state'
 import { mutationBulkDelete } from 'connectors/items/mutation-delete.state'
 import { mutationBulkFavorite } from 'connectors/items/mutation-favorite.state'
 import { mutationBulkUnFavorite } from 'connectors/items/mutation-favorite.state'
-
-// import { mutationBulkTag } from 'connectors/items/mutation-tag.state'
+import { mutationBulkTag } from 'connectors/items/mutation-tagging.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { useDispatch, useSelector } from 'react-redux'
@@ -44,9 +43,9 @@ function GlobalNavBulkEditConnected({ onClose }) {
 
   const tagAction = () => {
     if (bulkItemsCount) {
-      // const items = buildBulkForAnalytics()
-      // dispatch(sendSnowplowEvent('global-nav.bulk.tag', items))
-      // dispatch(mutationBulkTag('tag'))
+      const items = buildBulkForAnalytics()
+      dispatch(sendSnowplowEvent('global-nav.bulk.tag', items))
+      dispatch(mutationBulkTag(bulkItems))
     }
   }
 

@@ -108,6 +108,9 @@ import { mutationDeleteSagas } from 'connectors/items/mutation-delete.state'
 import { mutationFavoriteReducers } from 'connectors/items/mutation-favorite.state'
 import { mutationFavoriteSagas } from 'connectors/items/mutation-favorite.state'
 
+import { mutationTaggingReducers } from 'connectors/items/mutation-tagging.state'
+import { mutationTaggingSagas } from 'connectors/items/mutation-tagging.state'
+
 import { mutationUpsertSagas } from 'connectors/items/mutation-upsert.state'
 
 import { mutationBulkReducers } from 'connectors/items/mutations-bulk.state'
@@ -126,7 +129,7 @@ const itemReducers = {
   mutationFavorite: mutationFavoriteReducers,
   mutationArchive: mutationArchiveReducers,
   mutationDelete: mutationDeleteReducers,
-  mutationsTags: []
+  mutationTagging: mutationTaggingReducers
 }
 
 const listReducers = {
@@ -248,7 +251,8 @@ function* rootSaga() {
     ...mutationDeleteSagas,
     ...mutationFavoriteSagas,
     ...mutationUpsertSagas,
-    ...mutationBulkSagas
+    ...mutationBulkSagas,
+    ...mutationTaggingSagas
   ])
 }
 
