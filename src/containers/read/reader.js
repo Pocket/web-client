@@ -14,7 +14,7 @@ import { ContentWrapper } from 'connectors/reader/content'
 import { Recommendations } from 'containers/read/recommendations'
 import { Upsell } from 'connectors/reader/upsell'
 
-import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
+import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
 import { Toasts } from 'connectors/toasts/toast-list'
@@ -142,7 +142,7 @@ export default function Reader() {
       <Upsell />
 
       <DeleteModal />
-      <TaggingModal />
+      <MutationTaggingModal />
       <ShareModal />
       <Toasts />
 

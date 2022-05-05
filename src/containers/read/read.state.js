@@ -73,6 +73,8 @@ import { READ_UNFAVORITE_SUCCESS } from 'actions'
 import { READ_UNFAVORITE_FAILURE } from 'actions'
 
 import { MUTATION_DELETE_SUCCESS } from 'actions'
+import { MUTATION_SUCCESS } from 'actions'
+import { READ_MUTATE_SAVED_DATA } from 'actions'
 
 import { READ_ARCHIVE_REQUEST } from 'actions'
 import { READ_ARCHIVE_SUCCESS } from 'actions'
@@ -202,6 +204,11 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, savedData }
     }
 
+    case READ_MUTATE_SAVED_DATA: {
+      const { savedData } = action
+      return { ...state, savedData }
+    }
+
     case READ_SET_HIGHLIGHTS: {
       const { highlightList } = action
       return { ...state, highlightList }
@@ -288,12 +295,14 @@ export const readSagas = [
   takeEvery(READ_UNARCHIVE_SUCCESS, redirectToList),
   takeEvery(HIGHLIGHT_SAVE_REQUEST, highlightSaveRequest),
   takeEvery(HIGHLIGHT_DELETE_REQUEST, highlightDeleteRequest),
+  takeEvery(MUTATION_SUCCESS, checkMutations)
 ]
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getAnnotations = (state) => state.reader.annotations
 const getHighlights = (state) => state.reader.savedData?.annotations?.highlights
+const getSavedData = (state) => state.reader.savedData
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -448,6 +457,15 @@ function* highlightDeleteRequest({ annotationId }) {
   } catch (error) {
     yield put({ type: HIGHLIGHT_DELETE_FAILURE, error })
   }
+}
+
+function* checkMutations({ nodes }) {
+  // if not on reader -or- if bulk edit
+  if (document.location.href.indexOf('/read/') === -1 || nodes.length > 1) return
+
+  const oldSavedData = yield select(getSavedData)
+  const savedData = { ...oldSavedData, ...nodes[0] }
+  yield put({ type: READ_MUTATE_SAVED_DATA, savedData })
 }
 
 function redirectToList() {

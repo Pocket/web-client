@@ -8,6 +8,7 @@ import { unFavoriteItem } from 'containers/read/read.state'
 import { archiveItem } from 'containers/read/read.state'
 import { unArchiveItem } from 'containers/read/read.state'
 import { mutationDelete } from 'connectors/items/mutation-delete.state'
+import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -31,14 +32,15 @@ export const Toolbar = ({ id }) => {
 
   const {
     isArchived,
-    isFavorite
+    isFavorite,
+    tags
   } = savedData
 
   const handleSidebarToggle = () => dispatch(toggleSidebar())
 
   const itemTag = () => {
     dispatch(sendSnowplowEvent('reader.tag', analyticsData))
-    // dispatch(itemsTagAction([{ id }]))
+    dispatch(mutationTagItem(id, tags))
   }
 
   const itemShare = ({ quote }) => {
