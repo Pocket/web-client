@@ -35,22 +35,17 @@ export const Highlights = ({ children, id }) => {
 
   const toggleHighlight = () => {
     const selection = window.getSelection()
-    if (selection.toString()) {
-      setHighlight(selection)
-    } else if (highlight) {
-      setHighlight(null)
-    }
+    if (selection.toString()) return setHighlight(selection)
+    if (highlight) return setHighlight(null)
   }
 
   const toggleHighlightHover = (e) => {
-    if (e.type === 'mouseout') {
-      setHighlightHovered(null)
-    } else {
-      setHighlightHovered({
-        id: e.target.getAttribute('annotation_id'),
-        event: e
-      })
-    }
+    if (e.type === 'mouseout') return setHighlightHovered(null)
+
+    setHighlightHovered({
+      id: e.target.getAttribute('annotation_id'),
+      event: e
+    })
   }
 
   const clearSelection = () => {
@@ -59,18 +54,16 @@ export const Highlights = ({ children, id }) => {
   }
 
   const addAnnotation = () => {
-    if (annotations.length === 3 && !isPremium) {
-      setAnnotationLimitModal(true)
-    } else {
-      dispatch(sendSnowplowEvent('reader.add-highlight', analyticsData))
-      dispatch(
-        saveHighlightRequest({
-          id,
-          patch: requestAnnotationPatch(highlight),
-          quote: highlight.toString()
-        })
-      )
-    }
+    if (annotations.length === 3 && !isPremium) return setAnnotationLimitModal(true)
+
+    dispatch(sendSnowplowEvent('reader.add-highlight', analyticsData))
+    dispatch(
+      saveHighlightRequest({
+        id,
+        patch: requestAnnotationPatch(highlight),
+        quote: highlight.toString()
+      })
+    )
   }
 
   const removeAnnotation = (annotationId) => {
