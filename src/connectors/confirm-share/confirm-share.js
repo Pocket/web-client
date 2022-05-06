@@ -10,7 +10,6 @@ import { itemsShareCancel } from 'connectors/items-by-id/my-list/items.share'
 import { ShareSocial } from './share-social'
 import { SelectShareType } from './select-share-type'
 
-// import { ShareToFriend } from './share-to-friend'
 import { ShareRecommend } from './share-recommend'
 
 const shareQuote = css`
