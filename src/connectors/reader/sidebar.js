@@ -4,6 +4,7 @@ import { Sidebar } from 'components/reader/sidebar'
 
 import { toggleSidebar } from 'containers/read/read.state'
 import { deleteHighlightRequest } from 'containers/read/read.state'
+import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const SidebarWrapper = ({ id }) => {
@@ -27,7 +28,7 @@ export const SidebarWrapper = ({ id }) => {
 
   const itemShare = ({ quote }) => {
     dispatch(sendSnowplowEvent('reader.share', analyticsData))
-    // dispatch(itemsShareAction({ id, quote }))
+    dispatch(itemsShareAction({ id, quote }))
   }
 
   const removeAnnotation = (annotationId) => {

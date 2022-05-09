@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { css } from 'linaria'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'next-i18next'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 import { Modal, ModalBody, ModalTabs } from 'components/modal/modal'
 
@@ -25,6 +26,12 @@ const shareQuote = css`
 export const ShareModal = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
+
+  const flagsReady = useSelector((state) => state.features.flagsReady)
+  const featureState = useSelector((state) => state.features)
+  const readerApiNext = flagsReady && featureFlagActive({ flag: 'reader.client-api', featureState })
+  const listApiNext = flagsReady && featureFlagActive({ flag: 'api.next', featureState })
+  const useClientAPI = readerApiNext || listApiNext
 
   /**
    * State and state actions
@@ -77,7 +84,9 @@ export const ShareModal = () => {
         {quote ? <p className={shareQuote}>{quote}</p> : null}
       </ModalBody>
       <ModalTabs>
-        <SelectShareType active={active} activate={activate} />
+        {!useClientAPI ? (
+          <SelectShareType active={active} activate={activate} />
+        ) : null}
         {active === 'social' ? (
           <ShareSocial
             openUrl={openUrl}
