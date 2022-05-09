@@ -4,7 +4,7 @@ export const pageview = (url) => {
   gtag('set', 'page_path', url)
   gtag('event', 'page_view')
 
-  // This is how every blog things it should be done
+  // This is how every blog thinks it should be done
   // gtag('config', GOOGLE_ANALYTICS_ID, {
   //   page_path: url
   // })
