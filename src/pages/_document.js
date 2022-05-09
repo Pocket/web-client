@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { COLOR_MODE_PREFIX, CACHE_KEY_COLOR_MODE } from 'common/constants'
+import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 
 class ClientDocument extends Document {
   render() {
@@ -39,6 +40,25 @@ class ClientDocument extends Document {
             charSet="UTF-8" 
             data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e"></script>
           {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
+
+          {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GOOGLE_ANALYTICS_ID}', {
+              page_path: window.location.pathname,
+            });
+          `
+            }}
+          />
+
         </Head>
         <body>
           <Main />

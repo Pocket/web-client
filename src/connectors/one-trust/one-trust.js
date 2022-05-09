@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 
-import ReactGA from 'react-ga'
+import { pageview } from 'common/utilities/analytics/ga'
 import { loadOptinMonster } from 'common/utilities/third-party/opt-in-monster'
-import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 import { ONETRUST_EMPTY_DEFAULT } from 'common/constants'
 import { trackPageView } from 'connectors/snowplow/snowplow.state'
 import { initializeSnowplow } from 'common/setup/snowplow'
@@ -52,9 +51,6 @@ export function PostTrustInit() {
     const finalizeInit = () => dispatch(finalizeSnowplow())
     initializeSnowplow(user_id, sess_guid, analyticsCookie, finalizeInit)
 
-    // Set up Google Analytics
-    ReactGA.initialize(GOOGLE_ANALYTICS_ID)
-
     // Setting this so we don't get a glut of false positives with shifting
     // cookie preferences
     analyticsInitSet(true)
@@ -66,14 +62,21 @@ export function PostTrustInit() {
     loadOptinMonster()
   }, [isProduction])
 
-  // Track Page Views
+  // Track Snowplow Page Views
   useEffect(() => {
     if (user_status === 'pending') return null
     if (!analyticsInit) return null
 
     dispatch(trackPageView())
-    ReactGA.pageview(path)
   }, [user_status, sess_guid, user_id, path, dispatch, analyticsInit])
+
+  // Track GA Page Views
+  useEffect(() => {
+    router.events.on('routeChangeComplete', pageview)
+    return () => {
+      router.events.off('routeChangeComplete', pageview)
+    }
+  }, [router.events, dispatch])
 
   return <></>
 }

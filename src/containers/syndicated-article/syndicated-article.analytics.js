@@ -1,5 +1,5 @@
-import ReactGA from 'react-ga'
 import { v4 as uuid } from 'uuid'
+import GA from 'common/utilities/analytics/ga'
 import { legacyAnalyticsTrack } from 'common/api/_legacy/legacy-analytics'
 
 export const PUBLISHER_MODULE = 'syndicated_publisher'
@@ -8,7 +8,7 @@ export const POCKET_MODULE = 'syndicated_article'
 let PAGE_LOAD_ID = uuid()
 
 export function trackPublisherCTAImpression(publisher) {
-  ReactGA.event({
+  GA.event({
     category: 'Storypage',
     action: 'Viewed Publisher CTA',
     label: publisher,
@@ -17,7 +17,7 @@ export function trackPublisherCTAImpression(publisher) {
 }
 
 export function trackPublisherCTAClick(publisher) {
-  ReactGA.event({
+  GA.event({
     category: 'Storypage',
     action: 'Clicked Publisher CTA',
     label: publisher,
@@ -26,7 +26,7 @@ export function trackPublisherCTAClick(publisher) {
 }
 
 export function trackEmailSubmitSuccess(formId) {
-  ReactGA.event({
+  GA.event({
     category: 'Storypage',
     action: 'Newsletter Signup',
     label: 'Pocket Hits',
@@ -36,7 +36,7 @@ export function trackEmailSubmitSuccess(formId) {
 }
 
 export function trackScrollDepth(depth) {
-  ReactGA.event({
+  GA.event({
     category: 'Storypage',
     action: 'Scrolled Page',
     label: `${depth}%`,
@@ -70,7 +70,7 @@ export function trackRecImpression({
     type_id: 0
   })
 
-  ReactGA.event({
+  GA.event({
     category: 'Storypage',
     action: 'Viewed Recommendation',
     label: `${location} - ${position}`,
@@ -96,7 +96,7 @@ export function trackRecClick({ model, recId, articleId, position, resolvedId, m
     type_id: 1
   })
 
-  ReactGA.event({
+  GA.event({
     category: 'Storypage',
     action: 'Clicked Recommendation',
     label: `${location} - ${position}`,
