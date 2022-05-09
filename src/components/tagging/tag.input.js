@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import AutosizeInput from 'react-input-autosize'
+import React from 'react'
+import AutosizeInput from 'components/input-autosize/input-autosize'
 import { KEYS } from 'common/constants'
 import { css } from 'linaria'
 import { validateEmail } from 'common/utilities'
@@ -34,51 +34,62 @@ const inputStyle = css`
   padding: 2px 0;
 `
 
-export class TagInput extends Component {
+export function TagInput(props) {
+  const {
+    onBlur,
+    setValue,
+    value,
+    handleRemoveAction,
+    hasActiveTags,
+    setBlur,
+    deactivateTags,
+    email,
+    addTag,
+    submitForm,
+    characterLimit,
+    hasError,
+    setError,
+    clearError,
+    inputRef
+  } = props
+
   /* Input Events
   –––––––––––––––––––––––––––––––––––––––––––––––––––– */
-  onBlur = (event) => {
-    this.props.onBlur && this.props.onBlur(event)
-  }
-
-  onChange = (event) => {
-    this.props.setValue(event.target.value)
-  }
-
-  onKeyUp = (event) => {
+  const onChange = (event) => setValue(event.target.value)
+  const onKeyUp = (event) => {
     switch (event.keyCode) {
       // Handle intent to remove
       case KEYS.BACKSPACE:
       case KEYS.DELETE: {
-        this.clearError()
-        if (!this.props.value.length) this.props.handleRemoveAction()
+        clearInputError()
+        if (!value.length) handleRemoveAction()
         return
       }
 
       // Handle intent to exit
       case KEYS.ESCAPE: {
-        this.clearError()
-        this.props.setValue('')
-        if (this.props.hasActiveTags) this.props.deactivateTags()
-        if (!this.props.value.length) this.props.setBlur()
+        clearInputError()
+        setValue('')
+        if (hasActiveTags) deactivateTags()
+        if (!value.length) setBlur()
         return
       }
 
       // How necessary is this on every keyup
       default:
-        if (this.props.hasActiveTags) this.props.deactivateTags()
+        if (hasActiveTags) deactivateTags()
     }
   }
 
-  onInput = (event) => {
+  const onKeyInput = (event) => {
     // Check email validation
     if (
       event.charCode === KEYS.COMMA ||
       event.keyCode === KEYS.TAB ||
       event.keyCode === KEYS.ENTER
     ) {
-      if (this.props.email && !validateEmail(this.props.value)) {
-        this.setError()
+      if (email && !validateEmail(value)) {
+        setInputError()
         event.preventDefault()
         event.stopPropagation()
         return
@@ -89,7 +100,7 @@ export class TagInput extends Component {
     if (event.charCode === KEYS.COMMA || event.keyCode === KEYS.TAB) {
       event.preventDefault()
       event.stopPropagation()
-      this.props.addTag(`${this.props.value}`)
+      addTag(`${value}`)
       return
     }
 
@@ -98,18 +109,14 @@ export class TagInput extends Component {
       event.preventDefault()
       event.stopPropagation()
 
-      if (this.props.value.trim()) {
-        this.props.addTag(`${this.props.value}`)
-      } else {
-        this.props.submitForm()
-      }
-      return
+      if (value.trim()) return addTag(`${value}`)
+      submitForm()
     }
 
     // Set error on tag length limit
     if (
-      this.props.value &&
-      this.props.value.length > this.props.characterLimit &&
+      value &&
+      value.length > characterLimit &&
       event.keyCode !== KEYS.BACKSPACE &&
       event.keyCode !== KEYS.DELETE &&
       event.keyCode !== KEYS.LEFT &&
@@ -118,37 +125,30 @@ export class TagInput extends Component {
       event.keyCode !== KEYS.DOWN &&
       event.keyCode !== KEYS.ENTER
     ) {
-      this.setError()
+      setInputError()
       event.preventDefault()
       return
     }
   }
 
-  setError = () => {
-    if (!this.props.hasError) this.props.setError()
-  }
+  const setInputError = () => (!hasError ? setError() : null)
+  const clearInputError = () => (hasError ? clearError() : null)
 
-  clearError = () => {
-    if (this.props.hasError) this.props.clearError()
-  }
-
-  render() {
-    return (
-      <div className={inputWrapper}>
-        <AutosizeInput
-          data-cy="tagging-input"
-          autoFocus={true} //eslint-disable-line
-          className={autoWrapper}
-          inputRef={this.props.inputRef}
-          inputClassName={inputStyle}
-          value={this.props.value}
-          onChange={this.onChange}
-          onBlur={this.onBlur}
-          onKeyUp={this.onKeyUp}
-          onKeyDown={this.onInput}
-          onKeyPress={this.onInput}
-        />
-      </div>
-    )
-  }
+  return (
+    <div className={inputWrapper}>
+      <AutosizeInput
+        data-cy="tagging-input"
+        autoFocus={true} //eslint-disable-line
+        className={autoWrapper}
+        inputRef={inputRef}
+        inputClassName={inputStyle}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        onKeyUp={onKeyUp}
+        onKeyDown={onKeyInput}
+        onKeyPress={onKeyInput}
+      />
+    </div>
+  )
 }
