@@ -42,7 +42,7 @@ export const request = ({
    * @option ssrHeaders - These append a passed in cookie and origin since
    * that  is not set automatically on the server
    *
-   * @option apolloHeaders - These allow us to see our graphql specific requests
+   * @option clientInfo - These allow us to see our graphql specific requests
    * separated out in Apollo Studio.
    */
   const clientHeaders = {
@@ -50,7 +50,7 @@ export const request = ({
     'Content-Type': 'application/json',
     'X-Accept': 'application/json; charset=UTF8'
   }
-  const ssrHeaders = { Cookie: cookie, Origin: 'https://getpocket.com' }
+  const ssrHeaders = { Cookie: cookie, Origin: 'https://getpocket.com', ...clientInfo }
   const headers = ssr ? ssrHeaders : clientHeaders
 
   // The Promise returned from fetch() won’t reject on HTTP error status even if
@@ -118,18 +118,18 @@ export const postMime = ({ api_url = API_URL, params = {}, path, method = 'POST'
 }
 
 export const requestGQL = (data) => {
-  // const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
+  const RELEASE_VERSION = process.env.RELEASE_VERSION || 'v0.0.0'
 
-  // const clientInfo = {
-  //   'apollographql-client-name': 'web-client',
-  //   'apollographql-client-version': RELEASE_VERSION
-  // }
+  const clientInfo = {
+    'apollographql-client-name': 'web-client',
+    'apollographql-client-version': RELEASE_VERSION
+  }
 
   return request({
     api_url: GRAPHQL_URL,
     path: 'graphql',
     method: 'POST',
-    // clientInfo,
+    clientInfo,
     body: JSON.stringify(data)
   })
 }
