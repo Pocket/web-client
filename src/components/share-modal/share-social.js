@@ -1,11 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
-
-import { FacebookShareButton } from 'react-share'
-import { TwitterShareButton } from 'react-share'
-import { LinkedinShareButton } from 'react-share'
-import { RedditShareButton } from 'react-share'
-
+import { getObjectWithValidKeysOnly } from 'common/utilities'
 import { css } from 'linaria'
 
 import copy from 'clipboard-copy'
@@ -55,10 +50,6 @@ const socialIcons = css`
     }
   }
 
-  .buffer-button {
-    padding: 0;
-  }
-
   .icon {
     height: 1.5rem;
     line-height: 1rem;
@@ -67,25 +58,81 @@ const socialIcons = css`
   }
 `
 
-export const BufferShareButton = ({ url, text, onShareWindowClose, children, ...rest }) => {
-  const prepareWindow = (url, quote, callback) => {
-    const opts = {
-      name: 'buffer',
-      height: 550,
-      width: 750
-    }
-    const text = quote ? `&text=${quote}` : ''
-    const link = `https://bufferapp.com/add?url=${encodeURIComponent(url)}${text}`
-    openWindow(link, opts, callback)
+const SocialNetworks = {
+  facebook: {
+    width: 550,
+    height: 400,
+    params: ['u', 'quote'], // u === url
+    shareUrl: 'https://www.facebook.com/sharer/sharer.php'
+  },
+  twitter: {
+    width: 550,
+    height: 400,
+    params: ['url', 'text'], // text === title
+    shareUrl: 'https://twitter.com/share'
+  },
+  linkedin: {
+    width: 750,
+    height: 600,
+    params: ['url', 'title', 'summary'],
+    shareUrl: 'https://www.reddit.com/submit'
+  },
+  reddit: {
+    width: 660,
+    height: 460,
+    params: ['url', 'title'],
+    shareUrl: 'https://www.reddit.com/submit'
+  },
+  buffer: {
+    width: 750,
+    height: 550,
+    params: ['url', 'text'], // text === quote || excerpt
+    shareUrl: 'https://bufferapp.com/add'
   }
+}
+
+function buildLink(network, rest) {
+  const { params, shareUrl } = SocialNetworks[network]
+
+  const tmpParams = params.reduce((obj, key) => ({ ...obj, [key]: rest[key] }), {})
+  const searchParams = getObjectWithValidKeysOnly(tmpParams)
+
+  const url = new URL(shareUrl)
+  url.search = new URLSearchParams(searchParams)
+  return url.href
+}
+
+export const SocialButton = ({
+  network,
+  label,
+  dataTooltip,
+  onSocialShare,
+  children,
+  ...rest
+}) => {
+  const { width, height } = SocialNetworks[network]
+  const link = buildLink(network, rest)
+  const opts = {
+    name: network,
+    width,
+    height
+  }
+
+  const callbackHandler = () => onSocialShare(network)
 
   const clickHandler = (e) => {
     e.preventDefault()
-    prepareWindow(url, text, onShareWindowClose)
+    openWindow(link, opts, callbackHandler)
   }
 
   return (
-    <button onClick={clickHandler} {...rest}>
+    <button
+      onClick={clickHandler}
+      className={topTooltipDelayed}
+      aria-label={label}
+      data-tooltip={label}
+      data-cy={`share-${network}`}
+    >
       {children}
     </button>
   )
@@ -124,61 +171,56 @@ export const ShareSocial = ({
         onClick={copyUrl}>
         <LinkCopyIcon />
       </button>
-      <FacebookShareButton
-        aria-label={t('share:share-to-facebook', 'Share to Facebook')}
-        data-tooltip={t('share:share-to-facebook', 'Share to Facebook')}
-        data-cy="share-facebook"
-        className={topTooltipDelayed}
-        resetButtonStyle={false}
-        onShareWindowClose={() => onSocialShare('facebook')}
+      <SocialButton
+        network="facebook"
+        label={t('share:share-to-facebook', 'Share to Facebook')}
+        onSocialShare={onSocialShare}
         quote={quote}
-        url={openUrl}>
+        u={openUrl}
+      >
         <FacebookColorIcon />
-      </FacebookShareButton>
-      <TwitterShareButton
-        aria-label={t('share:share-to-twitter', 'Share to Twitter')}
-        data-tooltip={t('share:share-to-twitter', 'Share to Twitter')}
-        data-cy="share-twitter"
-        className={topTooltipDelayed}
-        resetButtonStyle={false}
-        onShareWindowClose={() => onSocialShare('twitter')}
-        title={title}
-        url={openUrl}>
+      </SocialButton>
+
+      <SocialButton
+        network="twitter"
+        label={t('share:share-to-twitter', 'Share to Twitter')}
+        onSocialShare={onSocialShare}
+        text={title}
+        url={openUrl}
+      >
         <TwitterColorIcon />
-      </TwitterShareButton>
-      <LinkedinShareButton
-        aria-label={t('share:share-to-linkedin', 'Share to LinkedIn')}
-        data-tooltip={t('share:share-to-linkedin', 'Share to LinkedIn')}
-        data-cy="share-linkedin"
-        className={topTooltipDelayed}
-        resetButtonStyle={false}
-        onShareWindowClose={() => onSocialShare('linkedin')}
+      </SocialButton>
+
+      <SocialButton
+        network="linkedin"
+        label={t('share:share-to-linkedin', 'Share to LinkedIn')}
+        onSocialShare={onSocialShare}
         title={title}
         summary={quote || excerpt}
-        url={openUrl}>
+        url={openUrl}
+      >
         <LinkedinMonoIcon />
-      </LinkedinShareButton>
-      <RedditShareButton
-        aria-label={t('share:share-to-reddit', 'Share to Reddit')}
-        data-tooltip={t('share:share-to-reddit', 'Share to Reddit')}
-        data-cy="share-reddit"
-        className={topTooltipDelayed}
-        resetButtonStyle={false}
-        onShareWindowClose={() => onSocialShare('reddit')}
+      </SocialButton>
+
+      <SocialButton
+        network="reddit"
+        label={t('share:share-to-reddit', 'Share to Reddit')}
+        onSocialShare={onSocialShare}
         title={title}
-        url={openUrl}>
+        url={openUrl}
+      >
         <RedditMonoIcon />
-      </RedditShareButton>
-      <BufferShareButton
-        aria-label={t('share:share-to-buffer', 'Share to Buffer')}
-        data-tooltip={t('share:share-to-buffer', 'Share to Buffer')}
-        data-cy="share-buffer"
-        className={topTooltipDelayed}
-        onShareWindowClose={() => onSocialShare('buffer')}
-        quote={quote || excerpt}
-        url={openUrl}>
+      </SocialButton>
+
+      <SocialButton
+        network="buffer"
+        label={t('share:share-to-buffer', 'Share to Buffer')}
+        onSocialShare={onSocialShare}
+        text={quote || excerpt}
+        url={openUrl}
+      >
         <BufferIcon />
-      </BufferShareButton>
+      </SocialButton>
     </div>
   )
 }

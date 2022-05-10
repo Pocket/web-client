@@ -8,7 +8,7 @@ export const ShareModalConnector = () => {
 
   const item = useSelector((state) => state.share.item)
   const quote = useSelector((state) => state.share.quote)
-  const position = useSelector((state) => state.share.position)
+  const position = useSelector((state) => state.share.position) || 0
   const cancelShare = () => dispatch(shareCancel())
 
   if (!item) return null
