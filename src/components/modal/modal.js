@@ -297,6 +297,7 @@ Modal.propTypes = {
 }
 
 Modal.defaultProps = {
+  appRootSelector: '#__next',
   title: undefined,
   isOpen: false,
   forceMobile: false,

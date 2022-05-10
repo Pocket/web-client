@@ -16,7 +16,7 @@ import { Upsell } from 'connectors/reader/upsell'
 
 import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
-import { ShareModal } from 'connectors/confirm-share/confirm-share'
+import { ShareModalConnector } from 'connectors/share-modal/share-modal'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { Onboarding } from 'connectors/onboarding/onboarding'
 
@@ -143,7 +143,7 @@ export default function Reader() {
 
       <DeleteModal />
       <MutationTaggingModal />
-      <ShareModal />
+      <ShareModalConnector />
       <Toasts />
 
       <Onboarding type="reader.flyaway.apps" />

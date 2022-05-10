@@ -10,6 +10,8 @@ import { unArchiveItem } from 'containers/read/read.state'
 import { mutationDelete } from 'connectors/items/mutation-delete.state'
 import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
 
+import { shareAction } from 'connectors/share-modal/share-modal.state'
+
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const Toolbar = ({ id }) => {
@@ -45,7 +47,7 @@ export const Toolbar = ({ id }) => {
 
   const itemShare = ({ quote }) => {
     dispatch(sendSnowplowEvent('reader.share', analyticsData))
-    // dispatch(itemsShareAction({ id, quote }))
+    dispatch(shareAction({ item, quote }))
   }
 
   const itemDelete = () => {

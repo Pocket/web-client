@@ -94,6 +94,8 @@ import { shortcutSagas } from 'connectors/shortcuts/shortcuts.state.js'
 import { onboardingReducers } from 'connectors/onboarding/onboarding.state'
 import { onboardingSagas } from 'connectors/onboarding/onboarding.state'
 
+import { shareModalReducers } from 'connectors/share-modal/share-modal.state'
+
 //Items (From the graph)
 import { itemsReducers } from 'connectors/items/items.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
@@ -191,7 +193,8 @@ const globalReducers = {
   toasts: actionToastsReducers, // Notifications of action results,
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
-  onboarding: onboardingReducers // Onboarding
+  onboarding: onboardingReducers, // Onboarding
+  share: shareModalReducers // Share
 }
 
 const userAccountReducers = {

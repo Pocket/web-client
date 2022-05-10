@@ -22,6 +22,8 @@ import { mutationDelete } from 'connectors/items/mutation-delete.state'
 import { mutationUnArchive } from 'connectors/items/mutation-archive.state'
 import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
 
+import { shareAction } from 'connectors/share-modal/share-modal.state'
+
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export function ActionsMyList({ id, position }) {
@@ -39,7 +41,7 @@ export function ActionsMyList({ id, position }) {
 
   /** ITEM MENU ITEMS
   --------------------------------------------------------------- */
-  const itemShare = () => {}
+  const itemShare = () => dispatch(shareAction({ item, position }))
 
   const itemDelete = () => dispatch(mutationDelete(id))
   const itemArchive = () => dispatch(mutationArchive(id))

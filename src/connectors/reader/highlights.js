@@ -9,6 +9,7 @@ import { deleteHighlightRequest } from 'containers/read/read.state'
 import { setHighlightList } from 'containers/read/read.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { shareAction } from 'connectors/share-modal/share-modal.state'
 import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 
@@ -73,7 +74,7 @@ export const Highlights = ({ children, id }) => {
 
   const itemShare = ({ quote }) => {
     dispatch(sendSnowplowEvent('reader.share', analyticsData))
-    // dispatch(itemsShareAction({ id, quote }))
+    dispatch(shareAction({ item, quote }))
   }
 
   const closeAnnotationLimit = () => setAnnotationLimitModal(false)
