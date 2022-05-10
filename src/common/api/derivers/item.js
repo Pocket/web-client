@@ -60,6 +60,7 @@ import { BASE_URL } from 'common/constants'
  * @param readUrl — item action when the user clicks on the image or title of a saved item
  * @param saveUrl — the url to use when an item is to be saved from a save action
  * @param permanentUrl — url for Pockets internal library [premium feature]
+ * @param syndicatedUrl — url using slug for a syndicated article [facilitates testing syndicated articles]
  *
  * Display Properties
  * ————————————————————————————————————
@@ -206,6 +207,7 @@ export function deriveItemData({
     externalUrl: externalUrl({ item, itemEnrichment, utmId }),
     readUrl: readUrl({ item, status: node?.status }),
     saveUrl: saveUrl({ item, itemEnrichment }),
+    syndicatedUrl: syndicatedUrl({ item }),
     permanentUrl: permanentUrl({ item, status: node?.status }),
     isSyndicated: syndicated({ item }),
     isReadable: isReadable({ item }),
@@ -266,6 +268,7 @@ function publisher({ item, itemEnrichment, passedPublisher }) {
   const urlToUse = item?.givenUrl || item?.resolvedUrl
   const derivedDomain = domainForUrl(urlToUse)
   const syndicatedPublisher = item?.syndicatedArticle?.publisher?.name
+  //prettier-ignore
   return (
     syndicatedPublisher ||        // Syndicated - provided by curation
     passedPublisher ||            // Collections - hardcoded as 'Pocket'
@@ -378,6 +381,16 @@ export function readUrl({ item, itemEnrichment, status }) {
  */
 function permanentUrl({ item, status }) {
   return status ? urlWithPermanentLibrary(item?.itemId) || false : false
+}
+
+/** SYNDICATED URL
+ * ————————————————————————————————————
+ * @param {object} item An item returned from the server
+ * @returns {string} The url for permanent library
+ */
+function syndicatedUrl({ item }) {
+  const slug = item?.syndicatedArticle?.slug
+  return slug ? `/explore/item/${slug}` : false
 }
 
 function fromPartner({ itemEnrichment }) {

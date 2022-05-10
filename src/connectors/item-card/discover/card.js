@@ -19,9 +19,9 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
   const item = useSelector((state) => state.discoverItemsById[id])
   if (!item) return null
 
-  const { saveStatus, itemId, readUrl, externalUrl, openExternal } = item
+  const { saveStatus, itemId, readUrl, externalUrl, openExternal, syndicatedUrl } = item
+  const openUrl = openExternal ? externalUrl : syndicatedUrl || readUrl || externalUrl
 
-  const openUrl = readUrl && !openExternal ? readUrl : externalUrl
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
     id,
