@@ -35,8 +35,9 @@ export const CardLineup = ({ id, position, className, cardShape, showExcerpt = f
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
-  const openUrl = readUrl || externalUrl
+  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner, syndicatedUrl } = item //prettier-ignore
+  const openUrl = syndicatedUrl || readUrl || externalUrl
+
   return (
     <Card
       itemId={itemId}
