@@ -1,3 +1,10 @@
+## [1.46.4](https://github.com/Pocket/web-client/compare/v1.46.3...v1.46.4) (2022-05-10)
+
+
+### Bug Fixes
+
+* **share:** adding new share modal that operates independently of v3 or clientapi ([52700ec](https://github.com/Pocket/web-client/commit/52700ec2361948af0b840fd56257a7de514825d1))
+
 ## [1.46.3](https://github.com/Pocket/web-client/compare/v1.46.2...v1.46.3) (2022-05-09)
 
 
