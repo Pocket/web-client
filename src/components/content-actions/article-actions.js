@@ -116,10 +116,10 @@ function buildShareUrl(url, source) {
 
 function buildEmailUrl(shareUrl, title, excerpt) {
   const builtUrl = buildShareUrl(shareUrl, 'emailsynd')
-  const body = excerpt ? `${excerpt} — ${builtUrl}` : builtUrl
-  const url = new URL(builtUrl)
-  url.search = new URLSearchParams({ subject: title, body })
-  return `mailto:${url.href}`
+  const body = excerpt
+    ? `${excerpt} — ${encodeURIComponent(builtUrl)}`
+    : encodeURIComponent(builtUrl)
+  return `mailto:?subject=${title}&body=${body}`
 }
 
 export const ArticleActions = function ({

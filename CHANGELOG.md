@@ -1,3 +1,10 @@
+## [1.46.7](https://github.com/Pocket/web-client/compare/v1.46.6...v1.46.7) (2022-05-11)
+
+
+### Bug Fixes
+
+* **share:** fix email share button ([0102391](https://github.com/Pocket/web-client/commit/0102391bdd7ceaf04b989dc436ca1aa26323ec4c))
+
 ## [1.46.6](https://github.com/Pocket/web-client/compare/v1.46.5...v1.46.6) (2022-05-11)
 
 
