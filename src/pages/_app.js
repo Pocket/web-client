@@ -18,6 +18,8 @@ import { hydrateSettings } from 'connectors/settings/settings.state'
 
 import { PostTrustInit } from 'connectors/one-trust/one-trust'
 
+import { BRAZE_API_KEY_DEV, BRAZE_API_KEY_PROD, BRAZE_SDK_ENDPOINT } from 'common/constants'
+
 /** Setup Files
  --------------------------------------------------------------- */
 import { loadPolyfills } from 'common/setup/polyfills'
@@ -34,6 +36,30 @@ function PocketWebClient({ Component, pageProps, err }) {
   const { user_status, user_id, sess_guid, birth, user_models } = useSelector((state) => state.user) //prettier-ignore
   const { flagsReady } = useSelector((state) => state.features)
   const { authRequired } = pageProps
+
+  useEffect(() => {
+    if (!user_id) return
+
+    // when user logs out, create new anonymous braze session
+    // when user is not logged in, track them as an anonymous user
+    // when they do log in after being anonymous, make sure we update the session with their new user_id
+    // look into whether we can pass through the app version to Braze
+
+    const version = process.env.RELEASE_VERSION || 'v.0.0.0'
+    const isDev = process.env.NODE_ENV === 'development'
+    const APIKey = isDev ? BRAZE_API_KEY_DEV : BRAZE_API_KEY_PROD
+
+    import('../common/utilities/braze/braze-lazy-load').then(
+      ({ initialize, automaticallyShowInAppMessages, changeUser, openSession }) => {
+        initialize(APIKey, {
+          baseUrl: BRAZE_SDK_ENDPOINT,
+          appVersion: version,
+          enableLogging: isDev
+        })
+        automaticallyShowInAppMessages(), changeUser(user_id), openSession()
+      }
+    )
+  }, [user_id])
 
   useEffect(() => {
     // Log out version for quick scan.  Can also help support get a read on
