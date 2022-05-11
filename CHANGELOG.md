@@ -1,3 +1,10 @@
+## [1.46.6](https://github.com/Pocket/web-client/compare/v1.46.5...v1.46.6) (2022-05-11)
+
+
+### Bug Fixes
+
+* **share:** remove all instances of react-share ([6996cfc](https://github.com/Pocket/web-client/commit/6996cfc22cb7c36ca4372e1e5c85c1240ca4bddb))
+
 ## [1.46.5](https://github.com/Pocket/web-client/compare/v1.46.4...v1.46.5) (2022-05-11)
 
 

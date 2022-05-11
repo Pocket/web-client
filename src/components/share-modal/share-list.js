@@ -1,18 +1,12 @@
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import { css, cx } from 'linaria'
-
 import copy from 'clipboard-copy'
 import { COPY_ITEM_URL } from 'actions'
-
 import { LinkCopyIcon } from '@pocket/web-ui'
-
 import { topTooltipDelayed } from 'components/tooltip/tooltip'
 import { socialButtonStyles } from 'components/social-button/social-button'
 import { SocialButton } from 'components/social-button/social-button'
-
-import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { itemsShareCancel } from 'connectors/items-by-id/my-list/items.share'
 
 const socialIcons = css`
   margin: 0;
@@ -21,27 +15,30 @@ const socialIcons = css`
   align-items: center;
   align-content: center;
   justify-content: space-around;
+  padding: var(--spacing100) var(--spacing150);
+  border-top: var(--dividerStyle);
 `
 
-export const ShareSocial = ({ openUrl, excerpt, title, itemId, quote, position = 0 }) => {
+export const ShareList = ({
+  openUrl,
+  excerpt,
+  title,
+  quote,
+  engagementEvent,
+  cancelShare
+}) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
-  const analyticsData = {
-    id: itemId,
-    url: openUrl,
-    position
-  }
 
-  const cancelShare = () => dispatch(itemsShareCancel())
   const onSocialShare = (service) => {
-    dispatch(sendSnowplowEvent(`share.${service}`, analyticsData))
+    engagementEvent(`share.${service}`)
     cancelShare()
   }
-  const copyAction = () => ({ type: COPY_ITEM_URL })
+
   const copyUrl = async () => {
     await copy(openUrl)
-    dispatch(sendSnowplowEvent('share.copy', analyticsData))
-    dispatch(copyAction())
+    engagementEvent('share.copy')
+    dispatch({ type: COPY_ITEM_URL }) // sends Toast
     cancelShare()
   }
 

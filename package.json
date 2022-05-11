@@ -153,7 +153,6 @@
     "react-intersection-observer": "8.33.1",
     "react-markdown": "8.0.1",
     "react-redux": "7.2.6",
-    "react-share": "4.4.0",
     "react-visibility-sensor": "5.1.1",
     "redux": "4.1.2",
     "redux-saga": "1.1.3",

@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next'
 import { Modal, ModalBody } from 'components/modal/modal'
 
 import { Card } from 'components/item-card/card'
-import { ShareSocial } from './share-social'
+import { ShareList } from './share-list'
 
 const shareQuote = css`
   margin: var(--spacing050) 0;
@@ -54,7 +54,7 @@ export const ShareModal = ({
         {quote ? <p className={shareQuote}>{quote}</p> : null}
       </ModalBody>
 
-      <ShareSocial
+      <ShareList
         openUrl={externalUrl}
         excerpt={excerpt}
         title={title}

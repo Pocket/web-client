@@ -1,18 +1,8 @@
 import { css, cx } from 'linaria'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
-import { FacebookMonoIcon } from '@pocket/web-ui'
-import { TwitterMonoIcon } from '@pocket/web-ui'
-import { RedditMonoIcon } from '@pocket/web-ui'
-import { LinkedinMonoIcon } from '@pocket/web-ui'
 import { MailIcon } from '@pocket/web-ui'
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  RedditShareButton,
-  LinkedinShareButton,
-  EmailShareButton
-} from 'react-share'
 import { breakpointMediumTablet } from '@pocket/web-ui'
+import { SocialButton } from 'components/social-button/social-button'
 
 const saveButton = css`
   min-width: 0;
@@ -54,6 +44,9 @@ const shareContainer = css`
     height: 24px;
     position: relative;
     border-radius: var(--borderRadius);
+    color: var(--color-textPrimary);
+    background: none;
+
     &:focus {
       outline-offset: 2px;
       outline-color: var(--color-actionFocus);
@@ -121,6 +114,14 @@ function buildShareUrl(url, source) {
   return `${url}?utm_source=${source}&utm_medium=social`
 }
 
+function buildEmailUrl(shareUrl, title, excerpt) {
+  const builtUrl = buildShareUrl(shareUrl, 'emailsynd')
+  const body = excerpt ? `${excerpt} — ${builtUrl}` : builtUrl
+  const url = new URL(builtUrl)
+  url.search = new URLSearchParams({ subject: title, body })
+  return `mailto:${url.href}`
+}
+
 export const ArticleActions = function ({
   isAuthenticated,
   onSave = () => {},
@@ -131,7 +132,12 @@ export const ArticleActions = function ({
   url,
   className
 }) {
+  const emailUrl = buildEmailUrl(url, title, excerpt)
   const saveAction = () => onSave(url, 'save-story-side')
+  const emailAction = () => {
+    onShare('email')
+    window.location.href = emailUrl
+  }
 
   return (
     <div className={cx(shareContainer, className)}>
@@ -148,58 +154,48 @@ export const ArticleActions = function ({
         </div>
 
         <div className="facebook-share">
-          <FacebookShareButton
-            data-cy="share-facebook"
-            onShareWindowClose={() => onShare('facebook')}
+          <SocialButton
+            network="facebook"
+            onSocialShare={onShare}
             quote={excerpt}
-            url={buildShareUrl(url, 'fbsynd')}>
-            <FacebookMonoIcon />
-          </FacebookShareButton>
+            u={buildShareUrl(url, 'fbsynd')}
+          />
         </div>
 
         <div className="twitter-share">
-          <TwitterShareButton
-            data-cy="share-twitter"
-            onShareWindowClose={() => onShare('twitter')}
-            title={title}
+          <SocialButton
+            network="twitter"
+            onSocialShare={onShare}
+            text={title}
             via="Pocket"
-            url={buildShareUrl(url, 'twtrsynd')}>
-            <TwitterMonoIcon />
-          </TwitterShareButton>
+            url={buildShareUrl(url, 'twtrsynd')}
+          />
         </div>
 
         <div className="reddit-share">
-          <RedditShareButton
-            data-cy="share-reddit"
-            onShareWindowClose={() => onShare('reddit')}
+          <SocialButton
+            network="reddit"
+            onSocialShare={onShare}
             title={title}
-            url={buildShareUrl(url, 'redditsynd')}>
-            <RedditMonoIcon />
-          </RedditShareButton>
+            url={buildShareUrl(url, 'redditsynd')}
+          />
         </div>
 
         <div className="linkedin-share">
-          <LinkedinShareButton
-            data-cy="share-linkedin"
-            onShareWindowClose={() => onShare('linkedin')}
-            summary={excerpt}
+          <SocialButton
+            network="linkedin"
+            onSocialShare={onShare}
             source="Pocket"
             title={title}
-            url={buildShareUrl(url, 'linkedinsynd')}>
-            <LinkedinMonoIcon />
-          </LinkedinShareButton>
+            summary={excerpt}
+            url={buildShareUrl(url, 'linkedinsynd')}
+          />
         </div>
 
         <div className="email-share">
-          <EmailShareButton
-            data-cy="share-email"
-            beforeOnClick={() => onShare('email')}
-            subject={title}
-            body={excerpt}
-            url={buildShareUrl(url, 'emailsynd')}
-            separator=" — ">
+          <button data-cy="share-email" onClick={emailAction}>
             <MailIcon />
-          </EmailShareButton>
+          </button>
         </div>
       </div>
     </div>
