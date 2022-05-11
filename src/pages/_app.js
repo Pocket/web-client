@@ -38,23 +38,21 @@ function PocketWebClient({ Component, pageProps, err }) {
   const { authRequired } = pageProps
 
   useEffect(() => {
-    if (!user_id) return
-
-    // when user logs out, create new anonymous braze session
-    // when user is not logged in, track them as an anonymous user
-    // when they do log in after being anonymous, make sure we update the session with their new user_id
-    // look into whether we can pass through the app version to Braze
+    if (!user_id) return // this will change when we do anonymous user tracking
 
     const version = process.env.RELEASE_VERSION || 'v.0.0.0'
     const isDev = process.env.NODE_ENV === 'development'
-    const APIKey = isDev ? BRAZE_API_KEY_DEV : BRAZE_API_KEY_PROD
+
+    // ONLY DEV FOR NOW
+    // const APIKey = isDev ? BRAZE_API_KEY_DEV : BRAZE_API_KEY_PROD // uncomment this when we are ready for production
+    const APIKey = BRAZE_API_KEY_DEV
 
     import('../common/utilities/braze/braze-lazy-load').then(
       ({ initialize, automaticallyShowInAppMessages, changeUser, openSession }) => {
         initialize(APIKey, {
           baseUrl: BRAZE_SDK_ENDPOINT,
           appVersion: version,
-          enableLogging: isDev
+          enableLogging: isDev // enable logging in development only
         })
         automaticallyShowInAppMessages(), changeUser(user_id), openSession()
       }
