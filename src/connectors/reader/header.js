@@ -15,6 +15,7 @@ export const Header = ({ id }) => {
     externalUrl,
     publisher,
     timeToRead,
+    datePublished,
     analyticsData
   } = item
 
@@ -34,6 +35,7 @@ export const Header = ({ id }) => {
       publisher={publisher}
       tags={tagList}
       timeToRead={timeToRead}
+      datePublished={datePublished}
     />
   )
 }

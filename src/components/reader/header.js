@@ -5,6 +5,7 @@ import { Pill } from '@pocket/web-ui'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import classNames from 'classnames'
 import { Trans } from 'next-i18next'
+import dayjs from 'dayjs'
 
 /* COMPONENTS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -33,10 +34,6 @@ const articleInfo = css`
   padding-bottom: 1em;
 `
 
-const byWrapper = css`
-  display: inline-block;
-`
-
 const authorWrapper = css`
   position: relative;
   display: inline-block;
@@ -44,7 +41,7 @@ const authorWrapper = css`
     position: relative;
     font-size: 0.5em;
     content: '•';
-    margin-left: 0.7em;
+    margin-left: 0.3em;
     top: -0.3em;
   }
 `
@@ -67,6 +64,11 @@ const timeWrapper = css`
     top: -0.3em;
   }
 `
+
+const dateWrapper = css`
+  margin-top: 0.5rem;
+`
+
 const pocketInfo = css`
   text-align: center;
   font-size: 18px;
@@ -125,23 +127,25 @@ export const ItemHeader = ({
   externalUrl,
   tags,
   timeToRead,
+  datePublished,
   viewOriginalEvent
 }) => {
   const authorList = listAuthors(authors)
+  const timestamp = dayjs(datePublished).format('MMMM D, YYYY')
 
   return (
     <header className={headerWrapper}>
       <h1 className={articleTitle}>{title}</h1>
 
       <div className={articleInfo}>
-        {authorList || publisher ? (
-          <div className={byWrapper}>
-            <Trans i18nKey="reader:by">By</Trans>
+        {authorList.length ? (
+          <div className={authorWrapper}>
+            <Trans i18nKey="reader:by">By</Trans> {authorList}
           </div>
-        ) : null}{' '}
-        {authorList ? <div className={authorWrapper}>{authorList}</div> : null}
+        ): null}
         {publisher ? <div className={domainWrapper}>{publisher}</div> : null}
         {timeToRead ? <div className={timeWrapper}>{timeToRead} min</div> : null}
+        {datePublished ? <div className={dateWrapper}>{timestamp}</div> : null}
       </div>
 
       <div className={pocketInfo}>
@@ -151,7 +155,8 @@ export const ItemHeader = ({
           className={viewOriginal}
           onClick={viewOriginalEvent}
           href={externalUrl}
-          target="_blank">
+          target="_blank"
+          rel="noopener noreferrer">
           <Trans i18nKey="reader:view-original">View Original</Trans>
         </a>
         {tags && (

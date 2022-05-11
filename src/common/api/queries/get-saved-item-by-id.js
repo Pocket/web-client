@@ -32,6 +32,7 @@ const getSavedItemByIdQuery = gql`
               name
               url
             }
+            datePublished
           }
         }
       }
