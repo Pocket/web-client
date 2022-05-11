@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button } from '@pocket/web-ui'
-import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
+import { Modal, ModalBody } from 'components/modal/modal'
 
 import Mousetrap from 'mousetrap'
 import { useSelector, useDispatch } from 'react-redux'
