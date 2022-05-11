@@ -46,10 +46,7 @@ const nextOptions = {
     ]
   },
   //prettier-ignore
-  webpack: (config, { isServer, webpack }) => {
-
-        // Replace @sentry/node imports with @sentry/browser when client side
-        if (!isServer) config.resolve.alias['@sentry/node'] = '@sentry/react'
+  webpack: (config, { webpack }) => {
 
         config.plugins.push(
           new webpack.DefinePlugin({
