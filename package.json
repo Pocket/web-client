@@ -117,6 +117,7 @@
     "vinyl-fs": "3.0.3"
   },
   "dependencies": {
+    "@braze/web-sdk": "4.0.1",
     "@n8tb1t/use-scroll-position": "2.0.3",
     "@pocket/web-localization": "0.20.0",
     "@pocket/web-ui": "2.36.5",
