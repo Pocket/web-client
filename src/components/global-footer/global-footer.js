@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
+import { darkMode } from '@pocket/web-ui'
 import { headingSansSerif } from '@pocket/web-ui'
 import { fontSansSerif, fontSizeRoot } from '@pocket/web-ui'
 import { breakpointSmallTablet } from '@pocket/web-ui'
@@ -48,6 +49,13 @@ const footerStyle = css`
     background-size: 1440px 9px;
     background-repeat: repeat-x;
     background-position: top center;
+  }
+
+  #ot-sdk-btn.ot-sdk-show-settings {
+    color: var(--color-textPrimary);
+    &:hover {
+      color: var(--color-textLinkHover);
+    }
   }
 
   ${breakpointTinyHandset} {
