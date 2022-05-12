@@ -90,6 +90,10 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
     }
   }
 
+  const shareAction = (platform) => {
+    dispatch(sendSnowplowEvent(`collection.share.${platform}`, { url }))
+  }
+
   return (
     <ArticleLayout
       forceWebView={true}
@@ -141,7 +145,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
               onSave={saveAction}
               saveStatus={pageSaveStatus}
               isAuthenticated={isAuthenticated}
-              onShare={() => {}}
+              onShare={shareAction}
               className="sticky"
               url={url}
             />

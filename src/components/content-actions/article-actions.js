@@ -63,9 +63,6 @@ const shareContainer = css`
     button {
       color: var(--color-textPrimary);
     }
-    ${breakpointMediumTablet} {
-      margin-top: 0.625rem;
-    }
   }
 
   .facebook-share {
@@ -101,6 +98,7 @@ const shareContainer = css`
     }
   }
   .email-share {
+    line-height: 1rem;
     button:hover,
     button:active {
       svg {
