@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
-import { darkMode } from '@pocket/web-ui'
 import { headingSansSerif } from '@pocket/web-ui'
 import { fontSansSerif, fontSizeRoot } from '@pocket/web-ui'
 import { breakpointSmallTablet } from '@pocket/web-ui'
