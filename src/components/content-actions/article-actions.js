@@ -98,12 +98,14 @@ const shareContainer = css`
     }
   }
   .email-share {
-    line-height: 1rem;
     button:hover,
     button:active {
       svg {
         color: var(--color-actionPrimary);
       }
+    }
+    ${breakpointMediumTablet} {
+      line-height: 1rem;
     }
   }
 `
