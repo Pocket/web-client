@@ -1,8 +1,6 @@
 /* global googletag, gptadslots */
 import * as Sentry from '@sentry/nextjs'
 import { useState, useEffect, useCallback } from 'react'
-import { loadAd } from './ad-helpers'
-import { destroyAllAdSlots } from './ad-helpers'
 import { css, cx } from 'linaria'
 import { REFRESH_KEY } from './ad-constants'
 import { REFRESH_VALUE } from './ad-constants'
@@ -30,7 +28,6 @@ const programmaticAdWrapperStyles = css`
  * @param adsReady(bool): this lets us know the page targeting and pubwise stuff has been setup
  * @param id(string): Identifier used to map an ad config to a div on the page
  * @param type(string): Type of ad to render (used in size mapping)
- * @param adUnitPath(string): Path to ad unit on programmatic team backend
  * @param position(string): Metadata describing where the ad is on the page. used in measuring by programmatic team
  * @param mapping(object): Mapping of browser sizes to ad sizes. Found in /programmatic-ad/ad-sizes
  * @returns
@@ -56,16 +53,12 @@ export const AdSlot = (props) => {
     if (!googleTagsReady) return
 
     setupAdSlot()
-
-    return () => {
-      destroyAllAdSlots()
-    }
   }, [googleTagsReady, setupAdSlot])
 
   useEffect(() => {
     if (!adsReady || adLoaded) return
-    loadAd(id)
     setAdLoaded(true)
+    loadAd(id)
   }, [adsReady, adLoaded, id])
 
   return (
@@ -111,7 +104,7 @@ const defineAdSlot = (params) => {
 }
 
 // Create size mapping — A convenince function to create size options for the ad
-export const createSizeMapping = (sizes) => {
+const createSizeMapping = (sizes) => {
   try {
     const mapping = googletag.sizeMapping()
     sizes.forEach(({ browserSize, adSizes }) => mapping.addSize(browserSize, adSizes))
@@ -120,6 +113,27 @@ export const createSizeMapping = (sizes) => {
     Sentry.withScope((scope) => {
       scope.setTag('third party', 'google ads')
       scope.setExtra('ad error type', 'size mapping')
+      scope.setFingerprint('Ad Error')
+      Sentry.captureMessage(err)
+    })
+  }
+}
+
+// Load ad in specified slot
+const loadAd = (slotId) => {
+  try {
+    global.googletag.display(slotId)
+    if (typeof global.pubwise !== 'undefined' && global.pubwise.enabled === true) {
+      global.pwpbjs.que.push(function () {
+        global.pwRegisterLazyLoad(global.gptadslots[slotId], 2, [50, 0, 50, 0], 0, 768, 2)
+      })
+    } else {
+      global.googletag.pubads().refresh([global.gptadslots[slotId]])
+    }
+  } catch (err) {
+    Sentry.withScope((scope) => {
+      scope.setTag('third party', 'google ads')
+      scope.setExtra('ad error type', 'load ad')
       scope.setFingerprint('Ad Error')
       Sentry.captureMessage(err)
     })

@@ -2,7 +2,6 @@
 import { useEffect, useCallback, useState } from 'react'
 import { useRouter } from 'next/router'
 import { once } from 'common/utilities/once/once'
-import { destroyAllAdSlots } from './ad-helpers'
 import { REFRESH_KEY } from './ad-constants'
 import { REFRESH_VALUE } from './ad-constants'
 
@@ -83,3 +82,9 @@ const refreshFunction = once((event) => {
     }, SECONDS_TO_WAIT_AFTER_VIEWABILITY * 1000)
   }
 })
+
+const destroyAllAdSlots = function () {
+  googletag.cmd.push(function () {
+    googletag.destroySlots()
+  })
+}
