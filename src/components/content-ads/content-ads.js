@@ -31,59 +31,59 @@ const BELOW_THE_FOLD = 'div-gpt-ad-6843487-4'
 // const NATIVE_SYNDICATION = 'div-gpt-ad-6843487-5'
 // const NATIVE_FRONT_DOOR = 'div-gpt-ad-6843487-6'
 
-export function AdAboveTheFold({ allowAds, usePersonalized, ...adTargetingMetadata }) {
+export function AdAboveTheFold({ allowAds, adsReady, ...adTargetingMetadata }) {
   return (
     <ProgrammaticAd
-      usePersonalized={usePersonalized}
       id={ABOVE_THE_FOLD}
       positionAlias="ATF"
       type={AD_TYPE_HORIZONTAL_LG}
       adTargetingMetadata={adTargetingMetadata}
-      showAd={allowAds}
+      allowAds={allowAds}
+      adsReady={adsReady}
       instanceStyles={aboveTheFoldStyle}
     />
   )
 }
 
-export function AdBelowTheFold({ allowAds, usePersonalized, ...adTargetingMetadata }) {
+export function AdBelowTheFold({ allowAds, adsReady, ...adTargetingMetadata }) {
   return (
     <ProgrammaticAd
-      usePersonalized={usePersonalized}
       id={BELOW_THE_FOLD}
       positionAlias="BTF"
       type={AD_TYPE_HORIZONTAL_M}
       adTargetingMetadata={adTargetingMetadata}
-      showAd={allowAds}
+      allowAds={allowAds}
+      adsReady={adsReady}
       instanceStyles={belowTheFoldStyle}
     />
   )
 }
 
-export function AdRailTop({ allowAds, usePersonalized, ...adTargetingMetadata }) {
+export function AdRailTop({ allowAds, adsReady, ...adTargetingMetadata }) {
   return (
     <div className={adRailStyle}>
       <ProgrammaticAd
-        usePersonalized={usePersonalized}
         id={RIGHT_RAIL_1_ID}
         positionAlias="RightRail1"
         type={AD_TYPE_VERTICAL}
         adTargetingMetadata={adTargetingMetadata}
-        showAd={allowAds}
+        allowAds={allowAds}
+        adsReady={adsReady}
       />
     </div>
   )
 }
 
-export function AdRailBottom({ allowAds, usePersonalized, ...adTargetingMetadata }) {
+export function AdRailBottom({ allowAds, adsReady, ...adTargetingMetadata }) {
   return (
     <div className={adRailStyle}>
       <ProgrammaticAd
-        usePersonalized={usePersonalized}
         id={RIGHT_RAIL_2_ID}
         positionAlias="RightRail2"
         type={AD_TYPE_VERTICAL}
         adTargetingMetadata={adTargetingMetadata}
-        showAd={allowAds}
+        allowAds={allowAds}
+        adsReady={adsReady}
       />
     </div>
   )
