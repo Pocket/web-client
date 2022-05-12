@@ -18,10 +18,7 @@ import { REFRESH_VALUE } from './ad-helpers'
 import { gtagPromise } from './ad-helpers'
 import { defineAdSlot } from './ad-helpers'
 import { loadAd } from './ad-helpers'
-import { createSizeMapping } from './ad-helpers'
 
-import loadAdLibraries from './load-third-party-scripts'
-import { getEtpValue } from 'common/utilities/third-party/etp-checker'
 import { fontSansSerif, fontSize085, spacing050 } from '@pocket/web-ui'
 import { once } from 'common/utilities/once/once'
 
@@ -42,19 +39,18 @@ export const initPageAdConfig = ({
   urlPath,
   iabTopCategory,
   iabSubCategory,
-  legacyId: syndicatedArticleId,
-  nav,
-  etpValue
+  legacyId: syndicatedArticleId
 }) => {
   // values here have character length max of 20 for keys, 40 for values
   global.googletag
     .pubads()
+    // .setTargeting('Environment', 'staging') // Uncomment for dev confirmations
     .setTargeting('URL', [`${urlPath}`])
     .setTargeting('Category', `${iabTopCategory}`)
     .setTargeting('SubCategory', `${iabSubCategory}`)
     .setTargeting('ArticleID', [`${syndicatedArticleId}`])
     .setTargeting('Nav', [])
-    .setTargeting('ETPType', [`${etpValue}`])
+  // .setTargeting('ETPType', [`${etpValue}`])
 
   // Number of seconds to wait after the slot becomes viewable.
   const SECONDS_TO_WAIT_AFTER_VIEWABILITY = 8
@@ -98,18 +94,9 @@ export const getAdDefaults = (type) => {
   }
 }
 
-const initAdMetadata = (targetingMetadata) => {
-  const maxWaitTilAdsLoad = 4 * 1000 // 4 seconds
-
-  // load third-party ad scripts
-  loadAdLibraries()
-
-  return Promise.all([getEtpValue(maxWaitTilAdsLoad), gtagPromise()]).then(([etpValue]) => {
-    initPageAdConfig({
-      ...targetingMetadata,
-      etpValue
-    })
-  })
+async function initAdMetadata(targetingMetadata) {
+  await gtagPromise()
+  return initPageAdConfig({ ...targetingMetadata })
 }
 
 const initAdMetadataOnce = once(initAdMetadata)
@@ -145,8 +132,6 @@ const ProgrammaticAd = ({
 }) => {
   if (!showAd) return null
 
-  const [isLoaded, setLoaded] = useState(false)
-
   useEffect(() => {
     // register this adslot with googletag
     gtagPromise().then(() => {
@@ -167,21 +152,20 @@ const ProgrammaticAd = ({
     })
       .then(() => {
         global.googletag.pubads()
-        setLoaded(true)
         loadAd(id)
       })
       .catch(() => console.log('ads were unable to load')) // TODO: candidate for Sentry reporting
   }, [])
 
-  return showAd && isLoaded ? (
-    <React.Fragment>
-      {/*'syndication-ad' here helps ad team target an ad's label and hide if the ad is an in-house ad*/}
-      <div className={cx(programmaticAdWrapperStyles, 'syndication-ad', instanceStyles)}>
-        <p className="label">{adLabel}</p>
-        <div id={id} data-refreshrate={refreshRate} />
-      </div>
-    </React.Fragment>
-  ) : null
+  // 'syndication-ad' here helps ad team target an ad's label and hide if the ad is an in-house ad
+  const adClassName = cx(programmaticAdWrapperStyles, 'syndication-ad', instanceStyles)
+
+  return (
+    <div className={adClassName}>
+      <p className="label">{adLabel}</p>
+      <div id={id} data-refreshrate={refreshRate} />
+    </div>
+  )
 }
 
 ProgrammaticAd.propTypes = {

@@ -74,8 +74,7 @@ describe('ProgrammaticAd', () => {
         iabTopCategory: 'Arts-and-Entertainment',
         iabSubCategory: 'Music',
         legacyId: '4444',
-        nav: '/rock-and-roll',
-        etpValue: 'etp-level-1'
+        nav: '/rock-and-roll'
       }
       const metaDataCount = Object.keys(pageMetadata).length
       initPageAdConfig(pageMetadata)

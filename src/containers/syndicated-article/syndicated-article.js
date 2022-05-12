@@ -11,10 +11,12 @@ import { AuthorByline } from 'components/content-author/author-byline'
 import { ArticleActions } from 'components/content-actions/article-actions'
 import { SaveArticleTop } from 'components/content-saving/save-article'
 import { SaveArticleBottom } from 'components/content-saving/save-article'
+
 import { AdAboveTheFold } from 'components/content-ads/content-ads'
 import { AdBelowTheFold } from 'components/content-ads/content-ads'
 import { AdRailTop } from 'components/content-ads/content-ads'
 import { AdRailBottom } from 'components/content-ads/content-ads'
+
 import { ContentParsed } from 'components/content-parsed/content-parsed'
 import { PublisherAttribution } from 'components/content-publisher/publisher-attribution'
 import { trackPublisherCTAImpression } from './syndicated-article.analytics'
@@ -43,7 +45,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
   const isAuthenticated = useSelector((state) => state.user?.auth)
   const isPremium = useSelector((state) => state.user?.premium_status)
-  const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
+  const userStatus = useSelector((state) => state.user.user_status)
   const trackingEnabled = useSelector((state) => state.oneTrust?.tracking?.enabled)
 
   const topics = useSelector((state) => state.topicList?.topicsByName)
@@ -87,7 +89,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const { mobile_web_view, premium_user } = queryParams
   const isMobileWebView = mobile_web_view === 'true'
   const isPremiumUser = premium_user === 'true' || isPremium === '1'
-  const allowAds = isPremiumUser ? false : showAds && oneTrustReady
+  const allowAds = userStatus === 'pending' || isPremiumUser ? false : showAds
   const usePersonalized = allowAds && trackingEnabled
 
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout

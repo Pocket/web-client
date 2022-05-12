@@ -73,6 +73,7 @@ export const defineAdSlot = ({
     })
   }
 }
+
 /**
  * @type {Promise} creates a new promise that resolves once the googletag library is loaded
  */
@@ -83,7 +84,7 @@ export const gtagPromise = () => {
     global.gptadslots = global.gptadslots || []
     global.googletag = global.googletag || DEFAULT_GOOGLETAG
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       googletag.cmd.push(resolve)
     })
   } catch (err) {
@@ -94,25 +95,6 @@ export const gtagPromise = () => {
       Sentry.captureMessage(err)
     })
   }
-}
-
-/**
- *
- * @type {Promise} creates a new promise that resolves once COMContentLoaded has fired
- */
-export const domLoadedPromise = () => {
-  return new Promise((success) => {
-    if (
-      document.readyState === 'complete' ||
-      document.readyState === 'loaded' ||
-      document.readyState === 'interactive'
-    ) {
-      // document has at least been parsed
-      success()
-    } else {
-      window.addEventListener('DOMContentLoaded', success)
-    }
-  })
 }
 
 /**
