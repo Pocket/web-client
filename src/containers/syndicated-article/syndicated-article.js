@@ -27,7 +27,6 @@ import { trackPublisherCTAClick } from './syndicated-article.analytics'
 
 import { saveArticleItem, unSaveArticleItem } from './syndicated-article.state'
 
-// import { PocketHitsCta } from './pocket-hits-cta'
 import { PublisherRecs } from './publisher-recs'
 import { PocketRecs } from './pocket-recs'
 
@@ -239,7 +238,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         </main>
         <Toasts />
       </ArticleLayout>
-      {/* <PocketHitsCta isAuthenticated={false || true || isAuthenticated || isMobileWebView} /> */}
     </>
   )
 }

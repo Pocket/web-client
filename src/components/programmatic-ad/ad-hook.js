@@ -29,7 +29,7 @@ export const useAdsOnPage = ({
   const [adsReady, setAdsReady] = useState(false)
   const initalizeAds = useCallback(() => {
     if (showLog) {
-      console.info('Initializing google ads on article:', {
+      console.info('Initializing page settings for google ads on article:', {
         syndicatedArticleId,
         iabTopCategory,
         iabSubCategory
@@ -56,6 +56,8 @@ export const useAdsOnPage = ({
     if (allowAds) googletag.cmd.push(initalizeAds)
   }, [initalizeAds, allowAds])
 
+  // When we change routes, we need to destroy the existing slots in order to define new slots
+  // and show those ads
   useEffect(() => {
     router.events.on('routeChangeComplete', destroyAllAdSlots)
     return () => {
