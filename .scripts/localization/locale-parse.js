@@ -173,7 +173,7 @@ async function cloneRepo(location, settings) {
     await fs.emptyDir(location)
     await git.cwd(location)
 
-    console.log('Checking out localization to ../web-localization')
+    console.log(`Checking out localization to ${location}`)
     await git.clone(localizationRepo, './')
 
     await fs.outputJson(scriptConfig, { ...settings, location: location })
