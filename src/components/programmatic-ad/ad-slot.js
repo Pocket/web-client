@@ -1,6 +1,7 @@
 /* global googletag, gptadslots */
 import * as Sentry from '@sentry/nextjs'
 import { useState, useEffect, useCallback } from 'react'
+import { useTranslation } from 'next-i18next'
 import { css, cx } from 'linaria'
 import { REFRESH_KEY } from './ad-constants'
 import { REFRESH_VALUE } from './ad-constants'
@@ -33,10 +34,12 @@ const programmaticAdWrapperStyles = css`
  * @returns
  */
 export const AdSlot = (props) => {
-  const { adsReady, id, type, positionAlias, adUnitPath, adLabel, refreshRate, instanceStyles } = props //prettier-ignore
+  const { t } = useTranslation()
+  const { adsReady, id, type, positionAlias, adUnitPath, refreshRate, instanceStyles } = props //prettier-ignore
   const adClassName = cx(programmaticAdWrapperStyles, 'syndication-ad', instanceStyles)
   const [googleTagsReady, setGoogleTagsReady] = useState(false)
   const [adLoaded, setAdLoaded] = useState(false)
+  const adLabel = t('ad:label', 'Advertisement')
 
   // We set this up as a callback so we can safely call it inside a useEffect
   const setupAdSlot = useCallback(() => {
