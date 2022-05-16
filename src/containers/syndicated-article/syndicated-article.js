@@ -1,5 +1,7 @@
 import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
+import { useRouter } from 'next/router'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { BASE_URL } from 'common/constants'
 
@@ -11,10 +13,13 @@ import { AuthorByline } from 'components/content-author/author-byline'
 import { ArticleActions } from 'components/content-actions/article-actions'
 import { SaveArticleTop } from 'components/content-saving/save-article'
 import { SaveArticleBottom } from 'components/content-saving/save-article'
+
+import { useAdsOnPage } from 'components/programmatic-ad/ad-hook'
 import { AdAboveTheFold } from 'components/content-ads/content-ads'
 import { AdBelowTheFold } from 'components/content-ads/content-ads'
 import { AdRailTop } from 'components/content-ads/content-ads'
 import { AdRailBottom } from 'components/content-ads/content-ads'
+
 import { ContentParsed } from 'components/content-parsed/content-parsed'
 import { PublisherAttribution } from 'components/content-publisher/publisher-attribution'
 import { trackPublisherCTAImpression } from './syndicated-article.analytics'
@@ -22,7 +27,6 @@ import { trackPublisherCTAClick } from './syndicated-article.analytics'
 
 import { saveArticleItem, unSaveArticleItem } from './syndicated-article.state'
 
-import { PocketHitsCta } from './pocket-hits-cta'
 import { PublisherRecs } from './publisher-recs'
 import { PocketRecs } from './pocket-recs'
 
@@ -40,17 +44,17 @@ const validParams = {
 
 export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const dispatch = useDispatch()
+  const router = useRouter()
+
+  const isDev = process.env.SHOW_DEV === 'included'
 
   const isAuthenticated = useSelector((state) => state.user?.auth)
   const isPremium = useSelector((state) => state.user?.premium_status)
-  const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
-  const trackingEnabled = useSelector((state) => state.oneTrust?.tracking?.enabled)
+  const userStatus = useSelector((state) => state.user.user_status)
 
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const articleData = useSelector((state) => state.syndicatedArticle.articleData)
   const saveStatus = useSelector((state) => state.syndicatedArticle.saveStatus)
-
-  if (!articleData) return
 
   const {
     itemId,
@@ -69,7 +73,21 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     curationCategory,
     legacyId,
     showAds
-  } = articleData
+  } = articleData || {}
+
+  // modify rendered elements when query params are passed in
+  const { mobile_web_view, premium_user } = queryParams
+  const isMobileWebView = mobile_web_view === 'true'
+  const isPremiumUser = premium_user === 'true' || isPremium === '1'
+  const allowAds = userStatus === 'pending' || isPremiumUser ? false : showAds
+
+  // Initialize Ads on the page
+  const { pathname: urlPath } = router
+  const showLog = isDev
+  const adsReady = useAdsOnPage({ allowAds, urlPath, iabTopCategory, iabSubCategory, legacyId, showLog }) //prettier-ignore
+
+  // If there is no article data, turn back until it's loaded
+  if (!articleData) return
 
   const languagePrefix = locale === 'en' ? '' : `/${locale}`
   const url = `${BASE_URL}${languagePrefix}/explore/item/${slug}`
@@ -82,13 +100,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     type: 'article'
   }
   const canonical = publisher?.attributeCanonicalToPublisher ? publisherUrl : url
-
-  // modify rendered elements when query params are passed in
-  const { mobile_web_view, premium_user } = queryParams
-  const isMobileWebView = mobile_web_view === 'true'
-  const isPremiumUser = premium_user === 'true' || isPremium === '1'
-  const allowAds = isPremiumUser ? false : showAds && oneTrustReady
-  const usePersonalized = allowAds && trackingEnabled
 
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
 
@@ -116,8 +127,8 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         <main className={contentLayout}>
           <section>
             <AdAboveTheFold
+              adsReady={adsReady}
               allowAds={allowAds}
-              usePersonalized={usePersonalized}
               iabTopCategory={iabTopCategory}
               iabSubCategory={iabSubCategory}
               curationCategory={curationCategory}
@@ -168,14 +179,14 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
             <aside className="right-aside">
               <AdRailTop
                 allowAds={allowAds}
-                usePersonalized={usePersonalized}
+                adsReady={adsReady}
                 iabTopCategory={iabTopCategory}
                 iabSubCategory={iabSubCategory}
                 curationCategory={curationCategory}
                 legacyId={legacyId}
               />
               <PublisherRecs itemId={originalItemId} publisher={publisher} legacyId={legacyId} />
-              <AdRailBottom allowAds={allowAds} usePersonalized={usePersonalized} />
+              <AdRailBottom allowAds={allowAds} adsReady={adsReady} />
             </aside>
 
             <div className="content-body">
@@ -208,7 +219,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
           <section>
             <AdBelowTheFold
               allowAds={allowAds}
-              usePersonalized={usePersonalized}
+              adsReady={adsReady}
               iabTopCategory={iabTopCategory}
               iabSubCategory={iabSubCategory}
               curationCategory={curationCategory}
@@ -227,7 +238,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         </main>
         <Toasts />
       </ArticleLayout>
-      <PocketHitsCta isAuthenticated={false || true || isAuthenticated || isMobileWebView} />
     </>
   )
 }

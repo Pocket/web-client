@@ -1,3 +1,12 @@
+## [1.46.10](https://github.com/Pocket/web-client/compare/v1.46.9...v1.46.10) (2022-05-16)
+
+
+### Bug Fixes
+
+* **ads:** adding label ready for localization ([4600da9](https://github.com/Pocket/web-client/commit/4600da9bc4db71c60ec3fecf7772401c5f8158ad))
+* **ads:** refactor for reliability ([2202561](https://github.com/Pocket/web-client/commit/2202561417e6ccc678fadb99cddcc8198471fe80))
+* **ads:** streamline serving ads ([a5eeab6](https://github.com/Pocket/web-client/commit/a5eeab66352ada511f9f8492cd2a946a35607619))
+
 ## [1.46.9](https://github.com/Pocket/web-client/compare/v1.46.8...v1.46.9) (2022-05-12)
 
 

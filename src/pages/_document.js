@@ -59,6 +59,18 @@ class ClientDocument extends Document {
             }}
           />
 
+          <script async src='https://securepubads.g.doubleclick.net/tag/js/gpt.js' />
+          <script dangerouslySetInnerHTML={{
+            __html: `
+              var gptadslots = [];
+              var googletag = googletag || {cmd:[]};
+            `
+            }} 
+          />
+
+        <script async src='https://fdyn.pubwise.io/script/8bfeb37f-2e7b-4828-a1ef-65bed8f5f77c/v3/dyn/pre_pws.js'/>
+        <script async src='https://fdyn.pubwise.io/script/8bfeb37f-2e7b-4828-a1ef-65bed8f5f77c/v3/dyn/pws.js'/>
+
         </Head>
         <body>
           <Main />
