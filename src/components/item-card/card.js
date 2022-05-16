@@ -96,7 +96,9 @@ export const Card = (props) => {
 
   // Fire when item is in view
   const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
-  useEffect(() => onItemInView(inView), [inView, onItemInView])
+  useEffect(() => {
+    onItemInView(inView)
+  }, [inView, onItemInView])
 
   // Fire when item is selected by shortcut
   // This allows us to keep shortcuts in sync with tab selection and in view
