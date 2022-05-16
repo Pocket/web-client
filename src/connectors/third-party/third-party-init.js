@@ -90,8 +90,8 @@ export function ThirdPartyInit() {
 
   // Track Snowplow Page Views
   useEffect(() => {
-    if (user_status === 'pending') return null
-    if (!analyticsInit) return null
+    if (user_status === 'pending') return
+    if (!analyticsInit) return
 
     dispatch(trackPageView())
   }, [user_status, sess_guid, user_id, path, dispatch, analyticsInit])

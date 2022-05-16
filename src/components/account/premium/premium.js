@@ -29,7 +29,9 @@ export const Premium = ({ isPremium, onPremiumImpression }) => {
 
   // Fire when item is in view
   const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
-  useEffect(() => onPremiumImpression(inView), [inView, onPremiumImpression])
+  useEffect(() => {
+    onPremiumImpression(inView)
+  }, [inView, onPremiumImpression])
 
   return (
     <section className={premiumStyle}>

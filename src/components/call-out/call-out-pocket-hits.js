@@ -213,7 +213,7 @@ const CallOutPocketHitsSignup = ({
     } else if (signupRequestState === 'failure') {
       handleSubmitFailure(activeForm)
     }
-  }, [signupRequestState])
+  }, [signupRequestState, handleSubmitSuccess, handleSubmitFailure, activeForm])
 
   // /* Event Handlers */
   function handleEmailSubmit(formId, email, recaptchaResponseKey) {
@@ -232,9 +232,7 @@ const CallOutPocketHitsSignup = ({
     <VisibilitySensor onVisible={handleVisible}>
       <div className={`${wrapper} brandingMessage`} data-cy="pocket-hits-module">
         <div className="brandBlock">
-          <aside>
-            {t('call-out:fuel-your-mind', 'Get ready to fuel your mind.')}
-          </aside>
+          <aside>{t('call-out:fuel-your-mind', 'Get ready to fuel your mind.')}</aside>
           <blockquote>
             <span className={classNames('copy', { isSuccessful })}>
               <svg
@@ -274,7 +272,9 @@ const CallOutPocketHitsSignup = ({
                       onFocus={handleEmailInputFocus}
                       onValidSubmit={handleEmailSubmit}
                       onValidationError={handleValidationError}
-                      errorMessage={signupError ? t('call-out:error', 'Oops! Something went wrong.') : null}
+                      errorMessage={
+                        signupError ? t('call-out:error', 'Oops! Something went wrong.') : null
+                      }
                       displayErrorInline
                       hideCaptchaBadge
                     />

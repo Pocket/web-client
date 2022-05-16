@@ -8,7 +8,9 @@ export const Notifications = () => {
   const sendMarketing = useSelector((state) => state?.userNotifications?.checkMarketing)
   const hitsFrequency = useSelector((state) => state?.userNotifications?.hitsFrequency)
 
-  useEffect(() => dispatch(getNotifications()), [dispatch])
+  useEffect(() => {
+    dispatch(getNotifications())
+  }, [dispatch])
 
   const onMarketingToggle = () => dispatch(setMarketing(!sendMarketing))
   const onFrequencyChange = (e) => dispatch(setFrequency(e.target.value))

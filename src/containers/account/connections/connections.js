@@ -16,7 +16,9 @@ import { revokeConnection } from 'containers/account/connections/connections.sta
 
 export const ConnectedServices = () => {
   const dispatch = useDispatch()
-  useEffect(() => dispatch(getConnections()), [dispatch])
+  useEffect(() => {
+    dispatch(getConnections())
+  }, [dispatch])
 
   const officialApps = useSelector((state) => state?.userConnectedServices?.officialApps)
   const socialServices = useSelector((state) => state?.userConnectedServices?.socialServices) || []

@@ -81,9 +81,11 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   // Hydrate user features/settings
   useEffect(() => {
-    if (user_status === 'pending') return null
-    if (user_status === 'invalid') return dispatch(featuresHydrate({}))
-    if (flagsReady) return null
+    if (user_status === 'pending' || flagsReady) return
+    if (user_status === 'invalid') {
+      dispatch(featuresHydrate({}))
+      return
+    }
 
     // Set up defaults/user pref in state
     dispatch(appSetPreferences())
