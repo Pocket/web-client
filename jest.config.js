@@ -4,6 +4,8 @@
  */
 
 module.exports = {
+  resolver: '<rootDir>/.test-setup/custom-resolver.js',
+
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
 
