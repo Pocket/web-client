@@ -68,10 +68,10 @@
   "devDependencies": {
     "@apollo/rover": "0.6.0",
     "@babel/cli": "7.17.10",
-    "@babel/core": "7.17.10",
+    "@babel/core": "7.17.12",
     "@babel/eslint-parser": "7.17.0",
-    "@babel/preset-env": "7.17.10",
-    "@babel/preset-react": "7.16.7",
+    "@babel/preset-env": "7.17.12",
+    "@babel/preset-react": "7.17.12",
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
     "@graphql-eslint/eslint-plugin": "3.10.3",
