@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { css } from 'linaria'
 import { Button } from '@pocket/web-ui'
 import Modal, { ModalBody, ModalFooter } from './modal'
@@ -195,7 +195,7 @@ export const Interactive = () => {
   const handleCloseModal = () => setIsOpen(false)
 
   return (
-    <React.Fragment>
+    <>
       <button onClick={handleOpenClick}>Please open the modal</button>
       <Modal
         title="Interactive Modal Time"
@@ -213,7 +213,7 @@ export const Interactive = () => {
           <Button>Primary Action</Button>
         </ModalFooter>
       </Modal>
-    </React.Fragment>
+    </>
   )
 }
 

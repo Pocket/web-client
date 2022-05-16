@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import Head from 'next/head'
@@ -26,7 +25,7 @@ export default function ErrorPage({ statusCode }) {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>Error</title>
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -45,7 +44,7 @@ export default function ErrorPage({ statusCode }) {
       </PageContainer>
 
       <GlobalFooter />
-    </React.Fragment>
+    </>
   )
 }
 

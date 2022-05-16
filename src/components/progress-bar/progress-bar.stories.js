@@ -1,4 +1,3 @@
-import React from 'react'
 import { ProgressBar } from './progress-bar'
 import { css } from 'linaria'
 import { ScrollTracker } from 'components/scroll/scroll-tracker'
@@ -22,13 +21,12 @@ const longPageStyles = css`
 `
 
 const ProgressBarStory = ({ scrollPercentage, noScroll, loremCount }) => (
-  <React.Fragment>
+  <>
     <div className={navBar}>
       <ProgressBar scrollPercentage={scrollPercentage} noScroll={noScroll} />
     </div>
-    <div className={longPageStyles}>
-    </div>
-  </React.Fragment>
+    <div className={longPageStyles}></div>
+  </>
 )
 
 const WrappedStory = ScrollTracker(ProgressBarStory)

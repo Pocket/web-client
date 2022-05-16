@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 import classnames from 'classnames'
@@ -168,7 +168,7 @@ const Modal = ({
   let modalContentRef = useRef(null)
 
   return (
-    <React.Fragment>
+    <>
       <ReactModal
         isOpen={isOpen}
         contentLabel={screenReaderLabel}
@@ -222,7 +222,7 @@ const Modal = ({
           <div onClick={onClick}>{children}</div>
         </div>
       </ReactModal>
-    </React.Fragment>
+    </>
   )
 }
 
