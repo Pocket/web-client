@@ -31,7 +31,7 @@ export function PostTrustInit() {
 
   useEffect(() => {
     function checkCookies() {
-      if (global.OptanonActiveGroups !== ONETRUST_EMPTY_DEFAULT) {
+      if (global.OptanonActiveGroups && global.OptanonActiveGroups !== ONETRUST_EMPTY_DEFAULT) {
         dispatch(updateOnetrustData(global.OptanonActiveGroups))
       } else {
         setTimeout(checkCookies, 50)
