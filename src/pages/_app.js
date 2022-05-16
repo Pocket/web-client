@@ -47,16 +47,18 @@ function PocketWebClient({ Component, pageProps, err }) {
     // const APIKey = isDev ? BRAZE_API_KEY_DEV : BRAZE_API_KEY_PROD // uncomment this when we are ready for production
     const APIKey = BRAZE_API_KEY_DEV
 
-    import('../common/utilities/braze/braze-lazy-load').then(
-      ({ initialize, automaticallyShowInAppMessages, changeUser, openSession }) => {
-        initialize(APIKey, {
-          baseUrl: BRAZE_SDK_ENDPOINT,
-          appVersion: version,
-          enableLogging: isDev // enable logging in development only
-        })
-        automaticallyShowInAppMessages(), changeUser(user_id), openSession()
-      }
-    )
+    if (isDev) {
+      import('../common/utilities/braze/braze-lazy-load').then(
+        ({ initialize, automaticallyShowInAppMessages, changeUser, openSession }) => {
+          initialize(APIKey, {
+            baseUrl: BRAZE_SDK_ENDPOINT,
+            appVersion: version,
+            enableLogging: isDev // enable logging in development only
+          })
+          automaticallyShowInAppMessages(), changeUser(user_id), openSession()
+        }
+      )
+    }
   }, [user_id])
 
   useEffect(() => {
