@@ -7,7 +7,6 @@ import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
 import { css, cx } from 'linaria'
 import { CollectionsIcon } from '@pocket/web-ui'
-import { BetaTag } from 'components/tags/tags'
 
 import { useInView } from 'react-intersection-observer'
 
@@ -173,7 +172,6 @@ export function SideNav({ type, subset, tag, pinned, isDisabled, newSaveCount, t
             onClick={clickEvent}
             data-cy="side-nav-home">
             <HomeIcon className="side-nav-icon" /> {t('nav:home', 'Home')}
-            <BetaTag>BETA</BetaTag>
           </button>
         </Link>
         <Link href="/my-list?src=sidebar">

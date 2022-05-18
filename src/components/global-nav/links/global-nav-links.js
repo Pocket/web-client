@@ -5,7 +5,6 @@ import { css, cx } from 'linaria'
 import { Trans } from 'next-i18next'
 import { DiscoverIcon } from '@pocket/web-ui'
 import { ListViewIcon } from '@pocket/web-ui'
-import { BetaTag } from 'components/tags/tags'
 
 export const DEFAULT_LINKS = [
   {
@@ -122,7 +121,6 @@ const GlobalNavLinks = ({ links, selectedLink, onLinkClick, className, ...remain
                   handleClick(event, link.name, link.url)
                 }}>
                 {link.label}
-                {link.beta ? <BetaTag>BETA</BetaTag> : null}
               </a>
             </Link>
           </li>

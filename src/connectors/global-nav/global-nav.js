@@ -108,8 +108,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       id: 'global-nav-home-link',
       label: t('nav:home', 'Home'),
       url: '/home?src=navbar',
-      icon: <HomeIcon />,
-      beta: true
+      icon: <HomeIcon />
     },
     {
       name: 'my-list',

@@ -8,7 +8,6 @@ import { Drawer } from '@pocket/web-ui'
 import { Button } from '@pocket/web-ui'
 import { DEFAULT_LINKS } from 'components/global-nav/links/global-nav-links'
 import { bottomTooltip } from 'components/tooltip/tooltip'
-import { BetaTag } from 'components/tags/tags'
 
 const premiumLinks = [
   {
@@ -146,14 +145,13 @@ export const MobileLink = ({
         id={id}
         className={classnames({
           selected: isSelected,
-          disabled: isDisabled,
+          disabled: isDisabled
         })}
         onClick={(event) => {
           handleClick(event, name, url)
         }}>
         {icon ? icon : null}
         {label}
-        {beta ? <BetaTag>BETA</BetaTag> : null}
       </a>
     </Link>
   </li>
