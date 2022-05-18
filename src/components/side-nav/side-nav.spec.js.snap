@@ -31,11 +31,6 @@ exports[`SideNav renders the Account side nav 1`] = `
       </span>
        
       nav:home
-      <span
-        class="b4tghaq beta"
-      >
-        BETA
-      </span>
     </button>
     <button
       class="sv813dg  "
@@ -221,11 +216,6 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
       </span>
        
       nav:home
-      <span
-        class="b4tghaq beta"
-      >
-        BETA
-      </span>
     </button>
     <button
       class="sv813dg  "
