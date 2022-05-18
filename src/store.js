@@ -6,7 +6,7 @@ import { all } from 'redux-saga/effects'
 /* IMPORT CONTAINER STATES
  --------------------------------------------------------------- */
 import { appReducers, appSagas } from 'connectors/app/app.state'
-import { oneTrustReducers } from 'connectors/one-trust/one-trust.state'
+import { oneTrustReducers } from 'connectors/third-party/one-trust.state'
 
 import { userReducers, userSagas, accountReducers } from 'containers/account/account.state'
 

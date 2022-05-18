@@ -16,9 +16,8 @@ import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 import { appSetPreferences } from 'connectors/app/app.state'
 import { hydrateSettings } from 'connectors/settings/settings.state'
 
-import { PostTrustInit } from 'connectors/one-trust/one-trust'
-
 import { BRAZE_API_KEY_DEV, BRAZE_API_KEY_PROD, BRAZE_SDK_ENDPOINT } from 'common/constants'
+import { ThirdPartyInit } from 'connectors/third-party/third-party-init'
 
 /** Setup Files
  --------------------------------------------------------------- */
@@ -140,7 +139,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   return (
     <ViewportProvider>
-      <PostTrustInit />
+      <ThirdPartyInit />
       <DevTools />
       <Shortcuts />
       {shouldRender ? <Component {...pageProps} err={err} /> : null}

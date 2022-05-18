@@ -16,7 +16,7 @@ import { updateOnetrustData } from './one-trust.state'
  * is wrapped in this version. This problem will not exist when we move
  * fully to web-client
  */
-export function PostTrustInit() {
+export function ThirdPartyInit() {
   // Initialize app once per page load
   const dispatch = useDispatch()
   const router = useRouter()
