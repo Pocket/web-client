@@ -10,6 +10,7 @@ import { initializeSnowplow } from 'common/setup/snowplow'
 import { finalizeSnowplow } from 'connectors/snowplow/snowplow.state'
 import { useRouter } from 'next/router'
 import { updateOnetrustData } from './one-trust.state'
+import { BRAZE_API_KEY_DEV, BRAZE_API_KEY_PROD, BRAZE_SDK_ENDPOINT } from 'common/constants'
 
 /**
  * Initialization file. We are using this because of the way the _app file
@@ -28,6 +29,31 @@ export function ThirdPartyInit() {
   const analytics = useSelector((state) => state.oneTrust?.analytics) //prettier-ignore
   const analyticsCookie = analytics?.enabled
   const isProduction = process.env.NODE_ENV === 'production'
+
+  useEffect(() => {
+    if (!user_id) return // this will change when we do anonymous user tracking
+
+    const version = process.env.RELEASE_VERSION || 'v.0.0.0'
+
+    // ONLY DEV FOR NOW
+    // const APIKey = isProduction ? BRAZE_API_KEY_PROD : BRAZE_API_KEY_DEV // uncomment this when we are ready for production
+    const APIKey = BRAZE_API_KEY_DEV
+
+    // lazy load braze SDK and then initialize it and call necessary functions
+    // see https://github.com/braze-inc/braze-web-sdk/issues/117 for more details on why we need to lazy load
+    if (!isProduction) {
+      import('common/utilities/braze/braze-lazy-load').then(
+        ({ initialize, automaticallyShowInAppMessages, changeUser, openSession }) => {
+          initialize(APIKey, {
+            baseUrl: BRAZE_SDK_ENDPOINT,
+            appVersion: version,
+            enableLogging: !isProduction // enable logging in development only
+          })
+          automaticallyShowInAppMessages(), changeUser(user_id), openSession()
+        }
+      )
+    }
+  }, [user_id, isProduction])
 
   useEffect(() => {
     function checkCookies() {

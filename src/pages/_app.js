@@ -16,7 +16,6 @@ import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 import { appSetPreferences } from 'connectors/app/app.state'
 import { hydrateSettings } from 'connectors/settings/settings.state'
 
-import { BRAZE_API_KEY_DEV, BRAZE_API_KEY_PROD, BRAZE_SDK_ENDPOINT } from 'common/constants'
 import { ThirdPartyInit } from 'connectors/third-party/third-party-init'
 
 /** Setup Files
@@ -35,30 +34,6 @@ function PocketWebClient({ Component, pageProps, err }) {
   const { user_status, user_id, sess_guid, birth, user_models } = useSelector((state) => state.user) //prettier-ignore
   const { flagsReady } = useSelector((state) => state.features)
   const { authRequired } = pageProps
-
-  useEffect(() => {
-    if (!user_id) return // this will change when we do anonymous user tracking
-
-    const version = process.env.RELEASE_VERSION || 'v.0.0.0'
-    const isDev = process.env.NODE_ENV === 'development'
-
-    // ONLY DEV FOR NOW
-    // const APIKey = isDev ? BRAZE_API_KEY_DEV : BRAZE_API_KEY_PROD // uncomment this when we are ready for production
-    const APIKey = BRAZE_API_KEY_DEV
-
-    if (isDev) {
-      import('../common/utilities/braze/braze-lazy-load').then(
-        ({ initialize, automaticallyShowInAppMessages, changeUser, openSession }) => {
-          initialize(APIKey, {
-            baseUrl: BRAZE_SDK_ENDPOINT,
-            appVersion: version,
-            enableLogging: isDev // enable logging in development only
-          })
-          automaticallyShowInAppMessages(), changeUser(user_id), openSession()
-        }
-      )
-    }
-  }, [user_id])
 
   useEffect(() => {
     // Log out version for quick scan.  Can also help support get a read on
