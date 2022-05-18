@@ -11,10 +11,7 @@ describe('SideNav', () => {
     isDisabled: false,
     subset: 'tag',
     isLoggedIn: true,
-    pinned: [
-      'home',
-      'space'
-    ],
+    pinned: ['home', 'space'],
     tag: '_untagged_',
     newSaveCount: 0,
     flagsReady: true,
@@ -24,7 +21,7 @@ describe('SideNav', () => {
   beforeAll(() => mockAllIsIntersecting())
 
   it('renders the My List side nav and shows tags', () => {
-    const { queryByCy, queryAllByCy } = wrappedRender(<SideNav type='my-list' {...baseProps} />)
+    const { queryByCy, queryAllByCy } = wrappedRender(<SideNav type="my-list" {...baseProps} />)
 
     // Main section
     expect(queryByCy('side-nav-home')).toBeInTheDocument()
@@ -48,7 +45,7 @@ describe('SideNav', () => {
   })
 
   it('renders the Account side nav', () => {
-    const { queryByCy } = wrappedRender(<SideNav type='account' />)
+    const { queryByCy } = wrappedRender(<SideNav type="account" />)
 
     // Main section
     expect(queryByCy('side-nav-home')).toBeInTheDocument()
