@@ -39,7 +39,6 @@ export const Resets = () => {
 
   const onboardingReset = () => dispatch(resetOnboarding())
 
-  const isDev = process.env.NODE_ENV === 'development'
   const wipeBrazeData = () => {
     import('common/utilities/braze/braze-lazy-load').then(({ wipeData, changeUser }) => {
       wipeData(), changeUser(user_id)
@@ -53,12 +52,10 @@ export const Resets = () => {
         <div className="title">Reset Onboarding</div>
         <div className="description">Start onboarding from the start</div>
       </div>
-      {isDev ? (
-        <div className="resetter" onClick={wipeBrazeData}>
-          <div className="title">Reset Braze</div>
-          <div className="description">Wipes data and starts new session</div>
-        </div>
-      ) : null}
+      <div className="resetter" onClick={wipeBrazeData}>
+        <div className="title">Reset Braze</div>
+        <div className="description">Wipes data and starts new session</div>
+      </div>
     </div>
   )
 }
