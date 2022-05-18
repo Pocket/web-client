@@ -144,17 +144,19 @@ export const ReaderNav = ({
     dispatch(sendSnowplowEvent('reader.goback'))
     goBack()
   }
-  const shortcutGoBack = () => {
-    const analyticsData = { label: 'Back to List', value: 'b' }
-    dispatch(sendSnowplowEvent('shortcut', analyticsData))
-    goBack()
-  }
+
   const buttonClass = cx(buttonReset, buttonStyles, bottomTooltip)
 
   useEffect(() => {
+    const shortcutGoBack = () => {
+      const analyticsData = { label: 'Back to List', value: 'b' }
+      dispatch(sendSnowplowEvent('shortcut', analyticsData))
+      goBack()
+    }
+
     Mousetrap.bind('b', shortcutGoBack)
     return () => Mousetrap.unbind('b')
-  }, [])
+  }, [dispatch])
 
   return (
     <header className={headerStyle} data-cy="reader-nav">

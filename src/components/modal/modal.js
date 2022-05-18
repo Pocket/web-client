@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 import classnames from 'classnames'
-import { css, cx } from 'linaria'
+import { css } from 'linaria'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import {
   breakpointSmallDesktop,

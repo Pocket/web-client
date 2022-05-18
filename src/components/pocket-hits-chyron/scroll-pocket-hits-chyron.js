@@ -40,9 +40,7 @@ const ScrollPocketHitsChyron = ({
 }) => {
   /* Variables */
   const dispatch = useDispatch()
-  const signupRequestState = useSelector(
-    (state) => state.pocketHits.signupRequestState
-  )
+  const signupRequestState = useSelector((state) => state.pocketHits.signupRequestState)
   const signupError = useSelector((state) => state.pocketHits.signupError)
 
   const isProcessing = signupRequestState === 'pending'
@@ -54,7 +52,7 @@ const ScrollPocketHitsChyron = ({
   /* Effects */
   useEffect(() => {
     setThreshold(_determineThreshold(thresholdPercent))
-  }, [])
+  }, [thresholdPercent])
 
   useEffect(() => {
     // event: request success
@@ -65,21 +63,14 @@ const ScrollPocketHitsChyron = ({
     } else if (signupRequestState === 'failure') {
       handleSubmitFailure(activeForm)
     }
-  }, [signupRequestState])
+  }, [activeForm, handleSubmitFailure, handleSubmitSuccess, signupRequestState])
 
   // /* Event Handlers */
   function handleEmailSubmit(formId, email, recaptchaResponseKey) {
     handleSubmit(formId)
     setActiveForm(formId)
     // track submit event here
-    dispatch(
-      pocketHitsSignupRequested(
-        email,
-        recaptchaResponseKey,
-        utmCampaign,
-        utmSource
-      )
-    )
+    dispatch(pocketHitsSignupRequested(email, recaptchaResponseKey, utmCampaign, utmSource))
   }
 
   /*
@@ -88,10 +79,7 @@ const ScrollPocketHitsChyron = ({
    *  threshold was being cached as undefined
    */
   return threshold ? (
-    <ScrollChyron
-      instanceId={instanceId}
-      shouldHide={isAuthenticated}
-      threshold={threshold}>
+    <ScrollChyron instanceId={instanceId} shouldHide={isAuthenticated} threshold={threshold}>
       <PocketHitsIllustratedChyron
         isProcessing={isProcessing}
         isSuccessful={isSuccessful}

@@ -132,9 +132,10 @@ const HighlightIndex = ({
 
   useEffect(() => {
     setLoading(false)
-
-    return () => clearTimeout(timer)
-  }, [])
+    return () => {
+      if (timer) clearTimeout(timer)
+    }
+  }, [timer])
 
   const itemHoverOn = () => {
     clearTimeout(timer)
