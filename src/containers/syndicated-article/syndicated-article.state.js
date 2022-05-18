@@ -8,7 +8,7 @@ import {
   ARTICLE_UNSAVE_SUCCESS,
   ARTICLE_UNSAVE_FAILURE
 } from 'actions'
-import { getSyndicatedArticle, getRandomSyndicatedArticle } from 'common/api'
+import { getSyndicatedArticle } from 'common/api'
 import { saveItem } from 'common/api/_legacy/saveItem'
 import { removeItem } from 'common/api/_legacy/removeItem'
 import { HYDRATE } from 'actions'
@@ -102,16 +102,6 @@ export function fetchArticleData(slug) {
   return getSyndicatedArticle(slug)
 }
 
-export function fetchRandomArticleData(baseUrl) {
-  // baseUrl is required at this point since this is a dev
-  // only feature, but we do want to run it on feature branches
-  return getRandomSyndicatedArticle(baseUrl)
-}
-
-export function fetchHydrationData({ baseUrl, slug }) {
-  // Having `random` instead of an article slug in the URL
-  // will return a random article when in the dev environment
-  // e.g. http://localhost.discover.getpocket.com/explore/item/random
-  if (slug === 'random') return fetchRandomArticleData(baseUrl)
+export function fetchHydrationData({ slug }) {
   return fetchArticleData(slug)
 }

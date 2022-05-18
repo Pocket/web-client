@@ -19,9 +19,6 @@ export { getHomeLineup } from './queries/get-home'
 // Syndicated Article
 export { getSyndicatedArticle } from './queries/get-syndicated-article'
 
-// Random Syndicated Article (dev)
-export { getRandomSyndicatedArticle } from './queries/get-syndicated-article'
-
 // MyList
 export { getSavedItems } from './queries/get-saved-items'
 export { searchSavedItems } from './queries/search-saved-items'
