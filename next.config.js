@@ -4,6 +4,10 @@ const { i18n } = require('./next-i18next.config.js')
 const withLinaria = require('next-linaria')
 const { withSentryConfig } = require('@sentry/nextjs')
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
+})
+
 // For all available options, see:
 // https://github.com/getsentry/sentry-webpack-plugin#options.
 const SentryWebpackPluginOptions = {
@@ -61,4 +65,6 @@ const nextOptions = {
   generateBuildId: () => nextBuildId({ dir: __dirname })
 }
 
-module.exports = withSentryConfig(withLinaria(nextOptions), SentryWebpackPluginOptions)
+module.exports = withBundleAnalyzer(
+  withSentryConfig(withLinaria(nextOptions), SentryWebpackPluginOptions)
+)
