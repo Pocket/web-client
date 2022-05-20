@@ -9,7 +9,8 @@
   "dependencies": {
     "fast-glob": "3.2.7",
     "fs-extra": "10.0.0",
-    "svgo": "2.5.0"
+    "svgo": "2.5.0",
+    "cli-progress": "^3.11.1"
   },
   "author": "",
   "license": "ISC"

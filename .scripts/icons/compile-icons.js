@@ -15,6 +15,7 @@ const { execSync } = require('child_process')
 const glob = require('fast-glob')
 const path = require('path')
 const { optimize, loadConfig } = require('svgo')
+const cliProgress = require('cli-progress')
 
 const SVG_INPUT_DIR = 'src/components/icons/svgs'
 const JS_OUTPUT_DIR = 'src/components/icons/components'
@@ -33,10 +34,7 @@ function compileIcons() {
       return console.error(error)
     }
 
-    processSvgs(() => {
-      // on success
-      console.log('\nℹ️  SVG COMPILATION SUCCESSFUL!  ℹ️\n\n')
-    })
+    processSvgs(() => {})
   })
 }
 
@@ -48,19 +46,24 @@ function compileIcons() {
  * Process the svgs into inline svg components
  */
 const processSvgs = async function (onSuccess) {
-  console.log('\nℹ️  optimizing & compiling svg icons to components...  ℹ️\n')
+  console.log('\nOptimizing & compiling svg icons to components...\n')
 
   const imports = []
   const originalsSvgs = glob.sync(SVG_INPUT_DIR + '/**/*.svg')
   const config = await loadConfig()
+  const progressBar = new cliProgress.Bar({
+    barCompleteChar: '•',
+    barIncompleteChar: '_',
+    format: 'Building Icons: {percentage}%' + ' — ' + '{bar}',
+    fps: 30,
+    stream: process.stdout,
+    barsize: 30
+  })
+  progressBar.start(originalsSvgs.length, 0)
 
   originalsSvgs.forEach((file, index) => {
     fs.readFile(file, 'utf8', (error, data) => {
-      console.log(`${imports.length + 1}/${originalsSvgs.length}: ${file}`)
-
-      if (error) {
-        throw error
-      }
+      if (error) throw error
 
       const baseFileName = path.basename(file, '.svg')
       const componentName = camalize(baseFileName)
@@ -84,42 +87,12 @@ const processSvgs = async function (onSuccess) {
 
       // if we've reached the last file - each file is processed by svgo
       // asynchronously, so we check if this is the last to complete, then wrap up
-      if (imports.length === originalsSvgs.length) {
-        // create icons index file for icon exports
-        writeIconsExportFile(imports)
-
-        // format newly created files with prettier
-        try {
-          execSync(
-            'prettier --config ./.prettierrc --write $(find ./src/components/icons -type f \\( -iname \\*.js \\))'
-          )
-        } catch (error) {
-          console.error('\n  ERROR: failed to reformat output with prettier  \n', error)
-        }
-
-        onSuccess()
-      }
+      if (imports.length === originalsSvgs.length) onSuccess()
     })
+    progressBar.increment()
   })
-}
 
-/*
- * FILE NAME HELPERS
- **************************************************************************** */
-
-/**
- * Given a string, e.g. `arrow-thin`, convert it to PascalCase to be a component
- * name e.g. `ArrowThin`
- *
- * @param  {String} str Base name to convert.
- * @return {String} The component name.
- */
-function getComponentName(str) {
-  return str
-    .replace(/(\w)(\w*)/g, (g0, g1, g2) => {
-      return g1.toUpperCase() + g2.toLowerCase()
-    })
-    .replace(/-/g, '')
+  progressBar.stop()
 }
 
 /*
@@ -135,40 +108,6 @@ function getComponentName(str) {
 function writeComponentFile(filename, svg, componentName) {
   // Write out the js file
   fs.writeFileSync(filename, convertSvgToComponentString(svg, componentName))
-
-  // console.log(`  ✓ ${filename}\n`)
-}
-
-/**
- * Writes the icons export file, `src/components/icons/icons.js`, based on the given components.
- *
- * @param {Array.Object} components The components to write out.
- * @param {Array.Object.name} The component's key name to map the component to.
- * @param {Array.Object.path} The component's path for importing the component.
- */
-function writeIconsExportFile(components) {
-  console.log(`Finishing: writing out ${JS_OUTPUT_DIR}/index.js...`)
-
-  // sort compontents by name
-  components.sort((a, b) => {
-    if (a.name < b.name) return -1
-    if (a.name > b.name) return 1
-    return 0
-  })
-
-  const fileComment =
-    '/**\n *\n * This is a generated file from `.scripts/compile-icons`. DO NOT EDIT.\n *\n */\n\n'
-  let exportsString = ''
-
-  components.forEach((component) => {
-    let componentName = component.componentName
-    exportsString += `export { ${componentName}Icon } from '${component.path}'\n`
-  })
-
-  const fileContent = fileComment + exportsString + '\n'
-
-  // Write out the icons export file
-  fs.writeFileSync(JS_OUTPUT_DIR + '/icons.js', fileContent)
 }
 
 var camalize = function camalize(str) {
@@ -193,7 +132,7 @@ function replaceColors(svg) {
 
   const hasFillColor = /\<svg(.*)fill=(.+?)\>/g.test(svg)
   if (!hasFillColor) {
-    svg = svg.replace('<svg ', '<svg fill="currentColor"')
+    svg = svg.replace('<svg ', '<svg fill="currentColor" ')
   }
 
   return svg
@@ -217,14 +156,16 @@ function convertSvgToComponentString(svg, componentName) {
   svg = svg.replace(/ariaHidden=/gi, 'aria-hidden=')
 
   //prettier-ignore
-  var componentString =`
-    import {iconStyle} from 'components/icons/_iconStyle'
-    import { cx } from 'linaria'
+  var componentString =`import { iconStyle } from 'components/icons/_iconStyle'
+import { cx } from 'linaria'
     
-    export const ${componentName}Icon = ({ className, ...rest }) => (
-      <span className={cx(iconStyle, 'icon', className && className)} {...rest}>
-      ${svg}
-    </span>)`
+export const ${componentName}Icon = ({ className, ...rest }) => (
+  <span className={cx(iconStyle, 'icon', className && className)} {...rest}>
+    ${svg}
+  </span>
+)
+  
+`
 
   return componentString
 }
