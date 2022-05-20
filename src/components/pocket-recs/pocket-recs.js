@@ -6,9 +6,9 @@ import {
   breakpointTinyTablet,
   breakpointMediumTablet,
   breakpointLargeHandset
-} from '@pocket/web-ui'
+} from 'common/constants'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { darkMode, sepiaMode } from '@pocket/web-ui'
+
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 
@@ -44,12 +44,12 @@ const publisherStyles = css`
   img {
     max-height: 30px;
 
-    ${darkMode} {
+    .colormode-dark & {
       mix-blend-mode: exclusion;
       filter: invert(1);
     }
 
-    ${sepiaMode} {
+    .colormode-sepia & {
       mix-blend-mode: multiply;
     }
   }

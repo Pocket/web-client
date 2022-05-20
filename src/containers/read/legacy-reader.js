@@ -13,7 +13,7 @@ import { Toasts } from 'connectors/toasts/toast-list'
 import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
-import { ReaderFonts } from '@pocket/web-ui'
+import { ReaderFonts } from 'components/reader/fonts'
 import { Recommendations } from 'containers/read/recommendations'
 
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'

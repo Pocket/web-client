@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
 import { css, cx } from 'linaria'
 
-import { CrossIcon } from '@pocket/web-ui'
+import { CrossIcon } from 'components/icons/CrossIcon'
 
-import { ArchiveIcon } from '@pocket/web-ui'
-import { AddIcon } from '@pocket/web-ui'
-import { DeleteIcon } from '@pocket/web-ui'
-import { FavoriteIcon } from '@pocket/web-ui'
-import { FavoriteFilledIcon } from '@pocket/web-ui'
-import { TagIcon } from '@pocket/web-ui'
-import { breakpointMediumHandset } from '@pocket/web-ui'
+import { ArchiveIcon } from 'components/icons/ArchiveIcon'
+import { AddIcon } from 'components/icons/AddIcon'
+import { DeleteIcon } from 'components/icons/DeleteIcon'
+import { FavoriteIcon } from 'components/icons/FavoriteIcon'
+import { FavoriteFilledIcon } from 'components/icons/FavoriteFilledIcon'
+import { TagIcon } from 'components/icons/TagIcon'
+import { breakpointMediumHandset } from 'common/constants'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 
 import { Trans, useTranslation } from 'next-i18next'

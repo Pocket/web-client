@@ -1,12 +1,12 @@
 import React from 'react'
 import { css } from 'linaria'
-import { Button } from '@pocket/web-ui'
-import { breakpointLargeTablet } from '@pocket/web-ui' // 1023
-import { breakpointMediumTablet } from '@pocket/web-ui' // 959
-import { breakpointTinyTablet } from '@pocket/web-ui' // 719
-import { breakpointMediumHandset } from '@pocket/web-ui' // 479
-import { breakpointSmallHandset } from '@pocket/web-ui' // 399
-import { SaveIcon } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
+import { breakpointLargeTablet } from 'common/constants' // 1023
+import { breakpointMediumTablet } from 'common/constants' // 959
+import { breakpointTinyTablet } from 'common/constants' // 719
+import { breakpointMediumHandset } from 'common/constants' // 479
+import { breakpointSmallHandset } from 'common/constants' // 399
+import { SaveIcon } from 'components/icons/SaveIcon'
 import { SIGNUP_URL } from 'common/constants'
 import laptopImg from 'static/images/laptop-mylist.png'
 import { Trans, useTranslation } from 'next-i18next'

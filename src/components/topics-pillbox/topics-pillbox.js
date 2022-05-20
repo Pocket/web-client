@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
 
-import { Pill } from '@pocket/web-ui'
-import { headingSerifAlt } from '@pocket/web-ui'
+import { Pill } from 'components/pill/pill'
 
 export const pillboxStyle = css`
   h4 {
     margin-bottom: var(--spacing150);
-    ${headingSerifAlt}
+    font-family: var(--fontSerifAlt);
+    font-weight: 500;
   }
 
   ul {

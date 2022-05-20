@@ -1,5 +1,5 @@
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { breakpointTinyTablet } from '@pocket/web-ui'
+import { breakpointLargeHandset } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
 
 import { css } from 'linaria'
 

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { cancelDeleteUserTag } from 'containers/my-list/tags-page/tags-page.state'
@@ -35,14 +35,11 @@ export const TagDeleteModal = () => {
       <ModalFooter>
         <em className="footnote">
           <Trans i18nKey="confirm:delete-tag-copy" tagToDelete={tagToDelete}>
-            Deleting the tag <em>{{ tagToDelete }}</em> will remove it from all
-            items. Are you sure you want to proceed?
+            Deleting the tag <em>{{ tagToDelete }}</em> will remove it from all items. Are you sure
+            you want to proceed?
           </Trans>
         </em>
-        <Button
-          type="submit"
-          data-cy="delete-tag-confirm"
-          onClick={confirmTagDelete}>
+        <Button type="submit" data-cy="delete-tag-confirm" onClick={confirmTagDelete}>
           <Trans i18nKey="confirm:delete">Delete</Trans>
         </Button>
       </ModalFooter>

@@ -3,7 +3,8 @@ import { css } from 'linaria'
 import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
-import { HighlightIcon, IosShareIcon } from '@pocket/web-ui'
+import { HighlightIcon } from 'components/icons/HighlightIcon'
+import { IosShareIcon } from 'components/icons/IosShareIcon'
 import { Trans } from 'next-i18next'
 
 const popupContainer = css`

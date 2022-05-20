@@ -1,12 +1,13 @@
 import { css } from 'linaria'
 import { Rail } from 'components/rail/rail'
-import { ChevronLeftIcon, ChevronRightIcon } from '@pocket/web-ui'
+import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
+import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { QuoteList } from 'components/annotations/annotations.list'
 import { TicList } from 'components/annotations/annotations.tics'
 import classNames from 'classnames'
 import { useTranslation } from 'next-i18next'
-import { breakpointSmallTablet } from '@pocket/web-ui'
+import { breakpointSmallTablet } from 'common/constants'
 
 const sideBarWrapper = css`
   width: 110px;

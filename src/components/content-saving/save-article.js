@@ -1,11 +1,11 @@
 import { css } from 'linaria'
 import classNames from 'classnames'
 import { usePopover } from 'components/popover/popover'
-import { SaveIcon } from '@pocket/web-ui'
-import { SaveFilledIcon } from '@pocket/web-ui'
+import { SaveIcon } from 'components/icons/SaveIcon'
+import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 import { SavePopover } from 'components/item-actions/save-to-pocket'
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { Button } from '@pocket/web-ui'
+import { breakpointLargeHandset } from 'common/constants'
+import { Button } from 'components/buttons/button'
 import { useTranslation } from 'next-i18next'
 
 const saveArticleStyles = css`

@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from 'linaria'
 
-import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointLargeHandset } from 'common/constants'
 import { useTranslation } from 'next-i18next'
 
 const PocketWorthyWrapper = css`

@@ -1,6 +1,6 @@
 import { css } from 'linaria'
 import { usePopover, popoverBase } from 'components/popover/popover'
-import { OverflowMenuIcon } from '@pocket/web-ui'
+import { OverflowMenuIcon } from 'components/icons/OverflowMenuIcon'
 import PropTypes from 'prop-types'
 import { menuItemStyle } from './base'
 

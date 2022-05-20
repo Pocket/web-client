@@ -4,7 +4,7 @@ import { getBool } from 'common/utilities'
 import { followUser } from 'containers/profile/profile.state'
 import { unFollowUser } from 'containers/profile/profile.state'
 import Avatar from 'components/avatar/avatar'
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 
 const headerStyles = css`
   text-align: center;

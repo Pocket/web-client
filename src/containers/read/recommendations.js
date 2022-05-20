@@ -4,7 +4,7 @@ import { css } from 'linaria'
 import { COLUMN_WIDTH_RANGE } from 'containers/read/read'
 import { RecCard } from 'connectors/item-card/reader/card-rec'
 import { readerRecsRequest } from 'connectors/recit/recit.state'
-import { breakpointTinyTablet } from '@pocket/web-ui'
+import { breakpointTinyTablet } from 'common/constants'
 
 const asideWrapper = css`
   margin: 0 2.5rem;
@@ -85,11 +85,7 @@ export const Recommendations = ({ id }) => {
       <h2 className={headerStyles}>You Might Also Like</h2>
       <section className={sectionWrapper}>
         {Object.keys(recommendations).map((itemId, index) => (
-          <RecCard
-            key={itemId}
-            id={itemId}
-            position={index}
-          />
+          <RecCard key={itemId} id={itemId} position={index} />
         ))}
       </section>
     </aside>

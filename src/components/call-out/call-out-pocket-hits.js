@@ -7,10 +7,10 @@ import EmailSignupForm from 'components/email-signup-form/email-signup-form'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { pocketHitsSignupRequested } from 'connectors/pocket-hits/pocket-hits.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { breakpointSmallDesktop } from '@pocket/web-ui' // 1279
-import { breakpointSmallTablet } from '@pocket/web-ui' // 839
-import { breakpointTinyTablet } from '@pocket/web-ui' // 719
-import { breakpointLargeHandset } from '@pocket/web-ui' // 599
+import { breakpointSmallDesktop } from 'common/constants' // 1279
+import { breakpointSmallTablet } from 'common/constants' // 839
+import { breakpointTinyTablet } from 'common/constants' // 719
+import { breakpointLargeHandset } from 'common/constants' // 599
 import { useTranslation } from 'next-i18next'
 
 const FORM_ID = 'explore-engagement-signup'

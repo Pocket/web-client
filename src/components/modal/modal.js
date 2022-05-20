@@ -4,11 +4,9 @@ import ReactModal from 'react-modal'
 import classnames from 'classnames'
 import { css } from 'linaria'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
-import {
-  breakpointSmallDesktop,
-  breakpointTinyTablet,
-  breakpointLargeHandset
-} from '@pocket/web-ui'
+import { breakpointSmallDesktop } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
 
 import { ModalHeader } from './modal-header'
 import { ModalBody } from './modal-body'

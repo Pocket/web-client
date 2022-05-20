@@ -1,12 +1,12 @@
 import React from 'react'
 import { css } from 'linaria'
-import { Button } from '@pocket/web-ui'
-import { CrossIcon } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
+import { CrossIcon } from 'components/icons/CrossIcon'
 import { SIGNUP_URL } from 'common/constants'
 import { Chyron } from 'components/chyron/chyron'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { breakpointSmallDesktop } from '@pocket/web-ui' // 1023
-import { breakpointLargeTablet } from '@pocket/web-ui' // 1023
+import { breakpointSmallDesktop } from 'common/constants' // 1023
+import { breakpointLargeTablet } from 'common/constants' // 1023
 import { useTranslation, Trans } from 'next-i18next'
 
 const INSTANCE_ID = 'call-out-start-library'

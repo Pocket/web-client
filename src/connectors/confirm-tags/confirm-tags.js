@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, Trans } from 'next-i18next'
@@ -163,9 +163,7 @@ export function TaggingModal() {
             />
           ) : null}
         </TagBox>
-        {!isPremium ? (
-          <TagUpsell onVisible={handleImpression} />
-        ) : null}
+        {!isPremium ? <TagUpsell onVisible={handleImpression} /> : null}
         {isPremium && isSingleTag ? (
           <TagSuggestions
             suggestedTags={suggestedTags}

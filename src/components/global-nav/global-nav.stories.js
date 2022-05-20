@@ -1,6 +1,9 @@
 import React from 'react'
 
-import { SearchIcon, AddIcon, EditIcon, NotificationIcon } from '@pocket/web-ui'
+import { SearchIcon } from 'components/icons/SearchIcon'
+import { AddIcon } from 'components/icons/AddIcon'
+import { EditIcon } from 'components/icons/EditIcon'
+import { NotificationIcon } from 'components/icons/NotificationIcon'
 import GlobalNav from './global-nav'
 
 export default {

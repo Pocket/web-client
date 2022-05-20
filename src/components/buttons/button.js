@@ -117,7 +117,7 @@ const buttonStyles = css`
 
   &.large {
     font-size: 1.25rem;
-    padding: 100rem;
+    padding: 1rem;
   }
 
   &.small {

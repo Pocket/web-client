@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { css } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
 

@@ -1,7 +1,7 @@
 import ReactMarkdown from 'react-markdown'
 import { getImageCacheUrl } from 'common/utilities'
 import { css } from 'linaria'
-import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointLargeHandset } from 'common/constants'
 const authorBioStyle = css`
   display: flex;
   justify-content: space-between;

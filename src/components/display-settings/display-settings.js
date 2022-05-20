@@ -1,17 +1,15 @@
 import React, { useRef, useState } from 'react'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { Trans, useTranslation } from 'next-i18next'
-import {
-  PopupMenu,
-  PopupMenuGroup,
-  PopupMenuItem,
-  TextSizeIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-  PremiumIcon,
-  ChevronLeftIcon,
-  breakpointMediumHandset
-} from '@pocket/web-ui'
+import { breakpointMediumHandset } from 'common/constants'
+import { PopupMenu, PopupMenuGroup, PopupMenuItem } from 'components/popup-menu/popup-menu'
+
+import { TextSizeIcon } from 'components/icons/TextSizeIcon'
+import { ChevronDownIcon } from 'components/icons/ChevronDownIcon'
+import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
+import { PremiumIcon } from 'components/icons/PremiumIcon'
+import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
+
 import { css } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import { bottomTooltip } from 'components/tooltip/tooltip'

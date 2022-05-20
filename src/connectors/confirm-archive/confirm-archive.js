@@ -1,4 +1,4 @@
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { itemsArchiveConfirm } from 'connectors/items-by-id/my-list/items.archive'

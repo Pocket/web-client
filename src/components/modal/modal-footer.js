@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
-import { headingSansSerif } from '@pocket/web-ui'
 
 /**
  * Defaults to aligning child items to the right. Will likely contain button actions
  * but can be configured per instance
  */
 const modalFooterStyles = css`
-  ${headingSansSerif};
+  font-family: var(--fontSansSerif);
+  font-weight: 600;
   margin: 0;
   padding: var(--spacing100) var(--spacing150);
   display: flex;

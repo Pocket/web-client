@@ -1,11 +1,10 @@
 import { css } from 'linaria'
-import { fontSansSerif } from '@pocket/web-ui'
 import { MessagesHeader } from 'components/headers/messages-header'
 import classNames from 'classnames'
 import { Trans, useTranslation } from 'next-i18next'
 
 const emptyWrapper = css`
-  font-family: ${fontSansSerif};
+  font-family: var(--fontSansSerif);
 `
 
 export const MessageEmpty = () => {

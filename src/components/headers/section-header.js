@@ -1,8 +1,8 @@
 import { css } from 'linaria'
 import classNames from 'classnames'
-import { breakpointMediumHandset } from '@pocket/web-ui'
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { breakpointMediumTablet } from '@pocket/web-ui'
+import { breakpointMediumHandset } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
+import { breakpointMediumTablet } from 'common/constants'
 
 const sectionHeaderStyle = css`
   font-family: 'Doyle';

@@ -1,7 +1,9 @@
-import { PopupMenuGroup } from '@pocket/web-ui'
+import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
 import { StepperWrapper, IconWrapper, StepperButton } from 'components/stepper/stepper'
 import { StepperRange } from 'components/stepper/stepper-range'
-import { AddIcon, RemoveIcon, LineHeightIcon } from '@pocket/web-ui'
+import { AddIcon } from 'components/icons/AddIcon'
+import { RemoveIcon } from 'components/icons/RemoveIcon'
+import { LineHeightIcon } from 'components/icons/LineHeightIcon'
 import { useTranslation } from 'next-i18next'
 
 export const LineHeightSettings = ({

@@ -1,8 +1,8 @@
 import { cardsGrid } from 'components/items-layout/base'
 import { css } from 'linaria'
-import { breakpointSmallTablet } from '@pocket/web-ui'
-import { breakpointTinyTablet } from '@pocket/web-ui'
-import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointSmallTablet } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
 
 export const ruler = css`
   position: absolute;

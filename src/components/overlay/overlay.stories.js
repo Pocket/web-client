@@ -1,7 +1,7 @@
 import { css } from 'linaria'
 import classNames from 'classnames'
 import { overlayBase } from './overlay'
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 
 export default {
   title: 'Overlays/Base'

@@ -1,4 +1,4 @@
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { itemsDeleteConfirm } from 'connectors/items-by-id/my-list/items.delete'
@@ -42,11 +42,7 @@ export const DeleteModal = () => {
       </ModalBody>
       {batchStart ? null : (
         <ModalFooter>
-          <Button
-            type="submit"
-            data-cy="delete-confirm"
-            onClick={confirmDelete}
-            autoFocus={true}>
+          <Button type="submit" data-cy="delete-confirm" onClick={confirmDelete} autoFocus={true}>
             <Trans i18nKey="confirm:delete">Delete</Trans>
           </Button>
         </ModalFooter>

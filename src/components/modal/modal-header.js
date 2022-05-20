@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import classnames from 'classnames'
-import { headingSansSerif } from '@pocket/web-ui'
 
 const modalHeaderStyles = css`
-  ${headingSansSerif};
+  font-family: var(--fontSansSerif);
+  font-weight: 600;
   margin: 0;
   padding: 1.25rem var(--spacing150);
 

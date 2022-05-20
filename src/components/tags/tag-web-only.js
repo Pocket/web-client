@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { DiscoverFilledIcon } from '@pocket/web-ui'
+import { DiscoverFilledIcon } from 'components/icons/DiscoverFilledIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
 import classNames from 'classnames'

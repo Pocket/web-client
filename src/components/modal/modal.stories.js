@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { css } from 'linaria'
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import Modal, { ModalBody, ModalFooter } from './modal'
-import { TextArea } from '@pocket/web-ui'
+import { TextArea } from 'components/form-fields/text-area'
 
 export default {
   title: 'Overlays/Modal',

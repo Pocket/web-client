@@ -1,5 +1,5 @@
 import { css, cx } from 'linaria'
-import { ChevronDownIcon } from '@pocket/web-ui'
+import { ChevronDownIcon } from 'components/icons/ChevronDownIcon'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import { buttonReset } from 'components/buttons/button-reset'
 import Link from 'next/link'
@@ -64,14 +64,9 @@ const filterStyle = css`
 export function FilterMenu({ subset, filter, tag, query }) {
   const { t } = useTranslation()
 
-  const hasFilter = [
-    'search',
-    'favorites',
-    'highlights',
-    'articles',
-    'videos',
-    'tag'
-  ].includes(subset)
+  const hasFilter = ['search', 'favorites', 'highlights', 'articles', 'videos', 'tag'].includes(
+    subset
+  )
 
   const filterActive = (filterLink) => {
     const activeClass = filterLink === filter ? 'active' : ''
@@ -81,7 +76,7 @@ export function FilterMenu({ subset, filter, tag, query }) {
   const filterTitles = {
     unread: t('nav:my-list', 'My List'),
     archive: t('nav:archive', 'Archive'),
-    favorites: t('nav:favorites', 'Favorites'),
+    favorites: t('nav:favorites', 'Favorites')
   }
   const activeTitle = filterTitles[filter] || t('nav:all-items', 'All items')
 
@@ -103,7 +98,10 @@ export function FilterMenu({ subset, filter, tag, query }) {
 
   return hasFilter ? (
     <div className={cx(filterStyle, 'filter-wrapper')}>
-      <button ref={popTrigger} data-cy="filter-trigger" className={cx(buttonReset, 'filter-trigger')}>
+      <button
+        ref={popTrigger}
+        data-cy="filter-trigger"
+        className={cx(buttonReset, 'filter-trigger')}>
         {activeTitle}
         <ChevronDownIcon style={{ marginTop: 0, paddingLeft: '3px' }} />
       </button>

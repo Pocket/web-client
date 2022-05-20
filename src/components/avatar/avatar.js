@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { css } from 'linaria'
 
-import { darkMode } from '@pocket/web-ui'
-import { ProfileIcon } from '@pocket/web-ui'
+import { ProfileIcon } from 'components/icons/ProfileIcon'
 
 const avatarStyle = css`
   display: block;
@@ -31,7 +30,7 @@ const avatarStyle = css`
     background: var(--color-actionPrimarySubdued);
   }
 
-  ${darkMode} {
+  .colormode-dark & {
     &.with-image {
       &::before {
         border: 1px solid rgba(255, 255, 255, 0.12);

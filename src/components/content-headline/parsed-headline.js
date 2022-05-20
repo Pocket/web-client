@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointLargeHandset } from 'common/constants'
 import ReactMarkdown from 'react-markdown'
 
 const Headline = css`
@@ -34,7 +34,9 @@ const Description = css`
 export function ParsedHeadline({ title, description, useMarkdown }) {
   return (
     <>
-      <h1 className={Headline} data-cy="parsed-headline">{title}</h1>
+      <h1 className={Headline} data-cy="parsed-headline">
+        {title}
+      </h1>
       <h2 className={Description}>
         {useMarkdown ? (
           <ReactMarkdown skipHtml={true} unwrapDisallowed={true} allowedElements={['strong', 'em']}>

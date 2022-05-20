@@ -1,6 +1,6 @@
 import { css } from 'linaria'
 import classNames from 'classnames'
-import { SaveFilledIcon } from '@pocket/web-ui'
+import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 
 const logoWrapper = css`
   display: inline-block;

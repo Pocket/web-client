@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { FavoriteIcon } from '@pocket/web-ui'
+import { FavoriteIcon } from 'components/icons/FavoriteIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
 import classNames from 'classnames'

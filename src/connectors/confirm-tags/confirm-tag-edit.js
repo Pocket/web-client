@@ -1,7 +1,7 @@
 import { css } from 'linaria'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { cancelEditUserTag } from 'containers/my-list/tags-page/tags-page.state'
@@ -56,14 +56,11 @@ export const TagEditModal = () => {
       <ModalFooter>
         <em className="footnote">
           <Trans i18nKey="confirm:edit-tag-copy" tagToEdit={tagToEdit}>
-            Editing the tag <em>{{ tagToEdit }}</em> will change it on all
-            items. Are you sure you want to proceed?
+            Editing the tag <em>{{ tagToEdit }}</em> will change it on all items. Are you sure you
+            want to proceed?
           </Trans>
         </em>
-        <Button
-          type="submit"
-          data-cy="edit-tag-confirm"
-          onClick={confirmTagEdit}>
+        <Button type="submit" data-cy="edit-tag-confirm" onClick={confirmTagEdit}>
           <Trans i18nKey="confirm:confirm">Confirm</Trans>
         </Button>
       </ModalFooter>

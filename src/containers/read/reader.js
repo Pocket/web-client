@@ -21,7 +21,7 @@ import { Toasts } from 'connectors/toasts/toast-list'
 import { Onboarding } from 'connectors/onboarding/onboarding'
 
 import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
-import { ReaderFonts } from '@pocket/web-ui'
+import { ReaderFonts } from 'components/reader/fonts'
 
 import { Loader, LoaderCentered } from 'components/loader/loader'
 

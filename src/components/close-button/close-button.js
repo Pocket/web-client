@@ -1,6 +1,5 @@
 import { css, cx } from 'linaria'
-import { CrossIcon } from '@pocket/web-ui'
-import { screenReaderOnly } from '@pocket/web-ui'
+import { CrossIcon } from 'components/icons/CrossIcon'
 import { useTranslation, Trans } from 'next-i18next'
 
 const closeButtonStyles = css`
@@ -32,7 +31,15 @@ const closeButtonStyles = css`
   }
 
   .visually-hidden {
-    ${screenReaderOnly}
+    border: 0;
+    clip-path: polygon(0px 0px, 0px 0px, 0px 0px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
   }
 `
 

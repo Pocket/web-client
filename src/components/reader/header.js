@@ -1,7 +1,7 @@
 /* eslint  react/jsx-no-target-blank: 0*/
 import { css } from 'linaria'
 import Link from 'next/link'
-import { Pill } from '@pocket/web-ui'
+import { Pill } from 'components/pill/pill'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import classNames from 'classnames'
 import { Trans } from 'next-i18next'
