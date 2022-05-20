@@ -1,3 +1,5 @@
+// Removed from Home on 5/19/22
+
 import { useEffect } from 'react'
 import { HomeSimilarHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'

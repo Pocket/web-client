@@ -1,4 +1,5 @@
-import React from 'react'
+// Removed from Home on 5/19/22
+
 import { itemActionStyle } from 'components/item-actions/base'
 import { useSelector, useDispatch } from 'react-redux'
 import { getSimilarRecs } from 'containers/home/home.state'
