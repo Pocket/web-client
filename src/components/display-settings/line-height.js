@@ -1,9 +1,9 @@
 import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
 import { StepperWrapper, IconWrapper, StepperButton } from 'components/stepper/stepper'
 import { StepperRange } from 'components/stepper/stepper-range'
-import { AddIcon } from 'components/icons/components/AddIcon'
-import { RemoveIcon } from 'components/icons/components/RemoveIcon'
-import { LineHeightIcon } from 'components/icons/components/LineHeightIcon'
+import { AddIcon } from 'components/icons/AddIcon'
+import { RemoveIcon } from 'components/icons/RemoveIcon'
+import { LineHeightIcon } from 'components/icons/LineHeightIcon'
 import { useTranslation } from 'next-i18next'
 
 export const LineHeightSettings = ({

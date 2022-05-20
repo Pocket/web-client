@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react'
 import { css, cx } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
 
-import { OverflowMenuIcon } from 'components/icons/components/OverflowMenuIcon'
-import { IosShareIcon } from 'components/icons/components/IosShareIcon'
-import { DeleteIcon } from 'components/icons/components/DeleteIcon'
+import { OverflowMenuIcon } from 'components/icons/OverflowMenuIcon'
+import { IosShareIcon } from 'components/icons/IosShareIcon'
+import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
 import { PopupMenuItem } from 'components/popup-menu/popup-menu'
 

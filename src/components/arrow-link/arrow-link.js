@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { ArrowRightIcon } from 'components/icons/components/ArrowRightIcon'
+import { ArrowRightIcon } from 'components/icons/ArrowRightIcon'
 
 const linkWrapper = css`
   font-family: 'Graphik Web';

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
-import { ProfileIcon } from 'components/icons/components/ProfileIcon'
+import { ProfileIcon } from 'components/icons/ProfileIcon'
 
 const avatarStyle = css`
   display: block;

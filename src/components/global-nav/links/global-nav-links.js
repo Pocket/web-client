@@ -3,8 +3,8 @@ import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
 import { Trans } from 'next-i18next'
-import { DiscoverIcon } from 'components/icons/components/DiscoverIcon'
-import { ListViewIcon } from 'components/icons/components/ListViewIcon'
+import { DiscoverIcon } from 'components/icons/DiscoverIcon'
+import { ListViewIcon } from 'components/icons/ListViewIcon'
 
 export const DEFAULT_LINKS = [
   {

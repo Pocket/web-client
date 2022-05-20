@@ -17,8 +17,8 @@ const path = require('path')
 const { optimize, loadConfig } = require('svgo')
 const cliProgress = require('cli-progress')
 
-const SVG_INPUT_DIR = 'src/components/icons/svgs'
-const JS_OUTPUT_DIR = 'src/components/icons/components'
+const SVG_INPUT_DIR = 'icons'
+const JS_OUTPUT_DIR = 'src/components/icons'
 
 const copyOptions = {
   filter: (path) => /^[^.]+$/g.test(path)
@@ -92,7 +92,10 @@ const processSvgs = async function (onSuccess) {
     progressBar.increment()
   })
 
-  progressBar.stop()
+  fs.copy(`${SVG_INPUT_DIR}/_iconStyle.js`, `${JS_OUTPUT_DIR}/_iconStyle.js`, (err) => {
+    if (err) return console.error(err)
+    progressBar.stop()
+  })
 }
 
 /*
@@ -158,7 +161,7 @@ function convertSvgToComponentString(svg, componentName) {
   //prettier-ignore
   var componentString =`import { iconStyle } from 'components/icons/_iconStyle'
 import { cx } from 'linaria'
-    
+
 export const ${componentName}Icon = ({ className, ...rest }) => (
   <span className={cx(iconStyle, 'icon', className && className)} {...rest}>
     ${svg}

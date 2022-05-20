@@ -1,7 +1,7 @@
 /* eslint  react/jsx-no-target-blank: 0*/
 import { css } from 'linaria'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
-import { PremiumIcon } from 'components/icons/components/PremiumIcon'
+import { PremiumIcon } from 'components/icons/PremiumIcon'
 import { Button } from 'components/buttons/button'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'

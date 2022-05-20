@@ -1,5 +1,5 @@
 import { css, cx } from 'linaria'
-import { DiscoverFilledIcon } from 'components/icons/components/DiscoverFilledIcon'
+import { DiscoverFilledIcon } from 'components/icons/DiscoverFilledIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
 

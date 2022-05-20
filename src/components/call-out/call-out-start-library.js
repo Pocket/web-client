@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from 'linaria'
 import { Button } from 'components/buttons/button'
-import { CrossIcon } from 'components/icons/components/CrossIcon'
+import { CrossIcon } from 'components/icons/CrossIcon'
 import { SIGNUP_URL } from 'common/constants'
 import { Chyron } from 'components/chyron/chyron'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'

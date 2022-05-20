@@ -1,7 +1,7 @@
 import React from 'react'
 import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
-import { CrossIcon } from 'components/icons/components/CrossIcon'
+import { CrossIcon } from 'components/icons/CrossIcon'
 
 export const tagBase = css`
   font-family: 'Graphik Web';

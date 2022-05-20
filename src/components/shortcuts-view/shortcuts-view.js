@@ -1,7 +1,7 @@
 import { css, cx } from 'linaria'
 import { Modal, ModalBody } from 'components/modal/modal'
 import { useTranslation } from 'next-i18next'
-import { PremiumIcon } from 'components/icons/components/PremiumIcon'
+import { PremiumIcon } from 'components/icons/PremiumIcon'
 
 const shortcutsStyle = css`
   table {

@@ -1,5 +1,5 @@
 import { css, cx } from 'linaria'
-import { HighlightIcon } from 'components/icons/components/HighlightIcon'
+import { HighlightIcon } from 'components/icons/HighlightIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
 

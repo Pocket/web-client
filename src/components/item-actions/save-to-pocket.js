@@ -5,9 +5,9 @@ import { buttonReset } from 'components/buttons/button-reset'
 import Link from 'next/link'
 import { useTranslation, Trans } from 'next-i18next'
 
-import { SaveIcon } from 'components/icons/components/SaveIcon'
-import { SaveFilledIcon } from 'components/icons/components/SaveFilledIcon'
-import { ReadingIcon } from 'components/icons/components/ReadingIcon'
+import { SaveIcon } from 'components/icons/SaveIcon'
+import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
+import { ReadingIcon } from 'components/icons/ReadingIcon'
 
 const saveContainer = css`
   display: flex;

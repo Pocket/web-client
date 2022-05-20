@@ -1,5 +1,5 @@
 import { css, cx } from 'linaria'
-import { CrossIcon } from 'components/icons/components/CrossIcon'
+import { CrossIcon } from 'components/icons/CrossIcon'
 import { useTranslation, Trans } from 'next-i18next'
 
 const closeButtonStyles = css`
