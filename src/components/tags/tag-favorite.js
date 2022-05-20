@@ -1,5 +1,5 @@
 import { css, cx } from 'linaria'
-import { FavoriteIcon } from 'components/icons/FavoriteIcon'
+import { FavoriteIcon } from 'components/icons/components/FavoriteIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
 

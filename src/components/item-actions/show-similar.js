@@ -1,7 +1,7 @@
 import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import { useTranslation } from 'next-i18next'
-import { SimilarIcon } from 'components/icons/SimilarIcon'
+import { SimilarIcon } from 'components/icons/components/SimilarIcon'
 import { topTooltipDelayed } from 'components/tooltip/tooltip'
 const similarContainer = css`
   display: flex;

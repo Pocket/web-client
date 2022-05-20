@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
-import { CrossIcon } from 'components/icons/CrossIcon'
+import { CrossIcon } from 'components/icons/components/CrossIcon'
 import { breakpointSmallHandset, breakpointMediumTablet } from 'common/constants'
 import EmailSignupForm from 'components/email-signup-form/email-signup-form'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'

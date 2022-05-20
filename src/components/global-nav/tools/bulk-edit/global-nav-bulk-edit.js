@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 import { css, cx } from 'linaria'
 
-import { CrossIcon } from 'components/icons/CrossIcon'
+import { CrossIcon } from 'components/icons/components/CrossIcon'
 
-import { ArchiveIcon } from 'components/icons/ArchiveIcon'
-import { AddIcon } from 'components/icons/AddIcon'
-import { DeleteIcon } from 'components/icons/DeleteIcon'
-import { FavoriteIcon } from 'components/icons/FavoriteIcon'
-import { FavoriteFilledIcon } from 'components/icons/FavoriteFilledIcon'
-import { TagIcon } from 'components/icons/TagIcon'
+import { ArchiveIcon } from 'components/icons/components/ArchiveIcon'
+import { AddIcon } from 'components/icons/components/AddIcon'
+import { DeleteIcon } from 'components/icons/components/DeleteIcon'
+import { FavoriteIcon } from 'components/icons/components/FavoriteIcon'
+import { FavoriteFilledIcon } from 'components/icons/components/FavoriteFilledIcon'
+import { TagIcon } from 'components/icons/components/TagIcon'
 import { breakpointMediumHandset } from 'common/constants'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 

@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from 'react'
 import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
-import { HighlightIcon } from 'components/icons/HighlightIcon'
-import { IosShareIcon } from 'components/icons/IosShareIcon'
+import { HighlightIcon } from 'components/icons/components/HighlightIcon'
+import { IosShareIcon } from 'components/icons/components/IosShareIcon'
 import { Trans } from 'next-i18next'
 
 const popupContainer = css`

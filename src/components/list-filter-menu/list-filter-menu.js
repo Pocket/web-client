@@ -1,5 +1,5 @@
 import { css, cx } from 'linaria'
-import { ChevronDownIcon } from 'components/icons/ChevronDownIcon'
+import { ChevronDownIcon } from 'components/icons/components/ChevronDownIcon'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import { buttonReset } from 'components/buttons/button-reset'
 import Link from 'next/link'

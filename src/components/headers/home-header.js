@@ -1,6 +1,6 @@
 import { css, cx } from 'linaria'
 import { useTranslation } from 'next-i18next'
-import { CrossIcon } from 'components/icons/CrossIcon'
+import { CrossIcon } from 'components/icons/components/CrossIcon'
 import Link from 'next/link'
 
 const cardPageHeaderStyle = css`

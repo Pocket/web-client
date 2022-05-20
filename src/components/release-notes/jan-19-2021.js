@@ -1,4 +1,4 @@
-import { OverflowMenuIcon } from '@pocket/web-ui'
+import { OverflowMenuIcon } from 'components/icons/components/OverflowMenuIcon'
 import { Trans } from 'next-i18next'
 
 export default function ReleaseNotes() {

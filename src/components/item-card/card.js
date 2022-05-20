@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { cx } from 'linaria'
-import { SyndicatedIcon } from 'components/icons/SyndicatedIcon'
+import { SyndicatedIcon } from 'components/icons/components/SyndicatedIcon'
 
 import { CardMedia } from 'components/items-media/card-media'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'

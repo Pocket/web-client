@@ -1,7 +1,7 @@
 import { render, fireEvent, mockModal } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
-import { PlayIcon } from 'components/icons/PlayIcon'
-import { TagIcon } from 'components/icons/TagIcon'
+import { PlayIcon } from 'components/icons/components/PlayIcon'
+import { TagIcon } from 'components/icons/components/TagIcon'
 
 import GlobalNavTools from './global-nav-tools'
 

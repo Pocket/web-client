@@ -2,7 +2,7 @@ import { css } from 'linaria'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { PREMIUM_URL } from 'common/constants'
-import { PremiumIcon } from 'components/icons/PremiumIcon'
+import { PremiumIcon } from 'components/icons/components/PremiumIcon'
 import { Trans } from 'next-i18next'
 
 const upsellWrapper = css`

@@ -1,5 +1,5 @@
 import { css, cx } from 'linaria'
-import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
+import { SaveFilledIcon } from 'components/icons/components/SaveFilledIcon'
 
 const logoWrapper = css`
   display: inline-block;

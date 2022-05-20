@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { css, cx } from 'linaria'
-import { BookmarkFilledIcon } from 'components/icons/BookmarkFilledIcon'
+import { BookmarkFilledIcon } from 'components/icons/components/BookmarkFilledIcon'
 import { useInView } from 'react-intersection-observer'
 import { useHasChanged } from 'common/utilities/hooks/has-changed'
 

@@ -1,6 +1,6 @@
 import { css, cx } from 'linaria'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
-import { MailIcon } from 'components/icons/MailIcon'
+import { MailIcon } from 'components/icons/components/MailIcon'
 import { breakpointMediumTablet } from 'common/constants'
 import { SocialButton } from 'components/social-button/social-button'
 

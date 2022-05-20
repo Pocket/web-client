@@ -9,7 +9,7 @@ import { useTranslation } from 'next-i18next'
 import { TopicSelector } from 'connectors/topic-list/topic-selector'
 import { onboardingCloseTopicSelectionModal } from '../onboarding.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
+import { SaveFilledIcon } from 'components/icons/components/SaveFilledIcon'
 import RainbowReader from 'static/images/rainbow-reader-transparent.svg'
 
 const modalBodyStyles = css`

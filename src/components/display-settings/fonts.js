@@ -1,8 +1,8 @@
 
 import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
 import { PopupMenuItem } from 'components/popup-menu/popup-menu'
-import { CheckCircledIcon } from 'components/icons/CheckCircledIcon'
-import { PremiumIcon } from 'components/icons/PremiumIcon'
+import { CheckCircledIcon } from 'components/icons/components/CheckCircledIcon'
+import { PremiumIcon } from 'components/icons/components/PremiumIcon'
 
 import { css, cx} from 'linaria'
 import { FONT_TYPES } from 'components/fonts/fonts'

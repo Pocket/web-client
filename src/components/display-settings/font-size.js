@@ -2,9 +2,9 @@ import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
 import { StepperWrapper, IconWrapper, StepperButton } from 'components/stepper/stepper'
 import { StepperRange } from 'components/stepper/stepper-range'
 
-import { AddIcon } from 'components/icons/AddIcon'
-import { RemoveIcon } from 'components/icons/RemoveIcon'
-import { TextSettingsIcon } from 'components/icons/TextSettingsIcon'
+import { AddIcon } from 'components/icons/components/AddIcon'
+import { RemoveIcon } from 'components/icons/components/RemoveIcon'
+import { TextSettingsIcon } from 'components/icons/components/TextSettingsIcon'
 
 import { useTranslation } from 'next-i18next'
 
