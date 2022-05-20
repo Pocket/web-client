@@ -13,11 +13,10 @@ exports[`SideNav renders the Account side nav 1`] = `
       data-cy="side-nav-home"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -37,11 +36,10 @@ exports[`SideNav renders the Account side nav 1`] = `
       data-cy="side-nav-mylist"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -62,11 +60,10 @@ exports[`SideNav renders the Account side nav 1`] = `
         class="b19radgi"
       >
         <span
-          class="igxbmuu icon "
+          class="i1qqph0t icon"
         >
           <svg
             aria-hidden="true"
-            aria-labelledby=" "
             fill="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -83,11 +80,10 @@ exports[`SideNav renders the Account side nav 1`] = `
       data-cy="side-nav-discover"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -112,11 +108,10 @@ exports[`SideNav renders the Account side nav 1`] = `
       data-cy="side-nav-collections"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="none"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -164,11 +159,10 @@ exports[`SideNav renders the Account side nav 1`] = `
       data-cy="side-nav-scroll-to-top"
     >
       <span
-        class="igxbmuu icon "
+        class="i1qqph0t icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -198,11 +192,10 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
       data-cy="side-nav-home"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -222,11 +215,10 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
       data-cy="side-nav-mylist"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -247,11 +239,10 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
         class="b19radgi"
       >
         <span
-          class="igxbmuu icon "
+          class="i1qqph0t icon"
         >
           <svg
             aria-hidden="true"
-            aria-labelledby=" "
             fill="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -268,11 +259,10 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
       data-cy="side-nav-discover"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -297,11 +287,10 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
       data-cy="side-nav-collections"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="none"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -345,11 +334,10 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
       data-cy="side-nav-archive"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -379,11 +367,10 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
       data-cy="side-nav-favorites"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -403,11 +390,10 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
       data-cy="side-nav-highlights"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -427,11 +413,10 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
       data-cy="side-nav-articles"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -456,11 +441,10 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
       data-cy="side-nav-videos"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -493,11 +477,10 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
       data-cy="side-nav-all-tags"
     >
       <span
-        class="igxbmuu icon side-nav-icon"
+        class="i1qqph0t icon side-nav-icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -537,11 +520,10 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
       data-cy="side-nav-scroll-to-top"
     >
       <span
-        class="igxbmuu icon "
+        class="i1qqph0t icon"
       >
         <svg
           aria-hidden="true"
-          aria-labelledby=" "
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"

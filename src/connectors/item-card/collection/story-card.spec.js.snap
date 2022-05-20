@@ -73,11 +73,10 @@ exports[`ItemCard renders a story 1`] = `
         data-cy="article-save-btn-1731163180"
       >
         <span
-          class="igxbmuu icon "
+          class="i1qqph0t icon"
         >
           <svg
             aria-hidden="true"
-            aria-labelledby=" "
             fill="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"

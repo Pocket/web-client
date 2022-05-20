@@ -65,11 +65,10 @@ exports[`ItemCard renders a legacy saved item 1`] = `
           class="syndicated"
         >
           <span
-            class="igxbmuu icon "
+            class="i1qqph0t icon"
           >
             <svg
               aria-hidden="true"
-              aria-labelledby=" "
               fill="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
@@ -107,11 +106,10 @@ exports[`ItemCard renders a legacy saved item 1`] = `
             data-tooltip="item-action:unfavorite"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -133,11 +131,10 @@ exports[`ItemCard renders a legacy saved item 1`] = `
             data-tooltip="item-action:archive"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -169,11 +166,10 @@ exports[`ItemCard renders a legacy saved item 1`] = `
             data-tooltip="item-action:tag"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -198,11 +194,10 @@ exports[`ItemCard renders a legacy saved item 1`] = `
             data-tooltip="item-action:share"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -229,11 +224,10 @@ exports[`ItemCard renders a legacy saved item 1`] = `
             data-tooltip="item-action:delete"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -339,11 +333,10 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
             data-tooltip="item-action:favorite"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -365,11 +358,10 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
             data-tooltip="item-action:archive"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -401,11 +393,10 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
             data-tooltip="item-action:tag"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -430,11 +421,10 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
             data-tooltip="item-action:share"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -461,11 +451,10 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
             data-tooltip="item-action:delete"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -571,11 +560,10 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
             data-tooltip="item-action:favorite"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -597,11 +585,10 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
             data-tooltip="item-action:archive"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -633,11 +620,10 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
             data-tooltip="item-action:tag"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -662,11 +648,10 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
             data-tooltip="item-action:share"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -693,11 +678,10 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
             data-tooltip="item-action:delete"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -803,11 +787,10 @@ exports[`ItemCard renders a saved collection 1`] = `
             data-tooltip="item-action:favorite"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -829,11 +812,10 @@ exports[`ItemCard renders a saved collection 1`] = `
             data-tooltip="item-action:archive"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -865,11 +847,10 @@ exports[`ItemCard renders a saved collection 1`] = `
             data-tooltip="item-action:tag"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -894,11 +875,10 @@ exports[`ItemCard renders a saved collection 1`] = `
             data-tooltip="item-action:share"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -925,11 +905,10 @@ exports[`ItemCard renders a saved collection 1`] = `
             data-tooltip="item-action:delete"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1026,11 +1005,10 @@ exports[`ItemCard renders a saved image 1`] = `
             data-tooltip="item-action:favorite"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1052,11 +1030,10 @@ exports[`ItemCard renders a saved image 1`] = `
             data-tooltip="item-action:archive"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1088,11 +1065,10 @@ exports[`ItemCard renders a saved image 1`] = `
             data-tooltip="item-action:tag"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1117,11 +1093,10 @@ exports[`ItemCard renders a saved image 1`] = `
             data-tooltip="item-action:share"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1148,11 +1123,10 @@ exports[`ItemCard renders a saved image 1`] = `
             data-tooltip="item-action:delete"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1249,11 +1223,10 @@ exports[`ItemCard renders a saved video 1`] = `
             data-tooltip="item-action:favorite"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1275,11 +1248,10 @@ exports[`ItemCard renders a saved video 1`] = `
             data-tooltip="item-action:archive"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1311,11 +1283,10 @@ exports[`ItemCard renders a saved video 1`] = `
             data-tooltip="item-action:tag"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1340,11 +1311,10 @@ exports[`ItemCard renders a saved video 1`] = `
             data-tooltip="item-action:share"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1371,11 +1341,10 @@ exports[`ItemCard renders a saved video 1`] = `
             data-tooltip="item-action:delete"
           >
             <span
-              class="igxbmuu icon "
+              class="i1qqph0t icon"
             >
               <svg
                 aria-hidden="true"
-                aria-labelledby=" "
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
