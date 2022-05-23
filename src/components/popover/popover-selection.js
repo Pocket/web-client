@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
@@ -64,8 +64,6 @@ export const SelectionPopover = ({ anchor, addAnnotation, disablePopup, shareIte
     document.addEventListener('mousedown', isClickOutside)
     return document.removeEventListener('mousedown', isClickOutside)
   }, [disablePopup])
-    }
-  }
 
   const onHighlight = () => {
     addAnnotation()

@@ -136,7 +136,7 @@ const iconStyle = css`
 `
 
 export const MobileLink = ({
-  link: { name, isDisabled = false, url, icon, label, id, beta },
+  link: { name, isDisabled = false, url, icon, label, id },
   isSelected,
   handleClick
 }) => (
