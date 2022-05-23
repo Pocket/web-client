@@ -56,10 +56,12 @@ const headingStyles = css`
 export class QuoteList extends Component {
   renderCards = () => {
     const {
+      isPremium,
       annotations,
       onClickEvent,
       shareItem,
-      deleteAnnotation,
+      deleteHighlight,
+      toggleAnnotations,
       handleImpression
     } = this.props
     const cards = []
@@ -77,20 +79,20 @@ export class QuoteList extends Component {
             onClick={(e) => e.stopPropagation()}
             key={id}
             className={classNames(cardStyles, activeCardStyles, { active })}>
-            <Quote
-              // aria-label={translate('annotations.scrollTo')}
-              onClick={() => onClickEvent(annot.position)}>
+            <Quote onClick={() => onClickEvent(annot.position)}>
               {annot.quote}
             </Quote>
             <CreatedDate>{createdAt}</CreatedDate>
 
             <div className={menuWrapper}>
               <AnnotationMenu
+                isPremium={isPremium}
                 visible
                 alignRight
                 id={id}
                 shareItem={shareItem}
-                deleteAnnotation={deleteAnnotation}
+                deleteHighlight={deleteHighlight}
+                annotateItem={toggleAnnotations}
                 quote={annot.quote}
               />
             </div>

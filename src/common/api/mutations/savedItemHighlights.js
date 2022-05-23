@@ -87,3 +87,52 @@ export function updateHighlight(highlightId, input) {
     .then((response) => response?.data?.updateSavedItemHighlight)
     .catch((error) => console.error(error))
 }
+
+const createHighlightAnnotation = gql`
+  mutation CreateSavedItemHighlightNote($id: ID!, $input: String!) {
+    createSavedItemHighlightNote(id: $id, input: $input) {
+      text
+    }
+  }
+`
+
+export function createAnnotation({ id, input }) {
+  return requestGQL({
+    query: createHighlightAnnotation,
+    variables: { id, input }
+  })
+    .then((response) => response?.data?.createSavedItemHighlightNote)
+    .catch((error) => console.error(error))
+}
+
+const updateHighlightAnnotation = gql`
+  mutation UpdateSavedItemHighlightNote($id: ID!, $input: String!) {
+    updateSavedItemHighlightNote(id: $id, input: $input) {
+      text
+    }
+  }
+`
+
+export function updateAnnotation({ id, input }) {
+  return requestGQL({
+    query: updateHighlightAnnotation,
+    variables: { id, input }
+  })
+    .then((response) => response?.data?.updateSavedItemHighlightNote)
+    .catch((error) => console.error(error))
+}
+
+const deleteHighlightAnnotation = gql`
+  mutation DeleteSavedItemHighlightNote($id: ID!) {
+    deleteSavedItemHighlightNote(id: $id)
+  }
+`
+
+export function deleteAnnotation({ id }) {
+  return requestGQL({
+    query: deleteHighlightAnnotation,
+    variables: { id }
+  })
+    .then((response) => response?.data?.deleteSavedItemHighlightNote)
+    .catch((error) => console.error(error))
+}

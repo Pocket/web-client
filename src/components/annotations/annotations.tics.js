@@ -93,7 +93,13 @@ const floatingCardStyles = css`
   position: relative;
 `
 
-const Card = ({ annotation, shareItem, deleteAnnotation }) => {
+const Card = ({
+  isPremium,
+  annotation,
+  shareItem,
+  deleteHighlight,
+  annotateItem
+}) => {
   const id = annotation.annotation_id || annotation.id
   const createdAt = annotation.created_at || annotation._createdAt * 1000
 
@@ -109,9 +115,11 @@ const Card = ({ annotation, shareItem, deleteAnnotation }) => {
         <AnnotationMenu
           visible
           id={id}
+          isPremium={isPremium}
           shareItem={shareItem}
           quote={annotation.quote}
-          deleteAnnotation={deleteAnnotation}
+          deleteHighlight={deleteHighlight}
+          annotateItem={annotateItem}
         />
       </div>
     </CardPositioning>
@@ -119,11 +127,13 @@ const Card = ({ annotation, shareItem, deleteAnnotation }) => {
 }
 
 const HighlightIndex = ({
+  isPremium,
   annotation,
   onClickEvent,
   top,
   shareItem,
-  deleteAnnotation,
+  deleteHighlight,
+  toggleAnnotations,
   children
 }) => {
   const [hoverOpen, setHover] = useState(false)
@@ -173,10 +183,11 @@ const HighlightIndex = ({
       <div className={anchorWrapper}>
         <div className={classNames(flyAwayWrapper, { show: hoverOpen })}>
           <Card
+            isPremium={isPremium}
             annotation={annotation}
-            // active={onScreen}
             shareItem={shareItem}
-            deleteAnnotation={deleteAnnotation}
+            deleteHighlight={deleteHighlight}
+            annotateItem={toggleAnnotations}
           />
         </div>
         {children}
@@ -186,11 +197,13 @@ const HighlightIndex = ({
 }
 
 export const TicList = ({
+  isPremium,
   onClickEvent,
   annotations,
   annotationCount,
   shareItem,
-  deleteAnnotation,
+  deleteHighlight,
+  toggleAnnotations,
   visible
 }) => {
   const renderTics = () => {
@@ -217,14 +230,14 @@ export const TicList = ({
       tics.push(
         <HighlightIndex
           key={index}
-          // yCoord={key}
+          isPremium={isPremium}
           annotationId={annot.id}
           top={top}
           annotation={annot}
           onClickEvent={onClickEvent}
           shareItem={shareItem}
-          deleteAnnotation={deleteAnnotation}
-          // disabled={!visible || firstTime}
+          deleteHighlight={deleteHighlight}
+          toggleAnnotations={toggleAnnotations}
         />
       )
     })

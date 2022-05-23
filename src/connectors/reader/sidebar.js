@@ -6,6 +6,7 @@ import { toggleSidebar } from 'containers/read/read.state'
 import { deleteHighlightRequest } from 'containers/read/read.state'
 import { shareAction } from 'connectors/share-modal/share-modal.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { toggleAnnotationModal } from 'containers/read/read.state'
 
 export const SidebarWrapper = ({ id }) => {
   const dispatch = useDispatch()
@@ -22,6 +23,10 @@ export const SidebarWrapper = ({ id }) => {
 
   const handleSidebarToggle = () => dispatch(toggleSidebar())
 
+  const handleAnnotationToggle = (id) => {
+    dispatch(toggleAnnotationModal(id))
+  }
+
   const handleImpression = (identifier) => {
     dispatch(sendSnowplowEvent(identifier))
   }
@@ -31,7 +36,7 @@ export const SidebarWrapper = ({ id }) => {
     dispatch(shareAction({ item, quote }))
   }
 
-  const removeAnnotation = (annotationId) => {
+  const removeHighlight = (annotationId) => {
     dispatch(sendSnowplowEvent('reader.remove-highlight', analyticsData))
     dispatch(deleteHighlightRequest({ annotationId }))
   }
@@ -42,9 +47,10 @@ export const SidebarWrapper = ({ id }) => {
         isPremium={isPremium}
         sideBarOpen={sideBarOpen}
         toggleSidebar={handleSidebarToggle}
+        toggleAnnotations={handleAnnotationToggle}
         highlightList={highlightList}
         annotationCount={highlights?.length}
-        deleteAnnotation={removeAnnotation}
+        deleteHighlight={removeHighlight}
         shareItem={itemShare}
         handleImpression={handleImpression}
       />

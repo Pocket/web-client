@@ -6,7 +6,8 @@ export const HighlightInlineMenu = ({
   highlightHovered,
   annotationCount,
   shareItem,
-  deleteAnnotation
+  deleteHighlight,
+  annotateItem
 }) => {
   const inlineMenus = []
 
@@ -31,7 +32,8 @@ export const HighlightInlineMenu = ({
           left={x}
           shareItem={shareItem}
           quote={highlight.quote}
-          deleteAnnotation={deleteAnnotation}
+          deleteHighlight={deleteHighlight}
+          annotateItem={annotateItem}
           floating={true}
         />
       )

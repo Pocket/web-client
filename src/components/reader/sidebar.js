@@ -86,9 +86,10 @@ export const Sidebar = ({
   highlightList,
   annotationCount,
   shareItem,
-  deleteAnnotation,
+  deleteHighlight,
   isPremium,
-  handleImpression
+  handleImpression,
+  toggleAnnotations
 }) => {
   const { t } = useTranslation()
 
@@ -109,9 +110,10 @@ export const Sidebar = ({
           isPremium={isPremium}
           visible={sideBarOpen}
           shareItem={shareItem}
+          toggleAnnotations={toggleAnnotations}
           annotations={highlightList}
           annotationCount={annotationCount}
-          deleteAnnotation={deleteAnnotation}
+          deleteHighlight={deleteHighlight}
           onClickEvent={handleAnnotationClick}
           handleImpression={handleImpression}
         />
@@ -138,7 +140,8 @@ export const Sidebar = ({
         shareItem={shareItem}
         annotations={highlightList}
         annotationCount={annotationCount}
-        deleteAnnotation={deleteAnnotation}
+        deleteHighlight={deleteHighlight}
+        toggleAnnotations={toggleAnnotations}
         onClickEvent={handleAnnotationClick}
       />
     </aside>

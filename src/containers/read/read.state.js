@@ -10,6 +10,7 @@ import { UPDATE_COLUMN_WIDTH } from 'actions'
 import { UPDATE_FONT_SIZE } from 'actions'
 import { UPDATE_FONT_TYPE } from 'actions'
 import { TOGGLE_READER_SIDEBAR } from 'actions'
+import { TOGGLE_ANNOTATION_MODAL } from 'actions'
 
 // V3 actions
 import { ARTICLE_ITEM_REQUEST } from 'actions'
@@ -59,6 +60,9 @@ import { itemArchive } from 'common/api'
 import { itemUnArchive } from 'common/api'
 import { createHighlight } from 'common/api'
 import { deleteHighlight } from 'common/api'
+import { createAnnotation } from 'common/api'
+import { updateAnnotation } from 'common/api'
+import { deleteAnnotation as removeAnnotation } from 'common/api'
 
 import { READ_ITEM_REQUEST } from 'actions'
 import { READ_ITEM_SUCCESS } from 'actions'
@@ -94,6 +98,14 @@ import { HIGHLIGHT_DELETE_REQUEST } from 'actions'
 import { HIGHLIGHT_DELETE_SUCCESS } from 'actions'
 import { HIGHLIGHT_DELETE_FAILURE } from 'actions'
 
+import { HIGHLIGHT_ANNOTATION_SAVE_REQUEST } from 'actions'
+import { HIGHLIGHT_ANNOTATION_SAVE_SUCCESS } from 'actions'
+import { HIGHLIGHT_ANNOTATION_SAVE_FAILURE } from 'actions'
+
+import { HIGHLIGHT_ANNOTATION_DELETE_REQUEST } from 'actions'
+import { HIGHLIGHT_ANNOTATION_DELETE_SUCCESS } from 'actions'
+import { HIGHLIGHT_ANNOTATION_DELETE_FAILURE } from 'actions'
+
 import { deriveReaderItem } from 'common/api/derivers/item'
 
 /** ACTIONS
@@ -111,12 +123,15 @@ export const unArchiveItem = (id) => ({ type: READ_UNARCHIVE_REQUEST, id }) //pr
 export const setHighlightList = (highlightList) => ({ type: READ_SET_HIGHLIGHTS, highlightList }) //prettier-ignore
 export const saveHighlightRequest = ({ id, quote, patch }) => ({ type: HIGHLIGHT_SAVE_REQUEST, id, quote, patch }) //prettier-ignore
 export const deleteHighlightRequest = ({ annotationId }) => ({ type: HIGHLIGHT_DELETE_REQUEST, annotationId }) //prettier-ignore
+export const saveAnnotationRequest = ({ id, input }) => ({ type: HIGHLIGHT_ANNOTATION_SAVE_REQUEST, id, input }) //prettier-ignore
+export const deleteAnnotationRequest = ({ id }) => ({ type: HIGHLIGHT_ANNOTATION_DELETE_REQUEST, id }) //prettier-ignore
 // Settings actions
 export const updateLineHeight = (lineHeight) => ({ type: UPDATE_LINE_HEIGHT, lineHeight }) //prettier-ignore
 export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, columnWidth }) //prettier-ignore
 export const updateFontSize = (fontSize) => ({ type: UPDATE_FONT_SIZE, fontSize }) //prettier-ignore
 export const updateFontType = (fontFamily) => ({ type: UPDATE_FONT_TYPE, fontFamily }) //prettier-ignore
 export const toggleSidebar = () => ({ type: TOGGLE_READER_SIDEBAR }) //prettier-ignore
+export const toggleAnnotationModal = (id) => ({ type: TOGGLE_ANNOTATION_MODAL, id })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -134,6 +149,7 @@ const initialState = {
   fontSize: 3,
   fontFamily: 'blanco',
   sideBarOpen: false,
+  annotationsOpen: false,
 
   articleItem: null,
   savedData: null,
@@ -195,6 +211,12 @@ export const readReducers = (state = initialState, action) => {
 
     case TOGGLE_READER_SIDEBAR: {
       return { ...state, sideBarOpen: !state.sideBarOpen }
+    }
+
+    case TOGGLE_ANNOTATION_MODAL: {
+      const { id } = action
+      const annotationsOpen = id || false
+      return { ...state, annotationsOpen }
     }
 
     case READ_FAVORITE_SUCCESS:
@@ -295,6 +317,8 @@ export const readSagas = [
   takeEvery(READ_UNARCHIVE_SUCCESS, redirectToList),
   takeEvery(HIGHLIGHT_SAVE_REQUEST, highlightSaveRequest),
   takeEvery(HIGHLIGHT_DELETE_REQUEST, highlightDeleteRequest),
+  takeEvery(HIGHLIGHT_ANNOTATION_SAVE_REQUEST, highlightAnnotationSaveRequest),
+  takeEvery(HIGHLIGHT_ANNOTATION_DELETE_REQUEST, highlightAnnotationDeleteRequest),
   takeEvery(MUTATION_SUCCESS, checkMutations)
 ]
 
@@ -456,6 +480,30 @@ function* highlightDeleteRequest({ annotationId }) {
     return yield put({ type: HIGHLIGHT_DELETE_SUCCESS, highlights })
   } catch (error) {
     yield put({ type: HIGHLIGHT_DELETE_FAILURE, error })
+  }
+}
+
+function* highlightAnnotationSaveRequest({ id, input }) {
+  try {
+    console.log('highlightAnnotationSaveRequest', id, input)
+    const data = yield call(createAnnotation, { id, input })
+    console.log(data)
+
+    // reconcile items
+  } catch (error) {
+    yield put({ type: HIGHLIGHT_ANNOTATION_SAVE_FAILURE, error })
+  }
+}
+
+function* highlightAnnotationDeleteRequest({ id }) {
+  try {
+    console.log('highlightAnnotationDeleteRequest', id)
+    const data = yield call(removeAnnotation, { id })
+    console.log(data)
+
+    // reconcile items
+  } catch (error) {
+    yield put({ type: HIGHLIGHT_ANNOTATION_DELETE_FAILURE, error })
   }
 }
 

@@ -6,6 +6,7 @@ import { Trans, useTranslation } from 'next-i18next'
 import { OverflowMenuIcon } from '@pocket/web-ui'
 import { IosShareIcon } from '@pocket/web-ui'
 import { DeleteIcon } from '@pocket/web-ui'
+import { EditIcon } from '@pocket/web-ui'
 import { PopupMenuGroup } from '@pocket/web-ui'
 import { PopupMenuItem } from '@pocket/web-ui'
 
@@ -76,6 +77,7 @@ const menuWrapper = css`
 `
 
 export const AnnotationMenu = ({
+  isPremium,
   alignRight,
   visible,
   top = 0,
@@ -83,7 +85,8 @@ export const AnnotationMenu = ({
   shareItem,
   quote,
   id,
-  deleteAnnotation,
+  deleteHighlight,
+  annotateItem,
   floating
 }) => {
   const { t } = useTranslation()
@@ -123,11 +126,15 @@ export const AnnotationMenu = ({
   }
 
   const handleDelete = () => {
-    deleteAnnotation(id)
+    deleteHighlight(id)
   }
 
   const handleShare = () => {
     shareItem({ quote })
+  }
+
+  const handleAnnotate = () => {
+    annotateItem(id)
   }
 
   return (
@@ -168,6 +175,14 @@ export const AnnotationMenu = ({
                 icon={<IosShareIcon />}>
                 <Trans i18nKey="share">Share</Trans>
               </PopupMenuItem>
+              {annotateItem && isPremium ? (
+                <PopupMenuItem
+                  onClick={handleAnnotate}
+                  data-cy={`highlight-annotate-${id}`}
+                  icon={<EditIcon />}>
+                  <Trans i18nKey="annotate">Annotate</Trans>
+                </PopupMenuItem>
+              ) : null}
             </PopupMenuGroup>
           </ul>
         ) : null}
