@@ -90,13 +90,7 @@ function buildLink(network, rest) {
   return url.href
 }
 
-export const SocialButton = ({
-  network,
-  label,
-  dataTooltip,
-  onSocialShare,
-  ...rest
-}) => {
+export const SocialButton = ({ network, label, onSocialShare, ...rest }) => {
   const { width, height, icon } = SocialNetworks[network]
   const link = buildLink(network, rest)
   const opts = {
@@ -119,8 +113,7 @@ export const SocialButton = ({
       className={cx(socialButtonStyles, topTooltipDelayed)}
       aria-label={label}
       data-tooltip={label}
-      data-cy={`share-${network}`}
-    >
+      data-cy={`share-${network}`}>
       <SocialIcon />
     </button>
   )

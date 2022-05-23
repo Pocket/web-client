@@ -227,7 +227,6 @@ export default function LegacyReader() {
 
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
 
-  console.log('Legacy v3')
   return (
     <>
       <Head>

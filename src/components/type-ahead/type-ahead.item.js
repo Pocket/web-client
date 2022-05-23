@@ -35,7 +35,7 @@ export const TypeAheadItem = ({ item, index, action, isActive }) => {
   useEffect(() => {
     if (prevActive) return
     if (isActive) ref.current.scrollIntoView({ block: 'center' })
-  }, [isActive])
+  }, [isActive, prevActive])
 
   const clickAction = () => action(index)
 

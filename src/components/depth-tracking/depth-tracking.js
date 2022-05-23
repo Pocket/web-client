@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useCallback, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { once } from 'common/utilities/once/once'
 
@@ -19,7 +19,7 @@ const DepthTracking = ({ depthIncrements, onScrollDepth, children }) => {
   const triggers = getTriggers(depthIncrements, onScrollDepth)
   const ref = useRef(null)
 
-  function buildPositions() {
+  const buildPositions = useCallback(() => {
     const elementHeight = ref.current.getBoundingClientRect().height
     const elementToTop = ref.current.getBoundingClientRect().top + window.scrollY
 
@@ -29,9 +29,9 @@ const DepthTracking = ({ depthIncrements, onScrollDepth, children }) => {
     }))
 
     setPositions(positionMap)
-  }
+  }, [depthIncrements, triggers])
 
-  function checkScrollPosition() {
+  const checkScrollPosition = useCallback(() => {
     const windowY = window.pageYOffset + window.innerHeight
 
     positions.forEach((increment) => {
@@ -40,7 +40,7 @@ const DepthTracking = ({ depthIncrements, onScrollDepth, children }) => {
         callback()
       }
     })
-  }
+  }, [positions])
 
   useEffect(() => {
     const resizeListener = () => buildPositions()
@@ -67,7 +67,7 @@ const DepthTracking = ({ depthIncrements, onScrollDepth, children }) => {
       window.removeEventListener('resize', resizeListener)
       window.removeEventListener('scroll', scrollListener)
     }
-  }, [positions])
+  }, [buildPositions, checkScrollPosition, positions])
 
   return <div ref={ref}>{children}</div>
 }

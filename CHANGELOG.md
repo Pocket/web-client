@@ -1,3 +1,10 @@
+## [1.47.3](https://github.com/Pocket/web-client/compare/v1.47.2...v1.47.3) (2022-05-23)
+
+
+### Bug Fixes
+
+* **hooks:** update hooks dependencies ([1d0dd11](https://github.com/Pocket/web-client/commit/1d0dd11def3eb2b477c7f2d70664782fe79c727c))
+
 ## [1.47.2](https://github.com/Pocket/web-client/compare/v1.47.1...v1.47.2) (2022-05-18)
 
 

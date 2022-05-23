@@ -50,25 +50,20 @@ const iconWrapper = css`
   margin-right: 6px;
 `
 
-export const SelectionPopover = ({
-  anchor,
-  addAnnotation,
-  disablePopup,
-  shareItem
-}) => {
+export const SelectionPopover = ({ anchor, addAnnotation, disablePopup, shareItem }) => {
   const ref = useRef()
 
   useEffect(() => {
+    const isClickOutside = (e) => {
+      if (e.button !== 0) return // only process left-click
+      if (!ref.current || !ref.current.contains(e.target)) {
+        disablePopup()
+      }
+    }
+
     document.addEventListener('mousedown', isClickOutside)
     return document.removeEventListener('mousedown', isClickOutside)
-  }, [])
-
-  const isClickOutside = (e) => {
-    if (e.button !== 0) return // only process left-click
-    if (!ref.current || !ref.current.contains(e.target)) {
-      disablePopup()
-    }
-  }
+  }, [disablePopup])
 
   const onHighlight = () => {
     addAnnotation()
@@ -91,22 +86,16 @@ export const SelectionPopover = ({
     <div
       className={popupContainer}
       style={{
-        transform: `translate(${Math.round(center)}px, ${Math.round(
-          top + window.scrollY
-        )}px)`
+        transform: `translate(${Math.round(center)}px, ${Math.round(top + window.scrollY)}px)`
       }}>
       <div className={classNames(overlayBase, popupWrapper)} ref={ref}>
-        <button
-          className={classNames(buttonReset, buttonWrapper)}
-          onClick={onHighlight}>
+        <button className={classNames(buttonReset, buttonWrapper)} onClick={onHighlight}>
           <span className={iconWrapper}>
             <HighlightIcon />
           </span>
           <Trans i18nKey="annotations:highlight">Highlight</Trans>
         </button>
-        <button
-          className={classNames(buttonReset, buttonWrapper)}
-          onClick={onShare}>
+        <button className={classNames(buttonReset, buttonWrapper)} onClick={onShare}>
           <span className={iconWrapper}>
             <IosShareIcon />
           </span>

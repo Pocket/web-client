@@ -5,9 +5,6 @@ import { localStore } from 'common/utilities/browser-storage/browser-storage'
 const CHYRON_NOT_COMPLETED = 'not-completed'
 const CHYRON_COMPLETED = 'completed'
 
-export const getChyronId = (id) => `chyron-${id}`
-export const getChyronDismissalDate = (id) => `chyron-dismissed-${id}`
-
 const getCurrentUnixTime = () => Math.round(new Date().getTime() / 1000)
 
 // number of seconds in 30 days
@@ -17,10 +14,11 @@ const isDismissalExpired = (timeDismissed) =>
 
 const Chyron = ({ instanceId, initialDismissed, initialSuccess, children }) => {
   const [isDismissed, setDismissed] = useState(initialDismissed)
-  const chyronId = getChyronId(instanceId)
-  const chyronDismissalDate = getChyronDismissalDate(instanceId)
+  const chyronId = `chyron-${instanceId}`
+  const chyronDismissalDate = `chyron-dismissed-${instanceId}`
 
-  const resolveDismissedState = () => {
+  useEffect(() => {
+    // Calls to localstorage are sync
     const chyronCompleted = localStore.getItem(chyronId)
     const chyronDismissedDate = localStore.getItem(chyronDismissalDate)
 
@@ -48,11 +46,7 @@ const Chyron = ({ instanceId, initialDismissed, initialSuccess, children }) => {
     if (chyronCompleted === null) {
       localStore.setItem(chyronId, CHYRON_NOT_COMPLETED)
     }
-  }
-
-  useEffect(() => {
-    resolveDismissedState()
-  }, [])
+  }, [chyronDismissalDate, chyronId, initialSuccess])
 
   return isDismissed || initialSuccess ? null : (
     <div data-cy="chyron-wrapper">

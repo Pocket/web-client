@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Chyron, getChyronId, getChyronDismissalDate } from './chyron'
+import { Chyron } from './chyron'
 import { ScrollChyron } from './chyron-scroll'
 import { ContentParsed } from 'components/content-parsed/content-parsed'
 import { articleContent } from 'mock/article'
@@ -25,8 +25,11 @@ const SimpleChild = ({ dismissChyron, completeChyron }) => (
 )
 
 const resetLocalStorage = (instanceId) => {
-  localStorage.removeItem(getChyronId(instanceId))
-  localStorage.removeItem(getChyronDismissalDate(instanceId))
+  const chyronId = `chyron-${instanceId}`
+  const chyronDismissalDate = `chyron-dismissed-${instanceId}`
+
+  localStorage.removeItem(chyronId)
+  localStorage.removeItem(chyronDismissalDate)
 
   // reload page
   document.location.reload()
