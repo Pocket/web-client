@@ -55,7 +55,7 @@ export const Listen = ({ isAuthenticated, pointer }) => {
     error: <p className={signUpWrapper}>Something went wrong! Sorry about that 😬</p>
   }
 
-  return !isAuthenticated ? (
+  return isAuthenticated ? (
     <div className={playerWrapper}>
       {ListenButton[playState]}
     </div>
