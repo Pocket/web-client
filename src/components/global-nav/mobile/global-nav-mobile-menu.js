@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
-import classnames from 'classnames'
+import { css, cx } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
 import { PremiumIcon } from 'components/icons/PremiumIcon'
 import { MenuIcon } from 'components/icons/MenuIcon'
@@ -145,10 +144,7 @@ export const MobileLink = ({
     <Link href={isDisabled ? null : url}>
       <a
         id={id}
-        className={classnames({
-          selected: isSelected,
-          disabled: isDisabled
-        })}
+        className={cx(isSelected && 'selected', isDisabled && 'disabled')}
         onClick={(event) => {
           handleClick(event, name, url)
         }}>
@@ -179,7 +175,7 @@ const DrawerHeader = ({ handleClose }) => {
         data-tooltip={t('nav:close', 'Close')}
         onClick={handleClose}
         variant="inline"
-        className={classnames(iconStyle, bottomTooltip)}>
+        className={cx(iconStyle, bottomTooltip)}>
         <ChevronLeftIcon />
       </Button>
     </div>
@@ -287,7 +283,7 @@ const GlobalNavMobileMenu = ({
         aria-label={t('nav:open-the-pocket-mobile-menu', 'Open the Pocket mobile menu')}
         data-tooltip={t('nav:open', 'Open')}
         variant="inline"
-        className={classnames(iconStyle, toggleClass, bottomTooltip)}>
+        className={cx(iconStyle, toggleClass, bottomTooltip)}>
         <MenuIcon />
       </Button>
       <Drawer

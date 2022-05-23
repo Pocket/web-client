@@ -1,9 +1,9 @@
 import { css, cx } from 'linaria'
 
-import { PopupMenuGroup } from '@pocket/web-ui'
-import { GridViewIcon } from '@pocket/web-ui'
-import { ListViewIcon } from '@pocket/web-ui'
-import { DetailViewIcon } from '@pocket/web-ui'
+import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
+import { GridViewIcon } from 'components/icons/GridViewIcon'
+import { ListViewIcon } from 'components/icons/ListViewIcon'
+import { DetailViewIcon } from 'components/icons/DetailViewIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 
 import { bottomTooltip } from 'components/tooltip/tooltip'

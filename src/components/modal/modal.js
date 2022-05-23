@@ -1,8 +1,7 @@
 import { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
-import classnames from 'classnames'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import { breakpointSmallDesktop } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
@@ -187,27 +186,23 @@ const Modal = ({
           onAfterClose()
         }}
         shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
-        className={classnames([
+        className={cx(
           className,
           modalStyles,
           modalContentClassName,
-          {
-            'animation-base': doesAnimateTransition,
-            'animation-show': doesAnimateTransition && readyAnimate && isOpen,
-            'animation-hide': doesAnimateTransition && readyAnimate && !isOpen,
-            'force-mobile': forceMobile
-          }
-        ])}
-        overlayClassName={classnames([
+          doesAnimateTransition && 'animation-base',
+          doesAnimateTransition && readyAnimate && isOpen && 'animation-show',
+          doesAnimateTransition && readyAnimate && !isOpen && 'animation-hide',
+          forceMobile && 'force-mobile'
+        )}
+        overlayClassName={cx([
           overlayStyles,
           overlayClassName,
-          {
-            'animation-base': doesAnimateTransition,
-            'animation-show': doesAnimateTransition && readyAnimate && isOpen,
-            'animation-hide': doesAnimateTransition && readyAnimate && !isOpen
-          }
+          doesAnimateTransition && 'animation-base',
+          doesAnimateTransition && readyAnimate && isOpen && 'animation-show',
+          doesAnimateTransition && readyAnimate && !isOpen && 'animation-hide'
         ])}
-        portalClassName={classnames([portalClassName])}
+        portalClassName={cx([portalClassName])}
         closeTimeoutMS={closeTimeoutMS} // necessary to make outgoing animation display
         data-cy="modal"
         contentRef={(node) => (modalContentRef = node)}>

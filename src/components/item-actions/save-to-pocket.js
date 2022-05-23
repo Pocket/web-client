@@ -1,7 +1,6 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import { LOGIN_URL, SIGNUP_URL } from 'common/constants'
-import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
 import Link from 'next/link'
 import { useTranslation, Trans } from 'next-i18next'
@@ -144,7 +143,7 @@ export const SaveToPocket = function ({
     ]
   })
 
-  const saveClasses = classNames(
+  const saveClasses = cx(
     buttonReset,
     saveContainer,
     saveStatus,

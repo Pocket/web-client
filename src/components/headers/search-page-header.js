@@ -1,5 +1,5 @@
 import { css, cx } from 'linaria'
-import { breakpointLargeTablet } from '@pocket/web-ui'
+import { breakpointLargeTablet } from 'common/constants'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { useTranslation } from 'next-i18next'
 import { Loader } from 'components/loader/loader'
@@ -42,8 +42,7 @@ export const SearchPageHeader = ({
           </span>
         ) : (
           <span>
-            {total || 0}{' '}
-            {t('search:search-results', 'Search Results')}
+            {total || 0} {t('search:search-results', 'Search Results')}
           </span>
         )}
       </h1>
@@ -53,7 +52,8 @@ export const SearchPageHeader = ({
         showRelevance={isPremium}
         handleNewest={handleNewest}
         handleOldest={handleOldest}
-        handleRelevance={handleRelevance} />
+        handleRelevance={handleRelevance}
+      />
     </header>
   ) : null
 }

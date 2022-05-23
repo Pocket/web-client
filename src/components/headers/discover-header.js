@@ -1,11 +1,11 @@
 import { css, cx } from 'linaria'
 import ReactMarkdown from 'react-markdown'
-import { breakpointSmallHandset } from '@pocket/web-ui'
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { breakpointTinyTablet } from '@pocket/web-ui'
-import { breakpointSmallTablet } from '@pocket/web-ui'
-import { breakpointMediumTablet } from '@pocket/web-ui'
-import { breakpointLargeTablet } from '@pocket/web-ui'
+import { breakpointSmallHandset } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
+import { breakpointSmallTablet } from 'common/constants'
+import { breakpointMediumTablet } from 'common/constants'
+import { breakpointLargeTablet } from 'common/constants'
 
 const cardPageHeaderStyle = css`
   margin-bottom: var(--spacing100);
@@ -104,7 +104,9 @@ const cardListHeadingStyle = css`
 export const CardPageHeader = ({ title, subHeading }) => {
   return title ? (
     <header className={cardPageHeaderStyle}>
-      <h1 className="pageTitle" data-cy="page-title">{title}</h1>
+      <h1 className="pageTitle" data-cy="page-title">
+        {title}
+      </h1>
       {subHeading ? <h2 className={cx('h3', subHeadingStyle)}>{subHeading}</h2> : null}
     </header>
   ) : null

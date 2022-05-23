@@ -1,6 +1,6 @@
 import { css } from 'linaria'
 import Link from 'next/link'
-import { Pill } from '@pocket/web-ui'
+import { Pill } from 'components/pill/pill'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import { SectionHeader } from 'components/headers/section-header'
 import { matchSorter } from 'match-sorter'

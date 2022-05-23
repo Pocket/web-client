@@ -116,9 +116,7 @@ const closeLabelStyle = css`
   color: var(--color-textSecondary);
 `
 
-const CloseLabel = ({ children }) => (
-  <span className={closeLabelStyle}>{children}</span>
-)
+const CloseLabel = ({ children }) => <span className={closeLabelStyle}>{children}</span>
 
 const buttonStyle = css`
   margin-left: auto;
@@ -147,10 +145,7 @@ const buttonStyle = css`
 
 const CloseButton = ({ onClick }) => {
   return (
-    <button
-      className={`${buttonStyle} cancel-button`}
-      onClick={onClick}
-      data-cy="bulk-close">
+    <button className={`${buttonStyle} cancel-button`} onClick={onClick} data-cy="bulk-close">
       <CrossIcon className={navIconStyle} />
       <CloseLabel>
         <Trans i18nKey="nav:cancel">Cancel</Trans>
@@ -183,9 +178,7 @@ function GlobalNavBulkEdit({
   const shouldArchive = batchStatus === 'archive'
   const clearAction = bulkItemsCount >= 1 ? clearBulkItems : onClose
   const clearCopy =
-    bulkItemsCount >= 1
-      ? t('nav:clear-copy', 'Clear')
-      : t('nav:cancel-copy', 'Cancel')
+    bulkItemsCount >= 1 ? t('nav:clear-copy', 'Clear') : t('nav:cancel-copy', 'Cancel')
 
   useEffect(() => {
     Mousetrap.bind('esc', clearAction)
@@ -208,14 +201,10 @@ function GlobalNavBulkEdit({
 
             <button
               aria-label={
-                shouldFavorite
-                  ? t('nav:favorite', 'Favorite')
-                  : t('nav:unfavorite', 'Unfavorite')
+                shouldFavorite ? t('nav:favorite', 'Favorite') : t('nav:unfavorite', 'Unfavorite')
               }
               data-tooltip={
-                shouldFavorite
-                  ? t('nav:favorite', 'Favorite')
-                  : t('nav:unfavorite', 'Unfavorite')
+                shouldFavorite ? t('nav:favorite', 'Favorite') : t('nav:unfavorite', 'Unfavorite')
               }
               data-cy="bulk-favorite"
               className={cx(buttonStyle, bottomTooltip)}
@@ -229,14 +218,10 @@ function GlobalNavBulkEdit({
 
             <button
               aria-label={
-                shouldArchive
-                  ? t('nav:archive-tooltip', 'Archive')
-                  : t('nav:add-tooltip', 'Add')
+                shouldArchive ? t('nav:archive-tooltip', 'Archive') : t('nav:add-tooltip', 'Add')
               }
               data-tooltip={
-                shouldArchive
-                  ? t('nav:archive-tooltip', 'Archive')
-                  : t('nav:add-tooltip', 'Add')
+                shouldArchive ? t('nav:archive-tooltip', 'Archive') : t('nav:add-tooltip', 'Add')
               }
               data-cy="bulk-archive"
               className={cx(buttonStyle, bottomTooltip)}
@@ -266,10 +251,7 @@ function GlobalNavBulkEdit({
             </div>
           </div>
         </div>
-        <button
-          className="bulk-cancel"
-          onClick={clearAction}
-          data-cy="clear-button">
+        <button className="bulk-cancel" onClick={clearAction} data-cy="clear-button">
           {clearCopy}
         </button>
         {onClose ? <CloseButton onClick={onClose} data-cy="add-close" /> : null}

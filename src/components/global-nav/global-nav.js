@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
-import classnames from 'classnames'
+import { css, cx } from 'linaria'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { useTranslation } from 'next-i18next'
 
@@ -239,7 +238,7 @@ const GlobalNav = ({
   }, [viewportWidth])
 
   return (
-    <header className={classnames(headerStyle, { 'logged-in': isLoggedIn })}>
+    <header className={cx(headerStyle, isLoggedIn && 'logged-in')}>
       <PageContainer className="global-nav-container">
         <nav className={navStyle} data-cy="global-nav">
           <div className="site-nav">
@@ -282,7 +281,7 @@ const GlobalNav = ({
                 />
               </div>
 
-              <div className={classnames(toolsStyle, { 'is-premium': isPremium })}>
+              <div className={cx(toolsStyle, isPremium && 'is-premium')}>
                 <GlobalNavTools tools={tools} onToolClick={onToolClick} />
               </div>
 

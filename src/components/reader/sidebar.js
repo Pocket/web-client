@@ -1,11 +1,10 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { Rail } from 'components/rail/rail'
 import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { QuoteList } from 'components/annotations/annotations.list'
 import { TicList } from 'components/annotations/annotations.tics'
-import classNames from 'classnames'
 import { useTranslation } from 'next-i18next'
 import { breakpointSmallTablet } from 'common/constants'
 
@@ -102,10 +101,8 @@ export const Sidebar = ({
   }
 
   return (
-    <aside className={classNames(sideBarWrapper, { active: sideBarOpen })}>
-      <Rail
-        visible={sideBarOpen}
-        clickAction={sideBarOpen ? null : toggleSidebar}>
+    <aside className={cx(sideBarWrapper, sideBarOpen && 'active')}>
+      <Rail visible={sideBarOpen} clickAction={sideBarOpen ? null : toggleSidebar}>
         <QuoteList
           isPremium={isPremium}
           visible={sideBarOpen}
@@ -117,10 +114,10 @@ export const Sidebar = ({
           handleImpression={handleImpression}
         />
 
-        <div className={classNames(buttonRail, 'button-rail')}>
+        <div className={cx(buttonRail, 'button-rail')}>
           <div className={verticallyCentered}>
             <button
-              onClick={sideBarOpen ? toggleSidebar: null}
+              onClick={sideBarOpen ? toggleSidebar : null}
               aria-label={
                 sideBarOpen
                   ? t('nav:close-highlights-menu', 'Close Highlights Menu')

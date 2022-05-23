@@ -1,7 +1,6 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
-import classNames from 'classnames'
 
 const trendingTag = css`
   background-color: #e8f7f6;
@@ -9,7 +8,5 @@ const trendingTag = css`
 `
 
 export const TrendingTag = ({ children }) => (
-  <div className={classNames(buttonReset, tagBase, trendingTag)}>
-    {children}
-  </div>
+  <div className={cx(buttonReset, tagBase, trendingTag)}>{children}</div>
 )

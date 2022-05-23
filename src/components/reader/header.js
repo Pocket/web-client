@@ -1,9 +1,8 @@
 /* eslint  react/jsx-no-target-blank: 0*/
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import Link from 'next/link'
 import { Pill } from 'components/pill/pill'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
-import classNames from 'classnames'
 import { Trans } from 'next-i18next'
 import dayjs from 'dayjs'
 
@@ -142,7 +141,7 @@ export const ItemHeader = ({
           <div className={authorWrapper}>
             <Trans i18nKey="reader:by">By</Trans> {authorList}
           </div>
-        ): null}
+        ) : null}
         {publisher ? <div className={domainWrapper}>{publisher}</div> : null}
         {timeToRead ? <div className={timeWrapper}>{timeToRead} min</div> : null}
         {datePublished ? <div className={dateWrapper}>{timestamp}</div> : null}
@@ -160,7 +159,7 @@ export const ItemHeader = ({
           <Trans i18nKey="reader:view-original">View Original</Trans>
         </a>
         {tags && (
-          <div className={classNames(tagsWrapper, pillboxStyle)}>
+          <div className={cx(tagsWrapper, pillboxStyle)}>
             <ul className="list">
               {tags.map((tag) => (
                 <li key={tag}>

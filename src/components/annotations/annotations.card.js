@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import dayjs from 'dayjs'
-import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
 import { Trans } from 'next-i18next'
 
@@ -36,7 +35,7 @@ const quoteStyles = css`
   }
 `
 export const Quote = ({ children, ...args }) => (
-  <button className={classNames(buttonReset, quoteStyles)} {...args}>
+  <button className={cx(buttonReset, quoteStyles)} {...args}>
     {children}
   </button>
 )
@@ -65,14 +64,14 @@ export class CreatedDate extends Component {
       let date = diff
       return (
         <Trans i18nKey="annotations:added-one-day-ago" date={date}>
-          Added {{date}} day ago
+          Added {{ date }} day ago
         </Trans>
       )
     } else if (diff < 7) {
       let date = diff
       return (
         <Trans i18nKey="annotations:added-many-days-ago" date={date}>
-          Added {{date}} days ago
+          Added {{ date }} days ago
         </Trans>
       )
     }
@@ -80,7 +79,7 @@ export class CreatedDate extends Component {
     let date = ts.format('MMM D, YYYY')
     return (
       <Trans i18nKey="annotations:added-date" date={date}>
-        Added {{date}}
+        Added {{ date }}
       </Trans>
     )
   }
@@ -106,27 +105,18 @@ export class CardPositioning extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (
-      prevProps.show !== this.props.show &&
-      this.props.show &&
-      !this.state.topAdj
-    ) {
+    if (prevProps.show !== this.props.show && this.props.show && !this.state.topAdj) {
       this.setTopAdjustment()
     }
   }
 
   setTopAdjustment() {
     if (this.contentNode) {
-      let docHeight =
-        window.innerHeight || document.documentElement.clientHeight
+      let docHeight = window.innerHeight || document.documentElement.clientHeight
       let { top, bottom } = this.contentNode.getBoundingClientRect()
 
       const topAdj =
-        top < 63
-          ? Math.abs(63 - top)
-          : bottom > docHeight
-          ? -Math.abs(bottom - docHeight)
-          : 0
+        top < 63 ? Math.abs(63 - top) : bottom > docHeight ? -Math.abs(bottom - docHeight) : 0
 
       this.setState({ topAdj })
     }
@@ -137,7 +127,7 @@ export class CardPositioning extends Component {
 
     return (
       <div
-        className={classNames(cardStyles, addedStyles, { arrow })}
+        className={cx(cardStyles, addedStyles, arrow && 'arrow')}
         style={{ top: this.state.topAdj }}
         ref={(node) => (this.contentNode = node)}>
         {this.props.children}

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
-import classnames from 'classnames'
+import { css, cx } from 'linaria'
 
 import { Pill } from 'components/pill/pill'
 
@@ -57,8 +56,8 @@ const TopicsPillbox = ({
   }
 
   return (
-    <div className={classnames(pillboxStyle, `align-${alignItems}`)}>
-      <h4 className={classnames('h5', headingClassName)} data-cy="heading">
+    <div className={cx(pillboxStyle, `align-${alignItems}`)}>
+      <h4 className={cx('h5', headingClassName)} data-cy="heading">
         {headingText}
       </h4>
       <ul>

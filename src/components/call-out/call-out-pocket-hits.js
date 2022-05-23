@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import EmailSignupForm from 'components/email-signup-form/email-signup-form'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { pocketHitsSignupRequested } from 'connectors/pocket-hits/pocket-hits.state'
@@ -234,7 +233,7 @@ const CallOutPocketHitsSignup = ({
         <div className="brandBlock">
           <aside>{t('call-out:fuel-your-mind', 'Get ready to fuel your mind.')}</aside>
           <blockquote>
-            <span className={classNames('copy', { isSuccessful })}>
+            <span className={cx('copy', isSuccessful && 'isSuccessful')}>
               <svg
                 className="zigzag"
                 xmlns="http://www.w3.org/2000/svg"

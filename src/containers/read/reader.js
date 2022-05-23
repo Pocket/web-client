@@ -2,8 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 
 import { getReadItem } from './read.state'
 
@@ -97,16 +96,14 @@ export default function Reader() {
     // dispatch(selectShortcutItem(id))
   }, [dispatch, id])
 
-  if (!item) return (
-    <LoaderCentered>
-      <Loader isVisible />
-    </LoaderCentered>
-  )
+  if (!item)
+    return (
+      <LoaderCentered>
+        <Loader isVisible />
+      </LoaderCentered>
+    )
 
-  const {
-    title,
-    hasVideo
-  } = item
+  const { title, hasVideo } = item
 
   const customStyles = {
     maxWidth: `${COLUMN_WIDTH_RANGE[columnWidth]}px`,
@@ -115,7 +112,7 @@ export default function Reader() {
     fontFamily: FONT_TYPES[fontFamily].family
   }
 
-  const articleClasses = classNames(
+  const articleClasses = cx(
     ReaderFonts,
     GoogleFonts,
     'reader',

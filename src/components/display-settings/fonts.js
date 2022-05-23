@@ -1,10 +1,10 @@
-import { css } from 'linaria'
-import classNames from 'classnames'
 
 import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
 import { PopupMenuItem } from 'components/popup-menu/popup-menu'
 import { CheckCircledIcon } from 'components/icons/CheckCircledIcon'
 import { PremiumIcon } from 'components/icons/PremiumIcon'
+
+import { css, cx} from 'linaria'
 import { FONT_TYPES } from 'components/fonts/fonts'
 
 import BlancoSVG from 'static/images/font-icons/blanco.svg'
@@ -73,7 +73,7 @@ export const FontSettings = ({ updateFontFamily, currentFont, isPremium }) => {
           <PopupMenuItem
             key={font}
             data-cy={`display-select-font-${font}`}
-            className={classNames(fontFamilyButton, { showPremium })}
+            className={cx(fontFamilyButton, showPremium && 'showPremium')}
             icon={showPremium ? <PremiumIcon /> : null}
             onClick={click}
             tabIndex={showPremium ? '-1' : '0'}

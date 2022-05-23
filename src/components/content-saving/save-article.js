@@ -1,5 +1,4 @@
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 import { usePopover } from 'components/popover/popover'
 import { SaveIcon } from 'components/icons/SaveIcon'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
@@ -70,7 +69,7 @@ const saveArticleStyles = css`
 export function SaveArticleTop({ url, saveAction, saveStatus, isAuthenticated, trackSaveClick }) {
   const { t } = useTranslation()
   return (
-    <div className={classNames(saveArticleStyles, 'top', 'save-article')}>
+    <div className={cx(saveArticleStyles, 'top', 'save-article')}>
       <SaveStoryButton
         trackSaveClick={trackSaveClick}
         isAuthenticated={isAuthenticated}
@@ -95,7 +94,7 @@ export function SaveArticleBottom({
   const { t } = useTranslation()
 
   return (
-    <div className={classNames(saveArticleStyles, 'top', 'save-article')}>
+    <div className={cx(saveArticleStyles, 'top', 'save-article')}>
       <SaveStoryButton
         trackSaveClick={trackSaveClick}
         isAuthenticated={isAuthenticated}

@@ -1,5 +1,4 @@
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 
 const logoWrapper = css`
@@ -63,20 +62,20 @@ const svg_triangle =
 
 export const LogoAnimated = () => (
   <div className={logoWrapper}>
-    <div className={classNames(triangle, tr1)}>
+    <div className={cx(triangle, tr1)}>
       <svg width="7" height="6" viewBox="0 0 7 6">
         <path d={svg_triangle} />
       </svg>
     </div>
-    <div className={classNames(triangle, tr2)}>
+    <div className={cx(triangle, tr2)}>
       <svg width="7" height="6" viewBox="0 0 7 6">
         <path d={svg_triangle} />
       </svg>
     </div>
-    <div className={classNames(square, sq1)} />
-    <div className={classNames(square, sq2)} />
-    <div className={classNames(circle, ci1)} />
-    <div className={classNames(circle, ci2)} />
+    <div className={cx(square, sq1)} />
+    <div className={cx(square, sq2)} />
+    <div className={cx(circle, ci1)} />
+    <div className={cx(circle, ci2)} />
     <SaveFilledIcon className="save-icon" />
   </div>
 )
