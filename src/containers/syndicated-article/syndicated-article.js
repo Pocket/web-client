@@ -35,6 +35,8 @@ import { trackScrollDepth } from './syndicated-article.analytics'
 
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { Toasts } from 'connectors/toasts/toast-list'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { Listen } from 'connectors/listen/listen'
 
 // Possible query params passed via url
 const validParams = {
@@ -55,6 +57,9 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const articleData = useSelector((state) => state.syndicatedArticle.articleData)
   const saveStatus = useSelector((state) => state.syndicatedArticle.saveStatus)
+
+  const featureState = useSelector((state) => state.features)
+  const useLab = featureFlagActive({ flag: 'lab', featureState })
 
   const {
     itemId,
@@ -154,6 +159,9 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
                 saveStatus={saveStatus}
                 url={url}
               />
+              {useLab ? (
+                <Listen pointer="article-section" isAuthenticated={isAuthenticated} />
+              ) : null}
             </header>
           </section>
 

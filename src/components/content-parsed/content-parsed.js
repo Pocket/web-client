@@ -419,7 +419,11 @@ export function ContentParsed({ content, trackScrollDepth }) {
     <article className={articleWrapper}>
       <DepthTracking onScrollDepth={trackScrollDepth}>
         <div className={resetWrapper} data-cy="parsed-content">
-          <section className={contentWrapper} dangerouslySetInnerHTML={{ __html: content }} />
+          <section
+            id="article-section"
+            className={contentWrapper}
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         </div>
       </DepthTracking>
     </article>
