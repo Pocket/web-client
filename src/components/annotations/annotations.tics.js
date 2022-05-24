@@ -102,6 +102,7 @@ const Card = ({
 }) => {
   const id = annotation.annotation_id || annotation.id
   const createdAt = annotation.created_at || annotation._createdAt * 1000
+  const note = annotation.note?.text
 
   return annotation ? (
     <CardPositioning
@@ -110,6 +111,7 @@ const Card = ({
       key={id}
       addedStyles={floatingCardStyles}>
       <Quote>{annotation.quote}</Quote>
+      {note ? <p>{note}</p> : null}
       <CreatedDate>{createdAt}</CreatedDate>
       <div className={menuWrapper}>
         <AnnotationMenu

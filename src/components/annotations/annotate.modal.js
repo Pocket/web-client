@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { css, cx } from 'linaria'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { Button } from '@pocket/web-ui'
@@ -27,14 +27,18 @@ export const AnnotateItemModal = ({
   closeModal,
   id,
   quote,
-  note = '',
+  note = {},
   saveAnnotation,
   deleteAnnotation
 }) => {
   const appRootSelector = '#__next'
   const { t } = useTranslation()
 
-  const [input, setInput] = useState(note)
+  const [input, setInput] = useState('')
+
+  useEffect(() => {
+    if (showModal) setInput(note?.text)
+  }, [showModal])
 
   const handleChange = (e) => {
     setInput(e.target.value)

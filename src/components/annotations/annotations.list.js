@@ -73,6 +73,7 @@ export class QuoteList extends Component {
         const active = false
         const id = annot.annotation_id || annot.id
         const createdAt = annot.created_at || annot._createdAt * 1000
+        const note = annot.note?.text
 
         cards.push(
           <div
@@ -82,6 +83,7 @@ export class QuoteList extends Component {
             <Quote onClick={() => onClickEvent(annot.position)}>
               {annot.quote}
             </Quote>
+            {note ? <p>{note}</p> : null}
             <CreatedDate>{createdAt}</CreatedDate>
 
             <div className={menuWrapper}>

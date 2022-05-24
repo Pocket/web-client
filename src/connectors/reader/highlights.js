@@ -92,11 +92,11 @@ export const Highlights = ({ children, id }) => {
   const closeAnnotateItem = () => dispatch(toggleAnnotationModal())
 
   const saveAnnotation = ({ id, input }) => {
-    // dispatch(saveAnnotationRequest({ id, input }))
+    dispatch(saveAnnotationRequest({ id, input }))
   }
 
   const deleteAnnotation = ({ id }) => {
-    // dispatch(deleteAnnotationRequest({ id }))
+    dispatch(deleteAnnotationRequest({ id }))
   }
 
   const handleImpression = (identifier) => {
@@ -109,8 +109,6 @@ export const Highlights = ({ children, id }) => {
     onHighlightHover: toggleHighlightHover,
     annotationsBuilt: buildAnnotations
   }
-
-  console.log({ ...highlightToAnnotate })
 
   return (
     <>

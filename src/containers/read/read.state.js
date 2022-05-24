@@ -60,9 +60,7 @@ import { itemArchive } from 'common/api'
 import { itemUnArchive } from 'common/api'
 import { createHighlight } from 'common/api'
 import { deleteHighlight } from 'common/api'
-import { createAnnotation } from 'common/api'
 import { updateAnnotation } from 'common/api'
-import { deleteAnnotation as removeAnnotation } from 'common/api'
 
 import { READ_ITEM_REQUEST } from 'actions'
 import { READ_ITEM_SUCCESS } from 'actions'
@@ -246,6 +244,18 @@ export const readReducers = (state = initialState, action) => {
         }
       }
       return { ...state, savedData }
+    }
+
+    case HIGHLIGHT_ANNOTATION_SAVE_SUCCESS:
+    case HIGHLIGHT_ANNOTATION_DELETE_SUCCESS: {
+      const { highlights } = action
+      const savedData = {
+        ...state.savedData,
+        annotations: {
+          highlights
+        }
+      }
+      return { ...state, savedData, annotationsOpen: false }
     }
 
     // optimistic update
@@ -485,11 +495,14 @@ function* highlightDeleteRequest({ annotationId }) {
 
 function* highlightAnnotationSaveRequest({ id, input }) {
   try {
-    console.log('highlightAnnotationSaveRequest', id, input)
-    const data = yield call(createAnnotation, { id, input })
-    console.log(data)
+    const data = yield call(updateAnnotation, { id, input })
+    const storedHighlights = yield select(getHighlights)
+    const highlights = storedHighlights.map(item => {
+      if (item.id === id) item.note = data
+      return item
+    })
 
-    // reconcile items
+    yield put({ type: HIGHLIGHT_ANNOTATION_SAVE_SUCCESS, highlights })
   } catch (error) {
     yield put({ type: HIGHLIGHT_ANNOTATION_SAVE_FAILURE, error })
   }
@@ -497,11 +510,14 @@ function* highlightAnnotationSaveRequest({ id, input }) {
 
 function* highlightAnnotationDeleteRequest({ id }) {
   try {
-    console.log('highlightAnnotationDeleteRequest', id)
-    const data = yield call(removeAnnotation, { id })
-    console.log(data)
+    const data = yield call(updateAnnotation, { id, input: '' })
+    const storedHighlights = yield select(getHighlights)
+    const highlights = storedHighlights.map(item => {
+      if (item.id === id) item.note = null
+      return item
+    })
 
-    // reconcile items
+    yield put({ type: HIGHLIGHT_ANNOTATION_DELETE_SUCCESS, highlights })
   } catch (error) {
     yield put({ type: HIGHLIGHT_ANNOTATION_DELETE_FAILURE, error })
   }
