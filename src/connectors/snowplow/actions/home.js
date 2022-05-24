@@ -68,6 +68,14 @@ export const homeActions = {
     },
     expects: ['id', 'url', 'position']
   },
+  'home.similar.show': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['id', 'url', 'position']
+  },
   'home.similar.impression': {
     eventType: 'impression',
     entityTypes: ['content', 'ui'],
