@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import classNames from 'classnames'
 import { css } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
@@ -9,9 +10,12 @@ import { DeleteIcon } from '@pocket/web-ui'
 import { EditIcon } from '@pocket/web-ui'
 import { PopupMenuGroup } from '@pocket/web-ui'
 import { PopupMenuItem } from '@pocket/web-ui'
+import { PremiumIcon } from '@pocket/web-ui'
 
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { PREMIUM_URL } from 'common/constants'
 
 const inlineMenuStyles = css`
   position: absolute;
@@ -90,6 +94,12 @@ export const AnnotationMenu = ({
   floating
 }) => {
   const { t } = useTranslation()
+
+  const flagsReady = useSelector((state) => state.features.flagsReady)
+  const featureState = useSelector((state) => state.features)
+  const showLab = flagsReady && featureFlagActive({ flag: 'lab', featureState })
+  const useClientAPI = flagsReady && featureFlagActive({ flag: 'reader.client-api', featureState })
+  const showAnnotations = showLab && useClientAPI
 
   const screenHeight = Math.max(
     document.documentElement.clientHeight,
@@ -175,11 +185,19 @@ export const AnnotationMenu = ({
                 icon={<IosShareIcon />}>
                 <Trans i18nKey="share">Share</Trans>
               </PopupMenuItem>
-              {annotateItem && isPremium ? (
+              {showAnnotations && isPremium ? (
                 <PopupMenuItem
                   onClick={handleAnnotate}
                   data-cy={`highlight-annotate-${id}`}
                   icon={<EditIcon />}>
+                  <Trans i18nKey="annotate">Annotate</Trans>
+                </PopupMenuItem>
+              ) : null}
+              {showAnnotations && !isPremium ? (
+                <PopupMenuItem
+                  href={`${PREMIUM_URL}&utm_campaign=add-annotations`}
+                  data-cy={`highlight-annotate-upsell`}
+                  icon={<PremiumIcon />}>
                   <Trans i18nKey="annotate">Annotate</Trans>
                 </PopupMenuItem>
               ) : null}
