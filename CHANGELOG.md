@@ -1,3 +1,10 @@
+## [1.47.4](https://github.com/Pocket/web-client/compare/v1.47.3...v1.47.4) (2022-05-24)
+
+
+### Bug Fixes
+
+* **home:** remove show similar button from recent items ([5d416ad](https://github.com/Pocket/web-client/commit/5d416ad36062198a3b3444117ede436a6ad3e9b0))
+
 ## [1.47.3](https://github.com/Pocket/web-client/compare/v1.47.2...v1.47.3) (2022-05-23)
 
 
