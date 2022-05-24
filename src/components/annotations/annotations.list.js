@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import { css } from 'linaria'
 import classNames from 'classnames'
 import { AnnotationMenu } from './annotations.menu'
@@ -39,8 +38,11 @@ const menuWrapper = css`
 const activeCardStyles = css`
   transition: box-shadow 150ms ease-in-out;
   box-shadow: 0 0 0 1px var(--color-dividerTertiary);
-  &.active {
-    box-shadow: 0 0 0 1px var(--color-dividerPrimary);
+
+  p.note {
+    margin-top: 0.5rem;
+    color: var(--color-textSecondary);
+    font-style: italic;
   }
 `
 
@@ -53,74 +55,78 @@ const headingStyles = css`
   margin-bottom: 0;
 `
 
-export class QuoteList extends Component {
-  renderCards = () => {
-    const {
-      isPremium,
-      annotations,
-      onClickEvent,
-      shareItem,
-      deleteHighlight,
-      toggleAnnotations,
-      handleImpression
-    } = this.props
-    const cards = []
+const QuoteItem = ({
+  isPremium,
+  id,
+  position,
+  quote,
+  note,
+  createdAt,
+  deleteHighlight,
+  shareItem,
+  toggleAnnotations
+}) => {
+  return (
+    <div
+      onClick={(e) => e.stopPropagation()}
+      key={id}
+      className={classNames(cardStyles, activeCardStyles)}>
+      <Quote onClick={() => onClickEvent(position)}>
+        {quote}
+      </Quote>
+      {note ? <p className="note">{note.text}</p> : null}
+      <CreatedDate>{createdAt}</CreatedDate>
 
-    annotations
-      .sort((a, b) => a.position - b.position)
-      .forEach((annot) => {
-        // const active = annot.coordY > viewPort.top && annot.coordY < viewPort.bottom
-        const active = false
-        const id = annot.annotation_id || annot.id
-        const createdAt = annot.created_at || annot._createdAt * 1000
-        const note = annot.note?.text
-
-        cards.push(
-          <div
-            onClick={(e) => e.stopPropagation()}
-            key={id}
-            className={classNames(cardStyles, activeCardStyles, { active })}>
-            <Quote onClick={() => onClickEvent(annot.position)}>
-              {annot.quote}
-            </Quote>
-            {note ? <p>{note}</p> : null}
-            <CreatedDate>{createdAt}</CreatedDate>
-
-            <div className={menuWrapper}>
-              <AnnotationMenu
-                isPremium={isPremium}
-                visible
-                alignRight
-                id={id}
-                shareItem={shareItem}
-                deleteHighlight={deleteHighlight}
-                annotateItem={toggleAnnotations}
-                quote={annot.quote}
-              />
-            </div>
-          </div>
-        )
-      })
-
-    if (cards.length === 3 && !this.props.isPremium) {
-      cards.push(<LimitNotice key="notice" onVisible={handleImpression} />)
-    }
-
-    return cards
-  }
-
-  render() {
-    const { visible, annotations, annotationCount } = this.props
-
-    return annotations && annotationCount > 0 ? (
-      <div className={classNames(listWrapper, { visible })}>
-        <h6 className={headingStyles}>
-          <Trans i18nKey="annotations:my-highlights">My Highlights</Trans>
-        </h6>
-        {this.renderCards()}
+      <div className={menuWrapper}>
+        <AnnotationMenu
+          isPremium={isPremium}
+          visible
+          alignRight
+          id={id}
+          shareItem={shareItem}
+          deleteHighlight={deleteHighlight}
+          annotateItem={toggleAnnotations}
+          quote={quote}
+        />
       </div>
-    ) : (
-      <EmptyList />
-    )
-  }
+    </div>
+  )
+}
+
+export const QuoteList = ({
+  isPremium,
+  annotations,
+  annotationCount,
+  onClickEvent,
+  shareItem,
+  deleteHighlight,
+  toggleAnnotations,
+  handleImpression,
+  visible
+}) => {
+  return annotations && annotationCount > 0 ? (
+    <div className={classNames(listWrapper, { visible })}>
+      <h6 className={headingStyles}>
+        <Trans i18nKey="annotations:my-highlights">My Highlights</Trans>
+      </h6>
+      {annotations.map(annot => (
+        <QuoteItem
+          key={annot.annotation_id || annot.id}
+          id={annot.annotation_id || annot.id}
+          createdAt={annot.created_at || annot._createdAt * 1000}
+          isPremium={isPremium}
+          onClickEvent={onClickEvent}
+          shareItem={shareItem}
+          deleteHighlight={deleteHighlight}
+          toggleAnnotations={toggleAnnotations}
+          {...annot}
+        />
+      ))}
+      {(annotations.length === 3 && !isPremium) ? (
+        <LimitNotice onVisible={handleImpression} />
+      ) : null}
+    </div>
+  ) : (
+    <EmptyList />
+  )
 }

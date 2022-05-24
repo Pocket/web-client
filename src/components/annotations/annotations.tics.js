@@ -91,6 +91,12 @@ const menuWrapper = css`
 const floatingCardStyles = css`
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
   position: relative;
+
+  p.note {
+    margin-top: 0.5rem;
+    color: var(--color-textSecondary);
+    font-style: italic;
+  }
 `
 
 const Card = ({
@@ -111,7 +117,7 @@ const Card = ({
       key={id}
       addedStyles={floatingCardStyles}>
       <Quote>{annotation.quote}</Quote>
-      {note ? <p>{note}</p> : null}
+      {note ? <p className="note">{note}</p> : null}
       <CreatedDate>{createdAt}</CreatedDate>
       <div className={menuWrapper}>
         <AnnotationMenu

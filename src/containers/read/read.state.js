@@ -248,14 +248,14 @@ export const readReducers = (state = initialState, action) => {
 
     case HIGHLIGHT_ANNOTATION_SAVE_SUCCESS:
     case HIGHLIGHT_ANNOTATION_DELETE_SUCCESS: {
-      const { highlights } = action
+      const { highlights, highlightList } = action
       const savedData = {
         ...state.savedData,
         annotations: {
           highlights
         }
       }
-      return { ...state, savedData, annotationsOpen: false }
+      return { ...state, savedData, highlightList, annotationsOpen: false }
     }
 
     // optimistic update
@@ -337,6 +337,7 @@ export const readSagas = [
 const getAnnotations = (state) => state.reader.annotations
 const getHighlights = (state) => state.reader.savedData?.annotations?.highlights
 const getSavedData = (state) => state.reader.savedData
+const getHighlightList = (state) => state.reader.highlightList
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -502,7 +503,13 @@ function* highlightAnnotationSaveRequest({ id, input }) {
       return item
     })
 
-    yield put({ type: HIGHLIGHT_ANNOTATION_SAVE_SUCCESS, highlights })
+    const storedHighlightList = yield select(getHighlightList)
+    const highlightList = storedHighlightList.map(item => {
+      if (item.id === id) item.note = data
+      return item
+    })
+
+    yield put({ type: HIGHLIGHT_ANNOTATION_SAVE_SUCCESS, highlights, highlightList })
   } catch (error) {
     yield put({ type: HIGHLIGHT_ANNOTATION_SAVE_FAILURE, error })
   }
@@ -517,7 +524,13 @@ function* highlightAnnotationDeleteRequest({ id }) {
       return item
     })
 
-    yield put({ type: HIGHLIGHT_ANNOTATION_DELETE_SUCCESS, highlights })
+    const storedHighlightList = yield select(getHighlightList)
+    const highlightList = storedHighlightList.map(item => {
+      if (item.id === id) item.note = null
+      return item
+    })
+
+    yield put({ type: HIGHLIGHT_ANNOTATION_DELETE_SUCCESS, highlights, highlightList })
   } catch (error) {
     yield put({ type: HIGHLIGHT_ANNOTATION_DELETE_FAILURE, error })
   }
