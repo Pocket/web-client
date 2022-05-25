@@ -64,14 +64,18 @@ const QuoteItem = ({
   createdAt,
   deleteHighlight,
   shareItem,
-  toggleAnnotations
+  toggleAnnotations,
+  onClickEvent
 }) => {
+  const stopProp = (e) => e.stopPropagation()
+  const handleClick = () => onClickEvent(position)
+
   return (
     <div
-      onClick={(e) => e.stopPropagation()}
+      onClick={stopProp}
       key={id}
       className={classNames(cardStyles, activeCardStyles)}>
-      <Quote onClick={() => onClickEvent(position)}>
+      <Quote onClick={handleClick}>
         {quote}
       </Quote>
       {note ? <p className="note">{note.text}</p> : null}
