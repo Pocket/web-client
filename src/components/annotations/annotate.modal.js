@@ -8,8 +8,12 @@ import { highlightStyles } from 'components/reader/styles'
 
 const modalBodyStyles = css`
   .highlight {
-    display: inline-block;
-    margin-bottom: 1rem;
+    display: inline;
+  }
+
+  textarea {
+    margin-top: 1rem;
+    max-width: 100%;
   }
 `
 
