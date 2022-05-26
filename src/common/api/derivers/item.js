@@ -344,8 +344,8 @@ function saveUrl({ item, itemEnrichment }) {
  * @param {object} item An item returned from the server
  * @returns {string} The url that should be passed to analytics
  */
-function analyticsUrl({ item }) {
-  return item?.resolvedUrl || item?.givenUrl || false
+function analyticsUrl({ item, itemEnrichment }) {
+  return item?.resolvedUrl || item?.givenUrl || itemEnrichment?.url || false
 }
 
 /** READ URl
