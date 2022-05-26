@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeGreeting } from 'containers/home/home-greeting'
 import { HomeRecentSaves } from 'containers/home/home-recent-saves'
-import { HomeSimilarRecs } from 'containers/home/home-similar-recs'
 
 import { getHomeLineup } from 'containers/home/home.state'
 
@@ -67,7 +66,6 @@ export const Home = ({ metaData }) => {
         <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
       ))}
 
-      <HomeSimilarRecs />
       <DeleteModal />
       <TaggingModal />
       <ShareModal />
@@ -108,10 +106,6 @@ export const Slate = ({ slateId, pagePosition, offset }) => {
   const cardShapes = [undefined, 'wide', 'block']
   const cardShape = cardShapes[position]
 
-  const displaysFull = [2]
-  const displayFull = displaysFull.includes(position)
-  const wrapperClass = displayFull ? 'highlight' : ''
-
   const headerTypes = {
     collection: HomeCollectionHeader,
     topic: HomeTopicHeader
@@ -124,7 +118,7 @@ export const Slate = ({ slateId, pagePosition, offset }) => {
   const onClickEvent = type === 'collection' ? collectionClickEvent : topicClickEvent
 
   return (
-    <SectionWrapper className={wrapperClass}>
+    <SectionWrapper>
       <HomeHeader
         sectionTitle={displayName}
         sectionDescription={description}
