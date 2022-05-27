@@ -1,9 +1,9 @@
 import { gql } from 'graphql-request'
-import { requestSyndicated } from 'common/utilities/request/request'
+import { requestGQL } from 'common/utilities/request/request'
 
 const getSyndicatedArticleQuery = gql`
   query GetSyndicatedArticle($slug: String) {
-    getArticleBySlug(slug: $slug) {
+    syndicatedArticleBySlug(slug: $slug) {
       items {
         id
         legacyId
@@ -68,7 +68,7 @@ const getSyndicatedArticleQuery = gql`
 export async function getSyndicatedArticle(slug) {
   const variables = { slug }
 
-  return requestSyndicated({ query: getSyndicatedArticleQuery, variables })
+  return requestGQL({ query: getSyndicatedArticleQuery, variables })
     .then((response) => response?.data?.getArticleBySlug)
     .catch((error) => console.error(error))
 }
