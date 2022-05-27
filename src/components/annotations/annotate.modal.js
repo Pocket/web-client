@@ -5,6 +5,8 @@ import { Button } from '@pocket/web-ui'
 import { DeleteIcon } from '@pocket/web-ui'
 import { Trans, useTranslation } from 'next-i18next'
 import { highlightStyles } from 'components/reader/styles'
+import { ANNOTATIONS_CHAR_LIMIT } from 'common/constants'
+import { KEYS } from 'common/constants'
 
 const modalBodyStyles = css`
   .highlight {
@@ -14,6 +16,15 @@ const modalBodyStyles = css`
   textarea {
     margin-top: 1rem;
     max-width: 100%;
+    min-height: 5rem;
+  }
+
+  p {
+    text-align: right;
+    font-size: 1rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+    color: var(--color-textSecondary);
   }
 `
 
@@ -41,11 +52,18 @@ export const AnnotateItemModal = ({
   const [input, setInput] = useState('')
 
   useEffect(() => {
-    if (showModal) setInput(note?.text)
+    if (showModal) setInput(note?.text || '')
   }, [showModal])
 
   const handleChange = (e) => {
     setInput(e.target.value)
+  }
+
+  const handleKeydown = (e) => {
+    if (e.keyCode === KEYS.ENTER) {
+      e.preventDefault()
+      return handleSave()
+    }
   }
 
   const handleSave = () => {
@@ -58,14 +76,22 @@ export const AnnotateItemModal = ({
 
   return (
     <Modal
-      title="Edit Annotation"
+      title={t('annotations:annotations-modal-title', 'Edit Annotation')}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel="Edit Annotation"
+      screenReaderLabel={t('annotations:annotations-modal-title', 'Edit Annotation')}
       handleClose={closeModal}>
       <ModalBody className={cx(highlightStyles, modalBodyStyles)}>
         <span className="highlight">{quote}</span>
-        <textarea value={input} onChange={handleChange}/>
+        <textarea
+          value={input}
+          onChange={handleChange}
+          onKeyDown={handleKeydown}
+          maxLength={ANNOTATIONS_CHAR_LIMIT}
+        />
+        <p>
+          {input.length}/{ANNOTATIONS_CHAR_LIMIT}
+        </p>
       </ModalBody>
       <ModalFooter>
         <div className={deleteButtonStyles}>

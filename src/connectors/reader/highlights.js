@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SelectionPopover } from 'components/popover/popover-selection'
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
-import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
+import { ModalLimitNotice as HighlightsLimitModal } from 'components/annotations/highlights.limit'
 import { AnnotateItemModal } from 'components/annotations/annotate.modal'
+import { AnnotationsLimitModal } from 'components/annotations/annotations.limit'
 
 import { saveHighlightRequest } from 'containers/read/read.state'
 import { deleteHighlightRequest } from 'containers/read/read.state'
@@ -127,25 +128,32 @@ export const Highlights = ({ children, id }) => {
           highlightHovered={highlightHovered}
           annotationCount={highlights.length}
           shareItem={itemShare}
-          isPremium={isPremium}
           deleteHighlight={removeHighlight}
           annotateItem={annotateItem}
         />
       ) : null}
 
-      <AnnotationsLimitModal
+      <HighlightsLimitModal
         showModal={annotationLimitModal}
         closeModal={closeAnnotationLimit}
         onVisible={handleImpression}
       />
 
-      <AnnotateItemModal
-        showModal={!!annotationsOpen}
-        closeModal={closeAnnotateItem}
-        saveAnnotation={saveAnnotation}
-        deleteAnnotation={deleteAnnotation}
-        {...highlightToAnnotate}
-      />
+      {isPremium ? (
+        <AnnotateItemModal
+          showModal={!!annotationsOpen}
+          closeModal={closeAnnotateItem}
+          saveAnnotation={saveAnnotation}
+          deleteAnnotation={deleteAnnotation}
+          {...highlightToAnnotate}
+        />
+      ) : (
+        <AnnotationsLimitModal
+          showModal={!!annotationsOpen}
+          closeModal={closeAnnotateItem}
+          onVisible={handleImpression}
+        />
+      )}
     </>
   )
 }

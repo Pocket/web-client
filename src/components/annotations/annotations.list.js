@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { AnnotationMenu } from './annotations.menu'
 import { cardStyles, Quote, CreatedDate } from './annotations.card'
 import { EmptyList } from './annotations.empty-list'
-import { LimitNotice } from './annotations.limit'
+import { LimitNotice } from './highlights.limit'
 import { Trans } from 'next-i18next'
 
 const listWrapper = css`
@@ -56,7 +56,6 @@ const headingStyles = css`
 `
 
 const QuoteItem = ({
-  isPremium,
   id,
   position,
   quote,
@@ -83,7 +82,6 @@ const QuoteItem = ({
 
       <div className={menuWrapper}>
         <AnnotationMenu
-          isPremium={isPremium}
           visible
           alignRight
           id={id}
@@ -118,7 +116,6 @@ export const QuoteList = ({
           key={annot.annotation_id || annot.id}
           id={annot.annotation_id || annot.id}
           createdAt={annot.created_at || annot._createdAt * 1000}
-          isPremium={isPremium}
           onClickEvent={onClickEvent}
           shareItem={shareItem}
           deleteHighlight={deleteHighlight}

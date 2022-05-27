@@ -135,7 +135,6 @@ export const Sidebar = ({
         </div>
       </Rail>
       <TicList
-        isPremium={isPremium}
         visible={!sideBarOpen}
         shareItem={shareItem}
         annotations={highlightList}

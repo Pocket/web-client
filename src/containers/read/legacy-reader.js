@@ -17,7 +17,7 @@ import { ReaderFonts } from '@pocket/web-ui'
 import { Recommendations } from 'containers/read/recommendations'
 
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
-import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
+import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/highlights.limit'
 import { itemDataRequest, saveAnnotation, deleteAnnotation } from './read.state'
 
 import { setColorMode } from 'connectors/app/app.state'

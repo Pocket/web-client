@@ -100,7 +100,6 @@ const floatingCardStyles = css`
 `
 
 const Card = ({
-  isPremium,
   annotation,
   shareItem,
   deleteHighlight,
@@ -123,7 +122,6 @@ const Card = ({
         <AnnotationMenu
           visible
           id={id}
-          isPremium={isPremium}
           shareItem={shareItem}
           quote={annotation.quote}
           deleteHighlight={deleteHighlight}
@@ -135,7 +133,6 @@ const Card = ({
 }
 
 const HighlightIndex = ({
-  isPremium,
   annotation,
   onClickEvent,
   top,
@@ -192,7 +189,6 @@ const HighlightIndex = ({
       <div className={anchorWrapper}>
         <div className={classNames(flyAwayWrapper, { show: hoverOpen })}>
           <Card
-            isPremium={isPremium}
             annotation={annotation}
             shareItem={shareItem}
             deleteHighlight={deleteHighlight}
@@ -206,7 +202,6 @@ const HighlightIndex = ({
 }
 
 export const TicList = ({
-  isPremium,
   onClickEvent,
   annotations,
   annotationCount,
@@ -239,7 +234,6 @@ export const TicList = ({
       tics.push(
         <HighlightIndex
           key={index}
-          isPremium={isPremium}
           annotationId={annot.id}
           top={top}
           annotation={annot}

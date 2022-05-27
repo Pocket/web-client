@@ -81,7 +81,6 @@ const menuWrapper = css`
 `
 
 export const AnnotationMenu = ({
-  isPremium,
   alignRight,
   visible,
   top = 0,
@@ -185,19 +184,11 @@ export const AnnotationMenu = ({
                 icon={<IosShareIcon />}>
                 <Trans i18nKey="share">Share</Trans>
               </PopupMenuItem>
-              {showAnnotations && isPremium ? (
+              {showAnnotations ? (
                 <PopupMenuItem
                   onClick={handleAnnotate}
                   data-cy={`highlight-annotate-${id}`}
                   icon={<EditIcon />}>
-                  <Trans i18nKey="annotate">Annotate</Trans>
-                </PopupMenuItem>
-              ) : null}
-              {showAnnotations && !isPremium ? (
-                <PopupMenuItem
-                  href={`${PREMIUM_URL}&utm_campaign=add-annotations`}
-                  data-cy={`highlight-annotate-upsell`}
-                  icon={<PremiumIcon />}>
                   <Trans i18nKey="annotate">Annotate</Trans>
                 </PopupMenuItem>
               ) : null}

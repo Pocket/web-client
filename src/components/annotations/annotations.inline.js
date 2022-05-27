@@ -1,7 +1,6 @@
 import { AnnotationMenu } from 'components/annotations/annotations.menu'
 
 export const HighlightInlineMenu = ({
-  isPremium,
   highlightList = [],
   highlightHovered,
   annotationCount,
@@ -24,7 +23,6 @@ export const HighlightInlineMenu = ({
 
       inlineMenus.push(
         <AnnotationMenu
-          isPremium={isPremium}
           key={id}
           id={id}
           visible={highlightHovered?.id === id}
