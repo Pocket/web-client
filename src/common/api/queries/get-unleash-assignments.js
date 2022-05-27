@@ -11,7 +11,7 @@ const getUnleashAssignmentsQuery = gql`
     $appName: String
     $recItUserProfile: RecItUserProfile
   ) {
-    getUnleashAssignments(
+    unleashAssignments(
       context: {
         sessionId: $sessionId
         userId: $userId
