@@ -1,3 +1,10 @@
+## [1.47.7](https://github.com/Pocket/web-client/compare/v1.47.6...v1.47.7) (2022-05-26)
+
+
+### Bug Fixes
+
+* **deriver:** add itemenrichment to analytics url deriver ([cb3e5c0](https://github.com/Pocket/web-client/commit/cb3e5c0c9ca292acc7cb613e33d3bd5f3fa696c5))
+
 ## [1.47.6](https://github.com/Pocket/web-client/compare/v1.47.5...v1.47.6) (2022-05-24)
 
 
