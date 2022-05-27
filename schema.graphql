@@ -1,8 +1,15 @@
-directive @apollo_studio_metadata(launchId: String, buildId: String, checkId: String) on SCHEMA
+directive @apollo_studio_metadata(buildId: String, checkId: String, launchId: String) on SCHEMA
 
 type ArticleMarkdown {
   images: [MarkdownImagePosition!]
   text: String!
+}
+
+"""The status of the syndicated article"""
+enum ArticleStatus {
+  ACTIVE
+  DRAFT
+  EXPIRED
 }
 
 """Information about an Author of an article or some content"""
@@ -143,6 +150,9 @@ type CollectionStoryAuthor {
 Represents an item that is in the Corpus and its associated manually edited metadata.
 """
 type CorpusItem {
+  """The author names and sort orders associated with this CorpusItem."""
+  authors: [CorpusItemAuthor!]
+
   """The excerpt of the Approved Item."""
   excerpt: String!
 
@@ -165,6 +175,12 @@ type CorpusItem {
 
   """The URL of the Approved Item."""
   url: Url!
+}
+
+"""An author associated with a CorpusItem."""
+type CorpusItemAuthor {
+  name: String!
+  sortOrder: Int!
 }
 
 """Valid language codes for curated corpus items."""
@@ -499,9 +515,6 @@ type Item {
   """If the item has a syndicated counterpart the syndication information"""
   syndicatedArticle: SyndicatedArticle
 
-  """If the item has a syndicated counterpart the syndication information"""
-  syndicatedArticleV2: SyndicatedArticle
-
   """Date this item was first parsed in Pocket"""
   timeFirstParsed: DateString @deprecated(reason: "Clients should not use this")
 
@@ -757,6 +770,9 @@ type Mutation {
   upsertSavedItem(input: SavedItemUpsertInput!): SavedItem!
 }
 
+"""A positive integer number."""
+scalar NonNegativeInt
+
 type NumberedListElement implements ListElement {
   """Row in a list"""
   content: Markdown!
@@ -863,18 +879,23 @@ type Publisher {
 
 type Query {
   """
+  Retrieves a {Collection} by the given slug. The {Collection} must be published.
+  """
+  collectionBySlug(slug: String!): Collection
+
+  """
   Retrieves a Collection by the given slug. The Collection must be published.
   """
-  getCollectionBySlug(slug: String!): Collection
+  getCollectionBySlug(slug: String!): Collection @deprecated(reason: "Use collectionBySlug instead")
 
   """Retrievs a paged set of published Collections."""
   getCollections(filters: CollectionsFiltersInput, page: Int, perPage: Int): CollectionsResult!
 
   """Look up {Item} info by ID."""
-  getItemByItemId(id: ID!): Item
+  getItemByItemId(id: ID!): Item @deprecated(reason: "Use itemById instead")
 
   """Look up {Item} info by a url."""
-  getItemByUrl(url: String!): Item
+  getItemByUrl(url: String!): Item @deprecated(reason: "Use itemByUrl instead")
 
   """
   Request a specific `RankedCorpusSlate` by ID: ultimately replaces `getSlate`
@@ -907,6 +928,9 @@ type Query {
     """The {SlateLineup.id} of the SlateLineup to return"""
     slateLineupId: String!
   ): SlateLineup
+
+  """Look up {SyndicatedArticle} by a slug."""
+  getSyndicatedArticleBySlug(slug: String!): SyndicatedArticle @deprecated(reason: "use syndicatedArticleBySlug instead")
   getSyndicatedRelatedContentFor(url: Url!): RelatedContentItemsResult
 
   """Get the recomendations for a specific topic"""
@@ -922,7 +946,13 @@ type Query {
   ~ Add an {UnleashAssignment} representing it to this list
   ~ If no toggles are found, return an empty list
   """
-  getUnleashAssignments(context: UnleashContext!): UnleashAssignmentList
+  getUnleashAssignments(context: UnleashContext!): UnleashAssignmentList @deprecated(reason: "use unleashAssignments instead")
+
+  """Look up {Item} info by ID."""
+  itemByItemId(id: ID!): Item
+
+  """Look up {Item} info by a url."""
+  itemByUrl(url: String!): Item
 
   """List all available slates"""
   listSlates(
@@ -938,6 +968,21 @@ type Query {
 
   """This is a future improvement, not needed now."""
   surface(id: ID!): Surface!
+
+  """Look up the {SyndicatedArticle} by a slug"""
+  syndicatedArticleBySlug(slug: String!): SyndicatedArticle
+
+  """
+  Returns a list of unleash toggles that are enabled for a given context.
+  
+  For more details on this check out https://docs.google.com/document/d/1dYS81h-DbQEWNLtK-ajLTylw454S32llPXUyBmDd5mU/edit# and https://getpocket.atlassian.net/wiki/spaces/PE/pages/1191444582/Feature+Flags+-+Unleash
+  
+  ~ For each of the enabled unleash toggles (via https://featureflags.readitlater.com/api/client/features or an unleash sdk)
+  ~ Check if the toggle is assigned/enabled for the provided {.context}
+  ~ Add an {UnleashAssignment} representing it to this list
+  ~ If no toggles are found, return an empty list
+  """
+  unleashAssignments(context: UnleashContext!): UnleashAssignmentList
 
   """Get a user entity for an authenticated client"""
   user: User
@@ -1575,11 +1620,70 @@ union Surface = ScheduledSurface
 
 """An article that Pocket has syndicated and we also host on our own site"""
 type SyndicatedArticle {
+  """Array of author names in string format"""
+  authorNames: [String]!
+
+  """Content for the syndicated article"""
+  content: String
+
+  """
+  The pocket curation category of the Article, maps to the Pocket Curation Topic lists
+  """
+  curationCategory: String
+
+  """Excerpt """
+  excerpt: String
+
+  """When does the contract for syndication expire"""
+  expiresAt: String
+
+  """
+  The Sub IAB category of the article defined at https://support.aerserv.com/hc/en-us/articles/207148516-List-of-IAB-Categories
+  """
+  iabSubCategory: String
+
+  """
+  The Main IAB category of the article defined at https://support.aerserv.com/hc/en-us/articles/207148516-List-of-IAB-Categories
+  """
+  iabTopCategory: String
+
+  """The item id of this Syndicated Article"""
+  itemId: ID
+
+  """The locale country of the article"""
+  localeCountry: String
+
+  """The language of the article"""
+  localeLanguage: String
+
+  """Primary image to use in surfacing this content"""
+  mainImage: String
+
+  """The item id of the article we cloned"""
+  originalItemId: ID!
+
+  """AWSDateTime — Format: YYYY-MM-DDThh:mm:ss.sssZ"""
+  publishedAt: String!
+
   """The manually set publisher information for this article"""
   publisher: Publisher
+  publisherUrl: String!
+
+  """Should ads be shown on this article or not"""
+  showAds: Boolean!
 
   """Slug that pocket uses for this article in the url"""
   slug: String
+
+  """
+  DRAFT — Article is not meant to be available to the public
+  EXPIRED — Article contract is up and should be redirected to original article
+  ACTIVE — Article is clear to be shown in syndicated form
+  """
+  status: ArticleStatus!
+
+  """Title of syndicated article"""
+  title: String!
 }
 
 """Represents a Tag that a User has created for their list"""
@@ -1690,7 +1794,7 @@ type Topic {
   pageType: PageType!
 
   """The query that was used internally for elasticsearch to find items"""
-  query: [String!]!
+  query: String!
 
   """The slug that should be used in the url to represent the topic"""
   slug: String!
@@ -1756,6 +1860,13 @@ input UnleashContext {
   - `web-app`
   """
   appName: String
+
+  """
+  The environment the device is running in:
+  - `prod`
+  - `beta`
+  - `alpha`
+  """
   environment: UnleashEnvironment
   properties: UnleashProperties
 
