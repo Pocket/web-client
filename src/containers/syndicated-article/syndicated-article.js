@@ -192,7 +192,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
             <div className="content-body">
               {/* Parsed Content */}
               <ContentParsed
-                content={content?.content}
+                content={content}
                 trackScrollDepth={trackScrollDepth}
                 isMobileWebView={isMobileWebView}
               />
