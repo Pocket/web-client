@@ -96,7 +96,7 @@ export const AnnotationMenu = ({
 
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const featureState = useSelector((state) => state.features)
-  const showLab = flagsReady && featureFlagActive({ flag: 'lab', featureState })
+  const showLab = flagsReady && featureFlagActive({ flag: 'annotations', featureState })
   const useClientAPI = flagsReady && featureFlagActive({ flag: 'reader.client-api', featureState })
   const showAnnotations = showLab && useClientAPI
 
