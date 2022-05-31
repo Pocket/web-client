@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import Link from 'next/link'
 import { css } from 'linaria'
 
 const BylineWrapper = css`
@@ -79,7 +80,9 @@ function Authors({ authors }) {
 function AuthorByline({ url, name, showAuthors, authorNames }) {
   return (
     <cite className={BylineWrapper}>
-      <a href={url} data-cy="author-url">{name}</a>
+      <Link href={url}>
+        <a data-cy="author-url">{name}</a>
+      </Link>
       {showAuthors ? <Authors authors={authorNames} /> : null}
     </cite>
   )

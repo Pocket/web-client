@@ -1,3 +1,17 @@
+## [1.47.9](https://github.com/Pocket/web-client/compare/v1.47.8...v1.47.9) (2022-05-31)
+
+
+### Bug Fixes
+
+* **author by-line:** use proper `Link` for author url ([82598ea](https://github.com/Pocket/web-client/commit/82598ea02699aea03bc5983424c70011cdd21d1e))
+
+## [1.47.8](https://github.com/Pocket/web-client/compare/v1.47.7...v1.47.8) (2022-05-31)
+
+
+### Bug Fixes
+
+* **deriver:** revert change to analytics url to fix content error ([1b99b9e](https://github.com/Pocket/web-client/commit/1b99b9e56fd3826e3afdbb3292b7dfd88c087451))
+
 ## [1.47.7](https://github.com/Pocket/web-client/compare/v1.47.6...v1.47.7) (2022-05-26)
 
 
