@@ -10,6 +10,7 @@ import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import SimilarSearchSVG from 'static/images/home/similarSearch.svg'
 import { breakpointSmallHandset } from '@pocket/web-ui'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { useInView } from 'react-intersection-observer'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -74,10 +75,16 @@ export const SimilarRecs = () => {
   const similarRecsResolved = useSelector((state) => state.similar.similarRecsResolved)
   const similarRecs = useSelector((state) => state.recit.recentRecs)
   const similarRecIds = similarRecs ? Object.keys(similarRecs) : []
-  const closeAction = () => dispatch(clearSimilarRecs())
 
   const sectionClass = similarRecsResolved ? 'active' : 'inactive'
   const showSimilar = isLab && similarRecId
+
+  const closeAction = () => {
+    dispatch(sendSnowplowEvent('similar.close'))
+    dispatch(clearSimilarRecs())
+  }
+
+  const impressionEvent = () => dispatch(sendSnowplowEvent('similar.no-recs'))
 
   useEffect(() => {
     if (!showSimilar) return
@@ -106,16 +113,26 @@ export const SimilarRecs = () => {
           />
         </SectionWrapper>
       ) : (
-        <NoResults closeAction={closeAction} similarRecsResolved={similarRecsResolved} />
+          <NoResults
+            closeAction={closeAction}
+            similarRecsResolved={similarRecsResolved}
+            impressionEvent={impressionEvent}
+          />
       )}
     </div>
   ) : null
 }
 
-const NoResults = ({ closeAction, similarRecsResolved }) => {
+const NoResults = ({ closeAction, similarRecsResolved, impressionEvent }) => {
+  // Fire when item is in view
+  const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
+  useEffect(() => {
+    impressionEvent()
+  }, [inView, impressionEvent])
+
   return similarRecsResolved ? (
     <SectionWrapper>
-      <div className={noSimilarRecs}>
+      <div className={noSimilarRecs} ref={viewRef}>
         <img className="visuals" src={SimilarSearch} alt="" />
         <div className="contentBody">
           <HomeSimilarHeader

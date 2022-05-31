@@ -38,5 +38,20 @@ export const similarActions = {
       'position',
       'destination'
     ]
-  }
+  },
+  'similar.close': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    }
+  },
+  'similar.no-recs': {
+    eventType: 'impression',
+    entityTypes: ['ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'dialog'
+    }
+  },
 }
