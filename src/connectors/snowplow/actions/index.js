@@ -11,6 +11,7 @@ import { profileActions } from './profile'
 import { readerActions } from './reader'
 import { shortcutActions } from './shortcuts'
 import { sideNavActions } from './side-nav'
+import { similarActions } from './similar'
 import { syndicatedArticleActions } from './syndicated-article'
 
 export const analyticsActions = {
@@ -27,5 +28,6 @@ export const analyticsActions = {
   ...shortcutActions,
   ...readerActions,
   ...sideNavActions,
+  ...similarActions,
   ...syndicatedArticleActions
 }

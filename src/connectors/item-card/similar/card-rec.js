@@ -37,10 +37,10 @@ export const RecCard = ({
    */
   const onOpenOriginalUrl = () => {
     const data = { ...analyticsData, destination: 'external' }
-    dispatch(sendSnowplowEvent('home.similar.view-original', data))
+    dispatch(sendSnowplowEvent('similar.view-original', data))
   }
-  const onOpen = () => dispatch(sendSnowplowEvent('home.similar.open', analyticsData))
-  const onImpression = () => dispatch(sendSnowplowEvent('home.similar.impression', analyticsData))
+  const onOpen = () => dispatch(sendSnowplowEvent('similar.open', analyticsData))
+  const onImpression = () => dispatch(sendSnowplowEvent('similar.impression', analyticsData))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
 
   const itemImage = item?.noImage ? '' : item?.thumbnail

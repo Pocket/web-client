@@ -96,6 +96,9 @@ import { onboardingSagas } from 'connectors/onboarding/onboarding.state'
 
 import { shareModalReducers } from 'connectors/share-modal/share-modal.state'
 
+import { similarReducers } from 'connectors/similar/similar.state'
+import { similarSagas } from 'connectors/similar/similar.state'
+
 //Items (From the graph)
 import { itemsReducers } from 'connectors/items/items.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
@@ -212,6 +215,7 @@ export const rootReducer = combineReducers({
   ...userAccountReducers,
   home: homeReducers,
   homeItemsById: homeItemsReducers,
+  similar: similarReducers,
   ...itemReducers,
   ...listReducers,
   ...itemActionReducers
@@ -242,6 +246,7 @@ function* rootSaga() {
     ...readSagas,
     ...homeSagas,
     ...homeItemsSagas,
+    ...similarSagas,
     ...userMessageSagas,
     ...userSearchSagas,
     ...profileSagas,

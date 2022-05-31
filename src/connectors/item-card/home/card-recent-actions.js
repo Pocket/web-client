@@ -1,7 +1,7 @@
 // Removed from Home on 5/24/22
 import { itemActionStyle } from 'components/item-actions/base'
 import { useSelector, useDispatch } from 'react-redux'
-import { getSimilarRecs } from 'containers/home/home.state'
+import { getSimilarRecs } from 'connectors/similar/similar.state'
 import { ShowSimilar } from 'components/item-actions/show-similar'
 
 export function ActionsRecent({ id }) {

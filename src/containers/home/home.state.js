@@ -23,29 +23,14 @@ import { HOME_LINEUP_REQUEST } from 'actions'
 import { HOME_LINEUP_SUCCESS } from 'actions'
 import { HOME_LINEUP_FAILURE } from 'actions'
 
-import { RECENT_RECS_SUCCESS } from 'actions'
-import { RECENT_RECS_FAILURE } from 'actions'
-import { HOME_SIMILAR_REC_REQUEST } from 'actions'
-import { HOME_SIMILAR_RECS_CLEAR } from 'actions'
-
-import { HOME_SIMILAR_REC_SAVE_REQUEST } from 'actions'
-import { HOME_SIMILAR_REC_SAVE_SUCCESS } from 'actions'
-import { HOME_SIMILAR_REC_SAVE_FAILURE } from 'actions'
-
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 
 import { ITEMS_ADD_SUCCESS } from 'actions'
-
-import { MYLIST_DATA_REQUEST } from 'actions'
-import { MYLIST_UPDATE_REQUEST } from 'actions'
-import { HYDRATE } from 'actions'
+import { SIMILAR_REC_SAVE_SUCCESS } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getHomeLineup = (id) => ({ type: HOME_LINEUP_REQUEST, id })
-export const getSimilarRecs = (id) => ({ type: HOME_SIMILAR_REC_REQUEST, id })
-export const saveSimilarRec = (id, url, position) => ({type: HOME_SIMILAR_REC_SAVE_REQUEST, id, url, position}) //prettier-ignore
-export const clearSimilarRecs = () => ({ type: HOME_SIMILAR_RECS_CLEAR })
 export const getRecentSaves = () => ({ type: HOME_RECENT_SAVES_REQUEST })
 export const saveHomeItem = (id, url, position) => ({type: HOME_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const unSaveHomeItem = (id, topic) => ({ type: HOME_UNSAVE_REQUEST, id, topic }) //prettier-ignore
@@ -68,25 +53,8 @@ export const homeReducers = (state = initialState, action) => {
       return { ...state, generalSlates, topicSlates, slatesById }
     }
 
-    case HOME_SIMILAR_REC_REQUEST: {
-      const { id } = action
-      return { ...state, similarRecId: id, similarRecsResolved: false }
-    }
-
-    case RECENT_RECS_SUCCESS:
-    case RECENT_RECS_FAILURE: {
-      return { ...state, similarRecsResolved: true }
-    }
-
-    case HOME_SIMILAR_RECS_CLEAR:
-    case MYLIST_DATA_REQUEST:
-    case MYLIST_UPDATE_REQUEST:
-    case HYDRATE: {
-      return { ...state, similarRecId: false, similarRecsResolved: false }
-    }
-
     case HOME_SAVE_SUCCESS:
-    case HOME_SIMILAR_REC_SAVE_SUCCESS: {
+    case SIMILAR_REC_SAVE_SUCCESS: {
       const { id } = action
       const recentSaves = new Set([id, ...state.recentSaves])
       return { ...state, recentSaves: Array.from(recentSaves), newSaves: ++state.newSaves }
@@ -124,7 +92,6 @@ export function updateSaveStatus(state, id, saveStatus) {
 export const homeSagas = [
   takeEvery(HOME_LINEUP_REQUEST, homeLineupRequest),
   takeEvery(HOME_RECENT_SAVES_REQUEST, recentDataRequest),
-  takeEvery(HOME_SIMILAR_REC_SAVE_REQUEST, homeSimilarRecSaveRequest),
   takeEvery(HOME_SAVE_REQUEST, homeSaveRequest),
   takeEvery(HOME_UNSAVE_REQUEST, homeUnSaveRequest)
 ]
@@ -198,32 +165,6 @@ function* homeUnSaveRequest({ id, topic }) {
     yield put({ type: HOME_UNSAVE_SUCCESS, id, topic })
   } catch (error) {
     yield put({ type: HOME_UNSAVE_FAILURE, error })
-  }
-}
-
-function* homeSimilarRecSaveRequest({ url, id, position }) {
-  try {
-    const analytics = {
-      view: 'web',
-      section: 'home',
-      page: '/home/',
-      cxt_item_position: position
-    }
-
-    const response = yield saveItem(url, analytics)
-    if (response?.status !== 1) throw new Error('Unable to save')
-
-    const derivedItems = Object.values(response.action_results).map((item) =>
-      deriveListItem(item, true)
-    )
-
-    const items = derivedItems.map((item) => item.resolvedId)
-    const itemsById = arrayToObject(derivedItems, 'resolvedId')
-
-    yield put({ type: HOME_SIMILAR_REC_SAVE_SUCCESS, id, items, itemsById })
-    yield put({ type: ITEMS_ADD_SUCCESS })
-  } catch (error) {
-    yield put({ type: HOME_SIMILAR_REC_SAVE_FAILURE, error })
   }
 }
 

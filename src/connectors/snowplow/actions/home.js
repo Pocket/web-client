@@ -68,46 +68,6 @@ export const homeActions = {
     },
     expects: ['id', 'url', 'position']
   },
-  'home.similar.impression': {
-    eventType: 'impression',
-    entityTypes: ['content', 'ui'],
-    eventData: {
-      component: 'ui',
-      uiType: 'card'
-    },
-    expects: ['id', 'url', 'position']
-  },
-  'home.similar.save': {
-    eventType: 'engagement',
-    entityTypes: ['content', 'ui'],
-    eventData: {
-      engagementType: 'save',
-      uiType: 'button'
-    },
-    expects: ['id', 'url', 'position']
-  },
-  'home.similar.open': {
-    eventType: 'contentOpen',
-    entityTypes: ['content', 'ui'],
-    eventData: {
-      destination: 'internal',
-      uiType: 'card'
-    },
-    expects: ['url', 'position']
-  },
-  'home.similar.view-original': {
-    eventType: 'contentOpen',
-    entityTypes: ['content', 'ui'],
-    eventData: {
-      uiType: 'card'
-    },
-    expects: [
-      'id',
-      'url',
-      'position',
-      'destination'
-    ]
-  },
   'home.recent.impression': {
     eventType: 'impression',
     entityTypes: ['content', 'ui'],

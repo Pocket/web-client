@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeGreeting } from 'containers/home/home-greeting'
 import { HomeRecentSaves } from 'containers/home/home-recent-saves'
+import { SimilarRecs } from 'connectors/similar/similar'
 
 import { getHomeLineup } from 'containers/home/home.state'
 
@@ -78,6 +79,7 @@ export const Home = ({ metaData }) => {
         </>
       ) : null}
       <Toasts />
+      <SimilarRecs />
     </Layout>
   )
 }

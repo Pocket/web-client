@@ -1,15 +1,17 @@
-// Removed from Home on 5/24/22
 import { useEffect } from 'react'
 import { HomeSimilarHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'
 import { recentRecsRequest } from 'connectors/recit/recit.state'
-import { clearSimilarRecs } from 'containers/home/home.state'
-import { RecCard } from 'connectors/item-card/home/card-rec'
+import { clearSimilarRecs } from './similar.state'
+import { RecCard } from 'connectors/item-card/similar/card-rec'
 import { OffsetList } from 'components/items-layout/list-offset'
 import { css } from 'linaria'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import SimilarSearchSVG from 'static/images/home/similarSearch.svg'
 import { breakpointSmallHandset } from '@pocket/web-ui'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 const SimilarSearch = SimilarSearchSVG.src || ''
 
@@ -20,6 +22,7 @@ const similarRecsContainer = css`
   background-color: var(--color-canvas);
   padding: 1.5rem 0;
   border-top: var(--borderStyle);
+  z-index: var(--zIndexColorModePicker);
 
   &.active {
     transition: transform 200ms 0s ease-out;
@@ -60,30 +63,35 @@ const noSimilarRecs = css`
   }
 `
 
-export const HomeSimilarRecs = () => {
+export const SimilarRecs = () => {
   const dispatch = useDispatch()
 
-  const similarRecId = useSelector((state) => state.home.similarRecId)
-  const similarRecsResolved = useSelector((state) => state.home.similarRecsResolved)
+  const flagsReady = useSelector((state) => state.features.flagsReady)
+  const featureState = useSelector((state) => state.features)
+  const isLab = flagsReady && featureFlagActive({ flag: 'lab', featureState })
+
+  const similarRecId = useSelector((state) => state.similar.similarRecId)
+  const similarRecsResolved = useSelector((state) => state.similar.similarRecsResolved)
   const similarRecs = useSelector((state) => state.recit.recentRecs)
   const similarRecIds = similarRecs ? Object.keys(similarRecs) : []
   const closeAction = () => dispatch(clearSimilarRecs())
 
   const sectionClass = similarRecsResolved ? 'active' : 'inactive'
+  const showSimilar = isLab && similarRecId
 
   useEffect(() => {
-    if (!similarRecId) return
+    if (!showSimilar) return
     dispatch(recentRecsRequest(similarRecId))
   }, [similarRecId, dispatch])
 
-  return (
+  return showSimilar ? (
     <div className={`${similarRecsContainer} ${sectionClass}`} data-cy="similar-recs">
       {similarRecIds.length ? (
         <SectionWrapper>
           <HomeSimilarHeader
             closeAction={closeAction}
-            sectionTitle="Similar Content"
-            sectionDescription="Recommended stories base on your selection"
+            sectionTitle="Similar Stories"
+            sectionDescription="Recommended stories base on your recent save"
           />
           <OffsetList
             items={similarRecIds}
@@ -101,7 +109,7 @@ export const HomeSimilarRecs = () => {
         <NoResults closeAction={closeAction} similarRecsResolved={similarRecsResolved} />
       )}
     </div>
-  )
+  ) : null
 }
 
 const NoResults = ({ closeAction, similarRecsResolved }) => {

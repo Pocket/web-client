@@ -14,7 +14,7 @@ import { ITEMS_TAG_SUCCESS } from 'actions'
 import { MYLIST_ITEMS_NO_IMAGE } from 'actions'
 import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
 import { HOME_SAVE_SUCCESS } from 'actions'
-import { HOME_SIMILAR_REC_SAVE_SUCCESS } from 'actions'
+import { SIMILAR_REC_SAVE_SUCCESS } from 'actions'
 /* CONSOLIDATE
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 import { itemTagSagas } from './items.tag'
@@ -40,7 +40,7 @@ export const myListItemsReducers = (state = initialState, action) => {
     case ARTICLE_ITEM_SUCCESS:
     case HOME_RECENT_SAVES_SUCCESS:
     case HOME_SAVE_SUCCESS:
-    case HOME_SIMILAR_REC_SAVE_SUCCESS:
+    case SIMILAR_REC_SAVE_SUCCESS:
     case USER_TAGS_ITEM_SUCCESS:
     case MYLIST_SEARCH_SUCCESS: {
       const { itemsById } = action

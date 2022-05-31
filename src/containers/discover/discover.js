@@ -23,6 +23,7 @@ import { CallOutStartLibraryExplore } from 'components/call-out/call-out-start-l
 import { CallOutPocketHitsSignup } from 'components/call-out/call-out-pocket-hits'
 
 import { Toasts } from 'connectors/toasts/toast-list'
+import { SimilarRecs } from 'connectors/similar/similar'
 
 import { useTranslation } from 'next-i18next'
 
@@ -57,48 +58,51 @@ export default function Discover({ locale }) {
 
   // Return error if no items are present !! TODO: FIX THIS - This is a horrid error
   return items?.length ? (
-    <Layout title={metaData.title} metaData={metaData}>
-      {!isAuthenticated && shouldRender ? <CallOutBuildHome /> : null}
+    <>
+      <Layout title={metaData.title} metaData={metaData}>
+        {!isAuthenticated && shouldRender ? <CallOutBuildHome /> : null}
 
-      <CardPageHeader
-        title={t('discover:best-of-the-web', 'Discover the best of the web')}
-        subHeading={t('discover:essential-reads', 'Today’s essential reads')}
-      />
+        <CardPageHeader
+          title={t('discover:best-of-the-web', 'Discover the best of the web')}
+          subHeading={t('discover:essential-reads', 'Today’s essential reads')}
+        />
 
-      {/* Top Lockup (center)*/}
-      <Lockup items={items} offset={0} heroPosition="center" ItemCard={ItemCard} />
+        {/* Top Lockup (center)*/}
+        <Lockup items={items} offset={0} heroPosition="center" ItemCard={ItemCard} />
 
-      {showTopics ? <CardTopicsNav topics={topics} /> : null}
+        {showTopics ? <CardTopicsNav topics={topics} /> : null}
 
-      {/* Pocket Brand Messaging */}
-      <CalloutTop locale={locale} shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
+        {/* Pocket Brand Messaging */}
+        <CalloutTop locale={locale} shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
 
-      {/* Top List */}
-      <CardListHeading>{t('discover:fascinating-stories', 'Fascinating stories')}</CardListHeading>
+        {/* Top List */}
+        <CardListHeading>{t('discover:fascinating-stories', 'Fascinating stories')}</CardListHeading>
 
-      <OffsetList items={items} offset={5} cardShape="wide" ItemCard={ItemCard} border={true} />
+        <OffsetList items={items} offset={5} cardShape="wide" ItemCard={ItemCard} border={true} />
 
-      <Lockup items={items} offset={10} heroPosition="left" ItemCard={ItemCard} />
+        <Lockup items={items} offset={10} heroPosition="left" ItemCard={ItemCard} />
 
-      <CalloutBottom
-        shouldRender={shouldRender}
-        isAuthenticated={isAuthenticated}
-        trackEvent={trackEvent}
-      />
+        <CalloutBottom
+          shouldRender={shouldRender}
+          isAuthenticated={isAuthenticated}
+          trackEvent={trackEvent}
+        />
 
-      <OffsetList
-        items={items}
-        offset={15}
-        cardShape="wide"
-        ItemCard={ItemCard}
-        border={showTopics}
-      />
+        <OffsetList
+          items={items}
+          offset={15}
+          cardShape="wide"
+          ItemCard={ItemCard}
+          border={showTopics}
+        />
 
-      {showTopics ? <CardTopicsNav topics={topics} className="no-border" /> : null}
+        {showTopics ? <CardTopicsNav topics={topics} className="no-border" /> : null}
 
-      <ReportFeedbackModal />
-      <Toasts />
-    </Layout>
+        <ReportFeedbackModal />
+        <Toasts />
+      </Layout>
+      <SimilarRecs />
+    </>
   ) : (
     <Layout title={metaData.title} metaData={metaData}></Layout>
   )
