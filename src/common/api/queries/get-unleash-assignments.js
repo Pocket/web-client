@@ -50,7 +50,7 @@ export async function getUnleashAssignments(sessionId, userId, birth, appName, l
     recItUserProfile: { userModels }
   }
   return requestGQL({ query: getUnleashAssignmentsQuery, variables })
-    .then((response) => response?.data?.getUnleashAssignments)
+    .then((response) => response?.data?.unleashAssignments)
     .catch((error) => {
       Sentry.withScope((scope) => {
         scope.setFingerprint('Unleash')
