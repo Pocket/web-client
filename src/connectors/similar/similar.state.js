@@ -14,6 +14,8 @@ import { RECENT_RECS_FAILURE } from 'actions'
 
 import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
 import { HOME_SAVE_SUCCESS } from 'actions'
+import { ARTICLE_SAVE_SUCCESS } from 'actions'
+import { COLLECTION_STORIES_SAVE_SUCCESS } from 'actions'
 import { ITEMS_ADD_SUCCESS } from 'actions'
 
 import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
@@ -36,6 +38,8 @@ export const similarReducers = (state = initialState, action) => {
     case SIMILAR_REC_REQUEST:
     case HOME_SAVE_SUCCESS:
     case DISCOVER_ITEMS_SAVE_SUCCESS:
+    case ARTICLE_SAVE_SUCCESS:
+    case COLLECTION_STORIES_SAVE_SUCCESS:
     case SIMILAR_REC_SAVE_SUCCESS: {
       const { id } = action
       return { ...state, similarRecId: id, similarRecsResolved: false }

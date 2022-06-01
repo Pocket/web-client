@@ -29,6 +29,7 @@ import { saveCollectionPage } from 'containers/collections/collections.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 import { Toasts } from 'connectors/toasts/toast-list'
+import { SimilarRecs } from 'connectors/similar/similar'
 import ErrorPage from 'pages/_error'
 
 import { css } from 'linaria'
@@ -95,131 +96,134 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   }
 
   return (
-    <ArticleLayout
-      forceWebView={true}
-      title={metaData.title}
-      canonical={canonical}
-      metaData={metaData}
-      className={printLayout}>
-      <main className={contentLayout}>
-        <section>
-          <AdAboveTheFold
-            allowAds={allowAds}
-            usePersonalized={usePersonalized}
-            iabTopCategory={IABParentCategory?.slug}
-            iabSubCategory={IABChildCategory?.slug}
-            curationCategory={curationCategory?.slug}
-            legacyId={externalId}
-          />
-        </section>
-        {/* Content header information */}
-        <section className="content-section">
-          <header>
-            <PocketWorthy />
-            <ParsedHeadline title={title} description={excerpt} useMarkdown={true} />
-            {authors ? (
-              <AuthorByline
-                url="/collections"
-                name="Pocket Collections"
-                showAuthors={true}
-                authorNames={authorNames}
+    <>
+      <ArticleLayout
+        forceWebView={true}
+        title={metaData.title}
+        canonical={canonical}
+        metaData={metaData}
+        className={printLayout}>
+        <main className={contentLayout}>
+          <section>
+            <AdAboveTheFold
+              allowAds={allowAds}
+              usePersonalized={usePersonalized}
+              iabTopCategory={IABParentCategory?.slug}
+              iabSubCategory={IABChildCategory?.slug}
+              curationCategory={curationCategory?.slug}
+              legacyId={externalId}
+            />
+          </section>
+          {/* Content header information */}
+          <section className="content-section">
+            <header>
+              <PocketWorthy />
+              <ParsedHeadline title={title} description={excerpt} useMarkdown={true} />
+              {authors ? (
+                <AuthorByline
+                  url="/collections"
+                  name="Pocket Collections"
+                  showAuthors={true}
+                  authorNames={authorNames}
+                />
+              ) : null}
+              <SaveArticleTop
+                isAuthenticated={isAuthenticated}
+                saveAction={saveAction}
+                saveStatus={pageSaveStatus}
+                url={url}
               />
-            ) : null}
-            <SaveArticleTop
-              isAuthenticated={isAuthenticated}
-              saveAction={saveAction}
-              saveStatus={pageSaveStatus}
-              url={url}
-            />
-          </header>
-        </section>
+            </header>
+          </section>
 
-        {/* Content body like a syndicated article or collection */}
-        <section className="content-section">
-          {/* Left side content actions */}
-          <aside className="left-aside">
-            <ArticleActions
-              isMobileWebView={isMobileWebView}
-              title={title}
-              excerpt={excerpt}
-              onSave={saveAction}
-              saveStatus={pageSaveStatus}
-              isAuthenticated={isAuthenticated}
-              onShare={shareAction}
-              className="sticky"
-              url={url}
-            />
-          </aside>
+          {/* Content body like a syndicated article or collection */}
+          <section className="content-section">
+            {/* Left side content actions */}
+            <aside className="left-aside">
+              <ArticleActions
+                isMobileWebView={isMobileWebView}
+                title={title}
+                excerpt={excerpt}
+                onSave={saveAction}
+                saveStatus={pageSaveStatus}
+                isAuthenticated={isAuthenticated}
+                onShare={shareAction}
+                className="sticky"
+                url={url}
+              />
+            </aside>
 
-          {/* Right aside content such as ads and recs */}
-          <aside className="right-aside">
-            <AdRailTop
-              allowAds={allowAds}
-              usePersonalized={usePersonalized}
-              iabTopCategory={IABParentCategory?.slug}
-              iabSubCategory={IABChildCategory?.slug}
-              curationCategory={curationCategory?.slug}
-              legacyId={externalId}
-            />
-            <AdRailBottom
-              allowAds={allowAds}
-              usePersonalized={usePersonalized}
-              iabTopCategory={IABParentCategory?.slug}
-              iabSubCategory={IABChildCategory?.slug}
-              curationCategory={curationCategory?.slug}
-              legacyId={externalId}
-            />
-          </aside>
+            {/* Right aside content such as ads and recs */}
+            <aside className="right-aside">
+              <AdRailTop
+                allowAds={allowAds}
+                usePersonalized={usePersonalized}
+                iabTopCategory={IABParentCategory?.slug}
+                iabSubCategory={IABChildCategory?.slug}
+                curationCategory={curationCategory?.slug}
+                legacyId={externalId}
+              />
+              <AdRailBottom
+                allowAds={allowAds}
+                usePersonalized={usePersonalized}
+                iabTopCategory={IABParentCategory?.slug}
+                iabSubCategory={IABChildCategory?.slug}
+                curationCategory={curationCategory?.slug}
+                legacyId={externalId}
+              />
+            </aside>
 
-          <div className="content-body">
-            <img src={heroImage} alt="" className="hero-image" />
+            <div className="content-body">
+              <img src={heroImage} alt="" className="hero-image" />
 
-            {partnership ? <Partner partnerInfo={partnership} /> : null}
+              {partnership ? <Partner partnerInfo={partnership} /> : null}
 
-            <ContentIntro intro={intro} />
+              <ContentIntro intro={intro} />
 
-            {/* Collection Stories */}
-            {stories
-              ? stories.map((id, index) => (
-                  <ItemCard
-                    id={id}
-                    key={id}
-                    position={index}
-                    cardShape="wide"
-                    showExcerpt={true}
-                    className={itemStyles}
-                    partnerType={partnership?.type}
-                  />
-                ))
-              : null}
+              {/* Collection Stories */}
+              {stories
+                ? stories.map((id, index) => (
+                    <ItemCard
+                      id={id}
+                      key={id}
+                      position={index}
+                      cardShape="wide"
+                      showExcerpt={true}
+                      className={itemStyles}
+                      partnerType={partnership?.type}
+                    />
+                  ))
+                : null}
 
-            {authors ? authors?.map((author) => <AuthorBio key={author.name} {...author} />) : null}
-          </div>
-        </section>
+              {authors ? authors?.map((author) => <AuthorBio key={author.name} {...author} />) : null}
+            </div>
+          </section>
 
-        <section className="content-section">
-          <footer>
-            <SaveArticleBottom
-              isAuthenticated={isAuthenticated}
-              saveAction={saveAction}
-              saveStatus={pageSaveStatus}
-              url={url}
-            />
+          <section className="content-section">
+            <footer>
+              <SaveArticleBottom
+                isAuthenticated={isAuthenticated}
+                saveAction={saveAction}
+                saveStatus={pageSaveStatus}
+                url={url}
+              />
 
-            <AdBelowTheFold
-              allowAds={allowAds}
-              usePersonalized={usePersonalized}
-              iabTopCategory={IABParentCategory?.slug}
-              iabSubCategory={IABChildCategory?.slug}
-              curationCategory={curationCategory?.slug}
-              legacyId={externalId}
-            />
+              <AdBelowTheFold
+                allowAds={allowAds}
+                usePersonalized={usePersonalized}
+                iabTopCategory={IABParentCategory?.slug}
+                iabSubCategory={IABChildCategory?.slug}
+                curationCategory={curationCategory?.slug}
+                legacyId={externalId}
+              />
 
-            {showTopics ? <TopicsBubbles topics={topics} className="no-border" /> : null}
-          </footer>
-        </section>
-      </main>
-      <Toasts />
-    </ArticleLayout>
+              {showTopics ? <TopicsBubbles topics={topics} className="no-border" /> : null}
+            </footer>
+          </section>
+        </main>
+        <Toasts />
+      </ArticleLayout>
+      <SimilarRecs />
+    </>
   )
 }

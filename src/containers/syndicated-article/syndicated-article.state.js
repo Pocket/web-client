@@ -16,7 +16,7 @@ import { HYDRATE } from 'actions'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const hydrateArticle = (hydrated) => ({ type: ARTICLE_HYDRATE, hydrated }) //prettier-ignore
-export const saveArticleItem = (url) => ({ type: ARTICLE_SAVE_REQUEST, url })
+export const saveArticleItem = (url, id) => ({ type: ARTICLE_SAVE_REQUEST, url, id })
 export const unSaveArticleItem = (id) => ({ type: ARTICLE_UNSAVE_REQUEST, id })
 
 /** REDUCERS
@@ -74,12 +74,12 @@ export const syndicatedArticleSagas = [
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-function* articleSaveRequest({ url }) {
+function* articleSaveRequest({ url, id }) {
   try {
     const response = yield saveItem(url)
     if (response?.status !== 1) throw new Error('Unable to save')
 
-    yield put({ type: ARTICLE_SAVE_SUCCESS })
+    yield put({ type: ARTICLE_SAVE_SUCCESS, id })
   } catch (error) {
     yield put({ type: ARTICLE_SAVE_FAILURE, error })
   }

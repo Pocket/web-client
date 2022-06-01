@@ -35,6 +35,7 @@ import { trackScrollDepth } from './syndicated-article.analytics'
 
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { Toasts } from 'connectors/toasts/toast-list'
+import { SimilarRecs } from 'connectors/similar/similar'
 
 // Possible query params passed via url
 const validParams = {
@@ -108,7 +109,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     if (saveStatus !== 'saved') {
       const analyticsData = { id: itemId, url: savedUrl, value }
       dispatch(sendSnowplowEvent('syndicated.article.save', analyticsData))
-      dispatch(saveArticleItem(savedUrl))
+      dispatch(saveArticleItem(savedUrl, itemId))
     }
   }
 
@@ -238,6 +239,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         </main>
         <Toasts />
       </ArticleLayout>
+      <SimilarRecs />
     </>
   )
 }
