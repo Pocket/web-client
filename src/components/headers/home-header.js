@@ -1,6 +1,5 @@
 import { css, cx } from 'linaria'
 import { useTranslation } from 'next-i18next'
-import { CrossIcon } from '@pocket/web-ui'
 import Link from 'next/link'
 
 const cardPageHeaderStyle = css`
@@ -74,21 +73,6 @@ const cardPageTopicStyle = css`
   margin-top: 3rem;
 `
 
-const cardPageSimilarStyle = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 0;
-  .sectionSubTitle {
-    margin: 0;
-  }
-  .close {
-    cursor: pointer;
-    font-size: 1.5rem;
-    margin-top: 0;
-  }
-`
-
 const lineupSpacerStyle = css`
   padding: 2rem 0;
 `
@@ -146,18 +130,6 @@ export const HomeLineupHeader = ({ sectionTitle, sectionDescription }) => {
     <header className={cx(cardPageHeaderStyle, cardPageLineupStyle)}>
       <h2 className="sectionTitle">{sectionTitle}</h2>
       {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
-    </header>
-  ) : null
-}
-
-export const HomeSimilarHeader = ({ sectionTitle, sectionDescription, closeAction = () => {} }) => {
-  return sectionTitle ? (
-    <header className={cx(cardPageHeaderStyle, cardPageSimilarStyle)}>
-      <div>
-        <h3 className="sectionTitle">{sectionTitle}</h3>
-        {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
-      </div>
-      <CrossIcon className="close" data-cy="close-similar" onClick={closeAction} />
     </header>
   ) : null
 }

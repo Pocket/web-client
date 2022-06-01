@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
-import { HomeSimilarHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'next-i18next'
+import { SimilarHeader } from 'components/headers/similar-header'
 import { recentRecsRequest } from 'connectors/recit/recit.state'
 import { clearSimilarRecs } from './similar.state'
 import { RecCard } from 'connectors/item-card/similar/card-rec'
@@ -66,6 +67,7 @@ const noSimilarRecs = css`
 
 export const SimilarRecs = () => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const featureState = useSelector((state) => state.features)
@@ -95,10 +97,10 @@ export const SimilarRecs = () => {
     <div className={`${similarRecsContainer} ${sectionClass}`} data-cy="similar-recs">
       {similarRecIds.length ? (
         <SectionWrapper>
-          <HomeSimilarHeader
+          <SimilarHeader
             closeAction={closeAction}
-            sectionTitle="Similar Stories"
-            sectionDescription="Recommended stories base on your recent save"
+            sectionTitle={t('similar:recs-title', 'Similar Stories')}
+            sectionDescription={t('similar:recs-description', 'Recommended stories base on your recent save')}
           />
           <OffsetList
             items={similarRecIds}
@@ -124,6 +126,8 @@ export const SimilarRecs = () => {
 }
 
 const NoResults = ({ closeAction, similarRecsResolved, impressionEvent }) => {
+  const { t } = useTranslation()
+
   // Fire when item is in view
   const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
   useEffect(() => {
@@ -135,10 +139,10 @@ const NoResults = ({ closeAction, similarRecsResolved, impressionEvent }) => {
       <div className={noSimilarRecs} ref={viewRef}>
         <img className="visuals" src={SimilarSearch} alt="" />
         <div className="contentBody">
-          <HomeSimilarHeader
+          <SimilarHeader
             closeAction={closeAction}
-            sectionTitle="You’re such a trendsetter!"
-            sectionDescription="We don’t have any recommendations for this content yet. We will get right on that!"
+            sectionTitle={t('similar:no-recs-title', 'You’re such a trendsetter!')}
+            sectionDescription={t('similar:no-recs-description', 'We don’t have any recommendations for this content yet. We will get right on that!')}
           />
         </div>
       </div>
