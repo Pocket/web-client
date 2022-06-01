@@ -117,6 +117,8 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     dispatch(sendSnowplowEvent(`syndicated.share.${platform}`, analyticsData))
   }
 
+  const showAuthors = authorNames?.length > 0
+
   return (
     <>
       <ArticleLayout
@@ -144,7 +146,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
                 <AuthorByline
                   url={publisher?.url}
                   name={publisher?.name}
-                  showAuthors={publisher?.showAuthors}
+                  showAuthors={showAuthors}
                   authorNames={authorNames}
                 />
               ) : null}

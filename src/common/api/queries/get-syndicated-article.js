@@ -21,6 +21,7 @@ const getSyndicatedArticleQuery = gql`
       publisher {
         name
         url
+        logo
       }
       showAds
       slug

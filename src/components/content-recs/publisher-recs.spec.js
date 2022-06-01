@@ -47,7 +47,7 @@ describe('Publisher', () => {
 
   it('renders a Publisher with a logo image, when available', () => {
     const { queryByCy } = render(<Publisher {...publisherProps} />)
-    expect(queryByCy('publisher-logo')).toHaveAttribute('src', publisherProps.logo.url)
+    expect(queryByCy('publisher-logo')).toHaveAttribute('src', publisherProps.logo)
   })
 
   it('renders a Publisher with no logo when its logo url is not available', () => {
