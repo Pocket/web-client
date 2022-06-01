@@ -8,9 +8,10 @@
     "npm": ">=8.0.0"
   },
   "scripts": {
-    "dev": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
-    "analyze": "npm run locale:inject && ANALYZE=true next build",
-    "build": "npm run locale:inject && npm run compile:icons && next build",
+    "prep": "npm run locale:inject && npm run compile:icons",
+    "dev": "npm run prep && RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
+    "analyze": "npm run prep && ANALYZE=true next build",
+    "build": "npm run prep && next build",
     "start": "next start -p 80",
     "start:local": "AS_PRODUCTION=true node ./server.local.js",
     "cypress:launch": "CYPRESS_BASE_URL=http://localhost.web-client.getpocket.com cypress open",
