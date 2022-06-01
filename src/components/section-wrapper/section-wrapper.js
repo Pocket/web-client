@@ -15,13 +15,6 @@ const sectionWrapperStyle = css`
     padding: 0 1rem;
   }
 
-  &.highlight {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    margin: 4rem 0;
-    background-color: var(--color-calloutBackgroundPrimary);
-  }
-
   .inner {
     margin: 0 auto;
     max-width: ${containerMaxWidth}px;

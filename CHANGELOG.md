@@ -1,3 +1,45 @@
+## [1.47.9](https://github.com/Pocket/web-client/compare/v1.47.8...v1.47.9) (2022-05-31)
+
+
+### Bug Fixes
+
+* **author by-line:** use proper `Link` for author url ([82598ea](https://github.com/Pocket/web-client/commit/82598ea02699aea03bc5983424c70011cdd21d1e))
+
+## [1.47.8](https://github.com/Pocket/web-client/compare/v1.47.7...v1.47.8) (2022-05-31)
+
+
+### Bug Fixes
+
+* **deriver:** revert change to analytics url to fix content error ([1b99b9e](https://github.com/Pocket/web-client/commit/1b99b9e56fd3826e3afdbb3292b7dfd88c087451))
+
+## [1.47.7](https://github.com/Pocket/web-client/compare/v1.47.6...v1.47.7) (2022-05-26)
+
+
+### Bug Fixes
+
+* **deriver:** add itemenrichment to analytics url deriver ([cb3e5c0](https://github.com/Pocket/web-client/commit/cb3e5c0c9ca292acc7cb613e33d3bd5f3fa696c5))
+
+## [1.47.6](https://github.com/Pocket/web-client/compare/v1.47.5...v1.47.6) (2022-05-24)
+
+
+### Bug Fixes
+
+* **home:** remove background color from collections slate ([a784220](https://github.com/Pocket/web-client/commit/a7842206f47ee3b344398102bfc440ab61317e0b))
+
+## [1.47.5](https://github.com/Pocket/web-client/compare/v1.47.4...v1.47.5) (2022-05-24)
+
+
+### Bug Fixes
+
+* **save:** updating color of save button to branded red ([8fc04d2](https://github.com/Pocket/web-client/commit/8fc04d25a748b15e04086ef45a7e31da3cdd2ef5))
+
+## [1.47.4](https://github.com/Pocket/web-client/compare/v1.47.3...v1.47.4) (2022-05-24)
+
+
+### Bug Fixes
+
+* **home:** remove show similar button from recent items ([5d416ad](https://github.com/Pocket/web-client/commit/5d416ad36062198a3b3444117ede436a6ad3e9b0))
+
 ## [1.47.3](https://github.com/Pocket/web-client/compare/v1.47.2...v1.47.3) (2022-05-23)
 
 

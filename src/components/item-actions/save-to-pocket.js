@@ -26,6 +26,7 @@ const saveContainer = css`
   }
 
   svg {
+    color: var(--color-actionBrand);
     transition: transform 200ms ease-out;
     display: block;
     margin-right: var(--size050);

@@ -1,3 +1,4 @@
+// Removed from Home on 5/24/22
 import { useEffect } from 'react'
 import { HomeSimilarHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'
