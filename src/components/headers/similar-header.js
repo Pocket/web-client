@@ -1,5 +1,5 @@
 import { css, cx } from 'linaria'
-import { CrossIcon } from '@pocket/web-ui'
+import { CrossIcon } from 'components/icons/CrossIcon'
 
 const cardPageHeaderStyle = css`
   margin-bottom: 1rem;

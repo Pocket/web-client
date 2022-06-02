@@ -77,7 +77,7 @@ export const SimilarRecs = () => {
   const similarRecs = useSelector((state) => state.recit.recentRecs)
   const similarRecIds = similarRecs ? Object.keys(similarRecs) : []
 
-  const sectionClass = similarRecsResolved ? 'active' : 'inactive'
+  const sectionClass = (similarRecsResolved && similarRecId) ? 'active' : 'inactive'
   const showSimilar = isLab && similarRecId
 
   const closeAction = () => {
@@ -90,9 +90,9 @@ export const SimilarRecs = () => {
   useEffect(() => {
     if (!showSimilar) return
     dispatch(recentRecsRequest(similarRecId))
-  }, [similarRecId, dispatch])
+  }, [similarRecId, showSimilar, dispatch])
 
-  return showSimilar ? (
+  return isLab ? (
     <div className={`${similarRecsContainer} ${sectionClass}`} data-cy="similar-recs">
       {similarRecIds.length ? (
         <SectionWrapper>
