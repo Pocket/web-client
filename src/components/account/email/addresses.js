@@ -1,6 +1,6 @@
 import { css } from 'linaria'
-import { Button } from '@pocket/web-ui'
-import { ErrorIcon } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
+import { ErrorIcon } from 'components/icons/ErrorIcon'
 import { topTooltip } from 'components/tooltip/tooltip'
 import { useTranslation, Trans } from 'next-i18next'
 

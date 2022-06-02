@@ -1,6 +1,8 @@
 import { StepperWrapper, IconWrapper, StepperButton } from './stepper'
 import { StepperRange } from './stepper-range'
-import { AddIcon, RemoveIcon, TextSettingsIcon } from '@pocket/web-ui'
+import { AddIcon } from 'components/icons/AddIcon'
+import { RemoveIcon } from 'components/icons/RemoveIcon'
+import { TextSettingsIcon } from 'components/icons/TextSettingsIcon'
 import { useState } from 'react'
 
 export default {
@@ -45,9 +47,7 @@ export const Normal = () => {
         </StepperButton>
       </StepperWrapper>
 
-      <p style={{ fontSize: range[current] }}>
-        Whoaaaaa!!! Lookit me change when you step-it.
-      </p>
+      <p style={{ fontSize: range[current] }}>Whoaaaaa!!! Lookit me change when you step-it.</p>
     </>
   )
 }

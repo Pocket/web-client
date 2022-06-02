@@ -1,8 +1,7 @@
-import { css } from 'linaria'
-import classNames from 'classnames'
-import { breakpointMediumHandset } from '@pocket/web-ui'
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { breakpointMediumTablet } from '@pocket/web-ui'
+import { css, cx } from 'linaria'
+import { breakpointMediumHandset } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
+import { breakpointMediumTablet } from 'common/constants'
 
 const sectionHeaderStyle = css`
   font-family: 'Doyle';
@@ -56,14 +55,8 @@ const sectionHeaderStyle = css`
     }
   }
 `
-export const SectionHeader = ({
-  sectionTitle,
-  sectionDescription,
-  addPadding
-}) => {
-  const sectionClass = classNames(sectionHeaderStyle, {
-    topicWithPadding: addPadding
-  })
+export const SectionHeader = ({ sectionTitle, sectionDescription, addPadding }) => {
+  const sectionClass = cx(sectionHeaderStyle, addPadding && 'topicWithPadding')
   return sectionTitle ? (
     <h4 className={sectionClass}>
       {sectionTitle}

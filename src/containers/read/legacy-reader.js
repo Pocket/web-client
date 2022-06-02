@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import classNames from 'classnames'
+import { cx } from 'linaria'
 import { Loader, LoaderCentered } from 'components/loader/loader'
 import { ReaderNav } from 'components/reader/nav'
 import { ItemHeader } from 'components/reader/header'
@@ -13,7 +13,7 @@ import { Toasts } from 'connectors/toasts/toast-list'
 import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
-import { ReaderFonts } from '@pocket/web-ui'
+import { ReaderFonts } from 'components/reader/fonts'
 import { Recommendations } from 'containers/read/recommendations'
 
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
@@ -250,7 +250,7 @@ export default function LegacyReader() {
       />
 
       <main className={articleWrapperStyles}>
-        <div className={classNames('sidebar-anchor', { active: sideBarOpen })}>
+        <div className={cx('sidebar-anchor', sideBarOpen && 'active')}>
           {articleContent ? (
             <Sidebar
               isPremium={isPremium}
@@ -265,12 +265,7 @@ export default function LegacyReader() {
           ) : null}
         </div>
         <article
-          className={classNames(
-            ReaderFonts,
-            GoogleFonts,
-            'reader',
-            hasVideo === 'IS_VIDEO' && 'is-video'
-          )}
+          className={cx(ReaderFonts, GoogleFonts, 'reader', hasVideo === 'IS_VIDEO' && 'is-video')}
           style={customStyles}>
           <ItemHeader viewOriginalEvent={viewOriginalEvent} {...headerData} />
           {articleContent ? (

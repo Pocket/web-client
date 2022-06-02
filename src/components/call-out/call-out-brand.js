@@ -1,9 +1,9 @@
 import React from 'react'
 import { css } from 'linaria'
-import { breakpointLargeTablet } from '@pocket/web-ui' // 1023
-import { breakpointSmallTablet } from '@pocket/web-ui' // 839
-import { breakpointLargeHandset } from '@pocket/web-ui' // 599
-import { breakpointSmallHandset } from '@pocket/web-ui' // 399
+import { breakpointLargeTablet } from 'common/constants' // 1023
+import { breakpointSmallTablet } from 'common/constants' // 839
+import { breakpointLargeHandset } from 'common/constants' // 599
+import { breakpointSmallHandset } from 'common/constants' // 399
 import { useTranslation } from 'next-i18next'
 
 const wrapper = css`

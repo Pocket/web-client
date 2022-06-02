@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { cx } from 'linaria'
-import { SyndicatedIcon } from '@pocket/web-ui'
+import { SyndicatedIcon } from 'components/icons/SyndicatedIcon'
 
 import { CardMedia } from 'components/items-media/card-media'
 import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
@@ -35,7 +35,7 @@ import ReactMarkdown from 'react-markdown'
  * @param {string} props.openUrl What is the url we will use when opening item
  * UI
  * @param {string} props.cardShape  What shape should the card take (block, wide, list)
- * @param {string} props.className Any classnames passed down
+ * @param {string} props.className Any classname passed down
  * @param {boolean} props.showExcerpt  Show excerpt or not
  * @param {boolean} props.showMedia Show image or not
  * @param {boolean} props.hiddenActions Hide actions until hover or not

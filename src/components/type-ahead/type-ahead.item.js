@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 import { usePrevious } from 'common/utilities/hooks/has-changed'
 
 const itemWrapper = css`
@@ -40,7 +39,7 @@ export const TypeAheadItem = ({ item, index, action, isActive }) => {
   const clickAction = () => action(index)
 
   return (
-    <div className={classNames(itemWrapper, { isActive })} onClick={clickAction}>
+    <div className={cx(itemWrapper, isActive && 'isActive')} onClick={clickAction}>
       <span ref={ref}>{item}</span>
     </div>
   )

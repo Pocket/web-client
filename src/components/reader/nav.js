@@ -1,19 +1,17 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { css, cx } from 'linaria'
-import {
-  ArrowLeftIcon,
-  HighlightIcon,
-  IosShareIcon,
-  TagIcon,
-  FavoriteIcon,
-  FavoriteFilledIcon,
-  ArchiveIcon,
-  AddCircledIcon,
-  DeleteIcon,
-  breakpointLargeTablet,
-  breakpointMediumHandset
-} from '@pocket/web-ui'
+import { ArrowLeftIcon } from 'components/icons/ArrowLeftIcon'
+import { HighlightIcon } from 'components/icons/HighlightIcon'
+import { IosShareIcon } from 'components/icons/IosShareIcon'
+import { TagIcon } from 'components/icons/TagIcon'
+import { FavoriteIcon } from 'components/icons/FavoriteIcon'
+import { FavoriteFilledIcon } from 'components/icons/FavoriteFilledIcon'
+import { ArchiveIcon } from 'components/icons/ArchiveIcon'
+import { AddCircledIcon } from 'components/icons/AddCircledIcon'
+import { DeleteIcon } from 'components/icons/DeleteIcon'
+
+import { breakpointLargeTablet, breakpointMediumHandset } from 'common/constants'
 import { DisplaySettings } from 'components/display-settings/display-settings'
 import { buttonReset } from 'components/buttons/button-reset'
 import { bottomTooltip } from 'components/tooltip/tooltip'

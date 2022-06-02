@@ -1,11 +1,12 @@
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
-import classnames from 'classnames'
+import { css, cx } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
-import { PremiumIcon, MenuIcon, ChevronLeftIcon } from '@pocket/web-ui'
-import { Drawer } from '@pocket/web-ui'
-import { Button } from '@pocket/web-ui'
+import { PremiumIcon } from 'components/icons/PremiumIcon'
+import { MenuIcon } from 'components/icons/MenuIcon'
+import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
+import { Drawer } from 'components/drawer/drawer'
+import { Button } from 'components/buttons/button'
 import { DEFAULT_LINKS } from 'components/global-nav/links/global-nav-links'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 
@@ -135,7 +136,7 @@ const iconStyle = css`
 `
 
 export const MobileLink = ({
-  link: { name, isDisabled = false, url, icon, label, id, beta },
+  link: { name, isDisabled = false, url, icon, label, id },
   isSelected,
   handleClick
 }) => (
@@ -143,10 +144,7 @@ export const MobileLink = ({
     <Link href={isDisabled ? null : url}>
       <a
         id={id}
-        className={classnames({
-          selected: isSelected,
-          disabled: isDisabled
-        })}
+        className={cx(isSelected && 'selected', isDisabled && 'disabled')}
         onClick={(event) => {
           handleClick(event, name, url)
         }}>
@@ -177,7 +175,7 @@ const DrawerHeader = ({ handleClose }) => {
         data-tooltip={t('nav:close', 'Close')}
         onClick={handleClose}
         variant="inline"
-        className={classnames(iconStyle, bottomTooltip)}>
+        className={cx(iconStyle, bottomTooltip)}>
         <ChevronLeftIcon />
       </Button>
     </div>
@@ -285,7 +283,7 @@ const GlobalNavMobileMenu = ({
         aria-label={t('nav:open-the-pocket-mobile-menu', 'Open the Pocket mobile menu')}
         data-tooltip={t('nav:open', 'Open')}
         variant="inline"
-        className={classnames(iconStyle, toggleClass, bottomTooltip)}>
+        className={cx(iconStyle, toggleClass, bottomTooltip)}>
         <MenuIcon />
       </Button>
       <Drawer

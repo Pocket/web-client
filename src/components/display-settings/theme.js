@@ -1,5 +1,6 @@
 import React from 'react'
-import { PopupMenuGroup, breakpointSmallHandset } from '@pocket/web-ui'
+import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
+import { breakpointSmallHandset } from 'common/constants'
 import { css } from 'linaria'
 import { Trans } from 'next-i18next'
 
@@ -7,7 +8,7 @@ const themeWrapper = css`
   display: flex;
   flex-direction: row;
   padding: 0 var(--spacing100);
-  
+
   ${breakpointSmallHandset} {
     flex-direction: column;
   }

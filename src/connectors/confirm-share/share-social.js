@@ -5,7 +5,7 @@ import { css, cx } from 'linaria'
 import copy from 'clipboard-copy'
 import { COPY_ITEM_URL } from 'actions'
 
-import { LinkCopyIcon } from '@pocket/web-ui'
+import { LinkCopyIcon } from 'components/icons/LinkCopyIcon'
 
 import { topTooltipDelayed } from 'components/tooltip/tooltip'
 import { socialButtonStyles } from 'components/social-button/social-button'

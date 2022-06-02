@@ -1,5 +1,4 @@
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 
 export const stepperTooltip = css`
@@ -17,8 +16,7 @@ export const stepperTooltip = css`
     opacity: 0;
     transform: translate(-50%, 14px);
     transform-style: preserve-3d;
-    transition: transform 200ms 1200ms ease-in-out,
-      opacity 150ms 1250ms ease-out;
+    transition: transform 200ms 1200ms ease-in-out, opacity 150ms 1250ms ease-out;
     z-index: 19;
   }
   &[data-tooltip]:before {
@@ -89,7 +87,7 @@ const iconWrapper = css`
   }
 `
 export const IconWrapper = ({ children, ...args }) => (
-  <div className={classNames(iconWrapper, stepperTooltip)} {...args}>
+  <div className={cx(iconWrapper, stepperTooltip)} {...args}>
     {children}
   </div>
 )
@@ -130,9 +128,7 @@ const stepperButton = css`
   }
 `
 export const StepperButton = ({ children, active, ...args }) => (
-  <button
-    className={classNames(buttonReset, stepperButton, stepperTooltip, { active })}
-    {...args}>
+  <button className={cx(buttonReset, stepperButton, stepperTooltip, active && 'active')} {...args}>
     {children}
   </button>
 )

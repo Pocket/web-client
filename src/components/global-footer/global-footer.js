@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
-import { headingSansSerif } from '@pocket/web-ui'
-import { fontSansSerif, fontSizeRoot } from '@pocket/web-ui'
-import { breakpointSmallTablet } from '@pocket/web-ui'
-import { breakpointTinyTablet } from '@pocket/web-ui'
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { breakpointTinyHandset } from '@pocket/web-ui'
-import { PageContainer } from '@pocket/web-ui'
-import { FacebookMonoIcon, TwitterMonoIcon, InstagramMonoIcon } from '@pocket/web-ui'
+import { breakpointSmallTablet } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
+import { breakpointTinyHandset } from 'common/constants'
+import { PageContainer } from 'components/page-container/page-container'
+import { FacebookMonoIcon } from 'components/icons/FacebookMonoIcon'
+import { TwitterMonoIcon } from 'components/icons/TwitterMonoIcon'
+import { InstagramMonoIcon } from 'components/icons/InstagramMonoIcon'
 import { Trans, useTranslation } from 'next-i18next'
 import { Languages } from 'connectors/languages/languages'
 import { PREMIUM_URL } from 'common/constants'
@@ -21,7 +21,7 @@ const googlePlayBadge =
 const footerStyle = css`
   background-color: var(--color-canvas);
   width: 100%;
-  font-family: ${fontSansSerif};
+  font-family: var(--fontSansSerif);
   color: var(--color-textPrimary);
 
   a {
@@ -89,11 +89,12 @@ const footerPrimaryGroupStyle = css`
 
   h6 {
     width: 100%;
-    ${headingSansSerif}
+    font-family: var(--fontSansSerif);
+    font-weight: 600;
   }
 
   ul {
-    font-size: ${fontSizeRoot};
+    font-size: var(--fontSizeRoot);
     list-style-type: none;
     padding: 0;
   }

@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { getPublishedDate } from 'common/utilities'
-import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointLargeHandset } from 'common/constants'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { Trans } from 'next-i18next'
 

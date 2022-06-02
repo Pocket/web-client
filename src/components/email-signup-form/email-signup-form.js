@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 import isEmail from 'validator/lib/isEmail'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import Recaptcha from 'react-google-recaptcha'
-
-import { Button, TextInput } from '@pocket/web-ui'
-import { breakpointSmallHandset, breakpointLargeHandset } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
+import { TextInput } from 'components/form-fields/text-input'
+import { breakpointSmallHandset, breakpointLargeHandset } from 'common/constants'
 
 import { CAPTCHA_SITE_KEY } from 'common/constants'
 
@@ -159,12 +158,10 @@ const EmailSignupForm = ({
 
   return (
     <form
-      className={classnames(formStyle, formClassName, {
-        'hidden-captcha-badge': hideCaptchaBadge
-      })}
+      className={cx(formStyle, formClassName, hideCaptchaBadge && 'hidden-captcha-badge')}
       onSubmit={handleFormSubmit}
       autoComplete="off">
-      <div className={classnames(inputStyle, inputClassName)}>
+      <div className={cx(inputStyle, inputClassName)}>
         <TextInput
           labelText={inputLabel}
           name={`${instanceId}-email-signup-input`}
@@ -177,7 +174,7 @@ const EmailSignupForm = ({
           data-cy="email-input"
         />
       </div>
-      <div className={classnames(buttonStyle, buttonClassName)}>
+      <div className={cx(buttonStyle, buttonClassName)}>
         <Button
           type="submit"
           disabled={isProcessing || isRecaptchaProcessing}
@@ -187,7 +184,7 @@ const EmailSignupForm = ({
         </Button>
       </div>
       {showCheckbox ? (
-        <div className={classnames(checkboxStyle)} data-cy="checkbox">
+        <div className={cx(checkboxStyle)} data-cy="checkbox">
           <input
             type="checkbox"
             onChange={handleCheckboxClick}

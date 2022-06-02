@@ -9,11 +9,10 @@ import { OffsetList } from 'components/items-layout/list-offset'
 import { css } from 'linaria'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import SimilarSearchSVG from 'static/images/home/similarSearch.svg'
-import { breakpointSmallHandset } from '@pocket/web-ui'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { useInView } from 'react-intersection-observer'
-
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { breakpointSmallHandset } from 'common/constants'
 
 const SimilarSearch = SimilarSearchSVG.src || ''
 

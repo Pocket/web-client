@@ -5,9 +5,8 @@ import {
   breakpointMediumTablet,
   breakpointTinyTablet,
   breakpointLargeHandset,
-  breakpointTinyHandset,
-  darkMode
-} from '@pocket/web-ui'
+  breakpointTinyHandset
+} from 'common/constants'
 
 const resetWrapper = css`
   font-size: initial;
@@ -202,7 +201,7 @@ const contentWrapper = css`
     background-position: center center;
     background-size: contain;
 
-    ${darkMode} {
+    .colormode-dark & {
       background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M1.643 2h20.714C23.264 2 24 2.715 24 3.597v7.736C24 17.777 18.628 23 12 23S0 17.777 0 11.333V3.597C0 2.715.736 2 1.643 2zm14.306 6.43L12 12.304 8.05 8.429a1.5 1.5 0 0 0-2.1 2.142l5 4.906a1.5 1.5 0 0 0 2.1 0l5-4.906a1.5 1.5 0 0 0-2.1-2.142z" fill="%23f2f2f2"/></svg>');
     }
   }
@@ -293,7 +292,7 @@ const contentWrapper = css`
         background-size: contain;
       }
 
-      ${darkMode} {
+      .colormode-dark & {
         font-weight: 500;
 
         &:before {

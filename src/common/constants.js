@@ -350,3 +350,30 @@ export const TOPIC_IDS = {
     }
   }
 }
+
+
+export const containerMaxWidth = 1128
+
+// screen widths (in px, max size)
+export const screenTinyHandset = 359
+export const screenSmallHandset = 399
+export const screenMediumHandset = 479
+export const screenLargeHandset = 599
+export const screenTinyTablet = 719
+export const screenSmallTablet = 839
+export const screenMediumTablet = 959
+export const screenLargeTablet = 1023
+export const screenSmallDesktop = 1279
+export const screenMediumDesktop = 1439
+// "large desktop" is anything 1440 and over.
+
+export const breakpointTinyHandset = `@media (max-width: ${screenTinyHandset}px)`
+export const breakpointSmallHandset = `@media (max-width: ${screenSmallHandset}px)`
+export const breakpointMediumHandset = `@media (max-width: ${screenMediumHandset}px)`
+export const breakpointLargeHandset = `@media (max-width: ${screenLargeHandset}px)`
+export const breakpointTinyTablet = `@media (max-width: ${screenTinyTablet}px)`
+export const breakpointSmallTablet = `@media (max-width: ${screenSmallTablet}px)`
+export const breakpointMediumTablet = `@media (max-width: ${screenMediumTablet}px)`
+export const breakpointLargeTablet = `@media (max-width: ${screenLargeTablet}px)`
+export const breakpointSmallDesktop = `@media (max-width: ${screenSmallDesktop}px)`
+export const breakpointMediumDesktop = `@media (max-width: ${screenMediumDesktop}px)`

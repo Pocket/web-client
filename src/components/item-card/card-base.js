@@ -1,11 +1,11 @@
 import { css } from 'linaria'
-import { breakpointLargeTablet } from '@pocket/web-ui'
-import { breakpointMediumTablet } from '@pocket/web-ui'
-import { breakpointSmallTablet } from '@pocket/web-ui'
-import { breakpointTinyTablet } from '@pocket/web-ui'
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { breakpointSmallHandset } from '@pocket/web-ui'
-import { breakpointMediumHandset } from '@pocket/web-ui'
+import { breakpointLargeTablet } from 'common/constants'
+import { breakpointMediumTablet } from 'common/constants'
+import { breakpointSmallTablet } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
+import { breakpointSmallHandset } from 'common/constants'
+import { breakpointMediumHandset } from 'common/constants'
 
 // !! Caution
 // Changes to cardStyles will change ALL cards across the app (eventually).

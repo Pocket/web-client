@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import { numberWithCommas } from 'common/utilities'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { darkMode, sepiaMode } from '@pocket/web-ui'
+
 import { Trans } from 'next-i18next'
 
 const publisherWrap = css`
@@ -21,8 +21,8 @@ const publisherStyles = css`
     height: 60px;
     margin-bottom: var(--spacing100);
 
-    ${darkMode},
-    ${sepiaMode} {
+    .colormode-dark &,
+    .colormode-sepia & {
       border-radius: 4px;
     }
   }

@@ -1,7 +1,7 @@
 import { css } from 'linaria'
-import { containerMaxWidth } from '@pocket/web-ui'
-import { breakpointTinyTablet } from '@pocket/web-ui'
-import { breakpointLargeHandset } from '@pocket/web-ui'
+import { containerMaxWidth } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
 
 const sectionWrapperStyle = css`
   box-sizing: content-box;

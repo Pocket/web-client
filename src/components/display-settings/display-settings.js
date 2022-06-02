@@ -1,21 +1,19 @@
+import { cx } from 'linaria'
 import React, { useRef, useState } from 'react'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { Trans, useTranslation } from 'next-i18next'
-import {
-  PopupMenu,
-  PopupMenuGroup,
-  PopupMenuItem,
-  TextSizeIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-  PremiumIcon,
-  ChevronLeftIcon,
-  breakpointMediumHandset
-} from '@pocket/web-ui'
+import { breakpointMediumHandset } from 'common/constants'
+import { PopupMenu, PopupMenuGroup, PopupMenuItem } from 'components/popup-menu/popup-menu'
+
+import { TextSizeIcon } from 'components/icons/TextSizeIcon'
+import { ChevronDownIcon } from 'components/icons/ChevronDownIcon'
+import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
+import { PremiumIcon } from 'components/icons/PremiumIcon'
+import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
+
 import { css } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import { bottomTooltip } from 'components/tooltip/tooltip'
-import classNames from 'classnames'
 import { FontSettings } from './fonts'
 import { FontSizeSettings } from './font-size'
 import { LineHeightSettings } from './line-height'
@@ -181,16 +179,10 @@ export const DisplaySettings = ({
   return (
     <div className={displayStyles} ref={menuRef}>
       <button
-        aria-label={t(
-          'settings:open-display-settings',
-          'Open Display Settings'
-        )}
-        data-tooltip={t(
-          'settings:open-display-settings',
-          'Open Display Settings'
-        )}
+        aria-label={t('settings:open-display-settings', 'Open Display Settings')}
+        data-tooltip={t('settings:open-display-settings', 'Open Display Settings')}
         data-cy="reader-nav-display-settings"
-        className={classNames(buttonReset, buttonStyles, bottomTooltip, mobileStyles)}
+        className={cx(buttonReset, buttonStyles, bottomTooltip, mobileStyles)}
         ref={displayButtonRef}
         onClick={handleOpen}
         onKeyPress={updateFocus}>
@@ -276,9 +268,7 @@ export const DisplaySettings = ({
                     href={`${PREMIUM_URL}&utm_campaign=reader-display-settings`}
                     target="_premium"
                     icon={<PremiumIcon />}>
-                    <Trans i18nKey="settings:unlock-more-options">
-                      Unlock more options
-                    </Trans>
+                    <Trans i18nKey="settings:unlock-more-options">Unlock more options</Trans>
                   </PopupMenuItem>
                 </PopupMenuGroup>
               </VisibilitySensor>

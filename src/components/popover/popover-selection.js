@@ -1,9 +1,9 @@
-import React, { useRef, useEffect } from 'react'
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { useRef, useEffect } from 'react'
+import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
-import { HighlightIcon, IosShareIcon } from '@pocket/web-ui'
+import { HighlightIcon } from 'components/icons/HighlightIcon'
+import { IosShareIcon } from 'components/icons/IosShareIcon'
 import { Trans } from 'next-i18next'
 
 const popupContainer = css`
@@ -88,14 +88,14 @@ export const SelectionPopover = ({ anchor, addAnnotation, disablePopup, shareIte
       style={{
         transform: `translate(${Math.round(center)}px, ${Math.round(top + window.scrollY)}px)`
       }}>
-      <div className={classNames(overlayBase, popupWrapper)} ref={ref}>
-        <button className={classNames(buttonReset, buttonWrapper)} onClick={onHighlight}>
+      <div className={cx(overlayBase, popupWrapper)} ref={ref}>
+        <button className={cx(buttonReset, buttonWrapper)} onClick={onHighlight}>
           <span className={iconWrapper}>
             <HighlightIcon />
           </span>
           <Trans i18nKey="annotations:highlight">Highlight</Trans>
         </button>
-        <button className={classNames(buttonReset, buttonWrapper)} onClick={onShare}>
+        <button className={cx(buttonReset, buttonWrapper)} onClick={onShare}>
           <span className={iconWrapper}>
             <IosShareIcon />
           </span>

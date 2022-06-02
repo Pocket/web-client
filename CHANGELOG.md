@@ -1,3 +1,18 @@
+# [1.48.0](https://github.com/Pocket/web-client/compare/v1.47.9...v1.48.0) (2022-06-01)
+
+
+### Bug Fixes
+
+* **reader:** font file formatting ([e70e47a](https://github.com/Pocket/web-client/commit/e70e47adb516a60254d95c152c2be73ebc513cd9))
+
+
+### Features
+
+* **breakpoints:** add to constants ([044635a](https://github.com/Pocket/web-client/commit/044635a069ba27c57cbee8dae6b4d2afe8d9b452))
+* **button:** add to components ([719a246](https://github.com/Pocket/web-client/commit/719a2468fc9468f1caff7334859b5bef3ea9b1b2))
+* **icons:** build icons scripts/icons ([6f93f87](https://github.com/Pocket/web-client/commit/6f93f878376176a042ea6d2c61305613f7e84ec5))
+* **pocket ui:** integrate pocket ui ([bf93256](https://github.com/Pocket/web-client/commit/bf93256ac41a5058f8f0067e0930c81f2019ea92))
+
 ## [1.47.9](https://github.com/Pocket/web-client/compare/v1.47.8...v1.47.9) (2022-05-31)
 
 

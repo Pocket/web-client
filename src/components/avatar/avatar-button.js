@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
-import classnames from 'classnames'
+import { css, cx } from 'linaria'
 
 import Avatar from './avatar'
 
@@ -86,17 +85,12 @@ export const AvatarButton = React.forwardRef(
     return (
       <button
         type="button"
-        className={classnames(buttonStyles, className)}
+        className={cx(buttonStyles, className && className)}
         title={label}
         onClick={onClick}
-        { ...rest }
+        {...rest}
         ref={ref}>
-        <Avatar
-          size={size}
-          src={src}
-          altText={label}
-          data-cy={`avatar-button-avatar-${id}`}
-        />
+        <Avatar size={size} src={src} altText={label} data-cy={`avatar-button-avatar-${id}`} />
       </button>
     )
   }

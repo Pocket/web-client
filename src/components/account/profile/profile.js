@@ -1,6 +1,6 @@
 import { css } from 'linaria'
 import { Avatar } from './avatar'
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { useTranslation } from 'next-i18next'
 
 const profileStyle = css`

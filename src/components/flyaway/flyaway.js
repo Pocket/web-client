@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { css, cx } from 'linaria'
-import { breakpointLargeHandset, breakpointLargeTablet } from '@pocket/web-ui'
+import { breakpointLargeHandset, breakpointLargeTablet } from 'common/constants'
 import { CloseButton } from 'components/close-button/close-button'
-import { containerMaxWidth } from '@pocket/web-ui'
+import { containerMaxWidth } from 'common/constants'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { getValueFromCookie } from 'common/utilities'
 
@@ -106,7 +106,9 @@ export function Flyaway({
 
   // If cookie consent banner is open, grab its height so we can
   // determine the position of the flyaway
-  const bannerHeight = !bannerClosed ? document.querySelector('#onetrust-banner-sdk')?.offsetHeight + 30 : 50
+  const bannerHeight = !bannerClosed
+    ? document.querySelector('#onetrust-banner-sdk')?.offsetHeight + 30
+    : 50
 
   useEffect(() => {
     let timer
@@ -116,12 +118,10 @@ export function Flyaway({
     return () => clearTimeout(timer)
   }, [show])
 
-  const flyawayClassNames = cx(flyawayWrapper, styleOverrides, flyawayOpen && 'show')
+  const flyawayClassName = cx(flyawayWrapper, styleOverrides, flyawayOpen && 'show')
   return (
-    <SectionWrapper
-      style={{ bottom: `${bannerHeight}px` }}
-      className={sectionWrapper} >
-      <div className={flyawayClassNames} data-cy={dataCy}>
+    <SectionWrapper style={{ bottom: `${bannerHeight}px` }} className={sectionWrapper}>
+      <div className={flyawayClassName} data-cy={dataCy}>
         <div className={flyaway}>
           <div className="flyaway_title">
             <h5>{title}</h5>
@@ -131,7 +131,7 @@ export function Flyaway({
               closeButtonOverrides={closeButtonOverrides}
             />
           </div>
-          { description ? <div className="description">{description}</div> : null }
+          {description ? <div className="description">{description}</div> : null}
         </div>
       </div>
     </SectionWrapper>

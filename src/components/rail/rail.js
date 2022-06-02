@@ -1,5 +1,4 @@
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 
 const railWrapper = css`
   position: fixed;
@@ -13,9 +12,7 @@ const railWrapper = css`
 `
 
 export const Rail = ({ clickAction, children }) => (
-  <div
-    className={classNames(railWrapper, 'rail-wrapper')}
-    onClick={clickAction}>
+  <div className={cx(railWrapper, 'rail-wrapper')} onClick={clickAction}>
     {children}
   </div>
 )

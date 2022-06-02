@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 import { AnnotationMenu } from './annotations.menu'
 import { cardStyles, Quote, CreatedDate } from './annotations.card'
 import { EmptyList } from './annotations.empty-list'
@@ -55,13 +54,7 @@ const headingStyles = css`
 
 export class QuoteList extends Component {
   renderCards = () => {
-    const {
-      annotations,
-      onClickEvent,
-      shareItem,
-      deleteAnnotation,
-      handleImpression
-    } = this.props
+    const { annotations, onClickEvent, shareItem, deleteAnnotation, handleImpression } = this.props
     const cards = []
 
     annotations
@@ -76,7 +69,7 @@ export class QuoteList extends Component {
           <div
             onClick={(e) => e.stopPropagation()}
             key={id}
-            className={classNames(cardStyles, activeCardStyles, { active })}>
+            className={cx(cardStyles, activeCardStyles, active && 'active')}>
             <Quote
               // aria-label={translate('annotations.scrollTo')}
               onClick={() => onClickEvent(annot.position)}>
@@ -109,7 +102,7 @@ export class QuoteList extends Component {
     const { visible, annotations, annotationCount } = this.props
 
     return annotations && annotationCount > 0 ? (
-      <div className={classNames(listWrapper, { visible })}>
+      <div className={cx(listWrapper, visible && 'visible')}>
         <h6 className={headingStyles}>
           <Trans i18nKey="annotations:my-highlights">My Highlights</Trans>
         </h6>

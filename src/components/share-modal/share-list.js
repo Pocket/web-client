@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { css, cx } from 'linaria'
 import copy from 'clipboard-copy'
 import { COPY_ITEM_URL } from 'actions'
-import { LinkCopyIcon } from '@pocket/web-ui'
+import { LinkCopyIcon } from 'components/icons/LinkCopyIcon'
 import { topTooltipDelayed } from 'components/tooltip/tooltip'
 import { socialButtonStyles } from 'components/social-button/social-button'
 import { SocialButton } from 'components/social-button/social-button'
@@ -19,14 +19,7 @@ const socialIcons = css`
   border-top: var(--dividerStyle);
 `
 
-export const ShareList = ({
-  openUrl,
-  excerpt,
-  title,
-  quote,
-  engagementEvent,
-  cancelShare
-}) => {
+export const ShareList = ({ openUrl, excerpt, title, quote, engagementEvent, cancelShare }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 

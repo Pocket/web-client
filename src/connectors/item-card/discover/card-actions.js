@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReportIcon } from '@pocket/web-ui'
+import { ReportIcon } from 'components/icons/ReportIcon'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { OverflowAction } from 'components/item-actions/overflow'
 import { useSelector, useDispatch } from 'react-redux'

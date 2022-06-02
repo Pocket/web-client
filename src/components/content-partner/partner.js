@@ -1,6 +1,5 @@
 import { css } from 'linaria'
 import { useTranslation } from 'next-i18next'
-import { darkMode, sepiaMode } from '@pocket/web-ui'
 
 const partnerStyles = css`
   font-family: 'Graphik Web';
@@ -13,12 +12,12 @@ const partnerStyles = css`
     margin-left: 0.5rem;
     max-width: 8rem;
 
-    ${darkMode} {
+    .colormode-dark & {
       mix-blend-mode: exclusion;
       filter: invert(1);
     }
 
-    ${sepiaMode} {
+    .colormode-sepia & {
       mix-blend-mode: multiply;
     }
   }

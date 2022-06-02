@@ -1,8 +1,7 @@
-import { css } from 'linaria'
-import { HighlightIcon } from '@pocket/web-ui'
+import { css, cx } from 'linaria'
+import { HighlightIcon } from 'components/icons/HighlightIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
-import classNames from 'classnames'
 
 const highlightWrapper = css`
   background-color: #fff8ec;
@@ -15,7 +14,7 @@ const highlightWrapper = css`
   }
 `
 export function HighlightsTag({ count, margin }) {
-  const className = classNames(highlightWrapper, buttonReset, tagBase)
+  const className = cx(highlightWrapper, buttonReset, tagBase)
   return (
     <div className={className} style={{ margin }}>
       <HighlightIcon />

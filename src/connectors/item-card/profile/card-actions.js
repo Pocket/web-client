@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { saveRecommendedItem } from 'connectors/items-by-id/profile/items.state'
 import { deleteRecommendedItem } from 'connectors/items-by-id/profile/items.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { DeleteIcon } from '@pocket/web-ui'
+import { DeleteIcon } from 'components/icons/DeleteIcon'
 
 export function ActionsFeed({ id, position }) {
   const dispatch = useDispatch()

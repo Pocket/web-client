@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import { css } from 'linaria'
-import { breakpointLargeTablet, breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointLargeTablet, breakpointLargeHandset } from 'common/constants'
 import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseReaderFlyaway } from '../onboarding.state'
@@ -43,7 +43,8 @@ export const MyListFlyawayReader = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const myListFlyawayDismissed = useSelector((state) => state.onboarding.homeFlyawayMyList) === false
+  const myListFlyawayDismissed =
+    useSelector((state) => state.onboarding.homeFlyawayMyList) === false
   const readerFlyawayReady = useSelector((state) => state.onboarding.myListFlyawayReader)
   const showFlyaway = myListFlyawayDismissed && readerFlyawayReady
 

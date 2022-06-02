@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import EmailSignupForm from 'components/email-signup-form/email-signup-form'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { pocketHitsSignupRequested } from 'connectors/pocket-hits/pocket-hits.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { breakpointSmallDesktop } from '@pocket/web-ui' // 1279
-import { breakpointSmallTablet } from '@pocket/web-ui' // 839
-import { breakpointTinyTablet } from '@pocket/web-ui' // 719
-import { breakpointLargeHandset } from '@pocket/web-ui' // 599
+import { breakpointSmallDesktop } from 'common/constants' // 1279
+import { breakpointSmallTablet } from 'common/constants' // 839
+import { breakpointTinyTablet } from 'common/constants' // 719
+import { breakpointLargeHandset } from 'common/constants' // 599
 import { useTranslation } from 'next-i18next'
 
 const FORM_ID = 'explore-engagement-signup'
@@ -234,7 +233,7 @@ const CallOutPocketHitsSignup = ({
         <div className="brandBlock">
           <aside>{t('call-out:fuel-your-mind', 'Get ready to fuel your mind.')}</aside>
           <blockquote>
-            <span className={classNames('copy', { isSuccessful })}>
+            <span className={cx('copy', isSuccessful && 'isSuccessful')}>
               <svg
                 className="zigzag"
                 xmlns="http://www.w3.org/2000/svg"

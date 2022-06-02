@@ -1,8 +1,8 @@
 import { css } from 'linaria'
 import { useTranslation } from 'next-i18next'
-import { breakpointSmallHandset } from '@pocket/web-ui'
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { breakpointLargeTablet } from '@pocket/web-ui'
+import { breakpointSmallHandset } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
+import { breakpointLargeTablet } from 'common/constants'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { ListSort } from 'components/list-sort/list-sort'
 
@@ -81,9 +81,11 @@ export const MyListHeader = ({ subset, filter, title, sortOrder, handleNewest, h
 
   return subset ? (
     <header className={myListHeaderStyle}>
-      <h1 className="pageTitle" data-cy="page-title">{translatedHeaders[title]}</h1>
+      <h1 className="pageTitle" data-cy="page-title">
+        {translatedHeaders[title]}
+      </h1>
       <FilterMenu subset={subset} filter={filter} />
-      { subset !== 'tag-page' ? (
+      {subset !== 'tag-page' ? (
         <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
       ) : null}
     </header>

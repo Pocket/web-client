@@ -3,7 +3,7 @@ import { Trans } from 'next-i18next'
 import dayjs from 'dayjs'
 import Avatar from 'components/avatar/avatar'
 import { Card } from 'components/item-card/card'
-import { fontSansSerif, Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { timeRelativeToNow } from 'common/utilities'
 
 const messageWrapper = css`
@@ -28,7 +28,7 @@ const messageWrapper = css`
   }
 
   header {
-    font-family: ${fontSansSerif};
+    font-family: var(--fontSansSerif);
     display: flex;
     justify-content: space-between;
     margin-bottom: var(--spacing100);
@@ -57,7 +57,7 @@ const messageWrapper = css`
   }
 
   .comment {
-    font-family: ${fontSansSerif};
+    font-family: var(--fontSansSerif);
     color: var(--color-textSecondary);
     margin-bottom: var(--spacing150);
   }

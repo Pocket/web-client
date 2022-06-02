@@ -1,8 +1,11 @@
-import { PopupMenuGroup, PopupMenuItem, CheckCircledIcon, PremiumIcon } from '@pocket/web-ui'
-import { css } from 'linaria'
-import classNames from 'classnames'
+
+import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
+import { PopupMenuItem } from 'components/popup-menu/popup-menu'
+import { CheckCircledIcon } from 'components/icons/CheckCircledIcon'
+import { PremiumIcon } from 'components/icons/PremiumIcon'
+
+import { css, cx} from 'linaria'
 import { FONT_TYPES } from 'components/fonts/fonts'
-import { darkMode } from '@pocket/web-ui'
 
 import BlancoSVG from 'static/images/font-icons/blanco.svg'
 import GraphikSVG from 'static/images/font-icons/graphik.svg'
@@ -31,7 +34,7 @@ const fontFamilyButton = css`
     height: var(--size150);
   }
 
-  ${darkMode} img {
+  .colormode-dark & img {
     filter: invert(1);
   }
 
@@ -70,7 +73,7 @@ export const FontSettings = ({ updateFontFamily, currentFont, isPremium }) => {
           <PopupMenuItem
             key={font}
             data-cy={`display-select-font-${font}`}
-            className={classNames(fontFamilyButton, { showPremium })}
+            className={cx(fontFamilyButton, showPremium && 'showPremium')}
             icon={showPremium ? <PremiumIcon /> : null}
             onClick={click}
             tabIndex={showPremium ? '-1' : '0'}

@@ -8,7 +8,7 @@ import { cardDetail } from 'components/items-layout/virtualized-list'
 import { cardList } from 'components/items-layout/virtualized-list'
 import { cardGrid } from 'components/items-layout/virtualized-list'
 import { ruler } from 'components/items-layout/virtualized-list'
-import { useViewport } from '@pocket/web-ui'
+import { useViewport } from 'components/viewport-provider/viewport-provider'
 import { LoadMore } from 'connectors/virtualized/load-more'
 /**
  * CardLayout
@@ -94,21 +94,17 @@ export function VirtualizedList({ type = 'grid', section, actions, loadMore = ()
 
   /** FUNCTIONS
  --------------------------------------------------------------- */
-  const checkRange = useCallback(
-    () => {
-      // Set up the fact that we are scrolling
-      setIsScrolling(true)
-      scrollTracker.current = setTimeout(() => setIsScrolling(false), 500)
+  const checkRange = useCallback(() => {
+    // Set up the fact that we are scrolling
+    setIsScrolling(true)
+    scrollTracker.current = setTimeout(() => setIsScrolling(false), 500)
 
-      // Get scroll direction.
-      const top = getScrollTop()
-      const naturalStart = Math.floor(top / height) * columnCount
-      const newIndex = Math.max(naturalStart - columnCount * 2, 0)
-      setRange({ start: newIndex, end: newIndex + itemOnScreen })
-
-    },
-    [columnCount, height, itemOnScreen]
-  )
+    // Get scroll direction.
+    const top = getScrollTop()
+    const naturalStart = Math.floor(top / height) * columnCount
+    const newIndex = Math.max(naturalStart - columnCount * 2, 0)
+    setRange({ start: newIndex, end: newIndex + itemOnScreen })
+  }, [columnCount, height, itemOnScreen])
 
   /** EFFECTS
  --------------------------------------------------------------- */
@@ -157,7 +153,7 @@ export function VirtualizedList({ type = 'grid', section, actions, loadMore = ()
   }, [type])
 
   return (
-    // Create a list container with the appropriate classnames
+    // Create a list container with the appropriate classname
     <div
       className={containerClasses}
       style={{
@@ -178,7 +174,7 @@ export function VirtualizedList({ type = 'grid', section, actions, loadMore = ()
           })}
         </div>
       </div>
-      <LoadMore count={count} total={total} loadMore={loadMore}/>
+      <LoadMore count={count} total={total} loadMore={loadMore} />
       <div className={ruler} ref={rulerRef} />
     </div>
   )

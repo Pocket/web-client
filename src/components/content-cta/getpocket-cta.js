@@ -1,6 +1,6 @@
 // Component last used on 9/14/20 -- delete if stale
 import { css } from 'linaria'
-import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointLargeHandset } from 'common/constants'
 import { Trans } from 'next-i18next'
 
 const GetPocketLink = css`

@@ -1,7 +1,7 @@
 import { css } from 'linaria'
-import { Button } from '@pocket/web-ui'
-import { breakpointMediumHandset, breakpointLargeHandset } from '@pocket/web-ui'
-import { darkMode, sepiaMode } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
+import { breakpointMediumHandset, breakpointLargeHandset } from 'common/constants'
+
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,7 +9,7 @@ import { useTranslation } from 'next-i18next'
 import { TopicSelector } from 'connectors/topic-list/topic-selector'
 import { onboardingCloseTopicSelectionModal } from '../onboarding.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { SaveFilledIcon } from '@pocket/web-ui'
+import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 import RainbowReader from 'static/images/rainbow-reader-transparent.svg'
 
 const modalBodyStyles = css`
@@ -27,11 +27,11 @@ const modalBodyStyles = css`
     width: 100%;
     background-color: var(--color-apricotLightest);
 
-    ${darkMode} {
+    .colormode-dark & {
       background-color: var(--color-grey40);
     }
 
-    ${sepiaMode} {
+    .colormode-sepia & {
       background-color: var(--color-amberLight);
     }
 

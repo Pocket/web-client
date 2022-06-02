@@ -1,6 +1,5 @@
 import React from 'react'
-import { css } from 'linaria'
-import classnames from 'classnames'
+import { css, cx } from 'linaria'
 
 const modalBodyStyles = css`
   padding: var(--spacing150);
@@ -12,7 +11,7 @@ const modalBodyStyles = css`
 `
 
 export const ModalBody = ({ children, className }) => (
-  <div className={classnames(modalBodyStyles, className)}>{children}</div>
+  <div className={cx(modalBodyStyles, className)}>{children}</div>
 )
 
 export default ModalBody

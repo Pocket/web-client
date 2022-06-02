@@ -1,14 +1,13 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import { LOGIN_URL, SIGNUP_URL } from 'common/constants'
-import classNames from 'classnames'
 import { buttonReset } from 'components/buttons/button-reset'
 import Link from 'next/link'
 import { useTranslation, Trans } from 'next-i18next'
 
-import { SaveIcon } from '@pocket/web-ui'
-import { SaveFilledIcon } from '@pocket/web-ui'
-import { ReadingIcon } from '@pocket/web-ui'
+import { SaveIcon } from 'components/icons/SaveIcon'
+import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
+import { ReadingIcon } from 'components/icons/ReadingIcon'
 
 const saveContainer = css`
   display: flex;
@@ -145,7 +144,7 @@ export const SaveToPocket = function ({
     ]
   })
 
-  const saveClasses = classNames(
+  const saveClasses = cx(
     buttonReset,
     saveContainer,
     saveStatus,

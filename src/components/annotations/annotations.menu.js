@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
-import classNames from 'classnames'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
 
-import { OverflowMenuIcon } from '@pocket/web-ui'
-import { IosShareIcon } from '@pocket/web-ui'
-import { DeleteIcon } from '@pocket/web-ui'
-import { PopupMenuGroup } from '@pocket/web-ui'
-import { PopupMenuItem } from '@pocket/web-ui'
+import { OverflowMenuIcon } from 'components/icons/OverflowMenuIcon'
+import { IosShareIcon } from 'components/icons/IosShareIcon'
+import { DeleteIcon } from 'components/icons/DeleteIcon'
+import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
+import { PopupMenuItem } from 'components/popup-menu/popup-menu'
 
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
@@ -88,10 +87,7 @@ export const AnnotationMenu = ({
 }) => {
   const { t } = useTranslation()
 
-  const screenHeight = Math.max(
-    document.documentElement.clientHeight,
-    window.innerHeight || 0
-  )
+  const screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
   const [menuOpen, setMenuOpen] = useState(false)
   const [flipDirection, setFlipDirection] = useState(false)
   const selfRef = useRef(null)
@@ -134,27 +130,28 @@ export const AnnotationMenu = ({
     <div className={inlineMenuStyles} style={{ top, left }}>
       <div className={relativeWrapper}>
         <button
-          aria-label={t(
-            'annotations:open-highlights-menu',
-            'Open Highlights Menu'
-          )}
+          aria-label={t('annotations:open-highlights-menu', 'Open Highlights Menu')}
           data-cy={`highlight-menu-${id}`}
           ref={selfRef}
           onClick={toggleMenu}
-          className={classNames(buttonReset, 'inline-button', {
-            visible,
-            floating
-          })}>
+          className={cx(
+            buttonReset,
+            'inline-button',
+            visible && 'visible',
+            floating && 'floating'
+          )}>
           <OverflowMenuIcon />
         </button>
         {menuOpen ? (
           <ul
             onMouseEnter={clearTimer}
             onMouseLeave={startTimer}
-            className={classNames(overlayBase, menuWrapper, {
-              alignRight,
-              flipDirection
-            })}>
+            className={cx(
+              overlayBase,
+              menuWrapper,
+              alignRight && 'alignRight',
+              flipDirection && 'flipDirection'
+            )}>
             <PopupMenuGroup>
               <PopupMenuItem
                 onClick={handleDelete}

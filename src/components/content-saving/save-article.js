@@ -1,11 +1,10 @@
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 import { usePopover } from 'components/popover/popover'
-import { SaveIcon } from '@pocket/web-ui'
-import { SaveFilledIcon } from '@pocket/web-ui'
+import { SaveIcon } from 'components/icons/SaveIcon'
+import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 import { SavePopover } from 'components/item-actions/save-to-pocket'
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { Button } from '@pocket/web-ui'
+import { breakpointLargeHandset } from 'common/constants'
+import { Button } from 'components/buttons/button'
 import { useTranslation } from 'next-i18next'
 
 const saveArticleStyles = css`
@@ -70,7 +69,7 @@ const saveArticleStyles = css`
 export function SaveArticleTop({ url, saveAction, saveStatus, isAuthenticated, trackSaveClick }) {
   const { t } = useTranslation()
   return (
-    <div className={classNames(saveArticleStyles, 'top', 'save-article')}>
+    <div className={cx(saveArticleStyles, 'top', 'save-article')}>
       <SaveStoryButton
         trackSaveClick={trackSaveClick}
         isAuthenticated={isAuthenticated}
@@ -95,7 +94,7 @@ export function SaveArticleBottom({
   const { t } = useTranslation()
 
   return (
-    <div className={classNames(saveArticleStyles, 'top', 'save-article')}>
+    <div className={cx(saveArticleStyles, 'top', 'save-article')}>
       <SaveStoryButton
         trackSaveClick={trackSaveClick}
         isAuthenticated={isAuthenticated}
