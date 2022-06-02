@@ -195,14 +195,14 @@ const Modal = ({
           doesAnimateTransition && readyAnimate && !isOpen && 'animation-hide',
           forceMobile && 'force-mobile'
         )}
-        overlayClassName={cx([
+        overlayClassName={cx(
           overlayStyles,
           overlayClassName,
           doesAnimateTransition && 'animation-base',
           doesAnimateTransition && readyAnimate && isOpen && 'animation-show',
           doesAnimateTransition && readyAnimate && !isOpen && 'animation-hide'
-        ])}
-        portalClassName={cx([portalClassName])}
+        )}
+        portalClassName={cx(portalClassName)}
         closeTimeoutMS={closeTimeoutMS} // necessary to make outgoing animation display
         data-cy="modal"
         contentRef={(node) => (modalContentRef = node)}>

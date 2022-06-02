@@ -1,3 +1,10 @@
+## [1.48.1](https://github.com/Pocket/web-client/compare/v1.48.0...v1.48.1) (2022-06-02)
+
+
+### Bug Fixes
+
+* **modal:** fix modal overlay styles ([7261dae](https://github.com/Pocket/web-client/commit/7261daea800b728ddc8fb68ff1aa613aafc9a33a))
+
 # [1.48.0](https://github.com/Pocket/web-client/compare/v1.47.9...v1.48.0) (2022-06-01)
 
 
