@@ -34,6 +34,8 @@ export const Home = ({ metaData }) => {
   const featureState = useSelector((state) => state.features) || {}
   const generalSlates = useSelector((state) => state.home.generalSlates)
   const topicSlates = useSelector((state) => state.home.topicSlates)
+  const recsByTopic = useSelector((state) => state.home.recsByTopic)
+
   const fallback = '249850f0-61c0-46f9-a16a-f0553c222800'
 
   const lineupFlag = featureState['home.lineup']
@@ -57,6 +59,27 @@ export const Home = ({ metaData }) => {
         <HomeGreeting />
         <HomeRecentSaves />
       </SectionWrapper>
+
+      {recsByTopic ? (
+        <SectionWrapper>
+          <HomeLineupHeader
+            sectionTitle="Based on your interests"
+            sectionDescription="Articles tailored to you"
+            onClickEvent={() => {}}
+          />
+
+          <OffsetList
+            items={recsByTopic}
+            offset={0}
+            count={6}
+            ItemCard={CardLineup}
+            cardShape="block"
+            showExcerpt={false}
+            showTopicName={true}
+            border={false}
+          />
+        </SectionWrapper>
+      ) : null}
 
       {generalSlates?.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />

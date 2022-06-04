@@ -43,3 +43,8 @@ export { bulkUnArchive } from './mutations/unArchiveItem'
 export { createHighlight } from './mutations/savedItemHighlights'
 export { deleteHighlight } from './mutations/savedItemHighlights'
 export { updateHighlight } from './mutations/savedItemHighlights'
+
+// Setup Moment
+export { getTopicSelectors } from './queries/get-topic-selectors'
+export { getSlate } from './queries/get-slate'
+export { getTopicMix } from './queries/get-topic-mix'

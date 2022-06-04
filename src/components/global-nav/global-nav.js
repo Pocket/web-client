@@ -185,6 +185,7 @@ const toolsStyle = css`
  * ```
  */
 const GlobalNav = ({
+  noNav,
   subLinks,
   subset,
   tag,
@@ -267,7 +268,7 @@ const GlobalNav = ({
               </a>
             </Link>
           </div>
-          {children ? (
+          {children || noNav ? (
             children
           ) : (
             <>

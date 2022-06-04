@@ -10,7 +10,7 @@ import { FavoriteFilledIcon } from 'components/icons/FavoriteFilledIcon'
 import { ArchiveIcon } from 'components/icons/ArchiveIcon'
 import { AddCircledIcon } from 'components/icons/AddCircledIcon'
 import { DeleteIcon } from 'components/icons/DeleteIcon'
-
+import { useRouter } from 'next/router'
 import { breakpointLargeTablet, breakpointMediumHandset } from 'common/constants'
 import { DisplaySettings } from 'components/display-settings/display-settings'
 import { buttonReset } from 'components/buttons/button-reset'
@@ -128,13 +128,18 @@ export const ReaderNav = ({
   setColorMode
 }) => {
   const dispatch = useDispatch()
+  const router = useRouter()
   const { t } = useTranslation()
 
   const setFontFamily = (val) => dispatch(updateFontType(val))
   const setFontSize = (val) => dispatch(updateFontSize(val))
   const setLineHeight = (val) => dispatch(updateLineHeight(val))
   const setColumnWidth = (val) => dispatch(updateColumnWidth(val))
+
   const goBack = () => {
+    const { getStarted } = router.query
+
+    if (getStarted) return router.push('/home')
     if (window.history.length > 1) return window.history.go(-1)
     document.location.href = '/my-list'
   }

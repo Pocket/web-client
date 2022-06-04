@@ -79,6 +79,7 @@ export const Card = (props) => {
     useMarkdown,
     partnerType,
     titleFlow = false,
+    topicName = false,
     style,
     // Tracking
     onItemInView,
@@ -155,6 +156,7 @@ export const Card = (props) => {
       <div className="cardWrap" ref={viewRef}>
         {showMedia ? (
           <CardMedia
+            topicName={topicName}
             image_src={itemImage}
             title={title}
             id={itemId}

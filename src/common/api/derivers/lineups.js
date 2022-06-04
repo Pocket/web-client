@@ -30,7 +30,7 @@ export function processLineup(response) {
   return { slateItemArrays, slatesById, itemsById }
 }
 
-function getRecsById(slates, lineupAnalytics) {
+export function getRecsById(slates, lineupAnalytics) {
   return slates.reduce((accumulator, current) => {
     const recommendations = deriveItems(current, lineupAnalytics)
     const recsById = arrayToObject(recommendations, 'itemId')

@@ -23,6 +23,8 @@ import { HOME_LINEUP_REQUEST } from 'actions'
 import { HOME_LINEUP_SUCCESS } from 'actions'
 import { HOME_LINEUP_FAILURE } from 'actions'
 
+import { GET_STARTED_HOME_BLOCK } from 'actions'
+
 import { RECENT_RECS_SUCCESS } from 'actions'
 import { RECENT_RECS_FAILURE } from 'actions'
 import { HOME_SIMILAR_REC_REQUEST } from 'actions'
@@ -57,6 +59,7 @@ const initialState = {
   recentSaves: [],
   slates: [],
   slatesById: {},
+  recsByTopic: [],
   newSaves: 0,
   similarRecsResolved: false
 }
@@ -96,6 +99,11 @@ export const homeReducers = (state = initialState, action) => {
       const { items } = action
       const recentSaves = new Set([...items, ...state.recentSaves])
       return { ...state, recentSaves: Array.from(recentSaves) }
+    }
+
+    case GET_STARTED_HOME_BLOCK: {
+      const { recsByTopic } = action
+      return { ...state, recsByTopic }
     }
 
     case SNOWPLOW_TRACK_PAGE_VIEW: {

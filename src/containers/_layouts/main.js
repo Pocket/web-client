@@ -17,6 +17,7 @@ function mainLayout({
   children,
   title = 'Pocket',
   canonical,
+  noNav = false,
   selectedNavLink,
   isFullWidthLayout,
   noContainer = false,
@@ -31,11 +32,11 @@ function mainLayout({
         metaData={metaData}
         forceWebView={forceWebView}
       />
-      <GlobalNav selectedLink={selectedNavLink} />
+      <GlobalNav selectedLink={selectedNavLink} noNav={noNav} />
       <div className={cx(fixedNavContainer, noContainer && noContainerStyle, className)}>
         {isFullWidthLayout ? children : <PageContainer>{children}</PageContainer>}
       </div>
-      <GlobalFooter />
+      {noNav ? null : <GlobalFooter />}
     </>
   )
 }

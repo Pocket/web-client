@@ -1,9 +1,10 @@
+import { requestGQL } from 'common/utilities/request/request'
 import { gql } from 'graphql-request'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
-const getSlate = gql`
-  query GetSlate($id: String!, $recommendationCount: Int) {
-    getSlate(slateId: $id, recommendationCount: $recommendationCount) {
+const getSlateQuery = gql`
+  query GetSlate($slateId: String!, $recommendationCount: Int) {
+    getSlate(slateId: $slateId, recommendationCount: $recommendationCount) {
       displayName
       description
       displayName
@@ -23,4 +24,16 @@ const getSlate = gql`
   }
   ${FRAGMENT_ITEM}
 `
-export default getSlate
+export async function getSlate(slateId, recommendationCount = 3) {
+  return requestGQL({
+    query: getSlateQuery,
+    variables: { slateId, recommendationCount }
+  })
+    .then(handleResponse)
+    .catch((error) => console.error(error))
+}
+
+function handleResponse(response) {
+  const responseData = response?.data?.getSlate
+  return responseData
+}

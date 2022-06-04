@@ -71,6 +71,7 @@ export const CardMedia = function ({
   title,
   id,
   onImageFail = () => {},
+  topicName,
   openUrl,
   onOpen
 }) {
@@ -127,6 +128,7 @@ export const CardMedia = function ({
    */
   return (
     <div className={`${cardMediaStyles} media`}>
+      {topicName ? <div className="topic-name">{topicName}</div> : null}
       {openUrl ? (
         <Link href={openUrl ? openUrl : false}>
           <a tabIndex="-1" data-cy="image-link" onClick={onOpen}>
