@@ -63,8 +63,8 @@ export const Home = ({ metaData }) => {
       {recsByTopic.length ? (
         <SectionWrapper>
           <HomeLineupHeader
-            sectionTitle="Based on your interests"
-            sectionDescription="Articles tailored to you"
+            sectionTitle="Recommended For You"
+            sectionDescription="Articles based on your topics"
             onClickEvent={() => {}}
           />
 

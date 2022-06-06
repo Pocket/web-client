@@ -35,7 +35,7 @@ export async function getTopicSelectors() {
         {
           name: 'Gaming',
           slug: 'gaming',
-          inSelection: true,
+          inSelection: false,
           slateId: '951ae6c3-4438-458b-9936-7f3b8ff0f178'
         },
         {
