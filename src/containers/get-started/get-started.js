@@ -12,6 +12,7 @@ const getStartdContainerStyle = css`
   .button {
     font-family: var(--fontSansSerif);
     text-decoration: none;
+    margin-left: 1rem;
   }
   .page-header {
     font-family: var(--fontSansSerif);
@@ -42,8 +43,7 @@ const getStartdContainerStyle = css`
     border: var(--borderStyle);
     border-width: 1px 0 0;
     display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
+    justify-content: flex-end;
   }
 `
 

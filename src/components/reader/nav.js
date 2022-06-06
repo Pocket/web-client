@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { css, cx } from 'linaria'
+import { HomeIcon } from 'components/icons/HomeIcon'
 import { ArrowLeftIcon } from 'components/icons/ArrowLeftIcon'
 import { HighlightIcon } from 'components/icons/HighlightIcon'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
@@ -135,10 +136,9 @@ export const ReaderNav = ({
   const setFontSize = (val) => dispatch(updateFontSize(val))
   const setLineHeight = (val) => dispatch(updateLineHeight(val))
   const setColumnWidth = (val) => dispatch(updateColumnWidth(val))
+  const { getStarted } = router.query
 
   const goBack = () => {
-    const { getStarted } = router.query
-
     if (getStarted) return router.push('/home')
     if (window.history.length > 1) return window.history.go(-1)
     document.location.href = '/my-list'
@@ -161,17 +161,20 @@ export const ReaderNav = ({
     return () => Mousetrap.unbind('b')
   }, [dispatch])
 
+  const returnCopy = getStarted
+    ? t('nav:back-to-home', 'Back to Home')
+    : t('nav:back-to-my-list', 'Back to My List')
   return (
     <header className={headerStyle} data-cy="reader-nav">
       <div className="global-nav-container">
         <nav className={navStyle}>
           <button
             onClick={clickGoBack}
-            aria-label={t('nav:back-to-my-list', 'Back to My List')}
-            data-tooltip={t('nav:back-to-my-list', 'Back to My List')}
+            aria-label={returnCopy}
+            data-tooltip={returnCopy}
             data-cy="reader-nav-go-back"
             className={cx(buttonClass, 'go-back')}>
-            <ArrowLeftIcon />
+            {getStarted ? <HomeIcon /> : <ArrowLeftIcon />}
           </button>
 
           <div className="nav-actions">

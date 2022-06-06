@@ -59,7 +59,7 @@ export const SelectTopics = () => {
   return (
     <>
       <header className="page-header">
-        <h1 className="title">Welcome to Pocket!</h1>
+        <h1 className="title">Hey, interesting person. What interests you?</h1>
         <h2 className="sub-head">
           Pick the Topics you find interesting and we'll use these topics to find you more stories.
         </h2>
@@ -70,7 +70,10 @@ export const SelectTopics = () => {
         ))}
       </div>
       <footer className="page-footer">
-        <Button className="button" onClick={handleContinue}>
+        <Button className="button" variant="inline">
+          Skip
+        </Button>
+        <Button className="button" size="small" onClick={handleContinue}>
           Continue
         </Button>
       </footer>

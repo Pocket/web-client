@@ -47,7 +47,7 @@ export const SelectArticle = () => {
       )}
       <footer className="page-footer">
         <Button className="button" variant="inline">
-          Skip to Home
+          Skip
         </Button>
       </footer>
     </>
@@ -68,6 +68,10 @@ const selectorCardStyle = css`
     &:hover {
       color: var(--color-textPrimary);
     }
+  }
+  a.publisher:hover {
+    text-decoration: none;
+    color: initial;
   }
 `
 

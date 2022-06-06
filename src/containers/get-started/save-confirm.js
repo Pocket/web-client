@@ -43,6 +43,13 @@ const modalConfirmStyles = css`
     align-items: flex-end;
     align-content: flex-end;
   }
+  .button {
+    margin-left: 1rem;
+    &.primary {
+      border: 1px solid var(--color-actionPrimary);
+    }
+  }
+
   .skip {
     text-decoration: none;
     font-size: 0.825rem;
@@ -89,8 +96,11 @@ export const SaveConfirmModal = ({ showModal, goToReader }) => {
           </h4>
           <p>Save then read in our distraction-free reading environment</p>
           <footer className="modal-footer">
-            <Button type="submit" onClick={goToReader}>
-              Continue
+            <Button type="submit" className="button" variant="secondary" onClick={() => {}}>
+              Discover More on Home
+            </Button>
+            <Button type="submit" className="button" variant="primary" onClick={goToReader}>
+              Read Article
             </Button>
           </footer>
         </div>
@@ -115,8 +125,11 @@ export const SaveConfirmContentWithCard = ({ goToReader }) => {
             <LogoMark /> Nice Save!
           </h4>
           <p>Now can read in our distraction-free reading environment.</p>
+          <Button type="submit" variant="secondary" onClick={() => {}}>
+            Discover More on Home
+          </Button>
           <Button type="submit" onClick={goToReader}>
-            Continue
+            Read Article
           </Button>
         </div>
       </div>
