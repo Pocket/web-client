@@ -40,8 +40,8 @@ const modalConfirmStyles = css`
   .modal-footer {
     display: flex;
     justify-content: flex-end;
-    align-items: end;
-    align-content: end;
+    align-items: flex-end;
+    align-content: flex-end;
   }
   .skip {
     text-decoration: none;
