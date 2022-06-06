@@ -34,7 +34,7 @@ export const Home = ({ metaData }) => {
   const featureState = useSelector((state) => state.features) || {}
   const generalSlates = useSelector((state) => state.home.generalSlates)
   const topicSlates = useSelector((state) => state.home.topicSlates)
-  const recsByTopic = useSelector((state) => state.home.recsByTopic)
+  const recsByTopic = useSelector((state) => state.home.recsByTopic) || []
 
   const fallback = '249850f0-61c0-46f9-a16a-f0553c222800'
 
@@ -60,7 +60,7 @@ export const Home = ({ metaData }) => {
         <HomeRecentSaves />
       </SectionWrapper>
 
-      {recsByTopic ? (
+      {recsByTopic.length ? (
         <SectionWrapper>
           <HomeLineupHeader
             sectionTitle="Based on your interests"
