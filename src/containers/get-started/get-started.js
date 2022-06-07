@@ -1,4 +1,4 @@
-import Layout from 'layouts/main'
+import Layout from 'layouts/get-started'
 import { useDispatch, useSelector } from 'react-redux'
 import { SelectTopics } from './select-topics'
 import { SelectArticle } from './select-article'
