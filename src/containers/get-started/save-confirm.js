@@ -88,13 +88,17 @@ export const SaveConfirmModal = ({ showModal, goToReader }) => {
   const handleClose = () => dispatch(clearSavedArticle())
 
   return (
-    <Modal appRootSelector="#__next" isOpen={showModal} handleClose={handleClose}>
+    <Modal
+      appRootSelector="#__next"
+      isOpen={showModal}
+      handleClose={handleClose}
+      screenReaderLabel="Save then read in our calm reading environment">
       <ModalBody>
         <div className={modalConfirmStyles}>
           <h4 className="modal-title">
             <LogoMark /> Nice Save!
           </h4>
-          <p>Save then read in our distraction-free reading environment</p>
+          <p>Save then read in our calm reading environment</p>
           <footer className="modal-footer">
             <Button type="submit" className="button" variant="secondary" onClick={() => {}}>
               Discover More on Home
@@ -124,7 +128,7 @@ export const SaveConfirmContentWithCard = ({ goToReader }) => {
           <h4 className="body-title">
             <LogoMark /> Nice Save!
           </h4>
-          <p>Now can read in our distraction-free reading environment.</p>
+          <p>Now can read in our calm reading environment.</p>
           <Button type="submit" variant="secondary" onClick={() => {}}>
             Discover More on Home
           </Button>

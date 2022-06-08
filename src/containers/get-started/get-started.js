@@ -1,12 +1,11 @@
-import Layout from 'layouts/get-started'
-import { useDispatch, useSelector } from 'react-redux'
-import { SelectTopics } from './select-topics'
-import { SelectArticle } from './select-article'
-import { SaveConfirm } from './save-confirm'
+import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 import { css } from 'linaria'
 // import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-const getStartdContainerStyle = css`
+export const getStartedContainerStyle = css`
   max-width: 900px;
   margin: 0 auto;
   .button {
@@ -47,22 +46,31 @@ const getStartdContainerStyle = css`
   }
 `
 
-export const GetStarted = ({ metaData }) => {
-  const dispatch = useDispatch()
+export const GetStarted = () => {
+  const router = useRouter()
+  const userStatus = useSelector((state) => state.user.user_status)
+  const featureState = useSelector((state) => state.features) || {}
+  const settings = useSelector((state) => state.settings)
+  const { settingsFetched, getStartedComplete = false } = settings
 
-  const positionInFlow = useSelector((state) => state.getStarted.positionInFlow)
-  const componentSteps = {
-    0: SelectTopics,
-    1: SelectArticle
-  }
+  const flagsReady = featureState.flagsReady
+  const inGetStartedTest = featureFlagActive({ flag: 'getstarted', featureState })
 
-  const ComponentToRender = componentSteps[positionInFlow]
-  return (
-    <Layout metaData={metaData} className={getStartdContainerStyle} noNav={true}>
-      <ComponentToRender />
-      <SaveConfirm />
-    </Layout>
-  )
+  const experienceReady = flagsReady //&& !getStartedComplete
+
+  // Hold tight until flags are all set
+  if (!experienceReady || !settingsFetched) return null
+
+  // We are all set, but not in the get started test
+  if (!inGetStartedTest) return router.replace('/home')
+
+  // We are all set, but we already went through the test
+  if (getStartedComplete) return router.replace('/home')
+
+  // We are all set and ready to take the tour
+  router.push('/get-started/select-topics')
+
+  return null
 }
 
 export default GetStarted

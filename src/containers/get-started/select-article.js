@@ -1,9 +1,17 @@
+import { useEffect } from 'react'
 import { Button } from 'components/buttons/button'
 import { useDispatch, useSelector } from 'react-redux'
 import { listFullStyle } from 'components/items-layout/list-full'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { itemActionStyle } from 'components/item-actions/base'
 import { saveArticle } from 'containers/get-started/get-started.state'
+import { SaveConfirm } from './save-confirm'
+import Layout from 'layouts/get-started'
+import { getStartedContainerStyle } from './get-started'
+import { getTopicSelectors } from './get-started.state'
+import { getArticleSelectors } from './get-started.state'
+import { parseCookies } from 'nookies'
+import { hydrateGetStarted } from './get-started.state'
 
 // import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { css, cx } from 'linaria'
@@ -25,11 +33,32 @@ const loaderStyle = css`
 
 export const articleGrid = cx(articleSelectorStyle, listFullStyle)
 
-export const SelectArticle = () => {
+export const SelectArticle = ({ metaData }) => {
   const dispatch = useDispatch()
   const articles = useSelector((state) => state.getStarted.articles)
+  const topicSelectors = useSelector((state) => state.getStarted.topicsSelectors)
+
+  // Dispatch for topic selectors
+  useEffect(() => {
+    if (topicSelectors.length) return
+    dispatch(getTopicSelectors())
+  }, [dispatch, topicSelectors])
+
+  // Dispatch for articles
+  useEffect(() => {
+    if (articles.length) return
+    dispatch(getArticleSelectors())
+  }, [dispatch, articles])
+
+  // Get any stored topics
+  useEffect(() => {
+    const { getStartedUserTopics } = parseCookies()
+    const userTopics = getStartedUserTopics ? JSON.parse(getStartedUserTopics) : []
+    dispatch(hydrateGetStarted({ userTopics }))
+  }, [dispatch])
+
   return (
-    <>
+    <Layout metaData={metaData} className={getStartedContainerStyle} noNav={true}>
       <header className="page-header">
         <h1 className="title">Select the article that you find most interesting</h1>
         <h2 className="sub-head">Save an article to continue</h2>
@@ -50,7 +79,9 @@ export const SelectArticle = () => {
           Skip
         </Button>
       </footer>
-    </>
+
+      <SaveConfirm />
+    </Layout>
   )
 }
 
@@ -71,7 +102,7 @@ const selectorCardStyle = css`
   }
   a.publisher:hover {
     text-decoration: none;
-    color: initial;
+    color: ;
   }
 `
 

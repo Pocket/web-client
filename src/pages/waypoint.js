@@ -12,14 +12,25 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     const lang = req.headers['accept-language'].toString().substring(0, 2)
     const supportedLocale = locales.includes(lang)
     const langPrefix = lang !== defaultLocale && supportedLocale ? `/${lang}` : ''
+    const isSignUp = query['type'] === 'signup'
 
     // query parameters returned after auth that are currently not used.
     // remove from the list of query parameters
     const unusedQueryParams = ['access_token', 'id', 'guid', 'type']
-    unusedQueryParams.forEach(param => delete query[param])
+    unusedQueryParams.forEach((param) => delete query[param])
 
     const myListLink = queryString.stringifyUrl({ url: `${langPrefix}/my-list`, query })
     const homeLink = queryString.stringifyUrl({ url: '/home', query })
+    const getStartedLink = queryString.stringifyUrl({ url: '/get-started', query })
+
+    if (isSignUp) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: getStartedLink
+        }
+      }
+    }
 
     const { sess_guid } = req.cookies
     const response = await getUserInfo(true, req?.headers?.cookie)
