@@ -71,7 +71,6 @@ const cardPageSectionStyle = css`
 
       ${breakpointMediumHandset} {
         margin-top: 0.5rem;
-        text-align: right;
       }
     }
   }

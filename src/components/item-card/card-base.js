@@ -601,6 +601,13 @@ export const cardStyles = css`
   --------------------------------------------------------------- */
 
   &.flex {
+    .title {
+      font-size: 1.25rem;
+
+      ${breakpointLargeHandset} {
+        font-size: 1rem;
+      }
+    }
     & + .flex {
       margin-left: 1rem;
 
