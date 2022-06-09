@@ -608,6 +608,7 @@ export const cardStyles = css`
         font-size: 1rem;
       }
     }
+
     & + .flex {
       margin-left: 1rem;
 
@@ -630,7 +631,7 @@ export const cardStyles = css`
       padding-bottom: 2.5rem;
     }
 
-    // these styles are applied when there is only one .flex card item
+    // these styles are applied when there is only one <article> item in the parent
     &:only-of-type {
       --media-column-span: span 3;
       --content-column-span: span 9;
@@ -647,7 +648,7 @@ export const cardStyles = css`
       }
     }
 
-    // these styles are applied when there are three .flex card items
+    // these styles are applied when there are three card items
     // https://css-tricks.com/solved-with-css-logical-styling-based-on-the-number-of-given-elements/
     &:first-child:nth-last-child(n + 3),
     &:first-child:nth-last-child(n + 3) ~ * {
