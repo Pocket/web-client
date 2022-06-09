@@ -49,6 +49,7 @@ export const getStartedContainerStyle = css`
 export const GetStarted = () => {
   const router = useRouter()
   const userStatus = useSelector((state) => state.user.user_status)
+
   const featureState = useSelector((state) => state.features) || {}
   const settings = useSelector((state) => state.settings)
   const { settingsFetched, getStartedComplete = false } = settings
@@ -58,14 +59,19 @@ export const GetStarted = () => {
 
   const experienceReady = flagsReady //&& !getStartedComplete
 
+  const isReady = userStatus === 'valid'
+
+  // Make sure we are all set on the user front
+  if (!isReady) return null
+
   // Hold tight until flags are all set
   if (!experienceReady || !settingsFetched) return null
 
-  // We are all set, but not in the get started test
-  if (!inGetStartedTest) return router.push('/home')
-
-  // We are all set, but we already went through the test
-  if (getStartedComplete) return router.push('/home')
+  // We are all set, but not in the get started test OR we already went through the test
+  if (!inGetStartedTest || getStartedComplete) {
+    router.push('/home')
+    return null
+  }
 
   // We are all set and ready to take the tour
   router.push('/get-started/select-topics')

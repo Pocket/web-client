@@ -28,8 +28,6 @@ import { HOME_LINEUP_REQUEST } from 'actions'
 import { HOME_LINEUP_SUCCESS } from 'actions'
 import { HOME_LINEUP_FAILURE } from 'actions'
 
-import { GET_STARTED_HOME_BLOCK } from 'actions'
-
 import { RECENT_RECS_SUCCESS } from 'actions'
 import { RECENT_RECS_FAILURE } from 'actions'
 import { HOME_SIMILAR_REC_REQUEST } from 'actions'
