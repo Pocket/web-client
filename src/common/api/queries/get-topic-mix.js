@@ -7,8 +7,6 @@ export async function getTopicMix(topicsSelectors) {
     topic${index}: getSlate(slateId: "${topic.slateId}", recommendationCount: ${recommendationCount}){
       displayName
       description
-      displayName
-      description
       recommendations {
         item {
           title
