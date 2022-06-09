@@ -62,8 +62,9 @@ export const cardStyles = css`
     position: relative;
     grid-column: var(--media-column-span);
     .topic-name {
-      background-color: rgba(0, 0, 0, 0.4);
-      color: #fff;
+      background: rgba(26, 26, 26, 0.8);
+      border-radius: 100px;
+      color: var(--color-white100);
       position: absolute;
       border-radius: 8px;
       padding: 0.25rem 0.5rem;
