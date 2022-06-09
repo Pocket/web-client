@@ -245,7 +245,7 @@ function* homeRecsByTopic(action) {
     const { topics } = action
 
     const topicRecs = yield call(getTopicMix, topics)
-    const itemsById = getRecsById(Object.values(topicRecs))
+    const itemsById = getRecsById(topicRecs)
     const recsByTopic = Object.keys(itemsById)
     yield put({ type: HOME_RECS_BY_TOPIC_SUCCESS, itemsById, recsByTopic })
   } catch (error) {

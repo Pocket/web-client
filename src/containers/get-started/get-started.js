@@ -69,7 +69,7 @@ export const GetStarted = () => {
 
   // We are all set, but not in the get started test OR we already went through the test
   if (!inGetStartedTest || getStartedComplete) {
-    router.push('/home')
+    router.replace('/home')
     return null
   }
 
