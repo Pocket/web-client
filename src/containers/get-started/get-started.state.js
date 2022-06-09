@@ -1,11 +1,9 @@
 import { put, takeEvery, call, select } from 'redux-saga/effects'
 import { getTopicSelectors as getTopicSelectorsApi } from 'common/api'
-import { getTopicMix } from 'common/api'
-import { getSlate } from 'common/api' // this will be swaped for the ML slate
-import { deriveRecommendation } from 'common/api/derivers/item'
+import { getSetupSlate } from 'common/api'
+import { deriveCorpusItem } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
 import { itemUpsert } from 'common/api'
-import { getRecsById } from 'common/api/derivers/lineups'
 import { setCookie } from 'nookies'
 
 import { GET_STARTED_HYDRATE } from 'actions'
@@ -22,7 +20,6 @@ import { GET_STARTED_SAVE_SUCCESS } from 'actions'
 import { GET_STARTED_SAVE_FAILURE } from 'actions'
 import { GET_STARTED_CLEAR_SAVED_ARTICLE } from 'actions'
 import { GET_STARTED_GET_TOPIC_SELECTORS } from 'actions'
-import { GET_STARTED_HOME_BLOCK } from 'actions'
 
 import { HYDRATE } from 'actions'
 
@@ -107,19 +104,12 @@ export const getStartedSagas = [
   takeEvery(GET_STARTED_DESELECT_TOPIC, deSelectTopics),
   takeEvery(GET_STARTED_FINALIZE_TOPICS, finalizeTopicSelection),
   takeEvery(GET_STARTED_ARTICLES_REQUEST, getTopicArticles),
-  takeEvery(GET_STARTED_ARTICLES_SUCCESS, getTopicsForHome),
   takeEvery(GET_STARTED_SAVE_REQUEST, getStartedSaveRequest)
 ]
 
 /** SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getUserTopics = (state) => state.getStarted.userTopics
-
-const getSelectedTopics = (state) => {
-  const userTopics = state.getStarted.userTopics
-  const topicsSelectors = state.getStarted.topicsSelectors || []
-  return topicsSelectors.filter((topic) => userTopics.includes(topic.name))
-}
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -152,10 +142,9 @@ function* finalizeTopicSelection() {
 function* getTopicArticles() {
   try {
     // Get articles for selection
-    const articleSlate = '2f2a3568-901f-4655-8735-daf67e8ecc5d' //in case you missed it
-    const { recommendations } = yield call(getSlate, articleSlate, 3)
-    const derivedRecommendations = recommendations.map((rec) => deriveRecommendation(rec))
-    const itemsById = arrayToObject(derivedRecommendations, 'itemId')
+    const { recommendations } = yield call(getSetupSlate)
+    const derivedRecommendations = recommendations.map((rec) => deriveCorpusItem(rec))
+    const itemsById = arrayToObject(derivedRecommendations, 'id')
     const items = Object.keys(itemsById)
 
     yield put({ type: GET_STARTED_ARTICLES_SUCCESS, itemsById, items })
@@ -176,14 +165,6 @@ function* getStartedSaveRequest(action) {
   }
 }
 
-function* getTopicsForHome() {
-  const topics = yield select(getSelectedTopics)
-  const topicRecs = yield call(getTopicMix, topics)
-  const itemsById = getRecsById(Object.values(topicRecs))
-  const recsByTopic = Object.keys(itemsById)
-  yield put({ type: GET_STARTED_HOME_BLOCK, itemsById, recsByTopic })
-}
-
 /** ASYNC Functions
  --------------------------------------------------------------- */
 
@@ -192,11 +173,7 @@ function* getTopicsForHome() {
  */
 export async function fetchTopicSelectorList() {
   try {
-    const response = await getTopicSelectorsApi()
-    if (!response?.getTopicSelectors?.data) return { error: 'No Items Returned' }
-
-    // Leaving this form factor since we will need to destructure a graph response
-    const topicsSelectors = response?.getTopicSelectors?.data.filter((topic) => topic.inSelection)
+    const topicsSelectors = await getTopicSelectorsApi()
     return topicsSelectors
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.

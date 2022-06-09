@@ -93,9 +93,8 @@ export const SelectTopics = ({ metaData }) => {
         </h2>
       </header>
       <div className={topicSelectorStyle}>
-        {topicSelectors.map((topic) => (
-          <TopicButton key={topic.slug} topic={topic} />
-        ))}
+        {topicSelectors &&
+          topicSelectors.map((topic) => <TopicButton key={topic.slug} topic={topic} />)}
       </div>
       <footer className="page-footer">
         <Button className="button" variant="inline" onClick={handleSkip}>

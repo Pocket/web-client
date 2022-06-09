@@ -1,0 +1,54 @@
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getTopicSelectors } from 'containers/get-started//get-started.state'
+import { HomeLineupHeader } from 'components/headers/home-header'
+import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
+import { CardLineup } from 'connectors/item-card/home/card-lineup'
+import { OffsetList } from 'components/items-layout/list-offset'
+import { getRecsByTopic } from './home.state'
+import { parseCookies } from 'nookies'
+
+export const HomeRecsByTopic = () => {
+  const dispatch = useDispatch()
+
+  const topicsSelectors = useSelector((state) => state.getStarted.topicsSelectors)
+  const recsByTopic = useSelector((state) => state.home.recsByTopic) || []
+
+  const hasRecsByTopic = recsByTopic.length
+  const hasTopicsSelectors = topicsSelectors.length
+
+  // Set up topic selectors if we are in getStartedActive and don't have them
+  useEffect(() => {
+    if (hasTopicsSelectors) return
+    dispatch(getTopicSelectors())
+  }, [dispatch, hasTopicsSelectors])
+
+  // If we have topic selectors lets get a topic mix
+  useEffect(() => {
+    if (hasRecsByTopic || !hasTopicsSelectors) return
+    const { getStartedUserTopics } = parseCookies()
+    const topics = topicsSelectors.filter((topic) => getStartedUserTopics.includes(topic.name))
+    dispatch(getRecsByTopic(topics))
+  }, [dispatch, hasRecsByTopic, hasTopicsSelectors, topicsSelectors])
+
+  return recsByTopic.length ? (
+    <SectionWrapper>
+      <HomeLineupHeader
+        sectionTitle="Recommended For You"
+        sectionDescription="Articles based on your topics"
+        onClickEvent={() => {}}
+      />
+
+      <OffsetList
+        items={recsByTopic}
+        offset={0}
+        count={6}
+        ItemCard={CardLineup}
+        cardShape="block"
+        showExcerpt={false}
+        showTopicName={true}
+        border={false}
+      />
+    </SectionWrapper>
+  ) : null
+}

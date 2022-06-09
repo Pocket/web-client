@@ -47,4 +47,5 @@ export { updateHighlight } from './mutations/savedItemHighlights'
 // Setup Moment
 export { getTopicSelectors } from './queries/get-topic-selectors'
 export { getSlate } from './queries/get-slate'
+export { getSetupSlate } from './queries/get-setup-slate'
 export { getTopicMix } from './queries/get-topic-mix'

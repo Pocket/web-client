@@ -1,5 +1,5 @@
 import { Button } from 'components/buttons/button'
-import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
+import { Modal, ModalBody } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import { css } from 'linaria'

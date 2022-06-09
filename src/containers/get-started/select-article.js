@@ -37,18 +37,18 @@ export const SelectArticle = ({ metaData }) => {
   const dispatch = useDispatch()
   const articles = useSelector((state) => state.getStarted.articles)
   const topicSelectors = useSelector((state) => state.getStarted.topicsSelectors)
+  const hasTopicSelectors = topicSelectors.length
 
   // Dispatch for topic selectors
   useEffect(() => {
-    if (topicSelectors.length) return
+    if (hasTopicSelectors) return
     dispatch(getTopicSelectors())
-  }, [dispatch, topicSelectors])
+  }, [dispatch, hasTopicSelectors])
 
   // Dispatch for articles
   useEffect(() => {
-    if (articles.length) return
     dispatch(getArticleSelectors())
-  }, [dispatch, articles])
+  }, [dispatch])
 
   // Get any stored topics
   useEffect(() => {

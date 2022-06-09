@@ -10,7 +10,8 @@ import { HOME_SAVE_FAILURE } from 'actions'
 import { HOME_UNSAVE_REQUEST } from 'actions'
 import { HOME_UNSAVE_SUCCESS } from 'actions'
 import { HOME_UNSAVE_FAILURE } from 'actions'
-import { GET_STARTED_HOME_BLOCK } from 'actions'
+import { HOME_RECS_BY_TOPIC_SUCCESS } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 
@@ -21,7 +22,7 @@ const initialState = {}
 export const homeItemsReducers = (state = initialState, action) => {
   switch (action.type) {
     case HOME_LINEUP_SUCCESS:
-    case GET_STARTED_HOME_BLOCK: {
+    case HOME_RECS_BY_TOPIC_SUCCESS: {
       const { itemsById } = action
       return { ...state, ...itemsById }
     }

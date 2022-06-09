@@ -3,8 +3,8 @@ import { requestGQL } from 'common/utilities/request/request'
 export async function getTopicMix(topicsSelectors) {
   const recommendationCount = topicsSelectors.length < 3 ? 6 : 2 // get enough to fill in a grid
   const arrayOfQueries = topicsSelectors.map(
-    (topic) => `
-    ${topic.slug}: getSlate(slateId: "${topic.slateId}", recommendationCount: ${recommendationCount}){
+    (topic, index) => `
+    topic${index}: getSlate(slateId: "${topic.slateId}", recommendationCount: ${recommendationCount}){
       displayName
       description
       displayName
@@ -53,6 +53,7 @@ export async function getTopicMix(topicsSelectors) {
   const query = `query GetTopicMix{
     ${arrayOfQueries.join('')}
   }`
+
   return requestGQL({
     query: query
   })
