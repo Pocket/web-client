@@ -2,21 +2,21 @@ import { requestGQL } from 'common/utilities/request/request'
 import { gql } from 'graphql-request'
 
 const slateIds = {
-  business: 'af2cc2c0-1286-47a3-b8ce-187b905f94af',
-  career: '00f0c593-3c99-4d5a-9297-c66f8b00be01',
-  education: '856eb5f8-da7f-43ae-ac5e-25da402af0ae',
-  entertainment: 'cceefa28-906e-47c5-b704-8c5b824ecd1b',
-  food: '651d27ab-a898-4173-9700-dd1726fbaaa4',
-  gaming: '951ae6c3-4438-458b-9936-7f3b8ff0f178',
-  health: '47023d21-0aa6-4f98-9077-eac21fad44f1',
-  parenting: '1a8de2be-db03-4a2f-901a-7c4c1cbd156a',
-  'personal-finance': 'f4b58337-4ab6-4563-9503-c384e773946f',
-  politics: 'f8c945b0-52fa-4203-bb31-6747245fe021',
-  'self-improvement': '5674f085-07b6-43c3-bcde-2774db3f6384',
-  sports: 'e6c00454-4a00-47c1-8f22-906122c261ed',
-  technology: 'ed9604ce-b752-48bd-b8c5-3a8cf6b54ced',
-  science: 'b548b456-70c4-474d-a723-80d040d00fec',
-  travel: '4345efa7-2c89-4884-b836-3260757a3a97'
+  business: '505c0126-d54d-42ef-8fe7-0f6a6f24e3a5',
+  career: 'b4032752-155b-4f09-ac1e-f5337df19e88',
+  education: 'b0de37c0-81ef-4063-a432-1bb64270b039',
+  entertainment: 'e9df8a81-19af-48e2-a90f-05e9a37491ca',
+  food: '1a634351-361b-4115-a9d5-b79131b1f95a',
+  gaming: '4cc738f7-25a9-4511-9cc3-68a8f9be91f8',
+  health: '7cb4f497-fd05-42c5-9f78-3650e9ddba21',
+  parenting: '90adee1c-7794-4f41-9645-2ff9cf91113c',
+  'personal-finance': '0c09627b-a409-4768-b87d-7e1d29259785',
+  politics: '9bece73b-4d54-43a6-bb10-d7b02abcd181',
+  'self-improvement': '6d1273a5-055e-4de0-8a5b-5f2b79d37e5c',
+  sports: 'ea40bef5-4406-488d-ad9d-915dfa1f0794',
+  technology: 'e0d7063a-9421-4148-b548-446e9fbc8566',
+  science: 'b64c873e-7f05-496e-8be4-bfae929c8a04',
+  travel: '9389d944-fdcf-4394-9ca3-4604c0af4fac'
 }
 
 const getRecommendationPreferenceTopicsQuery = gql`
