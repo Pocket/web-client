@@ -18,8 +18,8 @@ export const getStartedContainerStyle = css`
     font-style: normal;
     .title {
       font-weight: 600;
-      font-size: 1.75;
-      line-height: 2.25;
+      font-size: 1.75rem;
+      line-height: 1.825;
       margin: 0 0 10px 0;
     }
     .sub-head {
@@ -62,10 +62,10 @@ export const GetStarted = () => {
   if (!experienceReady || !settingsFetched) return null
 
   // We are all set, but not in the get started test
-  if (!inGetStartedTest) return router.replace('/home')
+  if (!inGetStartedTest) return router.push('/home')
 
   // We are all set, but we already went through the test
-  if (getStartedComplete) return router.replace('/home')
+  if (getStartedComplete) return router.push('/home')
 
   // We are all set and ready to take the tour
   router.push('/get-started/select-topics')

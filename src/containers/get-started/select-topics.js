@@ -54,7 +54,7 @@ const topicStyle = css`
     }
   }
   .checkIcon {
-    transform: translate(-1px, -6px);
+    transform: translate(-1px, -9px);
   }
 `
 
