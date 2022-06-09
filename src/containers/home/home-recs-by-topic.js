@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getTopicSelectors } from 'containers/get-started//get-started.state'
 import { HomeLineupHeader } from 'components/headers/home-header'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
-import { CardLineup } from 'connectors/item-card/home/card-lineup'
+import { CardTopicRec } from 'connectors/item-card/home/card-topic-rec'
 import { OffsetList } from 'components/items-layout/list-offset'
 import { getRecsByTopic } from './home.state'
 import { parseCookies } from 'nookies'
@@ -44,7 +44,7 @@ export const HomeRecsByTopic = () => {
         items={recsByTopic}
         offset={0}
         count={6}
-        ItemCard={CardLineup}
+        ItemCard={CardTopicRec}
         cardShape="block"
         showExcerpt={false}
         showTopicName={true}
