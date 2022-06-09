@@ -12,7 +12,7 @@ import { getTopicSelectors } from './get-started.state'
 import { getArticleSelectors } from './get-started.state'
 import { parseCookies } from 'nookies'
 import { hydrateGetStarted } from './get-started.state'
-
+import { useRouter } from 'next/router'
 // import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { css, cx } from 'linaria'
 import { Card } from 'components/item-card/card'
@@ -35,6 +35,8 @@ export const articleGrid = cx(articleSelectorStyle, listFullStyle)
 
 export const SelectArticle = ({ metaData }) => {
   const dispatch = useDispatch()
+  const router = useRouter()
+
   const articles = useSelector((state) => state.getStarted.articles)
   const topicSelectors = useSelector((state) => state.getStarted.topicsSelectors)
   const hasTopicSelectors = topicSelectors.length
@@ -57,6 +59,8 @@ export const SelectArticle = ({ metaData }) => {
     dispatch(hydrateGetStarted({ userTopics }))
   }, [dispatch])
 
+  const handleSkip = () => router.push('/home?get-started=skip')
+
   return (
     <Layout metaData={metaData} className={getStartedContainerStyle} noNav={true}>
       <header className="page-header">
@@ -75,7 +79,7 @@ export const SelectArticle = ({ metaData }) => {
         </div>
       )}
       <footer className="page-footer">
-        <Button className="button" variant="inline">
+        <Button className="button" variant="inline" onClick={handleSkip}>
           Skip
         </Button>
       </footer>

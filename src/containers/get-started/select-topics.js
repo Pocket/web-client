@@ -86,24 +86,29 @@ export const SelectTopics = ({ metaData }) => {
 
   return (
     <Layout metaData={metaData} className={getStartedContainerStyle} noNav={true}>
-      <header className="page-header">
-        <h1 className="title">Hey, interesting person. What interests you?</h1>
-        <h2 className="sub-head">
-          Pick the Topics you find interesting and we'll use these topics to find you stories.
-        </h2>
-      </header>
-      <div className={topicSelectorStyle}>
-        {topicSelectors &&
-          topicSelectors.map((topic) => <TopicButton key={topic.slug} topic={topic} />)}
-      </div>
-      <footer className="page-footer">
-        <Button className="button" variant="inline" onClick={handleSkip}>
-          Skip
-        </Button>
-        <Button className="button" size="small" onClick={handleContinue}>
-          Continue
-        </Button>
-      </footer>
+      {topicSelectors.length ? (
+        <>
+          <header className="page-header">
+            <h1 className="title">Hey, interesting person. What interests you?</h1>
+            <h2 className="sub-head">
+              Pick the Topics you find interesting and we'll use these topics to find you stories.
+            </h2>
+          </header>
+          <div className={topicSelectorStyle}>
+            {topicSelectors.map((topic) => (
+              <TopicButton key={topic.slug} topic={topic} />
+            ))}
+          </div>
+          <footer className="page-footer">
+            <Button className="button" variant="inline" onClick={handleSkip}>
+              Skip
+            </Button>
+            <Button className="button" size="small" onClick={handleContinue}>
+              Continue
+            </Button>
+          </footer>
+        </>
+      ) : null}
     </Layout>
   )
 }
