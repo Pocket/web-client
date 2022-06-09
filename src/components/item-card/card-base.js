@@ -66,8 +66,7 @@ export const cardStyles = css`
       border-radius: 100px;
       color: var(--color-white100);
       position: absolute;
-      border-radius: 8px;
-      padding: 0.25rem 0.5rem;
+      padding: 0.25rem 0.825rem;
       z-index: 10;
       bottom: 2rem;
       left: 1rem;
