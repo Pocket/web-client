@@ -31,8 +31,8 @@ const topicStyle = css`
   font-family: var(--fontSansSerif);
   font-style: normal;
   font-weight: 400;
-  font-size: 19px;
-  line-height: 28px;
+  font-size: 1.188rem;
+  line-height: 1.75;
   text-align: center;
   color: var(--color-actionPrimary);
   border: var(--borderStyle);

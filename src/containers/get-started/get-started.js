@@ -18,14 +18,14 @@ export const getStartedContainerStyle = css`
     font-style: normal;
     .title {
       font-weight: 600;
-      font-size: 28px;
-      line-height: 36px;
+      font-size: 1.75;
+      line-height: 2.25;
       margin: 0 0 10px 0;
     }
     .sub-head {
       font-weight: 400;
-      font-size: 16px;
-      line-height: 24px;
+      font-size: 1rem;
+      line-height: 1.5;
       margin: 0;
       display: flex;
       align-content: center;
