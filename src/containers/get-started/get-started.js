@@ -6,7 +6,7 @@ import { css } from 'linaria'
 // import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const getStartedContainerStyle = css`
-  max-width: 900px;
+  max-width: 950px;
   margin: 0 auto;
   .button {
     font-family: var(--fontSansSerif);
@@ -39,7 +39,7 @@ export const getStartedContainerStyle = css`
   .page-footer {
     margin-top: 3rem;
     padding: 1rem 0;
-    border: var(--borderStyle);
+    border: var(--dividerStyle);
     border-width: 1px 0 0;
     display: flex;
     justify-content: flex-end;
