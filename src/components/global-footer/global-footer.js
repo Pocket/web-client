@@ -5,7 +5,6 @@ import { breakpointSmallTablet } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { breakpointTinyHandset } from 'common/constants'
-import { breakpointSmallHandset } from 'common/constants'
 import { PageContainer } from 'components/page-container/page-container'
 import { FacebookMonoIcon } from 'components/icons/FacebookMonoIcon'
 import { TwitterMonoIcon } from 'components/icons/TwitterMonoIcon'
@@ -30,7 +29,7 @@ const footerStyle = css`
     left: 0;
     width: 100vw;
 
-    ${breakpointSmallHandset} {
+    ${breakpointTinyTablet} {
       margin-top: 3rem;
       position: static;
     }
