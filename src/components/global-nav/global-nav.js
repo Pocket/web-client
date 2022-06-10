@@ -74,7 +74,7 @@ const headerStyle = css`
       margin-right: 1rem;
     }
     &.logged-in {
-      .logo {
+      .logo:not(.noNav) {
         display: none;
       }
     }
@@ -243,30 +243,36 @@ const GlobalNav = ({
       <PageContainer className="global-nav-container">
         <nav className={navStyle} data-cy="global-nav">
           <div className="site-nav">
-            <GlobalNavMobileMenu
-              appRootSelector={appRootSelector}
-              links={links}
-              subLinks={subLinks}
-              subset={subset}
-              tag={tag}
-              onLinkClick={onLinkClick}
-              selectedLink={selectedLink}
-              toggleClass="hamburger-icon"
-              isOpen={isMobileMenuOpen}
-              toggleMenuOpen={setMobileMenuOpen}
-            />
-            <Link href={pocketLogoOutboundUrl} data-test="logo-link">
-              <a
-                id="pocket-logo-nav"
-                className="pocket-logo"
-                onClick={(event) => {
-                  handleLinkClick('pocket', event)
-                }}
-                data-cy="logo-link">
-                <Logo className="logo" />
-                {isLoggedIn ? <LogoMark className="logo-mark" /> : null}
-              </a>
-            </Link>
+            {noNav ? null : (
+              <GlobalNavMobileMenu
+                appRootSelector={appRootSelector}
+                links={links}
+                subLinks={subLinks}
+                subset={subset}
+                tag={tag}
+                onLinkClick={onLinkClick}
+                selectedLink={selectedLink}
+                toggleClass="hamburger-icon"
+                isOpen={isMobileMenuOpen}
+                toggleMenuOpen={setMobileMenuOpen}
+              />
+            )}
+            {noNav ? (
+              <Logo className="logo noNav" />
+            ) : (
+              <Link href={pocketLogoOutboundUrl} data-test="logo-link">
+                <a
+                  id="pocket-logo-nav"
+                  className="pocket-logo"
+                  onClick={(event) => {
+                    handleLinkClick('pocket', event)
+                  }}
+                  data-cy="logo-link">
+                  <Logo className="logo" />
+                  {isLoggedIn ? <LogoMark className="logo-mark" /> : null}
+                </a>
+              </Link>
+            )}
           </div>
           {children || noNav ? (
             children
