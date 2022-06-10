@@ -17,6 +17,7 @@ import { useRouter } from 'next/router'
 import { css, cx } from 'linaria'
 import { Card } from 'components/item-card/card'
 import { Loader } from 'components/loader/loader'
+import { SaveIcon } from 'components/icons/SaveIcon'
 
 const articleSelectorStyle = css`
   margin-top: 3rem;
@@ -64,8 +65,13 @@ export const SelectArticle = ({ metaData }) => {
   return (
     <Layout metaData={metaData} className={getStartedContainerStyle} noNav={true}>
       <header className="page-header">
-        <h1 className="title">Select the article that you find most interesting</h1>
-        <h2 className="sub-head">Save an article to continue</h2>
+        <h1 className="title">Save an article you find interesting</h1>
+        <h2 className="sub-head with-icon">
+          <SaveIcon />
+          <div>
+            <span className="bold">Save</span> one article
+          </div>
+        </h2>
       </header>
       {articles.length ? (
         <div className={articleGrid}>

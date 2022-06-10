@@ -27,15 +27,22 @@ export const getStartedContainerStyle = css`
       font-size: 1rem;
       line-height: 1.5;
       margin: 0;
-      /* display: flex;
-      align-content: center;
-      align-items: center; */
+
+      &.with-icon {
+        display: flex;
+      }
+
       .bold {
         font-weight: 600;
       }
       .icon {
         margin-top: 0;
         margin: 0 0.25rem;
+        color: var(--color-actionBrand);
+
+        svg {
+          height: 1.5rem;
+        }
       }
     }
   }
