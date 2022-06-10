@@ -30,6 +30,9 @@ export const getStartedContainerStyle = css`
       display: flex;
       align-content: center;
       align-items: center;
+      .bold {
+        font-weight: 600;
+      }
       .icon {
         margin-top: 0;
         margin: 0 0.25rem;
