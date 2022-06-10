@@ -46,6 +46,10 @@ export const getStartedContainerStyle = css`
     border-width: 1px 0 0;
     display: flex;
     justify-content: flex-end;
+
+    .button + .button {
+      margin-left: 1.5rem;
+    }
   }
 `
 

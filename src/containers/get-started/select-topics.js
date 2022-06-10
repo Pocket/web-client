@@ -115,11 +115,7 @@ export const SelectTopics = ({ metaData }) => {
             <Button className="button" variant="inline" onClick={handleSkip}>
               Skip
             </Button>
-            <Button
-              disabled={!topicsSelected}
-              className="button"
-              size="small"
-              onClick={handleContinue}>
+            <Button disabled={!topicsSelected} className="button" onClick={handleContinue}>
               Continue
             </Button>
           </footer>
