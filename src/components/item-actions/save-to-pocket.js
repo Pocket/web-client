@@ -69,6 +69,24 @@ const saveContainer = css`
       color: var(--color-actionBrandHover);
     }
   }
+
+  &.border {
+    border: var(--borderStyle);
+    border-width: 2px;
+    border-color: var(--color-actionSecondary);
+
+    .actionCopy {
+      color: var(--color-textPrimary);
+    }
+
+    &:hover,
+    &:focus {
+      background: var(--color-actionSecondary);
+      .actionCopy {
+        color: var(--color-actionPrimaryText);
+      }
+    }
+  }
 `
 
 const popoverContainer = css`
@@ -114,7 +132,8 @@ export const SaveToPocket = function ({
   allowRead = false,
   hideCopy = false,
   className,
-  id
+  id,
+  border
 }) {
   const { t } = useTranslation()
 
@@ -150,7 +169,8 @@ export const SaveToPocket = function ({
     saveStatus,
     'card-actions',
     allowRead && 'read-now',
-    className
+    className,
+    border && 'border'
   )
 
   return saveStatus === 'saved' && allowRead ? (

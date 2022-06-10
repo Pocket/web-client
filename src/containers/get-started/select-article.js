@@ -166,6 +166,7 @@ const SelectCardActions = ({ id }) => {
         isAuthenticated={isAuthenticated}
         saveStatus={saveStatus}
         id={id}
+        border={true}
       />
     </div>
   ) : null
