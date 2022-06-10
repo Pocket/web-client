@@ -32,9 +32,11 @@ export function LoadMore({ loadMore }) {
   const hasNextPage = useSelector((state) => state.listSavedPageInfo.hasNextPage)
   const loading = useSelector((state) => state.listSavedPageInfo.loading)
   const error = useSelector((state) => state.listSavedPageInfo.error)
+  const listSaved = useSelector((state) => state.listSaved)
 
   const shouldLoadMore = hasNextPage && !loading
 
+  const loadMoreMessage = listSaved.length ? 'Loading more items' : ''
   useEffect(() => {
     if (!inView) return
 
@@ -48,7 +50,7 @@ export function LoadMore({ loadMore }) {
         <>Something went wrong while retrieving your items</>
       ) : (
         <>
-          Loading more items <Loader />
+          {loadMoreMessage} <Loader />
         </>
       )}
     </div>
