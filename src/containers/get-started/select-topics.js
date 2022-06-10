@@ -72,6 +72,8 @@ export const SelectTopics = ({ metaData }) => {
   const router = useRouter()
 
   const topicSelectors = useSelector((state) => state.getStarted.topicsSelectors)
+  const userTopics = useSelector((state) => state.getStarted.userTopics)
+  const topicsSelected = userTopics.length > 0
 
   // Dispatch for topic selectors
   useEffect(() => {
@@ -112,7 +114,11 @@ export const SelectTopics = ({ metaData }) => {
             <Button className="button" variant="inline" onClick={handleSkip}>
               Skip
             </Button>
-            <Button className="button" size="small" onClick={handleContinue}>
+            <Button
+              disabled={!topicsSelected}
+              className="button"
+              size="small"
+              onClick={handleContinue}>
               Continue
             </Button>
           </footer>
@@ -131,8 +137,8 @@ const TopicButton = ({ topic }) => {
   const toggleTopic = () => dispatch(topicAction(topic.name))
 
   return (
-    <label className={cx(topicStyle, isSelected && 'selected')} >
-      <input type="checkbox" checked={isSelected} onChange={toggleTopic}/>
+    <label className={cx(topicStyle, isSelected && 'selected')}>
+      <input type="checkbox" checked={isSelected} onChange={toggleTopic} />
       {topic.name}
     </label>
   )
