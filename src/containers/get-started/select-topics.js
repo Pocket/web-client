@@ -38,12 +38,21 @@ const topicStyle = css`
   border: var(--borderStyle);
   border-radius: 8px;
   user-select: none;
-  span {
+  input {
     margin-right: 1rem;
     width: 18px;
     height: 18px;
     border: var(--borderStyle);
     border-radius: var(--borderRadius);
+    &:before {
+      content: url('data:image/svg+xml;charset=US-ASCII,<svg fill="%23008078" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-12 12a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L9 16.586 20.293 5.293a1 1 0 0 1 1.414 0Z"></path></svg>');
+      margin-top: -3px;
+    }
+    &:checked,
+    &:checked:hover {
+      border: var(--borderStyle);
+      background-color: var(--color-canvas);
+    }
   }
   &:hover,
   &.selected {
@@ -122,9 +131,9 @@ const TopicButton = ({ topic }) => {
   const toggleTopic = () => dispatch(topicAction(topic.name))
 
   return (
-    <div className={cx(topicStyle, isSelected && 'selected')} onClick={toggleTopic}>
-      <span>{isSelected ? <CheckIcon className="checkIcon" /> : null}</span>
+    <label className={cx(topicStyle, isSelected && 'selected')} >
+      <input type="checkbox" checked={isSelected} onChange={toggleTopic}/>
       {topic.name}
-    </div>
+    </label>
   )
 }
