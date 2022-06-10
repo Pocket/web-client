@@ -104,7 +104,7 @@ export const SelectTopics = ({ metaData }) => {
     dispatch(finalizeTopics())
     router.push('/get-started/select-article', null, { shallow: true })
   }
-  const handleSkip = () => router.push('/home?get-started=skip')
+  const handleSkip = () => router.push('/get-started/select-article', null, { shallow: true })
 
   return (
     <Layout metaData={metaData} className={getStartedContainerStyle} noNav={true}>
