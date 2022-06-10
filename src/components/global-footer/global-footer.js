@@ -205,6 +205,10 @@ const footerSecondaryStyle = css`
   border-top: var(--dividerStyle);
   padding: 1.5rem 0 0;
 
+  .minimal & {
+    border-top: 0;
+  }
+
   ${breakpointSmallTablet} {
     margin-top: 2.5rem;
   }
@@ -327,7 +331,8 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder, minimal, ancho
         footerStyle,
         anchored && 'anchored',
         hasBorder && 'with-border',
-        hasColorBorder && 'with-color-border'
+        hasColorBorder && 'with-color-border',
+        minimal && 'minimal'
       )}>
       <PageContainer className="footer-container">
         {minimal ? null : (
