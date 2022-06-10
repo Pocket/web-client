@@ -19,7 +19,7 @@ export const getStartedContainerStyle = css`
     .title {
       font-weight: 600;
       font-size: 1.75rem;
-      line-height: 1.825;
+      line-height: 1.5;
       margin: 0 0 10px 0;
     }
     .sub-head {
@@ -27,9 +27,9 @@ export const getStartedContainerStyle = css`
       font-size: 1rem;
       line-height: 1.5;
       margin: 0;
-      display: flex;
+      /* display: flex;
       align-content: center;
-      align-items: center;
+      align-items: center; */
       .bold {
         font-weight: 600;
       }

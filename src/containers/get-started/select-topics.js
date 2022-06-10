@@ -7,11 +7,11 @@ import { deSelectTopic } from './get-started.state'
 import { finalizeTopics } from './get-started.state'
 import { hydrateGetStarted } from './get-started.state'
 import { getTopicSelectors } from './get-started.state'
+import { breakpointMediumHandset } from 'common/constants'
 
 import { useRouter } from 'next/router'
 import { parseCookies } from 'nookies'
 
-import { CheckIcon } from 'components/icons/CheckIcon'
 // import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { css, cx } from 'linaria'
 import { getStartedContainerStyle } from './get-started'
@@ -26,7 +26,7 @@ const topicStyle = css`
   display: flex;
   align-items: center;
   align-content: center;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   margin: 0.5rem 0.5rem 0 0;
   font-family: var(--fontSansSerif);
   font-style: normal;
@@ -34,10 +34,16 @@ const topicStyle = css`
   font-size: 1.188rem;
   line-height: 1.75;
   text-align: center;
-  color: var(--color-actionPrimary);
-  border: var(--borderStyle);
+  color: var(--color-textPrimary);
+  border: var(--dividerStyle);
   border-radius: 8px;
   user-select: none;
+
+  ${breakpointMediumHandset} {
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+  }
+
   input {
     margin-right: 1rem;
     width: 18px;
@@ -47,6 +53,10 @@ const topicStyle = css`
     &:before {
       content: url('data:image/svg+xml;charset=US-ASCII,<svg fill="%23008078" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-12 12a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L9 16.586 20.293 5.293a1 1 0 0 1 1.414 0Z"></path></svg>');
       margin-top: -3px;
+
+      ${breakpointMediumHandset} {
+        margin-top: 0;
+      }
     }
     &:checked,
     &:checked:hover {
@@ -57,7 +67,8 @@ const topicStyle = css`
   &:hover,
   &.selected {
     cursor: pointer;
-    background-color: rgba(0, 128, 120, 0.1);
+    color: var(--color-actionPrimary);
+    background-color: rgba(0, 128, 120, 0.05);
     span {
       background-color: var(--color-canvas);
     }

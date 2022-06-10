@@ -5,6 +5,7 @@ import { breakpointSmallTablet } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { breakpointTinyHandset } from 'common/constants'
+import { breakpointSmallHandset } from 'common/constants'
 import { PageContainer } from 'components/page-container/page-container'
 import { FacebookMonoIcon } from 'components/icons/FacebookMonoIcon'
 import { TwitterMonoIcon } from 'components/icons/TwitterMonoIcon'
@@ -24,11 +25,14 @@ const footerStyle = css`
   font-family: var(--fontSansSerif);
   color: var(--color-textPrimary);
   &.anchored {
-    @media screen and (min-height: 800px) {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100vw;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+
+    ${breakpointSmallHandset} {
+      margin-top: 3rem;
+      position: static;
     }
   }
   a {
@@ -207,6 +211,10 @@ const footerSecondaryStyle = css`
 
   .minimal & {
     border-top: 0;
+
+    ${breakpointSmallTablet} {
+      margin-top: 0;
+    }
   }
 
   ${breakpointSmallTablet} {
