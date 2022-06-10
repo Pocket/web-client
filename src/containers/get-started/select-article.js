@@ -97,11 +97,6 @@ export const SelectArticle = ({ metaData }) => {
 
 const selectorCardStyle = css`
   padding-bottom: 2.25rem;
-  cursor: pointer;
-  &:hover .selectedBack {
-    display: block;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
-  }
   .card-actions {
     margin-bottom: 0.25rem;
     padding: 0.75rem;
@@ -112,7 +107,6 @@ const selectorCardStyle = css`
   }
   a.publisher:hover {
     text-decoration: none;
-    color: ;
   }
 `
 
@@ -123,7 +117,6 @@ export const SelectArticleCard = ({
   cardShape = 'block',
   showExcerpt = false
 }) => {
-  const dispatch = useDispatch()
   const item = useSelector((state) => state.getStarted.articlesById[id])
   if (!item) return null
 
@@ -150,7 +143,7 @@ export const SelectArticleCard = ({
   )
 }
 
-const SelectCardActions = ({ id, position }) => {
+const SelectCardActions = ({ id }) => {
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
