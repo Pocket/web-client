@@ -317,5 +317,5 @@ function shouldBeFiltered(itemDetails, filter) {
   if (filter?.contentType === 'IS_VIDEO' && item?.hasVideo !== 'IS_VIDEO') return true
   if (filter?.isHighlighted && !node?.isHighlighted) return true
   if (filter?.isFavorite && !node?.isFavorite) return true
-  if (filter?.status && filter?.status !== node?.status) return true
+  if (filter?.statuses && !filter?.statuses.includes(node?.status)) return true
 }
