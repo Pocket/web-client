@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { ListOfItems } from './list-of-items'
+import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
 import { searchItems } from 'containers/list-saved/list-saved.state'
 import { searchItemsUnread } from 'containers/list-saved/list-saved.state'
@@ -90,6 +91,13 @@ export const ListSaved = (props) => {
     const itemFilterFunction = filterSelector(subset, filter)
     dispatch(itemFilterFunction(searchTerm, sortOrder))
   }, [dispatch, subset, filter, searchTerm, sortOrder, sortBy])
+
+  // Remove current item when we return to myList
+  // This should be leveraged more effectively in future, but for now
+  // it is simply a reset
+  useEffect(() => {
+    dispatch(selectShortcutItem(false))
+  }, [dispatch])
 
   return <ListOfItems />
 }
