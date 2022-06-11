@@ -18,9 +18,14 @@ import { css, cx } from 'linaria'
 import { Card } from 'components/item-card/card'
 import { Loader } from 'components/loader/loader'
 import { SaveIcon } from 'components/icons/SaveIcon'
+import { breakpointTinyTablet } from 'common/constants'
 
 const articleSelectorStyle = css`
   margin-top: 3rem;
+
+  ${breakpointTinyTablet} {
+    grid-row-gap: 2rem;
+  }
 `
 
 const loaderStyle = css`
@@ -39,6 +44,7 @@ export const SelectArticle = ({ metaData }) => {
   const router = useRouter()
 
   const articles = useSelector((state) => state.getStarted.articles)
+  const articlesToUse = articles.slice(0, 3)
   const topicSelectors = useSelector((state) => state.getStarted.topicsSelectors)
   const hasTopicSelectors = topicSelectors.length
 
@@ -73,9 +79,9 @@ export const SelectArticle = ({ metaData }) => {
           </div>
         </h2>
       </header>
-      {articles.length ? (
+      {articlesToUse.length ? (
         <div className={articleGrid}>
-          {articles.map((id, index) => (
+          {articlesToUse.map((id, index) => (
             <SelectArticleCard key={id} id={id} position={index} />
           ))}
         </div>
@@ -97,12 +103,41 @@ export const SelectArticle = ({ metaData }) => {
 
 const selectorCardStyle = css`
   padding-bottom: 2.25rem;
+
+  .actions {
+    ${breakpointTinyTablet} {
+      grid-column: span 12 !important; // buh, couldn't find another way to override
+
+      .card-actions {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
   .card-actions {
     margin-bottom: 0.25rem;
     padding: 0.75rem;
-    width: 100%;
     &:hover {
       color: var(--color-textPrimary);
+    }
+
+    &.border {
+      border: var(--borderStyle);
+      border-width: 2px;
+      border-color: var(--color-actionSecondary);
+
+      .actionCopy {
+        color: var(--color-textPrimary);
+      }
+
+      &:hover,
+      &:focus {
+        background: var(--color-actionSecondary);
+        .actionCopy {
+          color: var(--color-actionPrimaryText);
+        }
+      }
     }
   }
   a.publisher:hover {

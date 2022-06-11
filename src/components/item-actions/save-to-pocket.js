@@ -69,24 +69,6 @@ const saveContainer = css`
       color: var(--color-actionBrandHover);
     }
   }
-
-  &.border {
-    border: var(--borderStyle);
-    border-width: 2px;
-    border-color: var(--color-actionSecondary);
-
-    .actionCopy {
-      color: var(--color-textPrimary);
-    }
-
-    &:hover,
-    &:focus {
-      background: var(--color-actionSecondary);
-      .actionCopy {
-        color: var(--color-actionPrimaryText);
-      }
-    }
-  }
 `
 
 const popoverContainer = css`
