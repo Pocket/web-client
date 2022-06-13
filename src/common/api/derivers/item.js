@@ -99,6 +99,16 @@ export function deriveListItem(passedItem, legacy) {
   return deriveItem({ item, node: rest, cursor, utmId: 'pocket_mylist' })
 }
 
+export function deriveCorpusItem(recommendation) {
+  const item = recommendation.corpusItem
+  const { url, publisher } = item
+  return deriveItemData({
+    item,
+    itemEnrichment: { url },
+    passedPublisher: publisher
+  })
+}
+
 export function deriveRecommendation(
   recommendationsFromSlate,
   analyticsData,

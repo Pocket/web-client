@@ -23,7 +23,14 @@ const footerStyle = css`
   width: 100%;
   font-family: var(--fontSansSerif);
   color: var(--color-textPrimary);
-
+  &.anchored {
+    @media screen and (min-height: 800px) {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+    }
+  }
   a {
     color: var(--color-textSecondary);
     text-decoration: none;
@@ -280,7 +287,7 @@ const engagementBlockStyle = css`
 /**
  * The `GlobalFooter` component appears at the bottom of every screen in our web applications.
  */
-export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
+export const GlobalFooter = ({ device, hasBorder, hasColorBorder, minimal, anchored }) => {
   const { t, i18n } = useTranslation()
   const { language } = i18n
 
@@ -318,94 +325,97 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
     <footer
       className={cx(
         footerStyle,
+        anchored && 'anchored',
         hasBorder && 'with-border',
         hasColorBorder && 'with-color-border'
       )}>
       <PageContainer className="footer-container">
-        <div className={footerPrimaryStyle}>
-          <div className={footerPrimaryGroupStyle}>
-            <h6>{t('global-footer:products', 'Products')}</h6>
-            <nav aria-label="Products">
-              <ul>
-                <li>
-                  <a href="https://getpocket.com/explore?src=footer_v2">
-                    {t('global-footer:must-read-articles', 'Must-read articles')}
-                  </a>
-                </li>
-                <li>
-                  <a href={newsletterLink}>
-                    {t('global-footer:daily-newsletter', 'Daily newsletter')}
-                  </a>
-                </li>
-                <li>
-                  <a href={`${PREMIUM_URL}&utm_campaign=global-bottom&src=footer_v2`}>
-                    {t('global-footer:pocket-premium', 'Pocket Premium')}
-                  </a>
-                </li>
+        {minimal ? null : (
+          <div className={footerPrimaryStyle}>
+            <div className={footerPrimaryGroupStyle}>
+              <h6>{t('global-footer:products', 'Products')}</h6>
+              <nav aria-label="Products">
+                <ul>
+                  <li>
+                    <a href="https://getpocket.com/explore?src=footer_v2">
+                      {t('global-footer:must-read-articles', 'Must-read articles')}
+                    </a>
+                  </li>
+                  <li>
+                    <a href={newsletterLink}>
+                      {t('global-footer:daily-newsletter', 'Daily newsletter')}
+                    </a>
+                  </li>
+                  <li>
+                    <a href={`${PREMIUM_URL}&utm_campaign=global-bottom&src=footer_v2`}>
+                      {t('global-footer:pocket-premium', 'Pocket Premium')}
+                    </a>
+                  </li>
 
-                <li>
-                  <a href="https://getpocket.com/welcome?src=footer_v2">
-                    {t('global-footer:save-to-pocket-extensions', 'Save to Pocket extensions')}
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div className={footerPrimaryGroupStyle}>
-            <h6>{t('global-footer:company', 'Company')}</h6>
-            <nav aria-label="Company">
-              <ul>
-                <li>
-                  <a href="https://getpocket.com/about?src=footer_v2">
-                    {t('global-footer:about', 'About')}
-                  </a>
-                </li>
-                <li>
-                  <a href="https://getpocket.com/jobs?src=footer_v2">
-                    {t('global-footer:careers', 'Careers')}
-                  </a>
-                </li>
-                <li>
-                  <a href="https://blog.getpocket.com?src=footer_v2">
-                    {t('global-footer:blog', 'Blog')}
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div className={footerPrimaryGroupStyle}>
-            <h6>{t('global-footer:resources', 'Resources')}</h6>
-            <nav aria-label="Resources">
-              <ul>
-                <li>
-                  <a href="https://help.getpocket.com/?src=footer_v2">
-                    {t('global-footer:get-help', 'Get help')}
-                  </a>
-                </li>
-                <li>
-                  <a href="https://getpocket.com/developer?src=footer_v2">
-                    {t('global-footer:developer-api', 'Developer API')}
-                  </a>
-                </li>
-                <li>
-                  <a href="https://getpocket.com/publisher?src=footer_v2">
-                    {t('global-footer:pocket-for-publishers', 'Pocket for publishers')}
-                  </a>
-                </li>
+                  <li>
+                    <a href="https://getpocket.com/welcome?src=footer_v2">
+                      {t('global-footer:save-to-pocket-extensions', 'Save to Pocket extensions')}
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div className={footerPrimaryGroupStyle}>
+              <h6>{t('global-footer:company', 'Company')}</h6>
+              <nav aria-label="Company">
+                <ul>
+                  <li>
+                    <a href="https://getpocket.com/about?src=footer_v2">
+                      {t('global-footer:about', 'About')}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://getpocket.com/jobs?src=footer_v2">
+                      {t('global-footer:careers', 'Careers')}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://blog.getpocket.com?src=footer_v2">
+                      {t('global-footer:blog', 'Blog')}
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div className={footerPrimaryGroupStyle}>
+              <h6>{t('global-footer:resources', 'Resources')}</h6>
+              <nav aria-label="Resources">
+                <ul>
+                  <li>
+                    <a href="https://help.getpocket.com/?src=footer_v2">
+                      {t('global-footer:get-help', 'Get help')}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://getpocket.com/developer?src=footer_v2">
+                      {t('global-footer:developer-api', 'Developer API')}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://getpocket.com/publisher?src=footer_v2">
+                      {t('global-footer:pocket-for-publishers', 'Pocket for publishers')}
+                    </a>
+                  </li>
 
-                <li>
-                  <a href="https://getpocket.com/sponsor?src=footer_v2">
-                    {t('global-footer:advertise', 'Advertise')}
-                  </a>
-                </li>
-              </ul>
-            </nav>
+                  <li>
+                    <a href="https://getpocket.com/sponsor?src=footer_v2">
+                      {t('global-footer:advertise', 'Advertise')}
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div className={cx(footerPrimaryGroupStyle, footerPrimaryAppButtonsStyle)}>
+              <h6>{t('global-footer:get-the-app', 'Get the app')}</h6>
+              {appBadges}
+            </div>
           </div>
-          <div className={cx(footerPrimaryGroupStyle, footerPrimaryAppButtonsStyle)}>
-            <h6>{t('global-footer:get-the-app', 'Get the app')}</h6>
-            {appBadges}
-          </div>
-        </div>
+        )}
 
         <div className={footerSecondaryStyle}>
           <div className={legalLinksStyle}>
@@ -434,40 +444,42 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder }) => {
               </button>
             </nav>
           </div>
-          <div className={engagementBlockStyle}>
-            <div className="languages-wrapper">
-              {t('global-footer:language', 'Language')}
-              <div className="languages">
-                <Languages />
+          {minimal ? null : (
+            <div className={engagementBlockStyle}>
+              <div className="languages-wrapper">
+                {t('global-footer:language', 'Language')}
+                <div className="languages">
+                  <Languages />
+                </div>
+              </div>
+              <div className="social-wrapper">
+                {t('global-footer:follow-pocket', 'Follow Pocket')}
+                <div className="social">
+                  <a href="https://facebook.com/pocket" target="_blank" rel="noopener noreferrer">
+                    <FacebookMonoIcon
+                      id="facebook-footer-icon"
+                      title="Facebook"
+                      description={t('global-footer:visit-facebook', 'Visit our Facebook page')}
+                    />
+                  </a>
+                  <a href="https://twitter.com/pocket" target="_blank" rel="noopener noreferrer">
+                    <TwitterMonoIcon
+                      id="twitter-footer-icon"
+                      title="Twitter"
+                      description={t('global-footer:view-twitter', 'View our Twitter profile')}
+                    />
+                  </a>
+                  <a href="https://instagram.com/pocket" target="_blank" rel="noopener noreferrer">
+                    <InstagramMonoIcon
+                      id="instagram-footer-icon"
+                      title="Instagram"
+                      description={t('global-footer:view-instagram', 'Find us on Instagram')}
+                    />
+                  </a>
+                </div>
               </div>
             </div>
-            <div className="social-wrapper">
-              {t('global-footer:follow-pocket', 'Follow Pocket')}
-              <div className="social">
-                <a href="https://facebook.com/pocket" target="_blank" rel="noopener noreferrer">
-                  <FacebookMonoIcon
-                    id="facebook-footer-icon"
-                    title="Facebook"
-                    description={t('global-footer:visit-facebook', 'Visit our Facebook page')}
-                  />
-                </a>
-                <a href="https://twitter.com/pocket" target="_blank" rel="noopener noreferrer">
-                  <TwitterMonoIcon
-                    id="twitter-footer-icon"
-                    title="Twitter"
-                    description={t('global-footer:view-twitter', 'View our Twitter profile')}
-                  />
-                </a>
-                <a href="https://instagram.com/pocket" target="_blank" rel="noopener noreferrer">
-                  <InstagramMonoIcon
-                    id="instagram-footer-icon"
-                    title="Instagram"
-                    description={t('global-footer:view-instagram', 'Find us on Instagram')}
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </PageContainer>
     </footer>

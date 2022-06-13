@@ -1,9 +1,9 @@
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
-import { ActionsLineup } from './card-lineup-actions'
+import { ActionsTopicRec } from './card-topic-rec-actions'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export const CardLineup = ({
+export const CardTopicRec = ({
   id,
   position,
   className,
@@ -69,7 +69,7 @@ export const CardLineup = ({
       onItemInView={onItemInView}
       onOpen={onOpen}
       onOpenOriginalUrl={onOpenOriginalUrl}
-      ActionMenu={ActionsLineup}
+      ActionMenu={ActionsTopicRec}
     />
   )
 }

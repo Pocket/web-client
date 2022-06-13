@@ -11,6 +11,7 @@ import { HomeCollectionHeader } from 'components/headers/home-header'
 import { HomeLineupHeader } from 'components/headers/home-header'
 import { HomeTopicHeader } from 'components/headers/home-header'
 
+import { HomeRecsByTopic } from 'containers/home/home-recs-by-topic'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
 
@@ -34,10 +35,13 @@ export const Home = ({ metaData }) => {
   const featureState = useSelector((state) => state.features) || {}
   const generalSlates = useSelector((state) => state.home.generalSlates)
   const topicSlates = useSelector((state) => state.home.topicSlates)
+
   const fallback = '249850f0-61c0-46f9-a16a-f0553c222800'
 
   const lineupFlag = featureState['home.lineup']
   const lineupId = lineupFlag?.payload?.slateLineupId || fallback
+
+  const getStartedActive = featureState['getstarted']
 
   useEffect(() => {
     if (userStatus !== 'valid' || !lineupFlag) return
@@ -57,6 +61,8 @@ export const Home = ({ metaData }) => {
         <HomeGreeting />
         <HomeRecentSaves />
       </SectionWrapper>
+
+      {getStartedActive ? <HomeRecsByTopic /> : null}
 
       {generalSlates?.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />

@@ -8,19 +8,13 @@ import { PocketHead } from 'containers/_layouts/_head'
 const fixedNavContainer = css`
   padding-top: 65px;
 `
-const noContainerStyle = css`
-  padding-bottom: 65px;
-`
 
-function mainLayout({
+function GetStartedLayout({
   metaData,
   children,
   title = 'Pocket',
   canonical,
-  noNav = false,
   selectedNavLink,
-  isFullWidthLayout,
-  noContainer = false,
   className = '',
   forceWebView = false
 }) {
@@ -32,16 +26,16 @@ function mainLayout({
         metaData={metaData}
         forceWebView={forceWebView}
       />
-      <GlobalNav selectedLink={selectedNavLink} noNav={noNav} />
-      <div className={cx(fixedNavContainer, noContainer && noContainerStyle, className)}>
-        {isFullWidthLayout ? children : <PageContainer>{children}</PageContainer>}
+      <GlobalNav selectedLink={selectedNavLink} noNav={true} />
+      <div className={cx(fixedNavContainer, className)}>
+        <PageContainer>{children}</PageContainer>
       </div>
-      {noNav ? null : <GlobalFooter />}
+      <GlobalFooter minimal={true} anchored={true} />
     </>
   )
 }
 
-mainLayout.propTypes = {
+GetStartedLayout.propTypes = {
   /**
    * Set to true if you need to have full-width or custom width content, in which
    * case you intend to implement your own content container in between the
@@ -51,9 +45,9 @@ mainLayout.propTypes = {
   isFullWidthLayout: PropTypes.bool
 }
 
-mainLayout.defaultProps = {
+GetStartedLayout.defaultProps = {
   selectedNavLink: undefined,
   isFullWidthLayout: false
 }
 
-export default mainLayout
+export default GetStartedLayout

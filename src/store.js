@@ -5,6 +5,9 @@ import { all } from 'redux-saga/effects'
 
 /* IMPORT CONTAINER STATES
  --------------------------------------------------------------- */
+import { getStartedReducers } from 'containers/get-started/get-started.state'
+import { getStartedSagas } from 'containers/get-started/get-started.state'
+
 import { appReducers, appSagas } from 'connectors/app/app.state'
 import { oneTrustReducers } from 'connectors/third-party/one-trust.state'
 
@@ -185,6 +188,7 @@ const marketingReducers = {
 
 const globalReducers = {
   app: appReducers, // App wide (mostly example at this time)
+  getStarted: getStartedReducers, // Gettin
   oneTrust: oneTrustReducers, // One Trust Readiness
   settings: settingsReducers, // User defined settings
   features: featureReducers, // Feature flags (very basic start)
@@ -221,6 +225,7 @@ export const rootReducer = combineReducers({
  --------------------------------------------------------------- */
 function* rootSaga() {
   yield all([
+    ...getStartedSagas,
     ...appSagas,
     ...userSagas,
     ...settingsSagas,

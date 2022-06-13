@@ -1,3 +1,38 @@
+## [1.49.1](https://github.com/Pocket/web-client/compare/v1.49.0...v1.49.1) (2022-06-10)
+
+
+### Bug Fixes
+
+* **topic-selection:** make the topic selectors keyboard selectable and navigable ([f1d6302](https://github.com/Pocket/web-client/commit/f1d63022242ac6aa0844accf88f64262e9eb29cf))
+
+# [1.49.0](https://github.com/Pocket/web-client/compare/v1.48.2...v1.49.0) (2022-06-10)
+
+
+### Bug Fixes
+
+* **get started:** clean up cruft / handle skips ([fa14e0e](https://github.com/Pocket/web-client/commit/fa14e0eef6c2d395d1c310c3db1f379d526383d7))
+* **get started:** hydrate individual pages ([00c03cd](https://github.com/Pocket/web-client/commit/00c03cde95c8d3be4b43dc12b72826fb61bcbcfd))
+* **get started:** negative path fixes ([f28b25d](https://github.com/Pocket/web-client/commit/f28b25dc177201301ccac784c60cc8c57524dba0))
+* **get started:** remove potential leak to get started ([d33bb50](https://github.com/Pocket/web-client/commit/d33bb50806b40a788ea0d89c845051e2877edc97))
+* **get started:** rems not px ([5d4dbc7](https://github.com/Pocket/web-client/commit/5d4dbc7ff571b97534e913f2c1453382a71b4b25))
+* **get started:** replace displayName with topic ([e054e5a](https://github.com/Pocket/web-client/commit/e054e5a69df73bf009f63fc1eeaa2818f1fd6574))
+* **get started:** specific card avoids confusion ([1274b37](https://github.com/Pocket/web-client/commit/1274b37ddfd8941b6a6f7c57fb819bb19f42b782))
+* **get started:** styling issues ([3ca9fce](https://github.com/Pocket/web-client/commit/3ca9fce0099bc4dbb77efd6884f51a9c8420c609))
+* **get started:** styling tweaks ([23b6f68](https://github.com/Pocket/web-client/commit/23b6f68422fc6bbf28d85df058f9ac8b687856a0))
+* **get started:** use non new tab slate ids ([f1851f0](https://github.com/Pocket/web-client/commit/f1851f079e5d3269e09304d8a1fb2c889eb1e462))
+* **get started:** use provided slate ids ([39f3702](https://github.com/Pocket/web-client/commit/39f3702545999812e5f847b13b635cf79c8fa1d6))
+* **get started:** use specific layout ([245befb](https://github.com/Pocket/web-client/commit/245befbeaf6d486a62835aef3d26c3d99001d290))
+* **get-started:** copy and topic limits ([03c3f7c](https://github.com/Pocket/web-client/commit/03c3f7c095d46675d2fa47034e41c6649b0c13fa))
+* **get-started:** minor tweaks from sync ([3303ab2](https://github.com/Pocket/web-client/commit/3303ab27369800419db9bf8f677de58e1b2f36fd))
+* **home:** limit recs by topic ([8840a5d](https://github.com/Pocket/web-client/commit/8840a5dd3b5425ad7f1564d64bcfac9665d0f124))
+* **setup:** use proper flex-end ([c0c7c24](https://github.com/Pocket/web-client/commit/c0c7c248a89db6eb1ab163bd38968e20d78c7e8b))
+
+
+### Features
+
+* **get started:** break out pages ([8793f2c](https://github.com/Pocket/web-client/commit/8793f2c7acbd4d86e867d017010602a8f6457bf1))
+* **get-started:** scaffold get-started experience ([5789b0b](https://github.com/Pocket/web-client/commit/5789b0be5d44d8c703b841a9ef630f9ead04b15f))
+
 ## [1.48.2](https://github.com/Pocket/web-client/compare/v1.48.1...v1.48.2) (2022-06-09)
 
 

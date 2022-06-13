@@ -59,7 +59,18 @@ export const cardStyles = css`
   }
 
   .media {
+    position: relative;
     grid-column: var(--media-column-span);
+    .topic-name {
+      background: rgba(26, 26, 26, 0.8);
+      border-radius: 100px;
+      color: var(--color-white100);
+      position: absolute;
+      padding: 0.25rem 0.825rem;
+      z-index: 10;
+      bottom: 2rem;
+      left: 1rem;
+    }
   }
 
   .content {

@@ -3,7 +3,8 @@ import { getMyList } from 'common/api/my-list'
 import { getHomeLineup as apiGetHomeLineup } from 'common/api'
 import { saveItem } from 'common/api/_legacy/saveItem'
 import { removeItem } from 'common/api/_legacy/removeItem'
-
+import { getTopicMix } from 'common/api'
+import { getRecsById } from 'common/api/derivers/lineups'
 import { arrayToObject } from 'common/utilities'
 import { deriveListItem } from 'common/api/derivers/item'
 
@@ -18,6 +19,10 @@ import { HOME_UNSAVE_FAILURE } from 'actions'
 import { HOME_RECENT_SAVES_REQUEST } from 'actions'
 import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
 import { HOME_RECENT_SAVES_FAILURE } from 'actions'
+
+import { HOME_RECS_BY_TOPIC_REQUEST } from 'actions'
+import { HOME_RECS_BY_TOPIC_SUCCESS } from 'actions'
+import { HOME_RECS_BY_TOPIC_FAILURE } from 'actions'
 
 import { HOME_LINEUP_REQUEST } from 'actions'
 import { HOME_LINEUP_SUCCESS } from 'actions'
@@ -49,6 +54,7 @@ export const clearSimilarRecs = () => ({ type: HOME_SIMILAR_RECS_CLEAR })
 export const getRecentSaves = () => ({ type: HOME_RECENT_SAVES_REQUEST })
 export const saveHomeItem = (id, url, position) => ({type: HOME_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const unSaveHomeItem = (id, topic) => ({ type: HOME_UNSAVE_REQUEST, id, topic }) //prettier-ignore
+export const getRecsByTopic = (topics) => ({ type: HOME_RECS_BY_TOPIC_REQUEST, topics })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -57,6 +63,7 @@ const initialState = {
   recentSaves: [],
   slates: [],
   slatesById: {},
+  recsByTopic: [],
   newSaves: 0,
   similarRecsResolved: false
 }
@@ -98,6 +105,11 @@ export const homeReducers = (state = initialState, action) => {
       return { ...state, recentSaves: Array.from(recentSaves) }
     }
 
+    case HOME_RECS_BY_TOPIC_SUCCESS: {
+      const { recsByTopic } = action
+      return { ...state, recsByTopic }
+    }
+
     case SNOWPLOW_TRACK_PAGE_VIEW: {
       return { ...state, newSaves: 0 }
     }
@@ -126,7 +138,8 @@ export const homeSagas = [
   takeEvery(HOME_RECENT_SAVES_REQUEST, recentDataRequest),
   takeEvery(HOME_SIMILAR_REC_SAVE_REQUEST, homeSimilarRecSaveRequest),
   takeEvery(HOME_SAVE_REQUEST, homeSaveRequest),
-  takeEvery(HOME_UNSAVE_REQUEST, homeUnSaveRequest)
+  takeEvery(HOME_UNSAVE_REQUEST, homeUnSaveRequest),
+  takeEvery(HOME_RECS_BY_TOPIC_REQUEST, homeRecsByTopic)
 ]
 
 /* SAGAS :: SELECTORS
@@ -224,6 +237,19 @@ function* homeSimilarRecSaveRequest({ url, id, position }) {
     yield put({ type: ITEMS_ADD_SUCCESS })
   } catch (error) {
     yield put({ type: HOME_SIMILAR_REC_SAVE_FAILURE, error })
+  }
+}
+
+function* homeRecsByTopic(action) {
+  try {
+    const { topics } = action
+
+    const topicRecs = yield call(getTopicMix, topics)
+    const itemsById = getRecsById(topicRecs)
+    const recsByTopic = Object.keys(itemsById)
+    yield put({ type: HOME_RECS_BY_TOPIC_SUCCESS, itemsById, recsByTopic })
+  } catch (error) {
+    yield put({ type: HOME_RECS_BY_TOPIC_FAILURE })
   }
 }
 
