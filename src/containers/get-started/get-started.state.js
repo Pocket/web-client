@@ -1,6 +1,7 @@
 import { put, takeEvery, call, select } from 'redux-saga/effects'
 import { getTopicSelectors as getTopicSelectorsApi } from 'common/api'
 import { getSetupSlate } from 'common/api'
+import { setTopicPreferences } from 'common/api'
 import { deriveCorpusItem } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
 import { itemUpsert } from 'common/api'
@@ -20,6 +21,9 @@ import { GET_STARTED_SAVE_SUCCESS } from 'actions'
 import { GET_STARTED_SAVE_FAILURE } from 'actions'
 import { GET_STARTED_CLEAR_SAVED_ARTICLE } from 'actions'
 import { GET_STARTED_GET_TOPIC_SELECTORS } from 'actions'
+import { SET_TOPIC_REQUEST } from 'actions'
+import { SET_TOPIC_SUCCESS } from 'actions'
+import { SET_TOPIC_FAILURE } from 'actions'
 
 import { HYDRATE } from 'actions'
 
@@ -42,7 +46,8 @@ const initialState = {
   userTopics: [],
   articlesById: {},
   articles: [],
-  savedArticleId: false
+  savedArticleId: false,
+  finalizingTopics: false
 }
 
 export const getStartedReducers = (state = initialState, action) => {
@@ -62,7 +67,13 @@ export const getStartedReducers = (state = initialState, action) => {
     }
 
     case GET_STARTED_FINALIZE_TOPICS: {
-      return { ...state }
+      return { ...state, finalizingTopics: true }
+    }
+
+    case SET_TOPIC_SUCCESS:
+    case SET_TOPIC_FAILURE: {
+      // We are moving forward regardless of topic profile success at this point
+      return { ...state, finalizingTopics: false }
     }
 
     case GET_STARTED_ARTICLES_SUCCESS: {
@@ -110,6 +121,7 @@ export const getStartedSagas = [
 /** SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getUserTopics = (state) => state.getStarted.userTopics
+const getAllTopicsSelectors = (state) => state.getStarted.topicsSelectors
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -136,7 +148,21 @@ function* deSelectTopics(action) {
 }
 
 function* finalizeTopicSelection() {
-  yield put({ type: GET_STARTED_ARTICLES_REQUEST })
+  try {
+    const topicSelectors = yield select(getAllTopicsSelectors) || []
+    const currentTopics = yield select(getUserTopics) || []
+
+    const preferredTopics = topicSelectors
+      .filter((topic) => currentTopics.includes(topic.name))
+      .map((topic) => ({ id: topic.id }))
+
+    const { errors } = yield call(setTopicPreferences, preferredTopics)
+    if (errors) throw new Error(errors[0].message)
+
+    yield put({ type: SET_TOPIC_SUCCESS })
+  } catch (error) {
+    yield put({ type: SET_TOPIC_FAILURE })
+  }
 }
 
 function* getTopicArticles() {

@@ -46,6 +46,7 @@ export const SelectArticle = ({ metaData }) => {
   const articles = useSelector((state) => state.getStarted.articles)
   const articlesToUse = articles.slice(0, 3)
   const topicSelectors = useSelector((state) => state.getStarted.topicsSelectors)
+  const finalizingTopics = useSelector((state) => state.getStarted.finalizingTopics)
   const hasTopicSelectors = topicSelectors.length
 
   // Dispatch for topic selectors
@@ -54,10 +55,11 @@ export const SelectArticle = ({ metaData }) => {
     dispatch(getTopicSelectors())
   }, [dispatch, hasTopicSelectors])
 
-  // Dispatch for articles
+  // Dispatch for articles if we are not in the process of finalizing topics
   useEffect(() => {
+    if (finalizingTopics) return
     dispatch(getArticleSelectors())
-  }, [dispatch])
+  }, [dispatch, finalizingTopics])
 
   // Get any stored topics
   useEffect(() => {
