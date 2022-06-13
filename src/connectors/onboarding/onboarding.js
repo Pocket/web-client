@@ -12,7 +12,9 @@ export const Onboarding = ({ type, ...rest }) => {
   const onboardingDev = featureFlagActive({ flag: 'onboarding.dev', featureState })
   const onboardingRollout = featureFlagActive({ flag: 'onboarding.rollout', featureState })
   const settingsFetched = useSelector((state) => state.settings.settingsFetched)
-  const showOnboarding = (onboardingDev || onboardingRollout) && settingsFetched
+  const inGetStartedTest = featureFlagActive({ flag: 'getstarted', featureState })
+  const showOnboarding =
+    (onboardingDev || onboardingRollout) && settingsFetched && !inGetStartedTest
 
   const onboardingTypes = {
     'home.flyaway.save': HomeFlyawaySave,
