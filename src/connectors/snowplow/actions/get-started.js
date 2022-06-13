@@ -74,5 +74,13 @@ export const getStartedActions = {
       uiType: 'button'
     },
     description: 'Click the “Read Article” button'
+  },
+  'get-started.reader.gohome': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Click the “Home” button in the toolbar in Reader'
   }
 }
