@@ -4,29 +4,23 @@ import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const searchSavedItemsQuery = gql`
   query SearchSavedItems(
-    $filter: SearchFilterInput
-    $pagination: PaginationInput
-    $sort: SearchSortInput
     $term: String!
+    $sort: SearchSortInput
+    $pagination: PaginationInput
+    $filter: SearchFilterInput
   ) {
     user {
-      searchSavedItems(filter: $filter, sort: $sort, pagination: $pagination, term: $term) {
+      searchSavedItems(term: $term, sort: $sort, pagination: $pagination, filter: $filter) {
         edges {
-          cursor
           node {
             savedItem {
               _createdAt
               _updatedAt
-              id
-              status
-              isFavorite
+              archivedAt
               favoritedAt
               isArchived
-              archivedAt
-              tags {
-                id
-                name
-              }
+              isFavorite
+              status
               item {
                 ...ItemDetails
               }

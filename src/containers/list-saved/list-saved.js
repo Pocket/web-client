@@ -89,8 +89,8 @@ export const ListSaved = (props) => {
   // Get items based on location
   useEffect(() => {
     const itemFilterFunction = filterSelector(subset, filter)
-    dispatch(itemFilterFunction(searchTerm, sortOrder))
-  }, [dispatch, subset, filter, searchTerm, sortOrder, sortBy])
+    dispatch(itemFilterFunction(searchTerm, sortOrder, [tag]))
+  }, [dispatch, subset, filter, searchTerm, sortOrder, sortBy, tag])
 
   // Remove current item when we return to myList
   // This should be leveraged more effectively in future, but for now
