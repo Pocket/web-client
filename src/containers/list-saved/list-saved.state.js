@@ -85,10 +85,10 @@ export const getItemsTagsUnread = (searchTerm, sortOrder, tagNames) => ({ type: 
 export const getItemsTagsArchived = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS_ARCHIVED, filter: {tagNames, ...ARCHIVED}, searchTerm, sortOrder}) //prettier-ignore
 export const getItemsTagsFavorites = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS_FAVORITES, filter: {tagNames, ...FAVORITED, ...ALL}, searchTerm, sortOrder}) //prettier-ignore
 
-export const searchItems = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS, filter: {...ALL}, searchTerm, sortOrder }) //prettier-ignore
-export const searchItemsUnread = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_UNREAD, filter: {...UNREAD}, searchTerm, sortOrder }) //prettier-ignore
-export const searchItemsArchived = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_ARCHIVED, filter: {...ARCHIVED}, searchTerm, sortOrder }) //prettier-ignore
-export const searchItemsFavorites = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_FAVORITES, filter: {...FAVORITED, ...ALL}, searchTerm, sortOrder }) //prettier-ignore
+export const searchItems = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS, filter: {status: 'UNREAD'}, searchTerm, sortOrder }) //prettier-ignore
+export const searchItemsUnread = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_UNREAD, filter: {status: 'UNREAD'}, searchTerm, sortOrder }) //prettier-ignore
+export const searchItemsArchived = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_ARCHIVED, filter: {status: 'ARCHIVED'}, searchTerm, sortOrder }) //prettier-ignore
+export const searchItemsFavorites = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_FAVORITES, filter: {...FAVORITED, status: 'UNREAD'}, searchTerm, sortOrder }) //prettier-ignore
 
 export const savedItemsSetSortOrder = (sortOrder) => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER, sortOrder}) //prettier-ignore
 export const savedItemsSetSortBy = (sortBy) => ({ type: ITEMS_SAVED_PAGE_SET_SORT_BY, sortBy })
@@ -99,8 +99,6 @@ export const loadMoreListItems = () => ({ type: LOAD_MORE_ITEMS })
  --------------------------------------------------------------- */
 export const listSavedReducers = (state = [], action) => {
   switch (action.type) {
-    case ITEMS_SAVED_SEARCH_REQUEST:
-    case ITEMS_SAVED_TAGGED_REQUEST:
     case ITEMS_SAVED_SUCCESS: {
       const itemIds = action?.savedItemIds || []
       const items = new Set([...state, ...itemIds])
@@ -163,9 +161,12 @@ const initialState = {
 export const listSavedPageInfoReducers = (state = initialState, action) => {
   switch (action.type) {
     case ITEMS_SAVED_TAGGED_REQUEST:
+    case ITEMS_SAVED_SEARCH_REQUEST:
     case ITEMS_SAVED_REQUEST: {
       const { filters } = action
-      return { ...state, error: false, loading: true, ...filters }
+      const { sortOrder, sortBy } = filters?.sort || {}
+
+      return { ...state, error: false, loading: true, sortOrder, sortBy, ...filters }
     }
 
     case ITEMS_SAVED_PAGE_SET_FILTERS: {
@@ -185,7 +186,8 @@ export const listSavedPageInfoReducers = (state = initialState, action) => {
     }
 
     case ITEMS_SAVED_PAGE_INFO_SUCCESS: {
-      const { pageInfo, searchTerm } = action
+      const { pageInfo } = action
+      const { searchTerm } = pageInfo
       return { ...state, loading: false, ...pageInfo, searchTerm }
     }
 

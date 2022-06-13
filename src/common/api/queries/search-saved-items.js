@@ -21,6 +21,7 @@ const searchSavedItemsQuery = gql`
               isArchived
               isFavorite
               status
+              id
               item {
                 ...ItemDetails
               }
