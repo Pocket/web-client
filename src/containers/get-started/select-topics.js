@@ -113,8 +113,8 @@ export const SelectTopics = ({ metaData }) => {
           <header className="page-header">
             <h1 className="title">Hey, interesting person. What interests you?</h1>
             <h2 className="sub-head">
-              Pick the <span className="bold">Topics</span> you find interesting and we’ll use these
-              topics to find you stories.
+              Pick the <strong>Topics</strong> you find interesting and we’ll use these topics to
+              find you stories.
             </h2>
           </header>
           <div className={topicSelectorStyle}>

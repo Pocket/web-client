@@ -32,8 +32,8 @@ export const getStartedContainerStyle = css`
         display: flex;
       }
 
-      .bold {
-        font-weight: 600;
+      strong {
+        font-weight: 500;
       }
       .icon {
         margin-top: 0;

@@ -75,7 +75,7 @@ export const SelectArticle = ({ metaData }) => {
         <h2 className="sub-head with-icon">
           <SaveIcon />
           <span>
-            <span className="bold">Save</span> one article
+            <strong>Save</strong> one article
           </span>
         </h2>
       </header>
