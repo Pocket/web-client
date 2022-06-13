@@ -1,3 +1,11 @@
+## [1.49.4](https://github.com/Pocket/web-client/compare/v1.49.3...v1.49.4) (2022-06-13)
+
+
+### Bug Fixes
+
+* **get-started:** add snowplow event to the Home button in the toolbar in Reader ([0e76609](https://github.com/Pocket/web-client/commit/0e76609aeddf273ce63044f0d37ae4ee87d78f4d))
+* **get-started:** adding snowplow events for all interactions in the get started flow ([183225d](https://github.com/Pocket/web-client/commit/183225d74bf8b6af93ffea58aae355301e0f6421))
+
 ## [1.49.3](https://github.com/Pocket/web-client/compare/v1.49.2...v1.49.3) (2022-06-13)
 
 
