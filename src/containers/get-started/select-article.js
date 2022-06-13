@@ -74,9 +74,9 @@ export const SelectArticle = ({ metaData }) => {
         <h1 className="title">Save an article you find interesting</h1>
         <h2 className="sub-head with-icon">
           <SaveIcon />
-          <div>
+          <span>
             <span className="bold">Save</span> one article
-          </div>
+          </span>
         </h2>
       </header>
       {articlesToUse.length ? (
