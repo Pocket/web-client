@@ -6,6 +6,7 @@ import { clearSavedArticle } from './get-started.state'
 import { LogoMark } from 'components/logo/logo'
 import { useRouter } from 'next/router'
 import { breakpointLargeHandset } from 'common/constants'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 const modalConfirmStyles = css`
   .modal-title {
@@ -70,8 +71,20 @@ export const SaveConfirmModal = ({ showModal, goToReader }) => {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const handleClose = () => dispatch(clearSavedArticle())
-  const handleSkip = () => router.push('/home?get-started=skip')
+  const handleClose = () => {
+    dispatch(sendSnowplowEvent('get-started.article.modal.close'))
+    dispatch(clearSavedArticle())
+  }
+
+  const handleSkip = () => {
+    dispatch(sendSnowplowEvent('get-started.article.modal.skip'))
+    router.push('/home?get-started=skip')
+  }
+
+  const handleRead = () => {
+    dispatch(sendSnowplowEvent('get-started.article.modal.continue'))
+    goToReader()
+  }
 
   return (
     <Modal
@@ -90,7 +103,7 @@ export const SaveConfirmModal = ({ showModal, goToReader }) => {
             <Button type="submit" className="button" variant="secondary" onClick={handleSkip}>
               Discover More on Home
             </Button>
-            <Button type="submit" className="button" variant="primary" onClick={goToReader}>
+            <Button type="submit" className="button" variant="primary" onClick={handleRead}>
               Read Article
             </Button>
           </footer>
