@@ -1,6 +1,7 @@
 import { css, cx } from 'linaria'
 import { useTranslation } from 'next-i18next'
 import { CrossIcon } from 'components/icons/CrossIcon'
+import { breakpointMediumHandset } from 'common/constants'
 import Link from 'next/link'
 
 const cardPageHeaderStyle = css`
@@ -51,6 +52,29 @@ const cardPageHeaderStyle = css`
 
 const cardPageSectionStyle = css`
   margin-bottom: 0;
+  .sectionSubTitleWrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    ${breakpointMediumHandset} {
+      flex-direction: column;
+    }
+
+    a {
+      color: var(--color-actionPrimary);
+      margin-top: 0;
+
+      &:hover {
+        color: var(--color-actionPrimaryHover);
+      }
+
+      ${breakpointMediumHandset} {
+        margin-top: 0.5rem;
+      }
+    }
+  }
+
   .sectionSubTitle {
     margin: 0;
   }
@@ -102,11 +126,24 @@ export const HomeJourneyHeader = ({ sectionTitle, sectionDescription }) => {
   ) : null
 }
 
-export const HomeSectionHeader = ({ sectionTitle, sectionDescription }) => {
+export const HomeSectionHeader = ({
+  sectionTitle,
+  sectionDescription,
+  sectionLinkText,
+  sectionLinkDestination,
+  sectionLinkClick
+}) => {
   return sectionTitle ? (
     <header className={cx(cardPageHeaderStyle, cardPageSectionStyle)}>
       <h2 className="sectionTitle">{sectionTitle}</h2>
-      {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
+      <div className="sectionSubTitleWrapper">
+        {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
+        {sectionLinkText ? (
+          <Link href={sectionLinkDestination}>
+            <a onClick={sectionLinkClick}>{sectionLinkText}</a>
+          </Link>
+        ) : null}
+      </div>
     </header>
   ) : null
 }

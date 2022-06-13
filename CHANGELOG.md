@@ -1,3 +1,19 @@
+## [1.49.2](https://github.com/Pocket/web-client/compare/v1.49.1...v1.49.2) (2022-06-13)
+
+
+### Bug Fixes
+
+* **card base styles:** add styles for flex card shape ([5489823](https://github.com/Pocket/web-client/commit/5489823d39809eac467cb7b7ba14d875a6eba624))
+* **card base:** update css comments ([0c1059c](https://github.com/Pocket/web-client/commit/0c1059cec5a9b90a1940d5a438da40d450a83d97))
+* **card:** add new flex card shape ([6e724ce](https://github.com/Pocket/web-client/commit/6e724ce41b873858875baba93c61bcef62ee650f))
+* **flex card:** adjust size of title ([416a4f1](https://github.com/Pocket/web-client/commit/416a4f128df1153391856288a65e91ea55d36871))
+* **home greeting:** show home greeting after first save ([5812d4c](https://github.com/Pocket/web-client/commit/5812d4cc98de7707c2eff370a425ec917668a720))
+* **home header:** add ability to include link in HomeSectionHeader ([c1be44b](https://github.com/Pocket/web-client/commit/c1be44b85cf9cf94e9074b0d2fae67764862f708))
+* **home state:** don't include old recent saves ([587bc66](https://github.com/Pocket/web-client/commit/587bc6606a81e4bcf68052ea0094d478eac71300))
+* **item layouts:** add FlexList layout so it can be based on flexbox instead of grid ([297711c](https://github.com/Pocket/web-client/commit/297711c9da9cfa894d49e15b8da993f9a0bfd81a))
+* **recent saves:** use FlexList for recent saves card items ([9d28558](https://github.com/Pocket/web-client/commit/9d285581e51d396e51c80d8e144fea1a4bf79634))
+* **snowplow actions:** add snowplow action for home.recent.view-my-list ([4158df2](https://github.com/Pocket/web-client/commit/4158df2dd53b5ab74717f2d23a024a0eb644f7dd))
+
 ## [1.49.1](https://github.com/Pocket/web-client/compare/v1.49.0...v1.49.1) (2022-06-10)
 
 

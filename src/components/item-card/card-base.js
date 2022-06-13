@@ -608,6 +608,83 @@ export const cardStyles = css`
     }
   }
 
+  /** Flex style
+  --------------------------------------------------------------- */
+
+  &.flex {
+    .title {
+      font-size: 1.25rem;
+
+      ${breakpointLargeHandset} {
+        font-size: 1rem;
+      }
+    }
+
+    & + .flex {
+      margin-left: 1rem;
+
+      ${breakpointSmallTablet} {
+        margin-left: 0;
+      }
+    }
+
+    ${breakpointMediumTablet} {
+      --media-column-span: span 12;
+      --content-column-span: span 12;
+    }
+
+    ${breakpointSmallTablet} {
+      --media-column-span: span 4;
+      --content-column-span: span 8;
+    }
+
+    ${breakpointTinyTablet} {
+      padding-bottom: 2.5rem;
+    }
+
+    // these styles are applied when there is only one <article> item in the parent
+    &:only-of-type {
+      --media-column-span: span 3;
+      --content-column-span: span 9;
+
+      ${breakpointMediumTablet} {
+        --media-column-span: span 4;
+        --content-column-span: span 8;
+      }
+
+      ${breakpointTinyTablet} {
+        .excerpt {
+          display: none;
+        }
+      }
+    }
+
+    // these styles are applied when there are three card items
+    // https://css-tricks.com/solved-with-css-logical-styling-based-on-the-number-of-given-elements/
+    &:first-child:nth-last-child(n + 3),
+    &:first-child:nth-last-child(n + 3) ~ * {
+      ${breakpointLargeTablet} {
+        --media-column-span: span 12;
+        --content-column-span: span 12;
+      }
+
+      ${breakpointMediumTablet} {
+        .cardWrap {
+          grid-column-gap: 0;
+        }
+      }
+
+      ${breakpointSmallTablet} {
+        --media-column-span: span 4;
+        --content-column-span: span 8;
+
+        .cardWrap {
+          grid-column-gap: 1.5rem;
+        }
+      }
+    }
+  }
+
   /** Lockup style
   --------------------------------------------------------------- */
   .lockup-hero & {
