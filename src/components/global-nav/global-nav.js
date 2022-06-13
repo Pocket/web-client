@@ -73,8 +73,11 @@ const headerStyle = css`
     .pocket-logo {
       margin-right: 1rem;
     }
+    .logo:not(.noNav) {
+      display: none;
+    }
     &.logged-in {
-      .logo:not(.noNav) {
+      .logo {
         display: none;
       }
     }
