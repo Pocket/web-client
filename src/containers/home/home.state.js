@@ -101,7 +101,7 @@ export const homeReducers = (state = initialState, action) => {
 
     case HOME_RECENT_SAVES_SUCCESS: {
       const { items } = action
-      const recentSaves = new Set([...items, ...state.recentSaves])
+      const recentSaves = new Set([...items])
       return { ...state, recentSaves: Array.from(recentSaves) }
     }
 

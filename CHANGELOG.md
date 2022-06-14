@@ -1,3 +1,58 @@
+## [1.49.5](https://github.com/Pocket/web-client/compare/v1.49.4...v1.49.5) (2022-06-14)
+
+
+### Bug Fixes
+
+* **onboarding:** don't show any of the onboarding flyaways when in the getstarted test ([c834147](https://github.com/Pocket/web-client/commit/c83414701ed3569af032d3db14678131475257f3))
+
+## [1.49.4](https://github.com/Pocket/web-client/compare/v1.49.3...v1.49.4) (2022-06-13)
+
+
+### Bug Fixes
+
+* **get-started:** add snowplow event to the Home button in the toolbar in Reader ([0e76609](https://github.com/Pocket/web-client/commit/0e76609aeddf273ce63044f0d37ae4ee87d78f4d))
+* **get-started:** adding snowplow events for all interactions in the get started flow ([183225d](https://github.com/Pocket/web-client/commit/183225d74bf8b6af93ffea58aae355301e0f6421))
+
+## [1.49.3](https://github.com/Pocket/web-client/compare/v1.49.2...v1.49.3) (2022-06-13)
+
+
+### Bug Fixes
+
+* **footer:** adjust responsive breakpoint for .anchored ([b3a97fb](https://github.com/Pocket/web-client/commit/b3a97fbbf1990a48329a25c496bfecfa4a2dabf5))
+* **footer:** fix double border on minimal footer ([24a1ee6](https://github.com/Pocket/web-client/commit/24a1ee658b5393e92bd7439f1e4e35f1357cb886))
+* **get started:** adjust max-width of layout, update footer border to divider style ([dcf7a14](https://github.com/Pocket/web-client/commit/dcf7a14d62ee78370d6ef55d1e323936741984a8))
+* **global nav:** hide the no nav logo separately from the logged in logo ([6e2d60a](https://github.com/Pocket/web-client/commit/6e2d60aecdf9e0301361cff1cddc0284d15412cc))
+* **header:** make logo not clickable, keep full logo and remove hamburger menu on mobile ([01aba7e](https://github.com/Pocket/web-client/commit/01aba7e79f24d033c6b880a8b2de095123c26d9f))
+* **reader:** add home label on desktop ([049c1a9](https://github.com/Pocket/web-client/commit/049c1a9c8f8e1c14aaa6a9107e42e6916cdc03c4))
+* **save-confirm:** update copy, adjust buttons on small screens ([9ddbee0](https://github.com/Pocket/web-client/commit/9ddbee05202219d1d20efbd4cd3dfadfd06ceec0))
+* **save-to-pocket:** add the ability to have a border on the save to pocket button ([7b509ac](https://github.com/Pocket/web-client/commit/7b509ac079ec9062646295ac7e5a752921302125))
+* **select-article:** change div to span in h2 sub-head ([b6cd174](https://github.com/Pocket/web-client/commit/b6cd174ec13c1a95c5f5313bbfc58b7db6dafca4))
+* **select-article:** remove hover effect on card items, some cleanup ([f308e98](https://github.com/Pocket/web-client/commit/f308e985241d8fd1968f7701de40eb1500cefb74))
+* **select-article:** responsiveness, move border style for button, limit articles ([ce0e829](https://github.com/Pocket/web-client/commit/ce0e82911c5456b4e712010ca3d6649e2efb0a30))
+* **select-article:** update copy and add save icon ([e49a148](https://github.com/Pocket/web-client/commit/e49a14840c516608289c144c008ee445cec40a59))
+* **select-topics:** adjust size and spacing of footer buttons ([f77eb3f](https://github.com/Pocket/web-client/commit/f77eb3fb1abd95a5c1f82e6bbcf61733cf230288))
+* **select-topics:** bold the word Topics in the subheader ([7e5a16d](https://github.com/Pocket/web-client/commit/7e5a16d5b6adadf3a8c436faa513f9b37f668c2c))
+* **select-topics:** disable continue button until first topic is selected ([e14304c](https://github.com/Pocket/web-client/commit/e14304c38076f00f5dc8dd358e1ccd6117b69888))
+* **select-topics:** responsive tweaks ([75d452a](https://github.com/Pocket/web-client/commit/75d452a4eb3f13a2f227430ba829833dde881761))
+* **select-topics:** skip link should also go to select-article ([c215e88](https://github.com/Pocket/web-client/commit/c215e884074f1f6cda290637872ed0b5c76fedc3))
+* **setup moment:** use <strong> for bold text in sub-head ([80c1005](https://github.com/Pocket/web-client/commit/80c100599df77548172331cad56011727ab98f65))
+
+## [1.49.2](https://github.com/Pocket/web-client/compare/v1.49.1...v1.49.2) (2022-06-13)
+
+
+### Bug Fixes
+
+* **card base styles:** add styles for flex card shape ([5489823](https://github.com/Pocket/web-client/commit/5489823d39809eac467cb7b7ba14d875a6eba624))
+* **card base:** update css comments ([0c1059c](https://github.com/Pocket/web-client/commit/0c1059cec5a9b90a1940d5a438da40d450a83d97))
+* **card:** add new flex card shape ([6e724ce](https://github.com/Pocket/web-client/commit/6e724ce41b873858875baba93c61bcef62ee650f))
+* **flex card:** adjust size of title ([416a4f1](https://github.com/Pocket/web-client/commit/416a4f128df1153391856288a65e91ea55d36871))
+* **home greeting:** show home greeting after first save ([5812d4c](https://github.com/Pocket/web-client/commit/5812d4cc98de7707c2eff370a425ec917668a720))
+* **home header:** add ability to include link in HomeSectionHeader ([c1be44b](https://github.com/Pocket/web-client/commit/c1be44b85cf9cf94e9074b0d2fae67764862f708))
+* **home state:** don't include old recent saves ([587bc66](https://github.com/Pocket/web-client/commit/587bc6606a81e4bcf68052ea0094d478eac71300))
+* **item layouts:** add FlexList layout so it can be based on flexbox instead of grid ([297711c](https://github.com/Pocket/web-client/commit/297711c9da9cfa894d49e15b8da993f9a0bfd81a))
+* **recent saves:** use FlexList for recent saves card items ([9d28558](https://github.com/Pocket/web-client/commit/9d285581e51d396e51c80d8e144fea1a4bf79634))
+* **snowplow actions:** add snowplow action for home.recent.view-my-list ([4158df2](https://github.com/Pocket/web-client/commit/4158df2dd53b5ab74717f2d23a024a0eb644f7dd))
+
 ## [1.49.1](https://github.com/Pocket/web-client/compare/v1.49.0...v1.49.1) (2022-06-10)
 
 

@@ -114,7 +114,8 @@ export const SaveToPocket = function ({
   allowRead = false,
   hideCopy = false,
   className,
-  id
+  id,
+  border
 }) {
   const { t } = useTranslation()
 
@@ -150,7 +151,8 @@ export const SaveToPocket = function ({
     saveStatus,
     'card-actions',
     allowRead && 'read-now',
-    className
+    className,
+    border && 'border'
   )
 
   return saveStatus === 'saved' && allowRead ? (

@@ -46,5 +46,5 @@ export const HomeGreeting = () => {
   const showName = firstName && firstName.length < 30
   const greeting = showName ? withNameGreeting[timeOfDay] : noNameGreeting[timeOfDay]
 
-  return recentSaves?.length > 2 ? <div className={homeCollections}>{greeting}</div> : null
+  return recentSaves?.length > 0 ? <div className={homeCollections}>{greeting}</div> : null
 }

@@ -101,12 +101,7 @@ export const homeActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: [
-      'id',
-      'url',
-      'position',
-      'destination'
-    ]
+    expects: ['id', 'url', 'position', 'destination']
   },
   'home.recent.impression': {
     eventType: 'impression',
@@ -132,12 +127,15 @@ export const homeActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: [
-      'id',
-      'url',
-      'position',
-      'destination',
-    ]
+    expects: ['id', 'url', 'position', 'destination']
+  },
+  'home.recent.view-my-list': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'link'
+    },
+    description: 'Fired when a user clicks the `Go to My List` link in the recent saves section'
   },
   'home.collection.open': {
     eventType: 'contentOpen',

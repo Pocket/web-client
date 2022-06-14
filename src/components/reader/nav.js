@@ -12,7 +12,11 @@ import { ArchiveIcon } from 'components/icons/ArchiveIcon'
 import { AddCircledIcon } from 'components/icons/AddCircledIcon'
 import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { useRouter } from 'next/router'
-import { breakpointLargeTablet, breakpointMediumHandset } from 'common/constants'
+import {
+  breakpointLargeTablet,
+  breakpointMediumHandset,
+  breakpointLargeHandset
+} from 'common/constants'
 import { DisplaySettings } from 'components/display-settings/display-settings'
 import { buttonReset } from 'components/buttons/button-reset'
 import { bottomTooltip } from 'components/tooltip/tooltip'
@@ -59,6 +63,23 @@ const navStyle = css`
     justify-content: space-between;
     align-items: center;
     align-content: center;
+
+    &.get-started {
+      margin-left: -3rem;
+
+      ${breakpointLargeHandset} {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .home-label {
+    font-family: var(--fontSansSerif);
+    padding-left: 0.5rem;
+
+    ${breakpointLargeHandset} {
+      display: none;
+    }
   }
 
   ${breakpointLargeTablet} {
@@ -144,7 +165,8 @@ export const ReaderNav = ({
     document.location.href = '/my-list'
   }
   const clickGoBack = () => {
-    dispatch(sendSnowplowEvent('reader.goback'))
+    const identifier = getStarted ? 'get-started.reader.gohome' : 'reader.goback'
+    dispatch(sendSnowplowEvent(identifier))
     goBack()
   }
 
@@ -174,10 +196,17 @@ export const ReaderNav = ({
             data-tooltip={returnCopy}
             data-cy="reader-nav-go-back"
             className={cx(buttonClass, 'go-back')}>
-            {getStarted ? <HomeIcon /> : <ArrowLeftIcon />}
+            {getStarted ? (
+              <>
+                <HomeIcon />
+                <span className="home-label">Home</span>
+              </>
+            ) : (
+              <ArrowLeftIcon />
+            )}
           </button>
 
-          <div className="nav-actions">
+          <div className={cx(getStarted && 'get-started', 'nav-actions')}>
             <button
               onClick={toggleSidebar}
               aria-label={

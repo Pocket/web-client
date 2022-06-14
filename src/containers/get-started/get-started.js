@@ -6,7 +6,7 @@ import { css } from 'linaria'
 // import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const getStartedContainerStyle = css`
-  max-width: 900px;
+  max-width: 950px;
   margin: 0 auto;
   .button {
     font-family: var(--fontSansSerif);
@@ -19,7 +19,7 @@ export const getStartedContainerStyle = css`
     .title {
       font-weight: 600;
       font-size: 1.75rem;
-      line-height: 1.825;
+      line-height: 1.5;
       margin: 0 0 10px 0;
     }
     .sub-head {
@@ -27,22 +27,36 @@ export const getStartedContainerStyle = css`
       font-size: 1rem;
       line-height: 1.5;
       margin: 0;
-      display: flex;
-      align-content: center;
-      align-items: center;
+
+      &.with-icon {
+        display: flex;
+      }
+
+      strong {
+        font-weight: 500;
+      }
       .icon {
         margin-top: 0;
         margin: 0 0.25rem;
+        color: var(--color-actionBrand);
+
+        svg {
+          height: 1.5rem;
+        }
       }
     }
   }
   .page-footer {
     margin-top: 3rem;
     padding: 1rem 0;
-    border: var(--borderStyle);
+    border: var(--dividerStyle);
     border-width: 1px 0 0;
     display: flex;
     justify-content: flex-end;
+
+    .button + .button {
+      margin-left: 1.5rem;
+    }
   }
 `
 

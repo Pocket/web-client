@@ -13,13 +13,19 @@ import { getArticleSelectors } from './get-started.state'
 import { parseCookies } from 'nookies'
 import { hydrateGetStarted } from './get-started.state'
 import { useRouter } from 'next/router'
-// import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { css, cx } from 'linaria'
 import { Card } from 'components/item-card/card'
 import { Loader } from 'components/loader/loader'
+import { SaveIcon } from 'components/icons/SaveIcon'
+import { breakpointTinyTablet } from 'common/constants'
 
 const articleSelectorStyle = css`
   margin-top: 3rem;
+
+  ${breakpointTinyTablet} {
+    grid-row-gap: 2rem;
+  }
 `
 
 const loaderStyle = css`
@@ -38,6 +44,7 @@ export const SelectArticle = ({ metaData }) => {
   const router = useRouter()
 
   const articles = useSelector((state) => state.getStarted.articles)
+  const articlesToUse = articles.slice(0, 3)
   const topicSelectors = useSelector((state) => state.getStarted.topicsSelectors)
   const hasTopicSelectors = topicSelectors.length
 
@@ -59,17 +66,25 @@ export const SelectArticle = ({ metaData }) => {
     dispatch(hydrateGetStarted({ userTopics }))
   }, [dispatch])
 
-  const handleSkip = () => router.push('/home?get-started=skip')
+  const handleSkip = () => {
+    dispatch(sendSnowplowEvent('get-started.article.skip'))
+    router.push('/home?get-started=skip')
+  }
 
   return (
     <Layout metaData={metaData} className={getStartedContainerStyle} noNav={true}>
       <header className="page-header">
-        <h1 className="title">Select the article that you find most interesting</h1>
-        <h2 className="sub-head">Save an article to continue</h2>
+        <h1 className="title">Save an article you find interesting</h1>
+        <h2 className="sub-head with-icon">
+          <SaveIcon />
+          <span>
+            <strong>Save</strong> one article
+          </span>
+        </h2>
       </header>
-      {articles.length ? (
+      {articlesToUse.length ? (
         <div className={articleGrid}>
-          {articles.map((id, index) => (
+          {articlesToUse.map((id, index) => (
             <SelectArticleCard key={id} id={id} position={index} />
           ))}
         </div>
@@ -91,22 +106,45 @@ export const SelectArticle = ({ metaData }) => {
 
 const selectorCardStyle = css`
   padding-bottom: 2.25rem;
-  cursor: pointer;
-  &:hover .selectedBack {
-    display: block;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
+
+  .actions {
+    ${breakpointTinyTablet} {
+      grid-column: span 12 !important; // buh, couldn't find another way to override
+
+      .card-actions {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    }
   }
   .card-actions {
     margin-bottom: 0.25rem;
     padding: 0.75rem;
-    width: 100%;
     &:hover {
       color: var(--color-textPrimary);
+    }
+
+    &.border {
+      border: var(--borderStyle);
+      border-width: 2px;
+      border-color: var(--color-actionSecondary);
+
+      .actionCopy {
+        color: var(--color-textPrimary);
+      }
+
+      &:hover,
+      &:focus {
+        background: var(--color-actionSecondary);
+        .actionCopy {
+          color: var(--color-actionPrimaryText);
+        }
+      }
     }
   }
   a.publisher:hover {
     text-decoration: none;
-    color: ;
   }
 `
 
@@ -118,11 +156,24 @@ export const SelectArticleCard = ({
   showExcerpt = false
 }) => {
   const dispatch = useDispatch()
+
   const item = useSelector((state) => state.getStarted.articlesById[id])
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   if (!item) return null
 
-  const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner, thumbnail } = item //prettier-ignore
+  const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner, thumbnail, analyticsData } = item //prettier-ignore
   const ActionMenu = noAction ? null : SelectCardActions
+
+  const data = {
+    position,
+    ...analyticsData
+  }
+
+  const onItemInView = (inView) => {
+    if (!impressionFired && inView)
+      dispatch(sendSnowplowEvent('get-started.article.impression', data))
+  }
+
   return (
     <Card
       itemId={id}
@@ -138,6 +189,7 @@ export const SelectArticleCard = ({
       hiddenActions={false}
       showExcerpt={showExcerpt}
       className={selectorCardStyle}
+      onItemInView={onItemInView}
       // Open Actions
       ActionMenu={ActionMenu}
     />
@@ -152,10 +204,17 @@ const SelectCardActions = ({ id, position }) => {
 
   if (!item) return null
 
-  const { saveStatus, saveUrl } = item
+  const { saveStatus, saveUrl, analyticsData } = item
+  const data = {
+    position,
+    ...analyticsData
+  }
 
   // Prep save action
-  const onSave = () => dispatch(saveArticle(saveUrl))
+  const onSave = () => {
+    dispatch(sendSnowplowEvent('get-started.article.save', data))
+    dispatch(saveArticle(saveUrl))
+  }
 
   return item ? (
     <div className={`${itemActionStyle} actions`}>
@@ -167,6 +226,7 @@ const SelectCardActions = ({ id, position }) => {
         isAuthenticated={isAuthenticated}
         saveStatus={saveStatus}
         id={id}
+        border={true}
       />
     </div>
   ) : null
