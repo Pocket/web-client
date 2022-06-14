@@ -13,7 +13,7 @@ import { getArticleSelectors } from './get-started.state'
 import { parseCookies } from 'nookies'
 import { hydrateGetStarted } from './get-started.state'
 import { useRouter } from 'next/router'
-// import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { css, cx } from 'linaria'
 import { Card } from 'components/item-card/card'
 import { Loader } from 'components/loader/loader'
@@ -68,7 +68,10 @@ export const SelectArticle = ({ metaData }) => {
     dispatch(hydrateGetStarted({ userTopics }))
   }, [dispatch])
 
-  const handleSkip = () => router.push('/home?get-started=skip')
+  const handleSkip = () => {
+    dispatch(sendSnowplowEvent('get-started.article.skip'))
+    router.push('/home?get-started=skip')
+  }
 
   return (
     <Layout metaData={metaData} className={getStartedContainerStyle} noNav={true}>
@@ -154,11 +157,25 @@ export const SelectArticleCard = ({
   cardShape = 'block',
   showExcerpt = false
 }) => {
+  const dispatch = useDispatch()
+
   const item = useSelector((state) => state.getStarted.articlesById[id])
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   if (!item) return null
 
-  const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner, thumbnail } = item //prettier-ignore
+  const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner, thumbnail, analyticsData } = item //prettier-ignore
   const ActionMenu = noAction ? null : SelectCardActions
+
+  const data = {
+    position,
+    ...analyticsData
+  }
+
+  const onItemInView = (inView) => {
+    if (!impressionFired && inView)
+      dispatch(sendSnowplowEvent('get-started.article.impression', data))
+  }
+
   return (
     <Card
       itemId={id}
@@ -174,13 +191,14 @@ export const SelectArticleCard = ({
       hiddenActions={false}
       showExcerpt={showExcerpt}
       className={selectorCardStyle}
+      onItemInView={onItemInView}
       // Open Actions
       ActionMenu={ActionMenu}
     />
   )
 }
 
-const SelectCardActions = ({ id }) => {
+const SelectCardActions = ({ id, position }) => {
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
@@ -188,10 +206,17 @@ const SelectCardActions = ({ id }) => {
 
   if (!item) return null
 
-  const { saveStatus, saveUrl } = item
+  const { saveStatus, saveUrl, analyticsData } = item
+  const data = {
+    position,
+    ...analyticsData
+  }
 
   // Prep save action
-  const onSave = () => dispatch(saveArticle(saveUrl))
+  const onSave = () => {
+    dispatch(sendSnowplowEvent('get-started.article.save', data))
+    dispatch(saveArticle(saveUrl))
+  }
 
   return item ? (
     <div className={`${itemActionStyle} actions`}>

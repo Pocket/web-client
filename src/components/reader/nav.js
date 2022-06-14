@@ -165,7 +165,8 @@ export const ReaderNav = ({
     document.location.href = '/my-list'
   }
   const clickGoBack = () => {
-    dispatch(sendSnowplowEvent('reader.goback'))
+    const identifier = getStarted ? 'get-started.reader.gohome' : 'reader.goback'
+    dispatch(sendSnowplowEvent(identifier))
     goBack()
   }
 

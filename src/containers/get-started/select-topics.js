@@ -12,7 +12,7 @@ import { breakpointMediumHandset } from 'common/constants'
 import { useRouter } from 'next/router'
 import { parseCookies } from 'nookies'
 
-// import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { css, cx } from 'linaria'
 import { getStartedContainerStyle } from './get-started'
 
@@ -101,10 +101,15 @@ export const SelectTopics = ({ metaData }) => {
   }, [dispatch])
 
   const handleContinue = () => {
+    dispatch(sendSnowplowEvent('get-started.topic.continue'))
     dispatch(finalizeTopics())
     router.push('/get-started/select-article', null, { shallow: true })
   }
-  const handleSkip = () => router.push('/get-started/select-article', null, { shallow: true })
+
+  const handleSkip = () => {
+    dispatch(sendSnowplowEvent('get-started.topic.skip'))
+    router.push('/get-started/select-article', null, { shallow: true })
+  }
 
   return (
     <Layout metaData={metaData} className={getStartedContainerStyle} noNav={true}>
@@ -142,7 +147,14 @@ const TopicButton = ({ topic }) => {
   const isSelected = userTopics.includes(topic.name)
 
   const topicAction = isSelected ? deSelectTopic : selectTopic
-  const toggleTopic = () => dispatch(topicAction(topic.name))
+  const toggleTopic = () => {
+    const analyticsData = {
+      label: topic.name,
+      value: isSelected ? 'deselect' : 'select'
+    }
+    dispatch(topicAction(topic.name))
+    dispatch(sendSnowplowEvent('get-started.topic.toggle', analyticsData))
+  }
 
   return (
     <label className={cx(topicStyle, isSelected && 'selected')}>
