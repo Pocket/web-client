@@ -1,3 +1,24 @@
+## [1.49.7](https://github.com/Pocket/web-client/compare/v1.49.6...v1.49.7) (2022-06-14)
+
+
+### Bug Fixes
+
+* **get started:** add ability to update topic pref ([a81d0b3](https://github.com/Pocket/web-client/commit/a81d0b320dd32bca4822b0732c4faed811dcdf98))
+
+## [1.49.6](https://github.com/Pocket/web-client/compare/v1.49.5...v1.49.6) (2022-06-14)
+
+
+### Bug Fixes
+
+* **home:** only show HomeRecsByTopic when inGetStartedTest ([7edc0dd](https://github.com/Pocket/web-client/commit/7edc0ddf038346c9f2e8629bbb0734a0c413e893))
+
+## [1.49.5](https://github.com/Pocket/web-client/compare/v1.49.4...v1.49.5) (2022-06-14)
+
+
+### Bug Fixes
+
+* **onboarding:** don't show any of the onboarding flyaways when in the getstarted test ([c834147](https://github.com/Pocket/web-client/commit/c83414701ed3569af032d3db14678131475257f3))
+
 ## [1.49.4](https://github.com/Pocket/web-client/compare/v1.49.3...v1.49.4) (2022-06-13)
 
 
