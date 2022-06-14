@@ -82,12 +82,12 @@ export const getStartedReducers = (state = initialState, action) => {
     }
 
     case GET_STARTED_SAVE_SUCCESS: {
-      const { id } = action
+      const { id, savedId } = action
       const article = state.articlesById[id]
       return {
         ...state,
         articlesById: { ...state.articlesById, [id]: { ...article, saveStatus: 'saved' } },
-        savedArticleId: id
+        savedArticleId: savedId
       }
     }
 
@@ -183,10 +183,10 @@ function* getStartedSaveRequest(action) {
   try {
     const { url, id } = action
 
-    const { errors } = yield call(itemUpsert, url)
+    const { errors, id: savedId  } = yield call(itemUpsert, url)
     if (errors) throw new Error(errors[0]?.message)
 
-    yield put({ type: GET_STARTED_SAVE_SUCCESS, id })
+    yield put({ type: GET_STARTED_SAVE_SUCCESS, id, savedId })
   } catch (error) {
     yield put({ type: GET_STARTED_SAVE_FAILURE })
   }
