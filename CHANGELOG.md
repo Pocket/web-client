@@ -1,3 +1,10 @@
+## [1.49.6](https://github.com/Pocket/web-client/compare/v1.49.5...v1.49.6) (2022-06-14)
+
+
+### Bug Fixes
+
+* **home:** only show HomeRecsByTopic when inGetStartedTest ([7edc0dd](https://github.com/Pocket/web-client/commit/7edc0ddf038346c9f2e8629bbb0734a0c413e893))
+
 ## [1.49.5](https://github.com/Pocket/web-client/compare/v1.49.4...v1.49.5) (2022-06-14)
 
 
