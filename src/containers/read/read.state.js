@@ -469,6 +469,11 @@ function* checkMutations({ nodes }) {
 }
 
 function redirectToList() {
+  // setup moment
+  const getStarted = new URLSearchParams(window.location.search)?.has('getStarted')
+  if (getStarted) return document.location.href = '/home'
+
+  // default behavior
   if (document.location.href.indexOf('/read/') !== -1) {
     if (global.history.length > 1) {
       global.history.go(-1)
