@@ -160,7 +160,7 @@ export const SelectArticleCard = ({
   const dispatch = useDispatch()
 
   const item = useSelector((state) => state.getStarted.articlesById[id])
-  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(item?.url))
   if (!item) return null
 
   const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner, thumbnail, analyticsData } = item //prettier-ignore
