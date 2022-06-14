@@ -43,18 +43,38 @@ export function ActionsMyList({ id, position }) {
 
   /** ITEM MENU ITEMS
   --------------------------------------------------------------- */
-  const itemShare = () => dispatch(shareAction({ item, position }))
-
-  const itemDelete = () => dispatch(mutationDelete(id))
-  const itemArchive = () => dispatch(mutationArchive(id))
-  const itemUpsert = () => dispatch(mutationUpsert(givenUrl, filters, sort, true))
+  const itemShare = () => {
+    dispatch(sendSnowplowEvent('my-list.share', analyticsData))
+    dispatch(shareAction({ item, position }))
+  }
+  const itemDelete = () => {
+    dispatch(sendSnowplowEvent('my-list.delete', analyticsData))
+    dispatch(mutationDelete(id))
+  }
+  const itemArchive = () => {
+    dispatch(sendSnowplowEvent('my-list.archive', analyticsData))
+    dispatch(mutationArchive(id))
+  }
+  const itemUpsert = () => {
+    dispatch(sendSnowplowEvent('my-list.unarchive', analyticsData))
+    dispatch(mutationUpsert(givenUrl, filters, sort, true))
+  }
+  const itemFavorite = () => {
+    dispatch(sendSnowplowEvent('my-list.favorite', analyticsData))
+    dispatch(mutationFavorite(id))
+  }
+  const itemUnFavorite = () => {
+    dispatch(sendSnowplowEvent('my-list.un-favorite', analyticsData))
+    dispatch(mutationUnFavorite(id))
+  }
+  const itemTag = () => {
+    dispatch(sendSnowplowEvent('my-list.tag', analyticsData))
+    dispatch(mutationTagItem(id, tags))
+  }
 
   // This is more of an undo.  Leaving it here because we may want to switch to this eventually
   // For now Upsert will double as our `archive` function
   const itemUnArchive = () => dispatch(mutationUnArchive(id))
-  const itemFavorite = () => dispatch(mutationFavorite(id))
-  const itemUnFavorite = () => dispatch(mutationUnFavorite(id))
-  const itemTag = () => dispatch(mutationTagItem(id, tags))
 
   const itemPermLibOpen = () => {
     const data = { ...analyticsData, url: permanentUrl }
