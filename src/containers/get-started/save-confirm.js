@@ -48,9 +48,10 @@ const modalConfirmStyles = css`
   }
   p {
     margin: 0 0 0.5rem;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-family: var(--fontSansSerif);
     &.small {
+      font-style: italic;
       font-size: 1rem;
       margin-bottom: 2rem;
     }
