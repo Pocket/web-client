@@ -70,7 +70,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     slug,
     iabTopCategory,
     iabSubCategory,
-    curationCategory,
+    topic,
     legacyId,
     showAds
   } = articleData || {}
@@ -133,7 +133,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
               allowAds={allowAds}
               iabTopCategory={iabTopCategory}
               iabSubCategory={iabSubCategory}
-              curationCategory={curationCategory}
+              curationCategory={topic}
               legacyId={legacyId}
             />
           </section>
@@ -184,7 +184,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
                 adsReady={adsReady}
                 iabTopCategory={iabTopCategory}
                 iabSubCategory={iabSubCategory}
-                curationCategory={curationCategory}
+                curationCategory={topic}
                 legacyId={legacyId}
               />
               <PublisherRecs itemId={originalItemId} publisher={publisher} legacyId={legacyId} />
@@ -224,7 +224,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
               adsReady={adsReady}
               iabTopCategory={iabTopCategory}
               iabSubCategory={iabSubCategory}
-              curationCategory={curationCategory}
+              curationCategory={topic}
               legacyId={legacyId}
             />
           </section>

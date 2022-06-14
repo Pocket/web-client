@@ -6,7 +6,7 @@ const getSyndicatedArticleQuery = gql`
     syndicatedArticleBySlug(slug: $slug) {
       content
       authorNames
-      curationCategory
+      topic
       excerpt
       expiresAt
       iabSubCategory
@@ -20,8 +20,20 @@ const getSyndicatedArticleQuery = gql`
       publisherUrl
       publisher {
         name
+        recommendationName
         url
+        showAuthors
+        attributeCanonicalToPublisher
+        showArticleCta
+        appearedOnDomain
         logo
+        logoWide
+        logoWideBlack
+        articleCta {
+          url
+          text
+          leadIn
+        }
       }
       showAds
       slug
