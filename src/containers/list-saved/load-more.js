@@ -24,6 +24,8 @@ const loadMoreRefStyle = css`
   height: 350px;
   width: 100%;
   display: block;
+  pointer-events: none;
+  z-index: -1;
 `
 
 export function LoadMore({ loadMore }) {
