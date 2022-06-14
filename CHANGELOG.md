@@ -1,3 +1,10 @@
+## [1.49.5](https://github.com/Pocket/web-client/compare/v1.49.4...v1.49.5) (2022-06-14)
+
+
+### Bug Fixes
+
+* **onboarding:** don't show any of the onboarding flyaways when in the getstarted test ([c834147](https://github.com/Pocket/web-client/commit/c83414701ed3569af032d3db14678131475257f3))
+
 ## [1.49.4](https://github.com/Pocket/web-client/compare/v1.49.3...v1.49.4) (2022-06-13)
 
 
