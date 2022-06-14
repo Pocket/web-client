@@ -27,6 +27,12 @@ export const cardStyles = css`
   grid-column: var(--card-column-span);
   grid-row: var(--card-row-span);
 
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
   .cardWrap {
     position: relative;
     height: 100%;
@@ -132,6 +138,12 @@ export const cardStyles = css`
     color: var(--color-textSecondary);
     &:hover {
       color: var(--color-textSecondary);
+    }
+
+    &.champion {
+      animation: blinker 1s linear infinite;
+      background-color: hotpink;
+      font-size: 2rem;
     }
   }
 

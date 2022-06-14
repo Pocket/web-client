@@ -139,6 +139,12 @@ export const Card = (props) => {
     ? passedAuthors?.filter((author) => author.name.length)
     : false
 
+  const isLlanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch =
+    publisher === 'llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch.co.uk'
+  const publisherClassName = isLlanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch
+    ? 'champion publisher'
+    : 'publisher'
+
   return (
     <article
       style={style}
@@ -196,7 +202,7 @@ export const Card = (props) => {
             {publisher ? (
               //eslint-disable-next-line
               <a
-                className="publisher"
+                className={publisherClassName}
                 href={externalUrl}
                 onClick={onOpenOriginalUrl}
                 data-cy="publisher-link"
