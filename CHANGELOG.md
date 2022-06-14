@@ -1,3 +1,10 @@
+## [1.49.10](https://github.com/Pocket/web-client/compare/v1.49.9...v1.49.10) (2022-06-14)
+
+
+### Bug Fixes
+
+* **get-started:** fix duplicate impressions on select articles ([9465d5e](https://github.com/Pocket/web-client/commit/9465d5e1bc39ae6bd72aef2bdae2a9eb363f5d3d))
+
 ## [1.49.9](https://github.com/Pocket/web-client/compare/v1.49.8...v1.49.9) (2022-06-14)
 
 
