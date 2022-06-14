@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Button } from 'components/buttons/button'
 import { useDispatch, useSelector } from 'react-redux'
 import { listFullStyle } from 'components/items-layout/list-full'
@@ -96,7 +96,7 @@ export const SelectArticle = ({ metaData }) => {
         </div>
       )}
       <footer className="page-footer">
-        <Button className="button" variant="inline" onClick={handleSkip}>
+        <Button className="button skip" variant="inline" onClick={handleSkip}>
           Skip
         </Button>
       </footer>
@@ -200,14 +200,13 @@ export const SelectArticleCard = ({
 
 const SelectCardActions = ({ id, position }) => {
   const dispatch = useDispatch()
-  const [isSaved, setIsSaved] = useState('unsaved')
 
   const isAuthenticated = useSelector((state) => state.user.auth)
   const item = useSelector((state) => state.getStarted.articlesById[id])
 
   if (!item) return null
 
-  const { saveUrl, analyticsData } = item
+  const { saveStatus, saveUrl, analyticsData } = item
   const data = {
     position,
     ...analyticsData
@@ -215,9 +214,8 @@ const SelectCardActions = ({ id, position }) => {
 
   // Prep save action
   const onSave = () => {
-    setIsSaved('saved')
     dispatch(sendSnowplowEvent('get-started.article.save', data))
-    dispatch(saveArticle(saveUrl))
+    dispatch(saveArticle(saveUrl, id))
   }
 
   return item ? (
@@ -228,7 +226,7 @@ const SelectCardActions = ({ id, position }) => {
         openExternal={false}
         saveAction={onSave}
         isAuthenticated={isAuthenticated}
-        saveStatus={isSaved}
+        saveStatus={saveStatus}
         id={id}
         border={true}
       />

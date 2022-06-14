@@ -37,7 +37,7 @@ export const deSelectTopic = (topic) => ({ type: GET_STARTED_DESELECT_TOPIC, top
 export const finalizeTopics = () => ({ type: GET_STARTED_FINALIZE_TOPICS })
 export const reSelectTopics = () => ({ type: GET_STARTED_RESELECT_TOPICS })
 export const clearSavedArticle = () => ({ type: GET_STARTED_CLEAR_SAVED_ARTICLE })
-export const saveArticle = (url) => ({ type: GET_STARTED_SAVE_REQUEST, url })
+export const saveArticle = (url, id) => ({ type: GET_STARTED_SAVE_REQUEST, url, id })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -181,10 +181,11 @@ function* getTopicArticles() {
 
 function* getStartedSaveRequest(action) {
   try {
-    const { url } = action
+    const { url, id } = action
 
-    const upsertResponse = yield call(itemUpsert, url)
-    const { id } = upsertResponse
+    const { errors } = yield call(itemUpsert, url)
+    if (errors) throw new Error(errors[0]?.message)
+
     yield put({ type: GET_STARTED_SAVE_SUCCESS, id })
   } catch (error) {
     yield put({ type: GET_STARTED_SAVE_FAILURE })
