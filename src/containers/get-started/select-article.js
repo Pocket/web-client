@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from 'components/buttons/button'
 import { useDispatch, useSelector } from 'react-redux'
 import { listFullStyle } from 'components/items-layout/list-full'
@@ -200,13 +200,14 @@ export const SelectArticleCard = ({
 
 const SelectCardActions = ({ id, position }) => {
   const dispatch = useDispatch()
+  const [isSaved, setIsSaved] = useState('unsaved')
 
   const isAuthenticated = useSelector((state) => state.user.auth)
   const item = useSelector((state) => state.getStarted.articlesById[id])
 
   if (!item) return null
 
-  const { saveStatus, saveUrl, analyticsData } = item
+  const { saveUrl, analyticsData } = item
   const data = {
     position,
     ...analyticsData
@@ -214,6 +215,7 @@ const SelectCardActions = ({ id, position }) => {
 
   // Prep save action
   const onSave = () => {
+    setIsSaved('saved')
     dispatch(sendSnowplowEvent('get-started.article.save', data))
     dispatch(saveArticle(saveUrl))
   }
@@ -226,7 +228,7 @@ const SelectCardActions = ({ id, position }) => {
         openExternal={false}
         saveAction={onSave}
         isAuthenticated={isAuthenticated}
-        saveStatus={saveStatus}
+        saveStatus={isSaved}
         id={id}
         border={true}
       />
