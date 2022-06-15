@@ -57,6 +57,15 @@ export const getStartedContainerStyle = css`
     .button + .button {
       margin-left: 1.5rem;
     }
+
+    .skip {
+      color: var(--color-actionPrimary);
+
+      &:hover {
+        color: var(--color-textLinkHover);
+        text-decoration: underline;
+      }
+    }
   }
 `
 

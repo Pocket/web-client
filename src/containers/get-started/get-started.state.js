@@ -1,6 +1,7 @@
 import { put, takeEvery, call, select } from 'redux-saga/effects'
 import { getTopicSelectors as getTopicSelectorsApi } from 'common/api'
 import { getSetupSlate } from 'common/api'
+import { setTopicPreferences } from 'common/api'
 import { deriveCorpusItem } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
 import { itemUpsert } from 'common/api'
@@ -20,6 +21,9 @@ import { GET_STARTED_SAVE_SUCCESS } from 'actions'
 import { GET_STARTED_SAVE_FAILURE } from 'actions'
 import { GET_STARTED_CLEAR_SAVED_ARTICLE } from 'actions'
 import { GET_STARTED_GET_TOPIC_SELECTORS } from 'actions'
+import { SET_TOPIC_REQUEST } from 'actions'
+import { SET_TOPIC_SUCCESS } from 'actions'
+import { SET_TOPIC_FAILURE } from 'actions'
 
 import { HYDRATE } from 'actions'
 
@@ -33,7 +37,7 @@ export const deSelectTopic = (topic) => ({ type: GET_STARTED_DESELECT_TOPIC, top
 export const finalizeTopics = () => ({ type: GET_STARTED_FINALIZE_TOPICS })
 export const reSelectTopics = () => ({ type: GET_STARTED_RESELECT_TOPICS })
 export const clearSavedArticle = () => ({ type: GET_STARTED_CLEAR_SAVED_ARTICLE })
-export const saveArticle = (url) => ({ type: GET_STARTED_SAVE_REQUEST, url })
+export const saveArticle = (url, id) => ({ type: GET_STARTED_SAVE_REQUEST, url, id })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -42,7 +46,8 @@ const initialState = {
   userTopics: [],
   articlesById: {},
   articles: [],
-  savedArticleId: false
+  savedArticleId: false,
+  finalizingTopics: false
 }
 
 export const getStartedReducers = (state = initialState, action) => {
@@ -62,7 +67,13 @@ export const getStartedReducers = (state = initialState, action) => {
     }
 
     case GET_STARTED_FINALIZE_TOPICS: {
-      return { ...state }
+      return { ...state, finalizingTopics: true }
+    }
+
+    case SET_TOPIC_SUCCESS:
+    case SET_TOPIC_FAILURE: {
+      // We are moving forward regardless of topic profile success at this point
+      return { ...state, finalizingTopics: false }
     }
 
     case GET_STARTED_ARTICLES_SUCCESS: {
@@ -71,12 +82,12 @@ export const getStartedReducers = (state = initialState, action) => {
     }
 
     case GET_STARTED_SAVE_SUCCESS: {
-      const { id } = action
+      const { id, savedId } = action
       const article = state.articlesById[id]
       return {
         ...state,
         articlesById: { ...state.articlesById, [id]: { ...article, saveStatus: 'saved' } },
-        savedArticleId: id
+        savedArticleId: savedId
       }
     }
 
@@ -110,6 +121,7 @@ export const getStartedSagas = [
 /** SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getUserTopics = (state) => state.getStarted.userTopics
+const getAllTopicsSelectors = (state) => state.getStarted.topicsSelectors
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -136,7 +148,21 @@ function* deSelectTopics(action) {
 }
 
 function* finalizeTopicSelection() {
-  yield put({ type: GET_STARTED_ARTICLES_REQUEST })
+  try {
+    const topicSelectors = yield select(getAllTopicsSelectors) || []
+    const currentTopics = yield select(getUserTopics) || []
+
+    const preferredTopics = topicSelectors
+      .filter((topic) => currentTopics.includes(topic.name))
+      .map((topic) => ({ id: topic.id }))
+
+    const { errors } = yield call(setTopicPreferences, preferredTopics)
+    if (errors) throw new Error(errors[0].message)
+
+    yield put({ type: SET_TOPIC_SUCCESS })
+  } catch (error) {
+    yield put({ type: SET_TOPIC_FAILURE })
+  }
 }
 
 function* getTopicArticles() {
@@ -155,11 +181,12 @@ function* getTopicArticles() {
 
 function* getStartedSaveRequest(action) {
   try {
-    const { url } = action
+    const { url, id } = action
 
-    const upsertResponse = yield call(itemUpsert, url)
-    const { id } = upsertResponse
-    yield put({ type: GET_STARTED_SAVE_SUCCESS, id })
+    const { errors, id: savedId  } = yield call(itemUpsert, url)
+    if (errors) throw new Error(errors[0]?.message)
+
+    yield put({ type: GET_STARTED_SAVE_SUCCESS, id, savedId })
   } catch (error) {
     yield put({ type: GET_STARTED_SAVE_FAILURE })
   }

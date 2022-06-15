@@ -1,3 +1,62 @@
+## [1.49.13](https://github.com/Pocket/web-client/compare/v1.49.12...v1.49.13) (2022-06-15)
+
+
+### Bug Fixes
+
+* **publisher:** add champion ([815b05a](https://github.com/Pocket/web-client/commit/815b05a6d4affbe87a00deaf9ffb5167fe5be13e))
+* **publisher:** clamp very long publishers ( for real this time ) ([c6f85ac](https://github.com/Pocket/web-client/commit/c6f85ac1ee36411acb936e80be08b257e1f9872d))
+
+## [1.49.12](https://github.com/Pocket/web-client/compare/v1.49.11...v1.49.12) (2022-06-15)
+
+
+### Bug Fixes
+
+* **get-started:** make sure to pass id from upsert response ([644bf2d](https://github.com/Pocket/web-client/commit/644bf2dc160988df97799db48a0422bcedd9be00))
+
+## [1.49.11](https://github.com/Pocket/web-client/compare/v1.49.10...v1.49.11) (2022-06-14)
+
+
+### Bug Fixes
+
+* **get-started:** remove anchor from footer and add save state to article selection ([9f4eb3c](https://github.com/Pocket/web-client/commit/9f4eb3c3fcff786374c054358e18d41f6ee14c27))
+* **get-started:** update save status state management and skip button color ([6f86a07](https://github.com/Pocket/web-client/commit/6f86a0704e8099b0a0fdfcca1f105ad20a5c14d8))
+
+## [1.49.10](https://github.com/Pocket/web-client/compare/v1.49.9...v1.49.10) (2022-06-14)
+
+
+### Bug Fixes
+
+* **get-started:** fix duplicate impressions on select articles ([9465d5e](https://github.com/Pocket/web-client/commit/9465d5e1bc39ae6bd72aef2bdae2a9eb363f5d3d))
+
+## [1.49.9](https://github.com/Pocket/web-client/compare/v1.49.8...v1.49.9) (2022-06-14)
+
+
+### Bug Fixes
+
+* **get-started:** go to home on archive or delete actions in reader ([c441f18](https://github.com/Pocket/web-client/commit/c441f185628a18cbbd4c71db6e8bad3364549e0a))
+* **reader:** only redirect to home when on reader ([a614148](https://github.com/Pocket/web-client/commit/a61414809b5c53dcb835973a06786fd462af7b25))
+
+## [1.49.8](https://github.com/Pocket/web-client/compare/v1.49.7...v1.49.8) (2022-06-14)
+
+
+### Bug Fixes
+
+* **global nav:** make logo hide/show work in all cases ([6065897](https://github.com/Pocket/web-client/commit/6065897a1580234793357590146c7001fece4ed9))
+
+## [1.49.7](https://github.com/Pocket/web-client/compare/v1.49.6...v1.49.7) (2022-06-14)
+
+
+### Bug Fixes
+
+* **get started:** add ability to update topic pref ([a81d0b3](https://github.com/Pocket/web-client/commit/a81d0b320dd32bca4822b0732c4faed811dcdf98))
+
+## [1.49.6](https://github.com/Pocket/web-client/compare/v1.49.5...v1.49.6) (2022-06-14)
+
+
+### Bug Fixes
+
+* **home:** only show HomeRecsByTopic when inGetStartedTest ([7edc0dd](https://github.com/Pocket/web-client/commit/7edc0ddf038346c9f2e8629bbb0734a0c413e893))
+
 ## [1.49.5](https://github.com/Pocket/web-client/compare/v1.49.4...v1.49.5) (2022-06-14)
 
 
