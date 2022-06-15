@@ -30,7 +30,7 @@ function GetStartedLayout({
       <div className={cx(fixedNavContainer, className)}>
         <PageContainer>{children}</PageContainer>
       </div>
-      <GlobalFooter minimal={true} anchored={true} />
+      <GlobalFooter minimal={true} />
     </>
   )
 }

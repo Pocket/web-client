@@ -27,6 +27,7 @@ import { Onboarding } from 'connectors/onboarding/onboarding'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Home = ({ metaData }) => {
   const dispatch = useDispatch()
@@ -41,7 +42,7 @@ export const Home = ({ metaData }) => {
   const lineupFlag = featureState['home.lineup']
   const lineupId = lineupFlag?.payload?.slateLineupId || fallback
 
-  const getStartedActive = featureState['getstarted']
+  const inGetStartedTest = featureFlagActive({ flag: 'getstarted', featureState })
 
   useEffect(() => {
     if (userStatus !== 'valid' || !lineupFlag) return
@@ -62,7 +63,7 @@ export const Home = ({ metaData }) => {
         <HomeRecentSaves />
       </SectionWrapper>
 
-      {getStartedActive ? <HomeRecsByTopic /> : null}
+      {inGetStartedTest ? <HomeRecsByTopic /> : null}
 
       {generalSlates?.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />
