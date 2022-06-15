@@ -1,3 +1,11 @@
+## [1.49.13](https://github.com/Pocket/web-client/compare/v1.49.12...v1.49.13) (2022-06-15)
+
+
+### Bug Fixes
+
+* **publisher:** add champion ([815b05a](https://github.com/Pocket/web-client/commit/815b05a6d4affbe87a00deaf9ffb5167fe5be13e))
+* **publisher:** clamp very long publishers ( for real this time ) ([c6f85ac](https://github.com/Pocket/web-client/commit/c6f85ac1ee36411acb936e80be08b257e1f9872d))
+
 ## [1.49.12](https://github.com/Pocket/web-client/compare/v1.49.11...v1.49.12) (2022-06-15)
 
 

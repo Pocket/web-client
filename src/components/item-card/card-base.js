@@ -98,7 +98,9 @@ export const cardStyles = css`
     padding: var(--size050) 0;
     font-size: var(--fontSize085);
     line-height: 1.5;
-    display: block;
+    display: flex;
+    align-items: center;
+    align-content: center;
     color: var(--color-textSecondary);
   }
 
@@ -130,6 +132,10 @@ export const cardStyles = css`
     padding: 0;
     display: inline-block;
     color: var(--color-textSecondary);
+    max-width: 70%;
+    overflow-x: hidden;
+    padding-right: 0.25rem;
+    text-overflow: ellipsis;
     &:hover {
       color: var(--color-textSecondary);
     }
