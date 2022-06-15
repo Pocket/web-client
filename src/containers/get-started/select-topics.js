@@ -51,18 +51,19 @@ const topicStyle = css`
     border: var(--borderStyle);
     border-radius: var(--borderRadius);
     &:before {
-      content: url('data:image/svg+xml;charset=US-ASCII,<svg fill="%23008078" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-12 12a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L9 16.586 20.293 5.293a1 1 0 0 1 1.414 0Z"></path></svg>');
-      margin-top: -3px;
+      /* content: url('data:image/svg+xml;charset=US-ASCII,<svg fill="%23008078" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.707 5.293a1 1 0 0 1 0 1.414l-12 12a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L9 16.586 20.293 5.293a1 1 0 0 1 1.414 0Z"></path></svg>'); */
+      margin-top: -5px;
+      margin-left: -1px;
 
       ${breakpointMediumHandset} {
-        margin-top: 0;
+        margin-top: -2px;
       }
     }
-    &:checked,
+    /* &:checked,
     &:checked:hover {
       border: var(--borderStyle);
       background-color: var(--color-canvas);
-    }
+    } */
   }
   &:hover,
   &.selected {
