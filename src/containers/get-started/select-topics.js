@@ -27,7 +27,7 @@ const topicStyle = css`
   align-items: center;
   align-content: center;
   padding: 0.5rem 1rem;
-  margin: 0.5rem 0.5rem 0 0;
+  margin: 1rem 1rem 0 0;
   font-family: var(--fontSansSerif);
   font-style: normal;
   font-weight: 400;
@@ -42,10 +42,11 @@ const topicStyle = css`
   ${breakpointMediumHandset} {
     font-size: 1rem;
     padding: 0.25rem 0.5rem;
+    margin: 0.5rem 0.5rem 0 0;
   }
 
   input {
-    margin-right: 0.625rem;
+    margin-right: 0.5rem;
     width: 18px;
     height: 18px;
     border: var(--borderStyle);
