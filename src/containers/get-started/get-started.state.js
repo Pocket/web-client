@@ -54,7 +54,7 @@ export const getStartedReducers = (state = initialState, action) => {
   switch (action.type) {
     case GET_STARTED_HYDRATE: {
       const { getStartedState } = action
-      return { ...state, ...getStartedState }
+      return { ...state, ...getStartedState, savedArticleId: false }
     }
 
     case GET_STARTED_RESELECT_TOPICS: {
