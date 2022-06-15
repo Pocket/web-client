@@ -27,12 +27,6 @@ export const cardStyles = css`
   grid-column: var(--card-column-span);
   grid-row: var(--card-row-span);
 
-  @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
-  }
-
   .cardWrap {
     position: relative;
     height: 100%;
