@@ -46,6 +46,7 @@ export const SelectArticle = ({ metaData }) => {
   const articles = useSelector((state) => state.getStarted.articles)
   const articlesToUse = articles.slice(0, 3)
   const topicSelectors = useSelector((state) => state.getStarted.topicsSelectors)
+  const finalizingTopics = useSelector((state) => state.getStarted.finalizingTopics)
   const hasTopicSelectors = topicSelectors.length
 
   // Dispatch for topic selectors
@@ -54,10 +55,11 @@ export const SelectArticle = ({ metaData }) => {
     dispatch(getTopicSelectors())
   }, [dispatch, hasTopicSelectors])
 
-  // Dispatch for articles
+  // Dispatch for articles if we are not in the process of finalizing topics
   useEffect(() => {
+    if (finalizingTopics) return
     dispatch(getArticleSelectors())
-  }, [dispatch])
+  }, [dispatch, finalizingTopics])
 
   // Get any stored topics
   useEffect(() => {
@@ -94,7 +96,7 @@ export const SelectArticle = ({ metaData }) => {
         </div>
       )}
       <footer className="page-footer">
-        <Button className="button" variant="inline" onClick={handleSkip}>
+        <Button className="button skip" variant="inline" onClick={handleSkip}>
           Skip
         </Button>
       </footer>
@@ -158,7 +160,7 @@ export const SelectArticleCard = ({
   const dispatch = useDispatch()
 
   const item = useSelector((state) => state.getStarted.articlesById[id])
-  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(item?.url))
   if (!item) return null
 
   const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner, thumbnail, analyticsData } = item //prettier-ignore
@@ -213,7 +215,7 @@ const SelectCardActions = ({ id, position }) => {
   // Prep save action
   const onSave = () => {
     dispatch(sendSnowplowEvent('get-started.article.save', data))
-    dispatch(saveArticle(saveUrl))
+    dispatch(saveArticle(saveUrl, id))
   }
 
   return item ? (

@@ -128,7 +128,7 @@ export const SelectTopics = ({ metaData }) => {
             ))}
           </div>
           <footer className="page-footer">
-            <Button className="button" variant="inline" onClick={handleSkip}>
+            <Button className="button skip" variant="inline" onClick={handleSkip}>
               Skip
             </Button>
             <Button disabled={!topicsSelected} className="button" onClick={handleContinue}>
