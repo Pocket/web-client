@@ -25,7 +25,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     const homeLink = queryString.stringifyUrl({ url: '/home', query })
     const getStartedLink = queryString.stringifyUrl({ url: '/get-started', query })
 
-    if (isSignUp && nonEnglish) {
+    if (isSignUp && !nonEnglish) {
       return {
         redirect: {
           permanent: false,
