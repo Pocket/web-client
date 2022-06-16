@@ -1,63 +1,44 @@
 import { gql } from 'graphql-request'
-import { requestSyndicated } from 'common/utilities/request/request'
+import { requestGQL } from 'common/utilities/request/request'
 
 const getSyndicatedArticleQuery = gql`
-  query GetSyndicatedArticle($slug: String) {
-    getArticleBySlug(slug: $slug) {
-      items {
-        id
-        legacyId
-        originalItemId
-        itemId
-        status
-        slug
-        showAds
-        publisherUrl
-        authorNames
-        expiresAt
-        contentId
-        localeLanguage
-        localeCountry
-        title
-        excerpt
-        publishedAt
-        publisherId
-        mainImage
-        iabTopCategory
-        iabSubCategory
-        curationCategory
-        content {
-          content
-        }
-        publisher {
-          id
-          legacyId
-          name
-          recommendationName
+  query GetSyndicatedArticle($slug: String!) {
+    syndicatedArticleBySlug(slug: $slug) {
+      content
+      authorNames
+      topic
+      excerpt
+      expiresAt
+      iabSubCategory
+      iabTopCategory
+      itemId
+      localeCountry
+      localeLanguage
+      mainImage
+      originalItemId
+      publishedAt
+      publisherUrl
+      publisher {
+        name
+        recommendationName
+        url
+        showAuthors
+        attributeCanonicalToPublisher
+        showArticleCta
+        appearedOnDomain
+        logo
+        logoWide
+        logoWideBlack
+        articleCta {
           url
-          showAuthors
-          attributeCanonicalToPublisher
-          showArticleCta
-          appearedOnDomain
-          logo {
-            name
-            url
-          }
-          logoWide {
-            name
-            url
-          }
-          logoWideBlack {
-            name
-            url
-          }
-          articleCta {
-            url
-            text
-            leadIn
-          }
+          text
+          leadIn
         }
       }
+      showAds
+      slug
+      status
+      title
     }
   }
 `
@@ -68,7 +49,7 @@ const getSyndicatedArticleQuery = gql`
 export async function getSyndicatedArticle(slug) {
   const variables = { slug }
 
-  return requestSyndicated({ query: getSyndicatedArticleQuery, variables })
-    .then((response) => response?.data?.getArticleBySlug)
+  return requestGQL({ query: getSyndicatedArticleQuery, variables })
+    .then((response) => response?.data?.syndicatedArticleBySlug)
     .catch((error) => console.error(error))
 }

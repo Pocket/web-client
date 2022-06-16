@@ -17,7 +17,7 @@ export function ActionsTopicRec({ id, position }) {
 
   // Prep save action
   const onSave = () => {
-    dispatch(sendSnowplowEvent('home.lineup.save', analyticsData))
+    dispatch(sendSnowplowEvent('home.topic-rec.save', analyticsData))
     dispatch(saveHomeItem(id, saveUrl, position))
   }
 
@@ -25,7 +25,7 @@ export function ActionsTopicRec({ id, position }) {
   const url = readUrl && !openExternal ? readUrl : externalUrl
   const onOpen = () => {
     const destination = saveStatus === 'saved' && !openExternal ? 'internal' : 'external'
-    dispatch(sendSnowplowEvent('home.lineup.open', { destination, ...analyticsData }))
+    dispatch(sendSnowplowEvent('home.topic-rec.open', { destination, ...analyticsData }))
   }
 
   return item ? (

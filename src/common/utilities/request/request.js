@@ -2,7 +2,6 @@ import queryString from 'query-string'
 import { CONSUMER_KEY } from 'common/constants'
 import { GRAPHQL_URL } from 'common/constants'
 import { API_URL } from 'common/constants'
-import { ARTICLE_API_URL, ARTICLE_API_KEY } from 'common/constants'
 /**
  * @param {Object} requestInfo Information about the request
  * @param {Object={}} requestInfo.params Additional params to pass through
@@ -132,17 +131,4 @@ export const requestGQL = (data) => {
     clientInfo,
     body: JSON.stringify(data)
   })
-}
-
-export const requestSyndicated = (data) => {
-  const body = JSON.stringify(data)
-
-  return fetch(ARTICLE_API_URL, {
-    method: 'POST',
-    headers: { 'x-api-key': ARTICLE_API_KEY },
-    body
-  })
-    .then((response) => handleErrors(response))
-    .then((response) => response.json())
-    .catch((error) => error)
 }
