@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, Trans } from 'next-i18next'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
+import { getUserTags } from 'containers/my-list/tags-page/tags-page.state'
 import { mutationTagConfirm } from 'connectors/items/mutation-tagging.state'
 import { mutationTagCancel } from 'connectors/items/mutation-tagging.state'
 import { mutationTagAdd } from 'connectors/items/mutation-tagging.state'
@@ -35,7 +36,8 @@ export function MutationTaggingModal() {
   const needsSaving = useSelector((state) => state.mutationTagging.needsSaving)
   const tagSuggestions = useSelector((state) => state.mutationTagging.tagSuggestions)
   const tagSuggestionStatus = useSelector((state) => state.mutationTagging.tagSuggestionStatus)
-  const allTags = ['floofs'] //!NOTE we need to get all tags into the users list and reconcile them
+  const tagsSince = useSelector((state) => state.userTags.since)
+  const allTags = useSelector((state) => state.userTags.tagsList)
 
   const showModal = itemsToTag?.length > 0
   const isSingleTag = itemsToTag.length === 1
@@ -101,6 +103,11 @@ export function MutationTaggingModal() {
       dispatch(mutationTagGetSuggestions(itemsToTag[0]))
     }
   }, [itemsToTag, isPremium, dispatch])
+
+  useEffect(() => {
+    if (tagsSince) return
+    dispatch(getUserTags())
+  }, [dispatch, tagsSince])
 
   return (
     <Modal
