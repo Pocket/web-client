@@ -12,7 +12,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     const lang = req.headers['accept-language'].toString().substring(0, 2)
     const supportedLocale = locales.includes(lang)
     const langPrefix = lang !== defaultLocale && supportedLocale ? `/${lang}` : ''
-    const isSignUp = false // query['type'] === 'signup'
+    const isSignUp = query['type'] === 'signup'
 
     // query parameters returned after auth that are currently not used.
     // remove from the list of query parameters
