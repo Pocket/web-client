@@ -5,18 +5,9 @@ const publisher = {
     url: 'http://theverge.com/?utm_source=pocket',
     showAuthors: true,
     useDomainOnrelatedItems: false,
-    logo: {
-      url:
-        'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/verge.jpg'
-    },
-    logoWideBlack: {
-      url:
-        'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5ce5c763e1808.png'
-    },
-    logoWide: {
-      url:
-        'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5cbe36a3bdf4d.png'
-    },
+    logo: 'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/verge.jpg',
+    logoWideBlack: 'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5ce5c763e1808.png',
+    logoWide: 'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5cbe36a3bdf4d.png',
     domains: ['theverge.com', 'somethingelse.com'],
     articleCta: null
   },
@@ -27,10 +18,7 @@ const publisher = {
     url: 'http://jamesclear.com/?utm_source=pocket',
     showAuthors: false,
     useDomainOnrelatedItems: false,
-    logo: {
-      url:
-        'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/jamesclear.jpg'
-    },
+    logo: 'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/jamesclear.jpg',
     logoWide: null,
     logoWideBlack: null,
     domains: ['jamesclear.com'],
@@ -53,18 +41,9 @@ const publisher = {
     name: 'The Atlantic',
     recommendationName: 'The Atlantic',
     url: 'http://theatlantic.com/?utm_source=pocket',
-    logo: {
-      url:
-        'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/theatlantic.jpg'
-    },
-    logoWide: {
-      url:
-        'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5dcc1c19d9cba.png'
-    },
-    logoWideBlack: {
-      url:
-        'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5cdc881b3f7fb.png'
-    },
+    logo: 'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/theatlantic.jpg',
+    logoWide: 'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5dcc1c19d9cba.png',
+    logoWideBlack: 'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5cdc881b3f7fb.png',
     showAuthors: true,
     domains: ['theatlantic.com'],
     attributeCanonicalToPublisher: false,
@@ -79,24 +58,14 @@ const publisher = {
     name: 'Kiplinger',
     recommendationName: 'Kiplinger',
     url: 'https://www.kiplinger.com/',
-    logo: {
-      url:
-        'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5cddb9d622b0f.png'
-    },
-    logoWide: {
-      url:
-        'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5cdf07c8991e1.png'
-    },
-    logoWideBlack: {
-      url:
-        'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5ce5ca607c9f7.png'
-    },
+    logo: 'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5cddb9d622b0f.png',
+    logoWide: 'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5cdf07c8991e1.png',
+    logoWideBlack: 'https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5ce5ca607c9f7.png',
     showAuthors: true,
     domains: ['kiplinger.com'],
     attributeCanonicalToPublisher: true,
     articleCta: {
-      url:
-        'https://www.kiplinger.com/generic/retirement/T063-C000-S001-sign-up-for-kiplinger-today-free.html?source=pocket',
+      url: 'https://www.kiplinger.com/generic/retirement/T063-C000-S001-sign-up-for-kiplinger-today-free.html?source=pocket',
       leadIn: 'Want advice on creating a more profitable future?',
       text: 'Get the Kiplinger Today newsletter'
     }

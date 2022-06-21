@@ -259,6 +259,56 @@ export const homeActions = {
       'description'
     ]
   },
+  'home.topic-rec.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'id',
+      'url',
+      'position'
+    ]
+  },
+  'home.topic-rec.view-original': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'id',
+      'url',
+      'position'
+    ]
+  },
+  'home.topic-rec.impression': {
+    eventType: 'impression',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: [
+      'id',
+      'url',
+      'position'
+    ]
+  },
+  'home.topic-rec.save': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      engagementType: 'save',
+      uiType: 'button'
+    },
+    expects: [
+      'id',
+      'url',
+      'position'
+    ]
+  },
   'home.bestof.impression': {
     eventType: 'impression',
     entityTypes: ['ui'],

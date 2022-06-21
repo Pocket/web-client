@@ -36,6 +36,7 @@ export const Home = ({ metaData }) => {
   const featureState = useSelector((state) => state.features) || {}
   const generalSlates = useSelector((state) => state.home.generalSlates)
   const topicSlates = useSelector((state) => state.home.topicSlates)
+  const recsByTopic = useSelector((state) => state.home.recsByTopic) || []
 
   const fallback = '249850f0-61c0-46f9-a16a-f0553c222800'
 
@@ -43,6 +44,7 @@ export const Home = ({ metaData }) => {
   const lineupId = lineupFlag?.payload?.slateLineupId || fallback
 
   const inGetStartedTest = featureFlagActive({ flag: 'getstarted', featureState })
+  const renderLineup = inGetStartedTest ? recsByTopic.length : true
 
   useEffect(() => {
     if (userStatus !== 'valid' || !lineupFlag) return
@@ -65,13 +67,13 @@ export const Home = ({ metaData }) => {
 
       {inGetStartedTest ? <HomeRecsByTopic /> : null}
 
-      {generalSlates?.map((slateId, index) => (
+      {renderLineup ? generalSlates?.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />
-      ))}
+      )) : null}
 
-      {topicSlates?.map((slateId, index) => (
+      {renderLineup ? topicSlates?.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
-      ))}
+      )) : null}
 
       <DeleteModal />
       <TaggingModal />

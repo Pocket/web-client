@@ -64,7 +64,7 @@ export const SaveConfirm = () => {
   const showModal = !!savedArticleId
 
   const goToReader = () => router.push(`/read/${savedArticleId}?getStarted=true`)
-  return savedArticleId ? <SaveConfirmModal showModal={showModal} goToReader={goToReader} /> : null
+  return <SaveConfirmModal showModal={showModal} goToReader={goToReader} />
 }
 
 export const SaveConfirmModal = ({ showModal, goToReader }) => {

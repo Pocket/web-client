@@ -1,3 +1,52 @@
+## [1.50.1](https://github.com/Pocket/web-client/compare/v1.50.0...v1.50.1) (2022-06-16)
+
+
+### Bug Fixes
+
+* **waypoint:** direct non english users to my list ([20f62ff](https://github.com/Pocket/web-client/commit/20f62ffcce4c3fe3fdc59b7040fedd819e14ad81))
+* **waypoint:** should only go to get-started if not english ([697f3d6](https://github.com/Pocket/web-client/commit/697f3d606be32cb9030b20b8ea4fbccaa48c3edd))
+
+# [1.50.0](https://github.com/Pocket/web-client/compare/v1.49.18...v1.50.0) (2022-06-16)
+
+
+### Features
+
+* **get-started:** send new users to /get-started on sign up ([51bf6a2](https://github.com/Pocket/web-client/commit/51bf6a293bf7e2a16ffe9a8d22ac46b68c17732f))
+
+## [1.49.18](https://github.com/Pocket/web-client/compare/v1.49.17...v1.49.18) (2022-06-16)
+
+
+### Bug Fixes
+
+* **home:** add snowplow events for topic rec cards ([bf50e93](https://github.com/Pocket/web-client/commit/bf50e93eaa79d105562c5c4d7b0d8d720c2dd594))
+
+## [1.49.17](https://github.com/Pocket/web-client/compare/v1.49.16...v1.49.17) (2022-06-16)
+
+
+### Bug Fixes
+
+* **names:** fixing a few response names ([4287f9e](https://github.com/Pocket/web-client/commit/4287f9e7ddd0d6a61af3286601b24f27d553ac5c))
+* **name:** updating collection query name ([0556ead](https://github.com/Pocket/web-client/commit/0556ead721528be0da6a5e156f1db794554491d2))
+* **publisher:** updating the uses of logos to the new format ([fea0149](https://github.com/Pocket/web-client/commit/fea0149ee1147bba2ed520820b0e8e0646b08c42))
+* **syndicated article:** adjusting consumption ([59095df](https://github.com/Pocket/web-client/commit/59095dfaef537931fdc7abfb27379c92b7b9334f))
+* **syndicated:** shape for publisher/authors ([4a41f98](https://github.com/Pocket/web-client/commit/4a41f98b6e10e97ad82c246317083ab74c745cfe))
+* **syndication:** switching to pocket graph for syndication ([6ea05d4](https://github.com/Pocket/web-client/commit/6ea05d40d3ece1afd393f29829d62e49c218f84b))
+* **unleash:** switching to unleashAssignments ([3202486](https://github.com/Pocket/web-client/commit/32024868871931e20305a461aa38ffe7c94c7aa4))
+
+## [1.49.16](https://github.com/Pocket/web-client/compare/v1.49.15...v1.49.16) (2022-06-15)
+
+
+### Bug Fixes
+
+* **get-started:** fix save confirm modal to prevent scroll lock ([96790b4](https://github.com/Pocket/web-client/commit/96790b4c5edee5a74f2e0f1500920bc000fbe1e6))
+
+## [1.49.15](https://github.com/Pocket/web-client/compare/v1.49.14...v1.49.15) (2022-06-15)
+
+
+### Bug Fixes
+
+* **get-started:** deleting an article will remove reader from browser history ([790e07c](https://github.com/Pocket/web-client/commit/790e07c18ef8e5d9d4fc752971564fe4a9663708))
+
 ## [1.49.14](https://github.com/Pocket/web-client/compare/v1.49.13...v1.49.14) (2022-06-15)
 
 

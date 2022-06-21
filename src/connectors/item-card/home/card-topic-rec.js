@@ -34,10 +34,10 @@ export const CardTopicRec = ({
    */
   const onOpenOriginalUrl = () => {
     const openData = { ...data, destination: 'external' }
-    dispatch(sendSnowplowEvent('home.lineup.view-original', openData))
+    dispatch(sendSnowplowEvent('home.topic-rec.view-original', openData))
   }
-  const onOpen = () => dispatch(sendSnowplowEvent('home.lineup.open', data))
-  const onImpression = () => dispatch(sendSnowplowEvent('home.lineup.impression', data))
+  const onOpen = () => dispatch(sendSnowplowEvent('home.topic-rec.open', data))
+  const onImpression = () => dispatch(sendSnowplowEvent('home.topic-rec.impression', data))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
 
   /** ITEM DETAILS

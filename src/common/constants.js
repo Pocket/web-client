@@ -7,8 +7,6 @@ export const LOGIN_URL = 'https://getpocket.com/login'
 export const SIGNUP_URL = 'https://getpocket.com/signup'
 export const PREMIUM_URL = 'https://getpocket.com/premium?utm_source=web-app-premium-cta'
 export const GRAPHQL_URL = 'https://getpocket.com'
-export const ARTICLE_API_URL = 'https://tz7snrninbak3oh36gjshbmdia.appsync-api.us-east-1.amazonaws.com/graphql' // ARTICLE_API_KEY is a secret and needs to be stored as such
-export const ARTICLE_API_KEY = 'da2-shleiiw7qzcnlkjwg3v7rfkpte' // Currently set to expire Thu, 04 Mar 2021 16:00:00 GMT
 export const READING_WPM = 220
 export const BATCH_SIZE = 30
 export const COLOR_MODE_PREFIX = 'colormode'

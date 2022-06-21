@@ -70,7 +70,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     slug,
     iabTopCategory,
     iabSubCategory,
-    curationCategory,
+    topic,
     legacyId,
     showAds
   } = articleData || {}
@@ -117,6 +117,8 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     dispatch(sendSnowplowEvent(`syndicated.share.${platform}`, analyticsData))
   }
 
+  const showAuthors = authorNames?.length > 0
+
   return (
     <>
       <ArticleLayout
@@ -131,7 +133,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
               allowAds={allowAds}
               iabTopCategory={iabTopCategory}
               iabSubCategory={iabSubCategory}
-              curationCategory={curationCategory}
+              curationCategory={topic}
               legacyId={legacyId}
             />
           </section>
@@ -144,7 +146,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
                 <AuthorByline
                   url={publisher?.url}
                   name={publisher?.name}
-                  showAuthors={publisher?.showAuthors}
+                  showAuthors={showAuthors}
                   authorNames={authorNames}
                 />
               ) : null}
@@ -182,7 +184,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
                 adsReady={adsReady}
                 iabTopCategory={iabTopCategory}
                 iabSubCategory={iabSubCategory}
-                curationCategory={curationCategory}
+                curationCategory={topic}
                 legacyId={legacyId}
               />
               <PublisherRecs itemId={originalItemId} publisher={publisher} legacyId={legacyId} />
@@ -192,7 +194,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
             <div className="content-body">
               {/* Parsed Content */}
               <ContentParsed
-                content={content?.content}
+                content={content}
                 trackScrollDepth={trackScrollDepth}
                 isMobileWebView={isMobileWebView}
               />
@@ -222,7 +224,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
               adsReady={adsReady}
               iabTopCategory={iabTopCategory}
               iabSubCategory={iabSubCategory}
-              curationCategory={curationCategory}
+              curationCategory={topic}
               legacyId={legacyId}
             />
           </section>

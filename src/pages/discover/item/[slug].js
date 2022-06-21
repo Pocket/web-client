@@ -23,18 +23,18 @@ export const getServerSideProps = wrapper.getServerSideProps(
       const response = await fetchHydrationData({ slug, baseUrl })
 
       // No article found
-      if (!response || response?.items?.length === 0) {
+      if (!response || !response?.content) {
         return { props: defaultProps, notFound: true }
       }
 
       if (response.items?.[0]?.status === 'EXPIRED') {
-        res.writeHead(301, { Location: response.items[0].publisherUrl })
+        res.writeHead(301, { Location: response.publisherUrl })
         res.end()
       }
 
       // Since ssr will not wait for side effects to resolve this dispatch
       // needs to be pure as well.
-      dispatch(hydrateArticle({ articleData: response?.items[0] }))
+      dispatch(hydrateArticle({ articleData: response }))
 
       // end the saga
       dispatch(END)
