@@ -1,3 +1,17 @@
+## [1.51.2](https://github.com/Pocket/web-client/compare/v1.51.1...v1.51.2) (2022-06-22)
+
+
+### Bug Fixes
+
+* **localizations:** bump web-localization ([b7f3927](https://github.com/Pocket/web-client/commit/b7f3927f8f0944b14f0b4c250a6a35ef46a13d5f))
+
+## [1.51.1](https://github.com/Pocket/web-client/compare/v1.51.0...v1.51.1) (2022-06-22)
+
+
+### Bug Fixes
+
+* **home:** content should load with or without selected topics ([b99655a](https://github.com/Pocket/web-client/commit/b99655aebeb2d93b35ac48e94fedaa6f7c83d93f))
+
 # [1.51.0](https://github.com/Pocket/web-client/compare/v1.50.1...v1.51.0) (2022-06-21)
 
 
