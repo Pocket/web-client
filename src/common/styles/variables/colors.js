@@ -7,10 +7,14 @@
  * These are used to generate CSS variables, linting, and hinting
  * !! These are not for direct use
  */
-export const _colorPalette = {
-  white100: '#FFFFFF',
-  cream100: '#FFFCF7',
 
+export const _colorGroups = {
+  grey: ['grey', 'white'],
+  sepia: ['sepia', 'cream'],
+  teal: ['teal']
+}
+
+export const _colorPalette = {
   grey10: '#1A1A1A',
   grey20: '#333333',
   grey25: '#404040',
@@ -23,6 +27,7 @@ export const _colorPalette = {
   grey80: '#CCCCCC',
   grey85: '#D9D9D9',
   grey95: '#F2F2F2',
+  white100: '#FFFFFF',
 
   sepia10: '#191917',
   sepia20: '#33312E',
@@ -35,6 +40,7 @@ export const _colorPalette = {
   sepia90: '#E5DECF',
   sepia96: '#F5EDDD',
   sepia100: '#FFF7E6',
+  cream100: '#FFFCF7',
 
   teal25: '#00403C',
   teal30: '#004D48',
@@ -57,6 +63,12 @@ export const _colorPalette = {
   coral: '#EF4056',
   coralLight: '#F9BFD1',
   coralLightest: '#FDF2F5',
+
+  tealDarker: '#004D48',
+  tealDark: '#008078',
+  teal: '#009990',
+  tealLight: '#95D5D2',
+  tealLightest: '#E8f7f6',
 
   amberDarker: '#B24000',
   amberDark: '#E55300',

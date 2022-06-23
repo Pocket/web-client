@@ -19,7 +19,7 @@ export const Semantic = (Story, context) => {
 }
 
 const colorDisplay = css`
-  padding: 0 3rem;
+  padding: 0 2rem;
   font-family: var(--fontSansSerif);
   .colorBlock {
     display: flex;
@@ -33,9 +33,11 @@ const colorDisplay = css`
   }
   .color {
     position: relative;
-    padding: 2rem;
-    margin: 1em;
+    padding: 1rem 2rem;
+    margin: 0.5rem;
     border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     &:hover {
       cursor: pointer;
       outline: solid var(--color-calloutAccent);

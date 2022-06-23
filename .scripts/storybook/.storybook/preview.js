@@ -91,6 +91,15 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/
     }
+  },
+  options: {
+    storySort: (a, b) => {
+      if (/^ui-/.test(a[1].id)) return false
+      if (/^ui-/.test(b[1].id)) return true
+      return a[1].kind === b[1].kind
+        ? 0
+        : a[1].id.localeCompare(b[1].id, undefined, { numeric: true })
+    }
   }
 }
 
