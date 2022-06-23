@@ -34,7 +34,27 @@ function compileIcons() {
       return console.error(error)
     }
 
-    processSvgs(() => {})
+    processSvgs(buildStory)
+  })
+}
+
+function buildImport(component) {
+  return `import { ${component.componentName}Icon } from './${component.componentName}Icon.js'`
+}
+
+function buildStory(imports) {
+  const importStatements = imports.map(buildImport).join('\n')
+  const componentsArray = imports.map((component) => `${component.componentName}Icon`).join(',')
+
+  fs.readFile(`${SVG_INPUT_DIR}/_icons.story.js`, 'utf8', function (err, data) {
+    if (err) return console.log(err)
+
+    const importResults = data.replace(/\/\*ICONS_IMPORTS\*\//g, importStatements)
+    const result = importResults.replace(/\/\*ICONS_ARRAY\*\//g, componentsArray)
+
+    fs.writeFile(`${JS_OUTPUT_DIR}/_icons.story.js`, result, 'utf8', function (err) {
+      if (err) return console.log(err)
+    })
   })
 }
 
@@ -87,7 +107,7 @@ const processSvgs = async function (onSuccess) {
 
       // if we've reached the last file - each file is processed by svgo
       // asynchronously, so we check if this is the last to complete, then wrap up
-      if (imports.length === originalsSvgs.length) onSuccess()
+      if (imports.length === originalsSvgs.length) onSuccess(imports)
     })
     progressBar.increment()
   })
