@@ -2,6 +2,8 @@ import ReactMarkdown from 'react-markdown'
 import { getImageCacheUrl } from 'common/utilities'
 import { css } from 'linaria'
 import { breakpointLargeHandset } from 'common/constants'
+import PropTypes from 'prop-types'
+
 const authorBioStyle = css`
   display: flex;
   justify-content: space-between;
@@ -57,4 +59,19 @@ export function AuthorBio({ name, bio, imageUrl }) {
       </div>
     </cite>
   ) : null
+}
+
+AuthorBio.propTypes = {
+  /**
+   * Name of the author to display as the header
+   */
+  name: PropTypes.string,
+  /**
+   * Biographical details about the author
+   */
+  bio: PropTypes.string,
+  /**
+   * Optional image to include along side the biogrpahical details
+   */
+  imageUrl: PropTypes.string
 }

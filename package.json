@@ -21,7 +21,7 @@
     "test": "npm run compile:icons && jest --reporters='default'",
     "test:ci": "npm run compile:icons && jest --ci",
     "test:snowplow": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included TEST_SNOWPLOW=included node ./server.local.js",
-    "storybook": "start-storybook -p 9009 -s ./public -h localhost.web-client.getpocket.com",
+    "storybook": "cd .scripts/storybook && npm run storybook",
     "storybook:build": "build-storybook",
     "compile:icons": "node ./.scripts/icons/compile-icons.js",
     "locale:inject": "node ./.scripts/localization/locale-inject",

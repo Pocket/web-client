@@ -24,7 +24,7 @@ const premiumStyle = css`
   }
 `
 
-export const Premium = ({ isPremium, onPremiumImpression }) => {
+export const Premium = ({ isPremium, onPremiumImpression = () => {} }) => {
   const { t } = useTranslation()
 
   // Fire when item is in view

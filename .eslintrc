@@ -52,5 +52,15 @@
       "error",
       "never"
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.story.js"
+      ],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ]
 }

@@ -4,7 +4,6 @@ import { cx } from 'linaria'
 import { SyndicatedIcon } from 'components/icons/SyndicatedIcon'
 
 import { CardMedia } from 'components/items-media/card-media'
-import { FeatureFlag } from 'connectors/feature-flags/feature-flags'
 import { ItemTags } from 'components/item-tags/item-tags'
 import { PartnerOverline } from 'components/content-partner/partner'
 import { cardStyles } from './card-base'
@@ -148,10 +147,6 @@ export const Card = (props) => {
       data-cy={`article-card-${itemId}`}
       onClick={selectBulk}>
       <div className="selectedBack" />
-
-      <FeatureFlag flag="item_id_overlay" dev={true}>
-        <span className="idOverlay">{itemId}</span>
-      </FeatureFlag>
 
       <div className="cardWrap" ref={viewRef}>
         {showMedia ? (
