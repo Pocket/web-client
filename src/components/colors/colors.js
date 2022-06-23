@@ -1,0 +1,368 @@
+/** COLOR PALETTE
+ ---------------------------------------------------------------------------- */
+/**
+ * Prefer mapping to semantic names when using but allow these for
+ * one off colors over including hex codes directly.
+ *
+ * These are used to generate CSS variables, linting, and hinting
+ * !! These are not for direct use
+ */
+export const _colorPalette = {
+  white100: '#FFFFFF',
+  cream100: '#FFFCF7',
+
+  grey10: '#1A1A1A',
+  grey20: '#333333',
+  grey25: '#404040',
+  grey30: '#4D4D4D',
+  grey35: '#595959',
+  grey40: '#666666',
+  grey45: '#737373',
+  grey55: '#8C8C8C',
+  grey65: '#A6A6A6',
+  grey80: '#CCCCCC',
+  grey85: '#D9D9D9',
+  grey95: '#F2F2F2',
+
+  sepia10: '#191917',
+  sepia20: '#33312E',
+  sepia25: '#403E3A',
+  sepia40: '#66635C',
+  sepia45: '#736F68',
+  sepia55: '#8C877E',
+  sepia65: '#A6A095',
+  sepia80: '#CCC5B8',
+  sepia90: '#E5DECF',
+  sepia96: '#F5EDDD',
+  sepia100: '#FFF7E6',
+
+  teal25: '#00403C',
+  teal30: '#004D48',
+  teal45: '#00736C',
+  teal50: '#008078',
+  teal60: '#009990',
+  teal65: '#00A69C',
+  teal70: '#00B2A8',
+  teal75: '#00BFB4',
+  teal80: '#00CCC0',
+  teal85: '#00D9CC',
+  teal100: '#E8F7F6',
+
+  tealLightestFill: '#E0F0EF',
+  tealLightestFillSepia: '#D8DECF',
+  tealLightestFillDark: '#274F4C',
+
+  coralDarker: '#6C000E',
+  coralDark: '#901424',
+  coral: '#EF4056',
+  coralLight: '#F9BFD1',
+  coralLightest: '#FDF2F5',
+
+  amberDarker: '#B24000',
+  amberDark: '#E55300',
+  amber: '#FCB643',
+  amberLight: '#FFD25E',
+  amberLightest: '#FFFBE3',
+
+  mintDarker: '#0B6639',
+  mintDark: '#29A668',
+  mint: '#00CB77',
+  mintLight: '#82ECB7',
+  mintLightest: '#C6FFE3',
+
+  lapisDarker: '#00256D',
+  lapisDark: '#1649AC',
+  lapis: '#3668FF',
+  lapisLight: '#95D2FF',
+  lapisLightest: '#DCEAFF',
+
+  apricotDarker: '#9F2600',
+  apricotDark: '#D23807',
+  apricot: '#F67D6D',
+  apricotLight: '#FEB69F',
+  apricotLightest: '#FDF0EC',
+
+  irisDarker: '#802AC3',
+  irisDark: '#9971EF',
+  iris: '#C4A5F7',
+  irisLight: '#DAB5FF',
+  irisLightest: '#F2DEFF',
+
+  // Social
+  brandPocket: '#EF4056',
+  brandFacebook: '#3B5998',
+  brandTwitter: '#00ACED',
+  brandReddit: '#FF4500',
+  brandLinkedin: '#007BB6'
+}
+
+/** SEMANTIC COLORS & THEMEING
+ ---------------------------------------------------------------------------- */
+/**
+ * These are used to generate CSS variables, linting, and hinting
+ * !! These are not for direct use
+ */
+export const _colorModes = {
+  canvas: {
+    light: _colorPalette.white100,
+    dark: _colorPalette.grey10,
+    sepia: _colorPalette.sepia96
+  },
+
+  /**
+   * General Colors
+   */
+  textPrimary: {
+    light: _colorPalette.grey10,
+    dark: _colorPalette.grey95,
+    sepia: _colorPalette.sepia10
+  },
+  textSecondary: {
+    light: _colorPalette.grey40,
+    dark: _colorPalette.grey55,
+    sepia: _colorPalette.sepia40
+  },
+  textTertiary: {
+    light: _colorPalette.grey55,
+    dark: _colorPalette.grey45,
+    sepia: _colorPalette.sepia55
+  },
+  textLinkHover: {
+    // color specifically for text links, in particular so that the dark theme text is readable
+    light: _colorPalette.teal50,
+    dark: _colorPalette.teal65,
+    sepia: _colorPalette.teal45
+  },
+  textLinkPressed: {
+    light: _colorPalette.teal30,
+    dark: _colorPalette.teal85,
+    sepia: _colorPalette.teal25
+  },
+  textAccent: {
+    // requested by marketing
+    light: _colorPalette.lapis,
+    dark: _colorPalette.lapisLight,
+    sepia: _colorPalette.lapisDark
+  },
+
+  /**
+   * Action Colors (general interactive elements - buttons, links, etc)
+   */
+  actionPrimary: {
+    light: _colorPalette.teal50,
+    dark: _colorPalette.teal50,
+    sepia: _colorPalette.teal45
+  },
+  actionPrimaryHover: {
+    light: _colorPalette.teal30,
+    dark: _colorPalette.teal30,
+    sepia: _colorPalette.teal25
+  },
+  actionPrimarySubdued: {
+    light: _colorPalette.teal100,
+    sepia: _colorPalette.teal100,
+    dark: _colorPalette.teal25
+  },
+  actionPrimaryText: {
+    // (text that overlays the action color)
+    light: _colorPalette.white100,
+    dark: _colorPalette.white100,
+    sepia: _colorPalette.white100
+  },
+  actionSecondary: {
+    light: _colorPalette.grey10,
+    dark: _colorPalette.grey95,
+    sepia: _colorPalette.sepia10
+  },
+  actionSecondaryHover: {
+    light: _colorPalette.grey10,
+    dark: _colorPalette.grey95,
+    sepia: _colorPalette.sepia10
+  },
+  actionSecondaryHoverText: {
+    light: _colorPalette.grey95,
+    dark: _colorPalette.grey10,
+    sepia: _colorPalette.cream100
+  },
+  actionSecondaryText: {
+    // (text that overlays the action color)
+    light: _colorPalette.grey10,
+    dark: _colorPalette.grey95,
+    sepia: _colorPalette.sepia10
+  },
+  actionBrand: {
+    light: _colorPalette.coral,
+    dark: _colorPalette.coral,
+    sepia: _colorPalette.coral
+  },
+  actionBrandHover: {
+    light: _colorPalette.coralDark,
+    dark: _colorPalette.coralDark,
+    sepia: _colorPalette.coralDark
+  },
+  actionBrandSubdued: {
+    light: _colorPalette.coralLightest,
+    sepia: _colorPalette.coralLightest,
+    dark: _colorPalette.coralDarker
+  },
+  actionBrandText: {
+    // (text that overlays the action color)
+    light: _colorPalette.white100,
+    dark: _colorPalette.white100,
+    sepia: _colorPalette.white100
+  },
+  actionFocus: {
+    // focus highlighting for an element with focus
+    light: _colorPalette.teal60,
+    dark: _colorPalette.teal80,
+    sepia: _colorPalette.teal60
+  },
+  toggleOff: {
+    light: _colorPalette.grey45,
+    dark: _colorPalette.grey45,
+    sepia: _colorPalette.sepia40
+  },
+  toggleOffHover: {
+    light: _colorPalette.grey25,
+    dark: _colorPalette.grey25,
+    sepia: _colorPalette.sepia25
+  },
+
+  /**
+   * Form Colors
+   */
+  formFieldFocusLabel: {
+    light: _colorPalette.teal50,
+    dark: _colorPalette.teal65,
+    sepia: _colorPalette.teal45
+  },
+  formFieldTextPrimary: {
+    light: _colorPalette.grey10,
+    dark: _colorPalette.grey95,
+    sepia: _colorPalette.sepia10
+  },
+  formFieldTextSecondary: {
+    light: _colorPalette.grey40,
+    dark: _colorPalette.grey55,
+    sepia: _colorPalette.sepia40
+  },
+  formFieldBorder: {
+    light: _colorPalette.grey55,
+    dark: _colorPalette.grey45,
+    sepia: _colorPalette.sepia55
+  },
+  formFieldBorderHover: {
+    light: _colorPalette.grey20,
+    dark: _colorPalette.grey80,
+    sepia: _colorPalette.sepia20
+  },
+
+  error: {
+    light: _colorPalette.amberDarker,
+    dark: _colorPalette.amberDark,
+    sepia: _colorPalette.amberDarker
+  },
+
+  /**
+   * Popover Colors (menus, modals, etc)
+   */
+  popoverCanvas: {
+    light: _colorPalette.white100,
+    dark: _colorPalette.grey20,
+    sepia: _colorPalette.sepia96
+  },
+  popoverBorder: {
+    light: _colorPalette.grey85,
+    dark: _colorPalette.grey35,
+    sepia: _colorPalette.sepia80
+  },
+  menuItemHover: {
+    light: _colorPalette.teal50,
+    dark: _colorPalette.teal50,
+    sepia: _colorPalette.teal45
+  },
+  menuItemHoverText: {
+    light: _colorPalette.white100,
+    dark: _colorPalette.white100,
+    sepia: _colorPalette.cream100
+  },
+  menuItemActive: {
+    light: _colorPalette.teal30,
+    dark: _colorPalette.teal30,
+    sepia: _colorPalette.teal25
+  },
+
+  navCurrentTab: {
+    light: _colorPalette.tealLightestFill,
+    dark: _colorPalette.tealLightestFillDark,
+    sepia: _colorPalette.tealLightestFillSepia
+  },
+  navCurrentTabText: {
+    light: _colorPalette.teal50,
+    dark: _colorPalette.teal80,
+    sepia: _colorPalette.teal45
+  },
+
+  /**
+   * Tooltip Colors
+   */
+  tooltipCanvas: {
+    light: _colorPalette.grey10,
+    dark: _colorPalette.grey95,
+    sepia: _colorPalette.sepia10
+  },
+  tooltipText: {
+    light: _colorPalette.grey95,
+    dark: _colorPalette.grey10,
+    sepia: _colorPalette.grey95
+  },
+
+  /**
+   * Divider Colors
+   */
+  dividerPrimary: {
+    light: _colorPalette.grey20,
+    dark: _colorPalette.grey80,
+    sepia: _colorPalette.sepia20
+  },
+  dividerSecondary: {
+    light: _colorPalette.grey55,
+    dark: _colorPalette.grey45,
+    sepia: _colorPalette.sepia55
+  },
+  dividerTertiary: {
+    light: _colorPalette.grey85,
+    dark: _colorPalette.grey25,
+    sepia: _colorPalette.sepia80
+  },
+
+  /**
+   * Drawer Colors
+   */
+  drawerCanvas: {
+    light: _colorPalette.white100,
+    dark: _colorPalette.grey20,
+    sepia: _colorPalette.sepia96
+  },
+
+  /**
+   * Call Outs
+   */
+  calloutBackgroundPrimary: {
+    light: _colorPalette.teal100,
+    dark: _colorPalette.teal30,
+    sepia: _colorPalette.teal100
+  },
+
+  calloutBackgroundSecondary: {
+    light: _colorPalette.coralLightest,
+    dark: _colorPalette.grey20,
+    sepia: _colorPalette.coralLightest
+  },
+
+  calloutAccent: {
+    light: _colorPalette.grey10,
+    dark: _colorPalette.teal80,
+    sepia: _colorPalette.grey10
+  }
+}
