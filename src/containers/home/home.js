@@ -1,5 +1,6 @@
 import Layout from 'layouts/main'
 import { useEffect } from 'react'
+import { parseCookies } from 'nookies'
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeGreeting } from 'containers/home/home-greeting'
 import { HomeRecentSaves } from 'containers/home/home-recent-saves'
@@ -43,8 +44,12 @@ export const Home = ({ metaData }) => {
   const lineupFlag = featureState['home.lineup']
   const lineupId = lineupFlag?.payload?.slateLineupId || fallback
 
+  const { getStartedUserTopics } = parseCookies()
+  const userTopics = getStartedUserTopics ? JSON.parse(getStartedUserTopics) : []
+
   const inGetStartedTest = featureFlagActive({ flag: 'getstarted', featureState })
-  const renderLineup = inGetStartedTest ? recsByTopic.length : true
+  const shouldRenderTopicMix = inGetStartedTest && userTopics.length
+  const renderLineup = shouldRenderTopicMix ? recsByTopic.length : true
 
   useEffect(() => {
     if (userStatus !== 'valid' || !lineupFlag) return
@@ -65,7 +70,7 @@ export const Home = ({ metaData }) => {
         <HomeRecentSaves />
       </SectionWrapper>
 
-      {inGetStartedTest ? <HomeRecsByTopic /> : null}
+      {shouldRenderTopicMix ? <HomeRecsByTopic /> : null}
 
       {renderLineup ? generalSlates?.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />

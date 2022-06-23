@@ -189,8 +189,9 @@ function* homeSaveRequest({ url, id, position }) {
     const response = yield saveItem(url, analytics)
     if (response?.status !== 1) throw new Error('Unable to save')
 
+    // Manually adding `status: "0"` will derive the readUrl
     const derivedItems = yield Object.values(response.action_results).map((item) =>
-      deriveListItem(item, true)
+      deriveListItem({ ...item, status: "0" }, true)
     )
 
     const items = derivedItems.map((item) => item.resolvedId)
