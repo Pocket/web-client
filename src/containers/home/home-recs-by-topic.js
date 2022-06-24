@@ -16,7 +16,6 @@ export const HomeRecsByTopic = () => {
   const { getStartedUserTopics = [] } = parseCookies()
 
   const hasSelectedTopics = getStartedUserTopics.length
-  const hasRecsByTopic = recsByTopic.length
   const hasTopicsSelectors = topicsSelectors.length
 
   // Set up topic selectors if we are in getStartedActive and don't have them
@@ -27,10 +26,10 @@ export const HomeRecsByTopic = () => {
 
   // If we have topic selectors lets get a topic mix
   useEffect(() => {
-    if (hasRecsByTopic || !hasTopicsSelectors) return
+    if (!hasTopicsSelectors) return
     const topics = topicsSelectors.filter((topic) => getStartedUserTopics.includes(topic.name))
     dispatch(getRecsByTopic(topics))
-  }, [dispatch, hasRecsByTopic, hasTopicsSelectors, topicsSelectors, getStartedUserTopics])
+  }, [dispatch, hasTopicsSelectors, topicsSelectors, getStartedUserTopics])
 
   return recsByTopic.length ? (
     <SectionWrapper>
