@@ -32,12 +32,10 @@ const popoverMenuItem = css`
   }
   &:focus {
     background-color: var(--color-actionPrimarySubdued);
-    color: var(--color-actionPrimaryHover);
     outline: none;
   }
   &:hover {
     background-color: var(--color-actionPrimarySubdued);
-    color: var(--color-actionPrimaryText);
   }
 `
 
