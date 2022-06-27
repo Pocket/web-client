@@ -1,4 +1,4 @@
-import { put, select, takeEvery } from 'redux-saga/effects'
+import { put, call, select, takeEvery } from 'redux-saga/effects'
 import { ITEMS_SAVED_REQUEST } from 'actions'
 import { ITEMS_SAVED_SUCCESS } from 'actions'
 import { ITEMS_UPSERT_SUCCESS } from 'actions'
@@ -14,6 +14,7 @@ import { ITEMS_SAVED_PAGE_SET_FILTERS } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_ORDER } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_BY } from 'actions'
 import { ITEMS_SAVED_SEARCH_REQUEST } from 'actions'
+import { ITEMS_SAVED_TAGGED_REQUEST } from 'actions'
 
 import { ITEM_SAVED_REMOVE_FROM_LIST } from 'actions'
 
@@ -64,10 +65,10 @@ export const getItemsFavorites = (searchTerm, sortOrder) => ({ type: GET_ITEMS_F
 export const getItemsFavoritesUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_FAVORITES_UNREAD, filter: {...FAVORITED, ...UNREAD}, sortBy: 'FAVORITED_AT', searchTerm, sortOrder}) //prettier-ignore
 export const getItemsFavoritesArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_FAVORITES_ARCHIVED, filter: {...FAVORITED, ...ARCHIVED}, sortBy: 'FAVORITED_AT', searchTerm, sortOrder}) //prettier-ignore
 
-export const getItemsAnnotated = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED, filter: { ...ANNOTATATED, ...ALL}, sortBy: 'UPDATED_AT' , searchTerm, sortOrder}) //prettier-ignore
-export const getItemsAnnotatedUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_UNREAD, filter: {...ANNOTATATED, ...UNREAD}, sortBy: 'UPDATED_AT', searchTerm, sortOrder}) //prettier-ignore
-export const getItemsAnnotatedArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_ARCHIVED, filter: {...ANNOTATATED, ...ARCHIVED }, sortBy: 'UPDATED_AT', searchTerm, sortOrder}) //prettier-ignore
-export const getItemsAnnotatedFavorites = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_FAVORITES, filter: {...ANNOTATATED, ...FAVORITED, ...ALL }, sortBy: 'UPDATED_AT', searchTerm, sortOrder}) //prettier-ignore
+export const getItemsAnnotated = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED, filter: { ...ANNOTATATED, ...ALL}, sortBy: 'CREATED_AT' , searchTerm, sortOrder}) //prettier-ignore
+export const getItemsAnnotatedUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_UNREAD, filter: {...ANNOTATATED, ...UNREAD}, sortBy: 'CREATED_AT', searchTerm, sortOrder}) //prettier-ignore
+export const getItemsAnnotatedArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_ARCHIVED, filter: {...ANNOTATATED, ...ARCHIVED }, sortBy: 'CREATED_AT', searchTerm, sortOrder}) //prettier-ignore
+export const getItemsAnnotatedFavorites = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_FAVORITES, filter: {...ANNOTATATED, ...FAVORITED, ...ALL }, sortBy: 'CREATED_AT', searchTerm, sortOrder}) //prettier-ignore
 
 export const getItemsArticles = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ARTICLES, filter: { ...ARTICLE, ...ALL} , searchTerm, sortOrder}) //prettier-ignore
 export const getItemsArticlesUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ARTICLES_UNREAD, filter: { ...ARTICLE, ...UNREAD} , searchTerm, sortOrder}) //prettier-ignore
@@ -79,15 +80,15 @@ export const getItemsVideosUnread = (searchTerm, sortOrder) => ({ type: GET_ITEM
 export const getItemsVideosArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_VIDEOS_ARCHIVED, filter: {...VIDEOS, ...ARCHIVED}, searchTerm, sortOrder}) //prettier-ignore
 export const getItemsVideosFavorites = (searchTerm, sortOrder) => ({ type: GET_ITEMS_VIDEOS_FAVORITES, filter: {...VIDEOS, ...FAVORITED, ...ALL}, searchTerm, sortOrder}) //prettier-ignore
 
-export const getItemsTags = (tagNames, searchTerm, sortOrder) => ({ type: GET_ITEMS_TAGS, filter: {tagNames, ...ALL}, searchTerm, sortOrder}) //prettier-ignore
-export const getItemsTagsUnread = (tagNames, searchTerm, sortOrder) => ({ type: GET_ITEMS_TAGS_UNREAD, filter: {tagNames, ...UNREAD }, searchTerm, sortOrder}) //prettier-ignore
-export const getItemsTagsArchived = (tagNames, searchTerm, sortOrder) => ({ type: GET_ITEMS_TAGS_ARCHIVED, filter: {tagNames, ...ARCHIVED}, searchTerm, sortOrder}) //prettier-ignore
-export const getItemsTagsFavorites = (tagNames, searchTerm, sortOrder) => ({ type: GET_ITEMS_TAGS_FAVORITES, filter: {tagNames, ...FAVORITED, ...ALL}, searchTerm, sortOrder}) //prettier-ignore
+export const getItemsTags = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS, filter: {tagNames, ...ALL}, searchTerm, sortOrder}) //prettier-ignore
+export const getItemsTagsUnread = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS_UNREAD, filter: {tagNames, ...UNREAD }, searchTerm, sortOrder}) //prettier-ignore
+export const getItemsTagsArchived = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS_ARCHIVED, filter: {tagNames, ...ARCHIVED}, searchTerm, sortOrder}) //prettier-ignore
+export const getItemsTagsFavorites = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS_FAVORITES, filter: {tagNames, ...FAVORITED, ...ALL}, searchTerm, sortOrder}) //prettier-ignore
 
-export const searchItems = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS, filter: {...ALL}, searchTerm, sortOrder }) //prettier-ignore
-export const searchItemsUnread = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_UNREAD, filter: {...UNREAD}, searchTerm, sortOrder }) //prettier-ignore
-export const searchItemsArchived = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_ARCHIVED, filter: {...ARCHIVED}, searchTerm, sortOrder }) //prettier-ignore
-export const searchItemsFavorites = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_FAVORITES, filter: {...FAVORITED, ...ALL}, searchTerm, sortOrder }) //prettier-ignore
+export const searchItems = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS, filter: {status: 'UNREAD'}, searchTerm, sortOrder }) //prettier-ignore
+export const searchItemsUnread = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_UNREAD, filter: {status: 'UNREAD'}, searchTerm, sortOrder }) //prettier-ignore
+export const searchItemsArchived = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_ARCHIVED, filter: {status: 'ARCHIVED'}, searchTerm, sortOrder }) //prettier-ignore
+export const searchItemsFavorites = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_FAVORITES, filter: {...FAVORITED, status: 'UNREAD'}, searchTerm, sortOrder }) //prettier-ignore
 
 export const savedItemsSetSortOrder = (sortOrder) => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER, sortOrder}) //prettier-ignore
 export const savedItemsSetSortBy = (sortBy) => ({ type: ITEMS_SAVED_PAGE_SET_SORT_BY, sortBy })
@@ -152,16 +153,20 @@ export const listSavedReducers = (state = [], action) => {
  --------------------------------------------------------------- */
 const initialState = {
   filter: {},
-  sortBy: 'UPDATED_AT',
+  sortBy: 'CREATED_AT',
   sortOrder: 'DESC',
   count: 30,
   error: false
 }
 export const listSavedPageInfoReducers = (state = initialState, action) => {
   switch (action.type) {
+    case ITEMS_SAVED_TAGGED_REQUEST:
+    case ITEMS_SAVED_SEARCH_REQUEST:
     case ITEMS_SAVED_REQUEST: {
       const { filters } = action
-      return { ...state, error: false, loading: true, ...filters }
+      const { sortOrder, sortBy } = filters?.sort || {}
+
+      return { ...state, error: false, loading: true, sortOrder, sortBy, ...filters }
     }
 
     case ITEMS_SAVED_PAGE_SET_FILTERS: {
@@ -181,7 +186,8 @@ export const listSavedPageInfoReducers = (state = initialState, action) => {
     }
 
     case ITEMS_SAVED_PAGE_INFO_SUCCESS: {
-      const { pageInfo, searchTerm } = action
+      const { pageInfo } = action
+      const { searchTerm } = pageInfo
       return { ...state, loading: false, ...pageInfo, searchTerm }
     }
 
@@ -283,15 +289,16 @@ function* reconcileUpsert(action) {
 function* requestItemsWithFilter(action) {
   const { filter, sortBy = 'CREATED_AT', searchTerm } = action
   const { sortOrder, count } = yield select(getSavedPageInfo)
-  const type = searchTerm ? ITEMS_SAVED_SEARCH_REQUEST : ITEMS_SAVED_REQUEST
+  const type = yield call(itemRequestType, searchTerm, filter?.tagNames)
+
   yield put({ type, filters: { filter, sort: { sortOrder, sortBy }, count, searchTerm } })
 }
 
 function* loadMoreItems() {
   try {
-    const { searchTerm, filter, sort, endCursor } = yield select(getSavedPageInfo)
-    const { sortOrder, sortBy } = sort
-    const type = searchTerm ? ITEMS_SAVED_SEARCH_REQUEST : ITEMS_SAVED_REQUEST
+    const { searchTerm, filter, sortOrder, sortBy, endCursor } = yield select(getSavedPageInfo)
+    const type = yield call(itemRequestType, searchTerm, filter?.tagNames)
+
     yield put({
       type,
       filters: {
@@ -317,5 +324,11 @@ function shouldBeFiltered(itemDetails, filter) {
   if (filter?.contentType === 'IS_VIDEO' && item?.hasVideo !== 'IS_VIDEO') return true
   if (filter?.isHighlighted && !node?.isHighlighted) return true
   if (filter?.isFavorite && !node?.isFavorite) return true
-  if (filter?.status && filter?.status !== node?.status) return true
+  if (filter?.statuses && !filter?.statuses.includes(node?.status)) return true
+}
+
+function itemRequestType(searchTerm, tagNames) {
+  if (tagNames?.length) return ITEMS_SAVED_TAGGED_REQUEST
+  if (searchTerm) return ITEMS_SAVED_SEARCH_REQUEST
+  return ITEMS_SAVED_REQUEST
 }

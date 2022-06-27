@@ -3,7 +3,9 @@ import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, Trans } from 'next-i18next'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
+import { getUserTags } from 'containers/my-list/tags-page/tags-page.state'
 import { mutationTagConfirm } from 'connectors/items/mutation-tagging.state'
 import { mutationTagCancel } from 'connectors/items/mutation-tagging.state'
 import { mutationTagAdd } from 'connectors/items/mutation-tagging.state'
@@ -16,6 +18,11 @@ import { TagList } from 'components/tagging/tag.list'
 import { TagInput } from 'components/tagging/tag.input'
 import { TagBox } from 'components/tagging/tag.box'
 
+import { TagSuggestions } from 'components/tagging/tag.suggestions'
+import { TagUpsell } from 'components/tagging/tag.upsell'
+
+import { TypeAhead } from 'components/type-ahead/type-ahead'
+
 export function MutationTaggingModal() {
   const appRootSelector = '#__next'
   const dispatch = useDispatch()
@@ -27,8 +34,13 @@ export function MutationTaggingModal() {
   const currentTags = useSelector((state) => state.mutationTagging.tagNames)
   const activeTags = useSelector((state) => state.mutationTagging.activeTags)
   const needsSaving = useSelector((state) => state.mutationTagging.needsSaving)
+  const tagSuggestions = useSelector((state) => state.mutationTagging.tagSuggestions)
+  const tagSuggestionStatus = useSelector((state) => state.mutationTagging.tagSuggestionStatus)
+  const tagsSince = useSelector((state) => state.userTags.since)
+  const allTags = useSelector((state) => state.userTags.tagsList)
 
   const showModal = itemsToTag?.length > 0
+  const isSingleTag = itemsToTag.length === 1
 
   // State
   const [value, setValue] = useState('') // This is the managed input value
@@ -80,16 +92,22 @@ export function MutationTaggingModal() {
     if (tag) selectTag(tag)
   }
 
+  const handleImpression = (identifier) => dispatch(sendSnowplowEvent(identifier))
+
   const title = currentTags?.length
     ? t('confirm:edit-tags', 'Edit Tags')
     : t('confirm:add-tags', 'Add Tags')
 
   useEffect(() => {
-    // Cutting this one off as it is berry berry slow ... to the point of failure
-    if (itemsToTag.length === 1 && isPremium && 'apples' === 'oranges') {
+    if (itemsToTag.length === 1 && isPremium) {
       dispatch(mutationTagGetSuggestions(itemsToTag[0]))
     }
   }, [itemsToTag, isPremium, dispatch])
+
+  useEffect(() => {
+    if (tagsSince) return
+    dispatch(getUserTags())
+  }, [dispatch, tagsSince])
 
   return (
     <Modal
@@ -129,7 +147,26 @@ export function MutationTaggingModal() {
             // Passed Props
             addTag={handleAdd}
           />
+          {allTags.length > 0 ? (
+            <TypeAhead
+              reFocus={setFocus}
+              setValue={addTag}
+              inputValue={value}
+              textInput={inputReference.current}
+              items={allTags}
+            />
+          ) : null}
         </TagBox>
+        {!isPremium ? <TagUpsell onVisible={handleImpression} /> : null}
+        {isPremium && isSingleTag ? (
+          <TagSuggestions
+            suggestedTags={tagSuggestions}
+            tags={currentTags}
+            addTag={addTag}
+            allTags={allTags}
+            tagSuggestionStatus={tagSuggestionStatus}
+          />
+        ) : null}
       </ModalBody>
       <ModalFooter isSticky={false}>
         <div className="actions">

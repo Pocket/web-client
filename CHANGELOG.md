@@ -1,3 +1,37 @@
+## [1.51.6](https://github.com/Pocket/web-client/compare/v1.51.5...v1.51.6) (2022-06-27)
+
+
+### Bug Fixes
+
+* **global-nav:** adjust icon colors to be compatible with all themes ([09185df](https://github.com/Pocket/web-client/commit/09185dfccc45da504607b6c06618919745ea0910))
+* **item-overflow:** adjust text color on hover to be compatible with all themes ([3a7f6e5](https://github.com/Pocket/web-client/commit/3a7f6e594285b70c827eac7842323e82d45ea68b))
+
+## [1.51.5](https://github.com/Pocket/web-client/compare/v1.51.4...v1.51.5) (2022-06-27)
+
+
+### Bug Fixes
+
+* **account:** adding tree images for different themes ([a2d4af1](https://github.com/Pocket/web-client/commit/a2d4af166d1d41ce1e78509e31f3fea277e39a76))
+
+## [1.51.4](https://github.com/Pocket/web-client/compare/v1.51.3...v1.51.4) (2022-06-23)
+
+
+### Bug Fixes
+
+* **list:** add appropriate spacing ([dc74c46](https://github.com/Pocket/web-client/commit/dc74c46323d2a522dd85c45ab90c6e2cc6e53d91))
+* **list:** adjust search to work with api shape [FRONT-1757] ([721f038](https://github.com/Pocket/web-client/commit/721f038d2b171e6df78433c476e740d9572b18c0))
+* **list:** allow upsert to stand in for un-archive [FRONT-1752] ([599bba2](https://github.com/Pocket/web-client/commit/599bba2fa9f2646ec59a53195e1248074d847c90))
+* **list:** analytics on card actions [FRONT-1772] ([711b7cd](https://github.com/Pocket/web-client/commit/711b7cd6d2146603b739a014eaec710d73f30fca))
+* **list:** archived not filtered [FRONT-1737] ([c255014](https://github.com/Pocket/web-client/commit/c25501418008cf8c1a7c2e8a37cbcd9f0d59e553))
+* **list:** get permanent url properly [FRONT-1755] ([4dcd9c4](https://github.com/Pocket/web-client/commit/4dcd9c4e73ac3b75da16d90e59c0f7314a08be66))
+* **list:** loadmore to basic loader on initial [FRONT-1768] ([b53f160](https://github.com/Pocket/web-client/commit/b53f160666a077a95c128c01bf720c351e44e4f7))
+* **list:** remove shortcut on load [FRONT-1765] ([78fa88c](https://github.com/Pocket/web-client/commit/78fa88c2987e412e38a22f5c6395807bcc7975d6))
+* **list:** tagged list requests [FRONT-1754] ([e6f4806](https://github.com/Pocket/web-client/commit/e6f4806552bacacfa10a2791d239fe22f99c9899))
+* **load more:** avoid blocking pointer actions [FRONT-1751] ([982c4f3](https://github.com/Pocket/web-client/commit/982c4f3854d20d0e09dfa01b17917c7c2dda9b25))
+* **suggested tags:** enable from graph [FRONT-1740] ([d7aa632](https://github.com/Pocket/web-client/commit/d7aa632bbaac6827bb5e89553b4f192b0b91fde8))
+* **tagging:** fetch user tags if they do not exist ([437bba5](https://github.com/Pocket/web-client/commit/437bba53e00e844a8e5a6b6b395d401ddb8e10d0))
+* **tagging:** return status in tag mutations ([39fd1f2](https://github.com/Pocket/web-client/commit/39fd1f2644f6d4039c70389886be87866dbf839e))
+
 ## [1.51.3](https://github.com/Pocket/web-client/compare/v1.51.2...v1.51.3) (2022-06-22)
 
 

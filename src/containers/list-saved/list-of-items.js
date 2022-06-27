@@ -10,6 +10,7 @@ import { css } from 'linaria'
 
 const listSavedStyle = css`
   position: relative;
+  margin-top: 2rem;
 `
 
 const LIST_DIMENSIONS = {

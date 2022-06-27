@@ -80,6 +80,7 @@ const addIconStyle = css`
   transform: translateY(-50%);
   top: 50%;
   margin: 0;
+  color: var(--color-grey40);
 
   ${breakpointMediumHandset} {
     display: none;
