@@ -88,8 +88,13 @@ export const cardStyles = css`
     max-height: 3.858em;
     overflow: hidden;
     text-overflow: ellipsis;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     &.flow {
       max-height: initial;
+      display: block;
     }
   }
 
