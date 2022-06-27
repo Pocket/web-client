@@ -1,3 +1,10 @@
+## [1.51.5](https://github.com/Pocket/web-client/compare/v1.51.4...v1.51.5) (2022-06-27)
+
+
+### Bug Fixes
+
+* **account:** adding tree images for different themes ([a2d4af1](https://github.com/Pocket/web-client/commit/a2d4af166d1d41ce1e78509e31f3fea277e39a76))
+
 ## [1.51.4](https://github.com/Pocket/web-client/compare/v1.51.3...v1.51.4) (2022-06-23)
 
 
