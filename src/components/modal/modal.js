@@ -23,7 +23,7 @@ const modalMobileStyles = `
   bottom: 0;
   top: auto;
   border-radius: 0;
-  max-height: 100vh;
+  max-height: calc(100vh - var(--spacing650));
   max-width: 100%;
   transform-origin: bottom;
 
