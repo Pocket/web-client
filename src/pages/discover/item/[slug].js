@@ -27,7 +27,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         return { props: defaultProps, notFound: true }
       }
 
-      if (response.items?.[0]?.status === 'EXPIRED') {
+      if (response?.status === 'EXPIRED') {
         res.writeHead(301, { Location: response.publisherUrl })
         res.end()
       }
