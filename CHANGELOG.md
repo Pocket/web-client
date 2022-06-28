@@ -1,3 +1,10 @@
+## [1.51.10](https://github.com/Pocket/web-client/compare/v1.51.9...v1.51.10) (2022-06-28)
+
+
+### Bug Fixes
+
+* **syndicated:** forward users when article has expired ([0562186](https://github.com/Pocket/web-client/commit/0562186900ab0c9998e14b4c2296a6df86478f9d))
+
 ## [1.51.9](https://github.com/Pocket/web-client/compare/v1.51.8...v1.51.9) (2022-06-28)
 
 
