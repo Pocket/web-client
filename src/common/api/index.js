@@ -21,6 +21,7 @@ export { getSyndicatedArticle } from './queries/get-syndicated-article'
 
 // MyList
 export { getSavedItems } from './queries/get-saved-items'
+export { getSavedItemsTagged } from './queries/get-saved-items-tagged'
 export { searchSavedItems } from './queries/search-saved-items'
 
 export { getSavedItemByItemId } from './queries/get-saved-item-by-id'

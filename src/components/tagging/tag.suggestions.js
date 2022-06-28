@@ -54,15 +54,16 @@ function NoSuggestions() {
   )
 }
 
-export function TagSuggestions({ suggestedTags, tags, addTag, allTags, since }) {
+export function TagSuggestions({ suggestedTags, tags, addTag, allTags, tagSuggestionStatus }) {
   // Loading if we don't have suggestedTags
-  if (!suggestedTags || !since) return <Loading />
+  if (!suggestedTags || tagSuggestionStatus === 'pending') return <Loading />
 
   // No suggestions and no user tags
-  if (suggestedTags?.length === 0 && allTags.length === 0) return <StartTagging />
+  if (suggestedTags?.length === 0 && allTags.length === 0 && tagSuggestionStatus === 'complete')
+    return <StartTagging />
 
   // No suggestions?
-  if (suggestedTags?.length === 0) return <NoSuggestions />
+  if (suggestedTags?.length === 0 && tagSuggestionStatus === 'complete') return <NoSuggestions />
 
   // We have tags, let's render them
   const tagList = suggestedTags.filter((tag) => !tags.includes(tag))

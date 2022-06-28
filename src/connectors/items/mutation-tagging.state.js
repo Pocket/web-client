@@ -39,7 +39,7 @@ const initialTaggingState = {
   activeTags: [],
   itemIds: [],
   tagSuggestions: [],
-  tagSuggestionRequest: 'idle',
+  tagSuggestionStatus: 'idle',
   needsSaving: false,
   isBulk: false
 }
@@ -95,15 +95,16 @@ export const mutationTaggingReducers = (state = initialTaggingState, action) => 
     }
 
     case MUTATION_TAG_SUGGESTION_REQUEST: {
-      return { ...state, tagSuggestionRequest: 'pending' }
+      return { ...state, tagSuggestionStatus: 'pending' }
     }
 
     case MUTATION_TAG_SUGGESTION_SUCCESS: {
       const { tagSuggestions } = action
-      return { ...state, tagSuggestions, tagSuggestionRequest: 'complete' }
+      return { ...state, tagSuggestions, tagSuggestionStatus: 'complete' }
     }
+
     case MUTATION_TAG_SUGGESTION_FAILURE: {
-      return { ...state, tagSuggestionRequest: 'complete' }
+      return { ...state, tagSuggestionStatus: 'complete' }
     }
 
     case MUTATION_SUCCESS:
@@ -146,7 +147,8 @@ function* confirmTagMutations() {
 
 function* getTagSuggestions(action) {
   const { itemId } = action
-  const tagSuggestions = yield call(getTagSuggestionById, itemId)
+  const tagSuggestionResponse = yield call(getTagSuggestionById, itemId)
+  const tagSuggestions = tagSuggestionResponse.map((tag) => tag.name)
   yield put({ type: MUTATION_TAG_SUGGESTION_SUCCESS, tagSuggestions })
 }
 
