@@ -140,7 +140,7 @@ const selectorCardStyle = css`
       &:focus {
         background: var(--color-actionSecondary);
         .actionCopy {
-          color: var(--color-actionPrimaryText);
+          color: var(--color-actionSecondaryHoverText);
         }
       }
     }
