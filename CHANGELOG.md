@@ -1,3 +1,10 @@
+## [1.51.9](https://github.com/Pocket/web-client/compare/v1.51.8...v1.51.9) (2022-06-28)
+
+
+### Bug Fixes
+
+* **modal:** add a mobile specific max height smaller than 100vh ([5f28515](https://github.com/Pocket/web-client/commit/5f285152e0ba013752534c887d6b56ef4152b3cc))
+
 ## [1.51.8](https://github.com/Pocket/web-client/compare/v1.51.7...v1.51.8) (2022-06-27)
 
 
