@@ -13,7 +13,7 @@ export const ThirdParty = ({ appIds, ConnectedApp }) => {
   const { t } = useTranslation()
   return appIds?.length ? (
     <section className={thirdPartyStyle}>
-      <h2>{t('account:third-party-apps', 'Third Party Applications')}</h2>
+      <h2 id="third-party-apps">{t('account:third-party-apps', 'Third Party Applications')}</h2>
       <div className="sectionBody thirdPartyBody">
         {appIds.map((appId) => (
           <ConnectedApp key={appId} appId={appId} />

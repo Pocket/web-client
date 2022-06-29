@@ -24,7 +24,7 @@ export const Profile = ({
   const { t } = useTranslation()
   return (
     <section className={profileStyle}>
-      <h2>{t('account:profile-header', 'Profile Information')}</h2>
+      <h2 id="profile">{t('account:profile-header', 'Profile Information')}</h2>
 
       <div className="sectionBody profileBody">
         <Avatar avatarSrc={avatarSrc} onChangePhoto={onChangePhoto} />
