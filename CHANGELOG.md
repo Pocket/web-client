@@ -1,3 +1,11 @@
+## [1.51.11](https://github.com/Pocket/web-client/compare/v1.51.10...v1.51.11) (2022-06-29)
+
+
+### Bug Fixes
+
+* **select-article:** fix button text on dark mode ([0454201](https://github.com/Pocket/web-client/commit/0454201324697abf5114d5ba33af331aa54c3fc7))
+* **select-article:** use correct semantic variable name ([e8e6f76](https://github.com/Pocket/web-client/commit/e8e6f764d2d79e260b75b1675b1fc92896d0edc1))
+
 ## [1.51.10](https://github.com/Pocket/web-client/compare/v1.51.9...v1.51.10) (2022-06-28)
 
 

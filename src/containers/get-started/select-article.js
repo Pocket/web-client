@@ -123,9 +123,6 @@ const selectorCardStyle = css`
   .card-actions {
     margin-bottom: 0.25rem;
     padding: 0.75rem;
-    &:hover {
-      color: var(--color-textPrimary);
-    }
 
     &.border {
       border: var(--borderStyle);
@@ -133,14 +130,14 @@ const selectorCardStyle = css`
       border-color: var(--color-actionSecondary);
 
       .actionCopy {
-        color: var(--color-textPrimary);
+        color: var(--color-actionSecondaryText);
       }
 
       &:hover,
       &:focus {
         background: var(--color-actionSecondary);
         .actionCopy {
-          color: var(--color-actionPrimaryText);
+          color: var(--color-actionSecondaryHoverText);
         }
       }
     }
