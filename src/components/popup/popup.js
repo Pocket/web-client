@@ -110,6 +110,7 @@ const Popup = ({
   function createPopper() {
     if (!popper) {
       popper = createPopperInstance(trigger.current, contentRef.current, popperOptions)
+      popper.forceUpdate()
     }
   }
 
