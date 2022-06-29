@@ -1,3 +1,10 @@
+## [1.51.12](https://github.com/Pocket/web-client/compare/v1.51.11...v1.51.12) (2022-06-29)
+
+
+### Bug Fixes
+
+* **popper:** update popper placement on open ([d3d555e](https://github.com/Pocket/web-client/commit/d3d555ec6afabdc03cb11baa65ca260f514cb1a4))
+
 ## [1.51.11](https://github.com/Pocket/web-client/compare/v1.51.10...v1.51.11) (2022-06-29)
 
 
