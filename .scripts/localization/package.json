@@ -3,19 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "chalk": "4.1.2",
+    "chalk": "5.0.1",
+    "cli-progress": "^3.11.1",
     "enquirer": "2.3.6",
     "fs-extra": "10.1.0",
-    "gulp-sort": "2.0.0",
-    "i18next-parser": "5.4.0",
-    "intersection-observer": "0.12.0",
+    "gulp-sort": "^2.0.0",
+    "i18next-parser": "^6.5.0",
     "isomorphic-unfetch": "3.1.0",
-    "simple-git": "3.3.0",
-    "vinyl-fs": "3.0.3"
+    "simple-git": "3.7.1",
+    "vinyl-fs": "^3.0.3"
   },
   "author": "",
   "license": "ISC"

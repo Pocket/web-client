@@ -1,5 +1,6 @@
-import '@pocket/web-ui/lib/pocket-web-ui.css'
-import { ViewportProvider } from '@pocket/web-ui'
+import '../../public/static/pocket-web-ui.css'
+
+import { ViewportProvider } from 'components/viewport-provider/viewport-provider'
 import { appWithTranslation } from 'next-i18next'
 
 import { useEffect } from 'react'

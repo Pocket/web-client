@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
-import { CrossIcon } from '@pocket/web-ui'
+import { CrossIcon } from 'components/icons/CrossIcon'
 import { Fade } from 'common/utilities/animation/fade'
 import { useDispatch } from 'react-redux'
 import { clearToast } from './toast.state'

@@ -11,8 +11,8 @@ module.exports = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '^mock/article': '<rootDir>/.storybook/_data/article/index.js',
-    '^mock(.*)$': '<rootDir>/.storybook/_data$1',
+    '^mock(.*)$': '<rootDir>/__mocks__/_data$1',
+    '^mock/article': '<rootDir>/__mocks__/_data/article/index.js',
     '^static(.*)$': '<rootDir>/public/static$1',
     '^common(.*)$': '<rootDir>/src/common$1',
     '^containers(.*)$': '<rootDir>/src/containers$1',

@@ -1,11 +1,11 @@
 import { css } from 'linaria'
-import { breakpointLargeTablet } from '@pocket/web-ui'
-import { breakpointMediumTablet } from '@pocket/web-ui'
-import { breakpointSmallTablet } from '@pocket/web-ui'
-import { breakpointTinyTablet } from '@pocket/web-ui'
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { breakpointSmallHandset } from '@pocket/web-ui'
-import { breakpointMediumHandset } from '@pocket/web-ui'
+import { breakpointLargeTablet } from 'common/constants'
+import { breakpointMediumTablet } from 'common/constants'
+import { breakpointSmallTablet } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
+import { breakpointSmallHandset } from 'common/constants'
+import { breakpointMediumHandset } from 'common/constants'
 
 // !! Caution
 // Changes to cardStyles will change ALL cards across the app (eventually).
@@ -59,7 +59,18 @@ export const cardStyles = css`
   }
 
   .media {
+    position: relative;
     grid-column: var(--media-column-span);
+    .topic-name {
+      background: rgba(26, 26, 26, 0.8);
+      border-radius: 100px;
+      color: var(--color-white100);
+      position: absolute;
+      padding: 0.25rem 0.825rem;
+      z-index: 10;
+      bottom: 2rem;
+      left: 1rem;
+    }
   }
 
   .content {
@@ -77,8 +88,13 @@ export const cardStyles = css`
     max-height: 3.858em;
     overflow: hidden;
     text-overflow: ellipsis;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     &.flow {
       max-height: initial;
+      display: block;
     }
   }
 
@@ -87,7 +103,9 @@ export const cardStyles = css`
     padding: var(--size050) 0;
     font-size: var(--fontSize085);
     line-height: 1.5;
-    display: block;
+    display: flex;
+    align-items: center;
+    align-content: center;
     color: var(--color-textSecondary);
   }
 
@@ -119,6 +137,10 @@ export const cardStyles = css`
     padding: 0;
     display: inline-block;
     color: var(--color-textSecondary);
+    max-width: 70%;
+    overflow-x: hidden;
+    padding-right: 0.25rem;
+    text-overflow: ellipsis;
     &:hover {
       color: var(--color-textSecondary);
     }
@@ -593,6 +615,83 @@ export const cardStyles = css`
       }
       .media {
         display: none;
+      }
+    }
+  }
+
+  /** Flex style
+  --------------------------------------------------------------- */
+
+  &.flex {
+    .title {
+      font-size: 1.25rem;
+
+      ${breakpointLargeHandset} {
+        font-size: 1rem;
+      }
+    }
+
+    & + .flex {
+      margin-left: 1rem;
+
+      ${breakpointSmallTablet} {
+        margin-left: 0;
+      }
+    }
+
+    ${breakpointMediumTablet} {
+      --media-column-span: span 12;
+      --content-column-span: span 12;
+    }
+
+    ${breakpointSmallTablet} {
+      --media-column-span: span 4;
+      --content-column-span: span 8;
+    }
+
+    ${breakpointTinyTablet} {
+      padding-bottom: 2.5rem;
+    }
+
+    // these styles are applied when there is only one <article> item in the parent
+    &:only-of-type {
+      --media-column-span: span 3;
+      --content-column-span: span 9;
+
+      ${breakpointMediumTablet} {
+        --media-column-span: span 4;
+        --content-column-span: span 8;
+      }
+
+      ${breakpointTinyTablet} {
+        .excerpt {
+          display: none;
+        }
+      }
+    }
+
+    // these styles are applied when there are three card items
+    // https://css-tricks.com/solved-with-css-logical-styling-based-on-the-number-of-given-elements/
+    &:first-child:nth-last-child(n + 3),
+    &:first-child:nth-last-child(n + 3) ~ * {
+      ${breakpointLargeTablet} {
+        --media-column-span: span 12;
+        --content-column-span: span 12;
+      }
+
+      ${breakpointMediumTablet} {
+        .cardWrap {
+          grid-column-gap: 0;
+        }
+      }
+
+      ${breakpointSmallTablet} {
+        --media-column-span: span 4;
+        --content-column-span: span 8;
+
+        .cardWrap {
+          grid-column-gap: 1.5rem;
+        }
       }
     }
   }

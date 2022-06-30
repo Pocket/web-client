@@ -15,19 +15,19 @@ import GlobalNavAdd from './global-nav-add'
 import GlobalNavBulkEdit from './global-nav-bulk-edit'
 import GlobalNavBulkMutations from './global-nav-bulk-mutations'
 
-import { HomeIcon } from '@pocket/web-ui'
-import { DiscoverIcon } from '@pocket/web-ui'
-import { ListViewIcon } from '@pocket/web-ui'
-import { SearchIcon } from '@pocket/web-ui'
-import { AddIcon } from '@pocket/web-ui'
-import { EditIcon } from '@pocket/web-ui'
-import { FavoriteIcon } from '@pocket/web-ui'
-import { HighlightIcon } from '@pocket/web-ui'
-import { TagIcon } from '@pocket/web-ui'
-import { ArticleIcon } from '@pocket/web-ui'
-import { ArchiveIcon } from '@pocket/web-ui'
-import { VideoIcon } from '@pocket/web-ui'
-import { CollectionsIcon } from '@pocket/web-ui'
+import { HomeIcon } from 'components/icons/HomeIcon'
+import { DiscoverIcon } from 'components/icons/DiscoverIcon'
+import { ListViewIcon } from 'components/icons/ListViewIcon'
+import { SearchIcon } from 'components/icons/SearchIcon'
+import { AddIcon } from 'components/icons/AddIcon'
+import { EditIcon } from 'components/icons/EditIcon'
+import { FavoriteIcon } from 'components/icons/FavoriteIcon'
+import { HighlightIcon } from 'components/icons/HighlightIcon'
+import { TagIcon } from 'components/icons/TagIcon'
+import { ArticleIcon } from 'components/icons/ArticleIcon'
+import { ArchiveIcon } from 'components/icons/ArchiveIcon'
+import { VideoIcon } from 'components/icons/VideoIcon'
+import { CollectionsIcon } from 'components/icons/CollectionsIcon'
 
 import { BASE_URL } from 'common/constants'
 import { LOGIN_URL } from 'common/constants'
@@ -56,7 +56,7 @@ export const enforceDefaultAvatar = (avatarUrl = '') => {
  * It has no stories or tests because of this, and will pass through any props
  * provided to it to the GlobalNav component.
  */
-const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
+const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
@@ -249,6 +249,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag }) => {
       sendImpression={sendImpressionEvent}
       showNotification={showNotification}
       tools={tools}
+      noNav={noNav}
       flagsReady={flagsReady}>
       {NavTakeover ? <NavTakeover onClose={resetNav} /> : null}
     </GlobalNavComponent>

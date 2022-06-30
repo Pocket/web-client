@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { GlobalFooter } from 'components/global-footer/global-footer'
-import { PageContainer } from '@pocket/web-ui'
+import { PageContainer } from 'components/page-container/page-container'
 import GlobalNav from 'connectors/global-nav/global-nav'
 import { css, cx } from 'linaria'
 import { PocketHead } from 'containers/_layouts/_head'
@@ -17,6 +17,7 @@ function mainLayout({
   children,
   title = 'Pocket',
   canonical,
+  noNav = false,
   selectedNavLink,
   isFullWidthLayout,
   noContainer = false,
@@ -31,11 +32,11 @@ function mainLayout({
         metaData={metaData}
         forceWebView={forceWebView}
       />
-      <GlobalNav selectedLink={selectedNavLink} />
+      <GlobalNav selectedLink={selectedNavLink} noNav={noNav} />
       <div className={cx(fixedNavContainer, noContainer && noContainerStyle, className)}>
         {isFullWidthLayout ? children : <PageContainer>{children}</PageContainer>}
       </div>
-      <GlobalFooter />
+      {noNav ? null : <GlobalFooter />}
     </>
   )
 }

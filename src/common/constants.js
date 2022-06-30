@@ -7,8 +7,6 @@ export const LOGIN_URL = 'https://getpocket.com/login'
 export const SIGNUP_URL = 'https://getpocket.com/signup'
 export const PREMIUM_URL = 'https://getpocket.com/premium?utm_source=web-app-premium-cta'
 export const GRAPHQL_URL = 'https://getpocket.com'
-export const ARTICLE_API_URL = 'https://tz7snrninbak3oh36gjshbmdia.appsync-api.us-east-1.amazonaws.com/graphql' // ARTICLE_API_KEY is a secret and needs to be stored as such
-export const ARTICLE_API_KEY = 'da2-shleiiw7qzcnlkjwg3v7rfkpte' // Currently set to expire Thu, 04 Mar 2021 16:00:00 GMT
 export const READING_WPM = 220
 export const BATCH_SIZE = 30
 export const COLOR_MODE_PREFIX = 'colormode'
@@ -351,3 +349,30 @@ export const TOPIC_IDS = {
     }
   }
 }
+
+
+export const containerMaxWidth = 1128
+
+// screen widths (in px, max size)
+export const screenTinyHandset = 359
+export const screenSmallHandset = 399
+export const screenMediumHandset = 479
+export const screenLargeHandset = 599
+export const screenTinyTablet = 719
+export const screenSmallTablet = 839
+export const screenMediumTablet = 959
+export const screenLargeTablet = 1023
+export const screenSmallDesktop = 1279
+export const screenMediumDesktop = 1439
+// "large desktop" is anything 1440 and over.
+
+export const breakpointTinyHandset = `@media (max-width: ${screenTinyHandset}px)`
+export const breakpointSmallHandset = `@media (max-width: ${screenSmallHandset}px)`
+export const breakpointMediumHandset = `@media (max-width: ${screenMediumHandset}px)`
+export const breakpointLargeHandset = `@media (max-width: ${screenLargeHandset}px)`
+export const breakpointTinyTablet = `@media (max-width: ${screenTinyTablet}px)`
+export const breakpointSmallTablet = `@media (max-width: ${screenSmallTablet}px)`
+export const breakpointMediumTablet = `@media (max-width: ${screenMediumTablet}px)`
+export const breakpointLargeTablet = `@media (max-width: ${screenLargeTablet}px)`
+export const breakpointSmallDesktop = `@media (max-width: ${screenSmallDesktop}px)`
+export const breakpointMediumDesktop = `@media (max-width: ${screenMediumDesktop}px)`

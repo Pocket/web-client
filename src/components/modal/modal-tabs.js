@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
-import classnames from 'classnames'
+import { css, cx } from 'linaria'
 
 const modalTabStyles = css`
   margin: 0;
@@ -33,15 +32,7 @@ const modalTabStyles = css`
 
 export const ModalTabs = ({ children, hasBorder, isSticky, className }) => {
   return (
-    <div
-      className={classnames(
-        modalTabStyles,
-        {
-          bordered: hasBorder,
-          sticky: isSticky
-        },
-        className
-      )}>
+    <div className={cx(modalTabStyles, hasBorder && 'bordered', isSticky && 'sticky', className)}>
       {children}
     </div>
   )

@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { getPublishedDate } from 'common/utilities'
-import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointLargeHandset } from 'common/constants'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { Trans } from 'next-i18next'
 
@@ -81,9 +81,7 @@ function PublisherInfo({ logoWide, publishedAt, name }) {
   return name ? (
     <>
       <hr />
-      {logoWide ? (
-        <img src={logoWide.url} data-cy="publisher-img" alt={`Logo for ${name}`} />
-      ) : null}
+      {logoWide ? <img src={logoWide} data-cy="publisher-img" alt={`Logo for ${name}`} /> : null}
       <p>
         <Trans i18nKey="discover:publisher-attribution">
           This post originally appeared on {{ name }} and was published {{ publishedDate }}. This
@@ -131,7 +129,7 @@ PublisherAttribution.propTypes = {
    * Publisher object that includes the publisher name, logo, and custom button object
    */
   publisher: PropTypes.shape({
-    logoWide: PropTypes.object,
+    logoWide: PropTypes.string,
     name: PropTypes.string,
     articleCta: PropTypes.object
   }),

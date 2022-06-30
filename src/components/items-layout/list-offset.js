@@ -1,6 +1,6 @@
 import { css, cx } from 'linaria'
 import { cardsGrid } from 'components/items-layout/base'
-import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointLargeHandset } from 'common/constants'
 
 export const offsetListStyle = css`
   ${cardsGrid};
@@ -36,7 +36,8 @@ export function OffsetList({
   showExcerpt = true,
   showMedia,
   dataCy = 'offset',
-  children
+  children,
+  showTopicName = false
 }) {
   const start = offset
   const end = offset + count
@@ -52,6 +53,7 @@ export function OffsetList({
     <div className={listClass} data-cy={dataCy}>
       {items.slice(start, end).map((id, index) => (
         <ItemCard
+          showTopicName={showTopicName}
           id={id}
           key={id}
           position={index}

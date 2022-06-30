@@ -1,6 +1,6 @@
 import React from 'react'
 import { css } from 'linaria'
-import { PillCheckbox } from '@pocket/web-ui'
+import { PillCheckbox } from 'components/pill/pill-checkbox'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTopicSection } from 'containers/home/home.state'
 import { unsetTopicSection } from 'containers/home/home.state'
@@ -32,9 +32,7 @@ const TopicPill = ({ topic, handleTopicClick, active }) => {
   )
 }
 
-export const TopicSelector = ({
-  toggleCallback = () => {}
-}) => {
+export const TopicSelector = ({ toggleCallback = () => {} }) => {
   const dispatch = useDispatch()
 
   // Get topicList for sections that require it

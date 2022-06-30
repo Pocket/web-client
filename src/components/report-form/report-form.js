@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { TextArea } from '@pocket/web-ui'
+import { TextArea } from 'components/form-fields/text-area'
 import PropTypes from 'prop-types'
 
 const OTHER_FIELD_CHAR_LIMIT = 500

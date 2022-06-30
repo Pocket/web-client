@@ -1,4 +1,8 @@
-const fs = require('fs-extra')
+import fs from 'fs-extra'
+import cliProgress from 'cli-progress'
+
+const { copySync } = fs
+const { Bar } = cliProgress
 
 function inferInternationalizedLang() {
   const locales = {
@@ -20,18 +24,33 @@ function inferInternationalizedLang() {
     'zh-CN': ['zh', 'zh-CN'],
     'zh-TW': ['zh-TW']
   }
+  const progressBar = new Bar({
+    barCompleteChar: '•',
+    barIncompleteChar: '_',
+    format: 'Injecting Locales: {percentage}%' + ' — ' + '{bar}',
+    fps: 30,
+    stream: process.stdout,
+    barsize: 30
+  })
 
-  Object.keys(locales).map((source) => distributeLocalizations(source, locales[source]))
+  const localeKeys = Object.keys(locales)
+  progressBar.start(localeKeys.length, 0)
+
+  localeKeys.forEach((source) => {
+    distributeLocalizations(source, locales[source])
+    progressBar.increment()
+  })
+
+  progressBar.stop()
 }
 
 function distributeLocalizations(source, destinations) {
-  destinations.map((destination) => {
+  destinations.forEach((destination) => {
     try {
-      fs.copySync(
+      copySync(
         `node_modules/@pocket/web-localization/locales/${source}`,
         `public/locales/${destination}`
       )
-      console.log(`${source} copied to ${destination}`)
     } catch (err) {
       console.error(err)
     }

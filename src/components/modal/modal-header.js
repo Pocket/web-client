@@ -1,11 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
-import classnames from 'classnames'
-import { headingSansSerif } from '@pocket/web-ui'
+import { css, cx } from 'linaria'
 
 const modalHeaderStyles = css`
-  ${headingSansSerif};
+  font-family: var(--fontSansSerif);
+  font-weight: 600;
   margin: 0;
   padding: 1.25rem var(--spacing150);
 
@@ -24,14 +23,7 @@ export const ModalHeader = ({ title, hasBorder, isSticky, className }) => {
   return (
     <h6
       data-cy="modal-header"
-      className={classnames(
-        modalHeaderStyles,
-        {
-          bordered: hasBorder,
-          sticky: isSticky
-        },
-        className
-      )}>
+      className={cx(modalHeaderStyles, hasBorder && 'bordered', isSticky && 'sticky', className)}>
       {title}
     </h6>
   )

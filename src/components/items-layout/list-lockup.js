@@ -1,6 +1,6 @@
 import { css, cx } from 'linaria'
 import { cardsGrid } from 'components/items-layout/base'
-import { breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointLargeHandset } from 'common/constants'
 
 const heroType = {
   center: {

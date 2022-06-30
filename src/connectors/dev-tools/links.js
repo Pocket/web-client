@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import Link from 'next/link'
 
 const linkStyles = css`

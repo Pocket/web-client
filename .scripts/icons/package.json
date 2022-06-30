@@ -1,0 +1,17 @@
+{
+  "name": "icon-building-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "fast-glob": "3.2.7",
+    "fs-extra": "10.0.0",
+    "svgo": "2.5.0",
+    "cli-progress": "^3.11.1"
+  },
+  "author": "",
+  "license": "ISC"
+}

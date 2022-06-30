@@ -1,12 +1,12 @@
 import { css, cx } from 'linaria'
 import { useRef, useState } from 'react'
-import { SortByNewestIcon } from '@pocket/web-ui'
-import { SortByOldestIcon } from '@pocket/web-ui'
-import { RelevanceIcon } from '@pocket/web-ui'
+import { SortByNewestIcon } from 'components/icons/SortByNewestIcon'
+import { SortByOldestIcon } from 'components/icons/SortByOldestIcon'
+import { RelevanceIcon } from 'components/icons/RelevanceIcon'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { buttonReset } from 'components/buttons/button-reset'
 import { useTranslation } from 'next-i18next'
-import { PopupMenu, PopupMenuItem } from '@pocket/web-ui'
+import { PopupMenu, PopupMenuItem } from 'components/popup-menu/popup-menu'
 import { KEYS } from 'common/constants'
 
 const sortStyles = css`

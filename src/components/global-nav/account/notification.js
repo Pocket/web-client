@@ -1,5 +1,4 @@
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 
 const bubbleStyles = css`
   height: var(--size050);
@@ -29,5 +28,5 @@ export const InlineNotification = (props) => (
 )
 
 export const FloatingNotification = (props) => (
-  <span {...props} aria-hidden="true" className={classNames(bubbleStyles, floatingBubble)} />
+  <span {...props} aria-hidden="true" className={cx(bubbleStyles, floatingBubble)} />
 )

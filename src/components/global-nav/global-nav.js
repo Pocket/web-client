@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
-import classnames from 'classnames'
+import { css, cx } from 'linaria'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { useTranslation } from 'next-i18next'
 
-import { breakpointSmallTablet } from '@pocket/web-ui'
-import { breakpointLargeTablet } from '@pocket/web-ui'
-import { fontSansSerif } from '@pocket/web-ui'
-import { fontSize100 } from '@pocket/web-ui'
-import { screenLargeTablet } from '@pocket/web-ui'
-import { PageContainer } from '@pocket/web-ui'
-import { Logo } from '@pocket/web-ui'
-import { LogoMark } from '@pocket/web-ui'
-import { useViewport } from '@pocket/web-ui'
+import { breakpointSmallTablet } from 'common/constants'
+import { breakpointLargeTablet } from 'common/constants'
+import { screenLargeTablet } from 'common/constants'
+import { PageContainer } from 'components/page-container/page-container'
+import { Logo, LogoMark } from 'components/logo/logo'
+import { useViewport } from 'components/viewport-provider/viewport-provider'
 
 import GlobalNavLinks from './links/global-nav-links'
 import GlobalNavMobileMenu from './mobile/global-nav-mobile-menu'
@@ -77,9 +73,14 @@ const headerStyle = css`
     .pocket-logo {
       margin-right: 1rem;
     }
+
+    &.logged-in .logo {
+      display: none;
+    }
+
     &.logged-in {
-      .logo {
-        display: none;
+      .noNav.logo {
+        display: block;
       }
     }
 
@@ -134,7 +135,7 @@ const linksStyle = css`
   flex-grow: 2;
   justify-content: flex-start;
   display: flex;
-  font-family: ${fontSansSerif};
+  font-family: var(--fontSansSerif);
   line-height: 1;
   white-space: nowrap;
 
@@ -142,7 +143,7 @@ const linksStyle = css`
     margin: 0;
     padding: 0;
     list-style-type: none;
-    font-size: ${fontSize100};
+    font-size: 1rem;
   }
 
   li {
@@ -184,14 +185,12 @@ const toolsStyle = css`
 /**
  * Navigation UI that sits at the top of any standard Pocket Web view.
  *
- * ```js
- * import { GlobalNav } from '@pocket/web-ui'
- *
  * //...
  * <GlobalNav isLoggedIn={!!state.user.auth} />
  * ```
  */
 const GlobalNav = ({
+  noNav,
   subLinks,
   subset,
   tag,
@@ -245,36 +244,42 @@ const GlobalNav = ({
   }, [viewportWidth])
 
   return (
-    <header className={classnames(headerStyle, { 'logged-in': isLoggedIn })}>
+    <header className={cx(headerStyle, isLoggedIn && 'logged-in')}>
       <PageContainer className="global-nav-container">
         <nav className={navStyle} data-cy="global-nav">
           <div className="site-nav">
-            <GlobalNavMobileMenu
-              appRootSelector={appRootSelector}
-              links={links}
-              subLinks={subLinks}
-              subset={subset}
-              tag={tag}
-              onLinkClick={onLinkClick}
-              selectedLink={selectedLink}
-              toggleClass="hamburger-icon"
-              isOpen={isMobileMenuOpen}
-              toggleMenuOpen={setMobileMenuOpen}
-            />
-            <Link href={pocketLogoOutboundUrl} data-test="logo-link">
-              <a
-                id="pocket-logo-nav"
-                className="pocket-logo"
-                onClick={(event) => {
-                  handleLinkClick('pocket', event)
-                }}
-                data-cy="logo-link">
-                <Logo className="logo" />
-                {isLoggedIn ? <LogoMark className="logo-mark" /> : null}
-              </a>
-            </Link>
+            {noNav ? null : (
+              <GlobalNavMobileMenu
+                appRootSelector={appRootSelector}
+                links={links}
+                subLinks={subLinks}
+                subset={subset}
+                tag={tag}
+                onLinkClick={onLinkClick}
+                selectedLink={selectedLink}
+                toggleClass="hamburger-icon"
+                isOpen={isMobileMenuOpen}
+                toggleMenuOpen={setMobileMenuOpen}
+              />
+            )}
+            {noNav ? (
+              <Logo className="logo noNav" />
+            ) : (
+              <Link href={pocketLogoOutboundUrl} data-test="logo-link">
+                <a
+                  id="pocket-logo-nav"
+                  className="pocket-logo"
+                  onClick={(event) => {
+                    handleLinkClick('pocket', event)
+                  }}
+                  data-cy="logo-link">
+                  <Logo className="logo" />
+                  {isLoggedIn ? <LogoMark className="logo-mark" /> : null}
+                </a>
+              </Link>
+            )}
           </div>
-          {children ? (
+          {children || noNav ? (
             children
           ) : (
             <>
@@ -288,7 +293,7 @@ const GlobalNav = ({
                 />
               </div>
 
-              <div className={classnames(toolsStyle, { 'is-premium': isPremium })}>
+              <div className={cx(toolsStyle, isPremium && 'is-premium')}>
                 <GlobalNavTools tools={tools} onToolClick={onToolClick} />
               </div>
 

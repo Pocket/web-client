@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { SearchIcon, CrossIcon, ErrorIcon } from '@pocket/web-ui'
-import { breakpointMediumHandset } from '@pocket/web-ui'
-import { screenMediumHandset } from '@pocket/web-ui'
-import { css } from 'linaria'
-import classnames from 'classnames'
+import { SearchIcon } from 'components/icons/SearchIcon'
+import { CrossIcon } from 'components/icons/CrossIcon'
+import { ErrorIcon } from 'components/icons/ErrorIcon'
+import { breakpointMediumHandset } from 'common/constants'
+import { screenMediumHandset } from 'common/constants'
+import { css, cx } from 'linaria'
+
 import { Trans, useTranslation } from 'next-i18next'
 import { KEYS } from 'common/constants'
 import Mousetrap from 'mousetrap'
@@ -78,6 +80,7 @@ const searchIconStyle = css`
   transform: translateY(-50%);
   top: 50%;
   margin: 0;
+  color: var(--color-grey40);
 
   ${breakpointMediumHandset} {
     display: none;
@@ -259,7 +262,7 @@ const GlobalNavSearch = ({
         <input
           name="search-input"
           ref={inputEl}
-          className={classnames(['search-input', { 'has-value': !!searchTerm }])}
+          className={cx('search-input', !!searchTerm && 'has-value')}
           aria-label={t('nav:search-your-collection', 'Search your collection')}
           value={searchTerm}
           onChange={handleInputChange}

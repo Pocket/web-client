@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { useTranslation } from 'next-i18next'
 const privacyStyle = css`
   padding-bottom: 3rem;

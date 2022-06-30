@@ -14,12 +14,16 @@ export const CONTENT_SCHEMA_URL = getSchemaUri('content')
  * @param id {int} - The backend identifier for a URL. @optional
  * @returns {{schema: *, data: {url: string, ?item_id: int}}}
  */
-const createContentEntity = ({ url, id }) => ({
-  schema: CONTENT_SCHEMA_URL,
-  data: getObjectWithValidKeysOnly({
-    url,
-    item_id: id ? parseInt(id, 10) : null
-  })
-})
+const createContentEntity = ({ url, id }) => {
+  const itemId = id ? parseInt(id, 10) : null
+
+  return {
+    schema: CONTENT_SCHEMA_URL,
+    data: getObjectWithValidKeysOnly({
+      url,
+      item_id: itemId
+    })
+  }
+}
 
 export default createContentEntity

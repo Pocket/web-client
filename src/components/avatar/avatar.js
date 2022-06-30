@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
-import { css } from 'linaria'
-
-import { darkMode } from '@pocket/web-ui'
-import { ProfileIcon } from '@pocket/web-ui'
+import { css, cx } from 'linaria'
+import { ProfileIcon } from 'components/icons/ProfileIcon'
 
 const avatarStyle = css`
   display: block;
@@ -31,7 +28,7 @@ const avatarStyle = css`
     background: var(--color-actionPrimarySubdued);
   }
 
-  ${darkMode} {
+  .colormode-dark & {
     &.with-image {
       &::before {
         border: 1px solid rgba(255, 255, 255, 0.12);
@@ -69,15 +66,7 @@ const Avatar = ({ id, src, altText, size, className }) => {
 
   return (
     <span
-      className={classnames(
-        avatarStyle,
-        {
-          // note, these class names are depended on by AvatarButton.
-          'with-image': !!src,
-          default: !src
-        },
-        className
-      )}
+      className={cx(avatarStyle, !!src && 'with-image', !src && 'default', className && className)}
       style={avatarStyleVariables}>
       {src ? (
         <img src={src} alt={altText} className={imageStyle} data-cy={`avatar-image-${id}`} />

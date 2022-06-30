@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { CardPositioning, Quote, CreatedDate } from './annotations.card' // CardWrapper
 import { AnnotationMenu } from './annotations.menu'
-import classNames from 'classnames'
 
 const ticTray = css`
   position: fixed;
@@ -184,10 +183,10 @@ const HighlightIndex = ({
       onMouseEnter={itemHoverOn}
       onMouseLeave={itemHoverOff}
       onClick={onItemClick}
-      className={classNames(ticWrapper, className)}
+      className={cx(ticWrapper, className)}
       style={{ top }}>
       <div className={anchorWrapper}>
-        <div className={classNames(flyAwayWrapper, { show: hoverOpen })}>
+        <div className={cx(flyAwayWrapper, hoverOpen && 'show')}>
           <Card
             annotation={annotation}
             shareItem={shareItem}
@@ -249,6 +248,6 @@ export const TicList = ({
   }
 
   return annotations && annotationCount > 0 ? (
-    <div className={classNames(ticTray, { visible })}>{renderTics()}</div>
+    <div className={cx(ticTray, visible && 'visible')}>{renderTics()}</div>
   ) : null
 }

@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next'
 import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseExtensionFlyaway } from '../onboarding.state'
-import { breakpointLargeTablet, breakpointLargeHandset } from '@pocket/web-ui'
+import { breakpointLargeTablet, breakpointLargeHandset } from 'common/constants'
 import { appStoreBadgeWrapper } from './reader-flyaway-apps'
 import { appStoreBadgeStyle } from './reader-flyaway-apps'
 import ChromeIcon from 'static/images/browser-icons/chrome.png'
@@ -94,17 +94,16 @@ export const MyListFlyawayExtensions = () => {
   const googlePlayBadge =
     'https://assets.getpocket.com/web-ui/assets/google-play-badge.db9b21a1c41f3dcd9731e1e7acfdbb57.png'
 
-  const desktopTitle = t('onboarding:flyaway-extensions-title-desktop', 'Save anything from across the web with our extension')
+  const desktopTitle = t(
+    'onboarding:flyaway-extensions-title-desktop',
+    'Save anything from across the web with our extension'
+  )
   const mobileTitle = t('onboarding:flyaway-extensions-title-mobile', 'Save anything, anywhere')
 
   const title = (
     <>
-      <div className={desktopStyles}>
-        {desktopTitle}
-      </div>
-      <div className={mobileStyles}>
-        {mobileTitle}
-      </div>
+      <div className={desktopStyles}>{desktopTitle}</div>
+      <div className={mobileStyles}>{mobileTitle}</div>
     </>
   )
 

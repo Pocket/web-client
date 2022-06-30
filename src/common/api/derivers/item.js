@@ -99,6 +99,16 @@ export function deriveListItem(passedItem, legacy) {
   return deriveItem({ item, node: rest, cursor, utmId: 'pocket_mylist' })
 }
 
+export function deriveCorpusItem(recommendation) {
+  const item = recommendation.corpusItem
+  const { url, publisher } = item
+  return deriveItemData({
+    item,
+    itemEnrichment: { url },
+    passedPublisher: publisher
+  })
+}
+
 export function deriveRecommendation(
   recommendationsFromSlate,
   analyticsData,
@@ -344,8 +354,8 @@ function saveUrl({ item, itemEnrichment }) {
  * @param {object} item An item returned from the server
  * @returns {string} The url that should be passed to analytics
  */
-function analyticsUrl({ item }) {
-  return item?.resolvedUrl || item?.givenUrl || false
+function analyticsUrl({ item, itemEnrichment }) {
+  return item?.resolvedUrl || item?.givenUrl || itemEnrichment?.url || false
 }
 
 /** READ URl

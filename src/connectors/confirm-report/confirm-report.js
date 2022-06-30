@@ -1,4 +1,4 @@
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -78,7 +78,7 @@ export const ReportFeedbackModal = () => {
   const title = t('confirm:report-title', 'Report a Concern')
   const readerLabel = t('confirm:report-label', 'Request Feedback Modal')
   const errorMessage = errors[errorCode]
-  const submitDisabled = (reason === null) || (reason === 'other' && otherText === '')
+  const submitDisabled = reason === null || (reason === 'other' && otherText === '')
 
   return item ? (
     <Modal
@@ -101,7 +101,11 @@ export const ReportFeedbackModal = () => {
       </ModalBody>
       {success ? null : (
         <ModalFooter>
-          <Button disabled={submitDisabled} type="submit" data-cy="submit-report-feedback" onClick={confirmReport}>
+          <Button
+            disabled={submitDisabled}
+            type="submit"
+            data-cy="submit-report-feedback"
+            onClick={confirmReport}>
             <Trans i18nKey="confirm:report-feedback">Report Feedback</Trans>
           </Button>
         </ModalFooter>

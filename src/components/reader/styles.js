@@ -1,5 +1,4 @@
 import { css } from 'linaria'
-import { darkMode, sepiaMode } from '@pocket/web-ui'
 
 export const READER_PADDING = 40
 
@@ -295,8 +294,7 @@ export const highlightStyles = css`
   }
   a .highlight,
   a.highlight {
-    text-shadow: -1px -1px 0 #fee8c3, 1px -1px 0 #fee8c3, -1px 1px 0 #fee8c3,
-      1px 1px 0 #fee8c3 !important;
+    text-shadow: -1px -1px 0 #fee8c3, 1px -1px 0 #fee8c3, -1px 1px 0 #fee8c3, 1px 1px 0 #fee8c3 !important;
     background-image: linear-gradient(
       to top,
       rgba(0, 0, 0, 0),
@@ -307,7 +305,7 @@ export const highlightStyles = css`
     );
   }
 
-  ${darkMode} {
+  .colormode-dark & {
     *::selection {
       background-color: rgb(0, 73, 69, 0.99) !important;
       color: #e0e0e0 !important;
@@ -320,8 +318,7 @@ export const highlightStyles = css`
     }
     a .highlight,
     a.highlight {
-      text-shadow: -1px -1px 0 #fee8c3, 1px -1px 0 #fee8c3, -1px 1px 0 #fee8c3,
-        1px 1px 0 #fee8c3 !important;
+      text-shadow: -1px -1px 0 #fee8c3, 1px -1px 0 #fee8c3, -1px 1px 0 #fee8c3, 1px 1px 0 #fee8c3 !important;
       background-image: linear-gradient(
         to top,
         rgba(0, 0, 0, 0),
@@ -333,7 +330,7 @@ export const highlightStyles = css`
     }
   }
 
-  ${sepiaMode} {
+  .colormode-sepia & {
     *::selection {
       background-color: #dde2d2 !important;
       color: #3b3934 !important;
@@ -346,8 +343,7 @@ export const highlightStyles = css`
     }
     a .highlight,
     a.highlight {
-      text-shadow: -1px -1px 0 #fedda7, 1px -1px 0 #fedda7, -1px 1px 0 #fedda7,
-        1px 1px 0 #fedda7 !important;
+      text-shadow: -1px -1px 0 #fedda7, 1px -1px 0 #fedda7, -1px 1px 0 #fedda7, 1px 1px 0 #fedda7 !important;
       background-image: linear-gradient(
         to top,
         rgba(0, 0, 0, 0),

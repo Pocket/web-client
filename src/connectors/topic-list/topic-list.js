@@ -1,7 +1,7 @@
 import { css, cx } from 'linaria'
 import TopicsPillbox from 'components/topics-pillbox/topics-pillbox'
-import { breakpointLargeTablet } from '@pocket/web-ui'
-import { breakpointTinyTablet } from '@pocket/web-ui'
+import { breakpointLargeTablet } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
 
 const topicsNavRightRailStyle = css`
   grid-column: 10 / span 3;

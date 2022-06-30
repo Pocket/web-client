@@ -4,7 +4,7 @@ import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const getCollectionBySlugQuery = gql`
   query GetCollectionBySlug($getCollectionBySlugSlug: String!) {
-    getCollectionBySlug(slug: $getCollectionBySlugSlug) {
+    collectionBySlug(slug: $getCollectionBySlugSlug) {
       slug
       title
       excerpt
@@ -56,6 +56,6 @@ export function getCollectionBySlug(slug) {
     query: getCollectionBySlugQuery,
     variables: { getCollectionBySlugSlug: slug }
   })
-    .then((response) => response?.data?.getCollectionBySlug)
+    .then((response) => response?.data?.collectionBySlug)
     .catch((error) => console.error(error))
 }

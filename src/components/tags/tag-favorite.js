@@ -1,8 +1,7 @@
-import { css } from 'linaria'
-import { FavoriteIcon } from '@pocket/web-ui'
+import { css, cx } from 'linaria'
+import { FavoriteIcon } from 'components/icons/FavoriteIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
-import classNames from 'classnames'
 
 const favoriteWrapper = css`
   padding: 0 5px;
@@ -12,7 +11,7 @@ const favoriteWrapper = css`
   color: var(--color-canvas);
 `
 export function FavoriteTag({ margin }) {
-  const className = classNames(favoriteWrapper, buttonReset, tagBase)
+  const className = cx(favoriteWrapper, buttonReset, tagBase)
   return (
     <div className={className} style={{ margin }}>
       <FavoriteIcon />

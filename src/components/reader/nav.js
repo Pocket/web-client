@@ -1,19 +1,22 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { css, cx } from 'linaria'
+import { HomeIcon } from 'components/icons/HomeIcon'
+import { ArrowLeftIcon } from 'components/icons/ArrowLeftIcon'
+import { HighlightIcon } from 'components/icons/HighlightIcon'
+import { IosShareIcon } from 'components/icons/IosShareIcon'
+import { TagIcon } from 'components/icons/TagIcon'
+import { FavoriteIcon } from 'components/icons/FavoriteIcon'
+import { FavoriteFilledIcon } from 'components/icons/FavoriteFilledIcon'
+import { ArchiveIcon } from 'components/icons/ArchiveIcon'
+import { AddCircledIcon } from 'components/icons/AddCircledIcon'
+import { DeleteIcon } from 'components/icons/DeleteIcon'
+import { useRouter } from 'next/router'
 import {
-  ArrowLeftIcon,
-  HighlightIcon,
-  IosShareIcon,
-  TagIcon,
-  FavoriteIcon,
-  FavoriteFilledIcon,
-  ArchiveIcon,
-  AddCircledIcon,
-  DeleteIcon,
   breakpointLargeTablet,
-  breakpointMediumHandset
-} from '@pocket/web-ui'
+  breakpointMediumHandset,
+  breakpointLargeHandset
+} from 'common/constants'
 import { DisplaySettings } from 'components/display-settings/display-settings'
 import { buttonReset } from 'components/buttons/button-reset'
 import { bottomTooltip } from 'components/tooltip/tooltip'
@@ -60,6 +63,23 @@ const navStyle = css`
     justify-content: space-between;
     align-items: center;
     align-content: center;
+
+    &.get-started {
+      margin-left: -3rem;
+
+      ${breakpointLargeHandset} {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .home-label {
+    font-family: var(--fontSansSerif);
+    padding-left: 0.5rem;
+
+    ${breakpointLargeHandset} {
+      display: none;
+    }
   }
 
   ${breakpointLargeTablet} {
@@ -130,18 +150,23 @@ export const ReaderNav = ({
   setColorMode
 }) => {
   const dispatch = useDispatch()
+  const router = useRouter()
   const { t } = useTranslation()
 
   const setFontFamily = (val) => dispatch(updateFontType(val))
   const setFontSize = (val) => dispatch(updateFontSize(val))
   const setLineHeight = (val) => dispatch(updateLineHeight(val))
   const setColumnWidth = (val) => dispatch(updateColumnWidth(val))
+  const { getStarted } = router.query
+
   const goBack = () => {
+    if (getStarted) return router.push('/home')
     if (window.history.length > 1) return window.history.go(-1)
     document.location.href = '/my-list'
   }
   const clickGoBack = () => {
-    dispatch(sendSnowplowEvent('reader.goback'))
+    const identifier = getStarted ? 'get-started.reader.gohome' : 'reader.goback'
+    dispatch(sendSnowplowEvent(identifier))
     goBack()
   }
 
@@ -158,20 +183,30 @@ export const ReaderNav = ({
     return () => Mousetrap.unbind('b')
   }, [dispatch])
 
+  const returnCopy = getStarted
+    ? t('nav:back-to-home', 'Back to Home')
+    : t('nav:back-to-my-list', 'Back to My List')
   return (
     <header className={headerStyle} data-cy="reader-nav">
       <div className="global-nav-container">
         <nav className={navStyle}>
           <button
             onClick={clickGoBack}
-            aria-label={t('nav:back-to-my-list', 'Back to My List')}
-            data-tooltip={t('nav:back-to-my-list', 'Back to My List')}
+            aria-label={returnCopy}
+            data-tooltip={returnCopy}
             data-cy="reader-nav-go-back"
             className={cx(buttonClass, 'go-back')}>
-            <ArrowLeftIcon />
+            {getStarted ? (
+              <>
+                <HomeIcon />
+                <span className="home-label">Home</span>
+              </>
+            ) : (
+              <ArrowLeftIcon />
+            )}
           </button>
 
-          <div className="nav-actions">
+          <div className={cx(getStarted && 'get-started', 'nav-actions')}>
             <button
               onClick={toggleSidebar}
               aria-label={

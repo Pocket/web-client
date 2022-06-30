@@ -3,15 +3,23 @@ import { useSelector, useDispatch } from 'react-redux'
 import { ActionsLineup } from './card-lineup-actions'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export const CardLineup = ({ id, position, className, cardShape, showExcerpt = false }) => {
+export const CardLineup = ({
+  id,
+  position,
+  className,
+  cardShape,
+  showExcerpt = false,
+  showTopicName = false
+}) => {
   const dispatch = useDispatch()
 
   // Get data from state
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const item = useSelector((state) => state.homeItemsById[id])
-
   if (!item) return null
   const { saveStatus, itemId, readUrl, externalUrl, openExternal, analyticsData } = item
+  const { displayName } = analyticsData
+  const topicName = showTopicName ? displayName : false
 
   const data = {
     id,
@@ -40,6 +48,7 @@ export const CardLineup = ({ id, position, className, cardShape, showExcerpt = f
 
   return (
     <Card
+      topicName={topicName}
       itemId={itemId}
       externalUrl={externalUrl}
       tags={tags}

@@ -1,8 +1,7 @@
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import { useTranslation } from 'next-i18next'
-import { SimilarIcon } from '@pocket/web-ui'
+import { SimilarIcon } from 'components/icons/SimilarIcon'
 import { topTooltipDelayed } from 'components/tooltip/tooltip'
 const similarContainer = css`
   display: flex;
@@ -68,7 +67,7 @@ export const ShowSimilar = function ({ id, similarAction, className, hideCopy = 
     similarAction()
   }
 
-  const saveClasses = classNames(
+  const saveClasses = cx(
     buttonReset,
     'card-actions',
     similarContainer,

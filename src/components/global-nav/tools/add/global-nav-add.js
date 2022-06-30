@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { AddIcon, CrossIcon, ErrorIcon } from '@pocket/web-ui'
-import { breakpointMediumHandset } from '@pocket/web-ui'
-import { screenMediumHandset } from '@pocket/web-ui'
-import { css } from 'linaria'
-import classnames from 'classnames'
+import { AddIcon } from 'components/icons/AddIcon'
+import { CrossIcon } from 'components/icons/CrossIcon'
+import { ErrorIcon } from 'components/icons/ErrorIcon'
+import { breakpointMediumHandset } from 'common/constants'
+import { screenMediumHandset } from 'common/constants'
+import { css, cx } from 'linaria'
 import isURL from 'validator/lib/isURL'
 import { Trans, useTranslation } from 'next-i18next'
 import { KEYS } from 'common/constants'
@@ -79,6 +80,7 @@ const addIconStyle = css`
   transform: translateY(-50%);
   top: 50%;
   margin: 0;
+  color: var(--color-grey40);
 
   ${breakpointMediumHandset} {
     display: none;
@@ -215,7 +217,7 @@ const GlobalNavAdd = ({
           type="url"
           name="add-input"
           ref={inputEl}
-          className={classnames(['add-input', { 'has-value': !!addUrl }])}
+          className={cx('add-input', !!addUrl && 'has-value')}
           aria-label={t('nav:add-item-to-pocket', 'Add Item to Pocket')}
           value={addUrl}
           onChange={handleInputChange}

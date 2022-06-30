@@ -1,7 +1,7 @@
 import { css, cx } from 'linaria'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
-import { MailIcon } from '@pocket/web-ui'
-import { breakpointMediumTablet } from '@pocket/web-ui'
+import { MailIcon } from 'components/icons/MailIcon'
+import { breakpointMediumTablet } from 'common/constants'
 import { SocialButton } from 'components/social-button/social-button'
 
 const saveButton = css`

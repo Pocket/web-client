@@ -51,6 +51,7 @@ import { deriveListItem } from 'common/api/derivers/item'
 
 import { HYDRATE } from 'actions'
 import { SNOWPLOW_SEND_EVENT } from 'actions'
+import { READER_CLEAR_DELETION } from 'actions'
 
 // Client API actions
 import { getSavedItemByItemId } from 'common/api'
@@ -129,7 +130,11 @@ export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, 
 export const updateFontSize = (fontSize) => ({ type: UPDATE_FONT_SIZE, fontSize }) //prettier-ignore
 export const updateFontType = (fontFamily) => ({ type: UPDATE_FONT_TYPE, fontFamily }) //prettier-ignore
 export const toggleSidebar = () => ({ type: TOGGLE_READER_SIDEBAR }) //prettier-ignore
+<<<<<<< feat/highlight-annotations -- Incoming Change
 export const toggleAnnotationModal = (id) => ({ type: TOGGLE_ANNOTATION_MODAL, id })
+=======
+export const clearDeletion = () => ({ type: READER_CLEAR_DELETION })
+>>>>>>> main -- Current Change
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -147,7 +152,11 @@ const initialState = {
   fontSize: 3,
   fontFamily: 'blanco',
   sideBarOpen: false,
+<<<<<<< feat/highlight-annotations -- Incoming Change
   annotationsOpen: false,
+=======
+  deleted: false,
+>>>>>>> main -- Current Change
 
   articleItem: null,
   savedData: null,
@@ -282,6 +291,15 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, ...settings }
     }
 
+    case ITEMS_DELETE_SUCCESS:
+    case MUTATION_DELETE_SUCCESS: {
+      return { ...state, deleted: true }
+    }
+
+    case READER_CLEAR_DELETION: {
+      return { ...state, deleted: false }
+    }
+
     case ARTICLE_ITEM_REQUEST:
     case READ_ITEM_REQUEST: {
       return initialState
@@ -308,7 +326,6 @@ export const readSagas = [
   takeEvery(ARTICLE_ITEM_SUCCESS, articleContentRequest),
   takeEvery(ANNOTATION_SAVE_REQUEST, annotationSaveRequest),
   takeEvery(ANNOTATION_DELETE_REQUEST, annotationDeleteRequest),
-  takeEvery(ITEMS_DELETE_SUCCESS, redirectToList),
   takeEvery(ITEMS_ARCHIVE_SUCCESS, redirectToList),
   takeEvery(ITEMS_UNARCHIVE_SUCCESS, redirectToList),
   // settings
@@ -320,7 +337,6 @@ export const readSagas = [
   takeEvery(READ_ITEM_REQUEST, readItemRequest),
   takeEvery(READ_FAVORITE_REQUEST, readFavoriteRequest),
   takeEvery(READ_UNFAVORITE_REQUEST, readUnFavoriteRequest),
-  takeEvery(MUTATION_DELETE_SUCCESS, redirectToList),
   takeEvery(READ_ARCHIVE_REQUEST, readArchiveRequest),
   takeEvery(READ_ARCHIVE_SUCCESS, redirectToList),
   takeEvery(READ_UNARCHIVE_REQUEST, readUnArchiveRequest),
@@ -547,6 +563,11 @@ function* checkMutations({ nodes }) {
 
 function redirectToList() {
   if (document.location.href.indexOf('/read/') !== -1) {
+    // setup moment
+    const getStarted = new URLSearchParams(window.location.search)?.has('getStarted')
+    if (getStarted) return document.location.href = '/home'
+
+    // default behavior
     if (global.history.length > 1) {
       global.history.go(-1)
     } else {

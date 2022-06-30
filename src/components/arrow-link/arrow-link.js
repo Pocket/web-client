@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { ArrowRightIcon } from '@pocket/web-ui'
+import { ArrowRightIcon } from 'components/icons/ArrowRightIcon'
 
 const linkWrapper = css`
   font-family: 'Graphik Web';

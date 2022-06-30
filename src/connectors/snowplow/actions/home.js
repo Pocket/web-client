@@ -101,12 +101,7 @@ export const homeActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: [
-      'id',
-      'url',
-      'position',
-      'destination'
-    ]
+    expects: ['id', 'url', 'position', 'destination']
   },
   'home.recent.impression': {
     eventType: 'impression',
@@ -132,12 +127,15 @@ export const homeActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: [
-      'id',
-      'url',
-      'position',
-      'destination',
-    ]
+    expects: ['id', 'url', 'position', 'destination']
+  },
+  'home.recent.view-my-list': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'link'
+    },
+    description: 'Fired when a user clicks the `Go to My List` link in the recent saves section'
   },
   'home.collection.open': {
     eventType: 'contentOpen',
@@ -259,6 +257,56 @@ export const homeActions = {
       'slateExperiment',
       'displayName',
       'description'
+    ]
+  },
+  'home.topic-rec.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'id',
+      'url',
+      'position'
+    ]
+  },
+  'home.topic-rec.view-original': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'id',
+      'url',
+      'position'
+    ]
+  },
+  'home.topic-rec.impression': {
+    eventType: 'impression',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: [
+      'id',
+      'url',
+      'position'
+    ]
+  },
+  'home.topic-rec.save': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      engagementType: 'save',
+      uiType: 'button'
+    },
+    expects: [
+      'id',
+      'url',
+      'position'
     ]
   },
   'home.bestof.impression': {

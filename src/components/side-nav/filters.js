@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 
-import { FavoriteIcon } from '@pocket/web-ui'
-import { HighlightIcon } from '@pocket/web-ui'
-import { TagIcon } from '@pocket/web-ui'
-import { ArticleIcon } from '@pocket/web-ui'
-import { ArchiveIcon } from '@pocket/web-ui'
-import { VideoIcon } from '@pocket/web-ui'
+import { FavoriteIcon } from 'components/icons/FavoriteIcon'
+import { HighlightIcon } from 'components/icons/HighlightIcon'
+import { TagIcon } from 'components/icons/TagIcon'
+import { ArticleIcon } from 'components/icons/ArticleIcon'
+import { ArchiveIcon } from 'components/icons/ArchiveIcon'
+import { VideoIcon } from 'components/icons/VideoIcon'
 
 import { sideNavHeader } from './side-nav'
 

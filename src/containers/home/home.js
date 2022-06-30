@@ -1,5 +1,6 @@
 import Layout from 'layouts/main'
 import { useEffect } from 'react'
+import { parseCookies } from 'nookies'
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeGreeting } from 'containers/home/home-greeting'
 import { HomeRecentSaves } from 'containers/home/home-recent-saves'
@@ -11,6 +12,7 @@ import { HomeCollectionHeader } from 'components/headers/home-header'
 import { HomeLineupHeader } from 'components/headers/home-header'
 import { HomeTopicHeader } from 'components/headers/home-header'
 
+import { HomeRecsByTopic } from 'containers/home/home-recs-by-topic'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
 
@@ -26,6 +28,7 @@ import { Onboarding } from 'connectors/onboarding/onboarding'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Home = ({ metaData }) => {
   const dispatch = useDispatch()
@@ -34,10 +37,19 @@ export const Home = ({ metaData }) => {
   const featureState = useSelector((state) => state.features) || {}
   const generalSlates = useSelector((state) => state.home.generalSlates)
   const topicSlates = useSelector((state) => state.home.topicSlates)
+  const recsByTopic = useSelector((state) => state.home.recsByTopic) || []
+
   const fallback = '249850f0-61c0-46f9-a16a-f0553c222800'
 
   const lineupFlag = featureState['home.lineup']
   const lineupId = lineupFlag?.payload?.slateLineupId || fallback
+
+  const { getStartedUserTopics } = parseCookies()
+  const userTopics = getStartedUserTopics ? JSON.parse(getStartedUserTopics) : []
+
+  const inGetStartedTest = featureFlagActive({ flag: 'getstarted', featureState })
+  const shouldRenderTopicMix = inGetStartedTest && userTopics.length
+  const renderLineup = shouldRenderTopicMix ? recsByTopic.length : true
 
   useEffect(() => {
     if (userStatus !== 'valid' || !lineupFlag) return
@@ -58,13 +70,15 @@ export const Home = ({ metaData }) => {
         <HomeRecentSaves />
       </SectionWrapper>
 
-      {generalSlates?.map((slateId, index) => (
-        <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />
-      ))}
+      {shouldRenderTopicMix ? <HomeRecsByTopic /> : null}
 
-      {topicSlates?.map((slateId, index) => (
+      {renderLineup ? generalSlates?.map((slateId, index) => (
+        <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />
+      )) : null}
+
+      {renderLineup ? topicSlates?.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
-      ))}
+      )) : null}
 
       <DeleteModal />
       <TaggingModal />

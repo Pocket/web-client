@@ -1,6 +1,5 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { tagBase } from './tags'
-import classNames from 'classnames'
 
 export const suggestedTag = css`
   cursor: pointer;
@@ -14,7 +13,7 @@ export const suggestedTag = css`
   }
 `
 export const SuggestedTag = ({ children, className, ...args }) => (
-  <div className={classNames(className, tagBase, suggestedTag)} {...args}>
+  <div className={cx(className, tagBase, suggestedTag)} {...args}>
     {children}
   </div>
 )

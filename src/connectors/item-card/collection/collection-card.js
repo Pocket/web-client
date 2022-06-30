@@ -39,9 +39,7 @@ export function ItemCard({
   }
   /** ITEM DETAILS
    --------------------------------------------------------------- */
-  // for hero items in a lockup, use the heroImage instead of thumbnail
-  const preferredImage = lockup || useHero ? item.heroImage : item.thumbnail
-  const itemImage = item?.noImage ? '' : preferredImage
+  const itemImage = item?.noImage ? '' : item.heroImage
   const {tags, title, authors, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
 
   /**

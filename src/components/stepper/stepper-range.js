@@ -1,5 +1,4 @@
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 
 const rangeStepperWrapper = css`
   display: grid;
@@ -68,7 +67,7 @@ export const StepperRange = ({ range = [], current = 0, onChange }) => {
           data-index-number={index}
           aria-hidden={true}
           onClick={onStepClick}
-          className={classNames({ current: index === current })}
+          className={cx(index === current && 'current')}
         />
       ))}
     </div>

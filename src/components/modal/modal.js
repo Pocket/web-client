@@ -1,14 +1,11 @@
 import { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
-import classnames from 'classnames'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
-import {
-  breakpointSmallDesktop,
-  breakpointTinyTablet,
-  breakpointLargeHandset
-} from '@pocket/web-ui'
+import { breakpointSmallDesktop } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
 
 import { ModalHeader } from './modal-header'
 import { ModalBody } from './modal-body'
@@ -26,7 +23,7 @@ const modalMobileStyles = `
   bottom: 0;
   top: auto;
   border-radius: 0;
-  max-height: 100vh;
+  max-height: calc(100vh - var(--spacing650));
   max-width: 100%;
   transform-origin: bottom;
 
@@ -189,27 +186,23 @@ const Modal = ({
           onAfterClose()
         }}
         shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
-        className={classnames([
+        className={cx(
           className,
           modalStyles,
           modalContentClassName,
-          {
-            'animation-base': doesAnimateTransition,
-            'animation-show': doesAnimateTransition && readyAnimate && isOpen,
-            'animation-hide': doesAnimateTransition && readyAnimate && !isOpen,
-            'force-mobile': forceMobile
-          }
-        ])}
-        overlayClassName={classnames([
+          doesAnimateTransition && 'animation-base',
+          doesAnimateTransition && readyAnimate && isOpen && 'animation-show',
+          doesAnimateTransition && readyAnimate && !isOpen && 'animation-hide',
+          forceMobile && 'force-mobile'
+        )}
+        overlayClassName={cx(
           overlayStyles,
           overlayClassName,
-          {
-            'animation-base': doesAnimateTransition,
-            'animation-show': doesAnimateTransition && readyAnimate && isOpen,
-            'animation-hide': doesAnimateTransition && readyAnimate && !isOpen
-          }
-        ])}
-        portalClassName={classnames([portalClassName])}
+          doesAnimateTransition && 'animation-base',
+          doesAnimateTransition && readyAnimate && isOpen && 'animation-show',
+          doesAnimateTransition && readyAnimate && !isOpen && 'animation-hide'
+        )}
+        portalClassName={cx(portalClassName)}
         closeTimeoutMS={closeTimeoutMS} // necessary to make outgoing animation display
         data-cy="modal"
         contentRef={(node) => (modalContentRef = node)}>

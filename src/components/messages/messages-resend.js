@@ -1,9 +1,9 @@
 import { css } from 'linaria'
 import { Trans } from 'next-i18next'
-import { fontSansSerif, Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 
 const messageWrapper = css`
-  font-family: ${fontSansSerif};
+  font-family: var(--fontSansSerif);
 `
 
 export const MessageResend = ({ email, resendAction, status }) => {

@@ -94,6 +94,9 @@ public/static/locales/
 public/locales/
 .scripts/localization/config.json
 
+# Icon files — We build these from raw svgs (in case they need adjustment)
+src/components/icons
+
 # TS Terraform build 
 .terraform/
 node_modules/

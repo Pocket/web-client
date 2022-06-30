@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 
-import { HomeIcon } from '@pocket/web-ui'
-import { ChevronUpIcon } from '@pocket/web-ui'
-import { DiscoverIcon } from '@pocket/web-ui'
-import { ListViewIcon } from '@pocket/web-ui'
+import { HomeIcon } from 'components/icons/HomeIcon'
+import { ChevronUpIcon } from 'components/icons/ChevronUpIcon'
+import { DiscoverIcon } from 'components/icons/DiscoverIcon'
+import { ListViewIcon } from 'components/icons/ListViewIcon'
 import { css, cx } from 'linaria'
-import { CollectionsIcon } from '@pocket/web-ui'
+import { CollectionsIcon } from 'components/icons/CollectionsIcon'
 
 import { useInView } from 'react-intersection-observer'
 

@@ -1,15 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
-import classnames from 'classnames'
+import { css, cx } from 'linaria'
 
-import { Pill } from '@pocket/web-ui'
-import { headingSerifAlt } from '@pocket/web-ui'
+import { Pill } from 'components/pill/pill'
 
 export const pillboxStyle = css`
   h4 {
     margin-bottom: var(--spacing150);
-    ${headingSerifAlt}
+    font-family: var(--fontSerifAlt);
+    font-weight: 500;
   }
 
   ul {
@@ -57,8 +56,8 @@ const TopicsPillbox = ({
   }
 
   return (
-    <div className={classnames(pillboxStyle, `align-${alignItems}`)}>
-      <h4 className={classnames('h5', headingClassName)} data-cy="heading">
+    <div className={cx(pillboxStyle, `align-${alignItems}`)}>
+      <h4 className={cx('h5', headingClassName)} data-cy="heading">
         {headingText}
       </h4>
       <ul>

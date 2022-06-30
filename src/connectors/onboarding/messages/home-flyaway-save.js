@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import { css } from 'linaria'
-import { breakpointTinyTablet } from '@pocket/web-ui'
+import { breakpointTinyTablet } from 'common/constants'
 import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseSaveFlyaway } from '../onboarding.state'
@@ -20,7 +20,7 @@ const desktopHighlight = css`
 
 const tabletHighlight = css`
   ${onboardingHighlight}
-  
+
   ${breakpointTinyTablet} {
     border-radius: 2.75rem;
     animation: onboardingPulse 1.7s linear infinite;

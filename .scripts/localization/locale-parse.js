@@ -1,21 +1,25 @@
-const crypto = require('crypto')
-const fetch = require('isomorphic-unfetch')
-const fs = require('fs-extra')
-const path = require('path')
-const chalk = require('chalk')
-const simpleGit = require('simple-git/promise')
+import chalk from 'chalk'
+import enquirer from 'enquirer'
+import fs from 'fs-extra'
+import fetch from 'isomorphic-unfetch'
+import simpleGit from 'simple-git'
+import { transform as i18nTransform } from 'i18next-parser'
+import vfs from 'vinyl-fs'
+import sort from 'gulp-sort'
+import path from 'path'
+import parserConfig from '../../i18next-parser.config.js'
+import crypto from 'crypto'
+
 const git = simpleGit()
-const { Select, prompt } = require('enquirer')
-const vfs = require('vinyl-fs')
-const i18nTransform = require('i18next-parser').transform
-var sort = require('gulp-sort')
+const { pathExists, outputJson, emptyDir } = fs
+const { Select, prompt } = enquirer
 
 // Constants
-const localizationRepo = 'https://github.com/Pocket/web-localization'
-const localizationRepoTest = /https\:\/\/([\w\d]+@)?github.com\/Pocket\/web-localization(\.git)?/
-const scriptConfig = './.scripts/localization/config.json'
-const defaultLocation = '../web-localization/'
-const githubApiUrl = 'https://api.github.com'
+const LOCALIZATION_REPO = 'https://github.com/Pocket/web-localization'
+const LOCALIZATION_REPO_TEST = /https\:\/\/([\w\d]+@)?github.com\/Pocket\/web-localization(\.git)?/
+const CONFIG = './.scripts/localization/config.json'
+const DEFAULT_REPO_LOCAION = '../web-localization/'
+const GITHUB_API_URL = 'https://api.github.com'
 
 /**
  * Process localization organizes the logic and takes the user through
@@ -25,11 +29,11 @@ const githubApiUrl = 'https://api.github.com'
 async function processLocalization() {
   try {
     // Check for a preferences file first
-    const configExists = await fs.pathExists(scriptConfig)
+    const configExists = await pathExists(CONFIG)
 
     // Grab our settings
-    const settings = configExists ? await fs.readJson(scriptConfig) : {}
-    let { location = defaultLocation } = settings
+    const settings = configExists ? await fs.readJson(CONFIG) : {}
+    let { location = DEFAULT_REPO_LOCAION } = settings
 
     // Make sure we have a token stored in our config
     const token = settings.token ? settings.token : await setToken(settings)
@@ -58,7 +62,7 @@ async function processLocalization() {
     // Go ahead and submit PR if one does not already exist
     await submitPR(token, branchName, changedFiles)
   } catch (error) {
-    console.warn(error)
+    console.warn(chalk.red(error))
   }
 }
 
@@ -74,7 +78,7 @@ async function validateRepo(location) {
   console.log(chalk.blue(`Validating localization at: ${location}`))
 
   // First we check if the folder even exists
-  const folderExists = await fs.pathExists(location)
+  const folderExists = await pathExists(location)
 
   // If the folder does not exists the repo is not valid
   if (!folderExists) return false
@@ -88,7 +92,7 @@ async function validateRepo(location) {
   // If it is a repo, get some more details and confirm it's the localization repo
   const listConfig = await git.listConfig()
   const { 'remote.origin.url': remoteUrl } = listConfig.values['.git/config']
-  return isRepo && localizationRepoTest.test(remoteUrl)
+  return isRepo && LOCALIZATION_REPO_TEST.test(remoteUrl)
 }
 
 /**
@@ -121,7 +125,7 @@ async function setupRepo(location, settings) {
       }
     }
   } catch (error) {
-    console.warn(error)
+    console.warn(chalk.red(error))
   }
 }
 
@@ -139,12 +143,12 @@ async function locateRepo(settings) {
     })
 
     if (!location.length) throw new Error('Must be a separate repo.')
-    const locationExists = await fs.pathExists(location)
+    const locationExists = await pathExists(location)
 
     if (!locationExists) throw new Error('Not a valid location')
 
     // Write preferences to file
-    await fs.outputJson(scriptConfig, { ...settings, location: location })
+    await outputJson(CONFIG, { ...settings, location: location })
     console.log(`Setting localization repo to ${location}`)
 
     const isValid = validateRepo(location)
@@ -170,18 +174,18 @@ async function locateRepo(settings) {
  */
 async function cloneRepo(location, settings) {
   try {
-    await fs.emptyDir(location)
+    await emptyDir(location)
     await git.cwd(location)
 
     console.log(`Checking out localization to ${location}`)
-    await git.clone(localizationRepo, './')
+    await git.clone(LOCALIZATION_REPO, './')
 
-    await fs.outputJson(scriptConfig, { ...settings, location: location })
+    await outputJson(CONFIG, { ...settings, location: location })
     console.log(chalk.green('Repo checked out!'))
 
     return location
   } catch (error) {
-    console.log('Unable to check out repo!')
+    console.log(chalk.red('Unable to check out repo!'))
   }
 }
 
@@ -194,7 +198,7 @@ async function updateRepo() {
     await git.checkout('main')
     return git.pull()
   } catch (error) {
-    console.warn(error)
+    console.warn(chalk.red(error))
   }
 }
 
@@ -208,13 +212,12 @@ async function setBranch() {
 
   const branchName = await selectBranch(localBranches)
   const branchExists = localBranches.all.includes(branchName)
-  const checkoutCMD = branchExists ? git.checkout : git.checkoutLocalBranch
 
   branchExists
     ? console.log(chalk.green('Switching to branch'))
     : console.log(chalk.green('Creating new branch'))
 
-  await checkoutCMD(branchName)
+  branchExists ? await git.checkout(branchName) : await git.checkoutLocalBranch(branchName)
   return branchName
 }
 
@@ -250,7 +253,7 @@ async function selectBranch(localBranches) {
       }
     }
   } catch (error) {
-    console.warn(error)
+    console.warn(chalk.red(error))
   }
 }
 
@@ -288,7 +291,7 @@ async function pushChanges(branchName, location) {
     console.log(chalk.blue('  [commit] Pushing changes to branch'))
     const addLocation = path.resolve(location, 'locales')
     await git.cwd(addLocation)
-    return await git.push(localizationRepo, branchName)
+    return await git.push(LOCALIZATION_REPO, branchName)
   }
 
   return
@@ -317,7 +320,7 @@ async function submitPR(token, branchName, changedFiles) {
       process.exit(0)
     }
 
-    const prEndpoint = `${githubApiUrl}/repos/Pocket/web-localization/pulls`
+    const prEndpoint = `${GITHUB_API_URL}/repos/Pocket/web-localization/pulls`
     const prTitle = `feat(localization): from branch '${branchName}'`
     console.log(chalk.blue(chalk.blue('  [PR] Checking for existing PR')))
 
@@ -326,7 +329,7 @@ async function submitPR(token, branchName, changedFiles) {
       headers: { Authorization: `token ${token}` }
     }).then((response) => response.json())
 
-    if (existingPRs.filter((pr) => pr.title === prTitle).length) {
+    if (existingPRs?.filter((pr) => pr.title === prTitle).length) {
       return console.log(chalk.magenta('  [PR] Pull request already exists'))
     }
 
@@ -354,7 +357,7 @@ async function submitPR(token, branchName, changedFiles) {
     const { html_url } = createdPR
     console.log(chalk.green(`  [PR] Pull request created at ${html_url}`))
   } catch (error) {
-    console.error(error)
+    console.error(chalk.red(error))
   }
 }
 
@@ -369,51 +372,42 @@ async function submitPR(token, branchName, changedFiles) {
  * @param {string} location: Location of cloned repo
  */
 async function parseLocalizationChanges(location) {
-  return new Promise((resolve) => {
-    var config = {}
-    try {
-      config = require(path.resolve('i18next-parser.config.js'))
-    } catch (err) {
-      if (err.code === 'MODULE_NOT_FOUND') {
-        console.log('  [error] ' + 'Config file does not exist: i18next-parser.config.js')
-      } else {
-        throw err
-      }
+  try {
+    if (!parserConfig) throw new Error('MODULE_NOT_FOUND')
+
+    return new Promise((resolve) => {
+      const config = parserConfig
+      config.output = config.output || '$LOCALE/$NAMESPACE.json'
+      const resolvedOutput = path.resolve(location, 'locales')
+
+      let count = 0
+      let fileChanges = []
+
+      vfs
+        .src(config.input)
+        .pipe(sort())
+        .pipe(
+          new i18nTransform(config)
+            .on('reading', () => {
+              count++
+            })
+            .on('data', (file) => {
+              const fileChanged = handleData(file, location)
+              if (fileChanged) fileChanges.push(fileChanged)
+            })
+            .on('finish', () => handleFinish(count, fileChanges))
+            .on('error', (file) => handleError(file))
+        )
+        .pipe(vfs.dest(resolvedOutput))
+        .on('finish', () => resolve(fileChanges))
+    })
+  } catch (err) {
+    if (err.code === 'MODULE_NOT_FOUND') {
+      console.log('  [error] ' + 'Config file does not exist: i18next-parser.config.js')
+    } else {
+      throw err
     }
-
-    config.output = config.output || '$LOCALE/$NAMESPACE.json'
-    const resolvedOutput = path.resolve(location, 'locales')
-
-    let count = 0
-    let fileChanges = []
-
-    vfs
-      .src(config.input)
-      .pipe(sort())
-      .pipe(
-        new i18nTransform(config)
-          .on('reading', (file) => {
-            count++
-            handleReading(file)
-          })
-          .on('data', (file) => {
-            const fileChanged = handleData(file, location)
-            if (fileChanged) fileChanges.push(fileChanged)
-          })
-          .on('finish', () => handleFinish(count, fileChanges))
-          .on('error', (file) => handleError(file))
-      )
-      .pipe(vfs.dest(resolvedOutput))
-      .on('finish', () => resolve(fileChanges))
-  })
-}
-
-/**
- * handleReading is a helper function for the parser to display feedback on read
- * @param {obj} file: vinyl object the parser is reading
- */
-function handleReading(file) {
-  console.log(chalk.green(`  [read]: ${file.path}`))
+  }
 }
 
 /**
@@ -490,13 +484,14 @@ async function setToken(settings) {
     if (!token.length) throw new Error('Token is required.')
 
     // Write preferences to file
-    await fs.outputJson(scriptConfig, { ...settings, token })
+    await outputJson(CONFIG, { ...settings, token })
     console.log('Saving token to config')
 
     return token
   } catch (error) {
-    console.warn(error)
+    console.warn(chalk.red(error))
   }
 }
 
+// Run the whole thing
 processLocalization()

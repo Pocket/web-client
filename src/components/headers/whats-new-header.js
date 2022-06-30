@@ -1,8 +1,8 @@
 import { css } from 'linaria'
-import { breakpointSmallHandset } from '@pocket/web-ui'
-import { breakpointLargeHandset } from '@pocket/web-ui'
-import { breakpointTinyTablet } from '@pocket/web-ui'
-import { breakpointLargeTablet } from '@pocket/web-ui'
+import { breakpointSmallHandset } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
+import { breakpointLargeTablet } from 'common/constants'
 import { capitalizeFirstLetter } from 'common/utilities'
 
 const whatsNewHeaderStyle = css`
@@ -41,7 +41,9 @@ const whatsNewHeaderStyle = css`
 export const WhatsNewHeader = ({ title }) => {
   return (
     <header className={whatsNewHeaderStyle}>
-      <h1 className="pageTitle" data-cy="page-title">{capitalizeFirstLetter(title)}</h1>
+      <h1 className="pageTitle" data-cy="page-title">
+        {capitalizeFirstLetter(title)}
+      </h1>
     </header>
   )
 }

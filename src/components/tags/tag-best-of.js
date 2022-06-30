@@ -1,7 +1,6 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
-import classNames from 'classnames'
 
 const bestOfTag = css`
   background-color: #fdecee;
@@ -9,5 +8,5 @@ const bestOfTag = css`
 `
 
 export const BestOfTag = ({ children }) => (
-  <div className={classNames(buttonReset, tagBase, bestOfTag)}>{children}</div>
+  <div className={cx(buttonReset, tagBase, bestOfTag)}>{children}</div>
 )

@@ -4,12 +4,13 @@ import { MemoizedItemCard as ItemCard } from './card'
 import { useSelector, useDispatch } from 'react-redux'
 import { loadMoreListItems } from './list-saved.state'
 import { getScrollTop } from 'common/utilities'
-import { useViewport } from '@pocket/web-ui'
+import { useViewport } from 'components/viewport-provider/viewport-provider'
 
 import { css } from 'linaria'
 
 const listSavedStyle = css`
   position: relative;
+  margin-top: 2rem;
 `
 
 const LIST_DIMENSIONS = {

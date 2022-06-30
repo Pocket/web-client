@@ -1,4 +1,4 @@
-import { Button } from '@pocket/web-ui'
+import { Button } from 'components/buttons/button'
 import { css } from 'linaria'
 
 import { useState } from 'react'

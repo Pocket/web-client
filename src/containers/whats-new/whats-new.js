@@ -3,8 +3,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
-import { css } from 'linaria'
-import classNames from 'classnames'
+import { css, cx } from 'linaria'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { WhatsNewHeader } from 'components/headers/whats-new-header'
@@ -75,7 +74,7 @@ export default function Messages() {
   return (
     <Layout title={`Pocket - ${t('whats-new:whats-new', "What's New")}`}>
       <SideNav type="whats-new" isLoggedIn={isLoggedIn} />
-      <main className={classNames('main', whatsNewStyles)}>
+      <main className={cx('main', whatsNewStyles)}>
         <WhatsNewHeader title={t('whats-new:whats-new', "What's New")} />
         <Jun242021 />
         <Jun212021 />

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import classNames from 'classnames'
+import { cx } from 'linaria'
 import DOMPurify from 'dompurify'
 import { loadParsedImages } from './images'
 import { loadParsedVideos } from './videos'
@@ -85,7 +85,7 @@ export const Content = ({
     <article
       {...args}
       ref={articleRef}
-      className={classNames(contentStyles, highlightStyles)}
+      className={cx(contentStyles, highlightStyles)}
       dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
     />
   )

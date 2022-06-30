@@ -32,7 +32,7 @@ import { Toasts } from 'connectors/toasts/toast-list'
 import ErrorPage from 'pages/_error'
 
 import { css } from 'linaria'
-import { breakpointMediumHandset } from '@pocket/web-ui' // 479
+import { breakpointMediumHandset } from 'common/constants' // 479
 
 const itemStyles = css`
   ${breakpointMediumHandset} {

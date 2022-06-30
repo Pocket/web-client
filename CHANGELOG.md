@@ -1,3 +1,344 @@
+## [1.51.12](https://github.com/Pocket/web-client/compare/v1.51.11...v1.51.12) (2022-06-29)
+
+
+### Bug Fixes
+
+* **popper:** update popper placement on open ([d3d555e](https://github.com/Pocket/web-client/commit/d3d555ec6afabdc03cb11baa65ca260f514cb1a4))
+
+## [1.51.11](https://github.com/Pocket/web-client/compare/v1.51.10...v1.51.11) (2022-06-29)
+
+
+### Bug Fixes
+
+* **select-article:** fix button text on dark mode ([0454201](https://github.com/Pocket/web-client/commit/0454201324697abf5114d5ba33af331aa54c3fc7))
+* **select-article:** use correct semantic variable name ([e8e6f76](https://github.com/Pocket/web-client/commit/e8e6f764d2d79e260b75b1675b1fc92896d0edc1))
+
+## [1.51.10](https://github.com/Pocket/web-client/compare/v1.51.9...v1.51.10) (2022-06-28)
+
+
+### Bug Fixes
+
+* **syndicated:** forward users when article has expired ([0562186](https://github.com/Pocket/web-client/commit/0562186900ab0c9998e14b4c2296a6df86478f9d))
+
+## [1.51.9](https://github.com/Pocket/web-client/compare/v1.51.8...v1.51.9) (2022-06-28)
+
+
+### Bug Fixes
+
+* **modal:** add a mobile specific max height smaller than 100vh ([5f28515](https://github.com/Pocket/web-client/commit/5f285152e0ba013752534c887d6b56ef4152b3cc))
+
+## [1.51.8](https://github.com/Pocket/web-client/compare/v1.51.7...v1.51.8) (2022-06-27)
+
+
+### Bug Fixes
+
+* **card:** make text overflow really work, add overflow-wrap to break words when needed ([25fd783](https://github.com/Pocket/web-client/commit/25fd7839a0e372204afdd814f74a8544fbb482f0))
+
+## [1.51.7](https://github.com/Pocket/web-client/compare/v1.51.6...v1.51.7) (2022-06-27)
+
+
+### Bug Fixes
+
+* **recs by topic:** refresh recs by topic when topic selection changes ([e599bb9](https://github.com/Pocket/web-client/commit/e599bb9a77f213ed225b57ee353dcb76a972c1ca))
+
+## [1.51.6](https://github.com/Pocket/web-client/compare/v1.51.5...v1.51.6) (2022-06-27)
+
+
+### Bug Fixes
+
+* **global-nav:** adjust icon colors to be compatible with all themes ([09185df](https://github.com/Pocket/web-client/commit/09185dfccc45da504607b6c06618919745ea0910))
+* **item-overflow:** adjust text color on hover to be compatible with all themes ([3a7f6e5](https://github.com/Pocket/web-client/commit/3a7f6e594285b70c827eac7842323e82d45ea68b))
+
+## [1.51.5](https://github.com/Pocket/web-client/compare/v1.51.4...v1.51.5) (2022-06-27)
+
+
+### Bug Fixes
+
+* **account:** adding tree images for different themes ([a2d4af1](https://github.com/Pocket/web-client/commit/a2d4af166d1d41ce1e78509e31f3fea277e39a76))
+
+## [1.51.4](https://github.com/Pocket/web-client/compare/v1.51.3...v1.51.4) (2022-06-23)
+
+
+### Bug Fixes
+
+* **list:** add appropriate spacing ([dc74c46](https://github.com/Pocket/web-client/commit/dc74c46323d2a522dd85c45ab90c6e2cc6e53d91))
+* **list:** adjust search to work with api shape [FRONT-1757] ([721f038](https://github.com/Pocket/web-client/commit/721f038d2b171e6df78433c476e740d9572b18c0))
+* **list:** allow upsert to stand in for un-archive [FRONT-1752] ([599bba2](https://github.com/Pocket/web-client/commit/599bba2fa9f2646ec59a53195e1248074d847c90))
+* **list:** analytics on card actions [FRONT-1772] ([711b7cd](https://github.com/Pocket/web-client/commit/711b7cd6d2146603b739a014eaec710d73f30fca))
+* **list:** archived not filtered [FRONT-1737] ([c255014](https://github.com/Pocket/web-client/commit/c25501418008cf8c1a7c2e8a37cbcd9f0d59e553))
+* **list:** get permanent url properly [FRONT-1755] ([4dcd9c4](https://github.com/Pocket/web-client/commit/4dcd9c4e73ac3b75da16d90e59c0f7314a08be66))
+* **list:** loadmore to basic loader on initial [FRONT-1768] ([b53f160](https://github.com/Pocket/web-client/commit/b53f160666a077a95c128c01bf720c351e44e4f7))
+* **list:** remove shortcut on load [FRONT-1765] ([78fa88c](https://github.com/Pocket/web-client/commit/78fa88c2987e412e38a22f5c6395807bcc7975d6))
+* **list:** tagged list requests [FRONT-1754] ([e6f4806](https://github.com/Pocket/web-client/commit/e6f4806552bacacfa10a2791d239fe22f99c9899))
+* **load more:** avoid blocking pointer actions [FRONT-1751] ([982c4f3](https://github.com/Pocket/web-client/commit/982c4f3854d20d0e09dfa01b17917c7c2dda9b25))
+* **suggested tags:** enable from graph [FRONT-1740] ([d7aa632](https://github.com/Pocket/web-client/commit/d7aa632bbaac6827bb5e89553b4f192b0b91fde8))
+* **tagging:** fetch user tags if they do not exist ([437bba5](https://github.com/Pocket/web-client/commit/437bba53e00e844a8e5a6b6b395d401ddb8e10d0))
+* **tagging:** return status in tag mutations ([39fd1f2](https://github.com/Pocket/web-client/commit/39fd1f2644f6d4039c70389886be87866dbf839e))
+
+## [1.51.3](https://github.com/Pocket/web-client/compare/v1.51.2...v1.51.3) (2022-06-22)
+
+
+### Bug Fixes
+
+* **home:** derive readurl on item save ([33c5b9f](https://github.com/Pocket/web-client/commit/33c5b9f20bcc41e2251c55eef5142841390fc633))
+
+## [1.51.2](https://github.com/Pocket/web-client/compare/v1.51.1...v1.51.2) (2022-06-22)
+
+
+### Bug Fixes
+
+* **localizations:** bump web-localization ([b7f3927](https://github.com/Pocket/web-client/commit/b7f3927f8f0944b14f0b4c250a6a35ef46a13d5f))
+
+## [1.51.1](https://github.com/Pocket/web-client/compare/v1.51.0...v1.51.1) (2022-06-22)
+
+
+### Bug Fixes
+
+* **home:** content should load with or without selected topics ([b99655a](https://github.com/Pocket/web-client/commit/b99655aebeb2d93b35ac48e94fedaa6f7c83d93f))
+
+# [1.51.0](https://github.com/Pocket/web-client/compare/v1.50.1...v1.51.0) (2022-06-21)
+
+
+### Features
+
+* **collections:** use hero image full time ([fdf50a2](https://github.com/Pocket/web-client/commit/fdf50a2c2270b4a10470b5edb57de90efc3ac1ef))
+
+## [1.50.1](https://github.com/Pocket/web-client/compare/v1.50.0...v1.50.1) (2022-06-16)
+
+
+### Bug Fixes
+
+* **waypoint:** direct non english users to my list ([20f62ff](https://github.com/Pocket/web-client/commit/20f62ffcce4c3fe3fdc59b7040fedd819e14ad81))
+* **waypoint:** should only go to get-started if not english ([697f3d6](https://github.com/Pocket/web-client/commit/697f3d606be32cb9030b20b8ea4fbccaa48c3edd))
+
+# [1.50.0](https://github.com/Pocket/web-client/compare/v1.49.18...v1.50.0) (2022-06-16)
+
+
+### Features
+
+* **get-started:** send new users to /get-started on sign up ([51bf6a2](https://github.com/Pocket/web-client/commit/51bf6a293bf7e2a16ffe9a8d22ac46b68c17732f))
+
+## [1.49.18](https://github.com/Pocket/web-client/compare/v1.49.17...v1.49.18) (2022-06-16)
+
+
+### Bug Fixes
+
+* **home:** add snowplow events for topic rec cards ([bf50e93](https://github.com/Pocket/web-client/commit/bf50e93eaa79d105562c5c4d7b0d8d720c2dd594))
+
+## [1.49.17](https://github.com/Pocket/web-client/compare/v1.49.16...v1.49.17) (2022-06-16)
+
+
+### Bug Fixes
+
+* **names:** fixing a few response names ([4287f9e](https://github.com/Pocket/web-client/commit/4287f9e7ddd0d6a61af3286601b24f27d553ac5c))
+* **name:** updating collection query name ([0556ead](https://github.com/Pocket/web-client/commit/0556ead721528be0da6a5e156f1db794554491d2))
+* **publisher:** updating the uses of logos to the new format ([fea0149](https://github.com/Pocket/web-client/commit/fea0149ee1147bba2ed520820b0e8e0646b08c42))
+* **syndicated article:** adjusting consumption ([59095df](https://github.com/Pocket/web-client/commit/59095dfaef537931fdc7abfb27379c92b7b9334f))
+* **syndicated:** shape for publisher/authors ([4a41f98](https://github.com/Pocket/web-client/commit/4a41f98b6e10e97ad82c246317083ab74c745cfe))
+* **syndication:** switching to pocket graph for syndication ([6ea05d4](https://github.com/Pocket/web-client/commit/6ea05d40d3ece1afd393f29829d62e49c218f84b))
+* **unleash:** switching to unleashAssignments ([3202486](https://github.com/Pocket/web-client/commit/32024868871931e20305a461aa38ffe7c94c7aa4))
+
+## [1.49.16](https://github.com/Pocket/web-client/compare/v1.49.15...v1.49.16) (2022-06-15)
+
+
+### Bug Fixes
+
+* **get-started:** fix save confirm modal to prevent scroll lock ([96790b4](https://github.com/Pocket/web-client/commit/96790b4c5edee5a74f2e0f1500920bc000fbe1e6))
+
+## [1.49.15](https://github.com/Pocket/web-client/compare/v1.49.14...v1.49.15) (2022-06-15)
+
+
+### Bug Fixes
+
+* **get-started:** deleting an article will remove reader from browser history ([790e07c](https://github.com/Pocket/web-client/commit/790e07c18ef8e5d9d4fc752971564fe4a9663708))
+
+## [1.49.14](https://github.com/Pocket/web-client/compare/v1.49.13...v1.49.14) (2022-06-15)
+
+
+### Bug Fixes
+
+* **get-started:** pixel pushing that checkbox ([fad58a0](https://github.com/Pocket/web-client/commit/fad58a05cd7da49c8d86e972cdadba21723bd119))
+* **get-started:** update styles of checkbox to have smaller checkmark ([525707d](https://github.com/Pocket/web-client/commit/525707da74fa191b8573128f5983f2ee3a705198))
+* **get-started:** update styles of checkbox to have thicker checkmark ([2bccff9](https://github.com/Pocket/web-client/commit/2bccff926838559f6718d27b9c473facd45bb1d4))
+
+## [1.49.13](https://github.com/Pocket/web-client/compare/v1.49.12...v1.49.13) (2022-06-15)
+
+
+### Bug Fixes
+
+* **publisher:** add champion ([815b05a](https://github.com/Pocket/web-client/commit/815b05a6d4affbe87a00deaf9ffb5167fe5be13e))
+* **publisher:** clamp very long publishers ( for real this time ) ([c6f85ac](https://github.com/Pocket/web-client/commit/c6f85ac1ee36411acb936e80be08b257e1f9872d))
+
+## [1.49.12](https://github.com/Pocket/web-client/compare/v1.49.11...v1.49.12) (2022-06-15)
+
+
+### Bug Fixes
+
+* **get-started:** make sure to pass id from upsert response ([644bf2d](https://github.com/Pocket/web-client/commit/644bf2dc160988df97799db48a0422bcedd9be00))
+
+## [1.49.11](https://github.com/Pocket/web-client/compare/v1.49.10...v1.49.11) (2022-06-14)
+
+
+### Bug Fixes
+
+* **get-started:** remove anchor from footer and add save state to article selection ([9f4eb3c](https://github.com/Pocket/web-client/commit/9f4eb3c3fcff786374c054358e18d41f6ee14c27))
+* **get-started:** update save status state management and skip button color ([6f86a07](https://github.com/Pocket/web-client/commit/6f86a0704e8099b0a0fdfcca1f105ad20a5c14d8))
+
+## [1.49.10](https://github.com/Pocket/web-client/compare/v1.49.9...v1.49.10) (2022-06-14)
+
+
+### Bug Fixes
+
+* **get-started:** fix duplicate impressions on select articles ([9465d5e](https://github.com/Pocket/web-client/commit/9465d5e1bc39ae6bd72aef2bdae2a9eb363f5d3d))
+
+## [1.49.9](https://github.com/Pocket/web-client/compare/v1.49.8...v1.49.9) (2022-06-14)
+
+
+### Bug Fixes
+
+* **get-started:** go to home on archive or delete actions in reader ([c441f18](https://github.com/Pocket/web-client/commit/c441f185628a18cbbd4c71db6e8bad3364549e0a))
+* **reader:** only redirect to home when on reader ([a614148](https://github.com/Pocket/web-client/commit/a61414809b5c53dcb835973a06786fd462af7b25))
+
+## [1.49.8](https://github.com/Pocket/web-client/compare/v1.49.7...v1.49.8) (2022-06-14)
+
+
+### Bug Fixes
+
+* **global nav:** make logo hide/show work in all cases ([6065897](https://github.com/Pocket/web-client/commit/6065897a1580234793357590146c7001fece4ed9))
+
+## [1.49.7](https://github.com/Pocket/web-client/compare/v1.49.6...v1.49.7) (2022-06-14)
+
+
+### Bug Fixes
+
+* **get started:** add ability to update topic pref ([a81d0b3](https://github.com/Pocket/web-client/commit/a81d0b320dd32bca4822b0732c4faed811dcdf98))
+
+## [1.49.6](https://github.com/Pocket/web-client/compare/v1.49.5...v1.49.6) (2022-06-14)
+
+
+### Bug Fixes
+
+* **home:** only show HomeRecsByTopic when inGetStartedTest ([7edc0dd](https://github.com/Pocket/web-client/commit/7edc0ddf038346c9f2e8629bbb0734a0c413e893))
+
+## [1.49.5](https://github.com/Pocket/web-client/compare/v1.49.4...v1.49.5) (2022-06-14)
+
+
+### Bug Fixes
+
+* **onboarding:** don't show any of the onboarding flyaways when in the getstarted test ([c834147](https://github.com/Pocket/web-client/commit/c83414701ed3569af032d3db14678131475257f3))
+
+## [1.49.4](https://github.com/Pocket/web-client/compare/v1.49.3...v1.49.4) (2022-06-13)
+
+
+### Bug Fixes
+
+* **get-started:** add snowplow event to the Home button in the toolbar in Reader ([0e76609](https://github.com/Pocket/web-client/commit/0e76609aeddf273ce63044f0d37ae4ee87d78f4d))
+* **get-started:** adding snowplow events for all interactions in the get started flow ([183225d](https://github.com/Pocket/web-client/commit/183225d74bf8b6af93ffea58aae355301e0f6421))
+
+## [1.49.3](https://github.com/Pocket/web-client/compare/v1.49.2...v1.49.3) (2022-06-13)
+
+
+### Bug Fixes
+
+* **footer:** adjust responsive breakpoint for .anchored ([b3a97fb](https://github.com/Pocket/web-client/commit/b3a97fbbf1990a48329a25c496bfecfa4a2dabf5))
+* **footer:** fix double border on minimal footer ([24a1ee6](https://github.com/Pocket/web-client/commit/24a1ee658b5393e92bd7439f1e4e35f1357cb886))
+* **get started:** adjust max-width of layout, update footer border to divider style ([dcf7a14](https://github.com/Pocket/web-client/commit/dcf7a14d62ee78370d6ef55d1e323936741984a8))
+* **global nav:** hide the no nav logo separately from the logged in logo ([6e2d60a](https://github.com/Pocket/web-client/commit/6e2d60aecdf9e0301361cff1cddc0284d15412cc))
+* **header:** make logo not clickable, keep full logo and remove hamburger menu on mobile ([01aba7e](https://github.com/Pocket/web-client/commit/01aba7e79f24d033c6b880a8b2de095123c26d9f))
+* **reader:** add home label on desktop ([049c1a9](https://github.com/Pocket/web-client/commit/049c1a9c8f8e1c14aaa6a9107e42e6916cdc03c4))
+* **save-confirm:** update copy, adjust buttons on small screens ([9ddbee0](https://github.com/Pocket/web-client/commit/9ddbee05202219d1d20efbd4cd3dfadfd06ceec0))
+* **save-to-pocket:** add the ability to have a border on the save to pocket button ([7b509ac](https://github.com/Pocket/web-client/commit/7b509ac079ec9062646295ac7e5a752921302125))
+* **select-article:** change div to span in h2 sub-head ([b6cd174](https://github.com/Pocket/web-client/commit/b6cd174ec13c1a95c5f5313bbfc58b7db6dafca4))
+* **select-article:** remove hover effect on card items, some cleanup ([f308e98](https://github.com/Pocket/web-client/commit/f308e985241d8fd1968f7701de40eb1500cefb74))
+* **select-article:** responsiveness, move border style for button, limit articles ([ce0e829](https://github.com/Pocket/web-client/commit/ce0e82911c5456b4e712010ca3d6649e2efb0a30))
+* **select-article:** update copy and add save icon ([e49a148](https://github.com/Pocket/web-client/commit/e49a14840c516608289c144c008ee445cec40a59))
+* **select-topics:** adjust size and spacing of footer buttons ([f77eb3f](https://github.com/Pocket/web-client/commit/f77eb3fb1abd95a5c1f82e6bbcf61733cf230288))
+* **select-topics:** bold the word Topics in the subheader ([7e5a16d](https://github.com/Pocket/web-client/commit/7e5a16d5b6adadf3a8c436faa513f9b37f668c2c))
+* **select-topics:** disable continue button until first topic is selected ([e14304c](https://github.com/Pocket/web-client/commit/e14304c38076f00f5dc8dd358e1ccd6117b69888))
+* **select-topics:** responsive tweaks ([75d452a](https://github.com/Pocket/web-client/commit/75d452a4eb3f13a2f227430ba829833dde881761))
+* **select-topics:** skip link should also go to select-article ([c215e88](https://github.com/Pocket/web-client/commit/c215e884074f1f6cda290637872ed0b5c76fedc3))
+* **setup moment:** use <strong> for bold text in sub-head ([80c1005](https://github.com/Pocket/web-client/commit/80c100599df77548172331cad56011727ab98f65))
+
+## [1.49.2](https://github.com/Pocket/web-client/compare/v1.49.1...v1.49.2) (2022-06-13)
+
+
+### Bug Fixes
+
+* **card base styles:** add styles for flex card shape ([5489823](https://github.com/Pocket/web-client/commit/5489823d39809eac467cb7b7ba14d875a6eba624))
+* **card base:** update css comments ([0c1059c](https://github.com/Pocket/web-client/commit/0c1059cec5a9b90a1940d5a438da40d450a83d97))
+* **card:** add new flex card shape ([6e724ce](https://github.com/Pocket/web-client/commit/6e724ce41b873858875baba93c61bcef62ee650f))
+* **flex card:** adjust size of title ([416a4f1](https://github.com/Pocket/web-client/commit/416a4f128df1153391856288a65e91ea55d36871))
+* **home greeting:** show home greeting after first save ([5812d4c](https://github.com/Pocket/web-client/commit/5812d4cc98de7707c2eff370a425ec917668a720))
+* **home header:** add ability to include link in HomeSectionHeader ([c1be44b](https://github.com/Pocket/web-client/commit/c1be44b85cf9cf94e9074b0d2fae67764862f708))
+* **home state:** don't include old recent saves ([587bc66](https://github.com/Pocket/web-client/commit/587bc6606a81e4bcf68052ea0094d478eac71300))
+* **item layouts:** add FlexList layout so it can be based on flexbox instead of grid ([297711c](https://github.com/Pocket/web-client/commit/297711c9da9cfa894d49e15b8da993f9a0bfd81a))
+* **recent saves:** use FlexList for recent saves card items ([9d28558](https://github.com/Pocket/web-client/commit/9d285581e51d396e51c80d8e144fea1a4bf79634))
+* **snowplow actions:** add snowplow action for home.recent.view-my-list ([4158df2](https://github.com/Pocket/web-client/commit/4158df2dd53b5ab74717f2d23a024a0eb644f7dd))
+
+## [1.49.1](https://github.com/Pocket/web-client/compare/v1.49.0...v1.49.1) (2022-06-10)
+
+
+### Bug Fixes
+
+* **topic-selection:** make the topic selectors keyboard selectable and navigable ([f1d6302](https://github.com/Pocket/web-client/commit/f1d63022242ac6aa0844accf88f64262e9eb29cf))
+
+# [1.49.0](https://github.com/Pocket/web-client/compare/v1.48.2...v1.49.0) (2022-06-10)
+
+
+### Bug Fixes
+
+* **get started:** clean up cruft / handle skips ([fa14e0e](https://github.com/Pocket/web-client/commit/fa14e0eef6c2d395d1c310c3db1f379d526383d7))
+* **get started:** hydrate individual pages ([00c03cd](https://github.com/Pocket/web-client/commit/00c03cde95c8d3be4b43dc12b72826fb61bcbcfd))
+* **get started:** negative path fixes ([f28b25d](https://github.com/Pocket/web-client/commit/f28b25dc177201301ccac784c60cc8c57524dba0))
+* **get started:** remove potential leak to get started ([d33bb50](https://github.com/Pocket/web-client/commit/d33bb50806b40a788ea0d89c845051e2877edc97))
+* **get started:** rems not px ([5d4dbc7](https://github.com/Pocket/web-client/commit/5d4dbc7ff571b97534e913f2c1453382a71b4b25))
+* **get started:** replace displayName with topic ([e054e5a](https://github.com/Pocket/web-client/commit/e054e5a69df73bf009f63fc1eeaa2818f1fd6574))
+* **get started:** specific card avoids confusion ([1274b37](https://github.com/Pocket/web-client/commit/1274b37ddfd8941b6a6f7c57fb819bb19f42b782))
+* **get started:** styling issues ([3ca9fce](https://github.com/Pocket/web-client/commit/3ca9fce0099bc4dbb77efd6884f51a9c8420c609))
+* **get started:** styling tweaks ([23b6f68](https://github.com/Pocket/web-client/commit/23b6f68422fc6bbf28d85df058f9ac8b687856a0))
+* **get started:** use non new tab slate ids ([f1851f0](https://github.com/Pocket/web-client/commit/f1851f079e5d3269e09304d8a1fb2c889eb1e462))
+* **get started:** use provided slate ids ([39f3702](https://github.com/Pocket/web-client/commit/39f3702545999812e5f847b13b635cf79c8fa1d6))
+* **get started:** use specific layout ([245befb](https://github.com/Pocket/web-client/commit/245befbeaf6d486a62835aef3d26c3d99001d290))
+* **get-started:** copy and topic limits ([03c3f7c](https://github.com/Pocket/web-client/commit/03c3f7c095d46675d2fa47034e41c6649b0c13fa))
+* **get-started:** minor tweaks from sync ([3303ab2](https://github.com/Pocket/web-client/commit/3303ab27369800419db9bf8f677de58e1b2f36fd))
+* **home:** limit recs by topic ([8840a5d](https://github.com/Pocket/web-client/commit/8840a5dd3b5425ad7f1564d64bcfac9665d0f124))
+* **setup:** use proper flex-end ([c0c7c24](https://github.com/Pocket/web-client/commit/c0c7c248a89db6eb1ab163bd38968e20d78c7e8b))
+
+
+### Features
+
+* **get started:** break out pages ([8793f2c](https://github.com/Pocket/web-client/commit/8793f2c7acbd4d86e867d017010602a8f6457bf1))
+* **get-started:** scaffold get-started experience ([5789b0b](https://github.com/Pocket/web-client/commit/5789b0be5d44d8c703b841a9ef630f9ead04b15f))
+
+## [1.48.2](https://github.com/Pocket/web-client/compare/v1.48.1...v1.48.2) (2022-06-09)
+
+
+### Bug Fixes
+
+* **snowplow:** fix race condition when parsing item id for content entity ([59cdd9f](https://github.com/Pocket/web-client/commit/59cdd9f221902e719724f29df85a59c4c794c0e5))
+
+## [1.48.1](https://github.com/Pocket/web-client/compare/v1.48.0...v1.48.1) (2022-06-02)
+
+
+### Bug Fixes
+
+* **modal:** fix modal overlay styles ([7261dae](https://github.com/Pocket/web-client/commit/7261daea800b728ddc8fb68ff1aa613aafc9a33a))
+
+# [1.48.0](https://github.com/Pocket/web-client/compare/v1.47.9...v1.48.0) (2022-06-01)
+
+
+### Bug Fixes
+
+* **reader:** font file formatting ([e70e47a](https://github.com/Pocket/web-client/commit/e70e47adb516a60254d95c152c2be73ebc513cd9))
+
+
+### Features
+
+* **breakpoints:** add to constants ([044635a](https://github.com/Pocket/web-client/commit/044635a069ba27c57cbee8dae6b4d2afe8d9b452))
+* **button:** add to components ([719a246](https://github.com/Pocket/web-client/commit/719a2468fc9468f1caff7334859b5bef3ea9b1b2))
+* **icons:** build icons scripts/icons ([6f93f87](https://github.com/Pocket/web-client/commit/6f93f878376176a042ea6d2c61305613f7e84ec5))
+* **pocket ui:** integrate pocket ui ([bf93256](https://github.com/Pocket/web-client/commit/bf93256ac41a5058f8f0067e0930c81f2019ea92))
+
 ## [1.47.9](https://github.com/Pocket/web-client/compare/v1.47.8...v1.47.9) (2022-05-31)
 
 

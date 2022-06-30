@@ -4,6 +4,8 @@ import { requestGQL } from 'common/utilities/request/request'
 const itemsTagsAddQuery = gql`
   mutation ItemsTagsAdd($input: [SavedItemTagsInput!]!) {
     createSavedItemTags(input: $input) {
+      status
+      _updatedAt
       id
       tags {
         name
@@ -20,6 +22,7 @@ const itemTagsReplaceQuery = gql`
         name
         id
       }
+      status
       _updatedAt
       id
     }
@@ -33,6 +36,7 @@ const itemTagsRemoveQuery = gql`
         name
         id
       }
+      status
       _updatedAt
       id
     }

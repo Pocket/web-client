@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from 'linaria'
 import { numberWithCommas } from 'common/utilities'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { darkMode, sepiaMode } from '@pocket/web-ui'
+
 import { Trans } from 'next-i18next'
 
 const publisherWrap = css`
@@ -21,8 +21,8 @@ const publisherStyles = css`
     height: 60px;
     margin-bottom: var(--spacing100);
 
-    ${darkMode},
-    ${sepiaMode} {
+    .colormode-dark &,
+    .colormode-sepia & {
       border-radius: 4px;
     }
   }
@@ -43,7 +43,7 @@ export const Publisher = ({ recommendationName, name, logo }) => {
   const publisherName = recommendationName || name || 'Publisher'
   return (
     <div className={publisherStyles}>
-      {logo ? <img data-cy="publisher-logo" src={logo.url} alt={publisherName} /> : null}
+      {logo ? <img data-cy="publisher-logo" src={logo} alt={publisherName} /> : null}
       <h6 className="publisher-name" data-cy="publisher-recs-publisher-name">
         <Trans i18nKey="discover:more-from-publisher">More from {{ publisherName }}</Trans>
       </h6>
@@ -188,7 +188,7 @@ PublisherRecs.propTypes = {
    */
   publisher: PropTypes.shape({
     recommendationName: PropTypes.string,
-    logo: PropTypes.object
+    logo: PropTypes.string
   }),
 
   /**

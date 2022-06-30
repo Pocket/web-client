@@ -1,8 +1,7 @@
-import { css } from 'linaria'
-import { DiscoverFilledIcon } from '@pocket/web-ui'
+import { css, cx } from 'linaria'
+import { DiscoverFilledIcon } from 'components/icons/DiscoverFilledIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
-import classNames from 'classnames'
 
 const webOnlyWrapper = css`
   padding: 0 5px;
@@ -12,7 +11,7 @@ const webOnlyWrapper = css`
   color: var(--color-canvas);
 `
 export function WebOnlyTag({ count, margin }) {
-  const className = classNames(webOnlyWrapper, buttonReset, tagBase)
+  const className = cx(webOnlyWrapper, buttonReset, tagBase)
   return (
     <div className={className} style={{ margin }}>
       <DiscoverFilledIcon />

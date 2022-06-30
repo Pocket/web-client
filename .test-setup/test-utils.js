@@ -5,7 +5,7 @@ import * as customQueries from './custom-queries'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { rootReducer } from '../src/store'
-import { ViewportProvider } from '@pocket/web-ui'
+import { ViewportProvider } from 'components/viewport-provider/viewport-provider'
 
 /**
  * Custom basic render

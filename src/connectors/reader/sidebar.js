@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import classNames from 'classnames'
 import { Sidebar } from 'components/reader/sidebar'
-
+import { cx } from 'linaria'
 import { toggleSidebar } from 'containers/read/read.state'
 import { deleteHighlightRequest } from 'containers/read/read.state'
 import { shareAction } from 'connectors/share-modal/share-modal.state'
@@ -42,7 +41,7 @@ export const SidebarWrapper = ({ id }) => {
   }
 
   return (
-    <div className={classNames('sidebar-anchor', { active: sideBarOpen })}>
+    <div className={cx('sidebar-anchor', sideBarOpen && 'active')}>
       <Sidebar
         isPremium={isPremium}
         sideBarOpen={sideBarOpen}

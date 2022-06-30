@@ -5,7 +5,7 @@ import { css } from 'linaria'
 import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseMyListFlyaway } from '../onboarding.state'
-import { breakpointLargeTablet } from '@pocket/web-ui'
+import { breakpointLargeTablet } from 'common/constants'
 import { onboardingHighlight } from './onboarding-animations'
 
 const topNavStyles = css`
@@ -59,7 +59,7 @@ export const HomeFlyawayMyList = () => {
   const myListFlyawayReady = useSelector((state) => state.onboarding.homeFlyawayMyList)
   const saveFlyawayStatus = useSelector((state) => state.onboarding.homeFlyawaySave)
   const saveFlyawayDismissed = saveFlyawayStatus === false
-  const showFlyaway = (saveFlyawayDismissed && myListFlyawayReady)
+  const showFlyaway = saveFlyawayDismissed && myListFlyawayReady
 
   useEffect(() => {
     let timer

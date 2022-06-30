@@ -52,6 +52,10 @@ export async function getSavedItemByItemId(itemId) {
 }
 
 function handleResponse(response) {
-  const { item, ...savedData } = response?.data?.user?.savedItemById
+  const responseData = response?.data?.user?.savedItemById
+
+  if (!responseData) throw new Error(response?.errors)
+
+  const { item, ...savedData } = responseData
   return { item, savedData }
 }
