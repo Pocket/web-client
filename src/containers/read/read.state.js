@@ -130,11 +130,8 @@ export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, 
 export const updateFontSize = (fontSize) => ({ type: UPDATE_FONT_SIZE, fontSize }) //prettier-ignore
 export const updateFontType = (fontFamily) => ({ type: UPDATE_FONT_TYPE, fontFamily }) //prettier-ignore
 export const toggleSidebar = () => ({ type: TOGGLE_READER_SIDEBAR }) //prettier-ignore
-<<<<<<< feat/highlight-annotations -- Incoming Change
 export const toggleAnnotationModal = (id) => ({ type: TOGGLE_ANNOTATION_MODAL, id })
-=======
 export const clearDeletion = () => ({ type: READER_CLEAR_DELETION })
->>>>>>> main -- Current Change
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -152,11 +149,8 @@ const initialState = {
   fontSize: 3,
   fontFamily: 'blanco',
   sideBarOpen: false,
-<<<<<<< feat/highlight-annotations -- Incoming Change
   annotationsOpen: false,
-=======
   deleted: false,
->>>>>>> main -- Current Change
 
   articleItem: null,
   savedData: null,

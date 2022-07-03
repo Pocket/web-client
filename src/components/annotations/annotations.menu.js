@@ -3,18 +3,16 @@ import { useSelector } from 'react-redux'
 import { css, cx } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
 
-import { OverflowMenuIcon } from '@pocket/web-ui'
-import { IosShareIcon } from '@pocket/web-ui'
-import { DeleteIcon } from '@pocket/web-ui'
-import { EditIcon } from '@pocket/web-ui'
-import { PopupMenuGroup } from '@pocket/web-ui'
-import { PopupMenuItem } from '@pocket/web-ui'
-import { PremiumIcon } from '@pocket/web-ui'
+import { OverflowMenuIcon } from 'components/icons/OverflowMenuIcon'
+import { IosShareIcon } from 'components/icons/IosShareIcon'
+import { DeleteIcon } from 'components/icons/DeleteIcon'
+import { EditIcon } from 'components/icons/EditIcon'
+import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
+import { PopupMenuItem } from 'components/popup-menu/popup-menu'
 
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
-import { PREMIUM_URL } from 'common/constants'
 
 const inlineMenuStyles = css`
   position: absolute;
@@ -93,7 +91,6 @@ export const AnnotationMenu = ({
 }) => {
   const { t } = useTranslation()
 
-<<<<<<< feat/highlight-annotations -- Incoming Change
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const featureState = useSelector((state) => state.features)
   const showLab = flagsReady && featureFlagActive({ flag: 'annotations', featureState })
@@ -104,9 +101,6 @@ export const AnnotationMenu = ({
     document.documentElement.clientHeight,
     window.innerHeight || 0
   )
-=======
-  const screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
->>>>>>> main -- Current Change
   const [menuOpen, setMenuOpen] = useState(false)
   const [flipDirection, setFlipDirection] = useState(false)
   const selfRef = useRef(null)

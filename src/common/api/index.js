@@ -44,9 +44,7 @@ export { bulkUnArchive } from './mutations/unArchiveItem'
 export { createHighlight } from './mutations/savedItemHighlights'
 export { deleteHighlight } from './mutations/savedItemHighlights'
 export { updateHighlight } from './mutations/savedItemHighlights'
-<<<<<<< feat/highlight-annotations -- Incoming Change
 export { updateAnnotation } from './mutations/savedItemHighlights'
-=======
 
 // Setup Moment
 export { getTopicSelectors } from './queries/get-topic-selectors'
@@ -54,4 +52,3 @@ export { getSlate } from './queries/get-slate'
 export { getSetupSlate } from './queries/get-setup-slate'
 export { getTopicMix } from './queries/get-topic-mix'
 export { setTopicPreferences } from './mutations/setTopicPreferences'
->>>>>>> main -- Current Change

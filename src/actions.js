@@ -508,11 +508,8 @@ export const UPDATE_COLUMN_WIDTH = 'UPDATE_COLUMN_WIDTH'
 export const UPDATE_FONT_SIZE = 'UPDATE_FONT_SIZE'
 export const UPDATE_FONT_TYPE = 'UPDATE_FONT_TYPE'
 export const TOGGLE_READER_SIDEBAR = 'TOGGLE_READER_SIDEBAR'
-<<<<<<< feat/highlight-annotations -- Incoming Change
 export const TOGGLE_ANNOTATION_MODAL = 'TOGGLE_ANNOTATION_MODAL'
-=======
 export const READER_CLEAR_DELETION = 'READER_CLEAR_DELETION'
->>>>>>> main -- Current Change
 export const PINNED_TOPICS_SET = 'PINNED_TOPICS_SET'
 
 // Messages

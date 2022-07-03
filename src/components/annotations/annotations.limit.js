@@ -1,4 +1,5 @@
 /* eslint  react/jsx-no-target-blank: 0*/
+import { css } from 'linaria'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { PremiumIcon } from 'components/icons/PremiumIcon'
 import { Button } from 'components/buttons/button'
@@ -7,9 +8,6 @@ import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { Trans, useTranslation } from 'next-i18next'
 import { PREMIUM_URL } from 'common/constants'
 
-<<<<<<< feat/highlight-annotations -- Incoming Change
-export const AnnotationsLimitModal = ({ showModal, closeModal, onVisible }) => {
-=======
 const upsellWrapper = css`
   font-family: 'Graphik Web';
   font-size: 16px;
@@ -47,7 +45,6 @@ export const LimitNotice = ({ onVisible }) => {
 }
 
 export const ModalLimitNotice = ({ showModal, closeModal, onVisible }) => {
->>>>>>> main -- Current Change
   const appRootSelector = '#__next'
   const { t } = useTranslation()
 
@@ -64,16 +61,9 @@ export const ModalLimitNotice = ({ showModal, closeModal, onVisible }) => {
         <VisibilitySensor onVisible={handleVisible}>
           <p>
             <PremiumIcon />{' '}
-<<<<<<< feat/highlight-annotations -- Incoming Change
-            <Trans i18nKey="annotations:annotation-limit-copy">
-              Adding annotations to your highlights is a brand new Pocket Premium
-              feature. Upgrading your account will automatically unlock annotations.
-              Plus you'll get unlimited highlights! 🤩
-=======
             <Trans i18nKey="annotations:highlight-limit-copy">
               You’re limited to 3 highlights per article. Pocket Premium members get unlimited
               highlights.
->>>>>>> main -- Current Change
             </Trans>{' '}
             <ArrowLink
               id="reader.annotations.limit"

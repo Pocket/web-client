@@ -1,10 +1,4 @@
-<<<<<<< feat/highlight-annotations -- Incoming Change
-import { css } from 'linaria'
-import classNames from 'classnames'
-=======
-import React, { Component } from 'react'
 import { css, cx } from 'linaria'
->>>>>>> main -- Current Change
 import { AnnotationMenu } from './annotations.menu'
 import { cardStyles, Quote, CreatedDate } from './annotations.card'
 import { EmptyList } from './annotations.empty-list'
@@ -60,7 +54,6 @@ const headingStyles = css`
   margin-bottom: 0;
 `
 
-<<<<<<< feat/highlight-annotations -- Incoming Change
 const QuoteItem = ({
   id,
   position,
@@ -74,45 +67,17 @@ const QuoteItem = ({
 }) => {
   const stopProp = (e) => e.stopPropagation()
   const handleClick = () => onClickEvent(position)
-=======
-export class QuoteList extends Component {
-  renderCards = () => {
-    const { annotations, onClickEvent, shareItem, deleteAnnotation, handleImpression } = this.props
-    const cards = []
-
-    annotations
-      .sort((a, b) => a.position - b.position)
-      .forEach((annot) => {
-        // const active = annot.coordY > viewPort.top && annot.coordY < viewPort.bottom
-        const active = false
-        const id = annot.annotation_id || annot.id
-        const createdAt = annot.created_at || annot._createdAt * 1000
-
-        cards.push(
-          <div
-            onClick={(e) => e.stopPropagation()}
-            key={id}
-            className={cx(cardStyles, activeCardStyles, active && 'active')}>
-            <Quote
-              // aria-label={translate('annotations.scrollTo')}
-              onClick={() => onClickEvent(annot.position)}>
-              {annot.quote}
-            </Quote>
-            <CreatedDate>{createdAt}</CreatedDate>
->>>>>>> main -- Current Change
 
   return (
     <div
       onClick={stopProp}
       key={id}
-      className={classNames(cardStyles, activeCardStyles)}>
+      className={cx(cardStyles, activeCardStyles)}>
       <Quote onClick={handleClick}>
         {quote}
       </Quote>
       {note ? <p className="note">{note.text}</p> : null}
       <CreatedDate>{createdAt}</CreatedDate>
-
-<<<<<<< feat/highlight-annotations -- Incoming Change
       <div className={menuWrapper}>
         <AnnotationMenu
           visible
@@ -123,24 +88,6 @@ export class QuoteList extends Component {
           annotateItem={toggleAnnotations}
           quote={quote}
         />
-=======
-    if (cards.length === 3 && !this.props.isPremium) {
-      cards.push(<LimitNotice key="notice" onVisible={handleImpression} />)
-    }
-
-    return cards
-  }
-
-  render() {
-    const { visible, annotations, annotationCount } = this.props
-
-    return annotations && annotationCount > 0 ? (
-      <div className={cx(listWrapper, visible && 'visible')}>
-        <h6 className={headingStyles}>
-          <Trans i18nKey="annotations:my-highlights">My Highlights</Trans>
-        </h6>
-        {this.renderCards()}
->>>>>>> main -- Current Change
       </div>
     </div>
   )
@@ -158,7 +105,7 @@ export const QuoteList = ({
   visible
 }) => {
   return annotations && annotationCount > 0 ? (
-    <div className={classNames(listWrapper, { visible })}>
+    <div className={cx(listWrapper, visible && 'visible')}>
       <h6 className={headingStyles}>
         <Trans i18nKey="annotations:my-highlights">My Highlights</Trans>
       </h6>
