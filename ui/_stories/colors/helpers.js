@@ -1,79 +1,66 @@
 import { useRef, useState } from 'react'
-import { _colorPalette } from './colors'
-import { _colorModes } from './colors'
-import { css } from 'linaria'
 import copy from 'clipboard-copy'
+import { css } from 'linaria'
 
-export default {
-  title: 'UI/Colors'
-}
-
-export const Palette = () => {
-  let colorPalette = mapColorsForDisplay(_colorPalette)
-  return <div className={colorDisplay}>{colorPalette}</div>
-}
-
-export const Semantic = (Story, context) => {
-  let colorModes = mapColorsForDisplay(_colorModes, context.globals.theme)
-  return <div className={colorDisplay}>{colorModes}</div>
-}
-
-const colorDisplay = css`
-  padding: 0 2rem;
+export const colorGroups = css`
   font-family: var(--fontSansSerif);
-  .colorBlock {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: 1.25rem;
+  h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
   }
-  .group {
-    font-size: 1.6em;
-    margin: 1em 0 0.5em;
+
+  .colorset {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    margin-bottom: 2rem;
   }
-  .color {
+  .colorblock {
+    margin-bottom: 0.25rem;
     position: relative;
-    padding: 1rem 2rem;
-    margin: 0.5rem;
-    border-radius: 16px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    padding: 0.725rem;
+    border-radius: var(--borderRadius);
     &:hover {
       cursor: pointer;
       outline: solid var(--color-calloutAccent);
     }
   }
+  .copy {
+    display: flex;
+    justify-content: space-between;
+  }
   .copied {
     position: absolute;
-    right: 2rem;
+    left: 50%;
     top: 50%;
-    font-style: italic;
-    font-weight: 300;
+    transform: translate(-50%, -50%);
   }
 `
 
-function mapColorsForDisplay(colors, theme) {
-  let group, previousGroup
-  let printGroup = false
-
-  return Object.keys(colors).map((colorKey) => {
-    const hex = colors[colorKey]
-    const naturalName = camelToSentence(colorKey)
-    group = naturalName.replace(/ .*/, '')
-
-    printGroup = group !== previousGroup
-    previousGroup = group
-
-    return (
-      <div key={colorKey}>
-        {printGroup ? <h4 className="group">{group}</h4> : null}
-        <ColorBlock hex={hex} colorKey={colorKey} theme={theme} />
-      </div>
-    )
-  })
+export const GroupHeading = ({ title, description }) => {
+  return (
+    <>
+      <h4>{title}</h4>
+      {description ? <p>{description}</p> : null}
+    </>
+  )
 }
 
-const ColorBlock = ({ hex, colorKey, theme }) => {
+export const ColorsGrid = ({ colors, theme }) => {
+  return Object.keys(colors).map((colorKey) => (
+    <ColorBlock
+      className="colorblock"
+      key={colorKey}
+      colorKey={colorKey}
+      hex={colors[colorKey]}
+      theme={theme}
+    />
+  ))
+}
+
+export const ColorBlock = ({ hex, colorKey, theme }) => {
   const [copied, setCopied] = useState(false)
   const colorHex = theme ? hex[theme] : hex
   const naturalName = camelToSentence(colorKey)
@@ -95,13 +82,13 @@ const ColorBlock = ({ hex, colorKey, theme }) => {
 
   return (
     <div
-      className="color"
+      className="colorblock"
       onClick={colorCopy}
       style={{ backgroundColor: colorVar, color: textColor }}>
       <div className="copy">
         <div>{naturalName}</div>
         <div>{colorValue}</div>
-        {copied ? <div className="copied">{`Copied — ${colorKey}`}</div> : null}
+        {copied ? <div className="copied">Copied</div> : null}
       </div>
     </div>
   )

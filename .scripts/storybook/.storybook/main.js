@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
   stories: [
     '../../../src/components/**/*.story.@(js|jsx|ts|tsx)',
-    '../../../src/common/styles/**/*.story.@(js|jsx|ts|tsx)'
+    '../../../ui/**/*.story.@(js|jsx|ts|tsx)'
   ],
   addons: [
     '@storybook/addon-links',
@@ -12,6 +12,7 @@ module.exports = {
   ],
   framework: '@storybook/react',
   staticDirs: ['../../../public'],
+  features: { postcss: false },
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
     // You can change the configuration based on that.

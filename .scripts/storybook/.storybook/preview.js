@@ -82,6 +82,8 @@ const customViewports = {
 
 export const parameters = {
   backgrounds: { disable: true },
+  measure: { disable: true },
+  outline: { disable: true },
   actions: { argTypesRegex: '^on[A-Z].*' },
   viewport: {
     viewports: customViewports
@@ -93,12 +95,9 @@ export const parameters = {
     }
   },
   options: {
-    storySort: (a, b) => {
-      if (/^ui-/.test(a[1].id)) return false
-      if (/^ui-/.test(b[1].id)) return true
-      return a[1].kind === b[1].kind
-        ? 0
-        : a[1].id.localeCompare(b[1].id, undefined, { numeric: true })
+    enableShortcuts: false,
+    storySort: {
+      order: ['UI']
     }
   }
 }
@@ -111,7 +110,11 @@ export const globalTypes = {
     toolbar: {
       icon: 'photo',
       // array of plain string values or MenuItem shape (see below)
-      items: ['light', 'dark', 'sepia']
+      items: ['light', 'dark', 'sepia'],
+      // Property that specifies if the name of the item will be displayed
+      showName: true,
+      // Change title based on selected value
+      dynamicTitle: true
     }
   }
 }
