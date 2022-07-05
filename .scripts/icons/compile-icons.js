@@ -17,7 +17,7 @@ const path = require('path')
 const { optimize, loadConfig } = require('svgo')
 const cliProgress = require('cli-progress')
 
-const SVG_INPUT_DIR = 'icons'
+const SVG_INPUT_DIR = 'ui/icons'
 const JS_OUTPUT_DIR = 'src/components/icons'
 
 const copyOptions = {

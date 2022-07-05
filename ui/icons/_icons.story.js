@@ -4,7 +4,7 @@ import copy from 'clipboard-copy'
 /*ICONS_IMPORTS*/
 
 export default {
-  title: 'Components/Icons'
+  title: 'UI/Icons'
 }
 
 const Label = css`
