@@ -10,7 +10,7 @@ export const PocketApps = ({ appIds, ConnectedApp }) => {
   const { t } = useTranslation()
   return appIds?.length ? (
     <section className={pocketAppsStyle}>
-      <h2>{t('account:pocket-applications', 'Pocket Applications')}</h2>
+      <h2 id="pocket-applications">{t('account:pocket-applications', 'Pocket Applications')}</h2>
       <div className="sectionBody">
         <div className="helperText full">
           {t(

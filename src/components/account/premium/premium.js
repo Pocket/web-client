@@ -49,7 +49,7 @@ export const Premium = ({ isPremium, onPremiumImpression = () => {} }) => {
 
   return (
     <section className={premiumStyle}>
-      <h2>{t('account:premium', 'Premium')}</h2>
+      <h2 id="premium">{t('account:premium', 'Premium')}</h2>
       <div className="sectionBody premiumBody">
         <img aria-hidden="true" alt="" className="dark" src={TreeDark.src} />
         <img aria-hidden="true" alt="" className="light" src={Tree.src} />

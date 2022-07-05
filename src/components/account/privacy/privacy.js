@@ -10,7 +10,7 @@ export const Privacy = ({ accountClear, accountDelete, rssProtect, rssProtected 
   const { t } = useTranslation()
   return (
     <section className={privacyStyle}>
-      <h2>{t('account:privacy', 'Privacy')}</h2>
+      <h2 id="privacy">{t('account:privacy', 'Privacy')}</h2>
       <div className="sectionBody">
         {/* Leaving this here until the endpoint is properly sorted out
         <div className="toggleWrap">
@@ -18,7 +18,7 @@ export const Privacy = ({ accountClear, accountDelete, rssProtect, rssProtected 
             Make my profile private
           </label>
           <input type="checkbox" name="profilePrivate" id="profilePrivate" className="toggle" />
-        </div> 
+        </div>
         */}
 
         <div className="toggleWrap">

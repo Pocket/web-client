@@ -17,6 +17,15 @@ export const accountStyles = css`
     line-height: 1.25;
     color: var(--color-textPrimary);
     margin-bottom: 0.5rem;
+
+    &[id]:before {
+      display: block;
+      content: "";
+      margin-top: -6rem;
+      height: 6rem;
+      visibility: hidden;
+      pointer-events: none;
+    }
   }
 
   h4 {

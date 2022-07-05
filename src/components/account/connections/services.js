@@ -10,7 +10,7 @@ export const Services = ({ appIds, ConnectedApp }) => {
   const { t } = useTranslation()
   return appIds?.length ? (
     <section className={servicesStyle}>
-      <h2>{t('account:connected-services', 'Connected Services')}</h2>
+      <h2 id="connected-services">{t('account:connected-services', 'Connected Services')}</h2>
       <div className="sectionBody">
         <div className="helperText full">
           {t(

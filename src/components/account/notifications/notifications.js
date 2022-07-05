@@ -20,7 +20,7 @@ export const Notifications = ({
 
   return (
     <section className={notficationsStyle}>
-      <h2>{t('account:notifications', 'Notifications')}</h2>
+      <h2 id="notifications">{t('account:notifications', 'Notifications')}</h2>
       <div className="sectionBody emailBody">
         <label htmlFor="productUpdates" className="flush">
           {t('account:notifications-product', 'Notify me of product updates')}

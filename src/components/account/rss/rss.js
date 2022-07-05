@@ -19,7 +19,7 @@ export const RSSFeeds = ({ userName }) => {
 
   return (
     <section className={pocketAppsStyle}>
-      <h2>{t('account:rss', 'RSS Feeds')}</h2>
+      <h2 id="rss">{t('account:rss', 'RSS Feeds')}</h2>
       <div className="sectionBody">
         <label htmlFor="something" className="connectionLabel">
           {t('account:rss-view-unread', 'View RSS feed of unread items')}

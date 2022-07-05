@@ -71,7 +71,7 @@ export const EmailAddresses = ({
 
   return (
     <section className={emailStyle}>
-      <h2>{t('account:email-addresses', 'Email Addresses')}</h2>
+      <h2 id="email">{t('account:email-addresses', 'Email Addresses')}</h2>
       <div className="sectionBody emailBody">
         <label htmlFor="primaryEmail">{t('account:email-primary', 'Primary Email')}</label>
         <div className="contentDisplay">

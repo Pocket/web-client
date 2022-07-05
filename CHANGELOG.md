@@ -1,3 +1,10 @@
+## [1.51.13](https://github.com/Pocket/web-client/compare/v1.51.12...v1.51.13) (2022-07-05)
+
+
+### Bug Fixes
+
+* **account:** adding anchors to all sections ([c6ba5d3](https://github.com/Pocket/web-client/commit/c6ba5d360bf5328cc52513c605926349c5dcf78b))
+
 ## [1.51.12](https://github.com/Pocket/web-client/compare/v1.51.11...v1.51.12) (2022-06-29)
 
 
