@@ -23,7 +23,7 @@ export const useAdsOnPage = ({
   urlPath,
   iabTopCategory,
   iabSubCategory,
-  legacyId: syndicatedArticleId
+  originalItemId: syndicatedArticleId
 }) => {
   const router = useRouter()
   const [adsReady, setAdsReady] = useState(false)
