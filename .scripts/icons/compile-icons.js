@@ -46,7 +46,7 @@ function buildStory(imports) {
   const importStatements = imports.map(buildImport).join('\n')
   const componentsArray = imports.map((component) => `${component.componentName}Icon`).join(',')
 
-  fs.readFile(`${SVG_INPUT_DIR}/_icons.story.js`, 'utf8', function (err, data) {
+  fs.readFile(`${SVG_INPUT_DIR}/_story-template.js`, 'utf8', function (err, data) {
     if (err) return console.log(err)
 
     const importResults = data.replace(/\/\*ICONS_IMPORTS\*\//g, importStatements)

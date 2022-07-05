@@ -1,0 +1,21 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": [
+          "../../"
+        ],
+        "alias": {
+          "static/*": [
+            "./public/static/*"
+          ]
+        }
+      }
+    ],
+    "./transform-asset-cdn.cjs"
+  ],
+  "generatorOpts": {
+    "retainLines": false
+  }
+}

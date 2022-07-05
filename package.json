@@ -24,6 +24,7 @@
     "storybook": "cd .scripts/storybook && npm run storybook",
     "storybook:build": "build-storybook",
     "compile:icons": "node ./.scripts/icons/compile-icons.js",
+    "compile:styles": "cd .scripts/styles && npm install && npm run compile:styles",
     "locale:inject": "node ./.scripts/localization/locale-inject",
     "locale:parse": "node ./.scripts/localization/locale-parse",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",

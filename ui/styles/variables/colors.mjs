@@ -8,13 +8,7 @@
  * !! These are not for direct use
  */
 
-export const _colorGroups = {
-  grey: ['grey', 'white'],
-  sepia: ['sepia', 'cream'],
-  teal: ['teal']
-}
-
-export const _colorPalette = {
+const greys = {
   grey10: '#1A1A1A',
   grey20: '#333333',
   grey25: '#404040',
@@ -27,8 +21,10 @@ export const _colorPalette = {
   grey80: '#CCCCCC',
   grey85: '#D9D9D9',
   grey95: '#F2F2F2',
-  white100: '#FFFFFF',
+  white100: '#FFFFFF'
+}
 
+const sepias = {
   sepia10: '#191917',
   sepia20: '#33312E',
   sepia25: '#403E3A',
@@ -40,8 +36,10 @@ export const _colorPalette = {
   sepia90: '#E5DECF',
   sepia96: '#F5EDDD',
   sepia100: '#FFF7E6',
-  cream100: '#FFFCF7',
+  cream100: '#FFFCF7'
+}
 
+const teals = {
   teal25: '#00403C',
   teal30: '#004D48',
   teal45: '#00736C',
@@ -52,54 +50,66 @@ export const _colorPalette = {
   teal75: '#00BFB4',
   teal80: '#00CCC0',
   teal85: '#00D9CC',
-  teal100: '#E8F7F6',
+  teal100: '#E8F7F6'
+}
 
-  tealLightestFill: '#E0F0EF',
-  tealLightestFillSepia: '#D8DECF',
-  tealLightestFillDark: '#274F4C',
-
-  coralDarker: '#6C000E',
-  coralDark: '#901424',
-  coral: '#EF4056',
-  coralLight: '#F9BFD1',
-  coralLightest: '#FDF2F5',
-
+const teal = {
   tealDarker: '#004D48',
   tealDark: '#008078',
   teal: '#009990',
   tealLight: '#95D5D2',
-  tealLightest: '#E8f7f6',
+  tealLightest: '#E8f7f6'
+}
 
+const coral = {
+  coralDarker: '#6C000E',
+  coralDark: '#901424',
+  coral: '#EF4056',
+  coralLight: '#F9BFD1',
+  coralLightest: '#FDF2F5'
+}
+
+const amber = {
   amberDarker: '#B24000',
   amberDark: '#E55300',
   amber: '#FCB643',
   amberLight: '#FFD25E',
-  amberLightest: '#FFFBE3',
+  amberLightest: '#FFFBE3'
+}
 
+const mint = {
   mintDarker: '#0B6639',
   mintDark: '#29A668',
   mint: '#00CB77',
   mintLight: '#82ECB7',
-  mintLightest: '#C6FFE3',
+  mintLightest: '#C6FFE3'
+}
 
+const lapis = {
   lapisDarker: '#00256D',
   lapisDark: '#1649AC',
   lapis: '#3668FF',
   lapisLight: '#95D2FF',
-  lapisLightest: '#DCEAFF',
+  lapisLightest: '#DCEAFF'
+}
 
+const apricot = {
   apricotDarker: '#9F2600',
   apricotDark: '#D23807',
   apricot: '#F67D6D',
   apricotLight: '#FEB69F',
-  apricotLightest: '#FDF0EC',
+  apricotLightest: '#FDF0EC'
+}
 
+const iris = {
   irisDarker: '#802AC3',
   irisDark: '#9971EF',
   iris: '#C4A5F7',
   irisLight: '#DAB5FF',
-  irisLightest: '#F2DEFF',
+  irisLightest: '#F2DEFF'
+}
 
+const platformBrandColors = {
   // Social
   brandPocket: '#EF4056',
   brandFacebook: '#3B5998',
@@ -108,22 +118,57 @@ export const _colorPalette = {
   brandLinkedin: '#007BB6'
 }
 
+export const _paletteGroups = [
+  {
+    title: 'UI Colors',
+    description: 'The number value is determined by the brightness value (HSB).',
+    colors: [greys, sepias, teals]
+  },
+  {
+    title: 'Pocket Brand Colors',
+    description:
+      'You will need to check for conrast and create theme maps when using these colors.',
+    colors: [teal, coral, amber, mint, lapis, apricot, iris]
+  },
+  {
+    title: 'Platform Brand Colors',
+    description:
+      'You will need to check for conrast and create theme maps when using these colors.',
+    colors: [platformBrandColors]
+  }
+]
+
+export const _colorPalette = {
+  ...greys,
+  ...sepias,
+  ...teals,
+  ...teal,
+  ...coral,
+  ...amber,
+  ...mint,
+  ...lapis,
+  ...apricot,
+  ...iris,
+  ...platformBrandColors
+}
+
 /** SEMANTIC COLORS & THEMEING
  ---------------------------------------------------------------------------- */
 /**
  * These are used to generate CSS variables, linting, and hinting
  * !! These are not for direct use
  */
-export const _colorModes = {
+
+const canvas = {
   canvas: {
     light: _colorPalette.white100,
     dark: _colorPalette.grey10,
     sepia: _colorPalette.sepia96
-  },
+  }
+}
 
-  /**
-   * General Colors
-   */
+/** General Colors */
+const general = {
   textPrimary: {
     light: _colorPalette.grey10,
     dark: _colorPalette.grey95,
@@ -155,11 +200,11 @@ export const _colorModes = {
     light: _colorPalette.lapis,
     dark: _colorPalette.lapisLight,
     sepia: _colorPalette.lapisDark
-  },
+  }
+}
 
-  /**
-   * Action Colors (general interactive elements - buttons, links, etc)
-   */
+/** Action Colors (general interactive elements - buttons, links, etc) */
+const actions = {
   actionPrimary: {
     light: _colorPalette.teal50,
     dark: _colorPalette.teal50,
@@ -238,11 +283,11 @@ export const _colorModes = {
     light: _colorPalette.grey25,
     dark: _colorPalette.grey25,
     sepia: _colorPalette.sepia25
-  },
+  }
+}
 
-  /**
-   * Form Colors
-   */
+/** Form Colors */
+const forms = {
   formFieldFocusLabel: {
     light: _colorPalette.teal50,
     dark: _colorPalette.teal65,
@@ -273,11 +318,11 @@ export const _colorModes = {
     light: _colorPalette.amberDarker,
     dark: _colorPalette.amberDark,
     sepia: _colorPalette.amberDarker
-  },
+  }
+}
 
-  /**
-   * Popover Colors (menus, modals, etc)
-   */
+/** Raised Colors (menus, modals, etc) */
+const raised = {
   popoverCanvas: {
     light: _colorPalette.white100,
     dark: _colorPalette.grey20,
@@ -305,9 +350,9 @@ export const _colorModes = {
   },
 
   navCurrentTab: {
-    light: _colorPalette.tealLightestFill,
-    dark: _colorPalette.tealLightestFillDark,
-    sepia: _colorPalette.tealLightestFillSepia
+    light: '#E0F0EF',
+    dark: '#D8DECF',
+    sepia: '#274F4C'
   },
   navCurrentTabText: {
     light: _colorPalette.teal50,
@@ -315,9 +360,6 @@ export const _colorModes = {
     sepia: _colorPalette.teal45
   },
 
-  /**
-   * Tooltip Colors
-   */
   tooltipCanvas: {
     light: _colorPalette.grey10,
     dark: _colorPalette.grey95,
@@ -328,10 +370,15 @@ export const _colorModes = {
     dark: _colorPalette.grey10,
     sepia: _colorPalette.grey95
   },
+  drawerCanvas: {
+    light: _colorPalette.white100,
+    dark: _colorPalette.grey20,
+    sepia: _colorPalette.sepia96
+  }
+}
 
-  /**
-   * Divider Colors
-   */
+/** Divider Colors */
+const dividers = {
   dividerPrimary: {
     light: _colorPalette.grey20,
     dark: _colorPalette.grey80,
@@ -346,20 +393,11 @@ export const _colorModes = {
     light: _colorPalette.grey85,
     dark: _colorPalette.grey25,
     sepia: _colorPalette.sepia80
-  },
+  }
+}
 
-  /**
-   * Drawer Colors
-   */
-  drawerCanvas: {
-    light: _colorPalette.white100,
-    dark: _colorPalette.grey20,
-    sepia: _colorPalette.sepia96
-  },
-
-  /**
-   * Call Outs
-   */
+/** Call Outs */
+const callouts = {
   calloutBackgroundPrimary: {
     light: _colorPalette.teal100,
     dark: _colorPalette.teal30,
@@ -378,3 +416,15 @@ export const _colorModes = {
     sepia: _colorPalette.grey10
   }
 }
+
+export const _colorModes = {
+  ...canvas,
+  ...general,
+  ...actions,
+  ...forms,
+  ...raised,
+  ...dividers,
+  ...callouts
+}
+
+export const _themeGroups = { canvas, general, actions, forms, raised, dividers, callouts }
