@@ -98,6 +98,11 @@ public/locales/
 .asset-cache
 src/components/icons
 
+# Styles - Some styles are generated ... we don't want to commit those
+ui/styles/fonts.js
+ui/styles/fonts-reader.js
+ui/styles/global-variables.js
+
 # TS Terraform build 
 .terraform/
 node_modules/
