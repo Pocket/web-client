@@ -71,7 +71,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     iabTopCategory,
     iabSubCategory,
     topic,
-    legacyId,
     showAds
   } = articleData || {}
 
@@ -82,9 +81,9 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const allowAds = userStatus === 'pending' || isPremiumUser ? false : showAds
 
   // Initialize Ads on the page
-  const { pathname: urlPath } = router
+  const { asPath: urlPath } = router
   const showLog = isDev
-  const adsReady = useAdsOnPage({ allowAds, urlPath, iabTopCategory, iabSubCategory, legacyId, showLog }) //prettier-ignore
+  const adsReady = useAdsOnPage({ allowAds, urlPath, iabTopCategory, iabSubCategory, originalItemId, showLog }) //prettier-ignore
 
   // If there is no article data, turn back until it's loaded
   if (!articleData) return
@@ -134,7 +133,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
               iabTopCategory={iabTopCategory}
               iabSubCategory={iabSubCategory}
               curationCategory={topic}
-              legacyId={legacyId}
+              legacyId={originalItemId}
             />
           </section>
           {/* Content header information */}
@@ -185,9 +184,9 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
                 iabTopCategory={iabTopCategory}
                 iabSubCategory={iabSubCategory}
                 curationCategory={topic}
-                legacyId={legacyId}
+                legacyId={originalItemId}
               />
-              <PublisherRecs itemId={originalItemId} publisher={publisher} legacyId={legacyId} />
+              <PublisherRecs itemId={originalItemId} publisher={publisher} legacyId={originalItemId} />
               <AdRailBottom allowAds={allowAds} adsReady={adsReady} />
             </aside>
 
@@ -225,14 +224,14 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
               iabTopCategory={iabTopCategory}
               iabSubCategory={iabSubCategory}
               curationCategory={topic}
-              legacyId={legacyId}
+              legacyId={originalItemId}
             />
           </section>
 
           {!isMobileWebView ? (
             <section className="content-section">
               <footer>
-                <PocketRecs itemId={originalItemId} legacyId={legacyId} />
+                <PocketRecs itemId={originalItemId} legacyId={originalItemId} />
                 <TopicsBubbles topics={topics} className="no-border" />
               </footer>
             </section>
