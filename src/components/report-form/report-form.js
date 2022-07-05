@@ -5,6 +5,9 @@ import PropTypes from 'prop-types'
 const OTHER_FIELD_CHAR_LIMIT = 500
 
 const formStyles = css`
+  label {
+    display: block;
+  }
   padding: var(--size150);
   .other-reason {
     margin: var(--spacing100) 0 var(--spacing075);
@@ -43,7 +46,7 @@ export function ReportForm({
   ) : (
     <form className={formStyles}>
       {reasons.map(({ id, label }) => (
-        <div key={id}>
+        <label key={id}>
           <input
             type="radio"
             name="reason"
@@ -53,8 +56,8 @@ export function ReportForm({
             onChange={handleRadioChange}
             checked={currentReason === id}
           />
-          <label htmlFor={id}>{label}</label>
-        </div>
+          {label}
+        </label>
       ))}
       {currentReason !== 'other' ? null : (
         <TextArea

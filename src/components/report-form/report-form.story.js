@@ -1,5 +1,5 @@
 import { ReportForm } from './report-form'
-
+import { useState } from 'react'
 const reasons = [
   { id: 'broken_meta', label: 'The title, link, or image is broken' },
   { id: 'wrong_category', label: 'It’s in the wrong category' },
@@ -11,34 +11,32 @@ const reasons = [
 
 export default {
   title: 'Forms/Report',
-  component: ReportForm,
-  argTypes: {
-    currentReason: {
-      control: {
-        type: 'select',
-        options: reasons.map((reason) => reason.id)
-      }
-    },
-    reasons: {
-      table: {
-        disable: true
-      }
-    },
-    handleRadioChange: {
-      table: {
-        disable: true
-      }
-    },
-    handleTextAreaChange: {
-      table: {
-        disable: true
-      }
-    }
-  }
+  component: ReportForm
 }
 
-export const Report = (args) => <ReportForm {...args} reasons={reasons} />
+export const Report = () => {
+  const [currentReason, setCurrentReason] = useState('broken_meta')
+  const [otherText, setOtherText] = useState('')
 
-Report.args = {
-  success: false
+  const handleRadioChange = (e) => {
+    setCurrentReason(e.target.value)
+  }
+
+  const handleTextAreaChange = (e) => {
+    setOtherText(e.target.value)
+  }
+
+  return (
+    <ReportForm
+      currentReason={currentReason}
+      otherText={otherText}
+      handleTextAreaChange={handleTextAreaChange}
+      handleRadioChange={handleRadioChange}
+      reasons={reasons}
+    />
+  )
+}
+
+Report.parameters = {
+  controls: { hideNoControlsWarning: true }
 }
