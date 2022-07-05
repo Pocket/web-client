@@ -4,9 +4,7 @@
   "description": "",
   "main": "compile-styles.js",
   "scripts": {
-    "rollup": "npx rollup -c",
     "compile:styles": "node ./compile-styles.js",
-    "build:assets": "babel src --delete-dir-on-start --no-babelrc --out-dir lib --ignore **/*.stories.js,**/*.spec.js --config-file ./.scripts/publish/.babelrc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

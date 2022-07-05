@@ -1,13 +1,15 @@
 const fs = require('fs-extra')
+const path = require('path')
 const rollupPkg = require('rollup')
 const linaria = require('linaria/rollup')
 const css = require('rollup-plugin-css-only')
 const babel = require('@babel/core')
 const { rollup } = rollupPkg
 
-const VAR_OUTPUT_DIR = '../../ui/styles'
-const CSS_OUTPUT_DIR = '../../public/static'
-const FONT_OUTPUT_DIR = '../../ui/styles'
+const BASE_PATH = path.resolve(__dirname, '../../')
+const VAR_OUTPUT_DIR = path.resolve(BASE_PATH, 'ui/styles')
+const CSS_OUTPUT_DIR = path.resolve(BASE_PATH, 'public/static')
+const FONT_OUTPUT_DIR = path.resolve(BASE_PATH, 'ui/styles')
 
 /**
  * Color structure is nested, so in order to know what modes are defined
@@ -160,14 +162,13 @@ export const GlobalVariables = css\`
 }
 
 async function replaceFontImports() {
-  const fontsTransformed = babel.transformFileSync('../../ui/fonts/fonts.js', {
-    configFile: './.babelrc'
-  }) // => { code, map, ast }
+  const fontsFile = path.resolve(BASE_PATH, 'ui/fonts/fonts.js')
+  const fontsReaderFile = path.resolve(BASE_PATH, 'ui/fonts/fonts-reader.js')
+  const configFile = path.resolve(__dirname, './.babelrc')
+  const fontsTransformed = babel.transformFileSync(fontsFile, { configFile }) // => { code, map, ast }
   const { code: fonts } = fontsTransformed
 
-  const readerFontsTransformed = babel.transformFileSync('../../ui/fonts/fonts-reader.js', {
-    configFile: './.babelrc'
-  }) // => { code, map, ast }
+  const readerFontsTransformed = babel.transformFileSync(fontsReaderFile, { configFile }) // => { code, map, ast }
   const { code: fontsReader } = readerFontsTransformed
 
   return { fonts, fontsReader }
@@ -176,7 +177,7 @@ async function replaceFontImports() {
 async function buildDistribution() {
   const bundle = await rollup({
     cache: false,
-    input: '../../ui/styles/index.js',
+    input: path.resolve(BASE_PATH, 'ui/styles/index.js'),
     onwarn: () => {}, // We don't much care for warnings once it is working as expected
     plugins: [linaria(), css()],
     external: ['linaria']
@@ -200,12 +201,12 @@ async function buildDistribution() {
  * @param {object} colorModes Color modes used to create semantic color vars
  */
 async function compileVariables() {
-  const { _colorPalette, _colorModes } = await import('../../ui/styles/variables/colors.mjs') //prettier-ignore
-  const { typography } = await import('../../ui/styles/variables/typography.mjs')
-  const { sizes } = await import('../../ui/styles/variables/sizes.mjs')
-  const { zIndex } = await import('../../ui/styles/variables/zindex.mjs')
-  const { borders } = await import('../../ui/styles/variables/border.mjs')
-  const { animations } = await import('../../ui/styles/variables/animations.mjs')
+  const { _colorPalette, _colorModes } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/colors.mjs')) //prettier-ignore
+  const { typography } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/typography.mjs')) //prettier-ignore
+  const { sizes } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/sizes.mjs'))
+  const { zIndex } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/zindex.mjs'))
+  const { borders } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/border.mjs'))
+  const { animations } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/animations.mjs')) //prettier-ignore
 
   // Get the supported modes
   const supportedModes = getModes(_colorModes)

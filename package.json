@@ -23,12 +23,13 @@
     "test:snowplow": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included TEST_SNOWPLOW=included node ./server.local.js",
     "storybook": "cd .scripts/storybook && npm run storybook",
     "storybook:build": "build-storybook",
+    "compile": "npm run compile:icons & npm run compile:styles",
     "compile:icons": "node ./.scripts/icons/compile-icons.js",
-    "compile:styles": "cd .scripts/styles && npm install && npm run compile:styles",
+    "compile:styles": "node .scripts/styles/compile-styles.js",
     "locale:inject": "node ./.scripts/localization/locale-inject",
     "locale:parse": "node ./.scripts/localization/locale-parse",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
-    "postinstall": "cd .scripts/localization && npm install -s && cd ../icons && npm install -s"
+    "postinstall": "cd .scripts/localization && npm install -s && cd ../icons && npm install -s && cd ../styles && npm install -s"
   },
   "jest-junit": {
     "addFileAttribute": "true"
