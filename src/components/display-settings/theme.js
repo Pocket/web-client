@@ -15,14 +15,8 @@ const themeWrapper = css`
 `
 
 const themeRadioButtons = css`
-  input[type='radio'] + label:before {
-    top: 3px;
-    left: -9px;
-  }
-
-  input[type='radio'] + label:after {
-    top: 8px;
-    left: -4px;
+  label {
+    padding-right: 1rem;
   }
 `
 
@@ -49,16 +43,18 @@ export const ThemeSettings = ({ colorMode = 'light', setColorMode }) => {
       <div className={themeWrapper}>
         {Themes.map(({ id, label }) => (
           <span key={id} className={themeRadioButtons}>
-            <input
-              type="radio"
-              name="theme"
-              value={id}
-              id={id}
-              data-cy={`display-theme-${id}`}
-              onChange={handleChange}
-              checked={colorMode === id}
-            />
-            <label htmlFor={id}>{label}</label>
+            <label htmlFor={id}>
+              <input
+                type="radio"
+                name="theme"
+                value={id}
+                id={id}
+                data-cy={`display-theme-${id}`}
+                onChange={handleChange}
+                checked={colorMode === id}
+              />
+              {label}
+            </label>
           </span>
         ))}
       </div>
