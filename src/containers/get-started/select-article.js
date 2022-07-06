@@ -97,7 +97,7 @@ export const SelectArticle = ({ metaData }) => {
       )}
       <footer className="page-footer">
         <Button className="button skip" variant="inline" onClick={handleSkip}>
-          Skip
+          Skip to Home
         </Button>
       </footer>
 
