@@ -12,7 +12,7 @@ export const Onboarding = ({ type, ...rest }) => {
   const onboardingDev = featureFlagActive({ flag: 'onboarding.dev', featureState })
   const onboardingRollout = featureFlagActive({ flag: 'onboarding.rollout', featureState })
   const settingsFetched = useSelector((state) => state.settings.settingsFetched)
-  const inGetStartedTest = featureFlagActive({ flag: 'getstarted', featureState })
+  const inGetStartedTest = featureFlagActive({ flag: 'getstarted-v2', featureState })
   const showOnboarding =
     (onboardingDev || onboardingRollout) && settingsFetched && !inGetStartedTest
 

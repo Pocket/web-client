@@ -47,7 +47,7 @@ export const Home = ({ metaData }) => {
   const { getStartedUserTopics } = parseCookies()
   const userTopics = getStartedUserTopics ? JSON.parse(getStartedUserTopics) : []
 
-  const inGetStartedTest = featureFlagActive({ flag: 'getstarted', featureState })
+  const inGetStartedTest = featureFlagActive({ flag: 'getstarted-v2', featureState })
   const shouldRenderTopicMix = inGetStartedTest && userTopics.length
   const renderLineup = shouldRenderTopicMix ? recsByTopic.length : true
 
@@ -72,13 +72,17 @@ export const Home = ({ metaData }) => {
 
       {shouldRenderTopicMix ? <HomeRecsByTopic /> : null}
 
-      {renderLineup ? generalSlates?.map((slateId, index) => (
-        <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />
-      )) : null}
+      {renderLineup
+        ? generalSlates?.map((slateId, index) => (
+            <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />
+          ))
+        : null}
 
-      {renderLineup ? topicSlates?.map((slateId, index) => (
-        <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
-      )) : null}
+      {renderLineup
+        ? topicSlates?.map((slateId, index) => (
+            <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
+          ))
+        : null}
 
       <DeleteModal />
       <TaggingModal />
