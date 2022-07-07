@@ -351,8 +351,8 @@ const raised = {
 
   navCurrentTab: {
     light: '#E0F0EF',
-    dark: '#D8DECF',
-    sepia: '#274F4C'
+    dark: '#274F4C',
+    sepia: '#D8DECF'
   },
   navCurrentTabText: {
     light: _colorPalette.teal50,
