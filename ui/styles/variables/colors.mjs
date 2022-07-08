@@ -273,16 +273,6 @@ const actions = {
     light: _colorPalette.teal60,
     dark: _colorPalette.teal80,
     sepia: _colorPalette.teal60
-  },
-  toggleOff: {
-    light: _colorPalette.grey45,
-    dark: _colorPalette.grey45,
-    sepia: _colorPalette.sepia40
-  },
-  toggleOffHover: {
-    light: _colorPalette.grey25,
-    dark: _colorPalette.grey25,
-    sepia: _colorPalette.sepia25
   }
 }
 
@@ -313,11 +303,20 @@ const forms = {
     dark: _colorPalette.grey80,
     sepia: _colorPalette.sepia20
   },
-
   error: {
     light: _colorPalette.amberDarker,
     dark: _colorPalette.amberDark,
     sepia: _colorPalette.amberDarker
+  },
+  toggleOff: {
+    light: _colorPalette.grey45,
+    dark: _colorPalette.grey45,
+    sepia: _colorPalette.sepia40
+  },
+  toggleOffHover: {
+    light: _colorPalette.grey25,
+    dark: _colorPalette.grey25,
+    sepia: _colorPalette.sepia25
   }
 }
 
@@ -417,6 +416,7 @@ const callouts = {
   }
 }
 
+/** Used in building color variables */
 export const _colorModes = {
   ...canvas,
   ...general,
@@ -427,4 +427,5 @@ export const _colorModes = {
   ...callouts
 }
 
+/** Used for stories */
 export const _themeGroups = { canvas, general, actions, forms, raised, dividers, callouts }
