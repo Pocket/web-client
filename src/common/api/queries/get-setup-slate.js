@@ -8,7 +8,7 @@ const setupMomentSlateQuery = gql`
       headline
       subheadline
       recommendations {
-        id
+        corpusRecommendationId: id
         corpusItem {
           topImageUrl: imageUrl
           publisher
