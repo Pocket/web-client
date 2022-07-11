@@ -1,3 +1,10 @@
+## [1.52.1](https://github.com/Pocket/web-client/compare/v1.52.0...v1.52.1) (2022-07-07)
+
+
+### Bug Fixes
+
+* **colors:** swap sepia and dark nav current ([c8e5860](https://github.com/Pocket/web-client/commit/c8e5860cde54d44b0fc2f8a9940ec6c68ff909b7))
+
 # [1.52.0](https://github.com/Pocket/web-client/compare/v1.51.14...v1.52.0) (2022-07-06)
 
 
