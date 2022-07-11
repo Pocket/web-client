@@ -107,7 +107,7 @@ export const SelectTopics = ({ metaData }) => {
 
   const handleSkip = () => {
     dispatch(sendSnowplowEvent('get-started.topic.skip'))
-    router.push('/get-started/select-article', null, { shallow: true })
+    router.push('/home?get-started=skip')
   }
 
   return (
@@ -128,7 +128,7 @@ export const SelectTopics = ({ metaData }) => {
           </div>
           <footer className="page-footer">
             <Button className="button skip" variant="inline" onClick={handleSkip}>
-              Skip
+              Skip to Home
             </Button>
             <Button disabled={!topicsSelected} className="button" onClick={handleContinue}>
               Continue

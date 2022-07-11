@@ -78,7 +78,7 @@ export const GetStarted = () => {
   const { settingsFetched, getStartedComplete = false } = settings
 
   const flagsReady = featureState.flagsReady
-  const inGetStartedTest = featureFlagActive({ flag: 'getstarted', featureState })
+  const inGetStartedTest = featureFlagActive({ flag: 'getstarted-v2', featureState })
 
   const experienceReady = flagsReady //&& !getStartedComplete
 

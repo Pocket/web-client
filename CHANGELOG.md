@@ -1,3 +1,13 @@
+## [1.53.1](https://github.com/Pocket/web-client/compare/v1.53.0...v1.53.1) (2022-07-11)
+
+
+### Bug Fixes
+
+* **get started:** swap out feature flags ([c0d3b0d](https://github.com/Pocket/web-client/commit/c0d3b0d7407725f2087bba091c52c3c6b02fe8d9))
+* **select topics:** update skip to home destination ([d9edf3d](https://github.com/Pocket/web-client/commit/d9edf3d3e2d507e81ac42f9c9ebb4ede3bfb5269))
+* **setup-moment:** check against both v1 and v2 of the feature flags ([f96cf1b](https://github.com/Pocket/web-client/commit/f96cf1b7d82e254534c8140536934ad3c74bce14))
+* **skip:** change skip link text ([3f958d8](https://github.com/Pocket/web-client/commit/3f958d8cfc762f15cf5f849f9f7de8e69ddf0d47))
+
 # [1.53.0](https://github.com/Pocket/web-client/compare/v1.52.1...v1.53.0) (2022-07-11)
 
 
