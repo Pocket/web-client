@@ -1,6 +1,6 @@
 import { css } from 'linaria'
 import { resetOnboarding } from 'connectors/onboarding/onboarding.state'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const resetStyles = css`
   h6 {
@@ -35,15 +35,8 @@ const resetStyles = css`
 
 export const Resets = () => {
   const dispatch = useDispatch()
-  const { user_id } = useSelector((state) => state.user)
 
   const onboardingReset = () => dispatch(resetOnboarding())
-
-  const wipeBrazeData = () => {
-    import('common/utilities/braze/braze-lazy-load').then(({ wipeData, changeUser }) => {
-      wipeData(), changeUser(user_id)
-    })
-  }
 
   return (
     <div className={resetStyles}>
@@ -51,10 +44,6 @@ export const Resets = () => {
       <div className="resetter" onClick={onboardingReset}>
         <div className="title">Reset Onboarding</div>
         <div className="description">Start onboarding from the start</div>
-      </div>
-      <div className="resetter" onClick={wipeBrazeData}>
-        <div className="title">Reset Braze</div>
-        <div className="description">Wipes data and starts new session</div>
       </div>
     </div>
   )

@@ -7,6 +7,7 @@ import { devModeToggle } from 'connectors/app/app.state'
 import { Features } from 'connectors/dev-tools/features'
 import { Links } from 'connectors/dev-tools/links'
 import { Resets } from 'connectors/dev-tools/resets'
+import { BrazeTools } from 'connectors/dev-tools/braze'
 
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
@@ -39,6 +40,7 @@ export function DevTools() {
       handleClose={toggleDevMode}>
       <ModalBody>
         <Features />
+        <BrazeTools />
         <Links toggleDevMode={toggleDevMode} />
         <Resets />
       </ModalBody>

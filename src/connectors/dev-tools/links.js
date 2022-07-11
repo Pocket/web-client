@@ -29,27 +29,19 @@ const linkStyles = css`
 `
 
 export const Links = ({ toggleDevMode }) => {
-  const links = [
-    {
-      title: 'Account',
-      description: 'New account page for users to manage accounts',
-      src: '/account'
-    }
-  ]
+  const links = []
 
-  return (
+  return links.length ? (
     <div className={linkStyles}>
       <h6>Links in progress</h6>
-      {links.length
-        ? links.map((link) => (
-            <Link href={link.src} key={link.title}>
-              <a onClick={toggleDevMode} className="link">
-                <div className="title">{link.title}</div>
-                <div className="description">{link.description}</div>
-              </a>
-            </Link>
-          ))
-        : null}
+      {links.map((link) => (
+        <Link href={link.src} key={link.title}>
+          <a onClick={toggleDevMode} className="link">
+            <div className="title">{link.title}</div>
+            <div className="description">{link.description}</div>
+          </a>
+        </Link>
+      ))}
     </div>
-  )
+  ) : null
 }

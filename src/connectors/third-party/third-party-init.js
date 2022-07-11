@@ -47,7 +47,8 @@ export function ThirdPartyInit() {
           initialize(APIKey, {
             baseUrl: BRAZE_SDK_ENDPOINT,
             appVersion: version,
-            enableLogging: !isProduction // enable logging in development only
+            enableLogging: !isProduction, // enable logging in development only
+            openCardsInNewTab: true
           })
           automaticallyShowInAppMessages(), changeUser(user_id), openSession()
         }
@@ -55,6 +56,7 @@ export function ThirdPartyInit() {
     }
   }, [user_id, isProduction])
 
+  // Get OneTrust settings
   useEffect(() => {
     function checkCookies() {
       if (global.OptanonActiveGroups && global.OptanonActiveGroups !== ONETRUST_EMPTY_DEFAULT) {
@@ -69,11 +71,11 @@ export function ThirdPartyInit() {
     return () => clearTimeout(timer)
   }, [dispatch])
 
+  // Initialize Snowplow after OneTrust is ready
   useEffect(() => {
     if (analyticsInit || !oneTrustReady) return
     if (user_status === 'pending' || !sess_guid) return
 
-    // Set up Snowplow
     const finalizeInit = () => dispatch(finalizeSnowplow())
     initializeSnowplow(user_id, sess_guid, analyticsCookie, finalizeInit)
 
@@ -82,8 +84,8 @@ export function ThirdPartyInit() {
     analyticsInitSet(true)
   }, [oneTrustReady, analyticsCookie, analyticsInit, dispatch, user_status, sess_guid, user_id])
 
+  // Load Opt In Monster for marketing/conversion adventurers ... but not during dev
   useEffect(() => {
-    // Load Opt In Monster for marketing/conversion adventurers ... but not during dev
     if (!isProduction) return
     loadOptinMonster()
   }, [isProduction])

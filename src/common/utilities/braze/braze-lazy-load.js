@@ -4,5 +4,8 @@ export {
   automaticallyShowInAppMessages,
   changeUser,
   wipeData,
-  showInAppMessage
+  showInAppMessage,
+  requestPushPermission,
+  isPushBlocked,
+  isPushPermissionGranted
 } from '@braze/web-sdk'
