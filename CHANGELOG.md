@@ -1,3 +1,10 @@
+# [1.53.0](https://github.com/Pocket/web-client/compare/v1.52.1...v1.53.0) (2022-07-11)
+
+
+### Features
+
+* **snowplow:** corpusRecommendationId on getStarted ([aa5c63a](https://github.com/Pocket/web-client/commit/aa5c63ac8195822cca8f8b5f86e8895f65200200))
+
 ## [1.52.1](https://github.com/Pocket/web-client/compare/v1.52.0...v1.52.1) (2022-07-07)
 
 

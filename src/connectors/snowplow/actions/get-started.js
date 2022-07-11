@@ -34,22 +34,30 @@ export const getStartedActions = {
   },
   'get-started.article.impression': {
     eventType: 'impression',
-    entityTypes: ['content', 'ui'],
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
       component: 'card',
       uiType: 'card'
     },
-    expects: ['url', 'position']
+    expects: ['url', 'corpusRecommendationId']
   },
   'get-started.article.save': {
     eventType: 'engagement',
-    entityTypes: ['content', 'ui'],
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
       engagementType: 'save',
       uiType: 'button'
     },
-    expects: ['url', 'position'],
+    expects: ['url', 'corpusRecommendationId'],
     description: 'Click “Save to My List” on a Card'
+  },
+  'get-started.article.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui', 'corpusRecommendationId'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: ['id', 'url', 'corpusRecommendationId', 'destination']
   },
   'get-started.article.modal.close': {
     eventType: 'engagement',
