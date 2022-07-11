@@ -47,7 +47,9 @@ export const Home = ({ metaData }) => {
   const { getStartedUserTopics } = parseCookies()
   const userTopics = getStartedUserTopics ? JSON.parse(getStartedUserTopics) : []
 
-  const inGetStartedTest = featureFlagActive({ flag: 'getstarted-v2', featureState })
+  const getStartedV1 = featureFlagActive({ flag: 'getstarted', featureState })
+  const getStartedV2 = featureFlagActive({ flag: 'getstarted-v2', featureState })
+  const inGetStartedTest = getStartedV1 || getStartedV2
   const shouldRenderTopicMix = inGetStartedTest && userTopics.length
   const renderLineup = shouldRenderTopicMix ? recsByTopic.length : true
 
