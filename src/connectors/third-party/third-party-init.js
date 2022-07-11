@@ -35,6 +35,7 @@ export function ThirdPartyInit() {
   const labUser = featureFlagActive({ flag: 'lab', featureState })
 
   useEffect(() => {
+    if (!labUser) return // remove once we've wrapped testing
     if (!user_id) return // this will change when we do anonymous user tracking
 
     const version = process.env.RELEASE_VERSION || 'v.0.0.0'
@@ -45,20 +46,18 @@ export function ThirdPartyInit() {
 
     // lazy load braze SDK and then initialize it and call necessary functions
     // see https://github.com/braze-inc/braze-web-sdk/issues/117 for more details on why we need to lazy load
-    if (!isProduction) {
-      import('common/utilities/braze/braze-lazy-load').then(
-        ({ initialize, automaticallyShowInAppMessages, changeUser, openSession }) => {
-          initialize(APIKey, {
-            baseUrl: BRAZE_SDK_ENDPOINT,
-            appVersion: version,
-            enableLogging: !isProduction, // enable logging in development only
-            openCardsInNewTab: true
-          })
-          automaticallyShowInAppMessages(), changeUser(user_id), openSession()
-        }
-      )
-    }
-  }, [user_id, isProduction])
+    import('common/utilities/braze/braze-lazy-load').then(
+      ({ initialize, automaticallyShowInAppMessages, changeUser, openSession }) => {
+        initialize(APIKey, {
+          baseUrl: BRAZE_SDK_ENDPOINT,
+          appVersion: version,
+          enableLogging: !isProduction, // enable logging in development only
+          openCardsInNewTab: true
+        })
+        automaticallyShowInAppMessages(), changeUser(user_id), openSession()
+      }
+    )
+  }, [user_id, isProduction, labUser])
 
   useEffect(() => {
     if (labUser && 'serviceWorker' in navigator) {
