@@ -13,9 +13,26 @@ export const Typography = css`
     }
 
     body {
-      font-family: var(--fontSerif);
+      font-family: var(--fontSansSerif);
       color: var(--color-textPrimary);
       background-color: var(--color-canvas);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      &.serif,
+      .serif & {
+        font-family: var(--fontSerif);
+      }
+
+      &.display,
+      .display & {
+        font-family: var(--fontSerifAlt);
+      }
     }
 
     h1,
