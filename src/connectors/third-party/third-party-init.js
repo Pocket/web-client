@@ -12,6 +12,8 @@ import { useRouter } from 'next/router'
 import { updateOnetrustData } from './one-trust.state'
 import { BRAZE_API_KEY_DEV, BRAZE_API_KEY_PROD, BRAZE_SDK_ENDPOINT } from 'common/constants'
 
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 /**
  * Initialization file. We are using this because of the way the _app file
  * is wrapped in this version. This problem will not exist when we move
@@ -29,6 +31,8 @@ export function ThirdPartyInit() {
   const analytics = useSelector((state) => state.oneTrust?.analytics) //prettier-ignore
   const analyticsCookie = analytics?.enabled
   const isProduction = process.env.NODE_ENV === 'production'
+  const featureState = useSelector((state) => state.features)
+  const labUser = featureFlagActive({ flag: 'lab', featureState })
 
   useEffect(() => {
     if (!user_id) return // this will change when we do anonymous user tracking
@@ -55,6 +59,15 @@ export function ThirdPartyInit() {
       )
     }
   }, [user_id, isProduction])
+
+  useEffect(() => {
+    if (labUser && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js').then(
+        (registration) => console.log('Service Worker registration successful with scope: ', registration.scope),
+        (err) => console.log('Service Worker registration failed: ', err)
+      )
+    }
+  }, [labUser])
 
   // Get OneTrust settings
   useEffect(() => {

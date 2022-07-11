@@ -81,9 +81,9 @@ export const BrazeTools = () => {
       {pushDenied ? (
         <section className="error">
           <div>
-            Push notifications are currently blocked. You will need to&nbsp;
+            Push notifications are currently blocked.<br />
             <a href="https://support.mozilla.org/en-US/kb/push-notifications-firefox#w_upgraded-notifications" target="_blank">
-              update your browser settings
+              Please update your settings
             </a>
           </div>
         </section>
