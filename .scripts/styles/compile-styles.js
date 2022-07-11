@@ -3,8 +3,10 @@ const path = require('path')
 const rollupPkg = require('rollup')
 const linaria = require('linaria/rollup')
 const css = require('rollup-plugin-css-only')
+const resolvePkg = require('@rollup/plugin-node-resolve')
 const babel = require('@babel/core')
 const { rollup } = rollupPkg
+const { nodeResolve } = resolvePkg
 
 const BASE_PATH = path.resolve(__dirname, '../../')
 const VAR_OUTPUT_DIR = path.resolve(BASE_PATH, 'ui/styles')
@@ -179,7 +181,7 @@ async function buildDistribution() {
     cache: false,
     input: path.resolve(BASE_PATH, 'ui/styles/index.js'),
     onwarn: () => {}, // We don't much care for warnings once it is working as expected
-    plugins: [linaria(), css()],
+    plugins: [nodeResolve(), linaria(), css()],
     external: ['linaria']
   })
 
