@@ -53,6 +53,9 @@ export const Elements = css`
     input[type='time'],
     input[type='url'],
     input[type='week'],
+    input[type='datetime-local'],
+    input[type='color'],
+    input[type='tel'],
     textarea,
     select {
       font-family: var(--fontSansSerif);
