@@ -438,6 +438,15 @@ export const Elements = css`
         outline-offset: 3px;
       }
 
+      /** We don't want to outline tooltip*/
+      &[data-tooltip] {
+        border: 2px solid var(--color-canvas);
+        :focus {
+          outline: none;
+          box-shadow: 0 0 0 2px var(--color-actionFocus);
+        }
+      }
+
       &.large {
         font-size: 1.25rem;
         padding: 1rem;
@@ -446,10 +455,6 @@ export const Elements = css`
       &.small {
         font-size: 0.85rem;
         padding: 0.75rem;
-      }
-
-      .icon {
-        margin-right: 0.5rem;
       }
 
       .colormode-dark & {
