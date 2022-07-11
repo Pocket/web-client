@@ -39,6 +39,15 @@ export const Input = () => {
         </label>
       </div>
       <div>
+        <label>
+          <span>Select</span>
+          <select>
+            <option>Option 1</option>
+            <option>Option 2</option>
+          </select>
+        </label>
+      </div>
+      <div>
         <label className="block">
           <input type="checkbox" className="toggle" /> <span>Toggle</span>
         </label>
