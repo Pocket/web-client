@@ -101,11 +101,14 @@ export function deriveListItem(passedItem, legacy) {
 
 export function deriveCorpusItem(recommendation) {
   const item = recommendation.corpusItem
+  const corpusRecommendationId = recommendation.corpusRecommendationId
   const { url, publisher } = item
   return deriveItemData({
     item,
     itemEnrichment: { url },
-    passedPublisher: publisher
+    analyticsData: { corpusRecommendationId },
+    passedPublisher: publisher,
+    utmId: 'pocket_get_started'
   })
 }
 
