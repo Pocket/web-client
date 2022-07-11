@@ -2,7 +2,7 @@ import { getSchemaUri } from 'connectors/snowplow/snowplow.utilities'
 
 /**
  * Schema information:
- * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/a06b8567dc9d443fcdc750a09f14f890b20d3b9400a08f6733d9ebe46bc6dc10
+ * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/11f844daa16bc2e58672b1bc8d8a7545e58e565a6fb8adf05ebfc664bf5259e0
  */
 const RECOMMENDATION_SCHEMA_URL = getSchemaUri('corpus_recommendation')
 
