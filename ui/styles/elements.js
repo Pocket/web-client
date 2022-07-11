@@ -386,6 +386,7 @@ export const Elements = css`
       background-repeat: no-repeat;
       background-position: right 0.7rem top 50%;
       background-size: 11px auto;
+      padding-right: 1.725rem;
 
       .colormode-dark & {
         background-image: url(${selectDownArrowDarkEncoded});
