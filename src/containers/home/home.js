@@ -36,7 +36,7 @@ export const Home = ({ metaData }) => {
 
   const userStatus = useSelector((state) => state.user.user_status)
   const featureState = useSelector((state) => state.features) || {}
-  const generalSlates = useSelector((state) => state.home.generalSlates)
+  const generalSlates = useSelector((state) => state.home.generalSlates) || []
   const topicSlates = useSelector((state) => state.home.topicSlates)
   const recsByTopic = useSelector((state) => state.home.recsByTopic) || []
   const topics = useSelector((state) => state.topicList?.topicsByName)
@@ -49,10 +49,14 @@ export const Home = ({ metaData }) => {
   const { getStartedUserTopics } = parseCookies()
   const userTopics = getStartedUserTopics ? JSON.parse(getStartedUserTopics) : []
 
+  // Hacky way to get personalized indicator.  This will go away when we harden the lineup and remove
+  // the topicMix hack
+  const isPersonalized = generalSlates[0] === '631d8077-1462-4397-ad0a-aa340c27570a'
+
   const getStartedV1 = featureFlagActive({ flag: 'getstarted', featureState })
   const getStartedV2 = featureFlagActive({ flag: 'getstarted-v2', featureState })
   const inGetStartedTest = getStartedV1 || getStartedV2
-  const shouldRenderTopicMix = inGetStartedTest && userTopics.length
+  const shouldRenderTopicMix = inGetStartedTest && userTopics.length && !isPersonalized
   const renderLineup = shouldRenderTopicMix ? recsByTopic.length : true
 
   useEffect(() => {
