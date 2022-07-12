@@ -110,19 +110,23 @@ export const WithForm = () => {
         <form>
           {standardReasons.map(({ id, label }) => (
             <div key={id}>
-              <input type="radio" name="reason" value={id} id={id} onChange={handleRadioChange} />
-              <label htmlFor={id}>{label}</label>
+              <label htmlFor={id}>
+                <input type="radio" name="reason" value={id} id={id} onChange={handleRadioChange} />
+                {label}
+              </label>
             </div>
           ))}
           <div>
-            <input
-              type="radio"
-              name="reason"
-              value="other"
-              id="other"
-              onChange={handleRadioChange}
-            />
-            <label htmlFor="other">Other</label>
+            <label htmlFor="other">
+              <input
+                type="radio"
+                name="reason"
+                value="other"
+                id="other"
+                onChange={handleRadioChange}
+              />
+              Other
+            </label>
           </div>
           {currentReason !== 'other' ? null : (
             <TextArea

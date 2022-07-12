@@ -1,6 +1,5 @@
 import { cx } from 'linaria'
-import React, { useRef, useState } from 'react'
-import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
+import React, { useRef, useEffect, useState } from 'react'
 import { Trans, useTranslation } from 'next-i18next'
 import { breakpointMediumHandset } from 'common/constants'
 import { PopupMenu, PopupMenuGroup, PopupMenuItem } from 'components/popup-menu/popup-menu'
@@ -60,7 +59,6 @@ const buttonStyles = css`
   &:focus {
     transition: none;
     color: var(--color-navCurrentTabText);
-    outline: 1px auto var(--color-navCurrentTab);
   }
 
   .icon {
@@ -99,7 +97,7 @@ export const DisplaySettings = ({
   setColumnWidth,
   isPremium,
   forceShow = false,
-  onVisible,
+  onVisible = () => {},
   colorMode,
   setColorMode
 }) => {
@@ -112,22 +110,23 @@ export const DisplaySettings = ({
   const displayButtonRef = useRef(null)
   const menuRef = useRef(null)
 
-  useCorrectEffect(() => {
-    if (!focus || !menuOpen) return
-    menuRef.current.querySelector('li button').focus()
-    menuRef.current.addEventListener('focusout', checkInnerFocus)
+  useEffect(() => {
+    if (!focus || !menuOpen || forceShow) return
+    const menuCurrent = menuRef.current
+    const checkInnerFocus = () => {
+      if (menuCurrent.querySelectorAll(':focus-within').length === 0) {
+        handleOnClose()
+        displayButtonRef.current.click()
+      }
+    }
+
+    menuCurrent.querySelector('li button').focus()
+    menuCurrent.addEventListener('focusout', checkInnerFocus)
 
     return () => {
-      menuRef.current.removeEventListener('focusout', checkInnerFocus)
+      menuCurrent.removeEventListener('focusout', checkInnerFocus)
     }
-  }, [focus, menuOpen])
-
-  const checkInnerFocus = () => {
-    if (menuRef.current.querySelectorAll(':focus-within').length === 0) {
-      handleOnClose()
-      displayButtonRef.current.click()
-    }
-  }
+  }, [focus, menuOpen, forceShow])
 
   const decreaseFontSize = () => {
     setFontSize(parseInt(fontSize) - 1)
@@ -196,6 +195,7 @@ export const DisplaySettings = ({
         title={t('settings:display-settings', 'Display Settings')}
         screenReaderLabel={t('settings:display-settings', 'Display Settings')}
         appRootSelector={appRootSelector}
+        forceShow={forceShow}
         popperOptions={{
           placement: 'bottom-end',
           modifiers: [

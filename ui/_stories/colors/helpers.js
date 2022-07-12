@@ -80,11 +80,14 @@ export const ColorBlock = ({ hex, colorKey, theme }) => {
     }, 2000)
   }
 
+  const isText = isTextColor(colorKey)
+
+  const blockStyle = {
+    backgroundColor: isText ? 'var(--color-canvas)' : colorVar,
+    color: isText ? colorVar : textColor
+  }
   return (
-    <div
-      className="colorblock"
-      onClick={colorCopy}
-      style={{ backgroundColor: colorVar, color: textColor }}>
+    <div className="colorblock" onClick={colorCopy} style={blockStyle}>
       <div className="copy">
         <div>{naturalName}</div>
         <div>{colorValue}</div>
@@ -150,4 +153,8 @@ function contrastText(hex, theme) {
   if (hasContrast) return startingColor
   if (isDark) return '#000'
   return '#fff'
+}
+
+function isTextColor(colorKey) {
+  return /^text/gi.test(colorKey)
 }
