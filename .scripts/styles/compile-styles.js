@@ -145,7 +145,7 @@ ${variableDeclaration[mode].join(`
 `
   }
 
-  // This builds the variable declarations for animation constants
+  // This builds the variable declarations for form glyphs
   const glyphKeys = Object.keys(glyphs)
   for (let index = 0; index < glyphKeys.length; index++) {
     const glyphKey = glyphKeys[index]
