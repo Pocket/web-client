@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
@@ -15,6 +16,8 @@ import { bottomTooltip } from 'components/tooltip/tooltip'
 import { ThemeSettings } from 'components/display-settings/theme'
 import { ListSettings } from 'components/display-settings/list-modes'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 import { FloatingNotification } from './notification'
 import { InlineNotification } from './notification'
@@ -172,6 +175,9 @@ const GlobalNavAccount = ({
 }) => {
   const { t } = useTranslation()
 
+  const featureState = useSelector((state) => state.features)
+  const labUser = featureFlagActive({ flag: 'lab', featureState })
+
   const accountMenuTriggerRef = useRef(null)
   const menuRef = useRef(null)
 
@@ -203,7 +209,11 @@ const GlobalNavAccount = ({
   const handleHelpCase = () => onLinkClick('help')
   const handleMessagesCase = () => onLinkClick('messages')
   const handleWhatsNewCase = () => onLinkClick('whats-new')
-  const handleLogoutCase = () => onLinkClick('logout')
+  const handleLogoutCase = () => {
+    onLinkClick('logout')
+    // Fire for all users when Braze launches
+    if (labUser) import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
+  }
 
   function handleVisible() {
     sendImpression('global-nav.upgrade-link')

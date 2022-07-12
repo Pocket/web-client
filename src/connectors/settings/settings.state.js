@@ -19,6 +19,8 @@ import { USER_TAGS_PINS_SET } from 'actions'
 
 import { PINNED_TOPICS_SET } from 'actions'
 
+import { TOGGLE_BRAZE } from 'actions'
+
 import { CACHE_KEY_HOME_STORED_TOPICS } from 'common/constants'
 
 const initialState = {
@@ -77,13 +79,15 @@ export const settingsSagas = [
   takeLatest(USER_TAGS_EDIT_SUCCESS, saveSettings),
   takeLatest(USER_TAGS_DELETE_SUCCESS, saveSettings),
   takeLatest(USER_TAGS_PINS_SET, saveSettings),
-  takeLatest(PINNED_TOPICS_SET, saveSettings)
+  takeLatest(PINNED_TOPICS_SET, saveSettings),
+  takeLatest(TOGGLE_BRAZE, saveSettings)
 ]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 const getSettings = (state) => state.settings
 const getOnboarding = (state) => state.onboarding
+const getBraze = (state) => state.userBraze
 
 function* fetchSettings() {
   try {
@@ -100,7 +104,8 @@ function* saveSettings() {
   try {
     const storedSettings = yield select(getSettings)
     const onboarding = yield select(getOnboarding)
-    const settings = { ...storedSettings, onboarding }
+    const braze = yield select(getBraze)
+    const settings = { ...storedSettings, onboarding, braze }
     const { error, status } = yield putAppSettings(settings)
     if (status !== 1) throw new Error(`Unable to save settings: ${error}`)
 

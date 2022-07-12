@@ -13,6 +13,7 @@ import { updateOnetrustData } from './one-trust.state'
 import { BRAZE_API_KEY_DEV, BRAZE_API_KEY_PROD, BRAZE_SDK_ENDPOINT } from 'common/constants'
 
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { usePrevious } from 'common/utilities/hooks/has-changed'
 
 /**
  * Initialization file. We are using this because of the way the _app file
@@ -26,17 +27,26 @@ export function ThirdPartyInit() {
 
   const path = router.asPath
   const [analyticsInit, analyticsInitSet] = useState(false)
+
   const { user_status, user_id, sess_guid } = useSelector((state) => state.user)
   const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
-  const analytics = useSelector((state) => state.oneTrust?.analytics) //prettier-ignore
+  const analytics = useSelector((state) => state.oneTrust?.analytics)
+  const settingsFetched = useSelector((state) => state.settings?.settingsFetched)
+  const brazeSubscribed = useSelector((state) => state.userBraze?.brazeSubscribed)
+
+  const enableBraze = settingsFetched && brazeSubscribed
+  const prevBraze = usePrevious(enableBraze)
+
   const analyticsCookie = analytics?.enabled
   const isProduction = process.env.NODE_ENV === 'production'
+
+  // Remove when Braze launches
   const featureState = useSelector((state) => state.features)
   const labUser = featureFlagActive({ flag: 'lab', featureState })
 
   useEffect(() => {
-    if (!labUser) return // remove once we've wrapped testing
-    if (!user_id) return // this will change when we do anonymous user tracking
+    if (!labUser) return // Remove when Braze launches
+    if (!user_id || !enableBraze) return // not logged in or opted out
 
     const version = process.env.RELEASE_VERSION || 'v.0.0.0'
 
@@ -47,17 +57,26 @@ export function ThirdPartyInit() {
     // lazy load braze SDK and then initialize it and call necessary functions
     // see https://github.com/braze-inc/braze-web-sdk/issues/117 for more details on why we need to lazy load
     import('common/utilities/braze/braze-lazy-load').then(
-      ({ initialize, automaticallyShowInAppMessages, changeUser, openSession }) => {
+      ({ initialize, automaticallyShowInAppMessages, changeUser, openSession, isDisabled, enableSDK }) => {
+        if (isDisabled()) enableSDK() // Was previously disabled, need to re-enable
         initialize(APIKey, {
           baseUrl: BRAZE_SDK_ENDPOINT,
           appVersion: version,
           enableLogging: !isProduction, // enable logging in development only
-          openCardsInNewTab: true
+          openCardsInNewTab: true,
+          enableSdkAuthentication: true
         })
         automaticallyShowInAppMessages(), changeUser(user_id), openSession()
       }
     )
-  }, [user_id, isProduction, labUser])
+  }, [user_id, enableBraze, isProduction, labUser])
+
+  useEffect(() => {
+    // Braze is off, and was previously on, so disable Braze
+    if (!enableBraze && prevBraze) {
+      import('common/utilities/braze/braze-lazy-load').then(({ disableSDK }) => disableSDK())
+    }
+  }, [enableBraze, prevBraze])
 
   useEffect(() => {
     if (labUser && 'serviceWorker' in navigator) {

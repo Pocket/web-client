@@ -6,6 +6,7 @@ import { accountStyles } from 'components/account/account'
 import { Premium } from 'components/account/premium/premium'
 import { Profile } from 'containers/account/profile/profile'
 import { Email } from 'containers/account/email/email'
+import { Braze } from 'containers/account/braze/braze'
 import { Notifications } from 'containers/account/notifications/notifications'
 import { ConnectedServices } from 'containers/account/connections/connections'
 import { RSSFeeds } from 'containers/account/rss/rss'
@@ -33,6 +34,7 @@ export const Account = () => {
         <Profile />
         <Email />
         <Notifications />
+        <Braze />
         <ConnectedServices />
         <RSSFeeds />
         <Privacy />
