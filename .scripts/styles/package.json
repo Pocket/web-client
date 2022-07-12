@@ -11,15 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/plugin-syntax-jsx": "^7.18.6",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "babel-plugin-module-resolver": "^4.1.0",
+    "cssnano": "^5.1.12",
     "hasha": "^5.2.2",
-    "linaria": "^2.3.1",
-    "rollup-plugin-css-only": "3.1.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.18.6",
-    "@rollup/plugin-babel": "^5.3.1"
+    "postcss": "^8.4.14",
+    "postcss-import": "^14.1.0",
+    "postcss-nested": "^5.0.6",
+    "postcss-url": "^10.1.3"
   }
 }
