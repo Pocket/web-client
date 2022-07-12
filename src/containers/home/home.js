@@ -29,6 +29,7 @@ import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
 export const Home = ({ metaData }) => {
   const dispatch = useDispatch()
@@ -38,6 +39,7 @@ export const Home = ({ metaData }) => {
   const generalSlates = useSelector((state) => state.home.generalSlates)
   const topicSlates = useSelector((state) => state.home.topicSlates)
   const recsByTopic = useSelector((state) => state.home.recsByTopic) || []
+  const topics = useSelector((state) => state.topicList?.topicsByName)
 
   const fallback = '249850f0-61c0-46f9-a16a-f0553c222800'
 
@@ -85,6 +87,8 @@ export const Home = ({ metaData }) => {
             <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
           ))
         : null}
+
+      <CardTopicsNav topics={topics} className="no-border" />
 
       <DeleteModal />
       <TaggingModal />
