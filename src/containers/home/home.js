@@ -120,7 +120,7 @@ export const Slate = ({ slateId, pagePosition, offset }) => {
   const layoutTypes = [Lockup, OffsetList, OffsetList, Lockup]
   const LayoutType = layoutTypes[position] || OffsetList
 
-  const heroPositions = ['center', '', 'left', 'right']
+  const heroPositions = ['left', '', 'left', 'left']
   const heroPosition = heroPositions[position]
 
   const cardShapes = [undefined, 'wide', 'block']
