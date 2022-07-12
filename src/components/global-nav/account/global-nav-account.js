@@ -175,6 +175,7 @@ const GlobalNavAccount = ({
 }) => {
   const { t } = useTranslation()
 
+  // Remove when Braze launches
   const featureState = useSelector((state) => state.features)
   const labUser = featureFlagActive({ flag: 'lab', featureState })
 

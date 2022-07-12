@@ -72,11 +72,13 @@ export function ThirdPartyInit() {
   }, [user_id, enableBraze, isProduction, labUser])
 
   useEffect(() => {
+    if (!labUser) return // Remove when Braze launches
+
     // Braze is off, and was previously on, so disable Braze
     if (!enableBraze && prevBraze) {
       import('common/utilities/braze/braze-lazy-load').then(({ disableSDK }) => disableSDK())
     }
-  }, [enableBraze, prevBraze])
+  }, [enableBraze, prevBraze, labUser])
 
   useEffect(() => {
     if (labUser && 'serviceWorker' in navigator) {
