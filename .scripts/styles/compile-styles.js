@@ -60,7 +60,8 @@ async function buildCSSVariables({
   typography,
   zIndex,
   borders,
-  animations
+  animations,
+  glyphs
 }) {
   // Create key/value object of semanticName/colors for each mode
   const variableDeclaration = supportedModes.reduce((accumulator, mode) => {
@@ -141,6 +142,15 @@ ${variableDeclaration[mode].join(`
     const animationKey = animationKeys[index]
     const animationValue = animations[animationKey]
     variableContent += `${variableTemplate(animationKey, animationValue, false)}
+`
+  }
+
+  // This builds the variable declarations for animation constants
+  const glyphKeys = Object.keys(glyphs)
+  for (let index = 0; index < glyphKeys.length; index++) {
+    const glyphKey = glyphKeys[index]
+    const glyphValue = glyphs[glyphKey]
+    variableContent += `  --${glyphKey}: url('${glyphValue}');
 `
   }
 
@@ -228,10 +238,9 @@ async function buildDistribution() {
     const output = await postcss()
       .use(
         atImport({
-          plugins: [nested()]
+          plugins: [nested(), cssnano()]
         })
       )
-      .use(cssnano())
       .process(css, { from: style })
 
     fs.writeFileSync(CSS_OUTPUT_DIR + '/pocket-web-ui.css', output.css)
@@ -252,6 +261,7 @@ async function compileVariables() {
   const { zIndex } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/zindex.mjs'))
   const { borders } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/border.mjs'))
   const { animations } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/animations.mjs')) //prettier-ignore
+  const { glyphs } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/glyphs.mjs'))
 
   // Get the supported modes
   const supportedModes = getModes(_colorModes)
@@ -267,7 +277,8 @@ async function compileVariables() {
     sizes,
     zIndex,
     borders,
-    animations
+    animations,
+    glyphs
   })
 
   await replaceFontImports()
