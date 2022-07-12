@@ -126,22 +126,22 @@ export const Input = () => {
             </select>
           </div>
           <div>
-            <label>
+            <label className="block">
               <input type="checkbox" value="" />
               Check this checkbox
             </label>
           </div>
           <div>
-            <label>
+            <label className="block">
               <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" />
               Option one is this and that
             </label>
-            <label>
+            <label className="block">
               <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
               Option two is something else that's also super long to demonstrate the wrapping of
               these fancy form controls.
             </label>
-            <label>
+            <label className="block">
               <input
                 type="radio"
                 name="optionsRadios"
@@ -195,14 +195,6 @@ export const Input = () => {
             <input type="submit" value="Input submit button" />
             <input type="reset" value="Input reset button" />
             <input type="button" value="Input button" />
-          </div>
-          <div>
-            <button type="submit" disabled="">
-              Button submit
-            </button>
-            <input type="submit" value="Input submit button" disabled="" />
-            <input type="reset" value="Input reset button" disabled="" />
-            <input type="button" value="Input button" disabled="" />
           </div>
         </fieldset>
       </form>
