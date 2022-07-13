@@ -1,11 +1,13 @@
 const fs = require('fs-extra')
 const path = require('path')
-const rollupPkg = require('rollup')
-const linaria = require('linaria/rollup')
-const css = require('rollup-plugin-css-only')
-const babel = require('@babel/core')
-const { rollup } = rollupPkg
+const hasha = require('hasha')
+const nested = require('postcss-nested')
+const postcss = require('postcss')
+const cssUrl = require('postcss-url')
+const atImport = require('postcss-import')
+const cssnano = require('cssnano')
 
+const CDN_PATH = 'https://assets.getpocket.com/web-ui/assets/'
 const BASE_PATH = path.resolve(__dirname, '../../')
 const VAR_OUTPUT_DIR = path.resolve(BASE_PATH, 'ui/styles')
 const CSS_OUTPUT_DIR = path.resolve(BASE_PATH, 'public/static')
@@ -58,7 +60,8 @@ async function buildCSSVariables({
   typography,
   zIndex,
   borders,
-  animations
+  animations,
+  glyphs
 }) {
   // Create key/value object of semanticName/colors for each mode
   const variableDeclaration = supportedModes.reduce((accumulator, mode) => {
@@ -72,38 +75,28 @@ async function buildCSSVariables({
   }, {})
 
   // Create variableContent string to write to the css file
-  // Wierd indentation here is by design to keep a clean file.
-  let variableContent = `/* eslint-disable */
-/**
- * WARNING! DO NOT EDIT
- * This is a generated file from scripts/compile-colors.  Make
- * any changes to rules in that file and run \`npm compile:styles\`
- **/
+  // NOTE: Weird indentation here is by design to keep a clean file.
+  let variableContent = ``
 
-import { css } from 'linaria'
-
-export const GlobalVariables = css\`
-  :global() {
-`
   // This builds the variable declarations for modes
   for (let mIndex = 0; mIndex < supportedModes.length; mIndex++) {
     const mode = supportedModes[mIndex]
-    variableContent += `    .colormode-${mode} {
-    ${variableDeclaration[mode].join(`
-    `)}
-    }
+    variableContent += `.colormode-${mode} {
+${variableDeclaration[mode].join(`
+`)}
+}
 
 `
   }
 
-  variableContent += `  :root{
+  variableContent += `:root{
 `
 
   // This builds the variable declarations for color palette
   for (let pIndex = 0; pIndex < colorPaletteKeys.length; pIndex++) {
     const colorKey = colorPaletteKeys[pIndex]
     const colorValue = colorPalette[colorKey]
-    variableContent += `  ${variableTemplate(colorKey, colorValue, 'color')}
+    variableContent += `${variableTemplate(colorKey, colorValue, 'color')}
 `
   }
 
@@ -112,7 +105,7 @@ export const GlobalVariables = css\`
   for (let fIndex = 0; fIndex < typographyKeys.length; fIndex++) {
     const typographyKey = typographyKeys[fIndex]
     const typographyValue = typography[typographyKey]
-    variableContent += `  ${variableTemplate(typographyKey, typographyValue, false)}
+    variableContent += `${variableTemplate(typographyKey, typographyValue, false)}
 `
   }
 
@@ -121,7 +114,7 @@ export const GlobalVariables = css\`
   for (let sIndex = 0; sIndex < sizesKeys.length; sIndex++) {
     const sizesKey = sizesKeys[sIndex]
     const sizesValue = sizes[sizesKey]
-    variableContent += `  ${variableTemplate(sizesKey, sizesValue, false)}
+    variableContent += `${variableTemplate(sizesKey, sizesValue, false)}
 `
   }
 
@@ -130,7 +123,7 @@ export const GlobalVariables = css\`
   for (let index = 0; index < zIndexKeys.length; index++) {
     const zIndexKey = zIndexKeys[index]
     const zIndexValue = zIndex[zIndexKey]
-    variableContent += `  ${variableTemplate(zIndexKey, zIndexValue, false)}
+    variableContent += `${variableTemplate(zIndexKey, zIndexValue, false)}
 `
   }
 
@@ -139,7 +132,7 @@ export const GlobalVariables = css\`
   for (let index = 0; index < bordersKeys.length; index++) {
     const bordersKey = bordersKeys[index]
     const bordersValue = borders[bordersKey]
-    variableContent += `  ${variableTemplate(bordersKey, bordersValue, false)}
+    variableContent += `${variableTemplate(bordersKey, bordersValue, false)}
 `
   }
 
@@ -148,51 +141,112 @@ export const GlobalVariables = css\`
   for (let index = 0; index < animationKeys.length; index++) {
     const animationKey = animationKeys[index]
     const animationValue = animations[animationKey]
-    variableContent += `  ${variableTemplate(animationKey, animationValue, false)}
+    variableContent += `${variableTemplate(animationKey, animationValue, false)}
+`
+  }
+
+  // This builds the variable declarations for form glyphs
+  const glyphKeys = Object.keys(glyphs)
+  for (let index = 0; index < glyphKeys.length; index++) {
+    const glyphKey = glyphKeys[index]
+    const glyphValue = glyphs[glyphKey]
+    variableContent += `  --${glyphKey}: url('${glyphValue}');
 `
   }
 
   variableContent += `
-    }
-  }
-\`
-`
+}`
+
   // Write out the declarations to a file
-  fs.writeFileSync(VAR_OUTPUT_DIR + '/global-variables.js', variableContent)
+  fs.writeFileSync(VAR_OUTPUT_DIR + '/global-variables.pcss', variableContent)
 }
 
 async function replaceFontImports() {
-  const fontsFile = path.resolve(BASE_PATH, 'ui/fonts/fonts.js')
-  const fontsReaderFile = path.resolve(BASE_PATH, 'ui/fonts/fonts-reader.js')
-  const configFile = path.resolve(__dirname, './.babelrc')
-  const fontsTransformed = babel.transformFileSync(fontsFile, { configFile }) // => { code, map, ast }
-  const { code: fonts } = fontsTransformed
+  const fonts = path.resolve(BASE_PATH, 'ui/fonts/')
+  const fontsFile = path.resolve(BASE_PATH, 'ui/fonts/fonts.pcss')
+  // css to be processed
+  const css = fs.readFileSync(fontsFile, 'utf8')
 
-  const readerFontsTransformed = babel.transformFileSync(fontsReaderFile, { configFile }) // => { code, map, ast }
-  const { code: fontsReader } = readerFontsTransformed
+  // process css
+  const output = await postcss([cssUrl])
+    .use(
+      cssUrl({
+        url: (asset) => {
+          const source = path.resolve(fonts, asset.pathname)
 
-  return { fonts, fontsReader }
+          // Get the full path of the file
+          const extension = path.extname(source)
+          const baseName = path.basename(source, extension)
+
+          // Hash the file
+          const hash = hasha.fromFileSync(source, {
+            algorithm: 'md5',
+            digest: 'hex'
+          })
+
+          const hashedName = `${baseName}.${hash}${extension}`
+          const cdnFile = `${CDN_PATH}${hashedName}`
+          return cdnFile
+        }
+      })
+    )
+    .process(css, { from: undefined })
+
+  fs.writeFileSync(FONT_OUTPUT_DIR + '/fonts.pcss', output.css)
+}
+
+async function replaceReaderFontImports() {
+  const fonts = path.resolve(BASE_PATH, 'ui/fonts/')
+  const fontsFile = path.resolve(BASE_PATH, 'ui/fonts/fonts-reader.pcss')
+  // css to be processed
+  const css = fs.readFileSync(fontsFile, 'utf8')
+
+  // process css
+  const output = await postcss([cssUrl])
+    .use(
+      cssUrl({
+        url: (asset) => {
+          const source = path.resolve(fonts, asset.pathname)
+
+          // Get the full path of the file
+          const extension = path.extname(source)
+          const baseName = path.basename(source, extension)
+
+          // Hash the file
+          const hash = hasha.fromFileSync(source, {
+            algorithm: 'md5',
+            digest: 'hex'
+          })
+
+          const hashedName = `${baseName}.${hash}${extension}`
+          const cdnFile = `${CDN_PATH}${hashedName}`
+          return cdnFile
+        }
+      })
+    )
+    .process(css, { from: undefined })
+
+  fs.writeFileSync(FONT_OUTPUT_DIR + '/fonts-reader.pcss', output.css)
 }
 
 async function buildDistribution() {
-  const bundle = await rollup({
-    cache: false,
-    input: path.resolve(BASE_PATH, 'ui/styles/index.js'),
-    onwarn: () => {}, // We don't much care for warnings once it is working as expected
-    plugins: [linaria(), css()],
-    external: ['linaria']
-  })
+  const style = path.resolve(BASE_PATH, 'ui/styles/index.pcss')
+  // css to be processed
+  const css = fs.readFileSync(style, 'utf8')
+  // process css
+  try {
+    const output = await postcss()
+      .use(
+        atImport({
+          plugins: [nested(), cssnano()]
+        })
+      )
+      .process(css, { from: style })
 
-  const { output } = await bundle.generate({
-    file: 'pocket-web-ui',
-    format: 'es'
-  })
-
-  // We want the css source and since we aren't too complicated we can assume it is second and
-  // grab the source from that 1 — jsBundle (ignored) 2 — css
-  const cssSource = output[1].source
-
-  fs.writeFileSync(CSS_OUTPUT_DIR + '/pocket-web-ui.css', cssSource)
+    fs.writeFileSync(CSS_OUTPUT_DIR + '/pocket-web-ui.css', output.css)
+  } catch (err) {
+    console.warn(err)
+  }
 }
 
 /**
@@ -207,6 +261,7 @@ async function compileVariables() {
   const { zIndex } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/zindex.mjs'))
   const { borders } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/border.mjs'))
   const { animations } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/animations.mjs')) //prettier-ignore
+  const { glyphs } = await import(path.resolve(BASE_PATH, 'ui/styles/variables/glyphs.mjs'))
 
   // Get the supported modes
   const supportedModes = getModes(_colorModes)
@@ -222,13 +277,12 @@ async function compileVariables() {
     sizes,
     zIndex,
     borders,
-    animations
+    animations,
+    glyphs
   })
 
-  const { fonts, fontsReader } = await replaceFontImports()
-  fs.writeFileSync(FONT_OUTPUT_DIR + '/fonts.js', fonts)
-  fs.writeFileSync(FONT_OUTPUT_DIR + '/fonts-reader.js', fontsReader)
-
+  await replaceFontImports()
+  await replaceReaderFontImports()
   buildDistribution()
 }
 

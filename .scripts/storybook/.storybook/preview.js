@@ -81,21 +81,11 @@ const customViewports = {
 }
 
 export const parameters = {
-  backgrounds: { disable: true },
-  measure: { disable: true },
-  outline: { disable: true },
-  actions: { argTypesRegex: '^on[A-Z].*' },
   viewport: {
     viewports: customViewports
   },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/
-    }
-  },
   options: {
-    enableShortcuts: false,
+    enableShortcuts: true,
     storySort: {
       order: ['UI']
     }
@@ -109,7 +99,7 @@ export const globalTypes = {
     defaultValue: 'light',
     toolbar: {
       icon: 'photo',
-      // array of plain string values or MenuItem shape (see below)
+      // array of plain string values or MenuItem shape
       items: ['light', 'dark', 'sepia'],
       // Property that specifies if the name of the item will be displayed
       showName: true,

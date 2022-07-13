@@ -5,11 +5,7 @@ module.exports = {
     '../../../src/components/**/*.story.@(js|jsx|ts|tsx)',
     '../../../ui/**/*.story.@(js|jsx|ts|tsx)'
   ],
-  addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions'
-  ],
+  addons: ['@storybook/addon-a11y', '@storybook/addon-viewport', '@storybook/addon-toolbars'],
   framework: '@storybook/react',
   staticDirs: ['../../../public'],
   features: { postcss: false },

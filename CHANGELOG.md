@@ -1,3 +1,13 @@
+## [1.53.4](https://github.com/Pocket/web-client/compare/v1.53.3...v1.53.4) (2022-07-12)
+
+
+### Bug Fixes
+
+* **buttons:** avoid odd outline on buttons ([bd67bf4](https://github.com/Pocket/web-client/commit/bd67bf422f25f0eaffe17a484e9512040e7a7f78))
+* **elements:** add more inputs to story ([5b438bf](https://github.com/Pocket/web-client/commit/5b438bf6fa729d1eb8e84faaf863acf4d537a256))
+* **style:** add padding for arrow on select ([ea9546a](https://github.com/Pocket/web-client/commit/ea9546a9147dec213c77e8739430e6059c439e59))
+* **styles:** default to sans serif ([74a9fa9](https://github.com/Pocket/web-client/commit/74a9fa9dbcc3c7873c8304cf73d816c0d19f34c2))
+
 ## [1.53.3](https://github.com/Pocket/web-client/compare/v1.53.2...v1.53.3) (2022-07-12)
 
 

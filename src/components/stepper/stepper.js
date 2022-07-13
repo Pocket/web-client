@@ -116,19 +116,9 @@ const stepperButton = css`
       color: var(--color-actionPrimaryHover);
     }
   }
-
-  &:focus {
-    transition: none;
-    outline: 1px auto var(--color-navCurrentTab);
-  }
-
-  .icon {
-    width: 24px;
-    text-align: center;
-  }
 `
 export const StepperButton = ({ children, active, ...args }) => (
-  <button className={cx(buttonReset, stepperButton, stepperTooltip, active && 'active')} {...args}>
+  <button className={cx(stepperButton, stepperTooltip, active && 'active')} {...args}>
     {children}
   </button>
 )

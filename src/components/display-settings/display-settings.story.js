@@ -30,8 +30,10 @@ const DisplaySettingsWrapper = ({ isPremium, forceShow }) => {
   )
 }
 
-export const displaySettings = () => <DisplaySettingsWrapper forceShow />
+export const displaySettings = () => <DisplaySettingsWrapper forceShow={true} />
 
-export const displaySettingsPremium = () => <DisplaySettingsWrapper isPremium forceShow />
+export const displaySettingsPremium = () => (
+  <DisplaySettingsWrapper isPremium={true} forceShow={true} />
+)
 
-export const fullExperience = () => <DisplaySettingsWrapper isPremium />
+export const fullExperience = () => <DisplaySettingsWrapper isPremium={true} />
