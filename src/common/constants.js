@@ -161,7 +161,8 @@ export const LOCALE_COMMON = [
   'collections',
   'partner',
   'topic',
-  'fxa'
+  'fxa',
+  'feedback'
 ]
 
 export const LOCALE_ACCOUNT = ['account']
