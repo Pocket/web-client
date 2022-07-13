@@ -1,3 +1,16 @@
+# [1.54.0](https://github.com/Pocket/web-client/compare/v1.53.4...v1.54.0) (2022-07-13)
+
+
+### Bug Fixes
+
+* **home:** don’t show topicMix and recommended [FRONT-1833] ([597187f](https://github.com/Pocket/web-client/commit/597187fca483f3405e18aa7b6e7849c5cd466e09))
+* **lockups:** use left hero position consistently [FRONT-1819] ([26b63ba](https://github.com/Pocket/web-client/commit/26b63ba5e7374bae51994d1c3f991c44fdb7e5f0))
+
+
+### Features
+
+* **topics:** add topics nav to home [FRONT-1835] ([88fefac](https://github.com/Pocket/web-client/commit/88fefac30d90a4a29f04da3127be83a4263c7719))
+
 ## [1.53.4](https://github.com/Pocket/web-client/compare/v1.53.3...v1.53.4) (2022-07-12)
 
 

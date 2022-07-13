@@ -66,7 +66,7 @@ export default function Discover({ locale }) {
       />
 
       {/* Top Lockup (center)*/}
-      <Lockup items={items} offset={0} heroPosition="center" ItemCard={ItemCard} />
+      <Lockup items={items} offset={0} heroPosition="left" ItemCard={ItemCard} />
 
       {showTopics ? <CardTopicsNav topics={topics} /> : null}
 

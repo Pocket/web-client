@@ -44,7 +44,7 @@ export default function Collections({ locale }) {
       <Lockup
         items={itemIds}
         offset={startingOffset}
-        heroPosition="center"
+        heroPosition="left"
         ItemCard={ItemCard}
         useHero={useHero}
       />

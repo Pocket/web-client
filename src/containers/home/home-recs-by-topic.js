@@ -34,8 +34,8 @@ export const HomeRecsByTopic = () => {
   return recsByTopic.length ? (
     <SectionWrapper>
       <HomeLineupHeader
-        sectionTitle="Recommended For You"
-        sectionDescription="Articles based on your topics"
+        sectionTitle="Recommended reads, just for you"
+        sectionDescription="Stories to fuel your mind, curated for your interests"
         onClickEvent={() => {}}
       />
 
