@@ -1,3 +1,11 @@
+## [1.54.1](https://github.com/Pocket/web-client/compare/v1.54.0...v1.54.1) (2022-07-13)
+
+
+### Bug Fixes
+
+* **braze:** adding ability to toggle braze on or off ([b1f2275](https://github.com/Pocket/web-client/commit/b1f2275154c42f1a725796323c3cbd26e6cdd6b5))
+* **braze:** put disabling/enabling behind labs flag ([1841efb](https://github.com/Pocket/web-client/commit/1841efbf14f05eb62b171906b07a311f4188ac3b))
+
 # [1.54.0](https://github.com/Pocket/web-client/compare/v1.53.4...v1.54.0) (2022-07-13)
 
 

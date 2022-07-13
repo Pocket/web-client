@@ -1,3 +1,4 @@
+// Braze methods: https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html
 export {
   initialize,
   openSession,
@@ -7,5 +8,9 @@ export {
   showInAppMessage,
   requestPushPermission,
   isPushBlocked,
-  isPushPermissionGranted
+  isPushPermissionGranted,
+  isDisabled,
+  disableSDK,
+  enableSDK,
+  destroy
 } from '@braze/web-sdk'
