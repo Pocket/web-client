@@ -6,14 +6,12 @@ import { App } from 'cdktf'
 import { RemoteBackend } from 'cdktf'
 import { TerraformStack } from 'cdktf'
 
-import { AwsProvider } from '../.gen/providers/aws'
-import { DataAwsKmsAlias } from '../.gen/providers/aws'
-import { DataAwsCallerIdentity } from '../.gen/providers/aws'
-import { DataAwsRegion } from '../.gen/providers/aws'
-import { DataAwsSnsTopic } from '../.gen/providers/aws'
-import { PagerdutyProvider } from '../.gen/providers/pagerduty'
-
-import { PocketALBApplication } from '@pocket/terraform-modules'
+import { AwsProvider, sns, datasources, kms } from '@cdktf/provider-aws'
+import { PagerdutyProvider } from '@cdktf/provider-pagerduty'
+import { NullProvider } from '@cdktf/provider-null'
+import { LocalProvider } from '@cdktf/provider-local'
+import { ArchiveProvider } from '@cdktf/provider-archive'
+import { PocketALBApplication } from '@pocket-tools/terraform-modules'
 
 class WebClient extends TerraformStack {
   constructor(scope: Construct, name: string) {
@@ -21,22 +19,25 @@ class WebClient extends TerraformStack {
 
     new AwsProvider(this, 'aws', { region: 'us-east-1' })
     new PagerdutyProvider(this, 'pagerduty_provider', { token: undefined })
+    new NullProvider(this, 'null-provider')
+    new LocalProvider(this, 'local-provider')
+    new ArchiveProvider(this, 'archive-provider')
     new RemoteBackend(this, {
       hostname: 'app.terraform.io',
       organization: 'Pocket',
       workspaces: [{ prefix: `${config.name}-` }]
     })
 
-    const region = new DataAwsRegion(this, 'region');
-    const caller = new DataAwsCallerIdentity(this, 'caller');
-    const secretsManager = new DataAwsKmsAlias(this, 'kms_alias', {
-      name: 'alias/aws/secretsmanager',
-    });
+    const region = new datasources.DataAwsRegion(this, 'region')
+    const caller = new datasources.DataAwsCallerIdentity(this, 'caller')
+    const secretsManager = new kms.DataAwsKmsAlias(this, 'kms_alias', {
+      name: 'alias/aws/secretsmanager'
+    })
 
     // Created by shared infrastructure
-    const snsTopic = new DataAwsSnsTopic(this, 'frontend_notifications', {
+    const snsTopic = new sns.DataAwsSnsTopic(this, 'frontend_notifications', {
       name: `Frontend-${config.environment}-ChatBot`
-    });
+    })
 
     new PocketALBApplication(this, 'application', {
       prefix: config.prefix,
@@ -50,18 +51,15 @@ class WebClient extends TerraformStack {
           portMappings: [
             {
               hostPort: 80,
-              containerPort: 80,
-            },
+              containerPort: 80
+            }
           ],
           healthCheck: {
-            command: [
-              'CMD-SHELL',
-              'curl -f http://localhost/web-client-health || exit 1',
-            ],
+            command: ['CMD-SHELL', 'curl -f http://localhost/web-client-health || exit 1'],
             interval: 15,
             retries: 3,
             timeout: 5,
-            startPeriod: 0,
+            startPeriod: 0
           },
           envVars: [
             {
@@ -92,14 +90,20 @@ class WebClient extends TerraformStack {
             {
               hostPort: 2000,
               containerPort: 2000,
-              protocol: 'udp',
-            },
+              protocol: 'udp'
+            }
           ],
-          command: ['--region', 'us-east-1', '--local-mode'],
+          command: ['--region', 'us-east-1', '--local-mode']
         }
       ],
       codeDeploy: {
         useCodeDeploy: true,
+        useCodePipeline: true,
+        notifications: {
+          notifyOnFailed: true,
+          notifyOnStarted: false,
+          notifyOnSucceeded: false
+        },
         snsNotificationTopicArn: snsTopic.arn
       },
       exposedContainer: {
@@ -118,9 +122,9 @@ class WebClient extends TerraformStack {
               `arn:aws:secretsmanager:${region.name}:${caller.accountId}:secret:Shared/*`,
               secretsManager.targetKeyArn,
               `arn:aws:secretsmanager:${region.name}:${caller.accountId}:secret:${config.name}/${config.environment}`,
-              `arn:aws:secretsmanager:${region.name}:${caller.accountId}:secret:${config.name}/${config.environment}/*`,
+              `arn:aws:secretsmanager:${region.name}:${caller.accountId}:secret:${config.name}/${config.environment}/*`
             ],
-            effect: 'Allow',
+            effect: 'Allow'
           },
           {
             actions: ['ssm:GetParameter*'],
@@ -153,25 +157,13 @@ class WebClient extends TerraformStack {
         targetMaxCapacity: 30
       },
       alarms: {
-        // TODO: Get a way to send this direct to Kelvin's neighbors phone
-        http5xxError: {
-          threshold: 10,
-          evaluationPeriods: 2,
-          period: 600,
-          actions: []
-        },
         httpLatency: {
           evaluationPeriods: 2,
           threshold: 500,
           actions: []
-        },
-        httpRequestCount: {
-          threshold: 5000,
-          evaluationPeriods: 2,
-          actions: []
         }
       }
-    });
+    })
   }
 }
 

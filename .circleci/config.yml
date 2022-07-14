@@ -8,8 +8,7 @@ orbs:
   assume-role: airswap/assume-role@0.2.0
   slack: circleci/slack@3.4.0
   aws-ecs: circleci/aws-ecs@2.0.0
-  pocket: pocket/circleci-orbs@1.0.0
-  queue: eddiewebb/queue@1.5.0
+  pocket: pocket/circleci-orbs@1.2.8
 
 # Commands: Setting up some tasks to avoid a lot of boilerplate
 commands:
@@ -380,34 +379,21 @@ workflows:
           push: true
           requires:
             - build_app_dev
-
-      - queue/block_workflow:
-          <<: *only_dev_main
-          context: pocket
-          name: wait_for_deploy_queue
-          time: '30'
-
-      # !! This pushes to a dev account
-      - aws-ecs/deploy-service-update:
+      
+      # Dev
+      - pocket/execute_codepipeline:
           <<: *only_dev
           context: pocket
-          name: deploy_ecs_dev
-          family: 'WebClient-Dev'
-          cluster-name: 'WebClient-Dev'
-          deployment-controller: 'CODE_DEPLOY'
-          codedeploy-application-name: 'WebClient-Dev-ECS'
-          codedeploy-deployment-group-name: 'WebClient-Dev-ECS'
-          codedeploy-load-balanced-container-name: app
-          codedeploy-load-balanced-container-port: 80
-          container-image-name-updates: 'container=app,image-and-tag=410318598490.dkr.ecr.us-east-1.amazonaws.com/webclient-dev-app:$CIRCLE_SHA1'
+          name: deploy_dev
+          environment: Dev
           aws-access-key-id: Dev_AWS_ACCESS_KEY
           aws-secret-access-key: Dev_AWS_SECRET_ACCESS_KEY
           aws-region: Dev_AWS_DEFAULT_REGION
-          verify-revision-is-deployed: true
-          verification-timeout: '30'
+          codepipeline-name: WebClient-Dev-CodePipeline
+          codebuild-project-name: WebClient-Dev
+          codebuild-project-branch: dev
           requires:
             - build_docker_dev
-            - wait_for_deploy_queue
 
       # Build & Deploy the Prod Docker Image
       - docker_build:
@@ -422,26 +408,20 @@ workflows:
           requires:
             - build_app_production
 
-      - aws-ecs/deploy-service-update:
+      # Prod
+      - pocket/execute_codepipeline:
           <<: *only_main
-          name: deploy_ecs_prod
           context: pocket
-          family: 'WebClient-Prod'
-          cluster-name: 'WebClient-Prod'
-          deployment-controller: 'CODE_DEPLOY'
-          codedeploy-application-name: 'WebClient-Prod-ECS'
-          codedeploy-deployment-group-name: 'WebClient-Prod-ECS'
-          codedeploy-load-balanced-container-name: app
-          codedeploy-load-balanced-container-port: 80
-          container-image-name-updates: 'container=app,image-and-tag=996905175585.dkr.ecr.us-east-1.amazonaws.com/webclient-prod-app:$CIRCLE_SHA1'
+          name: deploy_prod
+          environment: Prod
           aws-access-key-id: Prod_AWS_ACCESS_KEY
           aws-secret-access-key: Prod_AWS_SECRET_ACCESS_KEY
           aws-region: Prod_AWS_DEFAULT_REGION
-          verify-revision-is-deployed: true
-          verification-timeout: '30'
+          codepipeline-name: WebClient-Prod-CodePipeline
+          codebuild-project-name: WebClient-Prod
+          codebuild-project-branch: main
           requires:
             - build_docker_prod
-            - wait_for_deploy_queue
 
       - pocket/setup_deploy_params:
           <<: *only_main
@@ -473,5 +453,5 @@ workflows:
           sentry_org: pocket
           workspace-path: /tmp/workspace
           requires:
-            - deploy_ecs_prod
+            - deploy_prod
 
