@@ -36,7 +36,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     const { sess_guid } = req.cookies
     const response = await getUserInfo(true, req?.headers?.cookie)
     // Not logged in, or something else went awry?
-    // NOTE: this will redirect to my list 100% of the time on localhost
+    // !! NOTE: this will redirect to my list 100% of the time on localhost
     const { user_id, birth } = response?.user || {}
 
     if (!user_id || !birth || !sess_guid || nonEnglish) {
