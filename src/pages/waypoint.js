@@ -13,8 +13,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     const supportedLocale = locales.includes(lang)
     const langPrefix = lang !== defaultLocale && supportedLocale ? `/${lang}` : ''
     const isSignUp = query['type'] === 'signup'
-    const nonEnglish = locale !== defaultLocale ||
-      (lang !== defaultLocale && supportedLocale)
+    const nonEnglish = locale !== defaultLocale || (lang !== defaultLocale && supportedLocale)
 
     // query parameters returned after auth that are currently not used.
     // remove from the list of query parameters
@@ -40,11 +39,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     // NOTE: this will redirect to my list 100% of the time on localhost
     const { user_id, birth } = response?.user || {}
 
-    if (
-      !user_id ||
-      !birth ||
-      nonEnglish
-    ) {
+    if (!user_id || !birth || !sess_guid || nonEnglish) {
       return {
         redirect: {
           permanent: false,

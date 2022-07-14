@@ -102,11 +102,10 @@ function* fireFeatureEnroll({ hydrate }) {
   yield call(waitForInitialization)
   for (let flag in hydrate) {
     const { test: testName, variant, assigned } = hydrate[flag]
-    const hasVariant = variant !== 'disabled' && !!variant
-    if (hasVariant) {
-      const entityVariant = assigned ? variant : `control.${variant}`
+    const shouldBeTracked = variant !== 'disabled' && !!variant && assigned
+    if (shouldBeTracked) {
       const variantEnrollEvent = createVariantEnrollEvent()
-      const featureFlagEntity = createFeatureFlagEntity(testName, entityVariant)
+      const featureFlagEntity = createFeatureFlagEntity(testName, variant)
 
       yield call(sendCustomSnowplowEvent, variantEnrollEvent, [featureFlagEntity])
     }
