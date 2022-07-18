@@ -17,7 +17,7 @@ export default function Read() {
   const deleted = useSelector((state) => state.reader.deleted)
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const featureState = useSelector((state) => state.features)
-  const useClientAPI = flagsReady && featureFlagActive({ flag: 'reader.client-api', featureState })
+  const useClientAPI = flagsReady && featureFlagActive({ flag: 'api.next', featureState })
   const ContentToRender = useClientAPI ? Reader : LegacyReader
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function Read() {
       router.replace(path)
       dispatch(clearDeletion())
     }
-  }, [deleted, router])
+  }, [deleted, router, dispatch])
 
   return <ContentToRender />
 }
