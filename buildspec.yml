@@ -11,10 +11,11 @@ env:
     #Terraform workspace that we operate in
     TF_DEV_WORKSPACE: Dev
     TF_WORKSPACE: Prod
-    #The ref of the main branch we work against
-    MAIN_BRANCH: 'refs/heads/main'
+    MAIN_BRANCH_REF: 'refs/heads/main'
+    MAIN_BRANCH: 'main'
     #The ref of the dev branch we work against
-    DEV_BRANCH: 'refs/heads/dev'
+    DEV_BRANCH_REF: 'refs/heads/dev'
+    DEV_BRANCH: 'dev'
     #Metaflow requires a username to run
     USERNAME: 'codebuild'
   secrets-manager:
