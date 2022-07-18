@@ -27,7 +27,7 @@ module.exports = {
       layouts: path.join(__dirname, '../../../src/containers/_layouts')
     }
     config.resolve.alias = { ...config.resolve.alias, ...alias }
-
+    config.resolve.alias['@braze/web-sdk'] = require.resolve('../../../__mocks__/braze-sdk.js')
     // add support for Linaria preprocessing
     config.module.rules.push({
       test: /\.js$/,
