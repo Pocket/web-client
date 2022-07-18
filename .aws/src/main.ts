@@ -102,7 +102,7 @@ class WebClient extends TerraformStack {
         notifications: {
           notifyOnFailed: true,
           notifyOnStarted: false,
-          notifyOnSucceeded: false
+          notifyOnSucceeded: true
         },
         snsNotificationTopicArn: snsTopic.arn
       },
