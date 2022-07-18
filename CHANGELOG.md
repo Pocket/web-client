@@ -1,3 +1,10 @@
+## [1.54.3](https://github.com/Pocket/web-client/compare/v1.54.2...v1.54.3) (2022-07-18)
+
+
+### Bug Fixes
+
+* **pocket-graph:** combine feature flags for graph ([8e24379](https://github.com/Pocket/web-client/commit/8e243793ae4e867e1f852577f96b5df3bfccdcd4))
+
 ## [1.54.2](https://github.com/Pocket/web-client/compare/v1.54.1...v1.54.2) (2022-07-13)
 
 
