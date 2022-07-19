@@ -1,5 +1,19 @@
 import { css, cx } from 'linaria'
 
+export const horizontalAnimation = `
+  @keyframes tooltipFadeawayHorizontal {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    9%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+`
+
 export const tooltipStyles = css`
   display: inline-block;
   position: relative;
@@ -16,8 +30,6 @@ export const tooltipStyles = css`
     pointer-events: none;
     position: absolute;
     opacity: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
   }
 
   /* tooltip arrow */
@@ -83,6 +95,12 @@ export const placementBottom = css`
     }
   }
 
+  &[data-tooltip]:before,
+  &[data-tooltip]:after {
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
   /* tooltip arrow */
   &[data-tooltip]:before {
     top: calc(100% + var(--spacing050));
@@ -118,6 +136,12 @@ export const placementTop = css`
     }
   }
 
+  &[data-tooltip]:before,
+  &[data-tooltip]:after {
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
   /* tooltip arrow */
   &[data-tooltip]:before {
     bottom: calc(100% + var(--spacing050));
@@ -141,6 +165,62 @@ export const placementTop = css`
   }
 `
 
+export const placementRight = css`
+  ${horizontalAnimation};
+
+  /* tooltip arrow */
+  &[data-tooltip]:before {
+    bottom: 5px;
+    left: calc(100% - 1px + var(--spacing075));
+    border-left-width: 0;
+    border-right-color: var(--color-tooltipCanvas);
+  }
+
+  /* tooltip body */
+  &[data-tooltip]:after {
+    bottom: -5px;
+    left: calc(100% - 1px + var(--spacing100));
+  }
+
+  &[data-tooltip]:hover:before,
+  &[data-tooltip]:hover:after {
+    transform-origin: left;
+    animation-name: tooltipFadeawayHorizontal;
+    animation-duration: calc(var(--dialogsDurationEnterMS) + 1500ms + var(--dialogsDurationExitMS));
+    animation-timing-function: var(--easingAccelerate);
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+  }
+`
+
+export const placementLeft = css`
+  ${horizontalAnimation};
+
+  /* tooltip arrow */
+  &[data-tooltip]:before {
+    bottom: 5px;
+    right: calc(100% + 1px + var(--spacing050));
+    border-right-width: 0;
+    border-left-color: var(--color-tooltipCanvas);
+  }
+
+  /* tooltip body */
+  &[data-tooltip]:after {
+    bottom: -5px;
+    right: calc(100% + var(--spacing075));
+  }
+
+  &[data-tooltip]:hover:before,
+  &[data-tooltip]:hover:after {
+    transform-origin: right;
+    animation-name: tooltipFadeawayHorizontal;
+    animation-duration: calc(var(--dialogsDurationEnterMS) + 1500ms + var(--dialogsDurationExitMS));
+    animation-timing-function: var(--easingAccelerate);
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+  }
+`
+
 export const delayStyle = css`
   &[data-tooltip]:hover:before,
   &[data-tooltip]:hover:after {
@@ -153,3 +233,9 @@ export const bottomTooltipDelayed = cx(tooltipStyles, placementBottom, delayStyl
 
 export const topTooltip = cx(tooltipStyles, placementTop)
 export const topTooltipDelayed = cx(tooltipStyles, placementTop, delayStyle)
+
+export const rightTooltip = cx(tooltipStyles, placementRight)
+export const rightTooltipDelayed = cx(tooltipStyles, placementRight, delayStyle)
+
+export const leftTooltip = cx(tooltipStyles, placementLeft)
+export const leftTooltipDelayed = cx(tooltipStyles, placementLeft, delayStyle)

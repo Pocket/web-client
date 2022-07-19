@@ -30,7 +30,7 @@ export const Tooltip = () => {
     <>
       <div className={wrapper}>
         <button
-          data-tooltip="I am tooltip text"
+          data-tooltip="Top tooltip placement"
           className={cx(buttonReset, topTooltip)}
           aria-label="button">
           <ArrowUpIcon />
@@ -48,7 +48,7 @@ export const Tooltip = () => {
           <ArrowDownIcon />
         </button>
         <button
-          data-tooltip="I am tooltip text"
+          data-tooltip="I am tooltip text test test itestst"
           className={cx(buttonReset, leftTooltip)}
           aria-label="button">
           <ArrowLeftIcon />
