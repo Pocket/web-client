@@ -12,7 +12,7 @@ import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 
 import { css } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
-import { bottomTooltip } from 'components/tooltip/tooltip'
+import { leftTooltip } from 'components/tooltip/tooltip'
 import { FontSettings } from './fonts'
 import { FontSizeSettings } from './font-size'
 import { LineHeightSettings } from './line-height'
@@ -181,7 +181,7 @@ export const DisplaySettings = ({
         aria-label={t('settings:open-display-settings', 'Open Display Settings')}
         data-tooltip={t('settings:open-display-settings', 'Open Display Settings')}
         data-cy="reader-nav-display-settings"
-        className={cx(buttonReset, buttonStyles, bottomTooltip, mobileStyles)}
+        className={cx(buttonReset, buttonStyles, leftTooltip, mobileStyles)}
         ref={displayButtonRef}
         onClick={handleOpen}
         onKeyPress={updateFocus}>

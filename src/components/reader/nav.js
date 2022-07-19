@@ -19,7 +19,7 @@ import {
 } from 'common/constants'
 import { DisplaySettings } from 'components/display-settings/display-settings'
 import { buttonReset } from 'components/buttons/button-reset'
-import { bottomTooltip } from 'components/tooltip/tooltip'
+import { bottomTooltip, rightTooltip } from 'components/tooltip/tooltip'
 import {
   updateLineHeight,
   updateColumnWidth,
@@ -171,6 +171,7 @@ export const ReaderNav = ({
   }
 
   const buttonClass = cx(buttonReset, buttonStyles, bottomTooltip)
+  const buttonClassWithRightTooltip = cx(buttonReset, buttonStyles, rightTooltip)
 
   useEffect(() => {
     const shortcutGoBack = () => {
@@ -195,7 +196,7 @@ export const ReaderNav = ({
             aria-label={returnCopy}
             data-tooltip={returnCopy}
             data-cy="reader-nav-go-back"
-            className={cx(buttonClass, 'go-back')}>
+            className={cx(buttonClassWithRightTooltip, 'go-back')}>
             {getStarted ? (
               <>
                 <HomeIcon />
