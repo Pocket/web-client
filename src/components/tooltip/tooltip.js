@@ -72,13 +72,12 @@ export const tooltipStyles = css`
 
 export const placementBottom = css`
   @keyframes tooltipFadeawayBottom {
-    0%,
-    100% {
+    0% {
       opacity: 0;
       transform: translate(-50%, 0.2em) scale(0.8);
     }
     9%,
-    96% {
+    100% {
       opacity: 1;
       transform: translate(-50%, 0) scale(1);
     }
@@ -99,23 +98,21 @@ export const placementBottom = css`
   &[data-tooltip]:hover:after {
     transform-origin: top;
     animation-name: tooltipFadeawayBottom;
-    animation-duration: calc(
-      var(--dialogsDurationEnterMS) + 1500ms + var(--dialogsDurationExitMS)
-    );
+    animation-duration: calc(var(--dialogsDurationEnterMS) + 1500ms + var(--dialogsDurationExitMS));
     animation-timing-function: var(--easingAccelerate);
     animation-direction: normal;
+    animation-fill-mode: forwards;
   }
 `
 
 export const placementTop = css`
   @keyframes tooltipFadeawayTop {
-    0%,
-    100% {
+    0% {
       opacity: 0;
       transform: translate(-50%, -0.2em) scale(0.8);
     }
     9%,
-    96% {
+    100% {
       opacity: 1;
       transform: translate(-50%, 0) scale(1);
     }
@@ -137,11 +134,10 @@ export const placementTop = css`
   &[data-tooltip]:hover:after {
     transform-origin: bottom;
     animation-name: tooltipFadeawayTop;
-    animation-duration: calc(
-      var(--dialogsDurationEnterMS) + 1500ms + var(--dialogsDurationExitMS)
-    );
+    animation-duration: calc(var(--dialogsDurationEnterMS) + 1500ms + var(--dialogsDurationExitMS));
     animation-timing-function: var(--easingAccelerate);
     animation-direction: normal;
+    animation-fill-mode: forwards;
   }
 `
 
