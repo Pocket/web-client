@@ -38,6 +38,7 @@ export const tooltipStyles = css`
     z-index: var(--zIndexTooltip);
     border: 4px solid transparent;
   }
+
   /* tooltip body */
   &[data-tooltip]:after {
     content: attr(data-tooltip); /* get text value from markup */
@@ -66,6 +67,15 @@ export const tooltipStyles = css`
     width: unset;
   }
 
+  /* Shared animation styles for both tooltip arrow and body on hover */
+  &[data-tooltip]:hover:before,
+  &[data-tooltip]:hover:after {
+    animation-duration: calc(var(--dialogsDurationEnterMS) + 1500ms + var(--dialogsDurationExitMS));
+    animation-timing-function: var(--easingAccelerate);
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+  }
+
   /* Safari focus/active styles are super buggy
    * and show focus outline around pseudo elements.
    * Hide tooltip if button has focus/active */
@@ -75,6 +85,7 @@ export const tooltipStyles = css`
   &[data-tooltip]:focus:after {
     display: none;
   }
+
   /* Re-show tooltip if hovering over focused element */
   &[data-tooltip]:focus:hover:before,
   &[data-tooltip]:focus:hover:after {
@@ -112,14 +123,11 @@ export const placementBottom = css`
   &[data-tooltip]:after {
     top: calc(100% + 4px + var(--spacing050));
   }
+
   &[data-tooltip]:hover:before,
   &[data-tooltip]:hover:after {
     transform-origin: top;
     animation-name: tooltipFadeawayBottom;
-    animation-duration: calc(var(--dialogsDurationEnterMS) + 1500ms + var(--dialogsDurationExitMS));
-    animation-timing-function: var(--easingAccelerate);
-    animation-direction: normal;
-    animation-fill-mode: forwards;
   }
 `
 
@@ -158,10 +166,6 @@ export const placementTop = css`
   &[data-tooltip]:hover:after {
     transform-origin: bottom;
     animation-name: tooltipFadeawayTop;
-    animation-duration: calc(var(--dialogsDurationEnterMS) + 1500ms + var(--dialogsDurationExitMS));
-    animation-timing-function: var(--easingAccelerate);
-    animation-direction: normal;
-    animation-fill-mode: forwards;
   }
 `
 
@@ -186,10 +190,6 @@ export const placementRight = css`
   &[data-tooltip]:hover:after {
     transform-origin: left;
     animation-name: tooltipFadeawayHorizontal;
-    animation-duration: calc(var(--dialogsDurationEnterMS) + 1500ms + var(--dialogsDurationExitMS));
-    animation-timing-function: var(--easingAccelerate);
-    animation-direction: normal;
-    animation-fill-mode: forwards;
   }
 `
 
@@ -214,10 +214,6 @@ export const placementLeft = css`
   &[data-tooltip]:hover:after {
     transform-origin: right;
     animation-name: tooltipFadeawayHorizontal;
-    animation-duration: calc(var(--dialogsDurationEnterMS) + 1500ms + var(--dialogsDurationExitMS));
-    animation-timing-function: var(--easingAccelerate);
-    animation-direction: normal;
-    animation-fill-mode: forwards;
   }
 `
 
