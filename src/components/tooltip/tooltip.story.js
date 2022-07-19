@@ -81,7 +81,7 @@ export const Tooltip = () => {
       </div>
       <hr />
       <div className="title">
-        <h4>Delayed Tooltips</h4>
+        <h4>Delayed tooltips</h4>
         <p>These tooltips show up after a short delay</p>
       </div>
       <div className="wrapper">
