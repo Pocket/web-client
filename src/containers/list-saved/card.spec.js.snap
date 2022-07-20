@@ -101,7 +101,7 @@ exports[`ItemCard renders a legacy saved item 1`] = `
         <span>
           <button
             aria-label="item-action:unfavorite"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq active"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd active"
             data-cy="item-action:unfavorite"
             data-tooltip="item-action:unfavorite"
           >
@@ -126,7 +126,7 @@ exports[`ItemCard renders a legacy saved item 1`] = `
         <span>
           <button
             aria-label="item-action:archive"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:archive"
             data-tooltip="item-action:archive"
           >
@@ -161,7 +161,7 @@ exports[`ItemCard renders a legacy saved item 1`] = `
         <span>
           <button
             aria-label="item-action:tag"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:tag"
             data-tooltip="item-action:tag"
           >
@@ -189,7 +189,7 @@ exports[`ItemCard renders a legacy saved item 1`] = `
         <span>
           <button
             aria-label="item-action:share"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:share"
             data-tooltip="item-action:share"
           >
@@ -219,7 +219,7 @@ exports[`ItemCard renders a legacy saved item 1`] = `
         <span>
           <button
             aria-label="item-action:delete"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:delete"
             data-tooltip="item-action:delete"
           >
@@ -328,7 +328,7 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
         <span>
           <button
             aria-label="item-action:favorite"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:favorite"
             data-tooltip="item-action:favorite"
           >
@@ -353,7 +353,7 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
         <span>
           <button
             aria-label="item-action:archive"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:archive"
             data-tooltip="item-action:archive"
           >
@@ -388,7 +388,7 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
         <span>
           <button
             aria-label="item-action:tag"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:tag"
             data-tooltip="item-action:tag"
           >
@@ -416,7 +416,7 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
         <span>
           <button
             aria-label="item-action:share"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:share"
             data-tooltip="item-action:share"
           >
@@ -446,7 +446,7 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
         <span>
           <button
             aria-label="item-action:delete"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:delete"
             data-tooltip="item-action:delete"
           >
@@ -555,7 +555,7 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
         <span>
           <button
             aria-label="item-action:favorite"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:favorite"
             data-tooltip="item-action:favorite"
           >
@@ -580,7 +580,7 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
         <span>
           <button
             aria-label="item-action:archive"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:archive"
             data-tooltip="item-action:archive"
           >
@@ -615,7 +615,7 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
         <span>
           <button
             aria-label="item-action:tag"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:tag"
             data-tooltip="item-action:tag"
           >
@@ -643,7 +643,7 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
         <span>
           <button
             aria-label="item-action:share"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:share"
             data-tooltip="item-action:share"
           >
@@ -673,7 +673,7 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
         <span>
           <button
             aria-label="item-action:delete"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:delete"
             data-tooltip="item-action:delete"
           >
@@ -782,7 +782,7 @@ exports[`ItemCard renders a saved collection 1`] = `
         <span>
           <button
             aria-label="item-action:favorite"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:favorite"
             data-tooltip="item-action:favorite"
           >
@@ -807,7 +807,7 @@ exports[`ItemCard renders a saved collection 1`] = `
         <span>
           <button
             aria-label="item-action:archive"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:archive"
             data-tooltip="item-action:archive"
           >
@@ -842,7 +842,7 @@ exports[`ItemCard renders a saved collection 1`] = `
         <span>
           <button
             aria-label="item-action:tag"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:tag"
             data-tooltip="item-action:tag"
           >
@@ -870,7 +870,7 @@ exports[`ItemCard renders a saved collection 1`] = `
         <span>
           <button
             aria-label="item-action:share"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:share"
             data-tooltip="item-action:share"
           >
@@ -900,7 +900,7 @@ exports[`ItemCard renders a saved collection 1`] = `
         <span>
           <button
             aria-label="item-action:delete"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:delete"
             data-tooltip="item-action:delete"
           >
@@ -1000,7 +1000,7 @@ exports[`ItemCard renders a saved image 1`] = `
         <span>
           <button
             aria-label="item-action:favorite"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:favorite"
             data-tooltip="item-action:favorite"
           >
@@ -1025,7 +1025,7 @@ exports[`ItemCard renders a saved image 1`] = `
         <span>
           <button
             aria-label="item-action:archive"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:archive"
             data-tooltip="item-action:archive"
           >
@@ -1060,7 +1060,7 @@ exports[`ItemCard renders a saved image 1`] = `
         <span>
           <button
             aria-label="item-action:tag"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:tag"
             data-tooltip="item-action:tag"
           >
@@ -1088,7 +1088,7 @@ exports[`ItemCard renders a saved image 1`] = `
         <span>
           <button
             aria-label="item-action:share"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:share"
             data-tooltip="item-action:share"
           >
@@ -1118,7 +1118,7 @@ exports[`ItemCard renders a saved image 1`] = `
         <span>
           <button
             aria-label="item-action:delete"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:delete"
             data-tooltip="item-action:delete"
           >
@@ -1218,7 +1218,7 @@ exports[`ItemCard renders a saved video 1`] = `
         <span>
           <button
             aria-label="item-action:favorite"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:favorite"
             data-tooltip="item-action:favorite"
           >
@@ -1243,7 +1243,7 @@ exports[`ItemCard renders a saved video 1`] = `
         <span>
           <button
             aria-label="item-action:archive"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:archive"
             data-tooltip="item-action:archive"
           >
@@ -1278,7 +1278,7 @@ exports[`ItemCard renders a saved video 1`] = `
         <span>
           <button
             aria-label="item-action:tag"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:tag"
             data-tooltip="item-action:tag"
           >
@@ -1306,7 +1306,7 @@ exports[`ItemCard renders a saved video 1`] = `
         <span>
           <button
             aria-label="item-action:share"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:share"
             data-tooltip="item-action:share"
           >
@@ -1336,7 +1336,7 @@ exports[`ItemCard renders a saved video 1`] = `
         <span>
           <button
             aria-label="item-action:delete"
-            class="m11fpiro t1221eea pmdugmx d1ihjjkq"
+            class="m11fpiro t1221eea pmdugmx d1mp5exd"
             data-cy="item-action:delete"
             data-tooltip="item-action:delete"
           >
