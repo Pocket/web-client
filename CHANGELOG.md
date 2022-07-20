@@ -1,3 +1,10 @@
+## [1.54.6](https://github.com/Pocket/web-client/compare/v1.54.5...v1.54.6) (2022-07-20)
+
+
+### Bug Fixes
+
+* **account:** pick up rss privacy properly ([8e646a7](https://github.com/Pocket/web-client/commit/8e646a7eaa2790340d0632e4b5cb18244f67f7b6))
+
 ## [1.54.5](https://github.com/Pocket/web-client/compare/v1.54.4...v1.54.5) (2022-07-19)
 
 
