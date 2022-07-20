@@ -49,8 +49,9 @@ export const accountClearCancel = () => ({ type: ACCOUNT_CLEAR_CANCEL })
 export const userPrivacyReducers = (state = initialState, action) => {
   switch (action.type) {
     case USER_SUCCESS: {
-      const { profile } = action
-      return { ...state, rssProtected: profile.feed_protected || true }
+      const { user } = action
+      const rssProtected = user?.feed_protected === '1'
+      return { ...state, rssProtected }
     }
 
     case ACCOUNT_CLEAR_REQUEST: {
