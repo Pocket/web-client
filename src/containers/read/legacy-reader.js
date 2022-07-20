@@ -14,7 +14,7 @@ import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
 import { ReaderFonts } from 'components/reader/fonts'
-import { Recommendations } from 'containers/read/recommendations'
+import { Recommendations } from 'connectors/reader/recommendations'
 
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
