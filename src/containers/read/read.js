@@ -29,5 +29,5 @@ export default function Read() {
     }
   }, [deleted, router, dispatch])
 
-  return <ContentToRender />
+  return flagsReady ? <ContentToRender /> : null
 }
