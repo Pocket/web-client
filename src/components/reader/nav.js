@@ -170,8 +170,7 @@ export const ReaderNav = ({
     goBack()
   }
 
-  const buttonClass = cx(buttonReset, buttonStyles, bottomTooltip)
-  const buttonClassWithRightTooltip = cx(buttonReset, buttonStyles, rightTooltip)
+  const buttonClass = cx(buttonReset, buttonStyles)
 
   useEffect(() => {
     const shortcutGoBack = () => {
@@ -196,7 +195,7 @@ export const ReaderNav = ({
             aria-label={returnCopy}
             data-tooltip={returnCopy}
             data-cy="reader-nav-go-back"
-            className={cx(buttonClassWithRightTooltip, 'go-back')}>
+            className={cx(buttonClass, rightTooltip, 'go-back')}>
             {getStarted ? (
               <>
                 <HomeIcon />
@@ -221,7 +220,7 @@ export const ReaderNav = ({
                   : t('nav:open-highlights-menu', 'Open Highlights Menu')
               }
               data-cy="reader-nav-highlights"
-              className={buttonClass}>
+              className={cx(buttonClass, bottomTooltip)}>
               <HighlightIcon />
             </button>
 
@@ -230,7 +229,7 @@ export const ReaderNav = ({
               aria-label={t('nav:tag-article', 'Tag Article')}
               data-tooltip={t('nav:tag-article', 'Tag Article')}
               data-cy="reader-nav-tag"
-              className={buttonClass}>
+              className={cx(buttonClass, bottomTooltip)}>
               <TagIcon />
             </button>
 
@@ -247,7 +246,7 @@ export const ReaderNav = ({
                   : t('nav:favorite-article', 'Favorite Article')
               }
               data-cy="reader-nav-favorite"
-              className={cx(buttonClass, favorite && 'favorite')}>
+              className={cx(buttonClass, bottomTooltip, favorite && 'favorite')}>
               {favorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
             </button>
 
@@ -264,7 +263,7 @@ export const ReaderNav = ({
                   : t('nav:archive-article', 'Archive Article')
               }
               data-cy="reader-nav-archive"
-              className={buttonClass}>
+              className={cx(buttonClass, bottomTooltip)}>
               {archive ? <AddCircledIcon /> : <ArchiveIcon />}
             </button>
 
@@ -273,7 +272,7 @@ export const ReaderNav = ({
               aria-label={t('nav:delete-from-library', 'Delete from Library')}
               data-tooltip={t('nav:delete-from-library', 'Delete from Library')}
               data-cy="reader-nav-delete"
-              className={buttonClass}>
+              className={cx(buttonClass, bottomTooltip)}>
               <DeleteIcon />
             </button>
 
@@ -282,7 +281,7 @@ export const ReaderNav = ({
               aria-label={t('nav:share-article', 'Share Article')}
               data-tooltip={t('nav:share-article', 'Share Article')}
               data-cy="reader-nav-share"
-              className={buttonClass}>
+              className={cx(buttonClass, bottomTooltip)}>
               <IosShareIcon />
             </button>
           </div>
