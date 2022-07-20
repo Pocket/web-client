@@ -218,7 +218,7 @@ export function deriveItemData({
     excerpt: excerpt({ item, itemEnrichment }),
     publisher: publisher({ item, itemEnrichment, passedPublisher }),
     externalUrl: externalUrl({ item, itemEnrichment, utmId }),
-    readUrl: readUrl({ item, status: node?.status }),
+    readUrl: readUrl({ item, node, status: node?.status }),
     saveUrl: saveUrl({ item, itemEnrichment }),
     syndicatedUrl: syndicatedUrl({ item }),
     permanentUrl: permanentUrl({ item, status: node?.status }),
@@ -366,7 +366,7 @@ function analyticsUrl({ item, itemEnrichment }) {
  * @param {object} item An item returned from the server
  * @return {string} url to use when reading
  */
-export function readUrl({ item, itemEnrichment, status }) {
+export function readUrl({ item, node, itemEnrichment, status }) {
   const external = externalUrl({ item, itemEnrichment })
   const readable = isReadable({ item })
   const collection = isCollection({ item })
@@ -384,7 +384,8 @@ export function readUrl({ item, itemEnrichment, status }) {
   if (!readable) return external
 
   // Otherwise we are gonna open it in reader view
-  return `/read/${item.itemId}`
+  const itemId = node?.id || item?.itemId
+  return `/read/${itemId}`
 }
 
 /** PERMANENT URL
