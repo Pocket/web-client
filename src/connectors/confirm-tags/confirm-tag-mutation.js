@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, Trans } from 'next-i18next'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-import { getUserTags } from 'containers/my-list/tags-page/tags-page.state'
+import { requestUserTags } from 'containers/my-list/tags-page/tags-page.state'
 import { mutationTagConfirm } from 'connectors/items/mutation-tagging.state'
 import { mutationTagCancel } from 'connectors/items/mutation-tagging.state'
 import { mutationTagAdd } from 'connectors/items/mutation-tagging.state'
@@ -106,7 +106,7 @@ export function MutationTaggingModal() {
 
   useEffect(() => {
     if (tagsSince) return
-    dispatch(getUserTags())
+    dispatch(requestUserTags())
   }, [dispatch, tagsSince])
 
   return (

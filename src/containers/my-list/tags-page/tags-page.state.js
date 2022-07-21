@@ -3,6 +3,7 @@ import { fetchStoredTags } from 'common/api/_legacy/tags'
 import { renameStoredTag } from 'common/api/_legacy/tags'
 import { deleteStoredTag } from 'common/api/_legacy/tags'
 import { fetchMyListData } from 'containers/my-list/my-list.state'
+import { getUserTags as getUserTagsGraph } from 'common/api'
 
 import { USER_TAGS_GET_REQUEST } from 'actions'
 import { USER_TAGS_GET_SUCCESS } from 'actions'
@@ -10,6 +11,11 @@ import { USER_TAGS_GET_FAILURE } from 'actions'
 import { USER_TAGS_ITEM_SUCCESS } from 'actions'
 import { USER_TAGS_PIN } from 'actions'
 import { USER_TAGS_PINS_SET } from 'actions'
+
+//Client API
+import { USER_TAGS_REQUEST } from 'actions'
+import { USER_TAGS_SUCCESS } from 'actions'
+import { USER_TAGS_FAILURE } from 'actions'
 
 import { USER_TAGS_EDIT } from 'actions'
 import { USER_TAGS_EDIT_CONFIRM } from 'actions'
@@ -33,6 +39,7 @@ export const confirmEditUserTag = (old_tag, new_tag, router) => ({ type: USER_TA
 export const deleteUserTag = (tag) => ({ type: USER_TAGS_DELETE, tag })
 export const cancelDeleteUserTag = () => ({ type: USER_TAGS_DELETE_CANCEL })
 export const confirmDeleteUserTag = (tag, router) => ({ type: USER_TAGS_DELETE_CONFIRM, tag, router}) //prettier-ignore
+export const requestUserTags = () => ({ type: USER_TAGS_REQUEST })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -113,6 +120,7 @@ export const userTagsReducers = (state = initialState, action) => {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const userTagsSagas = [
   takeEvery(USER_TAGS_GET_REQUEST, userTagsRequest),
+  takeEvery(USER_TAGS_REQUEST, userTagsOnly),
   takeEvery(USER_TAGS_PIN, userTagsTogglePin),
   takeEvery(USER_TAGS_EDIT_CONFIRM, userTagsEditConfirm),
   takeEvery(USER_TAGS_DELETE_CONFIRM, userTagsDeleteConfirm)
@@ -124,6 +132,13 @@ const getPinnedTags = (state) => state.settings.pinnedTags
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+function* userTagsOnly() {
+  // This will need to be part of the larger request organization
+  // For now we are keeping this as a placeholder to avoid double requesting
+  // during the apiNext testing.
+  // const response = yield getUserTagsGraph()
+}
+
 function* userTagsRequest() {
   const response = yield fetchStoredTags()
 
