@@ -30,6 +30,7 @@ const quoteStyles = css`
   font-size: 18px;
   margin: 0;
   cursor: pointer;
+  white-space: initial;
   &:hover {
     background: transparent;
   }

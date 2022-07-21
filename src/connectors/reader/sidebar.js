@@ -13,7 +13,7 @@ export const SidebarWrapper = ({ id }) => {
   const savedData = useSelector((state) => state.itemsSaved[id])
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const sideBarOpen = useSelector((state) => state.readerGraph.sideBarOpen)
-  const highlightList = useSelector((state) => state.reader.highlightList)
+  const highlightList = useSelector((state) => state.readerGraph.highlightList)
 
   const { analyticsData } = item
   const { annotations } = savedData
