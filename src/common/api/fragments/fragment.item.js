@@ -38,6 +38,12 @@ export const FRAGMENT_ITEM = gql`
       intro
       title
     }
+    authors {
+      id
+      name
+      url
+    }
+    datePublished
     syndicatedArticle {
       slug
       publisher {
