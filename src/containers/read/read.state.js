@@ -43,31 +43,13 @@ import { HYDRATE } from 'actions'
 import { READER_CLEAR_DELETION } from 'actions'
 
 // Client API actions
-import { createHighlight } from 'common/api'
-import { deleteHighlight } from 'common/api'
-
 import { MUTATION_DELETE_SUCCESS } from 'actions'
-import { READ_SET_HIGHLIGHTS } from 'actions'
-
-import { HIGHLIGHT_SAVE_REQUEST } from 'actions'
-import { HIGHLIGHT_SAVE_SUCCESS } from 'actions'
-import { HIGHLIGHT_SAVE_FAILURE } from 'actions'
-
-import { HIGHLIGHT_DELETE_REQUEST } from 'actions'
-import { HIGHLIGHT_DELETE_SUCCESS } from 'actions'
-import { HIGHLIGHT_DELETE_FAILURE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-// v3 actions
 export const itemDataRequest = (itemId) => ({ type: ARTICLE_ITEM_REQUEST, itemId }) //prettier-ignore
 export const saveAnnotation = ({ itemId, quote, patch }) => ({ type: ANNOTATION_SAVE_REQUEST, item_id: itemId, quote, patch }) //prettier-ignore
 export const deleteAnnotation = ({ itemId, annotation_id }) => ({ type: ANNOTATION_DELETE_REQUEST, item_id: itemId, annotation_id }) //prettier-ignore
-
-// client-api actions
-export const setHighlightList = (highlightList) => ({ type: READ_SET_HIGHLIGHTS, highlightList }) //prettier-ignore
-export const saveHighlightRequest = ({ id, quote, patch }) => ({ type: HIGHLIGHT_SAVE_REQUEST, id, quote, patch }) //prettier-ignore
-export const deleteHighlightRequest = ({ annotationId }) => ({ type: HIGHLIGHT_DELETE_REQUEST, annotationId }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -85,11 +67,7 @@ const initialState = {
   fontSize: 3,
   fontFamily: 'blanco',
   sideBarOpen: false,
-  deleted: false,
-
-  articleItem: null,
-  savedData: null,
-  highlightList: []
+  deleted: false
 }
 
 export const readReducers = (state = initialState, action) => {
@@ -118,23 +96,6 @@ export const readReducers = (state = initialState, action) => {
     case ANNOTATION_DELETE_SUCCESS: {
       const { annotations } = action
       return { ...state, annotations }
-    }
-
-    case READ_SET_HIGHLIGHTS: {
-      const { highlightList } = action
-      return { ...state, highlightList }
-    }
-
-    case HIGHLIGHT_SAVE_SUCCESS:
-    case HIGHLIGHT_DELETE_SUCCESS: {
-      const { highlights } = action
-      const savedData = {
-        ...state.savedData,
-        annotations: {
-          highlights
-        }
-      }
-      return { ...state, savedData }
     }
 
     // optimistic update
@@ -203,17 +164,12 @@ export const readSagas = [
   takeEvery(ANNOTATION_SAVE_REQUEST, annotationSaveRequest),
   takeEvery(ANNOTATION_DELETE_REQUEST, annotationDeleteRequest),
   takeEvery(ITEMS_ARCHIVE_SUCCESS, redirectToList),
-  takeEvery(ITEMS_UNARCHIVE_SUCCESS, redirectToList),
-
-  // client-api
-  takeEvery(HIGHLIGHT_SAVE_REQUEST, highlightSaveRequest),
-  takeEvery(HIGHLIGHT_DELETE_REQUEST, highlightDeleteRequest)
+  takeEvery(ITEMS_UNARCHIVE_SUCCESS, redirectToList)
 ]
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getAnnotations = (state) => state.reader.annotations
-const getHighlights = (state) => state.reader.savedData?.annotations?.highlights
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -302,38 +258,6 @@ function* annotationDeleteRequest({ item_id, annotation_id }) {
     if (data) return yield put({ type: ANNOTATION_DELETE_SUCCESS, annotations })
   } catch (error) {
     yield put({ type: ANNOTATION_DELETE_FAILURE, error })
-  }
-}
-
-function* highlightSaveRequest({ id, quote, patch }) {
-  try {
-    const highlight = {
-      version: 2,
-      itemId: id,
-      quote,
-      patch
-    }
-
-    const data = yield call(createHighlight, highlight)
-    const storedHighlights = yield select(getHighlights)
-    const highlights = [...storedHighlights, ...data]
-
-    return yield put({ type: HIGHLIGHT_SAVE_SUCCESS, highlights })
-  } catch (error) {
-    yield put({ type: HIGHLIGHT_SAVE_FAILURE, error })
-  }
-}
-
-function* highlightDeleteRequest({ annotationId }) {
-  try {
-    // data === annotationId
-    const data = yield call(deleteHighlight, annotationId)
-    const storedHighlights = yield select(getHighlights)
-    const highlights = storedHighlights.filter(i => i.id !== data) //prettier-ignore
-
-    return yield put({ type: HIGHLIGHT_DELETE_SUCCESS, highlights })
-  } catch (error) {
-    yield put({ type: HIGHLIGHT_DELETE_FAILURE, error })
   }
 }
 

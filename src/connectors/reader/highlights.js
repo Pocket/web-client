@@ -4,9 +4,10 @@ import { SelectionPopover } from 'components/popover/popover-selection'
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
 
-import { saveHighlightRequest } from 'containers/read/read.state'
-import { deleteHighlightRequest } from 'containers/read/read.state'
-import { setHighlightList } from 'containers/read/read.state'
+import { mutationHighlightItem } from 'connectors/items/mutation-highlight.state'
+import { mutationHighlightDelete } from 'connectors/items/mutation-highlight.state'
+
+import { setHighlightList } from 'containers/read/reader.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { shareAction } from 'connectors/share-modal/share-modal.state'
@@ -23,7 +24,7 @@ export const Highlights = ({ children, id }) => {
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const item = useSelector((state) => state.items[id])
   const savedData = useSelector((state) => state.itemsSaved[id])
-  const highlightList = useSelector((state) => state.reader.highlightList)
+  const highlightList = useSelector((state) => state.readerGraph.highlightList)
 
   const { analyticsData } = item
   const { annotations } = savedData
@@ -59,7 +60,7 @@ export const Highlights = ({ children, id }) => {
 
     dispatch(sendSnowplowEvent('reader.add-highlight', analyticsData))
     dispatch(
-      saveHighlightRequest({
+      mutationHighlightItem({
         id,
         patch: requestAnnotationPatch(highlight),
         quote: highlight.toString()
@@ -69,7 +70,7 @@ export const Highlights = ({ children, id }) => {
 
   const removeAnnotation = (annotationId) => {
     dispatch(sendSnowplowEvent('reader.remove-highlight', analyticsData))
-    dispatch(deleteHighlightRequest({ annotationId }))
+    dispatch(mutationHighlightDelete({ annotationId, savedItemId: id }))
   }
 
   const itemShare = ({ quote }) => {

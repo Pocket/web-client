@@ -19,8 +19,6 @@ export const updateLineHeight = (lineHeight) => ({ type: UPDATE_LINE_HEIGHT, lin
 export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, columnWidth })
 export const updateFontSize = (fontSize) => ({ type: UPDATE_FONT_SIZE, fontSize })
 export const updateFontType = (fontFamily) => ({ type: UPDATE_FONT_TYPE, fontFamily })
-export const toggleSidebar = () => ({ type: TOGGLE_READER_SIDEBAR })
-export const clearDeletion = () => ({ type: READER_CLEAR_DELETION })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -28,9 +26,7 @@ const initialState = {
   lineHeight: 3,
   columnWidth: 3,
   fontSize: 3,
-  fontFamily: 'blanco',
-  sideBarOpen: false,
-  deleted: false
+  fontFamily: 'blanco'
 }
 
 export const readerSettingsReducers = (state = initialState, action) => {
@@ -53,14 +49,6 @@ export const readerSettingsReducers = (state = initialState, action) => {
     case UPDATE_FONT_TYPE: {
       const { fontFamily } = action
       return { ...state, fontFamily }
-    }
-
-    case TOGGLE_READER_SIDEBAR: {
-      return { ...state, sideBarOpen: !state.sideBarOpen }
-    }
-
-    case READER_CLEAR_DELETION: {
-      return { ...state, deleted: false }
     }
 
     case HYDRATE_DISPLAY_SETTINGS: {

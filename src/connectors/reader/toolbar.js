@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ReaderNav } from 'components/reader/nav'
 
 import { setColorMode } from 'connectors/app/app.state'
-import { toggleSidebar } from 'containers/read/reader-settings.state'
+import { toggleSidebar } from 'containers/read/reader.state'
 
 import { mutationFavorite } from 'connectors/items/mutation-favorite.state'
 import { mutationUnFavorite } from 'connectors/items/mutation-favorite.state'
@@ -25,7 +25,7 @@ export const Toolbar = ({ id }) => {
 
   const item = useSelector((state) => state.items[id])
   const savedData = useSelector((state) => state.itemsSaved[id])
-  const sideBarOpen = useSelector((state) => state.readerSettings.sideBarOpen)
+  const sideBarOpen = useSelector((state) => state.readerGraph.sideBarOpen)
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const colorMode = useSelector((state) => state?.app?.colorMode)

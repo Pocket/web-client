@@ -1,11 +1,7 @@
-import { put, takeEvery, select, call } from 'redux-saga/effects'
-import { arrayToObject } from 'common/utilities'
+import { put, takeEvery } from 'redux-saga/effects'
 
 // Client API actions
 import { getSavedItemByItemId } from 'common/api'
-
-import { createHighlight } from 'common/api'
-import { deleteHighlight } from 'common/api'
 import { deriveReaderItem } from 'common/api/derivers/item'
 
 import { READ_ITEM_REQUEST } from 'actions'
@@ -14,30 +10,37 @@ import { READ_ITEM_FAILURE } from 'actions'
 
 import { READ_SET_HIGHLIGHTS } from 'actions'
 
-import { HIGHLIGHT_SAVE_REQUEST } from 'actions'
-import { HIGHLIGHT_SAVE_SUCCESS } from 'actions'
-import { HIGHLIGHT_SAVE_FAILURE } from 'actions'
-
-import { HIGHLIGHT_DELETE_REQUEST } from 'actions'
-import { HIGHLIGHT_DELETE_SUCCESS } from 'actions'
-import { HIGHLIGHT_DELETE_FAILURE } from 'actions'
+import { TOGGLE_READER_SIDEBAR } from 'actions'
+import { READER_CLEAR_DELETION } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getReadItem = (id) => ({ type: READ_ITEM_REQUEST, id })
 export const setHighlightList = (highlightList) => ({ type: READ_SET_HIGHLIGHTS, highlightList })
-export const saveHighlightRequest = ({ id, quote, patch }) => ({ type: HIGHLIGHT_SAVE_REQUEST, id, quote, patch }) //prettier-ignore
-export const deleteHighlightRequest = ({ annotationId }) => ({ type: HIGHLIGHT_DELETE_REQUEST, annotationId }) //prettier-ignore
+export const toggleSidebar = () => ({ type: TOGGLE_READER_SIDEBAR })
+export const clearDeletion = () => ({ type: READER_CLEAR_DELETION })
 
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  articleItem: null,
+  sideBarOpen: false,
+  deleted: false,
   highlightList: []
 }
 
 export const readerReducers = (state = initialState, action) => {
   switch (action.type) {
+    case READ_SET_HIGHLIGHTS: {
+      const { highlightList } = action
+      return { ...state, highlightList }
+    }
+
+    case TOGGLE_READER_SIDEBAR: {
+      return { ...state, sideBarOpen: !state.sideBarOpen }
+    }
+    case READER_CLEAR_DELETION: {
+      return { ...state, deleted: false }
+    }
     default:
       return state
   }

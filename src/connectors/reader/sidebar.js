@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Sidebar } from 'components/reader/sidebar'
 import { cx } from 'linaria'
-import { toggleSidebar } from 'containers/read/reader-settings.state'
+import { toggleSidebar } from 'containers/read/reader.state'
 import { deleteHighlightRequest } from 'containers/read/read.state'
 import { shareAction } from 'connectors/share-modal/share-modal.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
@@ -12,7 +12,7 @@ export const SidebarWrapper = ({ id }) => {
   const item = useSelector((state) => state.items[id])
   const savedData = useSelector((state) => state.itemsSaved[id])
   const isPremium = useSelector((state) => state.user.premium_status === '1')
-  const sideBarOpen = useSelector((state) => state.readerSettings.sideBarOpen)
+  const sideBarOpen = useSelector((state) => state.readerGraph.sideBarOpen)
   const highlightList = useSelector((state) => state.reader.highlightList)
 
   const { analyticsData } = item
