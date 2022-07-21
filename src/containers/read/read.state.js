@@ -253,7 +253,20 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, ...settings }
     }
 
-    case ITEMS_DELETE_SUCCESS:
+    case ITEMS_DELETE_SUCCESS: {
+      const itemId = state.articleData?.item_id
+      const { actions } = action
+      const deletedItems = actions
+        .filter((current) => {
+          return current.action === 'delete' && current.item_id === itemId
+        })
+        .map((item) => item.item_id)
+
+      const deleted = itemId && deletedItems.length
+
+      return { ...state, deleted: !!deleted }
+    }
+
     case MUTATION_DELETE_SUCCESS: {
       return { ...state, deleted: true }
     }
@@ -482,7 +495,7 @@ function redirectToList() {
   if (document.location.href.indexOf('/read/') !== -1) {
     // setup moment
     const getStarted = new URLSearchParams(window.location.search)?.has('getStarted')
-    if (getStarted) return document.location.href = '/home'
+    if (getStarted) return (document.location.href = '/home')
 
     // default behavior
     if (global.history.length > 1) {
