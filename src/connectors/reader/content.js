@@ -6,13 +6,9 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 export const ContentWrapper = ({ id }) => {
   const dispatch = useDispatch()
 
-  const item = useSelector((state) => state.reader.articleItem)
+  const item = useSelector((state) => state.items[id])
 
-  const {
-    article,
-    images,
-    videos
-  } = item
+  const { article, images, videos } = item
 
   const externalLinkClick = (href) => {
     const data = { id, url: href }

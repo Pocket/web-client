@@ -2,12 +2,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ReaderNav } from 'components/reader/nav'
 
 import { setColorMode } from 'connectors/app/app.state'
-import { favoriteItem } from 'containers/read/read.state'
-import { unFavoriteItem } from 'containers/read/read.state'
-import { archiveItem } from 'containers/read/read.state'
-import { unArchiveItem } from 'containers/read/read.state'
 import { toggleSidebar } from 'containers/read/reader-settings.state'
+
+import { mutationFavorite } from 'connectors/items/mutation-favorite.state'
+import { mutationUnFavorite } from 'connectors/items/mutation-favorite.state'
+import { mutationArchive } from 'connectors/items/mutation-archive.state'
 import { mutationDelete } from 'connectors/items/mutation-delete.state'
+import { mutationUnArchive } from 'connectors/items/mutation-archive.state'
 import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
 
 import { updateLineHeight } from 'containers/read/reader-settings.state'
@@ -22,8 +23,8 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 export const Toolbar = ({ id }) => {
   const dispatch = useDispatch()
 
-  const item = useSelector((state) => state.reader.articleItem)
-  const savedData = useSelector((state) => state.reader.savedData)
+  const item = useSelector((state) => state.items[id])
+  const savedData = useSelector((state) => state.itemsSaved[id])
   const sideBarOpen = useSelector((state) => state.readerSettings.sideBarOpen)
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
@@ -37,11 +38,7 @@ export const Toolbar = ({ id }) => {
 
   const { analyticsData } = item
 
-  const {
-    isArchived,
-    isFavorite,
-    tags
-  } = savedData
+  const { isArchived, isFavorite, tags } = savedData
 
   const handleSidebarToggle = () => dispatch(toggleSidebar())
 
@@ -61,14 +58,14 @@ export const Toolbar = ({ id }) => {
   }
 
   const toggleFavorite = () => {
-    const favoriteAction = isFavorite ? unFavoriteItem : favoriteItem
+    const favoriteAction = isFavorite ? mutationUnFavorite : mutationFavorite
     const identifier = isFavorite ? 'reader.un-favorite' : 'reader.favorite'
     dispatch(sendSnowplowEvent(identifier, analyticsData))
     dispatch(favoriteAction(id))
   }
 
   const itemArchive = () => {
-    const archiveAction = isArchived ? unArchiveItem : archiveItem
+    const archiveAction = isArchived ? mutationUnArchive : mutationArchive
     const identifier = isArchived ? 'reader.un-archive' : 'reader.archive'
     dispatch(sendSnowplowEvent(identifier, analyticsData))
     dispatch(archiveAction(id))
