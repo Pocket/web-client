@@ -137,7 +137,7 @@ export const ItemHeader = ({
       <h1 className={articleTitle}>{title}</h1>
 
       <div className={articleInfo}>
-        {authorList.length ? (
+        {authorList?.length ? (
           <div className={authorWrapper}>
             <Trans i18nKey="reader:by">By</Trans> {authorList}
           </div>
