@@ -8,16 +8,13 @@ export const Upsell = () => {
   const dispatch = useDispatch()
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
-  const columnWidth = useSelector((state) => state.reader.columnWidth)
+  const columnWidth = useSelector((state) => state.readerSettings.columnWidth)
 
   const handleImpression = (identifier) => {
     dispatch(sendSnowplowEvent(identifier))
   }
 
   return isPremium ? null : (
-    <BottomUpsell
-      maxWidth={`${COLUMN_WIDTH_RANGE[columnWidth]}px`}
-      onVisible={handleImpression}
-    />
+    <BottomUpsell maxWidth={`${COLUMN_WIDTH_RANGE[columnWidth]}px`} onVisible={handleImpression} />
   )
 }

@@ -99,6 +99,9 @@ import { onboardingSagas } from 'connectors/onboarding/onboarding.state'
 
 import { shareModalReducers } from 'connectors/share-modal/share-modal.state'
 
+import { readerSettingsReducers } from 'containers/read/reader-settings.state'
+import { readerSettingsSagas } from 'containers/read/reader-settings.state'
+
 //Items (From the graph)
 import { itemsReducers } from 'connectors/items/items.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
@@ -178,8 +181,9 @@ const libraryReducers = {
   profileItemsByIds: profileItemsReducers
 }
 
-const readerReducers = {
-  reader: readReducers
+const readerViewReducers = {
+  reader: readReducers,
+  readerSettings: readerSettingsReducers,
 }
 
 const marketingReducers = {
@@ -245,6 +249,7 @@ function* rootSaga() {
     ...itemShareSagas,
     ...itemReportSagas,
     ...readSagas,
+    ...readerSettingsSagas,
     ...homeSagas,
     ...homeItemsSagas,
     ...userMessageSagas,
