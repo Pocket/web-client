@@ -9,8 +9,8 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 export const SidebarWrapper = ({ id }) => {
   const dispatch = useDispatch()
 
-  const item = useSelector((state) => state.reader.articleItem)
-  const savedData = useSelector((state) => state.reader.savedData)
+  const item = useSelector((state) => state.items[id])
+  const savedData = useSelector((state) => state.itemsSaved[id])
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const sideBarOpen = useSelector((state) => state.readerSettings.sideBarOpen)
   const highlightList = useSelector((state) => state.reader.highlightList)

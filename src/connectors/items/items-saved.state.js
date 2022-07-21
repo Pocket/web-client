@@ -20,6 +20,7 @@ import { ITEMS_SAVED_PAGE_INFO_SUCCESS } from 'actions'
 import { ITEMS_SAVED_PAGE_INFO_FAILURE } from 'actions'
 
 import { ITEMS_SUCCESS } from 'actions'
+import { READ_ITEM_SUCCESS } from 'actions'
 import { MUTATION_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
 
@@ -31,7 +32,8 @@ import { MUTATION_DELETE_SUCCESS } from 'actions'
 export const itemsSavedReducers = (state = {}, action) => {
   switch (action.type) {
     case ITEMS_SAVED_SUCCESS:
-    case ITEMS_UPSERT_SUCCESS: {
+    case ITEMS_UPSERT_SUCCESS:
+    case READ_ITEM_SUCCESS: {
       return { ...state, ...action.nodes }
     }
 

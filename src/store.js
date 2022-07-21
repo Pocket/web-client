@@ -103,6 +103,9 @@ import { readerSettingsReducers } from 'containers/read/reader-settings.state'
 import { readerSettingsSagas } from 'containers/read/reader-settings.state'
 
 //Items (From the graph)
+import { readerReducers } from 'containers/read/reader.state'
+import { readerSagas } from 'containers/read/reader.state'
+
 import { itemsReducers } from 'connectors/items/items.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
 import { itemsSavedSagas } from 'connectors/items/items-saved.state'
@@ -184,6 +187,7 @@ const libraryReducers = {
 const readerViewReducers = {
   reader: readReducers,
   readerSettings: readerSettingsReducers,
+  readerGraph: readerReducers
 }
 
 const marketingReducers = {
@@ -216,7 +220,7 @@ export const rootReducer = combineReducers({
   ...discoverReducers,
   ...collectionReducer,
   ...libraryReducers,
-  ...readerReducers,
+  ...readerViewReducers,
   ...userAccountReducers,
   home: homeReducers,
   homeItemsById: homeItemsReducers,
@@ -250,6 +254,7 @@ function* rootSaga() {
     ...itemReportSagas,
     ...readSagas,
     ...readerSettingsSagas,
+    ...readerSagas, //graph
     ...homeSagas,
     ...homeItemsSagas,
     ...userMessageSagas,

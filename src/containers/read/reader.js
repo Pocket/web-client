@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { css, cx } from 'linaria'
 
-import { getReadItem } from './read.state'
+import { getReadItem } from './reader.state'
 
 import { Toolbar } from 'connectors/reader/toolbar'
 import { Header } from 'connectors/reader/header'
@@ -83,13 +83,13 @@ export default function Reader() {
   const router = useRouter()
   const { slug: id } = router.query
 
-  const item = useSelector((state) => state.reader.articleItem)
+  const item = useSelector((state) => state.items[id])
 
   // Display settings
-  const lineHeight = useSelector((state) => state.reader.lineHeight)
-  const columnWidth = useSelector((state) => state.reader.columnWidth)
-  const fontSize = useSelector((state) => state.reader.fontSize)
-  const fontFamily = useSelector((state) => state.reader.fontFamily)
+  const lineHeight = useSelector((state) => state.readerSettings.lineHeight)
+  const columnWidth = useSelector((state) => state.readerSettings.columnWidth)
+  const fontSize = useSelector((state) => state.readerSettings.fontSize)
+  const fontFamily = useSelector((state) => state.readerSettings.fontFamily)
 
   useEffect(() => {
     dispatch(getReadItem(id))

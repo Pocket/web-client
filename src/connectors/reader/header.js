@@ -6,19 +6,10 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 export const Header = ({ id }) => {
   const dispatch = useDispatch()
 
-  const item = useSelector((state) => state.reader.articleItem)
-  const savedData = useSelector((state) => state.reader.savedData)
+  const item = useSelector((state) => state.items[id])
+  const savedData = useSelector((state) => state.itemsSaved[id])
 
-  const {
-    title,
-    authors,
-    externalUrl,
-    publisher,
-    timeToRead,
-    datePublished,
-    analyticsData
-  } = item
-
+  const { title, authors, externalUrl, publisher, timeToRead, datePublished, analyticsData } = item
   const { tags } = savedData
   const tagList = tags?.map((tag) => tag.name)
 
