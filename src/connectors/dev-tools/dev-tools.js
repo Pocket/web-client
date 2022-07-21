@@ -40,7 +40,7 @@ export function DevTools() {
       handleClose={toggleDevMode}>
       <ModalBody>
         <Features />
-        <BrazeTools />
+        {labUser ? <BrazeTools /> : null}
         <Links toggleDevMode={toggleDevMode} />
         <Resets />
       </ModalBody>
