@@ -44,6 +44,11 @@ import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
+import { updateLineHeight } from 'containers/read/reader-settings.state'
+import { updateColumnWidth } from 'containers/read/reader-settings.state'
+import { updateFontSize } from 'containers/read/reader-settings.state'
+import { updateFontType } from 'containers/read/reader-settings.state'
+
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
 export const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
@@ -247,6 +252,10 @@ export default function LegacyReader() {
         sideBarOpen={sideBarOpen}
         colorMode={colorMode}
         setColorMode={setAppColorMode}
+        updateLineHeight={updateLineHeight}
+        updateColumnWidth={updateColumnWidth}
+        updateFontSize={updateFontSize}
+        updateFontType={updateFontType}
       />
 
       <main className={articleWrapperStyles}>

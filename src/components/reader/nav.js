@@ -20,12 +20,6 @@ import {
 import { DisplaySettings } from 'components/display-settings/display-settings'
 import { buttonReset } from 'components/buttons/button-reset'
 import { bottomTooltip, rightTooltip } from 'components/tooltip/tooltip'
-import {
-  updateLineHeight,
-  updateColumnWidth,
-  updateFontSize,
-  updateFontType
-} from 'containers/read/read.state'
 import { ProgressBar } from 'components/progress-bar/progress-bar'
 import { useTranslation } from 'next-i18next'
 import Mousetrap from 'mousetrap'
@@ -147,7 +141,11 @@ export const ReaderNav = ({
   onVisible,
   sideBarOpen,
   colorMode,
-  setColorMode
+  setColorMode,
+  updateLineHeight,
+  updateColumnWidth,
+  updateFontSize,
+  updateFontType
 }) => {
   const dispatch = useDispatch()
   const router = useRouter()

@@ -2,13 +2,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ReaderNav } from 'components/reader/nav'
 
 import { setColorMode } from 'connectors/app/app.state'
-import { toggleSidebar } from 'containers/read/read.state'
 import { favoriteItem } from 'containers/read/read.state'
 import { unFavoriteItem } from 'containers/read/read.state'
 import { archiveItem } from 'containers/read/read.state'
 import { unArchiveItem } from 'containers/read/read.state'
+import { toggleSidebar } from 'containers/read/reader-settings.state'
 import { mutationDelete } from 'connectors/items/mutation-delete.state'
 import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
+
+import { updateLineHeight } from 'containers/read/reader-settings.state'
+import { updateColumnWidth } from 'containers/read/reader-settings.state'
+import { updateFontSize } from 'containers/read/reader-settings.state'
+import { updateFontType } from 'containers/read/reader-settings.state'
 
 import { shareAction } from 'connectors/share-modal/share-modal.state'
 
@@ -19,16 +24,16 @@ export const Toolbar = ({ id }) => {
 
   const item = useSelector((state) => state.reader.articleItem)
   const savedData = useSelector((state) => state.reader.savedData)
-  const sideBarOpen = useSelector((state) => state.reader.sideBarOpen)
+  const sideBarOpen = useSelector((state) => state.readerSettings.sideBarOpen)
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const colorMode = useSelector((state) => state?.app?.colorMode)
 
   // Display settings
-  const lineHeight = useSelector((state) => state.reader.lineHeight)
-  const columnWidth = useSelector((state) => state.reader.columnWidth)
-  const fontSize = useSelector((state) => state.reader.fontSize)
-  const fontFamily = useSelector((state) => state.reader.fontFamily)
+  const lineHeight = useSelector((state) => state.readerSettings.lineHeight)
+  const columnWidth = useSelector((state) => state.readerSettings.columnWidth)
+  const fontSize = useSelector((state) => state.readerSettings.fontSize)
+  const fontFamily = useSelector((state) => state.readerSettings.fontFamily)
 
   const { analyticsData } = item
 
@@ -91,6 +96,10 @@ export const Toolbar = ({ id }) => {
       onVisible={handleImpression}
       colorMode={colorMode}
       setColorMode={setAppColorMode}
+      updateLineHeight={updateLineHeight}
+      updateColumnWidth={updateColumnWidth}
+      updateFontSize={updateFontSize}
+      updateFontType={updateFontType}
     />
   )
 }

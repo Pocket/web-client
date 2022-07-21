@@ -1,15 +1,6 @@
 import { put, takeEvery, select, call } from 'redux-saga/effects'
 import { v4 as uuid } from 'uuid'
 import { arrayToObject } from 'common/utilities'
-import { localStore } from 'common/utilities/browser-storage/browser-storage'
-
-// Settings actions
-import { HYDRATE_DISPLAY_SETTINGS } from 'actions'
-import { UPDATE_LINE_HEIGHT } from 'actions'
-import { UPDATE_COLUMN_WIDTH } from 'actions'
-import { UPDATE_FONT_SIZE } from 'actions'
-import { UPDATE_FONT_TYPE } from 'actions'
-import { TOGGLE_READER_SIDEBAR } from 'actions'
 
 // V3 actions
 import { ARTICLE_ITEM_REQUEST } from 'actions'
@@ -112,13 +103,6 @@ export const unArchiveItem = (id) => ({ type: READ_UNARCHIVE_REQUEST, id }) //pr
 export const setHighlightList = (highlightList) => ({ type: READ_SET_HIGHLIGHTS, highlightList }) //prettier-ignore
 export const saveHighlightRequest = ({ id, quote, patch }) => ({ type: HIGHLIGHT_SAVE_REQUEST, id, quote, patch }) //prettier-ignore
 export const deleteHighlightRequest = ({ annotationId }) => ({ type: HIGHLIGHT_DELETE_REQUEST, annotationId }) //prettier-ignore
-// Settings actions
-export const updateLineHeight = (lineHeight) => ({ type: UPDATE_LINE_HEIGHT, lineHeight }) //prettier-ignore
-export const updateColumnWidth = (columnWidth) => ({ type: UPDATE_COLUMN_WIDTH, columnWidth }) //prettier-ignore
-export const updateFontSize = (fontSize) => ({ type: UPDATE_FONT_SIZE, fontSize }) //prettier-ignore
-export const updateFontType = (fontFamily) => ({ type: UPDATE_FONT_TYPE, fontFamily }) //prettier-ignore
-export const toggleSidebar = () => ({ type: TOGGLE_READER_SIDEBAR }) //prettier-ignore
-export const clearDeletion = () => ({ type: READER_CLEAR_DELETION })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -176,29 +160,6 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, annotations }
     }
 
-    case UPDATE_LINE_HEIGHT: {
-      const { lineHeight } = action
-      return { ...state, lineHeight }
-    }
-
-    case UPDATE_COLUMN_WIDTH: {
-      const { columnWidth } = action
-      return { ...state, columnWidth }
-    }
-
-    case UPDATE_FONT_SIZE: {
-      const { fontSize } = action
-      return { ...state, fontSize }
-    }
-
-    case UPDATE_FONT_TYPE: {
-      const { fontFamily } = action
-      return { ...state, fontFamily }
-    }
-
-    case TOGGLE_READER_SIDEBAR: {
-      return { ...state, sideBarOpen: !state.sideBarOpen }
-    }
 
     case READ_FAVORITE_SUCCESS:
     case READ_UNFAVORITE_SUCCESS: {
@@ -246,11 +207,6 @@ export const readReducers = (state = initialState, action) => {
         return { ...obj, [key]: {} }
       }, {})
       return { ...state, tags: newTags }
-    }
-
-    case HYDRATE_DISPLAY_SETTINGS: {
-      const { settings } = action
-      return { ...state, ...settings }
     }
 
     case ITEMS_DELETE_SUCCESS: {
@@ -303,11 +259,7 @@ export const readSagas = [
   takeEvery(ANNOTATION_DELETE_REQUEST, annotationDeleteRequest),
   takeEvery(ITEMS_ARCHIVE_SUCCESS, redirectToList),
   takeEvery(ITEMS_UNARCHIVE_SUCCESS, redirectToList),
-  // settings
-  takeEvery(UPDATE_LINE_HEIGHT, saveDisplaySettings),
-  takeEvery(UPDATE_COLUMN_WIDTH, saveDisplaySettings),
-  takeEvery(UPDATE_FONT_SIZE, saveDisplaySettings),
-  takeEvery(UPDATE_FONT_TYPE, saveDisplaySettings),
+
   // client-api
   takeEvery(READ_ITEM_REQUEST, readItemRequest),
   takeEvery(READ_FAVORITE_REQUEST, readFavoriteRequest),
@@ -504,30 +456,6 @@ function redirectToList() {
       document.location.href = '/my-list'
     }
   }
-}
-
-function* hydrateDisplaySettings() {
-  const displaySettings = ['lineHeight', 'columnWidth', 'fontSize', 'fontFamily']
-
-  const settings = displaySettings.reduce((obj, val) => {
-    obj[val] = localStore.getItem(val) || initialState[val]
-    return obj
-  }, {})
-
-  yield put({ type: HYDRATE_DISPLAY_SETTINGS, settings })
-}
-
-function* saveDisplaySettings({ type, ...settings }) {
-  yield Object.keys(settings).forEach((val) => {
-    localStore.setItem(val.toString(), settings[val])
-  })
-
-  const identifier = 'reader.display'
-  const data = Object.keys(settings).map((label) => ({
-    value: settings[label]?.toString(),
-    label
-  }))
-  yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 }
 
 /** ASYNC REQUESTS
