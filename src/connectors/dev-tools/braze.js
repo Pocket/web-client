@@ -38,15 +38,17 @@ export const BrazeTools = () => {
   const [pushGranted, setPushGranted] = useState(false)
   const [pushDenied, setPushDenied] = useState(false)
   const { user_id } = useSelector((state) => state.user)
+  const brazeInitialized = useSelector((state) => state?.braze?.initialized)
 
   const brazeToken = useSelector((state) => state.userBraze?.token)
 
   useEffect(() => {
+    if (!brazeInitialized) return
     import('common/utilities/braze/braze-lazy-load').then(({ isPushBlocked, isPushPermissionGranted }) => {
       if (isPushBlocked()) setPushDenied(true)
       if (isPushPermissionGranted()) setPushGranted(true)
     })
-  }, [])
+  }, [brazeInitialized])
 
   const wipeBrazeData = () => {
     import('common/utilities/braze/braze-lazy-load').then(({ wipeData, changeUser }) => {
@@ -64,7 +66,7 @@ export const BrazeTools = () => {
     })
   }
 
-  return (
+  return !brazeInitialized ? (
     <div className={brazeStyles}>
       <section onClick={wipeBrazeData}>
         <div className="title">Reset Braze</div>
@@ -93,5 +95,5 @@ export const BrazeTools = () => {
         </section >
       ) : null}
     </div>
-  )
+  ) : null
 }

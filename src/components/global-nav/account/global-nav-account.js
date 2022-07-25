@@ -173,7 +173,7 @@ const GlobalNavAccount = ({
 }) => {
   const { t } = useTranslation()
 
-  const brazeSubscribed = useSelector((state) => state?.userBraze?.brazeSubscribed)
+  const brazeInitialized = useSelector((state) => state?.braze?.initialized)
 
   const accountMenuTriggerRef = useRef(null)
   const menuRef = useRef(null)
@@ -209,7 +209,7 @@ const GlobalNavAccount = ({
   const handleLogoutCase = () => {
     onLinkClick('logout')
     // Fire for all users when Braze launches
-    if (brazeSubscribed) import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
+    if (brazeInitialized) import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
   }
 
   function handleVisible() {
