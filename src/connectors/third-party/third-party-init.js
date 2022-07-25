@@ -84,7 +84,7 @@ export function ThirdPartyInit() {
     if (!enableBraze && prevBraze) {
       import('common/utilities/braze/braze-lazy-load').then(({ disableSDK }) => disableSDK())
     }
-  }, [enableBraze, prevBraze, brazeLabUser])
+  }, [enableBraze, prevBraze])
 
   useEffect(() => {
     if (!brazeInitialized) return // braze not initialized
@@ -93,7 +93,7 @@ export function ThirdPartyInit() {
     if (brazeToken !== prevBrazeToken) {
       import('common/utilities/braze/braze-lazy-load').then(({ setSdkAuthenticationSignature }) => setSdkAuthenticationSignature(brazeToken))
     }
-  }, [brazeToken, prevBrazeToken, brazeInitialized, brazeLabUser])
+  }, [brazeToken, prevBrazeToken, brazeInitialized])
 
   useEffect(() => {
     if (brazeLabUser && 'serviceWorker' in navigator) {
