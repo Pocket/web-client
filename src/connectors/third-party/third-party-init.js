@@ -49,7 +49,6 @@ export function ThirdPartyInit() {
   const brazeLabUser = featureFlagActive({ flag: 'lab.braze', featureState })
 
   useEffect(() => {
-    if (!brazeLabUser) return // Remove when Braze launches
     if (!user_id || !enableBraze) return // not logged in or opted out
     if (brazeInitialized) return // braze already initialized
     if (!brazeToken) return dispatch(fetchBrazeToken(user_id))
@@ -81,8 +80,6 @@ export function ThirdPartyInit() {
   }, [user_id, brazeToken, brazeInitialized, enableBraze, isProduction, brazeLabUser, dispatch])
 
   useEffect(() => {
-    if (!brazeLabUser) return // Remove when Braze launches
-
     // Braze turned off, and was previously on, so disable Braze
     if (!enableBraze && prevBraze) {
       import('common/utilities/braze/braze-lazy-load').then(({ disableSDK }) => disableSDK())
@@ -90,7 +87,6 @@ export function ThirdPartyInit() {
   }, [enableBraze, prevBraze, brazeLabUser])
 
   useEffect(() => {
-    if (!brazeLabUser) return // Remove when Braze launches
     if (!brazeInitialized) return // braze not initialized
 
     // tokens don't match! update braze SDK

@@ -71,13 +71,12 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
   const pocketLogoOutboundUrl = isLoggedIn ? '/my-list' : 'https://getpocket.com'
 
   const featureState = useSelector((state) => state.features)
-  const showLab = featureFlagActive({ flag: 'lab', featureState })
   const useApiNext = featureFlagActive({ flag: 'api.next', featureState })
 
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.userProfile?.first_name)
   const userId = useSelector((state) => state?.user?.user_id)
-  const profileUrl = showLab ? `/profile/${userId}?src=navbar` : `${BASE_URL}/@${userId}?src=navbar`
+  const profileUrl = `${BASE_URL}/@${userId}?src=navbar`
 
   const listMode = useSelector((state) => state?.app?.listMode)
   const colorMode = useSelector((state) => state?.app?.colorMode)

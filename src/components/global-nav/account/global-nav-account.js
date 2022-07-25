@@ -17,8 +17,6 @@ import { ThemeSettings } from 'components/display-settings/theme'
 import { ListSettings } from 'components/display-settings/list-modes'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
-
 import { FloatingNotification } from './notification'
 import { InlineNotification } from './notification'
 
@@ -175,9 +173,7 @@ const GlobalNavAccount = ({
 }) => {
   const { t } = useTranslation()
 
-  // Remove when Braze launches
-  const featureState = useSelector((state) => state.features)
-  const brazeLabUser = featureFlagActive({ flag: 'lab.braze', featureState })
+  const brazeSubscribed = useSelector((state) => state?.userBraze?.brazeSubscribed)
 
   const accountMenuTriggerRef = useRef(null)
   const menuRef = useRef(null)
@@ -213,7 +209,7 @@ const GlobalNavAccount = ({
   const handleLogoutCase = () => {
     onLinkClick('logout')
     // Fire for all users when Braze launches
-    if (brazeLabUser) import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
+    if (brazeSubscribed) import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
   }
 
   function handleVisible() {
