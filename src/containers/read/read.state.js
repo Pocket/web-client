@@ -50,6 +50,7 @@ import { MUTATION_DELETE_SUCCESS } from 'actions'
 export const itemDataRequest = (itemId) => ({ type: ARTICLE_ITEM_REQUEST, itemId }) //prettier-ignore
 export const saveAnnotation = ({ itemId, quote, patch }) => ({ type: ANNOTATION_SAVE_REQUEST, item_id: itemId, quote, patch }) //prettier-ignore
 export const deleteAnnotation = ({ itemId, annotation_id }) => ({ type: ANNOTATION_DELETE_REQUEST, item_id: itemId, annotation_id }) //prettier-ignore
+export const clearDeletion = () => ({ type: READER_CLEAR_DELETION })
 
 /** REDUCERS
  --------------------------------------------------------------- */
