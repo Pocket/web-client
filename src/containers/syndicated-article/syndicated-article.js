@@ -186,7 +186,11 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
                 curationCategory={topic}
                 legacyId={originalItemId}
               />
-              <PublisherRecs itemId={originalItemId} publisher={publisher} legacyId={originalItemId} />
+              <PublisherRecs
+                itemId={originalItemId}
+                publisher={publisher}
+                legacyId={originalItemId}
+              />
               <AdRailBottom allowAds={allowAds} adsReady={adsReady} />
             </aside>
 
@@ -232,7 +236,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
             <section className="content-section">
               <footer>
                 <PocketRecs itemId={originalItemId} legacyId={originalItemId} />
-                <TopicsBubbles topics={topics} className="no-border" />
+                <TopicsBubbles topics={topics} className="no-border" surface="syndicated" />
               </footer>
             </section>
           ) : null}

@@ -68,7 +68,7 @@ export default function Discover({ locale }) {
       {/* Top Lockup (center)*/}
       <Lockup items={items} offset={0} heroPosition="left" ItemCard={ItemCard} />
 
-      {showTopics ? <CardTopicsNav topics={topics} /> : null}
+      {showTopics ? <CardTopicsNav topics={topics} surface="discover.middle" /> : null}
 
       {/* Pocket Brand Messaging */}
       <CalloutTop locale={locale} shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
@@ -94,7 +94,9 @@ export default function Discover({ locale }) {
         border={showTopics}
       />
 
-      {showTopics ? <CardTopicsNav topics={topics} className="no-border" /> : null}
+      {showTopics ? (
+        <CardTopicsNav topics={topics} className="no-border" surface="discover.bottom" />
+      ) : null}
 
       <ReportFeedbackModal />
       <Toasts />

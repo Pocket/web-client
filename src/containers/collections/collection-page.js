@@ -215,7 +215,9 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
               legacyId={externalId}
             />
 
-            {showTopics ? <TopicsBubbles topics={topics} className="no-border" /> : null}
+            {showTopics ? (
+              <TopicsBubbles topics={topics} className="no-border" surface="collection" />
+            ) : null}
           </footer>
         </section>
       </main>

@@ -16,11 +16,11 @@ export default function TopicCollection({ curatedItems, topic }) {
       <Lockup items={curatedItems} offset={0} heroPosition="left" ItemCard={ItemCard} />
 
       <OffsetList items={curatedItems} offset={5} cardShape="wide" ItemCard={ItemCard}>
-        <CardTopicsNav topics={topics} rail={true} />
+        <CardTopicsNav topics={topics} rail={true} surface="topic-collection.rail" />
       </OffsetList>
 
       <OffsetList items={curatedItems} offset={10} cardShape="wide" ItemCard={ItemCard} />
-      <CardTopicsNav topics={topics} />
+      <CardTopicsNav topics={topics} surface="topic-collection.bottom" />
     </>
   )
 }

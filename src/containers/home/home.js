@@ -92,7 +92,7 @@ export const Home = ({ metaData }) => {
           ))
         : null}
 
-      <CardTopicsNav topics={topics} className="no-border" />
+      <CardTopicsNav topics={topics} className="no-border" surface="home" />
 
       <DeleteModal />
       <TaggingModal />

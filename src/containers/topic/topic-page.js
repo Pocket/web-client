@@ -33,7 +33,7 @@ export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
 
       {/* Algorithmic */}
       <OffsetList items={algorithmicItems} offset={0} cardShape="wide" ItemCard={ItemCard}>
-        <CardTopicsNav topics={topics} rail={true} />
+        <CardTopicsNav topics={topics} rail={true} surface="topic-page.rail" />
       </OffsetList>
 
       <OffsetList
@@ -45,7 +45,7 @@ export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
       />
 
       {/* Bottom TopicNav */}
-      <CardTopicsNav topics={topics} className="no-border" />
+      <CardTopicsNav topics={topics} className="no-border" surface="topic-page.bottom" />
     </>
   )
 }
