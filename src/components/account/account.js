@@ -20,7 +20,7 @@ export const accountStyles = css`
 
     &[id]:before {
       display: block;
-      content: "";
+      content: '';
       margin-top: -6rem;
       height: 6rem;
       visibility: hidden;
@@ -90,6 +90,13 @@ export const accountStyles = css`
     display: flex;
     align-items: center;
     align-content: center;
+  }
+  .emailDisplay {
+    display: block;
+    width: 100%;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .subButton {
     grid-column: span 2;

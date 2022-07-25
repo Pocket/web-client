@@ -32,7 +32,7 @@ const Alias = ({ onRemoveAlias, onResendConfirmation, alias, confirmed }) => {
   return (
     <>
       <div className="contentDisplay">
-        {alias}{' '}
+        <span className="emailDisplay">{alias}</span>
         {unconfirmed ? (
           <ErrorIcon
             className={`unconfirmed ${topTooltip}`}
@@ -75,7 +75,7 @@ export const EmailAddresses = ({
       <div className="sectionBody emailBody">
         <label htmlFor="primaryEmail">{t('account:email-primary', 'Primary Email')}</label>
         <div className="contentDisplay">
-          {primaryEmail}{' '}
+          <span className="emailDisplay">{primaryEmail}</span>
           {primaryUnConfirmed ? (
             <ErrorIcon
               className={`unconfirmed ${topTooltip}`}
