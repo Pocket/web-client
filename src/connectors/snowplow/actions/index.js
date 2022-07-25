@@ -13,6 +13,7 @@ import { readerActions } from './reader'
 import { shortcutActions } from './shortcuts'
 import { sideNavActions } from './side-nav'
 import { syndicatedArticleActions } from './syndicated-article'
+import { topicActions } from './topic'
 
 export const analyticsActions = {
   ...accountActions,
@@ -29,5 +30,6 @@ export const analyticsActions = {
   ...shortcutActions,
   ...readerActions,
   ...sideNavActions,
-  ...syndicatedArticleActions
+  ...syndicatedArticleActions,
+  ...topicActions
 }

@@ -59,7 +59,8 @@ export const collectionsActions = {
       uiType: 'button'
     },
     expects: ['url', 'value'],
-    description: 'Fired when a user clicks the `Save` button, value is one of three: save-story-top, save-story-side, or save-story-bottom'
+    description:
+      'Fired when a user clicks the `Save` button, value is one of three: save-story-top, save-story-side, or save-story-bottom'
   },
   'collection.share.facebook': {
     eventType: 'engagement',
@@ -100,5 +101,15 @@ export const collectionsActions = {
       uiType: 'button'
     },
     expects: ['url']
+  },
+  'collection.topic.click': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['label'],
+    description:
+      'Fired when a user clicks a topic in the `Discover More Topics` section at the bottom of the page'
   }
 }
