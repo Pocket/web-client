@@ -1,3 +1,10 @@
+## [1.55.5](https://github.com/Pocket/web-client/compare/v1.55.4...v1.55.5) (2022-07-26)
+
+
+### Bug Fixes
+
+* **account:** adding correct copy and wrapping in translation ([f387141](https://github.com/Pocket/web-client/commit/f387141e753500cd570fd210cb7cc364d059e7d7))
+
 ## [1.55.4](https://github.com/Pocket/web-client/compare/v1.55.3...v1.55.4) (2022-07-26)
 
 
