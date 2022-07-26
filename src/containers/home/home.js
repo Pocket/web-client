@@ -70,6 +70,10 @@ export const Home = ({ metaData }) => {
 
   const offset = generalSlates?.length || 0
 
+  const topicClick = (event, topic, index) => {
+    dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
+  }
+
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
       <SuccessFXA type="home" />
@@ -92,7 +96,7 @@ export const Home = ({ metaData }) => {
           ))
         : null}
 
-      <CardTopicsNav topics={topics} className="no-border" surface="home" />
+      <CardTopicsNav topics={topics} className="no-border" track={topicClick} />
 
       <DeleteModal />
       <TaggingModal />

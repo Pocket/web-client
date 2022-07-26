@@ -94,6 +94,10 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
     dispatch(sendSnowplowEvent(`collection.share.${platform}`, { url }))
   }
 
+  const topicClick = (event, topic, index) => {
+    dispatch(sendSnowplowEvent('collection.topic.click', { label: topic }))
+  }
+
   return (
     <ArticleLayout
       forceWebView={true}
@@ -216,7 +220,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
             />
 
             {showTopics ? (
-              <TopicsBubbles topics={topics} className="no-border" surface="collection" />
+              <TopicsBubbles topics={topics} className="no-border" track={topicClick} />
             ) : null}
           </footer>
         </section>

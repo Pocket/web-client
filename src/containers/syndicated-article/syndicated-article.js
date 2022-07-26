@@ -116,6 +116,10 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     dispatch(sendSnowplowEvent(`syndicated.share.${platform}`, analyticsData))
   }
 
+  const topicClick = (event, topic, index) => {
+    dispatch(sendSnowplowEvent('syndicated.topic.click', { label: topic }))
+  }
+
   const showAuthors = authorNames?.length > 0
 
   return (
@@ -236,7 +240,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
             <section className="content-section">
               <footer>
                 <PocketRecs itemId={originalItemId} legacyId={originalItemId} />
-                <TopicsBubbles topics={topics} className="no-border" surface="syndicated" />
+                <TopicsBubbles topics={topics} className="no-border" track={topicClick} />
               </footer>
             </section>
           ) : null}

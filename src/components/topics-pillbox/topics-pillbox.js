@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
-import { useDispatch } from 'react-redux'
 
-import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { Pill } from 'components/pill/pill'
 
 export const pillboxStyle = css`
@@ -39,10 +37,8 @@ const TopicsPillbox = ({
   headingText,
   headingClassName,
   alignItems,
-  onTopicClick,
-  surface
+  onTopicClick
 }) => {
-  const dispatch = useDispatch()
   topicsMap = topicsMap || {}
   const topicsKeys = Object.keys(topicsMap)
   const topicsArray = topicsKeys.map((key) => {
@@ -56,8 +52,7 @@ const TopicsPillbox = ({
   })
 
   function handleTopicClick(event, topicId, topicIndex) {
-    dispatch(sendSnowplowEvent(`${surface}.topic.click`, { label: topicId }))
-    onTopicClick(topicId, topicIndex, id)
+    onTopicClick(event, topicId, topicIndex)
   }
 
   return (

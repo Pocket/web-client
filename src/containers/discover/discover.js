@@ -55,6 +55,14 @@ export default function Discover({ locale }) {
     dispatch(sendSnowplowEvent(id))
   }
 
+  const topicClickMiddle = (event, topic, index) => {
+    dispatch(sendSnowplowEvent('discover.middle.topic.click', { label: topic }))
+  }
+
+  const topicClickBottom = (event, topic, index) => {
+    dispatch(sendSnowplowEvent('discover.bottom.topic.click', { label: topic }))
+  }
+
   // Return error if no items are present !! TODO: FIX THIS - This is a horrid error
   return items?.length ? (
     <Layout title={metaData.title} metaData={metaData}>
@@ -68,7 +76,7 @@ export default function Discover({ locale }) {
       {/* Top Lockup (center)*/}
       <Lockup items={items} offset={0} heroPosition="left" ItemCard={ItemCard} />
 
-      {showTopics ? <CardTopicsNav topics={topics} surface="discover.middle" /> : null}
+      {showTopics ? <CardTopicsNav topics={topics} track={topicClickMiddle} /> : null}
 
       {/* Pocket Brand Messaging */}
       <CalloutTop locale={locale} shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
@@ -95,7 +103,7 @@ export default function Discover({ locale }) {
       />
 
       {showTopics ? (
-        <CardTopicsNav topics={topics} className="no-border" surface="discover.bottom" />
+        <CardTopicsNav topics={topics} className="no-border" track={topicClickBottom} />
       ) : null}
 
       <ReportFeedbackModal />

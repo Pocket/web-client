@@ -52,7 +52,7 @@ const topicsNavBottomHeadingStyle = css`
   }
 `
 
-export function CardTopicsNav({ topics, rail, track, className, surface }) {
+export function CardTopicsNav({ topics, rail, track, className }) {
   const moduleClass = rail ? topicsNavRightRailStyle : topicsNavBottomStyle
   const headingClass = rail ? 'h6' : topicsNavBottomHeadingStyle
 
@@ -65,7 +65,6 @@ export function CardTopicsNav({ topics, rail, track, className, surface }) {
           headingText="Discover More Topics"
           headingClassName={headingClass}
           onTopicClick={track}
-          surface={surface}
         />
       </div>
     </div>
