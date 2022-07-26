@@ -52,7 +52,7 @@ const TopicsPillbox = ({
   })
 
   function handleTopicClick(event, topicId, topicIndex) {
-    onTopicClick(event, topicId, topicIndex)
+    onTopicClick(topicId, topicIndex, id)
   }
 
   return (

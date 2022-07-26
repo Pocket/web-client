@@ -11,11 +11,11 @@ export default function TopicCollection({ curatedItems, topic }) {
   // Get topicList for sections that require it
   const topics = useSelector((state) => state.topicList?.topicsByName)
 
-  const topicClickRail = (event, topic, index) => {
+  const topicClickRail = (topic, index, id) => {
     dispatch(sendSnowplowEvent('topic-collection.rail.topic.click', { label: topic }))
   }
 
-  const topicClickBottom = (event, topic, index) => {
+  const topicClickBottom = (topic, index, id) => {
     dispatch(sendSnowplowEvent('topic-collection.bottom.topic.click', { label: topic }))
   }
 

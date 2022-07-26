@@ -70,7 +70,7 @@ export const Home = ({ metaData }) => {
 
   const offset = generalSlates?.length || 0
 
-  const topicClick = (event, topic, index) => {
+  const topicClick = (topic, index, id) => {
     dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
   }
 

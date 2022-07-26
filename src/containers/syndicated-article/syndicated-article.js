@@ -116,7 +116,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     dispatch(sendSnowplowEvent(`syndicated.share.${platform}`, analyticsData))
   }
 
-  const topicClick = (event, topic, index) => {
+  const topicClick = (topic, index, id) => {
     dispatch(sendSnowplowEvent('syndicated.topic.click', { label: topic }))
   }
 

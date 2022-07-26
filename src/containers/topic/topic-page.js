@@ -15,11 +15,11 @@ export default function TopicPage({ curatedItems, algorithmicItems, topic }) {
   // Get topicList for sections that require it
   const topics = useSelector((state) => state.topicList?.topicsByName)
 
-  const topicClickRail = (event, topic, index) => {
+  const topicClickRail = (topic, index, id) => {
     dispatch(sendSnowplowEvent('topic-page.rail.topic.click', { label: topic }))
   }
 
-  const topicClickBottom = (event, topic, index) => {
+  const topicClickBottom = (topic, index, id) => {
     dispatch(sendSnowplowEvent('topic-page.bottom.topic.click', { label: topic }))
   }
 

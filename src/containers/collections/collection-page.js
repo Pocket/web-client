@@ -94,7 +94,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
     dispatch(sendSnowplowEvent(`collection.share.${platform}`, { url }))
   }
 
-  const topicClick = (event, topic, index) => {
+  const topicClick = (topic, index, id) => {
     dispatch(sendSnowplowEvent('collection.topic.click', { label: topic }))
   }
 
