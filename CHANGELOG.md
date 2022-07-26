@@ -1,3 +1,10 @@
+## [1.55.4](https://github.com/Pocket/web-client/compare/v1.55.3...v1.55.4) (2022-07-26)
+
+
+### Bug Fixes
+
+* **home:** remove space taken by phantom onboarding ([5a4ccf7](https://github.com/Pocket/web-client/commit/5a4ccf7d4b98171214a77e22446da8732e9a27ca))
+
 ## [1.55.3](https://github.com/Pocket/web-client/compare/v1.55.2...v1.55.3) (2022-07-26)
 
 
