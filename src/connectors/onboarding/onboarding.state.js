@@ -13,8 +13,6 @@ import { ARTICLE_ITEM_SUCCESS } from 'actions'
 
 import { HOME_SAVE_REQUEST } from 'actions'
 
-import { filterSettings } from 'common/utilities'
-
 const initialState = {
   topicSelectionModal: true,
   homeFlyawaySave: true,
@@ -42,9 +40,10 @@ export const onboardingReducers = (state = initialState, action) => {
   switch (action.type) {
     case SETTINGS_FETCH_SUCCESS: {
       const { settings } = action
+      const onboarding = settings?.onboarding || {}
       return {
         ...state,
-        ...filterSettings(settings?.onboarding, initialState)
+        ...onboarding
       }
     }
     case ONBOARDING_CLOSE_TOPICS_MODAL:

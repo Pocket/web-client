@@ -35,8 +35,7 @@ export function arrayToObject(objectArray, key) {
  */
 export function getObjectWithValidKeysOnly(
   o,
-  validatorFn = (value) =>
-    !(value === undefined || value === null || value === '')
+  validatorFn = (value) => !(value === undefined || value === null || value === '')
 ) {
   return Object.keys(o).reduce((validObject, nextKey) => {
     const value = o[nextKey]
@@ -72,20 +71,4 @@ export function chunk(array, size = 1) {
     result[resIndex++] = array.slice(index, (index += safeSize))
   }
   return result
-}
-
-/** FILTER SETTINGS
- * Helper function to filter server settings to match keys defined in initialState
- * @param {object} settings Settings as they were returned from the server
- * @param {object} initialState Initial state of settings to compare to
- */
-export const filterSettings = (settings, initialState) => {
-  if (!settings) return {}
-
-  return Object.keys(settings)
-    .filter(key => Object.keys(initialState).includes(key))
-    .reduce((newObj, key) => {
-      newObj[key] = settings[key]
-      return newObj
-    }, {})
 }
