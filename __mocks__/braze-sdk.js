@@ -14,6 +14,8 @@ const isDisabled = noop
 const disableSDK = noop
 const enableSDK = noop
 const destroy = noop
+const setSdkAuthenticationSignature = noop
+const subscribeToSdkAuthenticationFailures = noop
 
 export {
   initialize,
@@ -28,5 +30,7 @@ export {
   isDisabled,
   disableSDK,
   enableSDK,
-  destroy
+  destroy,
+  setSdkAuthenticationSignature,
+  subscribeToSdkAuthenticationFailures
 }

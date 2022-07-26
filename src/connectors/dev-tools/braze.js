@@ -3,10 +3,6 @@ import { css } from 'linaria'
 import { useSelector } from 'react-redux'
 
 const brazeStyles = css`
-  h6 {
-    padding-top: 2rem;
-    font-weight: 600;
-  }
   section {
     cursor: pointer;
     border-radius: var(--borderRadius);
@@ -43,6 +39,8 @@ export const BrazeTools = () => {
   const [pushDenied, setPushDenied] = useState(false)
   const { user_id } = useSelector((state) => state.user)
 
+  const brazeToken = useSelector((state) => state.userBraze?.token)
+
   useEffect(() => {
     import('common/utilities/braze/braze-lazy-load').then(({ isPushBlocked, isPushPermissionGranted }) => {
       if (isPushBlocked()) setPushDenied(true)
@@ -52,7 +50,8 @@ export const BrazeTools = () => {
 
   const wipeBrazeData = () => {
     import('common/utilities/braze/braze-lazy-load').then(({ wipeData, changeUser }) => {
-      wipeData(), changeUser(user_id)
+      wipeData()
+      changeUser(user_id, brazeToken)
     })
   }
 
@@ -67,7 +66,6 @@ export const BrazeTools = () => {
 
   return (
     <div className={brazeStyles}>
-      <h6>Braze</h6>
       <section onClick={wipeBrazeData}>
         <div className="title">Reset Braze</div>
         <div className="description">Wipes data and starts new session</div>

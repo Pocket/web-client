@@ -199,3 +199,8 @@ a.button+a.button,a.button+button,a.button+input[type=button],a.button+input[typ
 @font-face{font-family:Whitney;font-weight:700;src:url(https://assets.getpocket.com/web-ui/assets/Whitney-BookItal_Web.80efdde5b097eda872e1754487ce68fc.woff2)}
 @font-face{font-family:Whitney;font-style:italic;src:url(https://assets.getpocket.com/web-ui/assets/Whitney-Semibld_Web.de2dee03c81082edf5341031656ea505.woff2)}
 @font-face{font-family:Whitney;font-style:italic;font-weight:700;src:url(https://assets.getpocket.com/web-ui/assets/Whitney-SemibldItal_Web.fdd7d75fa8fa59d56cc3c402c5bccb55.woff2)}
+/* BRAZE STYLES --------------------------------------------- */
+.ab-iam-root .ab-in-app-message.ab-background{background-color:var(--color-canvas)!important;border:1px solid rgba(0,0,0,.12)!important;border-radius:var(--borderRadius)!important;box-shadow:0 8px 24px rgba(0,0,0,.12)!important}
+.ab-iam-root .ab-message-text{color:var(--color-textPrimary)!important;font-family:var(--fontSansSerif)!important;font-weight:400!important}
+.ab-iam-root .ab-close-button svg path{fill:var(--color-textPrimary)!important}
+.ab-iam-root .ab-close-button:hover svg path{fill:var(--color-textLinkHover)!important}

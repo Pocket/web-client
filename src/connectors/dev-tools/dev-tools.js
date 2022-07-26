@@ -7,7 +7,7 @@ import { devModeToggle } from 'connectors/app/app.state'
 import { Features } from 'connectors/dev-tools/features'
 import { Links } from 'connectors/dev-tools/links'
 import { Resets } from 'connectors/dev-tools/resets'
-import { BrazeTools } from 'connectors/dev-tools/braze'
+import { BrazeModal } from 'connectors/dev-tools/braze-modal'
 
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
@@ -32,18 +32,21 @@ export function DevTools() {
   const showModal = showDevTools && devMode
 
   return (
-    <Modal
-      title="QA Tools"
-      appRootSelector={appRootSelector}
-      isOpen={showModal}
-      screenReaderLabel="QA Tools"
-      handleClose={toggleDevMode}>
-      <ModalBody>
-        <Features />
-        {labUser ? <BrazeTools /> : null}
-        <Links toggleDevMode={toggleDevMode} />
-        <Resets />
-      </ModalBody>
-    </Modal>
+    <>
+      <Modal
+        title="QA Tools"
+        appRootSelector={appRootSelector}
+        isOpen={showModal}
+        screenReaderLabel="QA Tools"
+        handleClose={toggleDevMode}>
+        <ModalBody>
+          <Features />
+          <Links toggleDevMode={toggleDevMode} />
+          <Resets />
+        </ModalBody>
+      </Modal>
+
+      <BrazeModal />
+    </>
   )
 }
