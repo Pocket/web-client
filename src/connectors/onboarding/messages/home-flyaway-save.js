@@ -67,12 +67,12 @@ export const HomeFlyawaySave = () => {
 
   const title = t('onboarding:flyaway-save-title', 'Save articles to read them later')
 
-  return (
+  return flyawayReady ? (
     <Flyaway
       dataCy="home-flyaway-save"
       title={title}
       handleClose={handleClose}
       show={showFlyaway}
     />
-  )
+  ) : null
 }
