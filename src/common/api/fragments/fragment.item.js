@@ -37,6 +37,7 @@ export const FRAGMENT_ITEM = gql`
       imageUrl
       intro
       title
+      excerpt
     }
     authors {
       id

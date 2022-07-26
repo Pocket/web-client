@@ -1,3 +1,17 @@
+## [1.55.3](https://github.com/Pocket/web-client/compare/v1.55.2...v1.55.3) (2022-07-26)
+
+
+### Bug Fixes
+
+* **item:** collection data should take prescedence ([3289c88](https://github.com/Pocket/web-client/commit/3289c8864c14dae27fc12b52b88c610be750ce59))
+
+## [1.55.2](https://github.com/Pocket/web-client/compare/v1.55.1...v1.55.2) (2022-07-26)
+
+
+### Bug Fixes
+
+* **reader:** use reader-settings for state ([849546b](https://github.com/Pocket/web-client/commit/849546b18eee93819fc8083f8e925fec98fc8a43))
+
 ## [1.55.1](https://github.com/Pocket/web-client/compare/v1.55.0...v1.55.1) (2022-07-25)
 
 
