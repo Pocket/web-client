@@ -1,6 +1,6 @@
 import { getUnleashAssignments } from 'common/api'
 import { arrayToObject } from 'common/utilities'
-import { FEATURES_HYDRATE, FEATURES_TOGGLE, HYDRATE } from 'actions'
+import { FEATURES_HYDRATE, FEATURES_TOGGLE, FEATURES_ASSIGN, HYDRATE } from 'actions'
 
 const initialState = {}
 
@@ -8,6 +8,7 @@ const initialState = {}
  --------------------------------------------------------------- */
 export const featuresHydrate = (hydrate) => ({ type: FEATURES_HYDRATE, hydrate }) //prettier-ignore
 export const featuresToggle = (flag) => ({ type: FEATURES_TOGGLE, flag })
+export const featuresAssign = (flag) => ({ type: FEATURES_ASSIGN, flag })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -16,6 +17,14 @@ export const featureReducers = (state = initialState, action) => {
     case FEATURES_HYDRATE: {
       const { hydrate } = action
       return { ...state, ...hydrate, flagsReady: true }
+    }
+
+    case FEATURES_ASSIGN: {
+      const { flag } = action
+      const currentFlagState = state[flag]
+      if (!currentFlagState) return state
+
+      return { ...state, [flag]: { ...currentFlagState, active: true } }
     }
 
     case FEATURES_TOGGLE: {
