@@ -66,7 +66,7 @@ export const BrazeTools = () => {
     })
   }
 
-  return !brazeInitialized ? (
+  return brazeInitialized ? (
     <div className={brazeStyles}>
       <section onClick={wipeBrazeData}>
         <div className="title">Reset Braze</div>
