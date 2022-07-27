@@ -1,5 +1,5 @@
+import { useSelector } from 'react-redux'
 import { css } from 'linaria'
-import { Button } from 'components/buttons/button'
 import Link from 'next/link'
 
 const linkStyles = css`
@@ -29,7 +29,13 @@ const linkStyles = css`
 `
 
 export const Links = ({ toggleDevMode }) => {
-  const links = []
+  const userId = useSelector((state) => state?.user?.user_id)
+
+  const links = [{
+    src: `/profile/${userId}?src=navbar`,
+    title: 'Profile',
+    description: 'Articles you Recommended'
+  }]
 
   return links.length ? (
     <div className={linkStyles}>

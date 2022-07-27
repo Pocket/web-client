@@ -10,6 +10,8 @@ import { getStartedSagas } from 'containers/get-started/get-started.state'
 
 import { appReducers, appSagas } from 'connectors/app/app.state'
 import { oneTrustReducers } from 'connectors/third-party/one-trust.state'
+import { brazeReducers } from 'connectors/third-party/braze.state'
+import { brazeSagas } from 'connectors/third-party/braze.state'
 
 import { userReducers, userSagas, accountReducers } from 'containers/account/account.state'
 
@@ -210,7 +212,8 @@ const globalReducers = {
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
   onboarding: onboardingReducers, // Onboarding
-  share: shareModalReducers // Share
+  share: shareModalReducers, // Share
+  braze: brazeReducers // Braze
 }
 
 const userAccountReducers = {
@@ -267,6 +270,7 @@ function* rootSaga() {
     ...profileItemsSagas,
     ...shortcutSagas,
     ...onboardingSagas,
+    ...brazeSagas,
     ...listSavedSagas,
     ...itemsSavedSagas,
     ...mutationArchiveSagas,

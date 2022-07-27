@@ -1,3 +1,16 @@
+## [1.55.7](https://github.com/Pocket/web-client/compare/v1.55.6...v1.55.7) (2022-07-27)
+
+
+### Bug Fixes
+
+* **braze:** add in missing state from merge ([3c86bc1](https://github.com/Pocket/web-client/commit/3c86bc1f28fee22e28669f53acfc8f194362c8eb))
+* **braze:** enabling braze for all users on production ([57e5a1e](https://github.com/Pocket/web-client/commit/57e5a1e1bb94953b993c098c3d40aa74d872175d))
+* **braze:** fix account settings bug ([75d2a50](https://github.com/Pocket/web-client/commit/75d2a5024b370e6f27d49ca81d92a0c9a027eb97))
+* **braze:** only fire braze methods after it has been initialized ([0395614](https://github.com/Pocket/web-client/commit/0395614fc06678c5ae44e2f174082288f462b15c))
+* **braze:** remove unneeded variables from useeffect ([9c031af](https://github.com/Pocket/web-client/commit/9c031af29d1e65d1911f7dd4a3ad523bdc515e3c))
+* **braze:** updating braze state management ([7caffb1](https://github.com/Pocket/web-client/commit/7caffb161154d3db8673471c49f53009c9d2ece7))
+* **braze:** updating check to display braze dev tools ([ac480da](https://github.com/Pocket/web-client/commit/ac480dad15e2326fbf79c52f96d0d8743a0e62b3))
+
 ## [1.55.6](https://github.com/Pocket/web-client/compare/v1.55.5...v1.55.6) (2022-07-26)
 
 

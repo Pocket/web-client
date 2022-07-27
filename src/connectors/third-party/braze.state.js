@@ -22,7 +22,7 @@ export const toggleBraze = () => ({ type: TOGGLE_BRAZE })
 
 /** REDUCERS
  --------------------------------------------------------------- */
-export const userBrazeReducers = (state = initialState, action) => {
+export const brazeReducers = (state = initialState, action) => {
   switch (action.type) {
     case BRAZE_INITIALIZED: {
       return { ...state, initialized: true }
@@ -39,7 +39,7 @@ export const userBrazeReducers = (state = initialState, action) => {
 
     case SETTINGS_FETCH_SUCCESS: {
       const { settings } = action
-      const brazeSubscribed = settings?.brazeSubscribed || true
+      const brazeSubscribed = (settings?.brazeSubscribed === false) ? settings.brazeSubscribed : true
       return { ...state, brazeSubscribed }
     }
 
@@ -50,7 +50,7 @@ export const userBrazeReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const userBrazeSagas = [
+export const brazeSagas = [
   takeLatest(BRAZE_TOKEN_REQUEST, brazeTokenRequest)
 ]
 
