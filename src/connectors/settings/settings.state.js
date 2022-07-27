@@ -87,7 +87,7 @@ export const settingsSagas = [
  --------------------------------------------------------------- */
 const getSettings = (state) => state.settings
 const getOnboarding = (state) => state.onboarding
-const getBraze = (state) => state.userBraze?.brazeSubscribed
+const getBraze = (state) => state.braze?.brazeSubscribed
 
 function* fetchSettings() {
   try {

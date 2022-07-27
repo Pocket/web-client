@@ -1,6 +1,6 @@
 import { Braze as BrazeComp } from 'components/account/braze/braze'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleBraze } from './braze.state'
+import { toggleBraze } from 'connectors/third-party/braze.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Braze = () => {

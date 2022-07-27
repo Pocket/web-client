@@ -102,6 +102,9 @@ import { shareModalReducers } from 'connectors/share-modal/share-modal.state'
 import { readerSettingsReducers } from 'containers/read/reader-settings.state'
 import { readerSettingsSagas } from 'containers/read/reader-settings.state'
 
+import { brazeReducers } from 'connectors/third-party/braze.state'
+import { brazeSagas } from 'connectors/third-party/braze.state'
+
 //Items (From the graph)
 import { readerReducers } from 'containers/read/reader.state'
 import { readerSagas } from 'containers/read/reader.state'
@@ -210,7 +213,8 @@ const globalReducers = {
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
   onboarding: onboardingReducers, // Onboarding
-  share: shareModalReducers // Share
+  share: shareModalReducers, // Share
+  braze: brazeReducers // Braze
 }
 
 const userAccountReducers = {
@@ -267,6 +271,7 @@ function* rootSaga() {
     ...profileItemsSagas,
     ...shortcutSagas,
     ...onboardingSagas,
+    ...brazeSagas,
     ...listSavedSagas,
     ...itemsSavedSagas,
     ...mutationArchiveSagas,

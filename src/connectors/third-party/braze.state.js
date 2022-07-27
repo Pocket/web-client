@@ -22,7 +22,7 @@ export const toggleBraze = () => ({ type: TOGGLE_BRAZE })
 
 /** REDUCERS
  --------------------------------------------------------------- */
-export const userBrazeReducers = (state = initialState, action) => {
+export const brazeReducers = (state = initialState, action) => {
   switch (action.type) {
     case BRAZE_INITIALIZED: {
       return { ...state, initialized: true }
@@ -50,7 +50,7 @@ export const userBrazeReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const userBrazeSagas = [
+export const brazeSagas = [
   takeLatest(BRAZE_TOKEN_REQUEST, brazeTokenRequest)
 ]
 

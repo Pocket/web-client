@@ -11,8 +11,8 @@ import { finalizeSnowplow } from 'connectors/snowplow/snowplow.state'
 import { useRouter } from 'next/router'
 import { updateOnetrustData } from './one-trust.state'
 import { BRAZE_API_KEY_DEV, BRAZE_API_KEY_PROD, BRAZE_SDK_ENDPOINT } from 'common/constants'
-import { initializeBraze } from 'containers/account/braze/braze.state'
-import { fetchBrazeToken } from 'containers/account/braze/braze.state'
+import { initializeBraze } from 'connectors/third-party/braze.state'
+import { fetchBrazeToken } from 'connectors/third-party/braze.state'
 
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { usePrevious } from 'common/utilities/hooks/has-changed'
@@ -34,9 +34,9 @@ export function ThirdPartyInit() {
   const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
   const analytics = useSelector((state) => state.oneTrust?.analytics)
   const settingsFetched = useSelector((state) => state.settings?.settingsFetched)
-  const brazeInitialized = useSelector((state) => state.userBraze?.initialized)
-  const brazeSubscribed = useSelector((state) => state.userBraze?.brazeSubscribed)
-  const brazeToken = useSelector((state) => state.userBraze?.token)
+  const brazeInitialized = useSelector((state) => state.braze?.initialized)
+  const brazeSubscribed = useSelector((state) => state.braze?.brazeSubscribed)
+  const brazeToken = useSelector((state) => state.braze?.token)
   const prevBrazeToken = usePrevious(brazeToken)
 
   const enableBraze = settingsFetched && brazeSubscribed
