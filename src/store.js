@@ -10,6 +10,8 @@ import { getStartedSagas } from 'containers/get-started/get-started.state'
 
 import { appReducers, appSagas } from 'connectors/app/app.state'
 import { oneTrustReducers } from 'connectors/third-party/one-trust.state'
+import { brazeReducers } from 'connectors/third-party/braze.state'
+import { brazeSagas } from 'connectors/third-party/braze.state'
 
 import { userReducers, userSagas, accountReducers } from 'containers/account/account.state'
 
