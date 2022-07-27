@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-// import { useTranslation } from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 
 const brazeStyle = css`
   padding-bottom: 3rem;
@@ -10,14 +10,16 @@ export const Braze = ({
   subscribed = false,
   onBrazeToggle
 }) => {
-  // const { t } = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <section className={brazeStyle}>
-      <h2 id="braze">Brazeeee placeholder</h2>
+      <h2 id="braze">
+        {t('account:tracking-title', 'Tracking for in-app messaging')}
+      </h2>
       <div className="sectionBody">
         <label htmlFor="brazeSubscription" className="flush">
-          Yo, you want Braze?? 😎 👉👉
+          {t('account:tracking-desc', 'Allow tracking in Braze so we can message you on Pocket’s website.')}
         </label>
         <input
           type="checkbox"

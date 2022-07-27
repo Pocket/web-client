@@ -248,6 +248,7 @@ function title({ item, itemEnrichment }) {
   const fileName = file ? file.replace(/\.[^/.]+$/, '') : false
   return (
     itemEnrichment?.title ||
+    item?.collection?.title ||
     item?.title ||
     item?.resolvedTitle ||
     item?.givenTitle ||
@@ -300,7 +301,7 @@ function publisher({ item, itemEnrichment, passedPublisher }) {
  * @returns {string} The most appropriate excerpt to show
  */
 function excerpt({ item, itemEnrichment }) {
-  return itemEnrichment?.excerpt || item?.excerpt || null
+  return itemEnrichment?.excerpt || item?.collection?.excerpt || item?.excerpt || null
 }
 
 /**

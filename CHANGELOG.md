@@ -1,3 +1,39 @@
+## [1.55.6](https://github.com/Pocket/web-client/compare/v1.55.5...v1.55.6) (2022-07-26)
+
+
+### Bug Fixes
+
+* **braze:** message styling ([9d3df64](https://github.com/Pocket/web-client/commit/9d3df64bd590e0f089201efb0156d67b9e4754eb))
+* **dev-tools:** generic devtools wrapper with qa modal ([18af813](https://github.com/Pocket/web-client/commit/18af813aa72736f28aa82de60e5c6a36e62f8044))
+
+## [1.55.5](https://github.com/Pocket/web-client/compare/v1.55.4...v1.55.5) (2022-07-26)
+
+
+### Bug Fixes
+
+* **account:** adding correct copy and wrapping in translation ([f387141](https://github.com/Pocket/web-client/commit/f387141e753500cd570fd210cb7cc364d059e7d7))
+
+## [1.55.4](https://github.com/Pocket/web-client/compare/v1.55.3...v1.55.4) (2022-07-26)
+
+
+### Bug Fixes
+
+* **home:** remove space taken by phantom onboarding ([5a4ccf7](https://github.com/Pocket/web-client/commit/5a4ccf7d4b98171214a77e22446da8732e9a27ca))
+
+## [1.55.3](https://github.com/Pocket/web-client/compare/v1.55.2...v1.55.3) (2022-07-26)
+
+
+### Bug Fixes
+
+* **item:** collection data should take prescedence ([3289c88](https://github.com/Pocket/web-client/commit/3289c8864c14dae27fc12b52b88c610be750ce59))
+
+## [1.55.2](https://github.com/Pocket/web-client/compare/v1.55.1...v1.55.2) (2022-07-26)
+
+
+### Bug Fixes
+
+* **reader:** use reader-settings for state ([849546b](https://github.com/Pocket/web-client/commit/849546b18eee93819fc8083f8e925fec98fc8a43))
+
 ## [1.55.1](https://github.com/Pocket/web-client/compare/v1.55.0...v1.55.1) (2022-07-25)
 
 
