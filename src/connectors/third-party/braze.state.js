@@ -39,7 +39,7 @@ export const brazeReducers = (state = initialState, action) => {
 
     case SETTINGS_FETCH_SUCCESS: {
       const { settings } = action
-      const brazeSubscribed = settings?.brazeSubscribed || true
+      const brazeSubscribed = (settings?.brazeSubscribed === false) ? settings.brazeSubscribed : true
       return { ...state, brazeSubscribed }
     }
 
