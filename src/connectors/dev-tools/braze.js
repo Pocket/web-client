@@ -95,5 +95,9 @@ export const BrazeTools = () => {
         </section >
       ) : null}
     </div>
-  ) : null
+  ) : <BrazeOff />
 }
+
+const BrazeOff = () => (
+  <p>Braze is currently turned off. Please enable Braze on the <a href="/account">Account Settings</a> page</p>
+)
