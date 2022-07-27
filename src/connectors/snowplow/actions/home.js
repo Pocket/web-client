@@ -42,6 +42,16 @@ export const homeActions = {
     expects: ['label'],
     description: 'Fired when a user clicks the `View More Articles` link within each topic section'
   },
+  'home.topic.click': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['label'],
+    description:
+      'Fired when a user clicks a topic in the `Discover More Topics` section at the bottom of the page'
+  },
   'home.rec.open': {
     eventType: 'contentOpen',
     entityTypes: ['content', 'ui'],
@@ -265,11 +275,7 @@ export const homeActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: [
-      'id',
-      'url',
-      'position'
-    ]
+    expects: ['id', 'url', 'position']
   },
   'home.topic-rec.view-original': {
     eventType: 'contentOpen',
@@ -277,11 +283,7 @@ export const homeActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: [
-      'id',
-      'url',
-      'position'
-    ]
+    expects: ['id', 'url', 'position']
   },
   'home.topic-rec.impression': {
     eventType: 'impression',
@@ -290,11 +292,7 @@ export const homeActions = {
       component: 'ui',
       uiType: 'card'
     },
-    expects: [
-      'id',
-      'url',
-      'position'
-    ]
+    expects: ['id', 'url', 'position']
   },
   'home.topic-rec.save': {
     eventType: 'engagement',
@@ -303,11 +301,7 @@ export const homeActions = {
       engagementType: 'save',
       uiType: 'button'
     },
-    expects: [
-      'id',
-      'url',
-      'position'
-    ]
+    expects: ['id', 'url', 'position']
   },
   'home.bestof.impression': {
     eventType: 'impression',

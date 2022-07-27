@@ -1,3 +1,15 @@
+## [1.55.8](https://github.com/Pocket/web-client/compare/v1.55.7...v1.55.8) (2022-07-27)
+
+
+### Bug Fixes
+
+* **CardTopicsNav:** move snowplow events into containers ([ca31180](https://github.com/Pocket/web-client/commit/ca31180e6f89736957f0d888ec0164a5ad259bb4))
+* **snowplow:** add new topic.click events for all the different surfaces ([768ce23](https://github.com/Pocket/web-client/commit/768ce23c7614f2c49691e5e61e043c605b695cca))
+* **topic click events:** adjust args to fix test ([3a74b0e](https://github.com/Pocket/web-client/commit/3a74b0e751bf475ab3c167485ec6771af6b80bb2))
+* **topic-pillbox spec:** use wrappedRender instead of render ([304b83c](https://github.com/Pocket/web-client/commit/304b83c5372f8907512bf8021fd6570b2c1ab1d1))
+* **topics-pillbox:** dispatch snowplow event on click ([305e53c](https://github.com/Pocket/web-client/commit/305e53c9fd074e0c575ff44d032ffd8a801ba618))
+* **topics:** pass surface through to CardTopicsNav so it can be used by TopicsPillbox ([985a96e](https://github.com/Pocket/web-client/commit/985a96ec25b03b507dd151066f1096bc05e4d78b))
+
 ## [1.55.7](https://github.com/Pocket/web-client/compare/v1.55.6...v1.55.7) (2022-07-27)
 
 
