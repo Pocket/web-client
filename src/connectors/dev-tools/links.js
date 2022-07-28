@@ -1,48 +1,24 @@
+import { sectionStyles } from 'components/dev-tools/tool-styles'
 import { useSelector } from 'react-redux'
-import { css } from 'linaria'
 import Link from 'next/link'
-
-const linkStyles = css`
-  h6 {
-    padding-top: 2rem;
-    font-weight: 600;
-  }
-  .link {
-    border-radius: var(--borderRadius);
-    border: 1px solid var(--color-calloutBackgroundPrimary);
-    background-color: var(--color-calloutBackgroundPrimary);
-    display: flex;
-    padding: 0.5rem;
-    text-decoration: none;
-    &:hover {
-      color: var(--color-textPrimary);
-      border-color: var(--color-formFieldBorder);
-    }
-  }
-  .title {
-    font-weight: 500;
-    padding-right: 1rem;
-  }
-  .description {
-    color: var(--color-textSecondary);
-  }
-`
 
 export const Links = ({ toggleDevMode }) => {
   const userId = useSelector((state) => state?.user?.user_id)
 
-  const links = [{
-    src: `/profile/${userId}?src=navbar`,
-    title: 'Profile',
-    description: 'Articles you Recommended'
-  }]
+  const links = [
+    {
+      src: `/profile/${userId}?src=navbar`,
+      title: 'Profile',
+      description: 'Articles you Recommended'
+    }
+  ]
 
   return links.length ? (
-    <div className={linkStyles}>
+    <div className={sectionStyles}>
       <h6>Links in progress</h6>
       {links.map((link) => (
         <Link href={link.src} key={link.title}>
-          <a onClick={toggleDevMode} className="link">
+          <a onClick={toggleDevMode} className="action-block">
             <div className="title">{link.title}</div>
             <div className="description">{link.description}</div>
           </a>

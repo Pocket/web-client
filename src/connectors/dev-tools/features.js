@@ -1,24 +1,13 @@
-import { css } from 'linaria'
+import { sectionStyles } from 'components/dev-tools/tool-styles'
 import { useSelector, useDispatch } from 'react-redux'
 import { featuresToggle } from 'connectors/feature-flags/feature-flags.state'
-
-const featureStyles = css`
-  h6 {
-    font-weight: 600;
-  }
-  .flags {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 1rem;
-  }
-`
 
 export function Features() {
   const features = useSelector((state) => state.features)
   const featureList = Object.keys(features)
 
   return (
-    <div className={featureStyles}>
+    <div className={sectionStyles}>
       <h6>Feature Flags</h6>
       <div className="flags">
         {featureList.length
