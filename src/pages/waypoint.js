@@ -1,6 +1,6 @@
 import { getUserInfo } from 'common/api/_legacy/user'
-import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { eligibleUser } from 'common/utilities/account/eligible-user'
+import { START_DATE_FOR_HOME } from 'common/constants'
 import queryString from 'query-string'
 import * as Sentry from '@sentry/nextjs'
 
@@ -35,10 +35,10 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
 
     const { sess_guid } = req.cookies
     const response = await getUserInfo(true, req?.headers?.cookie)
+
     // Not logged in, or something else went awry?
     // !! NOTE: this will redirect to my list 100% of the time on localhost
     const { user_id, birth } = response?.user || {}
-
     if (!user_id || !birth || !sess_guid || nonEnglish) {
       return {
         redirect: {
@@ -50,9 +50,8 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
 
     // EN users who signed up after 08-09-2021 will be assigned to 'home.release'
     // feature flag and therefore will be sent to Home after sign up
-    const featureState = await fetchUnleashData(user_id, sess_guid, birth, lang)
-    const homeRelease = featureFlagActive({ flag: 'home.release', featureState })
-    const destination = homeRelease ? homeLink : myListLink
+    const eligible = eligibleUser(birth, START_DATE_FOR_HOME)
+    const destination = eligible ? homeLink : myListLink
 
     return {
       redirect: {
