@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Sidebar } from 'components/reader/sidebar'
 import { cx } from 'linaria'
 import { toggleSidebar } from 'containers/read/reader.state'
-import { deleteHighlightRequest } from 'containers/read/read.state'
+import { mutationHighlightDelete } from 'connectors/items/mutation-highlight.state'
 import { shareAction } from 'connectors/share-modal/share-modal.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -32,7 +32,7 @@ export const SidebarWrapper = ({ id }) => {
 
   const removeAnnotation = (annotationId) => {
     dispatch(sendSnowplowEvent('reader.remove-highlight', analyticsData))
-    dispatch(deleteHighlightRequest({ annotationId }))
+    dispatch(mutationHighlightDelete({ annotationId, savedItemId: id }))
   }
 
   return (

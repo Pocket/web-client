@@ -167,18 +167,17 @@ export default function LegacyReader() {
   const analyticsInfo = { ...analyticsData, id: itemId }
 
   const addAnnotation = () => {
-    if (annotations.length === 3 && !isPremium) {
-      setAnnotationLimitModal(true)
-    } else {
-      dispatch(sendSnowplowEvent('reader.add-highlight', analyticsInfo))
-      dispatch(
-        saveAnnotation({
-          itemId,
-          patch: requestAnnotationPatch(highlight),
-          quote: highlight.toString()
-        })
-      )
-    }
+    if (!highlight.toString()) return
+    if (annotations.length === 3 && !isPremium) return setAnnotationLimitModal(true)
+
+    dispatch(sendSnowplowEvent('reader.add-highlight', analyticsInfo))
+    dispatch(
+      saveAnnotation({
+        itemId,
+        patch: requestAnnotationPatch(highlight),
+        quote: highlight.toString()
+      })
+    )
   }
 
   const removeAnnotation = (annotation_id) => {

@@ -56,6 +56,7 @@ export const Highlights = ({ children, id }) => {
   }
 
   const addAnnotation = () => {
+    if (!highlight.toString()) return
     if (annotations.length === 3 && !isPremium) return setAnnotationLimitModal(true)
 
     dispatch(sendSnowplowEvent('reader.add-highlight', analyticsData))
