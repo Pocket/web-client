@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { eligibleUser } from 'common/utilities/account/eligible-user'
+import { START_DATE_FOR_ONBOARDING } from 'common/constants'
 
 import { HomeFlyawaySave } from './messages/home-flyaway-save'
 import { HomeFlyawayMyList } from './messages/home-flyaway-my-list'
@@ -8,15 +9,10 @@ import { MyListFlyawayExtensions } from './messages/my-list-flyaway-extensions'
 import { ReaderFlyawayApps } from './messages/reader-flyaway-apps'
 
 export const Onboarding = ({ type, ...rest }) => {
-  const featureState = useSelector((state) => state.features)
-  const onboardingDev = featureFlagActive({ flag: 'onboarding.dev', featureState })
-  const onboardingRollout = featureFlagActive({ flag: 'onboarding.rollout', featureState })
+  const userBirth = useSelector((state) => state.user.birth)
   const settingsFetched = useSelector((state) => state.settings.settingsFetched)
-  const getStartedV1 = featureFlagActive({ flag: 'getstarted', featureState })
-  const getStartedV2 = featureFlagActive({ flag: 'getstarted-v2', featureState })
-  const inGetStartedTest = getStartedV1 || getStartedV2
-  const showOnboarding =
-    (onboardingDev || onboardingRollout) && settingsFetched && !inGetStartedTest
+  const eligible = eligibleUser(userBirth, START_DATE_FOR_ONBOARDING)
+  const showOnboarding = settingsFetched && eligible
 
   const onboardingTypes = {
     'home.flyaway.save': HomeFlyawaySave,
