@@ -1,4 +1,5 @@
 import { sectionStyles } from './tool-styles'
+import { LinkCopyIcon } from 'components/icons/LinkCopyIcon'
 
 export default {
   title: 'Dev/Tools'
@@ -179,6 +180,14 @@ export const Tools = () => {
           {featureList.length
             ? featureList.map((feature) => <Feature key={feature} feature={feature} />)
             : null}
+        </div>
+        <div className="link-block">
+          <div className="link">
+            <LinkCopyIcon /> from Home
+          </div>
+          <div className="link">
+            <LinkCopyIcon /> from MyList
+          </div>
         </div>
       </div>
     </>

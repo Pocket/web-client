@@ -9,10 +9,12 @@ export const sectionStyles = css`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 1rem;
+    padding-bottom: 1rem;
   }
 
   section,
-  .action-block {
+  .action-block,
+  .link {
     cursor: pointer;
     border-radius: var(--borderRadius);
     border: 1px solid var(--color-calloutBackgroundPrimary);
@@ -30,6 +32,10 @@ export const sectionStyles = css`
       background-color: var(--color-error);
       color: white;
     }
+
+    &.stacked {
+      flex-direction: column;
+    }
   }
 
   & + section {
@@ -45,7 +51,21 @@ export const sectionStyles = css`
     font-weight: 500;
     padding-right: 1rem;
   }
+  .link-block {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 1rem;
+    .link {
+      justify-content: center;
+      align-items: center;
+    }
+    .icon {
+      margin-right: 0.725rem;
+      height: 24px;
+    }
+  }
   .description {
     color: var(--color-textSecondary);
+    word-break: break-all;
   }
 `
