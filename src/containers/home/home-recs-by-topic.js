@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getTopicSelectors } from 'containers/get-started//get-started.state'
+import { getTopicSelectors } from 'containers/get-started/get-started.state'
 import { HomeLineupHeader } from 'components/headers/home-header'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { CardTopicRec } from 'connectors/item-card/home/card-topic-rec'

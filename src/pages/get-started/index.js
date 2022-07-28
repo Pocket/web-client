@@ -1,14 +1,14 @@
 import GetStarted from 'containers/get-started/get-started'
+import queryString from 'query-string'
 
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { LOCALE_COMMON } from 'common/constants'
+export async function getServerSideProps({ query }) {
+  // We are passing users that come here to home since this launched post home landing page
+  const homeLink = queryString.stringifyUrl({ url: '/home', query })
 
-export async function getStaticProps({ locale }) {
   return {
-    props: {
-      authRequired: true,
-      locale,
-      ...(await serverSideTranslations(locale, [...LOCALE_COMMON]))
+    redirect: {
+      permanent: false,
+      destination: homeLink
     }
   }
 }

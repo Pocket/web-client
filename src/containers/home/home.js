@@ -28,7 +28,6 @@ import { Onboarding } from 'connectors/onboarding/onboarding'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
 export const Home = ({ metaData }) => {
@@ -53,10 +52,7 @@ export const Home = ({ metaData }) => {
   // the topicMix hack
   const isPersonalized = generalSlates[0] === '631d8077-1462-4397-ad0a-aa340c27570a'
 
-  const getStartedV1 = featureFlagActive({ flag: 'getstarted', featureState })
-  const getStartedV2 = featureFlagActive({ flag: 'getstarted-v2', featureState })
-  const inGetStartedTest = getStartedV1 || getStartedV2
-  const shouldRenderTopicMix = inGetStartedTest && userTopics.length && !isPersonalized
+  const shouldRenderTopicMix = userTopics.length && !isPersonalized
   const renderLineup = shouldRenderTopicMix ? recsByTopic.length : true
 
   useEffect(() => {
