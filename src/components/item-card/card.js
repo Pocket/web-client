@@ -189,15 +189,21 @@ export const Card = (props) => {
               </div>
             ) : null}
             {publisher ? (
-              //eslint-disable-next-line
-              <a
-                className="publisher"
-                href={externalUrl}
-                onClick={onOpenOriginalUrl}
-                data-cy="publisher-link"
-                tabIndex={0}>
-                {publisher}
-              </a>
+              <>
+                {externalUrl ? (
+                  //eslint-disable-next-line
+                  <a
+                    className="publisher"
+                    href={externalUrl}
+                    onClick={onOpenOriginalUrl}
+                    data-cy="publisher-link"
+                    tabIndex={0}>
+                    {publisher}
+                  </a>
+                ) : (
+                  <span>{publisher}</span>
+                )}
+              </>
             ) : null}
             {timeToRead ? (
               <span className="readtime" data-cy="read-time">
