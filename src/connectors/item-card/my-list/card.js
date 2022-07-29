@@ -73,7 +73,7 @@ export function ItemCard({ id, position, type }) {
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {itemId, tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
+  const {itemId, tags, title, publisher, excerpt, timeToRead, isSyndicated, isCollection, fromPartner } = item //prettier-ignore
 
   return item ? (
     <Card
@@ -86,6 +86,7 @@ export function ItemCard({ id, position, type }) {
       excerpt={excerpt}
       timeToRead={timeToRead}
       isSyndicated={isSyndicated}
+      isCollection={isCollection}
       fromPartner={fromPartner}
       position={position}
       cardShape={type}

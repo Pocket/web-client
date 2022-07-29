@@ -40,7 +40,7 @@ export function ItemCard({
   /** ITEM DETAILS
    --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item.heroImage
-  const {tags, title, authors, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
+  const {tags, title, authors, excerpt, timeToRead, isSyndicated, isCollection, fromPartner } = item //prettier-ignore
 
   /**
    * ITEM TRACKING
@@ -62,6 +62,7 @@ export function ItemCard({
       excerpt={excerpt}
       timeToRead={timeToRead}
       isSyndicated={isSyndicated}
+      isCollection={isCollection}
       fromPartner={fromPartner}
       authors={authors}
       onImageFail={onImageFail}

@@ -59,9 +59,11 @@ export const Card = (props) => {
     excerpt,
     timeToRead,
     isSyndicated,
+    isCollection,
     openUrl,
     externalUrl,
     fromPartner,
+    viewOnly,
 
     // Data
     bulkEdit,
@@ -138,6 +140,14 @@ export const Card = (props) => {
     ? passedAuthors?.filter((author) => author.name.length)
     : false
 
+  // https://regexr.com/6qm61 <- test regex pattern
+  const pattern = /^\/read\/\d+/gim
+  const openInternal = !!openUrl.match(pattern) || isCollection
+  const linkTarget = openInternal ? '' : '_blank'
+  const linkRel = openInternal ? '' : 'noopener noreferrer'
+
+  console.log({ viewOnly })
+
   return (
     <article
       style={style}
@@ -148,7 +158,7 @@ export const Card = (props) => {
       onClick={selectBulk}>
       <div className="selectedBack" />
 
-      <div className="cardWrap" ref={viewRef}>
+      <div className={cx('cardWrap', !openInternal && 'openExternal')} ref={viewRef}>
         {showMedia ? (
           <CardMedia
             topicName={topicName}
@@ -159,6 +169,7 @@ export const Card = (props) => {
             onOpen={onOpen}
             onImageFail={onImageFail}
             onFocus={handleFocus}
+            openInternal={openInternal}
           />
         ) : null}
         <div className="content">
@@ -171,6 +182,8 @@ export const Card = (props) => {
                   onClick={onOpen}
                   data-cy="title-link"
                   tabIndex={0}
+                  target={linkTarget}
+                  rel={linkRel}
                   onFocus={handleFocus}>
                   {title}
                 </a>
@@ -197,6 +210,8 @@ export const Card = (props) => {
                     href={externalUrl}
                     onClick={onOpenOriginalUrl}
                     data-cy="publisher-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     tabIndex={0}>
                     {publisher}
                   </a>

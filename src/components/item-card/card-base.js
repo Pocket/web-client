@@ -37,6 +37,13 @@ export const cardStyles = css`
     grid-column-gap: var(--size150);
     padding-bottom: 0;
 
+    &:hover {
+      .view-original {
+        opacity: 1;
+        transition: opacity 300ms ease-in-out;
+      }
+    }
+
     a {
       text-decoration: none;
       &:focus {
@@ -70,6 +77,18 @@ export const cardStyles = css`
       z-index: 10;
       bottom: 2rem;
       left: 1rem;
+    }
+
+    .view-original {
+      opacity: 0;
+      transition: opacity 300ms ease-in-out;
+      background: rgba(26, 26, 26, 0.8);
+      color: var(--color-white100);
+      position: absolute;
+      right: 0;
+      z-index: 10;
+      padding: 0.25rem 0.825rem;
+      border-radius: 4px;
     }
   }
 

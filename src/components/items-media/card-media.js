@@ -1,4 +1,5 @@
 import { getImageCacheUrl } from 'common/utilities'
+import { NewViewIcon } from 'components/icons/NewViewIcon'
 import { css } from 'linaria'
 import Link from 'next/link'
 
@@ -73,7 +74,8 @@ export const CardMedia = function ({
   onImageFail = () => {},
   topicName,
   openUrl,
-  onOpen
+  onOpen,
+  openInternal
 }) {
   /**
    * Fallback images:
@@ -108,6 +110,9 @@ export const CardMedia = function ({
     '--fallbackLetter': `'${letter}'`
   }
 
+  const linkTarget = openInternal ? '' : '_blank'
+  const linkRel = openInternal ? '' : 'noopener noreferrer'
+
   const MediaImage = () => {
     return hasImage ? (
       <img
@@ -131,8 +136,13 @@ export const CardMedia = function ({
       {topicName ? <div className="topic-name">{topicName}</div> : null}
       {openUrl ? (
         <Link href={openUrl ? openUrl : false}>
-          <a tabIndex="-1" data-cy="image-link" onClick={onOpen}>
+          <a tabIndex="-1" data-cy="image-link" onClick={onOpen} target={linkTarget} rel={linkRel}>
             <MediaImage />
+            {openInternal ? null : (
+              <span className="view-original">
+                View Original <NewViewIcon />
+              </span>
+            )}
           </a>
         </Link>
       ) : (
