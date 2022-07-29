@@ -61,8 +61,6 @@ export const ShareModal = () => {
       handleClose={cancelShare}>
       <ModalBody>
         <Card
-          openUrl={openUrl}
-          externalUrl={externalUrl}
           showExcerpt={showExcerpt}
           itemImage={itemImage}
           title={title}
