@@ -22,9 +22,19 @@ export const featureReducers = (state = initialState, action) => {
     case FEATURES_ASSIGN: {
       const { flag } = action
       const currentFlagState = state[flag]
-      if (!currentFlagState) return state
+      // The flag exists. Just turn it to active
+      if (currentFlagState) return { ...state, [flag]: { ...currentFlagState, active: true } }
 
-      return { ...state, [flag]: { ...currentFlagState, active: true } }
+      // The flag doesn't exist. Let's mock it out and allow it to be temporary
+      const phantomFlagState = {
+        assigned: false,
+        active: true,
+        variant: null,
+        test: `phantom.web.client.${flag}`,
+        payload: null,
+        name: flag
+      }
+      return { ...state, [flag]: phantomFlagState }
     }
 
     case FEATURES_TOGGLE: {

@@ -30,6 +30,8 @@ import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 export const Home = ({ metaData }) => {
   const dispatch = useDispatch()
 
@@ -65,13 +67,22 @@ export const Home = ({ metaData }) => {
   if (!shouldRender) return null
 
   const offset = generalSlates?.length || 0
-
   const topicClick = (topic, index, id) => {
     dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
   }
 
+  const hasPhantomTest = featureFlagActive({ flag: 'phantom.test', featureState })
+
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
+      {hasPhantomTest ? (
+        <SectionWrapper>
+          <h4 style={{ display: 'flex', justifyContent: 'center', padding: '2rem 0 0', margin: 0 }}>
+            👻 Phantom Test!
+          </h4>
+        </SectionWrapper>
+      ) : null}
+
       <SuccessFXA type="home" />
       <SectionWrapper>
         <HomeGreeting />
