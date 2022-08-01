@@ -1,3 +1,17 @@
+## [1.56.3](https://github.com/Pocket/web-client/compare/v1.56.2...v1.56.3) (2022-08-01)
+
+
+### Bug Fixes
+
+* **share:** adding quote to sharing on twitter ([92c2cf8](https://github.com/Pocket/web-client/commit/92c2cf873d09bd36a99fbaf00f9e8e28e63c87ec))
+
+## [1.56.2](https://github.com/Pocket/web-client/compare/v1.56.1...v1.56.2) (2022-08-01)
+
+
+### Bug Fixes
+
+* **braze:** bump localization package for translations ([52eaffd](https://github.com/Pocket/web-client/commit/52eaffdd2c1e007e00981d8ac023b106d6a3d276))
+
 ## [1.56.1](https://github.com/Pocket/web-client/compare/v1.56.0...v1.56.1) (2022-07-28)
 
 

@@ -52,7 +52,7 @@ const SocialNetworks = {
   twitter: {
     width: 550,
     height: 400,
-    params: ['url', 'text', 'via'], // text === title
+    params: ['url', 'text', 'via'], // text === quote || title
     shareUrl: 'https://twitter.com/share',
     icon: TwitterColorIcon
   },
