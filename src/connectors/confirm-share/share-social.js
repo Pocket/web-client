@@ -68,7 +68,7 @@ export const ShareSocial = ({ openUrl, excerpt, title, itemId, quote, position =
         network="twitter"
         label={t('share:share-to-twitter', 'Share to Twitter')}
         onSocialShare={onSocialShare}
-        text={title}
+        text={quote || title}
         url={openUrl}
       />
 

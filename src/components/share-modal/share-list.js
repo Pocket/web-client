@@ -58,7 +58,7 @@ export const ShareList = ({ openUrl, excerpt, title, quote, engagementEvent, can
         network="twitter"
         label={t('share:share-to-twitter', 'Share to Twitter')}
         onSocialShare={onSocialShare}
-        text={title}
+        text={quote || title}
         url={openUrl}
       />
 
