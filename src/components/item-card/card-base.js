@@ -89,6 +89,10 @@ export const cardStyles = css`
       z-index: 10;
       padding: 0.25rem 0.825rem;
       border-radius: 4px;
+
+      ${breakpointSmallTablet} {
+        display: none;
+      }
     }
   }
 
@@ -114,6 +118,23 @@ export const cardStyles = css`
     &.flow {
       max-height: initial;
       display: block;
+    }
+
+    &.openExternal {
+      a {
+        margin-right: 0;
+        ${breakpointSmallTablet} {
+          margin-right: 0.5rem;
+        }
+      }
+
+      .mobile-view-original {
+        display: none;
+
+        ${breakpointSmallTablet} {
+          display: inline-block;
+        }
+      }
     }
   }
 

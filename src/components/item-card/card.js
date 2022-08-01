@@ -10,6 +10,8 @@ import { cardStyles } from './card-base'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
 import ReactMarkdown from 'react-markdown'
+import { NewViewIcon } from 'components/icons/NewViewIcon'
+import { isInternalUrl } from 'common/utilities/urls/urls'
 
 /** Card
  * Item card for display.
@@ -63,7 +65,6 @@ export const Card = (props) => {
     openUrl,
     externalUrl,
     fromPartner,
-    viewOnly,
 
     // Data
     bulkEdit,
@@ -140,13 +141,9 @@ export const Card = (props) => {
     ? passedAuthors?.filter((author) => author.name.length)
     : false
 
-  // https://regexr.com/6qm61 <- test regex pattern
-  const pattern = /^\/read\/\d+/gim
-  const openInternal = !!openUrl.match(pattern) || isCollection
-  const linkTarget = openInternal ? '' : '_blank'
-  const linkRel = openInternal ? '' : 'noopener noreferrer'
-
-  console.log({ viewOnly })
+  const openExternal = !isInternalUrl(openUrl, isCollection)
+  const linkTarget = openExternal ? '_blank' : ''
+  const linkRel = openExternal ? 'noopener noreferrer' : ''
 
   return (
     <article
@@ -158,7 +155,7 @@ export const Card = (props) => {
       onClick={selectBulk}>
       <div className="selectedBack" />
 
-      <div className={cx('cardWrap', !openInternal && 'openExternal')} ref={viewRef}>
+      <div className={'cardWrap'} ref={viewRef}>
         {showMedia ? (
           <CardMedia
             topicName={topicName}
@@ -169,25 +166,30 @@ export const Card = (props) => {
             onOpen={onOpen}
             onImageFail={onImageFail}
             onFocus={handleFocus}
-            openInternal={openInternal}
+            openExternal={openExternal}
           />
         ) : null}
         <div className="content">
           {fromPartner ? <PartnerOverline partnerType={partnerType} /> : null}
-          <h2 className={cx('title', titleFlow && 'flow')}>
+          <h2 className={cx('title', titleFlow && 'flow', openExternal && 'openExternal')}>
             {openUrl ? (
-              <Link href={openUrl}>
-                <a
-                  ref={linkRef}
-                  onClick={onOpen}
-                  data-cy="title-link"
-                  tabIndex={0}
-                  target={linkTarget}
-                  rel={linkRel}
-                  onFocus={handleFocus}>
-                  {title}
-                </a>
-              </Link>
+              <>
+                <Link href={openUrl}>
+                  <a
+                    ref={linkRef}
+                    onClick={onOpen}
+                    data-cy="title-link"
+                    tabIndex={0}
+                    target={linkTarget}
+                    rel={linkRel}
+                    onFocus={handleFocus}>
+                    {title}
+                  </a>
+                </Link>
+                {openExternal ? (
+                  <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
+                ) : null}
+              </>
             ) : (
               title
             )}

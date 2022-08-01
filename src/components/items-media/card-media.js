@@ -75,7 +75,7 @@ export const CardMedia = function ({
   topicName,
   openUrl,
   onOpen,
-  openInternal
+  openExternal
 }) {
   /**
    * Fallback images:
@@ -110,8 +110,8 @@ export const CardMedia = function ({
     '--fallbackLetter': `'${letter}'`
   }
 
-  const linkTarget = openInternal ? '' : '_blank'
-  const linkRel = openInternal ? '' : 'noopener noreferrer'
+  const linkTarget = openExternal ? '_blank' : ''
+  const linkRel = openExternal ? 'noopener noreferrer' : ''
 
   const MediaImage = () => {
     return hasImage ? (
@@ -138,11 +138,11 @@ export const CardMedia = function ({
         <Link href={openUrl ? openUrl : false}>
           <a tabIndex="-1" data-cy="image-link" onClick={onOpen} target={linkTarget} rel={linkRel}>
             <MediaImage />
-            {openInternal ? null : (
-              <span className="view-original">
+            {openExternal && openUrl ? (
+              <span className="view-original" data-cy="view-original">
                 View Original <NewViewIcon />
               </span>
-            )}
+            ) : null}
           </a>
         </Link>
       ) : (
