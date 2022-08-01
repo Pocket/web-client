@@ -102,3 +102,19 @@ export function replaceUTM(passedUrl, source) {
 
   return queryString.stringifyUrl({ url, query, fragmentIdentifier }, { skipNull: true })
 }
+
+/**
+ * Determine if an item is an internal item or not
+ * Based on isCollection or if openUrl is a read link
+ * @param {string} openUrl
+ * @param {boolean} isCollection
+ * @returns {boolean} Returns whether item is an internal URL
+ */
+
+export function isInternalUrl(openUrl, isCollection) {
+  if (isCollection) return true
+
+  // https://regexr.com/6qm61 <- test regex pattern
+  const pattern = /^\/read\/\d+/gim
+  return !!openUrl?.match(pattern)
+}
