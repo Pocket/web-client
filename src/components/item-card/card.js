@@ -201,7 +201,7 @@ export const Card = (props) => {
                     {publisher}
                   </a>
                 ) : (
-                  <span>{publisher}</span>
+                  <span className="publisher">{publisher}</span>
                 )}
               </>
             ) : null}
