@@ -9,6 +9,7 @@ import { setCookie } from 'nookies'
 
 import { GET_STARTED_HYDRATE } from 'actions'
 import { GET_STARTED_SELECT_TOPIC } from 'actions'
+import { GET_STARTED_SET_USER_TOPICS } from 'actions'
 import { GET_STARTED_DESELECT_TOPIC } from 'actions'
 import { GET_STARTED_UPDATE_TOPICS } from 'actions'
 import { GET_STARTED_FINALIZE_TOPICS } from 'actions'
@@ -38,6 +39,7 @@ export const finalizeTopics = () => ({ type: GET_STARTED_FINALIZE_TOPICS })
 export const reSelectTopics = () => ({ type: GET_STARTED_RESELECT_TOPICS })
 export const clearSavedArticle = () => ({ type: GET_STARTED_CLEAR_SAVED_ARTICLE })
 export const saveArticle = (url, id) => ({ type: GET_STARTED_SAVE_REQUEST, url, id })
+export const setUserTopics = (userTopics, finalizedTopics) => ({ type: GET_STARTED_SET_USER_TOPICS, userTopics, finalizedTopics }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -47,7 +49,7 @@ const initialState = {
   articlesById: {},
   articles: [],
   savedArticleId: false,
-  finalizingTopics: false
+  finalizedTopics: false
 }
 
 export const getStartedReducers = (state = initialState, action) => {
@@ -58,7 +60,7 @@ export const getStartedReducers = (state = initialState, action) => {
     }
 
     case GET_STARTED_RESELECT_TOPICS: {
-      return { ...state, savedArticleId: false }
+      return { ...state, finalizedTopics: false }
     }
 
     case GET_STARTED_UPDATE_TOPICS: {
@@ -66,14 +68,13 @@ export const getStartedReducers = (state = initialState, action) => {
       return { ...state, userTopics }
     }
 
-    case GET_STARTED_FINALIZE_TOPICS: {
-      return { ...state, finalizingTopics: true }
+    case GET_STARTED_SET_USER_TOPICS: {
+      const { userTopics, finalizedTopics } = action
+      return { ...state, userTopics, finalizedTopics }
     }
 
-    case SET_TOPIC_SUCCESS:
-    case SET_TOPIC_FAILURE: {
-      // We are moving forward regardless of topic profile success at this point
-      return { ...state, finalizingTopics: false }
+    case GET_STARTED_FINALIZE_TOPICS: {
+      return { ...state, finalizedTopics: true }
     }
 
     case GET_STARTED_ARTICLES_SUCCESS: {
@@ -161,7 +162,7 @@ function* finalizeTopicSelection() {
 
     yield put({ type: SET_TOPIC_SUCCESS })
   } catch (error) {
-    yield put({ type: SET_TOPIC_FAILURE })
+    yield put({ type: SET_TOPIC_FAILURE, error })
   }
 }
 
@@ -183,7 +184,7 @@ function* getStartedSaveRequest(action) {
   try {
     const { url, id } = action
 
-    const { errors, id: savedId  } = yield call(itemUpsert, url)
+    const { errors, id: savedId } = yield call(itemUpsert, url)
     if (errors) throw new Error(errors[0]?.message)
 
     yield put({ type: GET_STARTED_SAVE_SUCCESS, id, savedId })
