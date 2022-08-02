@@ -105,14 +105,15 @@ export function replaceUTM(passedUrl, source) {
 
 /**
  * Determine if an item is an internal item or not
- * Based on isCollection or if openUrl is a read link
+ * Based on isCollection, isSyndicated, or if openUrl is a read link
  * @param {string} openUrl
  * @param {boolean} isCollection
+ * @param {boolean} isSyndicated
  * @returns {boolean} Returns whether item is an internal URL
  */
 
-export function isInternalUrl(openUrl, isCollection) {
-  if (isCollection) return true
+export function isInternalUrl(openUrl, isCollection, isSyndicated) {
+  if (isCollection || isSyndicated) return true
 
   // https://regexr.com/6qm61 <- test regex pattern
   const pattern = /^\/read\/\d+/gim

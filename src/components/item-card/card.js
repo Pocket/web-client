@@ -141,7 +141,7 @@ export const Card = (props) => {
     ? passedAuthors?.filter((author) => author.name.length)
     : false
 
-  const openExternal = !isInternalUrl(openUrl, isCollection)
+  const openExternal = !isInternalUrl(openUrl, isCollection, isSyndicated)
   const linkTarget = openExternal ? '_blank' : ''
   const linkRel = openExternal ? 'noopener noreferrer' : ''
 
