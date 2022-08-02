@@ -22,6 +22,7 @@ export const ShareModal = ({
   excerpt,
   timeToRead,
   isSyndicated,
+  isCollection,
   externalUrl,
   thumbnail,
   quote,
@@ -46,6 +47,7 @@ export const ShareModal = ({
           excerpt={excerpt}
           timeToRead={timeToRead}
           isSyndicated={isSyndicated}
+          isCollection={isCollection}
           itemType="display"
           cardShape="wide"
         />

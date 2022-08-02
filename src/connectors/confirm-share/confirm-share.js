@@ -41,7 +41,7 @@ export const ShareModal = () => {
   const openUrl = externalUrl
   const showExcerpt = false
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {title, publisher, excerpt, timeToRead, isSyndicated } = item //prettier-ignore
+  const {title, publisher, excerpt, timeToRead, isSyndicated, isCollection } = item //prettier-ignore
 
   const showModal = itemId !== false
 
@@ -68,6 +68,7 @@ export const ShareModal = () => {
           excerpt={excerpt}
           timeToRead={timeToRead}
           isSyndicated={isSyndicated}
+          isCollection={isCollection}
           itemType="display"
           cardShape="wide"
         />

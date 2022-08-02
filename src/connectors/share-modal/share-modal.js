@@ -20,6 +20,7 @@ export const ShareModalConnector = () => {
     excerpt,
     timeToRead,
     isSyndicated,
+    isCollection,
     externalUrl,
     thumbnail,
     analyticsData
@@ -37,6 +38,7 @@ export const ShareModalConnector = () => {
       excerpt={excerpt}
       timeToRead={timeToRead}
       isSyndicated={isSyndicated}
+      isCollection={isCollection}
       externalUrl={externalUrl}
       thumbnail={thumbnail}
       quote={quote}
