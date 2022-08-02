@@ -17,7 +17,9 @@ exports[`ItemCard renders a collection 1`] = `
       <a
         data-cy="image-link"
         href="/collections/making-sense-of-cybersecurity-in-2021"
+        rel=""
         tabindex="-1"
+        target=""
       >
         <img
           alt=""
@@ -36,7 +38,9 @@ exports[`ItemCard renders a collection 1`] = `
         <a
           data-cy="title-link"
           href="/collections/making-sense-of-cybersecurity-in-2021"
+          rel=""
           tabindex="0"
+          target=""
         >
           Making Sense of Cybersecurity in 2021
         </a>

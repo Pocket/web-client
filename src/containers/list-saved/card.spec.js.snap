@@ -17,7 +17,9 @@ exports[`ItemCard renders a legacy saved item 1`] = `
       <a
         data-cy="image-link"
         href="/read/3059000415"
+        rel=""
         tabindex="-1"
+        target=""
       >
         <img
           alt=""
@@ -36,7 +38,9 @@ exports[`ItemCard renders a legacy saved item 1`] = `
         <a
           data-cy="title-link"
           href="/read/3059000415"
+          rel=""
           tabindex="0"
+          target=""
         >
           The Undisciplined Pursuit of More (The Art of Limiting Yourself to Only The Essential)
         </a>
@@ -48,7 +52,9 @@ exports[`ItemCard renders a legacy saved item 1`] = `
           class="publisher"
           data-cy="publisher-link"
           href="https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential?utm_source=pocket_mylist"
+          rel="noopener noreferrer"
           tabindex="0"
+          target="_blank"
         >
           Thomas Oppong
         </a>
@@ -269,7 +275,9 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
       <a
         data-cy="image-link"
         href="/read/3362121180"
+        rel=""
         tabindex="-1"
+        target=""
       >
         <img
           alt=""
@@ -288,7 +296,9 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
         <a
           data-cy="title-link"
           href="/read/3362121180"
+          rel=""
           tabindex="0"
+          target=""
         >
           The Secrets of ‘Cognitive Super-Agers’
         </a>
@@ -300,7 +310,9 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
           class="publisher"
           data-cy="publisher-link"
           href="http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html?utm_source=pocket_mylist"
+          rel="noopener noreferrer"
           tabindex="0"
+          target="_blank"
         >
           The New York Times
         </a>
@@ -496,7 +508,9 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
       <a
         data-cy="image-link"
         href="https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_mylist"
+        rel="noopener noreferrer"
         tabindex="-1"
+        target="_blank"
       >
         <img
           alt=""
@@ -504,21 +518,72 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
           srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fwww.myswitzerland.com%2F-%2Fmedia%2Fst%2Fgadmin%2Fimages%2Faccommodation%2Fsummer%2Ftypically%2520swiss%2Fk-img_5780_2_36163.jpg 2x "
           style="--fallbackBackground: #1CB0A880; --fallbackColor: #1CB0A8; --fallbackLetter: 'B';"
         />
+        <span
+          class="view-original"
+          data-cy="view-original"
+        >
+          View Original 
+          <span
+            class="i1qqph0t icon"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M6 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3a1 1 0 1 1 2 0v3a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h3a1 1 0 0 1 0 2H6Z"
+                fill-rule="evenodd"
+              />
+              <path
+                clip-rule="evenodd"
+                d="M13 3a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v7a1 1 0 1 1-2 0V5.414l-7.293 7.293a1 1 0 0 1-1.414-1.414L18.586 4H14a1 1 0 0 1-1-1Z"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </span>
+        </span>
       </a>
     </div>
     <div
       class="content"
     >
       <h2
-        class="title"
+        class="title openExternal"
       >
         <a
           data-cy="title-link"
           href="https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_mylist"
+          rel="noopener noreferrer"
           tabindex="0"
+          target="_blank"
         >
           Blausee
         </a>
+        <span
+          class="i1qqph0t icon mobile-view-original"
+          data-cy="view-original-icon"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M6 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3a1 1 0 1 1 2 0v3a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h3a1 1 0 0 1 0 2H6Z"
+              fill-rule="evenodd"
+            />
+            <path
+              clip-rule="evenodd"
+              d="M13 3a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v7a1 1 0 1 1-2 0V5.414l-7.293 7.293a1 1 0 0 1-1.414-1.414L18.586 4H14a1 1 0 0 1-1-1Z"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </span>
       </h2>
       <cite
         class="details"
@@ -527,7 +592,9 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
           class="publisher"
           data-cy="publisher-link"
           href="https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_mylist"
+          rel="noopener noreferrer"
           tabindex="0"
+          target="_blank"
         >
           myswitzerland.com
         </a>
@@ -723,7 +790,9 @@ exports[`ItemCard renders a saved collection 1`] = `
       <a
         data-cy="image-link"
         href="/collections/delicious-reads-about-your-favorite-candy"
+        rel=""
         tabindex="-1"
+        target=""
       >
         <img
           alt=""
@@ -742,7 +811,9 @@ exports[`ItemCard renders a saved collection 1`] = `
         <a
           data-cy="title-link"
           href="/collections/delicious-reads-about-your-favorite-candy"
+          rel=""
           tabindex="0"
+          target=""
         >
           Delicious Reads About Your Favorite Candy
         </a>
@@ -754,7 +825,9 @@ exports[`ItemCard renders a saved collection 1`] = `
           class="publisher"
           data-cy="publisher-link"
           href="https://getpocket.com/collections/delicious-reads-about-your-favorite-candy?utm_source=pocket_mylist"
+          rel="noopener noreferrer"
           tabindex="0"
+          target="_blank"
         >
           Pocket
         </a>
@@ -950,7 +1023,9 @@ exports[`ItemCard renders a saved image 1`] = `
       <a
         data-cy="image-link"
         href="/read/3462094779"
+        rel=""
         tabindex="-1"
+        target=""
       >
         <img
           alt=""
@@ -969,7 +1044,9 @@ exports[`ItemCard renders a saved image 1`] = `
         <a
           data-cy="title-link"
           href="/read/3462094779"
+          rel=""
           tabindex="0"
+          target=""
         >
           335d386abb459f49570030e830429cef
         </a>
@@ -981,7 +1058,9 @@ exports[`ItemCard renders a saved image 1`] = `
           class="publisher"
           data-cy="publisher-link"
           href="https://cdn.dribbble.com/users/59947/screenshots/16700535/media/335d386abb459f49570030e830429cef.jpg?utm_source=pocket_mylist"
+          rel="noopener noreferrer"
           tabindex="0"
+          target="_blank"
         >
           cdn.dribbble.com
         </a>
@@ -1168,7 +1247,9 @@ exports[`ItemCard renders a saved video 1`] = `
       <a
         data-cy="image-link"
         href="/read/2815325547"
+        rel=""
         tabindex="-1"
+        target=""
       >
         <img
           alt=""
@@ -1187,7 +1268,9 @@ exports[`ItemCard renders a saved video 1`] = `
         <a
           data-cy="title-link"
           href="/read/2815325547"
+          rel=""
           tabindex="0"
+          target=""
         >
           Mufasa- its friday then.
         </a>
@@ -1199,7 +1282,9 @@ exports[`ItemCard renders a saved video 1`] = `
           class="publisher"
           data-cy="publisher-link"
           href="https://www.youtube.com/watch?utm_source=pocket_mylist&v=1AnG04qnLqI"
+          rel="noopener noreferrer"
           tabindex="0"
+          target="_blank"
         >
           YouTube
         </a>
