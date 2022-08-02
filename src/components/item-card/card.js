@@ -155,7 +155,7 @@ export const Card = (props) => {
       onClick={selectBulk}>
       <div className="selectedBack" />
 
-      <div className={'cardWrap'} ref={viewRef}>
+      <div className="cardWrap" ref={viewRef}>
         {showMedia ? (
           <CardMedia
             topicName={topicName}
