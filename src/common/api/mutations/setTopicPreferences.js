@@ -25,6 +25,6 @@ export function setTopicPreferences(preferredTopics) {
     query: setTopicPreferencesQuery,
     variables: { input: { preferredTopics } }
   })
-    .then((response) => response?.data?.updateUserRecommendationPreferencesQuery)
+    .then((response) => response?.data?.updateUserRecommendationPreferences)
     .catch((error) => console.error(error))
 }
