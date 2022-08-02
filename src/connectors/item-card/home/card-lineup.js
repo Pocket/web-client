@@ -43,7 +43,7 @@ export const CardLineup = ({
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner, syndicatedUrl, isCollection } = item //prettier-ignore
+  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, isCollection, fromPartner, syndicatedUrl } = item //prettier-ignore
   const openUrl = syndicatedUrl || readUrl || externalUrl
 
   return (
