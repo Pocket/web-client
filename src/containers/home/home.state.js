@@ -191,7 +191,7 @@ function* homeSaveRequest({ url, id, position }) {
 
     // Manually adding `status: "0"` will derive the readUrl
     const derivedItems = yield Object.values(response.action_results).map((item) =>
-      deriveListItem({ ...item, status: "0" }, true)
+      deriveListItem({ ...item, status: '0' }, true)
     )
 
     const items = derivedItems.map((item) => item.resolvedId)
@@ -244,6 +244,7 @@ function* homeSimilarRecSaveRequest({ url, id, position }) {
 function* homeRecsByTopic(action) {
   try {
     const { topics } = action
+    if (!topics.length) return
 
     const topicRecs = yield call(getTopicMix, topics)
     const itemsById = getRecsById(topicRecs)
