@@ -59,10 +59,10 @@ export const MyListFlyawayExtensions = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const myListFlyawayDismissed =
-    useSelector((state) => state.onboarding.myListFlyawayReader) === false
+  const homeFlyawayDismissed =
+    useSelector((state) => state.onboarding.homeFlyawayReader) === false
   const extensionFlyawayReady = useSelector((state) => state.onboarding.myListFlyawayExtension)
-  const showFlyaway = myListFlyawayDismissed && extensionFlyawayReady
+  const showFlyaway = homeFlyawayDismissed && extensionFlyawayReady
 
   useEffect(() => {
     if (showFlyaway) {

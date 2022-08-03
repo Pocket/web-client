@@ -109,7 +109,6 @@ export const List = (props) => {
 
       <Toasts />
       <Onboarding type="my-list.flyaway.extensions" />
-      <Onboarding type="my-list.flyaway.reader" />
     </Layout>
   )
 }

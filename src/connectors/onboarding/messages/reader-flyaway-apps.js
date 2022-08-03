@@ -37,7 +37,7 @@ export const ReaderFlyawayApps = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const readerFlyawayDismissed = useSelector((state) => state.onboarding.myListFlyawayReader) === false
+  const readerFlyawayDismissed = useSelector((state) => state.onboarding.homeFlyawayReader) === false
   const appsFlyawayReady = useSelector((state) => state.onboarding.readerFlyawayApps)
   const showFlyaway = readerFlyawayDismissed && appsFlyawayReady
 

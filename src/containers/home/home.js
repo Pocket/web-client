@@ -113,7 +113,7 @@ export const Home = ({ metaData }) => {
       {generalSlates || topicSlates ? (
         <>
           <Onboarding type="home.flyaway.save" />
-          <Onboarding type="home.flyaway.my-list" />
+          <Onboarding type="home.flyaway.reader" />
         </>
       ) : null}
       <Toasts />
