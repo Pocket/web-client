@@ -14,7 +14,6 @@ import { HOME_SAVE_REQUEST } from 'actions'
 const initialState = {
   homeFlyawaySave: true,
   homeFlyawayReader: true,
-  myListFlyawayReader: true,
   myListFlyawayExtension: true,
   readerFlyawayApps: true
 }
