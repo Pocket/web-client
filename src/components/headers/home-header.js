@@ -117,6 +117,16 @@ const lineupSpacerStyle = css`
   padding: 2rem 0;
 `
 
+const cardMixHeaderStyle = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  .action {
+    font-size: 0.825rem;
+  }
+`
+
 export const HomeJourneyHeader = ({ sectionTitle, sectionDescription }) => {
   return sectionTitle ? (
     <header className={cardPageHeaderStyle}>
@@ -183,6 +193,24 @@ export const HomeLineupHeader = ({ sectionTitle, sectionDescription }) => {
     <header className={cx(cardPageHeaderStyle, cardPageLineupStyle)}>
       <h2 className="sectionTitle">{sectionTitle}</h2>
       {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
+    </header>
+  ) : null
+}
+
+export const HomeTopicMixHeader = ({ sectionTitle, sectionDescription, actionCopy, action }) => {
+  return sectionTitle ? (
+    <header className={cx(cardPageHeaderStyle, cardPageLineupStyle, cardMixHeaderStyle)}>
+      <div>
+        <h2 className="sectionTitle">
+          <span>{sectionTitle}</span>
+        </h2>
+        {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
+      </div>
+      {action ? (
+        <button className="action text" onClick={action}>
+          {actionCopy}
+        </button>
+      ) : null}
     </header>
   ) : null
 }
