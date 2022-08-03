@@ -3,6 +3,7 @@ import { getImageCacheUrl } from 'common/utilities'
 import { domainForUrl } from 'common/utilities'
 import { getTopLevelPath } from 'common/utilities'
 import { replaceUTM } from 'common/utilities'
+import { isInternalUrl } from './urls'
 
 describe('urlWithPocketRedirect', () => {
   it('returns a properly formatted pocket redirect url.', () => {
@@ -186,5 +187,34 @@ describe('replaceUTM', () => {
 
   it('should leave craigslist alone', () => {
     expect(replaceUTM(craigslist, 'pocket')).toBe(craigslist)
+  })
+})
+
+describe('isInternalUrl', () => {
+  const readURL = '/read/12345'
+  const externalURL = 'http://www.isithalloweenyet.com'
+
+  it('should return true if item is a collection', () => {
+    const isCollection = true
+    const isSyndicated = false
+    expect(isInternalUrl(externalURL, isCollection, isSyndicated)).toBe(true)
+  })
+
+  it('should return true if item is syndicated', () => {
+    const isCollection = false
+    const isSyndicated = true
+    expect(isInternalUrl(externalURL, isCollection, isSyndicated)).toBe(true)
+  })
+
+  it('should return true if item is a read link', () => {
+    const isCollection = false
+    const isSyndicated = false
+    expect(isInternalUrl(readURL, isCollection, isSyndicated)).toBe(true)
+  })
+
+  it('should return false if item is not a read link, collection or syndicated item', () => {
+    const isCollection = false
+    const isSyndicated = false
+    expect(isInternalUrl(externalURL, isCollection, isSyndicated)).toBe(false)
   })
 })
