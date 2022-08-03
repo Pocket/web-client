@@ -1,3 +1,10 @@
+## [1.57.1](https://github.com/Pocket/web-client/compare/v1.57.0...v1.57.1) (2022-08-03)
+
+
+### Bug Fixes
+
+* **home:** use homeSetup state in sagas ([b4912b1](https://github.com/Pocket/web-client/commit/b4912b1b00dddc204b8ba9fb82aa7befeb9ef22b))
+
 # [1.57.0](https://github.com/Pocket/web-client/compare/v1.56.4...v1.57.0) (2022-08-02)
 
 
