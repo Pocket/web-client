@@ -41,13 +41,15 @@ export const homeSetupReducers = (state = initialState, action) => {
   switch (action.type) {
     case HOME_SET_STORED_USER_TOPICS: {
       const { userTopics } = action
-      return { ...state, userTopics, storedTopicsReady: true }
+      return { ...state, userTopics, storedTopicsReady: true, finalizedTopics: true }
     }
 
     case HOME_SETUP_FINALIZE_TOPICS: {
       return { ...state, finalizedTopics: true }
     }
 
+    case HOME_SETUP_SELECT_TOPIC:
+    case HOME_SETUP_DESELECT_TOPIC:
     case HOME_SETUP_RESELECT_TOPICS: {
       return { ...state, finalizedTopics: false }
     }
