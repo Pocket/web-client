@@ -4,6 +4,7 @@ import { parseCookies } from 'nookies'
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeGreeting } from 'containers/home/home-greeting'
 import { HomeRecentSaves } from 'containers/home/home-recent-saves'
+import { HomeSetup } from 'containers/home/home-setup'
 
 import { getHomeLineup } from 'containers/home/home.state'
 
@@ -71,8 +72,9 @@ export const Home = ({ metaData }) => {
   // the topicMix hack
   const isPersonalized = generalSlates[0] === '631d8077-1462-4397-ad0a-aa340c27570a'
 
+  // We can no longer wait on topic mix since there is a possibility userTopics will exist
+  // but we are no ready to render
   const shouldRenderTopicMix = storedTopicsReady && userTopics.length && !isPersonalized
-  const renderLineup = shouldRenderTopicMix ? recsByTopic.length : true
 
   useEffect(() => {
     if (userStatus !== 'valid' || !lineupFlag) return
@@ -86,27 +88,29 @@ export const Home = ({ metaData }) => {
   const offset = generalSlates?.length || 0
   const topicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
 
+  // Are we in the setup v3 test
+  const inSetupV3 = featureFlagActive({ flag: 'setup.moment.v3', featureState })
+
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
       <SuccessFXA type="home" />
+
+      {inSetupV3 ? <HomeSetup /> : null}
+
       <SectionWrapper>
         <HomeGreeting />
         <HomeRecentSaves />
       </SectionWrapper>
 
-      {shouldRenderTopicMix ? <HomeRecsByTopic /> : null}
+      {shouldRenderTopicMix ? <HomeRecsByTopic showReSelect={inSetupV3} /> : null}
 
-      {renderLineup ? (
-        <>
-          {generalSlates?.map((slateId, index) => (
-            <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />
-          ))}
-          {topicSlates?.map((slateId, index) => (
-            <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
-          ))}
-          <CardTopicsNav topics={topics} className="no-border" track={topicClick} />
-        </>
-      ) : null}
+      {generalSlates?.map((slateId, index) => (
+        <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />
+      ))}
+      {topicSlates?.map((slateId, index) => (
+        <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
+      ))}
+      <CardTopicsNav topics={topics} className="no-border" track={topicClick} />
 
       <DeleteModal />
       <TaggingModal />
