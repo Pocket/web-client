@@ -85,8 +85,8 @@ export const homeSetupSagas = [
 
 /** SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-const getUserTopics = (state) => state.getStarted.userTopics
-const getAllTopicsSelectors = (state) => state.getStarted.topicsSelectors
+const getUserTopics = (state) => state.homeSetup.userTopics
+const getAllTopicsSelectors = (state) => state.homeSetup.topicsSelectors
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
