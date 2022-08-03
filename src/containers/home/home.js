@@ -30,6 +30,9 @@ import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
+import { setStoredUserTopics } from 'containers/home/home-setup.state'
+import { getTopicSelectors } from 'containers/home/home-setup.state'
+
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Home = ({ metaData }) => {
@@ -41,20 +44,34 @@ export const Home = ({ metaData }) => {
   const topicSlates = useSelector((state) => state.home.topicSlates)
   const recsByTopic = useSelector((state) => state.home.recsByTopic) || []
   const topics = useSelector((state) => state.topicList?.topicsByName)
+  const storedTopicsReady = useSelector((state) => state.homeSetup.storedTopicsReady)
+  const userTopics = useSelector((state) => state.homeSetup.userTopics)
 
   const fallback = '249850f0-61c0-46f9-a16a-f0553c222800'
 
   const lineupFlag = featureState['home.lineup']
   const lineupId = lineupFlag?.payload?.slateLineupId || fallback
 
-  const { getStartedUserTopics } = parseCookies()
-  const userTopics = getStartedUserTopics ? JSON.parse(getStartedUserTopics) : []
+  // Get topicSelectors from the server so we can glean the proper ids to use
+  // for the topic mix if it is required. This will go away in a future iteration
+  // where we no longer need to make a topic mix request.
+  useEffect(() => {
+    dispatch(getTopicSelectors())
+  }, [dispatch])
+
+  // Get user stored topics and put them into state so we can manipulate them if
+  // neccesary
+  useEffect(() => {
+    const { getStartedUserTopics } = parseCookies()
+    const storedTopics = getStartedUserTopics ? JSON.parse(getStartedUserTopics) : []
+    dispatch(setStoredUserTopics(storedTopics))
+  }, [dispatch])
 
   // Hacky way to get personalized indicator.  This will go away when we harden the lineup and remove
   // the topicMix hack
   const isPersonalized = generalSlates[0] === '631d8077-1462-4397-ad0a-aa340c27570a'
 
-  const shouldRenderTopicMix = userTopics.length && !isPersonalized
+  const shouldRenderTopicMix = storedTopicsReady && userTopics.length && !isPersonalized
   const renderLineup = shouldRenderTopicMix ? recsByTopic.length : true
 
   useEffect(() => {
@@ -67,22 +84,10 @@ export const Home = ({ metaData }) => {
   if (!shouldRender) return null
 
   const offset = generalSlates?.length || 0
-  const topicClick = (topic, index, id) => {
-    dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
-  }
-
-  const hasPhantomTest = featureFlagActive({ flag: 'phantom.test', featureState })
+  const topicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
 
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
-      {hasPhantomTest ? (
-        <SectionWrapper>
-          <h4 style={{ display: 'flex', justifyContent: 'center', padding: '2rem 0 0', margin: 0 }}>
-            👻 Phantom Test!
-          </h4>
-        </SectionWrapper>
-      ) : null}
-
       <SuccessFXA type="home" />
       <SectionWrapper>
         <HomeGreeting />
@@ -91,19 +96,17 @@ export const Home = ({ metaData }) => {
 
       {shouldRenderTopicMix ? <HomeRecsByTopic /> : null}
 
-      {renderLineup
-        ? generalSlates?.map((slateId, index) => (
+      {renderLineup ? (
+        <>
+          {generalSlates?.map((slateId, index) => (
             <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />
-          ))
-        : null}
-
-      {renderLineup
-        ? topicSlates?.map((slateId, index) => (
+          ))}
+          {topicSlates?.map((slateId, index) => (
             <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
-          ))
-        : null}
-
-      <CardTopicsNav topics={topics} className="no-border" track={topicClick} />
+          ))}
+          <CardTopicsNav topics={topics} className="no-border" track={topicClick} />
+        </>
+      ) : null}
 
       <DeleteModal />
       <TaggingModal />

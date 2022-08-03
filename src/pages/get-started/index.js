@@ -1,4 +1,3 @@
-import GetStarted from 'containers/get-started/get-started'
 import queryString from 'query-string'
 
 export async function getServerSideProps({ query }) {
@@ -13,4 +12,4 @@ export async function getServerSideProps({ query }) {
   }
 }
 
-export default GetStarted
+export default function GetStarted() {}
