@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import { css } from 'linaria'
-import { breakpointLargeTablet, breakpointLargeHandset } from 'common/constants'
+import { breakpointSmallTablet } from 'common/constants'
 import { Flyaway } from 'components/flyaway/flyaway'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { onboardingCloseReaderFlyaway } from '../onboarding.state'
@@ -20,6 +20,10 @@ const recentCardStyles = css`
     border-radius: 1.5rem;
     pointer-events: none;
     animation: onboardingPulse 1.7s linear infinite;
+
+    ${breakpointSmallTablet} {
+      height: 100%;
+    }
   }
 `
 
