@@ -90,36 +90,16 @@ const topicStyle = css`
     padding: 0.25rem 0.5rem;
     margin: 0.5rem 0.5rem 0 0;
   }
-
-  input {
-    margin-right: 0.5rem;
-    width: 18px;
-    height: 18px;
-    border: var(--borderStyle);
-    border-radius: var(--borderRadius);
-    &:before {
-      margin-top: -5px;
-      margin-left: -1px;
-
-      ${breakpointMediumHandset} {
-        margin-top: -2px;
-      }
-    }
-    &:checked:before {
-      transform: scale(0.8);
-    }
+  input[type='checkbox']:before {
+    line-height: 1;
   }
-  &:hover,
-  &.selected {
+  &:hover {
     cursor: pointer;
     color: var(--color-actionPrimary);
     background-color: rgba(0, 128, 120, 0.05);
     span {
       background-color: var(--color-canvas);
     }
-  }
-  .checkIcon {
-    transform: translate(-1px, -9px);
   }
 `
 
@@ -223,16 +203,14 @@ const TopicSelector = ({ toggleSkip, topicSelectors, handleContinue, hasTopics }
 
 const PersonalizeMessage = ({ toggleSkip }) => {
   return (
-    <>
-      <div className="body" style={{ backgroundImage: `url(${RainbowReader.src})` }}>
-        <div className="copy">
-          <LogoMark />
-          <h2>Personalize your Home to find interesting reads</h2>
-        </div>
-        <div className="actions left">
-          <button onClick={toggleSkip}>Continue</button>
-        </div>
+    <div className="body" style={{ backgroundImage: `url(${RainbowReader.src})` }}>
+      <div className="copy">
+        <LogoMark />
+        <h2>Personalize your Home to find interesting reads</h2>
       </div>
-    </>
+      <div className="actions left">
+        <button onClick={toggleSkip}>Continue</button>
+      </div>
+    </div>
   )
 }
