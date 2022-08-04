@@ -1,6 +1,7 @@
 import { css, cx } from 'linaria'
 import { cardsGrid } from 'components/items-layout/base'
 import { breakpointLargeHandset } from 'common/constants'
+import { CardSkeleton } from 'components/item-card/card-skeleton'
 
 export const offsetListStyle = css`
   ${cardsGrid};
@@ -37,7 +38,8 @@ export function OffsetList({
   showMedia,
   dataCy = 'offset',
   children,
-  showTopicName = false
+  showTopicName = false,
+  showSkeleton = false
 }) {
   const start = offset
   const end = offset + count
@@ -49,8 +51,12 @@ export function OffsetList({
     hasChildren && 'no-space',
     className
   )
+
   return (
     <div className={listClass} data-cy={dataCy}>
+      {!items.length && showSkeleton
+        ? [...Array(count)].map((x, i) => <CardSkeleton key={i} />)
+        : null}
       {items.slice(start, end).map((id, index) => (
         <ItemCard
           showTopicName={showTopicName}
