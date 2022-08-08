@@ -1,6 +1,8 @@
-import { getImageCacheUrl } from 'common/utilities'
 import { css } from 'linaria'
 import Link from 'next/link'
+import { useTranslation } from 'next-i18next'
+import { getImageCacheUrl } from 'common/utilities'
+import { NewViewIcon } from 'components/icons/NewViewIcon'
 
 const cardMediaStyles = css`
   position: relative;
@@ -73,7 +75,8 @@ export const CardMedia = function ({
   onImageFail = () => {},
   topicName,
   openUrl,
-  onOpen
+  onOpen,
+  openInNewTab
 }) {
   /**
    * Fallback images:
@@ -108,6 +111,10 @@ export const CardMedia = function ({
     '--fallbackLetter': `'${letter}'`
   }
 
+  const { t } = useTranslation()
+  const linkTarget = openInNewTab ? '_blank' : ''
+  const linkRel = openInNewTab ? 'noopener noreferrer' : ''
+
   const MediaImage = () => {
     return hasImage ? (
       <img
@@ -131,8 +138,13 @@ export const CardMedia = function ({
       {topicName ? <div className="topic-name">{topicName}</div> : null}
       {openUrl ? (
         <Link href={openUrl ? openUrl : false}>
-          <a tabIndex="-1" data-cy="image-link" onClick={onOpen}>
+          <a tabIndex="-1" data-cy="image-link" onClick={onOpen} target={linkTarget} rel={linkRel}>
             <MediaImage />
+            {openInNewTab && openUrl ? (
+              <span className="view-original" data-cy="view-original">
+                {t('item-action.view-original', 'View Original')} <NewViewIcon />
+              </span>
+            ) : null}
           </a>
         </Link>
       ) : (
