@@ -225,6 +225,7 @@ export function deriveItemData({
     isSyndicated: syndicated({ item }),
     isReadable: isReadable({ item }),
     isCollection: isCollection({ item }),
+    isInternalItem: isInternalItem({ item, node, itemEnrichment, status: node?.status }),
     timeToRead: readTime({ item }),
     fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
@@ -427,6 +428,20 @@ function isCollection({ item }) {
 
   const pattern = /.+?getpocket\.com\/(?:[a-z]{2}(?:-[a-zA-Z]{2})?\/)?collections\/(?!\?).+/gi
   return !!urlToTest.match(pattern)
+}
+
+function isInternalItem({ item, node, itemEnrichment, status }) {
+  const itemIsCollection = isCollection({ item })
+  const itemIsSyndicated = syndicated({ item })
+  const itemReadUrl = readUrl({ item, node, itemEnrichment, status })
+
+  if (itemIsCollection || itemIsSyndicated) return true
+
+  if (!itemReadUrl) return false // double check this one
+
+  // https://regexr.com/6qm61 <- test regex pattern
+  const pattern = /^\/read\/\d+/gim
+  return !!itemReadUrl?.match(pattern)
 }
 
 function collectionSlug({ item }) {
