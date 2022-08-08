@@ -61,7 +61,17 @@ export const Card = (args) => {
   if (!item) return <div>No card to display</div>
 
   const { itemId, readUrl, externalUrl, openExternal } = item
-  const { tags, title, authors, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item
+  const {
+    tags,
+    title,
+    authors,
+    publisher,
+    excerpt,
+    timeToRead,
+    isSyndicated,
+    isInternalItem,
+    fromPartner
+  } = item
   const openUrl = readUrl && !openExternal ? readUrl : externalUrl
   const getShownImage = () => {
     if (item?.noImage) return ''
@@ -85,6 +95,7 @@ export const Card = (args) => {
         authors={shownAuthors}
         timeToRead={timeToRead}
         isSyndicated={isSyndicated}
+        isInternalItem={isInternalItem}
         openUrl={openUrl}
         position={0}
         fromPartner={fromPartner}

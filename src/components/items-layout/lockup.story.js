@@ -26,7 +26,8 @@ const ItemCard = ({ id, position, ...rest }) => {
   if (!item) return <div>No card to display</div>
 
   const { itemId, readUrl, externalUrl, openExternal } = item
-  const { tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item
+  const { tags, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } =
+    item
   const openUrl = readUrl && !openExternal ? readUrl : externalUrl
   const itemImage = item?.noImage ? '' : item?.thumbnail
 
@@ -42,6 +43,7 @@ const ItemCard = ({ id, position, ...rest }) => {
       excerpt={excerpt}
       timeToRead={timeToRead}
       isSyndicated={isSyndicated}
+      isInternalItem={isInternalItem}
       fromPartner={fromPartner}
       openUrl={openUrl}
       position={position}
