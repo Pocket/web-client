@@ -96,6 +96,21 @@ export const cardStyles = css`
       max-height: initial;
       display: block;
     }
+
+    &.open-external {
+      a {
+        margin-right: 0;
+        ${breakpointSmallTablet} {
+          margin-right: 0.5rem;
+        }
+      }
+      .mobile-view-original {
+        display: none;
+        ${breakpointSmallTablet} {
+          display: inline-block;
+        }
+      }
+    }
   }
 
   .details {

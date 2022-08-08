@@ -10,6 +10,7 @@ import { cardStyles } from './card-base'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
 import ReactMarkdown from 'react-markdown'
+import { NewViewIcon } from 'components/icons/NewViewIcon'
 
 /** Card
  * Item card for display.
@@ -59,6 +60,7 @@ export const Card = (props) => {
     excerpt,
     timeToRead,
     isSyndicated,
+    isInternalItem,
     openUrl,
     externalUrl,
     fromPartner,
@@ -138,6 +140,10 @@ export const Card = (props) => {
     ? passedAuthors?.filter((author) => author.name.length)
     : false
 
+  const openInNewTab = !isInternalItem
+  const linkTarget = openInNewTab ? '_blank' : undefined
+  const linkRel = openInNewTab ? 'noopener noreferrer' : undefined
+
   return (
     <article
       style={style}
@@ -159,22 +165,30 @@ export const Card = (props) => {
             onOpen={onOpen}
             onImageFail={onImageFail}
             onFocus={handleFocus}
+            openInNewTab={openInNewTab}
           />
         ) : null}
         <div className="content">
           {fromPartner ? <PartnerOverline partnerType={partnerType} /> : null}
-          <h2 className={cx('title', titleFlow && 'flow')}>
+          <h2 className={cx('title', titleFlow && 'flow', openInNewTab && 'open-external')}>
             {openUrl ? (
-              <Link href={openUrl}>
-                <a
-                  ref={linkRef}
-                  onClick={onOpen}
-                  data-cy="title-link"
-                  tabIndex={0}
-                  onFocus={handleFocus}>
-                  {title}
-                </a>
-              </Link>
+              <>
+                <Link href={openUrl}>
+                  <a
+                    ref={linkRef}
+                    onClick={onOpen}
+                    data-cy="title-link"
+                    tabIndex={0}
+                    target={linkTarget}
+                    rel={linkRel}
+                    onFocus={handleFocus}>
+                    {title}
+                  </a>
+                </Link>
+                {openInNewTab ? (
+                  <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
+                ) : null}
+              </>
             ) : (
               title
             )}
@@ -197,7 +211,9 @@ export const Card = (props) => {
                     href={externalUrl}
                     onClick={onOpenOriginalUrl}
                     data-cy="publisher-link"
-                    tabIndex={0}>
+                    tabIndex={0}
+                    target="_blank"
+                    rel="noopener noreferrer">
                     {publisher}
                   </a>
                 ) : (
