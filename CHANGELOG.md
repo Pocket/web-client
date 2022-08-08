@@ -1,3 +1,36 @@
+## [1.58.1](https://github.com/Pocket/web-client/compare/v1.58.0...v1.58.1) (2022-08-04)
+
+
+### Bug Fixes
+
+* **syndicated:** last item in article if video should display block ([286a9ae](https://github.com/Pocket/web-client/commit/286a9aed8e25e91393d0d8de37b3b9100b005632))
+
+# [1.58.0](https://github.com/Pocket/web-client/compare/v1.57.1...v1.58.0) (2022-08-04)
+
+
+### Bug Fixes
+
+* **home setup:** adjust state to capture finalized better ([5466d85](https://github.com/Pocket/web-client/commit/5466d8535a05a5b1f71414a1a60dda982eb30171))
+* **home:** add home setup/remove conditional render ([92b95a8](https://github.com/Pocket/web-client/commit/92b95a84a4462fedd72d7ef1cc4b442ba72b68ab))
+* **home:** avoid multiple re-renders ([8fa1d44](https://github.com/Pocket/web-client/commit/8fa1d44d5e734bfc472e87df1fb65cb549d86e91))
+* **mutations:** correct user rec preferences shape ([4cf3785](https://github.com/Pocket/web-client/commit/4cf3785aad68a644271189cc2e53a02b47218f6a))
+* **onboarding:** exclude user from onboarding if they are in setupv3 ([78347dc](https://github.com/Pocket/web-client/commit/78347dc181150a8b8d5f3f444dd9430eeb372a8c))
+* **topic mix:** limit renders / allow redirects ([4a625e5](https://github.com/Pocket/web-client/commit/4a625e5f4fddcdc39ead702bc9cf5a2a20642266))
+
+
+### Features
+
+* **home setup:** add setup experience ([553569b](https://github.com/Pocket/web-client/commit/553569b9df1fea9269f9abcff3ff6188e294a015))
+* **home:** add specific topic mix header for reselect ([0122db0](https://github.com/Pocket/web-client/commit/0122db032724fec48e89e5f0a723e2a7f9cfb8c3))
+* **offset list:** allow explicirt skeletons ([a51235e](https://github.com/Pocket/web-client/commit/a51235e3ae42bc9861bab4a4e01dda5a18457745))
+
+## [1.57.1](https://github.com/Pocket/web-client/compare/v1.57.0...v1.57.1) (2022-08-03)
+
+
+### Bug Fixes
+
+* **home:** use homeSetup state in sagas ([b4912b1](https://github.com/Pocket/web-client/commit/b4912b1b00dddc204b8ba9fb82aa7befeb9ef22b))
+
 # [1.57.0](https://github.com/Pocket/web-client/compare/v1.56.4...v1.57.0) (2022-08-02)
 
 

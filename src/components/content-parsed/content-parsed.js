@@ -208,6 +208,9 @@ const contentWrapper = css`
   & > .article-card:last-of-type:after {
     display: none;
   }
+  & > .RIL_video:last-child {
+    display: block;
+  }
 
   .article-card {
     display: flex;

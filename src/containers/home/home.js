@@ -4,6 +4,7 @@ import { parseCookies } from 'nookies'
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeGreeting } from 'containers/home/home-greeting'
 import { HomeRecentSaves } from 'containers/home/home-recent-saves'
+import { HomeSetup } from 'containers/home/home-setup'
 
 import { getHomeLineup } from 'containers/home/home.state'
 
@@ -30,6 +31,9 @@ import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
+import { setStoredUserTopics } from 'containers/home/home-setup.state'
+import { getTopicSelectors } from 'containers/home/home-setup.state'
+
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Home = ({ metaData }) => {
@@ -41,21 +45,36 @@ export const Home = ({ metaData }) => {
   const topicSlates = useSelector((state) => state.home.topicSlates)
   const recsByTopic = useSelector((state) => state.home.recsByTopic) || []
   const topics = useSelector((state) => state.topicList?.topicsByName)
+  const storedTopicsReady = useSelector((state) => state.homeSetup.storedTopicsReady)
+  const userTopics = useSelector((state) => state.homeSetup.userTopics)
 
   const fallback = '249850f0-61c0-46f9-a16a-f0553c222800'
 
   const lineupFlag = featureState['home.lineup']
   const lineupId = lineupFlag?.payload?.slateLineupId || fallback
 
-  const { getStartedUserTopics } = parseCookies()
-  const userTopics = getStartedUserTopics ? JSON.parse(getStartedUserTopics) : []
+  // Get topicSelectors from the server so we can glean the proper ids to use
+  // for the topic mix if it is required. This will go away in a future iteration
+  // where we no longer need to make a topic mix request.
+  useEffect(() => {
+    dispatch(getTopicSelectors())
+  }, [dispatch])
+
+  // Get user stored topics and put them into state so we can manipulate them if
+  // neccesary
+  useEffect(() => {
+    const { getStartedUserTopics } = parseCookies()
+    const storedTopics = getStartedUserTopics ? JSON.parse(getStartedUserTopics) : []
+    dispatch(setStoredUserTopics(storedTopics))
+  }, [dispatch])
 
   // Hacky way to get personalized indicator.  This will go away when we harden the lineup and remove
   // the topicMix hack
   const isPersonalized = generalSlates[0] === '631d8077-1462-4397-ad0a-aa340c27570a'
 
-  const shouldRenderTopicMix = userTopics.length && !isPersonalized
-  const renderLineup = shouldRenderTopicMix ? recsByTopic.length : true
+  // We can no longer wait on topic mix since there is a possibility userTopics will exist
+  // but we are no ready to render
+  const shouldRenderTopicMix = storedTopicsReady && userTopics.length && !isPersonalized
 
   useEffect(() => {
     if (userStatus !== 'valid' || !lineupFlag) return
@@ -67,42 +86,30 @@ export const Home = ({ metaData }) => {
   if (!shouldRender) return null
 
   const offset = generalSlates?.length || 0
-  const topicClick = (topic, index, id) => {
-    dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
-  }
+  const topicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
 
-  const hasPhantomTest = featureFlagActive({ flag: 'phantom.test', featureState })
+  // Are we in the setup v3 test
+  const inSetupV3 = featureFlagActive({ flag: 'setup.moment.v3', featureState })
 
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
-      {hasPhantomTest ? (
-        <SectionWrapper>
-          <h4 style={{ display: 'flex', justifyContent: 'center', padding: '2rem 0 0', margin: 0 }}>
-            👻 Phantom Test!
-          </h4>
-        </SectionWrapper>
-      ) : null}
-
       <SuccessFXA type="home" />
+
+      {inSetupV3 ? <HomeSetup /> : null}
+
       <SectionWrapper>
         <HomeGreeting />
         <HomeRecentSaves />
       </SectionWrapper>
 
-      {shouldRenderTopicMix ? <HomeRecsByTopic /> : null}
+      {shouldRenderTopicMix ? <HomeRecsByTopic showReSelect={inSetupV3} /> : null}
 
-      {renderLineup
-        ? generalSlates?.map((slateId, index) => (
-            <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />
-          ))
-        : null}
-
-      {renderLineup
-        ? topicSlates?.map((slateId, index) => (
-            <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
-          ))
-        : null}
-
+      {generalSlates?.map((slateId, index) => (
+        <Slate key={slateId} slateId={slateId} pagePosition={index} offset={0} />
+      ))}
+      {topicSlates?.map((slateId, index) => (
+        <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
+      ))}
       <CardTopicsNav topics={topics} className="no-border" track={topicClick} />
 
       <DeleteModal />
