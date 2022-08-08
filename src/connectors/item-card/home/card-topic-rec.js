@@ -43,7 +43,7 @@ export const CardTopicRec = ({
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner, syndicatedUrl } = item //prettier-ignore
+  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner, syndicatedUrl } = item //prettier-ignore
   const openUrl = syndicatedUrl || readUrl || externalUrl
 
   return (
@@ -58,6 +58,7 @@ export const CardTopicRec = ({
       excerpt={excerpt}
       timeToRead={timeToRead}
       isSyndicated={isSyndicated}
+      isInternalItem={isInternalItem}
       fromPartner={fromPartner}
       position={position}
       className={className}

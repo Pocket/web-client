@@ -85,7 +85,7 @@ export function ItemCard({
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
+  const { title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } = item //prettier-ignore
   const { tags } = itemSaved
   /** ITEM DIMENSIONS
   --------------------------------------------------------------- */
@@ -111,6 +111,7 @@ export function ItemCard({
       excerpt={excerpt}
       timeToRead={timeToRead}
       isSyndicated={isSyndicated}
+      isInternalItem={isInternalItem}
       fromPartner={fromPartner}
       position={position}
       cardShape={type}

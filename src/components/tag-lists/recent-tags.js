@@ -46,7 +46,7 @@ function RecentCard({ itemId }) {
   const item = useSelector((state) => state.myListItemsById[itemId])
   if (!item) return null
 
-  const { externalUrl, title, publisher, excerpt, timeToRead, isSyndicated } = item
+  const { externalUrl, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem } = item
   const openUrl = externalUrl
   const showExcerpt = false
   const itemImage = item?.noImage ? '' : item?.thumbnail
@@ -60,6 +60,7 @@ function RecentCard({ itemId }) {
         excerpt={excerpt}
         timeToRead={timeToRead}
         isSyndicated={isSyndicated}
+        isInternalItem={isInternalItem}
         openUrl={openUrl}
         externalUrl={externalUrl}
         showExcerpt={showExcerpt}

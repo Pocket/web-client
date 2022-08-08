@@ -44,7 +44,7 @@ export const RecCard = ({
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
 
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
+  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } = item //prettier-ignore
 
   return item ? (
     <Card
@@ -57,6 +57,7 @@ export const RecCard = ({
       excerpt={excerpt}
       timeToRead={timeToRead}
       isSyndicated={isSyndicated}
+      isInternalItem={isInternalItem}
       fromPartner={fromPartner}
       position={position}
       className={recStyle}

@@ -29,7 +29,7 @@ export const RecCard = ({ id, position }) => {
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
+  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } = item //prettier-ignore
 
   return item ? (
     <Card
@@ -42,6 +42,7 @@ export const RecCard = ({ id, position }) => {
       excerpt={excerpt}
       timeToRead={timeToRead}
       isSyndicated={isSyndicated}
+      isInternalItem={isInternalItem}
       fromPartner={fromPartner}
       cardShape="block"
       position={position}

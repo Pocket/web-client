@@ -16,7 +16,7 @@ export const RecommendedFeedCard = ({ id, position }) => {
   const { readUrl, externalUrl, analyticsData: passedAnalytics, openExternal } = item
   const openUrl = readUrl || externalUrl
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {title, publisher, excerpt, timeToRead, isSyndicated, post} = item //prettier-ignore
+  const {title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, post} = item //prettier-ignore
   const analyticsData = {
     id,
     position,
@@ -41,6 +41,7 @@ export const RecommendedFeedCard = ({ id, position }) => {
         excerpt={excerpt}
         timeToRead={timeToRead}
         isSyndicated={isSyndicated}
+        isInternalItem={isInternalItem}
         itemImage={itemImage}
         externalUrl={externalUrl}
         openExternal={openExternal}
