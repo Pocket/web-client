@@ -437,7 +437,7 @@ function isInternalItem({ item, node, itemEnrichment, status }) {
 
   if (itemIsCollection || itemIsSyndicated) return true
 
-  if (!itemReadUrl) return false // double check this one
+  if (!itemReadUrl) return false
 
   // https://regexr.com/6qm61 <- test regex pattern
   const pattern = /^\/read\/\d+/gim
