@@ -142,7 +142,10 @@ export const CardMedia = function ({
             <MediaImage />
             {openInNewTab && openUrl ? (
               <span className="view-original" data-cy="view-original">
-                {t('item-action.view-original', 'View Original')} <NewViewIcon />
+                <span className="view-original-text">
+                  {t('item-action.view-original', 'View Original')}
+                </span>
+                <NewViewIcon />
               </span>
             ) : null}
           </a>
