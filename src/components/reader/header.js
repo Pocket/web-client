@@ -5,6 +5,7 @@ import { Pill } from 'components/pill/pill'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import { Trans } from 'next-i18next'
 import dayjs from 'dayjs'
+import { NewViewIcon } from 'components/icons/NewViewIcon'
 
 /* COMPONENTS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -71,6 +72,10 @@ const dateWrapper = css`
 const pocketInfo = css`
   text-align: center;
   font-size: 18px;
+
+  .icon {
+    margin-left: 0.5rem;
+  }
 `
 const viewOriginal = css`
   display: block;
@@ -157,6 +162,7 @@ export const ItemHeader = ({
           target="_blank"
           rel="noopener noreferrer">
           <Trans i18nKey="reader:view-original">View Original</Trans>
+          <NewViewIcon />
         </a>
         {tags && (
           <div className={cx(tagsWrapper, pillboxStyle)}>
