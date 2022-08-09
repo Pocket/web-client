@@ -161,6 +161,7 @@ describe('My List - Parsed', () => {
     expect(item.externalUrl).toBe(expectedExternalUrl)
     expect(item.readUrl).toBe(expectedReadUrl)
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
+    expect(item.isInternalItem).toBe(true)
     expect(item.timeToRead).toBe(5)
     expect(item.authors).toStrictEqual([
       {
@@ -211,6 +212,7 @@ describe('My List - Parsed', () => {
     expect(item.externalUrl).toBe(expectedExternalUrl)
     expect(item.readUrl).toBe(expectedReadUrl)
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
+    expect(item.isInternalItem).toBe(true)
     expect(item.timeToRead).toBe(5)
     expect(item.authors).toStrictEqual([
       {

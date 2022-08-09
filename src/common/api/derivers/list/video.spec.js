@@ -170,6 +170,7 @@ describe('My List - Videos', () => {
     expect(item.externalUrl).toBe(expectedExternalUrl)
     expect(item.readUrl).toBe(expectedReadUrl)
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
+    expect(item.isInternalItem).toBe(true)
     expect(item.timeToRead).toBeFalsy()
     expect(item.authors).toStrictEqual([
       {
@@ -218,6 +219,7 @@ describe('My List - Videos', () => {
     expect(item.externalUrl).toBe(expectedExternalUrl)
     expect(item.readUrl).toBe(expectedReadUrl)
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
+    expect(item.isInternalItem).toBe(true)
     expect(item.timeToRead).toBeFalsy()
     expect(item.authors).toStrictEqual([
       {

@@ -120,6 +120,7 @@ describe('Home', () => {
     expect(item.externalUrl).toBe(expectedExternalUrl)
     expect(item.readUrl).toBe(expectedReadUrl)
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
+    expect(item.isInternalItem).toBe(true)
     expect(item.timeToRead).toBe(2)
     expect(item.authors).toBeFalsy()
 

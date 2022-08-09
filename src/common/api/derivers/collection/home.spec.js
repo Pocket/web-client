@@ -92,6 +92,7 @@ describe('Collection — Page as Home Item', () => {
     expect(item.externalUrl).toBe(expectedExternalUrl)
     expect(item.readUrl).toBe(expectedReadUrl)
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
+    expect(item.isInternalItem).toBe(true)
     expect(item.timeToRead).toBe(null)
     expect(item.authors).toBeFalsy()
     expect(item.analyticsData.id).toBe('3664844706')

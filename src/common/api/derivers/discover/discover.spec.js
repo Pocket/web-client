@@ -155,6 +155,7 @@ describe('Discover', () => {
     expect(item.externalUrl).toBe(expectedExternalUrl)
     expect(item.readUrl).toBe(expectedReadUrl)
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
+    expect(item.isInternalItem).toBe(false)
     expect(item.timeToRead).toBe(7)
     expect(item.authors).toStrictEqual([
       {

@@ -123,6 +123,7 @@ describe('Syndicated', () => {
     expect(item.readUrl).toBe(expectedReadUrl)
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
     expect(item.syndicatedUrl).toBe(expectedSyndicatedUrl)
+    expect(item.isInternalItem).toBe(true)
     expect(item.timeToRead).toBe(3)
     expect(item.authors).toStrictEqual([
       {
