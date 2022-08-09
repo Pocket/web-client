@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { cx } from 'linaria'
 import { SyndicatedIcon } from 'components/icons/SyndicatedIcon'
@@ -11,6 +12,7 @@ import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
 import ReactMarkdown from 'react-markdown'
 import { NewViewIcon } from 'components/icons/NewViewIcon'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 /** Card
  * Item card for display.
@@ -140,7 +142,10 @@ export const Card = (props) => {
     ? passedAuthors?.filter((author) => author.name.length)
     : false
 
-  const openInNewTab = !isInternalItem
+  const featureState = useSelector((state) => state.features) || {}
+  const inViewOriginal = featureFlagActive({ flag: 'view-original', featureState }) // will remove this after UAT and VQA
+
+  const openInNewTab = !isInternalItem && inViewOriginal
   const linkTarget = openInNewTab ? '_blank' : undefined
   const linkRel = openInNewTab ? 'noopener noreferrer' : undefined
 
