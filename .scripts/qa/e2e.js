@@ -13,9 +13,8 @@ const { Select, prompt } = enquirer
 
 // Constants
 const REPO = 'https://github.com/Pocket/web-qa'
-const REPO_TEST = /https\:\/\/([\w\d]+@)?github.com\/Pocket\/web-qa(\.git)?/
-const DEFAULT_REPO_LOCAION = '../web-qa/'
-const GITHUB_API_URL = 'https://api.github.com'
+const REPO_TEST = /https:\/\/([\w\d]+@)?github.com\/Pocket\/web-qa(\.git)?/
+const DEFAULT_REPO_LOCATION = '../web-qa/'
 const CONFIG = './.scripts/qa/config.json'
 
 // Run the whole thing
@@ -114,7 +113,7 @@ async function setRepoAccess() {
 
   // Grab our settings
   const settings = configExists ? await fs.readJson(CONFIG) : {}
-  let { location = DEFAULT_REPO_LOCAION } = settings
+  let { location = DEFAULT_REPO_LOCATION } = settings
 
   // Make sure token is set
   await setToken(settings)
@@ -149,7 +148,7 @@ async function processIntegrations(location) {
     const answer = await selectInitOption.run()
 
     const testProcess = spawn('npm', ['--prefix', qaLocation, 'run', answer], { stdio: 'inherit' })
-    const testIndicator = ora().stopAndPersist('Running Tests')
+    const testIndicator = ora().stopAndPersist({ text: 'Running Tests' })
 
     testProcess.on('close', (code) => {
       if (code !== 0) console.log(`ps process exited with code ${code}`)
@@ -174,7 +173,7 @@ async function validateRepo(location) {
   // First we check if the folder even exists
   const folderExists = await pathExists(location)
 
-  // If the folder does not exists the repo is not valid
+  // If the folder does not exist the repo is not valid
   if (!folderExists) {
     validation.fail('Repo location does not exist')
     return false
@@ -201,8 +200,8 @@ async function validateRepo(location) {
 }
 
 /**
- * setToken is used to help the user set a github access token locally.  This is
- * required in order to create a PR on Github
+ * setToken is used to help the user set a GitHub access token locally.  This is
+ * required in order to create a PR on GitHub
  */
 async function setToken(settings) {
   try {
@@ -244,6 +243,7 @@ async function setToken(settings) {
  * It gives the user the option to clone a fresh copy of the repo, or locate
  * a previously checked out version
  * @param {string} location: Location of cloned repo
+ * @param {object} settings: The settings object containing settings content in an object
  */
 async function setupRepo(location, settings) {
   try {
@@ -316,7 +316,7 @@ async function updateRepo(location) {
   try {
     const repoUpdate = ora(chalk.blue(`Updating web-qa to latest`)).start()
 
-    await git.checkout('master') //tsk tsk
+    await setBranch()
     await git.pull
 
     const install = spawn('npm', ['--prefix', path.resolve(location), 'install'], {})
@@ -356,12 +356,51 @@ async function cloneRepo(location, settings) {
 function cleanup() {
   if (serve) {
     serve.kill()
-    console.log(`${chalk.green('✔')} Stoping Local Server`)
+    console.log(`${chalk.green('✔')} Stopping Local Server`)
   }
 
   if (qaProcesses) {
     qaProcesses.kill()
-    console.log(`${chalk.green('✔')} Stoping QA Processes`)
+    console.log(`${chalk.green('✔')} Stopping QA Processes`)
   }
   console.log(`${chalk.green('✔')} Test run completed`)
+}
+
+/**
+ * setBranch checks if our choosen branch name already exists, in which case
+ * it switches to that branch, otherwise it creates the new branch
+ */
+async function setBranch() {
+  // Confirm branch doesn't already exist
+  const localBranches = await git.branchLocal()
+
+  const branchName = await selectBranch(localBranches)
+  const branchExists = localBranches.all.map((branch) => branch.name).includes(branchName)
+
+  if (branchExists) {
+    await git.checkout(branchName)
+    return branchName
+  }
+
+  return false
+}
+
+/**
+ * selectBranch is a helper for setBranch that lets the user decide what branch
+ * they want to use for this localization update.  It returns a `branchName`
+ * @param {array} localBranches list of all local branches
+ */
+async function selectBranch(localBranches) {
+  try {
+    const selectInitOption = new Select({
+      name: 'which-branch',
+      message: `What branch would you like to use?`,
+      choices: localBranches.all
+    })
+
+    const answer = await selectInitOption.run()
+    return answer
+  } catch (error) {
+    console.warn(chalk.red(error))
+  }
 }
