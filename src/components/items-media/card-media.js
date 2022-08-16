@@ -141,9 +141,9 @@ export const CardMedia = function ({
           <a tabIndex="-1" data-cy="image-link" onClick={onOpen} target={linkTarget} rel={linkRel}>
             <MediaImage />
             {openInNewTab && openUrl ? (
-              <span className="view-original" data-cy="view-original">
-                <span className="view-original-text">
-                  {t('item-action.view-original', 'View Original')}
+              <span className="original-view" data-cy="original-view">
+                <span className="original-view-text">
+                  {t('item-action.original-view', 'Original View')}
                 </span>
                 <NewViewIcon />
               </span>

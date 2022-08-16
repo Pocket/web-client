@@ -191,7 +191,7 @@ export const Card = (props) => {
                   </a>
                 </Link>
                 {openInNewTab ? (
-                  <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
+                  <NewViewIcon className="mobile-original-view" data-cy="original-view-icon" />
                 ) : null}
               </>
             ) : (
