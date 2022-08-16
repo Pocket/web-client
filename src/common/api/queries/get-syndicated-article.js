@@ -51,7 +51,7 @@ export async function getSyndicatedArticle(slug) {
 
   return requestGQL({
     query: getSyndicatedArticleQuery,
-    operationName: "GetSyndicatedArticle",
+    operationName: 'GetSyndicatedArticle',
     variables
   })
     .then((response) => response?.data?.syndicatedArticleBySlug)

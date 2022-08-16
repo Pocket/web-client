@@ -17,7 +17,7 @@ const getTagSuggestionByIdQuery = gql`
 export async function getTagSuggestionById(itemId) {
   return requestGQL({
     query: getTagSuggestionByIdQuery,
-    operationName: "SavedItemById",
+    operationName: 'SavedItemById',
     variables: {
       savedItemByIdId: itemId
     }

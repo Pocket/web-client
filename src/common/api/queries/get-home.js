@@ -50,7 +50,7 @@ const getHomeLineupQuery = gql`
 export async function getHomeLineup({ id, recommendationCount = 5 }) {
   return requestGQL({
     query: getHomeLineupQuery,
-    operationName: "GetHomeLineup",
+    operationName: 'GetHomeLineup',
     variables: { id, recommendationCount, slateCount: 20 }
   })
     .then(handleResponse)

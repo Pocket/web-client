@@ -27,7 +27,7 @@ const setupMomentSlateQuery = gql`
 export async function getSetupSlate() {
   return requestGQL({
     query: setupMomentSlateQuery,
-    operationName: "SetupMomentSlate"
+    operationName: 'SetupMomentSlate'
   })
     .then(handleResponse)
     .catch((error) => console.error(error))

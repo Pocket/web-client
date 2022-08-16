@@ -26,7 +26,7 @@ const getCollectionsQuery = gql`
 export function getCollections(lang = 'en') {
   return requestGQL({
     query: getCollectionsQuery,
-    operationName: "GetCollections",
+    operationName: 'GetCollections',
     variables: { getCollectionLang: lang }
   })
     .then((response) => response?.data?.getCollections?.collections)

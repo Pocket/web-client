@@ -47,7 +47,7 @@ const getSavedItemsTaggedQuery = gql`
 export async function getSavedItemsTagged({ filter, sort, pagination }) {
   return requestGQL({
     query: getSavedItemsTaggedQuery,
-    operationName: "SavedItemsTagged",
+    operationName: 'SavedItemsTagged',
     variables: {
       filter,
       sort,

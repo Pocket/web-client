@@ -51,7 +51,7 @@ export async function getUnleashAssignments(sessionId, userId, birth, appName, l
   }
   return requestGQL({
     query: getUnleashAssignmentsQuery,
-    operationName: "GetUnleashAssignments",
+    operationName: 'GetUnleashAssignments',
     variables
   })
     .then((response) => response?.data?.unleashAssignments)
