@@ -41,6 +41,7 @@ const getTopicLineupQuery = gql`
 export async function getTopicLineup(topic, recommendationCount = 30) {
   return requestGQL({
     query: getTopicLineupQuery,
+    operationName: 'GetTopicLineup',
     variables: { id: TOPICS_BY_NAME[topic].id, recommendationCount, slateCount: 2 }
   })
     .then(handleResponse)

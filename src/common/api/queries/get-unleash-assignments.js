@@ -49,7 +49,11 @@ export async function getUnleashAssignments(sessionId, userId, birth, appName, l
     locale,
     recItUserProfile: { userModels }
   }
-  return requestGQL({ query: getUnleashAssignmentsQuery, variables })
+  return requestGQL({
+    query: getUnleashAssignmentsQuery,
+    operationName: "GetUnleashAssignments",
+    variables
+  })
     .then((response) => response?.data?.unleashAssignments)
     .catch((error) => {
       Sentry.withScope((scope) => {

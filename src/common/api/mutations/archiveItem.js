@@ -16,6 +16,7 @@ const itemArchiveQuery = gql`
 export function itemArchive(itemId) {
   return requestGQL({
     query: itemArchiveQuery,
+    operationName: 'ItemArchive',
     variables: { itemId }
   })
     .then((response) => response?.data?.updateSavedItemArchive)

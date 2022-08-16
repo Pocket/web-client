@@ -48,6 +48,7 @@ export function itemTagsReplace(itemIds, tags) {
 
   return requestGQL({
     query: itemTagsReplaceQuery,
+    operationName: 'ItemTagsReplace',
     variables: { input }
   })
     .then((response) => response?.data?.replaceSavedItemTags)
@@ -57,6 +58,7 @@ export function itemTagsReplace(itemIds, tags) {
 export function itemTagsRemove(itemIds) {
   return requestGQL({
     query: itemTagsRemoveQuery,
+    operationName: 'ItemTagsRemove',
     variables: { savedItemId: itemIds[0] }
   })
     .then((response) => response?.data?.updateSavedItemRemoveTags)
@@ -66,7 +68,11 @@ export function itemTagsRemove(itemIds) {
 
 export function bulkTagging(itemIds, tags) {
   const input = itemIds.map((itemId) => ({ savedItemId: itemId, tags }))
-  return requestGQL({ query: itemsTagsAddQuery, variables: { input } })
+  return requestGQL({
+    query: itemsTagsAddQuery,
+    operationName: 'ItemsTagsAdd',
+    variables: { input }
+  })
     .then((response) => response?.data?.createSavedItemTags)
     .then((nodes) => nodes)
     .catch((error) => console.error(error))

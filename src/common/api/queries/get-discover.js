@@ -52,6 +52,7 @@ export async function getDiscoverLineup({ recommendationCount = 30, locale }) {
   const id = getLocaleId(locale)
   return requestGQL({
     query: getDiscoverLineupQuery,
+    operationName: "GetDiscoverLineup",
     variables: { id, recommendationCount, slateCount: 2 }
   })
     .then(handleResponse)

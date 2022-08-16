@@ -23,6 +23,7 @@ const setTopicPreferencesQuery = gql`
 export function setTopicPreferences(preferredTopics) {
   return requestGQL({
     query: setTopicPreferencesQuery,
+    operationName: 'UpdateUserRecommendationPreferences',
     variables: { input: { preferredTopics } }
   })
     .then((response) => response?.data?.updateUserRecommendationPreferences)

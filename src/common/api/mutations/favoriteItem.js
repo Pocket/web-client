@@ -16,6 +16,7 @@ const itemFavoriteQuery = gql`
 export function itemFavorite(itemId) {
   return requestGQL({
     query: itemFavoriteQuery,
+    operationName: 'ItemFavorite',
     variables: { itemId }
   })
     .then((response) => response?.data?.updateSavedItemFavorite)

@@ -24,6 +24,7 @@ const getUsersTagsQuery = gql`
 export async function getUserTags() {
   return requestGQL({
     query: getUsersTagsQuery,
+    operationName: "GetUsersTags",
     variables: {
       pagination: {
         first: 1000000

@@ -54,6 +54,7 @@ const getCollectionBySlugQuery = gql`
 export function getCollectionBySlug(slug) {
   return requestGQL({
     query: getCollectionBySlugQuery,
+    operationName: "GetCollectionBySlug",
     variables: { getCollectionBySlugSlug: slug }
   })
     .then((response) => response?.data?.collectionBySlug)

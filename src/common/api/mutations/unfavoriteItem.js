@@ -16,6 +16,7 @@ const itemUnFavoriteQuery = gql`
 export function itemUnFavorite(itemId) {
   return requestGQL({
     query: itemUnFavoriteQuery,
+    operationName: 'ItemUnFavorite',
     variables: { itemId }
   })
     .then((response) => response?.data?.updateSavedItemUnFavorite)
@@ -39,7 +40,10 @@ export function bulkUnFavorite(items) {
     ${arrayOfQueries.join('')}
   }`
 
-  return requestGQL({ query })
+  return requestGQL({
+    query,
+    operationName: 'ItemsBulkUnFavorite'
+  })
     .then((response) => response?.data)
     .catch((error) => console.error(error))
 }

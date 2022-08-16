@@ -32,7 +32,8 @@ const getRecommendationPreferenceTopicsQuery = gql`
 
 export async function getTopicSelectors() {
   return requestGQL({
-    query: getRecommendationPreferenceTopicsQuery
+    query: getRecommendationPreferenceTopicsQuery,
+    operationName: "RecommendationPreferenceTopics"
   })
     .then(handleResponse)
     .catch((error) => console.error(error))

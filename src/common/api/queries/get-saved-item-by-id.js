@@ -39,6 +39,7 @@ const getSavedItemByIdQuery = gql`
 export async function getSavedItemByItemId(itemId) {
   return requestGQL({
     query: getSavedItemByIdQuery,
+    operationName: "GetSavedItemById",
     variables: { itemId }
   })
     .then(handleResponse)
