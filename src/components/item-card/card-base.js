@@ -38,7 +38,7 @@ export const cardStyles = css`
     padding-bottom: 0;
 
     &:hover {
-      .view-original {
+      .original-view {
         opacity: 1;
         transition: opacity 300ms ease-in-out;
       }
@@ -80,7 +80,7 @@ export const cardStyles = css`
     }
   }
 
-  .view-original {
+  .original-view {
     opacity: 0;
     transition: opacity 300ms ease-in-out;
     background: rgba(26, 26, 26, 0.8);
@@ -95,7 +95,7 @@ export const cardStyles = css`
       display: none;
     }
 
-    .view-original-text + .icon {
+    .original-view-text + .icon {
       margin-left: 0.25rem;
     }
   }
@@ -131,7 +131,7 @@ export const cardStyles = css`
           margin-right: 0.5rem;
         }
       }
-      .mobile-view-original {
+      .mobile-original-view {
         display: none;
         ${breakpointSmallTablet} {
           display: inline-block;
@@ -462,11 +462,11 @@ export const cardStyles = css`
       margin-bottom: 0;
     }
 
-    .view-original .icon {
+    .original-view .icon {
       margin-left: 0;
     }
 
-    .view-original-text {
+    .original-view-text {
       display: none;
     }
 
@@ -550,11 +550,11 @@ export const cardStyles = css`
       grid-column: span 2;
     }
 
-    .view-original .icon {
+    .original-view .icon {
       margin-left: 0;
     }
 
-    .view-original-text {
+    .original-view-text {
       display: none;
     }
 
