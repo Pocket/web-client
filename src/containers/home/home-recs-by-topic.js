@@ -6,6 +6,8 @@ import { CardTopicRec } from 'connectors/item-card/home/card-topic-rec'
 import { OffsetList } from 'components/items-layout/list-offset'
 import { getRecsByTopic } from './home.state'
 import { reSelectTopics } from 'containers/home/home-setup.state'
+import { setSetupStatus } from 'containers/home/home-setup.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const HomeRecsByTopic = ({ showReSelect }) => {
   const dispatch = useDispatch()
@@ -29,7 +31,9 @@ export const HomeRecsByTopic = ({ showReSelect }) => {
 
   // Reset topic selections
   const resetTopics = () => {
+    dispatch(sendSnowplowEvent('get-started.topic.update'))
     dispatch(reSelectTopics())
+    dispatch(setSetupStatus('reselect'))
   }
 
   return isFinalized || recsByTopic.length ? (
@@ -39,7 +43,7 @@ export const HomeRecsByTopic = ({ showReSelect }) => {
         sectionDescription="Stories to fuel your mind, curated for your interests"
         showReSelect={showReSelect}
         action={showReSelect ? resetTopics : false}
-        actionCopy="Re-Select Topics"
+        actionCopy="Update Topics"
       />
 
       <OffsetList

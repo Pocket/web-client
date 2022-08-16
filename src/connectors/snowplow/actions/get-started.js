@@ -24,64 +24,29 @@ export const getStartedActions = {
     },
     description: 'Clicking “Continue” on the `select-topics` page'
   },
-  'get-started.article.skip': {
+  'get-started.topic.update': {
     eventType: 'engagement',
     entityTypes: ['ui'],
     eventData: {
       uiType: 'button'
     },
-    description: 'Clicking “Skip” on the `select-article` page'
+    description: 'Clicking “Update” on the Recommended Reads slate'
   },
-  'get-started.article.impression': {
-    eventType: 'impression',
-    entityTypes: ['content', 'ui', 'corpusRecommendation'],
-    eventData: {
-      component: 'card',
-      uiType: 'card'
-    },
-    expects: ['url', 'corpusRecommendationId']
-  },
-  'get-started.article.save': {
-    eventType: 'engagement',
-    entityTypes: ['content', 'ui', 'corpusRecommendation'],
-    eventData: {
-      engagementType: 'save',
-      uiType: 'button'
-    },
-    expects: ['url', 'corpusRecommendationId'],
-    description: 'Click “Save to My List” on a Card'
-  },
-  'get-started.article.open': {
-    eventType: 'contentOpen',
-    entityTypes: ['content', 'ui', 'corpusRecommendationId'],
-    eventData: {
-      uiType: 'card'
-    },
-    expects: ['id', 'url', 'corpusRecommendationId', 'destination']
-  },
-  'get-started.article.modal.close': {
-    eventType: 'engagement',
-    entityTypes: ['ui'],
-    eventData: {
-      uiType: 'dialog'
-    },
-    description: 'Cancel the Save modal using the X close button or the escape key'
-  },
-  'get-started.article.modal.skip': {
+  'get-started.topic.dismiss': {
     eventType: 'engagement',
     entityTypes: ['ui'],
     eventData: {
       uiType: 'button'
     },
-    description: 'Click the “Discover more on Home” button'
+    description: 'Clicking the “X” button at the top of the panel after clicking “Skip”'
   },
-  'get-started.article.modal.continue': {
+  'get-started.topic.reselect': {
     eventType: 'engagement',
     entityTypes: ['ui'],
     eventData: {
       uiType: 'button'
     },
-    description: 'Click the “Read Article” button'
+    description: 'Clicking the “Continue” button on the panel after clicking “Skip”'
   },
   'get-started.reader.gohome': {
     eventType: 'engagement',

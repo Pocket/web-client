@@ -3,7 +3,12 @@ import { getTopicSelectors as getTopicSelectorsApi } from 'common/api'
 import { setTopicPreferences } from 'common/api'
 import { setCookie } from 'nookies'
 
+import { SETTINGS_FETCH_SUCCESS } from 'actions'
+import { SETTINGS_UPDATE } from 'actions'
+
 import { HOME_SET_STORED_USER_TOPICS } from 'actions'
+
+import { HOME_SETUP_SET_STATUS } from 'actions'
 
 import { HOME_TOPIC_SELECTORS_REQUEST } from 'actions'
 import { HOME_TOPIC_SELECTORS_SUCCESS } from 'actions'
@@ -23,6 +28,7 @@ import { HYDRATE } from 'actions'
  --------------------------------------------------------------- */
 export const getTopicSelectors = () => ({ type: HOME_TOPIC_SELECTORS_REQUEST })
 export const setStoredUserTopics = (userTopics) => ({ type: HOME_SET_STORED_USER_TOPICS, userTopics }) //prettier-ignore
+export const setSetupStatus = (setupStatus) => ({ type: HOME_SETUP_SET_STATUS, setupStatus })
 export const selectTopic = (topic) => ({ type: HOME_SETUP_SELECT_TOPIC, topic })
 export const deSelectTopic = (topic) => ({ type: HOME_SETUP_DESELECT_TOPIC, topic })
 export const finalizeTopics = () => ({ type: HOME_SETUP_FINALIZE_TOPICS })
@@ -31,6 +37,7 @@ export const reSelectTopics = () => ({ type: HOME_SETUP_RESELECT_TOPICS })
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
+  setupStatus: null,
   topicsSelectors: [],
   userTopics: [],
   storedTopicsReady: false,
@@ -39,13 +46,23 @@ const initialState = {
 
 export const homeSetupReducers = (state = initialState, action) => {
   switch (action.type) {
+    // case SETTINGS_FETCH_SUCCESS: {
+    //   const { userTopics, setupStatus } = action
+    //   return { ...state, userTopics, setupStatus, storedTopicsReady: true, finalizedTopics: true }
+    // }
+
     case HOME_SET_STORED_USER_TOPICS: {
       const { userTopics } = action
       return { ...state, userTopics, storedTopicsReady: true, finalizedTopics: true }
     }
 
     case HOME_SETUP_FINALIZE_TOPICS: {
-      return { ...state, finalizedTopics: true }
+      return { ...state, finalizedTopics: true, setupStatus: 'complete' }
+    }
+
+    case HOME_SETUP_SET_STATUS: {
+      const { setupStatus } = action
+      return { ...state, setupStatus }
     }
 
     case HOME_SETUP_SELECT_TOPIC:
@@ -82,7 +99,8 @@ export const homeSetupSagas = [
   takeEvery(HOME_TOPIC_SELECTORS_REQUEST, requestTopicSelectors),
   takeEvery(HOME_SETUP_SELECT_TOPIC, selectTopics),
   takeEvery(HOME_SETUP_DESELECT_TOPIC, deSelectTopics),
-  takeEvery(HOME_SETUP_FINALIZE_TOPICS, finalizeTopicSelection)
+  takeEvery(HOME_SETUP_FINALIZE_TOPICS, finalizeTopicSelection),
+  // takeEvery([HOME_SETUP_UPDATE_TOPICS, HOME_SETUP_SET_STATUS, SET_TOPIC_SUCCESS], saveSettings)
 ]
 
 /** SAGAS :: SELECTORS
@@ -159,3 +177,7 @@ function storeUserTopics(userTopics) {
     maxAge: yearInMs
   })
 }
+
+// function* saveSettings() {
+//   yield put({ type: SETTINGS_UPDATE })
+// }
