@@ -46,10 +46,12 @@ const initialState = {
 
 export const homeSetupReducers = (state = initialState, action) => {
   switch (action.type) {
-    // case SETTINGS_FETCH_SUCCESS: {
-    //   const { userTopics, setupStatus } = action
-    //   return { ...state, userTopics, setupStatus, storedTopicsReady: true, finalizedTopics: true }
-    // }
+    case SETTINGS_FETCH_SUCCESS: {
+      const { settings } = action
+      const { setupStatus, userTopics } = settings
+      return { ...state, setupStatus, userTopics }
+      // return { ...state, userTopics, setupStatus, storedTopicsReady: true, finalizedTopics: true }
+    }
 
     case HOME_SET_STORED_USER_TOPICS: {
       const { userTopics } = action
@@ -66,9 +68,12 @@ export const homeSetupReducers = (state = initialState, action) => {
     }
 
     case HOME_SETUP_SELECT_TOPIC:
-    case HOME_SETUP_DESELECT_TOPIC:
-    case HOME_SETUP_RESELECT_TOPICS: {
+    case HOME_SETUP_DESELECT_TOPIC: {
       return { ...state, finalizedTopics: false }
+    }
+
+    case HOME_SETUP_RESELECT_TOPICS: {
+      return { ...state, finalizedTopics: false, setupStatus: 'reselect' }
     }
 
     case HOME_SETUP_UPDATE_TOPICS: {
@@ -100,6 +105,7 @@ export const homeSetupSagas = [
   takeEvery(HOME_SETUP_SELECT_TOPIC, selectTopics),
   takeEvery(HOME_SETUP_DESELECT_TOPIC, deSelectTopics),
   takeEvery(HOME_SETUP_FINALIZE_TOPICS, finalizeTopicSelection),
+  takeEvery(HOME_SETUP_SET_STATUS, saveSettings)
   // takeEvery([HOME_SETUP_UPDATE_TOPICS, HOME_SETUP_SET_STATUS, SET_TOPIC_SUCCESS], saveSettings)
 ]
 
@@ -178,6 +184,6 @@ function storeUserTopics(userTopics) {
   })
 }
 
-// function* saveSettings() {
-//   yield put({ type: SETTINGS_UPDATE })
-// }
+function* saveSettings() {
+  yield put({ type: SETTINGS_UPDATE })
+}

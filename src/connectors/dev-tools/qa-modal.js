@@ -39,8 +39,8 @@ export function QaModal() {
       handleClose={toggleDevMode}>
       <ModalBody>
         <Features />
-        <Links toggleDevMode={toggleDevMode} />
         <Resets />
+        <Links toggleDevMode={toggleDevMode} />
       </ModalBody>
     </Modal>
   )

@@ -124,6 +124,10 @@ const cardMixHeaderStyle = css`
   align-content: center;
   .action {
     font-size: 0.825rem;
+    color: var(--color-actionPrimary);
+    &:hover {
+      color: var(--color-actionPrimaryHover);
+    }
   }
 `
 

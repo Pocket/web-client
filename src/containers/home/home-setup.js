@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { css, cx } from 'linaria'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import RainbowReader from 'static/images/rainbow-reader-transparent.svg'
@@ -192,7 +191,9 @@ export const HomeSetup = () => {
   const topicsSelectors = useSelector((state) => state.homeSetup.topicsSelectors)
   const userTopics = useSelector((state) => state.homeSetup.userTopics)
   const isFinalized = useSelector((state) => state.homeSetup.finalizedTopics)
+
   const isSkipped = setupStatus === 'skipped'
+  const isDismissed = setupStatus === 'dismissed'
 
   const handleContinue = () => {
     dispatch(sendSnowplowEvent('get-started.topic.continue'))
@@ -219,7 +220,7 @@ export const HomeSetup = () => {
   const showSelectionSetup = !isFinalized || (isFinalized && !userTopics.length)
   const SectionToRender = isSkipped ? PersonalizeMessage : TopicSelector
 
-  return showSelectionSetup ? (
+  return !isDismissed && showSelectionSetup ? (
     <div className={containerClass}>
       <SectionWrapper>
         <SectionToRender
