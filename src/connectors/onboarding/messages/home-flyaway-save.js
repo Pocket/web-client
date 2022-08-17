@@ -30,12 +30,13 @@ const tabletHighlight = css`
 const homeSaveQueryDesktop = 'article:not(.hero-center) button[data-cy^="article-save-btn"]'
 const homeSaveQueryTablet = 'button[data-cy^="article-save-btn"]'
 
-export const HomeFlyawaySave = () => {
+export const HomeFlyawaySave = ({ inSetupV3 }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
   const flyawayReady = useSelector((state) => state.onboarding.homeFlyawaySave)
   const showFlyaway = flyawayReady
+  const delay = inSetupV3 ? 2500 : 1000 // Topics slates need an extra moment to load
 
   useEffect(() => {
     let timer
@@ -50,7 +51,7 @@ export const HomeFlyawaySave = () => {
 
     if (showFlyaway) {
       dispatch(sendSnowplowEvent('onboarding.flyaway.save.impression'))
-      timer = setTimeout(highlightElement, 1000)
+      timer = setTimeout(highlightElement, delay)
     }
 
     return () => {
@@ -58,7 +59,7 @@ export const HomeFlyawaySave = () => {
       desktopElement?.classList.remove(desktopHighlight)
       tabletElement?.classList.remove(tabletHighlight)
     }
-  }, [showFlyaway])
+  }, [showFlyaway, delay])
 
   const handleClose = () => {
     dispatch(sendSnowplowEvent('onboarding.flyaway.save.close'))
