@@ -19,6 +19,8 @@ import { HOME_SETUP_FINALIZE_TOPICS } from 'actions'
 import { HOME_SETUP_RESELECT_TOPICS } from 'actions'
 import { HOME_SETUP_UPDATE_TOPICS } from 'actions'
 
+import { HOME_SETUP_RESET } from 'actions'
+
 import { SET_TOPIC_SUCCESS } from 'actions'
 import { SET_TOPIC_FAILURE } from 'actions'
 
@@ -33,11 +35,12 @@ export const selectTopic = (topic) => ({ type: HOME_SETUP_SELECT_TOPIC, topic })
 export const deSelectTopic = (topic) => ({ type: HOME_SETUP_DESELECT_TOPIC, topic })
 export const finalizeTopics = () => ({ type: HOME_SETUP_FINALIZE_TOPICS })
 export const reSelectTopics = () => ({ type: HOME_SETUP_RESELECT_TOPICS })
+export const resetSetupMoment = () => ({ type: HOME_SETUP_RESET })
 
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  setupStatus: null,
+  setupStatus: false,
   topicsSelectors: [],
   userTopics: [],
   storedTopicsReady: false,
@@ -49,8 +52,7 @@ export const homeSetupReducers = (state = initialState, action) => {
     case SETTINGS_FETCH_SUCCESS: {
       const { settings } = action
       const { setupStatus, userTopics } = settings
-      return { ...state, setupStatus, userTopics }
-      // return { ...state, userTopics, setupStatus, storedTopicsReady: true, finalizedTopics: true }
+      return { ...state, userTopics, setupStatus, storedTopicsReady: true, finalizedTopics: true }
     }
 
     case HOME_SET_STORED_USER_TOPICS: {
@@ -86,6 +88,10 @@ export const homeSetupReducers = (state = initialState, action) => {
       return { ...state, topicsSelectors }
     }
 
+    case HOME_SETUP_RESET: {
+      return { ...state, setupStatus: false, userTopics: [] }
+    }
+
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE: {
@@ -105,8 +111,12 @@ export const homeSetupSagas = [
   takeEvery(HOME_SETUP_SELECT_TOPIC, selectTopics),
   takeEvery(HOME_SETUP_DESELECT_TOPIC, deSelectTopics),
   takeEvery(HOME_SETUP_FINALIZE_TOPICS, finalizeTopicSelection),
-  takeEvery(HOME_SETUP_SET_STATUS, saveSettings)
-  // takeEvery([HOME_SETUP_UPDATE_TOPICS, HOME_SETUP_SET_STATUS, SET_TOPIC_SUCCESS], saveSettings)
+  takeEvery([
+    HOME_SETUP_SET_STATUS,
+    HOME_SETUP_RESET,
+    HOME_SET_STORED_USER_TOPICS,
+    SET_TOPIC_SUCCESS
+  ], saveSettings)
 ]
 
 /** SAGAS :: SELECTORS
@@ -130,7 +140,6 @@ function* selectTopics(action) {
   const currentTopics = yield select(getUserTopics)
   const updatedTopics = new Set([...currentTopics, topic])
   const userTopics = Array.from(updatedTopics)
-  storeUserTopics(userTopics)
   yield put({ type: HOME_SETUP_UPDATE_TOPICS, userTopics })
 }
 
@@ -138,7 +147,6 @@ function* deSelectTopics(action) {
   const { topic } = action
   const currentTopics = yield select(getUserTopics)
   const userTopics = currentTopics.filter((current) => current !== topic)
-  storeUserTopics(userTopics)
   yield put({ type: HOME_SETUP_UPDATE_TOPICS, userTopics })
 }
 
@@ -172,16 +180,6 @@ export async function fetchTopicSelectorList() {
   } catch (error) {
     console.warn('home.setup', error)
   }
-}
-
-function storeUserTopics(userTopics) {
-  const yearInMs = 60 * 60 * 24 * 365
-  // Set topic selection in local-storage so we can maintain state on refresh
-  setCookie(null, 'getStartedUserTopics', JSON.stringify(userTopics), {
-    sameSite: 'lax',
-    path: '/',
-    maxAge: yearInMs
-  })
 }
 
 function* saveSettings() {

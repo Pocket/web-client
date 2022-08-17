@@ -1,12 +1,12 @@
 import { sectionStyles } from 'components/dev-tools/tool-styles'
 import { resetOnboarding } from 'connectors/onboarding/onboarding.state'
-import { setSetupStatus } from 'containers/home/home-setup.state'
+import { resetSetupMoment } from 'containers/home/home-setup.state'
 import { useDispatch } from 'react-redux'
 
 export const Resets = () => {
   const dispatch = useDispatch()
 
-  const setupMomentReset = () => dispatch(setSetupStatus())
+  const setupMomentReset = () => dispatch(resetSetupMoment())
   const onboardingReset = () => dispatch(resetOnboarding())
 
   return (

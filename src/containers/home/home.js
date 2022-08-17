@@ -64,6 +64,7 @@ export const Home = ({ metaData }) => {
   // neccesary
   useEffect(() => {
     const { getStartedUserTopics } = parseCookies()
+    if (!getStartedUserTopics) return
     const storedTopics = getStartedUserTopics ? JSON.parse(getStartedUserTopics) : []
     dispatch(setStoredUserTopics(storedTopics))
   }, [dispatch])
