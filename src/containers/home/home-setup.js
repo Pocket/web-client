@@ -100,8 +100,14 @@ const homeSetupStyles = css`
     }
 
     .actions {
-      grid-column: 11 / span 2;
+      grid-column: 9 / span 4;
       margin-top: 3rem;
+
+      ${breakpointTinyTablet} {
+        grid-column: 1 / span 12;
+        margin-top: 0;
+        padding-bottom: 0;
+      }
     }
   }
 `
