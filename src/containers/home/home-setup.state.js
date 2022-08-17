@@ -1,7 +1,7 @@
 import { put, takeEvery, call, select } from 'redux-saga/effects'
 import { getTopicSelectors as getTopicSelectorsApi } from 'common/api'
 import { setTopicPreferences } from 'common/api'
-import { setCookie } from 'nookies'
+import { destroyCookie } from 'nookies'
 
 import { SETTINGS_FETCH_SUCCESS } from 'actions'
 import { SETTINGS_UPDATE } from 'actions'
@@ -111,12 +111,13 @@ export const homeSetupSagas = [
   takeEvery(HOME_SETUP_SELECT_TOPIC, selectTopics),
   takeEvery(HOME_SETUP_DESELECT_TOPIC, deSelectTopics),
   takeEvery(HOME_SETUP_FINALIZE_TOPICS, finalizeTopicSelection),
+  // takeEvery(HOME_SET_STORED_USER_TOPICS, clearUserTopicsCookie),
   takeEvery([
     HOME_SETUP_SET_STATUS,
     HOME_SETUP_RESET,
     HOME_SET_STORED_USER_TOPICS,
     SET_TOPIC_SUCCESS
-  ], saveSettings)
+  ], saveSettings),
 ]
 
 /** SAGAS :: SELECTORS
@@ -180,6 +181,11 @@ export async function fetchTopicSelectorList() {
   } catch (error) {
     console.warn('home.setup', error)
   }
+}
+
+// Clear topic selection from local-storage so we can maintain in settings
+function clearUserTopicsCookie() {
+  destroyCookie(null, 'getStartedUserTopics')
 }
 
 function* saveSettings() {
