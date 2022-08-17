@@ -32,6 +32,7 @@ const createHighlightQuery = gql`
 export function createHighlight(highlight) {
   return requestGQL({
     query: createHighlightQuery,
+    operationName: 'CreateHighlight',
     variables: { input: [highlight] }
   })
     .then((response) => response?.data?.createSavedItemHighlights)

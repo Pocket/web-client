@@ -49,7 +49,11 @@ const getSyndicatedArticleQuery = gql`
 export async function getSyndicatedArticle(slug) {
   const variables = { slug }
 
-  return requestGQL({ query: getSyndicatedArticleQuery, variables })
+  return requestGQL({
+    query: getSyndicatedArticleQuery,
+    operationName: 'GetSyndicatedArticle',
+    variables
+  })
     .then((response) => response?.data?.syndicatedArticleBySlug)
     .catch((error) => console.error(error))
 }

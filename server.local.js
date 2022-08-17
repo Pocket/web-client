@@ -1,5 +1,4 @@
 var https = require('https')
-var http = require('http')
 var fs = require('fs')
 const { parse } = require('url')
 const dev = process.env.AS_PRODUCTION ? false : true //eslint-disable-line
@@ -21,11 +20,6 @@ function runServer(req, res) {
 app.prepare().then(() => {
   https.createServer(options, runServer).listen(443, (err) => {
     if (err) throw err
-    console.log('🔑 — Secure server at https://localhost.web-client.getpocket.com')
-  })
-
-  http.createServer(runServer).listen(80, (err) => {
-    if (err) throw err
-    console.log('😐 — Regular old server on http://localhost.web-client.getpocket.com')
+    console.info('🌐  Ready at: https://localhost.web-client.getpocket.com')
   })
 })

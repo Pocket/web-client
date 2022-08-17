@@ -18,6 +18,7 @@ const itemUpsertQuery = gql`
 export function itemUpsert(url) {
   return requestGQL({
     query: itemUpsertQuery,
+    operationName: 'ItemUpsert',
     variables: { input: { url } }
   })
     .then((response) => response?.data?.upsertSavedItem)

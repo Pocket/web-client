@@ -10,6 +10,7 @@ const itemDeleteQuery = gql`
 export function itemDelete(itemId) {
   return requestGQL({
     query: itemDeleteQuery,
+    operationName: 'ItemDelete',
     variables: { itemId }
   })
     .then((response) => response.data.deleteSavedItem)

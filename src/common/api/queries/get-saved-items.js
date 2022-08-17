@@ -46,6 +46,7 @@ const getSavedItemsQuery = gql`
 export async function getSavedItems({ filter, sort, pagination }) {
   return requestGQL({
     query: getSavedItemsQuery,
+    operationName: 'GetSavedItems',
     variables: {
       filter,
       sort,

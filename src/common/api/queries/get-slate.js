@@ -27,6 +27,7 @@ const getSlateQuery = gql`
 export async function getSlate(slateId, recommendationCount = 3) {
   return requestGQL({
     query: getSlateQuery,
+    operationName: 'GetSlate',
     variables: { slateId, recommendationCount }
   })
     .then(handleResponse)

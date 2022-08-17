@@ -19,6 +19,7 @@ const itemUnArchiveQuery = gql`
 export function itemUnArchive(itemId) {
   return requestGQL({
     query: itemUnArchiveQuery,
+    operationName: 'ItemUnArchive',
     variables: { itemId }
   })
     .then((response) => response?.data?.updateSavedItemUnArchive)
@@ -42,7 +43,10 @@ export function bulkUnArchive(items) {
     ${arrayOfQueries.join('')}
   }`
 
-  return requestGQL({ query })
+  return requestGQL({
+    query,
+    operationName: 'ItemsBulkUnArchive'
+  })
     .then((response) => response?.data)
     .catch((error) => console.error(error))
 }

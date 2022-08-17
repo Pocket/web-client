@@ -54,7 +54,8 @@ export async function getTopicMix(topicsSelectors) {
   }`
 
   return requestGQL({
-    query: query
+    query: query,
+    operationName: 'GetTopicMix'
   })
     .then(handleResponse)
     .catch((error) => console.error(error))

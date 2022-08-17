@@ -53,6 +53,7 @@ export async function searchSavedItems(params) {
   const { filter, sort, pagination, searchTerm: term } = params
   return requestGQL({
     query: searchSavedItemsQuery,
+    operationName: 'SearchSavedItems',
     variables: {
       filter,
       sort,

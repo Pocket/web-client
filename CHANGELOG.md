@@ -1,3 +1,16 @@
+# [1.59.0](https://github.com/Pocket/web-client/compare/v1.58.4...v1.59.0) (2022-08-17)
+
+
+### Bug Fixes
+
+* **api:** add operationName to all queries (helfup in testing) ([ab35a6c](https://github.com/Pocket/web-client/commit/ab35a6ca9ba2988fd3e810ca85f3b1514b9ea333))
+* **gitignore:** add qa config ([5fb9601](https://github.com/Pocket/web-client/commit/5fb9601cdaf6ee3d4b3f60cf45264acf02d88f01))
+
+
+### Features
+
+* **qa:** add e2e harness scripts ([f6ef8cc](https://github.com/Pocket/web-client/commit/f6ef8ccb7244c53b7735553a77911792fba854a3))
+
 ## [1.58.4](https://github.com/Pocket/web-client/compare/v1.58.3...v1.58.4) (2022-08-16)
 
 
