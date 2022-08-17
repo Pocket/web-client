@@ -11,13 +11,20 @@ import { CloseButton } from 'components/close-button/close-button'
 
 import { breakpointLargeTablet } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
-import { breakpointMediumHandset } from 'common/constants'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 const homeSetupStyles = css`
   margin: 0 0 2rem;
   background-color: var(--color-apricotLightest);
+
+  .colormode-dark & {
+    background-color: var(--color-grey20);
+  }
+
+  .colormode-sepia & {
+    background-color: var(--color-amberLight);
+  }
 
   .body {
     padding: 2rem 0 0.75rem;
@@ -30,6 +37,12 @@ const homeSetupStyles = css`
     ${breakpointLargeTablet} {
       background-image: none !important;
     }
+
+    .colormode-dark &,
+    .colormode-sepia & {
+      border-bottom-color: var(--color-dividerSecondary)
+    }
+
   }
   .copy {
     grid-column: 1 / span 8;
@@ -83,6 +96,9 @@ const homeSetupStyles = css`
         pointer-events: none;
       }
     }
+    .text {
+      color: var(--color-actionPrimary);
+    }
   }
   .close {
     position: absolute;
@@ -95,7 +111,7 @@ const homeSetupStyles = css`
   &.skipped {
     .body {
       position: relative;
-      padding-bottom: 33px;
+      padding-bottom: 32px;
       border-bottom: none;
     }
 
@@ -135,9 +151,9 @@ const topicStyle = css`
   font-size: 1.188rem;
   line-height: 1.75;
   text-align: center;
-  color: var(--color-textPrimary);
-  border: var(--dividerStyle);
-  background-color: var(--color-canvas);
+  color: var(--color-checkboxLabel);
+  border: 1px solid var(--color-checkboxBorder);
+  background-color: var(--color-checkboxBackground);
   border-radius: 8px;
   user-select: none;
 
@@ -146,25 +162,46 @@ const topicStyle = css`
     padding: 0.25rem 0.5rem;
     margin: 0.5rem 0.5rem 0 0;
   }
-  input[type='checkbox']:before {
-    line-height: 1;
+  input[type='checkbox'] {
+    border-color: var(--color-checkboxInputBorder);
+    background-color: var(--color-checkboxInputBackground);
 
-    ${breakpointTinyTablet} {
-      line-height: 1.3;
+    &:checked {
+      border-color: var(--color-checkboxInputBorderSelected);
+      background-color: var(--color-checkboxInputBackgroundSelected);
+    }
+
+    &:before {
+      line-height: 1;
+      ${breakpointTinyTablet} {
+        line-height: 1.3;
+      }
     }
   }
+
   &:hover {
     cursor: pointer;
-    color: var(--color-actionPrimary);
-    background-color: rgba(0, 128, 120, 0.05);
-    span {
-      background-color: var(--color-canvas);
+    /*
+    color: var(--color-checkboxLabelHover);
+    background-color: var(--color-checkboxBackgroundHover);
+    border-color: var(--color-checkboxBorderHover);
+    input[type='checkbox'] {
+      background-color: var(--color-checkboxInputBackgroundHover);
+      border-color: var(--color-checkboxInputBorderHover);
     }
+    */
   }
 
   &.selected {
-    color: var(--color-actionPrimary);
-    background-color: var(--color-actionPrimarySubdued)
+    color: var(--color-checkboxLabelSelected);
+    background-color: var(--color-checkboxBackgroundSelected);
+    border-color: var(--color-checkboxBorderSelected);
+  }
+
+  .colormode-dark & {
+    input[type='checkbox']:before {
+      content: var(--checkboxCheckMarkColor);
+    }
   }
 `
 

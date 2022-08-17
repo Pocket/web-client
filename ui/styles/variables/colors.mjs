@@ -416,6 +416,66 @@ const callouts = {
   }
 }
 
+const checkBoxes = {
+  checkboxLabel: {
+    light: _colorPalette.grey25,
+    dark: _colorPalette.white100,
+    sepia: _colorPalette.grey25
+  },
+  checkboxBorder: {
+    light: _colorPalette.grey85,
+    dark: _colorPalette.grey55,
+    sepia: _colorPalette.grey85
+  },
+  checkboxBackground: {
+    light: _colorPalette.white100,
+    dark: _colorPalette.grey10,
+    sepia: _colorPalette.sepia96
+  },
+  checkboxInputBorder: {
+    light: _colorPalette.grey85,
+    dark: _colorPalette.grey55,
+    sepia: _colorPalette.grey55
+  },
+  checkboxInputBackground: {
+    light: _colorPalette.white100,
+    dark: _colorPalette.grey10,
+    sepia: _colorPalette.sepia96
+  },
+
+  // checkboxLabelHover: {},
+  // checkboxBorderHover: {},
+  // checkboxBackgroundHover: {},
+  // checkboxInputBorderHover: {},
+  // checkboxInputBackgroundHover: {},
+
+  checkboxLabelSelected: {
+    light: _colorPalette.teal50,
+    dark: _colorPalette.teal100,
+    sepia: _colorPalette.teal50
+  },
+  checkboxBorderSelected: {
+    light: _colorPalette.teal50,
+    dark: _colorPalette.teal100,
+    sepia: _colorPalette.teal50
+  },
+  checkboxBackgroundSelected: {
+    light: _colorPalette.teal100,
+    dark: _colorPalette.teal50,
+    sepia: _colorPalette.teal100
+  },
+  checkboxInputBorderSelected: {
+    light: _colorPalette.teal50,
+    dark: _colorPalette.white100,
+    sepia: _colorPalette.teal50,
+  },
+  checkboxInputBackgroundSelected: {
+    light: _colorPalette.teal50,
+    dark: _colorPalette.white100,
+    sepia: _colorPalette.teal50,
+  }
+}
+
 /** Used in building color variables */
 export const _colorModes = {
   ...canvas,
@@ -424,8 +484,9 @@ export const _colorModes = {
   ...forms,
   ...raised,
   ...dividers,
-  ...callouts
+  ...callouts,
+  ...checkBoxes
 }
 
 /** Used for stories */
-export const _themeGroups = { canvas, general, actions, forms, raised, dividers, callouts }
+export const _themeGroups = { canvas, general, actions, forms, raised, dividers, callouts, checkBoxes }
