@@ -1,4 +1,5 @@
 import { css } from 'linaria'
+import { breakpointSmallDesktop } from 'common/constants'
 import { breakpointLargeTablet } from 'common/constants'
 import { breakpointMediumTablet } from 'common/constants'
 import { breakpointSmallTablet } from 'common/constants'
@@ -698,9 +699,19 @@ export const cardStyles = css`
       }
     }
 
+    ${breakpointSmallDesktop} {
+      .original-view-text {
+        display: none;
+      }
+    }
+
     ${breakpointMediumTablet} {
       --media-column-span: span 12;
       --content-column-span: span 12;
+
+      .original-view-text {
+        display: inline;
+      }
     }
 
     ${breakpointSmallTablet} {
@@ -716,6 +727,10 @@ export const cardStyles = css`
     &:only-of-type {
       --media-column-span: span 3;
       --content-column-span: span 9;
+
+      .original-view-text {
+        display: inline;
+      }
 
       ${breakpointMediumTablet} {
         --media-column-span: span 4;
@@ -733,9 +748,17 @@ export const cardStyles = css`
     // https://css-tricks.com/solved-with-css-logical-styling-based-on-the-number-of-given-elements/
     &:first-child:nth-last-child(n + 3),
     &:first-child:nth-last-child(n + 3) ~ * {
+      .original-view-text {
+        display: none;
+      }
+
       ${breakpointLargeTablet} {
         --media-column-span: span 12;
         --content-column-span: span 12;
+
+        .original-view-text {
+          display: inline;
+        }
       }
 
       ${breakpointMediumTablet} {
