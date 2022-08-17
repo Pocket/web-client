@@ -1,3 +1,11 @@
+## [1.58.4](https://github.com/Pocket/web-client/compare/v1.58.3...v1.58.4) (2022-08-16)
+
+
+### Bug Fixes
+
+* **localization:** wrong interpolation ([831bbd9](https://github.com/Pocket/web-client/commit/831bbd99cdc09b082e98d88764fc90914c939c5d))
+* **original view:** changing text and class names to match ([52f0a29](https://github.com/Pocket/web-client/commit/52f0a29daa3822ea3a1abbcb3d933d6a5f05745c))
+
 ## [1.58.3](https://github.com/Pocket/web-client/compare/v1.58.2...v1.58.3) (2022-08-15)
 
 
