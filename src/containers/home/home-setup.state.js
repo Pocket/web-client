@@ -51,7 +51,7 @@ export const homeSetupReducers = (state = initialState, action) => {
   switch (action.type) {
     case SETTINGS_FETCH_SUCCESS: {
       const { settings } = action
-      const { setupStatus, userTopics } = settings
+      const { setupStatus = false, userTopics = [] } = settings
       return { ...state, userTopics, setupStatus, storedTopicsReady: true, finalizedTopics: true }
     }
 
@@ -111,7 +111,7 @@ export const homeSetupSagas = [
   takeEvery(HOME_SETUP_SELECT_TOPIC, selectTopics),
   takeEvery(HOME_SETUP_DESELECT_TOPIC, deSelectTopics),
   takeEvery(HOME_SETUP_FINALIZE_TOPICS, finalizeTopicSelection),
-  // takeEvery(HOME_SET_STORED_USER_TOPICS, clearUserTopicsCookie),
+  takeEvery(HOME_SET_STORED_USER_TOPICS, clearUserTopicsCookie),
   takeEvery([
     HOME_SETUP_SET_STATUS,
     HOME_SETUP_RESET,
