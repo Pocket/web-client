@@ -46,7 +46,7 @@ const SORT_FAVORITE = { sortBy: 'FAVORITED_AT' }
 /** FILTERS
  --------------------------------------------------------------- */
 
-// prettier-ignore
+
 export const itemFiltersFromGraph = {
   [GET_ITEMS_UNREAD]: { filter: { ...UNREAD }, sort: SORT_DEFAULT },
   [GET_ITEMS_ARCHIVED]: { filter: { ...ARCHIVED }, sort: SORT_ARCHIVE },
@@ -56,11 +56,11 @@ export const itemFiltersFromGraph = {
   [GET_ITEMS_ANNOTATED]: { filter: { ...ANNOTATATED, ...ALL }, sort: SORT_DEFAULT },
   [GET_ITEMS_ANNOTATED_UNREAD]: { filter: { ...ANNOTATATED, ...UNREAD }, sort: SORT_DEFAULT },
   [GET_ITEMS_ANNOTATED_ARCHIVED]: { filter: { ...ANNOTATATED, ...ARCHIVED }, sort: SORT_DEFAULT },
-  [GET_ITEMS_ANNOTATED_FAVORITES]: { filter: { ...ANNOTATATED, ...FAVORITED, ...ALL }, sort: SORT_DEFAULT },
+  [GET_ITEMS_ANNOTATED_FAVORITES]: { filter: { ...ANNOTATATED, ...FAVORITED, ...ALL }, sort: SORT_DEFAULT }, // prettier-ignore
   [GET_ITEMS_ARTICLES]: { filter: { ...ARTICLE, ...ALL }, sort: SORT_DEFAULT },
   [GET_ITEMS_ARTICLES_UNREAD]: { filter: { ...ARTICLE, ...UNREAD }, sort: SORT_DEFAULT },
   [GET_ITEMS_ARTICLES_ARCHIVED]: { filter: { ...ARTICLE, ...ARCHIVED }, sort: SORT_DEFAULT },
-  [GET_ITEMS_ARTICLES_FAVORITES]: { filter: { ...ARTICLE, ...FAVORITED, ...ALL }, sort: SORT_DEFAULT },
+  [GET_ITEMS_ARTICLES_FAVORITES]: { filter: { ...ARTICLE, ...FAVORITED, ...ALL }, sort: SORT_DEFAULT }, // prettier-ignore
   [GET_ITEMS_VIDEOS]: { filter: { ...VIDEOS, ...ALL }, sort: SORT_DEFAULT },
   [GET_ITEMS_VIDEOS_UNREAD]: { filter: { ...VIDEOS, ...UNREAD }, sort: SORT_DEFAULT },
   [GET_ITEMS_VIDEOS_ARCHIVED]: { filter: { ...VIDEOS, ...ARCHIVED }, sort: SORT_DEFAULT },
@@ -69,9 +69,8 @@ export const itemFiltersFromGraph = {
   [GET_ITEMS_TAGS_UNREAD]: { filter: { ...UNREAD }, sort: SORT_DEFAULT },
   [GET_ITEMS_TAGS_ARCHIVED]: { filter: { ...ARCHIVED }, sort: SORT_DEFAULT },
   [GET_ITEMS_TAGS_FAVORITES]: { filter: { ...FAVORITED, ...ALL }, sort: SORT_DEFAULT },
-  [SEARCH_SAVED_ITEMS]: { filter: { ...ALL }, sort: SORT_DEFAULT },
-  [SEARCH_SAVED_ITEMS_UNREAD]: { filter: { ...UNREAD }, sort: SORT_DEFAULT },
-  [SEARCH_SAVED_ITEMS_ARCHIVED]: { filter: { ...ARCHIVED }, sort: SORT_DEFAULT },
-  [SEARCH_SAVED_ITEMS_FAVORITES]: { filter: { ...FAVORITED, ...UNREAD }, sort: SORT_DEFAULT }
-
+  [SEARCH_SAVED_ITEMS]: { sort: SORT_DEFAULT }, // Omit filter for all
+  [SEARCH_SAVED_ITEMS_UNREAD]: { filter: { status: 'UNREAD' }, sort: SORT_DEFAULT },
+  [SEARCH_SAVED_ITEMS_ARCHIVED]: { filter: { status: 'ARCHIVED' }, sort: SORT_DEFAULT },
+  [SEARCH_SAVED_ITEMS_FAVORITES]: { filter: { ...FAVORITED }, sort: SORT_DEFAULT }
 }
