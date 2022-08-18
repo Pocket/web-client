@@ -123,6 +123,7 @@ export const listSavedReducers = (state = [], action) => {
 const initialState = {
   sortOrder: 'DESC',
   count: 30,
+  totalCount: 0,
   tagNames: [],
   error: false
 }

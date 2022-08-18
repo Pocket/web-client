@@ -51,7 +51,8 @@ export const List = (props) => {
   const savedSortOrder = useSelector((state) => state.listSavedPageInfo.sortOrder)
   const featureState = useSelector((state) => state.features)
   const isPremium = useSelector((state) => state.user.premium_status === '1')
-  const total = useSelector((state) => state.myList[`${section}Total`])
+  const v3Total = useSelector((state) => state.myList[`${section}Total`])
+  const graphTotal = useSelector((state) => state.listSavedPageInfo.totalCount)
 
   // Derived Values
   const shouldRender = userStatus !== 'pending'
@@ -72,6 +73,7 @@ export const List = (props) => {
   const handleNewest = () => dispatch(setNewest('DESC'))
   const handleOldest = () => dispatch(setOldest('ASC'))
   const handleRelevance = () => dispatch(setRelevance('RELEVANCE'))
+  const total = useApiNext ? graphTotal : v3Total
 
   return (
     <Layout title={metaData.title} metaData={metaData} subset={subset} tag={tag}>
