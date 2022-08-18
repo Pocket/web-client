@@ -1,4 +1,6 @@
 import { put, call, select, takeEvery } from 'redux-saga/effects'
+import { itemFiltersFromGraph } from 'common/api/queries/get-saved-items.filters'
+
 import { ITEMS_SAVED_REQUEST } from 'actions'
 import { ITEMS_SAVED_SUCCESS } from 'actions'
 import { ITEMS_UPSERT_SUCCESS } from 'actions'
@@ -218,11 +220,11 @@ const getItems = (state) => state.items
  --------------------------------------------------------------- */
 function* reconcileMutation(action) {
   const { nodes } = action
-  const { filter } = yield select(getSavedPageInfo)
+  const { actionType } = yield select(getSavedPageInfo)
   const items = yield select(getItems)
 
   const idsToRemove = nodes
-    .filter((node) => shouldBeFiltered({ item: items[node?.id], node }, filter))
+    .filter((node) => shouldBeFiltered({ item: items[node?.id], node }, actionType))
     .map((node) => node.id)
 
   if (idsToRemove.length) yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, idsToRemove })
@@ -286,7 +288,8 @@ function* loadMoreItems() {
   }
 }
 
-function shouldBeFiltered(itemDetails, filter) {
+function shouldBeFiltered(itemDetails, actionType) {
+  const { filter } = itemFiltersFromGraph[actionType] || {}
   const { item, node } = itemDetails
 
   if (node?.status === 'DELETED') return true

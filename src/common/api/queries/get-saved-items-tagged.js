@@ -1,10 +1,7 @@
 import { requestGQL } from 'common/utilities/request/request'
 import { gql } from 'graphql-request'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
-import { GET_ITEMS_TAGS } from 'actions'
-import { GET_ITEMS_TAGS_UNREAD } from 'actions'
-import { GET_ITEMS_TAGS_ARCHIVED } from 'actions'
-import { GET_ITEMS_TAGS_FAVORITES } from 'actions'
+import { itemFiltersFromGraph } from './get-saved-items.filters'
 
 const getSavedItemsTaggedQuery = gql`
   query SavedItemsTagged(
@@ -47,21 +44,6 @@ const getSavedItemsTaggedQuery = gql`
 
   ${FRAGMENT_ITEM}
 `
-/** FILTERS
- --------------------------------------------------------------- */
-const UNREAD = { statuses: ['UNREAD'] }
-const ARCHIVED = { statuses: ['ARCHIVED'] }
-const ALL = { statuses: ['UNREAD', 'ARCHIVED'] }
-const FAVORITED = { isFavorite: true }
-const SORT_DEFAULT = { sortBy: 'CREATED_AT' }
-
-// prettier-ignore
-const itemFiltersFromGraph = {
-  [GET_ITEMS_TAGS]: { filter: { ...ALL }, sort: SORT_DEFAULT },
-  [GET_ITEMS_TAGS_UNREAD]: { filter: { ...UNREAD }, sort: SORT_DEFAULT },
-  [GET_ITEMS_TAGS_ARCHIVED]: { filter: { ...ARCHIVED }, sort: SORT_DEFAULT },
-  [GET_ITEMS_TAGS_FAVORITES]: { filter: { ...FAVORITED, ...ALL }, sort: SORT_DEFAULT }
-}
 
 export async function getSavedItemsTagged({
   tagNames,
