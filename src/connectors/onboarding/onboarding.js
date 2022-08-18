@@ -16,10 +16,9 @@ export const Onboarding = ({ type, ...rest }) => {
   const setupStatus = useSelector((state) => state.homeSetup.setupStatus)
 
   const inSetupV3 = featureFlagActive({ flag: 'setup.moment.v3', featureState })
-  // If in setup moment, check that the status isn't false. Otherwise it's safe to show
-  const postSetupMoment = (inSetupV3) ? !!setupStatus : true
-
-  const showOnboarding = settingsFetched && eligible && postSetupMoment
+  // If in setup moment, use status and check it isn't false. Otherwise check eligibility
+  const postSetupMoment = (inSetupV3) ? !!setupStatus : eligible
+  const showOnboarding = settingsFetched && postSetupMoment
 
   const onboardingTypes = {
     'home.flyaway.save': HomeFlyawaySave,
