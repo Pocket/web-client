@@ -2,6 +2,7 @@ import { requestGQL } from 'common/utilities/request/request'
 import { gql } from 'graphql-request'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 import { itemFiltersFromGraph } from './get-saved-items.filters'
+import { actionToCamelCase } from 'common/utilities/strings/strings'
 
 const getSavedItemsTaggedQuery = gql`
   query SavedItemsTagged(
@@ -56,12 +57,9 @@ export async function getSavedItemsTagged({
 
   const { filter, sort } = requestDetails
   const variables = { filter: { ...filter, tagNames }, sort: { ...sort, sortOrder }, pagination }
+  const operationName = actionToCamelCase(actionType)
 
-  return requestGQL({
-    query: getSavedItemsTaggedQuery,
-    operationName: actionType,
-    variables
-  })
+  return requestGQL({ query: getSavedItemsTaggedQuery, operationName, variables })
     .then(handleResponse)
     .catch((error) => console.error(error))
 }
