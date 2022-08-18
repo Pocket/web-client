@@ -442,13 +442,11 @@ const checkBoxes = {
     dark: _colorPalette.grey10,
     sepia: _colorPalette.sepia96
   },
-
-  // checkboxLabelHover: {},
-  // checkboxBorderHover: {},
-  // checkboxBackgroundHover: {},
-  // checkboxInputBorderHover: {},
-  // checkboxInputBackgroundHover: {},
-
+  checkboxHighlight: {
+    light: _colorPalette.teal60,
+    dark: _colorPalette.teal60,
+    sepia: _colorPalette.teal60
+  },
   checkboxLabelSelected: {
     light: _colorPalette.teal50,
     dark: _colorPalette.teal100,

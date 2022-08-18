@@ -179,23 +179,21 @@ const topicStyle = css`
     }
   }
 
-  &:hover {
-    cursor: pointer;
-    /*
-    color: var(--color-checkboxLabelHover);
-    background-color: var(--color-checkboxBackgroundHover);
-    border-color: var(--color-checkboxBorderHover);
-    input[type='checkbox'] {
-      background-color: var(--color-checkboxInputBackgroundHover);
-      border-color: var(--color-checkboxInputBorderHover);
-    }
-    */
-  }
-
   &.selected {
     color: var(--color-checkboxLabelSelected);
     background-color: var(--color-checkboxBackgroundSelected);
     border-color: var(--color-checkboxBorderSelected);
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: var(--color-checkboxHighlight);
+    background-color: var(--color-checkboxBackground);
+    border-color: var(--color-checkboxHighlight);
+    input[type='checkbox'] {
+      /* background-color: var(--color-checkboxBackground); */
+      border-color: var(--color-checkboxHighlight);
+    }
   }
 
   .colormode-dark & {
