@@ -1,7 +1,7 @@
 import { put, takeEvery, call, select } from 'redux-saga/effects'
 import { getTopicSelectors as getTopicSelectorsApi } from 'common/api'
 import { setTopicPreferences } from 'common/api'
-import { destroyCookie } from 'nookies'
+import { destroyCookie, setCookie } from 'nookies'
 
 import { SETTINGS_FETCH_SUCCESS } from 'actions'
 import { SETTINGS_UPDATE } from 'actions'
@@ -20,6 +20,7 @@ import { HOME_SETUP_RESELECT_TOPICS } from 'actions'
 import { HOME_SETUP_UPDATE_TOPICS } from 'actions'
 
 import { HOME_SETUP_RESET } from 'actions'
+import { HOME_COOKIE_RESET } from 'actions'
 
 import { SET_TOPIC_SUCCESS } from 'actions'
 import { SET_TOPIC_FAILURE } from 'actions'
@@ -38,6 +39,7 @@ export const deSelectTopic = (topic) => ({ type: HOME_SETUP_DESELECT_TOPIC, topi
 export const finalizeTopics = () => ({ type: HOME_SETUP_FINALIZE_TOPICS })
 export const reSelectTopics = () => ({ type: HOME_SETUP_RESELECT_TOPICS })
 export const resetSetupMoment = () => ({ type: HOME_SETUP_RESET })
+export const resetTopicsCookie = () => ({ type: HOME_COOKIE_RESET })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -95,7 +97,8 @@ export const homeSetupReducers = (state = initialState, action) => {
       return { ...state, setupStatus }
     }
 
-    case HOME_SETUP_RESET: {
+    case HOME_SETUP_RESET:
+    case HOME_COOKIE_RESET: {
       return { ...state, setupStatus: false, userTopics: [] }
     }
 
@@ -122,9 +125,11 @@ export const homeSetupSagas = [
   takeEvery([
     HOME_SETUP_SET_STATUS,
     HOME_SETUP_RESET,
+    HOME_COOKIE_RESET,
     HOME_SET_STORED_USER_TOPICS,
     SET_TOPIC_SUCCESS
   ], saveSettings),
+  takeEvery(HOME_COOKIE_RESET, storeUserTopics)
 ]
 
 /** SAGAS :: SELECTORS
@@ -193,6 +198,17 @@ export async function fetchTopicSelectorList() {
 // Clear topic selection from local-storage so we can maintain in settings
 function clearUserTopicsCookie() {
   destroyCookie(null, 'getStartedUserTopics')
+}
+
+function storeUserTopics() {
+  const userTopics = ["Entertainment", "Food", "Politics"]
+  const yearInMs = 60 * 60 * 24 * 365
+  // Set topic selection in local-storage so we can maintain state on refresh
+  setCookie(null, 'getStartedUserTopics', JSON.stringify(userTopics), {
+    sameSite: 'lax',
+    path: '/',
+    maxAge: yearInMs
+  })
 }
 
 function* saveSettings() {
