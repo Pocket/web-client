@@ -24,6 +24,8 @@ import { HOME_SETUP_RESET } from 'actions'
 import { SET_TOPIC_SUCCESS } from 'actions'
 import { SET_TOPIC_FAILURE } from 'actions'
 
+import { HOME_SAVE_REQUEST } from 'actions'
+
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
@@ -86,6 +88,11 @@ export const homeSetupReducers = (state = initialState, action) => {
     case HOME_TOPIC_SELECTORS_SUCCESS: {
       const { topicsSelectors } = action
       return { ...state, topicsSelectors }
+    }
+
+    case HOME_SAVE_REQUEST: {
+      const setupStatus = state.setupStatus || 'skipped'
+      return { ...state, setupStatus }
     }
 
     case HOME_SETUP_RESET: {

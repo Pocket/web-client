@@ -191,7 +191,6 @@ const topicStyle = css`
     background-color: var(--color-checkboxBackground);
     border-color: var(--color-checkboxHighlight);
     input[type='checkbox'] {
-      /* background-color: var(--color-checkboxBackground); */
       border-color: var(--color-checkboxHighlight);
     }
   }
