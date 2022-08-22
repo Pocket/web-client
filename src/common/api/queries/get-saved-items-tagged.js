@@ -53,7 +53,7 @@ export async function getSavedItemsTagged({
   pagination
 }) {
   const requestDetails = itemFiltersFromGraph[actionType]
-  if (!requestDetails) throw new MalformedTaggedItemRqeuestError()
+  if (!requestDetails) throw new MalformedTaggedItemRequestError()
 
   const { filter, sort } = requestDetails
   const variables = { filter: { ...filter, tagNames }, sort: { ...sort, sortOrder }, pagination }
@@ -73,9 +73,9 @@ function handleResponse(response) {
   return { pageInfo, edges, totalCount }
 }
 
-class MalformedTaggedItemRqeuestError extends Error {
+class MalformedTaggedItemRequestError extends Error {
   constructor(message) {
     super(message)
-    this.name = 'MalformedTaggedItemRqeuestError'
+    this.name = 'MalformedTaggedItemRequestError'
   }
 }
