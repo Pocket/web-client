@@ -103,14 +103,11 @@ function* fetchSettings() {
 function* saveSettings() {
   try {
     const storedSettings = yield select(getSettings)
-    const { settingsFetched, ...settingsRest } = storedSettings
-    if (!settingsFetched) throw new Error('Unable to save settings before retreiving them')
-
     const onboarding = yield select(getOnboarding)
     const brazeSubscribed = yield select(getBraze)
     const { setupStatus, userTopics } = yield select(getSetupState)
     const settings = {
-      ...settingsRest,
+      ...storedSettings,
       onboarding,
       brazeSubscribed,
       setupStatus,
