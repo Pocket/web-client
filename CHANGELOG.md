@@ -1,3 +1,10 @@
+## [1.59.1](https://github.com/Pocket/web-client/compare/v1.59.0...v1.59.1) (2022-08-18)
+
+
+### Bug Fixes
+
+* **recent saves:** adjust original view styling treatment for recent saves cards ([3d618cf](https://github.com/Pocket/web-client/commit/3d618cf4201f9472a56016a989d5b42ed175cbb6))
+
 # [1.59.0](https://github.com/Pocket/web-client/compare/v1.58.4...v1.59.0) (2022-08-17)
 
 
