@@ -48,6 +48,14 @@ export const getStartedActions = {
     },
     description: 'Clicking the “Continue” button on the panel after clicking “Skip”'
   },
+  'get-started.topic.cancel': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Clicking the “Cancel” button when reselecting topics'
+  },
   'get-started.reader.gohome': {
     eventType: 'engagement',
     entityTypes: ['ui'],

@@ -15,6 +15,7 @@ import { HOME_TOPIC_SELECTORS_SUCCESS } from 'actions'
 
 import { HOME_SETUP_SELECT_TOPIC } from 'actions'
 import { HOME_SETUP_DESELECT_TOPIC } from 'actions'
+import { HOME_SETUP_CANCEL_SELECTION } from 'actions'
 import { HOME_SETUP_FINALIZE_TOPICS } from 'actions'
 import { HOME_SETUP_RESELECT_TOPICS } from 'actions'
 import { HOME_SETUP_UPDATE_TOPICS } from 'actions'
@@ -36,6 +37,7 @@ export const setStoredUserTopics = (userTopics) => ({ type: HOME_SET_STORED_USER
 export const setSetupStatus = (setupStatus) => ({ type: HOME_SETUP_SET_STATUS, setupStatus })
 export const selectTopic = (topic) => ({ type: HOME_SETUP_SELECT_TOPIC, topic })
 export const deSelectTopic = (topic) => ({ type: HOME_SETUP_DESELECT_TOPIC, topic })
+export const cancelTopicSelection = () => ({ type: HOME_SETUP_CANCEL_SELECTION })
 export const finalizeTopics = () => ({ type: HOME_SETUP_FINALIZE_TOPICS })
 export const reSelectTopics = () => ({ type: HOME_SETUP_RESELECT_TOPICS })
 export const resetSetupMoment = () => ({ type: HOME_SETUP_RESET })
@@ -48,7 +50,9 @@ const initialState = {
   topicsSelectors: [],
   userTopics: [],
   storedTopicsReady: false,
-  finalizedTopics: false
+  finalizedTopics: false,
+  prevStatus: null,
+  prevTopics: null
 }
 
 export const homeSetupReducers = (state = initialState, action) => {
@@ -78,8 +82,25 @@ export const homeSetupReducers = (state = initialState, action) => {
       return { ...state, finalizedTopics: false }
     }
 
+    case HOME_SETUP_CANCEL_SELECTION: {
+      return {
+        ...state,
+        finalizedTopics: true,
+        setupStatus: state.prevStatus,
+        userTopics: state.prevTopics,
+        prevStatus: null,
+        prevTopics: null
+      }
+    }
+
     case HOME_SETUP_RESELECT_TOPICS: {
-      return { ...state, finalizedTopics: false, setupStatus: 'reselect' }
+      return {
+        ...state,
+        finalizedTopics: false,
+        setupStatus: 'reselect',
+        prevStatus: state.setupStatus,
+        prevTopics: state.userTopics
+      }
     }
 
     case HOME_SETUP_UPDATE_TOPICS: {

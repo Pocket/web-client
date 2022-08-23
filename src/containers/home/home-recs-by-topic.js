@@ -32,6 +32,12 @@ export const HomeRecsByTopic = ({ showReSelect }) => {
   const resetTopics = () => {
     dispatch(sendSnowplowEvent('get-started.topic.update'))
     dispatch(reSelectTopics())
+
+    window.scrollTo({
+      left: 0,
+      top: 0,
+      behavior: 'smooth'
+    })
   }
 
   return isFinalized || recsByTopic.length ? (

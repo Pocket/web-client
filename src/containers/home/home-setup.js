@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setSetupStatus } from 'containers/home/home-setup.state'
 import { selectTopic } from 'containers/home/home-setup.state'
 import { deSelectTopic } from 'containers/home/home-setup.state'
+import { cancelTopicSelection } from 'containers/home/home-setup.state'
 import { finalizeTopics } from 'containers/home/home-setup.state'
+import { reSelectTopics } from 'containers/home/home-setup.state'
 import { CloseButton } from 'components/close-button/close-button'
 
 import { breakpointLargeTablet } from 'common/constants'
@@ -234,6 +236,7 @@ export const HomeSetup = () => {
 
   const isSkipped = setupStatus === 'skipped'
   const isDismissed = setupStatus === 'dismissed'
+  const isReselect = setupStatus === 'reselect'
 
   const handleContinue = () => {
     dispatch(sendSnowplowEvent('get-started.topic.continue'))
@@ -250,8 +253,13 @@ export const HomeSetup = () => {
     dispatch(sendSnowplowEvent('get-started.topic.dismiss'))
   }
 
+  const handleCancel = () => {
+    dispatch(cancelTopicSelection())
+    dispatch(sendSnowplowEvent('get-started.topic.cancel'))
+  }
+
   const handleReselect = () => {
-    dispatch(setSetupStatus('reselect'))
+    dispatch(reSelectTopics())
     dispatch(sendSnowplowEvent('get-started.topic.reselect'))
   }
 
@@ -265,10 +273,11 @@ export const HomeSetup = () => {
       <SectionWrapper>
         <SectionToRender
           hasTopics={userTopics.length}
-          hideTitle={setupStatus === 'reselect'}
+          isReselect={isReselect}
           topicSelectors={topicsSelectors}
           handleSkip={handleSkip}
           handleContinue={handleContinue}
+          handleCancel={handleCancel}
           handleDismiss={handleDismiss}
           handleReselect={handleReselect}
         />
@@ -277,13 +286,20 @@ export const HomeSetup = () => {
   ) : null
 }
 
-const TopicSelector = ({ hideTitle, handleSkip, topicSelectors, handleContinue, hasTopics }) => {
+const TopicSelector = ({
+  isReselect,
+  handleSkip,
+  topicSelectors,
+  handleContinue,
+  handleCancel,
+  hasTopics
+}) => {
   return (
     <>
       <div className="body" style={{ backgroundImage: `url(${RainbowReader.src})` }}>
         <div className="copy">
           <LogoMark className="logo"/>
-          {!hideTitle ? <h2>Welcome to Pocket!</h2> : null}
+          {!isReselect ? <h2>Welcome to Pocket!</h2> : null}
           <h3>Tell us what interests you...</h3>
           <p>Pick the <strong>Topics</strong> you find interesting and we'll use these topics to find you more stories.</p>
         </div>
@@ -294,11 +310,16 @@ const TopicSelector = ({ hideTitle, handleSkip, topicSelectors, handleContinue, 
         </div>
       </div>
       <div className="actions">
-        {hasTopics ? null : (
+        {hasTopics || isReselect ? null : (
           <button onClick={handleSkip} className="text">
             Skip
           </button>
         )}
+        {isReselect ? (
+          <button onClick={handleCancel} className="text">
+            Cancel
+          </button>
+        ): null}
         <button
           onClick={handleContinue}
           disabled={!hasTopics}
