@@ -1,15 +1,15 @@
 import { put, call, select, takeEvery } from 'redux-saga/effects'
+import { itemFiltersFromGraph } from 'common/api/queries/get-saved-items.filters'
+
 import { ITEMS_SAVED_REQUEST } from 'actions'
 import { ITEMS_SAVED_SUCCESS } from 'actions'
 import { ITEMS_UPSERT_SUCCESS } from 'actions'
 import { ITEMS_UPSERT_INJECT } from 'actions'
 import { ITEMS_SAVED_FAILURE } from 'actions'
-import { ITEMS_SAVED_RECONCILED } from 'actions'
 import { MUTATION_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
 
 import { ITEMS_SAVED_PAGE_INFO_SUCCESS } from 'actions'
-import { ITEMS_SAVED_PAGE_INFO_FAILURE } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_FILTERS } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_ORDER } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_BY } from 'actions'
@@ -17,7 +17,6 @@ import { ITEMS_SAVED_SEARCH_REQUEST } from 'actions'
 import { ITEMS_SAVED_TAGGED_REQUEST } from 'actions'
 
 import { ITEM_SAVED_REMOVE_FROM_LIST } from 'actions'
-
 import { SEARCH_SAVED_ITEMS } from 'actions'
 import { SEARCH_SAVED_ITEMS_UNREAD } from 'actions'
 import { SEARCH_SAVED_ITEMS_ARCHIVED } from 'actions'
@@ -44,51 +43,42 @@ import { GET_ITEMS_TAGS } from 'actions'
 import { GET_ITEMS_TAGS_UNREAD } from 'actions'
 import { GET_ITEMS_TAGS_ARCHIVED } from 'actions'
 import { GET_ITEMS_TAGS_FAVORITES } from 'actions'
+import { ITEMS_CLEAR_CURRENT } from 'actions'
 import { LOAD_MORE_ITEMS } from 'actions'
-
-/** FILTERS
- --------------------------------------------------------------- */
-const UNREAD = { statuses: ['UNREAD'] }
-const ARCHIVED = { statuses: ['ARCHIVED'] }
-const ALL = { statuses: ['UNREAD', 'ARCHIVED'] }
-const FAVORITED = { isFavorite: true }
-const ANNOTATATED = { isHighlighted: true }
-const ARTICLE = { contentType: 'IS_READABLE' }
-const VIDEOS = { contentType: 'IS_VIDEO' }
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getItemsUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_UNREAD, filter: {...UNREAD}, searchTerm, sortOrder}) //prettier-ignore
-export const getItemsArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ARCHIVED, filter: {...ARCHIVED}, sortBy: 'ARCHIVED_AT', searchTerm, sortOrder}) //prettier-ignore
+export const getItemsUnread = (sortOrder) => ({ type: GET_ITEMS_UNREAD, sortOrder}) //prettier-ignore
+export const getItemsArchived = (sortOrder) => ({ type: GET_ITEMS_ARCHIVED, sortOrder }) //prettier-ignore
 
-export const getItemsFavorites = (searchTerm, sortOrder) => ({ type: GET_ITEMS_FAVORITES, filter: {...FAVORITED, ...ALL}, sortBy: 'FAVORITED_AT', searchTerm, sortOrder}) //prettier-ignore
-export const getItemsFavoritesUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_FAVORITES_UNREAD, filter: {...FAVORITED, ...UNREAD}, sortBy: 'FAVORITED_AT', searchTerm, sortOrder}) //prettier-ignore
-export const getItemsFavoritesArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_FAVORITES_ARCHIVED, filter: {...FAVORITED, ...ARCHIVED}, sortBy: 'FAVORITED_AT', searchTerm, sortOrder}) //prettier-ignore
+export const getItemsFavorites = (sortOrder) => ({ type: GET_ITEMS_FAVORITES, sortOrder}) //prettier-ignore
+export const getItemsFavoritesUnread = (sortOrder) => ({ type: GET_ITEMS_FAVORITES_UNREAD, sortOrder}) //prettier-ignore
+export const getItemsFavoritesArchived = (sortOrder) => ({ type: GET_ITEMS_FAVORITES_ARCHIVED, sortOrder}) //prettier-ignore
 
-export const getItemsAnnotated = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED, filter: { ...ANNOTATATED, ...ALL}, sortBy: 'CREATED_AT' , searchTerm, sortOrder}) //prettier-ignore
-export const getItemsAnnotatedUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_UNREAD, filter: {...ANNOTATATED, ...UNREAD}, sortBy: 'CREATED_AT', searchTerm, sortOrder}) //prettier-ignore
-export const getItemsAnnotatedArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_ARCHIVED, filter: {...ANNOTATATED, ...ARCHIVED }, sortBy: 'CREATED_AT', searchTerm, sortOrder}) //prettier-ignore
-export const getItemsAnnotatedFavorites = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ANNOTATED_FAVORITES, filter: {...ANNOTATATED, ...FAVORITED, ...ALL }, sortBy: 'CREATED_AT', searchTerm, sortOrder}) //prettier-ignore
+export const getItemsAnnotated = (sortOrder) => ({ type: GET_ITEMS_ANNOTATED, sortOrder}) //prettier-ignore
+export const getItemsAnnotatedUnread = (sortOrder) => ({ type: GET_ITEMS_ANNOTATED_UNREAD, sortOrder}) //prettier-ignore
+export const getItemsAnnotatedArchived = (sortOrder) => ({ type: GET_ITEMS_ANNOTATED_ARCHIVED, sortOrder}) //prettier-ignore
+export const getItemsAnnotatedFavorites = (sortOrder) => ({ type: GET_ITEMS_ANNOTATED_FAVORITES, sortOrder}) //prettier-ignore
 
-export const getItemsArticles = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ARTICLES, filter: { ...ARTICLE, ...ALL} , searchTerm, sortOrder}) //prettier-ignore
-export const getItemsArticlesUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ARTICLES_UNREAD, filter: { ...ARTICLE, ...UNREAD} , searchTerm, sortOrder}) //prettier-ignore
-export const getItemsArticlesArchived = (searchTerm, sortOrder) => ({type: GET_ITEMS_ARTICLES_ARCHIVED,filter: { ...ARTICLE, ...ARCHIVED  }, searchTerm, sortOrder}) //prettier-ignore
-export const getItemsArticlesFavorites = (searchTerm, sortOrder) => ({ type: GET_ITEMS_ARTICLES_FAVORITES, filter: {...ARTICLE, ...FAVORITED, ...ALL}, searchTerm, sortOrder}) //prettier-ignore
+export const getItemsArticles = (sortOrder) => ({ type: GET_ITEMS_ARTICLES, sortOrder}) //prettier-ignore
+export const getItemsArticlesUnread = (sortOrder) => ({ type: GET_ITEMS_ARTICLES_UNREAD, sortOrder}) //prettier-ignore
+export const getItemsArticlesArchived = (sortOrder) => ({type: GET_ITEMS_ARTICLES_ARCHIVED, sortOrder}) //prettier-ignore
+export const getItemsArticlesFavorites = (sortOrder) => ({ type: GET_ITEMS_ARTICLES_FAVORITES, sortOrder}) //prettier-ignore
 
-export const getItemsVideos = (searchTerm, sortOrder) => ({ type: GET_ITEMS_VIDEOS, filter: {...VIDEOS, ...ALL}, searchTerm, sortOrder}) //prettier-ignore
-export const getItemsVideosUnread = (searchTerm, sortOrder) => ({ type: GET_ITEMS_VIDEOS_UNREAD, filter: {...VIDEOS, ...UNREAD}, searchTerm, sortOrder}) //prettier-ignore
-export const getItemsVideosArchived = (searchTerm, sortOrder) => ({ type: GET_ITEMS_VIDEOS_ARCHIVED, filter: {...VIDEOS, ...ARCHIVED}, searchTerm, sortOrder}) //prettier-ignore
-export const getItemsVideosFavorites = (searchTerm, sortOrder) => ({ type: GET_ITEMS_VIDEOS_FAVORITES, filter: {...VIDEOS, ...FAVORITED, ...ALL}, searchTerm, sortOrder}) //prettier-ignore
+export const getItemsVideos = (sortOrder) => ({ type: GET_ITEMS_VIDEOS, sortOrder}) //prettier-ignore
+export const getItemsVideosUnread = (sortOrder) => ({ type: GET_ITEMS_VIDEOS_UNREAD, sortOrder}) //prettier-ignore
+export const getItemsVideosArchived = (sortOrder) => ({ type: GET_ITEMS_VIDEOS_ARCHIVED, sortOrder}) //prettier-ignore
+export const getItemsVideosFavorites = (sortOrder) => ({ type: GET_ITEMS_VIDEOS_FAVORITES, sortOrder}) //prettier-ignore
 
-export const getItemsTags = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS, filter: {tagNames, ...ALL}, searchTerm, sortOrder}) //prettier-ignore
-export const getItemsTagsUnread = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS_UNREAD, filter: {tagNames, ...UNREAD }, searchTerm, sortOrder}) //prettier-ignore
-export const getItemsTagsArchived = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS_ARCHIVED, filter: {tagNames, ...ARCHIVED}, searchTerm, sortOrder}) //prettier-ignore
-export const getItemsTagsFavorites = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS_FAVORITES, filter: {tagNames, ...FAVORITED, ...ALL}, searchTerm, sortOrder}) //prettier-ignore
+export const getItemsTags = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS, tagNames, sortOrder}) //prettier-ignore
+export const getItemsTagsUnread = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS_UNREAD, tagNames, sortOrder}) //prettier-ignore
+export const getItemsTagsArchived = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS_ARCHIVED, tagNames, sortOrder}) //prettier-ignore
+export const getItemsTagsFavorites = (searchTerm, sortOrder, tagNames) => ({ type: GET_ITEMS_TAGS_FAVORITES, tagNames, sortOrder}) //prettier-ignore
 
-export const searchItems = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS, filter: {status: 'UNREAD'}, searchTerm, sortOrder }) //prettier-ignore
-export const searchItemsUnread = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_UNREAD, filter: {status: 'UNREAD'}, searchTerm, sortOrder }) //prettier-ignore
-export const searchItemsArchived = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_ARCHIVED, filter: {status: 'ARCHIVED'}, searchTerm, sortOrder }) //prettier-ignore
-export const searchItemsFavorites = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_FAVORITES, filter: {...FAVORITED, status: 'UNREAD'}, searchTerm, sortOrder }) //prettier-ignore
+export const searchItems = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS, searchTerm, sortOrder }) //prettier-ignore
+export const searchItemsUnread = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_UNREAD, searchTerm, sortOrder }) //prettier-ignore
+export const searchItemsArchived = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_ARCHIVED, searchTerm, sortOrder }) //prettier-ignore
+export const searchItemsFavorites = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_FAVORITES, searchTerm, sortOrder }) //prettier-ignore
 
 export const savedItemsSetSortOrder = (sortOrder) => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER, sortOrder}) //prettier-ignore
 export const savedItemsSetSortBy = (sortBy) => ({ type: ITEMS_SAVED_PAGE_SET_SORT_BY, sortBy })
@@ -111,31 +101,10 @@ export const listSavedReducers = (state = [], action) => {
       return [...items]
     }
 
-    case SEARCH_SAVED_ITEMS:
-    case SEARCH_SAVED_ITEMS_UNREAD:
-    case SEARCH_SAVED_ITEMS_ARCHIVED:
-    case SEARCH_SAVED_ITEMS_FAVORITES:
-    case GET_ITEMS_UNREAD:
-    case GET_ITEMS_ARCHIVED:
-    case GET_ITEMS_FAVORITES:
-    case GET_ITEMS_FAVORITES_UNREAD:
-    case GET_ITEMS_FAVORITES_ARCHIVED:
-    case GET_ITEMS_ANNOTATED:
-    case GET_ITEMS_ANNOTATED_UNREAD:
-    case GET_ITEMS_ANNOTATED_ARCHIVED:
-    case GET_ITEMS_ANNOTATED_FAVORITES:
-    case GET_ITEMS_ARTICLES:
-    case GET_ITEMS_ARTICLES_UNREAD:
-    case GET_ITEMS_ARTICLES_ARCHIVED:
-    case GET_ITEMS_ARTICLES_FAVORITES:
-    case GET_ITEMS_VIDEOS:
-    case GET_ITEMS_VIDEOS_UNREAD:
-    case GET_ITEMS_VIDEOS_ARCHIVED:
-    case GET_ITEMS_VIDEOS_FAVORITES:
-    case GET_ITEMS_TAGS:
-    case GET_ITEMS_TAGS_UNREAD:
-    case GET_ITEMS_TAGS_ARCHIVED:
-    case GET_ITEMS_TAGS_FAVORITES: {
+    // ! This is agressive clearing of the list
+    // ! We should do some checking here and have an explicit
+    // ! clearing action
+    case ITEMS_CLEAR_CURRENT: {
       return []
     }
 
@@ -152,10 +121,10 @@ export const listSavedReducers = (state = [], action) => {
 /** PAGINATION REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  filter: {},
-  sortBy: 'CREATED_AT',
   sortOrder: 'DESC',
   count: 30,
+  totalCount: 0,
+  tagNames: [],
   error: false
 }
 export const listSavedPageInfoReducers = (state = initialState, action) => {
@@ -163,10 +132,10 @@ export const listSavedPageInfoReducers = (state = initialState, action) => {
     case ITEMS_SAVED_TAGGED_REQUEST:
     case ITEMS_SAVED_SEARCH_REQUEST:
     case ITEMS_SAVED_REQUEST: {
-      const { filters } = action
-      const { sortOrder, sortBy } = filters?.sort || {}
+      const { filters, actionType } = action
+      const { sortOrder } = filters?.sort || {}
 
-      return { ...state, error: false, loading: true, sortOrder, sortBy, ...filters }
+      return { ...state, error: false, loading: true, sortOrder, actionType }
     }
 
     case ITEMS_SAVED_PAGE_SET_FILTERS: {
@@ -239,7 +208,7 @@ export const listSavedSagas = [
       GET_ITEMS_TAGS_ARCHIVED,
       GET_ITEMS_TAGS_FAVORITES
     ],
-    requestItemsWithFilter
+    requestItems
   )
 ]
 
@@ -252,11 +221,11 @@ const getItems = (state) => state.items
  --------------------------------------------------------------- */
 function* reconcileMutation(action) {
   const { nodes } = action
-  const { filter } = yield select(getSavedPageInfo)
+  const { actionType } = yield select(getSavedPageInfo)
   const items = yield select(getItems)
 
   const idsToRemove = nodes
-    .filter((node) => shouldBeFiltered({ item: items[node?.id], node }, filter))
+    .filter((node) => shouldBeFiltered({ item: items[node?.id], node }, actionType))
     .map((node) => node.id)
 
   if (idsToRemove.length) yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, idsToRemove })
@@ -286,29 +255,33 @@ function* reconcileUpsert(action) {
   if (!notInFilter) yield put({ type: ITEMS_UPSERT_INJECT, savedItemIds })
 }
 
-function* requestItemsWithFilter(action) {
-  const { filter, sortBy = 'CREATED_AT', searchTerm } = action
-  const { sortOrder, count } = yield select(getSavedPageInfo)
-  const type = yield call(itemRequestType, searchTerm, filter?.tagNames)
+function* requestItems(action) {
+  const { searchTerm, type: actionType, tagNames } = action
+  const { sortOrder, count, actionType: previousActionType } = yield select(getSavedPageInfo)
 
-  yield put({ type, filters: { filter, sort: { sortOrder, sortBy }, count, searchTerm } })
+  if (actionType !== previousActionType) yield put({ type: ITEMS_CLEAR_CURRENT }) // Less aggressive clearing
+
+  const type = yield call(itemRequestType, searchTerm, tagNames)
+
+  yield put({ type, actionType, sortOrder, count, tagNames, searchTerm })
 }
 
 function* loadMoreItems() {
   try {
-    const { searchTerm, filter, sortOrder, sortBy, endCursor } = yield select(getSavedPageInfo)
+    const { searchTerm, filter, sortOrder, endCursor, actionType, tagNames } = yield select(
+      getSavedPageInfo
+    )
     const type = yield call(itemRequestType, searchTerm, filter?.tagNames)
 
     yield put({
       type,
-      filters: {
-        filter,
-        sort: { sortOrder, sortBy },
-        count: 30,
-        searchTerm,
-        pagination: {
-          after: endCursor
-        }
+      actionType,
+      sortOrder,
+      searchTerm,
+      tagNames,
+      count: 30,
+      pagination: {
+        after: endCursor
       }
     })
   } catch (err) {
@@ -316,7 +289,8 @@ function* loadMoreItems() {
   }
 }
 
-function shouldBeFiltered(itemDetails, filter) {
+function shouldBeFiltered(itemDetails, actionType) {
+  const { filter } = itemFiltersFromGraph[actionType] || {}
   const { item, node } = itemDetails
 
   if (node?.status === 'DELETED') return true

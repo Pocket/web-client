@@ -1,3 +1,14 @@
+## [1.59.2](https://github.com/Pocket/web-client/compare/v1.59.1...v1.59.2) (2022-08-22)
+
+
+### Bug Fixes
+
+* **item queries:** share the filters ([6484bc7](https://github.com/Pocket/web-client/commit/6484bc70178957a4ead38f01a5fb19f5f02a2a2d))
+* **queries:** update spelling for custom tagged error ([8780a26](https://github.com/Pocket/web-client/commit/8780a2659425fcb9731cea527a5ce23d421f39e2))
+* **search:** search doesn’t support statuses ([4de8ba0](https://github.com/Pocket/web-client/commit/4de8ba012e431d992cafc127312279074ee63885))
+* **search:** use proper count for graph searches ([73a09d2](https://github.com/Pocket/web-client/commit/73a09d272d52183e730d7792b5b93e1776759b3d))
+* **utilities:** add new line at the end of `strings` ([b2d4fe3](https://github.com/Pocket/web-client/commit/b2d4fe38e406363a26c2c06a656b0c5b6ab9df6d))
+
 ## [1.59.1](https://github.com/Pocket/web-client/compare/v1.59.0...v1.59.1) (2022-08-18)
 
 

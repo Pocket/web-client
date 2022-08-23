@@ -1,6 +1,8 @@
 import { requestGQL } from 'common/utilities/request/request'
 import { gql } from 'graphql-request'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
+import { itemFiltersFromGraph } from './get-saved-items.filters'
+import { actionToCamelCase } from 'common/utilities/strings/strings'
 
 const getSavedItemsQuery = gql`
   query GetSavedItems(
@@ -42,17 +44,15 @@ const getSavedItemsQuery = gql`
   }
   ${FRAGMENT_ITEM}
 `
+export async function getSavedItems({ actionType, sortOrder = 'DESC', tagNames, pagination }) {
+  const requestDetails = itemFiltersFromGraph[actionType]
+  if (!requestDetails) throw new MalformedItemRequestError()
 
-export async function getSavedItems({ filter, sort, pagination }) {
-  return requestGQL({
-    query: getSavedItemsQuery,
-    operationName: 'GetSavedItems',
-    variables: {
-      filter,
-      sort,
-      pagination
-    }
-  })
+  const { filter, sort } = requestDetails
+  const variables = { filter: { ...filter, tagNames }, sort: { ...sort, sortOrder }, pagination }
+  const operationName = actionToCamelCase(actionType)
+
+  return requestGQL({ query: getSavedItemsQuery, operationName, variables })
     .then(handleResponse)
     .catch((error) => console.error(error))
 }
@@ -64,4 +64,11 @@ function handleResponse(response) {
 
   const { pageInfo, edges, totalCount } = responseData
   return { pageInfo, edges, totalCount }
+}
+
+class MalformedItemRequestError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'MalformedItemRequestError'
+  }
 }
