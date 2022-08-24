@@ -7,43 +7,6 @@ export const POCKET_MODULE = 'syndicated_article'
 
 let PAGE_LOAD_ID = uuid()
 
-export function trackPublisherCTAImpression(publisher) {
-  GA.event({
-    category: 'Storypage',
-    action: 'Viewed Publisher CTA',
-    label: publisher,
-    nonInteraction: true
-  })
-}
-
-export function trackPublisherCTAClick(publisher) {
-  GA.event({
-    category: 'Storypage',
-    action: 'Clicked Publisher CTA',
-    label: publisher,
-    nonInteraction: true
-  })
-}
-
-export function trackEmailSubmitSuccess(formId) {
-  GA.event({
-    category: 'Storypage',
-    action: 'Newsletter Signup',
-    label: 'Pocket Hits',
-    value: 1,
-    nonInteraction: false
-  })
-}
-
-export function trackScrollDepth(depth) {
-  GA.event({
-    category: 'Storypage',
-    action: 'Scrolled Page',
-    label: `${depth}%`,
-    nonInteraction: true
-  })
-}
-
 // ?? Do we need to update this legacy callback?
 // ?? AND/OR
 // ?? Does this need to be adjusted to accept resolved_url

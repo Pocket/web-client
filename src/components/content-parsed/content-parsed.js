@@ -1,5 +1,4 @@
 import { css } from 'linaria'
-import { DepthTracking } from 'components/depth-tracking/depth-tracking'
 import {
   breakpointSmallTablet,
   breakpointMediumTablet,
@@ -402,28 +401,14 @@ const articleWrapper = css`
   ${breakpointTinyTablet} {
     grid-column-end: span 12;
   }
-
-  &.isMobileWebView {
-    grid-column-end: span 8;
-
-    ${breakpointMediumTablet} {
-      grid-column-end: span 7;
-    }
-
-    ${breakpointSmallTablet} {
-      grid-column-end: span 12;
-    }
-  }
 `
 
-export function ContentParsed({ content, trackScrollDepth }) {
+export function ContentParsed({ content }) {
   return (
     <article className={articleWrapper}>
-      <DepthTracking onScrollDepth={trackScrollDepth}>
-        <div className={resetWrapper} data-cy="parsed-content">
-          <section className={contentWrapper} dangerouslySetInnerHTML={{ __html: content }} />
-        </div>
-      </DepthTracking>
+      <div className={resetWrapper} data-cy="parsed-content">
+        <section className={contentWrapper} dangerouslySetInnerHTML={{ __html: content }} />
+      </div>
     </article>
   )
 }

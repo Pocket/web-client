@@ -22,8 +22,6 @@ import { AdRailBottom } from 'components/content-ads/content-ads'
 
 import { ContentParsed } from 'components/content-parsed/content-parsed'
 import { PublisherAttribution } from 'components/content-publisher/publisher-attribution'
-import { trackPublisherCTAImpression } from './syndicated-article.analytics'
-import { trackPublisherCTAClick } from './syndicated-article.analytics'
 
 import { saveArticleItem, unSaveArticleItem } from './syndicated-article.state'
 
@@ -31,7 +29,6 @@ import { PublisherRecs } from './publisher-recs'
 import { PocketRecs } from './pocket-recs'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { trackScrollDepth } from './syndicated-article.analytics'
 
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { Toasts } from 'connectors/toasts/toast-list'
@@ -120,6 +117,14 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     dispatch(sendSnowplowEvent('syndicated.topic.click', { label: topic }))
   }
 
+  const publisherImpression = (label) => {
+    dispatch(sendSnowplowEvent('syndicated.attribution.impression', { label }))
+  }
+
+  const publisherClick = (label) => {
+    dispatch(sendSnowplowEvent('syndicated.attribution.click', { label }))
+  }
+
   const showAuthors = authorNames?.length > 0
 
   return (
@@ -200,11 +205,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
             <div className="content-body">
               {/* Parsed Content */}
-              <ContentParsed
-                content={content}
-                trackScrollDepth={trackScrollDepth}
-                isMobileWebView={isMobileWebView}
-              />
+              <ContentParsed content={content} />
             </div>
           </section>
 
@@ -219,8 +220,8 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
               <PublisherAttribution
                 publisher={publisher}
                 publishedAt={publishedAt}
-                handlePublisherImpression={trackPublisherCTAImpression}
-                handlePublisherClick={trackPublisherCTAClick}
+                handlePublisherImpression={publisherImpression}
+                handlePublisherClick={publisherClick}
               />
             </footer>
           </section>

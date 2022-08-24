@@ -59,5 +59,25 @@ export const syndicatedArticleActions = {
     expects: ['label'],
     description:
       'Fired when a user clicks a topic in the `Discover More Topics` section at the bottom of the page'
+  },
+  'syndicated.attribution.click': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['label'],
+    description:
+      'Fired when a user clicks the link in the publisher attribution at the bottom of the page'
+  },
+  'syndicated.attribution.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['label'],
+    description:
+      'Fired when a user sees the link in the publisher attribution at the bottom of the page'
   }
 }
