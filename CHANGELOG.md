@@ -1,3 +1,10 @@
+## [1.59.5](https://github.com/Pocket/web-client/compare/v1.59.4...v1.59.5) (2022-08-24)
+
+
+### Bug Fixes
+
+* **home:** update link for recs header ([d1d437a](https://github.com/Pocket/web-client/commit/d1d437a3eea12192410b6a9c7142272542d4e42c))
+
 ## [1.59.4](https://github.com/Pocket/web-client/compare/v1.59.3...v1.59.4) (2022-08-23)
 
 

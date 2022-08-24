@@ -123,10 +123,18 @@ const cardMixHeaderStyle = css`
   align-items: center;
   align-content: center;
   .action {
-    font-size: 0.825rem;
     color: var(--color-actionPrimary);
     &:hover {
       color: var(--color-actionPrimaryHover);
+    }
+  }
+
+  ${breakpointMediumHandset} {
+    flex-direction: column;
+    align-items: flex-start;
+    .action {
+      margin-top: 0.5rem;
+      padding: 0;
     }
   }
 `
