@@ -232,8 +232,8 @@ function* reconcileMutation(action) {
 }
 
 function* reconcileDeleteMutation(action) {
-  const { id } = action
-  yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, idsToRemove: [id] })
+  const { ids } = action
+  yield put({ type: ITEM_SAVED_REMOVE_FROM_LIST, idsToRemove: ids })
 }
 
 function* reconcileUpsert(action) {

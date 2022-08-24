@@ -38,9 +38,13 @@ export const itemsSavedReducers = (state = {}, action) => {
     }
 
     case MUTATION_DELETE_SUCCESS: {
-      const { id } = action
-      const current = state[id]
-      return { ...state, [id]: { ...current, status: 'DELETED' } }
+      const { ids } = action
+      const updatedItems = ids.reduce((previous, current) => {
+        const id = current
+        return { ...previous, [id]: { ...state[id], status: 'DELETED' } }
+      }, {})
+
+      return { ...state, ...updatedItems }
     }
 
     case MUTATION_SUCCESS: {
