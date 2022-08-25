@@ -1,3 +1,11 @@
+## [1.59.6](https://github.com/Pocket/web-client/compare/v1.59.5...v1.59.6) (2022-08-24)
+
+
+### Bug Fixes
+
+* **delete:** update form factor to more concise ([b404a3e](https://github.com/Pocket/web-client/commit/b404a3e059324ed9e17386829824fb157902df8b))
+* **item actions:** wire up bulk delete ([0d265d7](https://github.com/Pocket/web-client/commit/0d265d751dac1d5535df3a55728da282d5d245f2))
+
 ## [1.59.5](https://github.com/Pocket/web-client/compare/v1.59.4...v1.59.5) (2022-08-24)
 
 
