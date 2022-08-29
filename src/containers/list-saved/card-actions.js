@@ -39,7 +39,7 @@ export function ActionsMyList({ id, position }) {
   if (!itemSaved || !item) return null
   const { isFavorite, isArchived, analyticsData: passedAnalyticsData, tags} = itemSaved //prettier-ignore
   const { givenUrl, permanentUrl } = item
-  const analyticsData = { ...passedAnalyticsData, id, position }
+  const analyticsData = { ...passedAnalyticsData, id, position, url: givenUrl }
 
   /** ITEM MENU ITEMS
   --------------------------------------------------------------- */

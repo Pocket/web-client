@@ -26,6 +26,8 @@ import { ITEMS_UNFAVORITE_FAILURE } from 'actions'
 
 import { ITEMS_SHARE_SUCCESS } from 'actions'
 import { ITEMS_SHARE_FAILURE } from 'actions'
+import { SHARE_RECOMMEND_SUCCESS } from 'actions'
+import { SHARE_RECOMMEND_FAILURE } from 'actions'
 
 import { COPY_ITEM_URL } from 'actions'
 
@@ -109,6 +111,8 @@ const messages = {
   [ITEMS_UNFAVORITE_FAILURE]: 'error-removing-from-favorites',
   [ITEMS_SHARE_SUCCESS]: 'shared',
   [ITEMS_SHARE_FAILURE]: 'error-sharing',
+  [SHARE_RECOMMEND_SUCCESS]: 'shared',
+  [SHARE_RECOMMEND_FAILURE]: 'error-sharing',
   [ITEMS_TAG_SUCCESS]: 'tagged',
   [ITEMS_TAG_FAILURE]: 'error-tagging',
   [ADD_SHARE_SUCCESS]: 'added',
