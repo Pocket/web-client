@@ -74,7 +74,8 @@ export const syndicatedArticleActions = {
     eventType: 'impression',
     entityTypes: ['ui'],
     eventData: {
-      uiType: 'button'
+      uiType: 'button',
+      component: 'button',
     },
     expects: ['label'],
     description:

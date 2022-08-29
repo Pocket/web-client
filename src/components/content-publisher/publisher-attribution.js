@@ -59,13 +59,16 @@ const AttributionWrapper = css`
 `
 
 function FollowPublisher({ leadIn, text, url, handleImpression, handleClick }) {
+  const onVisible = () => handleImpression(text)
+  const onClick = () => handleClick(text)
+
   return (
-    <VisibilitySensor onVisible={handleImpression}>
+    <VisibilitySensor onVisible={onVisible}>
       <div className="publisher-follow" data-cy="follow-publisher">
         <p>{leadIn}</p>
         <Button
           variant="secondary"
-          onClick={handleClick}
+          onClick={onClick}
           href={url}
           /* eslint-disable-next-line */
           target="_blank">
@@ -98,14 +101,6 @@ function PublisherAttribution({
   handlePublisherImpression,
   handlePublisherClick
 }) {
-  function handleImpression() {
-    handlePublisherImpression(publisher.name)
-  }
-
-  function handleClick() {
-    handlePublisherClick(publisher.name)
-  }
-
   return publisher ? (
     <cite className={AttributionWrapper}>
       <PublisherInfo
@@ -116,8 +111,8 @@ function PublisherAttribution({
       {publisher.articleCta ? (
         <FollowPublisher
           {...publisher.articleCta}
-          handleImpression={handleImpression}
-          handleClick={handleClick}
+          handleImpression={handlePublisherImpression}
+          handleClick={handlePublisherClick}
         />
       ) : null}
     </cite>
