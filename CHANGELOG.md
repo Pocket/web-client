@@ -1,3 +1,10 @@
+## [1.59.9](https://github.com/Pocket/web-client/compare/v1.59.8...v1.59.9) (2022-08-29)
+
+
+### Bug Fixes
+
+* **sort order:** fix error post list request overhaul ([fafc9c4](https://github.com/Pocket/web-client/commit/fafc9c498e47e6db3a588e99e887b9f641e94421))
+
 ## [1.59.8](https://github.com/Pocket/web-client/compare/v1.59.7...v1.59.8) (2022-08-29)
 
 
