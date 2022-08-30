@@ -45,7 +45,7 @@ export const ShareModalConnector = () => {
       externalUrl={externalUrl}
       thumbnail={thumbnail}
       quote={quote}
-      showModal={itemId !== false}
+      showModal={!!itemId}
       cancelShare={cancelShare}
       engagementEvent={engagementEvent}
       recommendEvent={recommendEvent}
