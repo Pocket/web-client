@@ -94,6 +94,11 @@ export const listSavedReducers = (state = [], action) => {
       const items = new Set([...state, ...itemIds])
       return [...items]
     }
+    case ITEMS_SAVED_PAGE_SET_SORT_ORDER: {
+      const {sortOrder: passedSortOrder} = action
+      if(state.sortOrder !== passedSortOrder) return []
+      return state
+    }
 
     case ITEMS_UPSERT_INJECT: {
       const itemIds = action?.savedItemIds || []
