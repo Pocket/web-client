@@ -17,7 +17,8 @@ const audioStyles = css`
   audio {
     display: inline-block;
     width: 100%;
-    border-radius: 4px;
+    height: 42px;
+    border-radius: 22px;
     border: 1px solid var(--color-textSecondary);
   }
 
