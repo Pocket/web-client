@@ -873,7 +873,6 @@ export const cardStyles = css`
           padding: var(--spacing050) 0;
         }
         .title {
-          padding: var(--spacing100) 0 0;
           max-height: calc(1em * 5.25);
           &.flow {
             max-height: initial;
