@@ -159,7 +159,7 @@ function* homeLineupRequest(action) {
 
 function* recentDataRequest() {
   try {
-    const { items, itemsById, error } = yield fetchMyListData({
+    const { itemsById, error } = yield fetchMyListData({
       count: 3,
       offset: 0,
       state: 'unread',
@@ -168,9 +168,13 @@ function* recentDataRequest() {
     if (error) yield put({ type: HOME_RECENT_SAVES_FAILURE, error })
 
     // Remove default item for Home Experiment
-    const itemsNoDefault = items.filter((item) => item !== '2333373270' && item !== '3242033017')
+    const notAllowed = ['2333373270', '3242033017']
+    const items = Object.values(itemsById)
+      .filter((item) => !notAllowed.includes(item.itemId))
+      .sort((a, b) => b._createdAt - a._createdAt)
+      .map((item) => item.itemId)
 
-    yield put({ type: HOME_RECENT_SAVES_SUCCESS, items: itemsNoDefault, itemsById }) // prettier-ignore
+    yield put({ type: HOME_RECENT_SAVES_SUCCESS, items, itemsById }) // prettier-ignore
   } catch (error) {
     console.warn(error)
     yield put({ type: HOME_RECENT_SAVES_FAILURE, error })
@@ -271,12 +275,9 @@ export async function fetchMyListData(params) {
     const total = response.total
 
     const derivedItems = Object.values(response.list).map((item) => deriveListItem(item, true))
-
-    const items = derivedItems.map((item) => item.itemId)
-
     const itemsById = arrayToObject(derivedItems, 'itemId')
 
-    return { items, itemsById, total }
+    return { itemsById, total }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.warn('discover.state', error)

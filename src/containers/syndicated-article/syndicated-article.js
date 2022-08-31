@@ -32,6 +32,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { Toasts } from 'connectors/toasts/toast-list'
+import { ListenLogin as Listen } from 'connectors/listen/listen-login'
 
 // Possible query params passed via url
 const validParams = {
@@ -164,6 +165,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
                 saveStatus={saveStatus}
                 url={url}
               />
+              <Listen itemId={itemId} path={url} />
             </header>
           </section>
 

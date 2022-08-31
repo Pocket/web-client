@@ -4,6 +4,7 @@ import { discoverActions } from './discover'
 import { globalNavActions } from './global-nav'
 import { homeActions } from './home'
 import { getStartedActions } from './get-started'
+import { listenActions } from './listen'
 import { modalActions } from './modals'
 import { myListActions } from './my-list'
 import { onboardingActions } from './onboarding'
@@ -22,6 +23,7 @@ export const analyticsActions = {
   ...globalNavActions,
   ...homeActions,
   ...getStartedActions,
+  ...listenActions,
   ...modalActions,
   ...myListActions,
   ...onboardingActions,

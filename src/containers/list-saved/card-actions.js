@@ -37,9 +37,9 @@ export function ActionsMyList({ id, position }) {
   const item = useSelector((state) => state.items[id])
 
   if (!itemSaved || !item) return null
-  const { isFavorite, isArchived, analyticsData: passedAnalyticsData, tags} = itemSaved //prettier-ignore
-  const { givenUrl, permanentUrl } = item
-  const analyticsData = { ...passedAnalyticsData, id, position }
+  const { isFavorite, isArchived, tags} = itemSaved //prettier-ignore
+  const { givenUrl, permanentUrl, analyticsData: passedAnalyticsData } = item
+  const analyticsData = { ...passedAnalyticsData, position }
 
   /** ITEM MENU ITEMS
   --------------------------------------------------------------- */

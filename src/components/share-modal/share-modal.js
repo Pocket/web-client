@@ -1,10 +1,13 @@
 import { css } from 'linaria'
+import { useState } from 'react'
 import { useTranslation } from 'next-i18next'
 
-import { Modal, ModalBody } from 'components/modal/modal'
+import { Modal, ModalBody, ModalTabs } from 'components/modal/modal'
 
 import { Card } from 'components/item-card/card'
+import { SelectShareType } from './share-selector'
 import { ShareList } from './share-list'
+import { ShareRecommend } from './share-recommend'
 
 const shareQuote = css`
   margin: var(--spacing050) 0;
@@ -16,7 +19,6 @@ const shareQuote = css`
 `
 
 export const ShareModal = ({
-  id,
   title,
   publisher,
   excerpt,
@@ -27,9 +29,13 @@ export const ShareModal = ({
   quote,
   showModal,
   cancelShare,
-  engagementEvent
+  engagementEvent,
+  recommendEvent
 }) => {
   const { t } = useTranslation()
+  const [active, setActive] = useState('social')
+
+  const activate = (tab) => setActive(tab)
 
   return (
     <Modal
@@ -51,16 +57,22 @@ export const ShareModal = ({
         />
         {quote ? <p className={shareQuote}>{quote}</p> : null}
       </ModalBody>
-
-      <ShareList
-        openUrl={externalUrl}
-        excerpt={excerpt}
-        title={title}
-        itemId={id}
-        quote={quote}
-        engagementEvent={engagementEvent}
-        cancelShare={cancelShare}
-      />
+      <ModalTabs>
+        <SelectShareType active={active} activate={activate} />
+        {active === 'social' ? (
+          <ShareList
+            openUrl={externalUrl}
+            excerpt={excerpt}
+            title={title}
+            quote={quote}
+            engagementEvent={engagementEvent}
+            cancelShare={cancelShare}
+          />
+        ) : null}
+        {active === 'recommend' ? (
+          <ShareRecommend recommendEvent={recommendEvent} />
+        ) : null}
+      </ModalTabs>
     </Modal>
   )
 }

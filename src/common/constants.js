@@ -14,6 +14,7 @@ export const COLOR_MODE_PREFIX = 'colormode'
 export const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
 export const LINE_HEIGHT = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
 export const COLUMN_WIDTH = [531, 574, 632, 718, 826, 933, 1041]
+export const LISTEN_SPEEDS = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 3]
 
 export const CACHE_KEY_COLOR_MODE = 'pocket-color-mode'
 export const CACHE_KEY_LIST_MODE = 'pocket-list-mode'

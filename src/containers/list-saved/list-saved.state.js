@@ -123,6 +123,7 @@ export const listSavedReducers = (state = [], action) => {
 const initialState = {
   sortOrder: 'DESC',
   count: 30,
+  loading: true,
   totalCount: 0,
   tagNames: [],
   error: false
@@ -132,9 +133,7 @@ export const listSavedPageInfoReducers = (state = initialState, action) => {
     case ITEMS_SAVED_TAGGED_REQUEST:
     case ITEMS_SAVED_SEARCH_REQUEST:
     case ITEMS_SAVED_REQUEST: {
-      const { filters, actionType } = action
-      const { sortOrder } = filters?.sort || {}
-
+      const { sortOrder = 'DESC', actionType } = action
       return { ...state, error: false, loading: true, sortOrder, actionType }
     }
 

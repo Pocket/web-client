@@ -1,3 +1,44 @@
+# [1.60.0](https://github.com/Pocket/web-client/compare/v1.59.11...v1.60.0) (2022-08-31)
+
+
+### Bug Fixes
+
+* **audio:** add border to audio player to add contrast on dark theme ([8c5c45e](https://github.com/Pocket/web-client/commit/8c5c45ed5f9bb99c8f1a3a7bd2450fad87a8ca7d))
+* **listen:** add listen icon to audio portion ([e3dbc34](https://github.com/Pocket/web-client/commit/e3dbc34bf24774662504a96e6d0fe87e991a7000))
+* **listen:** add sign up option when logged out ([11b5fef](https://github.com/Pocket/web-client/commit/11b5fefa2450e1398fb83c7ff4bc40f8260269cf))
+* **listen:** add snowplow events ([1c67c8c](https://github.com/Pocket/web-client/commit/1c67c8cef6c1dde48c1aa33f934b83d4b40d124b))
+* **listen:** cleanup and tightening up ([222aad8](https://github.com/Pocket/web-client/commit/222aad884ff09911d9532cb68034de15a1356cd6))
+* **listen:** file renaming ([3949477](https://github.com/Pocket/web-client/commit/39494771730ec8595cf9d9cb04034e1fac2a8fbe))
+* **listen:** updating listen styles to match figma design ([c6141b8](https://github.com/Pocket/web-client/commit/c6141b8873419bc5427692c967350a9e610dfcdf))
+
+
+### Features
+
+* **listen:** adding listen proof of concept to syndicated articles ([276533c](https://github.com/Pocket/web-client/commit/276533c67b499ff7ce563950f6d9d23a81976681))
+
+## [1.59.11](https://github.com/Pocket/web-client/compare/v1.59.10...v1.59.11) (2022-08-31)
+
+
+### Bug Fixes
+
+* **home:** fix recent saves sort order ([59951aa](https://github.com/Pocket/web-client/commit/59951aa17af12eb6fb323325a8ed8101fa23b1d0))
+
+## [1.59.10](https://github.com/Pocket/web-client/compare/v1.59.9...v1.59.10) (2022-08-30)
+
+
+### Bug Fixes
+
+* **card-actions:** grabbing analytics data from item instead of itemsaved ([36211a2](https://github.com/Pocket/web-client/commit/36211a2471f3cc78ee32301302147a008d1b6c16))
+* **share:** adding recommend to the pocket-graph implementation of share ([5d63122](https://github.com/Pocket/web-client/commit/5d631225b41e2ce3ee59954662680ef7b1cb6b08))
+* **share:** changing item id does not equal false to double apostrophe itemid ([0edad41](https://github.com/Pocket/web-client/commit/0edad41d2ff07993ccdcce10c82191ab5138ade5))
+
+## [1.59.9](https://github.com/Pocket/web-client/compare/v1.59.8...v1.59.9) (2022-08-29)
+
+
+### Bug Fixes
+
+* **sort order:** fix error post list request overhaul ([fafc9c4](https://github.com/Pocket/web-client/commit/fafc9c498e47e6db3a588e99e887b9f641e94421))
+
 ## [1.59.8](https://github.com/Pocket/web-client/compare/v1.59.7...v1.59.8) (2022-08-29)
 
 
