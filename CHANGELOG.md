@@ -1,3 +1,11 @@
+## [1.60.2](https://github.com/Pocket/web-client/compare/v1.60.1...v1.60.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* **card base css:** remove lockup-showcase - not used ([f6a83bf](https://github.com/Pocket/web-client/commit/f6a83bf0d04aed05b67ffa48834d767d124e4601))
+* **card base:** remove padding-top on title of hero item in lockup on small screens ([16ab784](https://github.com/Pocket/web-client/commit/16ab7840795fbe38ea68bef2fd975f3d4f9ab4f1))
+
 ## [1.60.1](https://github.com/Pocket/web-client/compare/v1.60.0...v1.60.1) (2022-08-31)
 
 
