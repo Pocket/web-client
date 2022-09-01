@@ -1,3 +1,10 @@
+## [1.60.1](https://github.com/Pocket/web-client/compare/v1.60.0...v1.60.1) (2022-08-31)
+
+
+### Bug Fixes
+
+* **listen:** cleanup border so it looks good across both firefox and chrome ([636f0fd](https://github.com/Pocket/web-client/commit/636f0fd6e3f3001167d24f92e5f82862255b7fc9))
+
 # [1.60.0](https://github.com/Pocket/web-client/compare/v1.59.11...v1.60.0) (2022-08-31)
 
 
