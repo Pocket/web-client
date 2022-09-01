@@ -17,17 +17,15 @@ const audioStyles = css`
   audio {
     display: inline-block;
     width: 100%;
-    height: 42px;
-    border-radius: 22px;
-    border: 1px solid var(--color-textSecondary);
+    height: 40px;
+    border-radius: 4px;
   }
 
   select {
-    cursor: pointer;
-    margin: 1px 0 1px 10px; // 1px margins make up for accent border on audio element
+    margin-left: 10px;
     width: 80px;
     min-width: 80px;
-    height: 2.5rem;
+    height: 40px;
     display: inline-block;
   }
 `
