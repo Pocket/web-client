@@ -5,6 +5,7 @@ import Popup from 'components/popup/popup'
 import Modal from 'components/modal/modal'
 import { useViewport } from 'components/viewport-provider/viewport-provider'
 import { screenLargeHandset, breakpointLargeHandset } from 'common/constants'
+import Link from 'node_modules/next/link'
 
 const popupStyle = css`
   // make sure this style has precedence over built in popup styles
@@ -145,9 +146,11 @@ export const PopupMenuItem = ({
   return (
     <li className={cx(itemStyle, className)}>
       {href ? (
-        <a href={href} id={id} {...remaining}>
-          {getContent()}
-        </a>
+        <Link href={href}>
+          <a id={id} {...remaining}>
+            {getContent()}
+          </a>
+        </Link>
       ) : (
         <button type="button" id={id} {...remaining}>
           {getContent()}
