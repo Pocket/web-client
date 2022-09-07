@@ -5,7 +5,7 @@ import Popup from 'components/popup/popup'
 import Modal from 'components/modal/modal'
 import { useViewport } from 'components/viewport-provider/viewport-provider'
 import { screenLargeHandset, breakpointLargeHandset } from 'common/constants'
-import Link from 'node_modules/next/link'
+import Link from 'next/link'
 
 const popupStyle = css`
   // make sure this style has precedence over built in popup styles
