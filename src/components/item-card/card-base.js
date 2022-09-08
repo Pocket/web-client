@@ -84,10 +84,14 @@ export const cardStyles = css`
   .view-original {
     opacity: 0;
     transition: opacity 300ms ease-in-out;
-    background: rgba(26, 26, 26, 0.8);
+    background: rgba(26, 26, 26, 0.7);
     color: var(--color-white100);
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    right: 0;
     z-index: 10;
     padding: 0.25rem 0.825rem;
     border-radius: 4px;
@@ -98,6 +102,7 @@ export const cardStyles = css`
 
     .view-original-text + .icon {
       margin-left: 0.25rem;
+      margin-top: 0;
     }
   }
 
