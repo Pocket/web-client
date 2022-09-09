@@ -86,11 +86,13 @@ export const cardStyles = css`
     transition: opacity 300ms ease-in-out;
     background: rgba(26, 26, 26, 0.7);
     color: var(--color-white100);
-    display: flex;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    align-content: center;
     position: absolute;
     z-index: 10;
     padding: 0.25rem 0.825rem;
