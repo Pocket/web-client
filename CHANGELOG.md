@@ -1,3 +1,11 @@
+## [1.60.5](https://github.com/Pocket/web-client/compare/v1.60.4...v1.60.5) (2022-09-08)
+
+
+### Bug Fixes
+
+* **waypoint:** add a conditional to accept-language header ([c9de21d](https://github.com/Pocket/web-client/commit/c9de21d82a4f1c722ffcf4b0187ec0754807bfd8))
+* **waypoint:** add error handling for no cookie and no user ([a1d2a72](https://github.com/Pocket/web-client/commit/a1d2a72ffa7cd51ee313ed602e3257bc2abdade5))
+
 ## [1.60.4](https://github.com/Pocket/web-client/compare/v1.60.3...v1.60.4) (2022-09-07)
 
 

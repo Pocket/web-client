@@ -9,7 +9,7 @@ export default function Waypoint() {}
 export async function getServerSideProps({ req, locale, query, defaultLocale, locales }) {
   try {
     // returns first two letters of browser defined language settings
-    const lang = req.headers['accept-language'].toString().substring(0, 2)
+    const lang = req.headers['accept-language']?.toString().substring(0, 2)
     const supportedLocale = locales.includes(lang)
     const langPrefix = lang !== defaultLocale && supportedLocale ? `/${lang}` : ''
     // const isSignUp = query['type'] === 'signup'
@@ -22,13 +22,17 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
 
     const myListLink = queryString.stringifyUrl({ url: `${langPrefix}/my-list`, query })
     const homeLink = queryString.stringifyUrl({ url: '/home', query })
+
     const { sess_guid } = req.cookies
+    if (!sess_guid) throw new WaypointNoSessGuidError()
+
     const response = await getUserInfo(true, req?.headers?.cookie)
+    const { user_id, birth } = response?.user || {}
+    if (!user_id) throw new WaypointNoUserIdError()
 
     // Not logged in, or something else went awry?
     // !! NOTE: this will redirect to my list 100% of the time on localhost
-    const { user_id, birth } = response?.user || {}
-    if (!user_id || !birth || !sess_guid || nonEnglish) {
+    if (!birth || nonEnglish) {
       return {
         redirect: {
           permanent: false,
@@ -62,5 +66,19 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
         destination: '/my-list'
       }
     }
+  }
+}
+
+class WaypointNoSessGuidError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'WaypointNoSessGuidError'
+  }
+}
+
+class WaypointNoUserIdError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'WaypointNoUserIdError'
   }
 }
