@@ -1,3 +1,10 @@
+## [1.60.6](https://github.com/Pocket/web-client/compare/v1.60.5...v1.60.6) (2022-09-12)
+
+
+### Bug Fixes
+
+* **snowplow:** adding an error when snowplow injection fails ([d171f25](https://github.com/Pocket/web-client/commit/d171f25ab56c42a3393e542eb0fe0f91a9435c95))
+
 ## [1.60.5](https://github.com/Pocket/web-client/compare/v1.60.4...v1.60.5) (2022-09-08)
 
 

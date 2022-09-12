@@ -6,6 +6,7 @@ import { SNOWPLOW_ANONYMOUS_CONFIG } from 'common/constants'
 import { createUserEntity, apiUserEntity } from 'connectors/snowplow/entities'
 import { injectInlineScript } from 'common/utilities/inject-script'
 import { SNOWPLOW_SCRIPT } from 'common/constants'
+import * as Sentry from '@sentry/nextjs'
 
 /**
  * Load the Snowplow script onto the page. Should be called within the document <head>.
@@ -21,32 +22,48 @@ function loadSnowplow(snowplowInstanceName) {
 }
 
 export function initializeSnowplow(user_id, sess_guid, cookied, finalizeInit) {
-  // load snowplow scripts
-  loadSnowplow('snowplow')
+  try {
+    // load snowplow scripts
+    loadSnowplow('snowplow')
+    if (!snowplow) throw new SnowplowInjectionError()
 
-  // configure snowplow
-  const snowplowConfig = (cookied) ? SNOWPLOW_CONFIG : SNOWPLOW_ANONYMOUS_CONFIG
-  snowplow('newTracker', 'sp', SNOWPLOW_COLLECTOR, snowplowConfig)
+    // configure snowplow
+    const snowplowConfig = (cookied) ? SNOWPLOW_CONFIG : SNOWPLOW_ANONYMOUS_CONFIG
+    snowplow('newTracker', 'sp', SNOWPLOW_COLLECTOR, snowplowConfig)
 
-  // enable activity monitoring (heartbeat)
-  snowplow('enableActivityTracking', {
-    minimumVisitLength: SNOWPLOW_HEARTBEAT_DELAY,
-    heartbeatDelay: SNOWPLOW_HEARTBEAT_INTERVAL
-  })
+    // enable activity monitoring (heartbeat)
+    snowplow('enableActivityTracking', {
+      minimumVisitLength: SNOWPLOW_HEARTBEAT_DELAY,
+      heartbeatDelay: SNOWPLOW_HEARTBEAT_INTERVAL
+    })
 
-  // automatic link tracking
-  snowplow('enableLinkClickTracking')
+    // automatic link tracking
+    snowplow('enableLinkClickTracking')
 
-  // automatic form elements tracking
-  snowplow('enableFormTracking')
+    // automatic form elements tracking
+    snowplow('enableFormTracking')
 
-  // add User entity to Snowplow global context
-  const userEntity = createUserEntity(user_id, sess_guid)
-  const globalContexts = [userEntity, apiUserEntity]
-  snowplow('addGlobalContexts', globalContexts)
+    // add User entity to Snowplow global context
+    const userEntity = createUserEntity(user_id, sess_guid)
+    const globalContexts = [userEntity, apiUserEntity]
+    snowplow('addGlobalContexts', globalContexts)
 
-  // no analytics cookies allowed, make sure user data is clean
-  if (!cookied) snowplow('clearUserData')
+    // no analytics cookies allowed, make sure user data is clean
+    if (!cookied) snowplow('clearUserData')
 
-  finalizeInit()
+    finalizeInit()
+  } catch (err) {
+    Sentry.withScope((scope) => {
+      scope.setTag('snowplow')
+      scope.setFingerprint('Snowplow Error')
+      Sentry.captureMessage(err)
+    })
+  }
+}
+
+class SnowplowInjectionError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'SnowplowInjectionError'
+  }
 }
