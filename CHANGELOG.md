@@ -1,3 +1,13 @@
+## [1.60.7](https://github.com/Pocket/web-client/compare/v1.60.6...v1.60.7) (2022-09-13)
+
+
+### Bug Fixes
+
+* **card base:** add flex wrap styling ([2a9e541](https://github.com/Pocket/web-client/commit/2a9e5413fc4e787eeb05134d0e742dc1a263d9de))
+* **card base:** adjust view original styles ([4788fb1](https://github.com/Pocket/web-client/commit/4788fb1cdf71e7f69ef29a1d3feb62048d0c38e8))
+* **package.json:** bump web-localization ([2856515](https://github.com/Pocket/web-client/commit/2856515462a0f22be3c450ba1b186a43537c2832))
+* **view original:** rename everything back to view original ([c9fb5d8](https://github.com/Pocket/web-client/commit/c9fb5d8b427522e7ccec6bc160f8573cf736af90))
+
 ## [1.60.6](https://github.com/Pocket/web-client/compare/v1.60.5...v1.60.6) (2022-09-12)
 
 
