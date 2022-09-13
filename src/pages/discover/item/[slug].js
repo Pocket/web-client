@@ -28,7 +28,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       }
 
       if (response?.status === 'EXPIRED') {
-        res.writeHead(301, { Location: response.publisherUrl })
+        res.writeHead(302, { Location: response.publisherUrl })
         res.end()
       }
 
