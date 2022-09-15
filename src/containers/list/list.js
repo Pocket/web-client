@@ -32,6 +32,8 @@ import { BulkDeleteModal } from 'connectors/confirm-delete/confirm-bulk-delete'
 import { BulkArchiveModal } from 'connectors/confirm-archive/confirm-bulk-archive'
 import { ShareModalConnector } from 'connectors/share-modal/share-modal'
 
+import { GermanCollection } from 'connectors/marketing/german-collection'
+
 export const List = (props) => {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -59,6 +61,9 @@ export const List = (props) => {
   const useApiNext = featureFlagActive({ flag: 'api.next', featureState })
   const sortOrder = useApiNext ? savedSortOrder : legacySortOrder
 
+  const showCollectionBanner = featureFlagActive({ flag: 'german.collection', featureState })
+  const CollectionBanner = (showCollectionBanner && subset === 'unread') ? GermanCollection : null
+
   const { flagsReady } = featureState
   const LegacyList = searchTerm ? SearchList : MyList
   const ListToRender = useApiNext ? ListSaved : LegacyList
@@ -76,7 +81,13 @@ export const List = (props) => {
   const total = useApiNext ? graphTotal : v3Total
 
   return (
-    <Layout title={metaData.title} metaData={metaData} subset={subset} tag={tag}>
+    <Layout
+      title={metaData.title}
+      metaData={metaData}
+      subset={subset}
+      tag={tag}
+      ShowBanner={CollectionBanner}
+    >
       <SideNav type="my-list" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
       <main className="main">
         <SuccessFXA type="my-list" />

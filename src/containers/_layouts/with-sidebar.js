@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import Head from 'next/head'
 import { css } from 'linaria'
 import { GlobalFooter } from 'components/global-footer/global-footer'
 import { PageContainer } from 'components/page-container/page-container'
@@ -49,12 +48,14 @@ function mainLayout({
   subset,
   tag,
   selectedNavLink,
-  isFullWidthLayout
+  isFullWidthLayout,
+  ShowBanner = null
 }) {
   return (
     <>
       <PocketHead title={title} canonical={canonical} metaData={metaData} />
       <GlobalNav selectedLink={selectedNavLink} subset={subset} tag={tag} />
+      {ShowBanner ? <ShowBanner/> : null}
       <div className={fixedNavContainer}>
         {isFullWidthLayout ? (
           children
