@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { css, cx } from 'linaria'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import RainbowReader from 'static/images/rainbow-reader-transparent.svg'
@@ -10,6 +11,7 @@ import { cancelTopicSelection } from 'containers/home/home-setup.state'
 import { finalizeTopics } from 'containers/home/home-setup.state'
 import { reSelectTopics } from 'containers/home/home-setup.state'
 import { CloseButton } from 'components/close-button/close-button'
+import { getTopicSelectors } from 'containers/home/home-setup.state'
 
 import { breakpointLargeTablet } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
@@ -42,9 +44,8 @@ const homeSetupStyles = css`
 
     .colormode-dark &,
     .colormode-sepia & {
-      border-bottom-color: var(--color-dividerSecondary)
+      border-bottom-color: var(--color-dividerSecondary);
     }
-
   }
   .copy {
     grid-column: 1 / span 8;
@@ -56,7 +57,8 @@ const homeSetupStyles = css`
   .logo {
     margin-bottom: 1rem;
   }
-  h2, h3 {
+  h2,
+  h3 {
     font-family: var(--fontSerifAlt);
     font-weight: 500;
     font-size: 40px;
@@ -229,10 +231,15 @@ const TopicButton = ({ topic }) => {
 
 export const HomeSetup = () => {
   const dispatch = useDispatch()
+
   const setupStatus = useSelector((state) => state.homeSetup.setupStatus)
   const topicsSelectors = useSelector((state) => state.homeSetup.topicsSelectors)
   const userTopics = useSelector((state) => state.homeSetup.userTopics)
   const isFinalized = useSelector((state) => state.homeSetup.finalizedTopics)
+
+  useEffect(() => {
+    dispatch(getTopicSelectors())
+  }, [dispatch])
 
   const isSkipped = setupStatus === 'skipped'
   const isDismissed = setupStatus === 'dismissed'
@@ -298,10 +305,13 @@ const TopicSelector = ({
     <>
       <div className="body" style={{ backgroundImage: `url(${RainbowReader.src})` }}>
         <div className="copy">
-          <LogoMark className="logo"/>
+          <LogoMark className="logo" />
           {!isReselect ? <h2>Welcome to Pocket!</h2> : null}
           <h3>Tell us what interests you...</h3>
-          <p>Pick the <strong>Topics</strong> you find interesting and we'll use these topics to find you more stories.</p>
+          <p>
+            Pick the <strong>Topics</strong> you find interesting and we'll use these topics to find
+            you more stories.
+          </p>
         </div>
         <div className={topicSelectorStyle}>
           {topicSelectors.map((topic) => (
@@ -319,7 +329,7 @@ const TopicSelector = ({
           <button onClick={handleCancel} className="text">
             Cancel
           </button>
-        ): null}
+        ) : null}
         <button
           onClick={handleContinue}
           disabled={!hasTopics}
@@ -342,10 +352,7 @@ const PersonalizeMessage = ({ handleReselect, handleDismiss }) => {
         <button onClick={handleReselect}>Continue</button>
       </div>
 
-      <CloseButton
-        handleClose={handleDismiss}
-        dataCy="get-started-dismiss"
-      />
+      <CloseButton handleClose={handleDismiss} dataCy="get-started-dismiss" />
     </div>
   )
 }
