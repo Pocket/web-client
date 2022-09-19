@@ -76,7 +76,7 @@ export const Home = ({ metaData }) => {
 
   // We can no longer wait on topic mix since there is a possibility userTopics will exist
   // but we are no ready to render
-  const shouldRenderTopicMix = storedTopicsReady && userTopics.length && !isPersonalized
+  const shouldRenderTopicMix = false // storedTopicsReady && userTopics.length && !isPersonalized
 
   useEffect(() => {
     if (userStatus !== 'valid' || !lineupFlag) return

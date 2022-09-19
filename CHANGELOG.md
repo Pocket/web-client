@@ -1,3 +1,10 @@
+## [1.60.9](https://github.com/Pocket/web-client/compare/v1.60.8...v1.60.9) (2022-09-15)
+
+
+### Bug Fixes
+
+* **home:** removing topic mix until endpoints are sorted ([37c8f4b](https://github.com/Pocket/web-client/commit/37c8f4b80af1f829012a7bae66415071b7154a1d))
+
 ## [1.60.8](https://github.com/Pocket/web-client/compare/v1.60.7...v1.60.8) (2022-09-13)
 
 
