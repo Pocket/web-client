@@ -16,7 +16,7 @@ export const LegacyHome = () => {
   const generalSlates = useSelector((state) => state.home.generalSlates) || []
 
   const userStatus = useSelector((state) => state.user.user_status)
-  const lineupId = '249850f0-61c0-46f9-a16a-f0553c222800'
+  const lineupId = '05027beb-0053-4020-8bdc-4da2fcc0cb68'
 
   useEffect(() => {
     if (userStatus !== 'valid') return
