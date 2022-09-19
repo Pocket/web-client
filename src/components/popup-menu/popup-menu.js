@@ -122,13 +122,14 @@ export const PopupMenuItem = ({
   id,
   helperText,
   className,
+  external,
   href,
   icon,
   ...remaining
 }) => {
   function getContent() {
     return (
-      <React.Fragment>
+      <>
         {icon}
         <span className="label">
           {children}
@@ -138,19 +139,30 @@ export const PopupMenuItem = ({
             </span>
           ) : null}
         </span>
-      </React.Fragment>
+      </>
     )
-  } // if an href is passed, element should be an anchor (hyperlink). If no href,
-  // this is a button element
+  }
 
+  function getLink() {
+    return (external) ? (
+      <a id={id} href={href} {...remaining}>
+        {getContent()}
+      </a>
+    ) : (
+      <Link href={href}>
+        <a id={id} {...remaining}>
+          {getContent()}
+        </a>
+      </Link>
+    )
+  }
+
+  // if an href is passed, element should be an anchor (hyperlink). If no href,
+  // this is a button element
   return (
     <li className={cx(itemStyle, className)}>
       {href ? (
-        <Link href={href}>
-          <a id={id} {...remaining}>
-            {getContent()}
-          </a>
-        </Link>
+        <>{getLink()}</>
       ) : (
         <button type="button" id={id} {...remaining}>
           {getContent()}
@@ -189,6 +201,11 @@ PopupMenuItem.propTypes = {
   href: PropTypes.string,
 
   /**
+   * If the hyperlink should not be wrapped in a next/link component
+   */
+  external: PropTypes.bool,
+
+  /**
    * Provide a JSX icon in order to display an icon before the text.
    */
   icon: PropTypes.node
@@ -197,6 +214,7 @@ PopupMenuItem.defaultProps = {
   helperText: null,
   className: '',
   href: null,
+  external: false,
   icon: null
 }
 /** COMPONENT: PopupMenuGroup
