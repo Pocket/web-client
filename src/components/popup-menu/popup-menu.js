@@ -201,7 +201,9 @@ PopupMenuItem.propTypes = {
   href: PropTypes.string,
 
   /**
-   * If the hyperlink should not be wrapped in a next/link component
+   * If the hyperlink should not be wrapped in a next/link component. This is
+   * is intended for links that live within the getpocket.com domain, but not
+   * within web-client.
    */
   external: PropTypes.bool,
 
