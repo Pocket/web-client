@@ -32,7 +32,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   // Initialize app once per page load
   const dispatch = useDispatch()
 
-  const { user_status, user_id, sess_guid, birth, user_models } = useSelector((state) => state.user) //prettier-ignore
+  const { user_status, user_id, sess_guid, birth } = useSelector((state) => state.user) //prettier-ignore
   const { flagsReady } = useSelector((state) => state.features)
   const { authRequired } = pageProps
 
@@ -98,13 +98,13 @@ function PocketWebClient({ Component, pageProps, err }) {
         ? navigator.languages[0]
         : navigator.language || navigator.userLanguage
 
-      const response = await fetchUnleashData(user_id, sess_guid, birth, locale, user_models)
+      const response = await fetchUnleashData(user_id, sess_guid, birth, locale)
       const features = response ? response : {}
       if (features) dispatch(featuresHydrate(features))
     }
 
     hydrateFeatures()
-  }, [user_status, sess_guid, user_id, birth, dispatch, user_models, flagsReady])
+  }, [user_status, sess_guid, user_id, birth, dispatch, flagsReady])
 
   useEffect(() => {
     if (authRequired && user_status === 'invalid') {

@@ -3,7 +3,6 @@ import Layout from 'layouts/main'
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeGreeting } from 'containers/home/home-greeting'
 import { HomeRecentSaves } from 'containers/home/home-recent-saves'
-import { HomeSetup } from 'containers/home/home-setup'
 
 import { LegacyHome } from './home-legacy'
 import { HomeContent } from './home-baseline'
@@ -33,8 +32,7 @@ export const Home = ({ metaData }) => {
   const topics = useSelector((state) => state.topicList?.topicsByName)
 
   const renderOnboarding = generalSlates.length
-  const flagsReady = featureState.flagsReady
-  const shouldRender = userStatus !== 'pending' && flagsReady
+  const shouldRender = userStatus !== 'pending'
   if (!shouldRender) return null
 
   // Temporary flag for building unified home baseline
@@ -46,8 +44,6 @@ export const Home = ({ metaData }) => {
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
       <SuccessFXA type="home" />
-
-      {/* <HomeSetup /> This will soon become a part of the baseline. Omitting it until the endpoint supports it*/}
 
       <SectionWrapper>
         <HomeGreeting />
