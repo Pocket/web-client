@@ -32,10 +32,10 @@ describe('GlobalNavAccount', () => {
 
   it('renders the "view profile" menu link using props.profileUrl as the href', () => {
     const { getByCy } = wrappedRender(
-      <GlobalNavAccount {...baseProps} isLoggedIn profileUrl="getpocket.com/123kitties" />
+      <GlobalNavAccount {...baseProps} isLoggedIn profileUrl="https://getpocket.com/123kitties" />
     )
     const profileLink = getByCy('account-menu-profile-link')
-    expect(profileLink).toHaveAttribute('href', '/getpocket.com/123kitties')
+    expect(profileLink).toHaveAttribute('href', 'https://getpocket.com/123kitties')
   })
 
   it('renders the "view profile" menu link using props.accountName as the display name', () => {
