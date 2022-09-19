@@ -38,7 +38,7 @@ export const List = (props) => {
   const router = useRouter()
   const dispatch = useDispatch()
 
-  const { metaData = {}, subset: sub = 'active', filter: propFilter } = props
+  const { metaData = {}, subset: sub = 'active', filter: propFilter, locale } = props
   const { tag, filter: queryFilter, query: searchTerm } = router.query
   const subset = tag ? 'tag' : searchTerm ? 'search' : sub
   const filter = tag ? queryFilter : propFilter
@@ -61,7 +61,7 @@ export const List = (props) => {
   const useApiNext = featureFlagActive({ flag: 'api.next', featureState })
   const sortOrder = useApiNext ? savedSortOrder : legacySortOrder
 
-  const showCollectionBanner = featureFlagActive({ flag: 'german.collection', featureState })
+  const showCollectionBanner = locale === 'de' || locale === 'de-DE'
   const CollectionBanner = (showCollectionBanner && subset === 'unread') ? GermanCollection : null
 
   const { flagsReady } = featureState
