@@ -304,6 +304,7 @@ const GlobalNavAccount = ({
         data-cy="account-menu">
         <PopupMenuGroup>
           <PopupMenuItem
+            external={true}
             href={profileUrl}
             helperText={t('nav:view-profile', 'View Profile')}
             id="account-menu-profile-link"
@@ -345,6 +346,7 @@ const GlobalNavAccount = ({
         </PopupMenuGroup>
         <PopupMenuGroup>
           <PopupMenuItem
+            external={true}
             href="https://getpocket.com/lo?src=navbar"
             id="account-menu-logout-link"
             onClick={handleLogoutCase}
