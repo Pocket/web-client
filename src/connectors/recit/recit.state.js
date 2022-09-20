@@ -41,6 +41,7 @@ import { removeItem as removeItemAPI } from 'common/api/_legacy/removeItem'
 
 import { arrayToObject } from 'common/utilities'
 import { checkExternal } from './recit.derive'
+import { STARTER_ARTICLES } from 'common/constants'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -257,7 +258,7 @@ function* fetchPocketRecs({ itemId }) {
 
 function* fetchReaderRecs({ itemId }) {
   try {
-    if (!itemId) return
+    if (!itemId || STARTER_ARTICLES.includes(itemId)) return
     const response = yield getRecommendations(itemId)
 
     const derivedItems = Object.values(response.recommendations).map(deriveReccit)
