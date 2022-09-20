@@ -254,12 +254,10 @@ export const Card = (props) => {
               )}
             </div>
           ) : null}
+          {ActionMenu ? <ActionMenu id={actionId || itemId} position={position} /> : null}
         </div>
       </div>
-      <footer className="footer">
-        {showTags ? <ItemTags tags={tags} /> : null}
-        {ActionMenu ? <ActionMenu id={actionId || itemId} position={position} /> : null}
-      </footer>
+      <footer className="footer">{showTags ? <ItemTags tags={tags} /> : null}</footer>
     </article>
   )
 }
