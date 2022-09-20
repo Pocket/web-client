@@ -29,8 +29,6 @@ export const cardStyles = css`
   grid-row: var(--card-row-span);
 
   .cardWrap {
-    position: relative;
-    height: 100%;
     width: 100%;
     text-decoration: none;
     display: grid;
@@ -224,8 +222,6 @@ export const cardStyles = css`
 
   .footer {
     width: 100%;
-    position: absolute;
-    bottom: 0;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
   }
@@ -274,7 +270,6 @@ export const cardStyles = css`
 
     .cardWrap {
       display: block;
-      padding-bottom: 2.5rem;
     }
 
     /* Hide actions on block cards only */
@@ -318,7 +313,6 @@ export const cardStyles = css`
 
       .cardWrap {
         display: grid;
-        padding-bottom: 1.85rem;
       }
 
       .footer .actions {
@@ -336,10 +330,6 @@ export const cardStyles = css`
   &.wide,
   &.display {
     --card-column-span: span 8;
-
-    .content {
-      padding-bottom: var(--size250);
-    }
 
     .title {
       font-size: var(--fontSize150);

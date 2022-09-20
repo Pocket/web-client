@@ -2,7 +2,7 @@ import { css } from 'linaria'
 
 export const itemActionStyle = css`
   display: flex;
-  padding: var(--size100) 0 var(--size025);
+  padding: var(--size025) 0;
   justify-content: space-between;
   .item-actions {
     display: flex;
