@@ -25,6 +25,8 @@ export const LegacyHome = () => {
 
   const offset = generalSlates?.length || 0
 
+  // Tracking clicks on the topic selector
+
   return (
     <>
       {generalSlates?.map((slateId, index) => (

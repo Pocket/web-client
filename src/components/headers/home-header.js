@@ -139,6 +139,28 @@ const cardMixHeaderStyle = css`
   }
 `
 
+export const HomeUnifiedHeader = ({
+  headline,
+  subheadline,
+  moreLinkText,
+  moreLinkUrl,
+  moreLinkTrack
+}) => {
+  return headline ? (
+    <header className={cx(cardPageHeaderStyle, cardPageSectionStyle)}>
+      <h2 className="sectionTitle">{headline}</h2>
+      <div className="sectionSubTitleWrapper">
+        {subheadline ? <p className="sectionSubTitle">{subheadline}</p> : null}
+        {moreLinkText ? (
+          <Link href={moreLinkUrl}>
+            <a onClick={moreLinkTrack}>{moreLinkText}</a>
+          </Link>
+        ) : null}
+      </div>
+    </header>
+  ) : null
+}
+
 export const HomeJourneyHeader = ({ sectionTitle, sectionDescription }) => {
   return sectionTitle ? (
     <header className={cardPageHeaderStyle}>

@@ -1,6 +1,6 @@
 import Layout from 'layouts/main'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { HomeGreeting } from 'containers/home/home-greeting'
 import { HomeRecentSaves } from 'containers/home/home-recent-saves'
 
@@ -17,11 +17,9 @@ import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 import { Onboarding } from 'connectors/onboarding/onboarding'
 
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
-
-import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { CardTopicsNav } from 'connectors/topic-list/topic-list'
-
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { CardTopicsNav } from 'connectors/topic-list/topic-list'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const Home = ({ metaData }) => {
   const dispatch = useDispatch()
@@ -32,13 +30,12 @@ export const Home = ({ metaData }) => {
   const topics = useSelector((state) => state.topicList?.topicsByName)
 
   const renderOnboarding = generalSlates.length
-  const shouldRender = userStatus !== 'pending'
+  const shouldRender = userStatus !== 'pending' && featureState.flagsReady
   if (!shouldRender) return null
 
   // Temporary flag for building unified home baseline
   const baseLineHome = featureFlagActive({ flag: 'home.baseline', featureState })
 
-  // Tracking clicks on the topic selector
   const topicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
 
   return (
