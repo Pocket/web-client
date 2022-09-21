@@ -2,7 +2,6 @@ import { put, takeLatest, call } from 'redux-saga/effects'
 
 import { getUserInfo } from 'common/api/_legacy/user'
 import { createGuid } from 'common/api/_legacy/user'
-import { getRecItProfile } from 'common/api/_legacy/user'
 
 import { setCookie } from 'nookies'
 
@@ -35,14 +34,13 @@ export const sessGuidHydrate = (sess_guid) => ({type: SESS_GUID_HYDRATE,sess_gui
 export const userReducers = (state = initialState, action) => {
   switch (action.type) {
     case USER_SUCCESS: {
-      const { user, recent_searches, user_models = [] } = action
+      const { user, recent_searches } = action
       return {
         ...state,
         ...user,
         recent_searches,
         auth: true,
-        user_status: 'valid',
-        user_models
+        user_status: 'valid'
       }
     }
 
@@ -50,7 +48,6 @@ export const userReducers = (state = initialState, action) => {
       return {
         ...state,
         user_status: 'invalid',
-        user_models: [],
         auth: false // force auth to false
       }
     }
@@ -102,16 +99,11 @@ function* userRequest(action) {
   const { user } = response
   const { username, first_name, last_name, profile, email, aliases, friend, ...rest } = user
 
-  // Check to see if the user has a personalization profile
-  const recitProfileResponse = yield call(getRecItProfile)
-  const { user_models = [] } = recitProfileResponse || {}
-
   if (user)
     return yield put({
       type: USER_SUCCESS,
       user: rest,
       profile: { username, first_name, last_name, ...profile },
-      user_models,
       aliases,
       email,
       friend

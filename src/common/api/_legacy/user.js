@@ -17,10 +17,3 @@ export const getUserInfo = (ssr, cookie) => {
   const path = 'v3/getuser'
   return request({ params, path, auth: true, ssr, cookie })
 }
-
-export const getRecItProfile = () => {
-  return request({
-    path: 'v3/discover/recIt/userProfile',
-    auth: true
-  })
-}
