@@ -1,3 +1,12 @@
+## [1.60.13](https://github.com/Pocket/web-client/compare/v1.60.12...v1.60.13) (2022-09-21)
+
+
+### Bug Fixes
+
+* **account:** remove user models ([3bb0514](https://github.com/Pocket/web-client/commit/3bb05140206ece4736a9c3471e082a47e1c321e8))
+* **home:** add personalized as the lineup ([4d82f52](https://github.com/Pocket/web-client/commit/4d82f528dc7f41d536e9f404c0469e97a41c2e8c))
+* **home:** separate home into legacy and baseline ([abb19d3](https://github.com/Pocket/web-client/commit/abb19d3a12445af1c63387526aee4ebbc1ef7480))
+
 ## [1.60.12](https://github.com/Pocket/web-client/compare/v1.60.11...v1.60.12) (2022-09-19)
 
 
