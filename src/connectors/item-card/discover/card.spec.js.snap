@@ -17,9 +17,9 @@ exports[`ItemCard renders a discover item 1`] = `
       <a
         data-cy="image-link"
         href="http://theverge.com/22734645/apple-macbook-pro-2021-ports-magsafe-touch-bar-usb-c-future?utm_source=pocket_discover"
-        rel=""
+        rel="noopener noreferrer"
         tabindex="-1"
-        target=""
+        target="_blank"
       >
         <img
           alt=""
@@ -27,21 +27,76 @@ exports[`ItemCard renders a discover item 1`] = `
           srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.vox-cdn.com%2Fthumbor%2F26f5VRT9jvt6JW6WB4Nohu849cI%3D%2F0x137%3A1911x1138%2Ffit-in%2F1200x630%2Fcdn.vox-cdn.com%2Fuploads%2Fchorus_asset%2Ffile%2F22938855%2FApple_MacBook_Pro_Ports_10182021.jpg 2x "
           style="--fallbackBackground: #00CB7780; --fallbackColor: #00CB77; --fallbackLetter: 'A';"
         />
+        <span
+          class="view-original"
+          data-cy="view-original"
+        >
+          <span
+            class="view-original-text"
+          >
+            item-action:view-original
+          </span>
+          <span
+            class="i1qqph0t icon"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M6 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3a1 1 0 1 1 2 0v3a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h3a1 1 0 0 1 0 2H6Z"
+                fill-rule="evenodd"
+              />
+              <path
+                clip-rule="evenodd"
+                d="M13 3a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v7a1 1 0 1 1-2 0V5.414l-7.293 7.293a1 1 0 0 1-1.414-1.414L18.586 4H14a1 1 0 0 1-1-1Z"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </span>
+        </span>
       </a>
     </div>
     <div
       class="content"
     >
       <h2
-        class="title"
+        class="title open-external"
       >
         <a
           data-cy="title-link"
           href="http://theverge.com/22734645/apple-macbook-pro-2021-ports-magsafe-touch-bar-usb-c-future?utm_source=pocket_discover"
+          rel="noopener noreferrer"
           tabindex="0"
+          target="_blank"
         >
           Apple is ready to admit it was wrong about the future of laptops
         </a>
+        <span
+          class="i1qqph0t icon mobile-view-original"
+          data-cy="view-original-icon"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M6 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3a1 1 0 1 1 2 0v3a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4h3a1 1 0 0 1 0 2H6Z"
+              fill-rule="evenodd"
+            />
+            <path
+              clip-rule="evenodd"
+              d="M13 3a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v7a1 1 0 1 1-2 0V5.414l-7.293 7.293a1 1 0 0 1-1.414-1.414L18.586 4H14a1 1 0 0 1-1-1Z"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </span>
       </h2>
       <cite
         class="details"
