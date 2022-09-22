@@ -49,7 +49,7 @@ export async function getTopicLineup(topic, recommendationCount = 30) {
 }
 
 function handleResponse(response, topic) {
-  const { slateItemArrays, itemsById } = processLineup(response, `pocket_topic_${topic}`)
+  const { slateItemArrays, itemsById } = processLineup(response, `pocket_discover_${topic}`)
   const curatedItems = slateItemArrays[0]
   const algorithmicItems = slateItemArrays[1]
 
