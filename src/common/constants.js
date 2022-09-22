@@ -354,6 +354,7 @@ export const TOPIC_IDS = {
   }
 }
 
+export const STARTER_ARTICLES = ['2333373270', '3242033017']
 
 export const containerMaxWidth = 1128
 

@@ -1,3 +1,22 @@
+# [1.61.0](https://github.com/Pocket/web-client/compare/v1.60.14...v1.61.0) (2022-09-21)
+
+
+### Bug Fixes
+
+* **snapshots:** update snapshots ([0246234](https://github.com/Pocket/web-client/commit/02462347a37adaee59a57ca587e870d78410fc3d))
+
+
+### Features
+
+* **view original:** remove feature flag ([811a09e](https://github.com/Pocket/web-client/commit/811a09e7d19fa2fd00ff1ed256da8327b35938bf))
+
+## [1.60.14](https://github.com/Pocket/web-client/compare/v1.60.13...v1.60.14) (2022-09-21)
+
+
+### Bug Fixes
+
+* **reader:** hide reader recs on starter articles ([2e2eede](https://github.com/Pocket/web-client/commit/2e2eedeec7bea00d64df9216b9f2dd015475b08c))
+
 ## [1.60.13](https://github.com/Pocket/web-client/compare/v1.60.12...v1.60.13) (2022-09-21)
 
 
