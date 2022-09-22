@@ -15,7 +15,7 @@ export const PocketHead = ({ metaData = {}, title: pageTitle, canonical, forceWe
     // prettier-ignore
     <Head>
       <title>{pageTitle}</title>
-      
+
       {canonical ? <link rel="canonical" href={canonical} /> : null}
 
       {forceWebView ? <meta name="x-pocket-force-webview"/> : null}
@@ -65,6 +65,7 @@ export const PocketHead = ({ metaData = {}, title: pageTitle, canonical, forceWe
       <meta name="apple-mobile-web-app-title" content="Pocket" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      <meta name="apple-itunes-app" content="app-id=309601447" />
 
       {/* Windows */}
       <meta name="msapplication-TileColor" content="#ef4056" />
@@ -83,10 +84,10 @@ export const PocketHead = ({ metaData = {}, title: pageTitle, canonical, forceWe
 
       {/* Icons */}
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-      <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/i/apple-touch-icon/Pocket_AppIcon_@57.png" /> 
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/i/apple-touch-icon/Pocket_AppIcon_@72.png" /> 
-      <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/i/apple-touch-icon/Pocket_AppIcon_@114.png" /> 
-      <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/i/apple-touch-icon/Pocket_AppIcon_@144.png" />    
+      <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/i/apple-touch-icon/Pocket_AppIcon_@57.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/i/apple-touch-icon/Pocket_AppIcon_@72.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/i/apple-touch-icon/Pocket_AppIcon_@114.png" />
+      <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/i/apple-touch-icon/Pocket_AppIcon_@144.png" />
 
     </Head>
   )
