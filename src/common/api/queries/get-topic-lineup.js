@@ -44,12 +44,12 @@ export async function getTopicLineup(topic, recommendationCount = 30) {
     operationName: 'GetTopicLineup',
     variables: { id: TOPICS_BY_NAME[topic].id, recommendationCount, slateCount: 2 }
   })
-    .then(handleResponse)
+    .then((response) => handleResponse(response, topic))
     .catch((error) => console.error(error))
 }
 
-function handleResponse(response) {
-  const { slateItemArrays, itemsById } = processLineup(response)
+function handleResponse(response, topic) {
+  const { slateItemArrays, itemsById } = processLineup(response, `pocket_topic_${topic}`)
   const curatedItems = slateItemArrays[0]
   const algorithmicItems = slateItemArrays[1]
 
