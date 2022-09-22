@@ -65,7 +65,6 @@ export const PocketHead = ({ metaData = {}, title: pageTitle, canonical, forceWe
       <meta name="apple-mobile-web-app-title" content="Pocket" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-      <meta name="apple-itunes-app" content="app-id=309601447" />
 
       {/* Windows */}
       <meta name="msapplication-TileColor" content="#ef4056" />
