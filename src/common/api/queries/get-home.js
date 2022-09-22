@@ -58,7 +58,7 @@ export async function getHomeLineup({ id, recommendationCount = 5 }) {
 }
 
 function handleResponse(response) {
-  const { slatesById, itemsById } = processLineup(response)
+  const { slatesById, itemsById } = processLineup(response, 'pocket_home')
   const { generalSlates, topicSlates } = splitSlates(slatesById)
   return { generalSlates, topicSlates, slatesById, itemsById }
 }

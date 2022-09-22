@@ -1,3 +1,18 @@
+## [1.61.2](https://github.com/Pocket/web-client/compare/v1.61.1...v1.61.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* **ios:** adding ios app store meta tag to show banner when viewing web-client on ios device ([5d57475](https://github.com/Pocket/web-client/commit/5d57475d1b43e9fda7e99c3171453938249a452e))
+
+## [1.61.1](https://github.com/Pocket/web-client/compare/v1.61.0...v1.61.1) (2022-09-22)
+
+
+### Bug Fixes
+
+* **items:** add correct utm query param to home, discover, and topics ([933c9b0](https://github.com/Pocket/web-client/commit/933c9b002c6b578fd003028bf40bee696164d5dc))
+* **items:** update topic utm query param value ([553374c](https://github.com/Pocket/web-client/commit/553374c0278c0c5b75f15cf147a89c6e6208a3fe))
+
 # [1.61.0](https://github.com/Pocket/web-client/compare/v1.60.14...v1.61.0) (2022-09-21)
 
 
