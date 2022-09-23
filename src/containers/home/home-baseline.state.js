@@ -3,6 +3,7 @@ import { getUnifiedHome } from 'common/api/queries/get-home-unified'
 import { saveItem } from 'common/api/_legacy/saveItem'
 import { arrayToObject } from 'common/utilities'
 import { deriveListItem } from 'common/api/derivers/item'
+import { removeItemByUrl } from 'common/api/_legacy/removeItem'
 
 import { HOME_CONTENT_REQUEST } from 'actions'
 import { HOME_CONTENT_SUCCESS } from 'actions'
@@ -10,10 +11,15 @@ import { HOME_CONTENT_SUCCESS } from 'actions'
 import { HOME_CONTENT_SAVE_REQUEST } from 'actions'
 import { HOME_SAVE_SUCCESS } from 'actions'
 
+import { HOME_CONTENT_UNSAVE_REQUEST } from 'actions'
+import { HOME_UNSAVE_SUCCESS } from 'actions'
+import { HOME_UNSAVE_FAILURE } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getHomeContent = (id) => ({ type: HOME_CONTENT_REQUEST, id })
 export const saveHomeItem = (id, url) => ({ type: HOME_CONTENT_SAVE_REQUEST, id, url })
+export const unSaveHomeItem = (id, url) => ({ type: HOME_CONTENT_UNSAVE_REQUEST, id, url })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -39,6 +45,15 @@ export const homeUnifiedReducers = (state = initialState, action) => {
       }
     }
 
+    case HOME_UNSAVE_SUCCESS: {
+      const { corpusId } = action
+      const item = state.itemsById[corpusId] || {}
+      return {
+        ...state,
+        itemsById: { ...state.itemsById, [corpusId]: { ...item, saveStatus: 'unsaved' } }
+      }
+    }
+
     default: {
       return state
     }
@@ -49,7 +64,8 @@ export const homeUnifiedReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const homeUnifiedSagas = [
   takeEvery(HOME_CONTENT_REQUEST, homeContentRequest),
-  takeEvery(HOME_CONTENT_SAVE_REQUEST, homeContentSaveRequest)
+  takeEvery(HOME_CONTENT_SAVE_REQUEST, homeContentSaveRequest),
+  takeEvery(HOME_CONTENT_UNSAVE_REQUEST, homeContentUnSaveRequest)
 ]
 
 /* SAGAS :: SELECTORS
@@ -84,6 +100,17 @@ function* homeContentSaveRequest({ url, id }) {
     yield put({ type: HOME_SAVE_SUCCESS, corpusId: id, id: saveId, items, itemsById })
   } catch (error) {
     console.warn(error)
+  }
+}
+
+function* homeContentUnSaveRequest({ id, url }) {
+  try {
+    const response = yield removeItemByUrl(url)
+    if (response?.status !== 1) throw new Error('Unable to remove item')
+
+    yield put({ type: HOME_UNSAVE_SUCCESS, corpusId: id })
+  } catch (error) {
+    yield put({ type: HOME_UNSAVE_FAILURE, error })
   }
 }
 
