@@ -175,11 +175,11 @@ export const HomeUnifiedHeader = ({
 }) => {
   return headline ? (
     <header className={cx(cardPageHeaderStyle, homeHeaderStyle)}>
-      <h2 className="headiline">{headline}</h2>
+      <h2 className="headline">{headline}</h2>
       {subheadline ? <div className="subheadline">{subheadline}</div> : null}
       {moreLinkText ? (
         <div className="morelink">
-          <HomUnifiedMoreLink
+          <HomeUnifiedMoreLink
             moreLinkText={moreLinkText}
             moreLinkUrl={moreLinkUrl}
             moreLinkClick={moreLinkClick}
@@ -190,7 +190,7 @@ export const HomeUnifiedHeader = ({
   ) : null
 }
 
-const HomUnifiedMoreLink = ({ moreLinkUrl, moreLinkText, moreLinkClick }) => {
+const HomeUnifiedMoreLink = ({ moreLinkUrl, moreLinkText, moreLinkClick }) => {
   if (moreLinkUrl) {
     return (
       <Link href={moreLinkUrl}>

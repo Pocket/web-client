@@ -35,7 +35,7 @@ export const Home = ({ metaData }) => {
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
       <SuccessFXA type="home" />
-      <HomeSetup />
+      {baseLineHome ? <HomeSetup /> : null}
 
       <SectionWrapper>
         <HomeGreeting />

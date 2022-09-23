@@ -122,20 +122,18 @@ export const CardNext = (props) => {
             {fromPartner ? <PartnerOverline partnerType={partnerType} /> : null}
             <h2 className={cx('title', titleFlow && 'flow', openInNewTab && 'open-external')}>
               {openUrl ? (
-                <>
-                  <Link href={openUrl}>
-                    <a
-                      ref={linkRef}
-                      onClick={onOpen}
-                      data-cy="title-link"
-                      tabIndex={0}
-                      target={linkTarget}
-                      rel={linkRel}
-                      onFocus={handleFocus}>
-                      {title}
-                    </a>
-                  </Link>
-                </>
+                <Link href={openUrl}>
+                  <a
+                    ref={linkRef}
+                    onClick={onOpen}
+                    data-cy="title-link"
+                    tabIndex={0}
+                    target={linkTarget}
+                    rel={linkRel}
+                    onFocus={handleFocus}>
+                    {title}
+                  </a>
+                </Link>
               ) : (
                 title
               )}
