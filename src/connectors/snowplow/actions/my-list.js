@@ -31,8 +31,8 @@ export const myListActions = {
       component: 'ui',
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position', 'label'],
-    description: 'label captures the card type being displayed (list, detail, or grid)'
+    expects: ['id', 'url', 'position'],
+    description: 'passing in label to capture the card type being displayed (list, detail, or grid). Not required'
   },
   'my-list.share': {
     eventType: 'engagement',
