@@ -5,6 +5,14 @@ import { getImageCacheUrl } from 'common/utilities'
 import { NewViewIcon } from 'components/icons/NewViewIcon'
 
 const cardMediaStyles = css`
+  --aspect-percent: 56.25%;
+  .side-by-side & {
+    --aspect-percent: 75%;
+    .no-link {
+      padding-bottom: 66%;
+    }
+  }
+
   position: relative;
   border-radius: var(--size025);
   overflow: hidden;
@@ -14,8 +22,9 @@ const cardMediaStyles = css`
     position: relative;
     display: block;
     width: 100%;
-    padding-bottom: 66.66%;
+    padding-bottom: var(--aspect-percent);
     height: 0;
+    overflow: hidden;
   }
 
   img,
@@ -24,7 +33,7 @@ const cardMediaStyles = css`
     object-fit: cover;
     width: 100%;
     height: auto;
-    min-height: 66.66%;
+    min-height: var(--aspect-percent);
     transition-property: opacity;
     transition-duration: 0.2s;
     transition-timing-function: ease;
@@ -139,10 +148,10 @@ export const CardMedia = function ({
     <div className={`${cardMediaStyles} media`}>
       {topic ? <div className="topic-name">{topic}</div> : null}
       {openUrl ? (
-        <Link href={openUrl ? openUrl : false}>
+        <Link href={openUrl}>
           <a tabIndex="-1" data-cy="image-link" onClick={onOpen} target={linkTarget} rel={linkRel}>
             <MediaImage />
-            {openInNewTab && openUrl ? (
+            {openInNewTab ? (
               <span className="view-original" data-cy="view-original">
                 <span className="view-original-text">
                   {t('item-action:view-original', 'View Original')}
@@ -155,6 +164,14 @@ export const CardMedia = function ({
       ) : (
         <span className="no-link">
           <MediaImage />
+          {openInNewTab ? (
+            <span className="view-original" data-cy="view-original">
+              <span className="view-original-text">
+                {t('item-action:view-original', 'View Original')}
+              </span>
+              <NewViewIcon />
+            </span>
+          ) : null}
         </span>
       )}
     </div>
