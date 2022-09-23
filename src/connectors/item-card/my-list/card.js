@@ -42,7 +42,8 @@ export function ItemCard({ id, position, type }) {
   const analyticsData = {
     ...passedAnalytics,
     position,
-    destination: readUrl ? 'internal' : 'external'
+    destination: readUrl ? 'internal' : 'external',
+    label: type
   }
 
   /** ITEM TRACKING
