@@ -61,14 +61,19 @@ const homeHeaderStyle = css`
   }
 
   .morelink {
-    color: var(--color-actionPrimary);
     display: flex;
     justify-content: flex-end;
+    a,
+    button {
+      &:focus {
+        outline: none;
+      }
+      color: var(--color-actionPrimary);
+    }
   }
 
   .moreLink + .subheadline {
     grid-row-start: 2;
-    color: pink !important;
   }
 `
 
@@ -173,24 +178,33 @@ export const HomeUnifiedHeader = ({
       <h2 className="headiline">{headline}</h2>
       {subheadline ? <div className="subheadline">{subheadline}</div> : null}
       {moreLinkText ? (
-        <HomUnifiedMoreLink
-          moreLinkText={moreLinkText}
-          moreLinkUrl={moreLinkUrl}
-          moreLinkClick={moreLinkClick}
-        />
+        <div className="morelink">
+          <HomUnifiedMoreLink
+            moreLinkText={moreLinkText}
+            moreLinkUrl={moreLinkUrl}
+            moreLinkClick={moreLinkClick}
+          />
+        </div>
       ) : null}
     </header>
   ) : null
 }
 
 const HomUnifiedMoreLink = ({ moreLinkUrl, moreLinkText, moreLinkClick }) => {
-  return moreLinkUrl ? (
-    <Link href={moreLinkUrl}>
-      <a onClick={moreLinkClick} className="morelink">
+  if (moreLinkUrl) {
+    return (
+      <Link href={moreLinkUrl}>
+        <a onClick={moreLinkClick}>{moreLinkText}</a>
+      </Link>
+    )
+  }
+  if (moreLinkText) {
+    return (
+      <button className="inline text" onClick={moreLinkClick}>
         {moreLinkText}
-      </a>
-    </Link>
-  ) : null
+      </button>
+    )
+  }
 }
 
 export const HomeJourneyHeader = ({ sectionTitle, sectionDescription }) => {
