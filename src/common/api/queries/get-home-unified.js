@@ -52,7 +52,10 @@ function handleResponse(response) {
   const slates = response?.data?.homeSlateLineup?.slates
   if (!slates) throw new HomeRequestError()
 
-  const itemsById = slates.map(getItemsFromSlate).reduce((p, c) => ({ ...p, ...c }), {})
+  const itemsById = slates
+    .map(getItemsFromSlate)
+    .reduce((previous, current) => ({ ...previous, ...current }), {})
+  
   const slatesById = slates.reduce(processSlates, {})
   const slateArray = slates.map((slate) => slate.slateId)
 
