@@ -9,6 +9,7 @@ import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { itemActionStyle } from 'components/item-actions/base'
 import { saveHomeItem } from 'containers/home/home-baseline.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import TopicsPillbox from 'components/topics-pillbox/topics-pillbox'
 
 export const HomeContent = () => {
   const dispatch = useDispatch()
@@ -18,7 +19,14 @@ export const HomeContent = () => {
     dispatch(getHomeContent())
   }, [dispatch])
 
-  return slates.map((slateId) => <Slate key={slateId} slateId={slateId} />)
+  return (
+    <>
+      {slates.map((slateId) => (
+        <Slate key={slateId} slateId={slateId} />
+      ))}
+      <ExploreMoreTopics />
+    </>
+  )
 }
 
 function Slate({ slateId }) {
@@ -86,7 +94,6 @@ function CardActions({ id }) {
 
   const { url, saveStatus } = item
   // const analyticsData = { id }
-
   // Prep save action
   const onSave = () => {
     // dispatch(sendSnowplowEvent('home.save', analyticsData))
@@ -106,4 +113,26 @@ function CardActions({ id }) {
       />
     </div>
   )
+}
+
+function ExploreMoreTopics() {
+  const dispatch = useDispatch()
+  const topics = useSelector((state) => state.topicList?.topicsByName)
+
+  const onTopicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
+
+  return (
+    <SectionWrapper className="unifiedHome">
+      <TopicsPillbox
+        omitPromoted={true}
+        id={'page-topics'}
+        topicsMap={topics}
+        className="homeTopics"
+        headingText="Discover More Topics"
+        headingClassName="heading"
+        onTopicClick={onTopicClick}
+      />
+    </SectionWrapper>
+  )
+}
 }

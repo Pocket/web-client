@@ -9,14 +9,18 @@ import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
+import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
 export const LegacyHome = () => {
   const dispatch = useDispatch()
   const topicSlates = useSelector((state) => state.home.topicSlates)
   const generalSlates = useSelector((state) => state.home.generalSlates) || []
+  const topics = useSelector((state) => state.topicList?.topicsByName)
 
   const userStatus = useSelector((state) => state.user.user_status)
   const lineupId = '05027beb-0053-4020-8bdc-4da2fcc0cb68'
+
+  const topicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
 
   useEffect(() => {
     if (userStatus !== 'valid') return
@@ -35,6 +39,8 @@ export const LegacyHome = () => {
       {topicSlates?.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} pagePosition={index} offset={offset} />
       ))}
+
+      <CardTopicsNav topics={topics} className="no-border" track={topicClick} />
     </>
   )
 }

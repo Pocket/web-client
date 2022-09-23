@@ -1,6 +1,6 @@
 import Layout from 'layouts/main'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { HomeGreeting } from 'containers/home/home-greeting'
 import { HomeRecentSaves } from 'containers/home/home-recent-saves'
 
@@ -18,16 +18,11 @@ import { Onboarding } from 'connectors/onboarding/onboarding'
 
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
-import { CardTopicsNav } from 'connectors/topic-list/topic-list'
-import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const Home = ({ metaData }) => {
-  const dispatch = useDispatch()
-
   const userStatus = useSelector((state) => state.user.user_status)
   const featureState = useSelector((state) => state.features) || {}
   const generalSlates = useSelector((state) => state.home.generalSlates) || []
-  const topics = useSelector((state) => state.topicList?.topicsByName)
 
   const renderOnboarding = generalSlates.length
   const shouldRender = userStatus !== 'pending' && featureState.flagsReady
@@ -35,8 +30,6 @@ export const Home = ({ metaData }) => {
 
   // Temporary flag for building unified home baseline
   const baseLineHome = featureFlagActive({ flag: 'home.baseline', featureState })
-
-  const topicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
 
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
@@ -48,8 +41,6 @@ export const Home = ({ metaData }) => {
       </SectionWrapper>
 
       {baseLineHome ? <HomeContent /> : <LegacyHome />}
-
-      <CardTopicsNav topics={topics} className="no-border" track={topicClick} />
 
       <DeleteModal />
       <TaggingModal />
