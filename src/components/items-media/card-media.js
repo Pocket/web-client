@@ -15,6 +15,7 @@ const cardMediaStyles = css`
     display: block;
     width: 100%;
     padding-bottom: 66.66%;
+    height: 0;
   }
 
   img,
@@ -129,13 +130,14 @@ export const CardMedia = function ({
     )
   }
 
+  const topic = topicName ? topicName.split('_').join(' ').toLowerCase() : false
   /**
    * We are setting these explicitly to avoid the image getting blocked by
    * ad/tracking blockers. They flag images set by JS as block-worthy
    */
   return (
     <div className={`${cardMediaStyles} media`}>
-      {topicName ? <div className="topic-name">{topicName}</div> : null}
+      {topic ? <div className="topic-name">{topic}</div> : null}
       {openUrl ? (
         <Link href={openUrl ? openUrl : false}>
           <a tabIndex="-1" data-cy="image-link" onClick={onOpen} target={linkTarget} rel={linkRel}>
