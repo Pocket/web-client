@@ -50,6 +50,28 @@ const cardPageHeaderStyle = css`
   }
 `
 
+const homeHeaderStyle = css`
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: baseline;
+  margin-bottom: 0;
+
+  .subheadline {
+    grid-column-start: 1;
+  }
+
+  .morelink {
+    color: var(--color-actionPrimary);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .moreLink + .subheadline {
+    grid-row-start: 2;
+    color: pink !important;
+  }
+`
+
 const cardPageSectionStyle = css`
   margin-bottom: 0;
   .sectionSubTitleWrapper {
@@ -144,20 +166,30 @@ export const HomeUnifiedHeader = ({
   subheadline,
   moreLinkText,
   moreLinkUrl,
-  moreLinkTrack
+  moreLinkClick
 }) => {
   return headline ? (
-    <header className={cx(cardPageHeaderStyle, cardPageSectionStyle)}>
-      <h2 className="sectionTitle">{headline}</h2>
-      <div className="sectionSubTitleWrapper">
-        {subheadline ? <p className="sectionSubTitle">{subheadline}</p> : null}
-        {moreLinkText ? (
-          <Link href={moreLinkUrl}>
-            <a onClick={moreLinkTrack}>{moreLinkText}</a>
-          </Link>
-        ) : null}
-      </div>
+    <header className={cx(cardPageHeaderStyle, homeHeaderStyle)}>
+      <h2 className="headiline">{headline}</h2>
+      {subheadline ? <div className="subheadline">{subheadline}</div> : null}
+      {moreLinkText ? (
+        <HomUnifiedMoreLink
+          moreLinkText={moreLinkText}
+          moreLinkUrl={moreLinkUrl}
+          moreLinkClick={moreLinkClick}
+        />
+      ) : null}
     </header>
+  ) : null
+}
+
+const HomUnifiedMoreLink = ({ moreLinkUrl, moreLinkText, moreLinkClick }) => {
+  return moreLinkUrl ? (
+    <Link href={moreLinkUrl}>
+      <a onClick={moreLinkClick} className="morelink">
+        {moreLinkText}
+      </a>
+    </Link>
   ) : null
 }
 
