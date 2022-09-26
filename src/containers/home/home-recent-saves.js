@@ -27,10 +27,15 @@ export const HomeRecentSaves = () => {
     dispatch(getRecentSaves())
   }, [dispatch])
 
+  const homeNext = featureFlagActive({ flag: 'home.next', featureState })
+  const sectionTitle = homeNext
+    ? t('home:recent-saves', 'Recent Saves')
+    : t('home:recent-saves-title', 'Recent Saves to My List')
+
   return recentSaves?.length > 0 ? (
     <>
       <HomeSectionHeader
-        sectionTitle={t('home:recent-saves-title', 'Recent Saves to My List')}
+        sectionTitle={sectionTitle}
         sectionDescription={t(
           'home:recent-saves-description',
           'What recently captured your interest'
