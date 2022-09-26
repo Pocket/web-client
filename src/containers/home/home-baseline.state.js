@@ -54,6 +54,16 @@ export const homeUnifiedReducers = (state = initialState, action) => {
       }
     }
 
+    case HOME_CONTENT_SAVE_REQUEST:
+    case HOME_CONTENT_UNSAVE_REQUEST: {
+      const { id } = action
+      const item = state.itemsById[id] || {}
+      return {
+        ...state,
+        itemsById: { ...state.itemsById, [id]: { ...item, saveStatus: 'saving' } }
+      }
+    }
+
     default: {
       return state
     }
