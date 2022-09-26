@@ -329,10 +329,13 @@ export const cardNextStyles = css`
 
   .title {
     font-weight: 500;
-    font-size: 20px;
+    font-size: clamp(0.75rem, 1.25rem, 2rem);
     line-height: 26px;
     margin: 0;
-    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    max-height: calc(1.35em * 3);
+    overflow: hidden;
+    text-overflow: ellipsis;
     a {
       padding-right: 0.5rem;
     }
