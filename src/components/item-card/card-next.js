@@ -314,15 +314,14 @@ export const cardNextStyles = css`
   .content {
     padding: 0 var(--card-padding);
     grid-column: var(--content-column-span);
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 22px;
+    font-size: 0.875remx;
+    line-height: 1.35;
     p {
-      font-size: 14px;
+      font-size: 0.875rem;
       overflow: hidden;
       text-overflow: ellipsis;
-      height: 66px;
-      line-height: 22px;
+      height: calc(1.35em * 3);
+      line-height: 1.35;
       margin: 0 0 1rem;
     }
   }
@@ -330,10 +329,10 @@ export const cardNextStyles = css`
   .title {
     font-weight: 500;
     font-size: clamp(0.75rem, 1.25rem, 2rem);
-    line-height: 26px;
+    line-height: 1.625rem;
     margin: 0;
     margin-bottom: 1rem;
-    max-height: calc(1.35em * 3);
+    max-height: calc(1.625rem * 3);
     overflow: hidden;
     text-overflow: ellipsis;
     a {
