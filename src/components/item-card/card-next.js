@@ -204,6 +204,10 @@ export const cardNextStyles = css`
   --cite-column-span: span 8;
   --actions-column-span: span 4;
 
+  ${breakpointSmallTablet} {
+    --card-column-span: span 12;
+  }
+
   width: 100%;
   height: 100%;
   padding: 0;
