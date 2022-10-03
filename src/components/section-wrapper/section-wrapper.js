@@ -19,6 +19,10 @@ const sectionWrapperStyle = css`
     margin: 0 auto;
     max-width: ${containerMaxWidth}px;
   }
+
+  &.unifiedHome {
+    padding-top: 4.25rem;
+  }
 `
 
 export const SectionWrapper = ({ children, className = '', ...rest }) => {

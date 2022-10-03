@@ -1,3 +1,37 @@
+## [1.62.1](https://github.com/Pocket/web-client/compare/v1.62.0...v1.62.1) (2022-09-26)
+
+
+### Bug Fixes
+
+* **home:** make card next responsive ([75b0603](https://github.com/Pocket/web-client/commit/75b060346d27d6f2f48ad239a779e306b195daaf))
+
+# [1.62.0](https://github.com/Pocket/web-client/compare/v1.61.4...v1.62.0) (2022-09-26)
+
+
+### Bug Fixes
+
+* **home pi:** remove shorthand from reducer ([1bca5e3](https://github.com/Pocket/web-client/commit/1bca5e3968ddd885c16b471359e8ff8a0552c153))
+* **home:** add overflow to card next ([0b9ef39](https://github.com/Pocket/web-client/commit/0b9ef394add35477eb154b0ebcf577cd159afea2))
+* **home:** add padding to section wrappers ([52f30dc](https://github.com/Pocket/web-client/commit/52f30dc42720287deaaade19535b0b715803375e))
+* **home:** add saving state to card next ([510b122](https://github.com/Pocket/web-client/commit/510b1223868e03f22b045654f4e52eeb7011cfd2))
+* **home:** adding card-next ([b8080f5](https://github.com/Pocket/web-client/commit/b8080f5ab1aaef962fe55b745a5168c35c566c92))
+* **home:** allow topic selection ([b0de1c5](https://github.com/Pocket/web-client/commit/b0de1c50df2e9b26b1cc98d374c127d0e46cd2d9))
+* **home:** allow unsaving ([4ca10b8](https://github.com/Pocket/web-client/commit/4ca10b8965badedbd864cc83b7bb3a5d32d864e2))
+* **home:** recent saves title in home.next ([e81b0b0](https://github.com/Pocket/web-client/commit/e81b0b0c740b5c8260bec55e4bd8ffba42c0029e))
+* **home:** typography clamping ([870e7a1](https://github.com/Pocket/web-client/commit/870e7a1fcbfac053e8cf044672274f81c4bd8e75))
+* **home:** unified header links ([3a22d61](https://github.com/Pocket/web-client/commit/3a22d6104821db90260257a0661a273a1d0faa94))
+* **home:** update topic link names ([9d74e02](https://github.com/Pocket/web-client/commit/9d74e0269898a7cfcb13556dfdb9bd79b43ed8bf))
+* **home:** update topic selector ([d0be4a0](https://github.com/Pocket/web-client/commit/d0be4a0cd445b7218a97316ee00a868ab6884af8))
+* **pill:** align designs / allow for omit promoted ([7533163](https://github.com/Pocket/web-client/commit/75331635fbb96593cbe2e075e57b42d8b15c5a5d))
+* **save to pocket:** only force width with label ([4a2aa45](https://github.com/Pocket/web-client/commit/4a2aa45618d78f45b4011a583d9bc96e8910c774))
+* **topic tags:** adjusting style ([3f31d09](https://github.com/Pocket/web-client/commit/3f31d09ce38a64b1669f9ab79e89f494273a6633))
+
+
+### Features
+
+* **home:** add boilerplate for unified home ([6a72753](https://github.com/Pocket/web-client/commit/6a727536e124dd1095c7596899511b5626596de3))
+* **home:** adding baseline draft ([3719fbe](https://github.com/Pocket/web-client/commit/3719fbed3be55080303c24744fb6e26638f69b78))
+
 ## [1.61.4](https://github.com/Pocket/web-client/compare/v1.61.3...v1.61.4) (2022-09-22)
 
 

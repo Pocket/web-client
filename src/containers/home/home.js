@@ -1,6 +1,6 @@
 import Layout from 'layouts/main'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { HomeGreeting } from 'containers/home/home-greeting'
 import { HomeRecentSaves } from 'containers/home/home-recent-saves'
 
@@ -17,33 +17,25 @@ import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 import { Onboarding } from 'connectors/onboarding/onboarding'
 
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
-
-import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { CardTopicsNav } from 'connectors/topic-list/topic-list'
-
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { HomeSetup } from './home-setup'
 
 export const Home = ({ metaData }) => {
-  const dispatch = useDispatch()
-
   const userStatus = useSelector((state) => state.user.user_status)
   const featureState = useSelector((state) => state.features) || {}
   const generalSlates = useSelector((state) => state.home.generalSlates) || []
-  const topics = useSelector((state) => state.topicList?.topicsByName)
 
   const renderOnboarding = generalSlates.length
-  const shouldRender = userStatus !== 'pending'
+  const shouldRender = userStatus !== 'pending' && featureState.flagsReady
   if (!shouldRender) return null
 
   // Temporary flag for building unified home baseline
   const baseLineHome = featureFlagActive({ flag: 'home.baseline', featureState })
 
-  // Tracking clicks on the topic selector
-  const topicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
-
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
       <SuccessFXA type="home" />
+      {baseLineHome ? <HomeSetup /> : null}
 
       <SectionWrapper>
         <HomeGreeting />
@@ -51,8 +43,6 @@ export const Home = ({ metaData }) => {
       </SectionWrapper>
 
       {baseLineHome ? <HomeContent /> : <LegacyHome />}
-
-      <CardTopicsNav topics={topics} className="no-border" track={topicClick} />
 
       <DeleteModal />
       <TaggingModal />

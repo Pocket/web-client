@@ -50,6 +50,33 @@ const cardPageHeaderStyle = css`
   }
 `
 
+const homeHeaderStyle = css`
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: baseline;
+  margin-bottom: 0;
+
+  .subheadline {
+    grid-column-start: 1;
+  }
+
+  .morelink {
+    display: flex;
+    justify-content: flex-end;
+    a,
+    button {
+      &:focus {
+        outline: none;
+      }
+      color: var(--color-actionPrimary);
+    }
+  }
+
+  .moreLink + .subheadline {
+    grid-row-start: 2;
+  }
+`
+
 const cardPageSectionStyle = css`
   margin-bottom: 0;
   .sectionSubTitleWrapper {
@@ -138,6 +165,47 @@ const cardMixHeaderStyle = css`
     }
   }
 `
+
+export const HomeUnifiedHeader = ({
+  headline,
+  subheadline,
+  moreLinkText,
+  moreLinkUrl,
+  moreLinkClick
+}) => {
+  return headline ? (
+    <header className={cx(cardPageHeaderStyle, homeHeaderStyle)}>
+      <h2 className="headline">{headline}</h2>
+      {subheadline ? <div className="subheadline">{subheadline}</div> : null}
+      {moreLinkText ? (
+        <div className="morelink">
+          <HomeUnifiedMoreLink
+            moreLinkText={moreLinkText}
+            moreLinkUrl={moreLinkUrl}
+            moreLinkClick={moreLinkClick}
+          />
+        </div>
+      ) : null}
+    </header>
+  ) : null
+}
+
+const HomeUnifiedMoreLink = ({ moreLinkUrl, moreLinkText, moreLinkClick }) => {
+  if (moreLinkUrl) {
+    return (
+      <Link href={moreLinkUrl}>
+        <a onClick={moreLinkClick}>{moreLinkText}</a>
+      </Link>
+    )
+  }
+  if (moreLinkText) {
+    return (
+      <button className="inline text" onClick={moreLinkClick}>
+        {moreLinkText}
+      </button>
+    )
+  }
+}
 
 export const HomeJourneyHeader = ({ sectionTitle, sectionDescription }) => {
   return sectionTitle ? (

@@ -15,7 +15,6 @@ const saveContainer = css`
   align-items: center;
   justify-content: flex-start;
   font-size: var(--fontSize150);
-  min-width: 3.913em;
   color: var(--color-textSecondary);
   cursor: pointer;
   padding: 4px;
@@ -69,6 +68,10 @@ const saveContainer = css`
       color: var(--color-actionBrandHover);
     }
   }
+`
+
+const forceWidth = css`
+  min-width: 3.913em;
 `
 
 const popoverContainer = css`
@@ -150,6 +153,7 @@ export const SaveToPocket = function ({
     saveContainer,
     saveStatus,
     'card-actions',
+    !hideCopy && 'forceWidth',
     allowRead && 'read-now',
     className,
     border && 'border'

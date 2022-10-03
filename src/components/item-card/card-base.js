@@ -71,13 +71,17 @@ export const cardStyles = css`
     grid-column: var(--media-column-span);
     .topic-name {
       background: rgba(26, 26, 26, 0.8);
-      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 1.25rem;
+      border-radius: 8px;
       color: var(--color-white100);
       position: absolute;
       padding: 0.25rem 0.825rem;
       z-index: 10;
       bottom: 2rem;
       left: 1rem;
+      text-transform: capitalize;
     }
   }
 
