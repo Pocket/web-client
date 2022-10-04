@@ -194,8 +194,7 @@ export const CardNext = (props) => {
   )
 }
 
-export const cardNextStyles = css`
-  --card-column-span: span 4;
+export const cardNextStyles = css`  --card-column-span: span 4;
   --card-row-span: span 1;
   --card-padding: 1rem;
   --media-column-span: span 12;
@@ -203,6 +202,9 @@ export const cardNextStyles = css`
   --footer-column-span: span 12;
   --cite-column-span: span 8;
   --actions-column-span: span 4;
+  --title-line-height: 1.25em;
+  --title-margin: 1rem 0;
+  --media-radius: 1rem 1rem 0 0;
 
   ${breakpointSmallTablet} {
     --card-column-span: span 12;
@@ -271,7 +273,8 @@ export const cardNextStyles = css`
   .media {
     position: relative;
     grid-column: var(--media-column-span);
-    border-radius: 1rem 1rem 0 0;
+    border-radius: var(--media-radius);
+    padding-bottom: 0;
     .topic-name {
       background: rgba(26, 26, 26, 0.8);
       font-size: 0.875rem;
@@ -285,6 +288,10 @@ export const cardNextStyles = css`
       bottom: 2rem;
       left: 1rem;
       text-transform: capitalize;
+    }
+    span,
+    img {
+      border-radius: var(--media-radius);
     }
   }
 
@@ -332,11 +339,10 @@ export const cardNextStyles = css`
 
   .title {
     font-weight: 500;
-    font-size: clamp(0.75rem, 1.25rem, 2rem);
-    line-height: 1.625rem;
-    margin: 0;
-    margin-bottom: 1rem;
-    max-height: calc(1.625rem * 3);
+    font-size: 1.25rem;
+    line-height: var(--title-line-height);
+    margin: var(--title-margin);
+    max-height: calc(var(--title-line-height) * 3);
     overflow: hidden;
     text-overflow: ellipsis;
     a {
@@ -369,6 +375,8 @@ export const cardNextStyles = css`
 
   .authors {
     display: block;
+    overflow: hidden;
+
     span:after {
       content: ',';
       display: inline-block;
@@ -388,11 +396,14 @@ export const cardNextStyles = css`
     --card-column-span: span 1;
     --card-row-span: span 1;
     --card-padding: 0.725rem;
-    --media-column-span: 2;
-    --content-column-span: 1;
+    --media-column-span: 1;
+    --content-column-span: 2;
     --footer-column-span: span 12;
     --cite-column-span: span 8;
     --actions-column-span: span 4;
+    --title-line-height: 1.25em;
+    --title-margin: 0 0 1rem;
+    --media-radius: 16px 0 0 16px;
 
     margin-right: 1rem;
     padding: 0;
@@ -401,22 +412,11 @@ export const cardNextStyles = css`
       padding-bottom: 0;
     }
 
-    .media {
-      padding-bottom: 0;
-      border-radius: 0 16px 16px 0;
-    }
-    .media span {
-      border-radius: 0 16px 16px 0;
-    }
-    .media img {
-      border-radius: 0 16px 16px 0;
-    }
     .content {
       grid-row: 1;
       padding: var(--card-padding);
     }
     .title {
-      line-height: 1.25;
       font-size: 0.75rem;
       padding-bottom: 0;
     }
@@ -425,10 +425,15 @@ export const cardNextStyles = css`
     }
     .cardWrap > a {
       display: grid;
-      grid-template-columns: auto 40%;
+      grid-template-columns: 40% auto;
     }
     .footer {
       padding: 0 var(--card-padding) var(--card-padding);
+      grid-template-columns: 40% auto;
+      cite {
+        grid-column: 2;
+        padding: 0 var(--card-padding);
+      }
     }
   }
 `
