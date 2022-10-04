@@ -404,7 +404,7 @@ export const cardNextStyles = css`
     --actions-column-span: span 4;
     --title-line-height: 1.25em;
     --title-margin: 0 0 1rem;
-    --media-radius: 16px 0 0 16px;
+    --media-radius: 1rem 0 0 1rem;
 
     margin-right: 1rem;
     padding: 0;
