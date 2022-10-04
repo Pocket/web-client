@@ -14,6 +14,7 @@ import { HOME_SAVE_SUCCESS } from 'actions'
 import { HOME_CONTENT_UNSAVE_REQUEST } from 'actions'
 import { HOME_UNSAVE_SUCCESS } from 'actions'
 import { HOME_UNSAVE_FAILURE } from 'actions'
+import { SET_TOPIC_SUCCESS } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -74,6 +75,7 @@ export const homeUnifiedReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const homeUnifiedSagas = [
   takeEvery(HOME_CONTENT_REQUEST, homeContentRequest),
+  takeEvery(SET_TOPIC_SUCCESS, homeContentRequest),
   takeEvery(HOME_CONTENT_SAVE_REQUEST, homeContentSaveRequest),
   takeEvery(HOME_CONTENT_UNSAVE_REQUEST, homeContentUnSaveRequest)
 ]
