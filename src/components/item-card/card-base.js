@@ -215,6 +215,10 @@ export const cardStyles = css`
     strong {
       font-weight: 500;
     }
+    .unifiedHome & {
+      max-height: calc(3 * 1.5em);
+      overflow: hidden;
+    }
   }
 
   .markdown {
