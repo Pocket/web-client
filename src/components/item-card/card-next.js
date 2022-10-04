@@ -194,7 +194,8 @@ export const CardNext = (props) => {
   )
 }
 
-export const cardNextStyles = css`  --card-column-span: span 4;
+export const cardNextStyles = css`
+  --card-column-span: span 4;
   --card-row-span: span 1;
   --card-padding: 1rem;
   --media-column-span: span 12;
