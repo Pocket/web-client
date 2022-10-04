@@ -80,8 +80,10 @@ function Slate({ slateId }) {
 }
 
 function ItemCard({ corpusId }) {
+  const dispatch = useDispatch()
   const item = useSelector((state) => state.homeUnified.itemsById[corpusId])
   const featureState = useSelector((state) => state.features) || {}
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(corpusId))
 
   const cardNext = featureFlagActive({ flag: 'home.next', featureState })
 
@@ -91,6 +93,23 @@ function ItemCard({ corpusId }) {
   if (!item) return null
 
   const { title, imageUrl, url, excerpt, publisher, topic, authors } = item
+
+  const analyticsData = {
+    corpusRecommendationId: corpusId,
+    url,
+    destination: 'external',
+    ...item?.analyticsData
+  }
+
+  const onImpression = () => dispatch(sendSnowplowEvent('home.corpus.impression', analyticsData))
+  const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
+
+  const onOpenOriginalUrl = () => {
+    const data = { ...analyticsData, destination: 'external' }
+    dispatch(sendSnowplowEvent('home.corpus.view-original', data))
+  }
+  const onOpen = () => dispatch(sendSnowplowEvent('home.corpus.open', analyticsData))
+
   return (
     <CardToRender
       itemId={corpusId}
@@ -103,9 +122,9 @@ function ItemCard({ corpusId }) {
       authors={authors}
       // Open Actions
       openUrl={url}
-      onOpen={() => {}}
-      onOpenOriginalUrl={() => {}}
-      onItemInView={() => {}}
+      onOpen={onOpen}
+      onOpenOriginalUrl={onOpenOriginalUrl}
+      onItemInView={onItemInView}
       onImageFail={() => {}}
       topicName={topic}
       ActionMenu={ActionsToRender}
@@ -122,16 +141,17 @@ function CardActions({ id }) {
   const item = useSelector((state) => state.homeUnified.itemsById[id])
   if (!item) return null
 
-  const { url, saveStatus } = item
-  // const analyticsData = { id }
+  const { corpusItemId, url, saveStatus } = item
+  const analyticsData = { corpusRecommendationId: corpusItemId, url }
 
   // Prep save action
   const onSave = () => {
-    // dispatch(sendSnowplowEvent('home.save', analyticsData))
+    dispatch(sendSnowplowEvent('home.corpus.save', analyticsData))
     dispatch(saveHomeItem(id, url))
   }
 
   const onUnSave = () => {
+    dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
     dispatch(unSaveHomeItem(id, url))
   }
 
@@ -180,18 +200,19 @@ function NextActions({ id }) {
   const item = useSelector((state) => state.homeUnified.itemsById[id])
   if (!item) return null
 
-  const { url, saveStatus } = item
-  // const analyticsData = { id }
-
-  const onUnsave = () => {
-    dispatch(unSaveHomeItem(id, url))
-  }
+  const { corpusItemId, url, saveStatus } = item
+  const analyticsData = { corpusRecommendationId: corpusItemId, url }
 
   // Prep save action
   const onSave = () => {
-    // dispatch(sendSnowplowEvent('home.save', analyticsData))
+    dispatch(sendSnowplowEvent('home.corpus.save', analyticsData))
     dispatch(saveHomeItem(id, url))
   }
 
-  return <NextActionsComponent onSave={onSave} onUnsave={onUnsave} saveStatus={saveStatus} />
+  const onUnSave = () => {
+    dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
+    dispatch(unSaveHomeItem(id, url))
+  }
+
+  return <NextActionsComponent onSave={onSave} onUnsave={onUnSave} saveStatus={saveStatus} />
 }
