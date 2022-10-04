@@ -332,15 +332,15 @@ export const homeActions = {
     eventType: 'engagement',
     entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
-      engagementType: 'unsave',
+      engagementType: 'general',
       uiType: 'button'
     },
     expects: ['corpusRecommendationId', 'url'],
     description: 'Click “UnSave” on a card in baseline home'
   },
   'home.corpus.impression': {
-    eventType: 'contentOpen',
-    entityTypes: ['content', 'ui'],
+    eventType: 'impression',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
       uiType: 'card'
     },
@@ -348,15 +348,15 @@ export const homeActions = {
   },
   'home.corpus.view-original': {
     eventType: 'contentOpen',
-    entityTypes: ['content', 'ui'],
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
       uiType: 'card'
     },
     expects: ['corpusRecommendationId', 'url']
   },
   'home.corpus.open': {
-    eventType: 'impression',
-    entityTypes: ['content', 'ui'],
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
       component: 'ui',
       uiType: 'card'
