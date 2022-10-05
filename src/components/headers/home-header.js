@@ -2,6 +2,7 @@ import { css, cx } from 'linaria'
 import { useTranslation } from 'next-i18next'
 import { CrossIcon } from 'components/icons/CrossIcon'
 import { breakpointMediumHandset } from 'common/constants'
+import { breakpointSmallTablet } from 'common/constants'
 import Link from 'next/link'
 
 const cardPageHeaderStyle = css`
@@ -70,10 +71,21 @@ const homeHeaderStyle = css`
       }
       color: var(--color-actionPrimary);
     }
+    & + .subheadline {
+      grid-row-start: 2;
+    }
+
+    ${breakpointSmallTablet} {
+      justify-content: flex-start;
+      a,
+      button {
+        padding-left: 0;
+      }
+    }
   }
 
-  .moreLink + .subheadline {
-    grid-row-start: 2;
+  ${breakpointSmallTablet} {
+    grid-template-columns: 100%;
   }
 `
 

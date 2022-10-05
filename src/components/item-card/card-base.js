@@ -1011,4 +1011,66 @@ export const cardStyles = css`
       }
     }
   }
+
+  /** Home specific style
+  --------------------------------------------------------------- */
+  &.homeCard {
+    ${breakpointSmallDesktop} {
+      .details {
+        flex-direction: column;
+        align-content: flex-start;
+        align-items: flex-start;
+      }
+      .authors {
+        color: var(--color-textPrimary);
+      }
+      .authors + .publisher {
+        &:before {
+          content: '';
+          display: none;
+          padding: 0;
+        }
+      }
+      .publisher {
+        max-width: 100%;
+      }
+    }
+
+    ${breakpointTinyTablet} {
+      --card-column-span: span 12;
+      padding-bottom: 2rem;
+      .media {
+        grid-column: span 12;
+      }
+      .content {
+        grid-column: span 12;
+      }
+      .title {
+        font-size: 1.25rem;
+        line-height: 1.286;
+        max-height: 4.825em;
+        &.flow {
+          max-height: initial;
+        }
+      }
+      .details {
+        flex-direction: row;
+        align-content: flex-start;
+        align-items: flex-start;
+      }
+      .authors + .publisher {
+        &:before {
+          content: '·';
+          display: inline-block;
+          padding: 0 0.625rem 0 0;
+        }
+      }
+      .publisher {
+        max-width: 70%;
+      }
+      .footer .actions {
+        grid-column: 1 / -1;
+      }
+    }
+  }
 `
