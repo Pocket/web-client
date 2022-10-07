@@ -119,7 +119,7 @@ function ItemCard({ corpusId }) {
       publisher={publisher}
       excerpt={excerpt}
       showExcerpt={true}
-      authors={authors}
+      authors={null}
       className="homeCard"
       // Open Actions
       openUrl={url}
