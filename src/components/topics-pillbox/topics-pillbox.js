@@ -7,8 +7,8 @@ import { Pill } from 'components/pill/pill'
 export const pillboxStyle = css`
   h4 {
     margin-bottom: var(--spacing150);
-    font-family: var(--fontSerifAlt);
-    font-weight: 500;
+    font-family: var(--fontSansSerif);
+    font-weight: 600;
   }
 
   ul {
