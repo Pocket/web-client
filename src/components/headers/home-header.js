@@ -70,6 +70,9 @@ const homeHeaderStyle = css`
         outline: none;
       }
       color: var(--color-actionPrimary);
+      &.text {
+        padding: 0;
+      }
     }
     & + .subheadline {
       grid-row-start: 2;
