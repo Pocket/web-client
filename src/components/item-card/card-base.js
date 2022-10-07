@@ -699,7 +699,7 @@ export const cardStyles = css`
 
   &.flex {
     .title {
-      font-size: 1.25rem;
+      font-size: 1rem;
 
       ${breakpointLargeHandset} {
         font-size: 1rem;
@@ -707,11 +707,7 @@ export const cardStyles = css`
     }
 
     & + .flex {
-      margin-left: 1rem;
-
-      ${breakpointSmallTablet} {
-        margin-left: 0;
-      }
+      grid-column: span 6;
     }
 
     ${breakpointSmallDesktop} {
@@ -740,9 +736,13 @@ export const cardStyles = css`
 
     // these styles are applied when there is only one <article> item in the parent
     &:only-of-type {
+      grid-column: span 12;
       --media-column-span: span 3;
       --content-column-span: span 9;
 
+      .title {
+        font-size: 1.25rem;
+      }
       .view-original-text {
         display: inline;
       }
@@ -759,10 +759,11 @@ export const cardStyles = css`
       }
     }
 
-    // these styles are applied when there are three card items
+    // these styles are applied when there are two card items
     // https://css-tricks.com/solved-with-css-logical-styling-based-on-the-number-of-given-elements/
-    &:first-child:nth-last-child(n + 3),
-    &:first-child:nth-last-child(n + 3) ~ * {
+    &:first-child:nth-last-child(n + 2),
+    &:first-child:nth-last-child(n + 2) ~ * {
+      grid-column: span 6;
       .view-original-text {
         display: none;
       }
@@ -790,6 +791,12 @@ export const cardStyles = css`
           grid-column-gap: 1.5rem;
         }
       }
+    }
+
+    // these styles are applied when there are three card items
+    &:first-child:nth-last-child(n + 3),
+    &:first-child:nth-last-child(n + 3) ~ * {
+      grid-column: span 4;
     }
   }
 

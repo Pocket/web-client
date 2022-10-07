@@ -4,8 +4,8 @@ import { breakpointLargeHandset } from 'common/constants'
 
 export const listStrata = css`
   ${cardsGrid};
-  grid-column-gap: 3.5rem;
-  grid-row-gap: 2rem;
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 1.5rem;
   padding: 1.375rem 0 0;
 
   ${breakpointLargeHandset} {

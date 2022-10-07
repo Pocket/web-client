@@ -2,13 +2,11 @@ import { css, cx } from 'linaria'
 import { breakpointSmallTablet } from 'common/constants'
 
 export const flexListStyles = css`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 1.5rem;
   padding: 2.5rem 0;
-
-  ${breakpointSmallTablet} {
-    flex-direction: column;
-  }
 
   &.border {
     border-bottom: 1px solid var(--color-dividerTertiary);
@@ -29,7 +27,7 @@ export const flexListStyles = css`
 export function FlexList({
   items,
   offset = 0,
-  count = 5,
+  count = 3,
   border = false,
   compact = false,
   className,
@@ -50,6 +48,7 @@ export function FlexList({
     hasChildren && 'no-space',
     className
   )
+
   return (
     <div className={listClass} data-cy={dataCy}>
       {items.slice(start, end).map((id, index) => (
