@@ -1015,6 +1015,10 @@ export const cardStyles = css`
   /** Home specific style
   --------------------------------------------------------------- */
   &.homeCard {
+    .footer .card-actions .icon {
+      margin-left: -6px;
+    }
+
     ${breakpointSmallDesktop} {
       .details {
         flex-direction: column;
