@@ -14,8 +14,8 @@ const getHomeQuery = gql`
           text
         }
         recommendations {
+          corpusRecommendationId: id
           corpusItem {
-            corpusItemId: id
             imageUrl
             url
             title
@@ -25,7 +25,10 @@ const getHomeQuery = gql`
             authors {
               name
             }
-            topic
+          }
+          reason {
+            name
+            type
           }
         }
       }
@@ -55,7 +58,7 @@ function handleResponse(response) {
   const itemsById = slates
     .map(getItemsFromSlate)
     .reduce((previous, current) => ({ ...previous, ...current }), {})
-  
+
   const slatesById = slates.reduce(processSlates, {})
   const slateArray = slates.map((slate) => slate.slateId)
 
@@ -65,13 +68,18 @@ function handleResponse(response) {
 function getItemsFromSlate({ recommendations }) {
   return recommendations.reduce((previous, current) => {
     const corpusItem = current?.corpusItem
+    const topic = current?.reason?.name
+    const corpusRecommendationId = current?.corpusRecommendationId
     if (!corpusItem) return previous
-    return { ...previous, [corpusItem.corpusItemId]: corpusItem }
+    return {
+      ...previous,
+      [corpusRecommendationId]: { ...corpusItem, topic, corpusRecommendationId }
+    }
   }, {})
 }
 
 function processSlates(previous, { recommendations, ...slate }) {
-  const recIds = recommendations.map((rec) => rec.corpusItem?.corpusItemId)
+  const recIds = recommendations.map((rec) => rec.corpusRecommendationId)
   return { ...previous, [slate.slateId]: { ...slate, recommendations: recIds } }
 }
 

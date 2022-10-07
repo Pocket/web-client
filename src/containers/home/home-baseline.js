@@ -142,8 +142,8 @@ function CardActions({ id }) {
   const item = useSelector((state) => state.homeUnified.itemsById[id])
   if (!item) return null
 
-  const { corpusItemId, url, saveStatus } = item
-  const analyticsData = { corpusRecommendationId: corpusItemId, url }
+  const { corpusRecommendationId, url, saveStatus } = item
+  const analyticsData = { corpusRecommendationId, url }
 
   // Prep save action
   const onSave = () => {
