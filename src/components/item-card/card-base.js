@@ -218,6 +218,11 @@ export const cardStyles = css`
     .unifiedHome & {
       max-height: calc(3 * 1.5em);
       overflow: hidden;
+      text-overflow: ellipsis;
+      overflow-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
   }
 
