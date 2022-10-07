@@ -755,6 +755,9 @@ export const cardStyles = css`
       ${breakpointMediumTablet} {
         --media-column-span: span 4;
         --content-column-span: span 8;
+        .title {
+          font-size: 1rem;
+        }
       }
 
       ${breakpointTinyTablet} {
@@ -773,6 +776,22 @@ export const cardStyles = css`
         display: none;
       }
 
+      ${breakpointSmallTablet} {
+        --media-column-span: span 4;
+        --content-column-span: span 8;
+        grid-column: span 12;
+        padding-bottom: 0;
+
+        .cardWrap {
+          grid-column-gap: 1.5rem;
+        }
+      }
+    }
+
+    // these styles are applied when there are three card items
+    &:first-child:nth-last-child(n + 3),
+    &:first-child:nth-last-child(n + 3) ~ * {
+      grid-column: span 4;
       ${breakpointLargeTablet} {
         --media-column-span: span 12;
         --content-column-span: span 12;
@@ -787,21 +806,16 @@ export const cardStyles = css`
           grid-column-gap: 0;
         }
       }
-
       ${breakpointSmallTablet} {
         --media-column-span: span 4;
         --content-column-span: span 8;
+        grid-column: span 12;
+        padding-bottom: 0;
 
         .cardWrap {
           grid-column-gap: 1.5rem;
         }
       }
-    }
-
-    // these styles are applied when there are three card items
-    &:first-child:nth-last-child(n + 3),
-    &:first-child:nth-last-child(n + 3) ~ * {
-      grid-column: span 4;
     }
   }
 
