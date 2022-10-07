@@ -48,7 +48,7 @@ function Slate({ slateId }) {
 
   const showTopicSelector = recommendationReasonType === 'PREFERRED_TOPICS'
 
-  const slateLink = showTopicSelector ? { text: 'Update your topics', url: false } : moreLink
+  const slateLink = showTopicSelector ? { text: 'Update topics', url: false } : moreLink
   const cardNext = featureFlagActive({ flag: 'home.next', featureState })
 
   const urlTrack = () => {}
