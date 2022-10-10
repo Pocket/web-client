@@ -11,13 +11,13 @@ import { deriveRecommendation } from 'common/api/derivers/item'
  *   @param {object} slatesById
  *   @param {object} itemsById
  */
-export function processLineup(response) {
+export function processLineup(response, utmId) {
   const responseData = response?.data?.getSlateLineup
   const { slateLineupExperiment, slateLineupRequestId, slateLineupId, slates } = responseData
   const lineupAnalytics = { slateLineupExperiment, slateLineupRequestId, slateLineupId }
 
   // All the items returned in an key/value object where itemId is the key
-  const itemsById = getRecsById(slates, lineupAnalytics)
+  const itemsById = getRecsById(slates, lineupAnalytics, utmId)
 
   // All the slates returned in an key/value object where itemId is the key
   const slatesById = processSlates(slates)
@@ -30,9 +30,9 @@ export function processLineup(response) {
   return { slateItemArrays, slatesById, itemsById }
 }
 
-export function getRecsById(slates, lineupAnalytics) {
+export function getRecsById(slates, lineupAnalytics, utmId) {
   return slates.reduce((accumulator, current) => {
-    const recommendations = deriveItems(current, lineupAnalytics)
+    const recommendations = deriveItems(current, lineupAnalytics, utmId)
     const recsById = arrayToObject(recommendations, 'itemId')
     return { ...accumulator, ...recsById }
   }, {})
@@ -51,7 +51,7 @@ function processSlates(slates) {
   return arrayToObject(slateWithIds, 'slateId')
 }
 
-function deriveItems(slate, lineupAnalytics) {
+function deriveItems(slate, lineupAnalytics, utmId) {
   const recommendations = slate?.recommendations
   const { slateId, slateRequestId, slateExperiment, displayName, description } = slate
   const analyticsData = {
@@ -63,10 +63,10 @@ function deriveItems(slate, lineupAnalytics) {
     description
   }
 
-  return recommendations.map((item) => deriveRecommendation(item, analyticsData))
+  return recommendations.map((item) => deriveRecommendation(item, analyticsData, utmId))
 }
 
-/** Enrichment Functions 
+/** Enrichment Functions
  --------------------------------------------------------------- */
 /**
  * This gives us a chance to adjust some of the meta data.  This function will be unncessary when

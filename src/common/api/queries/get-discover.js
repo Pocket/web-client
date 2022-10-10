@@ -60,7 +60,7 @@ export async function getDiscoverLineup({ recommendationCount = 30, locale }) {
 }
 
 function handleResponse(response) {
-  const { slateItemArrays, itemsById } = processLineup(response)
+  const { slateItemArrays, itemsById } = processLineup(response, 'pocket_discover')
   const top = slateItemArrays[0] || []
   const bottom = slateItemArrays[1] || []
 

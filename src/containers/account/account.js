@@ -13,6 +13,7 @@ import { RSSFeeds } from 'containers/account/rss/rss'
 import { Privacy } from 'containers/account/privacy/privacy'
 import { useTranslation } from 'next-i18next'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Account = () => {
   const dispatch = useDispatch()
@@ -21,6 +22,9 @@ export const Account = () => {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const { t } = useTranslation()
+
+  const featureState = useSelector((state) => state.features)
+  const hideNotifications = featureFlagActive({ flag: 'account.disable.notifications', featureState })
 
   const onImpression = () => dispatch(sendSnowplowEvent('account.premium.upsell'))
   const onPremiumImpression = (inView) => (inView ? onImpression() : null)
@@ -33,7 +37,7 @@ export const Account = () => {
         <Premium isPremium={isPremium} onPremiumImpression={onPremiumImpression}/>
         <Profile />
         <Email />
-        <Notifications />
+        {hideNotifications ? null : <Notifications />}
         <Braze />
         <ConnectedServices />
         <RSSFeeds />

@@ -7,8 +7,8 @@ import { Pill } from 'components/pill/pill'
 export const pillboxStyle = css`
   h4 {
     margin-bottom: var(--spacing150);
-    font-family: var(--fontSerifAlt);
-    font-weight: 500;
+    font-family: var(--fontSansSerif);
+    font-weight: 600;
   }
 
   ul {
@@ -33,6 +33,7 @@ export const pillboxStyle = css`
 
 const TopicsPillbox = ({
   id,
+  omitPromoted,
   topicsMap,
   headingText,
   headingClassName,
@@ -40,7 +41,9 @@ const TopicsPillbox = ({
   onTopicClick
 }) => {
   topicsMap = topicsMap || {}
-  const topicsKeys = Object.keys(topicsMap)
+  const topicsKeys = Object.keys(topicsMap).filter((topic) =>
+    omitPromoted ? !topicsMap[topic].is_promoted : true
+  )
   const topicsArray = topicsKeys.map((key) => {
     return topicsMap[key]
   })

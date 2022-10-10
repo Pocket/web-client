@@ -142,7 +142,7 @@ describe('Home', () => {
   })
 
   describe('Snowplow', () => {
-    const whitelist = /^home./
+    const whitelist = /^home.(?!corpus)/
     const blacklist = []
 
     const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))

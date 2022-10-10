@@ -1,3 +1,135 @@
+## [1.62.6](https://github.com/Pocket/web-client/compare/v1.62.5...v1.62.6) (2022-10-10)
+
+
+### Bug Fixes
+
+* **marketing:** remove german collection banner from my list ([98941c4](https://github.com/Pocket/web-client/commit/98941c4a31faaa22d4f3ba48dee501016d828c3e))
+
+## [1.62.5](https://github.com/Pocket/web-client/compare/v1.62.4...v1.62.5) (2022-10-10)
+
+
+### Bug Fixes
+
+* **home:** add elipsis to excerpt clamping ([9cf40f5](https://github.com/Pocket/web-client/commit/9cf40f575eef50414faebff546a45416ffd1b31b))
+* **home:** adjust title for topics ([e7ca23b](https://github.com/Pocket/web-client/commit/e7ca23b280bd60bd947f74ea4e905e50234773f4))
+* **home:** align recent saves (switch to grid) ([df5f009](https://github.com/Pocket/web-client/commit/df5f009cb097c41828b2514a32aa89f3a556595d))
+* **home:** header spacing and layout ([337bb93](https://github.com/Pocket/web-client/commit/337bb93f4162b4d09e002dcfe26a9bce017f1fe3))
+* **home:** omit authors from home cards ([a0d893d](https://github.com/Pocket/web-client/commit/a0d893d6d4cccae81ac370f1002e4ad7a4131a48))
+* **home:** responsive on recent saves ([72ead68](https://github.com/Pocket/web-client/commit/72ead68a97f652449b5ca168726776d6c929e73f))
+* **home:** use proper field for analytics/storage ([a370052](https://github.com/Pocket/web-client/commit/a370052f920d63951e3cdcefc3c1cda89fe341ec))
+* **topics:** normalize title for topic selector ([bdeef1b](https://github.com/Pocket/web-client/commit/bdeef1b429dd95ed48a284a870bbc0b2d50aee2e))
+* **ui:** align save icon on home ([f5b9cf4](https://github.com/Pocket/web-client/commit/f5b9cf4d848427683fc858de85d478b2357d8d60))
+
+## [1.62.4](https://github.com/Pocket/web-client/compare/v1.62.3...v1.62.4) (2022-10-05)
+
+
+### Bug Fixes
+
+* **home:** add responsive styles ([1aaa0c4](https://github.com/Pocket/web-client/commit/1aaa0c4f13c0361d3d7aa68541b9d4889479b78c))
+
+## [1.62.3](https://github.com/Pocket/web-client/compare/v1.62.2...v1.62.3) (2022-10-04)
+
+
+### Bug Fixes
+
+* **card next:** code format ([766993f](https://github.com/Pocket/web-client/commit/766993fcf866584d873089023f268821b50cdceb))
+* **card next:** media radius units ([80066ad](https://github.com/Pocket/web-client/commit/80066ad1fdac7ecb9085c8cf72300fe1faef5b76))
+* **card next:** minor styling change for side by side ([71f043c](https://github.com/Pocket/web-client/commit/71f043cf070bcfda273fbb95dc92302efa73fdc0))
+* **home:** add snowplow ([cc8274a](https://github.com/Pocket/web-client/commit/cc8274a43fbd886ea73e54a597bba66945c2b092))
+* **home:** clamp the excerpt ([3c8d937](https://github.com/Pocket/web-client/commit/3c8d9378337cc78c391288d2745724450428ca65))
+* **home:** invalidate list on topic selection ([06ec052](https://github.com/Pocket/web-client/commit/06ec052c4c8cd211ffb57aeb339afa701acc9160))
+* **home:** snowplow adjustments ([e303ee6](https://github.com/Pocket/web-client/commit/e303ee6bfcf21dccd5e4116db74872e365ea9e0d))
+
+## [1.62.2](https://github.com/Pocket/web-client/compare/v1.62.1...v1.62.2) (2022-10-04)
+
+
+### Bug Fixes
+
+* **my-list:** adding card type to my list events as label ([84155f7](https://github.com/Pocket/web-client/commit/84155f76352d62ee922ac08e28e6a69ce060413f))
+* **my-list:** remove label from expects field as its not required and temporary ([efbfa6d](https://github.com/Pocket/web-client/commit/efbfa6d213b80e96cd9bbbcd79e1bd1c659538cd))
+
+## [1.62.1](https://github.com/Pocket/web-client/compare/v1.62.0...v1.62.1) (2022-09-26)
+
+
+### Bug Fixes
+
+* **home:** make card next responsive ([75b0603](https://github.com/Pocket/web-client/commit/75b060346d27d6f2f48ad239a779e306b195daaf))
+
+# [1.62.0](https://github.com/Pocket/web-client/compare/v1.61.4...v1.62.0) (2022-09-26)
+
+
+### Bug Fixes
+
+* **home pi:** remove shorthand from reducer ([1bca5e3](https://github.com/Pocket/web-client/commit/1bca5e3968ddd885c16b471359e8ff8a0552c153))
+* **home:** add overflow to card next ([0b9ef39](https://github.com/Pocket/web-client/commit/0b9ef394add35477eb154b0ebcf577cd159afea2))
+* **home:** add padding to section wrappers ([52f30dc](https://github.com/Pocket/web-client/commit/52f30dc42720287deaaade19535b0b715803375e))
+* **home:** add saving state to card next ([510b122](https://github.com/Pocket/web-client/commit/510b1223868e03f22b045654f4e52eeb7011cfd2))
+* **home:** adding card-next ([b8080f5](https://github.com/Pocket/web-client/commit/b8080f5ab1aaef962fe55b745a5168c35c566c92))
+* **home:** allow topic selection ([b0de1c5](https://github.com/Pocket/web-client/commit/b0de1c50df2e9b26b1cc98d374c127d0e46cd2d9))
+* **home:** allow unsaving ([4ca10b8](https://github.com/Pocket/web-client/commit/4ca10b8965badedbd864cc83b7bb3a5d32d864e2))
+* **home:** recent saves title in home.next ([e81b0b0](https://github.com/Pocket/web-client/commit/e81b0b0c740b5c8260bec55e4bd8ffba42c0029e))
+* **home:** typography clamping ([870e7a1](https://github.com/Pocket/web-client/commit/870e7a1fcbfac053e8cf044672274f81c4bd8e75))
+* **home:** unified header links ([3a22d61](https://github.com/Pocket/web-client/commit/3a22d6104821db90260257a0661a273a1d0faa94))
+* **home:** update topic link names ([9d74e02](https://github.com/Pocket/web-client/commit/9d74e0269898a7cfcb13556dfdb9bd79b43ed8bf))
+* **home:** update topic selector ([d0be4a0](https://github.com/Pocket/web-client/commit/d0be4a0cd445b7218a97316ee00a868ab6884af8))
+* **pill:** align designs / allow for omit promoted ([7533163](https://github.com/Pocket/web-client/commit/75331635fbb96593cbe2e075e57b42d8b15c5a5d))
+* **save to pocket:** only force width with label ([4a2aa45](https://github.com/Pocket/web-client/commit/4a2aa45618d78f45b4011a583d9bc96e8910c774))
+* **topic tags:** adjusting style ([3f31d09](https://github.com/Pocket/web-client/commit/3f31d09ce38a64b1669f9ab79e89f494273a6633))
+
+
+### Features
+
+* **home:** add boilerplate for unified home ([6a72753](https://github.com/Pocket/web-client/commit/6a727536e124dd1095c7596899511b5626596de3))
+* **home:** adding baseline draft ([3719fbe](https://github.com/Pocket/web-client/commit/3719fbed3be55080303c24744fb6e26638f69b78))
+
+## [1.61.4](https://github.com/Pocket/web-client/compare/v1.61.3...v1.61.4) (2022-09-22)
+
+
+### Bug Fixes
+
+* **document:** add ios meta tag to document instead of head file ([109f886](https://github.com/Pocket/web-client/commit/109f886156f9316d93e283fc00616bb8d17b4c9c))
+
+## [1.61.3](https://github.com/Pocket/web-client/compare/v1.61.2...v1.61.3) (2022-09-22)
+
+
+### Bug Fixes
+
+* **account:** wrap notifications in feature flag for quick disabling ([bb4cf4c](https://github.com/Pocket/web-client/commit/bb4cf4c91374f8ed7a9782fa851d30ff735b5032))
+
+## [1.61.2](https://github.com/Pocket/web-client/compare/v1.61.1...v1.61.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* **ios:** adding ios app store meta tag to show banner when viewing web-client on ios device ([5d57475](https://github.com/Pocket/web-client/commit/5d57475d1b43e9fda7e99c3171453938249a452e))
+
+## [1.61.1](https://github.com/Pocket/web-client/compare/v1.61.0...v1.61.1) (2022-09-22)
+
+
+### Bug Fixes
+
+* **items:** add correct utm query param to home, discover, and topics ([933c9b0](https://github.com/Pocket/web-client/commit/933c9b002c6b578fd003028bf40bee696164d5dc))
+* **items:** update topic utm query param value ([553374c](https://github.com/Pocket/web-client/commit/553374c0278c0c5b75f15cf147a89c6e6208a3fe))
+
+# [1.61.0](https://github.com/Pocket/web-client/compare/v1.60.14...v1.61.0) (2022-09-21)
+
+
+### Bug Fixes
+
+* **snapshots:** update snapshots ([0246234](https://github.com/Pocket/web-client/commit/02462347a37adaee59a57ca587e870d78410fc3d))
+
+
+### Features
+
+* **view original:** remove feature flag ([811a09e](https://github.com/Pocket/web-client/commit/811a09e7d19fa2fd00ff1ed256da8327b35938bf))
+
+## [1.60.14](https://github.com/Pocket/web-client/compare/v1.60.13...v1.60.14) (2022-09-21)
+
+
+### Bug Fixes
+
+* **reader:** hide reader recs on starter articles ([2e2eede](https://github.com/Pocket/web-client/commit/2e2eedeec7bea00d64df9216b9f2dd015475b08c))
+
 ## [1.60.13](https://github.com/Pocket/web-client/compare/v1.60.12...v1.60.13) (2022-09-21)
 
 

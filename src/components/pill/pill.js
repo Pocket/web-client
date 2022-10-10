@@ -4,7 +4,7 @@ import { css, cx } from 'linaria'
 
 const pillStyle = css`
   display: inline-block;
-  padding: var(--spacing050) var(--spacing100);
+  padding: 1rem 0.8rem;
   background: none;
   color: var(--color-textPrimary);
   font-size: var(--fontSize085);
@@ -12,9 +12,8 @@ const pillStyle = css`
   font-weight: 500;
   line-height: 1;
   text-decoration: none;
-  border: 1px solid var(--color-formFieldBorder);
-  /* border-radius is half of the sum of vertical padding & font size */
-  border-radius: calc(var(--fontSize085) / 2 + var(--spacing050));
+  border: 1px solid var(--color-dividerTertiary);
+  border-radius: 8px;
   transition: all 0.15s ease-out;
   transition-property: border, color, background;
 

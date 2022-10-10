@@ -71,13 +71,17 @@ export const cardStyles = css`
     grid-column: var(--media-column-span);
     .topic-name {
       background: rgba(26, 26, 26, 0.8);
-      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 1.25rem;
+      border-radius: 8px;
       color: var(--color-white100);
       position: absolute;
       padding: 0.25rem 0.825rem;
       z-index: 10;
       bottom: 2rem;
       left: 1rem;
+      text-transform: capitalize;
     }
   }
 
@@ -210,6 +214,15 @@ export const cardStyles = css`
     margin: 0 0 1rem 0;
     strong {
       font-weight: 500;
+    }
+    .unifiedHome & {
+      max-height: calc(3 * 1.5em);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      overflow-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
   }
 
@@ -691,7 +704,7 @@ export const cardStyles = css`
 
   &.flex {
     .title {
-      font-size: 1.25rem;
+      font-size: 1rem;
 
       ${breakpointLargeHandset} {
         font-size: 1rem;
@@ -699,11 +712,7 @@ export const cardStyles = css`
     }
 
     & + .flex {
-      margin-left: 1rem;
-
-      ${breakpointSmallTablet} {
-        margin-left: 0;
-      }
+      grid-column: span 6;
     }
 
     ${breakpointSmallDesktop} {
@@ -732,9 +741,13 @@ export const cardStyles = css`
 
     // these styles are applied when there is only one <article> item in the parent
     &:only-of-type {
+      grid-column: span 12;
       --media-column-span: span 3;
       --content-column-span: span 9;
 
+      .title {
+        font-size: 1.25rem;
+      }
       .view-original-text {
         display: inline;
       }
@@ -742,6 +755,9 @@ export const cardStyles = css`
       ${breakpointMediumTablet} {
         --media-column-span: span 4;
         --content-column-span: span 8;
+        .title {
+          font-size: 1rem;
+        }
       }
 
       ${breakpointTinyTablet} {
@@ -751,14 +767,31 @@ export const cardStyles = css`
       }
     }
 
-    // these styles are applied when there are three card items
+    // these styles are applied when there are two card items
     // https://css-tricks.com/solved-with-css-logical-styling-based-on-the-number-of-given-elements/
-    &:first-child:nth-last-child(n + 3),
-    &:first-child:nth-last-child(n + 3) ~ * {
+    &:first-child:nth-last-child(n + 2),
+    &:first-child:nth-last-child(n + 2) ~ * {
+      grid-column: span 6;
       .view-original-text {
         display: none;
       }
 
+      ${breakpointSmallTablet} {
+        --media-column-span: span 4;
+        --content-column-span: span 8;
+        grid-column: span 12;
+        padding-bottom: 0;
+
+        .cardWrap {
+          grid-column-gap: 1.5rem;
+        }
+      }
+    }
+
+    // these styles are applied when there are three card items
+    &:first-child:nth-last-child(n + 3),
+    &:first-child:nth-last-child(n + 3) ~ * {
+      grid-column: span 4;
       ${breakpointLargeTablet} {
         --media-column-span: span 12;
         --content-column-span: span 12;
@@ -773,10 +806,11 @@ export const cardStyles = css`
           grid-column-gap: 0;
         }
       }
-
       ${breakpointSmallTablet} {
         --media-column-span: span 4;
         --content-column-span: span 8;
+        grid-column: span 12;
+        padding-bottom: 0;
 
         .cardWrap {
           grid-column-gap: 1.5rem;
@@ -997,6 +1031,72 @@ export const cardStyles = css`
         &.flow {
           max-height: initial;
         }
+      }
+      .footer .actions {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+  /** Home specific style
+  --------------------------------------------------------------- */
+  &.homeCard {
+    .footer .card-actions .icon {
+      margin-left: -6px;
+    }
+
+    ${breakpointSmallDesktop} {
+      .details {
+        flex-direction: column;
+        align-content: flex-start;
+        align-items: flex-start;
+      }
+      .authors {
+        color: var(--color-textPrimary);
+      }
+      .authors + .publisher {
+        &:before {
+          content: '';
+          display: none;
+          padding: 0;
+        }
+      }
+      .publisher {
+        max-width: 100%;
+      }
+    }
+
+    ${breakpointTinyTablet} {
+      --card-column-span: span 12;
+      padding-bottom: 2rem;
+      .media {
+        grid-column: span 12;
+      }
+      .content {
+        grid-column: span 12;
+      }
+      .title {
+        font-size: 1.25rem;
+        line-height: 1.286;
+        max-height: 4.825em;
+        &.flow {
+          max-height: initial;
+        }
+      }
+      .details {
+        flex-direction: row;
+        align-content: flex-start;
+        align-items: flex-start;
+      }
+      .authors + .publisher {
+        &:before {
+          content: '·';
+          display: inline-block;
+          padding: 0 0.625rem 0 0;
+        }
+      }
+      .publisher {
+        max-width: 70%;
       }
       .footer .actions {
         grid-column: 1 / -1;

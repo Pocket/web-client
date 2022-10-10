@@ -8,6 +8,9 @@ class ClientDocument extends Document {
       <Html>
         {/* prettier-ignore */}
         <Head>
+          {/* Loads an iOS app store banner at the top of Safari */}
+          <meta name="apple-itunes-app" content="app-id=309601447" />
+
           {/*
           This all sets us up for color themes without having a flash of
           light if the user has chosen another color mode as the default
@@ -34,10 +37,10 @@ class ClientDocument extends Document {
           />
 
           {/* <!-- OneTrust Cookies Consent Notice start for getpocket.com --> */}
-          <script 
-            src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  
-            type="text/javascript" 
-            charSet="UTF-8" 
+          <script
+            src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+            type="text/javascript"
+            charSet="UTF-8"
             data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e"></script>
           {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
 
@@ -65,7 +68,7 @@ class ClientDocument extends Document {
               var gptadslots = [];
               var googletag = googletag || {cmd:[]};
             `
-            }} 
+            }}
           />
 
         <script async src='https://fdyn.pubwise.io/script/8bfeb37f-2e7b-4828-a1ef-65bed8f5f77c/v3/dyn/pre_pws.js'/>

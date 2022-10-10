@@ -63,7 +63,7 @@ exports[`ItemCard renders a collection 1`] = `
       class="i18uycg6 actions"
     >
       <button
-        class="b5bt6fr sb4ns5w unsaved card-actions"
+        class="b5bt6fr sb4ns5w unsaved card-actions forceWidth"
         data-cy="article-save-btn-making-sense-of-cybersecurity-in-2021"
       >
         <span

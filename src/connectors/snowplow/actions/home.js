@@ -317,5 +317,50 @@ export const homeActions = {
     eventData: {
       uiType: 'button'
     }
+  },
+  'home.corpus.save': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
+    eventData: {
+      engagementType: 'save',
+      uiType: 'button'
+    },
+    expects: ['corpusRecommendationId', 'url'],
+    description: 'Click “Save” on a card in baseline home'
+  },
+  'home.corpus.unsave': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
+    eventData: {
+      engagementType: 'general',
+      uiType: 'button'
+    },
+    expects: ['corpusRecommendationId', 'url'],
+    description: 'Click “UnSave” on a card in baseline home'
+  },
+  'home.corpus.impression': {
+    eventType: 'impression',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: ['corpusRecommendationId', 'url']
+  },
+  'home.corpus.view-original': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: ['corpusRecommendationId', 'url']
+  },
+  'home.corpus.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: ['corpusRecommendationId', 'url']
   }
 }

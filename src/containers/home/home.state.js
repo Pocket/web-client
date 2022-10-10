@@ -7,6 +7,7 @@ import { getTopicMix } from 'common/api'
 import { getRecsById } from 'common/api/derivers/lineups'
 import { arrayToObject } from 'common/utilities'
 import { deriveListItem } from 'common/api/derivers/item'
+import { STARTER_ARTICLES } from 'common/constants'
 
 import { HOME_SAVE_REQUEST } from 'actions'
 import { HOME_SAVE_SUCCESS } from 'actions'
@@ -168,9 +169,8 @@ function* recentDataRequest() {
     if (error) yield put({ type: HOME_RECENT_SAVES_FAILURE, error })
 
     // Remove default item for Home Experiment
-    const notAllowed = ['2333373270', '3242033017']
     const items = Object.values(itemsById)
-      .filter((item) => !notAllowed.includes(item.itemId))
+      .filter((item) => !STARTER_ARTICLES.includes(item.itemId))
       .sort((a, b) => b._createdAt - a._createdAt)
       .map((item) => item.itemId)
 
