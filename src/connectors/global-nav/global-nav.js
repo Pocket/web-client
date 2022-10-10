@@ -81,10 +81,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
   const listMode = useSelector((state) => state?.app?.listMode)
   const colorMode = useSelector((state) => state?.app?.colorMode)
 
-  const showNotification = useSelector(
-    (state) => state?.app?.releaseVersion !== RELEASE_NOTES_VERSION
-  )
-
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
   const setListMode = () => dispatch(setListModeList())
   const setGridMode = () => dispatch(setListModeGrid())
@@ -246,7 +242,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
       setGridMode={setGridMode}
       setDetailMode={setDetailMode}
       sendImpression={sendImpressionEvent}
-      showNotification={showNotification}
       tools={tools}
       noNav={noNav}
       flagsReady={flagsReady}>

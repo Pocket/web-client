@@ -335,14 +335,6 @@ const GlobalNavAccount = ({
             data-cy="account-menu-messages-link">
             <Trans i18nKey="nav:messages">Messages</Trans>
           </PopupMenuItem>
-          <PopupMenuItem
-            href="/my-list/whats-new"
-            id="account-menu-whats-new-link"
-            onClick={handleWhatsNewCase}
-            data-cy="account-menu-whats-new-link">
-            <Trans i18nKey="nav:whats-new">What’s New</Trans>{' '}
-            {showNotification ? <InlineNotification data-cy="notification-whatsnew" /> : null}
-          </PopupMenuItem>
         </PopupMenuGroup>
         <PopupMenuGroup>
           <PopupMenuItem
