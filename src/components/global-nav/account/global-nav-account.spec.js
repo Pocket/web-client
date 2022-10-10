@@ -50,13 +50,11 @@ describe('GlobalNavAccount', () => {
       <GlobalNavAccount {...baseProps} isLoggedIn showNotification />
     )
     expect(getByCy('notification-avatar'))
-    expect(getByCy('notification-whatsnew'))
   })
 
   it('does not render bubble notifications by default', () => {
     const { queryByCy } = wrappedRender(<GlobalNavAccount {...baseProps} isLoggedIn />)
     expect(queryByCy('notification-avatar')).toBeFalsy()
-    expect(queryByCy('notification-whatsnew')).toBeFalsy()
   })
 
   it('calls the onLogin callback when a login is clicked', () => {
