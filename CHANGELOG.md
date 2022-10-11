@@ -1,3 +1,11 @@
+## [1.62.7](https://github.com/Pocket/web-client/compare/v1.62.6...v1.62.7) (2022-10-10)
+
+
+### Bug Fixes
+
+* **global-nav:** hide whats new bubble and link ([aa6eff8](https://github.com/Pocket/web-client/commit/aa6eff8419de5b20ece80702614adf8fc73eac4a))
+* **global-nav:** update test due to whats new link removal ([96f5d18](https://github.com/Pocket/web-client/commit/96f5d18aee9365e48f53016976960f4a9afab5a2))
+
 ## [1.62.6](https://github.com/Pocket/web-client/compare/v1.62.5...v1.62.6) (2022-10-10)
 
 
