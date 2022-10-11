@@ -60,8 +60,8 @@ exports[`ItemCard renders a legacy saved item 1`] = `
           class="readtime"
           data-cy="read-time"
         >
-
-          ·
+           
+          · 
           5
            min
         </span>
@@ -316,8 +316,8 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
           class="readtime"
           data-cy="read-time"
         >
-
-          ·
+           
+          · 
           5
            min
         </span>
@@ -602,8 +602,8 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
           class="readtime"
           data-cy="read-time"
         >
-
-          ·
+           
+          · 
           2
            min
         </span>
@@ -833,8 +833,8 @@ exports[`ItemCard renders a saved collection 1`] = `
           class="readtime"
           data-cy="read-time"
         >
-
-          ·
+           
+          · 
           2
            min
         </span>
