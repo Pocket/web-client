@@ -2,8 +2,8 @@ import { put, call, take, race, select } from 'redux-saga/effects'
 import { takeLatest, takeEvery } from 'redux-saga/effects'
 import { sendItemActions } from 'common/api/_legacy/item-actions'
 import { getSuggestedTags } from 'common/api/_legacy/tags'
-import { buildActions } from 'connectors/items-by-id/my-list/build-actions'
-import { batchSendActions } from 'connectors/items-by-id/my-list/build-actions'
+import { buildActions } from 'connectors/items-by-id/saves/build-actions'
+import { batchSendActions } from 'connectors/items-by-id/saves/build-actions'
 
 import { ITEMS_TAG_REQUEST } from 'actions'
 import { ITEMS_TAG_CONFIRM } from 'actions'
@@ -75,7 +75,7 @@ export const itemTagSagas = [
   takeLatest(ITEMS_TAG_SUGGEST_REQUEST, itemsSuggest)
 ]
 
-export const getItemTags = (state, id) => state.myListItemsById[id]?.tags
+export const getItemTags = (state, id) => state.savesItemsById[id]?.tags
 export const getPremiumStatus = (state) => state.user.premium_status === '1'
 
 /** SAGAS :: RESPONDERS

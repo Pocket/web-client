@@ -63,12 +63,12 @@ import { setColorModeLight } from 'connectors/app/app.state'
 import { setColorModeDark } from 'connectors/app/app.state'
 import { setColorModeSepia } from 'connectors/app/app.state'
 
-import { itemsArchiveBatch } from 'connectors/items-by-id/my-list/items.archive.js'
-import { itemsUnarchiveBatch } from 'connectors/items-by-id/my-list/items.archive.js'
-import { itemsFavoriteBatch } from 'connectors/items-by-id/my-list/items.favorite.js'
-import { itemsUnFavoriteBatch } from 'connectors/items-by-id/my-list/items.favorite.js'
-import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
-import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
+import { itemsArchiveBatch } from 'connectors/items-by-id/saves/items.archive.js'
+import { itemsUnarchiveBatch } from 'connectors/items-by-id/saves/items.archive.js'
+import { itemsFavoriteBatch } from 'connectors/items-by-id/saves/items.favorite.js'
+import { itemsUnFavoriteBatch } from 'connectors/items-by-id/saves/items.favorite.js'
+import { itemsDeleteAction } from 'connectors/items-by-id/saves/items.delete'
+import { itemsTagAction } from 'connectors/items-by-id/saves/items.tag'
 
 export const openHelpOverlay = () => ({ type: SHORTCUT_OPEN_HELP_OVERLAY })
 export const closeHelpOverlay = () => ({ type: SHORTCUT_CLOSE_HELP_OVERLAY })
@@ -105,7 +105,7 @@ export const decreaseColumnWidth = () => ({type: SHORTCUT_DECREASE_COLUMN_WIDTH 
 
 // prettier-ignore
 export const listShortcuts = [
-  { action: goToList, copy: 'Go to My List', keyCopy: 'g then l', keys:  'g l' },
+  { action: goToList, copy: 'Go to Saves', keyCopy: 'g then l', keys:  'g l' },
   { action: goToArchive, copy: 'Go to Archive', keyCopy: 'g then a', keys:  'g a' },
   { action: goToFavorites, copy: 'Go to Favorites', keyCopy: 'g then f', keys:  'g f' },
   { action: goToArticles, copy: 'Go to Articles', keyCopy: 'g then r', keys: 'g r' },
@@ -219,8 +219,8 @@ const getCurrentItemId = (state) => state.shortcuts.currentId
 const getCurrentPosition = (state) => state.shortcuts.position
 const getCurrentBulkItemId = (state) => state.bulkEdit.currentId
 const getSection = (state) => state.app.section
-const getItems = (state, section) => state.myList[section]
-const getItem = (state, id) => state.myListItemsById[id]
+const getItems = (state, section) => state.saves[section]
+const getItem = (state, id) => state.savesItemsById[id]
 const getFontSize = (state) => state.reader.fontSize
 const getColumnWidth = (state) => state.reader.columnWidth
 const getBulkItems = (state) => state?.bulkEdit?.selected
@@ -234,31 +234,31 @@ function* appModeSwitch() {
 }
 
 function* shortcutGoToList({ router }) {
-  yield call(router.push, '/my-list')
+  yield call(router.push, '/saves')
 }
 
 function* shortcutGoToArchive({ router }) {
-  yield call(router.push, '/my-list/archive')
+  yield call(router.push, '/saves/archive')
 }
 
 function* shortcutGoToFavorites({ router }) {
-  yield call(router.push, '/my-list/favorites')
+  yield call(router.push, '/saves/favorites')
 }
 
 function* shortcutGoToArticles({ router }) {
-  yield call(router.push, '/my-list/articles')
+  yield call(router.push, '/saves/articles')
 }
 
 function* shortcutGoToHighlights({ router }) {
-  yield call(router.push, '/my-list/highlights')
+  yield call(router.push, '/saves/highlights')
 }
 
 function* shortcutGoToVideos({ router }) {
-  yield call(router.push, '/my-list/videos')
+  yield call(router.push, '/saves/videos')
 }
 
 function* shortcutGoToTags({ router }) {
-  yield call(router.push, '/my-list/tags')
+  yield call(router.push, '/saves/tags')
 }
 
 /**

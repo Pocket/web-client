@@ -34,7 +34,7 @@ const nextOptions = {
   async redirects() {
     return [
       {
-        source: '/my-list/read/:slug',
+        source: '/saves/read/:slug',
         destination: '/read/:slug',
         permanent: true
       }

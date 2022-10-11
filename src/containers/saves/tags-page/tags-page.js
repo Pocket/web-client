@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { getUserTags } from './tags-page.state'
-import { MyListHeader } from 'components/headers/my-list-header'
+import { SavesHeader } from 'components/headers/saves-header'
 import { RecentTags } from 'components/tag-lists/recent-tags'
 import { TagList } from 'components/tag-lists/tags-list'
 
@@ -29,11 +29,11 @@ export default function TagsPage(props) {
 
   return (
     <Layout title={metaData.title} metaData={metaData}>
-      <SideNav type="my-list" subset={subset} isLoggedIn={isLoggedIn} />
+      <SideNav type="saves" subset={subset} isLoggedIn={isLoggedIn} />
 
       {shouldRender ? (
         <main className="main">
-          <MyListHeader type="my-list" subset={'tag-page'} filter={filter} title="tags" />
+          <SavesHeader type="saves" subset={'tag-page'} filter={filter} title="tags" />
 
           {userTagsRecent ? <RecentTags taggedItems={taggedItems} /> : null}
           {userTags ? (

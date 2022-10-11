@@ -20,7 +20,7 @@ export const HomeRecentSaves = () => {
   const cardNext = featureFlagActive({ flag: 'home.next', featureState })
   const CardToRender = cardNext ? RecentCardNext : RecentCard
 
-  const onLinkClick = () => dispatch(sendSnowplowEvent('home.recent.view-my-list'))
+  const onLinkClick = () => dispatch(sendSnowplowEvent('home.recent.view-saves'))
 
   // Initialize data
   useEffect(() => {
@@ -30,14 +30,14 @@ export const HomeRecentSaves = () => {
   const homeNext = featureFlagActive({ flag: 'home.next', featureState })
   const sectionTitle = homeNext
     ? t('home:recent-saves', 'Recent Saves')
-    : t('home:recent-saves-title', 'Recent Saves to My List')
+    : t('home:recent-saves-title', 'Recent Saves')
 
   return recentSaves?.length > 0 ? (
     <>
       <HomeUnifiedHeader
         headline={sectionTitle}
-        moreLinkText={t('home:recent-saves-my-list-link-text', 'Go to My List')}
-        moreLinkUrl={'/my-list?src=recent-saves'}
+        moreLinkText={t('home:recent-saves-link-text', 'Go to Saves')}
+        moreLinkUrl={'/saves?src=recent-saves'}
         moreLinkClick={onLinkClick}
       />
 
@@ -60,7 +60,7 @@ const RecentCardNext = ({ id, position, showMedia = true, showExcerpt = false })
   const dispatch = useDispatch()
 
   // Get data from state
-  const item = useSelector((state) => state.myListItemsById[id])
+  const item = useSelector((state) => state.savesItemsById[id])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
   if (!item) return null

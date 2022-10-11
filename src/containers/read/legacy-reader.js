@@ -29,14 +29,14 @@ import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
 
-import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
-import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
-import { itemsShareAction } from 'connectors/items-by-id/my-list/items.share'
+import { itemsDeleteAction } from 'connectors/items-by-id/saves/items.delete'
+import { itemsTagAction } from 'connectors/items-by-id/saves/items.tag'
+import { itemsShareAction } from 'connectors/items-by-id/saves/items.share'
 
-import { itemsFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
-import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favorite'
-import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
-import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
+import { itemsFavoriteAction } from 'connectors/items-by-id/saves/items.favorite'
+import { itemsUnFavoriteAction } from 'connectors/items-by-id/saves/items.favorite'
+import { itemsArchiveAction } from 'connectors/items-by-id/saves/items.archive'
+import { itemsUnArchiveAction } from 'connectors/items-by-id/saves/items.archive'
 
 import { Onboarding } from 'connectors/onboarding/onboarding'
 
@@ -60,7 +60,7 @@ export default function LegacyReader() {
   const { slug: id } = router.query
 
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false ) //prettier-ignore
-  const articleData = useSelector((state) => state.myListItemsById[id])
+  const articleData = useSelector((state) => state.savesItemsById[id])
   const articleContent = useSelector((state) => state.reader.articleContent)
   const annotations = useSelector((state) => state.reader.annotations)
   const tags = useSelector((state) => state.reader.tags)

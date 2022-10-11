@@ -1,7 +1,7 @@
 import { put, call, take, takeLatest, race } from 'redux-saga/effects'
 import { sendItemActions } from 'common/api/_legacy/item-actions'
-import { buildActions } from 'connectors/items-by-id/my-list/build-actions'
-import { batchSendActions } from 'connectors/items-by-id/my-list/build-actions'
+import { buildActions } from 'connectors/items-by-id/saves/build-actions'
+import { batchSendActions } from 'connectors/items-by-id/saves/build-actions'
 
 import { ITEMS_FAVORITE_REQUEST } from 'actions'
 import { ITEMS_FAVORITE_SUCCESS } from 'actions'

@@ -59,7 +59,7 @@ export function RecentSearches({ searchTerms = [] }) {
 
       {searchTerms.map((search) => (
         <div key={search}>
-          <Link href={`/my-list/search?query=${encodeURIComponent(search)}`}>
+          <Link href={`/saves/search?query=${encodeURIComponent(search)}`}>
             <a tabIndex={0}>{search}</a>
           </Link>
         </div>

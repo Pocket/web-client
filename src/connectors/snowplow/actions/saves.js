@@ -1,5 +1,5 @@
-export const myListActions = {
-  'my-list.card.view-original': {
+export const savesActions = {
+  'saves.card.view-original': {
     eventType: 'contentOpen',
     entityTypes: ['content', 'ui'],
     eventData: {
@@ -7,7 +7,7 @@ export const myListActions = {
     },
     expects: ['id', 'url', 'position', 'destination']
   },
-  'my-list.card.permanent-library': {
+  'saves.card.permanent-library': {
     eventType: 'contentOpen',
     entityTypes: ['content', 'ui'],
     eventData: {
@@ -16,7 +16,7 @@ export const myListActions = {
     },
     expects: ['id', 'url', 'position']
   },
-  'my-list.card.open': {
+  'saves.card.open': {
     eventType: 'contentOpen',
     entityTypes: ['content', 'ui'],
     eventData: {
@@ -24,7 +24,7 @@ export const myListActions = {
     },
     expects: ['id', 'url', 'position', 'destination']
   },
-  'my-list.card.impression': {
+  'saves.card.impression': {
     eventType: 'impression',
     entityTypes: ['content', 'ui'],
     eventData: {
@@ -34,7 +34,7 @@ export const myListActions = {
     expects: ['id', 'url', 'position'],
     description: 'passing in label to capture the card type being displayed (list, detail, or grid). Not required'
   },
-  'my-list.share': {
+  'saves.share': {
     eventType: 'engagement',
     entityTypes: ['content', 'ui'],
     eventData: {
@@ -42,7 +42,7 @@ export const myListActions = {
     },
     expects: ['id', 'url', 'position']
   },
-  'my-list.delete': {
+  'saves.delete': {
     eventType: 'engagement',
     entityTypes: ['content', 'ui'],
     eventData: {
@@ -50,7 +50,7 @@ export const myListActions = {
     },
     expects: ['id', 'url', 'position']
   },
-  'my-list.archive': {
+  'saves.archive': {
     eventType: 'engagement',
     entityTypes: ['content', 'ui'],
     eventData: {
@@ -58,7 +58,7 @@ export const myListActions = {
     },
     expects: ['id', 'url', 'position']
   },
-  'my-list.unarchive': {
+  'saves.unarchive': {
     eventType: 'engagement',
     entityTypes: ['content', 'ui'],
     eventData: {
@@ -67,7 +67,7 @@ export const myListActions = {
     },
     expects: ['id', 'url', 'position']
   },
-  'my-list.favorite': {
+  'saves.favorite': {
     eventType: 'engagement',
     entityTypes: ['content', 'ui'],
     eventData: {
@@ -75,7 +75,7 @@ export const myListActions = {
     },
     expects: ['id', 'url', 'position']
   },
-  'my-list.un-favorite': {
+  'saves.un-favorite': {
     eventType: 'engagement',
     entityTypes: ['content', 'ui'],
     eventData: {
@@ -83,7 +83,7 @@ export const myListActions = {
     },
     expects: ['id', 'url', 'position']
   },
-  'my-list.tag': {
+  'saves.tag': {
     eventType: 'engagement',
     entityTypes: ['content', 'ui'],
     eventData: {
@@ -91,7 +91,7 @@ export const myListActions = {
     },
     expects: ['id', 'url', 'position']
   },
-  'my-list.display.view': {
+  'saves.display.view': {
     eventType: 'engagement',
     entityTypes: ['ui'],
     eventData: {
@@ -99,7 +99,7 @@ export const myListActions = {
     },
     expects: ['value']
   },
-  'my-list.sort': {
+  'saves.sort': {
     eventType: 'engagement',
     entityTypes: ['ui'],
     eventData: {
@@ -107,7 +107,7 @@ export const myListActions = {
     },
     expects: ['value']
   },
-  'my-list.theme': {
+  'saves.theme': {
     eventType: 'engagement',
     entityTypes: ['ui'],
     eventData: {

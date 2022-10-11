@@ -1,5 +1,5 @@
 import { put, takeEvery, call } from 'redux-saga/effects'
-import { getMyList } from 'common/api/my-list'
+import { getSaves } from 'common/api/saves'
 import { getHomeLineup as apiGetHomeLineup } from 'common/api'
 import { saveItem } from 'common/api/_legacy/saveItem'
 import { removeItem } from 'common/api/_legacy/removeItem'
@@ -42,8 +42,8 @@ import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
 
 import { ITEMS_ADD_SUCCESS } from 'actions'
 
-import { MYLIST_DATA_REQUEST } from 'actions'
-import { MYLIST_UPDATE_REQUEST } from 'actions'
+import { SAVES_DATA_REQUEST } from 'actions'
+import { SAVES_UPDATE_REQUEST } from 'actions'
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
@@ -87,8 +87,8 @@ export const homeReducers = (state = initialState, action) => {
     }
 
     case HOME_SIMILAR_RECS_CLEAR:
-    case MYLIST_DATA_REQUEST:
-    case MYLIST_UPDATE_REQUEST:
+    case SAVES_DATA_REQUEST:
+    case SAVES_UPDATE_REQUEST:
     case HYDRATE: {
       return { ...state, similarRecId: false, similarRecsResolved: false }
     }
@@ -160,7 +160,7 @@ function* homeLineupRequest(action) {
 
 function* recentDataRequest() {
   try {
-    const { itemsById, error } = yield fetchMyListData({
+    const { itemsById, error } = yield fetchSavesData({
       count: 3,
       offset: 0,
       state: 'unread',
@@ -263,13 +263,13 @@ function* homeRecsByTopic(action) {
  --------------------------------------------------------------- */
 
 /**
- * fetchMyListData
+ * fetchSavesData
  * Make and async request for a Pocket v3 feed and return best data
  * @return items {array} An array of derived items
  */
-export async function fetchMyListData(params) {
+export async function fetchSavesData(params) {
   try {
-    const response = await getMyList(params)
+    const response = await getSaves(params)
     if (!response.list) return { error: 'No Items Returned' }
 
     const total = response.total

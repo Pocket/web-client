@@ -6,7 +6,7 @@ import { breakpointLargeTablet } from 'common/constants'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { ListSort } from 'components/list-sort/list-sort'
 
-export const myListHeaderStyle = css`
+export const savesHeaderStyle = css`
   margin-bottom: var(--spacing150);
   font-family: 'Graphik Web';
   border-bottom: 1px solid var(--color-dividerTertiary);
@@ -66,11 +66,11 @@ export const myListHeaderStyle = css`
   }
 `
 
-export const MyListHeader = ({ subset, filter, title, sortOrder, handleNewest, handleOldest }) => {
+export const SavesHeader = ({ subset, filter, title, sortOrder, handleNewest, handleOldest }) => {
   const { t } = useTranslation()
 
   const translatedHeaders = {
-    unread: t('headers:my-list', 'My List'),
+    unread: t('headers:saves', 'Saves'),
     archive: t('headers:archive', 'Archive'),
     favorites: t('headers:favorites', 'Favorites'),
     highlights: t('headers:highlights', 'Highlights'),
@@ -80,7 +80,7 @@ export const MyListHeader = ({ subset, filter, title, sortOrder, handleNewest, h
   }
 
   return subset ? (
-    <header className={myListHeaderStyle}>
+    <header className={savesHeaderStyle}>
       <h1 className="pageTitle" data-cy="page-title">
         {translatedHeaders[title]}
       </h1>

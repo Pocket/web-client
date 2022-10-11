@@ -49,7 +49,7 @@ exports[`ItemCard renders a legacy saved item 1`] = `
         <a
           class="publisher"
           data-cy="publisher-link"
-          href="https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential?utm_source=pocket_mylist"
+          href="https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential?utm_source=pocket_saves"
           rel="noopener noreferrer"
           tabindex="0"
           target="_blank"
@@ -60,8 +60,8 @@ exports[`ItemCard renders a legacy saved item 1`] = `
           class="readtime"
           data-cy="read-time"
         >
-           
-          · 
+
+          ·
           5
            min
         </span>
@@ -305,7 +305,7 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
         <a
           class="publisher"
           data-cy="publisher-link"
-          href="http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html?utm_source=pocket_mylist"
+          href="http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html?utm_source=pocket_saves"
           rel="noopener noreferrer"
           tabindex="0"
           target="_blank"
@@ -316,8 +316,8 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
           class="readtime"
           data-cy="read-time"
         >
-           
-          · 
+
+          ·
           5
            min
         </span>
@@ -503,7 +503,7 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
     >
       <a
         data-cy="image-link"
-        href="https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_mylist"
+        href="https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_saves"
         rel="noopener noreferrer"
         tabindex="-1"
         target="_blank"
@@ -555,7 +555,7 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
       >
         <a
           data-cy="title-link"
-          href="https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_mylist"
+          href="https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_saves"
           rel="noopener noreferrer"
           tabindex="0"
           target="_blank"
@@ -591,7 +591,7 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
         <a
           class="publisher"
           data-cy="publisher-link"
-          href="https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_mylist"
+          href="https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_saves"
           rel="noopener noreferrer"
           tabindex="0"
           target="_blank"
@@ -602,8 +602,8 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
           class="readtime"
           data-cy="read-time"
         >
-           
-          · 
+
+          ·
           2
            min
         </span>
@@ -822,7 +822,7 @@ exports[`ItemCard renders a saved collection 1`] = `
         <a
           class="publisher"
           data-cy="publisher-link"
-          href="https://getpocket.com/collections/delicious-reads-about-your-favorite-candy?utm_source=pocket_mylist"
+          href="https://getpocket.com/collections/delicious-reads-about-your-favorite-candy?utm_source=pocket_saves"
           rel="noopener noreferrer"
           tabindex="0"
           target="_blank"
@@ -833,8 +833,8 @@ exports[`ItemCard renders a saved collection 1`] = `
           class="readtime"
           data-cy="read-time"
         >
-           
-          · 
+
+          ·
           2
            min
         </span>
@@ -1053,7 +1053,7 @@ exports[`ItemCard renders a saved image 1`] = `
         <a
           class="publisher"
           data-cy="publisher-link"
-          href="https://cdn.dribbble.com/users/59947/screenshots/16700535/media/335d386abb459f49570030e830429cef.jpg?utm_source=pocket_mylist"
+          href="https://cdn.dribbble.com/users/59947/screenshots/16700535/media/335d386abb459f49570030e830429cef.jpg?utm_source=pocket_saves"
           rel="noopener noreferrer"
           tabindex="0"
           target="_blank"
@@ -1275,7 +1275,7 @@ exports[`ItemCard renders a saved video 1`] = `
         <a
           class="publisher"
           data-cy="publisher-link"
-          href="https://www.youtube.com/watch?utm_source=pocket_mylist&v=1AnG04qnLqI"
+          href="https://www.youtube.com/watch?utm_source=pocket_saves&v=1AnG04qnLqI"
           rel="noopener noreferrer"
           tabindex="0"
           target="_blank"

@@ -27,7 +27,7 @@ import { shareAction } from 'connectors/share-modal/share-modal.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export function ActionsMyList({ id, position }) {
+export function ActionsSaves({ id, position }) {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -44,31 +44,31 @@ export function ActionsMyList({ id, position }) {
   /** ITEM MENU ITEMS
   --------------------------------------------------------------- */
   const itemShare = () => {
-    dispatch(sendSnowplowEvent('my-list.share', analyticsData))
+    dispatch(sendSnowplowEvent('saves.share', analyticsData))
     dispatch(shareAction({ item, position }))
   }
   const itemDelete = () => {
-    dispatch(sendSnowplowEvent('my-list.delete', analyticsData))
+    dispatch(sendSnowplowEvent('saves.delete', analyticsData))
     dispatch(mutationDelete(id))
   }
   const itemArchive = () => {
-    dispatch(sendSnowplowEvent('my-list.archive', analyticsData))
+    dispatch(sendSnowplowEvent('saves.archive', analyticsData))
     dispatch(mutationArchive(id))
   }
   const itemUpsert = () => {
-    dispatch(sendSnowplowEvent('my-list.unarchive', analyticsData))
+    dispatch(sendSnowplowEvent('saves.unarchive', analyticsData))
     dispatch(mutationUpsert(givenUrl, filters, sort, true))
   }
   const itemFavorite = () => {
-    dispatch(sendSnowplowEvent('my-list.favorite', analyticsData))
+    dispatch(sendSnowplowEvent('saves.favorite', analyticsData))
     dispatch(mutationFavorite(id))
   }
   const itemUnFavorite = () => {
-    dispatch(sendSnowplowEvent('my-list.un-favorite', analyticsData))
+    dispatch(sendSnowplowEvent('saves.un-favorite', analyticsData))
     dispatch(mutationUnFavorite(id))
   }
   const itemTag = () => {
-    dispatch(sendSnowplowEvent('my-list.tag', analyticsData))
+    dispatch(sendSnowplowEvent('saves.tag', analyticsData))
     dispatch(mutationTagItem(id, tags))
   }
 
@@ -78,7 +78,7 @@ export function ActionsMyList({ id, position }) {
 
   const itemPermLibOpen = () => {
     const data = { ...analyticsData, url: permanentUrl }
-    dispatch(sendSnowplowEvent('my-list.card.permanent-library', data))
+    dispatch(sendSnowplowEvent('saves.card.permanent-library', data))
   }
 
   const archiveAction = isArchived ? itemUpsert : itemArchive

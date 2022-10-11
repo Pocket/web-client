@@ -74,7 +74,7 @@ export function FilterMenu({ subset, filter, tag, query }) {
   }
 
   const filterTitles = {
-    unread: t('nav:my-list', 'My List'),
+    unread: t('nav:saves', 'Saves'),
     archive: t('nav:archive', 'Archive'),
     favorites: t('nav:favorites', 'Favorites')
   }
@@ -108,21 +108,21 @@ export function FilterMenu({ subset, filter, tag, query }) {
       {shown ? (
         <div className="filter-menu" ref={popBody}>
           <div>
-            <Link href={`/my-list/${path}${searchQuery}`}>
+            <Link href={`/saves/${path}${searchQuery}`}>
               <button className={filterActive()} data-cy="filter-all-items">
                 <Trans i18nKey="nav:all-items">All items</Trans>
               </button>
             </Link>
           </div>
           <div>
-            <Link href={`/my-list/${path}/unread${searchQuery}`}>
-              <button className={filterActive('unread')} data-cy="filter-mylist">
-                <Trans i18nKey="nav:my-list">My List</Trans>
+            <Link href={`/saves/${path}/unread${searchQuery}`}>
+              <button className={filterActive('unread')} data-cy="filter-saves">
+                <Trans i18nKey="nav:saves">Saves</Trans>
               </button>
             </Link>
           </div>
           <div>
-            <Link href={`/my-list/${path}/archive${searchQuery}`}>
+            <Link href={`/saves/${path}/archive${searchQuery}`}>
               <button className={filterActive('archive')} data-cy="filter-archive">
                 <Trans i18nKey="nav:archive">Archive</Trans>
               </button>
@@ -130,7 +130,7 @@ export function FilterMenu({ subset, filter, tag, query }) {
           </div>
           {path === 'favorites' || subset === 'search' ? null : (
             <div>
-              <Link href={`/my-list/${path}/favorites`}>
+              <Link href={`/saves/${path}/favorites`}>
                 <button className={filterActive('favorites')} data-cy="filter-favorites">
                   <Trans i18nKey="nav:favorites">Favorites</Trans>
                 </button>

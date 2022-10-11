@@ -7,7 +7,7 @@ import { ShowSimilar } from 'components/item-actions/show-similar'
 export function ActionsRecent({ id }) {
   const dispatch = useDispatch()
 
-  const item = useSelector((state) => state.myListItemsById[id])
+  const item = useSelector((state) => state.savesItemsById[id])
 
   if (!item) return null
 

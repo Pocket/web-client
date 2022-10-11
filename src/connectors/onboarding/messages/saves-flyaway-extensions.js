@@ -55,13 +55,13 @@ const styleOverrides = css`
   }
 `
 
-export const MyListFlyawayExtensions = () => {
+export const SavesFlyawayExtensions = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
   const homeFlyawayDismissed =
     useSelector((state) => state.onboarding.homeFlyawayReader) === false
-  const extensionFlyawayReady = useSelector((state) => state.onboarding.myListFlyawayExtension)
+  const extensionFlyawayReady = useSelector((state) => state.onboarding.savesFlyawayExtension)
   const showFlyaway = homeFlyawayDismissed && extensionFlyawayReady
 
   useEffect(() => {
@@ -157,7 +157,7 @@ export const MyListFlyawayExtensions = () => {
 
   return (
     <Flyaway
-      dataCy="mylist-flyaway-extensions"
+      dataCy="saves-flyaway-extensions"
       title={title}
       description={description}
       handleClose={handleClose}

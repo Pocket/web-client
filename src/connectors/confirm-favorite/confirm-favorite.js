@@ -1,8 +1,8 @@
 import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
-import { itemsFavoriteConfirm } from 'connectors/items-by-id/my-list/items.favorite'
-import { itemsFavoriteCancel } from 'connectors/items-by-id/my-list/items.favorite'
+import { itemsFavoriteConfirm } from 'connectors/items-by-id/saves/items.favorite'
+import { itemsFavoriteCancel } from 'connectors/items-by-id/saves/items.favorite'
 import { BatchProcessing } from 'components/processing/processing'
 import { useTranslation, Trans } from 'next-i18next'
 

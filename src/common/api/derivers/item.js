@@ -85,7 +85,7 @@ import { BASE_URL } from 'common/constants'
 export function deriveSavedItem(node) {
   const { item, ...nodeDetails } = node
   // node contains user-item data as well as the item itself
-  const derivedItem = deriveItemData({ item, utmId: 'pocket_mylist', node: nodeDetails })
+  const derivedItem = deriveItemData({ item, utmId: 'pocket_saves', node: nodeDetails })
   return { item: derivedItem, node: nodeDetails }
 }
 
@@ -96,7 +96,7 @@ export function deriveListItem(passedItem, legacy) {
   // node contains user-item data as well as the item itself
   const { node = {}, cursor = null } = edge
   const { item, ...rest } = node
-  return deriveItem({ item, node: rest, cursor, utmId: 'pocket_mylist' })
+  return deriveItem({ item, node: rest, cursor, utmId: 'pocket_saves' })
 }
 
 export function deriveCorpusItem(recommendation) {
@@ -339,7 +339,7 @@ function isReadable({ item }) {
  * @param {object} item An item returned from the server
  * @returns {string} The url that opens to a non-pocket site
  */
-function externalUrl({ item, itemEnrichment, utmId = 'pocket_mylist' }) {
+function externalUrl({ item, itemEnrichment, utmId = 'pocket_saves' }) {
   const urlToUse = itemEnrichment?.url || item?.givenUrl || item?.resolvedUrl
   const linkWithUTM = replaceUTM(urlToUse, utmId)
   return linkWithUTM

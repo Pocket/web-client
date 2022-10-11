@@ -8,7 +8,7 @@ export function ItemTags({ tags }) {
       {tags && Array.isArray(tags)
         ? tags.map((tag) => (
             <span key={tag.name}>
-              <Link href={`/my-list/tags/${encodeURIComponent(tag.name)}`}>
+              <Link href={`/saves/tags/${encodeURIComponent(tag.name)}`}>
                 <a className={`${tagBase} ${tagWrapper}`}>{tag.name}</a>
               </Link>
             </span>

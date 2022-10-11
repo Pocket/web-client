@@ -29,7 +29,7 @@ const snackbar = css`
 `
 
 const wrapper = css`
-  &.my-list {
+  &.saves {
     padding: 0 0;
     margin-bottom: 2rem;
   }

@@ -119,9 +119,9 @@ export const savedLegacyListItemFromClientApi = {
   cursor: 'MzA1OTAwMDQxNV8qXzE2MzQ4NTI0MzI='
 }
 
-describe('My List - Original Deriver', () => {
+describe('Saves - Original Deriver', () => {
   const expectedSaveUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
-  const expectedExternalUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential?utm_source=pocket_mylist' //prettier-ignore
+  const expectedExternalUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential?utm_source=pocket_saves' //prettier-ignore
   const expectedReadUrl = '/read/3059000415'
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3059000415'
   const expectedAnalyticsUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
@@ -245,7 +245,7 @@ describe('My List - Original Deriver', () => {
 
   describe('Snowplow', () => {
     const item = deriveListItem(savedLegacyListItemFromClientApi)
-    const whitelist = /^my-list./
+    const whitelist = /^saves./
     const blacklist = []
 
     const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))

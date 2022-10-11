@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
-import { cancelEditUserTag } from 'containers/my-list/tags-page/tags-page.state'
-import { confirmEditUserTag } from 'containers/my-list/tags-page/tags-page.state'
+import { cancelEditUserTag } from 'containers/saves/tags-page/tags-page.state'
+import { confirmEditUserTag } from 'containers/saves/tags-page/tags-page.state'
 import { useTranslation, Trans } from 'next-i18next'
 
 const inputWrapper = css`

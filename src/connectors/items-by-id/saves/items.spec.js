@@ -1,4 +1,4 @@
-import { deriveMyListItems } from './items.derive'
+import { deriveSavesItems } from './items.derive'
 
 // An item without expected values that make up the bulk of the visuals in a card
 // EX: title, excerpt, images.  These are assumed to always be there, but there
@@ -61,12 +61,12 @@ const itemWithMissingData = [
   }
 ]
 
-describe('My List Items', () => {
+describe('Saves Items', () => {
   describe('deriveItemData', () => {
     it('should derive data as expected', () => {
-      const derivedItems = deriveMyListItems(itemWithMissingData)
+      const derivedItems = deriveSavesItems(itemWithMissingData)
       const expectedSaveUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
-      const expectedOpenUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential?utm_source=pocket_mylist' //prettier-ignore
+      const expectedOpenUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential?utm_source=pocket_saves' //prettier-ignore
       const expectedOriginalUrl =
         'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential'
       const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3059000416'

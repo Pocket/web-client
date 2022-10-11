@@ -8,7 +8,7 @@ import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { bottomTooltipDelayed } from 'components/tooltip/tooltip'
 import { useTranslation } from 'next-i18next'
-import { myListHeaderStyle } from './my-list-header'
+import { savesHeaderStyle } from './saves-header'
 import { ListSort } from 'components/list-sort/list-sort'
 
 const tagPageHeaderStyle = css`
@@ -42,7 +42,7 @@ const tagPageHeaderStyle = css`
 `
 
 export const UnTaggedHeader = ({ subset, filter, tag, sortOrder, handleNewest, handleOldest }) => (
-  <header className={myListHeaderStyle}>
+  <header className={savesHeaderStyle}>
     <h1 className="pageTitle">not tagged</h1>
     <FilterMenu subset={subset} filter={filter} tag={tag} />
     <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
@@ -66,7 +66,7 @@ export const TaggedHeader = ({
 
   return (
     <div className={tagPageHeaderStyle}>
-      <header className={myListHeaderStyle}>
+      <header className={savesHeaderStyle}>
         <h1 className="pageTitle" data-cy="page-title">
           {capitalizeFirstLetter(title)}
         </h1>

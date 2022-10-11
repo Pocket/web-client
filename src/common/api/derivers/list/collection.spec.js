@@ -116,9 +116,9 @@ export const savedCollectionFromClientApi = {
   cursor: 'MzQ1MzQ1NjQ0NV8qXzE2MzQ4Mzk4NDg='
 }
 
-describe('My List - Collection', () => {
+describe('Saves - Collection', () => {
   const expectedSaveUrl = 'https://getpocket.com/collections/delicious-reads-about-your-favorite-candy' //prettier-ignore
-  const expectedExternalUrl = 'https://getpocket.com/collections/delicious-reads-about-your-favorite-candy?utm_source=pocket_mylist' //prettier-ignore
+  const expectedExternalUrl = 'https://getpocket.com/collections/delicious-reads-about-your-favorite-candy?utm_source=pocket_saves' //prettier-ignore
   const expectedReadUrl = '/collections/delicious-reads-about-your-favorite-candy' //prettier-ignore
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3453456445'
   const expectedAnalyticsUrl = 'https://getpocket.com/collections/delicious-reads-about-your-favorite-candy' //prettier-ignore
@@ -228,7 +228,7 @@ describe('My List - Collection', () => {
 
   describe('Snowplow', () => {
     const item = deriveListItem(savedCollectionFromClientApi)
-    const whitelist = /^my-list./
+    const whitelist = /^saves./
     const blacklist = []
 
     const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))

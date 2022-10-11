@@ -6,7 +6,7 @@ import { breakpointLargeTablet } from 'common/constants'
 import GlobalNav from 'connectors/global-nav/global-nav'
 import { PocketHead } from 'containers/_layouts/_head'
 
-const myListContainer = css`
+const savesContainer = css`
   display: grid;
   align-items: start;
   justify-content: space-between;
@@ -59,7 +59,7 @@ function mainLayout({
           children
         ) : (
           <PageContainer>
-            <div className={myListContainer}>{children}</div>
+            <div className={savesContainer}>{children}</div>
           </PageContainer>
         )}
       </div>

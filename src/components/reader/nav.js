@@ -160,7 +160,7 @@ export const ReaderNav = ({
   const goBack = () => {
     if (getStarted) return router.push('/home')
     if (window.history.length > 1) return window.history.go(-1)
-    document.location.href = '/my-list'
+    document.location.href = '/saves'
   }
   const clickGoBack = () => {
     const identifier = getStarted ? 'get-started.reader.gohome' : 'reader.goback'
@@ -183,7 +183,7 @@ export const ReaderNav = ({
 
   const returnCopy = getStarted
     ? t('nav:back-to-home', 'Back to Home')
-    : t('nav:back-to-my-list', 'Back to My List')
+    : t('nav:back-to-saves', 'Back to Saves')
   return (
     <header className={headerStyle} data-cy="reader-nav">
       <div className="global-nav-container">

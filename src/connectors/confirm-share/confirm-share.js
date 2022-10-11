@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next'
 import { Modal, ModalBody, ModalTabs } from 'components/modal/modal'
 
 import { Card } from 'components/item-card/card'
-import { itemsShareCancel } from 'connectors/items-by-id/my-list/items.share'
+import { itemsShareCancel } from 'connectors/items-by-id/saves/items.share'
 import { ShareSocial } from './share-social'
 import { SelectShareType } from './select-share-type'
 
@@ -30,7 +30,7 @@ export const ShareModal = () => {
    * ------------------------------------------------------------------------
    */
   const itemId = useSelector((state) => state.itemsToShare.id)
-  const item = useSelector((state) => state.myListItemsById[itemId])
+  const item = useSelector((state) => state.savesItemsById[itemId])
   const quote = useSelector((state) => state.itemsToShare.quote)
   const position = useSelector((state) => state.itemsToShare.position)
   const [active, setActive] = useState('social')

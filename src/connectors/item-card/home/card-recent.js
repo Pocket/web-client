@@ -13,7 +13,7 @@ export const RecentCard = ({
   const dispatch = useDispatch()
 
   // Get data from state
-  const item = useSelector((state) => state.myListItemsById[id])
+  const item = useSelector((state) => state.savesItemsById[id])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
   if (!item) return null

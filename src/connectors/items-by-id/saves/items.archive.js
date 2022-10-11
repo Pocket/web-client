@@ -1,7 +1,7 @@
 import { put, take, call, takeLatest, race } from 'redux-saga/effects'
 import { sendItemActions } from 'common/api/_legacy/item-actions'
-import { buildActions } from 'connectors/items-by-id/my-list/build-actions'
-import { batchSendActions } from 'connectors/items-by-id/my-list/build-actions'
+import { buildActions } from 'connectors/items-by-id/saves/build-actions'
+import { batchSendActions } from 'connectors/items-by-id/saves/build-actions'
 
 import { ITEMS_ARCHIVE_REQUEST } from 'actions'
 import { ITEMS_ARCHIVE_BATCH } from 'actions'

@@ -2,7 +2,7 @@ import { put, call, takeEvery, select } from 'redux-saga/effects'
 import { fetchStoredTags } from 'common/api/_legacy/tags'
 import { renameStoredTag } from 'common/api/_legacy/tags'
 import { deleteStoredTag } from 'common/api/_legacy/tags'
-import { fetchMyListData } from 'containers/my-list/my-list.state'
+import { fetchSavesData } from 'containers/saves/saves.state'
 import { getUserTags as getUserTagsGraph } from 'common/api'
 
 import { USER_TAGS_GET_REQUEST } from 'actions'
@@ -146,7 +146,7 @@ function* userTagsRequest() {
 
   const { tags: tagsList, since } = response
 
-  const { itemsById } = yield fetchMyListData({
+  const { itemsById } = yield fetchSavesData({
     count: 50,
     offset: 0,
     sort: 'newest'
@@ -202,7 +202,7 @@ function* userTagsEditConfirm(action) {
     const pinnedItems = yield select(getPinnedTags)
     const pinnedTags = pinnedItems.map((pin) => (old_tag === pin ? new_tag : pin)) //prettier-ignore
     yield put({ type: USER_TAGS_EDIT_SUCCESS, new_tag, old_tag, pinnedTags }) //prettier-ignore
-    return yield call(router.replace, `/my-list/tags/${encodeURI(new_tag)}`)
+    return yield call(router.replace, `/saves/tags/${encodeURI(new_tag)}`)
   }
 
   return yield put({ type: USER_TAGS_EDIT_FAILURE, old_tag })
@@ -216,7 +216,7 @@ function* userTagsDeleteConfirm(action) {
     const pinnedItems = yield select(getPinnedTags)
     const pinnedTags = pinnedItems.filter((pin) => pin !== tag)
     yield put({ type: USER_TAGS_DELETE_SUCCESS, tag, pinnedTags })
-    return yield call(router.replace, '/my-list/tags')
+    return yield call(router.replace, '/saves/tags')
   }
 
   return yield put({ type: USER_TAGS_DELETE_FAILURE, tag })

@@ -20,7 +20,7 @@ import { savedLegacyListItemFromClientApi } from 'common/api/derivers/list/legac
 import { savedCollectionFromV3 } from 'common/api/derivers/list/collection.spec'
 import { savedCollectionFromClientApi } from 'common/api/derivers/list/collection.spec'
 
-import { ItemCard as MyListCard } from 'connectors/item-card/my-list/card'
+import { ItemCard as SavesCard } from 'connectors/item-card/saves/card'
 import { deriveListItem } from 'common/api/derivers/item'
 
 describe('ItemCard', () => {
@@ -38,7 +38,7 @@ describe('ItemCard', () => {
     analytics: {
       impressions: []
     },
-    myListItemsById: {
+    savesItemsById: {
       [derivedSavedParsed.itemId]: derivedSavedParsed,
       [derivedSavedUnparsed.itemId]: derivedSavedUnparsed,
       [derivedSavedVideo.itemId]: derivedSavedVideo,
@@ -52,34 +52,34 @@ describe('ItemCard', () => {
     mockAllIsIntersecting()
   })
 
-  // My List cards
+  // Saves cards
   it('renders a saved article that can be parsed', () => {
-    const { getByCy } = wrappedRender(<MyListCard id={derivedSavedParsed.itemId} position={3} />, { initialState }) //prettier-ignore
+    const { getByCy } = wrappedRender(<SavesCard id={derivedSavedParsed.itemId} position={3} />, { initialState }) //prettier-ignore
     expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
   })
 
   it('renders a saved article that can`t be parsed', () => {
-    const { getByCy } = wrappedRender(<MyListCard id={derivedSavedUnparsed.itemId} position={3} />, { initialState }) //prettier-ignore
+    const { getByCy } = wrappedRender(<SavesCard id={derivedSavedUnparsed.itemId} position={3} />, { initialState }) //prettier-ignore
     expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
   })
 
   it('renders a saved collection', () => {
-    const { getByCy } = wrappedRender(<MyListCard id={deriveSavedCollection.itemId} position={3} />, { initialState }) //prettier-ignore
+    const { getByCy } = wrappedRender(<SavesCard id={deriveSavedCollection.itemId} position={3} />, { initialState }) //prettier-ignore
     expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
   })
 
   it('renders a saved video', () => {
-    const { getByCy } = wrappedRender(<MyListCard id={derivedSavedVideo.itemId} position={3} />, { initialState }) //prettier-ignore
+    const { getByCy } = wrappedRender(<SavesCard id={derivedSavedVideo.itemId} position={3} />, { initialState }) //prettier-ignore
     expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
   })
 
   it('renders a saved image', () => {
-    const { getByCy } = wrappedRender(<MyListCard id={derivedSavedImage.itemId} position={3} />, { initialState }) //prettier-ignore
+    const { getByCy } = wrappedRender(<SavesCard id={derivedSavedImage.itemId} position={3} />, { initialState }) //prettier-ignore
     expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
   })
 
   it('renders a legacy saved item', () => {
-    const { getByCy } = wrappedRender(<MyListCard id={derivedSavedLegacy.itemId} position={3} />, { initialState }) //prettier-ignore
+    const { getByCy } = wrappedRender(<SavesCard id={derivedSavedLegacy.itemId} position={3} />, { initialState }) //prettier-ignore
     expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
   })
 })

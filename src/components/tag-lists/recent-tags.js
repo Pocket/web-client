@@ -43,7 +43,7 @@ export function RecentTags({ taggedItems }) {
 }
 
 function RecentCard({ itemId }) {
-  const item = useSelector((state) => state.myListItemsById[itemId])
+  const item = useSelector((state) => state.savesItemsById[itemId])
   if (!item) return null
 
   const { externalUrl, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem } = item

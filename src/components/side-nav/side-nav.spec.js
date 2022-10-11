@@ -20,12 +20,12 @@ describe('SideNav', () => {
 
   beforeAll(() => mockAllIsIntersecting())
 
-  it('renders the My List side nav and shows tags', () => {
-    const { queryByCy, queryAllByCy } = wrappedRender(<SideNav type="my-list" {...baseProps} />)
+  it('renders the Saves side nav and shows tags', () => {
+    const { queryByCy, queryAllByCy } = wrappedRender(<SideNav type="saves" {...baseProps} />)
 
     // Main section
     expect(queryByCy('side-nav-home')).toBeInTheDocument()
-    expect(queryByCy('side-nav-mylist')).toBeInTheDocument()
+    expect(queryByCy('side-nav-saves')).toBeInTheDocument()
     expect(queryByCy('side-nav-discover')).toBeInTheDocument()
     expect(queryByCy('side-nav-collections')).toBeInTheDocument()
 
@@ -49,7 +49,7 @@ describe('SideNav', () => {
 
     // Main section
     expect(queryByCy('side-nav-home')).toBeInTheDocument()
-    expect(queryByCy('side-nav-mylist')).toBeInTheDocument()
+    expect(queryByCy('side-nav-saves')).toBeInTheDocument()
     expect(queryByCy('side-nav-discover')).toBeInTheDocument()
     expect(queryByCy('side-nav-collections')).toBeInTheDocument()
 

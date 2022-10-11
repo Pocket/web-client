@@ -14,24 +14,24 @@ const baseProps = {
       icon: <DiscoverIcon />
     },
     {
-      name: 'my-list',
-      id: 'global-nav-my-list-link',
-      label: 'My List',
-      url: 'https://getpocket.com/my-list',
+      name: 'saves',
+      id: 'global-nav-saves-link',
+      label: 'Saves',
+      url: 'https://getpocket.com/saves',
       icon: <ListViewIcon />
     },
     {
       name: 'disabled-link',
       id: 'disabled-link',
       label: 'Disabled Link',
-      url: 'https://getpocket.com/my-list',
+      url: 'https://getpocket.com/saves',
       isDisabled: true
     },
     {
       name: 'no-icon',
       id: 'no-icon',
       label: 'No Icon',
-      url: 'https://getpocket.com/my-list'
+      url: 'https://getpocket.com/saves'
     }
   ]
 }

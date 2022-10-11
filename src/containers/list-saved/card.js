@@ -1,12 +1,12 @@
 import { memo } from 'react'
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
-import { setNoImage } from 'connectors/items-by-id/my-list/items.state'
+import { setNoImage } from 'connectors/items-by-id/saves/items.state'
 import { mutationBulkSelectAction } from 'connectors/items/mutations-bulk.state'
 import { mutationBulkDeSelectAction } from 'connectors/items/mutations-bulk.state'
 
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
-import { ActionsMyList } from './card-actions'
+import { ActionsSaves } from './card-actions'
 import { ActionsBulk } from './card-actions'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -46,7 +46,7 @@ export function ItemCard({
   const { readUrl, externalUrl, analyticsData: passedAnalytics } = item
   const openUrl = readUrl || externalUrl
   const showExcerpt = type === 'detail'
-  // const ActionMenu = bulkEdit ? ActionsBulk : ActionsMyList
+  // const ActionMenu = bulkEdit ? ActionsBulk : ActionsSaves
 
   const onImageFail = () => dispatch(setNoImage(id))
 
@@ -59,16 +59,16 @@ export function ItemCard({
 
   /** ITEM TRACKING
   --------------------------------------------------------------- */
-  const onOpen = () => dispatch(sendSnowplowEvent('my-list.card.open', analyticsData))
+  const onOpen = () => dispatch(sendSnowplowEvent('saves.card.open', analyticsData))
 
   const onOpenOriginalUrl = () => {
     const data = { ...analyticsData, destination: 'external' }
-    dispatch(sendSnowplowEvent('my-list.card.view-original', data))
+    dispatch(sendSnowplowEvent('saves.card.view-original', data))
   }
 
   const onItemInView = (inView) => {
     if (!impressionFired && inView)
-      dispatch(sendSnowplowEvent('my-list.card.impression', analyticsData))
+      dispatch(sendSnowplowEvent('saves.card.impression', analyticsData))
   }
 
   /** ITEM BULK ACTIONS
@@ -81,7 +81,7 @@ export function ItemCard({
   /** ITEM SELECT ACTIONS
   --------------------------------------------------------------- */
   const shortcutSelect = () => dispatch(selectShortcutItem(id, position))
-  const ActionMenu = bulkEdit ? ActionsBulk : ActionsMyList
+  const ActionMenu = bulkEdit ? ActionsBulk : ActionsSaves
 
   /** ITEM DETAILS
   --------------------------------------------------------------- */

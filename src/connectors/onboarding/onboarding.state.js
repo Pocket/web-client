@@ -14,7 +14,7 @@ import { HOME_SAVE_REQUEST } from 'actions'
 const initialState = {
   homeFlyawaySave: true,
   homeFlyawayReader: true,
-  myListFlyawayExtension: true,
+  savesFlyawayExtension: true,
   readerFlyawayApps: true
 }
 
@@ -57,7 +57,7 @@ export const onboardingReducers = (state = initialState, action) => {
     case ONBOARDING_CLOSE_EXTENSION_FLYAWAY:
       return {
         ...state,
-        myListFlyawayExtension: false
+        savesFlyawayExtension: false
       }
 
     case ONBOARDING_CLOSE_APPS_FLYAWAY:

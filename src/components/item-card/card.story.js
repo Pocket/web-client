@@ -5,12 +5,12 @@ import { deriveCollection } from 'common/api/derivers/item'
 import { deriveStory } from 'common/api/derivers/item'
 
 import { arrayToObject } from 'common/utilities'
-import { MyList as MyListActions } from 'components/item-actions/item-actions.story'
+import { Saves as SavesActions } from 'components/item-actions/item-actions.story'
 import { Recommendation as RecommendationActions } from 'components/item-actions/item-actions.story'
 import { Home as HomeActions } from 'components/item-actions/item-actions.story'
 import { Similar as SimilarActions } from 'components/item-actions/item-actions.story'
 
-import myListResponse from 'mocks/savedItems.json'
+import savesResponse from 'mocks/savedItems.json'
 import discoverResponse from 'mocks/slateLineupResponse.json'
 import collectionResponse from 'mocks/collectionResponse.json'
 
@@ -30,9 +30,9 @@ const discoverItems = discoverResponse?.data?.getSlateLineup?.slates[0].recommen
   }
 )
 
-const myListItems = Object.values(myListResponse.edges).map((item) => {
+const savesItems = Object.values(savesResponse.edges).map((item) => {
   let derivedItem = deriveListItem(item)
-  derivedItem['storyName'] = `My List - ${sanitizeString(derivedItem.title)}`
+  derivedItem['storyName'] = `Saves - ${sanitizeString(derivedItem.title)}`
   return derivedItem
 })
 
@@ -50,7 +50,7 @@ const storyItems = collectionResponse.data.getCollectionBySlug.stories.map((item
 })
 
 const itemsToDisplay = arrayToObject(
-  [...myListItems, ...discoverItems, ...collectionItems, ...storyItems],
+  [...savesItems, ...discoverItems, ...collectionItems, ...storyItems],
   'storyName'
 )
 
@@ -100,7 +100,7 @@ export const Card = (args) => {
         position={0}
         fromPartner={fromPartner}
         useMarkdown={true}
-        ActionMenu={MyListActions}
+        ActionMenu={SavesActions}
         {...args}
       />
     </div>
@@ -108,8 +108,8 @@ export const Card = (args) => {
 }
 
 Card.args = {
-  itemToDisplay: myListItems[0].storyName,
-  ActionMenu: 'myList',
+  itemToDisplay: savesItems[0].storyName,
+  ActionMenu: 'saves',
   showExcerpt: false,
   showMedia: true,
   hiddenActions: false,
@@ -166,10 +166,10 @@ export default {
     ActionMenu: {
       control: {
         type: 'inline-radio',
-        options: ['myList', 'recommendation', 'home', 'recent']
+        options: ['saves', 'recommendation', 'home', 'recent']
       },
       mapping: {
-        myList: MyListActions,
+        saves: SavesActions,
         recommendation: RecommendationActions,
         home: HomeActions,
         recent: SimilarActions

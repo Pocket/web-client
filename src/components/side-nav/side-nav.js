@@ -157,7 +157,7 @@ export function SideNav({ type, subset, tag, pinned, isDisabled, newSaveCount, t
   const clickEvent = (e) => trackMenuClick(e.target.textContent)
 
   const navTypes = {
-    'my-list': FiltersSideNav,
+    'saves': FiltersSideNav,
     account: AccountSideNav
   }
   const SubNav = navTypes[type]
@@ -174,9 +174,9 @@ export function SideNav({ type, subset, tag, pinned, isDisabled, newSaveCount, t
             <HomeIcon className="side-nav-icon" /> {t('nav:home', 'Home')}
           </button>
         </Link>
-        <Link href="/my-list?src=sidebar">
-          <button className={subActive('unread')} onClick={clickEvent} data-cy="side-nav-mylist">
-            <ListViewIcon className="side-nav-icon" /> {t('nav:my-list', 'My List')}
+        <Link href="/saves?src=sidebar">
+          <button className={subActive('unread')} onClick={clickEvent} data-cy="side-nav-saves">
+            <ListViewIcon className="side-nav-icon" /> {t('nav:saves', 'Saves')}
             <BookmarkIcon newSaveCount={newSaveCount} />
           </button>
         </Link>
