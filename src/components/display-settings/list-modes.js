@@ -11,8 +11,9 @@ import { bottomTooltip } from 'components/tooltip/tooltip'
 import { useTranslation } from 'next-i18next'
 
 const listSettingStyle = css`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: space-evenly;
+
   div {
     display: flex;
     justify-content: center;
