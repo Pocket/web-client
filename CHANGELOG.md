@@ -1,3 +1,10 @@
+## [1.62.8](https://github.com/Pocket/web-client/compare/v1.62.7...v1.62.8) (2022-10-12)
+
+
+### Bug Fixes
+
+* **list-settings:** update list settings from grid display to flex ([16c27e6](https://github.com/Pocket/web-client/commit/16c27e6a4c8d4f618ca8991e4361db7dc3378c9d))
+
 ## [1.62.7](https://github.com/Pocket/web-client/compare/v1.62.6...v1.62.7) (2022-10-10)
 
 
