@@ -20,7 +20,7 @@ const sectionWrapperStyle = css`
     max-width: ${containerMaxWidth}px;
   }
 
-  &.unifiedHome {
+  &.homeSection {
     padding-top: 4.25rem;
   }
 `

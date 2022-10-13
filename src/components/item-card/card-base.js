@@ -212,17 +212,15 @@ export const cardStyles = css`
   .excerpt p {
     font-size: var(--fontSize100);
     margin: 0 0 1rem 0;
+    max-height: calc(3 * 1.5em);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     strong {
       font-weight: 500;
-    }
-    .unifiedHome & {
-      max-height: calc(3 * 1.5em);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      overflow-wrap: anywhere;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
     }
   }
 

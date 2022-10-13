@@ -55,7 +55,7 @@ function Slate({ slateId }) {
   const moreLinkClick = showTopicSelector ? updateTopics : urlTrack
 
   return (
-    <SectionWrapper className="unifiedHome">
+    <SectionWrapper className="homeSection">
       <HomeHeader
         headline={headline}
         subheadline={subheadline}
@@ -169,12 +169,12 @@ function ExploreMoreTopics() {
   const onTopicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
 
   return (
-    <SectionWrapper className="homeTopics">
+    <SectionWrapper className="homeSection">
       <TopicsPillbox
         omitPromoted={true}
         id={'page-topics'}
         topicsMap={topics}
-        className="homeTopics"
+        className="homeSection"
         headingText="Discover More Topics"
         headingClassName="heading"
         onTopicClick={onTopicClick}
