@@ -11,7 +11,6 @@ import { DISCOVER_ITEMS_UNSAVE_REQUEST } from 'actions'
 import { DISCOVER_ITEMS_UNSAVE_SUCCESS } from 'actions'
 import { DISCOVER_ITEMS_UNSAVE_FAILURE } from 'actions'
 import { DISCOVER_ITEMS_NO_IMAGE } from 'actions'
-import { HOME_TOPIC_SECTION_SUCCESS } from 'actions'
 import { HOME_SAVE_REQUEST } from 'actions'
 import { HOME_SAVE_SUCCESS } from 'actions'
 import { HOME_SAVE_FAILURE } from 'actions'
@@ -36,11 +35,6 @@ export const discoverItemsReducers = (state = initialState, action) => {
     case DISCOVER_ITEMS_HYDRATE: {
       const { hydrated } = action
       return { ...state, ...hydrated }
-    }
-
-    case HOME_TOPIC_SECTION_SUCCESS: {
-      const { itemsById } = action
-      return { ...state, ...itemsById }
     }
 
     case DISCOVER_ITEMS_SAVE_REQUEST:

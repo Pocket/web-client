@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
-import { HomeUnifiedHeader } from 'components/headers/home-header'
+import { HomeHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRecentSaves } from 'containers/home/home.state'
 import { RecentCard } from 'connectors/item-card/home/card-recent'
@@ -34,7 +34,7 @@ export const HomeRecentSaves = () => {
 
   return recentSaves?.length > 0 ? (
     <>
-      <HomeUnifiedHeader
+      <HomeHeader
         headline={sectionTitle}
         moreLinkText={t('home:recent-saves-my-list-link-text', 'Go to My List')}
         moreLinkUrl={'/my-list?src=recent-saves'}

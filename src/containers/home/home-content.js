@@ -1,15 +1,13 @@
 import { useEffect } from 'react'
 import { Card } from 'components/item-card/card'
-import { CardNext } from 'components/item-card/card-next'
-import { NextActions as NextActionsComponent } from 'components/item-actions/next'
-import { listStrata, listStrataNext } from 'components/items-layout/list-strata'
+import { listStrata } from 'components/items-layout/list-strata'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
-import { getHomeContent } from './home-baseline.state'
+import { getHomeContent } from './home.state'
+import { saveHomeItem, unSaveHomeItem } from 'containers/home/home.state'
 import { useDispatch, useSelector } from 'react-redux'
-import { HomeUnifiedHeader } from 'components/headers/home-header'
+import { HomeHeader } from 'components/headers/home-header'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { itemActionStyle } from 'components/item-actions/base'
-import { saveHomeItem, unSaveHomeItem } from 'containers/home/home-baseline.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import TopicsPillbox from 'components/topics-pillbox/topics-pillbox'
@@ -17,7 +15,7 @@ import { reSelectTopics } from 'containers/home/home-setup.state'
 
 export const HomeContent = () => {
   const dispatch = useDispatch()
-  const slates = useSelector((state) => state.homeUnified.slates)
+  const slates = useSelector((state) => state.home.slates)
 
   useEffect(() => {
     dispatch(getHomeContent())
@@ -35,9 +33,8 @@ export const HomeContent = () => {
 
 function Slate({ slateId }) {
   const dispatch = useDispatch()
-  const slates = useSelector((state) => state.homeUnified.slates)
-  const slate = useSelector((state) => state.homeUnified.slatesById[slateId])
-  const featureState = useSelector((state) => state.features) || {}
+  const slates = useSelector((state) => state.home.slates)
+  const slate = useSelector((state) => state.home.slatesById[slateId])
 
   if (!slate) return null
 
@@ -49,7 +46,6 @@ function Slate({ slateId }) {
   const showTopicSelector = recommendationReasonType === 'PREFERRED_TOPICS'
 
   const slateLink = showTopicSelector ? { text: 'Update topics', url: false } : moreLink
-  const cardNext = featureFlagActive({ flag: 'home.next', featureState })
 
   const urlTrack = () => {}
   const updateTopics = () => {
@@ -58,11 +54,9 @@ function Slate({ slateId }) {
   }
   const moreLinkClick = showTopicSelector ? updateTopics : urlTrack
 
-  const cardGridStyle = cardNext ? listStrataNext : listStrata
-
   return (
     <SectionWrapper className="unifiedHome">
-      <HomeUnifiedHeader
+      <HomeHeader
         headline={headline}
         subheadline={subheadline}
         moreLinkText={slateLink?.text}
@@ -70,7 +64,7 @@ function Slate({ slateId }) {
         moreLinkClick={moreLinkClick}
       />
 
-      <div className={cardGridStyle}>
+      <div className={listStrata}>
         {recsToShow.map((corpusId) => (
           <ItemCard key={corpusId} corpusId={corpusId} />
         ))}
@@ -81,14 +75,8 @@ function Slate({ slateId }) {
 
 function ItemCard({ corpusId }) {
   const dispatch = useDispatch()
-  const item = useSelector((state) => state.homeUnified.itemsById[corpusId])
-  const featureState = useSelector((state) => state.features) || {}
+  const item = useSelector((state) => state.home.itemsById[corpusId])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(corpusId))
-
-  const cardNext = featureFlagActive({ flag: 'home.next', featureState })
-
-  const CardToRender = cardNext ? CardNext : Card
-  const ActionsToRender = cardNext ? NextActions : CardActions
 
   if (!item) return null
 
@@ -111,7 +99,7 @@ function ItemCard({ corpusId }) {
   const onOpen = () => dispatch(sendSnowplowEvent('home.corpus.open', analyticsData))
 
   return (
-    <CardToRender
+    <Card
       itemId={corpusId}
       externalUrl={url}
       title={title}
@@ -128,7 +116,7 @@ function ItemCard({ corpusId }) {
       onItemInView={onItemInView}
       onImageFail={() => {}}
       topicName={topic}
-      ActionMenu={ActionsToRender}
+      ActionMenu={CardActions}
     />
   )
 }
@@ -139,7 +127,7 @@ function CardActions({ id }) {
 
   const dispatch = useDispatch()
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const item = useSelector((state) => state.homeUnified.itemsById[id])
+  const item = useSelector((state) => state.home.itemsById[id])
   if (!item) return null
 
   const { corpusRecommendationId, url, saveStatus } = item
@@ -181,7 +169,7 @@ function ExploreMoreTopics() {
   const onTopicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
 
   return (
-    <SectionWrapper className="unifiedHome">
+    <SectionWrapper className="homeTopics">
       <TopicsPillbox
         omitPromoted={true}
         id={'page-topics'}
@@ -193,27 +181,4 @@ function ExploreMoreTopics() {
       />
     </SectionWrapper>
   )
-}
-
-function NextActions({ id }) {
-  const dispatch = useDispatch()
-
-  const item = useSelector((state) => state.homeUnified.itemsById[id])
-  if (!item) return null
-
-  const { corpusItemId, url, saveStatus } = item
-  const analyticsData = { corpusRecommendationId: corpusItemId, url }
-
-  // Prep save action
-  const onSave = () => {
-    dispatch(sendSnowplowEvent('home.corpus.save', analyticsData))
-    dispatch(saveHomeItem(id, url))
-  }
-
-  const onUnSave = () => {
-    dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
-    dispatch(unSaveHomeItem(id, url))
-  }
-
-  return <NextActionsComponent onSave={onSave} onUnsave={onUnSave} saveStatus={saveStatus} />
 }
