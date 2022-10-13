@@ -38,8 +38,6 @@ import { itemsUnFavoriteAction } from 'connectors/items-by-id/my-list/items.favo
 import { itemsArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 import { itemsUnArchiveAction } from 'connectors/items-by-id/my-list/items.archive'
 
-import { Onboarding } from 'connectors/onboarding/onboarding'
-
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
@@ -318,7 +316,6 @@ export default function LegacyReader() {
       <TaggingModal />
       <ShareModal />
       <Toasts />
-      {articleContent ? <Onboarding type="reader.flyaway.apps" /> : null}
     </>
   )
 }
