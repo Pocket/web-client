@@ -108,7 +108,7 @@ function ItemCard({ corpusId }) {
       excerpt={excerpt}
       showExcerpt={true}
       authors={null}
-      className="homeCard"
+      className="homeCard clamped"
       // Open Actions
       openUrl={url}
       onOpen={onOpen}
