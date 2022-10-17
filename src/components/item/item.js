@@ -4,7 +4,6 @@ import { SyndicatedIcon } from 'components/icons/SyndicatedIcon'
 import { CardMedia } from 'components/items-media/card-media'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
-import { breakpointSmallTablet } from 'common/constants'
 import { FavoriteFilledIcon } from 'components/icons/FavoriteFilledIcon'
 import { ItemTags } from 'components/item-tags/item-tags'
 import { useTranslation } from 'next-i18next'
@@ -189,37 +188,60 @@ function PartnerOverline({ partnerType }) {
 }
 
 const itemStyles = css`
-  --card-column-span: span 4;
-  --card-row-span: span 1;
+  // This is can be used in layouts
+  --card-column: span 4;
+  --card-row: span 1;
+
+  // We lay out the card in it's own grid (independent of containing layout)
+  --card-column-template: 1fr;
+  --card-column-gap: 0;
+
+  // Where does the media sit?  Stacked default
+  --media-column: initial;
+  --media-row: initial;
+
+  // Where does the content sit?  Stacked default
+  --content-column: initial;
+  --content-row: initial;
+
+  // Where does the footer sit?  Stacked default
+  --footer-column: initial;
+  --footer-column-template: auto 120px;
+
+  // Generally these are consistent styles
   --card-padding: 1rem;
-  --media-column-span: span 2;
-  --content-column-span: span 2;
-  --footer-column-span: span 12;
-  --cite-column-span: span 8;
-  --actions-column-span: span 4;
-  --title-line-height: 1.25em;
-  --title-margin: 1rem 0;
+
   --media-radius: 1rem 1rem 0 0;
+  --media-margin: 0 0 0 0;
+
   --card-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   --card-hover-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
   --card-border-radius: 1rem;
   --card-transition: all 150ms ease-in;
 
+  --overline-display: block;
+
+  --title-line-height: 1.25em;
+  --title-margin: 1rem 0;
   --title-size: 1.25rem;
   --title-lines: 3;
 
+  --excerpt-display: initial;
   --excerpt-size: 0.875rem;
   --excerpt-margin: 0 0 1rem;
   --excerpt-lines: 3;
   --excerpt-line-height: 1.35em;
 
+  --details-size: 0.875rem;
+  --details-column: initial;
+  --details-row: initial;
+
+  --logo-display: block;
+  --overflow-transform: translate(-10%, 10%);
+
   .colormode-dark & {
     --card-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
     --card-hover-shadow: 0 0 18px rgba(0, 0, 0, 0.9);
-  }
-
-  ${breakpointSmallTablet} {
-    --card-column-span: span 12;
   }
 
   // Container card styles
@@ -227,7 +249,7 @@ const itemStyles = css`
   font-weight: 400;
   position: relative;
   z-index: 0;
-  grid-column: var(--card-column-span);
+  grid-column: var(--card-column);
 
   background-color: var(--color-canvas);
   box-shadow: var(--card-shadow);
@@ -235,10 +257,9 @@ const itemStyles = css`
   transition: var(--card-transition);
 
   //Inner grid
-  .content-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
+  display: grid;
+  grid-template-columns: var(--card-column-template);
+  grid-column-gap: var(--card-column-gap);
 
   // What happens when we hover over the main card
   &:hover {
@@ -257,11 +278,15 @@ const itemStyles = css`
   }
 
   // What does the main image look like?
-  .media {
+  .media-block {
     position: relative;
-    grid-column: var(--media-column-span);
+    grid-column: var(--media-column);
+    grid-row: var(--media-row);
     border-radius: var(--media-radius);
-    padding-bottom: 0; // This is an override ... we should remove this from the media component
+    .media {
+      margin: var(--media-margin);
+      padding-bottom: 0; // This is an overide and should be removed from the media element
+    }
     span,
     img {
       border-radius: var(--media-radius);
@@ -284,12 +309,14 @@ const itemStyles = css`
   }
 
   // What does the main content (title/excerpt) look like?
-  .content {
+  .content-block {
+    display: block;
     padding: 0 var(--card-padding);
-    grid-column: var(--content-column-span);
+    grid-column: var(--content-column);
   }
 
   .overline {
+    display: var(--overline-display);
     position: absolute;
     background-color: var(--color-canvas);
     color: var(--color-textSecondary);
@@ -299,6 +326,7 @@ const itemStyles = css`
     line-height: 1.25;
     transform: translate(-1rem, -100%);
     padding: 0.5rem 1rem 1rem 1rem;
+
     border-radius: 0 1rem 0 0;
   }
 
@@ -320,6 +348,7 @@ const itemStyles = css`
   }
 
   .excerpt {
+    display: var(--excerpt-display);
     p {
       font-size: var(--excerpt-size);
       overflow: hidden;
@@ -342,13 +371,16 @@ const itemStyles = css`
   .footer {
     padding: 0 var(--card-padding) var(--card-padding);
     display: grid;
-    grid-template-columns: auto 120px;
+    grid-column: var(--footer-column);
+    grid-template-columns: var(--footer-column-template);
   }
 
   cite.details {
+    grid-column: var(--details-column);
+    grid-row: var(--details-row);
     font-style: normal;
-    font-size: 14px;
-    line-height: 20px;
+    font-size: var(--details-size);
+    line-height: 1.25;
     color: var(--color-textTertiary);
   }
 
@@ -359,6 +391,7 @@ const itemStyles = css`
     position: absolute;
     top: 0.5rem;
     left: 0.5rem;
+    display: var(--logo-display);
   }
 
   .publisher {
@@ -423,7 +456,7 @@ const itemStyles = css`
     right: 0;
     display: none;
     .overflow {
-      transform: translate(-10%, 10%);
+      transform: var(--overflow-transform);
       box-shadow: var(--card-shadow);
       padding: 0;
       display: flex;
@@ -460,5 +493,43 @@ const itemStyles = css`
         }
       }
     }
+  }
+
+  // This view is very flawed.  It seems built to address aribrary existing layout
+  // but I tried to get a consistent information hierarchy into it
+  &.side-by-side {
+    --card-column: span 4;
+    --card-row: span 1;
+
+    // We lay out the card in it's own grid (independent of containing layout)
+    --card-column-template: 120px auto;
+    --card-column-gap: 0.5rem;
+
+    // Where does the media sit?  Stacked default
+    --media-column: 1;
+    --media-row: span 2;
+
+    // Where does the content sit?  Stacked default
+    --content-column: 2/-1;
+    --content-row: initial;
+
+    // Where does the footer sit?  Stacked default
+    --footer-column: 1/-1;
+    --footer-column-template: auto 32px;
+
+    --card-padding: 0.875rem;
+
+    --overline-display: none;
+
+    --title-size: 1rem;
+    --title-margin: 0.875rem 0 0.5rem;
+
+    --media-radius: 0.5rem;
+    --media-margin: 0.875rem 0 0.875rem 0.875rem;
+
+    --excerpt-display: none;
+
+    --logo-display: none;
+    --overflow-transform: translate(15%, -15%);
   }
 `

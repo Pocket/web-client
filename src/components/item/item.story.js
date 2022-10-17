@@ -2,7 +2,7 @@ import { Item as ItemComponent } from './item'
 import myListResponse from 'mocks/savedItems.json'
 import { deriveListItem } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 
 import { SavedActions, DiscoveryActions, ActionsSecondary } from './item-actions'
 
@@ -58,6 +58,12 @@ export default {
       }
     },
     clamp: {
+      control: {
+        type: 'inline-radio',
+        options: [false, true]
+      }
+    },
+    sideBySide: {
       control: {
         type: 'inline-radio',
         options: [false, true]
@@ -130,6 +136,8 @@ export const Item = (args) => {
   }
   const itemImage = getShownImage()
 
+  const cardClassnames = cx(args.className, args.sideBySide && 'side-by-side')
+
   return (
     <ItemComponent
       itemId={itemId}
@@ -150,6 +158,7 @@ export const Item = (args) => {
       useMarkdown={true}
       ActionsSecondary={ActionsSecondary}
       {...args}
+      className={cardClassnames}
     />
   )
 }
@@ -160,7 +169,7 @@ Item.args = {
   isSyndicated: false,
   fromPartner: true, // This is so we can superseded this with the selector
   clamp: false,
-  partnerType: 'FALSE'
+  partnerType: false
 }
 
 function sanitizeString(str) {
