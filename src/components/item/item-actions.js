@@ -227,12 +227,13 @@ export function ActionsSecondary({ forceShown, placement = 'top-start' }) {
 
   return (
     <div className="overflow-container">
-      {isShown ? null : (
+      {isShown ? (
+        <ActionMenu popoverRef={popBody} />
+      ) : (
         <button className="overflow" ref={popTrigger}>
           <OverflowMenuIcon />
         </button>
       )}
-      {isShown ? <ActionMenu popoverRef={popBody} /> : null}
     </div>
   )
 }
