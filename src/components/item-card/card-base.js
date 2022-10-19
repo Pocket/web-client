@@ -1104,4 +1104,45 @@ export const cardStyles = css`
       }
     }
   }
+
+  .smallCards & {
+    --media-column-span: 1;
+    --content-column-span: 2/-1;
+
+    .cardWrap {
+      display: grid;
+      height: initial;
+      padding-bottom: 0;
+      grid-column-gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .media {
+      padding-bottom: 0;
+    }
+
+    .view-original {
+      display: none;
+    }
+
+    .topic-name {
+      display: none;
+    }
+    .excerpt {
+      display: none;
+    }
+    .details {
+      padding: 0.25rem 0;
+    }
+
+    .footer {
+      position: initial;
+      bottom: initial;
+      grid-template-columns: repeat(3, 1fr);
+      grid-column-gap: 1rem;
+      .actions {
+        padding-top: 0;
+        grid-column: 2/-1;
+      }
+    }
+  }
 `

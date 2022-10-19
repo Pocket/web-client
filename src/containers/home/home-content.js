@@ -1,6 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { cx } from 'linaria'
+
 import { Card } from 'components/item-card/card'
-import { listStrata } from 'components/items-layout/list-strata'
+import { listStrata, listSlide } from 'components/items-layout/list-strata'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { getHomeContent } from './home.state'
 import { saveHomeItem, unSaveHomeItem } from 'containers/home/home.state'
@@ -12,6 +14,8 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import TopicsPillbox from 'components/topics-pillbox/topics-pillbox'
 import { reSelectTopics } from 'containers/home/home-setup.state'
+import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
+import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
 
 export const HomeContent = () => {
   const dispatch = useDispatch()
@@ -35,6 +39,8 @@ function Slate({ slateId }) {
   const dispatch = useDispatch()
   const slates = useSelector((state) => state.home.slates)
   const slate = useSelector((state) => state.home.slatesById[slateId])
+  const featureState = useSelector((state) => state.features) || {}
+  const [slide, setSlide] = useState(false)
 
   if (!slate) return null
 
@@ -44,6 +50,8 @@ function Slate({ slateId }) {
   const recsToShow = recommendations.slice(0, recCount)
 
   const showTopicSelector = recommendationReasonType === 'PREFERRED_TOPICS'
+  const showHits = recommendationReasonType === 'PREFERRED_TOPICS'
+  const showSlide = featureFlagActive({ flag: 'pocket-hits.slide', featureState })
 
   const slateLink = showTopicSelector ? { text: 'Update topics', url: false } : moreLink
 
@@ -54,6 +62,14 @@ function Slate({ slateId }) {
   }
   const moreLinkClick = showTopicSelector ? updateTopics : urlTrack
 
+  const slideIn = () => {
+    setSlide(true)
+  }
+  const slideOut = () => {
+    setSlide(false)
+  }
+
+  const sectionClassname = cx(listStrata, showHits && 'smallCards')
   return (
     <SectionWrapper className="homeSection">
       <HomeHeader
@@ -63,12 +79,32 @@ function Slate({ slateId }) {
         moreLinkUrl={slateLink?.url}
         moreLinkClick={moreLinkClick}
       />
+      {showSlide && showHits ? (
+        <>
+          <div className="controls">
+            <button className="text" onClick={slideOut}>
+              <ChevronLeftIcon />
+            </button>
+            <button className="text" onClick={slideIn}>
+              <ChevronRightIcon />
+            </button>
+          </div>
 
-      <div className={listStrata}>
-        {recsToShow.map((corpusId) => (
-          <ItemCard key={corpusId} corpusId={corpusId} />
-        ))}
-      </div>
+          <div className={listSlide}>
+            <div className={cx(listStrata, 'slideSection', slide && 'slide')}>
+              {recsToShow.map((corpusId) => (
+                <ItemCard key={corpusId} corpusId={corpusId} />
+              ))}
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className={sectionClassname}>
+          {recsToShow.map((corpusId) => (
+            <ItemCard key={corpusId} corpusId={corpusId} />
+          ))}
+        </div>
+      )}
     </SectionWrapper>
   )
 }
