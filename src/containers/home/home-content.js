@@ -27,15 +27,15 @@ export const HomeContent = () => {
 
   return (
     <>
-      {slates.map((slateId) => (
-        <Slate key={slateId} slateId={slateId} />
+      {slates.map((slateId, index) => (
+        <Slate key={slateId} slateId={slateId} position={index} />
       ))}
       <ExploreMoreTopics />
     </>
   )
 }
 
-function Slate({ slateId }) {
+function Slate({ slateId, position }) {
   const dispatch = useDispatch()
   const slates = useSelector((state) => state.home.slates)
   const slate = useSelector((state) => state.home.slatesById[slateId])
@@ -49,9 +49,11 @@ function Slate({ slateId }) {
   const recCount = slates.indexOf(slateId) === 0 ? 6 : 3
   const recsToShow = recommendations.slice(0, recCount)
 
-  const showTopicSelector = recommendationReasonType === 'PREFERRED_TOPICS'
-  const showHits = recommendationReasonType === 'PREFERRED_TOPICS'
+  const forceHits = featureFlagActive({ flag: 'pocket-hits.force', featureState })
   const showSlide = featureFlagActive({ flag: 'pocket-hits.slide', featureState })
+
+  const showTopicSelector = recommendationReasonType === 'PREFERRED_TOPICS'
+  const showHits = recommendationReasonType === 'POCKET_HITS' || (forceHits && position === 0)
 
   const slateLink = showTopicSelector ? { text: 'Update topics', url: false } : moreLink
 
