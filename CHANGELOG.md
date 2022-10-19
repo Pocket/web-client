@@ -1,3 +1,10 @@
+## [1.62.12](https://github.com/Pocket/web-client/compare/v1.62.11...v1.62.12) (2022-10-18)
+
+
+### Bug Fixes
+
+* **tagging:** disable save button until change and clear input upon open ([f194308](https://github.com/Pocket/web-client/commit/f194308144eb9170f226280d535120c267b06896))
+
 ## [1.62.11](https://github.com/Pocket/web-client/compare/v1.62.10...v1.62.11) (2022-10-14)
 
 

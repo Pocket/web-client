@@ -40,7 +40,6 @@ const initialTaggingState = {
   itemIds: [],
   tagSuggestions: [],
   tagSuggestionStatus: 'idle',
-  needsSaving: false,
   isBulk: false
 }
 
