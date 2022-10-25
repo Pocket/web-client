@@ -46,14 +46,15 @@ function Slate({ slateId, position }) {
 
   const { headline, subheadline, moreLink, recommendations, recommendationReasonType } = slate
 
-  const recCount = slates.indexOf(slateId) === 0 ? 6 : 3
-  const recsToShow = recommendations.slice(0, recCount)
-
-  const forceHits = featureFlagActive({ flag: 'pocket-hits.force', featureState })
   const showSlide = featureFlagActive({ flag: 'pocket-hits.slide', featureState })
 
   const showTopicSelector = recommendationReasonType === 'PREFERRED_TOPICS'
-  const showHits = recommendationReasonType === 'POCKET_HITS' || (forceHits && position === 0)
+  const showHits = recommendationReasonType === 'POCKET_HITS'
+
+  const recCount = slates.indexOf(slateId) === 0 || showHits ? 6 : 3
+  const recsToShow = recommendations.slice(0, recCount)
+
+
 
   const slateLink = showTopicSelector ? { text: 'Update topics', url: false } : moreLink
 
