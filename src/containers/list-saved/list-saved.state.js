@@ -1,5 +1,6 @@
 import { put, call, select, takeEvery } from 'redux-saga/effects'
 import { itemFiltersFromGraph } from 'common/api/queries/get-saved-items.filters'
+import { arraysAreEqual } from 'common/utilities/object-array/object-array'
 
 import { ITEMS_SAVED_REQUEST } from 'actions'
 import { ITEMS_SAVED_SUCCESS } from 'actions'
@@ -102,8 +103,6 @@ export const listSavedReducers = (state = [], action) => {
     }
 
     // ! This is agressive clearing of the list
-    // ! We should do some checking here and have an explicit
-    // ! clearing action
     case ITEMS_CLEAR_CURRENT: {
       return []
     }
@@ -256,9 +255,22 @@ function* reconcileUpsert(action) {
 
 function* requestItems(action) {
   const { searchTerm, type: actionType, tagNames } = action
-  const { sortOrder, count, actionType: previousActionType } = yield select(getSavedPageInfo)
+  const {
+    sortOrder,
+    count,
+    tagNames: previousTagNames,
+    actionType: previousActionType,
+    searchTerm: previousSearchTerm
+  } = yield select(getSavedPageInfo)
 
-  if (actionType !== previousActionType) yield put({ type: ITEMS_CLEAR_CURRENT }) // Less aggressive clearing
+  // Less aggressive clearing
+  const differentActionType = actionType !== previousActionType
+  const differentSearch = searchTerm !== previousSearchTerm
+  const sameTags = arraysAreEqual(tagNames, previousTagNames)
+
+  if (differentActionType || differentSearch || !sameTags) {
+    yield put({ type: ITEMS_CLEAR_CURRENT })
+  }
 
   const type = yield call(itemRequestType, searchTerm, tagNames)
 

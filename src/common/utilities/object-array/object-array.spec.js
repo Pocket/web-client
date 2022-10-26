@@ -1,5 +1,6 @@
 import { arrayToObject } from 'common/utilities'
 import { getObjectWithValidKeysOnly } from 'common/utilities'
+import { arraysAreEqual } from 'common/utilities/object-array/object-array'
 
 describe('arrayToObject', () => {
   const arrayOfObjects = [
@@ -53,5 +54,35 @@ describe('getObjectWithValidKeysOnly', () => {
     const myValidatorFunction = (url) => url === 'https://pocket.com'
     const filteredObject = getObjectWithValidKeysOnly(originalObject, myValidatorFunction)
     expect(filteredObject).toStrictEqual({ two: 'https://pocket.com' })
+  })
+})
+
+describe('arraysAreEqual', () => {
+  it('returns false if non-arrays are sent in', () => {
+    const nonArrays = arraysAreEqual(1, 4)
+    expect(nonArrays).toBeTruthy()
+  })
+
+  it('returns false if one of the values are not arrays', () => {
+    const secondIsArray = arraysAreEqual(1, [])
+    expect(secondIsArray).toBeFalsy()
+
+    const firstIsArray = arraysAreEqual([], undefined)
+    expect(firstIsArray).toBeFalsy()
+  })
+
+  it('returns false the values are arrays that do not match', () => {
+    const unEqualArrays = arraysAreEqual(['horse', 'rider'], [])
+    expect(unEqualArrays).toBeFalsy()
+  })
+
+  it('returns true if the array has the same values', () => {
+    const unEqualArrays = arraysAreEqual(['horse'], ['horse'])
+    expect(unEqualArrays).toBeTruthy()
+  })
+
+  it('returns false if one array has extra values', () => {
+    const unEqualArrays = arraysAreEqual(['horse'], ['horse', 'rider'])
+    expect(unEqualArrays).toBeFalsy()
   })
 })

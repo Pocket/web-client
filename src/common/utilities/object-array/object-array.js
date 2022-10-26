@@ -72,3 +72,20 @@ export function chunk(array, size = 1) {
   }
   return result
 }
+
+export function arraysAreEqual(arrayOne, arrayTwo) {
+  // Are they both non-arrays we are just gonna ignore them
+  if (!Array.isArray(arrayOne) && !Array.isArray(arrayTwo)) return true
+  //If one is an array and the other is not they are not equal
+  if (!Array.isArray(arrayOne) || !Array.isArray(arrayTwo)) return false
+
+  // At this point they should both be arrays, let's check the contents
+  const sortedArrayOne = arrayOne.sort()
+  const sortedArrayTwo = arrayTwo.sort()
+
+  const arraysContainTheSameValues =
+    sortedArrayOne.length === sortedArrayTwo.length &&
+    sortedArrayTwo.every((currentValue) => sortedArrayOne.includes(currentValue))
+
+  return arraysContainTheSameValues
+}
