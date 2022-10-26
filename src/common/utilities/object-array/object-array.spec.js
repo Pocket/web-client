@@ -60,7 +60,7 @@ describe('getObjectWithValidKeysOnly', () => {
 describe('arraysAreEqual', () => {
   it('returns false if non-arrays are sent in', () => {
     const nonArrays = arraysAreEqual(1, 4)
-    expect(nonArrays).toBeTruthy()
+    expect(nonArrays).toBeFalsy()
   })
 
   it('returns false if one of the values are not arrays', () => {

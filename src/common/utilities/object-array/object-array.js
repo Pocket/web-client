@@ -74,8 +74,7 @@ export function chunk(array, size = 1) {
 }
 
 export function arraysAreEqual(arrayOne, arrayTwo) {
-  // Are they both non-arrays we are just gonna ignore them
-  if (!Array.isArray(arrayOne) && !Array.isArray(arrayTwo)) return true
+
   //If one is an array and the other is not they are not equal
   if (!Array.isArray(arrayOne) || !Array.isArray(arrayTwo)) return false
 

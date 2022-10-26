@@ -266,7 +266,9 @@ function* requestItems(action) {
   // Less aggressive clearing
   const differentActionType = actionType !== previousActionType
   const differentSearch = searchTerm !== previousSearchTerm
-  const sameTags = arraysAreEqual(tagNames, previousTagNames)
+
+  const requestInvolvesTags = Array.isArray(tagNames) || Array.isArray(previousTagNames)
+  const sameTags = requestInvolvesTags ? arraysAreEqual(tagNames, previousTagNames) : true
 
   if (differentActionType || differentSearch || !sameTags) {
     yield put({ type: ITEMS_CLEAR_CURRENT })
