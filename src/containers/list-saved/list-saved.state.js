@@ -268,9 +268,9 @@ function* requestItems(action) {
   const differentSearch = searchTerm !== previousSearchTerm
 
   const requestInvolvesTags = Array.isArray(tagNames) || Array.isArray(previousTagNames)
-  const sameTags = requestInvolvesTags ? arraysAreEqual(tagNames, previousTagNames) : true
+  const tagChanges = requestInvolvesTags && !arraysAreEqual(tagNames, previousTagNames)
 
-  if (differentActionType || differentSearch || !sameTags) {
+  if (differentActionType || differentSearch || tagChanges) {
     yield put({ type: ITEMS_CLEAR_CURRENT })
   }
 
