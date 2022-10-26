@@ -1,7 +1,4 @@
 import { css, cx } from 'linaria'
-import { useTranslation } from 'next-i18next'
-import { CrossIcon } from 'components/icons/CrossIcon'
-import { breakpointMediumHandset } from 'common/constants'
 import { breakpointSmallTablet } from 'common/constants'
 import Link from 'next/link'
 
@@ -92,109 +89,14 @@ const homeHeaderStyle = css`
   }
 `
 
-const cardPageSectionStyle = css`
-  margin-bottom: 0;
-  .sectionSubTitleWrapper {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-
-    ${breakpointMediumHandset} {
-      flex-direction: column;
-    }
-
-    a {
-      color: var(--color-actionPrimary);
-      margin-top: 0;
-
-      &:hover {
-        color: var(--color-actionPrimaryHover);
-      }
-
-      ${breakpointMediumHandset} {
-        margin-top: 0.5rem;
-      }
-    }
-  }
-
-  .sectionSubTitle {
-    margin: 0;
-  }
-`
-
-const cardPageCollectionStyle = css`
-  margin-bottom: 0;
-  margin-top: 2rem;
-  .sectionSubTitle {
-    margin: 0;
-  }
-`
-
-const cardPageLineupStyle = css`
-  margin: 3rem 0 0;
-  .sectionSubTitle {
-    margin: 0;
-  }
-`
-const cardPageTopicStyle = css`
-  margin-top: 3rem;
-`
-
-const cardPageSimilarStyle = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 0;
-  .sectionSubTitle {
-    margin: 0;
-  }
-  .close {
-    cursor: pointer;
-    font-size: 1.5rem;
-    margin-top: 0;
-  }
-`
-
-const lineupSpacerStyle = css`
-  padding: 2rem 0;
-`
-
-const cardMixHeaderStyle = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
-  .action {
-    color: var(--color-actionPrimary);
-    &:hover {
-      color: var(--color-actionPrimaryHover);
-    }
-  }
-
-  ${breakpointMediumHandset} {
-    flex-direction: column;
-    align-items: flex-start;
-    .action {
-      margin-top: 0.5rem;
-      padding: 0;
-    }
-  }
-`
-
-export const HomeUnifiedHeader = ({
-  headline,
-  subheadline,
-  moreLinkText,
-  moreLinkUrl,
-  moreLinkClick
-}) => {
+export const HomeHeader = ({ headline, subheadline, moreLinkText, moreLinkUrl, moreLinkClick }) => {
   return headline ? (
     <header className={cx(cardPageHeaderStyle, homeHeaderStyle)}>
       <h2 className="headline">{headline}</h2>
       {subheadline ? <div className="subheadline">{subheadline}</div> : null}
       {moreLinkText ? (
         <div className="morelink">
-          <HomeUnifiedMoreLink
+          <HomeMoreLink
             moreLinkText={moreLinkText}
             moreLinkUrl={moreLinkUrl}
             moreLinkClick={moreLinkClick}
@@ -205,7 +107,7 @@ export const HomeUnifiedHeader = ({
   ) : null
 }
 
-const HomeUnifiedMoreLink = ({ moreLinkUrl, moreLinkText, moreLinkClick }) => {
+const HomeMoreLink = ({ moreLinkUrl, moreLinkText, moreLinkClick }) => {
   if (moreLinkUrl) {
     return (
       <Link href={moreLinkUrl}>
@@ -220,108 +122,4 @@ const HomeUnifiedMoreLink = ({ moreLinkUrl, moreLinkText, moreLinkClick }) => {
       </button>
     )
   }
-}
-
-export const HomeJourneyHeader = ({ sectionTitle, sectionDescription }) => {
-  return sectionTitle ? (
-    <header className={cardPageHeaderStyle}>
-      <h2 className="pageTitle">{sectionTitle}</h2>
-      {sectionDescription ? <p>{sectionDescription}</p> : null}
-    </header>
-  ) : null
-}
-
-export const HomeSectionHeader = ({
-  sectionTitle,
-  sectionDescription,
-  sectionLinkText,
-  sectionLinkDestination,
-  sectionLinkClick
-}) => {
-  return sectionTitle ? (
-    <header className={cx(cardPageHeaderStyle, cardPageSectionStyle)}>
-      <h2 className="sectionTitle">{sectionTitle}</h2>
-      <div className="sectionSubTitleWrapper">
-        {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
-        {sectionLinkText ? (
-          <Link href={sectionLinkDestination}>
-            <a onClick={sectionLinkClick}>{sectionLinkText}</a>
-          </Link>
-        ) : null}
-      </div>
-    </header>
-  ) : null
-}
-
-export const HomeCollectionHeader = ({ sectionTitle, clickEvent }) => {
-  const { t } = useTranslation()
-
-  return sectionTitle ? (
-    <header className={cx(cardPageHeaderStyle, cardPageCollectionStyle)}>
-      <h2 className="sectionTitle">{sectionTitle}</h2>
-      <div className="sectionSubtitle">
-        <Link href="/collections/?src=home-view-more">
-          <a onClick={clickEvent}>{t('home:view-more-collections', 'View More Collections')}</a>
-        </Link>
-      </div>
-    </header>
-  ) : null
-}
-
-export const HomeTopicHeader = ({ topicSlug, sectionTitle, clickEvent }) => {
-  return sectionTitle ? (
-    <header className={cx(cardPageHeaderStyle, cardPageTopicStyle)}>
-      <h3 className="sectionTitle">
-        {sectionTitle}
-        <div className="sectionSubtitle">
-          <Link href={`/explore/${topicSlug}?src=home-view-more`}>
-            <a onClick={clickEvent}>Find more articles on {sectionTitle}</a>
-          </Link>
-        </div>
-      </h3>
-    </header>
-  ) : null
-}
-
-export const HomeLineupHeader = ({ sectionTitle, sectionDescription }) => {
-  return sectionTitle ? (
-    <header className={cx(cardPageHeaderStyle, cardPageLineupStyle)}>
-      <h2 className="sectionTitle">{sectionTitle}</h2>
-      {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
-    </header>
-  ) : null
-}
-
-export const HomeTopicMixHeader = ({ sectionTitle, sectionDescription, actionCopy, action }) => {
-  return sectionTitle ? (
-    <header className={cx(cardPageHeaderStyle, cardPageLineupStyle, cardMixHeaderStyle)}>
-      <div>
-        <h2 className="sectionTitle">
-          <span>{sectionTitle}</span>
-        </h2>
-        {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
-      </div>
-      {action ? (
-        <button className="action text" onClick={action}>
-          {actionCopy}
-        </button>
-      ) : null}
-    </header>
-  ) : null
-}
-
-export const HomeSimilarHeader = ({ sectionTitle, sectionDescription, closeAction = () => {} }) => {
-  return sectionTitle ? (
-    <header className={cx(cardPageHeaderStyle, cardPageSimilarStyle)}>
-      <div>
-        <h3 className="sectionTitle">{sectionTitle}</h3>
-        {sectionDescription ? <p className="sectionSubTitle">{sectionDescription}</p> : null}
-      </div>
-      <CrossIcon className="close" data-cy="close-similar" onClick={closeAction} />
-    </header>
-  ) : null
-}
-
-export const HomeLineupSpacer = () => {
-  return <div className={lineupSpacerStyle} />
 }

@@ -1,3 +1,60 @@
+## [1.64.1](https://github.com/Pocket/web-client/compare/v1.64.0...v1.64.1) (2022-10-25)
+
+
+### Bug Fixes
+
+* **home:** increase pocket hits count ([a35533e](https://github.com/Pocket/web-client/commit/a35533e367ac353bba4dca4611ea61b4406bf5d2))
+
+# [1.64.0](https://github.com/Pocket/web-client/compare/v1.63.0...v1.64.0) (2022-10-20)
+
+
+### Features
+
+* **home:** add small card layout (for hits) ([4b3b3a1](https://github.com/Pocket/web-client/commit/4b3b3a1103e92ceea1f306af30a6b6ac632a20cf))
+
+# [1.63.0](https://github.com/Pocket/web-client/compare/v1.62.12...v1.63.0) (2022-10-19)
+
+
+### Bug Fixes
+
+* **item:** better ternary for overflow ([b14b331](https://github.com/Pocket/web-client/commit/b14b331e5608d0e577c63a879dabfc4af39ebe40))
+* **item:** improve information hierarchy ([121dc5e](https://github.com/Pocket/web-client/commit/121dc5ed352089b116cb8863fc96854b941d9868))
+
+
+### Features
+
+* **item:** add ubiquitous item/next ([ce9473b](https://github.com/Pocket/web-client/commit/ce9473b521e112dbd3244391aa3c68c66b7e9cd1))
+
+## [1.62.12](https://github.com/Pocket/web-client/compare/v1.62.11...v1.62.12) (2022-10-18)
+
+
+### Bug Fixes
+
+* **tagging:** disable save button until change and clear input upon open ([f194308](https://github.com/Pocket/web-client/commit/f194308144eb9170f226280d535120c267b06896))
+
+## [1.62.11](https://github.com/Pocket/web-client/compare/v1.62.10...v1.62.11) (2022-10-14)
+
+
+### Bug Fixes
+
+* **collections:** restrict clamping to home for now ([3493479](https://github.com/Pocket/web-client/commit/3493479bd5c7e1efc325b3e6aeef963565f25d3a))
+
+## [1.62.10](https://github.com/Pocket/web-client/compare/v1.62.9...v1.62.10) (2022-10-14)
+
+
+### Bug Fixes
+
+* **home:** adjust classnames ([f8e953d](https://github.com/Pocket/web-client/commit/f8e953d5c477c23b06c3743cd5523f035aaf3b4b))
+* **home:** remove onboarding from reader ([486e235](https://github.com/Pocket/web-client/commit/486e2351910dd2647f5afb241b2a431b0aa58667))
+* **onboarding:** remove the last of the onboarding ([6e94fd8](https://github.com/Pocket/web-client/commit/6e94fd898c45228ec9ca9060d778c3be22802fbd))
+
+## [1.62.9](https://github.com/Pocket/web-client/compare/v1.62.8...v1.62.9) (2022-10-13)
+
+
+### Bug Fixes
+
+* **home:** fix impression event to include component type ([53f1ef9](https://github.com/Pocket/web-client/commit/53f1ef9d68f55586a60fd39541d318f5b0f74cfb))
+
 ## [1.62.8](https://github.com/Pocket/web-client/compare/v1.62.7...v1.62.8) (2022-10-12)
 
 

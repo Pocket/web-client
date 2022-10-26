@@ -73,14 +73,8 @@ import { itemShareSagas } from 'connectors/items-by-id/saves/items.share'
 import { itemReportReducers } from 'connectors/items-by-id/discover/items.report'
 import { itemReportSagas } from 'connectors/items-by-id/discover/items.report'
 
-import { homeUnifiedReducers } from 'containers/home/home-baseline.state'
-import { homeUnifiedSagas } from 'containers/home/home-baseline.state'
-
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
-
-import { homeItemsReducers } from 'connectors/items-by-id/home/items.state'
-import { homeItemsSagas } from 'connectors/items-by-id/home/items.state'
 
 import { readReducers } from 'containers/read/read.state'
 import { readSagas } from 'containers/read/read.state'
@@ -238,8 +232,6 @@ export const rootReducer = combineReducers({
   ...readerViewReducers,
   ...userAccountReducers,
   home: homeReducers,
-  homeItemsById: homeItemsReducers,
-  homeUnified: homeUnifiedReducers,
   ...itemReducers,
   ...listReducers,
   ...itemActionReducers
@@ -249,7 +241,6 @@ export const rootReducer = combineReducers({
  --------------------------------------------------------------- */
 function* rootSaga() {
   yield all([
-    ...homeUnifiedSagas,
     ...homeSetupSagas,
     ...appSagas,
     ...userSagas,
@@ -273,7 +264,6 @@ function* rootSaga() {
     ...readerSettingsSagas,
     ...readerSagas, //graph
     ...homeSagas,
-    ...homeItemsSagas,
     ...userMessageSagas,
     ...userSearchSagas,
     ...profileSagas,

@@ -17,7 +17,6 @@ import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutati
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModalConnector } from 'connectors/share-modal/share-modal'
 import { Toasts } from 'connectors/toasts/toast-list'
-import { Onboarding } from 'connectors/onboarding/onboarding'
 
 import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
 import { ReaderFonts } from 'components/reader/fonts'
@@ -142,8 +141,6 @@ export default function Reader() {
       <MutationTaggingModal />
       <ShareModalConnector />
       <Toasts />
-
-      <Onboarding type="reader.flyaway.apps" />
     </>
   )
 }

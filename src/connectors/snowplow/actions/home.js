@@ -342,6 +342,7 @@ export const homeActions = {
     eventType: 'impression',
     entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
+      component: 'ui',
       uiType: 'card'
     },
     expects: ['corpusRecommendationId', 'url']

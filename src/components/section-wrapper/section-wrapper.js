@@ -20,8 +20,21 @@ const sectionWrapperStyle = css`
     max-width: ${containerMaxWidth}px;
   }
 
-  &.unifiedHome {
+  &.homeSection {
     padding-top: 4.25rem;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    button {
+      font-size: 1.25rem;
+      border: var(--borderStyle);
+      border-radius: 50%;
+      margin-left: 1rem;
+      padding: 0.5rem;
+    }
   }
 `
 

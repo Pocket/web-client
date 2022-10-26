@@ -13,7 +13,6 @@ import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
 import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
-import { Onboarding } from 'connectors/onboarding/onboarding'
 import { sortOrderSetNew, sortOrderSetOld, sortOrderSetRelevance } from 'connectors/app/app.state'
 import { savedItemsSetSortOrder } from 'containers/list-saved/list-saved.state'
 import { savedItemsSetSortBy } from 'containers/list-saved/list-saved.state'
@@ -110,7 +109,6 @@ export const List = (props) => {
       <ShareModalConnector />
 
       <Toasts />
-      <Onboarding type="saves.flyaway.extensions" />
     </Layout>
   )
 }

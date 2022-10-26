@@ -1,103 +1,80 @@
 import { put, takeEvery, call } from 'redux-saga/effects'
-import { getSaves } from 'common/api/saves'
-import { getHomeLineup as apiGetHomeLineup } from 'common/api'
+import { getUnifiedHome } from 'common/api/queries/get-home-unified'
 import { saveItem } from 'common/api/_legacy/saveItem'
-import { removeItem } from 'common/api/_legacy/removeItem'
-import { getTopicMix } from 'common/api'
-import { getRecsById } from 'common/api/derivers/lineups'
 import { arrayToObject } from 'common/utilities'
 import { deriveListItem } from 'common/api/derivers/item'
+import { removeItemByUrl } from 'common/api/_legacy/removeItem'
 import { STARTER_ARTICLES } from 'common/constants'
-
-import { HOME_SAVE_REQUEST } from 'actions'
-import { HOME_SAVE_SUCCESS } from 'actions'
-import { HOME_SAVE_FAILURE } from 'actions'
-
-import { HOME_UNSAVE_REQUEST } from 'actions'
-import { HOME_UNSAVE_SUCCESS } from 'actions'
-import { HOME_UNSAVE_FAILURE } from 'actions'
+import { getSaves } from 'common/api/saves'
 
 import { HOME_RECENT_SAVES_REQUEST } from 'actions'
 import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
 import { HOME_RECENT_SAVES_FAILURE } from 'actions'
 
-import { HOME_RECS_BY_TOPIC_REQUEST } from 'actions'
-import { HOME_RECS_BY_TOPIC_SUCCESS } from 'actions'
-import { HOME_RECS_BY_TOPIC_FAILURE } from 'actions'
+import { HOME_CONTENT_REQUEST } from 'actions'
+import { HOME_CONTENT_SUCCESS } from 'actions'
 
-import { HOME_LINEUP_REQUEST } from 'actions'
-import { HOME_LINEUP_SUCCESS } from 'actions'
-import { HOME_LINEUP_FAILURE } from 'actions'
+import { HOME_SAVE_REQUEST } from 'actions'
+import { HOME_SAVE_SUCCESS } from 'actions'
 
-import { RECENT_RECS_SUCCESS } from 'actions'
-import { RECENT_RECS_FAILURE } from 'actions'
-import { HOME_SIMILAR_REC_REQUEST } from 'actions'
-import { HOME_SIMILAR_RECS_CLEAR } from 'actions'
-
-import { HOME_SIMILAR_REC_SAVE_REQUEST } from 'actions'
-import { HOME_SIMILAR_REC_SAVE_SUCCESS } from 'actions'
-import { HOME_SIMILAR_REC_SAVE_FAILURE } from 'actions'
-
-import { SNOWPLOW_TRACK_PAGE_VIEW } from 'actions'
-
-import { ITEMS_ADD_SUCCESS } from 'actions'
-
-import { SAVES_DATA_REQUEST } from 'actions'
-import { SAVES_UPDATE_REQUEST } from 'actions'
-import { HYDRATE } from 'actions'
+import { HOME_UNSAVE_REQUEST } from 'actions'
+import { HOME_UNSAVE_SUCCESS } from 'actions'
+import { HOME_UNSAVE_FAILURE } from 'actions'
+import { SET_TOPIC_SUCCESS } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getHomeLineup = (id) => ({ type: HOME_LINEUP_REQUEST, id })
-export const getSimilarRecs = (id) => ({ type: HOME_SIMILAR_REC_REQUEST, id })
-export const saveSimilarRec = (id, url, position) => ({type: HOME_SIMILAR_REC_SAVE_REQUEST, id, url, position}) //prettier-ignore
-export const clearSimilarRecs = () => ({ type: HOME_SIMILAR_RECS_CLEAR })
+export const getHomeContent = (id) => ({ type: HOME_CONTENT_REQUEST, id })
+export const saveHomeItem = (id, url) => ({ type: HOME_SAVE_REQUEST, id, url })
+export const unSaveHomeItem = (id, url) => ({ type: HOME_UNSAVE_REQUEST, id, url })
 export const getRecentSaves = () => ({ type: HOME_RECENT_SAVES_REQUEST })
-export const saveHomeItem = (id, url, position) => ({type: HOME_SAVE_REQUEST, id, url, position}) //prettier-ignore
-export const unSaveHomeItem = (id, topic) => ({ type: HOME_UNSAVE_REQUEST, id, topic }) //prettier-ignore
-export const getRecsByTopic = (topics) => ({ type: HOME_RECS_BY_TOPIC_REQUEST, topics })
 
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  collectionSet: [],
   recentSaves: [],
   slates: [],
-  slatesById: {},
-  recsByTopic: [],
-  newSaves: 0,
-  similarRecsResolved: false
+  itemsById: {}
 }
 
 export const homeReducers = (state = initialState, action) => {
   switch (action.type) {
-    case HOME_LINEUP_SUCCESS: {
-      const { generalSlates, topicSlates, slatesById } = action
-      return { ...state, generalSlates, topicSlates, slatesById }
+    case HOME_CONTENT_SUCCESS: {
+      const { itemsById, slatesById, slateArray } = action
+      return { ...state, itemsById, slatesById, slates: slateArray }
     }
 
-    case HOME_SIMILAR_REC_REQUEST: {
+    case HOME_SAVE_SUCCESS: {
+      const { corpusId, id } = action
+      const item = state.itemsById[corpusId] || {}
+      const recentSaves = Array.from(new Set([id, ...state.recentSaves]))
+
+      return {
+        ...state,
+        recentSaves,
+        itemsById: { ...state.itemsById, [corpusId]: { ...item, savedId: id, saveStatus: 'saved' } }
+      }
+    }
+
+    case HOME_UNSAVE_SUCCESS: {
+      const { corpusId } = action
+      const item = state.itemsById[corpusId] || {}
+      const recentSaves = state.recentSaves.filter((id) => id !== item.savedId)
+      return {
+        ...state,
+        recentSaves,
+        itemsById: { ...state.itemsById, [corpusId]: { ...item, saveStatus: 'unsaved' } }
+      }
+    }
+
+    case HOME_SAVE_REQUEST:
+    case HOME_UNSAVE_REQUEST: {
       const { id } = action
-      return { ...state, similarRecId: id, similarRecsResolved: false }
-    }
-
-    case RECENT_RECS_SUCCESS:
-    case RECENT_RECS_FAILURE: {
-      return { ...state, similarRecsResolved: true }
-    }
-
-    case HOME_SIMILAR_RECS_CLEAR:
-    case SAVES_DATA_REQUEST:
-    case SAVES_UPDATE_REQUEST:
-    case HYDRATE: {
-      return { ...state, similarRecId: false, similarRecsResolved: false }
-    }
-
-    case HOME_SAVE_SUCCESS:
-    case HOME_SIMILAR_REC_SAVE_SUCCESS: {
-      const { id } = action
-      const recentSaves = new Set([id, ...state.recentSaves])
-      return { ...state, recentSaves: Array.from(recentSaves), newSaves: ++state.newSaves }
+      const item = state.itemsById[id] || {}
+      return {
+        ...state,
+        itemsById: { ...state.itemsById, [id]: { ...item, saveStatus: 'saving' } }
+      }
     }
 
     case HOME_RECENT_SAVES_SUCCESS: {
@@ -106,41 +83,20 @@ export const homeReducers = (state = initialState, action) => {
       return { ...state, recentSaves: Array.from(recentSaves) }
     }
 
-    case HOME_RECS_BY_TOPIC_SUCCESS: {
-      const { recsByTopic } = action
-      return { ...state, recsByTopic }
-    }
-
-    case SNOWPLOW_TRACK_PAGE_VIEW: {
-      return { ...state, newSaves: 0 }
-    }
-
-    default:
+    default: {
       return state
+    }
   }
-}
-
-/** UPDATE SAVE STATUS
- * Helper function to update save status for a specific item based on id
- * @param {object} state Redux state object
- * @param {string} id Item id to operate on
- * @param {string} save_status Value to update save status to
- */
-export function updateSaveStatus(state, id, saveStatus) {
-  const itemsById = state.itemsById
-  const item = itemsById[id]
-  return { ...itemsById, [id]: { ...item, saveStatus } }
 }
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const homeSagas = [
-  takeEvery(HOME_LINEUP_REQUEST, homeLineupRequest),
+  takeEvery(HOME_CONTENT_REQUEST, homeContentRequest),
+  takeEvery(SET_TOPIC_SUCCESS, homeContentRequest),
+  takeEvery(HOME_SAVE_REQUEST, homeContentSaveRequest),
   takeEvery(HOME_RECENT_SAVES_REQUEST, recentDataRequest),
-  takeEvery(HOME_SIMILAR_REC_SAVE_REQUEST, homeSimilarRecSaveRequest),
-  takeEvery(HOME_SAVE_REQUEST, homeSaveRequest),
-  takeEvery(HOME_UNSAVE_REQUEST, homeUnSaveRequest),
-  takeEvery(HOME_RECS_BY_TOPIC_REQUEST, homeRecsByTopic)
+  takeEvery(HOME_UNSAVE_REQUEST, homeContentUnSaveRequest)
 ]
 
 /* SAGAS :: SELECTORS
@@ -148,19 +104,50 @@ export const homeSagas = [
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-function* homeLineupRequest(action) {
+function* homeContentRequest() {
   try {
-    const { id } = action
-    const data = yield call(fetchLineupData, id)
-    yield put({ type: HOME_LINEUP_SUCCESS, ...data })
+    const { itemsById, slatesById, slateArray } = yield call(getUnifiedHome)
+
+    yield put({ type: HOME_CONTENT_SUCCESS, itemsById, slatesById, slateArray })
   } catch (error) {
     console.warn(error)
   }
 }
 
+function* homeContentSaveRequest({ url, id }) {
+  try {
+    const response = yield saveItem(url, { id })
+    if (response?.status !== 1) throw new Error('Unable to save')
+
+    // Manually adding `status: "0"` will derive the readUrl
+    const derivedItems = yield Object.values(response.action_results).map((item) =>
+      deriveListItem({ ...item, status: '0' }, true)
+    )
+
+    const items = derivedItems.map((item) => item.resolvedId)
+    const itemsById = arrayToObject(derivedItems, 'resolvedId')
+    const saveId = items[0]
+
+    yield put({ type: HOME_SAVE_SUCCESS, corpusId: id, id: saveId, items, itemsById })
+  } catch (error) {
+    console.warn(error)
+  }
+}
+
+function* homeContentUnSaveRequest({ id, url }) {
+  try {
+    const response = yield removeItemByUrl(url)
+    if (response?.status !== 1) throw new Error('Unable to remove item')
+
+    yield put({ type: HOME_UNSAVE_SUCCESS, corpusId: id })
+  } catch (error) {
+    yield put({ type: HOME_UNSAVE_FAILURE, error })
+  }
+}
+
 function* recentDataRequest() {
   try {
-    const { itemsById, error } = yield fetchSavesData({
+    const { itemsById, error } = yield fetchMyListData({
       count: 3,
       offset: 0,
       state: 'unread',
@@ -181,87 +168,8 @@ function* recentDataRequest() {
   }
 }
 
-function* homeSaveRequest({ url, id, position }) {
-  try {
-    const analytics = {
-      view: 'web',
-      section: 'home',
-      page: '/home/',
-      cxt_item_position: position
-    }
-
-    const response = yield saveItem(url, analytics)
-    if (response?.status !== 1) throw new Error('Unable to save')
-
-    // Manually adding `status: "0"` will derive the readUrl
-    const derivedItems = yield Object.values(response.action_results).map((item) =>
-      deriveListItem({ ...item, status: '0' }, true)
-    )
-
-    const items = derivedItems.map((item) => item.resolvedId)
-    const itemsById = arrayToObject(derivedItems, 'resolvedId')
-
-    yield put({ type: HOME_SAVE_SUCCESS, id, items, itemsById })
-    yield put({ type: ITEMS_ADD_SUCCESS })
-  } catch (error) {
-    yield put({ type: HOME_SAVE_FAILURE, error })
-  }
-}
-
-function* homeUnSaveRequest({ id, topic }) {
-  try {
-    const response = yield removeItem(id)
-    if (response?.status !== 1) throw new Error('Unable to remove item')
-
-    yield put({ type: HOME_UNSAVE_SUCCESS, id, topic })
-  } catch (error) {
-    yield put({ type: HOME_UNSAVE_FAILURE, error })
-  }
-}
-
-function* homeSimilarRecSaveRequest({ url, id, position }) {
-  try {
-    const analytics = {
-      view: 'web',
-      section: 'home',
-      page: '/home/',
-      cxt_item_position: position
-    }
-
-    const response = yield saveItem(url, analytics)
-    if (response?.status !== 1) throw new Error('Unable to save')
-
-    const derivedItems = Object.values(response.action_results).map((item) =>
-      deriveListItem(item, true)
-    )
-
-    const items = derivedItems.map((item) => item.resolvedId)
-    const itemsById = arrayToObject(derivedItems, 'resolvedId')
-
-    yield put({ type: HOME_SIMILAR_REC_SAVE_SUCCESS, id, items, itemsById })
-    yield put({ type: ITEMS_ADD_SUCCESS })
-  } catch (error) {
-    yield put({ type: HOME_SIMILAR_REC_SAVE_FAILURE, error })
-  }
-}
-
-function* homeRecsByTopic(action) {
-  try {
-    const { topics } = action
-    if (!topics.length) return
-
-    const topicRecs = yield call(getTopicMix, topics)
-    const itemsById = getRecsById(topicRecs)
-    const recsByTopic = Object.keys(itemsById)
-    yield put({ type: HOME_RECS_BY_TOPIC_SUCCESS, itemsById, recsByTopic })
-  } catch (error) {
-    yield put({ type: HOME_RECS_BY_TOPIC_FAILURE })
-  }
-}
-
 /** ASYNC Functions
  --------------------------------------------------------------- */
-
 /**
  * fetchSavesData
  * Make and async request for a Pocket v3 feed and return best data
@@ -281,25 +189,5 @@ export async function fetchSavesData(params) {
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.warn('discover.state', error)
-  }
-}
-
-/**
- * fetchLineupData
- * Make and async request the home lineup
- */
-export async function fetchLineupData(id) {
-  try {
-    const response = await apiGetHomeLineup({ id })
-
-    const { slatesById, itemsById, slateLineup } = response
-    const { generalSlates, topicSlates } = response
-
-    if (!generalSlates?.length || !slatesById || !itemsById) return {}
-
-    return { generalSlates, topicSlates, slatesById, itemsById, slateLineup }
-  } catch (error) {
-    //TODO: adjust this once error reporting strategy is defined.
-    console.warn('home.state.lineup', error)
   }
 }

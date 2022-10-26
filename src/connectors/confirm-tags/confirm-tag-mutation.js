@@ -33,7 +33,6 @@ export function MutationTaggingModal() {
   const itemsToTag = useSelector((state) => state.mutationTagging.itemIds)
   const currentTags = useSelector((state) => state.mutationTagging.tagNames)
   const activeTags = useSelector((state) => state.mutationTagging.activeTags)
-  const needsSaving = useSelector((state) => state.mutationTagging.needsSaving)
   const tagSuggestions = useSelector((state) => state.mutationTagging.tagSuggestions)
   const tagSuggestionStatus = useSelector((state) => state.mutationTagging.tagSuggestionStatus)
   const tagsSince = useSelector((state) => state.userTags.since)
@@ -43,6 +42,7 @@ export function MutationTaggingModal() {
   const isSingleTag = itemsToTag.length === 1
 
   // State
+  const [fresh, setFresh] = useState(true)
   const [value, setValue] = useState('') // This is the managed input value
   const [hasError, setHasError] = useState(false) // Error state on tags
 
@@ -58,11 +58,13 @@ export function MutationTaggingModal() {
   const removeTag = (tags) => {
     dispatch(mutationTagRemove(tags))
     setFocus()
+    setFresh(false)
   }
 
   const addTag = (tag) => {
     dispatch(mutationTagAdd(tag))
     setFocus()
+    setFresh(false)
   }
 
   const selectTag = (tag) => dispatch(mutationTagSelect(tag))
@@ -108,6 +110,11 @@ export function MutationTaggingModal() {
     if (tagsSince) return
     dispatch(requestUserTags())
   }, [dispatch, tagsSince])
+
+  useEffect(() => {
+    setValue('')
+    setFresh(true)
+  }, [showModal])
 
   return (
     <Modal
@@ -171,7 +178,7 @@ export function MutationTaggingModal() {
       <ModalFooter isSticky={false}>
         <div className="actions">
           <Button
-            disabled={needsSaving}
+            disabled={!value ? fresh : false}
             type="submit"
             data-cy="tagging-confirm"
             onClick={handleSave}>

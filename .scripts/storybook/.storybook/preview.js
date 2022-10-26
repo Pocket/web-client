@@ -87,7 +87,7 @@ export const parameters = {
   options: {
     enableShortcuts: true,
     storySort: {
-      order: ['UI']
+      order: ['UI', 'Item']
     }
   }
 }

@@ -215,15 +215,16 @@ export const cardStyles = css`
     strong {
       font-weight: 500;
     }
-    .unifiedHome & {
-      max-height: calc(3 * 1.5em);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      overflow-wrap: anywhere;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-    }
+  }
+
+  &.clamped .excerpt p {
+    max-height: calc(3 * 1.5em);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 
   .markdown {
@@ -1100,6 +1101,47 @@ export const cardStyles = css`
       }
       .footer .actions {
         grid-column: 1 / -1;
+      }
+    }
+  }
+
+  .smallCards & {
+    --media-column-span: 1;
+    --content-column-span: 2/-1;
+
+    .cardWrap {
+      display: grid;
+      height: initial;
+      padding-bottom: 0;
+      grid-column-gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .media {
+      padding-bottom: 0;
+    }
+
+    .view-original {
+      display: none;
+    }
+
+    .topic-name {
+      display: none;
+    }
+    .excerpt {
+      display: none;
+    }
+    .details {
+      padding: 0.25rem 0;
+    }
+
+    .footer {
+      position: initial;
+      bottom: initial;
+      grid-template-columns: repeat(3, 1fr);
+      grid-column-gap: 1rem;
+      .actions {
+        padding-top: 0;
+        grid-column: 2/-1;
       }
     }
   }
