@@ -217,6 +217,7 @@ export function deriveItemData({
     thumbnail: thumbnail({ item, itemEnrichment }),
     excerpt: excerpt({ item, itemEnrichment }),
     publisher: publisher({ item, itemEnrichment, passedPublisher }),
+    publisherLogo: item?.domainMetadata?.logo || false,
     externalUrl: externalUrl({ item, itemEnrichment, utmId }),
     readUrl: readUrl({ item, node, status: node?.status }),
     saveUrl: saveUrl({ item, itemEnrichment }),

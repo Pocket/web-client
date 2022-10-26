@@ -1,306 +1,232 @@
 {
   "edges": [
     {
+      "cursor": "MzcxMDAzNTYxOV8qXzE2NjU2OTA4OTI=",
       "node": {
-        "_createdAt": 1637535873,
-        "_updatedAt": 1637535873,
-        "url": "https://getpocket.com/collections/how-data-ownership-shapes-the-web",
+        "id": "3710035619",
+        "url": "https://slate.com/human-interest/2022/09/history-physical-education-kids-sports-inclusive-exercise.html",
         "status": "UNREAD",
+        "_createdAt": 1665690892,
+        "_updatedAt": 1665690892,
+        "_deletedAt": null,
         "isFavorite": false,
         "favoritedAt": null,
         "isArchived": false,
         "archivedAt": null,
         "tags": [],
+        "annotations": {
+          "highlights": []
+        },
         "item": {
-          "itemId": "3473148905",
+          "url": "https://slate.com/human-interest/2022/09/history-physical-education-kids-sports-inclusive-exercise.html",
+          "id": "3710035619",
+          "title": "Why American Kids Grow Up Hating Exercise",
+          "excerpt": "Huffing through yet another long run together, my friend and I got to talking about how unlikely it was that the two of us had, one, met at the gym, and two, were now training for a marathon.",
           "authors": [
             {
-              "id": "159260083",
-              "name": "Rebecca Weiss, Sydette Harry, Jauvaun Moradi, and Ted Han",
-              "url": ""
+              "name": "Natalia Mehlman Petrzela"
+            }
+          ],
+          "domainMetadata": {
+            "name": "Slate",
+            "logo": "https://logo.clearbit.com/slate.com?size=800",
+            "logoGreyscale": "https://logo.clearbit.com/slate.com?size=800&greyscale=true"
+          },
+          "hasImage": "HAS_IMAGES",
+          "hasVideo": "NO_VIDEOS",
+          "isArticle": true,
+          "isIndex": false,
+          "timeToRead": 16,
+          "topImageUrl": "https://compote.slate.com/images/2cb1d7b0-e8fa-4d4a-9048-a3db60b81e87.jpeg?width=1560",
+          "collection": null,
+          "syndicatedArticle": null
+        }
+      }
+    },
+    {
+      "cursor": "MzM2NTIyNDgxNF8qXzE2NjU0MjgyNjc=",
+      "node": {
+        "id": "3365224814",
+        "url": "http://getpocket.com/collections/13-delicious-sandwich-recipes",
+        "status": "UNREAD",
+        "_createdAt": 1665428267,
+        "_updatedAt": 1665428267,
+        "_deletedAt": null,
+        "isFavorite": false,
+        "favoritedAt": null,
+        "isArchived": false,
+        "archivedAt": null,
+        "tags": [],
+        "annotations": {
+          "highlights": []
+        },
+        "item": {
+          "url": "https://getpocket.com/collections/13-delicious-sandwich-recipes",
+          "id": "3365224814",
+          "title": "13 Delicious Sandwich Recipes",
+          "excerpt": "",
+          "authors": [
+            {
+              "name": "Amy Maoz"
             }
           ],
           "domainMetadata": {
             "name": "Pocket",
-            "logo": "https://logo.clearbit.com/getpocket.com?size=800"
+            "logo": "https://logo.clearbit.com/getpocket.com?size=800",
+            "logoGreyscale": "https://logo.clearbit.com/getpocket.com?size=800&greyscale=true"
           },
-          "domain": null,
-          "excerpt": "Making sense of how personal data fuels problematic algorithms—and what it looks like to be part of the solution.",
           "hasImage": "HAS_IMAGES",
           "hasVideo": "NO_VIDEOS",
-          "images": [
-            {
-              "caption": "",
-              "credit": "",
-              "src": "https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fd0fcd040-935c-4c2e-b406-1304e997499d.jpeg",
-              "width": 0,
-              "height": 0,
-              "imageId": 1
-            }
-          ],
-          "isArticle": true,
+          "isArticle": false,
           "isIndex": false,
-          "resolvedUrl": "https://getpocket.com/collections/how-data-ownership-shapes-the-web",
-          "resolvedId": "3473148905",
-          "title": "How Data Ownership Shapes the Web",
-          "topImageUrl": "https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F029972a3-475b-4103-be8d-e04381e5e158.png",
-          "videos": null,
-          "wordCount": 416,
-          "datePublished": null,
-          "language": "en",
           "timeToRead": null,
-          "givenUrl": "https://getpocket.com/collections/how-data-ownership-shapes-the-web",
-          "syndicatedArticle": null,
+          "topImageUrl": "https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F229247af-f201-4a68-914b-5fdb92bef7bd.png",
           "collection": {
-            "slug": "how-data-ownership-shapes-the-web",
-            "imageUrl": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/029972a3-475b-4103-be8d-e04381e5e158.png",
-            "excerpt": "Making sense of how personal data fuels problematic algorithms—and what it looks like to be part of the solution.",
-            "title": "How Data Ownership Shapes the Web"
-          }
+            "title": "13 Delicious Sandwich Recipes ",
+            "intro": "*Image by snapgalleria/Getty Images*",
+            "excerpt": "Make lunch the most exciting time of the day with a baker's dozen of mouthwatering sandwich recipes, from muffulettas to cubanos to MLTs (and BLTs, too).",
+            "imageUrl": "https://s3.amazonaws.com/pocket-collectionapi-prod-images/229247af-f201-4a68-914b-5fdb92bef7bd.png",
+            "slug": "13-delicious-sandwich-recipes"
+          },
+          "syndicatedArticle": null
         }
-      },
-      "cursor": "MzQ3MzE0ODkwNV8qXzE2Mzc1MzU4NzM="
+      }
     },
     {
+      "cursor": "MzY4MDY0MzkxN18qXzE2NjQ5MTY3Nzk=",
       "node": {
-        "_createdAt": 1637002780,
-        "_updatedAt": 1637535975,
-        "url": "https://getpocket.com/explore/item/the-hunt-for-earth-s-deep-hidden-oceans",
+        "id": "3680643917",
+        "url": "https://www.inc.com/bill-murphy-jr/how-people-with-highemotionalintelligenceuse-fortune-cookie-rule-to-become-exceptionally-resilient.html",
         "status": "UNREAD",
-        "isFavorite": false,
-        "favoritedAt": null,
-        "isArchived": false,
-        "archivedAt": null,
-        "tags": [
-          {
-            "name": "philosophy"
-          },
-          {
-            "name": "science"
-          }
-        ],
-        "item": {
-          "itemId": "3119258811",
-          "authors": [
-            {
-              "id": "400605",
-              "name": "Marcus Woo",
-              "url": ""
-            }
-          ],
-          "domainMetadata": {
-            "name": "Pocket",
-            "logo": "https://logo.clearbit.com/getpocket.com?size=800"
-          },
-          "domain": null,
-          "excerpt": "Water-bearing minerals reveal that Earth’s mantle could hold more water than all its oceans. Researchers now ask: Where did it all come from?",
-          "hasImage": "HAS_IMAGES",
-          "hasVideo": "NO_VIDEOS",
-          "images": [
-            {
-              "caption": "",
-              "credit": "Olena Shmahalo / Quanta Magazine",
-              "src": "https://pocket-syndicated-images.s3.amazonaws.com/5f69f3665fef7.jpg",
-              "width": 0,
-              "height": 0,
-              "imageId": 1
-            }
-          ],
-          "isArticle": true,
-          "isIndex": false,
-          "resolvedUrl": "https://getpocket.com/explore/item/the-hunt-for-earth-s-deep-hidden-oceans",
-          "resolvedId": "3119258811",
-          "title": "The Hunt for Earth’s Deep Hidden Oceans",
-          "topImageUrl": "https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5733%2F1600779143_WaterEarth_3Kx1665.jpg",
-          "videos": null,
-          "wordCount": 1811,
-          "datePublished": null,
-          "language": "en",
-          "timeToRead": 8,
-          "givenUrl": "https://getpocket.com/explore/item/the-hunt-for-earth-s-deep-hidden-oceans",
-          "syndicatedArticle": {
-            "slug": "the-hunt-for-earth-s-deep-hidden-oceans",
-            "publisher": {
-              "name": "Quanta Magazine",
-              "url": "https://www.quantamagazine.org/?utm_source=pocket",
-              "logo": "https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5f64c9383e5ae.png"
-            }
-          },
-          "collection": null
-        }
-      },
-      "cursor": "MzExOTI1ODgxMV8qXzE2MzcwMDI3ODA="
-    },
-    {
-      "node": {
-        "_createdAt": 1636660857,
-        "_updatedAt": 1636660857,
-        "url": "http://aeon.co/essays/free-yourself-from-the-tentacles-of-pain-with-radical-acceptance",
-        "status": "UNREAD",
+        "_createdAt": 1664916779,
+        "_updatedAt": 1664916779,
+        "_deletedAt": null,
         "isFavorite": false,
         "favoritedAt": null,
         "isArchived": false,
         "archivedAt": null,
         "tags": [],
+        "annotations": {
+          "highlights": []
+        },
         "item": {
-          "itemId": "3356435941",
+          "url": "https://www.inc.com/bill-murphy-jr/how-people-with-highemotionalintelligenceuse-fortune-cookie-rule-to-become-exceptionally-resilient.html",
+          "id": "3680643917",
+          "title": "How People With Very High Emotional Intelligence Use the Fortune Cookie Rule to Become Super-Resilient",
+          "excerpt": "This is a story about emotional intelligence, building resilience, and (oddly) high school humor. When I was a teenager, some friends and I used to frequent a Chinese restaurant.",
           "authors": [
             {
-              "id": "362364",
-              "name": "Joshua Coleman",
-              "url": ""
-            }
-          ],
-          "domainMetadata": {
-            "name": "Aeon",
-            "logo": "https://logo.clearbit.com/aeon.co?size=800"
-          },
-          "domain": null,
-          "excerpt": "Terrible things can happen. You get diagnosed with an incurable disease. Your accident changes your ability to do the activities that made life fun and meaningful. Your spouse decides that they want someone else.",
-          "hasImage": "NO_IMAGES",
-          "hasVideo": "NO_VIDEOS",
-          "images": null,
-          "isArticle": true,
-          "isIndex": false,
-          "resolvedUrl": "https://aeon.co/essays/free-yourself-from-the-tentacles-of-pain-with-radical-acceptance",
-          "resolvedId": "3356435941",
-          "title": "Free yourself from the tentacles of pain with radical acceptance",
-          "topImageUrl": "https://epsilon.aeon.co/images/3bceebee-533b-4516-8936-c5564de01a85/header_essay-v2-final-par375943.jpg",
-          "videos": null,
-          "wordCount": 3218,
-          "datePublished": "2021-06-14 00:00:00",
-          "language": "en",
-          "timeToRead": 15,
-          "givenUrl": "http://aeon.co/essays/free-yourself-from-the-tentacles-of-pain-with-radical-acceptance",
-          "syndicatedArticle": null,
-          "collection": null
-        }
-      },
-      "cursor": "MzM1NjQzNTk0MV8qXzE2MzY2NjA4NTc="
-    },
-    {
-      "node": {
-        "_createdAt": 1636660852,
-        "_updatedAt": 1636660853,
-        "url": "http://inc.com/jason-aten/how-10-second-rule-can-dramatically-change-your-conversations-make-you-a-better-leader.html",
-        "status": "UNREAD",
-        "isFavorite": false,
-        "favoritedAt": null,
-        "isArchived": false,
-        "archivedAt": null,
-        "tags": [],
-        "item": {
-          "itemId": "3404817099",
-          "authors": [
-            {
-              "id": "110533897",
-              "name": "Jason Aten",
-              "url": "https://www.inc.com/author/jason-aten"
+              "name": "Bill Murphy Jr."
             }
           ],
           "domainMetadata": {
             "name": "Inc. Magazine",
-            "logo": "https://logo.clearbit.com/inc.com?size=800"
+            "logo": "https://logo.clearbit.com/inc.com?size=800",
+            "logoGreyscale": "https://logo.clearbit.com/inc.com?size=800&greyscale=true"
           },
-          "domain": null,
-          "excerpt": "Communicating is easily the single most important job of leaders. If leadership is mostly about influence--and it is--then the ability to communicate a vision and motivate people to move toward that vision is the single most important characteristic a leader can have.",
           "hasImage": "HAS_IMAGES",
           "hasVideo": "NO_VIDEOS",
-          "images": [
-            {
-              "caption": "Getty Images",
-              "credit": "",
-              "src": "https://img-cdn.inc.com/image/upload/w_1920,h_1080,c_fill/images/panoramic/getty_1150384570_f2e8mt.jpg",
-              "width": 0,
-              "height": 0,
-              "imageId": 1
-            }
-          ],
           "isArticle": true,
           "isIndex": false,
-          "resolvedUrl": "https://www.inc.com/jason-aten/how-10-second-rule-can-dramatically-change-your-conversations-make-you-a-better-leader.html",
-          "resolvedId": "3404817099",
-          "title": "How the 10-Second Rule Can Dramatically Change Your Conversations and Make You a Better Leader",
-          "topImageUrl": "https://img-cdn.inc.com/image/upload/w_1024,h_576,c_fill/images/panoramic/getty_1150384570_f2e8mt.jpg",
-          "videos": null,
-          "wordCount": 564,
-          "datePublished": "2021-08-12 04:00:00",
-          "language": "en",
-          "timeToRead": 3,
-          "givenUrl": "http://inc.com/jason-aten/how-10-second-rule-can-dramatically-change-your-conversations-make-you-a-better-leader.html",
-          "syndicatedArticle": null,
-          "collection": null
+          "timeToRead": 5,
+          "topImageUrl": "https://img-cdn.inc.com/image/upload/w_1024,h_576,c_fill/images/panoramic/GettyImages-1303793807_509111_xefuh5.jpg",
+          "collection": null,
+          "syndicatedArticle": null
         }
-      },
-      "cursor": "MzQwNDgxNzA5OV8qXzE2MzY2NjA4NTI="
+      }
     },
     {
+      "cursor": "MzY2MTIzNTIyNV8qXzE2NjQ5MTU4NDM=",
       "node": {
-        "_createdAt": 1636136016,
-        "_updatedAt": 1636136016,
-        "url": "http://hbr.org/2021/09/our-brains-were-not-built-for-this-much-uncertainty",
+        "id": "3661235225",
+        "url": "https://zenhabits.net/powerfully-effective/",
         "status": "UNREAD",
-        "isFavorite": false,
-        "favoritedAt": null,
+        "_createdAt": 1664915843,
+        "_updatedAt": 1665182114,
+        "_deletedAt": null,
+        "isFavorite": true,
+        "favoritedAt": 1665182114,
         "isArchived": false,
         "archivedAt": null,
         "tags": [],
+        "annotations": {
+          "highlights": []
+        },
         "item": {
-          "itemId": "3438053807",
+          "url": "https://zenhabits.net/powerfully-effective/",
+          "id": "3661235225",
+          "title": "How to Have a Powerfully Effective Day",
+          "excerpt": "A lot of people I talk to are unhappy with their ability to get stuff done in their lives. They feel they’re wasting a lot of time, never really getting anything important done.",
           "authors": [
             {
-              "id": "97730864",
-              "name": "Heidi Grant",
-              "url": "https://hbr.org/search?term=heidi%20grant"
-            },
-            {
-              "id": "157181795",
-              "name": "Tal Goldhamer",
-              "url": "https://hbr.org/search?term=tal%20goldhamer"
+              "name": "Leo Babauta"
             }
           ],
           "domainMetadata": {
-            "name": "Harvard Business Review",
-            "logo": "https://logo.clearbit.com/hbr.org?size=800"
+            "name": "Zen Habits",
+            "logo": "https://logo.clearbit.com/zenhabits.net?size=800",
+            "logoGreyscale": "https://logo.clearbit.com/zenhabits.net?size=800&greyscale=true"
           },
-          "domain": null,
-          "excerpt": "Prior to the pandemic, the working world already felt to most of us like it was undergoing rapid, unrelenting change — changes in customer preferences, client and employee expectations, and competitive advantages.",
-          "hasImage": "HAS_IMAGES",
+          "hasImage": "NO_IMAGES",
           "hasVideo": "NO_VIDEOS",
-          "images": [
-            {
-              "caption": "Illustration by Daniel Creel",
-              "credit": "Illustration  Daniel Creel",
-              "src": "https://hbr.org/resources/images/article_assets/2021/09/Sep21_22_DanielCreel.jpg",
-              "width": 0,
-              "height": 0,
-              "imageId": 1
-            }
-          ],
           "isArticle": true,
           "isIndex": false,
-          "resolvedUrl": "https://hbr.org/2021/09/our-brains-were-not-built-for-this-much-uncertainty",
-          "resolvedId": "3438053807",
-          "title": "Our Brains Were Not Built for This Much Uncertainty",
-          "topImageUrl": "https://hbr.org/resources/images/article_assets/2021/09/Sep21_22_DanielCreel.jpg",
-          "videos": null,
-          "wordCount": 1233,
-          "datePublished": "2021-09-22 07:05:47",
-          "language": "en",
-          "timeToRead": 6,
-          "givenUrl": "http://hbr.org/2021/09/our-brains-were-not-built-for-this-much-uncertainty",
-          "syndicatedArticle": null,
-          "collection": null
+          "timeToRead": 5,
+          "topImageUrl": "https://zenhabits.net/wp-content/uploads/2022/07/daniel-mirlea-dfuA04fz9yM-unsplash.jpg",
+          "collection": null,
+          "syndicatedArticle": null
         }
-      },
-      "cursor": "MzQzODA1MzgwN18qXzE2MzYxMzYwMTY="
+      }
+    },
+    {
+      "cursor": "MzY3Mzk5OTg1NV8qXzE2NjQ5MTU4NDA=",
+      "node": {
+        "id": "3673999855",
+        "url": "https://psyche.co/guides/how-to-be-kinder-to-yourself-by-practising-self-compassion",
+        "status": "UNREAD",
+        "_createdAt": 1664915840,
+        "_updatedAt": 1665082473,
+        "_deletedAt": null,
+        "isFavorite": true,
+        "favoritedAt": 1665082473,
+        "isArchived": false,
+        "archivedAt": null,
+        "tags": [],
+        "annotations": {
+          "highlights": []
+        },
+        "item": {
+          "url": "https://psyche.co/guides/how-to-be-kinder-to-yourself-by-practising-self-compassion",
+          "id": "3673999855",
+          "title": "How to be kinder to yourself",
+          "excerpt": "Imagine you’ve been planning for a high-stakes situation, such as a difficult conversation with a friend, an important sports game, or a presentation for your company’s leadership team. You’ve spent months rehearsing what you’ll say or do.",
+          "authors": [
+            {
+              "name": "Brooke Schwartz"
+            }
+          ],
+          "domainMetadata": {
+            "name": "psyche.co",
+            "logo": null,
+            "logoGreyscale": null
+          },
+          "hasImage": "NO_IMAGES",
+          "hasVideo": "NO_VIDEOS",
+          "isArticle": true,
+          "isIndex": false,
+          "timeToRead": 22,
+          "topImageUrl": "https://alpha.aeon.co/images/6a2e7882-0dcb-4111-9701-bfc11f262440/1500x1500.jpg",
+          "collection": null,
+          "syndicatedArticle": null
+        }
+      }
     }
   ],
   "pageInfo": {
     "hasNextPage": true,
     "hasPreviousPage": false,
-    "startCursor": "MzQ3MzE0ODkwNV8qXzE2Mzc1MzU4NzM=",
-    "endCursor": "MzQzODA1MzgwN18qXzE2MzYxMzYwMTY="
+    "startCursor": "MzcxMDAzNTYxOV8qXzE2NjU2OTA4OTI=",
+    "endCursor": "MzY3Mzk5OTg1NV8qXzE2NjQ5MTU4NDA="
   },
-  "totalCount": 564
+  "totalCount": 598
 }
