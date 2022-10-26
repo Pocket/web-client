@@ -1,4 +1,5 @@
 import { css } from 'linaria'
+import { useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import { breakpointMediumHandset } from 'common/constants'
 import Link from 'next/link'
@@ -50,11 +51,24 @@ const recentSearchStyle = css`
   }
 `
 
-export function RecentSearches({ searchTerms = [] }) {
+export function RecentSearches({ searchTerms = [], isFocused }) {
   const { t } = useTranslation()
+  const [isHovered, setIsHovered] = useState(false)
 
-  return searchTerms.length ? (
-    <div className={recentSearchStyle}>
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+  }
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+  }
+
+  const showModule = (isFocused || isHovered) && searchTerms.length
+
+  return showModule ? (
+    <div
+      className={recentSearchStyle}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}>
       <h4 className="title">{t('search:recent-searches', 'Recent Searches')}</h4>
 
       {searchTerms.map((search) => (
