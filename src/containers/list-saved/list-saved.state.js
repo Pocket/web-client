@@ -133,8 +133,8 @@ export const listSavedPageInfoReducers = (state = initialState, action) => {
     case ITEMS_SAVED_TAGGED_REQUEST:
     case ITEMS_SAVED_SEARCH_REQUEST:
     case ITEMS_SAVED_REQUEST: {
-      const { sortOrder = 'DESC', actionType } = action
-      return { ...state, error: false, loading: true, sortOrder, actionType }
+      const { sortOrder = 'DESC', tagNames, searchTerm, actionType } = action
+      return { ...state, error: false, loading: true, sortOrder, actionType, tagNames, searchTerm }
     }
 
     case ITEMS_SAVED_PAGE_SET_FILTERS: {
@@ -267,10 +267,10 @@ function* requestItems(action) {
 
 function* loadMoreItems() {
   try {
-    const { searchTerm, filter, sortOrder, endCursor, actionType, tagNames } = yield select(
+    const { searchTerm, sortOrder, endCursor, actionType, tagNames } = yield select(
       getSavedPageInfo
     )
-    const type = yield call(itemRequestType, searchTerm, filter?.tagNames)
+    const type = yield call(itemRequestType, searchTerm, tagNames)
 
     yield put({
       type,

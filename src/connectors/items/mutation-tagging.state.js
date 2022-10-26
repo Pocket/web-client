@@ -46,8 +46,8 @@ const initialTaggingState = {
 export const mutationTaggingReducers = (state = initialTaggingState, action) => {
   switch (action.type) {
     case MUTATION_TAGGING: {
-      const { itemId, tags } = action
-      const tagNames = tags.map((tag) => tag.name)
+      const { itemId, tags = [] } = action
+      const tagNames = tags.map((tag) => tag?.name)
       const tagsWithId = arrayToObject(tags, 'name')
 
       return {

@@ -7,6 +7,7 @@ export async function getStaticProps({ locale }) {
     props: {
       authRequired: true,
       ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
+      subset: 'search',
       filter: 'archive'
     }
   }

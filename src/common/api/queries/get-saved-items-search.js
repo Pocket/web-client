@@ -18,12 +18,16 @@ const searchSavedItemsQuery = gql`
             savedItem {
               _createdAt
               _updatedAt
-              archivedAt
+              id
+              status
+              isFavorite
               favoritedAt
               isArchived
-              isFavorite
-              status
-              id
+              archivedAt
+              tags {
+                id
+                name
+              }
               item {
                 ...ItemDetails
               }

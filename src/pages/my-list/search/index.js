@@ -6,6 +6,7 @@ export async function getStaticProps({ locale }) {
   return {
     props: {
       authRequired: true,
+      subset: 'search',
       ...(await serverSideTranslations(locale, [...LOCALE_COMMON]))
     }
   }
