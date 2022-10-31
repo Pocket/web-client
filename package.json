@@ -76,8 +76,8 @@
     "@babel/eslint-parser": "7.17.0",
     "@babel/preset-env": "7.17.12",
     "@babel/preset-react": "7.17.12",
-    "@commitlint/cli": "^17.0.0",
-    "@commitlint/config-conventional": "^17.0.0",
+    "@commitlint/cli": "^17.2.0",
+    "@commitlint/config-conventional": "^17.2.0",
     "@graphql-eslint/eslint-plugin": "3.10.3",
     "@next/eslint-plugin-next": "12.1.6",
     "@semantic-release/changelog": "6.0.1",
@@ -96,7 +96,7 @@
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-prettier": "4.0.0",
-    "graphql": "16.5.0",
+    "graphql": "16.6.0",
     "husky": "8.0.1",
     "jest": "28.1.0",
     "jest-environment-jsdom": "28.1.0",
@@ -104,7 +104,7 @@
     "jsdom": "19.0.0",
     "jsdom-global": "3.0.2",
     "next-build-id": "3.0.0",
-    "prettier": "2.6.2"
+    "prettier": "2.7.1"
   },
   "dependencies": {
     "@braze/web-sdk": "4.0.1",
