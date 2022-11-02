@@ -92,7 +92,7 @@ export const ListSaved = (props) => {
     dispatch(itemFilterFunction(searchTerm, sortOrder, [tag]))
   }, [dispatch, subset, filter, searchTerm, sortOrder, sortBy, tag])
 
-  // Remove current item when we return to myList
+  // Remove current item when we return to saves
   // This should be leveraged more effectively in future, but for now
   // it is simply a reset
   useEffect(() => {

@@ -4,7 +4,7 @@ import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { useTranslation } from 'next-i18next'
 import { Loader } from 'components/loader/loader'
 import { ListSort } from 'components/list-sort/list-sort'
-import { myListHeaderStyle } from './my-list-header'
+import { savesHeaderStyle } from './saves-header'
 
 const searchStyles = css`
   ${breakpointLargeTablet} {
@@ -33,7 +33,7 @@ export const SearchPageHeader = ({
 
   const isLoading = total === false
   return query ? (
-    <header className={cx(myListHeaderStyle, searchStyles)}>
+    <header className={cx(savesHeaderStyle, searchStyles)}>
       <h1 className="pageTitle" data-cy="page-title">
         <em data-cy="search-query">"{query}"</em> —{' '}
         {isLoading ? (

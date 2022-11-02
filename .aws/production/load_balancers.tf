@@ -126,11 +126,18 @@ resource "aws_alb_listener_rule" "public_forward_104" {
   priority = 2104
 }
 
-resource "aws_alb_listener_rule" "public_forward_110" {
+resource "aws_alb_listener_rule" "public_forward_105" {
   listener_arn = data.aws_alb_listener.web_client.arn
   action {
-    type             = "forward"
-    target_group_arn = aws_alb_target_group.public.arn
+    type = "redirect"
+    redirect {
+      port        = "443"
+      host        = "getpocket.com"
+      path        = "/my-list"
+      protocol    = "HTTPS"
+      status_code = "HTTP_302"
+      query       = "#{query}"
+    }
   }
 
   # Remove host condition so we can test with dotcom gateway
@@ -143,14 +150,14 @@ resource "aws_alb_listener_rule" "public_forward_110" {
   condition {
     path_pattern {
       values = [
-        "/my-list",
-        "/my-list/",
-        "/my-list/*"
+        "/saves",
+        "/saves/",
+        "/saves/*"
       ]
     }
   }
 
-  priority = 2110
+  priority = 2105
 }
 
 resource "aws_alb_listener_rule" "public_forward_111" {

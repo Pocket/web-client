@@ -15,8 +15,8 @@ import { brazeSagas } from 'connectors/third-party/braze.state'
 
 import { userReducers, userSagas, accountReducers } from 'containers/account/account.state'
 
-import { userTagsSagas } from 'containers/my-list/tags-page/tags-page.state'
-import { userTagsReducers } from 'containers/my-list/tags-page/tags-page.state'
+import { userTagsSagas } from 'containers/saves/tags-page/tags-page.state'
+import { userTagsReducers } from 'containers/saves/tags-page/tags-page.state'
 
 import { settingsReducers } from 'connectors/settings/settings.state'
 import { settingsSagas } from 'connectors/settings/settings.state'
@@ -56,19 +56,19 @@ import { syndicatedArticleSagas } from 'containers/syndicated-article/syndicated
 import { recitReducers } from 'connectors/recit/recit.state'
 import { recitSagas } from 'connectors/recit/recit.state'
 
-import { myListReducers } from 'containers/my-list/my-list.state'
-import { myListSagas } from 'containers/my-list/my-list.state'
+import { savesReducers } from 'containers/saves/saves.state'
+import { savesSagas } from 'containers/saves/saves.state'
 
-import { myListItemsReducers } from 'connectors/items-by-id/my-list/items.state'
-import { myListItemsSagas } from 'connectors/items-by-id/my-list/items.state'
+import { savesItemsReducers } from 'connectors/items-by-id/saves/items.state'
+import { savesItemsSagas } from 'connectors/items-by-id/saves/items.state'
 
-import { itemBulkReducers } from 'connectors/items-by-id/my-list/items.bulk'
-import { itemDeleteReducers } from 'connectors/items-by-id/my-list/items.delete'
-import { itemFavoriteReducers } from 'connectors/items-by-id/my-list/items.favorite'
-import { itemArchiveReducers } from 'connectors/items-by-id/my-list/items.archive'
-import { itemTagReducers } from 'connectors/items-by-id/my-list/items.tag'
-import { itemShareReducers } from 'connectors/items-by-id/my-list/items.share'
-import { itemShareSagas } from 'connectors/items-by-id/my-list/items.share'
+import { itemBulkReducers } from 'connectors/items-by-id/saves/items.bulk'
+import { itemDeleteReducers } from 'connectors/items-by-id/saves/items.delete'
+import { itemFavoriteReducers } from 'connectors/items-by-id/saves/items.favorite'
+import { itemArchiveReducers } from 'connectors/items-by-id/saves/items.archive'
+import { itemTagReducers } from 'connectors/items-by-id/saves/items.tag'
+import { itemShareReducers } from 'connectors/items-by-id/saves/items.share'
+import { itemShareSagas } from 'connectors/items-by-id/saves/items.share'
 
 import { itemReportReducers } from 'connectors/items-by-id/discover/items.report'
 import { itemReportSagas } from 'connectors/items-by-id/discover/items.report'
@@ -182,8 +182,8 @@ const collectionReducer = {
 }
 
 const libraryReducers = {
-  myListItemsById: myListItemsReducers,
-  myList: myListReducers,
+  savesItemsById: savesItemsReducers,
+  saves: savesReducers,
   bulkEdit: itemBulkReducers,
   userTags: userTagsReducers,
   userMessages: userMessageReducers,
@@ -256,8 +256,8 @@ function* rootSaga() {
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
     ...recitSagas,
-    ...myListSagas,
-    ...myListItemsSagas,
+    ...savesSagas,
+    ...savesItemsSagas,
     ...itemShareSagas,
     ...itemReportSagas,
     ...readSagas,

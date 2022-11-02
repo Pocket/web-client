@@ -23,7 +23,7 @@ export default function Read() {
   useEffect(() => {
     if (deleted) {
       const { getStarted } = router.query
-      const path = getStarted ? '/home' : '/my-list'
+      const path = getStarted ? '/home' : '/saves'
       router.replace(path)
       dispatch(clearDeletion())
     }

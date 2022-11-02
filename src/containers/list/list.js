@@ -18,12 +18,12 @@ import { savedItemsSetSortOrder } from 'containers/list-saved/list-saved.state'
 import { savedItemsSetSortBy } from 'containers/list-saved/list-saved.state'
 import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 
-import { TagPageHeader } from 'containers/my-list/tags-page/tag-page-header'
-import { MyListHeader } from 'components/headers/my-list-header'
+import { TagPageHeader } from 'containers/saves/tags-page/tag-page-header'
+import { SavesHeader } from 'components/headers/saves-header'
 import { SearchPageHeader } from 'components/headers/search-page-header'
 
-import MyList from 'containers/my-list/my-list'
-import SearchList from 'containers/my-list/search-page/search-page'
+import Saves from 'containers/saves/saves'
+import SearchList from 'containers/saves/search-page/search-page'
 
 import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
 import { BulkFavoriteModal } from 'connectors/confirm-favorite/confirm-bulk-favorite'
@@ -50,7 +50,7 @@ export const List = (props) => {
   const savedSortOrder = useSelector((state) => state.listSavedPageInfo.sortOrder)
   const featureState = useSelector((state) => state.features)
   const isPremium = useSelector((state) => state.user.premium_status === '1')
-  const v3Total = useSelector((state) => state.myList[`${section}Total`])
+  const v3Total = useSelector((state) => state.saves[`${section}Total`])
   const graphTotal = useSelector((state) => state.listSavedPageInfo.totalCount)
 
   // Derived Values
@@ -59,10 +59,10 @@ export const List = (props) => {
   const sortOrder = useApiNext ? savedSortOrder : legacySortOrder
 
   const { flagsReady } = featureState
-  const LegacyList = searchTerm ? SearchList : MyList
+  const LegacyList = searchTerm ? SearchList : Saves
   const ListToRender = useApiNext ? ListSaved : LegacyList
 
-  const ListHeader = searchTerm ? SearchPageHeader : MyListHeader
+  const ListHeader = searchTerm ? SearchPageHeader : SavesHeader
   const Header = tag ? TagPageHeader : ListHeader
 
   // Actions
@@ -76,9 +76,9 @@ export const List = (props) => {
 
   return (
     <Layout title={metaData.title} metaData={metaData} subset={subset} tag={tag}>
-      <SideNav type="my-list" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
+      <SideNav type="saves" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
       <main className="main">
-        <SuccessFXA type="my-list" />
+        <SuccessFXA type="saves" />
         <Header
           subset={subset}
           title={selector}

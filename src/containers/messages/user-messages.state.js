@@ -2,7 +2,7 @@ import { put, call, takeEvery, select } from 'redux-saga/effects'
 import { getShares } from 'common/api/_legacy/messages'
 import { resendConfirmation } from 'common/api/_legacy/messages'
 import { sendItemActions } from 'common/api/_legacy/item-actions'
-import { deriveMyListItems } from 'connectors/items-by-id/my-list/items.derive'
+import { deriveSavesItems } from 'connectors/items-by-id/saves/items.derive'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 import { API_ACTION_SHARE_ADDED } from 'common/constants'
@@ -104,7 +104,7 @@ function* sharesRequest() {
       ...notifications.map((notification) => notification.item),
       ...unconfirmed_shares.map((share) => share.item)
     ]
-    const derivedItems = deriveMyListItems(itemsArray)
+    const derivedItems = deriveSavesItems(itemsArray)
     const itemsById = arrayToObject(derivedItems, 'item_id')
     yield put({ type: GET_SHARES_SUCCESS, notifications, unconfirmed_shares, itemsById })
   } catch (error) {

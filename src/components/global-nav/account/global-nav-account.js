@@ -329,7 +329,7 @@ const GlobalNavAccount = ({
             <Trans i18nKey="nav:get-help">Get help</Trans>
           </PopupMenuItem>
           <PopupMenuItem
-            href="/my-list/messages"
+            href="/saves/messages"
             id="account-menu-messages-link"
             onClick={handleMessagesCase}
             data-cy="account-menu-messages-link">

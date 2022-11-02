@@ -1,27 +1,27 @@
 import { takeLatest, put, select } from 'redux-saga/effects'
-import { getMyList } from 'common/api/my-list'
-import { searchMyList } from 'common/api/my-list'
+import { getSaves } from 'common/api/saves'
+import { searchSaves } from 'common/api/saves'
 import { deriveListItem } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
 
-import { reconcileItemsBatch } from './my-list.reconcilers'
-import { reconcileItemsArchived } from './my-list.reconcilers'
-import { reconcileItemsUnArchived } from './my-list.reconcilers'
-import { reconcileItemsUnFavorited } from './my-list.reconcilers'
-import { reconcileItemsDeleted } from './my-list.reconcilers'
+import { reconcileItemsBatch } from './saves.reconcilers'
+import { reconcileItemsArchived } from './saves.reconcilers'
+import { reconcileItemsUnArchived } from './saves.reconcilers'
+import { reconcileItemsUnFavorited } from './saves.reconcilers'
+import { reconcileItemsDeleted } from './saves.reconcilers'
 
-import { filterSelector } from './my-list.filters'
-import { sortSelector } from './my-list.sorters'
+import { filterSelector } from './saves.filters'
+import { sortSelector } from './saves.sorters'
 
-import { MYLIST_DATA_REQUEST } from 'actions'
-import { MYLIST_DATA_SUCCESS } from 'actions'
-import { MYLIST_DATA_FAILURE } from 'actions'
-import { MYLIST_UPDATE_REQUEST } from 'actions'
-import { MYLIST_UPDATE_SUCCESS } from 'actions'
-import { MYLIST_UPDATE_FAILURE } from 'actions'
-import { MYLIST_HYDRATE } from 'actions'
-import { MYLIST_SAVE_REQUEST } from 'actions'
-import { MYLIST_UNSAVE_REQUEST } from 'actions'
+import { SAVES_DATA_REQUEST } from 'actions'
+import { SAVES_DATA_SUCCESS } from 'actions'
+import { SAVES_DATA_FAILURE } from 'actions'
+import { SAVES_UPDATE_REQUEST } from 'actions'
+import { SAVES_UPDATE_SUCCESS } from 'actions'
+import { SAVES_UPDATE_FAILURE } from 'actions'
+import { SAVES_HYDRATE } from 'actions'
+import { SAVES_SAVE_REQUEST } from 'actions'
+import { SAVES_UNSAVE_REQUEST } from 'actions'
 
 import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
 import { ITEMS_ARCHIVE_REQUEST } from 'actions'
@@ -33,10 +33,10 @@ import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
 import { ITEMS_ADD_SUCCESS } from 'actions'
 import { ITEMS_TAG_SUCCESS } from 'actions'
 
-import { MYLIST_SEARCH_REQUEST } from 'actions'
-import { MYLIST_SEARCH_CLEAR } from 'actions'
-import { MYLIST_SEARCH_SUCCESS } from 'actions'
-import { MYLIST_SEARCH_FAILURE } from 'actions'
+import { SAVES_SEARCH_REQUEST } from 'actions'
+import { SAVES_SEARCH_CLEAR } from 'actions'
+import { SAVES_SEARCH_SUCCESS } from 'actions'
+import { SAVES_SEARCH_FAILURE } from 'actions'
 
 import { APP_SET_MODE } from 'actions'
 
@@ -48,12 +48,12 @@ import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getMylistData = (count, offset, subset, filter, tag) => ({ type: MYLIST_DATA_REQUEST, count, offset, subset, filter, tag}) //prettier-ignore
-export const updateMyListData = (since, subset, filter, tag) => ({ type: MYLIST_UPDATE_REQUEST, since, subset, filter, tag}) //prettier-ignore
-export const hydrateMylist = (hydrated) => ({ type: MYLIST_HYDRATE, hydrated }) //prettier-ignore
-export const saveMylistItem = (id, url, position) => ({type: MYLIST_SAVE_REQUEST, id, url, position}) //prettier-ignore
-export const unSaveMylistItem = (id) => ({ type: MYLIST_UNSAVE_REQUEST, id }) //prettier-ignore
-export const getMylistSearchData = (filter, query, offset) => ({ type: MYLIST_SEARCH_REQUEST, filter, query, offset }) //prettier-ignore
+export const getSavesData = (count, offset, subset, filter, tag) => ({ type: SAVES_DATA_REQUEST, count, offset, subset, filter, tag}) //prettier-ignore
+export const updateSavesData = (since, subset, filter, tag) => ({ type: SAVES_UPDATE_REQUEST, since, subset, filter, tag}) //prettier-ignore
+export const hydrateSaves = (hydrated) => ({ type: SAVES_HYDRATE, hydrated }) //prettier-ignore
+export const saveSavesItem = (id, url, position) => ({type: SAVES_SAVE_REQUEST, id, url, position}) //prettier-ignore
+export const unSaveSavesItem = (id) => ({ type: SAVES_UNSAVE_REQUEST, id }) //prettier-ignore
+export const getSavesSearchData = (filter, query, offset) => ({ type: SAVES_SEARCH_REQUEST, filter, query, offset }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -179,9 +179,9 @@ const initialState = {
   searchfavoritesTotal: false
 }
 
-export const myListReducers = (state = initialState, action) => {
+export const savesReducers = (state = initialState, action) => {
   switch (action.type) {
-    case MYLIST_DATA_SUCCESS: {
+    case SAVES_DATA_SUCCESS: {
       const { items, offset, subset, total, filter, since, tag } = action
       const selector = tag ? tag : subset
 
@@ -196,7 +196,7 @@ export const myListReducers = (state = initialState, action) => {
       }
     }
 
-    case MYLIST_UPDATE_SUCCESS: {
+    case SAVES_UPDATE_SUCCESS: {
       const { items, subset, filter, since, tag } = action
       const selector = tag ? tag : subset
       const section = filter ? selector + filter : selector
@@ -209,12 +209,12 @@ export const myListReducers = (state = initialState, action) => {
       }
     }
 
-    case MYLIST_DATA_FAILURE: {
+    case SAVES_DATA_FAILURE: {
       const { error } = action
       return { ...state, error }
     }
 
-    case MYLIST_HYDRATE: {
+    case SAVES_HYDRATE: {
       const { hydrated } = action
       return { ...state, ...hydrated }
     }
@@ -233,8 +233,8 @@ export const myListReducers = (state = initialState, action) => {
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE: {
-      const { mylist } = action.payload
-      return { ...state, ...mylist }
+      const { saves } = action.payload
+      return { ...state, ...saves }
     }
     // Reconcilers
     case ITEMS_ARCHIVE_SUCCESS:
@@ -276,7 +276,7 @@ export const myListReducers = (state = initialState, action) => {
       return reconcileItemsDeleted(items, state)
     }
 
-    case MYLIST_SEARCH_CLEAR: {
+    case SAVES_SEARCH_CLEAR: {
       const { query } = action
       return {
         ...state,
@@ -303,7 +303,7 @@ export const myListReducers = (state = initialState, action) => {
       }
     }
 
-    case MYLIST_SEARCH_SUCCESS: {
+    case SAVES_SEARCH_SUCCESS: {
       const { items, offset, total, filter, since, query } = action
 
       const section = filter ? 'search' + filter : 'search'
@@ -318,7 +318,7 @@ export const myListReducers = (state = initialState, action) => {
       }
     }
 
-    case MYLIST_SEARCH_FAILURE: {
+    case SAVES_SEARCH_FAILURE: {
       const { error } = action
       return { ...state, error }
     }
@@ -330,26 +330,26 @@ export const myListReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const myListSagas = [
-  takeLatest(MYLIST_DATA_REQUEST, myListDataRequest),
-  takeLatest(MYLIST_UPDATE_REQUEST, myListUpdate),
-  takeLatest(MYLIST_SEARCH_REQUEST, myListSearchRequest)
-  // takeEvery(MYLIST_DATA_SUCCESS, mylistSaveRequest),
-  // takeEvery(MYLIST_DATA_FAILURE, mylistUnSaveRequest)
+export const savesSagas = [
+  takeLatest(SAVES_DATA_REQUEST, savesDataRequest),
+  takeLatest(SAVES_UPDATE_REQUEST, savesUpdate),
+  takeLatest(SAVES_SEARCH_REQUEST, savesSearchRequest)
+  // takeEvery(SAVES_DATA_SUCCESS, savesSaveRequest),
+  // takeEvery(SAVES_DATA_FAILURE, savesUnSaveRequest)
 ]
 
 /** SAGA :: SELECTORS
  --------------------------------------------------------------- */
 const getSortOptionsBySubset = (state, subset) => state.app.sortOptions[subset] || 'newest'
-const getMyListItemsById = (state) => state.myListItemsById
-const getState = (state) => state.myList || {}
+const getSavesItemsById = (state) => state.savesItemsById
+const getState = (state) => state.saves || {}
 const getSubset = (state) => state.app.section
-const getQuery = (state) => state.myList.query || ''
+const getQuery = (state) => state.saves.query || ''
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 
-function* myListDataRequest(action) {
+function* savesDataRequest(action) {
   try {
     const { count = 15, offset = 0, subset = 'active', tag, filter } = action
 
@@ -371,16 +371,16 @@ function* myListDataRequest(action) {
     if (filter === 'archive') parameters.state = 'read'
     if (filter === 'favorites') parameters.favorite = 1
 
-    const { itemsById, total, since, error } = yield fetchMyListData({
+    const { itemsById, total, since, error } = yield fetchSavesData({
       count,
       offset,
       sort: sortOrder,
       ...parameters
     })
 
-    if (error) return yield put({ type: MYLIST_DATA_FAILURE, error })
+    if (error) return yield put({ type: SAVES_DATA_FAILURE, error })
 
-    const existingItemsById = yield select(getMyListItemsById)
+    const existingItemsById = yield select(getSavesItemsById)
     const itemsByIdDraft = { ...existingItemsById, ...itemsById }
 
     const filterFunction = filterSelector(subset, filter)
@@ -394,7 +394,7 @@ function* myListDataRequest(action) {
     const newOffset = offset + Object.keys(itemsById).length
 
     yield put({
-      type: MYLIST_DATA_SUCCESS,
+      type: SAVES_DATA_SUCCESS,
       items,
       itemsById,
       offset: newOffset,
@@ -406,11 +406,11 @@ function* myListDataRequest(action) {
     })
   } catch (error) {
     console.warn(error)
-    yield put({ type: MYLIST_DATA_FAILURE, error })
+    yield put({ type: SAVES_DATA_FAILURE, error })
   }
 }
 
-function* myListUpdate(action) {
+function* savesUpdate(action) {
   try {
     const { since, subset = 'active', filter, tag } = action
     if (!since) return
@@ -418,14 +418,14 @@ function* myListUpdate(action) {
     const sortSubset = yield select(getSubset)
     const sortOrder = yield select(getSortOptionsBySubset, sortSubset)
 
-    const data = yield fetchMyListUpdate({ since })
+    const data = yield fetchSavesUpdate({ since })
 
     // No updates so simply return
     if (data.total === 0) return
 
     // If anything has changed, update the item store
     const { updatedItemsById, itemsToDelete, updatedSince } = data
-    const existingItemsById = yield select(getMyListItemsById)
+    const existingItemsById = yield select(getSavesItemsById)
 
     //Remove all items to delete
     itemsToDelete.forEach((id) => delete existingItemsById[id])
@@ -442,7 +442,7 @@ function* myListUpdate(action) {
 
     // Update our item store
     yield put({
-      type: MYLIST_UPDATE_SUCCESS,
+      type: SAVES_UPDATE_SUCCESS,
       items,
       itemsById,
       subset,
@@ -452,11 +452,11 @@ function* myListUpdate(action) {
     })
   } catch (error) {
     console.warn(error)
-    yield put({ type: MYLIST_UPDATE_FAILURE, error })
+    yield put({ type: SAVES_UPDATE_FAILURE, error })
   }
 }
 
-function* myListSearchRequest(action) {
+function* savesSearchRequest(action) {
   yield put({ type: APP_SET_MODE, mode: 'default' })
 
   try {
@@ -473,14 +473,14 @@ function* myListSearchRequest(action) {
     if (filter === 'favorites') parameters.favorite = 1
 
     // If queries don't match, it's fresh so reset search
-    if (query !== savedQuery) yield put({ type: MYLIST_SEARCH_CLEAR, query })
+    if (query !== savedQuery) yield put({ type: SAVES_SEARCH_CLEAR, query })
 
     const {
       itemsById,
       total = 0,
       since,
       error
-    } = yield fetchMyListSearch({
+    } = yield fetchSavesSearch({
       locale_lang: 'en-US',
       state: 'all',
       count: 100,
@@ -489,7 +489,7 @@ function* myListSearchRequest(action) {
       ...parameters
     })
 
-    if (error) return yield put({ type: MYLIST_SEARCH_FAILURE, error })
+    if (error) return yield put({ type: SAVES_SEARCH_FAILURE, error })
 
     const searchState = yield select(getState)
     const currentItems = searchState[section]
@@ -504,7 +504,7 @@ function* myListSearchRequest(action) {
     const newOffset = items.length
 
     yield put({
-      type: MYLIST_SEARCH_SUCCESS,
+      type: SAVES_SEARCH_SUCCESS,
       items,
       itemsById,
       subset: 'search',
@@ -516,7 +516,7 @@ function* myListSearchRequest(action) {
     })
   } catch (error) {
     console.warn(error)
-    yield put({ type: MYLIST_SEARCH_FAILURE, error })
+    yield put({ type: SAVES_SEARCH_FAILURE, error })
   }
 }
 
@@ -528,9 +528,9 @@ function* myListSearchRequest(action) {
  * Make wand async request for a Pocket v3 feed and return best data
  * @return items {array} An array of derived items
  */
-export async function fetchMyListData(params) {
+export async function fetchSavesData(params) {
   try {
-    const response = await getMyList(params)
+    const response = await getSaves(params)
     if (!response.list) return { error: 'No Items Returned' }
 
     const total = response.total
@@ -542,13 +542,13 @@ export async function fetchMyListData(params) {
     return { itemsById, total, since }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.warn('my-list.state', error)
+    console.warn('saves.state', error)
   }
 }
 
-export async function fetchMyListUpdate(params) {
+export async function fetchSavesUpdate(params) {
   try {
-    const response = await getMyList(params)
+    const response = await getSaves(params)
     const { status, total, since, list } = response
 
     // If no changes have happened just return that
@@ -566,7 +566,7 @@ export async function fetchMyListUpdate(params) {
     return { updatedItemsById, itemsToDelete, total, updatedSince: since }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.warn('my-list.state', error)
+    console.warn('saves.state', error)
   }
 }
 
@@ -575,9 +575,9 @@ export async function fetchMyListUpdate(params) {
  * Make wand async request for a Pocket v3 feed and return best data
  * @return items {array} An array of derived items
  */
-export async function fetchMyListSearch(params) {
+export async function fetchSavesSearch(params) {
   try {
-    const response = await searchMyList(params)
+    const response = await searchSaves(params)
     if (!response.list) return { error: 'No Items Returned' }
 
     const { since, search_meta, total } = response
@@ -589,6 +589,6 @@ export async function fetchMyListSearch(params) {
     return { itemsById, total: computedTotal, since }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
-    console.warn('my-list.state', error)
+    console.warn('saves.state', error)
   }
 }

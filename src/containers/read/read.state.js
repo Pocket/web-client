@@ -272,7 +272,7 @@ function redirectToList() {
     if (global.history.length > 1) {
       global.history.go(-1)
     } else {
-      document.location.href = '/my-list'
+      document.location.href = '/saves'
     }
   }
 }

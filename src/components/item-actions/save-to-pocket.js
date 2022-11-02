@@ -123,8 +123,8 @@ export const SaveToPocket = function ({
   const { t } = useTranslation()
 
   const saveCopy = {
-    unsaved: t('item-action:save-unsaved', 'Save to My List'),
-    saving: t('item-action:save-saving', 'Save to My List'),
+    unsaved: t('item-action:save-unsaved', 'Save'),
+    saving: t('item-action:save-saving', 'Save'),
     saved: t('item-action:save-saved', 'Saved')
   }
 

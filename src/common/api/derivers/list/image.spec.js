@@ -87,9 +87,9 @@ export const savedImageFromClientApi = {
   cursor: 'MzQ2MjA5NDc3OV8qXzE2MzQ4Mzk2Nzg='
 }
 
-describe('My List - Image', () => {
+describe('Saves - Image', () => {
   const expectedSaveUrl = 'https://cdn.dribbble.com/users/59947/screenshots/16700535/media/335d386abb459f49570030e830429cef.jpg' //prettier-ignore
-  const expectedExternalUrl = 'https://cdn.dribbble.com/users/59947/screenshots/16700535/media/335d386abb459f49570030e830429cef.jpg?utm_source=pocket_mylist' //prettier-ignore
+  const expectedExternalUrl = 'https://cdn.dribbble.com/users/59947/screenshots/16700535/media/335d386abb459f49570030e830429cef.jpg?utm_source=pocket_saves' //prettier-ignore
   const expectedReadUrl = '/read/3462094779' //prettier-ignore
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3462094779'
   const expectedAnalyticsUrl = 'https://cdn.dribbble.com/users/59947/screenshots/16700535/media/335d386abb459f49570030e830429cef.jpg' //prettier-ignore
@@ -184,7 +184,7 @@ describe('My List - Image', () => {
 
   describe('Snowplow', () => {
     const item = deriveListItem(savedImageFromClientApi)
-    const whitelist = /^my-list./
+    const whitelist = /^saves./
     const blacklist = []
 
     const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))

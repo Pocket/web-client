@@ -186,7 +186,7 @@ export const Tools = () => {
             <LinkCopyIcon /> from Home
           </div>
           <div className="link">
-            <LinkCopyIcon /> from MyList
+            <LinkCopyIcon /> from Saves
           </div>
         </div>
       </div>

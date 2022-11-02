@@ -98,8 +98,8 @@ export const itemBulkSagas = [
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getLastId = (state) => state.bulkEdit.lastId
 const getEndPosition = (state) => state.bulkEdit.endPosition
-const getMyList = (state) => state.myList
-const getItemsById = (state) => state.myListItemsById
+const getSaves = (state) => state.saves
+const getItemsById = (state) => state.savesItemsById
 const getAppSection = (state) => state.app?.section
 const getSelected = (state) => state.bulkEdit.selected
 
@@ -111,11 +111,11 @@ export function* itemBulkSelect(action) {
 
     const lastId = yield select(getLastId)
     const endPosition = yield select(getEndPosition)
-    const myList = yield select(getMyList)
+    const saves = yield select(getSaves)
     const appSection = yield select(getAppSection)
     const itemsById = yield select(getItemsById)
 
-    const sectionItems = myList[appSection]
+    const sectionItems = saves[appSection]
     const position = sectionItems.indexOf(id)
     const lastIdPosition = sectionItems.indexOf(lastId)
     const selected = yield select(getSelected)
@@ -165,11 +165,11 @@ export function* itemBulkDeSelect(action) {
     const { id, shift } = action
 
     const endPosition = yield select(getEndPosition)
-    const myList = yield select(getMyList)
+    const saves = yield select(getSaves)
     const appSection = yield select(getAppSection)
     const selected = yield select(getSelected)
 
-    const sectionItems = myList[appSection]
+    const sectionItems = saves[appSection]
     const position = sectionItems.indexOf(id)
     const itemIds = shift ? sectionItems.slice(position + 1, endPosition + 1) : [id]
     const draftSelected = selected.filter((item) => !itemIds.includes(item.id))

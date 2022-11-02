@@ -139,13 +139,13 @@ export const homeActions = {
     },
     expects: ['id', 'url', 'position', 'destination']
   },
-  'home.recent.view-my-list': {
+  'home.recent.view-saves': {
     eventType: 'engagement',
     entityTypes: ['ui'],
     eventData: {
       uiType: 'link'
     },
-    description: 'Fired when a user clicks the `Go to My List` link in the recent saves section'
+    description: 'Fired when a user clicks the `Go to Saves` link in the recent saves section'
   },
   'home.collection.open': {
     eventType: 'contentOpen',

@@ -5,7 +5,7 @@ import { arrayToObject } from 'common/utilities'
 import { deriveListItem } from 'common/api/derivers/item'
 import { removeItemByUrl } from 'common/api/_legacy/removeItem'
 import { STARTER_ARTICLES } from 'common/constants'
-import { getMyList } from 'common/api/my-list'
+import { getSaves } from 'common/api/saves'
 
 import { HOME_RECENT_SAVES_REQUEST } from 'actions'
 import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
@@ -147,7 +147,7 @@ function* homeContentUnSaveRequest({ id, url }) {
 
 function* recentDataRequest() {
   try {
-    const { itemsById, error } = yield fetchMyListData({
+    const { itemsById, error } = yield fetchSavesData({
       count: 3,
       offset: 0,
       state: 'unread',
@@ -171,13 +171,13 @@ function* recentDataRequest() {
 /** ASYNC Functions
  --------------------------------------------------------------- */
 /**
- * fetchMyListData
+ * fetchSavesData
  * Make and async request for a Pocket v3 feed and return best data
  * @return items {array} An array of derived items
  */
-export async function fetchMyListData(params) {
+export async function fetchSavesData(params) {
   try {
-    const response = await getMyList(params)
+    const response = await getSaves(params)
     if (!response.list) return { error: 'No Items Returned' }
 
     const total = response.total

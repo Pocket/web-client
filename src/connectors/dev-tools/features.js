@@ -14,11 +14,11 @@ export function Features() {
   const featureList = Object.keys(features)
 
   const [copiedHomeLink, setCopiedHomeLink] = useState(false)
-  const [copiedMyListLink, setCopiedMyListLink] = useState(false)
+  const [copiedSavesLink, setCopiedSavesLink] = useState(false)
   const [currentLink, setCurrentLink] = useState(false)
 
   const timerHomeLink = useRef()
-  const timerMyListLink = useRef()
+  const timerSavesLink = useRef()
 
   const buildAssignmentParameters = (url) => {
     const assign = Object.values(features)
@@ -33,20 +33,20 @@ export function Features() {
   const copyHomeLink = () => {
     buildAssignmentParameters(`${BASE_URL}/home`)
     setCopiedHomeLink(true)
-    setCopiedMyListLink(false)
+    setCopiedSavesLink(false)
     clearTimeout(timerHomeLink.current)
     timerHomeLink.current = setTimeout(() => {
       setCopiedHomeLink(false)
       setCurrentLink(false)
     }, 6000)
   }
-  const copyMyListLink = () => {
-    buildAssignmentParameters(`${BASE_URL}/my-list`)
-    setCopiedMyListLink(true)
+  const copySavesLink = () => {
+    buildAssignmentParameters(`${BASE_URL}/saves`)
+    setCopiedSavesLink(true)
     setCopiedHomeLink(false)
-    clearTimeout(timerMyListLink.current)
-    timerMyListLink.current = setTimeout(() => {
-      setCopiedMyListLink(false)
+    clearTimeout(timerSavesLink.current)
+    timerSavesLink.current = setTimeout(() => {
+      setCopiedSavesLink(false)
       setCurrentLink(false)
     }, 6000)
   }
@@ -63,8 +63,8 @@ export function Features() {
         <div className="link" onClick={copyHomeLink}>
           {copiedHomeLink ? <CheckCircledIcon /> : <LinkCopyIcon />} from Home
         </div>
-        <div className="link" onClick={copyMyListLink}>
-          {copiedMyListLink ? <CheckCircledIcon /> : <LinkCopyIcon />} from MyList
+        <div className="link" onClick={copySavesLink}>
+          {copiedSavesLink ? <CheckCircledIcon /> : <LinkCopyIcon />} from Saves
         </div>
       </div>
       {currentLink ? (

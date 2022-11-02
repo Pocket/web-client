@@ -4,7 +4,7 @@ import { START_DATE_FOR_ONBOARDING } from 'common/constants'
 
 import { HomeFlyawaySave } from './messages/home-flyaway-save'
 import { HomeFlyawayReader } from './messages/home-flyaway-reader'
-import { MyListFlyawayExtensions } from './messages/my-list-flyaway-extensions'
+import { SavesFlyawayExtensions } from './messages/saves-flyaway-extensions'
 import { ReaderFlyawayApps } from './messages/reader-flyaway-apps'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
@@ -23,7 +23,7 @@ export const Onboarding = ({ type, ...rest }) => {
   const onboardingTypes = {
     'home.flyaway.save': HomeFlyawaySave,
     'home.flyaway.reader': HomeFlyawayReader,
-    'my-list.flyaway.extensions': MyListFlyawayExtensions,
+    'saves.flyaway.extensions': SavesFlyawayExtensions,
     'reader.flyaway.apps': ReaderFlyawayApps
   }
 

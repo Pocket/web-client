@@ -12,7 +12,7 @@ import { socialButtonStyles } from 'components/social-button/social-button'
 import { SocialButton } from 'components/social-button/social-button'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { itemsShareCancel } from 'connectors/items-by-id/my-list/items.share'
+import { itemsShareCancel } from 'connectors/items-by-id/saves/items.share'
 
 const socialIcons = css`
   margin: 0;

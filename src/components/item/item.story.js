@@ -1,18 +1,18 @@
 import { Item as ItemComponent } from './item'
-import myListResponse from 'mocks/savedItems.json'
+import savesResponse from 'mocks/savedItems.json'
 import { deriveListItem } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
 import { css, cx } from 'linaria'
 
 import { SavedActions, DiscoveryActions, ActionsSecondary } from './item-actions'
 
-const myListItems = Object.values(myListResponse.edges).map((item) => {
+const savesItems = Object.values(savesResponse.edges).map((item) => {
   let derivedItem = deriveListItem(item)
-  derivedItem['storyName'] = `My List - ${sanitizeString(derivedItem.title)}`
+  derivedItem['storyName'] = `Saves - ${sanitizeString(derivedItem.title)}`
   return derivedItem
 })
 
-const itemsToDisplay = arrayToObject([...myListItems], 'storyName')
+const itemsToDisplay = arrayToObject([...savesItems], 'storyName')
 
 const gridContainer = css`
   display: grid;
@@ -164,7 +164,7 @@ export const Item = (args) => {
 }
 
 Item.args = {
-  itemToDisplay: myListItems[0].storyName,
+  itemToDisplay: savesItems[0].storyName,
   Actions: 'saved',
   isSyndicated: false,
   fromPartner: true, // This is so we can superseded this with the selector

@@ -68,7 +68,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const retrievedAvatar = useSelector((state) => state?.userProfile?.avatar_url)
-  const pocketLogoOutboundUrl = isLoggedIn ? '/my-list' : 'https://getpocket.com'
+  const pocketLogoOutboundUrl = isLoggedIn ? '/saves' : 'https://getpocket.com'
 
   const featureState = useSelector((state) => state.features)
   const useApiNext = featureFlagActive({ flag: 'api.next', featureState })
@@ -93,7 +93,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
     return {
       label: pin,
       name: pin,
-      url: `/my-list/tags/${pin}`
+      url: `/saves/tags/${pin}`
     }
   })
 
@@ -106,10 +106,10 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
       icon: <HomeIcon />
     },
     {
-      name: 'my-list',
-      id: 'global-nav-my-list-link',
-      label: t('nav:my-list', 'My List'),
-      url: '/my-list?src=navbar',
+      name: 'saves',
+      id: 'global-nav-saves-link',
+      label: t('nav:saves', 'Saves'),
+      url: '/saves?src=navbar',
       icon: <ListViewIcon />
     },
     {
@@ -133,45 +133,45 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
       name: 'archive',
       icon: <ArchiveIcon />,
       label: t('nav:archive', 'Archive'),
-      url: '/my-list/archive'
+      url: '/saves/archive'
     },
     {
       name: 'favorites',
       icon: <FavoriteIcon />,
       label: t('nav:favorites', 'Favorites'),
-      url: '/my-list/favorites'
+      url: '/saves/favorites'
     },
     {
       name: 'highlights',
       icon: <HighlightIcon />,
       label: t('nav:highlights', 'Highlights'),
-      url: '/my-list/highlights'
+      url: '/saves/highlights'
     },
     {
       name: 'articles',
       icon: <ArticleIcon />,
       label: t('nav:articles', 'Articles'),
-      url: '/my-list/articles'
+      url: '/saves/articles'
     },
     {
       name: 'videos',
       icon: <VideoIcon />,
       label: t('nav:videos', 'Videos'),
-      url: '/my-list/videos'
+      url: '/saves/videos'
     },
     {
       name: 'tags',
       icon: <TagIcon />,
       label: t('nav:all-tags', 'All Tags'),
-      url: '/my-list/tags'
+      url: '/saves/tags'
     },
     ...pinnedLinks
   ]
 
   /**
-   * Tools are what we use on myList
+   * Tools are what we use on Saves
    */
-  const showNav = selectedLink === 'my-list' && isLoggedIn
+  const showNav = selectedLink === 'saves' && isLoggedIn
   const tools = showNav
     ? [
         {

@@ -17,13 +17,13 @@ export function FiltersSideNav({ subActive, pinned, clickEvent }) {
     <>
       <div className={sideNavHeader}>{t('nav:filters', 'Filters')}</div>
 
-      <Link href="/my-list/archive">
+      <Link href="/saves/archive">
         <button className={subActive('archive')} onClick={clickEvent} data-cy="side-nav-archive">
           <ArchiveIcon className="side-nav-icon" /> {t('nav:archive', 'Archive')}
         </button>
       </Link>
 
-      <Link href="/my-list/favorites">
+      <Link href="/saves/favorites">
         <button
           className={subActive('favorites')}
           onClick={clickEvent}
@@ -32,7 +32,7 @@ export function FiltersSideNav({ subActive, pinned, clickEvent }) {
         </button>
       </Link>
 
-      <Link href="/my-list/highlights">
+      <Link href="/saves/highlights">
         <button
           className={subActive('highlights')}
           onClick={clickEvent}
@@ -41,26 +41,26 @@ export function FiltersSideNav({ subActive, pinned, clickEvent }) {
         </button>
       </Link>
 
-      <Link href="/my-list/articles">
+      <Link href="/saves/articles">
         <button className={subActive('articles')} onClick={clickEvent} data-cy="side-nav-articles">
           <ArticleIcon className="side-nav-icon" /> {t('nav:articles', 'Articles')}
         </button>
       </Link>
 
-      <Link href="/my-list/videos">
+      <Link href="/saves/videos">
         <button className={subActive('videos')} onClick={clickEvent} data-cy="side-nav-videos">
           <VideoIcon className="side-nav-icon" /> {t('nav:videos', 'Videos')}
         </button>
       </Link>
       <div className={sideNavHeader}>{t('nav:tags', 'Tags')}</div>
-      <Link href="/my-list/tags">
+      <Link href="/saves/tags">
         <button className={subActive('tag')} onClick={clickEvent} data-cy="side-nav-all-tags">
           <TagIcon className="side-nav-icon" /> {t('nav:all-tags', 'All Tags')}
         </button>
       </Link>
       {pinned.length
         ? pinned.map((tag) => (
-            <Link href={`/my-list/tags/${encodeURIComponent(tag)}`} key={tag}>
+            <Link href={`/saves/tags/${encodeURIComponent(tag)}`} key={tag}>
               <button
                 className={subActive(tag, true)}
                 onClick={clickEvent}

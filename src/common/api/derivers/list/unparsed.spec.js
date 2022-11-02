@@ -104,10 +104,10 @@ export const savedUnparsedFromClientApi = {
   cursor: 'MzExNzU4MjQ4MV8qXzE2MzQ4Mzk4NDU='
 }
 
-describe('My List - Unparsed', () => {
+describe('Saves - Unparsed', () => {
   const expectedSaveUrl = 'https://www.myswitzerland.com/en-us/destinations/blausee/' //prettier-ignore
-  const expectedExternalUrl = 'https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_mylist' //prettier-ignore
-  const expectedReadUrl = 'https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_mylist' //prettier-ignore
+  const expectedExternalUrl = 'https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_saves' //prettier-ignore
+  const expectedReadUrl = 'https://www.myswitzerland.com/en-us/destinations/blausee/?utm_source=pocket_saves' //prettier-ignore
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3117582481'
   const expectedAnalyticsUrl = 'https://www.myswitzerland.com/en-us/destinations/blausee/'
 
@@ -215,7 +215,7 @@ describe('My List - Unparsed', () => {
 
   describe('Snowplow', () => {
     const item = deriveListItem(savedUnparsedFromClientApi)
-    const whitelist = /^my-list./
+    const whitelist = /^saves./
     const blacklist = []
 
     const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))

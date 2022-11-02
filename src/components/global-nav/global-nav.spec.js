@@ -29,7 +29,7 @@ const baseProps = {
 
 describe('GlobalNav', () => {
   mockModal()
-  it('renders the "Discover" and "My List" links by default', () => {
+  it('renders the "Discover" and "Saves" links by default', () => {
     const { getAllByCy } = wrappedRender(<GlobalNav appRootSelector="#root" flagsReady={true} />)
     const defaultLinks = getAllByCy(/global-nav-(.+)-link/)
     expect(defaultLinks).toHaveLength(2)

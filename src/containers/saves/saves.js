@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { useHasChanged, usePrevious } from 'common/utilities/hooks/has-changed'
 
-import { getMylistData } from './my-list.state'
-import { updateMyListData } from './my-list.state'
+import { getSavesData } from './saves.state'
+import { updateSavesData } from './saves.state'
 import { appSetSection } from 'connectors/app/app.state'
-import { MyListHeader } from 'components/headers/my-list-header'
+import { SavesHeader } from 'components/headers/saves-header'
 import { TagPageHeader } from './tags-page/tag-page-header'
 import { VirtualizedList } from 'connectors/virtualized/virtualized-list'
 
@@ -18,7 +18,7 @@ import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 import { sortOrderSetNew, sortOrderSetOld } from 'connectors/app/app.state'
 import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 
-export default function MyList(props) {
+export default function Saves(props) {
   const { subset: sub = 'active', filter: propFilter } = props
 
   const dispatch = useDispatch()
@@ -31,11 +31,11 @@ export default function MyList(props) {
 
   const section = filter ? selector + filter : selector
 
-  const listState = useSelector((state) => state.myList.listState)
-  const items = useSelector((state) => state.myList[section])
-  const offset = useSelector((state) => state.myList[`${section}Offset`])
-  const total = useSelector((state) => state.myList[`${section}Total`])
-  const since = useSelector((state) => state.myList[`${section}Since`])
+  const listState = useSelector((state) => state.saves.listState)
+  const items = useSelector((state) => state.saves[section])
+  const offset = useSelector((state) => state.saves[`${section}Offset`])
+  const total = useSelector((state) => state.saves[`${section}Total`])
+  const since = useSelector((state) => state.saves[`${section}Since`])
   const listMode = useSelector((state) => state.app.listMode)
   const sortSubset = useSelector((state) => state.app.section)
   const sortOrder = useSelector((state) => state.app.sortOptions[sortSubset] || 'newest')
@@ -55,7 +55,7 @@ export default function MyList(props) {
   useEffect(() => {
     const handleFocus = () => {
       if (!since) return
-      dispatch(updateMyListData(since, subset, filter, tag))
+      dispatch(updateSavesData(since, subset, filter, tag))
     }
 
     // Adding new event listeners
@@ -74,11 +74,11 @@ export default function MyList(props) {
   useEffect(() => {
     if (initialItemsPopulated || userStatus === 'pending') return
     dispatch(appSetSection(section))
-    dispatch(getMylistData(30, 0, subset, filter, tag))
+    dispatch(getSavesData(30, 0, subset, filter, tag))
   }, [userStatus, initialItemsPopulated, subset, sortOrder, filter, section, tag, dispatch])
 
   /**
-   * Update list if we are navigating here from another my-list type page:
+   * Update list if we are navigating here from another saves type page:
    * (archive/favorites/search/etc)
    * ------------------------------------------------------------------------
    */
@@ -87,7 +87,7 @@ export default function MyList(props) {
     // If items are already in place, we want to know if anything has changed
     // since the last time we fetched the list (operations in other pages or apps)
     dispatch(appSetSection(section))
-    dispatch(updateMyListData(since, subset, filter, tag))
+    dispatch(updateSavesData(since, subset, filter, tag))
   }, [routeChange, initialItemsPopulated, dispatch, section, since, subset, filter, tag])
 
   /**
@@ -96,7 +96,7 @@ export default function MyList(props) {
    * ------------------------------------------------------------------------
    */
   useEffect(() => {
-    if (!oldRoute) dispatch(updateMyListData(since, subset, filter, tag))
+    if (!oldRoute) dispatch(updateSavesData(since, subset, filter, tag))
   }, [oldRoute])
 
   /**
@@ -107,10 +107,10 @@ export default function MyList(props) {
   useEffect(() => {
     if (listState === 'clean') return
 
-    dispatch(updateMyListData(since, subset, filter, tag))
+    dispatch(updateSavesData(since, subset, filter, tag))
   }, [listState, since, subset, filter, tag, dispatch])
 
-  // Remove current item when we return to myList
+  // Remove current item when we return to saves
   // This should be leveraged more effectively in future, but for now
   // it is simply a reset
   useEffect(() => {
@@ -123,7 +123,7 @@ export default function MyList(props) {
    */
   const loadMore = () => {
     if (offset >= total) return
-    dispatch(getMylistData(45, offset, subset, filter, tag))
+    dispatch(getSavesData(45, offset, subset, filter, tag))
   }
 
   const type = listMode

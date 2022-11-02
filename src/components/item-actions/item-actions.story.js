@@ -11,7 +11,7 @@ import { OverflowAction } from 'components/item-actions/overflow'
 import { ShowSimilar } from 'components/item-actions/show-similar'
 
 const noop = function () {}
-export const MyList = ({ id, position }) => (
+export const Saves = ({ id, position }) => (
   <ItemActions
     menuItems={[
       { key: `archive-${id}`, label: 'Archive', icon: <ArchiveIcon />, onClick: noop },

@@ -19,7 +19,7 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
 
   const pinTypes = {
     home: pinnedTopics,
-    'my-list': pinnedTags
+    'saves': pinnedTags
   }
   const pinned = pinTypes[type]
 

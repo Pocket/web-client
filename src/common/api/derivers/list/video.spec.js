@@ -126,9 +126,9 @@ export const savedVideoFromClientApi = {
   cursor: 'MjgxNTMyNTU0N18qXzE2MzQ4Mzk3NTk='
 }
 
-describe('My List - Videos', () => {
+describe('Saves - Videos', () => {
   const expectedSaveUrl = 'https://www.youtube.com/watch?v=1AnG04qnLqI' //prettier-ignore
-  const expectedExternalUrl = 'https://www.youtube.com/watch?utm_source=pocket_mylist&v=1AnG04qnLqI' //prettier-ignore
+  const expectedExternalUrl = 'https://www.youtube.com/watch?utm_source=pocket_saves&v=1AnG04qnLqI' //prettier-ignore
   const expectedReadUrl = '/read/2815325547' //prettier-ignore
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=2815325547'
   const expectedAnalyticsUrl = 'http://www.youtube.com/watch?v=1AnG04qnLqI'
@@ -233,7 +233,7 @@ describe('My List - Videos', () => {
 
   describe('Snowplow', () => {
     const item = deriveListItem(savedVideoFromClientApi)
-    const whitelist = /^my-list./
+    const whitelist = /^saves./
     const blacklist = []
 
     const sectionActions = Object.keys(analyticsActions).filter((action) => action.match(whitelist))

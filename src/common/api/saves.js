@@ -1,6 +1,6 @@
 import { request } from 'common/utilities/request/request'
 
-export function getMyList(data) {
+export function getSaves(data) {
   return request({
     path: 'v3/get',
     auth: true,
@@ -24,7 +24,7 @@ export function getMyList(data) {
   })
 }
 
-export function searchMyList(data) {
+export function searchSaves(data) {
   return request({
     path: 'v3/get',
     auth: true,
@@ -45,7 +45,7 @@ export function searchMyList(data) {
   })
 }
 
-export function fetchMyList(params) {
+export function fetchSaves(params) {
   return request({
     path: 'v3/fetch',
     auth: true,

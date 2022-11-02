@@ -4,12 +4,12 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, Trans } from 'next-i18next'
 
-import { getUserTags } from 'containers/my-list/tags-page/tags-page.state'
+import { getUserTags } from 'containers/saves/tags-page/tags-page.state'
 
-import { itemsTagConfirm } from 'connectors/items-by-id/my-list/items.tag'
-import { itemsTagCancel } from 'connectors/items-by-id/my-list/items.tag'
-import { itemsTagAdd } from 'connectors/items-by-id/my-list/items.tag'
-import { itemsTagRemove } from 'connectors/items-by-id/my-list/items.tag'
+import { itemsTagConfirm } from 'connectors/items-by-id/saves/items.tag'
+import { itemsTagCancel } from 'connectors/items-by-id/saves/items.tag'
+import { itemsTagAdd } from 'connectors/items-by-id/saves/items.tag'
+import { itemsTagRemove } from 'connectors/items-by-id/saves/items.tag'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 

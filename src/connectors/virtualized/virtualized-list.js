@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { getScrollTop } from 'common/utilities'
 import { cardsContainer } from 'components/items-layout/base'
 import { cx } from 'linaria'
-import { MemoizedItem } from 'connectors/item-card/my-list/card'
+import { MemoizedItem } from 'connectors/item-card/saves/card'
 import { cardDetail } from 'components/items-layout/virtualized-list'
 import { cardList } from 'components/items-layout/virtualized-list'
 import { cardGrid } from 'components/items-layout/virtualized-list'
@@ -20,8 +20,8 @@ export function VirtualizedList({ type = 'grid', section, actions, loadMore = ()
   /** SETUP
  --------------------------------------------------------------- */
   const viewport = useViewport()
-  const items = useSelector((state) => state.myList[section])
-  const total = useSelector((state) => state.myList[`${section}Total`])
+  const items = useSelector((state) => state.saves[section])
+  const total = useSelector((state) => state.saves[`${section}Total`])
   const count = items.length
 
   // Set up ref to ruler so we can get height of the container

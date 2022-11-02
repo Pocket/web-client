@@ -4,7 +4,7 @@ import { Button } from 'components/buttons/button'
 import { css } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
 
-import { itemsRecommendConfirm } from 'connectors/items-by-id/my-list/items.share'
+import { itemsRecommendConfirm } from 'connectors/items-by-id/saves/items.share'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 const recommendStyle = css`

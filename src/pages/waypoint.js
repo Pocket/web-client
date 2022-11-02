@@ -20,7 +20,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     const unusedQueryParams = ['access_token', 'id', 'guid', 'type']
     unusedQueryParams.forEach((param) => delete query[param])
 
-    const myListLink = queryString.stringifyUrl({ url: `${langPrefix}/my-list`, query })
+    const savesLink = queryString.stringifyUrl({ url: `${langPrefix}/saves`, query })
     const homeLink = queryString.stringifyUrl({ url: '/home', query })
 
     const { sess_guid } = req.cookies
@@ -31,12 +31,12 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     if (!user_id) throw new WaypointNoUserIdError()
 
     // Not logged in, or something else went awry?
-    // !! NOTE: this will redirect to my list 100% of the time on localhost
+    // !! NOTE: this will redirect to Saves 100% of the time on localhost
     if (!birth || nonEnglish) {
       return {
         redirect: {
           permanent: false,
-          destination: myListLink
+          destination: savesLink
         }
       }
     }
@@ -44,7 +44,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     // EN users who signed up after 08-09-2021 will be assigned to 'home.release'
     // feature flag and therefore will be sent to Home after sign up
     const eligible = eligibleUser(birth, START_DATE_FOR_HOME)
-    const destination = eligible ? homeLink : myListLink
+    const destination = eligible ? homeLink : savesLink
 
     return {
       redirect: {
@@ -54,7 +54,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     }
   } catch (err) {
     // Something went wrong while trying to sort the user out (flags, valid user, etc)
-    // so we are just gonna route them to `/my-list` to avoid poor user experience (seeing waypoint)
+    // so we are just gonna route them to `/saves` to avoid poor user experience (seeing waypoint)
     Sentry.withScope((scope) => {
       scope.setTag('waypoint', 'fail over')
       scope.setFingerprint('Waypoint Error')
@@ -63,7 +63,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     return {
       redirect: {
         permanent: false,
-        destination: '/my-list'
+        destination: '/saves'
       }
     }
   }

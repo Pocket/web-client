@@ -19,7 +19,7 @@ export { getHomeLineup } from './queries/get-home'
 // Syndicated Article
 export { getSyndicatedArticle } from './queries/get-syndicated-article'
 
-// MyList
+// Saves
 export { getSavedItemByItemId } from './queries/get-saved-item-by-id'
 
 // Item Mutations

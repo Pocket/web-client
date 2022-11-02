@@ -2,7 +2,7 @@ import { READING_WPM } from 'common/constants'
 import { domainForUrl, replaceUTM } from 'common/utilities'
 import { urlWithPermanentLibrary } from 'common/utilities'
 
-export function deriveMyListItems(response) {
+export function deriveSavesItems(response) {
   /**
    * @title {string} The most appropriate title to show
    * @thumbnail {url} The most appropriate image to show as a thumbnail
@@ -116,7 +116,7 @@ function displayExcerpt({ item, curated_info }) {
  * @returns {string} The url that should be saved or opened
  */
 function openUrl({ item, redirect_url }) {
-  const linkWithUTM = replaceUTM(item?.given_url, 'pocket_mylist')
+  const linkWithUTM = replaceUTM(item?.given_url, 'pocket_saves')
   return devLink(item) || redirect_url || linkWithUTM
 }
 

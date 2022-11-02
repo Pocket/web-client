@@ -14,7 +14,7 @@ export const HomeRecentSaves = () => {
   const count = recentSaves.length
   const showExcerpt = count < 2
 
-  const onLinkClick = () => dispatch(sendSnowplowEvent('home.recent.view-my-list'))
+  const onLinkClick = () => dispatch(sendSnowplowEvent('home.recent.view-saves'))
 
   // Initialize data
   useEffect(() => {
@@ -24,9 +24,9 @@ export const HomeRecentSaves = () => {
   return recentSaves?.length > 0 ? (
     <>
       <HomeHeader
-        headline={t('home:recent-saves-title', 'Recent Saves to My List')}
-        moreLinkText={t('home:recent-saves-my-list-link-text', 'Go to My List')}
-        moreLinkUrl={'/my-list?src=recent-saves'}
+        headline={t('home:recent-saves-title', 'Recent Saves')}
+        moreLinkText={t('home:recent-saves-link-text', 'Go to Saves')}
+        moreLinkUrl={'/saves?src=recent-saves'}
         moreLinkClick={onLinkClick}
       />
 

@@ -282,7 +282,7 @@ export const cardStyles = css`
 
   /** Block/Grid style
   --------------------------------------------------------------- */
-  &.grid, /* my-list name for block elements */
+  &.grid, /* saves name for block elements */
   &.block {
     --card-column-span: span 4;
 

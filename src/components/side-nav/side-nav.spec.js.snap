@@ -33,7 +33,7 @@ exports[`SideNav renders the Account side nav 1`] = `
     </button>
     <button
       class="sv813dg  "
-      data-cy="side-nav-mylist"
+      data-cy="side-nav-saves"
     >
       <span
         class="i1qqph0t icon side-nav-icon"
@@ -55,7 +55,7 @@ exports[`SideNav renders the Account side nav 1`] = `
         </svg>
       </span>
        
-      nav:my-list
+      nav:saves
       <span
         class="b19radgi"
       >
@@ -179,7 +179,7 @@ exports[`SideNav renders the Account side nav 1`] = `
 </div>
 `;
 
-exports[`SideNav renders the My List side nav and shows tags 1`] = `
+exports[`SideNav renders the Saves side nav and shows tags 1`] = `
 <div
   class="s3icf2j side-nav"
   data-cy="side-nav"
@@ -212,7 +212,7 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
     </button>
     <button
       class="sv813dg  "
-      data-cy="side-nav-mylist"
+      data-cy="side-nav-saves"
     >
       <span
         class="i1qqph0t icon side-nav-icon"
@@ -234,7 +234,7 @@ exports[`SideNav renders the My List side nav and shows tags 1`] = `
         </svg>
       </span>
        
-      nav:my-list
+      nav:saves
       <span
         class="b19radgi"
       >

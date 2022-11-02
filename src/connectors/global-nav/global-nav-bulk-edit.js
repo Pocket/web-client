@@ -1,14 +1,14 @@
 import GlobalNavBulkEdit from 'components/global-nav/tools/bulk-edit/global-nav-bulk-edit'
-import { itemsBulkClear } from 'connectors/items-by-id/my-list/items.bulk.js'
+import { itemsBulkClear } from 'connectors/items-by-id/saves/items.bulk.js'
 
-import { itemsArchiveBatch } from 'connectors/items-by-id/my-list/items.archive.js'
-import { itemsUnarchiveBatch } from 'connectors/items-by-id/my-list/items.archive.js'
+import { itemsArchiveBatch } from 'connectors/items-by-id/saves/items.archive.js'
+import { itemsUnarchiveBatch } from 'connectors/items-by-id/saves/items.archive.js'
 
-import { itemsFavoriteBatch } from 'connectors/items-by-id/my-list/items.favorite.js'
-import { itemsUnFavoriteBatch } from 'connectors/items-by-id/my-list/items.favorite.js'
+import { itemsFavoriteBatch } from 'connectors/items-by-id/saves/items.favorite.js'
+import { itemsUnFavoriteBatch } from 'connectors/items-by-id/saves/items.favorite.js'
 
-import { itemsDeleteAction } from 'connectors/items-by-id/my-list/items.delete'
-import { itemsTagAction } from 'connectors/items-by-id/my-list/items.tag'
+import { itemsDeleteAction } from 'connectors/items-by-id/saves/items.delete'
+import { itemsTagAction } from 'connectors/items-by-id/saves/items.tag'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 

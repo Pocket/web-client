@@ -15,10 +15,10 @@ export const DEFAULT_LINKS = [
     icon: <DiscoverIcon />
   },
   {
-    name: 'my-list',
-    id: 'global-nav-my-list-link',
-    label: <Trans i18nKey="nav:my-list">My List</Trans>,
-    url: 'https://getpocket.com/my-list?src=navbar',
+    name: 'saves',
+    id: 'global-nav-saves-link',
+    label: <Trans i18nKey="nav:saves">Saves</Trans>,
+    url: 'https://getpocket.com/saves?src=navbar',
     icon: <ListViewIcon />
   }
 ]

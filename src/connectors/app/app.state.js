@@ -160,7 +160,7 @@ function* appColorModeSet({ colorMode, skipAnalytics = false }) {
   setColorClass(colorMode)
 
   if (skipAnalytics) return
-  const identifier = 'my-list.theme'
+  const identifier = 'saves.theme'
   const data = { value: colorMode }
   yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 }
@@ -169,7 +169,7 @@ function* appListModeSet({ listMode }) {
   localStore.setItem(CACHE_KEY_LIST_MODE, listMode)
   yield put({ type: APP_LIST_MODE_SET, listMode })
 
-  const identifier = 'my-list.display.view'
+  const identifier = 'saves.display.view'
   const data = { value: listMode }
   yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 }
@@ -181,7 +181,7 @@ function* appSortOrderSet({ sortOrder }) {
   localStore.setItem(CACHE_KEY_SORT_OPTIONS, JSON.stringify(updatedSortOptions))
   yield put({ type: APP_SORT_ORDER_SET, sortOrder, subset })
 
-  const identifier = 'my-list.sort'
+  const identifier = 'saves.sort'
   const data = { value: sortOrder }
   yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 }
