@@ -1,10 +1,21 @@
 import { wrappedRender } from 'test-utils'
-import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils'
 import '@testing-library/jest-dom/extend-expect'
+import {
+  resetIntersectionMocking,
+  setupIntersectionMocking
+} from 'react-intersection-observer/test-utils'
 
 import { SideNav } from './side-nav'
 
 describe('SideNav', () => {
+  beforeEach(() => {
+    setupIntersectionMocking(jest.fn)
+  })
+
+  afterEach(() => {
+    resetIntersectionMocking()
+  })
+
   const handleClick = () => {}
 
   const baseProps = {
@@ -17,8 +28,6 @@ describe('SideNav', () => {
     flagsReady: true,
     trackMenuClick: handleClick
   }
-
-  beforeAll(() => mockAllIsIntersecting())
 
   it('renders the My List side nav and shows tags', () => {
     const { queryByCy, queryAllByCy } = wrappedRender(<SideNav type="my-list" {...baseProps} />)

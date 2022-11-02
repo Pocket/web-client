@@ -171,6 +171,7 @@ const GlobalNavSearch = ({
   const inputEl = useRef(null)
   const formRef = useRef(null)
 
+  const [isFocused, setIsFocused] = useState(true)
   const [searchTerm, updateSearchTerm] = useState(value)
   const [isMobile, updateIsMobile] = useState(false)
   const [inputError, updateInputError] = useState(false)
@@ -188,6 +189,15 @@ const GlobalNavSearch = ({
     if (!searchTerm) return updateInputError(t('nav:please-enter-a-search-term'))
 
     onSubmit(searchTerm)
+  }
+
+  const handleFocus = () => {
+    onFocus()
+    setIsFocused(true)
+  }
+  const handleBlur = () => {
+    onBlur()
+    setIsFocused(false)
   }
 
   const handleKeyUp = (event) => {
@@ -266,14 +276,14 @@ const GlobalNavSearch = ({
           aria-label={t('nav:search-your-collection', 'Search your collection')}
           value={searchTerm}
           onChange={handleInputChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           onKeyUp={handleKeyUp}
           placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
           data-cy="search-input"
           enterKeyHint="search"
         />
-        <RecentSearches searchTerms={recentSearches} />
+        <RecentSearches searchTerms={recentSearches} isFocused={isFocused} />
         {inputError ? (
           <div className="error-message">
             <div>

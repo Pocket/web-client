@@ -1,3 +1,22 @@
+## [1.64.3](https://github.com/Pocket/web-client/compare/v1.64.2...v1.64.3) (2022-10-31)
+
+
+### Bug Fixes
+
+* **schema:** updating rover and generated schema ([f9b698b](https://github.com/Pocket/web-client/commit/f9b698bd0e7f10409d0c2e64d3af8d431ee937fd))
+
+## [1.64.2](https://github.com/Pocket/web-client/compare/v1.64.1...v1.64.2) (2022-10-26)
+
+
+### Bug Fixes
+
+* **list:** clear on search/tag changes ([e4f98d4](https://github.com/Pocket/web-client/commit/e4f98d48cdcb08db0ef489a2d82c83971f494811))
+* **list:** make tag checking  easier to read ([6c7485a](https://github.com/Pocket/web-client/commit/6c7485ad74abdbc55ece6c6fb36a1303f5d0a9b5))
+* **list:** search/tagging pagination ([fda9346](https://github.com/Pocket/web-client/commit/fda9346835fb8754838dd4201b14e9dd95a86ca0))
+* **search:** collapse recent on blur ([067bf96](https://github.com/Pocket/web-client/commit/067bf965f5368236ea33c74e36ca8902ec7d5d05))
+* **utilities:** adding new lines ([4d79458](https://github.com/Pocket/web-client/commit/4d794584108cca86aa85ff6a5063c06d1653dd8c))
+* **utilities:** don’t cut corners on array comparison ([81e4e28](https://github.com/Pocket/web-client/commit/81e4e281d2b81dc9f8403e839091ec406465f74b))
+
 ## [1.64.1](https://github.com/Pocket/web-client/compare/v1.64.0...v1.64.1) (2022-10-25)
 
 
