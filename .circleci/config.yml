@@ -350,6 +350,13 @@ workflows:
           requires:
             - build_app_production
 
+      # conditional push production build and assets (css/js) for dev branch
+      - push_production_assets:
+          <<: *only_dev
+          name: push_dev_assets
+          requires:
+            - build_app_dev
+
        # Try building the ECS docker image on each branch
        # !! This pushes to a dev account
        # !! Change this to not_main instead of getting rid of it
