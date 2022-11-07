@@ -1,3 +1,10 @@
+## [1.64.4](https://github.com/Pocket/web-client/compare/v1.64.3...v1.64.4) (2022-11-07)
+
+
+### Bug Fixes
+
+* **next:** adding a temporary rewrite to prevent my-list to saves from causing downtime ([83ddbb6](https://github.com/Pocket/web-client/commit/83ddbb6177d4f89294508a5bc23e9fb4f0be0479))
+
 ## [1.64.3](https://github.com/Pocket/web-client/compare/v1.64.2...v1.64.3) (2022-10-31)
 
 

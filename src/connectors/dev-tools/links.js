@@ -10,6 +10,11 @@ export const Links = ({ toggleDevMode }) => {
       src: `/profile/${userId}?src=navbar`,
       title: 'Profile',
       description: 'Articles you Recommended'
+    },
+    {
+      src: `/saves`,
+      title: 'Saves',
+      description: 'Temporary; remove after My List to Saves goes live'
     }
   ]
 
