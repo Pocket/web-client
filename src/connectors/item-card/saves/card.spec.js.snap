@@ -23,8 +23,8 @@ exports[`ItemCard renders a legacy saved item 1`] = `
       >
         <img
           alt=""
-          src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5173%2F1595617454_GettyImages-1168909015.jpgcrop.jpg"
-          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5173%2F1595617454_GettyImages-1168909015.jpgcrop.jpg 2x "
+          src="https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5173%2F1595617454_GettyImages-1168909015.jpgcrop.jpg"
+          srcset=" https://pocket-image-cache.com/1280x720/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5173%2F1595617454_GettyImages-1168909015.jpgcrop.jpg 2x "
           style="--fallbackBackground: #1CB0A880; --fallbackColor: #1CB0A8; --fallbackLetter: 'T';"
         />
       </a>
@@ -254,8 +254,8 @@ exports[`ItemCard renders a saved article that can be parsed 1`] = `
       >
         <img
           alt=""
-          src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fstatic01.nyt.com%2Fimages%2F2021%2F06%2F22%2Fscience%2F21SCI-BRODY-CENTENARIANS%2F21SCI-BRODY-CENTENARIANS-facebookJumbo.jpg"
-          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fstatic01.nyt.com%2Fimages%2F2021%2F06%2F22%2Fscience%2F21SCI-BRODY-CENTENARIANS%2F21SCI-BRODY-CENTENARIANS-facebookJumbo.jpg 2x "
+          src="https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fstatic01.nyt.com%2Fimages%2F2021%2F06%2F22%2Fscience%2F21SCI-BRODY-CENTENARIANS%2F21SCI-BRODY-CENTENARIANS-facebookJumbo.jpg"
+          srcset=" https://pocket-image-cache.com/1280x720/filters:format(jpg):extract_focal()/https%3A%2F%2Fstatic01.nyt.com%2Fimages%2F2021%2F06%2F22%2Fscience%2F21SCI-BRODY-CENTENARIANS%2F21SCI-BRODY-CENTENARIANS-facebookJumbo.jpg 2x "
           style="--fallbackBackground: #FCB64380; --fallbackColor: #FCB643; --fallbackLetter: 'T';"
         />
       </a>
@@ -485,8 +485,8 @@ exports[`ItemCard renders a saved article that can\`t be parsed 1`] = `
       >
         <img
           alt=""
-          src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fwww.myswitzerland.com%2F-%2Fmedia%2Fst%2Fgadmin%2Fimages%2Faccommodation%2Fsummer%2Ftypically%2520swiss%2Fk-img_5780_2_36163.jpg"
-          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fwww.myswitzerland.com%2F-%2Fmedia%2Fst%2Fgadmin%2Fimages%2Faccommodation%2Fsummer%2Ftypically%2520swiss%2Fk-img_5780_2_36163.jpg 2x "
+          src="https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fwww.myswitzerland.com%2F-%2Fmedia%2Fst%2Fgadmin%2Fimages%2Faccommodation%2Fsummer%2Ftypically%2520swiss%2Fk-img_5780_2_36163.jpg"
+          srcset=" https://pocket-image-cache.com/1280x720/filters:format(jpg):extract_focal()/https%3A%2F%2Fwww.myswitzerland.com%2F-%2Fmedia%2Fst%2Fgadmin%2Fimages%2Faccommodation%2Fsummer%2Ftypically%2520swiss%2Fk-img_5780_2_36163.jpg 2x "
           style="--fallbackBackground: #1CB0A880; --fallbackColor: #1CB0A8; --fallbackLetter: 'B';"
         />
         <span
@@ -771,8 +771,8 @@ exports[`ItemCard renders a saved collection 1`] = `
       >
         <img
           alt=""
-          src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F756e1877-8857-45c4-b9f6-84c62a0700b5.png"
-          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F756e1877-8857-45c4-b9f6-84c62a0700b5.png 2x "
+          src="https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F756e1877-8857-45c4-b9f6-84c62a0700b5.png"
+          srcset=" https://pocket-image-cache.com/1280x720/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F756e1877-8857-45c4-b9f6-84c62a0700b5.png 2x "
           style="--fallbackBackground: #00CB7780; --fallbackColor: #00CB77; --fallbackLetter: 'D';"
         />
       </a>
@@ -1002,8 +1002,8 @@ exports[`ItemCard renders a saved image 1`] = `
       >
         <img
           alt=""
-          src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F59947%2Fscreenshots%2F16700535%2Fmedia%2F335d386abb459f49570030e830429cef.jpg"
-          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F59947%2Fscreenshots%2F16700535%2Fmedia%2F335d386abb459f49570030e830429cef.jpg 2x "
+          src="https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F59947%2Fscreenshots%2F16700535%2Fmedia%2F335d386abb459f49570030e830429cef.jpg"
+          srcset=" https://pocket-image-cache.com/1280x720/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F59947%2Fscreenshots%2F16700535%2Fmedia%2F335d386abb459f49570030e830429cef.jpg 2x "
           style="--fallbackBackground: #00CB7780; --fallbackColor: #00CB77; --fallbackLetter: '3';"
         />
       </a>
@@ -1224,8 +1224,8 @@ exports[`ItemCard renders a saved video 1`] = `
       >
         <img
           alt=""
-          src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg"
-          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg 2x "
+          src="https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg"
+          srcset=" https://pocket-image-cache.com/1280x720/filters:format(jpg):extract_focal()/https%3A%2F%2Fi.ytimg.com%2Fvi%2F1AnG04qnLqI%2Fmqdefault.jpg 2x "
           style="--fallbackBackground: #00CB7780; --fallbackColor: #00CB77; --fallbackLetter: 'M';"
         />
       </a>

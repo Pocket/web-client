@@ -23,8 +23,8 @@ exports[`ItemCard renders a discover item 1`] = `
       >
         <img
           alt=""
-          src="https://pocket-image-cache.com/600x400/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.vox-cdn.com%2Fthumbor%2F26f5VRT9jvt6JW6WB4Nohu849cI%3D%2F0x137%3A1911x1138%2Ffit-in%2F1200x630%2Fcdn.vox-cdn.com%2Fuploads%2Fchorus_asset%2Ffile%2F22938855%2FApple_MacBook_Pro_Ports_10182021.jpg"
-          srcset=" https://pocket-image-cache.com/1200x800/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.vox-cdn.com%2Fthumbor%2F26f5VRT9jvt6JW6WB4Nohu849cI%3D%2F0x137%3A1911x1138%2Ffit-in%2F1200x630%2Fcdn.vox-cdn.com%2Fuploads%2Fchorus_asset%2Ffile%2F22938855%2FApple_MacBook_Pro_Ports_10182021.jpg 2x "
+          src="https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.vox-cdn.com%2Fthumbor%2F26f5VRT9jvt6JW6WB4Nohu849cI%3D%2F0x137%3A1911x1138%2Ffit-in%2F1200x630%2Fcdn.vox-cdn.com%2Fuploads%2Fchorus_asset%2Ffile%2F22938855%2FApple_MacBook_Pro_Ports_10182021.jpg"
+          srcset=" https://pocket-image-cache.com/1280x720/filters:format(jpg):extract_focal()/https%3A%2F%2Fcdn.vox-cdn.com%2Fthumbor%2F26f5VRT9jvt6JW6WB4Nohu849cI%3D%2F0x137%3A1911x1138%2Ffit-in%2F1200x630%2Fcdn.vox-cdn.com%2Fuploads%2Fchorus_asset%2Ffile%2F22938855%2FApple_MacBook_Pro_Ports_10182021.jpg 2x "
           style="--fallbackBackground: #00CB7780; --fallbackColor: #00CB77; --fallbackLetter: 'A';"
         />
         <span
