@@ -131,8 +131,8 @@ export const CardMedia = function ({
         style={mediaFallbackDetails}
         onError={onImageFail}
         alt=""
-        src={getImageCacheUrl(image_src, { width: 600, height: 400 })}
-        srcSet={` ${getImageCacheUrl(image_src, { width: 1200, height: 800 })} 2x `}
+        src={getImageCacheUrl(image_src, { width: 640, height: 360 })}
+        srcSet={` ${getImageCacheUrl(image_src, { width: 1280, height: 720 })} 2x `}
       />
     ) : (
       <div className="no-image" style={mediaFallbackDetails} />
