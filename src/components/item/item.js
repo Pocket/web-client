@@ -4,7 +4,6 @@ import { SyndicatedIcon } from 'components/icons/SyndicatedIcon'
 import { CardMedia } from 'components/items-media/card-media'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
-import { FavoriteFilledIcon } from 'components/icons/FavoriteFilledIcon'
 import { ItemTags } from 'components/item-tags/item-tags'
 import { useTranslation } from 'next-i18next'
 
@@ -17,12 +16,14 @@ export const Item = (props) => {
     itemImage,
     publisher,
     publisherLogo,
-    authors,
     excerpt,
     timeToRead,
     isFavorite,
+    isArchive,
+    isPremium,
     isSyndicated,
     isInternalItem,
+    saveStatus,
     url,
     fromPartner,
     topicName,
@@ -39,7 +40,6 @@ export const Item = (props) => {
 
     // Actions
     Actions,
-    ActionsSecondary,
 
     // Tracking
     onItemInView,
@@ -64,7 +64,8 @@ export const Item = (props) => {
           className="media-block"
           data-cy="content-link"
           target={linkTarget}
-          rel={linkRel}>
+          rel={linkRel}
+          aria-label={`Open item: ${title}`}>
           <CardMedia
             topicName={topicName}
             image_src={itemImage}
@@ -97,38 +98,26 @@ export const Item = (props) => {
             publisher={publisher}
             externalUrl={url}
             onOpenOriginalUrl={onOpenOriginalUrl}
+            isSyndicated={isSyndicated}
           />
           {timeToRead ? (
-            <span className="readtime" data-cy="read-time">
-              {' '}
-              · {timeToRead} min
-            </span>
-          ) : null}
-
-          {isSyndicated ? (
-            <span className="syndicated">
-              <SyndicatedIcon />
-            </span>
-          ) : null}
-
-          {authors?.length ? (
-            <div className="authors">
-              {authors.map((author) => (
-                <span key={author.name}>{author.name}</span>
-              ))}
+            <div className="readtime" data-cy="read-time">
+              {timeToRead} min
             </div>
           ) : null}
         </cite>
-        {Actions ? <Actions /> : null}
-      </footer>
 
-      {ActionsSecondary ? <ActionsSecondary /> : null}
-
-      {isFavorite ? (
-        <div className="favoriteIndicator">
-          <FavoriteFilledIcon />
+        <div className="footerActions">
+          {Actions ? (
+            <Actions
+              isFavorite={isFavorite}
+              isArchive={isArchive}
+              isPremium={isPremium}
+              saveStatus={saveStatus}
+            />
+          ) : null}
         </div>
-      ) : null}
+      </footer>
 
       {publisherLogo && publisher !== 'Pocket' ? (
         <img src={publisherLogo} alt={publisher} className="publisherLogo" />
@@ -155,22 +144,31 @@ const Excerpt = ({ useMarkdown, excerpt }) => {
   )
 }
 
-const Publisher = ({ publisher, externalUrl, onOpenOriginalUrl }) => {
+const Publisher = ({ publisher, externalUrl, onOpenOriginalUrl, isSyndicated }) => {
   if (!publisher) return null
-  if (externalUrl)
-    return (
-      <a
-        className="publisher"
-        href={externalUrl}
-        onClick={onOpenOriginalUrl}
-        data-cy="publisher-link"
-        tabIndex={0}
-        target="_blank"
-        rel="noopener noreferrer">
-        {publisher}
-      </a>
-    )
-  return <span className="publisher">{publisher}</span>
+  return (
+    <>
+      {externalUrl ? (
+        <a
+          className="publisher"
+          href={externalUrl}
+          onClick={onOpenOriginalUrl}
+          data-cy="publisher-link"
+          tabIndex={0}
+          target="_blank"
+          rel="noopener noreferrer">
+          {publisher}
+        </a>
+      ) : (
+        <span className="publisher">{publisher}</span>
+      )}
+      {isSyndicated ? (
+        <span className="syndicated">
+          <SyndicatedIcon />
+        </span>
+      ) : null}
+    </>
+  )
 }
 
 function PartnerOverline({ partnerType }) {
@@ -206,7 +204,8 @@ const itemStyles = css`
 
   // Where does the footer sit?  Stacked default
   --footer-column: initial;
-  --footer-column-template: auto 120px;
+  --footer-column-template: auto 50%;
+  --footer-column-gap: 1rem;
 
   // Generally these are consistent styles
   --card-padding: 1rem;
@@ -263,7 +262,6 @@ const itemStyles = css`
 
   // What happens when we hover over the main card
   &:hover {
-    cursor: pointer;
     box-shadow: var(--card-hover-shadow);
   }
 
@@ -373,6 +371,7 @@ const itemStyles = css`
     display: grid;
     grid-column: var(--footer-column);
     grid-template-columns: var(--footer-column-template);
+    grid-column-gap: var(--footer-column-gap);
   }
 
   cite.details {
@@ -426,56 +425,6 @@ const itemStyles = css`
       display: none;
       padding: 0;
     }
-  }
-
-  .favoriteIndicator {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    background: var(--color-canvas);
-    color: var(--color-amber);
-    border-radius: 16px;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .icon {
-      margin-top: 0;
-    }
-  }
-
-  .actions {
-    padding: 0;
-    justify-content: flex-end;
-  }
-
-  .overflow-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: none;
-    .overflow {
-      transform: var(--overflow-transform);
-      box-shadow: var(--card-shadow);
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      align-content: center;
-      background-color: var(--color-canvas);
-      border-radius: 1rem;
-      color: var(--color-textTertiary);
-      font-size: 24px;
-      width: 32px;
-      height: 32px;
-      .icon {
-        margin: 0;
-      }
-    }
-  }
-  &:hover .overflow-container {
-    display: block;
   }
 
   .tags {
