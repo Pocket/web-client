@@ -1,16 +1,11 @@
 import { css } from 'linaria'
 import { useTranslation } from 'next-i18next'
-import { OverflowMenuIcon } from 'components/icons/OverflowMenuIcon'
 import { OverflowAction } from 'components/item-actions/overflow'
 import { LikeIcon } from 'components/icons/LikeIcon'
 import { SaveIcon } from 'components/icons/SaveIcon'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 import { LikeFilledIcon } from 'components/icons/LikeFilledIcon'
-import { RemoveCircledIcon } from 'components/icons/RemoveCircledIcon'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
-import { ReportIcon } from 'components/icons/ReportIcon'
-import { ListenIcon } from 'components/icons/ListenIcon'
-import { usePopover, popoverBase } from 'components/popover/popover'
 import { topTooltip } from 'components/tooltip/tooltip'
 
 import { DeleteIcon } from 'components/icons/DeleteIcon'
@@ -40,11 +35,6 @@ export const nextActionStyle = css`
     }
   }
   text-align: right;
-  align-items: center;
-  align-content: center;
-  justify-content: space-between;
-  z-index: var(--zIndexModal);
-  color: var(--color-primary);
 
   button {
     display: inline-flex;
@@ -112,9 +102,6 @@ export const nextActionStyle = css`
         transform: translateY(1px);
       }
     }
-    .overflow {
-      margin-right: 0;
-    }
   }
 
   &.status-saving {
@@ -124,50 +111,6 @@ export const nextActionStyle = css`
     .likeIcon {
       display: inline-block;
       animation: 550ms pulse;
-    }
-  }
-
-  .overflow-container {
-    display: inline-block;
-    position: relative;
-  }
-`
-
-export const popoverContainer = css`
-  ${popoverBase};
-  position: absolute;
-  top: 2rem;
-  right: 0;
-  background-color: var(--color-popoverCanvas);
-  border-radius: 8px;
-
-  button {
-    padding: 0.5rem 1rem;
-    margin: 0;
-    display: block;
-    font-size: 1rem;
-    line-height: 1.25;
-    font-weight: 400;
-    border-radius: 0;
-    text-decoration: none;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: left;
-
-    .icon {
-      font-size: 24px;
-      margin-right: 0.25rem;
-    }
-    &:first-of-type {
-      border-radius: 8px 8px 0 0;
-    }
-    &:last-of-type {
-      border-radius: 0 0 8px 8px;
-    }
-    &:hover {
-      text-decoration: none;
-      color: var(--color-menuItemHoverText);
-      background-color: var(--color-menuItemHover);
     }
   }
 `
@@ -246,48 +189,6 @@ export function DiscoveryActions({ onSave, onUnsave, saveStatus }) {
           <span className="copy">Save</span>
         </button>
       )}
-    </div>
-  )
-}
-
-export function ActionsSecondary({ forceShown, placement = 'top-start' }) {
-  // Popover Effect
-  const { popTrigger, popBody, shown } = usePopover({
-    placement,
-    modifiers: [
-      {
-        name: 'offset',
-        options: {
-          offset: [0, 0]
-        }
-      }
-    ]
-  })
-
-  const isShown = shown || forceShown
-
-  return (
-    <div className="overflow-container">
-      {isShown ? (
-        <ActionMenu popoverRef={popBody} />
-      ) : (
-        <button className="overflow" ref={popTrigger}>
-          <OverflowMenuIcon />
-        </button>
-      )}
-    </div>
-  )
-}
-
-function ActionMenu() {
-  return (
-    <div className={popoverContainer}>
-      <button>
-        <ReportIcon /> Report
-      </button>
-      <button>
-        <IosShareIcon /> Share
-      </button>
     </div>
   )
 }
