@@ -4,7 +4,7 @@ import { deriveListItem } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
 import { css, cx } from 'linaria'
 
-import { SavedActions, DiscoveryActions, ActionsSecondary } from './item-actions'
+import { SavedActions, DiscoveryActions } from './item-actions'
 
 const savesItems = Object.values(savesResponse.edges).map((item) => {
   let derivedItem = deriveListItem(item)
@@ -15,10 +15,8 @@ const savesItems = Object.values(savesResponse.edges).map((item) => {
 const itemsToDisplay = arrayToObject([...savesItems], 'storyName')
 
 const gridContainer = css`
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
 `
 
 export default {
@@ -156,7 +154,6 @@ export const Item = (args) => {
       position={0}
       fromPartner={fromPartner}
       useMarkdown={true}
-      ActionsSecondary={ActionsSecondary}
       {...args}
       className={cardClassnames}
     />
@@ -167,9 +164,13 @@ Item.args = {
   itemToDisplay: savesItems[0].storyName,
   Actions: 'saved',
   isSyndicated: false,
+  isFavorite: false,
+  isArchive: false,
+  isPremium: false,
   fromPartner: true, // This is so we can superseded this with the selector
   clamp: false,
-  partnerType: false
+  partnerType: false,
+  sideBySide: false
 }
 
 function sanitizeString(str) {
