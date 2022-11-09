@@ -230,23 +230,20 @@ export function SavedActions({ saveStatus, isFavorite, isArchive, isPremium }) {
   )
 }
 
-export function SavedActions({ onSave, onUnsave, saveStatus }) {
+export function DiscoveryActions({ onSave, onUnsave, saveStatus }) {
   return (
     <div className={`${nextActionStyle} status-${saveStatus}`}>
       {saveStatus === 'saved' ? (
         <button className="save-action saved" onClick={onUnsave}>
           <SaveFilledIcon className="saveIcon" />
           <LikeFilledIcon className="likeIcon" />
-          {/* <span className="copy">Saved</span> */}
+          <span className="copy">Saved</span>
         </button>
       ) : (
-        <button
-          className={`save-action save ${topTooltip}`}
-          onClick={onSave}
-          data-tooltip="Save to your library">
+        <button className="save-action save" onClick={onSave}>
           <SaveIcon className="saveIcon" />
           <LikeIcon className="likeIcon" />
-          {/* <span className="copy">Save</span> */}
+          <span className="copy">Save</span>
         </button>
       )}
     </div>

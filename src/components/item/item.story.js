@@ -36,6 +36,12 @@ export default {
         options: Object.keys(itemsToDisplay)
       }
     },
+    saveStatus: {
+      control: {
+        type: 'inline-radio',
+        options: ['saved', 'unsaved']
+      }
+    },
     tags: {
       control: {
         type: 'inline-radio',
@@ -70,7 +76,7 @@ export default {
     Actions: {
       control: {
         type: 'inline-radio',
-        options: ['saved', 'discovery']
+        options: ['discovery', 'saved']
       },
       mapping: {
         saved: SavedActions,
@@ -83,6 +89,7 @@ export default {
         options: [false, 'PARTNERED', 'SPONSORED']
       }
     },
+
     itemId: { table: { disable: true } },
     title: { table: { disable: true } },
     publisher: { table: { disable: true } },
@@ -162,7 +169,8 @@ export const Item = (args) => {
 
 Item.args = {
   itemToDisplay: savesItems[0].storyName,
-  Actions: 'saved',
+  Actions: 'discovery',
+  saveStatus: 'unsaved',
   isSyndicated: false,
   isFavorite: false,
   isArchive: false,
