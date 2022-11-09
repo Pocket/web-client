@@ -39,7 +39,9 @@ const popoverMenuItem = css`
   }
 `
 
-const PopoverMenuItem = ({ item: { label, icon, onClick } }) => {
+const PopoverMenuItem = ({ item: { label, icon, hide, onClick } }) => {
+  if (hide) return null
+
   return (
     <div data-cy={label} className={popoverMenuItem} onClick={onClick}>
       {icon ? icon : null}
