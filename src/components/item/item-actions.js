@@ -1,5 +1,7 @@
 import { css } from 'linaria'
+import { useTranslation } from 'next-i18next'
 import { OverflowMenuIcon } from 'components/icons/OverflowMenuIcon'
+import { OverflowAction } from 'components/item-actions/overflow'
 import { LikeIcon } from 'components/icons/LikeIcon'
 import { SaveIcon } from 'components/icons/SaveIcon'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
@@ -15,6 +17,8 @@ import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { ArchiveIcon } from 'components/icons/ArchiveIcon'
 import { FavoriteIcon } from 'components/icons/FavoriteIcon'
 import { TagIcon } from 'components/icons/TagIcon'
+import { AddIcon } from 'components/icons/AddIcon'
+import { PermanentCopyIcon } from 'components/icons/PermanentCopyIcon'
 
 export const nextActionStyle = css`
   @keyframes pulse {
@@ -52,6 +56,10 @@ export const nextActionStyle = css`
     line-height: 1em;
     color: var(--color-actionSecondary);
     padding: 0.25rem;
+
+    .active {
+      color: var(--color-amber);
+    }
 
     span.copy {
       font-size: 1rem;
@@ -164,24 +172,60 @@ export const popoverContainer = css`
   }
 `
 
-export function DiscoveryActions({ onSave, onUnsave, saveStatus }) {
+export function SavedActions({ saveStatus, isFavorite, isArchive, isPremium }) {
+  const { t } = useTranslation()
+  const archiveLabel = isArchive
+    ? t('item-action:re-add', 'Re-add to Saves')
+    : t('item-action:archive', 'Archive')
+  const favoriteLabel = isFavorite
+    ? t('item-action:unfavorite', 'Un-Favorite')
+    : t('item-action:favorite', 'Favorite')
+
   return (
     <div className={`${nextActionStyle} status-${saveStatus}`}>
-      <button className="save-action">
-        <ArchiveIcon />
+      <button
+        className={topTooltip}
+        data-tooltip={favoriteLabel}
+        aria-label={favoriteLabel}
+        data-cy={favoriteLabel}
+        onClick={() => {}}>
+        <FavoriteIcon className={isFavorite && 'active'} />
       </button>
-      <button className="save-action">
-        <FavoriteIcon />
+
+      <button
+        className={topTooltip}
+        data-tooltip={archiveLabel}
+        aria-label={archiveLabel}
+        data-cy={archiveLabel}
+        onClick={() => {}}>
+        {isArchive ? <AddIcon /> : <ArchiveIcon />}
       </button>
-      <button className="save-action">
-        <TagIcon />
-      </button>
-      <button className="save-action">
-        <IosShareIcon />
-      </button>
-      <button className="save-action">
-        <DeleteIcon />
-      </button>
+
+      <OverflowAction
+        menuItems={[
+          {
+            label: t('item-action:tag', 'Tag'),
+            icon: <TagIcon />,
+            onClick: () => {}
+          },
+          {
+            label: t('item-action:share', 'Share'),
+            icon: <IosShareIcon />,
+            onClick: () => {}
+          },
+          {
+            label: t('item-action:delete', 'Delete'),
+            icon: <DeleteIcon />,
+            onClick: () => {}
+          },
+          {
+            label: t('item-action:permanent-copy', 'Permanent Copy'),
+            hide: !isPremium,
+            icon: <PermanentCopyIcon />,
+            onClick: () => {}
+          }
+        ]}
+      />
     </div>
   )
 }
