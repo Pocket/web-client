@@ -19,7 +19,7 @@ export const mutationUpsertSagas = [takeEvery(MUTATION_UPSERT, savedItemUpsert)]
  --------------------------------------------------------------- */
 
 function* savedItemUpsert(action) {
-  const { url, sort, isUnArchive } = action
+  const { url, sort, isUnArchive, type } = action
   const upsertResponse = yield call(itemUpsert, url)
 
   if (!upsertResponse) return // Do better here
@@ -29,7 +29,7 @@ function* savedItemUpsert(action) {
   const savedItemIds = [itemId]
   yield put({ type: ITEMS_SUCCESS, itemsById: { [itemId]: item } })
 
-  if (isUnArchive) return yield put({ type: MUTATION_SUCCESS, nodes: [node] })
+  if (isUnArchive) return yield put({ type: MUTATION_SUCCESS, nodes: [node],  actionType: type, count: 1})
 
   yield put({ type: ITEMS_UPSERT_SUCCESS, nodes: { [itemId]: node }, savedItemIds, sort })
 }

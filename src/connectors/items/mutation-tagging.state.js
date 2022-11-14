@@ -138,7 +138,10 @@ function* confirmTagMutations() {
 
     const nodes = yield call(taggingFunction, itemIds, tagNames)
 
-    if (nodes) return yield put({ type: MUTATION_SUCCESS, nodes })
+    if (nodes) {
+      const count = nodes.count
+      return yield put({ type: MUTATION_SUCCESS, nodes,  actionType:MUTATION_TAGGING, count})
+    }
   } catch {
     yield put({ type: MUTATION_FAILURE })
   }

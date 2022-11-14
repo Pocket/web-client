@@ -1,5 +1,9 @@
 import { TOAST_CLEAR } from 'actions'
 
+import { MUTATION_SUCCESS } from 'actions'
+import { MUTATION_TAG_SUCCESS } from 'actions'
+import { MUTATION_DELETE_SUCCESS } from 'actions'
+
 import { ITEMS_DELETE_SUCCESS } from 'actions'
 import { ITEMS_DELETE_FAILURE } from 'actions'
 
@@ -56,6 +60,13 @@ export const actionToastsReducers = (state = initialState, action) => {
       return state.filter((item) => item.stamp !== stamp)
     }
 
+    case MUTATION_DELETE_SUCCESS: {
+      const { ids, deletedItemPosition } = action
+      const itemCount = ids.length
+      const stamp = Date.now()
+      return [...state, { stamp, type: action.type, ids, itemCount, deletedItemPosition }]
+    }
+
     case ITEMS_DELETE_SUCCESS:
     case ITEMS_DELETE_FAILURE:
     case ITEMS_ADD_SUCCESS:
@@ -83,11 +94,12 @@ export const actionToastsReducers = (state = initialState, action) => {
     case COLLECTION_PAGE_SAVE_SUCCESS:
     case DISCOVER_ITEMS_SAVE_SUCCESS:
     case ARTICLE_SAVE_SUCCESS:
+    case MUTATION_SUCCESS:
     case COPY_ITEM_URL: {
-      const { actions, count } = action
+      const { actions, count, actionType = false } = action
       const itemCount = actions ? actions?.length : count
       const stamp = Date.now()
-      return [...state, { stamp, type: action.type, itemCount }]
+      return [...state, { stamp, type: action.type, actionType, itemCount }]
     }
 
     default:

@@ -56,19 +56,19 @@ export const mutationArchiveSagas = [
  --------------------------------------------------------------- */
 
 function* savedItemArchive(action) {
-  const { itemId } = action
+  const { itemId, type } = action
   const node = yield call(itemArchive, itemId)
-  return yield put({ type: MUTATION_SUCCESS, nodes: [node] })
+  return yield put({ type: MUTATION_SUCCESS, nodes: [node], actionType: type, count: 1 })
 }
 
 function* savedItemUnArchive(action) {
-  const { itemId } = action
+  const { itemId, type } = action
   const node = yield call(itemUnArchive, itemId)
-  return yield put({ type: MUTATION_SUCCESS, nodes: [node] })
+  return yield put({ type: MUTATION_SUCCESS, nodes: [node], actionType: type, count: 1 })
 }
 
 function* savedItemsBulkArchive(action) {
-  const { itemIds } = action
+  const { itemIds, type } = action
   // Wait for the user to confirm or cancel
   const { cancel } = yield race({
     confirm: take(MUTATION_BULK_CONFIRM),
@@ -80,11 +80,14 @@ function* savedItemsBulkArchive(action) {
 
   // Batch and send api calls for the ids
   const nodes = yield call(batchSendMutations, itemIds, bulkArchive)
-  if (nodes) return yield put({ type: MUTATION_SUCCESS, nodes })
+  if (nodes) {
+    const count = nodes.length
+    return yield put({ type: MUTATION_SUCCESS, nodes, actionType: type, count })
+  }
 }
 
 function* savedItemsBulkUnArchive(action) {
-  const { itemIds } = action
+  const { itemIds, type } = action
   // Wait for the user to confirm or cancel
   const { cancel } = yield race({
     confirm: take(MUTATION_BULK_CONFIRM),
@@ -96,5 +99,8 @@ function* savedItemsBulkUnArchive(action) {
 
   // Batch and send api calls for the ids
   const nodes = yield call(batchSendMutations, itemIds, bulkUnArchive)
-  if (nodes) return yield put({ type: MUTATION_SUCCESS, nodes })
+  if (nodes) {
+    const count = nodes.length
+    return yield put({ type: MUTATION_SUCCESS, nodes, actionType: type, count })
+  }
 }

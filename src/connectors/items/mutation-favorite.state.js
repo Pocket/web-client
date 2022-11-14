@@ -54,20 +54,20 @@ export const mutationFavoriteSagas = [
  --------------------------------------------------------------- */
 
 function* savedItemFavorite(action) {
-  const { itemId } = action
+  const { itemId, type } = action
   const node = yield call(itemFavorite, itemId)
-  return yield put({ type: MUTATION_SUCCESS, nodes: [node] })
+  return yield put({ type: MUTATION_SUCCESS, nodes: [node], actionType: type, count: 1 })
 }
 
 function* savedItemUnFavorite(action) {
-  const { itemId } = action
+  const { itemId, type } = action
   const node = yield call(itemUnFavorite, itemId)
-  return yield put({ type: MUTATION_SUCCESS, nodes: [node] })
+  return yield put({ type: MUTATION_SUCCESS, nodes: [node], actionType: type, count: 1 })
 }
 
 //
 function* savedItemsBulkFavorite(action) {
-  const { itemIds } = action
+  const { itemIds, type } = action
   // Wait for the user to confirm or cancel
   const { cancel } = yield race({
     confirm: take(MUTATION_BULK_CONFIRM),
@@ -79,11 +79,14 @@ function* savedItemsBulkFavorite(action) {
 
   // Batch and send api calls for the ids
   const nodes = yield call(batchSendMutations, itemIds, bulkFavorite)
-  if (nodes) return yield put({ type: MUTATION_SUCCESS, nodes })
+  if (nodes) {
+    const count = nodes.length
+    return yield put({ type: MUTATION_SUCCESS, nodes, actionType: type, count })
+  }
 }
 
 function* savedItemsBulkUnFavorite(action) {
-  const { itemIds } = action
+  const { itemIds, type } = action
   // Wait for the user to confirm or cancel
   const { cancel } = yield race({
     confirm: take(MUTATION_BULK_CONFIRM),
@@ -95,5 +98,8 @@ function* savedItemsBulkUnFavorite(action) {
 
   // Batch and send api calls for the ids
   const nodes = yield call(batchSendMutations, itemIds, bulkUnFavorite)
-  if (nodes) return yield put({ type: MUTATION_SUCCESS, nodes })
+  if (nodes) {
+    const count = nodes.length
+    return yield put({ type: MUTATION_SUCCESS, nodes, actionType: type, count })
+  }
 }
