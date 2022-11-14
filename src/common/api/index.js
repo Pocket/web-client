@@ -29,6 +29,7 @@ export { itemUnFavorite } from './mutations/unfavoriteItem'
 export { itemArchive } from './mutations/archiveItem'
 export { itemUnArchive } from './mutations/unArchiveItem'
 export { itemDelete } from './mutations/deleteItem'
+export { itemUnDelete } from './mutations/unDeleteItem'
 
 // Bulk Mutations
 export { bulkFavorite } from './mutations/favoriteItem'

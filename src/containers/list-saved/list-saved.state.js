@@ -10,6 +10,8 @@ import { ITEMS_SAVED_FAILURE } from 'actions'
 import { MUTATION_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
 
+import { ITEMS_UNDELETE_SUCCESS } from 'actions'
+
 import { ITEMS_SAVED_PAGE_INFO_SUCCESS } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_FILTERS } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_ORDER } from 'actions'
@@ -100,6 +102,13 @@ export const listSavedReducers = (state = [], action) => {
       const itemIds = action?.savedItemIds || []
       const items = new Set([...itemIds, ...state])
       return [...items]
+    }
+
+    case ITEMS_UNDELETE_SUCCESS: {
+      const { itemId, itemPosition } = action
+      const currentItems = state.slice()
+      currentItems.splice(itemPosition, 0, itemId)
+      return currentItems
     }
 
     // ! This is agressive clearing of the list
