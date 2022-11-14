@@ -52,7 +52,7 @@ phases:
       - ln -s ~/.tfenv/bin/* /usr/bin
       - tfenv install
       - tfenv use $(cat .terraform-version)
-      - npm install -g npm
+      - npm install -g npm@"<9.0.0"
       - npm install
       - npm run build
       # synthesize the js into terraform json with the proper node environment
