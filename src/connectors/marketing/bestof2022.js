@@ -17,7 +17,6 @@ const spacerStyles = css`
 `
 
 const bannerBackground = css`
-  background-color: black;
   position: fixed;
   top: 0;
   width: 100%;  
