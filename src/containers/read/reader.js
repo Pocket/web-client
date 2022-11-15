@@ -83,6 +83,16 @@ export default function Reader() {
   const { slug: id } = router.query
 
   const item = useSelector((state) => state.items[id])
+  const status = useSelector((state) => state.itemsSaved[id]?.status)
+
+  // Is deleted ?
+  useEffect(() => {
+    if (status === 'DELETED') {
+      const { getStarted } = router.query
+      const path = getStarted ? '/home' : '/saves'
+      router.replace(path)
+    }
+  }, [status, router, dispatch])
 
   // Display settings
   const lineHeight = useSelector((state) => state.readerSettings.lineHeight)

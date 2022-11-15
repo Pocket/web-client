@@ -1,3 +1,10 @@
+## [1.66.1](https://github.com/Pocket/web-client/compare/v1.66.0...v1.66.1) (2022-11-15)
+
+
+### Bug Fixes
+
+* **reader:** simplify delete from reader check ([3e3b6ac](https://github.com/Pocket/web-client/commit/3e3b6ac1abe894cebc17710281be473752d84136))
+
 # [1.66.0](https://github.com/Pocket/web-client/compare/v1.65.4...v1.66.0) (2022-11-14)
 
 
