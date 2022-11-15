@@ -110,7 +110,7 @@
     "@braze/web-sdk": "4.3.0",
     "@n8tb1t/use-scroll-position": "2.0.3",
     "@next/bundle-analyzer": "12.1.6",
-    "@pocket/web-localization": "0.24.1",
+    "@pocket/web-localization": "0.25.0",
     "@popperjs/core": "2.11.6",
     "@sentry/integrations": "6.19.7",
     "@sentry/nextjs": "6.19.7",
