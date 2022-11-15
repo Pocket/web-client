@@ -132,10 +132,6 @@ export const readReducers = (state = initialState, action) => {
       return { ...state, deleted: !!deleted }
     }
 
-    case MUTATION_DELETE_SUCCESS: {
-      return { ...state, deleted: true }
-    }
-
     case READER_CLEAR_DELETION: {
       return { ...state, deleted: false }
     }
