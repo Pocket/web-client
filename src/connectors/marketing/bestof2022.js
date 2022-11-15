@@ -16,17 +16,24 @@ const spacerStyles = css`
   }
 `
 
-const bannerStyles = css`
+const bannerBackground = css`
   position: fixed;
   top: 0;
+  width: 100%;  
+  background-color: var(--color-lapisLightest);
+  z-index: 1;
+`
+
+const bannerStyles = css`
+  position: relative;
   height: 80px;
-  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--color-lapisLightest);
   padding-left: 309px;
-  z-index: 1;
 
   &:before {
     content: '';
@@ -54,7 +61,7 @@ const bannerStyles = css`
     padding: 8px 44px;
     width: 100%;
     max-width: 213px;
-    background-color: var(--color-lapisDarker);
+    background-color: #0060DF;
     color: #FFF;
     font-size: 16px;
     font-weight: 500;
@@ -159,22 +166,24 @@ export const BestOf2022 = ({ locale = 'en' }) => {
   return (
     <>
       <div className={spacerStyles} />
-      <div className={cx(bannerStyles, isGerman && germanStyles)}>
-        <h3>
-          {isGerman
-            ? `Das sind die besten Artikel des Jahres`
-            : `Don’t miss the best articles of 2022`
-          }
-        </h3>
-        <Link href="/collections/">
-          <a onClick={handleClick}>
+      <div className={bannerBackground}>
+        <div className={cx(bannerStyles, isGerman && germanStyles)}>
+          <h3>
             {isGerman
-              ? `Entdecke das Best of 2022`
-              : `See the winners`
+              ? `Das sind die besten Artikel des Jahres`
+              : `Don’t miss the best articles of 2022`
             }
-          </a>
-        </Link>
-      </div>    
+          </h3>
+          <Link href="/collections/">
+            <a onClick={handleClick}>
+              {isGerman
+                ? `Entdecke das Best of 2022`
+                : `See the winners`
+              }
+            </a>
+          </Link>
+        </div> 
+      </div>   
     </>
   )
 }

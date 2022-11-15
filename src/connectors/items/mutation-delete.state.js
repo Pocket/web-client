@@ -1,10 +1,16 @@
-import { put, call, race, take, takeEvery } from 'redux-saga/effects'
+import { put, call, race, take, takeEvery, select } from 'redux-saga/effects'
+import { deriveSavedItem } from 'common/api/derivers/item'
 import { itemDelete } from 'common/api'
+import { itemUnDelete } from 'common/api'
 import { bulkDelete } from 'common/api'
 import { batchSendMutations } from './mutations-bulk.state'
 
+import { ITEMS_UNDELETE_SUCCESS } from 'actions'
+
 import { MUTATION_DELETE } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
+import { MUTATION_UNDELETE } from 'actions'
+
 import { MUTATION_BULK_DELETE } from 'actions'
 import { MUTATION_BULK_CANCEL } from 'actions'
 import { MUTATION_BULK_CONFIRM } from 'actions'
@@ -12,6 +18,7 @@ import { MUTATION_BULK_CONFIRM } from 'actions'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const mutationDelete = (itemId) => ({ type: MUTATION_DELETE, itemId })
+export const mutationUnDelete = (itemIds, itemPosition) => ({ type: MUTATION_UNDELETE, itemIds, itemPosition }) //prettier-ignore
 export const mutationBulkDelete = (itemIds) => ({ type: MUTATION_BULK_DELETE, itemIds })
 
 /** REDUCERS
@@ -38,16 +45,31 @@ export const mutationDeleteReducers = (state = initialState, action) => {
  --------------------------------------------------------------- */
 export const mutationDeleteSagas = [
   takeEvery(MUTATION_DELETE, savedItemDelete),
+  takeEvery(MUTATION_UNDELETE, savedItemUnDelete),
   takeEvery(MUTATION_BULK_DELETE, savedItemsBulkDelete)
 ]
+
+/* SAGAS :: SELECTORS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+const getDeletedItemPosition = (state, id) => state.listSaved.indexOf(id)
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 
 function* savedItemDelete(action) {
   const { itemId } = action
+  const deletedItemPosition = yield select(getDeletedItemPosition, itemId)
   const deletedId = yield call(itemDelete, itemId)
-  return yield put({ type: MUTATION_DELETE_SUCCESS, ids: [deletedId] })
+  return yield put({ type: MUTATION_DELETE_SUCCESS, ids: [deletedId], deletedItemPosition })
+}
+
+function* savedItemUnDelete(action) {
+  const { itemIds, itemPosition } = action
+  const itemId = itemIds[0]
+  const unDeleteResponse = yield call(itemUnDelete, itemId)
+  if (unDeleteResponse?.error) return //Do better here with ubiquitous error handling
+
+  yield put({ type: ITEMS_UNDELETE_SUCCESS, itemId, itemPosition })
 }
 
 function* savedItemsBulkDelete(action) {

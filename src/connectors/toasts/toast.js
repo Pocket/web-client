@@ -1,11 +1,23 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import { css, cx } from 'linaria'
 import { buttonReset } from 'components/buttons/button-reset'
-import { CrossIcon } from 'components/icons/CrossIcon'
+import { CheckIcon } from 'components/icons/CheckIcon'
+import { ErrorIcon } from 'components/icons/ErrorIcon'
+
 import { Fade } from 'common/utilities/animation/fade'
 import { useDispatch } from 'react-redux'
 import { clearToast } from './toast.state'
-import { Trans } from 'next-i18next'
+import { Trans, useTranslation } from 'next-i18next'
+import { mutationUnDelete } from 'connectors/items/mutation-delete.state'
+
+import { MUTATION_DELETE_SUCCESS } from 'actions'
+
+import { MUTATION_ARCHIVE } from 'actions'
+import { MUTATION_UNARCHIVE } from 'actions'
+import { MUTATION_FAVORITE } from 'actions'
+import { MUTATION_UNFAVORITE } from 'actions'
+import { MUTATION_TAGGING } from 'actions'
+import { MUTATION_UPSERT } from 'actions'
 
 import { ITEMS_DELETE_SUCCESS } from 'actions'
 import { ITEMS_DELETE_FAILURE } from 'actions'
@@ -54,51 +66,59 @@ const toastWrapper = css`
   padding: 0;
   box-sizing: border-box;
   transform: translateZ(0.01);
-`
-
-const toastBlock = css`
-  display: inline-grid;
-  grid-template-columns: auto 16px;
-  gap: 16px;
-  align-content: center;
-  align-items: center;
-  font-weight: 500;
-  line-height: 22px;
-  font-size: 16px;
-  font-family: 'Graphik Web';
-  text-align: left;
-  padding: 20px;
-  border-radius: 4px;
-  margin: 20px 0 0 0;
-  min-width: 275px;
-  border-radius: 4px;
-  background-color: var(--color-navCurrentTab);
-  color: var(--color-navCurrentTabText);
-
-  &.success {
+  .toastBlock {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    line-height: 22px;
+    font-size: 16px;
+    font-family: 'Graphik Web';
+    padding: 20px;
+    border-radius: 4px;
+    margin: 20px 0 0 0;
+    min-width: 275px;
+    border-radius: 4px;
     background-color: var(--color-navCurrentTab);
     color: var(--color-navCurrentTabText);
-  }
-  &.neutral {
-    background-color: var(--color-navCurrentTab);
-    color: var(--color-navCurrentTabText);
-  }
-  &.warn {
-    background-color: var(--color-error);
-    color: var(--color-actionBrandText);
-  }
-`
 
-const closeWrapper = css`
-  cursor: pointer;
-  justify-self: end;
-  &:hover {
-    background: transparent;
+    .actionWrapper {
+      padding-left: 1rem;
+    }
+
+    button.text {
+      color: var(--color-navCurrentTabText);
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    &.success {
+      background-color: var(--color-navCurrentTab);
+      color: var(--color-navCurrentTabText);
+    }
+    &.neutral {
+      background-color: var(--color-navCurrentTab);
+      color: var(--color-navCurrentTabText);
+    }
+    &.warn {
+      background-color: var(--color-error);
+      color: var(--color-actionBrandText);
+
+      button.text {
+        color: var(--color-actionBrandText);
+      }
+    }
+  }
+  &.actionWrapper {
+    text-align: right;
   }
 `
 
 const messages = {
   [ITEMS_DELETE_SUCCESS]: 'deleted',
+  [ITEMS_DELETE_FAILURE]: 'error-deleting',
+  [MUTATION_DELETE_SUCCESS]: 'added',
+  [MUTATION_DELETE_SUCCESS]: 'deleted',
   [ITEMS_DELETE_FAILURE]: 'error-deleting',
   [ITEMS_ADD_SUCCESS]: 'added',
   [ITEMS_ARCHIVE_SUCCESS]: 'archived',
@@ -125,11 +145,33 @@ const messages = {
   [COLLECTIONS_SAVE_SUCCESS]: 'added',
   [COLLECTION_PAGE_SAVE_SUCCESS]: 'added',
   [DISCOVER_ITEMS_SAVE_SUCCESS]: 'added',
-  [ARTICLE_SAVE_SUCCESS]: 'added'
+  [ARTICLE_SAVE_SUCCESS]: 'added',
+  [MUTATION_TAGGING]: 'tagged',
+  [MUTATION_ARCHIVE]: 'archived',
+  [MUTATION_UNARCHIVE]: 'added',
+  [MUTATION_FAVORITE]: 'added-to-favorites',
+  [MUTATION_UNFAVORITE]: 'removed-from-favorites',
+  [MUTATION_UPSERT]: 'added'
 }
 
-export function Toast({ stamp, type, itemCount = 1 }) {
+const errors = [
+  ITEMS_DELETE_FAILURE,
+  ITEMS_DELETE_FAILURE,
+  ITEMS_ARCHIVE_FAILURE,
+  ITEMS_UNARCHIVE_FAILURE,
+  ITEMS_FAVORITE_FAILURE,
+  ITEMS_UNFAVORITE_FAILURE,
+  ITEMS_SHARE_FAILURE,
+  SHARE_RECOMMEND_FAILURE,
+  ITEMS_TAG_FAILURE,
+  ADD_SHARE_FAILURE,
+  PROFILE_ITEM_SAVE_FAILURE,
+  PROFILE_ITEM_DELETE_FAILURE
+]
+
+export function Toast({ stamp, type, ids, actionType, deletedItemPosition, itemCount = 1 }) {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   const [show, setShow] = useState(false)
   const mount = () => setShow(true)
@@ -137,26 +179,42 @@ export function Toast({ stamp, type, itemCount = 1 }) {
 
   const remove = useCallback(() => dispatch(clearToast(stamp)), [stamp, dispatch])
 
+  const typeForMessage = actionType || type
+  const showUndo = type === MUTATION_DELETE_SUCCESS
+  const IconToShow = errors.includes(type) ? ErrorIcon : CheckIcon
+
   useEffect(() => {
     if (!show) return
-    const removeTimer = setTimeout(unmount, 3500)
+    const removeTime = showUndo ? 5000 : 3500
+    const removeTimer = setTimeout(unmount, removeTime)
     return () => clearTimeout(removeTimer)
-  }, [show, remove])
+  }, [show, showUndo, remove])
 
   useEffect(() => {
     mount()
   }, [])
 
+  const handleUndo = () => {
+    dispatch(mutationUnDelete(ids, deletedItemPosition))
+    remove()
+  }
+
   return (
     <Fade show={show} remove={remove}>
       <div className={toastWrapper}>
-        <div className={cx(toastBlock, `${type}`)} data-cy={messages[type]}>
+        <div className={cx('toastBlock', `${type}`)} data-cy={messages[typeForMessage]}>
           <div>
-            <Trans i18nKey={messages[type]} count={itemCount} />
+            <Trans i18nKey={messages[typeForMessage]} count={itemCount} />
           </div>
-          <button className={cx(buttonReset, closeWrapper)} onClick={unmount}>
-            <CrossIcon />
-          </button>
+          <div className="actionWrapper">
+            {showUndo ? (
+              <button onClick={handleUndo} className="text">
+                {t('toast:undo', 'Undo')}
+              </button>
+            ) : (
+              <IconToShow />
+            )}
+          </div>
         </div>
       </div>
     </Fade>
