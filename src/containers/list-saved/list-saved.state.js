@@ -112,6 +112,8 @@ export const listSavedReducers = (state = [], action) => {
     }
 
     // ! This is agressive clearing of the list
+    case ITEMS_SAVED_PAGE_SET_SORT_ORDER:
+    case ITEMS_SAVED_PAGE_SET_SORT_BY:
     case ITEMS_CLEAR_CURRENT: {
       return []
     }
