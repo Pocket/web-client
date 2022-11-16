@@ -9,6 +9,7 @@ import { ITEMS_SAVED_REQUEST } from 'actions'
 import { ITEMS_SAVED_SUCCESS } from 'actions'
 import { ITEMS_SAVED_FAILURE } from 'actions'
 import { ITEMS_UPSERT_SUCCESS } from 'actions'
+import { ITEMS_UNDELETE_SUCCESS } from 'actions'
 
 import { ITEMS_SAVED_SEARCH_REQUEST } from 'actions'
 import { ITEMS_SAVED_SEARCH_FAILURE } from 'actions'
@@ -35,6 +36,11 @@ export const itemsSavedReducers = (state = {}, action) => {
     case ITEMS_UPSERT_SUCCESS:
     case READ_ITEM_SUCCESS: {
       return { ...state, ...action.nodes }
+    }
+
+    case ITEMS_UNDELETE_SUCCESS: {
+      const { itemId, previousStatus } = action
+      return { ...state, [itemId]: { ...state[itemId], status: previousStatus } }
     }
 
     case MUTATION_DELETE_SUCCESS: {

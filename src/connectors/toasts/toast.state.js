@@ -61,10 +61,13 @@ export const actionToastsReducers = (state = initialState, action) => {
     }
 
     case MUTATION_DELETE_SUCCESS: {
-      const { ids, deletedItemPosition } = action
+      const { ids, deletedItemPosition, previousStatus } = action
       const itemCount = ids.length
       const stamp = Date.now()
-      return [...state, { stamp, type: action.type, ids, itemCount, deletedItemPosition }]
+      return [
+        ...state,
+        { stamp, type: action.type, ids, itemCount, deletedItemPosition, previousStatus }
+      ]
     }
 
     case ITEMS_DELETE_SUCCESS:

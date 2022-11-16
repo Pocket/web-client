@@ -18,7 +18,7 @@ import { MUTATION_BULK_CONFIRM } from 'actions'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const mutationDelete = (itemId) => ({ type: MUTATION_DELETE, itemId })
-export const mutationUnDelete = (itemIds, itemPosition) => ({ type: MUTATION_UNDELETE, itemIds, itemPosition }) //prettier-ignore
+export const mutationUnDelete = (itemIds, itemPosition, previousStatus) => ({ type: MUTATION_UNDELETE, itemIds, itemPosition, previousStatus}) //prettier-ignore
 export const mutationBulkDelete = (itemIds) => ({ type: MUTATION_BULK_DELETE, itemIds })
 
 /** REDUCERS
@@ -52,6 +52,7 @@ export const mutationDeleteSagas = [
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getDeletedItemPosition = (state, id) => state.listSaved.indexOf(id)
+const getDeletedItemStatus = (state, id) => state.itemsSaved[id]?.status
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -59,17 +60,23 @@ const getDeletedItemPosition = (state, id) => state.listSaved.indexOf(id)
 function* savedItemDelete(action) {
   const { itemId } = action
   const deletedItemPosition = yield select(getDeletedItemPosition, itemId)
+  const previousStatus = yield select(getDeletedItemStatus, itemId)
   const deletedId = yield call(itemDelete, itemId)
-  return yield put({ type: MUTATION_DELETE_SUCCESS, ids: [deletedId], deletedItemPosition })
+  return yield put({
+    type: MUTATION_DELETE_SUCCESS,
+    ids: [deletedId],
+    deletedItemPosition,
+    previousStatus
+  })
 }
 
 function* savedItemUnDelete(action) {
-  const { itemIds, itemPosition } = action
+  const { itemIds, itemPosition, previousStatus } = action
   const itemId = itemIds[0]
   const unDeleteResponse = yield call(itemUnDelete, itemId)
   if (unDeleteResponse?.error) return //Do better here with ubiquitous error handling
 
-  yield put({ type: ITEMS_UNDELETE_SUCCESS, itemId, itemPosition })
+  yield put({ type: ITEMS_UNDELETE_SUCCESS, itemId, itemPosition, previousStatus })
 }
 
 function* savedItemsBulkDelete(action) {

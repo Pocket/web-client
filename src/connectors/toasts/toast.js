@@ -169,7 +169,15 @@ const errors = [
   PROFILE_ITEM_DELETE_FAILURE
 ]
 
-export function Toast({ stamp, type, ids, actionType, deletedItemPosition, itemCount = 1 }) {
+export function Toast({
+  stamp,
+  type,
+  ids,
+  actionType,
+  deletedItemPosition,
+  itemCount = 1,
+  previousStatus
+}) {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -195,7 +203,7 @@ export function Toast({ stamp, type, ids, actionType, deletedItemPosition, itemC
   }, [])
 
   const handleUndo = () => {
-    dispatch(mutationUnDelete(ids, deletedItemPosition))
+    dispatch(mutationUnDelete(ids, deletedItemPosition, previousStatus))
     remove()
   }
 
