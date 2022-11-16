@@ -141,9 +141,8 @@ export function ActionsSaves({ id, position }) {
 }
 
 export function ActionsBulk({ id }) {
-  const bulkList = useSelector((state) => state.bulkEdit.selected)
-  const selected = bulkList?.map((item) => item.id).includes(id)
-
+  const bulkList = useSelector((state) => state.mutationBulk.itemIds)
+  const selected = bulkList?.includes(id)
   const BulkIcon = selected ? CheckCircledIcon : EmptyCircledIcon
   return (
     <div className={`${itemActionStyle} actions`}>
