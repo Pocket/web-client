@@ -180,7 +180,7 @@ export function Toast({ stamp, type, ids, actionType, deletedItemPosition, itemC
   const remove = useCallback(() => dispatch(clearToast(stamp)), [stamp, dispatch])
 
   const typeForMessage = actionType || type
-  const showUndo = type === MUTATION_DELETE_SUCCESS && deletedItemPosition
+  const showUndo = type === MUTATION_DELETE_SUCCESS && deletedItemPosition !== undefined
   const IconToShow = errors.includes(type) ? ErrorIcon : CheckIcon
 
   useEffect(() => {
