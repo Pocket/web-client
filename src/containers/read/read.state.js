@@ -42,8 +42,6 @@ import { deriveListItem } from 'common/api/derivers/item'
 import { HYDRATE } from 'actions'
 import { READER_CLEAR_DELETION } from 'actions'
 
-// Client API actions
-import { MUTATION_DELETE_SUCCESS } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */

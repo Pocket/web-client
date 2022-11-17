@@ -47,6 +47,8 @@ import { updateColumnWidth } from 'containers/read/reader-settings.state'
 import { updateFontSize } from 'containers/read/reader-settings.state'
 import { updateFontType } from 'containers/read/reader-settings.state'
 
+import { clearDeletion } from './read.state'
+
 export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
 export const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
@@ -63,6 +65,7 @@ export default function LegacyReader() {
   const annotations = useSelector((state) => state.reader.annotations)
   const tags = useSelector((state) => state.reader.tags)
   const favorite = useSelector((state) => state.reader.favorite)
+  const deleted = useSelector((state) => state.reader.deleted)
 
   const lineHeight = useSelector((state) => state.readerSettings.lineHeight)
   const columnWidth = useSelector((state) => state.readerSettings.columnWidth)
@@ -80,6 +83,15 @@ export default function LegacyReader() {
     dispatch(itemDataRequest(id))
     dispatch(selectShortcutItem(id))
   }, [dispatch, id])
+
+  useEffect(() => {
+    if (deleted) {
+      const { getStarted } = router.query
+      const path = getStarted ? '/home' : '/saves'
+      router.replace(path)
+      dispatch(clearDeletion())
+    }
+  }, [deleted, router, dispatch])
 
   if (!articleData) {
     return (
