@@ -149,7 +149,8 @@ const expectationTypes = {
   slateRequestId: 'string',
   slateExperiment: 'string',
   displayName: 'string',
-  description: 'string'
+  description: 'string',
+  corpusRecommendationId: 'string'
 }
 
 export function validateSnowplowExpectations({ identifier, expects, data }) {
