@@ -16,6 +16,7 @@ import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { HomeSetup } from './home-setup'
+import { HomeOnboarding } from './home-onboarding'
 
 export const Home = ({ metaData }) => {
   const userStatus = useSelector((state) => state.user.user_status)
@@ -28,6 +29,7 @@ export const Home = ({ metaData }) => {
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
       <SuccessFXA type="home" />
       <HomeSetup />
+      <HomeOnboarding />
 
       <SectionWrapper>
         <HomeGreeting />
@@ -46,4 +48,3 @@ export const Home = ({ metaData }) => {
     </Layout>
   )
 }
-

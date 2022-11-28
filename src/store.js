@@ -7,6 +7,8 @@ import { all } from 'redux-saga/effects'
  --------------------------------------------------------------- */
 import { homeSetupReducers } from 'containers/home/home-setup.state'
 import { homeSetupSagas } from 'containers/home/home-setup.state'
+import { homeOnboardingReducers } from 'containers/home/home-onboarding.state'
+import { homeOnboardingSagas } from 'containers/home/home-onboarding.state'
 
 import { appReducers, appSagas } from 'connectors/app/app.state'
 import { oneTrustReducers } from 'connectors/third-party/one-trust.state'
@@ -205,6 +207,7 @@ const marketingReducers = {
 const globalReducers = {
   app: appReducers, // App wide (mostly example at this time)
   homeSetup: homeSetupReducers,
+  homeOnboarding: homeOnboardingReducers,
   oneTrust: oneTrustReducers, // One Trust Readiness
   settings: settingsReducers, // User defined settings
   features: featureReducers, // Feature flags (very basic start)
@@ -242,6 +245,7 @@ export const rootReducer = combineReducers({
 function* rootSaga() {
   yield all([
     ...homeSetupSagas,
+    ...homeOnboardingSagas,
     ...appSagas,
     ...userSagas,
     ...settingsSagas,

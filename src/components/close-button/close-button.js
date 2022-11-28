@@ -2,7 +2,7 @@ import { css, cx } from 'linaria'
 import { CrossIcon } from 'components/icons/CrossIcon'
 import { useTranslation, Trans } from 'next-i18next'
 
-const closeButtonStyles = css`
+export const closeButtonStyles = css`
   cursor: pointer;
   span,
   span:hover {
