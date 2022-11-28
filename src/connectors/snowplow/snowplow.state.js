@@ -1,5 +1,6 @@
 import { take, takeEvery, takeLatest, call, put, select } from 'redux-saga/effects'
 import { analyticsActions } from 'connectors/snowplow/actions'
+import * as Sentry from '@sentry/nextjs'
 
 import { createContentOpenEvent } from 'connectors/snowplow/events'
 import { createEngagementEvent } from 'connectors/snowplow/events'
@@ -132,14 +133,24 @@ const entityBuilders = {
 }
 
 const expectationTypes = {
-  id: 'int',
+  id: 'string',
   url: 'string',
-  position: 'int',
+  position: 'number',
   label: 'string',
   destination: 'string',
   value: 'string',
   reason: 'string',
-  otherText: 'string'
+  otherText: 'string',
+  recommendationId: 'string',
+  slateLineupId: 'string',
+  slateLineupRequestId: 'string',
+  slateLineupExperiment: 'string',
+  slateId: 'string',
+  slateRequestId: 'string',
+  slateExperiment: 'string',
+  displayName: 'string',
+  description: 'string',
+  corpusRecommendationId: 'string'
 }
 
 export function validateSnowplowExpectations({ identifier, expects, data }) {
@@ -155,11 +166,19 @@ export function validateSnowplowExpectations({ identifier, expects, data }) {
         )
       }) || []
 
-    if (missingValues?.length > 0) throw new Error(`Missing expected values for : ${missingValues}`)
+    const badValues = expects?.filter(
+      (expectation) => typeof data[expectation] !== expectationTypes[expectation]
+    )
+
+    if (missingValues?.length > 0) throw new SnowplowValueMissingError(`Missing expected values for : ${missingValues}`) //prettier-ignore
+    if (badValues?.length > 0) throw new SnowplowValueTypeError(`Value types are not valid for : ${badValues}`) //prettier-ignore
 
     return true
-  } catch (error) {
-    console.info({ identifier, error: error.message })
+  } catch (err) {
+    Sentry.withScope((scope) => {
+      scope.setContext('data', { identifier, ...data })
+      Sentry.captureMessage(err)
+    })
     return false
   }
 }
@@ -244,5 +263,19 @@ const snowplowTrackPageView = () => {
     global.snowplow('trackPageView')
   } catch {
     console.warn('PageView: snowplow library is not available')
+  }
+}
+
+class SnowplowValueMissingError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'SnowplowValueMissingError'
+  }
+}
+
+class SnowplowValueTypeError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'SnowplowValueTypeError'
   }
 }
