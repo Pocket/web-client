@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from 'layouts/with-sidebar'
 import { useSelector, useDispatch } from 'react-redux'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
@@ -68,7 +68,7 @@ export const List = (props) => {
   const Header = tag ? TagPageHeader : ListHeader
 
   //const showBanner = locale === 'de' || locale === 'de-DE' || locale === 'en' || locale === 'en-US'
-  const showBanner = featureFlagActive({ flag: 'bestof2022', featureState }) 
+  const showBanner = featureFlagActive({ flag: 'bestof2022', featureState })
 
   // Actions
   const setNewest = useApiNext ? savedItemsSetSortOrder : sortOrderSetNew
@@ -78,6 +78,12 @@ export const List = (props) => {
   const handleOldest = () => dispatch(setOldest('ASC'))
   const handleRelevance = () => dispatch(setRelevance('RELEVANCE'))
   const total = useApiNext ? graphTotal : v3Total
+
+  useEffect(() => {
+    if (!flagsReady) return
+    const apiInUse = useApiNext ? 'Graph' : 'v3'
+    console.info(`Pocket Web Client: ${apiInUse} API`)
+  }, [flagsReady, useApiNext])
 
   return (
     <>
@@ -116,7 +122,7 @@ export const List = (props) => {
         <ShareModalConnector />
 
         <Toasts />
-      </Layout>    
+      </Layout>
     </>
   )
 }
