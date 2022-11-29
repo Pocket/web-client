@@ -1,3 +1,10 @@
+## [1.66.8](https://github.com/Pocket/web-client/compare/v1.66.7...v1.66.8) (2022-11-29)
+
+
+### Bug Fixes
+
+* **reader:** add commas between multiple authors ([9967aa7](https://github.com/Pocket/web-client/commit/9967aa707dedc3a74faebdb9956c67156202bcef))
+
 ## [1.66.7](https://github.com/Pocket/web-client/compare/v1.66.6...v1.66.7) (2022-11-21)
 
 

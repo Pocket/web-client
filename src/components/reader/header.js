@@ -112,11 +112,14 @@ const tagsWrapper = css`
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 function listAuthors(authors) {
   if (!authors) return
-  return Object.keys(authors).map((authorKey) => {
+  const authorKeys = Object.keys(authors)
+  return authorKeys.map((authorKey, index) => {
+    const isLast = index === authorKeys.length - 1
     const current = authors[authorKey]
     return (
       <span className={authorNoLink} key={authorKey}>
-        {current.name}{' '}
+        {current.name}
+        {isLast ? null : ','}{' '}
       </span>
     )
   })
