@@ -44,11 +44,6 @@ class ClientDocument extends Document {
             data-domain-script="a7ff9c31-9f59-421f-9a8e-49b11a3eb24e"></script>
           {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
 
-          {/* Global Site Tag (gtag.js) - Google Analytics */}
-          <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
-          />
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -61,19 +56,6 @@ class ClientDocument extends Document {
           `
             }}
           />
-
-          <script async src='https://securepubads.g.doubleclick.net/tag/js/gpt.js' />
-          <script dangerouslySetInnerHTML={{
-            __html: `
-              var gptadslots = [];
-              var googletag = googletag || {cmd:[]};
-            `
-            }}
-          />
-
-        <script async src='https://fdyn.pubwise.io/script/8bfeb37f-2e7b-4828-a1ef-65bed8f5f77c/v3/dyn/pre_pws.js'/>
-        <script async src='https://fdyn.pubwise.io/script/8bfeb37f-2e7b-4828-a1ef-65bed8f5f77c/v3/dyn/pws.js'/>
-
         </Head>
         <body>
           <Main />

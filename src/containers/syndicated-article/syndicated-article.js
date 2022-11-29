@@ -1,7 +1,8 @@
+/* Global freestar googletag*/
+import Head from 'next/head'
 import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
 import { useRouter } from 'next/router'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { BASE_URL } from 'common/constants'
 
@@ -14,7 +15,6 @@ import { ArticleActions } from 'components/content-actions/article-actions'
 import { SaveArticleTop } from 'components/content-saving/save-article'
 import { SaveArticleBottom } from 'components/content-saving/save-article'
 
-import { useAdsOnPage } from 'components/programmatic-ad/ad-hook'
 import { AdAboveTheFold } from 'components/content-ads/content-ads'
 import { AdBelowTheFold } from 'components/content-ads/content-ads'
 import { AdRailTop } from 'components/content-ads/content-ads'
@@ -80,9 +80,12 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
   // Initialize Ads on the page
   const { asPath: urlPath } = router
-  const showLog = isDev
-  const adsReady = useAdsOnPage({ allowAds, urlPath, iabTopCategory, iabSubCategory, originalItemId, showLog }) //prettier-ignore
-
+  const targeting = {
+    URL: urlPath,
+    Category: iabTopCategory,
+    SubCategory: iabSubCategory,
+    ArticleID: originalItemId
+  }
   // If there is no article data, turn back until it's loaded
   if (!articleData) return
 
@@ -130,6 +133,20 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
   return (
     <>
+      <Head>
+        {/* These preconnect are in place for Freestar Ads */}
+        <link rel="preconnect" href="https://a.pub.network/" crossOrigin />
+        <link rel="preconnect" href="https://b.pub.network/" crossOrigin />
+        <link rel="preconnect" href="https://c.pub.network/" crossOrigin />
+        <link rel="preconnect" href="https://d.pub.network/" crossOrigin />
+        <link rel="preconnect" href="https://btloader.com/" crossOrigin />
+        <link rel="preconnect" href="https://api.btloader.com/" crossOrigin />
+        <link
+          rel="preconnect"
+          href="https://confiant-integrations.global.ssl.fastly.net"
+          crossOrigin
+        />
+      </Head>
       <ArticleLayout
         title={title}
         metaData={articleMetaData}
@@ -137,14 +154,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         className={printLayout}>
         <main className={contentLayout}>
           <section>
-            <AdAboveTheFold
-              adsReady={adsReady}
-              allowAds={allowAds}
-              iabTopCategory={iabTopCategory}
-              iabSubCategory={iabSubCategory}
-              curationCategory={topic}
-              legacyId={originalItemId}
-            />
+            <AdAboveTheFold allowAds={allowAds} targeting={targeting} curationCategory={topic} />
           </section>
           {/* Content header information */}
           <section className="content-section">
@@ -189,20 +199,13 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
             {/* Right aside content such as ads and recs */}
             <aside className="right-aside">
-              <AdRailTop
-                allowAds={allowAds}
-                adsReady={adsReady}
-                iabTopCategory={iabTopCategory}
-                iabSubCategory={iabSubCategory}
-                curationCategory={topic}
-                legacyId={originalItemId}
-              />
+              <AdRailTop allowAds={allowAds} targeting={targeting} curationCategory={topic} />
               <PublisherRecs
                 itemId={originalItemId}
                 publisher={publisher}
                 legacyId={originalItemId}
               />
-              <AdRailBottom allowAds={allowAds} adsReady={adsReady} />
+              <AdRailBottom allowAds={allowAds} targeting={targeting} curationCategory={topic} />
             </aside>
 
             <div className="content-body">
@@ -229,14 +232,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
           </section>
 
           <section>
-            <AdBelowTheFold
-              allowAds={allowAds}
-              adsReady={adsReady}
-              iabTopCategory={iabTopCategory}
-              iabSubCategory={iabSubCategory}
-              curationCategory={topic}
-              legacyId={originalItemId}
-            />
+            <AdBelowTheFold allowAds={allowAds} targeting={targeting} curationCategory={topic} />
           </section>
 
           {!isMobileWebView ? (
