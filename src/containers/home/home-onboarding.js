@@ -31,7 +31,7 @@ export const HomeOnboarding = () => {
   const recentSaves = useSelector((state) => state.home.recentSaves)
 
   useEffect(() => {
-    setTimeout(() => setRunning(true), 1000)
+    setTimeout(() => setRunning(true), 1500)
   }, [])
   
   // Button actions

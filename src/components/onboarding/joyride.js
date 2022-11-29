@@ -57,7 +57,7 @@ const tooltipStyles = css`
   }
 `
 
-export const Tooltip = ({
+const Tooltip = ({
   step,
   closeProps,
   primaryProps,
@@ -98,7 +98,7 @@ export const Onboarding = ({
   const options = {
     overlayColor: 'transparent',
     spotlightShadow: 'transparent',
-    zIndex: -99
+    zIndex: -99 // Base zIndex is 100, subtract 99 to prevent conflict with GlobalNav 🙄
   }
 
   const onboardingCallback = (data) => {

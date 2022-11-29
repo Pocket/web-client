@@ -9,7 +9,7 @@ export default {
 
 const joyrideStyles = css`
   button { 
-    margin: 0 20px;
+    margin: 20px;
   }
 `
 
@@ -48,8 +48,16 @@ export const Joyride = () => {
 
   const readAction = () => setRunning(false)
 
+  const resetOnboarding = () => {
+    setRunning(false)
+    setStepIndex(0)
+    setItemSaved(false)
+  }  
+
   // Onboarding Callbacks
-  const handleImpression = () => console.log('send impression event')
+  const handleImpression = () => {
+    // console.log('send impression event')
+  }
 
   const handleDismiss = (index) => {
     setRunning(false)
@@ -65,9 +73,13 @@ export const Joyride = () => {
 
   return (
     <div className={joyrideStyles}>
-      <button onClick={startAction}>Start Onboarding!</button>
-      <button className="button-1" onClick={saveAction}>Save button!</button>
-      {itemSaved ? <button className="button-2" onClick={readAction}>Read item!</button> : null}
+      <div>
+        <button onClick={startAction}>Start Onboarding!</button>
+        <button className="button-1" onClick={saveAction}>Save button!</button>
+        {itemSaved ? <button className="button-2" onClick={readAction}>Read item!</button> : null}
+      </div>
+
+      <button onClick={resetOnboarding}>Reset</button>
       
       <Onboarding
         steps={onboardingSteps}
