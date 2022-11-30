@@ -43,17 +43,17 @@ export function ItemCard({
 
   if (!item) return null
 
-  const { readUrl, externalUrl, analyticsData: passedAnalytics } = item
+  const { isInternalItem, readUrl, externalUrl, analyticsData: passedAnalytics } = item
   const openUrl = readUrl || externalUrl
   const showExcerpt = type === 'detail'
-  // const ActionMenu = bulkEdit ? ActionsBulk : ActionsSaves
 
   const onImageFail = () => dispatch(setNoImage(id))
 
   const analyticsData = {
     ...passedAnalytics,
+    impressionId: id,
     position,
-    destination: readUrl ? 'internal' : 'external',
+    destination: isInternalItem ? 'internal' : 'external',
     label: type
   }
 
@@ -67,8 +67,9 @@ export function ItemCard({
   }
 
   const onItemInView = (inView) => {
-    if (!impressionFired && inView)
+    if (!impressionFired && inView) {
       dispatch(sendSnowplowEvent('saves.card.impression', analyticsData))
+    }
   }
 
   /** ITEM BULK ACTIONS
@@ -86,7 +87,7 @@ export function ItemCard({
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const { title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } = item //prettier-ignore
+  const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
   const { tags } = itemSaved
   /** ITEM DIMENSIONS
   --------------------------------------------------------------- */

@@ -47,8 +47,8 @@ export const snowplowReducers = (state = initialState, action) => {
     }
 
     case SNOWPLOW_TRACK_ITEM_IMPRESSION: {
-      const { id, url, corpusRecommendationId } = action
-      const identifier = id || corpusRecommendationId || url
+      const { impressionId, id, url, corpusRecommendationId } = action
+      const identifier = impressionId || id || corpusRecommendationId || url
       const set = new Set([...state.impressions, identifier])
       return { ...state, impressions: Array.from(set) }
     }
