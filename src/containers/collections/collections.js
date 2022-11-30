@@ -28,7 +28,7 @@ export default function Collections({ locale }) {
 
   // Remove Best Of specific metadata once the campaign is complete
   const bestOfImage =
-    'https://pocket-image-cache.com/648x/filters:format(png):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fe0f19ac2-0dd2-4af6-b6c2-d69afc32de8b.jpeg'
+    'https://s3.amazonaws.com/pocket-collectionapi-prod-images/20a5c150-c497-400a-a4be-a035225be3e8.jpeg'
 
   const metaData = {
     // description: t('collections:page-description', 'Curated guides to the best of the web'),
