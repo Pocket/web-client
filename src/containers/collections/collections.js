@@ -26,9 +26,16 @@ export default function Collections({ locale }) {
   const canonical = `${BASE_URL}${languagePrefix}/collections`
   const url = canonical
 
+  // Remove Best Of specific metadata once the campaign is complete
+  const bestOfImage =
+    'https://pocket-image-cache.com/648x/filters:format(png):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fe0f19ac2-0dd2-4af6-b6c2-d69afc32de8b.jpeg'
+
   const metaData = {
-    description: t('collections:page-description', 'Curated guides to the best of the web'),
-    title: t('collections:page-title', 'Collections for Your Pocket'),
+    // description: t('collections:page-description', 'Curated guides to the best of the web'),
+    // title: t('collections:page-title', 'Collections for Your Pocket'),
+    description: t('collections:best-of-page-description', 'The year’s top articles'),
+    title: t('collections:best-of-page-title', 'Pocket’s Best of 2022'),
+    image: bestOfImage,
     url
   }
 
