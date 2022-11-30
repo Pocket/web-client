@@ -28,7 +28,10 @@ export default function Collections({ locale }) {
 
   // Remove Best Of specific metadata once the campaign is complete
   const isGerman = locale === 'de' || locale === 'de-DE'
-  const description = isGerman ? 'Die besten Artikel des Jahres' : 'The year’s top articles'
+  const title = isGerman ? 'Best of 2022' : 'Pocket’s Best of 2022'
+  const description = isGerman
+    ? 'Die besten Artikel des Jahres in Pocket'
+    : 'The year’s top articles'
   const bestOfImage = isGerman
     ? 'https://s3.amazonaws.com/pocket-collectionapi-prod-images/2990c169-326f-4839-be58-d0cad7286cfc.png'
     : 'https://s3.amazonaws.com/pocket-collectionapi-prod-images/20a5c150-c497-400a-a4be-a035225be3e8.jpeg'
@@ -37,7 +40,7 @@ export default function Collections({ locale }) {
     // description: t('collections:page-description', 'Curated guides to the best of the web'),
     // title: t('collections:page-title', 'Collections for Your Pocket'),
     description: description,
-    title: 'Pocket’s Best of 2022',
+    title: title,
     image: bestOfImage,
     url
   }
