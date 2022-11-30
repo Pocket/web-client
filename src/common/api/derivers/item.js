@@ -230,7 +230,7 @@ export function deriveItemData({
     timeToRead: readTime({ item }),
     fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
-      id: item?.itemId || false,
+      id: item?.itemId || node?.id || false,
       url: analyticsUrl({ item, itemEnrichment }),
       ...analyticsData
     }
