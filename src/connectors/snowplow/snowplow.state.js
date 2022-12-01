@@ -154,6 +154,8 @@ const expectationTypes = {
 }
 
 export function validateSnowplowExpectations({ identifier, expects, data }) {
+  const isDevBuild = process.env.SHOW_DEV === 'included'
+
   // Make sure we are not missing any entities
   try {
     if (!data || !expects) return true
@@ -175,6 +177,7 @@ export function validateSnowplowExpectations({ identifier, expects, data }) {
 
     return true
   } catch (err) {
+    if (isDevBuild) return console.warn(identifier, data, err.message)
     Sentry.withScope((scope) => {
       scope.setContext('data', { identifier, ...data })
       Sentry.captureMessage(err)
@@ -185,9 +188,16 @@ export function validateSnowplowExpectations({ identifier, expects, data }) {
 
 export function buildSnowplowCustomEvent({ identifier, data }) {
   const { eventType, entityTypes, eventData, batchEntityTypes, expects } = analyticsActions[identifier] //prettier-ignore
+  const isBatch = batchEntityTypes
 
   // Run a test against expectations
-  validateSnowplowExpectations({ identifier, expects, data })
+  if (isBatch) {
+    data.forEach((batchData) =>
+      validateSnowplowExpectations({ identifier, expects, data: batchData })
+    )
+  } else {
+    validateSnowplowExpectations({ identifier, expects, data })
+  }
 
   // Build event
   const eventFunction = eventBuilders[eventType]
