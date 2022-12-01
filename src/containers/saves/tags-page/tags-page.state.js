@@ -67,6 +67,11 @@ export const userTagsReducers = (state = initialState, action) => {
       }
     }
 
+    case USER_TAGS_SUCCESS: {
+      const { tagNames } = action
+      return { ...state, tagNames }
+    }
+
     case USER_TAGS_EDIT: {
       const { tag } = action
       return { ...state, tagToEdit: tag }
@@ -134,9 +139,12 @@ const getPinnedTags = (state) => state.settings.pinnedTags
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 function* userTagsOnly() {
   // This will need to be part of the larger request organization
-  // For now we are keeping this as a placeholder to avoid double requesting
-  // during the apiNext testing.
-  // const response = yield getUserTagsGraph()
+  const response = yield getUserTagsGraph()
+
+  if (!response) yield put({ type: USER_TAGS_FAILURE })
+
+  const { tagNames } = response
+  yield put({ type: USER_TAGS_SUCCESS, tagNames })
 }
 
 function* userTagsRequest() {
