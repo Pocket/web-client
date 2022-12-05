@@ -80,6 +80,10 @@ export const ListSort = ({
     relevance: <RelevanceIcon />
   }
 
+  const sortAscDisabled = sortOrder === 'ASC' || sortOrder === 'oldest'
+  const sortDescDisabled = sortOrder === 'DESC' || sortOrder === 'newest'
+  const relevanceDisabled = sortOrder === 'RELEVANCE' || sortOrder == 'relevance'
+
   return (
     <div ref={menuRef}>
       <button
@@ -106,16 +110,19 @@ export const ListSort = ({
             }
           ]
         }}>
-        <PopupMenuItem data-cy="sort-oldest" onClick={handleOldest}>
+        <PopupMenuItem data-cy="sort-oldest" onClick={handleOldest} disabled={sortAscDisabled}>
           <SortByOldestIcon />
           {t('settings:sort-oldest', 'Oldest first')}
         </PopupMenuItem>
-        <PopupMenuItem data-cy="sort-newest" onClick={handleNewest}>
+        <PopupMenuItem data-cy="sort-newest" onClick={handleNewest} disabled={sortDescDisabled}>
           <SortByNewestIcon />
           {t('settings:sort-newest', 'Newest first')}
         </PopupMenuItem>
         {showRelevance ? (
-          <PopupMenuItem data-cy="sort-relevance" onClick={handleRelevance}>
+          <PopupMenuItem
+            data-cy="sort-relevance"
+            onClick={handleRelevance}
+            disabled={relevanceDisabled}>
             <RelevanceIcon />
             {t('settings:sort-relevance', 'By relevance')}
           </PopupMenuItem>
