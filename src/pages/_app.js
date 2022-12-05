@@ -61,7 +61,12 @@ function PocketWebClient({ Component, pageProps, err }) {
      */
     const initializeUser = async () => {
       const sess_guid = await getSessGuid()
-      if (!sess_guid) return
+      if (!sess_guid) {
+        // The reason we wouldn't get a sessGuid is because of a cors error (AKA on a non-pocket)
+        // so we want to invalidate the user at this point ex: https://getpocket.com/v3/guid
+        dispatch(setUser(true))
+        return
+      }
       dispatch(sessGuidHydrate(sess_guid))
       dispatch(setUser(false))
     }
