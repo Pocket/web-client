@@ -23,7 +23,7 @@ import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 export const Home = ({ metaData }) => {
   const userStatus = useSelector((state) => state.user.user_status)
   const featureState = useSelector((state) => state.features) || {}
-  const setupV4 = true //featureFlagActive({ flag: 'setup.moment.v4', featureState })
+  const setupV4 = featureFlagActive({ flag: 'setup.moment.v4', featureState })
 
   const shouldRender = userStatus !== 'pending' && featureState.flagsReady
   if (!shouldRender) return null
