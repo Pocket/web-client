@@ -2,12 +2,12 @@ import Joyride, { EVENTS, STATUS, ACTIONS } from 'react-joyride'
 import { css } from 'linaria'
 import { CloseButton } from 'components/close-button/close-button'
 import { breakpointSmallTablet } from 'common/constants'
-import { breakpointSmallHandset } from 'common/constants' 
+import { breakpointSmallHandset } from 'common/constants'
 import { breakpointTinyHandset } from 'common/constants'
 
 const highlightStyles = css`
-  position: relative; 
-  
+  position: relative;
+
   &:after {
     position: absolute;
     content: '';
@@ -32,7 +32,7 @@ const tooltipStyles = css`
 
   .close {
     color: var(--color-grey10);
-  }  
+  }
 
   h3 {
     margin: 0;
@@ -42,7 +42,7 @@ const tooltipStyles = css`
     font-weight: 500;
     font-size: 36px;
     line-height: 48px;
-  }    
+  }
 
   p {
     margin: 0;
@@ -51,24 +51,24 @@ const tooltipStyles = css`
     font-style: normal;
     font-weight: 400;
     font-size: 19px;
-    line-height: 28px;  
+    line-height: 28px;
   }
 
   ${breakpointSmallTablet} {
-    max-width: 328px; 
+    max-width: 328px;
 
     h3 {
       font-size: 28px;
-      line-height: 36px;      
+      line-height: 36px;
     }
   }
 
   ${breakpointSmallHandset} {
     p {
       font-size: 16px;
-      line-height: 24px;              
+      line-height: 24px;
     }
-  }  
+  }
 
   ${breakpointTinyHandset} {
     max-width: 300px;
@@ -86,7 +86,7 @@ const Tooltip = ({
 
   return (
     <div className={tooltipStyles} {...tooltipProps} >
-      <CloseButton handleClose={closeAction} />      
+      <CloseButton handleClose={closeAction} />
       {step.title && <h3 onClick={clickAction}>{step.title}</h3>}
       <p onClick={clickAction}>{step.content}</p>
     </div>
@@ -111,7 +111,7 @@ export const Onboarding = ({
 
   const highlightElement = (target) => {
     document.querySelector(target)?.classList.add(highlightStyles)
-  }    
+  }
 
   const removeHighlight = (target) => {
     document.querySelector(target)?.classList.remove(highlightStyles)
@@ -123,14 +123,14 @@ export const Onboarding = ({
     if (type === EVENTS.TOOLTIP) {
       highlightElement(steps[index].target)
       impressionEvent(index)
-      return 
+      return
     }
     if (type === EVENTS.STEP_AFTER && action === ACTIONS.CLOSE) dismissEvent(index)
     if (type === EVENTS.STEP_AFTER && action === ACTIONS.NEXT) engagementEvent(index)
     if (status === STATUS.FINISHED) finishEvent()
-    
+
     removeHighlight(steps[index]?.target)
-  }  
+  }
 
   return (
     <Joyride
@@ -140,7 +140,7 @@ export const Onboarding = ({
       callback={onboardingCallback}
       continuous={true}
       disableScrolling={true}
-      tooltipComponent={Tooltip} 
+      tooltipComponent={Tooltip}
       styles={{ options }}
       scrollOffset={50}
       spotlightClicks={true}

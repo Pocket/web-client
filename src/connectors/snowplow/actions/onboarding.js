@@ -137,7 +137,7 @@ export const onboardingActions = {
     eventData: {
       uiType: 'dialog'
     }
-  },  
+  },
   'home.onboarding.read.dismiss': {
     eventType: 'engagement',
     entityTypes: ['ui'],

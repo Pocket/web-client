@@ -46,46 +46,46 @@ export const homeOnboardingReducers = (state = initialState, action) => {
       const { homeOnboarding } = settings
       return { ...state, ...homeOnboarding }
     }
-     
+
     // topic selection skipped
     case HOME_SETUP_SET_STATUS: {
       const { setupStatus } = action
       const running = setupStatus === 'skipped' || state.running
       return { ...state, running }
-    }    
-      
+    }
+
     case HOME_ONBOARDING_SAVE_SHOW: {
       return { ...state, running: true }
-    }      
-      
+    }
+
     case HOME_ONBOARDING_SAVE_DISMISS: {
       return { ...state, currentStep: 1, saveComplete: true, running: false }
     }
-      
+
     case HOME_ONBOARDING_SAVE_IMPRESSION: {
       return { ...state, saveImpression: true }
     }
 
     // on home save or having saved on another page
-    case HOME_SAVE_SUCCESS:   
+    case HOME_SAVE_SUCCESS:
     case HOME_ONBOARDING_READ_SHOW: {
       return { ...state, currentStep: 1, saveComplete: true, running: true }
     }
-      
+
     case HOME_ONBOARDING_READ_DISMISS: {
       return { ...state, currentStep: 2, readComplete: true, running: false }
     }
-      
+
     case HOME_ONBOARDING_READ_IMPRESSION: {
       return { ...state, readImpression: true }
     }
-      
+
     // navigated to reader, won't show again
     case READ_ITEM_SUCCESS:
     case ARTICLE_ITEM_SUCCESS: {
       return { ...state, currentStep: 2, readComplete: true, running: false }
     }
-      
+
     case HOME_ONBOARDING_UNLOAD: {
       return {
         ...state,
@@ -94,11 +94,11 @@ export const homeOnboardingReducers = (state = initialState, action) => {
         readComplete: state.readImpression
       }
     }
-            
+
     case HOME_ONBOARDING_RESET: {
       return { ...initialState }
     }
-      
+
     default:
       return state
   }
@@ -107,7 +107,7 @@ export const homeOnboardingReducers = (state = initialState, action) => {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const homeOnboardingSagas = [
-  takeEvery(HOME_CONTENT_SUCCESS, homeContentLoaded), 
+  takeEvery(HOME_CONTENT_SUCCESS, homeContentLoaded),
   takeEvery(HOME_RECENT_SAVES_SUCCESS, homeSavesLoaded),
   takeLatest([
     HOME_ONBOARDING_SAVE_SHOW,
@@ -116,9 +116,9 @@ export const homeOnboardingSagas = [
     HOME_ONBOARDING_READ_SHOW,
     HOME_ONBOARDING_READ_DISMISS,
     HOME_ONBOARDING_READ_IMPRESSION,
-    HOME_ONBOARDING_UNLOAD,  
+    HOME_ONBOARDING_UNLOAD,
     HOME_ONBOARDING_RESET,
-  ], saveSettings)  
+  ], saveSettings)
 ]
 
 /** SAGAS :: SELECTORS
@@ -145,4 +145,4 @@ function* homeSavesLoaded({ items }) {
 
 function* saveSettings() {
   yield put({ type: SETTINGS_UPDATE })
-} 
+}

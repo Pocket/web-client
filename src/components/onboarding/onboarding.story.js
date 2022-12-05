@@ -8,7 +8,7 @@ export default {
 }
 
 const buttonStyles = css`
-  button { 
+  button {
     margin: 20px;
   }
 `
@@ -24,7 +24,7 @@ const onboardingSteps = [{
   target: '.button-2',
   title: 'Ready to read it?',
   content: 'Read it in Pocket’s calm reading zone.'
-}]  
+}]
 
 export const Walkthrough = () => {
   // Onboarding state
@@ -33,7 +33,7 @@ export const Walkthrough = () => {
 
   // Page state
   const [itemSaved, setItemSaved] = useState(false)
-  
+
   // Button actions
   const startAction = () => {
     setStepIndex(0)
@@ -52,7 +52,7 @@ export const Walkthrough = () => {
     setRunning(false)
     setStepIndex(0)
     setItemSaved(false)
-  }  
+  }
 
   // Onboarding Callbacks
   const handleImpression = () => {
@@ -68,7 +68,7 @@ export const Walkthrough = () => {
     if (index === 0) saveAction()
     if (index === 1) readAction()
   }
-  
+
   const handleFinish = () => setRunning(false)
 
   return (
@@ -80,7 +80,7 @@ export const Walkthrough = () => {
       </div>
 
       <button onClick={resetOnboarding}>Reset</button>
-      
+
       <Onboarding
         steps={onboardingSteps}
         stepIndex={stepIndex}

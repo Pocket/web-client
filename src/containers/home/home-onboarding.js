@@ -6,7 +6,7 @@ import { saveDismissAction } from './home-onboarding.state'
 import { readDismissAction } from './home-onboarding.state'
 import { saveImpressionEvent } from './home-onboarding.state'
 import { readImpressionEvent } from './home-onboarding.state'
-import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'  
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const HomeOnboarding = () => {
   const dispatch = useDispatch()
@@ -32,13 +32,13 @@ export const HomeOnboarding = () => {
     title: 'Ready to read it?',
     content: isInternalItem ? 'Read it in Pocket’s calm reading zone.' : 'Click to read it.',
     placement: 'bottom'
-  }]  
+  }]
 
   useEffect(() => {
     return () => {
-      dispatch(unloadOnboarding()) 
+      dispatch(unloadOnboarding())
     }
-  }, [dispatch]) 
+  }, [dispatch])
 
   // Impression actions
   const saveImpressionAction = () => {
@@ -50,7 +50,7 @@ export const HomeOnboarding = () => {
     dispatch(sendSnowplowEvent('home.onboarding.read.impression'))
     dispatch(readImpressionEvent())
   }
-  
+
   // Engagement actions
   const saveAction = () => {
     if (saveComplete) return
@@ -82,7 +82,7 @@ export const HomeOnboarding = () => {
 
   const handleDismiss = (index) => {
     if (index === 0) saveDismiss()
-    if (index === 1) readDismiss() 
+    if (index === 1) readDismiss()
   }
 
   const handleEngagement = (index) => {
