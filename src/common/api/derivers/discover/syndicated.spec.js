@@ -79,7 +79,7 @@ describe('Syndicated', () => {
   const expectedReadUrl = false
   const expectedPermanentUrl = false
   const expectedSyndicatedUrl = '/explore/item/the-3-minutes-it-takes-to-read-this-will-improve-your-conversations-forever' //prettier-ignore
-  const expectedAnalyticsUrl = 'https://getpocket.com/explore/item/the-3-minutes-it-takes-to-read-this-will-improve-your-conversations-forever' //prettier-ignore
+  const expectedAnalyticsUrl = 'http://getpocket.com/explore/item/the-3-minutes-it-takes-to-read-this-will-improve-your-conversations-forever' //prettier-ignore
 
   const item = deriveRecommendation(recommendationsFromSlate, {
     ...lineupAnalytics,

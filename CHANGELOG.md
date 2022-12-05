@@ -1,3 +1,12 @@
+## [1.66.19](https://github.com/Pocket/web-client/compare/v1.66.18...v1.66.19) (2022-12-05)
+
+
+### Bug Fixes
+
+* **analytics:** add additional meta to error ([357d06d](https://github.com/Pocket/web-client/commit/357d06d79032b7cb21860d9b263380cc09e173ce))
+* **analytics:** add block check to see if `url` is stripped ([86d70d3](https://github.com/Pocket/web-client/commit/86d70d3d1a82e6831e25230121eef12c5130b16c))
+* **analytics:** use given url for analytics ([48dde9f](https://github.com/Pocket/web-client/commit/48dde9f868b1f4e50ea13907b82fed73d78ab276))
+
 ## [1.66.18](https://github.com/Pocket/web-client/compare/v1.66.17...v1.66.18) (2022-12-05)
 
 

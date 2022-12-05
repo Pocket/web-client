@@ -52,7 +52,7 @@ describe('Collection — Page as Home Item', () => {
   const expectedExternalUrl = 'http://getpocket.com/collections/going-down-the-rabbit-hole-why-people-fall-for-conspiracy-theories?utm_source=pocket_home' //prettier-ignore
   const expectedReadUrl = '/collections/going-down-the-rabbit-hole-why-people-fall-for-conspiracy-theories' //prettier-ignore
   const expectedPermanentUrl = false
-  const expectedAnalyticsUrl = 'https://getpocket.com/collections/going-down-the-rabbit-hole-why-people-fall-for-conspiracy-theories' //prettier-ignore
+  const expectedAnalyticsUrl = 'http://getpocket.com/collections/going-down-the-rabbit-hole-why-people-fall-for-conspiracy-theories' //prettier-ignore
 
   const item = deriveItem({ item: collectionAsItem, utmId: 'pocket_home' })
 

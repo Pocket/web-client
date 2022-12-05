@@ -31,7 +31,7 @@ import { BATCH_SIZE } from 'common/constants'
  --------------------------------------------------------------- */
 export const finalizeSnowplow = () => ({ type: SNOWPLOW_INITIALIZED })
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
-export const sendSnowplowEvent = (identifier, data) => ({ type: SNOWPLOW_SEND_EVENT, identifier, data }) //prettier-ignore
+export const sendSnowplowEvent = (identifier, data) => ({ type: SNOWPLOW_SEND_EVENT, identifier, data}) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -153,7 +153,7 @@ const expectationTypes = {
   corpusRecommendationId: 'string'
 }
 
-export function validateSnowplowExpectations({ identifier, expects, data }) {
+export function validateSnowplowExpectations({ identifier, expects, data}) {
   const isDevBuild = process.env.SHOW_DEV === 'included'
 
   // Make sure we are not missing any entities
@@ -179,7 +179,7 @@ export function validateSnowplowExpectations({ identifier, expects, data }) {
   } catch (err) {
     if (isDevBuild) return console.warn(identifier, data, err.message)
     Sentry.withScope((scope) => {
-      scope.setContext('data', { identifier, ...data })
+      scope.setContext('data', { identifier, ...data})
       Sentry.captureMessage(err)
     })
     return false
@@ -227,7 +227,7 @@ export function buildSnowplowCustomEvent({ identifier, data }) {
   return { event, entities, expects }
 }
 
-export function* fireSnowplowEvent({ identifier, data }) {
+export function* fireSnowplowEvent({ identifier, data}) {
   yield call(waitForInitialization)
 
   // Check events are valid

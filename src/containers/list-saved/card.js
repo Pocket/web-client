@@ -89,6 +89,7 @@ export function ItemCard({
   const itemImage = item?.noImage ? '' : item?.thumbnail
   const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
   const { tags } = itemSaved
+  
   /** ITEM DIMENSIONS
   --------------------------------------------------------------- */
 

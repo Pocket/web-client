@@ -16,6 +16,7 @@ const searchSavedItemsQuery = gql`
         edges {
           node {
             savedItem {
+              url
               _createdAt
               _updatedAt
               id

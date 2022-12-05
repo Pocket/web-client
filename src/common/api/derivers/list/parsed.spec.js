@@ -120,7 +120,7 @@ describe('Saves - Parsed', () => {
   const expectedExternalUrl = 'http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html?utm_source=pocket_saves' //prettier-ignore
   const expectedReadUrl = '/read/3362121180' //prettier-ignore
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3362121180'
-  const expectedAnalyticsUrl = 'https://www.nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html' //prettier-ignore
+  const expectedAnalyticsUrl = 'http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html' //prettier-ignore
 
   it('should derive v3 as expected', () => {
     const item = deriveListItem(savedParsedFromV3, true)
