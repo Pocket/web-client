@@ -43,15 +43,11 @@ export function ItemCard({
 
   if (!item) return null
 
-  /** ITEM DETAILS
-   --------------------------------------------------------------- */
   const { isInternalItem, readUrl, externalUrl, analyticsData: passedAnalytics } = item
-  const itemImage = item?.noImage ? '' : item?.thumbnail
-  const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item 
-  const { tags } = itemSaved
-
   const openUrl = readUrl || externalUrl
   const showExcerpt = type === 'detail'
+
+  const onImageFail = () => dispatch(setNoImage(id))
 
   const analyticsData = {
     ...passedAnalytics,
@@ -60,9 +56,6 @@ export function ItemCard({
     destination: isInternalItem ? 'internal' : 'external',
     label: type
   }
-
-  const analyticsMeta = {title, publisher, isSyndicated}
-
 
   /** ITEM TRACKING
   --------------------------------------------------------------- */
@@ -75,7 +68,7 @@ export function ItemCard({
 
   const onItemInView = (inView) => {
     if (!impressionFired && inView) {
-      dispatch(sendSnowplowEvent('saves.card.impression', analyticsData, analyticsMeta))
+      dispatch(sendSnowplowEvent('saves.card.impression', analyticsData))
     }
   }
 
@@ -90,8 +83,13 @@ export function ItemCard({
   --------------------------------------------------------------- */
   const shortcutSelect = () => dispatch(selectShortcutItem(id, position))
   const ActionMenu = bulkEdit ? ActionsBulk : ActionsSaves
-  const onImageFail = () => dispatch(setNoImage(id))
 
+  /** ITEM DETAILS
+  --------------------------------------------------------------- */
+  const itemImage = item?.noImage ? '' : item?.thumbnail
+  const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
+  const { tags } = itemSaved
+  
   /** ITEM DIMENSIONS
   --------------------------------------------------------------- */
 

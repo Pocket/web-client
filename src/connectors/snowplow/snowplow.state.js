@@ -31,7 +31,7 @@ import { BATCH_SIZE } from 'common/constants'
  --------------------------------------------------------------- */
 export const finalizeSnowplow = () => ({ type: SNOWPLOW_INITIALIZED })
 export const trackPageView = () => ({ type: SNOWPLOW_TRACK_PAGE_VIEW })
-export const sendSnowplowEvent = (identifier, data, meta) => ({ type: SNOWPLOW_SEND_EVENT, identifier, data, meta}) //prettier-ignore
+export const sendSnowplowEvent = (identifier, data) => ({ type: SNOWPLOW_SEND_EVENT, identifier, data}) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -153,7 +153,7 @@ const expectationTypes = {
   corpusRecommendationId: 'string'
 }
 
-export function validateSnowplowExpectations({ identifier, expects, data, meta = {}}) {
+export function validateSnowplowExpectations({ identifier, expects, data}) {
   const isDevBuild = process.env.SHOW_DEV === 'included'
 
   // Make sure we are not missing any entities
@@ -179,14 +179,14 @@ export function validateSnowplowExpectations({ identifier, expects, data, meta =
   } catch (err) {
     if (isDevBuild) return console.warn(identifier, data, err.message)
     Sentry.withScope((scope) => {
-      scope.setContext('data', { identifier, ...data, ...meta})
+      scope.setContext('data', { identifier, ...data})
       Sentry.captureMessage(err)
     })
     return false
   }
 }
 
-export function buildSnowplowCustomEvent({ identifier, data, meta }) {
+export function buildSnowplowCustomEvent({ identifier, data }) {
   const { eventType, entityTypes, eventData, batchEntityTypes, expects } = analyticsActions[identifier] //prettier-ignore
   const isBatch = batchEntityTypes
 
@@ -196,7 +196,7 @@ export function buildSnowplowCustomEvent({ identifier, data, meta }) {
       validateSnowplowExpectations({ identifier, expects, data: batchData })
     )
   } else {
-    validateSnowplowExpectations({ identifier, expects, data, meta })
+    validateSnowplowExpectations({ identifier, expects, data })
   }
 
   // Build event
@@ -227,7 +227,7 @@ export function buildSnowplowCustomEvent({ identifier, data, meta }) {
   return { event, entities, expects }
 }
 
-export function* fireSnowplowEvent({ identifier, data, meta}) {
+export function* fireSnowplowEvent({ identifier, data}) {
   yield call(waitForInitialization)
 
   // Check events are valid
@@ -235,7 +235,7 @@ export function* fireSnowplowEvent({ identifier, data, meta}) {
   if (!eventType) return console.warn('No action for this event!')
 
   // Build custom events
-  const { event, entities } = yield buildSnowplowCustomEvent({ identifier, data, meta })
+  const { event, entities } = yield buildSnowplowCustomEvent({ identifier, data })
 
   // Tracking impressions using id or url
   if (eventType === 'impression') {
