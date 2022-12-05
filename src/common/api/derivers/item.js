@@ -232,7 +232,6 @@ export function deriveItemData({
     analyticsData: {
       id: item?.itemId || node?.id || false,
       url: analyticsUrl({ node, item, itemEnrichment }),
-      blockCheck: analyticsUrl({ node, item, itemEnrichment }),
       ...analyticsData
     }
   }
