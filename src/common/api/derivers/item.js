@@ -231,7 +231,7 @@ export function deriveItemData({
     fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
       id: item?.itemId || node?.id || false,
-      url: analyticsUrl({ item, itemEnrichment }),
+      url: analyticsUrl({ node, item, itemEnrichment }),
       ...analyticsData
     }
   }
@@ -360,8 +360,8 @@ function saveUrl({ item, itemEnrichment }) {
  * @param {object} item An item returned from the server
  * @returns {string} The url that should be passed to analytics
  */
-function analyticsUrl({ item, itemEnrichment }) {
-  return item?.resolvedUrl || item?.givenUrl || itemEnrichment?.url || false
+function analyticsUrl({ node, item, itemEnrichment }) {
+  return node?.url || item?.givenUrl || itemEnrichment?.url || false
 }
 
 /** READ URl

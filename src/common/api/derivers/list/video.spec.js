@@ -131,7 +131,7 @@ describe('Saves - Videos', () => {
   const expectedExternalUrl = 'https://www.youtube.com/watch?utm_source=pocket_saves&v=1AnG04qnLqI' //prettier-ignore
   const expectedReadUrl = '/read/2815325547' //prettier-ignore
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=2815325547'
-  const expectedAnalyticsUrl = 'http://www.youtube.com/watch?v=1AnG04qnLqI'
+  const expectedAnalyticsUrl = 'https://www.youtube.com/watch?v=1AnG04qnLqI'
 
   it('should derive v3 as expected', () => {
     const item = deriveListItem(savedVideoFromV3, true)

@@ -74,7 +74,7 @@ describe('Home', () => {
   const expectedExternalUrl = 'http://getpocket.com/explore/item/people-think-what-you-do-with-your-shopping-cart-when-you-re-done-with-it-says-a-lot-about-you?utm_source=pocket_home' //prettier-ignore
   const expectedReadUrl = false
   const expectedPermanentUrl = false
-  const expectedAnalyticsUrl = 'https://getpocket.com/explore/item/people-think-what-you-do-with-your-shopping-cart-when-you-re-done-with-it-says-a-lot-about-you' //prettier-ignore
+  const expectedAnalyticsUrl = 'http://getpocket.com/explore/item/people-think-what-you-do-with-your-shopping-cart-when-you-re-done-with-it-says-a-lot-about-you' //prettier-ignore
 
   const item = deriveRecommendation(
     recommendationsFromSlate,

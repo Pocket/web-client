@@ -15,6 +15,7 @@ const getSavedItemsQuery = gql`
         edges {
           cursor
           node {
+            url
             _createdAt
             _updatedAt
             id

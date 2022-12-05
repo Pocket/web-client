@@ -110,7 +110,7 @@ describe('Profile - Parsed', () => {
   const expectedExternalUrl = 'https://medium.com/life-learning/it-s-much-easier-than-you-think-to-live-the-life-you-want-41e8356660bc?utm_source=pocket_profile' //prettier-ignore
   const expectedReadUrl = false
   const expectedPermanentUrl = false
-  const expectedAnalyticsUrl = 'https://medium.com/the-mission/it-s-much-easier-than-you-think-to-live-the-life-you-want-41e8356660bc' //prettier-ignore
+  const expectedAnalyticsUrl = 'https://medium.com/life-learning/it-s-much-easier-than-you-think-to-live-the-life-you-want-41e8356660bc#.f1mva9pd9' //prettier-ignore
 
   it('should derive v3 as expected', () => {
     const item = deriveProfile(profileFromV3, true)
