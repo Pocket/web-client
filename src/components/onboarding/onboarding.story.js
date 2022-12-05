@@ -1,4 +1,4 @@
-import { Onboarding } from './joyride'
+import { Onboarding } from './onboarding'
 import { useState } from 'react'
 import { css } from 'linaria'
 
@@ -7,7 +7,7 @@ export default {
   component: Onboarding
 }
 
-const joyrideStyles = css`
+const buttonStyles = css`
   button { 
     margin: 20px;
   }
@@ -26,7 +26,7 @@ const onboardingSteps = [{
   content: 'Read it in Pocket’s calm reading zone.'
 }]  
 
-export const Joyride = () => {
+export const Walkthrough = () => {
   // Onboarding state
   const [stepIndex, setStepIndex] = useState(0)
   const [running, setRunning] = useState(false)
@@ -72,7 +72,7 @@ export const Joyride = () => {
   const handleFinish = () => setRunning(false)
 
   return (
-    <div className={joyrideStyles}>
+    <div className={buttonStyles}>
       <div>
         <button onClick={startAction}>Start Onboarding!</button>
         <button className="button-1" onClick={saveAction}>Save button!</button>

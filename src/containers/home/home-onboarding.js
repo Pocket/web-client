@@ -1,67 +1,94 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Onboarding } from 'components/onboarding/joyride'
-import { incrementOnboardingStep } from './home-onboarding.state'
-import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-
-const onboardingSteps = [{
-  disableBeacon: true,
-  target: '.card-actions',
-  title: 'Find an article interesting but pressed for time?',
-  content: <>Hit <strong>Save</strong> to unlock the power of Pocket and read it later.</>,
-  placement: 'right-end'
-}, {
-  disableBeacon: true,
-  target: '[data-cy=recent-saves] [data-cy^="article-card-"]',
-  title: 'Ready to read it?',
-  content: 'Read it in Pocket’s calm reading zone.',
-  placement: 'right-end'
-}]  
+import { Onboarding } from 'components/onboarding/onboarding'
+import { unloadOnboarding } from './home-onboarding.state'
+import { saveDismissAction } from './home-onboarding.state'
+import { readDismissAction } from './home-onboarding.state'
+import { saveImpressionEvent } from './home-onboarding.state'
+import { readImpressionEvent } from './home-onboarding.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'  
 
 export const HomeOnboarding = () => {
   const dispatch = useDispatch()
 
-  // Onboarding state
-  const [running, setRunning] = useState(false)
-
+  const running = useSelector((state) => state.homeOnboarding.running)
   const currentStep = useSelector((state) => state.homeOnboarding.currentStep)
-
-  const setupStatus = useSelector((state) => state.homeSetup.setupStatus)
-  const isFinalized = useSelector((state) => state.homeSetup.finalizedTopics)
+  const saveComplete = useSelector((state) => state.homeOnboarding.saveComplete)
+  const readComplete = useSelector((state) => state.homeOnboarding.readComplete)
   const recentSaves = useSelector((state) => state.home.recentSaves)
 
+  const recentItem = useSelector((state) => state.savesItemsById[recentSaves[0]])
+  const isInternalItem = recentItem?.isInternalItem
+
+  const onboardingSteps = [{
+    disableBeacon: true,
+    target: '[data-cy^="article-save-btn"]',
+    title: 'Find an article interesting but pressed for time?',
+    content: <>Hit <strong>Save</strong> to unlock the power of Pocket and read it later.</>,
+    placement: 'right-end'
+  }, {
+    disableBeacon: true,
+    target: '[data-cy=recent-saves] [data-cy^="article-card-"]',
+    title: 'Ready to read it?',
+    content: isInternalItem ? 'Read it in Pocket’s calm reading zone.' : 'Click to read it.',
+    placement: 'bottom'
+  }]  
+
   useEffect(() => {
-    setTimeout(() => setRunning(true), 1500)
-  }, [])
+    return () => {
+      dispatch(unloadOnboarding()) 
+    }
+  }, [dispatch]) 
+
+  // Impression actions
+  const saveImpressionAction = () => {
+    dispatch(sendSnowplowEvent('home.onboarding.save.impression'))
+    dispatch(saveImpressionEvent())
+  }
+
+  const readImpressionAction = () => {
+    dispatch(sendSnowplowEvent('home.onboarding.read.impression'))
+    dispatch(readImpressionEvent())
+  }
   
-  // Button actions
+  // Engagement actions
   const saveAction = () => {
-    console.log('send snowplow event')
+    if (saveComplete) return
+    dispatch(sendSnowplowEvent('home.onboarding.save.click'))
     document.querySelector('.card-actions').click()
   }
 
   const readAction = () => {
-    console.log('send snowplow event')
-    document.querySelector('[data-cy=recent-saves] [data-cy^="article-card-"]').click()
+    if (readComplete) return
+    dispatch(sendSnowplowEvent('home.onboarding.read.click'))
+    document.querySelector('[data-cy=recent-saves] [data-cy^="article-card-"] a').click()
+  }
+
+  const saveDismiss = () => {
+    dispatch(sendSnowplowEvent('home.onboarding.save.dismiss'))
+    dispatch(saveDismissAction())
+  }
+
+  const readDismiss = () => {
+    dispatch(sendSnowplowEvent('home.onboarding.read.dismiss'))
+    dispatch(readDismissAction())
   }
 
   // Onboarding Callbacks
-  const handleImpression = () => {
-    console.log('send impression event')
+  const handleImpression = (index) => {
+    if (index === 0) saveImpressionAction()
+    if (index === 1) readImpressionAction()
   }
 
   const handleDismiss = (index) => {
-    setRunning(false)
-    console.log('send dismiss event', index)
-    dispatch(incrementOnboardingStep(index))
+    if (index === 0) saveDismiss()
+    if (index === 1) readDismiss() 
   }
 
   const handleEngagement = (index) => {
     if (index === 0) saveAction()
     if (index === 1) readAction()
   }
-  
-  const handleFinish = () => setRunning(false)
 
   return (
     <Onboarding
@@ -71,7 +98,6 @@ export const HomeOnboarding = () => {
       impressionEvent={handleImpression}
       dismissEvent={handleDismiss}
       engagementEvent={handleEngagement}
-      finishEvent={handleFinish}
     />
   )
 }

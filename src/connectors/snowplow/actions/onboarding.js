@@ -100,5 +100,49 @@ export const onboardingActions = {
     eventData: {
       uiType: 'button'
     }
-  }
+  },
+  'home.onboarding.save.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'dialog'
+    }
+  },
+  'home.onboarding.save.click': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'dialog'
+    }
+  },
+  'home.onboarding.save.dismiss': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    }
+  },
+  'home.onboarding.read.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'dialog'
+    }
+  },
+  'home.onboarding.read.click': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'dialog'
+    }
+  },  
+  'home.onboarding.read.dismiss': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    }
+  },
 }

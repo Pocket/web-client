@@ -85,7 +85,7 @@ export const settingsSagas = [
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 const getSettings = (state) => state.settings
-const getOnboarding = (state) => state.onboarding
+const getHomeOnboarding = (state) => state.homeOnboarding
 const getBraze = (state) => state.braze?.brazeSubscribed
 const getSetupState = (state) => state.homeSetup
 
@@ -103,12 +103,12 @@ function* fetchSettings() {
 function* saveSettings() {
   try {
     const storedSettings = yield select(getSettings)
-    const onboarding = yield select(getOnboarding)
+    const homeOnboarding = yield select(getHomeOnboarding)
     const brazeSubscribed = yield select(getBraze)
     const { setupStatus, userTopics } = yield select(getSetupState)
     const settings = {
       ...storedSettings,
-      onboarding,
+      homeOnboarding,
       brazeSubscribed,
       setupStatus,
       userTopics
