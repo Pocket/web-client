@@ -1,3 +1,10 @@
+## [1.66.20](https://github.com/Pocket/web-client/compare/v1.66.19...v1.66.20) (2022-12-05)
+
+
+### Bug Fixes
+
+* **analytics:** re-adding resolvedURL for recs ([04b6b90](https://github.com/Pocket/web-client/commit/04b6b90572ced9a43721b04a3e2d66264ce928ce))
+
 ## [1.66.19](https://github.com/Pocket/web-client/compare/v1.66.18...v1.66.19) (2022-12-05)
 
 
