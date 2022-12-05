@@ -361,7 +361,7 @@ function saveUrl({ item, itemEnrichment }) {
  * @returns {string} The url that should be passed to analytics
  */
 function analyticsUrl({ node, item, itemEnrichment }) {
-  return node?.url || item?.givenUrl || itemEnrichment?.url || false
+  return node?.url || item?.givenUrl || item?.resolvedUrl || itemEnrichment?.url || false
 }
 
 /** READ URl
