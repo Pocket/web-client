@@ -1,3 +1,84 @@
+## [1.66.18](https://github.com/Pocket/web-client/compare/v1.66.17...v1.66.18) (2022-12-05)
+
+
+### Bug Fixes
+
+* **sort order:** disable current order ([6b43f99](https://github.com/Pocket/web-client/commit/6b43f99baf3c03591de0edb4b3e6698fc33eb431))
+
+## [1.66.17](https://github.com/Pocket/web-client/compare/v1.66.16...v1.66.17) (2022-12-01)
+
+
+### Bug Fixes
+
+* **tagging:** fetch user tags from the graph ([05f6e99](https://github.com/Pocket/web-client/commit/05f6e99acd4efc9283d121bc2ef54a866a57cc53))
+
+## [1.66.16](https://github.com/Pocket/web-client/compare/v1.66.15...v1.66.16) (2022-12-01)
+
+
+### Bug Fixes
+
+* **snowplow:**  entityType in reader display ([5d4c6a4](https://github.com/Pocket/web-client/commit/5d4c6a4d746e5474e0f7746cc4465bd1de37bbe4))
+* **snowplow:** update validation for batch ([00b6046](https://github.com/Pocket/web-client/commit/00b6046d2ccd29f721524d5452be407d5d27604b))
+
+## [1.66.15](https://github.com/Pocket/web-client/compare/v1.66.14...v1.66.15) (2022-11-30)
+
+
+### Bug Fixes
+
+* **snowplow:** add fallback to saved item id ([6b2383a](https://github.com/Pocket/web-client/commit/6b2383ab99476a161540e74e4da8ea78b5bb2949))
+* **snowplow:** avoid duplicate impressions ([e4c0759](https://github.com/Pocket/web-client/commit/e4c0759e089bda08e2f983e66167dd03ead5045f))
+
+## [1.66.14](https://github.com/Pocket/web-client/compare/v1.66.13...v1.66.14) (2022-11-30)
+
+
+### Bug Fixes
+
+* **collections index:** update German metadata title & description ([6cc4bea](https://github.com/Pocket/web-client/commit/6cc4bea43063dd02863fb969867ef88c816066b4))
+
+## [1.66.13](https://github.com/Pocket/web-client/compare/v1.66.12...v1.66.13) (2022-11-30)
+
+
+### Bug Fixes
+
+* **collections index:** add German-specific metadata description & image ([a5137e3](https://github.com/Pocket/web-client/commit/a5137e389df7cb0284186967d2719895963f6fe4))
+
+## [1.66.12](https://github.com/Pocket/web-client/compare/v1.66.11...v1.66.12) (2022-11-30)
+
+
+### Bug Fixes
+
+* **bestOfImage:** update best of image link for metadata ([c93765f](https://github.com/Pocket/web-client/commit/c93765f2f1f364ffc361e2a751b209b30802640b))
+* **collections index:** update metadata for Best Of campaign ([60905e2](https://github.com/Pocket/web-client/commit/60905e2955b908c5d1b2393dc0ac638788b94e1a))
+
+## [1.66.11](https://github.com/Pocket/web-client/compare/v1.66.10...v1.66.11) (2022-11-30)
+
+
+### Bug Fixes
+
+* **bestof:** release best of 2022 banner ([281b140](https://github.com/Pocket/web-client/commit/281b1406caa5207cb1198481fa5de7cb0f5c8c91))
+
+## [1.66.10](https://github.com/Pocket/web-client/compare/v1.66.9...v1.66.10) (2022-11-29)
+
+
+### Bug Fixes
+
+* **api:** log out api in use ([8ede150](https://github.com/Pocket/web-client/commit/8ede150c56685879afa4a22c2a930212a5d02cc3))
+* **sentry:** add assignment tags to global scope ([61d5196](https://github.com/Pocket/web-client/commit/61d5196ce7f839aa8e24628b80c3b02a337b339f))
+
+## [1.66.9](https://github.com/Pocket/web-client/compare/v1.66.8...v1.66.9) (2022-11-29)
+
+
+### Bug Fixes
+
+* **bestof:** best of 2022 collections need to be marked as external ([2437b5d](https://github.com/Pocket/web-client/commit/2437b5d88ca19e6f7b3316d0942c45cbb66dab9a))
+
+## [1.66.8](https://github.com/Pocket/web-client/compare/v1.66.7...v1.66.8) (2022-11-29)
+
+
+### Bug Fixes
+
+* **reader:** add commas between multiple authors ([9967aa7](https://github.com/Pocket/web-client/commit/9967aa707dedc3a74faebdb9956c67156202bcef))
+
 ## [1.66.7](https://github.com/Pocket/web-client/compare/v1.66.6...v1.66.7) (2022-11-21)
 
 

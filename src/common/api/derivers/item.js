@@ -230,7 +230,7 @@ export function deriveItemData({
     timeToRead: readTime({ item }),
     fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
-      id: item?.itemId || false,
+      id: item?.itemId || node?.id || false,
       url: analyticsUrl({ item, itemEnrichment }),
       ...analyticsData
     }
@@ -426,6 +426,10 @@ function isCollection({ item }) {
 
   const urlToTest = item?.resolvedUrl
   if (!urlToTest) return false
+
+  // Related to best of 2022, remove once redirects have been removed
+  if (urlToTest.includes('die-besten-artikel-2022')) return false
+  if (urlToTest.includes('pocket-best-articles-2022')) return false
 
   const pattern = /.+?getpocket\.com\/(?:[a-z]{2}(?:-[a-zA-Z]{2})?\/)?collections\/(?!\?).+/gi
   return !!urlToTest.match(pattern)

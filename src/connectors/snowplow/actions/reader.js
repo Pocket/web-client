@@ -68,7 +68,8 @@ export const readerActions = {
       component: 'ui',
       uiType: 'dialog'
     },
-    description: 'Upgrade modal that appears when a non-premium user attempts to make a 4th highlight'
+    description:
+      'Upgrade modal that appears when a non-premium user attempts to make a 4th highlight'
   },
   'reader.display-settings': {
     eventType: 'impression',
@@ -154,7 +155,7 @@ export const readerActions = {
   },
   'reader.display': {
     eventType: 'engagement',
-    batchEntityTypes: ['ui'],
+    entityTypes: ['ui'],
     eventData: {
       uiType: 'button'
     },

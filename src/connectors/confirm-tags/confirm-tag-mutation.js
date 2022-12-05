@@ -36,7 +36,7 @@ export function MutationTaggingModal() {
   const tagSuggestions = useSelector((state) => state.mutationTagging.tagSuggestions)
   const tagSuggestionStatus = useSelector((state) => state.mutationTagging.tagSuggestionStatus)
   const tagsSince = useSelector((state) => state.userTags.since)
-  const allTags = useSelector((state) => state.userTags.tagsList)
+  const allTags = useSelector((state) => state.userTags.tagNames)
 
   const showModal = itemsToTag?.length > 0
   const isSingleTag = itemsToTag.length === 1
@@ -107,7 +107,6 @@ export function MutationTaggingModal() {
   }, [itemsToTag, isPremium, dispatch])
 
   useEffect(() => {
-    if (tagsSince) return
     dispatch(requestUserTags())
   }, [dispatch, tagsSince])
 
@@ -154,7 +153,7 @@ export function MutationTaggingModal() {
             // Passed Props
             addTag={handleAdd}
           />
-          {allTags.length > 0 ? (
+          {allTags?.length > 0 ? (
             <TypeAhead
               reFocus={setFocus}
               setValue={addTag}

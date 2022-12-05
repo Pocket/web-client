@@ -76,15 +76,21 @@ export const readerSettingsSagas = [
  --------------------------------------------------------------- */
 
 function* saveDisplaySettings({ type, ...settings }) {
-  yield Object.keys(settings).forEach((val) => {
+  
+  const settingKeys = Object.keys(settings)
+  yield settingKeys.forEach((val) => {
     localStore.setItem(val.toString(), settings[val])
   })
 
   const identifier = 'reader.display'
-  const data = Object.keys(settings).map((label) => ({
-    value: settings[label]?.toString(),
-    label
-  }))
+  
+  // We only pass one of these at a time but we need to break them into expected format
+  // So we take the name of the first value and apply it to the original object
+  const label = settingKeys[0]
+  const value = settings[label]?.toString()
+  const data = {label, value}
+
+
   yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 }
 
