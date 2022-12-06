@@ -23,9 +23,6 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     const savesLink = queryString.stringifyUrl({ url: `${langPrefix}/saves`, query })
     const homeLink = queryString.stringifyUrl({ url: '/home', query })
 
-    const { sess_guid } = req.cookies
-    if (!sess_guid) throw new WaypointNoSessGuidError()
-
     const response = await getUserInfo(true, req?.headers?.cookie)
     const { user_id, birth } = response?.user || {}
     if (!user_id) throw new WaypointNoUserIdError()
@@ -66,13 +63,6 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
         destination: '/saves'
       }
     }
-  }
-}
-
-class WaypointNoSessGuidError extends Error {
-  constructor(message) {
-    super(message)
-    this.name = 'WaypointNoSessGuidError'
   }
 }
 
