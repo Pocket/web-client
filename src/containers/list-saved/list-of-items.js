@@ -18,22 +18,22 @@ const LIST_DIMENSIONS = {
     screenLargeDesktop: ['100%', 75, 1],
     screenMediumDesktop: ['100%', 75, 1],
     screenSmallDesktop: ['100%', 75, 1],
-    screenTinyTablet: ['100%', 75, 1],
+    screenLargeTablet: ['100%', 75, 1],
     screenSmallTablet: ['100%', 75, 1],
     screenMediumTablet: ['100%', 75, 1],
-    screenLargeTablet: ['100%', 75, 1],
+    screenTinyTablet: ['100%', 75, 1],
     screenLargeHandset: ['100%', 75, 1],
     screenMediumHandset: ['100%', 130, 1],
+    screenSmallHandset: ['100%', 130, 1],
     screenTinyHandset: ['100%', 130, 1],
-    screenSmallHandset: ['100%', 130, 1]
   },
   grid: {
-    screenLargeDesktop: [295, 361, 3],
-    screenMediumDesktop: [295, 361, 3],
-    screenSmallDesktop: [295, 361, 3],
-    screenLargeTablet: [295, 361, 3],
-    screenMediumTablet: [295, 361, 3],
-    screenSmallTablet: [295, 326, 3],
+    screenLargeDesktop: [0.24, 361, 3],
+    screenMediumDesktop: [0.24, 361, 3],
+    screenSmallDesktop: [0.24, 361, 3],
+    screenLargeTablet: [0.28, 361, 3],
+    screenMediumTablet: [0.28, 361, 3],
+    screenSmallTablet: [0.28, 326, 3],
     screenTinyTablet: ['100%', 174, 1],
     screenLargeHandset: ['100%', 154, 1],
     screenMediumHandset: ['100%', 154, 1],
@@ -44,14 +44,15 @@ const LIST_DIMENSIONS = {
     screenLargeDesktop: ['100%', 160, 1],
     screenMediumDesktop: ['100%', 160, 1],
     screenSmallDesktop: ['100%', 160, 1],
+    screenSmallerDesktop: ['100%', 160, 1],
     screenTinyTablet: ['100%', 185, 1],
-    screenSmallTablet: ['100%', 185, 1],
-    screenMediumTablet: ['100%', 185, 1],
     screenLargeTablet: ['100%', 185, 1],
+    screenMediumTablet: ['100%', 185, 1],
+    screenSmallTablet: ['100%', 185, 1],
     screenLargeHandset: ['100%', 185, 1],
     screenMediumHandset: ['100%', 180, 1],
+    screenSmallHandset: ['100%', 185, 1],
     screenTinyHandset: ['100%', 185, 1],
-    screenSmallHandset: ['100%', 185, 1]
   }
 }
 
@@ -67,7 +68,8 @@ export const ListOfItems = () => {
 
   // Set up state to track for virtualization
   const breakpoint = getBreakpoint(viewport.width)
-  const [width, height, columnCount] = LIST_DIMENSIONS[type][breakpoint]
+  const [widthPercentage, height, columnCount] = LIST_DIMENSIONS[type][breakpoint] //width
+  const width = typeof widthPercentage === 'string' ? widthPercentage : Math.min(Math.ceil(viewport.width*widthPercentage), 295)
 
   const itemsOnScreen = 30
   const verticalPadding = 15
