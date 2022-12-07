@@ -62,18 +62,6 @@ export default {
         ]
       }
     },
-    clamp: {
-      control: {
-        type: 'inline-radio',
-        options: [false, true]
-      }
-    },
-    sideBySide: {
-      control: {
-        type: 'inline-radio',
-        options: [false, true]
-      }
-    },
     Actions: {
       control: {
         type: 'inline-radio',
@@ -176,13 +164,9 @@ Item.args = {
   isFavorite: false,
   isArchive: false,
   isPremium: false,
-  fromPartner: true, // This is so we can superseded this with the selector
+  isInternalItem: false,
+  fromPartner: true, // This is so we can supersede this with the selector
   clamp: false,
   partnerType: false,
   sideBySide: false
-}
-
-function sanitizeString(str) {
-  str = str.replace(/[^a-z0-9áéíóúñü \\.,_-]/gim, '')
-  return str.trim()
 }
