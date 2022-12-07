@@ -9,7 +9,6 @@ import { SavedActions, DiscoveryActions } from './item-actions'
 const savesItems = Object.values(savesResponse.edges).map((item) => {
   let derivedItem = deriveListItem(item)
   derivedItem['storyName'] = item.storybookContext
-  console.log({ derivedItem })
   return derivedItem
 })
 

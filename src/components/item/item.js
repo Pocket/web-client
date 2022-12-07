@@ -425,6 +425,20 @@ const itemStyles = css`
     grid-column-gap: var(--footer-column-gap);
   }
 
+  .footerActions {
+    button {
+      margin-right: 1rem;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+
+    .icon {
+      color: var(--color-textTertiary);
+    }
+  }
+
   cite.details {
     grid-column: var(--details-column);
     grid-row: var(--details-row);
