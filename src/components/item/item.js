@@ -1,11 +1,12 @@
 import { css, cx } from 'linaria'
-import { SyndicatedIcon } from 'components/icons/SyndicatedIcon'
-
-import { CardMedia } from 'components/items-media/card-media'
 import Link from 'next/link'
-import ReactMarkdown from 'react-markdown'
-import { ItemTags } from 'components/item-tags/item-tags'
 import { useTranslation } from 'next-i18next'
+import ReactMarkdown from 'react-markdown'
+import { SyndicatedIcon } from 'components/icons/SyndicatedIcon'
+import { NewViewIcon } from 'components/icons/NewViewIcon'
+import { CardMedia } from 'components/items-media/card-media'
+import { ItemTags } from 'components/item-tags/item-tags'
+import { breakpointSmallTablet } from 'common/constants'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
 
@@ -84,7 +85,12 @@ export const Item = (props) => {
           rel={linkRel}>
           <div className="content">
             {fromPartner ? <PartnerOverline partnerType={partnerType} /> : null}
-            <h2 className={cx('title', openInNewTab && 'open-external')}>{title}</h2>
+            <h2 className={cx('title', openInNewTab && 'open-external')}>
+              {title}{' '}
+              {openInNewTab ? (
+                <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
+              ) : null}
+            </h2>
             <Excerpt useMarkdown={useMarkdown} excerpt={excerpt} />
           </div>
         </a>
@@ -263,6 +269,10 @@ const itemStyles = css`
   // What happens when we hover over the main card
   &:hover {
     box-shadow: var(--card-hover-shadow);
+    .view-original {
+      opacity: 1;
+      transition: opacity 300ms ease-in-out;
+    }
   }
 
   & > a {
@@ -288,6 +298,32 @@ const itemStyles = css`
     span,
     img {
       border-radius: var(--media-radius);
+    }
+  }
+
+  .view-original {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+    background: rgba(26, 26, 26, 0.7);
+    color: var(--color-white100);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    z-index: 10;
+    padding: 0.25rem 0.825rem;
+
+    ${breakpointSmallTablet} {
+      display: none;
+    }
+
+    .view-original-text + .icon {
+      margin-left: 0.25rem;
+      margin-top: 0;
     }
   }
 
@@ -333,6 +369,21 @@ const itemStyles = css`
     font-size: var(--title-size);
     margin: var(--title-margin);
     line-height: var(--title-line-height);
+
+    &.open-external {
+      a {
+        margin-right: 0;
+        ${breakpointSmallTablet} {
+          margin-right: 0.5rem;
+        }
+      }
+      .mobile-view-original {
+        display: none;
+        ${breakpointSmallTablet} {
+          display: inline-block;
+        }
+      }
+    }
   }
 
   &.clamped .title {
