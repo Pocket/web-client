@@ -81,7 +81,12 @@ export const OverflowAction = function ({ toggleLabel, menuItems, placement }) {
 
   return (
     <>
-      <button data-cy="overflow" className={menuItemStyle} onClick={handleClick} ref={popTrigger}>
+      <button
+        data-cy="overflow"
+        className={menuItemStyle}
+        onClick={handleClick}
+        ref={popTrigger}
+        aria-label="overflow-menu">
         <OverflowMenuIcon />
         {toggleLabel ? <div className="actionCopy">{toggleLabel}</div> : null}
       </button>

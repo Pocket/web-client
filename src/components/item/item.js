@@ -429,13 +429,22 @@ const itemStyles = css`
     button {
       margin-right: 1rem;
 
+      ${breakpointSmallTablet} {
+        // might need to tweak this breakpoint
+        margin-right: 0.5rem;
+      }
+
       &:last-of-type {
         margin-right: 0;
       }
     }
 
     .icon {
-      color: var(--color-textTertiary);
+      color: var(--color-textSecondary);
+
+      &.active {
+        color: var(--color-amber);
+      }
     }
   }
 
@@ -445,7 +454,7 @@ const itemStyles = css`
     font-style: normal;
     font-size: var(--details-size);
     line-height: 1.25;
-    color: var(--color-textTertiary);
+    color: var(--color-textSecondary);
   }
 
   .publisherLogo {
