@@ -32,6 +32,9 @@ const tooltipStyles = css`
 
   .close {
     color: var(--color-grey10);
+    &:hover {
+      color: var(--color-textLinkHover);
+    }
   }
 
   h3 {
@@ -109,19 +112,19 @@ export const Onboarding = ({
     zIndex: -99 // Base zIndex is 100, subtract 99 to prevent conflict with GlobalNav 🙄
   }
 
-  const highlightElement = (target) => {
-    document.querySelector(target)?.classList.add(highlightStyles)
+  const highlightElement = (target, styles) => {
+    document.querySelector(target)?.classList.add(styles || highlightStyles)
   }
 
-  const removeHighlight = (target) => {
-    document.querySelector(target)?.classList.remove(highlightStyles)
+  const removeHighlight = (target, styles) => {
+    document.querySelector(target)?.classList.remove(styles || highlightStyles)
   }
 
   const onboardingCallback = (data) => {
     const { action, index, status, type } = data
 
     if (type === EVENTS.TOOLTIP) {
-      highlightElement(steps[index].target)
+      highlightElement(steps[index].target, steps[index].outline)
       impressionEvent(index)
       return
     }
@@ -129,7 +132,7 @@ export const Onboarding = ({
     if (type === EVENTS.STEP_AFTER && action === ACTIONS.NEXT) engagementEvent(index)
     if (status === STATUS.FINISHED) finishEvent()
 
-    removeHighlight(steps[index]?.target)
+    removeHighlight(steps[index]?.target, steps[index]?.outline)
   }
 
   return (

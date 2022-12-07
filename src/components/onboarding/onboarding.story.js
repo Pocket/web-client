@@ -7,6 +7,22 @@ export default {
   component: Onboarding
 }
 
+const outlineStyles = css`
+  position: relative;
+
+  &:after {
+    position: absolute;
+    content: '';
+    height: calc(100% + 1rem);
+    width: calc(100% + 1.5rem);
+    top: -0.5rem;
+    left: -0.75rem;
+    border: 3px solid red;
+    border-radius: 16px;
+    pointer-events: none;
+  }
+`
+
 const buttonStyles = css`
   button {
     margin: 20px;
@@ -23,7 +39,8 @@ const onboardingSteps = [{
   disableBeacon: true,
   target: '.button-2',
   title: 'Ready to read it?',
-  content: 'Read it in Pocket’s calm reading zone.'
+  content: 'Read it in Pocket’s calm reading zone.',
+  outline: outlineStyles
 }]
 
 export const Walkthrough = () => {

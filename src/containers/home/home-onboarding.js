@@ -1,12 +1,51 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { css } from 'linaria'
 import { Onboarding } from 'components/onboarding/onboarding'
 import { unloadOnboarding } from './home-onboarding.state'
 import { saveDismissAction } from './home-onboarding.state'
 import { readDismissAction } from './home-onboarding.state'
 import { saveImpressionEvent } from './home-onboarding.state'
 import { readImpressionEvent } from './home-onboarding.state'
+import { breakpointTinyTablet } from 'common/constants'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+
+const saveOutlineStyles = css`
+  position: relative;
+
+  &:after {
+    position: absolute;
+    content: '';
+    height: calc(100% + 1rem);
+    width: calc(100% + 1.5rem);
+    top: -0.5rem;
+    left: -0.75rem;
+    border: 3px solid var(--color-teal50);
+    border-radius: 16px;
+    pointer-events: none;
+  }
+`
+
+const readOutlineStyles = css`
+  position: relative;
+
+  &:after {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: calc(100% + 1rem);
+    top: -0.5rem;
+    left: -0.5rem;
+    border: 3px solid var(--color-teal50);
+    border-radius: 16px;
+    pointer-events: none;
+
+    ${breakpointTinyTablet} {
+      height: calc(100% - 2.5rem);
+      min-height: 108px;
+    }
+  }
+`
 
 export const HomeOnboarding = () => {
   const dispatch = useDispatch()
@@ -25,13 +64,15 @@ export const HomeOnboarding = () => {
     target: '[data-cy^="article-save-btn"]',
     title: 'Find an article interesting but pressed for time?',
     content: <>Hit <strong>Save</strong> to unlock the power of Pocket and read it later.</>,
-    placement: 'right-end'
+    placement: 'right-end',
+    outline: saveOutlineStyles
   }, {
     disableBeacon: true,
     target: '[data-cy=recent-saves] [data-cy^="article-card-"]',
     title: 'Ready to read it?',
     content: isInternalItem ? 'Read it in Pocket’s calm reading zone.' : 'Click to read it.',
-    placement: 'bottom'
+    placement: 'bottom',
+    outline: readOutlineStyles
   }]
 
   useEffect(() => {
