@@ -161,6 +161,7 @@ exports[`ItemCard renders a discover item 1`] = `
         </div>
       </button>
       <button
+        aria-label="overflow-menu"
         class="m11fpiro"
         data-cy="overflow"
       >
