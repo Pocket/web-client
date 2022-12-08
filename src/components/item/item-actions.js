@@ -1,10 +1,8 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { useTranslation } from 'next-i18next'
 import { OverflowAction } from 'components/item-actions/overflow'
-import { LikeIcon } from 'components/icons/LikeIcon'
 import { SaveIcon } from 'components/icons/SaveIcon'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
-import { LikeFilledIcon } from 'components/icons/LikeFilledIcon'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
 import { topTooltip } from 'components/tooltip/tooltip'
 
@@ -15,25 +13,9 @@ import { TagIcon } from 'components/icons/TagIcon'
 import { AddIcon } from 'components/icons/AddIcon'
 import { PermanentCopyIcon } from 'components/icons/PermanentCopyIcon'
 
-export const nextActionStyle = css`
-  @keyframes pulse {
-    0% {
-      transform: 0;
-      opacity: 1;
-    }
-    20% {
-      transform: scale(90%);
-      opactiy: 0.2;
-    }
-    70% {
-      transform: scale(180%);
-      opacity: 0.5;
-    }
-    100% {
-      opacity: 1;
-      transform: 0;
-    }
-  }
+import { breakpointSmallTablet } from 'common/constants'
+
+export const sharedActionStyles = css`
   text-align: right;
 
   button {
@@ -41,76 +23,47 @@ export const nextActionStyle = css`
     align-content: center;
     align-items: center;
     background-color: var(--color-canvas);
-    box-sizing: content-box;
     font-size: 1.5rem;
     line-height: 1em;
     color: var(--color-actionSecondary);
     padding: 0.25rem;
+    margin-right: 1rem;
 
-    .active {
-      color: var(--color-amber);
-    }
-
-    span.copy {
-      font-size: 1rem;
-      margin: 0 0.5rem;
+    ${breakpointSmallTablet} {
+      // might need to tweak this breakpoint when we apply this to the items in app
+      margin-right: 0.5rem;
     }
 
-    &:active,
-    &:focus {
-      outline: none;
-      border: none;
-      box-shadow: none;
+    &:last-of-type {
+      margin-right: 0;
     }
+  }
+`
 
-    &:hover {
-      color: var(--color-actionSecondaryHover);
-      span.copy {
-        color: var(--color-actionBrand);
-      }
-    }
-    .saveIcon {
-      display: inline-block;
-    }
-    .likeIcon {
-      display: none;
-    }
-
-    &:hover {
-      .saveIcon {
-        display: none;
-      }
-      .likeIcon {
-        display: inline-block;
-      }
-    }
-
-    &:active {
-      .likeIcon {
-        animation: 1000ms pulse;
-      }
-    }
-
-    span {
+export const savedActionStyles = css`
+  button {
+    .icon {
+      color: var(--color-textSecondary);
       margin-top: 0;
-    }
 
-    &.save-action {
-      margin-right: 0.25rem;
-      .icon {
-        color: var(--color-actionBrand);
-        transform: translateY(1px);
+      &.active {
+        color: var(--color-amber);
       }
     }
   }
+`
 
-  &.status-saving {
-    .saveIcon {
-      display: none;
+export const discoveryActionStyles = css`
+  button {
+    .copy {
+      font-size: 1rem;
+      margin-left: 0.5rem;
     }
-    .likeIcon {
+
+    .saveIcon {
+      color: var(--color-actionBrand);
       display: inline-block;
-      animation: 550ms pulse;
+      margin-top: 0;
     }
   }
 `
@@ -124,8 +77,10 @@ export function SavedActions({ saveStatus, isFavorite, isArchive, isPremium }) {
     ? t('item-action:unfavorite', 'Un-Favorite')
     : t('item-action:favorite', 'Favorite')
 
+  const savedClasses = cx(sharedActionStyles, savedActionStyles)
+
   return (
-    <div className={`${nextActionStyle} status-${saveStatus}`}>
+    <div className={`${savedClasses} status-${saveStatus}`}>
       <button
         className={topTooltip}
         data-tooltip={favoriteLabel}
@@ -174,18 +129,18 @@ export function SavedActions({ saveStatus, isFavorite, isArchive, isPremium }) {
 }
 
 export function DiscoveryActions({ onSave, onUnsave, saveStatus }) {
+  const discoveryClasses = cx(sharedActionStyles, discoveryActionStyles)
+
   return (
-    <div className={`${nextActionStyle} status-${saveStatus}`}>
+    <div className={`${discoveryClasses} status-${saveStatus}`}>
       {saveStatus === 'saved' ? (
         <button className="save-action saved" onClick={onUnsave}>
           <SaveFilledIcon className="saveIcon" />
-          <LikeFilledIcon className="likeIcon" />
           <span className="copy">Saved</span>
         </button>
       ) : (
         <button className="save-action save" onClick={onSave}>
           <SaveIcon className="saveIcon" />
-          <LikeIcon className="likeIcon" />
           <span className="copy">Save</span>
         </button>
       )}
