@@ -479,28 +479,6 @@ const itemStyles = css`
     font-size: 1rem;
   }
 
-  .authors {
-    display: block;
-    overflow: hidden;
-    max-height: 1.25em;
-    text-overflow: ellipsis;
-    overflow-wrap: anywhere;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-
-    span:after {
-      content: ',';
-      display: inline-block;
-      padding: 0 0.5rem 0 0;
-    }
-    span:last-of-type:after {
-      content: '';
-      display: none;
-      padding: 0;
-    }
-  }
-
   .tags {
     padding: 0 0 var(--card-padding) 0;
     display: flex;
