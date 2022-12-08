@@ -1,5 +1,6 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { usePrevious } from 'common/utilities/hooks/has-changed'
 import { css } from 'linaria'
 import { Onboarding } from 'components/onboarding/onboarding'
 import { unloadOnboarding } from './home-onboarding.state'
@@ -50,14 +51,17 @@ const readOutlineStyles = css`
 export const HomeOnboarding = () => {
   const dispatch = useDispatch()
 
+  const [savedItem, setSavedItem] = useState(null)
+
   const running = useSelector((state) => state.homeOnboarding.running)
   const currentStep = useSelector((state) => state.homeOnboarding.currentStep)
   const saveComplete = useSelector((state) => state.homeOnboarding.saveComplete)
   const readComplete = useSelector((state) => state.homeOnboarding.readComplete)
   const recentSaves = useSelector((state) => state.home.recentSaves)
-
-  const recentItem = useSelector((state) => state.savesItemsById[recentSaves[0]])
+  const recentId = recentSaves?.[0]
+  const recentItem = useSelector((state) => state.savesItemsById[recentId])
   const isInternalItem = recentItem?.isInternalItem
+  const prevSave = usePrevious(recentId)
 
   const onboardingSteps = [{
     disableBeacon: true,
@@ -68,7 +72,7 @@ export const HomeOnboarding = () => {
     outline: saveOutlineStyles
   }, {
     disableBeacon: true,
-    target: '[data-cy=recent-saves] [data-cy^="article-card-"]',
+    target: `[data-cy=recent-saves] [data-cy="article-card-${savedItem}"]`,
     title: 'Ready to read it?',
     content: isInternalItem ? 'Read it in Pocket’s calm reading zone.' : 'Click to read it.',
     placement: 'bottom',
@@ -76,10 +80,20 @@ export const HomeOnboarding = () => {
   }]
 
   useEffect(() => {
-    return () => {
+    return () => dispatch(unloadOnboarding())
+  }, [dispatch])
+
+  // Only store recent save if previously was null
+  useEffect(() => {
+    if (recentId && !prevSave) setSavedItem(recentId)
+  }, [recentId, prevSave])
+
+  // Highlighted item no longer appears in recent saves
+  useEffect(() => {
+    if (currentStep === 1 && recentSaves.indexOf(savedItem) > 2) {
       dispatch(unloadOnboarding())
     }
-  }, [dispatch])
+  }, [currentStep, savedItem, recentSaves])
 
   // Impression actions
   const saveImpressionAction = () => {
@@ -102,7 +116,7 @@ export const HomeOnboarding = () => {
   const readAction = () => {
     if (readComplete) return
     dispatch(sendSnowplowEvent('home.onboarding.read.click'))
-    document.querySelector('[data-cy=recent-saves] [data-cy^="article-card-"] a').click()
+    document.querySelector(`[data-cy=recent-saves] [data-cy="article-card-${savedItem}"] a`).click()
   }
 
   const saveDismiss = () => {
