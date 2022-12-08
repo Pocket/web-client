@@ -139,50 +139,6 @@
       }
     },
     {
-      "storybookContext": "Other thing",
-      "cursor": "MzY2MTIzNTIyNV8qXzE2NjQ5MTU4NDM=",
-      "node": {
-        "id": "3661235225",
-        "url": "https://zenhabits.net/powerfully-effective/",
-        "status": "UNREAD",
-        "_createdAt": 1664915843,
-        "_updatedAt": 1665182114,
-        "_deletedAt": null,
-        "isFavorite": true,
-        "favoritedAt": 1665182114,
-        "isArchived": false,
-        "archivedAt": null,
-        "tags": [],
-        "annotations": {
-          "highlights": []
-        },
-        "item": {
-          "url": "https://zenhabits.net/powerfully-effective/",
-          "id": "3661235225",
-          "title": "How to Have a Powerfully Effective Day",
-          "excerpt": "A lot of people I talk to are unhappy with their ability to get stuff done in their lives. They feel they’re wasting a lot of time, never really getting anything important done.",
-          "authors": [
-            {
-              "name": "Leo Babauta"
-            }
-          ],
-          "domainMetadata": {
-            "name": "Zen Habits",
-            "logo": "https://logo.clearbit.com/zenhabits.net?size=800",
-            "logoGreyscale": "https://logo.clearbit.com/zenhabits.net?size=800&greyscale=true"
-          },
-          "hasImage": "NO_IMAGES",
-          "hasVideo": "NO_VIDEOS",
-          "isArticle": true,
-          "isIndex": false,
-          "timeToRead": 5,
-          "topImageUrl": "https://zenhabits.net/wp-content/uploads/2022/07/daniel-mirlea-dfuA04fz9yM-unsplash.jpg",
-          "collection": null,
-          "syndicatedArticle": null
-        }
-      }
-    },
-    {
       "storybookContext": "No publisher image, long excerpt",
       "cursor": "MzY3Mzk5OTg1NV8qXzE2NjQ5MTU4NDA=",
       "node": {
