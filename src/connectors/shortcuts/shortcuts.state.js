@@ -1,17 +1,25 @@
 import { takeLatest, takeEvery, put, call, select } from 'redux-saga/effects'
-import { race, take } from 'redux-saga/effects'
 import { APP_SET_MODE } from 'actions'
-import { ITEMS_BULK_SET_CURRENT } from 'actions'
-import { ITEMS_BULK_TOGGLE } from 'actions'
 
-import { ITEMS_DELETE_REQUEST } from 'actions'
-import { ITEMS_DELETE_CONFIRM } from 'actions'
-import { ITEMS_DELETE_CANCEL } from 'actions'
-import { ITEMS_ARCHIVE_REQUEST } from 'actions'
-import { ITEMS_UNARCHIVE_REQUEST } from 'actions'
-import { ITEMS_FAVORITE_REQUEST } from 'actions'
-import { ITEMS_UNFAVORITE_REQUEST } from 'actions'
-import { ITEMS_TAG_REQUEST } from 'actions'
+import { MUTATION_BULK_DESELECT } from 'actions'
+import { MUTATION_BULK_SELECT } from 'actions'
+import { MUTATION_BULK_SET_CURRENT } from 'actions'
+
+import { MUTATION_DELETE } from 'actions'
+import { MUTATION_BULK_DELETE } from 'actions'
+
+import { MUTATION_ARCHIVE } from 'actions'
+import { MUTATION_UNARCHIVE } from 'actions'
+import { MUTATION_BULK_ARCHIVE } from 'actions'
+import { MUTATION_BULK_UNARCHIVE } from 'actions'
+
+import { MUTATION_FAVORITE } from 'actions'
+import { MUTATION_UNFAVORITE } from 'actions'
+import { MUTATION_BULK_FAVORITE } from 'actions'
+import { MUTATION_BULK_UNFAVORITE } from 'actions'
+
+import { MUTATION_TAGGING } from 'actions'
+import { MUTATION_BULK_TAGGING } from 'actions'
 
 import { UPDATE_FONT_SIZE } from 'actions'
 import { UPDATE_COLUMN_WIDTH } from 'actions'
@@ -62,13 +70,6 @@ import { appSetMode } from 'connectors/app/app.state'
 import { setColorModeLight } from 'connectors/app/app.state'
 import { setColorModeDark } from 'connectors/app/app.state'
 import { setColorModeSepia } from 'connectors/app/app.state'
-
-import { itemsArchiveBatch } from 'connectors/items-by-id/saves/items.archive.js'
-import { itemsUnarchiveBatch } from 'connectors/items-by-id/saves/items.archive.js'
-import { itemsFavoriteBatch } from 'connectors/items-by-id/saves/items.favorite.js'
-import { itemsUnFavoriteBatch } from 'connectors/items-by-id/saves/items.favorite.js'
-import { itemsDeleteAction } from 'connectors/items-by-id/saves/items.delete'
-import { itemsTagAction } from 'connectors/items-by-id/saves/items.tag'
 
 export const openHelpOverlay = () => ({ type: SHORTCUT_OPEN_HELP_OVERLAY })
 export const closeHelpOverlay = () => ({ type: SHORTCUT_CLOSE_HELP_OVERLAY })
@@ -216,16 +217,16 @@ export const shortcutSagas = [
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getCurrentItemId = (state) => state.shortcuts.currentId
-const getCurrentPosition = (state) => state.shortcuts.position
-const getCurrentBulkItemId = (state) => state.bulkEdit.currentId
+const getCurrentBulkItemId = (state) => state.mutationBulk.currentId
+const getCurrentBulkItems = (state) => state.mutationBulk.itemIds
 const getSection = (state) => state.app.section
-const getItems = (state, section) => state.saves[section]
-const getItem = (state, id) => state.savesItemsById[id]
+const getItems = (state) => state.listSaved
+const getItem = (state, id) => state.itemsSaved[id]
 const getFontSize = (state) => state.reader.fontSize
 const getColumnWidth = (state) => state.reader.columnWidth
-const getBulkItems = (state) => state?.bulkEdit?.selected
-const getBatchFavorite = (state) => state?.bulkEdit?.batchFavorite
-const getBatchStatus = (state) => state?.bulkEdit?.batchStatus
+const getBulkItems = (state) => state?.mutationBulk?.itemIds
+const getBatchFavorite = (state) => state?.mutationBulk?.favoriteAction
+const getBatchArchive = (state) => state?.mutationBulk?.archiveAction
 
 /** SAGA :: RESPONDERS
 --------------------------------------------------------------- */
@@ -279,7 +280,7 @@ function* selectItem(next) {
   const currentId = yield select(getCurrentItemId)
   const section = yield select(getSection)
   const items = yield select(getItems, section)
-  const total = items.length
+  const total = items?.length
   const currentPosition = items.indexOf(currentId)
 
   if (next) {
@@ -305,18 +306,18 @@ function* selectBulkItem(next) {
   const currentId = yield select(getCurrentBulkItemId)
   const section = yield select(getSection)
   const items = yield select(getItems, section)
-  const total = items.length
+  const total = items?.length
   const currentPosition = items.indexOf(currentId)
 
   if (next) {
     const nextPosition = currentPosition < 0 ? 0 : currentPosition + 1
     const nextId = items[nextPosition] ? items[nextPosition] : false
-    return yield put({ type: ITEMS_BULK_SET_CURRENT, currentId: nextId })
+    return yield put({ type: MUTATION_BULK_SET_CURRENT, currentId: nextId })
   }
 
   const prevPosition = currentPosition >= total ? total : currentPosition - 1
   const prevId = items[prevPosition] ? items[prevPosition] : false
-  return yield put({ type: ITEMS_BULK_SET_CURRENT, currentId: prevId })
+  return yield put({ type: MUTATION_BULK_SET_CURRENT, currentId: prevId })
 }
 
 function* shortcutEngage({ appMode }) {
@@ -326,7 +327,9 @@ function* shortcutEngage({ appMode }) {
 
 function* bulkEngage() {
   const bulkId = yield select(getCurrentBulkItemId)
-  yield put({ type: ITEMS_BULK_TOGGLE, id: bulkId })
+  const bulkIds = yield select(getCurrentBulkItems)
+  const type = bulkIds.includes(bulkId) ? MUTATION_BULK_DESELECT : MUTATION_BULK_SELECT
+  yield put({ type, id: bulkId })
 }
 
 /**
@@ -349,16 +352,10 @@ function* shortcutDeleteItem({ appMode }) {
   if (appMode === 'bulk') return yield shortcutBatchDelete()
 
   const id = yield select(getCurrentItemId)
-  const position = yield select(getCurrentPosition)
   if (!id) return
+  
+  yield put({ type: MUTATION_DELETE, itemId:id })
 
-  yield put({ type: ITEMS_DELETE_REQUEST, items: [{ id, position }] })
-  const { cancel } = yield race({
-    confirm: take(ITEMS_DELETE_CONFIRM),
-    cancel: take(ITEMS_DELETE_CANCEL)
-  })
-
-  if (!cancel) return yield call(selectItem, true)
 }
 
 function* shortcutArchiveItem({ appMode }) {
@@ -373,15 +370,13 @@ function* shortcutArchiveItem({ appMode }) {
   const section = yield select(getSection)
   const isArchived = item.status === '1'
 
-  const position = yield select(getCurrentPosition)
-
   if (!isArchived) {
     if (section === 'unread') yield call(selectItem, true)
-    return yield put({ type: ITEMS_ARCHIVE_REQUEST, items: [{ id, position }] })
+    return yield put({ type: MUTATION_ARCHIVE, itemId: id })
   }
 
   if (section === 'archive') yield call(selectItem, true)
-  yield put({ type: ITEMS_UNARCHIVE_REQUEST, items: [{ id, position }] })
+  yield put({ type: MUTATION_UNARCHIVE, itemId: id })
 }
 
 function* shortcutFavoriteItem({ appMode }) {
@@ -394,32 +389,22 @@ function* shortcutFavoriteItem({ appMode }) {
   if (!item) return
 
   const section = yield select(getSection)
-  const isFavorite = item.favorite === '1'
 
-  const position = yield select(getCurrentPosition)
-
-  if (!isFavorite) {
-    return yield put({
-      type: ITEMS_FAVORITE_REQUEST,
-      items: [{ id, position }]
-    })
-  }
-
+  if (!item.isFavorite) return yield put({ type: MUTATION_FAVORITE, itemId: id })
   if (section === 'favorites') yield call(selectItem, true)
-  return yield put({
-    type: ITEMS_UNFAVORITE_REQUEST,
-    items: [{ id, position }]
-  })
+  return yield put({ type: MUTATION_UNFAVORITE, itemId: id })
 }
 
 function* shortcutEditTags({ appMode }) {
   if (appMode === 'bulk') return yield shortcutBatchTag()
 
   const id = yield select(getCurrentItemId)
-  const position = yield select(getCurrentPosition)
   if (!id) return
 
-  yield put({ type: ITEMS_TAG_REQUEST, items: [{ id, position }] })
+  const currentItem = yield select(getItem, id)
+  const tags = currentItem?.tags
+
+  yield put({ type: MUTATION_TAGGING, itemId:id, tags})
 }
 
 function* shortcutBatchFavorite() {
@@ -427,33 +412,33 @@ function* shortcutBatchFavorite() {
   if (!bulkItems.length) return
 
   const batchFavorite = yield select(getBatchFavorite)
-  const favoriteFunction =
-    batchFavorite === 'favorite' ? itemsFavoriteBatch : itemsUnFavoriteBatch
+  const type =
+    batchFavorite === 'favorite' ? MUTATION_BULK_FAVORITE : MUTATION_BULK_UNFAVORITE
 
-  yield put(favoriteFunction(bulkItems))
+  yield put({type, itemIds: bulkItems})
 }
 
 function* shortcutBatchArchive() {
   const bulkItems = yield select(getBulkItems)
   if (!bulkItems.length) return
 
-  const batchStatus = yield select(getBatchStatus)
-  const archiveFunction =
-    batchStatus === 'archive' ? itemsArchiveBatch : itemsUnarchiveBatch
+  const batchArchive = yield select(getBatchArchive)
+  const type =
+  batchArchive === 'archive' ? MUTATION_BULK_ARCHIVE : MUTATION_BULK_UNARCHIVE
 
-  yield put(archiveFunction(bulkItems))
+  yield put({type, itemIds: bulkItems})
 }
 
 function* shortcutBatchDelete() {
   const bulkItems = yield select(getBulkItems)
   if (!bulkItems.length) return
-  yield put(itemsDeleteAction(bulkItems))
+  yield put({type:MUTATION_BULK_DELETE, itemIds: bulkItems})
 }
 
 function* shortcutBatchTag() {
   const bulkItems = yield select(getBulkItems)
   if (!bulkItems.length) return
-  yield put(itemsTagAction(bulkItems))
+  yield put({type:MUTATION_BULK_TAGGING, itemIds: bulkItems})
 }
 
 /**

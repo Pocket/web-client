@@ -2,7 +2,6 @@ import { put, takeEvery, call, select } from 'redux-saga/effects'
 import { chunk } from 'common/utilities/object-array/object-array'
 
 import { BATCH_SIZE } from 'common/constants'
-import { MUTATION_BULK_TOGGLE } from 'actions'
 
 import { MUTATION_BULK_CONFIRM } from 'actions'
 import { MUTATION_BULK_CANCEL } from 'actions'
@@ -85,8 +84,7 @@ export const mutationBulkReducers = (state = initialState, action) => {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const mutationBulkSagas = [
   takeEvery(MUTATION_BULK_SELECT, itemBulkSelect),
-  takeEvery(MUTATION_BULK_DESELECT, itemBulkSelect),
-  takeEvery(MUTATION_BULK_TOGGLE, itemBulkSelect)
+  takeEvery(MUTATION_BULK_DESELECT, itemBulkSelect)
 ]
 
 /* SAGAS :: SELECTORS
