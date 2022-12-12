@@ -69,6 +69,8 @@ export const Card = (props) => {
     bulkEdit,
     bulkSelected,
     shortcutSelected,
+    bulkIsCurrent,
+
     position,
     // UI
     cardShape,
@@ -131,6 +133,7 @@ export const Card = (props) => {
     hiddenActions && !bulkEdit && 'hiddenActions',
     !showExcerpt && 'noExcerpt',
     !showMedia && 'noMedia',
+    bulkIsCurrent && 'bulkCurrent',
     bulkEdit && 'bulkEdit',
     (bulkSelected || shortcutSelected) && 'selected'
   )
