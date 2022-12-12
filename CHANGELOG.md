@@ -1,3 +1,10 @@
+## [1.67.4](https://github.com/Pocket/web-client/compare/v1.67.3...v1.67.4) (2022-12-12)
+
+
+### Bug Fixes
+
+* **onboarding:** fixes based on qa ([dd506d3](https://github.com/Pocket/web-client/commit/dd506d32a6356f0fa45e12653a7c3df4d4838f5d))
+
 ## [1.67.3](https://github.com/Pocket/web-client/compare/v1.67.2...v1.67.3) (2022-12-07)
 
 

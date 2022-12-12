@@ -12,10 +12,12 @@ import { HOME_ONBOARDING_UNLOAD } from 'actions'
 import { HOME_ONBOARDING_RESET } from 'actions'
 
 import { HOME_SETUP_SET_STATUS } from 'actions'
+import { HOME_SETUP_RESELECT_TOPICS } from 'actions'
 import { HOME_CONTENT_SUCCESS } from 'actions'
 import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
 
 import { HOME_SAVE_SUCCESS } from 'actions'
+import { HOME_UNSAVE_SUCCESS } from 'actions'
 import { READ_ITEM_SUCCESS } from 'actions'
 import { ARTICLE_ITEM_SUCCESS } from 'actions' //v3
 
@@ -54,6 +56,10 @@ export const homeOnboardingReducers = (state = initialState, action) => {
       return { ...state, running }
     }
 
+    case HOME_SETUP_RESELECT_TOPICS: {
+      return { ...state, running: false }
+    }
+
     case HOME_ONBOARDING_SAVE_SHOW: {
       return { ...state, running: true }
     }
@@ -70,6 +76,10 @@ export const homeOnboardingReducers = (state = initialState, action) => {
     case HOME_SAVE_SUCCESS:
     case HOME_ONBOARDING_READ_SHOW: {
       return { ...state, currentStep: 1, saveComplete: true, running: true }
+    }
+
+    case HOME_UNSAVE_SUCCESS: {
+      return { ...state, running: false }
     }
 
     case HOME_ONBOARDING_READ_DISMISS: {
