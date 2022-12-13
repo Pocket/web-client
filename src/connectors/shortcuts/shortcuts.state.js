@@ -23,6 +23,7 @@ import { MUTATION_BULK_TAGGING } from 'actions'
 
 import { UPDATE_FONT_SIZE } from 'actions'
 import { UPDATE_COLUMN_WIDTH } from 'actions'
+import { ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST } from 'actions'
 
 import { SHORTCUT_OPEN_HELP_OVERLAY } from 'actions'
 import { SHORTCUT_CLOSE_HELP_OVERLAY } from 'actions'
@@ -62,8 +63,6 @@ import { COLUMN_WIDTH } from 'common/constants' // Need key combos for this that
 import { setListModeList } from 'connectors/app/app.state'
 import { setListModeGrid } from 'connectors/app/app.state'
 import { setListModeDetail } from 'connectors/app/app.state'
-import { sortOrderSetOld } from 'connectors/app/app.state'
-import { sortOrderSetNew } from 'connectors/app/app.state'
 
 import { appSetMode } from 'connectors/app/app.state'
 
@@ -103,6 +102,9 @@ export const increaseFontSize = () => ({ type: SHORTCUT_INCREASE_FONT_SIZE })
 export const decreaseFontSize = () => ({ type: SHORTCUT_DECREASE_FONT_SIZE })
 export const increaseColumnWidth = () => ({type: SHORTCUT_INCREASE_COLUMN_WIDTH }) //prettier-ignore
 export const decreaseColumnWidth = () => ({type: SHORTCUT_DECREASE_COLUMN_WIDTH }) //prettier-ignore
+
+const sortOrderSetNew = () => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, sortOrder: 'DESC'})
+const sortOrderSetOld = () => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, sortOrder: 'ASC'})
 
 // prettier-ignore
 export const listShortcuts = [

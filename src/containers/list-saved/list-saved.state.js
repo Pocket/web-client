@@ -14,6 +14,7 @@ import { ITEMS_UNDELETE_SUCCESS } from 'actions'
 
 import { ITEMS_SAVED_PAGE_INFO_SUCCESS } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_FILTERS } from 'actions'
+import { ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_ORDER } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_BY } from 'actions'
 import { ITEMS_SAVED_SEARCH_REQUEST } from 'actions'
@@ -83,7 +84,7 @@ export const searchItemsUnread = (searchTerm, sortOrder) => ({ type: SEARCH_SAVE
 export const searchItemsArchived = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_ARCHIVED, searchTerm, sortOrder }) //prettier-ignore
 export const searchItemsFavorites = (searchTerm, sortOrder) => ({ type: SEARCH_SAVED_ITEMS_FAVORITES, searchTerm, sortOrder }) //prettier-ignore
 
-export const savedItemsSetSortOrder = (sortOrder) => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER, sortOrder}) //prettier-ignore
+export const savedItemsSetSortOrder = (sortOrder) => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, sortOrder}) //prettier-ignore
 export const savedItemsSetSortBy = (sortBy) => ({ type: ITEMS_SAVED_PAGE_SET_SORT_BY, sortBy })
 
 export const loadMoreListItems = () => ({ type: LOAD_MORE_ITEMS })
@@ -111,13 +112,8 @@ export const listSavedReducers = (state = [], action) => {
       return currentItems
     }
 
-    case ITEMS_SAVED_PAGE_SET_SORT_ORDER: {
-      const { sortOrder: passedSortOrder } = action
-      if (state.sortOrder !== passedSortOrder) return []
-      return state
-    }
-
     // ! This is agressive clearing of the list
+    case ITEMS_SAVED_PAGE_SET_SORT_ORDER:
     case ITEMS_SAVED_PAGE_SET_SORT_BY:
     case ITEMS_CLEAR_CURRENT: {
       return []
@@ -194,6 +190,7 @@ export const listSavedSagas = [
   takeEvery(MUTATION_DELETE_SUCCESS, reconcileDeleteMutation),
   takeEvery(ITEMS_UPSERT_SUCCESS, reconcileUpsert),
   takeEvery(LOAD_MORE_ITEMS, loadMoreItems),
+  takeEvery(ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, adjustSortOrder),
   takeEvery(
     [
       SEARCH_SAVED_ITEMS,
@@ -229,6 +226,7 @@ export const listSavedSagas = [
 /** SAGA :: SELECTORS
  --------------------------------------------------------------- */
 const getSavedPageInfo = (state) => state.listSavedPageInfo
+const getSortOrder = (state) => state.listSavedPageInfo?.sortOrder
 const getItems = (state) => state.items
 
 /** SAGA :: RESPONDERS
@@ -316,6 +314,16 @@ function* loadMoreItems() {
   } catch (err) {
     console.warn(err)
   }
+}
+
+function* adjustSortOrder(action){
+  const {sortOrder} = action
+  const currentSortOrder = yield select(getSortOrder)
+
+  // Don't change sort order if it's already in the same space
+  if(currentSortOrder === sortOrder) return
+
+  yield put({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER, sortOrder})
 }
 
 function shouldBeFiltered(itemDetails, actionType) {
