@@ -12,7 +12,6 @@ import { SESS_GUID_HYDRATE } from 'actions'
 
 import { userProfileReducers, userProfileSagas } from 'containers/account/profile/profile.state'
 import { userEmailReducers, userEmailSagas } from 'containers/account/email/email.state'
-import { userNotificationReducers, userNotificationSagas } from 'containers/account/notifications/notfications.state' // prettier-ignore
 import { userConnectedServicesReducers, userConnectedServicesSagas } from 'containers/account/connections/connections.state' // prettier-ignore
 import { userPrivacyReducers, userPrivacySagas } from 'containers/account/privacy/privacy.state'
 
@@ -65,7 +64,6 @@ export const userReducers = (state = initialState, action) => {
 export const accountReducers = {
   userProfile: userProfileReducers,
   userEmail: userEmailReducers,
-  userNotifications: userNotificationReducers,
   userConnectedServices: userConnectedServicesReducers,
   userPrivacy: userPrivacyReducers
 }
@@ -76,7 +74,6 @@ export const userSagas = [
   takeLatest(USER_REQUEST, userRequest),
   ...userProfileSagas,
   ...userEmailSagas,
-  ...userNotificationSagas,
   ...userConnectedServicesSagas,
   ...userPrivacySagas
 ]

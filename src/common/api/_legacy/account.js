@@ -44,22 +44,6 @@ export const setAvatar = (data) => {
   })
 }
 
-export const getAccountNotifications = () => {
-  return request({
-    path: 'v3/getEmailNotificationSettings',
-    auth: true
-  })
-}
-
-export const setAccountNotifications = (data) => {
-  return request({
-    method: 'POST',
-    path: 'v3/setEmailNotificationSettings',
-    body: JSON.stringify({ ...data }),
-    auth: true
-  })
-}
-
 export const setRssProtection = (isOn) => {
   const feed_protected = isOn ? '1' : '0'
   return request({
