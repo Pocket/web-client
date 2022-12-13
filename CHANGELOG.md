@@ -1,3 +1,10 @@
+## [1.67.5](https://github.com/Pocket/web-client/compare/v1.67.4...v1.67.5) (2022-12-13)
+
+
+### Bug Fixes
+
+* **onboarding:** dont overwrite current state running ([63e6465](https://github.com/Pocket/web-client/commit/63e6465f3fc1073face94553d379702cea1120e2))
+
 ## [1.67.4](https://github.com/Pocket/web-client/compare/v1.67.3...v1.67.4) (2022-12-12)
 
 
