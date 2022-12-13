@@ -8,18 +8,13 @@ import { CardPageHeader } from 'components/headers/discover-header'
 import { ItemCard } from 'connectors/item-card/collection/collection-card'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
-
 import { Toasts } from 'connectors/toasts/toast-list'
 
-import { useTranslation } from 'next-i18next'
-
 export default function Collections({ locale }) {
-  const { t } = useTranslation()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
-  const items = useSelector((state) => state.collectionsBySlug)
-  const itemIds = Object.keys(items)
+  const itemIds = useSelector((state) => state.collectionsPage)
   const shouldRender = userStatus !== 'pending'
 
   const languagePrefix = locale === 'en' ? '' : `/${locale}`
