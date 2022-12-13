@@ -46,7 +46,7 @@ export const homeOnboardingReducers = (state = initialState, action) => {
     case SETTINGS_FETCH_SUCCESS: {
       const { settings } = action
       const { homeOnboarding } = settings
-      return { ...state, ...homeOnboarding }
+      return { ...state, ...homeOnboarding, running: state.running }
     }
 
     // topic selection skipped
