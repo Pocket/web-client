@@ -221,7 +221,8 @@ const getCurrentBulkItemId = (state) => state.mutationBulk.currentId
 const getCurrentBulkItems = (state) => state.mutationBulk.itemIds
 const getSection = (state) => state.app.section
 const getItems = (state) => state.listSaved
-const getItem = (state, id) => state.itemsSaved[id]
+const getItem = (state, id) => state.items[id]
+const getSavedItem = (state, id) => state.itemsSaved[id]
 const getFontSize = (state) => state.reader.fontSize
 const getColumnWidth = (state) => state.reader.columnWidth
 const getBulkItems = (state) => state?.mutationBulk?.itemIds
@@ -364,13 +365,12 @@ function* shortcutArchiveItem({ appMode }) {
   const id = yield select(getCurrentItemId)
   if (!id) return
 
-  const item = yield select(getItem, id)
+  const item = yield select(getSavedItem, id)
   if (!item) return
 
   const section = yield select(getSection)
-  const isArchived = item.status === '1'
 
-  if (!isArchived) {
+  if (!item.isArchived) {
     if (section === 'unread') yield call(selectItem, true)
     return yield put({ type: MUTATION_ARCHIVE, itemId: id })
   }
@@ -385,7 +385,7 @@ function* shortcutFavoriteItem({ appMode }) {
   const id = yield select(getCurrentItemId)
   if (!id) return
 
-  const item = yield select(getItem, id)
+  const item = yield select(getSavedItem, id)
   if (!item) return
 
   const section = yield select(getSection)
@@ -401,7 +401,7 @@ function* shortcutEditTags({ appMode }) {
   const id = yield select(getCurrentItemId)
   if (!id) return
 
-  const currentItem = yield select(getItem, id)
+  const currentItem = yield select(getSavedItem, id)
   const tags = currentItem?.tags
 
   yield put({ type: MUTATION_TAGGING, itemId:id, tags})
