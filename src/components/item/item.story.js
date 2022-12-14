@@ -78,9 +78,6 @@ export default {
         options: [false, 'PARTNERED', 'SPONSORED']
       }
     },
-    showTopic: {
-      control: 'boolean'
-    },
     topicName: {
       control: 'select',
       options: Object.keys(topics),
@@ -118,7 +115,7 @@ export const Item = (args) => {
 
   if (!item) return <div>No card to display</div>
 
-  const { itemId, url, openExternal } = item
+  const { itemId, url } = item
   const {
     tags,
     title,
@@ -181,5 +178,7 @@ Item.args = {
   clamp: false,
   partnerType: false,
   sideBySide: false,
-  showTopic: false
+  showTopic: false,
+  topicName: null,
+  tags: 'none'
 }
