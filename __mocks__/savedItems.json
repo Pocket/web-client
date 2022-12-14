@@ -39,6 +39,24 @@
           "isIndex": false,
           "timeToRead": 16,
           "topImageUrl": "https://compote.slate.com/images/2cb1d7b0-e8fa-4d4a-9048-a3db60b81e87.jpeg?width=1560",
+          "images": [
+            {
+              "caption": "",
+              "credit": "Ron Bull/Toronto Star via Getty Images",
+              "height": 0,
+              "imageId": 1,
+              "src": "https://compote.slate.com/images/90f592a1-efb7-479e-bb12-8a01e8efed26.jpeg",
+              "width": 0
+            },
+            {
+              "caption": "",
+              "credit": "",
+              "height": 0,
+              "imageId": 2,
+              "src": "https://compote.slate.com/images/8a054020-f88d-4c7f-9403-3b9b9b432d60.jpeg",
+              "width": 0
+            }
+          ],
           "collection": null,
           "syndicatedArticle": null
         }
@@ -83,6 +101,128 @@
           "isIndex": false,
           "timeToRead": null,
           "topImageUrl": "https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F229247af-f201-4a68-914b-5fdb92bef7bd.png",
+          "images": [
+            {
+              "caption": "View Original",
+              "credit": "",
+              "height": 0,
+              "imageId": 1,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fe661ef40-f429-4066-a521-ce1b7fab27eb.png",
+              "width": 0
+            },
+            {
+              "caption": "View Original",
+              "credit": "",
+              "height": 0,
+              "imageId": 2,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fc6c5d24b-ae8e-40fb-9d40-7948095d725e.png",
+              "width": 0
+            },
+            {
+              "caption": "View Original",
+              "credit": "",
+              "height": 0,
+              "imageId": 3,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F2736a061-2de1-4131-a5aa-1a8f2aca8c11.jpeg",
+              "width": 0
+            },
+            {
+              "caption": "View Original",
+              "credit": "",
+              "height": 0,
+              "imageId": 4,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fd316cc47-2441-4344-9b79-f4e054502b31.jpeg",
+              "width": 0
+            },
+            {
+              "caption": "",
+              "credit": "",
+              "height": 0,
+              "imageId": 5,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fc0ace25f-badd-4d0e-8e51-bacc361fcaeb.png",
+              "width": 0
+            },
+            {
+              "caption": "",
+              "credit": "",
+              "height": 0,
+              "imageId": 6,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F5c82a325-6987-419a-ba6d-8c5d73271456.png",
+              "width": 0
+            },
+            {
+              "caption": "View Original",
+              "credit": "",
+              "height": 0,
+              "imageId": 7,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F3b1789b9-2b88-4eda-a022-4071765ac999.jpeg",
+              "width": 0
+            },
+            {
+              "caption": "View Original",
+              "credit": "",
+              "height": 0,
+              "imageId": 8,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F01a6fd7f-e3ef-46e2-956f-4fcc0df30186.jpeg",
+              "width": 0
+            },
+            {
+              "caption": "View Original",
+              "credit": "",
+              "height": 0,
+              "imageId": 9,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F697b625f-d1af-4844-b384-7502520df3ee.jpeg",
+              "width": 0
+            },
+            {
+              "caption": "View Original",
+              "credit": "",
+              "height": 0,
+              "imageId": 10,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F66fff165-438c-4342-9ee8-01652beb8a2c.jpeg",
+              "width": 0
+            },
+            {
+              "caption": "View Original",
+              "credit": "",
+              "height": 0,
+              "imageId": 11,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F894f9e1c-dc1b-41f3-99b8-00e39e7f731b.jpeg",
+              "width": 0
+            },
+            {
+              "caption": "View Original",
+              "credit": "",
+              "height": 0,
+              "imageId": 12,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fc6dda276-c119-4dad-9ba2-0a87109aa8a2.jpeg",
+              "width": 0
+            },
+            {
+              "caption": "View Original",
+              "credit": "",
+              "height": 0,
+              "imageId": 13,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fe1d37ef3-1dfa-4a11-8cdb-8f28044c4453.jpeg",
+              "width": 0
+            },
+            {
+              "caption": "View Original",
+              "credit": "",
+              "height": 0,
+              "imageId": 14,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fa8e3c76f-1aab-4048-9b59-c0663dcfab5f.jpeg",
+              "width": 0
+            },
+            {
+              "caption": "",
+              "credit": "",
+              "height": 0,
+              "imageId": 15,
+              "src": "https://pocket-image-cache.com/640x360/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Ffafc4d6c-57aa-4524-86a0-99860a09748a.jpeg",
+              "width": 0
+            }
+          ],
           "collection": {
             "title": "13 Delicious Sandwich Recipes ",
             "intro": "*Image by snapgalleria/Getty Images*",
@@ -133,6 +273,16 @@
           "isIndex": false,
           "timeToRead": 5,
           "topImageUrl": "https://img-cdn.inc.com/image/upload/w_1024,h_576,c_fill/images/panoramic/GettyImages-1303793807_509111_xefuh5.jpg",
+          "images": [
+            {
+              "caption": "Illustration: Getty Images",
+              "credit": "",
+              "height": 0,
+              "imageId": 1,
+              "src": "https://img-cdn.inc.com/image/upload/w_1920,h_1080,c_fill/images/panoramic/GettyImages-1303793807_509111_xefuh5.jpg",
+              "width": 0
+            }
+          ],
           "collection": null,
           "syndicatedArticle": null
         }
@@ -177,6 +327,7 @@
           "isIndex": false,
           "timeToRead": 22,
           "topImageUrl": "https://alpha.aeon.co/images/6a2e7882-0dcb-4111-9701-bfc11f262440/1500x1500.jpg",
+          "images": null,
           "collection": null,
           "syndicatedArticle": null
         }
@@ -221,6 +372,16 @@
           "isIndex": false,
           "timeToRead": null,
           "topImageUrl": null,
+          "images": [
+            {
+              "caption": "",
+              "credit": "",
+              "height": 720,
+              "imageId": 1,
+              "src": "https://i.ytimg.com/vi/vT4Kk9v3B5Y/maxresdefault.jpg",
+              "width": 1280
+            }
+          ],
           "collection": null,
           "syndicatedArticle": null
         }
@@ -260,6 +421,7 @@
           "isIndex": false,
           "timeToRead": null,
           "topImageUrl": "http://www.nasa.gov/sites/default/files/thumbnails/image/main_image_galaxies_stephans_quintet_sq_nircam_miri_final-5mb.jpg",
+          "images": null,
           "collection": null,
           "syndicatedArticle": null
         }
