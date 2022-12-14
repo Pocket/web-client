@@ -38,7 +38,8 @@ import { discoverItemsSagas } from 'connectors/items-by-id/discover/items.state'
 import { discoverHomeReducers } from 'containers/discover/discover.state'
 import { discoverHomeSagas } from 'containers/discover/discover.state'
 
-import { collectionsReducers } from 'containers/collections/collections.state'
+import { collectionsPageReducers } from 'containers/collections/collections.state'
+import { collectionsBySlugReducers } from 'containers/collections/collections.state'
 import { collectionsSagas } from 'containers/collections/collections.state'
 
 import { collectionStoriesReducers } from 'connectors/items-by-id/collection/stories.state'
@@ -179,7 +180,8 @@ const discoverReducers = {
 }
 
 const collectionReducer = {
-  collectionsBySlug: collectionsReducers,
+  collectionsPage: collectionsPageReducers,
+  collectionsBySlug: collectionsBySlugReducers,
   collectionStoriesById: collectionStoriesReducers
 }
 

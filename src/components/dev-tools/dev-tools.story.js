@@ -6,38 +6,6 @@ export default {
 }
 
 const features = {
-  'getstarted-v2': {
-    assigned: true,
-    active: false,
-    variant: 'control',
-    test: 'temp.web.client.getstarted-v2',
-    payload: null,
-    name: 'getstarted-v2'
-  },
-  getstarted: {
-    assigned: true,
-    active: false,
-    variant: 'control',
-    test: 'temp.web.client.getstarted',
-    payload: null,
-    name: 'getstarted'
-  },
-  annotations: {
-    assigned: false,
-    active: false,
-    variant: null,
-    test: 'temp.web.client.annotations',
-    payload: null,
-    name: 'annotations'
-  },
-  'lab.annotations': {
-    assigned: false,
-    active: false,
-    variant: null,
-    test: 'temp.web.client.lab.annotations',
-    payload: null,
-    name: 'lab.annotations'
-  },
   'lab.braze': {
     assigned: false,
     active: false,
@@ -62,46 +30,6 @@ const features = {
     payload: null,
     name: 'api.next'
   },
-  'home.interests': {
-    assigned: false,
-    active: true,
-    variant: null,
-    test: 'temp.web.client.home.interests',
-    payload: null,
-    name: 'home.interests'
-  },
-  'pocket-hits.disable': {
-    assigned: true,
-    active: true,
-    variant: null,
-    test: 'temp.web.client.pocket-hits.disable',
-    payload: null,
-    name: 'pocket-hits.disable'
-  },
-  profiletest: {
-    assigned: false,
-    active: false,
-    variant: null,
-    test: 'temp.web.client.profiletest',
-    payload: null,
-    name: 'profiletest'
-  },
-  'home.release': {
-    assigned: true,
-    active: true,
-    variant: null,
-    test: 'temp.web.client.home.release',
-    payload: null,
-    name: 'home.release'
-  },
-  'home.lineup': {
-    assigned: false,
-    active: false,
-    variant: 'disabled',
-    test: 'perm.web.client.home.lineup',
-    payload: null,
-    name: 'home.lineup'
-  },
   lab: {
     assigned: false,
     active: false,
@@ -109,14 +37,6 @@ const features = {
     test: 'temp.web.client.lab',
     payload: null,
     name: 'lab'
-  },
-  'onboarding.rollout': {
-    assigned: true,
-    active: true,
-    variant: null,
-    test: 'perm.web.client.onboarding.rollout',
-    payload: null,
-    name: 'onboarding.rollout'
   },
   flagsReady: true
 }

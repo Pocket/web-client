@@ -248,6 +248,12 @@ export const cardStyles = css`
     display: none;
   }
 
+  .actions .item-actions{
+    button, a{
+      border-color: transparent;
+    }
+  }
+
   /* Bulk edit styles */
   &.bulkEdit {
     cursor: pointer;
@@ -262,6 +268,7 @@ export const cardStyles = css`
     position: absolute;
     box-sizing: content-box;
     border-radius: var(--borderRadius);
+    border: 1px solid transparent;
     width: 100%;
     height: 100%;
     transform: translate(-0.625rem, -0.75rem);
@@ -277,6 +284,12 @@ export const cardStyles = css`
   &.selected .selectedBack,
   &.selected:focus-within .selectedBack {
     background-color: var(--color-navCurrentTab);
+    display: block;
+  }
+
+  &.bulkCurrent .selectedBack,
+  &.bulkCurrent:focus-within .selectedBack {
+    border-color: var(--color-navCurrentTabText);
     display: block;
   }
 

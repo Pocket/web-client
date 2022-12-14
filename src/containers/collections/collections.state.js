@@ -33,9 +33,27 @@ export const unSaveCollectionPage = (slug) => ({ type: COLLECTION_PAGE_UNSAVE_RE
 
 /** REDUCERS
  --------------------------------------------------------------- */
-const initialState = {}
+export const collectionsPageReducers = (state = [], action) => {
+  switch (action.type) {
+    case COLLECTIONS_HYDRATE: {
+      const { payload } = action
+      return Object.keys(payload)
+    }
 
-export const collectionsReducers = (state = initialState, action) => {
+    // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
+    // it represents the state used to build the page on the server.
+    case HYDRATE: {
+      const { collectionsPage } = action.payload
+      return collectionsPage
+    }
+
+    default:
+      return state
+  }
+}
+
+
+export const collectionsBySlugReducers = (state = {}, action) => {
   switch (action.type) {
     case COLLECTIONS_HYDRATE: {
       const { payload } = action
