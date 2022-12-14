@@ -1,7 +1,7 @@
 # Anatomy of an item
 
 ## Image 
-Image associated with the article.  If no images are associate we generate a fallback to fill the space.
+Image associated with the article.  If no images are associated we generate a fallback to fill the space.
 
 ### Derived from:
 - thumbnail — Explicitly set by the curation team
