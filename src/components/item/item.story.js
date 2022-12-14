@@ -1,5 +1,6 @@
 import { Item as ItemComponent } from './item'
 import savesResponse from 'mocks/savedItems.json'
+import { topics } from 'mocks/_data/article'
 import { deriveListItem } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities'
 import { css, cx } from 'linaria'
@@ -77,6 +78,16 @@ export default {
         options: [false, 'PARTNERED', 'SPONSORED']
       }
     },
+    showTopic: {
+      control: 'boolean'
+    },
+    topicName: {
+      control: 'select',
+      options: Object.keys(topics),
+      if: {
+        arg: 'showTopic'
+      }
+    },
 
     itemId: { table: { disable: true } },
     title: { table: { disable: true } },
@@ -119,7 +130,8 @@ export const Item = (args) => {
     isInternalItem,
     publisherLogo,
     fromPartner,
-    clamp
+    clamp,
+    topic
   } = item
 
   const getShownImage = () => {
@@ -149,6 +161,7 @@ export const Item = (args) => {
       position={0}
       fromPartner={fromPartner}
       useMarkdown={true}
+      topicName={topic}
       {...args}
       className={cardClassnames}
     />
@@ -167,5 +180,6 @@ Item.args = {
   fromPartner: true, // This is so we can supersede this with the selector
   clamp: false,
   partnerType: false,
-  sideBySide: false
+  sideBySide: false,
+  showTopic: false
 }
