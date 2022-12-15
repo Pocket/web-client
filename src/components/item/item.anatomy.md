@@ -24,7 +24,7 @@ Title of the item/collection/syndicated article.  This is subject to clamping de
 ---
 
 ## Excerpt
-Excerpt generated from the content of the article. Generally this is 
+Excerpt generated from the content of the article. Generally this is pulled from meta-data if it exists, and otherwise is derived from article content
 
 ### Derived from:
 - curatedExcerpt — Explicitly set by the curation team
@@ -85,7 +85,7 @@ If a collection was made in partnership with an external company, this entity wi
 Indicator if the article is syndicated by Pocket
 
 ### Derived from
-- Checks for the prescence of syndicated metadata on the item
+- Checks for the presence of syndicated metadata on the item
 
 ---
 
@@ -98,7 +98,7 @@ Check whether the article will require the user to leave Pocket or if it will op
 - hasValidReadUrl — TRUE (this indicates the item can be parsed)
 
 #### PROPOSAL
-- isParsed — having a clear indicator whether something has be parsed would reduce the need for the regex.
+- isParsed — having a clear indicator whether something has been parsed would reduce the need for the regex.
 
 ---
 
@@ -118,7 +118,7 @@ Whether an item is a collection built by the curation team
 A derived url for premium users 
 
 ### Dervied from: 
-- generated on the client side basd on itemId
+- generated on the client side based on itemId
 
 #### PROPOSAL
 If this came from the server it would allow us to easily modify and enhange this service
