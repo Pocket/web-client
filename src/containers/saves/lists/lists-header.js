@@ -1,7 +1,7 @@
 import { TagPageHeader as TagHeader } from 'components/headers/tag-page-header'
-import { pinUserTag } from './tags-page.state'
-import { editUserTag } from './tags-page.state'
-import { deleteUserTag } from './tags-page.state'
+import { pinUserTag } from './lists-page.state'
+import { editUserTag } from './lists-page.state'
+import { deleteUserTag } from './lists-page.state'
 import { useDispatch, useSelector } from 'react-redux'
 
 export function TagPageHeader({ subset, title, filter, tag, sortOrder, handleNewest, handleOldest }) {

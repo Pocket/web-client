@@ -147,7 +147,17 @@ function* userTagsOnly() {
 }
 
 function* userTagsRequest() {
-  return yield put({ type: USER_TAGS_GET_FAILURE })
+  const response = yield fetchStoredTags()
+
+  if (response.status !== 1) return yield put({ type: USER_TAGS_GET_FAILURE })
+
+  const { tags: tagsList, since } = response
+
+  yield put({
+    type: USER_TAGS_GET_SUCCESS,
+    since,
+    tagsList
+  })
 }
 
 function* userTagsTogglePin(actions) {
