@@ -79,9 +79,6 @@ import { itemReportSagas } from 'connectors/items-by-id/discover/items.report'
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
 
-import { readReducers } from 'containers/read/read.state'
-import { readSagas } from 'containers/read/read.state'
-
 import { userMessageReducers } from 'containers/messages/user-messages.state'
 import { userMessageSagas } from 'containers/messages/user-messages.state'
 
@@ -197,9 +194,8 @@ const libraryReducers = {
 }
 
 const readerViewReducers = {
-  reader: readReducers,
   readerSettings: readerSettingsReducers,
-  readerGraph: readerReducers
+  reader: readerReducers
 }
 
 const marketingReducers = {
@@ -266,7 +262,6 @@ function* rootSaga() {
     ...savesItemsSagas,
     ...itemShareSagas,
     ...itemReportSagas,
-    ...readSagas,
     ...readerSettingsSagas,
     ...readerSagas, //graph
     ...homeSagas,

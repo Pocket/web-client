@@ -225,8 +225,8 @@ const getSection = (state) => state.app.section
 const getItems = (state) => state.listSaved
 const getItem = (state, id) => state.items[id]
 const getSavedItem = (state, id) => state.itemsSaved[id]
-const getFontSize = (state) => state.reader.fontSize
-const getColumnWidth = (state) => state.reader.columnWidth
+const getFontSize = (state) => state.readerSettings.fontSize
+const getColumnWidth = (state) => state.readerSettings.columnWidth
 const getBulkItems = (state) => state?.mutationBulk?.itemIds
 const getBatchFavorite = (state) => state?.mutationBulk?.favoriteAction
 const getBatchArchive = (state) => state?.mutationBulk?.archiveAction

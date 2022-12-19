@@ -25,7 +25,7 @@ export const Toolbar = ({ id }) => {
 
   const item = useSelector((state) => state.items[id])
   const savedData = useSelector((state) => state.itemsSaved[id])
-  const sideBarOpen = useSelector((state) => state.readerGraph.sideBarOpen)
+  const sideBarOpen = useSelector((state) => state.reader.sideBarOpen)
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const colorMode = useSelector((state) => state?.app?.colorMode)
