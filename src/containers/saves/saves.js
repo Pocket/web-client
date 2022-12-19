@@ -80,7 +80,7 @@ export const Saves = (props) => {
             isPremium={isPremium}
             handleRelevance={handleRelevance}
           />
-          {flagsReady && shouldRender ? <SavedItems {...props} /> : null}
+
         </main>
         <DeleteModal />
         <TaggingModal />
