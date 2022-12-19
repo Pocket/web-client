@@ -15,7 +15,7 @@ import { savedItemsSetSortOrder } from 'containers/list-saved/list-saved.state'
 import { savedItemsSetSortBy } from 'containers/list-saved/list-saved.state'
 import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 
-import { TagPageHeader } from 'containers/saves/lists/tag-page-header'
+import { TagPageHeader } from 'containers/saves/lists/lists-header'
 import { SavesHeader } from 'components/headers/saves-header'
 import { SearchPageHeader } from 'components/headers/search-page-header'
 

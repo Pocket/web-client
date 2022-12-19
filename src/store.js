@@ -17,8 +17,8 @@ import { brazeSagas } from 'connectors/third-party/braze.state'
 
 import { userReducers, userSagas, accountReducers } from 'containers/account/account.state'
 
-import { userTagsSagas } from 'containers/saves/lists/tags-page.state'
-import { userTagsReducers } from 'containers/saves/lists/tags-page.state'
+import { userTagsSagas } from 'containers/saves/lists/lists-page.state'
+import { userTagsReducers } from 'containers/saves/lists/lists-page.state'
 
 import { settingsReducers } from 'connectors/settings/settings.state'
 import { settingsSagas } from 'connectors/settings/settings.state'
