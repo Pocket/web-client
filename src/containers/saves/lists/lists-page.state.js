@@ -2,11 +2,7 @@ import { put, call, takeEvery, select } from 'redux-saga/effects'
 import { fetchStoredTags } from 'common/api/_legacy/tags'
 import { renameStoredTag } from 'common/api/_legacy/tags'
 import { deleteStoredTag } from 'common/api/_legacy/tags'
-<<<<<<<< HEAD:src/containers/saves/lists/lists-page.state.js
 import { getUserTags as getUserTagsGraph } from 'common/api/queries/get-user-tags'
-========
-import { getUserTags as getUserTagsGraph } from 'common/api'
->>>>>>>> 1b0e3196 (chore(saves): move tags to lists folder):src/containers/saves/lists/tags-page.state.js
 
 import { USER_TAGS_GET_REQUEST } from 'actions'
 import { USER_TAGS_GET_SUCCESS } from 'actions'
