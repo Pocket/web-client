@@ -24,7 +24,7 @@ export const Highlights = ({ children, id }) => {
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const item = useSelector((state) => state.items[id])
   const savedData = useSelector((state) => state.itemsSaved[id])
-  const highlightList = useSelector((state) => state.readerGraph.highlightList)
+  const highlightList = useSelector((state) => state.reader.highlightList)
 
   const { analyticsData } = item
   const { annotations } = savedData
