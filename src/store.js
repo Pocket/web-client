@@ -17,8 +17,8 @@ import { brazeSagas } from 'connectors/third-party/braze.state'
 
 import { userReducers, userSagas, accountReducers } from 'containers/account/account.state'
 
-import { userTagsSagas } from 'containers/saves/tags-page/tags-page.state'
-import { userTagsReducers } from 'containers/saves/tags-page/tags-page.state'
+import { userTagsSagas } from 'containers/saves/lists/tags-page.state'
+import { userTagsReducers } from 'containers/saves/lists/tags-page.state'
 
 import { settingsReducers } from 'connectors/settings/settings.state'
 import { settingsSagas } from 'connectors/settings/settings.state'
@@ -58,9 +58,6 @@ import { syndicatedArticleSagas } from 'containers/syndicated-article/syndicated
 
 import { recitReducers } from 'connectors/recit/recit.state'
 import { recitSagas } from 'connectors/recit/recit.state'
-
-import { savesReducers } from 'containers/saves/saves.state'
-import { savesSagas } from 'containers/saves/saves.state'
 
 import { savesItemsReducers } from 'connectors/items-by-id/saves/items.state'
 import { savesItemsSagas } from 'connectors/items-by-id/saves/items.state'
@@ -184,7 +181,6 @@ const collectionReducer = {
 
 const libraryReducers = {
   savesItemsById: savesItemsReducers,
-  saves: savesReducers,
   bulkEdit: itemBulkReducers,
   userTags: userTagsReducers,
   userMessages: userMessageReducers,
@@ -258,7 +254,6 @@ function* rootSaga() {
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
     ...recitSagas,
-    ...savesSagas,
     ...savesItemsSagas,
     ...itemShareSagas,
     ...itemReportSagas,
