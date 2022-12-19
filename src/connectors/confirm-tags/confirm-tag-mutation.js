@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, Trans } from 'next-i18next'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-import { requestUserTags } from 'containers/saves/tags-page/tags-page.state'
+import { requestUserTags } from 'containers/saves/lists/tags-page.state'
 import { mutationTagConfirm } from 'connectors/items/mutation-tagging.state'
 import { mutationTagCancel } from 'connectors/items/mutation-tagging.state'
 import { mutationTagAdd } from 'connectors/items/mutation-tagging.state'
