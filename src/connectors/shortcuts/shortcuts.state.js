@@ -55,8 +55,8 @@ import { SHORTCUT_FAVORITE_ITEM } from 'actions'
 import { SHORTCUT_VIEW_ORIGINAL } from 'actions'
 
 import { FONT_RANGE } from 'common/constants'
-import { COLUMN_WIDTH } from 'common/constants' // Need key combos for this that make sense
-// import { LINE_HEIGHT } from 'common/constants' // Need key combos for this that make sense
+import { COLUMN_WIDTH_RANGE } from 'common/constants' // Need key combos for this that make sense
+// import { LINE_HEIGHT_RANGE } from 'common/constants' // Need key combos for this that make sense
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -466,7 +466,7 @@ function* shortcutIncreaseColumnWidth() {
   const columnWidth = yield select(getColumnWidth)
   const nextSize = parseInt(columnWidth) + 1
 
-  if (nextSize > COLUMN_WIDTH.length) return
+  if (nextSize > COLUMN_WIDTH_RANGE.length) return
   yield put({ type: UPDATE_COLUMN_WIDTH, columnWidth: nextSize })
 }
 

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { BottomUpsell } from 'components/reader/upsell.bottom'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-import { COLUMN_WIDTH_RANGE } from 'containers/read/read'
+import { COLUMN_WIDTH_RANGE } from 'common/constants'
 
 export const Upsell = () => {
   const dispatch = useDispatch()

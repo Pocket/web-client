@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { css } from 'linaria'
-import { COLUMN_WIDTH_RANGE } from 'containers/read/read'
+import { COLUMN_WIDTH_RANGE } from 'common/constants'
 import { RecCard } from 'connectors/item-card/reader/card-rec'
 import { readerRecsRequest } from 'connectors/recit/recit.state'
 import { breakpointTinyTablet } from 'common/constants'
