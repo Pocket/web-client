@@ -2,7 +2,7 @@ import { useEffect, useCallback, useState } from 'react'
 import { LoadMore } from './load-more'
 import { MemoizedItemCard as ItemCard } from './card'
 import { useSelector, useDispatch } from 'react-redux'
-import { loadMoreListItems } from './list-saved.state'
+import { loadMoreListItems } from './saved-items.state'
 import { getScrollTop } from 'common/utilities/scroll/scroll'
 import { useViewport } from 'components/viewport-provider/viewport-provider'
 
