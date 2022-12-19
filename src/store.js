@@ -130,9 +130,9 @@ import { mutationHighlightSagas } from 'connectors/items/mutation-highlight.stat
 import { mutationBulkReducers } from 'connectors/items/mutations-bulk.state'
 import { mutationBulkSagas } from 'connectors/items/mutations-bulk.state'
 
-import { listSavedReducers } from 'containers/list-saved/list-saved.state'
-import { listSavedSagas } from 'containers/list-saved/list-saved.state'
-import { listSavedPageInfoReducers } from 'containers/list-saved/list-saved.state'
+import { listSavedReducers } from 'containers/saves/saved-items/saved-items.state'
+import { listSavedSagas } from 'containers/saves/saved-items/saved-items.state'
+import { listSavedPageInfoReducers } from 'containers/saves/saved-items/saved-items.state'
 
 /* REDUCERS
  --------------------------------------------------------------- */

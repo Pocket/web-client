@@ -2,7 +2,7 @@ import Layout from 'layouts/with-sidebar'
 import { useSelector, useDispatch } from 'react-redux'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { useRouter } from 'next/router'
-import { ListSaved } from 'containers/list-saved/list-saved'
+import { SavedItems } from 'containers/saves/saved-items/saved-items'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ShareModal } from 'connectors/confirm-share/confirm-share'
@@ -11,8 +11,8 @@ import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
 import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
-import { savedItemsSetSortOrder } from 'containers/list-saved/list-saved.state'
-import { savedItemsSetSortBy } from 'containers/list-saved/list-saved.state'
+import { savedItemsSetSortOrder } from 'containers/saves/saved-items/saved-items'
+import { savedItemsSetSortBy } from 'containers/saves/saved-items/saved-items'
 import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 
 import { TagPageHeader } from 'containers/saves/lists/lists-header'
@@ -80,7 +80,7 @@ export const Saves = (props) => {
             isPremium={isPremium}
             handleRelevance={handleRelevance}
           />
-          {flagsReady && shouldRender ? <ListSaved {...props} /> : null}
+          {flagsReady && shouldRender ? <SavedItems {...props} /> : null}
         </main>
         <DeleteModal />
         <TaggingModal />

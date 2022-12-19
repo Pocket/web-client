@@ -4,31 +4,31 @@ import { useRouter } from 'next/router'
 import { ListOfItems } from './list-of-items'
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
 
-import { searchItems } from 'containers/list-saved/list-saved.state'
-import { searchItemsUnread } from 'containers/list-saved/list-saved.state'
-import { searchItemsArchived } from 'containers/list-saved/list-saved.state'
-import { searchItemsFavorites } from 'containers/list-saved/list-saved.state'
-import { getItemsUnread } from 'containers/list-saved/list-saved.state'
-import { getItemsArchived } from 'containers/list-saved/list-saved.state'
-import { getItemsFavorites } from 'containers/list-saved/list-saved.state'
-import { getItemsFavoritesUnread } from 'containers/list-saved/list-saved.state'
-import { getItemsFavoritesArchived } from 'containers/list-saved/list-saved.state'
-import { getItemsAnnotated } from 'containers/list-saved/list-saved.state'
-import { getItemsAnnotatedUnread } from 'containers/list-saved/list-saved.state'
-import { getItemsAnnotatedArchived } from 'containers/list-saved/list-saved.state'
-import { getItemsAnnotatedFavorites } from 'containers/list-saved/list-saved.state'
-import { getItemsArticles } from 'containers/list-saved/list-saved.state'
-import { getItemsArticlesUnread } from 'containers/list-saved/list-saved.state'
-import { getItemsArticlesArchived } from 'containers/list-saved/list-saved.state'
-import { getItemsArticlesFavorites } from 'containers/list-saved/list-saved.state'
-import { getItemsVideos } from 'containers/list-saved/list-saved.state'
-import { getItemsVideosArchived } from 'containers/list-saved/list-saved.state'
-import { getItemsVideosFavorites } from 'containers/list-saved/list-saved.state'
-import { getItemsVideosUnread } from 'containers/list-saved/list-saved.state'
-import { getItemsTagsUnread } from 'containers/list-saved/list-saved.state'
-import { getItemsTagsArchived } from 'containers/list-saved/list-saved.state'
-import { getItemsTagsFavorites } from 'containers/list-saved/list-saved.state'
-import { getItemsTags } from 'containers/list-saved/list-saved.state'
+import { searchItems } from 'containers/saves/saved-items/saved-items.state'
+import { searchItemsUnread } from 'containers/saves/saved-items/saved-items.state'
+import { searchItemsArchived } from 'containers/saves/saved-items/saved-items.state'
+import { searchItemsFavorites } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsUnread } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsArchived } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsFavorites } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsFavoritesUnread } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsFavoritesArchived } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsAnnotated } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsAnnotatedUnread } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsAnnotatedArchived } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsAnnotatedFavorites } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsArticles } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsArticlesUnread } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsArticlesArchived } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsArticlesFavorites } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsVideos } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsVideosArchived } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsVideosFavorites } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsVideosUnread } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsTagsUnread } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsTagsArchived } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsTagsFavorites } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsTags } from 'containers/saves/saved-items/saved-items.state'
 
 export function filterSelector(subset, filter) {
   if (subset === 'unread') return getItemsUnread
@@ -75,7 +75,7 @@ export function filterSelector(subset, filter) {
   return () => {}
 }
 
-export const ListSaved = (props) => {
+export const SavedItems = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
   const sortOrder = useSelector((state) => state.listSavedPageInfo.sortOrder)
