@@ -1,4 +1,4 @@
-import Reader from 'containers/read/read'
+import Reader from 'containers/read/reader'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON, LOCALE_READER } from 'common/constants'
 

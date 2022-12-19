@@ -23,6 +23,10 @@ import { ReaderFonts } from 'components/reader/fonts'
 
 import { Loader, LoaderCentered } from 'components/loader/loader'
 
+import { COLUMN_WIDTH_RANGE } from 'common/constants'
+import { LINE_HEIGHT_RANGE } from 'common/constants'
+import { FONT_RANGE } from 'common/constants'
+
 export const articleWrapperStyles = css`
   p {
     font-size: unset !important;
@@ -72,10 +76,6 @@ export const articleWrapperStyles = css`
     }
   }
 `
-
-export const COLUMN_WIDTH_RANGE = [531, 574, 632, 718, 826, 933, 1041]
-export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]
-export const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
 
 export default function Reader() {
   const dispatch = useDispatch()

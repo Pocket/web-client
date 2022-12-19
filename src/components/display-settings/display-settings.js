@@ -21,8 +21,8 @@ import { ThemeSettings } from './theme'
 import { FONT_TYPES } from 'components/fonts/fonts'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { FONT_RANGE } from 'common/constants'
-import { LINE_HEIGHT } from 'common/constants'
-import { COLUMN_WIDTH } from 'common/constants'
+import { LINE_HEIGHT_RANGE } from 'common/constants'
+import { COLUMN_WIDTH_RANGE } from 'common/constants'
 import { KEYS } from 'common/constants'
 import { PREMIUM_URL } from 'common/constants'
 
@@ -247,14 +247,14 @@ export const DisplaySettings = ({
                 <LineHeightSettings
                   clickDecrease={decreaseLineHeight}
                   clickIncrease={increaseLineHeight}
-                  range={LINE_HEIGHT}
+                  range={LINE_HEIGHT_RANGE}
                   current={parseInt(lineHeight)}
                   setCurrent={setLineHeight}
                 />
                 <ColumnWidthSettings
                   clickDecrease={decreaseColumnWidth}
                   clickIncrease={increaseColumnWidth}
-                  range={COLUMN_WIDTH}
+                  range={COLUMN_WIDTH_RANGE}
                   current={parseInt(columnWidth)}
                   setCurrent={setColumnWidth}
                 />
