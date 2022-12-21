@@ -6,55 +6,6 @@ import { validateSnowplowExpectations } from 'connectors/snowplow/snowplow.state
 // EX: title, excerpt, images.  These are assumed to always be there, but there
 // is a possibility they may be missing
 
-export const savedLegacyListItem = {
-  item_id: '3059000415',
-  resolved_id: '3059000415',
-  given_url:
-    'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential',
-  given_title: 'The Undisciplined Pursuit of More (The Art of Limiting Yourself to Only The',
-  favorite: '1',
-  status: '0',
-  time_added: '1634852432',
-  time_updated: '1634852432',
-  time_read: '0',
-  time_favorited: '1602888587',
-  sort_id: 0,
-  resolved_title:
-    'The Undisciplined Pursuit of More (The Art of Limiting Yourself to Only The Essential)',
-  resolved_url:
-    'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential',
-  excerpt:
-    'For too long, we have overemphasized the external aspect of choices and underemphasized our internal ability to choose.',
-  is_article: '1',
-  is_index: '0',
-  has_video: '0',
-  has_image: '1',
-  word_count: '1192',
-  lang: 'en',
-  time_to_read: 5,
-  top_image_url:
-    'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5173%2F1595617454_GettyImages-1168909015.jpgcrop.jpg',
-  authors: {
-    148370955: {
-      item_id: '3059000415',
-      author_id: '148370955',
-      name: 'Thomas Oppong',
-      url: 'https://learn.thomasoppong.com/'
-    }
-  },
-  images: {
-    1: {
-      src: 'https://pocket-syndicated-images.s3.amazonaws.com/5f1b307571176.jpg'
-    }
-  },
-  domain_metadata: {
-    name: 'Pocket',
-    logo: 'https://logo.clearbit.com/getpocket.com?size=800',
-    greyscale_logo: 'https://logo.clearbit.com/getpocket.com?size=800&greyscale=true'
-  },
-  listen_duration_estimate: 461
-}
-
 export const savedLegacyListItemFromClientApi = {
   node: {
     _createdAt: 1634852432,
@@ -126,66 +77,6 @@ describe('Saves - Original Deriver', () => {
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3059000415'
   const expectedAnalyticsUrl = 'https://getpocket.com/explore/item/the-undisciplined-pursuit-of-more-the-art-of-limiting-yourself-to-only-the-essential' //prettier-ignore
 
-  it('should derive legacy data as expected', () => {
-    const item = deriveListItem(savedLegacyListItem, true)
-
-    expect(item._createdAt).toBe(1634852432)
-    expect(item._updatedAt).toBe(1634852432)
-    expect(item.status).toBe('UNREAD')
-    expect(item.isFavorite).toBe(true)
-    expect(item.favoritedAt).toBe(1602888587)
-    expect(item.isArchived).toBe(false)
-    expect(item.archivedAt).toBe(0)
-
-    expect(item.itemId).toBe('3059000415')
-    expect(item.resolvedId).toBe('3059000415')
-
-    expect(item.isSyndicated).toBe(false)
-    expect(item.isReadable).toBe(true)
-    expect(item.isCollection).toBe(false)
-    expect(item.isArticle).toBeTruthy()
-    expect(item.isIndex).toBeFalsy()
-    expect(item.hasVideo).toBe('NO_VIDEOS')
-    expect(item.hasImage).toBe('HAS_IMAGES')
-    expect(item.language).toBe('en')
-    expect(item.fromPartner).toBeFalsy()
-
-    expect(item.title).toBe(
-      'The Undisciplined Pursuit of More (The Art of Limiting Yourself to Only The Essential)'
-    )
-    expect(item.thumbnail).toBe(
-      'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fpocket-syndicated-images.s3.amazonaws.com%2Farticles%2F5173%2F1595617454_GettyImages-1168909015.jpgcrop.jpg'
-    )
-    expect(item.publisher).toBe('Pocket')
-    expect(item.excerpt).toBe(
-      'For too long, we have overemphasized the external aspect of choices and underemphasized our internal ability to choose.'
-    )
-    expect(item.saveUrl).toBe(expectedSaveUrl)
-    expect(item.externalUrl).toBe(expectedExternalUrl)
-    expect(item.readUrl).toBe(expectedReadUrl)
-    expect(item.permanentUrl).toBe(expectedPermanentUrl)
-    expect(item.isInternalItem).toBe(true)
-    expect(item.timeToRead).toBe(5)
-    expect(item.tags).toStrictEqual([])
-    expect(item.annotations).toStrictEqual([])
-    expect(item.hasAnnotation).toBeFalsy()
-    expect(item.images).toStrictEqual([
-      {
-        src: 'https://pocket-syndicated-images.s3.amazonaws.com/5f1b307571176.jpg'
-      }
-    ])
-    expect(item.videos).toBe(undefined)
-    expect(item.authors).toStrictEqual([
-      {
-        item_id: '3059000415',
-        author_id: '148370955',
-        name: 'Thomas Oppong',
-        url: 'https://learn.thomasoppong.com/'
-      }
-    ])
-    expect(item.analyticsData.id).toBe('3059000415')
-    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
-  })
 
   it('should derive client api data as expected', () => {
     const item = deriveListItem(savedLegacyListItemFromClientApi)
