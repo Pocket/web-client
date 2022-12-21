@@ -5,7 +5,6 @@ import { Card } from 'components/item-card/card'
 import { listStrata, listSlide } from 'components/items-layout/list-strata'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { getHomeContent } from './home.state'
-import { saveHomeItem, unSaveHomeItem } from 'containers/home/home.state'
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeHeader } from 'components/headers/home-header'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
@@ -16,6 +15,8 @@ import TopicsPillbox from 'components/topics-pillbox/topics-pillbox'
 import { reSelectTopics } from 'containers/home/home-setup.state'
 import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
+import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
+import { mutationDelete } from 'connectors/items/mutation-delete.state'
 
 export const HomeContent = () => {
   const dispatch = useDispatch()
@@ -35,7 +36,7 @@ export const HomeContent = () => {
   )
 }
 
-function Slate({ slateId, position }) {
+function Slate({ slateId }) {
   const dispatch = useDispatch()
   const slates = useSelector((state) => state.home.slates)
   const slate = useSelector((state) => state.home.slatesById[slateId])
@@ -175,12 +176,12 @@ function CardActions({ id }) {
   // Prep save action
   const onSave = () => {
     dispatch(sendSnowplowEvent('home.corpus.save', analyticsData))
-    dispatch(saveHomeItem(id, url))
+    dispatch(mutationUpsert(url))
   }
 
   const onUnSave = () => {
     dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
-    dispatch(unSaveHomeItem(id, url))
+    dispatch(mutationDelete(id))
   }
 
   const saveAction = saveStatus === 'saved' ? onUnSave : onSave
