@@ -1,7 +1,7 @@
 import { css } from 'linaria'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
-import { getImageCacheUrl } from 'common/utilities'
+import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { NewViewIcon } from 'components/icons/NewViewIcon'
 
 const cardMediaStyles = css`

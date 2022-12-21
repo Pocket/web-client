@@ -3,7 +3,7 @@ import { breakpointSmallHandset } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
 import { breakpointLargeTablet } from 'common/constants'
-import { capitalizeFirstLetter } from 'common/utilities'
+import { capitalizeFirstLetter } from 'common/utilities/strings/strings'
 
 const whatsNewHeaderStyle = css`
   margin-bottom: var(--spacing100);

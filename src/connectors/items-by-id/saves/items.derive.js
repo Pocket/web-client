@@ -1,6 +1,6 @@
 import { READING_WPM } from 'common/constants'
-import { domainForUrl, replaceUTM } from 'common/utilities'
-import { urlWithPermanentLibrary } from 'common/utilities'
+import { domainForUrl, replaceUTM } from 'common/utilities/urls/urls'
+import { urlWithPermanentLibrary } from 'common/utilities/urls/urls'
 
 export function deriveSavesItems(response) {
   /**

@@ -1,4 +1,4 @@
-import { arrayToObject } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { slateMeta } from 'common/slate-meta'
 import { deriveRecommendation } from 'common/api/derivers/item'
 

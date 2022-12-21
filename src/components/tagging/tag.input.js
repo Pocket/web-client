@@ -2,7 +2,7 @@ import React from 'react'
 import AutosizeInput from 'components/input-autosize/input-autosize'
 import { KEYS } from 'common/constants'
 import { css } from 'linaria'
-import { validateEmail } from 'common/utilities'
+import { validateEmail } from 'common/utilities/validate-email/validate-email'
 
 const inputWrapper = css`
   max-width: 100%;

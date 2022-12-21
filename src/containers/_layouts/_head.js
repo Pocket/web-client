@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { getImageCacheUrl } from 'common/utilities'
+import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { FACEBOOK_APP_ID } from 'common/constants'
 
 export const PocketHead = ({ metaData = {}, title: pageTitle, canonical, forceWebView }) => {

@@ -1,7 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { saveItem as saveItemAPI } from 'common/api/_legacy/saveItem'
 import { deriveStory } from 'common/api/derivers/item'
-import { arrayToObject } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 import { COLLECTION_STORIES_REQUEST } from 'actions'
 import { COLLECTION_STORIES_HYDRATE } from 'actions'

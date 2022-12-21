@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { useSelector } from 'react-redux'
-import { getScrollTop } from 'common/utilities'
+import { getScrollTop } from 'common/utilities/scroll/scroll'
 import { cardsContainer } from 'components/items-layout/base'
 import { cx } from 'linaria'
 import { MemoizedItem } from 'connectors/item-card/saves/card'

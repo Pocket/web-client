@@ -1,5 +1,5 @@
 import { getSchemaUri } from 'connectors/snowplow/snowplow.utilities'
-import { getObjectWithValidKeysOnly } from 'common/utilities'
+import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object-array'
 
 /**
  * Schema information:

@@ -1,5 +1,5 @@
 import { put, call, select, takeEvery, takeLatest } from 'redux-saga/effects'
-import { arrayToObject } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { itemTagsReplace, itemTagsRemove, bulkTagging } from 'common/api/mutations/tagItem'
 import { getTagSuggestionById } from 'common/api/queries/get-tag-suggestions'
 

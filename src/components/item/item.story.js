@@ -2,7 +2,7 @@ import { Item as ItemComponent } from './item'
 import savesResponse from 'mocks/savedItems.json'
 import { topics } from 'mocks/_data/article'
 import { deriveListItem } from 'common/api/derivers/item'
-import { arrayToObject } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { css, cx } from 'linaria'
 
 import { SavedActions, DiscoveryActions } from './item-actions'

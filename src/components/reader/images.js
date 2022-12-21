@@ -1,4 +1,6 @@
-import { getImageCacheUrl, waitForElement } from 'common/utilities'
+import { getImageCacheUrl} from 'common/utilities/urls/urls'
+import { waitForElement } from 'common/utilities/elements/wait-for-element'
+
 import DOMPurify from 'dompurify'
 
 function loadImage(imageObject) {

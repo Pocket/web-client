@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
-import { numberWithCommas } from 'common/utilities'
+import { numberWithCommas } from 'common/utilities/numbers/numbers'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 
 import { Trans } from 'next-i18next'

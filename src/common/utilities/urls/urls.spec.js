@@ -1,8 +1,8 @@
-import { urlWithPocketRedirect } from 'common/utilities'
-import { getImageCacheUrl } from 'common/utilities'
-import { domainForUrl } from 'common/utilities'
-import { getTopLevelPath } from 'common/utilities'
-import { replaceUTM } from 'common/utilities'
+import { urlWithPocketRedirect } from './urls'
+import { getImageCacheUrl } from './urls'
+import { domainForUrl } from './urls'
+import { getTopLevelPath } from './urls'
+import { replaceUTM } from './urls'
 
 describe('urlWithPocketRedirect', () => {
   it('returns a properly formatted pocket redirect url.', () => {

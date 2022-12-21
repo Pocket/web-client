@@ -1,6 +1,6 @@
 import { css, cx } from 'linaria'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
-import { capitalizeFirstLetter } from 'common/utilities'
+import { capitalizeFirstLetter } from 'common/utilities/strings/strings'
 import { PinFilledIcon } from 'components/icons/PinFilledIcon'
 import { PinIcon } from 'components/icons/PinIcon'
 import { EditIcon } from 'components/icons/EditIcon'

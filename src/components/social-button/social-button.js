@@ -1,6 +1,6 @@
 import { css, cx } from 'linaria'
-import { getObjectWithValidKeysOnly } from 'common/utilities'
-import { openWindow } from 'common/utilities'
+import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object-array'
+import { openWindow } from 'common/utilities/open-window/open-window'
 import { topTooltipDelayed } from 'components/tooltip/tooltip'
 
 import { FacebookColorIcon } from 'components/icons/FacebookColorIcon'

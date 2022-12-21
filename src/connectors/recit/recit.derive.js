@@ -1,5 +1,5 @@
 import { READING_WPM } from 'common/constants'
-import { domainForUrl } from 'common/utilities'
+import { domainForUrl } from 'common/utilities/urls/urls'
 
 export function deriveReaderRecitItems(recommendations) {
   /**

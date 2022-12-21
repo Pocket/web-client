@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { getTimeOfDay } from 'common/utilities'
+import { getTimeOfDay } from 'common/utilities/date-time/date-time'
 import { css } from 'linaria'
 import { useTranslation, Trans } from 'next-i18next'
 

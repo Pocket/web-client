@@ -2,7 +2,7 @@ import { takeLatest, put, select } from 'redux-saga/effects'
 import { getSaves } from 'common/api/saves'
 import { searchSaves } from 'common/api/saves'
 import { deriveListItem } from 'common/api/derivers/item'
-import { arrayToObject } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 import { reconcileItemsBatch } from './saves.reconcilers'
 import { reconcileItemsArchived } from './saves.reconcilers'

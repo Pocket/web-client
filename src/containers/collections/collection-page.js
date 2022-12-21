@@ -20,7 +20,7 @@ import { ContentIntro } from 'components/content-intro/content-intro'
 import { AuthorBio } from 'components/content-author/author-bio'
 import { Partner } from 'components/content-partner/partner'
 
-import { getImageCacheUrl } from 'common/utilities'
+import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { ItemCard } from 'connectors/item-card/collection/story-card'
 

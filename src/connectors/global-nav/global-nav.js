@@ -32,7 +32,7 @@ import { CollectionsIcon } from 'components/icons/CollectionsIcon'
 import { BASE_URL } from 'common/constants'
 import { LOGIN_URL } from 'common/constants'
 import { RELEASE_NOTES_VERSION } from 'common/constants'
-import { getTopLevelPath } from 'common/utilities'
+import { getTopLevelPath } from 'common/utilities/urls/urls'
 
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 

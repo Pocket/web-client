@@ -1,5 +1,5 @@
-import { arrayToObject } from 'common/utilities'
-import { getObjectWithValidKeysOnly } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
+import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object-array'
 import { arraysAreEqual } from 'common/utilities/object-array/object-array'
 
 describe('arrayToObject', () => {

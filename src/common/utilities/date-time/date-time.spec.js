@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
-import { getPublishedDate, timeRelativeToNow } from 'common/utilities'
+import { getPublishedDate } from 'common/utilities/date-time/date-time'
+import {timeRelativeToNow } from 'common/utilities/date-time/date-time'
 
 describe('getPublishedDate', () => {
   it('returns a properly formatted date', () => {

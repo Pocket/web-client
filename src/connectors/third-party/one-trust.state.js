@@ -1,5 +1,5 @@
 import { ONE_TRUST_DATA } from 'actions'
-import { arrayToObject } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 // ID C0001 Necessary Cookies
 // ID C0002 Analytics Cookies
