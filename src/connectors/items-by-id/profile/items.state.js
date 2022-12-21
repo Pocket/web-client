@@ -1,7 +1,7 @@
 import { put, call, takeLatest } from 'redux-saga/effects'
 import { getFeedByUser } from 'common/api/_legacy/profile'
 import { sendItemActions } from 'common/api/_legacy/item-actions'
-import { arrayToObject } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { saveItem as saveItemAPI } from 'common/api/_legacy/saveItem'
 import { deriveProfile } from 'common/api/derivers/item'
 

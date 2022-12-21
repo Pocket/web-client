@@ -1,4 +1,4 @@
-import { getValueFromCookie } from 'common/utilities'
+import { getValueFromCookie } from './cookies'
 
 describe('getValueFromCookie', () => {
   let cookie =

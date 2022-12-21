@@ -1,4 +1,4 @@
-import { numberWithCommas } from 'common/utilities'
+import { numberWithCommas } from 'common/utilities/numbers/numbers'
 
 describe('numberWithCommas', () => {
   it('returns a US formatted number with commas', () => {

@@ -4,7 +4,7 @@ import { deriveRecommendation } from 'common/api/derivers/item'
 import { deriveCollection } from 'common/api/derivers/item'
 import { deriveStory } from 'common/api/derivers/item'
 
-import { arrayToObject } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { Saves as SavesActions } from 'components/item-actions/item-actions.story'
 import { Recommendation as RecommendationActions } from 'components/item-actions/item-actions.story'
 import { Home as HomeActions } from 'components/item-actions/item-actions.story'

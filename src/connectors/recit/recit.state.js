@@ -39,7 +39,7 @@ import { getHomeRecommendations } from 'common/api/_legacy/recit'
 import { saveItem as saveItemAPI } from 'common/api/_legacy/saveItem'
 import { removeItem as removeItemAPI } from 'common/api/_legacy/removeItem'
 
-import { arrayToObject } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { checkExternal } from './recit.derive'
 import { STARTER_ARTICLES } from 'common/constants'
 

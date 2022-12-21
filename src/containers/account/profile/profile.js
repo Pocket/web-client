@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { enforceDefaultAvatar } from 'common/utilities/'
+import { enforceDefaultAvatar } from 'common/utilities/account/avatar'
 import { updateFirstName } from './profile.state'
 import { updateLastName } from './profile.state'
 import { updateBio } from './profile.state'

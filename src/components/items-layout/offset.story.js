@@ -2,7 +2,7 @@ import { Card as CardComponent } from 'components/item-card/card'
 import { deriveRecommendation } from 'common/api/derivers/item'
 import { OffsetList as OffsetComponent } from './list-offset'
 import discoverResponse from 'mocks/slateLineupResponse.json'
-import { arrayToObject } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 const discoverItems = discoverResponse?.data?.getSlateLineup?.slates[0].recommendations?.map(
   (item) => {

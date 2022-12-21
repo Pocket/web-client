@@ -21,7 +21,7 @@ import { COLLECTION_PAGE_UNSAVE_REQUEST } from 'actions'
 import { COLLECTION_PAGE_UNSAVE_SUCCESS } from 'actions'
 import { COLLECTION_PAGE_UNSAVE_FAILURE } from 'actions'
 
-import { arrayToObject } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { BASE_URL } from 'common/constants'
 
 /** ACTIONS

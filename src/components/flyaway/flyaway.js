@@ -4,7 +4,7 @@ import { breakpointLargeHandset, breakpointLargeTablet } from 'common/constants'
 import { CloseButton } from 'components/close-button/close-button'
 import { containerMaxWidth } from 'common/constants'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
-import { getValueFromCookie } from 'common/utilities'
+import { getValueFromCookie } from 'common/utilities/cookies/cookies'
 
 const sectionWrapper = css`
   position: sticky;

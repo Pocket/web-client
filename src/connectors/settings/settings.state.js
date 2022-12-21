@@ -2,8 +2,8 @@ import { put, takeLatest, select } from 'redux-saga/effects'
 import { getAppSettings } from 'common/api/_legacy/settings'
 import { putAppSettings } from 'common/api/_legacy/settings'
 
-import { localStore } from 'common/utilities'
-import { getObjectWithValidKeysOnly } from 'common/utilities'
+import { localStore } from 'common/utilities/browser-storage/browser-storage'
+import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object-array'
 
 import { SETTINGS_FETCH_REQUEST } from 'actions'
 import { SETTINGS_FETCH_SUCCESS } from 'actions'

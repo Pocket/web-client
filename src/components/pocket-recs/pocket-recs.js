@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
-import { getImageCacheUrl } from 'common/utilities'
+import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import {
   breakpointTinyTablet,
   breakpointMediumTablet,

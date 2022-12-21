@@ -1,6 +1,6 @@
 import { put, takeEvery, select, call } from 'redux-saga/effects'
 import { v4 as uuid } from 'uuid'
-import { arrayToObject } from 'common/utilities'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 // V3 actions
 import { ARTICLE_ITEM_REQUEST } from 'actions'

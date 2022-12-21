@@ -1,6 +1,6 @@
 import { css } from 'linaria'
 import { useDispatch, useSelector } from 'react-redux'
-import { getBool } from 'common/utilities'
+import { getBool } from 'common/utilities/get-bool/get-bool'
 import { followUser } from 'containers/profile/profile.state'
 import { unFollowUser } from 'containers/profile/profile.state'
 import Avatar from 'components/avatar/avatar'

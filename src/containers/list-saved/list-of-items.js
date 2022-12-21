@@ -3,7 +3,7 @@ import { LoadMore } from './load-more'
 import { MemoizedItemCard as ItemCard } from './card'
 import { useSelector, useDispatch } from 'react-redux'
 import { loadMoreListItems } from './list-saved.state'
-import { getScrollTop } from 'common/utilities'
+import { getScrollTop } from 'common/utilities/scroll/scroll'
 import { useViewport } from 'components/viewport-provider/viewport-provider'
 
 import { css } from 'linaria'

@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom'
 import { Video } from 'components/video/video'
-import { waitForElement } from 'common/utilities'
+import { waitForElement } from 'common/utilities/elements/wait-for-element'
 
 async function replaceVideo(video) {
   const videoID = video.video_id || video.videoId

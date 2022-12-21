@@ -1,5 +1,10 @@
-import { domainForUrl, replaceUTM, readTimeFromWordCount } from 'common/utilities'
-import { urlWithPermanentLibrary, getBool, getImageCacheUrl } from 'common/utilities'
+import { replaceUTM } from 'common/utilities/urls/urls'
+import { readTimeFromWordCount } from 'common/utilities/time-to-read/time-to-read'
+import { domainForUrl } from 'common/utilities/urls/urls'
+import { getBool } from 'common/utilities/get-bool/get-bool'
+import { getImageCacheUrl } from 'common/utilities/urls/urls'
+import { urlWithPermanentLibrary} from 'common/utilities/urls/urls'
+
 import { BASE_URL } from 'common/constants'
 /**
  * ————————————————————————————————————————————————————————————————————————

@@ -1,5 +1,5 @@
 import { css } from 'linaria'
-import { timeRelativeToNow } from 'common/utilities'
+import { timeRelativeToNow } from 'common/utilities/date-time/date-time'
 import Avatar from 'components/avatar/avatar'
 import dayjs from 'dayjs'
 

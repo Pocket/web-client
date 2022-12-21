@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import Avatar from 'components/avatar/avatar'
 import { Card } from 'components/item-card/card'
 import { Button } from 'components/buttons/button'
-import { timeRelativeToNow } from 'common/utilities'
+import { timeRelativeToNow } from 'common/utilities/date-time/date-time'
 
 const messageWrapper = css`
   padding-bottom: var(--spacing150);
