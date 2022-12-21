@@ -1,6 +1,6 @@
 import { put, call, takeEvery } from 'redux-saga/effects'
 import { deriveSavedItem } from 'common/api/derivers/item'
-import { itemUpsert } from 'common/api'
+import { itemUpsert } from 'common/api/mutations/upsertItem'
 
 import { MUTATION_UPSERT } from 'actions'
 import { MUTATION_SUCCESS } from 'actions'

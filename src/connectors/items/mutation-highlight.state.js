@@ -8,8 +8,8 @@ import { HIGHLIGHT_DELETE_FAILURE } from 'actions'
 
 import { MUTATION_SUCCESS } from 'actions'
 
-import { createHighlight } from 'common/api'
-import { deleteHighlight } from 'common/api'
+import { createHighlight } from 'common/api/mutations/savedItemHighlights'
+import { deleteHighlight } from 'common/api/mutations/savedItemHighlights'
 
 /** ACTIONS
  --------------------------------------------------------------- */

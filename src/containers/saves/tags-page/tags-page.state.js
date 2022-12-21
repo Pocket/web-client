@@ -3,7 +3,7 @@ import { fetchStoredTags } from 'common/api/_legacy/tags'
 import { renameStoredTag } from 'common/api/_legacy/tags'
 import { deleteStoredTag } from 'common/api/_legacy/tags'
 import { fetchSavesData } from 'containers/saves/saves.state'
-import { getUserTags as getUserTagsGraph } from 'common/api'
+import { getUserTags as getUserTagsGraph } from 'common/api/queries/get-user-tags'
 
 import { USER_TAGS_GET_REQUEST } from 'actions'
 import { USER_TAGS_GET_SUCCESS } from 'actions'
