@@ -3,13 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { useRouter } from 'next/router'
 import { SavedItems } from 'containers/saves/saved-items/saved-items'
-import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
-import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
-import { ShareModal } from 'connectors/confirm-share/confirm-share'
-import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
-import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
+
 import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
 import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
+
 import { Toasts } from 'connectors/toasts/toast-list'
 import { savedItemsSetSortOrder } from 'containers/saves/saved-items/saved-items'
 import { savedItemsSetSortBy } from 'containers/saves/saved-items/saved-items'
@@ -82,11 +79,6 @@ export const Saves = (props) => {
           />
           {flagsReady && shouldRender ? <SavedItems {...props} /> : null}
         </main>
-        <DeleteModal />
-        <TaggingModal />
-        <ShareModal />
-        <ArchiveModal />
-        <FavoriteModal />
         <TagDeleteModal />
         <TagEditModal />
 

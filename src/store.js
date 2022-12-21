@@ -59,17 +59,6 @@ import { syndicatedArticleSagas } from 'containers/syndicated-article/syndicated
 import { recitReducers } from 'connectors/recit/recit.state'
 import { recitSagas } from 'connectors/recit/recit.state'
 
-import { savesItemsReducers } from 'connectors/items-by-id/saves/items.state'
-import { savesItemsSagas } from 'connectors/items-by-id/saves/items.state'
-
-import { itemBulkReducers } from 'connectors/items-by-id/saves/items.bulk'
-import { itemDeleteReducers } from 'connectors/items-by-id/saves/items.delete'
-import { itemFavoriteReducers } from 'connectors/items-by-id/saves/items.favorite'
-import { itemArchiveReducers } from 'connectors/items-by-id/saves/items.archive'
-import { itemTagReducers } from 'connectors/items-by-id/saves/items.tag'
-import { itemShareReducers } from 'connectors/items-by-id/saves/items.share'
-import { itemShareSagas } from 'connectors/items-by-id/saves/items.share'
-
 import { itemReportReducers } from 'connectors/items-by-id/discover/items.report'
 import { itemReportSagas } from 'connectors/items-by-id/discover/items.report'
 
@@ -158,12 +147,8 @@ const listReducers = {
 }
 
 const itemActionReducers = {
-  itemsToFavorite: itemFavoriteReducers,
-  itemsToDelete: itemDeleteReducers,
-  itemsToArchive: itemArchiveReducers,
-  itemsToTag: itemTagReducers,
-  itemToReport: itemReportReducers,
-  itemsToShare: itemShareReducers
+  itemToReport: itemReportReducers
+
 }
 
 const discoverReducers = {
@@ -180,8 +165,6 @@ const collectionReducer = {
 }
 
 const libraryReducers = {
-  savesItemsById: savesItemsReducers,
-  bulkEdit: itemBulkReducers,
   userTags: userTagsReducers,
   userMessages: userMessageReducers,
   userSearch: userSearchReducers,
@@ -254,8 +237,6 @@ function* rootSaga() {
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
     ...recitSagas,
-    ...savesItemsSagas,
-    ...itemShareSagas,
     ...itemReportSagas,
     ...readerSettingsSagas,
     ...readerSagas, //graph
