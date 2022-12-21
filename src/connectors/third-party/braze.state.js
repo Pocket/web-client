@@ -6,7 +6,7 @@ import { BRAZE_TOKEN_SUCCESS } from 'actions'
 import { BRAZE_TOKEN_FAILURE } from 'actions'
 import { TOGGLE_BRAZE } from 'actions'
 
-import { getBrazeToken } from 'common/api/'
+import { getBrazeToken } from 'common/api/internal/braze'
 
 const initialState = {
   initialized: false,
@@ -59,7 +59,7 @@ export const brazeSagas = [
 function* brazeTokenRequest({ userId }) {
   try {
     const token = yield call(getBrazeToken, userId)
-    if (!token) throw new Error(`Unable to fetch token: ${error}`)
+    if (!token) throw new Error('Unable to fetch token')
 
     yield put({ type: BRAZE_TOKEN_SUCCESS, token })
   } catch (error) {

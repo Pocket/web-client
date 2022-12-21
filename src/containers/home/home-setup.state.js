@@ -1,6 +1,6 @@
 import { put, takeEvery, call, select } from 'redux-saga/effects'
-import { getTopicSelectors as getTopicSelectorsApi } from 'common/api'
-import { setTopicPreferences } from 'common/api'
+import { getTopicSelectors as getTopicSelectorsApi } from 'common/api/queries/get-topic-selectors'
+import { setTopicPreferences } from 'common/api/mutations/setTopicPreferences'
 import { destroyCookie, setCookie } from 'nookies'
 
 import { SETTINGS_FETCH_SUCCESS } from 'actions'

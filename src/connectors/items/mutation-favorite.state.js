@@ -1,8 +1,6 @@
 import { put, call, take, race, takeEvery } from 'redux-saga/effects'
-import { itemFavorite } from 'common/api'
-import { itemUnFavorite } from 'common/api'
-import { bulkFavorite } from 'common/api'
-import { bulkUnFavorite } from 'common/api'
+import { itemFavorite, bulkFavorite} from 'common/api/mutations/favoriteItem'
+import { itemUnFavorite, bulkUnFavorite } from 'common/api/mutations/unfavoriteItem'
 import { batchSendMutations } from './mutations-bulk.state'
 
 import { MUTATION_FAVORITE } from 'actions'

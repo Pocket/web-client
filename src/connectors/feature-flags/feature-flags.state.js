@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/nextjs'
 import { put, takeEvery, select } from 'redux-saga/effects'
-import { getUnleashAssignments } from 'common/api'
+import { getUnleashAssignments } from 'common/api/queries/get-unleash-assignments'
 import { arrayToObject } from 'common/utilities'
 import { FEATURES_HYDRATE, FEATURES_TOGGLE, FEATURES_ASSIGN, FEATURES_SET, HYDRATE } from 'actions'
 import { setCookie } from 'nookies'

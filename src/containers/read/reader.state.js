@@ -1,7 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects'
 
 // Client API actions
-import { getSavedItemByItemId } from 'common/api'
+import { getSavedItemByItemId } from 'common/api/queries/get-saved-item-by-id'
 import { deriveReaderItem } from 'common/api/derivers/item'
 
 import { READ_ITEM_REQUEST } from 'actions'

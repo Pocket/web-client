@@ -1,8 +1,6 @@
 import { put, call, race, take, takeEvery } from 'redux-saga/effects'
-import { itemArchive } from 'common/api'
-import { itemUnArchive } from 'common/api'
-import { bulkArchive } from 'common/api'
-import { bulkUnArchive } from 'common/api'
+import { itemArchive, bulkArchive} from 'common/api/mutations/archiveItem'
+import { itemUnArchive, bulkUnArchive } from 'common/api/mutations/unArchiveItem'
 import { batchSendMutations } from './mutations-bulk.state'
 
 import { MUTATION_RE_ADD } from 'actions'

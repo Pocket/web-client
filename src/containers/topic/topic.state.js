@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import { getTopicLineup } from 'common/api'
+import { getTopicLineup } from 'common/api/queries/get-topic-lineup'
 
 import { TOPIC_HYDRATE } from 'actions'
 import { TOPIC_SAVE_REQUEST } from 'actions'

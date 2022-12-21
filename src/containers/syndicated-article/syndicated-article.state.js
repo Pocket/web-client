@@ -8,7 +8,7 @@ import {
   ARTICLE_UNSAVE_SUCCESS,
   ARTICLE_UNSAVE_FAILURE
 } from 'actions'
-import { getSyndicatedArticle } from 'common/api'
+import { getSyndicatedArticle } from 'common/api/queries/get-syndicated-article'
 import { saveItem } from 'common/api/_legacy/saveItem'
 import { removeItem } from 'common/api/_legacy/removeItem'
 import { HYDRATE } from 'actions'

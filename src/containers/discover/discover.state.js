@@ -1,5 +1,5 @@
 import { takeLatest, put, takeEvery } from 'redux-saga/effects'
-import { getDiscoverLineup } from 'common/api'
+import { getDiscoverLineup } from 'common/api/queries/get-discover'
 
 import { DISCOVER_DATA_REQUEST } from 'actions'
 import { DISCOVER_DATA_SUCCESS } from 'actions'
