@@ -22,10 +22,11 @@ export const topicListReducers = (state = initialState, action) => {
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
-    case HYDRATE:
+    case HYDRATE:{
       const { topicList } = action.payload
       return { ...state, ...topicList }
-
+    }
+    
     default:
       return state
   }
