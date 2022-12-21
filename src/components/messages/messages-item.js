@@ -93,7 +93,7 @@ export const MessageItem = ({
           </Button>
         </header>
         <p className="comment">{comment}</p>
-        <Card item={item} itemType="message" cardShape="wide" onSave={handleSave} />
+        <Card {...item} itemType="message" cardShape="wide" onSave={handleSave}/>
       </aside>
     </div>
   ) : null
