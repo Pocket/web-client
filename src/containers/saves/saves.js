@@ -8,8 +8,8 @@ import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
 import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 
 import { Toasts } from 'connectors/toasts/toast-list'
-import { savedItemsSetSortOrder } from 'containers/saves/saved-items/saved-items'
-import { savedItemsSetSortBy } from 'containers/saves/saved-items/saved-items'
+import { savedItemsSetSortOrder } from 'containers/saves/saved-items/saved-items.state'
+import { savedItemsSetSortBy } from 'containers/saves/saved-items/saved-items.state'
 import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 
 import { TagPageHeader } from 'containers/saves/lists/lists-header'

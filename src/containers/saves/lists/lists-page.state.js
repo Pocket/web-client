@@ -147,7 +147,7 @@ function* userTagsOnly() {
 }
 
 function* userTagsRequest() {
-<<<<<<<< HEAD:src/containers/saves/lists/lists-page.state.js
+
   const response = yield fetchStoredTags()
 
   if (response.status !== 1) return yield put({ type: USER_TAGS_GET_FAILURE })
@@ -159,9 +159,7 @@ function* userTagsRequest() {
     since,
     tagsList
   })
-========
-  return yield put({ type: USER_TAGS_GET_FAILURE })
->>>>>>>> 1b0e3196 (chore(saves): move tags to lists folder):src/containers/saves/lists/tags-page.state.js
+
 }
 
 function* userTagsTogglePin(actions) {
