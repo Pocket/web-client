@@ -119,9 +119,9 @@ import { mutationHighlightSagas } from 'connectors/items/mutation-highlight.stat
 import { mutationBulkReducers } from 'connectors/items/mutations-bulk.state'
 import { mutationBulkSagas } from 'connectors/items/mutations-bulk.state'
 
-import { listSavedReducers } from 'containers/saves/saved-items/saved-items.state'
-import { listSavedSagas } from 'containers/saves/saved-items/saved-items.state'
-import { listSavedPageInfoReducers } from 'containers/saves/saved-items/saved-items.state'
+import { pageSavedReducers } from 'containers/saves/saved-page/saved-page.state'
+import { pageSavedInfoReducers } from 'containers/saves/saved-page/saved-page.state'
+import { pageSavedSagas } from 'containers/saves/saved-page/saved-page.state'
 
 /* REDUCERS
  --------------------------------------------------------------- */
@@ -137,9 +137,9 @@ const itemReducers = {
   listen: listenReducers
 }
 
-const listReducers = {
-  listSaved: listSavedReducers,
-  listSavedPageInfo: listSavedPageInfoReducers
+const pageReducers = {
+  pageSaved: pageSavedReducers,
+  pageSavedInfo: pageSavedInfoReducers
 }
 
 const itemActionReducers = {
@@ -209,7 +209,7 @@ export const rootReducer = combineReducers({
   ...userAccountReducers,
   home: homeReducers,
   ...itemReducers,
-  ...listReducers,
+  ...pageReducers,
   ...itemActionReducers
 })
 
@@ -244,7 +244,7 @@ function* rootSaga() {
     ...shortcutSagas,
     ...onboardingSagas,
     ...brazeSagas,
-    ...listSavedSagas,
+    ...pageSavedSagas,
     ...itemsSavedSagas,
     ...shareModalSagas,
     ...mutationArchiveSagas,

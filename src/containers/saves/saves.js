@@ -2,14 +2,14 @@ import Layout from 'layouts/with-sidebar'
 import { useSelector, useDispatch } from 'react-redux'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { useRouter } from 'next/router'
-import { SavedItems } from 'containers/saves/saved-items/saved-items'
+import { SavedItems } from 'containers/saves/saved-page/saved-page'
 
 import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
 import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 
 import { Toasts } from 'connectors/toasts/toast-list'
-import { savedItemsSetSortOrder } from 'containers/saves/saved-items/saved-items.state'
-import { savedItemsSetSortBy } from 'containers/saves/saved-items/saved-items.state'
+import { savedItemsSetSortOrder } from 'containers/saves/saved-page/saved-page.state'
+import { savedItemsSetSortBy } from 'containers/saves/saved-page/saved-page.state'
 import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 
 import { TagPageHeader } from 'containers/saves/lists/lists-header'
@@ -37,10 +37,10 @@ export const Saves = (props) => {
   // Selectors
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
-  const sortOrder = useSelector((state) => state.listSavedPageInfo.sortOrder)
+  const sortOrder = useSelector((state) => state.pageSavedInfo.sortOrder)
   const featureState = useSelector((state) => state.features)
   const isPremium = useSelector((state) => state.user.premium_status === '1')
-  const total = useSelector((state) => state.listSavedPageInfo.totalCount)
+  const total = useSelector((state) => state.pageSavedInfo.totalCount)
 
   // Derived Values
   const shouldRender = userStatus !== 'pending'

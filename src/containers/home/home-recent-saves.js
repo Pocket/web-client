@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RecentCard } from 'connectors/item-card/home/card-recent'
 import { FlexList } from 'components/items-layout/list-flex'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { getItemsUnread } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsUnread } from 'containers/saves/saved-page/saved-page.state'
 
 export const HomeRecentSaves = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const recentSaves = useSelector((state) => state.listSaved)
+  const recentSaves = useSelector((state) => state.pageSaved)
   const count = recentSaves?.length
   const showExcerpt = count < 2
 

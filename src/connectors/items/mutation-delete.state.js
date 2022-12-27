@@ -49,7 +49,7 @@ export const mutationDeleteSagas = [
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-const getDeletedItemPosition = (state, id) => state.listSaved.indexOf(id)
+const getDeletedItemPosition = (state, id) => state.pageSaved.indexOf(id)
 const getDeletedItemStatus = (state, id) => state.itemsSaved[id]?.status
 
 /** SAGA :: RESPONDERS

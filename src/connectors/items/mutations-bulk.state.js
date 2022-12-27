@@ -91,7 +91,7 @@ export const mutationBulkSagas = [
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 const getPreviousId = (state) => state.mutationBulk.previouslySelectedId
 const getSelected = (state) => state.mutationBulk.itemIds
-const getListSaved = (state) => state.listSaved
+const getpageSaved = (state) => state.pageSaved
 const getItemsById = (state) => state.itemsSaved
 
 /** SAGAS :: RESPONDERS
@@ -101,7 +101,7 @@ export function* itemBulkSelect(action) {
     const { id, shift, type } = action
     const selectorFunction = type === MUTATION_BULK_SELECT ? itemSelector : itemDeselector
 
-    const itemsToSelectFrom = yield select(getListSaved)
+    const itemsToSelectFrom = yield select(getpageSaved)
     const startingId = shift ? yield select(getPreviousId) : false
     const selected = yield select(getSelected)
     const itemIds = selectorFunction(id, startingId, selected, itemsToSelectFrom)

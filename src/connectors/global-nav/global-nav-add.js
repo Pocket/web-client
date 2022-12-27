@@ -5,7 +5,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 function GlobalNavAddConnected({ onClose }) {
   const dispatch = useDispatch()
-  const { filters, sort } = useSelector((state) => state.listSavedPageInfo)
+  const { filters, sort } = useSelector((state) => state.pageSavedInfo)
 
   const onSubmit = (url) => {
     dispatch(sendSnowplowEvent('global-nav.save', { url }))

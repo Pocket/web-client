@@ -2,13 +2,13 @@ import { useEffect, useCallback, useState } from 'react'
 import { LoadMore } from './load-more'
 import { MemoizedItemCard as ItemCard } from './card'
 import { useSelector, useDispatch } from 'react-redux'
-import { loadMoreListItems } from './saved-items.state'
+import { loadMoreListItems } from './saved-page.state'
 import { getScrollTop } from 'common/utilities/scroll/scroll'
 import { useViewport } from 'components/viewport-provider/viewport-provider'
 
 import { css } from 'linaria'
 
-const listSavedStyle = css`
+const pageSavedStyle = css`
   position: relative;
   margin-top: 2rem;
 `
@@ -60,8 +60,8 @@ export const ListOfItems = () => {
   const dispatch = useDispatch()
   const viewport = useViewport()
 
-  const listSaved = useSelector((state) => state.listSaved)
-  const totalCount = useSelector((state) => state.listSavedPageInfo.totalCount)
+  const pageSaved = useSelector((state) => state.pageSaved)
+  const totalCount = useSelector((state) => state.pageSavedInfo.totalCount)
   const type = useSelector((state) => state.app.listMode)
 
   const [startingIndex, setStartingIndex] = useState(0)
@@ -75,7 +75,7 @@ export const ListOfItems = () => {
   const verticalPadding = 15
   const horizontalPadding = 25
 
-  const blockRows = listSaved.length / columnCount
+  const blockRows = pageSaved.length / columnCount
   const totalHeight = blockRows * height + blockRows * verticalPadding
 
   /** FUNCTIONS
@@ -108,14 +108,14 @@ export const ListOfItems = () => {
   if (!totalCount) return null
 
   const loadMore = () => dispatch(loadMoreListItems())
-  const itemsToShow = listSaved.slice(startingIndex, startingIndex + itemsOnScreen + 1)
+  const itemsToShow = pageSaved.slice(startingIndex, startingIndex + itemsOnScreen + 1)
 
   return (
     <>
-      <div className={listSavedStyle}>
+      <div className={pageSavedStyle}>
         {itemsToShow
           ? itemsToShow.map((itemId) => {
-              const positionOfItem = listSaved.indexOf(itemId)
+              const positionOfItem = pageSaved.indexOf(itemId)
               return (
                 <ItemCard
                   key={itemId}

@@ -91,7 +91,7 @@ export const loadMoreListItems = () => ({ type: LOAD_MORE_ITEMS })
 
 /** LIST SAVED REDUCERS
  --------------------------------------------------------------- */
-export const listSavedReducers = (state = [], action) => {
+export const pageSavedReducers = (state = [], action) => {
   switch (action.type) {
     case ITEMS_SAVED_SUCCESS: {
       const itemIds = action?.savedItemIds || []
@@ -139,7 +139,7 @@ const initialState = {
   tagNames: [],
   error: false
 }
-export const listSavedPageInfoReducers = (state = initialState, action) => {
+export const pageSavedInfoReducers = (state = initialState, action) => {
   switch (action.type) {
     case ITEMS_SAVED_TAGGED_REQUEST:
     case ITEMS_SAVED_SEARCH_REQUEST:
@@ -185,7 +185,7 @@ export const listSavedPageInfoReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const listSavedSagas = [
+export const pageSavedSagas = [
   takeEvery(MUTATION_SUCCESS, reconcileMutation),
   takeEvery(MUTATION_DELETE_SUCCESS, reconcileDeleteMutation),
   takeEvery(ITEMS_UPSERT_SUCCESS, reconcileUpsert),
@@ -225,8 +225,8 @@ export const listSavedSagas = [
 
 /** SAGA :: SELECTORS
  --------------------------------------------------------------- */
-const getSavedPageInfo = (state) => state.listSavedPageInfo
-const getSortOrder = (state) => state.listSavedPageInfo?.sortOrder
+const getSavedPageInfo = (state) => state.pageSavedInfo
+const getSortOrder = (state) => state.pageSavedInfo?.sortOrder
 const getItems = (state) => state.itemsDisplay
 
 /** SAGA :: RESPONDERS
