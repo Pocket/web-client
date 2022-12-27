@@ -35,8 +35,8 @@ import { snowplowSagas } from 'connectors/snowplow/snowplow.state'
 import { discoverItemsReducers } from 'connectors/items-by-id/discover/items.state'
 import { discoverItemsSagas } from 'connectors/items-by-id/discover/items.state'
 
-import { discoverHomeReducers } from 'containers/discover/discover.state'
-import { discoverHomeSagas } from 'containers/discover/discover.state'
+import { pageDiscoverReducers } from 'containers/discover/discover.state'
+import { pageDiscoverSagas } from 'containers/discover/discover.state'
 
 import { collectionsPageReducers } from 'containers/collections/collections.state'
 import { collectionsBySlugReducers } from 'containers/collections/collections.state'
@@ -144,13 +144,22 @@ const itemMutations = {
 }
 
 const pageReducers = {
+  pageDiscoverIds: pageDiscoverReducers
   pageSaved: pageSavedReducers,
+  pageSavedInfo: pageSavedInfoReducers
+}
+
+const listReducers = {
+  listHome: [],
+  listSaved: listSavedReducers,
+  listSavedPageInfo: listSavedPageInfoReducers,
+  listDiscover: [],
+  listCollection: [],
   pageSavedInfo: pageSavedInfoReducers
 }
 
 const discoverReducers = {
   discoverItemsById: discoverItemsReducers, // Shared discover item store
-  discoverHome: discoverHomeReducers,
   discoverTopic: topicReducers,
   syndicatedArticle: syndicatedArticleReducers
 }
@@ -208,6 +217,7 @@ export const rootReducer = combineReducers({
   ...readerViewReducers,
   ...userAccountReducers,
   home: homeReducers,
+  ...pageReducers,
   ...itemReducers,
   ...listReducers,
   ...itemMutations
@@ -226,7 +236,7 @@ function* rootSaga() {
     ...featureSagas,
     ...snowplowSagas,
     ...discoverItemsSagas,
-    ...discoverHomeSagas,
+    ...pageDiscoverSagas,
     ...collectionsSagas,
     ...collectionStoriesSagas,
     ...topicSagas,

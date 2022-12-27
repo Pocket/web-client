@@ -23,7 +23,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ locale 
 
   // Since ssr will not wait for side effects to resolve this dispatch
   // needs to be pure as well.
-  dispatch(hydrateDiscover({ items }))
+  dispatch(hydrateDiscover(items))
   dispatch(hydrateItems(itemsById))
 
   // Revalidate means this can be regenerated once every X seconds
