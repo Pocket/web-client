@@ -59,8 +59,8 @@ import { syndicatedArticleSagas } from 'containers/syndicated-article/syndicated
 import { recitReducers } from 'connectors/recit/recit.state'
 import { recitSagas } from 'connectors/recit/recit.state'
 
-import { itemReportReducers } from 'connectors/items-by-id/discover/items.report'
-import { itemReportSagas } from 'connectors/items-by-id/discover/items.report'
+import { mutationReportReducers } from 'connectors/items/mutation-report.state'
+import { mutationReportSagas } from 'connectors/items/mutation-report.state'
 
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
@@ -135,16 +135,12 @@ const itemReducers = {
   mutationTagging: mutationTaggingReducers,
   mutationHighlight: mutationHighlightReducers,
   listen: listenReducers
+  mutationReport: mutationReportReducers,
 }
 
 const pageReducers = {
   pageSaved: pageSavedReducers,
   pageSavedInfo: pageSavedInfoReducers
-}
-
-const itemActionReducers = {
-  itemToReport: itemReportReducers
-
 }
 
 const discoverReducers = {
@@ -233,7 +229,7 @@ function* rootSaga() {
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
     ...recitSagas,
-    ...itemReportSagas,
+    ...mutationReportSagas,
     ...readerSettingsSagas,
     ...readerSagas, //graph
     ...homeSagas,
@@ -246,7 +242,7 @@ function* rootSaga() {
     ...brazeSagas,
     ...pageSavedSagas,
     ...itemsSavedSagas,
-    ...shareModalSagas,
+    ...mutationShareSagas,
     ...mutationArchiveSagas,
     ...mutationDeleteSagas,
     ...mutationFavoriteSagas,
