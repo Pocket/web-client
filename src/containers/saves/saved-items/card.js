@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
-import { setNoImage } from 'connectors/items/items.state'
+import { setNoImage } from 'connectors/items/items-display.state'
 import { mutationBulkSelectAction } from 'connectors/items/mutations-bulk.state'
 import { mutationBulkDeSelectAction } from 'connectors/items/mutations-bulk.state'
 
@@ -31,7 +31,7 @@ export function ItemCard({
 
   // Get data from state
   const isPremium = useSelector((state) => state.user.premium_status === '1')
-  const item = useSelector((state) => state.items[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
   const itemSaved = useSelector((state) => state.itemsSaved[id])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const bulkList = useSelector((state) => state.mutationBulk.itemIds)

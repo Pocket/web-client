@@ -6,7 +6,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 export const Header = ({ id }) => {
   const dispatch = useDispatch()
 
-  const item = useSelector((state) => state.items[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
   const savedData = useSelector((state) => state.itemsSaved[id])
 
   const { title, authors, externalUrl, publisher, timeToRead, datePublished, analyticsData } = item

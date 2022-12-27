@@ -227,7 +227,7 @@ export const listSavedSagas = [
  --------------------------------------------------------------- */
 const getSavedPageInfo = (state) => state.listSavedPageInfo
 const getSortOrder = (state) => state.listSavedPageInfo?.sortOrder
-const getItems = (state) => state.items
+const getItems = (state) => state.itemsDisplay
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */

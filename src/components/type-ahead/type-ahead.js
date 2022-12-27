@@ -62,7 +62,7 @@ export class TypeAhead extends React.Component {
       if (this.state.selectedIndex > -1) {
         event.preventDefault()
         event.stopPropagation()
-        this.props.setValue(this.state.items[this.state.selectedIndex])
+        this.props.setValue(this.state.itemsDisplay[this.state.selectedIndex])
       }
       return
     }
@@ -76,7 +76,7 @@ export class TypeAhead extends React.Component {
   /* Selection Manipulation
   ------------------------------------------------------- */
   setSelected = (index) => {
-    this.props.setValue(this.state.items[index])
+    this.props.setValue(this.state.itemsDisplay[index])
     this.props.reFocus()
   }
 

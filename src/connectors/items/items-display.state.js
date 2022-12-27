@@ -8,7 +8,7 @@ import { ITEMS_SET_NO_IMAGE } from 'actions'
 
 /** ITEM REDUCERS
  --------------------------------------------------------------- */
-export const itemsReducers = (state = {}, action) => {
+export const itemsDisplayReducers = (state = {}, action) => {
   switch (action.type) {
     case READ_ITEM_SUCCESS:
     case ITEMS_SUCCESS: {

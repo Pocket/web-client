@@ -95,7 +95,7 @@ import { readerSettingsSagas } from 'containers/read/reader-settings.state'
 import { readerReducers } from 'containers/read/reader.state'
 import { readerSagas } from 'containers/read/reader.state'
 
-import { itemsReducers } from 'connectors/items/items.state'
+import { itemsDisplayReducers } from 'connectors/items/items-display.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
 import { itemsSavedSagas } from 'connectors/items/items-saved.state'
 
@@ -126,7 +126,7 @@ import { listSavedPageInfoReducers } from 'containers/saves/saved-items/saved-it
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
-  items: itemsReducers,
+  itemsDisplay: itemsDisplayReducers,
   itemsSaved: itemsSavedReducers,
   mutationBulk: mutationBulkReducers,
   mutationFavorite: mutationFavoriteReducers,
@@ -138,12 +138,8 @@ const itemReducers = {
 }
 
 const listReducers = {
-  listHome: [],
   listSaved: listSavedReducers,
-  listSavedPageInfo: listSavedPageInfoReducers,
-  listDiscover: [],
-  listCollection: [],
-  listCollectionStories: []
+  listSavedPageInfo: listSavedPageInfoReducers
 }
 
 const itemActionReducers = {

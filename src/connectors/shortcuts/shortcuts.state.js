@@ -223,7 +223,7 @@ const getCurrentBulkItemId = (state) => state.mutationBulk.currentId
 const getCurrentBulkItems = (state) => state.mutationBulk.itemIds
 const getSection = (state) => state.app.section
 const getItems = (state) => state.listSaved
-const getItem = (state, id) => state.items[id]
+const getItem = (state, id) => state.itemsDisplay[id]
 const getSavedItem = (state, id) => state.itemsSaved[id]
 const getFontSize = (state) => state.readerSettings.fontSize
 const getColumnWidth = (state) => state.readerSettings.columnWidth

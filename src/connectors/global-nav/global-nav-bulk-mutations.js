@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 function GlobalNavBulkEditConnected({ onClose }) {
   const dispatch = useDispatch()
   const bulkItems = useSelector((state) => state?.mutationBulk?.itemIds)
-  const items = useSelector((state) => state?.items)
+  const items = useSelector((state) => state?.itemsDisplay)
   const listSaved = useSelector((state) => state?.listSaved)
 
   const batchFavorite = useSelector((state) => state?.mutationBulk?.favoriteAction)

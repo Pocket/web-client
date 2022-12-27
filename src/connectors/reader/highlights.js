@@ -22,7 +22,7 @@ export const Highlights = ({ children, id }) => {
   const [highlightHovered, setHighlightHovered] = useState(null)
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
-  const item = useSelector((state) => state.items[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
   const savedData = useSelector((state) => state.itemsSaved[id])
   const highlightList = useSelector((state) => state.reader.highlightList)
 
