@@ -10,7 +10,7 @@ import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { savedItemsSetSortOrder } from 'containers/saves/saved-page/saved-page.state'
 import { savedItemsSetSortBy } from 'containers/saves/saved-page/saved-page.state'
-import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
+import { SuccessFXA } from 'components/snackbar/success-fxa'
 
 import { TagPageHeader } from 'containers/saves/lists/lists-header'
 import { SavesHeader } from 'components/headers/saves-header'

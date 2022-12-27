@@ -144,17 +144,8 @@ const itemMutations = {
 }
 
 const pageReducers = {
-  pageDiscoverIds: pageDiscoverReducers
+  pageDiscoverIds: pageDiscoverReducers,
   pageSaved: pageSavedReducers,
-  pageSavedInfo: pageSavedInfoReducers
-}
-
-const listReducers = {
-  listHome: [],
-  listSaved: listSavedReducers,
-  listSavedPageInfo: listSavedPageInfoReducers,
-  listDiscover: [],
-  listCollection: [],
   pageSavedInfo: pageSavedInfoReducers
 }
 
@@ -219,7 +210,6 @@ export const rootReducer = combineReducers({
   home: homeReducers,
   ...pageReducers,
   ...itemReducers,
-  ...listReducers,
   ...itemMutations
 })
 
