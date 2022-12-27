@@ -82,9 +82,6 @@ import { shortcutSagas } from 'connectors/shortcuts/shortcuts.state.js'
 import { onboardingReducers } from 'connectors/onboarding/onboarding.state'
 import { onboardingSagas } from 'connectors/onboarding/onboarding.state'
 
-import { shareModalReducers } from 'connectors/share-modal/share-modal.state'
-import { shareModalSagas } from 'connectors/share-modal/share-modal.state'
-
 import { listenReducers } from 'connectors/listen/listen.state'
 import { listenSagas } from 'connectors/listen/listen.state'
 
@@ -98,6 +95,10 @@ import { readerSagas } from 'containers/read/reader.state'
 import { itemsDisplayReducers } from 'connectors/items/items-display.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
 import { itemsSavedSagas } from 'connectors/items/items-saved.state'
+
+
+import { mutationShareReducers  } from 'connectors/items/mutation-share.state'
+import { mutationShareSagas } from 'connectors/items/mutation-share.state'
 
 import { mutationArchiveReducers } from 'connectors/items/mutation-archive.state'
 import { mutationArchiveSagas } from 'connectors/items/mutation-archive.state'
@@ -128,14 +129,18 @@ import { pageSavedSagas } from 'containers/saves/saved-page/saved-page.state'
 const itemReducers = {
   itemsDisplay: itemsDisplayReducers,
   itemsSaved: itemsSavedReducers,
+  listen: listenReducers
+}
+
+const itemMutations = {
   mutationBulk: mutationBulkReducers,
   mutationFavorite: mutationFavoriteReducers,
   mutationArchive: mutationArchiveReducers,
   mutationDelete: mutationDeleteReducers,
   mutationTagging: mutationTaggingReducers,
   mutationHighlight: mutationHighlightReducers,
-  listen: listenReducers
   mutationReport: mutationReportReducers,
+  mutationShare: mutationShareReducers,
 }
 
 const pageReducers = {
@@ -186,7 +191,6 @@ const globalReducers = {
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
   onboarding: onboardingReducers, // Onboarding
-  share: shareModalReducers, // Share
   braze: brazeReducers // Braze
 }
 
@@ -205,8 +209,8 @@ export const rootReducer = combineReducers({
   ...userAccountReducers,
   home: homeReducers,
   ...itemReducers,
-  ...pageReducers,
-  ...itemActionReducers
+  ...listReducers,
+  ...itemMutations
 })
 
 /* SAGAS

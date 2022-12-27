@@ -20,7 +20,7 @@ import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutati
 import { BulkFavoriteModal } from 'connectors/confirm-favorite/confirm-bulk-favorite'
 import { BulkDeleteModal } from 'connectors/confirm-delete/confirm-bulk-delete'
 import { BulkArchiveModal } from 'connectors/confirm-archive/confirm-bulk-archive'
-import { ShareModalConnector } from 'connectors/share-modal/share-modal'
+import { ShareModalConnector } from 'connectors/confirm-share/share-modal'
 
 import { BestOf2022 } from 'connectors/marketing/bestof2022'
 

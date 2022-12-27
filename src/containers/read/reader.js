@@ -14,7 +14,7 @@ import { Recommendations } from 'connectors/reader/recommendations'
 import { Upsell } from 'connectors/reader/upsell'
 
 import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
-import { ShareModalConnector } from 'connectors/share-modal/share-modal'
+import { ShareModalConnector } from 'connectors/confirm-share/share-modal'
 import { Toasts } from 'connectors/toasts/toast-list'
 
 import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'

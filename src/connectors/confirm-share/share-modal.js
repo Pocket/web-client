@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { ShareModal } from 'components/share-modal/share-modal'
-import { shareCancel } from 'connectors/share-modal/share-modal.state'
-import { shareRecommend } from 'connectors/share-modal/share-modal.state'
+import { shareCancel } from 'connectors/items/mutation-share.state'
+import { shareRecommend } from 'connectors/items/mutation-share.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const ShareModalConnector = () => {
   const dispatch = useDispatch()
 
-  const item = useSelector((state) => state.share.item)
-  const quote = useSelector((state) => state.share.quote)
-  const position = useSelector((state) => state.share.position) || 0
+  const item = useSelector((state) => state.mutationShare.item)
+  const quote = useSelector((state) => state.mutationShare.quote)
+  const position = useSelector((state) => state.mutationShare.position) || 0
   const cancelShare = () => dispatch(shareCancel())
 
   if (!item) return null

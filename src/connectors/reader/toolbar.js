@@ -16,7 +16,7 @@ import { updateColumnWidth } from 'containers/read/reader-settings.state'
 import { updateFontSize } from 'containers/read/reader-settings.state'
 import { updateFontType } from 'containers/read/reader-settings.state'
 
-import { shareAction } from 'connectors/share-modal/share-modal.state'
+import { shareAction } from 'connectors/items/mutation-share.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 

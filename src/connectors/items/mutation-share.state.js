@@ -23,7 +23,7 @@ const initialState = {
   quote: null
 }
 
-export const shareModalReducers = (state = initialState, action) => {
+export const mutationShareReducers = (state = initialState, action) => {
   switch (action.type) {
     case SHARE_REQUEST: {
       const { item, quote, position } = action
@@ -42,7 +42,7 @@ export const shareModalReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-export const shareModalSagas = [takeEvery(SHARE_RECOMMEND, itemRecommend)]
+export const mutationShareSagas = [takeEvery(SHARE_RECOMMEND, itemRecommend)]
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
