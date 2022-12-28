@@ -15,7 +15,7 @@ function GlobalNavBulkEditConnected({ onClose }) {
   const dispatch = useDispatch()
   const bulkItems = useSelector((state) => state?.mutationBulk?.itemIds)
   const items = useSelector((state) => state?.itemsDisplay)
-  const pageSaved = useSelector((state) => state?.pageSaved)
+  const pageSavedIds = useSelector((state) => state?.pageSavedIds)
 
   const batchFavorite = useSelector((state) => state?.mutationBulk?.favoriteAction)
   const batchStatus = useSelector((state) => state?.mutationBulk?.archiveAction)
@@ -28,7 +28,7 @@ function GlobalNavBulkEditConnected({ onClose }) {
     return bulkItems.map((bulkId) => {
       const item = items[bulkId]
       const { itemId: id, saveUrl: url } = item
-      const position = pageSaved.indexOf(id)
+      const position = pageSavedIds.indexOf(id)
       return { id, url, position }
     })
   }

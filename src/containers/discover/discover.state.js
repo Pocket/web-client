@@ -16,7 +16,8 @@ import { HYDRATE } from 'actions'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getDiscoverData = () => ({ type: DISCOVER_DATA_REQUEST })
-export const hydrateDiscover = (items) => ({ type: DISCOVER_HYDRATE, items }) //prettier-ignore
+export const hydrateDiscover = (itemsIds) => ({ type: DISCOVER_HYDRATE, itemsIds }) //prettier-ignore
+
 export const saveDiscoverItem = (id, url, position) => ({type: DISCOVER_SAVE_REQUEST, id, url, position}) //prettier-ignore
 export const unSaveDiscoverItem = (id) => ({ type: DISCOVER_UNSAVE_REQUEST, id }) //prettier-ignore
 
@@ -28,8 +29,8 @@ export const pageDiscoverReducers = (state = initialState, action) => {
   switch (action.type) {
     case DISCOVER_HYDRATE:
     case DISCOVER_DATA_SUCCESS: {
-      const { items } = action
-      return items
+      const { itemsIds } = action
+      return itemsIds
     }
 
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
@@ -56,10 +57,10 @@ export const pageDiscoverSagas = [
  --------------------------------------------------------------- */
 function* discoverDataRequest() {
   try {
-    const { items, itemsById } = yield fetchDiscoverData()
+    const { itemsIds, itemsById } = yield fetchDiscoverData()
 
     // Deriving data from the response
-    yield put({ type: DISCOVER_DATA_SUCCESS, items, itemsById })
+    yield put({ type: DISCOVER_DATA_SUCCESS, itemsIds, itemsById })
   } catch (error) {
     yield put({ type: DISCOVER_DATA_FAILURE, error })
   }
@@ -94,9 +95,8 @@ function* discoverUnSaveRequest(action) {
  */
 export async function fetchDiscoverData({ locale }) {
   try {
-    const { itemsById, items } = await getDiscoverLineup({ locale })
-
-    return { items, itemsById }
+    const { itemsById, itemsIds } = await getDiscoverLineup({ locale })
+    return { itemsIds, itemsById }
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.warn('discover.state', error)

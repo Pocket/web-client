@@ -64,7 +64,7 @@ function handleResponse(response) {
   const top = slateItemArrays[0] || []
   const bottom = slateItemArrays[1] || []
 
-  return { items: [...top, ...bottom], itemsById }
+  return { itemsIds: [...top, ...bottom], itemsById }
 }
 
 const getLocaleId = function (locale) {

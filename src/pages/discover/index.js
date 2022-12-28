@@ -19,11 +19,11 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ locale 
   // Hydrating initial state with an async request. This will block the
   // page from loading. Do this for SEO/crawler purposes
   const response = await fetchDiscoverData({ locale })
-  const { items, itemsById } = response
+  const { itemsIds, itemsById } = response
 
   // Since ssr will not wait for side effects to resolve this dispatch
   // needs to be pure as well.
-  dispatch(hydrateDiscover(items))
+  dispatch(hydrateDiscover(itemsIds))
   dispatch(hydrateItems(itemsById))
 
   // Revalidate means this can be regenerated once every X seconds

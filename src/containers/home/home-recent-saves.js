@@ -10,8 +10,8 @@ import { getItemsUnread } from 'containers/saves/saved-page/saved-page.state'
 export const HomeRecentSaves = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const recentSaves = useSelector((state) => state.pageSaved)
-  const count = recentSaves?.length
+  const recentSavesIds = useSelector((state) => state.pageSavedIds)
+  const count = recentSavesIds?.length
   const showExcerpt = count < 2
 
   const onLinkClick = () => dispatch(sendSnowplowEvent('home.recent.view-saves'))
@@ -21,7 +21,7 @@ export const HomeRecentSaves = () => {
     dispatch(getItemsUnread())
   }, [dispatch])
 
-  return recentSaves?.length > 0 ? (
+  return recentSavesIds?.length > 0 ? (
     <>
       <HomeHeader
         headline={t('home:recent-saves-title', 'Recent Saves')}
@@ -31,7 +31,7 @@ export const HomeRecentSaves = () => {
       />
 
       <FlexList
-        items={recentSaves}
+        items={recentSavesIds}
         offset={0}
         count={3}
         ItemCard={RecentCard}

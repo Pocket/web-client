@@ -34,11 +34,11 @@ export function LoadMore({ loadMore }) {
   const hasNextPage = useSelector((state) => state.pageSavedInfo.hasNextPage)
   const loading = useSelector((state) => state.pageSavedInfo.loading)
   const error = useSelector((state) => state.pageSavedInfo.error)
-  const pageSaved = useSelector((state) => state.pageSaved)
+  const pageSavedIds = useSelector((state) => state.pageSavedIds)
 
   const shouldLoadMore = hasNextPage && !loading
 
-  const loadMoreMessage = pageSaved.length ? 'Loading more items' : ''
+  const loadMoreMessage = pageSavedIds.length ? 'Loading more items' : ''
   useEffect(() => {
     if (!inView) return
 

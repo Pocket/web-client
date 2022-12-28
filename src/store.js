@@ -144,9 +144,9 @@ const itemMutations = {
 }
 
 const pageReducers = {
-  pageDiscoverIds: pageDiscoverReducers,
-  pageSaved: pageSavedReducers,
-  pageSavedInfo: pageSavedInfoReducers
+  pageSavedIds: pageSavedReducers,
+  pageSavedInfo: pageSavedInfoReducers,
+  pageDiscoverIds: pageDiscoverReducers
 }
 
 const discoverReducers = {

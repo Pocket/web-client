@@ -60,7 +60,7 @@ export const ListOfItems = () => {
   const dispatch = useDispatch()
   const viewport = useViewport()
 
-  const pageSaved = useSelector((state) => state.pageSaved)
+  const pageSavedIds = useSelector((state) => state.pageSavedIds)
   const totalCount = useSelector((state) => state.pageSavedInfo.totalCount)
   const type = useSelector((state) => state.app.listMode)
 
@@ -75,7 +75,7 @@ export const ListOfItems = () => {
   const verticalPadding = 15
   const horizontalPadding = 25
 
-  const blockRows = pageSaved.length / columnCount
+  const blockRows = pageSavedIds.length / columnCount
   const totalHeight = blockRows * height + blockRows * verticalPadding
 
   /** FUNCTIONS
@@ -108,14 +108,14 @@ export const ListOfItems = () => {
   if (!totalCount) return null
 
   const loadMore = () => dispatch(loadMoreListItems())
-  const itemsToShow = pageSaved.slice(startingIndex, startingIndex + itemsOnScreen + 1)
+  const itemsToShow = pageSavedIds.slice(startingIndex, startingIndex + itemsOnScreen + 1)
 
   return (
     <>
       <div className={pageSavedStyle}>
         {itemsToShow
           ? itemsToShow.map((itemId) => {
-              const positionOfItem = pageSaved.indexOf(itemId)
+              const positionOfItem = pageSavedIds.indexOf(itemId)
               return (
                 <ItemCard
                   key={itemId}
