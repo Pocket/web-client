@@ -32,9 +32,6 @@ import { featureSagas } from 'connectors/feature-flags/feature-flags.state'
 import { snowplowReducers } from 'connectors/snowplow/snowplow.state'
 import { snowplowSagas } from 'connectors/snowplow/snowplow.state'
 
-import { discoverItemsReducers } from 'connectors/items-by-id/discover/items.state'
-import { discoverItemsSagas } from 'connectors/items-by-id/discover/items.state'
-
 import { pageDiscoverReducers } from 'containers/discover/discover.state'
 import { pageDiscoverSagas } from 'containers/discover/discover.state'
 
@@ -150,7 +147,6 @@ const pageReducers = {
 }
 
 const discoverReducers = {
-  discoverItemsById: discoverItemsReducers, // Shared discover item store
   discoverTopic: topicReducers,
   syndicatedArticle: syndicatedArticleReducers
 }
@@ -225,7 +221,6 @@ function* rootSaga() {
     ...userTagsSagas,
     ...featureSagas,
     ...snowplowSagas,
-    ...discoverItemsSagas,
     ...pageDiscoverSagas,
     ...collectionsSagas,
     ...collectionStoriesSagas,

@@ -1,4 +1,4 @@
-import { takeLatest, put, takeEvery } from 'redux-saga/effects'
+import { takeLatest, put } from 'redux-saga/effects'
 import { getDiscoverLineup } from 'common/api/queries/get-discover'
 
 import { DISCOVER_DATA_REQUEST } from 'actions'
@@ -7,9 +7,6 @@ import { DISCOVER_DATA_FAILURE } from 'actions'
 import { DISCOVER_HYDRATE } from 'actions'
 import { DISCOVER_SAVE_REQUEST } from 'actions'
 import { DISCOVER_UNSAVE_REQUEST } from 'actions'
-
-import { DISCOVER_ITEMS_SAVE_REQUEST } from 'actions'
-import { DISCOVER_ITEMS_UNSAVE_REQUEST } from 'actions'
 
 import { HYDRATE } from 'actions'
 
@@ -48,9 +45,7 @@ export const pageDiscoverReducers = (state = initialState, action) => {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const pageDiscoverSagas = [
-  takeLatest(DISCOVER_DATA_REQUEST, discoverDataRequest),
-  takeEvery(DISCOVER_SAVE_REQUEST, discoverSaveRequest),
-  takeEvery(DISCOVER_UNSAVE_REQUEST, discoverUnSaveRequest)
+  takeLatest(DISCOVER_DATA_REQUEST, discoverDataRequest)
 ]
 
 /** SAGA :: RESPONDERS
@@ -64,25 +59,6 @@ function* discoverDataRequest() {
   } catch (error) {
     yield put({ type: DISCOVER_DATA_FAILURE, error })
   }
-}
-
-// This is just a passthrough that adds analytics toe the item save request
-function* discoverSaveRequest(action) {
-  const { url, id, position } = action
-  const analytics = {
-    view: 'web',
-    section: 'explore',
-    page: '/explore/',
-    cxt_item_position: position
-  }
-
-  yield put({ type: DISCOVER_ITEMS_SAVE_REQUEST, id, url, analytics })
-}
-
-// This is only here to keep a consistent chain for item actions
-function* discoverUnSaveRequest(action) {
-  const { id } = action
-  yield put({ type: DISCOVER_ITEMS_UNSAVE_REQUEST, id })
 }
 
 /** ASYNC Functions

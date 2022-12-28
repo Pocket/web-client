@@ -1,6 +1,6 @@
 import { wrappedRender } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
-import Topic from 'containers/topic/topic'
+import Topic from 'containers/discover/topic/topic'
 
 const setAppElementStub = jest.fn()
 const ReactModalMock = ({ children }) => <div>{children}</div>

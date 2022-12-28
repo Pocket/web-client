@@ -3,7 +3,7 @@ import { TOPICS_BY_NAME } from 'common/constants'
 import { setActiveTopic } from 'connectors/topic-list/topic-list.state'
 import { fetchTopicData } from 'containers/discover/topic/topic.state'
 import { hydrateTopic } from 'containers/discover/topic/topic.state'
-import { hydrateItems } from 'connectors/items-by-id/discover/items.state'
+import { hydrateItems } from 'connectors/items/items-display.state'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
 

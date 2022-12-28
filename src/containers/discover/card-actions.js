@@ -19,7 +19,7 @@ export function ActionsDiscover({ id, position }) {
   const { t } = useTranslation()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const item = useSelector((state) => state.discoverItemsById[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
 
   if (!item) return null
   const { saveStatus, saveUrl, externalUrl, openExternal } = item
@@ -27,25 +27,20 @@ export function ActionsDiscover({ id, position }) {
 
   // Prep save action
   const onSave = () => {
-    dispatch(sendSnowplowEvent('home.corpus.save', analyticsData))
+    dispatch(sendSnowplowEvent('discover.save', analyticsData))
     dispatch(mutationUpsert(saveUrl))
   }
 
   const onUnSave = () => {
-    dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
+    dispatch(sendSnowplowEvent('discover.unsave', analyticsData))
     dispatch(mutationDelete(id))
   }
 
   // Open action
   const url = externalUrl
-
+  const destination = openExternal ? 'external' : 'internal'
   const onOpen = () => {
-    const data = {
-      ...analyticsData,
-      url,
-      destination: openExternal ? 'external' : 'internal'
-    }
-    dispatch(sendSnowplowEvent('discover.open', data))
+    dispatch(sendSnowplowEvent('discover.open', { ...analyticsData, url, destination }))
   }
 
   // On Report

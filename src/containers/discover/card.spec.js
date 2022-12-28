@@ -21,7 +21,7 @@ describe('ItemCard', () => {
     analytics: {
       impressions: []
     },
-    discoverItemsById: {
+    itemsDisplay: {
       [derivedDiscoverItem.itemId]: derivedDiscoverItem
     }
   }

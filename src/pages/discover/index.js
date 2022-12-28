@@ -1,7 +1,7 @@
 import Discover from 'containers/discover/discover'
 import { hydrateDiscover } from 'containers/discover/discover.state'
 import { fetchDiscoverData } from 'containers/discover/discover.state'
-import { hydrateItems } from 'connectors/items-by-id/discover/items.state'
+import { hydrateItems } from 'connectors/items/items-display.state'
 import { wrapper } from 'store'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'

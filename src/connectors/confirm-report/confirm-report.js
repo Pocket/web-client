@@ -19,7 +19,7 @@ export const ReportFeedbackModal = () => {
   const [success, updateSubmitSuccess] = useState(false)
 
   const id = useSelector((state) => state.mutationReport)
-  const item = useSelector((state) => state.discoverItemsById[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
 
   const showModal = !!item
 
