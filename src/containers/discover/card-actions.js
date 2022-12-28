@@ -3,11 +3,14 @@ import { ReportIcon } from 'components/icons/ReportIcon'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { OverflowAction } from 'components/item-actions/overflow'
 import { useSelector, useDispatch } from 'react-redux'
-import { saveDiscoverItem } from 'containers/discover/discover.state'
 import { useTranslation } from 'next-i18next'
 
 import { itemActionStyle } from 'components/item-actions/base'
 import { itemReportAction } from 'connectors/items/mutation-report.state'
+
+import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
+import { mutationDelete } from 'connectors/items/mutation-delete.state'
+
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -24,8 +27,13 @@ export function ActionsDiscover({ id, position }) {
 
   // Prep save action
   const onSave = () => {
-    dispatch(saveDiscoverItem(id, saveUrl, position))
-    dispatch(sendSnowplowEvent('discover.save', analyticsData))
+    dispatch(sendSnowplowEvent('home.corpus.save', analyticsData))
+    dispatch(mutationUpsert(saveUrl))
+  }
+
+  const onUnSave = () => {
+    dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
+    dispatch(mutationDelete(id))
   }
 
   // Open action

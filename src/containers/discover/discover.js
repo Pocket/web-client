@@ -11,7 +11,7 @@ import { BASE_URL } from 'common/constants'
 // Components
 import { CardPageHeader } from 'components/headers/discover-header'
 import { CardListHeading } from 'components/headers/discover-header'
-import { ItemCard } from 'connectors/item-card/discover/card'
+import { ItemCard } from './card'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
