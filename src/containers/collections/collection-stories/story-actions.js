@@ -10,7 +10,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 export function ActionsCollection({ id, position }) {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const item = useSelector((state) => state.collectionStoriesById[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
 
   if (!item) return null
 

@@ -13,14 +13,12 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
   const dispatch = useDispatch()
   // Get data from state
   const analyticsInitialized = useSelector((state) => state.analytics.initialized)
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
-  const item = useSelector((state) => state.collectionStoriesById[id])
-  const { itemId, readUrl, externalUrl, openExternal } = item
-
-  const impressionFired = useSelector((state) => state.analytics.impressions.includes(itemId))
-
+  const item = useSelector((state) => state.itemsDisplay[id])
   if (!item) return null
 
+  const { itemId, readUrl, externalUrl, openExternal } = item
   const openUrl = readUrl && !openExternal ? readUrl : externalUrl
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {

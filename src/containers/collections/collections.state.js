@@ -188,13 +188,11 @@ export async function fetchCollectionBySlug({ slug }) {
     const response = await getCollectionBySlug(slug)
     if (!response) return { error: 'No data found' }
 
-    const { stories: passedStories, ...rest } = response
+    const { stories: passedStories, storiesById, ...rest } = response
     const url = `/collections/${slug}`
-
     // Derive items
     const validStories = passedStories.filter(validateStory)
     const stories = validStories.map((story) => story?.item?.itemId)
-    const urls = validStories.map((story) => story.url)
 
     return {
       collection: {
@@ -202,12 +200,12 @@ export async function fetchCollectionBySlug({ slug }) {
           itemId: slug,
           stories,
           url,
-          urls,
           pageSaveStatus: 'unsaved',
           saveStatus: 'unsaved',
           ...rest
         }
       },
+      storiesById,
       stories: validStories
     }
   } catch (error) {
