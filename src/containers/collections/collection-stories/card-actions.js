@@ -6,7 +6,7 @@ import { mutationDelete } from 'connectors/items/mutation-delete.state'
 import { itemActionStyle } from 'components/item-actions/base'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export function ActionsCollection({ id, position }) {
+export function ActionsStory({ id, position }) {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector((state) => state.user.auth)
   const item = useSelector((state) => state.itemsDisplay[id])

@@ -1,6 +1,6 @@
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
-import { ActionsCollection } from './story-actions'
+import { ActionsCollection } from './card-actions'
 import { setNoImage } from 'connectors/items/items-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -9,50 +9,56 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
  * Creates a connected `Card` with the appropriate data and actions
  * @param {object} {id, position} item_id for data and position for analytics
  */
-export function ItemCard({ id, cardShape, className, showExcerpt = false, position, partnerType }) {
+export function ItemCard({
+  id,
+  cardShape,
+  className,
+  showExcerpt = false,
+  position
+}) {
   const dispatch = useDispatch()
-  // Get data from state
-  const analyticsInitialized = useSelector((state) => state.analytics.initialized)
-  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
-  const item = useSelector((state) => state.itemsDisplay[id])
+  // Get data from state
+  const item = useSelector((state) => state.collectionsBySlug[id])
+  const { slug, readUrl, externalUrl, openExternal } = item
+
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(openExternal))
+  const analyticsInitialized = useSelector((state) => state.analytics.initialized)
+  const onImageFail = () => dispatch(setNoImage(id))
+
   if (!item) return null
 
-  const { itemId, readUrl, externalUrl, openExternal } = item
   const openUrl = readUrl && !openExternal ? readUrl : externalUrl
-  const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
     id,
     position,
-    destination: 'external',
+    destination: 'internal',
     ...item?.analyticsData
   }
+  /** ITEM DETAILS
+   --------------------------------------------------------------- */
+  const itemImage = item?.noImage ? '' : item.heroImage
+  const {tags, title, authors, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } = item //prettier-ignore
 
   /**
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onImpression = () =>
-    dispatch(sendSnowplowEvent('collection.story.impression', analyticsData))
+  const onImpression = () => dispatch(sendSnowplowEvent('collection.impression', analyticsData))
   const onItemInView = (inView) =>
     !impressionFired && inView && analyticsInitialized ? onImpression() : null
-  const onOpen = () => dispatch(sendSnowplowEvent('collection.story.open', analyticsData))
-
-  /** ITEM DETAILS
-  --------------------------------------------------------------- */
-  const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {tags, title, publisher, excerpt, isSyndicated, isInternalItem, fromPartner, authors } = item //prettier-ignore
+  const onOpen = () => dispatch(sendSnowplowEvent('collection.open', analyticsData))
 
   return (
     <Card
-      itemId={itemId}
+      itemId={slug}
       externalUrl={externalUrl}
       tags={tags}
       title={title}
       itemImage={itemImage}
-      publisher={publisher}
+      publisher={false}
       excerpt={excerpt}
-      timeToRead={false}
+      timeToRead={timeToRead}
       isSyndicated={isSyndicated}
       isInternalItem={isInternalItem}
       fromPartner={fromPartner}
@@ -64,10 +70,11 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
       showExcerpt={showExcerpt}
       openUrl={openUrl}
       useMarkdown={true}
-      partnerType={partnerType}
       // Tracking
       onItemInView={onItemInView}
       onOpen={onOpen}
+      // Actions
+      actionId={item.slug}
       ActionMenu={ActionsCollection}
     />
   )

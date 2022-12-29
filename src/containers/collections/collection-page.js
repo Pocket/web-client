@@ -22,7 +22,7 @@ import { Partner } from 'components/content-partner/partner'
 
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
-import { ItemCard } from 'containers/collections/collection-stories/story-card'
+import { ItemCard } from 'containers/collections/collection-stories/card'
 
 import { unSaveCollectionPage } from 'containers/collections/collections.state'
 import { saveCollectionPage } from 'containers/collections/collections.state'
