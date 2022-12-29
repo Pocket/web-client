@@ -1,6 +1,6 @@
 import PocketRecs from './pocket-recs'
 
-import { pocketRecommendations as pocketRecs, publisher } from 'mocks/_data/article'
+import { pocketRecommendations as pocketRecs } from 'mocks/_data/article'
 
 export default {
   title: 'Recommendations/Pocket',

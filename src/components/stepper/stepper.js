@@ -1,5 +1,4 @@
 import { css, cx } from 'linaria'
-import { buttonReset } from 'components/buttons/button-reset'
 
 export const stepperTooltip = css`
   &[data-tooltip] {

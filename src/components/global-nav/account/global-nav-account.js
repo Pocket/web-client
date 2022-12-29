@@ -18,7 +18,6 @@ import { ListSettings } from 'components/display-settings/list-modes'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 
 import { FloatingNotification } from './notification'
-import { InlineNotification } from './notification'
 
 const accountLinkStyle = css`
   display: inline-block;
@@ -205,7 +204,7 @@ const GlobalNavAccount = ({
   const handleManageAccountCase = () => onLinkClick('manage-account')
   const handleHelpCase = () => onLinkClick('help')
   const handleMessagesCase = () => onLinkClick('messages')
-  const handleWhatsNewCase = () => onLinkClick('whats-new')
+  // const handleWhatsNewCase = () => onLinkClick('whats-new')
   const handleLogoutCase = () => {
     onLinkClick('logout')
     // Fire for all users when Braze launches

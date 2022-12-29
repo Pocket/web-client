@@ -36,7 +36,7 @@ export const Basic = () => (
       <br />
       <br />
       <div>
-        <img src="http://placeimg.com/320/240/animals/sepia" />
+        <img src="http://placeimg.com/320/240/animals/sepia" alt=""/>
       </div>
     </ModalBody>
   </Modal>
@@ -263,7 +263,7 @@ const LongContent = () => (
     <br />
     <br />
     <div>
-      <img src="http://placekitten.com/g/200/300" />
+      <img src="http://placekitten.com/g/200/300"  alt=""/>
     </div>
   </div>
 )

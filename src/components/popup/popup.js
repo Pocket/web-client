@@ -70,7 +70,7 @@ const popupStyle = css`
  * within the component itself.
  */
 
-let handleClickOutside = (event) => {}
+let handleClickOutside = () => {}
 
 function handleClickOutsidePointer(event) {
   handleClickOutside(event)
@@ -174,7 +174,7 @@ const Popup = ({
    * @param {object} event Click event passed though from the listener
    */
 
-  function handleTriggerClick(event) {
+  function handleTriggerClick() {
     if (!forceShow) setIsShowRequested((prevShown) => !prevShown)
   }
   /**
@@ -182,7 +182,7 @@ const Popup = ({
    * UI elements, or when window loses focus
    */
 
-  function handleWindowBlur(event) {
+  function handleWindowBlur() {
     if (!forceShow) setIsShowRequested(false)
   } // Use Effect to create/set up popup on component mount
 
@@ -301,9 +301,9 @@ Popup.defaultProps = {
   animationDuration: 75,
   alwaysRender: true,
 
-  onOpen(id) {},
+  onOpen() {},
 
-  onClose(id) {},
+  onClose() {},
 
   popperOptions: {
     placement: 'bottom-start'

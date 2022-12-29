@@ -23,11 +23,11 @@
     "@next/next/no-img-element": "off",
     "no-extra-boolean-cast": "off",
     "no-unused-vars": [
-      "warn",
+      "error",
       {
         "vars": "local",
         "args": "after-used",
-        "ignoreRestSiblings": false
+        "ignoreRestSiblings": true
       }
     ],
     "no-console": [
