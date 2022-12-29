@@ -4,7 +4,7 @@ import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils'
 
 import { collectionFromClientApi } from 'common/api/derivers/collection/page.spec'
 import { partnerCollectionFromClientApi } from 'common/api/derivers/collection/page.spec'
-import { ItemCard as CollectionCard } from 'connectors/item-card/collection/collection-card'
+import { ItemCard as CollectionCard } from 'containers/collections/collection-card'
 import { deriveCollection } from 'common/api/derivers/item'
 
 describe('ItemCard', () => {

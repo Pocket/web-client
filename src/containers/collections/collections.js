@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 import { CardPageHeader } from 'components/headers/discover-header'
-import { ItemCard } from 'connectors/item-card/collection/collection-card'
+import { ItemCard } from 'containers/collections/collection-card'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
 import { Toasts } from 'connectors/toasts/toast-list'

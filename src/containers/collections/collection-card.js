@@ -14,9 +14,7 @@ export function ItemCard({
   cardShape,
   className,
   showExcerpt = false,
-  position,
-  lockup,
-  useHero = false
+  position
 }) {
   const dispatch = useDispatch()
 
