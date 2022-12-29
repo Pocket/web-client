@@ -5,18 +5,12 @@ import { DISCOVER_DATA_REQUEST } from 'actions'
 import { DISCOVER_DATA_SUCCESS } from 'actions'
 import { DISCOVER_DATA_FAILURE } from 'actions'
 import { DISCOVER_HYDRATE } from 'actions'
-import { DISCOVER_SAVE_REQUEST } from 'actions'
-import { DISCOVER_UNSAVE_REQUEST } from 'actions'
-
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getDiscoverData = () => ({ type: DISCOVER_DATA_REQUEST })
 export const hydrateDiscover = (itemsIds) => ({ type: DISCOVER_HYDRATE, itemsIds }) //prettier-ignore
-
-export const saveDiscoverItem = (id, url, position) => ({type: DISCOVER_SAVE_REQUEST, id, url, position}) //prettier-ignore
-export const unSaveDiscoverItem = (id) => ({ type: DISCOVER_UNSAVE_REQUEST, id }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
