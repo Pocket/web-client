@@ -1,10 +1,9 @@
 import React from 'react'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { useSelector, useDispatch } from 'react-redux'
-import { saveStory } from 'connectors/items-by-id/collection/stories.state'
-
+import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
+import { mutationDelete } from 'connectors/items/mutation-delete.state'
 import { itemActionStyle } from 'components/item-actions/base'
-
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export function ActionsCollection({ id, position }) {
@@ -21,11 +20,16 @@ export function ActionsCollection({ id, position }) {
     ...item?.analyticsData
   }
 
-  // Prep save action
-  const onSave = () => {
-    dispatch(saveStory(id, saveUrl))
-    dispatch(sendSnowplowEvent('collection.story.save', analyticsData))
-  }
+    // Prep save action
+    const onSave = () => {
+      dispatch(sendSnowplowEvent('collection.story.save', analyticsData))
+      dispatch(mutationUpsert(saveUrl))
+    }
+  
+    const onUnSave = () => {
+      dispatch(sendSnowplowEvent('discover.unsave', analyticsData))
+      dispatch(mutationDelete(id))
+    }
 
   // Open action
   const onOpen = () => dispatch(sendSnowplowEvent('collection.story.open', analyticsData))

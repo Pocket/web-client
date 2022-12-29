@@ -39,9 +39,6 @@ import { collectionsPageReducers } from 'containers/collections/collections.stat
 import { collectionsBySlugReducers } from 'containers/collections/collections.state'
 import { collectionsSagas } from 'containers/collections/collections.state'
 
-import { collectionStoriesReducers } from 'connectors/items-by-id/collection/stories.state'
-import { collectionStoriesSagas } from 'connectors/items-by-id/collection/stories.state'
-
 import { topicListReducers } from 'connectors/topic-list/topic-list.state'
 
 import { topicReducers } from 'containers/discover/topic/topic.state'
@@ -153,7 +150,6 @@ const discoverReducers = {
 const collectionReducer = {
   collectionsPage: collectionsPageReducers,
   collectionsBySlug: collectionsBySlugReducers,
-  collectionStoriesById: collectionStoriesReducers
 }
 
 const libraryReducers = {
