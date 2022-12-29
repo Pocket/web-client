@@ -1,9 +1,5 @@
 import { put, takeEvery, call } from 'redux-saga/effects'
 import { getUnifiedHome } from 'common/api/queries/get-home-unified'
-import { saveItem } from 'common/api/_legacy/saveItem'
-import { arrayToObject } from 'common/utilities/object-array/object-array'
-import { deriveListItem } from 'common/api/derivers/item'
-import { removeItemByUrl } from 'common/api/_legacy/removeItem'
 
 import { HOME_CONTENT_REQUEST } from 'actions'
 import { HOME_CONTENT_SUCCESS } from 'actions'

@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { usePrevious } from 'common/utilities/hooks/has-changed'
 import { css } from 'linaria'
 import { Onboarding } from 'components/onboarding/onboarding'
-import { unloadOnboarding } from './home-onboarding.state'
-import { saveDismissAction } from './home-onboarding.state'
-import { readDismissAction } from './home-onboarding.state'
-import { saveImpressionEvent } from './home-onboarding.state'
-import { readImpressionEvent } from './home-onboarding.state'
+import { unloadOnboarding } from './onboarding.state'
+import { saveDismissAction } from './onboarding.state'
+import { readDismissAction } from './onboarding.state'
+import { saveImpressionEvent } from './onboarding.state'
+import { readImpressionEvent } from './onboarding.state'
 import { breakpointTinyTablet } from 'common/constants'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -57,9 +57,10 @@ export const HomeOnboarding = () => {
   const currentStep = useSelector((state) => state.homeOnboarding.currentStep)
   const saveComplete = useSelector((state) => state.homeOnboarding.saveComplete)
   const readComplete = useSelector((state) => state.homeOnboarding.readComplete)
-  const recentSaves = useSelector((state) => state.home.recentSaves)
-  const recentId = recentSaves?.[0]
-  const recentItem = useSelector((state) => state.savesItemsById[recentId])
+  const recentSavesIds = useSelector((state) => state.pageSavedIds)
+
+  const recentId = recentSavesIds?.[0]
+  const recentItem = useSelector((state) => state.itemsDisplay[recentId])
   const isInternalItem = recentItem?.isInternalItem
   const prevSave = usePrevious(recentId)
 
@@ -90,10 +91,10 @@ export const HomeOnboarding = () => {
 
   // Highlighted item no longer appears in recent saves
   useEffect(() => {
-    if (currentStep === 1 && recentSaves.indexOf(savedItem) > 2) {
+    if (currentStep === 1 && recentSavesIds.indexOf(savedItem) > 2) {
       dispatch(unloadOnboarding())
     }
-  }, [currentStep, savedItem, recentSaves])
+  }, [currentStep, savedItem, recentSavesIds, dispatch])
 
   // Impression actions
   const saveImpressionAction = () => {

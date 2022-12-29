@@ -5,10 +5,11 @@ import { all } from 'redux-saga/effects'
 
 /* IMPORT CONTAINER STATES
  --------------------------------------------------------------- */
-import { homeSetupReducers } from 'containers/home/home-setup.state'
-import { homeSetupSagas } from 'containers/home/home-setup.state'
-import { homeOnboardingReducers } from 'containers/home/home-onboarding.state'
-import { homeOnboardingSagas } from 'containers/home/home-onboarding.state'
+import { homeSetupReducers } from 'containers/home/setup/setup.state'
+import { homeSetupSagas } from 'containers/home/setup/setup.state'
+
+import { homeOnboardingReducers } from 'containers/home/onboarding/onboarding.state'
+import { homeOnboardingSagas } from 'containers/home/onboarding/onboarding.state'
 
 import { appReducers, appSagas } from 'connectors/app/app.state'
 import { oneTrustReducers } from 'connectors/third-party/one-trust.state'

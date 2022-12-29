@@ -1,6 +1,6 @@
 import { sectionStyles } from 'components/dev-tools/tool-styles'
-import { resetOnboarding } from 'containers/home/home-onboarding.state'
-import { resetSetupMoment } from 'containers/home/home-setup.state'
+import { resetOnboarding } from 'containers/home/onboarding/onboarding.state'
+import { resetSetupMoment } from 'containers/home/setup/setup.state'
 import { useDispatch } from 'react-redux'
 
 export const Resets = () => {
