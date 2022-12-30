@@ -37,7 +37,6 @@ import { pageDiscoverSagas } from 'containers/discover/discover.state'
 
 import { collectionsPageReducers } from 'containers/collections/collections.state'
 import { collectionsBySlugReducers } from 'containers/collections/collections.state'
-import { collectionsSagas } from 'containers/collections/collections.state'
 
 import { topicListReducers } from 'connectors/topic-list/topic-list.state'
 
@@ -217,8 +216,6 @@ function* rootSaga() {
     ...featureSagas,
     ...snowplowSagas,
     ...pageDiscoverSagas,
-    ...collectionsSagas,
-    ...collectionStoriesSagas,
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
     ...recitSagas,

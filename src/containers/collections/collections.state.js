@@ -1,35 +1,15 @@
-import { select, takeLatest, put } from 'redux-saga/effects'
 import { deriveCollection } from 'common/api/derivers/item'
 import { getCollectionBySlug } from 'common/api/queries/get-collection-by-slug'
 import { getCollections } from 'common/api/queries/get-collections'
-import { saveItem } from 'common/api/_legacy/saveItem'
-import { removeItemByUrl } from 'common/api/_legacy/removeItem'
-import { saveItems } from 'common/api/_legacy/saveItem'
 
 import { HYDRATE } from 'actions'
 import { COLLECTIONS_HYDRATE } from 'actions'
 
-import { COLLECTIONS_SAVE_REQUEST } from 'actions'
-import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
-import { COLLECTIONS_SAVE_FAILURE } from 'actions'
-
-import { COLLECTION_PAGE_SAVE_REQUEST } from 'actions'
-import { COLLECTION_PAGE_SAVE_SUCCESS } from 'actions'
-import { COLLECTION_PAGE_SAVE_FAILURE } from 'actions'
-
-import { COLLECTION_PAGE_UNSAVE_REQUEST } from 'actions'
-import { COLLECTION_PAGE_UNSAVE_SUCCESS } from 'actions'
-import { COLLECTION_PAGE_UNSAVE_FAILURE } from 'actions'
-
 import { arrayToObject } from 'common/utilities/object-array/object-array'
-import { BASE_URL } from 'common/constants'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const hydrateCollections = (payload) => ({ type: COLLECTIONS_HYDRATE, payload })
-export const saveCollection = (slug) => ({ type: COLLECTIONS_SAVE_REQUEST, slug })
-export const saveCollectionPage = (slug) => ({ type: COLLECTION_PAGE_SAVE_REQUEST, slug })
-export const unSaveCollectionPage = (slug) => ({ type: COLLECTION_PAGE_UNSAVE_REQUEST, slug })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -67,96 +47,11 @@ export const collectionsBySlugReducers = (state = {}, action) => {
       return { ...state, ...collectionsBySlug }
     }
 
-    case COLLECTION_PAGE_SAVE_REQUEST: {
-      const { slug } = action
-      return { ...state, [slug]: { ...state[slug], pageSaveStatus: 'saving' } }
-    }
-
-    case COLLECTION_PAGE_SAVE_SUCCESS: {
-      const { slug } = action
-      return { ...state, [slug]: { ...state[slug], pageSaveStatus: 'saved' } }
-    }
-
-    case COLLECTION_PAGE_UNSAVE_SUCCESS:
-    case COLLECTION_PAGE_SAVE_FAILURE: {
-      const { slug } = action
-      return { ...state, [slug]: { ...state[slug], pageSaveStatus: 'unsaved' } }
-    }
-
-    case COLLECTIONS_SAVE_REQUEST: {
-      const { slug } = action
-      return { ...state, [slug]: { ...state[slug], saveStatus: 'saving' } }
-    }
-
-    case COLLECTIONS_SAVE_SUCCESS: {
-      const { slug } = action
-      return { ...state, [slug]: { ...state[slug], saveStatus: 'saved' } }
-    }
-
-    case COLLECTIONS_SAVE_FAILURE: {
-      const { slug } = action
-      return { ...state, [slug]: { ...state[slug], saveStatus: 'unsaved' } }
-    }
-
     default:
       return state
   }
 }
 
-/** SAGAS :: WATCHERS
- --------------------------------------------------------------- */
-export const collectionsSagas = [
-  takeLatest(COLLECTIONS_SAVE_REQUEST, collectionSaveRequest),
-  takeLatest(COLLECTION_PAGE_SAVE_REQUEST, collectionPageSave),
-  takeLatest(COLLECTION_PAGE_UNSAVE_REQUEST, collectionPageUnSave)
-]
-
-/* SAGAS :: SELECTORS
- --------------------------------------------------------------- */
-const getUrls = (state, slug) => state.collections[slug]?.urls
-
-/** SAGA :: RESPONDERS
- --------------------------------------------------------------- */
-function* collectionPageSave(action) {
-  try {
-    const { slug } = action
-    const url = `${BASE_URL}/collections/${slug}`
-
-    const response = yield saveItem(url)
-    if (response?.status !== 1) throw new Error('Unable to save')
-
-    yield put({ type: COLLECTION_PAGE_SAVE_SUCCESS, slug })
-  } catch (error) {
-    yield put({ type: COLLECTION_PAGE_SAVE_FAILURE, error })
-  }
-}
-
-function* collectionPageUnSave(action) {
-  try {
-    const { slug } = action
-    const url = `${BASE_URL}/collections/${slug}`
-
-    const response = yield removeItemByUrl(url)
-    if (response?.status !== 1) throw new Error('Unable to remove item')
-
-    yield put({ type: COLLECTION_PAGE_UNSAVE_SUCCESS, slug })
-  } catch (error) {
-    yield put({ type: COLLECTION_PAGE_UNSAVE_FAILURE, error })
-  }
-}
-
-function* collectionSaveRequest(action) {
-  try {
-    const { slug } = action
-    const urls = yield select(getUrls, slug)
-    const response = yield saveItems(urls)
-    if (response?.status !== 1) throw new Error('Unable to save')
-
-    yield put({ type: COLLECTIONS_SAVE_SUCCESS, slug, count: urls.length })
-  } catch (error) {
-    yield put({ type: COLLECTIONS_SAVE_FAILURE, error })
-  }
-}
 
 /** ASYNC Functions
  --------------------------------------------------------------- */

@@ -23,10 +23,9 @@ import { Partner } from 'components/content-partner/partner'
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { ItemCard } from 'containers/collections/collection-stories/card'
-
-import { unSaveCollectionPage } from 'containers/collections/collections.state'
-import { saveCollectionPage } from 'containers/collections/collections.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+
+import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
 
 import { Toasts } from 'connectors/toasts/toast-list'
 import ErrorPage from 'pages/_error'
@@ -82,19 +81,17 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const url = canonical
 
   const metaData = { description: excerpt, title, url, image: imageUrl }
+
   const saveAction = (saveUrl, id) => {
-    if (pageSaveStatus === 'saved') dispatch(unSaveCollectionPage(slug))
-    if (pageSaveStatus !== 'saved') {
-      dispatch(saveCollectionPage(slug))
       dispatch(sendSnowplowEvent('collection.page.save', { url: saveUrl, value: id }))
-    }
+      dispatch(mutationUpsert(url))
   }
 
   const shareAction = (platform) => {
     dispatch(sendSnowplowEvent(`collection.share.${platform}`, { url }))
   }
 
-  const topicClick = (topic, index, id) => {
+  const topicClick = (topic) => {
     dispatch(sendSnowplowEvent('collection.topic.click', { label: topic }))
   }
 

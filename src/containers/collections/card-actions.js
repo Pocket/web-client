@@ -1,10 +1,11 @@
-import React from 'react'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { useSelector, useDispatch } from 'react-redux'
-import { saveCollectionPage } from 'containers/collections/collections.state'
+
 import { itemActionStyle } from 'components/item-actions/base'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { BASE_URL } from 'common/constants'
+import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
+import { mutationDelete } from 'connectors/items/mutation-delete.state'
 
 export function ActionsCollection({ id, position }) {
   const dispatch = useDispatch()
@@ -14,15 +15,20 @@ export function ActionsCollection({ id, position }) {
   if (!item) return null
 
   const { url, pageSaveStatus } = item
-  const analyticsItem = {
+  const analyticsData = {
     url: `${BASE_URL}${url}`,
     position
   }
 
   // Prep save action
   const onSave = () => {
-    dispatch(saveCollectionPage(id))
-    dispatch(sendSnowplowEvent('collection.save', analyticsItem))
+    dispatch(sendSnowplowEvent('collection.save', analyticsData))
+    dispatch(mutationUpsert(url))
+  }
+
+  const onUnSave = () => {
+    dispatch(sendSnowplowEvent('collection.unsave', analyticsData))
+    dispatch(mutationDelete(id))
   }
 
   // Open action
