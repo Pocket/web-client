@@ -1,18 +1,11 @@
-import { put, takeEvery } from 'redux-saga/effects'
 import { getTopicLineup } from 'common/api/queries/get-topic-lineup'
-
 import { TOPIC_HYDRATE } from 'actions'
-import { TOPIC_SAVE_REQUEST } from 'actions'
-import { TOPIC_UNSAVE_REQUEST } from 'actions'
-import { DISCOVER_ITEMS_SAVE_REQUEST } from 'actions'
-import { DISCOVER_ITEMS_UNSAVE_REQUEST } from 'actions'
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const hydrateTopic = (hydrated) => ({ type: TOPIC_HYDRATE, hydrated })
-export const saveTopicItem = (id, url, position) => ({type: TOPIC_SAVE_REQUEST, id, url, position}) /*prettier-ignore */
-export const unSaveTopicItem = (id) => ({ type: TOPIC_UNSAVE_REQUEST, id })
+
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -36,35 +29,6 @@ export const topicReducers = (state = initialState, action) => {
     default:
       return state
   }
-}
-
-/** SAGAS :: WATCHERS
- --------------------------------------------------------------- */
-export const topicSagas = [
-  takeEvery(TOPIC_SAVE_REQUEST, topicsSaveRequest),
-  takeEvery(TOPIC_UNSAVE_REQUEST, topicsUnSaveRequest)
-]
-
-/** SAGA :: RESPONDERS
- --------------------------------------------------------------- */
-function* topicsSaveRequest(action) {
-  const { url, id, position } = action
-  const page = global?.location?.pathname
-  const topic = page.match(/\/explore\/(.*)(\?.*)?/)
-  const analytics = {
-    view: 'web',
-    section: 'topics',
-    page,
-    cxt_item_position: position,
-    extra_content: topic ? topic[1] : false
-  }
-
-  yield put({ type: DISCOVER_ITEMS_SAVE_REQUEST, id, url, analytics })
-}
-
-function* topicsUnSaveRequest(action) {
-  const { id } = action
-  yield put({ type: DISCOVER_ITEMS_UNSAVE_REQUEST, id })
 }
 
 /** ASYNC Functions

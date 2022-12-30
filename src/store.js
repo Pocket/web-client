@@ -45,7 +45,6 @@ import { collectionStoriesSagas } from 'connectors/items-by-id/collection/storie
 import { topicListReducers } from 'connectors/topic-list/topic-list.state'
 
 import { topicReducers } from 'containers/discover/topic/topic.state'
-import { topicSagas } from 'containers/discover/topic/topic.state'
 
 import { pocketHitsReducers } from 'connectors/pocket-hits/pocket-hits.state'
 import { pocketHitsSagas } from 'connectors/pocket-hits/pocket-hits.state'
@@ -224,7 +223,6 @@ function* rootSaga() {
     ...pageDiscoverSagas,
     ...collectionsSagas,
     ...collectionStoriesSagas,
-    ...topicSagas,
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
     ...recitSagas,
