@@ -2,9 +2,13 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { css } from 'linaria'
 import { COLUMN_WIDTH_RANGE } from 'common/constants'
-import { RecCard } from 'connectors/item-card/reader/card-rec'
 import { readerRecsRequest } from 'connectors/recit/recit.state'
 import { breakpointTinyTablet } from 'common/constants'
+import { Card } from 'components/item-card/card'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { SaveToPocket } from 'components/item-actions/save-to-pocket'
+import { itemActionStyle } from 'components/item-actions/base'
+import { readerRecSaveItem } from 'connectors/recit/recit.state'
 
 const asideWrapper = css`
   margin: 0 2.5rem;
@@ -89,5 +93,99 @@ export const Recommendations = ({ id }) => {
         ))}
       </section>
     </aside>
+  ) : null
+}
+
+
+const RecCard = ({ id, position }) => {
+  const dispatch = useDispatch()
+
+  // Get data from state
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
+  const item = useSelector((state) => state.recit.readerRecs[id])
+  const { saveStatus, itemId, readUrl, externalUrl, openExternal } = item
+  const openUrl = readUrl && !openExternal ? readUrl : externalUrl
+  const analyticsData = {
+    id,
+    url: openUrl,
+    position,
+    destination: saveStatus === 'saved' && !openExternal ? 'internal' : 'external'
+  }
+
+  /**
+   * ITEM TRACKING
+   * ----------------------------------------------------------------
+   */
+  const onOpen = () => dispatch(sendSnowplowEvent('reader.rec.open', analyticsData))
+  const onImpression = () => dispatch(sendSnowplowEvent('reader.rec.impression', analyticsData))
+  const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
+
+  /** ITEM DETAILS
+  --------------------------------------------------------------- */
+  const itemImage = item?.noImage ? '' : item?.thumbnail
+  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } = item //prettier-ignore
+
+  return item ? (
+    <Card
+      itemId={itemId}
+      externalUrl={externalUrl}
+      tags={tags}
+      title={title}
+      itemImage={itemImage}
+      publisher={publisher}
+      excerpt={excerpt}
+      timeToRead={timeToRead}
+      isSyndicated={isSyndicated}
+      isInternalItem={isInternalItem}
+      fromPartner={fromPartner}
+      cardShape="block"
+      position={position}
+      showExcerpt={true}
+      onItemInView={onItemInView}
+      onOpen={onOpen}
+      onOpenOriginalUrl={onOpen}
+      hiddenActions={false}
+      openUrl={openUrl}
+      ActionMenu={ActionsRec}
+    />
+  ) : null
+}
+
+export function ActionsRec({ id, position }) {
+  const dispatch = useDispatch()
+
+  const isAuthenticated = useSelector((state) => state.user.auth)
+  const item = useSelector((state) => state.recit.readerRecs[id])
+
+  if (!item) return null
+  const { saveUrl, saveStatus, readUrl, externalUrl, openExternal } = item
+
+  // Prep save action
+  const onSave = () => {
+    const data = { id, url: saveUrl, position }
+    dispatch(readerRecSaveItem(id, saveUrl, position))
+    dispatch(sendSnowplowEvent('reader.rec.save', data))
+  }
+
+  // Open action
+  const url = openExternal ? externalUrl : readUrl
+  const onOpen = () => {
+    const data = { id, url, position, destination: 'internal' }
+    dispatch(sendSnowplowEvent('reader.rec.open', data))
+  }
+
+  return item ? (
+    <div className={`${itemActionStyle} actions`}>
+      <SaveToPocket
+        allowRead={false}
+        url={url}
+        onOpen={onOpen}
+        openExternal={openExternal}
+        saveAction={onSave}
+        isAuthenticated={isAuthenticated}
+        saveStatus={saveStatus}
+        id={id}
+      />
+    </div>
   ) : null
 }
