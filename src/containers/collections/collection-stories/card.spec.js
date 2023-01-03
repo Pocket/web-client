@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils'
 
 import { storyFromClientApi } from 'common/api/derivers/collection/story.spec'
-import { ItemCard as StoryCard } from 'containers/collections/collection-stories/story-card'
+import { ItemCard as StoryCard } from 'containers/collections/collection-stories/card'
 import { deriveStory } from 'common/api/derivers/item'
 
 describe('ItemCard', () => {
