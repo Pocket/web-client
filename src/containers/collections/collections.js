@@ -1,5 +1,6 @@
 import Layout from 'layouts/main'
 import { BASE_URL } from 'common/constants'
+import { useTranslation } from 'next-i18next'
 
 import { useSelector } from 'react-redux'
 
@@ -11,6 +12,7 @@ import { OffsetList } from 'components/items-layout/list-offset'
 import { Toasts } from 'connectors/toasts/toast-list'
 
 export default function Collections({ locale }) {
+  const { t } = useTranslation()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
@@ -21,22 +23,9 @@ export default function Collections({ locale }) {
   const canonical = `${BASE_URL}${languagePrefix}/collections`
   const url = canonical
 
-  // Remove Best Of specific metadata once the campaign is complete
-  const isGerman = locale === 'de' || locale === 'de-DE'
-  const title = isGerman ? 'Best of 2022' : 'Pocket’s Best of 2022'
-  const description = isGerman
-    ? 'Die besten Artikel des Jahres in Pocket'
-    : 'The year’s top articles'
-  const bestOfImage = isGerman
-    ? 'https://s3.amazonaws.com/pocket-collectionapi-prod-images/2990c169-326f-4839-be58-d0cad7286cfc.png'
-    : 'https://s3.amazonaws.com/pocket-collectionapi-prod-images/20a5c150-c497-400a-a4be-a035225be3e8.jpeg'
-
   const metaData = {
-    // description: t('collections:page-description', 'Curated guides to the best of the web'),
-    // title: t('collections:page-title', 'Collections for Your Pocket'),
-    description: description,
-    title: title,
-    image: bestOfImage,
+    description: t('collections:page-description', 'Curated guides to the best of the web'),
+    title: t('collections:page-title', 'Collections for Your Pocket'),
     url
   }
 

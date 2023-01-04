@@ -1,3 +1,10 @@
+## [1.67.11](https://github.com/Pocket/web-client/compare/v1.67.10...v1.67.11) (2023-01-04)
+
+
+### Bug Fixes
+
+* **bestof:** remove best of 2022 pages ([bfc0f8f](https://github.com/Pocket/web-client/commit/bfc0f8fc185288d65c66bba83d04e4b81ca3eb71))
+
 ## [1.67.10](https://github.com/Pocket/web-client/compare/v1.67.9...v1.67.10) (2022-12-15)
 
 
