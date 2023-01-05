@@ -42,7 +42,7 @@ phases:
       - echo Setting environment variables
       - cd .aws
       - tfenv use $(cat .terraform-version)
-      - npm install -g npm@latest
+      - npm install -g npm@"<9.0.0"
       - npm install
       - npm run build
       # synthesize the js into terraform json with the proper node environment
