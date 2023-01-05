@@ -1,10 +1,3 @@
-# [1.68.0](https://github.com/Pocket/web-client/compare/v1.67.11...v1.68.0) (2023-01-05)
-
-
-### Features
-
-* **build image:** update buildspec to work w/new pocket-build image ([62b6f3c](https://github.com/Pocket/web-client/commit/62b6f3c873cab0fed4a9716db83493a7a0f37ec6))
-
 ## [1.67.11](https://github.com/Pocket/web-client/compare/v1.67.10...v1.67.11) (2023-01-04)
 
 
