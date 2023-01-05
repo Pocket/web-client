@@ -422,6 +422,7 @@ workflows:
           codebuild-project-branch: main
           requires:
             - build_docker_prod
+            - push_production_assets
 
       - pocket/setup_deploy_params:
           <<: *only_main
