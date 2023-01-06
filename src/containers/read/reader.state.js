@@ -60,7 +60,7 @@ function* readItemRequest({ id }) {
     const response = yield getSavedItemByItemId(id)
 
     const { item, savedData } = response
-    const derivedItem = deriveReaderItem(item)
+    const derivedItem = deriveReaderItem(item, savedData)
     const idKey = savedData.id
 
     yield put({
