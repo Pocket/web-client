@@ -32,9 +32,6 @@ export function AdSlot({ placementName, targeting, instanceStyles }) {
         publisher={FREESTAR_PUBLISHER_NAME}
         placementName={placementName}
         targeting={targeting}
-        onNewAdSlotsHook={(placementName) => console.info('creating ad', placementName)}
-        onDeleteAdSlotsHook={(placementName) => console.info('destroying ad', placementName)}
-        onAdRefreshHook={(placementName) => console.info('refreshing ad', placementName)}
       />
       <p className="label">{adLabel}</p>
     </div>
