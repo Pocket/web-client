@@ -1,4 +1,4 @@
-import TagsPage from 'containers/saves/lists/lists-page'
+import TagsPage from 'containers/saves/tagged/tagged-page'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
 

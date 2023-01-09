@@ -4,7 +4,7 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, Trans } from 'next-i18next'
 
-import { getUserTags } from 'containers/saves/lists/lists-page.state'
+import { getUserTags } from 'containers/saves/tagged/tagged-page.state'
 
 import { itemsTagConfirm } from 'connectors/items-by-id/saves/items.tag'
 import { itemsTagCancel } from 'connectors/items-by-id/saves/items.tag'
