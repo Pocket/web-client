@@ -44,8 +44,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const isDev = process.env.SHOW_DEV === 'included'
-
   const isAuthenticated = useSelector((state) => state.user?.auth)
   const isPremium = useSelector((state) => state.user?.premium_status)
   const userStatus = useSelector((state) => state.user.user_status)
@@ -68,7 +66,6 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     slug,
     iabTopCategory,
     iabSubCategory,
-    topic,
     showAds
   } = articleData || {}
 
@@ -117,7 +114,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     dispatch(sendSnowplowEvent(`syndicated.share.${platform}`, analyticsData))
   }
 
-  const topicClick = (topic, index, id) => {
+  const topicClick = (topic) => {
     dispatch(sendSnowplowEvent('syndicated.topic.click', { label: topic }))
   }
 
@@ -154,7 +151,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         className={printLayout}>
         <main className={contentLayout}>
           <section>
-            <AdAboveTheFold allowAds={allowAds} targeting={targeting} curationCategory={topic} />
+            <AdAboveTheFold allowAds={allowAds} targeting={targeting} />
           </section>
           {/* Content header information */}
           <section className="content-section">
@@ -199,13 +196,13 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
 
             {/* Right aside content such as ads and recs */}
             <aside className="right-aside">
-              <AdRailTop allowAds={allowAds} targeting={targeting} curationCategory={topic} />
+              <AdRailTop allowAds={allowAds} targeting={targeting} />
               <PublisherRecs
                 itemId={originalItemId}
                 publisher={publisher}
                 legacyId={originalItemId}
               />
-              <AdRailBottom allowAds={allowAds} targeting={targeting} curationCategory={topic} />
+              <AdRailBottom allowAds={allowAds} targeting={targeting} />
             </aside>
 
             <div className="content-body">
@@ -232,7 +229,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
           </section>
 
           <section>
-            <AdBelowTheFold allowAds={allowAds} targeting={targeting} curationCategory={topic} />
+            <AdBelowTheFold allowAds={allowAds} targeting={targeting} />
           </section>
 
           {!isMobileWebView ? (
