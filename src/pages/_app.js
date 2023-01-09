@@ -1,4 +1,5 @@
 import '../../public/static/pocket-web-ui.css'
+import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 
 import { ViewportProvider } from 'components/viewport-provider/viewport-provider'
 import { appWithTranslation } from 'next-i18next'
@@ -44,6 +45,14 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // Load any relevant polyfills
     loadPolyfills()
+  }, [])
+
+
+  // Google Analytics 
+  useEffect(()=> {
+    window.gtag = window.gtag || function() { window.dataLayer.push(arguments) }
+    window.gtag('js', new Date())
+    window.gtag('config', GOOGLE_ANALYTICS_ID)
   }, [])
 
   // Check user status with cookies
