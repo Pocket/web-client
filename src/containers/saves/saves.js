@@ -25,8 +25,6 @@ import { BulkDeleteModal } from 'connectors/confirm-delete/confirm-bulk-delete'
 import { BulkArchiveModal } from 'connectors/confirm-archive/confirm-bulk-archive'
 import { ShareModalConnector } from 'connectors/share-modal/share-modal'
 
-import { BestOf2022 } from 'connectors/marketing/bestof2022'
-
 export const Saves = (props) => {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -52,52 +50,46 @@ export const Saves = (props) => {
   const ListHeader = searchTerm ? SearchPageHeader : SavesHeader
   const Header = tag ? TagPageHeader : ListHeader
 
-  const bannerLanguages = ['de', 'de-DE', 'en', 'en-US']
-  const showBanner = bannerLanguages.includes(locale)
-
   // Actions
   const handleNewest = () => dispatch(savedItemsSetSortOrder('DESC'))
   const handleOldest = () => dispatch(savedItemsSetSortOrder('ASC'))
   const handleRelevance = () => dispatch(savedItemsSetSortBy('RELEVANCE'))
 
   return (
-    <>
-      {showBanner ? <BestOf2022 locale={locale} /> : null}
-      <Layout title={metaData.title} metaData={metaData} subset={subset} tag={tag}>
-        <SideNav type="saves" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
-        <main className="main">
-          <SuccessFXA type="saves" />
-          <Header
-            subset={subset}
-            title={selector}
-            filter={filter}
-            tag={tag}
-            total={total}
-            query={searchTerm}
-            sortOrder={sortOrder}
-            handleNewest={handleNewest}
-            handleOldest={handleOldest}
-            isPremium={isPremium}
-            handleRelevance={handleRelevance}
-          />
-          {flagsReady && shouldRender ? <SavedItems {...props} /> : null}
-        </main>
-        <DeleteModal />
-        <TaggingModal />
-        <ShareModal />
-        <ArchiveModal />
-        <FavoriteModal />
-        <TagDeleteModal />
-        <TagEditModal />
+    <Layout title={metaData.title} metaData={metaData} subset={subset} tag={tag}>
+      <SideNav type="saves" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
+      <main className="main">
+        <SuccessFXA type="saves" />
+        <Header
+          subset={subset}
+          title={selector}
+          filter={filter}
+          tag={tag}
+          total={total}
+          query={searchTerm}
+          sortOrder={sortOrder}
+          handleNewest={handleNewest}
+          handleOldest={handleOldest}
+          isPremium={isPremium}
+          handleRelevance={handleRelevance}
+        />
+        {flagsReady && shouldRender ? <SavedItems {...props} /> : null}
+      </main>
+      <DeleteModal />
+      <TaggingModal />
+      <ShareModal />
+      <ArchiveModal />
+      <FavoriteModal />
+      <TagDeleteModal />
+      <TagEditModal />
 
-        <BulkFavoriteModal />
-        <BulkDeleteModal />
-        <BulkArchiveModal />
-        <MutationTaggingModal />
-        <ShareModalConnector />
+      <BulkFavoriteModal />
+      <BulkDeleteModal />
+      <BulkArchiveModal />
+      <MutationTaggingModal />
+      <ShareModalConnector />
 
-        <Toasts />
-      </Layout>
-    </>
+      <Toasts />
+    </Layout>
   )
 }
