@@ -61,6 +61,14 @@ class ClientDocument extends Document {
           `
             }}
           />
+
+          <script dangerouslySetInnerHTML={{
+            __html: `
+              var gptadslots = [];
+              var googletag = googletag || {cmd:[]};
+            `
+            }}
+          />
         </Head>
         <body>
           <Main />
