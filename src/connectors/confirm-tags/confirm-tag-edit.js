@@ -23,7 +23,7 @@ export const TagEditModal = () => {
   const tagToEdit = useSelector((state) => state.userTags.tagToEdit)
 
   const [value, setValue] = useState('')
-  const onChange = (event) => setValue(event.target.value)
+  const onChange = (event) => setValue(event.target.value.replace(/[?]/g, ''))
 
   const showModal = tagToEdit !== false
   const confirmTagEdit = () => dispatch(confirmEditUserTag(tagToEdit, value, router)) // prettier-ignore

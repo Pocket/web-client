@@ -55,7 +55,7 @@ export function TagInput(props) {
 
   /* Input Events
   –––––––––––––––––––––––––––––––––––––––––––––––––––– */
-  const onChange = (event) => setValue(event.target.value)
+  const onChange = (event) => setValue(event.target.value.replace(/[?]/g, ''))
   const onKeyUp = (event) => {
     switch (event.keyCode) {
       // Handle intent to remove
