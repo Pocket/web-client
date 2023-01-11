@@ -1,6 +1,6 @@
 import { css } from 'linaria'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,6 +20,8 @@ export const ConfirmTagEdit = () => {
   const router = useRouter()
   const { t } = useTranslation()
 
+  const inputReference = useRef(null);
+
   // Handle delete actions with confirmation
   const tagToEdit = useSelector((state) => state.userTags.tagToEdit)
 
@@ -27,7 +29,10 @@ export const ConfirmTagEdit = () => {
   const onChange = (event) => setValue(event.target.value)
 
   const showModal = tagToEdit !== false
-  const confirmTagEdit = () => dispatch(confirmEditUserTag(tagToEdit, value, router)) // prettier-ignore
+  const confirmTagEdit = () => {
+    if (!value.trim()) return inputReference.current.focus()
+    dispatch(confirmEditUserTag(tagToEdit, value, router)) // prettier-ignore
+  }
   const cancelTagEdit = () => dispatch(cancelEditUserTag())
 
   const appRootSelector = '#__next'
@@ -52,6 +57,7 @@ export const ConfirmTagEdit = () => {
             value={value}
             onChange={onChange}
             maxLength={MAX_TAG_NAME_LENGTH}
+            ref={inputReference}
           />
         </div>
       </ModalBody>
