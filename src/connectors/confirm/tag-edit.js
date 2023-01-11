@@ -31,7 +31,7 @@ export const ConfirmTagEdit = () => {
   const showModal = tagToEdit !== false
   const confirmTagEdit = () => {
     if (!value.trim()) return inputReference.current.focus()
-    dispatch(confirmEditUserTag(tagToEdit, value, router)) // prettier-ignore
+    dispatch(confirmEditUserTag(tagToEdit, value, router))
   }
   const cancelTagEdit = () => dispatch(cancelEditUserTag())
 
