@@ -50,6 +50,7 @@ export const TagEditModal = () => {
             autoFocus={true}
             value={value}
             onChange={onChange}
+            maxLength={25}
           />
         </div>
       </ModalBody>
