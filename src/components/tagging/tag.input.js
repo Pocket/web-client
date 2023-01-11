@@ -100,7 +100,7 @@ export function TagInput(props) {
     if (event.charCode === KEYS.COMMA || event.keyCode === KEYS.TAB) {
       event.preventDefault()
       event.stopPropagation()
-      addTag(`${value}`)
+      if (value.trim()) return addTag(`${value}`)
       return
     }
 
@@ -109,8 +109,12 @@ export function TagInput(props) {
       event.preventDefault()
       event.stopPropagation()
 
-      if (value.trim()) return addTag(`${value}`)
-      submitForm()
+      if (value.trim()) {
+        return addTag(`${value}`)
+      } else if (value) {
+        // Do not allow submitting plain white space
+        submitForm()
+      }
     }
 
     // Set error on tag length limit
