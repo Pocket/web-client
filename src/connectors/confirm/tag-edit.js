@@ -20,7 +20,7 @@ export const ConfirmTagEdit = () => {
   const router = useRouter()
   const { t } = useTranslation()
 
-  const inputReference = useRef(null);
+  const inputReference = useRef(null)
 
   // Handle delete actions with confirmation
   const tagToEdit = useSelector((state) => state.userTags.tagToEdit)
