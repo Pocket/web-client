@@ -65,6 +65,7 @@ export function MutationTaggingModal() {
     dispatch(mutationTagAdd(tag))
     setFocus()
     setFresh(false)
+    setValue('')
   }
 
   const selectTag = (tag) => dispatch(mutationTagSelect(tag))
