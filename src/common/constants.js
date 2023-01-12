@@ -10,6 +10,7 @@ export const GRAPHQL_URL = 'https://getpocket.com'
 export const READING_WPM = 220
 export const BATCH_SIZE = 30
 export const COLOR_MODE_PREFIX = 'colormode'
+export const MAX_TAG_NAME_LENGTH = 25
 
 export const FONT_RANGE = [16, 19, 22, 25, 28, 32, 37]
 export const LINE_HEIGHT_RANGE = [1.2, 1.3, 1.4, 1.5, 1.65, 1.9, 2.5]

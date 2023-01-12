@@ -22,6 +22,7 @@ import { TagSuggestions } from 'components/tagging/tag.suggestions'
 import { TagUpsell } from 'components/tagging/tag.upsell'
 
 import { TypeAhead } from 'components/type-ahead/type-ahead'
+import { MAX_TAG_NAME_LENGTH } from 'common/constants'
 
 export function MutationTaggingModal() {
   const appRootSelector = '#__next'
@@ -140,7 +141,7 @@ export function MutationTaggingModal() {
             // Value Handling
             value={value}
             setValue={setValue}
-            characterLimit={25}
+            characterLimit={MAX_TAG_NAME_LENGTH}
             // Error Handling
             clearError={clearError}
             setError={setError}

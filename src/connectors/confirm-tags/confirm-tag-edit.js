@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { cancelEditUserTag } from 'containers/saves/tags-page/tags-page.state'
 import { confirmEditUserTag } from 'containers/saves/tags-page/tags-page.state'
 import { useTranslation, Trans } from 'next-i18next'
+import { MAX_TAG_NAME_LENGTH } from 'common/constants'
 
 const inputWrapper = css`
   input[type='text'] {
@@ -50,7 +51,7 @@ export const TagEditModal = () => {
             autoFocus={true}
             value={value}
             onChange={onChange}
-            maxLength={25}
+            maxLength={MAX_TAG_NAME_LENGTH}
           />
         </div>
       </ModalBody>
