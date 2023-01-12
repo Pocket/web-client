@@ -49,8 +49,9 @@ export function ConfirmTagging() {
 
   const cancelTags = () => dispatch(mutationTagCancel())
   const confirmTags = (value) => {
+    const trimmedValue = value.trim()
     setBlur()
-    if (value) dispatch(mutationTagAdd(value))
+    if (trimmedValue) dispatch(mutationTagAdd(trimmedValue))
     dispatch(mutationTagConfirm(value))
     setValue('')
   }
@@ -179,7 +180,7 @@ export function ConfirmTagging() {
       <ModalFooter isSticky={false}>
         <div className="actions">
           <Button
-            disabled={!value ? fresh : false}
+            disabled={!value.trim() ? fresh : false}
             type="submit"
             data-cy="tagging-confirm"
             onClick={handleSave}>
