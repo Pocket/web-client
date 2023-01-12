@@ -165,9 +165,9 @@ function* collectionSaveRequest(action) {
  * Make and async request for a Pocket Client API (mocked) and return best data
  * @return data {object} An object representing the collection
  */
-export async function fetchCollections(lang = 'en') {
+export async function fetchCollections(lang = 'en', labels) {
   try {
-    const response = await getCollections(lang)
+    const response = await getCollections(lang, labels)
     if (!response) return { error: 'No data found' }
 
     const derivedCollections = response.map((collection) => deriveCollection(collection))
