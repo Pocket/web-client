@@ -116,7 +116,7 @@ export function TagInput(props) {
     // Set error on tag length limit
     if (
       value &&
-      value.length > characterLimit &&
+      value.length >= characterLimit &&
       event.keyCode !== KEYS.BACKSPACE &&
       event.keyCode !== KEYS.DELETE &&
       event.keyCode !== KEYS.LEFT &&
