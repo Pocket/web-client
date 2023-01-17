@@ -34,6 +34,6 @@ NoImage.args = {
 export const NonWordTitle = Template.bind({})
 NonWordTitle.args = {
   image_src: '',
-  title: "'Quote'",
+  title: '!Quote',
   id: 4
 }

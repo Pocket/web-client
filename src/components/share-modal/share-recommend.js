@@ -1,11 +1,7 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { Button } from 'components/buttons/button'
 import { css } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
-
-import { itemsRecommendConfirm } from 'connectors/items-by-id/saves/items.share'
-import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 const recommendStyle = css`
   display: flex;
@@ -22,7 +18,6 @@ const recommendStyle = css`
 `
 
 export function ShareRecommend({ recommendEvent }) {
-  const dispatch = useDispatch()
   const { t } = useTranslation()
   const [commentValue, setCommentValue] = useState('')
 

@@ -189,7 +189,7 @@ export function NextActions({ onSave, onUnsave, saveStatus }) {
   )
 }
 
-function CardActionMenu({ ref, saveStatus, onSave, onUnsave }) {
+function CardActionMenu({ saveStatus, onSave, onUnsave }) {
   return (
     <div className={popoverContainer}>
       <button>
