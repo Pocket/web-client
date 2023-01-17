@@ -210,7 +210,7 @@ function* userTagsEditConfirm(action) {
     const pinnedItems = yield select(getPinnedTags)
     const pinnedTags = pinnedItems.map((pin) => (old_tag === pin ? new_tag : pin)) //prettier-ignore
     yield put({ type: USER_TAGS_EDIT_SUCCESS, new_tag, old_tag, pinnedTags }) //prettier-ignore
-    return yield call(router.replace, `/saves/tags/${encodeURI(new_tag)}`)
+    return yield call(router.replace, `/saves/tags/${encodeURIComponent(new_tag)}`)
   }
 
   return yield put({ type: USER_TAGS_EDIT_FAILURE, old_tag })
