@@ -1,4 +1,3 @@
-import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { SAVES_DATA_SUCCESS } from 'actions'
 import { SAVES_UPDATE_SUCCESS } from 'actions'
 import { ARTICLE_ITEM_SUCCESS } from 'actions'
@@ -14,7 +13,7 @@ import { ITEMS_TAG_SUCCESS } from 'actions'
 import { SAVES_ITEMS_NO_IMAGE } from 'actions'
 import { HOME_RECENT_SAVES_SUCCESS } from 'actions'
 import { HOME_SAVE_SUCCESS } from 'actions'
-import { HOME_SIMILAR_REC_SAVE_SUCCESS } from 'actions'
+
 /* CONSOLIDATE
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 import { itemTagSagas } from './items.tag'
@@ -40,7 +39,6 @@ export const savesItemsReducers = (state = initialState, action) => {
     case ARTICLE_ITEM_SUCCESS:
     case HOME_RECENT_SAVES_SUCCESS:
     case HOME_SAVE_SUCCESS:
-    case HOME_SIMILAR_REC_SAVE_SUCCESS:
     case USER_TAGS_ITEM_SUCCESS:
     case SAVES_SEARCH_SUCCESS: {
       const { itemsById } = action

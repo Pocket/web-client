@@ -1,12 +1,13 @@
 import { memo } from 'react'
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
-import { setNoImage } from 'connectors/items-by-id/saves/items.state'
-import { itemsBulkSelectAction } from 'connectors/items-by-id/saves/items.bulk'
-import { itemsBulkDeSelectAction } from 'connectors/items-by-id/saves/items.bulk'
+import { setNoImage } from 'connectors/items/items.state'
+import { mutationBulkSelectAction } from 'connectors/items/mutations-bulk.state'
+import { mutationBulkDeSelectAction } from 'connectors/items/mutations-bulk.state'
+
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
-import { ActionsSaves } from 'connectors/item-card/saves/card-actions'
-import { ActionsBulk } from 'connectors/item-card/saves/card-actions'
+import { ActionsSaves } from './card-actions'
+import { ActionsBulk } from './card-actions'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 /**
@@ -14,35 +15,45 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
  * Creates a connected `Card` with the appropriate data and actions
  * @param {object} {id, position} item_id for data and position for analytics
  */
-export function ItemCard({ id, position, type }) {
+export function ItemCard({
+  id,
+  position,
+  type,
+  columnCount,
+  horizontalPadding,
+  verticalPadding,
+  width,
+  height
+}) {
   const dispatch = useDispatch()
   const appMode = useSelector((state) => state?.app?.mode)
   const bulkEdit = appMode === 'bulk'
 
   // Get data from state
   const isPremium = useSelector((state) => state.user.premium_status === '1')
-  const item = useSelector((state) => state.savesItemsById[id])
+  const item = useSelector((state) => state.items[id])
+  const itemSaved = useSelector((state) => state.itemsSaved[id])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
-  const bulkList = useSelector((state) => state.bulkEdit.selected)
-  const bulkCurrent = useSelector((state) => state.bulkEdit.currentId)
+  const bulkList = useSelector((state) => state.mutationBulk.itemIds)
+  const bulkCurrent = useSelector((state) => state.mutationBulk.currentId)
   const bulkIsCurrent = bulkCurrent === id
-  const bulkSelected = bulkList?.map((item) => item.id).includes(id)
+  const bulkSelected = bulkList?.includes(id)
   const shortcutId = useSelector((state) => state.shortcuts.currentId)
   const shortcutSelected = shortcutId === id
 
   if (!item) return null
 
-  const { readUrl, externalUrl, analyticsData: passedAnalytics } = item
+  const { isInternalItem, readUrl, externalUrl, analyticsData: passedAnalytics } = item
   const openUrl = readUrl || externalUrl
   const showExcerpt = type === 'detail'
-  const ActionMenu = bulkEdit ? ActionsBulk : ActionsSaves
 
   const onImageFail = () => dispatch(setNoImage(id))
 
   const analyticsData = {
     ...passedAnalytics,
+    impressionId: id,
     position,
-    destination: readUrl ? 'internal' : 'external',
+    destination: isInternalItem ? 'internal' : 'external',
     label: type
   }
 
@@ -56,29 +67,45 @@ export function ItemCard({ id, position, type }) {
   }
 
   const onItemInView = (inView) => {
-    if (!impressionFired && inView)
+    if (!impressionFired && inView) {
       dispatch(sendSnowplowEvent('saves.card.impression', analyticsData))
+    }
   }
 
   /** ITEM BULK ACTIONS
   --------------------------------------------------------------- */
-  const itemBulkSelect = (shift) => dispatch(itemsBulkSelectAction(id, shift))
-  const itemBulkDeSelect = (shift) => dispatch(itemsBulkDeSelectAction(id, shift))
+  const itemBulkSelect = (shift) => dispatch(mutationBulkSelectAction(id, shift))
+  const itemBulkDeSelect = (shift) => dispatch(mutationBulkDeSelectAction(id, shift))
   const bulkAction = bulkSelected ? itemBulkDeSelect : itemBulkSelect
   const selectBulk = (event) => (bulkEdit ? bulkAction(event.shiftKey) : null)
 
   /** ITEM SELECT ACTIONS
   --------------------------------------------------------------- */
   const shortcutSelect = () => dispatch(selectShortcutItem(id, position))
+  const ActionMenu = bulkEdit ? ActionsBulk : ActionsSaves
 
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {itemId, tags, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } = item //prettier-ignore
+  const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
+  const { tags } = itemSaved
+  
+  /** ITEM DIMENSIONS
+  --------------------------------------------------------------- */
+
+  const columnPosition = position % columnCount
+  const rowPosition = Math.floor(position / columnCount)
+
+  const horizontalSpacing = columnPosition * horizontalPadding
+  const veriticalSpacing = rowPosition * verticalPadding
+  const left = columnCount > 1 ? columnPosition * width + horizontalSpacing : 0
+  const top = rowPosition * height + veriticalSpacing
+  const positionStyle = { position: 'absolute', left, top, width, height }
 
   return item ? (
     <Card
-      itemId={itemId}
+      style={positionStyle}
+      itemId={id}
       externalUrl={externalUrl}
       tags={tags}
       title={title}
@@ -111,11 +138,4 @@ export function ItemCard({ id, position, type }) {
   ) : null
 }
 
-// This seems like an over-optimization so do some actual testing here
-const isEqual = (prev, next) => {
-  const isTheSame =
-    prev.id === next.id && prev.position === next.position && prev.type === next.type
-  return isTheSame
-}
-
-export const MemoizedItem = memo(ItemCard, isEqual)
+export const MemoizedItemCard = memo(ItemCard)

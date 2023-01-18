@@ -1,3 +1,24 @@
+## [1.69.4](https://github.com/Pocket/web-client/compare/v1.69.3...v1.69.4) (2023-01-17)
+
+
+### Bug Fixes
+
+* **eslint:** adjust simple errors ([24db7f5](https://github.com/Pocket/web-client/commit/24db7f5f53257936c0be1c717d6baebe1554a240))
+
+## [1.69.3](https://github.com/Pocket/web-client/compare/v1.69.2...v1.69.3) (2023-01-17)
+
+
+### Bug Fixes
+
+* **tagging:** switch encode func to encodeURIComponent ([00f9c31](https://github.com/Pocket/web-client/commit/00f9c314c765acb6e4e131fb1949226cff00553d))
+
+## [1.69.2](https://github.com/Pocket/web-client/compare/v1.69.1...v1.69.2) (2023-01-13)
+
+
+### Bug Fixes
+
+* **actions:** build error on unused constants ([730ffbd](https://github.com/Pocket/web-client/commit/730ffbdf51fe731a789e57ee77a1a5be2a22d625))
+
 ## [1.69.1](https://github.com/Pocket/web-client/compare/v1.69.0...v1.69.1) (2023-01-10)
 
 

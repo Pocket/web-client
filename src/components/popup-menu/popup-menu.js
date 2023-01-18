@@ -310,7 +310,7 @@ export const PopupMenu = ({
     } else {
       onClose(id)
     }
-  }, [isMenuOpen]) // effect for handling window resize
+  }, [id, isMenuOpen, onClose, onOpen]) // effect for handling window resize
 
   useEffect(() => {
     setIsMobile(viewportWidth <= screenLargeHandset)
@@ -412,9 +412,9 @@ PopupMenu.propTypes = {
 PopupMenu.defaultProps = {
   id: '',
 
-  onOpen(id) {},
+  onOpen() {},
 
-  onClose(id) {},
+  onClose() {},
 
   forceShow: false
 }

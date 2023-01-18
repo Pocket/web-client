@@ -11,7 +11,7 @@ import { OverflowAction } from 'components/item-actions/overflow'
 import { ShowSimilar } from 'components/item-actions/show-similar'
 
 const noop = function () {}
-export const Saves = ({ id, position }) => (
+export const Saves = ({ id }) => (
   <ItemActions
     menuItems={[
       { key: `archive-${id}`, label: 'Archive', icon: <ArchiveIcon />, onClick: noop },
@@ -43,7 +43,7 @@ export const Saves = ({ id, position }) => (
   />
 )
 
-export const Recommendation = ({ id = 1, position = 1 }) => {
+export const Recommendation = ({ id = 1 }) => {
   return (
     <div className={`${itemActionStyle} actions`}>
       <SaveToPocket
@@ -71,7 +71,7 @@ export const Recommendation = ({ id = 1, position = 1 }) => {
   )
 }
 
-export const Home = ({ id = 1, position = 1 }) => {
+export const Home = ({ id = 1 }) => {
   return (
     <div className={`${itemActionStyle} actions`}>
       <SaveToPocket
@@ -88,7 +88,7 @@ export const Home = ({ id = 1, position = 1 }) => {
   )
 }
 
-export const Similar = ({ id = 1, position = 1 }) => {
+export const Similar = () => {
   return (
     <div className={`${itemActionStyle} actions`}>
       <ShowSimilar similarAction={noop} />

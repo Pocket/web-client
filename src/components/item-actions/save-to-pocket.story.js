@@ -25,7 +25,7 @@ export const LoggedIn = () => {
 
   useEffect(() => {
     return () => clearTimeout(timer)
-  }, [])
+  }, [timer])
 
   const startTimer = () => {
     setSaveStatus('saving')

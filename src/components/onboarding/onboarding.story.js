@@ -76,7 +76,7 @@ export const Walkthrough = () => {
     // console.log('send impression event')
   }
 
-  const handleDismiss = (index) => {
+  const handleDismiss = () => {
     setRunning(false)
     setStepIndex(stepIndex + 1)
   }
