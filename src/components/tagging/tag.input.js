@@ -109,10 +109,12 @@ export function TagInput(props) {
       event.preventDefault()
       event.stopPropagation()
 
-      // Do not allow adding or submitting with input that is only white space
       if (value.trim()) {
         return addTag(`${value}`)
-      } else if (!value) {
+      }
+      
+      // Do not allow submitting with input that is only white space
+      if (!value) {
         submitForm()
       }
     }
