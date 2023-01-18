@@ -16,14 +16,22 @@ import TopicsPillbox from 'components/topics-pillbox/topics-pillbox'
 import { reSelectTopics } from 'containers/home/home-setup.state'
 import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
+import { useRouter } from 'node_modules/next/router'
 
 export const HomeContent = () => {
+  const {locale} = useRouter()
   const dispatch = useDispatch()
   const slates = useSelector((state) => state.home.slates)
 
+  const featureState = useSelector((state) => state.features) || {}
+  const flagsReady = useSelector((state) => state.features.flagsReady)
+  const localizedHome = featureFlagActive({ flag: 'home.locale', featureState })
+  const localeToUse = localizedHome ? locale : 'en'
+
   useEffect(() => {
-    dispatch(getHomeContent())
-  }, [dispatch])
+    if(!flagsReady) return
+    dispatch(getHomeContent(localeToUse))
+  }, [dispatch, localeToUse, flagsReady])
 
   return (
     <>
