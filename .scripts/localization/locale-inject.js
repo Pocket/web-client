@@ -6,7 +6,7 @@ const { Bar } = cliProgress
 
 function inferInternationalizedLang() {
   const locales = {
-    en: ['en'],
+    en: ['en', 'en-KE'],
     'de-DE': ['de', 'de-DE'],
     'es-ES': ['es', 'es-ES'],
     'es-LA': ['es-LA'],
