@@ -100,7 +100,7 @@ export function TagInput(props) {
     if (event.charCode === KEYS.COMMA || event.keyCode === KEYS.TAB) {
       event.preventDefault()
       event.stopPropagation()
-      if (value.trim()) return addTag(`${value}`)
+      if (value.trim()) return addTag(`${value.trim()}`)
       return
     }
 
