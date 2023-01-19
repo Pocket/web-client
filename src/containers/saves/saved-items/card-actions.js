@@ -23,7 +23,7 @@ import { mutationUnArchive } from 'connectors/items/mutation-archive.state'
 import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
 import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
 
-import { shareAction } from 'connectors/share-modal/share-modal.state'
+import { shareAction } from 'connectors/items/mutation-share.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 

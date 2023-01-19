@@ -93,9 +93,6 @@ import { shortcutSagas } from 'connectors/shortcuts/shortcuts.state.js'
 import { onboardingReducers } from 'connectors/onboarding/onboarding.state'
 import { onboardingSagas } from 'connectors/onboarding/onboarding.state'
 
-import { shareModalReducers } from 'connectors/share-modal/share-modal.state'
-import { shareModalSagas } from 'connectors/share-modal/share-modal.state'
-
 import { listenReducers } from 'connectors/listen/listen.state'
 import { listenSagas } from 'connectors/listen/listen.state'
 
@@ -130,6 +127,9 @@ import { mutationHighlightSagas } from 'connectors/items/mutation-highlight.stat
 import { mutationBulkReducers } from 'connectors/items/mutations-bulk.state'
 import { mutationBulkSagas } from 'connectors/items/mutations-bulk.state'
 
+import { mutationShareReducers } from 'connectors/items/mutation-share.state'
+import { mutationShareSagas } from 'connectors/items/mutation-share.state'
+
 import { pageSavedIdsReducers } from 'containers/saves/saved-items/saved-items.state'
 import { pageSavedIdsSagas } from 'containers/saves/saved-items/saved-items.state'
 import { pageSavedInfoReducers } from 'containers/saves/saved-items/saved-items.state'
@@ -149,7 +149,8 @@ const itemMutations = {
   mutationArchive: mutationArchiveReducers,
   mutationDelete: mutationDeleteReducers,
   mutationTagging: mutationTaggingReducers,
-  mutationHighlight: mutationHighlightReducers
+  mutationHighlight: mutationHighlightReducers,
+  mutationShare: mutationShareReducers
 }
 
 const itemActionReducers = {
@@ -221,7 +222,6 @@ const globalReducers = {
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
   onboarding: onboardingReducers, // Onboarding
-  share: shareModalReducers, // Share
   braze: brazeReducers // Braze
 }
 
@@ -280,7 +280,6 @@ function* rootSaga() {
     ...brazeSagas,
     ...pageSavedIdsSagas,
     ...itemsSavedSagas,
-    ...shareModalSagas,
     ...mutationArchiveSagas,
     ...mutationDeleteSagas,
     ...mutationFavoriteSagas,
@@ -288,6 +287,7 @@ function* rootSaga() {
     ...mutationBulkSagas,
     ...mutationTaggingSagas,
     ...mutationHighlightSagas,
+    ...mutationShareSagas,
     ...listenSagas
   ])
 }

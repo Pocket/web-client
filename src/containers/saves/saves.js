@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { SavedItems } from 'containers/saves/saved-items/saved-items'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
-import { ShareModal } from 'connectors/confirm-share/confirm-share'
+
 import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
 import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
@@ -23,7 +23,7 @@ import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutati
 import { BulkFavoriteModal } from 'connectors/confirm-favorite/confirm-bulk-favorite'
 import { BulkDeleteModal } from 'connectors/confirm-delete/confirm-bulk-delete'
 import { BulkArchiveModal } from 'connectors/confirm-archive/confirm-bulk-archive'
-import { ShareModalConnector } from 'connectors/share-modal/share-modal'
+import { ConfirmShare } from 'connectors/confirm/share'
 
 export const Saves = (props) => {
   const router = useRouter()
@@ -77,7 +77,6 @@ export const Saves = (props) => {
       </main>
       <DeleteModal />
       <TaggingModal />
-      <ShareModal />
       <ArchiveModal />
       <FavoriteModal />
       <TagDeleteModal />
@@ -87,7 +86,7 @@ export const Saves = (props) => {
       <BulkDeleteModal />
       <BulkArchiveModal />
       <MutationTaggingModal />
-      <ShareModalConnector />
+      <ConfirmShare />
 
       <Toasts />
     </Layout>

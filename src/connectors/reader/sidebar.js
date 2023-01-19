@@ -3,7 +3,7 @@ import { Sidebar } from 'components/reader/sidebar'
 import { cx } from 'linaria'
 import { toggleSidebar } from 'containers/read/reader.state'
 import { mutationHighlightDelete } from 'connectors/items/mutation-highlight.state'
-import { shareAction } from 'connectors/share-modal/share-modal.state'
+import { shareAction } from 'connectors/items/mutation-share.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const SidebarWrapper = ({ id }) => {

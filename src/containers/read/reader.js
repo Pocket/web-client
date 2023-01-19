@@ -15,7 +15,7 @@ import { Upsell } from 'connectors/reader/upsell'
 
 import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
-import { ShareModalConnector } from 'connectors/share-modal/share-modal'
+import { ConfirmShare } from 'connectors/confirm/share'
 import { Toasts } from 'connectors/toasts/toast-list'
 
 import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
@@ -149,7 +149,7 @@ export default function Reader() {
 
       <DeleteModal />
       <MutationTaggingModal />
-      <ShareModalConnector />
+      <ConfirmShare />
       <Toasts />
     </>
   )

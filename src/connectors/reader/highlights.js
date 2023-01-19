@@ -10,7 +10,7 @@ import { mutationHighlightDelete } from 'connectors/items/mutation-highlight.sta
 import { setHighlightList } from 'containers/read/reader.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { shareAction } from 'connectors/share-modal/share-modal.state'
+import { shareAction } from 'connectors/items/mutation-share.state'
 import { compileAnnotations } from 'components/annotations/utilities'
 import { requestAnnotationPatch } from 'components/annotations/utilities'
 

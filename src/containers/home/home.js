@@ -8,7 +8,6 @@ import { HomeContent } from './home-content'
 
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
-import { ShareModal } from 'connectors/confirm-share/confirm-share'
 import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
 import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { Toasts } from 'connectors/toasts/toast-list'
@@ -43,7 +42,6 @@ export const Home = ({ metaData }) => {
 
       <DeleteModal />
       <TaggingModal />
-      <ShareModal />
       <ArchiveModal />
       <FavoriteModal />
 
