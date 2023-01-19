@@ -1,18 +1,18 @@
 import { render } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
 
-import { PublisherRecs, Publisher, RecommendedArticle } from './publisher-recs'
+import { PublisherRecs, Publisher } from './publisher-recs'
 import { publisher, publisherRecommendations as publisherRecs } from 'mock/article'
 
 describe('PublisherRecs', () => {
-  it('does not render <Publisher> or <RecommendedArticles> when there are no recommendations', () => {
+  it('does not render <Publisher> or <RecommendedArticle> when there are no recommendations', () => {
     const { container } = render(<PublisherRecs />)
     expect(container).toBeEmptyDOMElement()
   })
 })
 
-describe('RecommendedArticles', () => {
-  const recommendations = publisherRecs.recommendations
+describe('RecommendedArticle', () => {
+  const recommendations = publisherRecs.relatedRightRail
   const publisherProps = publisher.theVerge
   const tooManyRecs = recommendations.slice(0, 8)
   const tooFewRecs = recommendations.slice(0, 2)

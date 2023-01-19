@@ -1,41 +1,24 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { publisherRecsRequest } from '/connectors/recit/recit.state'
+import { useSelector } from 'react-redux'
 import { PublisherRecs as RecsComponent } from 'components/content-recs/publisher-recs'
-import { trackRecImpression } from './syndicated-article.analytics'
-import { trackRecClick } from './syndicated-article.analytics'
-import { PUBLISHER_MODULE } from './syndicated-article.analytics'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export function PublisherRecs({ publisher, itemId, legacyId }) {
-  const dispatch = useDispatch()
+export const PublisherRecs = ({ publisher }) => {
+  const articleData = useSelector((state) => state.syndicatedArticle.articleData)
+  const { relatedRightRail } = articleData
 
-  const publisherRecs = useSelector((state) => state.recit.publisherRecs)
-  const recId = useSelector((state) => state.recit.publisherRecId)
-  const model = useSelector((state) => state.recit.publisherRecModel)
-
-  const analyticsData = {
-    model,
-    recId,
-    articleId: legacyId,
-    module: PUBLISHER_MODULE,
-    location: 'Right Rail'
+  const handleRecImpression = ({ position, corpusRecommendationId, url }) => {
+    const analyticsData = { position, corpusRecommendationId, url }
+    sendSnowplowEvent('syndicated.corpus.sidebar.impression', analyticsData)
   }
 
-  const handleRecImpression = ({ position, resolvedId }) => {
-    trackRecImpression({ position, resolvedId, ...analyticsData })
+  const handleRecClick = ({ position, corpusRecommendationId, url }) => {
+    const analyticsData = { position, corpusRecommendationId, url }
+    sendSnowplowEvent('syndicated.corpus.sidebar.open', analyticsData)
   }
-
-  const handleRecClick = ({ position, resolvedId }) => {
-    trackRecClick({ position, resolvedId, ...analyticsData })
-  }
-
-  useEffect(() => {
-    dispatch(publisherRecsRequest(itemId))
-  }, [dispatch, itemId])
 
   return (
     <RecsComponent
-      recommendations={publisherRecs}
+      recommendations={relatedRightRail}
       publisher={publisher}
       maxRecommendations={3}
       handleRecImpression={handleRecImpression}

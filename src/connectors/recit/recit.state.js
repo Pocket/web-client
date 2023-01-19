@@ -1,12 +1,6 @@
 import { takeLatest, takeEvery, put, select } from 'redux-saga/effects'
 import { deriveReccit } from 'common/api/derivers/item'
 import {
-  PUBLISHER_RECS_REQUEST,
-  PUBLISHER_RECS_SUCCESS,
-  PUBLISHER_RECS_FAILURE,
-  POCKET_RECS_REQUEST,
-  POCKET_RECS_SUCCESS,
-  POCKET_RECS_FAILURE,
   RECENT_RECS_REQUEST,
   RECENT_RECS_SUCCESS,
   RECENT_RECS_FAILURE,
@@ -32,8 +26,6 @@ import {
 
 import { ITEMS_ADD_SUCCESS } from 'actions'
 
-import { getPublisherRecs } from 'common/api/_legacy/recit'
-import { getPocketRecs } from 'common/api/_legacy/recit'
 import { getRecommendations } from 'common/api/_legacy/recit'
 import { getHomeRecommendations } from 'common/api/_legacy/recit'
 import { saveItem as saveItemAPI } from 'common/api/_legacy/saveItem'
@@ -45,9 +37,6 @@ import { STARTER_ARTICLES } from 'common/constants'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const publisherRecsRequest = (itemId) => ({ type: PUBLISHER_RECS_REQUEST, itemId }) //prettier-ignore
-export const pocketRecsRequest = (itemId) => ({ type: POCKET_RECS_REQUEST, itemId }) //prettier-ignore
-
 export const readerRecsRequest = (itemId) =>  ({ type: READER_RECS_REQUEST, itemId }) //prettier-ignore
 export const readerRecSaveItem = (id, url, analytics) => ({ type: READER_REC_SAVE_REQUEST, id, url, analytics }) //prettier-ignore
 export const readerRecUnSaveItem = (id) => ({ type: READER_REC_UNSAVE_REQUEST, id }) //prettier-ignore
@@ -59,12 +48,6 @@ export const unSaveItem = id => ({ type: RECENT_REC_UNSAVE_REQUEST, id }) //pret
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  publisherRecs: [],
-  publisherRecId: null,
-  publisherRecModel: null,
-  pocketRecs: [],
-  pocketRecId: null,
-  pocketRecModel: null,
   readerRecs: {},
   recentRecId: null,
   recentRecs: {},
@@ -73,34 +56,6 @@ const initialState = {
 
 export const recitReducers = (state = initialState, action) => {
   switch (action.type) {
-    case PUBLISHER_RECS_SUCCESS: {
-      const {
-        response: {
-          recommendations: publisherRecs,
-          rec_id: publisherRecId,
-          model: publisherRecModel
-        }
-      } = action
-      return {
-        ...state,
-        publisherRecs,
-        publisherRecId,
-        publisherRecModel
-      }
-    }
-
-    case POCKET_RECS_SUCCESS: {
-      const {
-        response: { recommendations: pocketRecs, rec_id: pocketRecId, model: pocketRecModel }
-      } = action
-      return {
-        ...state,
-        pocketRecs,
-        pocketRecId,
-        pocketRecModel
-      }
-    }
-
     case READER_RECS_SUCCESS: {
       const { readerRecs } = action
       return {
@@ -187,8 +142,6 @@ export function updateSaveStatus(state, id, saveStatus, openExternal = true) {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const recitSagas = [
-  takeLatest(PUBLISHER_RECS_REQUEST, fetchPublisherRecs),
-  takeLatest(POCKET_RECS_REQUEST, fetchPocketRecs),
   takeLatest(READER_RECS_REQUEST, fetchReaderRecs),
   takeLatest(READER_REC_SAVE_REQUEST, readerItemSaveRequest),
   takeLatest(READER_REC_UNSAVE_REQUEST, readerItemUnSaveRequest),
@@ -227,24 +180,6 @@ function* itemsUnSaveRequest(action) {
     yield put({ type: RECENT_REC_UNSAVE_SUCCESS, id })
   } catch (error) {
     yield put({ type: RECENT_REC_UNSAVE_FAILURE, error })
-  }
-}
-
-function* fetchPublisherRecs({ itemId }) {
-  try {
-    const response = yield getPublisherRecs(itemId)
-    yield put({ type: PUBLISHER_RECS_SUCCESS, response })
-  } catch (error) {
-    yield put({ type: PUBLISHER_RECS_FAILURE, error })
-  }
-}
-
-function* fetchPocketRecs({ itemId }) {
-  try {
-    const response = yield getPocketRecs(itemId)
-    yield put({ type: POCKET_RECS_SUCCESS, response })
-  } catch (error) {
-    yield put({ type: POCKET_RECS_FAILURE, error })
   }
 }
 

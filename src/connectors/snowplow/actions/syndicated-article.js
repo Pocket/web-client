@@ -80,5 +80,41 @@ export const syndicatedArticleActions = {
     expects: ['label'],
     description:
       'Fired when a user sees the link in the publisher attribution at the bottom of the page'
-  }
+  },
+  'syndicated.corpus.bottom.impression': {
+    eventType: 'impression',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: ['corpusRecommendationId', 'url', 'position']
+  },
+  'syndicated.corpus.bottom.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: ['corpusRecommendationId', 'url', 'position']
+  },
+  'syndicated.corpus.sidebar.impression': {
+    eventType: 'impression',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: ['corpusRecommendationId', 'url', 'position']
+  },
+  'syndicated.corpus.sidebar.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
+    eventData: {
+      component: 'ui',
+      uiType: 'card'
+    },
+    expects: ['corpusRecommendationId', 'url', 'position']
+  },
 }

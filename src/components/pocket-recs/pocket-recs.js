@@ -2,29 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
-import {
-  breakpointTinyTablet,
-  breakpointMediumTablet,
-  breakpointLargeHandset
-} from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
+import { breakpointMediumTablet } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
-
-const pocketRecsStyles = css`
-  border-top: solid 3px var(--color-textPrimary);
-  margin-top: var(--spacing250);
-  padding: var(--spacing250) 0 0;
-
-  ${breakpointTinyTablet} {
-    max-width: 92vw;
-  }
-
-  ${breakpointLargeHandset} {
-    padding-top: var(--spacing150);
-  }
-`
 
 const headingStyles = css`
   font-family: var(--fontSerifAlt);
@@ -39,7 +22,7 @@ const Heading = () => {
 }
 
 const publisherStyles = css`
-  margin-bottom: var(--spacing050);
+  margin-bottom: 8px;
 
   img {
     max-height: 30px;
@@ -55,15 +38,15 @@ const publisherStyles = css`
   }
 
   span {
-    text-transform: uppercase;
-    font-size: var(--fontSize125);
+    font-size: 20px;
     line-height: 147%;
     font-family: var(--fontSansSerif);
+    font-weight: 500;
     color: var(--color-textSecondary);
   }
 
   ${breakpointTinyTablet} {
-    margin-top: var(--spacing100);
+    margin-top: 16px;
   }
 `
 export const Publisher = ({ name, logo }) => (
@@ -80,7 +63,7 @@ const recommendationStyles = css`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 1.5rem;
-  margin-bottom: var(--spacing150);
+  margin-bottom: 24px;
 
   &:last-child {
     margin-bottom: 0;
@@ -120,7 +103,7 @@ const recommendationStyles = css`
   ${breakpointTinyTablet} {
     display: flex;
     flex-direction: column;
-    margin-right: var(--spacing150);
+    margin-right: 24px;
     max-width: 248px;
     margin-bottom: 0;
 
@@ -131,6 +114,60 @@ const recommendationStyles = css`
     .thumbnail img {
       width: 248px;
     }
+  }
+`
+
+export const Recommendation = ({
+  rec,
+  position,
+  corpusRecommendationId,
+  handleRecImpression,
+  handleRecClick
+}) => {
+  if (!rec) return null
+  const { imageUrl, title, url, publisher } = rec
+  const thumbnailUrl = getImageCacheUrl(imageUrl, { width: 270, height: 150 })
+
+  const handleVisible = () => {
+    handleRecImpression({ position, corpusRecommendationId, url })
+  }
+
+  const handleClick = () => {
+    handleRecClick({ position, corpusRecommendationId, url })
+  }
+
+  return (
+    <VisibilitySensor onVisible={handleVisible}>
+      <li className={recommendationStyles} data-cy="pocket-recs-article">
+        <Link href={url}>
+          <a className="thumbnail" onClick={handleClick}>
+            <img src={thumbnailUrl} alt={`Thumbnail image for article`} />
+          </a>
+        </Link>
+        <div className="details">
+          <Publisher name={publisher} /> {/* logo={logoWideBwUrl} /> */}
+          <Link href={url}>
+            <a onClick={handleClick}>
+              <h4 className="h5">{title}</h4>
+            </a>
+          </Link>
+        </div>
+      </li>
+    </VisibilitySensor>
+  )
+}
+
+const pocketRecsStyles = css`
+  border-top: solid 3px var(--color-textPrimary);
+  margin-top: 40px;
+  padding: 40px 0 0;
+
+  ${breakpointTinyTablet} {
+    max-width: 92vw;
+  }
+
+  ${breakpointLargeHandset} {
+    padding-top: 24px;
   }
 `
 
@@ -148,51 +185,6 @@ const recommendationsStyles = css`
   }
 `
 
-export const Recommendation = ({ rec, position, handleRecImpression, handleRecClick }) => {
-  if (!rec) return null
-  const { title, slug, topImageUrl, publisher, resolvedItem } = rec
-  const { logoWideBwUrl, name } = publisher
-  const url = `/explore/item/${slug}`
-  const thumbnailUrl = getImageCacheUrl(topImageUrl, { width: 270, height: 150 })
-
-  function handleVisible() {
-    handleRecImpression({
-      resolvedId: resolvedItem.resolvedId,
-      position
-    })
-  }
-
-  function handleClick(e) {
-    e.preventDefault()
-    handleRecClick({
-      resolvedId: resolvedItem.resolvedId,
-      position
-    })
-    // timeout ensures analytics event completes
-    setTimeout(() => (document.location.href = url), 250)
-  }
-
-  return (
-    <VisibilitySensor onVisible={handleVisible}>
-      <li className={recommendationStyles} data-cy="pocket-recommended-article">
-        <Link href={url}>
-          <a className="thumbnail" onClick={handleClick}>
-            <img src={thumbnailUrl} alt={`Logo for ${name}`} />
-          </a>
-        </Link>
-        <div className="details">
-          <Publisher name={name} logo={logoWideBwUrl} />
-          <Link href={url}>
-            <a onClick={handleClick}>
-              <h4 className="h5">{title}</h4>
-            </a>
-          </Link>
-        </div>
-      </li>
-    </VisibilitySensor>
-  )
-}
-
 export const PocketRecs = ({
   recommendations,
   maxRecommendations,
@@ -207,11 +199,12 @@ export const PocketRecs = ({
     <div className={cx(pocketRecsStyles, 'pocket-recs')}>
       <Heading />
       <ul className={recommendationsStyles} data-cy="pocket-recommended-articles">
-        {recsToDisplay.map(({ syndicated_article }, index) => (
+        {recsToDisplay.map(({ corpusItem, corpusRecommendationId }, index) => (
           <Recommendation
-            key={syndicated_article?.slug}
-            rec={syndicated_article}
+            key={corpusItem?.id}
+            rec={corpusItem}
             position={index}
+            corpusRecommendationId={corpusRecommendationId}
             handleRecImpression={handleRecImpression}
             handleRecClick={handleRecClick}
           />

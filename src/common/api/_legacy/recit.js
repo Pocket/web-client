@@ -1,17 +1,5 @@
 import { request } from 'common/utilities/request/request'
 
-export const getPublisherRecs = (itemId) => {
-  return request({
-    path: `v3/recit/module/syndicated_publisher/${itemId}`
-  })
-}
-
-export const getPocketRecs = (itemId) => {
-  return request({
-    path: `v3/recit/module/syndicated_article/${itemId}`
-  })
-}
-
 export const getRecommendations = (itemId, count = 3) => {
   const lang = 'en' // Gotta be a good way to pass this in
   return request({

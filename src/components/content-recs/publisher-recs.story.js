@@ -8,7 +8,7 @@ export default {
 
 export const normal = () => {
   return (
-    <PublisherRecs publisher={publisher.theVerge} recommendations={publisherRecs.recommendations} />
+    <PublisherRecs publisher={publisher.theVerge} recommendations={publisherRecs.relatedRightRail} />
   )
 }
 
@@ -16,7 +16,7 @@ export const noPublisherLogo = () => {
   return (
     <PublisherRecs
       publisher={publisher.noLogoPublisher}
-      recommendations={publisherRecs.recommendations}
+      recommendations={publisherRecs.relatedRightRail}
     />
   )
 }

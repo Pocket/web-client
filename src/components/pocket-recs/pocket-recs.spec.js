@@ -5,7 +5,7 @@ import PocketRecs, { Publisher } from './pocket-recs'
 import { pocketRecommendations as pocketRecs, publisher } from 'mock/article'
 
 describe('PocketRecs', () => {
-  const { recommendations } = pocketRecs
+  const { relatedEndOfArticle: recommendations } = pocketRecs
 
   it('does not render <Heading> or <Recommendations> when there are no recommendations', () => {
     const { queryByCy } = render(<Publisher recommendations={[]} />)
@@ -37,14 +37,14 @@ describe('PocketRecs', () => {
       const { queryAllByCy } = render(
         <PocketRecs recommendations={tooManyRecs} maxRecommendations={maxRecs} />
       )
-      expect(queryAllByCy('pocket-recommended-article')).toHaveLength(3)
+      expect(queryAllByCy('pocket-recs-article')).toHaveLength(3)
     })
 
     it('displays all articles passed in if less than the max number of articles', () => {
       const { queryAllByCy } = render(
         <PocketRecs recommendations={tooFewRecs} maxRecommendations={maxRecs} />
       )
-      expect(queryAllByCy('pocket-recommended-article')).toHaveLength(2)
+      expect(queryAllByCy('pocket-recs-article')).toHaveLength(2)
     })
   })
 })

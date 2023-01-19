@@ -1,25 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
-import { numberWithCommas } from 'common/utilities/numbers/numbers'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-
 import { Trans } from 'next-i18next'
-
-const publisherWrap = css`
-  & > div {
-    position: sticky;
-    top: 6rem;
-    margin: 0 0 4rem;
-    margin-top: -22px;
-  }
-`
 
 const publisherStyles = css`
   img {
     width: 60px;
     height: 60px;
-    margin-bottom: var(--spacing100);
+    margin-bottom: 16px;
 
     .colormode-dark &,
     .colormode-sepia & {
@@ -29,8 +18,8 @@ const publisherStyles = css`
   p {
     color: var(--color-textTertiary);
     font-family: var(--fontSansSerif);
-    font-size: var(--fontSize125);
-    margin-bottom: var(--spacing050);
+    font-size: 1.25rem;
+    margin-bottom: 8px;
   }
   .publisher-name {
     font-family: var(--fontSansSerif);
@@ -51,26 +40,10 @@ export const Publisher = ({ recommendationName, name, logo }) => {
   )
 }
 
-const saveCountStyles = css`
-  color: var(--color-textSecondary);
-  font-family: var(--fontSansSerif);
-  font-size: var(--fontSize100);
-  padding-bottom: var(--spacing100);
-  line-height: 24px;
-`
-
-const SaveCount = ({ count }) => (
-  <div className={saveCountStyles}>
-    <Trans i18nKey="discover:save-count" count={numberWithCommas(count)}>
-      {{ count }} saves
-    </Trans>
-  </div>
-)
-
 const recommendedArticleStyles = css`
   list-style: none;
   border-bottom: solid 1px var(--color-dividerTertiary);
-  margin-top: var(--spacing150);
+  margin-top: 24px;
 
   &:first-child {
     margin-top: 0;
@@ -82,80 +55,63 @@ const recommendedArticleStyles = css`
 
   .title {
     font-family: var(--fontSerif);
-    font-size: var(--fontSize125);
+    font-size: 1.25rem;
     line-height: 130%;
     font-weight: bold;
     text-decoration: none;
-    padding-bottom: var(--spacing100);
+    margin-bottom: 24px;
     display: block;
   }
 `
 
-export const RecommendedArticle = ({ title, saveCount, targetUrl, handleClick }) => (
-  <li className={recommendedArticleStyles} data-cy="publisher-recs-article">
-    {/*eslint-disable-next-line*/}
-    <a onClick={handleClick} className="title" href={targetUrl} target="_blank">
-      {title}
-    </a>
-    <SaveCount count={saveCount} />
-  </li>
-)
-
-const recommendationsStyles = css`
-  /*set ems in this component relative to 16px. getting clobbered by typography base style targeting ul */
-  font-size: 16px;
-  padding: 0;
-`
-const RecommendedArticles = ({
-  recommendations,
-  maxRecommendations,
+const RecommendedArticle = ({
+  rec,
+  position,
+  corpusRecommendationId,
   handleRecImpression,
   handleRecClick
 }) => {
+  if (!rec) return null
+  const { title, url } = rec
+
+  const handleVisible = () => {
+    handleRecImpression({ position, corpusRecommendationId, url })
+  }
+
+  const handleClick = () => {
+    handleRecClick({ position, corpusRecommendationId, url })
+  }
+
   return (
-    <ul className={recommendationsStyles}>
-      {recommendations.slice(0, maxRecommendations).map((r, position) => {
-        const { save_count: saveCount, target_url: targetUrl, item, syndicated_article } = r
-        if (!item) {
-          return null
-        }
-
-        const { title: itemTitle, item_id: itemId, resolved_id: resolvedId } = item
-
-        const title = syndicated_article?.title || itemTitle
-        const url = targetUrl.replace(
-          'getpocket.com/redirect?',
-          'getpocket.com/redirect?skipSyndication=1&'
-        )
-
-        function handleVisible() {
-          handleRecImpression({
-            resolvedId,
-            position
-          })
-        }
-
-        function handleClick() {
-          handleRecClick({
-            resolvedId,
-            position
-          })
-        }
-
-        return (
-          <VisibilitySensor key={itemId} onVisible={handleVisible}>
-            <RecommendedArticle
-              title={title}
-              saveCount={saveCount}
-              targetUrl={url}
-              handleClick={handleClick}
-            />
-          </VisibilitySensor>
-        )
-      })}
-    </ul>
+    <VisibilitySensor onVisible={handleVisible}>
+      <li className={recommendedArticleStyles} data-cy="publisher-recs-article">
+        <a
+          onClick={handleClick}
+          className="title"
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer">
+          {title}
+        </a>
+      </li>
+    </VisibilitySensor>
   )
 }
+
+const publisherWrap = css`
+  & > div {
+    position: sticky;
+    top: 6rem;
+    margin: 0 0 4rem;
+    margin-top: -22px;
+  }
+`
+
+const recommendationsStyles = css`
+  font-size: 16px; /* sets root size for list */
+  list-style: none;
+  padding: 0;
+`
 
 export const PublisherRecs = ({
   publisher,
@@ -166,17 +122,24 @@ export const PublisherRecs = ({
 }) => {
   if (recommendations.length === 0) return null
 
+  const recsToDisplay = recommendations.slice(0, maxRecommendations)
+
   return (
     <div className={publisherWrap}>
       <div>
         <Publisher {...publisher} data-cy="publisher-header" />
-        <RecommendedArticles
-          data-cy="recommended-articles"
-          recommendations={recommendations}
-          maxRecommendations={maxRecommendations}
-          handleRecImpression={handleRecImpression}
-          handleRecClick={handleRecClick}
-        />
+        <ul className={recommendationsStyles} data-cy="publisher-recommended-articles">
+          {recsToDisplay.map(({ corpusItem, corpusRecommendationId }, index) => (
+            <RecommendedArticle
+              key={corpusItem?.id}
+              rec={corpusItem}
+              position={index}
+              corpusRecommendationId={corpusRecommendationId}
+              handleRecImpression={handleRecImpression}
+              handleRecClick={handleRecClick}
+            />
+          ))}
+        </ul>
       </div>
     </div>
   )
