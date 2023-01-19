@@ -145,7 +145,7 @@ export const Recommendation = ({
           </a>
         </Link>
         <div className="details">
-          <Publisher name={publisher} /> {/* logo={logoWideBwUrl} /> */}
+          <Publisher name={publisher} />
           <Link href={url}>
             <a onClick={handleClick}>
               <h4 className="h5">{title}</h4>
