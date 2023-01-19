@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { SavedItems } from 'containers/saves/saved-items/saved-items'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 
-import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
 import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
@@ -18,7 +17,7 @@ import { SavesHeader } from 'components/headers/saves-header'
 import { SearchPageHeader } from 'components/headers/search-page-header'
 
 import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
-import { BulkFavoriteModal } from 'connectors/confirm-favorite/confirm-bulk-favorite'
+import { ConfirmFavorite } from 'connectors/confirm/favorite'
 import { ConfirmDelete } from 'connectors/confirm/delete'
 import { ConfirmArchive } from 'connectors/confirm/archive'
 import { ConfirmShare } from 'connectors/confirm/share'
@@ -74,11 +73,10 @@ export const Saves = (props) => {
         {flagsReady && shouldRender ? <SavedItems {...props} /> : null}
       </main>
       <TaggingModal />
-      <FavoriteModal />
       <TagDeleteModal />
       <TagEditModal />
 
-      <BulkFavoriteModal />
+      <ConfirmFavorite />
       <ConfirmDelete />
       <ConfirmArchive />
       <MutationTaggingModal />
