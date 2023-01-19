@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, Trans } from 'next-i18next'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-import { requestUserTags } from 'containers/saves/tags-page/tags-page.state'
+import { requestUserTags } from 'containers/saves/tagged/tagged-page.state'
 import { mutationTagConfirm } from 'connectors/items/mutation-tagging.state'
 import { mutationTagCancel } from 'connectors/items/mutation-tagging.state'
 import { mutationTagAdd } from 'connectors/items/mutation-tagging.state'
@@ -22,6 +22,7 @@ import { TagSuggestions } from 'components/tagging/tag.suggestions'
 import { TagUpsell } from 'components/tagging/tag.upsell'
 
 import { TypeAhead } from 'components/type-ahead/type-ahead'
+import { MAX_TAG_NAME_LENGTH } from 'common/constants'
 
 export function MutationTaggingModal() {
   const appRootSelector = '#__next'
@@ -141,7 +142,7 @@ export function MutationTaggingModal() {
             // Value Handling
             value={value}
             setValue={setValue}
-            characterLimit={25}
+            characterLimit={MAX_TAG_NAME_LENGTH}
             // Error Handling
             clearError={clearError}
             setError={setError}

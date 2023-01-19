@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react'
 import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
-import { cancelEditUserTag } from 'containers/saves/tags-page/tags-page.state'
-import { confirmEditUserTag } from 'containers/saves/tags-page/tags-page.state'
+import { cancelEditUserTag } from 'containers/saves/tagged/tagged-page.state'
+import { confirmEditUserTag } from 'containers/saves/tagged/tagged-page.state'
 import { useTranslation, Trans } from 'next-i18next'
+import { MAX_TAG_NAME_LENGTH } from 'common/constants'
 
 const inputWrapper = css`
   input[type='text'] {
@@ -50,6 +51,7 @@ export const TagEditModal = () => {
             autoFocus={true}
             value={value}
             onChange={onChange}
+            maxLength={MAX_TAG_NAME_LENGTH}
           />
         </div>
       </ModalBody>

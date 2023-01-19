@@ -2,7 +2,6 @@ import { put, call, takeEvery, select } from 'redux-saga/effects'
 import { fetchStoredTags } from 'common/api/_legacy/tags'
 import { renameStoredTag } from 'common/api/_legacy/tags'
 import { deleteStoredTag } from 'common/api/_legacy/tags'
-import { fetchSavesData } from 'containers/saves/saves.state'
 import { getUserTags as getUserTagsGraph } from 'common/api/queries/get-user-tags'
 
 import { USER_TAGS_GET_REQUEST } from 'actions'
@@ -154,41 +153,10 @@ function* userTagsRequest() {
 
   const { tags: tagsList, since } = response
 
-  const { itemsById } = yield fetchSavesData({
-    count: 50,
-    offset: 0,
-    sort: 'newest'
-  })
-
-  yield put({ type: USER_TAGS_ITEM_SUCCESS, itemsById })
-
-  // This just finds which of the most recent items have tags
-  const itemsWithTags = Object.values(itemsById)
-    .filter((item) => item?.tags.length > 0)
-    .slice(0, 4)
-  const itemsWithTagsArray = itemsWithTags.map((item) => item?.tags)
-  const itemsWithTagsList = itemsWithTags.map((item) => item?.itemId)
-
-  // This fun jumble of code makes an object of tags, with their corresponding
-  // items.  We have to do this since the endpoint does not natively support
-  // advanced tagging data ... yet
-  const tagsWithItems = itemsWithTagsArray.reduce((previous, current) => {
-    Object.keys(current).map((tag) => {
-      previous[tag] = previous[tag] ? [...previous[tag], current[tag]] : [current[tag]]
-      return tag
-    })
-    return previous
-  }, {})
-
-  const recentTags = Array.from(new Set(Object.keys(tagsWithItems)))
-
   yield put({
     type: USER_TAGS_GET_SUCCESS,
     since,
-    tagsList,
-    tagsWithItems,
-    itemsWithTags: itemsWithTagsList,
-    recentTags
+    tagsList
   })
 }
 
@@ -210,7 +178,7 @@ function* userTagsEditConfirm(action) {
     const pinnedItems = yield select(getPinnedTags)
     const pinnedTags = pinnedItems.map((pin) => (old_tag === pin ? new_tag : pin)) //prettier-ignore
     yield put({ type: USER_TAGS_EDIT_SUCCESS, new_tag, old_tag, pinnedTags }) //prettier-ignore
-    return yield call(router.replace, `/saves/tags/${encodeURI(new_tag)}`)
+    return yield call(router.replace, `/saves/tags/${encodeURIComponent(new_tag)}`)
   }
 
   return yield put({ type: USER_TAGS_EDIT_FAILURE, old_tag })

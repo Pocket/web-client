@@ -43,7 +43,7 @@ export const Item = (props) => {
     Actions,
 
     // Tracking
-    onItemInView,
+    // onItemInView,
     onOpenOriginalUrl,
     onOpen
   } = props

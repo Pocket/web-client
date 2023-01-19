@@ -2,8 +2,8 @@ import { useRouter } from 'next/router'
 import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
-import { cancelDeleteUserTag } from 'containers/saves/tags-page/tags-page.state'
-import { confirmDeleteUserTag } from 'containers/saves/tags-page/tags-page.state'
+import { cancelDeleteUserTag } from 'containers/saves/tagged/tagged-page.state'
+import { confirmDeleteUserTag } from 'containers/saves/tagged/tagged-page.state'
 import { useTranslation, Trans } from 'next-i18next'
 
 export const TagDeleteModal = () => {

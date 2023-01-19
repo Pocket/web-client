@@ -22,6 +22,10 @@ const nextOptions = {
     TEST_SNOWPLOW: process.env.TEST_SNOWPLOW
   },
   assetPrefix,
+  sentry: {
+    disableServerWebpackPlugin: true,
+    disableClientWebpackPlugin: true
+  },
   async rewrites() {
     return [
       { source: '/explore', destination: '/discover' },

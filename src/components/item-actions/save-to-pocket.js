@@ -70,10 +70,6 @@ const saveContainer = css`
   }
 `
 
-const forceWidth = css`
-  min-width: 3.913em;
-`
-
 const popoverContainer = css`
   ${popoverBase};
   padding: 16px;

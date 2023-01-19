@@ -2,8 +2,8 @@ import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
 
 const getCollectionsQuery = gql`
-  query GetCollections($getCollectionLang: String!) {
-    getCollections(filters: { language: $getCollectionLang }) {
+  query GetCollections($filters: CollectionsFiltersInput) {
+    getCollections(filters: $filters) {
       collections {
         slug
         title
@@ -23,12 +23,19 @@ const getCollectionsQuery = gql`
   }
 `
 
-export function getCollections(lang = 'en') {
+export function getCollections(language = 'en', labels) {
   return requestGQL({
     query: getCollectionsQuery,
     operationName: 'GetCollections',
-    variables: { getCollectionLang: lang }
+    variables: {
+      filters: {
+        labels,
+        language
+      }
+    }
   })
-    .then((response) => response?.data?.getCollections?.collections)
+    .then((response) => {
+      return response?.data?.getCollections?.collections
+    })
     .catch((error) => console.error(error))
 }

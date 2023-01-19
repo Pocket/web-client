@@ -2,8 +2,8 @@ import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
 
 const getHomeQuery = gql`
-  query Home {
-    homeSlateLineup {
+  query Home($locale: String) {
+    homeSlateLineup(locale: $locale) {
       slates {
         slateId: id
         recommendationReasonType
@@ -41,11 +41,11 @@ const getHomeQuery = gql`
  * @param {} param0
  * @returns
  */
-export async function getUnifiedHome() {
+export async function getUnifiedHome(locale) {
   return requestGQL({
     query: getHomeQuery,
     operationName: 'GetHome',
-    variables: {}
+    variables: {locale}
   })
     .then(handleResponse)
     .catch((error) => console.error(error))

@@ -24,7 +24,7 @@ import { SET_TOPIC_SUCCESS } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getHomeContent = (id) => ({ type: HOME_CONTENT_REQUEST, id })
+export const getHomeContent = (locale) => ({ type: HOME_CONTENT_REQUEST, locale })
 export const saveHomeItem = (id, url) => ({ type: HOME_SAVE_REQUEST, id, url })
 export const unSaveHomeItem = (id, url) => ({ type: HOME_UNSAVE_REQUEST, id, url })
 export const getRecentSaves = () => ({ type: HOME_RECENT_SAVES_REQUEST })
@@ -104,9 +104,9 @@ export const homeSagas = [
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-function* homeContentRequest() {
+function* homeContentRequest({locale}) {
   try {
-    const { itemsById, slatesById, slateArray } = yield call(getUnifiedHome)
+    const { itemsById, slatesById, slateArray } = yield call(getUnifiedHome, locale)
 
     yield put({ type: HOME_CONTENT_SUCCESS, itemsById, slatesById, slateArray })
   } catch (error) {

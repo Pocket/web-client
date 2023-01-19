@@ -1,4 +1,3 @@
-import { css, cx } from 'linaria'
 import { EmailAddresses as EmailAddressesComponent } from './addresses'
 import { accountStyles } from '../account'
 

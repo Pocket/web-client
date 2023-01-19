@@ -4,7 +4,7 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, Trans } from 'next-i18next'
 
-import { getUserTags } from 'containers/saves/tags-page/tags-page.state'
+import { getUserTags } from 'containers/saves/tagged/tagged-page.state'
 
 import { itemsTagConfirm } from 'connectors/items-by-id/saves/items.tag'
 import { itemsTagCancel } from 'connectors/items-by-id/saves/items.tag'
@@ -21,6 +21,7 @@ import { TagSuggestions } from 'components/tagging/tag.suggestions'
 import { TagUpsell } from 'components/tagging/tag.upsell'
 
 import { TypeAhead } from 'components/type-ahead/type-ahead'
+import { MAX_TAG_NAME_LENGTH } from 'common/constants'
 
 export function TaggingModal() {
   const appRootSelector = '#__next'
@@ -139,7 +140,7 @@ export function TaggingModal() {
             // Value Handling
             value={value}
             setValue={setValue}
-            characterLimit={25}
+            characterLimit={MAX_TAG_NAME_LENGTH}
             // Error Handling
             clearError={clearError}
             setError={setError}

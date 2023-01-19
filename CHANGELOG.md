@@ -1,3 +1,48 @@
+# [1.71.0](https://github.com/Pocket/web-client/compare/v1.70.0...v1.71.0) (2023-01-18)
+
+
+### Features
+
+* **home:** set up locale for home content ([96bed81](https://github.com/Pocket/web-client/commit/96bed817ed924e13167c46c74f657e37c39fb166))
+
+# [1.70.0](https://github.com/Pocket/web-client/compare/v1.69.5...v1.70.0) (2023-01-18)
+
+
+### Features
+
+* **collections:** add support for labels ([3e11386](https://github.com/Pocket/web-client/commit/3e113861026cd14f9c8f5884012f07e2616c5f70))
+* **localization:** support en-KE ([803b9ee](https://github.com/Pocket/web-client/commit/803b9eedb38fb2d78bb2d0e80baaa58b3740927b))
+
+## [1.69.5](https://github.com/Pocket/web-client/compare/v1.69.4...v1.69.5) (2023-01-18)
+
+
+### Bug Fixes
+
+* **tagging:** added character limit to editing tag on tag's page ([8a7b893](https://github.com/Pocket/web-client/commit/8a7b893d113f9092dac91d053fc5fd47c2998800))
+* **tagging:** fix character limit off-by-1 ([c3bb751](https://github.com/Pocket/web-client/commit/c3bb7512d52e7fc7d7ab147f219c22ffa2596e33))
+* **tagging:** Introduce shared variable ([7e85f0f](https://github.com/Pocket/web-client/commit/7e85f0f57df2a08b8e37b720527ba2f5608a3fa9))
+
+## [1.69.4](https://github.com/Pocket/web-client/compare/v1.69.3...v1.69.4) (2023-01-17)
+
+
+### Bug Fixes
+
+* **eslint:** adjust simple errors ([24db7f5](https://github.com/Pocket/web-client/commit/24db7f5f53257936c0be1c717d6baebe1554a240))
+
+## [1.69.3](https://github.com/Pocket/web-client/compare/v1.69.2...v1.69.3) (2023-01-17)
+
+
+### Bug Fixes
+
+* **tagging:** switch encode func to encodeURIComponent ([00f9c31](https://github.com/Pocket/web-client/commit/00f9c314c765acb6e4e131fb1949226cff00553d))
+
+## [1.69.2](https://github.com/Pocket/web-client/compare/v1.69.1...v1.69.2) (2023-01-13)
+
+
+### Bug Fixes
+
+* **actions:** build error on unused constants ([730ffbd](https://github.com/Pocket/web-client/commit/730ffbdf51fe731a789e57ee77a1a5be2a22d625))
+
 ## [1.69.1](https://github.com/Pocket/web-client/compare/v1.69.0...v1.69.1) (2023-01-10)
 
 
