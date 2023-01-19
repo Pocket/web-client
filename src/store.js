@@ -137,7 +137,7 @@ import { listSavedPageInfoReducers } from 'containers/saves/saved-items/saved-it
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
-  items: itemsReducers,
+  itemsDisplay: itemsReducers, // This is canonical item data used to display an item from anywhere (an item is an item is an item)
   itemsSaved: itemsSavedReducers, // This represents the actions the user has taken on a given item (if any)
   itemsTransitions: { saving: [], unsaving: [] }, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
   listen: listenReducers

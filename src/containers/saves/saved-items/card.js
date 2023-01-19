@@ -31,7 +31,7 @@ export function ItemCard({
 
   // Get data from state
   const isPremium = useSelector((state) => state.user.premium_status === '1')
-  const item = useSelector((state) => state.items[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
   const itemSaved = useSelector((state) => state.itemsSaved[id])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const bulkList = useSelector((state) => state.mutationBulk.itemIds)

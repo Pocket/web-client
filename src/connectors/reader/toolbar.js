@@ -23,7 +23,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 export const Toolbar = ({ id }) => {
   const dispatch = useDispatch()
 
-  const item = useSelector((state) => state.items[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
   const savedData = useSelector((state) => state.itemsSaved[id])
   const sideBarOpen = useSelector((state) => state.reader.sideBarOpen)
 

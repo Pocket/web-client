@@ -82,7 +82,7 @@ export default function Reader() {
   const router = useRouter()
   const { slug: id } = router.query
 
-  const item = useSelector((state) => state.items[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
   const status = useSelector((state) => state.itemsSaved[id]?.status)
 
   // Is deleted ?
