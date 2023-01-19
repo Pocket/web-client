@@ -7,7 +7,6 @@ import { HomeRecentSaves } from 'containers/home/home-recent-saves'
 import { HomeContent } from './home-content'
 
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
-import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
 import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
@@ -40,7 +39,6 @@ export const Home = ({ metaData }) => {
       <HomeContent />
 
       <TaggingModal />
-      <ArchiveModal />
       <FavoriteModal />
 
       <Toasts />

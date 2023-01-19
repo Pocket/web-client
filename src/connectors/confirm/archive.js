@@ -6,7 +6,7 @@ import { mutationBulkConfirm, mutationBulkCancel } from 'connectors/items/mutati
 import { BatchProcessing } from 'components/processing/processing'
 import { useTranslation, Trans } from 'next-i18next'
 
-export const BulkArchiveModal = () => {
+export const ConfirmArchive = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
