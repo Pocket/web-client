@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import ErrorPage from 'pages/_error'
 import TopicCollection from './topic-collection'
 import TopicPage from './topic-page'
-import { ReportFeedbackModal } from 'connectors/confirm-report/confirm-report'
+import { ConfirmReport } from 'connectors/confirm/report'
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 
 import { BASE_URL } from 'common/constants'
@@ -55,7 +55,7 @@ export default function Topic({ locale, statusCode = 500 }) {
         curatedItems={curatedItems}
         algorithmicItems={algorithmicItems}
       />
-      <ReportFeedbackModal />
+      <ConfirmReport />
     </Layout>
   )
 }

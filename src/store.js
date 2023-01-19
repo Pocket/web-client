@@ -70,9 +70,6 @@ import { itemTagReducers } from 'connectors/items-by-id/saves/items.tag'
 import { itemShareReducers } from 'connectors/items-by-id/saves/items.share'
 import { itemShareSagas } from 'connectors/items-by-id/saves/items.share'
 
-import { itemReportReducers } from 'connectors/items-by-id/discover/items.report'
-import { itemReportSagas } from 'connectors/items-by-id/discover/items.report'
-
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
 
@@ -130,6 +127,9 @@ import { mutationBulkSagas } from 'connectors/items/mutations-bulk.state'
 import { mutationShareReducers } from 'connectors/items/mutation-share.state'
 import { mutationShareSagas } from 'connectors/items/mutation-share.state'
 
+import { mutationReportReducers } from 'connectors/items/mutation-report.state'
+import { mutationReportSagas } from 'connectors/items/mutation-report.state'
+
 import { pageSavedIdsReducers } from 'containers/saves/saved-items/saved-items.state'
 import { pageSavedIdsSagas } from 'containers/saves/saved-items/saved-items.state'
 import { pageSavedInfoReducers } from 'containers/saves/saved-items/saved-items.state'
@@ -150,7 +150,8 @@ const itemMutations = {
   mutationDelete: mutationDeleteReducers,
   mutationTagging: mutationTaggingReducers,
   mutationHighlight: mutationHighlightReducers,
-  mutationShare: mutationShareReducers
+  mutationShare: mutationShareReducers,
+  mutationReport: mutationReportReducers
 }
 
 const itemActionReducers = {
@@ -158,7 +159,6 @@ const itemActionReducers = {
   itemsToDelete: itemDeleteReducers,
   itemsToArchive: itemArchiveReducers,
   itemsToTag: itemTagReducers,
-  itemToReport: itemReportReducers,
   itemsToShare: itemShareReducers
 }
 
@@ -267,7 +267,6 @@ function* rootSaga() {
     ...recitSagas,
     ...savesItemsSagas,
     ...itemShareSagas,
-    ...itemReportSagas,
     ...readerSettingsSagas,
     ...readerSagas, //graph
     ...homeSagas,
@@ -288,6 +287,7 @@ function* rootSaga() {
     ...mutationTaggingSagas,
     ...mutationHighlightSagas,
     ...mutationShareSagas,
+    ...mutationReportSagas,
     ...listenSagas
   ])
 }

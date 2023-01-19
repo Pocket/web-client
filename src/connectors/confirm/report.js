@@ -2,14 +2,14 @@ import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { itemReportConfirm } from 'connectors/items-by-id/discover/items.report'
-import { itemReportCancel } from 'connectors/items-by-id/discover/items.report'
+import { itemReportConfirm } from 'connectors/items/mutation-report.state'
+import { itemReportCancel } from 'connectors/items/mutation-report.state'
 import { ReportForm } from 'components/report-form/report-form'
 import { useTranslation, Trans } from 'next-i18next'
 
 const OTHER_FIELD_CHAR_LIMIT = 500
 
-export const ReportFeedbackModal = () => {
+export const ConfirmReport = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -18,7 +18,7 @@ export const ReportFeedbackModal = () => {
   const [errorCode, updateErrorCode] = useState(null)
   const [success, updateSubmitSuccess] = useState(false)
 
-  const id = useSelector((state) => state.itemToReport)
+  const id = useSelector((state) => state.mutationReport)
   const item = useSelector((state) => state.discoverItemsById[id])
 
   const showModal = !!item
