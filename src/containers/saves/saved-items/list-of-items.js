@@ -8,7 +8,7 @@ import { useViewport } from 'components/viewport-provider/viewport-provider'
 
 import { css } from 'linaria'
 
-const listSavedStyle = css`
+const itemsListStyle = css`
   position: relative;
   margin-top: 2rem;
 `
@@ -25,7 +25,7 @@ const LIST_DIMENSIONS = {
     screenLargeHandset: ['100%', 75, 1],
     screenMediumHandset: ['100%', 130, 1],
     screenSmallHandset: ['100%', 130, 1],
-    screenTinyHandset: ['100%', 130, 1],
+    screenTinyHandset: ['100%', 130, 1]
   },
   grid: {
     screenLargeDesktop: [0.24, 361, 3],
@@ -52,7 +52,7 @@ const LIST_DIMENSIONS = {
     screenLargeHandset: ['100%', 185, 1],
     screenMediumHandset: ['100%', 180, 1],
     screenSmallHandset: ['100%', 185, 1],
-    screenTinyHandset: ['100%', 185, 1],
+    screenTinyHandset: ['100%', 185, 1]
   }
 }
 
@@ -60,8 +60,8 @@ export const ListOfItems = () => {
   const dispatch = useDispatch()
   const viewport = useViewport()
 
-  const listSaved = useSelector((state) => state.listSaved)
-  const totalCount = useSelector((state) => state.listSavedPageInfo.totalCount)
+  const pageSavedIds = useSelector((state) => state.pageSavedIds)
+  const totalCount = useSelector((state) => state.pageSavedInfo.totalCount)
   const type = useSelector((state) => state.app.listMode)
 
   const [startingIndex, setStartingIndex] = useState(0)
@@ -69,13 +69,13 @@ export const ListOfItems = () => {
   // Set up state to track for virtualization
   const breakpoint = getBreakpoint(viewport.width)
   const [widthPercentage, height, columnCount] = LIST_DIMENSIONS[type][breakpoint] //width
-  const width = typeof widthPercentage === 'string' ? widthPercentage : Math.min(Math.ceil(viewport.width*widthPercentage), 295)
+  const width = typeof widthPercentage === 'string' ? widthPercentage : Math.min(Math.ceil(viewport.width*widthPercentage), 295) //prettier-ignore
 
   const itemsOnScreen = 30
   const verticalPadding = 15
   const horizontalPadding = 25
 
-  const blockRows = listSaved.length / columnCount
+  const blockRows = pageSavedIds.length / columnCount
   const totalHeight = blockRows * height + blockRows * verticalPadding
 
   /** FUNCTIONS
@@ -108,14 +108,14 @@ export const ListOfItems = () => {
   if (!totalCount) return null
 
   const loadMore = () => dispatch(loadMoreListItems())
-  const itemsToShow = listSaved.slice(startingIndex, startingIndex + itemsOnScreen + 1)
+  const itemsToShow = pageSavedIds.slice(startingIndex, startingIndex + itemsOnScreen + 1)
 
   return (
     <>
-      <div className={listSavedStyle}>
+      <div className={itemsListStyle}>
         {itemsToShow
           ? itemsToShow.map((itemId) => {
-              const positionOfItem = listSaved.indexOf(itemId)
+              const positionOfItem = pageSavedIds.indexOf(itemId)
               return (
                 <ItemCard
                   key={itemId}

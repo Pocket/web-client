@@ -130,9 +130,9 @@ import { mutationHighlightSagas } from 'connectors/items/mutation-highlight.stat
 import { mutationBulkReducers } from 'connectors/items/mutations-bulk.state'
 import { mutationBulkSagas } from 'connectors/items/mutations-bulk.state'
 
-import { listSavedReducers } from 'containers/saves/saved-items/saved-items.state'
-import { listSavedSagas } from 'containers/saves/saved-items/saved-items.state'
-import { listSavedPageInfoReducers } from 'containers/saves/saved-items/saved-items.state'
+import { pageSavedIdsReducers } from 'containers/saves/saved-items/saved-items.state'
+import { pageSavedIdsSagas } from 'containers/saves/saved-items/saved-items.state'
+import { pageSavedInfoReducers } from 'containers/saves/saved-items/saved-items.state'
 
 /* REDUCERS
  --------------------------------------------------------------- */
@@ -152,15 +152,6 @@ const itemMutations = {
   mutationHighlight: mutationHighlightReducers
 }
 
-const listReducers = {
-  listHome: [],
-  listSaved: listSavedReducers,
-  listSavedPageInfo: listSavedPageInfoReducers,
-  listDiscover: [],
-  listCollection: [],
-  listCollectionStories: []
-}
-
 const itemActionReducers = {
   itemsToFavorite: itemFavoriteReducers,
   itemsToDelete: itemDeleteReducers,
@@ -168,6 +159,21 @@ const itemActionReducers = {
   itemsToTag: itemTagReducers,
   itemToReport: itemReportReducers,
   itemsToShare: itemShareReducers
+}
+
+const pageReducers = {
+  pageHomeIds: [],
+  pageHomeInfo: [],
+  pageSavedIds: pageSavedIdsReducers,
+  pageSavedInfo: pageSavedInfoReducers,
+  pageDiscoverIds: [],
+  pageDiscoverInfo: [],
+  pageDiscoverTopicIds: [],
+  pageDiscoverTopicInfo: [],
+  pageCollectionIds: [],
+  pageCollectionInfo: [],
+  pageStoriesIds: [],
+  pageStoriesInfo: []
 }
 
 const discoverReducers = {
@@ -234,9 +240,9 @@ export const rootReducer = combineReducers({
   ...userAccountReducers,
   home: homeReducers,
   ...itemReducers,
-  ...listReducers,
   ...itemActionReducers,
-  ...itemMutations
+  ...itemMutations,
+  ...pageReducers
 })
 
 /* SAGAS
@@ -272,7 +278,7 @@ function* rootSaga() {
     ...shortcutSagas,
     ...onboardingSagas,
     ...brazeSagas,
-    ...listSavedSagas,
+    ...pageSavedIdsSagas,
     ...itemsSavedSagas,
     ...shareModalSagas,
     ...mutationArchiveSagas,

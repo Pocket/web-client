@@ -222,7 +222,7 @@ const getCurrentItemId = (state) => state.shortcuts.currentId
 const getCurrentBulkItemId = (state) => state.mutationBulk.currentId
 const getCurrentBulkItems = (state) => state.mutationBulk.itemIds
 const getSection = (state) => state.app.section
-const getItems = (state) => state.listSaved
+const getPageSavedIds = (state) => state.pageSavedIds
 const getItem = (state, id) => state.itemsDisplay[id]
 const getSavedItem = (state, id) => state.itemsSaved[id]
 const getFontSize = (state) => state.readerSettings.fontSize
@@ -282,13 +282,13 @@ function* shortcutPreviousItem({ appMode }) {
 function* selectItem(next) {
   const currentId = yield select(getCurrentItemId)
   const section = yield select(getSection)
-  const items = yield select(getItems, section)
-  const total = items?.length
-  const currentPosition = items.indexOf(currentId)
+  const pageSavedIds = yield select(getPageSavedIds, section)
+  const total = pageSavedIds?.length
+  const currentPosition = pageSavedIds.indexOf(currentId)
 
   if (next) {
     const nextPosition = currentPosition < 0 ? 0 : currentPosition + 1
-    const nextId = items[nextPosition] ? items[nextPosition] : false
+    const nextId = pageSavedIds[nextPosition] ? pageSavedIds[nextPosition] : false
     return yield put({
       type: SHORTCUT_SET_CURRENT_ITEM,
       currentId: nextId,
@@ -297,7 +297,7 @@ function* selectItem(next) {
   }
 
   const prevPosition = currentPosition >= total ? total : currentPosition - 1
-  const prevId = items[prevPosition] ? items[prevPosition] : false
+  const prevId = pageSavedIds[prevPosition] ? pageSavedIds[prevPosition] : false
   return yield put({
     type: SHORTCUT_SET_CURRENT_ITEM,
     currentId: prevId,
@@ -308,18 +308,18 @@ function* selectItem(next) {
 function* selectBulkItem(next) {
   const currentId = yield select(getCurrentBulkItemId)
   const section = yield select(getSection)
-  const items = yield select(getItems, section)
-  const total = items?.length
-  const currentPosition = items.indexOf(currentId)
+  const pageSavedIds = yield select(getPageSavedIds, section)
+  const total = pageSavedIds?.length
+  const currentPosition = pageSavedIds.indexOf(currentId)
 
   if (next) {
     const nextPosition = currentPosition < 0 ? 0 : currentPosition + 1
-    const nextId = items[nextPosition] ? items[nextPosition] : false
+    const nextId = pageSavedIds[nextPosition] ? pageSavedIds[nextPosition] : false
     return yield put({ type: MUTATION_BULK_SET_CURRENT, currentId: nextId })
   }
 
   const prevPosition = currentPosition >= total ? total : currentPosition - 1
-  const prevId = items[prevPosition] ? items[prevPosition] : false
+  const prevId = pageSavedIds[prevPosition] ? pageSavedIds[prevPosition] : false
   return yield put({ type: MUTATION_BULK_SET_CURRENT, currentId: prevId })
 }
 

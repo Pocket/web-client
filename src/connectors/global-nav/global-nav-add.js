@@ -9,7 +9,7 @@ function GlobalNavAddConnected({ onClose }) {
   const dispatch = useDispatch()
 
   const featureState = useSelector((state) => state.features)
-  const { filters, sort } = useSelector((state) => state.listSavedPageInfo)
+  const { filters, sort } = useSelector((state) => state.pageSavedInfo)
   const useApiNext = featureFlagActive({ flag: 'api.next', featureState })
 
   const saveFunction = useApiNext ? mutationUpsert : itemAddAction

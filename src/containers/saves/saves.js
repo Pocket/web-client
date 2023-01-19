@@ -38,10 +38,10 @@ export const Saves = (props) => {
   // Selectors
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
-  const sortOrder = useSelector((state) => state.listSavedPageInfo.sortOrder)
+  const sortOrder = useSelector((state) => state.pageSavedInfo.sortOrder)
   const featureState = useSelector((state) => state.features)
   const isPremium = useSelector((state) => state.user.premium_status === '1')
-  const total = useSelector((state) => state.listSavedPageInfo.totalCount)
+  const total = useSelector((state) => state.pageSavedInfo.totalCount)
 
   // Derived Values
   const shouldRender = userStatus !== 'pending'

@@ -33,7 +33,7 @@ export function ActionsSaves({ id, position }) {
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const itemSaved = useSelector((state) => state.itemsSaved[id])
-  const { filters, sort } = useSelector((state) => state.listSavedPageInfo)
+  const { filters, sort } = useSelector((state) => state.pageSavedInfo)
   const item = useSelector((state) => state.itemsDisplay[id])
 
   if (!itemSaved || !item) return null
