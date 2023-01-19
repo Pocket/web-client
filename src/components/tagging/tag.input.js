@@ -82,13 +82,15 @@ export function TagInput(props) {
   }
 
   const onKeyInput = (event) => {
-    // Check email validation
+    const trimmedValue = value.trim()
+
+    // Check email validation. No longer used 1/19/23
     if (
       event.charCode === KEYS.COMMA ||
       event.keyCode === KEYS.TAB ||
       event.keyCode === KEYS.ENTER
     ) {
-      if (email && !validateEmail(value)) {
+      if (email && !validateEmail(trimmedValue)) {
         setInputError()
         event.preventDefault()
         event.stopPropagation()
@@ -100,7 +102,7 @@ export function TagInput(props) {
     if (event.charCode === KEYS.COMMA || event.keyCode === KEYS.TAB) {
       event.preventDefault()
       event.stopPropagation()
-      if (value.trim()) return addTag(`${value.trim()}`)
+      if (trimmedValue) return addTag(`${trimmedValue}`)
       return
     }
 
@@ -109,11 +111,11 @@ export function TagInput(props) {
       event.preventDefault()
       event.stopPropagation()
 
-      if (value.trim()) {
-        return addTag(`${value}`)
+      if (trimmedValue) {
+        return addTag(`${trimmedValue}`)
       }
       
-      // Do not allow submitting with input that is only white space
+      // Only allow submitting when input is empty
       if (!value) {
         submitForm()
       }
