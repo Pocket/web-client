@@ -81,7 +81,7 @@ export const syndicatedArticleActions = {
     description:
       'Fired when a user sees the link in the publisher attribution at the bottom of the page'
   },
-  'syndicated.corpus.bottom.impression': {
+  'syndicated.rec.bottom.impression': {
     eventType: 'impression',
     entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
@@ -90,7 +90,7 @@ export const syndicatedArticleActions = {
     },
     expects: ['corpusRecommendationId', 'url', 'position']
   },
-  'syndicated.corpus.bottom.open': {
+  'syndicated.rec.bottom.open': {
     eventType: 'contentOpen',
     entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
@@ -99,7 +99,7 @@ export const syndicatedArticleActions = {
     },
     expects: ['corpusRecommendationId', 'url', 'position']
   },
-  'syndicated.corpus.sidebar.impression': {
+  'syndicated.rec.sidebar.impression': {
     eventType: 'impression',
     entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
@@ -108,7 +108,7 @@ export const syndicatedArticleActions = {
     },
     expects: ['corpusRecommendationId', 'url', 'position']
   },
-  'syndicated.corpus.sidebar.open': {
+  'syndicated.rec.sidebar.open': {
     eventType: 'contentOpen',
     entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
