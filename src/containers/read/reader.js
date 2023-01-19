@@ -14,7 +14,6 @@ import { Recommendations } from 'connectors/reader/recommendations'
 import { Upsell } from 'connectors/reader/upsell'
 
 import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
-import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
 import { ConfirmShare } from 'connectors/confirm/share'
 import { Toasts } from 'connectors/toasts/toast-list'
 
@@ -147,7 +146,6 @@ export default function Reader() {
       <Recommendations id={id} />
       <Upsell />
 
-      <DeleteModal />
       <MutationTaggingModal />
       <ConfirmShare />
       <Toasts />

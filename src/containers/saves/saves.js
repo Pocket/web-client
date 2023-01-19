@@ -4,7 +4,7 @@ import { SideNav } from 'connectors/side-nav/side-nav'
 import { useRouter } from 'next/router'
 import { SavedItems } from 'containers/saves/saved-items/saved-items'
 import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
-import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
+
 
 import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
 import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
@@ -21,7 +21,7 @@ import { SearchPageHeader } from 'components/headers/search-page-header'
 
 import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
 import { BulkFavoriteModal } from 'connectors/confirm-favorite/confirm-bulk-favorite'
-import { BulkDeleteModal } from 'connectors/confirm-delete/confirm-bulk-delete'
+import { ConfirmDelete } from 'connectors/confirm/delete'
 import { BulkArchiveModal } from 'connectors/confirm-archive/confirm-bulk-archive'
 import { ConfirmShare } from 'connectors/confirm/share'
 
@@ -75,7 +75,6 @@ export const Saves = (props) => {
         />
         {flagsReady && shouldRender ? <SavedItems {...props} /> : null}
       </main>
-      <DeleteModal />
       <TaggingModal />
       <ArchiveModal />
       <FavoriteModal />
@@ -83,7 +82,7 @@ export const Saves = (props) => {
       <TagEditModal />
 
       <BulkFavoriteModal />
-      <BulkDeleteModal />
+      <ConfirmDelete />
       <BulkArchiveModal />
       <MutationTaggingModal />
       <ConfirmShare />

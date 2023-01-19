@@ -1,24 +1,23 @@
 import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
-import { itemsDeleteConfirm } from 'connectors/items-by-id/saves/items.delete'
-import { itemsDeleteCancel } from 'connectors/items-by-id/saves/items.delete'
+import { mutationBulkConfirm, mutationBulkCancel } from 'connectors/items/mutations-bulk.state'
 import { BatchProcessing } from 'components/processing/processing'
 import { useTranslation, Trans } from 'next-i18next'
 
-export const DeleteModal = () => {
+export const ConfirmDelete = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
   // Handle delete actions with confirmation
-  const itemsToDelete = useSelector((state) => state.itemsToDelete)
-  const batchTotal = useSelector((state) => state.bulkEdit.batchTotal)
-  const batchCount = useSelector((state) => state.bulkEdit.batchCount)
-  const batchStart = useSelector((state) => state.bulkEdit.batchStart)
+  const itemsToDelete = useSelector((state) => state.mutationDelete.itemIds)
+  const batchTotal = useSelector((state) => state.mutationBulk.batchTotal)
+  const batchCount = useSelector((state) => state.mutationBulk.batchCount)
+  const batchStart = useSelector((state) => state.mutationBulk.batchStart)
 
   const showModal = itemsToDelete.length > 0
-  const confirmDelete = () => dispatch(itemsDeleteConfirm())
-  const cancelDelete = () => dispatch(itemsDeleteCancel())
+  const confirmDelete = () => dispatch(mutationBulkConfirm())
+  const cancelDelete = () => dispatch(mutationBulkCancel())
 
   const appRootSelector = '#__next'
 
