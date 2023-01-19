@@ -138,14 +138,18 @@ import { listSavedPageInfoReducers } from 'containers/saves/saved-items/saved-it
  --------------------------------------------------------------- */
 const itemReducers = {
   items: itemsReducers,
-  itemsSaved: itemsSavedReducers,
+  itemsSaved: itemsSavedReducers, // This represents the actions the user has taken on a given item (if any)
+  itemsTransitions: { saving: [], unsaving: [] }, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
+  listen: listenReducers
+}
+
+const itemMutations = {
   mutationBulk: mutationBulkReducers,
   mutationFavorite: mutationFavoriteReducers,
   mutationArchive: mutationArchiveReducers,
   mutationDelete: mutationDeleteReducers,
   mutationTagging: mutationTaggingReducers,
-  mutationHighlight: mutationHighlightReducers,
-  listen: listenReducers
+  mutationHighlight: mutationHighlightReducers
 }
 
 const listReducers = {
@@ -231,7 +235,8 @@ export const rootReducer = combineReducers({
   home: homeReducers,
   ...itemReducers,
   ...listReducers,
-  ...itemActionReducers
+  ...itemActionReducers,
+  ...itemMutations
 })
 
 /* SAGAS
