@@ -95,7 +95,8 @@ export const syndicatedArticleActions = {
     entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
       component: 'ui',
-      uiType: 'card'
+      uiType: 'card',
+      destination: 'internal'
     },
     expects: ['corpusRecommendationId', 'url', 'position']
   },
@@ -104,7 +105,7 @@ export const syndicatedArticleActions = {
     entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
       component: 'ui',
-      uiType: 'card'
+      uiType: 'link'
     },
     expects: ['corpusRecommendationId', 'url', 'position']
   },
@@ -113,7 +114,8 @@ export const syndicatedArticleActions = {
     entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
       component: 'ui',
-      uiType: 'card'
+      uiType: 'link',
+      destination: 'external'
     },
     expects: ['corpusRecommendationId', 'url', 'position']
   },
