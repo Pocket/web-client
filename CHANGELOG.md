@@ -1,3 +1,18 @@
+# [1.71.0](https://github.com/Pocket/web-client/compare/v1.70.0...v1.71.0) (2023-01-18)
+
+
+### Features
+
+* **home:** set up locale for home content ([96bed81](https://github.com/Pocket/web-client/commit/96bed817ed924e13167c46c74f657e37c39fb166))
+
+# [1.70.0](https://github.com/Pocket/web-client/compare/v1.69.5...v1.70.0) (2023-01-18)
+
+
+### Features
+
+* **collections:** add support for labels ([3e11386](https://github.com/Pocket/web-client/commit/3e113861026cd14f9c8f5884012f07e2616c5f70))
+* **localization:** support en-KE ([803b9ee](https://github.com/Pocket/web-client/commit/803b9eedb38fb2d78bb2d0e80baaa58b3740927b))
+
 ## [1.69.5](https://github.com/Pocket/web-client/compare/v1.69.4...v1.69.5) (2023-01-18)
 
 
