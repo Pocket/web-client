@@ -2,8 +2,6 @@ import { put, call, takeEvery, select } from 'redux-saga/effects'
 import { getShares } from 'common/api/_legacy/messages'
 import { resendConfirmation } from 'common/api/_legacy/messages'
 import { sendItemActions } from 'common/api/_legacy/item-actions'
-import { deriveSavesItems } from 'connectors/items-by-id/saves/items.derive'
-import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 import { API_ACTION_SHARE_ADDED } from 'common/constants'
 import { API_ACTION_SHARE_IGNORED } from 'common/constants'
@@ -99,13 +97,8 @@ function* sharesRequest() {
     const response = yield getShares()
     if (response?.status !== 1) throw new Error('Cannot get shares')
 
-    const { notifications, unconfirmed_shares } = response
-    const itemsArray = [
-      ...notifications.map((notification) => notification.item),
-      ...unconfirmed_shares.map((share) => share.item)
-    ]
-    const derivedItems = deriveSavesItems(itemsArray)
-    const itemsById = arrayToObject(derivedItems, 'item_id')
+    const { notifications, unconfirmed_shares, itemsById} = response
+
     yield put({ type: GET_SHARES_SUCCESS, notifications, unconfirmed_shares, itemsById })
   } catch (error) {
     yield put({ type: GET_SHARES_FAILURE, error })
