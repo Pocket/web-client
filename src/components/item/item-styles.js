@@ -301,22 +301,13 @@ export const itemStyles = css`
     --content-column: 2/-1;
     --content-row: initial;
 
-    // Where does the footer sit?  Stacked default
-    --footer-column: 1/-1;
-    --footer-column-template: auto 32px;
-
     --card-padding: 0.875rem;
-
     --overline-display: none;
-
     --title-size: 1rem;
     --title-margin: 0.875rem 0 0.5rem;
-
     --media-radius: 0.5rem;
     --media-margin: 0.875rem 0 0.875rem 0.875rem;
-
     --excerpt-display: none;
-
     --logo-display: none;
     --overflow-transform: translate(15%, -15%);
   }
