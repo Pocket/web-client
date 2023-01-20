@@ -93,7 +93,7 @@ export function FilterMenu({ subset, filter, tag, query }) {
     ]
   })
 
-  const path = tag ? `tags/${tag}` : subset
+  const path = tag ? `tags/${encodeURIComponent(tag)}` : subset
   const searchQuery = query ? `?query=${query}` : ''
 
   return hasFilter ? (
