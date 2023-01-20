@@ -15,7 +15,7 @@ const inputWrapper = css`
   }
 `
 
-export const TagEditModal = () => {
+export const ConfirmTagEdit = () => {
   const dispatch = useDispatch()
   const router = useRouter()
   const { t } = useTranslation()

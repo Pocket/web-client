@@ -24,7 +24,7 @@ import { TagUpsell } from 'components/tagging/tag.upsell'
 import { TypeAhead } from 'components/type-ahead/type-ahead'
 import { MAX_TAG_NAME_LENGTH } from 'common/constants'
 
-export function MutationTaggingModal() {
+export function ConfirmTagging() {
   const appRootSelector = '#__next'
   const dispatch = useDispatch()
   const { t } = useTranslation()

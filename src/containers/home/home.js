@@ -3,10 +3,8 @@ import Layout from 'layouts/main'
 import { useSelector } from 'react-redux'
 import { HomeGreeting } from 'containers/home/home-greeting'
 import { HomeRecentSaves } from 'containers/home/home-recent-saves'
-
 import { HomeContent } from './home-content'
 
-import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
 
@@ -36,8 +34,6 @@ export const Home = ({ metaData }) => {
       </SectionWrapper>
 
       <HomeContent />
-
-      <TaggingModal />
 
       <Toasts />
     </Layout>

@@ -6,7 +6,7 @@ import { cancelDeleteUserTag } from 'containers/saves/tagged/tagged-page.state'
 import { confirmDeleteUserTag } from 'containers/saves/tagged/tagged-page.state'
 import { useTranslation, Trans } from 'next-i18next'
 
-export const TagDeleteModal = () => {
+export const ConfirmTagDelete = () => {
   const dispatch = useDispatch()
   const router = useRouter()
   const { t } = useTranslation()

@@ -3,10 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { useRouter } from 'next/router'
 import { SavedItems } from 'containers/saves/saved-items/saved-items'
-import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
 
-import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
-import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { savedItemsSetSortOrder } from 'containers/saves/saved-items/saved-items.state'
 import { savedItemsSetSortBy } from 'containers/saves/saved-items/saved-items.state'
@@ -16,11 +13,13 @@ import { TagPageHeader } from 'containers/saves/tagged/tagged-header'
 import { SavesHeader } from 'components/headers/saves-header'
 import { SearchPageHeader } from 'components/headers/search-page-header'
 
-import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
+import { ConfirmTagging } from 'connectors/confirm/tagging'
 import { ConfirmFavorite } from 'connectors/confirm/favorite'
 import { ConfirmDelete } from 'connectors/confirm/delete'
 import { ConfirmArchive } from 'connectors/confirm/archive'
 import { ConfirmShare } from 'connectors/confirm/share'
+import { ConfirmTagEdit } from 'connectors/confirm/tag-edit'
+import { ConfirmTagDelete } from 'connectors/confirm/tag-delete'
 
 export const Saves = (props) => {
   const router = useRouter()
@@ -72,15 +71,14 @@ export const Saves = (props) => {
         />
         {flagsReady && shouldRender ? <SavedItems {...props} /> : null}
       </main>
-      <TaggingModal />
-      <TagDeleteModal />
-      <TagEditModal />
 
       <ConfirmFavorite />
       <ConfirmDelete />
       <ConfirmArchive />
-      <MutationTaggingModal />
+      <ConfirmTagging />
       <ConfirmShare />
+      <ConfirmTagEdit />
+      <ConfirmTagDelete />
 
       <Toasts />
     </Layout>

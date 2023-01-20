@@ -13,7 +13,7 @@ import { ContentWrapper } from 'connectors/reader/content'
 import { Recommendations } from 'connectors/reader/recommendations'
 import { Upsell } from 'connectors/reader/upsell'
 
-import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
+import { ConfirmTagging } from 'connectors/confirm/tagging'
 import { ConfirmShare } from 'connectors/confirm/share'
 import { Toasts } from 'connectors/toasts/toast-list'
 
@@ -146,7 +146,7 @@ export default function Reader() {
       <Recommendations id={id} />
       <Upsell />
 
-      <MutationTaggingModal />
+      <ConfirmTagging />
       <ConfirmShare />
       <Toasts />
     </>
