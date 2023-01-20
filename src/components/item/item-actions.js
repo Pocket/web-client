@@ -27,7 +27,7 @@ export const sharedActionStyles = css`
     line-height: 1em;
     color: var(--color-actionSecondary);
     padding: 0.25rem;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
 
     ${breakpointSmallTablet} {
       // might need to tweak this breakpoint when we apply this to the items in app
