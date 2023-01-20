@@ -34,8 +34,6 @@ export const Home = ({ metaData }) => {
       </SectionWrapper>
 
       <HomeContent />
-
-      <Toasts />
     </Layout>
   )
 }

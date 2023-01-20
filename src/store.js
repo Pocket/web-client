@@ -103,6 +103,7 @@ import { readerSagas } from 'containers/read/reader.state'
 import { itemsReducers } from 'connectors/items/items.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
 import { itemsSavedSagas } from 'connectors/items/items-saved.state'
+import { itemsTransitionsReducers } from 'connectors/items/items-transition.state'
 
 import { mutationArchiveReducers } from 'connectors/items/mutation-archive.state'
 import { mutationArchiveSagas } from 'connectors/items/mutation-archive.state'
@@ -139,7 +140,7 @@ import { pageSavedInfoReducers } from 'containers/saves/saved-items/saved-items.
 const itemReducers = {
   itemsDisplay: itemsReducers, // This is canonical item data used to display an item from anywhere (an item is an item is an item)
   itemsSaved: itemsSavedReducers, // This represents the actions the user has taken on a given item (if any)
-  itemsTransitions: { saving: [], unsaving: [] }, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
+  itemsTransitions: itemsTransitionsReducers, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
   listen: listenReducers
 }
 

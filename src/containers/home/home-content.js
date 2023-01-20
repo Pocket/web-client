@@ -18,8 +18,8 @@ import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
 import { useRouter } from 'node_modules/next/router'
 
-import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
-import { mutationDelete } from 'connectors/items/mutation-delete.state'
+import { mutationUpsertCorpusItem } from 'connectors/items/mutation-upsert.state'
+import { mutationDeleteCorpusItem } from 'connectors/items/mutation-delete.state'
 
 export const HomeContent = () => {
   const { locale } = useRouter()
@@ -176,23 +176,27 @@ function CardActions({ id }) {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector((state) => state.user.auth)
   const item = useSelector((state) => state.home.itemsById[id])
+
+  const saveItemId = useSelector((state) => state.itemsTransitions[id])
+  const saveStatus = saveItemId ? 'saved' : 'unsaved'
+
   if (!item) return null
 
-  const { corpusRecommendationId, url, saveStatus } = item
+  const { corpusRecommendationId, url } = item
   const analyticsData = { corpusRecommendationId, url }
 
   // Prep save action
   const onSave = () => {
     dispatch(sendSnowplowEvent('home.corpus.save', analyticsData))
-    dispatch(mutationUpsert(url))
+    dispatch(mutationUpsertCorpusItem(url, id))
   }
 
   const onUnSave = () => {
     dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
-    dispatch(mutationDelete(id))
+    dispatch(mutationDeleteCorpusItem(saveItemId, id))
   }
 
-  const saveAction = saveStatus === 'saved' ? onUnSave : onSave
+  const saveAction = saveItemId ? onUnSave : onSave
 
   return (
     <div className={`${itemActionStyle} actions`}>
