@@ -5,7 +5,7 @@ import { Card } from 'components/item-card/card'
 import { listStrata, listSlide } from 'components/items-layout/list-strata'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { getHomeContent } from './home.state'
-import { saveHomeItem, unSaveHomeItem } from 'containers/home/home.state'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeHeader } from 'components/headers/home-header'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
@@ -18,8 +18,11 @@ import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
 import { useRouter } from 'node_modules/next/router'
 
+import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
+import { mutationDelete } from 'connectors/items/mutation-delete.state'
+
 export const HomeContent = () => {
-  const {locale} = useRouter()
+  const { locale } = useRouter()
   const dispatch = useDispatch()
   const slates = useSelector((state) => state.home.slates)
 
@@ -29,7 +32,7 @@ export const HomeContent = () => {
   const localeToUse = localizedHome ? locale : 'en'
 
   useEffect(() => {
-    if(!flagsReady) return
+    if (!flagsReady) return
     dispatch(getHomeContent(localeToUse))
   }, [dispatch, localeToUse, flagsReady])
 
@@ -61,8 +64,6 @@ function Slate({ slateId, position }) {
 
   const recCount = slates.indexOf(slateId) === 0 || showHits ? 6 : 3
   const recsToShow = recommendations.slice(0, recCount)
-
-
 
   const slateLink = showTopicSelector ? { text: 'Update topics', url: false } : moreLink
 
@@ -183,12 +184,12 @@ function CardActions({ id }) {
   // Prep save action
   const onSave = () => {
     dispatch(sendSnowplowEvent('home.corpus.save', analyticsData))
-    dispatch(saveHomeItem(id, url))
+    dispatch(mutationUpsert(url))
   }
 
   const onUnSave = () => {
     dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
-    dispatch(unSaveHomeItem(id, url))
+    dispatch(mutationDelete(id))
   }
 
   const saveAction = saveStatus === 'saved' ? onUnSave : onSave
