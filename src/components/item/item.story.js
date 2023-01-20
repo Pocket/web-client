@@ -115,8 +115,9 @@ export const Item = (args) => {
 
   if (!item) return <div>No card to display</div>
 
-  const { itemId, url } = item
   const {
+    itemId,
+    url,
     tags,
     title,
     authors,
@@ -154,7 +155,7 @@ export const Item = (args) => {
       isSyndicated={isSyndicated}
       isInternalItem={isInternalItem}
       clamp={clamp}
-      url={url}
+      openUrl={url}
       position={0}
       fromPartner={fromPartner}
       useMarkdown={true}

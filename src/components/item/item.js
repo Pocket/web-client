@@ -25,7 +25,7 @@ export const Item = (props) => {
     isSyndicated,
     isInternalItem,
     saveStatus,
-    url,
+    openUrl,
     fromPartner,
     topicName,
     tags,
@@ -59,24 +59,17 @@ export const Item = (props) => {
 
   return (
     <article style={style} className={itemClassName} key={itemId} data-cy="article-card">
-      <Link href={url}>
-        <a
-          onClick={onOpen}
-          className="media-block"
-          data-cy="content-link"
-          target={linkTarget}
-          rel={linkRel}
-          aria-label={`Open item: ${title}`}>
-          <CardMedia
-            topicName={topicName}
-            image_src={itemImage}
-            title={title}
-            id={itemId}
-            openInNewTab={openInNewTab}
-          />
-        </a>
-      </Link>
-      <Link href={url}>
+      <span className="media-block">
+        <CardMedia
+          topicName={topicName}
+          image_src={itemImage}
+          title={title}
+          id={itemId}
+          openInNewTab={openInNewTab}
+          openUrl={openUrl}
+        />
+      </span>
+      <Link href={openUrl}>
         <a
           onClick={onOpen}
           className="content-block"
@@ -102,7 +95,7 @@ export const Item = (props) => {
           <Publisher
             publisherLogo={publisherLogo}
             publisher={publisher}
-            externalUrl={url}
+            externalUrl={openUrl}
             onOpenOriginalUrl={onOpenOriginalUrl}
             isSyndicated={isSyndicated}
           />
