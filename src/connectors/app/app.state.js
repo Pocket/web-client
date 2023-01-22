@@ -24,7 +24,6 @@ import { APP_UPDATE_RELEASE } from 'actions'
 
 import { SNOWPLOW_SEND_EVENT } from 'actions'
 
-import { ITEMS_BULK_CLEAR } from 'actions'
 import { MUTATION_BULK_CLEAR } from 'actions'
 
 import { HYDRATE } from 'actions'
@@ -150,7 +149,6 @@ const getSortOptions = (state) => state.app.sortOptions
 function* appModeSwitch(action) {
   const { mode } = action
   if (mode !== 'bulk') {
-    yield put({ type: ITEMS_BULK_CLEAR })
     yield put({ type: MUTATION_BULK_CLEAR })
   }
 }
