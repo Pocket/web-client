@@ -33,6 +33,7 @@ export const ConfirmTagEdit = () => {
   const appRootSelector = '#__next'
 
   useEffect(() => {
+    if (tagToEdit === false) return
     setValue(tagToEdit)
   }, [tagToEdit])
 
@@ -62,7 +63,7 @@ export const ConfirmTagEdit = () => {
             want to proceed?
           </Trans>
         </em>
-        <Button type="submit" data-cy="edit-tag-confirm" onClick={confirmTagEdit}>
+        <Button disabled={!value.trim()} type="submit" data-cy="edit-tag-confirm" onClick={confirmTagEdit}>
           <Trans i18nKey="confirm:confirm">Confirm</Trans>
         </Button>
       </ModalFooter>
