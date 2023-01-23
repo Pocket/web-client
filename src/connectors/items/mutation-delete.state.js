@@ -17,6 +17,7 @@ import { MUTATION_BULK_CONFIRM } from 'actions'
  --------------------------------------------------------------- */
 export const mutationDelete = (itemId) => ({ type: MUTATION_DELETE, itemId })
 export const mutationUnDelete = (itemIds, itemPosition, previousStatus) => ({ type: MUTATION_UNDELETE, itemIds, itemPosition, previousStatus}) //prettier-ignore
+export const mutationDeleteCorpusItem = (itemId, corpusId) => ({  type: MUTATION_DELETE, itemId, corpusId }) //prettier-ignore
 export const mutationBulkDelete = (itemIds) => ({ type: MUTATION_BULK_DELETE, itemIds })
 
 /** REDUCERS
@@ -56,13 +57,14 @@ const getDeletedItemStatus = (state, id) => state.itemsSaved[id]?.status
  --------------------------------------------------------------- */
 
 function* savedItemDelete(action) {
-  const { itemId } = action
+  const { itemId, corpusId } = action
   const deletedItemPosition = yield select(getDeletedItemPosition, itemId)
   const previousStatus = yield select(getDeletedItemStatus, itemId)
   const deletedId = yield call(itemDelete, itemId)
   return yield put({
     type: MUTATION_DELETE_SUCCESS,
     ids: [deletedId],
+    corpusId,
     deletedItemPosition,
     previousStatus
   })

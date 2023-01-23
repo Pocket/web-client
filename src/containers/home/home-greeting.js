@@ -14,7 +14,7 @@ const homeCollections = css`
 
 export const HomeGreeting = () => {
   const { t } = useTranslation()
-  const recentSaves = useSelector((state) => state.home.recentSaves)
+  const recentSaves = useSelector((state) => state.pageSavedIds)
 
   const firstName = useSelector((state) => state.userProfile.first_name)
   const timeOfDay = getTimeOfDay()
