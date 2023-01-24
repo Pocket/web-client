@@ -26,6 +26,7 @@ export const CACHE_KEY_HOME_STORED_TOPICS = 'pocket-home-stored-topics'
 // RELEASE DATES
 export const RELEASE_NOTES_VERSION = 'jun-25-2021'
 export const START_DATE_FOR_HOME = '2021-08-09 00:00:00'
+export const START_DATE_FOR_GERMAN_HOME = '2023-01-26 00:00:00'
 export const START_DATE_FOR_ONBOARDING = '2021-11-28 00:00:00'
 
 // THIRD PARTY
