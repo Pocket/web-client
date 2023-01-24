@@ -1,3 +1,15 @@
+# [1.72.0](https://github.com/Pocket/web-client/compare/v1.71.3...v1.72.0) (2023-01-24)
+
+
+### Bug Fixes
+
+* **home:** omit topics on specific locales ([5d8e10f](https://github.com/Pocket/web-client/commit/5d8e10ffc28b3fa1a6bc0a07386007ed76910ae7))
+
+
+### Features
+
+* **waypoint:** redirect new german users to home ([f46284d](https://github.com/Pocket/web-client/commit/f46284db4301b7dd82a4788ae8570ca1a6dce446))
+
 ## [1.71.3](https://github.com/Pocket/web-client/compare/v1.71.2...v1.71.3) (2023-01-23)
 
 

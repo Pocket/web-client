@@ -30,6 +30,7 @@ export const HomeContent = () => {
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const localizedHome = featureFlagActive({ flag: 'home.locale', featureState })
   const localeToUse = localizedHome ? locale : 'en'
+  const hideTopics = ['de', 'de-DE'].includes(locale)
 
   useEffect(() => {
     if (!flagsReady) return
@@ -41,12 +42,12 @@ export const HomeContent = () => {
       {slates.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} position={index} />
       ))}
-      <ExploreMoreTopics />
+      {hideTopics ? null : <ExploreMoreTopics />}
     </>
   )
 }
 
-function Slate({ slateId, position }) {
+function Slate({ slateId }) {
   const dispatch = useDispatch()
   const slates = useSelector((state) => state.home.slates)
   const slate = useSelector((state) => state.home.slatesById[slateId])
@@ -128,7 +129,7 @@ function ItemCard({ corpusId }) {
 
   if (!item) return null
 
-  const { title, imageUrl, url, excerpt, publisher, topic, authors } = item
+  const { title, imageUrl, url, excerpt, publisher, topic } = item
 
   const analyticsData = {
     corpusRecommendationId: corpusId,
