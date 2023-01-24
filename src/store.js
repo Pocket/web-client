@@ -59,20 +59,6 @@ import { syndicatedArticleSagas } from 'containers/syndicated-article/syndicated
 import { recitReducers } from 'connectors/recit/recit.state'
 import { recitSagas } from 'connectors/recit/recit.state'
 
-import { savesItemsReducers } from 'connectors/items-by-id/saves/items.state'
-import { savesItemsSagas } from 'connectors/items-by-id/saves/items.state'
-
-import { itemBulkReducers } from 'connectors/items-by-id/saves/items.bulk'
-import { itemDeleteReducers } from 'connectors/items-by-id/saves/items.delete'
-import { itemFavoriteReducers } from 'connectors/items-by-id/saves/items.favorite'
-import { itemArchiveReducers } from 'connectors/items-by-id/saves/items.archive'
-import { itemTagReducers } from 'connectors/items-by-id/saves/items.tag'
-import { itemShareReducers } from 'connectors/items-by-id/saves/items.share'
-import { itemShareSagas } from 'connectors/items-by-id/saves/items.share'
-
-import { itemReportReducers } from 'connectors/items-by-id/discover/items.report'
-import { itemReportSagas } from 'connectors/items-by-id/discover/items.report'
-
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
 
@@ -93,9 +79,6 @@ import { shortcutSagas } from 'connectors/shortcuts/shortcuts.state.js'
 import { onboardingReducers } from 'connectors/onboarding/onboarding.state'
 import { onboardingSagas } from 'connectors/onboarding/onboarding.state'
 
-import { shareModalReducers } from 'connectors/share-modal/share-modal.state'
-import { shareModalSagas } from 'connectors/share-modal/share-modal.state'
-
 import { listenReducers } from 'connectors/listen/listen.state'
 import { listenSagas } from 'connectors/listen/listen.state'
 
@@ -109,6 +92,7 @@ import { readerSagas } from 'containers/read/reader.state'
 import { itemsReducers } from 'connectors/items/items.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
 import { itemsSavedSagas } from 'connectors/items/items-saved.state'
+import { itemsTransitionsReducers } from 'connectors/items/items-transition.state'
 
 import { mutationArchiveReducers } from 'connectors/items/mutation-archive.state'
 import { mutationArchiveSagas } from 'connectors/items/mutation-archive.state'
@@ -130,40 +114,49 @@ import { mutationHighlightSagas } from 'connectors/items/mutation-highlight.stat
 import { mutationBulkReducers } from 'connectors/items/mutations-bulk.state'
 import { mutationBulkSagas } from 'connectors/items/mutations-bulk.state'
 
-import { listSavedReducers } from 'containers/saves/saved-items/saved-items.state'
-import { listSavedSagas } from 'containers/saves/saved-items/saved-items.state'
-import { listSavedPageInfoReducers } from 'containers/saves/saved-items/saved-items.state'
+import { mutationShareReducers } from 'connectors/items/mutation-share.state'
+import { mutationShareSagas } from 'connectors/items/mutation-share.state'
+
+import { mutationReportReducers } from 'connectors/items/mutation-report.state'
+import { mutationReportSagas } from 'connectors/items/mutation-report.state'
+
+import { pageSavedIdsReducers } from 'containers/saves/saved-items/saved-items.state'
+import { pageSavedIdsSagas } from 'containers/saves/saved-items/saved-items.state'
+import { pageSavedInfoReducers } from 'containers/saves/saved-items/saved-items.state'
 
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
-  items: itemsReducers,
-  itemsSaved: itemsSavedReducers,
+  itemsDisplay: itemsReducers, // This is canonical item data used to display an item from anywhere (an item is an item is an item)
+  itemsSaved: itemsSavedReducers, // This represents the actions the user has taken on a given item (if any)
+  itemsTransitions: itemsTransitionsReducers, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
+  listen: listenReducers
+}
+
+const itemMutations = {
   mutationBulk: mutationBulkReducers,
   mutationFavorite: mutationFavoriteReducers,
   mutationArchive: mutationArchiveReducers,
   mutationDelete: mutationDeleteReducers,
   mutationTagging: mutationTaggingReducers,
   mutationHighlight: mutationHighlightReducers,
-  listen: listenReducers
+  mutationShare: mutationShareReducers,
+  mutationReport: mutationReportReducers
 }
 
-const listReducers = {
-  listHome: [],
-  listSaved: listSavedReducers,
-  listSavedPageInfo: listSavedPageInfoReducers,
-  listDiscover: [],
-  listCollection: [],
-  listCollectionStories: []
-}
-
-const itemActionReducers = {
-  itemsToFavorite: itemFavoriteReducers,
-  itemsToDelete: itemDeleteReducers,
-  itemsToArchive: itemArchiveReducers,
-  itemsToTag: itemTagReducers,
-  itemToReport: itemReportReducers,
-  itemsToShare: itemShareReducers
+const pageReducers = {
+  pageHomeIds: [],
+  pageHomeInfo: [],
+  pageSavedIds: pageSavedIdsReducers,
+  pageSavedInfo: pageSavedInfoReducers,
+  pageDiscoverIds: [],
+  pageDiscoverInfo: [],
+  pageDiscoverTopicIds: [],
+  pageDiscoverTopicInfo: [],
+  pageCollectionIds: [],
+  pageCollectionInfo: [],
+  pageStoriesIds: [],
+  pageStoriesInfo: []
 }
 
 const discoverReducers = {
@@ -180,8 +173,6 @@ const collectionReducer = {
 }
 
 const libraryReducers = {
-  savesItemsById: savesItemsReducers,
-  bulkEdit: itemBulkReducers,
   userTags: userTagsReducers,
   userMessages: userMessageReducers,
   userSearch: userSearchReducers,
@@ -211,7 +202,6 @@ const globalReducers = {
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
   onboarding: onboardingReducers, // Onboarding
-  share: shareModalReducers, // Share
   braze: brazeReducers // Braze
 }
 
@@ -230,8 +220,8 @@ export const rootReducer = combineReducers({
   ...userAccountReducers,
   home: homeReducers,
   ...itemReducers,
-  ...listReducers,
-  ...itemActionReducers
+  ...itemMutations,
+  ...pageReducers
 })
 
 /* SAGAS
@@ -254,9 +244,6 @@ function* rootSaga() {
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
     ...recitSagas,
-    ...savesItemsSagas,
-    ...itemShareSagas,
-    ...itemReportSagas,
     ...readerSettingsSagas,
     ...readerSagas, //graph
     ...homeSagas,
@@ -267,9 +254,8 @@ function* rootSaga() {
     ...shortcutSagas,
     ...onboardingSagas,
     ...brazeSagas,
-    ...listSavedSagas,
+    ...pageSavedIdsSagas,
     ...itemsSavedSagas,
-    ...shareModalSagas,
     ...mutationArchiveSagas,
     ...mutationDeleteSagas,
     ...mutationFavoriteSagas,
@@ -277,6 +263,8 @@ function* rootSaga() {
     ...mutationBulkSagas,
     ...mutationTaggingSagas,
     ...mutationHighlightSagas,
+    ...mutationShareSagas,
+    ...mutationReportSagas,
     ...listenSagas
   ])
 }

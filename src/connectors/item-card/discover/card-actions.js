@@ -7,7 +7,7 @@ import { saveDiscoverItem } from 'containers/discover/discover.state'
 import { useTranslation } from 'next-i18next'
 
 import { itemActionStyle } from 'components/item-actions/base'
-import { itemReportAction } from 'connectors/items-by-id/discover/items.report'
+import { itemReportAction } from 'connectors/items/mutation-report.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 

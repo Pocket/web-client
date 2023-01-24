@@ -13,9 +13,8 @@ import { ContentWrapper } from 'connectors/reader/content'
 import { Recommendations } from 'connectors/reader/recommendations'
 import { Upsell } from 'connectors/reader/upsell'
 
-import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
-import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
-import { ShareModalConnector } from 'connectors/share-modal/share-modal'
+import { ConfirmTagging } from 'connectors/confirm/tagging'
+import { ConfirmShare } from 'connectors/confirm/share'
 import { Toasts } from 'connectors/toasts/toast-list'
 
 import { GoogleFonts, FONT_TYPES } from 'components/fonts/fonts'
@@ -82,7 +81,7 @@ export default function Reader() {
   const router = useRouter()
   const { slug: id } = router.query
 
-  const item = useSelector((state) => state.items[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
   const status = useSelector((state) => state.itemsSaved[id]?.status)
 
   // Is deleted ?
@@ -147,9 +146,8 @@ export default function Reader() {
       <Recommendations id={id} />
       <Upsell />
 
-      <DeleteModal />
-      <MutationTaggingModal />
-      <ShareModalConnector />
+      <ConfirmTagging />
+      <ConfirmShare />
       <Toasts />
     </>
   )

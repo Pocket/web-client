@@ -31,14 +31,14 @@ const loadMoreRefStyle = css`
 export function LoadMore({ loadMore }) {
   const { ref, inView } = useInView()
 
-  const hasNextPage = useSelector((state) => state.listSavedPageInfo.hasNextPage)
-  const loading = useSelector((state) => state.listSavedPageInfo.loading)
-  const error = useSelector((state) => state.listSavedPageInfo.error)
-  const listSaved = useSelector((state) => state.listSaved)
+  const hasNextPage = useSelector((state) => state.pageSavedInfo.hasNextPage)
+  const loading = useSelector((state) => state.pageSavedInfo.loading)
+  const error = useSelector((state) => state.pageSavedInfo.error)
+  const pageSavedIds = useSelector((state) => state.pageSavedIds)
 
   const shouldLoadMore = hasNextPage && !loading
 
-  const loadMoreMessage = listSaved.length ? 'Loading more items' : ''
+  const loadMoreMessage = pageSavedIds.length ? 'Loading more items' : ''
   useEffect(() => {
     if (!inView) return
 

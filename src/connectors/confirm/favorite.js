@@ -6,60 +6,59 @@ import { mutationBulkConfirm, mutationBulkCancel } from 'connectors/items/mutati
 import { BatchProcessing } from 'components/processing/processing'
 import { useTranslation, Trans } from 'next-i18next'
 
-export const BulkArchiveModal = () => {
+export const ConfirmFavorite = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
   // Handle delete actions with confirmation
-  const itemsToArchive = useSelector((state) => state.mutationArchive.itemIds)
+  const itemsToFavorite = useSelector((state) => state.mutationFavorite.itemIds)
   const batchTotal = useSelector((state) => state.mutationBulk.batchTotal)
   const batchCount = useSelector((state) => state.mutationBulk.batchCount)
   const batchStart = useSelector((state) => state.mutationBulk.batchStart)
-  const batchStatus = useSelector((state) => state.mutationBulk.archiveAction)
+  const batchFavorite = useSelector((state) => state.mutationBulk.favoriteAction)
 
-  const showModal = itemsToArchive.length > 0
-  const archiveCopy =
-    batchStatus === 'archive' ? (
-      <Trans i18nKey="confirm:archive-items-copy">
-        Are you sure you want to archive these items? This cannot be undone.
+  const showModal = itemsToFavorite.length > 0
+  const favoriteCopy =
+    batchFavorite === 'favorite' ? (
+      <Trans i18nKey="confirm:favorite-copy">
+        Are you sure you want to favorite these items? This cannot be undone.
       </Trans>
     ) : (
-      <Trans i18nKey="confirm:add-items-copy">
-        Are you sure you want to add these items? This cannot be undone.
+      <Trans i18nKey="confirm:un-favorite-copy">
+        Are you sure you want to un-favorite these items? This cannot be undone.
       </Trans>
     )
-
-  const archiveTitle =
-    batchStatus === 'archive'
-      ? t('confirm:archive-items', 'Archive Items')
-      : t('confirm:add-items', 'Add Items')
-  const confirmArchive = () => dispatch(mutationBulkConfirm())
-  const cancelArchive = () => dispatch(mutationBulkCancel())
+  const favoriteTitle =
+    batchFavorite === 'favorite'
+      ? t('confirm:favorite-items', 'Favorite Items')
+      : t('confirm:un-favorite-items', 'Un-Favorite Items')
+  const confirmFavorite = () => dispatch(mutationBulkConfirm())
+  const cancelFavorite = () => dispatch(mutationBulkCancel())
 
   const appRootSelector = '#__next'
 
   return (
     <Modal
-      title={archiveTitle}
+      title={favoriteTitle}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={archiveTitle}
-      handleClose={cancelArchive}>
+      screenReaderLabel={favoriteTitle}
+      handleClose={cancelFavorite}>
       <ModalBody>
         {batchStart ? (
           <BatchProcessing batchTotal={batchTotal} batchCount={batchCount} />
         ) : (
-          <p>{archiveCopy}</p>
+          <p>{favoriteCopy}</p>
         )}
       </ModalBody>
       {batchStart ? null : (
         <ModalFooter>
           <Button
             type="submit"
-            data-cy="archive-modal-confirm"
-            onClick={confirmArchive}
+            data-cy="favorite-modal-confirm"
+            onClick={confirmFavorite}
             autoFocus={true}>
-            {archiveTitle}
+            {favoriteTitle}
           </Button>
         </ModalFooter>
       )}

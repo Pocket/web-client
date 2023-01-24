@@ -2,23 +2,23 @@ import { useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import { HomeHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'
-import { getRecentSaves } from 'containers/home/home.state'
-import { RecentCard } from 'connectors/item-card/home/card-recent'
+import { getItemsUnread } from 'containers/saves/saved-items/saved-items.state'
 import { FlexList } from 'components/items-layout/list-flex'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { Card } from 'components/item-card/card'
 
 export const HomeRecentSaves = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const recentSaves = useSelector((state) => state.home.recentSaves)
-  const count = recentSaves.length
+  const recentSaves = useSelector((state) => state.pageSavedIds)
+  const count = recentSaves?.length
   const showExcerpt = count < 2
 
   const onLinkClick = () => dispatch(sendSnowplowEvent('home.recent.view-saves'))
 
   // Initialize data
   useEffect(() => {
-    dispatch(getRecentSaves())
+    dispatch(getItemsUnread())
   }, [dispatch])
 
   return recentSaves?.length > 0 ? (
@@ -42,5 +42,72 @@ export const HomeRecentSaves = () => {
         dataCy="recent-saves"
       />
     </>
+  ) : null
+}
+
+export const RecentCard = ({
+  id,
+  position,
+  className,
+  cardShape = 'block',
+  showMedia = true,
+  showExcerpt = false
+}) => {
+  const dispatch = useDispatch()
+
+  // Get data from state
+  const item = useSelector((state) => state.itemsDisplay[id])
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
+
+  if (!item) return null
+
+  const { itemId, openExternal, readUrl, externalUrl } = item
+  const openUrl = readUrl && !openExternal ? readUrl : externalUrl
+  const analyticsData = {
+    id,
+    position,
+    destination: !openExternal ? 'internal' : 'external',
+    ...item?.analyticsData
+  }
+
+  /**
+   * ITEM TRACKING
+   * ----------------------------------------------------------------
+   */
+  const onOpenOriginalUrl = () => {
+    const data = { ...analyticsData, destination: 'external' }
+    dispatch(sendSnowplowEvent('home.recent.view-original', data))
+  }
+  const onOpen = () => dispatch(sendSnowplowEvent('home.recent.open', analyticsData))
+  const onImpression = () => dispatch(sendSnowplowEvent('home.recent.impression', analyticsData))
+  const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
+
+  const itemImage = item?.noImage ? '' : item?.thumbnail
+  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } = item //prettier-ignore
+
+  return item ? (
+    <Card
+      itemId={itemId}
+      externalUrl={externalUrl}
+      tags={tags}
+      title={title}
+      itemImage={itemImage}
+      publisher={publisher}
+      excerpt={excerpt}
+      timeToRead={timeToRead}
+      isSyndicated={isSyndicated}
+      isInternalItem={isInternalItem}
+      fromPartner={fromPartner}
+      position={position}
+      className={className}
+      cardShape={cardShape}
+      showExcerpt={showExcerpt}
+      showMedia={showMedia}
+      openUrl={openUrl}
+      // Tracking
+      onItemInView={onItemInView}
+      onOpen={onOpen}
+      onOpenOriginalUrl={onOpenOriginalUrl}
+    />
   ) : null
 }

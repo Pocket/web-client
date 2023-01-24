@@ -17,7 +17,7 @@ export const itemReportCancel = () => ({ type: ITEMS_REPORT_CANCEL })
  --------------------------------------------------------------- */
 const initialState = false
 
-export const itemReportReducers = (state = initialState, action) => {
+export const mutationReportReducers = (state = initialState, action) => {
   switch (action.type) {
     case ITEMS_REPORT_REQUEST: {
       const { id } = action
@@ -36,7 +36,7 @@ export const itemReportReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-export const itemReportSagas = [takeLatest(ITEMS_REPORT_REQUEST, itemsReport)]
+export const mutationReportSagas = [takeLatest(ITEMS_REPORT_REQUEST, itemsReport)]
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

@@ -1,3 +1,27 @@
+## [1.71.3](https://github.com/Pocket/web-client/compare/v1.71.2...v1.71.3) (2023-01-23)
+
+
+### Bug Fixes
+
+* **aws:** removing old aws crud ([3cf8cd7](https://github.com/Pocket/web-client/commit/3cf8cd729d40c2f58a48508a933d6873cbc5f52f))
+
+## [1.71.2](https://github.com/Pocket/web-client/compare/v1.71.1...v1.71.2) (2023-01-23)
+
+
+### Bug Fixes
+
+* **global nav:** remove flags for graph ([4b31a83](https://github.com/Pocket/web-client/commit/4b31a83d738d2a3715fdf30347cb2eb7ebffbfce))
+* **home:** remove home specific save ([cacbec0](https://github.com/Pocket/web-client/commit/cacbec0f9d1abe5e1ce53f79e5d9962babac062a))
+* **home:** use common item state ([d048c5a](https://github.com/Pocket/web-client/commit/d048c5af30cd94c649cf67d0401a5216f41f4edd))
+* **home:** use itemTransition for save state ([632ba35](https://github.com/Pocket/web-client/commit/632ba35eb5f88f62e81f1c5bff500591cc688934))
+
+## [1.71.1](https://github.com/Pocket/web-client/compare/v1.71.0...v1.71.1) (2023-01-19)
+
+
+### Bug Fixes
+
+* **tagging:** clear input upon selecting typeahead item ([56a6a7d](https://github.com/Pocket/web-client/commit/56a6a7d99d32f5e59013bb7ee38399d869d30053))
+
 # [1.71.0](https://github.com/Pocket/web-client/compare/v1.70.0...v1.71.0) (2023-01-18)
 
 

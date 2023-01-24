@@ -1,21 +1,21 @@
 import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
-import { itemsArchiveConfirm } from 'connectors/items-by-id/saves/items.archive'
-import { itemsArchiveCancel } from 'connectors/items-by-id/saves/items.archive'
+import { mutationBulkConfirm, mutationBulkCancel } from 'connectors/items/mutations-bulk.state'
+
 import { BatchProcessing } from 'components/processing/processing'
 import { useTranslation, Trans } from 'next-i18next'
 
-export const ArchiveModal = () => {
+export const ConfirmArchive = () => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
   // Handle delete actions with confirmation
-  const itemsToArchive = useSelector((state) => state.itemsToArchive)
-  const batchTotal = useSelector((state) => state.bulkEdit.batchTotal)
-  const batchCount = useSelector((state) => state.bulkEdit.batchCount)
-  const batchStart = useSelector((state) => state.bulkEdit.batchStart)
-  const batchStatus = useSelector((state) => state.bulkEdit.batchStatus)
+  const itemsToArchive = useSelector((state) => state.mutationArchive.itemIds)
+  const batchTotal = useSelector((state) => state.mutationBulk.batchTotal)
+  const batchCount = useSelector((state) => state.mutationBulk.batchCount)
+  const batchStart = useSelector((state) => state.mutationBulk.batchStart)
+  const batchStatus = useSelector((state) => state.mutationBulk.archiveAction)
 
   const showModal = itemsToArchive.length > 0
   const archiveCopy =
@@ -33,8 +33,8 @@ export const ArchiveModal = () => {
     batchStatus === 'archive'
       ? t('confirm:archive-items', 'Archive Items')
       : t('confirm:add-items', 'Add Items')
-  const confirmArchive = () => dispatch(itemsArchiveConfirm())
-  const cancelArchive = () => dispatch(itemsArchiveCancel())
+  const confirmArchive = () => dispatch(mutationBulkConfirm())
+  const cancelArchive = () => dispatch(mutationBulkCancel())
 
   const appRootSelector = '#__next'
 

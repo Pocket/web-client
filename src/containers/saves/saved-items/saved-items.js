@@ -78,8 +78,8 @@ export function filterSelector(subset, filter) {
 export const SavedItems = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const sortOrder = useSelector((state) => state.listSavedPageInfo.sortOrder)
-  const sortBy = useSelector((state) => state.listSavedPageInfo.sortBy)
+  const sortOrder = useSelector((state) => state.pageSavedInfo.sortOrder)
+  const sortBy = useSelector((state) => state.pageSavedInfo.sortBy)
 
   const { subset: sub = 'active', filter: propFilter } = props
   const { tag, filter: queryFilter, query: searchTerm } = router.query

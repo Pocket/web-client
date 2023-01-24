@@ -10,6 +10,7 @@ import { ITEMS_UPSERT_SUCCESS } from 'actions'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const mutationUpsert = (url, filters, sort, isUnArchive) => ({ type: MUTATION_UPSERT, url, filters, sort, isUnArchive}) //prettier-ignore
+export const mutationUpsertCorpusItem = (url, corpusId) => ({ type: MUTATION_UPSERT, url, corpusId }) //prettier-ignore
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
@@ -19,7 +20,7 @@ export const mutationUpsertSagas = [takeEvery(MUTATION_UPSERT, savedItemUpsert)]
  --------------------------------------------------------------- */
 
 function* savedItemUpsert(action) {
-  const { url, sort, isUnArchive, type } = action
+  const { url, sort, isUnArchive, type, corpusId } = action
   const upsertResponse = yield call(itemUpsert, url)
 
   if (!upsertResponse) return // Do better here
@@ -29,7 +30,14 @@ function* savedItemUpsert(action) {
   const savedItemIds = [itemId]
   yield put({ type: ITEMS_SUCCESS, itemsById: { [itemId]: item } })
 
-  if (isUnArchive) return yield put({ type: MUTATION_SUCCESS, nodes: [node],  actionType: type, count: 1})
+  if (isUnArchive) return yield put({ type: MUTATION_SUCCESS, nodes: [node], actionType: type, count: 1 }) //prettier-ignore
 
-  yield put({ type: ITEMS_UPSERT_SUCCESS, nodes: { [itemId]: node }, savedItemIds, sort })
+  yield put({
+    type: ITEMS_UPSERT_SUCCESS,
+    nodes: { [itemId]: node },
+    savedItemIds,
+    sort,
+    corpusId,
+    itemId
+  })
 }

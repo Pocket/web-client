@@ -23,7 +23,7 @@ import { mutationUnArchive } from 'connectors/items/mutation-archive.state'
 import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
 import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
 
-import { shareAction } from 'connectors/share-modal/share-modal.state'
+import { shareAction } from 'connectors/items/mutation-share.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -33,8 +33,8 @@ export function ActionsSaves({ id, position }) {
 
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const itemSaved = useSelector((state) => state.itemsSaved[id])
-  const { filters, sort } = useSelector((state) => state.listSavedPageInfo)
-  const item = useSelector((state) => state.items[id])
+  const { filters, sort } = useSelector((state) => state.pageSavedInfo)
+  const item = useSelector((state) => state.itemsDisplay[id])
 
   if (!itemSaved || !item) return null
   const { isFavorite, isArchived, tags} = itemSaved //prettier-ignore

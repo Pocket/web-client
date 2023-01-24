@@ -3,13 +3,13 @@ import { Sidebar } from 'components/reader/sidebar'
 import { cx } from 'linaria'
 import { toggleSidebar } from 'containers/read/reader.state'
 import { mutationHighlightDelete } from 'connectors/items/mutation-highlight.state'
-import { shareAction } from 'connectors/share-modal/share-modal.state'
+import { shareAction } from 'connectors/items/mutation-share.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const SidebarWrapper = ({ id }) => {
   const dispatch = useDispatch()
 
-  const item = useSelector((state) => state.items[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
   const savedData = useSelector((state) => state.itemsSaved[id])
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const sideBarOpen = useSelector((state) => state.reader.sideBarOpen)

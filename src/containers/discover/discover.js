@@ -16,7 +16,7 @@ import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
-import { ReportFeedbackModal } from 'connectors/confirm-report/confirm-report'
+import { ConfirmReport } from 'connectors/confirm/report'
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { CallOutStartLibraryExplore } from 'components/call-out/call-out-start-library'
@@ -106,7 +106,7 @@ export default function Discover({ locale }) {
         <CardTopicsNav topics={topics} className="no-border" track={topicClickBottom} />
       ) : null}
 
-      <ReportFeedbackModal />
+      <ConfirmReport />
       <Toasts />
     </Layout>
   ) : (

@@ -6,7 +6,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 export const ContentWrapper = ({ id }) => {
   const dispatch = useDispatch()
 
-  const item = useSelector((state) => state.items[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
 
   const { article, images, videos } = item
 

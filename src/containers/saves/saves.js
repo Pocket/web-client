@@ -3,13 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { useRouter } from 'next/router'
 import { SavedItems } from 'containers/saves/saved-items/saved-items'
-import { TaggingModal } from 'connectors/confirm-tags/confirm-tags'
-import { DeleteModal } from 'connectors/confirm-delete/confirm-delete'
-import { ShareModal } from 'connectors/confirm-share/confirm-share'
-import { ArchiveModal } from 'connectors/confirm-archive/confirm-archive'
-import { FavoriteModal } from 'connectors/confirm-favorite/confirm-favorite'
-import { TagDeleteModal } from 'connectors/confirm-tags/confirm-tag-delete'
-import { TagEditModal } from 'connectors/confirm-tags/confirm-tag-edit'
+
 import { Toasts } from 'connectors/toasts/toast-list'
 import { savedItemsSetSortOrder } from 'containers/saves/saved-items/saved-items.state'
 import { savedItemsSetSortBy } from 'containers/saves/saved-items/saved-items.state'
@@ -19,11 +13,13 @@ import { TagPageHeader } from 'containers/saves/tagged/tagged-header'
 import { SavesHeader } from 'components/headers/saves-header'
 import { SearchPageHeader } from 'components/headers/search-page-header'
 
-import { MutationTaggingModal } from 'connectors/confirm-tags/confirm-tag-mutation'
-import { BulkFavoriteModal } from 'connectors/confirm-favorite/confirm-bulk-favorite'
-import { BulkDeleteModal } from 'connectors/confirm-delete/confirm-bulk-delete'
-import { BulkArchiveModal } from 'connectors/confirm-archive/confirm-bulk-archive'
-import { ShareModalConnector } from 'connectors/share-modal/share-modal'
+import { ConfirmTagging } from 'connectors/confirm/tagging'
+import { ConfirmFavorite } from 'connectors/confirm/favorite'
+import { ConfirmDelete } from 'connectors/confirm/delete'
+import { ConfirmArchive } from 'connectors/confirm/archive'
+import { ConfirmShare } from 'connectors/confirm/share'
+import { ConfirmTagEdit } from 'connectors/confirm/tag-edit'
+import { ConfirmTagDelete } from 'connectors/confirm/tag-delete'
 
 export const Saves = (props) => {
   const router = useRouter()
@@ -38,10 +34,10 @@ export const Saves = (props) => {
   // Selectors
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
-  const sortOrder = useSelector((state) => state.listSavedPageInfo.sortOrder)
+  const sortOrder = useSelector((state) => state.pageSavedInfo.sortOrder)
   const featureState = useSelector((state) => state.features)
   const isPremium = useSelector((state) => state.user.premium_status === '1')
-  const total = useSelector((state) => state.listSavedPageInfo.totalCount)
+  const total = useSelector((state) => state.pageSavedInfo.totalCount)
 
   // Derived Values
   const shouldRender = userStatus !== 'pending'
@@ -75,19 +71,14 @@ export const Saves = (props) => {
         />
         {flagsReady && shouldRender ? <SavedItems {...props} /> : null}
       </main>
-      <DeleteModal />
-      <TaggingModal />
-      <ShareModal />
-      <ArchiveModal />
-      <FavoriteModal />
-      <TagDeleteModal />
-      <TagEditModal />
 
-      <BulkFavoriteModal />
-      <BulkDeleteModal />
-      <BulkArchiveModal />
-      <MutationTaggingModal />
-      <ShareModalConnector />
+      <ConfirmFavorite />
+      <ConfirmDelete />
+      <ConfirmArchive />
+      <ConfirmTagging />
+      <ConfirmShare />
+      <ConfirmTagEdit />
+      <ConfirmTagDelete />
 
       <Toasts />
     </Layout>
