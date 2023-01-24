@@ -5,9 +5,7 @@ import { HomeGreeting } from 'containers/home/home-greeting'
 import { HomeRecentSaves } from 'containers/home/home-recent-saves'
 import { HomeContent } from './home-content'
 
-import { Toasts } from 'connectors/toasts/toast-list'
 import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
-
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { HomeSetup } from './home-setup'
 import { HomeOnboarding } from './home-onboarding'
