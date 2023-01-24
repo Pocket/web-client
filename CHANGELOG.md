@@ -1,3 +1,10 @@
+## [1.72.1](https://github.com/Pocket/web-client/compare/v1.72.0...v1.72.1) (2023-01-24)
+
+
+### Bug Fixes
+
+* **tagging:** disallow tag edit submission with empty input or whitespace input ([8f9ad39](https://github.com/Pocket/web-client/commit/8f9ad39c98e0acc3423b1b73923fa12c4ce11a91))
+
 # [1.72.0](https://github.com/Pocket/web-client/compare/v1.71.3...v1.72.0) (2023-01-24)
 
 
