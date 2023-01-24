@@ -8,6 +8,7 @@ import { breakpointLargeHandset } from 'common/constants'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
+import { PublisherImages } from './publisher-images.tmp'
 
 const headingStyles = css`
   font-family: var(--fontSerifAlt);
@@ -49,15 +50,19 @@ const publisherStyles = css`
     margin-top: 16px;
   }
 `
-export const Publisher = ({ name, logo }) => (
-  <div className={publisherStyles}>
-    {logo ? (
-      <img src={logo} data-cy="pocket-rec-publisher-logo" alt={`Logo for ${name}`} />
-    ) : (
-      <span data-cy="pocket-rec-publisher-name">{name}</span>
-    )}
-  </div>
-)
+export const Publisher = ({ name, logo }) => {
+  const publisherImage = PublisherImages[name]
+
+  return (
+    <div className={publisherStyles}>
+      {publisherImage ? (
+        <img src={publisherImage} data-cy="pocket-rec-publisher-logo" alt={`Logo for ${name}`} />
+      ) : (
+        <span data-cy="pocket-rec-publisher-name">{name}</span>
+      )}
+    </div>
+  )
+}
 
 const recommendationStyles = css`
   display: grid;

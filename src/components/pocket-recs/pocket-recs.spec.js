@@ -13,16 +13,17 @@ describe('PocketRecs', () => {
     expect(queryByCy('pocket-recommended-articles')).toBeFalsy()
   })
 
+  // TODO: Update once the recs api returns a new logo url
   describe('Publisher', () => {
     it('renders a Publisher with a logo image, when available', () => {
-      const { name, logoWideBlack } = publisher.theVerge
-      const { queryByCy } = render(<Publisher name={name} logo={logoWideBlack} />)
+      const { name } = publisher.theVerge
+      const { queryByCy } = render(<Publisher name={name} />)
       expect(queryByCy('pocket-rec-publisher-logo')).toBeTruthy()
     })
 
     it('renders the name of the Publisher when its logo url is not available', () => {
-      const { name } = publisher.theVerge
-      const { queryByCy } = render(<Publisher name={name} logo={null} />)
+      const name = 'Unheard of Publisher'
+      const { queryByCy } = render(<Publisher name={name} />)
       expect(queryByCy('pocket-rec-publisher-logo')).toBeFalsy()
       expect(queryByCy('pocket-rec-publisher-name')).toHaveTextContent(name)
     })
