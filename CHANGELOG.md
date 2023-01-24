@@ -1,3 +1,10 @@
+## [1.72.2](https://github.com/Pocket/web-client/compare/v1.72.1...v1.72.2) (2023-01-24)
+
+
+### Bug Fixes
+
+* **tagging:** applied URIEncoding to spot ([495a548](https://github.com/Pocket/web-client/commit/495a5484204e2455b279afa89b7e85902a4de5af))
+
 ## [1.72.1](https://github.com/Pocket/web-client/compare/v1.72.0...v1.72.1) (2023-01-24)
 
 
