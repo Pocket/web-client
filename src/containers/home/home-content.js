@@ -5,7 +5,7 @@ import { Card } from 'components/item-card/card'
 import { listStrata, listSlide } from 'components/items-layout/list-strata'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { getHomeContent } from './home.state'
-import { saveHomeItem, unSaveHomeItem } from 'containers/home/home.state'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeHeader } from 'components/headers/home-header'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
@@ -18,8 +18,11 @@ import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
 import { useRouter } from 'node_modules/next/router'
 
+import { mutationUpsertCorpusItem } from 'connectors/items/mutation-upsert.state'
+import { mutationDeleteCorpusItem } from 'connectors/items/mutation-delete.state'
+
 export const HomeContent = () => {
-  const {locale} = useRouter()
+  const { locale } = useRouter()
   const dispatch = useDispatch()
   const slates = useSelector((state) => state.home.slates)
 
@@ -27,9 +30,10 @@ export const HomeContent = () => {
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const localizedHome = featureFlagActive({ flag: 'home.locale', featureState })
   const localeToUse = localizedHome ? locale : 'en'
+  const hideTopics = ['de', 'de-DE'].includes(locale)
 
   useEffect(() => {
-    if(!flagsReady) return
+    if (!flagsReady) return
     dispatch(getHomeContent(localeToUse))
   }, [dispatch, localeToUse, flagsReady])
 
@@ -38,12 +42,12 @@ export const HomeContent = () => {
       {slates.map((slateId, index) => (
         <Slate key={slateId} slateId={slateId} position={index} />
       ))}
-      <ExploreMoreTopics />
+      {hideTopics ? null : <ExploreMoreTopics />}
     </>
   )
 }
 
-function Slate({ slateId, position }) {
+function Slate({ slateId }) {
   const dispatch = useDispatch()
   const slates = useSelector((state) => state.home.slates)
   const slate = useSelector((state) => state.home.slatesById[slateId])
@@ -61,8 +65,6 @@ function Slate({ slateId, position }) {
 
   const recCount = slates.indexOf(slateId) === 0 || showHits ? 6 : 3
   const recsToShow = recommendations.slice(0, recCount)
-
-
 
   const slateLink = showTopicSelector ? { text: 'Update topics', url: false } : moreLink
 
@@ -127,7 +129,7 @@ function ItemCard({ corpusId }) {
 
   if (!item) return null
 
-  const { title, imageUrl, url, excerpt, publisher, topic, authors } = item
+  const { title, imageUrl, url, excerpt, publisher, topic } = item
 
   const analyticsData = {
     corpusRecommendationId: corpusId,
@@ -175,23 +177,27 @@ function CardActions({ id }) {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector((state) => state.user.auth)
   const item = useSelector((state) => state.home.itemsById[id])
+
+  const saveItemId = useSelector((state) => state.itemsTransitions[id])
+  const saveStatus = saveItemId ? 'saved' : 'unsaved'
+
   if (!item) return null
 
-  const { corpusRecommendationId, url, saveStatus } = item
+  const { corpusRecommendationId, url } = item
   const analyticsData = { corpusRecommendationId, url }
 
   // Prep save action
   const onSave = () => {
     dispatch(sendSnowplowEvent('home.corpus.save', analyticsData))
-    dispatch(saveHomeItem(id, url))
+    dispatch(mutationUpsertCorpusItem(url, id))
   }
 
   const onUnSave = () => {
     dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
-    dispatch(unSaveHomeItem(id, url))
+    dispatch(mutationDeleteCorpusItem(saveItemId, id))
   }
 
-  const saveAction = saveStatus === 'saved' ? onUnSave : onSave
+  const saveAction = saveItemId ? onUnSave : onSave
 
   return (
     <div className={`${itemActionStyle} actions`}>

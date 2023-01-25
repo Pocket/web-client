@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import { appSetMode } from 'connectors/app/app.state'
-import { listModeToggle } from 'connectors/app/app.state'
 import { setListModeList } from 'connectors/app/app.state'
 import { setListModeGrid } from 'connectors/app/app.state'
 import { setListModeDetail } from 'connectors/app/app.state'
@@ -12,7 +11,6 @@ import { setColorMode } from 'connectors/app/app.state'
 import GlobalNavComponent from 'components/global-nav/global-nav'
 import GlobalNavSearch from './global-nav-search'
 import GlobalNavAdd from './global-nav-add'
-import GlobalNavBulkEdit from './global-nav-bulk-edit'
 import GlobalNavBulkMutations from './global-nav-bulk-mutations'
 
 import { HomeIcon } from 'components/icons/HomeIcon'
@@ -31,11 +29,7 @@ import { CollectionsIcon } from 'components/icons/CollectionsIcon'
 
 import { BASE_URL } from 'common/constants'
 import { LOGIN_URL } from 'common/constants'
-import { RELEASE_NOTES_VERSION } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities/urls/urls'
-
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
-
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
@@ -69,9 +63,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const retrievedAvatar = useSelector((state) => state?.userProfile?.avatar_url)
   const pocketLogoOutboundUrl = isLoggedIn ? '/saves' : 'https://getpocket.com'
-
-  const featureState = useSelector((state) => state.features)
-  const useApiNext = featureFlagActive({ flag: 'api.next', featureState })
 
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.userProfile?.first_name)
@@ -206,7 +197,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
   const navChildren = {
     search: GlobalNavSearch,
     add: GlobalNavAdd,
-    bulk: useApiNext ? GlobalNavBulkMutations : GlobalNavBulkEdit
+    bulk: GlobalNavBulkMutations
   }
 
   const NavTakeover = navChildren[appMode]

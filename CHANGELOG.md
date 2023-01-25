@@ -1,3 +1,68 @@
+## [1.72.4](https://github.com/Pocket/web-client/compare/v1.72.3...v1.72.4) (2023-01-24)
+
+
+### Bug Fixes
+
+* **toasts:** fix {{count}} is appearing on toasts in some languages ([1238cee](https://github.com/Pocket/web-client/commit/1238ceecf196af15dd0a220eeac69310912e9c92))
+
+## [1.72.3](https://github.com/Pocket/web-client/compare/v1.72.2...v1.72.3) (2023-01-24)
+
+
+### Bug Fixes
+
+* **tagging:** add handling for white space input ([97cb387](https://github.com/Pocket/web-client/commit/97cb38718f17e4721486cd1ad2ab7a7e42b06610))
+* **tagging:** applied trim to submitted values in cases ([17becdc](https://github.com/Pocket/web-client/commit/17becdc91b7a1e06df9584198f3a58a4d9ce7b32))
+* **tagging:** cleaned up if-else case per PR comment ([03aad0c](https://github.com/Pocket/web-client/commit/03aad0c5306729daa74962d15b02eefba48aeaa3))
+* **tagging:** fixed Enter case broken from earlier commit cleanup, fixed Save button case ([ecfa385](https://github.com/Pocket/web-client/commit/ecfa38538d5b3bc07c7562351e071ab44725ee3b))
+* **tagging:** re-focus input on invalid submission attempt ([1c0e590](https://github.com/Pocket/web-client/commit/1c0e590909f569873e0b11a2234788b4fd8b40c1))
+* **tagging:** removed ; ([1452418](https://github.com/Pocket/web-client/commit/1452418900eff541e14d53aedb2fb990654df750))
+* **tagging:** removed prettier ignore ([4d404f5](https://github.com/Pocket/web-client/commit/4d404f5d00bd35daff99c6eac570522df1b239a2))
+* **tagging:** Undid changes to TagEditModal ([a0bbc44](https://github.com/Pocket/web-client/commit/a0bbc443ca5933c5a7e0da7b9311183dcb04b03a))
+* **tagging:** updated code comment and introduced trimmed value variable ([bb752f5](https://github.com/Pocket/web-client/commit/bb752f5426f3271fb2a42dbf2c79479ebfc41e38))
+
+## [1.72.2](https://github.com/Pocket/web-client/compare/v1.72.1...v1.72.2) (2023-01-24)
+
+
+### Bug Fixes
+
+* **tagging:** applied URIEncoding to spot ([495a548](https://github.com/Pocket/web-client/commit/495a5484204e2455b279afa89b7e85902a4de5af))
+
+## [1.72.1](https://github.com/Pocket/web-client/compare/v1.72.0...v1.72.1) (2023-01-24)
+
+
+### Bug Fixes
+
+* **tagging:** disallow tag edit submission with empty input or whitespace input ([8f9ad39](https://github.com/Pocket/web-client/commit/8f9ad39c98e0acc3423b1b73923fa12c4ce11a91))
+
+# [1.72.0](https://github.com/Pocket/web-client/compare/v1.71.3...v1.72.0) (2023-01-24)
+
+
+### Bug Fixes
+
+* **home:** omit topics on specific locales ([5d8e10f](https://github.com/Pocket/web-client/commit/5d8e10ffc28b3fa1a6bc0a07386007ed76910ae7))
+
+
+### Features
+
+* **waypoint:** redirect new german users to home ([f46284d](https://github.com/Pocket/web-client/commit/f46284db4301b7dd82a4788ae8570ca1a6dce446))
+
+## [1.71.3](https://github.com/Pocket/web-client/compare/v1.71.2...v1.71.3) (2023-01-23)
+
+
+### Bug Fixes
+
+* **aws:** removing old aws crud ([3cf8cd7](https://github.com/Pocket/web-client/commit/3cf8cd729d40c2f58a48508a933d6873cbc5f52f))
+
+## [1.71.2](https://github.com/Pocket/web-client/compare/v1.71.1...v1.71.2) (2023-01-23)
+
+
+### Bug Fixes
+
+* **global nav:** remove flags for graph ([4b31a83](https://github.com/Pocket/web-client/commit/4b31a83d738d2a3715fdf30347cb2eb7ebffbfce))
+* **home:** remove home specific save ([cacbec0](https://github.com/Pocket/web-client/commit/cacbec0f9d1abe5e1ce53f79e5d9962babac062a))
+* **home:** use common item state ([d048c5a](https://github.com/Pocket/web-client/commit/d048c5af30cd94c649cf67d0401a5216f41f4edd))
+* **home:** use itemTransition for save state ([632ba35](https://github.com/Pocket/web-client/commit/632ba35eb5f88f62e81f1c5bff500591cc688934))
+
 ## [1.71.1](https://github.com/Pocket/web-client/compare/v1.71.0...v1.71.1) (2023-01-19)
 
 

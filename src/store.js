@@ -59,17 +59,6 @@ import { syndicatedArticleSagas } from 'containers/syndicated-article/syndicated
 import { recitReducers } from 'connectors/recit/recit.state'
 import { recitSagas } from 'connectors/recit/recit.state'
 
-import { savesItemsReducers } from 'connectors/items-by-id/saves/items.state'
-import { savesItemsSagas } from 'connectors/items-by-id/saves/items.state'
-
-import { itemBulkReducers } from 'connectors/items-by-id/saves/items.bulk'
-import { itemDeleteReducers } from 'connectors/items-by-id/saves/items.delete'
-import { itemFavoriteReducers } from 'connectors/items-by-id/saves/items.favorite'
-import { itemArchiveReducers } from 'connectors/items-by-id/saves/items.archive'
-import { itemTagReducers } from 'connectors/items-by-id/saves/items.tag'
-import { itemShareReducers } from 'connectors/items-by-id/saves/items.share'
-import { itemShareSagas } from 'connectors/items-by-id/saves/items.share'
-
 import { homeReducers } from 'containers/home/home.state'
 import { homeSagas } from 'containers/home/home.state'
 
@@ -103,6 +92,7 @@ import { readerSagas } from 'containers/read/reader.state'
 import { itemsReducers } from 'connectors/items/items.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
 import { itemsSavedSagas } from 'connectors/items/items-saved.state'
+import { itemsTransitionsReducers } from 'connectors/items/items-transition.state'
 
 import { mutationArchiveReducers } from 'connectors/items/mutation-archive.state'
 import { mutationArchiveSagas } from 'connectors/items/mutation-archive.state'
@@ -139,7 +129,7 @@ import { pageSavedInfoReducers } from 'containers/saves/saved-items/saved-items.
 const itemReducers = {
   itemsDisplay: itemsReducers, // This is canonical item data used to display an item from anywhere (an item is an item is an item)
   itemsSaved: itemsSavedReducers, // This represents the actions the user has taken on a given item (if any)
-  itemsTransitions: { saving: [], unsaving: [] }, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
+  itemsTransitions: itemsTransitionsReducers, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
   listen: listenReducers
 }
 
@@ -152,14 +142,6 @@ const itemMutations = {
   mutationHighlight: mutationHighlightReducers,
   mutationShare: mutationShareReducers,
   mutationReport: mutationReportReducers
-}
-
-const itemActionReducers = {
-  itemsToFavorite: itemFavoriteReducers,
-  itemsToDelete: itemDeleteReducers,
-  itemsToArchive: itemArchiveReducers,
-  itemsToTag: itemTagReducers,
-  itemsToShare: itemShareReducers
 }
 
 const pageReducers = {
@@ -191,8 +173,6 @@ const collectionReducer = {
 }
 
 const libraryReducers = {
-  savesItemsById: savesItemsReducers,
-  bulkEdit: itemBulkReducers,
   userTags: userTagsReducers,
   userMessages: userMessageReducers,
   userSearch: userSearchReducers,
@@ -240,7 +220,6 @@ export const rootReducer = combineReducers({
   ...userAccountReducers,
   home: homeReducers,
   ...itemReducers,
-  ...itemActionReducers,
   ...itemMutations,
   ...pageReducers
 })
@@ -265,8 +244,6 @@ function* rootSaga() {
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
     ...recitSagas,
-    ...savesItemsSagas,
-    ...itemShareSagas,
     ...readerSettingsSagas,
     ...readerSagas, //graph
     ...homeSagas,
