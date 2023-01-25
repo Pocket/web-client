@@ -7,7 +7,7 @@ import { ErrorIcon } from 'components/icons/ErrorIcon'
 import { Fade } from 'common/utilities/animation/fade'
 import { useDispatch } from 'react-redux'
 import { clearToast } from './toast.state'
-import { Trans, useTranslation } from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 import { mutationUnDelete } from 'connectors/items/mutation-delete.state'
 
 import { MUTATION_DELETE_SUCCESS } from 'actions'
@@ -211,9 +211,9 @@ export function Toast({
     <Fade show={show} remove={remove}>
       <div className={toastWrapper}>
         <div className={cx('toastBlock', `${type}`)} data-cy={messages[typeForMessage]}>
-          <div>
-            <Trans i18nKey={messages[typeForMessage]} count={itemCount} />
-          </div>
+          <p>
+            {t(messages[typeForMessage], {count: itemCount})}
+          </p>
           <div className="actionWrapper">
             {showUndo ? (
               <button onClick={handleUndo} className="text">
