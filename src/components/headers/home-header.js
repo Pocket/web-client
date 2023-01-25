@@ -108,16 +108,18 @@ export const HomeHeader = ({ headline, subheadline, moreLinkText, moreLinkUrl, m
 }
 
 const HomeMoreLink = ({ moreLinkUrl, moreLinkText, moreLinkClick }) => {
+  const handleClick = () => moreLinkClick(moreLinkText)
+
   if (moreLinkUrl) {
     return (
       <Link href={moreLinkUrl}>
-        <a onClick={moreLinkClick}>{moreLinkText}</a>
+        <a onClick={handleClick}>{moreLinkText}</a>
       </Link>
     )
   }
   if (moreLinkText) {
     return (
-      <button className="inline text" onClick={moreLinkClick}>
+      <button className="inline text" onClick={handleClick}>
         {moreLinkText}
       </button>
     )

@@ -68,7 +68,9 @@ function Slate({ slateId }) {
 
   const slateLink = showTopicSelector ? { text: 'Update topics', url: false } : moreLink
 
-  const urlTrack = () => {}
+  const urlTrack = (label) => {
+    dispatch(sendSnowplowEvent('home.topic.view-more', { label }))
+  }
   const updateTopics = () => {
     dispatch(reSelectTopics())
     dispatch(sendSnowplowEvent('get-started.topic.reselect'))
