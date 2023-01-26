@@ -65,6 +65,22 @@ The time it will take to read the article.
 
 ---
 
+## isImage
+Is the item an image
+
+### Derived from :
+- hasImage - value 2 (comes from the parser so won't always be available)
+
+---
+
+## isVideo
+Is the item a video
+
+### Derived from :
+- hasVideo - value 2 (comes from the parser so won't always be available)
+
+---
+
 ## fromPartner
 From within the collection display, if True, the story is provided by a partner and should be displayed as such
 
