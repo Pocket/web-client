@@ -24,7 +24,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     unusedQueryParams.forEach((param) => delete query[param])
 
     const savesLink = queryString.stringifyUrl({ url: `${langPrefix}/saves`, query })
-    const homeLink = queryString.stringifyUrl({ url: '/home', query })
+    const homeLink = queryString.stringifyUrl({ url: `${langPrefix}/home`, query })
 
     const response = await getUserInfo(true, req?.headers?.cookie)
     const { user_id, birth } = response?.user || {}
