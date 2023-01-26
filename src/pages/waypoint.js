@@ -15,7 +15,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     const langPrefix = lang !== defaultLocale && supportedLocale ? `/${lang}` : ''
     // const isSignUp = query['type'] === 'signup'
     const nonEnglish = locale !== defaultLocale || (lang !== defaultLocale && supportedLocale)
-    const isGerman = ['de', 'de-DE'].includes(locale)
+    const isGerman = ['de', 'de-DE'].includes(locale) || ['de', 'de-DE'].includes(lang)
     const homeEligible = isGerman || !nonEnglish
 
     // query parameters returned after auth that are currently not used.
