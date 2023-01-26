@@ -1,5 +1,4 @@
 import { sectionStyles } from 'components/dev-tools/tool-styles'
-import { resetOnboarding } from 'containers/home/home-onboarding.state'
 import { resetSetupMoment } from 'containers/home/home-setup.state'
 import { useDispatch } from 'react-redux'
 
@@ -7,7 +6,6 @@ export const Resets = () => {
   const dispatch = useDispatch()
 
   const setupMomentReset = () => dispatch(resetSetupMoment())
-  const onboardingReset = () => dispatch(resetOnboarding())
 
   return (
     <div className={sectionStyles}>
@@ -15,10 +13,6 @@ export const Resets = () => {
       <div className="action-block" onClick={setupMomentReset}>
         <div className="title">Reset Topic Selectors</div>
         <div className="description">Start topic selectors from the start</div>
-      </div>
-      <div className="action-block" onClick={onboardingReset}>
-        <div className="title">Reset Setup Moment</div>
-        <div className="description">Start setup moment from the start</div>
       </div>
     </div>
   )
