@@ -59,7 +59,7 @@ export const HomeOnboarding = () => {
   const readComplete = useSelector((state) => state.homeOnboarding.readComplete)
   const recentSaves = useSelector((state) => state.home.recentSaves)
   const recentId = recentSaves?.[0]
-  const recentItem = useSelector((state) => state.savesItemsById[recentId])
+  const recentItem = useSelector((state) => state.itemsDisplay[recentId])
   const isInternalItem = recentItem?.isInternalItem
   const prevSave = usePrevious(recentId)
 
