@@ -12,6 +12,7 @@ import { finalizeTopics } from 'containers/home/home-setup.state'
 import { reSelectTopics } from 'containers/home/home-setup.state'
 import { CloseButton } from 'components/close-button/close-button'
 import { getTopicSelectors } from 'containers/home/home-setup.state'
+import { useRouter } from 'node_modules/next/router'
 
 import { breakpointLargeTablet } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
@@ -231,6 +232,8 @@ const TopicButton = ({ topic }) => {
 
 export const HomeSetup = () => {
   const dispatch = useDispatch()
+  const { locale } = useRouter()
+  const hideSetup = ['de', 'de-DE'].includes(locale)
 
   const setupStatus = useSelector((state) => state.homeSetup.setupStatus)
   const topicsSelectors = useSelector((state) => state.homeSetup.topicsSelectors)
@@ -238,8 +241,11 @@ export const HomeSetup = () => {
   const isFinalized = useSelector((state) => state.homeSetup.finalizedTopics)
 
   useEffect(() => {
+    if (hideSetup) return
     dispatch(getTopicSelectors())
-  }, [dispatch])
+  }, [dispatch, hideSetup])
+
+  if (hideSetup) return null
 
   const isSkipped = setupStatus === 'skipped'
   const isDismissed = setupStatus === 'dismissed'

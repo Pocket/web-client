@@ -1,3 +1,17 @@
+## [1.73.2](https://github.com/Pocket/web-client/compare/v1.73.1...v1.73.2) (2023-01-26)
+
+
+### Bug Fixes
+
+* **home:** limit setup on de home ([f49aa31](https://github.com/Pocket/web-client/commit/f49aa31342833453513184b5bfe36abadeee7022))
+
+## [1.73.1](https://github.com/Pocket/web-client/compare/v1.73.0...v1.73.1) (2023-01-26)
+
+
+### Bug Fixes
+
+* **waypoint:** allow accept language header ([a8f19f5](https://github.com/Pocket/web-client/commit/a8f19f5384abc895e6d4c4481d27e6cf77239c77))
+
 # [1.73.0](https://github.com/Pocket/web-client/compare/v1.72.5...v1.73.0) (2023-01-25)
 
 
