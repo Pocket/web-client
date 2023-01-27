@@ -451,7 +451,7 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder, minimal, ancho
               <a href="https://getpocket.com/tos?src=footer_v2">
                 {t('global-footer:terms-of-service', 'Terms of service')}
               </a>
-              <button id="ot-sdk-btn" className="ot-sdk-show-settings">
+              <button onClick={() => window.OneTrust.ToggleInfoDisplay()} id="ot-sdk-btn" className="ot-sdk-show-settings">
                 {t('global-footer:cookie-preferences', 'Cookie preferences')}
               </button>
             </nav>
