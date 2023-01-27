@@ -7,7 +7,7 @@ import { SavedItems } from 'containers/saves/saved-items/saved-items'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { savedItemsSetSortOrder } from 'containers/saves/saved-items/saved-items.state'
 import { savedItemsSetSortBy } from 'containers/saves/saved-items/saved-items.state'
-import { SuccessFXA } from 'connectors/fxa-migration-success/success-fxa'
+import { SuccessFXA } from 'components/snackbar/success-fxa'
 
 import { TagPageHeader } from 'containers/saves/tagged/tagged-header'
 import { SavesHeader } from 'components/headers/saves-header'
