@@ -4,11 +4,11 @@ import { ITEMS_SET_NO_IMAGE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
- export const setNoImage = (id) => ({ type: ITEMS_SET_NO_IMAGE, id })
+export const setNoImage = (id) => ({ type: ITEMS_SET_NO_IMAGE, id })
 
 /** ITEM REDUCERS
  --------------------------------------------------------------- */
-export const itemsReducers = (state = {}, action) => {
+export const itemsDisplayReducers = (state = {}, action) => {
   switch (action.type) {
     case READ_ITEM_SUCCESS:
     case ITEMS_SUCCESS: {
