@@ -74,9 +74,6 @@ import { actionToastsReducers } from 'connectors/toasts/toast.state'
 import { shortcutReducers } from 'connectors/shortcuts/shortcuts.state.js'
 import { shortcutSagas } from 'connectors/shortcuts/shortcuts.state.js'
 
-import { onboardingReducers } from 'connectors/onboarding/onboarding.state'
-import { onboardingSagas } from 'connectors/onboarding/onboarding.state'
-
 import { listenReducers } from 'connectors/listen/listen.state'
 import { listenSagas } from 'connectors/listen/listen.state'
 
@@ -198,7 +195,6 @@ const globalReducers = {
   toasts: actionToastsReducers, // Notifications of action results,
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
-  onboarding: onboardingReducers, // Onboarding
   braze: brazeReducers // Braze
 }
 
@@ -248,7 +244,6 @@ function* rootSaga() {
     ...profileSagas,
     ...profileItemsSagas,
     ...shortcutSagas,
-    ...onboardingSagas,
     ...brazeSagas,
     ...pageSavedIdsSagas,
     ...itemsSavedSagas,
