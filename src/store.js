@@ -5,8 +5,8 @@ import { all } from 'redux-saga/effects'
 
 /* IMPORT CONTAINER STATES
  --------------------------------------------------------------- */
-import { homeSetupReducers } from 'containers/home/home-setup.state'
-import { homeSetupSagas } from 'containers/home/home-setup.state'
+import { homeSetupReducers } from 'containers/home/setup/setup.state'
+import { homeSetupSagas } from 'containers/home/setup/setup.state'
 
 import { appReducers, appSagas } from 'connectors/app/app.state'
 import { oneTrustReducers } from 'connectors/third-party/one-trust.state'
@@ -56,9 +56,6 @@ import { syndicatedArticleSagas } from 'containers/syndicated-article/syndicated
 
 import { recitReducers } from 'connectors/recit/recit.state'
 import { recitSagas } from 'connectors/recit/recit.state'
-
-import { homeReducers } from 'containers/home/home.state'
-import { homeSagas } from 'containers/home/home.state'
 
 import { userMessageReducers } from 'containers/messages/user-messages.state'
 import { userMessageSagas } from 'containers/messages/user-messages.state'
@@ -119,6 +116,22 @@ import { pageSavedIdsReducers } from 'containers/saves/saved-items/saved-items.s
 import { pageSavedIdsSagas } from 'containers/saves/saved-items/saved-items.state'
 import { pageSavedInfoReducers } from 'containers/saves/saved-items/saved-items.state'
 
+import { pageHomeReducers } from 'containers/home/home.state'
+import { pageHomeSaga } from 'containers/home/home.state'
+
+// pageDiscoverReducers
+// pageDiscoverSagas
+
+// pageDiscoverTopicReducers
+// pageDiscoverTopicSagas
+
+// pageCollectionReducers
+// pageCollectionSagas
+
+// pageCollectionStoriesReducers
+// pageCollectionStoriesSagas
+
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
@@ -140,7 +153,7 @@ const itemMutations = {
 }
 
 const pageReducers = {
-  pageHomeIds: [],
+  pageHome: pageHomeReducers,
   pageHomeInfo: [],
   pageSavedIds: pageSavedIdsReducers,
   pageSavedInfo: pageSavedInfoReducers,
@@ -211,7 +224,6 @@ export const rootReducer = combineReducers({
   ...libraryReducers,
   ...readerViewReducers,
   ...userAccountReducers,
-  home: homeReducers,
   ...itemReducers,
   ...itemMutations,
   ...pageReducers
@@ -238,7 +250,7 @@ function* rootSaga() {
     ...recitSagas,
     ...readerSettingsSagas,
     ...readerSagas, //graph
-    ...homeSagas,
+    ...pageHomeSaga,
     ...userMessageSagas,
     ...userSearchSagas,
     ...profileSagas,

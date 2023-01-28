@@ -1,13 +1,11 @@
 import Layout from 'layouts/main'
 
 import { useSelector } from 'react-redux'
-import { HomeGreeting } from 'containers/home/home-greeting'
-import { HomeRecentSaves } from 'containers/home/home-recent-saves'
-import { HomeContent } from './home-content'
+import { HomeRecentSaves } from 'containers/home/recent-saves/recent-saves'
+import { HomeContent } from './content'
 
 import { SuccessFXA } from 'components/snackbar/success-fxa'
-import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
-import { HomeSetup } from './home-setup'
+import { HomeSetup } from './setup/setup'
 
 export const Home = ({ metaData }) => {
   const userStatus = useSelector((state) => state.user.user_status)
@@ -20,12 +18,7 @@ export const Home = ({ metaData }) => {
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
       <SuccessFXA type="home" />
       <HomeSetup />
-
-      <SectionWrapper>
-        <HomeGreeting />
-        <HomeRecentSaves />
-      </SectionWrapper>
-
+      <HomeRecentSaves />
       <HomeContent />
     </Layout>
   )

@@ -6,6 +6,8 @@ import { getItemsUnread } from 'containers/saves/saved-items/saved-items.state'
 import { FlexList } from 'components/items-layout/list-flex'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { Card } from 'components/item-card/card'
+import { HomeGreeting } from './greeting'
+import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
 export const HomeRecentSaves = () => {
   const { t } = useTranslation()
@@ -22,7 +24,9 @@ export const HomeRecentSaves = () => {
   }, [dispatch])
 
   return recentSaves?.length > 0 ? (
-    <>
+    <SectionWrapper>
+      <HomeGreeting />
+
       <HomeHeader
         headline={t('home:recent-saves-title', 'Recent Saves')}
         moreLinkText={t('home:recent-saves-link-text', 'Go to Saves')}
@@ -41,7 +45,7 @@ export const HomeRecentSaves = () => {
         compact={true}
         dataCy="recent-saves"
       />
-    </>
+    </SectionWrapper>
   ) : null
 }
 

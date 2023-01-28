@@ -1,5 +1,5 @@
 import { sectionStyles } from 'components/dev-tools/tool-styles'
-import { resetSetupMoment } from 'containers/home/home-setup.state'
+import { resetSetupMoment } from 'containers/home/setup/setup.state'
 import { useDispatch } from 'react-redux'
 
 export const Resets = () => {
