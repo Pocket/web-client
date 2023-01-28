@@ -10,7 +10,6 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
   const flagsReady = useSelector((state) => state.features.flagsReady)
   const pinnedTags = useSelector((state) => state.settings.pinnedTags)
   const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
-  const newSaveCount = useSelector((state) => state.home.newSaves)
   const appMode = useSelector((state) => state?.app?.mode)
 
   const trackMenuClick = (label) => dispatch(sendSnowplowEvent('side-nav', { label }))
@@ -19,7 +18,7 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
 
   const pinTypes = {
     home: pinnedTopics,
-    'saves': pinnedTags
+    saves: pinnedTags
   }
   const pinned = pinTypes[type]
 
@@ -31,7 +30,6 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
       isLoggedIn={isLoggedIn}
       pinned={pinned}
       tag={tag}
-      newSaveCount={newSaveCount}
       flagsReady={flagsReady}
       trackMenuClick={trackMenuClick}
     />
