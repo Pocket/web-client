@@ -18,8 +18,8 @@ import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
 import { useRouter } from 'node_modules/next/router'
 
-import { mutationUpsertCorpusItem } from 'connectors/items/mutation-upsert.state'
-import { mutationDeleteCorpusItem } from 'connectors/items/mutation-delete.state'
+import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
+import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 
 export const HomeContent = () => {
   const { locale } = useRouter()
@@ -191,12 +191,12 @@ function CardActions({ id }) {
   // Prep save action
   const onSave = () => {
     dispatch(sendSnowplowEvent('home.corpus.save', analyticsData))
-    dispatch(mutationUpsertCorpusItem(url, id))
+    dispatch(mutationUpsertTransitionalItem(url, id))
   }
 
   const onUnSave = () => {
     dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
-    dispatch(mutationDeleteCorpusItem(saveItemId, id))
+    dispatch(mutationDeleteTransitionalItem(saveItemId, id))
   }
 
   const saveAction = saveItemId ? onUnSave : onSave

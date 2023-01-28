@@ -10,16 +10,16 @@ export const itemsTransitionsReducers = (state = {}, action) => {
   switch (action.type) {
     case ITEMS_UNDELETE_SUCCESS:
     case ITEMS_UPSERT_SUCCESS: {
-      const { corpusId, itemId } = action
-      return { ...state, [corpusId]: itemId }
+      const { itemId, transitionId } = action
+      return { ...state, [transitionId]: itemId }
     }
 
     case MUTATION_DELETE_SUCCESS: {
-      const { corpusId } = action
-      if (!corpusId) return state
+      const { transitionId } = action
+      if (!transitionId) return state
 
       const stateDraft = state
-      delete stateDraft[corpusId]
+      delete stateDraft[transitionId]
 
       return stateDraft
     }
