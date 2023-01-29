@@ -65,6 +65,28 @@ export const discoverActions = {
       'description'
     ]
   },
+  'discover.unsave': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'recommendation', 'slate', 'slateLineup', 'ui'],
+    eventData: {
+      engagementType: 'save',
+      uiType: 'button'
+    },
+    expects: [
+      'id',
+      'url',
+      'position',
+      'recommendationId',
+      'slateLineupId',
+      'slateLineupRequestId',
+      'slateLineupExperiment',
+      'slateId',
+      'slateRequestId',
+      'slateExperiment',
+      'displayName',
+      'description'
+    ]
+  },
   'discover.signup.impression': {
     eventType: 'impression',
     entityTypes: ['ui'],

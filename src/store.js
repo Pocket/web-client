@@ -33,9 +33,6 @@ import { snowplowSagas } from 'connectors/snowplow/snowplow.state'
 import { discoverItemsReducers } from 'connectors/items-by-id/discover/items.state'
 import { discoverItemsSagas } from 'connectors/items-by-id/discover/items.state'
 
-import { discoverHomeReducers } from 'containers/discover/discover.state'
-import { discoverHomeSagas } from 'containers/discover/discover.state'
-
 import { collectionsPageReducers } from 'containers/collections/collections.state'
 import { collectionsBySlugReducers } from 'containers/collections/collections.state'
 import { collectionsSagas } from 'containers/collections/collections.state'
@@ -120,7 +117,6 @@ import { pageHomeReducers } from 'containers/home/home.state'
 import { pageHomeSaga } from 'containers/home/home.state'
 
 import { pageDiscoverIdsReducers } from 'containers/discover/discover.state'
-import { pageDiscoverIdsSagas } from 'containers/discover/discover.state'
 
 // pageDiscoverTopicReducers
 // pageDiscoverTopicSagas

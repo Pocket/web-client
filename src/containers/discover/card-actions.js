@@ -3,30 +3,41 @@ import { ReportIcon } from 'components/icons/ReportIcon'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { OverflowAction } from 'components/item-actions/overflow'
 import { useSelector, useDispatch } from 'react-redux'
-import { saveDiscoverItem } from 'containers/discover/discover.state'
 import { useTranslation } from 'next-i18next'
 
 import { itemActionStyle } from 'components/item-actions/base'
 import { itemReportAction } from 'connectors/items/mutation-report.state'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
+import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 
 export function ActionsDiscover({ id, position }) {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const item = useSelector((state) => state.discoverItemsById[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
+
+  const saveItemId = useSelector((state) => state.itemsTransitions[id])
+  const saveStatus = saveItemId ? 'saved' : 'unsaved'
 
   if (!item) return null
-  const { saveStatus, saveUrl, externalUrl, openExternal } = item
+  const { saveUrl, externalUrl, openExternal } = item
   const analyticsData = { position, ...item?.analyticsData }
 
   // Prep save action
   const onSave = () => {
-    dispatch(saveDiscoverItem(id, saveUrl, position))
     dispatch(sendSnowplowEvent('discover.save', analyticsData))
+    dispatch(mutationUpsertTransitionalItem(saveUrl, id))
   }
+
+  const onUnSave = () => {
+    dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
+    dispatch(mutationDeleteTransitionalItem(saveItemId, id))
+  }
+
+  const saveAction = saveItemId ? onUnSave : onSave
 
   // Open action
   const url = externalUrl
@@ -50,7 +61,7 @@ export function ActionsDiscover({ id, position }) {
         url={url}
         onOpen={onOpen}
         openExternal={openExternal}
-        saveAction={onSave}
+        saveAction={saveAction}
         isAuthenticated={isAuthenticated}
         saveStatus={saveStatus}
         id={id}

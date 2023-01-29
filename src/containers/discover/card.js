@@ -1,7 +1,7 @@
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { ActionsDiscover } from './card-actions'
-import { setNoImage } from 'connectors/items-by-id/discover/items.state'
+import { setNoImage } from 'connectors/items/items-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 /**
@@ -16,7 +16,7 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const analyticsInitialized = useSelector((state) => state.analytics.initialized)
 
-  const item = useSelector((state) => state.discoverItemsById[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
   if (!item) return null
 
   const { saveStatus, itemId, readUrl, externalUrl, openExternal, syndicatedUrl } = item
