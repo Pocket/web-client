@@ -30,9 +30,6 @@ import { featureSagas } from 'connectors/feature-flags/feature-flags.state'
 import { snowplowReducers } from 'connectors/snowplow/snowplow.state'
 import { snowplowSagas } from 'connectors/snowplow/snowplow.state'
 
-import { discoverItemsReducers } from 'connectors/items-by-id/discover/items.state'
-import { discoverItemsSagas } from 'connectors/items-by-id/discover/items.state'
-
 import { collectionsPageReducers } from 'containers/collections/collections.state'
 import { collectionsBySlugReducers } from 'containers/collections/collections.state'
 import { collectionsSagas } from 'containers/collections/collections.state'
@@ -144,13 +141,10 @@ const itemMutations = {
 
 const pageReducers = {
   pageHome: pageHomeReducers,
-  pageHomeInfo: [],
   pageSavedIds: pageSavedIdsReducers,
   pageSavedInfo: pageSavedInfoReducers,
-  pageDiscoverIds: pageDiscoverIdsReducers,
-  pageDiscoverInfo: [],
-  pageTopic: pageTopicReducers,
-  pageTopicInfo: [],
+  pageDiscoverIds: pageDiscoverIdsReducers, // item ids for the discover home surface
+  pageTopic: pageTopicReducers, //topic keyed arrays of item ids for topic pages
   pageCollectionIds: [],
   pageCollectionInfo: [],
   pageStoriesIds: [],
@@ -158,7 +152,6 @@ const pageReducers = {
 }
 
 const discoverReducers = {
-  discoverItemsById: discoverItemsReducers, // Shared discover item store
   syndicatedArticle: syndicatedArticleReducers
 }
 
@@ -228,7 +221,6 @@ function* rootSaga() {
     ...userTagsSagas,
     ...featureSagas,
     ...snowplowSagas,
-    ...discoverItemsSagas,
     ...collectionsSagas,
     ...collectionStoriesSagas,
     ...pocketHitsSagas,

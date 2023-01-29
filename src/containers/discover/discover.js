@@ -53,11 +53,11 @@ export default function Discover({ locale }) {
     dispatch(sendSnowplowEvent(id))
   }
 
-  const topicClickMiddle = (topic, index, id) => {
+  const topicClickMiddle = (topic) => {
     dispatch(sendSnowplowEvent('discover.middle.topic.click', { label: topic }))
   }
 
-  const topicClickBottom = (topic, index, id) => {
+  const topicClickBottom = (topic) => {
     dispatch(sendSnowplowEvent('discover.bottom.topic.click', { label: topic }))
   }
 
