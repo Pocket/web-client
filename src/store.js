@@ -30,13 +30,6 @@ import { featureSagas } from 'connectors/feature-flags/feature-flags.state'
 import { snowplowReducers } from 'connectors/snowplow/snowplow.state'
 import { snowplowSagas } from 'connectors/snowplow/snowplow.state'
 
-import { collectionsPageReducers } from 'containers/collections/collections.state'
-import { collectionsBySlugReducers } from 'containers/collections/collections.state'
-import { collectionsSagas } from 'containers/collections/collections.state'
-
-import { collectionStoriesReducers } from 'connectors/items-by-id/collection/stories.state'
-import { collectionStoriesSagas } from 'connectors/items-by-id/collection/stories.state'
-
 import { topicListReducers } from 'connectors/topic-list/topic-list.state'
 
 import { pocketHitsReducers } from 'connectors/pocket-hits/pocket-hits.state'
@@ -105,11 +98,8 @@ import { pageHomeSaga } from 'containers/home/home.state'
 import { pageDiscoverIdsReducers } from 'containers/discover/discover.state'
 import { pageTopicReducers } from 'containers/discover/topic/topic.state'
 
-// pageCollectionReducers
-// pageCollectionSagas
-
-// pageCollectionStoriesReducers
-// pageCollectionStoriesSagas
+import { pageCollectionIdsReducers } from 'containers/collections/collections.state'
+import { pageCollectionStoriesReducers } from 'containers/collections/stories-page/stories.state'
 
 /* REDUCERS
  --------------------------------------------------------------- */
@@ -138,20 +128,14 @@ const pageReducers = {
   pageSavedInfo: pageSavedInfoReducers,
   pageDiscoverIds: pageDiscoverIdsReducers, // item ids for the discover home surface
   pageTopic: pageTopicReducers, //topic keyed arrays of item ids for topic pages
-  pageCollectionIds: [],
-  pageCollectionInfo: [],
-  pageStoriesIds: [],
+  pageCollectionIds: pageCollectionIdsReducers,
+  pageCollectionInfo: [], // In future this will handle pagination
+  pageCollectionStories: pageCollectionStoriesReducers,
   pageStoriesInfo: []
 }
 
 const discoverReducers = {
   syndicatedArticle: syndicatedArticleReducers
-}
-
-const collectionReducer = {
-  collectionsPage: collectionsPageReducers,
-  collectionsBySlug: collectionsBySlugReducers,
-  collectionStoriesById: collectionStoriesReducers
 }
 
 const libraryReducers = {
@@ -191,7 +175,6 @@ export const rootReducer = combineReducers({
   ...globalReducers,
   ...marketingReducers,
   ...discoverReducers,
-  ...collectionReducer,
   ...libraryReducers,
   ...readerViewReducers,
   ...userAccountReducers,
@@ -211,8 +194,6 @@ function* rootSaga() {
     ...userTagsSagas,
     ...featureSagas,
     ...snowplowSagas,
-    ...collectionsSagas,
-    ...collectionStoriesSagas,
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
     ...readerSettingsSagas,

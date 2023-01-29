@@ -1,6 +1,6 @@
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
-import { ActionsCollection } from './collection-actions'
+import { ActionsCollection } from './card-actions'
 import { setNoImage } from 'connectors/items/items-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -9,19 +9,11 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
  * Creates a connected `Card` with the appropriate data and actions
  * @param {object} {id, position} item_id for data and position for analytics
  */
-export function ItemCard({
-  id,
-  cardShape,
-  className,
-  showExcerpt = false,
-  position,
-  lockup,
-  useHero = false
-}) {
+export function ItemCard({ id, cardShape, className, showExcerpt = false, position }) {
   const dispatch = useDispatch()
 
   // Get data from state
-  const item = useSelector((state) => state.collectionsBySlug[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
   const { slug, readUrl, externalUrl, openExternal } = item
 
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(openExternal))
@@ -39,7 +31,7 @@ export function ItemCard({
   }
   /** ITEM DETAILS
    --------------------------------------------------------------- */
-  const itemImage = item?.noImage ? '' : item.heroImage
+  const itemImage = item?.noImage ? '' : item.thumbnail
   const {tags, title, authors, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } = item //prettier-ignore
 
   /**

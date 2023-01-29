@@ -6,17 +6,16 @@ import { useSelector } from 'react-redux'
 
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 import { CardPageHeader } from 'components/headers/discover-header'
-import { ItemCard } from 'connectors/item-card/collection/collection-card'
+import { ItemCard } from './card'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
-import { Toasts } from 'connectors/toasts/toast-list'
 
 export default function Collections({ locale }) {
   const { t } = useTranslation()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
-  const itemIds = useSelector((state) => state.collectionsPage)
+  const itemIds = useSelector((state) => state.pageCollectionIds)
   const shouldRender = userStatus !== 'pending'
 
   const languagePrefix = locale === 'en' ? '' : `/${locale}`
@@ -66,8 +65,6 @@ export default function Collections({ locale }) {
         cardShape="wide"
         ItemCard={ItemCard}
       />
-
-      <Toasts />
     </Layout>
   )
 }
