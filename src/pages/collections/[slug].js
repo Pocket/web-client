@@ -1,8 +1,8 @@
-import { CollectionPage } from 'containers/collections/collection-page'
+import { CollectionPage } from 'containers/collections/stories-page/stories-page'
 import { fetchCollections } from 'containers/collections/collections.state'
-import { fetchCollectionBySlug } from 'containers/collections/collections.state'
-import { hydrateCollections } from 'containers/collections/collections.state'
-import { hydrateStories } from 'connectors/items-by-id/collection/stories.state'
+import { fetchCollectionBySlug } from 'containers/collections/stories-page/stories.state'
+import { hydrateStoryPage } from 'containers/collections/stories-page/stories.state'
+import { hydrateItems } from 'connectors/items/items-display.state'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
 import { END } from 'redux-saga'
@@ -16,8 +16,8 @@ import { wrapper } from 'store'
  * SEO/Crawlers
   --------------------------------------------------------------- */
 export const getStaticPaths = async () => {
-  const collections = await fetchCollections()
-  const paths = Object.keys(collections).map((collection) => `/collections/${collection.slug}`)
+  const { itemSlugs } = await fetchCollections()
+  const paths = itemSlugs.map((collection) => `/collections/${collection.slug}`)
 
   return { paths, fallback: 'blocking' }
 }
@@ -34,16 +34,16 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ params,
 
   // Hydrating initial state with an async request. This will block the
   // page from loading. Do this for SEO/crawler purposes
-  const { stories, collection } = await fetchCollectionBySlug({ slug })
+  const { itemsById, storyIdsBySlug } = await fetchCollectionBySlug({ slug })
 
   // No article found
-  if (!collection || !stories) {
+  if (!itemsById) {
     return { props: { ...defaultProps, statusCode: 404 }, revalidate: 60 }
   }
 
   // Since ssr will not wait for side effects to resolve this dispatch needs to be pure
-  dispatch(hydrateCollections(collection))
-  dispatch(hydrateStories(stories))
+  dispatch(hydrateItems(itemsById))
+  dispatch(hydrateStoryPage(storyIdsBySlug))
 
   // end the saga
   dispatch(END)

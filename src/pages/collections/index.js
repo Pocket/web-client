@@ -2,6 +2,7 @@ import Collections from 'containers/collections/collections'
 
 import { fetchCollections } from 'containers/collections/collections.state'
 import { hydrateCollections } from 'containers/collections/collections.state'
+import { hydrateItems } from 'connectors/items/items-display.state'
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
@@ -20,14 +21,14 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ locale 
 
   // Hydrating initial state with an async request. This will block the
   // page from loading. Do this for SEO/crawler purposes
-  const collections = await fetchCollections(locale, labels)
+  const { itemsBySlug, itemSlugs } = await fetchCollections(locale, labels)
 
-  // No article found
-  if (!collections) return { props: { ...defaultProps, statusCode: 404 }, revalidate: 60 }
+  // No articles found
+  if (!itemsBySlug) return { props: { ...defaultProps, statusCode: 404 }, revalidate: 60 }
 
   // Since ssr will not wait for side effects to resolve this dispatch needs to be pure
-  dispatch(hydrateCollections(collections))
-
+  dispatch(hydrateCollections(itemSlugs))
+  dispatch(hydrateItems(itemsBySlug))
   // end the saga
   dispatch(END)
   await sagaTask.toPromise()

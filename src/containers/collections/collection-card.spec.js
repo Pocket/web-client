@@ -3,8 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils'
 
 import { collectionFromClientApi } from 'common/api/derivers/collection/page.spec'
-import { partnerCollectionFromClientApi } from 'common/api/derivers/collection/page.spec'
-import { ItemCard as CollectionCard } from 'connectors/item-card/collection/collection-card'
+import { ItemCard as CollectionCard } from './card'
 import { deriveCollection } from 'common/api/derivers/item'
 
 describe('ItemCard', () => {
@@ -16,7 +15,7 @@ describe('ItemCard', () => {
     analytics: {
       impressions: []
     },
-    collectionsBySlug: {
+    itemsDisplay: {
       [derivedCollection.slug]: derivedCollection
     }
   }

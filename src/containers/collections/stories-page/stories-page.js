@@ -24,7 +24,7 @@ import { Partner } from 'components/content-partner/partner'
 
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
-import { ItemCard } from 'connectors/item-card/collection/story-card'
+import { ItemCard } from './card'
 
 import { unSaveCollectionPage } from 'containers/collections/collections.state'
 import { saveCollectionPage } from 'containers/collections/collections.state'
@@ -60,7 +60,8 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const isAuthenticated = useSelector((state) => state.user?.auth)
   const isPremium = useSelector((state) => state.user?.premium_status)
 
-  const data = useSelector((state) => state.collectionsBySlug[slug]) || {}
+  const data = useSelector((state) => state.itemsDisplay[slug]) || {}
+  const storyIds = useSelector((state) => state.pageCollectionStories[slug])
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const userStatus = useSelector((state) => state.user.user_status)
   const showTopics = locale === 'en'
@@ -68,8 +69,8 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   // Show error page if things have gone awry
   if (statusCode) return <ErrorPage statusCode={statusCode} />
 
-  const { title, intro, excerpt, authors, stories, imageUrl, pageSaveStatus, partnership } = data
-  const { showAds = true, IABParentCategory, IABChildCategory, curationCategory, externalId } = data
+  const { title, intro, excerpt, authors, imageUrl, pageSaveStatus, partnership } = data
+  const { showAds = true, IABParentCategory, IABChildCategory, externalId } = data
   const authorNames = authors?.map((author) => author.name)
 
   const allowAds = userStatus === 'pending' || isPremium ? false : showAds
@@ -188,8 +189,8 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
               <ContentIntro intro={intro} />
 
               {/* Collection Stories */}
-              {stories
-                ? stories.map((id, index) => (
+              {storyIds
+                ? storyIds.map((id, index) => (
                     <ItemCard
                       id={id}
                       key={id}
