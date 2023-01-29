@@ -119,8 +119,8 @@ import { pageSavedInfoReducers } from 'containers/saves/saved-items/saved-items.
 import { pageHomeReducers } from 'containers/home/home.state'
 import { pageHomeSaga } from 'containers/home/home.state'
 
-// pageDiscoverReducers
-// pageDiscoverSagas
+import { pageDiscoverIdsReducers } from 'containers/discover/discover.state'
+import { pageDiscoverIdsSagas } from 'containers/discover/discover.state'
 
 // pageDiscoverTopicReducers
 // pageDiscoverTopicSagas
@@ -130,7 +130,6 @@ import { pageHomeSaga } from 'containers/home/home.state'
 
 // pageCollectionStoriesReducers
 // pageCollectionStoriesSagas
-
 
 /* REDUCERS
  --------------------------------------------------------------- */
@@ -157,7 +156,7 @@ const pageReducers = {
   pageHomeInfo: [],
   pageSavedIds: pageSavedIdsReducers,
   pageSavedInfo: pageSavedInfoReducers,
-  pageDiscoverIds: [],
+  pageDiscoverIds: pageDiscoverIdsReducers,
   pageDiscoverInfo: [],
   pageDiscoverTopicIds: [],
   pageDiscoverTopicInfo: [],
@@ -169,7 +168,6 @@ const pageReducers = {
 
 const discoverReducers = {
   discoverItemsById: discoverItemsReducers, // Shared discover item store
-  discoverHome: discoverHomeReducers,
   discoverTopic: topicReducers,
   syndicatedArticle: syndicatedArticleReducers
 }
@@ -241,7 +239,6 @@ function* rootSaga() {
     ...featureSagas,
     ...snowplowSagas,
     ...discoverItemsSagas,
-    ...discoverHomeSagas,
     ...collectionsSagas,
     ...collectionStoriesSagas,
     ...topicSagas,

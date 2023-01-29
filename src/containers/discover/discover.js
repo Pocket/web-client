@@ -31,7 +31,7 @@ export default function Discover({ locale }) {
   const dispatch = useDispatch()
 
   // Select items
-  const items = useSelector((state) => state.discoverHome.items)
+  const items = useSelector((state) => state.pageDiscoverIds.items)
   const isAuthenticated = useSelector((state) => state.user.auth)
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const userStatus = useSelector((state) => state.user.user_status)

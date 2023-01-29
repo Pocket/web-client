@@ -24,7 +24,7 @@ export const unSaveDiscoverItem = (id) => ({ type: DISCOVER_UNSAVE_REQUEST, id }
  --------------------------------------------------------------- */
 const initialState = { items: [] }
 
-export const discoverHomeReducers = (state = initialState, action) => {
+export const pageDiscoverIdsReducers = (state = initialState, action) => {
   switch (action.type) {
     case DISCOVER_DATA_SUCCESS: {
       const { items, itemsById } = action
@@ -44,8 +44,8 @@ export const discoverHomeReducers = (state = initialState, action) => {
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE: {
-      const { discoverHome } = action.payload
-      return { ...state, ...discoverHome }
+      const { pageDiscoverIds } = action.payload
+      return pageDiscoverIds
     }
 
     default:
@@ -55,7 +55,7 @@ export const discoverHomeReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const discoverHomeSagas = [
+export const pageDiscoverIdsSagas = [
   takeLatest(DISCOVER_DATA_REQUEST, discoverDataRequest),
   takeEvery(DISCOVER_SAVE_REQUEST, discoverSaveRequest),
   takeEvery(DISCOVER_UNSAVE_REQUEST, discoverUnSaveRequest)
