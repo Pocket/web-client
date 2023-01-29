@@ -1,6 +1,6 @@
 import { wrappedRender } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
-import Topic from 'containers/topic/topic'
+import Topic from './topic'
 
 const setAppElementStub = jest.fn()
 const ReactModalMock = ({ children }) => <div>{children}</div>
@@ -46,15 +46,9 @@ const mockEmpty = {
 }
 
 const mockState = {
-  discoverTopic: {
-    'laser-cats': {
-      curatedItems: [1, 2, 3, 4],
-      algorithmicItems: [1, 2, 3, 4]
-    },
-    'badgers-and-badges': {
-      curatedItems: [1, 2, 3, 4],
-      algorithmicItems: [1, 2, 3, 4]
-    }
+  pageTopic: {
+    'laser-cats': [1, 2, 3, 4],
+    'badgers-and-badges': [1, 2, 3, 4]
   }
 }
 

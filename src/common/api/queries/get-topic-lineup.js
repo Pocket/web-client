@@ -53,5 +53,12 @@ function handleResponse(response, topic) {
   const curatedItems = slateItemArrays[0]
   const algorithmicItems = slateItemArrays[1]
 
-  return { curatedItems, algorithmicItems, itemsById }
+  // This is due to a disparity with how old school `collections` in topics work.
+  // `collections` are 100% curated, so we have to check if there are any algorithmic
+  // items in the response and either return the full curated payload OR slice the top 5 curated
+  // and return the rest as algorithmic
+  const curatedItemIds = algorithmicItems ? curatedItems.slice(0, 5) : curatedItems
+  const algorithmicIds = algorithmicItems ? algorithmicItems : []
+
+  return { itemIds: [...curatedItemIds, ...algorithmicIds], itemsById }
 }

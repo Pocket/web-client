@@ -42,9 +42,6 @@ import { collectionStoriesSagas } from 'connectors/items-by-id/collection/storie
 
 import { topicListReducers } from 'connectors/topic-list/topic-list.state'
 
-import { topicReducers } from 'containers/topic/topic.state'
-import { topicSagas } from 'containers/topic/topic.state'
-
 import { pocketHitsReducers } from 'connectors/pocket-hits/pocket-hits.state'
 import { pocketHitsSagas } from 'connectors/pocket-hits/pocket-hits.state'
 
@@ -117,9 +114,7 @@ import { pageHomeReducers } from 'containers/home/home.state'
 import { pageHomeSaga } from 'containers/home/home.state'
 
 import { pageDiscoverIdsReducers } from 'containers/discover/discover.state'
-
-// pageDiscoverTopicReducers
-// pageDiscoverTopicSagas
+import { pageTopicReducers } from 'containers/discover/topic/topic.state'
 
 // pageCollectionReducers
 // pageCollectionSagas
@@ -154,8 +149,8 @@ const pageReducers = {
   pageSavedInfo: pageSavedInfoReducers,
   pageDiscoverIds: pageDiscoverIdsReducers,
   pageDiscoverInfo: [],
-  pageDiscoverTopicIds: [],
-  pageDiscoverTopicInfo: [],
+  pageTopic: pageTopicReducers,
+  pageTopicInfo: [],
   pageCollectionIds: [],
   pageCollectionInfo: [],
   pageStoriesIds: [],
@@ -164,7 +159,6 @@ const pageReducers = {
 
 const discoverReducers = {
   discoverItemsById: discoverItemsReducers, // Shared discover item store
-  discoverTopic: topicReducers,
   syndicatedArticle: syndicatedArticleReducers
 }
 
@@ -237,7 +231,6 @@ function* rootSaga() {
     ...discoverItemsSagas,
     ...collectionsSagas,
     ...collectionStoriesSagas,
-    ...topicSagas,
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
     ...recitSagas,
