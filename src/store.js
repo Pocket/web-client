@@ -45,9 +45,6 @@ import { pocketHitsSagas } from 'connectors/pocket-hits/pocket-hits.state'
 import { syndicatedArticleReducers } from 'containers/syndicated-article/syndicated-article.state'
 import { syndicatedArticleSagas } from 'containers/syndicated-article/syndicated-article.state'
 
-import { recitReducers } from 'connectors/recit/recit.state'
-import { recitSagas } from 'connectors/recit/recit.state'
-
 import { userMessageReducers } from 'containers/messages/user-messages.state'
 import { userMessageSagas } from 'containers/messages/user-messages.state'
 
@@ -76,6 +73,7 @@ import { itemsDisplayReducers } from 'connectors/items/items-display.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
 import { itemsSavedSagas } from 'connectors/items/items-saved.state'
 import { itemsTransitionsReducers } from 'connectors/items/items-transition.state'
+import { itemsRelatedReducers } from 'connectors/items/items-related.state'
 
 import { mutationArchiveReducers } from 'connectors/items/mutation-archive.state'
 import { mutationArchiveSagas } from 'connectors/items/mutation-archive.state'
@@ -125,6 +123,7 @@ const itemReducers = {
   itemsDisplay: itemsDisplayReducers, // This is canonical item data used to display an item from anywhere (an item is an item is an item)
   itemsSaved: itemsSavedReducers, // This represents the actions the user has taken on a given item (if any)
   itemsTransitions: itemsTransitionsReducers, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
+  itemsRelated: itemsRelatedReducers, // This is an explict call for related items ... these will shift over requests
   listen: listenReducers
 }
 
@@ -185,7 +184,6 @@ const globalReducers = {
   settings: settingsReducers, // User defined settings
   features: featureReducers, // Feature flags (very basic start)
   topicList: topicListReducers, // Valid topics list and active topic
-  recit: recitReducers, // Recommended articles, both publisher and pocket
   toasts: actionToastsReducers, // Notifications of action results,
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
@@ -225,7 +223,6 @@ function* rootSaga() {
     ...collectionStoriesSagas,
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
-    ...recitSagas,
     ...readerSettingsSagas,
     ...readerSagas, //graph
     ...pageHomeSaga,

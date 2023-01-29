@@ -1,6 +1,6 @@
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
-import { ActionsRec } from './card-rec-actions'
+import { ActionsRec } from './card-actions'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const RecCard = ({ id, position }) => {
@@ -8,8 +8,10 @@ export const RecCard = ({ id, position }) => {
 
   // Get data from state
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
-  const item = useSelector((state) => state.recit.readerRecs[id])
-  const { saveStatus, itemId, readUrl, externalUrl, openExternal } = item
+  const item = useSelector((state) => state.itemsDisplay[id])
+  if (!item) return null
+
+  const { saveStatus, readUrl, externalUrl, openExternal } = item
   const openUrl = readUrl && !openExternal ? readUrl : externalUrl
   const analyticsData = {
     id,
@@ -33,7 +35,7 @@ export const RecCard = ({ id, position }) => {
 
   return item ? (
     <Card
-      itemId={itemId}
+      itemId={id}
       externalUrl={externalUrl}
       tags={tags}
       title={title}
