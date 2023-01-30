@@ -18,6 +18,8 @@ const appStoreBadge =
 const googlePlayBadge =
   'https://assets.getpocket.com/web-ui/assets/google-play-badge.db9b21a1c41f3dcd9731e1e7acfdbb57.png'
 
+const oneTrustClickHander = () => window.OneTrust?.ToggleInfoDisplay()
+
 const footerStyle = css`
   background-color: var(--color-canvas);
   width: 100%;
@@ -451,7 +453,7 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder, minimal, ancho
               <a href="https://getpocket.com/tos?src=footer_v2">
                 {t('global-footer:terms-of-service', 'Terms of service')}
               </a>
-              <button onClick={() => window.OneTrust.ToggleInfoDisplay()} id="ot-sdk-btn" className="ot-sdk-show-settings">
+              <button onClick={oneTrustClickHander} id="ot-sdk-btn" className="ot-sdk-show-settings">
                 {t('global-footer:cookie-preferences', 'Cookie preferences')}
               </button>
             </nav>
