@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import { css, cx } from 'linaria'
-import { buttonReset } from 'components/buttons/button-reset'
 import { CheckIcon } from 'components/icons/CheckIcon'
 import { ErrorIcon } from 'components/icons/ErrorIcon'
 
@@ -81,6 +80,10 @@ const toastWrapper = css`
     border-radius: 4px;
     background-color: var(--color-navCurrentTab);
     color: var(--color-navCurrentTabText);
+
+    p {
+      margin: 0;
+    }
 
     .actionWrapper {
       padding-left: 1rem;
@@ -211,9 +214,7 @@ export function Toast({
     <Fade show={show} remove={remove}>
       <div className={toastWrapper}>
         <div className={cx('toastBlock', `${type}`)} data-cy={messages[typeForMessage]}>
-          <p>
-            {t(messages[typeForMessage], {count: itemCount})}
-          </p>
+          <p>{t(messages[typeForMessage], { count: itemCount })}</p>
           <div className="actionWrapper">
             {showUndo ? (
               <button onClick={handleUndo} className="text">

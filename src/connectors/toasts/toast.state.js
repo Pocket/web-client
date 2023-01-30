@@ -1,4 +1,5 @@
 import { TOAST_CLEAR } from 'actions'
+import { TOAST_CLEAR_ALL } from 'actions'
 
 import { MUTATION_SUCCESS } from 'actions'
 import { MUTATION_TAG_SUCCESS } from 'actions'
@@ -48,6 +49,7 @@ import { PROFILE_ITEM_DELETE_FAILURE } from 'actions'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const clearToast = (stamp) => ({ type: TOAST_CLEAR, stamp })
+export const clearAllToasts = () => ({ type: TOAST_CLEAR_ALL })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -58,6 +60,10 @@ export const actionToastsReducers = (state = initialState, action) => {
     case TOAST_CLEAR: {
       const { stamp } = action
       return state.filter((item) => item.stamp !== stamp)
+    }
+
+    case TOAST_CLEAR_ALL: {
+      return []
     }
 
     case MUTATION_DELETE_SUCCESS: {
