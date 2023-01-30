@@ -129,6 +129,8 @@ You will need to update your hosts file to point localhost (127.0.0.1) to the ho
 
 The discover pages will be deployed locally on `localhost.web-client.getpocket.com`.
 
+You can test on a mobile device connected on your local network by navigating to your host machine's IP address, which can be found via `ifconfig | grep "inet "`.
+
 ### Storybook
 
 This app also has an instance of Storybook, for developing components that will be shared inside of this repo.
