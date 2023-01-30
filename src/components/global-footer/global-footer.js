@@ -18,8 +18,6 @@ const appStoreBadge =
 const googlePlayBadge =
   'https://assets.getpocket.com/web-ui/assets/google-play-badge.db9b21a1c41f3dcd9731e1e7acfdbb57.png'
 
-const oneTrustClickHander = () => window.OneTrust?.ToggleInfoDisplay()
-
 const footerStyle = css`
   background-color: var(--color-canvas);
   width: 100%;
@@ -304,6 +302,8 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder, minimal, ancho
   const { t, i18n } = useTranslation()
   const { language } = i18n
 
+const oneTrustClickHandler = () => window.OneTrust?.ToggleInfoDisplay()
+
   const languagePrefix = language === 'de' ? 'de' : 'en'
   const newsletterLink = `https://getpocket.com/${languagePrefix}/explore/pocket-hits-signup?src=footer_v2`
 
@@ -453,7 +453,7 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder, minimal, ancho
               <a href="https://getpocket.com/tos?src=footer_v2">
                 {t('global-footer:terms-of-service', 'Terms of service')}
               </a>
-              <button onClick={oneTrustClickHander} id="ot-sdk-btn" className="ot-sdk-show-settings">
+              <button onClick={oneTrustClickHandler} id="ot-sdk-btn" className="ot-sdk-show-settings">
                 {t('global-footer:cookie-preferences', 'Cookie preferences')}
               </button>
             </nav>
