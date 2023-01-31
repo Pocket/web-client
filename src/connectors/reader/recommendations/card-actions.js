@@ -17,13 +17,15 @@ export function ActionsRec({ id, position }) {
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
 
   if (!item) return null
-  const { saveUrl } = item
+  const { saveUrl, corpusRecommendationId } = item
   const analyticsData = {
-    id,
+    corpusRecommendationId,
     url: saveUrl,
     position,
     destination: 'external'
   }
+
+  console.log({ corpusRecommendationId, id })
 
   // Prep save action
   const onSave = () => {
@@ -40,7 +42,7 @@ export function ActionsRec({ id, position }) {
 
   // Open action
   const onOpen = () => {
-    dispatch(sendSnowplowEvent('reader.rec.open', daanalyticsDatata))
+    dispatch(sendSnowplowEvent('reader.rec.open', analyticsData))
   }
 
   return item ? (

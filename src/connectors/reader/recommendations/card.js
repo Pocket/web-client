@@ -14,10 +14,10 @@ export const RecCard = ({ id, position }) => {
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const { title, publisher, excerpt, saveUrl } = item
+  const { title, publisher, excerpt, saveUrl, corpusRecommendationId } = item
 
   const analyticsData = {
-    id,
+    corpusRecommendationId,
     url: saveUrl,
     position,
     destination: 'external'

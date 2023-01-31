@@ -29,6 +29,7 @@ const getSavedItemByIdQuery = gql`
           ... on Item {
             article
             relatedAfterArticle(count: 3) {
+              corpusRecommendationId: id
               corpusItem {
                 thumbnail: imageUrl
                 publisher
@@ -65,7 +66,10 @@ function handleResponse(response) {
   const { item: responseItem, ...savedData } = responseData
   const { relatedAfterArticle, ...item } = responseItem
 
-  const relatedArticles = relatedAfterArticle.map((relatedItem) => relatedItem?.corpusItem ) //prettier-ignore
+  const relatedArticles = relatedAfterArticle.map((relatedItem) => ({
+    corpusRecommendationId: relatedItem?.corpusRecommendationId,
+    ...relatedItem?.corpusItem
+  }))
   const relatedArticlesById = arrayToObject(relatedArticles, 'id')
 
   return {
