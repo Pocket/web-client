@@ -9,8 +9,9 @@ import { ITEMS_UPSERT_SUCCESS } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const mutationUpsert = (url, filters, sort, isUnArchive) => ({ type: MUTATION_UPSERT, url, filters, sort, isUnArchive}) //prettier-ignore
-export const mutationUpsertCorpusItem = (url, corpusId) => ({ type: MUTATION_UPSERT, url, corpusId }) //prettier-ignore
+export const mutationUpsert = (url, filters, sort, isUnArchive) => ({ type: MUTATION_UPSERT, url, filters, sort, isUnArchive }) //prettier-ignore
+// A transitional item is something that we are offering the user as a recommendation from our corpus or other discovery surface
+export const mutationUpsertTransitionalItem = (url, transitionId) => ({ type: MUTATION_UPSERT, url, transitionId }) //prettier-ignore
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
@@ -20,7 +21,7 @@ export const mutationUpsertSagas = [takeEvery(MUTATION_UPSERT, savedItemUpsert)]
  --------------------------------------------------------------- */
 
 function* savedItemUpsert(action) {
-  const { url, sort, isUnArchive, type, corpusId } = action
+  const { url, sort, isUnArchive, type, transitionId } = action
   const upsertResponse = yield call(itemUpsert, url)
 
   if (!upsertResponse) return // Do better here
@@ -37,7 +38,7 @@ function* savedItemUpsert(action) {
     nodes: { [itemId]: node },
     savedItemIds,
     sort,
-    corpusId,
+    transitionId,
     itemId
   })
 }

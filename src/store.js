@@ -5,8 +5,8 @@ import { all } from 'redux-saga/effects'
 
 /* IMPORT CONTAINER STATES
  --------------------------------------------------------------- */
-import { homeSetupReducers } from 'containers/home/home-setup.state'
-import { homeSetupSagas } from 'containers/home/home-setup.state'
+import { homeSetupReducers } from 'containers/home/setup/setup.state'
+import { homeSetupSagas } from 'containers/home/setup/setup.state'
 
 import { appReducers, appSagas } from 'connectors/app/app.state'
 import { oneTrustReducers } from 'connectors/third-party/one-trust.state'
@@ -57,9 +57,6 @@ import { syndicatedArticleSagas } from 'containers/syndicated-article/syndicated
 import { recitReducers } from 'connectors/recit/recit.state'
 import { recitSagas } from 'connectors/recit/recit.state'
 
-import { homeReducers } from 'containers/home/home.state'
-import { homeSagas } from 'containers/home/home.state'
-
 import { userMessageReducers } from 'containers/messages/user-messages.state'
 import { userMessageSagas } from 'containers/messages/user-messages.state'
 
@@ -74,9 +71,6 @@ import { actionToastsReducers } from 'connectors/toasts/toast.state'
 import { shortcutReducers } from 'connectors/shortcuts/shortcuts.state.js'
 import { shortcutSagas } from 'connectors/shortcuts/shortcuts.state.js'
 
-import { onboardingReducers } from 'connectors/onboarding/onboarding.state'
-import { onboardingSagas } from 'connectors/onboarding/onboarding.state'
-
 import { listenReducers } from 'connectors/listen/listen.state'
 import { listenSagas } from 'connectors/listen/listen.state'
 
@@ -87,7 +81,7 @@ import { readerSettingsSagas } from 'containers/read/reader-settings.state'
 import { readerReducers } from 'containers/read/reader.state'
 import { readerSagas } from 'containers/read/reader.state'
 
-import { itemsReducers } from 'connectors/items/items.state'
+import { itemsDisplayReducers } from 'connectors/items/items-display.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
 import { itemsSavedSagas } from 'connectors/items/items-saved.state'
 import { itemsTransitionsReducers } from 'connectors/items/items-transition.state'
@@ -122,10 +116,26 @@ import { pageSavedIdsReducers } from 'containers/saves/saved-items/saved-items.s
 import { pageSavedIdsSagas } from 'containers/saves/saved-items/saved-items.state'
 import { pageSavedInfoReducers } from 'containers/saves/saved-items/saved-items.state'
 
+import { pageHomeReducers } from 'containers/home/home.state'
+import { pageHomeSaga } from 'containers/home/home.state'
+
+// pageDiscoverReducers
+// pageDiscoverSagas
+
+// pageDiscoverTopicReducers
+// pageDiscoverTopicSagas
+
+// pageCollectionReducers
+// pageCollectionSagas
+
+// pageCollectionStoriesReducers
+// pageCollectionStoriesSagas
+
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
-  itemsDisplay: itemsReducers, // This is canonical item data used to display an item from anywhere (an item is an item is an item)
+  itemsDisplay: itemsDisplayReducers, // This is canonical item data used to display an item from anywhere (an item is an item is an item)
   itemsSaved: itemsSavedReducers, // This represents the actions the user has taken on a given item (if any)
   itemsTransitions: itemsTransitionsReducers, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
   listen: listenReducers
@@ -143,7 +153,7 @@ const itemMutations = {
 }
 
 const pageReducers = {
-  pageHomeIds: [],
+  pageHome: pageHomeReducers,
   pageHomeInfo: [],
   pageSavedIds: pageSavedIdsReducers,
   pageSavedInfo: pageSavedInfoReducers,
@@ -198,7 +208,6 @@ const globalReducers = {
   toasts: actionToastsReducers, // Notifications of action results,
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
-  onboarding: onboardingReducers, // Onboarding
   braze: brazeReducers // Braze
 }
 
@@ -215,7 +224,6 @@ export const rootReducer = combineReducers({
   ...libraryReducers,
   ...readerViewReducers,
   ...userAccountReducers,
-  home: homeReducers,
   ...itemReducers,
   ...itemMutations,
   ...pageReducers
@@ -242,13 +250,12 @@ function* rootSaga() {
     ...recitSagas,
     ...readerSettingsSagas,
     ...readerSagas, //graph
-    ...homeSagas,
+    ...pageHomeSaga,
     ...userMessageSagas,
     ...userSearchSagas,
     ...profileSagas,
     ...profileItemsSagas,
     ...shortcutSagas,
-    ...onboardingSagas,
     ...brazeSagas,
     ...pageSavedIdsSagas,
     ...itemsSavedSagas,

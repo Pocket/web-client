@@ -1,4 +1,6 @@
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { clearAllToasts } from 'connectors/toasts/toast.state'
 import { Toast } from './toast'
 import { css } from 'linaria'
 
@@ -10,7 +12,14 @@ const toastStyle = css`
 `
 
 export const Toasts = () => {
+  const dispatch = useDispatch()
+
   const toasts = useSelector((state) => state.toasts)
+
+  useEffect(() => {
+  dispatch(clearAllToasts())
+  }, [dispatch])
+
   return (
     <div className={toastStyle}>
       {toasts.map((toast) => (

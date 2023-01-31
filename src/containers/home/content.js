@@ -13,18 +13,18 @@ import { itemActionStyle } from 'components/item-actions/base'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import TopicsPillbox from 'components/topics-pillbox/topics-pillbox'
-import { reSelectTopics } from 'containers/home/home-setup.state'
+import { reSelectTopics } from 'containers/home/setup/setup.state'
 import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
 import { useRouter } from 'node_modules/next/router'
 
-import { mutationUpsertCorpusItem } from 'connectors/items/mutation-upsert.state'
-import { mutationDeleteCorpusItem } from 'connectors/items/mutation-delete.state'
+import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
+import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 
 export const HomeContent = () => {
   const { locale } = useRouter()
   const dispatch = useDispatch()
-  const slates = useSelector((state) => state.home.slates)
+  const slates = useSelector((state) => state.pageHome.slates)
 
   const featureState = useSelector((state) => state.features) || {}
   const flagsReady = useSelector((state) => state.features.flagsReady)
@@ -49,8 +49,8 @@ export const HomeContent = () => {
 
 function Slate({ slateId }) {
   const dispatch = useDispatch()
-  const slates = useSelector((state) => state.home.slates)
-  const slate = useSelector((state) => state.home.slatesById[slateId])
+  const slates = useSelector((state) => state.pageHome.slates)
+  const slate = useSelector((state) => state.pageHome.slatesById[slateId])
   const featureState = useSelector((state) => state.features) || {}
   const [slide, setSlide] = useState(false)
 
@@ -126,7 +126,7 @@ function Slate({ slateId }) {
 
 function ItemCard({ corpusId }) {
   const dispatch = useDispatch()
-  const item = useSelector((state) => state.home.itemsById[corpusId])
+  const item = useSelector((state) => state.itemsDisplay[corpusId])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(corpusId))
 
   if (!item) return null
@@ -178,7 +178,7 @@ function CardActions({ id }) {
 
   const dispatch = useDispatch()
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const item = useSelector((state) => state.home.itemsById[id])
+  const item = useSelector((state) => state.itemsDisplay[id])
 
   const saveItemId = useSelector((state) => state.itemsTransitions[id])
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
@@ -191,12 +191,12 @@ function CardActions({ id }) {
   // Prep save action
   const onSave = () => {
     dispatch(sendSnowplowEvent('home.corpus.save', analyticsData))
-    dispatch(mutationUpsertCorpusItem(url, id))
+    dispatch(mutationUpsertTransitionalItem(url, id))
   }
 
   const onUnSave = () => {
     dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
-    dispatch(mutationDeleteCorpusItem(saveItemId, id))
+    dispatch(mutationDeleteTransitionalItem(saveItemId, id))
   }
 
   const saveAction = saveItemId ? onUnSave : onSave
