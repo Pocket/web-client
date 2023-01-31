@@ -12,9 +12,22 @@ import { RSSFeeds } from 'containers/account/rss/rss'
 import { Privacy } from 'containers/account/privacy/privacy'
 import { useTranslation } from 'next-i18next'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { useEffect } from 'react'
 
 export const Account = () => {
   const dispatch = useDispatch()
+
+  // https://github.com/vercel/next.js/issues/11109#issuecomment-952397638 Work-around for scrolling to anchors on page load [FRONT-1571]
+  useEffect(() => {
+    const hash = window.location.hash
+    if (hash) {
+      setTimeout(()=> {
+        document
+          .querySelector(hash)
+          ?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    }
+  }, [])
 
   // Profile content
   const isLoggedIn = useSelector((state) => !!state.user.auth)
