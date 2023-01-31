@@ -127,9 +127,7 @@ export const API_ACTION_ADD_ANNOTATION = 'add_annotation'
 export const API_ACTION_DELETE_ANNOTATION = 'delete_annotation'
 export const API_ACTION_SHARE_ADDED = 'share_added'
 export const API_ACTION_SHARE_IGNORED = 'share_ignored'
-export const API_ACTION_FOLLOW_USER = 'follow_user'
-export const API_ACTION_UNFOLLOW_USER = 'unfollow_user'
-export const API_ACTION_DELETE_RECOMMEND = 'post_delete'
+
 
 // ANALYTICS
 export const ANALYTICS_UI = 'cxt_ui'
