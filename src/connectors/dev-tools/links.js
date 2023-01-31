@@ -1,17 +1,8 @@
 import { sectionStyles } from 'components/dev-tools/tool-styles'
-import { useSelector } from 'react-redux'
 import Link from 'next/link'
 
 export const Links = ({ toggleDevMode }) => {
-  const userId = useSelector((state) => state?.user?.user_id)
-
-  const links = [
-    {
-      src: `/profile/${userId}?src=navbar`,
-      title: 'Profile',
-      description: 'Articles you Recommended'
-    }
-  ]
+  const links = []
 
   return links.length ? (
     <div className={sectionStyles}>

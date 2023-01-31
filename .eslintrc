@@ -11,7 +11,8 @@
   ],
   "ignorePatterns": [
     "*.stories.js",
-    "*.spec.js"
+    "*.spec.js",
+    "*.tmp.js"
   ],
   "globals": {
     "snowplow": true
