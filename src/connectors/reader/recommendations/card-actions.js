@@ -25,8 +25,6 @@ export function ActionsRec({ id, position }) {
     destination: 'external'
   }
 
-  console.log({ corpusRecommendationId, id })
-
   // Prep save action
   const onSave = () => {
     dispatch(mutationUpsertTransitionalItem(saveUrl, id))
