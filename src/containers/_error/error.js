@@ -30,6 +30,7 @@ const containerStyle = css`
   align-items: center;
   min-height: 400px;
   height: 100%;
+  padding-top: 65px;
 
   .errorHeading {
     font-family: var(--fontSansSerif);
