@@ -49,6 +49,14 @@ export const readerActions = {
     entityTypes: ['content', 'ui'],
     eventData: {
       engagementType: 'save',
+      uiType: 'button',
+    },
+    expects: ['id', 'url', 'position']
+  },
+  'reader.rec.unsave': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
       uiType: 'button'
     },
     expects: ['id', 'url', 'position']

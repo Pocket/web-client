@@ -11,13 +11,16 @@ export const RecCard = ({ id, position }) => {
   const item = useSelector((state) => state.itemsDisplay[id])
   if (!item) return null
 
-  const { saveStatus, readUrl, externalUrl, openExternal } = item
-  const openUrl = readUrl && !openExternal ? readUrl : externalUrl
+  /** ITEM DETAILS
+  --------------------------------------------------------------- */
+  const itemImage = item?.noImage ? '' : item?.thumbnail
+  const { title, publisher, excerpt, saveUrl } = item
+
   const analyticsData = {
     id,
-    url: openUrl,
+    url: saveUrl,
     position,
-    destination: saveStatus === 'saved' && !openExternal ? 'internal' : 'external'
+    destination: 'external'
   }
 
   /**
@@ -28,32 +31,21 @@ export const RecCard = ({ id, position }) => {
   const onImpression = () => dispatch(sendSnowplowEvent('reader.rec.impression', analyticsData))
   const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
 
-  /** ITEM DETAILS
-  --------------------------------------------------------------- */
-  const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } = item //prettier-ignore
-
   return item ? (
     <Card
       itemId={id}
-      externalUrl={externalUrl}
-      tags={tags}
+      externalUrl={saveUrl}
       title={title}
       itemImage={itemImage}
       publisher={publisher}
       excerpt={excerpt}
-      timeToRead={timeToRead}
-      isSyndicated={isSyndicated}
-      isInternalItem={isInternalItem}
-      fromPartner={fromPartner}
       cardShape="block"
       position={position}
       showExcerpt={true}
       onItemInView={onItemInView}
       onOpen={onOpen}
       onOpenOriginalUrl={onOpen}
-      hiddenActions={false}
-      openUrl={openUrl}
+      openUrl={saveUrl}
       ActionMenu={ActionsRec}
     />
   ) : null

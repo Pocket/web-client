@@ -17,36 +17,38 @@ export function ActionsRec({ id, position }) {
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
 
   if (!item) return null
-  const { saveUrl, readUrl, externalUrl, openExternal } = item
-  const data = { id, url: saveUrl, position }
+  const { saveUrl } = item
+  const analyticsData = {
+    id,
+    url: saveUrl,
+    position,
+    destination: 'external'
+  }
 
   // Prep save action
   const onSave = () => {
     dispatch(mutationUpsertTransitionalItem(saveUrl, id))
-    dispatch(sendSnowplowEvent('reader.rec.save', data))
+    dispatch(sendSnowplowEvent('reader.rec.save', analyticsData))
   }
 
   const onUnSave = () => {
-    dispatch(sendSnowplowEvent('reader.rec.unsave', data))
+    dispatch(sendSnowplowEvent('reader.rec.unsave', analyticsData))
     dispatch(mutationDeleteTransitionalItem(saveItemId, id))
   }
 
   const saveAction = saveItemId ? onUnSave : onSave
 
   // Open action
-  const url = openExternal ? externalUrl : readUrl
   const onOpen = () => {
-    const data = { id, url, position, destination: 'internal' }
-    dispatch(sendSnowplowEvent('reader.rec.open', data))
+    dispatch(sendSnowplowEvent('reader.rec.open', daanalyticsDatata))
   }
 
   return item ? (
     <div className={`${itemActionStyle} actions`}>
       <SaveToPocket
         allowRead={false}
-        url={url}
+        url={saveUrl}
         onOpen={onOpen}
-        openExternal={openExternal}
         saveAction={saveAction}
         isAuthenticated={isAuthenticated}
         saveStatus={saveStatus}
