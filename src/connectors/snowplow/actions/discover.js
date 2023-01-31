@@ -69,7 +69,6 @@ export const discoverActions = {
     eventType: 'engagement',
     entityTypes: ['content', 'recommendation', 'slate', 'slateLineup', 'ui'],
     eventData: {
-      engagementType: 'save',
       uiType: 'button'
     },
     expects: [

@@ -33,7 +33,7 @@ export function ActionsDiscover({ id, position }) {
   }
 
   const onUnSave = () => {
-    dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
+    dispatch(sendSnowplowEvent('discover.unsave', analyticsData))
     dispatch(mutationDeleteTransitionalItem(saveItemId, id))
   }
 
