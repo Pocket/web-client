@@ -5,6 +5,8 @@ import { MUTATION_SUCCESS } from 'actions'
 import { MUTATION_TAG_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
 
+import { ITEMS_UPSERT_SUCCESS } from 'actions'
+
 import { ITEMS_DELETE_SUCCESS } from 'actions'
 import { ITEMS_DELETE_FAILURE } from 'actions'
 
@@ -95,6 +97,7 @@ export const actionToastsReducers = (state = initialState, action) => {
     case DISCOVER_ITEMS_SAVE_SUCCESS:
     case ARTICLE_SAVE_SUCCESS:
     case MUTATION_SUCCESS:
+    case ITEMS_UPSERT_SUCCESS:
     case COPY_ITEM_URL: {
       const { actions, count, actionType = false } = action
       const itemCount = actions ? actions?.length : count
