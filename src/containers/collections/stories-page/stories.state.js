@@ -38,9 +38,14 @@ export const pageCollectionStoriesReducers = (state = initialState, action) => {
  */
 export async function fetchCollectionBySlug({ slug }) {
   try {
-    const { itemsById, storyIdsBySlug } = await getCollectionBySlug(slug)
+    const response = await getCollectionBySlug(slug)
+    const { itemsById, storyIdsBySlug } = response || {}
 
-    if (!itemsById) return { error: 'No data found' }
+    // No items by id here.  We could throw an error, but this might break things when
+    // collections are in a non-published state.  As it stands right now,
+    // this is handled on the page side
+    if (!itemsById) return
+
     return { itemsById, storyIdsBySlug }
   } catch (error) {
     console.warn('collection.state.collectionBySlug', error)
