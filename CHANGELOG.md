@@ -1,3 +1,11 @@
+# [1.75.0](https://github.com/Pocket/web-client/compare/v1.74.0...v1.75.0) (2023-02-01)
+
+
+### Features
+
+* **home:** add banner to home surface ([45125e5](https://github.com/Pocket/web-client/commit/45125e52714ded6e49677d2b81e337686690ca53))
+* **home:** home banner ([bf721e8](https://github.com/Pocket/web-client/commit/bf721e80646b7de5f5609fbaaa4cfd1d3fc3dbd0))
+
 # [1.74.0](https://github.com/Pocket/web-client/compare/v1.73.5...v1.74.0) (2023-01-26)
 
 
