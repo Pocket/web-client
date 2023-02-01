@@ -29,8 +29,6 @@ import { ItemCard } from './card'
 import { unSaveCollectionPage } from 'containers/collections/collections.state'
 import { saveCollectionPage } from 'containers/collections/collections.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-
-import { Toasts } from 'connectors/toasts/toast-list'
 import ErrorPage from 'pages/_error'
 
 import { css } from 'linaria'
@@ -226,7 +224,6 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
             </footer>
           </section>
         </main>
-        <Toasts />
       </ArticleLayout>
     </>
   )
