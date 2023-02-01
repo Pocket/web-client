@@ -9,6 +9,7 @@ import { clearToast } from './toast.state'
 import { useTranslation } from 'next-i18next'
 import { mutationUnDelete } from 'connectors/items/mutation-delete.state'
 
+import { ITEMS_UPSERT_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
 
 import { MUTATION_ARCHIVE } from 'actions'
@@ -114,7 +115,7 @@ const toastWrapper = css`
 const messages = {
   [ITEMS_DELETE_SUCCESS]: 'deleted',
   [ITEMS_DELETE_FAILURE]: 'error-deleting',
-  [MUTATION_DELETE_SUCCESS]: 'added',
+  [ITEMS_UPSERT_SUCCESS]: 'added',
   [MUTATION_DELETE_SUCCESS]: 'deleted',
   [ITEMS_DELETE_FAILURE]: 'error-deleting',
   [ITEMS_ADD_SUCCESS]: 'added',

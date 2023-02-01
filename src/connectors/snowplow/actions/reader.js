@@ -29,29 +29,37 @@ export const readerActions = {
   },
   'reader.rec.open': {
     eventType: 'contentOpen',
-    entityTypes: ['content', 'ui'],
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position', 'destination']
+    expects: ['corpusRecommendationId', 'url', 'position', 'destination']
   },
   'reader.rec.impression': {
     eventType: 'impression',
-    entityTypes: ['content', 'ui'],
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
       component: 'ui',
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position', 'destination']
+    expects: ['corpusRecommendationId', 'url', 'position']
   },
   'reader.rec.save': {
     eventType: 'engagement',
-    entityTypes: ['content', 'ui'],
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
       engagementType: 'save',
+      uiType: 'button',
+    },
+    expects: ['corpusRecommendationId', 'url', 'position']
+  },
+  'reader.rec.unsave': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
+    eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['corpusRecommendationId', 'url', 'position']
   },
   'highlights.limit.sidebar': {
     eventType: 'impression',

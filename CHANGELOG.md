@@ -1,3 +1,19 @@
+# [1.76.0](https://github.com/Pocket/web-client/compare/v1.75.0...v1.76.0) (2023-02-01)
+
+
+### Bug Fixes
+
+* **reader-recs:** update analytics calls to include corpusrecommendationid ([719ad6f](https://github.com/Pocket/web-client/commit/719ad6fdd6f52c5939499a46fc832e630607b2f9))
+* **reader:** update recs save unsave functionality ([2c616c2](https://github.com/Pocket/web-client/commit/2c616c2095db59803caa3391871d6a1177e86a83))
+* **recs:** remove pesky console log ([e393e16](https://github.com/Pocket/web-client/commit/e393e16973e60ac56eb9997b5e1fcdc8c03e07f7))
+* **recs:** remove reader rec actions ([5bf59c5](https://github.com/Pocket/web-client/commit/5bf59c5ab62f981a69f9e9c663335f18b221ce70))
+* **toasts:** adding toast for upsert success ([8054c03](https://github.com/Pocket/web-client/commit/8054c03a1bce5641d4d082d6b1ff6415dd24e460))
+
+
+### Features
+
+* **reader:** use related end of article ([e02dc2f](https://github.com/Pocket/web-client/commit/e02dc2fd971e79a48e6f16aeba81c8b93e1b7c9e))
+
 # [1.75.0](https://github.com/Pocket/web-client/compare/v1.74.0...v1.75.0) (2023-02-01)
 
 
