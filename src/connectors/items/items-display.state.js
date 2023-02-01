@@ -15,7 +15,20 @@ export const itemsDisplayReducers = (state = {}, action) => {
     case READ_ITEM_SUCCESS:
     case ITEMS_SUCCESS: {
       const { itemsById } = action
-      return { ...state, ...itemsById }
+
+      // Instead of a wholesale shallow merge (which overwrites existing values)
+      // We are gonna do a messy deep merge.  This is all neccesary because we
+      // don't have great data consistency in our endpoints
+      const preExistingItemIds = Object.keys(itemsById).filter((value) =>
+        Object.keys(state).includes(value)
+      )
+      // This monstrosity avoids us clobbering the current derived display
+      // This can all be nuked once we achieve display item consistnecy from the graph
+      const preExistingItemsById = preExistingItemIds.reduce((previous, current) => {
+        return { ...previous, [current]: { ...itemsById[current], ...state[current] } }
+      }, {})
+
+      return { ...state, ...itemsById, ...preExistingItemsById }
     }
 
     case ITEMS_SET_NO_IMAGE: {
