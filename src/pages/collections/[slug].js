@@ -16,7 +16,7 @@ import { wrapper } from 'store'
  * SEO/Crawlers
   --------------------------------------------------------------- */
 export const getStaticPaths = async () => {
-  const { itemSlugs } = await fetchCollections()
+  const { itemSlugs = [] } = await fetchCollections()
   const paths = itemSlugs.map((collection) => `/collections/${collection.slug}`)
 
   return { paths, fallback: 'blocking' }

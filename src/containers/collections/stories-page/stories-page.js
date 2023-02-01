@@ -26,13 +26,14 @@ import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { ItemCard } from './card'
 
-import { unSaveCollectionPage } from 'containers/collections/collections.state'
-import { saveCollectionPage } from 'containers/collections/collections.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import ErrorPage from 'pages/_error'
 
 import { css } from 'linaria'
 import { breakpointMediumHandset } from 'common/constants' // 479
+
+import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
+import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 
 const itemStyles = css`
   ${breakpointMediumHandset} {
@@ -63,6 +64,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const userStatus = useSelector((state) => state.user.user_status)
   const showTopics = locale === 'en'
+  const saveItemId = useSelector((state) => state.itemsTransitions[slug])
 
   // Show error page if things have gone awry
   if (statusCode) return <ErrorPage statusCode={statusCode} />
@@ -92,13 +94,21 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const url = canonical
 
   const metaData = { description: excerpt, title, url, image: imageUrl }
-  const saveAction = (saveUrl, id) => {
-    if (pageSaveStatus === 'saved') dispatch(unSaveCollectionPage(slug))
-    if (pageSaveStatus !== 'saved') {
-      dispatch(saveCollectionPage(slug))
-      dispatch(sendSnowplowEvent('collection.page.save', { url: saveUrl, value: id }))
-    }
+
+  const saveStatus = saveItemId ? 'saved' : 'unsaved'
+
+  // Prep save action
+  const onSave = () => {
+    dispatch(sendSnowplowEvent('collection.page.save', { url: url, value: slug }))
+    dispatch(mutationUpsertTransitionalItem(url, slug))
   }
+
+  const onUnSave = () => {
+    // dispatch(sendSnowplowEvent('collection.unsave', analyticsData)) // HELP ME OBI-ANTHONY-KENOBI
+    dispatch(mutationDeleteTransitionalItem(saveItemId, slug))
+  }
+
+  const saveAction = saveItemId ? onUnSave : onSave
 
   const shareAction = (platform) => {
     dispatch(sendSnowplowEvent(`collection.share.${platform}`, { url }))
@@ -150,7 +160,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
               <SaveArticleTop
                 isAuthenticated={isAuthenticated}
                 saveAction={saveAction}
-                saveStatus={pageSaveStatus}
+                saveStatus={saveStatus}
                 url={url}
               />
             </header>
@@ -212,7 +222,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
               <SaveArticleBottom
                 isAuthenticated={isAuthenticated}
                 saveAction={saveAction}
-                saveStatus={pageSaveStatus}
+                saveStatus={saveStatus}
                 url={url}
               />
 
