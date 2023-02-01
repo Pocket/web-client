@@ -7,7 +7,14 @@ import { HomeContent } from './content'
 import { SuccessFXA } from 'components/snackbar/success-fxa'
 import { HomeSetup } from './setup/setup'
 
+import { useRouter } from 'node_modules/next/router'
+import { BannerGermanHome } from 'components/banner/german-home'
+
 export const Home = ({ metaData }) => {
+  const { locale } = useRouter()
+  const bannerLanguages = ['de', 'de-DE']
+  const showBanner = bannerLanguages.includes(locale)
+
   const userStatus = useSelector((state) => state.user.user_status)
   const featureState = useSelector((state) => state.features) || {}
 
@@ -16,7 +23,9 @@ export const Home = ({ metaData }) => {
 
   return (
     <Layout metaData={metaData} isFullWidthLayout={true} noContainer={true}>
+      {showBanner ? <BannerGermanHome /> : null}
       <SuccessFXA type="home" />
+
       <HomeSetup />
       <HomeRecentSaves />
       <HomeContent />

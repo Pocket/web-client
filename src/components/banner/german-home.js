@@ -12,9 +12,6 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import bannerCard from 'static/images/banner/german-home/cards.png'
 
 const bannerBackground = css`
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   background: linear-gradient(90deg, var(--color-lapisDarker) 50%, var(--color-lapisLightest) 50%);
   z-index: 1;
@@ -93,13 +90,8 @@ const bannerStyles = css`
       font-size: 12px;
     }
   }
-  ${breakpointTinyTablet} {
-    h3 {
-      font-size: 16px;
-    }
-  }
 
-  ${breakpointMediumHandset} {
+  ${breakpointTinyTablet} {
     height: 100px;
     display: grid;
     grid-template-columns: 104px auto;
@@ -128,21 +120,23 @@ const bannerStyles = css`
   }
 `
 
-export const GermanHomeBanner = () => {
+export const BannerGermanHome = () => {
   const dispatch = useDispatch()
   const bannerLink =
     'https://getpocket.com/de/collections/eine-partnerschaft-fuer-mehr-sichtbarkeit-bipoc-im-spotlight'
 
   useEffect(() => {
-    dispatch(sendSnowplowEvent('bestof2022.collection.impression'))
+    dispatch(sendSnowplowEvent('banner.german.home.impression'))
   }, [dispatch])
 
-  const handleClick = () => dispatch(sendSnowplowEvent('bestof2022.collection.click'))
+  const handleClick = () => {
+    dispatch(sendSnowplowEvent('banner.german.home.click'))
+  }
 
   return (
     <div className={bannerBackground}>
       <div className={bannerStyles}>
-        <div className="media" style={{ backgroundImage: `url("${bannerCard}")` }}>
+        <div className="media" style={{ backgroundImage: `url("${bannerCard.src}")` }}>
           <div className="media-copy">BIPoC im Spotlight</div>
         </div>
         <h3>Entdecke Content, der die Autor*innen von „People of Deutschland“ inspiriert.</h3>

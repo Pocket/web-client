@@ -1,4 +1,4 @@
-import { GermanHomeBanner as Component } from './german-home'
+import { BannerGermanHome as Component } from './german-home'
 
 export default {
   title: 'Components/Banner/German Home',

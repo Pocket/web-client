@@ -14,6 +14,7 @@ import { shortcutActions } from './shortcuts'
 import { sideNavActions } from './side-nav'
 import { syndicatedArticleActions } from './syndicated-article'
 import { topicActions } from './topic'
+import { marketingActions } from './marketing'
 
 export const analyticsActions = {
   ...accountActions,
@@ -31,5 +32,6 @@ export const analyticsActions = {
   ...readerActions,
   ...sideNavActions,
   ...syndicatedArticleActions,
-  ...topicActions
+  ...topicActions,
+  ...marketingActions
 }
