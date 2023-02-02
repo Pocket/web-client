@@ -67,7 +67,7 @@ function handleResponse(response) {
   try {
     const { stories, ...collectionData } = response?.data?.collectionBySlug || {}
 
-    if (!collectionData) throw new CollectionBySlugRequestError()
+    if (!stories) throw new CollectionBySlugRequestError()
 
     const derivedCollection = deriveCollection(collectionData)
     const collectionBySlug = { [derivedCollection?.slug]: derivedCollection }
