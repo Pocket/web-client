@@ -27,7 +27,7 @@ export function ActionsCollection({ id, position }) {
   }
 
   const onUnSave = () => {
-    // dispatch(sendSnowplowEvent('collection.unsave', analyticsData)) // HELP ME OBI-ANTHONY-KENOBI
+    dispatch(sendSnowplowEvent('collection.story.unsave', analyticsData))
     dispatch(mutationDeleteTransitionalItem(saveItemId, id))
   }
   const saveAction = saveItemId ? onUnSave : onSave
