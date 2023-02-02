@@ -7,7 +7,12 @@ export default {
         "imageUrl": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/e1e3d2fc-c3e3-469a-9a06-277483494401.jpeg",
         "title": "End of the Avocado: Why Chefs Are Ditching the Unsustainable Fruit",
         "url": "https://getpocket.com/explore/item/end-of-the-avocado-why-chefs-are-ditching-the-unsustainable-fruit",
-        "publisher": "The Guardian"
+        "publisher": "The Guardian",
+        "target": {
+          "publisher": {
+            "logoWideBlack": "https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5ecfd51115764.png",
+          }
+        }
       }
     },
     {
@@ -17,7 +22,12 @@ export default {
         "imageUrl": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/5f951369-ea98-436e-9556-fc70065fdace.jpeg",
         "title": "Plant-Based Doesn’t Always Mean Healthy",
         "url": "https://getpocket.com/explore/item/plant-based-doesn-t-always-mean-healthy",
-        "publisher": "The Conversation"
+        "publisher": "The Conversation",
+        "target": {
+          "publisher": {
+            "logoWideBlack": "https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5e41cf5d22a5a.png",
+          }
+        }
       }
     },
     {
@@ -27,7 +37,12 @@ export default {
         "imageUrl": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/fedb1690-26f3-4bb8-a027-1016bfe2bfda.jpeg",
         "title": "Vegan Cheese Is Ready to Compete With Dairy. Is the World Ready to Eat It?",
         "url": "https://getpocket.com/explore/item/vegan-cheese-is-ready-to-compete-with-dairy-is-the-world-ready-to-eat-it",
-        "publisher": "Eater"
+        "publisher": "Eater",
+        "target": {
+          "publisher": {
+            "logoWideBlack": "https://pocket-syndicated-publisher-logos.s3.amazonaws.com/635adf7585116.png",
+          }
+        }
       }
     },
     {
@@ -37,7 +52,12 @@ export default {
         "imageUrl": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/57827ae9-6ec9-4cfd-8bb8-320fb1308894.jpeg",
         "title": "Eat This to Save the World!",
         "url": "https://getpocket.com/explore/item/eat-this-to-save-the-world-the-most-sustainable-foods-from-seaweed-to-venison",
-        "publisher": "The Guardian"
+        "publisher": "The Guardian",
+        "target": {
+          "publisher": {
+            "logoWideBlack": "https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5ecfd51115764.png",
+          }
+        }
       }
     },
     {
@@ -47,7 +67,12 @@ export default {
         "imageUrl": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/01e92072-efde-44cc-9552-15b7beb9a3f6.png",
         "title": "Magical Microbes: How to Feed Your Gut",
         "url": "https://getpocket.com/explore/item/magical-microbes-how-to-feed-your-gut",
-        "publisher": "The Guardian"
+        "publisher": "The Guardian",
+        "target": {
+          "publisher": {
+            "logoWideBlack": "https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5ecfd51115764.png",
+          }
+        }
       }
     },
     {
@@ -57,7 +82,12 @@ export default {
         "imageUrl": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/128bca90-ee62-4173-ba99-ed9cf0e7703c.jpeg",
         "title": "Seven Things You’re Paying Too Much for in a Restaurant",
         "url": "https://getpocket.com/explore/item/seven-things-you-re-paying-too-much-for-in-a-restaurant",
-        "publisher": "Bloomberg"
+        "publisher": "Bloomberg",
+        "target": {
+          "publisher": {
+            "logoWideBlack": "https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5db9fb68b6b7f.png",
+          }
+        }
       }
     },
     {
@@ -67,7 +97,12 @@ export default {
         "imageUrl": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/0d719cdd-4db2-4540-8df1-1da3cae8f13a.jpeg",
         "title": "10 Recipes with Vegetable Broth",
         "url": "https://getpocket.com/explore/item/10-recipes-with-vegetable-broth",
-        "publisher": "Feel Good Foodie"
+        "publisher": "Feel Good Foodie",
+        "target": {
+          "publisher": {
+            "logoWideBlack": "https://pocket-syndicated-publisher-logos.s3.amazonaws.com/604bf1a5afa23.png",
+          }
+        }
       }
     },
     {
@@ -77,7 +112,12 @@ export default {
         "imageUrl": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/c38c1efb-c473-4bbd-8396-b7651d823204.jpeg",
         "title": "What Chefs Make When All They Have Is a Bag of Rice",
         "url": "https://getpocket.com/explore/item/what-chefs-make-when-all-they-have-is-a-bag-of-rice",
-        "publisher": "Domino"
+        "publisher": "Domino",
+        "target": {
+          "publisher": {
+            "logoWideBlack": "https://pocket-syndicated-publisher-logos.s3.amazonaws.com/5ecfd69945da6.png",
+          }
+        }
       }
     },
     {
@@ -87,7 +127,12 @@ export default {
         "imageUrl": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/cd772424-fa36-4e69-8e7b-397ee09fa6ca.jpeg",
         "title": "11 Soup Recipes Perfect for Freezing and Hoarding",
         "url": "https://getpocket.com/explore/item/eleven-soup-recipes-perfect-for-freezing-and-hoarding",
-        "publisher": "Popular Science"
+        "publisher": "Popular Science",
+        "target": {
+          "publisher": {
+            "logoWideBlack": "https://pocket-syndicated-publisher-logos.s3.amazonaws.com/60e4df2ca511d.png",
+          }
+        }
       }
     },
     {
@@ -97,7 +142,12 @@ export default {
         "imageUrl": "https://s3.amazonaws.com/pocket-curatedcorpusapi-prod-images/b437cc09-bdc5-43f7-9eb5-e2d44972de73.jpeg",
         "title": "Black Lentils Are a Revelation",
         "url": "https://getpocket.com/explore/item/black-lentils-are-a-revelation",
-        "publisher": "Saveur"
+        "publisher": "Saveur",
+        "target": {
+          "publisher": {
+            "logoWideBlack": "ttps://pocket-syndicated-publisher-logos.s3.amazonaws.com/5ce69f3324877.png",
+          }
+        }
       }
     }
   ]

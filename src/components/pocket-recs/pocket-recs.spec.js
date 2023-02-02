@@ -2,7 +2,7 @@ import { render } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
 
 import PocketRecs, { Publisher } from './pocket-recs'
-import { pocketRecommendations as pocketRecs, publisher } from 'mock/article'
+import { pocketRecommendations as pocketRecs } from 'mock/article'
 
 describe('PocketRecs', () => {
   const { relatedEndOfArticle: recommendations } = pocketRecs
@@ -16,16 +16,18 @@ describe('PocketRecs', () => {
   // TODO: Update once the recs api returns a new logo url
   describe('Publisher', () => {
     it('renders a Publisher with a logo image, when available', () => {
-      const { name } = publisher.theVerge
-      const { queryByCy } = render(<Publisher name={name} />)
+      const { corpusItem } = recommendations[0]
+      const { publisher, target } = corpusItem
+      const { queryByCy } = render(<Publisher name={publisher} logo={target?.publisher?.logoWideBlack} />)
       expect(queryByCy('pocket-rec-publisher-logo')).toBeTruthy()
     })
 
     it('renders the name of the Publisher when its logo url is not available', () => {
-      const name = 'Unheard of Publisher'
-      const { queryByCy } = render(<Publisher name={name} />)
+      const { corpusItem } = recommendations[0]
+      const { publisher } = corpusItem
+      const { queryByCy } = render(<Publisher name={publisher} />)
       expect(queryByCy('pocket-rec-publisher-logo')).toBeFalsy()
-      expect(queryByCy('pocket-rec-publisher-name')).toHaveTextContent(name)
+      expect(queryByCy('pocket-rec-publisher-name')).toHaveTextContent(publisher)
     })
   })
 

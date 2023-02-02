@@ -52,7 +52,7 @@ const publisherStyles = css`
 export const Publisher = ({ name, logo }) => (
   <div className={publisherStyles}>
     {logo ? (
-      <img src={publisherImage} data-cy="pocket-rec-publisher-logo" alt={`Logo for ${name}`} />
+      <img src={logo} data-cy="pocket-rec-publisher-logo" alt={`Logo for ${name}`} />
     ) : (
       <span data-cy="pocket-rec-publisher-name">{name}</span>
     )}
