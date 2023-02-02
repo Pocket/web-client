@@ -14,7 +14,6 @@ import { BASE_URL } from 'common/constants'
  * IDENTIFIERS
  * ————————————————————————————————————
  * @param {string} itemId — A server generated unique id for this item.
- * @param {string} resolvedId — The item id of the resolved_url
  *
  * URLS
  * ————————————————————————————————————
