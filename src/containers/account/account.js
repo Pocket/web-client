@@ -16,18 +16,23 @@ import { useEffect } from 'react'
 
 export const Account = () => {
   const dispatch = useDispatch()
+  
+  // Anchor tags
+  const officialApps = useSelector((state) => state?.userConnectedServices?.officialApps)
 
   // https://github.com/vercel/next.js/issues/11109#issuecomment-952397638 Work-around for scrolling to anchors on page load [FRONT-1571]
   useEffect(() => {
     const hash = window.location.hash
-    if (hash) {
-      setTimeout(()=> {
-        document
-          .querySelector(hash)
-          ?.scrollIntoView({ behavior: 'smooth' })
-      }, 100)
+    if (!officialApps || !hash) {
+      return
     }
-  }, [])
+    
+    setTimeout(()=> {
+      document
+        .querySelector(hash)
+        ?.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
+  }, [officialApps])
 
   // Profile content
   const isLoggedIn = useSelector((state) => !!state.user.auth)
