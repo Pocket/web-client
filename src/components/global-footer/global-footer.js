@@ -302,7 +302,7 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder, minimal, ancho
   const { t, i18n } = useTranslation()
   const { language } = i18n
 
-const oneTrustClickHandler = () => window.OneTrust?.ToggleInfoDisplay()
+  const oneTrustClickHandler = () => window.OneTrust?.ToggleInfoDisplay()
 
   const languagePrefix = language === 'de' ? 'de' : 'en'
   const newsletterLink = `https://getpocket.com/${languagePrefix}/explore/pocket-hits-signup?src=footer_v2`
