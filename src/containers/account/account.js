@@ -13,20 +13,24 @@ import { Privacy } from 'containers/account/privacy/privacy'
 import { useTranslation } from 'next-i18next'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { useEffect } from 'react'
+import { useRef } from 'react'
 
 export const Account = () => {
   const dispatch = useDispatch()
   
   // Anchor tags
+  const hasScrolledToHashRef = useRef(false)
   const officialApps = useSelector((state) => state?.userConnectedServices?.officialApps)
 
   // https://github.com/vercel/next.js/issues/11109#issuecomment-952397638 Work-around for scrolling to anchors on page load [FRONT-1571]
   useEffect(() => {
     const hash = window.location.hash
-    if (!officialApps || !hash) {
+    if (hasScrolledToHashRef.current || !officialApps || !hash) {
       return
     }
     
+    hasScrolledToHashRef.current = true
+
     setTimeout(()=> {
       document
         .querySelector(hash)
