@@ -47,6 +47,13 @@ const getSyndicatedArticleQuery = gql`
           title
           url
           publisher
+          target {
+            ... on SyndicatedArticle {
+              publisher {
+                logoWideBlack
+              }
+            }
+          }
         }
       }
       relatedRightRail(count: $count) {

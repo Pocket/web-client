@@ -8,7 +8,6 @@ import { breakpointLargeHandset } from 'common/constants'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
-import { PublisherImages } from './publisher-images.tmp'
 
 const headingStyles = css`
   font-family: var(--fontSerifAlt);
@@ -50,19 +49,15 @@ const publisherStyles = css`
     margin-top: 16px;
   }
 `
-export const Publisher = ({ name, logo }) => {
-  const publisherImage = PublisherImages[name]
-
-  return (
-    <div className={publisherStyles}>
-      {publisherImage ? (
-        <img src={publisherImage} data-cy="pocket-rec-publisher-logo" alt={`Logo for ${name}`} />
-      ) : (
-        <span data-cy="pocket-rec-publisher-name">{name}</span>
-      )}
-    </div>
-  )
-}
+export const Publisher = ({ name, logo }) => (
+  <div className={publisherStyles}>
+    {logo ? (
+      <img src={publisherImage} data-cy="pocket-rec-publisher-logo" alt={`Logo for ${name}`} />
+    ) : (
+      <span data-cy="pocket-rec-publisher-name">{name}</span>
+    )}
+  </div>
+)
 
 const recommendationStyles = css`
   display: grid;
@@ -130,7 +125,7 @@ export const Recommendation = ({
   handleRecClick
 }) => {
   if (!rec) return null
-  const { imageUrl, title, url, publisher } = rec
+  const { imageUrl, title, url, publisher, target } = rec
   const thumbnailUrl = getImageCacheUrl(imageUrl, { width: 270, height: 150 })
 
   const handleVisible = () => {
@@ -150,7 +145,7 @@ export const Recommendation = ({
           </a>
         </Link>
         <div className="details">
-          <Publisher name={publisher} />
+          <Publisher name={publisher} logo={target?.publisher?.logoWideBlack} />
           <Link href={url}>
             <a onClick={handleClick}>
               <h4 className="h5">{title}</h4>
