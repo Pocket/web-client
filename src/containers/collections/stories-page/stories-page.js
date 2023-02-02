@@ -98,13 +98,13 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
 
   // Prep save action
-  const onSave = () => {
-    dispatch(sendSnowplowEvent('collection.page.save', { url: url, value: slug }))
+  const onSave = (url, value) => {
+    dispatch(sendSnowplowEvent('collection.page.save', { url, value }))
     dispatch(mutationUpsertTransitionalItem(url, slug))
   }
 
-  const onUnSave = () => {
-    // dispatch(sendSnowplowEvent('collection.unsave', analyticsData)) // HELP ME OBI-ANTHONY-KENOBI
+  const onUnSave = (url, value) => {
+    dispatch(sendSnowplowEvent('collection.page.unsave', { url, value }))
     dispatch(mutationDeleteTransitionalItem(saveItemId, slug))
   }
 

@@ -25,6 +25,14 @@ export const collectionsActions = {
     },
     expects: ['url', 'position']
   },
+  'collection.unsave': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['url', 'position']
+  },
   'collection.story.impression': {
     eventType: 'impression',
     entityTypes: ['content', 'ui'],
@@ -51,6 +59,14 @@ export const collectionsActions = {
     },
     expects: ['url', 'position']
   },
+  'collection.story.unsave': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['url', 'position']
+  },
   'collection.page.save': {
     eventType: 'engagement',
     entityTypes: ['content', 'ui'],
@@ -61,6 +77,16 @@ export const collectionsActions = {
     expects: ['url', 'value'],
     description:
       'Fired when a user clicks the `Save` button, value is one of three: save-story-top, save-story-side, or save-story-bottom'
+  },
+  'collection.page.unsave': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['url', 'value'],
+    description:
+      'Fired when a user clicks the `Save` button once Saved, value is one of three: save-story-top, save-story-side, or save-story-bottom'
   },
   'collection.share.facebook': {
     eventType: 'engagement',
