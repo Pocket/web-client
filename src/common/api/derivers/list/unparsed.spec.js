@@ -107,7 +107,7 @@ describe('Saves - Unparsed', () => {
     expect(item.readUrl).toBe(expectedReadUrl)
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
     expect(item.isInternalItem).toBe(false)
-    expect(item.timeToRead).toBe(2)
+    expect(item.timeToRead).toBe(null)
     expect(item.authors).toStrictEqual([
       {
         name: 'Schweiz Tourismus',

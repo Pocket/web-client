@@ -60,8 +60,7 @@ Author(s) of the article
 The time it will take to read the article.
 
 ### Derived from:
-- itemTimeToRead — time to read coming from the server (?? where/how is it calculated)
-- readTimeFromWordCount — time to engage with article based on word count divided by number of words an average reader reads in a minute (220) 
+- itemTimeToRead — time to read coming from the server
 
 ---
 

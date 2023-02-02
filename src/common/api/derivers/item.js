@@ -1,5 +1,4 @@
 import { replaceUTM } from 'common/utilities/urls/urls'
-import { readTimeFromWordCount } from 'common/utilities/time-to-read/time-to-read'
 import { domainForUrl } from 'common/utilities/urls/urls'
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { urlWithPermanentLibrary } from 'common/utilities/urls/urls'
@@ -202,7 +201,6 @@ export function deriveItemData({
     isReadable: isReadable({ item }),
     isCollection: isCollection({ item }),
     isInternalItem: isInternalItem({ item, node, itemEnrichment, status: node?.status }),
-    timeToRead: readTime({ item }),
     fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
       id: item?.itemId || node?.id || false,
@@ -290,14 +288,6 @@ function excerpt({ item, itemEnrichment }) {
 const syndicated = function ({ item }) {
   if (item?.syndicatedArticle) return true
   return false
-}
-
-/** READ TIME
- * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
- * @returns {int} average number of minutes to read the item
- */
-export function readTime({ item }) {
-  return item?.timeToRead || readTimeFromWordCount(item?.wordCount) || null
 }
 
 /**
