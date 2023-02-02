@@ -115,7 +115,6 @@ export const CardPageHeader = ({ title, subHeading }) => {
 export const CollectionPageHeader = ({ title, note }) => {
   return title ? (
     <header className={cardPageHeaderStyle}>
-      <p className="h4 collectionSubTitle">Collection</p>
       <h1 className="collectonTitle">{title}</h1>
       <h2 className={cx('h3', subHeadingStyle)}>Essential Reads</h2>
       <div className="descriptor">

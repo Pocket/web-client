@@ -9,12 +9,12 @@ import { modalActions } from './modals'
 import { savesActions } from './saves'
 import { onboardingActions } from './onboarding'
 import { pocketHitsActions } from './pocket-hits'
-import { profileActions } from './profile'
 import { readerActions } from './reader'
 import { shortcutActions } from './shortcuts'
 import { sideNavActions } from './side-nav'
 import { syndicatedArticleActions } from './syndicated-article'
 import { topicActions } from './topic'
+import { marketingActions } from './marketing'
 
 export const analyticsActions = {
   ...accountActions,
@@ -28,10 +28,10 @@ export const analyticsActions = {
   ...savesActions,
   ...onboardingActions,
   ...pocketHitsActions,
-  ...profileActions,
   ...shortcutActions,
   ...readerActions,
   ...sideNavActions,
   ...syndicatedArticleActions,
-  ...topicActions
+  ...topicActions,
+  ...marketingActions
 }

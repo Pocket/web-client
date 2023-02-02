@@ -6,7 +6,7 @@ import { lineupAnalytics } from 'common/api/derivers/discover/discover.spec'
 import { slateAnalytics } from 'common/api/derivers/discover/discover.spec'
 import { recommendationsFromSlate } from 'common/api/derivers/discover/discover.spec'
 
-import { ItemCard as DiscoverCard } from 'connectors/item-card/discover/card'
+import { ItemCard as DiscoverCard } from './card'
 import { deriveRecommendation } from 'common/api/derivers/item'
 
 describe('ItemCard', () => {
@@ -21,7 +21,7 @@ describe('ItemCard', () => {
     analytics: {
       impressions: []
     },
-    discoverItemsById: {
+    itemsDisplay: {
       [derivedDiscoverItem.itemId]: derivedDiscoverItem
     }
   }

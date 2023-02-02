@@ -1,7 +1,7 @@
 import { Card } from 'components/item-card/card'
 import { useSelector, useDispatch } from 'react-redux'
 import { ActionsCollection } from './story-actions'
-import { setNoImage } from 'connectors/items-by-id/discover/items.state'
+import { setNoImage } from 'connectors/items/items-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 /**

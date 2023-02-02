@@ -1,3 +1,34 @@
+## [1.76.1](https://github.com/Pocket/web-client/compare/v1.76.0...v1.76.1) (2023-02-02)
+
+
+### Bug Fixes
+
+* **404 error:** add css rule ([7f2ee5f](https://github.com/Pocket/web-client/commit/7f2ee5fd5107ec83ee4524741ee9878d845ca6c0))
+
+# [1.76.0](https://github.com/Pocket/web-client/compare/v1.75.0...v1.76.0) (2023-02-01)
+
+
+### Bug Fixes
+
+* **reader-recs:** update analytics calls to include corpusrecommendationid ([719ad6f](https://github.com/Pocket/web-client/commit/719ad6fdd6f52c5939499a46fc832e630607b2f9))
+* **reader:** update recs save unsave functionality ([2c616c2](https://github.com/Pocket/web-client/commit/2c616c2095db59803caa3391871d6a1177e86a83))
+* **recs:** remove pesky console log ([e393e16](https://github.com/Pocket/web-client/commit/e393e16973e60ac56eb9997b5e1fcdc8c03e07f7))
+* **recs:** remove reader rec actions ([5bf59c5](https://github.com/Pocket/web-client/commit/5bf59c5ab62f981a69f9e9c663335f18b221ce70))
+* **toasts:** adding toast for upsert success ([8054c03](https://github.com/Pocket/web-client/commit/8054c03a1bce5641d4d082d6b1ff6415dd24e460))
+
+
+### Features
+
+* **reader:** use related end of article ([e02dc2f](https://github.com/Pocket/web-client/commit/e02dc2fd971e79a48e6f16aeba81c8b93e1b7c9e))
+
+# [1.75.0](https://github.com/Pocket/web-client/compare/v1.74.0...v1.75.0) (2023-02-01)
+
+
+### Features
+
+* **home:** add banner to home surface ([45125e5](https://github.com/Pocket/web-client/commit/45125e52714ded6e49677d2b81e337686690ca53))
+* **home:** home banner ([bf721e8](https://github.com/Pocket/web-client/commit/bf721e80646b7de5f5609fbaaa4cfd1d3fc3dbd0))
+
 # [1.74.0](https://github.com/Pocket/web-client/compare/v1.73.5...v1.74.0) (2023-01-26)
 
 

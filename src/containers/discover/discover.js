@@ -11,7 +11,7 @@ import { BASE_URL } from 'common/constants'
 // Components
 import { CardPageHeader } from 'components/headers/discover-header'
 import { CardListHeading } from 'components/headers/discover-header'
-import { ItemCard } from 'connectors/item-card/discover/card'
+import { ItemCard } from './card'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
@@ -22,8 +22,6 @@ import { CallOutBrand } from 'components/call-out/call-out-brand'
 import { CallOutStartLibraryExplore } from 'components/call-out/call-out-start-library'
 import { CallOutPocketHitsSignup } from 'components/call-out/call-out-pocket-hits'
 
-import { Toasts } from 'connectors/toasts/toast-list'
-
 import { useTranslation } from 'next-i18next'
 
 export default function Discover({ locale }) {
@@ -31,7 +29,7 @@ export default function Discover({ locale }) {
   const dispatch = useDispatch()
 
   // Select items
-  const items = useSelector((state) => state.discoverHome.items)
+  const items = useSelector((state) => state.pageDiscoverIds)
   const isAuthenticated = useSelector((state) => state.user.auth)
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const userStatus = useSelector((state) => state.user.user_status)
@@ -55,11 +53,11 @@ export default function Discover({ locale }) {
     dispatch(sendSnowplowEvent(id))
   }
 
-  const topicClickMiddle = (topic, index, id) => {
+  const topicClickMiddle = (topic) => {
     dispatch(sendSnowplowEvent('discover.middle.topic.click', { label: topic }))
   }
 
-  const topicClickBottom = (topic, index, id) => {
+  const topicClickBottom = (topic) => {
     dispatch(sendSnowplowEvent('discover.bottom.topic.click', { label: topic }))
   }
 
@@ -107,7 +105,6 @@ export default function Discover({ locale }) {
       ) : null}
 
       <ConfirmReport />
-      <Toasts />
     </Layout>
   ) : (
     <Layout title={metaData.title} metaData={metaData}></Layout>

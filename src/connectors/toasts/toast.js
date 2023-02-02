@@ -9,6 +9,7 @@ import { clearToast } from './toast.state'
 import { useTranslation } from 'next-i18next'
 import { mutationUnDelete } from 'connectors/items/mutation-delete.state'
 
+import { ITEMS_UPSERT_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
 
 import { MUTATION_ARCHIVE } from 'actions'
@@ -47,12 +48,6 @@ import { ITEMS_TAG_FAILURE } from 'actions'
 
 import { ADD_SHARE_SUCCESS } from 'actions'
 import { ADD_SHARE_FAILURE } from 'actions'
-
-import { PROFILE_ITEM_SAVE_SUCCESS } from 'actions'
-import { PROFILE_ITEM_SAVE_FAILURE } from 'actions'
-
-import { PROFILE_ITEM_DELETE_SUCCESS } from 'actions'
-import { PROFILE_ITEM_DELETE_FAILURE } from 'actions'
 
 import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
 import { COLLECTION_PAGE_SAVE_SUCCESS } from 'actions'
@@ -120,7 +115,7 @@ const toastWrapper = css`
 const messages = {
   [ITEMS_DELETE_SUCCESS]: 'deleted',
   [ITEMS_DELETE_FAILURE]: 'error-deleting',
-  [MUTATION_DELETE_SUCCESS]: 'added',
+  [ITEMS_UPSERT_SUCCESS]: 'added',
   [MUTATION_DELETE_SUCCESS]: 'deleted',
   [ITEMS_DELETE_FAILURE]: 'error-deleting',
   [ITEMS_ADD_SUCCESS]: 'added',
@@ -140,10 +135,6 @@ const messages = {
   [ITEMS_TAG_FAILURE]: 'error-tagging',
   [ADD_SHARE_SUCCESS]: 'added',
   [ADD_SHARE_FAILURE]: 'error-adding',
-  [PROFILE_ITEM_SAVE_SUCCESS]: 'added',
-  [PROFILE_ITEM_SAVE_FAILURE]: 'error-adding',
-  [PROFILE_ITEM_DELETE_SUCCESS]: 'deleted',
-  [PROFILE_ITEM_DELETE_FAILURE]: 'error-deleting',
   [COPY_ITEM_URL]: 'url-copied',
   [COLLECTIONS_SAVE_SUCCESS]: 'added',
   [COLLECTION_PAGE_SAVE_SUCCESS]: 'added',
@@ -167,9 +158,7 @@ const errors = [
   ITEMS_SHARE_FAILURE,
   SHARE_RECOMMEND_FAILURE,
   ITEMS_TAG_FAILURE,
-  ADD_SHARE_FAILURE,
-  PROFILE_ITEM_SAVE_FAILURE,
-  PROFILE_ITEM_DELETE_FAILURE
+  ADD_SHARE_FAILURE
 ]
 
 export function Toast({

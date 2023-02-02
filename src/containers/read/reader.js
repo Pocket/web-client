@@ -10,7 +10,7 @@ import { Toolbar } from 'connectors/reader/toolbar'
 import { Header } from 'connectors/reader/header'
 import { SidebarWrapper } from 'connectors/reader/sidebar'
 import { ContentWrapper } from 'connectors/reader/content'
-import { Recommendations } from 'connectors/reader/recommendations'
+import { Recommendations } from 'connectors/reader/recommendations/recommendations'
 import { Upsell } from 'connectors/reader/upsell'
 
 import { ConfirmTagging } from 'connectors/confirm/tagging'

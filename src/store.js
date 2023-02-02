@@ -30,12 +30,6 @@ import { featureSagas } from 'connectors/feature-flags/feature-flags.state'
 import { snowplowReducers } from 'connectors/snowplow/snowplow.state'
 import { snowplowSagas } from 'connectors/snowplow/snowplow.state'
 
-import { discoverItemsReducers } from 'connectors/items-by-id/discover/items.state'
-import { discoverItemsSagas } from 'connectors/items-by-id/discover/items.state'
-
-import { discoverHomeReducers } from 'containers/discover/discover.state'
-import { discoverHomeSagas } from 'containers/discover/discover.state'
-
 import { collectionsPageReducers } from 'containers/collections/collections.state'
 import { collectionsBySlugReducers } from 'containers/collections/collections.state'
 import { collectionsSagas } from 'containers/collections/collections.state'
@@ -45,26 +39,14 @@ import { collectionStoriesSagas } from 'connectors/items-by-id/collection/storie
 
 import { topicListReducers } from 'connectors/topic-list/topic-list.state'
 
-import { topicReducers } from 'containers/topic/topic.state'
-import { topicSagas } from 'containers/topic/topic.state'
-
 import { pocketHitsReducers } from 'connectors/pocket-hits/pocket-hits.state'
 import { pocketHitsSagas } from 'connectors/pocket-hits/pocket-hits.state'
 
 import { syndicatedArticleReducers } from 'containers/syndicated-article/syndicated-article.state'
 import { syndicatedArticleSagas } from 'containers/syndicated-article/syndicated-article.state'
 
-import { recitReducers } from 'connectors/recit/recit.state'
-import { recitSagas } from 'connectors/recit/recit.state'
-
 import { userMessageReducers } from 'containers/messages/user-messages.state'
 import { userMessageSagas } from 'containers/messages/user-messages.state'
-
-import { profileReducers } from 'containers/profile/profile.state'
-import { profileSagas } from 'containers/profile/profile.state'
-
-import { profileItemsReducers } from 'connectors/items-by-id/profile/items.state'
-import { profileItemsSagas } from 'connectors/items-by-id/profile/items.state'
 
 import { actionToastsReducers } from 'connectors/toasts/toast.state'
 
@@ -85,6 +67,7 @@ import { itemsDisplayReducers } from 'connectors/items/items-display.state'
 import { itemsSavedReducers } from 'connectors/items/items-saved.state'
 import { itemsSavedSagas } from 'connectors/items/items-saved.state'
 import { itemsTransitionsReducers } from 'connectors/items/items-transition.state'
+import { itemsRelatedReducers } from 'connectors/items/items-related.state'
 
 import { mutationArchiveReducers } from 'connectors/items/mutation-archive.state'
 import { mutationArchiveSagas } from 'connectors/items/mutation-archive.state'
@@ -119,11 +102,8 @@ import { pageSavedInfoReducers } from 'containers/saves/saved-items/saved-items.
 import { pageHomeReducers } from 'containers/home/home.state'
 import { pageHomeSaga } from 'containers/home/home.state'
 
-// pageDiscoverReducers
-// pageDiscoverSagas
-
-// pageDiscoverTopicReducers
-// pageDiscoverTopicSagas
+import { pageDiscoverIdsReducers } from 'containers/discover/discover.state'
+import { pageTopicReducers } from 'containers/discover/topic/topic.state'
 
 // pageCollectionReducers
 // pageCollectionSagas
@@ -131,13 +111,13 @@ import { pageHomeSaga } from 'containers/home/home.state'
 // pageCollectionStoriesReducers
 // pageCollectionStoriesSagas
 
-
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
   itemsDisplay: itemsDisplayReducers, // This is canonical item data used to display an item from anywhere (an item is an item is an item)
   itemsSaved: itemsSavedReducers, // This represents the actions the user has taken on a given item (if any)
   itemsTransitions: itemsTransitionsReducers, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
+  itemsRelated: itemsRelatedReducers, // This is an explict call for related items ... these will shift over requests
   listen: listenReducers
 }
 
@@ -154,13 +134,10 @@ const itemMutations = {
 
 const pageReducers = {
   pageHome: pageHomeReducers,
-  pageHomeInfo: [],
   pageSavedIds: pageSavedIdsReducers,
   pageSavedInfo: pageSavedInfoReducers,
-  pageDiscoverIds: [],
-  pageDiscoverInfo: [],
-  pageDiscoverTopicIds: [],
-  pageDiscoverTopicInfo: [],
+  pageDiscoverIds: pageDiscoverIdsReducers, // item ids for the discover home surface
+  pageTopic: pageTopicReducers, //topic keyed arrays of item ids for topic pages
   pageCollectionIds: [],
   pageCollectionInfo: [],
   pageStoriesIds: [],
@@ -168,9 +145,6 @@ const pageReducers = {
 }
 
 const discoverReducers = {
-  discoverItemsById: discoverItemsReducers, // Shared discover item store
-  discoverHome: discoverHomeReducers,
-  discoverTopic: topicReducers,
   syndicatedArticle: syndicatedArticleReducers
 }
 
@@ -183,9 +157,7 @@ const collectionReducer = {
 const libraryReducers = {
   userTags: userTagsReducers,
   userMessages: userMessageReducers,
-  userSearch: userSearchReducers,
-  userPublicProfile: profileReducers,
-  profileItemsByIds: profileItemsReducers
+  userSearch: userSearchReducers
 }
 
 const readerViewReducers = {
@@ -204,7 +176,6 @@ const globalReducers = {
   settings: settingsReducers, // User defined settings
   features: featureReducers, // Feature flags (very basic start)
   topicList: topicListReducers, // Valid topics list and active topic
-  recit: recitReducers, // Recommended articles, both publisher and pocket
   toasts: actionToastsReducers, // Notifications of action results,
   shortcuts: shortcutReducers, // Keyboard shortcuts,
   analytics: snowplowReducers, //Analytics
@@ -240,21 +211,15 @@ function* rootSaga() {
     ...userTagsSagas,
     ...featureSagas,
     ...snowplowSagas,
-    ...discoverItemsSagas,
-    ...discoverHomeSagas,
     ...collectionsSagas,
     ...collectionStoriesSagas,
-    ...topicSagas,
     ...pocketHitsSagas,
     ...syndicatedArticleSagas,
-    ...recitSagas,
     ...readerSettingsSagas,
     ...readerSagas, //graph
     ...pageHomeSaga,
     ...userMessageSagas,
     ...userSearchSagas,
-    ...profileSagas,
-    ...profileItemsSagas,
     ...shortcutSagas,
     ...brazeSagas,
     ...pageSavedIdsSagas,

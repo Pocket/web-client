@@ -1,6 +1,6 @@
 import { wrappedRender } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
-import Topic from 'containers/topic/topic'
+import Topic from './topic'
 
 const setAppElementStub = jest.fn()
 const ReactModalMock = ({ children }) => <div>{children}</div>
@@ -46,15 +46,9 @@ const mockEmpty = {
 }
 
 const mockState = {
-  discoverTopic: {
-    'laser-cats': {
-      curatedItems: [1, 2, 3, 4],
-      algorithmicItems: [1, 2, 3, 4]
-    },
-    'badgers-and-badges': {
-      curatedItems: [1, 2, 3, 4],
-      algorithmicItems: [1, 2, 3, 4]
-    }
+  pageTopic: {
+    'laser-cats': [1, 2, 3, 4],
+    'badgers-and-badges': [1, 2, 3, 4]
   }
 }
 
@@ -94,11 +88,6 @@ const mockPageTopic = {
 }
 
 describe('TopicPage', function () {
-  xit('renders an error when no results are returned', () => {
-    const { getByText } = wrappedRender(<Topic />, { initialState: mockEmpty })
-    expect(getByText('Oops', { exact: false }))
-  })
-
   it('renders a topic collection when `page_type` is `editorial_collection`', () => {
     const { getByRole } = wrappedRender(<Topic />, { initialState: mockCollectionTopic })
     expect(getByRole('heading', { level: 1 })).toHaveTextContent('Laser Cats!')

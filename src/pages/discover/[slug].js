@@ -1,9 +1,9 @@
-import Topic from 'containers/topic/topic'
+import Topic from 'containers/discover/topic/topic'
 import { TOPICS_BY_NAME } from 'common/constants'
 import { setActiveTopic } from 'connectors/topic-list/topic-list.state'
-import { fetchTopicData } from 'containers/topic/topic.state'
-import { hydrateTopic } from 'containers/topic/topic.state'
-import { hydrateItems } from 'connectors/items-by-id/discover/items.state'
+import { fetchTopicData } from 'containers/discover/topic/topic.state'
+import { hydrateTopic } from 'containers/discover/topic/topic.state'
+import { hydrateItems } from 'connectors/items/items-display.state'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
 
@@ -46,7 +46,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ params,
   const response = await fetchTopicData(topic)
   if (!response) return { props: { ...defaultProps, statusCode: 500 }, revalidate: 300 }
 
-  const { curatedItems = [], algorithmicItems = [], itemsById = {} } = response
+  const { itemIds, itemsById } = response
 
   // Hydrate the items array
   dispatch(hydrateItems(itemsById))
@@ -55,7 +55,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ params,
   dispatch(setActiveTopic(slug))
 
   // Hydrate the topic page item arrays
-  dispatch(hydrateTopic({ topic: slug, data: { curatedItems, algorithmicItems } }))
+  dispatch(hydrateTopic({ topic: slug, itemIds }))
 
   // Revalidate means this can be regenerated once every X seconds
   return { props: defaultProps, revalidate: 60 }

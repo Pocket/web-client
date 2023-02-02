@@ -1,9 +1,7 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { css } from 'linaria'
 import { COLUMN_WIDTH_RANGE } from 'common/constants'
-import { RecCard } from 'connectors/item-card/reader/card-rec'
-import { readerRecsRequest } from 'connectors/recit/recit.state'
+import { RecCard } from './card'
 import { breakpointTinyTablet } from 'common/constants'
 
 const asideWrapper = css`
@@ -72,19 +70,13 @@ const headerStyles = css`
 `
 
 export const Recommendations = ({ id }) => {
-  const dispatch = useDispatch()
+  const recommendations = useSelector((state) => state.itemsRelated[id])
 
-  const recommendations = useSelector((state) => state.recit.readerRecs)
-
-  useEffect(() => {
-    dispatch(readerRecsRequest(id))
-  }, [dispatch, id])
-
-  return Object.keys(recommendations).length ? (
+  return recommendations?.length ? (
     <aside className={asideWrapper}>
       <h2 className={headerStyles}>You Might Also Like</h2>
       <section className={sectionWrapper}>
-        {Object.keys(recommendations).map((itemId, index) => (
+        {recommendations.map((itemId, index) => (
           <RecCard key={itemId} id={itemId} position={index} />
         ))}
       </section>
