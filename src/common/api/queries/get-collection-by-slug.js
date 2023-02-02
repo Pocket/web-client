@@ -3,6 +3,7 @@ import { requestGQL } from 'common/utilities/request/request'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 import { deriveCollection, deriveStory } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
+import * as Sentry from '@sentry/nextjs'
 
 const getCollectionBySlugQuery = gql`
   query GetCollectionBySlug($getCollectionBySlugSlug: String!) {
@@ -54,34 +55,40 @@ const getCollectionBySlugQuery = gql`
 `
 
 export function getCollectionBySlug(slug) {
+  if (!slug) return // No slug, no collection for you
+
   return requestGQL({
     query: getCollectionBySlugQuery,
     operationName: 'GetCollectionBySlug',
     variables: { getCollectionBySlugSlug: slug }
   })
-    .then(handleResponse)
+    .then((response) => handleResponse(response, slug))
     .catch((error) => console.error(error))
 }
 
-function handleResponse(response) {
+function handleResponse(response, slug) {
   try {
-    const { stories, ...collectionData } = response?.data?.collectionBySlug || {}
+    const { collectionBySlug, errors } = response?.data || {}
+    const { stories, ...collectionData } = collectionBySlug || {}
 
-    if (!stories) throw new CollectionBySlugRequestError()
+    if (errors) throw new CollectionBySlugRequestError(errors)
+    if (!stories?.length) throw new CollectionBySlugStoriesError(stories)
 
     const derivedCollection = deriveCollection(collectionData)
-    const collectionBySlug = { [derivedCollection?.slug]: derivedCollection }
-
-    const derivedStories = stories.filter(validateStory).map(deriveStory)
+    const derivedCollectionBySlug = { [derivedCollection?.slug]: derivedCollection }
+    const derivedStories = stories?.filter(validateStory).map(deriveStory)
 
     // const stories = validStories
     const storiesById = arrayToObject(derivedStories, 'itemId')
     const storyIds = Object.keys(storiesById)
     const storyIdsBySlug = { [derivedCollection?.slug]: storyIds }
 
-    return { itemsById: { ...collectionBySlug, ...storiesById }, storyIdsBySlug }
+    return { itemsById: { ...derivedCollectionBySlug, ...storiesById }, storyIdsBySlug }
   } catch (error) {
-    console.warn(error)
+    Sentry.withScope((scope) => {
+      scope.setTag('slug', slug)
+      Sentry.captureMessage(error)
+    })
   }
 }
 
@@ -89,9 +96,18 @@ function validateStory(story) {
   return story?.item?.itemId?.length && story?.url?.length
 }
 
+/** ERRORS
+ --------------------------------------------------------------- */
 class CollectionBySlugRequestError extends Error {
   constructor(message) {
     super(message)
     this.name = 'CollectionBySlugRequestError'
+  }
+}
+
+class CollectionBySlugStoriesError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'CollectionBySlugStoriesError'
   }
 }

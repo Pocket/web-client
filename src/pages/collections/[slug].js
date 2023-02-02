@@ -1,5 +1,5 @@
 import { CollectionPage } from 'containers/collections/stories-page/stories-page'
-import { fetchCollections } from 'containers/collections/collections.state'
+import { getCollectionsSlugs } from 'common/api/queries/get-collections'
 import { fetchCollectionBySlug } from 'containers/collections/stories-page/stories.state'
 import { hydrateStoryPage } from 'containers/collections/stories-page/stories.state'
 import { hydrateItems } from 'connectors/items/items-display.state'
@@ -16,8 +16,8 @@ import { wrapper } from 'store'
  * SEO/Crawlers
   --------------------------------------------------------------- */
 export const getStaticPaths = async () => {
-  const { itemSlugs = [] } = await fetchCollections()
-  const paths = itemSlugs.map((collection) => `/collections/${collection.slug}`)
+  const { slugs = [] } = await getCollectionsSlugs()
+  const paths = slugs.map((slug) => `/collections/${slug}`)
 
   return { paths, fallback: 'blocking' }
 }
