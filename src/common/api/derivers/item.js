@@ -126,16 +126,6 @@ export function deriveRecommendation(
   })
 }
 
-export function deriveReccit(recommendation) {
-  const { item: passedItem, sort_id, ...rest } = recommendation //eslint-disable-line no-unused-vars
-  const {
-    node: { item }
-  } = modernizeItem({ ...passedItem, sort_id })
-  const derivedItem = deriveItem({ item, utmId: 'pocket_rec' })
-
-  return derivedItem
-}
-
 export function deriveCollection(collection) {
   const collectionUrl = `/collections/${collection?.slug}`
 
@@ -155,17 +145,6 @@ export function deriveCollection(collection) {
 export function deriveStory(story) {
   const { item, ...itemEnrichment } = story
   return deriveItem({ item, itemEnrichment, utmId: 'pocket_collection_story' })
-}
-
-export function deriveProfile(feedItem, legacy) {
-  const { item: passedItem, post } = feedItem
-  // if a legacy flag is passed, first we need to modernize the item
-  const edge = legacy ? modernizeItem(passedItem) : passedItem
-  // node contains user-item data as well as the item itself
-  const { node = {}, cursor = null } = edge
-  const { item: nodeItem, ...rest } = node
-  const item = { ...nodeItem, readUrl: false, openExternal: true, post }
-  return deriveItem({ item, node: { ...rest, status: false }, cursor, utmId: 'pocket_profile' })
 }
 
 export function deriveReaderItem(item, savedItem) {
