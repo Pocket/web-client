@@ -80,7 +80,7 @@ function handleResponse(response, slug) {
 
     // const stories = validStories
     const storiesById = arrayToObject(derivedStories, 'itemId')
-    const storyIds = Object.keys(storiesById)
+    const storyIds = derivedStories.map(i => i.itemId)
     const storyIdsBySlug = { [derivedCollection?.slug]: storyIds }
 
     return { itemsById: { ...derivedCollectionBySlug, ...storiesById }, storyIdsBySlug }
