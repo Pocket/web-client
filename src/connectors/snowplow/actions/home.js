@@ -16,7 +16,8 @@ export const homeActions = {
       component: 'ui',
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a card in the `Recent Saves` section scrolls into view'
   },
   'home.recent.open': {
     eventType: 'contentOpen',
@@ -25,7 +26,8 @@ export const homeActions = {
       destination: 'internal',
       uiType: 'card'
     },
-    expects: ['url', 'position']
+    expects: ['url', 'position'],
+    description: 'Fired when a user clicks a card in the `Recent Saves` section'
   },
   'home.recent.view-original': {
     eventType: 'contentOpen',
@@ -33,7 +35,8 @@ export const homeActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position', 'destination']
+    expects: ['id', 'url', 'position', 'destination'],
+    description: 'Fired when a user clicks the publisher in a card in the `Recent Saves` section'
   },
   'home.recent.view-saves': {
     eventType: 'engagement',
@@ -70,7 +73,8 @@ export const homeActions = {
       component: 'ui',
       uiType: 'card'
     },
-    expects: ['corpusRecommendationId', 'url']
+    expects: ['corpusRecommendationId', 'url'],
+    description: 'Fired when a card on Home scrolls into view'
   },
   'home.corpus.view-original': {
     eventType: 'contentOpen',
@@ -78,7 +82,8 @@ export const homeActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: ['corpusRecommendationId', 'url']
+    expects: ['corpusRecommendationId', 'url'],
+    description: 'Fired when a user clicks the publisher in a card on Home'
   },
   'home.corpus.open': {
     eventType: 'contentOpen',
@@ -87,7 +92,8 @@ export const homeActions = {
       component: 'ui',
       uiType: 'card'
     },
-    expects: ['corpusRecommendationId', 'url']
+    expects: ['corpusRecommendationId', 'url'],
+    description: 'Fired when a user clicks a card on Home'
   },
   'home.topic.view-more': {
     eventType: 'engagement',

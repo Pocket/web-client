@@ -6,7 +6,8 @@ export const globalNavActions = {
       engagementType: 'save',
       uiType: 'button'
     },
-    expects: ['url']
+    expects: ['url'],
+    description: 'A user clicks `Add` after entering a URL in the global nav'
   },
   'global-nav.search.submit': {
     eventType: 'engagement',
@@ -14,7 +15,8 @@ export const globalNavActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['value']
+    expects: ['value'],
+    description: 'A user clicks `Search` after entering a search term in the global nav'
   },
   'global-nav.upgrade-link': {
     eventType: 'impression',
@@ -22,7 +24,8 @@ export const globalNavActions = {
     eventData: {
       component: 'ui',
       uiType: 'button'
-    }
+    },
+    description: 'A user sees the Premium upsell button in the global nav'
   },
   'global-nav': {
     eventType: 'engagement',
@@ -38,21 +41,24 @@ export const globalNavActions = {
     entityTypes: ['ui'],
     eventData: {
       uiType: 'button'
-    }
+    },
+    description: 'A user clicks the magnifying glass icon in the global nav'
   },
   'global-nav.add-item': {
     eventType: 'engagement',
     entityTypes: ['ui'],
     eventData: {
       uiType: 'button'
-    }
+    },
+    description: 'A user clicks the plus icon in the global nav'
   },
   'global-nav.bulk-edit': {
     eventType: 'engagement',
     entityTypes: ['ui'],
     eventData: {
       uiType: 'button'
-    }
+    },
+    description: 'A user clicks the pencil/bulk-edit icon in the global nav'
   },
   'global-nav.bulk.delete': {
     eventType: 'engagement',
@@ -61,7 +67,8 @@ export const globalNavActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'A user clicks the delete icon after selecting items in bulk edit - this does not include the delete confirmation'
   },
   'global-nav.bulk.tag': {
     eventType: 'engagement',
@@ -70,7 +77,8 @@ export const globalNavActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'A user clicks the tag icon after selecting items in bulk edit - this does not include any engagement in the tag modal'
   },
   'global-nav.bulk.archive': {
     eventType: 'engagement',
@@ -79,7 +87,8 @@ export const globalNavActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'A user clicks the archive icon after selecting items in bulk edit - this does not include the archive confirmation'
   },
   'global-nav.bulk.un-archive': {
     eventType: 'engagement',
@@ -89,7 +98,8 @@ export const globalNavActions = {
       engagementType: 'save',
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'A user clicks the un-archive/add icon after selecting items in bulk edit - this does not include the confirmation'
   },
   'global-nav.bulk.favorite': {
     eventType: 'engagement',
@@ -98,7 +108,8 @@ export const globalNavActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'A user clicks the favorite icon after selecting items in bulk edit - this does not include the confirmation'
   },
   'global-nav.bulk.un-favorite': {
     eventType: 'engagement',
@@ -107,6 +118,7 @@ export const globalNavActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'A user clicks the un-favorite icon after selecting items in bulk edit - this does not include the confirmation'
   }
 }

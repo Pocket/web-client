@@ -5,7 +5,8 @@ export const savesActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position', 'destination']
+    expects: ['id', 'url', 'position', 'destination'],
+    description: 'Fired when a user clicks the publisher in a card on Saves'
   },
   'saves.card.permanent-library': {
     eventType: 'contentOpen',
@@ -14,7 +15,8 @@ export const savesActions = {
       destination: 'internal',
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the Permanent Library icon in a card on Saves'
   },
   'saves.card.open': {
     eventType: 'contentOpen',
@@ -22,7 +24,8 @@ export const savesActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position', 'destination']
+    expects: ['id', 'url', 'position', 'destination'],
+    description: 'Fired when a user clicks the card on Saves'
   },
   'saves.card.impression': {
     eventType: 'impression',
@@ -32,7 +35,7 @@ export const savesActions = {
       uiType: 'card'
     },
     expects: ['id', 'url', 'position'],
-    description: 'passing in label to capture the card type being displayed (list, detail, or grid). Not required'
+    description: 'Fired when a card scrolls into view on Saves; passing in label to capture the card type being displayed (list, detail, or grid). Not required'
   },
   'saves.share': {
     eventType: 'engagement',
@@ -40,7 +43,8 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the Share icon in a card on Saves'
   },
   'saves.delete': {
     eventType: 'engagement',
@@ -48,7 +52,8 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the Delete icon in a card on Saves'
   },
   'saves.archive': {
     eventType: 'engagement',
@@ -56,7 +61,8 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the Archive icon in a card on Saves'
   },
   'saves.unarchive': {
     eventType: 'engagement',
@@ -65,7 +71,8 @@ export const savesActions = {
       engagementType: 'save',
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the Un-Archive/Add icon in a card on Saves'
   },
   'saves.favorite': {
     eventType: 'engagement',
@@ -73,7 +80,8 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the Favorite icon in a card on Saves'
   },
   'saves.un-favorite': {
     eventType: 'engagement',
@@ -81,7 +89,8 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the Un-Favorite icon in a card on Saves'
   },
   'saves.tag': {
     eventType: 'engagement',
@@ -89,7 +98,8 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the Tag icon in a card on Saves'
   },
   'saves.display.view': {
     eventType: 'engagement',
@@ -97,7 +107,8 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['value']
+    expects: ['value'],
+    description: 'Fired when a user clicks changes the view type from the Account dropdown; value is the new setting'
   },
   'saves.sort': {
     eventType: 'engagement',
@@ -105,7 +116,8 @@ export const savesActions = {
     eventData: {
       uiType: 'menu'
     },
-    expects: ['value']
+    expects: ['value'],
+    description: 'Fired when a user changes the sort type on Saves (currently broken)'
   },
   'saves.theme': {
     eventType: 'engagement',
@@ -113,6 +125,7 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['value']
+    expects: ['value'],
+    description: 'Fired when a user clicks changes the theme from the Account dropdown; value is the new setting'
   }
 }

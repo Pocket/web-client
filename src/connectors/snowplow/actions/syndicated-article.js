@@ -16,7 +16,8 @@ export const syndicatedArticleActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a user clicks the FB button on a syndicated article'
   },
   'syndicated.share.twitter': {
     eventType: 'engagement',
@@ -24,7 +25,8 @@ export const syndicatedArticleActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a user clicks the Twitter button on a syndicated article'
   },
   'syndicated.share.linkedin': {
     eventType: 'engagement',
@@ -32,7 +34,8 @@ export const syndicatedArticleActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a user clicks the LinkedIn button on a syndicated article'
   },
   'syndicated.share.reddit': {
     eventType: 'engagement',
@@ -40,7 +43,8 @@ export const syndicatedArticleActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a user clicks the Reddit button on a syndicated article'
   },
   'syndicated.share.email': {
     eventType: 'engagement',
@@ -48,7 +52,8 @@ export const syndicatedArticleActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a user clicks the email button on a syndicated article'
   },
   'syndicated.topic.click': {
     eventType: 'engagement',
@@ -88,7 +93,8 @@ export const syndicatedArticleActions = {
       component: 'ui',
       uiType: 'card'
     },
-    expects: ['corpusRecommendationId', 'url', 'position']
+    expects: ['corpusRecommendationId', 'url', 'position'],
+    description: 'Fired when a rec at the bottom of a syndicated article scrolls into view'
   },
   'syndicated.rec.bottom.open': {
     eventType: 'contentOpen',
@@ -98,7 +104,8 @@ export const syndicatedArticleActions = {
       uiType: 'card',
       destination: 'internal'
     },
-    expects: ['corpusRecommendationId', 'url', 'position']
+    expects: ['corpusRecommendationId', 'url', 'position'],
+    description: 'Fired when a user clicks a rec at the bottom of a syndicated article'
   },
   'syndicated.rec.sidebar.impression': {
     eventType: 'impression',
@@ -107,7 +114,8 @@ export const syndicatedArticleActions = {
       component: 'ui',
       uiType: 'link'
     },
-    expects: ['corpusRecommendationId', 'url', 'position']
+    expects: ['corpusRecommendationId', 'url', 'position'],
+    description: 'Fired when a rec at in the sidebar of a syndicated article scrolls into view'
   },
   'syndicated.rec.sidebar.open': {
     eventType: 'contentOpen',
@@ -117,6 +125,7 @@ export const syndicatedArticleActions = {
       uiType: 'link',
       destination: 'external'
     },
-    expects: ['corpusRecommendationId', 'url', 'position']
+    expects: ['corpusRecommendationId', 'url', 'position'],
+    description: 'Fired when a user clicks a rec in the sidebar of a syndicated article'
   },
 }

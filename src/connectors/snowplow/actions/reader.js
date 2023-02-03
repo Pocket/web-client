@@ -16,7 +16,8 @@ export const readerActions = {
       destination: 'external',
       uiType: 'link'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fires when a user clicks the View Original link at the top of Reader'
   },
   'reader.bottom.premium': {
     eventType: 'impression',
@@ -33,7 +34,8 @@ export const readerActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: ['corpusRecommendationId', 'url', 'position', 'destination']
+    expects: ['corpusRecommendationId', 'url', 'position', 'destination'],
+    description: 'Fired when a user clicks a Rec at the bottom of Reader'
   },
   'reader.rec.impression': {
     eventType: 'impression',
@@ -42,7 +44,8 @@ export const readerActions = {
       component: 'ui',
       uiType: 'card'
     },
-    expects: ['corpusRecommendationId', 'url', 'position']
+    expects: ['corpusRecommendationId', 'url', 'position'],
+    description: 'Fired when a Rec scrolls into view at the bottom of Reader'
   },
   'reader.rec.save': {
     eventType: 'engagement',
@@ -51,7 +54,8 @@ export const readerActions = {
       engagementType: 'save',
       uiType: 'button',
     },
-    expects: ['corpusRecommendationId', 'url', 'position']
+    expects: ['corpusRecommendationId', 'url', 'position'],
+    description: 'Fired when a user Saves a Rec at the bottom of Reader'
   },
   'reader.rec.unsave': {
     eventType: 'engagement',
@@ -59,7 +63,8 @@ export const readerActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['corpusRecommendationId', 'url', 'position']
+    expects: ['corpusRecommendationId', 'url', 'position'],
+    description: 'Fired when a user clicks the `Saved` button post-save on a Rec at the bottom of Reader'
   },
   'highlights.limit.sidebar': {
     eventType: 'impression',
@@ -67,7 +72,8 @@ export const readerActions = {
     eventData: {
       component: 'ui',
       uiType: 'button'
-    }
+    },
+    description: 'Fired when a user sees the premium upsell in the sidebar after making 3 highlights on Reader'
   },
   'highlights.limit.modal': {
     eventType: 'impression',
@@ -94,7 +100,8 @@ export const readerActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a user deletes an article via the top toolbar on Reader'
   },
   'reader.archive': {
     eventType: 'engagement',
@@ -102,7 +109,8 @@ export const readerActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a user archives an article via the top toolbar on Reader'
   },
   'reader.un-archive': {
     eventType: 'engagement',
@@ -111,7 +119,8 @@ export const readerActions = {
       engagementType: 'save',
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a user un-archives/adds an article via the top toolbar on Reader'
   },
   'reader.tag': {
     eventType: 'engagement',
@@ -119,7 +128,8 @@ export const readerActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a user clicks the Tag button in the top toolbar on Reader'
   },
   'reader.favorite': {
     eventType: 'engagement',
@@ -127,7 +137,8 @@ export const readerActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a user favorites an article via the top toolbar on Reader'
   },
   'reader.un-favorite': {
     eventType: 'engagement',
@@ -135,7 +146,8 @@ export const readerActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a user un-favorites an article via the top toolbar on Reader'
   },
   'reader.add-highlight': {
     eventType: 'engagement',
@@ -143,7 +155,8 @@ export const readerActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a clicks the Highlight button after selecting text on Reader'
   },
   'reader.remove-highlight': {
     eventType: 'engagement',
@@ -151,7 +164,8 @@ export const readerActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a clicks the Delete button on the popout menu on any Highlight (in text, sidebar, or highlight flyaway)'
   },
   'reader.share': {
     eventType: 'engagement',
@@ -159,7 +173,8 @@ export const readerActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['id', 'url'],
+    description: 'Fired when a user clicks the Share button: top of Reader, any Highlight (in text, sidebar, or highlight flyaway), or after selecting text'
   },
   'reader.display': {
     eventType: 'engagement',
@@ -167,13 +182,15 @@ export const readerActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['value', 'label']
+    expects: ['value', 'label'],
+    description: 'Fired when a user updates any display settings. Label is the type of setting, value is the new setting'
   },
   'reader.goback': {
     eventType: 'engagement',
     entityTypes: ['ui'],
     eventData: {
       uiType: 'button'
-    }
+    },
+    description: 'Fired when a user clicks the Back arrow in the toolbar at the top of Reader'
   }
 }

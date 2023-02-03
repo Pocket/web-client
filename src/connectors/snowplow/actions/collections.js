@@ -6,7 +6,8 @@ export const collectionsActions = {
       component: 'ui',
       uiType: 'card'
     },
-    expects: ['url', 'position']
+    expects: ['url', 'position'],
+    description: 'Fired when a card scrolls into view on /collections'
   },
   'collection.open': {
     eventType: 'contentOpen',
@@ -14,7 +15,8 @@ export const collectionsActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: ['url', 'position', 'destination']
+    expects: ['url', 'position', 'destination'],
+    description: 'Fired when a user clicks a card on /collections'
   },
   'collection.save': {
     eventType: 'engagement',
@@ -23,7 +25,8 @@ export const collectionsActions = {
       engagementType: 'save',
       uiType: 'button'
     },
-    expects: ['url', 'position']
+    expects: ['url', 'position'],
+    description: 'Fired when a user Saves a card on /collections'
   },
   'collection.unsave': {
     eventType: 'engagement',
@@ -31,7 +34,8 @@ export const collectionsActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['url', 'position']
+    expects: ['url', 'position'],
+    description: 'Fired when a user clicks the `Saved` button post-save on a card on /collections'
   },
   'collection.story.impression': {
     eventType: 'impression',
@@ -40,7 +44,8 @@ export const collectionsActions = {
       component: 'ui',
       uiType: 'card'
     },
-    expects: ['url', 'position']
+    expects: ['url', 'position'],
+    description: 'Fired when a card scrolls into view on a collection story page at /collections/*'
   },
   'collection.story.open': {
     eventType: 'contentOpen',
@@ -48,7 +53,8 @@ export const collectionsActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: ['url', 'position', 'destination']
+    expects: ['url', 'position', 'destination'],
+    description: 'Fired when a clicks a card on a collection story page at /collections/*'
   },
   'collection.story.save': {
     eventType: 'engagement',
@@ -57,7 +63,8 @@ export const collectionsActions = {
       engagementType: 'save',
       uiType: 'button'
     },
-    expects: ['url', 'position']
+    expects: ['url', 'position'],
+    description: 'Fired when a Saves a card on a collection story page at /collections/*'
   },
   'collection.story.unsave': {
     eventType: 'engagement',
@@ -65,7 +72,8 @@ export const collectionsActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['url', 'position']
+    expects: ['url', 'position'],
+    description: 'Fired when a clicks the `Saved` button post-save on a card on a collection story page at /collections/*'
   },
   'collection.page.save': {
     eventType: 'engagement',
@@ -94,7 +102,8 @@ export const collectionsActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['url']
+    expects: ['url'],
+    description: 'Fired when a user clicks the FB button on a collection story page at /collections/*'
   },
   'collection.share.twitter': {
     eventType: 'engagement',
@@ -102,7 +111,8 @@ export const collectionsActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['url']
+    expects: ['url'],
+    description: 'Fired when a user clicks the Twitter button on a collection story page at /collections/*'
   },
   'collection.share.linkedin': {
     eventType: 'engagement',
@@ -110,7 +120,8 @@ export const collectionsActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['url']
+    expects: ['url'],
+    description: 'Fired when a user clicks the LinkedIn button on a collection story page at /collections/*'
   },
   'collection.share.reddit': {
     eventType: 'engagement',
@@ -118,7 +129,8 @@ export const collectionsActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['url']
+    expects: ['url'],
+    description: 'Fired when a user clicks the Reddit button on a collection story page at /collections/*'
   },
   'collection.share.email': {
     eventType: 'engagement',
@@ -126,7 +138,8 @@ export const collectionsActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['url']
+    expects: ['url'],
+    description: 'Fired when a user clicks the email button on a collection story page at /collections/*'
   },
   'collection.topic.click': {
     eventType: 'engagement',

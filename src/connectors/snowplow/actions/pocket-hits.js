@@ -6,6 +6,7 @@ export const pocketHitsActions = {
       object: 'newsletter_subscriber',
       trigger: 'newsletter_signup'
     },
-    expects: ['email', 'locale']
+    expects: ['email', 'locale'],
+    description: 'Fired when a user submits an email address in the Pocket Hits module when signed out on /discover'
   }
 }
