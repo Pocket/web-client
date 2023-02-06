@@ -43,11 +43,12 @@ const shortcutsStyle = css`
   }
 `
 
-export function ShortCutDisplay({ copy, keyCopy, premium, isPremium }) {
+export function ShortCutDisplay({ copy, keyCopy, premium, isPremium, translationKey }) {
+  const { t } = useTranslation()
   const rowClass = cx(premium && !isPremium && 'locked')
   return (
     <tr key={keyCopy} className={rowClass}>
-      <td>{copy}</td>
+      <td>{t(translationKey, copy)}</td>
       <td>
         {premium ? <PremiumIcon className="premium-icon" /> : null} {keyCopy}
       </td>
@@ -82,13 +83,14 @@ export function ShortCutsView({
               </tr>
             </thead>
             <tbody>
-              {listShortcuts.map(({ copy, keyCopy, premium }) => (
+              {listShortcuts.map(({ copy, keyCopy, premium, translationKey }) => (
                 <ShortCutDisplay
                   copy={copy}
                   key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
+                  translationKey={translationKey}
                 />
               ))}
             </tbody>
@@ -101,13 +103,14 @@ export function ShortCutsView({
               </tr>
             </thead>
             <tbody>
-              {itemActions.map(({ copy, keyCopy, premium }) => (
+              {itemActions.map(({ copy, keyCopy, premium, translationKey }) => (
                 <ShortCutDisplay
                   copy={copy}
                   key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
+                  translationKey={translationKey}
                 />
               ))}
             </tbody>
@@ -120,13 +123,14 @@ export function ShortCutsView({
               </tr>
             </thead>
             <tbody>
-              {readerShortcuts.map(({ copy, keyCopy, premium }) => (
+              {readerShortcuts.map(({ copy, keyCopy, premium, translationKey }) => (
                 <ShortCutDisplay
                   copy={copy}
                   key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
+                  translationKey={translationKey}
                 />
               ))}
             </tbody>
