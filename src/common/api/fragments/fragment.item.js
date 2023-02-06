@@ -6,6 +6,7 @@ export const FRAGMENT_ITEM = gql`
     title
     itemId
     normalUrl
+    resolvedId
     resolvedUrl
     domain
     domainMetadata {
