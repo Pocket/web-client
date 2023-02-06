@@ -1,3 +1,10 @@
+## [1.76.6](https://github.com/Pocket/web-client/compare/v1.76.5...v1.76.6) (2023-02-06)
+
+
+### Bug Fixes
+
+* **snowplow:** remove unused helper function ([4381f42](https://github.com/Pocket/web-client/commit/4381f42630769c8af35a5ceaa1a5265b11f22613))
+
 ## [1.76.5](https://github.com/Pocket/web-client/compare/v1.76.4...v1.76.5) (2023-02-03)
 
 
