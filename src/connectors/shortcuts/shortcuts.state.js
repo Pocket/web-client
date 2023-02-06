@@ -106,7 +106,6 @@ export const decreaseColumnWidth = () => ({type: SHORTCUT_DECREASE_COLUMN_WIDTH 
 const sortOrderSetNew = () => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, sortOrder: 'DESC'})
 const sortOrderSetOld = () => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, sortOrder: 'ASC'})
 
-
 // prettier-ignore
 export const listShortcuts = [
   { action: goToList, translationKey: 'shortcuts:go-to-saves', copy: 'Go to Saves', keyCopy: 'g then l', keys:  'g l' },
