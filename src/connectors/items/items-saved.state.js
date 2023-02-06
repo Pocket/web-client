@@ -4,6 +4,7 @@ import { getSavedItemsTagged } from 'common/api/queries/get-saved-items-tagged'
 import { getSavedItemsSearch } from 'common/api/queries/get-saved-items-search'
 
 import { deriveSavedItem } from 'common/api/derivers/item'
+import { STARTER_ARTICLES } from 'common/constants'
 
 import { ITEMS_SAVED_REQUEST } from 'actions'
 import { ITEMS_SAVED_SUCCESS } from 'actions'
@@ -90,7 +91,9 @@ function* savedItemRequest(action) {
     if (!pageInfo) return yield put({ type: ITEMS_SAVED_PAGE_INFO_FAILURE })
     if (!edges) return yield put({ type: ITEMS_SAVED_FAILURE })
 
-    const savedItemIds = edges.map((edge) => edge.node.id)
+    const savedItemIds = edges
+      .filter((edge) => !STARTER_ARTICLES.includes(edge.node.item.resolvedId)) //!! While we remove this item from being added by backend
+      .map((edge) => edge.node.id)
     const nodes = edges.reduce(getNodeFromEdge, {})
     const itemsById = edges.reduce(getItemFromEdge, {})
     const itemsCount = savedItemIds.length
