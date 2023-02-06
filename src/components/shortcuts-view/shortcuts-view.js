@@ -78,7 +78,7 @@ export function ShortCutsView({
           <table>
             <thead>
               <tr>
-                <th scope="col">List Actions</th>
+                <th scope="col">Saves Actions</th>
                 <th scope="col">Shortcut</th>
               </tr>
             </thead>

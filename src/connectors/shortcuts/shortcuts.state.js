@@ -151,7 +151,7 @@ export const itemActions = [
 // prettier-ignore
 export const readerShortcuts = [
   // We omit this so it doesn't bind since we do that in read container
-  { action: null, translationKey: 'shortcuts:back-to-list', copy: 'Back to List', keyCopy: 'b', keys: 'b', omit: true },
+  { action: null, translationKey: 'shortcuts:back-to-saves', copy: 'Back to Saves', keyCopy: 'b', keys: 'b', omit: true },
 
   { action: increaseFontSize, translationKey: 'shortcuts:increase-article-font-size', copy: 'Increase Article Font Size', keyCopy: 'Control =', keys: ['ctrl+='] },
   { action: decreaseFontSize, translationKey: 'shortcuts:decrease-article-font-size', copy: 'Decrease Article Font Size', keyCopy: 'Control -', keys: ['ctrl+-'] },
