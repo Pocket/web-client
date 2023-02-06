@@ -108,7 +108,7 @@ export const savesActions = {
       uiType: 'button'
     },
     expects: ['value'],
-    description: 'Fired when a user clicks changes the view type from the Account dropdown; value is the new setting'
+    description: 'Fired when a user changes the view type from the Account dropdown; value is the new setting'
   },
   'saves.sort': {
     eventType: 'engagement',

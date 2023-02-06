@@ -54,7 +54,7 @@ export const collectionsActions = {
       uiType: 'card'
     },
     expects: ['url', 'position', 'destination'],
-    description: 'Fired when a clicks a card on a collection story page at /collections/*'
+    description: 'Fired when a user clicks a card on a collection story page at /collections/*'
   },
   'collection.story.save': {
     eventType: 'engagement',
@@ -64,7 +64,7 @@ export const collectionsActions = {
       uiType: 'button'
     },
     expects: ['url', 'position'],
-    description: 'Fired when a Saves a card on a collection story page at /collections/*'
+    description: 'Fired when a user Saves a card on a collection story page at /collections/*'
   },
   'collection.story.unsave': {
     eventType: 'engagement',
@@ -73,7 +73,7 @@ export const collectionsActions = {
       uiType: 'button'
     },
     expects: ['url', 'position'],
-    description: 'Fired when a clicks the `Saved` button post-save on a card on a collection story page at /collections/*'
+    description: 'Fired when a user clicks the `Saved` button post-save on a card on a collection story page at /collections/*'
   },
   'collection.page.save': {
     eventType: 'engagement',

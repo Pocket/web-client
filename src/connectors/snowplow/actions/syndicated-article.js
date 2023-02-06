@@ -115,7 +115,7 @@ export const syndicatedArticleActions = {
       uiType: 'link'
     },
     expects: ['corpusRecommendationId', 'url', 'position'],
-    description: 'Fired when a rec at in the sidebar of a syndicated article scrolls into view'
+    description: 'Fired when a rec in the sidebar of a syndicated article scrolls into view'
   },
   'syndicated.rec.sidebar.open': {
     eventType: 'contentOpen',
