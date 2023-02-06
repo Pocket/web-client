@@ -19,7 +19,8 @@ export const discoverActions = {
       'slateExperiment',
       'displayName',
       'description'
-    ]
+    ],
+    description: 'Fired when a user clicks a card on /discover'
   },
   'discover.impression': {
     eventType: 'impression',
@@ -41,7 +42,8 @@ export const discoverActions = {
       'slateExperiment',
       'displayName',
       'description'
-    ]
+    ],
+    description: 'Fired when a card scrolls into view on /discover'
   },
   'discover.save': {
     eventType: 'engagement',
@@ -63,7 +65,8 @@ export const discoverActions = {
       'slateExperiment',
       'displayName',
       'description'
-    ]
+    ],
+    description: 'Fired when a user saves a card on /discover'
   },
   'discover.unsave': {
     eventType: 'engagement',
@@ -84,7 +87,8 @@ export const discoverActions = {
       'slateExperiment',
       'displayName',
       'description'
-    ]
+    ],
+    description: 'Fired when a user clicks the `Saved` button post-save on a card on /discover'
   },
   'discover.signup.impression': {
     eventType: 'impression',

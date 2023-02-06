@@ -5,6 +5,7 @@ export const shortcutActions = {
     eventData: {
       uiType: 'button',
     },
-    expects: ['value', 'label']
+    expects: ['value', 'label'],
+    description: 'Fired when a user completes a keyboard shortcut; value is the key combination, label is how the action is described in the Shortcuts menu'
   }
 }

@@ -1,3 +1,25 @@
+## [1.76.7](https://github.com/Pocket/web-client/compare/v1.76.6...v1.76.7) (2023-02-06)
+
+
+### Bug Fixes
+
+* **snowplow:** adding descriptions to all actions ([1db6dcf](https://github.com/Pocket/web-client/commit/1db6dcf63e91727796dd6dab573ece120864d283))
+* **snowplow:** update minor copy in action descriptions ([a52c529](https://github.com/Pocket/web-client/commit/a52c5298b30e12ada4bd943e76c56fd0aaa66844))
+
+## [1.76.6](https://github.com/Pocket/web-client/compare/v1.76.5...v1.76.6) (2023-02-06)
+
+
+### Bug Fixes
+
+* **snowplow:** remove unused helper function ([4381f42](https://github.com/Pocket/web-client/commit/4381f42630769c8af35a5ceaa1a5265b11f22613))
+
+## [1.76.5](https://github.com/Pocket/web-client/compare/v1.76.4...v1.76.5) (2023-02-03)
+
+
+### Bug Fixes
+
+* **collections:** update story order ([531e7e0](https://github.com/Pocket/web-client/commit/531e7e0358c233a5541a06d11339403b94ef22b9))
+
 ## [1.76.4](https://github.com/Pocket/web-client/compare/v1.76.3...v1.76.4) (2023-02-02)
 
 

@@ -5,7 +5,8 @@ export const modalActions = {
     eventData: {
       component: 'ui',
       uiType: 'link'
-    }
+    },
+    description: 'Fired when a user sees the Premium upsell link in the Tagging modal'
   },
   'share.facebook': {
     eventType: 'engagement',
@@ -13,7 +14,8 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the FB button in the Share modal'
   },
   'share.twitter': {
     eventType: 'engagement',
@@ -21,7 +23,8 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the Twitter button in the Share modal'
   },
   'share.linkedin': {
     eventType: 'engagement',
@@ -29,7 +32,8 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the LinkedIn button in the Share modal'
   },
   'share.reddit': {
     eventType: 'engagement',
@@ -37,7 +41,8 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the Reddit button in the Share modal'
   },
   'share.buffer': {
     eventType: 'engagement',
@@ -45,7 +50,8 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the Buffer button in the Share modal'
   },
   'share.copy': {
     eventType: 'engagement',
@@ -53,7 +59,8 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user clicks the Copy Link button in the Share modal'
   },
   'share.recommend': {
     eventType: 'engagement',
@@ -61,6 +68,7 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position']
+    expects: ['id', 'url', 'position'],
+    description: 'Fired when a user submits a Recommendation in the Share modal'
   }
 }
