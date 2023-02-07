@@ -66,6 +66,9 @@ export function ShortCutsView({
   cancelShortcutView
 }) {
   const { t } = useTranslation()
+
+  const keyHeaderText = t('shortcuts:shortcut', 'Shortcut')
+
   return (
     <Modal
       title={t('shortcuts:shortcut-header', 'Keyboard Shortcuts')}
@@ -79,7 +82,7 @@ export function ShortCutsView({
             <thead>
               <tr>
                 <th scope="col">{t('shortcuts:saves-actions', 'Saves Actions')}</th>
-                <th scope="col">{t('shortcuts:shortcut', 'Shortcut')}</th>
+                <th scope="col">{keyHeaderText}</th>
               </tr>
             </thead>
             <tbody>
@@ -100,7 +103,7 @@ export function ShortCutsView({
             <thead>
               <tr>
                 <th scope="col">{t('shortcuts:item-actions', 'Item Actions')}</th>
-                <th scope="col">{t('shortcuts:shortcut', 'Shortcut')}</th>
+                <th scope="col">{keyHeaderText}</th>
               </tr>
             </thead>
             <tbody>
@@ -121,7 +124,7 @@ export function ShortCutsView({
             <thead>
               <tr>
                 <th scope="col">{t('shortcuts:reading-actions', 'Reading Actions')}</th>
-                <th scope="col">{t('shortcuts:shortcut', 'Shortcut')}</th>
+                <th scope="col">{keyHeaderText}</th>
               </tr>
             </thead>
             <tbody>
@@ -143,3 +146,11 @@ export function ShortCutsView({
     </Modal>
   )
 }
+
+/**
+  t('shortcuts:shortcut-header', 'Keyboard Shortcuts')
+  t('shortcuts:saves-actions', 'Saves Actions')
+  t('shortcuts:item-actions', 'Item Actions')
+  t('shortcuts:reading-actions', 'Reading Actions')
+  t('shortcuts:shortcut', 'Shortcut')
+ */
