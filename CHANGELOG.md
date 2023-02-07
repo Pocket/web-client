@@ -1,3 +1,10 @@
+## [1.76.8](https://github.com/Pocket/web-client/compare/v1.76.7...v1.76.8) (2023-02-07)
+
+
+### Bug Fixes
+
+* **home:** sunset initial article ([484e341](https://github.com/Pocket/web-client/commit/484e341c644011d993c16cc3f3de06d238f33ca4))
+
 ## [1.76.7](https://github.com/Pocket/web-client/compare/v1.76.6...v1.76.7) (2023-02-06)
 
 
