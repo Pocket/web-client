@@ -108,54 +108,54 @@ const sortOrderSetOld = () => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, s
 
 // prettier-ignore
 export const listShortcuts = [
-  { action: goToList, translationKey: 'shortcuts:go-to-saves', copy: 'Go to Saves', keyCopy: 'g then l', keys:  'g l' },
-  { action: goToArchive, translationKey: 'shortcuts:go-to-archive', copy: 'Go to Archive', keyCopy: 'g then a', keys:  'g a' },
-  { action: goToFavorites, translationKey: 'shortcuts:go-to-favorites', copy: 'Go to Favorites', keyCopy: 'g then f', keys:  'g f' },
-  { action: goToArticles, translationKey: 'shortcuts:go-to-articles', copy: 'Go to Articles', keyCopy: 'g then r', keys: 'g r' },
-  { action: goToHighlights, translationKey: 'shortcuts:go-to-highlights', copy: 'Go to Highlights', keyCopy: 'g then h', keys:  'g h' },
-  { action: goToVideos, translationKey: 'shortcuts:go-to-videos', copy: 'Go to Videos', keyCopy: 'g then v', keys: 'g v' },
-  { action: gotToTag, translationKey: 'shortcuts:go-to-all-tags', copy: 'Go to All Tags', keyCopy: 'g then t', keys:  'g t' },
+  { action: goToList, copyTranslationKey: 'shortcuts:go-to-saves', copy: 'Go to Saves', keyTranslationKey: 'shortcuts:go-to-saves-key', keyCopy: 'g then l', keys:  'g l' },
+  { action: goToArchive, copyTranslationKey: 'shortcuts:go-to-archive', copy: 'Go to Archive', keyTranslationKey: 'shortcuts:go-to-archive-key', keyCopy: 'g then a', keys:  'g a' },
+  { action: goToFavorites, copyTranslationKey: 'shortcuts:go-to-favorites', copy: 'Go to Favorites', keyTranslationKey: 'shortcuts:go-to-favorites-key', keyCopy: 'g then f', keys:  'g f' },
+  { action: goToArticles, copyTranslationKey: 'shortcuts:go-to-articles', copy: 'Go to Articles', keyTranslationKey: 'shortcuts:go-to-articles-key', keyCopy: 'g then r', keys: 'g r' },
+  { action: goToHighlights, copyTranslationKey: 'shortcuts:go-to-highlights', copy: 'Go to Highlights', keyTranslationKey: 'shortcuts:go-to-highlights-key', keyCopy: 'g then h', keys:  'g h' },
+  { action: goToVideos, copyTranslationKey: 'shortcuts:go-to-videos', copy: 'Go to Videos', keyTranslationKey: 'shortcuts:go-to-videos-key', keyCopy: 'g then v', keys: 'g v' },
+  { action: gotToTag, copyTranslationKey: 'shortcuts:go-to-all-tags', copy: 'Go to All Tags', keyTranslationKey: 'shortcuts:go-to-all-tags-key', keyCopy: 'g then t', keys:  'g t' },
 
-  { action: goToSearch, translationKey: 'shortcuts:go-to-search', copy: 'Go to Search', keyCopy: 'g then s', keys: 'g s', prevent: true},
-  { action: bulkEdit, translationKey: 'shortcuts:bulk-edit', copy: 'Bulk Edit', keyCopy: 'g then b', keys:  'g b' },
-  { action: saveAUrl, translationKey: 'shortcuts:save-a-url', copy: 'Save a URL', keyCopy: 'g then u', keys: 'g u', prevent: true},
+  { action: goToSearch, copyTranslationKey: 'shortcuts:go-to-search', copy: 'Go to Search', keyTranslationKey: 'shortcuts:go-to-search-key', keyCopy: 'g then s', keys: 'g s', prevent: true},
+  { action: bulkEdit, copyTranslationKey: 'shortcuts:bulk-edit', copy: 'Bulk Edit', keyTranslationKey: 'shortcuts:bulk-edit-key', keyCopy: 'g then b', keys:  'g b' },
+  { action: saveAUrl, copyTranslationKey: 'shortcuts:save-a-url', copy: 'Save a URL', keyTranslationKey: 'shortcuts:save-a-url-key', keyCopy: 'g then u', keys: 'g u', prevent: true},
 
-  { action: sortOrderSetNew, translationKey: 'shortcuts:sort-by-newest', copy: 'Sort by Newest', keyCopy: 's then n', keys: 's n' },
-  { action: sortOrderSetOld, translationKey: 'shortcuts:sort-by-oldest', copy: 'Sort by Oldest', keyCopy: 's then o', keys:  's o' },
+  { action: sortOrderSetNew, copyTranslationKey: 'shortcuts:sort-by-newest', copy: 'Sort by Newest', keyTranslationKey: 'shortcuts:sort-by-newest-key', keyCopy: 's then n', keys: 's n' },
+  { action: sortOrderSetOld, copyTranslationKey: 'shortcuts:sort-by-oldest', copy: 'Sort by Oldest', keyTranslationKey: 'shortcuts:sort-by-oldest', keyCopy: 's then o', keys:  's o' },
 
-  { action: setListModeList, translationKey: 'shortcuts:list-view', copy: 'List View', keyCopy: 'v then l', keys: 'v l' },
-  { action: setListModeGrid, translationKey: 'shortcuts:grid-view', copy: 'Grid View', keyCopy: 'v then g', keys: 'v g' },
-  { action: setListModeDetail, translationKey: 'shortcuts:detail-view', copy: 'Detail View', keyCopy: 'v then d', keys: 'v d' },
+  { action: setListModeList, copyTranslationKey: 'shortcuts:list-view', copy: 'List View', keyTranslationKey: 'shortcuts:list-view-key', keyCopy: 'v then l', keys: 'v l' },
+  { action: setListModeGrid, copyTranslationKey: 'shortcuts:grid-view', copy: 'Grid View', keyTranslationKey: 'shortcuts:grid-view-key', keyCopy: 'v then g', keys: 'v g' },
+  { action: setListModeDetail, copyTranslationKey: 'shortcuts:detail-view', copy: 'Detail View', keyTranslationKey: 'shortcuts:detail-view-key', keyCopy: 'v then d', keys: 'v d' },
 
-  { action: setColorModeLight, translationKey: 'shortcuts:change-to-light-theme', copy: 'Change to Light Theme	', keyCopy: 'c then l', keys:  'c l' },
-  { action: setColorModeDark, translationKey: 'shortcuts:change-to-dark-theme', copy: 'Change to Dark Theme	', keyCopy: 'c then d', keys:  'c d' },
-  { action: setColorModeSepia, translationKey: 'shortcuts:change-to-sepia-theme', copy: 'Change to Sepia Theme', keyCopy: 'c then s', keys:  'c s' },
+  { action: setColorModeLight, copyTranslationKey: 'shortcuts:change-to-light-theme', copy: 'Change to Light Theme	', keyTranslationKey: 'shortcuts:change-to-light-theme-key', keyCopy: 'c then l', keys:  'c l' },
+  { action: setColorModeDark, copyTranslationKey: 'shortcuts:change-to-dark-theme', copy: 'Change to Dark Theme	', keyTranslationKey: 'shortcuts:change-to-dark-theme-key', keyCopy: 'c then d', keys:  'c d' },
+  { action: setColorModeSepia, copyTranslationKey: 'shortcuts:change-to-sepia-theme', copy: 'Change to Sepia Theme', keyTranslationKey: 'shortcuts:change-to-sepia-theme-key', keyCopy: 'c then s', keys:  'c s' },
 
-  { action: toggleHelpOverlay, translationKey: 'shortcuts:open-help-overlay', copy: 'Open Help Overlay', keyCopy: '? or /', keys: ['?', '/'] },
+  { action: toggleHelpOverlay, copyTranslationKey: 'shortcuts:open-help-overlay', copy: 'Open Help Overlay', keyTranslationKey: 'shortcuts:open-help-overlay-key', keyCopy: '? or /', keys: ['?', '/'] },
 
 ]
 
 // prettier-ignore
 export const itemActions = [
-  { action: viewOriginal, translationKey: 'shortcuts:open-original-in-new-tab', copy: 'Open Original in New Tab', keyCopy: 'o', keys: 'o' },
-  { action: archiveItem, translationKey: 'shortcuts:archive-selected-item', copy: 'Archive Selected Item', keyCopy: 'a', keys:  'a' },
-  { action: favoriteItem, translationKey: 'shortcuts:favorite-selected-item', copy: 'Favorite Selected Item', keyCopy: 'f', keys:  'f' },
-  { action: editTags, translationKey: 'shortcuts:tag-selected-item', copy: 'Tag Selected Item', keyCopy: 't', keys:  't', prevent: true },
-  { action: deleteItem, translationKey: 'shortcuts:delete-selected-item', copy: 'Delete Selected Item', keyCopy: 'd', keys: 'd' },
-  { action: engageSelectedItem, translationKey: 'shortcuts:select-item-in-bulk-edit', copy: 'Select Item in Bulk Edit', keyCopy: 'x', keys: ['x'] },
-  { action: selectNextItem, translationKey: 'shortcuts:select-next-item', copy: 'Select Next Item', keyCopy: 'j', keys: 'j' },
-  { action: selectPreviousItem, translationKey: 'shortcuts:select-previous-item', copy: 'Select Previous Item', keyCopy: 'k', keys: 'k' },
+  { action: viewOriginal, copyTranslationKey: 'shortcuts:open-original-in-new-tab', copy: 'Open Original in New Tab', keyTranslationKey: 'shortcuts:open-original-in-new-tab-key', keyCopy: 'o', keys: 'o' },
+  { action: archiveItem, copyTranslationKey: 'shortcuts:archive-selected-item', copy: 'Archive Selected Item', keyTranslationKey: 'shortcuts:archive-selected-item-key', keyCopy: 'a', keys:  'a' },
+  { action: favoriteItem, copyTranslationKey: 'shortcuts:favorite-selected-item', copy: 'Favorite Selected Item', keyTranslationKey: 'shortcuts:favorite-selected-item-key', keyCopy: 'f', keys:  'f' },
+  { action: editTags, copyTranslationKey: 'shortcuts:tag-selected-item', copy: 'Tag Selected Item', keyTranslationKey: 'shortcuts:tag-selected-item-key', keyCopy: 't', keys:  't', prevent: true },
+  { action: deleteItem, copyTranslationKey: 'shortcuts:delete-selected-item', copy: 'Delete Selected Item', keyTranslationKey: 'shortcuts:delete-selected-item-key', keyCopy: 'd', keys: 'd' },
+  { action: engageSelectedItem, copyTranslationKey: 'shortcuts:select-item-in-bulk-edit', copy: 'Select Item in Bulk Edit', keyTranslationKey: 'shortcuts:select-item-in-bulk-edit-key', keyCopy: 'x', keys: ['x'] },
+  { action: selectNextItem, copyTranslationKey: 'shortcuts:select-next-item', copy: 'Select Next Item', keyTranslationKey: 'shortcuts:select-next-item-key', keyCopy: 'j', keys: 'j' },
+  { action: selectPreviousItem, copyTranslationKey: 'shortcuts:select-previous-item', copy: 'Select Previous Item', keyTranslationKey: 'shortcuts:select-previous-item-key', keyCopy: 'k', keys: 'k' },
 ]
 
 // prettier-ignore
 export const readerShortcuts = [
   // We omit this so it doesn't bind since we do that in read container
-  { action: null, translationKey: 'shortcuts:back-to-saves', copy: 'Back to Saves', keyCopy: 'b', keys: 'b', omit: true },
+  { action: null, copyTranslationKey: 'shortcuts:back-to-saves', copy: 'Back to Saves', keyTranslationKey: 'shortcuts:back-to-saves-key', keyCopy: 'b', keys: 'b', omit: true },
 
-  { action: increaseFontSize, translationKey: 'shortcuts:increase-article-font-size', copy: 'Increase Article Font Size', keyCopy: 'Control =', keys: ['ctrl+='] },
-  { action: decreaseFontSize, translationKey: 'shortcuts:decrease-article-font-size', copy: 'Decrease Article Font Size', keyCopy: 'Control -', keys: ['ctrl+-'] },
-  { action: increaseColumnWidth, translationKey: 'shortcuts:increase-column-width', copy: 'Increase Column Width', keyCopy: 'Alt/Option =', keys: ['alt+='], premium: true},
-  { action: decreaseColumnWidth, translationKey: 'shortcuts:decrease-column-width', copy: 'Decrease Column Width', keyCopy: 'Alt/Option  -', keys: ['alt+-'], premium: true},
+  { action: increaseFontSize, copyTranslationKey: 'shortcuts:increase-article-font-size', copy: 'Increase Article Font Size', keyTranslationKey: 'shortcuts:increase-article-font-size-key', keyCopy: 'Control =', keys: ['ctrl+='] },
+  { action: decreaseFontSize, copyTranslationKey: 'shortcuts:decrease-article-font-size', copy: 'Decrease Article Font Size', keyTranslationKey: 'shortcuts:decrease-article-font-size-key', keyCopy: 'Control -', keys: ['ctrl+-'] },
+  { action: increaseColumnWidth, copyTranslationKey: 'shortcuts:increase-column-width', copy: 'Increase Column Width', keyTranslationKey: 'shortcuts:increase-column-width-key', keyCopy: 'Alt/Option =', keys: ['alt+='], premium: true},
+  { action: decreaseColumnWidth, copyTranslationKey: 'shortcuts:decrease-column-width', copy: 'Decrease Column Width', keyTranslationKey: 'shortcuts:decrease-column-width-key', keyCopy: 'Alt/Option  -', keys: ['alt+-'], premium: true},
 ]
 
 const initialState = {

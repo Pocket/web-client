@@ -43,14 +43,14 @@ const shortcutsStyle = css`
   }
 `
 
-export function ShortCutDisplay({ copy, keyCopy, premium, isPremium, translationKey }) {
+export function ShortCutDisplay({ copy, keyCopy, premium, isPremium, copyTranslationKey, keyTranslationKey }) {
   const { t } = useTranslation()
   const rowClass = cx(premium && !isPremium && 'locked')
   return (
     <tr key={keyCopy} className={rowClass}>
-      <td>{t(translationKey, copy)}</td>
+      <td>{t(copyTranslationKey, copy)}</td>
       <td>
-        {premium ? <PremiumIcon className="premium-icon" /> : null} {keyCopy}
+        {premium ? <PremiumIcon className="premium-icon" /> : null} {t(keyTranslationKey, keyCopy)}
       </td>
     </tr>
   )
@@ -78,19 +78,20 @@ export function ShortCutsView({
           <table>
             <thead>
               <tr>
-                <th scope="col">Saves Actions</th>
-                <th scope="col">Shortcut</th>
+                <th scope="col">{t('shortcuts:saves-actions', 'Saves Actions')}</th>
+                <th scope="col">{t('shortcuts:shortcut', 'Shortcut')}</th>
               </tr>
             </thead>
             <tbody>
-              {listShortcuts.map(({ copy, keyCopy, premium, translationKey }) => (
+              {listShortcuts.map(({ copy, keyCopy, premium, copyTranslationKey, keyTranslationKey }) => (
                 <ShortCutDisplay
                   copy={copy}
                   key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
-                  translationKey={translationKey}
+                  copyTranslationKey={copyTranslationKey}
+                  keyTranslationKey={keyTranslationKey}
                 />
               ))}
             </tbody>
@@ -98,19 +99,20 @@ export function ShortCutsView({
           <table>
             <thead>
               <tr>
-                <th scope="col">Item Actions</th>
-                <th scope="col">Shortcut</th>
+                <th scope="col">{t('shortcuts:item-actions', 'Item Actions')}</th>
+                <th scope="col">{t('shortcuts:shortcut', 'Shortcut')}</th>
               </tr>
             </thead>
             <tbody>
-              {itemActions.map(({ copy, keyCopy, premium, translationKey }) => (
+              {itemActions.map(({ copy, keyCopy, premium, copyTranslationKey, keyTranslationKey }) => (
                 <ShortCutDisplay
                   copy={copy}
                   key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
-                  translationKey={translationKey}
+                  copyTranslationKey={copyTranslationKey}
+                  keyTranslationKey={keyTranslationKey}
                 />
               ))}
             </tbody>
@@ -118,19 +120,20 @@ export function ShortCutsView({
           <table>
             <thead>
               <tr>
-                <th scope="col">Reading Actions</th>
-                <th scope="col">Shortcut</th>
+                <th scope="col">{t('shortcuts:reading-actions', 'Reading Actions')}</th>
+                <th scope="col">{t('shortcuts:shortcut', 'Shortcut')}</th>
               </tr>
             </thead>
             <tbody>
-              {readerShortcuts.map(({ copy, keyCopy, premium, translationKey }) => (
+              {readerShortcuts.map(({ copy, keyCopy, premium, copyTranslationKey, keyTranslationKey }) => (
                 <ShortCutDisplay
                   copy={copy}
                   key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
-                  translationKey={translationKey}
+                  copyTranslationKey={copyTranslationKey}
+                  keyTranslationKey={keyTranslationKey}
                 />
               ))}
             </tbody>
