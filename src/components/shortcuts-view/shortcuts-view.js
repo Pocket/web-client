@@ -43,14 +43,14 @@ const shortcutsStyle = css`
   }
 `
 
-export function ShortCutDisplay({ copy, keyCopy, premium, isPremium, copyTranslationKey, keyTranslationKey }) {
+export function ShortCutDisplay({ copy, keyCopy, premium, isPremium, transKey }) {
   const { t } = useTranslation()
   const rowClass = cx(premium && !isPremium && 'locked')
   return (
     <tr key={keyCopy} className={rowClass}>
-      <td>{t(copyTranslationKey, copy)}</td>
+      <td>{t(`shortcuts:${transKey}`, copy)}</td>
       <td>
-        {premium ? <PremiumIcon className="premium-icon" /> : null} {t(keyTranslationKey, keyCopy)}
+        {premium ? <PremiumIcon className="premium-icon" /> : null} {t(`shortcuts:${transKey}-key`, keyCopy)}
       </td>
     </tr>
   )
@@ -86,15 +86,14 @@ export function ShortCutsView({
               </tr>
             </thead>
             <tbody>
-              {listShortcuts.map(({ copy, keyCopy, premium, copyTranslationKey, keyTranslationKey }) => (
+              {listShortcuts.map(({ copy, keyCopy, premium, transKey }) => (
                 <ShortCutDisplay
                   copy={copy}
                   key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
-                  copyTranslationKey={copyTranslationKey}
-                  keyTranslationKey={keyTranslationKey}
+                  transKey={transKey}
                 />
               ))}
             </tbody>
@@ -107,15 +106,14 @@ export function ShortCutsView({
               </tr>
             </thead>
             <tbody>
-              {itemActions.map(({ copy, keyCopy, premium, copyTranslationKey, keyTranslationKey }) => (
+              {itemActions.map(({ copy, keyCopy, premium, transKey }) => (
                 <ShortCutDisplay
                   copy={copy}
                   key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
-                  copyTranslationKey={copyTranslationKey}
-                  keyTranslationKey={keyTranslationKey}
+                  transKey={transKey}
                 />
               ))}
             </tbody>
@@ -128,15 +126,14 @@ export function ShortCutsView({
               </tr>
             </thead>
             <tbody>
-              {readerShortcuts.map(({ copy, keyCopy, premium, copyTranslationKey, keyTranslationKey }) => (
+              {readerShortcuts.map(({ copy, keyCopy, premium, transKey }) => (
                 <ShortCutDisplay
                   copy={copy}
                   key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
-                  copyTranslationKey={copyTranslationKey}
-                  keyTranslationKey={keyTranslationKey}
+                  transKey={transKey}
                 />
               ))}
             </tbody>
