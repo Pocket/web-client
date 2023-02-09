@@ -1,3 +1,10 @@
+# [1.77.0](https://github.com/Pocket/web-client/compare/v1.76.9...v1.77.0) (2023-02-09)
+
+
+### Features
+
+* **collections:** use label for collections homepage ([3b84bf4](https://github.com/Pocket/web-client/commit/3b84bf431ca763aaa8a0d4384cef63f6ba9e7d4e))
+
 ## [1.76.9](https://github.com/Pocket/web-client/compare/v1.76.8...v1.76.9) (2023-02-07)
 
 
