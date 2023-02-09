@@ -1,13 +1,13 @@
 import { memo } from 'react'
-import { Card } from 'components/item-card/card'
+import { Item } from 'components/item/item'
 import { useSelector, useDispatch } from 'react-redux'
 import { setNoImage } from 'connectors/items/items-display.state'
 import { mutationBulkSelectAction } from 'connectors/items/mutations-bulk.state'
 import { mutationBulkDeSelectAction } from 'connectors/items/mutations-bulk.state'
 
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
-import { ActionsSaves } from './card-actions'
-import { ActionsBulk } from './card-actions'
+import { ActionsSaves } from './item-actions-saved'
+import { ActionsBulk } from './item-actions-saved'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 /**
@@ -17,6 +17,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
  */
 export function ItemCard({
   id,
+  snowplowId,
   position,
   type,
   columnCount,
@@ -59,16 +60,16 @@ export function ItemCard({
 
   /** ITEM TRACKING
   --------------------------------------------------------------- */
-  const onOpen = () => dispatch(sendSnowplowEvent('saves.card.open', analyticsData))
+  const onOpen = () => dispatch(sendSnowplowEvent(`${snowplowId}.open`, analyticsData))
 
   const onOpenOriginalUrl = () => {
     const data = { ...analyticsData, destination: 'external' }
-    dispatch(sendSnowplowEvent('saves.card.view-original', data))
+    dispatch(sendSnowplowEvent(`${snowplowId}.view-original`, data))
   }
 
   const onItemInView = (inView) => {
     if (!impressionFired && inView) {
-      dispatch(sendSnowplowEvent('saves.card.impression', analyticsData))
+      dispatch(sendSnowplowEvent(`${snowplowId}.impression`, analyticsData))
     }
   }
 
@@ -82,14 +83,14 @@ export function ItemCard({
   /** ITEM SELECT ACTIONS
   --------------------------------------------------------------- */
   const shortcutSelect = () => dispatch(selectShortcutItem(id, position))
-  const ActionMenu = bulkEdit ? ActionsBulk : ActionsSaves
+  const Actions = bulkEdit ? ActionsBulk : ActionsSaves
 
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
   const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
   const { tags } = itemSaved
-  
+
   /** ITEM DIMENSIONS
   --------------------------------------------------------------- */
 
@@ -101,9 +102,10 @@ export function ItemCard({
   const left = columnCount > 1 ? columnPosition * width + horizontalSpacing : 0
   const top = rowPosition * height + veriticalSpacing
   const positionStyle = { position: 'absolute', left, top, width, height }
+  const visibleCount = type !== 'grid' ? 6 : 0
 
   return item ? (
-    <Card
+    <Item
       style={positionStyle}
       itemId={id}
       externalUrl={externalUrl}
@@ -125,6 +127,9 @@ export function ItemCard({
       bulkIsCurrent={bulkIsCurrent}
       shortcutSelected={shortcutSelected}
       shortcutSelect={shortcutSelect}
+      clamp={true}
+      type={type}
+      visibleCount={visibleCount}
       // Open Actions
       openUrl={openUrl}
       onOpen={onOpen}
@@ -133,7 +138,8 @@ export function ItemCard({
       selectBulk={selectBulk}
       onImageFail={onImageFail}
       isPremium={isPremium}
-      ActionMenu={ActionMenu}
+      Actions={Actions}
+      snowplowId={snowplowId}
     />
   ) : null
 }

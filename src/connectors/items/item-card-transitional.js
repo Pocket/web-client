@@ -1,6 +1,6 @@
-import { Card } from 'components/item-card/card'
+import { Item } from 'components/item/item'
 import { useSelector, useDispatch } from 'react-redux'
-import { ActionsDiscover } from './card-actions'
+import { ActionsTransitional } from './item-actions-transitional'
 import { setNoImage } from 'connectors/items/items-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
@@ -9,7 +9,15 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
  * Creates a connected `Card` with the appropriate data and actions
  * @param {object} {id, position} item_id for data and position for analytics
  */
-export function ItemCard({ id, position, className, cardShape, showExcerpt = false }) {
+export function ItemCard({
+  id,
+  position,
+  className,
+  cardShape,
+  showExcerpt = true,
+  clamp,
+  snowplowId
+}) {
   const dispatch = useDispatch()
 
   // Get data from state
@@ -19,14 +27,14 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
   const item = useSelector((state) => state.itemsDisplay[id])
   if (!item) return null
 
-  const { saveStatus, itemId, readUrl, externalUrl, openExternal, syndicatedUrl } = item
+  const { itemId, readUrl, externalUrl, openExternal, syndicatedUrl } = item
   const openUrl = openExternal ? externalUrl : syndicatedUrl || readUrl || externalUrl
 
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
     id,
     position,
-    destination: saveStatus === 'saved' && !openExternal ? 'internal' : 'external',
+    destination: !openExternal ? 'internal' : 'external',
     ...item?.analyticsData
   }
 
@@ -34,10 +42,10 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
    * ITEM TRACKING
    * ----------------------------------------------------------------
    */
-  const onImpression = () => dispatch(sendSnowplowEvent('discover.impression', analyticsData))
+  const onImpression = () => dispatch(sendSnowplowEvent(`${snowplowId}.impression`, analyticsData))
   const onItemInView = (inView) =>
     !impressionFired && inView && analyticsInitialized ? onImpression() : null
-  const onOpen = () => dispatch(sendSnowplowEvent('discover.open', analyticsData))
+  const onOpen = () => dispatch(sendSnowplowEvent(`${snowplowId}.open`, analyticsData))
 
   /** ITEM DETAILS
   --------------------------------------------------------------- */
@@ -45,7 +53,7 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
   const {tags, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } = item //prettier-ignore
 
   return (
-    <Card
+    <Item
       itemId={itemId}
       externalUrl={externalUrl}
       tags={tags}
@@ -63,10 +71,12 @@ export function ItemCard({ id, position, className, cardShape, showExcerpt = fal
       cardShape={cardShape}
       showExcerpt={showExcerpt}
       openUrl={openUrl}
+      clamp={clamp}
       // Tracking
       onItemInView={onItemInView}
       onOpen={onOpen}
-      ActionMenu={ActionsDiscover}
+      Actions={ActionsTransitional}
+      snowplowId="discover"
     />
   )
 }

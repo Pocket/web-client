@@ -11,7 +11,7 @@ import { BASE_URL } from 'common/constants'
 // Components
 import { CardPageHeader } from 'components/headers/discover-header'
 import { CardListHeading } from 'components/headers/discover-header'
-import { ItemCard } from './card'
+import { ItemCard } from 'connectors/items/item-card-transitional'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
@@ -72,9 +72,7 @@ export default function Discover({ locale }) {
       />
 
       {/* Top Lockup (center)*/}
-      <Lockup items={items} offset={0} heroPosition="left" ItemCard={ItemCard} />
-
-      {showTopics ? <CardTopicsNav topics={topics} track={topicClickMiddle} /> : null}
+      <Lockup items={items} offset={0} heroPosition="left" ItemCard={ItemCard} border={false} />
 
       {/* Pocket Brand Messaging */}
       <CalloutTop locale={locale} shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
@@ -82,9 +80,11 @@ export default function Discover({ locale }) {
       {/* Top List */}
       <CardListHeading>{t('discover:fascinating-stories', 'Fascinating stories')}</CardListHeading>
 
-      <OffsetList items={items} offset={5} cardShape="wide" ItemCard={ItemCard} border={true} />
+      <OffsetList items={items} offset={5} cardShape="wide" ItemCard={ItemCard} border={false}>
+        {showTopics ? <CardTopicsNav topics={topics} rail={true} track={topicClickMiddle} /> : null}
+      </OffsetList>
 
-      <Lockup items={items} offset={10} heroPosition="left" ItemCard={ItemCard} />
+      <Lockup items={items} offset={10} heroPosition="left" ItemCard={ItemCard} border={false} />
 
       <CalloutBottom
         shouldRender={shouldRender}
@@ -92,13 +92,7 @@ export default function Discover({ locale }) {
         trackEvent={trackEvent}
       />
 
-      <OffsetList
-        items={items}
-        offset={15}
-        cardShape="wide"
-        ItemCard={ItemCard}
-        border={showTopics}
-      />
+      <OffsetList items={items} offset={15} cardShape="wide" ItemCard={ItemCard} border={false} />
 
       {showTopics ? (
         <CardTopicsNav topics={topics} className="no-border" track={topicClickBottom} />
@@ -115,7 +109,7 @@ function CalloutTop({ shouldRender, isAuthenticated, locale }) {
   return shouldRender ? (
     <div>
       {isAuthenticated ? (
-        <CallOutBrand />
+        <CallOutBrand border={false} />
       ) : (
         <CallOutPocketHitsSignup locale={locale} utmCampaign="explore-inline" utmSource="explore" />
       )}

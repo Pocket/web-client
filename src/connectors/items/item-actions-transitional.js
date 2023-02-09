@@ -12,7 +12,8 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 
-export function ActionsDiscover({ id, position }) {
+export function ActionsTransitional(props) {
+  const { id, position, snowplowId } = props
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -28,12 +29,12 @@ export function ActionsDiscover({ id, position }) {
 
   // Prep save action
   const onSave = () => {
-    dispatch(sendSnowplowEvent('discover.save', analyticsData))
+    dispatch(sendSnowplowEvent(`${snowplowId}.save`, analyticsData))
     dispatch(mutationUpsertTransitionalItem(saveUrl, id))
   }
 
   const onUnSave = () => {
-    dispatch(sendSnowplowEvent('discover.unsave', analyticsData))
+    dispatch(sendSnowplowEvent(`${snowplowId}.unsave`, analyticsData))
     dispatch(mutationDeleteTransitionalItem(saveItemId, id))
   }
 
@@ -43,12 +44,8 @@ export function ActionsDiscover({ id, position }) {
   const url = externalUrl
 
   const onOpen = () => {
-    const data = {
-      ...analyticsData,
-      url,
-      destination: openExternal ? 'external' : 'internal'
-    }
-    dispatch(sendSnowplowEvent('discover.open', data))
+    const data = { ...analyticsData, url, destination: openExternal ? 'external' : 'internal' }
+    dispatch(sendSnowplowEvent(`${snowplowId}.open`, data))
   }
 
   // On Report
@@ -59,6 +56,7 @@ export function ActionsDiscover({ id, position }) {
       <SaveToPocket
         allowRead={false}
         url={url}
+        hideCopy={false}
         onOpen={onOpen}
         openExternal={openExternal}
         saveAction={saveAction}
@@ -67,7 +65,7 @@ export function ActionsDiscover({ id, position }) {
         id={id}
       />
 
-      <OverflowAction
+      {/* <OverflowAction
         menuItems={[
           {
             label: t('item-action:report', 'Report'),
@@ -76,7 +74,7 @@ export function ActionsDiscover({ id, position }) {
             onClick: onReport
           }
         ]}
-      />
+      /> */}
     </div>
   ) : null
 }

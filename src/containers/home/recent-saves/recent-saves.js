@@ -3,9 +3,9 @@ import { useTranslation } from 'next-i18next'
 import { HomeHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'
 import { getItemsUnread } from 'containers/saves/saved-items/saved-items.state'
-import { FlexList } from 'components/items-layout/list-flex'
+import { listStrata } from 'components/items-layout/list-strata'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { Card } from 'components/item-card/card'
+import { ItemCard } from 'connectors/items/item-card-transitional'
 import { HomeGreeting } from './greeting'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
@@ -34,84 +34,12 @@ export const HomeRecentSaves = () => {
         moreLinkClick={onLinkClick}
       />
 
-      <FlexList
-        items={recentSaves}
-        offset={0}
-        count={3}
-        ItemCard={RecentCard}
-        cardShape="flex"
-        showExcerpt={showExcerpt}
-        border={false}
-        compact={true}
-        dataCy="recent-saves"
-      />
+      <div className={`${listStrata} recentCards`}>
+        {recentSaves.slice(0, 3).map((id) => (
+          <ItemCard key={id} id={id} clamp={true} showExcerpt={showExcerpt} />
+        ))}
+      </div>
     </SectionWrapper>
   ) : null
 }
 
-export const RecentCard = ({
-  id,
-  position,
-  className,
-  cardShape = 'block',
-  showMedia = true,
-  showExcerpt = false
-}) => {
-  const dispatch = useDispatch()
-
-  // Get data from state
-  const item = useSelector((state) => state.itemsDisplay[id])
-  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
-
-  if (!item) return null
-
-  const { itemId, openExternal, readUrl, externalUrl } = item
-  const openUrl = readUrl && !openExternal ? readUrl : externalUrl
-  const analyticsData = {
-    id,
-    position,
-    destination: !openExternal ? 'internal' : 'external',
-    ...item?.analyticsData
-  }
-
-  /**
-   * ITEM TRACKING
-   * ----------------------------------------------------------------
-   */
-  const onOpenOriginalUrl = () => {
-    const data = { ...analyticsData, destination: 'external' }
-    dispatch(sendSnowplowEvent('home.recent.view-original', data))
-  }
-  const onOpen = () => dispatch(sendSnowplowEvent('home.recent.open', analyticsData))
-  const onImpression = () => dispatch(sendSnowplowEvent('home.recent.impression', analyticsData))
-  const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
-
-  const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner } = item //prettier-ignore
-
-  return item ? (
-    <Card
-      itemId={itemId}
-      externalUrl={externalUrl}
-      tags={tags}
-      title={title}
-      itemImage={itemImage}
-      publisher={publisher}
-      excerpt={excerpt}
-      timeToRead={timeToRead}
-      isSyndicated={isSyndicated}
-      isInternalItem={isInternalItem}
-      fromPartner={fromPartner}
-      position={position}
-      className={className}
-      cardShape={cardShape}
-      showExcerpt={showExcerpt}
-      showMedia={showMedia}
-      openUrl={openUrl}
-      // Tracking
-      onItemInView={onItemInView}
-      onOpen={onOpen}
-      onOpenOriginalUrl={onOpenOriginalUrl}
-    />
-  ) : null
-}

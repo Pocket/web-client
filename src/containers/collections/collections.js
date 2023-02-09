@@ -6,9 +6,10 @@ import { useSelector } from 'react-redux'
 
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 import { CardPageHeader } from 'components/headers/discover-header'
-import { ItemCard } from './card'
+import { ItemCard } from 'connectors/items/item-card-transitional'
 import { Lockup } from 'components/items-layout/list-lockup'
 import { OffsetList } from 'components/items-layout/list-offset'
+import { CallOutCollection } from 'components/call-out/call-out-collections'
 
 export default function Collections({ locale }) {
   const { t } = useTranslation()
@@ -43,20 +44,19 @@ export default function Collections({ locale }) {
         heroPosition="left"
         ItemCard={ItemCard}
         useHero={useHero}
+        border={false}
       />
 
-      <OffsetList
-        items={itemIds}
-        offset={startingOffset + 5}
-        cardShape="wide"
-        ItemCard={ItemCard}
-      />
+      <OffsetList items={itemIds} offset={startingOffset + 5} cardShape="wide" ItemCard={ItemCard}>
+        <CallOutCollection />
+      </OffsetList>
 
       <Lockup
         items={itemIds}
         offset={startingOffset + 10}
         heroPosition="left"
         ItemCard={ItemCard}
+        border={false}
       />
 
       <OffsetList
