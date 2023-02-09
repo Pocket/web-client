@@ -9,6 +9,7 @@ const getCollectionsQuery = gql`
     getCollections(filters: $filters) {
       collections {
         slug
+        itemId: slug
         title
         excerpt
         intro

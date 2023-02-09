@@ -17,6 +17,7 @@ const getHomeQuery = gql`
           corpusRecommendationId: id
           corpusItem {
             imageUrl
+            thumbnail: imageUrl
             url
             title
             excerpt
@@ -45,7 +46,7 @@ export async function getUnifiedHome(locale) {
   return requestGQL({
     query: getHomeQuery,
     operationName: 'GetHome',
-    variables: {locale}
+    variables: { locale }
   })
     .then(handleResponse)
     .catch((error) => console.error(error))
@@ -73,7 +74,14 @@ function getItemsFromSlate({ recommendations }) {
     if (!corpusItem) return previous
     return {
       ...previous,
-      [corpusRecommendationId]: { ...corpusItem, topic, corpusRecommendationId }
+      [corpusRecommendationId]: {
+        ...corpusItem,
+        externalUrl: corpusItem.url,
+        saveUrl: corpusItem.url,
+        itemId: corpusRecommendationId,
+        topic,
+        corpusRecommendationId
+      }
     }
   }, {})
 }
