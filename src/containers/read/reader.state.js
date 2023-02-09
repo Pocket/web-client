@@ -59,14 +59,12 @@ function* readItemRequest({ id }) {
   try {
     const response = yield getSavedItemByItemId(id)
 
-    const { item, savedData, relatedArticlesById } = response
+    const { item, savedData } = response
     const derivedItem = deriveReaderItem(item, savedData)
     const idKey = savedData.id
-    const relatedArticleIds = Object.keys(relatedArticlesById)
     yield put({
       type: READ_ITEM_SUCCESS,
-      relatedItems: {[idKey]: relatedArticleIds},
-      itemsById: { [idKey]: derivedItem, ...relatedArticlesById },
+      itemsById: { [idKey]: derivedItem },
       nodes: { [idKey]: savedData }
     })
   } catch (error) {

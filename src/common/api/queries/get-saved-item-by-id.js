@@ -2,7 +2,6 @@ import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
 import { FRAGMENT_SAVED_ITEM } from 'common/api/fragments/fragment.savedItem'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
-import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 const getSavedItemByIdQuery = gql`
   query GetSavedItemById($itemId: ID!) {
@@ -28,17 +27,7 @@ const getSavedItemByIdQuery = gql`
           ...ItemDetails
           ... on Item {
             article
-            relatedAfterArticle(count: 3) {
-              corpusRecommendationId: id
-              corpusItem {
-                thumbnail: imageUrl
-                publisher
-                title
-                saveUrl: url
-                id
-                excerpt
-              }
-            }
+            language
           }
         }
       }
@@ -63,22 +52,6 @@ function handleResponse(response) {
 
   if (!responseData) throw new Error(response?.errors)
 
-  const { item: responseItem, ...savedData } = responseData
-  const { relatedAfterArticle, ...item } = responseItem
-
-  const relatedArticles = relatedAfterArticle.map((relatedItem) => ({
-    corpusRecommendationId: relatedItem?.corpusRecommendationId,
-    analyticsData: {
-      corpusRecommendationId: relatedItem?.corpusRecommendationId,
-      url: relatedItem?.corpusItem?.saveUrl
-    },
-    ...relatedItem?.corpusItem
-  }))
-  const relatedArticlesById = arrayToObject(relatedArticles, 'id')
-
-  return {
-    item,
-    relatedArticlesById,
-    savedData
-  }
+  const { item, ...savedData } = responseData
+  return { item, savedData }
 }

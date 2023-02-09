@@ -143,7 +143,7 @@ export default function Reader() {
         </article>
       </main>
 
-      <Recommendations id={id} />
+      <Recommendations id={id} language={item.language} />
       <Upsell />
 
       <ConfirmTagging />

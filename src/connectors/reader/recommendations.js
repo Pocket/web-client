@@ -1,9 +1,11 @@
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { css } from 'linaria'
 import { COLUMN_WIDTH_RANGE } from 'common/constants'
 import { ItemCard } from 'connectors/items/item-card-transitional'
 import { breakpointTinyTablet } from 'common/constants'
 import { standardGrid } from 'components/item/items-layout'
+import { useEffect } from 'react'
+import { getReadRecommended } from 'connectors/items/items-related.state'
 
 const asideWrapper = css`
   margin: 0 2.5rem;
@@ -39,8 +41,16 @@ const headerStyles = css`
   margin: 0 auto;
 `
 
-export const Recommendations = ({ id }) => {
+export const Recommendations = ({ id, language }) => {
   const recommendations = useSelector((state) => state.itemsRelated[id])
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (id && language === 'en') {
+      dispatch(getReadRecommended(id))
+    }
+  }, [dispatch, language, id])
+
   return recommendations?.length ? (
     <aside className={asideWrapper}>
       <h2 className={headerStyles}>You Might Also Like</h2>

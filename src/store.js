@@ -61,6 +61,7 @@ import { itemsSavedReducers } from 'connectors/items/items-saved.state'
 import { itemsSavedSagas } from 'connectors/items/items-saved.state'
 import { itemsTransitionsReducers } from 'connectors/items/items-transition.state'
 import { itemsRelatedReducers } from 'connectors/items/items-related.state'
+import { itemsRelatedSagas } from 'connectors/items/items-related.state'
 
 import { mutationArchiveReducers } from 'connectors/items/mutation-archive.state'
 import { mutationArchiveSagas } from 'connectors/items/mutation-archive.state'
@@ -218,6 +219,7 @@ function* rootSaga() {
     ...shortcutSagas,
     ...brazeSagas,
     ...pageSavedIdsSagas,
+    ...itemsRelatedSagas,
     ...itemsSavedSagas,
     ...pageListsIdsSagas,
     ...pageIndividualListsSagas,
