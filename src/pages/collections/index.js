@@ -17,7 +17,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ locale 
     locale
   }
 
-  const labels = locale === 'en-KE' ? ['region-east-africa'] : null
+  const labels = locale === 'en-KE' ? ['region-east-africa'] : ['collections-homepage']
 
   // Hydrating initial state with an async request. This will block the
   // page from loading. Do this for SEO/crawler purposes
