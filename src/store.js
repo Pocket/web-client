@@ -101,6 +101,10 @@ import { pageTopicReducers } from 'containers/discover/topic/topic.state'
 import { pageCollectionIdsReducers } from 'containers/collections/collections.state'
 import { pageCollectionStoriesReducers } from 'containers/collections/stories-page/stories.state'
 
+import { pageListsIdsReducers } from 'containers/lists/lists.state'
+import { pageListsIdsSagas } from 'containers/lists/lists.state'
+import { pageListsInfoReducers } from 'containers/lists/lists.state'
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
@@ -131,7 +135,9 @@ const pageReducers = {
   pageCollectionIds: pageCollectionIdsReducers,
   pageCollectionInfo: [], // In future this will handle pagination
   pageCollectionStories: pageCollectionStoriesReducers,
-  pageStoriesInfo: []
+  pageStoriesInfo: [],
+  pageListsIds: pageListsIdsReducers,
+  pageListsInfo: pageListsInfoReducers
 }
 
 const discoverReducers = {
@@ -205,6 +211,7 @@ function* rootSaga() {
     ...brazeSagas,
     ...pageSavedIdsSagas,
     ...itemsSavedSagas,
+    ...pageListsIdsSagas,
     ...mutationArchiveSagas,
     ...mutationDeleteSagas,
     ...mutationFavoriteSagas,

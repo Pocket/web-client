@@ -34,6 +34,11 @@ describe('Button', () => {
     expect(getByRole('button')).toHaveClass('small')
   })
 
+  it('applies a "tiny" style if prop size="tiny"', () => {
+    const { getByRole } = render(<Button size="tiny">Moar Cats</Button>)
+    expect(getByRole('button')).toHaveClass('tiny')
+  })
+
   it('applies a "disabled" style if props.disabled is true', () => {
     const { getByRole } = render(<Button disabled>Moar Cats</Button>)
     expect(getByRole('button')).toBeDisabled('disabled')

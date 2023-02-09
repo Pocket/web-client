@@ -2,7 +2,11 @@ import { sectionStyles } from 'components/dev-tools/tool-styles'
 import Link from 'next/link'
 
 export const Links = ({ toggleDevMode }) => {
-  const links = []
+  const links = [{
+    title: 'Lists',
+    src: '/lists',
+    description: 'Link to the Lists page'
+  }]
 
   return links.length ? (
     <div className={sectionStyles}>
