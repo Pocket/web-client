@@ -29,12 +29,15 @@ export const Item = (props) => {
     fromPartner,
     topicName,
     tags,
+    type,
 
     // UI
     className,
     useMarkdown,
     partnerType,
     clamp,
+    showExcerpt,
+    visibleCount,
 
     //Positioning
     style,
@@ -44,6 +47,7 @@ export const Item = (props) => {
 
     // Tracking
     // onItemInView,
+    snowplowId,
     onOpenOriginalUrl,
     onOpen
   } = props
@@ -52,7 +56,7 @@ export const Item = (props) => {
    * Layout is defined here.
    * ----------------------------------------------------------------
    */
-  const itemClassName = cx(itemStyles, clamp && 'clamped', className)
+  const itemClassName = cx(itemStyles, clamp && 'clamped', showExcerpt && 'showExcerpt', className, type) //prettier-ignore
   const openInNewTab = !isInternalItem
   const linkTarget = openInNewTab ? '_blank' : undefined
   const linkRel = openInNewTab ? 'noopener noreferrer' : undefined
@@ -88,9 +92,8 @@ export const Item = (props) => {
           </div>
         </a>
       </Link>
-
       <footer className="footer">
-        {tags.length ? <ItemTags className="itemTags" tags={tags} /> : null}
+        {tags?.length ? <ItemTags className="itemTags" tags={tags} /> : null}
         <cite className="details">
           <Publisher
             publisherLogo={publisherLogo}
@@ -100,15 +103,18 @@ export const Item = (props) => {
             isSyndicated={isSyndicated}
           />
           {timeToRead ? (
-            <div className="readtime" data-cy="read-time">
+            <div className="time-to-read" data-cy="time-to-read">
               {timeToRead} min
             </div>
           ) : null}
         </cite>
 
-        <div className="footerActions">
+        <div className="footer-actions">
           {Actions ? (
             <Actions
+              id={itemId}
+              visibleCount={visibleCount}
+              snowplowId={snowplowId}
               isFavorite={isFavorite}
               isArchive={isArchive}
               isPremium={isPremium}
@@ -117,7 +123,6 @@ export const Item = (props) => {
           ) : null}
         </div>
       </footer>
-
       {publisherLogo && publisher !== 'Pocket' ? (
         <img src={publisherLogo} alt={publisher} className="publisherLogo" />
       ) : null}
@@ -146,7 +151,7 @@ const Excerpt = ({ useMarkdown, excerpt }) => {
 const Publisher = ({ publisher, externalUrl, onOpenOriginalUrl, isSyndicated }) => {
   if (!publisher) return null
   return (
-    <>
+    <div>
       {externalUrl ? (
         <a
           className="publisher"
@@ -166,7 +171,7 @@ const Publisher = ({ publisher, externalUrl, onOpenOriginalUrl, isSyndicated }) 
           <SyndicatedIcon />
         </span>
       ) : null}
-    </>
+    </div>
   )
 }
 
