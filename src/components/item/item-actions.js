@@ -26,7 +26,7 @@ export const sharedActionStyles = css`
     font-size: 1.5rem;
     line-height: 1em;
     color: var(--color-actionSecondary);
-    padding: 0.25rem;
+    padding: 0;
     margin-right: 0.5rem;
 
     ${breakpointSmallTablet} {
@@ -68,7 +68,18 @@ export const discoveryActionStyles = css`
   }
 `
 
-export function SavedActions({ saveStatus, isFavorite, isArchive, isPremium }) {
+export function SavedActions({
+  visibleCount = 0,
+  isFavorite,
+  isArchive,
+  isPremium,
+  actionFavorite,
+  actionArchive,
+  actionTag,
+  actionShare,
+  actionDelete,
+  actionPremLibOpen
+}) {
   const { t } = useTranslation()
   const archiveLabel = isArchive
     ? t('item-action:re-add', 'Re-add to Saves')
@@ -77,53 +88,52 @@ export function SavedActions({ saveStatus, isFavorite, isArchive, isPremium }) {
     ? t('item-action:unfavorite', 'Un-Favorite')
     : t('item-action:favorite', 'Favorite')
 
+  const CorrectArchiveIcon = isArchive ? AddIcon : ArchiveIcon
+
+  const actionTypes = {
+    favorite: {
+      label: favoriteLabel,
+      icon: <FavoriteIcon className={isFavorite && 'active'} />,
+      onClick: actionFavorite
+    },
+    archive: {
+      label: archiveLabel,
+      icon: <CorrectArchiveIcon />,
+      onClick: actionArchive
+    },
+    tag: {
+      label: t('item-action:tag', 'Tag'),
+      icon: <TagIcon />,
+      onClick: actionTag
+    },
+    share: {
+      label: t('item-action:share', 'Share'),
+      icon: <IosShareIcon />,
+      onClick: actionShare
+    },
+    delete: {
+      label: t('item-action:delete', 'Delete'),
+      icon: <DeleteIcon />,
+      onClick: actionDelete
+    },
+    permanent: {
+      label: t('item-action:permanent-copy', 'Permanent Copy'),
+      hide: !isPremium,
+      icon: <PermanentCopyIcon />,
+      onClick: actionPremLibOpen
+    }
+  }
+
+  // Build open items based on item order and open count
+  const visibleActions = Object.values(actionTypes).slice(0, visibleCount)
+  const overflowActions = Object.values(actionTypes).slice(visibleCount, -1)
+
   const savedClasses = cx(sharedActionStyles, savedActionStyles)
 
   return (
-    <div className={`${savedClasses} status-${saveStatus}`}>
-      <button
-        className={topTooltip}
-        data-tooltip={favoriteLabel}
-        aria-label={favoriteLabel}
-        data-cy={favoriteLabel}
-        onClick={() => {}}>
-        <FavoriteIcon className={isFavorite && 'active'} />
-      </button>
-
-      <button
-        className={topTooltip}
-        data-tooltip={archiveLabel}
-        aria-label={archiveLabel}
-        data-cy={archiveLabel}
-        onClick={() => {}}>
-        {isArchive ? <AddIcon /> : <ArchiveIcon />}
-      </button>
-
-      <OverflowAction
-        menuItems={[
-          {
-            label: t('item-action:tag', 'Tag'),
-            icon: <TagIcon />,
-            onClick: () => {}
-          },
-          {
-            label: t('item-action:share', 'Share'),
-            icon: <IosShareIcon />,
-            onClick: () => {}
-          },
-          {
-            label: t('item-action:delete', 'Delete'),
-            icon: <DeleteIcon />,
-            onClick: () => {}
-          },
-          {
-            label: t('item-action:permanent-copy', 'Permanent Copy'),
-            hide: !isPremium,
-            icon: <PermanentCopyIcon />,
-            onClick: () => {}
-          }
-        ]}
-      />
+    <div className={savedClasses}>
+      {visibleActions.length ? <VisibleAction actions={visibleActions} /> : null}
+      {overflowActions.length ? <OverflowAction menuItems={overflowActions} /> : null}
     </div>
   )
 }
@@ -147,3 +157,20 @@ export function DiscoveryActions({ onSave, onUnsave, saveStatus }) {
     </div>
   )
 }
+
+export function VisibleAction({ actions }) {
+  return actions.map(({ label, icon, onClick }) => {
+    return (
+      <button
+        key={label}
+        className={topTooltip}
+        data-tooltip={label}
+        aria-label={label}
+        data-cy={label}
+        onClick={onClick}>
+        {icon}
+      </button>
+    )
+  })
+}
+
