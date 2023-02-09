@@ -121,7 +121,7 @@ describe('Home', () => {
     expect(item.readUrl).toBe(expectedReadUrl)
     expect(item.permanentUrl).toBe(expectedPermanentUrl)
     expect(item.isInternalItem).toBe(true)
-    expect(item.timeToRead).toBe(2)
+    expect(item.timeToRead).toBe(null)
     expect(item.authors).toBeFalsy()
 
     expect(item.analyticsData.id).toBe('3365323914')

@@ -1,9 +1,7 @@
 import { replaceUTM } from 'common/utilities/urls/urls'
-import { readTimeFromWordCount } from 'common/utilities/time-to-read/time-to-read'
 import { domainForUrl } from 'common/utilities/urls/urls'
-import { getBool } from 'common/utilities/get-bool/get-bool'
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
-import { urlWithPermanentLibrary} from 'common/utilities/urls/urls'
+import { urlWithPermanentLibrary } from 'common/utilities/urls/urls'
 
 import { BASE_URL } from 'common/constants'
 /**
@@ -14,7 +12,6 @@ import { BASE_URL } from 'common/constants'
  * IDENTIFIERS
  * ————————————————————————————————————
  * @param {string} itemId — A server generated unique id for this item.
- * @param {string} resolvedId — The item id of the resolved_url
  *
  * URLS
  * ————————————————————————————————————
@@ -94,10 +91,7 @@ export function deriveSavedItem(node) {
   return { item: derivedItem, node: nodeDetails }
 }
 
-export function deriveListItem(passedItem, legacy) {
-  // if a legacy flag is passed, first we need to modernize the item
-  const edge = legacy ? modernizeItem(passedItem) : passedItem
-
+export function deriveListItem(edge) {
   // node contains user-item data as well as the item itself
   const { node = {}, cursor = null } = edge
   const { item, ...rest } = node
@@ -131,16 +125,6 @@ export function deriveRecommendation(
   })
 }
 
-export function deriveReccit(recommendation) {
-  const { item: passedItem, sort_id, ...rest } = recommendation //eslint-disable-line no-unused-vars
-  const {
-    node: { item }
-  } = modernizeItem({ ...passedItem, sort_id })
-  const derivedItem = deriveItem({ item, utmId: 'pocket_rec' })
-
-  return derivedItem
-}
-
 export function deriveCollection(collection) {
   const collectionUrl = `/collections/${collection?.slug}`
 
@@ -160,17 +144,6 @@ export function deriveCollection(collection) {
 export function deriveStory(story) {
   const { item, ...itemEnrichment } = story
   return deriveItem({ item, itemEnrichment, utmId: 'pocket_collection_story' })
-}
-
-export function deriveProfile(feedItem, legacy) {
-  const { item: passedItem, post } = feedItem
-  // if a legacy flag is passed, first we need to modernize the item
-  const edge = legacy ? modernizeItem(passedItem) : passedItem
-  // node contains user-item data as well as the item itself
-  const { node = {}, cursor = null } = edge
-  const { item: nodeItem, ...rest } = node
-  const item = { ...nodeItem, readUrl: false, openExternal: true, post }
-  return deriveItem({ item, node: { ...rest, status: false }, cursor, utmId: 'pocket_profile' })
 }
 
 export function deriveReaderItem(item, savedItem) {
@@ -228,7 +201,6 @@ export function deriveItemData({
     isReadable: isReadable({ item }),
     isCollection: isCollection({ item }),
     isInternalItem: isInternalItem({ item, node, itemEnrichment, status: node?.status }),
-    timeToRead: readTime({ item }),
     fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
       id: item?.itemId || node?.id || false,
@@ -316,14 +288,6 @@ function excerpt({ item, itemEnrichment }) {
 const syndicated = function ({ item }) {
   if (item?.syndicatedArticle) return true
   return false
-}
-
-/** READ TIME
- * @param {object} feedItem An unreliable item returned from a v3 feed endpoint
- * @returns {int} average number of minutes to read the item
- */
-export function readTime({ item }) {
-  return item?.timeToRead || readTimeFromWordCount(item?.wordCount) || null
 }
 
 /**
@@ -451,112 +415,4 @@ function collectionSlug({ item }) {
   // We test for collection with the resolved and should use it to construct the slug
   const url = item?.resolvedUrl
   return url.substring(url.lastIndexOf('/') + 1)
-}
-
-// !! TEMPORARY FUNCTION while we transition to API next
-// !! THIS SHOULD BE DELETED SHORTLY
-
-function convertTags(tags) {
-  if (!tags) return []
-  return Object.values(tags).map((tag) => ({ name: tag.tag }))
-}
-
-function modernizeItem(item) {
-  const {
-    item_id,
-    resolved_id,
-    resolved_title,
-    sort_id,
-    has_image,
-    has_video,
-    is_article,
-    is_index,
-    favorite,
-    status,
-    time_added,
-    time_favorited,
-    time_read,
-    time_updated,
-    time_to_read,
-    word_count,
-    top_image_url,
-    syndicated_article,
-    domain_metadata,
-    given_url,
-    given_title,
-    resolved_url,
-    tags = [],
-    annotations = [],
-    authors,
-    images,
-    lang,
-    ...rest
-  } = item
-
-  const statusEnum = {
-    0: 'UNREAD',
-    1: 'ARCHIVED',
-    2: 'DELETED'
-  }
-
-  const imagesEnum = {
-    0: 'NO_IMAGES',
-    1: 'HAS_IMAGES',
-    2: 'IS_IMAGE'
-  }
-
-  const videosEnum = {
-    0: 'NO_VIDEOS',
-    1: 'HAS_VIDEOS',
-    2: 'IS_VIDEO'
-  }
-
-  const base = {
-    cursor: '',
-    node: {
-      _createdAt: parseInt(time_added, 10),
-      _updatedAt: parseInt(time_updated, 10),
-      url: given_url,
-      status: statusEnum[parseInt(status, 10)],
-      isFavorite: favorite === '1',
-      favoritedAt: parseInt(time_favorited),
-      isArchived: status === '1',
-      archivedAt: parseInt(time_read),
-      hasAnnotations: annotations?.length,
-      annotations,
-      tags: convertTags(tags)
-    }
-  }
-
-  const syndicatedObject = syndicated_article ? { syndicatedArticle: syndicated_article } : {}
-  const collectionObject = isCollection({ item })
-    ? { collection: { slug: collectionSlug(given_url) } }
-    : {}
-
-  const convertedItem = {
-    itemId: item_id,
-    resolvedId: resolved_id,
-    resolvedTitle: resolved_title,
-    sortId: sort_id,
-    language: lang,
-    hasImage: imagesEnum[parseInt(has_image, 10)],
-    hasVideo: videosEnum[parseInt(has_video, 10)],
-    isArticle: getBool(is_article),
-    isIndex: getBool(is_index),
-    timeToRead: time_to_read,
-    wordCount: word_count,
-    topImageUrl: top_image_url,
-    domainMetadata: domain_metadata,
-    givenUrl: given_url,
-    givenTitle: given_title,
-    resolvedUrl: resolved_url,
-    authors: authors ? Object.values(authors) : [],
-    images: images ? Object.values(images) : [],
-    ...syndicatedObject,
-    ...collectionObject,
-    ...rest
-  }
-
-  // Derive checks if this key exists, so adding it without condition gives a false positive
-  return { ...base, node: { ...base.node, item: convertedItem } }
 }

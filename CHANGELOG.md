@@ -1,3 +1,25 @@
+# [1.77.0](https://github.com/Pocket/web-client/compare/v1.76.9...v1.77.0) (2023-02-09)
+
+
+### Features
+
+* **collections:** use label for collections homepage ([3b84bf4](https://github.com/Pocket/web-client/commit/3b84bf431ca763aaa8a0d4384cef63f6ba9e7d4e))
+
+## [1.76.9](https://github.com/Pocket/web-client/compare/v1.76.8...v1.76.9) (2023-02-07)
+
+
+### Bug Fixes
+
+* **snowplow:** update readme to include how to build actions and add new events ([ec66c27](https://github.com/Pocket/web-client/commit/ec66c27a73112fd94d6ccdd9a1d5fea2ff367870))
+* **snowplow:** updating info to the readme linking events to eventtype and entities to entitytypes ([941e74c](https://github.com/Pocket/web-client/commit/941e74c003e9a365447fa8ca46af40baa73d8885))
+
+## [1.76.8](https://github.com/Pocket/web-client/compare/v1.76.7...v1.76.8) (2023-02-07)
+
+
+### Bug Fixes
+
+* **home:** sunset initial article ([484e341](https://github.com/Pocket/web-client/commit/484e341c644011d993c16cc3f3de06d238f33ca4))
+
 ## [1.76.7](https://github.com/Pocket/web-client/compare/v1.76.6...v1.76.7) (2023-02-06)
 
 

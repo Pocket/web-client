@@ -57,7 +57,6 @@ function modernizeItem(node) {
     itemId: item_id || resolved_id,
     title: resolved_title || given_url,
     excerpt,
-    resolvedId: resolved_id,
     resolvedTitle: resolved_title,
     wordCount: word_count,
     itemImage: image?.src,

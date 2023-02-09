@@ -2,67 +2,6 @@ import { deriveListItem } from 'common/api/derivers/item'
 import { analyticsActions } from 'connectors/snowplow/actions'
 import { validateSnowplowExpectations } from 'connectors/snowplow/snowplow.state'
 
-export const savedParsedFromV3 = {
-  item_id: '3362121180',
-  resolved_id: '3362121180',
-  given_url: 'http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html',
-  given_title: '',
-  favorite: '0',
-  status: '0',
-  time_added: '1634765628',
-  time_updated: '1634765628',
-  time_read: '0',
-  time_favorited: '0',
-  sort_id: 4,
-  resolved_title: 'The Secrets of \u2018Cognitive Super-Agers\u2019',
-  resolved_url: 'https://www.nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html',
-  excerpt:
-    'By studying centenarians, researchers hope to develop strategies to ward off Alzheimer\u2019s disease and slow brain aging for all of us.',
-  is_article: '1',
-  is_index: '0',
-  has_video: '0',
-  has_image: '1',
-  word_count: '1112',
-  lang: 'en',
-  time_to_read: 5,
-  amp_url: 'https://www.nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.amp.html',
-  top_image_url:
-    'https://static01.nyt.com/images/2021/06/22/science/21SCI-BRODY-CENTENARIANS/21SCI-BRODY-CENTENARIANS-facebookJumbo.jpg',
-  authors: {
-    62339103: {
-      name: 'JANE E. BRODY',
-      url: 'https://www.nytimes.com/by/jane-e-brody'
-    }
-  },
-  images: {
-    1: {
-      item_id: '3362121180',
-      image_id: '1',
-      src: 'https://static01.nyt.com/images/2021/06/22/science/21SCI-BRODY-CENTENARIANS/21SCI-BRODY-CENTENARIANS-articleLarge.jpg?quality=75&auto=webp&disable=upscale',
-      width: '600',
-      height: '398',
-      credit: '',
-      caption: ''
-    },
-    2: {
-      item_id: '3362121180',
-      image_id: '2',
-      src: 'https://static01.nyt.com/images/2018/06/12/multimedia/jane-e-brody/jane-e-brody-thumbLarge.png',
-      width: '0',
-      height: '0',
-      credit: '',
-      caption: ''
-    }
-  },
-  badge_group_id: '1',
-  domain_metadata: {
-    name: 'The New York Times',
-    logo: 'https://logo.clearbit.com/nytimes.com?size=800',
-    greyscale_logo: 'https://logo.clearbit.com/nytimes.com?size=800&greyscale=true'
-  },
-  listen_duration_estimate: 430
-}
-
 //prettier-ignore
 export const savedParsedFromClientApi =   {
   "node": {
@@ -121,57 +60,6 @@ describe('Saves - Parsed', () => {
   const expectedReadUrl = '/read/3362121180' //prettier-ignore
   const expectedPermanentUrl = 'https://getpocket.com/library/?pl_i=3362121180'
   const expectedAnalyticsUrl = 'http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html' //prettier-ignore
-
-  it('should derive v3 as expected', () => {
-    const item = deriveListItem(savedParsedFromV3, true)
-
-    // User driven data points
-    expect(item._createdAt).toBe(1634765628)
-    expect(item._updatedAt).toBe(1634765628)
-    expect(item.status).toBe('UNREAD')
-    expect(item.isFavorite).toBe(false)
-    expect(item.isArchived).toBe(false)
-    expect(item.timeRead).toBeFalsy()
-    expect(item.timeFavorited).toBeFalsy()
-    expect(item.tags).toStrictEqual([])
-
-    // UnDerived content should come from the server
-    expect(item.itemId).toBe('3362121180')
-    expect(item.resolvedId).toBe('3362121180')
-    expect(item.isSyndicated).toBe(false)
-    expect(item.isReadable).toBe(true)
-    expect(item.isCollection).toBe(false)
-    expect(item.isArticle).toBeTruthy()
-    expect(item.isIndex).toBeFalsy()
-    expect(item.hasVideo).toBe('NO_VIDEOS')
-    expect(item.hasImage).toBe('HAS_IMAGES')
-    expect(item.language).toBe('en')
-    expect(item.fromPartner).toBeFalsy()
-
-    // Derived content
-    expect(item.title).toBe('The Secrets of \u2018Cognitive Super-Agers\u2019')
-    expect(item.thumbnail).toBe(
-      'https://static01.nyt.com/images/2021/06/22/science/21SCI-BRODY-CENTENARIANS/21SCI-BRODY-CENTENARIANS-facebookJumbo.jpg'
-    )
-    expect(item.publisher).toBe('The New York Times')
-    expect(item.excerpt).toBe(
-      'By studying centenarians, researchers hope to develop strategies to ward off Alzheimer\u2019s disease and slow brain aging for all of us.'
-    )
-    expect(item.saveUrl).toBe(expectedSaveUrl)
-    expect(item.externalUrl).toBe(expectedExternalUrl)
-    expect(item.readUrl).toBe(expectedReadUrl)
-    expect(item.permanentUrl).toBe(expectedPermanentUrl)
-    expect(item.isInternalItem).toBe(true)
-    expect(item.timeToRead).toBe(5)
-    expect(item.authors).toStrictEqual([
-      {
-        name: 'JANE E. BRODY',
-        url: 'https://www.nytimes.com/by/jane-e-brody'
-      }
-    ])
-    expect(item.analyticsData.id).toBe('3362121180')
-    expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
-  })
 
   it('should derive clientAPI as expected', () => {
     const item = deriveListItem(savedParsedFromClientApi)
