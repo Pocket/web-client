@@ -1,7 +1,8 @@
 import { put, takeEvery } from 'redux-saga/effects'
 
 // Client API actions
-import { READ_ITEM_SUCCESS, READ_RECOMMENDED_REQUEST } from 'actions'
+import { READ_ITEM_SUCCESS } from 'actions'
+import { READ_RECOMMENDED_REQUEST } from 'actions'
 import { READ_RECOMMENDED_SUCCESS } from 'actions'
 import { READ_RECOMMENDED_FAILURE } from 'actions'
 import { getItemByItemId } from 'common/api/queries/get-related-after-article'
