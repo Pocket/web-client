@@ -23,6 +23,9 @@ export const Item = (props) => {
     isArchive,
     isPremium,
     isSyndicated,
+    isCollection,
+    authors,
+    storyCount,
     isInternalItem,
     saveStatus,
     openUrl,
@@ -95,13 +98,28 @@ export const Item = (props) => {
       <footer className="footer">
         {tags?.length ? <ItemTags className="itemTags" tags={tags} /> : null}
         <cite className="details">
-          <Publisher
-            publisherLogo={publisherLogo}
-            publisher={publisher}
-            externalUrl={openUrl}
-            onOpenOriginalUrl={onOpenOriginalUrl}
-            isSyndicated={isSyndicated}
-          />
+          {isCollection ? (
+            <div>
+              {authors.map((author) => (
+                <span key={author.name}>{author.name}</span>
+              ))}
+            </div>
+          ) : (
+            <Publisher
+              publisherLogo={publisherLogo}
+              publisher={publisher}
+              externalUrl={openUrl}
+              onOpenOriginalUrl={onOpenOriginalUrl}
+              isSyndicated={isSyndicated}
+            />
+          )}
+
+          {storyCount ? (
+            <div className="story-count" data-cy="story-count">
+              {storyCount} stories
+            </div>
+          ) : null}
+
           {timeToRead ? (
             <div className="time-to-read" data-cy="time-to-read">
               {timeToRead} min

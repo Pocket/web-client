@@ -127,13 +127,14 @@ export function deriveRecommendation(
 
 export function deriveCollection(collection) {
   const collectionUrl = `/collections/${collection?.slug}`
-
+  const storyCount = collection?.stories?.length || null
   return deriveItem({
     item: {
       ...collection,
       status: false,
       givenUrl: `${BASE_URL}${collectionUrl}`,
       collectionUrl,
+      storyCount,
       isArticle: true
     },
     passedPublisher: 'Pocket',
