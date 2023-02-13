@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
-import { ListsHeader } from 'components/headers/lists-header'
+import { ListsAllHeader } from 'components/headers/lists-header'
 import { listsItemsSetSortOrder } from './lists.state'
 
 export const Lists = () => {
@@ -23,7 +23,7 @@ export const Lists = () => {
 
       {shouldRender ? (
         <main className="main">
-          <ListsHeader
+          <ListsAllHeader
             sortOrder={sortOrder}
             handleCreateList={handleCreateList}
             handleNewest={handleNewest}
