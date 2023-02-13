@@ -3,9 +3,13 @@ import Link from 'next/link'
 
 export const Links = ({ toggleDevMode }) => {
   const links = [{
-    title: 'Lists',
+    title: 'All Lists',
     src: '/lists',
-    description: 'Link to the Lists page'
+    description: 'Link to the All Lists page'
+  },{
+    title: 'Individual List',
+    src: '/lists/the-cosmos-awaits-12345',
+    description: 'Link to an Individual List page'
   }]
 
   return links.length ? (
