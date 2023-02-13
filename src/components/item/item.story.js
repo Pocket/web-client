@@ -16,8 +16,8 @@ const savesItems = Object.values(savesResponse.edges).map((item) => {
 const itemsToDisplay = arrayToObject([...savesItems], 'storyName')
 
 const gridContainer = css`
-  max-width: 600px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
 `
 
 export default {
@@ -177,6 +177,7 @@ Item.args = {
   isInternalItem: false,
   fromPartner: true, // This is so we can supersede this with the selector
   clamp: false,
+  showExcerpt: true,
   partnerType: false,
   sideBySide: false,
   showTopic: false,

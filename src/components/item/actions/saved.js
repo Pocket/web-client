@@ -1,11 +1,8 @@
-import { css, cx } from 'linaria'
+import { css } from 'linaria'
 import { useTranslation } from 'next-i18next'
-import { OverflowAction } from 'components/item-actions/overflow'
-import { SaveIcon } from 'components/icons/SaveIcon'
-import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
 import { topTooltip } from 'components/tooltip/tooltip'
-
+import { OverflowMenu } from './overflow'
 import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { ArchiveIcon } from 'components/icons/ArchiveIcon'
 import { FavoriteIcon } from 'components/icons/FavoriteIcon'
@@ -15,9 +12,7 @@ import { PermanentCopyIcon } from 'components/icons/PermanentCopyIcon'
 
 import { breakpointSmallTablet } from 'common/constants'
 
-export const sharedActionStyles = css`
-  text-align: right;
-
+export const savedActionStyles = css`
   button {
     display: inline-flex;
     align-content: center;
@@ -37,11 +32,6 @@ export const sharedActionStyles = css`
     &:last-of-type {
       margin-right: 0;
     }
-  }
-`
-
-export const savedActionStyles = css`
-  button {
     .icon {
       color: var(--color-textSecondary);
       margin-top: 0;
@@ -53,27 +43,14 @@ export const savedActionStyles = css`
   }
 `
 
-export const discoveryActionStyles = css`
-  button {
-    .copy {
-      font-size: 1rem;
-      margin-left: 0.5rem;
-    }
-
-    .saveIcon {
-      color: var(--color-actionBrand);
-      display: inline-block;
-      margin-top: 0;
-    }
-  }
-`
-
 export function SavedActions({
-  visibleCount = 0,
+  visibleCount,
   isFavorite,
-  isArchive,
+  isArchived,
   isPremium,
   actionFavorite,
+  actionUnFavorite,
+  actionUpsert,
   actionArchive,
   actionTag,
   actionShare,
@@ -81,25 +58,28 @@ export function SavedActions({
   actionPremLibOpen
 }) {
   const { t } = useTranslation()
-  const archiveLabel = isArchive
+  const archiveLabel = isArchived
     ? t('item-action:re-add', 'Re-add to Saves')
     : t('item-action:archive', 'Archive')
   const favoriteLabel = isFavorite
     ? t('item-action:unfavorite', 'Un-Favorite')
     : t('item-action:favorite', 'Favorite')
 
-  const CorrectArchiveIcon = isArchive ? AddIcon : ArchiveIcon
+  const CorrectArchiveIcon = isArchived ? AddIcon : ArchiveIcon
+
+  const correctArchiveAction = isArchived ? actionUpsert : actionArchive
+  const correctFavoriteAction = isFavorite ? actionUnFavorite : actionFavorite
 
   const actionTypes = {
     favorite: {
       label: favoriteLabel,
       icon: <FavoriteIcon className={isFavorite && 'active'} />,
-      onClick: actionFavorite
+      onClick: correctFavoriteAction
     },
     archive: {
       label: archiveLabel,
       icon: <CorrectArchiveIcon />,
-      onClick: actionArchive
+      onClick: correctArchiveAction
     },
     tag: {
       label: t('item-action:tag', 'Tag'),
@@ -128,32 +108,10 @@ export function SavedActions({
   const visibleActions = Object.values(actionTypes).slice(0, visibleCount)
   const overflowActions = Object.values(actionTypes).slice(visibleCount, -1)
 
-  const savedClasses = cx(sharedActionStyles, savedActionStyles)
-
   return (
-    <div className={savedClasses}>
+    <div className={savedActionStyles}>
       {visibleActions.length ? <VisibleAction actions={visibleActions} /> : null}
-      {overflowActions.length ? <OverflowAction menuItems={overflowActions} /> : null}
-    </div>
-  )
-}
-
-export function DiscoveryActions({ onSave, onUnsave, saveStatus }) {
-  const discoveryClasses = cx(sharedActionStyles, discoveryActionStyles)
-
-  return (
-    <div className={`${discoveryClasses} status-${saveStatus}`}>
-      {saveStatus === 'saved' ? (
-        <button className="save-action saved" onClick={onUnsave}>
-          <SaveFilledIcon className="saveIcon" />
-          <span className="copy">Saved</span>
-        </button>
-      ) : (
-        <button className="save-action save" onClick={onSave}>
-          <SaveIcon className="saveIcon" />
-          <span className="copy">Save</span>
-        </button>
-      )}
+      {overflowActions.length ? <OverflowMenu menuItems={overflowActions} /> : null}
     </div>
   )
 }
@@ -173,4 +131,3 @@ export function VisibleAction({ actions }) {
     )
   })
 }
-

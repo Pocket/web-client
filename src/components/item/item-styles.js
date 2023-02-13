@@ -1,34 +1,18 @@
 import { css } from 'linaria'
-import {
-  breakpointLargeHandset,
-  breakpointLargeTablet,
-  breakpointMediumTablet,
-  breakpointSmallTablet,
-  breakpointTinyTablet
-} from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
+import { breakpointLargeTablet } from 'common/constants'
+import { breakpointMediumTablet } from 'common/constants'
+import { breakpointSmallTablet } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
+
 import { breakpointMediumHandset } from 'common/constants'
 
 export const itemStyles = css`
-  // This is can be used in layouts
-  --card-column: span 4;
-  --card-row: span 1;
-
-  // We lay out the card in it's own grid (independent of containing layout)
-  --card-column-template: 1fr;
-  --card-column-gap: 0;
-
-  // Where does the media sit?  Stacked default
-  --media-column: initial;
-  --media-row: initial;
-
-  // Where does the content sit?  Stacked default
-  --content-column: initial;
-  --content-row: initial;
-
   // Where does the footer sit?  Stacked default
   --footer-column: initial;
   --footer-column-template: auto 42px;
   --footer-column-gap: 1rem;
+  --footer-height: 52px;
 
   // Generally these are consistent styles
   --card-padding: 1rem;
@@ -39,8 +23,7 @@ export const itemStyles = css`
 
   --card-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   --card-hover-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
-  --card-border-radius: 1rem;
-  --card-transition: all 150ms ease-in;
+  --tag-box-shadow: 0 -2px 18px rgba(0, 0, 0, 0.25);
 
   --overline-display: block;
 
@@ -67,29 +50,31 @@ export const itemStyles = css`
     --card-hover-shadow: 0 0 18px rgba(0, 0, 0, 0.9);
   }
 
-  // Container card styles
+  // Default size of a card for 3 across.  This will be overridden in the layouts when needed
+  grid-column: span 4;
+  grid-row: span 1;
+
   font-family: var(--fontSansSerif);
   font-weight: 400;
   position: relative;
   z-index: 0;
-  grid-column: var(--card-column);
-  grid-row: var(--card-row);
 
   background-color: var(--color-canvas);
   box-shadow: var(--card-shadow);
-  border-radius: var(--card-border-radius);
-  transition: var(--card-transition);
+  border-radius: 1rem;
+  transition: all 150ms ease-in;
 
   // Inner grid
   display: grid;
 
-  grid-template-columns: var(--card-column-template);
-  grid-column-gap: var(--card-column-gap);
-  grid-template-rows: auto minmax(0, 1fr) 48px;
+  grid-template-columns: 1fr;
+  grid-column-gap: 0;
+  grid-template-rows: auto minmax(0, 1fr) 52px;
 
   // Lets the cards fill their container
   height: 100%;
   width: 100%;
+  margin: 0;
 
   // What happens when we hover over the main card
   &:hover {
@@ -100,7 +85,7 @@ export const itemStyles = css`
     }
   }
 
-  & > a {
+  a {
     text-decoration: none;
     &:focus {
       outline: none;
@@ -113,8 +98,6 @@ export const itemStyles = css`
   // What does the main image look like?
   .media-block {
     position: relative;
-    grid-column: var(--media-column);
-    grid-row: var(--media-row);
     border-radius: var(--media-radius);
     overflow: hidden;
     .media {
@@ -186,7 +169,7 @@ export const itemStyles = css`
     line-height: 1.25;
     transform: translate(-1rem, -100%);
     padding: 0.5rem 1rem 1rem 1rem;
-
+    z-index: 12;
     border-radius: 0 1rem 0 0;
   }
 
@@ -211,19 +194,8 @@ export const itemStyles = css`
       }
     }
   }
-
-  &.clamped .title {
-    max-height: calc(var(--title-line-height) * var(--title-lines));
-    overflow: hidden;
-    text-overflow: ellipsis;
-    overflow-wrap: anywhere;
-    display: -webkit-box;
-    -webkit-line-clamp: var(--title-lines);
-    -webkit-box-orient: vertical;
-  }
-
   .excerpt {
-    display: none;
+    display: var(--excerpt-display);
     p {
       font-size: var(--excerpt-size);
       overflow: hidden;
@@ -233,18 +205,25 @@ export const itemStyles = css`
     }
   }
 
-  &.showExcerpt .excerpt {
-    display: block;
-  }
-
-  &.clamped .excerpt p {
-    max-height: calc(var(--excerpt-line-height) * var(--excerpt-lines));
-    overflow: hidden;
-    text-overflow: ellipsis;
-    overflow-wrap: anywhere;
-    display: -webkit-box;
-    -webkit-line-clamp: var(--excerpt-lines);
-    -webkit-box-orient: vertical;
+  &.clamped {
+    .title {
+      max-height: calc(var(--title-line-height) * var(--title-lines));
+      overflow: hidden;
+      text-overflow: ellipsis;
+      overflow-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-line-clamp: var(--title-lines);
+      -webkit-box-orient: vertical;
+    }
+    .excerpt p {
+      max-height: calc(var(--excerpt-line-height) * var(--excerpt-lines));
+      overflow: hidden;
+      text-overflow: ellipsis;
+      overflow-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-line-clamp: var(--excerpt-lines);
+      -webkit-box-orient: vertical;
+    }
   }
 
   .footer {
@@ -257,7 +236,7 @@ export const itemStyles = css`
     padding-bottom: 0.725rem;
   }
 
-  cite.details {
+  .details {
     display: flex;
     overflow: hidden;
     flex-direction: column;
@@ -269,9 +248,22 @@ export const itemStyles = css`
     color: var(--color-textSecondary);
   }
 
-  .time-to-read {
+  .context {
+    display: flex;
+    justify-content: flex-start;
     font-weight: 300;
+    & > div {
+      padding-right: 0.5rem;
+      & ~ div:before {
+        color: var(--color-textSecondary);
+        position: relative;
+        font-size: 0.875rem;
+        content: '•';
+        margin-right: 0.5rem;
+      }
+    }
   }
+
   .footer-actions {
     display: flex;
     justify-content: flex-end;
@@ -301,12 +293,34 @@ export const itemStyles = css`
     font-size: 1rem;
   }
 
-  .tags {
+  .tags-container {
     display: none;
-    padding: 0 0 var(--card-padding) 0;
-    grid-column: 1/-1;
-    flex-flow: wrap;
-    span {
+    padding: var(--card-padding);
+
+    align-items: center;
+    margin-right: 2rem;
+    padding: var(--card-padding);
+    border-radius: 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-popoverCanvas);
+    z-index: var(--zIndexRaised);
+    box-shadow: var(--tag-box-shadow);
+
+    .icon {
+      height: 24px;
+      width: 24px;
+    }
+
+    .tags-list {
+      padding-left: 1rem;
+      display: flex;
+      flex-flow: wrap;
+      width: 100%;
+    }
+    .tag {
       margin: 0 0.5rem 0.5rem 0;
       a {
         text-decoration: none;
@@ -316,96 +330,13 @@ export const itemStyles = css`
         }
       }
     }
-
-    .showTags & {
-      display: flex;
-    }
   }
 
-  // This view is very flawed.  It seems built to address aribrary existing layout
-  // but I tried to get a consistent information hierarchy into it
-  &.side-by-side {
-    --card-column: span 4;
-    --card-row: span 1;
-
-    // We lay out the card in it's own grid (independent of containing layout)
-    --card-column-template: 120px auto;
-    --card-column-gap: 0.5rem;
-
-    // Where does the media sit?  Stacked default
-    --media-column: 1;
-    --media-row: span 2;
-
-    // Where does the content sit?  Stacked default
-    --content-column: 2/-1;
-    --content-row: initial;
-
-    --card-padding: 0.875rem;
-    --overline-display: none;
-    --title-size: 1rem;
-    --title-margin: 0.875rem 0 0.5rem;
-    --media-radius: 0.5rem;
-    --media-margin: 0.875rem 0 0.875rem 0.875rem;
-    --excerpt-display: none;
-    --logo-display: none;
-    --overflow-transform: translate(15%, -15%);
+  .show-tags .tags-container {
+    display: flex;
   }
 
-  .lockup-hero & {
-    --card-column: span 3;
-    --card-row: span 1;
-
-    &.showExcerpt .excerpt {
-      display: none;
-    }
-    ${breakpointSmallTablet} {
-      --card-column: span 6;
-      --card-row: span 1;
-    }
-  }
-
-  &.hero-left {
-    --card-column: 1 / span 6;
-    --card-row: span 2;
-    --title-size: 1.5rem;
-    &.showExcerpt .excerpt {
-      display: block;
-      p {
-        font-size: 1.125rem;
-      }
-    }
-    ${breakpointSmallTablet} {
-      --card-column: 1 / span 12;
-      --card-row: span 1;
-    }
-  }
-
-  .horizontal-items & {
-    --media-radius: 1rem;
-    grid-column: span 8;
-    width: 100%;
-    .media-block {
-      margin: 0.5rem;
-      width: 280px;
-      grid-row: span 2;
-    }
-    grid-template-rows: auto 42px;
-    grid-template-columns: auto minmax(0, 1fr);
-    ${breakpointLargeTablet} {
-      grid-column: span 12;
-      &.showExcerpt .excerpt {
-        display: block;
-      }
-    }
-    ${breakpointTinyTablet} {
-      .media-block {
-        margin: 0.5rem;
-        width: 140px;
-        grid-row: span 2;
-      }
-    }
-  }
-
+  // SAVED CARD TYPES (special since they don't live in a grid)
   &.detail {
     --media-radius: 1rem;
     grid-column: span 8;
@@ -415,11 +346,17 @@ export const itemStyles = css`
       width: 280px;
       grid-row: span 2;
     }
-    grid-template-rows: auto 42px;
+    grid-template-rows: auto var(--footer-height);
     grid-template-columns: auto minmax(0, 1fr);
     --title-lines: 2;
     --excerpt-lines: 2;
     --footer-column-template: minmax(0, 1fr) auto;
+    --title-margin: 1rem 0 0.5rem 0;
+    --excerpt-margin: 0.5rem 0;
+    .card-tags {
+      display: block;
+    }
+
     ${breakpointSmallTablet} {
       grid-template-rows: auto minmax(0, 1fr);
       --footer-column-template: minmax(0, 1fr) auto;
@@ -440,24 +377,20 @@ export const itemStyles = css`
       }
     }
   }
-  .smallCards & {
-    grid-column: span 3;
-  }
 
   &.list {
     --title-lines: 1;
     --title-size: 1rem;
     --title-margin: 0.5rem 0;
-    grid-template-rows: auto minmax(0, 1fr);
+    --excerpt-display: none;
     --footer-column-template: minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(0, 1fr);
+
     .media-block {
       display: none;
     }
-    &.showExcerpt .excerpt {
-      display: none;
-    }
 
-    cite.details {
+    .details {
       flex-direction: row;
       justify-content: flex-start;
       .time-to-read {
@@ -471,6 +404,7 @@ export const itemStyles = css`
   }
 
   &.grid {
+    --excerpt-display: none;
     ${breakpointLargeHandset} {
       grid-template-columns: auto minmax(0, 1fr);
       grid-template-rows: auto minmax(0, 1fr);
@@ -483,35 +417,6 @@ export const itemStyles = css`
       .footer {
         grid-column: span 2;
       }
-    }
-  }
-  .recentCards & {
-    --media-radius: 0.5rem;
-    --title-size: 0.825rem;
-    --title-margin: 0.5rem 0;
-
-    .media-block {
-      margin: 0.5rem;
-      width: 100%;
-      grid-row: span 2;
-    }
-    &.showExcerpt .excerpt {
-      display: none;
-    }
-    grid-column-gap: 0.5rem;
-    grid-template-rows: minmax(0, 1fr) 32px;
-    grid-template-columns: 156px minmax(0, 1fr);
-
-    cite.details {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-    .footer {
-      grid-template-columns: 1fr;
-    }
-    .footer-actions {
-      display: none;
     }
   }
 `

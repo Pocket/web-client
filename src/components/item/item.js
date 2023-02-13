@@ -4,8 +4,8 @@ import { useTranslation } from 'next-i18next'
 import ReactMarkdown from 'react-markdown'
 import { SyndicatedIcon } from 'components/icons/SyndicatedIcon'
 import { NewViewIcon } from 'components/icons/NewViewIcon'
-import { CardMedia } from 'components/items-media/card-media'
-import { ItemTags } from 'components/item-tags/item-tags'
+import { CardMedia } from 'components/item/item-media'
+import { ItemTags } from 'components/item/item-tags'
 import { itemStyles } from './item-styles'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
