@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { cx } from 'linaria'
 
 import { ItemCard } from 'connectors/items/item-card-transitional'
-import { listStrata, listSlide } from 'components/items-layout/list-strata'
+import { standardGrid } from 'components/item/items-layout'
+import { basicSlide } from 'components/item/items-layout'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { getHomeContent } from './home.state'
 
@@ -55,7 +56,7 @@ function Slate({ slateId }) {
   const showTopicSelector = recommendationReasonType === 'PREFERRED_TOPICS'
   const showHits = recommendationReasonType === 'POCKET_HITS'
   const firstSlate = slates.indexOf(slateId) === 0
-  const hitsCount = recommendations.length >= 8 ? 8 : 4
+  const hitsCount = recommendations.length //>= 8 ? 8 : 4
   const recCount = showHits ? hitsCount : firstSlate ? 6 : 3
   const recsToShow = recommendations.slice(0, recCount)
 
@@ -77,7 +78,6 @@ function Slate({ slateId }) {
     setSlide(false)
   }
 
-  const sectionClassname = cx(listStrata, showHits && 'smallCards')
   return (
     <SectionWrapper className="homeSection">
       <HomeHeader
@@ -89,13 +89,9 @@ function Slate({ slateId }) {
       />
 
       {showHits ? (
-        <>
-          <div className={listSlide}>
-            <div className={cx(sectionClassname, 'slideSection', slide && 'slide')}>
-              {recsToShow.map((corpusId) => (
-                <ItemCard key={corpusId} id={corpusId} />
-              ))}
-            </div>
+        <div className={cx(basicSlide, recCount <= 4 && 'no-slide')}>
+          <div className="outer-slide">
+            <div className={cx('inner-slide', slide && 'slide-active')}>{recsToShow.map(Card)}</div>
           </div>
           <div className="controls">
             <button className="text" onClick={slideOut}>
@@ -105,13 +101,9 @@ function Slate({ slateId }) {
               <ChevronRightIcon />
             </button>
           </div>
-        </>
-      ) : (
-        <div className={sectionClassname}>
-          {recsToShow.map((corpusId) => (
-            <ItemCard key={corpusId} id={corpusId} />
-          ))}
         </div>
+      ) : (
+        <div className={standardGrid}>{recsToShow.map(Card)}</div>
       )}
     </SectionWrapper>
   )
@@ -136,4 +128,9 @@ function ExploreMoreTopics() {
       />
     </SectionWrapper>
   )
+}
+
+// This is just a concenience method so we can keep grid declarations simple
+function Card(id) {
+  return <ItemCard key={id} id={id} />
 }

@@ -12,8 +12,7 @@ import { BASE_URL } from 'common/constants'
 import { CardPageHeader } from 'components/headers/discover-header'
 import { CardListHeading } from 'components/headers/discover-header'
 import { ItemCard } from 'connectors/items/item-card-transitional'
-import { Lockup } from 'components/items-layout/list-lockup'
-import { OffsetList } from 'components/items-layout/list-offset'
+import { heroGrid, stackedGrid } from 'components/item/items-layout'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
 import { ConfirmReport } from 'connectors/confirm/report'
@@ -71,20 +70,21 @@ export default function Discover({ locale }) {
         subHeading={t('discover:essential-reads', 'Today’s essential reads')}
       />
 
-      {/* Top Lockup (center)*/}
-      <Lockup items={items} offset={0} heroPosition="left" ItemCard={ItemCard} border={false} />
+      {/* Top Hero Grid*/}
+      <div className={heroGrid}>{items.slice(0, 5).map(Card)}</div>
 
       {/* Pocket Brand Messaging */}
       <CalloutTop locale={locale} shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
 
       {/* Top List */}
       <CardListHeading>{t('discover:fascinating-stories', 'Fascinating stories')}</CardListHeading>
-
-      <OffsetList items={items} offset={5} cardShape="wide" ItemCard={ItemCard} border={false}>
+      <div className={stackedGrid}>
+        {items.slice(5, 10).map(Card)}
         {showTopics ? <CardTopicsNav topics={topics} rail={true} track={topicClickMiddle} /> : null}
-      </OffsetList>
+      </div>
 
-      <Lockup items={items} offset={10} heroPosition="left" ItemCard={ItemCard} border={false} />
+      {/* Mid-Hero Grid */}
+      <div className={heroGrid}>{items.slice(10, 15).map(Card)}</div>
 
       <CalloutBottom
         shouldRender={shouldRender}
@@ -92,7 +92,8 @@ export default function Discover({ locale }) {
         trackEvent={trackEvent}
       />
 
-      <OffsetList items={items} offset={15} cardShape="wide" ItemCard={ItemCard} border={false} />
+      {/* Bottom List */}
+      <div className={stackedGrid}>{items.slice(15, 20).map(Card)}</div>
 
       {showTopics ? (
         <CardTopicsNav topics={topics} className="no-border" track={topicClickBottom} />
@@ -130,4 +131,9 @@ function CalloutBottom({ shouldRender, isAuthenticated, trackEvent }) {
       isAuthenticated={isAuthenticated}
     />
   ) : null
+}
+
+// This is just a concenience method so we can keep grid declarations simple
+function Card(id) {
+  return <ItemCard key={id} id={id} />
 }

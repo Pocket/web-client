@@ -7,8 +7,7 @@ import { useSelector } from 'react-redux'
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 import { CardPageHeader } from 'components/headers/discover-header'
 import { ItemCard } from 'connectors/items/item-card-transitional'
-import { Lockup } from 'components/items-layout/list-lockup'
-import { OffsetList } from 'components/items-layout/list-offset'
+import { heroGrid, stackedGrid } from 'components/item/items-layout'
 import { CallOutCollection } from 'components/call-out/call-out-collections'
 
 export default function Collections({ locale }) {
@@ -29,42 +28,27 @@ export default function Collections({ locale }) {
     url
   }
 
-  const startingOffset = 0
-  const useHero = false
-
   return (
     <Layout title={metaData.title} metaData={metaData} canonical={canonical} forceWebView={true}>
       {!isAuthenticated && shouldRender ? <CallOutBuildHome source="collections" /> : null}
 
       <CardPageHeader title={metaData.title} subHeading={metaData.description} />
 
-      <Lockup
-        items={itemIds}
-        offset={startingOffset}
-        heroPosition="left"
-        ItemCard={ItemCard}
-        useHero={useHero}
-        border={false}
-      />
+      <div className={heroGrid}>{itemIds.slice(0, 5).map(Card)}</div>
 
-      <OffsetList items={itemIds} offset={startingOffset + 5} cardShape="wide" ItemCard={ItemCard}>
+      <div className={stackedGrid}>
+        {itemIds.slice(5, 10).map(Card)}
         <CallOutCollection />
-      </OffsetList>
+      </div>
 
-      <Lockup
-        items={itemIds}
-        offset={startingOffset + 10}
-        heroPosition="left"
-        ItemCard={ItemCard}
-        border={false}
-      />
+      <div className={heroGrid}>{itemIds.slice(10, 15).map(Card)}</div>
 
-      <OffsetList
-        items={itemIds}
-        offset={startingOffset + 15}
-        cardShape="wide"
-        ItemCard={ItemCard}
-      />
+      <div className={stackedGrid}>{itemIds.slice(15, 20).map(Card)}</div>
     </Layout>
   )
+}
+
+// This is just a concenience method so we can keep grid declarations simple
+function Card(id) {
+  return <ItemCard key={id} id={id} />
 }
