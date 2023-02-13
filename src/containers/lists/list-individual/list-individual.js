@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListIndividualHeader } from 'components/headers/lists-header'
+import { EmptyIndividualLists } from 'components/empty-states/inividual-list'
 import { listsItemsSetSortOrder } from '../lists.state'
 
 const MOCK_DATA = {
@@ -56,6 +57,7 @@ export const ListIndividual = () => {
           />
 
           {/* List Component */}
+          <EmptyIndividualLists />
         </main>
       ) : null}
     </Layout>
