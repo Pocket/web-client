@@ -79,12 +79,9 @@ export const ListIndividualHeader = ({
   status,
   userId,
   slug,
-  sortOrder,
   handlePublish,
   handleShare,
-  handleEdit,
-  handleNewest,
-  handleOldest
+  handleEdit
 }) => {
   const url = `/${userId}/list/${slug}`
   const isPrivate = status === 'PRIVATE'
@@ -114,7 +111,6 @@ export const ListIndividualHeader = ({
         )}
 
         <button onClick={handleEdit} className="filter"><FiltersAltIcon /></button>
-        <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
       </div>
     </header>
   )

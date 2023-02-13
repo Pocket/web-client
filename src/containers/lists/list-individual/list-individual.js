@@ -3,7 +3,6 @@ import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListIndividualHeader } from 'components/headers/lists-header'
 import { EmptyIndividualLists } from 'components/empty-states/inividual-list'
-import { listsItemsSetSortOrder } from '../lists.state'
 
 const MOCK_DATA = {
   id: '1111111',
@@ -25,7 +24,6 @@ export const ListIndividual = () => {
   const dispatch = useDispatch()
 
   const userStatus = useSelector((state) => state.user.user_status)
-  const sortOrder = useSelector((state) => state.pageListsInfo.sortOrder)
 
   const shouldRender = userStatus !== 'pending'
 
@@ -33,8 +31,6 @@ export const ListIndividual = () => {
   const handlePublish = () => { }
   const handleShare = () => { }
   const handleEdit = () => { }
-  const handleNewest = () => dispatch(listsItemsSetSortOrder('DESC'))
-  const handleOldest = () => dispatch(listsItemsSetSortOrder('ASC'))
 
   return (
     <Layout>
@@ -48,12 +44,9 @@ export const ListIndividual = () => {
             status={MOCK_DATA.status}
             userId={MOCK_DATA.userId}
             slug={MOCK_DATA.slug}
-            sortOrder={sortOrder}
             handlePublish={handlePublish}
             handleShare={handleShare}
             handleEdit={handleEdit}
-            handleNewest={handleNewest}
-            handleOldest={handleOldest}
           />
 
           {/* List Component */}
