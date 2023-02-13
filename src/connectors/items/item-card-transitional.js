@@ -1,8 +1,11 @@
 import { Item } from 'components/item/item'
 import { useSelector, useDispatch } from 'react-redux'
-import { ActionsTransitional } from './item-actions-transitional'
 import { setNoImage } from 'connectors/items/items-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { TransitionalActions } from 'components/item/actions/transitional'
+import { itemReportAction } from 'connectors/items/mutation-report.state'
+import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
+import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 
 /**
  * Article Card
@@ -15,6 +18,7 @@ export function ItemCard({
   className,
   cardShape,
   showExcerpt = true,
+  useMarkdown,
   clamp,
   snowplowId
 }) {
@@ -27,8 +31,9 @@ export function ItemCard({
   const item = useSelector((state) => state.itemsDisplay[id])
   if (!item) return null
 
-  const { itemId, readUrl, externalUrl, openExternal, syndicatedUrl } = item
-  const openUrl = openExternal ? externalUrl : syndicatedUrl || readUrl || externalUrl
+  const { readUrl, externalUrl, openExternal, syndicatedUrl, isCollection, authors, saveUrl } = item
+
+  const openUrl = openExternal ? externalUrl : syndicatedUrl || readUrl || externalUrl || saveUrl
 
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
@@ -54,7 +59,7 @@ export function ItemCard({
 
   return (
     <Item
-      itemId={itemId}
+      itemId={id}
       externalUrl={externalUrl}
       tags={tags}
       title={title}
@@ -75,6 +80,7 @@ export function ItemCard({
       showExcerpt={showExcerpt}
       openUrl={openUrl}
       clamp={clamp}
+      useMarkdown={useMarkdown}
       // Tracking
       onItemInView={onItemInView}
       onOpen={onOpen}
@@ -82,4 +88,46 @@ export function ItemCard({
       snowplowId="discover"
     />
   )
+}
+
+export function ActionsTransitional(props) {
+  const { id, position, snowplowId } = props
+  const dispatch = useDispatch()
+
+  const isAuthenticated = useSelector((state) => state.user.auth)
+  const item = useSelector((state) => state.itemsDisplay[id])
+
+  const saveItemId = useSelector((state) => state.itemsTransitions[id])
+  const saveStatus = saveItemId ? 'saved' : 'unsaved'
+
+  if (!item) return null
+  const { saveUrl } = item
+  const analyticsData = { position, ...item?.analyticsData }
+
+  // Prep save action
+  const onSave = () => {
+    if (!isAuthenticated) return
+    dispatch(sendSnowplowEvent(`${snowplowId}.save`, analyticsData))
+    dispatch(mutationUpsertTransitionalItem(saveUrl, id))
+  }
+
+  const onUnSave = () => {
+    if (!isAuthenticated) return
+    dispatch(sendSnowplowEvent(`${snowplowId}.unsave`, analyticsData))
+    dispatch(mutationDeleteTransitionalItem(saveItemId, id))
+  }
+
+  // On Report
+  const onReport = () => dispatch(itemReportAction(id))
+
+  return item ? (
+    <TransitionalActions
+      id={id}
+      isAuthenticated={isAuthenticated}
+      saveStatus={saveStatus}
+      onSave={onSave}
+      onUnSave={onUnSave}
+      onReport={onReport}
+    />
+  ) : null
 }
