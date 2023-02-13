@@ -1,4 +1,5 @@
 import { cx } from 'linaria'
+import { useState } from 'react'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import ReactMarkdown from 'react-markdown'
@@ -63,6 +64,10 @@ export const Item = (props) => {
   const openInNewTab = !isInternalItem
   const linkTarget = openInNewTab ? '_blank' : undefined
   const linkRel = openInNewTab ? 'noopener noreferrer' : undefined
+  const [tagsShown, setTagsShown] = useState(false)
+
+  const showTags = () => setTagsShown(true)
+  const hideTags = () => setTagsShown(false)
 
   return (
     <article style={style} className={itemClassName} key={itemId} data-cy="article-card">
@@ -76,27 +81,28 @@ export const Item = (props) => {
           openUrl={openUrl}
         />
       </span>
-      <Link href={openUrl}>
-        <a
-          onClick={onOpen}
-          className="content-block"
-          data-cy="content-block"
-          target={linkTarget}
-          rel={linkRel}>
-          <div className="content">
-            {fromPartner ? <PartnerOverline partnerType={partnerType} /> : null}
-            <h2 className={cx('title', openInNewTab && 'open-external')}>
-              {title}{' '}
-              {openInNewTab ? (
-                <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
-              ) : null}
-            </h2>
-            <Excerpt useMarkdown={useMarkdown} excerpt={excerpt} />
-          </div>
-        </a>
-      </Link>
+      <div>
+        <Link href={openUrl}>
+          <a
+            onClick={onOpen}
+            className="content-block"
+            data-cy="content-block"
+            target={linkTarget}
+            rel={linkRel}>
+            <div className="content">
+              {fromPartner ? <PartnerOverline partnerType={partnerType} /> : null}
+              <h2 className={cx('title', openInNewTab && 'open-external')}>
+                {title}{' '}
+                {openInNewTab ? (
+                  <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
+                ) : null}
+              </h2>
+              <Excerpt useMarkdown={useMarkdown} excerpt={excerpt} />
+            </div>
+          </a>
+        </Link>
+      </div>
       <footer className="footer">
-        {tags?.length ? <ItemTags className="itemTags" tags={tags} /> : null}
         <cite className="details">
           {isCollection ? (
             <div>
@@ -114,17 +120,27 @@ export const Item = (props) => {
             />
           )}
 
-          {storyCount ? (
-            <div className="story-count" data-cy="story-count">
-              {storyCount} stories
-            </div>
-          ) : null}
-
-          {timeToRead ? (
-            <div className="time-to-read" data-cy="time-to-read">
-              {timeToRead} min
-            </div>
-          ) : null}
+          <div className="context">
+            {storyCount ? (
+              <div className="story-count" data-cy="story-count">
+                {storyCount} stories
+              </div>
+            ) : null}
+            {timeToRead ? (
+              <div className="time-to-read" data-cy="time-to-read">
+                {timeToRead} min
+              </div>
+            ) : null}
+            {tags?.length && type === 'detail' ? (
+              <div
+                className={cx('card-tags', tagsShown && 'show-tags')}
+                data-cy="card-tags"
+                onMouseEnter={showTags}>
+                {tags?.length} tags
+                <ItemTags className="itemTags" tags={tags} mouseLeave={hideTags} />
+              </div>
+            ) : null}
+          </div>
         </cite>
 
         <div className="footer-actions">
