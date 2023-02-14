@@ -10,6 +10,7 @@ import { useTranslation } from 'next-i18next'
 import { mutationUnDelete } from 'connectors/items/mutation-delete.state'
 
 import { ITEMS_UPSERT_SUCCESS } from 'actions'
+
 import { MUTATION_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
 
@@ -213,7 +214,7 @@ export function Toast({
 // t('error-adding-to-favorites', 'Error adding to favorites')
 
 // t('highlighted', '{{count}} item highlighted')
-// t('highlight-deleted', '{{count}} item highlighted')
+// t('highlight-deleted', '{{count}} highlight removed')
 
 // t('removed-from-favorites', '{{count}} item removed from favorites')
 // t('removed-from-favorites_plural', '{{count}} items removed from favorites')

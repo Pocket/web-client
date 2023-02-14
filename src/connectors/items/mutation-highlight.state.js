@@ -1,6 +1,7 @@
 import { put, call, select, takeEvery } from 'redux-saga/effects'
 
-import { HIGHLIGHT_SAVE_REQUEST, HIGHLIGHT_SAVE_SUCCESS } from 'actions'
+import { HIGHLIGHT_SAVE_REQUEST } from 'actions'
+import { HIGHLIGHT_SAVE_SUCCESS } from 'actions'
 import { HIGHLIGHT_SAVE_FAILURE } from 'actions'
 
 import { HIGHLIGHT_DELETE_REQUEST } from 'actions'
