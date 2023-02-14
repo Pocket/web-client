@@ -195,6 +195,7 @@ export function deriveItemData({
     publisherLogo: item?.domainMetadata?.logo || false,
     externalUrl: externalUrl({ item, itemEnrichment, utmId }),
     readUrl: readUrl({ item, node, status: node?.status }),
+    itemUrl: node?.url || null,
     saveUrl: saveUrl({ item, itemEnrichment }),
     syndicatedUrl: syndicatedUrl({ item }),
     permanentUrl: permanentUrl({ item, status: node?.status }),

@@ -51,8 +51,8 @@ export function ItemCard({
 
   if (!item) return null
 
-  const { isInternalItem, readUrl, externalUrl, analyticsData: passedAnalytics } = item
-  const openUrl = readUrl || externalUrl
+  const { isInternalItem, readUrl, itemUrl, externalUrl, analyticsData: passedAnalytics } = item
+  const openUrl = readUrl || externalUrl || itemUrl
   const showExcerpt = type === 'detail'
 
   const onImageFail = () => dispatch(setNoImage(id))
