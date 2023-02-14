@@ -10,6 +10,7 @@ import { useTranslation } from 'next-i18next'
 import { mutationUnDelete } from 'connectors/items/mutation-delete.state'
 
 import { ITEMS_UPSERT_SUCCESS } from 'actions'
+import { MUTATION_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
 
 import { MUTATION_ARCHIVE } from 'actions'
@@ -53,6 +54,9 @@ import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
 import { COLLECTION_PAGE_SAVE_SUCCESS } from 'actions'
 import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
 import { ARTICLE_SAVE_SUCCESS } from 'actions'
+
+import { HIGHLIGHT_SAVE_SUCCESS } from 'actions'
+import { HIGHLIGHT_DELETE_SUCCESS } from 'actions'
 
 const toastWrapper = css`
   text-align: left;
@@ -148,6 +152,11 @@ const messages = {
   [MUTATION_UPSERT]: 'added'
 }
 
+const mutationSuccessMessages = {
+  [HIGHLIGHT_SAVE_SUCCESS]: 'highlighted',
+  [HIGHLIGHT_DELETE_SUCCESS]: 'highlight-deleted'
+}
+
 const errors = [
   ITEMS_DELETE_FAILURE,
   ITEMS_DELETE_FAILURE,
@@ -199,11 +208,13 @@ export function Toast({
     remove()
   }
 
+  const translationKey = type === MUTATION_SUCCESS ? mutationSuccessMessages[actionType] : messages[typeForMessage]
+
   return (
     <Fade show={show} remove={remove}>
       <div className={toastWrapper}>
         <div className={cx('toastBlock', `${type}`)} data-cy={messages[typeForMessage]}>
-          <p>{t(messages[typeForMessage], { count: itemCount })}</p>
+          <p>{t(translationKey, { count: itemCount })}</p>
           <div className="actionWrapper">
             {showUndo ? (
               <button onClick={handleUndo} className="text">
@@ -237,6 +248,9 @@ export function Toast({
 // t('added-to-favorites', '{{count}} item added to favorites')
 // t('added-to-favorites_plural', '{{count}} items added to favorites')
 // t('error-adding-to-favorites', 'Error adding to favorites')
+
+// t('highlighted', '{{count}} item highlighted')
+// t('highlight-deleted', '{{count}} item highlighted')
 
 // t('removed-from-favorites', '{{count}} item removed from favorites')
 // t('removed-from-favorites_plural', '{{count}} items removed from favorites')
