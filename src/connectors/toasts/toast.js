@@ -20,25 +20,8 @@ import { MUTATION_UNFAVORITE } from 'actions'
 import { MUTATION_TAGGING } from 'actions'
 import { MUTATION_UPSERT } from 'actions'
 
-import { ITEMS_DELETE_SUCCESS } from 'actions'
-import { ITEMS_DELETE_FAILURE } from 'actions'
-
 import { ITEMS_ADD_SUCCESS } from 'actions'
 
-import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
-import { ITEMS_ARCHIVE_FAILURE } from 'actions'
-
-import { ITEMS_UNARCHIVE_SUCCESS } from 'actions'
-import { ITEMS_UNARCHIVE_FAILURE } from 'actions'
-
-import { ITEMS_FAVORITE_SUCCESS } from 'actions'
-import { ITEMS_FAVORITE_FAILURE } from 'actions'
-
-import { ITEMS_UNFAVORITE_SUCCESS } from 'actions'
-import { ITEMS_UNFAVORITE_FAILURE } from 'actions'
-
-import { ITEMS_SHARE_SUCCESS } from 'actions'
-import { ITEMS_SHARE_FAILURE } from 'actions'
 import { SHARE_RECOMMEND_SUCCESS } from 'actions'
 import { SHARE_RECOMMEND_FAILURE } from 'actions'
 
@@ -117,22 +100,9 @@ const toastWrapper = css`
 `
 
 const messages = {
-  [ITEMS_DELETE_SUCCESS]: 'deleted',
-  [ITEMS_DELETE_FAILURE]: 'error-deleting',
   [ITEMS_UPSERT_SUCCESS]: 'added',
   [MUTATION_DELETE_SUCCESS]: 'deleted',
-  [ITEMS_DELETE_FAILURE]: 'error-deleting',
   [ITEMS_ADD_SUCCESS]: 'added',
-  [ITEMS_ARCHIVE_SUCCESS]: 'archived',
-  [ITEMS_ARCHIVE_FAILURE]: 'error-archiving',
-  [ITEMS_UNARCHIVE_SUCCESS]: 'added',
-  [ITEMS_UNARCHIVE_FAILURE]: 'error-adding',
-  [ITEMS_FAVORITE_SUCCESS]: 'added-to-favorites',
-  [ITEMS_FAVORITE_FAILURE]: 'error-adding-to-favorites',
-  [ITEMS_UNFAVORITE_SUCCESS]: 'removed-from-favorites',
-  [ITEMS_UNFAVORITE_FAILURE]: 'error-removing-from-favorites',
-  [ITEMS_SHARE_SUCCESS]: 'shared',
-  [ITEMS_SHARE_FAILURE]: 'error-sharing',
   [SHARE_RECOMMEND_SUCCESS]: 'shared',
   [SHARE_RECOMMEND_FAILURE]: 'error-sharing',
   [ITEMS_TAG_SUCCESS]: 'tagged',
@@ -158,13 +128,6 @@ const mutationSuccessMessages = {
 }
 
 const errors = [
-  ITEMS_DELETE_FAILURE,
-  ITEMS_DELETE_FAILURE,
-  ITEMS_ARCHIVE_FAILURE,
-  ITEMS_UNARCHIVE_FAILURE,
-  ITEMS_FAVORITE_FAILURE,
-  ITEMS_UNFAVORITE_FAILURE,
-  ITEMS_SHARE_FAILURE,
   SHARE_RECOMMEND_FAILURE,
   ITEMS_TAG_FAILURE,
   ADD_SHARE_FAILURE

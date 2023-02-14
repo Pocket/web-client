@@ -2,35 +2,17 @@ import { TOAST_CLEAR } from 'actions'
 import { TOAST_CLEAR_ALL } from 'actions'
 
 import { MUTATION_SUCCESS } from 'actions'
-import { MUTATION_TAG_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
 
 import { ITEMS_UPSERT_SUCCESS } from 'actions'
 
-import { ITEMS_DELETE_SUCCESS } from 'actions'
-import { ITEMS_DELETE_FAILURE } from 'actions'
-
 import { ITEMS_ADD_SUCCESS } from 'actions'
-
-import { ITEMS_ARCHIVE_SUCCESS } from 'actions'
-import { ITEMS_ARCHIVE_FAILURE } from 'actions'
-
-import { ITEMS_UNARCHIVE_SUCCESS } from 'actions'
-import { ITEMS_UNARCHIVE_FAILURE } from 'actions'
-
-import { ITEMS_FAVORITE_SUCCESS } from 'actions'
-import { ITEMS_FAVORITE_FAILURE } from 'actions'
-
-import { ITEMS_UNFAVORITE_SUCCESS } from 'actions'
-import { ITEMS_UNFAVORITE_FAILURE } from 'actions'
 
 import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
 import { COLLECTION_PAGE_SAVE_SUCCESS } from 'actions'
 import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
 import { ARTICLE_SAVE_SUCCESS } from 'actions'
 
-import { ITEMS_SHARE_SUCCESS } from 'actions'
-import { ITEMS_SHARE_FAILURE } from 'actions'
 import { SHARE_RECOMMEND_SUCCESS } from 'actions'
 import { SHARE_RECOMMEND_FAILURE } from 'actions'
 
@@ -73,19 +55,7 @@ export const actionToastsReducers = (state = initialState, action) => {
       ]
     }
 
-    case ITEMS_DELETE_SUCCESS:
-    case ITEMS_DELETE_FAILURE:
     case ITEMS_ADD_SUCCESS:
-    case ITEMS_ARCHIVE_SUCCESS:
-    case ITEMS_ARCHIVE_FAILURE:
-    case ITEMS_UNARCHIVE_SUCCESS:
-    case ITEMS_UNARCHIVE_FAILURE:
-    case ITEMS_FAVORITE_SUCCESS:
-    case ITEMS_FAVORITE_FAILURE:
-    case ITEMS_UNFAVORITE_SUCCESS:
-    case ITEMS_UNFAVORITE_FAILURE:
-    case ITEMS_SHARE_SUCCESS:
-    case ITEMS_SHARE_FAILURE:
     case SHARE_RECOMMEND_SUCCESS:
     case SHARE_RECOMMEND_FAILURE:
     case ITEMS_TAG_SUCCESS:
