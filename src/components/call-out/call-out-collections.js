@@ -101,7 +101,7 @@ export function CallOutCollection({ onVisible }) {
   return (
     <aside className={wrapper}>
       <div>
-        <h6>{t('collections:call-out-intro', 'Playlists of fascinating content')}</h6>
+        <h6>{t('collections:call-out-intro', "What's worth reading")}</h6>
         <svg
           className="zigzag"
           xmlns="http://www.w3.org/2000/svg"
@@ -118,10 +118,7 @@ export function CallOutCollection({ onVisible }) {
         </svg>
         <p>
           <Trans i18nKey="collections:call-out-body">
-            Some questions can’t be answered by a single article: That’s where collections come in.
-            Take a deep dive into the concepts that capture your interest and through the best
-            articles, videos, books, recipes, audio, morse code, interpretive dance, smoke signals,
-            and mime on the subject. Pocket: we are not just articles anymore.
+            Pocket's curated lists take the guesswork out of what's good and worth your time.
           </Trans>
         </p>
       </div>
