@@ -3,7 +3,7 @@ import { css } from 'linaria'
 import { Button } from 'components/buttons/button'
 import Modal, { ModalBody, ModalFooter } from './modal'
 import { TextArea } from 'components/form-fields/text-area'
-import { ListModal } from 'connectors/confirm/list'
+import { CreateListModal } from 'connectors/confirm/create-list'
 
 export default {
   title: 'Overlays/Modal',
@@ -25,7 +25,7 @@ const OverflowElement = () => (
   <div className={testChildStyles}>Placeholder content block (can overflow)</div>
 )
 
-export const CreateListModal = () => <ListModal />
+export const CreateList = () => <CreateListModal />
 
 export const Basic = () => (
   <Modal

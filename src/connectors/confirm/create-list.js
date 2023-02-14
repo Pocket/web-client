@@ -1,13 +1,11 @@
 import { useState } from 'react'
-import { useTranslation } from 'next-i18next'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { Button } from 'components/buttons/button'
 import { TextInput } from 'components/form-fields/text-input'
 import { TextArea } from 'components/form-fields/text-area'
 
-export const ListModal = () => {
+export const CreateListModal = () => {
   const appRootSelector = '#root'
-  const { t } = useTranslation()
 
   const [isOpen, setIsOpen] = useState(true)
   const [listName, setListName] = useState('')
@@ -25,16 +23,18 @@ export const ListModal = () => {
     setIsOpen(false)
   }
 
+  const listNameEmpty = !listName.trim()
+
   return (
     <Modal
-      title={t('lists:create-list', 'Create List')}
+      title="Create List"
       appRootSelector={appRootSelector}
       isOpen={isOpen}
-      screenReaderLabel={t('lists:create-list', 'Create List')}
+      screenReaderLabel="Create List"
       handleClose={handleClose}>
       <ModalBody>
         <TextInput
-          labelText={t('lists:list-name', 'List Name')}
+          labelText="List Name"
           name="list-name"
           value={listName}
           onChange={handleNameChange}
@@ -42,7 +42,7 @@ export const ListModal = () => {
           maxLength={100}
         />
         <TextArea
-          labelText={t('lists:description', 'Description (optional)')}
+          labelText="Description (optional)"
           name="list-description"
           value={description}
           onChange={handleDescriptionChange}
@@ -59,10 +59,14 @@ export const ListModal = () => {
           type="button"
           data-cy="create-list-cancel"
           onClick={handleClose}>
-          {t('list:cancel', 'Cancel')}
+          Cancel
         </Button>
-        <Button disabled={false} type="submit" data-cy="create-list-confirm" onClick={() => {}}>
-          {t('list:create-list', 'Create List')}
+        <Button
+          disabled={listNameEmpty}
+          type="submit"
+          data-cy="create-list-confirm"
+          onClick={() => {}}>
+          Create List
         </Button>
       </ModalFooter>
     </Modal>
