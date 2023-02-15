@@ -6,17 +6,9 @@ import { NewViewIcon } from 'components/icons/NewViewIcon'
 
 const cardMediaStyles = css`
   --aspect-percent: 56.25%;
-  .side-by-side & {
-    --aspect-percent: 75%;
-    .no-link {
-      padding-bottom: 66%;
-    }
-  }
-
   position: relative;
-  border-radius: var(--size025);
   overflow: hidden;
-  padding-bottom: 1rem;
+
   a,
   .no-link {
     position: relative;

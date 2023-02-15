@@ -28,7 +28,7 @@ export const itemStyles = css`
   --overline-display: block;
 
   --title-line-height: 1.25em;
-  --title-margin: 1rem 0;
+  --title-margin: 1rem 0 0.5rem;
   --title-size: 1rem;
   --title-lines: 3;
 
@@ -50,41 +50,40 @@ export const itemStyles = css`
     --card-hover-shadow: 0 0 18px rgba(0, 0, 0, 0.9);
   }
 
-  // Default size of a card for 3 across.  This will be overridden in the layouts when needed
-  grid-column: span 4;
-  grid-row: span 1;
-
+  // Baseline Card Styles
   font-family: var(--fontSansSerif);
   font-weight: 400;
   position: relative;
   z-index: 0;
-
   background-color: var(--color-canvas);
   box-shadow: var(--card-shadow);
   border-radius: 1rem;
   transition: all 150ms ease-in;
-
-  // Inner grid
-  display: grid;
-
-  grid-template-columns: 1fr;
-  grid-column-gap: 0;
-  grid-template-rows: auto minmax(0, 1fr) 52px;
-
-  // Lets the cards fill their container
   height: 100%;
   width: 100%;
   margin: 0;
 
+  // Inner grid used to lay out the card components
+  display: grid;
+
+  // In a vertical card everything is stacked
+  grid-template-columns: 1fr;
+  grid-column-gap: 0;
+  grid-template-rows: auto minmax(0, 1fr) 52px;
+
   // What happens when we hover over the main card
   &:hover {
     box-shadow: var(--card-hover-shadow);
+
+    // We show a view original to help the user realize they may be leaving the pocket experience
+    // ?? There may be a more elegant solution here
     .view-original {
       opacity: 1;
       transition: opacity 300ms ease-in-out;
     }
   }
 
+  // Standard link behavior throughout the card
   a {
     text-decoration: none;
     &:focus {
@@ -97,15 +96,10 @@ export const itemStyles = css`
 
   // What does the main image look like?
   .media-block {
+    margin: var(--media-margin);
     position: relative;
-    border-radius: var(--media-radius);
     overflow: hidden;
     .media {
-      margin: var(--media-margin);
-      padding-bottom: 0; // This is an overide and should be removed from the media element
-    }
-    span,
-    img {
       border-radius: var(--media-radius);
     }
   }
@@ -194,6 +188,7 @@ export const itemStyles = css`
       }
     }
   }
+
   .excerpt {
     display: var(--excerpt-display);
     p {
@@ -244,6 +239,7 @@ export const itemStyles = css`
     justify-content: center;
     font-style: normal;
     font-size: var(--details-size);
+    font-weight: 500;
     line-height: 1.25;
     color: var(--color-textSecondary);
   }
@@ -251,7 +247,7 @@ export const itemStyles = css`
   .context {
     display: flex;
     justify-content: flex-start;
-    font-weight: 300;
+    font-weight: 400;
     & > div {
       padding-right: 0.5rem;
       & ~ div:before {
@@ -281,7 +277,6 @@ export const itemStyles = css`
   }
 
   .publisher {
-    font-weight: 400;
     overflow: hidden;
     text-decoration: none;
     font-size: 0.875rem;

@@ -1,10 +1,48 @@
 import { css } from 'linaria'
-import { breakpointLargeTablet, breakpointSmallDesktop } from 'common/constants'
+import { breakpointLargeTablet } from 'common/constants'
+import { breakpointSmallDesktop } from 'common/constants'
 import { breakpointMediumTablet } from 'common/constants'
 import { breakpointSmallTablet } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { breakpointMediumHandset } from 'common/constants'
+import { containerMaxWidth } from 'common/constants'
+
+/**
+ * Shared styles
+ * These are sort of baseline styles so we don't have a bunch of duplication.
+ * Linaria does not yet support fragments (issue open since 2019 so ... https://github.com/callstack/linaria/issues/244)
+ * So we do composition sparingly (no syntax highlighting or linting)
+ */
+const gridFragment = `
+  display: grid;
+  align-items: flex-start;
+  justify-content: space-between;
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 1.5rem;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-flow: row dense;
+`
+
+const horizontalFragment = `
+  grid-template-rows: minmax(0, 1fr) 46px;
+  grid-template-columns: 200px minmax(0, 1fr);
+  --media-radius: 0.5rem;
+  --title-margin: 0.5rem 0;
+  --excerpt-display: block;
+  .media-block {
+    grid-row: span 2;
+    margin: 0.5rem;
+  }
+  .details {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .footer {
+    grid-template-columns: 1fr;
+  }
+`
 
 /**
  * Standard Grid
@@ -13,48 +51,21 @@ import { breakpointMediumHandset } from 'common/constants'
  * of the container
  */
 export const standardGrid = css`
-  display: grid;
-  align-items: flex-start;
-  justify-content: space-between;
-  grid-column-gap: 1.5rem;
-  grid-row-gap: 1.5rem;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-flow: row dense;
+  ${gridFragment}
   padding: 1.5rem 0 0;
+  article {
+    grid-column: span 4;
+  }
 
   ${breakpointMediumTablet} {
-    // Two cards across
+    article {
+      grid-column: span 6;
+    }
+  }
+
+  ${breakpointLargeHandset} {
     article {
       grid-column: span 12;
-      --media-radius: 0.5rem;
-      --title-size: 1rem;
-      --title-margin: 0.5rem 0;
-      --excerpt-display: block;
-
-      grid-column-gap: 0.5rem;
-      grid-template-rows: minmax(0, 1fr) 46px;
-      grid-template-columns: 200px minmax(0, 1fr);
-
-      .media-block {
-        margin: 0.5rem;
-        width: 100%;
-        grid-row: span 2;
-      }
-
-      .details {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-end;
-      }
-      .footer {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    ${breakpointLargeHandset} {
-      article {
-        grid-template-columns: 100px minmax(0, 1fr);
-      }
     }
   }
 `
@@ -66,98 +77,66 @@ export const standardGrid = css`
  * that goes into a 2 across at small sizes
  */
 export const basicSlide = css`
-  padding: 1.5rem 0 0;
+  padding: 0;
+  .outer-slide {
+    display: block;
+    margin: 0 auto;
+    max-width: calc(${containerMaxWidth}px + 4rem);
+    overflow: hidden;
+    padding: 0 2rem;
+    position: relative;
+    &:after,
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 2rem;
+      height: 100%;
+      bottom: 0;
+      top: 0;
+      z-index: var(--zIndexRaised);
+    }
+    &:after {
+      right: 0;
+      background: linear-gradient(90deg, transparent 25%, var(--color-canvas));
+    }
+    &:before {
+      left: 0;
+      background: linear-gradient(90deg, var(--color-canvas), transparent 25%);
+    }
+  }
+
   .inner-slide {
-    display: grid;
-    align-items: flex-start;
-    justify-content: space-between;
-    grid-column-gap: 1.5rem;
-    grid-row-gap: 1.5rem;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-flow: row dense;
+    ${gridFragment}
+    padding: 1.5rem 0;
+    width: 200%;
+    grid-template-columns: repeat(24, 1fr);
+    transition: 350ms ease-in-out;
   }
 
   article {
     grid-column: span 3;
   }
 
-  .controls {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 1rem;
-    button {
-      font-size: 1.25rem;
-      border: var(--borderStyle);
-      border-radius: 50%;
-      margin-left: 1rem;
-      padding: 0.5rem;
-    }
-  }
-
-  &.no-slide .controls {
-    display: none;
-  }
-
-  .outer-slide {
-    width: 100%;
-  }
-
-  .inner-slide {
-    width: 200%;
-    grid-template-columns: repeat(24, 1fr);
-    transition: 350ms ease-in-out;
-    transform: translateX(0);
-
-    &.slide-active {
-      transform: translateX(-50%);
-    }
-  }
   ${breakpointLargeTablet} {
-    .controls {
-      display: none;
-    }
     .inner-slide {
-      width: 100%;
-      grid-template-columns: repeat(12, 1fr);
+      width: 300%;
+      grid-template-columns: repeat(36, 1fr);
     }
     // Two cards across
     article {
-      grid-column: span 6;
+      grid-column: span 4;
     }
   }
 
   ${breakpointTinyTablet} {
+    .inner-slide {
+      width: 800%;
+      grid-template-columns: repeat(96, 1fr);
+    }
     // Two cards across
     article {
       grid-column: span 12;
-      --media-radius: 0.5rem;
-      --title-size: 1rem;
-      --title-margin: 0.5rem 0;
-      --excerpt-display: block;
-
-      grid-column-gap: 0.5rem;
-      grid-template-rows: minmax(0, 1fr) 46px;
-      grid-template-columns: 100px minmax(0, 1fr);
-
-      .media-block {
-        margin: 0.5rem;
-        width: 100%;
-        grid-row: span 2;
-      }
-
-      .details {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-end;
-      }
-      .footer {
-        grid-template-columns: 1fr;
-      }
-    }
-    .inner-slide {
-      width: 100%;
-      grid-template-columns: repeat(12, 1fr);
-      transform: translateX(0);
     }
   }
 `
@@ -289,7 +268,6 @@ export const recentGrid = css`
 
     .media-block {
       margin: 0.5rem;
-      width: 100%;
       grid-row: span 2;
     }
 
@@ -307,15 +285,6 @@ export const recentGrid = css`
     }
     .footer-actions {
       display: none;
-    }
-  }
-
-  ${breakpointMediumTablet} {
-    article {
-      --excerpt-display: block;
-      --title-size: 1rem;
-      /* grid-template-columns: 100px minmax(0, 1fr); */
-      grid-column: span 12;
     }
   }
 `

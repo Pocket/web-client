@@ -17,6 +17,8 @@ import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
 import { useRouter } from 'node_modules/next/router'
 
+import { useViewport } from 'components/viewport-provider/viewport-provider'
+
 export const HomeContent = () => {
   const { locale } = useRouter()
   const dispatch = useDispatch()
@@ -44,39 +46,40 @@ export const HomeContent = () => {
 }
 
 function Slate({ slateId }) {
-  const dispatch = useDispatch()
   const slates = useSelector((state) => state.pageHome.slates)
   const slate = useSelector((state) => state.pageHome.slatesById[slateId])
-  const [slide, setSlide] = useState(false)
-
   if (!slate) return null
+
+  const { recommendationReasonType } = slate
+  const firstSlate = slates.indexOf(slateId) === 0
+  const showHits = recommendationReasonType === 'POCKET_HITS'
+
+  const SlateToRender = showHits ? SlideSlate : StaticSlate
+  return <SlateToRender slateId={slateId} firstSlate={firstSlate} />
+}
+
+function StaticSlate({ slateId, firstSlate }) {
+  const dispatch = useDispatch()
+  const slate = useSelector((state) => state.pageHome.slatesById[slateId])
 
   const { headline, subheadline, moreLink, recommendations, recommendationReasonType } = slate
 
-  const showTopicSelector = recommendationReasonType === 'PREFERRED_TOPICS'
-  const showHits = recommendationReasonType === 'POCKET_HITS'
-  const firstSlate = slates.indexOf(slateId) === 0
-  const hitsCount = recommendations.length //>= 8 ? 8 : 4
-  const recCount = showHits ? hitsCount : firstSlate ? 6 : 3
+  const recCount = firstSlate ? 6 : 3
   const recsToShow = recommendations.slice(0, recCount)
 
+  const showTopicSelector = recommendationReasonType === 'PREFERRED_TOPICS'
   const slateLink = showTopicSelector ? { text: 'Update topics', url: false } : moreLink
 
   const urlTrack = (label) => {
     dispatch(sendSnowplowEvent('home.topic.view-more', { label }))
   }
+
   const updateTopics = () => {
     dispatch(reSelectTopics())
     dispatch(sendSnowplowEvent('get-started.topic.reselect'))
   }
-  const moreLinkClick = showTopicSelector ? updateTopics : urlTrack
 
-  const slideIn = () => {
-    setSlide(true)
-  }
-  const slideOut = () => {
-    setSlide(false)
-  }
+  const moreLinkClick = showTopicSelector ? updateTopics : urlTrack
 
   return (
     <SectionWrapper className="homeSection">
@@ -87,25 +90,65 @@ function Slate({ slateId }) {
         moreLinkUrl={slateLink?.url}
         moreLinkClick={moreLinkClick}
       />
+      <div className={standardGrid}>{recsToShow.map(Card)}</div>
+    </SectionWrapper>
+  )
+}
 
-      {showHits ? (
-        <div className={cx(basicSlide, recCount <= 4 && 'no-slide')}>
-          <div className="outer-slide">
-            <div className={cx('inner-slide', slide && 'slide-active')}>{recsToShow.map(Card)}</div>
-          </div>
-          <div className="controls">
-            <button className="text" onClick={slideOut}>
-              <ChevronLeftIcon />
-            </button>
-            <button className="text" onClick={slideIn}>
-              <ChevronRightIcon />
-            </button>
+function SlideSlate({ slateId }) {
+  const dispatch = useDispatch()
+  const [slidePage, setSlidePage] = useState(0)
+  const slate = useSelector((state) => state.pageHome.slatesById[slateId])
+
+  const { headline, subheadline, moreLink, recommendations } = slate
+
+  const viewport = useViewport()
+  const itemsOnScreen = getItemsOnSceen(viewport.width)
+  const recCount = recommendations.length
+  const recsToShow = recommendations.slice(1, recCount)
+  const hideSlide = recCount <= itemsOnScreen
+  const totalPages = Math.ceil(recCount / itemsOnScreen)
+  const transformPercentage = (slidePage / totalPages) * 100
+  const transformStyle = { transform: `translateX(-${transformPercentage}%)` }
+
+  const slideIn = () => {
+    setSlidePage(Math.min(totalPages - 1, slidePage + 1))
+  }
+  const slideOut = () => {
+    setSlidePage(Math.max(0, slidePage - 1))
+  }
+
+  const moreLinkClick = (label) => {
+    dispatch(sendSnowplowEvent('home.topic.view-more', { label }))
+  }
+
+  return (
+    <>
+      <SectionWrapper className="homeSection slideSection">
+        <HomeHeader
+          headline={headline}
+          subheadline={subheadline}
+          moreLinkText={moreLink?.text}
+          moreLinkUrl={moreLink?.url}
+          moreLinkClick={moreLinkClick}
+        />
+        <div className={cx('controls', hideSlide && 'no-slide')}>
+          <button className="text" onClick={slideOut}>
+            <ChevronLeftIcon />
+          </button>
+          <button className="text" onClick={slideIn}>
+            <ChevronRightIcon />
+          </button>
+        </div>
+      </SectionWrapper>
+      <div className={basicSlide}>
+        <div className="outer-slide">
+          <div className="inner-slide" style={transformStyle}>
+            {recsToShow.map(Card)}
           </div>
         </div>
-      ) : (
-        <div className={standardGrid}>{recsToShow.map(Card)}</div>
-      )}
-    </SectionWrapper>
+      </div>
+    </>
   )
 }
 
@@ -130,7 +173,13 @@ function ExploreMoreTopics() {
   )
 }
 
-// This is just a concenience method so we can keep grid declarations simple
+// This is just a convenience method so we can keep grid declarations simple
 function Card(id) {
   return <ItemCard key={id} id={id} />
+}
+
+function getItemsOnSceen(width) {
+  if (width <= 719) return 1
+  if (width <= 1023) return 3
+  return 4 // Everything
 }
