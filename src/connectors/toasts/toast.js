@@ -120,10 +120,7 @@ const messages = {
   [MUTATION_UNARCHIVE]: 'added',
   [MUTATION_FAVORITE]: 'added-to-favorites',
   [MUTATION_UNFAVORITE]: 'removed-from-favorites',
-  [MUTATION_UPSERT]: 'added'
-}
-
-const mutationSuccessMessages = {
+  [MUTATION_UPSERT]: 'added',
   [HIGHLIGHT_SAVE_SUCCESS]: 'highlighted',
   [HIGHLIGHT_DELETE_SUCCESS]: 'highlight-deleted'
 }
@@ -172,13 +169,11 @@ export function Toast({
     remove()
   }
 
-  const translationKey = type === MUTATION_SUCCESS ? mutationSuccessMessages[actionType] : messages[typeForMessage]
-
   return (
     <Fade show={show} remove={remove}>
       <div className={toastWrapper}>
         <div className={cx('toastBlock', `${type}`)} data-cy={messages[typeForMessage]}>
-          <p>{t(translationKey, { count: itemCount })}</p>
+          <p>{t(messages[typeForMessage], { count: itemCount })}</p>
           <div className="actionWrapper">
             {showUndo ? (
               <button onClick={handleUndo} className="text">
