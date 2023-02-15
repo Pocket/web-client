@@ -101,7 +101,7 @@ export function CallOutCollection({ onVisible }) {
   return (
     <aside className={wrapper}>
       <div>
-        <h6>{t('collections:call-out-intro', "What's worth reading")}</h6>
+        <h6>Find what's worth reading</h6>
         <svg
           className="zigzag"
           xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +118,8 @@ export function CallOutCollection({ onVisible }) {
         </svg>
         <p>
           <Trans i18nKey="collections:call-out-body">
-            Pocket's curated lists take the guesswork out of what's good and worth your time.
+            Take the guesswork out of your next great read. Pocket lists put the best of the
+            internet at your fingertips.
           </Trans>
         </p>
       </div>
