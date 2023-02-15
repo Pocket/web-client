@@ -1,4 +1,4 @@
-import { CreateEditShareableList } from 'components/shared-lists/create-edit-modal'
+import { CreateEditShareableList } from 'components/sharable-lists/create-edit-modal'
 
 export const ListSettingsModal = () => {
   const listName = 'Temp list name' // temporary
