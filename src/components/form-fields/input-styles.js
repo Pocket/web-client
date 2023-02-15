@@ -3,7 +3,6 @@ import { css } from 'linaria'
 export const inputWrapper = css`
   display: inline-block;
   width: 100%;
-  max-width: 400px;
   position: relative;
   /* top margin is calculated as half of the size of the label font, so that the
   label can visually overlay the input border aligned to the middle of the text.

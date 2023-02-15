@@ -24,7 +24,8 @@ export const TextInput = ({
   onChange,
   onFocus,
   onBlur,
-  inputStyles
+  inputStyles,
+  maxLength
 }) => {
   return (
     <InputWrapper
@@ -46,6 +47,7 @@ export const TextInput = ({
         onBlur={onBlur}
         className={inputStyles}
         data-cy="text-input"
+        maxLength={maxLength}
       />
     </InputWrapper>
   )
@@ -110,7 +112,12 @@ TextInput.propTypes = {
   /**
    * Called when the user blurs the input
    */
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
+
+  /**
+   * Max character length for the input
+   */
+  maxLength: PropTypes.number
 }
 TextInput.defaultProps = {
   helperText: null,
