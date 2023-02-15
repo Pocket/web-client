@@ -3,7 +3,6 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { Button } from 'components/buttons/button'
 import { TextInput } from 'components/form-fields/text-input'
 import { TextArea } from 'components/form-fields/text-area'
-import { SHARED_LIST_NAME_LIMIT, SHARED_LIST_DESCRIPTION_LIMIT } from 'common/constants'
 
 export const CreateEditShareableList = ({
   modalTitle,
@@ -52,7 +51,7 @@ export const CreateEditShareableList = ({
           value={listNameValue}
           onChange={onNameChange}
           data-cy="list-name"
-          maxLength={SHARED_LIST_NAME_LIMIT}
+          maxLength={100}
         />
         <TextArea
           labelText="Description (optional)"
@@ -61,7 +60,7 @@ export const CreateEditShareableList = ({
           onChange={onDescriptionChange}
           initialRows={4}
           maxRows={4}
-          characterLimit={SHARED_LIST_DESCRIPTION_LIMIT}
+          characterLimit={200}
           showCharacterLimit={true}
         />
       </ModalBody>
