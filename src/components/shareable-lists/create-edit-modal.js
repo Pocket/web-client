@@ -69,14 +69,14 @@ export const CreateEditShareableList = ({
           variant="secondary"
           disabled={false}
           type="button"
-          data-cy="create-list-cancel"
+          data-cy="create-edit-list-cancel"
           onClick={onClose}>
           Cancel
         </Button>
         <Button
           disabled={listNameEmpty}
           type="submit"
-          data-cy="create-list-confirm"
+          data-cy="create-edit-list-confirm"
           onClick={handleSubmit}>
           {modalSubmit}
         </Button>
