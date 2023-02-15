@@ -2,7 +2,7 @@ import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 
-const getItemByItemIdQuery = gql`
+const getRelatedAfterArticleQuery = gql`
   query RelatedAfterArticle($itemId: ID!) {
     itemByItemId(id: $itemId) {
       relatedAfterArticle(count: 3) {
@@ -20,10 +20,10 @@ const getItemByItemIdQuery = gql`
   }
 `
 
-export async function getItemByItemId(itemId) {
+export async function getRelatedAfterArticle(itemId) {
   return requestGQL({
-    query: getItemByItemIdQuery,
-    operationName: 'GetItemByItemId',
+    query: getRelatedAfterArticleQuery,
+    operationName: 'GetRelatedAfterArticle',
     variables: { itemId }
   })
     .then(handleResponse)

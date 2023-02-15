@@ -5,7 +5,7 @@ import { READ_ITEM_SUCCESS } from 'actions'
 import { READ_RECOMMENDED_REQUEST } from 'actions'
 import { READ_RECOMMENDED_SUCCESS } from 'actions'
 import { READ_RECOMMENDED_FAILURE } from 'actions'
-import { getItemByItemId } from 'common/api/queries/get-related-after-article'
+import { getRelatedAfterArticle } from 'common/api/queries/get-related-after-article'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -38,12 +38,13 @@ export const itemsRelatedSagas = [
  --------------------------------------------------------------- */
 function* readRecommendedRequest({ id }) {
   try {
-    const response = yield getItemByItemId(id)
+    const response = yield getRelatedAfterArticle(id)
     const { relatedArticlesById } = response
 
     yield put({
       type: READ_ITEM_SUCCESS,
-      itemsById: relatedArticlesById
+      itemsById: relatedArticlesById,
+      nodes: {}
     })
 
     yield put({
