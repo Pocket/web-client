@@ -4,6 +4,7 @@ import { Button } from 'components/buttons/button'
 import Modal, { ModalBody, ModalFooter } from './modal'
 import { TextArea } from 'components/form-fields/text-area'
 import { CreateListModal } from 'connectors/confirm/create-list'
+import { ListSettingsModal } from 'connectors/confirm/list-settings'
 
 export default {
   title: 'Overlays/Modal',
@@ -26,6 +27,8 @@ const OverflowElement = () => (
 )
 
 export const CreateList = () => <CreateListModal />
+
+export const ListSettings = () => <ListSettingsModal />
 
 export const Basic = () => (
   <Modal
