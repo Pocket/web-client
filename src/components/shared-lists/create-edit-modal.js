@@ -17,8 +17,14 @@ export const CreateEditShareableList = ({
 }) => {
   const appRootSelector = '#root' // to be updated when integrated into the app
 
+  const [isOpen, setIsOpen] = useState(true)
   const [listNameValue, setListNameValue] = useState(listName)
   const [descriptionValue, setDescriptionValue] = useState(listDescription)
+
+  const onClose = () => {
+    setIsOpen(false)
+    handleClose()
+  }
 
   const onNameChange = (e) => {
     setListNameValue(e.target.value)
@@ -36,9 +42,9 @@ export const CreateEditShareableList = ({
     <Modal
       title={modalTitle}
       appRootSelector={appRootSelector}
-      isOpen={true} // update with real logic
+      isOpen={isOpen}
       screenReaderLabel={modalTitle}
-      handleClose={handleClose}>
+      handleClose={onClose}>
       <ModalBody>
         <TextInput
           labelText="List Name"
@@ -65,7 +71,7 @@ export const CreateEditShareableList = ({
           disabled={false}
           type="button"
           data-cy="create-list-cancel"
-          onClick={handleClose}>
+          onClick={onClose}>
           Cancel
         </Button>
         <Button
