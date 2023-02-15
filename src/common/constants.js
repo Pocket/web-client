@@ -40,6 +40,11 @@ export const BRAZE_API_KEY_DEV = '76e48d24-506c-4e7e-bec2-c0f262ebbcd5' // API k
 export const BRAZE_API_KEY_PROD = '4fee55ff-f105-4a61-843b-856c583b109e' // API key for Pocket - Web (THIS IS PRODUCTION)
 export const BRAZE_SDK_ENDPOINT = 'sdk.iad-05.braze.com' // SDK endpoint for Pocket (Dev) - Web (same for both dev & prod)
 
+// SHARED LISTS
+
+export const SHARED_LIST_NAME_LIMIT = 100
+export const SHARED_LIST_DESCRIPTION_LIMIT = 200
+
 // SNOWPLOW
 export const API_USER_ID = 89624 // Pocket backend identifier for an API user used in Snowplow analytic events
 export const SNOWPLOW_SCHEMA_VENDOR = 'com.pocket'
