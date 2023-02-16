@@ -5,7 +5,10 @@ import { deriveListItem } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { css, cx } from 'linaria'
 
-import { SavedActions, DiscoveryActions } from './item-actions'
+import { SavedActions } from './actions/saved'
+import { TransitionalActions } from './actions/transitional'
+
+// import { SavedActions, DiscoveryActions } from './item-actions'
 
 const savesItems = Object.values(savesResponse.edges).map((item) => {
   let derivedItem = deriveListItem(item)
@@ -18,6 +21,21 @@ const itemsToDisplay = arrayToObject([...savesItems], 'storyName')
 const gridContainer = css`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+  .column6 {
+    grid-column: span 6;
+  }
+  .column5 {
+    grid-column: span 5;
+  }
+  .column4 {
+    grid-column: span 4;
+  }
+  .column3 {
+    grid-column: span 3;
+  }
+  .column2 {
+    grid-column: span 2;
+  }
 `
 
 export default {
@@ -31,6 +49,9 @@ export default {
     )
   ],
   argTypes: {
+    cardSpan: {
+      control: { type: 'range', min: 2, max: 6, step: 1 }
+    },
     itemToDisplay: {
       control: {
         type: 'select',
@@ -69,7 +90,7 @@ export default {
       },
       mapping: {
         saved: SavedActions,
-        discovery: DiscoveryActions
+        discovery: TransitionalActions
       }
     },
     partnerType: {
@@ -85,7 +106,6 @@ export default {
         arg: 'showTopic'
       }
     },
-
     itemId: { table: { disable: true } },
     title: { table: { disable: true } },
     publisher: { table: { disable: true } },
@@ -126,6 +146,7 @@ export const Item = (args) => {
     timeToRead,
     isSyndicated,
     isInternalItem,
+    onItemInView = () => {},
     publisherLogo,
     fromPartner,
     clamp,
@@ -139,7 +160,11 @@ export const Item = (args) => {
   }
   const itemImage = getShownImage()
 
-  const cardClassnames = cx(args.className, args.sideBySide && 'side-by-side')
+  const cardClassnames = cx(
+    args.className,
+    `column${args.cardSpan}`,
+    args.sideBySide && 'side-by-side'
+  )
 
   return (
     <ItemComponent
@@ -160,6 +185,7 @@ export const Item = (args) => {
       fromPartner={fromPartner}
       useMarkdown={true}
       topicName={topic}
+      onItemInView={onItemInView}
       {...args}
       className={cardClassnames}
     />
@@ -167,6 +193,7 @@ export const Item = (args) => {
 }
 
 Item.args = {
+  cardSpan: 3,
   itemToDisplay: savesItems[0].storyName,
   Actions: 'discovery',
   saveStatus: 'unsaved',

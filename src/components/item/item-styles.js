@@ -69,7 +69,7 @@ export const itemStyles = css`
   // In a vertical card everything is stacked
   grid-template-columns: 1fr;
   grid-column-gap: 0;
-  grid-template-rows: auto minmax(0, 1fr) 52px;
+  grid-template-rows: auto minmax(0, 1fr) auto;
 
   // What happens when we hover over the main card
   &:hover {
