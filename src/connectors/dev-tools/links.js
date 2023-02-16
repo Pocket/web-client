@@ -10,6 +10,10 @@ export const Links = ({ toggleDevMode }) => {
     title: 'Individual List',
     src: '/lists/the-cosmos-awaits-12345',
     description: 'Link to an Individual List page'
+  },{
+    title: 'Public List',
+    src: '/@luigimario/list/the-cosmos-awaits-12345',
+    description: 'Link to a Public page'
   }]
 
   return links.length ? (
