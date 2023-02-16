@@ -1,3 +1,14 @@
+## [1.78.4](https://github.com/Pocket/web-client/compare/v1.78.3...v1.78.4) (2023-02-16)
+
+
+### Bug Fixes
+
+* **constants:** add constants for list name & description char limits ([6311f7d](https://github.com/Pocket/web-client/commit/6311f7dfe5da15412b6e80350516c3e88796b603))
+* **CreateEditShareableList:** add back modal open/close state ([76fb0f3](https://github.com/Pocket/web-client/commit/76fb0f3e7e34e13d7e7b3bc4d3e15663c5e0ad12))
+* **CreateEditShareableList:** update data-cy on cancel & confirm buttons ([bcebdeb](https://github.com/Pocket/web-client/commit/bcebdeb6f85971c3a8d60c19774a4c57f650cd33))
+* **modals story:** add ListSettingsModal ([fb126b6](https://github.com/Pocket/web-client/commit/fb126b61289e50ac4b7b728577c78054d595cc3b))
+* **shareable lists:** create new shared modal component ([50278ee](https://github.com/Pocket/web-client/commit/50278eee84b03859eb3da37c2be3242c93e1c275))
+
 ## [1.78.3](https://github.com/Pocket/web-client/compare/v1.78.2...v1.78.3) (2023-02-15)
 
 

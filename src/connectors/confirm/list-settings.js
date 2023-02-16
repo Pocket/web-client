@@ -1,7 +1,8 @@
 import { CreateEditShareableList } from 'components/shareable-lists/create-edit-modal'
 
-export const CreateListModal = () => {
-  const createList = 'Create List'
+export const ListSettingsModal = () => {
+  const listName = 'Temp list name' // temporary
+  const listDescription = 'Temp description' // temporary
 
   const handleClose = () => {}
   const handleSubmit = () => {}
@@ -10,8 +11,10 @@ export const CreateListModal = () => {
 
   return (
     <CreateEditShareableList
-      modalTitle={createList}
-      modalSubmit={createList}
+      modalTitle="List Settings"
+      modalSubmit="Save Changes"
+      listName={listName}
+      listDescription={listDescription}
       handleClose={handleClose}
       handleSubmit={handleSubmit}
       handleNameChange={handleNameChange}
