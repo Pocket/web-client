@@ -301,7 +301,7 @@ export const itemStyles = css`
     left: 0;
     width: 100%;
     background-color: var(--color-popoverCanvas);
-    z-index: var(--zIndexRaised);
+    z-index: var(--zIndexTooltip);
     box-shadow: var(--tag-box-shadow);
 
     .icon {
