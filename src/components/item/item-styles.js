@@ -10,7 +10,7 @@ import { breakpointMediumHandset } from 'common/constants'
 export const itemStyles = css`
   // Where does the footer sit?  Stacked default
   --footer-column: initial;
-  --footer-column-template: auto 42px;
+  --footer-column-template: minmax(0, 1fr) auto;
   --footer-column-gap: 1rem;
   --footer-height: 52px;
 

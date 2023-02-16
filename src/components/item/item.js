@@ -108,7 +108,7 @@ export const Item = (props) => {
             <div className="content">
               {fromPartner ? <PartnerOverline partnerType={partnerType} /> : null}
               <h2 className={cx('title', openInNewTab && 'open-external')}>
-                {title}{' '}
+                {title}
                 {openInNewTab ? (
                   <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
                 ) : null}
