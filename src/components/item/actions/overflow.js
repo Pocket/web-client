@@ -78,7 +78,6 @@ const MenuPopover = function ({ popoverRef, menuItems }) {
 export const OverflowMenu = function ({ toggleLabel, menuItems }) {
   const handleClick = (event) => {
     event.preventDefault()
-    event.stopPropagation()
   }
 
   // Popover Effect
