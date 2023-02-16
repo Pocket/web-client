@@ -29,6 +29,7 @@ export const Item = (props) => {
     storyCount,
     isInternalItem,
     saveStatus,
+    externalUrl,
     openUrl,
     fromPartner,
     topicName,
@@ -114,7 +115,7 @@ export const Item = (props) => {
             <Publisher
               publisherLogo={publisherLogo}
               publisher={publisher}
-              externalUrl={openUrl}
+              externalUrl={externalUrl}
               onOpenOriginalUrl={onOpenOriginalUrl}
               isSyndicated={isSyndicated}
             />
