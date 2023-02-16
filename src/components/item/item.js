@@ -16,6 +16,7 @@ export const Item = (props) => {
     itemId,
     title,
     itemImage,
+    onImageFail,
     publisher,
     publisherLogo,
     excerpt,
@@ -78,6 +79,7 @@ export const Item = (props) => {
           image_src={itemImage}
           title={title}
           id={itemId}
+          onImageFail={onImageFail}
           openInNewTab={openInNewTab}
           openUrl={openUrl}
         />
