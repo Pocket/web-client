@@ -1,5 +1,5 @@
 import { cx } from 'linaria'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import ReactMarkdown from 'react-markdown'
@@ -8,6 +8,7 @@ import { NewViewIcon } from 'components/icons/NewViewIcon'
 import { CardMedia } from 'components/item/item-media'
 import { ItemTags } from 'components/item/item-tags'
 import { itemStyles } from './item-styles'
+import { useInView } from 'react-intersection-observer'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
 
@@ -52,7 +53,7 @@ export const Item = (props) => {
     Actions,
 
     // Tracking
-    // onItemInView,
+    onItemInView,
     snowplowId,
     onOpenOriginalUrl,
     onOpen
@@ -67,12 +68,24 @@ export const Item = (props) => {
   const linkTarget = openInNewTab ? '_blank' : undefined
   const linkRel = openInNewTab ? 'noopener noreferrer' : undefined
   const [tagsShown, setTagsShown] = useState(false)
+  const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
 
   const showTags = () => setTagsShown(true)
   const hideTags = () => setTagsShown(false)
 
+  // Fire when item is in view
+
+  useEffect(() => {
+    onItemInView(inView)
+  }, [inView, onItemInView])
+
   return (
-    <article style={style} className={itemClassName} key={itemId} data-cy="article-card">
+    <article
+      style={style}
+      className={itemClassName}
+      key={itemId}
+      data-cy="article-card"
+      ref={viewRef}>
       <span className="media-block">
         <CardMedia
           topicName={topicName}
