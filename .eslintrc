@@ -13,7 +13,7 @@
     "*.stories.js",
     "*.spec.js",
     "*.tmp.js",
-    "*/release-notes/*"
+    "release-notes/**"
   ],
   "globals": {
     "snowplow": true
