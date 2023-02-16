@@ -17,7 +17,8 @@ export const savedActionStyles = css`
     display: inline-flex;
     align-content: center;
     align-items: center;
-    background-color: var(--color-canvas);
+    background-color: transparent;
+    border-color: transparent;
     font-size: 1.5rem;
     line-height: 1em;
     color: var(--color-actionSecondary);

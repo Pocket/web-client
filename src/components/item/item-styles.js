@@ -331,6 +331,27 @@ export const itemStyles = css`
     display: flex;
   }
 
+  &.bulkEdit {
+    cursor: pointer;
+    user-select: none;
+    a,
+    .actions {
+      pointer-events: none;
+    }
+    &:hover .view-original {
+      opacity: 0;
+    }
+    &.selected {
+      background-color: var(--color-navCurrentTab);
+    }
+  }
+
+  &.selected,
+  &.bulkCurrent,
+  &.bulkCurrent:focus-within {
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+  }
+
   // SAVED CARD TYPES (special since they don't live in a grid)
   &.detail {
     --media-radius: 1rem;

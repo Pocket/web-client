@@ -1,5 +1,5 @@
 import { cx } from 'linaria'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import ReactMarkdown from 'react-markdown'
@@ -38,6 +38,12 @@ export const Item = (props) => {
     tags,
     type,
 
+    // Data
+    bulkEdit,
+    bulkSelected,
+    shortcutSelected,
+    bulkIsCurrent,
+
     // UI
     className,
     useMarkdown,
@@ -51,6 +57,8 @@ export const Item = (props) => {
 
     // Actions
     Actions,
+    shortcutSelect,
+    selectBulk,
 
     // Tracking
     onItemInView,
@@ -63,21 +71,46 @@ export const Item = (props) => {
    * Layout is defined here.
    * ----------------------------------------------------------------
    */
-  const itemClassName = cx(itemStyles, clamp && 'clamped', showExcerpt && 'showExcerpt', className, type) //prettier-ignore
+  const itemClassName = cx(itemStyles, clamp && 'clamped', showExcerpt && 'showExcerpt', className, type,
+    bulkIsCurrent && 'bulkCurrent',
+    bulkEdit && 'bulkEdit',
+    (bulkSelected || shortcutSelected) && 'selected'
+  ) //prettier-ignore
+
   const openInNewTab = !isInternalItem
   const linkTarget = openInNewTab ? '_blank' : undefined
   const linkRel = openInNewTab ? 'noopener noreferrer' : undefined
   const [tagsShown, setTagsShown] = useState(false)
   const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
 
+  const linkRef = useRef(null)
+  const footerRef = useRef(null)
+
   const showTags = () => setTagsShown(true)
   const hideTags = () => setTagsShown(false)
 
   // Fire when item is in view
-
   useEffect(() => {
     onItemInView(inView)
   }, [inView, onItemInView])
+
+  // Fire when item is selected by shortcut
+  // This allows us to keep shortcuts in sync with tab selection and in view
+  useEffect(() => {
+    if (!linkRef.current) return
+    const selectedAndNotActive = shortcutSelected && document.activeElement !== linkRef.current
+    const notSelectedAndActive = !shortcutSelected && document.activeElement === linkRef.current
+
+    if (notSelectedAndActive) linkRef.current.blur()
+    if (selectedAndNotActive) {
+      linkRef.current.focus()
+      footerRef.current.scrollIntoView({ block: 'center', behavior: 'smooth' })
+    }
+  }, [shortcutSelected, linkRef])
+
+  const handleFocus = () => {
+    if (!shortcutSelected && shortcutSelect) shortcutSelect()
+  }
 
   return (
     <article
@@ -85,8 +118,10 @@ export const Item = (props) => {
       className={itemClassName}
       key={itemId}
       data-cy="article-card"
-      ref={viewRef}>
-      <span className="media-block">
+      onClick={selectBulk}
+      ref={viewRef}
+      onFocus={handleFocus}>
+      <span className="media-block" ref={footerRef}>
         <CardMedia
           topicName={topicName}
           image_src={itemImage}
@@ -104,6 +139,7 @@ export const Item = (props) => {
             className="content-block"
             data-cy="content-block"
             target={linkTarget}
+            ref={linkRef}
             rel={linkRel}>
             <div className="content">
               {fromPartner ? <PartnerOverline partnerType={partnerType} /> : null}
