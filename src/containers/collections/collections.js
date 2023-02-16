@@ -34,21 +34,30 @@ export default function Collections({ locale }) {
 
       <CardPageHeader title={metaData.title} subHeading={metaData.description} />
 
-      <div className={heroGrid}>{itemIds.slice(0, 5).map(Card)}</div>
+      <div className={heroGrid}>
+        {itemIds.slice(0, 5).map((id, index) => (
+          <ItemCard position={index} key={id} id={id} snowplowId="collection" />
+        ))}
+      </div>
 
       <div className={stackedGrid}>
-        {itemIds.slice(5, 10).map(Card)}
+        {itemIds.slice(5, 10).map((id, index) => (
+          <ItemCard position={4 + index} key={id} id={id} snowplowId="collection" />
+        ))}
         <CallOutCollection />
       </div>
 
-      <div className={heroGrid}>{itemIds.slice(10, 15).map(Card)}</div>
+      <div className={heroGrid}>
+        {itemIds.slice(10, 15).map((id, index) => (
+          <ItemCard position={9 + index} key={id} id={id} snowplowId="collection" />
+        ))}
+      </div>
 
-      <div className={stackedGrid}>{itemIds.slice(15, 20).map(Card)}</div>
+      <div className={stackedGrid}>
+        {itemIds.slice(15, 20).map((id, index) => (
+          <ItemCard position={14 + index} key={id} id={id} snowplowId="collection" />
+        ))}
+      </div>
     </Layout>
   )
-}
-
-// This is just a concenience method so we can keep grid declarations simple
-function Card(id) {
-  return <ItemCard key={id} id={id} />
 }

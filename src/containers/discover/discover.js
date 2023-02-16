@@ -71,7 +71,11 @@ export default function Discover({ locale }) {
       />
 
       {/* Top Hero Grid*/}
-      <div className={heroGrid}>{items.slice(0, 5).map(Card)}</div>
+      <div className={heroGrid}>
+        {items.slice(0, 5).map((id, index) => (
+          <ItemCard position={index} key={id} id={id} snowplowId="discover" />
+        ))}
+      </div>
 
       {/* Pocket Brand Messaging */}
       <CalloutTop locale={locale} shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
@@ -79,12 +83,18 @@ export default function Discover({ locale }) {
       {/* Top List */}
       <CardListHeading>{t('discover:fascinating-stories', 'Fascinating stories')}</CardListHeading>
       <div className={stackedGrid}>
-        {items.slice(5, 10).map(Card)}
+        {items.slice(5, 10).map((id, index) => (
+          <ItemCard position={4 + index} key={id} id={id} snowplowId="discover" />
+        ))}
         {showTopics ? <CardTopicsNav topics={topics} rail={true} track={topicClickMiddle} /> : null}
       </div>
 
       {/* Mid-Hero Grid */}
-      <div className={heroGrid}>{items.slice(10, 15).map(Card)}</div>
+      <div className={heroGrid}>
+        {items.slice(10, 15).map((id, index) => (
+          <ItemCard position={9 + index} key={id} id={id} snowplowId="discover" />
+        ))}
+      </div>
 
       <CalloutBottom
         shouldRender={shouldRender}
@@ -93,7 +103,11 @@ export default function Discover({ locale }) {
       />
 
       {/* Bottom List */}
-      <div className={stackedGrid}>{items.slice(15, 20).map(Card)}</div>
+      <div className={stackedGrid}>
+        {items.slice(15, 20).map((id, index) => (
+          <ItemCard position={14 + index} key={id} id={id} snowplowId="discover" />
+        ))}
+      </div>
 
       {showTopics ? (
         <CardTopicsNav topics={topics} className="no-border" track={topicClickBottom} />
@@ -131,9 +145,4 @@ function CalloutBottom({ shouldRender, isAuthenticated, trackEvent }) {
       isAuthenticated={isAuthenticated}
     />
   ) : null
-}
-
-// This is just a concenience method so we can keep grid declarations simple
-function Card(id) {
-  return <ItemCard key={id} id={id} />
 }

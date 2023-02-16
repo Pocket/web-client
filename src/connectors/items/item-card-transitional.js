@@ -85,7 +85,7 @@ export function ItemCard({
       onItemInView={onItemInView}
       onOpen={onOpen}
       Actions={ActionsTransitional}
-      snowplowId="discover"
+      snowplowId={snowplowId}
     />
   )
 }

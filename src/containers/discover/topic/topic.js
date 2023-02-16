@@ -9,8 +9,7 @@ import { CardPageHeader } from 'components/headers/discover-header'
 import { SectionHeader } from 'components/headers/section-header'
 import { CollectionPageHeader } from 'components/headers/discover-header'
 import { ItemCard } from 'connectors/items/item-card-transitional'
-import { Lockup } from 'components/items-layout/list-lockup'
-import { OffsetList } from 'components/items-layout/list-offset'
+import { heroGrid, stackedGrid } from 'components/item/items-layout'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 import { useTranslation } from 'next-i18next'
 import { BASE_URL } from 'common/constants'
@@ -78,7 +77,11 @@ export default function Topic({ locale, statusCode = 500 }) {
       )}
 
       {/* Curated */}
-      <Lockup items={itemIds} offset={0} heroPosition="left" ItemCard={ItemCard} />
+      <div className={heroGrid}>
+        {itemIds.slice(0, 5).map((id, index) => (
+          <ItemCard position={index} key={id} id={id} snowplowId="discover" />
+        ))}
+      </div>
 
       {isEditorialCollection ? null : (
         <SectionHeader
@@ -89,11 +92,18 @@ export default function Topic({ locale, statusCode = 500 }) {
       )}
 
       {/* Algorithmic */}
-      <OffsetList items={itemIds} offset={5} cardShape="wide" ItemCard={ItemCard}>
+      <div className={stackedGrid}>
+        {itemIds.slice(5, 10).map((id, index) => (
+          <ItemCard position={4 + index} key={id} id={id} snowplowId="discover" />
+        ))}
         <CardTopicsNav topics={topicList} rail={true} track={topicClickRail} />
-      </OffsetList>
+      </div>
 
-      <OffsetList items={itemIds} offset={10} count={15} cardShape="wide" ItemCard={ItemCard} />
+      <div className={heroGrid}>
+        {itemIds.slice(10, 15).map((id, index) => (
+          <ItemCard position={9 + index} key={id} id={id} snowplowId="discover" />
+        ))}
+      </div>
 
       {/* Bottom TopicNav */}
       <CardTopicsNav topics={topicList} className="no-border" track={topicClickBottom} />

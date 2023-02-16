@@ -35,8 +35,15 @@ export const HomeRecentSaves = () => {
       />
 
       <div className={recentGrid}>
-        {recentSaves.slice(0, 3).map((id) => (
-          <ItemCard key={id} id={id} clamp={true} showExcerpt={showExcerpt} />
+        {recentSaves.slice(0, 3).map((id, index) => (
+          <ItemCard
+            position={index}
+            key={id}
+            id={id}
+            clamp={true}
+            showExcerpt={showExcerpt}
+            snowplowId="home.recent"
+          />
         ))}
       </div>
     </SectionWrapper>

@@ -195,7 +195,7 @@ function ExploreMoreTopics() {
 
 // This is just a convenience method so we can keep grid declarations simple
 function Card(id) {
-  return <ItemCard key={id} id={id} />
+  return <ItemCard key={id} id={id} snowplowId="home.corpus" />
 }
 
 function getItemsOnSceen(width) {

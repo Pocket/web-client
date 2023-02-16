@@ -80,7 +80,11 @@ function getItemsFromSlate({ recommendations }) {
         saveUrl: corpusItem.url,
         itemId: corpusRecommendationId,
         topic,
-        corpusRecommendationId
+        corpusRecommendationId,
+        analyticsData: {
+          url: corpusItem.url,
+          corpusRecommendationId
+        }
       }
     }
   }, {})
