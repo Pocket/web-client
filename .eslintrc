@@ -12,7 +12,8 @@
   "ignorePatterns": [
     "*.stories.js",
     "*.spec.js",
-    "*.tmp.js"
+    "*.tmp.js",
+    "*/release-notes/*"
   ],
   "globals": {
     "snowplow": true
