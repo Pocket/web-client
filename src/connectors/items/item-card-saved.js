@@ -155,6 +155,7 @@ export const MemoizedItemCard = memo(ItemCard)
 
 function ActionsSaves({ id, snowplowId, visibleCount }) {
   const dispatch = useDispatch()
+
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const itemSaved = useSelector((state) => state.itemsSaved[id])
   const { filters, sort } = useSelector((state) => state.pageSavedInfo)
@@ -200,6 +201,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   const actionPermLibOpen = () => {
     const data = { ...analyticsData, url: permanentUrl }
     dispatch(sendSnowplowEvent(`${snowplowId}.card.permanent-library`, data))
+    location.assign(permanentUrl)
   }
 
   return (

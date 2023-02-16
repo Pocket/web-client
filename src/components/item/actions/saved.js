@@ -117,8 +117,8 @@ export function SavedActions({
 }
 
 export function VisibleAction({ actions }) {
-  return actions.map(({ label, icon, onClick }) => {
-    return (
+  return actions.map(({ label, icon, onClick, hide }) => {
+    return hide ? null : (
       <button
         key={label}
         className={topTooltip}
