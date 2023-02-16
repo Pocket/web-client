@@ -38,6 +38,7 @@ const cardMediaStyles = css`
     transition-duration: 0.2s;
     transition-timing-function: ease;
     overflow: hidden;
+    border-radius: var(--borderRadius);
     top: 0;
     left: 0;
     bottom: 0;

@@ -25,7 +25,7 @@ const heroType = {
 
 export const cardLockupStyle = css`
   ${cardsGrid};
-  padding: 0 0 4rem;
+  padding: 2rem 0 0;
 
   ${breakpointLargeHandset} {
     border-bottom: 0;

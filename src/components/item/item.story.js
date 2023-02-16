@@ -4,11 +4,8 @@ import { topics } from 'mocks/_data/article'
 import { deriveListItem } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { css, cx } from 'linaria'
-
 import { SavedActions } from './actions/saved'
 import { TransitionalActions } from './actions/transitional'
-
-// import { SavedActions, DiscoveryActions } from './item-actions'
 
 const savesItems = Object.values(savesResponse.edges).map((item) => {
   let derivedItem = deriveListItem(item)

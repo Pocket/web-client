@@ -5,7 +5,7 @@ import { CardSkeleton } from 'components/item-card/card-skeleton'
 
 export const offsetListStyle = css`
   ${cardsGrid};
-  padding: 0 0 4rem;
+  padding: 2.5rem 0;
   grid-row-gap: 2.5rem;
   grid-column-gap: 1rem;
 
@@ -14,6 +14,10 @@ export const offsetListStyle = css`
     ${breakpointLargeHandset} {
       border-bottom: 0;
     }
+  }
+
+  &.no-space {
+    padding-bottom: 0;
   }
 
   &.compact {
@@ -39,11 +43,12 @@ export function OffsetList({
 }) {
   const start = offset
   const end = offset + count
+  const hasChildren = !!children
   const listClass = cx(
-    'horizontal-items',
     offsetListStyle,
     compact && 'compact',
     border && 'border',
+    hasChildren && 'no-space',
     className
   )
 
