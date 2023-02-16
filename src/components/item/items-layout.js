@@ -119,10 +119,6 @@ export const basicSlide = css`
   }
 
   ${breakpointLargeTablet} {
-    .inner-slide {
-      width: 300%;
-      grid-template-columns: repeat(36, 1fr);
-    }
     // Two cards across
     article {
       grid-column: span 4;
@@ -130,11 +126,13 @@ export const basicSlide = css`
   }
 
   ${breakpointTinyTablet} {
-    .inner-slide {
-      width: 800%;
-      grid-template-columns: repeat(96, 1fr);
-    }
     // Two cards across
+    article {
+      grid-column: span 6;
+    }
+  }
+
+  ${breakpointLargeHandset} {
     article {
       grid-column: span 12;
     }
@@ -261,13 +259,16 @@ export const recentGrid = css`
   padding: 1.5rem 0 0;
 
   article {
+    grid-column: span 4;
     --media-radius: 0.5rem;
     --title-size: 0.825rem;
     --title-margin: 0.5rem 0;
     --excerpt-display: none;
 
+    --card-padding: 0.5rem;
+
     .media-block {
-      margin: 0.5rem;
+      margin: 0.5rem 0 0.5rem 0.5rem;
       grid-row: span 2;
     }
 
@@ -285,6 +286,24 @@ export const recentGrid = css`
     }
     .footer-actions {
       display: none;
+    }
+    .context {
+      display: none;
+    }
+
+    ${breakpointMediumTablet} {
+      grid-template-columns: 100px minmax(0, 1fr);
+      grid-column: span 6;
+      &:nth-child(n + 3) {
+        display: none;
+      }
+    }
+
+    ${breakpointLargeHandset} {
+      grid-column: span 12;
+      &:nth-child(n + 2) {
+        display: none;
+      }
     }
   }
 `

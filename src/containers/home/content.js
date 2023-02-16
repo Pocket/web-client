@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useSwipeable } from 'react-swipeable'
 import { cx } from 'linaria'
 
 import { ItemCard } from 'connectors/items/item-card-transitional'
@@ -59,12 +60,13 @@ function Slate({ slateId }) {
 }
 
 function StaticSlate({ slateId, firstSlate }) {
+  const viewport = useViewport()
   const dispatch = useDispatch()
   const slate = useSelector((state) => state.pageHome.slatesById[slateId])
 
   const { headline, subheadline, moreLink, recommendations, recommendationReasonType } = slate
 
-  const recCount = firstSlate ? 6 : 3
+  const recCount = firstSlate ? 6 : viewport.width <= 959 ? 4 : 3
   const recsToShow = recommendations.slice(0, recCount)
 
   const showTopicSelector = recommendationReasonType === 'PREFERRED_TOPICS'
@@ -105,13 +107,27 @@ function SlideSlate({ slateId }) {
   const viewport = useViewport()
   const itemsOnScreen = getItemsOnSceen(viewport.width)
   const recCount = recommendations.length
-  const recsToShow = recommendations.slice(1, recCount)
+  const recsToShow = recommendations.slice(0, recCount)
   const hideSlide = recCount <= itemsOnScreen
   const totalPages = Math.ceil(recCount / itemsOnScreen)
   const transformPercentage = (slidePage / totalPages) * 100
-  const transformStyle = { transform: `translateX(-${transformPercentage}%)` }
+
+  const transformStyle = {
+    width: `${totalPages * 100}%`,
+    gridTemplateColumns: `repeat(${totalPages * 12}, 1fr)`,
+    transform: `translateX(-${transformPercentage}%)`
+  }
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => slideIn(),
+    onSwipedRight: () => slideOut(),
+    swipeDuration: 500,
+    preventScrollOnSwipe: true,
+    trackMouse: false
+  })
 
   const slideIn = () => {
+    // if (slidePage + 1 === totalPages) return totalPages - 1
     setSlidePage(Math.min(totalPages - 1, slidePage + 1))
   }
   const slideOut = () => {
@@ -121,6 +137,10 @@ function SlideSlate({ slateId }) {
   const moreLinkClick = (label) => {
     dispatch(sendSnowplowEvent('home.topic.view-more', { label }))
   }
+
+  useEffect(() => {
+    setSlidePage(0)
+  }, [totalPages])
 
   return (
     <>
@@ -141,7 +161,7 @@ function SlideSlate({ slateId }) {
           </button>
         </div>
       </SectionWrapper>
-      <div className={basicSlide}>
+      <div className={basicSlide} {...handlers}>
         <div className="outer-slide">
           <div className="inner-slide" style={transformStyle}>
             {recsToShow.map(Card)}
@@ -179,7 +199,8 @@ function Card(id) {
 }
 
 function getItemsOnSceen(width) {
-  if (width <= 719) return 1
+  if (width <= 599) return 1
+  if (width <= 719) return 2
   if (width <= 1023) return 3
   return 4 // Everything
 }
