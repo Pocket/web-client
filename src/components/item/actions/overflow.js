@@ -65,12 +65,27 @@ const popoverMenuItem = css`
 const MenuPopover = function ({ popoverRef, menuItems }) {
   return (
     <div className={popoverContainer} ref={popoverRef}>
-      {menuItems.map(({ label, icon, onClick }) => (
-        <div key={label} data-cy={label} className={popoverMenuItem} onClick={onClick}>
-          {icon ? icon : null}
-          {label}
-        </div>
-      ))}
+      {menuItems.map(({ label, icon, onClick, url, hide }) => {
+        if (hide) return null
+        return url ? (
+          <a
+            href={url}
+            key={label}
+            data-cy={label}
+            className={popoverMenuItem}
+            onClick={onClick}
+            target="_blank"
+            rel="noreferrer">
+            {icon ? icon : null}
+            {label}
+          </a>
+        ) : (
+          <div key={label} data-cy={label} className={popoverMenuItem} onClick={onClick}>
+            {icon ? icon : null}
+            {label}
+          </div>
+        )
+      })}
     </div>
   )
 }

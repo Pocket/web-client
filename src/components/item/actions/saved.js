@@ -10,10 +10,9 @@ import { TagIcon } from 'components/icons/TagIcon'
 import { AddIcon } from 'components/icons/AddIcon'
 import { PermanentCopyIcon } from 'components/icons/PermanentCopyIcon'
 
-import { breakpointSmallTablet } from 'common/constants'
-
 export const savedActionStyles = css`
-  button {
+  button,
+  a.button {
     display: inline-flex;
     align-content: center;
     align-items: center;
@@ -25,14 +24,10 @@ export const savedActionStyles = css`
     padding: 0;
     margin-right: 0.5rem;
 
-    ${breakpointSmallTablet} {
-      // might need to tweak this breakpoint when we apply this to the items in app
-      margin-right: 0.5rem;
-    }
-
     &:last-of-type {
       margin-right: 0;
     }
+
     .icon {
       color: var(--color-textSecondary);
       margin-top: 0;
@@ -41,6 +36,10 @@ export const savedActionStyles = css`
         color: var(--color-amber);
       }
     }
+  }
+
+  a.button {
+    margin-left: 0.5rem;
   }
 `
 
@@ -56,7 +55,8 @@ export function SavedActions({
   actionTag,
   actionShare,
   actionDelete,
-  actionPremLibOpen
+  actionPremLibOpen,
+  permanentUrl
 }) {
   const { t } = useTranslation()
   const archiveLabel = isArchived
@@ -100,6 +100,7 @@ export function SavedActions({
     permanent: {
       label: t('item-action:permanent-copy', 'Permanent Copy'),
       hide: !isPremium,
+      url: permanentUrl,
       icon: <PermanentCopyIcon />,
       onClick: actionPremLibOpen
     }
@@ -107,7 +108,7 @@ export function SavedActions({
 
   // Build open items based on item order and open count
   const visibleActions = Object.values(actionTypes).slice(0, visibleCount)
-  const overflowActions = Object.values(actionTypes).slice(visibleCount, -1)
+  const overflowActions = Object.values(actionTypes).slice(visibleCount)
 
   return (
     <div className={savedActionStyles}>
@@ -118,8 +119,22 @@ export function SavedActions({
 }
 
 export function VisibleAction({ actions }) {
-  return actions.map(({ label, icon, onClick, hide }) => {
-    return hide ? null : (
+  return actions.map(({ label, icon, onClick, hide, url }) => {
+    if (hide) return null
+    return url ? (
+      <a
+        key={label}
+        href={url}
+        className={`${topTooltip} button`}
+        data-tooltip={label}
+        aria-label={label}
+        data-cy={label}
+        onClick={onClick}
+        target="_blank"
+        rel="noreferrer">
+        {icon}
+      </a>
+    ) : (
       <button
         key={label}
         className={topTooltip}

@@ -350,6 +350,10 @@ export const itemStyles = css`
   &.bulkCurrent,
   &.bulkCurrent:focus-within {
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+    .colormode-dark & {
+      outline: 3px solid #000;
+      transition: none;
+    }
   }
 
   // SAVED CARD TYPES (special since they don't live in a grid)

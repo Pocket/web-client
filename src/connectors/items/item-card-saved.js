@@ -201,7 +201,6 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   const actionPermLibOpen = () => {
     const data = { ...analyticsData, url: permanentUrl }
     dispatch(sendSnowplowEvent(`${snowplowId}.card.permanent-library`, data))
-    location.assign(permanentUrl)
   }
 
   return (
@@ -218,6 +217,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
       actionUnFavorite={actionUnFavorite}
       actionTag={actionTag}
       actionPremLibOpen={actionPermLibOpen}
+      permanentUrl={permanentUrl}
     />
   )
 }
