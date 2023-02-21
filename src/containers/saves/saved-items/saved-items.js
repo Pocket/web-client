@@ -78,7 +78,7 @@ export function filterSelector(subset, filter) {
 export const SavedItems = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const sortOrder = useSelector((state) => state.pageSavedInfo.sortOrder)
+  const sortOrder = useSelector((state) => state.pageSavedInfo.sortOrders[state.pageSavedInfo.section] || 'DESC')
   const sortBy = useSelector((state) => state.pageSavedInfo.sortBy)
 
   const { subset: sub = 'active', filter: propFilter } = props

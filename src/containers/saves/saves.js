@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { SavedItems } from 'containers/saves/saved-items/saved-items'
 
 import { Toasts } from 'connectors/toasts/toast-list'
+import { savedItemsSetSection } from 'containers/saves/saved-items/saved-items.state'
 import { savedItemsSetSortOrder } from 'containers/saves/saved-items/saved-items.state'
 import { savedItemsSetSortBy } from 'containers/saves/saved-items/saved-items.state'
 import { SuccessFXA } from 'components/snackbar/success-fxa'
@@ -22,6 +23,7 @@ import { ConfirmTagEdit } from 'connectors/confirm/tag-edit'
 import { ConfirmTagDelete } from 'connectors/confirm/tag-delete'
 import { ConfirmAddToList } from 'connectors/confirm/add-to-list'
 import { CreateListModal } from 'connectors/confirm/create-list'
+import { useEffect } from 'react'
 
 export const Saves = (props) => {
   const router = useRouter()
@@ -32,14 +34,19 @@ export const Saves = (props) => {
   const subset = tag ? 'tag' : searchTerm ? 'search' : sub
   const filter = tag ? queryFilter : propFilter
   const selector = tag ? tag : sub
+  const section = filter ? selector + filter : selector
 
   // Selectors
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
-  const sortOrder = useSelector((state) => state.pageSavedInfo.sortOrder)
+  const sortOrder = useSelector((state) => state.pageSavedInfo.sortOrders[section] || 'DESC')
   const featureState = useSelector((state) => state.features)
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const total = useSelector((state) => state.pageSavedInfo.totalCount)
+
+  useEffect(() => {
+    dispatch(savedItemsSetSection(section))
+  }, [dispatch, section])
 
   // Derived Values
   const shouldRender = userStatus !== 'pending'

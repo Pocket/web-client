@@ -14,6 +14,7 @@ import { ITEMS_UNDELETE_SUCCESS } from 'actions'
 
 import { ITEMS_SAVED_PAGE_INFO_SUCCESS } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_FILTERS } from 'actions'
+import { ITEMS_SAVED_PAGE_SET_SECTION } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_ORDER } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_BY } from 'actions'
@@ -87,6 +88,8 @@ export const searchItemsFavorites = (searchTerm, sortOrder) => ({ type: SEARCH_S
 export const savedItemsSetSortOrder = (sortOrder) => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, sortOrder}) //prettier-ignore
 export const savedItemsSetSortBy = (sortBy) => ({ type: ITEMS_SAVED_PAGE_SET_SORT_BY, sortBy })
 
+export const savedItemsSetSection = (section) => ({ type: 'ITEMS_SAVED_PAGE_SET_SECTION', section })
+
 export const loadMoreListItems = () => ({ type: LOAD_MORE_ITEMS })
 
 /** LIST SAVED REDUCERS
@@ -132,7 +135,8 @@ export const pageSavedIdsReducers = (state = [], action) => {
 /** PAGINATION REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  sortOrder: 'DESC',
+  sortOrders: {},
+  section: '',
   count: 30,
   loading: true,
   totalCount: 0,
@@ -145,7 +149,13 @@ export const pageSavedInfoReducers = (state = initialState, action) => {
     case ITEMS_SAVED_SEARCH_REQUEST:
     case ITEMS_SAVED_REQUEST: {
       const { sortOrder = 'DESC', tagNames, searchTerm, actionType } = action
-      return { ...state, error: false, loading: true, sortOrder, actionType, tagNames, searchTerm }
+      return {
+        ...state, error: false, loading: true, actionType, tagNames, searchTerm,
+        sortOrders: {
+          ...state.sortOrders,
+          [state.section]: sortOrder
+        }
+      }
     }
 
     case ITEMS_SAVED_PAGE_SET_FILTERS: {
@@ -153,14 +163,19 @@ export const pageSavedInfoReducers = (state = initialState, action) => {
       return { ...state, filter }
     }
 
+    case 'ITEMS_SAVED_PAGE_SET_SECTION': {
+      const sortOrder = state.sortOrders[action.section] ? {} : { [action.section]: 'DESC'}
+      return { ...state, section: action.section, ...sortOrder}
+    }
+      
     case ITEMS_SAVED_PAGE_SET_SORT_ORDER: {
       const { sortOrder } = action
-      return { ...state, sortOrder }
+      return { ...state, sortOrders: { ...state.sortOrders, [state.section]: sortOrder } }
     }
 
     case ITEMS_SAVED_PAGE_SET_SORT_BY: {
       const { sortBy } = action
-      const sortOrder = sortBy === 'RELEVANCE' ? { sortOrder: 'DESC' } : {}
+      const sortOrder = sortBy === 'RELEVANCE' ? { sortOrders: { [state.section]: 'DESC'} } : {}
       return { ...state, ...sortOrder, sortBy }
     }
 
@@ -177,7 +192,7 @@ export const pageSavedInfoReducers = (state = initialState, action) => {
     case ITEMS_SAVED_FAILURE: {
       return { ...state, loading: false, error: true }
     }
-
+      
     default:
       return state
   }
@@ -226,7 +241,7 @@ export const pageSavedIdsSagas = [
 /** SAGA :: SELECTORS
  --------------------------------------------------------------- */
 const getSavedPageInfo = (state) => state.pageSavedInfo
-const getSortOrder = (state) => state.pageSavedInfo?.sortOrder
+const getSortOrder = (state) => state.pageSavedInfo?.sortOrders[state.pageSavedInfo?.section]
 const getItems = (state) => state.itemsDisplay
 
 /** SAGA :: RESPONDERS
@@ -249,8 +264,10 @@ function* reconcileDeleteMutation(action) {
 }
 
 function* reconcileUpsert(action) {
-  const { sortOrder, sortBy, filter } = yield select(getSavedPageInfo)
+  const { sortOrders, section, sortBy, filter } = yield select(getSavedPageInfo)
   const items = yield select(getItems)
+
+  const sortOrder = sortOrders[section]
 
   // When sort order is ASC we will ignore this since it will be picked up in future requests
   if (sortOrder === 'ASC' || sortBy === 'RELEVANCE') return
@@ -270,12 +287,15 @@ function* reconcileUpsert(action) {
 function* requestItems(action) {
   const { searchTerm, type: actionType, tagNames } = action
   const {
-    sortOrder,
+    sortOrders,
+    section,
     count,
     tagNames: previousTagNames,
     actionType: previousActionType,
     searchTerm: previousSearchTerm
   } = yield select(getSavedPageInfo)
+
+  const sortOrder = sortOrders[section]
 
   // Less aggressive clearing
   const differentActionType = actionType !== previousActionType
@@ -295,10 +315,12 @@ function* requestItems(action) {
 
 function* loadMoreItems() {
   try {
-    const { searchTerm, sortOrder, endCursor, actionType, tagNames } = yield select(
+    const { searchTerm, sortOrders, section, endCursor, actionType, tagNames } = yield select(
       getSavedPageInfo
     )
     const type = yield call(itemRequestType, searchTerm, tagNames)
+
+    const sortOrder = sortOrders[section]
 
     yield put({
       type,
