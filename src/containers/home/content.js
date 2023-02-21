@@ -139,6 +139,9 @@ function SlideSlate({ slateId }) {
     dispatch(sendSnowplowEvent('home.topic.view-more', { label }))
   }
 
+  const slideEnd = slidePage === totalPages - 1
+  const slideStart = slidePage === 0
+
   useEffect(() => {
     setSlidePage(0)
   }, [totalPages])
@@ -154,10 +157,10 @@ function SlideSlate({ slateId }) {
           moreLinkClick={moreLinkClick}
         />
         <div className={cx('controls', hideSlide && 'no-slide')}>
-          <button className="text" onClick={slideOut}>
+          <button className="text" onClick={slideOut} disabled={slideStart}>
             <ChevronLeftIcon />
           </button>
-          <button className="text" onClick={slideIn}>
+          <button className="text" onClick={slideIn} disabled={slideEnd}>
             <ChevronRightIcon />
           </button>
         </div>
