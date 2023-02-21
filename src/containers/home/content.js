@@ -127,7 +127,6 @@ function SlideSlate({ slateId }) {
   })
 
   const slideIn = () => {
-    // if (slidePage + 1 === totalPages) return totalPages - 1
     setSlidePage(Math.min(totalPages - 1, slidePage + 1))
   }
   const slideOut = () => {
