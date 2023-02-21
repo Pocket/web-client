@@ -90,7 +90,7 @@ export const searchItemsFavorites = (searchTerm, sortOrder) => ({ type: SEARCH_S
 export const savedItemsSetSortOrder = (sortOrder) => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, sortOrder}) //prettier-ignore
 export const savedItemsSetSortBy = (sortBy) => ({ type: ITEMS_SAVED_PAGE_SET_SORT_BY, sortBy })
 
-export const savedItemsSetSection = (section) => ({ type: 'ITEMS_SAVED_PAGE_SET_SECTION', section })
+export const savedItemsSetSection = (section) => ({ type: ITEMS_SAVED_PAGE_SET_SECTION, section })
 
 export const loadMoreListItems = () => ({ type: LOAD_MORE_ITEMS })
 
@@ -171,7 +171,7 @@ export const pageSavedInfoReducers = (state = initialState, action) => {
       return { ...state, filter }
     }
 
-    case 'ITEMS_SAVED_PAGE_SET_SECTION': {
+    case ITEMS_SAVED_PAGE_SET_SECTION: {
       const sortOrder = state.sortOrders[action.section] ? {} : { [action.section]: 'DESC'}
       return { ...state, section: action.section, ...sortOrder}
     }
