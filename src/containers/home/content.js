@@ -128,9 +128,11 @@ function SlideSlate({ slateId }) {
 
   const slideIn = () => {
     setSlidePage(Math.min(totalPages - 1, slidePage + 1))
+    dispatch(sendSnowplowEvent('home.hits.carousel-forward'))
   }
   const slideOut = () => {
     setSlidePage(Math.max(0, slidePage - 1))
+    dispatch(sendSnowplowEvent('home.hits.carousel-back'))
   }
 
   const moreLinkClick = (label) => {
