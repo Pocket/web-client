@@ -51,6 +51,8 @@ import { GET_ITEMS_TAGS_FAVORITES } from 'actions'
 import { ITEMS_CLEAR_CURRENT } from 'actions'
 import { LOAD_MORE_ITEMS } from 'actions'
 
+import { SETTINGS_FETCH_SUCCESS } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getItemsUnread = (sortOrder) => ({ type: GET_ITEMS_UNREAD, sortOrder}) //prettier-ignore
@@ -145,6 +147,12 @@ const initialState = {
 }
 export const pageSavedInfoReducers = (state = initialState, action) => {
   switch (action.type) {
+    case SETTINGS_FETCH_SUCCESS: {
+      const { settings } = action
+      const { sortOrders } = settings
+      if (!sortOrders) return state
+      return { ...state, sortOrders }
+    }
     case ITEMS_SAVED_TAGGED_REQUEST:
     case ITEMS_SAVED_SEARCH_REQUEST:
     case ITEMS_SAVED_REQUEST: {
