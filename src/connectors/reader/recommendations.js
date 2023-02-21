@@ -46,7 +46,13 @@ export const Recommendations = ({ id }) => {
       <h2 className={headerStyles}>You Might Also Like</h2>
       <section className={`${standardGrid} ${sectionWrapper}`}>
         {recommendations.map((itemId, index) => (
-          <ItemCard key={itemId} id={itemId} position={index} clamp={true} />
+          <ItemCard
+            key={itemId}
+            id={itemId}
+            position={index}
+            clamp={true}
+            snowplowId="reader.rec"
+          />
         ))}
       </section>
     </aside>
