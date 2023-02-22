@@ -1,3 +1,11 @@
+## [1.79.3](https://github.com/Pocket/web-client/compare/v1.79.2...v1.79.3) (2023-02-22)
+
+
+### Bug Fixes
+
+* **create-list-modal:** reset input values on close ([4cc1d7e](https://github.com/Pocket/web-client/commit/4cc1d7e91748e51cca3343942c46ffa06f9cfe8e))
+* **lists:** hook up create list modal functionality ([749ca69](https://github.com/Pocket/web-client/commit/749ca6926a0a297cc06b29fe806b30fe47469e5c))
+
 ## [1.79.2](https://github.com/Pocket/web-client/compare/v1.79.1...v1.79.2) (2023-02-22)
 
 

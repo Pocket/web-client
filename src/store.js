@@ -105,6 +105,9 @@ import { pageListsIdsReducers } from 'containers/lists/lists.state'
 import { pageListsIdsSagas } from 'containers/lists/lists.state'
 import { pageListsInfoReducers } from 'containers/lists/lists.state'
 
+import { mutationListsReducers } from 'connectors/items/mutation-lists.state'
+import { mutationListsSagas } from 'connectors/items/mutation-lists.state'
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
@@ -123,7 +126,8 @@ const itemMutations = {
   mutationTagging: mutationTaggingReducers,
   mutationHighlight: mutationHighlightReducers,
   mutationShare: mutationShareReducers,
-  mutationReport: mutationReportReducers
+  mutationReport: mutationReportReducers,
+  mutationLists: mutationListsReducers
 }
 
 const pageReducers = {
@@ -221,6 +225,7 @@ function* rootSaga() {
     ...mutationHighlightSagas,
     ...mutationShareSagas,
     ...mutationReportSagas,
+    ...mutationListsSagas,
     ...listenSagas
   ])
 }
