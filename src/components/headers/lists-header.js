@@ -7,6 +7,8 @@ import { FiltersAltIcon } from 'components/icons/FiltersAltIcon'
 import { LockIcon } from 'components/icons/LockIcon'
 import { GlobeIcon } from 'components/icons/GlobeIcon'
 import { Button } from 'components/buttons/button'
+import Avatar from 'components/avatar/avatar'
+import { SaveListButton } from 'components/content-saving/save-list'
 
 const listHeaderStyles = css`
   .headline {
@@ -54,6 +56,41 @@ const listHeaderStyles = css`
 
     .icon {
       height: 20px;
+    }
+  }
+`
+
+const publicListHeaderStyles = css`
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--color-dividerTertiary);
+
+  .headline {
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    p {
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 68px;
+    }
+  }
+
+  .list-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .list-user-info {
+    display: flex;
+    align-items: center;
+    color: var(--color-textPrimary);
+    font-size: 14px;
+
+    span {
+      margin: 0 8px;
     }
   }
 `
@@ -112,6 +149,38 @@ export const ListIndividualHeader = ({
 
         <button onClick={handleEdit} className="filter"><FiltersAltIcon /></button>
       </div>
+    </header>
+  )
+}
+
+export const ListPublicHeader = ({
+  title,
+  description,
+  avatarUrl,
+  userName,
+  listCount,
+  isAuthenticated,
+  saveStatus,
+  handleSaveAll
+}) => {
+  return (
+    <header className={publicListHeaderStyles}>
+      <section className="headline">
+        <h1>{title}</h1>
+        <p>{description}</p>
+      </section>
+      <section className="list-info">
+        <div className="list-user-info">
+          <Avatar src={avatarUrl} size="32px" />
+          <span>{userName}</span> | <span>{listCount} Items</span>
+        </div>
+
+        <SaveListButton
+          saveAction={handleSaveAll}
+          isAuthenticated={isAuthenticated}
+          saveStatus={saveStatus}
+        />
+      </section>
     </header>
   )
 }

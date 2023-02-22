@@ -1,3 +1,15 @@
+## [1.79.2](https://github.com/Pocket/web-client/compare/v1.79.1...v1.79.2) (2023-02-22)
+
+
+### Bug Fixes
+
+* **eslint:** adding release notes to ignore ([5e89f2a](https://github.com/Pocket/web-client/commit/5e89f2a740990c44f77122848d3cef87d8878bdb))
+* **eslint:** adding release notes to ignore ([a89efec](https://github.com/Pocket/web-client/commit/a89efeccac6ffac34f375ca070cbb1c30b241020))
+* **eslint:** adding release notes to ignore ([baf13de](https://github.com/Pocket/web-client/commit/baf13de17a0a603801640ecc9c9c0ffafd8b3a8c))
+* **public-list:** add rewrites for public list ([f766b29](https://github.com/Pocket/web-client/commit/f766b29acbccc31570d045405a9d8a6c1d8cb5a7))
+* **public-list:** adding framework for public list page ([f0931ef](https://github.com/Pocket/web-client/commit/f0931ef283e53d0fa891c30433dd5590d20720fd))
+* **public-list:** remove stray console log ([dea9b54](https://github.com/Pocket/web-client/commit/dea9b541bf2c80fa344329d313973640ec271e93))
+
 ## [1.79.1](https://github.com/Pocket/web-client/compare/v1.79.0...v1.79.1) (2023-02-21)
 
 
