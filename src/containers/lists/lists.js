@@ -4,6 +4,8 @@ import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListsAllHeader } from 'components/headers/lists-header'
 import { EmptyAllLists } from 'components/empty-states/all-lists'
 import { listsItemsSetSortOrder } from './lists.state'
+import { mutateListAction } from 'connectors/items/mutation-lists.state'
+import { CreateListModal } from 'connectors/confirm/create-list'
 
 export const Lists = () => {
   const dispatch = useDispatch()
@@ -14,7 +16,7 @@ export const Lists = () => {
   const shouldRender = userStatus !== 'pending'
 
   // Actions
-  const handleCreateList = () => { }
+  const handleCreateList = () => dispatch(mutateListAction())
   const handleNewest = () => dispatch(listsItemsSetSortOrder('DESC'))
   const handleOldest = () => dispatch(listsItemsSetSortOrder('ASC'))
 
@@ -36,6 +38,8 @@ export const Lists = () => {
 
         </main>
       ) : null}
+
+      <CreateListModal />
     </Layout>
   )
 }

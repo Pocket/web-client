@@ -5,25 +5,22 @@ import { TextInput } from 'components/form-fields/text-input'
 import { TextArea } from 'components/form-fields/text-area'
 
 export const CreateEditShareableList = ({
+  showModal,
   modalTitle,
   modalSubmit,
   listName = '',
   listDescription = '',
   handleClose,
   handleSubmit,
-  handleNameChange,
-  handleDescriptionChange
+  handleNameChange = () => {},
+  handleDescriptionChange = () => {},
+  appRootSelector
 }) => {
-  const appRootSelector = '#root' // to be updated when integrated into the app
-
-  const [isOpen, setIsOpen] = useState(true)
   const [listNameValue, setListNameValue] = useState(listName)
   const [descriptionValue, setDescriptionValue] = useState(listDescription)
 
-  const onClose = () => {
-    setIsOpen(false)
-    handleClose()
-  }
+  const onClose = () => handleClose()
+  const onSubmit = () => handleSubmit(listNameValue, descriptionValue)
 
   const onNameChange = (e) => {
     setListNameValue(e.target.value)
@@ -41,7 +38,7 @@ export const CreateEditShareableList = ({
     <Modal
       title={modalTitle}
       appRootSelector={appRootSelector}
-      isOpen={isOpen}
+      isOpen={showModal}
       screenReaderLabel={modalTitle}
       handleClose={onClose}>
       <ModalBody>
@@ -77,7 +74,7 @@ export const CreateEditShareableList = ({
           disabled={listNameEmpty}
           type="submit"
           data-cy="create-edit-list-confirm"
-          onClick={handleSubmit}>
+          onClick={onSubmit}>
           {modalSubmit}
         </Button>
       </ModalFooter>
