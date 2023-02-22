@@ -30,7 +30,6 @@ export const PublicList = () => {
   const router = useRouter()
   const { slug, profile } = router.query
   const userId = profile.replace('@', '')
-  console.log({ slug, userId })
 
   const isAuthenticated = useSelector((state) => state.user?.auth)
   const saveStatus = 'unsaved'
