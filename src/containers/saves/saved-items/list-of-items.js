@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useState } from 'react'
 import { LoadMore } from './load-more'
-import { MemoizedItemCard as ItemCard } from './card'
+import { MemoizedItemCard as ItemCard } from 'connectors/items/item-card-saved'
 import { useSelector, useDispatch } from 'react-redux'
 import { loadMoreListItems } from './saved-items.state'
 import { getScrollTop } from 'common/utilities/scroll/scroll'
@@ -15,44 +15,44 @@ const itemsListStyle = css`
 
 const LIST_DIMENSIONS = {
   list: {
-    screenLargeDesktop: ['100%', 75, 1],
-    screenMediumDesktop: ['100%', 75, 1],
-    screenSmallDesktop: ['100%', 75, 1],
-    screenLargeTablet: ['100%', 75, 1],
-    screenSmallTablet: ['100%', 75, 1],
-    screenMediumTablet: ['100%', 75, 1],
-    screenTinyTablet: ['100%', 75, 1],
-    screenLargeHandset: ['100%', 75, 1],
+    screenLargeDesktop: ['100%', 72, 1],
+    screenMediumDesktop: ['100%', 72, 1],
+    screenSmallDesktop: ['100%', 72, 1],
+    screenLargeTablet: ['100%', 72, 1],
+    screenSmallTablet: ['100%', 72, 1],
+    screenMediumTablet: ['100%', 72, 1],
+    screenTinyTablet: ['100%', 72, 1],
+    screenLargeHandset: ['100%', 72, 1],
     screenMediumHandset: ['100%', 130, 1],
     screenSmallHandset: ['100%', 130, 1],
     screenTinyHandset: ['100%', 130, 1]
   },
   grid: {
-    screenLargeDesktop: [0.24, 361, 3],
-    screenMediumDesktop: [0.24, 361, 3],
-    screenSmallDesktop: [0.24, 361, 3],
-    screenLargeTablet: [0.28, 361, 3],
-    screenMediumTablet: [0.28, 361, 3],
-    screenSmallTablet: [0.28, 326, 3],
-    screenTinyTablet: ['100%', 174, 1],
-    screenLargeHandset: ['100%', 154, 1],
-    screenMediumHandset: ['100%', 154, 1],
-    screenSmallHandset: ['100%', 154, 1],
-    screenTinyHandset: ['100%', 154, 1]
+    screenLargeDesktop: [0.24, 300, 3],
+    screenMediumDesktop: [0.24, 300, 3],
+    screenSmallDesktop: [0.24, 300, 3],
+    screenLargeTablet: [0.28, 300, 3],
+    screenMediumTablet: [0.28, 300, 3],
+    screenSmallTablet: [0.28, 300, 3],
+    screenTinyTablet: [0.4, 300, 2],
+    screenLargeHandset: ['100%', 174, 1],
+    screenMediumHandset: ['100%', 174, 1],
+    screenSmallHandset: ['100%', 174, 1],
+    screenTinyHandset: ['100%', 174, 1]
   },
   detail: {
-    screenLargeDesktop: ['100%', 160, 1],
-    screenMediumDesktop: ['100%', 160, 1],
-    screenSmallDesktop: ['100%', 160, 1],
-    screenSmallerDesktop: ['100%', 160, 1],
-    screenTinyTablet: ['100%', 185, 1],
-    screenLargeTablet: ['100%', 185, 1],
-    screenMediumTablet: ['100%', 185, 1],
-    screenSmallTablet: ['100%', 185, 1],
-    screenLargeHandset: ['100%', 185, 1],
+    screenLargeDesktop: ['100%', 174, 1],
+    screenMediumDesktop: ['100%', 174, 1],
+    screenSmallDesktop: ['100%', 174, 1],
+    screenSmallerDesktop: ['100%', 174, 1],
+    screenTinyTablet: ['100%', 174, 1],
+    screenLargeTablet: ['100%', 174, 1],
+    screenMediumTablet: ['100%', 174, 1],
+    screenSmallTablet: ['100%', 174, 1],
+    screenLargeHandset: ['100%', 174, 1],
     screenMediumHandset: ['100%', 180, 1],
-    screenSmallHandset: ['100%', 185, 1],
-    screenTinyHandset: ['100%', 185, 1]
+    screenSmallHandset: ['100%', 174, 1],
+    screenTinyHandset: ['100%', 174, 1]
   }
 }
 
@@ -72,7 +72,7 @@ export const ListOfItems = () => {
   const width = typeof widthPercentage === 'string' ? widthPercentage : Math.min(Math.ceil(viewport.width*widthPercentage), 295) //prettier-ignore
 
   const itemsOnScreen = 30
-  const verticalPadding = 15
+  const verticalPadding = type === 'list' ? 10 : 25
   const horizontalPadding = 25
 
   const blockRows = pageSavedIds.length / columnCount
@@ -86,7 +86,7 @@ export const ListOfItems = () => {
     const naturalStart = Math.floor(top / (height + verticalPadding)) * columnCount
     const newIndex = Math.max(naturalStart - columnCount * 2, 0)
     if (startingIndex !== newIndex) setStartingIndex(newIndex)
-  }, [columnCount, height, startingIndex])
+  }, [columnCount, height, startingIndex, verticalPadding])
 
   /** EFFECTS
  --------------------------------------------------------------- */
@@ -127,6 +127,7 @@ export const ListOfItems = () => {
                   height={height}
                   verticalPadding={verticalPadding}
                   horizontalPadding={horizontalPadding}
+                  snowplowId="saves"
                 />
               )
             })

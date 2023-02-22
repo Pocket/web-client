@@ -1,3 +1,45 @@
+## [1.79.1](https://github.com/Pocket/web-client/compare/v1.79.0...v1.79.1) (2023-02-21)
+
+
+### Bug Fixes
+
+* **carousel:** add disabled states ([9c3068f](https://github.com/Pocket/web-client/commit/9c3068f5611a070f87f87184e1f2204bc5b52bde))
+* **home:** add analytics to carousel ([bd60155](https://github.com/Pocket/web-client/commit/bd6015578bf8300bba9e17fa79e3a7ab42ea59a4))
+* **reader:** update rec with snowplowId ([39483b2](https://github.com/Pocket/web-client/commit/39483b25bd41ba0166c0a73cf1b52ce83251c62a))
+
+# [1.79.0](https://github.com/Pocket/web-client/compare/v1.78.4...v1.79.0) (2023-02-21)
+
+
+### Bug Fixes
+
+* **cards:** vqa updates ([b22a365](https://github.com/Pocket/web-client/commit/b22a3654a64ee6238a5cb64514b762c63352e91a))
+* **collections:** add story count ([e2ea003](https://github.com/Pocket/web-client/commit/e2ea0032712638365bd8b46fa73d435018b3493b))
+* **collections:** update copy for callout ([342a52c](https://github.com/Pocket/web-client/commit/342a52cf570ad64cf0b82e8064201d6415705126))
+* **collection:** update callout language ([5444265](https://github.com/Pocket/web-client/commit/5444265779b954e7961f5dddec97857f07175e5b))
+* **home:** make carousel variable ([ef19d30](https://github.com/Pocket/web-client/commit/ef19d30964cadf4e71e4ca0fbba75ddc2c546e27))
+* **item actions:** allow more flexible display ([94a2a54](https://github.com/Pocket/web-client/commit/94a2a54e4abf7f82a37637430a1d644aa4d94ebf))
+* **item:** add image fail function  [FRONT-2128] ([8c7d821](https://github.com/Pocket/web-client/commit/8c7d82115117a08a292febfcfcceb240a05d8fcb))
+* **item:** add impression trigger back in [FRONT-2134] ([abfc898](https://github.com/Pocket/web-client/commit/abfc89869611f1a4c438255ba2b26bf58f51e2f4))
+* **item:** add node url ([eae158d](https://github.com/Pocket/web-client/commit/eae158d1cf66981c739da07f49e0ad11e63c6f9a))
+* **item:** fire correct events [FRONT-2134, FRONT-2133] ([0c2d601](https://github.com/Pocket/web-client/commit/0c2d6017660938009e2cf1cf9b4be0512e52e9c5))
+* **item:** hook up external link [FRONT-2124] ([c1c6e31](https://github.com/Pocket/web-client/commit/c1c6e318cc0f49d389823c2bd7daa3860fcb48e2))
+* **item:** make footer more flexible ([05627f6](https://github.com/Pocket/web-client/commit/05627f6c6e5ee219e58b347cfce95068a63e9295))
+* **item:** one popup at a time [FRONT-2130] ([034c6ec](https://github.com/Pocket/web-client/commit/034c6ece4ffa5bb95227bcd963591b488f43a156))
+* **item:** raize z-index of tags overlay [FRONT-2123] ([61efc15](https://github.com/Pocket/web-client/commit/61efc15d574840b61a6aa3e86fc8326a8fd7c024))
+* **item:** update layout and styles ([380d502](https://github.com/Pocket/web-client/commit/380d5027d3e74e284f1b9e40c383118319e6ec66))
+* **item:** update permanent library use [FRONT-2136, FRONT-2137] ([f003126](https://github.com/Pocket/web-client/commit/f003126f0d8b4c13eb992412ae415256efa2c9f2))
+* **item:** update storybook ([569f603](https://github.com/Pocket/web-client/commit/569f603d6be5acaa22b4cf215689be2683615ac9))
+* **item:** use standard link for permanent ([132e6bc](https://github.com/Pocket/web-client/commit/132e6bc1e4b9c24d70a1dbbd68b2bed5ba96f48a))
+* **item:** wire up selection ([bfadc21](https://github.com/Pocket/web-client/commit/bfadc21d84b557a0eefbe8715b29aef181792301))
+* **snowplow:** don’t error on error check ([5c53226](https://github.com/Pocket/web-client/commit/5c53226ada86cfd9656e34dcafabd3c5c05e6433))
+
+
+### Features
+
+* **item:** add contextual data in one place ([b166c55](https://github.com/Pocket/web-client/commit/b166c55849890a58d8dfb52b1528c0600711b833))
+* **items:** update to use new card structure ([8d12976](https://github.com/Pocket/web-client/commit/8d12976c4fa8caf09077fae647273db298a092a3))
+* **surfaces:** use new layouts ([ad56dd6](https://github.com/Pocket/web-client/commit/ad56dd64d2e9b85470afcff95295965f7af3fe75))
+
 ## [1.78.4](https://github.com/Pocket/web-client/compare/v1.78.3...v1.78.4) (2023-02-16)
 
 

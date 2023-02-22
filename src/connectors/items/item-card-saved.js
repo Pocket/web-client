@@ -1,14 +1,21 @@
 import { memo } from 'react'
-import { Card } from 'components/item-card/card'
+import { Item } from 'components/item/item'
 import { useSelector, useDispatch } from 'react-redux'
 import { setNoImage } from 'connectors/items/items-display.state'
 import { mutationBulkSelectAction } from 'connectors/items/mutations-bulk.state'
 import { mutationBulkDeSelectAction } from 'connectors/items/mutations-bulk.state'
-
 import { selectShortcutItem } from 'connectors/shortcuts/shortcuts.state'
-import { ActionsSaves } from './card-actions'
-import { ActionsBulk } from './card-actions'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { SavedActions } from 'components/item/actions/saved'
+import { EmptyCircledIcon } from 'components/icons/EmptyCircledIcon'
+import { CheckCircledIcon } from 'components/icons/CheckCircledIcon'
+import { mutationFavorite } from 'connectors/items/mutation-favorite.state'
+import { mutationUnFavorite } from 'connectors/items/mutation-favorite.state'
+import { mutationArchive } from 'connectors/items/mutation-archive.state'
+import { mutationDelete } from 'connectors/items/mutation-delete.state'
+import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
+import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
+import { shareAction } from 'connectors/items/mutation-share.state'
 
 /**
  * Article Card
@@ -17,6 +24,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
  */
 export function ItemCard({
   id,
+  snowplowId,
   position,
   type,
   columnCount,
@@ -43,8 +51,8 @@ export function ItemCard({
 
   if (!item) return null
 
-  const { isInternalItem, readUrl, externalUrl, analyticsData: passedAnalytics } = item
-  const openUrl = readUrl || externalUrl
+  const { isInternalItem, readUrl, itemUrl, externalUrl, analyticsData: passedAnalytics } = item
+  const openUrl = readUrl || externalUrl || itemUrl
   const showExcerpt = type === 'detail'
 
   const onImageFail = () => dispatch(setNoImage(id))
@@ -59,16 +67,16 @@ export function ItemCard({
 
   /** ITEM TRACKING
   --------------------------------------------------------------- */
-  const onOpen = () => dispatch(sendSnowplowEvent('saves.card.open', analyticsData))
+  const onOpen = () => dispatch(sendSnowplowEvent(`${snowplowId}.card.open`, analyticsData))
 
   const onOpenOriginalUrl = () => {
     const data = { ...analyticsData, destination: 'external' }
-    dispatch(sendSnowplowEvent('saves.card.view-original', data))
+    dispatch(sendSnowplowEvent(`${snowplowId}.view-original`, data))
   }
 
   const onItemInView = (inView) => {
     if (!impressionFired && inView) {
-      dispatch(sendSnowplowEvent('saves.card.impression', analyticsData))
+      dispatch(sendSnowplowEvent(`${snowplowId}.card.impression`, analyticsData))
     }
   }
 
@@ -82,14 +90,14 @@ export function ItemCard({
   /** ITEM SELECT ACTIONS
   --------------------------------------------------------------- */
   const shortcutSelect = () => dispatch(selectShortcutItem(id, position))
-  const ActionMenu = bulkEdit ? ActionsBulk : ActionsSaves
+  const Actions = bulkEdit ? ActionsBulk : ActionsSaves
 
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
   const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
   const { tags } = itemSaved
-  
+
   /** ITEM DIMENSIONS
   --------------------------------------------------------------- */
 
@@ -101,9 +109,10 @@ export function ItemCard({
   const left = columnCount > 1 ? columnPosition * width + horizontalSpacing : 0
   const top = rowPosition * height + veriticalSpacing
   const positionStyle = { position: 'absolute', left, top, width, height }
+  const visibleCount = type !== 'grid' ? 6 : 0
 
   return item ? (
-    <Card
+    <Item
       style={positionStyle}
       itemId={id}
       externalUrl={externalUrl}
@@ -125,6 +134,9 @@ export function ItemCard({
       bulkIsCurrent={bulkIsCurrent}
       shortcutSelected={shortcutSelected}
       shortcutSelect={shortcutSelect}
+      clamp={true}
+      type={type}
+      visibleCount={visibleCount}
       // Open Actions
       openUrl={openUrl}
       onOpen={onOpen}
@@ -133,9 +145,93 @@ export function ItemCard({
       selectBulk={selectBulk}
       onImageFail={onImageFail}
       isPremium={isPremium}
-      ActionMenu={ActionMenu}
+      Actions={Actions}
+      snowplowId={snowplowId}
     />
   ) : null
 }
 
 export const MemoizedItemCard = memo(ItemCard)
+
+function ActionsSaves({ id, snowplowId, visibleCount }) {
+  const dispatch = useDispatch()
+
+  const isPremium = useSelector((state) => state.user.premium_status === '1')
+  const itemSaved = useSelector((state) => state.itemsSaved[id])
+  const { filters, sort } = useSelector((state) => state.pageSavedInfo)
+  const position = useSelector((state) => state.pageSavedIds.indexOf(id))
+  const item = useSelector((state) => state.itemsDisplay[id])
+
+  if (!itemSaved || !item) return null
+  const { isFavorite, isArchived, tags} = itemSaved //prettier-ignore
+  const { givenUrl, permanentUrl, analyticsData: passedAnalyticsData } = item
+  const analyticsData = { ...passedAnalyticsData, position }
+
+  /** ITEM MENU ITEMS
+  --------------------------------------------------------------- */
+  const actionShare = () => {
+    dispatch(sendSnowplowEvent(`${snowplowId}.share`, analyticsData))
+    dispatch(shareAction({ item, position }))
+  }
+  const actionDelete = () => {
+    dispatch(sendSnowplowEvent(`${snowplowId}.delete`, analyticsData))
+    dispatch(mutationDelete(id))
+  }
+  const actionArchive = () => {
+    dispatch(sendSnowplowEvent(`${snowplowId}.archive`, analyticsData))
+    dispatch(mutationArchive(id))
+  }
+  const actionUpsert = () => {
+    dispatch(sendSnowplowEvent(`${snowplowId}.unarchive`, analyticsData))
+    dispatch(mutationUpsert(givenUrl, filters, sort, true))
+  }
+  const actionFavorite = () => {
+    dispatch(sendSnowplowEvent(`${snowplowId}.favorite`, analyticsData))
+    dispatch(mutationFavorite(id))
+  }
+  const actionUnFavorite = () => {
+    dispatch(sendSnowplowEvent(`${snowplowId}.un-favorite`, analyticsData))
+    dispatch(mutationUnFavorite(id))
+  }
+  const actionTag = () => {
+    dispatch(sendSnowplowEvent(`${snowplowId}.tag`, analyticsData))
+    dispatch(mutationTagItem(id, tags))
+  }
+
+  const actionPermLibOpen = () => {
+    const data = { ...analyticsData, url: permanentUrl }
+    dispatch(sendSnowplowEvent(`${snowplowId}.card.permanent-library`, data))
+  }
+
+  return (
+    <SavedActions
+      visibleCount={visibleCount}
+      isPremium={isPremium}
+      isArchived={isArchived}
+      isFavorite={isFavorite}
+      actionShare={actionShare}
+      actionDelete={actionDelete}
+      actionArchive={actionArchive}
+      actionUpsert={actionUpsert}
+      actionFavorite={actionFavorite}
+      actionUnFavorite={actionUnFavorite}
+      actionTag={actionTag}
+      actionPremLibOpen={actionPermLibOpen}
+      permanentUrl={permanentUrl}
+    />
+  )
+}
+
+export function ActionsBulk({ id }) {
+  const bulkList = useSelector((state) => state.mutationBulk.itemIds)
+  const selected = bulkList?.includes(id)
+  const BulkIcon = selected ? CheckCircledIcon : EmptyCircledIcon
+  return (
+    <div className="actions">
+      <div className="item-actions"></div>
+      <div>
+        <BulkIcon />
+      </div>
+    </div>
+  )
+}

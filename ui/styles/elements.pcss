@@ -405,6 +405,12 @@ input[type="reset"] {
     outline-offset: 3px;
   }
 
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  
   /** We don't want to outline tooltip*/
   &[data-tooltip] {
     border: 2px solid var(--color-canvas);

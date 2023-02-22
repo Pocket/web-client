@@ -46,6 +46,22 @@ export const homeActions = {
     },
     description: 'Fired when a user clicks the `Go to Saves` link in the recent saves section'
   },
+  'home.hits.carousel-forward': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a user clicks the pocket hits carousel forward button'
+  },
+  'home.hits.carousel-back': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a user clicks the pocket hits carousel back button'
+  },
   'home.corpus.save': {
     eventType: 'engagement',
     entityTypes: ['content', 'ui', 'corpusRecommendation'],
@@ -103,5 +119,5 @@ export const homeActions = {
     },
     expects: ['label'],
     description: 'Fired when a user clicks the `Exlore more *` link within each topic section'
-  },
+  }
 }

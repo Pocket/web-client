@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux'
 
 import { CallOutBuildHome } from 'components/call-out/call-out-build-home'
 import { CardPageHeader } from 'components/headers/discover-header'
-import { ItemCard } from './card'
-import { Lockup } from 'components/items-layout/list-lockup'
-import { OffsetList } from 'components/items-layout/list-offset'
+import { ItemCard } from 'connectors/items/item-card-transitional'
+import { heroGrid, stackedGrid } from 'components/item/items-layout'
+import { CallOutCollection } from 'components/call-out/call-out-collections'
 
 export default function Collections({ locale }) {
   const { t } = useTranslation()
@@ -28,43 +28,36 @@ export default function Collections({ locale }) {
     url
   }
 
-  const startingOffset = 0
-  const useHero = false
-
   return (
     <Layout title={metaData.title} metaData={metaData} canonical={canonical} forceWebView={true}>
       {!isAuthenticated && shouldRender ? <CallOutBuildHome source="collections" /> : null}
 
       <CardPageHeader title={metaData.title} subHeading={metaData.description} />
 
-      <Lockup
-        items={itemIds}
-        offset={startingOffset}
-        heroPosition="left"
-        ItemCard={ItemCard}
-        useHero={useHero}
-      />
+      <div className={heroGrid}>
+        {itemIds.slice(0, 5).map((id, index) => (
+          <ItemCard position={index} key={id} id={id} snowplowId="collection" />
+        ))}
+      </div>
 
-      <OffsetList
-        items={itemIds}
-        offset={startingOffset + 5}
-        cardShape="wide"
-        ItemCard={ItemCard}
-      />
+      <div className={stackedGrid}>
+        {itemIds.slice(5, 10).map((id, index) => (
+          <ItemCard position={4 + index} key={id} id={id} snowplowId="collection" />
+        ))}
+        <CallOutCollection />
+      </div>
 
-      <Lockup
-        items={itemIds}
-        offset={startingOffset + 10}
-        heroPosition="left"
-        ItemCard={ItemCard}
-      />
+      <div className={heroGrid}>
+        {itemIds.slice(10, 15).map((id, index) => (
+          <ItemCard position={9 + index} key={id} id={id} snowplowId="collection" />
+        ))}
+      </div>
 
-      <OffsetList
-        items={itemIds}
-        offset={startingOffset + 15}
-        cardShape="wide"
-        ItemCard={ItemCard}
-      />
+      <div className={stackedGrid}>
+        {itemIds.slice(15, 20).map((id, index) => (
+          <ItemCard position={14 + index} key={id} id={id} snowplowId="collection" />
+        ))}
+      </div>
     </Layout>
   )
 }

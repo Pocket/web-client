@@ -105,7 +105,7 @@ export function deriveCorpusItem(recommendation) {
   return deriveItemData({
     item,
     itemEnrichment: { url },
-    analyticsData: { corpusRecommendationId },
+    analyticsData: { url, corpusRecommendationId },
     passedPublisher: publisher,
     utmId: 'pocket_get_started'
   })
@@ -127,13 +127,14 @@ export function deriveRecommendation(
 
 export function deriveCollection(collection) {
   const collectionUrl = `/collections/${collection?.slug}`
-
+  const storyCount = collection?.stories?.length || null
   return deriveItem({
     item: {
       ...collection,
       status: false,
       givenUrl: `${BASE_URL}${collectionUrl}`,
       collectionUrl,
+      storyCount,
       isArticle: true
     },
     passedPublisher: 'Pocket',
@@ -194,6 +195,7 @@ export function deriveItemData({
     publisherLogo: item?.domainMetadata?.logo || false,
     externalUrl: externalUrl({ item, itemEnrichment, utmId }),
     readUrl: readUrl({ item, node, status: node?.status }),
+    itemUrl: node?.url || null,
     saveUrl: saveUrl({ item, itemEnrichment }),
     syndicatedUrl: syndicatedUrl({ item }),
     permanentUrl: permanentUrl({ item, status: node?.status }),

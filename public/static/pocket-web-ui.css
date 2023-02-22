@@ -134,6 +134,7 @@ a{color:inherit;text-decoration:underline;transition:color .1s ease-out}
 a.button,button,input[type=button],input[type=reset],input[type=submit]{background-color:var(--color-actionPrimary);border:none;border-radius:var(--borderRadius);color:var(--color-actionPrimaryText);display:inline-block;font-family:var(--fontSansSerif);font-size:1rem;line-height:110%;padding:.75rem;text-decoration:none;white-space:nowrap}
 a.button:hover,button:hover,input[type=button]:hover,input[type=reset]:hover,input[type=submit]:hover{background-color:var(--color-actionPrimaryHover);text-decoration:none}
 a.button:focus,button:focus,input[type=button]:focus,input[type=reset]:focus,input[type=submit]:focus{outline:1px auto var(--color-actionFocus);outline-offset:3px}
+a.button:disabled,button:disabled,input[type=button]:disabled,input[type=reset]:disabled,input[type=submit]:disabled{opacity:.5;pointer-events:none}
 a.button[data-tooltip],button[data-tooltip],input[type=button][data-tooltip],input[type=reset][data-tooltip],input[type=submit][data-tooltip]{border:2px solid var(--color-canvas)}
 a.button[data-tooltip]:focus,button[data-tooltip]:focus,input[type=button][data-tooltip]:focus,input[type=reset][data-tooltip]:focus,input[type=submit][data-tooltip]:focus{box-shadow:0 0 0 2px var(--color-actionFocus);outline:none}
 a.button.large,button.large,input[type=button].large,input[type=reset].large,input[type=submit].large{font-size:1.25rem;padding:1rem}
