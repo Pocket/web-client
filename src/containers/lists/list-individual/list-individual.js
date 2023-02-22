@@ -1,8 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListIndividualHeader } from 'components/headers/lists-header'
 import { EmptyIndividualLists } from 'components/empty-states/inividual-list'
+import { getIndividualListAction } from '../lists.state'
 
 const MOCK_DATA = {
   id: '1111111',
@@ -22,10 +25,15 @@ const MOCK_DATA = {
 
 export const ListIndividual = () => {
   const dispatch = useDispatch()
+  const router = useRouter()
+  const { slug: id } = router.query
 
   const userStatus = useSelector((state) => state.user.user_status)
-
   const shouldRender = userStatus !== 'pending'
+
+  useEffect(() => {
+    dispatch(getIndividualListAction(id))
+  }, [dispatch, id])
 
   // Actions
   const handlePublish = () => { }

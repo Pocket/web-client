@@ -1,10 +1,17 @@
-import { put, select, takeEvery } from 'redux-saga/effects'
+import { put, select, takeEvery, call } from 'redux-saga/effects'
+
+import { getShareableList } from 'common/api/queries/get-shareable-list'
+
+import { ITEMS_SHAREABLE_LIST_REQUEST } from 'actions'
+import { ITEMS_SHAREABLE_LIST_SUCCESS } from 'actions'
+import { ITEMS_SHAREABLE_LIST_FAILURE } from 'actions'
 
 import { ITEMS_LISTS_PAGE_SET_SORT_ORDER_REQUEST } from 'actions'
 import { ITEMS_LISTS_PAGE_SET_SORT_ORDER } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
+export const getIndividualListAction = (id) => ({ type: ITEMS_SHAREABLE_LIST_REQUEST, id })
 export const listsItemsSetSortOrder = (sortOrder) => ({type: ITEMS_LISTS_PAGE_SET_SORT_ORDER_REQUEST, sortOrder}) //prettier-ignore
 
 /** LIST SAVED REDUCERS
@@ -45,6 +52,7 @@ export const pageListsInfoReducers = (state = initialState, action) => {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const pageListsIdsSagas = [
+  takeEvery(ITEMS_SHAREABLE_LIST_REQUEST, getIndividualList),
   takeEvery(ITEMS_LISTS_PAGE_SET_SORT_ORDER_REQUEST, adjustSortOrder),
 ]
 
@@ -54,7 +62,18 @@ const getSortOrder = (state) => state.pageListsInfo?.sortOrder
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
-function* adjustSortOrder(action){
+function* getIndividualList({ id }) {
+  try {
+    const response = yield call(getShareableList, id)
+    // const { listItems, ...rest } = response
+
+    yield put({ type: ITEMS_SHAREABLE_LIST_SUCCESS })
+  } catch (error) {
+    yield put({ type: ITEMS_SHAREABLE_LIST_FAILURE, error })
+  }
+}
+
+function* adjustSortOrder(action) {
   const {sortOrder} = action
   const currentSortOrder = yield select(getSortOrder)
 
