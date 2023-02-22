@@ -14,7 +14,7 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the FB button in the Share modal'
   },
   'share.twitter': {
@@ -23,7 +23,7 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the Twitter button in the Share modal'
   },
   'share.linkedin': {
@@ -32,7 +32,7 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the LinkedIn button in the Share modal'
   },
   'share.reddit': {
@@ -41,7 +41,7 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the Reddit button in the Share modal'
   },
   'share.buffer': {
@@ -50,7 +50,7 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the Buffer button in the Share modal'
   },
   'share.copy': {
@@ -59,7 +59,7 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the Copy Link button in the Share modal'
   },
   'share.recommend': {
@@ -68,7 +68,7 @@ export const modalActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user submits a Recommendation in the Share modal'
   }
 }

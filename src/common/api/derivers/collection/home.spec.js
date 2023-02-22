@@ -95,7 +95,6 @@ describe('Collection — Page as Home Item', () => {
     expect(item.isInternalItem).toBe(true)
     expect(item.timeToRead).toBe(null)
     expect(item.authors).toBeFalsy()
-    expect(item.analyticsData.id).toBe('3664844706')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 

@@ -73,7 +73,6 @@ describe('Home', () => {
       }
     ])
 
-    expect(item.analyticsData.id).toBeFalsy()
     expect(item.analyticsData.corpusRecommendationId).toBe('19ec34d6f6d3496aad28a67c4b0f93e3')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })

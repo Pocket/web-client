@@ -19,10 +19,7 @@ export const Listen = ({ itemId, path }) => {
   const { status, url } = file
   const available = status === 'available'
 
-  const analyticsData = {
-    id: itemId,
-    url: path
-  }
+  const analyticsData = { url: path }
 
   // Snowplow Events
   const playEvent = () => dispatch(sendSnowplowEvent('listen.play', analyticsData))

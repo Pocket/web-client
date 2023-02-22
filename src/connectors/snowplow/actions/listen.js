@@ -5,7 +5,7 @@ export const listenActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['url']
   },
   'listen.pause': {
     eventType: 'engagement',
@@ -13,7 +13,7 @@ export const listenActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['url']
   },
   'listen.rate': {
     eventType: 'engagement',
@@ -21,7 +21,7 @@ export const listenActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'value']
+    expects: ['url', 'value']
   },
   'listen.end': {
     eventType: 'engagement',
@@ -29,7 +29,7 @@ export const listenActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url']
+    expects: ['url']
   },
   'listen.signup': {
     eventType: 'engagement',

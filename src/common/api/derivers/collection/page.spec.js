@@ -148,7 +148,6 @@ describe('Collection — Page', () => {
           'https://s3.amazonaws.com/pocket-collectionapi-prod-images/51ebddac-b680-4162-bf8c-78a48dbd4a61.png'
       }
     ])
-    expect(item.analyticsData.id).toBeFalsy()
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 

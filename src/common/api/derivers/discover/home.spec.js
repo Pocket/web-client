@@ -124,7 +124,6 @@ describe('Home', () => {
     expect(item.timeToRead).toBe(null)
     expect(item.authors).toBeFalsy()
 
-    expect(item.analyticsData.id).toBe('3365323914')
     expect(item.analyticsData.recommendationId).toBe('RecommendationAPI/3365323914')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
 

@@ -103,14 +103,14 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const saveAction = (savedUrl, value) => {
     if (saveStatus === 'saved') dispatch(unSaveArticleItem(itemId))
     if (saveStatus !== 'saved') {
-      const analyticsData = { id: itemId, url: savedUrl, value }
+      const analyticsData = { url: savedUrl, value }
       dispatch(sendSnowplowEvent('syndicated.article.save', analyticsData))
       dispatch(saveArticleItem(savedUrl))
     }
   }
 
   const shareAction = (platform) => {
-    const analyticsData = { id: itemId, url }
+    const analyticsData = { url }
     dispatch(sendSnowplowEvent(`syndicated.share.${platform}`, analyticsData))
   }
 

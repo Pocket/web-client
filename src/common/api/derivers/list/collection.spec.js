@@ -123,7 +123,6 @@ describe('Saves - Collection', () => {
         url: ''
       }
     ])
-    expect(item.analyticsData.id).toBe('3453456445')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 

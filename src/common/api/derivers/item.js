@@ -205,7 +205,6 @@ export function deriveItemData({
     isInternalItem: isInternalItem({ item, node, itemEnrichment, status: node?.status }),
     fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
-      id: item?.itemId || node?.id || false,
       url: analyticsUrl({ node, item, itemEnrichment }),
       ...analyticsData
     }
