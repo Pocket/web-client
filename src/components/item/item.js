@@ -104,7 +104,6 @@ export const Item = (props) => {
     if (notSelectedAndActive) linkRef.current.blur()
     if (selectedAndNotActive) {
       linkRef.current.focus()
-      footerRef.current.scrollIntoView({ block: 'center', behavior: 'smooth' })
     }
   }, [shortcutSelected, linkRef])
 
