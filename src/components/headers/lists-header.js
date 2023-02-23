@@ -1,16 +1,16 @@
-import Link from 'next/link'
 import { css, cx } from 'linaria'
 import { savesHeaderStyle } from './saves-header'
 import { ListSort } from 'components/list-sort/list-sort'
 import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
 import { FiltersAltIcon } from 'components/icons/FiltersAltIcon'
-import { LockIcon } from 'components/icons/LockIcon'
-import { GlobeIcon } from 'components/icons/GlobeIcon'
 import { Button } from 'components/buttons/button'
 import Avatar from 'components/avatar/avatar'
 import { SaveListButton } from 'components/content-saving/save-list'
+import { ListStatus } from 'components/shareable-lists/list-status'
 
 const listHeaderStyles = css`
+  padding-bottom: 22px;
+
   .headline {
     h1 {
       margin-bottom: 4px;
@@ -21,21 +21,6 @@ const listHeaderStyles = css`
       padding-right: 16px;
       font-size: 14px;
       line-height: 20px;
-    }
-
-    .chip {
-      display: inline-block;
-      padding: 2px 8px;
-      margin-bottom: 22px;
-      font-size: 14px;
-      background: #F9FAFB;
-      color: var(--color-textSecondary);
-      border-radius: 100px;
-
-      &.public {
-        background: var(--color-teal100);
-        color: var(--color-actionPrimary);
-      }
     }
 
     a {
@@ -103,7 +88,9 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
       </h1>
 
       <div className="create-sort">
-        <Button onClick={handleCreateList} size="tiny"><PlaylistAddIcon /> Create List</Button>
+        <Button onClick={handleCreateList} size="tiny">
+          <PlaylistAddIcon /> Create List
+        </Button>
         <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
       </div>
     </header>
@@ -130,24 +117,23 @@ export const ListIndividualHeader = ({
           {title}
         </h1>
         <p className="description">{description}</p>
-        {isPrivate ? (
-          <div className="chip private"><LockIcon /> Private</div>
-        ) : (
-          <>
-            <div className="chip public"><GlobeIcon /> Public</div>{' '}
-            <Link href={url}>{`https://getpocket.com${url}`}</Link>
-          </>
-        )}
+        <ListStatus status={status} url={url} />
       </div>
 
       <div className="create-sort">
         {isPrivate ? (
-          <Button onClick={handlePublish} size="tiny">Make list public</Button>
+          <Button onClick={handlePublish} size="tiny">
+            Make list public
+          </Button>
         ) : (
-          <Button onClick={handleShare} size="tiny">Share list</Button>
+          <Button onClick={handleShare} size="tiny">
+            Share list
+          </Button>
         )}
 
-        <button onClick={handleEdit} className="filter"><FiltersAltIcon /></button>
+        <button onClick={handleEdit} className="filter">
+          <FiltersAltIcon />
+        </button>
       </div>
     </header>
   )
