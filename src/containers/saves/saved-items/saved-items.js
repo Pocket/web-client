@@ -78,13 +78,19 @@ export function filterSelector(subset, filter) {
 export const SavedItems = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const sortOrder = useSelector((state) => state.pageSavedInfo.sortOrders[state.pageSavedInfo.section] || 'DESC')
-  const sortBy = useSelector((state) => state.pageSavedInfo.sortBy)
 
   const { subset: sub = 'active', filter: propFilter } = props
   const { tag, filter: queryFilter, query: searchTerm } = router.query
   const subset = tag ? 'tag' : searchTerm ? 'search' : sub
   const filter = tag ? queryFilter : propFilter
+  const selector = tag ? tag : sub
+  const section = filter ? selector + filter : selector
+
+  // Use 'section' derived from props bc there is a transient state
+  // where state.pageSavedInfo.section is stale
+  const sortOrder = useSelector((state) => state.pageSavedInfo.sortOrders[section])
+  const sortBy = useSelector((state) => state.pageSavedInfo.sortBy)
+
 
   // Get items based on location
   useEffect(() => {
