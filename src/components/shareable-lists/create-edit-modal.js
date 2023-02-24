@@ -19,14 +19,21 @@ export const CreateEditShareableList = ({
   const [listNameValue, setListNameValue] = useState(listName)
   const [descriptionValue, setDescriptionValue] = useState(listDescription)
 
-  const onClose = () => {
-    handleClose()
+  const reset = () => {
     // reset inputs on close
     setListNameValue(listName)
     setDescriptionValue(listDescription)
   }
 
-  const onSubmit = () => handleSubmit(listNameValue, descriptionValue)
+  const onClose = () => {
+    handleClose()
+    reset()
+  }
+
+  const onSubmit = () => {
+    handleSubmit(listNameValue, descriptionValue)
+    reset()
+  }
 
   const onNameChange = (e) => {
     setListNameValue(e.target.value)
