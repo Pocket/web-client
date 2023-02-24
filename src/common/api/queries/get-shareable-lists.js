@@ -10,6 +10,7 @@ const getShareableListsQuery = gql`
       slug
       createdAt
       moderationStatus
+      externalId
     }
   }
 `
