@@ -14,6 +14,7 @@ import { createUiEntity } from 'connectors/snowplow/entities'
 import { createRecommendationEntity } from 'connectors/snowplow/entities'
 import { createCorpusRecommendationEntity } from 'connectors/snowplow/entities'
 import { createReportEntity } from 'connectors/snowplow/entities'
+import { createShareableListItemEntity } from 'connectors/snowplow/entities'
 import { createShareableListEntity } from 'connectors/snowplow/entities'
 import { createSlateEntity } from 'connectors/snowplow/entities'
 import { createSlateLineupEntity } from 'connectors/snowplow/entities'
@@ -129,6 +130,7 @@ const entityBuilders = {
   recommendation: createRecommendationEntity,
   corpusRecommendation: createCorpusRecommendationEntity,
   report: createReportEntity,
+  shareableListItem: createShareableListItemEntity,
   shareableList: createShareableListEntity,
   slate: createSlateEntity,
   slateLineup: createSlateLineupEntity
@@ -153,6 +155,7 @@ const expectationTypes = {
   displayName: 'string',
   description: 'string',
   corpusRecommendationId: 'string',
+  shareableListItemExternalId: 'string',
   shareableListExternalId: 'string',
   userId: 'integer',
   slug: 'string',
@@ -162,7 +165,15 @@ const expectationTypes = {
   moderatedBy: 'string',
   moderationReason: 'string',
   createdAt: 'integer',
-  updatedAt: 'integer'
+  updatedAt: 'integer',
+  itemId: 'integer',
+  corpusItemId: 'string',
+  syndicatedArticleId: 'string',
+  givenUrl: 'string',
+  excerpt: 'string',
+  imageUrl: 'string',
+  authors: 'array',
+  sortOrder: 'integer'
 }
 
 export function validateSnowplowExpectations({ identifier, expects, data }) {

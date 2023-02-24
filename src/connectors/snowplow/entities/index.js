@@ -31,6 +31,7 @@ export { default as createNewsletterSubscriberEntity } from './newsletter-subscr
 export { default as createRecommendationEntity } from './recommendation'
 export { default as createCorpusRecommendationEntity } from './corpus-recommendation'
 export { default as createReportEntity } from './report'
+export { default as createShareableListItemEntity } from './shareable-list-item'
 export { default as createShareableListEntity } from './shareable-list'
 export { default as createSlateLineupEntity } from './slate-lineup'
 export { default as createSlateEntity } from './slate'
