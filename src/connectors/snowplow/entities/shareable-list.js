@@ -11,7 +11,7 @@ const SHAREABLE_LIST_SCHEMA_URL = getSchemaUri('shareable_list', '1-0-1')
  * Entity that describes the concept list that can be created then shared with other users regardless of logged-in status
  *
  * @param shareableListExternalId {string} @required - The unique backend identifier for a shared list
- * @param userId {integer} @required // maybe??? - The backend identifier for the Pocket user account that created this shareable list
+ * @param userId {integer} @required (maybe???) - The backend identifier for the Pocket user account that created this shareable list
  * @param slug {string} @required - The slug for the shareable list
  * @param title {string} @required - The title of the shareable list
  * @param description {string} - The description of the shareable list (filled in by the user creating the list)
