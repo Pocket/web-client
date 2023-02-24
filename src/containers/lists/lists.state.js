@@ -6,6 +6,7 @@ import { ITEMS_LISTS_PAGE_SET_SORT_ORDER_REQUEST } from 'actions'
 import { ITEMS_LISTS_PAGE_SET_SORT_ORDER } from 'actions'
 import { USER_SHAREABLE_LISTS_REQUEST } from 'actions'
 import { USER_SHAREABLE_LISTS_REQUEST_SUCCESS } from 'actions'
+import { USER_SHAREABLE_LISTS_REQUEST_FAILURE } from 'actions'
 import { ITEMS_CREATE_LIST_SUCCESS } from 'actions'
 
 /** ACTIONS
@@ -90,8 +91,11 @@ function* adjustSortOrder(action) {
 }
 
 function* userShareableListsRequest() {
-  const response = yield getShareableLists()
-  const userShareableLists = response
+  const userShareableLists = yield getShareableLists()
 
-  yield put({ type: USER_SHAREABLE_LISTS_REQUEST_SUCCESS, userShareableLists })
+  try {
+    return yield put({ type: USER_SHAREABLE_LISTS_REQUEST_SUCCESS, userShareableLists })
+  } catch {
+    return yield put({ type: USER_SHAREABLE_LISTS_REQUEST_FAILURE })
+  }
 }
