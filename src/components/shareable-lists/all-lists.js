@@ -14,7 +14,6 @@ export const AllLists = ({ shareableLists }) => {
             openUrl={`/lists/${list.externalId}`}
             onItemInView={() => {}} // impression event here
             isInternalItem={true}
-            storyCount={3} // mocked data
             listStatus={list.status}
           />
         </div>
