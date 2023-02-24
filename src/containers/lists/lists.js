@@ -9,6 +9,7 @@ import { mutateListAction } from 'connectors/items/mutation-lists.state'
 import { CreateListModal } from 'connectors/confirm/create-list'
 import { getUserShareableLists } from './lists.state'
 import { AllLists } from 'components/shareable-lists/all-lists'
+import { LoaderCentered } from 'components/loader/loader'
 
 export const Lists = () => {
   const dispatch = useDispatch()
@@ -16,10 +17,11 @@ export const Lists = () => {
   const userShareableLists = useSelector((state) => state.pageListsInfo.userShareableLists)
   const userStatus = useSelector((state) => state.user.user_status)
   const sortOrder = useSelector((state) => state.pageListsInfo.sortOrder)
+  const loading = useSelector((state) => state.pageListsInfo.loading)
 
   const shouldRender = userStatus !== 'pending'
 
-  const hasLists = userShareableLists?.length > 0
+  const showLists = userShareableLists?.length > 0 && !loading
 
   useEffect(() => {
     dispatch(getUserShareableLists())
@@ -43,7 +45,9 @@ export const Lists = () => {
             handleOldest={handleOldest}
           />
 
-          {hasLists ? <AllLists shareableLists={userShareableLists} /> : <EmptyAllLists />}
+          {loading ? <LoaderCentered /> : null}
+
+          {showLists ? <AllLists shareableLists={userShareableLists} /> : <EmptyAllLists />}
         </main>
       ) : null}
 

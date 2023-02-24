@@ -4,7 +4,9 @@ import { getShareableLists } from 'common/api/queries/get-shareable-lists'
 
 import { ITEMS_LISTS_PAGE_SET_SORT_ORDER_REQUEST } from 'actions'
 import { ITEMS_LISTS_PAGE_SET_SORT_ORDER } from 'actions'
-import { USER_SHAREABLE_LISTS_REQUEST, USER_SHAREABLE_LISTS_REQUEST_SUCCESS } from 'actions'
+import { USER_SHAREABLE_LISTS_REQUEST } from 'actions'
+import { USER_SHAREABLE_LISTS_REQUEST_SUCCESS } from 'actions'
+import { ITEMS_CREATE_LIST_SUCCESS } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -31,7 +33,8 @@ const initialState = {
   count: 30,
   loading: true,
   totalCount: 0,
-  error: false
+  error: false,
+  userShareableLists: false
 }
 
 export const pageListsInfoReducers = (state = initialState, action) => {
@@ -41,11 +44,20 @@ export const pageListsInfoReducers = (state = initialState, action) => {
       return { ...state, sortOrder }
     }
 
+    case ITEMS_CREATE_LIST_SUCCESS: {
+      const { newList } = action
+      return {
+        ...state,
+        userShareableLists: [newList, ...state.userShareableLists]
+      }
+    }
+
     case USER_SHAREABLE_LISTS_REQUEST_SUCCESS: {
       const { userShareableLists } = action
       return {
         ...state,
-        userShareableLists
+        userShareableLists,
+        loading: false
       }
     }
 
