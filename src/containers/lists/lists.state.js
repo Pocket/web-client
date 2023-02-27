@@ -91,9 +91,8 @@ function* adjustSortOrder(action) {
 }
 
 function* userShareableListsRequest() {
-  const userShareableLists = yield getShareableLists()
-
   try {
+    const userShareableLists = yield getShareableLists()
     return yield put({ type: USER_SHAREABLE_LISTS_REQUEST_SUCCESS, userShareableLists })
   } catch {
     return yield put({ type: USER_SHAREABLE_LISTS_REQUEST_FAILURE })
