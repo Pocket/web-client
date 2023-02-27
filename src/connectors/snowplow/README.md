@@ -263,7 +263,7 @@ Occasionally we'll need to add new `events` or `entities`. This happens when we 
 
 ### Adding a New Event/Entity
 
-For this walkthrough let's imagine that we need to include a new `ad` entity in the application. First we'd add a new file named `ad.js` in the [events](/events/) folder.
+For this walkthrough let's imagine that we need to include a new `ad` entity in the application. First we'd add a new file named `ad.js` in the [entities](/entities/) folder.
 
 Next, we'd visit the [defined schema](https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/dcfe0061541a1b0bc50def4b4ec18fbaebb4ec095724f6bd5a75881749a84acf) for this entity. Take careful note of all the `properties` for this schema, and make note of which ones are required vs optional. As of the time of writing this document all parameters for this entity are required.
 
@@ -319,7 +319,7 @@ export const createAdEntity = ({ adId, zoneId, siteId }) => ({
 })
 ```
 
-If you are creating an event or entity with optional values, the object in the data property should be wrapped with our `getObjectWithValidKeysOnly` utility. This ensures that no empty values are passed into Snowplow which will result in an error. You can take a look at our [content entity](/entities/content.js) for an example.
+If you are creating an event or entity with optional values, the object in the data property should be wrapped with our `getObjectWithValidKeysOnly` utility. This ensures that no empty values are passed into Snowplow which will result in an error. You can take a look at our [newsletter subscriber](/entities/newsletter-subscriber.js) for an example.
 
 Finally at the end of the file we need to export the `createAdEntity` function.
 
