@@ -1,3 +1,10 @@
+## [1.79.7](https://github.com/Pocket/web-client/compare/v1.79.6...v1.79.7) (2023-02-27)
+
+
+### Bug Fixes
+
+* **snowplow:** update readme based on updates to entities ([c5f254c](https://github.com/Pocket/web-client/commit/c5f254c1d629ed0014614fa1fe8ee5c4f17e9893))
+
 ## [1.79.6](https://github.com/Pocket/web-client/compare/v1.79.5...v1.79.6) (2023-02-23)
 
 
