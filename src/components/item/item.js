@@ -129,6 +129,7 @@ export const Item = (props) => {
           image_src={itemImage}
           title={title}
           id={itemId}
+          onClick={onOpen}
           onImageFail={onImageFail}
           openInNewTab={openInNewTab}
           openUrl={openUrl}
