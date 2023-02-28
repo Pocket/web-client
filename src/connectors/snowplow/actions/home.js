@@ -16,7 +16,7 @@ export const homeActions = {
       component: 'ui',
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a card in the `Recent Saves` section scrolls into view'
   },
   'home.recent.open': {
@@ -35,7 +35,7 @@ export const homeActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position', 'destination'],
+    expects: ['url', 'position', 'destination'],
     description: 'Fired when a user clicks the publisher in a card in the `Recent Saves` section'
   },
   'home.recent.view-saves': {

@@ -131,7 +131,6 @@ describe('Syndicated', () => {
         id: '369989'
       }
     ])
-    expect(item.analyticsData.id).toBe('2418914954')
     expect(item.analyticsData.recommendationId).toBe('RecommendationAPI/2418914954')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
 

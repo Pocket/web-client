@@ -6,7 +6,7 @@ export const syndicatedArticleActions = {
       engagementType: 'save',
       uiType: 'button'
     },
-    expects: ['id', 'url', 'value'],
+    expects: ['url', 'value'],
     description:
       'Fired when a user clicks the `Save` button, value is one of three: save-story-top, save-story-side, or save-story-bottom'
   },
@@ -16,7 +16,7 @@ export const syndicatedArticleActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url'],
+    expects: ['url'],
     description: 'Fired when a user clicks the FB button on a syndicated article'
   },
   'syndicated.share.twitter': {
@@ -25,7 +25,7 @@ export const syndicatedArticleActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url'],
+    expects: ['url'],
     description: 'Fired when a user clicks the Twitter button on a syndicated article'
   },
   'syndicated.share.linkedin': {
@@ -34,7 +34,7 @@ export const syndicatedArticleActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url'],
+    expects: ['url'],
     description: 'Fired when a user clicks the LinkedIn button on a syndicated article'
   },
   'syndicated.share.reddit': {
@@ -43,7 +43,7 @@ export const syndicatedArticleActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url'],
+    expects: ['url'],
     description: 'Fired when a user clicks the Reddit button on a syndicated article'
   },
   'syndicated.share.email': {
@@ -52,7 +52,7 @@ export const syndicatedArticleActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url'],
+    expects: ['url'],
     description: 'Fired when a user clicks the email button on a syndicated article'
   },
   'syndicated.topic.click': {

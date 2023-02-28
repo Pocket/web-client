@@ -1,3 +1,54 @@
+## [1.79.9](https://github.com/Pocket/web-client/compare/v1.79.8...v1.79.9) (2023-02-28)
+
+
+### Bug Fixes
+
+* **all lists:** update state to respond to ITEMS_CREATE_LIST_SUCCESS ([6709a80](https://github.com/Pocket/web-client/commit/6709a80d058158795cc0ccf7824e1ff1bf97218e))
+* **all-lists:** start wiring up all lists page ([a96d031](https://github.com/Pocket/web-client/commit/a96d031159e5cbca51d8346468f61bc0b5432564))
+* **all-lists:** use item component to show lists ([24cbdbe](https://github.com/Pocket/web-client/commit/24cbdbe2cdcad510fc51c338c1be489b79c81a73))
+* **AllLists:** remove story count ([06bb488](https://github.com/Pocket/web-client/commit/06bb4886c81654057c89ba23f264403a7d0b74e7))
+* **CreateEditShareableList:** reset inputs on submit ([9743363](https://github.com/Pocket/web-client/commit/9743363e4eb79358f6f7eefab581da4b8faac10f))
+* **elements.pcss:** remove button + button from margin-right styling ([852b571](https://github.com/Pocket/web-client/commit/852b571600d0caf6517b941ec77ca406cc268940))
+* **getShareableListsQuery:** add externalId ([5475cb9](https://github.com/Pocket/web-client/commit/5475cb9fe593991c5b9d8889173bb8a6dd943579))
+* **items layout:** add new stackedGridNoAside ([7fd1c91](https://github.com/Pocket/web-client/commit/7fd1c918955a8435149c9d834f6b76a86ce7a519))
+* **lists state:** add USER_SHAREABLE_LISTS_REQUEST_FAILURE ([3cdf958](https://github.com/Pocket/web-client/commit/3cdf958f1031c4018c14444126e7636730436bb8))
+* **lists state:** move getShareableLists API call into try block ([5238d24](https://github.com/Pocket/web-client/commit/5238d2498836f0584131f1bb34f8e67d6fb8d7f3))
+
+## [1.79.8](https://github.com/Pocket/web-client/compare/v1.79.7...v1.79.8) (2023-02-27)
+
+
+### Bug Fixes
+
+* **footer:** change de pocket hits signup link to eng ([af4b978](https://github.com/Pocket/web-client/commit/af4b978957b9c40b06ccdca2627f982f967e2391))
+
+## [1.79.7](https://github.com/Pocket/web-client/compare/v1.79.6...v1.79.7) (2023-02-27)
+
+
+### Bug Fixes
+
+* **snowplow:** update readme based on updates to entities ([c5f254c](https://github.com/Pocket/web-client/commit/c5f254c1d629ed0014614fa1fe8ee5c4f17e9893))
+
+## [1.79.6](https://github.com/Pocket/web-client/compare/v1.79.5...v1.79.6) (2023-02-23)
+
+
+### Bug Fixes
+
+* **saves:** update banner copy to say Collections instead of lists ([24cb882](https://github.com/Pocket/web-client/commit/24cb8823ba81abfac50249e05d71babc576c5223))
+
+## [1.79.5](https://github.com/Pocket/web-client/compare/v1.79.4...v1.79.5) (2023-02-23)
+
+
+### Bug Fixes
+
+* **item:** remove scroll into view on focus [DIS-381] ([e065b67](https://github.com/Pocket/web-client/commit/e065b67df4804af77d02a759bb7211d51eaa50f0))
+
+## [1.79.4](https://github.com/Pocket/web-client/compare/v1.79.3...v1.79.4) (2023-02-23)
+
+
+### Bug Fixes
+
+* **snowplow:** remove item id from content entities ([5de05fb](https://github.com/Pocket/web-client/commit/5de05fb47e87900e224cd6b1036c1278934e5afd))
+
 ## [1.79.3](https://github.com/Pocket/web-client/compare/v1.79.2...v1.79.3) (2023-02-22)
 
 

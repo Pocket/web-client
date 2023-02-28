@@ -120,7 +120,6 @@ describe('Saves - Videos', () => {
         url: 'https://www.youtube.com/channel/UCpJ9wxRuDnq1DxMDoKHrJlg'
       }
     ])
-    expect(item.analyticsData.id).toBe('2815325547')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 

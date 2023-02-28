@@ -242,6 +242,14 @@ export const stackedGrid = css`
   }
 `
 
+export const stackedGridNoAside = css`
+  padding: 1rem 0;
+
+  article {
+    grid-column: span 12;
+  }
+`
+
 /**
  * Recent Saves
  * These are small cards with no action to take (other than link actions)

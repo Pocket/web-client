@@ -37,7 +37,6 @@ export function ItemCard({
 
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
-    id,
     position,
     destination: !openExternal ? 'internal' : 'external',
     ...item?.analyticsData
