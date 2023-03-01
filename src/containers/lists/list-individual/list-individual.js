@@ -6,7 +6,7 @@ import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListIndividualHeader } from 'components/headers/lists-header'
 import { EmptyIndividualLists } from 'components/empty-states/inividual-list'
 import { getIndividualListAction } from './list-individual.state'
-import { IndividualListItem } from 'components/shareable-lists/individual-list-item'
+import { IndividualListItem } from 'components/lists/individual-list-item'
 
 const MOCK_DATA = {
   userId: 'luigimario',
