@@ -8,7 +8,7 @@ import { listsItemsSetSortOrder } from './lists.state'
 import { mutateListAction } from 'connectors/lists/mutation-create.state'
 import { CreateListModal } from 'connectors/confirm/create-list'
 import { getUserShareableLists } from './lists.state'
-import { AllLists } from 'components/shareable-lists/all-lists'
+import { ListCard } from 'connectors/lists/list-card'
 import { LoaderCentered } from 'components/loader/loader'
 
 export const Lists = () => {
@@ -21,7 +21,7 @@ export const Lists = () => {
 
   const shouldRender = userStatus !== 'pending'
 
-  const showLists = userShareableLists?.length > 0 && !loading
+  const showLists = listIds?.length > 0 && !loading
 
   useEffect(() => {
     dispatch(getUserShareableLists())
@@ -47,7 +47,7 @@ export const Lists = () => {
 
           {loading ? <LoaderCentered /> : null}
 
-          {showLists ? <AllLists shareableLists={userShareableLists} /> : <EmptyAllLists />}
+          {showLists ? listIds.map((id) => <ListCard key={id} id={id} />) : <EmptyAllLists />}
         </main>
       ) : null}
 
