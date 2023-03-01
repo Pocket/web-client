@@ -24,6 +24,11 @@ export const pageListsIdsReducers = (state = [], action) => {
       return []
     }
 
+    case ITEMS_CREATE_LIST_SUCCESS: {
+      const { externalId } = action
+      return [externalId, ...state]
+    }
+
     case SHAREABLE_LIST_DELETE_SUCCESS:
     case USER_SHAREABLE_LISTS_REQUEST_SUCCESS: {
       const { externalIds } = action
@@ -54,10 +59,10 @@ export const pageListsInfoReducers = (state = initialState, action) => {
     }
 
     case ITEMS_CREATE_LIST_SUCCESS: {
-      const { newList } = action
+      const { newList, externalId } = action
       return {
         ...state,
-        userShareableLists: [newList, ...state.userShareableLists]
+        [externalId]: newList
       }
     }
 

@@ -56,7 +56,8 @@ function* itemsCreateList() {
   try {
     const { title, description } = confirm
     const newList = yield call(createShareableList, { title, description })
-    return yield put({ type: ITEMS_CREATE_LIST_SUCCESS, newList })
+    const externalId = newList.externalId
+    return yield put({ type: ITEMS_CREATE_LIST_SUCCESS, newList, externalId })
   } catch {
     return yield put({ type: ITEMS_CREATE_LIST_FAILURE })
   }
