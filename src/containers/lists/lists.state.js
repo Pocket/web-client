@@ -8,6 +8,7 @@ import { USER_SHAREABLE_LISTS_REQUEST } from 'actions'
 import { USER_SHAREABLE_LISTS_REQUEST_SUCCESS } from 'actions'
 import { USER_SHAREABLE_LISTS_REQUEST_FAILURE } from 'actions'
 import { ITEMS_CREATE_LIST_SUCCESS } from 'actions'
+import { SHAREABLE_LIST_DELETE_SUCCESS } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -59,6 +60,14 @@ export const pageListsInfoReducers = (state = initialState, action) => {
         ...state,
         userShareableLists,
         loading: false
+      }
+    }
+
+    case SHAREABLE_LIST_DELETE_SUCCESS: {
+      const { deletedListId, userShareableLists } = action
+      return {
+        ...state,
+        userShareableLists: userShareableLists.filter(deletedListId)
       }
     }
 

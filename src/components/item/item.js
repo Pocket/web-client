@@ -62,6 +62,7 @@ export const Item = (props) => {
     Actions,
     shortcutSelect,
     selectBulk,
+    onListDelete,
 
     // Tracking
     onItemInView,
@@ -209,6 +210,7 @@ export const Item = (props) => {
               isArchive={isArchive}
               isPremium={isPremium}
               saveStatus={saveStatus}
+              deleteAction={onListDelete}
             />
           ) : null}
         </div>

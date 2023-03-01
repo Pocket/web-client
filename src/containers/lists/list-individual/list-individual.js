@@ -18,7 +18,7 @@ export const ListIndividual = () => {
   const router = useRouter()
   const { slug: id } = router.query
 
-  const list = useSelector((state) => state.pageIndividualLists.individualLists[id])
+  const list = useSelector((state) => state.pageIndividualLists?.individualLists[id])
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
 
@@ -31,9 +31,9 @@ export const ListIndividual = () => {
   const showLists = listItems?.length
 
   // Actions
-  const handlePublish = () => { }
-  const handleShare = () => { }
-  const handleEdit = () => { }
+  const handlePublish = () => {}
+  const handleShare = () => {}
+  const handleEdit = () => {}
 
   return (
     <Layout>
@@ -52,12 +52,7 @@ export const ListIndividual = () => {
             handleEdit={handleEdit}
           />
 
-          {showLists ? (
-            <IndividualListItem listItems={listItems} />
-          ) : (
-            <EmptyIndividualLists />
-          )}
-
+          {showLists ? <IndividualListItem listItems={listItems} /> : <EmptyIndividualLists />}
         </main>
       ) : null}
     </Layout>

@@ -10,7 +10,11 @@ import { ITEMS_CREATE_LIST_SUCCESS } from 'actions'
 /** ACTIONS
  --------------------------------------------------------------- */
 export const mutateListAction = () => ({ type: ITEMS_CREATE_LIST_REQUEST })
-export const mutateListConfirm = ({ title, description }) => ({ type: ITEMS_CREATE_LIST_CONFIRM, title, description })
+export const mutateListConfirm = ({ title, description }) => ({
+  type: ITEMS_CREATE_LIST_CONFIRM,
+  title,
+  description
+})
 export const mutateListCancel = () => ({ type: ITEMS_CREATE_LIST_CANCEL })
 
 /** REDUCERS
@@ -36,9 +40,7 @@ export const mutationListCreateReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-export const mutationListCreateSagas = [
-  takeLatest(ITEMS_CREATE_LIST_REQUEST, itemsCreateList)
-]
+export const mutationListCreateSagas = [takeLatest(ITEMS_CREATE_LIST_REQUEST, itemsCreateList)]
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
