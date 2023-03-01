@@ -11,10 +11,6 @@ export const mutateListDelete = (id) => ({
   id
 })
 
-/** REDUCERS
- --------------------------------------------------------------- */
-// maybe
-
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const mutationListDeleteSagas = [takeEvery(SHAREABLE_LIST_DELETE_REQUEST, deleteList)]
