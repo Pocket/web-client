@@ -6,6 +6,7 @@ import { ListsAllHeader } from 'components/headers/lists-header'
 import { EmptyAllLists } from 'components/empty-states/all-lists'
 import { listsItemsSetSortOrder } from './lists.state'
 import { mutateListAction } from 'connectors/lists/mutation-create.state'
+
 import { CreateListModal } from 'connectors/confirm/create-list'
 import { getUserShareableLists } from './lists.state'
 import { ListCard } from 'connectors/lists/list-card'
@@ -14,7 +15,7 @@ import { LoaderCentered } from 'components/loader/loader'
 export const Lists = () => {
   const dispatch = useDispatch()
 
-  const userShareableLists = useSelector((state) => state.pageListsInfo.userShareableLists)
+  const listIds = useSelector((state) => state.pageListsIds)
   const userStatus = useSelector((state) => state.user.user_status)
   const sortOrder = useSelector((state) => state.pageListsInfo.sortOrder)
   const loading = useSelector((state) => state.pageListsInfo.loading)

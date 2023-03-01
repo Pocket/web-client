@@ -9,6 +9,7 @@ import { USER_SHAREABLE_LISTS_REQUEST_SUCCESS } from 'actions'
 import { USER_SHAREABLE_LISTS_REQUEST_FAILURE } from 'actions'
 import { ITEMS_CREATE_LIST_SUCCESS } from 'actions'
 import { SHAREABLE_LIST_DELETE_SUCCESS } from 'actions'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -21,6 +22,12 @@ export const pageListsIdsReducers = (state = [], action) => {
   switch (action.type) {
     case ITEMS_LISTS_PAGE_SET_SORT_ORDER: {
       return []
+    }
+
+    case SHAREABLE_LIST_DELETE_SUCCESS:
+    case USER_SHAREABLE_LISTS_REQUEST_SUCCESS: {
+      const { externalIds } = action
+      return [...externalIds]
     }
 
     default:
@@ -55,19 +62,11 @@ export const pageListsInfoReducers = (state = initialState, action) => {
     }
 
     case USER_SHAREABLE_LISTS_REQUEST_SUCCESS: {
-      const { userShareableLists } = action
+      const { allLists } = action
       return {
         ...state,
-        userShareableLists,
+        ...allLists,
         loading: false
-      }
-    }
-
-    case SHAREABLE_LIST_DELETE_SUCCESS: {
-      const { deletedListId, userShareableLists } = action
-      return {
-        ...state,
-        userShareableLists: userShareableLists.filter(deletedListId)
       }
     }
 
@@ -102,7 +101,14 @@ function* adjustSortOrder(action) {
 function* userShareableListsRequest() {
   try {
     const userShareableLists = yield getShareableLists()
-    return yield put({ type: USER_SHAREABLE_LISTS_REQUEST_SUCCESS, userShareableLists })
+    const externalIds = userShareableLists.map((list) => list.externalId)
+    const allLists = arrayToObject(userShareableLists, 'externalId')
+
+    return yield put({
+      type: USER_SHAREABLE_LISTS_REQUEST_SUCCESS,
+      allLists,
+      externalIds
+    })
   } catch {
     return yield put({ type: USER_SHAREABLE_LISTS_REQUEST_FAILURE })
   }

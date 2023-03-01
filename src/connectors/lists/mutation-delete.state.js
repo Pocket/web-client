@@ -1,4 +1,4 @@
-import { put, takeEvery, call } from 'redux-saga/effects'
+import { put, takeEvery, call, select } from 'redux-saga/effects'
 import { SHAREABLE_LIST_DELETE_REQUEST } from 'actions'
 import { SHAREABLE_LIST_DELETE_SUCCESS } from 'actions'
 import { SHAREABLE_LIST_DELETE_FAILURE } from 'actions'
@@ -6,9 +6,9 @@ import { deleteShareableList } from 'common/api/mutations/deleteShareableList'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const mutateListDelete = ({ externalId }) => ({
+export const mutateListDelete = (id) => ({
   type: SHAREABLE_LIST_DELETE_REQUEST,
-  externalId
+  id
 })
 
 /** REDUCERS
@@ -19,14 +19,20 @@ export const mutateListDelete = ({ externalId }) => ({
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const mutationListDeleteSagas = [takeEvery(SHAREABLE_LIST_DELETE_REQUEST, deleteList)]
 
+/* SAGAS :: SELECTORS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+const getListExternalIds = (state) => state.pageListsIds
+
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-function* deleteList(action) {
-  const { externalId } = action
+function* deleteList({ id }) {
   try {
-    const deletedListId = yield call(deleteShareableList, { externalId })
-    return yield put({ type: SHAREABLE_LIST_DELETE_SUCCESS, deletedListId })
-  } catch {
-    return yield put({ type: SHAREABLE_LIST_DELETE_FAILURE })
+    const { externalId: deletedId } = yield call(deleteShareableList, { id })
+    const previousIds = yield select(getListExternalIds)
+    const externalIds = previousIds.filter((e) => e !== deletedId)
+
+    yield put({ type: SHAREABLE_LIST_DELETE_SUCCESS, deletedId, externalIds })
+  } catch (error) {
+    yield put({ type: SHAREABLE_LIST_DELETE_FAILURE, error })
   }
 }
