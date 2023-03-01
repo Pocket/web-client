@@ -14,7 +14,9 @@ export const IndividualListItem = ({ listItems }) => {
             itemImage={list.imageUrl}
             publisher={list.publisher}
             openUrl={list.url}
-            onItemInView={() => {}} // impression event here
+            onItemInView={() => { }} // impression event here
+            onOpenOriginalUrl={() => { }} // engagement event here
+            onOpen={() => { }} // engagement event here
           />
         </div>
       ))}
