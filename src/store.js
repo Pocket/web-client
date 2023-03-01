@@ -105,8 +105,11 @@ import { pageListsIdsReducers } from 'containers/lists/lists.state'
 import { pageListsIdsSagas } from 'containers/lists/lists.state'
 import { pageListsInfoReducers } from 'containers/lists/lists.state'
 
-import { mutationListsReducers } from 'connectors/items/mutation-lists.state'
-import { mutationListsSagas } from 'connectors/items/mutation-lists.state'
+import { mutationListCreateReducers } from 'connectors/lists/mutation-create.state'
+import { mutationListCreateSagas } from 'connectors/lists/mutation-create.state'
+
+import { mutationListAddReducers } from 'connectors/lists/mutation-add.state'
+import { mutationListAddSagas } from 'connectors/lists/mutation-add.state'
 
 import { pageIndividualListsReducers } from 'containers/lists/list-individual/list-individual.state'
 import { pageIndividualListsSagas } from 'containers/lists/list-individual/list-individual.state'
@@ -129,8 +132,12 @@ const itemMutations = {
   mutationTagging: mutationTaggingReducers,
   mutationHighlight: mutationHighlightReducers,
   mutationShare: mutationShareReducers,
-  mutationReport: mutationReportReducers,
-  mutationLists: mutationListsReducers
+  mutationReport: mutationReportReducers
+}
+
+const listMutations = {
+  mutationListCreate: mutationListCreateReducers,
+  mutationListAdd: mutationListAddReducers
 }
 
 const pageReducers = {
@@ -194,6 +201,7 @@ export const rootReducer = combineReducers({
   ...userAccountReducers,
   ...itemReducers,
   ...itemMutations,
+  ...listMutations,
   ...pageReducers
 })
 
@@ -230,7 +238,8 @@ function* rootSaga() {
     ...mutationHighlightSagas,
     ...mutationShareSagas,
     ...mutationReportSagas,
-    ...mutationListsSagas,
+    ...mutationListCreateSagas,
+    ...mutationListAddSagas,
     ...listenSagas
   ])
 }
