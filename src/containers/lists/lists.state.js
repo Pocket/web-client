@@ -35,8 +35,7 @@ const initialState = {
   loading: true,
   totalCount: 0,
   error: false,
-  userShareableLists: false,
-  individualLists: {}
+  userShareableLists: false
 }
 
 export const pageListsInfoReducers = (state = initialState, action) => {
