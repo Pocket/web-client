@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { CreateEditShareableList } from 'components/shareable-lists/create-edit-modal'
-import { mutateListConfirm } from 'connectors/items/mutation-lists.state'
-import { mutateListCancel } from 'connectors/items/mutation-lists.state'
+import { mutateListConfirm } from 'connectors/lists/mutation-create.state'
+import { mutateListCancel } from 'connectors/lists/mutation-create.state'
 
 export const CreateListModal = () => {
   const dispatch = useDispatch()
 
-  const showModal = useSelector((state) => state.mutationLists)
+  const showModal = useSelector((state) => state.mutationListCreate)
 
   const handleClose = () => {
     dispatch(mutateListCancel())
