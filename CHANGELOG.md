@@ -1,3 +1,10 @@
+## [1.79.12](https://github.com/Pocket/web-client/compare/v1.79.11...v1.79.12) (2023-03-01)
+
+
+### Bug Fixes
+
+* **reader-rec:** fixed missing fields for snowplow ([b5d170b](https://github.com/Pocket/web-client/commit/b5d170b31e437e2963dedb377982fc80b505d700))
+
 ## [1.79.11](https://github.com/Pocket/web-client/compare/v1.79.10...v1.79.11) (2023-03-01)
 
 
