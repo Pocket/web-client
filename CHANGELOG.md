@@ -1,3 +1,10 @@
+## [1.79.10](https://github.com/Pocket/web-client/compare/v1.79.9...v1.79.10) (2023-03-01)
+
+
+### Bug Fixes
+
+* **lists:** adding individual list page ([611efc2](https://github.com/Pocket/web-client/commit/611efc217a86d0b3f7d354208f754dc5a4081030))
+
 ## [1.79.9](https://github.com/Pocket/web-client/compare/v1.79.8...v1.79.9) (2023-02-28)
 
 
