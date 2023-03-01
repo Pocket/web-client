@@ -51,6 +51,11 @@ export function ItemCard({
     !impressionFired && inView && analyticsInitialized ? onImpression() : null
   const onOpen = () => dispatch(sendSnowplowEvent(`${snowplowId}.open`, analyticsData))
 
+  const onOpenOriginalUrl = () => {
+    const data = { ...analyticsData, destination: 'external' }
+    dispatch(sendSnowplowEvent(`${snowplowId}.view-original`, data))
+  }
+
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
@@ -82,6 +87,7 @@ export function ItemCard({
       useMarkdown={useMarkdown}
       // Tracking
       onItemInView={onItemInView}
+      onOpenOriginalUrl={onOpenOriginalUrl}
       onOpen={onOpen}
       Actions={ActionsTransitional}
       snowplowId={snowplowId}
