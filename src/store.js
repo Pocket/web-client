@@ -108,6 +108,8 @@ import { pageListsInfoReducers } from 'containers/lists/lists.state'
 import { mutationListCreateReducers } from 'connectors/lists/mutation-create.state'
 import { mutationListCreateSagas } from 'connectors/lists/mutation-create.state'
 
+import { mutationListDeleteSagas } from 'connectors/lists/mutation-delete.state'
+
 import { mutationListAddReducers } from 'connectors/lists/mutation-add.state'
 import { mutationListAddSagas } from 'connectors/lists/mutation-add.state'
 
@@ -239,6 +241,7 @@ function* rootSaga() {
     ...mutationShareSagas,
     ...mutationReportSagas,
     ...mutationListCreateSagas,
+    ...mutationListDeleteSagas,
     ...mutationListAddSagas,
     ...listenSagas
   ])
