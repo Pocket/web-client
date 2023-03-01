@@ -1,3 +1,12 @@
+## [1.79.11](https://github.com/Pocket/web-client/compare/v1.79.10...v1.79.11) (2023-03-01)
+
+
+### Bug Fixes
+
+* **cards:** fix home analytics click stopped working ([9f11694](https://github.com/Pocket/web-client/commit/9f11694c0a04a522ea00afaee9d9ecfc1c0f10de))
+* **cards:** fixed bad prop name from first commit ([1c4e989](https://github.com/Pocket/web-client/commit/1c4e98907299a6f1649f44a97dab06df080c7c42))
+* **cards:** put missing onOpenOriginalUrl on transition card ([49f53d9](https://github.com/Pocket/web-client/commit/49f53d96aae75d7ceda7eaf8d64ae42ec08d6deb))
+
 ## [1.79.10](https://github.com/Pocket/web-client/compare/v1.79.9...v1.79.10) (2023-03-01)
 
 
