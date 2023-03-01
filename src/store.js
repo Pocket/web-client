@@ -105,6 +105,9 @@ import { pageListsIdsReducers } from 'containers/lists/lists.state'
 import { pageListsIdsSagas } from 'containers/lists/lists.state'
 import { pageListsInfoReducers } from 'containers/lists/lists.state'
 
+import { pageIndividualListsReducers } from 'containers/lists/list-individual/list-individual.state'
+import { pageIndividualListsSagas } from 'containers/lists/list-individual/list-individual.state'
+
 import { mutationListsReducers } from 'connectors/items/mutation-lists.state'
 import { mutationListsSagas } from 'connectors/items/mutation-lists.state'
 
@@ -141,7 +144,8 @@ const pageReducers = {
   pageCollectionStories: pageCollectionStoriesReducers,
   pageStoriesInfo: [],
   pageListsIds: pageListsIdsReducers,
-  pageListsInfo: pageListsInfoReducers
+  pageListsInfo: pageListsInfoReducers,
+  pageIndividualLists: pageIndividualListsReducers
 }
 
 const discoverReducers = {
@@ -216,6 +220,7 @@ function* rootSaga() {
     ...pageSavedIdsSagas,
     ...itemsSavedSagas,
     ...pageListsIdsSagas,
+    ...pageIndividualListsSagas,
     ...mutationArchiveSagas,
     ...mutationDeleteSagas,
     ...mutationFavoriteSagas,
