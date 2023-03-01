@@ -9,11 +9,11 @@ const deleteShareableListQuery = gql`
   }
 `
 
-export function deleteShareableList({ externalId }) {
+export function deleteShareableList({ id }) {
   return requestGQL({
     query: deleteShareableListQuery,
     operationName: 'deleteShareableList',
-    variables: { data: { externalId } }
+    variables: { externalId: id }
   })
     .then((response) => response?.data?.deleteShareableList)
     .catch((error) => console.error(error))
