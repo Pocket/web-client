@@ -71,6 +71,8 @@ export const Item = (props) => {
     onOpen
   } = props
 
+  const { t } = useTranslation()
+
   /**
    * Layout is defined here.
    * ----------------------------------------------------------------
@@ -180,7 +182,7 @@ export const Item = (props) => {
             {listStatus ? <ListStatus status={listStatus} url={listUrl} /> : null}
             {storyCount ? (
               <div className="story-count" data-cy="story-count">
-                {storyCount} stories
+                {t('collections:count-stories', '{{count}} stories', { count: storyCount })}
               </div>
             ) : null}
             {timeToRead ? (
@@ -280,3 +282,5 @@ function PartnerOverline({ partnerType }) {
 
   return <div className="overline">{overline}</div>
 }
+
+// t('collections:count-stories', '{{count}} stories', { count: storyCount })
