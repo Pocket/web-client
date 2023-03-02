@@ -140,7 +140,7 @@ export const itemStyles = css`
     position: absolute;
     padding: 0.25rem 0.825rem;
     z-index: 10;
-    bottom: 2rem;
+    bottom: 1rem;
     left: 1rem;
     text-transform: capitalize;
   }

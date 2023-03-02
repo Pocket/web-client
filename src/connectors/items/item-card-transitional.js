@@ -59,7 +59,7 @@ export function ItemCard({
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner, storyCount } = item //prettier-ignore
+  const {tags, title, publisher, excerpt, timeToRead, isSyndicated, isInternalItem, fromPartner, storyCount, topic } = item //prettier-ignore
 
   return (
     <Item
@@ -85,6 +85,7 @@ export function ItemCard({
       openUrl={openUrl}
       clamp={clamp}
       useMarkdown={useMarkdown}
+      topicName={topic}
       // Tracking
       onItemInView={onItemInView}
       onOpenOriginalUrl={onOpenOriginalUrl}
