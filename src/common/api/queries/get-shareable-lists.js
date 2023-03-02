@@ -11,6 +11,9 @@ const getShareableListsQuery = gql`
       createdAt
       moderationStatus
       externalId
+      listItems {
+        imageUrl
+      }
     }
   }
 `

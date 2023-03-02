@@ -8,23 +8,31 @@ import { getUserShareableLists } from 'containers/lists/lists.state'
 export const ConfirmAddToList = () => {
   const dispatch = useDispatch()
 
-  const showModal = useSelector((state) => state.mutationListAdd)
+  const showModal = useSelector((state) => state.mutationListAdd.open)
+  const lastUsedList = useSelector((state) => state.mutationListAdd.lastUsedList)
+  const titleToIdList = useSelector((state) => state.pageListsInfo.titleToIdList)
 
   useEffect(() => {
-    dispatch(getUserShareableLists())
-  }, [dispatch])
+    if (showModal) dispatch(getUserShareableLists())
+  }, [dispatch, showModal])
+
+  const handleCreate = () => {
+    // create list
+  }
 
   const handleClose = () => {
     dispatch(mutateListAddCancel())
     // send snowplow event here
   }
 
-  const handleSubmit = (title, description) => {
-    dispatch(mutateListAddConfirm({ title, description }))
+  const handleSubmit = (listTitle) => {
+    const externalId = titleToIdList[listTitle]
+    dispatch(mutateListAddConfirm({ externalId, listTitle }))
     // send snowplow event here
   }
 
   const addToList = 'Add to List'
+  const selectOptions = titleToIdList ? Object.keys(titleToIdList) : []
 
   return (
     <AddToListModal
@@ -32,6 +40,8 @@ export const ConfirmAddToList = () => {
       modalTitle={addToList}
       handleClose={handleClose}
       handleSubmit={handleSubmit}
+      previouslySelected={lastUsedList}
+      selectOptions={selectOptions}
     />
   )
 }

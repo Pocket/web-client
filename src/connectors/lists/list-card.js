@@ -12,6 +12,9 @@ export const ListCard = ({ id }) => {
 
   if (!list) return null
 
+  const storyCount = list.listItems?.length || 0
+  const itemImage = list.listItems?.[0]?.imageUrl
+
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)} key={list.externalId}>
       <Item
@@ -23,6 +26,8 @@ export const ListCard = ({ id }) => {
         isInternalItem={true}
         listStatus={list.status}
         listUrl={'www.google.com'}
+        storyCount={storyCount}
+        itemImage={itemImage}
         Actions={ListActions}
       />
     </div>

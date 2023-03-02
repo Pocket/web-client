@@ -5,6 +5,7 @@ import Modal, { ModalBody, ModalFooter } from './modal'
 import { TextArea } from 'components/form-fields/text-area'
 import { CreateEditShareableList } from 'components/shareable-lists/create-edit-modal'
 import { AddToListModal } from 'components/shareable-lists/add-to-list-modal'
+import { COLORS } from 'mocks/_data/colors'
 
 export default {
   title: 'Overlays/Modal',
@@ -51,6 +52,7 @@ export const AddToList = () => (
     appRootSelector={APP_ROOT_SELECTOR}
     showModal
     modalTitle="Add to List"
+    selectOptions={COLORS}
   />
 )
 

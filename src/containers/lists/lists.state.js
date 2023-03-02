@@ -67,11 +67,12 @@ export const pageListsInfoReducers = (state = initialState, action) => {
     }
 
     case USER_SHAREABLE_LISTS_REQUEST_SUCCESS: {
-      const { allLists } = action
+      const { allLists, titleToIdList } = action
       return {
         ...state,
         ...allLists,
-        loading: false
+        loading: false,
+        titleToIdList
       }
     }
 
@@ -108,11 +109,13 @@ function* userShareableListsRequest() {
     const userShareableLists = yield getShareableLists()
     const externalIds = userShareableLists.map((list) => list.externalId)
     const allLists = arrayToObject(userShareableLists, 'externalId')
+    const titleToIdList = userShareableLists.reduce((obj, list) => ({ ...obj, [list.title]: list.externalId }), {})
 
     return yield put({
       type: USER_SHAREABLE_LISTS_REQUEST_SUCCESS,
       allLists,
-      externalIds
+      externalIds,
+      titleToIdList
     })
   } catch {
     return yield put({ type: USER_SHAREABLE_LISTS_REQUEST_FAILURE })

@@ -9,24 +9,31 @@ import { LIST_ADD_ITEM_FAILURE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const mutateListAddItem = ({ id }) => ({ type: LIST_ADD_ITEM_REQUEST, id })
+export const mutateListAddItem = (id) => ({ type: LIST_ADD_ITEM_REQUEST, id })
 export const mutateListAddCancel = () => ({ type: LIST_ADD_ITEM_CANCEL })
-export const mutateListAddConfirm = ({ externalId }) => ({ type: LIST_ADD_ITEM_CONFIRM, externalId })
+export const mutateListAddConfirm = ({ externalId, listTitle }) => ({ type: LIST_ADD_ITEM_CONFIRM, externalId, listTitle })
 
 /** REDUCERS
  --------------------------------------------------------------- */
-const initialState = false
+const initialState = {
+  open: false,
+  lastUsedList: ''
+}
 
 export const mutationListAddReducers = (state = initialState, action) => {
   switch (action.type) {
     case LIST_ADD_ITEM_REQUEST: {
-      return true
+      return { ...state, open: true }
     }
 
-    case LIST_ADD_ITEM_SUCCESS:
+    case LIST_ADD_ITEM_SUCCESS: {
+      const { listTitle } = action
+      return { ...state, open: false, lastUsedList: listTitle }
+    }
+
     case LIST_ADD_ITEM_FAILURE:
     case LIST_ADD_ITEM_CANCEL: {
-      return false
+      return { ...state, open: false }
     }
 
     default:
@@ -56,7 +63,7 @@ function* listAddItem({ id }) {
   if (cancel) return
 
   try {
-    const { externalId } = confirm
+    const { externalId, listTitle } = confirm
     const { givenUrl, excerpt, thumbnail, title, publisher } = yield select(getItem, id)
 
     const data = {
@@ -69,7 +76,7 @@ function* listAddItem({ id }) {
     }
 
     yield call(createShareableListItem, data)
-    yield put({ type: LIST_ADD_ITEM_SUCCESS })
+    yield put({ type: LIST_ADD_ITEM_SUCCESS, listTitle })
   } catch (error) {
     yield put({ type: LIST_ADD_ITEM_FAILURE, error })
   }
