@@ -84,7 +84,7 @@ export function CallOutCollection() {
         </svg>
         <p>
           <Trans i18nKey="collections:call-out-body">
-            Take the guesswork out of your next great read. Pocket Collections put the best of the
+            Take the guesswork out of your next great read. Pocket lists put the best of the
             internet at your fingertips.
           </Trans>
         </p>

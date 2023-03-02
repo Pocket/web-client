@@ -1,3 +1,10 @@
+## [1.79.13](https://github.com/Pocket/web-client/compare/v1.79.12...v1.79.13) (2023-03-01)
+
+
+### Bug Fixes
+
+* **collections:** revert banner copy to say lists ([4516321](https://github.com/Pocket/web-client/commit/45163218304fcd50fa54aaa4f411ae7c13474038))
+
 ## [1.79.12](https://github.com/Pocket/web-client/compare/v1.79.11...v1.79.12) (2023-03-01)
 
 
