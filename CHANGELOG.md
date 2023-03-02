@@ -1,3 +1,10 @@
+## [1.79.15](https://github.com/Pocket/web-client/compare/v1.79.14...v1.79.15) (2023-03-02)
+
+
+### Bug Fixes
+
+* **cards:** better responsive for hero layouts ([2de1739](https://github.com/Pocket/web-client/commit/2de17393650f4125bc1c4130523e593e56310a77))
+
 ## [1.79.14](https://github.com/Pocket/web-client/compare/v1.79.13...v1.79.14) (2023-03-02)
 
 

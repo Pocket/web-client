@@ -1,18 +1,31 @@
 import { css } from 'linaria'
 import { breakpointLargeTablet } from 'common/constants'
-import { breakpointSmallDesktop } from 'common/constants'
 import { breakpointMediumTablet } from 'common/constants'
 import { breakpointSmallTablet } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
-import { breakpointMediumHandset } from 'common/constants'
 import { containerMaxWidth } from 'common/constants'
+import { screenLargeHandset } from 'common/constants'
+import { screenSmallTablet } from 'common/constants'
 
 /**
  * Shared styles
  * These are sort of baseline styles so we don't have a bunch of duplication.
  * Linaria does not yet support fragments (issue open since 2019 so ... https://github.com/callstack/linaria/issues/244)
  * So we do composition sparingly (no syntax highlighting or linting)
+ *
+ * REFERENCE:
+ * screenTinyHandset     = 359
+ * screenSmallHandset    = 399
+ * screenMediumHandset   = 479
+ * screenLargeHandset    = 599
+ * screenTinyTablet      = 719
+ * screenSmallTablet     = 839
+ * screenMediumTablet    = 959
+ * screenLargeTablet     = 1023
+ * screenSmallDesktop    = 1279
+ * screenMediumDesktop   = 1439
+ *
  */
 const gridFragment = `
   display: grid;
@@ -25,22 +38,26 @@ const gridFragment = `
 `
 
 const horizontalFragment = `
-  grid-template-rows: minmax(0, 1fr) 46px;
-  grid-template-columns: 200px minmax(0, 1fr);
-  --media-radius: 0.5rem;
-  --title-margin: 0.5rem 0;
-  --excerpt-display: block;
+  --media-radius: 1rem;
+  width: 100%;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
+  margin-bottom: 0;
+
   .media-block {
-    grid-row: span 2;
     margin: 0.5rem;
+    width: 200px;
+    grid-row: span 2;
   }
-  .details {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-  .footer {
+
+  ${breakpointTinyTablet} {
     grid-template-columns: 1fr;
+    .media-block {
+      margin: 0;
+      width: 100%;
+      grid-row: span 1;
+      grid-template-rows: 1fr;
+    }
   }
 `
 
@@ -164,8 +181,14 @@ export const heroGrid = css`
     grid-template-rows: auto minmax(0, 1fr);
     --excerpt-display: none;
 
-    ${breakpointSmallTablet} {
+    ${breakpointLargeTablet} {
       grid-column: span 6;
+      --excerpt-display: block;
+    }
+
+    ${breakpointSmallTablet} {
+      grid-column: span 12;
+      --excerpt-display: block;
     }
   }
 
@@ -179,9 +202,26 @@ export const heroGrid = css`
     --excerpt-display: block;
     --excerpt-size: 1rem;
 
+    ${breakpointLargeTablet} {
+      grid-row: span 1;
+      --title-size: 1rem;
+      --excerpt-size: 0.875rem;
+    }
+
     ${breakpointSmallTablet} {
       grid-column: 1 / span 12;
-      grid-row: span 1;
+    }
+  }
+
+  article:last-of-type {
+    ${breakpointLargeTablet} {
+      ${horizontalFragment};
+      grid-column: span 12;
+    }
+  }
+  @media (min-width: ${screenLargeHandset}px) and (max-width: ${screenSmallTablet}px) {
+    article {
+      ${horizontalFragment};
     }
   }
 `
@@ -213,31 +253,14 @@ export const stackedGrid = css`
   }
 
   article {
-    --media-radius: 1rem;
+    ${horizontalFragment};
     grid-column: span 8;
-    width: 100%;
-    grid-template-rows: auto minmax(0, 1fr);
-    grid-template-columns: auto minmax(0, 1fr);
-    margin-bottom: 0;
+  }
 
-    .media-block {
-      margin: 0.5rem;
-      width: 280px;
-      grid-row: span 2;
-    }
-
-    ${breakpointLargeTablet} {
+  ${breakpointLargeTablet} {
+    padding: 1.5rem 0 0;
+    article {
       grid-column: span 12;
-      .excerpt {
-        display: block;
-      }
-    }
-    ${breakpointTinyTablet} {
-      .media-block {
-        margin: 0.5rem;
-        width: 140px;
-        grid-row: span 2;
-      }
     }
   }
 `
