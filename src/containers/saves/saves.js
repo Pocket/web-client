@@ -20,6 +20,7 @@ import { ConfirmArchive } from 'connectors/confirm/archive'
 import { ConfirmShare } from 'connectors/confirm/share'
 import { ConfirmTagEdit } from 'connectors/confirm/tag-edit'
 import { ConfirmTagDelete } from 'connectors/confirm/tag-delete'
+import { ConfirmAddToList } from 'connectors/confirm/add-to-list'
 
 export const Saves = (props) => {
   const router = useRouter()
@@ -79,6 +80,7 @@ export const Saves = (props) => {
       <ConfirmShare />
       <ConfirmTagEdit />
       <ConfirmTagDelete />
+      <ConfirmAddToList />
 
       <Toasts />
     </Layout>

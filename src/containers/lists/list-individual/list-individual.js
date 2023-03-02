@@ -6,7 +6,7 @@ import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListIndividualHeader } from 'components/headers/lists-header'
 import { EmptyIndividualLists } from 'components/empty-states/inividual-list'
 import { getIndividualListAction } from './list-individual.state'
-import { IndividualListItem } from 'components/lists/individual-list-item'
+import { IndividualListCard } from 'connectors/lists/individual-list.card'
 
 const MOCK_DATA = {
   userId: 'luigimario',
@@ -18,7 +18,9 @@ export const ListIndividual = () => {
   const router = useRouter()
   const { slug: id } = router.query
 
-  const list = useSelector((state) => state.pageIndividualLists?.individualLists[id])
+  const list = useSelector((state) => state.itemsDisplay[id])
+  const listItemIds = useSelector((state) => state.pageIndividualListIds?.[id])
+
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
 
@@ -27,8 +29,8 @@ export const ListIndividual = () => {
   }, [dispatch, id])
 
   if (!list) return null
-  const { title, description, status, listItems } = list
-  const showLists = listItems?.length
+  const { title, description, status } = list
+  const showLists = listItemIds?.length
 
   // Actions
   const handlePublish = () => {}
@@ -52,7 +54,9 @@ export const ListIndividual = () => {
             handleEdit={handleEdit}
           />
 
-          {showLists ? <IndividualListItem listItems={listItems} /> : <EmptyIndividualLists />}
+          {showLists
+            ? listItemIds.map((externalId) => <IndividualListCard key={externalId} id={externalId} listId={id} />)
+            : <EmptyIndividualLists />}
         </main>
       ) : null}
     </Layout>

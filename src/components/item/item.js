@@ -16,6 +16,7 @@ const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul'
 export const Item = (props) => {
   const {
     itemId,
+    listId,
     title,
     itemImage,
     onImageFail,
@@ -203,6 +204,7 @@ export const Item = (props) => {
           {Actions ? (
             <Actions
               id={itemId}
+              listId={listId}
               visibleCount={visibleCount}
               snowplowId={snowplowId}
               isFavorite={isFavorite}

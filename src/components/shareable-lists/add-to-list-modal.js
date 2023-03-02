@@ -1,43 +1,38 @@
-import { useState, useEffect } from 'react'
-import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
-import { useDispatch, useSelector } from 'react-redux'
-import { mutateListAddCancel } from 'connectors/lists/mutation-add.state'
-import { mutateListAddConfirm } from 'connectors/lists/mutation-add.state'
-import { TextInput } from 'components/form-fields/text-input'
 
-export const AddToListModal = () => {
-  const dispatch = useDispatch()
+export const AddToListModal = ({
+  showModal,
+  modalTitle,
+  handleCreate,
+  handleClose,
+  handleSubmit
+}) => {
 
-  const showModal = useSelector((state) => state.mutationListCreate)
-
-  const confirmListSelection = () => {
-    dispatch(mutateListAddConfirm())
-  }
-
-  const cancelListSelection = () => dispatch(mutateListAddCancel())
+  const createAction = () => handleCreate()
+  const cancelAction = () => handleClose()
+  const confirmAction = () => handleSubmit()
 
   return (
     <Modal
-      title="Save to List"
-      screenReaderLabel="Save to List"
+      title={modalTitle}
+      screenReaderLabel={modalTitle}
       isOpen={showModal}
-      handleClose={cancelListSelection}>
+      handleClose={cancelAction}>
       <ModalBody>
-        { /* Lists */}
+        {/* List Names */}
       </ModalBody>
       <ModalFooter>
-        <Button onClick={cancelListSelection}>
+        <button onClick={createAction}>
           Create List
-        </Button>
+        </button>
 
-        <Button onClick={cancelListSelection}>
+        <button onClick={cancelAction} className="secondary">
           Cancel
-        </Button>
+        </button>
 
-        <Button type="submit" onClick={confirmListSelection}>
+        <button type="submit" onClick={confirmAction}>
           Save to List
-        </Button>
+        </button>
       </ModalFooter>
     </Modal>
   )

@@ -68,10 +68,9 @@ function* listAddItem({ id }) {
       listExternalId: externalId
     }
 
-    const newListItem = yield call(createShareableListItem, data)
-    return yield put({ type: LIST_ADD_ITEM_SUCCESS })
-
-  } catch {
-    return yield put({ type: LIST_ADD_ITEM_FAILURE })
+    yield call(createShareableListItem, data)
+    yield put({ type: LIST_ADD_ITEM_SUCCESS })
+  } catch (error) {
+    yield put({ type: LIST_ADD_ITEM_FAILURE, error })
   }
 }

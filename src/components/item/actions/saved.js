@@ -9,6 +9,7 @@ import { FavoriteIcon } from 'components/icons/FavoriteIcon'
 import { TagIcon } from 'components/icons/TagIcon'
 import { AddIcon } from 'components/icons/AddIcon'
 import { PermanentCopyIcon } from 'components/icons/PermanentCopyIcon'
+import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
 
 export const savedActionStyles = css`
   button,
@@ -56,7 +57,9 @@ export function SavedActions({
   actionShare,
   actionDelete,
   actionPremLibOpen,
-  permanentUrl
+  actionAddToList,
+  permanentUrl,
+  inListsExperiment
 }) {
   const { t } = useTranslation()
   const archiveLabel = isArchived
@@ -72,6 +75,12 @@ export function SavedActions({
   const correctFavoriteAction = isFavorite ? actionUnFavorite : actionFavorite
 
   const actionTypes = {
+    lists: {
+      label: 'Add to List',
+      hide: !inListsExperiment,
+      icon: <PlaylistAddIcon />,
+      onClick: actionAddToList
+    },
     favorite: {
       label: favoriteLabel,
       icon: <FavoriteIcon className={isFavorite && 'active'} />,

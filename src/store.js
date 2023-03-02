@@ -113,7 +113,7 @@ import { mutationListDeleteSagas } from 'connectors/lists/mutation-delete.state'
 import { mutationListAddReducers } from 'connectors/lists/mutation-add.state'
 import { mutationListAddSagas } from 'connectors/lists/mutation-add.state'
 
-import { pageIndividualListsReducers } from 'containers/lists/list-individual/list-individual.state'
+import { pageIndividualListIdsReducers } from 'containers/lists/list-individual/list-individual.state'
 import { pageIndividualListsSagas } from 'containers/lists/list-individual/list-individual.state'
 
 /* REDUCERS
@@ -154,7 +154,7 @@ const pageReducers = {
   pageStoriesInfo: [],
   pageListsIds: pageListsIdsReducers,
   pageListsInfo: pageListsInfoReducers,
-  pageIndividualLists: pageIndividualListsReducers
+  pageIndividualListIds: pageIndividualListIdsReducers
 }
 
 const discoverReducers = {

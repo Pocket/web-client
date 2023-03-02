@@ -16,6 +16,8 @@ import { mutationDelete } from 'connectors/items/mutation-delete.state'
 import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
 import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
 import { shareAction } from 'connectors/items/mutation-share.state'
+import { mutateListAddItem } from 'connectors/lists/mutation-add.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 /**
  * Article Card
@@ -162,6 +164,9 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   const position = useSelector((state) => state.pageSavedIds.indexOf(id))
   const item = useSelector((state) => state.itemsDisplay[id])
 
+  const featureState = useSelector((state) => state.features)
+  const inListsExperiment = featureFlagActive({ flag: 'shared-lists', featureState })
+
   if (!itemSaved || !item) return null
   const { isFavorite, isArchived, tags} = itemSaved //prettier-ignore
   const { givenUrl, permanentUrl, analyticsData: passedAnalyticsData } = item
@@ -197,6 +202,10 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
     dispatch(sendSnowplowEvent(`${snowplowId}.tag`, analyticsData))
     dispatch(mutationTagItem(id, tags))
   }
+  const actionAddToList = () => {
+    // snowplow event here
+    dispatch(mutateListAddItem(id))
+  }
 
   const actionPermLibOpen = () => {
     const data = { ...analyticsData, url: permanentUrl }
@@ -206,6 +215,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   return (
     <SavedActions
       visibleCount={visibleCount}
+      inListsExperiment={inListsExperiment}
       isPremium={isPremium}
       isArchived={isArchived}
       isFavorite={isFavorite}
@@ -217,6 +227,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
       actionUnFavorite={actionUnFavorite}
       actionTag={actionTag}
       actionPremLibOpen={actionPermLibOpen}
+      actionAddToList={actionAddToList}
       permanentUrl={permanentUrl}
     />
   )
