@@ -14,6 +14,7 @@
     "build": "npm run prep && next build",
     "start": "next start -p 80",
     "start:local": "AS_PRODUCTION=true node ./server.local.js",
+    "prettier:check": "prettier --check 'src/**/*.js'",
     "lint": "next lint",
     "test": "npm run compile:icons && jest --reporters='default'",
     "test:e2e": "node ./.scripts/qa/e2e.js",
@@ -104,7 +105,7 @@
     "jsdom": "19.0.0",
     "jsdom-global": "3.0.2",
     "next-build-id": "3.0.0",
-    "prettier": "2.7.1",
+    "prettier": "2.8.4",
     "react-swipeable": "7.0.0"
   },
   "dependencies": {
