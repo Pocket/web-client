@@ -282,5 +282,3 @@ function PartnerOverline({ partnerType }) {
 
   return <div className="overline">{overline}</div>
 }
-
-// t('collections:count-stories', '{{count}} stories', { count: storyCount })
