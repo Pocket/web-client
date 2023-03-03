@@ -17,7 +17,7 @@ export const AddToListModal = ({
 
   const createAction = () => handleCreate()
   const cancelAction = () => handleClose()
-  const confirmAction = () => handleSubmit(value)
+  const confirmAction = () => handleSubmit(value || selectOptions[0])
 
   const showOptions = selectOptions.length > 0
 

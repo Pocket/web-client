@@ -113,6 +113,9 @@ import { mutationListDeleteSagas } from 'connectors/lists/mutation-delete.state'
 import { mutationListAddReducers } from 'connectors/lists/mutation-add.state'
 import { mutationListAddSagas } from 'connectors/lists/mutation-add.state'
 
+import { mutationListUpdateReducers } from 'connectors/lists/mutation-update.state'
+import { mutationListUpdateSagas } from 'connectors/lists/mutation-update.state'
+
 import { pageIndividualListIdsReducers } from 'containers/lists/list-individual/list-individual.state'
 import { pageIndividualListsSagas } from 'containers/lists/list-individual/list-individual.state'
 
@@ -139,7 +142,8 @@ const itemMutations = {
 
 const listMutations = {
   mutationListCreate: mutationListCreateReducers,
-  mutationListAdd: mutationListAddReducers
+  mutationListAdd: mutationListAddReducers,
+  mutationlistUpdate: mutationListUpdateReducers
 }
 
 const pageReducers = {
@@ -242,6 +246,7 @@ function* rootSaga() {
     ...mutationReportSagas,
     ...mutationListCreateSagas,
     ...mutationListDeleteSagas,
+    ...mutationListUpdateSagas,
     ...mutationListAddSagas,
     ...listenSagas
   ])

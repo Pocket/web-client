@@ -1,24 +1,39 @@
+import { useSelector, useDispatch } from 'react-redux'
 import { CreateEditShareableList } from 'components/shareable-lists/create-edit-modal'
+import { mutateListUpdateCancel } from 'connectors/lists/mutation-update.state'
+import { mutateListUpdateConfirm } from 'connectors/lists/mutation-update.state'
 
-export const ListSettingsModal = () => {
-  const listName = 'Temp list name' // temporary
-  const listDescription = 'Temp description' // temporary
+export const ListSettingsModal = ({ id }) => {
+  const dispatch = useDispatch()
 
-  const handleClose = () => {}
-  const handleSubmit = () => {}
-  const handleNameChange = () => {}
-  const handleDescriptionChange = () => {}
+  const list = useSelector((state) => state.itemsDisplay[id])
+  const showModal = useSelector((state) => state.mutationlistUpdate.open)
+
+  const { title, description } = list
+
+  const handleClose = () => {
+    dispatch(mutateListUpdateCancel())
+    // snowplow event
+  }
+
+  const handleSubmit = (listNameValue, descriptionValue) => {
+    const data = {
+      title: listNameValue,
+      description: descriptionValue
+    }
+    dispatch(mutateListUpdateConfirm(data))
+    // snowplow event
+  }
 
   return (
     <CreateEditShareableList
+      showModal={showModal}
       modalTitle="List Settings"
       modalSubmit="Save Changes"
-      listName={listName}
-      listDescription={listDescription}
+      listName={title}
+      listDescription={description}
       handleClose={handleClose}
       handleSubmit={handleSubmit}
-      handleNameChange={handleNameChange}
-      handleDescriptionChange={handleDescriptionChange}
     />
   )
 }

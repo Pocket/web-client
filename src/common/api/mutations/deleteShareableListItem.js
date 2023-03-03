@@ -14,9 +14,6 @@ export function deleteShareableListItem({ id }) {
     operationName: 'deleteShareableListItem',
     variables: { externalId: id }
   })
-    .then((response) => {
-      console.log({ response })
-      return response?.data?.deleteShareableListItem
-    })
+    .then((response) => response?.data?.deleteShareableListItem)
     .catch((error) => console.error(error))
 }
