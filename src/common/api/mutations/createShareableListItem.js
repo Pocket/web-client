@@ -33,9 +33,6 @@ export function createShareableListItem({ url, excerpt, imageUrl, title, listExt
     operationName: 'createShareableListItem',
     variables: { data }
   })
-    .then((response) => {
-      console.log({ response })
-      return response?.data?.createShareableListItem
-    })
+    .then((response) => response?.data?.createShareableListItem)
     .catch((error) => console.error(error))
 }
