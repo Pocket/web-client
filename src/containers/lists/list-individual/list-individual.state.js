@@ -15,7 +15,7 @@ import { LIST_DELETE_ITEM_SUCCESS } from 'actions'
  --------------------------------------------------------------- */
 export const getIndividualListAction = (id) => ({ type: ITEMS_SHAREABLE_LIST_REQUEST, id })
 
-/** PAGINATION REDUCERS
+/** REDUCERS
  --------------------------------------------------------------- */
 export const pageIndividualListIdsReducers = (state = {}, action) => {
   switch (action.type) {

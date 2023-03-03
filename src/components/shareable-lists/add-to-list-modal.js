@@ -19,8 +19,6 @@ export const AddToListModal = ({
   const cancelAction = () => handleClose()
   const confirmAction = () => handleSubmit(value || selectOptions[0])
 
-  const showOptions = selectOptions.length > 0
-
   return (
     <Modal
       appRootSelector={appRootSelector}
