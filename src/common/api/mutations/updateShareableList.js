@@ -24,9 +24,6 @@ export function updateShareableList({ title, description, externalId, status }) 
     operationName: 'updateShareableList',
     variables: { data }
   })
-    .then((response) => {
-      console.log({ response })
-      return response?.data?.updateShareableList
-    })
+    .then((response) => response?.data?.updateShareableList)
     .catch((error) => console.error(error))
 }
