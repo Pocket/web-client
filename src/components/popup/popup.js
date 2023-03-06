@@ -187,7 +187,8 @@ const Popup = ({
   } // Use Effect to create/set up popup on component mount
 
   useEffect(() => {
-    if (!contentRef.current || !trigger.current) return // attach click event to trigger
+    // attach click event to trigger
+    if (!contentRef.current || !trigger.current) return () => {}
 
     const triggerElement = trigger.current
     triggerElement.addEventListener('click', handleTriggerClick)

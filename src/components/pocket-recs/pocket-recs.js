@@ -139,17 +139,13 @@ export const Recommendation = ({
   return (
     <VisibilitySensor onVisible={handleVisible}>
       <li className={recommendationStyles} data-cy="pocket-recs-article">
-        <Link href={url}>
-          <a className="thumbnail" onClick={handleClick}>
-            <img src={thumbnailUrl} alt={`Thumbnail image for article`} />
-          </a>
+        <Link href={url} className="thumbnail" onClick={handleClick}>
+          <img src={thumbnailUrl} alt={`Thumbnail image for article`} />
         </Link>
         <div className="details">
           <Publisher name={publisher} logo={target?.publisher?.logoWideBlack} />
-          <Link href={url}>
-            <a onClick={handleClick}>
-              <h4 className="h5">{title}</h4>
-            </a>
+          <Link href={url} onClick={handleClick}>
+            <h4 className="h5">{title}</h4>
           </Link>
         </div>
       </li>

@@ -141,8 +141,8 @@ export const BannerGermanHome = () => {
         </div>
         <h3>Entdecke Content, der die Autor*innen von „People of Deutschland“ inspiriert.</h3>
         <div className="call-to-action">
-          <Link href={bannerLink}>
-            <a onClick={handleClick}>Entdecke Pocket Collections</a>
+          <Link href={bannerLink} onClick={handleClick}>
+            Entdecke Pocket Collections
           </Link>
         </div>
       </div>

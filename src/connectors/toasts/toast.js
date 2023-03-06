@@ -162,7 +162,7 @@ export function Toast({
   const IconToShow = errors.includes(type) ? ErrorIcon : CheckIcon
 
   useEffect(() => {
-    if (!show) return
+    if (!show) return () => {} 
     const removeTime = showUndo ? 5000 : 3500
     const removeTimer = setTimeout(unmount, removeTime)
     return () => clearTimeout(removeTimer)

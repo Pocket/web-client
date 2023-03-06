@@ -172,10 +172,13 @@ export const ItemHeader = ({
             <ul className="list">
               {tags.map((tag) => (
                 <li key={tag}>
-                  <Link href={`/saves/tags/${encodeURIComponent(tag)}`}>
-                    <a id={`reader.tag.${tag}`} data-cy={`reader-tag-${tag}`}>
-                      <Pill>{tag}</Pill>
-                    </a>
+                  <Link
+                    href={`/saves/tags/${encodeURIComponent(tag)}`}
+                    id={`reader.tag.${tag}`}
+                    data-cy={`reader-tag-${tag}`}>
+
+                    <Pill>{tag}</Pill>
+
                   </Link>
                 </li>
               ))}

@@ -107,7 +107,7 @@ export const Card = (props) => {
   // Fire when item is selected by shortcut
   // This allows us to keep shortcuts in sync with tab selection and in view
   useEffect(() => {
-    if (!linkRef.current) return
+    if (!linkRef.current) return () => {}
     const selectedAndNotActive = shortcutSelected && document.activeElement !== linkRef.current
     const notSelectedAndActive = !shortcutSelected && document.activeElement === linkRef.current
 
@@ -176,17 +176,18 @@ export const Card = (props) => {
           <h2 className={cx('title', titleFlow && 'flow', openInNewTab && 'open-external')}>
             {openUrl ? (
               <>
-                <Link href={openUrl}>
-                  <a
-                    ref={linkRef}
-                    onClick={onOpen}
-                    data-cy="title-link"
-                    tabIndex={0}
-                    target={linkTarget}
-                    rel={linkRel}
-                    onFocus={handleFocus}>
-                    {title}
-                  </a>
+                <Link
+                  href={openUrl}
+                  ref={linkRef}
+                  onClick={onOpen}
+                  data-cy="title-link"
+                  tabIndex={0}
+                  target={linkTarget}
+                  rel={linkRel}
+                  onFocus={handleFocus}>
+
+                  {title}
+
                 </Link>
                 {openInNewTab ? (
                   <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />

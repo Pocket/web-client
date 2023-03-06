@@ -241,7 +241,7 @@ export const HomeSetup = () => {
   const isFinalized = useSelector((state) => state.homeSetup.finalizedTopics)
 
   useEffect(() => {
-    if (hideSetup) return
+    if (hideSetup) return () => {} 
     dispatch(getTopicSelectors())
   }, [dispatch, hideSetup])
 

@@ -53,14 +53,14 @@ export const AdSlot = (props) => {
 
   useEffect(() => {
     // We want to make sure the googleTags API is ready
-    if (!googleTagsReady) return
+    if (!googleTagsReady) return () => {}
 
     // console.info(`Defining ad slot —  ${id}`)
     setupAdSlot()
   }, [googleTagsReady, setupAdSlot])
 
   useEffect(() => {
-    if (!adsReady || adLoaded) return
+    if (!adsReady || adLoaded) return () => {}
     setAdLoaded(true)
     loadAd(id)
     // console.info(`Loading ad for slot — ${id}`)

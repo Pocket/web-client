@@ -141,16 +141,17 @@ export const MobileLink = ({
   handleClick
 }) => (
   <li>
-    <Link href={isDisabled ? null : url}>
-      <a
-        id={id}
-        className={cx(isSelected && 'selected', isDisabled && 'disabled')}
-        onClick={(event) => {
-          handleClick(event, name, url)
-        }}>
-        {icon ? icon : null}
-        {label}
-      </a>
+    <Link
+      href={isDisabled ? null : url}
+      id={id}
+      className={cx(isSelected && 'selected', isDisabled && 'disabled')}
+      onClick={(event) => {
+        handleClick(event, name, url)
+      }}>
+
+      {icon ? icon : null}
+      {label}
+
     </Link>
   </li>
 )

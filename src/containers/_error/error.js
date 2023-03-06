@@ -76,7 +76,7 @@ function getMessageForCode(statusCode) {
   } error. Try refreshing your page and see if that fixes things. If you’re still seeing the issue, please contact our support team.`
 }
 
-export default function ErrorPage({ statusCode }) {
+function ErrorPage({ statusCode }) {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const [errorMessage, setErrorMessage] = useState(getMessageForCode())
 
@@ -117,6 +117,8 @@ export default function ErrorPage({ statusCode }) {
     </>
   )
 }
+
+export default ErrorPage
 
 ErrorPage.propTypes = {
   /**

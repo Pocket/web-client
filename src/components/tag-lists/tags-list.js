@@ -47,12 +47,12 @@ export function TagList({ userTags, value, valueChange }) {
         <ul className="list">
           {'un-tagged'.includes(value) ? (
             <li>
-              <Link href={'/saves/tags/_untagged_'}>
-                <a data-cy="all-tags-not-tagged">
-                  <Pill>
-                    <Trans i18nKey="tags:not-tagged">not tagged</Trans>
-                  </Pill>
-                </a>
+              <Link href={'/saves/tags/_untagged_'} data-cy="all-tags-not-tagged">
+
+                <Pill>
+                  <Trans i18nKey="tags:not-tagged">not tagged</Trans>
+                </Pill>
+
               </Link>
             </li>
           ) : null}
@@ -60,10 +60,12 @@ export function TagList({ userTags, value, valueChange }) {
             <>
               {sortedTags.map((tag) => (
                 <li key={tag}>
-                  <Link href={`/saves/tags/${encodeURIComponent(tag)}`}>
-                    <a data-cy={`all-tags-${tag}`}>
-                      <Pill>{tag}</Pill>
-                    </a>
+                  <Link
+                    href={`/saves/tags/${encodeURIComponent(tag)}`}
+                    data-cy={`all-tags-${tag}`}>
+
+                    <Pill>{tag}</Pill>
+
                   </Link>
                 </li>
               ))}
@@ -71,10 +73,12 @@ export function TagList({ userTags, value, valueChange }) {
           ) : (
             orderedTags.map((tag) => (
               <li key={tag}>
-                <Link href={`/saves/tags/${encodeURIComponent(tag)}`}>
-                  <a data-cy={`all-tags-${tag}`}>
-                    <Pill>{tag}</Pill>
-                  </a>
+                <Link
+                  href={`/saves/tags/${encodeURIComponent(tag)}`}
+                  data-cy={`all-tags-${tag}`}>
+
+                  <Pill>{tag}</Pill>
+
                 </Link>
               </li>
             ))
