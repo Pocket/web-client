@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { Button } from 'components/buttons/button'
 import { TextInput } from 'components/form-fields/text-input'
@@ -19,21 +19,8 @@ export const CreateEditShareableList = ({
   const [listNameValue, setListNameValue] = useState(listName)
   const [descriptionValue, setDescriptionValue] = useState(listDescription)
 
-  const reset = () => {
-    // reset inputs on close
-    setListNameValue(listName)
-    setDescriptionValue(listDescription)
-  }
-
-  const onClose = () => {
-    handleClose()
-    reset()
-  }
-
-  const onSubmit = () => {
-    handleSubmit(listNameValue, descriptionValue)
-    reset()
-  }
+  const onClose = () => handleClose()
+  const onSubmit = () => handleSubmit(listNameValue, descriptionValue)
 
   const onNameChange = (e) => {
     setListNameValue(e.target.value)

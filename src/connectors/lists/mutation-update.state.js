@@ -7,6 +7,8 @@ import { LIST_UPDATE_CANCEL } from 'actions'
 import { LIST_UPDATE_SUCCESS } from 'actions'
 import { LIST_UPDATE_FAILURE } from 'actions'
 
+import { LIST_ITEMS_SUCCESS } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const mutateListUpdateAction = (id) => ({ type: LIST_UPDATE_REQUEST, id })
@@ -71,8 +73,11 @@ function* listUpdate({ id }) {
       title
     }
 
-    // yield call(updateShareableList, data)
+    yield call(updateShareableList, data)
     yield put({ type: LIST_UPDATE_SUCCESS })
+
+    const itemsById = { [id]: data }
+    yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
   } catch (error) {
     yield put({ type: LIST_UPDATE_FAILURE, error })
   }

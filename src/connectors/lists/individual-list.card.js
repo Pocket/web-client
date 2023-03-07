@@ -8,7 +8,7 @@ import { bottomTooltip } from 'components/tooltip/tooltip'
 import { buttonReset } from 'components/buttons/button-reset'
 
 export const IndividualListCard = ({ id, listId }) => {
-  const item = useSelector((state) => state.itemsDisplay[id])
+  const item = useSelector((state) => state.listsDisplay[id])
 
   if (!item) return null
 

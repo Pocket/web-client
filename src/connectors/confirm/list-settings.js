@@ -6,7 +6,7 @@ import { mutateListUpdateConfirm } from 'connectors/lists/mutation-update.state'
 export const ListSettingsModal = ({ id }) => {
   const dispatch = useDispatch()
 
-  const list = useSelector((state) => state.itemsDisplay[id])
+  const list = useSelector((state) => state.listsDisplay[id])
   const showModal = useSelector((state) => state.mutationlistUpdate.open)
 
   const { title, description } = list

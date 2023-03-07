@@ -20,7 +20,7 @@ export const ListIndividual = () => {
   const router = useRouter()
   const { slug: id } = router.query
 
-  const list = useSelector((state) => state.itemsDisplay[id])
+  const list = useSelector((state) => state.listsDisplay[id])
   const listItemIds = useSelector((state) => state.pageIndividualListIds?.[id])
 
   const userStatus = useSelector((state) => state.user.user_status)

@@ -21,7 +21,7 @@ export const getUserShareableLists = () => ({ type: USER_SHAREABLE_LISTS_REQUEST
 export const pageListsIdsReducers = (state = [], action) => {
   switch (action.type) {
     case ITEMS_LISTS_PAGE_SET_SORT_ORDER: {
-      return []
+      return state.reverse()
     }
 
     case ITEMS_CREATE_LIST_SUCCESS: {
@@ -44,10 +44,7 @@ export const pageListsIdsReducers = (state = [], action) => {
  --------------------------------------------------------------- */
 const initialState = {
   sortOrder: 'DESC',
-  count: 30,
   loading: true,
-  totalCount: 0,
-  error: false,
   userShareableLists: false
 }
 

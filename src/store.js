@@ -101,6 +101,8 @@ import { pageTopicReducers } from 'containers/discover/topic/topic.state'
 import { pageCollectionIdsReducers } from 'containers/collections/collections.state'
 import { pageCollectionStoriesReducers } from 'containers/collections/stories-page/stories.state'
 
+import { listsDisplayReducers } from 'connectors/lists/lists-display.state'
+
 import { pageListsIdsReducers } from 'containers/lists/lists.state'
 import { pageListsIdsSagas } from 'containers/lists/lists.state'
 import { pageListsInfoReducers } from 'containers/lists/lists.state'
@@ -126,6 +128,7 @@ const itemReducers = {
   itemsSaved: itemsSavedReducers, // This represents the actions the user has taken on a given item (if any)
   itemsTransitions: itemsTransitionsReducers, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
   itemsRelated: itemsRelatedReducers, // This is an explict call for related items ... these will shift over requests
+  listsDisplay: listsDisplayReducers,
   listen: listenReducers
 }
 
