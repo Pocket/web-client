@@ -223,7 +223,9 @@ const TopicButton = ({ topic }) => {
   }
 
   return (
-    <label className={cx(topicStyle, isSelected && 'selected')}>
+    <label
+      className={cx(topicStyle, isSelected && 'selected')}
+      data-cy={`topic-pill-${topic.name.toLowerCase()}`}>
       <input type="checkbox" checked={isSelected} onChange={toggleTopic} />
       {topic.name}
     </label>
