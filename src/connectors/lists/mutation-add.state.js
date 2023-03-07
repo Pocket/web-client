@@ -7,6 +7,9 @@ import { LIST_ADD_ITEM_CANCEL } from 'actions'
 import { LIST_ADD_ITEM_SUCCESS } from 'actions'
 import { LIST_ADD_ITEM_FAILURE } from 'actions'
 
+import { ITEMS_CREATE_LIST_REQUEST } from 'actions'
+import { ITEMS_CREATE_LIST_SUCCESS } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const mutateListAddItem = (id) => ({ type: LIST_ADD_ITEM_REQUEST, id })
@@ -17,23 +20,27 @@ export const mutateListAddConfirm = ({ externalId, listTitle }) => ({ type: LIST
  --------------------------------------------------------------- */
 const initialState = {
   open: false,
-  lastUsedList: ''
+  lastUsedList: '',
+  id: null
 }
 
 export const mutationListAddReducers = (state = initialState, action) => {
   switch (action.type) {
     case LIST_ADD_ITEM_REQUEST: {
-      return { ...state, open: true }
+      const { id } = action
+      return { ...state, open: true, id }
     }
 
+    case ITEMS_CREATE_LIST_SUCCESS:
     case LIST_ADD_ITEM_SUCCESS: {
       const { listTitle } = action
-      return { ...state, open: false, lastUsedList: listTitle }
+      return { ...state, open: false, lastUsedList: listTitle, id: null }
     }
 
+    case ITEMS_CREATE_LIST_REQUEST:
     case LIST_ADD_ITEM_FAILURE:
     case LIST_ADD_ITEM_CANCEL: {
-      return { ...state, open: false }
+      return { ...state, open: false, id: null }
     }
 
     default:

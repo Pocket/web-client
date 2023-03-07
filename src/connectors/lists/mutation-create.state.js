@@ -9,7 +9,7 @@ import { ITEMS_CREATE_LIST_SUCCESS } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const mutateListAction = () => ({ type: ITEMS_CREATE_LIST_REQUEST })
+export const mutateListCreate = (id) => ({ type: ITEMS_CREATE_LIST_REQUEST, id })
 export const mutateListConfirm = ({ title, description }) => ({
   type: ITEMS_CREATE_LIST_CONFIRM,
   title,
@@ -19,18 +19,22 @@ export const mutateListCancel = () => ({ type: ITEMS_CREATE_LIST_CANCEL })
 
 /** REDUCERS
  --------------------------------------------------------------- */
-const initialState = false
+const initialState = {
+  open: false,
+  id: null
+}
 
 export const mutationListCreateReducers = (state = initialState, action) => {
   switch (action.type) {
     case ITEMS_CREATE_LIST_REQUEST: {
-      return true
+      const { id } = action
+      return { open: true, id }
     }
 
     case ITEMS_CREATE_LIST_SUCCESS:
     case ITEMS_CREATE_LIST_FAILURE:
     case ITEMS_CREATE_LIST_CANCEL: {
-      return false
+      return { open: false, id: null }
     }
 
     default:
@@ -42,9 +46,13 @@ export const mutationListCreateReducers = (state = initialState, action) => {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const mutationListCreateSagas = [takeLatest(ITEMS_CREATE_LIST_REQUEST, itemsCreateList)]
 
+/** SAGA :: SELECTORS
+ --------------------------------------------------------------- */
+const getItem = (state, id) => state.itemsDisplay[id]
+
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-function* itemsCreateList() {
+function* itemsCreateList({ id }) {
   // Wait for the user to confirm or cancel
   const { cancel, confirm } = yield race({
     confirm: take(ITEMS_CREATE_LIST_CONFIRM),
@@ -55,9 +63,26 @@ function* itemsCreateList() {
 
   try {
     const { title, description } = confirm
-    const newList = yield call(createShareableList, { title, description })
+    const listData = { title, description }
+
+    let listItemData = null
+
+    const item = yield select(getItem, id)
+    if (item) {
+      const { givenUrl, excerpt, thumbnail, title, publisher } = item
+      listItemData = {
+        url: givenUrl,
+        excerpt,
+        imageUrl: thumbnail,
+        title,
+        publisher,
+        sortOrder: 1
+      }
+    }
+
+    const newList = yield call(createShareableList, { listData, listItemData })
     const externalId = newList.externalId
-    return yield put({ type: ITEMS_CREATE_LIST_SUCCESS, newList, externalId })
+    return yield put({ type: ITEMS_CREATE_LIST_SUCCESS, newList, externalId, listTitle: title })
   } catch {
     return yield put({ type: ITEMS_CREATE_LIST_FAILURE })
   }

@@ -21,6 +21,7 @@ import { ConfirmShare } from 'connectors/confirm/share'
 import { ConfirmTagEdit } from 'connectors/confirm/tag-edit'
 import { ConfirmTagDelete } from 'connectors/confirm/tag-delete'
 import { ConfirmAddToList } from 'connectors/confirm/add-to-list'
+import { CreateListModal } from 'connectors/confirm/create-list'
 
 export const Saves = (props) => {
   const router = useRouter()
@@ -81,6 +82,7 @@ export const Saves = (props) => {
       <ConfirmTagEdit />
       <ConfirmTagDelete />
       <ConfirmAddToList />
+      <CreateListModal />
 
       <Toasts />
     </Layout>

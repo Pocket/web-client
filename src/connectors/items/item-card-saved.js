@@ -17,6 +17,7 @@ import { mutationUpsert } from 'connectors/items/mutation-upsert.state'
 import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
 import { shareAction } from 'connectors/items/mutation-share.state'
 import { mutateListAddItem } from 'connectors/lists/mutation-add.state'
+import { mutateListCreate } from 'connectors/lists/mutation-create.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 /**
@@ -204,7 +205,8 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   }
   const actionAddToList = () => {
     // snowplow event here
-    dispatch(mutateListAddItem(id))
+    const listAction = (true) ? mutateListAddItem : mutateListCreate
+    dispatch(listAction(id))
   }
 
   const actionPermLibOpen = () => {

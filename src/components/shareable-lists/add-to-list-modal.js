@@ -1,5 +1,12 @@
 import { useState } from 'react'
+import { css } from 'linaria'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
+import { Button } from 'components/buttons/button'
+
+const footerStyles = css`
+  display: flex;
+  justify-content: space-between;
+`
 
 export const AddToListModal = ({
   appRootSelector,
@@ -35,18 +42,20 @@ export const AddToListModal = ({
           ))}
         </select>
       </ModalBody>
-      <ModalFooter>
-        {/* <button onClick={createAction}>
+      <ModalFooter className={footerStyles}>
+        <Button onClick={createAction} variant="inline">
           Create List
-        </button> */}
+        </Button>
 
-        <button onClick={cancelAction} className="secondary">
-          Cancel
-        </button>
+        <div>
+          <Button onClick={cancelAction} variant="secondary">
+            Cancel
+          </Button>
 
-        <button type="submit" onClick={confirmAction}>
-          Save to List
-        </button>
+          <Button onClick={confirmAction}>
+            Save to List
+          </Button>
+        </div>
       </ModalFooter>
     </Modal>
   )

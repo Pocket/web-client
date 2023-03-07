@@ -5,7 +5,7 @@ import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListsAllHeader } from 'components/headers/lists-header'
 import { EmptyAllLists } from 'components/empty-states/all-lists'
 import { listsItemsSetSortOrder } from './lists.state'
-import { mutateListAction } from 'connectors/lists/mutation-create.state'
+import { mutateListCreate } from 'connectors/lists/mutation-create.state'
 
 import { CreateListModal } from 'connectors/confirm/create-list'
 import { getUserShareableLists } from './lists.state'
@@ -29,7 +29,7 @@ export const Lists = () => {
   }, [dispatch])
 
   // Actions
-  const handleCreateList = () => dispatch(mutateListAction())
+  const handleCreateList = () => dispatch(mutateListCreate())
   const handleNewest = () => dispatch(listsItemsSetSortOrder('DESC'))
   const handleOldest = () => dispatch(listsItemsSetSortOrder('ASC'))
 

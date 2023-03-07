@@ -6,7 +6,8 @@ import { mutateListCancel } from 'connectors/lists/mutation-create.state'
 export const CreateListModal = () => {
   const dispatch = useDispatch()
 
-  const showModal = useSelector((state) => state.mutationListCreate)
+  const showModal = useSelector((state) => state.mutationListCreate.open)
+  const id = useSelector((state) => state.mutationListCreate.id)
 
   const handleClose = () => {
     dispatch(mutateListCancel())
@@ -18,13 +19,13 @@ export const CreateListModal = () => {
     // send snowplow event here
   }
 
-  const createList = 'Create List'
+  const createList = (id) ? 'Create list with item' : 'Create list'
 
   return (
     <CreateEditShareableList
       showModal={showModal}
       modalTitle={createList}
-      modalSubmit={createList}
+      modalSubmit={'Create List'}
       handleClose={handleClose}
       handleSubmit={handleSubmit}
     />
