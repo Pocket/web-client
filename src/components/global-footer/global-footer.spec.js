@@ -1,7 +1,8 @@
 import { render } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
-
 import { GlobalFooter } from './global-footer'
+
+jest.mock('next/router', () => require('next-router-mock'))
 
 describe('GlobalFooter', () => {
   it('adds a top border to the footer if props.hasBorder is true', () => {
