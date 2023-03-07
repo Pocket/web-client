@@ -112,7 +112,7 @@ export const ListOfItems = () => {
 
   return (
     <>
-      <div className={itemsListStyle}>
+      <div className={itemsListStyle} data-cy={`list-of-items-view-${type}`}>
         {itemsToShow
           ? itemsToShow.map((itemId) => {
               const positionOfItem = pageSavedIds.indexOf(itemId)
