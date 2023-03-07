@@ -89,7 +89,7 @@ const homeHeaderStyle = css`
   }
 `
 
-export const HomeHeader = ({ headline, subheadline, moreLinkText, moreLinkUrl, moreLinkClick }) => {
+export const HomeHeader = ({ homeMoreLinkDataCy, headline, subheadline, moreLinkText, moreLinkUrl, moreLinkClick }) => {
   return headline ? (
     <header className={cx(cardPageHeaderStyle, homeHeaderStyle)}>
       <h2 className="headline">{headline}</h2>
@@ -97,6 +97,7 @@ export const HomeHeader = ({ headline, subheadline, moreLinkText, moreLinkUrl, m
       {moreLinkText ? (
         <div className="morelink">
           <HomeMoreLink
+            dataCy={homeMoreLinkDataCy}
             moreLinkText={moreLinkText}
             moreLinkUrl={moreLinkUrl}
             moreLinkClick={moreLinkClick}
@@ -107,19 +108,19 @@ export const HomeHeader = ({ headline, subheadline, moreLinkText, moreLinkUrl, m
   ) : null
 }
 
-const HomeMoreLink = ({ moreLinkUrl, moreLinkText, moreLinkClick }) => {
+const HomeMoreLink = ({ dataCy, moreLinkUrl, moreLinkText, moreLinkClick }) => {
   const handleClick = () => moreLinkClick(moreLinkText)
 
   if (moreLinkUrl) {
     return (
       <Link href={moreLinkUrl}>
-        <a onClick={handleClick}>{moreLinkText}</a>
+        <a onClick={handleClick} data-cy={dataCy}>{moreLinkText}</a>
       </Link>
     )
   }
   if (moreLinkText) {
     return (
-      <button className="inline text" onClick={handleClick}>
+      <button className="inline text" onClick={handleClick} data-cy={dataCy}>
         {moreLinkText}
       </button>
     )

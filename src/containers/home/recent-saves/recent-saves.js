@@ -26,6 +26,7 @@ export const HomeRecentSaves = ({ isBottom }) => {
   return recentSaves?.length > 0 ? (
     <SectionWrapper className={cx(isBottom && 'bottom')}>
       <HomeHeader
+        homeMoreLinkDataCy='go-to-saves'
         headline={t('home:recent-saves-title', 'Recent Saves')}
         moreLinkText={t('home:recent-saves-link-text', 'Go to Saves')}
         moreLinkUrl={'/saves?src=recent-saves'}
