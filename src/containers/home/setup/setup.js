@@ -327,17 +327,18 @@ const TopicSelector = ({
       </div>
       <div className="actions">
         {hasTopics || isReselect ? null : (
-          <button onClick={handleSkip} className="text">
+          <button onClick={handleSkip} className="text" data-cy='onboarding-skip'>
             Skip
           </button>
         )}
         {isReselect ? (
-          <button onClick={handleCancel} className="text">
+          <button onClick={handleCancel} className="text" data-cy='onboarding-cancel'>
             Cancel
           </button>
         ) : null}
         <button
           onClick={handleContinue}
+          data-cy='onboarding-continue'
           disabled={!hasTopics}
           className={cx(!hasTopics && 'disabled')}>
           Continue
