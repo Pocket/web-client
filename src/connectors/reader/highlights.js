@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { SelectionPopover } from 'components/popover/popover-selection'
+// import { SelectionPopover } from 'components/popover/popover-selection'
 import { HighlightInlineMenu } from 'components/annotations/annotations.inline'
 import { ModalLimitNotice as AnnotationsLimitModal } from 'components/annotations/annotations.limit'
 
@@ -95,14 +95,14 @@ export const Highlights = ({ children, id }) => {
   return (
     <>
       {React.cloneElement(children, passedProps)}
-      {highlight ? (
+      {/* {highlight ? (
         <SelectionPopover
           anchor={highlight}
           disablePopup={clearSelection}
           addAnnotation={addAnnotation}
           shareItem={itemShare}
         />
-      ) : null}
+      ) : null} */}
       {highlightList ? (
         <HighlightInlineMenu
           highlightList={highlightList}

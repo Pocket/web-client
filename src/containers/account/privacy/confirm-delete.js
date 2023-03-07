@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { accountDeleteConfirm } from './privacy.state'
 import { accountDeleteCancel } from './privacy.state'
 import { useTranslation, Trans } from 'next-i18next'
-import { errorCodes } from 'common/errors'
 
 const accountDeleteStyles = css`
   .toggleWrap {
@@ -68,9 +67,10 @@ export const AccountDeleteModal = () => {
   const showModal = useSelector((state) => state.userPrivacy?.deleteRequest)
   const deleteError = useSelector((state) => state.userProfile?.deleteRequestError)
 
-  const error =
-    errorCodes[deleteError]?.desc ||
-    t('account:error-generic', 'We are experiencing some issues, please try again later')
+  const error = t(
+    'account:error-generic',
+    'We are experiencing some issues, please try again later'
+  )
 
   return (
     <Modal

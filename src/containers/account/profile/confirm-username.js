@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { confirmUsernameUpdate } from './profile.state'
 import { cancelUsernameUpdate } from './profile.state'
 import { useTranslation } from 'next-i18next'
-import { errorCodes } from 'common/errors'
 
 const updateUsernameStyles = css`
   label {
@@ -70,9 +69,10 @@ export const UsernameModal = () => {
   const onChangeUsername = (e) => setUsername(e.target.value)
   const onChangePassword = (e) => setPassword(e.target.value)
 
-  const error =
-    errorCodes[usernameError]?.desc ||
-    t('account:error-generic', 'We are experiencing some issues, please try again later')
+  const error = t(
+    'account:error-generic',
+    'We are experiencing some issues, please try again later'
+  )
 
   return (
     <Modal

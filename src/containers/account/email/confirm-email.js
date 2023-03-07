@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { confirmPrimaryEmailUpdate } from './email.state'
 import { cancelPrimaryEmailUpdate } from './email.state'
 import { useTranslation } from 'next-i18next'
-import { errorCodes } from 'common/errors'
 
 const updateEmailStyles = css`
   label {
@@ -53,9 +52,10 @@ export const EmailModal = () => {
   const onChangeEmail = (e) => setEmail(e.target.value)
   const onChangePassword = (e) => setPassword(e.target.value)
 
-  const error =
-    errorCodes[emailError]?.desc ||
-    t('account:error-generic', 'We are experiencing some issues, please try again later')
+  const error = t(
+    'account:error-generic',
+    'We are experiencing some issues, please try again later'
+  )
 
   return (
     <Modal

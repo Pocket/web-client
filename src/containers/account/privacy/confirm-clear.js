@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { accountClearConfirm } from './privacy.state'
 import { accountClearCancel } from './privacy.state'
 import { useTranslation, Trans } from 'next-i18next'
-import { errorCodes } from 'common/errors'
 
 const accountClearStyles = css`
   .toggleWrap {
@@ -98,9 +97,10 @@ const PreClear = ({ cancelClearAccount, confirmClearAccount, setClearChecked, cl
   const { t } = useTranslation()
 
   const clearError = useSelector((state) => state.userPrivacy?.clearRequestError)
-  const error =
-    errorCodes[clearError]?.desc ||
-    t('account:error-generic', 'We are experiencing some issues, please try again later')
+  const error = t(
+    'account:error-generic',
+    'We are experiencing some issues, please try again later'
+  )
 
   return (
     <>

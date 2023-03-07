@@ -9,14 +9,11 @@ import { resendEmailConfirmation } from 'containers/account/email/email.state'
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { errorCodes } from 'common/errors'
-
 export const Email = () => {
   const dispatch = useDispatch()
 
   const [emailAlias, setEmailAlias] = useState('')
   const primaryEmail = useSelector((state) => state?.userEmail?.email)
-  const aliasError = useSelector((state) => state?.userEmail?.aliasError)
   const aliases = useSelector((state) => state?.userEmail?.aliases)
   const onChangeEmailAlias = (e) => setEmailAlias(e.target.value)
 
@@ -28,7 +25,7 @@ export const Email = () => {
   }
   const onRemoveAlias = (email) => dispatch(removeEmailAliasRequest(email))
 
-  const emailAliasError = errorCodes[aliasError]?.desc || false
+  const emailAliasError = false
 
   return (
     <>

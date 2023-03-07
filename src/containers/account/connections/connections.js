@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { errorCodes } from 'common/errors'
 import { ConnectedApp } from 'components/account/connections/connected-app'
 import { PocketApps } from 'components/account/connections/pocket-apps'
 import { Services } from 'components/account/connections/services'

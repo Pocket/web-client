@@ -7,7 +7,6 @@ import { confirmPasswordUpdate } from './profile.state'
 import { cancelPasswordUpdate } from './profile.state'
 import { setPasswordError } from './profile.state'
 import { useTranslation } from 'next-i18next'
-import { errorCodes } from 'common/errors'
 
 const updatePasswordStyles = css`
   label {
@@ -83,9 +82,10 @@ export const PasswordModal = () => {
     dispatch(confirmPasswordUpdate(newpassword, oldpassword))
   }
 
-  const error =
-    errorCodes[passwordError]?.desc ||
-    t('account:error-generic', 'We are experiencing some issues, please try again later')
+  const error = t(
+    'account:error-generic',
+    'We are experiencing some issues, please try again later'
+  )
 
   return (
     <Modal
