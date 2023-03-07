@@ -69,12 +69,12 @@ export function TransitionalActions({
   return (
     <div className={`${transitionalActionStyles} status-${saveStatus}`}>
       {isSaved ? (
-        <button className="saved" ref={popTrigger} onClick={onUnSave}>
+        <button className="saved" ref={popTrigger} onClick={onUnSave} data-cy='article-save-btn-saved'>
           <SaveFilledIcon className="saveIcon" />
           <span className="copy">{t('item-action:save-saved', 'Saved')}</span>
         </button>
       ) : (
-        <button className="save" ref={popTrigger} onClick={onSave}>
+        <button className="save" ref={popTrigger} onClick={onSave} data-cy='article-save-btn-save'>
           <SaveIcon className="saveIcon" />
           <span className="copy">{t('item-action:save-unsaved', 'Save')}</span>
         </button>
