@@ -68,6 +68,8 @@ function* itemsCreateList({ id }) {
     let listItemData = null
 
     const item = yield select(getItem, id)
+    // If item is null, that means an id was never passed in, so listItemData will
+    // remain null, which means it'll create a list without the item.
     if (item) {
       const { givenUrl, excerpt, thumbnail, title, publisher } = item
       listItemData = {
