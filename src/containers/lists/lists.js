@@ -35,7 +35,7 @@ export const Lists = () => {
 
   return (
     <Layout>
-      <SideNav type="saves" />
+      <SideNav type="saves" subset="lists" />
 
       {shouldRender ? (
         <main className="main">
