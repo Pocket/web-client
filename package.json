@@ -28,6 +28,7 @@
     "locale:inject": "node ./.scripts/localization/locale-inject",
     "locale:parse": "node ./.scripts/localization/locale-parse",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
+    "update": "npx npm-check-updates -u -i",
     "postinstall": "cd .scripts/localization && npm install -s && cd ../icons && npm install -s && cd ../styles && npm install -s"
   },
   "jest-junit": {
@@ -131,12 +132,11 @@
     "next": "13.2.3",
     "next-i18next": "13.2.1",
     "next-linaria": "0.11.0",
-    "next-redux-saga": "4.1.2",
     "next-redux-wrapper": "8.1.0",
     "node-fetch": "3.3.0",
     "nookies": "2.5.2",
     "prop-types": "15.8.1",
-    "query-string": "8.1.0",
+    "query-string": "7.1.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-google-recaptcha": "2.1.0",
