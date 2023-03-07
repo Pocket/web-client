@@ -148,7 +148,7 @@ export function SideNav({
   isDisabled,
   newSaveCount,
   trackMenuClick,
-  inListsExperiment,
+  inListsExperiment
 }) {
   const { t } = useTranslation()
 

@@ -11,7 +11,7 @@ import { VideoIcon } from 'components/icons/VideoIcon'
 import { sideNavHeader } from './side-nav'
 import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
 
-export function FiltersSideNav({ subActive, pinned, clickEvent, inListsExperiment, lists }) {
+export function FiltersSideNav({ subActive, pinned, clickEvent, inListsExperiment }) {
   const { t } = useTranslation()
 
   return (
@@ -65,7 +65,6 @@ export function FiltersSideNav({ subActive, pinned, clickEvent, inListsExperimen
               <PlaylistAddIcon className="side-nav-icon" /> All Lists
             </button>
           </Link>
-
         </div>
       ) : null}
 
