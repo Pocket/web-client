@@ -140,7 +140,7 @@ export const Recommendation = ({
     <VisibilitySensor onVisible={handleVisible}>
       <li className={recommendationStyles} data-cy="pocket-recs-article">
         <Link href={url} className="thumbnail" onClick={handleClick}>
-          <img src={thumbnailUrl} alt={`Thumbnail image for article`} />
+          <img src={thumbnailUrl} alt="Thumbnail image for article" />
         </Link>
         <div className="details">
           <Publisher name={publisher} logo={target?.publisher?.logoWideBlack} />
@@ -175,7 +175,6 @@ const recommendationsStyles = css`
   ${breakpointTinyTablet} {
     width: 100%;
     overflow-x: scroll;
-    overflow-scrolling: touch;
     display: flex;
     margin-bottom: 0;
   }

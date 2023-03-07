@@ -204,7 +204,7 @@ const GlobalNavAccount = ({
   const handleManageAccountCase = () => onLinkClick('manage-account')
   const handleHelpCase = () => onLinkClick('help')
   const handleMessagesCase = () => onLinkClick('messages')
-  const handleWhatsNewCase = () => onLinkClick('whats-new')
+
   const handleLogoutCase = () => {
     onLinkClick('logout')
     // Fire for all users when Braze launches

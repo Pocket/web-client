@@ -27,7 +27,7 @@ export const Saves = (props) => {
   const router = useRouter()
   const dispatch = useDispatch()
 
-  const { metaData = {}, subset: sub = 'active', filter: propFilter, locale } = props
+  const { metaData = {}, subset: sub = 'active', filter: propFilter } = props
   const { tag, filter: queryFilter, query: searchTerm } = router.query
   const subset = tag ? 'tag' : searchTerm ? 'search' : sub
   const filter = tag ? queryFilter : propFilter

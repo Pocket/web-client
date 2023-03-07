@@ -1,5 +1,5 @@
-import { put, takeLatest, take, race, call, select } from 'redux-saga/effects'
-import { updateShareableList } from 'common/api/mutations/updateShareableList'
+import { put, takeLatest, take, race } from 'redux-saga/effects'
+// import { updateShareableList } from 'common/api/mutations/updateShareableList'
 
 import { LIST_UPDATE_REQUEST } from 'actions'
 import { LIST_UPDATE_CONFIRM } from 'actions'
@@ -13,7 +13,7 @@ import { LIST_ITEMS_SUCCESS } from 'actions'
  --------------------------------------------------------------- */
 export const mutateListUpdateAction = (id) => ({ type: LIST_UPDATE_REQUEST, id })
 export const mutateListUpdateCancel = () => ({ type: LIST_UPDATE_CANCEL })
-export const mutateListUpdateConfirm = ({ title, description }) => ({ type: LIST_UPDATE_CONFIRM, title, description })
+export const mutateListUpdateConfirm = ({ title, description }) => ({ type: LIST_UPDATE_CONFIRM, title, description }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -44,9 +44,7 @@ export const mutationListUpdateReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-export const mutationListUpdateSagas = [
-  takeLatest(LIST_UPDATE_REQUEST, listUpdate)
-]
+export const mutationListUpdateSagas = [takeLatest(LIST_UPDATE_REQUEST, listUpdate)]
 
 /** SAGA :: SELECTORS
  --------------------------------------------------------------- */
@@ -69,7 +67,7 @@ function* listUpdate({ id }) {
     const data = {
       description,
       externalId: id,
-      status: "PRIVATE",
+      status: 'PRIVATE',
       title
     }
 

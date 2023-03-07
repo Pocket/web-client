@@ -11,9 +11,9 @@ export const AddToListModal = ({
   appRootSelector,
   showModal,
   modalTitle,
-  handleCreate = () => { },
-  handleClose = () => { },
-  handleSubmit = () => { },
+  // handleCreate = () => { },
+  handleClose = () => {},
+  handleSubmit = () => {},
   previouslySelected = '',
   selectOptions = []
 }) => {
@@ -21,7 +21,7 @@ export const AddToListModal = ({
 
   const setOptionValue = (e) => setValue(e.target.value)
 
-  const createAction = () => handleCreate()
+  // const createAction = () => handleCreate()
   const cancelAction = () => handleClose()
   const confirmAction = () => handleSubmit(value || selectOptions[0])
 

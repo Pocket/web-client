@@ -99,7 +99,7 @@ export const AvatarModal = () => {
     if (!types.includes(file.type)) {
       const fileErrorCopy = t(
         'account:avatar-error-file',
-        "We don't support that file type: {{fileType}}",
+        "We don't support that file type: {{fileType}}", // eslint-disable-line
         { fileType: file.type }
       )
       return dispatch(updateAvatarError(fileErrorCopy))

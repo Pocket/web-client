@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import { useSelector, useDispatch } from 'react-redux'
-import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux' //useDispatch
+// import { useRouter } from 'next/router'
 import Layout from 'layouts/main'
 import { ListPublicHeader } from 'components/headers/lists-header'
 
@@ -26,10 +26,10 @@ const MOCK_USER = {
 }
 
 export const PublicList = () => {
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const { slug, profile } = router.query
-  const userId = profile.replace('@', '')
+  // const dispatch = useDispatch()
+  // const router = useRouter()
+  // const { slug, profile } = router.query
+  // const userId = profile.replace('@', '')
 
   const isAuthenticated = useSelector((state) => state.user?.auth)
   const saveStatus = 'unsaved'

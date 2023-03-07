@@ -71,10 +71,13 @@ export default function Messages() {
     dispatch(setReleaseNotes(RELEASE_NOTES_VERSION))
   }, [dispatch])
 
+
   return (
+    // eslint-disable-next-line
     <Layout title={`Pocket - ${t('whats-new:whats-new', "What's New")}`}>
       <SideNav type="whats-new" isLoggedIn={isLoggedIn} />
       <main className={cx('main', whatsNewStyles)}>
+        {/* eslint-disable-next-line */}
         <WhatsNewHeader title={t('whats-new:whats-new', "What's New")} />
         <Jun242021 />
         <Jun212021 />

@@ -29,7 +29,7 @@
       {
         "vars": "local",
         "args": "after-used",
-        "ignoreRestSiblings": false
+        "ignoreRestSiblings": true
       }
     ],
     "no-console": [

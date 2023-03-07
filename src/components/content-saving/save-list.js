@@ -12,15 +12,11 @@ const saveListStyles = css`
   }
 `
 
-export const SaveListButton = ({
-  isAuthenticated,
-  saveStatus = "unsaved",
-  saveAction
-}) => {
+export const SaveListButton = ({ isAuthenticated, saveStatus = 'unsaved', saveAction }) => {
   const saveCopy = {
-    unsaved: "Save List",
-    saving: "Save List",
-    saved: "Saved"
+    unsaved: 'Save List',
+    saving: 'Save List',
+    saved: 'Saved'
   }
 
   const handleClick = () => saveAction()
@@ -45,10 +41,8 @@ export const SaveListButton = ({
         ref={popTrigger}
         variant="brand"
         size="small"
-        className={saveListStyles}
-      >
-        {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}{' '}
-        {saveCopy[saveStatus]}
+        className={saveListStyles}>
+        {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />} {saveCopy[saveStatus]}
       </Button>
       {!isAuthenticated && shown ? <SavePopover popoverRef={popBody} /> : null}
     </>

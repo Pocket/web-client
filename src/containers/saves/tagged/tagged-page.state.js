@@ -7,7 +7,6 @@ import { getUserTags as getUserTagsGraph } from 'common/api/queries/get-user-tag
 import { USER_TAGS_GET_REQUEST } from 'actions'
 import { USER_TAGS_GET_SUCCESS } from 'actions'
 import { USER_TAGS_GET_FAILURE } from 'actions'
-import { USER_TAGS_ITEM_SUCCESS } from 'actions'
 import { USER_TAGS_PIN } from 'actions'
 import { USER_TAGS_PINS_SET } from 'actions'
 

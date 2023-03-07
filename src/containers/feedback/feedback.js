@@ -11,7 +11,7 @@ const feedbackStyles = css`
   }
 `
 
-export const Feedback = ({ query }) => {
+export const Feedback = () => {
   const { t } = useTranslation()
 
   return (

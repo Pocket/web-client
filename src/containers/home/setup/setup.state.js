@@ -222,7 +222,7 @@ function clearUserTopicsCookie() {
 }
 
 function storeUserTopics() {
-  const userTopics = ["Entertainment", "Food", "Politics"]
+  const userTopics = ['Entertainment', 'Food', 'Politics']
   const yearInMs = 60 * 60 * 24 * 365
   // Set topic selection in local-storage so we can maintain state on refresh
   setCookie(null, 'getStartedUserTopics', JSON.stringify(userTopics), {
