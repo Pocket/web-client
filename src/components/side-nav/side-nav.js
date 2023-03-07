@@ -140,7 +140,16 @@ export const sideNavItem = css`
   }
 `
 
-export function SideNav({ type, subset, tag, pinned, isDisabled, newSaveCount, trackMenuClick }) {
+export function SideNav({
+  type,
+  subset,
+  tag,
+  pinned,
+  isDisabled,
+  newSaveCount,
+  trackMenuClick,
+  inListsExperiment,
+}) {
   const { t } = useTranslation()
 
   const [ref, inView] = useInView({ threshold: 0.5 })
@@ -157,7 +166,7 @@ export function SideNav({ type, subset, tag, pinned, isDisabled, newSaveCount, t
   const clickEvent = (e) => trackMenuClick(e.target.textContent)
 
   const navTypes = {
-    'saves': FiltersSideNav,
+    saves: FiltersSideNav,
     account: AccountSideNav
   }
   const SubNav = navTypes[type]
@@ -197,7 +206,14 @@ export function SideNav({ type, subset, tag, pinned, isDisabled, newSaveCount, t
             <CollectionsIcon className="side-nav-icon" /> {t('nav:collections', 'Collections')}
           </button>
         </Link>
-        {SubNav ? <SubNav subActive={subActive} pinned={pinned} clickEvent={clickEvent} /> : null}
+        {SubNav ? (
+          <SubNav
+            subActive={subActive}
+            pinned={pinned}
+            clickEvent={clickEvent}
+            inListsExperiment={inListsExperiment}
+          />
+        ) : null}
       </nav>
       <div className="bottom-nav">
         <button

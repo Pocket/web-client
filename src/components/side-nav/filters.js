@@ -9,8 +9,9 @@ import { ArchiveIcon } from 'components/icons/ArchiveIcon'
 import { VideoIcon } from 'components/icons/VideoIcon'
 
 import { sideNavHeader } from './side-nav'
+import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
 
-export function FiltersSideNav({ subActive, pinned, clickEvent }) {
+export function FiltersSideNav({ subActive, pinned, clickEvent, inListsExperiment, lists }) {
   const { t } = useTranslation()
 
   return (
@@ -52,6 +53,22 @@ export function FiltersSideNav({ subActive, pinned, clickEvent }) {
           <VideoIcon className="side-nav-icon" /> {t('nav:videos', 'Videos')}
         </button>
       </Link>
+
+      {inListsExperiment ? (
+        <div>
+          <div className={sideNavHeader}>Lists</div>
+          <Link href="/lists">
+            <button
+              className={subActive('lists')}
+              onClick={clickEvent}
+              data-cy="side-nav-all-lists">
+              <PlaylistAddIcon className="side-nav-icon" /> All Lists
+            </button>
+          </Link>
+
+        </div>
+      ) : null}
+
       <div className={sideNavHeader}>{t('nav:tags', 'Tags')}</div>
       <Link href="/saves/tags">
         <button className={subActive('tag')} onClick={clickEvent} data-cy="side-nav-all-tags">

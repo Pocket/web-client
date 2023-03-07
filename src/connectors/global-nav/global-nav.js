@@ -26,11 +26,13 @@ import { ArticleIcon } from 'components/icons/ArticleIcon'
 import { ArchiveIcon } from 'components/icons/ArchiveIcon'
 import { VideoIcon } from 'components/icons/VideoIcon'
 import { CollectionsIcon } from 'components/icons/CollectionsIcon'
+import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
 
 import { BASE_URL } from 'common/constants'
 import { LOGIN_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities/urls/urls'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
@@ -63,6 +65,8 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const retrievedAvatar = useSelector((state) => state?.userProfile?.avatar_url)
   const pocketLogoOutboundUrl = isLoggedIn ? '/saves' : 'https://getpocket.com'
+  const featureState = useSelector((state) => state.features)
+  const inListsExperiment = featureFlagActive({ flag: 'shared-lists', featureState })
 
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.userProfile?.first_name)
@@ -149,6 +153,12 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
       icon: <VideoIcon />,
       label: t('nav:videos', 'Videos'),
       url: '/saves/videos'
+    },
+    {
+      name: 'lists',
+      icon: <PlaylistAddIcon />,
+      label: 'All Lists',
+      url: inListsExperiment ? '/lists' : ''
     },
     {
       name: 'tags',
