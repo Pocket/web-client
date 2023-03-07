@@ -8,7 +8,6 @@ const updateShareableListQuery = gql`
       title
       status
       description
-      userId
     }
   }
 `
