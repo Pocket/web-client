@@ -86,7 +86,9 @@ function StaticSlate({ slateId, firstSlate }) {
   const moreLinkClick = showTopicSelector ? updateTopics : urlTrack
 
   return (
-    <SectionWrapper className={cx('homeSection', firstSlate && recentsTest && 'first-section')}>
+    <SectionWrapper
+      className={cx('homeSection', firstSlate && recentsTest && 'first-section')}
+      dataCy={`home-section-${headline.toLowerCase().replaceAll(' ', '-')}`}>
       <HomeHeader
         headline={headline}
         subheadline={subheadline}
@@ -150,7 +152,7 @@ function SlideSlate({ slateId }) {
 
   return (
     <>
-      <SectionWrapper className="homeSection slideSection">
+      <SectionWrapper className="homeSection slideSection" dataCy={`home-section-${headline.toLowerCase().replaceAll(' ', '-')}`}>
         <HomeHeader
           headline={headline}
           subheadline={subheadline}
@@ -184,14 +186,16 @@ function ExploreMoreTopics() {
 
   const onTopicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
 
+  const headingText = 'Discover More Topics'
+
   return (
-    <SectionWrapper className="homeSection">
+    <SectionWrapper className="homeSection" dataCy={`home-section-${headingText.toLowerCase().replaceAll(' ', '-')}`}>
       <TopicsPillbox
         omitPromoted={true}
         id={'page-topics'}
         topicsMap={topics}
         className="homeSection"
-        headingText="Discover More Topics"
+        headingText={headingText}
         headingClassName="heading"
         onTopicClick={onTopicClick}
       />
