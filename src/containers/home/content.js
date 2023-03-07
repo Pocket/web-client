@@ -159,10 +159,10 @@ function SlideSlate({ slateId }) {
           moreLinkClick={moreLinkClick}
         />
         <div className={cx('controls', hideSlide && 'no-slide')}>
-          <button className="text" onClick={slideOut} disabled={slideStart}>
+          <button className="text" onClick={slideOut} disabled={slideStart} data-cy='carousel-back'>
             <ChevronLeftIcon />
           </button>
-          <button className="text" onClick={slideIn} disabled={slideEnd}>
+          <button className="text" onClick={slideIn} disabled={slideEnd} data-cy='carousel-forward'>
             <ChevronRightIcon />
           </button>
         </div>
