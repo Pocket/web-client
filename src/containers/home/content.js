@@ -91,6 +91,7 @@ function StaticSlate({ slateId, firstSlate }) {
       dataCy={`home-section-${headline.toLowerCase().replaceAll(' ', '-')}`}>
       <HomeHeader
         headline={headline}
+        homeMoreLinkDataCy={showTopicSelector ? 'update-topics-link' : null}
         subheadline={subheadline}
         moreLinkText={slateLink?.text}
         moreLinkUrl={slateLink?.url}
