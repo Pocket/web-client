@@ -100,37 +100,6 @@ const toastWrapper = css`
   }
 `
 
-const messages = {
-  [ITEMS_UPSERT_SUCCESS]: 'added',
-  [MUTATION_DELETE_SUCCESS]: 'deleted',
-  [ITEMS_ADD_SUCCESS]: 'added',
-  [SHARE_RECOMMEND_SUCCESS]: 'shared',
-  [SHARE_RECOMMEND_FAILURE]: 'error-sharing',
-  [ITEMS_TAG_SUCCESS]: 'tagged',
-  [ITEMS_TAG_FAILURE]: 'error-tagging',
-  [ADD_SHARE_SUCCESS]: 'added',
-  [ADD_SHARE_FAILURE]: 'error-adding',
-  [COPY_ITEM_URL]: 'url-copied',
-  [COLLECTIONS_SAVE_SUCCESS]: 'added',
-  [COLLECTION_PAGE_SAVE_SUCCESS]: 'added',
-  [DISCOVER_ITEMS_SAVE_SUCCESS]: 'added',
-  [ARTICLE_SAVE_SUCCESS]: 'added',
-  [MUTATION_TAGGING]: 'tagged',
-  [MUTATION_ARCHIVE]: 'archived',
-  [MUTATION_UNARCHIVE]: 'added',
-  [MUTATION_FAVORITE]: 'added-to-favorites',
-  [MUTATION_UNFAVORITE]: 'removed-from-favorites',
-  [MUTATION_UPSERT]: 'added',
-  [HIGHLIGHT_SAVE_SUCCESS]: 'highlighted',
-  [HIGHLIGHT_DELETE_SUCCESS]: 'highlight-deleted'
-}
-
-const errors = [
-  SHARE_RECOMMEND_FAILURE,
-  ITEMS_TAG_FAILURE,
-  ADD_SHARE_FAILURE
-]
-
 export function Toast({
   stamp,
   type,
@@ -140,6 +109,45 @@ export function Toast({
   itemCount = 1,
   previousStatus
 }) {
+  const messages = {
+    // Adding Items
+    [ITEMS_UPSERT_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
+    [ITEMS_ADD_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
+    [ADD_SHARE_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
+    [COLLECTIONS_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
+    [COLLECTION_PAGE_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
+    [DISCOVER_ITEMS_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
+    [ARTICLE_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
+    [MUTATION_UNARCHIVE]: t('toast:added', '{{count}} item added', { itemCount }),
+    [MUTATION_UPSERT]: t('toast:added', '{{count}} item added', { itemCount }),
+    [ADD_SHARE_FAILURE]: t('toast:error-adding', 'Error adding item'),
+
+    // Tagging Items
+    [ITEMS_TAG_SUCCESS]: t('toast:tagged', '{{count}} item added', { itemCount }),
+    [MUTATION_TAGGING]: t('toast:tagged', '{{count}} item added', { itemCount }),
+
+    // Deleting
+    [MUTATION_DELETE_SUCCESS]: t('toast:deleted', '{{count}} item deleted', { itemCount }),
+
+    // Sharing
+    [SHARE_RECOMMEND_SUCCESS]: t('toast:shared', '{{count}} item shared', { itemCount }),
+    [SHARE_RECOMMEND_FAILURE]: t('toast:error-sharing', 'Error sharing item'),
+    [COPY_ITEM_URL]: t('toast:url-copied', 'URL copied'),
+
+    // Archive
+    [MUTATION_ARCHIVE]: t('toast:archived', '{{count}} item archived', { itemCount }),
+
+    [MUTATION_FAVORITE]: t('toast:added-to-favorites', '{{count}} item added to favorites', { itemCount }), //prettier-ignore
+    [MUTATION_UNFAVORITE]: t('toast:removed-from-favorites', '{{count}} item removed from favorites', { itemCount }), //prettier-ignore
+
+    [HIGHLIGHT_SAVE_SUCCESS]: t('toast:highlighted', '{{count}} item highlighted', { itemCount }), //prettier-ignore
+    [HIGHLIGHT_DELETE_SUCCESS]: t('toast:highlight-deleted', '{{count}} highlight removed', { itemCount }), //prettier-ignore
+
+    [ITEMS_TAG_FAILURE]: t('toast:error-tagging', 'Error tagging item')
+  }
+
+  const errors = [SHARE_RECOMMEND_FAILURE, ITEMS_TAG_FAILURE, ADD_SHARE_FAILURE]
+
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -173,7 +181,7 @@ export function Toast({
     <Fade show={show} remove={remove}>
       <div className={toastWrapper}>
         <div className={cx('toastBlock', `${type}`)} data-cy={messages[typeForMessage]}>
-          <p>{t(messages[typeForMessage], { count: itemCount })}</p>
+          <p>{messages[typeForMessage]}</p>
           <div className="actionWrapper">
             {showUndo ? (
               <button onClick={handleUndo} className="text">
@@ -189,40 +197,4 @@ export function Toast({
   )
 }
 
-// t('deleted', '{{count}} item deleted')
-// t('deleted_plural', '{{count}} items deleted')
-// t('error-deleting', 'Error deleting item')
-// t('error-deleting_plural', 'Error deleting items')
 
-// t('added', '{{count}} item added')
-// t('added_plural', '{{count}} items added')
-// t('error-adding', 'Error adding item')
-// t('error-adding_plural', 'Error adding items')
-
-// t('archived', '{{count}} item archived')
-// t('archived_plural', '{{count}} items archived')
-// t('error-archiving', 'Error archiving item')
-// t('error-archiving_plural', 'Error archiving items')
-
-// t('added-to-favorites', '{{count}} item added to favorites')
-// t('added-to-favorites_plural', '{{count}} items added to favorites')
-// t('error-adding-to-favorites', 'Error adding to favorites')
-
-// t('highlighted', '{{count}} item highlighted')
-// t('highlight-deleted', '{{count}} highlight removed')
-
-// t('removed-from-favorites', '{{count}} item removed from favorites')
-// t('removed-from-favorites_plural', '{{count}} items removed from favorites')
-// t('error-removing-from-favorites', 'Error removing from favorites')
-
-// t('shared', '{{count}} item shared')
-// t('shared_plural', '{{count}} items shared')
-// t('error-sharing', 'Error sharing item')
-// t('error-sharing_plural', 'Error sharing items')
-
-// t('tagged', '{{count}} item tagged')
-// t('tagged_plural', '{{count}} items tagged')
-// t('error-tagging', 'Error tagging item')
-// t('error-tagging_plural', 'Error tagging items')
-
-// t('url-copied' 'URL copied')
