@@ -93,7 +93,7 @@ function StaticSlate({ slateId, firstSlate }) {
       dataCy={`home-section-${cypressId}`}>
       <HomeHeader
         headline={headline}
-        homeMoreLinkDataCy={showTopicSelector ? 'update-topics-link' : `explore-more-${cypressId}`}
+        homeMoreLinkDataCy={showTopicSelector ? 'update-topics-link' : `more-link-${cypressId}`}
         subheadline={subheadline}
         moreLinkText={slateLink?.text}
         moreLinkUrl={slateLink?.url}
@@ -159,7 +159,7 @@ function SlideSlate({ slateId }) {
     <>
       <SectionWrapper className="homeSection slideSection" data-cy={`home-section-${cypressId}`}>
         <HomeHeader
-          homeMoreLinkDataCy={`explore-more-${cypressId}`}
+          homeMoreLinkDataCy={`more-link-${cypressId}`}
           headline={headline}
           subheadline={subheadline}
           moreLinkText={moreLink?.text}
