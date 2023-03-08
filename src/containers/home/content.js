@@ -157,7 +157,7 @@ function SlideSlate({ slateId }) {
 
   return (
     <>
-      <SectionWrapper className="homeSection slideSection" dataCy={`home-section-${dataName}`}>
+      <SectionWrapper className="homeSection slideSection" data-cy={`home-section-${dataName}`}>
         <HomeHeader
           homeMoreLinkDataCy={`explore-more-${dataName}`}
           headline={headline}
@@ -195,7 +195,7 @@ function ExploreMoreTopics() {
   const headingText = 'Discover More Topics'
 
   return (
-    <SectionWrapper className="homeSection" dataCy={`home-section-${headingText.toLowerCase().replaceAll(' ', '-')}`}>
+    <SectionWrapper className="homeSection" data-cy={`home-section-${headingText.toLowerCase().replaceAll(' ', '-')}`}>
       <TopicsPillbox
         omitPromoted={true}
         id={'page-topics'}

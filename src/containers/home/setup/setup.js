@@ -285,7 +285,7 @@ export const HomeSetup = () => {
 
   return !isDismissed && showSelectionSetup ? (
     <div className={containerClass}>
-      <SectionWrapper dataCy='onboarding-section'>
+      <SectionWrapper data-cy='onboarding-section'>
         <SectionToRender
           hasTopics={userTopics.length}
           isReselect={isReselect}

@@ -27,7 +27,7 @@ export const HomeRecentSaves = ({ isBottom }) => {
   return recentSaves?.length > 0 ? (
     <SectionWrapper
       className={cx(isBottom && 'bottom')}
-      dataCy='home-section-recent-saves'>
+      data-cy='home-section-recent-saves'>
       <HomeGreeting />
 
       <HomeHeader
