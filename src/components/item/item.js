@@ -94,6 +94,7 @@ export const Item = (props) => {
 
   const showTags = () => setTagsShown(true)
   const hideTags = () => setTagsShown(false)
+  const tagCount = tags?.length
 
   // Fire when item is in view
   useEffect(() => {
@@ -182,12 +183,12 @@ export const Item = (props) => {
             {listStatus ? <ListStatus status={listStatus} url={listUrl} /> : null}
             {storyCount ? (
               <div className="story-count" data-cy="story-count">
-                {t('collections:count-stories', '{{count}} stories', { count: storyCount })}
+                {t('item:story-count', '{{count}} stories', { count: storyCount })}
               </div>
             ) : null}
             {timeToRead ? (
               <div className="time-to-read" data-cy="time-to-read">
-                {timeToRead} min
+                {t('item:time-to-read', '{{timeToRead}} min', { timeToRead: timeToRead })}
               </div>
             ) : null}
             {tags?.length && type === 'detail' ? (
@@ -195,7 +196,7 @@ export const Item = (props) => {
                 className={cx('card-tags', tagsShown && 'show-tags')}
                 data-cy="card-tags"
                 onMouseEnter={showTags}>
-                {tags?.length} tags
+                {t('item:tag-count', '{{tagCount}} tags', { tagCount: tagCount })}
                 <ItemTags className="itemTags" tags={tags} mouseLeave={hideTags} />
               </div>
             ) : null}
