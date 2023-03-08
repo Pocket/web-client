@@ -5,22 +5,22 @@ import { getShareableList } from 'common/api/queries/get-shareable-list'
 
 import { LIST_ITEMS_SUCCESS } from 'actions'
 
-import { ITEMS_SHAREABLE_LIST_REQUEST } from 'actions'
-import { ITEMS_SHAREABLE_LIST_SUCCESS } from 'actions'
-import { ITEMS_SHAREABLE_LIST_FAILURE } from 'actions'
+import { LIST_INDIVIDUAL_REQUEST } from 'actions'
+import { LIST_INDIVIDUAL_SUCCESS } from 'actions'
+import { LIST_INDIVIDUAL_FAILURE } from 'actions'
 
 import { LIST_DELETE_ITEM_SUCCESS } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getIndividualListAction = (id) => ({ type: ITEMS_SHAREABLE_LIST_REQUEST, id })
+export const getIndividualListAction = (id) => ({ type: LIST_INDIVIDUAL_REQUEST, id })
 
 /** REDUCERS
  --------------------------------------------------------------- */
 export const pageIndividualListIdsReducers = (state = {}, action) => {
   switch (action.type) {
     case LIST_DELETE_ITEM_SUCCESS:
-    case ITEMS_SHAREABLE_LIST_SUCCESS: {
+    case LIST_INDIVIDUAL_SUCCESS: {
       const { externalId, externalIdList } = action
       return {
         ...state,
@@ -36,7 +36,7 @@ export const pageIndividualListIdsReducers = (state = {}, action) => {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const pageIndividualListsSagas = [
-  takeEvery(ITEMS_SHAREABLE_LIST_REQUEST, getIndividualList),
+  takeEvery(LIST_INDIVIDUAL_REQUEST, getIndividualList),
 ]
 
 /** SAGA :: RESPONDERS
@@ -53,8 +53,8 @@ function* getIndividualList({ id }) {
     }
 
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
-    yield put({ type: ITEMS_SHAREABLE_LIST_SUCCESS, externalId, externalIdList })
+    yield put({ type: LIST_INDIVIDUAL_SUCCESS, externalId, externalIdList })
   } catch (error) {
-    yield put({ type: ITEMS_SHAREABLE_LIST_FAILURE, error })
+    yield put({ type: LIST_INDIVIDUAL_FAILURE, error })
   }
 }

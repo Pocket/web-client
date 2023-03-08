@@ -2,35 +2,35 @@ import { put, select, takeEvery } from 'redux-saga/effects'
 
 import { getShareableLists } from 'common/api/queries/get-shareable-lists'
 
-import { ITEMS_LISTS_PAGE_SET_SORT_ORDER_REQUEST } from 'actions'
-import { ITEMS_LISTS_PAGE_SET_SORT_ORDER } from 'actions'
-import { USER_SHAREABLE_LISTS_REQUEST } from 'actions'
-import { USER_SHAREABLE_LISTS_REQUEST_SUCCESS } from 'actions'
-import { USER_SHAREABLE_LISTS_REQUEST_FAILURE } from 'actions'
-import { ITEMS_CREATE_LIST_SUCCESS } from 'actions'
-import { SHAREABLE_LIST_DELETE_SUCCESS } from 'actions'
+import { LIST_PAGE_SET_SORT_ORDER_REQUEST } from 'actions'
+import { LIST_PAGE_SET_SORT_ORDER } from 'actions'
+import { LIST_ALL_REQUEST } from 'actions'
+import { LIST_ALL_REQUEST_SUCCESS } from 'actions'
+import { LIST_ALL_REQUEST_FAILURE } from 'actions'
+import { LIST_CREATE_SUCCESS } from 'actions'
+import { LIST_DELETE_SUCCESS } from 'actions'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const listsItemsSetSortOrder = (sortOrder) => ({type: ITEMS_LISTS_PAGE_SET_SORT_ORDER_REQUEST, sortOrder}) //prettier-ignore
-export const getUserShareableLists = () => ({ type: USER_SHAREABLE_LISTS_REQUEST })
+export const listsItemsSetSortOrder = (sortOrder) => ({type: LIST_PAGE_SET_SORT_ORDER_REQUEST, sortOrder}) //prettier-ignore
+export const getUserShareableLists = () => ({ type: LIST_ALL_REQUEST })
 
 /** LIST SAVED REDUCERS
  --------------------------------------------------------------- */
 export const pageListsIdsReducers = (state = [], action) => {
   switch (action.type) {
-    case ITEMS_LISTS_PAGE_SET_SORT_ORDER: {
+    case LIST_PAGE_SET_SORT_ORDER: {
       return state.reverse()
     }
 
-    case ITEMS_CREATE_LIST_SUCCESS: {
+    case LIST_CREATE_SUCCESS: {
       const { externalId } = action
       return [externalId, ...state]
     }
 
-    case SHAREABLE_LIST_DELETE_SUCCESS:
-    case USER_SHAREABLE_LISTS_REQUEST_SUCCESS: {
+    case LIST_DELETE_SUCCESS:
+    case LIST_ALL_REQUEST_SUCCESS: {
       const { externalIds } = action
       return [...externalIds]
     }
@@ -50,12 +50,12 @@ const initialState = {
 
 export const pageListsInfoReducers = (state = initialState, action) => {
   switch (action.type) {
-    case ITEMS_LISTS_PAGE_SET_SORT_ORDER: {
+    case LIST_PAGE_SET_SORT_ORDER: {
       const { sortOrder } = action
       return { ...state, sortOrder }
     }
 
-    case ITEMS_CREATE_LIST_SUCCESS: {
+    case LIST_CREATE_SUCCESS: {
       const { newList, externalId } = action
       return {
         ...state,
@@ -63,7 +63,7 @@ export const pageListsInfoReducers = (state = initialState, action) => {
       }
     }
 
-    case USER_SHAREABLE_LISTS_REQUEST_SUCCESS: {
+    case LIST_ALL_REQUEST_SUCCESS: {
       const { allLists, titleToIdList } = action
       return {
         ...state,
@@ -81,8 +81,8 @@ export const pageListsInfoReducers = (state = initialState, action) => {
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const pageListsIdsSagas = [
-  takeEvery(ITEMS_LISTS_PAGE_SET_SORT_ORDER_REQUEST, adjustSortOrder),
-  takeEvery(USER_SHAREABLE_LISTS_REQUEST, userShareableListsRequest)
+  takeEvery(LIST_PAGE_SET_SORT_ORDER_REQUEST, adjustSortOrder),
+  takeEvery(LIST_ALL_REQUEST, userShareableListsRequest)
 ]
 
 /** SAGA :: SELECTORS
@@ -98,7 +98,7 @@ function* adjustSortOrder(action) {
   // Don't change sort order if it's already in the same space
   if (currentSortOrder === sortOrder) return
 
-  yield put({ type: ITEMS_LISTS_PAGE_SET_SORT_ORDER, sortOrder })
+  yield put({ type: LIST_PAGE_SET_SORT_ORDER, sortOrder })
 }
 
 function* userShareableListsRequest() {
@@ -109,12 +109,12 @@ function* userShareableListsRequest() {
     const titleToIdList = userShareableLists.reduce((obj, list) => ({ ...obj, [list.title]: list.externalId }), {})
 
     return yield put({
-      type: USER_SHAREABLE_LISTS_REQUEST_SUCCESS,
+      type: LIST_ALL_REQUEST_SUCCESS,
       allLists,
       externalIds,
       titleToIdList
     })
   } catch {
-    return yield put({ type: USER_SHAREABLE_LISTS_REQUEST_FAILURE })
+    return yield put({ type: LIST_ALL_REQUEST_FAILURE })
   }
 }
