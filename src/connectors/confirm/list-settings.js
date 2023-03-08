@@ -25,7 +25,7 @@ export const ListSettingsModal = ({ id }) => {
     // snowplow event
   }
 
-  return (
+  return showModal ? (
     <CreateEditShareableList
       showModal={showModal}
       modalTitle="List Settings"
@@ -35,5 +35,5 @@ export const ListSettingsModal = ({ id }) => {
       handleClose={handleClose}
       handleSubmit={handleSubmit}
     />
-  )
+  ) : null
 }
