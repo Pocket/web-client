@@ -1,3 +1,10 @@
+## [1.79.21](https://github.com/Pocket/web-client/compare/v1.79.20...v1.79.21) (2023-03-08)
+
+
+### Bug Fixes
+
+* **lists:** dont render modals unless showmodal prop is true ([dfa8c55](https://github.com/Pocket/web-client/commit/dfa8c5513ca74988393e2d0f506a9204eb0923e2))
+
 ## [1.79.20](https://github.com/Pocket/web-client/compare/v1.79.19...v1.79.20) (2023-03-08)
 
 
