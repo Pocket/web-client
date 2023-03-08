@@ -1,3 +1,11 @@
+# [1.80.0](https://github.com/Pocket/web-client/compare/v1.79.23...v1.80.0) (2023-03-08)
+
+
+### Features
+
+* **collections:** localize 'count stories' ([9961536](https://github.com/Pocket/web-client/commit/9961536b4af13ba7e42627c0ba35dc9cfa069751))
+* **collections:** removed commented out translation per PR review ([6a33083](https://github.com/Pocket/web-client/commit/6a3308336f74a9196e5e3414e511d9f2305cf559))
+
 ## [1.79.23](https://github.com/Pocket/web-client/compare/v1.79.22...v1.79.23) (2023-03-08)
 
 
