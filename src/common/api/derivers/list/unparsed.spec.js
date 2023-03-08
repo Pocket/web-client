@@ -114,7 +114,6 @@ describe('Saves - Unparsed', () => {
         url: ''
       }
     ])
-    expect(item.analyticsData.id).toBe('3117582481')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 

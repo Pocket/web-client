@@ -5,7 +5,7 @@ export const savesActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position', 'destination'],
+    expects: ['url', 'position', 'destination'],
     description: 'Fired when a user clicks the publisher in a card on Saves'
   },
   'saves.card.permanent-library': {
@@ -15,7 +15,7 @@ export const savesActions = {
       destination: 'internal',
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the Permanent Library icon in a card on Saves'
   },
   'saves.card.open': {
@@ -24,7 +24,7 @@ export const savesActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position', 'destination'],
+    expects: ['url', 'position', 'destination'],
     description: 'Fired when a user clicks the card on Saves'
   },
   'saves.card.impression': {
@@ -34,7 +34,7 @@ export const savesActions = {
       component: 'ui',
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a card scrolls into view on Saves; passing in label to capture the card type being displayed (list, detail, or grid). Not required'
   },
   'saves.share': {
@@ -43,7 +43,7 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the Share icon in a card on Saves'
   },
   'saves.delete': {
@@ -52,7 +52,7 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the Delete icon in a card on Saves'
   },
   'saves.archive': {
@@ -61,7 +61,7 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the Archive icon in a card on Saves'
   },
   'saves.unarchive': {
@@ -71,7 +71,7 @@ export const savesActions = {
       engagementType: 'save',
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the Un-Archive/Add icon in a card on Saves'
   },
   'saves.favorite': {
@@ -80,7 +80,7 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the Favorite icon in a card on Saves'
   },
   'saves.un-favorite': {
@@ -89,7 +89,7 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the Un-Favorite icon in a card on Saves'
   },
   'saves.tag': {
@@ -98,7 +98,7 @@ export const savesActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a user clicks the Tag icon in a card on Saves'
   },
   'saves.display.view': {

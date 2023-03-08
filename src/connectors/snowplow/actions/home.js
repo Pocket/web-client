@@ -16,7 +16,7 @@ export const homeActions = {
       component: 'ui',
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'Fired when a card in the `Recent Saves` section scrolls into view'
   },
   'home.recent.open': {
@@ -35,7 +35,7 @@ export const homeActions = {
     eventData: {
       uiType: 'card'
     },
-    expects: ['id', 'url', 'position', 'destination'],
+    expects: ['url', 'position', 'destination'],
     description: 'Fired when a user clicks the publisher in a card in the `Recent Saves` section'
   },
   'home.recent.view-saves': {
@@ -45,6 +45,22 @@ export const homeActions = {
       uiType: 'link'
     },
     description: 'Fired when a user clicks the `Go to Saves` link in the recent saves section'
+  },
+  'home.hits.carousel-forward': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a user clicks the pocket hits carousel forward button'
+  },
+  'home.hits.carousel-back': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a user clicks the pocket hits carousel back button'
   },
   'home.corpus.save': {
     eventType: 'engagement',
@@ -103,5 +119,5 @@ export const homeActions = {
     },
     expects: ['label'],
     description: 'Fired when a user clicks the `Exlore more *` link within each topic section'
-  },
+  }
 }

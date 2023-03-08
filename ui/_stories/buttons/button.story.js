@@ -57,6 +57,17 @@ export const Button = () => {
         </button>
         <button className="text small">Button as text</button>
       </div>
+
+      <h4>tiny</h4>
+      <div className="buttonList">
+        <button className="primary tiny">Primary</button>
+        <button className="secondary tiny">Secondary</button>
+        <button className="brand tiny">Brand</button>
+        <button className="primary tiny">
+          <PremiumIcon /> With Icon
+        </button>
+        <button className="text tiny">Button as text</button>
+      </div>
     </div>
   )
 }

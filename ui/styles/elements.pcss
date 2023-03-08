@@ -405,6 +405,12 @@ input[type="reset"] {
     outline-offset: 3px;
   }
 
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+
   /** We don't want to outline tooltip*/
   &[data-tooltip] {
     border: 2px solid var(--color-canvas);
@@ -422,6 +428,11 @@ input[type="reset"] {
   &.small {
     font-size: 0.85rem;
     padding: 0.75rem;
+  }
+
+  &.tiny {
+    font-size: 0.85rem;
+    padding: 0.375rem 0.75rem;
   }
 
   .colormode-dark & {
@@ -461,7 +472,28 @@ input[type="reset"] {
     }
   }
 
-  & + button,
+  &.inline {
+    display: inline;
+    background: none;
+    padding: 0;
+    color: var(--color-textPrimary);
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+
+    &:focus {
+      outline: inherit;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    &:hover {
+      color: var(--color-textLinkHover);
+    }
+  }
+
   & + a.button,
   & + input[type="button"],
   & + input[type="submit"],

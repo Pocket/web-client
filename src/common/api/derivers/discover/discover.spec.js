@@ -163,7 +163,6 @@ describe('Discover', () => {
         name: 'Jon Porter'
       }
     ])
-    expect(item.analyticsData.id).toBe('3460462323')
     expect(item.analyticsData.recommendationId).toBe('RecommendationAPI/3460462323')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
 

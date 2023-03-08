@@ -17,7 +17,7 @@ const cardPageHeaderStyle = css`
     font-size: var(--fontSize250);
     line-height: 1.2;
     letter-spacing: -0.005em;
-    margin-bottom: var(--spacing150);
+    margin-bottom: 1.5rem;
 
     ${breakpointLargeTablet} {
       font-size: var(--fontSize200);
@@ -38,7 +38,7 @@ const cardPageHeaderStyle = css`
   }
 
   h2 {
-    margin-bottom: var(--spacing050);
+    margin-bottom: 1.725rem;
   }
 
   .collectionSubTitle {
@@ -82,22 +82,22 @@ const subHeadingStyle = css`
   font-family: 'Doyle';
   font-style: normal;
   font-weight: 500;
-  font-size: var(--fontSize125);
+  font-size: 1.5rem;
   line-height: 1.2;
-  margin-bottom: var(--spacing050);
+  margin-bottom: 0.5rem;
 
   ${breakpointMediumTablet} {
     font-weight: 500;
-    font-size: var(--fontSize100);
-    margin-bottom: var(--spacing025);
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
   }
 `
 
 const cardListHeadingStyle = css`
-  margin: var(--spacing250) 0 calc(var(--spacing100) * -1);
+  margin: 0 0 2rem 0;
 
   ${breakpointLargeHandset} {
-    margin: var(--spacing150) 0 calc(var(--spacing050) * -1);
+    margin: 0 0 1.725rem;
   }
 `
 

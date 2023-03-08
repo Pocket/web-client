@@ -108,7 +108,6 @@ describe('Saves - Parsed', () => {
         url: 'https://www.nytimes.com/by/jane-e-brody'
       }
     ])
-    expect(item.analyticsData.id).toBe('3362121180')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 

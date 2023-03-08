@@ -197,13 +197,11 @@ export function CallOutStartLibraryExplore({
     <div className={ExplorePosition}>
       {isAuthenticated ? null : (
         <section>
-          <Chyron instanceId={INSTANCE_ID}>
-            <CallOutStartLibrary
-              onVisible={handleImpression}
-              handleDismiss={handleDismiss}
-              handleComplete={handleComplete}
-            />
-          </Chyron>
+          <CallOutStartLibrary
+            onVisible={handleImpression}
+            handleDismiss={handleDismiss}
+            handleComplete={handleComplete}
+          />
         </section>
       )}
     </div>

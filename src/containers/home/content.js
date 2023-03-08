@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
+import { useSwipeable } from 'react-swipeable'
 import { cx } from 'linaria'
 
-import { Card } from 'components/item-card/card'
-import { listStrata, listSlide } from 'components/items-layout/list-strata'
+import { ItemCard } from 'connectors/items/item-card-transitional'
+import { standardGrid } from 'components/item/items-layout'
+import { basicSlide } from 'components/item/items-layout'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { getHomeContent } from './home.state'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeHeader } from 'components/headers/home-header'
-import { SaveToPocket } from 'components/item-actions/save-to-pocket'
-import { itemActionStyle } from 'components/item-actions/base'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import TopicsPillbox from 'components/topics-pillbox/topics-pillbox'
@@ -18,8 +18,7 @@ import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
 import { useRouter } from 'node_modules/next/router'
 
-import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
-import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
+import { useViewport } from 'components/viewport-provider/viewport-provider'
 
 export const HomeContent = () => {
   const { locale } = useRouter()
@@ -48,43 +47,42 @@ export const HomeContent = () => {
 }
 
 function Slate({ slateId }) {
-  const dispatch = useDispatch()
   const slates = useSelector((state) => state.pageHome.slates)
   const slate = useSelector((state) => state.pageHome.slatesById[slateId])
-  const featureState = useSelector((state) => state.features) || {}
-  const [slide, setSlide] = useState(false)
-
   if (!slate) return null
+
+  const { recommendationReasonType } = slate
+  const firstSlate = slates.indexOf(slateId) === 0
+  const showHits = recommendationReasonType === 'POCKET_HITS'
+
+  const SlateToRender = showHits ? SlideSlate : StaticSlate
+  return <SlateToRender slateId={slateId} firstSlate={firstSlate} />
+}
+
+function StaticSlate({ slateId, firstSlate }) {
+  const viewport = useViewport()
+  const dispatch = useDispatch()
+  const slate = useSelector((state) => state.pageHome.slatesById[slateId])
 
   const { headline, subheadline, moreLink, recommendations, recommendationReasonType } = slate
 
-  const showSlide = featureFlagActive({ flag: 'pocket-hits.slide', featureState })
-
-  const showTopicSelector = recommendationReasonType === 'PREFERRED_TOPICS'
-  const showHits = recommendationReasonType === 'POCKET_HITS'
-
-  const recCount = slates.indexOf(slateId) === 0 || showHits ? 6 : 3
+  const recCount = firstSlate ? 6 : viewport.width <= 959 ? 4 : 3
   const recsToShow = recommendations.slice(0, recCount)
 
+  const showTopicSelector = recommendationReasonType === 'PREFERRED_TOPICS'
   const slateLink = showTopicSelector ? { text: 'Update topics', url: false } : moreLink
 
   const urlTrack = (label) => {
     dispatch(sendSnowplowEvent('home.topic.view-more', { label }))
   }
+
   const updateTopics = () => {
     dispatch(reSelectTopics())
     dispatch(sendSnowplowEvent('get-started.topic.reselect'))
   }
+
   const moreLinkClick = showTopicSelector ? updateTopics : urlTrack
 
-  const slideIn = () => {
-    setSlide(true)
-  }
-  const slideOut = () => {
-    setSlide(false)
-  }
-
-  const sectionClassname = cx(listStrata, showHits && 'smallCards')
   return (
     <SectionWrapper className="homeSection">
       <HomeHeader
@@ -94,126 +92,87 @@ function Slate({ slateId }) {
         moreLinkUrl={slateLink?.url}
         moreLinkClick={moreLinkClick}
       />
-      {showSlide && showHits ? (
-        <>
-          <div className="controls">
-            <button className="text" onClick={slideOut}>
-              <ChevronLeftIcon />
-            </button>
-            <button className="text" onClick={slideIn}>
-              <ChevronRightIcon />
-            </button>
-          </div>
-
-          <div className={listSlide}>
-            <div className={cx(listStrata, 'slideSection', slide && 'slide')}>
-              {recsToShow.map((corpusId) => (
-                <ItemCard key={corpusId} corpusId={corpusId} />
-              ))}
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className={sectionClassname}>
-          {recsToShow.map((corpusId) => (
-            <ItemCard key={corpusId} corpusId={corpusId} />
-          ))}
-        </div>
-      )}
+      <div className={standardGrid}>{recsToShow.map(Card)}</div>
     </SectionWrapper>
   )
 }
 
-function ItemCard({ corpusId }) {
+function SlideSlate({ slateId }) {
   const dispatch = useDispatch()
-  const item = useSelector((state) => state.itemsDisplay[corpusId])
-  const impressionFired = useSelector((state) => state.analytics.impressions.includes(corpusId))
+  const [slidePage, setSlidePage] = useState(0)
+  const slate = useSelector((state) => state.pageHome.slatesById[slateId])
 
-  if (!item) return null
+  const { headline, subheadline, moreLink, recommendations } = slate
 
-  const { title, imageUrl, url, excerpt, publisher, topic } = item
+  const viewport = useViewport()
+  const itemsOnScreen = getItemsOnSceen(viewport.width)
+  const recCount = recommendations.length
+  const recsToShow = recommendations.slice(0, recCount)
+  const hideSlide = recCount <= itemsOnScreen
+  const totalPages = Math.ceil(recCount / itemsOnScreen)
+  const transformPercentage = (slidePage / totalPages) * 100
 
-  const analyticsData = {
-    corpusRecommendationId: corpusId,
-    url,
-    destination: 'external',
-    ...item?.analyticsData
+  const transformStyle = {
+    width: `${totalPages * 100}%`,
+    gridTemplateColumns: `repeat(${totalPages * 12}, 1fr)`,
+    transform: `translateX(-${transformPercentage}%)`
   }
 
-  const onImpression = () => dispatch(sendSnowplowEvent('home.corpus.impression', analyticsData))
-  const onItemInView = (inView) => (!impressionFired && inView ? onImpression() : null)
+  const handlers = useSwipeable({
+    onSwipedLeft: () => slideIn(),
+    onSwipedRight: () => slideOut(),
+    swipeDuration: 500,
+    preventScrollOnSwipe: true,
+    trackMouse: false
+  })
 
-  const onOpenOriginalUrl = () => {
-    const data = { ...analyticsData, destination: 'external' }
-    dispatch(sendSnowplowEvent('home.corpus.view-original', data))
+  const slideIn = () => {
+    setSlidePage(Math.min(totalPages - 1, slidePage + 1))
+    dispatch(sendSnowplowEvent('home.hits.carousel-forward'))
   }
-  const onOpen = () => dispatch(sendSnowplowEvent('home.corpus.open', analyticsData))
+  const slideOut = () => {
+    setSlidePage(Math.max(0, slidePage - 1))
+    dispatch(sendSnowplowEvent('home.hits.carousel-back'))
+  }
+
+  const moreLinkClick = (label) => {
+    dispatch(sendSnowplowEvent('home.topic.view-more', { label }))
+  }
+
+  const slideEnd = slidePage === totalPages - 1
+  const slideStart = slidePage === 0
+
+  useEffect(() => {
+    setSlidePage(0)
+  }, [totalPages])
 
   return (
-    <Card
-      itemId={corpusId}
-      externalUrl={url}
-      title={title}
-      itemImage={imageUrl}
-      publisher={publisher}
-      excerpt={excerpt}
-      showExcerpt={true}
-      authors={null}
-      className="homeCard clamped"
-      // Open Actions
-      openUrl={url}
-      onOpen={onOpen}
-      onOpenOriginalUrl={onOpenOriginalUrl}
-      onItemInView={onItemInView}
-      onImageFail={() => {}}
-      topicName={topic}
-      ActionMenu={CardActions}
-    />
-  )
-}
-
-function CardActions({ id }) {
-  const featureState = useSelector((state) => state.features) || {}
-  const hideCopy = featureFlagActive({ flag: 'home.next', featureState })
-
-  const dispatch = useDispatch()
-  const isAuthenticated = useSelector((state) => state.user.auth)
-  const item = useSelector((state) => state.itemsDisplay[id])
-
-  const saveItemId = useSelector((state) => state.itemsTransitions[id])
-  const saveStatus = saveItemId ? 'saved' : 'unsaved'
-
-  if (!item) return null
-
-  const { corpusRecommendationId, url } = item
-  const analyticsData = { corpusRecommendationId, url }
-
-  // Prep save action
-  const onSave = () => {
-    dispatch(sendSnowplowEvent('home.corpus.save', analyticsData))
-    dispatch(mutationUpsertTransitionalItem(url, id))
-  }
-
-  const onUnSave = () => {
-    dispatch(sendSnowplowEvent('home.corpus.unsave', analyticsData))
-    dispatch(mutationDeleteTransitionalItem(saveItemId, id))
-  }
-
-  const saveAction = saveItemId ? onUnSave : onSave
-
-  return (
-    <div className={`${itemActionStyle} actions`}>
-      <SaveToPocket
-        allowRead={false}
-        url={url}
-        hideCopy={hideCopy}
-        onOpen={() => {}}
-        saveAction={saveAction}
-        isAuthenticated={isAuthenticated}
-        saveStatus={saveStatus}
-        id={id}
-      />
-    </div>
+    <>
+      <SectionWrapper className="homeSection slideSection">
+        <HomeHeader
+          headline={headline}
+          subheadline={subheadline}
+          moreLinkText={moreLink?.text}
+          moreLinkUrl={moreLink?.url}
+          moreLinkClick={moreLinkClick}
+        />
+        <div className={cx('controls', hideSlide && 'no-slide')}>
+          <button className="text" onClick={slideOut} disabled={slideStart}>
+            <ChevronLeftIcon />
+          </button>
+          <button className="text" onClick={slideIn} disabled={slideEnd}>
+            <ChevronRightIcon />
+          </button>
+        </div>
+      </SectionWrapper>
+      <div className={basicSlide} {...handlers}>
+        <div className="outer-slide">
+          <div className="inner-slide" style={transformStyle}>
+            {recsToShow.map(Card)}
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
 
@@ -236,4 +195,16 @@ function ExploreMoreTopics() {
       />
     </SectionWrapper>
   )
+}
+
+// This is just a convenience method so we can keep grid declarations simple
+function Card(id) {
+  return <ItemCard key={id} id={id} snowplowId="home.corpus" />
+}
+
+function getItemsOnSceen(width) {
+  if (width <= 599) return 1
+  if (width <= 719) return 2
+  if (width <= 1023) return 3
+  return 4 // Everything
 }

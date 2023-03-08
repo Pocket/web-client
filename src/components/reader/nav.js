@@ -168,6 +168,11 @@ export const ReaderNav = ({
     goBack()
   }
 
+  const clickArchive = () => {
+    archiveItem()
+    goBack()
+  }
+
   const buttonClass = cx(buttonReset, buttonStyles)
 
   useEffect(() => {
@@ -249,7 +254,7 @@ export const ReaderNav = ({
             </button>
 
             <button
-              onClick={archiveItem}
+              onClick={clickArchive}
               aria-label={
                 archive
                   ? t('nav:re-add-to-list', 'Re-add to List')

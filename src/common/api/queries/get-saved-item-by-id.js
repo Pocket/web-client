@@ -68,6 +68,10 @@ function handleResponse(response) {
 
   const relatedArticles = relatedAfterArticle.map((relatedItem) => ({
     corpusRecommendationId: relatedItem?.corpusRecommendationId,
+    analyticsData: {
+      corpusRecommendationId: relatedItem?.corpusRecommendationId,
+      url: relatedItem?.corpusItem?.saveUrl
+    },
     ...relatedItem?.corpusItem
   }))
   const relatedArticlesById = arrayToObject(relatedArticles, 'id')

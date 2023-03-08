@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { breakpointLargeTablet } from 'common/constants' // 1023
 import { breakpointSmallTablet } from 'common/constants' // 839
 import { breakpointLargeHandset } from 'common/constants' // 599
@@ -11,6 +11,11 @@ const wrapper = css`
   width: 100%;
   padding: var(--spacing400) 0;
   border-bottom: var(--dividerStyle);
+
+  &.noBorder {
+    border-bottom: none;
+    padding: 0 0 var(--spacing400) 0;
+  }
 
   .brandBlock {
     display: flex;
@@ -117,11 +122,11 @@ const wrapper = css`
   }
 `
 
-export function CallOutBrand() {
+export function CallOutBrand({ border = true }) {
   const { t } = useTranslation()
-
+  const classNames = cx(wrapper, 'brandingMessage', !border && 'noBorder')
   return (
-    <div className={`${wrapper} brandingMessage`}>
+    <div className={classNames}>
       <div className="brandBlock">
         <aside>
           {t('call-out:interesting-stories', 'Interesting stories for interesting people')}

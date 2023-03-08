@@ -101,6 +101,26 @@ import { pageTopicReducers } from 'containers/discover/topic/topic.state'
 import { pageCollectionIdsReducers } from 'containers/collections/collections.state'
 import { pageCollectionStoriesReducers } from 'containers/collections/stories-page/stories.state'
 
+import { listsDisplayReducers } from 'connectors/lists/lists-display.state'
+
+import { pageListsIdsReducers } from 'containers/lists/lists.state'
+import { pageListsIdsSagas } from 'containers/lists/lists.state'
+import { pageListsInfoReducers } from 'containers/lists/lists.state'
+
+import { mutationListCreateReducers } from 'connectors/lists/mutation-create.state'
+import { mutationListCreateSagas } from 'connectors/lists/mutation-create.state'
+
+import { mutationListDeleteSagas } from 'connectors/lists/mutation-delete.state'
+
+import { mutationListAddReducers } from 'connectors/lists/mutation-add.state'
+import { mutationListAddSagas } from 'connectors/lists/mutation-add.state'
+
+import { mutationListUpdateReducers } from 'connectors/lists/mutation-update.state'
+import { mutationListUpdateSagas } from 'connectors/lists/mutation-update.state'
+
+import { pageIndividualListIdsReducers } from 'containers/lists/list-individual/list-individual.state'
+import { pageIndividualListsSagas } from 'containers/lists/list-individual/list-individual.state'
+
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
@@ -108,6 +128,7 @@ const itemReducers = {
   itemsSaved: itemsSavedReducers, // This represents the actions the user has taken on a given item (if any)
   itemsTransitions: itemsTransitionsReducers, // This represents items transitioning from unsaved to saved (saving -> saved -> unsaving)
   itemsRelated: itemsRelatedReducers, // This is an explict call for related items ... these will shift over requests
+  listsDisplay: listsDisplayReducers,
   listen: listenReducers
 }
 
@@ -122,6 +143,12 @@ const itemMutations = {
   mutationReport: mutationReportReducers
 }
 
+const listMutations = {
+  mutationListCreate: mutationListCreateReducers,
+  mutationListAdd: mutationListAddReducers,
+  mutationlistUpdate: mutationListUpdateReducers
+}
+
 const pageReducers = {
   pageHome: pageHomeReducers,
   pageSavedIds: pageSavedIdsReducers,
@@ -131,7 +158,10 @@ const pageReducers = {
   pageCollectionIds: pageCollectionIdsReducers,
   pageCollectionInfo: [], // In future this will handle pagination
   pageCollectionStories: pageCollectionStoriesReducers,
-  pageStoriesInfo: []
+  pageStoriesInfo: [],
+  pageListsIds: pageListsIdsReducers,
+  pageListsInfo: pageListsInfoReducers,
+  pageIndividualListIds: pageIndividualListIdsReducers
 }
 
 const discoverReducers = {
@@ -180,6 +210,7 @@ export const rootReducer = combineReducers({
   ...userAccountReducers,
   ...itemReducers,
   ...itemMutations,
+  ...listMutations,
   ...pageReducers
 })
 
@@ -205,6 +236,8 @@ function* rootSaga() {
     ...brazeSagas,
     ...pageSavedIdsSagas,
     ...itemsSavedSagas,
+    ...pageListsIdsSagas,
+    ...pageIndividualListsSagas,
     ...mutationArchiveSagas,
     ...mutationDeleteSagas,
     ...mutationFavoriteSagas,
@@ -214,6 +247,10 @@ function* rootSaga() {
     ...mutationHighlightSagas,
     ...mutationShareSagas,
     ...mutationReportSagas,
+    ...mutationListCreateSagas,
+    ...mutationListDeleteSagas,
+    ...mutationListUpdateSagas,
+    ...mutationListAddSagas,
     ...listenSagas
   ])
 }

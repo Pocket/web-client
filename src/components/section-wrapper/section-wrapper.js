@@ -24,6 +24,12 @@ const sectionWrapperStyle = css`
     padding-top: 4.25rem;
   }
 
+  &.slideSection .inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: flex-end;
+  }
+
   .controls {
     display: flex;
     justify-content: flex-end;
@@ -34,6 +40,9 @@ const sectionWrapperStyle = css`
       border-radius: 50%;
       margin-left: 1rem;
       padding: 0.5rem;
+    }
+    &.no-slide {
+      display: none;
     }
   }
 `

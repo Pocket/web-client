@@ -97,7 +97,6 @@ describe('Saves - Image', () => {
     expect(item.isInternalItem).toBe(true)
     expect(item.timeToRead).toBeFalsy()
     expect(item.authors).toStrictEqual([])
-    expect(item.analyticsData.id).toBe('3462094779')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 

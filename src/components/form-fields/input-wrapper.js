@@ -29,10 +29,7 @@ const InputWrapper = ({
       )}
       data-cy="input-wrapper">
       {children}
-      <span
-        className={cx('label-wrapper', {
-          'has-value': !!value
-        })}>
+      <span className={cx('label-wrapper', !!value && 'has-value')}>
         <label htmlFor={name} data-cy="input-label">
           {labelText}
         </label>

@@ -1,3 +1,277 @@
+## [1.79.22](https://github.com/Pocket/web-client/compare/v1.79.21...v1.79.22) (2023-03-08)
+
+
+### Bug Fixes
+
+* **actions:** rename all actions pertaining to lists ([db1971c](https://github.com/Pocket/web-client/commit/db1971c47db2152d85e8b8e76ac34d0dc142ef4f))
+
+## [1.79.21](https://github.com/Pocket/web-client/compare/v1.79.20...v1.79.21) (2023-03-08)
+
+
+### Bug Fixes
+
+* **lists:** dont render modals unless showmodal prop is true ([dfa8c55](https://github.com/Pocket/web-client/commit/dfa8c5513ca74988393e2d0f506a9204eb0923e2))
+
+## [1.79.20](https://github.com/Pocket/web-client/compare/v1.79.19...v1.79.20) (2023-03-08)
+
+
+### Bug Fixes
+
+* **button:** adding button style inline ([4fe2c21](https://github.com/Pocket/web-client/commit/4fe2c214dde04d0152f4fbaac8c8855abd18b32f))
+* **list:** create list with item ([ed5d935](https://github.com/Pocket/web-client/commit/ed5d935db4cc14c49479600f1561d1a6650a56ea))
+* **lists:** adding comment to create function for clarity ([e9ca815](https://github.com/Pocket/web-client/commit/e9ca815eec41d0649eb0dfeec53ea72c98deb36d))
+* **lists:** remove unneeded parameter from update call ([3f29daa](https://github.com/Pocket/web-client/commit/3f29daa4500540b2bd9992e5974ca0fce21ed2ba))
+
+## [1.79.19](https://github.com/Pocket/web-client/compare/v1.79.18...v1.79.19) (2023-03-07)
+
+
+### Bug Fixes
+
+* **lists:** hook up individual list settings modal ([cca27b5](https://github.com/Pocket/web-client/commit/cca27b5b03604c036d1c3a382978224c608c4e25))
+
+## [1.79.18](https://github.com/Pocket/web-client/compare/v1.79.17...v1.79.18) (2023-03-07)
+
+
+### Bug Fixes
+
+* **list:** remove console log from update list query ([a6d44e6](https://github.com/Pocket/web-client/commit/a6d44e63812f7307c718ea2957e1e834819e8072))
+* **lists:** add item to list functionality ([e28ef63](https://github.com/Pocket/web-client/commit/e28ef633d63df79f0dc98afbcad6347a32ecfd92))
+* **lists:** adding default option to add to list modal ([3657f43](https://github.com/Pocket/web-client/commit/3657f437af74c70fe39355877b79baa1035df3c3))
+* **lists:** remove console log from add item api ([bc61de9](https://github.com/Pocket/web-client/commit/bc61de9b3f372888e9ab2313dcb27e82620be113))
+* **lists:** remove sneaky console logs ([3a01b87](https://github.com/Pocket/web-client/commit/3a01b875e63f94d0a0608cf4fd08871e9a57ad16))
+* **lists:** remove unused list constant ([394753a](https://github.com/Pocket/web-client/commit/394753a239afefb950b9c8fa77ceeb9d74d996cc))
+
+## [1.79.17](https://github.com/Pocket/web-client/compare/v1.79.16...v1.79.17) (2023-03-02)
+
+
+### Bug Fixes
+
+* **cards:** pass topic labels through ([3ac93bc](https://github.com/Pocket/web-client/commit/3ac93bc2175e06ac91b0de3a096dee24d19201cd))
+
+## [1.79.16](https://github.com/Pocket/web-client/compare/v1.79.15...v1.79.16) (2023-03-02)
+
+
+### Bug Fixes
+
+* **lists:** deleting item from list and update state management ([f75e55b](https://github.com/Pocket/web-client/commit/f75e55ba4e7fbc14c8a3ae6298a1ac21c7199e38))
+
+## [1.79.15](https://github.com/Pocket/web-client/compare/v1.79.14...v1.79.15) (2023-03-02)
+
+
+### Bug Fixes
+
+* **cards:** better responsive for hero layouts ([2de1739](https://github.com/Pocket/web-client/commit/2de17393650f4125bc1c4130523e593e56310a77))
+
+## [1.79.14](https://github.com/Pocket/web-client/compare/v1.79.13...v1.79.14) (2023-03-02)
+
+
+### Bug Fixes
+
+* **delete list:** first pass at deleting lists ([49ad6e8](https://github.com/Pocket/web-client/commit/49ad6e83bceb9994bdfc950028c25780f2ddddda))
+* **deleteShareableListQuery:** update variables to pass ([d7726a9](https://github.com/Pocket/web-client/commit/d7726a9977783f49e5f9088ed76f78d221b3505e))
+* **list-card:** add new list-card connector ([a974621](https://github.com/Pocket/web-client/commit/a9746214e041849671cf0849302b4b6e1d96f690))
+* **lists:** add delete to state, clean up some state ([8238f07](https://github.com/Pocket/web-client/commit/8238f07f2fa2542d7bac76e85d83ec7ed5b82517))
+* **lists:** add item to lists ([00928f5](https://github.com/Pocket/web-client/commit/00928f58be6d1ab1a6e5a236d5747bc885142cd4))
+* **lists:** delete unneeded files ([7917f6c](https://github.com/Pocket/web-client/commit/7917f6c4fdfb5cf209a1428941951e01d62512be))
+* **lists:** update list & mutation create state ([9ded102](https://github.com/Pocket/web-client/commit/9ded102a6ff37557d243a93ce490668a076f8dab))
+* **mutation-delete lists state:** remove comment ([bd22182](https://github.com/Pocket/web-client/commit/bd2218215b4d94391f2c8f4296835d811589944e))
+* **store:** adding mutationListDeleteSagas ([445f749](https://github.com/Pocket/web-client/commit/445f7491308ae1e514fd689334291300b6f0f561))
+
+## [1.79.13](https://github.com/Pocket/web-client/compare/v1.79.12...v1.79.13) (2023-03-01)
+
+
+### Bug Fixes
+
+* **collections:** revert banner copy to say lists ([4516321](https://github.com/Pocket/web-client/commit/45163218304fcd50fa54aaa4f411ae7c13474038))
+
+## [1.79.12](https://github.com/Pocket/web-client/compare/v1.79.11...v1.79.12) (2023-03-01)
+
+
+### Bug Fixes
+
+* **reader-rec:** fixed missing fields for snowplow ([b5d170b](https://github.com/Pocket/web-client/commit/b5d170b31e437e2963dedb377982fc80b505d700))
+
+## [1.79.11](https://github.com/Pocket/web-client/compare/v1.79.10...v1.79.11) (2023-03-01)
+
+
+### Bug Fixes
+
+* **cards:** fix home analytics click stopped working ([9f11694](https://github.com/Pocket/web-client/commit/9f11694c0a04a522ea00afaee9d9ecfc1c0f10de))
+* **cards:** fixed bad prop name from first commit ([1c4e989](https://github.com/Pocket/web-client/commit/1c4e98907299a6f1649f44a97dab06df080c7c42))
+* **cards:** put missing onOpenOriginalUrl on transition card ([49f53d9](https://github.com/Pocket/web-client/commit/49f53d96aae75d7ceda7eaf8d64ae42ec08d6deb))
+
+## [1.79.10](https://github.com/Pocket/web-client/compare/v1.79.9...v1.79.10) (2023-03-01)
+
+
+### Bug Fixes
+
+* **lists:** adding individual list page ([611efc2](https://github.com/Pocket/web-client/commit/611efc217a86d0b3f7d354208f754dc5a4081030))
+
+## [1.79.9](https://github.com/Pocket/web-client/compare/v1.79.8...v1.79.9) (2023-02-28)
+
+
+### Bug Fixes
+
+* **all lists:** update state to respond to ITEMS_CREATE_LIST_SUCCESS ([6709a80](https://github.com/Pocket/web-client/commit/6709a80d058158795cc0ccf7824e1ff1bf97218e))
+* **all-lists:** start wiring up all lists page ([a96d031](https://github.com/Pocket/web-client/commit/a96d031159e5cbca51d8346468f61bc0b5432564))
+* **all-lists:** use item component to show lists ([24cbdbe](https://github.com/Pocket/web-client/commit/24cbdbe2cdcad510fc51c338c1be489b79c81a73))
+* **AllLists:** remove story count ([06bb488](https://github.com/Pocket/web-client/commit/06bb4886c81654057c89ba23f264403a7d0b74e7))
+* **CreateEditShareableList:** reset inputs on submit ([9743363](https://github.com/Pocket/web-client/commit/9743363e4eb79358f6f7eefab581da4b8faac10f))
+* **elements.pcss:** remove button + button from margin-right styling ([852b571](https://github.com/Pocket/web-client/commit/852b571600d0caf6517b941ec77ca406cc268940))
+* **getShareableListsQuery:** add externalId ([5475cb9](https://github.com/Pocket/web-client/commit/5475cb9fe593991c5b9d8889173bb8a6dd943579))
+* **items layout:** add new stackedGridNoAside ([7fd1c91](https://github.com/Pocket/web-client/commit/7fd1c918955a8435149c9d834f6b76a86ce7a519))
+* **lists state:** add USER_SHAREABLE_LISTS_REQUEST_FAILURE ([3cdf958](https://github.com/Pocket/web-client/commit/3cdf958f1031c4018c14444126e7636730436bb8))
+* **lists state:** move getShareableLists API call into try block ([5238d24](https://github.com/Pocket/web-client/commit/5238d2498836f0584131f1bb34f8e67d6fb8d7f3))
+
+## [1.79.8](https://github.com/Pocket/web-client/compare/v1.79.7...v1.79.8) (2023-02-27)
+
+
+### Bug Fixes
+
+* **footer:** change de pocket hits signup link to eng ([af4b978](https://github.com/Pocket/web-client/commit/af4b978957b9c40b06ccdca2627f982f967e2391))
+
+## [1.79.7](https://github.com/Pocket/web-client/compare/v1.79.6...v1.79.7) (2023-02-27)
+
+
+### Bug Fixes
+
+* **snowplow:** update readme based on updates to entities ([c5f254c](https://github.com/Pocket/web-client/commit/c5f254c1d629ed0014614fa1fe8ee5c4f17e9893))
+
+## [1.79.6](https://github.com/Pocket/web-client/compare/v1.79.5...v1.79.6) (2023-02-23)
+
+
+### Bug Fixes
+
+* **saves:** update banner copy to say Collections instead of lists ([24cb882](https://github.com/Pocket/web-client/commit/24cb8823ba81abfac50249e05d71babc576c5223))
+
+## [1.79.5](https://github.com/Pocket/web-client/compare/v1.79.4...v1.79.5) (2023-02-23)
+
+
+### Bug Fixes
+
+* **item:** remove scroll into view on focus [DIS-381] ([e065b67](https://github.com/Pocket/web-client/commit/e065b67df4804af77d02a759bb7211d51eaa50f0))
+
+## [1.79.4](https://github.com/Pocket/web-client/compare/v1.79.3...v1.79.4) (2023-02-23)
+
+
+### Bug Fixes
+
+* **snowplow:** remove item id from content entities ([5de05fb](https://github.com/Pocket/web-client/commit/5de05fb47e87900e224cd6b1036c1278934e5afd))
+
+## [1.79.3](https://github.com/Pocket/web-client/compare/v1.79.2...v1.79.3) (2023-02-22)
+
+
+### Bug Fixes
+
+* **create-list-modal:** reset input values on close ([4cc1d7e](https://github.com/Pocket/web-client/commit/4cc1d7e91748e51cca3343942c46ffa06f9cfe8e))
+* **lists:** hook up create list modal functionality ([749ca69](https://github.com/Pocket/web-client/commit/749ca6926a0a297cc06b29fe806b30fe47469e5c))
+
+## [1.79.2](https://github.com/Pocket/web-client/compare/v1.79.1...v1.79.2) (2023-02-22)
+
+
+### Bug Fixes
+
+* **eslint:** adding release notes to ignore ([5e89f2a](https://github.com/Pocket/web-client/commit/5e89f2a740990c44f77122848d3cef87d8878bdb))
+* **eslint:** adding release notes to ignore ([a89efec](https://github.com/Pocket/web-client/commit/a89efeccac6ffac34f375ca070cbb1c30b241020))
+* **eslint:** adding release notes to ignore ([baf13de](https://github.com/Pocket/web-client/commit/baf13de17a0a603801640ecc9c9c0ffafd8b3a8c))
+* **public-list:** add rewrites for public list ([f766b29](https://github.com/Pocket/web-client/commit/f766b29acbccc31570d045405a9d8a6c1d8cb5a7))
+* **public-list:** adding framework for public list page ([f0931ef](https://github.com/Pocket/web-client/commit/f0931ef283e53d0fa891c30433dd5590d20720fd))
+* **public-list:** remove stray console log ([dea9b54](https://github.com/Pocket/web-client/commit/dea9b541bf2c80fa344329d313973640ec271e93))
+
+## [1.79.1](https://github.com/Pocket/web-client/compare/v1.79.0...v1.79.1) (2023-02-21)
+
+
+### Bug Fixes
+
+* **carousel:** add disabled states ([9c3068f](https://github.com/Pocket/web-client/commit/9c3068f5611a070f87f87184e1f2204bc5b52bde))
+* **home:** add analytics to carousel ([bd60155](https://github.com/Pocket/web-client/commit/bd6015578bf8300bba9e17fa79e3a7ab42ea59a4))
+* **reader:** update rec with snowplowId ([39483b2](https://github.com/Pocket/web-client/commit/39483b25bd41ba0166c0a73cf1b52ce83251c62a))
+
+# [1.79.0](https://github.com/Pocket/web-client/compare/v1.78.4...v1.79.0) (2023-02-21)
+
+
+### Bug Fixes
+
+* **cards:** vqa updates ([b22a365](https://github.com/Pocket/web-client/commit/b22a3654a64ee6238a5cb64514b762c63352e91a))
+* **collections:** add story count ([e2ea003](https://github.com/Pocket/web-client/commit/e2ea0032712638365bd8b46fa73d435018b3493b))
+* **collections:** update copy for callout ([342a52c](https://github.com/Pocket/web-client/commit/342a52cf570ad64cf0b82e8064201d6415705126))
+* **collection:** update callout language ([5444265](https://github.com/Pocket/web-client/commit/5444265779b954e7961f5dddec97857f07175e5b))
+* **home:** make carousel variable ([ef19d30](https://github.com/Pocket/web-client/commit/ef19d30964cadf4e71e4ca0fbba75ddc2c546e27))
+* **item actions:** allow more flexible display ([94a2a54](https://github.com/Pocket/web-client/commit/94a2a54e4abf7f82a37637430a1d644aa4d94ebf))
+* **item:** add image fail function  [FRONT-2128] ([8c7d821](https://github.com/Pocket/web-client/commit/8c7d82115117a08a292febfcfcceb240a05d8fcb))
+* **item:** add impression trigger back in [FRONT-2134] ([abfc898](https://github.com/Pocket/web-client/commit/abfc89869611f1a4c438255ba2b26bf58f51e2f4))
+* **item:** add node url ([eae158d](https://github.com/Pocket/web-client/commit/eae158d1cf66981c739da07f49e0ad11e63c6f9a))
+* **item:** fire correct events [FRONT-2134, FRONT-2133] ([0c2d601](https://github.com/Pocket/web-client/commit/0c2d6017660938009e2cf1cf9b4be0512e52e9c5))
+* **item:** hook up external link [FRONT-2124] ([c1c6e31](https://github.com/Pocket/web-client/commit/c1c6e318cc0f49d389823c2bd7daa3860fcb48e2))
+* **item:** make footer more flexible ([05627f6](https://github.com/Pocket/web-client/commit/05627f6c6e5ee219e58b347cfce95068a63e9295))
+* **item:** one popup at a time [FRONT-2130] ([034c6ec](https://github.com/Pocket/web-client/commit/034c6ece4ffa5bb95227bcd963591b488f43a156))
+* **item:** raize z-index of tags overlay [FRONT-2123] ([61efc15](https://github.com/Pocket/web-client/commit/61efc15d574840b61a6aa3e86fc8326a8fd7c024))
+* **item:** update layout and styles ([380d502](https://github.com/Pocket/web-client/commit/380d5027d3e74e284f1b9e40c383118319e6ec66))
+* **item:** update permanent library use [FRONT-2136, FRONT-2137] ([f003126](https://github.com/Pocket/web-client/commit/f003126f0d8b4c13eb992412ae415256efa2c9f2))
+* **item:** update storybook ([569f603](https://github.com/Pocket/web-client/commit/569f603d6be5acaa22b4cf215689be2683615ac9))
+* **item:** use standard link for permanent ([132e6bc](https://github.com/Pocket/web-client/commit/132e6bc1e4b9c24d70a1dbbd68b2bed5ba96f48a))
+* **item:** wire up selection ([bfadc21](https://github.com/Pocket/web-client/commit/bfadc21d84b557a0eefbe8715b29aef181792301))
+* **snowplow:** don’t error on error check ([5c53226](https://github.com/Pocket/web-client/commit/5c53226ada86cfd9656e34dcafabd3c5c05e6433))
+
+
+### Features
+
+* **item:** add contextual data in one place ([b166c55](https://github.com/Pocket/web-client/commit/b166c55849890a58d8dfb52b1528c0600711b833))
+* **items:** update to use new card structure ([8d12976](https://github.com/Pocket/web-client/commit/8d12976c4fa8caf09077fae647273db298a092a3))
+* **surfaces:** use new layouts ([ad56dd6](https://github.com/Pocket/web-client/commit/ad56dd64d2e9b85470afcff95295965f7af3fe75))
+
+## [1.78.4](https://github.com/Pocket/web-client/compare/v1.78.3...v1.78.4) (2023-02-16)
+
+
+### Bug Fixes
+
+* **constants:** add constants for list name & description char limits ([6311f7d](https://github.com/Pocket/web-client/commit/6311f7dfe5da15412b6e80350516c3e88796b603))
+* **CreateEditShareableList:** add back modal open/close state ([76fb0f3](https://github.com/Pocket/web-client/commit/76fb0f3e7e34e13d7e7b3bc4d3e15663c5e0ad12))
+* **CreateEditShareableList:** update data-cy on cancel & confirm buttons ([bcebdeb](https://github.com/Pocket/web-client/commit/bcebdeb6f85971c3a8d60c19774a4c57f650cd33))
+* **modals story:** add ListSettingsModal ([fb126b6](https://github.com/Pocket/web-client/commit/fb126b61289e50ac4b7b728577c78054d595cc3b))
+* **shareable lists:** create new shared modal component ([50278ee](https://github.com/Pocket/web-client/commit/50278eee84b03859eb3da37c2be3242c93e1c275))
+
+## [1.78.3](https://github.com/Pocket/web-client/compare/v1.78.2...v1.78.3) (2023-02-15)
+
+
+### Bug Fixes
+
+* **reader:** go back on archive click ([ae831e5](https://github.com/Pocket/web-client/commit/ae831e5fb493e63ebb5d1d109f3cf82a06baa0ab))
+
+## [1.78.2](https://github.com/Pocket/web-client/compare/v1.78.1...v1.78.2) (2023-02-15)
+
+
+### Bug Fixes
+
+* **CreateListModal:** rename file, remove translation ([6be4e28](https://github.com/Pocket/web-client/commit/6be4e28413c648427b92d3217654f3401e371f05))
+* **input-styles:** remove max-width on inputWrapper ([4acc9c7](https://github.com/Pocket/web-client/commit/4acc9c7b0ca127c224455354484b79927f3b5e62))
+* **InputWrapper:** fix has-value class not getting added properly ([c1544b8](https://github.com/Pocket/web-client/commit/c1544b8b0d55bc0f869b25a3f1cd1e888b8a71e8))
+* **modal.story:** add CreateListModal ([edb37fd](https://github.com/Pocket/web-client/commit/edb37fd1c6c5ae2b6650dff83b6aa1c9e2a555a4))
+* **shared lists:** add ListModal scaffold ([21c39fa](https://github.com/Pocket/web-client/commit/21c39fa2803ee36c63d4880702e89fe1472a5e5f))
+* **TextInput:** add maxLength prop ([e0492a0](https://github.com/Pocket/web-client/commit/e0492a0a8b49d9bb506dcf3e932fcf3486cb7f18))
+
+## [1.78.1](https://github.com/Pocket/web-client/compare/v1.78.0...v1.78.1) (2023-02-13)
+
+
+### Bug Fixes
+
+* **dev-tools:** adding link to the individual list page in qa modal ([3a54ded](https://github.com/Pocket/web-client/commit/3a54ded38d0d85113a28f5d829be33c4943581c4))
+* **empty-state:** adding empty states for both individual lists and all lists ([bb14234](https://github.com/Pocket/web-client/commit/bb142348a69f618a1f31d65c7bfd5fdbb78148c0))
+* **individual-list:** remove sort order per product requirements ([5a80a96](https://github.com/Pocket/web-client/commit/5a80a963529e57d74748b7390bb368ee3b1cc0a8))
+* **lists:** adding base individual list page ([0fe3e6a](https://github.com/Pocket/web-client/commit/0fe3e6ae847960c0e4cffcbb706a9b9b4f48bf61))
+
+# [1.78.0](https://github.com/Pocket/web-client/compare/v1.77.0...v1.78.0) (2023-02-09)
+
+
+### Bug Fixes
+
+* **icons:** adding lists specific icons ([bf6b7db](https://github.com/Pocket/web-client/commit/bf6b7db2b3b69d37745f6232fa957166dd5d9aa2))
+
+
+### Features
+
+* **lists:** add bare bones lists page ([2299ea1](https://github.com/Pocket/web-client/commit/2299ea13849a4ce173217d2e43891554a3bc2b82))
+
 # [1.77.0](https://github.com/Pocket/web-client/compare/v1.76.9...v1.77.0) (2023-02-09)
 
 

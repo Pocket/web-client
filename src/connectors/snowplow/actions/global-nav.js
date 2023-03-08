@@ -67,7 +67,7 @@ export const globalNavActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'A user clicks the delete icon after selecting items in bulk edit - this does not include the delete confirmation'
   },
   'global-nav.bulk.tag': {
@@ -77,7 +77,7 @@ export const globalNavActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'A user clicks the tag icon after selecting items in bulk edit - this does not include any engagement in the tag modal'
   },
   'global-nav.bulk.archive': {
@@ -87,7 +87,7 @@ export const globalNavActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'A user clicks the archive icon after selecting items in bulk edit - this does not include the archive confirmation'
   },
   'global-nav.bulk.un-archive': {
@@ -98,7 +98,7 @@ export const globalNavActions = {
       engagementType: 'save',
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'A user clicks the un-archive/add icon after selecting items in bulk edit - this does not include the confirmation'
   },
   'global-nav.bulk.favorite': {
@@ -108,7 +108,7 @@ export const globalNavActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'A user clicks the favorite icon after selecting items in bulk edit - this does not include the confirmation'
   },
   'global-nav.bulk.un-favorite': {
@@ -118,7 +118,7 @@ export const globalNavActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['id', 'url', 'position'],
+    expects: ['url', 'position'],
     description: 'A user clicks the un-favorite icon after selecting items in bulk edit - this does not include the confirmation'
   }
 }

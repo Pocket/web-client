@@ -11,9 +11,8 @@ import { BASE_URL } from 'common/constants'
 // Components
 import { CardPageHeader } from 'components/headers/discover-header'
 import { CardListHeading } from 'components/headers/discover-header'
-import { ItemCard } from './card'
-import { Lockup } from 'components/items-layout/list-lockup'
-import { OffsetList } from 'components/items-layout/list-offset'
+import { ItemCard } from 'connectors/items/item-card-transitional'
+import { heroGrid, stackedGrid } from 'components/item/items-layout'
 import { CardTopicsNav } from 'connectors/topic-list/topic-list'
 
 import { ConfirmReport } from 'connectors/confirm/report'
@@ -71,20 +70,31 @@ export default function Discover({ locale }) {
         subHeading={t('discover:essential-reads', 'Today’s essential reads')}
       />
 
-      {/* Top Lockup (center)*/}
-      <Lockup items={items} offset={0} heroPosition="left" ItemCard={ItemCard} />
-
-      {showTopics ? <CardTopicsNav topics={topics} track={topicClickMiddle} /> : null}
+      {/* Top Hero Grid*/}
+      <div className={heroGrid}>
+        {items.slice(0, 5).map((id, index) => (
+          <ItemCard position={index} key={id} id={id} snowplowId="discover" />
+        ))}
+      </div>
 
       {/* Pocket Brand Messaging */}
       <CalloutTop locale={locale} shouldRender={shouldRender} isAuthenticated={isAuthenticated} />
 
       {/* Top List */}
       <CardListHeading>{t('discover:fascinating-stories', 'Fascinating stories')}</CardListHeading>
+      <div className={stackedGrid}>
+        {items.slice(5, 10).map((id, index) => (
+          <ItemCard position={4 + index} key={id} id={id} snowplowId="discover" />
+        ))}
+        {showTopics ? <CardTopicsNav topics={topics} rail={true} track={topicClickMiddle} /> : null}
+      </div>
 
-      <OffsetList items={items} offset={5} cardShape="wide" ItemCard={ItemCard} border={true} />
-
-      <Lockup items={items} offset={10} heroPosition="left" ItemCard={ItemCard} />
+      {/* Mid-Hero Grid */}
+      <div className={heroGrid}>
+        {items.slice(10, 15).map((id, index) => (
+          <ItemCard position={9 + index} key={id} id={id} snowplowId="discover" />
+        ))}
+      </div>
 
       <CalloutBottom
         shouldRender={shouldRender}
@@ -92,13 +102,12 @@ export default function Discover({ locale }) {
         trackEvent={trackEvent}
       />
 
-      <OffsetList
-        items={items}
-        offset={15}
-        cardShape="wide"
-        ItemCard={ItemCard}
-        border={showTopics}
-      />
+      {/* Bottom List */}
+      <div className={stackedGrid}>
+        {items.slice(15, 20).map((id, index) => (
+          <ItemCard position={14 + index} key={id} id={id} snowplowId="discover" />
+        ))}
+      </div>
 
       {showTopics ? (
         <CardTopicsNav topics={topics} className="no-border" track={topicClickBottom} />
@@ -115,7 +124,7 @@ function CalloutTop({ shouldRender, isAuthenticated, locale }) {
   return shouldRender ? (
     <div>
       {isAuthenticated ? (
-        <CallOutBrand />
+        <CallOutBrand border={false} />
       ) : (
         <CallOutPocketHitsSignup locale={locale} utmCampaign="explore-inline" utmSource="explore" />
       )}

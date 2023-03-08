@@ -104,7 +104,8 @@
     "jsdom": "19.0.0",
     "jsdom-global": "3.0.2",
     "next-build-id": "3.0.0",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "react-swipeable": "7.0.0"
   },
   "dependencies": {
     "@braze/web-sdk": "4.3.0",

@@ -131,7 +131,6 @@ describe('Collection — Story', () => {
     expect(item.isInternalItem).toBe(false)
     expect(item.timeToRead).toBe(14)
     expect(item.authors).toStrictEqual([{ name: 'Jack Ewing' }])
-    expect(item.analyticsData.id).toBe('1731163180')
     expect(item.analyticsData.url).toBe(expectedAnalyticsUrl)
   })
 

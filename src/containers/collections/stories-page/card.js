@@ -24,7 +24,6 @@ export function ItemCard({ id, cardShape, className, showExcerpt = false, positi
   const openUrl = readUrl && !openExternal ? readUrl : externalUrl
   const onImageFail = () => dispatch(setNoImage(id))
   const analyticsData = {
-    id,
     position,
     destination: 'external',
     ...item?.analyticsData

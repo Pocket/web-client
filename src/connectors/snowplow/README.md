@@ -198,10 +198,9 @@ Next we’ll take a look at the `ui` entity. Looking at the required values we n
 
 As mentioned near the top of this document, we can hard-code some data to include with this action as the `eventData` object since it will never change. For the event for this demo, we’ll add `uiType: button`.
 
-The data required by the `content` entity is specific to the item being viewed. This entity will _always_ need a `url`. Only saved items will have an `id`. Since this action is on Reader, which is only available if an item has been saved, we’ll include it in this action.
-Since this data changes, we can’t hard-code any of this info for the action, so let’s move on to what this action `expects`.
+The data required by the `content` entity is specific to the item being viewed. This entity will _always_ need a `url`. Since this data changes, we can’t hard-code any of this info for the action, so let’s move on to what this action `expects`.
 
-The `expects` value is the additional required data that we need to manually pass to this action. As we covered in the paragraph above, the `content` entity _has_ to have a `url`, and since this item is saved we’ll also include the `id`. When this event eventually gets sent to Snowplow, a validator will be run against this action to ensure all data in the `expects` field is present. If any data is missing a `console.warning` is fired in dev environments, or a Sentry error is sent when on production.
+The `expects` value is the additional required data that we need to manually pass to this action. As we covered in the paragraph above, the `content` entity _has_ to have a `url`. When this event eventually gets sent to Snowplow, a validator will be run against this action to ensure all data in the `expects` field is present. If any data is missing a `console.warning` is fired in dev environments, or a Sentry error is sent when on production.
 
 Finally we’ll add the `description` field to help add additional context for anyone coming after you to see what this action does.
 
@@ -213,7 +212,7 @@ After going through the steps above, the resulting action should look something 
   eventData: {
     uiType: 'button'
   },
-  expects: ['id', 'url'],
+  expects: ['url'],
   description: 'Fired when a user clicks the `Copy Link` button on Reader'
 }
 ```
@@ -235,15 +234,15 @@ The `sendSnowplowEvent` function takes two arguments:
 1. The action name/identifier
 2. The required data in the shape of a javascript object
 
-When reading how the action is defined we can see that it `expects` the `url` and `id` of the item, so we’ll make sure to include that in the second argument.
+When reading how the action is defined we can see that it `expects` the `url` of the item, so we’ll make sure to include that in the second argument.
 
 In the end it may look like the following:
 ```
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const CopyLinkButton = ({ savedItem }) => {
-  const { url, id } = savedItem
-  const analyticsData = { url, id }
+  const { url } = savedItem
+  const analyticsData = { url }
 
   const onCopyClick = () => dispatch(sendSnowplowEvent('reader.copy-link', analyticsData))
 
@@ -264,7 +263,7 @@ Occasionally we'll need to add new `events` or `entities`. This happens when we 
 
 ### Adding a New Event/Entity
 
-For this walkthrough let's imagine that we need to include a new `ad` entity in the application. First we'd add a new file named `ad.js` in the [events](/events/) folder.
+For this walkthrough let's imagine that we need to include a new `ad` entity in the application. First we'd add a new file named `ad.js` in the [entities](/entities/) folder.
 
 Next, we'd visit the [defined schema](https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/dcfe0061541a1b0bc50def4b4ec18fbaebb4ec095724f6bd5a75881749a84acf) for this entity. Take careful note of all the `properties` for this schema, and make note of which ones are required vs optional. As of the time of writing this document all parameters for this entity are required.
 
@@ -320,7 +319,7 @@ export const createAdEntity = ({ adId, zoneId, siteId }) => ({
 })
 ```
 
-If you are creating an event or entity with optional values, the object in the data property should be wrapped with our `getObjectWithValidKeysOnly` utility. This ensures that no empty values are passed into Snowplow which will result in an error. You can take a look at our [content entity](/entities/content.js) for an example.
+If you are creating an event or entity with optional values, the object in the data property should be wrapped with our `getObjectWithValidKeysOnly` utility. This ensures that no empty values are passed into Snowplow which will result in an error. You can take a look at our [newsletter subscriber](/entities/newsletter-subscriber.js) for an example.
 
 Finally at the end of the file we need to export the `createAdEntity` function.
 

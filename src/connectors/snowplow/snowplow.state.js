@@ -231,8 +231,8 @@ export function* fireSnowplowEvent({ identifier, data}) {
   yield call(waitForInitialization)
 
   // Check events are valid
-  const { eventType, eventData } = analyticsActions[identifier]
-  if (!eventType) return console.warn('No action for this event!')
+  const { eventType, eventData } = analyticsActions[identifier] || {}
+  if (!eventType) return console.warn(`${identifier}: No action for this event!`)
 
   // Build custom events
   const { event, entities } = yield buildSnowplowCustomEvent({ identifier, data })

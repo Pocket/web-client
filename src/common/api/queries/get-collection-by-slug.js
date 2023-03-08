@@ -9,6 +9,7 @@ const getCollectionBySlugQuery = gql`
   query GetCollectionBySlug($getCollectionBySlugSlug: String!) {
     collectionBySlug(slug: $getCollectionBySlugSlug) {
       slug
+      itemId: slug
       title
       excerpt
       intro

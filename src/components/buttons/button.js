@@ -124,6 +124,11 @@ const buttonStyles = css`
     font-size: 0.85rem;
     padding: 0.75rem;
   }
+
+  &.tiny {
+    font-size: 0.85rem;
+    padding: 0.375rem 0.75rem;
+  }
 `
 
 /**
@@ -160,7 +165,7 @@ Button.propTypes = {
   // Visual variant of the button, from design standards
   variant: PropTypes.oneOf(['primary', 'secondary', 'outline', 'brand', 'emphasized', 'inline']),
   // Size of the button
-  size: PropTypes.oneOf(['normal', 'large', 'small']),
+  size: PropTypes.oneOf(['normal', 'large', 'small', 'tiny']),
   // Destination url for the button - if provided, will render the button as an anchor styled like a button
   href: PropTypes.string,
   // CSS class name if styles need to be provided/overridden.

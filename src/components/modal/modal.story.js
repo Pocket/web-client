@@ -3,6 +3,9 @@ import { css } from 'linaria'
 import { Button } from 'components/buttons/button'
 import Modal, { ModalBody, ModalFooter } from './modal'
 import { TextArea } from 'components/form-fields/text-area'
+import { CreateEditShareableList } from 'components/shareable-lists/create-edit-modal'
+import { AddToListModal } from 'components/shareable-lists/add-to-list-modal'
+import { COLORS } from 'mocks/_data/colors'
 
 export default {
   title: 'Overlays/Modal',
@@ -22,6 +25,35 @@ const testChildStyles = css`
 
 const OverflowElement = () => (
   <div className={testChildStyles}>Placeholder content block (can overflow)</div>
+)
+
+export const CreateList = () => (
+  <CreateEditShareableList
+    appRootSelector={APP_ROOT_SELECTOR}
+    showModal
+    modalTitle="Create List"
+    modalSubmit="Create List"
+  />
+)
+
+export const ListSettings = () => (
+  <CreateEditShareableList
+    appRootSelector={APP_ROOT_SELECTOR}
+    showModal
+    modalTitle="List Settings"
+    modalSubmit="Save Changes"
+    listName="The Cosmos"
+    listDescription="If someone loves a flower, of which just one single blossom grows, in all the millions of stars, it is enough to make him happy just to look at the stars."
+  />
+)
+
+export const AddToList = () => (
+  <AddToListModal
+    appRootSelector={APP_ROOT_SELECTOR}
+    showModal
+    modalTitle="Add to List"
+    selectOptions={COLORS}
+  />
 )
 
 export const Basic = () => (

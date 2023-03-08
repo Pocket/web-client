@@ -6,7 +6,6 @@ export const discoverActions = {
       uiType: 'card'
     },
     expects: [
-      'id',
       'url',
       'position',
       'destination',
@@ -30,7 +29,6 @@ export const discoverActions = {
       uiType: 'card'
     },
     expects: [
-      'id',
       'url',
       'position',
       'recommendationId',
@@ -53,7 +51,6 @@ export const discoverActions = {
       uiType: 'button'
     },
     expects: [
-      'id',
       'url',
       'position',
       'recommendationId',
@@ -75,7 +72,6 @@ export const discoverActions = {
       uiType: 'button'
     },
     expects: [
-      'id',
       'url',
       'position',
       'recommendationId',
@@ -122,7 +118,7 @@ export const discoverActions = {
     eventData: {
       engagementType: 'report'
     },
-    expects: ['id', 'url', 'reason', 'otherText'],
+    expects: ['url', 'reason', 'otherText'],
     description: '`otherText` is an optional field'
   },
   'discover.middle.topic.click': {
