@@ -30,15 +30,15 @@ commands:
             # when lock file changes, use increasingly general patterns to restore cache
             # If this gets our of sync, you can increment the version (vX).  Just be
             # sure to match that version when saving the cache as well.
-            - node-v7-{{ checksum "package-lock.json" }}
-            - node-v7-
+            - node-v8-{{ checksum "package-lock.json" }}
+            - node-v8-
       # Install javascript dependencies
       - run:
           name: Install dependencies
           command: npm install
       # Save the cache to avoid extraneous downloads
       - save_cache:
-          key: node-v7-{{ checksum "package-lock.json" }}
+          key: node-v8-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
             - ./.next/cache
@@ -54,7 +54,7 @@ jobs:
     resource_class: small
     # Define the container we will run the task in (standard node)
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:18.13.0
     steps:
       # Setup Environment
       - setup
@@ -74,7 +74,7 @@ jobs:
     parallelism: 5
     # Define the container we will run the task in (standard node)
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:18.13.0
     steps:
       # Setup Environment
       - setup
@@ -102,7 +102,7 @@ jobs:
     resource_class: small
     # Define the container we will run the task in (standard node)
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:18.13.0
     steps:
       - setup
       - add_ssh_keys:
@@ -145,7 +145,7 @@ jobs:
     resource_class: medium
     # Define the container we will run the task in (standard node)
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:18.13.0
     steps:
       # Setup Environment
       - setup
