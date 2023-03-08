@@ -21,7 +21,7 @@ export const CreateListModal = () => {
 
   const createList = (id) ? 'Create list with item' : 'Create list'
 
-  return (
+  return showModal ? (
     <CreateEditShareableList
       showModal={showModal}
       modalTitle={createList}
@@ -29,5 +29,5 @@ export const CreateListModal = () => {
       handleClose={handleClose}
       handleSubmit={handleSubmit}
     />
-  )
+  ) : null
 }
