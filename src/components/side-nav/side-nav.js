@@ -69,6 +69,20 @@ export const sideNavWrapper = css`
   }
 `
 
+export const sideNavActionHeader = css`
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0 5px;
+
+  h4 {
+    margin-top: 0;
+  }
+
+  button {
+    padding: 0.5rem;
+  }
+`
+
 export const sideNavHeader = css`
   font-family: var(--fontSansSerif);
   font-size: var(--fontSize100);
@@ -148,7 +162,8 @@ export function SideNav({
   isDisabled,
   newSaveCount,
   trackMenuClick,
-  inListsExperiment
+  inListsExperiment,
+  handleCreateList
 }) {
   const { t } = useTranslation()
 
@@ -212,6 +227,7 @@ export function SideNav({
             pinned={pinned}
             clickEvent={clickEvent}
             inListsExperiment={inListsExperiment}
+            handleCreateList={handleCreateList}
           />
         ) : null}
       </nav>

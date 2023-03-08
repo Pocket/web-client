@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { mutateListCreate } from 'connectors/lists/mutation-create.state'
 
 export function SideNav({ type, subset, isLoggedIn, tag }) {
   const dispatch = useDispatch()
@@ -16,6 +17,7 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
   const inListsExperiment = featureFlagActive({ flag: 'shared-lists', featureState })
 
   const trackMenuClick = (label) => dispatch(sendSnowplowEvent('side-nav', { label }))
+  const handleCreateList = () => dispatch(mutateListCreate())
 
   const isDisabled = appMode === 'bulk'
 
@@ -36,6 +38,7 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
       flagsReady={flagsReady}
       trackMenuClick={trackMenuClick}
       inListsExperiment={inListsExperiment}
+      handleCreateList={handleCreateList}
     />
   )
 }
