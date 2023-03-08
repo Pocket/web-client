@@ -9,7 +9,7 @@ exports[`SideNav renders the Account side nav 1`] = `
     role="navigation"
   >
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-home"
     >
       <span
@@ -32,7 +32,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:home
     </button>
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-saves"
     >
       <span
@@ -76,7 +76,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       </span>
     </button>
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-discover"
     >
       <span
@@ -104,7 +104,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:discover
     </button>
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-collections"
     >
       <span
@@ -146,7 +146,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:collections
     </button>
     <div
-      class="s1jxyudr"
+      class="sv813dg"
       data-cy="side-nav-account"
     />
   </nav>
@@ -188,7 +188,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     role="navigation"
   >
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-home"
     >
       <span
@@ -211,7 +211,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:home
     </button>
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-saves"
     >
       <span
@@ -255,7 +255,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       </span>
     </button>
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-discover"
     >
       <span
@@ -283,7 +283,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:discover
     </button>
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-collections"
     >
       <span
@@ -324,13 +324,13 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
        
       nav:collections
     </button>
-    <div
-      class="s1jxyudr"
+    <h4
+      class="sv813dg"
     >
       nav:filters
-    </div>
+    </h4>
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-archive"
     >
       <span
@@ -363,7 +363,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:archive
     </button>
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-favorites"
     >
       <span
@@ -386,7 +386,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:favorites
     </button>
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-highlights"
     >
       <span
@@ -409,7 +409,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:highlights
     </button>
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-articles"
     >
       <span
@@ -437,7 +437,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:articles
     </button>
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-videos"
     >
       <span
@@ -467,13 +467,13 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
        
       nav:videos
     </button>
-    <div
-      class="s1jxyudr"
+    <h4
+      class="sv813dg"
     >
       nav:tags
-    </div>
+    </h4>
     <button
-      class="sv813dg  "
+      class="sszr5nl  "
       data-cy="side-nav-all-tags"
     >
       <span
@@ -499,13 +499,13 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:all-tags
     </button>
     <button
-      class="sv813dg  tag-class"
+      class="sszr5nl  tag-class"
       data-cy="side-nav-tags-home"
     >
       home
     </button>
     <button
-      class="sv813dg  tag-class"
+      class="sszr5nl  tag-class"
       data-cy="side-nav-tags-space"
     >
       space
