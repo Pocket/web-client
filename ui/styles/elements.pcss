@@ -410,7 +410,7 @@ input[type="reset"] {
     pointer-events: none;
   }
 
-  
+
   /** We don't want to outline tooltip*/
   &[data-tooltip] {
     border: 2px solid var(--color-canvas);
@@ -469,6 +469,28 @@ input[type="reset"] {
     &:focus {
       outline: none;
       outline-offset: 3px;
+    }
+  }
+
+  &.inline {
+    display: inline;
+    background: none;
+    padding: 0;
+    color: var(--color-textPrimary);
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+
+    &:focus {
+      outline: inherit;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    &:hover {
+      color: var(--color-textLinkHover);
     }
   }
 

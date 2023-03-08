@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { css } from 'linaria'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
-import { Button } from 'components/buttons/button'
 
 const footerStyles = css`
   display: flex;
@@ -43,18 +42,18 @@ export const AddToListModal = ({
         </select>
       </ModalBody>
       <ModalFooter className={footerStyles}>
-        <Button onClick={createAction} variant="inline">
+        <button onClick={createAction} className="inline">
           Create List
-        </Button>
+        </button>
 
         <div>
-          <Button onClick={cancelAction} variant="secondary">
+          <button onClick={cancelAction} className="secondary">
             Cancel
-          </Button>
+          </button>
 
-          <Button onClick={confirmAction}>
+          <button onClick={confirmAction}>
             Save to List
-          </Button>
+          </button>
         </div>
       </ModalFooter>
     </Modal>
