@@ -222,10 +222,12 @@ const TopicButton = ({ topic }) => {
     dispatch(sendSnowplowEvent('get-started.topic.toggle', analyticsData))
   }
 
+  const topicTestId = topic.name.toLowerCase()
+
   return (
     <label
       className={cx(topicStyle, isSelected && 'selected')}
-      data-cy={`topic-pill-${topic.name.toLowerCase()}`}>
+      data-cy={`topic-pill-${topicTestId}`}>
       <input type="checkbox" checked={isSelected} onChange={toggleTopic} />
       {topic.name}
     </label>
