@@ -1,5 +1,5 @@
-import { put, takeLatest, take, race } from 'redux-saga/effects'
-// import { updateShareableList } from 'common/api/mutations/updateShareableList'
+import { put, takeLatest, take, race, call } from 'redux-saga/effects'
+import { updateShareableList } from 'common/api/mutations/updateShareableList'
 
 import { LIST_UPDATE_REQUEST } from 'actions'
 import { LIST_UPDATE_CONFIRM } from 'actions'
