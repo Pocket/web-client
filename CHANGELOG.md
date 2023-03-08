@@ -1,3 +1,15 @@
+## [1.79.23](https://github.com/Pocket/web-client/compare/v1.79.22...v1.79.23) (2023-03-08)
+
+
+### Bug Fixes
+
+* **localization:** add translations for the rest of shortcuts menu smh ([ba7c594](https://github.com/Pocket/web-client/commit/ba7c594db79cb6b728e6d7f6c6028c71457a7618))
+* **localization:** anthony's cleanup fix for translation keys ([dcb3e75](https://github.com/Pocket/web-client/commit/dcb3e75e3a4f73a9ddf40b6a7334e3382d5c03ac))
+* **localization:** broke out shortcuts variable and added header translations as comments ([7dd1b20](https://github.com/Pocket/web-client/commit/7dd1b20c5c56f29b4df41c7a24aea66d80911c22))
+* **localization:** change list to saves ([1ada890](https://github.com/Pocket/web-client/commit/1ada890b2440aa79010c368942cab1edcea85bbf))
+* **localization:** fix empty lines ([94abcc2](https://github.com/Pocket/web-client/commit/94abcc224a4872f6d437b3ecf27f9218e1dfe071))
+* **localization:** shortcuts localization ([3c6edf2](https://github.com/Pocket/web-client/commit/3c6edf21d38fd213f801e7155439ccd63cc1b246))
+
 ## [1.79.22](https://github.com/Pocket/web-client/compare/v1.79.21...v1.79.22) (2023-03-08)
 
 

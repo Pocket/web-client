@@ -43,13 +43,14 @@ const shortcutsStyle = css`
   }
 `
 
-export function ShortCutDisplay({ copy, keyCopy, premium, isPremium }) {
+export function ShortCutDisplay({ copy, keyCopy, premium, isPremium, transKey }) {
+  const { t } = useTranslation()
   const rowClass = cx(premium && !isPremium && 'locked')
   return (
     <tr key={keyCopy} className={rowClass}>
-      <td>{copy}</td>
+      <td>{t(`shortcuts:${transKey}`, copy)}</td>
       <td>
-        {premium ? <PremiumIcon className="premium-icon" /> : null} {keyCopy}
+        {premium ? <PremiumIcon className="premium-icon" /> : null} {t(`shortcuts:${transKey}-key`, keyCopy)}
       </td>
     </tr>
   )
@@ -65,6 +66,9 @@ export function ShortCutsView({
   cancelShortcutView
 }) {
   const { t } = useTranslation()
+
+  const keyHeaderText = t('shortcuts:shortcut', 'Shortcut')
+
   return (
     <Modal
       title={t('shortcuts:shortcut-header', 'Keyboard Shortcuts')}
@@ -77,18 +81,19 @@ export function ShortCutsView({
           <table>
             <thead>
               <tr>
-                <th scope="col">List Actions</th>
-                <th scope="col">Shortcut</th>
+                <th scope="col">{t('shortcuts:saves-actions', 'Saves Actions')}</th>
+                <th scope="col">{keyHeaderText}</th>
               </tr>
             </thead>
             <tbody>
-              {listShortcuts.map(({ copy, keyCopy, premium }) => (
+              {listShortcuts.map(({ copy, keyCopy, premium, transKey }) => (
                 <ShortCutDisplay
                   copy={copy}
                   key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
+                  transKey={transKey}
                 />
               ))}
             </tbody>
@@ -96,18 +101,19 @@ export function ShortCutsView({
           <table>
             <thead>
               <tr>
-                <th scope="col">Item Actions</th>
-                <th scope="col">Shortcut</th>
+                <th scope="col">{t('shortcuts:item-actions', 'Item Actions')}</th>
+                <th scope="col">{keyHeaderText}</th>
               </tr>
             </thead>
             <tbody>
-              {itemActions.map(({ copy, keyCopy, premium }) => (
+              {itemActions.map(({ copy, keyCopy, premium, transKey }) => (
                 <ShortCutDisplay
                   copy={copy}
                   key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
+                  transKey={transKey}
                 />
               ))}
             </tbody>
@@ -115,18 +121,19 @@ export function ShortCutsView({
           <table>
             <thead>
               <tr>
-                <th scope="col">Reading Actions</th>
-                <th scope="col">Shortcut</th>
+                <th scope="col">{t('shortcuts:reading-actions', 'Reading Actions')}</th>
+                <th scope="col">{keyHeaderText}</th>
               </tr>
             </thead>
             <tbody>
-              {readerShortcuts.map(({ copy, keyCopy, premium }) => (
+              {readerShortcuts.map(({ copy, keyCopy, premium, transKey }) => (
                 <ShortCutDisplay
                   copy={copy}
                   key={keyCopy}
                   keyCopy={keyCopy}
                   premium={premium}
                   isPremium={isPremium}
+                  transKey={transKey}
                 />
               ))}
             </tbody>
@@ -136,3 +143,11 @@ export function ShortCutsView({
     </Modal>
   )
 }
+
+/**
+  t('shortcuts:shortcut-header', 'Keyboard Shortcuts')
+  t('shortcuts:saves-actions', 'Saves Actions')
+  t('shortcuts:item-actions', 'Item Actions')
+  t('shortcuts:reading-actions', 'Reading Actions')
+  t('shortcuts:shortcut', 'Shortcut')
+ */
