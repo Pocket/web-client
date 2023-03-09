@@ -30,8 +30,8 @@ export const ListIndividual = () => {
   const shouldRender = userStatus !== 'pending'
 
   useEffect(() => {
-    dispatch(getIndividualListAction(id))
-  }, [dispatch, id])
+    if (enrolled) dispatch(getIndividualListAction(id))
+  }, [dispatch, id, enrolled])
 
   if (!list) return null
   const { title, description, status } = list
