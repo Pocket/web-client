@@ -1,3 +1,10 @@
+# [1.81.0](https://github.com/Pocket/web-client/compare/v1.80.6...v1.81.0) (2023-03-09)
+
+
+### Features
+
+* **logging:** add multiline log pattern to app container, update imports ([47e1976](https://github.com/Pocket/web-client/commit/47e19763a60fd7a8b99dd2d5f35906d777df27cb))
+
 ## [1.80.6](https://github.com/Pocket/web-client/compare/v1.80.5...v1.80.6) (2023-03-09)
 
 

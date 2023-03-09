@@ -4,12 +4,16 @@ import { config } from './config'
 
 import { App, RemoteBackend, TerraformStack, DataTerraformRemoteState } from 'cdktf'
 
-import { AwsProvider, sns, datasources, kms } from '@cdktf/provider-aws'
-import { PagerdutyProvider } from '@cdktf/provider-pagerduty'
-import { NullProvider } from '@cdktf/provider-null'
-import { LocalProvider } from '@cdktf/provider-local'
-import { ArchiveProvider } from '@cdktf/provider-archive'
-import { PocketALBApplication, PocketECSCodePipeline, PocketPagerDuty, PocketVPC } from '@pocket-tools/terraform-modules'
+import { ArchiveProvider } from '@cdktf/provider-archive/lib/provider';
+import { AwsProvider } from '@cdktf/provider-aws/lib/provider';
+import { DataAwsRegion } from '@cdktf/provider-aws/lib/data-aws-region';
+import { DataAwsCallerIdentity } from '@cdktf/provider-aws/lib/data-aws-caller-identity';
+import { DataAwsSnsTopic } from '@cdktf/provider-aws/lib/data-aws-sns-topic';
+import { DataAwsKmsAlias } from '@cdktf/provider-aws/lib/data-aws-kms-alias';
+import { LocalProvider } from '@cdktf/provider-local/lib/provider';
+import { NullProvider } from '@cdktf/provider-null/lib/provider';
+import { PagerdutyProvider } from '@cdktf/provider-pagerduty/lib/provider';
+import { PocketALBApplication, PocketECSCodePipeline, PocketPagerDuty, PocketVPC } from '@pocket-tools/terraform-modules';
 
 class WebClient extends TerraformStack {
   constructor(scope: Construct, name: string) {
@@ -27,8 +31,8 @@ class WebClient extends TerraformStack {
     })
 
     const pocketVPC = new PocketVPC(this, 'pocket-vpc')
-    const region = new datasources.DataAwsRegion(this, 'region')
-    const caller = new datasources.DataAwsCallerIdentity(this, 'caller')
+    const region = new DataAwsRegion(this, 'region')
+    const caller = new DataAwsCallerIdentity(this, 'caller')
 
     const pocketApp = this.createPocketAlbApplication({
       pagerDuty: this.createPagerDuty(),
@@ -48,7 +52,7 @@ class WebClient extends TerraformStack {
    * @private
    */
  private getCodeDeploySnsTopic() {
-  return  new sns.DataAwsSnsTopic(this, 'frontend_notifications', {
+  return  new DataAwsSnsTopic(this, 'frontend_notifications', {
     name: `Frontend-${config.environment}-ChatBot`
   })
 }
@@ -58,7 +62,7 @@ class WebClient extends TerraformStack {
  * @private
  */
 private getSecretsManagerKmsAlias() {
-  return new kms.DataAwsKmsAlias(this, 'kms_alias', {
+  return new DataAwsKmsAlias(this, 'kms_alias', {
     name: 'alias/aws/secretsmanager',
   });
 }
@@ -115,10 +119,10 @@ private getSecretsManagerKmsAlias() {
 
     private createPocketAlbApplication(dependencies: {
       pagerDuty: PocketPagerDuty;
-      region: datasources.DataAwsRegion;
-      caller: datasources.DataAwsCallerIdentity;
-      secretsManagerKmsAlias: kms.DataAwsKmsAlias;
-      snsTopic: sns.DataAwsSnsTopic;
+      region: DataAwsRegion;
+      caller: DataAwsCallerIdentity;
+      secretsManagerKmsAlias: DataAwsKmsAlias;
+      snsTopic: DataAwsSnsTopic;
       vpc: PocketVPC;
     }): PocketALBApplication {
       const { pagerDuty, region, caller, secretsManagerKmsAlias, snsTopic, vpc } =
@@ -170,7 +174,8 @@ private getSecretsManagerKmsAlias() {
                 name: 'BRAZE_PRIVATE_KEY',
                 valueFrom: `arn:aws:ssm:${region.name}:${caller.accountId}:parameter/${config.name}/${config.environment}/BRAZE_PRIVATE_KEY`
               }
-            ]
+            ],
+            logMultilinePattern: '^\\S.+',
           },
           {
             name: 'xray-daemon',
