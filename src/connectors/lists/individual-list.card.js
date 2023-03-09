@@ -26,6 +26,7 @@ export const IndividualListCard = ({ id, listId }) => {
         onOpenOriginalUrl={() => { }} // engagement event here
         onOpen={() => { }} // engagement event here
         Actions={ListActions}
+        clamp
       />
     </div>
   )

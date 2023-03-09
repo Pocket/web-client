@@ -1,3 +1,16 @@
+## [1.80.1](https://github.com/Pocket/web-client/compare/v1.80.0...v1.80.1) (2023-03-09)
+
+
+### Bug Fixes
+
+* **list cards:** clamp the list and individual list cards ([ade9f29](https://github.com/Pocket/web-client/commit/ade9f294eb2b76e6b8205a5dd1031505b8575476))
+* **lists:** highlight All Lists in side nav when on All Lists page ([a8303d0](https://github.com/Pocket/web-client/commit/a8303d06fc299831105d078f0d23015615b39778))
+* **navigation:** add All Lists link to side-nav & global-nav ([bb62fd1](https://github.com/Pocket/web-client/commit/bb62fd1f88ca15768291db9bfef97dab449f5c24))
+* **shareable-lists:** add getShareableListPilotStatusQuery ([c74b20a](https://github.com/Pocket/web-client/commit/c74b20a2d4814ba5e055f937daab64c8938d16ae))
+* **side-nav:** create list icon, styles and action ([1c9aef1](https://github.com/Pocket/web-client/commit/1c9aef194dbe12c0f03270c59501483fa7849810))
+* **side-nav:** remove lists - no longer showing individual list links ([8a8b9ef](https://github.com/Pocket/web-client/commit/8a8b9ef8b5588563c2569735b60611fc79565ba1))
+* **tooltip:** adjust tooltip pointer placement to remove space ([56ce24e](https://github.com/Pocket/web-client/commit/56ce24eb907269b5fe34511e2057118345e1556f))
+
 # [1.80.0](https://github.com/Pocket/web-client/compare/v1.79.23...v1.80.0) (2023-03-08)
 
 

@@ -29,6 +29,7 @@ export const ListCard = ({ id }) => {
         storyCount={storyCount}
         itemImage={itemImage}
         Actions={ListActions}
+        clamp
       />
     </div>
   )
