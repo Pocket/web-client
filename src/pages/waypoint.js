@@ -9,6 +9,11 @@ export default function Waypoint() {}
 
 export async function getServerSideProps({ req, locale, query, defaultLocale, locales }) {
   try {
+    // We can't reliably test waypoint locally due to auth requirements
+    // These two parameters will let us check if a user should be redirected
+    // based on explicitly providing data we can't get
+    const { skipUserCheck, userStartDate } = query
+
     // returns first two letters of browser defined language settings
     const lang = req.headers['accept-language']?.toString().substring(0, 2)
     const supportedLocale = locales.includes(lang)
@@ -20,19 +25,26 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
 
     // query parameters returned after auth that are currently not used.
     // remove from the list of query parameters
-    const unusedQueryParams = ['access_token', 'id', 'guid', 'type']
+    const unusedQueryParams = [
+      'access_token',
+      'id',
+      'guid',
+      'type',
+      'skipUserCheck',
+      'userStartDate'
+    ]
     unusedQueryParams.forEach((param) => delete query[param])
 
     const savesLink = queryString.stringifyUrl({ url: `${langPrefix}/saves`, query })
     const homeLink = queryString.stringifyUrl({ url: `${langPrefix}/home`, query })
 
     const response = await getUserInfo(true, req?.headers?.cookie)
-    const { user_id, birth } = response?.user || {}
-    if (!user_id) throw new WaypointNoUserIdError()
+    const { user_id, birth = userStartDate } = response?.user || {}
+    if (!user_id && !skipUserCheck) throw new WaypointNoUserIdError()
 
     // Not logged in, or something else went awry?
-    // !! NOTE: this will redirect to Saves 100% of the time on localhost
-    if (!birth || !homeEligible) {
+    // !! NOTE: this will redirect to Saves 100% of the time on localhost unless you use `skipUserCheck=true` in the url
+    if ((!birth && !skipUserCheck) || !homeEligible) {
       return {
         redirect: {
           permanent: false,
