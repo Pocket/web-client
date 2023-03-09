@@ -1,3 +1,22 @@
+## [1.80.4](https://github.com/Pocket/web-client/compare/v1.80.3...v1.80.4) (2023-03-09)
+
+
+### Bug Fixes
+
+* **reader:** fix highlights toasts have no copy ([1b2de09](https://github.com/Pocket/web-client/commit/1b2de09d6140a159af880be6967f66d56a11eae1))
+* **reader:** minor clean up for PR ([11e8e13](https://github.com/Pocket/web-client/commit/11e8e1383911ff817818d1141de1db3b579dff48))
+* **reader:** nuke unused actions ([bbc6ff0](https://github.com/Pocket/web-client/commit/bbc6ff0f7394798492b93b7670bd9fec9c695db6))
+* **reader:** undo 2nd map system bc I broke other MUTATION_SUCCESS operations ([a8cdc8c](https://github.com/Pocket/web-client/commit/a8cdc8c747161b68628b8907823556c5890798ad))
+* **toast:** add namespace / remove comment pattern ([acb7631](https://github.com/Pocket/web-client/commit/acb76314b3d531b87a1128cb33d692dcdec31cc5))
+* **toasts:** move t declaration ([9a8e2d1](https://github.com/Pocket/web-client/commit/9a8e2d1cda10950592e8351533b304a17fa83556))
+
+## [1.80.3](https://github.com/Pocket/web-client/compare/v1.80.2...v1.80.3) (2023-03-09)
+
+
+### Bug Fixes
+
+* **lists:** updates per design audit, adding delete confirmation ([7fa49ba](https://github.com/Pocket/web-client/commit/7fa49ba31650a96a616cc195c8722c56b010fef4))
+
 ## [1.80.2](https://github.com/Pocket/web-client/compare/v1.80.1...v1.80.2) (2023-03-09)
 
 

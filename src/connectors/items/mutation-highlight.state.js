@@ -1,9 +1,11 @@
 import { put, call, select, takeEvery } from 'redux-saga/effects'
 
 import { HIGHLIGHT_SAVE_REQUEST } from 'actions'
+import { HIGHLIGHT_SAVE_SUCCESS } from 'actions'
 import { HIGHLIGHT_SAVE_FAILURE } from 'actions'
 
 import { HIGHLIGHT_DELETE_REQUEST } from 'actions'
+import { HIGHLIGHT_DELETE_SUCCESS } from 'actions'
 import { HIGHLIGHT_DELETE_FAILURE } from 'actions'
 
 import { MUTATION_SUCCESS } from 'actions'
@@ -52,7 +54,7 @@ function* highlightSaveRequest({ id, quote, patch }) {
     const storedHighlights = yield select(getHighlights, id)
     const highlights = [...storedHighlights, ...data]
     const node = { id, annotations: { highlights } }
-    return yield put({ type: MUTATION_SUCCESS, nodes: [node] })
+    return yield put({ type: MUTATION_SUCCESS, nodes: [node], actionType: HIGHLIGHT_SAVE_SUCCESS })
   } catch (error) {
     yield put({ type: HIGHLIGHT_SAVE_FAILURE, error })
   }
@@ -66,7 +68,7 @@ function* highlightDeleteRequest({ annotationId, savedItemId }) {
     const highlights = storedHighlights.filter((i) => i.id !== data)
 
     const node = { id: savedItemId, annotations: { highlights } }
-    return yield put({ type: MUTATION_SUCCESS, nodes: [node] })
+    return yield put({ type: MUTATION_SUCCESS, nodes: [node], actionType: HIGHLIGHT_DELETE_SUCCESS })
   } catch (error) {
     yield put({ type: HIGHLIGHT_DELETE_FAILURE, error })
   }

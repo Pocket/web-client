@@ -26,7 +26,7 @@ import { ArticleIcon } from 'components/icons/ArticleIcon'
 import { ArchiveIcon } from 'components/icons/ArchiveIcon'
 import { VideoIcon } from 'components/icons/VideoIcon'
 import { CollectionsIcon } from 'components/icons/CollectionsIcon'
-import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
+import { PlaylistPlayIcon } from 'components/icons/PlaylistPlayIcon'
 
 import { BASE_URL } from 'common/constants'
 import { LOGIN_URL } from 'common/constants'
@@ -156,7 +156,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
     },
     {
       name: 'lists',
-      icon: <PlaylistAddIcon />,
+      icon: <PlaylistPlayIcon />,
       label: 'All Lists',
       url: inListsExperiment ? '/lists' : ''
     },

@@ -33,14 +33,7 @@ const listHeaderStyles = css`
     display: flex;
 
     .filter {
-      margin: 0 0 0 12px;
-      padding: 0.25rem 0.5rem;
-      background: transparent;
-      color: var(--color-primary);
-    }
-
-    .icon {
-      height: 20px;
+      margin-left: 12px;
     }
   }
 `
@@ -88,9 +81,9 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
       </h1>
 
       <div className="create-sort">
-        <Button onClick={handleCreateList} size="tiny">
+        <button onClick={handleCreateList} className="tiny">
           <PlaylistAddIcon /> Create List
-        </Button>
+        </button>
         <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
       </div>
     </header>
@@ -122,17 +115,17 @@ export const ListIndividualHeader = ({
 
       <div className="create-sort">
         {isPrivate ? (
-          <Button onClick={handlePublish} size="tiny">
+          <button onClick={handlePublish} className="tiny">
             Make list public
-          </Button>
+          </button>
         ) : (
-          <Button onClick={handleShare} size="tiny">
+          <button onClick={handleShare} className="tiny">
             Share list
-          </Button>
+          </button>
         )}
 
-        <button onClick={handleEdit} className="filter">
-          <FiltersAltIcon />
+        <button onClick={handleEdit} className="filter tiny outline">
+          <FiltersAltIcon /> Settings
         </button>
       </div>
     </header>

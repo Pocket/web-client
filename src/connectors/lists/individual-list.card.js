@@ -3,9 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { mutateListItemDelete } from './mutation-delete.state'
 import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
-import { DeleteIcon } from 'components/icons/DeleteIcon'
-import { bottomTooltip } from 'components/tooltip/tooltip'
-import { buttonReset } from 'components/buttons/button-reset'
 
 export const IndividualListCard = ({ id, listId }) => {
   const item = useSelector((state) => state.listsDisplay[id])
@@ -41,12 +38,11 @@ export const ListActions = ({ id, listId }) => {
 
   return (
     <button
-      aria-label="Delete Item from List"
-      data-tooltip="Delete Item"
-      data-cy="delete-item"
-      className={cx(buttonReset, bottomTooltip)}
+      aria-label="Remove item from list"
+      data-cy="remove-item"
+      className="tiny outline"
       onClick={handleDeleteItem}>
-      <DeleteIcon />
+      Remove
     </button>
   )
 }

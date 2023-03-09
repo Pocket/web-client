@@ -166,6 +166,7 @@ export const LOCALE_COMMON = [
   'collections',
   'partner',
   'topic',
+  'toast',
   'fxa',
   'feedback'
 ]
