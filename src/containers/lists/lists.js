@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import ErrorPage from 'containers/_error/error.js'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListsAllHeader } from 'components/headers/lists-header'
@@ -16,6 +17,8 @@ import { LoaderCentered } from 'components/loader/loader'
 export const Lists = () => {
   const dispatch = useDispatch()
 
+  const enrolled = useSelector((state) => state.pageListsInfo.enrolled)
+  const enrolledFetched = useSelector((state) => state.pageListsInfo.enrolledFetched)
   const listIds = useSelector((state) => state.pageListsIds)
   const userStatus = useSelector((state) => state.user.user_status)
   const sortOrder = useSelector((state) => state.pageListsInfo.sortOrder)
@@ -26,14 +29,16 @@ export const Lists = () => {
   const showLists = listIds?.length > 0 && !loading
 
   useEffect(() => {
-    dispatch(getUserShareableLists())
-  }, [dispatch])
+    if (enrolled) dispatch(getUserShareableLists())
+  }, [dispatch, enrolled])
 
   // Actions
   const handleCreateList = () => dispatch(mutateListCreate())
   const handleNewest = () => dispatch(listsItemsSetSortOrder('DESC'))
   const handleOldest = () => dispatch(listsItemsSetSortOrder('ASC'))
 
+  if (!enrolledFetched) return null
+  if (enrolledFetched && !enrolled) return <ErrorPage statusCode={404} />
   return (
     <Layout>
       <SideNav type="saves" subset="lists" />

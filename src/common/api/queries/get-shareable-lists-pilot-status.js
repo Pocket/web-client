@@ -2,10 +2,11 @@ import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
 
 const getShareableListPilotStatusQuery = gql`
-  query GetShareableListPilotStatus($externalId: ID!) {
+  query GetShareableListPilotStatus {
     shareableListsPilotUser
   }
 `
+
 export function getShareableListPilotStatus() {
   return requestGQL({
     query: getShareableListPilotStatusQuery,

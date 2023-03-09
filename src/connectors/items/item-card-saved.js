@@ -18,7 +18,6 @@ import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
 import { shareAction } from 'connectors/items/mutation-share.state'
 import { mutateListAddItem } from 'connectors/lists/mutation-add.state'
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 /**
  * Article Card
@@ -164,9 +163,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   const { filters, sort } = useSelector((state) => state.pageSavedInfo)
   const position = useSelector((state) => state.pageSavedIds.indexOf(id))
   const item = useSelector((state) => state.itemsDisplay[id])
-
-  const featureState = useSelector((state) => state.features)
-  const inListsExperiment = featureFlagActive({ flag: 'shared-lists', featureState })
+  const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
 
   if (!itemSaved || !item) return null
   const { isFavorite, isArchived, tags} = itemSaved //prettier-ignore
