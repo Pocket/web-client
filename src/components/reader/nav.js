@@ -158,9 +158,7 @@ export const ReaderNav = ({
   const { getStarted } = router.query
 
   const goBack = () => {
-    if (getStarted) return router.push('/home')
-    if (window.history.length > 1) return window.history.go(-1)
-    document.location.href = '/saves'
+    return router.push(getStarted ? '/home' : '/saves')
   }
   const clickGoBack = () => {
     const identifier = getStarted ? 'get-started.reader.gohome' : 'reader.goback'
