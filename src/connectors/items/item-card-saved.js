@@ -205,7 +205,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   }
   const actionAddToList = () => {
     // snowplow event here
-    const listAction = (true) ? mutateListAddItem : mutateListCreate
+    const listAction = true ? mutateListAddItem : mutateListCreate //eslint-disable-line
     dispatch(listAction(id))
   }
 

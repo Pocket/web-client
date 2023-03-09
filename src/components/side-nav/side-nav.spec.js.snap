@@ -12,7 +12,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       href="/home?src=sidebar"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-home"
       >
         <span
@@ -39,7 +39,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       href="/saves?src=sidebar"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-saves"
       >
         <span
@@ -87,7 +87,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       href="/explore?src=sidebar"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-discover"
       >
         <span
@@ -119,7 +119,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       href="/collections?src=sidebar"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-collections"
       >
         <span
@@ -162,7 +162,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       </button>
     </a>
     <div
-      class="s1jxyudr"
+      class="sv813dg"
       data-cy="side-nav-account"
     />
   </nav>
@@ -207,7 +207,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       href="/home?src=sidebar"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-home"
       >
         <span
@@ -234,7 +234,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       href="/saves?src=sidebar"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-saves"
       >
         <span
@@ -282,7 +282,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       href="/explore?src=sidebar"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-discover"
       >
         <span
@@ -314,7 +314,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       href="/collections?src=sidebar"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-collections"
       >
         <span
@@ -356,16 +356,16 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
         nav:collections
       </button>
     </a>
-    <div
-      class="s1jxyudr"
+    <h4
+      class="sv813dg"
     >
       nav:filters
-    </div>
+    </h4>
     <a
       href="/saves/archive"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-archive"
       >
         <span
@@ -402,7 +402,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       href="/saves/favorites"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-favorites"
       >
         <span
@@ -429,7 +429,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       href="/saves/highlights"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-highlights"
       >
         <span
@@ -456,7 +456,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       href="/saves/articles"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-articles"
       >
         <span
@@ -488,7 +488,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       href="/saves/videos"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-videos"
       >
         <span
@@ -519,16 +519,16 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
         nav:videos
       </button>
     </a>
-    <div
-      class="s1jxyudr"
+    <h4
+      class="sv813dg"
     >
       nav:tags
-    </div>
+    </h4>
     <a
       href="/saves/tags"
     >
       <button
-        class="sv813dg  "
+        class="sszr5nl  "
         data-cy="side-nav-all-tags"
       >
         <span
@@ -558,7 +558,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       href="/saves/tags/home"
     >
       <button
-        class="sv813dg  tag-class"
+        class="sszr5nl  tag-class"
         data-cy="side-nav-tags-home"
       >
         home
@@ -568,7 +568,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       href="/saves/tags/space"
     >
       <button
-        class="sv813dg  tag-class"
+        class="sszr5nl  tag-class"
         data-cy="side-nav-tags-space"
       >
         space
