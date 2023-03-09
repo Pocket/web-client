@@ -4,8 +4,6 @@ import { mutateListDelete } from 'connectors/lists/mutation-delete.state'
 import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { DeleteIcon } from 'components/icons/DeleteIcon'
-import { bottomTooltip } from 'components/tooltip/tooltip'
-import { buttonReset } from 'components/buttons/button-reset'
 
 export const ListCard = ({ id }) => {
   const list = useSelector((state) => state.pageListsInfo[id])
@@ -45,11 +43,10 @@ export const ListActions = ({ id }) => {
   return (
     <button
       aria-label="Delete List"
-      data-tooltip="Delete List"
       data-cy="delete-list"
-      className={cx(buttonReset, bottomTooltip)}
+      className="tiny outline"
       onClick={handleDeleteList}>
-      <DeleteIcon />
+      <DeleteIcon /> Delete
     </button>
   )
 }
