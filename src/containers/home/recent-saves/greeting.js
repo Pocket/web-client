@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next'
 import { useSelector } from 'react-redux'
 import { getTimeOfDay } from 'common/utilities/date-time/date-time'
-import { css, cx } from 'linaria'
+import { css } from 'linaria'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
 const homeGreeting = css`
@@ -34,5 +34,5 @@ export const HomeGreeting = () => {
   const showName = firstName && firstName.length < 30
   const greeting = showName ? withNameGreeting[timeOfDay] : noNameGreeting[timeOfDay]
 
-  return <SectionWrapper className={cx(homeGreeting, 'greeting')}>{greeting}</SectionWrapper>
+  return <SectionWrapper className={homeGreeting}>{greeting}</SectionWrapper>
 }
