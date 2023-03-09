@@ -1,4 +1,4 @@
-import GlobalNavBulkEdit from 'components/global-nav/tools/bulk-edit/global-nav-bulk-edit'
+import { GlobalNavBulkEdit as GlobalNavBulkEditComponent } from 'components/global-nav/tools/bulk-edit/global-nav-bulk-edit'
 import { mutationBulkClear } from 'connectors/items/mutations-bulk.state'
 
 import { mutationBulkArchive } from 'connectors/items/mutation-archive.state'
@@ -11,7 +11,7 @@ import { mutationBulkTag } from 'connectors/items/mutation-tagging.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { useDispatch, useSelector } from 'react-redux'
 
-function GlobalNavBulkEditConnected({ onClose }) {
+export function GlobalNavBulkEdit({ onClose }) {
   const dispatch = useDispatch()
   const bulkItems = useSelector((state) => state?.mutationBulk?.itemIds)
   const items = useSelector((state) => state?.itemsDisplay)
@@ -70,7 +70,7 @@ function GlobalNavBulkEditConnected({ onClose }) {
   }
 
   return (
-    <GlobalNavBulkEdit
+    <GlobalNavBulkEditComponent
       onClose={onClose}
       batchFavorite={batchFavorite}
       batchStatus={batchStatus}
@@ -83,5 +83,3 @@ function GlobalNavBulkEditConnected({ onClose }) {
     />
   )
 }
-
-export default GlobalNavBulkEditConnected

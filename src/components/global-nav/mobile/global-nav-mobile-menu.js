@@ -246,7 +246,7 @@ export const Menu = ({
  * Component to render navigational links in the GlobalNav. Accepts a list of links
  * to render so that links may be customized per page context.
  */
-const GlobalNavMobileMenu = ({
+export const GlobalNavMobileMenu = ({
   links,
   subLinks,
   selectedLink,
@@ -379,4 +379,3 @@ GlobalNavMobileMenu.defaultProps = {
   forceShow: false
 }
 
-export default GlobalNavMobileMenu

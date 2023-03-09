@@ -8,10 +8,10 @@ import { setListModeGrid } from 'connectors/app/app.state'
 import { setListModeDetail } from 'connectors/app/app.state'
 import { setColorMode } from 'connectors/app/app.state'
 
-import GlobalNavComponent from 'components/global-nav/global-nav'
-import GlobalNavSearch from './global-nav-search'
-import GlobalNavAdd from './global-nav-add'
-import GlobalNavBulkMutations from './global-nav-bulk-mutations'
+import { GlobalNav as GlobalNavComponent } from 'components/global-nav/global-nav'
+import { GlobalNavSearch } from './global-nav-search'
+import { GlobalNavAdd } from './global-nav-add'
+import { GlobalNavBulkEdit } from './global-nav-bulk-mutations'
 
 import { HomeIcon } from 'components/icons/HomeIcon'
 import { DiscoverIcon } from 'components/icons/DiscoverIcon'
@@ -52,7 +52,7 @@ export const enforceDefaultAvatar = (avatarUrl = '') => {
  * It has no stories or tests because of this, and will pass through any props
  * provided to it to the GlobalNav component.
  */
-const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
+export const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
@@ -207,7 +207,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
   const navChildren = {
     search: GlobalNavSearch,
     add: GlobalNavAdd,
-    bulk: GlobalNavBulkMutations
+    bulk: GlobalNavBulkEdit
   }
 
   const NavTakeover = navChildren[appMode]
@@ -251,4 +251,3 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
   )
 }
 
-export default GlobalNav

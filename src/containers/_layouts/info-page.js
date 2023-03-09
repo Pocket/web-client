@@ -3,7 +3,7 @@ import { css } from 'linaria'
 import { breakpointMediumTablet, breakpointTinyTablet } from 'common/constants'
 import { GlobalFooter } from 'components/global-footer/global-footer'
 import { PageContainer } from 'components/page-container/page-container'
-import GlobalNav from 'connectors/global-nav/global-nav'
+import { GlobalNav } from 'connectors/global-nav/global-nav'
 import { PocketHead } from 'containers/_layouts/_head'
 
 export const InfoPageStyles = css`

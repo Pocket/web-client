@@ -153,7 +153,7 @@ const addContainerStyle = css`
 /**
  * Component to expose search functionality to users in places like GlobalNav.
  */
-const GlobalNavAdd = ({
+export const GlobalNavAdd = ({
   onSubmit,
   onClose,
   onFocus,
@@ -293,4 +293,3 @@ GlobalNavAdd.defaultProps = {
 // t('nav:save-a-url-https', 'Save a URL https://...')
 // t('nav:save-a-url', 'Save a URL')
 
-export default GlobalNavAdd

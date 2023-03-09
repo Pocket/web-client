@@ -1,5 +1,5 @@
 import React from 'react'
-import GlobalNavSearch from './global-nav-search'
+import { GlobalNavSearch } from './global-nav-search'
 
 export default {
   title: 'GlobalNav/GlobalNavSearch',

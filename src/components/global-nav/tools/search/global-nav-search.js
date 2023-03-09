@@ -157,7 +157,7 @@ const searchContainerStyle = css`
 /**
  * Component to expose search functionality to users in places like GlobalNav.
  */
-const GlobalNavSearch = ({
+export const GlobalNavSearch = ({
   onSubmit,
   onClose,
   onFocus,
@@ -349,4 +349,3 @@ GlobalNavSearch.defaultProps = {
 // t('nav:search-for-topics-and-interests', 'Search for topics and interests')
 // t('nav:search-for-topics', 'Search for topics')
 
-export default GlobalNavSearch

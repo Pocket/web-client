@@ -1,6 +1,6 @@
 import React from 'react'
 
-import GlobalNavAccount from './global-nav-account'
+import { GlobalNavAccount } from './global-nav-account'
 
 export default {
   title: 'GlobalNav/GlobalNavAccount',

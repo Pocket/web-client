@@ -1,4 +1,4 @@
-import GlobalNavSearch from 'components/global-nav/tools/search/global-nav-search'
+import { GlobalNavSearch as GlobalNavSearchComponent } from 'components/global-nav/tools/search/global-nav-search'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,7 +6,7 @@ import { getRecentSearch } from 'connectors/search/search.state'
 import { saveRecentSearch } from 'connectors/search/search.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-function GlobalNavSearchConnected({ onClose }) {
+export function GlobalNavSearch({ onClose }) {
   const router = useRouter()
   const dispatch = useDispatch()
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false) //prettier-ignore
@@ -23,7 +23,7 @@ function GlobalNavSearchConnected({ onClose }) {
   }, [dispatch])
 
   return (
-    <GlobalNavSearch
+    <GlobalNavSearchComponent
       recentSearches={recentSearches}
       onClose={onClose}
       onSubmit={onSubmit}
@@ -31,5 +31,3 @@ function GlobalNavSearchConnected({ onClose }) {
     />
   )
 }
-
-export default GlobalNavSearchConnected

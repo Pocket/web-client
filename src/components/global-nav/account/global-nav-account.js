@@ -150,7 +150,7 @@ const avatarStyle = css`
  * login/signup/premium links depending on user state, as well as an avatar
  * with account menu for logged in users.
  */
-const GlobalNavAccount = ({
+export const GlobalNavAccount = ({
   isLoggedIn,
   isPremium,
   avatarSrc,
@@ -208,7 +208,8 @@ const GlobalNavAccount = ({
   const handleLogoutCase = () => {
     onLinkClick('logout')
     // Fire for all users when Braze launches
-    if (brazeInitialized) import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
+    if (brazeInitialized)
+      import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
   }
 
   function handleVisible() {
@@ -411,4 +412,3 @@ GlobalNavAccount.defaultProps = {
   onAccountClick: () => {}
 }
 
-export default GlobalNavAccount

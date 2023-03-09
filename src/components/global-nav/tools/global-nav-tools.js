@@ -47,7 +47,7 @@ const listStyle = css`
  * to know when a particular tool was clicked. The list of tools is passed in as a prop
  * so that tools can be customized in the GlobalNav per page/app.
  */
-const GlobalNavTools = ({ tools, onToolClick }) => {
+export const GlobalNavTools = ({ tools, onToolClick }) => {
   function handleToolClick(event, toolName) {
     onToolClick(toolName)
   }
@@ -106,4 +106,3 @@ GlobalNavTools.defaultProps = {
   onToolClick() {}
 }
 
-export default GlobalNavTools

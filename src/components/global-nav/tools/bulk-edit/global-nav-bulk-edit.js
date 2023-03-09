@@ -161,7 +161,7 @@ const bulkContainerStyle = css`
   flex: 1;
 `
 
-function GlobalNavBulkEdit({
+export function GlobalNavBulkEdit({
   onClose,
   batchFavorite,
   batchStatus,
@@ -259,5 +259,3 @@ function GlobalNavBulkEdit({
     </div>
   )
 }
-
-export default GlobalNavBulkEdit

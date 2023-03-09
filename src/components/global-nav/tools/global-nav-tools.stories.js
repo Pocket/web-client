@@ -1,6 +1,6 @@
 import React from 'react'
 
-import GlobalNavTools from './global-nav-tools'
+import { GlobalNavTools } from './global-nav-tools'
 import { SearchIcon } from 'components/icons/SearchIcon'
 import { AddIcon } from 'components/icons/AddIcon'
 import { EditIcon } from 'components/icons/EditIcon'

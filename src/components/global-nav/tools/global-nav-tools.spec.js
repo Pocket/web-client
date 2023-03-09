@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { PlayIcon } from 'components/icons/PlayIcon'
 import { TagIcon } from 'components/icons/TagIcon'
 
-import GlobalNavTools from './global-nav-tools'
+import { GlobalNavTools } from './global-nav-tools'
 
 describe('GlobalNavTools', () => {
   mockModal()

@@ -2,7 +2,7 @@ import { wrappedRender, mockModal } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
 
-import GlobalNavSearch from './global-nav-search'
+import { GlobalNavSearch } from './global-nav-search'
 
 jest.mock('next/router', () => require('next-router-mock'))
 

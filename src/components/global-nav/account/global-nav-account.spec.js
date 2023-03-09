@@ -1,6 +1,6 @@
 import { wrappedRender, fireEvent } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
-import GlobalNavAccount from './global-nav-account'
+import { GlobalNavAccount } from './global-nav-account'
 
 const baseProps = { appRootSelector: '#root' }
 

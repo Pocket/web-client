@@ -6,7 +6,7 @@ import { css } from 'linaria'
 import { GlobalFooter } from 'components/global-footer/global-footer'
 import { PageContainer } from 'components/page-container/page-container'
 import { breakpointLargeHandset } from 'common/constants' // 599
-import GlobalNav from 'connectors/global-nav/global-nav'
+import { GlobalNav } from 'connectors/global-nav/global-nav'
 import { Button } from 'components/buttons/button'
 
 const pageContainerStyle = css`

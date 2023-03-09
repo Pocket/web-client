@@ -12,10 +12,10 @@ import { PageContainer } from 'components/page-container/page-container'
 import { Logo, LogoMark } from 'components/logo/logo'
 import { useViewport } from 'components/viewport-provider/viewport-provider'
 
-import GlobalNavLinks from './links/global-nav-links'
-import GlobalNavMobileMenu from './mobile/global-nav-mobile-menu'
-import GlobalNavTools from './tools/global-nav-tools'
-import GlobalNavAccount from './account/global-nav-account'
+import { GlobalNavLinks } from './links/global-nav-links'
+import { GlobalNavMobileMenu } from './mobile/global-nav-mobile-menu'
+import { GlobalNavTools } from './tools/global-nav-tools'
+import { GlobalNavAccount } from './account/global-nav-account'
 
 const headerStyle = css`
   width: 100%;
@@ -189,7 +189,7 @@ const toolsStyle = css`
  * <GlobalNav isLoggedIn={!!state.user.auth} />
  * ```
  */
-const GlobalNav = ({
+export const GlobalNav = ({
   noNav,
   subLinks,
   subset,
@@ -422,4 +422,3 @@ GlobalNav.defaultProps = {
   children: null
 }
 
-export default GlobalNav

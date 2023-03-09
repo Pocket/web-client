@@ -1,7 +1,7 @@
 import { render, fireEvent } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
 
-import GlobalNavLinks from './global-nav-links'
+import { GlobalNavLinks } from './global-nav-links'
 const baseProps = {
   links: [
     {

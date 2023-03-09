@@ -1,5 +1,5 @@
 import React from 'react'
-import GlobalNavLinks from './global-nav-links'
+import { GlobalNavLinks } from './global-nav-links'
 
 export default {
   title: 'GlobalNav/GlobalNavLinks',

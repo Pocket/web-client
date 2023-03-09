@@ -1,5 +1,5 @@
 import React from 'react'
-import GlobalNavMobileMenu from './global-nav-mobile-menu'
+import { GlobalNavMobileMenu } from './global-nav-mobile-menu'
 import { DiscoverIcon } from 'components/icons/DiscoverIcon'
 import { ListViewIcon } from 'components/icons/ListViewIcon'
 
