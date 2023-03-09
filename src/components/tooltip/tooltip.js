@@ -121,7 +121,7 @@ export const placementBottom = css`
 
   /* tooltip body */
   &[data-tooltip]:after {
-    top: calc(100% + 4px + var(--spacing050));
+    top: calc(100% + 3px + var(--spacing050));
   }
 
   &[data-tooltip]:hover:before,

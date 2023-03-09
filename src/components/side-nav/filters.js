@@ -7,15 +7,26 @@ import { TagIcon } from 'components/icons/TagIcon'
 import { ArticleIcon } from 'components/icons/ArticleIcon'
 import { ArchiveIcon } from 'components/icons/ArchiveIcon'
 import { VideoIcon } from 'components/icons/VideoIcon'
+import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
+import { AddIcon } from 'components/icons/AddIcon'
 
 import { sideNavHeader } from './side-nav'
+import { sideNavActionHeader } from './side-nav'
+import { bottomTooltip } from 'components/tooltip/tooltip'
+import { buttonReset } from 'components/buttons/button-reset'
 
-export function FiltersSideNav({ subActive, pinned, clickEvent }) {
+export function FiltersSideNav({
+  subActive,
+  pinned,
+  clickEvent,
+  inListsExperiment,
+  handleCreateList
+}) {
   const { t } = useTranslation()
 
   return (
     <>
-      <div className={sideNavHeader}>{t('nav:filters', 'Filters')}</div>
+      <h4 className={sideNavHeader}>{t('nav:filters', 'Filters')}</h4>
 
       <Link href="/saves/archive">
         <button className={subActive('archive')} onClick={clickEvent} data-cy="side-nav-archive">
@@ -52,7 +63,30 @@ export function FiltersSideNav({ subActive, pinned, clickEvent }) {
           <VideoIcon className="side-nav-icon" /> {t('nav:videos', 'Videos')}
         </button>
       </Link>
-      <div className={sideNavHeader}>{t('nav:tags', 'Tags')}</div>
+
+      {inListsExperiment ? (
+        <>
+          <div className={sideNavActionHeader}>
+            <h4 className={sideNavHeader}>Lists</h4>
+            <button
+              className={buttonReset}
+              onClick={handleCreateList}
+              data-cy="side-nav-create-list">
+              <AddIcon className={bottomTooltip} data-tooltip="Create List" />
+            </button>
+          </div>
+          <Link href="/lists">
+            <button
+              className={subActive('lists')}
+              onClick={clickEvent}
+              data-cy="side-nav-all-lists">
+              <PlaylistAddIcon className="side-nav-icon" /> All Lists
+            </button>
+          </Link>
+        </>
+      ) : null}
+
+      <h4 className={sideNavHeader}>{t('nav:tags', 'Tags')}</h4>
       <Link href="/saves/tags">
         <button className={subActive('tag')} onClick={clickEvent} data-cy="side-nav-all-tags">
           <TagIcon className="side-nav-icon" /> {t('nav:all-tags', 'All Tags')}

@@ -9,6 +9,8 @@ import { HomeSetup } from './setup/setup'
 
 import { useRouter } from 'node_modules/next/router'
 import { BannerGermanHome } from 'components/banner/german-home'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { HomeGreeting } from './recent-saves/greeting'
 
 export const Home = ({ metaData }) => {
   const { locale } = useRouter()
@@ -18,6 +20,7 @@ export const Home = ({ metaData }) => {
   const userStatus = useSelector((state) => state.user.user_status)
   const featureState = useSelector((state) => state.features) || {}
 
+  const recentsTest = featureFlagActive({ flag: 'home.recents', featureState })
   const shouldRender = userStatus !== 'pending' && featureState.flagsReady
   if (!shouldRender) return null
 
@@ -27,8 +30,10 @@ export const Home = ({ metaData }) => {
       <SuccessFXA type="home" />
 
       <HomeSetup />
-      <HomeRecentSaves />
+      <HomeGreeting />
+      {recentsTest ? null : <HomeRecentSaves />}
       <HomeContent />
+      {recentsTest ? <HomeRecentSaves isBottom={true} /> : null}
     </Layout>
   )
 }

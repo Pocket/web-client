@@ -63,6 +63,8 @@ function StaticSlate({ slateId, firstSlate }) {
   const viewport = useViewport()
   const dispatch = useDispatch()
   const slate = useSelector((state) => state.pageHome.slatesById[slateId])
+  const featureState = useSelector((state) => state.features) || {}
+  const recentsTest = featureFlagActive({ flag: 'home.recents', featureState })
 
   const { headline, subheadline, moreLink, recommendations, recommendationReasonType } = slate
 
@@ -84,7 +86,7 @@ function StaticSlate({ slateId, firstSlate }) {
   const moreLinkClick = showTopicSelector ? updateTopics : urlTrack
 
   return (
-    <SectionWrapper className="homeSection">
+    <SectionWrapper className={cx('homeSection', firstSlate && recentsTest && 'first-section')}>
       <HomeHeader
         headline={headline}
         subheadline={subheadline}

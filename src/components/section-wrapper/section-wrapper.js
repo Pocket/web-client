@@ -22,6 +22,18 @@ const sectionWrapperStyle = css`
 
   &.homeSection {
     padding-top: 4.25rem;
+    &.first-section {
+      padding-top: 0;
+    }
+  }
+
+  &.bottom {
+    padding-top: 4.25rem;
+    padding-bottom: 1rem;
+    .inner {
+      padding-top: 3rem;
+      border-top: var(--dividerStyle);
+    }
   }
 
   &.slideSection .inner {
