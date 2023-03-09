@@ -20,6 +20,9 @@ import { MUTATION_FAVORITE } from 'actions'
 import { MUTATION_UNFAVORITE } from 'actions'
 import { MUTATION_TAGGING } from 'actions'
 import { MUTATION_UPSERT } from 'actions'
+import { MUTATION_BULK_ARCHIVE } from 'actions'
+import { MUTATION_BULK_FAVORITE } from 'actions'
+import { MUTATION_BULK_UNFAVORITE } from 'actions'
 
 import { ITEMS_ADD_SUCCESS } from 'actions'
 
@@ -150,9 +153,12 @@ export function Toast({
 
     // Archive
     [MUTATION_ARCHIVE]: t('toast:archived', '{{count}} item archived', { count }),
+    [MUTATION_BULK_ARCHIVE]: t('toast:archived', '{{count}} item archived', { count }),
 
     [MUTATION_FAVORITE]: t('toast:added-to-favorites', '{{count}} item added to favorites', { count }), //prettier-ignore
     [MUTATION_UNFAVORITE]: t('toast:removed-from-favorites', '{{count}} item removed from favorites', { count }), //prettier-ignore
+    [MUTATION_BULK_FAVORITE]: t('toast:added-to-favorites', '{{count}} item added to favorites', { count }), //prettier-ignore
+    [MUTATION_BULK_UNFAVORITE]: t('toast:removed-from-favorites', '{{count}} item removed from favorites', { count }), //prettier-ignore
 
     [HIGHLIGHT_SAVE_SUCCESS]: t('toast:highlighted', '{{count}} item highlighted', { count }), //prettier-ignore
     [HIGHLIGHT_DELETE_SUCCESS]: t('toast:highlight-deleted', '{{count}} highlight removed', { count }), //prettier-ignore
