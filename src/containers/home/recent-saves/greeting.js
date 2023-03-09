@@ -2,6 +2,7 @@ import { useTranslation } from 'next-i18next'
 import { useSelector } from 'react-redux'
 import { getTimeOfDay } from 'common/utilities/date-time/date-time'
 import { css } from 'linaria'
+import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
 const homeGreeting = css`
   font-family: 'Graphik Web';
@@ -9,7 +10,8 @@ const homeGreeting = css`
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.2;
-  padding: 2.5rem 0 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 `
 
 export const HomeGreeting = () => {
@@ -32,5 +34,5 @@ export const HomeGreeting = () => {
   const showName = firstName && firstName.length < 30
   const greeting = showName ? withNameGreeting[timeOfDay] : noNameGreeting[timeOfDay]
 
-  return <div className={homeGreeting}>{greeting}</div>
+  return <SectionWrapper className={homeGreeting}>{greeting}</SectionWrapper>
 }
