@@ -85,15 +85,15 @@ function StaticSlate({ slateId, firstSlate }) {
 
   const moreLinkClick = showTopicSelector ? updateTopics : urlTrack
 
-  const cypressId = headline.toLowerCase().replaceAll(' ', '-')
+  const testId = headline.toLowerCase().replaceAll(' ', '-')
 
   return (
     <SectionWrapper
       className={cx('homeSection', firstSlate && recentsTest && 'first-section')}
-      dataCy={`home-section-${cypressId}`}>
+      dataCy={`home-section-${testId}`}>
       <HomeHeader
         headline={headline}
-        homeMoreLinkDataCy={showTopicSelector ? 'update-topics-link' : `more-link-${cypressId}`}
+        homeMoreLinkDataCy={showTopicSelector ? 'update-topics-link' : `more-link-${testId}`}
         subheadline={subheadline}
         moreLinkText={slateLink?.text}
         moreLinkUrl={slateLink?.url}
@@ -153,13 +153,13 @@ function SlideSlate({ slateId }) {
     setSlidePage(0)
   }, [totalPages])
 
-  const cypressId = headline.toLowerCase().replaceAll(' ', '-')
+  const testId = headline.toLowerCase().replaceAll(' ', '-')
 
   return (
     <>
-      <SectionWrapper className="homeSection slideSection" data-cy={`home-section-${cypressId}`}>
+      <SectionWrapper className="homeSection slideSection" data-cy={`home-section-${testId}`}>
         <HomeHeader
-          homeMoreLinkDataCy={`more-link-${cypressId}`}
+          homeMoreLinkDataCy={`more-link-${testId}`}
           headline={headline}
           subheadline={subheadline}
           moreLinkText={moreLink?.text}
