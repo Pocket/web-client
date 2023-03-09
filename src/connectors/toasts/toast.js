@@ -109,6 +109,9 @@ export function Toast({
   itemCount = 1,
   previousStatus
 }) {
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
+
   const messages = {
     // Adding Items
     [ITEMS_UPSERT_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
@@ -147,9 +150,6 @@ export function Toast({
   }
 
   const errors = [SHARE_RECOMMEND_FAILURE, ITEMS_TAG_FAILURE, ADD_SHARE_FAILURE]
-
-  const dispatch = useDispatch()
-  const { t } = useTranslation()
 
   const [show, setShow] = useState(false)
   const mount = () => setShow(true)
