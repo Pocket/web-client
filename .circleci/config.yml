@@ -2,13 +2,10 @@ version: 2.1
 
 # Orbs: Pre-configured bundled functionality
 orbs:
-  aws-cli: circleci/aws-cli@1.2.1
-  aws-ecr-old: circleci/aws-ecr@6.1.0
-  aws-ecr: circleci/aws-ecr@6.10.0
+  aws-cli: circleci/aws-cli@1.4.1
+  aws-ecr: circleci/aws-ecr@6.15.3
   assume-role: airswap/assume-role@0.2.0
-  slack: circleci/slack@3.4.0
-  aws-ecs: circleci/aws-ecs@2.0.0
-  pocket: pocket/circleci-orbs@1.2.8
+  pocket: pocket/circleci-orbs@1.3.1
 
 # Commands: Setting up some tasks to avoid a lot of boilerplate
 commands:
@@ -71,7 +68,7 @@ jobs:
   unit_tests:
     # CPU and RAM resources for the job.
     resource_class: medium
-    parallelism: 5
+    # parallelism: 5
     # Define the container we will run the task in (standard node)
     docker:
       - image: cimg/node:18.13.0
@@ -83,8 +80,9 @@ jobs:
       - run:
           name: Run unit tests
           command: |
-              TEST=$(circleci tests glob src/**/*.spec.js | circleci tests split --split-by=timings)
-              npm run test:ci $TEST
+              # TEST=$(circleci tests glob src/**/*.spec.js | circleci tests split --split-by=timings)
+              # npm run test:ci $TEST
+              npm run test:ci
       - run:
           command: cp junit.xml ~/junit/
           when: always
@@ -184,7 +182,8 @@ jobs:
   # ——————————————————————————————————————————————————————————————
   push_production_assets:
     docker:
-      - image: circleci/python # for aws cli without fluff
+      # for aws cli without fluff
+      - image: cimg/python:3.11
     steps:
       - run:
           name: Setup environment variables
@@ -317,7 +316,6 @@ only_dev: &only_dev
 
 # Workflows: Executing jobs we have defined based on specific branch changes
 workflows:
-  version: 2
   all:
     jobs:
       # lint all the files
