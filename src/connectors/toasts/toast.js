@@ -106,7 +106,7 @@ export function Toast({
   ids,
   actionType,
   deletedItemPosition,
-  itemCount = 1,
+  itemCount: count = 1,
   previousStatus
 }) {
   const dispatch = useDispatch()
@@ -114,37 +114,37 @@ export function Toast({
 
   const messages = {
     // Adding Items
-    [ITEMS_UPSERT_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
-    [ITEMS_ADD_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
-    [ADD_SHARE_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
-    [COLLECTIONS_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
-    [COLLECTION_PAGE_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
-    [DISCOVER_ITEMS_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
-    [ARTICLE_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { itemCount }),
-    [MUTATION_UNARCHIVE]: t('toast:added', '{{count}} item added', { itemCount }),
-    [MUTATION_UPSERT]: t('toast:added', '{{count}} item added', { itemCount }),
+    [ITEMS_UPSERT_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
+    [ITEMS_ADD_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
+    [ADD_SHARE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
+    [COLLECTIONS_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
+    [COLLECTION_PAGE_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
+    [DISCOVER_ITEMS_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
+    [ARTICLE_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
+    [MUTATION_UNARCHIVE]: t('toast:added', '{{count}} item added', { count }),
+    [MUTATION_UPSERT]: t('toast:added', '{{count}} item added', { count }),
     [ADD_SHARE_FAILURE]: t('toast:error-adding', 'Error adding item'),
 
     // Tagging Items
-    [ITEMS_TAG_SUCCESS]: t('toast:tagged', '{{count}} item added', { itemCount }),
-    [MUTATION_TAGGING]: t('toast:tagged', '{{count}} item added', { itemCount }),
+    [ITEMS_TAG_SUCCESS]: t('toast:tagged', '{{count}} item added', { count }),
+    [MUTATION_TAGGING]: t('toast:tagged', '{{count}} item added', { count }),
 
     // Deleting
-    [MUTATION_DELETE_SUCCESS]: t('toast:deleted', '{{count}} item deleted', { itemCount }),
+    [MUTATION_DELETE_SUCCESS]: t('toast:deleted', '{{count}} item deleted', { count }),
 
     // Sharing
-    [SHARE_RECOMMEND_SUCCESS]: t('toast:shared', '{{count}} item shared', { itemCount }),
+    [SHARE_RECOMMEND_SUCCESS]: t('toast:shared', '{{count}} item shared', { count }),
     [SHARE_RECOMMEND_FAILURE]: t('toast:error-sharing', 'Error sharing item'),
     [COPY_ITEM_URL]: t('toast:url-copied', 'URL copied'),
 
     // Archive
-    [MUTATION_ARCHIVE]: t('toast:archived', '{{count}} item archived', { itemCount }),
+    [MUTATION_ARCHIVE]: t('toast:archived', '{{count}} item archived', { count }),
 
-    [MUTATION_FAVORITE]: t('toast:added-to-favorites', '{{count}} item added to favorites', { itemCount }), //prettier-ignore
-    [MUTATION_UNFAVORITE]: t('toast:removed-from-favorites', '{{count}} item removed from favorites', { itemCount }), //prettier-ignore
+    [MUTATION_FAVORITE]: t('toast:added-to-favorites', '{{count}} item added to favorites', { count }), //prettier-ignore
+    [MUTATION_UNFAVORITE]: t('toast:removed-from-favorites', '{{count}} item removed from favorites', { count }), //prettier-ignore
 
-    [HIGHLIGHT_SAVE_SUCCESS]: t('toast:highlighted', '{{count}} item highlighted', { itemCount }), //prettier-ignore
-    [HIGHLIGHT_DELETE_SUCCESS]: t('toast:highlight-deleted', '{{count}} highlight removed', { itemCount }), //prettier-ignore
+    [HIGHLIGHT_SAVE_SUCCESS]: t('toast:highlighted', '{{count}} item highlighted', { count }), //prettier-ignore
+    [HIGHLIGHT_DELETE_SUCCESS]: t('toast:highlight-deleted', '{{count}} highlight removed', { count }), //prettier-ignore
 
     [ITEMS_TAG_FAILURE]: t('toast:error-tagging', 'Error tagging item')
   }
