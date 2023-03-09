@@ -42,6 +42,17 @@ import { ARTICLE_SAVE_SUCCESS } from 'actions'
 import { HIGHLIGHT_SAVE_SUCCESS } from 'actions'
 import { HIGHLIGHT_DELETE_SUCCESS } from 'actions'
 
+import { LIST_CREATE_SUCCESS } from 'actions'
+import { LIST_CREATE_FAILURE } from 'actions'
+import { LIST_ADD_ITEM_SUCCESS } from 'actions'
+import { LIST_ADD_ITEM_FAILURE } from 'actions'
+import { LIST_DELETE_ITEM_SUCCESS } from 'actions'
+import { LIST_DELETE_ITEM_FAILURE } from 'actions'
+import { LIST_UPDATE_SUCCESS } from 'actions'
+import { LIST_UPDATE_FAILURE } from 'actions'
+import { LIST_DELETE_SUCCESS } from 'actions'
+import { LIST_DELETE_FAILURE } from 'actions'
+
 const toastWrapper = css`
   text-align: left;
   width: 100%;
@@ -146,10 +157,31 @@ export function Toast({
     [HIGHLIGHT_SAVE_SUCCESS]: t('toast:highlighted', '{{count}} item highlighted', { count }), //prettier-ignore
     [HIGHLIGHT_DELETE_SUCCESS]: t('toast:highlight-deleted', '{{count}} highlight removed', { count }), //prettier-ignore
 
-    [ITEMS_TAG_FAILURE]: t('toast:error-tagging', 'Error tagging item')
+    [ITEMS_TAG_FAILURE]: t('toast:error-tagging', 'Error tagging item'),
+
+    // Lists
+    [LIST_CREATE_SUCCESS]: 'List created',
+    [LIST_CREATE_FAILURE]: 'Error creating list',
+    [LIST_ADD_ITEM_SUCCESS]: 'Item added to list',
+    [LIST_ADD_ITEM_FAILURE]: 'Error adding item',
+    [LIST_DELETE_ITEM_SUCCESS]: 'Item removed from list',
+    [LIST_DELETE_ITEM_FAILURE]: 'Error removing item',
+    [LIST_UPDATE_SUCCESS]: 'List updated',
+    [LIST_UPDATE_FAILURE]: 'Error updating list',
+    [LIST_DELETE_SUCCESS]: 'List deleted',
+    [LIST_DELETE_FAILURE]: 'Error deleting list'
   }
 
-  const errors = [SHARE_RECOMMEND_FAILURE, ITEMS_TAG_FAILURE, ADD_SHARE_FAILURE]
+  const errors = [
+    SHARE_RECOMMEND_FAILURE,
+    ITEMS_TAG_FAILURE,
+    ADD_SHARE_FAILURE,
+    LIST_CREATE_FAILURE,
+    LIST_ADD_ITEM_FAILURE,
+    LIST_DELETE_ITEM_FAILURE,
+    LIST_UPDATE_FAILURE,
+    LIST_DELETE_FAILURE
+  ]
 
   const [show, setShow] = useState(false)
   const mount = () => setShow(true)
@@ -196,5 +228,3 @@ export function Toast({
     </Fade>
   )
 }
-
-

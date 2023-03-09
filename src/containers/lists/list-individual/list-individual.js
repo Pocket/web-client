@@ -10,6 +10,7 @@ import { getIndividualListAction } from './list-individual.state'
 import { IndividualListCard } from 'connectors/lists/individual-list.card'
 import { ListSettingsModal } from 'connectors/confirm/list-settings'
 import { mutateListUpdateAction } from 'connectors/lists/mutation-update.state'
+import { Toasts } from 'connectors/toasts/toast-list'
 
 const MOCK_DATA = {
   userId: 'luigimario',
@@ -70,6 +71,7 @@ export const ListIndividual = () => {
       </Layout>
 
       <ListSettingsModal id={id} />
+      <Toasts />
     </>
   )
 }

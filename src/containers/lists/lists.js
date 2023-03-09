@@ -14,6 +14,8 @@ import { getUserShareableLists } from './lists.state'
 import { ListCard } from 'connectors/lists/list-card'
 import { LoaderCentered } from 'components/loader/loader'
 
+import { Toasts } from 'connectors/toasts/toast-list'
+
 export const Lists = () => {
   const dispatch = useDispatch()
 
@@ -60,6 +62,7 @@ export const Lists = () => {
 
       <CreateListModal />
       <ConfirmListDelete />
+      <Toasts />
     </Layout>
   )
 }
