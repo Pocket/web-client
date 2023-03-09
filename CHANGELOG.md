@@ -1,3 +1,11 @@
+## [1.80.2](https://github.com/Pocket/web-client/compare/v1.80.1...v1.80.2) (2023-03-09)
+
+
+### Bug Fixes
+
+* **greeting:** remove extra classname ([ad5b40e](https://github.com/Pocket/web-client/commit/ad5b40e9f68cda4febfdc2f49ab8b81f6cbeb439))
+* **home:** a/b move recent saves to the bottom ([5c8ab05](https://github.com/Pocket/web-client/commit/5c8ab0586b15bbe5a74c2a3a8d7a518e039cbbe2))
+
 ## [1.80.1](https://github.com/Pocket/web-client/compare/v1.80.0...v1.80.1) (2023-03-09)
 
 

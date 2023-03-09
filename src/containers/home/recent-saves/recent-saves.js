@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { cx } from 'linaria'
 import { useTranslation } from 'next-i18next'
 import { HomeHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,10 +7,9 @@ import { getItemsUnread } from 'containers/saves/saved-items/saved-items.state'
 import { recentGrid } from 'components/item/items-layout'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { ItemCard } from 'connectors/items/item-card-transitional'
-import { HomeGreeting } from './greeting'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
-export const HomeRecentSaves = () => {
+export const HomeRecentSaves = ({ isBottom }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const recentSaves = useSelector((state) => state.pageSavedIds)
@@ -24,9 +24,7 @@ export const HomeRecentSaves = () => {
   }, [dispatch])
 
   return recentSaves?.length > 0 ? (
-    <SectionWrapper>
-      <HomeGreeting />
-
+    <SectionWrapper className={cx(isBottom && 'bottom')}>
       <HomeHeader
         headline={t('home:recent-saves-title', 'Recent Saves')}
         moreLinkText={t('home:recent-saves-link-text', 'Go to Saves')}
