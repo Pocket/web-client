@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { Button } from 'components/buttons/button'
-import { TextInput } from 'components/form-fields/text-input'
 import { TextArea } from 'components/form-fields/text-area'
 
 export const CreateEditShareableList = ({
@@ -42,13 +41,15 @@ export const CreateEditShareableList = ({
       screenReaderLabel={modalTitle}
       handleClose={onClose}>
       <ModalBody>
-        <TextInput
+        <TextArea
           labelText="List Name"
           name="list-name"
           value={listNameValue}
           onChange={onNameChange}
-          data-cy="list-name"
-          maxLength={100}
+          initialRows={2}
+          maxRows={4}
+          characterLimit={100}
+          showCharacterLimit={true}
         />
         <TextArea
           labelText="Description (optional)"

@@ -7,7 +7,7 @@ import { TagIcon } from 'components/icons/TagIcon'
 import { ArticleIcon } from 'components/icons/ArticleIcon'
 import { ArchiveIcon } from 'components/icons/ArchiveIcon'
 import { VideoIcon } from 'components/icons/VideoIcon'
-import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
+import { PlaylistPlayIcon } from 'components/icons/PlaylistPlayIcon'
 import { AddIcon } from 'components/icons/AddIcon'
 
 import { sideNavHeader } from './side-nav'
@@ -80,7 +80,7 @@ export function FiltersSideNav({
               className={subActive('lists')}
               onClick={clickEvent}
               data-cy="side-nav-all-lists">
-              <PlaylistAddIcon className="side-nav-icon" /> All Lists
+              <PlaylistPlayIcon className="side-nav-icon" /> All Lists
             </button>
           </Link>
         </>

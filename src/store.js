@@ -110,6 +110,7 @@ import { pageListsInfoReducers } from 'containers/lists/lists.state'
 import { mutationListCreateReducers } from 'connectors/lists/mutation-create.state'
 import { mutationListCreateSagas } from 'connectors/lists/mutation-create.state'
 
+import { mutationListDeleteReducers } from 'connectors/lists/mutation-delete.state'
 import { mutationListDeleteSagas } from 'connectors/lists/mutation-delete.state'
 
 import { mutationListAddReducers } from 'connectors/lists/mutation-add.state'
@@ -146,6 +147,7 @@ const itemMutations = {
 const listMutations = {
   mutationListCreate: mutationListCreateReducers,
   mutationListAdd: mutationListAddReducers,
+  mutationListDelete: mutationListDeleteReducers,
   mutationlistUpdate: mutationListUpdateReducers
 }
 

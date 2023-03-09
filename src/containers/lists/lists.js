@@ -8,6 +8,7 @@ import { listsItemsSetSortOrder } from './lists.state'
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
 
 import { CreateListModal } from 'connectors/confirm/create-list'
+import { ConfirmListDelete } from 'connectors/confirm/delete-list'
 import { getUserShareableLists } from './lists.state'
 import { ListCard } from 'connectors/lists/list-card'
 import { LoaderCentered } from 'components/loader/loader'
@@ -53,6 +54,7 @@ export const Lists = () => {
       ) : null}
 
       <CreateListModal />
+      <ConfirmListDelete />
     </Layout>
   )
 }

@@ -1,3 +1,10 @@
+## [1.80.3](https://github.com/Pocket/web-client/compare/v1.80.2...v1.80.3) (2023-03-09)
+
+
+### Bug Fixes
+
+* **lists:** updates per design audit, adding delete confirmation ([7fa49ba](https://github.com/Pocket/web-client/commit/7fa49ba31650a96a616cc195c8722c56b010fef4))
+
 ## [1.80.2](https://github.com/Pocket/web-client/compare/v1.80.1...v1.80.2) (2023-03-09)
 
 
