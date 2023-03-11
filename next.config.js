@@ -42,6 +42,11 @@ const nextOptions = {
         source: '/my-list/read/:slug',
         destination: '/read/:slug',
         permanent: true
+      },
+      {
+        source: '/get-started',
+        destination: '/home',
+        permanent: false
       }
     ]
   },
