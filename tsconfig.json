@@ -14,21 +14,40 @@
     "incremental": true,
     "esModuleInterop": true,
     "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
-        "static/*": [ "public/static/*"],
-        "common/*": [ "src/common/*"],
-        "containers/*": [ "src/containers/*"],
-        "components/*": [ "src/components/*"],
-        "connectors/*": [ "src/connectors/*"],
-        "layouts/*": [ "src/containers/_layouts/*"],
-        "pages/*": [ "src/pages/*"],
-        "actions$/*": [ "src/actions.js"],
-        "store$/*": [ "src/store.js"],
-    }
+      "static/*": [
+        "public/static/*"
+      ],
+      "common/*": [
+        "src/common/*"
+      ],
+      "containers/*": [
+        "src/containers/*"
+      ],
+      "components/*": [
+        "src/components/*"
+      ],
+      "connectors/*": [
+        "src/connectors/*"
+      ],
+      "layouts/*": [
+        "src/containers/_layouts/*"
+      ],
+      "pages/*": [
+        "src/pages/*"
+      ],
+      "actions$/*": [
+        "src/actions.js"
+      ],
+      "store$/*": [
+        "src/store.js"
+      ]
+    },
   },
   "include": [
     "next-env.d.ts",

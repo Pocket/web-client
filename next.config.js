@@ -31,7 +31,7 @@ const nextOptions = {
       { source: '/explore', destination: '/discover' },
       { source: '/explore/item/:slug', destination: '/discover/item/:slug' },
       { source: '/explore/:slug', destination: '/discover/:slug' },
-      { source: '/web-client-health', destination: '/health' },
+      { source: '/web-client-health', destination: '/api/health' },
       { source: '/web-client-api/:path*', destination: '/api/:path*' },
       { source: '/[profile]/list/:slug', destination: '/profile/list/:slug' }
     ]
