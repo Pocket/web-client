@@ -70,7 +70,7 @@ export const EmptyList = () => {
       </h4>
       <p className={info}>
         <Trans i18nKey="annotations:when-you-select-text">
-          When you select text while you’re reading, it'll appear here.
+          When you select text while you’re reading, it’ll appear here.
         </Trans>
       </p>
     </div>
