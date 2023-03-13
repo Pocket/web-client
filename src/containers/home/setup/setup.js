@@ -222,8 +222,12 @@ const TopicButton = ({ topic }) => {
     dispatch(sendSnowplowEvent('get-started.topic.toggle', analyticsData))
   }
 
+  const topicTestId = topic.name.toLowerCase()
+
   return (
-    <label className={cx(topicStyle, isSelected && 'selected')}>
+    <label
+      className={cx(topicStyle, isSelected && 'selected')}
+      data-cy={`topic-pill-${topicTestId}`}>
       <input type="checkbox" checked={isSelected} onChange={toggleTopic} />
       {topic.name}
     </label>
@@ -283,7 +287,7 @@ export const HomeSetup = () => {
 
   return !isDismissed && showSelectionSetup ? (
     <div className={containerClass}>
-      <SectionWrapper>
+      <SectionWrapper data-cy='onboarding-section'>
         <SectionToRender
           hasTopics={userTopics.length}
           isReselect={isReselect}
@@ -327,17 +331,18 @@ const TopicSelector = ({
       </div>
       <div className="actions">
         {hasTopics || isReselect ? null : (
-          <button onClick={handleSkip} className="text">
+          <button onClick={handleSkip} className="text" data-cy='onboarding-skip'>
             Skip
           </button>
         )}
         {isReselect ? (
-          <button onClick={handleCancel} className="text">
+          <button onClick={handleCancel} className="text" data-cy='onboarding-cancel'>
             Cancel
           </button>
         ) : null}
         <button
           onClick={handleContinue}
+          data-cy='onboarding-continue'
           disabled={!hasTopics}
           className={cx(!hasTopics && 'disabled')}>
           Continue

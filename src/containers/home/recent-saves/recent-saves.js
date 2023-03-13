@@ -24,7 +24,10 @@ export const HomeRecentSaves = ({ isBottom }) => {
   }, [dispatch])
 
   return recentSaves?.length > 0 ? (
-    <SectionWrapper className={cx(isBottom && 'bottom')}>
+    <SectionWrapper
+      className={cx(isBottom && 'bottom')}
+      data-cy='home-section-recent-saves'>
+
       <HomeHeader
         headline={t('home:recent-saves-title', 'Recent Saves')}
         moreLinkText={t('home:recent-saves-link-text', 'Go to Saves')}

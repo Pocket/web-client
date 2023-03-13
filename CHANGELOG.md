@@ -1,3 +1,28 @@
+## [1.81.3](https://github.com/Pocket/web-client/compare/v1.81.2...v1.81.3) (2023-03-13)
+
+
+### Bug Fixes
+
+* **home:** add data-cy for 'explore more -' per section ([98c0b32](https://github.com/Pocket/web-client/commit/98c0b320846602d96cd11b2595b05555df406961))
+* **home:** add data-cy for card save/unsave ([41e2ada](https://github.com/Pocket/web-client/commit/41e2adad57f97c2b1e473114199c495c589a01ef))
+* **home:** add data-cy for carousel btns ([1c138a7](https://github.com/Pocket/web-client/commit/1c138a7c61885d2f72069b3f79877449b17ecd4d))
+* **home:** add data-cy for Go To Saves ([59be1ed](https://github.com/Pocket/web-client/commit/59be1ed9f55a9c30326734a49fd05b50cde964b4))
+* **home:** add data-cy for home sections ([c9135b2](https://github.com/Pocket/web-client/commit/c9135b2e8f32d992e8b50da260dfb98867a9cbf8))
+* **home:** add data-cy for onboarding section ([9063a15](https://github.com/Pocket/web-client/commit/9063a1507b477c7f09d64636a01a7c19379faeb8))
+* **home:** add data-cy for saves list view type ([302936a](https://github.com/Pocket/web-client/commit/302936a558c2bffface5530ca2afd47fd93c9c19))
+* **home:** add data-cy for update topics ([dac2463](https://github.com/Pocket/web-client/commit/dac246384f16d2fe800b6cd2532218a8506e7a84))
+* **home:** added data-cy for topic selection btns ([4a83a92](https://github.com/Pocket/web-client/commit/4a83a92e74e33cdc1d50c7227c7a0e2785b6d225))
+* **home:** break out var per PR comment ([3041f28](https://github.com/Pocket/web-client/commit/3041f289eade2c98fa3e624785ba4bdc7bfc5dcd))
+* **home:** break out variable for data-cy for ExploreMoreTopics ([67812ee](https://github.com/Pocket/web-client/commit/67812ee8a04126fd9fbf59c4ca975f52787738be))
+* **home:** change dataName to testId ([5372292](https://github.com/Pocket/web-client/commit/5372292468e30ab31a5d6ca8312d56d16e4daf93))
+* **home:** change discover topics section selector to simply 'topic-selector' ([79dff13](https://github.com/Pocket/web-client/commit/79dff13905d4854b7ccd0dc8a0b378441031d25c))
+* **home:** change explore-more-* to more-link-* ([8c6c715](https://github.com/Pocket/web-client/commit/8c6c71569e2fa6529e41a42c747a669790e6844c))
+* **home:** change SectionWrapper dataCy to data-cy ([2224b31](https://github.com/Pocket/web-client/commit/2224b31d1a14e84ca3706afdcc33720e996cd1db))
+* **home:** data-cy for onboarding topic pills ([08cdacd](https://github.com/Pocket/web-client/commit/08cdacd92d732d25f724e4149bff1d9734d4b3e9))
+* **home:** fixed bad rebase ([7905be6](https://github.com/Pocket/web-client/commit/7905be6ecb5730bcddf1d47760039a7dbef2da82))
+* **home:** joel doesnt like cypress-id ([56e843d](https://github.com/Pocket/web-client/commit/56e843d85daef44a0a810ac895446950ac1c4e46))
+* **home:** removed more link data (need to re-think testing) ([b0382c3](https://github.com/Pocket/web-client/commit/b0382c3c7da431f0257337fd56070b5dcf70fc97))
+
 ## [1.81.2](https://github.com/Pocket/web-client/compare/v1.81.1...v1.81.2) (2023-03-13)
 
 
