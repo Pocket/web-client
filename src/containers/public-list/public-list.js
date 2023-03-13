@@ -7,7 +7,7 @@ import { BASE_URL } from 'common/constants'
 
 export const PublicList = ({ externalId, slug }) => {
   const isAuthenticated = useSelector((state) => state.user?.auth)
-  const list = useSelector((state) => state.publicList)
+  const list = useSelector((state) => state.pagePublicList)
 
   if (!list) return null
 

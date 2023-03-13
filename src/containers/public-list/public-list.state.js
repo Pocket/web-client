@@ -8,7 +8,7 @@ export const hydrateList = (hydrated) => ({ type: LIST_PUBLIC_HYDRATE, hydrated 
 
 /** REDUCERS
  --------------------------------------------------------------- */
-export const publicListReducers = (state = {}, action) => {
+export const pagePublicListReducers = (state = {}, action) => {
   switch (action.type) {
     case LIST_PUBLIC_HYDRATE: {
       const { hydrated } = action
@@ -16,8 +16,8 @@ export const publicListReducers = (state = {}, action) => {
     }
 
     case HYDRATE: {
-      const { publicList } = action.payload
-      return publicList
+      const { pagePublicList } = action.payload
+      return pagePublicList
     }
 
     default:

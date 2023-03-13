@@ -33,9 +33,6 @@ export function getShareableListPublic({ externalId, slug }) {
     operationName: 'getShareableListPublic',
     variables: { slug, externalId }
   })
-    .then((response) => {
-      console.log(JSON.stringify(response))
-      return response?.data?.shareableListPublic
-    })
+    .then((response) => response?.data?.shareableListPublic)
     .catch((error) => console.error(error))
 }

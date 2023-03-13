@@ -54,10 +54,6 @@ export const mutationListUpdateSagas = [
   takeLatest(LIST_UPDATE_STATUS_REQUEST, listUpdateStatus)
 ]
 
-/** SAGA :: SELECTORS
- --------------------------------------------------------------- */
-// const getItem = (state, id) => state.listsDisplay[id]
-
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 function* listUpdate({ id }) {
