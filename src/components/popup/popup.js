@@ -1,3 +1,4 @@
+//!! UPDATE HOOKS / REFACTOR TO TYPESCRIPT
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { createPopper as createPopperInstance } from '@popperjs/core'

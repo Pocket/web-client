@@ -1,3 +1,4 @@
+//!! UPDATE HOOKS / REFACTOR TO TYPESCRIPT
 import { useEffect, useRef, useState } from 'react'
 import { cx } from 'linaria'
 import DOMPurify from 'dompurify'
