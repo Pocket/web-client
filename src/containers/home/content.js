@@ -187,20 +187,18 @@ function SlideSlate({ slateId }) {
 function ExploreMoreTopics() {
   const dispatch = useDispatch()
   const topics = useSelector((state) => state.topicList?.topicsByName)
-  const headingText = 'Discover More Topics'
-  const testId = `home-section-${headingText.toLowerCase().replaceAll(' ', '-')}`
 
   const onTopicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
 
 
   return (
-    <SectionWrapper className="homeSection" data-cy={testId}>
+    <SectionWrapper className="homeSection" data-cy='topic-selector'>
       <TopicsPillbox
         omitPromoted={true}
         id={'page-topics'}
         topicsMap={topics}
         className="homeSection"
-        headingText={headingText}
+        headingText="Discover More Topics"
         headingClassName="heading"
         onTopicClick={onTopicClick}
       />
