@@ -90,7 +90,7 @@ function StaticSlate({ slateId, firstSlate }) {
   return (
     <SectionWrapper
       className={cx('homeSection', firstSlate && recentsTest && 'first-section')}
-      dataCy={`home-section-${testId}`}>
+      data-cy={`home-section-${testId}`}>
       <HomeHeader
         headline={headline}
         subheadline={subheadline}

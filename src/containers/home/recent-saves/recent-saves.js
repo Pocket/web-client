@@ -8,7 +8,6 @@ import { recentGrid } from 'components/item/items-layout'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { ItemCard } from 'connectors/items/item-card-transitional'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
-import { HomeGreeting } from './greeting'
 
 export const HomeRecentSaves = ({ isBottom }) => {
   const { t } = useTranslation()
@@ -28,7 +27,6 @@ export const HomeRecentSaves = ({ isBottom }) => {
     <SectionWrapper
       className={cx(isBottom && 'bottom')}
       data-cy='home-section-recent-saves'>
-      <HomeGreeting />
 
       <HomeHeader
         headline={t('home:recent-saves-title', 'Recent Saves')}
