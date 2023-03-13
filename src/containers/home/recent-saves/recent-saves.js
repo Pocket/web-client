@@ -31,7 +31,6 @@ export const HomeRecentSaves = ({ isBottom }) => {
       <HomeGreeting />
 
       <HomeHeader
-        homeMoreLinkDataCy='go-to-saves'
         headline={t('home:recent-saves-title', 'Recent Saves')}
         moreLinkText={t('home:recent-saves-link-text', 'Go to Saves')}
         moreLinkUrl={'/saves?src=recent-saves'}

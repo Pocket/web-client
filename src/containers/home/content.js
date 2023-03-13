@@ -93,7 +93,6 @@ function StaticSlate({ slateId, firstSlate }) {
       dataCy={`home-section-${testId}`}>
       <HomeHeader
         headline={headline}
-        homeMoreLinkDataCy={showTopicSelector ? 'update-topics-link' : `more-link-${testId}`}
         subheadline={subheadline}
         moreLinkText={slateLink?.text}
         moreLinkUrl={slateLink?.url}
@@ -159,7 +158,6 @@ function SlideSlate({ slateId }) {
     <>
       <SectionWrapper className="homeSection slideSection" data-cy={`home-section-${testId}`}>
         <HomeHeader
-          homeMoreLinkDataCy={`more-link-${testId}`}
           headline={headline}
           subheadline={subheadline}
           moreLinkText={moreLink?.text}
