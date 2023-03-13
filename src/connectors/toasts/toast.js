@@ -21,6 +21,7 @@ import { MUTATION_UNFAVORITE } from 'actions'
 import { MUTATION_TAGGING } from 'actions'
 import { MUTATION_UPSERT } from 'actions'
 import { MUTATION_BULK_ARCHIVE } from 'actions'
+import { MUTATION_BULK_UNARCHIVE } from 'actions'
 import { MUTATION_BULK_FAVORITE } from 'actions'
 import { MUTATION_BULK_UNFAVORITE } from 'actions'
 
@@ -136,6 +137,7 @@ export function Toast({
     [DISCOVER_ITEMS_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
     [ARTICLE_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
     [MUTATION_UNARCHIVE]: t('toast:added', '{{count}} item added', { count }),
+    [MUTATION_BULK_UNARCHIVE]: t('toast:unarchived', '{{count}} item added', { count }),
     [MUTATION_UPSERT]: t('toast:added', '{{count}} item added', { count }),
     [ADD_SHARE_FAILURE]: t('toast:error-adding', 'Error adding item'),
 
