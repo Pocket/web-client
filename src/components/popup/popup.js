@@ -174,7 +174,7 @@ const Popup = ({
    * @param {object} event Click event passed though from the listener
    */
 
-  function handleTriggerClick(event) {
+  function handleTriggerClick() {
     if (!forceShow) setIsShowRequested((prevShown) => !prevShown)
   }
   /**
