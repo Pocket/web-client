@@ -135,6 +135,8 @@ AvatarButton.defaultProps = {
   label: '',
   id: '',
   src: null,
-  onClick() {},
+  onClick() {
+    /** noop */
+  },
   className: null
 }

@@ -147,8 +147,12 @@ PublisherAttribution.propTypes = {
 
 PublisherAttribution.defaultProps = {
   publisher: null,
-  handlePublisherImpression() {},
-  handlePublisherClick() {}
+  handlePublisherImpression() {
+    /** noop */
+  },
+  handlePublisherClick() {
+    /** noop */
+  }
 }
 
 export { PublisherAttribution }

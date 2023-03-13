@@ -301,9 +301,13 @@ Popup.defaultProps = {
   animationDuration: 75,
   alwaysRender: true,
 
-  onOpen() {},
+  onOpen() {
+    /** noop */
+  },
 
-  onClose() {},
+  onClose() {
+    /** noop */
+  },
 
   popperOptions: {
     placement: 'bottom-start'

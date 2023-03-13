@@ -335,11 +335,21 @@ PocketHitsIllustratedChyron.propTypes = {
 PocketHitsIllustratedChyron.defaultProps = {
   isProcessing: false,
   isSuccessful: false,
-  handleEmailSubmit() {},
-  handleEmailInputFocus() {},
-  handleValidationError() {},
-  onVisible() {},
-  handleEmailDismiss() {},
+  handleEmailSubmit() {
+    /** noop */
+  },
+  handleEmailInputFocus() {
+    /** noop */
+  },
+  handleValidationError() {
+    /** noop */
+  },
+  onVisible() {
+    /** noop */
+  },
+  handleEmailDismiss() {
+    /** noop */
+  },
   signupError: false
 }
 

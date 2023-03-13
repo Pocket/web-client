@@ -103,7 +103,9 @@ GlobalNavTools.propTypes = {
 
 GlobalNavTools.defaultProps = {
   tools: [],
-  onToolClick() {}
+  onToolClick() {
+    /** noop */
+  }
 }
 
 export default GlobalNavTools

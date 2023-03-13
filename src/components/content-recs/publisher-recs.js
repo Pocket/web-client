@@ -178,6 +178,10 @@ PublisherRecs.propTypes = {
 PublisherRecs.defaultProps = {
   recommendations: [],
   maxRecommendations: 3,
-  handleRecImpression() {},
-  handleRecClick() {}
+  handleRecImpression() {
+    /** noop */
+  },
+  handleRecClick() {
+    /** noop */
+  }
 }

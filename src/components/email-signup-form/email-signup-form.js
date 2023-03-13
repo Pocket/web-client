@@ -320,11 +320,21 @@ EmailSignupForm.propTypes = {
 EmailSignupForm.defaultProps = {
   isProcessing: false,
   errorMessage: null,
-  onValidSubmit() {},
-  onValidationError() {},
-  onFocus() {},
-  onCheckboxChecked() {},
-  onChange() {},
+  onValidSubmit() {
+    /** noop */
+  },
+  onValidationError() {
+    /** noop */
+  },
+  onFocus() {
+    /** noop */
+  },
+  onCheckboxChecked() {
+    /** noop */
+  },
+  onChange() {
+    /** noop */
+  },
   formClassName: null,
   inputClassName: null,
   buttonClassName: null,

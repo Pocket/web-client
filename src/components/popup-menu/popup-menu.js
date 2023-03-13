@@ -412,9 +412,13 @@ PopupMenu.propTypes = {
 PopupMenu.defaultProps = {
   id: '',
 
-  onOpen() {},
+  onOpen() {
+    /** noop */
+  },
 
-  onClose() {},
+  onClose() {
+    /** noop */
+  },
 
   forceShow: false
 }

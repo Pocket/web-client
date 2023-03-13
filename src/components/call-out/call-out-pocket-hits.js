@@ -361,12 +361,24 @@ CallOutPocketHitsSignup.propTypes = {
 
 CallOutPocketHitsSignup.defaultProps = {
   hide: false,
-  handleSubmit() {},
-  handleSubmitSuccess() {},
-  handleEmailInputFocus() {},
-  handleSubmitFailure() {},
-  handleValidationError() {},
-  onVisible() {},
+  handleSubmit() {
+    /** noop */
+  },
+  handleSubmitSuccess() {
+    /** noop */
+  },
+  handleEmailInputFocus() {
+    /** noop */
+  },
+  handleSubmitFailure() {
+    /** noop */
+  },
+  handleValidationError() {
+    /** noop */
+  },
+  onVisible() {
+    /** noop */
+  },
   utmCampaign: '',
   utmSource: ''
 }

@@ -161,7 +161,9 @@ GlobalNavLinks.propTypes = {
 GlobalNavLinks.defaultProps = {
   links: DEFAULT_LINKS,
   selectedLink: null,
-  onLinkClick() {}
+  onLinkClick() {
+    /** noop */
+  }
 }
 
 export default GlobalNavLinks

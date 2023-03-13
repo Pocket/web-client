@@ -168,13 +168,27 @@ ScrollPocketHitsChyron.defaultProps = {
   instanceId: DEFAULT_INSTANCE_ID,
   isAuthenticated: false,
   thresholdPercent: 0.5,
-  handleSubmit() {},
-  handleSubmitSuccess() {},
-  handleSubmitFailure() {},
-  handleValidationError() {},
-  handleEmailInputFocus() {},
-  onVisible() {},
-  handleEmailDismiss() {},
+  handleSubmit() {
+    /** noop */
+  },
+  handleSubmitSuccess() {
+    /** noop */
+  },
+  handleSubmitFailure() {
+    /** noop */
+  },
+  handleValidationError() {
+    /** noop */
+  },
+  handleEmailInputFocus() {
+    /** noop */
+  },
+  onVisible() {
+    /** noop */
+  },
+  handleEmailDismiss() {
+    /** noop */
+  },
   signupError: false,
   utmCampaign: '',
   utmSource: ''

@@ -370,9 +370,15 @@ GlobalNavMobileMenu.propTypes = {
 GlobalNavMobileMenu.defaultProps = {
   links: DEFAULT_LINKS,
   selectedLink: null,
-  onLinkClick() {},
-  onOpen() {},
-  onClosed() {},
+  onLinkClick() {
+    /** noop */
+  },
+  onOpen() {
+    /** noop */
+  },
+  onClosed() {
+    /** noop */
+  },
   isUserLoggedIn: false,
   isUserPremium: false,
   forceShow: false
