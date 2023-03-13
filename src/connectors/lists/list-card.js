@@ -12,6 +12,7 @@ export const ListCard = ({ id }) => {
 
   const storyCount = list.listItems?.length || 0
   const itemImage = list.listItems?.[0]?.imageUrl
+  const url = `/sharedlists/${list.externalId}/${list.slug}`
 
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)} key={list.externalId}>
@@ -23,7 +24,7 @@ export const ListCard = ({ id }) => {
         onItemInView={() => {}} // impression event here
         isInternalItem={true}
         listStatus={list.status}
-        listUrl={'www.google.com'}
+        listUrl={url}
         storyCount={storyCount}
         itemImage={itemImage}
         Actions={ListActions}

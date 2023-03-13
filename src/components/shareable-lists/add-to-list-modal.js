@@ -1,10 +1,16 @@
 import { useState } from 'react'
 import { css } from 'linaria'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
+import { AddIcon } from 'components/icons/AddIcon'
 
 const footerStyles = css`
   display: flex;
   justify-content: space-between;
+
+  .create {
+    margin-left: 0;
+    color: var(--color-actionPrimary);
+  }
 `
 
 export const AddToListModal = ({
@@ -42,8 +48,8 @@ export const AddToListModal = ({
         </select>
       </ModalBody>
       <ModalFooter className={footerStyles}>
-        <button onClick={createAction} className="inline">
-          Create List
+        <button onClick={createAction} className="text create">
+          <AddIcon /> Create List
         </button>
 
         <div>
@@ -51,7 +57,7 @@ export const AddToListModal = ({
             Cancel
           </button>
 
-          <button onClick={confirmAction}>
+          <button onClick={confirmAction} autoFocus={true}>
             Save to List
           </button>
         </div>

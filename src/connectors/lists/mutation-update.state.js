@@ -7,6 +7,10 @@ import { LIST_UPDATE_CANCEL } from 'actions'
 import { LIST_UPDATE_SUCCESS } from 'actions'
 import { LIST_UPDATE_FAILURE } from 'actions'
 
+import { LIST_UPDATE_STATUS_REQUEST } from 'actions'
+import { LIST_UPDATE_STATUS_SUCCESS } from 'actions'
+import { LIST_UPDATE_STATUS_FAILURE } from 'actions'
+
 import { LIST_ITEMS_SUCCESS } from 'actions'
 
 /** ACTIONS
@@ -14,6 +18,7 @@ import { LIST_ITEMS_SUCCESS } from 'actions'
 export const mutateListUpdateAction = (id) => ({ type: LIST_UPDATE_REQUEST, id })
 export const mutateListUpdateCancel = () => ({ type: LIST_UPDATE_CANCEL })
 export const mutateListUpdateConfirm = ({ title, description }) => ({ type: LIST_UPDATE_CONFIRM, title, description })
+export const mutateListStatusAction = ({ id, status }) => ({ type: LIST_UPDATE_STATUS_REQUEST, id, status })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -45,12 +50,13 @@ export const mutationListUpdateReducers = (state = initialState, action) => {
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const mutationListUpdateSagas = [
-  takeLatest(LIST_UPDATE_REQUEST, listUpdate)
+  takeLatest(LIST_UPDATE_REQUEST, listUpdate),
+  takeLatest(LIST_UPDATE_STATUS_REQUEST, listUpdateStatus)
 ]
 
 /** SAGA :: SELECTORS
  --------------------------------------------------------------- */
-// const getItem = (state, id) => state.itemsDisplay[id]
+// const getItem = (state, id) => state.listsDisplay[id]
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -67,9 +73,8 @@ function* listUpdate({ id }) {
     const { title, description } = confirm
 
     const data = {
-      description,
       externalId: id,
-      status: "PRIVATE",
+      description,
       title
     }
 
@@ -80,5 +85,22 @@ function* listUpdate({ id }) {
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
   } catch (error) {
     yield put({ type: LIST_UPDATE_FAILURE, error })
+  }
+}
+
+function* listUpdateStatus({ id, status }) {
+  try {
+    const data = {
+      externalId: id,
+      status
+    }
+
+    const response = yield call(updateShareableList, data)
+    yield put({ type: LIST_UPDATE_STATUS_SUCCESS })
+
+    const itemsById = { [id]: { ...response } }
+    yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
+  } catch (error) {
+    yield put({ type: LIST_UPDATE_STATUS_FAILURE, error })
   }
 }

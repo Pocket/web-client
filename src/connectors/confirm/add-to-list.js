@@ -37,7 +37,7 @@ export const ConfirmAddToList = () => {
   const addToList = 'Add to List'
   const selectOptions = titleToIdList ? Object.keys(titleToIdList) : []
 
-  return (
+  return showModal ? (
     <AddToListModal
       showModal={showModal}
       modalTitle={addToList}
@@ -47,5 +47,5 @@ export const ConfirmAddToList = () => {
       previouslySelected={lastUsedList}
       selectOptions={selectOptions}
     />
-  )
+  ) : null
 }

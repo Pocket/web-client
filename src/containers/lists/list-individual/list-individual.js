@@ -9,13 +9,10 @@ import { EmptyIndividualLists } from 'components/empty-states/inividual-list'
 import { getIndividualListAction } from './list-individual.state'
 import { IndividualListCard } from 'connectors/lists/individual-list.card'
 import { ListSettingsModal } from 'connectors/confirm/list-settings'
+import { CreateListModal } from 'connectors/confirm/create-list'
 import { mutateListUpdateAction } from 'connectors/lists/mutation-update.state'
+import { mutateListStatusAction } from 'connectors/lists/mutation-update.state'
 import { Toasts } from 'connectors/toasts/toast-list'
-
-const MOCK_DATA = {
-  userId: 'luigimario',
-  slug: 'the-cosmos-awaits-123456'
-}
 
 export const ListIndividual = () => {
   const dispatch = useDispatch()
@@ -35,11 +32,11 @@ export const ListIndividual = () => {
   }, [dispatch, id, enrolled])
 
   if (!list) return null
-  const { title, description, status } = list
+  const { title, description, status, slug } = list
   const showLists = listItemIds?.length
 
   // Actions
-  const handlePublish = () => {}
+  const handleSetStatus = (val) => dispatch(mutateListStatusAction({ id, status: val }))
   const handleShare = () => {}
   const handleEdit = () => dispatch(mutateListUpdateAction(id))
 
@@ -56,9 +53,9 @@ export const ListIndividual = () => {
               title={title}
               description={description}
               status={status}
-              userId={MOCK_DATA.userId}
-              slug={MOCK_DATA.slug}
-              handlePublish={handlePublish}
+              externalId={id}
+              slug={slug}
+              handleSetStatus={handleSetStatus}
               handleShare={handleShare}
               handleEdit={handleEdit}
             />
@@ -71,6 +68,7 @@ export const ListIndividual = () => {
       </Layout>
 
       <ListSettingsModal id={id} />
+      <CreateListModal />
       <Toasts />
     </>
   )
