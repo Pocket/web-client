@@ -10,7 +10,7 @@ const lorem = [
 ]
 
 const generateLorem = (count) => {
-  let content = []
+  const content = []
   for (let i = 0; i < count; i++) {
     content.push(lorem[Math.floor(Math.random() * lorem.length)])
   }

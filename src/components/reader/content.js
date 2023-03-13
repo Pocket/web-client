@@ -72,7 +72,7 @@ export const Content = ({
 
   useEffect(() => {
     if (annotations) {
-      let timer = !loaded ? 500 : 0
+      const timer = !loaded ? 500 : 0
       setTimeout(() => {
         processAnnotations(annotations)
       }, timer)

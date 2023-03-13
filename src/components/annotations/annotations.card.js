@@ -62,14 +62,14 @@ export class CreatedDate extends Component {
     if (diff < 1) {
       return <Trans i18nKey="annotations:added-today">Added Today</Trans>
     } else if (diff === 1) {
-      let date = diff
+      const date = diff
       return (
         <Trans i18nKey="annotations:added-one-day-ago" date={date}>
           Added {{ date }} day ago
         </Trans>
       )
     } else if (diff < 7) {
-      let date = diff
+      const date = diff
       return (
         <Trans i18nKey="annotations:added-many-days-ago" date={date}>
           Added {{ date }} days ago
@@ -77,7 +77,7 @@ export class CreatedDate extends Component {
       )
     }
 
-    let date = ts.format('MMM D, YYYY')
+    const date = ts.format('MMM D, YYYY')
     return (
       <Trans i18nKey="annotations:added-date" date={date}>
         Added {{ date }}
@@ -113,8 +113,8 @@ export class CardPositioning extends Component {
 
   setTopAdjustment() {
     if (this.contentNode) {
-      let docHeight = window.innerHeight || document.documentElement.clientHeight
-      let { top, bottom } = this.contentNode.getBoundingClientRect()
+      const docHeight = window.innerHeight || document.documentElement.clientHeight
+      const { top, bottom } = this.contentNode.getBoundingClientRect()
 
       const topAdj =
         top < 63 ? Math.abs(63 - top) : bottom > docHeight ? -Math.abs(bottom - docHeight) : 0

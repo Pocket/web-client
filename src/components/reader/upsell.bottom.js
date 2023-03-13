@@ -498,7 +498,7 @@ const AdsOptions = {
 }
 
 function _determineItem() {
-  let tmpArray = Object.keys(AdsOptions)
+  const tmpArray = Object.keys(AdsOptions)
   return tmpArray[Math.floor(Math.random() * tmpArray.length)]
 }
 

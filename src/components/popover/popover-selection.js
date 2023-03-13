@@ -80,7 +80,7 @@ export const SelectionPopover = ({ anchor, addAnnotation, disablePopup, shareIte
   const position = anchor.getRangeAt(0).getBoundingClientRect()
 
   const { right, left, top } = position
-  let center = (right - left) / 2 + left
+  const center = (right - left) / 2 + left
 
   return (
     <div
