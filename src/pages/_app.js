@@ -15,6 +15,8 @@ import { getSessGuid, sessGuidHydrate } from 'containers/account/account.state'
 import { fetchUnleashData } from 'connectors/feature-flags/feature-flags.state'
 import { featuresHydrate } from 'connectors/feature-flags/feature-flags.state'
 
+import { checkListsPilotStatus } from 'containers/lists/lists.state'
+
 import { appSetPreferences } from 'connectors/app/app.state'
 import { hydrateSettings } from 'connectors/settings/settings.state'
 
@@ -48,7 +50,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   }, [])
 
 
-  // Google Analytics 
+  // Google Analytics
   useEffect(()=> {
     window.gtag = window.gtag || function() { window.dataLayer.push(arguments) }
     window.gtag('js', new Date())
@@ -117,7 +119,12 @@ function PocketWebClient({ Component, pageProps, err }) {
       if (features) dispatch(featuresHydrate(features))
     }
 
+    const requestListsPilotStatus = async () => {
+      dispatch(checkListsPilotStatus())
+    }
+
     hydrateFeatures()
+    requestListsPilotStatus()
   }, [user_status, sess_guid, user_id, birth, dispatch, flagsReady])
 
   useEffect(() => {

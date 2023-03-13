@@ -1,3 +1,33 @@
+## [1.81.2](https://github.com/Pocket/web-client/compare/v1.81.1...v1.81.2) (2023-03-13)
+
+
+### Bug Fixes
+
+* **saves:** add toast entry for bulk unarchive ([f593891](https://github.com/Pocket/web-client/commit/f593891ca888c16165c1b63611f01672fb28877c))
+* **saves:** add toasts entries for bulk favorite/un-favorite/archive ([0470812](https://github.com/Pocket/web-client/commit/04708129bfde86fe3088d575b10e89461065e7d5))
+
+## [1.81.1](https://github.com/Pocket/web-client/compare/v1.81.0...v1.81.1) (2023-03-09)
+
+
+### Bug Fixes
+
+* **lists:** adding toasts for list actions ([48c7e78](https://github.com/Pocket/web-client/commit/48c7e782c00a4c427c1b43990b1116e9c370d563))
+
+# [1.81.0](https://github.com/Pocket/web-client/compare/v1.80.6...v1.81.0) (2023-03-09)
+
+
+### Features
+
+* **logging:** add multiline log pattern to app container, update imports ([47e1976](https://github.com/Pocket/web-client/commit/47e19763a60fd7a8b99dd2d5f35906d777df27cb))
+
+## [1.80.6](https://github.com/Pocket/web-client/compare/v1.80.5...v1.80.6) (2023-03-09)
+
+
+### Bug Fixes
+
+* **list:** only fetch individual list if enrolled ([f569f4d](https://github.com/Pocket/web-client/commit/f569f4d3d51f3c60ac87912b9dc84ac04c7c8fca))
+* **lists:** adding check to graph for pilot status ([fae22e5](https://github.com/Pocket/web-client/commit/fae22e5db0a433d42006d28793ef89ac59fed51d))
+
 ## [1.80.5](https://github.com/Pocket/web-client/compare/v1.80.4...v1.80.5) (2023-03-09)
 
 

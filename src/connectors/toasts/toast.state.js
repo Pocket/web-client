@@ -24,6 +24,17 @@ import { ITEMS_TAG_FAILURE } from 'actions'
 import { ADD_SHARE_SUCCESS } from 'actions'
 import { ADD_SHARE_FAILURE } from 'actions'
 
+import { LIST_CREATE_SUCCESS } from 'actions'
+import { LIST_CREATE_FAILURE } from 'actions'
+import { LIST_ADD_ITEM_SUCCESS } from 'actions'
+import { LIST_ADD_ITEM_FAILURE } from 'actions'
+import { LIST_DELETE_ITEM_SUCCESS } from 'actions'
+import { LIST_DELETE_ITEM_FAILURE } from 'actions'
+import { LIST_UPDATE_SUCCESS } from 'actions'
+import { LIST_UPDATE_FAILURE } from 'actions'
+import { LIST_DELETE_SUCCESS } from 'actions'
+import { LIST_DELETE_FAILURE } from 'actions'
+
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -68,6 +79,16 @@ export const actionToastsReducers = (state = initialState, action) => {
     case ARTICLE_SAVE_SUCCESS:
     case MUTATION_SUCCESS:
     case ITEMS_UPSERT_SUCCESS:
+    case LIST_CREATE_SUCCESS:
+    case LIST_CREATE_FAILURE:
+    case LIST_ADD_ITEM_SUCCESS:
+    case LIST_ADD_ITEM_FAILURE:
+    case LIST_DELETE_ITEM_SUCCESS:
+    case LIST_DELETE_ITEM_FAILURE:
+    case LIST_UPDATE_SUCCESS:
+    case LIST_UPDATE_FAILURE:
+    case LIST_DELETE_SUCCESS:
+    case LIST_DELETE_FAILURE:
     case COPY_ITEM_URL: {
       const { actions, count, actionType = false } = action
       const itemCount = actions ? actions?.length : count

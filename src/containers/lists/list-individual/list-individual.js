@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import ErrorPage from 'containers/_error/error.js'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListIndividualHeader } from 'components/headers/lists-header'
@@ -9,6 +10,7 @@ import { getIndividualListAction } from './list-individual.state'
 import { IndividualListCard } from 'connectors/lists/individual-list.card'
 import { ListSettingsModal } from 'connectors/confirm/list-settings'
 import { mutateListUpdateAction } from 'connectors/lists/mutation-update.state'
+import { Toasts } from 'connectors/toasts/toast-list'
 
 const MOCK_DATA = {
   userId: 'luigimario',
@@ -20,6 +22,8 @@ export const ListIndividual = () => {
   const router = useRouter()
   const { slug: id } = router.query
 
+  const enrolled = useSelector((state) => state.pageListsInfo.enrolled)
+  const enrolledFetched = useSelector((state) => state.pageListsInfo.enrolledFetched)
   const list = useSelector((state) => state.listsDisplay[id])
   const listItemIds = useSelector((state) => state.pageIndividualListIds?.[id])
 
@@ -27,8 +31,8 @@ export const ListIndividual = () => {
   const shouldRender = userStatus !== 'pending'
 
   useEffect(() => {
-    dispatch(getIndividualListAction(id))
-  }, [dispatch, id])
+    if (enrolled) dispatch(getIndividualListAction(id))
+  }, [dispatch, id, enrolled])
 
   if (!list) return null
   const { title, description, status } = list
@@ -39,6 +43,8 @@ export const ListIndividual = () => {
   const handleShare = () => {}
   const handleEdit = () => dispatch(mutateListUpdateAction(id))
 
+  if (!enrolledFetched) return null
+  if (enrolledFetched && !enrolled) return <ErrorPage statusCode={404} />
   return (
     <>
       <Layout>
@@ -65,6 +71,7 @@ export const ListIndividual = () => {
       </Layout>
 
       <ListSettingsModal id={id} />
+      <Toasts />
     </>
   )
 }

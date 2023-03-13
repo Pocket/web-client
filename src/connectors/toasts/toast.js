@@ -20,6 +20,10 @@ import { MUTATION_FAVORITE } from 'actions'
 import { MUTATION_UNFAVORITE } from 'actions'
 import { MUTATION_TAGGING } from 'actions'
 import { MUTATION_UPSERT } from 'actions'
+import { MUTATION_BULK_ARCHIVE } from 'actions'
+import { MUTATION_BULK_UNARCHIVE } from 'actions'
+import { MUTATION_BULK_FAVORITE } from 'actions'
+import { MUTATION_BULK_UNFAVORITE } from 'actions'
 
 import { ITEMS_ADD_SUCCESS } from 'actions'
 
@@ -41,6 +45,17 @@ import { ARTICLE_SAVE_SUCCESS } from 'actions'
 
 import { HIGHLIGHT_SAVE_SUCCESS } from 'actions'
 import { HIGHLIGHT_DELETE_SUCCESS } from 'actions'
+
+import { LIST_CREATE_SUCCESS } from 'actions'
+import { LIST_CREATE_FAILURE } from 'actions'
+import { LIST_ADD_ITEM_SUCCESS } from 'actions'
+import { LIST_ADD_ITEM_FAILURE } from 'actions'
+import { LIST_DELETE_ITEM_SUCCESS } from 'actions'
+import { LIST_DELETE_ITEM_FAILURE } from 'actions'
+import { LIST_UPDATE_SUCCESS } from 'actions'
+import { LIST_UPDATE_FAILURE } from 'actions'
+import { LIST_DELETE_SUCCESS } from 'actions'
+import { LIST_DELETE_FAILURE } from 'actions'
 
 const toastWrapper = css`
   text-align: left;
@@ -122,6 +137,7 @@ export function Toast({
     [DISCOVER_ITEMS_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
     [ARTICLE_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
     [MUTATION_UNARCHIVE]: t('toast:added', '{{count}} item added', { count }),
+    [MUTATION_BULK_UNARCHIVE]: t('toast:unarchived', '{{count}} item added', { count }),
     [MUTATION_UPSERT]: t('toast:added', '{{count}} item added', { count }),
     [ADD_SHARE_FAILURE]: t('toast:error-adding', 'Error adding item'),
 
@@ -139,17 +155,41 @@ export function Toast({
 
     // Archive
     [MUTATION_ARCHIVE]: t('toast:archived', '{{count}} item archived', { count }),
+    [MUTATION_BULK_ARCHIVE]: t('toast:archived', '{{count}} item archived', { count }),
 
     [MUTATION_FAVORITE]: t('toast:added-to-favorites', '{{count}} item added to favorites', { count }), //prettier-ignore
     [MUTATION_UNFAVORITE]: t('toast:removed-from-favorites', '{{count}} item removed from favorites', { count }), //prettier-ignore
+    [MUTATION_BULK_FAVORITE]: t('toast:added-to-favorites', '{{count}} item added to favorites', { count }), //prettier-ignore
+    [MUTATION_BULK_UNFAVORITE]: t('toast:removed-from-favorites', '{{count}} item removed from favorites', { count }), //prettier-ignore
 
     [HIGHLIGHT_SAVE_SUCCESS]: t('toast:highlighted', '{{count}} item highlighted', { count }), //prettier-ignore
     [HIGHLIGHT_DELETE_SUCCESS]: t('toast:highlight-deleted', '{{count}} highlight removed', { count }), //prettier-ignore
 
-    [ITEMS_TAG_FAILURE]: t('toast:error-tagging', 'Error tagging item')
+    [ITEMS_TAG_FAILURE]: t('toast:error-tagging', 'Error tagging item'),
+
+    // Lists
+    [LIST_CREATE_SUCCESS]: 'List created',
+    [LIST_CREATE_FAILURE]: 'Error creating list',
+    [LIST_ADD_ITEM_SUCCESS]: 'Item added to list',
+    [LIST_ADD_ITEM_FAILURE]: 'Error adding item',
+    [LIST_DELETE_ITEM_SUCCESS]: 'Item removed from list',
+    [LIST_DELETE_ITEM_FAILURE]: 'Error removing item',
+    [LIST_UPDATE_SUCCESS]: 'List updated',
+    [LIST_UPDATE_FAILURE]: 'Error updating list',
+    [LIST_DELETE_SUCCESS]: 'List deleted',
+    [LIST_DELETE_FAILURE]: 'Error deleting list'
   }
 
-  const errors = [SHARE_RECOMMEND_FAILURE, ITEMS_TAG_FAILURE, ADD_SHARE_FAILURE]
+  const errors = [
+    SHARE_RECOMMEND_FAILURE,
+    ITEMS_TAG_FAILURE,
+    ADD_SHARE_FAILURE,
+    LIST_CREATE_FAILURE,
+    LIST_ADD_ITEM_FAILURE,
+    LIST_DELETE_ITEM_FAILURE,
+    LIST_UPDATE_FAILURE,
+    LIST_DELETE_FAILURE
+  ]
 
   const [show, setShow] = useState(false)
   const mount = () => setShow(true)
@@ -196,5 +236,3 @@ export function Toast({
     </Fade>
   )
 }
-
-
