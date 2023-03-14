@@ -10,6 +10,8 @@ import { getIndividualListAction } from './list-individual.state'
 import { IndividualListCard } from 'connectors/lists/individual-list.card'
 import { ListSettingsModal } from 'connectors/confirm/list-settings'
 import { CreateListModal } from 'connectors/confirm/create-list'
+import { ConfirmShare } from 'connectors/confirm/share-list'
+import { shareListAction } from 'connectors/lists/mutation-share.state'
 import { mutateListUpdateAction } from 'connectors/lists/mutation-update.state'
 import { mutateListStatusAction } from 'connectors/lists/mutation-update.state'
 import { Toasts } from 'connectors/toasts/toast-list'
@@ -37,7 +39,7 @@ export const ListIndividual = () => {
 
   // Actions
   const handleSetStatus = (val) => dispatch(mutateListStatusAction({ id, status: val }))
-  const handleShare = () => {}
+  const handleShare = () => dispatch(shareListAction(id))
   const handleEdit = () => dispatch(mutateListUpdateAction(id))
 
   if (!enrolledFetched) return null
@@ -69,6 +71,7 @@ export const ListIndividual = () => {
 
       <ListSettingsModal id={id} />
       <CreateListModal />
+      <ConfirmShare />
       <Toasts />
     </>
   )

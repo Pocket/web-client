@@ -98,7 +98,7 @@ export const Item = (props) => {
 
   // Fire when item is in view
   useEffect(() => {
-    onItemInView(inView)
+    if (onItemInView) onItemInView(inView)
   }, [inView, onItemInView])
 
   // Fire when item is selected by shortcut

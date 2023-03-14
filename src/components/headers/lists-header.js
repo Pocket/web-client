@@ -131,7 +131,7 @@ export const ListIndividualHeader = ({
 
       <div className="create-sort">
         {isPublic ? (
-          <button onClick={handleShare} className="tiny share" disabled>
+          <button onClick={handleShare} className="tiny share">
             Share list
           </button>
         ) : null}
