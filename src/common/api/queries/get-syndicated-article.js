@@ -2,7 +2,7 @@ import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
 
 const getSyndicatedArticleQuery = gql`
-  query GetSyndicatedArticle($slug: String!, $count: Int) {
+  query GetSyndicatedArticle($slug: String!) {
     syndicatedArticleBySlug(slug: $slug) {
       content
       authorNames
@@ -39,31 +39,6 @@ const getSyndicatedArticleQuery = gql`
       slug
       status
       title
-      relatedEndOfArticle(count: $count) {
-        corpusRecommendationId: id
-        corpusItem {
-          id
-          imageUrl
-          title
-          url
-          publisher
-          target {
-            ... on SyndicatedArticle {
-              publisher {
-                logoWideBlack
-              }
-            }
-          }
-        }
-      }
-      relatedRightRail(count: $count) {
-        corpusRecommendationId: id
-        corpusItem {
-          id
-          title
-          url
-        }
-      }
     }
   }
 `
@@ -72,7 +47,7 @@ const getSyndicatedArticleQuery = gql`
  * @param {String} slug  title of article
  */
 export async function getSyndicatedArticle(slug) {
-  const variables = { slug, count: 5 }
+  const variables = { slug }
 
   return requestGQL({
     query: getSyndicatedArticleQuery,
