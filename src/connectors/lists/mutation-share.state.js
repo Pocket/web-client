@@ -29,10 +29,3 @@ export const mutationListShareReducers = (state = initialState, action) => {
       return state
   }
 }
-
-/** SAGAS :: WATCHERS
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-export const mutationShareSagas = []
-
-/** SAGAS :: RESPONDERS
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
