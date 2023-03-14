@@ -24,27 +24,27 @@ const grid = css`
 
 const discoverItems = discoverResponse?.data?.getSlateLineup?.slates[0].recommendations?.map(
   (node) => {
-    let derivedItem = deriveRecommendation(node)
+    const derivedItem = deriveRecommendation(node)
     derivedItem['storyName'] = `Discover - ${sanitizeString(derivedItem.title)}`
     return derivedItem
   }
 )
 
 const savesItems = Object.values(savesResponse.edges).map((item) => {
-  let derivedItem = deriveListItem(item)
+  const derivedItem = deriveListItem(item)
   derivedItem['storyName'] = `Saves - ${sanitizeString(derivedItem.title)}`
   return derivedItem
 })
 
 const collections = () => {
-  let derivedItem = deriveCollection(collectionResponse.data.getCollectionBySlug)
+  const derivedItem = deriveCollection(collectionResponse.data.getCollectionBySlug)
   derivedItem['storyName'] = `Collection - ${sanitizeString(derivedItem.title)}`
   return [derivedItem]
 }
 const collectionItems = collections()
 
 const storyItems = collectionResponse.data.getCollectionBySlug.stories.map((item) => {
-  let derivedItem = deriveStory(item)
+  const derivedItem = deriveStory(item)
   derivedItem['storyName'] = `Story - ${sanitizeString(derivedItem.title)}`
   return derivedItem
 })

@@ -12,7 +12,7 @@ export const emptyListMessage = () => <EmptyList />
 export const quoteCard = () => (
   <div className={cardStyles}>
     <Quote>
-      Although James Cromwell would get more screen time in George Miller's talking pig tale than in
+      Although James Cromwell would get more screen time in George Miller’s talking pig tale than in
       any of his previous films, he had only 171 words of dialogue.
     </Quote>
     <CreatedDate>2019-11-12 13:02:07</CreatedDate>

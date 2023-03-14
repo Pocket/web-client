@@ -19,7 +19,9 @@ const baseProps = {
   title: 'Test Modal',
   appRootSelector: '#root',
   screenReaderLabel: 'foo',
-  handleClose() {}
+  handleClose() {
+    /** noop */
+  }
 }
 
 // make nodeSelector required, test that ReactModal.setAppElement is called with this

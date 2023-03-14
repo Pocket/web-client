@@ -141,7 +141,9 @@ TopicsPillbox.defaultProps = {
   headingText: 'Discover Articles By Topic',
   headingClassName: null,
   alignItems: 'left',
-  onTopicClick() {}
+  onTopicClick() {
+    /** noop */
+  }
 }
 
 export default TopicsPillbox

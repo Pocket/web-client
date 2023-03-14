@@ -1,10 +1,6 @@
 import { css } from 'linaria'
 import { breakpointLargeHandset } from 'common/constants'
-import { breakpointLargeTablet } from 'common/constants'
-import { breakpointMediumTablet } from 'common/constants'
 import { breakpointSmallTablet } from 'common/constants'
-import { breakpointTinyTablet } from 'common/constants'
-
 import { breakpointMediumHandset } from 'common/constants'
 
 export const itemStyles = css`

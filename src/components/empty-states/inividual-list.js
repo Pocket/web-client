@@ -11,7 +11,7 @@ const emptyStyles = css`
 export const EmptyIndividualLists = () => {
   return (
     <div className={emptyStyles}>
-      <img src={BorderSVG.src} />
+      <img src={BorderSVG.src} alt="" />
       <p>Add items to your list to quickly find them later.</p>
     </div>
   )

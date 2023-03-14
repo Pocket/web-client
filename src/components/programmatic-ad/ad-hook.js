@@ -75,7 +75,7 @@ const refreshFunction = once((event) => {
   // Number of seconds to wait after the slot becomes viewable.
   const SECONDS_TO_WAIT_AFTER_VIEWABILITY = 8
 
-  let slot = event.slot
+  const slot = event.slot
   if (slot.getTargeting(REFRESH_KEY).indexOf(REFRESH_VALUE) > -1) {
     setTimeout(function () {
       pwpbjs.que.push(function () {

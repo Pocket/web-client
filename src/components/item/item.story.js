@@ -8,7 +8,7 @@ import { SavedActions } from './actions/saved'
 import { TransitionalActions } from './actions/transitional'
 
 const savesItems = Object.values(savesResponse.edges).map((item) => {
-  let derivedItem = deriveListItem(item)
+  const derivedItem = deriveListItem(item)
   derivedItem['storyName'] = item.storybookContext
   return derivedItem
 })

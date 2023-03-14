@@ -6,7 +6,7 @@ import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 const discoverItems = discoverResponse?.data?.getSlateLineup?.slates[0].recommendations?.map(
   (item) => {
-    let derivedItem = deriveRecommendation(item)
+    const derivedItem = deriveRecommendation(item)
     derivedItem.story_name = `Discover - ${item.title}`
     return derivedItem
   }

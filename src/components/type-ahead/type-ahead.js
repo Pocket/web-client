@@ -20,7 +20,7 @@ export class TypeAhead extends React.Component {
 
   /* Lifecycle Hooks
   ------------------------------------------------------- */
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.state.ready) return
     this.textInput = nextProps.textInput
     this.textInput.addEventListener('keydown', this.keyDown)
@@ -33,7 +33,7 @@ export class TypeAhead extends React.Component {
     }
   }
 
-  componentWillUpdate(nextProps) {
+  UNSAFE_componentWillUpdate(nextProps) {
     if (nextProps.inputValue !== this.props.inputValue) {
       const nextItems = matchSorter(this.allItems, nextProps.inputValue, {
         threshold: rankings.CONTAINS

@@ -5,7 +5,13 @@ import { START_DATE_FOR_GERMAN_HOME } from 'common/constants'
 import queryString from 'query-string'
 import * as Sentry from '@sentry/nextjs'
 
-export default function Waypoint() {}
+export default function Waypoint() {
+  /**
+   * Do nothing here, this always ends in a redirect.
+   * The only reason for this file is to do some server side processing
+   * to determine destination
+   **/
+}
 
 export async function getServerSideProps({ req, locale, query, defaultLocale, locales }) {
   try {

@@ -1,3 +1,4 @@
+//!! UPDATE HOOKS / REFACTOR TO TYPESCRIPT
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from 'linaria'
@@ -144,7 +145,7 @@ export const PopupMenuItem = ({
   }
 
   function getLink() {
-    return (external) ? (
+    return external ? (
       <a id={id} href={href} {...remaining}>
         {getContent()}
       </a>
@@ -412,9 +413,13 @@ PopupMenu.propTypes = {
 PopupMenu.defaultProps = {
   id: '',
 
-  onOpen() {},
+  onOpen() {
+    /** noop */
+  },
 
-  onClose() {},
+  onClose() {
+    /** noop */
+  },
 
   forceShow: false
 }

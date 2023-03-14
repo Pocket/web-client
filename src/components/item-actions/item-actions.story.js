@@ -10,7 +10,9 @@ import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { OverflowAction } from 'components/item-actions/overflow'
 import { ShowSimilar } from 'components/item-actions/show-similar'
 
-const noop = function () {}
+const noop = function () {
+  /** noop */
+}
 export const Saves = ({ id }) => (
   <ItemActions
     menuItems={[

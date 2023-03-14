@@ -194,8 +194,8 @@ export const TicList = ({
   visible
 }) => {
   const renderTics = () => {
-    let body = document.body
-    let html = document.documentElement
+    const body = document.body
+    const html = document.documentElement
 
     const docHeight = Math.max(
       body.scrollHeight,
@@ -211,8 +211,8 @@ export const TicList = ({
     const tics = []
 
     annotations.forEach((annot, index) => {
-      let percent = annot.position / docHeight
-      let top = Math.round(percent * screenHeight) + 85 // top padding
+      const percent = annot.position / docHeight
+      const top = Math.round(percent * screenHeight) + 85 // top padding
 
       tics.push(
         <HighlightIndex

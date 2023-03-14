@@ -1,3 +1,4 @@
+//!! UPDATE HOOKS / REFACTOR TO TYPESCRIPT
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { createPopper as createPopperInstance } from '@popperjs/core'
@@ -174,7 +175,7 @@ const Popup = ({
    * @param {object} event Click event passed though from the listener
    */
 
-  function handleTriggerClick(event) {
+  function handleTriggerClick() {
     if (!forceShow) setIsShowRequested((prevShown) => !prevShown)
   }
   /**
@@ -301,9 +302,13 @@ Popup.defaultProps = {
   animationDuration: 75,
   alwaysRender: true,
 
-  onOpen() {},
+  onOpen() {
+    /** noop */
+  },
 
-  onClose() {},
+  onClose() {
+    /** noop */
+  },
 
   popperOptions: {
     placement: 'bottom-start'

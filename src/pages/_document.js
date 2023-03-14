@@ -38,6 +38,7 @@ class ClientDocument extends Document {
 
           {/* <!-- OneTrust Cookies Consent Notice start for getpocket.com --> */}
           <script
+            async
             src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
             type="text/javascript"
             charSet="UTF-8"
