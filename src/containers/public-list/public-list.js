@@ -61,13 +61,12 @@ export const PublicList = ({ listId, slug, statusCode }) => {
 
         {showLists
           ? listItems.map((item) => (
-              <PublicListCard
-                key={item.externalId}
-                listId={listId}
-                {...item}
-              />
-            )
-          ) : null}
+            <PublicListCard
+              key={item.externalId}
+              listId={listId}
+              {...item}
+            />
+          )) : null}
       </Layout>
     </>
   )
