@@ -27,11 +27,11 @@ const getShareableListPublicQuery = gql`
     }
   }
 `
-export function getShareableListPublic({ externalId, slug }) {
+export function getShareableListPublic({ listId, slug }) {
   return requestGQL({
     query: getShareableListPublicQuery,
     operationName: 'getShareableListPublic',
-    variables: { slug, externalId }
+    variables: { slug, externalId: listId }
   })
     .then((response) => response?.data?.shareableListPublic)
     .catch((error) => console.error(error))

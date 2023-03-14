@@ -178,7 +178,6 @@ export const ListPublicHeader = ({
         </div>
 
         <SaveListButton
-          isDisabled={true}
           saveAction={handleSaveAll}
           isAuthenticated={isAuthenticated}
           saveStatus={saveStatus}

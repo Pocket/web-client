@@ -10,22 +10,27 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ query, locale }) => {
       const { dispatch, sagaTask } = store
-      const { externalId, slug, ...queryParams } = query
+      const { listId, slug, ...queryParams } = query
       const defaultProps = {
         ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
         locale,
         slug,
-        externalId,
+        listId,
         queryParams
       }
 
       // Hydrating initial state with an async request. This will block the
       // page from loading.
-      const response = await fetchPublicListHydrationData({ slug, externalId })
+      const response = await fetchPublicListHydrationData({ slug, listId })
 
-      // No article found || Moderated and taken down
-      if (!response || response?.moderationStatus === 'HIDDEN') {
+      // No article found
+      if (!response) {
         return { props: defaultProps, notFound: true }
+      }
+
+      // Moderated and taken down
+      if (response?.moderationStatus === 'HIDDEN') {
+        return { props: { ...defaultProps, statusCode: 403 } }
       }
 
       // Since ssr will not wait for side effects to resolve this dispatch
