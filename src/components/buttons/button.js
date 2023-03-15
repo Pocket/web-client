@@ -9,7 +9,7 @@ const buttonStyles = css`
   font-size: 1rem;
   line-height: 110%;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 8px;
   padding: 0.75rem;
   transition: all 0.15s ease-out;
   text-decoration: none;
