@@ -13,7 +13,6 @@ const saveListStyles = css`
 `
 
 export const SaveListButton = ({
-  isDisabled = false,
   isAuthenticated,
   saveStatus = "unsaved",
   saveAction
@@ -42,7 +41,6 @@ export const SaveListButton = ({
   return (
     <>
       <Button
-        disabled={isDisabled}
         onClick={handleClick}
         ref={popTrigger}
         variant="brand"

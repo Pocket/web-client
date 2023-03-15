@@ -1,4 +1,5 @@
 import { cx } from 'linaria'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { mutateListDelete } from 'connectors/lists/mutation-delete.state'
 import { Item } from 'components/item/item'
@@ -10,9 +11,11 @@ export const ListCard = ({ id }) => {
 
   if (!list) return null
 
+  const [thumbnail, setThumbnail] = useState(list.listItems?.[0]?.imageUrl)
   const storyCount = list.listItems?.length || 0
-  const itemImage = list.listItems?.[0]?.imageUrl
   const url = `/sharedlists/${list.externalId}/${list.slug}`
+
+  const onImageFail = () => setThumbnail('')
 
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)} key={list.externalId}>
@@ -26,7 +29,8 @@ export const ListCard = ({ id }) => {
         listStatus={list.status}
         listUrl={url}
         storyCount={storyCount}
-        itemImage={itemImage}
+        itemImage={thumbnail}
+        onImageFail={onImageFail}
         Actions={ListActions}
         clamp
       />

@@ -27,6 +27,6 @@ export const pagePublicListReducers = (state = {}, action) => {
 
 /** ASYNC REQUESTS
  --------------------------------------------------------------- */
-export function fetchPublicListHydrationData({ slug, externalId }) {
-  return getShareableListPublic({ slug, externalId })
+export function fetchPublicListHydrationData({ slug, listId }) {
+  return getShareableListPublic({ slug, listId })
 }

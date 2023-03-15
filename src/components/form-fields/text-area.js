@@ -10,6 +10,7 @@ const defaultTextareaStyles = css`
 `
 
 export const TextArea = ({
+  autoFocus,
   name,
   initialRows,
   maxRows,
@@ -39,6 +40,7 @@ export const TextArea = ({
     characterLimit={characterLimit}
     value={value}>
     <TextareaAutosize
+      autoFocus={autoFocus}
       className={cx(defaultTextareaStyles, textareaStyles && textareaStyles)}
       name={name}
       rows={initialRows}

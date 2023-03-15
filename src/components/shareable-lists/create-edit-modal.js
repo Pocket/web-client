@@ -42,6 +42,7 @@ export const CreateEditShareableList = ({
       handleClose={onClose}>
       <ModalBody>
         <TextArea
+          autoFocus={true}
           labelText="List Name"
           name="list-name"
           value={listNameValue}

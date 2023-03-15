@@ -1,4 +1,5 @@
 import { cx } from 'linaria'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
@@ -15,7 +16,11 @@ export const PublicListCard = ({
   publisher,
   url
 }) => {
+  const [thumbnail, setThumbnail] = useState(imageUrl)
+
   if (!externalId || !listId) return null
+
+  const onImageFail = () => setThumbnail('')
 
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)}>
@@ -24,9 +29,10 @@ export const PublicListCard = ({
         itemId={externalId}
         title={title}
         excerpt={excerpt}
-        itemImage={imageUrl}
+        itemImage={thumbnail}
         publisher={publisher}
         openUrl={url}
+        onImageFail={onImageFail}
         onItemInView={() => { }} // impression event here
         onOpenOriginalUrl={() => { }} // engagement event here
         onOpen={() => { }} // engagement event here
@@ -41,13 +47,13 @@ export function ActionsTransitional({ id, position }) {
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const item = useSelector((state) => state.listsDisplay[id])
+  const list = useSelector((state) => state.pagePublicList.listItems)
 
+  const { url } = list.find(item => item.externalId === id)
   const saveItemId = useSelector((state) => state.itemsTransitions[id])
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
 
-  if (!item) return null
-  const { url } = item
+  if (!url) return null
 
   // Prep save action
   const onSave = () => {
@@ -62,7 +68,7 @@ export function ActionsTransitional({ id, position }) {
     dispatch(mutationDeleteTransitionalItem(url, id))
   }
 
-  return item ? (
+  return (
     <TransitionalActions
       id={id}
       isAuthenticated={isAuthenticated}
@@ -70,5 +76,5 @@ export function ActionsTransitional({ id, position }) {
       onSave={onSave}
       onUnSave={onUnSave}
     />
-  ) : null
+  )
 }
