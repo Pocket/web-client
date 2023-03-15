@@ -18,7 +18,7 @@ export const PublicList = ({ listId, slug, statusCode }) => {
   if (statusCode) return <ErrorPage statusCode={statusCode} />
   if (!list) return null
 
-  const { title, description, listItems } = list
+  const { title, description, listItems, user } = list
   const showLists = listItems?.length
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
   const url = `${BASE_URL}/sharedlists/${listId}/${slug}`
@@ -46,13 +46,12 @@ export const PublicList = ({ listId, slug, statusCode }) => {
       <Layout
         title={title}
         metaData={metaData}
-        forceWebView={true}
       >
         <ListPublicHeader
           title={title}
           description={description}
-          // avatarUrl={avatarUrl}
-          // userName={userName}
+          avatarUrl={user?.avatarUrl}
+          userName={user?.userName}
           listCount={listItems?.length}
           isAuthenticated={isAuthenticated}
           saveStatus={saveStatus}

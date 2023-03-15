@@ -73,10 +73,14 @@ export const pageListsInfoReducers = (state = initialState, action) => {
     }
 
     case LIST_CREATE_SUCCESS: {
-      const { newList, externalId } = action
+      const { newList, externalId, listTitle } = action
       return {
         ...state,
-        [externalId]: newList
+        [externalId]: newList,
+        titleToIdList: {
+          [listTitle]: externalId,
+          ...state.titleToIdList
+        }
       }
     }
 

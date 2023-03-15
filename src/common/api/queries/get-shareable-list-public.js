@@ -24,6 +24,10 @@ const getShareableListPublicQuery = gql`
         updatedAt
         url
       }
+      user {
+        username
+        avatarUrl
+      }
     }
   }
 `

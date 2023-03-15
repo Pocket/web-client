@@ -6,6 +6,7 @@ import { FiltersAltIcon } from 'components/icons/FiltersAltIcon'
 import Avatar from 'components/avatar/avatar'
 import { SaveListButton } from 'components/content-saving/save-list'
 import { ListStatus } from 'components/shareable-lists/list-status'
+import { IosShareIcon } from 'components/icons/IosShareIcon'
 
 const listHeaderStyles = css`
   padding-bottom: 22px;
@@ -132,7 +133,7 @@ export const ListIndividualHeader = ({
       <div className="create-sort">
         {isPublic ? (
           <button onClick={handleShare} className="tiny share">
-            Share list
+            <IosShareIcon /> Share list
           </button>
         ) : null}
 
