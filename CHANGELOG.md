@@ -1,3 +1,11 @@
+## [1.81.6](https://github.com/Pocket/web-client/compare/v1.81.5...v1.81.6) (2023-03-15)
+
+
+### Bug Fixes
+
+* **public-list:** formatting update on public list card component ([56342a8](https://github.com/Pocket/web-client/commit/56342a8f4a0f3313c963fee585809e79fe63c4e3))
+* **public-list:** hooking up saving ([ea76e16](https://github.com/Pocket/web-client/commit/ea76e168bbaea96dbd08cb6de62c177fc4ccc057))
+
 ## [1.81.5](https://github.com/Pocket/web-client/compare/v1.81.4...v1.81.5) (2023-03-14)
 
 
