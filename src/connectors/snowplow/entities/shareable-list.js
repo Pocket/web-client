@@ -5,13 +5,12 @@ import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object
  * Schema information:
  * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/7b895f09809942a835587b02a58b7a835f92e16a726f5d224a43b90d219ae9c4
  */
-const SHAREABLE_LIST_SCHEMA_URL = getSchemaUri('shareable_list', '1-0-1')
+const SHAREABLE_LIST_SCHEMA_URL = getSchemaUri('shareable_list', '1-0-2')
 
 /**
  * Entity that describes the concept list that can be created then shared with other users regardless of logged-in status
  *
  * @param shareableListExternalId {string} @required - The unique backend identifier for a shared list
- * @param userId {integer} @required (maybe???) - The backend identifier for the Pocket user account that created this shareable list
  * @param slug {string} @required - The slug for the shareable list
  * @param title {string} @required - The title of the shareable list
  * @param description {string} - The description of the shareable list (filled in by the user creating the list)
@@ -22,12 +21,22 @@ const SHAREABLE_LIST_SCHEMA_URL = getSchemaUri('shareable_list', '1-0-1')
  * @param createdAt {integer} @required - The UTC unix timestamp (in seconds) for when the shareable list was created
  * @param updatedAt {integer} - The UTC unix timestamp (in seconds) for when the shareable list was last updated
  *
- * @returns {{schema: *, data: {shareable_list_external_id: string, user_id: integer, slug: string, title: string, description: string, status: enum, moderation_status: enum, moderated_by: string, moderation_reason: string, created_at: integer, updated_at: integer }}}
+ * @returns {{schema: *, data: {
+ *  shareable_list_external_id: string,
+ *  slug: string,
+ *  title: string,
+ *  description: string,
+ *  status: enum,
+ *  moderation_status: enum,
+ *  moderated_by: string,
+ *  moderation_reason: string,
+ *  created_at: integer,
+ *  updated_at: integer
+ * }}}
  */
 
 export const createShareableListEntity = ({
   shareableListExternalId,
-  userId,
   slug,
   title,
   description,
@@ -41,7 +50,6 @@ export const createShareableListEntity = ({
   schema: SHAREABLE_LIST_SCHEMA_URL,
   data: getObjectWithValidKeysOnly({
     shareable_list_external_id: shareableListExternalId,
-    user_id: userId,
     slug: slug,
     title: title,
     desciption: description,
