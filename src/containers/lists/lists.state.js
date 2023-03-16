@@ -3,6 +3,8 @@ import { put, select, takeEvery } from 'redux-saga/effects'
 import { getShareableListPilotStatus } from 'common/api/queries/get-shareable-lists-pilot-status'
 import { getShareableLists } from 'common/api/queries/get-shareable-lists'
 
+import { LIST_ITEMS_SUCCESS } from 'actions'
+
 import { LIST_CHECK_PILOT_STATUS_REQUEST } from 'actions'
 import { LIST_CHECK_PILOT_STATUS_SUCCESS } from 'actions'
 import { LIST_CHECK_PILOT_STATUS_FAILURE } from 'actions'
@@ -12,8 +14,10 @@ import { LIST_PAGE_SET_SORT_ORDER } from 'actions'
 import { LIST_ALL_REQUEST } from 'actions'
 import { LIST_ALL_REQUEST_SUCCESS } from 'actions'
 import { LIST_ALL_REQUEST_FAILURE } from 'actions'
+
 import { LIST_CREATE_SUCCESS } from 'actions'
 import { LIST_DELETE_SUCCESS } from 'actions'
+
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 /** ACTIONS
@@ -35,10 +39,15 @@ export const pageListsIdsReducers = (state = [], action) => {
       return [externalId, ...state]
     }
 
-    case LIST_DELETE_SUCCESS:
+    case LIST_DELETE_SUCCESS: {
+      const { deletedId } = action
+      const externalIds = state.filter((id) => id !== deletedId)
+      return externalIds
+    }
+
     case LIST_ALL_REQUEST_SUCCESS: {
       const { externalIds } = action
-      return [...externalIds]
+      return externalIds
     }
 
     default:
@@ -73,25 +82,21 @@ export const pageListsInfoReducers = (state = initialState, action) => {
     }
 
     case LIST_CREATE_SUCCESS: {
-      const { newList, externalId, listTitle } = action
-      return {
-        ...state,
-        [externalId]: newList,
-        titleToIdList: {
-          [listTitle]: externalId,
-          ...state.titleToIdList
-        }
-      }
+      const { externalId, listTitle } = action
+      const titleToIdList = { [listTitle]: externalId, ...state.titleToIdList }
+      return { ...state, titleToIdList }
+    }
+
+    case LIST_DELETE_SUCCESS: {
+      const { deletedId } = action
+      const titleToIdList = Object.keys(state.titleToIdList)
+        .filter((title) => state.titleToIdList[title] !== deletedId)
+      return { ...state, titleToIdList }
     }
 
     case LIST_ALL_REQUEST_SUCCESS: {
-      const { allLists, titleToIdList } = action
-      return {
-        ...state,
-        ...allLists,
-        loading: false,
-        titleToIdList
-      }
+      const { titleToIdList } = action
+      return { ...state, loading: false, titleToIdList }
     }
 
     default:
@@ -136,15 +141,13 @@ function* userShareableListsRequest() {
   try {
     const userShareableLists = yield getShareableLists()
     const externalIds = userShareableLists.map((list) => list.externalId)
-    const allLists = arrayToObject(userShareableLists, 'externalId')
     const titleToIdList = userShareableLists.reduce((obj, list) => ({ ...obj, [list.title]: list.externalId }), {})
 
-    return yield put({
-      type: LIST_ALL_REQUEST_SUCCESS,
-      allLists,
-      externalIds,
-      titleToIdList
-    })
+    const lists = userShareableLists.map(item => ({ ...item, itemImage: item?.listItems?.[0]?.imageUrl }))
+    const itemsById = arrayToObject(lists, 'externalId')
+
+    yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
+    return yield put({ type: LIST_ALL_REQUEST_SUCCESS, externalIds, titleToIdList })
   } catch {
     return yield put({ type: LIST_ALL_REQUEST_FAILURE })
   }
