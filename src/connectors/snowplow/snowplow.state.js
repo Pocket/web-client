@@ -157,23 +157,20 @@ const expectationTypes = {
   corpusRecommendationId: 'string',
   shareableListItemExternalId: 'string',
   shareableListExternalId: 'string',
-  userId: 'integer',
   slug: 'string',
   title: 'string',
   status: 'string',
   moderationStatus: 'string',
   moderatedBy: 'string',
   moderationReason: 'string',
-  createdAt: 'integer',
-  updatedAt: 'integer',
-  itemId: 'integer',
-  corpusItemId: 'string',
-  syndicatedArticleId: 'string',
+  createdAt: 'number',
+  updatedAt: 'number',
   givenUrl: 'string',
   excerpt: 'string',
   imageUrl: 'string',
-  authors: 'array',
-  sortOrder: 'integer'
+  authors: 'object',
+  publisher: 'string',
+  sortOrder: 'number'
 }
 
 export function validateSnowplowExpectations({ identifier, expects, data }) {
