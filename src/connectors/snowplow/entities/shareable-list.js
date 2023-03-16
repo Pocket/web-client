@@ -52,7 +52,7 @@ export const createShareableListEntity = ({
     shareable_list_external_id: shareableListExternalId,
     slug: slug,
     title: title,
-    desciption: description,
+    description: description,
     status: status,
     moderation_status: moderationStatus,
     moderated_by: moderatedBy,
