@@ -15,7 +15,7 @@ import { shareListAction } from 'connectors/lists/mutation-share.state'
 import { mutateListUpdateAction } from 'connectors/lists/mutation-update.state'
 import { mutateListStatusAction } from 'connectors/lists/mutation-update.state'
 import { Toasts } from 'connectors/toasts/toast-list'
-import { sendSnowplowEvent } from '../../../connectors/snowplow/snowplow.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const ListIndividual = () => {
   const dispatch = useDispatch()
@@ -35,16 +35,18 @@ export const ListIndividual = () => {
   }, [dispatch, id, enrolled])
 
   if (!list) return null
-  const { title, description, slug, status, moderationStatus, createdAt } = list
+  const { title, description, slug, status, moderationStatus, createdAt, updatedAt } = list
   const showLists = listItemIds?.length
 
   const analyticsData = {
     shareableListExternalId: id,
     slug,
     title,
+    description,
     status,
     moderationStatus,
-    createdAt
+    createdAt,
+    updatedAt
   }
 
   // Actions
