@@ -45,8 +45,8 @@ export const ListIndividual = () => {
     description,
     status,
     moderationStatus,
-    createdAt,
-    updatedAt
+    createdAt: Date.parse(createdAt),
+    updatedAt: Date.parse(updatedAt)
   }
 
   // Actions
