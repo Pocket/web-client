@@ -100,14 +100,14 @@ export const ConfirmReport = () => {
       </ModalBody>
       {success ? null : (
         <ModalFooter>
-          <vutton
+          <button
             className="primary"
             disabled={submitDisabled}
             type="submit"
             data-cy="submit-report-feedback"
             onClick={confirmReport}>
             <Trans i18nKey="confirm:report-feedback">Report Feedback</Trans>
-          </vutton>
+          </button>
         </ModalFooter>
       )}
     </Modal>
