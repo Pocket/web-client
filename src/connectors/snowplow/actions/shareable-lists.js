@@ -5,7 +5,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'slug', 'title', 'status', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator clicks the Share button on a list'
   }
 }
