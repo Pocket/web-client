@@ -3,7 +3,6 @@ import { Trans } from 'next-i18next'
 import dayjs from 'dayjs'
 import Avatar from 'components/avatar/avatar'
 import { Card } from 'components/item-card/card'
-import { Button } from 'components/buttons/button'
 import { timeRelativeToNow } from 'common/utilities/date-time/date-time'
 
 const messageWrapper = css`
@@ -88,9 +87,9 @@ export const MessageItem = ({
             <p className="name">{name}</p>
             <p className="time">{timeRelativeToNow(time)}</p>
           </div>
-          <Button variant="inline" onClick={handleIgnore}>
+          <button variant="inline" onClick={handleIgnore}>
             <Trans i18nKey="messages:dismiss">Dismiss</Trans>
-          </Button>
+          </button>
         </header>
         <p className="comment">{comment}</p>
         <Card {...item} itemType="message" cardShape="wide" onSave={handleSave}/>

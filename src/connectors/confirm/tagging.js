@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react'
-import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, Trans } from 'next-i18next'
@@ -179,13 +178,14 @@ export function ConfirmTagging() {
       </ModalBody>
       <ModalFooter isSticky={false}>
         <div className="actions">
-          <Button
+          <button
+            className="primary"
             disabled={!value.trim() ? fresh : false}
             type="submit"
             data-cy="tagging-confirm"
             onClick={handleSave}>
             <Trans i18nKey="confirm:save">Save</Trans>
-          </Button>
+          </button>
         </div>
       </ModalFooter>
     </Modal>

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
-import { Button } from 'components/buttons/button'
 import { TextArea } from 'components/form-fields/text-area'
 
 export const CreateEditShareableList = ({
@@ -66,21 +65,22 @@ export const CreateEditShareableList = ({
         />
       </ModalBody>
       <ModalFooter>
-        <Button
-          variant="secondary"
+        <button
+          className="secondary"
           disabled={false}
           type="button"
           data-cy="create-edit-list-cancel"
           onClick={onClose}>
           Cancel
-        </Button>
-        <Button
+        </button>
+        <button
+          className="primary"
           disabled={listNameEmpty}
           type="submit"
           data-cy="create-edit-list-confirm"
           onClick={onSubmit}>
           {modalSubmit}
-        </Button>
+        </button>
       </ModalFooter>
     </Modal>
   )

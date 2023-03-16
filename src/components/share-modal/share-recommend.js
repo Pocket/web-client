@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Button } from 'components/buttons/button'
 import { css } from 'linaria'
 import { Trans, useTranslation } from 'next-i18next'
 
@@ -31,9 +30,9 @@ export function ShareRecommend({ recommendEvent }) {
         onChange={(e) => setCommentValue(e?.target?.value)}
         data-cy="share-recommend-input"
       />
-      <Button type="submit" onClick={onClick} data-cy="share-recommend-submit">
+      <button className="primary" type="submit" onClick={onClick} data-cy="share-recommend-submit">
         <Trans i18nKey="share:recommend">Recommend</Trans>
-      </Button>
+      </button>
     </div>
   )
 }

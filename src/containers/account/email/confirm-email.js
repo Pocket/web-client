@@ -1,4 +1,3 @@
-import { Button } from 'components/buttons/button'
 import { css } from 'linaria'
 
 import { useState } from 'react'
@@ -79,9 +78,9 @@ export const EmailModal = () => {
         <div>{emailError ? <span className="errorText">{error}</span> : null}</div>
       </ModalBody>
       <ModalFooter>
-        <Button type="submit" data-cy="update-primary-email-confirm" onClick={confirmEmail}>
+        <button className="primary" type="submit" data-cy="update-primary-email-confirm" onClick={confirmEmail}>
           {t('account:update-email', 'Update Email')}
-        </Button>
+        </button>
       </ModalFooter>
     </Modal>
   )

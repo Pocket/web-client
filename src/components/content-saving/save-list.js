@@ -1,9 +1,8 @@
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { usePopover } from 'components/popover/popover'
 import { SaveIcon } from 'components/icons/SaveIcon'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 import { SavePopover } from 'components/item-actions/save-to-pocket'
-import { Button } from 'components/buttons/button'
 
 const saveListStyles = css`
   .icon {
@@ -40,16 +39,14 @@ export const SaveListButton = ({
 
   return (
     <>
-      <Button
+      <button
         onClick={handleClick}
         ref={popTrigger}
-        variant="brand"
-        size="small"
-        className={saveListStyles}
+        className={cx(saveListStyles, "brand", "small")}
       >
         {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}{' '}
         {saveCopy[saveStatus]}
-      </Button>
+      </button>
       {!isAuthenticated && shown ? <SavePopover popoverRef={popBody} /> : null}
     </>
   )

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { css } from 'linaria'
-import { Button } from 'components/buttons/button'
 import Modal, { ModalBody, ModalFooter } from './modal'
 import { TextArea } from 'components/form-fields/text-area'
 import { CreateEditShareableList } from 'components/shareable-lists/create-edit-modal'
@@ -85,7 +84,7 @@ export const StaticModal = () => (
     showCloseButton={true}>
     <ModalBody>Wocka wocka</ModalBody>
     <ModalFooter>
-      <Button>Primary Action</Button>
+      <button className="primary">Primary Action</button>
     </ModalFooter>
   </Modal>
 )
@@ -176,7 +175,7 @@ export const WithForm = () => {
         </form>
       </ModalBody>
       <ModalFooter>
-        <Button>Primary Action</Button>
+        <button className="primary">Primary Action</button>
       </ModalFooter>
     </Modal>
   )
@@ -193,7 +192,7 @@ export const LengthyContentModal = () => (
       <LongContent />
     </ModalBody>
     <ModalFooter>
-      <Button>Primary Action</Button>
+      <button className="primary">Primary Action</button>
     </ModalFooter>
   </Modal>
 )
@@ -217,7 +216,7 @@ export const NoBackgroundScroll = () => {
           again.
         </ModalBody>
         <ModalFooter>
-          <Button>Primary Action</Button>
+          <button className="primary">Primary Action</button>
         </ModalFooter>
       </Modal>
     </>
@@ -246,7 +245,7 @@ export const Interactive = () => {
           <OverflowElement />
         </ModalBody>
         <ModalFooter isSticky={true}>
-          <Button>Primary Action</Button>
+          <button className="primary">Primary Action</button>
         </ModalFooter>
       </Modal>
     </>

@@ -1,4 +1,3 @@
-import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { mutationBulkConfirm, mutationBulkCancel } from 'connectors/items/mutations-bulk.state'
@@ -41,9 +40,9 @@ export const ConfirmDelete = () => {
       </ModalBody>
       {batchStart ? null : (
         <ModalFooter>
-          <Button type="submit" data-cy="delete-confirm" onClick={confirmDelete} autoFocus={true}>
+          <button className="primary" type="submit" data-cy="delete-confirm" onClick={confirmDelete} autoFocus={true}>
             <Trans i18nKey="confirm:delete">Delete</Trans>
-          </Button>
+          </button>
         </ModalFooter>
       )}
     </Modal>

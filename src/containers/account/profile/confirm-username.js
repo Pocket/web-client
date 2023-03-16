@@ -1,4 +1,3 @@
-import { Button } from 'components/buttons/button'
 import { css } from 'linaria'
 
 import { useState } from 'react'
@@ -102,9 +101,9 @@ export const UsernameModal = () => {
             'You will need to log in again after you update your username.'
           )}
         </div>
-        <Button type="submit" data-cy="update-username-confirm" onClick={confirmUsernmame}>
+        <button className="primary" type="submit" data-cy="update-username-confirm" onClick={confirmUsernmame}>
           {t('account:update-username', 'Update Username')}
-        </Button>
+        </button>
       </ModalFooter>
     </Modal>
   )

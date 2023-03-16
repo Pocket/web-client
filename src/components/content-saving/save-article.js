@@ -4,7 +4,6 @@ import { SaveIcon } from 'components/icons/SaveIcon'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 import { SavePopover } from 'components/item-actions/save-to-pocket'
 import { breakpointLargeHandset } from 'common/constants'
-import { Button } from 'components/buttons/button'
 import { useTranslation } from 'next-i18next'
 
 const saveArticleStyles = css`
@@ -146,10 +145,10 @@ function SaveStoryButton({ url, isAuthenticated, saveStatus, saveAction, id, tra
 
   return (
     <>
-      <Button onClick={handleClick} ref={popTrigger} data-cy={id}>
+      <a className="primary" onClick={handleClick} ref={popTrigger} data-cy={id}>
         {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}
         {saveCopy[saveStatus]}
-      </Button>
+      </a>
       {!isAuthenticated && shown ? <SavePopover popoverRef={popBody} id={id} /> : null}
     </>
   )

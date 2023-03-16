@@ -1,5 +1,4 @@
 import { css } from 'linaria'
-import { Button } from 'components/buttons/button'
 import { ErrorIcon } from 'components/icons/ErrorIcon'
 import { topTooltip } from 'components/tooltip/tooltip'
 import { useTranslation, Trans } from 'next-i18next'
@@ -40,13 +39,13 @@ const Alias = ({ onRemoveAlias, onResendConfirmation, alias, confirmed }) => {
           />
         ) : null}
       </div>
-      <Button variant="secondary" className="actionInline" onClick={onRemove}>
+      <button className="secondary actionInline" onClick={onRemove}>
         {t('account:remove-alias', 'Remove alias')}
-      </Button>
+      </button>
       {unconfirmed ? (
-        <Button variant="inline" onClick={onResend} className="subButton">
+        <button onClick={onResend} className="inline subButton">
           {t('account:email-resend-confirmation', 'Re-send email confirmation')}
-        </Button>
+        </button>
       ) : null}
     </>
   )
@@ -84,14 +83,14 @@ export const EmailAddresses = ({
           ) : null}
         </div>
 
-        <Button variant="secondary" className="actionInline" onClick={onChangeEmail}>
+        <button className="secondary actionInline" onClick={onChangeEmail}>
           {t('account:change-email', 'Change Email')}
-        </Button>
+        </button>
 
         {primaryUnConfirmed ? (
-          <Button variant="inline" onClick={resendPrimaryConfirmation} className="subButton">
+          <button onClick={resendPrimaryConfirmation} className="inline subButton">
             {t('account:email-resend-confirmation', 'Re-send email confirmation')}
-          </Button>
+          </button>
         ) : null}
 
         {aliasArray.map((alias) => (
@@ -110,9 +109,9 @@ export const EmailAddresses = ({
           onChange={onChangeEmailAlias}
           value={emailAlias}
         />
-        <Button variant="primary" className="actionInline" onClick={onAddEmailAlias}>
+        <button className="primary actionInline" onClick={onAddEmailAlias}>
           {t('account:add-email', 'Add Email')}
-        </Button>
+        </button>
         {emailAliasError ? <span className="errorText">{emailAliasError}</span> : null}
         <div className="contextCopy">
           <Trans i18nKey="account:additional-email-disclaimer">

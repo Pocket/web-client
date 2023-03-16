@@ -1,5 +1,4 @@
 import { css } from 'linaria'
-import { Button } from 'components/buttons/button'
 import { useTranslation } from 'next-i18next'
 
 const pocketAppsStyle = css`
@@ -22,38 +21,35 @@ const RssLinks = ({ userName }) => {
       <label htmlFor="something" className="connectionLabel">
         {t('account:rss-view-unread', 'View RSS feed of unread items')}
       </label>
-      <Button
+      <a
         href={unreadLink}
-        variant="secondary"
-        className="button actionInline"
+        className="button secondary actionInline"
         target="_blank"
         rel="noopener noreferrer">
         {t('account:rss-open-feed', 'Open Feed')}
-      </Button>
+      </a>
 
       <label htmlFor="something" className="connectionLabel">
         {t('account:rss-view-archived', 'View RSS feed of archived items')}
       </label>
-      <Button
+      <a
         href={readLink}
-        variant="secondary"
-        className="button actionInline"
+        className="button secondary actionInline"
         target="_blank"
         rel="noopener noreferrer">
         {t('account:rss-open-feed', 'Open Feed')}
-      </Button>
+      </a>
 
       <label htmlFor="something" className="connectionLabel">
         {t('account:rss-view-all', 'View RSS feed of all items')}
       </label>
-      <Button
+      <a
         href={allLink}
-        variant="secondary"
-        className="button actionInline"
+        className="button secondary actionInline"
         target="_blank"
         rel="noopener noreferrer">
         {t('account:rss-open-feed', 'Open Feed')}
-      </Button>
+      </a>
       <div className="helperText full">
         {t('account:rss-feed-helper', 'Your RSS feeds are private and password protected.')}
       </div>      
@@ -73,9 +69,9 @@ const ChangeUsername = ({ onChangeUsername }) => {
         </div>
       </label>              
       <div className="actionInline">
-        <Button id="rss-change-username" variant="primary" onClick={onChangeUsername}>
+        <button id="rss-change-username" className="primary" onClick={onChangeUsername}>
           {t('account:profile-change-username', 'Change Username')}
-        </Button>              
+        </button>              
       </div>            
     </div>
   )

@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { cancelDeleteUserTag } from 'containers/saves/tagged/tagged-page.state'
@@ -39,9 +38,9 @@ export const ConfirmTagDelete = () => {
             you want to proceed?
           </Trans>
         </em>
-        <Button type="submit" data-cy="delete-tag-confirm" onClick={confirmTagDelete}>
+        <button className="primary" type="submit" data-cy="delete-tag-confirm" onClick={confirmTagDelete}>
           <Trans i18nKey="confirm:delete">Delete</Trans>
-        </Button>
+        </button>
       </ModalFooter>
     </Modal>
   )

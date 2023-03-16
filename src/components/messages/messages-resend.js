@@ -1,6 +1,5 @@
 import { css } from 'linaria'
 import { Trans } from 'next-i18next'
-import { Button } from 'components/buttons/button'
 
 const messageWrapper = css`
   font-family: var(--fontSansSerif);
@@ -33,9 +32,9 @@ export const MessageResend = ({ email, resendAction, status }) => {
         {email}
       </p>
 
-      <Button onClick={resendAction}>
+      <button className="primary" onClick={resendAction}>
         <Trans i18nKey="messages:resend-confirmation">Resend Confirmation</Trans>
-      </Button>
+      </button>
     </div>
   )
 }

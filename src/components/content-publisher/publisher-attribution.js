@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
-import { Button } from 'components/buttons/button'
 import { getPublishedDate } from 'common/utilities/date-time/date-time'
 import { breakpointLargeHandset } from 'common/constants'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
@@ -66,14 +65,14 @@ function FollowPublisher({ leadIn, text, url, handleImpression, handleClick }) {
     <VisibilitySensor onVisible={onVisible}>
       <div className="publisher-follow" data-cy="follow-publisher">
         <p>{leadIn}</p>
-        <Button
-          variant="secondary"
+        <a
+          className="secondary"
           onClick={onClick}
           href={url}
           /* eslint-disable-next-line */
           target="_blank">
           {text}
-        </Button>
+        </a>
       </div>
     </VisibilitySensor>
   )

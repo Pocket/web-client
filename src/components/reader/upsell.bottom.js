@@ -23,7 +23,6 @@ import TypeDark from 'static/images/reader-upsells/Type-dark.svg'
 import TypeLight from 'static/images/reader-upsells/Type-light.svg'
 import TypeSepia from 'static/images/reader-upsells/Type-sepia.svg'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
-import { Button } from 'components/buttons/button'
 import { breakpointTinyTablet } from 'common/constants'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { PREMIUM_URL } from 'common/constants'
@@ -224,13 +223,14 @@ const LibraryAd = () => (
     </div>
 
     <div className={buttonWrapper}>
-      <Button
+      <a
         id="reader.bottom.premium.library"
         data-cy="reader-bottom-premium"
+        className="primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
-      </Button>
+      </a>
     </div>
   </>
 )
@@ -266,13 +266,14 @@ const SearchAd = () => (
     </div>
 
     <div className={buttonWrapper}>
-      <Button
+      <a
         id="reader.bottom.premium.search"
         data-cy="reader-bottom-premium"
+        className="primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
-      </Button>
+      </a>
     </div>
   </>
 )
@@ -308,13 +309,14 @@ const FocusedAd = () => (
     </div>
 
     <div className={buttonWrapper}>
-      <Button
+      <a
         id="reader.bottom.premium.focused"
         data-cy="reader-bottom-premium"
+        className="primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
-      </Button>
+      </a>
     </div>
   </>
 )
@@ -350,13 +352,14 @@ const TypeAd = () => (
     </div>
 
     <div className={buttonWrapper}>
-      <Button
+      <a
         id="reader.bottom.premium.type"
         data-cy="reader-bottom-premium"
+        className="primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
-      </Button>
+      </a>
     </div>
   </>
 )
@@ -392,13 +395,14 @@ const BigDiamondAd = () => (
     </div>
 
     <div className={buttonWrapper}>
-      <Button
+      <a
         id="reader.bottom.premium.features"
         data-cy="reader-bottom-premium"
+        className="primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
-      </Button>
+      </a>
     </div>
   </>
 )
@@ -434,13 +438,14 @@ const HighlightAd = () => (
     </div>
 
     <div className={buttonWrapper}>
-      <Button
+      <a
         id="reader.bottom.premium.highlights"
         data-cy="reader-bottom-premium"
+        className="primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
-      </Button>
+      </a>
     </div>
   </>
 )
@@ -476,13 +481,14 @@ const TagsAd = () => (
     </div>
 
     <div className={buttonWrapper}>
-      <Button
+      <a
         id="reader.bottom.premium.tags"
         data-cy="reader-bottom-premium"
+        className="primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
-      </Button>
+      </a>
     </div>
   </>
 )

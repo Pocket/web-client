@@ -1,7 +1,6 @@
 import { css } from 'linaria'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { cancelEditUserTag } from 'containers/saves/tagged/tagged-page.state'
@@ -63,9 +62,9 @@ export const ConfirmTagEdit = () => {
             want to proceed?
           </Trans>
         </em>
-        <Button disabled={!value.trim()} type="submit" data-cy="edit-tag-confirm" onClick={confirmTagEdit}>
+        <button className="primary" disabled={!value.trim()} type="submit" data-cy="edit-tag-confirm" onClick={confirmTagEdit}>
           <Trans i18nKey="confirm:confirm">Confirm</Trans>
-        </Button>
+        </button>
       </ModalFooter>
     </Modal>
   )

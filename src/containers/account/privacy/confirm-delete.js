@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Button } from 'components/buttons/button'
 import { css } from 'linaria'
 
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
@@ -109,16 +108,16 @@ export const AccountDeleteModal = () => {
         <div>{deleteError ? <span className="errorText">{error}</span> : null}</div>
       </ModalBody>
       <ModalFooter className={deleteFooterStyle}>
-        <Button variant="secondary" data-cy="delete-account-confirm" onClick={cancelDeleteAccount}>
+        <button className="secondary" data-cy="delete-account-confirm" onClick={cancelDeleteAccount}>
           {t('account:cancel-delete', 'Get me out of here!')}
-        </Button>
-        <Button
-          variant="brand"
+        </button>
+        <button
+          className="brand"
           data-cy="delete-account-confirm"
           onClick={confirmDeleteAccount}
           disabled={!deleteCheck}>
           {t('account:delete-account-confirm', 'Delete Account')}
-        </Button>
+        </button>
       </ModalFooter>
     </Modal>
   )

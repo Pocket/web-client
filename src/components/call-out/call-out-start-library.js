@@ -1,6 +1,5 @@
 import React from 'react'
 import { css } from 'linaria'
-import { Button } from 'components/buttons/button'
 import { CrossIcon } from 'components/icons/CrossIcon'
 import { SIGNUP_URL } from 'common/constants'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
@@ -116,9 +115,9 @@ export function CallOutStartLibrary({
     <VisibilitySensor onVisible={onVisible}>
       <aside className={wrapper}>
         <div>
-          <Button onClick={handleCloseClick} className="close-button" variant="inline">
+          <button onClick={handleCloseClick} className="close-button inline">
             <CrossIcon />
-          </Button>
+          </button>
 
           <h6>
             {t(
@@ -146,13 +145,13 @@ export function CallOutStartLibrary({
               articles right in Pocket. Read them when you’re free in a quiet, calm space.
             </Trans>
           </p>
-          <Button
-            className="start-button"
+          <a
+            className="primary start-button"
             target="_blank"
             onClick={handleButtonClick}
             href={`${SIGNUP_URL}?utm_source=explore&utm_medium=web`}>
             {t('discover:start-your-library', 'Start your library')}
-          </Button>
+          </a>
         </div>
       </aside>
     </VisibilitySensor>

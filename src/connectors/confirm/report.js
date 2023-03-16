@@ -1,4 +1,3 @@
-import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -101,13 +100,14 @@ export const ConfirmReport = () => {
       </ModalBody>
       {success ? null : (
         <ModalFooter>
-          <Button
+          <vutton
+            className="primary"
             disabled={submitDisabled}
             type="submit"
             data-cy="submit-report-feedback"
             onClick={confirmReport}>
             <Trans i18nKey="confirm:report-feedback">Report Feedback</Trans>
-          </Button>
+          </vutton>
         </ModalFooter>
       )}
     </Modal>

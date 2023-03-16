@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Button } from 'components/buttons/button'
 import { css } from 'linaria'
 
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
@@ -133,16 +132,16 @@ const PreClear = ({ cancelClearAccount, confirmClearAccount, setClearChecked, cl
         <div>{clearError ? <span className="errorText">{error}</span> : null}</div>
       </ModalBody>
       <ModalFooter className={clearFooterStyle}>
-        <Button variant="secondary" data-cy="clear-account-confirm" onClick={cancelClearAccount}>
+        <button className="secondary" data-cy="clear-account-confirm" onClick={cancelClearAccount}>
           {t('account:cancel-clear', 'Get me out of here!')}
-        </Button>
-        <Button
-          variant="brand"
+        </button>
+        <button
+          className="brand"
           data-cy="clear-account-confirm"
           onClick={confirmClearAccount}
           disabled={!clearCheck}>
           {t('account:clear-account-confirm', 'Clear Account')}
-        </Button>
+        </button>
       </ModalFooter>
     </>
   )
@@ -157,9 +156,9 @@ const PostClear = ({ cancelClearAccount }) => {
       </ModalBody>
       <ModalFooter className={clearFooterStyle}>
         <div></div>
-        <Button variant="primary" data-cy="clear-account-finalize" onClick={cancelClearAccount}>
+        <button className="primary" data-cy="clear-account-finalize" onClick={cancelClearAccount}>
           Continue
-        </Button>
+        </button>
       </ModalFooter>
     </>
   )

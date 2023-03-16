@@ -9,7 +9,6 @@ import { KEYS, PREMIUM_URL } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { ProfileIcon } from 'components/icons/ProfileIcon'
 import { PremiumIcon } from 'components/icons/PremiumIcon'
-import { Button } from 'components/buttons/button'
 import { AvatarButton } from 'components/avatar/avatar-button'
 import { PopupMenu, PopupMenuGroup, PopupMenuItem } from 'components/popup-menu/popup-menu'
 import { bottomTooltip } from 'components/tooltip/tooltip'
@@ -237,18 +236,17 @@ const GlobalNavAccount = ({
         data-cy="login-link">
         <Trans i18nKey="nav:log-in">Log in</Trans>
       </a>
-      <Button
+      <a
         href="https://getpocket.com/signup?src=navbar"
         id="global-nav-signup-link"
-        className={signupLinkStyle}
-        variant="secondary"
+        className={cx(signupLinkStyle, "secondary")}
         onClick={handleSignupCase}
         data-cy="signup-link">
         <ProfileIcon />
         <span className="label">
           <Trans i18nKey="nav:sign-up">Sign up</Trans>
         </span>
-      </Button>
+      </a>
     </div>
   ) : (
     <div ref={menuRef}>

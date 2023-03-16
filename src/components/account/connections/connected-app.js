@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Button } from 'components/buttons/button'
 import { css } from 'linaria'
 import { useTranslation } from 'next-i18next'
 
@@ -30,9 +29,9 @@ export const ConnectedApp = ({ slug, name, api_id, platform_id, onRevoke, Fallba
         {FallbackImage && !validImage ? <FallbackImage className="serviceIcon" /> : null}
         {name}
       </label>
-      <Button variant="secondary" className="actionInline" onClick={onClick}>
+      <button className="actionInline secondary" onClick={onClick}>
         {t('account:revoke-access', 'Revoke Access')}
-      </Button>
+      </button>
     </>
   )
 }

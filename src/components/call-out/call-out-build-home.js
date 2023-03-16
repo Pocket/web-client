@@ -1,6 +1,5 @@
 import React from 'react'
 import { css } from 'linaria'
-import { Button } from 'components/buttons/button'
 import { breakpointLargeTablet } from 'common/constants' // 1023
 import { breakpointMediumTablet } from 'common/constants' // 959
 import { breakpointTinyTablet } from 'common/constants' // 719
@@ -145,13 +144,13 @@ export function CallOutBuildHome({ source = 'explore' }) {
             in a distraction-free environment.
           </Trans>
         </p>
-        <Button
+        <a
           id="explore-signup-hero" // needed for snowplow identifier
-          variant="brand"
+          className="brand"
           target="_blank"
           href={`${SIGNUP_URL}?utm_source=${source}&utm_medium=web`}>
           {t('call-out:sign-up', 'Sign Up')}
-        </Button>
+        </a>
       </aside>
       <div className="img-wrapper">
         <img src={laptopImg.src} alt="" />

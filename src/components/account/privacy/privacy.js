@@ -1,5 +1,4 @@
 import { css } from 'linaria'
-import { Button } from 'components/buttons/button'
 import { useTranslation } from 'next-i18next'
 const privacyStyle = css`
   padding-bottom: 3rem;
@@ -41,7 +40,7 @@ export const Privacy = ({ accountClear, accountDelete, rssProtect, rssProtected 
           <div className="helperText">Export your Pocket data in a portable HTML file</div>
         </label>
         <div className="actionInline">
-          <Button variant="secondary">Export data</Button>
+          <button className="secondary">Export data</button>
         </div>
         */}
 
@@ -55,9 +54,9 @@ export const Privacy = ({ accountClear, accountDelete, rssProtect, rssProtected 
           </div>
         </label>
         <div className="actionInline">
-          <Button variant="secondary" onClick={accountClear}>
+          <button className="secondary" onClick={accountClear}>
             {t('account:privacy-clear-data', 'Clear data')}
-          </Button>
+          </button>
         </div>
 
         <label htmlFor="something" className="connectionLabel labelWithContext">
@@ -70,9 +69,9 @@ export const Privacy = ({ accountClear, accountDelete, rssProtect, rssProtected 
           </div>
         </label>
         <div className="actionInline">
-          <Button variant="secondary" onClick={accountDelete}>
+          <button className="secondary" onClick={accountDelete}>
             {t('account:privacy-delete-account', 'Delete Account')}
-          </Button>
+          </button>
         </div>
       </div>
     </section>

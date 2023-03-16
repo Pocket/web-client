@@ -1,6 +1,5 @@
 import { css } from 'linaria'
 import { Avatar } from './avatar'
-import { Button } from 'components/buttons/button'
 import { useTranslation } from 'next-i18next'
 
 const profileStyle = css`
@@ -44,12 +43,12 @@ export const Profile = ({
         <div className="contentDisplay">@{userName}</div>
 
         <div className="actionBlock">
-          <Button variant="primary" className="action" onClick={onChangeUsername}>
+          <button className="primary action" onClick={onChangeUsername}>
             {t('account:profile-change-username', 'Change Username')}
-          </Button>
-          <Button variant="primary" className="action" onClick={onChangePassword}>
+          </button>
+          <button className="primary action" onClick={onChangePassword}>
             {t('account:profile-chage-password', 'Change Password')}
-          </Button>
+          </button>
         </div>
       </div>
     </section>

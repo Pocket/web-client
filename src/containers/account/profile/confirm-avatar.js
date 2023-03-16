@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { css } from 'linaria'
-import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { confirmAvatarUpdate } from './profile.state'
@@ -140,14 +139,15 @@ export const AvatarModal = () => {
             {t('account:choose-file', 'Choose file')}
             <input id="file-upload" type="file" onChange={onChange} />
           </label>
-          <Button
+          <button
+            className="primary"
             type="submit"
             data-cy="avatar-confirm"
             onClick={confirmAvatar}
             autoFocus={true}
             disabled={!imagePreview}>
             {t('account:save', 'Save')}
-          </Button>
+          </button>
         </div>
       </ModalFooter>
     </Modal>

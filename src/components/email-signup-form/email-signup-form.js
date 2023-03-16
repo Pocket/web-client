@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import isEmail from 'validator/lib/isEmail'
 import { css, cx } from 'linaria'
 import Recaptcha from 'react-google-recaptcha'
-import { Button } from 'components/buttons/button'
 import { TextInput } from 'components/form-fields/text-input'
 import { breakpointSmallHandset, breakpointLargeHandset } from 'common/constants'
 
@@ -175,13 +174,13 @@ const EmailSignupForm = ({
         />
       </div>
       <div className={cx(buttonStyle, buttonClassName)}>
-        <Button
+        <button
           type="submit"
           disabled={isProcessing || isRecaptchaProcessing}
-          variant={buttonVariant}
+          className={buttonVariant}
           data-cy="submit-button">
           {isProcessing || isRecaptchaProcessing ? buttonLabelProcessing : buttonLabel}
-        </Button>
+        </button>
       </div>
       {showCheckbox ? (
         <div className={cx(checkboxStyle)} data-cy="checkbox">

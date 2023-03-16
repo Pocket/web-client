@@ -1,4 +1,3 @@
-import { Button } from 'components/buttons/button'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { mutationBulkConfirm, mutationBulkCancel } from 'connectors/items/mutations-bulk.state'
@@ -54,13 +53,14 @@ export const ConfirmArchive = () => {
       </ModalBody>
       {batchStart ? null : (
         <ModalFooter>
-          <Button
+          <button
+            className="primary"
             type="submit"
             data-cy="archive-modal-confirm"
             onClick={confirmArchive}
             autoFocus={true}>
             {archiveTitle}
-          </Button>
+          </button>
         </ModalFooter>
       )}
     </Modal>

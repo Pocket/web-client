@@ -7,7 +7,6 @@ import { GlobalFooter } from 'components/global-footer/global-footer'
 import { PageContainer } from 'components/page-container/page-container'
 import { breakpointLargeHandset } from 'common/constants' // 599
 import GlobalNav from 'connectors/global-nav/global-nav'
-import { Button } from 'components/buttons/button'
 
 const pageContainerStyle = css`
   display: flex;
@@ -106,9 +105,9 @@ export default function ErrorPage({ statusCode }) {
             <p className={messageStyle} data-cy="error-message">
               {errorMessage || getMessageForCode(statusCode)}
             </p>
-            <Button size="large" href="https://help.getpocket.com/">
+            <a className="primary large" href="https://help.getpocket.com/">
               Contact Support
-            </Button>
+            </a>
           </div>
         </div>
       </PageContainer>

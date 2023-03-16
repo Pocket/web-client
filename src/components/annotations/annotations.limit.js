@@ -2,7 +2,6 @@
 import { css } from 'linaria'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { PremiumIcon } from 'components/icons/PremiumIcon'
-import { Button } from 'components/buttons/button'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { Trans, useTranslation } from 'next-i18next'
@@ -75,9 +74,9 @@ export const ModalLimitNotice = ({ showModal, closeModal, onVisible }) => {
         </VisibilitySensor>
       </ModalBody>
       <ModalFooter>
-        <Button type="submit" onClick={closeModal}>
+        <button className="primary" type="submit" onClick={closeModal}>
           <Trans i18nKey="annotations:close">Close</Trans>
-        </Button>
+        </button>
       </ModalFooter>
     </Modal>
   )

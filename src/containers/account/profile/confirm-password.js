@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Button } from 'components/buttons/button'
 import { css } from 'linaria'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
@@ -135,9 +134,9 @@ export const PasswordModal = () => {
             'You will need to log in again after you update your password.'
           )}
         </div>
-        <Button type="submit" data-cy="update-password-confirm" onClick={confirmPassword}>
+        <button className="primary" type="submit" data-cy="update-password-confirm" onClick={confirmPassword}>
           {t('account:update-password', 'Update Password')}
-        </Button>
+        </button>
       </ModalFooter>
     </Modal>
   )

@@ -6,7 +6,6 @@ import { PremiumIcon } from 'components/icons/PremiumIcon'
 import { MenuIcon } from 'components/icons/MenuIcon'
 import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 import { Drawer } from 'components/drawer/drawer'
-import { Button } from 'components/buttons/button'
 import { DEFAULT_LINKS } from 'components/global-nav/links/global-nav-links'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 
@@ -169,15 +168,14 @@ const DrawerHeader = ({ handleClose }) => {
 
   return (
     <div className={drawerHeaderStyles}>
-      <Button
+      <button
         aria-label={t('nav:close-the-pocket-mobile-menu', 'Close the Pocket mobile menu')}
         data-cy="mobile-menu"
         data-tooltip={t('nav:close', 'Close')}
         onClick={handleClose}
-        variant="inline"
-        className={cx(iconStyle, bottomTooltip)}>
+        className={cx(iconStyle, bottomTooltip, "inline")}>
         <ChevronLeftIcon />
-      </Button>
+      </button>
     </div>
   )
 }
@@ -277,15 +275,14 @@ const GlobalNavMobileMenu = ({
 
   return (
     <>
-      <Button
+      <button
         data-cy="nav-hamburger"
         onClick={handleOpen}
         aria-label={t('nav:open-the-pocket-mobile-menu', 'Open the Pocket mobile menu')}
         data-tooltip={t('nav:open', 'Open')}
-        variant="inline"
-        className={cx(iconStyle, toggleClass, bottomTooltip)}>
+        className={cx(iconStyle, toggleClass, bottomTooltip, "inline")}>
         <MenuIcon />
-      </Button>
+      </button>
       <Drawer
         appRootSelector={appRootSelector}
         isOpen={isOpen}
