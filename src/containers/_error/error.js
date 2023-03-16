@@ -105,7 +105,7 @@ export default function ErrorPage({ statusCode }) {
             <p className={messageStyle} data-cy="error-message">
               {errorMessage || getMessageForCode(statusCode)}
             </p>
-            <a className="primary large" href="https://help.getpocket.com/">
+            <a className="button primary large" href="https://help.getpocket.com/">
               Contact Support
             </a>
           </div>

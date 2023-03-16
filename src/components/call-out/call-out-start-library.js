@@ -146,7 +146,7 @@ export function CallOutStartLibrary({
             </Trans>
           </p>
           <a
-            className="primary start-button"
+            className="button primary start-button"
             target="_blank"
             onClick={handleButtonClick}
             href={`${SIGNUP_URL}?utm_source=explore&utm_medium=web`}>

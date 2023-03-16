@@ -239,7 +239,7 @@ const GlobalNavAccount = ({
       <a
         href="https://getpocket.com/signup?src=navbar"
         id="global-nav-signup-link"
-        className={cx(signupLinkStyle, "secondary")}
+        className={cx(signupLinkStyle, "button secondary")}
         onClick={handleSignupCase}
         data-cy="signup-link">
         <ProfileIcon />

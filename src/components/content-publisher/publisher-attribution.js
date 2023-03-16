@@ -66,7 +66,7 @@ function FollowPublisher({ leadIn, text, url, handleImpression, handleClick }) {
       <div className="publisher-follow" data-cy="follow-publisher">
         <p>{leadIn}</p>
         <a
-          className="secondary"
+          className="button secondary"
           onClick={onClick}
           href={url}
           /* eslint-disable-next-line */

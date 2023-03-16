@@ -226,7 +226,7 @@ const LibraryAd = () => (
       <a
         id="reader.bottom.premium.library"
         data-cy="reader-bottom-premium"
-        className="primary"
+        className="button primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
@@ -269,7 +269,7 @@ const SearchAd = () => (
       <a
         id="reader.bottom.premium.search"
         data-cy="reader-bottom-premium"
-        className="primary"
+        className="button primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
@@ -312,7 +312,7 @@ const FocusedAd = () => (
       <a
         id="reader.bottom.premium.focused"
         data-cy="reader-bottom-premium"
-        className="primary"
+        className="button primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
@@ -355,7 +355,7 @@ const TypeAd = () => (
       <a
         id="reader.bottom.premium.type"
         data-cy="reader-bottom-premium"
-        className="primary"
+        className="button primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
@@ -398,7 +398,7 @@ const BigDiamondAd = () => (
       <a
         id="reader.bottom.premium.features"
         data-cy="reader-bottom-premium"
-        className="primary"
+        className="button primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
@@ -441,7 +441,7 @@ const HighlightAd = () => (
       <a
         id="reader.bottom.premium.highlights"
         data-cy="reader-bottom-premium"
-        className="primary"
+        className="button primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
@@ -484,7 +484,7 @@ const TagsAd = () => (
       <a
         id="reader.bottom.premium.tags"
         data-cy="reader-bottom-premium"
-        className="primary"
+        className="button primary"
         target="_blank"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
