@@ -1,20 +1,11 @@
 export const shareableListActions = {
-  // this is fake, I just wanted to mock one out - will replace with real event soon
-  'shareable-list.make-list-public': {
+  'shareable-list.share': {
     eventType: 'engagement',
     entityTypes: ['ui', 'shareableList'],
     eventData: {
       uiType: 'button'
     },
-    expects: [
-      'shareableListExternalId',
-      'userId',
-      'slug',
-      'title',
-      'status',
-      'moderationStatus',
-      'createdAt'
-    ],
-    description: 'Fired when a user makes a list public'
+    expects: ['shareableListExternalId', 'slug', 'title', 'status', 'createdAt'],
+    description: 'Fired when a creator clicks the Share button on a list'
   }
 }
