@@ -290,9 +290,9 @@ EmailSignupForm.propTypes = {
   buttonLabel: PropTypes.string,
 
   /**
-   * Variant style for the submit button. See the Button component's `variant` prop.
+   * Variant style for the submit button.
    */
-  buttonVariant: Button.propTypes.variant,
+  buttonVariant: PropTypes.string,
 
   /**
    * Text to display if invalid email is typed in.
