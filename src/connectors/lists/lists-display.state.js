@@ -1,8 +1,10 @@
 import { LIST_ITEMS_SUCCESS } from 'actions'
-import { LIST_ITEMS_SET_NO_IMAGE } from '../../actions'
+import { LIST_ITEMS_SET_NO_IMAGE } from 'actions'
+import { HYDRATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
+export const hydrateListItems = (itemsById) => ({ type: LIST_ITEMS_SUCCESS, itemsById })
 export const setNoImage = (id) => ({ type: LIST_ITEMS_SET_NO_IMAGE, id })
 
 /** ITEM REDUCERS
@@ -29,6 +31,12 @@ export const listsDisplayReducers = (state = {}, action) => {
       const item = state[id]
       const itemDraft = { ...item, noImage: true }
       return { ...state, [id]: itemDraft }
+    }
+
+    // it represents the state used to build the page on the server.
+    case HYDRATE: {
+      const { listsDisplay } = action.payload
+      return listsDisplay
     }
 
     default:
