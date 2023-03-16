@@ -29,7 +29,7 @@ export const ConnectedApp = ({ slug, name, api_id, platform_id, onRevoke, Fallba
         {FallbackImage && !validImage ? <FallbackImage className="serviceIcon" /> : null}
         {name}
       </label>
-      <button className="actionInline secondary" onClick={onClick}>
+      <button className="secondary actionInline" onClick={onClick}>
         {t('account:revoke-access', 'Revoke Access')}
       </button>
     </>
