@@ -228,6 +228,7 @@ const LibraryAd = () => (
         data-cy="reader-bottom-premium"
         className="button primary"
         target="_blank"
+        rel="noreferrer"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>
@@ -271,6 +272,7 @@ const SearchAd = () => (
         data-cy="reader-bottom-premium"
         className="button primary"
         target="_blank"
+        rel="noreferrer"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>
@@ -314,6 +316,7 @@ const FocusedAd = () => (
         data-cy="reader-bottom-premium"
         className="button primary"
         target="_blank"
+        rel="noreferrer"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>
@@ -345,7 +348,8 @@ const TypeAd = () => (
           id="reader.bottom.premium.type"
           dataCy="reader-bottom-premium"
           href={premiumURL}
-          target="_blank">
+          target="_blank"
+          rel="noreferrer">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
@@ -357,6 +361,7 @@ const TypeAd = () => (
         data-cy="reader-bottom-premium"
         className="button primary"
         target="_blank"
+        rel="noreferrer"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>
@@ -388,7 +393,8 @@ const BigDiamondAd = () => (
           id="reader.bottom.premium.features"
           dataCy="reader-bottom-premium"
           href={premiumURL}
-          target="_blank">
+          target="_blank"
+          rel="noreferrer">
           <Trans i18nKey="reader:pocket-premium">Pocket Premium</Trans>
         </ArrowLink>
       </p>
@@ -400,6 +406,7 @@ const BigDiamondAd = () => (
         data-cy="reader-bottom-premium"
         className="button primary"
         target="_blank"
+        rel="noreferrer"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>
@@ -443,6 +450,7 @@ const HighlightAd = () => (
         data-cy="reader-bottom-premium"
         className="button primary"
         target="_blank"
+        rel="noreferrer"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>
@@ -486,6 +494,7 @@ const TagsAd = () => (
         data-cy="reader-bottom-premium"
         className="button primary"
         target="_blank"
+        rel="noreferrer"
         href={premiumURL}>
         <Trans i18nKey="reader:upgrade">Upgrade</Trans>
       </a>

@@ -148,6 +148,7 @@ export function CallOutStartLibrary({
           <a
             className="button primary start-button"
             target="_blank"
+            rel="noreferrer"
             onClick={handleButtonClick}
             href={`${SIGNUP_URL}?utm_source=explore&utm_medium=web`}>
             {t('discover:start-your-library', 'Start your library')}
