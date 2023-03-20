@@ -1,3 +1,10 @@
+## [1.82.1](https://github.com/Pocket/web-client/compare/v1.82.0...v1.82.1) (2023-03-20)
+
+
+### Bug Fixes
+
+* **public-list:** ensure correct avatar and username displays ([9f1de0e](https://github.com/Pocket/web-client/commit/9f1de0e3fc92e626d06a26b0713099b99ef4d047))
+
 # [1.82.0](https://github.com/Pocket/web-client/compare/v1.81.14...v1.82.0) (2023-03-20)
 
 
