@@ -270,6 +270,7 @@ export const PopupMenu = ({
   onOpen,
   onClose,
   popperOptions,
+  className,
   forceShow
 }) => {
   const viewport = useViewport() // if viewport not available, we're probably SSR and so set the default to the
@@ -333,6 +334,7 @@ export const PopupMenu = ({
         screenReaderLabel={screenReaderLabel}
         handleClose={handleModalClose}
         isOpen={isMenuOpen}
+        className={className}
         forceMobile
         data-cy="modal">
         {getContent()}
@@ -342,7 +344,7 @@ export const PopupMenu = ({
     return (
       <Popup
         trigger={trigger}
-        className={popupStyle}
+        className={cx(popupStyle, className)}
         popperOptions={popperOptions}
         forceShow={forceShow}
         onClose={handleModalClose}
@@ -403,6 +405,11 @@ PopupMenu.propTypes = {
    * popperJS instance. See: https://popper.js.org/docs/v2/constructors/
    */
   popperOptions: PropTypes.object,
+
+  /**
+   * CSS class name if styles need to be provided/overridden.
+   */
+  className: PropTypes.string,
 
   /**
    * Set to true to have the popup shown. Mostly intended for debugging purposes

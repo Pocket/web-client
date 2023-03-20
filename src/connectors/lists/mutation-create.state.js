@@ -1,6 +1,8 @@
 import { put, takeLatest, take, race, call, select } from 'redux-saga/effects'
 import { createShareableList } from 'common/api/mutations/createShareableList'
 
+import { LIST_ITEMS_SUCCESS } from 'actions'
+
 import { LIST_CREATE_REQUEST } from 'actions'
 import { LIST_CREATE_CONFIRM } from 'actions'
 import { LIST_CREATE_CANCEL } from 'actions'
@@ -84,7 +86,10 @@ function* itemsCreateList({ id }) {
 
     const newList = yield call(createShareableList, { listData, listItemData })
     const externalId = newList.externalId
-    return yield put({ type: LIST_CREATE_SUCCESS, newList, externalId, listTitle: title })
+    const itemsById = { [externalId]: newList }
+
+    yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
+    return yield put({ type: LIST_CREATE_SUCCESS, externalId, listTitle: title })
   } catch {
     return yield put({ type: LIST_CREATE_FAILURE })
   }

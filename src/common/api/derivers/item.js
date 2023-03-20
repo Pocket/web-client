@@ -73,6 +73,7 @@ import { BASE_URL } from 'common/constants'
  * @param isReadable — true if the content type is video, image, or article
  * @param isSyndicated — true if this article is syndicated by pocket
  * @param isCollection — ?? Is this needed?
+ * @param isUserList - TODO: will result in an added icon on item card
  * @param hasAnnotations — for filtering by annotation/highlights
  *
  * Analytics Properties
@@ -202,6 +203,7 @@ export function deriveItemData({
     isSyndicated: syndicated({ item }),
     isReadable: isReadable({ item }),
     isCollection: isCollection({ item }),
+    isUserList: isUserList({ item }),
     isInternalItem: isInternalItem({ item, node, itemEnrichment, status: node?.status }),
     fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
@@ -339,11 +341,18 @@ export function readUrl({ item, node, itemEnrichment, status }) {
   const external = externalUrl({ item, itemEnrichment })
   const readable = isReadable({ item })
   const collection = isCollection({ item })
+  const userList = isUserList({ item })
 
   // It's a collection, it should always open the original
   if (collection) {
     const slug = collectionSlug({ item })
     return `/collections/${slug}`
+  }
+
+  // Always open the shared user list
+  if (userList) {
+    const path = publicListPath({ item })
+    return path
   }
 
   // If item has no status if should have a false readURL
@@ -397,12 +406,21 @@ function isCollection({ item }) {
   return !!urlToTest.match(pattern)
 }
 
+function isUserList({ item }) {
+  const urlToTest = item?.resolvedUrl
+  if (!urlToTest) return false
+
+  const pattern = /.+?getpocket\.com\/(?:[a-z]{2}(?:-[a-zA-Z]{2})?\/)?sharedlists\/(?!\?).+/gi
+  return !!urlToTest.match(pattern)
+}
+
 function isInternalItem({ item, node, itemEnrichment, status }) {
   const itemIsCollection = isCollection({ item })
   const itemIsSyndicated = syndicated({ item })
+  const itemIsUserList = isUserList({ item })
   const itemReadUrl = readUrl({ item, node, itemEnrichment, status })
 
-  if (itemIsCollection || itemIsSyndicated) return true
+  if (itemIsCollection || itemIsSyndicated || itemIsUserList) return true
 
   if (!itemReadUrl) return false
 
@@ -416,4 +434,10 @@ function collectionSlug({ item }) {
   // We test for collection with the resolved and should use it to construct the slug
   const url = item?.resolvedUrl
   return url.substring(url.lastIndexOf('/') + 1)
+}
+
+function publicListPath({ item }) {
+  // We test for shared list with the resolved and should use it to construct the path
+  const url = item?.resolvedUrl
+  return url.substring(url.lastIndexOf('/sharedlists'))
 }

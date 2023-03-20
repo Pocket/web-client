@@ -1,3 +1,38 @@
+## [1.81.13](https://github.com/Pocket/web-client/compare/v1.81.12...v1.81.13) (2023-03-20)
+
+
+### Bug Fixes
+
+* **PublicList:** add report list ([4219db2](https://github.com/Pocket/web-client/commit/4219db2975ec91190c8cbfec28e9bf5adc06697b))
+
+## [1.81.12](https://github.com/Pocket/web-client/compare/v1.81.11...v1.81.12) (2023-03-20)
+
+
+### Bug Fixes
+
+* **lists:** adding custom status toggle to individual lists ([a970620](https://github.com/Pocket/web-client/commit/a970620764c7d0c5733cc8bab13f4912d37deda1))
+
+## [1.81.11](https://github.com/Pocket/web-client/compare/v1.81.10...v1.81.11) (2023-03-20)
+
+
+### Bug Fixes
+
+* **create-list:** show error when creating a list with a dupe title ([d7c2950](https://github.com/Pocket/web-client/commit/d7c295008b15ff493c9506d0775274bc934d5dc1))
+
+## [1.81.10](https://github.com/Pocket/web-client/compare/v1.81.9...v1.81.10) (2023-03-20)
+
+
+### Bug Fixes
+
+* **public-lists:** updating request and state management of public list page ([2de9327](https://github.com/Pocket/web-client/commit/2de932788f6d91ee5a773d0dea5cdfe5e2c83b62))
+
+## [1.81.9](https://github.com/Pocket/web-client/compare/v1.81.8...v1.81.9) (2023-03-20)
+
+
+### Bug Fixes
+
+* **saves:** saved public list opens to original ([44f1bc1](https://github.com/Pocket/web-client/commit/44f1bc16a3f799c9a30a8a4863e62d6655c65390))
+
 ## [1.81.8](https://github.com/Pocket/web-client/compare/v1.81.7...v1.81.8) (2023-03-15)
 
 

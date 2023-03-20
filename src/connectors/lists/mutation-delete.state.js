@@ -52,13 +52,12 @@ export const mutationListDeleteSagas = [
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-const getListExternalIds = (state) => state.pageListsIds
 const getIndividualListIds = (state, id) => state.pageIndividualListIds[id]
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 function* deleteList({ id }) {
-  const { cancel, confirm } = yield race({
+  const { cancel } = yield race({
     confirm: take(LIST_DELETE_CONFIRM),
     cancel: take(LIST_DELETE_CANCEL)
   })
@@ -67,10 +66,7 @@ function* deleteList({ id }) {
 
   try {
     const { externalId: deletedId } = yield call(deleteShareableList, { id })
-    const previousIds = yield select(getListExternalIds)
-    const externalIds = previousIds.filter((e) => e !== deletedId)
-
-    yield put({ type: LIST_DELETE_SUCCESS, deletedId, externalIds })
+    yield put({ type: LIST_DELETE_SUCCESS, deletedId })
   } catch (error) {
     yield put({ type: LIST_DELETE_FAILURE, error })
   }
