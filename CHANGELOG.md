@@ -1,3 +1,10 @@
+# [1.82.0](https://github.com/Pocket/web-client/compare/v1.81.14...v1.82.0) (2023-03-20)
+
+
+### Features
+
+* **gtm:** added scripts to head ([1e138d3](https://github.com/Pocket/web-client/commit/1e138d3a4e157c688be8804a8fb4d31a26b4257f))
+
 ## [1.81.14](https://github.com/Pocket/web-client/compare/v1.81.13...v1.81.14) (2023-03-20)
 
 
