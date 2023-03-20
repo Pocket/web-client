@@ -123,6 +123,12 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
 
   const subLinks = [
     {
+      name: 'lists',
+      icon: <PlaylistPlayIcon />,
+      label: 'All Lists',
+      url: inListsExperiment ? '/lists' : ''
+    },
+    {
       name: 'archive',
       icon: <ArchiveIcon />,
       label: t('nav:archive', 'Archive'),
@@ -151,12 +157,6 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
       icon: <VideoIcon />,
       label: t('nav:videos', 'Videos'),
       url: '/saves/videos'
-    },
-    {
-      name: 'lists',
-      icon: <PlaylistPlayIcon />,
-      label: 'All Lists',
-      url: inListsExperiment ? '/lists' : ''
     },
     {
       name: 'tags',

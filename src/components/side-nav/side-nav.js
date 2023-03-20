@@ -2,9 +2,10 @@ import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 
 import { HomeIcon } from 'components/icons/HomeIcon'
+import { SaveIcon } from 'components/icons/SaveIcon'
+import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 import { ChevronUpIcon } from 'components/icons/ChevronUpIcon'
 import { DiscoverIcon } from 'components/icons/DiscoverIcon'
-import { ListViewIcon } from 'components/icons/ListViewIcon'
 import { css, cx } from 'linaria'
 import { CollectionsIcon } from 'components/icons/CollectionsIcon'
 
@@ -12,7 +13,6 @@ import { useInView } from 'react-intersection-observer'
 
 import { FiltersSideNav } from './filters'
 import { AccountSideNav } from './account'
-import { BookmarkIcon } from './bookmark-icon'
 
 export const sideNavWrapper = css`
   position: relative;
@@ -131,6 +131,10 @@ export const sideNavItem = css`
     height: 24px;
     padding-right: 10px;
     margin-top: 0;
+
+    &.active {
+      display: none;
+    }
   }
 
   .beta {
@@ -151,6 +155,15 @@ export const sideNavItem = css`
   &.active {
     color: var(--color-navCurrentTabText);
     background-color: var(--color-navCurrentTab);
+
+    .side-nav-icon{
+      &.active {
+        display: block;
+      }
+      &.inactive {
+        display: none;
+      }
+    }
   }
 `
 
@@ -160,7 +173,6 @@ export function SideNav({
   tag,
   pinned,
   isDisabled,
-  newSaveCount,
   trackMenuClick,
   inListsExperiment,
   handleCreateList
@@ -200,8 +212,9 @@ export function SideNav({
         </Link>
         <Link href="/saves?src=sidebar">
           <button className={subActive('unread')} onClick={clickEvent} data-cy="side-nav-saves">
-            <ListViewIcon className="side-nav-icon" /> {t('nav:saves', 'Saves')}
-            <BookmarkIcon newSaveCount={newSaveCount} />
+            <SaveIcon className="side-nav-icon inactive" />
+            <SaveFilledIcon className="side-nav-icon active" />
+            {' '}{t('nav:saves', 'Saves')}
           </button>
         </Link>
         <Link href="/explore?src=sidebar">
