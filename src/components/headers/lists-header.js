@@ -8,6 +8,7 @@ import { SaveListButton } from 'components/content-saving/save-list'
 import { ListStatus } from 'components/shareable-lists/list-status'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
 import { ListStatusToggle } from 'components/shareable-lists/list-status-toggle'
+import { breakpointSmallTablet } from 'common/constants'
 
 const listHeaderStyles = css`
   padding-bottom: 22px;
@@ -46,6 +47,21 @@ const listHeaderStyles = css`
       height: 1.875rem;
       padding: 0 12px;
       cursor: pointer;
+    }
+  }
+
+  ${breakpointSmallTablet} {
+    &.list-individual {
+      flex-direction: column;
+
+      .create-sort {
+        margin-top: 12px;
+      }
+
+      .headline a {
+        display: block;
+        margin: 8px 0 0 0;
+      }
     }
   }
 `
@@ -120,7 +136,7 @@ export const ListIndividualHeader = ({
   const isPublic = status === 'PUBLIC'
 
   return (
-    <header className={cx(savesHeaderStyle, listHeaderStyles)}>
+    <header className={cx(savesHeaderStyle, listHeaderStyles, 'list-individual')}>
       <div className="headline">
         <h1 className="pageTitle" data-cy="page-title">
           {title}
