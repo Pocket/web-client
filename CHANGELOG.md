@@ -1,3 +1,71 @@
+# [1.82.0](https://github.com/Pocket/web-client/compare/v1.81.14...v1.82.0) (2023-03-20)
+
+
+### Features
+
+* **gtm:** added scripts to head ([1e138d3](https://github.com/Pocket/web-client/commit/1e138d3a4e157c688be8804a8fb4d31a26b4257f))
+
+## [1.81.14](https://github.com/Pocket/web-client/compare/v1.81.13...v1.81.14) (2023-03-20)
+
+
+### Bug Fixes
+
+* **createShareableListEntity:** fix typo ([2608029](https://github.com/Pocket/web-client/commit/26080291cf6e1f6e4ddfadcb3f8abd7fff06e0b8))
+* **list-individual:** add engagement event for sharing a list ([7a9227b](https://github.com/Pocket/web-client/commit/7a9227b11092e72fa4d5e9bf7fdfae2b676b0766))
+* **ListIndividual:** convert milliseconds to seconds ([7a88534](https://github.com/Pocket/web-client/commit/7a885349f610123901322ac884b08762f6b217b4))
+* **ListIndividual:** parse createdAt & updatedAt for analytics data ([ec6daa8](https://github.com/Pocket/web-client/commit/ec6daa85a2fb1d291b70930022386d5e5f8b63cc))
+* **ListIndividual:** update import, add add'l analytics data ([83bc921](https://github.com/Pocket/web-client/commit/83bc921978e2f76433828722db754aefcbfe4e89))
+* **shareable-list-item:** update schema, remove & add some properties ([5c7a8d2](https://github.com/Pocket/web-client/commit/5c7a8d2e62bae248c993e6ae4dbbe067438198d0))
+* **shareable-list:** remove userId, update schema version, reformat comment ([69555ee](https://github.com/Pocket/web-client/commit/69555eea6010f7fd0754aaff2dd42e61cb3d8837))
+* **shareableListActions:** add moderationStatus to expectations ([c9478dc](https://github.com/Pocket/web-client/commit/c9478dc3ac5472c652af38750b08dd375d741463))
+* **snowplow actions:** add mock event for shareableListActions ([05e7863](https://github.com/Pocket/web-client/commit/05e7863eabc6439d350093b20796d9ffb37dfdeb))
+* **snowplow state:** add shareableList entity and expectations ([24c08e5](https://github.com/Pocket/web-client/commit/24c08e5378c59952fea6484927676f99804e1915))
+* **snowplow.state:** update expectation types for shareable lists & items ([ea39cc1](https://github.com/Pocket/web-client/commit/ea39cc1a3c233efc244e6d952dddf14742773c75))
+* **snowplow:** add new createShareableListEntity ([5eb0e04](https://github.com/Pocket/web-client/commit/5eb0e04b79af4f45ca2205362a070f0c4b9969c8))
+* **snowplow:** add new shareableListItem entity ([9278cfa](https://github.com/Pocket/web-client/commit/9278cfa6926c2d707be81031bc3daab9e3dae778))
+
+## [1.81.13](https://github.com/Pocket/web-client/compare/v1.81.12...v1.81.13) (2023-03-20)
+
+
+### Bug Fixes
+
+* **PublicList:** add report list ([4219db2](https://github.com/Pocket/web-client/commit/4219db2975ec91190c8cbfec28e9bf5adc06697b))
+
+## [1.81.12](https://github.com/Pocket/web-client/compare/v1.81.11...v1.81.12) (2023-03-20)
+
+
+### Bug Fixes
+
+* **lists:** adding custom status toggle to individual lists ([a970620](https://github.com/Pocket/web-client/commit/a970620764c7d0c5733cc8bab13f4912d37deda1))
+
+## [1.81.11](https://github.com/Pocket/web-client/compare/v1.81.10...v1.81.11) (2023-03-20)
+
+
+### Bug Fixes
+
+* **create-list:** show error when creating a list with a dupe title ([d7c2950](https://github.com/Pocket/web-client/commit/d7c295008b15ff493c9506d0775274bc934d5dc1))
+
+## [1.81.10](https://github.com/Pocket/web-client/compare/v1.81.9...v1.81.10) (2023-03-20)
+
+
+### Bug Fixes
+
+* **public-lists:** updating request and state management of public list page ([2de9327](https://github.com/Pocket/web-client/commit/2de932788f6d91ee5a773d0dea5cdfe5e2c83b62))
+
+## [1.81.9](https://github.com/Pocket/web-client/compare/v1.81.8...v1.81.9) (2023-03-20)
+
+
+### Bug Fixes
+
+* **saves:** saved public list opens to original ([44f1bc1](https://github.com/Pocket/web-client/commit/44f1bc16a3f799c9a30a8a4863e62d6655c65390))
+
+## [1.81.8](https://github.com/Pocket/web-client/compare/v1.81.7...v1.81.8) (2023-03-15)
+
+
+### Bug Fixes
+
+* **lists:** adding user to query and other polish ([cb4dfba](https://github.com/Pocket/web-client/commit/cb4dfba7400650fd0c61e75ce7e326b8599935f4))
+
 ## [1.81.7](https://github.com/Pocket/web-client/compare/v1.81.6...v1.81.7) (2023-03-15)
 
 

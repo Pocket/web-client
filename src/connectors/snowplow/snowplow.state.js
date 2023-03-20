@@ -14,6 +14,8 @@ import { createUiEntity } from 'connectors/snowplow/entities'
 import { createRecommendationEntity } from 'connectors/snowplow/entities'
 import { createCorpusRecommendationEntity } from 'connectors/snowplow/entities'
 import { createReportEntity } from 'connectors/snowplow/entities'
+import { createShareableListItemEntity } from 'connectors/snowplow/entities'
+import { createShareableListEntity } from 'connectors/snowplow/entities'
 import { createSlateEntity } from 'connectors/snowplow/entities'
 import { createSlateLineupEntity } from 'connectors/snowplow/entities'
 import { createFeatureFlagEntity } from 'connectors/snowplow/entities'
@@ -128,6 +130,8 @@ const entityBuilders = {
   recommendation: createRecommendationEntity,
   corpusRecommendation: createCorpusRecommendationEntity,
   report: createReportEntity,
+  shareableListItem: createShareableListItemEntity,
+  shareableList: createShareableListEntity,
   slate: createSlateEntity,
   slateLineup: createSlateLineupEntity
 }
@@ -150,10 +154,26 @@ const expectationTypes = {
   slateExperiment: 'string',
   displayName: 'string',
   description: 'string',
-  corpusRecommendationId: 'string'
+  corpusRecommendationId: 'string',
+  shareableListItemExternalId: 'string',
+  shareableListExternalId: 'string',
+  slug: 'string',
+  title: 'string',
+  status: 'string',
+  moderationStatus: 'string',
+  moderatedBy: 'string',
+  moderationReason: 'string',
+  createdAt: 'number',
+  updatedAt: 'number',
+  givenUrl: 'string',
+  excerpt: 'string',
+  imageUrl: 'string',
+  authors: 'object',
+  publisher: 'string',
+  sortOrder: 'number'
 }
 
-export function validateSnowplowExpectations({ identifier, expects, data}) {
+export function validateSnowplowExpectations({ identifier, expects, data }) {
   const isDevBuild = process.env.SHOW_DEV === 'included'
 
   // Make sure we are not missing any entities
@@ -179,7 +199,7 @@ export function validateSnowplowExpectations({ identifier, expects, data}) {
   } catch (err) {
     if (isDevBuild) return console.warn(identifier, data, err.message)
     Sentry.withScope((scope) => {
-      scope.setContext('data', { identifier, ...data})
+      scope.setContext('data', { identifier, ...data })
       Sentry.captureMessage(err)
     })
     return false
@@ -227,7 +247,7 @@ export function buildSnowplowCustomEvent({ identifier, data }) {
   return { event, entities, expects }
 }
 
-export function* fireSnowplowEvent({ identifier, data}) {
+export function* fireSnowplowEvent({ identifier, data }) {
   yield call(waitForInitialization)
 
   // Check events are valid

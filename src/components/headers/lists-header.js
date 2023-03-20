@@ -6,6 +6,8 @@ import { FiltersAltIcon } from 'components/icons/FiltersAltIcon'
 import Avatar from 'components/avatar/avatar'
 import { SaveListButton } from 'components/content-saving/save-list'
 import { ListStatus } from 'components/shareable-lists/list-status'
+import { IosShareIcon } from 'components/icons/IosShareIcon'
+import { ListStatusToggle } from 'components/shareable-lists/list-status-toggle'
 
 const listHeaderStyles = css`
   padding-bottom: 22px;
@@ -117,8 +119,6 @@ export const ListIndividualHeader = ({
   const url = `/sharedlists/${externalId}/${slug}`
   const isPublic = status === 'PUBLIC'
 
-  const setOptionValue = (e) => handleSetStatus(e.currentTarget.value)
-
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles)}>
       <div className="headline">
@@ -132,18 +132,11 @@ export const ListIndividualHeader = ({
       <div className="create-sort">
         {isPublic ? (
           <button onClick={handleShare} className="tiny share">
-            Share list
+            <IosShareIcon /> Share list
           </button>
         ) : null}
 
-        <select onChange={setOptionValue} value={status}>
-          <option value="PUBLIC">
-            Public
-          </option>
-          <option value="PRIVATE">
-            Private
-          </option>
-        </select>
+        <ListStatusToggle status={status} handleSetStatus={handleSetStatus} />
 
         <button onClick={handleEdit} className="filter tiny outline">
           <FiltersAltIcon /> Settings

@@ -7,6 +7,14 @@ import { BASE_URL } from 'common/constants'
 import ErrorPage from 'containers/_error/error.js'
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
+import { ReportIcon } from 'components/icons/ReportIcon'
+
+function buildReportEmail(url) {
+  const subject = `Report List: ${url}`
+  const body = 'Please state your reason for reporting this list:'
+
+  return `mailto:reportlist@getpocket.com?subject=${subject}&body=${body}`
+}
 
 export const PublicList = ({ listId, slug, statusCode }) => {
   const dispatch = useDispatch()
@@ -18,12 +26,11 @@ export const PublicList = ({ listId, slug, statusCode }) => {
   if (statusCode) return <ErrorPage statusCode={statusCode} />
   if (!list) return null
 
-  const { title, description, listItems } = list
-  const showLists = listItems?.length
+  const { title, description, listItemIds, user, imageUrl } = list
+  const listCount = listItemIds?.length
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
   const url = `${BASE_URL}/sharedlists/${listId}/${slug}`
-  const image = listItems?.[0]?.imageUrl
-  const metaData = { title, description, url, image }
+  const metaData = { title, description, url, image: imageUrl }
 
   const onSave = () => {
     // snowplow event here
@@ -35,6 +42,12 @@ export const PublicList = ({ listId, slug, statusCode }) => {
     dispatch(mutationDeleteTransitionalItem(saveItemId, slug))
   }
 
+  const emailUrl = buildReportEmail(url)
+  const onReport = () => {
+    // snowplow event here
+    window.location.href = emailUrl
+  }
+
   const saveAction = saveItemId ? onUnSave : onSave
 
   return (
@@ -43,30 +56,26 @@ export const PublicList = ({ listId, slug, statusCode }) => {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <Layout
-        title={title}
-        metaData={metaData}
-        forceWebView={true}
-      >
+      <Layout title={title} metaData={metaData}>
         <ListPublicHeader
           title={title}
           description={description}
-          // avatarUrl={avatarUrl}
-          // userName={userName}
-          listCount={listItems?.length}
+          avatarUrl={user?.avatarUrl}
+          userName={user?.userName}
+          listCount={listCount}
           isAuthenticated={isAuthenticated}
           saveStatus={saveStatus}
           handleSaveAll={saveAction}
         />
 
-        {showLists
-          ? listItems.map((item) => (
-            <PublicListCard
-              key={item.externalId}
-              listId={listId}
-              {...item}
-            />
-          )) : null}
+        {listCount
+          ? listItemIds.map((externalId) => (
+              <PublicListCard key={externalId} listId={listId} externalId={externalId} />
+            ))
+          : null}
+        <button className="tiny outline" data-cy="report-list" onClick={onReport}>
+          <ReportIcon /> Report List
+        </button>
       </Layout>
     </>
   )
