@@ -61,7 +61,7 @@ export const PublicList = ({ listId, slug, statusCode }) => {
           title={title}
           description={description}
           avatarUrl={user?.avatarUrl}
-          userName={user?.userName}
+          userName={user?.username}
           listCount={listCount}
           isAuthenticated={isAuthenticated}
           saveStatus={saveStatus}
