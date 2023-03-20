@@ -65,7 +65,10 @@ function* itemsCreateList({ id }) {
 
   try {
     const { title, description } = confirm
-    const listData = { title, description }
+    const listData = {
+      title: title.trim(),
+      description: description.trim()
+    }
 
     let listItemData = null
 
