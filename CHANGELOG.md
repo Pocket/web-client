@@ -1,3 +1,17 @@
+## [1.81.10](https://github.com/Pocket/web-client/compare/v1.81.9...v1.81.10) (2023-03-20)
+
+
+### Bug Fixes
+
+* **public-lists:** updating request and state management of public list page ([2de9327](https://github.com/Pocket/web-client/commit/2de932788f6d91ee5a773d0dea5cdfe5e2c83b62))
+
+## [1.81.9](https://github.com/Pocket/web-client/compare/v1.81.8...v1.81.9) (2023-03-20)
+
+
+### Bug Fixes
+
+* **saves:** saved public list opens to original ([44f1bc1](https://github.com/Pocket/web-client/commit/44f1bc16a3f799c9a30a8a4863e62d6655c65390))
+
 ## [1.81.8](https://github.com/Pocket/web-client/compare/v1.81.7...v1.81.8) (2023-03-15)
 
 

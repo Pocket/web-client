@@ -1,26 +1,23 @@
 import { cx } from 'linaria'
-import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { TransitionalActions } from 'components/item/actions/transitional'
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
+import { setNoImage } from 'connectors/lists/lists-display.state'
 
-export const PublicListCard = ({
-  listId,
-  externalId,
-  title,
-  excerpt,
-  imageUrl,
-  publisher,
-  url
-}) => {
-  const [thumbnail, setThumbnail] = useState(imageUrl)
+export const PublicListCard = ({ listId, externalId }) => {
+  const dispatch = useDispatch()
 
-  if (!externalId || !listId) return null
+  const item = useSelector((state) => state.listsDisplay[externalId])
 
-  const onImageFail = () => setThumbnail('')
+  if (!item || !listId) return null
+
+  const { title, excerpt, publisher, url } = item
+  const itemImage = item?.noImage ? '' : item?.imageUrl
+
+  const onImageFail = () => dispatch(setNoImage(externalId))
 
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)}>
@@ -29,7 +26,7 @@ export const PublicListCard = ({
         itemId={externalId}
         title={title}
         excerpt={excerpt}
-        itemImage={thumbnail}
+        itemImage={itemImage}
         publisher={publisher}
         openUrl={url}
         onImageFail={onImageFail}
@@ -47,9 +44,7 @@ export function ActionsTransitional({ id, position }) {
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const list = useSelector((state) => state.pagePublicList.listItems)
-
-  const { url } = list.find(item => item.externalId === id)
+  const { url } = useSelector((state) => state.listsDisplay[id])
   const saveItemId = useSelector((state) => state.itemsTransitions[id])
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
 

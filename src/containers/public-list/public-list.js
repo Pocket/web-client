@@ -18,12 +18,11 @@ export const PublicList = ({ listId, slug, statusCode }) => {
   if (statusCode) return <ErrorPage statusCode={statusCode} />
   if (!list) return null
 
-  const { title, description, listItems, user } = list
-  const showLists = listItems?.length
+  const { title, description, listItemIds, user, imageUrl } = list
+  const listCount = listItemIds?.length
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
   const url = `${BASE_URL}/sharedlists/${listId}/${slug}`
-  const image = listItems?.[0]?.imageUrl
-  const metaData = { title, description, url, image }
+  const metaData = { title, description, url, image: imageUrl }
 
   const onSave = () => {
     // snowplow event here
@@ -52,18 +51,18 @@ export const PublicList = ({ listId, slug, statusCode }) => {
           description={description}
           avatarUrl={user?.avatarUrl}
           userName={user?.userName}
-          listCount={listItems?.length}
+          listCount={listCount}
           isAuthenticated={isAuthenticated}
           saveStatus={saveStatus}
           handleSaveAll={saveAction}
         />
 
-        {showLists
-          ? listItems.map((item) => (
+        {listCount
+          ? listItemIds.map((externalId) => (
             <PublicListCard
-              key={item.externalId}
+              key={externalId}
               listId={listId}
-              {...item}
+              externalId={externalId}
             />
           )) : null}
       </Layout>
