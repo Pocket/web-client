@@ -13,6 +13,7 @@ export const CreateEditShareableList = ({
   handleSubmit,
   handleNameChange = () => {},
   handleDescriptionChange = () => {},
+  error,
   appRootSelector
 }) => {
   const [listNameValue, setListNameValue] = useState(listName)
@@ -51,6 +52,7 @@ export const CreateEditShareableList = ({
           maxRows={4}
           characterLimit={100}
           showCharacterLimit={true}
+          error={error}
         />
         <TextArea
           labelText="Description (optional)"

@@ -5,6 +5,7 @@ import { wrapper } from 'store'
 import { END } from 'redux-saga'
 import { fetchPublicListHydrationData } from 'containers/public-list/public-list.state'
 import { hydrateList } from 'containers/public-list/public-list.state'
+import { hydrateListItems } from 'connectors/lists/lists-display.state'
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
@@ -22,20 +23,22 @@ export const getServerSideProps = wrapper.getServerSideProps(
       // Hydrating initial state with an async request. This will block the
       // page from loading.
       const response = await fetchPublicListHydrationData({ slug, listId })
+      const { itemsById, publicListInfo } = response || {}
 
       // No article found
-      if (!response) {
+      if (!publicListInfo) {
         return { props: defaultProps, notFound: true }
       }
 
       // Moderated and taken down
-      if (response?.moderationStatus === 'HIDDEN') {
+      if (publicListInfo?.moderationStatus === 'HIDDEN') {
         return { props: { ...defaultProps, statusCode: 403 } }
       }
 
       // Since ssr will not wait for side effects to resolve this dispatch
       // needs to be pure as well.
-      dispatch(hydrateList(response))
+      dispatch(hydrateList(publicListInfo))
+      dispatch(hydrateListItems(itemsById))
 
       // end the saga
       dispatch(END)
