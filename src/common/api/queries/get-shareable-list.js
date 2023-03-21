@@ -17,6 +17,7 @@ const getShareableListQuery = gql`
         title
         imageUrl
         externalId
+        publisher
         excerpt
         authors
         sortOrder

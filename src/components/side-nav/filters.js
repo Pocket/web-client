@@ -7,8 +7,9 @@ import { TagIcon } from 'components/icons/TagIcon'
 import { ArticleIcon } from 'components/icons/ArticleIcon'
 import { ArchiveIcon } from 'components/icons/ArchiveIcon'
 import { VideoIcon } from 'components/icons/VideoIcon'
-import { PlaylistPlayIcon } from 'components/icons/PlaylistPlayIcon'
 import { AddIcon } from 'components/icons/AddIcon'
+import { ListViewAltIcon } from 'components/icons/ListViewAltIcon'
+import { ListViewAltFilledIcon } from 'components/icons/ListViewAltFilledIcon'
 
 import { sideNavHeader } from './side-nav'
 import { sideNavActionHeader } from './side-nav'
@@ -26,6 +27,30 @@ export function FiltersSideNav({
 
   return (
     <>
+      {inListsExperiment ? (
+        <>
+          <div className={sideNavActionHeader}>
+            <h4 className={sideNavHeader}>Lists</h4>
+            <button
+              className={buttonReset}
+              onClick={handleCreateList}
+              data-cy="side-nav-create-list">
+              <AddIcon className={bottomTooltip} data-tooltip="Create List" />
+            </button>
+          </div>
+          <Link href="/lists">
+            <button
+              className={subActive('lists')}
+              onClick={clickEvent}
+              data-cy="side-nav-all-lists">
+              <ListViewAltIcon className="side-nav-icon inactive" />
+              <ListViewAltFilledIcon className="side-nav-icon active" />
+              {' '}All Lists
+            </button>
+          </Link>
+        </>
+      ) : null}
+
       <h4 className={sideNavHeader}>{t('nav:filters', 'Filters')}</h4>
 
       <Link href="/saves/archive">
@@ -63,28 +88,6 @@ export function FiltersSideNav({
           <VideoIcon className="side-nav-icon" /> {t('nav:videos', 'Videos')}
         </button>
       </Link>
-
-      {inListsExperiment ? (
-        <>
-          <div className={sideNavActionHeader}>
-            <h4 className={sideNavHeader}>Lists</h4>
-            <button
-              className={buttonReset}
-              onClick={handleCreateList}
-              data-cy="side-nav-create-list">
-              <AddIcon className={bottomTooltip} data-tooltip="Create List" />
-            </button>
-          </div>
-          <Link href="/lists">
-            <button
-              className={subActive('lists')}
-              onClick={clickEvent}
-              data-cy="side-nav-all-lists">
-              <PlaylistPlayIcon className="side-nav-icon" /> All Lists
-            </button>
-          </Link>
-        </>
-      ) : null}
 
       <h4 className={sideNavHeader}>{t('nav:tags', 'Tags')}</h4>
       <Link href="/saves/tags">

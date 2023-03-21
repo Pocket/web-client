@@ -1,3 +1,42 @@
+## [1.82.8](https://github.com/Pocket/web-client/compare/v1.82.7...v1.82.8) (2023-03-21)
+
+
+### Bug Fixes
+
+* **saves:** adding create list button to saves header ([7d5ebfd](https://github.com/Pocket/web-client/commit/7d5ebfdb83651335b9bf7017a251f37f5eb88434))
+
+## [1.82.7](https://github.com/Pocket/web-client/compare/v1.82.6...v1.82.7) (2023-03-21)
+
+
+### Bug Fixes
+
+* **head:** remove data-cy attributes from meta tags to assist unfurling ([4f10bf3](https://github.com/Pocket/web-client/commit/4f10bf3fce2ed5c677b50171508442c81da90a21))
+
+## [1.82.6](https://github.com/Pocket/web-client/compare/v1.82.5...v1.82.6) (2023-03-21)
+
+
+### Bug Fixes
+
+* **home:** capture error in sentry ([e03a32b](https://github.com/Pocket/web-client/commit/e03a32bb2007c6cc2362796f2ae05e150abe26d9))
+* **home:** pass locale to topic selector ([fd1bf0a](https://github.com/Pocket/web-client/commit/fd1bf0a4cddd6f640055b7ae08c83b84c97c1584))
+
+## [1.82.5](https://github.com/Pocket/web-client/compare/v1.82.4...v1.82.5) (2023-03-21)
+
+
+### Bug Fixes
+
+* **individual-list:** adding publisher to query ([adc5940](https://github.com/Pocket/web-client/commit/adc594031c435d1456832ee49028c82fa50989e1))
+
+## [1.82.4](https://github.com/Pocket/web-client/compare/v1.82.3...v1.82.4) (2023-03-21)
+
+
+### Bug Fixes
+
+* **sidebar:** remove unneeded space in line name ([267ef5c](https://github.com/Pocket/web-client/commit/267ef5cf76ec6a533187bd606acb81cf829637a7))
+* **sidebar:** update sidebar icons and active styles ([dcbb087](https://github.com/Pocket/web-client/commit/dcbb087be85df392d3ff3152ddc871917ea74474))
+* **sidebar:** update snapshot to match whitespace changes ([478d65b](https://github.com/Pocket/web-client/commit/478d65bb94b7e66fbf6aa6d66755a40a7443be02))
+* **sidebar:** update the icon in the mobile sidebar for lists ([0ce2e2d](https://github.com/Pocket/web-client/commit/0ce2e2d8a3d8d2603633295bf9cb94465d38d3ec))
+
 ## [1.82.3](https://github.com/Pocket/web-client/compare/v1.82.2...v1.82.3) (2023-03-21)
 
 

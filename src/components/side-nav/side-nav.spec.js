@@ -24,7 +24,6 @@ describe('SideNav', () => {
     isLoggedIn: true,
     pinned: ['home', 'space'],
     tag: '_untagged_',
-    newSaveCount: 0,
     flagsReady: true,
     trackMenuClick: handleClick
   }
