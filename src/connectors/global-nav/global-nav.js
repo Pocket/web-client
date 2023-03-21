@@ -15,7 +15,7 @@ import GlobalNavBulkMutations from './global-nav-bulk-mutations'
 
 import { HomeIcon } from 'components/icons/HomeIcon'
 import { DiscoverIcon } from 'components/icons/DiscoverIcon'
-import { ListViewIcon } from 'components/icons/ListViewIcon'
+import { SaveIcon } from 'components/icons/SaveIcon'
 import { SearchIcon } from 'components/icons/SearchIcon'
 import { AddIcon } from 'components/icons/AddIcon'
 import { EditIcon } from 'components/icons/EditIcon'
@@ -103,7 +103,7 @@ const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
       id: 'global-nav-saves-link',
       label: t('nav:saves', 'Saves'),
       url: '/saves?src=navbar',
-      icon: <ListViewIcon />
+      icon: <SaveIcon />
     },
     {
       name: 'discover',
