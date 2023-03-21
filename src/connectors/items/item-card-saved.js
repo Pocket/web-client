@@ -164,6 +164,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   const position = useSelector((state) => state.pageSavedIds.indexOf(id))
   const item = useSelector((state) => state.itemsDisplay[id])
   const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
+  const hasLists = useSelector((state) => state.pageListsIds)
 
   if (!itemSaved || !item) return null
   const { isFavorite, isArchived, tags} = itemSaved //prettier-ignore
@@ -202,7 +203,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   }
   const actionAddToList = () => {
     // snowplow event here
-    const listAction = (true) ? mutateListAddItem : mutateListCreate
+    const listAction = hasLists.length ? mutateListAddItem : mutateListCreate
     dispatch(listAction(id))
   }
 
