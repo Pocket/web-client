@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { breakpointSmallHandset } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { breakpointLargeTablet } from 'common/constants'
+import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { ListSort } from 'components/list-sort/list-sort'
 
@@ -41,6 +42,11 @@ export const savesHeaderStyle = css`
     flex-grow: 1;
   }
 
+  .create-list {
+    flex-grow: 1;
+    text-align: right;
+  }
+
   .list-sort {
     vertical-align: top;
 
@@ -66,7 +72,16 @@ export const savesHeaderStyle = css`
   }
 `
 
-export const SavesHeader = ({ subset, filter, title, sortOrder, handleNewest, handleOldest }) => {
+export const SavesHeader = ({
+  subset,
+  filter,
+  title,
+  sortOrder,
+  handleNewest,
+  handleOldest,
+  inListsExperiment,
+  handleCreateList
+}) => {
   const { t } = useTranslation()
 
   const translatedHeaders = {
@@ -85,6 +100,15 @@ export const SavesHeader = ({ subset, filter, title, sortOrder, handleNewest, ha
         {translatedHeaders[title]}
       </h1>
       <FilterMenu subset={subset} filter={filter} />
+
+      {subset !== 'tag-page' && inListsExperiment ? (
+        <div className="create-list">
+          <button onClick={handleCreateList} className="tiny">
+            <PlaylistAddIcon /> Create List
+          </button>
+        </div>
+      ) : null}
+
       {subset !== 'tag-page' ? (
         <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
       ) : null}

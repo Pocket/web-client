@@ -70,8 +70,8 @@ function* listUpdate({ id }) {
 
     const data = {
       externalId: id,
-      description,
-      title
+      description: description.trim(),
+      title: title.trim()
     }
 
     const response = yield call(updateShareableList, data)

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { css } from 'linaria'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { AddIcon } from 'components/icons/AddIcon'
+import { breakpointMediumHandset } from 'common/constants'
 
 const footerStyles = css`
   display: flex;
@@ -10,6 +11,10 @@ const footerStyles = css`
   .create {
     margin-left: 0;
     color: var(--color-actionPrimary);
+
+    ${breakpointMediumHandset} {
+      padding: 0;
+    }
   }
 `
 

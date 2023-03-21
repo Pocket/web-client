@@ -23,6 +23,8 @@ import { ConfirmTagDelete } from 'connectors/confirm/tag-delete'
 import { ConfirmAddToList } from 'connectors/confirm/add-to-list'
 import { CreateListModal } from 'connectors/confirm/create-list'
 
+import { mutateListCreate } from 'connectors/lists/mutation-create.state'
+
 export const Saves = (props) => {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -40,6 +42,7 @@ export const Saves = (props) => {
   const featureState = useSelector((state) => state.features)
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const total = useSelector((state) => state.pageSavedInfo.totalCount)
+  const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
 
   // Derived Values
   const shouldRender = userStatus !== 'pending'
@@ -52,6 +55,7 @@ export const Saves = (props) => {
   const handleNewest = () => dispatch(savedItemsSetSortOrder('DESC'))
   const handleOldest = () => dispatch(savedItemsSetSortOrder('ASC'))
   const handleRelevance = () => dispatch(savedItemsSetSortBy('RELEVANCE'))
+  const handleCreateList = () => dispatch(mutateListCreate())
 
   return (
     <Layout title={metaData.title} metaData={metaData} subset={subset} tag={tag}>
@@ -70,6 +74,8 @@ export const Saves = (props) => {
           handleOldest={handleOldest}
           isPremium={isPremium}
           handleRelevance={handleRelevance}
+          inListsExperiment={inListsExperiment}
+          handleCreateList={handleCreateList}
         />
         {flagsReady && shouldRender ? <SavedItems {...props} /> : null}
       </main>
