@@ -37,6 +37,7 @@ export const Item = (props) => {
     openUrl,
     fromPartner,
     topicName,
+    isUserList,
     tags,
     type,
 
@@ -130,6 +131,7 @@ export const Item = (props) => {
       <span className="media-block" ref={footerRef}>
         <CardMedia
           topicName={topicName}
+          isUserList={isUserList}
           image_src={itemImage}
           title={title}
           id={itemId}

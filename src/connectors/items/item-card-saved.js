@@ -97,7 +97,7 @@ export function ItemCard({
   /** ITEM DETAILS
   --------------------------------------------------------------- */
   const itemImage = item?.noImage ? '' : item?.thumbnail
-  const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner } = item //prettier-ignore
+  const { title, publisher, excerpt, timeToRead, isSyndicated, fromPartner, isUserList } = item //prettier-ignore
   const { tags } = itemSaved
 
   /** ITEM DIMENSIONS
@@ -139,6 +139,7 @@ export function ItemCard({
       clamp={true}
       type={type}
       visibleCount={visibleCount}
+      isUserList={isUserList}
       // Open Actions
       openUrl={openUrl}
       onOpen={onOpen}
