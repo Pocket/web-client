@@ -1,3 +1,10 @@
+## [1.82.3](https://github.com/Pocket/web-client/compare/v1.82.2...v1.82.3) (2023-03-21)
+
+
+### Bug Fixes
+
+* **lists:** update lists for mobile screens ([e232fb7](https://github.com/Pocket/web-client/commit/e232fb7f4afe9df15d7aa2b7f8588dfd07b9543f))
+
 ## [1.82.2](https://github.com/Pocket/web-client/compare/v1.82.1...v1.82.2) (2023-03-20)
 
 
