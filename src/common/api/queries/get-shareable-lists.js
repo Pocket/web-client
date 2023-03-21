@@ -9,6 +9,7 @@ const getShareableListsQuery = gql`
       status
       slug
       createdAt
+      updatedAt
       moderationStatus
       externalId
       listItems {

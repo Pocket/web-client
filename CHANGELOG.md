@@ -1,3 +1,10 @@
+## [1.82.12](https://github.com/Pocket/web-client/compare/v1.82.11...v1.82.12) (2023-03-21)
+
+
+### Bug Fixes
+
+* **lists:** adding most 3 recently created lists to sidebar ([6137a4d](https://github.com/Pocket/web-client/commit/6137a4df1172a20612fc629e2f80b91b3ed0bd4b))
+
 ## [1.82.11](https://github.com/Pocket/web-client/compare/v1.82.10...v1.82.11) (2023-03-21)
 
 
