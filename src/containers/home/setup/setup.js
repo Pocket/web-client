@@ -319,7 +319,7 @@ const TopicSelector = ({
           {!isReselect ? <h2>Welcome to Pocket!</h2> : null}
           <h3>Tell us what interests you...</h3>
           <p>
-            Pick the <strong>Topics</strong> you find interesting and we'll use these topics to find
+            Pick the <strong>Topics</strong> you find interesting and we‘ll use these topics to find
             you more stories.
           </p>
         </div>
@@ -331,18 +331,18 @@ const TopicSelector = ({
       </div>
       <div className="actions">
         {hasTopics || isReselect ? null : (
-          <button onClick={handleSkip} className="text" data-cy='onboarding-skip'>
+          <button onClick={handleSkip} className="text" data-cy="onboarding-skip">
             Skip
           </button>
         )}
         {isReselect ? (
-          <button onClick={handleCancel} className="text" data-cy='onboarding-cancel'>
+          <button onClick={handleCancel} className="text" data-cy="onboarding-cancel">
             Cancel
           </button>
         ) : null}
         <button
           onClick={handleContinue}
-          data-cy='onboarding-continue'
+          data-cy="onboarding-continue"
           disabled={!hasTopics}
           className={cx(!hasTopics && 'disabled')}>
           Continue
