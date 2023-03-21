@@ -214,7 +214,7 @@ export function SideNav({
           <button className={subActive('unread')} onClick={clickEvent} data-cy="side-nav-saves">
             <SaveIcon className="side-nav-icon inactive" />
             <SaveFilledIcon className="side-nav-icon active" />
-            {' '}{t('nav:saves', 'Saves')}
+            {t('nav:saves', 'Saves')}
           </button>
         </Link>
         <Link href="/explore?src=sidebar">
