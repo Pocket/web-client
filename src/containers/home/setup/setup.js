@@ -257,7 +257,7 @@ export const HomeSetup = () => {
 
   const handleContinue = () => {
     dispatch(sendSnowplowEvent('get-started.topic.continue'))
-    dispatch(finalizeTopics())
+    dispatch(finalizeTopics(locale))
   }
 
   const handleSkip = () => {
