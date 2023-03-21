@@ -38,7 +38,7 @@ export const setSetupStatus = (setupStatus) => ({ type: HOME_SETUP_SET_STATUS, s
 export const selectTopic = (topic) => ({ type: HOME_SETUP_SELECT_TOPIC, topic })
 export const deSelectTopic = (topic) => ({ type: HOME_SETUP_DESELECT_TOPIC, topic })
 export const cancelTopicSelection = () => ({ type: HOME_SETUP_CANCEL_SELECTION })
-export const finalizeTopics = () => ({ type: HOME_SETUP_FINALIZE_TOPICS })
+export const finalizeTopics = (locale) => ({ type: HOME_SETUP_FINALIZE_TOPICS, locale })
 export const reSelectTopics = () => ({ type: HOME_SETUP_RESELECT_TOPICS })
 export const resetSetupMoment = () => ({ type: HOME_SETUP_RESET })
 export const resetTopicsCookie = () => ({ type: HOME_COOKIE_RESET })
@@ -143,13 +143,16 @@ export const homeSetupSagas = [
   takeEvery(HOME_SETUP_DESELECT_TOPIC, deSelectTopics),
   takeEvery(HOME_SETUP_FINALIZE_TOPICS, finalizeTopicSelection),
   takeEvery(HOME_SET_STORED_USER_TOPICS, clearUserTopicsCookie),
-  takeEvery([
-    HOME_SETUP_SET_STATUS,
-    HOME_SETUP_RESET,
-    HOME_COOKIE_RESET,
-    HOME_SET_STORED_USER_TOPICS,
-    SET_TOPIC_SUCCESS
-  ], saveSettings),
+  takeEvery(
+    [
+      HOME_SETUP_SET_STATUS,
+      HOME_SETUP_RESET,
+      HOME_COOKIE_RESET,
+      HOME_SET_STORED_USER_TOPICS,
+      SET_TOPIC_SUCCESS
+    ],
+    saveSettings
+  ),
   takeEvery(HOME_COOKIE_RESET, storeUserTopics)
 ]
 
@@ -184,7 +187,7 @@ function* deSelectTopics(action) {
   yield put({ type: HOME_SETUP_UPDATE_TOPICS, userTopics })
 }
 
-function* finalizeTopicSelection() {
+function* finalizeTopicSelection({ locale }) {
   try {
     const topicSelectors = yield select(getAllTopicsSelectors) || []
     const currentTopics = yield select(getUserTopics) || []
@@ -198,7 +201,7 @@ function* finalizeTopicSelection() {
     const { errors } = yield call(setTopicPreferences, preferredTopics)
     if (errors) throw new Error(errors[0].message)
 
-    yield put({ type: SET_TOPIC_SUCCESS })
+    yield put({ type: SET_TOPIC_SUCCESS, locale })
   } catch (error) {
     yield put({ type: SET_TOPIC_FAILURE })
   }
