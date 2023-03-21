@@ -72,7 +72,6 @@ exports[`SideNav renders the Account side nav 1`] = `
           />
         </svg>
       </span>
-       
       nav:saves
     </button>
     <button
@@ -251,7 +250,6 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
           />
         </svg>
       </span>
-       
       nav:saves
     </button>
     <button
