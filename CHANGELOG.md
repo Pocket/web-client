@@ -1,3 +1,17 @@
+## [1.82.10](https://github.com/Pocket/web-client/compare/v1.82.9...v1.82.10) (2023-03-21)
+
+
+### Bug Fixes
+
+* **lists:** make publisher name a clickable link ([752e870](https://github.com/Pocket/web-client/commit/752e87047b5ca3f35481d98cea03f2103897eaa3))
+
+## [1.82.9](https://github.com/Pocket/web-client/compare/v1.82.8...v1.82.9) (2023-03-21)
+
+
+### Bug Fixes
+
+* **add/create list items:** if no thumbnail pass null instead of false ([dc5473a](https://github.com/Pocket/web-client/commit/dc5473aed5dd3ef1b73de1eda1eddb64a14756f5))
+
 ## [1.82.8](https://github.com/Pocket/web-client/compare/v1.82.7...v1.82.8) (2023-03-21)
 
 

@@ -25,6 +25,7 @@ export const IndividualListCard = ({ id, listId }) => {
         itemImage={itemImage}
         publisher={item.publisher}
         openUrl={item.url}
+        externalUrl={item.url}
         onImageFail={onImageFail}
         onItemInView={() => { }} // impression event here
         onOpenOriginalUrl={() => { }} // engagement event here

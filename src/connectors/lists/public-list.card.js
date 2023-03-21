@@ -29,6 +29,7 @@ export const PublicListCard = ({ listId, externalId }) => {
         itemImage={itemImage}
         publisher={publisher}
         openUrl={url}
+        externalUrl={url}
         onImageFail={onImageFail}
         onItemInView={() => { }} // impression event here
         onOpenOriginalUrl={() => { }} // engagement event here
