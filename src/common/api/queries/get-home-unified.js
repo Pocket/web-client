@@ -1,5 +1,6 @@
 import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
+import * as Sentry from '@sentry/nextjs'
 
 const getHomeQuery = gql`
   query Home($locale: String) {
@@ -49,7 +50,9 @@ export async function getUnifiedHome(locale) {
     variables: { locale }
   })
     .then(handleResponse)
-    .catch((error) => console.error(error))
+    .catch((error) => {
+      Sentry.captureMessage(error)
+    })
 }
 
 function handleResponse(response) {

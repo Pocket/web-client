@@ -1,3 +1,11 @@
+## [1.82.6](https://github.com/Pocket/web-client/compare/v1.82.5...v1.82.6) (2023-03-21)
+
+
+### Bug Fixes
+
+* **home:** capture error in sentry ([e03a32b](https://github.com/Pocket/web-client/commit/e03a32bb2007c6cc2362796f2ae05e150abe26d9))
+* **home:** pass locale to topic selector ([fd1bf0a](https://github.com/Pocket/web-client/commit/fd1bf0a4cddd6f640055b7ae08c83b84c97c1584))
+
 ## [1.82.5](https://github.com/Pocket/web-client/compare/v1.82.4...v1.82.5) (2023-03-21)
 
 
