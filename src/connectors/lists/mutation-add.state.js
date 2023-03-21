@@ -76,7 +76,7 @@ function* listAddItem({ id }) {
     const data = {
       url: givenUrl,
       excerpt,
-      imageUrl: thumbnail ? thumbnail : null,
+      imageUrl: thumbnail || null,
       title,
       publisher,
       listExternalId: externalId

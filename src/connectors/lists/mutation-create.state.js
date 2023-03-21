@@ -80,7 +80,7 @@ function* itemsCreateList({ id }) {
       listItemData = {
         url: givenUrl,
         excerpt,
-        imageUrl: thumbnail ? thumbnail : null,
+        imageUrl: thumbnail || null,
         title,
         publisher,
         sortOrder: 1
