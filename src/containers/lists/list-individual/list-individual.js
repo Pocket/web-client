@@ -62,7 +62,7 @@ export const ListIndividual = () => {
   return (
     <>
       <Layout>
-        <SideNav type="saves" />
+        <SideNav type="saves" tag={id} />
 
         {shouldRender ? (
           <main className="main">

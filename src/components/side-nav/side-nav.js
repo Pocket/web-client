@@ -175,7 +175,8 @@ export function SideNav({
   isDisabled,
   trackMenuClick,
   inListsExperiment,
-  handleCreateList
+  handleCreateList,
+  recentLists
 }) {
   const { t } = useTranslation()
 
@@ -241,6 +242,7 @@ export function SideNav({
             clickEvent={clickEvent}
             inListsExperiment={inListsExperiment}
             handleCreateList={handleCreateList}
+            recentLists={recentLists}
           />
         ) : null}
       </nav>
