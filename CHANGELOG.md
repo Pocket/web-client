@@ -1,3 +1,24 @@
+## [1.82.13](https://github.com/Pocket/web-client/compare/v1.82.12...v1.82.13) (2023-03-21)
+
+
+### Bug Fixes
+
+* **global-nav:** update saves icon on mobile global nav ([78fac87](https://github.com/Pocket/web-client/commit/78fac875020c67479026788c21c505a762cc7ac4))
+
+## [1.82.12](https://github.com/Pocket/web-client/compare/v1.82.11...v1.82.12) (2023-03-21)
+
+
+### Bug Fixes
+
+* **lists:** adding most 3 recently created lists to sidebar ([6137a4d](https://github.com/Pocket/web-client/commit/6137a4df1172a20612fc629e2f80b91b3ed0bd4b))
+
+## [1.82.11](https://github.com/Pocket/web-client/compare/v1.82.10...v1.82.11) (2023-03-21)
+
+
+### Bug Fixes
+
+* **localization:** bumped version to 27 ([b3e8d1f](https://github.com/Pocket/web-client/commit/b3e8d1fbf66df99201f5d493fe814feec6fa69c8))
+
 ## [1.82.10](https://github.com/Pocket/web-client/compare/v1.82.9...v1.82.10) (2023-03-21)
 
 

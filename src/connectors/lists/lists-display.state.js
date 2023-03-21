@@ -23,7 +23,7 @@ export const listsDisplayReducers = (state = {}, action) => {
 
       // This basically is an easy way to say use the existing state but
       // add new items by id ... and we may try to overwrite existing items
-      return { ...state, ...preExistingItemsById, ...itemsById }
+      return { ...state, ...itemsById, ...preExistingItemsById }
     }
 
     case LIST_ITEMS_SET_NO_IMAGE: {

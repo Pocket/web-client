@@ -61,8 +61,7 @@ const initialState = {
   enrolled: false,
   enrolledFetched: false,
   sortOrder: 'DESC',
-  loading: true,
-  userShareableLists: false
+  loading: true
 }
 
 export const pageListsInfoReducers = (state = initialState, action) => {
@@ -91,6 +90,7 @@ export const pageListsInfoReducers = (state = initialState, action) => {
       const { deletedId } = action
       const titleToIdList = Object.keys(state.titleToIdList)
         .filter((title) => state.titleToIdList[title] !== deletedId)
+        .reduce((obj, title) => ({ ...obj, [title]: state.titleToIdList[title] }), {}) 
       return { ...state, titleToIdList }
     }
 
