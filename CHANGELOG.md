@@ -1,3 +1,10 @@
+## [1.82.5](https://github.com/Pocket/web-client/compare/v1.82.4...v1.82.5) (2023-03-21)
+
+
+### Bug Fixes
+
+* **individual-list:** adding publisher to query ([adc5940](https://github.com/Pocket/web-client/commit/adc594031c435d1456832ee49028c82fa50989e1))
+
 ## [1.82.4](https://github.com/Pocket/web-client/compare/v1.82.3...v1.82.4) (2023-03-21)
 
 
