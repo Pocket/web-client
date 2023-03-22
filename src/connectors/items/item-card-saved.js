@@ -203,8 +203,8 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
     dispatch(mutationTagItem(id, tags))
   }
   const actionAddToList = () => {
-    // snowplow event here
     const listAction = hasLists.length ? mutateListAddItem : mutateListCreate
+    dispatch(sendSnowplowEvent(`${snowplowId}.add-to-list`, analyticsData))
     dispatch(listAction(id))
   }
 

@@ -35,7 +35,8 @@ export const savesActions = {
       uiType: 'card'
     },
     expects: ['url', 'position'],
-    description: 'Fired when a card scrolls into view on Saves; passing in label to capture the card type being displayed (list, detail, or grid). Not required'
+    description:
+      'Fired when a card scrolls into view on Saves; passing in label to capture the card type being displayed (list, detail, or grid). Not required'
   },
   'saves.share': {
     eventType: 'engagement',
@@ -101,6 +102,15 @@ export const savesActions = {
     expects: ['url', 'position'],
     description: 'Fired when a user clicks the Tag icon in a card on Saves'
   },
+  'saves.add-to-list': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'content'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['url', 'position'],
+    description: 'Fired when a creator opens the Add to List modal'
+  },
   'saves.display.view': {
     eventType: 'engagement',
     entityTypes: ['ui'],
@@ -108,7 +118,8 @@ export const savesActions = {
       uiType: 'button'
     },
     expects: ['value'],
-    description: 'Fired when a user changes the view type from the Account dropdown; value is the new setting'
+    description:
+      'Fired when a user changes the view type from the Account dropdown; value is the new setting'
   },
   'saves.sort': {
     eventType: 'engagement',
@@ -126,6 +137,7 @@ export const savesActions = {
       uiType: 'button'
     },
     expects: ['value'],
-    description: 'Fired when a user clicks changes the theme from the Account dropdown; value is the new setting'
+    description:
+      'Fired when a user clicks changes the theme from the Account dropdown; value is the new setting'
   }
 }

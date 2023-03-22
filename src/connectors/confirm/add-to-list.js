@@ -5,6 +5,7 @@ import { mutateListCreate } from 'connectors/lists/mutation-create.state'
 import { mutateListAddCancel } from 'connectors/lists/mutation-add.state'
 import { mutateListAddConfirm } from 'connectors/lists/mutation-add.state'
 import { getUserShareableLists } from 'containers/lists/lists.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const ConfirmAddToList = () => {
   const dispatch = useDispatch()
@@ -13,6 +14,7 @@ export const ConfirmAddToList = () => {
   const showModal = useSelector((state) => state.mutationListAdd.open)
   const lastUsedList = useSelector((state) => state.mutationListAdd.lastUsedList)
   const titleToIdList = useSelector((state) => state.pageListsInfo.titleToIdList)
+  const item = useSelector((state) => state.itemsDisplay[id])
 
   useEffect(() => {
     if (showModal) dispatch(getUserShareableLists())
@@ -24,14 +26,19 @@ export const ConfirmAddToList = () => {
   }
 
   const handleClose = () => {
+    dispatch(sendSnowplowEvent('shareable-list.item.add.cancel'))
     dispatch(mutateListAddCancel())
-    // send snowplow event here
   }
 
   const handleSubmit = (listTitle) => {
     const externalId = titleToIdList[listTitle]
+    dispatch(
+      sendSnowplowEvent('shareable-list.item.add.confirm', {
+        ...item?.analyticsData,
+        label: listTitle
+      })
+    )
     dispatch(mutateListAddConfirm({ externalId, listTitle }))
-    // send snowplow event here
   }
 
   const addToList = 'Add to List'

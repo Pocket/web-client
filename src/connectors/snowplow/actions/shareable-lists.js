@@ -168,6 +168,23 @@ export const shareableListActions = {
     ],
     description: 'Fired when a list item is shown on the Individual List page'
   },
+  'shareable-list.item.add.cancel': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a creator cancels out of the Add to List modal'
+  },
+  'shareable-list.item.add.confirm': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'content'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['label', 'url'],
+    description: 'Fired when a creator adds an item to a list'
+  },
   'shareable-list.item.remove': {
     eventType: 'engagement',
     entityTypes: ['ui', 'shareableListItem'],
