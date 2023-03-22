@@ -1,3 +1,10 @@
+## [1.82.14](https://github.com/Pocket/web-client/compare/v1.82.13...v1.82.14) (2023-03-22)
+
+
+### Bug Fixes
+
+* **ActionsSaves:** show add to list modal when there are lists, otherwise create new list ([87f6ca7](https://github.com/Pocket/web-client/commit/87f6ca7d77ef32b6b22a3d6e2b668fabf654313b))
+
 ## [1.82.13](https://github.com/Pocket/web-client/compare/v1.82.12...v1.82.13) (2023-03-21)
 
 
