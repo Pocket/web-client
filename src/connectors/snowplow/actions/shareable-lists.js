@@ -1,4 +1,6 @@
 export const shareableListActions = {
+  // shareable list
+
   'shareable-list.impression': {
     eventType: 'impression',
     entityTypes: ['ui', 'shareableList'],
@@ -14,44 +16,6 @@ export const shareableListActions = {
       'createdAt'
     ],
     description: 'Fired when a list is shown on the All Lists page'
-  },
-  'shareable-list.item.impression': {
-    eventType: 'impression',
-    entityTypes: ['ui', 'shareableListItem'],
-    eventData: {
-      uiType: 'card'
-    },
-    expects: [
-      'shareableListItemExternalId',
-      'shareableListExternalId',
-      'givenUrl',
-      'title',
-      'excerpt',
-      'imageUrl',
-      'publisher',
-      'sortOrder',
-      'createdAt'
-    ],
-    description: 'Fired when a list item is shown on the Individual List page'
-  },
-  'public-list.item.impression': {
-    eventType: 'impression',
-    entityTypes: ['ui', 'shareableListItem'],
-    eventData: {
-      uiType: 'card'
-    },
-    expects: [
-      'shareableListItemExternalId',
-      'shareableListExternalId',
-      'givenUrl',
-      'title',
-      'excerpt',
-      'imageUrl',
-      'publisher',
-      'sortOrder',
-      'createdAt'
-    ],
-    description: 'Fired when a list item is shown on the Public List page'
   },
   'shareable-list.create.header': {
     eventType: 'engagement',
@@ -182,5 +146,47 @@ export const shareableListActions = {
       'createdAt'
     ],
     description: 'Fired when a user clicks the Copy Link button in the Share List modal'
+  },
+
+  // shareable list ITEM
+  'shareable-list.item.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a list item is shown on the Individual List page'
+  },
+
+  // PUBLIC list item
+  'public-list.item.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a list item is shown on the Public List page'
   }
 }
