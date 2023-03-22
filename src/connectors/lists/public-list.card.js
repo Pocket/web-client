@@ -61,7 +61,7 @@ export function ActionsTransitional({ id, position }) {
   const onUnSave = () => {
     if (!isAuthenticated) return
     // send snowplow action here
-    dispatch(mutationDeleteTransitionalItem(url, id))
+    dispatch(mutationDeleteTransitionalItem(saveItemId, id))
   }
 
   return (
