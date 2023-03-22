@@ -10,7 +10,7 @@ import { ItemTags } from 'components/item/item-tags'
 import { itemStyles } from './item-styles'
 import { useInView } from 'react-intersection-observer'
 import { ListViewAltIcon } from 'components/icons/ListViewAltIcon'
-import { PublicListUrl } from '../shareable-lists/public-list-url'
+import { PublicListUrl } from 'components/shareable-lists/public-list-url'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
 
