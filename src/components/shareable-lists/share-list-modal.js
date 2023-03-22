@@ -4,7 +4,7 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { Item } from 'components/item/item'
 import { ShareList } from 'components/share-modal/share-list'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
-import { ListStatus } from 'components/shareable-lists/list-status'
+import { PublicListUrl } from 'components/shareable-lists/public-list-url'
 
 const reducedPaddingStyles = css`
   padding: 0;
@@ -45,7 +45,7 @@ export const ShareListModal = ({
             clamp
           />
         </div>
-        <ListStatus externalId={externalId} slug={slug} title={title} callout />
+        <PublicListUrl externalId={externalId} slug={slug} title={title} callout />
       </ModalBody>
       <ModalFooter className={reducedPaddingStyles}>
         <ShareList

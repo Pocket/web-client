@@ -8,7 +8,7 @@ import { SaveListButton } from 'components/content-saving/save-list'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
 import { ListStatusToggle } from 'components/shareable-lists/list-status-toggle'
 import { breakpointSmallTablet } from 'common/constants'
-import { ListStatus } from 'components/shareable-lists/list-status'
+import { PublicListUrl } from 'components/shareable-lists/public-list-url'
 
 const listHeaderStyles = css`
   padding-bottom: 22px;
@@ -136,7 +136,7 @@ export const ListIndividualHeader = ({
           {title}
         </h1>
         <p className="description">{description}</p>
-        <ListStatus externalId={externalId} slug={slug} title={title} />
+        <PublicListUrl externalId={externalId} slug={slug} title={title} />
       </div>
 
       <div className="create-sort">

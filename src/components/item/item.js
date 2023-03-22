@@ -9,8 +9,8 @@ import { CardMedia } from 'components/item/item-media'
 import { ItemTags } from 'components/item/item-tags'
 import { itemStyles } from './item-styles'
 import { useInView } from 'react-intersection-observer'
-import { ListStatus } from 'components/shareable-lists/list-status'
 import { ListViewAltIcon } from 'components/icons/ListViewAltIcon'
+import { PublicListUrl } from '../shareable-lists/public-list-url'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
 
@@ -56,7 +56,6 @@ export const Item = (props) => {
     showExcerpt,
     visibleCount,
     listStatus,
-    listUrl,
 
     //Positioning
     style,
@@ -183,7 +182,7 @@ export const Item = (props) => {
           )}
 
           <div className="context">
-            {listStatus ? <ListStatus status={listStatus} url={listUrl} /> : null}
+            {listStatus ? <PublicListUrl /> : null}
             {storyCount ? (
               <div className="story-count" data-cy="story-count">
                 {t('item:story-count', '{{count}} stories', { count: storyCount })}

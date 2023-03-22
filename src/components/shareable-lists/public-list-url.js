@@ -31,7 +31,7 @@ const statusStyles = css`
   }
 `
 
-export const ListStatus = ({ externalId, slug, title, callout }) => {
+export const PublicListUrl = ({ externalId, slug, title, callout }) => {
   const dispatch = useDispatch()
   const url = `/sharedlists/${externalId}/${slug}`
   const copyUrl = `https://getpocket.com${url}`
