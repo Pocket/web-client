@@ -1,3 +1,11 @@
+## [1.82.19](https://github.com/Pocket/web-client/compare/v1.82.18...v1.82.19) (2023-03-22)
+
+
+### Bug Fixes
+
+* **card:** adding list label to cards ([8e5fb4b](https://github.com/Pocket/web-client/commit/8e5fb4b3a2dd593f741e8641293c3f574a7b8f6a))
+* **item:** add lists label for list view ([54c02de](https://github.com/Pocket/web-client/commit/54c02de99488dbf9d336798cba7e402dbaa84d44))
+
 ## [1.82.18](https://github.com/Pocket/web-client/compare/v1.82.17...v1.82.18) (2023-03-22)
 
 
