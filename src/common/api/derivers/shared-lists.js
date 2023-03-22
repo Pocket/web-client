@@ -1,7 +1,7 @@
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { replaceUTM } from 'common/utilities/urls/urls'
-import { BASE_URL } from 'common/constants'
 
+// Process a list of lists, viewable to the user only
 export function processAllList(responseData) {
   const userShareableLists = responseData
 
@@ -16,6 +16,8 @@ export function processAllList(responseData) {
   return { externalIds, itemsById, titleToIdList }
 }
 
+// process an individual list, viewable to the user only
+// returns an array of keys 
 export function processIndividualList(responseData, utmId) {
   const { listItems, externalId: listId, ...rest } = responseData 
 
@@ -31,6 +33,9 @@ export function processIndividualList(responseData, utmId) {
   return { externalIdList, itemsById, externalId: listId }
 }
 
+// process the Public list
+// itemsById will end up as listsDisplay
+// publicListInfo is the main list info
 export function processPublicList(responseData, utmId) {
   const { listItems, externalId: listId, ...rest } = responseData
 
@@ -45,6 +50,8 @@ export function processPublicList(responseData, utmId) {
   return { itemsById, publicListInfo }
 }
 
+// Loops through each list item and derives it
+// return an object with the external id as the keys and list info as the value
 function getListItemsById(listItems, listId, utmId) {
   const processedItems = listItems.map((item) => {
     return deriveListItem(item, listId, utmId)
@@ -53,6 +60,8 @@ function getListItemsById(listItems, listId, utmId) {
   return arrayToObject(processedItems, 'externalId')
 }
 
+// Builds a list item, compiles the analytics
+// Adds a utm paramter to the external url
 function deriveListItem(item, listId, utmId) {
   const { externalId, url, title, excerpt, imageUrl, publisher, createdAt } = item
   const analyticsData = {
@@ -73,6 +82,8 @@ function deriveListItem(item, listId, utmId) {
   }
 }
 
+// Build a List and compile the analytics
+// Process the card image
 function deriveList(list, listId, listItems) {
   const { slug, title, description, status, moderationStatus, createdAt } = list
   const analyticsData = {
@@ -86,13 +97,11 @@ function deriveList(list, listId, listItems) {
   }
 
   const listItemIds = listItems.map(item => item.externalId)
-  const url = `${BASE_URL}/sharedlists/${listId}/${slug}`
 
   return {
     ...list,
     itemImage: listItems?.[0]?.imageUrl,
     externalId: listId,
-    url,
     listItemIds,
     analyticsData
   }
