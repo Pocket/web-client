@@ -139,12 +139,7 @@ function* adjustSortOrder(action) {
 
 function* userShareableListsRequest() {
   try {
-    const userShareableLists = yield getShareableLists()
-    const externalIds = userShareableLists.map((list) => list.externalId)
-    const titleToIdList = userShareableLists.reduce((obj, list) => ({ ...obj, [list.title]: list.externalId }), {})
-
-    const lists = userShareableLists.map(item => ({ ...item, itemImage: item?.listItems?.[0]?.imageUrl }))
-    const itemsById = arrayToObject(lists, 'externalId')
+    const { externalIds, itemsById, titleToIdList } = yield getShareableLists()
 
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
     return yield put({ type: LIST_ALL_REQUEST_SUCCESS, externalIds, titleToIdList })

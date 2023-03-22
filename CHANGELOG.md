@@ -1,3 +1,12 @@
+## [1.82.15](https://github.com/Pocket/web-client/compare/v1.82.14...v1.82.15) (2023-03-22)
+
+
+### Bug Fixes
+
+* **list-deriver:** adding comments to derivers ([0790e74](https://github.com/Pocket/web-client/commit/0790e7401abb83d3ca0d19a55d7365898e6c5e7e))
+* **list-deriver:** adding comments to derivers ([cb28017](https://github.com/Pocket/web-client/commit/cb28017f6c2d502ba11bf50d5c43149efecd8560))
+* **lists:** adding analytics derivers for lists ([f2b1f62](https://github.com/Pocket/web-client/commit/f2b1f62c8d6d5085bc34ca945addaed1761e03f9))
+
 ## [1.82.14](https://github.com/Pocket/web-client/compare/v1.82.13...v1.82.14) (2023-03-22)
 
 

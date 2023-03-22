@@ -46,7 +46,7 @@ export const createShareableListItemEntity = ({
   imageUrl,
   authors,
   publisher,
-  sortOrder,
+  sortOrder = 0,
   createdAt,
   updatedAt
 }) => ({

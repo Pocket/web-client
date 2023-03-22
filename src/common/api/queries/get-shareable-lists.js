@@ -1,5 +1,6 @@
 import { requestGQL } from 'common/utilities/request/request'
 import { gql } from 'graphql-request'
+import { processAllList } from 'common/api/derivers/shared-lists'
 
 const getShareableListsQuery = gql`
   query GetShareableLists {
@@ -14,6 +15,7 @@ const getShareableListsQuery = gql`
       externalId
       listItems {
         imageUrl
+        externalId
       }
     }
   }
@@ -29,5 +31,7 @@ export async function getShareableLists() {
 
 function handleResponse(response) {
   const responseData = response?.data?.shareableLists
-  return responseData
+  const processedData = processAllList(responseData)
+
+  return processedData  
 }

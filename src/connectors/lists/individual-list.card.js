@@ -5,12 +5,17 @@ import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { setNoImage } from 'connectors/lists/lists-display.state'
 
-export const IndividualListCard = ({ id, listId }) => {
+export const IndividualListCard = ({ id, listId, position }) => {
   const dispatch = useDispatch()
 
   const item = useSelector((state) => state.listsDisplay[id])
 
   if (!item) return null
+  const { externalId, title, excerpt, publisher, url, analyticsData: passedAnalytics } = item
+  const analyticsData = {
+    ...passedAnalytics,
+    sortOrder: position
+  }
 
   const itemImage = item?.noImage ? '' : item?.imageUrl
   const onImageFail = () => dispatch(setNoImage(id))
@@ -19,13 +24,13 @@ export const IndividualListCard = ({ id, listId }) => {
     <div className={cx(stackedGrid, stackedGridNoAside)}>
       <Item
         listId={listId}
-        itemId={item.externalId}
-        title={item.title}
-        excerpt={item.excerpt}
+        itemId={externalId}
+        title={title}
+        excerpt={excerpt}
         itemImage={itemImage}
-        publisher={item.publisher}
-        openUrl={item.url}
-        externalUrl={item.url}
+        publisher={publisher}
+        openUrl={url}
+        externalUrl={url}
         onImageFail={onImageFail}
         onItemInView={() => { }} // impression event here
         onOpenOriginalUrl={() => { }} // engagement event here
