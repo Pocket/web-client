@@ -24,8 +24,10 @@ export const ConfirmShare = () => {
 
   return (
     <ShareListModal
+      externalId={externalId}
       title={title}
       description={description}
+      slug={slug}
       externalUrl={url}
       thumbnail={itemImage}
       storyCount={storyCount}
