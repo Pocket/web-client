@@ -21,9 +21,12 @@ export function FiltersSideNav({
   pinned,
   clickEvent,
   inListsExperiment,
-  handleCreateList
+  handleCreateList,
+  recentLists
 }) {
   const { t } = useTranslation()
+
+  const listNames = recentLists ? Object.keys(recentLists).slice(0, 3) : []
 
   return (
     <>
@@ -45,9 +48,21 @@ export function FiltersSideNav({
               data-cy="side-nav-all-lists">
               <ListViewAltIcon className="side-nav-icon inactive" />
               <ListViewAltFilledIcon className="side-nav-icon active" />
-              {' '}All Lists
+              All Lists
             </button>
           </Link>
+          {listNames.length
+            ? listNames.map((title) => (
+                <Link href={`/lists/${recentLists[title]}`} key={recentLists[title]}>
+                  <button
+                    className={subActive(recentLists[title], true)}
+                    onClick={clickEvent}
+                    data-cy={`side-nav-lists-${recentLists[title]}`}>
+                    {title}
+                  </button>
+                </Link>
+              ))
+            : null}          
         </>
       ) : null}
 

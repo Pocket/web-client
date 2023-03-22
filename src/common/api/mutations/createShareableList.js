@@ -11,6 +11,7 @@ const createShareableListQuery = gql`
       description
       externalId
       createdAt
+      updatedAt
       listItems {
         createdAt
         excerpt

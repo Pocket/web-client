@@ -1,3 +1,47 @@
+## [1.82.16](https://github.com/Pocket/web-client/compare/v1.82.15...v1.82.16) (2023-03-22)
+
+
+### Bug Fixes
+
+* **analytics:** use correct next script ([dcd6e11](https://github.com/Pocket/web-client/commit/dcd6e11716da04b4710aa070b8178683e00c3727))
+
+## [1.82.15](https://github.com/Pocket/web-client/compare/v1.82.14...v1.82.15) (2023-03-22)
+
+
+### Bug Fixes
+
+* **list-deriver:** adding comments to derivers ([0790e74](https://github.com/Pocket/web-client/commit/0790e7401abb83d3ca0d19a55d7365898e6c5e7e))
+* **list-deriver:** adding comments to derivers ([cb28017](https://github.com/Pocket/web-client/commit/cb28017f6c2d502ba11bf50d5c43149efecd8560))
+* **lists:** adding analytics derivers for lists ([f2b1f62](https://github.com/Pocket/web-client/commit/f2b1f62c8d6d5085bc34ca945addaed1761e03f9))
+
+## [1.82.14](https://github.com/Pocket/web-client/compare/v1.82.13...v1.82.14) (2023-03-22)
+
+
+### Bug Fixes
+
+* **ActionsSaves:** show add to list modal when there are lists, otherwise create new list ([87f6ca7](https://github.com/Pocket/web-client/commit/87f6ca7d77ef32b6b22a3d6e2b668fabf654313b))
+
+## [1.82.13](https://github.com/Pocket/web-client/compare/v1.82.12...v1.82.13) (2023-03-21)
+
+
+### Bug Fixes
+
+* **global-nav:** update saves icon on mobile global nav ([78fac87](https://github.com/Pocket/web-client/commit/78fac875020c67479026788c21c505a762cc7ac4))
+
+## [1.82.12](https://github.com/Pocket/web-client/compare/v1.82.11...v1.82.12) (2023-03-21)
+
+
+### Bug Fixes
+
+* **lists:** adding most 3 recently created lists to sidebar ([6137a4d](https://github.com/Pocket/web-client/commit/6137a4df1172a20612fc629e2f80b91b3ed0bd4b))
+
+## [1.82.11](https://github.com/Pocket/web-client/compare/v1.82.10...v1.82.11) (2023-03-21)
+
+
+### Bug Fixes
+
+* **localization:** bumped version to 27 ([b3e8d1f](https://github.com/Pocket/web-client/commit/b3e8d1fbf66df99201f5d493fe814feec6fa69c8))
+
 ## [1.82.10](https://github.com/Pocket/web-client/compare/v1.82.9...v1.82.10) (2023-03-21)
 
 

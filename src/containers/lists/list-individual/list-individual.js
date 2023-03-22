@@ -35,19 +35,8 @@ export const ListIndividual = () => {
   }, [dispatch, id, enrolled])
 
   if (!list) return null
-  const { title, description, slug, status, moderationStatus, createdAt, updatedAt } = list
+  const { title, description, slug, status, analyticsData } = list
   const showLists = listItemIds?.length
-
-  const analyticsData = {
-    shareableListExternalId: id,
-    slug,
-    title,
-    description,
-    status,
-    moderationStatus,
-    createdAt: Date.parse(createdAt) / 1000,
-    updatedAt: Date.parse(updatedAt) / 1000
-  }
 
   // Actions
   const handleSetStatus = (val) => dispatch(mutateListStatusAction({ id, status: val }))
@@ -62,7 +51,7 @@ export const ListIndividual = () => {
   return (
     <>
       <Layout>
-        <SideNav type="saves" />
+        <SideNav type="saves" tag={id} />
 
         {shouldRender ? (
           <main className="main">
@@ -78,8 +67,14 @@ export const ListIndividual = () => {
             />
 
             {showLists
-              ? listItemIds.map((externalId) => <IndividualListCard key={externalId} id={externalId} listId={id} />)
-              : <EmptyIndividualLists />}
+              ? listItemIds.map((externalId, index) => (
+                <IndividualListCard
+                  key={externalId}
+                  id={externalId}
+                  listId={id}
+                  position={index}
+                />
+              )) : <EmptyIndividualLists />}
           </main>
         ) : null}
       </Layout>
