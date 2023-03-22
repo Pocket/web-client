@@ -1,3 +1,10 @@
+## [1.82.18](https://github.com/Pocket/web-client/compare/v1.82.17...v1.82.18) (2023-03-22)
+
+
+### Bug Fixes
+
+* **lists:** fix broken unsave item ([2774480](https://github.com/Pocket/web-client/commit/27744808ed8dc3220423e441cdd60a54f66554ea))
+
 ## [1.82.17](https://github.com/Pocket/web-client/compare/v1.82.16...v1.82.17) (2023-03-22)
 
 
