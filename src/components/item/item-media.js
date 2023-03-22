@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { NewViewIcon } from 'components/icons/NewViewIcon'
+import { ListViewAltIcon } from 'components/icons/ListViewAltIcon'
 
 const cardMediaStyles = css`
   --aspect-percent: 56.25%;
@@ -75,6 +76,7 @@ export const CardMedia = function ({
   id,
   onImageFail = () => {},
   topicName,
+  isUserList,
   openUrl,
   onOpen,
   openInNewTab
@@ -138,6 +140,7 @@ export const CardMedia = function ({
   return (
     <div className={`${cardMediaStyles} media`}>
       {topic ? <div className="topic-name">{topic}</div> : null}
+      {isUserList ? <div className="user-list"><ListViewAltIcon /> List</div> : null}
       {openUrl ? (
         <Link href={openUrl}>
           <a tabIndex="-1" data-cy="image-link" onClick={onOpen} target={linkTarget} rel={linkRel}>

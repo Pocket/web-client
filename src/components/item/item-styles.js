@@ -141,6 +141,20 @@ export const itemStyles = css`
     text-transform: capitalize;
   }
 
+  .user-list {
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    border-radius: 4px;
+    color: var(--color-grey10);
+    position: absolute;
+    padding: 0.125rem 0.5rem;
+    z-index: 10;
+    bottom: 1rem;
+    left: 1rem;
+  }  
+
   // What does the main content (title/excerpt) look like?
   .content-block {
     display: block;
@@ -253,6 +267,10 @@ export const itemStyles = css`
         content: '•';
         margin-right: 0.5rem;
       }
+    }
+
+    .user-list-context {
+      display: none;
     }
   }
 
@@ -412,6 +430,11 @@ export const itemStyles = css`
       .time-to-read {
         padding-left: 0.5rem;
       }
+    }
+
+    .user-list-context {
+      display: inline-block;
+      margin-left: 16px;
     }
 
     ${breakpointMediumHandset} {

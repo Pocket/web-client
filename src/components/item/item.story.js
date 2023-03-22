@@ -113,6 +113,7 @@ export default {
     authors: { table: { disable: true } },
     fromPartner: { table: { disable: true } },
     itemImage: { table: { disable: true } },
+    isUserList: { table: { disable: false } },
     className: { table: { disable: false }, control: 'text' },
     position: { table: { disable: true } },
     bulkEdit: { table: { disable: true } },
@@ -142,6 +143,7 @@ export const Item = (args) => {
     excerpt,
     timeToRead,
     isSyndicated,
+    isUserList,
     isInternalItem,
     onItemInView = () => {},
     publisherLogo,
@@ -175,6 +177,7 @@ export const Item = (args) => {
       excerpt={excerpt}
       timeToRead={timeToRead}
       isSyndicated={isSyndicated}
+      isUserList={isUserList}
       isInternalItem={isInternalItem}
       clamp={clamp}
       openUrl={url}
@@ -195,6 +198,7 @@ Item.args = {
   Actions: 'discovery',
   saveStatus: 'unsaved',
   isSyndicated: false,
+  isUserList: false,
   isFavorite: false,
   isArchive: false,
   isPremium: false,
