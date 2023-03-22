@@ -22,7 +22,10 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
   }, [dispatch, inListsExperiment])  
 
   const trackMenuClick = (label) => dispatch(sendSnowplowEvent('side-nav', { label }))
-  const handleCreateList = () => dispatch(mutateListCreate())
+  const handleCreateList = () => {
+    dispatch(sendSnowplowEvent('shareable-list.create.sidebar'))
+    dispatch(mutateListCreate())
+  }
 
   const isDisabled = appMode === 'bulk'
 

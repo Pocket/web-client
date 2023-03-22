@@ -4,6 +4,7 @@ import { SideNav } from 'connectors/side-nav/side-nav'
 import { useRouter } from 'next/router'
 import { SavedItems } from 'containers/saves/saved-items/saved-items'
 
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { savedItemsSetSortOrder } from 'containers/saves/saved-items/saved-items.state'
 import { savedItemsSetSortBy } from 'containers/saves/saved-items/saved-items.state'
@@ -55,7 +56,10 @@ export const Saves = (props) => {
   const handleNewest = () => dispatch(savedItemsSetSortOrder('DESC'))
   const handleOldest = () => dispatch(savedItemsSetSortOrder('ASC'))
   const handleRelevance = () => dispatch(savedItemsSetSortBy('RELEVANCE'))
-  const handleCreateList = () => dispatch(mutateListCreate())
+  const handleCreateList = () => {
+    dispatch(sendSnowplowEvent('shareable-list.create.header'))
+    dispatch(mutateListCreate())
+  }
 
   return (
     <Layout title={metaData.title} metaData={metaData} subset={subset} tag={tag}>

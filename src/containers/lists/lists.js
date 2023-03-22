@@ -7,6 +7,7 @@ import { ListsAllHeader } from 'components/headers/lists-header'
 import { EmptyAllLists } from 'components/empty-states/all-lists'
 import { listsItemsSetSortOrder } from './lists.state'
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 import { CreateListModal } from 'connectors/confirm/create-list'
 import { ConfirmListDelete } from 'connectors/confirm/delete-list'
@@ -35,7 +36,10 @@ export const Lists = () => {
   }, [dispatch, enrolled])
 
   // Actions
-  const handleCreateList = () => dispatch(mutateListCreate())
+  const handleCreateList = () => {
+    dispatch(sendSnowplowEvent('shareable-list.create.header'))
+    dispatch(mutateListCreate())
+  }
   const handleNewest = () => dispatch(listsItemsSetSortOrder('DESC'))
   const handleOldest = () => dispatch(listsItemsSetSortOrder('ASC'))
 
