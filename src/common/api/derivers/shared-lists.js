@@ -72,7 +72,7 @@ function deriveListItem(item, listId, utmId) {
     excerpt: excerpt,
     imageUrl: imageUrl,
     publisher: publisher,
-    createdAt: createdAt
+    createdAt: Date.parse(createdAt) / 1000
   }
 
   return {
