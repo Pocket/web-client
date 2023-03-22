@@ -86,5 +86,101 @@ export const shareableListActions = {
       'createdAt'
     ],
     description: 'Fired when a creator clicks the Share button on a list'
+  },
+  'shareable-list.share.facebook': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user clicks the FB button in the Share List modal'
+  },
+  'shareable-list.share.twitter': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user clicks the Twitter button in the Share List modal'
+  },
+  'shareable-list.share.linkedin': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user clicks the LinkedIn button in the Share List modal'
+  },
+  'shareable-list.share.reddit': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user clicks the Reddit button in the Share List modal'
+  },
+  'shareable-list.share.buffer': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user clicks the Buffer button in the Share List modal'
+  },
+  'shareable-list.share.copy': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user clicks the Copy Link button in the Share List modal'
   }
 }

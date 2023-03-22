@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { ShareListModal } from 'components/shareable-lists/share-list-modal'
 import { shareListCancel } from 'connectors/lists/mutation-share.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { BASE_URL } from 'common/constants'
 
 export const ConfirmShare = () => {
@@ -11,14 +12,14 @@ export const ConfirmShare = () => {
 
   if (!list) return null
 
-  const { title, description, externalId, slug, listItemIds, itemImage } = list
+  const { title, description, externalId, slug, listItemIds, itemImage, analyticsData } = list
   const url = `${BASE_URL}/sharedlists/${externalId}/${slug}`
   const storyCount = listItemIds?.length || 0
 
   const cancelShare = () => dispatch(shareListCancel())
 
   const engagementEvent = (identifier) => {
-    // snowplow event
+    dispatch(sendSnowplowEvent(`shareable-list.${identifier}`, analyticsData))
   }
 
   return (
