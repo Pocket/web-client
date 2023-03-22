@@ -145,10 +145,10 @@ function SaveStoryButton({ url, isAuthenticated, saveStatus, saveAction, id, tra
 
   return (
     <>
-      <a className="primary" onClick={handleClick} ref={popTrigger} data-cy={id}>
+      <button className="primary" onClick={handleClick} ref={popTrigger} data-cy={id}>
         {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}
         {saveCopy[saveStatus]}
-      </a>
+      </button>
       {!isAuthenticated && shown ? <SavePopover popoverRef={popBody} id={id} /> : null}
     </>
   )
