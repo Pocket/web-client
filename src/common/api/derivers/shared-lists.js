@@ -17,19 +17,19 @@ export function processAllList(responseData) {
 }
 
 // process an individual list, viewable to the user only
-// returns an array of keys 
+// returns an array of keys
 export function processIndividualList(responseData, utmId) {
-  const { listItems, externalId: listId, ...rest } = responseData 
+  const { listItems, externalId: listId, ...rest } = responseData
 
   const listItemsById = getListItemsById(listItems, listId, utmId)
   const externalIdList = Object.keys(listItemsById)
-  const individualList = deriveList(rest, listId, listItems)      
+  const individualList = deriveList(rest, listId, listItems)
 
   const itemsById = {
     ...listItemsById,
     [listId]: individualList
   }
-  
+
   return { externalIdList, itemsById, externalId: listId }
 }
 
@@ -40,12 +40,12 @@ export function processPublicList(responseData, utmId) {
   const { listItems, externalId: listId, ...rest } = responseData
 
   const listItemsById = getListItemsById(listItems, listId, utmId)
-  const publicListInfo = deriveList(rest, listId, listItems)      
+  const publicListInfo = deriveList(rest, listId, listItems)
 
   const itemsById = {
     ...listItemsById,
     [listId]: publicListInfo
-  }  
+  }
 
   return { itemsById, publicListInfo }
 }
@@ -65,6 +65,7 @@ function getListItemsById(listItems, listId, utmId) {
 function deriveListItem(item, listId, utmId) {
   const { externalId, url, title, excerpt, imageUrl, publisher, createdAt } = item
   const analyticsData = {
+    id: externalId,
     shareableListItemExternalId: externalId,
     shareableListExternalId: listId,
     givenUrl: url,
@@ -87,6 +88,7 @@ function deriveListItem(item, listId, utmId) {
 function deriveList(list, listId, listItems) {
   const { slug, title, description, status, moderationStatus, createdAt } = list
   const analyticsData = {
+    id: listId,
     shareableListExternalId: listId,
     slug: slug,
     title: title,
@@ -96,7 +98,7 @@ function deriveList(list, listId, listItems) {
     createdAt: Date.parse(createdAt) / 1000
   }
 
-  const listItemIds = listItems.map(item => item.externalId)
+  const listItemIds = listItems.map((item) => item.externalId)
 
   return {
     ...list,
