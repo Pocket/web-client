@@ -168,6 +168,25 @@ export const shareableListActions = {
     ],
     description: 'Fired when a list item is shown on the Individual List page'
   },
+  'shareable-list.item.remove': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a creator removes an item from a list'
+  },
 
   // PUBLIC list item
   'public-list.item.impression': {

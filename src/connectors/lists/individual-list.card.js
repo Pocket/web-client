@@ -52,8 +52,18 @@ export const IndividualListCard = ({ id, listId, position }) => {
 
 export const ListActions = ({ id, listId }) => {
   const dispatch = useDispatch()
+  const item = useSelector((state) => state.listsDisplay[id])
+  const { listItemIds } = useSelector((state) => state.listsDisplay[listId])
+  const sortOrder = listItemIds.indexOf(id)
+  const { analyticsData: passedAnalytics } = item
+
+  const analyticsData = {
+    ...passedAnalytics,
+    sortOrder
+  }
 
   const handleDeleteItem = () => {
+    dispatch(sendSnowplowEvent('shareable-list.item.remove', analyticsData))
     dispatch(mutateListItemDelete({ id, listId }))
   }
 
