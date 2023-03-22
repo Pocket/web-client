@@ -43,14 +43,7 @@ export const pageIndividualListsSagas = [
  --------------------------------------------------------------- */
 function* getIndividualList({ id }) {
   try {
-    const individualList = yield call(getShareableList, id)
-    const externalId = individualList?.externalId
-    const listItems = arrayToObject(individualList?.listItems, 'externalId')
-    const externalIdList = Object.keys(listItems)
-    const itemsById = {
-      ...listItems,
-      [externalId]: individualList
-    }
+    const { externalIdList, itemsById, externalId } = yield call(getShareableList, id)
 
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
     yield put({ type: LIST_INDIVIDUAL_SUCCESS, externalId, externalIdList })

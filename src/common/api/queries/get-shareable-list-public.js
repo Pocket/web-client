@@ -1,6 +1,7 @@
 import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
+import { processPublicList } from 'common/api/derivers/shared-lists'
 
 const getShareableListPublicQuery = gql`
   query ShareableListPublic($slug: String!, $externalId: ID!) {
@@ -43,10 +44,8 @@ export function getShareableListPublic({ listId, slug }) {
 }
 
 function handleResponse(response) {
-  const { data } = response || {}
-  const { listItems, ...listInfo } = data?.shareableListPublic
-  const listItemIds = listItems.map(item => item.externalId)
-  const itemsById = arrayToObject(listItems, 'externalId')
-  const publicListInfo = { ...listInfo, imageUrl: listItems?.[0].imageUrl, listItemIds }
-  return { itemsById, publicListInfo }
+  const responseData = response?.data?.shareableListPublic
+  const processedData = processPublicList(responseData, 'pocket_public_list')
+
+  return processedData
 }

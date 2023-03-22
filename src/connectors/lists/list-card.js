@@ -13,8 +13,9 @@ export const ListCard = ({ id }) => {
 
   if (!list) return null
 
-  const storyCount = list.listItems?.length || 0
-  const url = `/sharedlists/${list.externalId}/${list.slug}`
+  const { listItems, externalId, slug, title, description, status } = list
+  const url = `/sharedlists/${externalId}/${slug}`
+  const storyCount = listItems?.length || 0
   const itemImage = list?.noImage ? '' : list?.itemImage
 
   const onImageFail = () => dispatch(setNoImage(id))
@@ -23,12 +24,12 @@ export const ListCard = ({ id }) => {
     <div className={cx(stackedGrid, stackedGridNoAside)} key={list.externalId}>
       <Item
         itemId={id}
-        title={list.title}
-        excerpt={list.description}
-        openUrl={`/lists/${list.externalId}`}
+        title={title}
+        excerpt={description}
+        openUrl={`/lists/${externalId}`}
         onItemInView={() => {}} // impression event here
         isInternalItem={true}
-        listStatus={list.status}
+        listStatus={status}
         listUrl={url}
         storyCount={storyCount}
         itemImage={itemImage}

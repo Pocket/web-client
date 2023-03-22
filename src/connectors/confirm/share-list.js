@@ -11,9 +11,8 @@ export const ConfirmShare = () => {
 
   if (!list) return null
 
-  const { title, description, externalId, slug, listItems } = list
+  const { title, description, externalId, slug, listItems, itemImage } = list
   const url = `${BASE_URL}/sharedlists/${externalId}/${slug}`
-  const thumbnail = listItems?.[0]?.imageUrl
   const storyCount = listItems?.length || 0
 
   const cancelShare = () => dispatch(shareListCancel())
@@ -27,7 +26,7 @@ export const ConfirmShare = () => {
       title={title}
       description={description}
       externalUrl={url}
-      thumbnail={thumbnail}
+      thumbnail={itemImage}
       storyCount={storyCount}
       showModal={true}
       cancelShare={cancelShare}
