@@ -1,3 +1,10 @@
+## [1.82.16](https://github.com/Pocket/web-client/compare/v1.82.15...v1.82.16) (2023-03-22)
+
+
+### Bug Fixes
+
+* **analytics:** use correct next script ([dcd6e11](https://github.com/Pocket/web-client/commit/dcd6e11716da04b4710aa070b8178683e00c3727))
+
 ## [1.82.15](https://github.com/Pocket/web-client/compare/v1.82.14...v1.82.15) (2023-03-22)
 
 
