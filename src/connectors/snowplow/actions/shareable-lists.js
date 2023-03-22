@@ -1,4 +1,58 @@
 export const shareableListActions = {
+  'shareable-list.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a list is shown on the All Lists page'
+  },
+  'shareable-list.item.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a list item is shown on the Individual List page'
+  },
+  'public-list.item.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a list item is shown on the Public List page'
+  },
   'shareable-list.create.header': {
     eventType: 'engagement',
     entityTypes: ['ui'],

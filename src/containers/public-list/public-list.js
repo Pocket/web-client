@@ -69,8 +69,13 @@ export const PublicList = ({ listId, slug, statusCode }) => {
         />
 
         {listCount
-          ? listItemIds.map((externalId) => (
-              <PublicListCard key={externalId} listId={listId} externalId={externalId} />
+          ? listItemIds.map((externalId, index) => (
+              <PublicListCard
+                key={externalId}
+                listId={listId}
+                externalId={externalId}
+                position={index}
+              />
             ))
           : null}
         <button className="tiny outline" data-cy="report-list" onClick={onReport}>

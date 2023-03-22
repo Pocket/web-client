@@ -4,11 +4,13 @@ import { mutateListItemDelete } from './mutation-delete.state'
 import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { setNoImage } from 'connectors/lists/lists-display.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const IndividualListCard = ({ id, listId, position }) => {
   const dispatch = useDispatch()
 
   const item = useSelector((state) => state.listsDisplay[id])
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
   if (!item) return null
   const { externalId, title, excerpt, publisher, url, analyticsData: passedAnalytics } = item
@@ -19,6 +21,12 @@ export const IndividualListCard = ({ id, listId, position }) => {
 
   const itemImage = item?.noImage ? '' : item?.imageUrl
   const onImageFail = () => dispatch(setNoImage(id))
+
+  const onItemInView = (inView) => {
+    if (!impressionFired && inView) {
+      dispatch(sendSnowplowEvent('shareable-list.item.impression', analyticsData))
+    }
+  }
 
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)}>
@@ -32,9 +40,9 @@ export const IndividualListCard = ({ id, listId, position }) => {
         openUrl={url}
         externalUrl={url}
         onImageFail={onImageFail}
-        onItemInView={() => { }} // impression event here
-        onOpenOriginalUrl={() => { }} // engagement event here
-        onOpen={() => { }} // engagement event here
+        onItemInView={onItemInView}
+        onOpenOriginalUrl={() => {}} // engagement event here
+        onOpen={() => {}} // engagement event here
         Actions={ListActions}
         clamp
       />

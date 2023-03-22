@@ -6,18 +6,31 @@ import { TransitionalActions } from 'components/item/actions/transitional'
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 import { setNoImage } from 'connectors/lists/lists-display.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export const PublicListCard = ({ listId, externalId }) => {
+export const PublicListCard = ({ listId, externalId, position }) => {
   const dispatch = useDispatch()
 
   const item = useSelector((state) => state.listsDisplay[externalId])
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(externalId))
+  const analyticsInitialized = useSelector((state) => state.analytics.initialized)
 
   if (!item || !listId) return null
 
-  const { title, excerpt, publisher, url } = item
+  const { title, excerpt, publisher, url, analyticsData: passedAnalytics } = item
   const itemImage = item?.noImage ? '' : item?.imageUrl
 
+  const analyticsData = {
+    ...passedAnalytics,
+    sortOrder: position
+  }
+
   const onImageFail = () => dispatch(setNoImage(externalId))
+
+  const onImpression = () =>
+    dispatch(sendSnowplowEvent('public-list.item.impression', analyticsData))
+  const onItemInView = (inView) =>
+    !impressionFired && inView && analyticsInitialized ? onImpression() : null
 
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)}>
@@ -31,9 +44,9 @@ export const PublicListCard = ({ listId, externalId }) => {
         openUrl={url}
         externalUrl={url}
         onImageFail={onImageFail}
-        onItemInView={() => { }} // impression event here
-        onOpenOriginalUrl={() => { }} // engagement event here
-        onOpen={() => { }} // engagement event here
+        onItemInView={onItemInView}
+        onOpenOriginalUrl={() => {}} // engagement event here
+        onOpen={() => {}} // engagement event here
         Actions={ActionsTransitional}
         clamp
       />

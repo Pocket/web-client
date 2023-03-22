@@ -5,20 +5,28 @@ import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { setNoImage } from 'connectors/lists/lists-display.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const ListCard = ({ id }) => {
   const dispatch = useDispatch()
 
   const list = useSelector((state) => state.listsDisplay[id])
+  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
   if (!list) return null
 
-  const { listItemIds, externalId, slug, title, description, status } = list
+  const { listItemIds, externalId, slug, title, description, status, analyticsData } = list
   const url = `/sharedlists/${externalId}/${slug}`
   const storyCount = listItemIds?.length || 0
   const itemImage = list?.noImage ? '' : list?.itemImage
 
   const onImageFail = () => dispatch(setNoImage(id))
+
+  const onItemInView = (inView) => {
+    if (!impressionFired && inView) {
+      dispatch(sendSnowplowEvent('shareable-list.impression', analyticsData))
+    }
+  }
 
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)} key={list.externalId}>
@@ -27,7 +35,7 @@ export const ListCard = ({ id }) => {
         title={title}
         excerpt={description}
         openUrl={`/lists/${externalId}`}
-        onItemInView={() => {}} // impression event here
+        onItemInView={onItemInView}
         isInternalItem={true}
         listStatus={status}
         listUrl={url}
@@ -45,6 +53,7 @@ export const ListActions = ({ id }) => {
   const dispatch = useDispatch()
 
   const handleDeleteList = () => {
+    // snowplow event
     dispatch(mutateListDelete(id))
   }
 
