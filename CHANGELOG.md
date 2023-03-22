@@ -1,3 +1,10 @@
+## [1.82.17](https://github.com/Pocket/web-client/compare/v1.82.16...v1.82.17) (2023-03-22)
+
+
+### Bug Fixes
+
+* **lists:** update edit list modal to check title value ([bbe79b1](https://github.com/Pocket/web-client/commit/bbe79b17c0868a512f442606c2420cf2012764e9))
+
 ## [1.82.16](https://github.com/Pocket/web-client/compare/v1.82.15...v1.82.16) (2023-03-22)
 
 
