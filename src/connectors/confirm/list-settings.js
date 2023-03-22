@@ -23,7 +23,9 @@ export const ListSettingsModal = ({ id }) => {
   }
 
   const handleSubmit = (listNameValue, descriptionValue) => {
-    if (titleList.includes(listNameValue)) return setError('List name has already been used.')
+    if (titleList.includes(listNameValue) && listNameValue !== title) {
+      return setError('List name has already been used.')
+    } 
 
     const data = {
       title: listNameValue,
