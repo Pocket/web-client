@@ -35,8 +35,8 @@ export const ListIndividual = () => {
   }, [dispatch, id, enrolled])
 
   if (!list) return null
-  const { title, description, slug, status, analyticsData } = list
-  const showLists = listItemIds?.length
+  const { title, description, slug, status, listItemIds: listItemCount, analyticsData } = list
+  const showLists = listItemCount?.length
 
   // Actions
   const handleSetStatus = (val) => dispatch(mutateListStatusAction({ id, status: val }))
@@ -66,7 +66,9 @@ export const ListIndividual = () => {
               handleEdit={handleEdit}
             />
 
-            {showLists
+            {!showLists ? <EmptyIndividualLists /> : null}
+
+            {listItemIds
               ? listItemIds.map((externalId, index) => (
                 <IndividualListCard
                   key={externalId}
@@ -74,7 +76,7 @@ export const ListIndividual = () => {
                   listId={id}
                   position={index}
                 />
-              )) : <EmptyIndividualLists />}
+              )) : null}
           </main>
         ) : null}
       </Layout>

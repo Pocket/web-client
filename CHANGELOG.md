@@ -1,3 +1,10 @@
+## [1.82.20](https://github.com/Pocket/web-client/compare/v1.82.19...v1.82.20) (2023-03-22)
+
+
+### Bug Fixes
+
+* **individual-list:** only show empty state when there are no list items ([b35dc7e](https://github.com/Pocket/web-client/commit/b35dc7e8d909bfa4ee7309ad96d78f912bcc56ef))
+
 ## [1.82.19](https://github.com/Pocket/web-client/compare/v1.82.18...v1.82.19) (2023-03-22)
 
 
