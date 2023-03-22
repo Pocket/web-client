@@ -10,6 +10,7 @@ import { ItemTags } from 'components/item/item-tags'
 import { itemStyles } from './item-styles'
 import { useInView } from 'react-intersection-observer'
 import { ListStatus } from 'components/shareable-lists/list-status'
+import { ListViewAltIcon } from 'components/icons/ListViewAltIcon'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
 
@@ -188,7 +189,12 @@ export const Item = (props) => {
                 {t('item:story-count', '{{count}} stories', { count: storyCount })}
               </div>
             ) : null}
-            {timeToRead ? (
+            {isUserList ? (
+              <div className="user-list-context" data-cy="user-list-context">
+                <ListViewAltIcon /> List
+              </div>
+            ) : null}
+            {timeToRead && !isUserList ? (
               <div className="time-to-read" data-cy="time-to-read">
                 {t('item:time-to-read', '{{timeToRead}} min', { timeToRead: timeToRead })}
               </div>

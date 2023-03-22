@@ -268,6 +268,10 @@ export const itemStyles = css`
         margin-right: 0.5rem;
       }
     }
+
+    .user-list-context {
+      display: none;
+    }
   }
 
   .footer-actions {
@@ -426,6 +430,11 @@ export const itemStyles = css`
       .time-to-read {
         padding-left: 0.5rem;
       }
+    }
+
+    .user-list-context {
+      display: inline-block;
+      margin-left: 16px;
     }
 
     ${breakpointMediumHandset} {
