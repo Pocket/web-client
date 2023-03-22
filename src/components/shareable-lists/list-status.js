@@ -1,41 +1,58 @@
+import { cx } from 'linaria'
 import Link from 'next/link'
+import { useDispatch } from 'react-redux'
 import { css } from 'linaria'
-import { LockIcon } from 'components/icons/LockIcon'
-import { GlobeIcon } from 'components/icons/GlobeIcon'
+import copy from 'clipboard-copy'
+import { COPY_ITEM_URL } from 'actions'
+import { LinkCopyIcon } from 'components/icons/LinkCopyIcon'
+import { bottomTooltip } from 'components/tooltip/tooltip'
 
 const statusStyles = css`
-  .chip {
-    display: inline-block;
-    padding: 2px 8px;
+  a {
     font-size: 14px;
-    background: #f9fafb;
-    color: var(--color-textSecondary);
-    border-radius: 100px;
+    color: var(--color-actionPrimary);
+    text-decoration: none;
 
-    &.public {
-      background: var(--color-teal100);
-      color: var(--color-actionPrimary);
+    &:hover {
+      text-decoration: underline;
     }
+  }
+
+  .copy {
+    margin-left: 0.5rem;
+  }
+
+  &.callout {
+    padding: 14px 16px;
+    line-height: 1.25;
+    background-color: var(--color-calloutBackgroundPrimary);
+    border-radius: 8px;
+    margin-top: 24px;
   }
 `
 
-export const ListStatus = ({ status, url }) => {
-  const isPrivate = status === 'PRIVATE'
+export const ListStatus = ({ externalId, slug, title, callout }) => {
+  const dispatch = useDispatch()
+  const url = `/sharedlists/${externalId}/${slug}`
+  const copyUrl = `https://getpocket.com${url}`
+  const linkDisplay = `https://getpocket.com/sharedlists/.../${title}`
+
+  const handleCopy = async () => {
+    await copy(copyUrl)
+    dispatch({ type: COPY_ITEM_URL }) // sends Toast
+  }
 
   return (
-    <div className={statusStyles}>
-      {isPrivate ? (
-        <div className="chip private">
-          <LockIcon /> Private
-        </div>
-      ) : (
-        <>
-          <div className="chip public">
-            <GlobeIcon /> Public
-          </div>{' '}
-          <Link href={url}>{`https://getpocket.com${url}`}</Link>
-        </>
-      )}
+    <div className={cx(callout && 'callout', statusStyles)}>
+      <Link href={url}>{linkDisplay}</Link>
+      <button
+        aria-label="Copy Link"
+        data-tooltip="Copy Link"
+        className={cx('copy', 'tiny', 'outline', bottomTooltip)}
+        data-cy="copy-link"
+        onClick={handleCopy}>
+        <LinkCopyIcon />
+      </button>
     </div>
   )
 }

@@ -1,8 +1,4 @@
 import { css, cx } from 'linaria'
-import Link from 'next/link'
-import { useDispatch } from 'react-redux'
-import copy from 'clipboard-copy'
-import { COPY_ITEM_URL } from 'actions'
 import { savesHeaderStyle } from './saves-header'
 import { ListSort } from 'components/list-sort/list-sort'
 import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
@@ -10,10 +6,9 @@ import { FiltersAltIcon } from 'components/icons/FiltersAltIcon'
 import Avatar from 'components/avatar/avatar'
 import { SaveListButton } from 'components/content-saving/save-list'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
-import { LinkCopyIcon } from 'components/icons/LinkCopyIcon'
 import { ListStatusToggle } from 'components/shareable-lists/list-status-toggle'
 import { breakpointSmallTablet } from 'common/constants'
-import { bottomTooltip } from 'components/tooltip/tooltip'
+import { ListStatus } from 'components/shareable-lists/list-status'
 
 const listHeaderStyles = css`
   padding-bottom: 22px;
@@ -28,16 +23,6 @@ const listHeaderStyles = css`
       padding-right: 16px;
       font-size: 14px;
       line-height: 20px;
-    }
-
-    a {
-      font-size: 14px;
-      color: var(--color-actionPrimary);
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
     }
   }
 
@@ -142,15 +127,7 @@ export const ListIndividualHeader = ({
   handleShare,
   handleEdit
 }) => {
-  const dispatch = useDispatch()
-  const url = `/sharedlists/${externalId}/${slug}`
   const isPublic = status === 'PUBLIC'
-
-  const copyUrl = async () => {
-    await copy(url)
-    dispatch({ type: COPY_ITEM_URL }) // sends Toast
-    cancelShare()
-  }
 
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles, 'list-individual')}>
@@ -159,17 +136,7 @@ export const ListIndividualHeader = ({
           {title}
         </h1>
         <p className="description">{description}</p>
-        <div>
-          <Link href={url}>{`https://getpocket.com/sharedlists/.../${title}`}</Link>
-          <button
-            aria-label="Copy Link"
-            data-tooltip="Copy Link"
-            className={bottomTooltip}
-            data-cy="copy-link"
-            onClick={copyUrl}>
-            <LinkCopyIcon />
-          </button>
-        </div>
+        <ListStatus externalId={externalId} slug={slug} title={title} />
       </div>
 
       <div className="create-sort">
