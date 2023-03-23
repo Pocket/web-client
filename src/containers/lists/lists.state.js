@@ -18,7 +18,7 @@ import { LIST_ALL_REQUEST_FAILURE } from 'actions'
 import { LIST_CREATE_SUCCESS } from 'actions'
 import { LIST_DELETE_SUCCESS } from 'actions'
 
-import { arrayToObject } from 'common/utilities/object-array/object-array'
+import { VARIANTS_SAVE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -120,8 +120,12 @@ const getSortOrder = (state) => state.pageListsInfo?.sortOrder
  --------------------------------------------------------------- */
 function* fetchListPilotStatus() {
   try {
-    const response = yield getShareableListPilotStatus()
-    yield put({ type: LIST_CHECK_PILOT_STATUS_SUCCESS, enrolled: response })
+    const enrolled = yield getShareableListPilotStatus()
+    const version = (enrolled) ? 'pilot.v1' : 'control'
+    const variants = { 'shareable.lists': version }
+
+    yield put ({ type: VARIANTS_SAVE, variants })
+    yield put({ type: LIST_CHECK_PILOT_STATUS_SUCCESS, enrolled })
   } catch {
     yield put({ type: LIST_CHECK_PILOT_STATUS_FAILURE })
   }

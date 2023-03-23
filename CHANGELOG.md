@@ -1,3 +1,10 @@
+## [1.82.22](https://github.com/Pocket/web-client/compare/v1.82.21...v1.82.22) (2023-03-23)
+
+
+### Bug Fixes
+
+* **lists:** fire snowplow feature enroll event ([630bec9](https://github.com/Pocket/web-client/commit/630bec91b787c1b91ece932976f54ff9f5267579))
+
 ## [1.82.21](https://github.com/Pocket/web-client/compare/v1.82.20...v1.82.21) (2023-03-22)
 
 
