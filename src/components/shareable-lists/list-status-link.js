@@ -3,13 +3,21 @@ import { css, cx } from 'linaria'
 import { LockIcon } from 'components/icons/LockIcon'
 import { GlobeIcon } from 'components/icons/GlobeIcon'
 import { PublicListUrl } from './public-list-url'
+import { breakpointSmallTablet } from 'common/constants'
 
 const statusStyles = css`
   display: flex;
   align-items: center;
 
+  ${breakpointSmallTablet} {
+    flex-direction: column;
+    align-items: baseline;
+  }
+
   .chip {
-    display: inline-block;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
     padding: 2px 8px;
     font-size: 14px;
     background: #f9fafb;
@@ -20,10 +28,16 @@ const statusStyles = css`
       background: var(--color-teal100);
       color: var(--color-actionPrimary);
     }
+
+    .icon {
+      margin-top: 0;
+      margin-right: 0.25rem;
+    }
   }
 `
 
-export const ListStatus = ({ status, publicListInfo }) => {
+export const ListStatusLink = ({ listStatusInfo }) => {
+  const { status } = listStatusInfo
   const isPrivate = status === 'PRIVATE'
 
   return (
@@ -37,7 +51,7 @@ export const ListStatus = ({ status, publicListInfo }) => {
           <div className="chip public">
             <GlobeIcon /> Public
           </div>{' '}
-          <PublicListUrl publicListInfo={publicListInfo} />
+          <PublicListUrl publicListInfo={listStatusInfo} />
         </>
       )}
     </div>

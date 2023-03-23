@@ -10,7 +10,7 @@ import { ItemTags } from 'components/item/item-tags'
 import { itemStyles } from './item-styles'
 import { useInView } from 'react-intersection-observer'
 import { ListViewAltIcon } from 'components/icons/ListViewAltIcon'
-import { ListStatus } from 'components/shareable-lists/list-status'
+import { ListStatusLink } from 'components/shareable-lists/list-status-link'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
 
@@ -41,9 +41,7 @@ export const Item = (props) => {
     isUserList,
     tags,
     type,
-    publicListInfo,
-    slug,
-    listStatus,
+    listStatusInfo,
 
     // Data
     bulkEdit,
@@ -164,7 +162,7 @@ export const Item = (props) => {
             </div>
           </a>
         </Link>
-        {listStatus ? <ListStatus status={listStatus} publicListInfo={publicListInfo} /> : null}
+        {listStatusInfo ? <ListStatusLink listStatusInfo={listStatusInfo} /> : null}
       </div>
       <footer className="footer">
         <cite className="details">

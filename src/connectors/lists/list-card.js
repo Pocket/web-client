@@ -28,7 +28,7 @@ export const ListCard = ({ id }) => {
     }
   }
 
-  const publicListInfo = {
+  const listStatusInfo = {
     externalId,
     slug,
     status
@@ -43,8 +43,7 @@ export const ListCard = ({ id }) => {
         openUrl={`/lists/${externalId}`}
         onItemInView={onItemInView}
         isInternalItem={true}
-        listStatus={status}
-        publicListInfo={publicListInfo}
+        listStatusInfo={listStatusInfo}
         listUrl={url}
         storyCount={storyCount}
         itemImage={itemImage}
