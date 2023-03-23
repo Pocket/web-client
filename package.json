@@ -19,7 +19,7 @@
     "test:e2e": "node ./.scripts/qa/e2e.js",
     "test:ci": "npm run compile:icons && jest --ci",
     "test:snowplow": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included TEST_SNOWPLOW=included node ./server.local.js",
-    "storybook": "cd .scripts/storybook && npm install && npm run storybook",
+    "storybook": "npm run prep && cd .scripts/storybook && npm install && npm run storybook",
     "storybook:build": "build-storybook",
     "compile": "npm run compile:icons & npm run compile:styles",
     "compile:icons": "node ./.scripts/icons/compile-icons.js",
