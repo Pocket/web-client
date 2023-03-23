@@ -56,7 +56,9 @@ export const Lists = () => {
 
           {loading ? <LoaderCentered /> : null}
 
-          {showLists ? listIds.map((id) => <ListCard key={id} id={id} />) : <EmptyAllLists />}
+          {showLists
+            ? listIds.map((id) => <ListCard key={id} id={id} />)
+            : <EmptyAllLists handleCreate={handleCreateList} />}
         </main>
       ) : null}
 
