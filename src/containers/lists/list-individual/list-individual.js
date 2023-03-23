@@ -45,6 +45,9 @@ export const ListIndividual = () => {
     dispatch(shareListAction(id))
   }
   const handleEdit = () => dispatch(mutateListUpdateAction(id))
+  const handleSavesClick = () => { 
+    // send snowplow event
+  }
 
   if (!enrolledFetched) return null
   if (enrolledFetched && !enrolled) return <ErrorPage statusCode={404} />
@@ -66,7 +69,7 @@ export const ListIndividual = () => {
               handleEdit={handleEdit}
             />
 
-            {!showLists ? <EmptyIndividualLists /> : null}
+            {!showLists ? <EmptyIndividualLists handleClick={handleSavesClick} /> : null}
 
             {listItemIds
               ? listItemIds.map((externalId, index) => (
