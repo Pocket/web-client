@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import Script from 'next/script'
 import { COLOR_MODE_PREFIX, CACHE_KEY_COLOR_MODE } from 'common/constants'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 
@@ -9,18 +8,6 @@ class ClientDocument extends Document {
       <Html>
         {/* prettier-ignore */}
         <Head>
-          {/* Google Tag Manager */}
-          <Script id="google-tag-manager">
-            {`
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-P4LPJ42');
-            `}
-          </Script>
-          {/* End Google Tag Manager */}
-
           {/* Loads an iOS app store banner at the top of Safari */}
           <meta name="apple-itunes-app" content="app-id=309601447" />
 
