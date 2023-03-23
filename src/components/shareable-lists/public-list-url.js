@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { css } from 'linaria'
 import copy from 'clipboard-copy'
 import { COPY_ITEM_URL } from 'actions'
+import { BASE_URL } from 'common/constants'
 import { LinkCopyIcon } from 'components/icons/LinkCopyIcon'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 
@@ -40,8 +41,8 @@ export const PublicListUrl = ({ publicListInfo, handleCopyPublicUrl }) => {
   if (status === 'PRIVATE') return null
 
   const url = `/sharedlists/${externalId}/${slug}`
-  const copyUrl = `https://getpocket.com${url}`
-  const linkDisplay = `https://getpocket.com/sharedlists/.../${slug}`
+  const copyUrl = `${BASE_URL}${url}`
+  const linkDisplay = `${BASE_URL}/sharedlists/.../${slug}`
 
   const handleCopy = async () => {
     await copy(copyUrl)
