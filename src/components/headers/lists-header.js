@@ -52,11 +52,6 @@ const listHeaderStyles = css`
       .create-sort {
         margin-top: 12px;
       }
-
-      .headline a {
-        display: block;
-        margin: 8px 0 0 0;
-      }
     }
   }
 `
@@ -128,11 +123,10 @@ export const ListIndividualHeader = ({
   handleEdit
 }) => {
   const isPublic = status === 'PUBLIC'
-
   const publicListInfo = {
     externalId,
-    slug,
-    status
+    status,
+    slug
   }
 
   return (
