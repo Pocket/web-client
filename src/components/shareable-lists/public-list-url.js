@@ -19,7 +19,9 @@ const statusStyles = css`
   }
 
   .copy {
-    margin-left: 0.5rem;
+    background: transparent;
+    color: var(--color-actionPrimary);
+    border: 0;
   }
 
   &.callout {
@@ -31,11 +33,12 @@ const statusStyles = css`
   }
 `
 
-export const PublicListUrl = ({ externalId, slug, title, callout }) => {
+export const PublicListUrl = ({ publicListInfo }) => {
+  const { externalId, slug, callout } = publicListInfo
   const dispatch = useDispatch()
   const url = `/sharedlists/${externalId}/${slug}`
   const copyUrl = `https://getpocket.com${url}`
-  const linkDisplay = `https://getpocket.com/sharedlists/.../${title}`
+  const linkDisplay = `https://getpocket.com/sharedlists/.../${slug}`
 
   const handleCopy = async () => {
     await copy(copyUrl)
@@ -48,7 +51,7 @@ export const PublicListUrl = ({ externalId, slug, title, callout }) => {
       <button
         aria-label="Copy Link"
         data-tooltip="Copy Link"
-        className={cx('copy', 'tiny', 'outline', bottomTooltip)}
+        className={cx('copy', 'tiny', bottomTooltip)}
         data-cy="copy-link"
         onClick={handleCopy}>
         <LinkCopyIcon />

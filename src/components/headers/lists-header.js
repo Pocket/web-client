@@ -129,6 +129,12 @@ export const ListIndividualHeader = ({
 }) => {
   const isPublic = status === 'PUBLIC'
 
+  const publicListInfo = {
+    externalId,
+    slug,
+    status
+  }
+
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles, 'list-individual')}>
       <div className="headline">
@@ -136,7 +142,7 @@ export const ListIndividualHeader = ({
           {title}
         </h1>
         <p className="description">{description}</p>
-        <PublicListUrl externalId={externalId} slug={slug} title={title} />
+        <PublicListUrl publicListInfo={publicListInfo} />
       </div>
 
       <div className="create-sort">
@@ -177,7 +183,10 @@ export const ListPublicHeader = ({
       <section className="list-info">
         <div className="list-user-info">
           <Avatar src={avatarUrl} size="32px" />
-          <span>{userName || 'Pocket User'}</span> | <span>{listCount} {countText}</span>
+          <span>{userName || 'Pocket User'}</span> |{' '}
+          <span>
+            {listCount} {countText}
+          </span>
         </div>
 
         <SaveListButton

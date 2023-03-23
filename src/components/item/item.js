@@ -10,7 +10,7 @@ import { ItemTags } from 'components/item/item-tags'
 import { itemStyles } from './item-styles'
 import { useInView } from 'react-intersection-observer'
 import { ListViewAltIcon } from 'components/icons/ListViewAltIcon'
-import { PublicListUrl } from 'components/shareable-lists/public-list-url'
+import { ListStatus } from 'components/shareable-lists/list-status'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
 
@@ -41,6 +41,9 @@ export const Item = (props) => {
     isUserList,
     tags,
     type,
+    publicListInfo,
+    slug,
+    listStatus,
 
     // Data
     bulkEdit,
@@ -55,7 +58,6 @@ export const Item = (props) => {
     clamp,
     showExcerpt,
     visibleCount,
-    listStatus,
 
     //Positioning
     style,
@@ -162,6 +164,7 @@ export const Item = (props) => {
             </div>
           </a>
         </Link>
+        {listStatus ? <ListStatus status={listStatus} publicListInfo={publicListInfo} /> : null}
       </div>
       <footer className="footer">
         <cite className="details">
@@ -182,7 +185,6 @@ export const Item = (props) => {
           )}
 
           <div className="context">
-            {listStatus ? <PublicListUrl /> : null}
             {storyCount ? (
               <div className="story-count" data-cy="story-count">
                 {t('item:story-count', '{{count}} stories', { count: storyCount })}

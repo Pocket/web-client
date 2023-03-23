@@ -28,6 +28,12 @@ export const ListCard = ({ id }) => {
     }
   }
 
+  const publicListInfo = {
+    externalId,
+    slug,
+    status
+  }
+
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)} key={list.externalId}>
       <Item
@@ -38,6 +44,7 @@ export const ListCard = ({ id }) => {
         onItemInView={onItemInView}
         isInternalItem={true}
         listStatus={status}
+        publicListInfo={publicListInfo}
         listUrl={url}
         storyCount={storyCount}
         itemImage={itemImage}

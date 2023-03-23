@@ -153,7 +153,7 @@ export const itemStyles = css`
     z-index: 10;
     bottom: 1rem;
     left: 1rem;
-  }  
+  }
 
   // What does the main content (title/excerpt) look like?
   .content-block {
@@ -229,6 +229,11 @@ export const itemStyles = css`
       -webkit-line-clamp: var(--excerpt-lines);
       -webkit-box-orient: vertical;
     }
+  }
+
+  .listStatus {
+    padding: 0 var(--card-padding);
+    margin-bottom: 0.5rem;
   }
 
   .footer {

@@ -25,6 +25,12 @@ export const ShareListModal = ({
   const [imageUrl, setImageUrl] = useState(thumbnail)
   const onImageFail = () => setImageUrl('')
 
+  const publicListInfo = {
+    externalId,
+    slug,
+    callout: true
+  }
+
   return (
     <Modal
       title="Share List"
@@ -45,7 +51,7 @@ export const ShareListModal = ({
             clamp
           />
         </div>
-        <PublicListUrl externalId={externalId} slug={slug} title={title} callout />
+        <PublicListUrl publicListInfo={publicListInfo} />
       </ModalBody>
       <ModalFooter className={reducedPaddingStyles}>
         <ShareList
