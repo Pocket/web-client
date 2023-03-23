@@ -9,8 +9,8 @@ import { CardMedia } from 'components/item/item-media'
 import { ItemTags } from 'components/item/item-tags'
 import { itemStyles } from './item-styles'
 import { useInView } from 'react-intersection-observer'
-import { ListStatus } from 'components/shareable-lists/list-status'
 import { ListViewAltIcon } from 'components/icons/ListViewAltIcon'
+import { ListStatusLink } from 'components/shareable-lists/list-status-link'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
 
@@ -41,6 +41,7 @@ export const Item = (props) => {
     isUserList,
     tags,
     type,
+    listStatusInfo,
 
     // Data
     bulkEdit,
@@ -55,8 +56,6 @@ export const Item = (props) => {
     clamp,
     showExcerpt,
     visibleCount,
-    listStatus,
-    listUrl,
 
     //Positioning
     style,
@@ -70,7 +69,8 @@ export const Item = (props) => {
     onItemInView,
     snowplowId,
     onOpenOriginalUrl,
-    onOpen
+    onOpen,
+    onCopyPublicUrl
   } = props
 
   const { t } = useTranslation()
@@ -163,6 +163,9 @@ export const Item = (props) => {
             </div>
           </a>
         </Link>
+        {listStatusInfo ? (
+          <ListStatusLink listStatusInfo={listStatusInfo} handleCopyPublicUrl={onCopyPublicUrl} />
+        ) : null}
       </div>
       <footer className="footer">
         <cite className="details">
@@ -183,7 +186,6 @@ export const Item = (props) => {
           )}
 
           <div className="context">
-            {listStatus ? <ListStatus status={listStatus} url={listUrl} /> : null}
             {storyCount ? (
               <div className="story-count" data-cy="story-count">
                 {t('item:story-count', '{{count}} stories', { count: storyCount })}

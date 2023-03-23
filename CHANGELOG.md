@@ -1,3 +1,20 @@
+## [1.82.25](https://github.com/Pocket/web-client/compare/v1.82.24...v1.82.25) (2023-03-23)
+
+
+### Bug Fixes
+
+* **item:** update import ([e5c6b59](https://github.com/Pocket/web-client/commit/e5c6b595767145f8625b33ebd8903173eb522cd3))
+* **ListIndividualHeader:** adjust styles ([9d6e017](https://github.com/Pocket/web-client/commit/9d6e017e99e9b7fa3468359411cb1c889649f0da))
+* **ListIndividualHeader:** making things show up ([c8cd1f6](https://github.com/Pocket/web-client/commit/c8cd1f6a02f2af2435852bc6865a8fa39e7aa7c5))
+* **lists-header:** use list status component ([19836f1](https://github.com/Pocket/web-client/commit/19836f1aa1279dedb4c3f1f39f3a2df56c1cbdc9))
+* **lists:** add back ListStatus, use it in the PublicListUrl ([23f4224](https://github.com/Pocket/web-client/commit/23f4224fd7bea18b411126293808446b1771b7f3))
+* **ListStatusLink:** rename ListStatus to ListStatusLink ([d909ec2](https://github.com/Pocket/web-client/commit/d909ec2a322c0fc6826a2f723e5e2c5f5ec516ef))
+* **PublicListUrl:** grab status from publicListInfo ([4c5a282](https://github.com/Pocket/web-client/commit/4c5a2829939897c9e00f7a029a225d2a4bba4a2f))
+* **PublicListUrl:** rename ListStatus to PublicListUrl ([4a7546d](https://github.com/Pocket/web-client/commit/4a7546d9500d365657b6f10f40887f9dfee9da84))
+* **PublicListUrl:** use BASE_URL ([7cb766f](https://github.com/Pocket/web-client/commit/7cb766f56f7bfbccdaea03aef4e5513dfd57c68a))
+* **ShareListModal:** use new component for url display/copy ([7f1c3a1](https://github.com/Pocket/web-client/commit/7f1c3a1fab54bd15f9667106ec183bcfbffa35dc))
+* **snowplow:** add engagement events for all the places we can copy ([c7b2257](https://github.com/Pocket/web-client/commit/c7b2257c2562eccadd436e41ac780c985fb0a5af))
+
 ## [1.82.24](https://github.com/Pocket/web-client/compare/v1.82.23...v1.82.24) (2023-03-23)
 
 
