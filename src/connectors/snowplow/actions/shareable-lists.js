@@ -147,6 +147,55 @@ export const shareableListActions = {
     ],
     description: 'Fired when a user clicks the Copy Link button in the Share List modal'
   },
+  'shareable-list.public-link.copy.share-modal': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user copies the public URL from the share modal'
+  },
+  'shareable-list.public-link.copy.header': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user copies the public URL from the Individual List page header'
+  },
+  'shareable-list.public-link.copy.all-lists': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description:
+      'Fired when a user copies the public URL from one of the List cards on the All Lists page'
+  },
 
   // shareable list ITEM
   'shareable-list.item.impression': {

@@ -28,6 +28,16 @@ export const ListCard = ({ id }) => {
     }
   }
 
+  const onCopyPublicUrl = () => {
+    dispatch(sendSnowplowEvent('shareable-list.public-link.copy.all-lists', analyticsData))
+  }
+
+  const listStatusInfo = {
+    externalId,
+    slug,
+    status
+  }
+
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)} key={list.externalId}>
       <Item
@@ -36,8 +46,9 @@ export const ListCard = ({ id }) => {
         excerpt={description}
         openUrl={`/lists/${externalId}`}
         onItemInView={onItemInView}
+        onCopyPublicUrl={onCopyPublicUrl}
         isInternalItem={true}
-        listStatus={status}
+        listStatusInfo={listStatusInfo}
         listUrl={url}
         storyCount={storyCount}
         itemImage={itemImage}

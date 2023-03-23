@@ -5,10 +5,10 @@ import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
 import { FiltersAltIcon } from 'components/icons/FiltersAltIcon'
 import Avatar from 'components/avatar/avatar'
 import { SaveListButton } from 'components/content-saving/save-list'
-import { ListStatus } from 'components/shareable-lists/list-status'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
 import { ListStatusToggle } from 'components/shareable-lists/list-status-toggle'
 import { breakpointSmallTablet } from 'common/constants'
+import { PublicListUrl } from 'components/shareable-lists/public-list-url'
 
 const listHeaderStyles = css`
   padding-bottom: 22px;
@@ -23,11 +23,6 @@ const listHeaderStyles = css`
       padding-right: 16px;
       font-size: 14px;
       line-height: 20px;
-    }
-
-    a {
-      margin-left: 10px;
-      font-size: 14px;
     }
   }
 
@@ -56,11 +51,6 @@ const listHeaderStyles = css`
 
       .create-sort {
         margin-top: 12px;
-      }
-
-      .headline a {
-        display: block;
-        margin: 8px 0 0 0;
       }
     }
   }
@@ -130,10 +120,15 @@ export const ListIndividualHeader = ({
   slug,
   handleSetStatus,
   handleShare,
-  handleEdit
+  handleEdit,
+  handleCopyPublicUrl
 }) => {
-  const url = `/sharedlists/${externalId}/${slug}`
   const isPublic = status === 'PUBLIC'
+  const publicListInfo = {
+    externalId,
+    status,
+    slug
+  }
 
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles, 'list-individual')}>
@@ -142,7 +137,7 @@ export const ListIndividualHeader = ({
           {title}
         </h1>
         <p className="description">{description}</p>
-        <ListStatus status={status} url={url} />
+        <PublicListUrl publicListInfo={publicListInfo} handleCopyPublicUrl={handleCopyPublicUrl} />
       </div>
 
       <div className="create-sort">
@@ -183,7 +178,10 @@ export const ListPublicHeader = ({
       <section className="list-info">
         <div className="list-user-info">
           <Avatar src={avatarUrl} size="32px" />
-          <span>{userName || 'Pocket User'}</span> | <span>{listCount} {countText}</span>
+          <span>{userName || 'Pocket User'}</span> |{' '}
+          <span>
+            {listCount} {countText}
+          </span>
         </div>
 
         <SaveListButton

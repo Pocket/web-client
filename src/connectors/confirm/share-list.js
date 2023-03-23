@@ -22,16 +22,23 @@ export const ConfirmShare = () => {
     dispatch(sendSnowplowEvent(`shareable-list.${identifier}`, analyticsData))
   }
 
+  const handleCopyPublicUrl = () => {
+    dispatch(sendSnowplowEvent('shareable-list.public-link.copy.share-modal', analyticsData))
+  }
+
   return (
     <ShareListModal
+      externalId={externalId}
       title={title}
       description={description}
+      slug={slug}
       externalUrl={url}
       thumbnail={itemImage}
       storyCount={storyCount}
       showModal={true}
       cancelShare={cancelShare}
       engagementEvent={engagementEvent}
+      handleCopyPublicUrl={handleCopyPublicUrl}
     />
   )
 }
