@@ -34,8 +34,11 @@ const statusStyles = css`
 `
 
 export const PublicListUrl = ({ publicListInfo }) => {
-  const { externalId, slug, callout } = publicListInfo
   const dispatch = useDispatch()
+  const { externalId, slug, callout, status } = publicListInfo
+
+  if (status === 'PRIVATE') return null
+
   const url = `/sharedlists/${externalId}/${slug}`
   const copyUrl = `https://getpocket.com${url}`
   const linkDisplay = `https://getpocket.com/sharedlists/.../${slug}`
