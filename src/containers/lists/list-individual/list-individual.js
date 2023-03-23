@@ -49,6 +49,10 @@ export const ListIndividual = () => {
     // send snowplow event
   }
 
+  const handleCopyPublicUrl = () => {
+    dispatch(sendSnowplowEvent('shareable-list.public-link.copy.header', analyticsData))
+  }
+
   if (!enrolledFetched) return null
   if (enrolledFetched && !enrolled) return <ErrorPage statusCode={404} />
   return (
@@ -67,6 +71,7 @@ export const ListIndividual = () => {
               handleSetStatus={handleSetStatus}
               handleShare={handleShare}
               handleEdit={handleEdit}
+              handleCopyPublicUrl={handleCopyPublicUrl}
             />
 
             {!showLists ? <EmptyIndividualLists handleClick={handleSavesClick} /> : null}

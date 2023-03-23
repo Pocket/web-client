@@ -120,7 +120,8 @@ export const ListIndividualHeader = ({
   slug,
   handleSetStatus,
   handleShare,
-  handleEdit
+  handleEdit,
+  handleCopyPublicUrl
 }) => {
   const isPublic = status === 'PUBLIC'
   const publicListInfo = {
@@ -136,7 +137,7 @@ export const ListIndividualHeader = ({
           {title}
         </h1>
         <p className="description">{description}</p>
-        <PublicListUrl publicListInfo={publicListInfo} />
+        <PublicListUrl publicListInfo={publicListInfo} handleCopyPublicUrl={handleCopyPublicUrl} />
       </div>
 
       <div className="create-sort">

@@ -20,7 +20,8 @@ export const ShareListModal = ({
   storyCount,
   showModal,
   cancelShare,
-  engagementEvent
+  engagementEvent,
+  handleCopyPublicUrl
 }) => {
   const [imageUrl, setImageUrl] = useState(thumbnail)
   const onImageFail = () => setImageUrl('')
@@ -51,7 +52,7 @@ export const ShareListModal = ({
             clamp
           />
         </div>
-        <PublicListUrl publicListInfo={publicListInfo} />
+        <PublicListUrl publicListInfo={publicListInfo} handleCopyPublicUrl={handleCopyPublicUrl} />
       </ModalBody>
       <ModalFooter className={reducedPaddingStyles}>
         <ShareList

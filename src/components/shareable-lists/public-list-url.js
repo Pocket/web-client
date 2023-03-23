@@ -33,7 +33,7 @@ const statusStyles = css`
   }
 `
 
-export const PublicListUrl = ({ publicListInfo }) => {
+export const PublicListUrl = ({ publicListInfo, handleCopyPublicUrl }) => {
   const dispatch = useDispatch()
   const { externalId, slug, callout, status } = publicListInfo
 
@@ -45,6 +45,7 @@ export const PublicListUrl = ({ publicListInfo }) => {
 
   const handleCopy = async () => {
     await copy(copyUrl)
+    handleCopyPublicUrl() // sends snowplow engagement event
     dispatch({ type: COPY_ITEM_URL }) // sends Toast
   }
 

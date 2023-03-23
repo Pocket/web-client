@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { css, cx } from 'linaria'
 import { LockIcon } from 'components/icons/LockIcon'
 import { GlobeIcon } from 'components/icons/GlobeIcon'
@@ -36,7 +35,7 @@ const statusStyles = css`
   }
 `
 
-export const ListStatusLink = ({ listStatusInfo }) => {
+export const ListStatusLink = ({ listStatusInfo, handleCopyPublicUrl }) => {
   const { status } = listStatusInfo
   const isPrivate = status === 'PRIVATE'
 
@@ -51,7 +50,10 @@ export const ListStatusLink = ({ listStatusInfo }) => {
           <div className="chip public">
             <GlobeIcon /> Public
           </div>{' '}
-          <PublicListUrl publicListInfo={listStatusInfo} />
+          <PublicListUrl
+            publicListInfo={listStatusInfo}
+            handleCopyPublicUrl={handleCopyPublicUrl}
+          />
         </>
       )}
     </div>
