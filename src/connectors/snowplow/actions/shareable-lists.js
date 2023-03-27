@@ -91,7 +91,7 @@ export const shareableListActions = {
       'moderationStatus',
       'createdAt'
     ],
-    description: 'Fired when a creator clicks the Remove button on a list'
+    description: 'Fired when a creator clicks the "Delete" button on a list on the All Lists page'
   },
   'shareable-list.delete.cancel': {
     eventType: 'engagement',
@@ -99,7 +99,7 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    description: 'Fired when a creator clicks the Cancel button in the Delete Modal'
+    description: 'Fired when a creator clicks the "Cancel" button in the Delete Modal'
   },
   'shareable-list.delete.confirm': {
     eventType: 'engagement',
@@ -107,7 +107,7 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    description: 'Fired when a creator clicks the Delete button in the Delete Modal'
+    description: 'Fired when a creator clicks the "Delete" button in the Delete Modal'
   },
   'shareable-list.share': {
     eventType: 'engagement',
@@ -123,7 +123,7 @@ export const shareableListActions = {
       'moderationStatus',
       'createdAt'
     ],
-    description: 'Fired when a creator clicks the Share button on a list'
+    description: 'Fired when a creator clicks the "Share" button on a list'
   },
   'shareable-list.share.facebook': {
     eventType: 'engagement',
@@ -139,7 +139,7 @@ export const shareableListActions = {
       'moderationStatus',
       'createdAt'
     ],
-    description: 'Fired when a user clicks the FB button in the Share List modal'
+    description: 'Fired when a creator clicks the "FB" button in the Share List modal'
   },
   'shareable-list.share.twitter': {
     eventType: 'engagement',
@@ -155,7 +155,7 @@ export const shareableListActions = {
       'moderationStatus',
       'createdAt'
     ],
-    description: 'Fired when a user clicks the Twitter button in the Share List modal'
+    description: 'Fired when a creator clicks the "Twitter" button in the Share List modal'
   },
   'shareable-list.share.linkedin': {
     eventType: 'engagement',
@@ -171,7 +171,7 @@ export const shareableListActions = {
       'moderationStatus',
       'createdAt'
     ],
-    description: 'Fired when a user clicks the LinkedIn button in the Share List modal'
+    description: 'Fired when a creator clicks the "LinkedIn" button in the Share List modal'
   },
   'shareable-list.share.reddit': {
     eventType: 'engagement',
@@ -187,7 +187,7 @@ export const shareableListActions = {
       'moderationStatus',
       'createdAt'
     ],
-    description: 'Fired when a user clicks the Reddit button in the Share List modal'
+    description: 'Fired when a creator clicks the "Reddit" button in the Share List modal'
   },
   'shareable-list.share.buffer': {
     eventType: 'engagement',
@@ -203,7 +203,7 @@ export const shareableListActions = {
       'moderationStatus',
       'createdAt'
     ],
-    description: 'Fired when a user clicks the Buffer button in the Share List modal'
+    description: 'Fired when a creator clicks the "Buffer" button in the Share List modal'
   },
   'shareable-list.share.copy': {
     eventType: 'engagement',
@@ -219,7 +219,7 @@ export const shareableListActions = {
       'moderationStatus',
       'createdAt'
     ],
-    description: 'Fired when a user clicks the Copy Link button in the Share List modal'
+    description: 'Fired when a creator clicks the "Copy Link" button in the Share List modal'
   },
   'shareable-list.public-link.copy.share-modal': {
     eventType: 'engagement',
@@ -235,7 +235,7 @@ export const shareableListActions = {
       'moderationStatus',
       'createdAt'
     ],
-    description: 'Fired when a user copies the public URL from the share modal'
+    description: 'Fired when a creator copies the public URL from the share modal'
   },
   'shareable-list.public-link.copy.header': {
     eventType: 'engagement',
@@ -251,7 +251,7 @@ export const shareableListActions = {
       'moderationStatus',
       'createdAt'
     ],
-    description: 'Fired when a user copies the public URL from the Individual List page header'
+    description: 'Fired when a creator copies the public URL from the Individual List page header'
   },
   'shareable-list.public-link.copy.all-lists': {
     eventType: 'engagement',
@@ -268,7 +268,7 @@ export const shareableListActions = {
       'createdAt'
     ],
     description:
-      'Fired when a user copies the public URL from one of the List cards on the All Lists page'
+      'Fired when a creator copies the public URL from one of the List cards on the All Lists page'
   },
 
   // shareable list ITEM
