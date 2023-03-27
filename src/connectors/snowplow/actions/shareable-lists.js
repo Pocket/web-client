@@ -17,6 +17,22 @@ export const shareableListActions = {
     ],
     description: 'Fired when a list is shown on the All Lists page'
   },
+  'shareable-list.open': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator clicks on a List on the All Lists page'
+  },
   'shareable-list.create.header': {
     eventType: 'engagement',
     entityTypes: ['ui'],
