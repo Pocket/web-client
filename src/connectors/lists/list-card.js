@@ -54,17 +54,18 @@ export const ListCard = ({ id }) => {
         itemImage={itemImage}
         onImageFail={onImageFail}
         Actions={ListActions}
+        analyticsData={analyticsData}
         clamp
       />
     </div>
   )
 }
 
-export const ListActions = ({ id }) => {
+export const ListActions = ({ id, analyticsData }) => {
   const dispatch = useDispatch()
 
   const handleDeleteList = () => {
-    // snowplow event
+    dispatch(sendSnowplowEvent('shareable-list.delete.intent', analyticsData))
     dispatch(mutateListDelete(id))
   }
 

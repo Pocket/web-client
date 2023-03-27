@@ -53,6 +53,38 @@ export const shareableListActions = {
     expects: [],
     description: 'Fired when a creator sorts lists by newest on the All Lists page'
   },
+  'shareable-list.delete.intent': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator clicks the Remove button on a list'
+  },
+  'shareable-list.delete.cancel': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a creator clicks the Cancel button in the Delete Modal'
+  },
+  'shareable-list.delete.confirm': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a creator clicks the Delete button in the Delete Modal'
+  },
   'shareable-list.share': {
     eventType: 'engagement',
     entityTypes: ['ui', 'shareableList'],

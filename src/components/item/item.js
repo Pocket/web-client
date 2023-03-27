@@ -64,6 +64,7 @@ export const Item = (props) => {
     Actions,
     shortcutSelect,
     selectBulk,
+    analyticsData,
 
     // Tracking
     onItemInView,
@@ -224,6 +225,7 @@ export const Item = (props) => {
               isArchive={isArchive}
               isPremium={isPremium}
               saveStatus={saveStatus}
+              analyticsData={analyticsData}
             />
           ) : null}
         </div>
