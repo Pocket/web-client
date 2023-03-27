@@ -90,7 +90,7 @@ function deriveList(list, listId, listItems) {
   const analyticsData = {
     id: listId,
     shareableListExternalId: listId,
-    slug: slug,
+    slug: slug || '',
     title: title,
     description: description,
     status: status,
