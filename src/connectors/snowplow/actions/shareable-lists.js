@@ -35,6 +35,14 @@ export const shareableListActions = {
     expects: [],
     description: 'Fired when a creator clicks the "Create List" button in the sidebar'
   },
+  'shareable-list.create.empty-all-lists': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a creator clicks the "Create List" button on the empty All Lists page'
+  },
   'shareable-list.sort.oldest': {
     eventType: 'engagement',
     entityTypes: ['ui'],

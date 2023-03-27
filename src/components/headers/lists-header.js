@@ -103,7 +103,7 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
       </h1>
 
       <div className="create-sort">
-        <button onClick={handleCreateList} className="tiny">
+        <button onClick={() => handleCreateList('header')} className="tiny">
           <PlaylistAddIcon /> Create List
         </button>
         <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />

@@ -18,7 +18,7 @@ export const EmptyAllLists = ({ handleCreate }) => {
     <div className={emptyStyles}>
       <img src={BorderSVG.src} alt="" />
       <p>Create your first list.</p>
-      <button className="outline" onClick={handleCreate}>
+      <button className="outline" onClick={() => handleCreate('empty-all-lists')}>
         <PlaylistAddIcon /> Create list
       </button>
     </div>

@@ -36,8 +36,8 @@ export const Lists = () => {
   }, [dispatch, enrolled])
 
   // Actions
-  const handleCreateList = () => {
-    dispatch(sendSnowplowEvent('shareable-list.create.header'))
+  const handleCreateList = (identifier) => {
+    dispatch(sendSnowplowEvent(`shareable-list.create.${identifier}`))
     dispatch(mutateListCreate())
   }
   const handleNewest = () => {
