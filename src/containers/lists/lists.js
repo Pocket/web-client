@@ -40,8 +40,15 @@ export const Lists = () => {
     dispatch(sendSnowplowEvent('shareable-list.create.header'))
     dispatch(mutateListCreate())
   }
-  const handleNewest = () => dispatch(listsItemsSetSortOrder('DESC'))
-  const handleOldest = () => dispatch(listsItemsSetSortOrder('ASC'))
+  const handleNewest = () => {
+    dispatch(sendSnowplowEvent('shareable-list.sort.newest'))
+    dispatch(listsItemsSetSortOrder('DESC'))
+  }
+
+  const handleOldest = () => {
+    dispatch(sendSnowplowEvent('shareable-list.sort.oldest'))
+    dispatch(listsItemsSetSortOrder('ASC'))
+  }
 
   if (!enrolledFetched) return null
   if (enrolledFetched && !enrolled) return <ErrorPage statusCode={404} />
