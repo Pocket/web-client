@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import Head from 'next/head'
 import { css } from 'linaria'
@@ -18,70 +18,101 @@ const pageContainerStyle = css`
     min-height: auto;
     height: auto;
   }
-`
 
-const containerStyle = css`
-  display: flex;
-  /* set flex grow to 1 so that if a parent page layout wants to vertically center
-  this and fill page space with header/footer, it will do that */
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-  height: 100%;
-  padding-top: 65px;
-
-  .errorHeading {
-    font-family: var(--fontSansSerif);
-    font-size: 2.5rem;
-    line-height: 120%;
-    margin: 0 0 1.5rem 0;
-  }
-
-  p {
-    margin-bottom: 0.5rem;
-  }
-
-  ${breakpointLargeHandset} {
-    min-height: 350px;
+  .container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    height: 100%;
+    padding-top: 65px;
 
     .errorHeading {
-      font-size: 2rem;
+      font-family: var(--fontSansSerif);
+      font-size: 2.5rem;
+      line-height: 120%;
+      margin: 0 0 1.5rem 0;
     }
 
-    p {
+    ${breakpointLargeHandset} {
+      min-height: 350px;
+    }
+  }
+
+  .content {
+    max-width: 744px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    line-height: 120%;
+    margin: 0 0 1.5rem;
+    ${breakpointLargeHandset} {
+      font-size: 2rem;
+    }
+  }
+  cite {
+    display: block;
+    padding: 1rem;
+    background-color: var(--color-navCurrentTab);
+    border-radius: var(--borderRadius);
+    margin-bottom: 1rem;
+  }
+  p {
+    color: var(--color-textSecondary);
+    margin-bottom: 2rem;
+    ${breakpointLargeHandset} {
       font-size: 1rem;
     }
   }
 `
-const contentStyle = css`
-  max-width: 744px;
-`
-const messageStyle = css`
-  font-family: var(--fontSansSerif);
-  color: var(--color-textSecondary);
-`
 
-function getMessageForCode(statusCode) {
-  if (statusCode === 404) {
-    const url = global.location ? `${global.location.pathname}${global.location.search}` : null
-    return `There’s been a 404 error. We couldn’t find a matching page${
-      url ? ` for "${url}"` : ''
-    }. Please contact our support team if you feel this is a mistake.`
+export default function ErrorPage({ statusCode, explicitError }) {
+  const { t } = useTranslation()
+  const router = useRouter()
+  const url = router.asPath
+  const isLoggedIn = useSelector((state) => !!state.user.auth)
+  const errorCode = explicitError || statusCode
+
+  const getMessageForCode = () => {
+    switch (errorCode) {
+      case 404: {
+        return {
+          title: t('error:404-title', 'Oops! Something’s gone awry...'),
+          message: t(
+            'error:404-message',
+            `Looks like the page you are trying to reach has gone missing. Please contact our support team if you feel this is a mistake.`
+          ),
+          detail: `'${url}' cannot be found.`,
+          ActionComponent: GetSupport
+        }
+      }
+
+      case 'mobileNotficationSettings': {
+        return {
+          title: t('error:notification-title', 'Hmm, looks like something went wrong'),
+          message: t(
+            'error:notification-message',
+            'The link you clicked directs you to your phone’s notification settings, which can only be accessed on a mobile device.'
+          )
+        }
+      }
+
+      default: {
+        return {
+          title: t('error:title', 'Oops! Something’s gone awry...'),
+          message: t(
+            'error:message',
+            `There’s been a ${errorCode} error. Try refreshing your page and see if that fixes things. If you’re still seeing the issue, please contact our support team.`
+          ),
+          ActionComponent: GetSupport
+        }
+      }
+    }
   }
 
-  return `There’s been a${
-    statusCode ? ` ${statusCode}` : 'n'
-  } error. Try refreshing your page and see if that fixes things. If you’re still seeing the issue, please contact our support team.`
-}
-
-export default function ErrorPage({ statusCode }) {
-  const isLoggedIn = useSelector((state) => !!state.user.auth)
-  const [errorMessage, setErrorMessage] = useState(getMessageForCode())
-
-  useEffect(() => {
-    setErrorMessage(getMessageForCode(statusCode))
-  }, [statusCode])
+  const { title, message, detail, ActionComponent } = getMessageForCode()
 
   return (
     <>
@@ -99,15 +130,12 @@ export default function ErrorPage({ statusCode }) {
       <GlobalNav isLoggedIn={isLoggedIn} />
 
       <PageContainer className={pageContainerStyle}>
-        <div className={containerStyle}>
-          <div className={contentStyle}>
-            <h1 className="errorHeading">Oops! Something’s gone awry...</h1>
-            <p className={messageStyle} data-cy="error-message">
-              {errorMessage || getMessageForCode(statusCode)}
-            </p>
-            <a className="button primary large" href="https://help.getpocket.com/">
-              Contact Support
-            </a>
+        <div className="container">
+          <div className="content">
+            <h1>{title}</h1>
+            {detail ? <cite>{detail}</cite> : null}
+            <p data-cy="error-message">{message}</p>
+            {ActionComponent ? <ActionComponent /> : null}
           </div>
         </div>
       </PageContainer>
@@ -117,14 +145,11 @@ export default function ErrorPage({ statusCode }) {
   )
 }
 
-ErrorPage.propTypes = {
-  /**
-   * Error status code from a failed request if this page is used to display
-   * a page-blocking error caused by that request (e.g., 404 page not found)
-   */
-  statusCode: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-}
-
-ErrorPage.defaultProps = {
-  statusCode: null
+function GetSupport() {
+  const { t } = useTranslation()
+  return (
+    <a className="button primary large" href="https://help.getpocket.com/">
+      {t('error:contact', 'Contact Support')}
+    </a>
+  )
 }
