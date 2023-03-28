@@ -28,12 +28,15 @@ import { loadPolyfills } from 'common/setup/polyfills'
 
 import { Shortcuts } from 'connectors/shortcuts/shortcuts'
 import { DevTools } from 'connectors/dev-tools/dev-tools'
+import { useRouter } from 'next/router'
 
 /** App
  --------------------------------------------------------------- */
 function PocketWebClient({ Component, pageProps, err }) {
   // Initialize app once per page load
   const dispatch = useDispatch()
+
+  const router = useRouter()
 
   const { user_status, user_id, sess_guid, birth } = useSelector((state) => state.user) //prettier-ignore
   const { flagsReady } = useSelector((state) => state.features)
@@ -49,13 +52,31 @@ function PocketWebClient({ Component, pageProps, err }) {
     loadPolyfills()
   }, [])
 
-
   // Google Analytics
   useEffect(()=> {
     window.gtag = window.gtag || function() { window.dataLayer.push(arguments) }
     window.gtag('js', new Date())
-    window.gtag('config', GOOGLE_ANALYTICS_ID)
+    window.gtag('config', GOOGLE_ANALYTICS_ID, {
+      send_page_view: false
+    })
   }, [])
+
+  // Google Analytics - manual pageviews due to app being a SPA
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      window.gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: location.href,
+        page_path: url,
+        send_to: GOOGLE_ANALYTICS_ID
+      })
+    }
+
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
   // Check user status with cookies
   useEffect(() => {
