@@ -96,6 +96,10 @@ const publicListHeaderStyles = css`
 `
 
 export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, handleOldest }) => {
+  const onCreateList = () => {
+    handleCreateList('header')
+  }
+
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles)}>
       <h1 className="pageTitle" data-cy="page-title">
@@ -103,7 +107,7 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
       </h1>
 
       <div className="create-sort">
-        <button onClick={() => handleCreateList('header')} className="tiny">
+        <button onClick={onCreateList} className="tiny">
           <PlaylistAddIcon /> Create List
         </button>
         <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />

@@ -14,11 +14,15 @@ const emptyStyles = css`
 `
 
 export const EmptyAllLists = ({ handleCreate }) => {
+  const onCreateList = () => {
+    handleCreate('empty-all-lists')
+  }
+
   return (
     <div className={emptyStyles}>
       <img src={BorderSVG.src} alt="" />
       <p>Create your first list.</p>
-      <button className="outline" onClick={() => handleCreate('empty-all-lists')}>
+      <button className="outline" onClick={onCreateList}>
         <PlaylistAddIcon /> Create list
       </button>
     </div>
