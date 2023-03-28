@@ -84,7 +84,7 @@ export default function ErrorPage({ statusCode, explicitError }) {
             'error:404-message',
             `Looks like the page you are trying to reach has gone missing. Please contact our support team if you feel this is a mistake.`
           ),
-          detail: `'${url}' cannot be found.`,
+          detail: t('error:404-detail', `'${url}' cannot be found.`),
           ActionComponent: GetSupport
         }
       }
