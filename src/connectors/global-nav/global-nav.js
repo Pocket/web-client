@@ -51,7 +51,8 @@ export const enforceDefaultAvatar = (avatarUrl = '') => {
  * It has no stories or tests because of this, and will pass through any props
  * provided to it to the GlobalNav component.
  */
-const GlobalNav = ({ selectedLink: selected, subset, tag, noNav }) => {
+const GlobalNav = (props) => {
+  const { selectedLink: selected, subset, tag, noNav } = props
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
