@@ -76,14 +76,13 @@ function* itemsCreateList({ id }) {
     // If item is null, that means an id was never passed in, so listItemData will
     // remain null, which means it'll create a list without the item.
     if (item) {
-      const { givenUrl, excerpt, thumbnail, title, publisher, itemId } = item
+      const { givenUrl, excerpt, thumbnail, title, publisher } = item
       listItemData = {
         url: givenUrl,
         excerpt,
         imageUrl: thumbnail || null,
         title,
         publisher,
-        itemId,
         sortOrder: 1
       }
     }

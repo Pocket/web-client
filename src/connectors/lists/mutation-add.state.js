@@ -71,10 +71,9 @@ function* listAddItem({ id }) {
 
   try {
     const { externalId, listTitle } = confirm
-    const { givenUrl, excerpt, thumbnail, title, publisher, itemId } = yield select(getItem, id)
+    const { givenUrl, excerpt, thumbnail, title, publisher } = yield select(getItem, id)
 
     const data = {
-      itemId,
       url: givenUrl,
       excerpt,
       imageUrl: thumbnail || null,
