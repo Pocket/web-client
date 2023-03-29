@@ -24,9 +24,22 @@ export default function ErrorPage({ statusCode }: { statusCode?: number | string
 
   return (
     <>
+      {/* prettier-ignore */}
       <Head>
         <title>Error</title>
-        <style>{`body,html{height: 100%;}#__next{display:flex;flex-direction:column;height:100%;}`}</style>
+
+        {/* Body specific styles — Needed to keep footer in the correct place */}
+        <style>{`
+          body, html { height: 100%; }
+          #__next { display: flex; flex-direction: column; height: 100%; }
+        `}</style>
+
+        {/* Icons */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/i/apple-touch-icon/Pocket_AppIcon_@57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/i/apple-touch-icon/Pocket_AppIcon_@72.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/i/apple-touch-icon/Pocket_AppIcon_@114.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/i/apple-touch-icon/Pocket_AppIcon_@144.png" />
       </Head>
 
       <GlobalNav />
