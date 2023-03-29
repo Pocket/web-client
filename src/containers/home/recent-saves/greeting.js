@@ -10,8 +10,7 @@ const homeGreeting = css`
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.2;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 2.5rem 0 1rem;
 `
 
 export const HomeGreeting = () => {
