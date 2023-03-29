@@ -1,4 +1,4 @@
-import ErrorPage from 'containers/_error/error.js'
+import ErrorPage from 'containers/_error/error'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
 

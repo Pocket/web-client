@@ -6,8 +6,7 @@
 import React from 'react'
 import Error from 'next/error'
 import * as Sentry from '@sentry/nextjs'
-
-import ErrorPage from 'containers/_error/error.js'
+import ErrorPage from 'containers/_error/error'
 
 const ClientError = ({ statusCode, hasGetInitialPropsRun, err }) => {
   if (!hasGetInitialPropsRun && err) {
