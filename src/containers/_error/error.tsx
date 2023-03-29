@@ -19,10 +19,10 @@ type ErrorPageProps = {
 
 /**
  * ErrorPage
- * This is the visual side of the custon error that we pass on to NextJS to provide
- * an error page that is more in line with the design language of Pocket.
- * It can also be used for explicit errors on pages that do not exist on the web-client
- * but are valid on mobile
+ * This is the visual side of the custon error that we pass on to NextJS to 
+ * provide an error page that is more in line with the design language of 
+ * Pocket. It can also be used for explicit errors on pages that do not exist 
+ * on the web-client but are valid on mobile
  */
 export default function ErrorPage({ statusCode }: ErrorPageProps) {
   const { t } = useTranslation()
