@@ -109,6 +109,54 @@ export const shareableListActions = {
     },
     description: 'Fired when a creator clicks the "Delete" button in the Delete Modal'
   },
+  'shareable-list.edit-settings.intent': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator clicks the "Settings" button on a list on the All Lists page'
+  },
+  'shareable-list.edit-settings.cancel': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator cancels out of the List Settings modal'
+  },
+  'shareable-list.edit-settings.submit': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator submits changes in the List Settings modal'
+  },
   'shareable-list.share': {
     eventType: 'engagement',
     entityTypes: ['ui', 'shareableList'],

@@ -44,7 +44,10 @@ export const ListIndividual = () => {
     dispatch(sendSnowplowEvent('shareable-list.share', analyticsData))
     dispatch(shareListAction(id))
   }
-  const handleEdit = () => dispatch(mutateListUpdateAction(id))
+  const handleEdit = () => {
+    dispatch(sendSnowplowEvent('shareable-list.edit-settings.intent', analyticsData))
+    dispatch(mutateListUpdateAction(id))
+  }
   const handleSavesClick = () => {
     dispatch(sendSnowplowEvent('shareable-list.empty-list.go-to-saves', analyticsData))
   }
