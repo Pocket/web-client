@@ -35,12 +35,11 @@ export const ListSettingsModal = ({ id }) => {
     }
 
     const data = {
-      ...analyticsData,
       title: listNameValue,
       description: descriptionValue
     }
     dispatch(mutateListUpdateConfirm(data))
-    dispatch(sendSnowplowEvent('shareable-list.edit-settings.submit', data))
+    dispatch(sendSnowplowEvent('shareable-list.edit-settings.submit', analyticsData))
   }
 
   return showModal ? (

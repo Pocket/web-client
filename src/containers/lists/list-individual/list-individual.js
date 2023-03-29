@@ -40,7 +40,7 @@ export const ListIndividual = () => {
 
   // Actions
   const handleSetStatus = (val) => {
-    dispatch(sendSnowplowEvent('shareable-list.status.update', { ...analyticsData, status: val }))
+    dispatch(sendSnowplowEvent('shareable-list.status.update', analyticsData))
     dispatch(mutateListStatusAction({ id, status: val }))
   }
   const handleShare = () => {
