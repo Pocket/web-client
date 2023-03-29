@@ -28,6 +28,14 @@ export const IndividualListCard = ({ id, listId, position }) => {
     }
   }
 
+  const onOpen = () => {
+    dispatch(sendSnowplowEvent('shareable-list.item.open', analyticsData))
+  }
+
+  const onOpenOriginal = () => {
+    dispatch(sendSnowplowEvent('shareable-list.item.open-original', analyticsData))
+  }
+
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)}>
       <Item
@@ -41,8 +49,8 @@ export const IndividualListCard = ({ id, listId, position }) => {
         externalUrl={url}
         onImageFail={onImageFail}
         onItemInView={onItemInView}
-        onOpenOriginalUrl={() => {}} // engagement event here
-        onOpen={() => {}} // engagement event here
+        onOpenOriginalUrl={onOpenOriginal}
+        onOpen={onOpen}
         Actions={ListActions}
         clamp
       />

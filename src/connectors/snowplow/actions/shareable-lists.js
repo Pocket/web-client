@@ -408,6 +408,45 @@ export const shareableListActions = {
     ],
     description: 'Fired when a creator removes an item from a list'
   },
+  'shareable-list.item.open': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a creator opens a list item from the individual list page'
+  },
+  'shareable-list.item.open-original': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description:
+      'Fired when a creator clicks on the Publisher on a list item from the individual list page'
+  },
 
   // PUBLIC list item
   'public-list.item.impression': {
