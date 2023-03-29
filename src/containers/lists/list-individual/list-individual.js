@@ -32,7 +32,7 @@ export const ListIndividual = () => {
 
   useEffect(() => {
     if (enrolled) dispatch(getIndividualListAction(id))
-  }, [dispatch, id, enrolled])
+  }, [dispatch, id, enrolled, listItemIds])
 
   if (!list) return null
   const { title, description, slug, status, listItemIds: listItemCount, analyticsData } = list
