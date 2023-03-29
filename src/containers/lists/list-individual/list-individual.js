@@ -45,8 +45,8 @@ export const ListIndividual = () => {
     dispatch(shareListAction(id))
   }
   const handleEdit = () => dispatch(mutateListUpdateAction(id))
-  const handleSavesClick = () => { 
-    // send snowplow event
+  const handleSavesClick = () => {
+    dispatch(sendSnowplowEvent('shareable-list.empty-list.go-to-saves', analyticsData))
   }
 
   const handleCopyPublicUrl = () => {

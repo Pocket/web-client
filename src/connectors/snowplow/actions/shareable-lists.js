@@ -270,6 +270,23 @@ export const shareableListActions = {
     description:
       'Fired when a creator copies the public URL from one of the List cards on the All Lists page'
   },
+  'shareable-list.empty-list.go-to-saves': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description:
+      'Fired when a creator clicks the "Go to Saves" button on an empty Individual List page'
+  },
 
   // shareable list ITEM
   'shareable-list.item.impression': {
