@@ -1,3 +1,6 @@
+// Types
+import { FC } from 'react'
+
 // Dependencies
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
@@ -13,24 +16,31 @@ import GlobalNav from 'connectors/global-nav/global-nav'
 import { breakpointLargeHandset } from 'common/constants'
 
 // Type declarations
-type ErrorPageProps = {
+type ErrorPagePropType = {
   statusCode?: number | string
+}
+
+type MessageForCodeType = {
+  title: string,
+  message: string,
+  detail?: string,
+  ActionComponent?: FC
 }
 
 /**
  * ErrorPage
- * This is the visual side of the custon error that we pass on to NextJS to 
- * provide an error page that is more in line with the design language of 
- * Pocket. It can also be used for explicit errors on pages that do not exist 
+ * This is the visual side of the custon error that we pass on to NextJS to
+ * provide an error page that is more in line with the design language of
+ * Pocket. It can also be used for explicit errors on pages that do not exist
  * on the web-client but are valid on mobile
  */
-export default function ErrorPage({ statusCode }: ErrorPageProps) {
+export default function ErrorPage({ statusCode }: ErrorPagePropType) {
   const { t } = useTranslation()
   const router = useRouter()
   const url = router.asPath
 
   // This allows us to handle both explict, and basic errors SSR errors
-  const getMessageForCode = () => {
+  const getMessageForCode = (): MessageForCodeType => {
     switch (statusCode) {
       case 404: {
         return {
@@ -113,7 +123,6 @@ function GetSupport() {
 /**
  * COMPONENT STYLES
  * -------------------------------------------------------------------------- */
-
 const pageContainerStyle = css`
   display: flex;
   align-items: stretch;
