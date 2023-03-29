@@ -39,7 +39,10 @@ export const ListIndividual = () => {
   const showLists = listItemCount?.length
 
   // Actions
-  const handleSetStatus = (val) => dispatch(mutateListStatusAction({ id, status: val }))
+  const handleSetStatus = (val) => {
+    dispatch(sendSnowplowEvent('shareable-list.status.update', { ...analyticsData, status: val }))
+    dispatch(mutateListStatusAction({ id, status: val }))
+  }
   const handleShare = () => {
     dispatch(sendSnowplowEvent('shareable-list.share', analyticsData))
     dispatch(shareListAction(id))
@@ -51,7 +54,6 @@ export const ListIndividual = () => {
   const handleSavesClick = () => {
     dispatch(sendSnowplowEvent('shareable-list.empty-list.go-to-saves', analyticsData))
   }
-
   const handleCopyPublicUrl = () => {
     dispatch(sendSnowplowEvent('shareable-list.public-link.copy.header', analyticsData))
   }

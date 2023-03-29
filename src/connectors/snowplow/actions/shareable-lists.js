@@ -157,6 +157,22 @@ export const shareableListActions = {
     ],
     description: 'Fired when a creator submits changes in the List Settings modal'
   },
+  'shareable-list.status.update': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator updates the List status'
+  },
   'shareable-list.share': {
     eventType: 'engagement',
     entityTypes: ['ui', 'shareableList'],
