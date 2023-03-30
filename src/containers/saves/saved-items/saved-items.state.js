@@ -50,6 +50,8 @@ import { GET_ITEMS_TAGS_FAVORITES } from 'actions'
 import { ITEMS_CLEAR_CURRENT } from 'actions'
 import { LOAD_MORE_ITEMS } from 'actions'
 
+import { SNOWPLOW_SEND_EVENT } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const getItemsUnread = (sortOrder) => ({ type: GET_ITEMS_UNREAD, sortOrder}) //prettier-ignore
@@ -323,7 +325,11 @@ function* adjustSortOrder(action){
   // Don't change sort order if it's already in the same space
   if(currentSortOrder === sortOrder) return
 
-  yield put({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER, sortOrder})
+  yield put({ type: ITEMS_SAVED_PAGE_SET_SORT_ORDER, sortOrder })
+
+  const identifier = 'saves.sort'
+  const data = { value: sortOrder }
+  yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 }
 
 function shouldBeFiltered(itemDetails, actionType) {
