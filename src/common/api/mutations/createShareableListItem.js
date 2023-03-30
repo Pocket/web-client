@@ -17,7 +17,15 @@ const createShareableListItemQuery = gql`
     }
   }
 `
-export function createShareableListItem({ url, excerpt, imageUrl, title, listExternalId, publisher }) {
+export function createShareableListItem({
+  url,
+  excerpt,
+  imageUrl,
+  title,
+  listExternalId,
+  publisher,
+  itemId
+}) {
   const data = {
     excerpt,
     imageUrl,
@@ -25,6 +33,7 @@ export function createShareableListItem({ url, excerpt, imageUrl, title, listExt
     url,
     listExternalId,
     publisher,
+    itemId,
     sortOrder: 1
   }
 

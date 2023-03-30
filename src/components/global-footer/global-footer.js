@@ -298,7 +298,8 @@ const engagementBlockStyle = css`
 /**
  * The `GlobalFooter` component appears at the bottom of every screen in our web applications.
  */
-export const GlobalFooter = ({ device, hasBorder, hasColorBorder, minimal, anchored }) => {
+export const GlobalFooter = (props) => {
+  const { device, hasBorder, hasColorBorder, minimal, anchored } = props
   const { t } = useTranslation()
 
   const oneTrustClickHandler = () => window.OneTrust?.ToggleInfoDisplay()
@@ -449,7 +450,10 @@ export const GlobalFooter = ({ device, hasBorder, hasColorBorder, minimal, ancho
               <a href="https://getpocket.com/tos?src=footer_v2">
                 {t('global-footer:terms-of-service', 'Terms of service')}
               </a>
-              <button onClick={oneTrustClickHandler} id="ot-sdk-btn" className="ot-sdk-show-settings">
+              <button
+                onClick={oneTrustClickHandler}
+                id="ot-sdk-btn"
+                className="ot-sdk-show-settings">
                 {t('global-footer:cookie-preferences', 'Cookie preferences')}
               </button>
             </nav>

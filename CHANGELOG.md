@@ -1,3 +1,23 @@
+## [1.83.1](https://github.com/Pocket/web-client/compare/v1.83.0...v1.83.1) (2023-03-29)
+
+
+### Bug Fixes
+
+* **lists:** bring back itemId for list items ([20b2e0b](https://github.com/Pocket/web-client/commit/20b2e0b66dd0b9c0d1d54c83b017637f415ae835))
+
+# [1.83.0](https://github.com/Pocket/web-client/compare/v1.82.30...v1.83.0) (2023-03-29)
+
+
+### Bug Fixes
+
+* **error:** localization for detail ([74409fd](https://github.com/Pocket/web-client/commit/74409fd051ddf3595c6f555277251d24fb3e7f95))
+
+
+### Features
+
+* **error:** allow for explicit errors ([e0bc81e](https://github.com/Pocket/web-client/commit/e0bc81e2b75635ee362d23c9648d5042f0d9e1e7))
+* **settings:** add notifications page for mobile error ([c5c14e5](https://github.com/Pocket/web-client/commit/c5c14e57517ba3e2f4bce03b9b47228b7740d1af))
+
 ## [1.82.30](https://github.com/Pocket/web-client/compare/v1.82.29...v1.82.30) (2023-03-29)
 
 
