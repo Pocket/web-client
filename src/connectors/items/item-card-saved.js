@@ -73,7 +73,7 @@ export function ItemCard({
 
   const onOpenOriginalUrl = () => {
     const data = { ...analyticsData, destination: 'external' }
-    dispatch(sendSnowplowEvent(`${snowplowId}.view-original`, data))
+    dispatch(sendSnowplowEvent(`${snowplowId}.card.view-original`, data))
   }
 
   const onItemInView = (inView) => {
