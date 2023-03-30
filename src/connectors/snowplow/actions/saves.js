@@ -128,7 +128,7 @@ export const savesActions = {
       uiType: 'menu'
     },
     expects: ['value'],
-    description: 'Fired when a user changes the sort type on Saves (currently broken)'
+    description: 'Fired when a user changes the sort type on Saves'
   },
   'saves.theme': {
     eventType: 'engagement',
