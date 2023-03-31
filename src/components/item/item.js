@@ -71,7 +71,8 @@ export const Item = (props) => {
     snowplowId,
     onOpenOriginalUrl,
     onOpen,
-    onCopyPublicUrl
+    onCopyPublicUrl,
+    onOpenPublicUrl
   } = props
 
   const { t } = useTranslation()
@@ -165,7 +166,11 @@ export const Item = (props) => {
           </a>
         </Link>
         {listStatusInfo ? (
-          <ListStatusLink listStatusInfo={listStatusInfo} handleCopyPublicUrl={onCopyPublicUrl} />
+          <ListStatusLink
+            listStatusInfo={listStatusInfo}
+            handleCopyUrl={onCopyPublicUrl}
+            handleOpenUrl={onOpenPublicUrl}
+          />
         ) : null}
       </div>
       <footer className="footer">

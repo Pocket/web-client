@@ -34,7 +34,7 @@ const statusStyles = css`
   }
 `
 
-export const PublicListUrl = ({ publicListInfo, handleCopyPublicUrl }) => {
+export const PublicListUrl = ({ publicListInfo, handleCopyUrl, handleOpenUrl }) => {
   const dispatch = useDispatch()
   const { externalId, slug, callout, status } = publicListInfo
 
@@ -46,13 +46,15 @@ export const PublicListUrl = ({ publicListInfo, handleCopyPublicUrl }) => {
 
   const handleCopy = async () => {
     await copy(copyUrl)
-    handleCopyPublicUrl() // sends snowplow engagement event
+    handleCopyUrl() // sends snowplow engagement event
     dispatch({ type: COPY_ITEM_URL }) // sends Toast
   }
 
   return (
     <div className={cx(callout && 'callout', statusStyles)}>
-      <Link href={url}>{linkDisplay}</Link>
+      <Link href={url}>
+        <a onClick={handleOpenUrl}>{linkDisplay}</a>
+      </Link>
       <button
         aria-label="Copy Link"
         data-tooltip="Copy Link"

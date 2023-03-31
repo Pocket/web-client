@@ -334,6 +334,54 @@ export const shareableListActions = {
     description:
       'Fired when a creator copies the public URL from one of the List cards on the All Lists page'
   },
+  'shareable-list.public-link.open.all-lists': {
+    eventType: 'contentOpen',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator opens the public URL on the All Lists page'
+  },
+  'shareable-list.public-link.open.share-modal': {
+    eventType: 'contentOpen',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator opens the public URL on the Share Modal'
+  },
+  'shareable-list.public-link.open.header': {
+    eventType: 'contentOpen',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator opens the public URL on the Individual List page header'
+  },
   'shareable-list.empty-list.go-to-saves': {
     eventType: 'engagement',
     entityTypes: ['shareableList', 'ui'],

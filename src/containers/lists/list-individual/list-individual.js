@@ -54,8 +54,11 @@ export const ListIndividual = () => {
   const handleSavesClick = () => {
     dispatch(sendSnowplowEvent('shareable-list.empty-list.go-to-saves', analyticsData))
   }
-  const handleCopyPublicUrl = () => {
+  const handleCopyUrl = () => {
     dispatch(sendSnowplowEvent('shareable-list.public-link.copy.header', analyticsData))
+  }
+  const handleOpenUrl = () => {
+    dispatch(sendSnowplowEvent('shareable-list.public-link.open.header', analyticsData))
   }
 
   if (!enrolledFetched) return null
@@ -76,7 +79,8 @@ export const ListIndividual = () => {
               handleSetStatus={handleSetStatus}
               handleShare={handleShare}
               handleEdit={handleEdit}
-              handleCopyPublicUrl={handleCopyPublicUrl}
+              handleCopyUrl={handleCopyUrl}
+              handleOpenUrl={handleOpenUrl}
             />
 
             {!showLists ? <EmptyIndividualLists handleClick={handleSavesClick} /> : null}
