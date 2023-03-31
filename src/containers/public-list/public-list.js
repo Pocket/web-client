@@ -8,6 +8,7 @@ import ErrorPage from 'containers/_error/error'
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 import { ReportIcon } from 'components/icons/ReportIcon'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 function buildReportEmail(url) {
   const subject = `Report List: ${url}`
@@ -26,19 +27,19 @@ export const PublicList = ({ listId, slug, statusCode }) => {
   if (statusCode) return <ErrorPage statusCode={statusCode} />
   if (!list) return null
 
-  const { title, description, listItemIds, user, imageUrl } = list
+  const { title, description, listItemIds, user, imageUrl, analyticsData } = list
   const listCount = listItemIds?.length
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
   const url = `${BASE_URL}/sharedlists/${listId}/${slug}`
   const metaData = { title, description, url, image: imageUrl }
 
   const onSave = () => {
-    // snowplow event here
+    dispatch(sendSnowplowEvent('public-list.save', analyticsData))
     dispatch(mutationUpsertTransitionalItem(url, slug))
   }
 
   const onUnSave = () => {
-    // snowplow event here
+    dispatch(sendSnowplowEvent('public-list.unsave', analyticsData))
     dispatch(mutationDeleteTransitionalItem(saveItemId, slug))
   }
 

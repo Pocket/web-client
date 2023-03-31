@@ -504,6 +504,40 @@ export const shareableListActions = {
       'Fired when a creator clicks on the Publisher on a list item from the individual list page'
   },
 
+  // PUBLIC list
+  'public-list.save': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user saves a public list'
+  },
+  'public-list.unsave': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user unsaves a public list on the public list page'
+  },
+
   // PUBLIC list item
   'public-list.item.impression': {
     eventType: 'impression',
