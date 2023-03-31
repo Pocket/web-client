@@ -59,6 +59,22 @@ export const shareableListActions = {
     },
     description: 'Fired when a creator clicks the "Create List" button on the empty All Lists page'
   },
+  'shareable-list.create.cancel': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a creator cancels out of the "Create List" modal'
+  },
+  'shareable-list.create.submit': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a creator clicks the "Create List" button in the "Create List" modal'
+  },
   'shareable-list.sort.oldest': {
     eventType: 'engagement',
     entityTypes: ['ui'],

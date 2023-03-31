@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { CreateEditShareableList } from 'components/shareable-lists/create-edit-modal'
 import { mutateListConfirm } from 'connectors/lists/mutation-create.state'
 import { mutateListCancel } from 'connectors/lists/mutation-create.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const CreateListModal = () => {
   const dispatch = useDispatch()
@@ -16,7 +17,7 @@ export const CreateListModal = () => {
 
   const handleClose = () => {
     dispatch(mutateListCancel())
-    // send snowplow event here
+    dispatch(sendSnowplowEvent('shareable-list.create.cancel'))
     setError(null)
   }
 
@@ -24,7 +25,7 @@ export const CreateListModal = () => {
     if (titleList.includes(title)) return setError('List name has already been used.')
 
     dispatch(mutateListConfirm({ title, description }))
-    // send snowplow event here
+    dispatch(sendSnowplowEvent('shareable-list.create.submit'))
     setError(null)
   }
 
