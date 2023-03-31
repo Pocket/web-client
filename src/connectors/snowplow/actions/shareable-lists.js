@@ -18,7 +18,7 @@ export const shareableListActions = {
     description: 'Fired when a list is shown on the All Lists page'
   },
   'shareable-list.open': {
-    eventType: 'engagement',
+    eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableList'],
     eventData: {
       uiType: 'card'
@@ -409,7 +409,7 @@ export const shareableListActions = {
     description: 'Fired when a creator removes an item from a list'
   },
   'shareable-list.item.open': {
-    eventType: 'engagement',
+    eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
       uiType: 'button'
@@ -428,7 +428,7 @@ export const shareableListActions = {
     description: 'Fired when a creator opens a list item from the individual list page'
   },
   'shareable-list.item.open-original': {
-    eventType: 'engagement',
+    eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
       uiType: 'button'
