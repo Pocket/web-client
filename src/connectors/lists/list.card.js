@@ -32,6 +32,11 @@ export const ListCard = ({ id }) => {
     dispatch(sendSnowplowEvent('shareable-list.public-link.copy.all-lists', analyticsData))
   }
 
+  const onOpenPublicUrl = () => {
+    console.log('here')
+    dispatch(sendSnowplowEvent('shareable-list.public-link.open.all-lists', analyticsData))
+  }
+
   const onOpenList = () => {
     dispatch(sendSnowplowEvent('shareable-list.open', analyticsData))
   }
@@ -51,6 +56,7 @@ export const ListCard = ({ id }) => {
         openUrl={`/lists/${externalId}`}
         onItemInView={onItemInView}
         onCopyPublicUrl={onCopyPublicUrl}
+        onOpenPublicUrl={onOpenPublicUrl}
         onOpen={onOpenList}
         isInternalItem={true}
         listStatusInfo={listStatusInfo}

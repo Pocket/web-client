@@ -12,7 +12,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { CreateListModal } from 'connectors/confirm/create-list'
 import { ConfirmListDelete } from 'connectors/confirm/delete-list'
 import { getUserShareableLists } from './lists.state'
-import { ListCard } from 'connectors/lists/list-card'
+import { ListCard } from 'connectors/lists/list.card'
 import { LoaderCentered } from 'components/loader/loader'
 
 import { Toasts } from 'connectors/toasts/toast-list'
