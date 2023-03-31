@@ -573,5 +573,42 @@ export const shareableListActions = {
       'createdAt'
     ],
     description: 'Fired when a list item is shown on the Public List page'
+  'public-list.item.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a user clicks on a list item on the public list page'
+  },
+  'public-list.item.open-original': {
+    eventType: 'contentOpen',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a user clicks on the publisher on a list item on the public list page'
   }
 }

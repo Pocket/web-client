@@ -32,6 +32,14 @@ export const PublicListCard = ({ listId, externalId, position }) => {
   const onItemInView = (inView) =>
     !impressionFired && inView && analyticsInitialized ? onImpression() : null
 
+  const onOpenOriginal = () => {
+    dispatch(sendSnowplowEvent('public-list.item.open-original', analyticsData))
+  }
+
+  const onOpen = () => {
+    dispatch(sendSnowplowEvent('public-list.item.open', analyticsData))
+  }
+
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)}>
       <Item
@@ -45,8 +53,8 @@ export const PublicListCard = ({ listId, externalId, position }) => {
         externalUrl={url}
         onImageFail={onImageFail}
         onItemInView={onItemInView}
-        onOpenOriginalUrl={() => {}} // engagement event here
-        onOpen={() => {}} // engagement event here
+        onOpenOriginalUrl={onOpenOriginal}
+        onOpen={onOpen}
         Actions={ActionsTransitional}
         clamp
       />
