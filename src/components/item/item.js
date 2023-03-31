@@ -59,6 +59,7 @@ export const Item = (props) => {
 
     //Positioning
     style,
+    position,
 
     // Actions
     Actions,
@@ -231,6 +232,7 @@ export const Item = (props) => {
               isPremium={isPremium}
               saveStatus={saveStatus}
               analyticsData={analyticsData}
+              position={position}
             />
           ) : null}
         </div>

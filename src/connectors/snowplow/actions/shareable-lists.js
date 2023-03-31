@@ -573,6 +573,45 @@ export const shareableListActions = {
       'createdAt'
     ],
     description: 'Fired when a list item is shown on the Public List page'
+  },
+  'public-list.item.save': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a user saves an item from a public list page'
+  },
+  'public-list.item.unsave': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a user unsaves an item from a public list page'
+  },
   'public-list.item.open': {
     eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableListItem'],
