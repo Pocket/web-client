@@ -420,6 +420,14 @@ export const shareableListActions = {
     ],
     description: 'Fired when a list item is shown on the Individual List page'
   },
+  'shareable-list.item.add.create-list': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a creator clicks on the "Create List" link in the Add to List modal'
+  },
   'shareable-list.item.add.cancel': {
     eventType: 'engagement',
     entityTypes: ['ui'],
