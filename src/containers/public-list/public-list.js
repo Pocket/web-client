@@ -45,7 +45,7 @@ export const PublicList = ({ listId, slug, statusCode }) => {
 
   const emailUrl = buildReportEmail(url)
   const onReport = () => {
-    // snowplow event here
+    dispatch(sendSnowplowEvent('public-list.report', analyticsData))
     window.location.href = emailUrl
   }
 

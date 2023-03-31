@@ -537,6 +537,22 @@ export const shareableListActions = {
     ],
     description: 'Fired when a user unsaves a public list on the public list page'
   },
+  'public-list.report': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user clicks the "Report" button on a public list page'
+  },
 
   // PUBLIC list item
   'public-list.item.impression': {
