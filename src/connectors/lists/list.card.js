@@ -33,7 +33,6 @@ export const ListCard = ({ id }) => {
   }
 
   const onOpenPublicUrl = () => {
-    console.log('here')
     dispatch(sendSnowplowEvent('shareable-list.public-link.open.all-lists', analyticsData))
   }
 
