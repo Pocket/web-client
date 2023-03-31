@@ -354,7 +354,7 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['shareableList', 'ui'],
     eventData: {
-      uiType: 'button'
+      uiType: 'link'
     },
     expects: [
       'shareableListExternalId',
@@ -370,7 +370,7 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['shareableList', 'ui'],
     eventData: {
-      uiType: 'button'
+      uiType: 'link'
     },
     expects: [
       'shareableListExternalId',
@@ -386,7 +386,7 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['shareableList', 'ui'],
     eventData: {
-      uiType: 'button'
+      uiType: 'link'
     },
     expects: [
       'shareableListExternalId',
@@ -484,7 +484,7 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
-      uiType: 'button'
+      uiType: 'card'
     },
     expects: [
       'shareableListItemExternalId',
@@ -503,7 +503,7 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
-      uiType: 'button'
+      uiType: 'card'
     },
     expects: [
       'shareableListItemExternalId',
