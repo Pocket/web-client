@@ -46,11 +46,6 @@ class ClientDocument extends Document {
           {/* <!-- OneTrust Cookies Consent Notice end for getpocket.com --> */}
 
           <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
-          />
-
-          <script
             dangerouslySetInnerHTML={{
               __html: `
             window.dataLayer = window.dataLayer || [];
