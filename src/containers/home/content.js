@@ -63,8 +63,6 @@ function StaticSlate({ slateId, firstSlate }) {
   const viewport = useViewport()
   const dispatch = useDispatch()
   const slate = useSelector((state) => state.pageHome.slatesById[slateId])
-  const featureState = useSelector((state) => state.features) || {}
-  const recentsTest = featureFlagActive({ flag: 'home.recents', featureState })
 
   const { headline, subheadline, moreLink, recommendations, recommendationReasonType } = slate
 
@@ -89,7 +87,7 @@ function StaticSlate({ slateId, firstSlate }) {
 
   return (
     <SectionWrapper
-      className={cx('homeSection', firstSlate && recentsTest && 'first-section')}
+      className="homeSection"
       data-cy={`home-section-${testId}`}>
       <HomeHeader
         headline={headline}

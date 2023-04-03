@@ -9,7 +9,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { ItemCard } from 'connectors/items/item-card-transitional'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
-export const HomeRecentSaves = ({ isBottom }) => {
+export const HomeRecentSaves = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const recentSaves = useSelector((state) => state.pageSavedIds)
@@ -24,9 +24,7 @@ export const HomeRecentSaves = ({ isBottom }) => {
   }, [dispatch])
 
   return recentSaves?.length > 0 ? (
-    <SectionWrapper
-      className={cx(isBottom && 'bottom')}
-      data-cy='home-section-recent-saves'>
+    <SectionWrapper data-cy='home-section-recent-saves'>
 
       <HomeHeader
         headline={t('home:recent-saves-title', 'Recent Saves')}

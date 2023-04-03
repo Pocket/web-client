@@ -1,3 +1,11 @@
+## [1.83.2](https://github.com/Pocket/web-client/compare/v1.83.1...v1.83.2) (2023-03-30)
+
+
+### Bug Fixes
+
+* **recent-saves:** fix responsive padding rules on Greeting ([cfbadef](https://github.com/Pocket/web-client/commit/cfbadef81f925b04b2ce49424f496c461af110dd))
+* **recent-saves:** remove logic to show recent saves at bottom ([c34bf2b](https://github.com/Pocket/web-client/commit/c34bf2b84e78cbb345785d082fbfcff0659f3cac))
+
 ## [1.83.1](https://github.com/Pocket/web-client/compare/v1.83.0...v1.83.1) (2023-03-29)
 
 
