@@ -46,7 +46,7 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
 
     const response = await getUserInfo(true, req?.headers?.cookie)
     const { user_id, birth = userStartDate } = response?.user || {}
-    if (!user_id && !skipUserCheck) throw new WaypointNoUserIdError(response)
+    if (!user_id && !skipUserCheck) throw new WaypointNoUserIdError(JSON.stringify(response))
 
     // Not logged in, or something else went awry?
     // !! NOTE: this will redirect to Saves 100% of the time on localhost unless you use `skipUserCheck=true` in the url
