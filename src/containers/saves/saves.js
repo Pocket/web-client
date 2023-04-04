@@ -43,6 +43,7 @@ export const Saves = (props) => {
   const featureState = useSelector((state) => state.features)
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const total = useSelector((state) => state.pageSavedInfo.totalCount)
+  const inBulkEdit = useSelector((state) => state?.app?.mode === 'bulk')
   const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
 
   // Derived Values
@@ -80,6 +81,7 @@ export const Saves = (props) => {
           handleRelevance={handleRelevance}
           inListsExperiment={inListsExperiment}
           handleCreateList={handleCreateList}
+          inBulkEdit={inBulkEdit}
         />
         {flagsReady && shouldRender ? <SavedItems {...props} /> : null}
       </main>

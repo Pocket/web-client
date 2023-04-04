@@ -18,7 +18,7 @@ export const shareableListActions = {
     description: 'Fired when a list is shown on the All Lists page'
   },
   'shareable-list.open': {
-    eventType: 'engagement',
+    eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableList'],
     eventData: {
       uiType: 'card'
@@ -58,6 +58,22 @@ export const shareableListActions = {
       uiType: 'button'
     },
     description: 'Fired when a creator clicks the "Create List" button on the empty All Lists page'
+  },
+  'shareable-list.create.cancel': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a creator cancels out of the "Create List" modal'
+  },
+  'shareable-list.create.submit': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a creator clicks the "Create List" button in the "Create List" modal'
   },
   'shareable-list.sort.oldest': {
     eventType: 'engagement',
@@ -108,6 +124,70 @@ export const shareableListActions = {
       uiType: 'button'
     },
     description: 'Fired when a creator clicks the "Delete" button in the Delete Modal'
+  },
+  'shareable-list.edit-settings.intent': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator clicks the "Settings" button on a list on the All Lists page'
+  },
+  'shareable-list.edit-settings.cancel': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator cancels out of the List Settings modal'
+  },
+  'shareable-list.edit-settings.submit': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator submits changes in the List Settings modal'
+  },
+  'shareable-list.status.update': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator updates the List status'
   },
   'shareable-list.share': {
     eventType: 'engagement',
@@ -270,6 +350,71 @@ export const shareableListActions = {
     description:
       'Fired when a creator copies the public URL from one of the List cards on the All Lists page'
   },
+  'shareable-list.public-link.open.all-lists': {
+    eventType: 'contentOpen',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'link'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator opens the public URL on the All Lists page'
+  },
+  'shareable-list.public-link.open.share-modal': {
+    eventType: 'contentOpen',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'link'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator opens the public URL on the Share Modal'
+  },
+  'shareable-list.public-link.open.header': {
+    eventType: 'contentOpen',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'link'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator opens the public URL on the Individual List page header'
+  },
+  'shareable-list.empty-list.go-to-saves': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description:
+      'Fired when a creator clicks the "Go to Saves" button on an empty Individual List page'
+  },
 
   // shareable list ITEM
   'shareable-list.item.impression': {
@@ -290,6 +435,14 @@ export const shareableListActions = {
       'createdAt'
     ],
     description: 'Fired when a list item is shown on the Individual List page'
+  },
+  'shareable-list.item.add.create-list': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a creator clicks on the "Create List" link in the Add to List modal'
   },
   'shareable-list.item.add.cancel': {
     eventType: 'engagement',
@@ -327,6 +480,95 @@ export const shareableListActions = {
     ],
     description: 'Fired when a creator removes an item from a list'
   },
+  'shareable-list.item.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a creator opens a list item from the individual list page'
+  },
+  'shareable-list.item.open-original': {
+    eventType: 'contentOpen',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description:
+      'Fired when a creator clicks on the Publisher on a list item from the individual list page'
+  },
+
+  // PUBLIC list
+  'public-list.save': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user saves a public list'
+  },
+  'public-list.unsave': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user unsaves a public list on the public list page'
+  },
+  'public-list.report': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'slug',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a user clicks the "Report" button on a public list page'
+  },
 
   // PUBLIC list item
   'public-list.item.impression': {
@@ -347,5 +589,81 @@ export const shareableListActions = {
       'createdAt'
     ],
     description: 'Fired when a list item is shown on the Public List page'
+  },
+  'public-list.item.save': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a user saves an item from a public list page'
+  },
+  'public-list.item.unsave': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a user unsaves an item from a public list page'
+  },
+  'public-list.item.open': {
+    eventType: 'contentOpen',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a user clicks on a list item on the public list page'
+  },
+  'public-list.item.open-original': {
+    eventType: 'contentOpen',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'card'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a user clicks on the publisher on a list item on the public list page'
   }
 }

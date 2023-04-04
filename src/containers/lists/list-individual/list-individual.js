@@ -5,7 +5,7 @@ import ErrorPage from 'containers/_error/error'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListIndividualHeader } from 'components/headers/lists-header'
-import { EmptyIndividualLists } from 'components/empty-states/inividual-list'
+import { EmptyIndividualLists } from 'components/empty-states/individual-list'
 import { getIndividualListAction } from './list-individual.state'
 import { IndividualListCard } from 'connectors/lists/individual-list.card'
 import { ListSettingsModal } from 'connectors/confirm/list-settings'
@@ -39,18 +39,26 @@ export const ListIndividual = () => {
   const showLists = listItemCount?.length
 
   // Actions
-  const handleSetStatus = (val) => dispatch(mutateListStatusAction({ id, status: val }))
+  const handleSetStatus = (val) => {
+    dispatch(sendSnowplowEvent('shareable-list.status.update', analyticsData))
+    dispatch(mutateListStatusAction({ id, status: val }))
+  }
   const handleShare = () => {
     dispatch(sendSnowplowEvent('shareable-list.share', analyticsData))
     dispatch(shareListAction(id))
   }
-  const handleEdit = () => dispatch(mutateListUpdateAction(id))
-  const handleSavesClick = () => { 
-    // send snowplow event
+  const handleEdit = () => {
+    dispatch(sendSnowplowEvent('shareable-list.edit-settings.intent', analyticsData))
+    dispatch(mutateListUpdateAction(id))
   }
-
-  const handleCopyPublicUrl = () => {
+  const handleSavesClick = () => {
+    dispatch(sendSnowplowEvent('shareable-list.empty-list.go-to-saves', analyticsData))
+  }
+  const handleCopyUrl = () => {
     dispatch(sendSnowplowEvent('shareable-list.public-link.copy.header', analyticsData))
+  }
+  const handleOpenUrl = () => {
+    dispatch(sendSnowplowEvent('shareable-list.public-link.open.header', analyticsData))
   }
 
   if (!enrolledFetched) return null
@@ -71,7 +79,8 @@ export const ListIndividual = () => {
               handleSetStatus={handleSetStatus}
               handleShare={handleShare}
               handleEdit={handleEdit}
-              handleCopyPublicUrl={handleCopyPublicUrl}
+              handleCopyUrl={handleCopyUrl}
+              handleOpenUrl={handleOpenUrl}
             />
 
             {!showLists ? <EmptyIndividualLists handleClick={handleSavesClick} /> : null}

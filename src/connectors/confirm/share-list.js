@@ -22,8 +22,12 @@ export const ConfirmShare = () => {
     dispatch(sendSnowplowEvent(`shareable-list.${identifier}`, analyticsData))
   }
 
-  const handleCopyPublicUrl = () => {
+  const handleCopyUrl = () => {
     dispatch(sendSnowplowEvent('shareable-list.public-link.copy.share-modal', analyticsData))
+  }
+
+  const handleOpenUrl = () => {
+    dispatch(sendSnowplowEvent('shareable-list.public-link.open.share-modal', analyticsData))
   }
 
   return (
@@ -38,7 +42,8 @@ export const ConfirmShare = () => {
       showModal={true}
       cancelShare={cancelShare}
       engagementEvent={engagementEvent}
-      handleCopyPublicUrl={handleCopyPublicUrl}
+      handleCopyUrl={handleCopyUrl}
+      handleOpenUrl={handleOpenUrl}
     />
   )
 }

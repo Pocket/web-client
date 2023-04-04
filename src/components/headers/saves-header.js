@@ -80,7 +80,8 @@ export const SavesHeader = ({
   handleNewest,
   handleOldest,
   inListsExperiment,
-  handleCreateList
+  handleCreateList,
+  inBulkEdit
 }) => {
   const { t } = useTranslation()
 
@@ -94,6 +95,8 @@ export const SavesHeader = ({
     tags: t('headers:tags', 'Tags')
   }
 
+  const showCreateList = inListsExperiment && !inBulkEdit && subset !== 'tag-page'
+
   return subset ? (
     <header className={savesHeaderStyle}>
       <h1 className="pageTitle" data-cy="page-title">
@@ -101,7 +104,7 @@ export const SavesHeader = ({
       </h1>
       <FilterMenu subset={subset} filter={filter} />
 
-      {subset !== 'tag-page' && inListsExperiment ? (
+      {showCreateList ? (
         <div className="create-list">
           <button onClick={handleCreateList} className="tiny">
             <PlaylistAddIcon /> Create List

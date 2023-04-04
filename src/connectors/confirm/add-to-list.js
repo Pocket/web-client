@@ -22,7 +22,7 @@ export const ConfirmAddToList = () => {
 
   const handleCreate = () => {
     dispatch(mutateListCreate(id))
-    // send snowplow event here
+    dispatch(sendSnowplowEvent('shareable-list.item.add.create-list'))
   }
 
   const handleClose = () => {

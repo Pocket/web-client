@@ -5,13 +5,13 @@ import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object
  * Schema information:
  * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/7b895f09809942a835587b02a58b7a835f92e16a726f5d224a43b90d219ae9c4
  */
-const SHAREABLE_LIST_SCHEMA_URL = getSchemaUri('shareable_list', '1-0-2')
+const SHAREABLE_LIST_SCHEMA_URL = getSchemaUri('shareable_list', '1-0-4')
 
 /**
  * Entity that describes the concept list that can be created then shared with other users regardless of logged-in status
  *
  * @param shareableListExternalId {string} @required - The unique backend identifier for a shared list
- * @param slug {string} @required - The slug for the shareable list
+ * @param slug {string} - The slug for the shareable list
  * @param title {string} @required - The title of the shareable list
  * @param description {string} - The description of the shareable list (filled in by the user creating the list)
  * @param status {["PUBLIC", "PRIVATE"]} @required - Indication of whether the list is private (default) or public (after publishing)

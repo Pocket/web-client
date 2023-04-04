@@ -32,6 +32,14 @@ export const PublicListCard = ({ listId, externalId, position }) => {
   const onItemInView = (inView) =>
     !impressionFired && inView && analyticsInitialized ? onImpression() : null
 
+  const onOpenOriginal = () => {
+    dispatch(sendSnowplowEvent('public-list.item.open-original', analyticsData))
+  }
+
+  const onOpen = () => {
+    dispatch(sendSnowplowEvent('public-list.item.open', analyticsData))
+  }
+
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)}>
       <Item
@@ -45,9 +53,10 @@ export const PublicListCard = ({ listId, externalId, position }) => {
         externalUrl={url}
         onImageFail={onImageFail}
         onItemInView={onItemInView}
-        onOpenOriginalUrl={() => {}} // engagement event here
-        onOpen={() => {}} // engagement event here
+        onOpenOriginalUrl={onOpenOriginal}
+        onOpen={onOpen}
         Actions={ActionsTransitional}
+        position={position}
         clamp
       />
     </div>
@@ -58,22 +67,27 @@ export function ActionsTransitional({ id, position }) {
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const { url } = useSelector((state) => state.listsDisplay[id])
+  const { url, analyticsData: passedAnalytics } = useSelector((state) => state.listsDisplay[id])
   const saveItemId = useSelector((state) => state.itemsTransitions[id])
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
+
+  const analyticsData = {
+    ...passedAnalytics,
+    sortOrder: position
+  }
 
   if (!url) return null
 
   // Prep save action
   const onSave = () => {
     if (!isAuthenticated) return
-    // send snowplow action here
+    dispatch(sendSnowplowEvent('public-list.item.save', analyticsData))
     dispatch(mutationUpsertTransitionalItem(url, id))
   }
 
   const onUnSave = () => {
     if (!isAuthenticated) return
-    // send snowplow action here
+    dispatch(sendSnowplowEvent('public-list.item.unsave', analyticsData))
     dispatch(mutationDeleteTransitionalItem(saveItemId, id))
   }
 

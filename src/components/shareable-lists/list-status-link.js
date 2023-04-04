@@ -35,7 +35,7 @@ const statusStyles = css`
   }
 `
 
-export const ListStatusLink = ({ listStatusInfo, handleCopyPublicUrl }) => {
+export const ListStatusLink = ({ listStatusInfo, handleCopyUrl, handleOpenUrl }) => {
   const { status } = listStatusInfo
   const isPrivate = status === 'PRIVATE'
 
@@ -52,7 +52,8 @@ export const ListStatusLink = ({ listStatusInfo, handleCopyPublicUrl }) => {
           </div>{' '}
           <PublicListUrl
             publicListInfo={listStatusInfo}
-            handleCopyPublicUrl={handleCopyPublicUrl}
+            handleCopyUrl={handleCopyUrl}
+            handleOpenUrl={handleOpenUrl}
           />
         </>
       )}

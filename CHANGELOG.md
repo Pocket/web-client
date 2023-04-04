@@ -1,3 +1,67 @@
+## [1.83.8](https://github.com/Pocket/web-client/compare/v1.83.7...v1.83.8) (2023-04-04)
+
+
+### Bug Fixes
+
+* **analytics:** removed duplicate config call ([41b0015](https://github.com/Pocket/web-client/commit/41b001518e4d632aa5372390817a74557e53c260))
+
+## [1.83.7](https://github.com/Pocket/web-client/compare/v1.83.6...v1.83.7) (2023-04-04)
+
+
+### Bug Fixes
+
+* **waypoint:** add response to waypoint error ([d65f8f0](https://github.com/Pocket/web-client/commit/d65f8f077448c40ca468a8f0335e64c6726d357d))
+
+## [1.83.6](https://github.com/Pocket/web-client/compare/v1.83.5...v1.83.6) (2023-04-04)
+
+
+### Bug Fixes
+
+* **shareable list:** update snowplow schema, slug no longer required ([8c1eb2b](https://github.com/Pocket/web-client/commit/8c1eb2b5f3b27d13f0e62615d1739f22844ba2e5))
+
+## [1.83.5](https://github.com/Pocket/web-client/compare/v1.83.4...v1.83.5) (2023-04-04)
+
+
+### Bug Fixes
+
+* **SavesHeader:** hide Create List button when in Bulk Edit mode ([acb1be0](https://github.com/Pocket/web-client/commit/acb1be07cc30823a2d2c8b87c123998c743d083d))
+
+## [1.83.4](https://github.com/Pocket/web-client/compare/v1.83.3...v1.83.4) (2023-04-03)
+
+
+### Bug Fixes
+
+* **ConfirmAddToList:** add engagement event for opening create list ([ab7400a](https://github.com/Pocket/web-client/commit/ab7400a0cb47e0b42f13e4bf4565d9459c7dc1af))
+* **CreateListModal:** add engagement events for cancel & submit ([3a1b2a1](https://github.com/Pocket/web-client/commit/3a1b2a1289e888118b50c4bdfdca5a6fa8afd64f))
+* **ListCard:** rename file to be more consistent ([a918324](https://github.com/Pocket/web-client/commit/a918324ea9cf5d86cffe214aba93b195b9e41464))
+* **lists:** add content open events for opening public URLs ([122d14d](https://github.com/Pocket/web-client/commit/122d14db4b48f528b4d6eb4995d53c7b317f3ca5))
+* **PublicList:** add engagement event for reporting a list ([ea5fbdd](https://github.com/Pocket/web-client/commit/ea5fbdd952679dc01b476cfbbb8c2b05f3503029))
+* **PublicLIst:** add engagement events for open & open-original on list items ([6d6696b](https://github.com/Pocket/web-client/commit/6d6696bc20c80d188ac53fc8d2fb1b9e391fc4f3))
+* **PublicList:** add engagement events for saving & unsaving public lists ([8f8c5de](https://github.com/Pocket/web-client/commit/8f8c5deb81fc1215f35982c96503fe3f5f492a65))
+* **PublicListCard:** add engagement events for saving & unsaving ([a7bfa20](https://github.com/Pocket/web-client/commit/a7bfa2088aa35170fe70c95a8daa70d47415d78a))
+* **shareableListActions:** update open events to be contentOpen ([391d478](https://github.com/Pocket/web-client/commit/391d4781596d9b47da1e02039b0dc0730266e63c))
+* **shareableListActions:** update uiType for a number of events ([7c2e4dc](https://github.com/Pocket/web-client/commit/7c2e4dca2b98ce0745082cb9b956d42e3240c915))
+
+## [1.83.3](https://github.com/Pocket/web-client/compare/v1.83.2...v1.83.3) (2023-04-03)
+
+
+### Bug Fixes
+
+* **EmptyIndividualLists:** update file name ([0ef0591](https://github.com/Pocket/web-client/commit/0ef05919c42db6dc938465724b222081237ce38b))
+* **IndividualListCard:** add engagement events for onOpen and onOpenOriginal ([957ba24](https://github.com/Pocket/web-client/commit/957ba241a63e29e537f28283c6734037f8bcfbdd))
+* **ListIndividual:** add engagement event for Go to Saves button ([f44ad74](https://github.com/Pocket/web-client/commit/f44ad741073a71af600b77d0fef4e6a70fd682c4))
+* **ListIndividual:** add engagement event for updating list status ([521445c](https://github.com/Pocket/web-client/commit/521445c43e0ed012af35d3ada88b0218ddc4c070))
+* **ListIndividual:** add engagement events for editing list ([16769bd](https://github.com/Pocket/web-client/commit/16769bd3d593733fed2e30847d897eac16f851bc))
+* **ListIndividual:** don't mutate analyticsData for snowplow event ([e810804](https://github.com/Pocket/web-client/commit/e810804756e92678f26b4f5e3a4103f1ff23af9d))
+
+## [1.83.2](https://github.com/Pocket/web-client/compare/v1.83.1...v1.83.2) (2023-03-30)
+
+
+### Bug Fixes
+
+* **recent-saves:** fix responsive padding rules on Greeting ([cfbadef](https://github.com/Pocket/web-client/commit/cfbadef81f925b04b2ce49424f496c461af110dd))
+* **recent-saves:** remove logic to show recent saves at bottom ([c34bf2b](https://github.com/Pocket/web-client/commit/c34bf2b84e78cbb345785d082fbfcff0659f3cac))
+
 ## [1.83.1](https://github.com/Pocket/web-client/compare/v1.83.0...v1.83.1) (2023-03-29)
 
 

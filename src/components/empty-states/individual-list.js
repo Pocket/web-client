@@ -17,8 +17,8 @@ export const EmptyIndividualLists = ({ handleClick }) => {
       <Link href="/saves">
         <a className="button outline" onClick={handleClick}>
           Go to Saves
-        </a>     
-      </Link> 
+        </a>
+      </Link>
     </div>
   )
 }

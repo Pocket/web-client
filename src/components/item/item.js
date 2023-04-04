@@ -59,6 +59,7 @@ export const Item = (props) => {
 
     //Positioning
     style,
+    position,
 
     // Actions
     Actions,
@@ -71,7 +72,8 @@ export const Item = (props) => {
     snowplowId,
     onOpenOriginalUrl,
     onOpen,
-    onCopyPublicUrl
+    onCopyPublicUrl,
+    onOpenPublicUrl
   } = props
 
   const { t } = useTranslation()
@@ -165,7 +167,11 @@ export const Item = (props) => {
           </a>
         </Link>
         {listStatusInfo ? (
-          <ListStatusLink listStatusInfo={listStatusInfo} handleCopyPublicUrl={onCopyPublicUrl} />
+          <ListStatusLink
+            listStatusInfo={listStatusInfo}
+            handleCopyUrl={onCopyPublicUrl}
+            handleOpenUrl={onOpenPublicUrl}
+          />
         ) : null}
       </div>
       <footer className="footer">
@@ -226,6 +232,7 @@ export const Item = (props) => {
               isPremium={isPremium}
               saveStatus={saveStatus}
               analyticsData={analyticsData}
+              position={position}
             />
           ) : null}
         </div>
