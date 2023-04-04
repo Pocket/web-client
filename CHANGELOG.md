@@ -1,3 +1,10 @@
+## [1.83.8](https://github.com/Pocket/web-client/compare/v1.83.7...v1.83.8) (2023-04-04)
+
+
+### Bug Fixes
+
+* **analytics:** removed duplicate config call ([41b0015](https://github.com/Pocket/web-client/commit/41b001518e4d632aa5372390817a74557e53c260))
+
 ## [1.83.7](https://github.com/Pocket/web-client/compare/v1.83.6...v1.83.7) (2023-04-04)
 
 
