@@ -1,3 +1,10 @@
+## [1.83.9](https://github.com/Pocket/web-client/compare/v1.83.8...v1.83.9) (2023-04-04)
+
+
+### Bug Fixes
+
+* **waypoint:** stringify response ([ad9b285](https://github.com/Pocket/web-client/commit/ad9b2852cb8b306f4fa833b05b4783bc918c8972))
+
 ## [1.83.8](https://github.com/Pocket/web-client/compare/v1.83.7...v1.83.8) (2023-04-04)
 
 
