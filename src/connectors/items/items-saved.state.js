@@ -89,11 +89,13 @@ function* savedItemRequest(action) {
     }) || {}
 
     if (!pageInfo) return yield put({ type: ITEMS_SAVED_PAGE_INFO_FAILURE })
-    if (!edges) return yield put({ type: ITEMS_SAVED_FAILURE })
+    if (!edges) return yield put({ type: ITEMS_SAVED_FAILURE, message: 'No edges returned' })
 
     const savedItemIds = edges
-      .filter((edge) => !STARTER_ARTICLES.includes(edge.node.item.resolvedId)) //!! While we remove this item from being added by backend
-      .map((edge) => edge.node.id)
+      .filter(validateEdge)
+      .filter(removeStarterArticle)
+      .map((edge) => edge?.node?.id)
+
     const nodes = edges.reduce(getNodeFromEdge, {})
     const itemsById = edges.reduce(getItemFromEdge, {})
     const itemsCount = savedItemIds.length
@@ -157,6 +159,12 @@ function* savedItemSearchRequest(action) {
 
 /** ASYNC Functions
  --------------------------------------------------------------- */
+
+// Remove any edges that don'e have a node containing and item
+const validateEdge = (edge) => !!edge?.node?.item
+
+// !!Remove any articles that are part of our legacy starter articles until done by backend
+const removeStarterArticle = (edge) => !STARTER_ARTICLES.includes(edge?.node?.item?.resolvedId)
 
 const getNodeFromEdge = (previous, current) => {
   const { item, ...node } = current.node
