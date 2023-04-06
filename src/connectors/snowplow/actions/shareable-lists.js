@@ -5,6 +5,7 @@ export const shareableListActions = {
     eventType: 'impression',
     entityTypes: ['ui', 'shareableList'],
     eventData: {
+      component: 'card',
       uiType: 'card'
     },
     expects: [
@@ -13,6 +14,7 @@ export const shareableListActions = {
       'title',
       'status',
       'moderationStatus',
+      'position',
       'createdAt'
     ],
     description: 'Fired when a list is shown on the All Lists page'
@@ -21,6 +23,7 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableList'],
     eventData: {
+      component: 'card',
       uiType: 'card'
     },
     expects: [
@@ -29,6 +32,7 @@ export const shareableListActions = {
       'title',
       'status',
       'moderationStatus',
+      'position',
       'createdAt'
     ],
     description: 'Fired when a creator clicks on a List on the All Lists page'
@@ -421,6 +425,7 @@ export const shareableListActions = {
     eventType: 'impression',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
+      component: 'card',
       uiType: 'card'
     },
     expects: [
@@ -432,6 +437,7 @@ export const shareableListActions = {
       'imageUrl',
       'publisher',
       'sortOrder',
+      'position',
       'createdAt'
     ],
     description: 'Fired when a list item is shown on the Individual List page'
@@ -484,6 +490,7 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
+      component: 'card',
       uiType: 'card'
     },
     expects: [
@@ -495,6 +502,7 @@ export const shareableListActions = {
       'imageUrl',
       'publisher',
       'sortOrder',
+      'position',
       'createdAt'
     ],
     description: 'Fired when a creator opens a list item from the individual list page'
@@ -503,6 +511,7 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
+      component: 'card',
       uiType: 'card'
     },
     expects: [
@@ -514,6 +523,7 @@ export const shareableListActions = {
       'imageUrl',
       'publisher',
       'sortOrder',
+      'position',
       'createdAt'
     ],
     description:
@@ -575,6 +585,7 @@ export const shareableListActions = {
     eventType: 'impression',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
+      component: 'card',
       uiType: 'card'
     },
     expects: [
@@ -586,6 +597,7 @@ export const shareableListActions = {
       'imageUrl',
       'publisher',
       'sortOrder',
+      'position',
       'createdAt'
     ],
     description: 'Fired when a list item is shown on the Public List page'
@@ -632,6 +644,7 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
+      component: 'card',
       uiType: 'card'
     },
     expects: [
@@ -643,6 +656,7 @@ export const shareableListActions = {
       'imageUrl',
       'publisher',
       'sortOrder',
+      'position',
       'createdAt'
     ],
     description: 'Fired when a user clicks on a list item on the public list page'
@@ -662,6 +676,7 @@ export const shareableListActions = {
       'imageUrl',
       'publisher',
       'sortOrder',
+      'position',
       'createdAt'
     ],
     description: 'Fired when a user clicks on the publisher on a list item on the public list page'
