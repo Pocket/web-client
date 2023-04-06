@@ -16,7 +16,9 @@ export const IndividualListCard = ({ id, listId, position }) => {
   const { externalId, title, excerpt, publisher, url, analyticsData: passedAnalytics } = item
   const analyticsData = {
     ...passedAnalytics,
-    sortOrder: position
+    sortOrder: position,
+    position,
+    destination: 'external'
   }
 
   const itemImage = item?.noImage ? '' : item?.imageUrl

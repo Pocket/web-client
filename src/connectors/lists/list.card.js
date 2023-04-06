@@ -15,10 +15,24 @@ export const ListCard = ({ id, position }) => {
 
   if (!list) return null
 
-  const { listItemIds, externalId, slug, title, description, status, analyticsData } = list
+  const {
+    listItemIds,
+    externalId,
+    slug,
+    title,
+    description,
+    status,
+    analyticsData: passedAnalytics
+  } = list
   const url = `/sharedlists/${externalId}/${slug}`
   const storyCount = listItemIds?.length || 0
   const itemImage = list?.noImage ? '' : list?.itemImage
+
+  const analyticsData = {
+    ...passedAnalytics,
+    position,
+    destination: 'internal'
+  }
 
   const onImageFail = () => dispatch(setNoImage(id))
 
