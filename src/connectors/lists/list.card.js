@@ -7,7 +7,7 @@ import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { setNoImage } from 'connectors/lists/lists-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
-export const ListCard = ({ id }) => {
+export const ListCard = ({ id, position }) => {
   const dispatch = useDispatch()
 
   const list = useSelector((state) => state.listsDisplay[id])
