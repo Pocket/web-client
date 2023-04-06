@@ -160,10 +160,11 @@ function* savedItemSearchRequest(action) {
 /** ASYNC Functions
  --------------------------------------------------------------- */
 
-// Remove any edges that don'e have a node containing and item
+// Remove any edges that do not have a node containing an item
 const validateEdge = (edge) => !!edge?.node?.item
 
-// !!Remove any articles that are part of our legacy starter articles until done by backend
+// !! Remove any articles that are part of our legacy starter articles
+// !! This will be on handled by the backend in future
 const removeStarterArticle = (edge) => !STARTER_ARTICLES.includes(edge?.node?.item?.resolvedId)
 
 const getNodeFromEdge = (previous, current) => {
