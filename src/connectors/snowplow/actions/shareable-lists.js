@@ -22,7 +22,6 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableList'],
     eventData: {
-      component: 'card',
       uiType: 'card'
     },
     expects: [
@@ -290,7 +289,6 @@ export const shareableListActions = {
     eventType: 'impression',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
-      component: 'card',
       uiType: 'card'
     },
     expects: [
@@ -353,7 +351,6 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
-      component: 'card',
       uiType: 'card'
     },
     expects: [
@@ -374,7 +371,6 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
-      component: 'card',
       uiType: 'card'
     },
     expects: [
@@ -484,7 +480,6 @@ export const shareableListActions = {
     eventType: 'contentOpen',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
-      component: 'card',
       uiType: 'card'
     },
     expects: [
