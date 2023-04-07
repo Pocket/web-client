@@ -25,6 +25,14 @@ export function updateShareableList({ title, description, externalId, status }) 
     operationName: 'updateShareableList',
     variables: { data }
   })
-    .then((response) => response?.data?.updateShareableList)
+    .then((response) => {
+      const responseData = response?.data?.updateShareableList
+      const { title, description } = responseData
+      return {
+        ...responseData,
+        title: decodeURIComponent(title),
+        description: decodeURIComponent(description)
+      }
+    })
     .catch((error) => console.error(error))
 }

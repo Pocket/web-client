@@ -33,6 +33,14 @@ export function createShareableList({ listData, listItemData }) {
     operationName: 'createShareableList',
     variables: { listData, listItemData }
   })
-    .then((response) => response?.data?.createShareableList)
+    .then((response) => {
+      const responseData = response?.data?.createShareableList
+      const { title, description } = responseData
+      return {
+        ...responseData,
+        title: decodeURIComponent(title),
+        description: decodeURIComponent(description)
+      }
+    })
     .catch((error) => console.error(error))
 }

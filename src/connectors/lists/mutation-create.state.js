@@ -66,8 +66,8 @@ function* itemsCreateList({ id }) {
   try {
     const { title, description } = confirm
     const listData = {
-      title: title.trim(),
-      description: description.trim()
+      title: encodeURIComponent(title.trim()),
+      description: encodeURIComponent(description.trim())
     }
 
     let listItemData = null
@@ -93,7 +93,7 @@ function* itemsCreateList({ id }) {
     const itemsById = { [externalId]: newList }
 
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
-    return yield put({ type: LIST_CREATE_SUCCESS, externalId, listTitle: title })
+    return yield put({ type: LIST_CREATE_SUCCESS, externalId, listTitle: newList.title })
   } catch {
     return yield put({ type: LIST_CREATE_FAILURE })
   }

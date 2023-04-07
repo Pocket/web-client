@@ -1,4 +1,4 @@
-import { put, takeLatest, take, race, call, select } from 'redux-saga/effects'
+import { put, takeLatest, take, race, call } from 'redux-saga/effects'
 import { updateShareableList } from 'common/api/mutations/updateShareableList'
 
 import { LIST_UPDATE_REQUEST } from 'actions'
@@ -70,8 +70,8 @@ function* listUpdate({ id }) {
 
     const data = {
       externalId: id,
-      description: description.trim(),
-      title: title.trim()
+      description: encodeURIComponent(description.trim()),
+      title: encodeURIComponent(title.trim())
     }
 
     const response = yield call(updateShareableList, data)

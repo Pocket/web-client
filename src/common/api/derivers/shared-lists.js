@@ -10,8 +10,11 @@ export function processAllList(responseData) {
   })
   
   const externalIds = userShareableLists.map((list) => list.externalId)
-  const titleToIdList = userShareableLists.reduce((obj, list) => ({ ...obj, [list.title]: list.externalId }), {})
-  const itemsById = arrayToObject(lists, 'externalId')  
+  const titleToIdList = userShareableLists.reduce(
+    (obj, list) => ({ ...obj, [decodeURIComponent(list.title)]: list.externalId }),
+    {}
+  )
+  const itemsById = arrayToObject(lists, 'externalId')
 
   return { externalIds, itemsById, titleToIdList }
 }
@@ -87,12 +90,17 @@ function deriveListItem(item, listId, utmId) {
 // Process the card image
 function deriveList(list, listId, listItems) {
   const { slug, title, description, status, moderationStatus, createdAt } = list
+
+  const decodedData = {
+    title: decodeURIComponent(title),
+    description: decodeURIComponent(description)
+  }
+
   const analyticsData = {
+    ...decodedData,
     id: listId,
     shareableListExternalId: listId,
     slug: slug || '',
-    title: title,
-    description: description,
     status: status,
     moderationStatus: moderationStatus,
     createdAt: Date.parse(createdAt) / 1000
@@ -102,6 +110,7 @@ function deriveList(list, listId, listItems) {
 
   return {
     ...list,
+    ...decodedData,
     itemImage: listItems?.[0]?.imageUrl,
     externalId: listId,
     listItemIds,
