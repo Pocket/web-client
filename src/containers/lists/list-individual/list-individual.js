@@ -35,12 +35,27 @@ export const ListIndividual = () => {
   }, [dispatch, id, enrolled])
 
   if (!list) return null
-  const { title, description, slug, status, listItemIds: listItemCount, analyticsData } = list
+  const {
+    title,
+    description,
+    slug,
+    status,
+    listItemIds: listItemCount,
+    analyticsData: passedAnalytics
+  } = list
   const showLists = listItemCount?.length
+
+  const analyticsData = {
+    ...passedAnalytics,
+    title,
+    description,
+    status,
+    slug
+  }
 
   // Actions
   const handleSetStatus = (val) => {
-    dispatch(sendSnowplowEvent('shareable-list.status.update', analyticsData))
+    dispatch(sendSnowplowEvent('shareable-list.status.update', { ...analyticsData, status: val }))
     dispatch(mutateListStatusAction({ id, status: val }))
   }
   const handleShare = () => {
