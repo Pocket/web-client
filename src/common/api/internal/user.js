@@ -3,7 +3,8 @@ export async function getUser(access_token) {
   const isDev = process.env.NODE_ENV !== 'production'
 
   // !! DANGER: If we are not in production ignore ssl errors
-  if (isDev) process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
+  // !! DO NOT MERGE WITH THIS LINE UNCOMMENTED.
+  // if (isDev) process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
   // On dev we want to hit the non-rewritten api endpoin
   const path = isDev
