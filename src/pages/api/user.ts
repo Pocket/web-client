@@ -41,7 +41,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       .then((response) => response.json())
       .then((response) => res.status(200).json(response))
   } catch (err) {
-    // console.log('CLIENT API ERROR:', err)
     Sentry.withScope((scope) => {
       scope.setTransactionName('USER API ERROR')
       Sentry.captureMessage(err)
