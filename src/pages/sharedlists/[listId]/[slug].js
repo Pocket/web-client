@@ -28,7 +28,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       if (errors) {
         // Moderated and taken down
         if (errors?.[0].extensions?.code === 'FORBIDDEN') {
-          return { props: { ...defaultProps, statusCode: 403 } }
+          return { props: { ...defaultProps, statusCode: 'moderatedList' } }
         }
 
         // No article found

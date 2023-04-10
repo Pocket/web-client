@@ -20,8 +20,8 @@ import { breakpointLargeHandset } from 'common/constants'
  */
 export default function ErrorPage({ statusCode }: { statusCode?: number | string }) {
   const specificCodes = {
-    403: ForbiddenError,
     404: NotFoundError,
+    moderatedList: ModeratedListError,
     mobileNotification: MobileNotification
   }
   const ErrorComponent = specificCodes[statusCode] ? specificCodes[statusCode] : GeneralError
@@ -59,22 +59,6 @@ export default function ErrorPage({ statusCode }: { statusCode?: number | string
   )
 }
 
-function ForbiddenError() {
-  const { t } = useTranslation()
-
-  return (
-    <div className="content">
-      <h1>{t('error:title', 'Oops! Something’s gone awry...')}</h1>
-      <p data-cy="error-message">
-        {t(
-          'error:403-message',
-          `This List is not available because it may have violated Pocket’s Shared Content Policies.`
-        )}
-      </p>
-    </div>
-  )
-}
-
 /**
  * Used for 404 Errors
  * -------------------------------------------------------------------------- */
@@ -97,6 +81,24 @@ function NotFoundError() {
       <a className="button primary large" href="https://help.getpocket.com/">
         {t('error:contact', 'Contact Support')}
       </a>
+    </div>
+  )
+}
+
+/**
+ * Used for lists that have been taken down due to moderation
+ * -------------------------------------------------------------------------- */
+function ModeratedListError() {
+  const { t } = useTranslation()
+  return (
+    <div className="content">
+      <h1>{t('error:title', 'Oops! Something’s gone awry...')}</h1>
+      <p data-cy="error-message">
+        {t(
+          'error:moderated-list-message',
+          `This List is not available because it may have violated Pocket’s Shared Content Policies.`
+        )}
+      </p>
     </div>
   )
 }
