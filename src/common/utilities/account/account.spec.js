@@ -4,7 +4,7 @@ const ISOAccountCreationsDate = '2015-10-22T09:49:47.000Z'
 const testStartBeforeDate = new Date('March 25, 2015 2:00:30 PM GMT-07:00')
 const testStartAfterDate = new Date('November 29, 2022 10:20:00 AM')
 
-describe('EligibleUser', () => {
+describe('ElibibleUser', () => {
   it('should return true if user started after the test start date', () => {
     expect(eligibleUser(ISOAccountCreationsDate, testStartBeforeDate)).toBeTruthy()
   })
