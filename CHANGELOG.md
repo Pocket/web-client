@@ -1,3 +1,10 @@
+## [1.84.2](https://github.com/Pocket/web-client/compare/v1.84.1...v1.84.2) (2023-04-10)
+
+
+### Reverts
+
+* Revert "fix(user): absolute url for endpoint" ([3748988](https://github.com/Pocket/web-client/commit/374898851e12d288da7f8b994c1a518184df454b))
+
 ## [1.84.1](https://github.com/Pocket/web-client/compare/v1.84.0...v1.84.1) (2023-04-10)
 
 
