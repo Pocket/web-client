@@ -55,7 +55,6 @@ export function ThirdPartyInit() {
     if (!brazeToken) return dispatch(fetchBrazeToken(user_id))
 
     const version = process.env.RELEASE_VERSION || 'v.0.0.0'
-    const showLogs = process.env.BRAZE_LOGS
     const APIKey = isProduction ? BRAZE_API_KEY_PROD : BRAZE_API_KEY_DEV
 
     // lazy load braze SDK and then initialize it and call necessary functions
@@ -66,7 +65,7 @@ export function ThirdPartyInit() {
         initialize(APIKey, {
           baseUrl: BRAZE_SDK_ENDPOINT,
           appVersion: version,
-          enableLogging: (!isProduction && showLogs) || brazeLabUser, // enable logging in development or flagged users only
+          enableLogging: !isProduction || brazeLabUser, // enable logging in development or flagged users only
           openCardsInNewTab: true,
           enableSdkAuthentication: true,
           doNotLoadFontAwesome: true
