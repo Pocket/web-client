@@ -44,6 +44,8 @@ export function getShareableListPublic({ listId, slug }) {
 }
 
 function handleResponse(response) {
+  if (response?.errors) return response
+
   const responseData = response?.data?.shareableListPublic
   const processedData = processPublicList(responseData, 'pocket_public_list')
 

@@ -23,16 +23,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
       // Hydrating initial state with an async request. This will block the
       // page from loading.
       const response = await fetchPublicListHydrationData({ slug, listId })
-      const { itemsById, publicListInfo } = response || {}
+      const { itemsById, publicListInfo, errors } = response || {}
 
-      // No article found
-      if (!publicListInfo) {
+      if (errors) {
+        // Moderated and taken down
+        if (errors?.[0].extensions?.code === 'FORBIDDEN') {
+          return { props: { ...defaultProps, statusCode: 403 } }
+        }
+
+        // No article found
         return { props: defaultProps, notFound: true }
-      }
-
-      // Moderated and taken down
-      if (publicListInfo?.moderationStatus === 'HIDDEN') {
-        return { props: { ...defaultProps, statusCode: 403 } }
       }
 
       // Since ssr will not wait for side effects to resolve this dispatch

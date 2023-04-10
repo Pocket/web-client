@@ -19,7 +19,11 @@ import { breakpointLargeHandset } from 'common/constants'
  * on the web-client but are valid on mobile
  */
 export default function ErrorPage({ statusCode }: { statusCode?: number | string }) {
-  const specificCodes = { 404: NotFoundError, mobileNotification: MobileNotification }
+  const specificCodes = {
+    403: ForbiddenError,
+    404: NotFoundError,
+    mobileNotification: MobileNotification
+  }
   const ErrorComponent = specificCodes[statusCode] ? specificCodes[statusCode] : GeneralError
 
   return (
@@ -52,6 +56,22 @@ export default function ErrorPage({ statusCode }: { statusCode?: number | string
 
       <GlobalFooter />
     </>
+  )
+}
+
+function ForbiddenError() {
+  const { t } = useTranslation()
+
+  return (
+    <div className="content">
+      <h1>{t('error:title', 'Oops! Something’s gone awry...')}</h1>
+      <p data-cy="error-message">
+        {t(
+          'error:403-message',
+          `This List is not available because it may have violated Pocket’s Shared Content Policies.`
+        )}
+      </p>
+    </div>
   )
 }
 
