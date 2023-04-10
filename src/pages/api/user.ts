@@ -30,8 +30,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     headers: {
       'apollographql-client-name': 'web-client',
       'apollographql-client-version': RELEASE_VERSION,
-      'Content-Type': 'application/json',
-      Cookie: req.headers.cookie
+      'Content-Type': 'application/json'
     },
     maxRedirects: 20,
     body: JSON.stringify({ query: getUserQuery })
