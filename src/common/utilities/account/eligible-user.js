@@ -2,7 +2,24 @@ export function eligibleUser(accountBirth, dateToCheck) {
   const startDate = Date.parse(dateToCheck)
   const accountCreatedAt = Date.parse(accountBirth)
 
-  if (isNaN(startDate) || isNaN(accountCreatedAt)) return false
+  if (isNaN(startDate)) throw new BadEligibilityStartDate(startDate)
+  if (isNaN(accountCreatedAt)) throw new BadAccountStartDate(accountCreatedAt)
 
   return accountCreatedAt > startDate
+}
+
+export class BadEligibilityStartDate extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'BadEligibilityStartDate'
+    this.message = message
+  }
+}
+
+export class BadAccountStartDate extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'BadAccountStartDate'
+    this.message = message
+  }
 }

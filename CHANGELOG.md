@@ -1,3 +1,28 @@
+## [1.84.1](https://github.com/Pocket/web-client/compare/v1.84.0...v1.84.1) (2023-04-10)
+
+
+### Bug Fixes
+
+* **user:** absolute url for endpoint ([be868bd](https://github.com/Pocket/web-client/commit/be868bd6d58be017f335422a67e5a23e43fe1eea))
+
+# [1.84.0](https://github.com/Pocket/web-client/compare/v1.83.12...v1.84.0) (2023-04-10)
+
+
+### Bug Fixes
+
+* **account:** throw and test discrete eligible tests ([d52231e](https://github.com/Pocket/web-client/commit/d52231e44b69f9c192fe1a0e361c164c214cf90a))
+* **tsconfig:** include JS for go to completions ([21352ee](https://github.com/Pocket/web-client/commit/21352ee6c0d2ae055a6fa46628799a92705f92df))
+* **user:** remove dangerous ignore ssl ([96b4e95](https://github.com/Pocket/web-client/commit/96b4e9549cb5d3df60324e328143e1594cd59e47))
+* **user:** remove explicit cookie passing ([01f1528](https://github.com/Pocket/web-client/commit/01f1528d12f630caa0ca7c93a2a9303ad8a76070))
+* **user:** spelling error ([5a823f6](https://github.com/Pocket/web-client/commit/5a823f697c417afa1fd52e3dc9fd0e2ee81a60a0))
+
+
+### Features
+
+* **logging:** add basic graph logging utility ssr ([c4f9942](https://github.com/Pocket/web-client/commit/c4f9942f9077c626bbb44047418f32d4b3201707))
+* **user:** ssr user api request ([fedfe4e](https://github.com/Pocket/web-client/commit/fedfe4e6cd0bfd201ac4827d2b0c265e7976609a))
+* **waypoint:** get user info from the graph ([5cbba96](https://github.com/Pocket/web-client/commit/5cbba96eb5e8aaa7221cd57f2010fc10e14ce445))
+
 ## [1.83.12](https://github.com/Pocket/web-client/compare/v1.83.11...v1.83.12) (2023-04-10)
 
 
