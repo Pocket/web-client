@@ -1,7 +1,8 @@
-import { getUserInfo } from 'common/api/_legacy/user'
+import { getUser } from 'common/api/internal/user'
 import { eligibleUser } from 'common/utilities/account/eligible-user'
 import { START_DATE_FOR_HOME } from 'common/constants'
 import { START_DATE_FOR_GERMAN_HOME } from 'common/constants'
+import { graphErrorLog } from 'common/utilities/logging/log-graph-errors'
 import queryString from 'query-string'
 import * as Sentry from '@sentry/nextjs'
 
@@ -15,11 +16,6 @@ export default function Waypoint() {
 
 export async function getServerSideProps({ req, locale, query, defaultLocale, locales }) {
   try {
-    // We can't reliably test waypoint locally due to auth requirements
-    // These two parameters will let us check if a user should be redirected
-    // based on explicitly providing data we can't get
-    const { skipUserCheck, userStartDate } = query
-
     // returns first two letters of browser defined language settings
     const lang = req.headers['accept-language']?.toString().substring(0, 2)
     const supportedLocale = locales.includes(lang)
@@ -29,28 +25,31 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
     const isGerman = ['de', 'de-DE'].includes(locale) || ['de', 'de-DE'].includes(lang)
     const homeEligible = isGerman || !nonEnglish
 
+    // This is passed in from login (the only time we really send people to waypoint)
+    const { access_token } = query
+    if (!access_token) throw new MissingTokenError()
+
     // query parameters returned after auth that are currently not used.
     // remove from the list of query parameters
-    const unusedQueryParams = [
-      'access_token',
-      'id',
-      'guid',
-      'type',
-      'skipUserCheck',
-      'userStartDate'
-    ]
+    const unusedQueryParams = ['access_token', 'id', 'guid', 'type']
     unusedQueryParams.forEach((param) => delete query[param])
 
+    // Define some links where the user may end up depending on conditions
     const savesLink = queryString.stringifyUrl({ url: `${langPrefix}/saves`, query })
     const homeLink = queryString.stringifyUrl({ url: `${langPrefix}/home`, query })
 
-    const response = await getUserInfo(true, req?.headers?.cookie)
-    const { user_id, birth = userStartDate } = response?.user || {}
-    if (!user_id && !skipUserCheck) throw new WaypointNoUserIdError(JSON.stringify(response))
+    // Get the user (this goes through the client api proxy)
+    const { data, errors } = await getUser(access_token)
 
-    // Not logged in, or something else went awry?
-    // !! NOTE: this will redirect to Saves 100% of the time on localhost unless you use `skipUserCheck=true` in the url
-    if ((!birth && !skipUserCheck) || !homeEligible) {
+    // Did the graph return errors without any data? IE no partial response
+    if (errors && !data) throw new GraphError(errors)
+
+    // Finding out what the accountCreationDate
+    const { accountCreationDate } = data?.user || {}
+    if (!accountCreationDate) throw new WaypointNoAccountCreationDate()
+
+    // Send to saves if user is not eligible for home as a starting locations (Not German/English)
+    if (!homeEligible) {
       return {
         redirect: {
           permanent: false,
@@ -61,8 +60,8 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
 
     // EN users who signed up after 08-09-2021 will be assigned to 'home.release'
     // feature flag and therefore will be sent to Home after sign up
-    const eligible = eligibleUser(birth, START_DATE_FOR_HOME)
-    const eligibleGerman = eligibleUser(birth, START_DATE_FOR_GERMAN_HOME) && isGerman
+    const eligible = eligibleUser(accountCreationDate, START_DATE_FOR_HOME)
+    const eligibleGerman = eligibleUser(accountCreationDate, START_DATE_FOR_GERMAN_HOME) && isGerman
     const destination = eligible || eligibleGerman ? homeLink : savesLink
 
     return {
@@ -71,14 +70,16 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
         destination
       }
     }
-  } catch (err) {
+  } catch (error) {
     // Something went wrong while trying to sort the user out (flags, valid user, etc)
     // so we are just gonna route them to `/saves` to avoid poor user experience (seeing waypoint)
-    Sentry.withScope((scope) => {
-      scope.setTag('waypoint', 'fail over')
-      scope.setFingerprint('Waypoint Error')
-      Sentry.captureMessage(err)
-    })
+
+    // Log it to sentry so we get some signal as to why this isn't firing
+    Sentry.captureMessage(error)
+
+    // Let's log something readable out to the server console
+    if (error.name === 'GraphError') graphErrorLog(error)
+
     return {
       redirect: {
         permanent: false,
@@ -88,9 +89,25 @@ export async function getServerSideProps({ req, locale, query, defaultLocale, lo
   }
 }
 
-class WaypointNoUserIdError extends Error {
+class GraphError extends Error {
   constructor(message) {
     super(message)
-    this.name = 'WaypointNoUserIdError'
+    this.name = 'GraphError'
+    this.message = message
+  }
+}
+
+class MissingTokenError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'MissingTokenError'
+    this.message = message
+  }
+}
+
+class WaypointNoAccountCreationDate extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'WaypointNoAccountCreationDate'
   }
 }
