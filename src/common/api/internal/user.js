@@ -9,7 +9,7 @@ export async function getUser(access_token) {
   // On dev we want to hit the non-rewritten api endpoint
   const path = isDev
     ? `https://localhost.web-client.getpocket.com/api/user?access_token=${access_token}`
-    : `https://getpocket.com/web-client-api/user?access_token=${access_token}`
+    : `/web-client-api/user?access_token=${access_token}`
 
   return fetch(path).then((response) => response.json())
 }
