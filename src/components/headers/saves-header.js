@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { breakpointSmallHandset } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { breakpointLargeTablet } from 'common/constants'
-import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
+import { ListAddIcon } from 'components/icons/ListAddIcon'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { ListSort } from 'components/list-sort/list-sort'
 
@@ -107,7 +107,7 @@ export const SavesHeader = ({
       {showCreateList ? (
         <div className="create-list">
           <button onClick={handleCreateList} className="tiny">
-            <PlaylistAddIcon /> Create List
+            <ListAddIcon /> Create List
           </button>
         </div>
       ) : null}

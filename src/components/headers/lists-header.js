@@ -1,7 +1,8 @@
 import { css, cx } from 'linaria'
+import { useTranslation } from 'next-i18next'
 import { savesHeaderStyle } from './saves-header'
 import { ListSort } from 'components/list-sort/list-sort'
-import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
+import { ListAddIcon } from 'components/icons/ListAddIcon'
 import { FiltersAltIcon } from 'components/icons/FiltersAltIcon'
 import Avatar from 'components/avatar/avatar'
 import { SaveListButton } from 'components/content-saving/save-list'
@@ -108,7 +109,7 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
 
       <div className="create-sort">
         <button onClick={onCreateList} className="tiny">
-          <PlaylistAddIcon /> Create List
+          <ListAddIcon /> Create List
         </button>
         <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
       </div>

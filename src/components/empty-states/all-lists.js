@@ -1,6 +1,6 @@
 import { css } from 'linaria'
 import BorderSVG from 'static/images/sunken-treasure-chest.svg'
-import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
+import { ListAddIcon } from 'components/icons/ListAddIcon'
 
 const emptyStyles = css`
   text-align: center;
@@ -23,7 +23,7 @@ export const EmptyAllLists = ({ handleCreate }) => {
       <img src={BorderSVG.src} alt="" />
       <p>Create your first list.</p>
       <button className="outline" onClick={onCreateList}>
-        <PlaylistAddIcon /> Create list
+        <ListAddIcon /> Create list
       </button>
     </div>
   )

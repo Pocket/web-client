@@ -9,7 +9,7 @@ import { FavoriteIcon } from 'components/icons/FavoriteIcon'
 import { TagIcon } from 'components/icons/TagIcon'
 import { AddIcon } from 'components/icons/AddIcon'
 import { PermanentCopyIcon } from 'components/icons/PermanentCopyIcon'
-import { PlaylistAddIcon } from 'components/icons/PlaylistAddIcon'
+import { ListAddIcon } from 'components/icons/ListAddIcon'
 
 export const savedActionStyles = css`
   button,
@@ -78,7 +78,7 @@ export function SavedActions({
     lists: {
       label: 'Add to List',
       hide: !inListsExperiment,
-      icon: <PlaylistAddIcon />,
+      icon: <ListAddIcon />,
       onClick: actionAddToList
     },
     favorite: {
