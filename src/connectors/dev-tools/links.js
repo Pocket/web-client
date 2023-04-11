@@ -7,21 +7,6 @@ export const Links = ({ toggleDevMode }) => {
       title: 'Trailhead',
       src: '/trailhead',
       description: 'inaccessible canary for waypoint auth'
-    },
-    {
-      title: 'All Lists',
-      src: '/lists',
-      description: 'Link to the All Lists page'
-    },
-    {
-      title: 'Individual List',
-      src: '/lists/the-cosmos-awaits-12345',
-      description: 'Link to an Individual List page'
-    },
-    {
-      title: 'Public List',
-      src: '/@luigimario/list/the-cosmos-awaits-12345',
-      description: 'Link to a Public page'
     }
   ]
 
