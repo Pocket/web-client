@@ -19,7 +19,8 @@ export const CreateEditShareableList = ({
   const [descriptionValue, setDescriptionValue] = useState(listDescription)
 
   const onClose = () => handleClose()
-  const onSubmit = () => handleSubmit(listNameValue, descriptionValue)
+  // regex on description replaces multiple line breaks with two
+  const onSubmit = () => handleSubmit(listNameValue, descriptionValue.replace(/\n{2,}/g, '\n\n'))
 
   const onNameChange = (e) => {
     setListNameValue(e.target.value)
