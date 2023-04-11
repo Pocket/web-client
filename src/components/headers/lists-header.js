@@ -1,5 +1,4 @@
 import { css, cx } from 'linaria'
-import { useTranslation } from 'next-i18next'
 import { savesHeaderStyle } from './saves-header'
 import { ListSort } from 'components/list-sort/list-sort'
 import { ListAddIcon } from 'components/icons/ListAddIcon'
