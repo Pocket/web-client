@@ -22,8 +22,11 @@ export default function ErrorPage({ statusCode }: { statusCode?: number | string
   const specificCodes = {
     404: NotFoundError,
     moderatedList: ModeratedListError,
-    mobileNotification: MobileNotification
+    mobileNotification: MobileNotification,
+    userNotification: UserNotification,
+    impossible: ImpossibleError
   }
+
   const ErrorComponent = specificCodes[statusCode] ? specificCodes[statusCode] : GeneralError
 
   return (
@@ -139,6 +142,35 @@ function GeneralError() {
       <a className="button primary large" href="https://help.getpocket.com/">
         {t('error:contact', 'Contact Support')}
       </a>
+    </div>
+  )
+}
+
+/**
+ * Maintenance
+ * -------------------------------------------------------------------------- */
+function UserNotification() {
+  const { t } = useTranslation()
+  return (
+    <div className="content">
+      <h1>{t('error:user-title', 'You are a user')}.</h1>
+      <p data-cy="error-message">
+        {t('error:user-message', 'OMG! Is it really you?  How exciting.')}
+      </p>
+    </div>
+  )
+}
+
+/**
+ * Wat??
+ * -------------------------------------------------------------------------- */
+function ImpossibleError() {
+  return (
+    <div className="content">
+      <h1>How did you...</h1>
+      <p data-cy="error-message">
+        This is an internal error ... we must have taken a wrong turn somewhere ...
+      </p>
     </div>
   )
 }
