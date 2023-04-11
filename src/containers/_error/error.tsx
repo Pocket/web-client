@@ -149,13 +149,12 @@ function GeneralError() {
 /**
  * Maintenance
  * -------------------------------------------------------------------------- */
-function UserNotification() {
-  const { t } = useTranslation()
+function UserNotification({ birth, accountCreationDate }) {
   return (
     <div className="content">
-      <h1>{t('error:user-title', 'You are a user')}.</h1>
+      <h1>Welcome to the trailhead</h1>
       <p data-cy="error-message">
-        {t('error:user-message', 'OMG! Is it really you?  How exciting.')}
+      Your account was created on {birth} ... or was it {accountCreationDate}
       </p>
     </div>
   )
