@@ -1,7 +1,6 @@
 // Libraries
 import queryString from 'query-string'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import nookies from 'nookies'
 import * as Sentry from '@sentry/nextjs'
 
 // API
@@ -26,16 +25,7 @@ export async function getServerSideProps(ctx) {
   const { req, locale, query, defaultLocale, locales } = ctx
   try {
     /**
-     * We parse out cookies here so we can limit the payload.
-     * Node has an 8k limit on request headers, so if we send the
-     * entire payload through, we may end up with an overflow error
-     * !! Not being used until we sort out how neccesary this is on production servers
-     * !! Suspicion is that being explicit may be overkill
-     */
-    // const cookies = nookies.get(ctx)
-
-    /**
-     * There is no garuntee that the referring source will include language pre-fix
+     * There is no guarantee that the referring source will include language pre-fix
      * If the first accrpt language header is non-english (default) and supported
      * We want to be able to prefix the destination with an explicit language code
      */
