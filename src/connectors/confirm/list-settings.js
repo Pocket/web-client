@@ -5,6 +5,7 @@ import { mutateListUpdateCancel } from 'connectors/lists/mutation-update.state'
 import { mutateListUpdateConfirm } from 'connectors/lists/mutation-update.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { getIndividualListAction } from 'containers/lists/list-individual/list-individual.state'
+import { existsInArray } from 'common/utilities/object-array/object-array'
 
 export const ListSettingsModal = ({ id }) => {
   const dispatch = useDispatch()
@@ -30,7 +31,7 @@ export const ListSettingsModal = ({ id }) => {
   }
 
   const handleSubmit = (listNameValue, descriptionValue) => {
-    if (titleList.includes(listNameValue) && listNameValue !== title) {
+    if (existsInArray(titleList, listNameValue) && listNameValue !== title) {
       return setError('List name has already been used.')
     }
 

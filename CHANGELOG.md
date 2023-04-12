@@ -1,3 +1,11 @@
+## [1.85.3](https://github.com/Pocket/web-client/compare/v1.85.2...v1.85.3) (2023-04-12)
+
+
+### Bug Fixes
+
+* **lists:** update list title validation so dupe titles can't be submitted ([2035829](https://github.com/Pocket/web-client/commit/20358295c718ded5dd36d5e9f84e1f82d46edd18))
+* **utility:** update comment describing existsinarray function ([ce5b27b](https://github.com/Pocket/web-client/commit/ce5b27b9605919b05fa133d46062f17fcb4acc92))
+
 ## [1.85.2](https://github.com/Pocket/web-client/compare/v1.85.1...v1.85.2) (2023-04-12)
 
 
