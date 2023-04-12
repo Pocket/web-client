@@ -62,7 +62,7 @@ export async function getServerSideProps(ctx) {
      * Based on the assumptions that http-only cookies will be present.
      * This method is inaccesible from localhost due to security conflicts
      */
-    const response = await getUserInfo(true, req?.headers?.cookies)
+    const response = await getUserInfo(true, req?.headers?.cookie)
     if (response.xError) throw new UserLegacyRequestError(response)
     const { birth } = response?.user || {}
     console.log(`Legacy: ${birth}`)
