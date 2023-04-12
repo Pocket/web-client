@@ -23,6 +23,7 @@ const listHeaderStyles = css`
       padding-right: 16px;
       font-size: 14px;
       line-height: 20px;
+      white-space: pre-wrap;
     }
   }
 
@@ -70,6 +71,7 @@ const publicListHeaderStyles = css`
       font-size: 14px;
       line-height: 1.4;
       margin-bottom: 68px;
+      white-space: pre-wrap;
     }
   }
 

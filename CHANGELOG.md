@@ -1,3 +1,10 @@
+## [1.85.5](https://github.com/Pocket/web-client/compare/v1.85.4...v1.85.5) (2023-04-12)
+
+
+### Bug Fixes
+
+* **lists:** preserve line breaks in descriptions ([952f7fa](https://github.com/Pocket/web-client/commit/952f7fa9297c0dd65e5cd420847cc3191e2d3ee3))
+
 ## [1.85.4](https://github.com/Pocket/web-client/compare/v1.85.3...v1.85.4) (2023-04-12)
 
 
