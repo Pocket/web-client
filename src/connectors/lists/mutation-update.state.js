@@ -1,5 +1,6 @@
 import { put, takeLatest, take, race, call, select } from 'redux-saga/effects'
 import { updateShareableList } from 'common/api/mutations/updateShareableList'
+import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object-array'
 
 import { LIST_UPDATE_REQUEST } from 'actions'
 import { LIST_UPDATE_CONFIRM } from 'actions'
@@ -68,11 +69,11 @@ function* listUpdate({ id }) {
   try {
     const { title, description } = confirm
 
-    const data = {
+    const data = getObjectWithValidKeysOnly({
       externalId: id,
       description: description.trim(),
       title: title.trim()
-    }
+    })
 
     const response = yield call(updateShareableList, data)
     yield put({ type: LIST_UPDATE_SUCCESS })
