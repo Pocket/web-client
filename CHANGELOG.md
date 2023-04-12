@@ -1,3 +1,48 @@
+## [1.85.4](https://github.com/Pocket/web-client/compare/v1.85.3...v1.85.4) (2023-04-12)
+
+
+### Bug Fixes
+
+* **trailhead:** preserve sentry prototype extension ([30343e5](https://github.com/Pocket/web-client/commit/30343e5660b03a7921a7c2a48ec6da3b1198880f))
+
+## [1.85.3](https://github.com/Pocket/web-client/compare/v1.85.2...v1.85.3) (2023-04-12)
+
+
+### Bug Fixes
+
+* **lists:** update list title validation so dupe titles can't be submitted ([2035829](https://github.com/Pocket/web-client/commit/20358295c718ded5dd36d5e9f84e1f82d46edd18))
+* **utility:** update comment describing existsinarray function ([ce5b27b](https://github.com/Pocket/web-client/commit/ce5b27b9605919b05fa133d46062f17fcb4acc92))
+
+## [1.85.2](https://github.com/Pocket/web-client/compare/v1.85.1...v1.85.2) (2023-04-12)
+
+
+### Bug Fixes
+
+* **trailhead:** update to be noindex,nofollow ([ee00eaf](https://github.com/Pocket/web-client/commit/ee00eafc07228d70e2342aef3f7e7ee267828dc4))
+
+## [1.85.1](https://github.com/Pocket/web-client/compare/v1.85.0...v1.85.1) (2023-04-12)
+
+
+### Bug Fixes
+
+* **lists:** prevent empty string from being submitted as a description ([05ba1b2](https://github.com/Pocket/web-client/commit/05ba1b2d31068a1f7535faa15350ee78c8826832))
+
+# [1.85.0](https://github.com/Pocket/web-client/compare/v1.84.5...v1.85.0) (2023-04-11)
+
+
+### Bug Fixes
+
+* **account:** throw and test discrete eligible tests ([2def7db](https://github.com/Pocket/web-client/commit/2def7db948537717f54b0584a28d508b385d3203))
+* **tsconfig:** include JS for go to completions ([70d6bf9](https://github.com/Pocket/web-client/commit/70d6bf935fd3bbd07c5fe6a89a406e528f511c3d))
+
+
+### Features
+
+* **errors:** more custom errors ([301ed97](https://github.com/Pocket/web-client/commit/301ed97f95546ae6db2d55bf0a14ca27061102d9))
+* **logging:** add basic graph logging utility ssr ([3913e55](https://github.com/Pocket/web-client/commit/3913e55ef9f96f36c58a39d42d431cc4e32a9609))
+* **trailhead:** add trailhead ([2f6a8b4](https://github.com/Pocket/web-client/commit/2f6a8b43c7c2d8bab4da8b9bc42f7316ddc2e19b))
+* **user:** ssr user api request ([3b68f32](https://github.com/Pocket/web-client/commit/3b68f32dc61897bb929ccb983f0e7fbaa1a535e1))
+
 ## [1.84.5](https://github.com/Pocket/web-client/compare/v1.84.4...v1.84.5) (2023-04-11)
 
 

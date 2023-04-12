@@ -88,3 +88,10 @@ export function arraysAreEqual(arrayOne, arrayTwo) {
 
   return arraysContainTheSameValues
 }
+
+// Checks if a string exists in an array of strings regardless of letter casing
+export function existsInArray(arr, val) {
+  if (!Array.isArray(arr) || !val) return false
+
+  return arr.some(name => name.toLowerCase() === val.toLowerCase())
+}

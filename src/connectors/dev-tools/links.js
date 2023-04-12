@@ -2,19 +2,13 @@ import { sectionStyles } from 'components/dev-tools/tool-styles'
 import Link from 'next/link'
 
 export const Links = ({ toggleDevMode }) => {
-  const links = [{
-    title: 'All Lists',
-    src: '/lists',
-    description: 'Link to the All Lists page'
-  },{
-    title: 'Individual List',
-    src: '/lists/the-cosmos-awaits-12345',
-    description: 'Link to an Individual List page'
-  },{
-    title: 'Public List',
-    src: '/@luigimario/list/the-cosmos-awaits-12345',
-    description: 'Link to a Public page'
-  }]
+  const links = [
+    {
+      title: 'Trailhead',
+      src: '/trailhead',
+      description: 'inaccessible canary for waypoint auth'
+    }
+  ]
 
   return links.length ? (
     <div className={sectionStyles}>

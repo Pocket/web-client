@@ -1,5 +1,6 @@
 import { put, takeLatest, take, race, call, select } from 'redux-saga/effects'
 import { createShareableList } from 'common/api/mutations/createShareableList'
+import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object-array'
 
 import { LIST_ITEMS_SUCCESS } from 'actions'
 
@@ -65,10 +66,10 @@ function* itemsCreateList({ id }) {
 
   try {
     const { title, description } = confirm
-    const listData = {
+    const listData = getObjectWithValidKeysOnly({
       title: title.trim(),
       description: description.trim()
-    }
+    })
 
     let listItemData = null
 

@@ -4,6 +4,7 @@ import { CreateEditShareableList } from 'components/shareable-lists/create-edit-
 import { mutateListConfirm } from 'connectors/lists/mutation-create.state'
 import { mutateListCancel } from 'connectors/lists/mutation-create.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { existsInArray } from 'common/utilities/object-array/object-array'
 
 export const CreateListModal = () => {
   const dispatch = useDispatch()
@@ -22,7 +23,7 @@ export const CreateListModal = () => {
   }
 
   const handleSubmit = (title, description) => {
-    if (titleList.includes(title)) return setError('List name has already been used.')
+    if (existsInArray(titleList, title)) return setError('List name has already been used.')
 
     dispatch(mutateListConfirm({ title, description }))
     dispatch(sendSnowplowEvent('shareable-list.create.submit'))
