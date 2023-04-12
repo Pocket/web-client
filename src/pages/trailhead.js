@@ -94,7 +94,7 @@ export async function getServerSideProps(ctx) {
     }
   } catch (err) {
     if (err instanceof UserLegacyRequestError) {
-      console.table([err.message], ['xErrorCode', 'xError'])
+      console.table([err.logMessage], ['xErrorCode', 'xError'])
     }
 
     if (err instanceof GraphError) {
@@ -120,7 +120,7 @@ class GraphError extends Error {
   constructor(message) {
     super(message)
     this.name = 'GraphError'
-    this.message = message
+    this.logMessage = message
   }
 }
 
@@ -128,7 +128,7 @@ class UserLegacyRequestError extends Error {
   constructor(message) {
     super(message)
     this.name = 'UserLegacyRequestError'
-    this.message = message
+    this.logMessage = message
   }
 }
 

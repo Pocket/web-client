@@ -12,7 +12,6 @@ export class BadEligibilityStartDate extends Error {
   constructor(message) {
     super(message)
     this.name = 'BadEligibilityStartDate'
-    this.message = message
   }
 }
 
@@ -20,6 +19,5 @@ export class BadAccountStartDate extends Error {
   constructor(message) {
     super(message)
     this.name = 'BadAccountStartDate'
-    this.message = message
   }
 }
