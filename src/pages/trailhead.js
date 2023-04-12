@@ -98,7 +98,7 @@ export async function getServerSideProps(ctx) {
     }
 
     if (err instanceof GraphError) {
-      graphErrorLog(err)
+      graphErrorLog(err.logMessage)
     }
 
     Sentry.captureMessage(err)
