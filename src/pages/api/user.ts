@@ -22,12 +22,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const path = `https://getpocket.com/graphql?consumer_key=94110-6d5ff7a89d72c869766af0e0`
   const options = {
     method: 'POST',
-    hostname: 'getpocket.com',
-    Origin: 'https://getpocket.com',
     headers: {
       'apollographql-client-name': 'web-client',
       'apollographql-client-version': RELEASE_VERSION,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Cookie: req?.headers?.cookie,
+      Origin: 'https://getpocket.com'
     },
     maxRedirects: 20,
     body: JSON.stringify({ query: getUserQuery })

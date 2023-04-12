@@ -10,5 +10,11 @@ export async function getUser() {
     ? `https://localhost.web-client.getpocket.com/api/user`
     : `https://getpocket.com/web-client-api/user`
 
-  return fetch(path).then((response) => response.json())
+  return fetch(path, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Origin: 'https://getpocket.com'
+    }
+  }).then((response) => response.json())
 }
