@@ -2,6 +2,7 @@
 import queryString from 'query-string'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import * as Sentry from '@sentry/nextjs'
+import Head from 'next/head'
 
 // API
 import { getUserInfo } from 'common/api/_legacy/user'
@@ -13,7 +14,14 @@ import { graphErrorLog } from 'common/utilities/logging/log-graph-errors'
 import { LOCALE_COMMON } from 'common/constants'
 
 export default function Trailhead({ statusCode, ...props }) {
-  return <ErrorPage statusCode={statusCode} {...props} />
+  return (
+    <>
+      <Head>
+        <meta name="robots" content="noindex,nofollow" />
+      </Head>
+      <ErrorPage statusCode={statusCode} {...props} />
+    </>
+  )
   /**
    * Do nothing here, this always ends in a redirect.
    * The only reason for this file is to do some server side processing
