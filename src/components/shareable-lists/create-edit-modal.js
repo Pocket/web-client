@@ -16,7 +16,7 @@ export const CreateEditShareableList = ({
   appRootSelector
 }) => {
   const [listNameValue, setListNameValue] = useState(listName)
-  const [descriptionValue, setDescriptionValue] = useState(listDescription)
+  const [descriptionValue, setDescriptionValue] = useState(listDescription || '')
 
   const onClose = () => handleClose()
   const onSubmit = () => handleSubmit(listNameValue, descriptionValue)

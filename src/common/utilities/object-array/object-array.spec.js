@@ -1,6 +1,7 @@
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object-array'
 import { arraysAreEqual } from 'common/utilities/object-array/object-array'
+import { existsInArray } from 'common/utilities/object-array/object-array'
 
 describe('arrayToObject', () => {
   const arrayOfObjects = [
@@ -84,5 +85,34 @@ describe('arraysAreEqual', () => {
   it('returns false if one array has extra values', () => {
     const unEqualArrays = arraysAreEqual(['horse'], ['horse', 'rider'])
     expect(unEqualArrays).toBeFalsy()
+  })
+})
+
+describe('existsInArray', () => {
+  const stringArray = ['one', 'two', 'three', 'four']
+
+  it('returns false if non-array is passed in', () => {
+    const nonArray = existsInArray(42, 'two')
+    expect(nonArray).toBeFalsy()
+  })
+
+  it('returns false if value passed in is null or undefined', () => {
+    const nonArray = existsInArray(stringArray)
+    expect(nonArray).toBeFalsy()
+  })
+
+  it(`returns false if the value doesn't exist in the array`, () => {
+    const unEqualArrays = existsInArray(stringArray, 'cheese')
+    expect(unEqualArrays).toBeFalsy()
+  })
+
+  it('returns true if the value exists in the array (cases match)', () => {
+    const unEqualArrays = existsInArray(stringArray, 'two')
+    expect(unEqualArrays).toBeTruthy()
+  })
+
+  it(`returns true if the value exists in the array (cases don't match)`, () => {
+    const unEqualArrays = existsInArray(stringArray, 'TWO')
+    expect(unEqualArrays).toBeTruthy()
   })
 })
