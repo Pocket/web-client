@@ -1,4 +1,4 @@
-export async function getUser() {
+export async function getUser(cookie) {
   // Are we in production?
   const isDev = process.env.NODE_ENV !== 'production'
 
@@ -12,9 +12,7 @@ export async function getUser() {
 
   return fetch(path, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Origin: 'https://getpocket.com'
-    }
+    credentials: 'include',
+    headers: { Cookie: cookie, Origin: 'https://getpocket.com' }
   }).then((response) => response.json())
 }

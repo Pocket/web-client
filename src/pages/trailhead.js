@@ -77,7 +77,7 @@ export async function getServerSideProps(ctx) {
      */
 
     // Finding out what the accountCreationDate
-    const { data, errors } = await getUser()
+    const { data, errors } = await getUser(req?.headers?.cookie)
     if (errors) throw new GraphError(errors)
 
     // Finding out what the accountCreationDate
