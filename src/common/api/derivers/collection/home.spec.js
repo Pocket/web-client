@@ -14,8 +14,6 @@ const collectionAsItem = {
   isArticle: false,
   title: 'Going Down the Rabbit Hole: Why People Fall for Conspiracy Theories',
   itemId: '3664844706',
-  normalUrl:
-    'http://getpocket.com/collections/going-down-the-rabbit-hole-why-people-fall-for-conspiracy-theories',
   resolvedId: '3664844706',
   resolvedUrl:
     'https://getpocket.com/collections/going-down-the-rabbit-hole-why-people-fall-for-conspiracy-theories',
@@ -40,7 +38,6 @@ const collectionAsItem = {
   ],
   topImageUrl:
     'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2Fc3d81de1-7e57-4393-ab61-6323c061c2ef.png',
-  wordCount: 0,
   timeToRead: null,
   givenUrl:
     'http://getpocket.com/collections/going-down-the-rabbit-hole-why-people-fall-for-conspiracy-theories',

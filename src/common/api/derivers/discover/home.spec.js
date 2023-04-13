@@ -31,8 +31,6 @@ export const recommendationsFromSlate = {
     isArticle: true,
     title: "What You Do With Your Shopping Cart When You're Done With It Says A Lot About You",
     itemId: '3365323914',
-    normalUrl:
-      'http://getpocket.com/explore/item/people-think-what-you-do-with-your-shopping-cart-when-you-re-done-with-it-says-a-lot-about-you',
     resolvedId: '3365323914',
     resolvedUrl:
       'https://getpocket.com/explore/item/people-think-what-you-do-with-your-shopping-cart-when-you-re-done-with-it-says-a-lot-about-you',
@@ -55,7 +53,6 @@ export const recommendationsFromSlate = {
     ],
     topImageUrl:
       'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fhips.hearstapps.com%2Fhmg-prod.s3.amazonaws.com%2Fimages%2Fview-of-branded-shopping-carts-lined-up-on-a-sidewalk-news-photo-1605802464.%3Fresize%3D640%3A*',
-    wordCount: 350,
     timeToRead: null,
     givenUrl:
       'http://getpocket.com/explore/item/people-think-what-you-do-with-your-shopping-cart-when-you-re-done-with-it-says-a-lot-about-you',

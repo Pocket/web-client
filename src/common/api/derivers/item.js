@@ -37,10 +37,8 @@ import { BASE_URL } from 'common/constants'
  * @param {Boolean} isIndex — true if the item is an index / home page, rather than a specific single piece of content
  * @param {String} title — The title as determined by the parser.
  * @param {URL} topImageUrl — The page's / publisher's preferred thumbnail image
- * @param {int} wordCount — Number of words in the article (we use this to derive read time)
  * @param {DateString} datePublished — The date the article was published
  * @param {string} language — The detected language of the article
- * @param {int} timeToRead — How long it will take to read the article (WordCount / 220 WPM)
  * @param {Boolean} fromPartner — If a story is sponsored/partnered
  *
  * INCLUDED ITEM ENRICHMENT

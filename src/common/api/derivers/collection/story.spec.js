@@ -27,7 +27,6 @@ export const storyFromClientApi = {
       }
     ],
     itemId: '1731163180',
-    normalUrl: 'http://nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html',
     resolvedId: '1731163180',
     resolvedUrl: 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html',
     domain: null,
@@ -76,7 +75,6 @@ export const storyFromClientApi = {
     ],
     topImageUrl:
       'https://static01.nyt.com/images/2017/05/07/business/07vwexcerpt1-web/07vwexcerpt1-web-facebookJumbo.jpg?year=2017&h=549&w=1050&s=9040da8dc525be00827fd1625a9bb1e954d7d895d974cec2d8a8395682209f60&k=ZQJBKqZ0VN',
-    wordCount: 2975,
     timeToRead: 14,
     givenUrl: 'https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html',
     syndicatedArticle: null

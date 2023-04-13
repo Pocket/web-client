@@ -3,55 +3,56 @@ import { analyticsActions } from 'connectors/snowplow/actions'
 import { validateSnowplowExpectations } from 'connectors/snowplow/snowplow.state'
 
 //prettier-ignore
-export const savedParsedFromClientApi =   {
-  "node": {
-      "_createdAt": 1634765628,
-      "_updatedAt": 1634765628,
-      "url": "http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html",
-      "status": "UNREAD",
-      "isFavorite": false,
-      "favoritedAt": null,
-      "isArchived": false,
-      "archivedAt": null,
-      "tags": [],
-      "item": {
-          "itemId": "3362121180",
-          "authors": [
-              {
-                  "name": "JANE E. BRODY",
-                  "url": "https://www.nytimes.com/by/jane-e-brody"
-              }
-          ],
-          "domainMetadata": {
-              "name": "The New York Times",
-              "logo": "https://logo.clearbit.com/nytimes.com?size=800"
-          },
-          "domain": null,
-          "excerpt": "By studying centenarians, researchers hope to develop strategies to ward off Alzheimer’s disease and slow brain aging for all of us.",
-          "hasImage": "HAS_IMAGES",
-          "hasVideo": "NO_VIDEOS",
-          "images": [
-              {
-                  "src": "https://static01.nyt.com/images/2021/06/22/science/21SCI-BRODY-CENTENARIANS/21SCI-BRODY-CENTENARIANS-articleLarge.jpg?quality=75&auto=webp&disable=upscale",
-              },
-          ],
-          "isArticle": true,
-          "isIndex": false,
-          "resolvedUrl": "https://www.nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html",
-          "resolvedId": "3362121180",
-          "title": "The Secrets of ‘Cognitive Super-Agers’",
-          "topImageUrl": "https://static01.nyt.com/images/2021/06/22/science/21SCI-BRODY-CENTENARIANS/21SCI-BRODY-CENTENARIANS-facebookJumbo.jpg",
-          "videos": null,
-          "wordCount": 1112,
-          "datePublished": "2021-06-21 04:00:09",
-          "language": "en",
-          "timeToRead": 5,
-          "givenUrl": "http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html",
-          "syndicatedArticle": null,
-          "collection": null
-      }
+export const savedParsedFromClientApi = {
+  node: {
+    _createdAt: 1634765628,
+    _updatedAt: 1634765628,
+    url: 'http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html',
+    status: 'UNREAD',
+    isFavorite: false,
+    favoritedAt: null,
+    isArchived: false,
+    archivedAt: null,
+    tags: [],
+    item: {
+      itemId: '3362121180',
+      authors: [
+        {
+          name: 'JANE E. BRODY',
+          url: 'https://www.nytimes.com/by/jane-e-brody'
+        }
+      ],
+      domainMetadata: {
+        name: 'The New York Times',
+        logo: 'https://logo.clearbit.com/nytimes.com?size=800'
+      },
+      domain: null,
+      excerpt:
+        'By studying centenarians, researchers hope to develop strategies to ward off Alzheimer’s disease and slow brain aging for all of us.',
+      hasImage: 'HAS_IMAGES',
+      hasVideo: 'NO_VIDEOS',
+      images: [
+        {
+          src: 'https://static01.nyt.com/images/2021/06/22/science/21SCI-BRODY-CENTENARIANS/21SCI-BRODY-CENTENARIANS-articleLarge.jpg?quality=75&auto=webp&disable=upscale'
+        }
+      ],
+      isArticle: true,
+      isIndex: false,
+      resolvedUrl: 'https://www.nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html',
+      resolvedId: '3362121180',
+      title: 'The Secrets of ‘Cognitive Super-Agers’',
+      topImageUrl:
+        'https://static01.nyt.com/images/2021/06/22/science/21SCI-BRODY-CENTENARIANS/21SCI-BRODY-CENTENARIANS-facebookJumbo.jpg',
+      videos: null,
+      datePublished: '2021-06-21 04:00:09',
+      language: 'en',
+      timeToRead: 5,
+      givenUrl: 'http://nytimes.com/2021/06/21/well/mind/aging-memory-centenarians.html',
+      syndicatedArticle: null,
+      collection: null
+    }
   },
-  "cursor": "MzM2MjEyMTE4MF8qXzE2MzQ3NjU2Mjg="
+  cursor: 'MzM2MjEyMTE4MF8qXzE2MzQ3NjU2Mjg='
 }
 
 describe('Saves - Parsed', () => {

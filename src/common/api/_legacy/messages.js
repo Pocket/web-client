@@ -44,7 +44,6 @@ function modernizeItem(node) {
     resolved_title,
     resolved_url,
     excerpt,
-    word_count,
     domain_metadata,
     authors,
     image,
@@ -52,13 +51,11 @@ function modernizeItem(node) {
     ...rest
   } = item
 
-
   const convertedItem = {
     itemId: item_id || resolved_id,
     title: resolved_title || given_url,
     excerpt,
     resolvedTitle: resolved_title,
-    wordCount: word_count,
     itemImage: image?.src,
     domainMetadata: domain_metadata,
     givenUrl: given_url,
