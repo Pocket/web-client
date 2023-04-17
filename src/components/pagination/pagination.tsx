@@ -76,12 +76,18 @@ export const Pagination = ({
   // Let's build all the links that we want to show
   const links = Array(totalPages)
     .fill(0)
-    .map((content, pageNumber) => {
+    .map((content, arrayIndex) => {
+      // Since we are just building an empty array based on the total pages and
+      // using the index to represent page number, we need to convert the
+      // zero-based array index to a page-number the server will understand and
+      // the url can represent with clarity
+      const pageNumber = arrayIndex + 1
+
       return (
         <PageLink
           pagePattern={pagePattern}
-          key={pageNumber + 1}
-          pageNumber={pageNumber + 1}
+          key={pageNumber}
+          pageNumber={pageNumber}
           currentPage={currentPage}
         />
       )
