@@ -6,12 +6,12 @@ export function processAllList(responseData) {
   const userShareableLists = responseData
 
   const lists = responseData.map(({ externalId, listItems, ...rest }) => {
-    return deriveList(rest, externalId, listItems)      
+    return deriveList(rest, externalId, listItems)
   })
-  
+
   const externalIds = userShareableLists.map((list) => list.externalId)
   const titleToIdList = userShareableLists.reduce((obj, list) => ({ ...obj, [list.title]: list.externalId }), {})
-  const itemsById = arrayToObject(lists, 'externalId')  
+  const itemsById = arrayToObject(lists, 'externalId')
 
   return { externalIds, itemsById, titleToIdList }
 }
@@ -22,7 +22,6 @@ export function processIndividualList(responseData, utmId) {
   const { listItems, externalId: listId, ...rest } = responseData
 
   const listItemsById = getListItemsById(listItems, listId, utmId)
-  const externalIdList = Object.keys(listItemsById)
   const individualList = deriveList(rest, listId, listItems)
 
   const itemsById = {
@@ -30,7 +29,7 @@ export function processIndividualList(responseData, utmId) {
     [listId]: individualList
   }
 
-  return { externalIdList, itemsById, externalId: listId }
+  return { itemsById }
 }
 
 // process the Public list

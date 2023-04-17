@@ -1,7 +1,8 @@
-import { put, select, takeEvery } from 'redux-saga/effects'
+import { put, select, takeEvery, call } from 'redux-saga/effects'
 
 import { getShareableListPilotStatus } from 'common/api/queries/get-shareable-lists-pilot-status'
 import { getShareableLists } from 'common/api/queries/get-shareable-lists'
+import { getShareableList } from 'common/api/queries/get-shareable-list'
 
 import { LIST_ITEMS_SUCCESS } from 'actions'
 
@@ -15,6 +16,9 @@ import { LIST_ALL_REQUEST } from 'actions'
 import { LIST_ALL_REQUEST_SUCCESS } from 'actions'
 import { LIST_ALL_REQUEST_FAILURE } from 'actions'
 
+import { LIST_INDIVIDUAL_REQUEST } from 'actions'
+import { LIST_INDIVIDUAL_FAILURE } from 'actions'
+
 import { LIST_CREATE_SUCCESS } from 'actions'
 import { LIST_DELETE_SUCCESS } from 'actions'
 
@@ -25,6 +29,7 @@ import { VARIANTS_SAVE } from 'actions'
 export const checkListsPilotStatus = () => ({ type: LIST_CHECK_PILOT_STATUS_REQUEST })
 export const listsItemsSetSortOrder = (sortOrder) => ({type: LIST_PAGE_SET_SORT_ORDER_REQUEST, sortOrder}) //prettier-ignore
 export const getUserShareableLists = () => ({ type: LIST_ALL_REQUEST })
+export const getIndividualListAction = (id) => ({ type: LIST_INDIVIDUAL_REQUEST, id })
 
 /** LIST SAVED REDUCERS
  --------------------------------------------------------------- */
@@ -90,7 +95,7 @@ export const pageListsInfoReducers = (state = initialState, action) => {
       const { deletedId } = action
       const titleToIdList = Object.keys(state.titleToIdList)
         .filter((title) => state.titleToIdList[title] !== deletedId)
-        .reduce((obj, title) => ({ ...obj, [title]: state.titleToIdList[title] }), {}) 
+        .reduce((obj, title) => ({ ...obj, [title]: state.titleToIdList[title] }), {})
       return { ...state, titleToIdList }
     }
 
@@ -109,7 +114,8 @@ export const pageListsInfoReducers = (state = initialState, action) => {
 export const pageListsIdsSagas = [
   takeEvery(LIST_CHECK_PILOT_STATUS_REQUEST, fetchListPilotStatus),
   takeEvery(LIST_PAGE_SET_SORT_ORDER_REQUEST, adjustSortOrder),
-  takeEvery(LIST_ALL_REQUEST, userShareableListsRequest)
+  takeEvery(LIST_ALL_REQUEST, userShareableListsRequest),
+  takeEvery(LIST_INDIVIDUAL_REQUEST, getIndividualList)
 ]
 
 /** SAGA :: SELECTORS
@@ -149,5 +155,15 @@ function* userShareableListsRequest() {
     return yield put({ type: LIST_ALL_REQUEST_SUCCESS, externalIds, titleToIdList })
   } catch {
     return yield put({ type: LIST_ALL_REQUEST_FAILURE })
+  }
+}
+
+function* getIndividualList({ id }) {
+  try {
+    const { itemsById } = yield call(getShareableList, id)
+
+    yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
+  } catch (error) {
+    yield put({ type: LIST_INDIVIDUAL_FAILURE, error })
   }
 }

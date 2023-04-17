@@ -121,9 +121,6 @@ import { mutationListUpdateSagas } from 'connectors/lists/mutation-update.state'
 
 import { mutationListShareReducers } from 'connectors/lists/mutation-share.state'
 
-import { pageIndividualListIdsReducers } from 'containers/lists/list-individual/list-individual.state'
-import { pageIndividualListsSagas } from 'containers/lists/list-individual/list-individual.state'
-
 import { pagePublicListReducers } from 'containers/public-list/public-list.state'
 
 /* REDUCERS
@@ -168,7 +165,6 @@ const pageReducers = {
   pageStoriesInfo: [],
   pageListsIds: pageListsIdsReducers,
   pageListsInfo: pageListsInfoReducers,
-  pageIndividualListIds: pageIndividualListIdsReducers,
   pagePublicList: pagePublicListReducers
 }
 
@@ -245,7 +241,6 @@ function* rootSaga() {
     ...pageSavedIdsSagas,
     ...itemsSavedSagas,
     ...pageListsIdsSagas,
-    ...pageIndividualListsSagas,
     ...mutationArchiveSagas,
     ...mutationDeleteSagas,
     ...mutationFavoriteSagas,

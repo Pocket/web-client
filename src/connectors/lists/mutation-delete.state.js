@@ -10,6 +10,8 @@ import { LIST_DELETE_ITEM_REQUEST } from 'actions'
 import { LIST_DELETE_ITEM_SUCCESS } from 'actions'
 import { LIST_DELETE_ITEM_FAILURE } from 'actions'
 
+import { LIST_ITEMS_SUCCESS } from 'actions'
+
 import { deleteShareableList } from 'common/api/mutations/deleteShareableList'
 import { deleteShareableListItem } from 'common/api/mutations/deleteShareableListItem'
 
@@ -52,7 +54,7 @@ export const mutationListDeleteSagas = [
 
 /* SAGAS :: SELECTORS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-const getIndividualListIds = (state, id) => state.pageIndividualListIds[id]
+const getIndividualListIds = (state, id) => state.listsDisplay[id].listItemIds
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -76,13 +78,11 @@ function* deleteListItem({ id, listId }) {
   try {
     const { externalId: deletedId } = yield call(deleteShareableListItem, { id })
     const previousIds = yield select(getIndividualListIds, listId)
-    const externalIdList = previousIds.filter((e) => e !== deletedId)
+    const listItemIds = previousIds.filter((e) => e !== deletedId)
 
-    yield put({
-      type: LIST_DELETE_ITEM_SUCCESS,
-      externalId: listId,
-      externalIdList
-    })
+    const itemsById = { [listId]: { listItemIds } }
+    yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
+    yield put({ type: LIST_DELETE_ITEM_SUCCESS })
   } catch (error) {
     yield put({ type: LIST_DELETE_ITEM_FAILURE, error })
   }

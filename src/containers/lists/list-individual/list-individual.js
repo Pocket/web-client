@@ -6,7 +6,7 @@ import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListIndividualHeader } from 'components/headers/lists-header'
 import { EmptyIndividualLists } from 'components/empty-states/individual-list'
-import { getIndividualListAction } from './list-individual.state'
+import { getIndividualListAction } from 'containers/lists/lists.state'
 import { IndividualListCard } from 'connectors/lists/individual-list.card'
 import { ListSettingsModal } from 'connectors/confirm/list-settings'
 import { CreateListModal } from 'connectors/confirm/create-list'
@@ -25,7 +25,6 @@ export const ListIndividual = () => {
   const enrolled = useSelector((state) => state.pageListsInfo.enrolled)
   const enrolledFetched = useSelector((state) => state.pageListsInfo.enrolledFetched)
   const list = useSelector((state) => state.listsDisplay[id])
-  const listItemIds = useSelector((state) => state.pageIndividualListIds?.[id])
 
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
@@ -40,10 +39,10 @@ export const ListIndividual = () => {
     description,
     slug,
     status,
-    listItemIds: listItemCount,
+    listItemIds,
     analyticsData: passedAnalytics
   } = list
-  const showLists = listItemCount?.length
+  const showPlaceholder = listItemIds?.length === 0
 
   const analyticsData = {
     ...passedAnalytics,
@@ -98,7 +97,7 @@ export const ListIndividual = () => {
               handleOpenUrl={handleOpenUrl}
             />
 
-            {!showLists ? <EmptyIndividualLists handleClick={handleSavesClick} /> : null}
+            {showPlaceholder ? <EmptyIndividualLists handleClick={handleSavesClick} /> : null}
 
             {listItemIds
               ? listItemIds.map((externalId, index) => (

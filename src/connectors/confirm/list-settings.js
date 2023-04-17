@@ -4,7 +4,7 @@ import { CreateEditShareableList } from 'components/shareable-lists/create-edit-
 import { mutateListUpdateCancel } from 'connectors/lists/mutation-update.state'
 import { mutateListUpdateConfirm } from 'connectors/lists/mutation-update.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { getIndividualListAction } from 'containers/lists/list-individual/list-individual.state'
+import { getIndividualListAction } from 'containers/lists/lists.state'
 import { existsInArray } from 'common/utilities/object-array/object-array'
 
 export const ListSettingsModal = ({ id }) => {
