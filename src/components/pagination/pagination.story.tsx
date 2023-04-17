@@ -17,14 +17,9 @@ export default {
   }
 }
 
-const Template = ({ totalResults, perPageCount, page, pagePattern }) => {
+const Template = ({ totalResults, totalLinksShown, perPageCount, page, pagePattern }) => {
   const [currentPage, setCurrentPage] = useState(0)
   const totalPages = Math.ceil(totalResults / perPageCount)
-  const nextPage = Math.min(currentPage + 1, totalPages)
-  const previousPage = Math.max(1, currentPage - 1)
-
-  const pageForward = () => setCurrentPage(nextPage)
-  const pageBackward = () => setCurrentPage(previousPage)
 
   useEffect(() => {
     setCurrentPage(Math.max(Math.min(page, totalPages), 1))
@@ -32,12 +27,11 @@ const Template = ({ totalResults, perPageCount, page, pagePattern }) => {
 
   return (
     <PaginationComponent
+      totalLinksShown={totalLinksShown}
       totalResults={totalResults}
       perPageCount={perPageCount}
       pagePattern={pagePattern}
       currentPage={currentPage}
-      pageForward={pageForward}
-      pageBackward={pageBackward}
     />
   )
 }
@@ -46,6 +40,7 @@ export const Pagination = Template.bind({})
 Pagination.args = {
   pagePattern: '/collections',
   totalResults: 222,
+  totalLinksShown: 9,
   page: 1,
   perPageCount: 16
 }

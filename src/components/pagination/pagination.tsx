@@ -1,24 +1,45 @@
+// Libraries
 import { css, cx } from 'linaria'
 import Link from 'next/link'
+
+// Dependencies
 import { OverflowMenuIcon } from 'components/icons/OverflowMenuIcon'
 import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
 import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
 
+/**
+ * Pagination
+ * A component to allow the user to naviagte through a predictable pattern of
+ * links in a sequence. Shows the users current location as well as the ability
+ * to navigate incrementatlly and explicitly to exposed page numbers.
+ *
+ */
 export const Pagination = ({
   pagePattern,
   totalResults,
+  totalLinksShown = 9,
   currentPage,
-  perPageCount,
-  pageForward,
-  pageBackward
+  perPageCount
+}: {
+  pagePattern: string,
+  totalResults: number,
+  totalLinksShown: number,
+  currentPage: number,
+  perPageCount: number
 }) => {
   //Some static settings in case we need to adjust
-  const totalShown = 9
   const paginationLinkSize = 44
-  const maxWidth = totalShown * paginationLinkSize
 
   // How many pages do we have (including partial pages)
   const totalPages = Math.ceil(totalResults / perPageCount)
+
+  // Let's account for bad data here ... negative totalLinks shown or
+  // more links shown than we have
+  const totalShown = Math.max(4, Math.min(totalLinksShown, totalPages))
+
+  // ? IMPROVEMENT: This could take container size and available space
+  // ? Right now we are a bit more static with it.
+  const maxWidth = totalShown * paginationLinkSize
 
   // If we have only one page ... no need for pagination
   const showPagination = totalPages > 1
@@ -27,14 +48,26 @@ export const Pagination = ({
   const tooWide = paginationLinkSize * totalPages > maxWidth
 
   // We want to start truncating in the center of the pagination IF we need to
+  // Conditions we want to account for are:
+  // 1) Do we need an overflow because we have more pages than space to display
+  // 2) Dragons ... we always gotta be on the look our for them
+
+  // First lets find the center of the pagination based on the total we want to
+  // show. Much better UI with an odd number shown
   const centerOfPagination = Math.ceil(totalShown / 2)
+
+  // What links should we show?  If we are at page 18 of 20 ... we need to
+  // truncate The begining of the sequence
   const offsetStart = tooWide ? Math.max(currentPage - centerOfPagination, 0) : 0
+
+  // Do we have a clear runway to the end, so overlow is no longer neccesary?
   const clearToTheEnd = totalPages - offsetStart <= totalShown
+
+  // If we are clear to the end, we no longer want to adjust the starting position
+  // so we will show the last item back to the total shown without overflow
   const startingPosition = clearToTheEnd ? totalPages - totalShown : offsetStart
 
   // We want the end position to be the total shown from the starting point
-  // Conditions we want to account for are:
-  // ) Dragons ... we always gotta be on the look our for them
   const endingPosition = clearToTheEnd
     ? totalPages
     : Math.min(startingPosition + totalShown - 2, totalPages)
@@ -55,7 +88,7 @@ export const Pagination = ({
     })
     .slice(startingPosition, endingPosition)
 
-  // This endlink may or may not be neccesary
+  // This endlink may or may not be neccesary based on overflow we calculated
   const endLink = (
     <>
       <div className="more">
@@ -70,23 +103,40 @@ export const Pagination = ({
     </>
   )
 
+  // Build our link array here (with possible overflow)
   const shownLinks = showOverflow ? [...links, endLink] : links
+
+  // We want to know if we should be activating the forward/backward based on
+  // the position we are at in the sequence.
+  const disableBack = currentPage === 1
+  const disableForward = currentPage === totalPages - 1
+  const backLink = disableBack ? '#' : `${pagePattern}/page/${currentPage - 1}`
+  const forwardLink = disableForward ? '#' : `${pagePattern}/page/${currentPage + 1}`
 
   return showPagination ? (
     <>
       <div className={paginationStyle}>
-        <button className="pagination" onClick={pageBackward}>
-          <ChevronLeftIcon className="" />
-        </button>
+        <Link href={backLink}>
+          <a>
+            <button className="pagination" disabled={disableBack}>
+              <ChevronLeftIcon className="" />
+            </button>
+          </a>
+        </Link>
         {shownLinks}
-        <button className="pagination" onClick={pageForward}>
-          <ChevronRightIcon className="" />
-        </button>
+        <Link href={forwardLink}>
+          <a>
+            <button className="pagination" disabled={disableForward}>
+              <ChevronRightIcon className="" />
+            </button>
+          </a>
+        </Link>
       </div>
     </>
   ) : null
 }
 
+// This is the button for an individual link
 const PageLink = ({ pagePattern, pageNumber, currentPage }) => {
   const buttonClass = pageNumber === currentPage ? 'active' : null
   const href = pageNumber === 1 ? pagePattern : `${pagePattern}/page/${pageNumber}`
@@ -122,6 +172,7 @@ const paginationStyle = css`
     text-decoration: none;
   }
 
+  a.pagination,
   button.pagination {
     margin-right: 0.25rem;
     padding: 0;
