@@ -9,7 +9,7 @@ import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
 
 /**
  * Pagination
- * A component to allow the user to naviagte through a predictable pattern of
+ * A component to allow the user to navigate through a predictable pattern of
  * links in a sequence. Shows the users current location as well as the ability
  * to navigate incrementally and explicitly to exposed page numbers.
  *
