@@ -155,6 +155,7 @@ const PageLink = ({ pagePattern, pageNumber, currentPage }) => {
 const paginationStyle = css`
   display: flex;
   .more {
+    color: var(--color-dividerTertiary);
     margin-right: 0.25rem;
     width: 40px;
     height: 40px;
