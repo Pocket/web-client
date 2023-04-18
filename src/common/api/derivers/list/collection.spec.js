@@ -49,7 +49,6 @@ export const savedCollectionFromClientApi = {
       topImageUrl:
         'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-collectionapi-prod-images%2F756e1877-8857-45c4-b9f6-84c62a0700b5.png',
       videos: null,
-      wordCount: 388,
       datePublished: null,
       language: 'en',
       timeToRead: null,

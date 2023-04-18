@@ -1,3 +1,58 @@
+# [1.86.0](https://github.com/Pocket/web-client/compare/v1.85.10...v1.86.0) (2023-04-17)
+
+
+### Bug Fixes
+
+* **pagination:** spelling ([27e01eb](https://github.com/Pocket/web-client/commit/27e01eb9353a0f16d6182c8a7eaa1f61e3c4d181))
+
+
+### Features
+
+* **pagination:** add component ([e15986b](https://github.com/Pocket/web-client/commit/e15986b6ceb6ffe2283fef746fbd6212156f9cdd))
+
+## [1.85.10](https://github.com/Pocket/web-client/compare/v1.85.9...v1.85.10) (2023-04-13)
+
+
+### Bug Fixes
+
+* **saves:** cleanup and remove unused values ([286fc2c](https://github.com/Pocket/web-client/commit/286fc2cf68912143844e3996f5315e245dbc7c17))
+
+## [1.85.9](https://github.com/Pocket/web-client/compare/v1.85.8...v1.85.9) (2023-04-13)
+
+
+### Bug Fixes
+
+* **shareableListActions:** add component ([c52b032](https://github.com/Pocket/web-client/commit/c52b032b32afa16a1cd502ba588601ebdafab85a))
+
+## [1.85.8](https://github.com/Pocket/web-client/compare/v1.85.7...v1.85.8) (2023-04-12)
+
+
+### Bug Fixes
+
+* **trailhead:** pass cookies all the way down ([6d68694](https://github.com/Pocket/web-client/commit/6d68694b6b1085b4fc7abd0e6a06d4bac69ac479))
+
+## [1.85.7](https://github.com/Pocket/web-client/compare/v1.85.6...v1.85.7) (2023-04-12)
+
+
+### Bug Fixes
+
+* **logging:** update graph error log ([e18c7f3](https://github.com/Pocket/web-client/commit/e18c7f3204f13093683fd62e64252b36a15e3414))
+* **trailhead:** explicitly pass headers in api ([a41ec41](https://github.com/Pocket/web-client/commit/a41ec413f51b0f29bc5a6e8e506c830252cb98ac))
+
+## [1.85.6](https://github.com/Pocket/web-client/compare/v1.85.5...v1.85.6) (2023-04-12)
+
+
+### Bug Fixes
+
+* **trailhead:** cookie not cookies ([4659eda](https://github.com/Pocket/web-client/commit/4659eda348f4b51c017e7a7ea8eae95b906e76c5))
+
+## [1.85.5](https://github.com/Pocket/web-client/compare/v1.85.4...v1.85.5) (2023-04-12)
+
+
+### Bug Fixes
+
+* **lists:** preserve line breaks in descriptions ([952f7fa](https://github.com/Pocket/web-client/commit/952f7fa9297c0dd65e5cd420847cc3191e2d3ee3))
+
 ## [1.85.4](https://github.com/Pocket/web-client/compare/v1.85.3...v1.85.4) (2023-04-12)
 
 

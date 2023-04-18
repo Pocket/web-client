@@ -1,4 +1,4 @@
-export async function getUser() {
+export async function getUser(cookie) {
   // Are we in production?
   const isDev = process.env.NODE_ENV !== 'production'
 
@@ -10,5 +10,9 @@ export async function getUser() {
     ? `https://localhost.web-client.getpocket.com/api/user`
     : `https://getpocket.com/web-client-api/user`
 
-  return fetch(path).then((response) => response.json())
+  return fetch(path, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { Cookie: cookie, Origin: 'https://getpocket.com' }
+  }).then((response) => response.json())
 }

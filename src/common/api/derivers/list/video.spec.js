@@ -56,7 +56,6 @@ export const savedVideoFromClientApi = {
           length: 61
         }
       ],
-      wordCount: 0,
       datePublished: '2019-10-19 06:37:37',
       language: '',
       timeToRead: null,

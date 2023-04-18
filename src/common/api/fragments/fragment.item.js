@@ -5,7 +5,6 @@ export const FRAGMENT_ITEM = gql`
     isArticle
     title
     itemId
-    normalUrl
     resolvedId
     resolvedUrl
     domain
@@ -30,7 +29,6 @@ export const FRAGMENT_ITEM = gql`
       src
     }
     topImageUrl
-    wordCount
     timeToRead
     givenUrl
     collection {

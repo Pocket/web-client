@@ -62,7 +62,7 @@ export async function getServerSideProps(ctx) {
      * Based on the assumptions that http-only cookies will be present.
      * This method is inaccesible from localhost due to security conflicts
      */
-    const response = await getUserInfo(true, req?.headers?.cookies)
+    const response = await getUserInfo(true, req?.headers?.cookie)
     if (response.xError) throw new UserLegacyRequestError(response)
     const { birth } = response?.user || {}
     console.log(`Legacy: ${birth}`)
@@ -77,7 +77,7 @@ export async function getServerSideProps(ctx) {
      */
 
     // Finding out what the accountCreationDate
-    const { data, errors } = await getUser()
+    const { data, errors } = await getUser(req?.headers?.cookie)
     if (errors) throw new GraphError(errors)
 
     // Finding out what the accountCreationDate
@@ -98,7 +98,7 @@ export async function getServerSideProps(ctx) {
     }
 
     if (err instanceof GraphError) {
-      graphErrorLog(err)
+      graphErrorLog(err.logMessage)
     }
 
     Sentry.captureMessage(err)

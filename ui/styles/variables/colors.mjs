@@ -474,6 +474,34 @@ const checkBoxes = {
   }
 }
 
+const pagination = {
+  paginationText: {
+    light: _colorPalette.teal50,
+    dark: _colorPalette.teal80,
+    sepia: _colorPalette.teal45
+  },
+  paginationHover: {
+    light: _colorPalette.grey95,
+    dark: _colorPalette.grey25,
+    sepia: _colorPalette.sepia90
+  },
+  paginationHoverText: {
+    light: _colorPalette.teal50,
+    dark: _colorPalette.teal80,
+    sepia: _colorPalette.teal45
+  },
+  paginationActive: {
+    light: _colorPalette.teal100,
+    dark: _colorPalette.grey20,
+    sepia: _colorPalette.sepia80
+  },
+  paginationActiveText: {
+    light: _colorPalette.teal50,
+    dark: _colorPalette.grey95,
+    sepia: _colorPalette.sepia10
+  }
+}
+
 /** Used in building color variables */
 export const _colorModes = {
   ...canvas,
@@ -483,7 +511,8 @@ export const _colorModes = {
   ...raised,
   ...dividers,
   ...callouts,
-  ...checkBoxes
+  ...checkBoxes,
+  ...pagination
 }
 
 /** Used for stories */

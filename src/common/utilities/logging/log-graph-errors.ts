@@ -1,6 +1,6 @@
-export function graphErrorLog(error): void {
-  const graphErrors = error.message
-
+export function graphErrorLog(graphErrors = []): void {
+  if (process.env.NODE_ENV === 'production') return
+  
   const parsedErrors = graphErrors.map((error) => {
     const message = error.message
     const code = error.extensions?.code

@@ -289,6 +289,7 @@ export const shareableListActions = {
     eventType: 'impression',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
+      component: 'card',
       uiType: 'card'
     },
     expects: [

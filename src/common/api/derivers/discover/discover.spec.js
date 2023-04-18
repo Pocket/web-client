@@ -37,8 +37,6 @@ export const recommendationsFromSlate = {
     isArticle: true,
     title: 'Apple is ready to admit it was wrong about the future of laptops',
     itemId: '3460462323',
-    normalUrl:
-      'http://theverge.com/22734645/apple-macbook-pro-2021-ports-magsafe-touch-bar-usb-c-future',
     resolvedId: '3460462323',
     resolvedUrl:
       'https://www.theverge.com/22734645/apple-macbook-pro-2021-ports-magsafe-touch-bar-usb-c-future',
@@ -96,7 +94,6 @@ export const recommendationsFromSlate = {
     topImageUrl:
       'https://cdn.vox-cdn.com/thumbor/26f5VRT9jvt6JW6WB4Nohu849cI=/0x137:1911x1138/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/22938855/Apple_MacBook_Pro_Ports_10182021.jpg',
     videos: null,
-    wordCount: 1491,
     dateResolved: '2021-10-27 07:47:47',
     datePublished: '2021-10-19 15:30:00',
     language: 'en',

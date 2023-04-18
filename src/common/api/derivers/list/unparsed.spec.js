@@ -48,7 +48,6 @@ export const savedUnparsedFromClientApi = {
       topImageUrl:
         'https://www.myswitzerland.com/-/media/st/gadmin/images/accommodation/summer/typically%20swiss/k-img_5780_2_36163.jpg',
       videos: null,
-      wordCount: 260,
       datePublished: null,
       language: 'en',
       timeToRead: null,

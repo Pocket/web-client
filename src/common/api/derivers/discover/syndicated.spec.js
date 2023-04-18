@@ -33,8 +33,6 @@ export const recommendationsFromSlate = {
       }
     ],
     itemId: '2418914954',
-    normalUrl:
-      'http://getpocket.com/explore/item/the-3-minutes-it-takes-to-read-this-will-improve-your-conversations-forever',
     resolvedId: '2418914954',
     resolvedUrl:
       'https://getpocket.com/explore/item/the-3-minutes-it-takes-to-read-this-will-improve-your-conversations-forever',
@@ -58,7 +56,6 @@ export const recommendationsFromSlate = {
     videos: null,
     topImageUrl:
       'https://pocket-image-cache.com/1200x/filters:format(jpg):extract_focal()/https%3A%2F%2Fs3.amazonaws.com%2Fpocket-syndicated-images%2Farticles%2F326%2F1566916077_direct.jpg',
-    wordCount: 579,
     timeToRead: 3,
     givenUrl:
       'http://getpocket.com/explore/item/the-3-minutes-it-takes-to-read-this-will-improve-your-conversations-forever',

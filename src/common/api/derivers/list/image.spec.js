@@ -37,7 +37,6 @@ export const savedImageFromClientApi = {
       title: '',
       topImageUrl: null,
       videos: null,
-      wordCount: 0,
       datePublished: null,
       language: '',
       timeToRead: null,
