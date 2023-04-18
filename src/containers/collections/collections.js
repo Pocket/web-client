@@ -30,13 +30,14 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
   const languagePrefix = locale === 'en' ? '' : `/${locale}`
   const canonical = `${BASE_URL}${languagePrefix}/collections`
   const url = canonical
-  const title = noIndex
+  const title = t('collections:page-title', 'Collections for Your Pocket')
+  const metaTitle = noIndex
     ? t('collections:pagination-title', `Collections for Your Pocket — Page {{currentPage}}`, {
         currentPage
       })
-    : t('collections:page-title', 'Collections for Your Pocket')
+    : title
   const description = t('collections:page-description', 'Curated guides to the best of the web')
-  const metaData = { description, title, url }
+  const metaData = { description, title: metaTitle, url }
 
   return (
     <>
@@ -47,7 +48,7 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
       ) : null}
 
       <Layout
-        title={metaData.title}
+        title={metaTitle}
         metaData={metaData}
         canonical={canonical}
         forceWebView={true}
