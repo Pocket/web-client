@@ -1,6 +1,7 @@
 import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
-import { processAllList } from '../derivers/shared-lists'
+import { processAllList } from 'common/api/derivers/shared-lists'
+import * as Sentry from '@sentry/nextjs'
 
 const createShareableListQuery = gql`
   mutation CreateShareableList($listData: CreateShareableListInput!, $listItemData: CreateShareableListItemWithList) {
@@ -39,8 +40,22 @@ export function createShareableList({ listData, listItemData }) {
 }
 
 function handleResponse(response) {
-  const responseData = response?.data?.createShareableList
-  const processedData = processAllList([responseData])
+  try {
+    const { createShareableList, errors } = response?.data || {}
+    if (errors) throw new CreateShareableListError(errors)
+    const processedData = processAllList([createShareableList])
 
-  return processedData
+    return processedData
+  } catch (error) {
+    Sentry.captureMessage(error)
+  }
+}
+
+/** ERRORS
+ --------------------------------------------------------------- */
+class CreateShareableListError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'CreateShareableListError'
+  }
 }
