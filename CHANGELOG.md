@@ -1,3 +1,10 @@
+## [1.87.1](https://github.com/Pocket/web-client/compare/v1.87.0...v1.87.1) (2023-04-18)
+
+
+### Bug Fixes
+
+* **collections:** separate meta from title ([5027862](https://github.com/Pocket/web-client/commit/5027862aae5da6f6cb2554ec7b962836fada914c))
+
 # [1.87.0](https://github.com/Pocket/web-client/compare/v1.86.1...v1.87.0) (2023-04-18)
 
 
