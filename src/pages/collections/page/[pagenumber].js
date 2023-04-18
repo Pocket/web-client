@@ -21,6 +21,8 @@ export const getStaticPaths = async () => {
   const paths = Array(pagesToPaginate)
     .fill(0)
     .map((content, pageNumber) => `/collections/page/${pageNumber}`)
+    .slice(1, -1)
+
   return { paths, fallback: 'blocking' }
 }
 
@@ -28,16 +30,6 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ params,
   const { dispatch, sagaTask } = store
   const { pagenumber: passedNumber } = params
   const pageNumber = parseInt(passedNumber, 10)
-
-  // We want page 1 to be the indexed collection so we redirect to that
-  if (pageNumber === 1) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/collections'
-      }
-    }
-  }
 
   const defaultProps = {
     ...(await serverSideTranslations(locale, [...LOCALE_COMMON])),
