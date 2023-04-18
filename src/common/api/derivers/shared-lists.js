@@ -32,23 +32,6 @@ export function processIndividualList(responseData, utmId) {
   return { itemsById }
 }
 
-// process the Public list
-// itemsById will end up as listsDisplay
-// publicListInfo is the main list info
-export function processPublicList(responseData, utmId) {
-  const { listItems, externalId: listId, ...rest } = responseData
-
-  const listItemsById = getListItemsById(listItems, listId, utmId)
-  const publicListInfo = deriveList(rest, listId, listItems)
-
-  const itemsById = {
-    ...listItemsById,
-    [listId]: publicListInfo
-  }
-
-  return { itemsById, publicListInfo }
-}
-
 // Loops through each list item and derives it
 // return an object with the external id as the keys and list info as the value
 function getListItemsById(listItems, listId, utmId) {
