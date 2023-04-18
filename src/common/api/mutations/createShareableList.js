@@ -1,5 +1,6 @@
 import { gql } from 'graphql-request'
 import { requestGQL } from 'common/utilities/request/request'
+import { processAllList } from '../derivers/shared-lists'
 
 const createShareableListQuery = gql`
   mutation CreateShareableList($listData: CreateShareableListInput!, $listItemData: CreateShareableListItemWithList) {
@@ -33,6 +34,13 @@ export function createShareableList({ listData, listItemData }) {
     operationName: 'createShareableList',
     variables: { listData, listItemData }
   })
-    .then((response) => response?.data?.createShareableList)
+    .then(handleResponse)
     .catch((error) => console.error(error))
+}
+
+function handleResponse(response) {
+  const responseData = response?.data?.createShareableList
+  const processedData = processAllList([responseData])
+
+  return processedData
 }
