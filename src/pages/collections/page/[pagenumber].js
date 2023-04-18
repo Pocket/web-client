@@ -11,7 +11,7 @@ import { END } from 'redux-saga'
 import { wrapper } from 'store'
 
 export const getStaticPaths = async () => {
-  //We are only gonna paginate items with the lable `collections-homepage`
+  //We are only gonna paginate items with the label `collections-homepage`
   const totalPages = await fetchCollectionPageCount('en', ['collections-homepage'])
 
   // We don't want the first page to be part of the pagination
@@ -49,7 +49,6 @@ export const getStaticProps = wrapper.getStaticProps((store) => async ({ params,
   // No article found
   if (!itemSlugs.length) return { props: defaultProps, notFound: true, revalidate: 60 }
 
-  // Since ssr will not wait for side effects to resolve this dispatch needs to be pure
   // Since ssr will not wait for side effects to resolve this dispatch needs to be pure
   dispatch(hydrateCollections(itemSlugs))
   dispatch(hydrateItems(itemsBySlug))
