@@ -123,13 +123,13 @@ export const Pagination = ({
     <>
       <div className={paginationStyle}>
         {disableBack ? (
-          <button className="pagination" disabled={disableBack}>
+          <button className="pagination" disabled>
             <ChevronLeftIcon className="" />
           </button>
         ) : (
           <Link href={backLink}>
             <a>
-              <button className="pagination" disabled={disableBack}>
+              <button className="pagination">
                 <ChevronLeftIcon className="" />
               </button>
             </a>
@@ -137,13 +137,13 @@ export const Pagination = ({
         )}
         {shownLinks}
         {disableForward ? (
-          <button className="pagination" disabled={disableForward}>
+          <button className="pagination" disabled>
             <ChevronRightIcon className="" />
           </button>
         ) : (
           <Link href={forwardLink}>
             <a>
-              <button className="pagination" disabled={disableForward}>
+              <button className="pagination">
                 <ChevronRightIcon className="" />
               </button>
             </a>
