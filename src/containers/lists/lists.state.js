@@ -32,35 +32,6 @@ export const listsItemsSetSortOrder = (sortOrder) => ({type: LIST_PAGE_SET_SORT_
 export const getAllListsAction = () => ({ type: LIST_ALL_REQUEST })
 export const getIndividualListAction = (id) => ({ type: LIST_INDIVIDUAL_REQUEST, id })
 
-/** LIST SAVED REDUCERS
- --------------------------------------------------------------- */
-export const pageListsIdsReducers = (state = [], action) => {
-  switch (action.type) {
-    case LIST_PAGE_SET_SORT_ORDER: {
-      return state.reverse()
-    }
-
-    case LIST_CREATE_SUCCESS: {
-      const { externalId } = action
-      return [externalId, ...state]
-    }
-
-    case LIST_DELETE_SUCCESS: {
-      const { deletedId } = action
-      const externalIds = state.filter((id) => id !== deletedId)
-      return externalIds
-    }
-
-    case LIST_ALL_REQUEST_SUCCESS: {
-      const { externalIds } = action
-      return externalIds
-    }
-
-    default:
-      return state
-  }
-}
-
 /** LISTS PAGE REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
@@ -96,7 +67,7 @@ export const pageListsInfoReducers = (state = initialState, action) => {
 
     case LIST_DELETE_SUCCESS: {
       const { deletedId } = action
-      const listsIds = state.filter((id) => id !== deletedId)
+      const listsIds = state.listsIds.filter((id) => id !== deletedId)
       const titleToIdList = Object.keys(state.titleToIdList)
         .filter((title) => state.titleToIdList[title] !== deletedId)
         .reduce((obj, title) => ({ ...obj, [title]: state.titleToIdList[title] }), {})
@@ -115,7 +86,7 @@ export const pageListsInfoReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
-export const pageListsIdsSagas = [
+export const pageListsInfoSagas = [
   takeEvery(LIST_CHECK_PILOT_STATUS_REQUEST, fetchListPilotStatus),
   takeEvery(LIST_PAGE_SET_SORT_ORDER_REQUEST, adjustSortOrder),
   takeEvery(LIST_ALL_REQUEST, getAllLists),

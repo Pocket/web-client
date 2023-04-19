@@ -103,8 +103,7 @@ import { pageCollectionStoriesReducers } from 'containers/collections/stories-pa
 
 import { listsDisplayReducers } from 'connectors/lists/lists-display.state'
 
-import { pageListsIdsReducers } from 'containers/lists/lists.state'
-import { pageListsIdsSagas } from 'containers/lists/lists.state'
+import { pageListsInfoSagas } from 'containers/lists/lists.state'
 import { pageListsInfoReducers } from 'containers/lists/lists.state'
 
 import { mutationListCreateReducers } from 'connectors/lists/mutation-create.state'
@@ -161,7 +160,6 @@ const pageReducers = {
   pageCollectionInfo: [], // In future this will handle pagination
   pageCollectionStories: pageCollectionStoriesReducers,
   pageStoriesInfo: [],
-  pageListsIds: pageListsIdsReducers,
   pageListsInfo: pageListsInfoReducers,
 }
 
@@ -237,7 +235,7 @@ function* rootSaga() {
     ...brazeSagas,
     ...pageSavedIdsSagas,
     ...itemsSavedSagas,
-    ...pageListsIdsSagas,
+    ...pageListsInfoSagas,
     ...mutationArchiveSagas,
     ...mutationDeleteSagas,
     ...mutationFavoriteSagas,
