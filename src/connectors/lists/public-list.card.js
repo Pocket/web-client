@@ -57,6 +57,7 @@ export const PublicListCard = ({ listId, externalId, position }) => {
         onItemInView={onItemInView}
         onOpenOriginalUrl={onOpenOriginal}
         onOpen={onOpen}
+        analyticsData={analyticsData}
         Actions={ActionsTransitional}
         position={position}
         clamp
@@ -65,18 +66,13 @@ export const PublicListCard = ({ listId, externalId, position }) => {
   )
 }
 
-export function ActionsTransitional({ id, position }) {
+export function ActionsTransitional({ id, analyticsData }) {
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const { url, analyticsData: passedAnalytics } = useSelector((state) => state.listsDisplay[id])
+  const { url } = useSelector((state) => state.listsDisplay[id])
   const saveItemId = useSelector((state) => state.itemsTransitions[id])
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
-
-  const analyticsData = {
-    ...passedAnalytics,
-    sortOrder: position
-  }
 
   if (!url) return null
 

@@ -1,4 +1,5 @@
 import { requestGQL } from 'common/utilities/request/request'
+import * as Sentry from '@sentry/nextjs'
 import { gql } from 'graphql-request'
 import { processAllList } from 'common/api/derivers/shared-lists'
 
@@ -30,8 +31,22 @@ export async function getShareableLists() {
 }
 
 function handleResponse(response) {
-  const responseData = response?.data?.shareableLists
-  const processedData = processAllList(responseData)
+  try {
+    const { shareableLists, errors } = response?.data || {}
+    if (errors) throw new GetShareableListsError(errors)
+    const processedData = processAllList(shareableLists)
 
-  return processedData  
+    return processedData
+  } catch (error) {
+    Sentry.captureMessage(error)
+  }
+}
+
+/** ERRORS
+ --------------------------------------------------------------- */
+class GetShareableListsError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'GetShareableListsError'
+  }
 }

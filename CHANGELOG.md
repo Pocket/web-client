@@ -1,3 +1,11 @@
+## [1.87.4](https://github.com/Pocket/web-client/compare/v1.87.3...v1.87.4) (2023-04-19)
+
+
+### Bug Fixes
+
+* **collections:** move logged out CTA below hero ([13762d7](https://github.com/Pocket/web-client/commit/13762d76af4d5bd5c40b41253bbeb0d7c8c2029c))
+* **collections:** remove nofollow ([6736dc7](https://github.com/Pocket/web-client/commit/6736dc78ba605b402fda11b75a4ac49fa6e628dc))
+
 ## [1.87.3](https://github.com/Pocket/web-client/compare/v1.87.2...v1.87.3) (2023-04-19)
 
 

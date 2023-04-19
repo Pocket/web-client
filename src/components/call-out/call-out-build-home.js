@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import { breakpointLargeTablet } from 'common/constants' // 1023
 import { breakpointMediumTablet } from 'common/constants' // 959
 import { breakpointTinyTablet } from 'common/constants' // 719
@@ -23,6 +23,12 @@ const wrapper = css`
   border-bottom: var(--dividerStyle);
   padding-bottom: var(--spacing250);
   margin-bottom: var(--spacing250);
+
+  &.topBorder {
+    margin-top: 2.5rem;
+    padding: 3.5rem 0;
+    border-top: var(--dividerStyle);
+  }
 
   aside {
     grid-column-end: span 6;
@@ -129,10 +135,10 @@ const wrapper = css`
   }
 `
 
-export function CallOutBuildHome({ source = 'explore' }) {
+export function CallOutBuildHome({ source = 'explore', topBorder }) {
   const { t } = useTranslation()
   return (
-    <div className={wrapper} data-cy="signup-module">
+    <div className={cx(wrapper, topBorder && 'topBorder')} data-cy="signup-module">
       <aside>
         <p className="h3 title">
           {t('call-out:build-a-home', 'Build a home for everything that interests you')}
