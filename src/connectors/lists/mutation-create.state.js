@@ -89,9 +89,8 @@ function* itemsCreateList({ id }) {
       }
     }
 
-    const newList = yield call(createShareableList, { listData, listItemData })
-    const externalId = newList.externalId
-    const itemsById = { [externalId]: newList }
+    const { itemsById, externalIds } = yield call(createShareableList, { listData, listItemData })
+    const externalId = externalIds[0]
 
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
     return yield put({ type: LIST_CREATE_SUCCESS, externalId, listTitle: title })

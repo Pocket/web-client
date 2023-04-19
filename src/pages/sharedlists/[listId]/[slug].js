@@ -3,8 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { LOCALE_COMMON } from 'common/constants'
 import { wrapper } from 'store'
 import { END } from 'redux-saga'
-import { fetchPublicListHydrationData } from 'containers/public-list/public-list.state'
-import { hydrateList } from 'containers/public-list/public-list.state'
+import { fetchPublicListHydrationData } from 'containers/lists/lists.state'
 import { hydrateListItems } from 'connectors/lists/lists-display.state'
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -23,7 +22,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       // Hydrating initial state with an async request. This will block the
       // page from loading.
       const response = await fetchPublicListHydrationData({ slug, listId })
-      const { itemsById, publicListInfo, errors } = response || {}
+      const { itemsById, errors } = response || {}
 
       if (errors) {
         // Moderated and taken down
@@ -37,7 +36,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
       // Since ssr will not wait for side effects to resolve this dispatch
       // needs to be pure as well.
-      dispatch(hydrateList(publicListInfo))
       dispatch(hydrateListItems(itemsById))
 
       // end the saga

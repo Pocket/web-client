@@ -5,8 +5,8 @@ import { arrayToObject } from 'common/utilities/object-array/object-array'
 import * as Sentry from '@sentry/nextjs'
 
 const getCollectionsQuery = gql`
-  query GetCollections($filters: CollectionsFiltersInput) {
-    getCollections(filters: $filters) {
+  query GetCollections($filters: CollectionsFiltersInput, $perPage: Int, $page: Int) {
+    getCollections(filters: $filters, perPage: $perPage, page: $page) {
       collections {
         slug
         itemId: slug
@@ -24,11 +24,17 @@ const getCollectionsQuery = gql`
           thumbnail: imageUrl
         }
       }
+      pagination {
+        totalPages
+        totalResults
+        perPage
+        currentPage
+      }
     }
   }
 `
 
-export function getCollections(language = 'en', labels) {
+export function getCollections(language = 'en', labels, page = 1) {
   return requestGQL({
     query: getCollectionsQuery,
     operationName: 'GetCollections',
@@ -36,7 +42,9 @@ export function getCollections(language = 'en', labels) {
       filters: {
         labels,
         language
-      }
+      },
+      page,
+      perPage: 20
     }
   })
     .then(handleResponse)
@@ -45,6 +53,7 @@ export function getCollections(language = 'en', labels) {
 
 function handleResponse(response) {
   const collections = response?.data?.getCollections?.collections
+  const pagination = response?.data?.getCollections?.pagination
 
   if (!collections) throw new CollectionsRequestError()
 
@@ -52,7 +61,7 @@ function handleResponse(response) {
   const itemsBySlug = arrayToObject(items, 'slug')
   const itemSlugs = Object.keys(itemsBySlug)
 
-  return { itemsBySlug, itemSlugs }
+  return { itemsBySlug, itemSlugs, pagination }
 }
 
 /** Slugs only in this one ... it is used in server side renders to seed statc paths
@@ -110,7 +119,7 @@ class CollectionsRequestError extends Error {
 class CollectionsRequestEmptyError extends Error {
   constructor(message) {
     super(message)
-    this.name = 'CollectionsRequestError'
+    this.name = 'CollectionsRequestEmptyError'
   }
 }
 

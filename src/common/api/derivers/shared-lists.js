@@ -3,14 +3,14 @@ import { replaceUTM } from 'common/utilities/urls/urls'
 
 // Process a list of lists, viewable to the user only
 export function processAllList(responseData) {
-  const userShareableLists = responseData
+  const allLists = responseData
 
   const lists = responseData.map(({ externalId, listItems, ...rest }) => {
     return deriveList(rest, externalId, listItems)
   })
 
-  const externalIds = userShareableLists.map((list) => list.externalId)
-  const titleToIdList = userShareableLists.reduce((obj, list) => ({ ...obj, [list.title]: list.externalId }), {})
+  const externalIds = allLists.map((list) => list.externalId)
+  const titleToIdList = allLists.reduce((obj, list) => ({ ...obj, [list.title]: list.externalId }), {})
   const itemsById = arrayToObject(lists, 'externalId')
 
   return { externalIds, itemsById, titleToIdList }
@@ -30,23 +30,6 @@ export function processIndividualList(responseData, utmId) {
   }
 
   return { itemsById }
-}
-
-// process the Public list
-// itemsById will end up as listsDisplay
-// publicListInfo is the main list info
-export function processPublicList(responseData, utmId) {
-  const { listItems, externalId: listId, ...rest } = responseData
-
-  const listItemsById = getListItemsById(listItems, listId, utmId)
-  const publicListInfo = deriveList(rest, listId, listItems)
-
-  const itemsById = {
-    ...listItemsById,
-    [listId]: publicListInfo
-  }
-
-  return { itemsById, publicListInfo }
 }
 
 // Loops through each list item and derives it

@@ -3,6 +3,7 @@ import { put, select, takeEvery, call } from 'redux-saga/effects'
 import { getShareableListPilotStatus } from 'common/api/queries/get-shareable-lists-pilot-status'
 import { getShareableLists } from 'common/api/queries/get-shareable-lists'
 import { getShareableList } from 'common/api/queries/get-shareable-list'
+import { getShareableListPublic } from 'common/api/queries/get-shareable-list-public'
 
 import { LIST_ITEMS_SUCCESS } from 'actions'
 
@@ -28,7 +29,7 @@ import { VARIANTS_SAVE } from 'actions'
  --------------------------------------------------------------- */
 export const checkListsPilotStatus = () => ({ type: LIST_CHECK_PILOT_STATUS_REQUEST })
 export const listsItemsSetSortOrder = (sortOrder) => ({type: LIST_PAGE_SET_SORT_ORDER_REQUEST, sortOrder}) //prettier-ignore
-export const getUserShareableLists = () => ({ type: LIST_ALL_REQUEST })
+export const getAllListsAction = () => ({ type: LIST_ALL_REQUEST })
 export const getIndividualListAction = (id) => ({ type: LIST_INDIVIDUAL_REQUEST, id })
 
 /** LIST SAVED REDUCERS
@@ -114,7 +115,7 @@ export const pageListsInfoReducers = (state = initialState, action) => {
 export const pageListsIdsSagas = [
   takeEvery(LIST_CHECK_PILOT_STATUS_REQUEST, fetchListPilotStatus),
   takeEvery(LIST_PAGE_SET_SORT_ORDER_REQUEST, adjustSortOrder),
-  takeEvery(LIST_ALL_REQUEST, userShareableListsRequest),
+  takeEvery(LIST_ALL_REQUEST, getAllLists),
   takeEvery(LIST_INDIVIDUAL_REQUEST, getIndividualList)
 ]
 
@@ -147,7 +148,7 @@ function* adjustSortOrder(action) {
   yield put({ type: LIST_PAGE_SET_SORT_ORDER, sortOrder })
 }
 
-function* userShareableListsRequest() {
+function* getAllLists() {
   try {
     const { externalIds, itemsById, titleToIdList } = yield getShareableLists()
 
@@ -166,4 +167,10 @@ function* getIndividualList({ id }) {
   } catch (error) {
     yield put({ type: LIST_INDIVIDUAL_FAILURE, error })
   }
+}
+
+/** ASYNC REQUESTS
+ --------------------------------------------------------------- */
+ export function fetchPublicListHydrationData({ slug, listId }) {
+  return getShareableListPublic({ slug, listId })
 }

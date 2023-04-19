@@ -21,7 +21,7 @@ export const PublicList = ({ listId, slug, statusCode }) => {
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user?.auth)
-  const list = useSelector((state) => state.pagePublicList)
+  const list = useSelector((state) => state.listsDisplay[listId])
   const saveItemId = useSelector((state) => state.itemsTransitions[slug])
 
   if (statusCode) return <ErrorPage statusCode={statusCode} />

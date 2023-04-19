@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
-import { getUserShareableLists } from 'containers/lists/lists.state'
+import { getAllListsAction } from 'containers/lists/lists.state'
 
 export function SideNav({ type, subset, isLoggedIn, tag }) {
   const dispatch = useDispatch()
@@ -18,7 +18,7 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
   const titleToIdList = useSelector((state) => state.pageListsInfo.titleToIdList)
 
   useEffect(() => {
-    if (inListsExperiment) dispatch(getUserShareableLists())
+    if (inListsExperiment) dispatch(getAllListsAction())
   }, [dispatch, inListsExperiment])  
 
   const trackMenuClick = (label) => dispatch(sendSnowplowEvent('side-nav', { label }))
