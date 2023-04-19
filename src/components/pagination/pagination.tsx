@@ -115,28 +115,40 @@ export const Pagination = ({
   // We want to know if we should be activating the forward/backward based on
   // the position we are at in the sequence.
   const disableBack = currentPage === 1
-  const disableForward = currentPage === totalPages - 1
-  const backLink = disableBack ? '#' : `${pagePattern}/page/${currentPage - 1}`
+  const disableForward = currentPage === totalPages
+  const backLink = currentPage === 2 ? pagePattern : `${pagePattern}/page/${currentPage - 1}`
   const forwardLink = disableForward ? '#' : `${pagePattern}/page/${currentPage + 1}`
 
   return showPagination ? (
     <>
       <div className={paginationStyle}>
-        <Link href={backLink}>
-          <a>
-            <button className="pagination" disabled={disableBack}>
-              <ChevronLeftIcon className="" />
-            </button>
-          </a>
-        </Link>
+        {disableBack ? (
+          <button className="pagination" disabled>
+            <ChevronLeftIcon className="" />
+          </button>
+        ) : (
+          <Link href={backLink}>
+            <a>
+              <button className="pagination">
+                <ChevronLeftIcon className="" />
+              </button>
+            </a>
+          </Link>
+        )}
         {shownLinks}
-        <Link href={forwardLink}>
-          <a>
-            <button className="pagination" disabled={disableForward}>
-              <ChevronRightIcon className="" />
-            </button>
-          </a>
-        </Link>
+        {disableForward ? (
+          <button className="pagination" disabled>
+            <ChevronRightIcon className="" />
+          </button>
+        ) : (
+          <Link href={forwardLink}>
+            <a>
+              <button className="pagination">
+                <ChevronRightIcon className="" />
+              </button>
+            </a>
+          </Link>
+        )}
       </div>
     </>
   ) : null

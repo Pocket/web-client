@@ -11,7 +11,6 @@ import { getHomeContent } from './home.state'
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeHeader } from 'components/headers/home-header'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import TopicsPillbox from 'components/topics-pillbox/topics-pillbox'
 import { reSelectTopics } from 'containers/home/setup/setup.state'
 import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
@@ -24,17 +23,11 @@ export const HomeContent = () => {
   const { locale } = useRouter()
   const dispatch = useDispatch()
   const slates = useSelector((state) => state.pageHome.slates)
-
-  const featureState = useSelector((state) => state.features) || {}
-  const flagsReady = useSelector((state) => state.features.flagsReady)
-  const localizedHome = featureFlagActive({ flag: 'home.locale', featureState })
-  const localeToUse = localizedHome ? locale : 'en'
   const hideTopics = ['de', 'de-DE'].includes(locale)
 
   useEffect(() => {
-    if (!flagsReady) return
-    dispatch(getHomeContent(localeToUse))
-  }, [dispatch, localeToUse, flagsReady])
+    dispatch(getHomeContent(locale))
+  }, [dispatch, locale])
 
   return (
     <>

@@ -53,10 +53,25 @@ export const pageCollectionStoriesReducers = (state = {}, action) => {
  * Make and async request for a Pocket Client API (mocked) and return best data
  * @return data {object} An object representing the collection
  */
-export async function fetchCollections(lang = 'en', labels) {
+export async function fetchCollections(lang = 'en', labels, page = 1) {
   try {
-    const { itemsBySlug, itemSlugs } = await getCollections(lang, labels)
-    return { itemsBySlug, itemSlugs }
+    const { itemsBySlug, itemSlugs, pagination } = await getCollections(lang, labels, page)
+    return { itemsBySlug, itemSlugs, pagination }
+  } catch (error) {
+    //TODO: adjust this once error reporting strategy is defined.
+    console.warn('collection.state.collections', error)
+  }
+}
+
+/**
+ * fetchCollectionPageCount
+ * @return {int} the total pages in a collection
+ */
+export async function fetchCollectionPageCount(lang = 'en', labels) {
+  try {
+    const { pagination } = await getCollections(lang, labels)
+    const { totalPages } = pagination || 0
+    return totalPages
   } catch (error) {
     //TODO: adjust this once error reporting strategy is defined.
     console.warn('collection.state.collections', error)

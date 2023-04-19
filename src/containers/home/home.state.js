@@ -18,9 +18,12 @@ const initialState = {
 
 export const pageHomeReducers = (state = initialState, action) => {
   switch (action.type) {
+    case HOME_CONTENT_REQUEST: {
+      return initialState
+    }
     case HOME_CONTENT_SUCCESS: {
       const { slatesById, slateArray } = action
-      return { ...state, slatesById, slates: slateArray }
+      return { slatesById, slates: slateArray }
     }
 
     default: {

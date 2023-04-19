@@ -1,3 +1,31 @@
+## [1.87.2](https://github.com/Pocket/web-client/compare/v1.87.1...v1.87.2) (2023-04-19)
+
+
+### Bug Fixes
+
+* **home:** reset state on every visit ([2f0374e](https://github.com/Pocket/web-client/commit/2f0374e931012fe59775a258e5dd4f7bada32b1c))
+
+## [1.87.1](https://github.com/Pocket/web-client/compare/v1.87.0...v1.87.1) (2023-04-18)
+
+
+### Bug Fixes
+
+* **collections:** separate meta from title ([5027862](https://github.com/Pocket/web-client/commit/5027862aae5da6f6cb2554ec7b962836fada914c))
+
+# [1.87.0](https://github.com/Pocket/web-client/compare/v1.86.1...v1.87.0) (2023-04-18)
+
+
+### Bug Fixes
+
+* **collections:** add number to title for GA ([89b8515](https://github.com/Pocket/web-client/commit/89b8515d313c890589eb3b7e02ebcff4790533d8))
+* **collections:** don’t pre-build page 1 ([7e2a7f8](https://github.com/Pocket/web-client/commit/7e2a7f85ec06070af2ecd8962dee2d8d3012c0af))
+* **pagination:** update forward/back logic ([00019c9](https://github.com/Pocket/web-client/commit/00019c9cb04ebf4557baeb0b6161cf1bbf70c5dc))
+
+
+### Features
+
+* **collections:** add pagination ([a907df7](https://github.com/Pocket/web-client/commit/a907df750776bb4b05e9c431d39515d0ffe1fa90))
+
 ## [1.86.1](https://github.com/Pocket/web-client/compare/v1.86.0...v1.86.1) (2023-04-18)
 
 
