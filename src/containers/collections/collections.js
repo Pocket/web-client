@@ -53,8 +53,6 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
         canonical={canonical}
         forceWebView={true}
         className={collectionStyles}>
-        {!isAuthenticated && shouldRender ? <CallOutBuildHome source="collections" /> : null}
-
         {showPagination ? (
           <div className="pagination-container">
             <Pagination
@@ -80,6 +78,10 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
             <ItemCard position={index} key={id} id={id} snowplowId="collection" />
           ))}
         </div>
+
+        {!isAuthenticated && shouldRender ? (
+          <CallOutBuildHome source="collections" topBorder />
+        ) : null}
 
         <div className={stackedGrid}>
           {itemIds.slice(5, 10).map((id, index) => (
