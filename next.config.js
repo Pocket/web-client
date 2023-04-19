@@ -46,6 +46,11 @@ const nextOptions = {
         source: '/get-started',
         destination: '/home',
         permanent: false
+      },
+      {
+        source: '/collections/page/1',
+        destination: '/collections',
+        permanent: false
       }
     ]
   },
