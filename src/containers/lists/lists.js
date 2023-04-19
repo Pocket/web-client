@@ -22,14 +22,14 @@ export const Lists = () => {
 
   const enrolled = useSelector((state) => state.pageListsInfo.enrolled)
   const enrolledFetched = useSelector((state) => state.pageListsInfo.enrolledFetched)
-  const listIds = useSelector((state) => state.pageListsInfo.listsIds)
+  const listsIds = useSelector((state) => state.pageListsInfo.listsIds)
   const userStatus = useSelector((state) => state.user.user_status)
   const sortOrder = useSelector((state) => state.pageListsInfo.sortOrder)
   const loading = useSelector((state) => state.pageListsInfo.loading)
 
   const shouldRender = userStatus !== 'pending'
-
-  const showLists = listIds?.length > 0 && !loading
+  const ids = sortOrder === 'DESC' ? listsIds : [...listsIds].reverse()
+  const showLists = listsIds?.length > 0 && !loading
 
   useEffect(() => {
     if (enrolled) dispatch(getAllListsAction())
@@ -68,7 +68,7 @@ export const Lists = () => {
           {loading ? <LoaderCentered /> : null}
 
           {showLists ? (
-            listIds.map((id, index) => <ListCard key={id} id={id} position={index} />)
+            ids.map((id, index) => <ListCard key={id} id={id} position={index} />)
           ) : (
             <EmptyAllLists handleCreate={handleCreateList} />
           )}
