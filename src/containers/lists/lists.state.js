@@ -3,6 +3,7 @@ import { put, select, takeEvery, call } from 'redux-saga/effects'
 import { getShareableListPilotStatus } from 'common/api/queries/get-shareable-lists-pilot-status'
 import { getShareableLists } from 'common/api/queries/get-shareable-lists'
 import { getShareableList } from 'common/api/queries/get-shareable-list'
+import { getShareableListPublic } from 'common/api/queries/get-shareable-list-public'
 
 import { LIST_ITEMS_SUCCESS } from 'actions'
 
@@ -166,4 +167,10 @@ function* getIndividualList({ id }) {
   } catch (error) {
     yield put({ type: LIST_INDIVIDUAL_FAILURE, error })
   }
+}
+
+/** ASYNC REQUESTS
+ --------------------------------------------------------------- */
+ export function fetchPublicListHydrationData({ slug, listId }) {
+  return getShareableListPublic({ slug, listId })
 }

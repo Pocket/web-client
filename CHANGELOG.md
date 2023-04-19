@@ -1,3 +1,11 @@
+## [1.87.3](https://github.com/Pocket/web-client/compare/v1.87.2...v1.87.3) (2023-04-19)
+
+
+### Bug Fixes
+
+* **lists:** add error handling to create list request ([3268f7e](https://github.com/Pocket/web-client/commit/3268f7e5133dc47ab604192b443f39d327ba6aa5))
+* **lists:** derive data when creating list for analytics ([9e7967f](https://github.com/Pocket/web-client/commit/9e7967f88f05e071d9f012a3d8a5ea92291ecc53))
+
 ## [1.87.2](https://github.com/Pocket/web-client/compare/v1.87.1...v1.87.2) (2023-04-19)
 
 

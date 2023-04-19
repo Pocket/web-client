@@ -121,8 +121,6 @@ import { mutationListUpdateSagas } from 'connectors/lists/mutation-update.state'
 
 import { mutationListShareReducers } from 'connectors/lists/mutation-share.state'
 
-import { pagePublicListReducers } from 'containers/public-list/public-list.state'
-
 /* REDUCERS
  --------------------------------------------------------------- */
 const itemReducers = {
@@ -165,7 +163,6 @@ const pageReducers = {
   pageStoriesInfo: [],
   pageListsIds: pageListsIdsReducers,
   pageListsInfo: pageListsInfoReducers,
-  pagePublicList: pagePublicListReducers
 }
 
 const discoverReducers = {
