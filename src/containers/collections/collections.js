@@ -43,7 +43,7 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
     <>
       {noIndex ? (
         <Head>
-          <meta name="robots" content="noindex, nofollow" />
+          <meta name="robots" content="noindex" />
         </Head>
       ) : null}
 
