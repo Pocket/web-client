@@ -3,14 +3,14 @@ import { replaceUTM } from 'common/utilities/urls/urls'
 
 // Process a list of lists, viewable to the user only
 export function processAllList(responseData) {
-  const userShareableLists = responseData
+  const allLists = responseData
 
   const lists = responseData.map(({ externalId, listItems, ...rest }) => {
     return deriveList(rest, externalId, listItems)
   })
 
-  const externalIds = userShareableLists.map((list) => list.externalId)
-  const titleToIdList = userShareableLists.reduce((obj, list) => ({ ...obj, [list.title]: list.externalId }), {})
+  const externalIds = allLists.map((list) => list.externalId)
+  const titleToIdList = allLists.reduce((obj, list) => ({ ...obj, [list.title]: list.externalId }), {})
   const itemsById = arrayToObject(lists, 'externalId')
 
   return { externalIds, itemsById, titleToIdList }
