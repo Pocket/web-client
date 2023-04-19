@@ -11,7 +11,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 import { CreateListModal } from 'connectors/confirm/create-list'
 import { ConfirmListDelete } from 'connectors/confirm/delete-list'
-import { getUserShareableLists } from './lists.state'
+import { getAllListsAction } from './lists.state'
 import { ListCard } from 'connectors/lists/list.card'
 import { LoaderCentered } from 'components/loader/loader'
 
@@ -32,7 +32,7 @@ export const Lists = () => {
   const showLists = listIds?.length > 0 && !loading
 
   useEffect(() => {
-    if (enrolled) dispatch(getUserShareableLists())
+    if (enrolled) dispatch(getAllListsAction())
   }, [dispatch, enrolled])
 
   // Actions

@@ -28,7 +28,7 @@ import { VARIANTS_SAVE } from 'actions'
  --------------------------------------------------------------- */
 export const checkListsPilotStatus = () => ({ type: LIST_CHECK_PILOT_STATUS_REQUEST })
 export const listsItemsSetSortOrder = (sortOrder) => ({type: LIST_PAGE_SET_SORT_ORDER_REQUEST, sortOrder}) //prettier-ignore
-export const getUserShareableLists = () => ({ type: LIST_ALL_REQUEST })
+export const getAllListsAction = () => ({ type: LIST_ALL_REQUEST })
 export const getIndividualListAction = (id) => ({ type: LIST_INDIVIDUAL_REQUEST, id })
 
 /** LIST SAVED REDUCERS

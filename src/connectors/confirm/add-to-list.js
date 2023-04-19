@@ -4,7 +4,7 @@ import { AddToListModal } from 'components/shareable-lists/add-to-list-modal'
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
 import { mutateListAddCancel } from 'connectors/lists/mutation-add.state'
 import { mutateListAddConfirm } from 'connectors/lists/mutation-add.state'
-import { getUserShareableLists } from 'containers/lists/lists.state'
+import { getAllListsAction } from 'containers/lists/lists.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const ConfirmAddToList = () => {
@@ -17,7 +17,7 @@ export const ConfirmAddToList = () => {
   const item = useSelector((state) => state.itemsDisplay[id])
 
   useEffect(() => {
-    if (showModal) dispatch(getUserShareableLists())
+    if (showModal) dispatch(getAllListsAction())
   }, [dispatch, showModal])
 
   const handleCreate = () => {
