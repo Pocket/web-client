@@ -1,4 +1,5 @@
 import { gql } from 'graphql-request'
+import * as Sentry from '@sentry/nextjs'
 import { requestGQL } from 'common/utilities/request/request'
 
 const createShareableListItemQuery = gql`
@@ -42,6 +43,26 @@ export function createShareableListItem({
     operationName: 'createShareableListItem',
     variables: { data }
   })
-    .then((response) => response?.data?.createShareableListItem)
+    .then(handleResponse)
     .catch((error) => console.error(error))
+}
+
+function handleResponse(response) {
+  try {
+    const { createShareableListItem, errors } = response?.data || {}
+    if (errors) throw new CreateShareableListItemError(errors)
+
+    return createShareableListItem
+  } catch (error) {
+    Sentry.captureMessage(error)
+  }
+}
+
+/** ERRORS
+ --------------------------------------------------------------- */
+class CreateShareableListItemError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'CreateShareableListItemError'
+  }
 }

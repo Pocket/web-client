@@ -1,4 +1,5 @@
 import { gql } from 'graphql-request'
+import * as Sentry from '@sentry/nextjs'
 import { requestGQL } from 'common/utilities/request/request'
 
 const deleteShareableListItemQuery = gql`
@@ -14,6 +15,26 @@ export function deleteShareableListItem({ id }) {
     operationName: 'deleteShareableListItem',
     variables: { externalId: id }
   })
-    .then((response) => response?.data?.deleteShareableListItem)
+    .then(handleResponse)
     .catch((error) => console.error(error))
+}
+
+function handleResponse(response) {
+  try {
+    const { deleteShareableListItem, errors } = response?.data || {}
+    if (errors) throw new DeleteShareableListItemError(errors)
+
+    return deleteShareableListItem
+  } catch (error) {
+    Sentry.captureMessage(error)
+  }
+}
+
+/** ERRORS
+ --------------------------------------------------------------- */
+class DeleteShareableListItemError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'DeleteShareableListItemError'
+  }
 }

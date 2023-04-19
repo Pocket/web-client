@@ -1,4 +1,5 @@
 import { gql } from 'graphql-request'
+import * as Sentry from '@sentry/nextjs'
 import { requestGQL } from 'common/utilities/request/request'
 
 const updateShareableListQuery = gql`
@@ -25,6 +26,26 @@ export function updateShareableList({ title, description, externalId, status }) 
     operationName: 'updateShareableList',
     variables: { data }
   })
-    .then((response) => response?.data?.updateShareableList)
+    .then(handleResponse)
     .catch((error) => console.error(error))
+}
+
+function handleResponse(response) {
+  try {
+    const { updateShareableList, errors } = response?.data || {}
+    if (errors) throw new UpdateShareableListError(errors)
+
+    return updateShareableList
+  } catch (error) {
+    Sentry.captureMessage(error)
+  }
+}
+
+/** ERRORS
+ --------------------------------------------------------------- */
+class UpdateShareableListError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'UpdateShareableListError'
+  }
 }
