@@ -1,3 +1,11 @@
+## [1.87.5](https://github.com/Pocket/web-client/compare/v1.87.4...v1.87.5) (2023-04-19)
+
+
+### Bug Fixes
+
+* **lists:** add error handling for mutations ([688fda6](https://github.com/Pocket/web-client/commit/688fda65a6de520d5fce66fece8329454982c0e8))
+* **lists:** add error handling for queries ([8f4d559](https://github.com/Pocket/web-client/commit/8f4d5595d61b9218b6dc8ade9c1b3d81df0ba245))
+
 ## [1.87.4](https://github.com/Pocket/web-client/compare/v1.87.3...v1.87.4) (2023-04-19)
 
 
