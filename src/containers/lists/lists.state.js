@@ -61,13 +61,14 @@ export const pageListsIdsReducers = (state = [], action) => {
   }
 }
 
-/** PAGINATION REDUCERS
+/** LISTS PAGE REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
   enrolled: false,
   enrolledFetched: false,
   sortOrder: 'DESC',
-  loading: true
+  loading: true,
+  listsIds: []
 }
 
 export const pageListsInfoReducers = (state = initialState, action) => {
@@ -88,21 +89,23 @@ export const pageListsInfoReducers = (state = initialState, action) => {
 
     case LIST_CREATE_SUCCESS: {
       const { externalId, listTitle } = action
+      const listsIds = [externalId, ...state.listsIds]
       const titleToIdList = { [listTitle]: externalId, ...state.titleToIdList }
-      return { ...state, titleToIdList }
+      return { ...state, titleToIdList, listsIds }
     }
 
     case LIST_DELETE_SUCCESS: {
       const { deletedId } = action
+      const listsIds = state.filter((id) => id !== deletedId)
       const titleToIdList = Object.keys(state.titleToIdList)
         .filter((title) => state.titleToIdList[title] !== deletedId)
         .reduce((obj, title) => ({ ...obj, [title]: state.titleToIdList[title] }), {})
-      return { ...state, titleToIdList }
+      return { ...state, titleToIdList, listsIds }
     }
 
     case LIST_ALL_REQUEST_SUCCESS: {
-      const { titleToIdList } = action
-      return { ...state, loading: false, titleToIdList }
+      const { externalIds, titleToIdList } = action
+      return { ...state, loading: false, titleToIdList, listsIds: externalIds }
     }
 
     default:

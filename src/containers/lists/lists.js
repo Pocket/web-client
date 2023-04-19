@@ -22,7 +22,7 @@ export const Lists = () => {
 
   const enrolled = useSelector((state) => state.pageListsInfo.enrolled)
   const enrolledFetched = useSelector((state) => state.pageListsInfo.enrolledFetched)
-  const listIds = useSelector((state) => state.pageListsIds)
+  const listIds = useSelector((state) => state.pageListsInfo.listsIds)
   const userStatus = useSelector((state) => state.user.user_status)
   const sortOrder = useSelector((state) => state.pageListsInfo.sortOrder)
   const loading = useSelector((state) => state.pageListsInfo.loading)

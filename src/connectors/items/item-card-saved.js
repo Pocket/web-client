@@ -165,7 +165,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   const position = useSelector((state) => state.pageSavedIds.indexOf(id))
   const item = useSelector((state) => state.itemsDisplay[id])
   const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
-  const hasLists = useSelector((state) => state.pageListsIds)
+  const hasLists = useSelector((state) => state.pageListsInfo.listsIds)
 
   if (!itemSaved || !item) return null
   const { isFavorite, isArchived, tags} = itemSaved //prettier-ignore
