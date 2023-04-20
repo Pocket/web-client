@@ -23,9 +23,7 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
   const isAuthenticated = useSelector((state) => state.user.auth)
   const userStatus = useSelector((state) => state.user.user_status)
   const itemIds = useSelector((state) => state.pageCollectionIds)
-  const featureState = useSelector((state) => state.features)
   const shouldRender = userStatus !== 'pending'
-  const showPagination = featureFlagActive({ flag: 'pagination', featureState })
 
   const languagePrefix = locale === 'en' ? '' : `/${locale}`
   const canonical = `${BASE_URL}${languagePrefix}/collections`
@@ -53,16 +51,14 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
         canonical={canonical}
         forceWebView={true}
         className={collectionStyles}>
-        {showPagination ? (
-          <div className="pagination-container">
-            <Pagination
-              pagePattern="/collections"
-              totalResults={totalResults}
-              currentPage={currentPage}
-              perPageCount={perPage}
-            />
-          </div>
-        ) : null}
+        <div className="pagination-container">
+          <Pagination
+            pagePattern="/collections"
+            totalResults={totalResults}
+            currentPage={currentPage}
+            perPageCount={perPage}
+          />
+        </div>
 
         <header>
           <h1 className="pageTitle" data-cy="page-title">
@@ -102,16 +98,14 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
           ))}
         </div>
 
-        {showPagination ? (
-          <div className="pagination-container">
-            <Pagination
-              pagePattern="/collections"
-              totalResults={totalResults}
-              currentPage={currentPage}
-              perPageCount={perPage}
-            />
-          </div>
-        ) : null}
+        <div className="pagination-container">
+          <Pagination
+            pagePattern="/collections"
+            totalResults={totalResults}
+            currentPage={currentPage}
+            perPageCount={perPage}
+          />
+        </div>
       </Layout>
     </>
   )
