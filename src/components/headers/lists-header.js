@@ -162,7 +162,7 @@ export const ListIndividualHeader = ({
       <div className="create-sort">
         {isPublic ? (
           <button onClick={handleShare} className="tiny share">
-            <IosShareIcon /> Share list
+            <IosShareIcon /> Share
           </button>
         ) : null}
 
@@ -206,7 +206,7 @@ export const ListPublicHeader = ({
 
       <div className="share-save">
         <button onClick={handleShare} className="tiny share">
-          <IosShareIcon /> Share list
+          <IosShareIcon /> Share
         </button>
         <SaveListButton
           className="save"
