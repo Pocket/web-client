@@ -12,6 +12,7 @@ const saveListStyles = css`
 `
 
 export const SaveListButton = ({
+  className,
   isAuthenticated,
   saveStatus = "unsaved",
   saveAction
@@ -42,7 +43,7 @@ export const SaveListButton = ({
       <button
         onClick={handleClick}
         ref={popTrigger}
-        className={cx(saveListStyles, "brand", "small")}
+        className={cx(saveListStyles, "brand", "small", className)}
       >
         {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}{' '}
         {saveCopy[saveStatus]}

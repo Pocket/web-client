@@ -95,6 +95,14 @@ const publicListHeaderStyles = css`
       margin: 0;
     }
   }
+
+  .share-save {
+    display: flex;
+
+    .save {
+      margin-left: 12px;
+    }
+  }
 `
 
 export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, handleOldest }) => {
@@ -176,7 +184,8 @@ export const ListPublicHeader = ({
   listCount,
   isAuthenticated,
   saveStatus,
-  handleSaveAll
+  handleSaveAll,
+  handleShare
 }) => {
   const countText = listCount === 1 ? 'Item' : 'Items'
 
@@ -195,11 +204,17 @@ export const ListPublicHeader = ({
           </span>
         </div>
 
+      <div className="share-save">
+        <button onClick={handleShare} className="tiny share">
+          <IosShareIcon /> Share list
+        </button>
         <SaveListButton
+          className="save"
           saveAction={handleSaveAll}
           isAuthenticated={isAuthenticated}
           saveStatus={saveStatus}
-        />
+          />
+        </div>
       </section>
     </header>
   )
