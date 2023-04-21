@@ -225,7 +225,7 @@ export const shareableListActions = {
       uiType: 'button'
     },
     expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
-    description: 'Fired when a creator copies the public URL from the share modal'
+    description: 'Fired when a creator copies the public URL from the Share List modal'
   },
   'shareable-list.public-link.copy.header': {
     eventType: 'engagement',
@@ -262,7 +262,7 @@ export const shareableListActions = {
       uiType: 'link'
     },
     expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
-    description: 'Fired when a creator opens the public URL on the Share Modal'
+    description: 'Fired when a creator opens the public URL on the Share List modal'
   },
   'shareable-list.public-link.open.header': {
     eventType: 'contentOpen',
@@ -408,6 +408,93 @@ export const shareableListActions = {
     },
     expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
     description: 'Fired when a user unsaves a public list on the public list page'
+  },
+
+
+  'public-list.share': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    description: 'Fired when a creator clicks the "Share" button on a list on the public list page'
+  },
+
+
+  'public-list.share.facebook': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    description: 'Fired when a creator clicks the "FB" button in the Share List modal on the public list page'
+  },
+  'public-list.share.twitter': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    description: 'Fired when a creator clicks the "Twitter" button in the Share List modal on the public list page'
+  },
+  'public-list.share.linkedin': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    description: 'Fired when a creator clicks the "LinkedIn" button in the Share List modal on the public list page'
+  },
+  'public-list.share.reddit': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    description: 'Fired when a creator clicks the "Reddit" button in the Share List modal on the public list page'
+  },
+  'public-list.share.buffer': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    description: 'Fired when a creator clicks the "Buffer" button in the Share List modal on the public list page'
+  },
+
+
+  'public-list.share.copy': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    description: 'Fired when a creator clicks the "Copy Link" button in the Share List modal on the public list page'
+  },
+  'public-list.public-link.copy.share-modal': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    description: 'Fired when a user copies the public URL from the Share List modal on the public list page'
+  },
+  'public-list.public-link.open.share-modal': {
+    eventType: 'contentOpen',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'link'
+    },
+    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    description: 'Fired when a user opens the public URL on the Share List modal  on the public list page'
   },
   'public-list.report': {
     eventType: 'engagement',
