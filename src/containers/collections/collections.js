@@ -37,6 +37,9 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
   const description = t('collections:page-description', 'Curated guides to the best of the web')
   const metaData = { description, title: metaTitle, url }
 
+  // We have some alternate markets so we are gonna limit pagination to en only at the moment
+  const showPagination = ['en', 'en-US'].includes(locale)
+
   return (
     <>
       {noIndex ? (
@@ -51,14 +54,16 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
         canonical={canonical}
         forceWebView={true}
         className={collectionStyles}>
-        <div className="pagination-container">
-          <Pagination
-            pagePattern="/collections"
-            totalResults={totalResults}
-            currentPage={currentPage}
-            perPageCount={perPage}
-          />
-        </div>
+        {showPagination ? (
+          <div className="pagination-container">
+            <Pagination
+              pagePattern="/collections"
+              totalResults={totalResults}
+              currentPage={currentPage}
+              perPageCount={perPage}
+            />
+          </div>
+        ) : null}
 
         <header>
           <h1 className="pageTitle" data-cy="page-title">
@@ -98,14 +103,16 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
           ))}
         </div>
 
-        <div className="pagination-container">
-          <Pagination
-            pagePattern="/collections"
-            totalResults={totalResults}
-            currentPage={currentPage}
-            perPageCount={perPage}
-          />
-        </div>
+        {showPagination ? (
+          <div className="pagination-container">
+            <Pagination
+              pagePattern="/collections"
+              totalResults={totalResults}
+              currentPage={currentPage}
+              perPageCount={perPage}
+            />
+          </div>
+        ) : null}
       </Layout>
     </>
   )
