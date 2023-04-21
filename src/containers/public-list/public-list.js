@@ -92,7 +92,7 @@ export const PublicList = ({ listId, slug, statusCode }) => {
           <ReportIcon /> Report List
         </button>
       </Layout>
-      <ConfirmShare />
+      <ConfirmShare snowplowId="public-list" />
     </>
   )
 }

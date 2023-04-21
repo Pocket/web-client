@@ -4,7 +4,9 @@ import { shareListCancel } from 'connectors/lists/mutation-share.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { BASE_URL } from 'common/constants'
 
-export const ConfirmShare = () => {
+export const ConfirmShare = ({
+  snowplowId
+}) => {
   const dispatch = useDispatch()
 
   const id = useSelector((state) => state.mutationListShare.id)
@@ -19,15 +21,15 @@ export const ConfirmShare = () => {
   const cancelShare = () => dispatch(shareListCancel())
 
   const engagementEvent = (identifier) => {
-    dispatch(sendSnowplowEvent(`shareable-list.${identifier}`, analyticsData))
+    dispatch(sendSnowplowEvent(`${snowplowId}.${identifier}`, analyticsData))
   }
 
   const handleCopyUrl = () => {
-    dispatch(sendSnowplowEvent('shareable-list.public-link.copy.share-modal', analyticsData))
+    dispatch(sendSnowplowEvent(`${snowplowId}.public-link.copy.share-modal`, analyticsData))
   }
 
   const handleOpenUrl = () => {
-    dispatch(sendSnowplowEvent('shareable-list.public-link.open.share-modal', analyticsData))
+    dispatch(sendSnowplowEvent(`${snowplowId}.public-link.open.share-modal`, analyticsData))
   }
 
   return (
