@@ -25,7 +25,7 @@ export const ListCard = ({ id, position }) => {
     analyticsData: passedAnalytics
   } = list
   const url = `/sharedlists/${externalId}/${slug}`
-  const storyCount = listItemIds?.length || 0
+  const itemCount = listItemIds?.length || 0
   const itemImage = list?.noImage ? '' : list?.itemImage
 
   const analyticsData = {
@@ -74,7 +74,7 @@ export const ListCard = ({ id, position }) => {
         isInternalItem={true}
         listStatusInfo={listStatusInfo}
         listUrl={url}
-        storyCount={storyCount}
+        itemCount={itemCount}
         itemImage={itemImage}
         onImageFail={onImageFail}
         Actions={ListActions}

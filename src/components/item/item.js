@@ -32,6 +32,7 @@ export const Item = (props) => {
     isCollection,
     authors,
     storyCount,
+    itemCount,
     isInternalItem,
     saveStatus,
     externalUrl,
@@ -196,6 +197,14 @@ export const Item = (props) => {
             {storyCount ? (
               <div className="story-count" data-cy="story-count">
                 {t('item:story-count', '{{count}} stories', { count: storyCount })}
+              </div>
+            ) : null}
+            {itemCount ? (
+              <div className="item-count" data-cy="item-count">
+                {itemCount === 1
+                  ? t('item:item-count-single', '{{count}} item', { count: itemCount })
+                  : t('item:item-count', '{{count}} items', { count: itemCount })
+                }
               </div>
             ) : null}
             {isUserList ? (
