@@ -409,8 +409,6 @@ export const shareableListActions = {
     expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
     description: 'Fired when a user unsaves a public list on the public list page'
   },
-
-
   'public-list.share': {
     eventType: 'engagement',
     entityTypes: ['ui', 'shareableList'],
@@ -420,8 +418,6 @@ export const shareableListActions = {
     expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
     description: 'Fired when a creator clicks the "Share" button on a list on the public list page'
   },
-
-
   'public-list.share.facebook': {
     eventType: 'engagement',
     entityTypes: ['shareableList', 'ui'],
@@ -467,8 +463,6 @@ export const shareableListActions = {
     expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
     description: 'Fired when a creator clicks the "Buffer" button in the Share List modal on the public list page'
   },
-
-
   'public-list.share.copy': {
     eventType: 'engagement',
     entityTypes: ['shareableList', 'ui'],
