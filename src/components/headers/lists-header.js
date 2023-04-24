@@ -99,8 +99,32 @@ const publicListHeaderStyles = css`
   .share-save {
     display: flex;
 
-    .save {
-      margin-left: 12px;
+    .share {
+      margin-right: 12px;
+    }
+  }
+
+  ${breakpointSmallTablet} {
+    .headline {
+      p {
+        margin-bottom: 12px;
+      }
+    }
+    .list-info {
+      flex-direction: column;
+      align-items: flex-start;
+      .list-user-info {
+        .list-user-avatar {
+          margin-left: 0;
+        }
+      }
+      .share-save {
+        margin-top: 12px;
+        width: 100%;
+        button {
+          flex-grow: 1;
+        }
+      }
     }
   }
 `
@@ -197,7 +221,7 @@ export const ListPublicHeader = ({
       </section>
       <section className="list-info">
         <div className="list-user-info">
-          <Avatar src={avatarUrl} size="32px" />
+          <Avatar src={avatarUrl} size="32px" className="list-user-avatar" />
           <span>{userName || 'Pocket User'}</span> |{' '}
           <span>
             {listCount} {countText}
@@ -209,7 +233,6 @@ export const ListPublicHeader = ({
           <IosShareIcon /> Share
         </button>
         <SaveListButton
-          className="save"
           saveAction={handleSaveAll}
           isAuthenticated={isAuthenticated}
           saveStatus={saveStatus}
