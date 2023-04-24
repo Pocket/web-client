@@ -113,10 +113,8 @@ const publicListHeaderStyles = css`
     .list-info {
       flex-direction: column;
       align-items: flex-start;
-      .list-user-info {
-        .list-user-avatar {
-          margin-left: 0;
-        }
+      .list-user-avatar {
+        margin-left: 0;
       }
       .share-save {
         margin-top: 12px;
@@ -228,15 +226,15 @@ export const ListPublicHeader = ({
           </span>
         </div>
 
-      <div className="share-save">
-        <button onClick={handleShare} className="tiny share">
-          <IosShareIcon /> Share
-        </button>
-        <SaveListButton
-          saveAction={handleSaveAll}
-          isAuthenticated={isAuthenticated}
-          saveStatus={saveStatus}
-          />
+        <div className="share-save">
+          <button onClick={handleShare} className="tiny share">
+            <IosShareIcon /> Share
+          </button>
+          <SaveListButton
+            saveAction={handleSaveAll}
+            isAuthenticated={isAuthenticated}
+            saveStatus={saveStatus}
+            />
         </div>
       </section>
     </header>
