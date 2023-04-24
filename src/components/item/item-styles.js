@@ -69,6 +69,7 @@ export const itemStyles = css`
 
   // What happens when we hover over the main card
   &:hover {
+    z-index: 1;
     box-shadow: var(--card-hover-shadow);
 
     // We show a view original to help the user realize they may be leaving the pocket experience

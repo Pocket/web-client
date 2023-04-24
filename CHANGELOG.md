@@ -1,3 +1,10 @@
+## [1.88.2](https://github.com/Pocket/web-client/compare/v1.88.1...v1.88.2) (2023-04-24)
+
+
+### Bug Fixes
+
+* **card:** add z-index to card when in hover state ([b6d0527](https://github.com/Pocket/web-client/commit/b6d0527394da36d35d5278379ef19a49ed984f3a))
+
 ## [1.88.1](https://github.com/Pocket/web-client/compare/v1.88.0...v1.88.1) (2023-04-21)
 
 
