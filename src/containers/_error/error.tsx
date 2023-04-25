@@ -8,8 +8,10 @@ import { css } from 'linaria'
 import { GlobalFooter } from 'components/global-footer/global-footer'
 import { PageContainer } from 'components/page-container/page-container'
 import GlobalNav from 'connectors/global-nav/global-nav'
+import QRMobileInstall from 'static/images/qr-mobile-install.png'
 
 // Constants
+import { breakpointSmallTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 
 /**
@@ -112,14 +114,19 @@ function ModeratedListError() {
 function MobileNotification() {
   const { t } = useTranslation()
   return (
-    <div className="content">
-      <h1>{t('error:notification-title', 'Hmm, looks like something went wrong')}</h1>
-      <p data-cy="error-message">
-        {t(
-          'error:notification-message',
-          'The link you clicked directs you to your phone’s notification settings, which can only be accessed on a mobile device.'
-        )}
-      </p>
+    <div className="content error-with-qr">
+      <div>
+        <h1>{t('error:notification-title', 'Hmm, looks like something went wrong')}</h1>
+        <div>
+          <p data-cy="error-message">
+            {t(
+              'error:notification-message',
+              'The link you clicked directs you to your phone’s notification settings, which can only be accessed on a mobile device. Scan the QR code to install Pocket on your phone.'
+            )}
+          </p>
+        </div>
+      </div>
+      <img src={QRMobileInstall.src} alt="QR code to install Pocket on your mobile device" />
     </div>
   )
 }
@@ -233,6 +240,21 @@ const pageContainerStyle = css`
     margin-bottom: 2rem;
     ${breakpointLargeHandset} {
       font-size: 1rem;
+    }
+  }
+
+  .error-with-qr {
+    display: grid;
+    grid-column-gap: 2rem;
+    grid-template-columns: auto 200px;
+    img {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto 2rem;
+    }
+    ${breakpointSmallTablet} {
+      grid-template-columns: 1fr;
+      justify-content: center;
     }
   }
 `
