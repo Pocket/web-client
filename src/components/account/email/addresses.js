@@ -113,16 +113,6 @@ export const EmailAddresses = ({
           {t('account:add-email', 'Add Email')}
         </button>
         {emailAliasError ? <span className="errorText">{emailAliasError}</span> : null}
-        <div className="contextCopy">
-          <Trans i18nKey="account:additional-email-disclaimer">
-            Adding additional email addresses to your account will:
-            <ul>
-              <li>Allow you to log in with that email as well as your primary email </li>
-              <li>Allow friends to share pocket links to any of your account emails </li>
-              <li>Save links emailed to add@getpocket.com from any account email</li>
-            </ul>
-          </Trans>
-        </div>
       </div>
     </section>
   )

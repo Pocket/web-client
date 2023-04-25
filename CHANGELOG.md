@@ -1,3 +1,17 @@
+# [1.89.0](https://github.com/Pocket/web-client/compare/v1.88.3...v1.89.0) (2023-04-24)
+
+
+### Features
+
+* **listen:** redirect to help article ([7a2e410](https://github.com/Pocket/web-client/commit/7a2e410f98698cef8ba8417c7034452d92ff6c0d))
+
+## [1.88.3](https://github.com/Pocket/web-client/compare/v1.88.2...v1.88.3) (2023-04-24)
+
+
+### Bug Fixes
+
+* **account:** remove additional email disclaimer ([5ea97eb](https://github.com/Pocket/web-client/commit/5ea97eb5cc6b5400dd7f1dcc73e5cc55a7864638))
+
 ## [1.88.2](https://github.com/Pocket/web-client/compare/v1.88.1...v1.88.2) (2023-04-24)
 
 
