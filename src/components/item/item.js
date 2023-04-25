@@ -201,10 +201,7 @@ export const Item = (props) => {
             ) : null}
             {itemCount ? (
               <div className="item-count" data-cy="item-count">
-                {itemCount === 1
-                  ? t('item:item-count-single', '{{count}} item', { count: itemCount })
-                  : t('item:item-count', '{{count}} items', { count: itemCount })
-                }
+                {t('item:item-count', '{{count}} items', { count: itemCount })}
               </div>
             ) : null}
             {isUserList ? (
