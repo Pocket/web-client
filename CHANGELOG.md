@@ -1,3 +1,18 @@
+# [1.91.0](https://github.com/Pocket/web-client/compare/v1.90.2...v1.91.0) (2023-04-26)
+
+
+### Bug Fixes
+
+* **lists:** add onboarding badge to title bar ([79788a0](https://github.com/Pocket/web-client/commit/79788a09a3b1b282d3a97edcb043cc5108a9e78f))
+
+
+### Features
+
+* **lists:** add onboarding badge to sidenav ([2d72861](https://github.com/Pocket/web-client/commit/2d72861755b636d46d7aae74e4dcc4646f0c6558))
+* **lists:** minor cleanup ([31c7f50](https://github.com/Pocket/web-client/commit/31c7f50d0561811a6af8193ee6745dd73bc97258))
+* **lists:** moved out sidebar styles to sideNavItem and use breakpointSmallDesktop ([30aa78c](https://github.com/Pocket/web-client/commit/30aa78c374b0b684c497bb4146b9fe37d1c1003a))
+* **lists:** remove sidenav active media css ([b2af3e7](https://github.com/Pocket/web-client/commit/b2af3e70d1a2f4c459b830416c6cab38939b2291))
+
 ## [1.90.2](https://github.com/Pocket/web-client/compare/v1.90.1...v1.90.2) (2023-04-26)
 
 
