@@ -1,7 +1,5 @@
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
-import { css } from 'linaria'
-import { cx } from 'linaria'
 
 import { FavoriteIcon } from 'components/icons/FavoriteIcon'
 import { HighlightIcon } from 'components/icons/HighlightIcon'
@@ -18,25 +16,6 @@ import { sideNavActionHeader } from './side-nav'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 import { buttonReset } from 'components/buttons/button-reset'
 
-const onboardingBadge = css`
-  margin-left: 8px;
-  padding: 2px 8px;
-  background: var(--color-teal100);
-  border: 1px solid var(--color-teal100);
-  border-radius: 4px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  color: var(--color-teal50);
-  &.active {
-    background: var(--color-white100);
-    border-color: var(--color-white100);
-  }
-  @media (max-width: 1124px) {
-    display: none;
-  }
-`
-
 export function FiltersSideNav({
   subActive,
   pinned,
@@ -48,7 +27,6 @@ export function FiltersSideNav({
   const { t } = useTranslation()
 
   const listNames = recentLists ? Object.keys(recentLists).slice(0, 3) : []
-  const allListsActive = subActive('lists').includes('active')
 
   return (
     <>
@@ -71,7 +49,7 @@ export function FiltersSideNav({
               <ListViewAltIcon className="side-nav-icon inactive" />
               <ListViewAltFilledIcon className="side-nav-icon active" />
               All Lists
-              <span className={cx(onboardingBadge, allListsActive && 'active')}>New</span>
+              <span className='badge'>New</span>
             </button>
           </Link>
           {listNames.length
