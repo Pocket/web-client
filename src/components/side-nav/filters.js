@@ -32,9 +32,6 @@ const onboardingBadge = css`
   &.active {
     background: var(--color-white100);
     border-color: var(--color-white100);
-    @media (max-width: 1190px) {
-     display: none;
-    }
   }
   @media (max-width: 1124px) {
     display: none;
