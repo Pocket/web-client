@@ -43,8 +43,23 @@ export const savesHeaderStyle = css`
   }
 
   .create-list {
+    display: flex;
+    justify-content: flex-end;
     flex-grow: 1;
     text-align: right;
+  }
+  .onboarding-badge {
+    margin-right: 15.5px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 33px;
+    .new {
+      font-weight: 600;
+      color: #008078;
+    }
+    ${breakpointLargeHandset} {
+      display: none;
+    }
   }
 
   .list-sort {
@@ -106,6 +121,11 @@ export const SavesHeader = ({
 
       {showCreateList ? (
         <div className="create-list">
+          <div className="onboarding-badge">
+            <span className="new">New!</span>
+            {" "}
+            <span>Add items to a List</span>
+          </div>
           <button onClick={handleCreateList} className="tiny">
             <ListAddIcon /> Create List
           </button>
