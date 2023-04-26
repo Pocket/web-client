@@ -210,6 +210,7 @@ export const ListPublicHeader = ({
   handleShare
 }) => {
   const countText = listCount === 1 ? 'Item' : 'Items'
+  const creator = userName || 'Pocket User'
 
   return (
     <header className={publicListHeaderStyles}>
@@ -219,8 +220,13 @@ export const ListPublicHeader = ({
       </section>
       <section className="list-info">
         <div className="list-user-info">
-          <Avatar src={avatarUrl} size="32px" className="list-user-avatar" />
-          <span>{userName || 'Pocket User'}</span> |{' '}
+          <Avatar
+            src={avatarUrl}
+            size="32px"
+            className="list-user-avatar"
+            altText={`${creator}’s avatar`}
+          />
+          <span>{creator}</span> |{' '}
           <span>
             {listCount} {countText}
           </span>
