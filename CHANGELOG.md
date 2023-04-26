@@ -1,3 +1,26 @@
+# [1.90.0](https://github.com/Pocket/web-client/compare/v1.89.1...v1.90.0) (2023-04-25)
+
+
+### Features
+
+* **error:** add QR code for mobile install ([3313833](https://github.com/Pocket/web-client/commit/33138338eeefbfc34452980487b3b7273aa9a829))
+
+## [1.89.1](https://github.com/Pocket/web-client/compare/v1.89.0...v1.89.1) (2023-04-25)
+
+
+### Bug Fixes
+
+* **card:** adding item count for lists ([c0278c8](https://github.com/Pocket/web-client/commit/c0278c8d24b71a32d64cf60b52ce74a4c96eca2b))
+* **item:** relying on pluralization in our localization function ([82476da](https://github.com/Pocket/web-client/commit/82476da3edfffa466c14add80af199f28a1787e4))
+* **list:** adding item count to share modal ([13cae30](https://github.com/Pocket/web-client/commit/13cae30303082a4e7d621bb442d3211722f853e0))
+
+# [1.89.0](https://github.com/Pocket/web-client/compare/v1.88.3...v1.89.0) (2023-04-24)
+
+
+### Features
+
+* **listen:** redirect to help article ([7a2e410](https://github.com/Pocket/web-client/commit/7a2e410f98698cef8ba8417c7034452d92ff6c0d))
+
 ## [1.88.3](https://github.com/Pocket/web-client/compare/v1.88.2...v1.88.3) (2023-04-24)
 
 

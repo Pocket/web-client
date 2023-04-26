@@ -17,7 +17,7 @@ export const ShareListModal = ({
   slug,
   externalUrl,
   thumbnail,
-  storyCount,
+  itemCount,
   showModal,
   cancelShare,
   engagementEvent,
@@ -48,7 +48,7 @@ export const ShareListModal = ({
             openUrl={externalUrl}
             isInternalItem={true}
             itemImage={imageUrl}
-            storyCount={storyCount}
+            itemCount={itemCount}
             onImageFail={onImageFail}
             clamp
           />

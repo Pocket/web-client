@@ -51,6 +51,13 @@ const nextOptions = {
         source: '/collections/page/1',
         destination: '/collections',
         permanent: false
+      },
+      {
+        source: '/listen/:anything*',
+        destination:
+          'https://help.getpocket.com/article/1081-listening-to-articles-in-pocket-with-text-to-speech',
+        permanent: false,
+        basePath: false
       }
     ]
   },
