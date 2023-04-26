@@ -24,7 +24,6 @@ const onboardingBadge = css`
   background: var(--color-teal100);
   border: 1px solid var(--color-teal100);
   border-radius: 4px;
-
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -71,7 +70,7 @@ export function FiltersSideNav({
               data-cy="side-nav-all-lists">
               <ListViewAltIcon className="side-nav-icon inactive" />
               <ListViewAltFilledIcon className="side-nav-icon active" />
-              <span className="button-text">All Lists</span>
+              All Lists
               <span className={cx(onboardingBadge, allListsActive && 'active')}>New</span>
             </button>
           </Link>

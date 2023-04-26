@@ -48,7 +48,7 @@ export const savesHeaderStyle = css`
     flex-grow: 1;
     text-align: right;
   }
-  .onboarding-banner {
+  .onboarding-badge {
     margin-right: 15.5px;
     font-weight: 400;
     font-size: 16px;
@@ -121,7 +121,7 @@ export const SavesHeader = ({
 
       {showCreateList ? (
         <div className="create-list">
-          <div className="onboarding-banner">
+          <div className="onboarding-badge">
             <span className="new">New!</span>
             {" "}
             <span>Add items to a List</span>
