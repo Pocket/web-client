@@ -1,3 +1,23 @@
+## [1.90.2](https://github.com/Pocket/web-client/compare/v1.90.1...v1.90.2) (2023-04-26)
+
+
+### Bug Fixes
+
+* **public-list:** update alt text on creator avatar ([8d7cb97](https://github.com/Pocket/web-client/commit/8d7cb9718c213f652dc9175dff9538b6e2e89be7))
+
+## [1.90.1](https://github.com/Pocket/web-client/compare/v1.90.0...v1.90.1) (2023-04-26)
+
+
+### Bug Fixes
+
+* **public list:** rename buttons text to simply 'Share' ([441dbc0](https://github.com/Pocket/web-client/commit/441dbc01a1d0cc90857586d3b01e17422964c460))
+* **public lists:** add public-list snowplow entries, clean up individual list entry descriptions ([c9d0025](https://github.com/Pocket/web-client/commit/c9d002555e859b8586c0f44ba30157ffa316a49d))
+* **public lists:** adjust css for mobile ([f129ac0](https://github.com/Pocket/web-client/commit/f129ac0637c8f0a27b66ec395cf71450578bfc17))
+* **public lists:** adjust share modal analytics events per individual or public list ([2efdd78](https://github.com/Pocket/web-client/commit/2efdd78b599d1616ba702060b70e6d641267b93b))
+* **public lists:** fixed indentation and simplified css selector per PR comments ([cfcb2db](https://github.com/Pocket/web-client/commit/cfcb2db5bd53ddf032a0bb80ac91adf6cbd6f03f))
+* **public lists:** put in public list share button ([36605f1](https://github.com/Pocket/web-client/commit/36605f19d86ff8bde8cf60e7ae245b8b5d219abc))
+* **public lists:** remove awry empty lines in snowplow file ([00a8e54](https://github.com/Pocket/web-client/commit/00a8e54460365553b30fbb99756c4b91ab5a899c))
+
 # [1.90.0](https://github.com/Pocket/web-client/compare/v1.89.1...v1.90.0) (2023-04-25)
 
 

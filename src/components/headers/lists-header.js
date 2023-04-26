@@ -95,6 +95,36 @@ const publicListHeaderStyles = css`
       margin: 0;
     }
   }
+
+  .share-save {
+    display: flex;
+
+    .share {
+      margin-right: 12px;
+    }
+  }
+
+  ${breakpointSmallTablet} {
+    .headline {
+      p {
+        margin-bottom: 12px;
+      }
+    }
+    .list-info {
+      flex-direction: column;
+      align-items: flex-start;
+      .list-user-avatar {
+        margin-left: 0;
+      }
+      .share-save {
+        margin-top: 12px;
+        width: 100%;
+        button {
+          flex-grow: 1;
+        }
+      }
+    }
+  }
 `
 
 export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, handleOldest }) => {
@@ -154,7 +184,7 @@ export const ListIndividualHeader = ({
       <div className="create-sort">
         {isPublic ? (
           <button onClick={handleShare} className="tiny share">
-            <IosShareIcon /> Share list
+            <IosShareIcon /> Share
           </button>
         ) : null}
 
@@ -176,9 +206,11 @@ export const ListPublicHeader = ({
   listCount,
   isAuthenticated,
   saveStatus,
-  handleSaveAll
+  handleSaveAll,
+  handleShare
 }) => {
   const countText = listCount === 1 ? 'Item' : 'Items'
+  const creator = userName || 'Pocket User'
 
   return (
     <header className={publicListHeaderStyles}>
@@ -188,18 +220,28 @@ export const ListPublicHeader = ({
       </section>
       <section className="list-info">
         <div className="list-user-info">
-          <Avatar src={avatarUrl} size="32px" />
-          <span>{userName || 'Pocket User'}</span> |{' '}
+          <Avatar
+            src={avatarUrl}
+            size="32px"
+            className="list-user-avatar"
+            altText={`${creator}’s avatar`}
+          />
+          <span>{creator}</span> |{' '}
           <span>
             {listCount} {countText}
           </span>
         </div>
 
-        <SaveListButton
-          saveAction={handleSaveAll}
-          isAuthenticated={isAuthenticated}
-          saveStatus={saveStatus}
-        />
+        <div className="share-save">
+          <button onClick={handleShare} className="tiny share">
+            <IosShareIcon /> Share
+          </button>
+          <SaveListButton
+            saveAction={handleSaveAll}
+            isAuthenticated={isAuthenticated}
+            saveStatus={saveStatus}
+            />
+        </div>
       </section>
     </header>
   )

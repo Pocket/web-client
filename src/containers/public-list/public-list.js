@@ -9,6 +9,8 @@ import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
 import { ReportIcon } from 'components/icons/ReportIcon'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { shareListAction } from 'connectors/lists/mutation-share.state'
+import { ConfirmShare } from 'connectors/confirm/share-list'
 
 function buildReportEmail(url) {
   const subject = `Report List: ${url}`
@@ -32,6 +34,12 @@ export const PublicList = ({ listId, slug, statusCode }) => {
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
   const url = `${BASE_URL}/sharedlists/${listId}/${slug}`
   const metaData = { title, description, url, image: imageUrl }
+
+  // Actions
+  const handleShare = () => {
+    dispatch(sendSnowplowEvent('public-list.share', analyticsData))
+    dispatch(shareListAction(listId))
+  }
 
   const onSave = () => {
     dispatch(sendSnowplowEvent('public-list.save', analyticsData))
@@ -67,6 +75,7 @@ export const PublicList = ({ listId, slug, statusCode }) => {
           isAuthenticated={isAuthenticated}
           saveStatus={saveStatus}
           handleSaveAll={saveAction}
+          handleShare={handleShare}
         />
 
         {listCount
@@ -83,6 +92,7 @@ export const PublicList = ({ listId, slug, statusCode }) => {
           <ReportIcon /> Report List
         </button>
       </Layout>
+      <ConfirmShare snowplowId="public-list" />
     </>
   )
 }

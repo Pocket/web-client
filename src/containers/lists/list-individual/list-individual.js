@@ -114,7 +114,7 @@ export const ListIndividual = () => {
 
       <ListSettingsModal id={id} />
       <CreateListModal />
-      <ConfirmShare />
+      <ConfirmShare snowplowId="shareable-list" />
       <Toasts />
     </>
   )
