@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useDispatch, useSelector } from 'react-redux'
+import { css } from 'linaria'
 import Layout from 'layouts/main'
 import { ListPublicHeader } from 'components/headers/lists-header'
 import { PublicListCard } from 'connectors/lists/public-list.card'
@@ -18,6 +19,11 @@ function buildReportEmail(url) {
 
   return `mailto:reportlist@getpocket.com?subject=${subject}&body=${body}`
 }
+
+
+const footerStyle = css`
+  padding-top: 16px;
+`
 
 export const PublicList = ({ listId, slug, statusCode }) => {
   const dispatch = useDispatch()
@@ -88,9 +94,11 @@ export const PublicList = ({ listId, slug, statusCode }) => {
               />
             ))
           : null}
-        <button className="tiny outline" data-cy="report-list" onClick={onReport}>
-          <ReportIcon /> Report List
-        </button>
+        <footer className={footerStyle}>
+          <button className="tiny outline" data-cy="report-list" onClick={onReport}>
+            <ReportIcon /> Report List
+          </button>
+        </footer>
       </Layout>
       <ConfirmShare snowplowId="public-list" />
     </>
