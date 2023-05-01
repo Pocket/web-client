@@ -6,6 +6,7 @@ import { LockIcon } from 'components/icons/LockIcon'
 import { GlobeIcon } from 'components/icons/GlobeIcon'
 import { EmptyCircledIcon } from 'components/icons/EmptyCircledIcon'
 import { CheckCircledIcon } from 'components/icons/CheckCircledIcon'
+import { ErrorIcon } from 'components/icons/ErrorIcon'
 
 const buttonStyles = css`
   &.isPublic {
@@ -84,7 +85,7 @@ export const ListStatusToggle = ({ handleSetStatus, status, listItemNoteVisibili
       case 'isPublic': 
         return <><GlobeIcon /> Public List & Notes </>
       default:
-        return <span>Visibility Status</span>
+        return <><ErrorIcon /> Loading </>
     }
   }
 
