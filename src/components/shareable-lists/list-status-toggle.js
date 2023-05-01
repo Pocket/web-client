@@ -8,14 +8,35 @@ import { EmptyCircledIcon } from 'components/icons/EmptyCircledIcon'
 import { CheckCircledIcon } from 'components/icons/CheckCircledIcon'
 
 const buttonStyles = css`
-  &.PUBLIC {
+  &.isPublic {
     border-color: var(--color-teal100);
     background: var(--color-teal100);
     color: var(--color-actionPrimary);
   }
+  &.isMixed {
+    border-color: var(--color-lapisLightest);
+    background: var(--color-lapisLightest);
+    color: var(--color-lapisDark);
+
+    &:hover {
+      border-color: var(--color-lapis);
+      background: var(--color-lapisLightest);
+      color: var(--color-lapisDark);
+    }
+  }
 `
 
 const toggleStyles = css`
+  max-width: 412px;
+
+  li {
+    &:last-child {
+      button{
+        border-bottom: 0;
+      }
+    }
+  }
+
   button {
     align-items: center;
     border-bottom: 1px solid var(--color-dividerTertiary);
