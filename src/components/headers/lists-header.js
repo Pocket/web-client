@@ -151,9 +151,10 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
 export const ListIndividualHeader = ({
   title,
   description,
-  status,
   externalId,
   slug,
+  status,
+  listItemNoteVisibility,
   handleSetStatus,
   handleShare,
   handleEdit,
@@ -188,7 +189,11 @@ export const ListIndividualHeader = ({
           </button>
         ) : null}
 
-        <ListStatusToggle status={status} handleSetStatus={handleSetStatus} />
+        <ListStatusToggle
+          status={status}
+          listItemNoteVisibility={listItemNoteVisibility}
+          handleSetStatus={handleSetStatus}
+        />
 
         <button onClick={handleEdit} className="filter tiny outline">
           <FiltersAltIcon /> Settings

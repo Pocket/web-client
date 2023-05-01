@@ -40,7 +40,8 @@ export const ListIndividual = () => {
     slug,
     status,
     listItemIds,
-    analyticsData: passedAnalytics
+    listItemNoteVisibility,
+    analyticsData: passedAnalytics,
   } = list
   const showPlaceholder = listItemIds?.length === 0
 
@@ -49,7 +50,8 @@ export const ListIndividual = () => {
     title,
     description,
     status,
-    slug
+    slug,
+    listItemNoteVisibility
   }
 
   // Actions
@@ -90,6 +92,7 @@ export const ListIndividual = () => {
               status={status}
               externalId={id}
               slug={slug}
+              listItemNoteVisibility={listItemNoteVisibility}
               handleSetStatus={handleSetStatus}
               handleShare={handleShare}
               handleEdit={handleEdit}
