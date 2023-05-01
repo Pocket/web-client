@@ -55,9 +55,9 @@ export const ListIndividual = () => {
   }
 
   // Actions
-  const handleSetStatus = (val) => {
-    dispatch(sendSnowplowEvent('shareable-list.status.update', { ...analyticsData, status: val }))
-    dispatch(mutateListStatusAction({ id, status: val }))
+  const handleSetStatus = ({status, listItemNoteVisibility}) => {
+    dispatch(sendSnowplowEvent('shareable-list.status.update', { ...analyticsData, status: status }))
+    dispatch(mutateListStatusAction({ id, status, listItemNoteVisibility }))
   }
   const handleShare = () => {
     dispatch(sendSnowplowEvent('shareable-list.share', analyticsData))

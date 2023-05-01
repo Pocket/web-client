@@ -19,7 +19,7 @@ import { LIST_ITEMS_SUCCESS } from 'actions'
 export const mutateListUpdateAction = (id) => ({ type: LIST_UPDATE_REQUEST, id })
 export const mutateListUpdateCancel = () => ({ type: LIST_UPDATE_CANCEL })
 export const mutateListUpdateConfirm = ({ title, description }) => ({ type: LIST_UPDATE_CONFIRM, title, description })
-export const mutateListStatusAction = ({ id, status }) => ({ type: LIST_UPDATE_STATUS_REQUEST, id, status })
+export const mutateListStatusAction = ({ id, status, listItemNoteVisibility }) => ({ type: LIST_UPDATE_STATUS_REQUEST, id, status, listItemNoteVisibility })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -85,11 +85,12 @@ function* listUpdate({ id }) {
   }
 }
 
-function* listUpdateStatus({ id, status }) {
+function* listUpdateStatus({ id, status, listItemNoteVisibility }) {
   try {
     const data = {
       externalId: id,
-      status
+      status,
+      listItemNoteVisibility
     }
 
     const response = yield call(updateShareableList, data)
