@@ -18,6 +18,7 @@ const buttonStyles = css`
 const toggleStyles = css`
   button {
     align-items: center;
+    border-bottom: 1px solid var(--color-dividerTertiary);
 
     &:hover, &:hover .label-secondary {
       background: var(--color-teal100);
@@ -34,28 +35,46 @@ const toggleStyles = css`
   }
 `
 
-export const ListStatusToggle = ({ status, handleSetStatus }) => {
+export const ListStatusToggle = ({ handleSetStatus, status, listItemNoteVisibility }) => {
   const appRootSelector = '#__next'
 
   const statusRef = useRef(null)
 
-  const handleSetPrivate = () => handleSetStatus('PRIVATE')
-  const handleSetPublic = () => handleSetStatus('PUBLIC')
+  const handleSetPrivate = () => handleSetStatus({status: 'PRIVATE'})
+  const handleSetPublic = () => handleSetStatus({status: 'PUBLIC', listItemNoteVisibility: 'PUBLIC'})
+  const handleSetMixed = () => handleSetStatus({status: 'PUBLIC', listItemNoteVisibility: 'PRIVATE'})
 
-  const publicIcon = (status === 'PUBLIC') ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
-  const privateIcon = (status === 'PRIVATE') ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
+  const visibilityStatus =
+    (status === 'PRIVATE') ? 'isPrivate'
+    : (status === 'PUBLIC' && listItemNoteVisibility === 'PRIVATE') ? 'isMixed'
+    : (status === 'PUBLIC' && listItemNoteVisibility === 'PUBLIC' ) ? 'isPublic'
+    : null
+
+  const privateIcon = visibilityStatus === 'isPrivate' ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
+  const mixedIcon = visibilityStatus === 'isMixed' ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
+  const publicIcon = visibilityStatus === 'isPublic' ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
+
+  const Dropdown = () => {
+    switch(visibilityStatus) {
+      case 'isPrivate':
+        return <><LockIcon /> Private </>
+      case 'isMixed': 
+        return <><LockIcon /> Public </>
+      case 'isPublic': 
+        return <><GlobeIcon /> Public List & Notes </>
+      default:
+        return <span>Visibility Status</span>
+    }
+  }
 
   return (
     <div>
       <button
         ref={statusRef}
-        className={cx("tiny", "outline", buttonStyles, status)}
+        className={cx("tiny", "outline", buttonStyles, visibilityStatus)}
         data-cy="sort-options">
-        {status === 'PRIVATE' ? (
-          <><LockIcon /> Private</>
-        ): (
-          <><GlobeIcon /> Public</>
-        )} <ChevronDownIcon />
+        <Dropdown />
+        <ChevronDownIcon />
       </button>
       <PopupMenu
         className={toggleStyles}
@@ -77,14 +96,20 @@ export const ListStatusToggle = ({ status, handleSetStatus }) => {
         <PopupMenuItem
           onClick={handleSetPrivate}
           icon={privateIcon}
-          helperText="Only you can view your list.">
+          helperText="Only you can view your list and notes.">
           Private List
+        </PopupMenuItem>
+        <PopupMenuItem
+          onClick={handleSetMixed}
+          icon={mixedIcon}
+          helperText="Publish your list to share via social media, email and messaging apps. Your notes will still be private.">
+          Public List
         </PopupMenuItem>
         <PopupMenuItem
           onClick={handleSetPublic}
           icon={publicIcon}
-          helperText="Publish your list to share via social media, email and messaging apps.">
-          Public List
+          helperText="Publish your list of articles and notes to share via social media, email and messaging apps.">
+          Public List & Notes
         </PopupMenuItem>
       </PopupMenu>
     </div>
