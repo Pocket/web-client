@@ -10,15 +10,17 @@ const updateShareableListQuery = gql`
       status
       description
       slug
+      listItemNoteVisibility
     }
   }
 `
-export function updateShareableList({ title, description, externalId, status }) {
+export function updateShareableList({ title, description, externalId, status, listItemNoteVisibility }) {
   const data = {
     description,
     externalId,
     status,
-    title
+    title,
+    listItemNoteVisibility
   }
 
   return requestGQL({
