@@ -1,5 +1,6 @@
 import { css, cx } from 'linaria'
 import { useRef } from 'react'
+import { useTranslation } from 'next-i18next'
 import { PopupMenu, PopupMenuItem } from 'components/popup-menu/popup-menu'
 import { ChevronDownIcon } from 'components/icons/ChevronDownIcon'
 import { LockIcon } from 'components/icons/LockIcon'
@@ -10,6 +11,7 @@ import { ErrorIcon } from 'components/icons/ErrorIcon'
 
 export const ListStatusToggle = ({ handleSetStatus, status, listItemNoteVisibility }) => {
   const appRootSelector = '#__next'
+  const { t } = useTranslation()
 
   const statusRef = useRef(null)
 
@@ -30,13 +32,13 @@ export const ListStatusToggle = ({ handleSetStatus, status, listItemNoteVisibili
   const Dropdown = () => {
     switch(visibilityStatus) {
       case 'isPrivate':
-        return <><LockIcon /> Private </>
+        return <><LockIcon /> {t('list:private-button-title', 'Private')} </>
       case 'isMixed': 
-        return <><LockIcon /> Public </>
+        return <><LockIcon /> {t('list:mixed-button-title', 'Public')} </>
       case 'isPublic': 
-        return <><GlobeIcon /> Public List & Notes </>
+        return <><GlobeIcon /> {t('list:public-title', 'Public List & Notes')} </>
       default:
-        return <><ErrorIcon /> Loading </>
+        return <><ErrorIcon /> {t('list:loading', 'Loading')} </>
     }
   }
 
@@ -70,22 +72,31 @@ export const ListStatusToggle = ({ handleSetStatus, status, listItemNoteVisibili
           onClick={handleSetPrivate}
           icon={privateIcon}
           className={visibilityStatus === 'isPrivate' ? 'active' : null}
-          helperText="Only you can view your list and notes.">
-          Private List
+          helperText={t('lists.private-description', 'Only you can view your list and notes.')}>
+          <span className="label-title">
+            <LockIcon />
+            {t('list:private-title', 'Private List')}
+          </span>
         </PopupMenuItem>
         <PopupMenuItem
           onClick={handleSetMixed}
           icon={mixedIcon}
           className={visibilityStatus === 'isMixed' ? 'active' : null}
-          helperText="Publish your list to share via social media, email and messaging apps. Your notes will still be private.">
-          Public List
+          helperText={t('lists.mixed-description', 'Publish your list to share via social media, email and messaging apps. Your notes will still be private.')}>
+          <span className="label-title">
+            <GlobeIcon />
+            {t('list:mixed-title', 'Public List')}
+          </span>
         </PopupMenuItem>
         <PopupMenuItem
           onClick={handleSetPublic}
           icon={publicIcon}
           className={visibilityStatus === 'isPublic' ? 'active' : null}
-          helperText="Publish your list of articles and notes to share via social media, email and messaging apps.">
-          Public List & Notes
+          helperText={t('lists.public-description', 'Publish your list of articles and notes to share via social media, email and messaging apps.')}>
+          <span className="label-title">
+            <GlobeIcon />
+            {t('list:public-title', 'Public List & Notes')}
+          </span>
         </PopupMenuItem>
       </PopupMenu>
     </div>
