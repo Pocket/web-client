@@ -10,7 +10,7 @@ export function processAllList(responseData) {
   })
 
   const externalIds = allLists.map((list) => list.externalId)
-  const titleToIdList = allLists.reduce((obj, list) => ({ ...obj, [list.title]: list.externalId }), {})
+  const titleToIdList = allLists.reduce((obj, list) => ({ ...obj, [decode(list.title)]: list.externalId }), {})
   const itemsById = arrayToObject(lists, 'externalId')
 
   return { externalIds, itemsById, titleToIdList }
