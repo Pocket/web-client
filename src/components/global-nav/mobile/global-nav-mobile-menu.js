@@ -71,6 +71,10 @@ const listStyle = css`
     &.selected {
       background-color: var(--color-navCurrentTab); /* needs alpha */
       color: var(--color-navCurrentTabText);
+      .badge {
+        background: var(--color-white100);
+        border-color: var(--color-white100);
+      }
     }
 
     &.disabled,
@@ -97,6 +101,18 @@ const listStyle = css`
       height: var(--size150);
       margin-right: var(--spacing075);
       margin-top: -1px;
+    }
+
+    .badge {
+      margin: 0 16px 0 auto;
+      padding: 2px 8px;
+      background: var(--color-teal100);
+      border: 1px solid var(--color-teal100);
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--color-teal50);
     }
   }
 
@@ -149,6 +165,7 @@ export const MobileLink = ({
         }}>
         {icon ? icon : null}
         {label}
+        {name === 'lists' ? <span className='badge'>New</span> : null}
       </a>
     </Link>
   </li>
