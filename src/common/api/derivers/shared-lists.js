@@ -84,9 +84,17 @@ function deriveList(list, listId, listItems) {
 
   return {
     ...list,
+    title: decode(title),
+    description: decode(description),
     itemImage: listItems?.[0]?.imageUrl,
     externalId: listId,
     listItemIds,
     analyticsData
   }
+}
+
+function decode(string) {
+  const gt_encoded = '&gt;'; // >
+  const lt_encoded = '&lt;'; // <
+  return string.replaceAll(gt_encoded, '>').replaceAll(lt_encoded, '< ')
 }
