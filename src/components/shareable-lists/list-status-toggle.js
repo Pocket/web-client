@@ -8,55 +8,6 @@ import { EmptyCircledIcon } from 'components/icons/EmptyCircledIcon'
 import { CheckCircledIcon } from 'components/icons/CheckCircledIcon'
 import { ErrorIcon } from 'components/icons/ErrorIcon'
 
-const buttonStyles = css`
-  &.isPublic {
-    border-color: var(--color-teal100);
-    background: var(--color-teal100);
-    color: var(--color-actionPrimary);
-  }
-  &.isMixed {
-    border-color: var(--color-lapisLightest);
-    background: var(--color-lapisLightest);
-    color: var(--color-lapisDark);
-
-    &:hover {
-      border-color: var(--color-lapis);
-      background: var(--color-lapisLightest);
-      color: var(--color-lapisDark);
-    }
-  }
-`
-
-const toggleStyles = css`
-  max-width: 412px;
-
-  li {
-    &:last-child {
-      button{
-        border-bottom: 0;
-      }
-    }
-  }
-
-  button {
-    align-items: center;
-    border-bottom: 1px solid var(--color-dividerTertiary);
-
-    &:hover, &:hover .label-secondary {
-      background: var(--color-teal100);
-      color: var(--color-actionPrimary);
-    }
-  }
-
-  .icon.active {
-    color: var(--color-actionPrimary);
-  }
-
-  .label {
-    white-space: normal;
-  }
-`
-
 export const ListStatusToggle = ({ handleSetStatus, status, listItemNoteVisibility }) => {
   const appRootSelector = '#__next'
 
@@ -93,7 +44,7 @@ export const ListStatusToggle = ({ handleSetStatus, status, listItemNoteVisibili
     <div>
       <button
         ref={statusRef}
-        className={cx("tiny", "outline", buttonStyles, visibilityStatus)}
+        className={cx("tiny", "outline", buttonStyles, status)}
         data-cy="sort-options">
         <Dropdown />
         <ChevronDownIcon />
@@ -118,18 +69,21 @@ export const ListStatusToggle = ({ handleSetStatus, status, listItemNoteVisibili
         <PopupMenuItem
           onClick={handleSetPrivate}
           icon={privateIcon}
+          className={visibilityStatus === 'isPrivate' ? 'active' : null}
           helperText="Only you can view your list and notes.">
           Private List
         </PopupMenuItem>
         <PopupMenuItem
           onClick={handleSetMixed}
           icon={mixedIcon}
+          className={visibilityStatus === 'isMixed' ? 'active' : null}
           helperText="Publish your list to share via social media, email and messaging apps. Your notes will still be private.">
           Public List
         </PopupMenuItem>
         <PopupMenuItem
           onClick={handleSetPublic}
           icon={publicIcon}
+          className={visibilityStatus === 'isPublic' ? 'active' : null}
           helperText="Publish your list of articles and notes to share via social media, email and messaging apps.">
           Public List & Notes
         </PopupMenuItem>
@@ -137,3 +91,47 @@ export const ListStatusToggle = ({ handleSetStatus, status, listItemNoteVisibili
     </div>
   )
 }
+
+const buttonStyles = css`
+  &.PUBLIC {
+    border-color: var(--color-teal100);
+    background: var(--color-teal100);
+    color: var(--color-actionPrimary);
+  }
+`
+
+const toggleStyles = css`
+  max-width: 412px;
+
+  li {
+    &:last-child button {
+      border-bottom: 0;
+    }
+
+    &.active {
+      .label,
+      .label-secondary {
+        color: var(--color-actionPrimary);
+      }
+    }
+  }
+
+  button {
+    align-items: center;
+    border-bottom: 1px solid var(--color-dividerTertiary);
+    
+    &:hover, &:hover .label-secondary {
+      transition: background-color 0.1s ease-out;
+      background-color: var(--color-teal100);
+      color: var(--color-actionPrimary);
+    }
+  }
+
+  .icon.active {
+    color: var(--color-actionPrimary);
+  }
+
+  .label {
+    white-space: normal;
+  }
+`
