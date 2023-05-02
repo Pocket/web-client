@@ -46,7 +46,7 @@ export const ListStatusToggle = ({ status, handleSetStatus }) => {
   const privateIcon = (status === 'PRIVATE') ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
 
   return (
-    <div>
+    <>
       <button
         ref={statusRef}
         className={cx("tiny", "outline", buttonStyles, status)}
@@ -87,6 +87,6 @@ export const ListStatusToggle = ({ status, handleSetStatus }) => {
           Public List
         </PopupMenuItem>
       </PopupMenu>
-    </div>
+    </>
   )
 }

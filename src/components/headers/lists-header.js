@@ -30,13 +30,14 @@ const listHeaderStyles = css`
 
   .create-sort {
     display: flex;
+    align-items: center;
 
-    .share {
-      margin-right: 12px;
-    }
-
-    .filter {
-      margin-left: 12px;
+    &.wrap {
+      flex-wrap: wrap;
+  
+      > button {
+        margin: 0 12px 12px 0;
+      }
     }
 
     select {
@@ -184,7 +185,7 @@ export const ListIndividualHeader = ({
         />
       </div>
 
-      <div className="create-sort">
+      <div className="create-sort wrap">
         {isPublic ? (
           <button onClick={handleShare} className="tiny share">
             <IosShareIcon /> Share

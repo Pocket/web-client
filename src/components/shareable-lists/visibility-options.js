@@ -43,7 +43,7 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
   }
 
   return (
-    <div>
+    <>
       <button
         ref={statusRef}
         className={cx("tiny", "outline", buttonStyles, status)}
@@ -99,7 +99,7 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
           </span>
         </PopupMenuItem>
       </PopupMenu>
-    </div>
+    </>
   )
 }
 
