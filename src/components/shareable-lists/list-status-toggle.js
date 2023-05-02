@@ -145,4 +145,21 @@ const toggleStyles = css`
   .label {
     white-space: normal;
   }
+
+  .label-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+
+    .icon {
+      height: 1rem;
+      line-height: 0.875rem;
+      margin-top: 0;
+      margin-right: 0.25rem;
+    }
+  }
+
+  .label-secondary {
+    color: var(--color-textPrimary);
+  }
 `
