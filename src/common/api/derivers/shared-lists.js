@@ -10,7 +10,7 @@ export function processAllList(responseData) {
   })
 
   const externalIds = allLists.map((list) => list.externalId)
-  const titleToIdList = allLists.reduce((obj, list) => ({ ...obj, [decode(list.title)]: list.externalId }), {})
+  const titleToIdList = allLists.reduce((obj, list) => ({ ...obj, [decodeSpecialChars(list.title)]: list.externalId }), {})
   const itemsById = arrayToObject(lists, 'externalId')
 
   return { externalIds, itemsById, titleToIdList }
@@ -84,8 +84,8 @@ function deriveList(list, listId, listItems) {
 
   return {
     ...list,
-    title: decode(title),
-    description: decode(description),
+    title: decodeSpecialChars(title),
+    description: decodeSpecialChars(description),
     itemImage: listItems?.[0]?.imageUrl,
     externalId: listId,
     listItemIds,
@@ -93,7 +93,7 @@ function deriveList(list, listId, listItems) {
   }
 }
 
-function decode(string) {
+function decodeSpecialChars(string) {
   const gt_encoded = '&gt;'; // >
   const lt_encoded = '&lt;'; // <
   return string.replaceAll(gt_encoded, '>').replaceAll(lt_encoded, '< ')
