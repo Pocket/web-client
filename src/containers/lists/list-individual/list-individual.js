@@ -16,6 +16,7 @@ import { mutateListUpdateAction } from 'connectors/lists/mutation-update.state'
 import { mutateListStatusAction } from 'connectors/lists/mutation-update.state'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const ListIndividual = () => {
   const dispatch = useDispatch()
@@ -25,6 +26,9 @@ export const ListIndividual = () => {
   const enrolled = useSelector((state) => state.pageListsInfo.enrolled)
   const enrolledFetched = useSelector((state) => state.pageListsInfo.enrolledFetched)
   const list = useSelector((state) => state.listsDisplay[id])
+
+  const featureState = useSelector((state) => state.features)
+  const inListsDev = featureFlagActive({ flag: 'lists.dev', featureState })
 
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
@@ -93,6 +97,7 @@ export const ListIndividual = () => {
               externalId={id}
               slug={slug}
               listItemNoteVisibility={listItemNoteVisibility}
+              inListsDev={inListsDev}
               handleSetStatus={handleSetStatus}
               handleShare={handleShare}
               handleEdit={handleEdit}

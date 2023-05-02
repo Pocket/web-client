@@ -6,6 +6,7 @@ import { FiltersAltIcon } from 'components/icons/FiltersAltIcon'
 import Avatar from 'components/avatar/avatar'
 import { SaveListButton } from 'components/content-saving/save-list'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
+import { VisibilityOptions } from 'components/shareable-lists/visibility-options'
 import { ListStatusToggle } from 'components/shareable-lists/list-status-toggle'
 import { breakpointSmallTablet } from 'common/constants'
 import { PublicListUrl } from 'components/shareable-lists/public-list-url'
@@ -155,6 +156,7 @@ export const ListIndividualHeader = ({
   slug,
   status,
   listItemNoteVisibility,
+  inListsDev,
   handleSetStatus,
   handleShare,
   handleEdit,
@@ -189,11 +191,18 @@ export const ListIndividualHeader = ({
           </button>
         ) : null}
 
-        <ListStatusToggle
-          status={status}
-          listItemNoteVisibility={listItemNoteVisibility}
-          handleSetStatus={handleSetStatus}
-        />
+        { inListsDev ? (
+          <VisibilityOptions
+            status={status}
+            listItemNoteVisibility={listItemNoteVisibility}
+            handleSetStatus={handleSetStatus}
+          />
+        ) : (
+          <ListStatusToggle
+            status={status}
+            handleSetStatus={handleSetStatus}
+          />
+        )}
 
         <button onClick={handleEdit} className="filter tiny outline">
           <FiltersAltIcon /> Settings
