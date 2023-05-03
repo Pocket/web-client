@@ -70,10 +70,6 @@ const listHeaderStyles = css`
           width: 100%;
           margin: 12px 0 0;
         }
-
-        .save {
-          margin-right: 8px;
-        }
       }
 
       .create-reorder {
