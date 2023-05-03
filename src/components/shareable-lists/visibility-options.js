@@ -9,6 +9,21 @@ import { EmptyCircledIcon } from 'components/icons/EmptyCircledIcon'
 import { CheckCircledIcon } from 'components/icons/CheckCircledIcon'
 import { ErrorIcon } from 'components/icons/ErrorIcon'
 
+const VisibilityDropdown = ({visibilityStatus}) => {
+  const { t } = useTranslation()
+
+  switch(visibilityStatus) {
+    case 'isPrivate':
+      return <><LockIcon /> {t('list:private-button-title', 'Private')} </>
+    case 'isMixed': 
+      return <><LockIcon /> {t('list:mixed-button-title', 'Public')} </>
+    case 'isPublic': 
+      return <><GlobeIcon /> {t('list:public-title', 'Public List & Notes')} </>
+    default:
+      return <><ErrorIcon /> {t('list:loading', 'Loading')} </>
+  }
+}
+
 export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibility }) => {
   const appRootSelector = '#__next'
   const { t } = useTranslation()
@@ -29,26 +44,13 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
   const mixedIcon = visibilityStatus === 'isMixed' ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
   const publicIcon = visibilityStatus === 'isPublic' ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
 
-  const Dropdown = () => {
-    switch(visibilityStatus) {
-      case 'isPrivate':
-        return <><LockIcon /> {t('list:private-button-title', 'Private')} </>
-      case 'isMixed': 
-        return <><LockIcon /> {t('list:mixed-button-title', 'Public')} </>
-      case 'isPublic': 
-        return <><GlobeIcon /> {t('list:public-title', 'Public List & Notes')} </>
-      default:
-        return <><ErrorIcon /> {t('list:loading', 'Loading')} </>
-    }
-  }
-
   return (
     <>
       <button
         ref={statusRef}
         className={cx("tiny", "outline", buttonStyles, status)}
         data-cy="sort-options">
-        <Dropdown />
+        <VisibilityDropdown visibilityStatus={visibilityStatus}/>
         <ChevronDownIcon />
       </button>
       <PopupMenu
