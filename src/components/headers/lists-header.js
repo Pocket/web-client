@@ -13,7 +13,10 @@ import { PublicListUrl } from 'components/shareable-lists/public-list-url'
 
 const listHeaderStyles = css`
   padding-bottom: 22px;
-  display: block;
+
+  &.list-individual {
+    display: block;
+  }
 
   .headline {
     h1 {
@@ -31,6 +34,7 @@ const listHeaderStyles = css`
 
   .create-sort {
     display: flex;
+    align-items: center;
 
     &.wrap {
       flex-wrap: wrap;
