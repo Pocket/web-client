@@ -37,6 +37,10 @@ const listHeaderStyles = css`
   
       > button {
         margin: 0 12px 12px 0;
+
+        &:last-child {
+          margin-right: 0;
+        }
       }
     }
 
