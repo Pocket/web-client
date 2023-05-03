@@ -52,7 +52,7 @@ export const ListContent = ({ id, toggleSort }) => {
   }
   const handleSort = () => {
     // dispatch(sendSnowplowEvent('shareable-list.sort.intent', analyticsData))
-    toggleSort()
+    toggleSort(true)
   }
   const handleSavesClick = () => {
     dispatch(sendSnowplowEvent('shareable-list.empty-list.go-to-saves', analyticsData))

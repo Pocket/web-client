@@ -17,6 +17,13 @@ const reorderStyles = css`
     font-size: 24px;
     padding: 1.5px 0 1px;
   }
+
+  .isDragging & {
+    /*
+      in case we want to add custom styles to the item being dragged around
+      we'll want to target article here
+    */
+  }
 `
 
 export const IndividualListReorderCard = ({ id, position }) => {
@@ -54,9 +61,7 @@ export const IndividualListReorderCard = ({ id, position }) => {
         openUrl={url}
         externalUrl={url}
         onImageFail={onImageFail}
-        onItemInView={onItemInView}
-        // onOpenOriginalUrl={onOpenOriginal}
-        // onOpen={onOpen}
+        // onItemInView={onItemInView}
         Actions={ReorderActions}
         clamp
       />
@@ -65,8 +70,6 @@ export const IndividualListReorderCard = ({ id, position }) => {
 }
 
 export const ReorderActions = () => {
-  const dispatch = useDispatch()
-
   return (
     <button
       aria-label="Reorder items"

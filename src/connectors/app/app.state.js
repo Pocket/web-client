@@ -104,7 +104,7 @@ export const appReducers = (state = initialState, action) => {
     }
 
     case APP_SET_MODE: {
-      // MODES  [default, search, add, bulk]
+      // MODES  [default, search, add, bulk, reorder]
       const { mode } = action
       return { ...state, mode }
     }

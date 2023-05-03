@@ -1,33 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
-import { css, cx } from 'linaria'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { ReorderList } from 'components/reorder/reorder'
+import { ReorderItem } from 'components/reorder/reorder'
 import { ListSortHeader } from 'components/headers/lists-header'
 import { IndividualListReorderCard } from 'connectors/lists/individual-list.reorder.card'
-import { reorderArray } from 'common/utilities/object-array/object-array'
 
-const itemStyles = css`
-  user-select: none;
-  cursor: grab;
-
-  &.isDragging {
-    /*
-      in case we want to add custom styles to the item being dragged around
-      we'll want to target article here
-    */
-  }
-`
-
-const listStyles = css`
-  &.isDraggingOver {
-    /*
-      in case we want to add custom styles to the list background
-      behind the item being dragged around
-    */
-  }
-`
-
-export const ReorderList = ({ id, toggleSort }) => {
+export const ListReorder = ({ id, toggleSort }) => {
   const dispatch = useDispatch()
 
   const { title, description, listItemIds } = useSelector((state) => state.listsDisplay[id])
@@ -36,26 +14,15 @@ export const ReorderList = ({ id, toggleSort }) => {
   const handleSave = () => {
     // dispatch(saveListOrderAction(items))
     // dispatch(sendSnowplowEvent('shareable-list.sort.save', analyticsData??))
-    toggleSort()
+    toggleSort(false)
   }
 
   const handleCancel = () => {
     // dispatch(sendSnowplowEvent('shareable-list.sort.cancel', analyticsData??))
-    toggleSort()
+    toggleSort(false)
   }
 
-  const handleOnDragEnd = (result) => {
-    // dropped outside the list
-    if (!result.destination) return
-
-    const newItems = reorderArray(
-      items,
-      result.source.index,
-      result.destination.index
-    )
-
-    setItems(newItems)
-  }
+  const updateList = (newItems) => setItems(newItems)
 
   return (
     <main className="main">
@@ -66,37 +33,13 @@ export const ReorderList = ({ id, toggleSort }) => {
         handleCancel={handleCancel}
       />
 
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              className={cx(listStyles, snapshot.isDraggingOver && 'isDraggingOver')}
-            >
-              {items.map((id, index) => (
-                <Draggable key={id} draggableId={id} index={index}>
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      className={cx(itemStyles, snapshot.isDragging && 'isDragging')}
-                    >
-                      <IndividualListReorderCard
-                        key={id}
-                        id={id}
-                        position={index}
-                      />
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <ReorderList listItems={items} updateList={updateList}>
+        {items.map((id, index) => (
+          <ReorderItem key={id} id={id} index={index}>
+            <IndividualListReorderCard id={id} position={index} />
+          </ReorderItem>
+        ))}
+      </ReorderList>
     </main>
   )
 }

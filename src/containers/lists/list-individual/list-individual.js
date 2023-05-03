@@ -5,12 +5,13 @@ import ErrorPage from 'containers/_error/error'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListContent } from 'containers/lists/list-individual/content'
-import { ReorderList } from 'containers/lists/list-individual/reorder'
+import { ListReorder } from 'containers/lists/list-individual/reorder'
 import { getIndividualListAction } from 'containers/lists/lists.state'
 import { ListSettingsModal } from 'connectors/confirm/list-settings'
 import { CreateListModal } from 'connectors/confirm/create-list'
 import { ConfirmShare } from 'connectors/confirm/share-list'
 import { Toasts } from 'connectors/toasts/toast-list'
+import { appSetMode } from 'connectors/app/app.state'
 
 export const ListIndividual = () => {
   const dispatch = useDispatch()
@@ -26,9 +27,13 @@ export const ListIndividual = () => {
     if (enrolled) dispatch(getIndividualListAction(id))
   }, [dispatch, id, enrolled])
 
-  const toggleSort = () => setReorder(!reorder)
+  const toggleSort = (status) => {
+    const mode = status ? 'reorder' : 'default'
+    setReorder(status)
+    dispatch(appSetMode(mode))
+  }
 
-  const Content = reorder ? ReorderList : ListContent
+  const Content = reorder ? ListReorder : ListContent
 
   if (!enrolledFetched) return null
   if (enrolledFetched && !enrolled) return <ErrorPage statusCode={404} />
