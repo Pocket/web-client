@@ -151,7 +151,7 @@ const iconStyle = css`
 `
 
 export const MobileLink = ({
-  link: { name, isDisabled = false, url, icon, label, id },
+  link: { name, isDisabled = false, url, icon, label, id, newLabel = false },
   isSelected,
   handleClick
 }) => (
@@ -165,7 +165,7 @@ export const MobileLink = ({
         }}>
         {icon ? icon : null}
         {label}
-        {name === 'lists' ? <span className='badge'>New</span> : null}
+        {newLabel ? <span className='badge'>New</span> : null}
       </a>
     </Link>
   </li>
