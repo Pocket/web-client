@@ -25,14 +25,14 @@ const itemStyles = css`
   }
 `
 
-export const simple = () => {
+export const Simple = () => {
   const [items, setItems] = useState(COLORS)
   const updateList = (newItems) => setItems(newItems)
 
   return (
     <ReorderList listItems={items} updateList={updateList} className={listStyles}>
       {items.map((color, index) => (
-        <ReorderItem id={color} index={index} className={itemStyles}>
+        <ReorderItem key={color} id={color} index={index} className={itemStyles}>
           {color}
         </ReorderItem>
       ))}
