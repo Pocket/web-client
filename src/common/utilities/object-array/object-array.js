@@ -95,3 +95,16 @@ export function existsInArray(arr, val) {
 
   return arr.some(name => name.toLowerCase() === val.toLowerCase())
 }
+
+// Reorders an array taking the item at the startIndex and moving it to the endIndex
+// The original array is not modified
+export function reorderArray(list, startIndex, endIndex) {
+  if (startIndex === endIndex) return list
+  if (startIndex < 0 || endIndex > list.length) return list
+
+  const result = Array.from(list)
+  const [removed] = result.splice(startIndex, 1)
+  result.splice(endIndex, 0, removed)
+
+  return result
+}

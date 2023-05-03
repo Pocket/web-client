@@ -1,28 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { CreateEditShareableList } from 'components/shareable-lists/create-edit-modal'
 import { mutateListUpdateCancel } from 'connectors/lists/mutation-update.state'
 import { mutateListUpdateConfirm } from 'connectors/lists/mutation-update.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { getIndividualListAction } from 'containers/lists/lists.state'
 import { existsInArray } from 'common/utilities/object-array/object-array'
 
 export const ListSettingsModal = ({ id }) => {
   const dispatch = useDispatch()
   const [error, setError] = useState(null)
 
-  const enrolled = useSelector((state) => state.pageListsInfo.enrolled)
   const list = useSelector((state) => state.listsDisplay[id])
   const showModal = useSelector((state) => state.mutationlistUpdate.open)
   const titleToIdList = useSelector((state) => state.pageListsInfo.titleToIdList)
 
   const titleList = titleToIdList ? Object.keys(titleToIdList) : []
 
+  if (!list) return null
   const { title, description, analyticsData } = list
-
-  useEffect(() => {
-    if (enrolled) dispatch(getIndividualListAction(id))
-  }, [dispatch, enrolled, id, title, description])
 
   const handleClose = () => {
     dispatch(mutateListUpdateCancel())
