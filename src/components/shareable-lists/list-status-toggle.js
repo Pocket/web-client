@@ -64,7 +64,7 @@ export const ListStatusToggle = ({ status, handleSetStatus }) => {
         screenReaderLabel="Update List Status"
         appRootSelector={appRootSelector}
         popperOptions={{
-          placement: 'bottom-end',
+          placement: 'bottom-start',
           modifiers: [
             {
               name: 'offset',
