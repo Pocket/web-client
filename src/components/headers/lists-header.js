@@ -31,7 +31,6 @@ const listHeaderStyles = css`
 
   .create-sort {
     display: flex;
-    align-items: center;
 
     &.wrap {
       flex-wrap: wrap;
