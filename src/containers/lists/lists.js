@@ -53,7 +53,7 @@ export const Lists = () => {
   if (!enrolledFetched) return null
   if (enrolledFetched && !enrolled) return <ErrorPage statusCode={404} />
   return (
-    <Layout>
+    <Layout selectedNavLink="lists">
       <SideNav type="saves" subset="lists" />
 
       {shouldRender ? (

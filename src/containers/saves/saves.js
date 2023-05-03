@@ -33,6 +33,7 @@ export const Saves = (props) => {
   const { metaData = {}, subset: sub = 'active', filter: propFilter, locale } = props
   const { tag, filter: queryFilter, query: searchTerm } = router.query
   const subset = tag ? 'tag' : searchTerm ? 'search' : sub
+  const selectedNavLink = subset === 'unread' ? 'saves' : subset
   const filter = tag ? queryFilter : propFilter
   const selector = tag ? tag : sub
 
@@ -63,7 +64,7 @@ export const Saves = (props) => {
   }
 
   return (
-    <Layout title={metaData.title} metaData={metaData} subset={subset} tag={tag}>
+    <Layout title={metaData.title} metaData={metaData} selectedNavLink={selectedNavLink} subset={subset} tag={tag}>
       <SideNav type="saves" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
       <main className="main">
         <SuccessFXA type="saves" />

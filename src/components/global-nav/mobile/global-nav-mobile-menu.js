@@ -222,10 +222,12 @@ export const Menu = ({
     })}
     {subLinks
       ? subLinks.map((link) => {
+          const isSelected = link.name === selectedLink
           const key = `global-nav-mobile-menu-${link?.name}`
           return link.url ? (
             <MobileLink
               link={link}
+              isSelected={isSelected}
               handleClick={(event) => {
                 handleClick(event, link.name, link.url)
               }}
