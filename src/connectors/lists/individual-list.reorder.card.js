@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { setNoImage } from 'connectors/lists/lists-display.state'
-import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { ReorderIcon } from 'components/icons/ReorderIcon'
 
 const reorderStyles = css`
@@ -26,29 +25,16 @@ const reorderStyles = css`
   }
 `
 
-export const IndividualListReorderCard = ({ id, position }) => {
+export const IndividualListReorderCard = ({ id }) => {
   const dispatch = useDispatch()
 
   const item = useSelector((state) => state.listsDisplay[id])
-  const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
   if (!item) return null
-  const { externalId, title, excerpt, publisher, url, analyticsData: passedAnalytics } = item
-  const analyticsData = {
-    ...passedAnalytics,
-    sortOrder: position,
-    position,
-    destination: 'external'
-  }
+  const { externalId, title, excerpt, publisher, url } = item
 
   const itemImage = item?.noImage ? '' : item?.imageUrl
   const onImageFail = () => dispatch(setNoImage(id))
-
-  const onItemInView = (inView) => {
-    if (!impressionFired && inView) {
-      dispatch(sendSnowplowEvent('shareable-list.item.impression', analyticsData))
-    }
-  }
 
   return (
     <div className={cx(stackedGrid, stackedGridNoAside, reorderStyles)}>
@@ -59,9 +45,7 @@ export const IndividualListReorderCard = ({ id, position }) => {
         itemImage={itemImage}
         publisher={publisher}
         openUrl={url}
-        externalUrl={url}
         onImageFail={onImageFail}
-        // onItemInView={onItemInView}
         Actions={ReorderActions}
         clamp
       />
@@ -72,6 +56,7 @@ export const IndividualListReorderCard = ({ id, position }) => {
 export const ReorderActions = () => {
   return (
     <button
+      tabIndex="-1"
       aria-label="Reorder items"
       data-cy="reorder-items"
       className="inline large">

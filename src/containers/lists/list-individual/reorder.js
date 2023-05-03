@@ -36,7 +36,7 @@ export const ListReorder = ({ id, toggleSort }) => {
       <ReorderList listItems={items} updateList={updateList}>
         {items.map((id, index) => (
           <ReorderItem key={id} id={id} index={index}>
-            <IndividualListReorderCard id={id} position={index} />
+            <IndividualListReorderCard id={id} />
           </ReorderItem>
         ))}
       </ReorderList>
