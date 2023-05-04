@@ -45,8 +45,8 @@ export const savesHeaderStyle = css`
   .create-list {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     flex-grow: 1;
-    text-align: right;
   }
   .onboarding-badge {
     margin-right: 15.5px;

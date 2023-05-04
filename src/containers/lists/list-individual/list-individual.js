@@ -16,6 +16,7 @@ import { mutateListUpdateAction } from 'connectors/lists/mutation-update.state'
 import { mutateListStatusAction } from 'connectors/lists/mutation-update.state'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const ListIndividual = () => {
   const dispatch = useDispatch()
@@ -25,6 +26,9 @@ export const ListIndividual = () => {
   const enrolled = useSelector((state) => state.pageListsInfo.enrolled)
   const enrolledFetched = useSelector((state) => state.pageListsInfo.enrolledFetched)
   const list = useSelector((state) => state.listsDisplay[id])
+
+  const featureState = useSelector((state) => state.features)
+  const inListsDev = featureFlagActive({ flag: 'lists.dev', featureState })
 
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
@@ -40,7 +44,8 @@ export const ListIndividual = () => {
     slug,
     status,
     listItemIds,
-    analyticsData: passedAnalytics
+    listItemNoteVisibility,
+    analyticsData: passedAnalytics,
   } = list
   const showPlaceholder = listItemIds?.length === 0
 
@@ -49,13 +54,14 @@ export const ListIndividual = () => {
     title,
     description,
     status,
-    slug
+    slug,
+    listItemNoteVisibility
   }
 
   // Actions
-  const handleSetStatus = (val) => {
-    dispatch(sendSnowplowEvent('shareable-list.status.update', { ...analyticsData, status: val }))
-    dispatch(mutateListStatusAction({ id, status: val }))
+  const handleSetStatus = ({status, listItemNoteVisibility}) => {
+    dispatch(sendSnowplowEvent('shareable-list.status.update', { ...analyticsData, status: status }))
+    dispatch(mutateListStatusAction({ id, status, listItemNoteVisibility }))
   }
   const handleShare = () => {
     dispatch(sendSnowplowEvent('shareable-list.share', analyticsData))
@@ -90,6 +96,8 @@ export const ListIndividual = () => {
               status={status}
               externalId={id}
               slug={slug}
+              listItemNoteVisibility={listItemNoteVisibility}
+              inListsDev={inListsDev}
               handleSetStatus={handleSetStatus}
               handleShare={handleShare}
               handleEdit={handleEdit}

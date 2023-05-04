@@ -6,12 +6,17 @@ import { FiltersAltIcon } from 'components/icons/FiltersAltIcon'
 import Avatar from 'components/avatar/avatar'
 import { SaveListButton } from 'components/content-saving/save-list'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
+import { VisibilityOptions } from 'components/shareable-lists/visibility-options'
 import { ListStatusToggle } from 'components/shareable-lists/list-status-toggle'
 import { breakpointSmallTablet } from 'common/constants'
 import { PublicListUrl } from 'components/shareable-lists/public-list-url'
 
 const listHeaderStyles = css`
   padding-bottom: 22px;
+
+  &.list-individual {
+    display: block;
+  }
 
   .headline {
     h1 {
@@ -29,13 +34,19 @@ const listHeaderStyles = css`
 
   .create-sort {
     display: flex;
+    align-items: center;
 
-    .share {
-      margin-right: 12px;
-    }
+    &.wrap {
+      flex-wrap: wrap;
+      margin-top: 12px;
+  
+      > button {
+        margin: 0 12px 12px 0;
 
-    .filter {
-      margin-left: 12px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
     }
 
     select {
@@ -151,9 +162,11 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
 export const ListIndividualHeader = ({
   title,
   description,
-  status,
   externalId,
   slug,
+  status,
+  listItemNoteVisibility,
+  inListsDev,
   handleSetStatus,
   handleShare,
   handleEdit,
@@ -181,14 +194,25 @@ export const ListIndividualHeader = ({
         />
       </div>
 
-      <div className="create-sort">
+      <div className="create-sort wrap">
         {isPublic ? (
           <button onClick={handleShare} className="tiny share">
             <IosShareIcon /> Share
           </button>
         ) : null}
 
-        <ListStatusToggle status={status} handleSetStatus={handleSetStatus} />
+        { inListsDev ? (
+          <VisibilityOptions
+            status={status}
+            listItemNoteVisibility={listItemNoteVisibility}
+            handleSetStatus={handleSetStatus}
+          />
+        ) : (
+          <ListStatusToggle
+            status={status}
+            handleSetStatus={handleSetStatus}
+          />
+        )}
 
         <button onClick={handleEdit} className="filter tiny outline">
           <FiltersAltIcon /> Settings
