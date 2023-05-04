@@ -3,6 +3,7 @@ import { savesHeaderStyle } from './saves-header'
 import { ListSort } from 'components/list-sort/list-sort'
 import { ListAddIcon } from 'components/icons/ListAddIcon'
 import { FiltersAltIcon } from 'components/icons/FiltersAltIcon'
+import { SortOrderIcon } from 'components/icons/SortOrderIcon'
 import Avatar from 'components/avatar/avatar'
 import { SaveListButton } from 'components/content-saving/save-list'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
@@ -39,7 +40,7 @@ const listHeaderStyles = css`
     &.wrap {
       flex-wrap: wrap;
       margin-top: 12px;
-  
+
       > button {
         margin: 0 12px 12px 0;
 
@@ -57,12 +58,34 @@ const listHeaderStyles = css`
     }
   }
 
+  .create-reorder {
+    .save {
+      margin-right: 12px;
+    }
+  }
+
   ${breakpointSmallTablet} {
     &.list-individual {
       flex-direction: column;
 
       .create-sort {
         margin-top: 12px;
+        flex-direction: column;
+        width: 100%;
+
+        button {
+          width: 100%;
+          margin: 12px 0 0;
+        }
+      }
+
+      .create-reorder {
+        display: flex;
+        width: 100%;
+
+        .cancel {
+          flex-grow: 1;
+        }
       }
     }
   }
@@ -160,16 +183,17 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
 }
 
 export const ListIndividualHeader = ({
+  inListsDev,
   title,
   description,
   externalId,
   slug,
   status,
   listItemNoteVisibility,
-  inListsDev,
   handleSetStatus,
   handleShare,
   handleEdit,
+  handleSort,
   handleCopyUrl,
   handleOpenUrl
 }) => {
@@ -216,6 +240,40 @@ export const ListIndividualHeader = ({
 
         <button onClick={handleEdit} className="filter tiny outline">
           <FiltersAltIcon /> Settings
+        </button>
+
+        {inListsDev ? (
+          <button onClick={handleSort} className="sort tiny outline">
+            <SortOrderIcon /> Reorder
+          </button>
+        ) : null}
+      </div>
+    </header>
+  )
+}
+
+export const ListSortHeader = ({
+  title,
+  description,
+  handleSave,
+  handleCancel,
+}) => {
+  return (
+    <header className={cx(savesHeaderStyle, listHeaderStyles, 'list-individual')}>
+      <div className="headline">
+        <h1 className="pageTitle" data-cy="page-title">
+          {title}
+        </h1>
+        <p className="description">{description}</p>
+      </div>
+
+      <div className="create-reorder">
+        <button onClick={handleSave} className="tiny save">
+          <SortOrderIcon /> Save Order
+        </button>
+
+        <button onClick={handleCancel} className="tiny outline cancel">
+          Cancel
         </button>
       </div>
     </header>

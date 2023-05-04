@@ -19,7 +19,7 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
 
   useEffect(() => {
     if (inListsExperiment) dispatch(getAllListsAction())
-  }, [dispatch, inListsExperiment])  
+  }, [dispatch, inListsExperiment])
 
   const trackMenuClick = (label) => dispatch(sendSnowplowEvent('side-nav', { label }))
   const handleCreateList = () => {
@@ -27,7 +27,7 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
     dispatch(mutateListCreate())
   }
 
-  const isDisabled = appMode === 'bulk'
+  const isDisabled = appMode === 'bulk' || appMode === 'reorder'
 
   const pinTypes = {
     home: pinnedTopics,

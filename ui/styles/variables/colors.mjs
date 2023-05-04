@@ -322,6 +322,11 @@ const forms = {
 
 /** Raised Colors (menus, modals, etc) */
 const raised = {
+  activeCanvas: {
+    light: '#F9F9FB',
+    dark: _colorPalette.grey20,
+    sepia: '#FFF4DE'
+  },
   popoverCanvas: {
     light: _colorPalette.white100,
     dark: _colorPalette.grey20,

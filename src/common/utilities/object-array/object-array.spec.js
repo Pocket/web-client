@@ -2,6 +2,7 @@ import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object-array'
 import { arraysAreEqual } from 'common/utilities/object-array/object-array'
 import { existsInArray } from 'common/utilities/object-array/object-array'
+import { reorderArray } from 'common/utilities/object-array/object-array'
 
 describe('arrayToObject', () => {
   const arrayOfObjects = [
@@ -114,5 +115,47 @@ describe('existsInArray', () => {
   it(`returns true if the value exists in the array (cases don't match)`, () => {
     const unEqualArrays = existsInArray(stringArray, 'TWO')
     expect(unEqualArrays).toBeTruthy()
+  })
+})
+
+describe('reorderArray', () => {
+  const startingList = ['a', 'b', 'c', 'd']
+
+  it('should reorder the given list when startIndex is less than endIndex', () => {
+    const startIndex = 1
+    const endIndex = 3
+    const expected = ['a', 'c', 'd', 'b']
+
+    const result = reorderArray(startingList, startIndex, endIndex)
+
+    expect(result).toEqual(expected)
+  })
+
+  it('should reorder the given list when startIndex is greater than endIndex', () => {
+    const startIndex = 3
+    const endIndex = 1
+    const expected = ['a', 'd', 'b', 'c']
+
+    const result = reorderArray(startingList, startIndex, endIndex)
+
+    expect(result).toEqual(expected)
+  })
+
+  it('should not modify the given list when startIndex and endIndex are equal', () => {
+    const startIndex = 2
+    const endIndex = 2
+
+    const result = reorderArray(startingList, startIndex, endIndex)
+
+    expect(result).toEqual(startingList)
+  })
+
+  it('should not modify the given list when startIndex or endIndex are out of bounds', () => {
+    const startIndex = -1
+    const endIndex = 4
+
+    const result = reorderArray(startingList, startIndex, endIndex)
+
+    expect(result).toEqual(startingList)
   })
 })

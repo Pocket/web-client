@@ -1,3 +1,33 @@
+## [1.92.2](https://github.com/Pocket/web-client/compare/v1.92.1...v1.92.2) (2023-05-04)
+
+
+### Bug Fixes
+
+* **lists:** fixing list header issue caused by rebase and conflicts ([4d985c0](https://github.com/Pocket/web-client/commit/4d985c0fa8ce054521d70ec5db46046671544c5b))
+
+## [1.92.1](https://github.com/Pocket/web-client/compare/v1.92.0...v1.92.1) (2023-05-04)
+
+
+### Bug Fixes
+
+* **lists:** remove merge conflict ([49cdd11](https://github.com/Pocket/web-client/commit/49cdd11d76829b77b0ba309056b0398e4ba8e031))
+
+# [1.92.0](https://github.com/Pocket/web-client/compare/v1.91.3...v1.92.0) (2023-05-04)
+
+
+### Bug Fixes
+
+* **list:** remove unneeded css styles for save button ([41dc15b](https://github.com/Pocket/web-client/commit/41dc15bd03a44ae2ab9ac38664fdd645f540c291))
+* **lists:** breaking reorder into reusable component ([a9c46f1](https://github.com/Pocket/web-client/commit/a9c46f176c306f0c85a3a085bf0c1f73139be86a))
+* **reorder:** cleanup reorder lists header styles ([153783a](https://github.com/Pocket/web-client/commit/153783ab8bbb4db075ecf0ce478699b643c6edbb))
+* **reorder:** tweaks for keyboard navigation reorder ([d31b125](https://github.com/Pocket/web-client/commit/d31b1251bf11f7c86981c393bc6acf93945fe9cd))
+* **reorder:** update reorder storybook to comply with lint ([24a5c29](https://github.com/Pocket/web-client/commit/24a5c2919ce0540f534df7a3374fb181119d9b7c))
+
+
+### Features
+
+* **lists:** add ui for reordering list items ([0153e29](https://github.com/Pocket/web-client/commit/0153e2923d8e1557b7772314e7ae1fde263bd342))
+
 ## [1.91.3](https://github.com/Pocket/web-client/compare/v1.91.2...v1.91.3) (2023-05-04)
 
 
