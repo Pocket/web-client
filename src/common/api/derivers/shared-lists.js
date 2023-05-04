@@ -96,5 +96,8 @@ function deriveList(list, listId, listItems) {
 function decodeSpecialChars(string) {
   const GT_ENCODED = '&gt;'; // >
   const LT_ENCODED = '&lt;'; // <
+
+  if (!string) return string
+
   return string.replaceAll(GT_ENCODED, '>').replaceAll(LT_ENCODED, '<')
 }
