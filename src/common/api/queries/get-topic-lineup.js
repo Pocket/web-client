@@ -2,7 +2,7 @@ import { requestGQL } from 'common/utilities/request/request'
 import { TOPICS_BY_NAME } from 'common/constants'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 import { processLineup } from 'common/api/derivers/lineups'
-import { gql } from 'graphql-request'
+import { gql } from 'common/utilities/gql/gql'
 
 const getTopicLineupQuery = gql`
   query GetTopicLineup($id: String!, $recommendationCount: Int, $slateCount: Int) {

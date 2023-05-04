@@ -1,6 +1,6 @@
 import { requestGQL } from 'common/utilities/request/request'
 import * as Sentry from '@sentry/nextjs'
-import { gql } from 'graphql-request'
+import { gql } from 'common/utilities/gql/gql'
 import { processAllList } from 'common/api/derivers/shared-lists'
 
 const getShareableListsQuery = gql`

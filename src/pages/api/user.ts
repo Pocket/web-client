@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { gql } from 'graphql-request'
+import { gql } from 'common/utilities/gql/gql'
 import * as Sentry from '@sentry/nextjs'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

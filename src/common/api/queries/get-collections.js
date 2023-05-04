@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request'
+import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
 import { deriveCollection } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
@@ -122,6 +122,3 @@ class CollectionsRequestEmptyError extends Error {
     this.name = 'CollectionsRequestEmptyError'
   }
 }
-
-
-

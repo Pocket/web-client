@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request'
+import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 import { deriveCollection, deriveStory } from 'common/api/derivers/item'
@@ -81,7 +81,7 @@ function handleResponse(response, slug) {
 
     // const stories = validStories
     const storiesById = arrayToObject(derivedStories, 'itemId')
-    const storyIds = derivedStories.map(i => i.itemId)
+    const storyIds = derivedStories.map((i) => i.itemId)
     const storyIdsBySlug = { [derivedCollection?.slug]: storyIds }
 
     return { itemsById: { ...derivedCollectionBySlug, ...storiesById }, storyIdsBySlug }

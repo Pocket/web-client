@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request'
+import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
 
 const itemsTagsAddQuery = gql`

@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request'
+import { gql } from 'common/utilities/gql/gql'
 import * as Sentry from '@sentry/nextjs'
 import { requestGQL } from 'common/utilities/request/request'
 
@@ -14,7 +14,13 @@ const updateShareableListQuery = gql`
     }
   }
 `
-export function updateShareableList({ title, description, externalId, status, listItemNoteVisibility }) {
+export function updateShareableList({
+  title,
+  description,
+  externalId,
+  status,
+  listItemNoteVisibility
+}) {
   const data = {
     description,
     externalId,

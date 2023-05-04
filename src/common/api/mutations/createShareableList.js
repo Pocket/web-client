@@ -1,10 +1,13 @@
-import { gql } from 'graphql-request'
+import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
 import { processAllList } from 'common/api/derivers/shared-lists'
 import * as Sentry from '@sentry/nextjs'
 
 const createShareableListQuery = gql`
-  mutation CreateShareableList($listData: CreateShareableListInput!, $listItemData: CreateShareableListItemWithList) {
+  mutation CreateShareableList(
+    $listData: CreateShareableListInput!
+    $listItemData: CreateShareableListItemWithList
+  ) {
     createShareableList(listData: $listData, listItemData: $listItemData) {
       title
       status

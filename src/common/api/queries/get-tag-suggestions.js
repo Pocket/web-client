@@ -1,5 +1,5 @@
 import { requestGQL } from 'common/utilities/request/request'
-import { gql } from 'graphql-request'
+import { gql } from 'common/utilities/gql/gql'
 
 const getTagSuggestionByIdQuery = gql`
   query SavedItemById($savedItemByIdId: ID!) {

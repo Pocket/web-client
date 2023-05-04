@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request'
+import { gql } from 'common/utilities/gql/gql'
 
 export const FRAGMENT_ITEM = gql`
   fragment ItemDetails on Item {

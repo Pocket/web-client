@@ -1,5 +1,5 @@
 import { requestGQL } from 'common/utilities/request/request'
-import { gql } from 'graphql-request'
+import { gql } from 'common/utilities/gql/gql'
 
 const slateIds = {
   business: 'af2cc2c0-1286-47a3-b8ce-187b905f94af',
