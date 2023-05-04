@@ -39,14 +39,14 @@ export const ListStatusToggle = ({ status, handleSetStatus }) => {
 
   const statusRef = useRef(null)
 
-  const handleSetPrivate = () => handleSetStatus('PRIVATE')
-  const handleSetPublic = () => handleSetStatus('PUBLIC')
+  const handleSetPrivate = () => handleSetStatus({status: 'PRIVATE'})
+  const handleSetPublic = () => handleSetStatus({status: 'PUBLIC'})
 
   const publicIcon = (status === 'PUBLIC') ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
   const privateIcon = (status === 'PRIVATE') ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
 
   return (
-    <div>
+    <>
       <button
         ref={statusRef}
         className={cx("tiny", "outline", buttonStyles, status)}
@@ -64,7 +64,7 @@ export const ListStatusToggle = ({ status, handleSetStatus }) => {
         screenReaderLabel="Update List Status"
         appRootSelector={appRootSelector}
         popperOptions={{
-          placement: 'bottom-end',
+          placement: 'bottom-start',
           modifiers: [
             {
               name: 'offset',
@@ -87,6 +87,6 @@ export const ListStatusToggle = ({ status, handleSetStatus }) => {
           Public List
         </PopupMenuItem>
       </PopupMenu>
-    </div>
+    </>
   )
 }

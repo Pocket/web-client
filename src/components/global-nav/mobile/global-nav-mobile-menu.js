@@ -71,6 +71,10 @@ const listStyle = css`
     &.selected {
       background-color: var(--color-navCurrentTab); /* needs alpha */
       color: var(--color-navCurrentTabText);
+      .badge {
+        background: var(--color-white100);
+        border-color: var(--color-white100);
+      }
     }
 
     &.disabled,
@@ -97,6 +101,18 @@ const listStyle = css`
       height: var(--size150);
       margin-right: var(--spacing075);
       margin-top: -1px;
+    }
+
+    .badge {
+      margin: 0 16px 0 auto;
+      padding: 2px 8px;
+      background: var(--color-teal100);
+      border: 1px solid var(--color-teal100);
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--color-teal50);
     }
   }
 
@@ -135,7 +151,7 @@ const iconStyle = css`
 `
 
 export const MobileLink = ({
-  link: { name, isDisabled = false, url, icon, label, id },
+  link: { name, isDisabled = false, url, icon, label, id, newLabel = false },
   isSelected,
   handleClick
 }) => (
@@ -149,6 +165,7 @@ export const MobileLink = ({
         }}>
         {icon ? icon : null}
         {label}
+        {newLabel ? <span className='badge'>New</span> : null}
       </a>
     </Link>
   </li>
@@ -205,10 +222,12 @@ export const Menu = ({
     })}
     {subLinks
       ? subLinks.map((link) => {
+          const isSelected = link.name === selectedLink
           const key = `global-nav-mobile-menu-${link?.name}`
           return link.url ? (
             <MobileLink
               link={link}
+              isSelected={isSelected}
               handleClick={(event) => {
                 handleClick(event, link.name, link.url)
               }}

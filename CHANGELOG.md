@@ -1,3 +1,38 @@
+## [1.91.3](https://github.com/Pocket/web-client/compare/v1.91.2...v1.91.3) (2023-05-04)
+
+
+### Bug Fixes
+
+* **getShareableListsQuery:** add listItemNoteVisibility ([bfe2f8e](https://github.com/Pocket/web-client/commit/bfe2f8e966b473683747638475f9ad4501f39d37))
+* **handleSetStatus:** update to include listItemNoteVisibility ([cc44cf3](https://github.com/Pocket/web-client/commit/cc44cf3ae3d9dc767639724485cdc1fce63b64a8))
+* **listHeaderStyles:** remove margin-right on the last button ([4f7a516](https://github.com/Pocket/web-client/commit/4f7a5164a75581406d8796bccc447de970b4810d))
+* **listHeaderStyles:** remove unneeded style ([d64fddd](https://github.com/Pocket/web-client/commit/d64fddd24f11fc3306827538e6cc85ec22290e48))
+* **listHeaderStyles:** scope the layout changes to the individual list page ([5e63d5c](https://github.com/Pocket/web-client/commit/5e63d5cad2931d44022dde5044e5aa892952660f))
+* **ListIndividual:** pass listItemNoteVisibility down ([b7cd184](https://github.com/Pocket/web-client/commit/b7cd184b6ef4c15d35fbb1f0b934ba5a4dec5214))
+* **lists-header:** add flex wrap for smaller screen sizes ([7aa4d29](https://github.com/Pocket/web-client/commit/7aa4d29dbad55a863f68892554cb6225f733d225))
+* **lists:** show new visibility options when in lists.dev feature flag ([a0d00ea](https://github.com/Pocket/web-client/commit/a0d00eabcdca60064d33f0233f0f546c83603589))
+* **ListStatusToggle:** add loading state to dropdown ([12da904](https://github.com/Pocket/web-client/commit/12da9044cd0d9d7be535ef757818cdc9c371f246))
+* **ListStatusToggle:** styling ([f170840](https://github.com/Pocket/web-client/commit/f17084078a02abc143acb1206e3c6644889f0408))
+* **ListStatusToggle:** update css per design review ([4bc1127](https://github.com/Pocket/web-client/commit/4bc1127e29b75cc0dcb5b75cf67e2a2b8e21b9ac))
+* **ListStatusToggle:** update dropdown to include new mixed state ([90d3e7a](https://github.com/Pocket/web-client/commit/90d3e7aa50d6f9247e94178eb9e8641c87f12903))
+* **ListStatusToggle:** update placement of the dropdown ([acd8af4](https://github.com/Pocket/web-client/commit/acd8af43dce40f4ab4ff2d54372b3fc112c51595))
+* **ListStatusToggle:** update styling ([897f742](https://github.com/Pocket/web-client/commit/897f742505b3ef200c29921d9a8b09a1b311abf7))
+* **ListStatusToggle:** wrap text in translation ([b26025c](https://github.com/Pocket/web-client/commit/b26025c79a29cc947d5fdf190861b076ccff05ea))
+* **updateShareableListQuery:** add listItemNoteVisibility ([2ae9e8a](https://github.com/Pocket/web-client/commit/2ae9e8aa6b6f75aee820a31219eddf025e11b47b))
+* **VisibilityDropdown:** swap out icon ([662a5a4](https://github.com/Pocket/web-client/commit/662a5a488b00650d2b11e84f0d9a2bcf405db426))
+* **VisibilityOptions:** account for long titles and small screens ([0d87343](https://github.com/Pocket/web-client/commit/0d87343e3c05196029c1057a97bcbe1cc0d1b7af))
+* **VisibilityOptions:** extract Dropdown into separate component ([f1bd08d](https://github.com/Pocket/web-client/commit/f1bd08d7f213e14c16f4730f983738ecad0bcb27))
+
+## [1.91.2](https://github.com/Pocket/web-client/compare/v1.91.1...v1.91.2) (2023-05-03)
+
+
+### Bug Fixes
+
+* **lists:** add onboarding callouts to mobile nav ([5131db1](https://github.com/Pocket/web-client/commit/5131db1c7114beba5b16d97523c183346b7eeeb7))
+* **lists:** anthony's way of detecting to show new ([38d7961](https://github.com/Pocket/web-client/commit/38d79617d40f5688db98ad3bf0454c30acce7d2a))
+* **lists:** fix mobile nav items are not being highlighted when active ([5c6b5d1](https://github.com/Pocket/web-client/commit/5c6b5d1ad529ce235752515f1e2aa344fca08fa8))
+* **lists:** fix tags nav item not being selected ([5eaf43f](https://github.com/Pocket/web-client/commit/5eaf43ff06bddc78ec57583d1735a0c0bdbda455))
+
 ## [1.91.1](https://github.com/Pocket/web-client/compare/v1.91.0...v1.91.1) (2023-04-26)
 
 

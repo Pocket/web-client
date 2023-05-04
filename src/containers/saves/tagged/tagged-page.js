@@ -28,7 +28,7 @@ export default function TagsPage(props) {
   }, [dispatch])
 
   return (
-    <Layout title={metaData.title} metaData={metaData}>
+    <Layout title={metaData.title} metaData={metaData} selectedNavLink="tags">
       <SideNav type="saves" subset={subset} isLoggedIn={isLoggedIn} />
 
       {shouldRender ? (

@@ -10,6 +10,7 @@ const getShareableListsQuery = gql`
       description
       status
       slug
+      listItemNoteVisibility
       createdAt
       updatedAt
       moderationStatus
