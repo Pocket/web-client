@@ -14,7 +14,7 @@ export default function getBrazeToken(req, res) {
     exp: Math.floor(Date.now() / 1000) + expiration
   }
 
-  const options = !isDev ? { algorithm: 'RS256' } : null
+  const options = !isDev ? { algorithm: 'RS256', allowInsecureKeySizes: true } : null
 
   const token = jwt.sign(payload, privateKey, options)
 
