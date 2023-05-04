@@ -27,15 +27,9 @@ export const ListIndividual = () => {
     if (enrolled) dispatch(getIndividualListAction(id))
   }, [dispatch, id, enrolled])
 
-<<<<<<< HEAD
   const toggleSort = (shouldReorder) => {
     const mode = shouldReorder ? 'reorder' : 'default'
     setReorder(shouldReorder)
-=======
-  const toggleSort = (status) => {
-    const mode = status ? 'reorder' : 'default'
-    setReorder(status)
->>>>>>> 3a769e4a (fix(lists): breaking reorder into reusable component)
     dispatch(appSetMode(mode))
   }
 
