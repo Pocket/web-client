@@ -1,3 +1,13 @@
+## [1.91.2](https://github.com/Pocket/web-client/compare/v1.91.1...v1.91.2) (2023-05-03)
+
+
+### Bug Fixes
+
+* **lists:** add onboarding callouts to mobile nav ([5131db1](https://github.com/Pocket/web-client/commit/5131db1c7114beba5b16d97523c183346b7eeeb7))
+* **lists:** anthony's way of detecting to show new ([38d7961](https://github.com/Pocket/web-client/commit/38d79617d40f5688db98ad3bf0454c30acce7d2a))
+* **lists:** fix mobile nav items are not being highlighted when active ([5c6b5d1](https://github.com/Pocket/web-client/commit/5c6b5d1ad529ce235752515f1e2aa344fca08fa8))
+* **lists:** fix tags nav item not being selected ([5eaf43f](https://github.com/Pocket/web-client/commit/5eaf43ff06bddc78ec57583d1735a0c0bdbda455))
+
 ## [1.91.1](https://github.com/Pocket/web-client/compare/v1.91.0...v1.91.1) (2023-04-26)
 
 
