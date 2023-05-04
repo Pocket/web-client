@@ -183,14 +183,13 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
 }
 
 export const ListIndividualHeader = ({
-  listsDev,
+  inListsDev,
   title,
   description,
   externalId,
   slug,
   status,
   listItemNoteVisibility,
-  inListsDev,
   handleSetStatus,
   handleShare,
   handleEdit,
@@ -243,7 +242,7 @@ export const ListIndividualHeader = ({
           <FiltersAltIcon /> Settings
         </button>
 
-        {listsDev ? (
+        {inListsDev ? (
           <button onClick={handleSort} className="sort tiny outline">
             <SortOrderIcon /> Reorder
           </button>

@@ -13,7 +13,7 @@ export const ListContent = ({ id, toggleSort }) => {
 
   const list = useSelector((state) => state.listsDisplay[id])
   const featureState = useSelector((state) => state.features)
-  const listsDev = featureFlagActive({ flag: 'lists.dev', featureState })
+  const inListsDev = featureFlagActive({ flag: 'lists.dev', featureState })
 
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
@@ -25,6 +25,7 @@ export const ListContent = ({ id, toggleSort }) => {
     slug,
     status,
     listItemIds,
+    listItemNoteVisibility,
     analyticsData: passedAnalytics
   } = list
   const showPlaceholder = listItemIds?.length === 0
@@ -34,13 +35,14 @@ export const ListContent = ({ id, toggleSort }) => {
     title,
     description,
     status,
-    slug
+    slug,
+    listItemNoteVisibility
   }
 
   // Actions
-  const handleSetStatus = (val) => {
-    dispatch(sendSnowplowEvent('shareable-list.status.update', { ...analyticsData, status: val }))
-    dispatch(mutateListStatusAction({ id, status: val }))
+  const handleSetStatus = ({ status, listItemNoteVisibility }) => {
+    dispatch(sendSnowplowEvent('shareable-list.status.update', { ...analyticsData, status }))
+    dispatch(mutateListStatusAction({ id, status, listItemNoteVisibility }))
   }
   const handleShare = () => {
     dispatch(sendSnowplowEvent('shareable-list.share', analyticsData))
@@ -67,12 +69,13 @@ export const ListContent = ({ id, toggleSort }) => {
   return shouldRender ? (
     <main className="main">
       <ListIndividualHeader
-        listsDev={listsDev}
+        inListsDev={inListsDev}
         title={title}
         description={description}
         status={status}
         externalId={id}
         slug={slug}
+        listItemNoteVisibility={listItemNoteVisibility}
         handleSetStatus={handleSetStatus}
         handleShare={handleShare}
         handleEdit={handleEdit}
