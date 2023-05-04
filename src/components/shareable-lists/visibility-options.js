@@ -16,7 +16,7 @@ const VisibilityDropdown = ({visibilityStatus}) => {
     case 'isPrivate':
       return <><LockIcon /> {t('list:private-button-title', 'Private')} </>
     case 'isMixed': 
-      return <><LockIcon /> {t('list:mixed-button-title', 'Public')} </>
+      return <><GlobeIcon /> {t('list:mixed-button-title', 'Public')} </>
     case 'isPublic': 
       return <><GlobeIcon /> {t('list:public-title', 'Public List & Notes')} </>
     default:
