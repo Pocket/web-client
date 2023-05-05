@@ -56,6 +56,8 @@ import { LIST_UPDATE_SUCCESS } from 'actions'
 import { LIST_UPDATE_FAILURE } from 'actions'
 import { LIST_DELETE_SUCCESS } from 'actions'
 import { LIST_DELETE_FAILURE } from 'actions'
+import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
+import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
 
 const toastWrapper = css`
   text-align: left;
@@ -177,7 +179,9 @@ export function Toast({
     [LIST_UPDATE_SUCCESS]: 'List updated',
     [LIST_UPDATE_FAILURE]: 'Error updating list',
     [LIST_DELETE_SUCCESS]: 'List deleted',
-    [LIST_DELETE_FAILURE]: 'Error deleting list'
+    [LIST_DELETE_FAILURE]: 'Error deleting list',
+    [LIST_ITEMS_REORDER_SUCCESS]: 'List updated',
+    [LIST_ITEMS_REORDER_FAILURE]: 'Error updating list'
   }
 
   const errors = [
@@ -188,7 +192,8 @@ export function Toast({
     LIST_ADD_ITEM_FAILURE,
     LIST_DELETE_ITEM_FAILURE,
     LIST_UPDATE_FAILURE,
-    LIST_DELETE_FAILURE
+    LIST_DELETE_FAILURE,
+    LIST_ITEMS_REORDER_FAILURE
   ]
 
   const [show, setShow] = useState(false)

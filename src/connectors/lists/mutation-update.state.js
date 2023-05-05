@@ -1,6 +1,8 @@
 import { put, takeLatest, take, race, call, select } from 'redux-saga/effects'
 import { updateShareableList } from 'common/api/mutations/updateShareableList'
+import { updateShareableListItems } from 'common/api/mutations/updateShareableListItems'
 import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object-array'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 import { LIST_UPDATE_REQUEST } from 'actions'
 import { LIST_UPDATE_CONFIRM } from 'actions'
@@ -12,6 +14,10 @@ import { LIST_UPDATE_STATUS_REQUEST } from 'actions'
 import { LIST_UPDATE_STATUS_SUCCESS } from 'actions'
 import { LIST_UPDATE_STATUS_FAILURE } from 'actions'
 
+import { LIST_ITEMS_REORDER_REQUEST } from 'actions'
+import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
+import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
+
 import { LIST_ITEMS_SUCCESS } from 'actions'
 
 /** ACTIONS
@@ -20,6 +26,8 @@ export const mutateListUpdateAction = (id) => ({ type: LIST_UPDATE_REQUEST, id }
 export const mutateListUpdateCancel = () => ({ type: LIST_UPDATE_CANCEL })
 export const mutateListUpdateConfirm = ({ title, description }) => ({ type: LIST_UPDATE_CONFIRM, title, description })
 export const mutateListStatusAction = ({ id, status, listItemNoteVisibility }) => ({ type: LIST_UPDATE_STATUS_REQUEST, id, status, listItemNoteVisibility })
+
+export const mutateReorderListItems = ({ id, items }) => ({ type: LIST_ITEMS_REORDER_REQUEST, id, items })
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -52,8 +60,13 @@ export const mutationListUpdateReducers = (state = initialState, action) => {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const mutationListUpdateSagas = [
   takeLatest(LIST_UPDATE_REQUEST, listUpdate),
-  takeLatest(LIST_UPDATE_STATUS_REQUEST, listUpdateStatus)
+  takeLatest(LIST_UPDATE_STATUS_REQUEST, listUpdateStatus),
+  takeLatest(LIST_ITEMS_REORDER_REQUEST, listItemsReorder)
 ]
+
+/** SAGA :: SELECTORS
+ --------------------------------------------------------------- */
+ const getListItemIds = (state, id) => state.listsDisplay[id]?.listItemIds
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -100,5 +113,33 @@ function* listUpdateStatus({ id, status, listItemNoteVisibility }) {
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
   } catch (error) {
     yield put({ type: LIST_UPDATE_STATUS_FAILURE, error })
+  }
+}
+
+function* listItemsReorder({ id, items }) {
+  // keeping track of this in case there's an error and we need to
+  // revert the id to the original order
+  const oldIdOrder = yield select(getListItemIds, id)
+
+  try {
+    // this optimistic update prevents a flash of unordered content
+    const tempUpdate = { [id]: { listItemIds: items } }
+    yield put({ type: LIST_ITEMS_SUCCESS, itemsById: tempUpdate })
+
+    // builds the data object, results in an array: [{ externalId, sortOrder }]
+    const data = items.map((externalId, index) => ({ externalId, sortOrder: index + 1 }))
+
+    // submits the reordered list
+    const response = yield call(updateShareableListItems, data)
+    yield put({ type: LIST_ITEMS_REORDER_SUCCESS })
+
+    // stores the updated sortOrder value
+    const itemsById = arrayToObject(response, 'externalId')
+    yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
+  } catch (error) {
+    // reverts to old order
+    const itemsById = { [id]: { listItemIds: oldIdOrder } }
+    yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
+    yield put({ type: LIST_ITEMS_REORDER_FAILURE, error })
   }
 }

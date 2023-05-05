@@ -4,6 +4,7 @@ import { ReorderList } from 'components/reorder/reorder'
 import { ReorderItem } from 'components/reorder/reorder'
 import { ListSortHeader } from 'components/headers/lists-header'
 import { IndividualListReorderCard } from 'connectors/lists/individual-list.reorder.card'
+import { mutateReorderListItems } from 'connectors/lists/mutation-update.state'
 
 export const ListReorder = ({ id, toggleSort }) => {
   const dispatch = useDispatch()
@@ -12,7 +13,7 @@ export const ListReorder = ({ id, toggleSort }) => {
   const [items, setItems] = useState(listItemIds)
 
   const handleSave = () => {
-    // dispatch(saveListOrderAction(items))
+    dispatch(mutateReorderListItems({ id, items }))
     // dispatch(sendSnowplowEvent('shareable-list.sort.save', analyticsData??))
     toggleSort(false)
   }

@@ -34,7 +34,8 @@ import { LIST_UPDATE_SUCCESS } from 'actions'
 import { LIST_UPDATE_FAILURE } from 'actions'
 import { LIST_DELETE_SUCCESS } from 'actions'
 import { LIST_DELETE_FAILURE } from 'actions'
-
+import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
+import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -89,6 +90,8 @@ export const actionToastsReducers = (state = initialState, action) => {
     case LIST_UPDATE_FAILURE:
     case LIST_DELETE_SUCCESS:
     case LIST_DELETE_FAILURE:
+    case LIST_ITEMS_REORDER_SUCCESS:
+    case LIST_ITEMS_REORDER_FAILURE:
     case COPY_ITEM_URL: {
       const { actions, count, actionType = false } = action
       const itemCount = actions ? actions?.length : count

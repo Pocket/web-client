@@ -1,15 +1,28 @@
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+// Libraries
+import { ReactNode } from 'react'
 import { css, cx } from 'linaria'
+import { DragDropContext, Droppable, DroppableProvided, DroppableStateSnapshot } from 'react-beautiful-dnd'
+import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
+
+// Dependencies
 import { reorderArray } from 'common/utilities/object-array/object-array'
 
-const itemStyles = css`
-  user-select: none;
-  cursor: grabbing;
+/**
+ * ReorderList
+ * Allow users to reorder a list of items through drag and drop.
+ *
+ */
+interface ListItem {
+  id: string;
+}
 
-  &.isDragging {
-    cursor: grabbing;
-  }
-`
+interface ReorderListProps {
+  id?: string;
+  listItems: ListItem[];
+  updateList: (listItems: ListItem[]) => void;
+  className?: string;
+  children: ReactNode;
+}
 
 export const ReorderList = ({
   id = 'droppable',
@@ -17,8 +30,9 @@ export const ReorderList = ({
   updateList,
   className,
   children
-}) => {
-  const handleOnDragEnd = (result) => {
+}: ReorderListProps) => {
+
+  const handleOnDragEnd = (result: object) => {
     // dropped outside the list
     if (!result.destination) return
 
@@ -34,7 +48,7 @@ export const ReorderList = ({
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId={id}>
-        {(provided, snapshot) => (
+        {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
@@ -49,15 +63,28 @@ export const ReorderList = ({
   )
 }
 
+/**
+ * ReorderItem
+ * A child component of ReorderList and represents an individual item within the list.
+ *
+ */
+
+interface ReorderItemProps {
+  id: string;
+  index: number;
+  className?: string;
+  children: ReactNode;
+}
+
 export const ReorderItem = ({
   id,
   index,
   className,
   children
-}) => {
+}: ReorderItemProps) => {
   return (
     <Draggable key={id} draggableId={id} index={index}>
-      {(provided, snapshot) => (
+      {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
@@ -70,3 +97,15 @@ export const ReorderItem = ({
     </Draggable>
   )
 }
+
+/**
+ * COMPONENT STYLES
+ * -------------------------------------------------------------------------- */
+const itemStyles = css`
+  user-select: none;
+  cursor: grabbing;
+
+  &.isDragging {
+    cursor: grabbing;
+  }
+`;
