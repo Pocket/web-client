@@ -41,7 +41,7 @@ export function FiltersSideNav({
               <AddIcon className={bottomTooltip} data-tooltip="Create List" />
             </button>
           </div>
-          <Link href="/lists">
+          <Link href="/lists" legacyBehavior>
             <button
               className={subActive('lists')}
               onClick={clickEvent}
@@ -49,12 +49,12 @@ export function FiltersSideNav({
               <ListViewAltIcon className="side-nav-icon inactive" />
               <ListViewAltFilledIcon className="side-nav-icon active" />
               All Lists
-              <span className='badge'>New</span>
+              <span className="badge">New</span>
             </button>
           </Link>
           {listNames.length
             ? listNames.map((title) => (
-                <Link href={`/lists/${recentLists[title]}`} key={recentLists[title]}>
+                <Link href={`/lists/${recentLists[title]}`} key={recentLists[title]} legacyBehavior>
                   <button
                     className={subActive(recentLists[title], true)}
                     onClick={clickEvent}
@@ -63,19 +63,19 @@ export function FiltersSideNav({
                   </button>
                 </Link>
               ))
-            : null}          
+            : null}
         </>
       ) : null}
 
       <h4 className={sideNavHeader}>{t('nav:filters', 'Filters')}</h4>
 
-      <Link href="/saves/archive">
+      <Link href="/saves/archive" legacyBehavior>
         <button className={subActive('archive')} onClick={clickEvent} data-cy="side-nav-archive">
           <ArchiveIcon className="side-nav-icon" /> {t('nav:archive', 'Archive')}
         </button>
       </Link>
 
-      <Link href="/saves/favorites">
+      <Link href="/saves/favorites" legacyBehavior>
         <button
           className={subActive('favorites')}
           onClick={clickEvent}
@@ -84,7 +84,7 @@ export function FiltersSideNav({
         </button>
       </Link>
 
-      <Link href="/saves/highlights">
+      <Link href="/saves/highlights" legacyBehavior>
         <button
           className={subActive('highlights')}
           onClick={clickEvent}
@@ -93,27 +93,27 @@ export function FiltersSideNav({
         </button>
       </Link>
 
-      <Link href="/saves/articles">
+      <Link href="/saves/articles" legacyBehavior>
         <button className={subActive('articles')} onClick={clickEvent} data-cy="side-nav-articles">
           <ArticleIcon className="side-nav-icon" /> {t('nav:articles', 'Articles')}
         </button>
       </Link>
 
-      <Link href="/saves/videos">
+      <Link href="/saves/videos" legacyBehavior>
         <button className={subActive('videos')} onClick={clickEvent} data-cy="side-nav-videos">
           <VideoIcon className="side-nav-icon" /> {t('nav:videos', 'Videos')}
         </button>
       </Link>
 
       <h4 className={sideNavHeader}>{t('nav:tags', 'Tags')}</h4>
-      <Link href="/saves/tags">
+      <Link href="/saves/tags" legacyBehavior>
         <button className={subActive('tag')} onClick={clickEvent} data-cy="side-nav-all-tags">
           <TagIcon className="side-nav-icon" /> {t('nav:all-tags', 'All Tags')}
         </button>
       </Link>
       {pinned.length
         ? pinned.map((tag) => (
-            <Link href={`/saves/tags/${encodeURIComponent(tag)}`} key={tag}>
+            <Link href={`/saves/tags/${encodeURIComponent(tag)}`} key={tag} legacyBehavior>
               <button
                 className={subActive(tag, true)}
                 onClick={clickEvent}

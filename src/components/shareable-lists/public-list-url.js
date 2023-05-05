@@ -52,8 +52,8 @@ export const PublicListUrl = ({ publicListInfo, handleCopyUrl, handleOpenUrl }) 
 
   return (
     <div className={cx(callout && 'callout', statusStyles)}>
-      <Link href={url}>
-        <a onClick={handleOpenUrl}>{linkDisplay}</a>
+      <Link href={url} onClick={handleOpenUrl}>
+        {linkDisplay}
       </Link>
       <button
         aria-label="Copy Link"

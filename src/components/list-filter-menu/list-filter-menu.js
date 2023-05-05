@@ -108,21 +108,21 @@ export function FilterMenu({ subset, filter, tag, query }) {
       {shown ? (
         <div className="filter-menu" ref={popBody}>
           <div>
-            <Link href={`/saves/${path}${searchQuery}`}>
+            <Link href={`/saves/${path}${searchQuery}`} legacyBehavior>
               <button className={filterActive()} data-cy="filter-all-items">
                 <Trans i18nKey="nav:all-items">All items</Trans>
               </button>
             </Link>
           </div>
           <div>
-            <Link href={`/saves/${path}/unread${searchQuery}`}>
+            <Link href={`/saves/${path}/unread${searchQuery}`} legacyBehavior>
               <button className={filterActive('unread')} data-cy="filter-saves">
                 <Trans i18nKey="nav:saves">Saves</Trans>
               </button>
             </Link>
           </div>
           <div>
-            <Link href={`/saves/${path}/archive${searchQuery}`}>
+            <Link href={`/saves/${path}/archive${searchQuery}`} legacyBehavior>
               <button className={filterActive('archive')} data-cy="filter-archive">
                 <Trans i18nKey="nav:archive">Archive</Trans>
               </button>
@@ -130,7 +130,7 @@ export function FilterMenu({ subset, filter, tag, query }) {
           </div>
           {path === 'favorites' || subset === 'search' ? null : (
             <div>
-              <Link href={`/saves/${path}/favorites`}>
+              <Link href={`/saves/${path}/favorites`} legacyBehavior>
                 <button className={filterActive('favorites')} data-cy="filter-favorites">
                   <Trans i18nKey="nav:favorites">Favorites</Trans>
                 </button>

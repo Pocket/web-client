@@ -140,20 +140,28 @@ export const CardMedia = function ({
   return (
     <div className={`${cardMediaStyles} media`}>
       {topic ? <div className="topic-name">{topic}</div> : null}
-      {isUserList ? <div className="user-list"><ListViewAltIcon /> List</div> : null}
+      {isUserList ? (
+        <div className="user-list">
+          <ListViewAltIcon /> List
+        </div>
+      ) : null}
       {openUrl ? (
-        <Link href={openUrl}>
-          <a tabIndex="-1" data-cy="image-link" onClick={onOpen} target={linkTarget} rel={linkRel}>
-            <MediaImage />
-            {openInNewTab ? (
-              <span className="view-original" data-cy="view-original">
-                <span className="view-original-text">
-                  {t('item-action:view-original', 'View Original')}
-                </span>
-                <NewViewIcon />
+        <Link
+          href={openUrl}
+          tabIndex="-1"
+          data-cy="image-link"
+          onClick={onOpen}
+          target={linkTarget}
+          rel={linkRel}>
+          <MediaImage />
+          {openInNewTab ? (
+            <span className="view-original" data-cy="view-original">
+              <span className="view-original-text">
+                {t('item-action:view-original', 'View Original')}
               </span>
-            ) : null}
-          </a>
+              <NewViewIcon />
+            </span>
+          ) : null}
         </Link>
       ) : (
         <span className="no-link">

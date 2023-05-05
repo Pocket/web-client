@@ -150,10 +150,8 @@ export const PopupMenuItem = ({
         {getContent()}
       </a>
     ) : (
-      <Link href={href}>
-        <a id={id} {...remaining}>
-          {getContent()}
-        </a>
+      <Link href={href} id={id} {...remaining}>
+        {getContent()}
       </Link>
     )
   }

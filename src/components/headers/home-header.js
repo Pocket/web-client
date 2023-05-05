@@ -112,8 +112,8 @@ const HomeMoreLink = ({ moreLinkUrl, moreLinkText, moreLinkClick }) => {
 
   if (moreLinkUrl) {
     return (
-      <Link href={moreLinkUrl}>
-        <a onClick={handleClick}>{moreLinkText}</a>
+      <Link href={moreLinkUrl} onClick={handleClick}>
+        {moreLinkText}
       </Link>
     )
   }

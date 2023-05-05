@@ -223,7 +223,7 @@ export function SideNav({
   return (
     <div className={wrapperClass} data-cy="side-nav">
       <nav role="navigation">
-        <Link href="/home?src=sidebar">
+        <Link href="/home?src=sidebar" legacyBehavior>
           <button
             ref={ref} // when ref offscreen, show "Return to top" button
             className={subActive('home')}
@@ -232,14 +232,14 @@ export function SideNav({
             <HomeIcon className="side-nav-icon" /> {t('nav:home', 'Home')}
           </button>
         </Link>
-        <Link href="/saves?src=sidebar">
+        <Link href="/saves?src=sidebar" legacyBehavior>
           <button className={subActive('unread')} onClick={clickEvent} data-cy="side-nav-saves">
             <SaveIcon className="side-nav-icon inactive" />
             <SaveFilledIcon className="side-nav-icon active" />
             {t('nav:saves', 'Saves')}
           </button>
         </Link>
-        <Link href="/explore?src=sidebar">
+        <Link href="/explore?src=sidebar" legacyBehavior>
           <button
             className={subActive('discover')}
             onClick={clickEvent}
@@ -247,7 +247,7 @@ export function SideNav({
             <DiscoverIcon className="side-nav-icon" /> {t('nav:discover', 'Discover')}
           </button>
         </Link>
-        <Link href="/collections?src=sidebar">
+        <Link href="/collections?src=sidebar" legacyBehavior>
           <button
             className={subActive('collections')}
             onClick={clickEvent}

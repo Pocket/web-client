@@ -128,11 +128,9 @@ export const Pagination = ({
           </button>
         ) : (
           <Link href={backLink}>
-            <a>
-              <button className="pagination">
-                <ChevronLeftIcon className="" />
-              </button>
-            </a>
+            <button className="pagination">
+              <ChevronLeftIcon className="" />
+            </button>
           </Link>
         )}
         {shownLinks}
@@ -142,11 +140,9 @@ export const Pagination = ({
           </button>
         ) : (
           <Link href={forwardLink}>
-            <a>
-              <button className="pagination">
-                <ChevronRightIcon className="" />
-              </button>
-            </a>
+            <button className="pagination">
+              <ChevronRightIcon className="" />
+            </button>
           </Link>
         )}
       </div>
@@ -160,9 +156,7 @@ const PageLink = ({ pagePattern, pageNumber, currentPage }) => {
   const href = pageNumber === 1 ? pagePattern : `${pagePattern}/page/${pageNumber}`
   return (
     <Link href={href}>
-      <a>
-        <button className={cx('pagination', buttonClass)}>{pageNumber}</button>
-      </a>
+      <button className={cx('pagination', buttonClass)}>{pageNumber}</button>
     </Link>
   )
 }

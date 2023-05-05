@@ -14,10 +14,8 @@ export const EmptyIndividualLists = ({ handleClick }) => {
     <div className={emptyStyles}>
       <img src={BorderSVG.src} alt="" />
       <p>Add items to your list. Go to Saves to get started.</p>
-      <Link href="/saves">
-        <a className="button outline" onClick={handleClick}>
-          Go to Saves
-        </a>
+      <Link href="/saves" className="button outline" onClick={handleClick}>
+        Go to Saves
       </Link>
     </div>
   )

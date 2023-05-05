@@ -176,17 +176,16 @@ export const Card = (props) => {
           <h2 className={cx('title', titleFlow && 'flow', openInNewTab && 'open-external')}>
             {openUrl ? (
               <>
-                <Link href={openUrl}>
-                  <a
-                    ref={linkRef}
-                    onClick={onOpen}
-                    data-cy="title-link"
-                    tabIndex={0}
-                    target={linkTarget}
-                    rel={linkRel}
-                    onFocus={handleFocus}>
-                    {title}
-                  </a>
+                <Link
+                  href={openUrl}
+                  ref={linkRef}
+                  onClick={onOpen}
+                  data-cy="title-link"
+                  tabIndex={0}
+                  target={linkTarget}
+                  rel={linkRel}
+                  onFocus={handleFocus}>
+                  {title}
                 </Link>
                 {openInNewTab ? (
                   <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
