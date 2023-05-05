@@ -3,6 +3,8 @@ import { updateShareableList } from 'common/api/mutations/updateShareableList'
 import { updateShareableListItems } from 'common/api/mutations/updateShareableListItems'
 import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object-array'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
+import { chunk } from 'common/utilities/object-array/object-array'
+import { BATCH_SIZE } from 'common/constants'
 
 import { LIST_UPDATE_REQUEST } from 'actions'
 import { LIST_UPDATE_CONFIRM } from 'actions'
@@ -129,13 +131,19 @@ function* listItemsReorder({ id, items }) {
 
     // builds the data object, results in an array: [{ externalId, sortOrder }]
     const data = items.map((externalId, index) => ({ externalId, sortOrder: index + 1 }))
+    const batches = yield chunk(data, BATCH_SIZE)
+    let totalResponses = {}
 
     // submits the reordered list
-    const response = yield call(updateShareableListItems, data)
+    for (let batch of batches) {
+      let response = yield call(updateShareableListItems, batch)
+      totalResponses = { ...totalResponses, ...response }
+    }
+xw
     yield put({ type: LIST_ITEMS_REORDER_SUCCESS })
 
     // stores the updated sortOrder value
-    const itemsById = arrayToObject(response, 'externalId')
+    const itemsById = arrayToObject(totalResponses, 'externalId')
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
   } catch (error) {
     // reverts to old order
