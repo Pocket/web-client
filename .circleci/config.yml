@@ -84,7 +84,7 @@ jobs:
           name: Run unit tests
           command: |
               TEST=$(circleci tests glob src/**/*.spec.js | circleci tests split --split-by=timings)
-              npm run test:ci $TEST
+              npm run test:ci $TEST -- -w=50%
       - run:
           command: cp junit.xml ~/junit/
           when: always
