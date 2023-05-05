@@ -32,7 +32,7 @@ export const ConfirmTagEdit = () => {
   const appRootSelector = '#__next'
 
   useEffect(() => {
-    if (tagToEdit === false) return
+    if (tagToEdit === false) return () => {} 
     setValue(tagToEdit)
   }, [tagToEdit])
 

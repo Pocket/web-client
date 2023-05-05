@@ -15,9 +15,9 @@ export function DevTools() {
 
   // Set up passed in assignments
   useEffect(() => {
-    if (!isReady || !flagsReady) return
+    if (!isReady || !flagsReady) return () => {}
 
-    if (!query['assign']) return
+    if (!query['assign']) return () => {}
     const assignments = Array.isArray(query['assign']) ? query['assign'] : [query['assign']]
 
     const isSticky = query['sticky'] === 'true'
@@ -25,10 +25,12 @@ export function DevTools() {
   }, [query, isReady, dispatch, flagsReady])
 
   useEffect(() => {
-    if (query['assign']) return // We don't want to do this if we are explicitly setting a test
+    // We don't want to do this if we are explicitly setting a test
+    if (query['assign']) return () => {}
     const { query_assignments } = parseCookies()
 
-    if (!query_assignments) return // No cookies? No problem, we good.
+    // No cookies? No problem, we good.
+    if (!query_assignments) return () => {}
 
     // Get the assignments from the cookies
     const assignments = JSON.parse(query_assignments)

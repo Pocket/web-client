@@ -55,14 +55,17 @@ export const SelectionPopover = ({ anchor, addAnnotation, disablePopup, shareIte
 
   useEffect(() => {
     const isClickOutside = (e) => {
-      if (e.button !== 0) return // only process left-click
+      // only process left-click
+      if (e.button !== 0) return () => {}
       if (!ref.current || !ref.current.contains(e.target)) {
         disablePopup()
       }
     }
 
     document.addEventListener('mousedown', isClickOutside)
-    return document.removeEventListener('mousedown', isClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', isClickOutside)
+    }
   }, [disablePopup])
 
   const onHighlight = () => {

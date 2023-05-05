@@ -26,6 +26,7 @@ export const HomeContent = () => {
   const hideTopics = ['de', 'de-DE'].includes(locale)
 
   useEffect(() => {
+    if (!flagsReady) return () => {} 
     dispatch(getHomeContent(locale))
   }, [dispatch, locale])
 

@@ -40,7 +40,7 @@ export function LoadMore({ loadMore }) {
 
   const loadMoreMessage = pageSavedIds.length ? 'Loading more items' : ''
   useEffect(() => {
-    if (!inView) return
+    if (!inView) return () => {} 
 
     // There are more items to load! Let's do it
     if (shouldLoadMore) loadMore()

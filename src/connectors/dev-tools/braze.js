@@ -12,7 +12,7 @@ export const BrazeTools = () => {
   const brazeToken = useSelector((state) => state.userBraze?.token)
 
   useEffect(() => {
-    if (!brazeInitialized) return
+    if (!brazeInitialized) return () => {} 
     import('common/utilities/braze/braze-lazy-load').then(
       ({ isPushBlocked, isPushPermissionGranted }) => {
         if (isPushBlocked()) setPushDenied(true)

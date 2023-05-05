@@ -110,7 +110,7 @@ export const Item = (props) => {
   // Fire when item is selected by shortcut
   // This allows us to keep shortcuts in sync with tab selection and in view
   useEffect(() => {
-    if (!linkRef.current) return
+    if (!linkRef.current) return () => {}
     const selectedAndNotActive = shortcutSelected && document.activeElement !== linkRef.current
     const notSelectedAndActive = !shortcutSelected && document.activeElement === linkRef.current
 

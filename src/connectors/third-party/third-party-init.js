@@ -50,9 +50,16 @@ export function ThirdPartyInit() {
   const brazeLabUser = featureFlagActive({ flag: 'lab.braze', featureState })
 
   useEffect(() => {
-    if (!user_id || !enableBraze) return // not logged in or opted out
-    if (brazeInitialized) return // braze already initialized
-    if (!brazeToken) return dispatch(fetchBrazeToken(user_id))
+    // not logged in or opted out
+    if (!user_id || !enableBraze) return () => {}
+
+    // braze already initialized
+    if (brazeInitialized) return () => {}
+
+    if (!brazeToken) {
+      dispatch(fetchBrazeToken(user_id))
+      return () => {}
+    }
 
     const version = process.env.RELEASE_VERSION || 'v.0.0.0'
     const showLogs = process.env.BRAZE_LOGS
@@ -61,7 +68,15 @@ export function ThirdPartyInit() {
     // lazy load braze SDK and then initialize it and call necessary functions
     // see https://github.com/braze-inc/braze-web-sdk/issues/117 for more details on why we need to lazy load
     import('common/utilities/braze/braze-lazy-load').then(
-      ({ isDisabled, enableSDK, initialize, automaticallyShowInAppMessages, changeUser, openSession, subscribeToSdkAuthenticationFailures }) => {
+      ({
+        isDisabled,
+        enableSDK,
+        initialize,
+        automaticallyShowInAppMessages,
+        changeUser,
+        openSession,
+        subscribeToSdkAuthenticationFailures
+      }) => {
         if (isDisabled()) enableSDK() // Was previously disabled, need to re-enable
         initialize(APIKey, {
           baseUrl: BRAZE_SDK_ENDPOINT,
@@ -89,19 +104,23 @@ export function ThirdPartyInit() {
   }, [enableBraze, prevBraze])
 
   useEffect(() => {
-    if (!brazeInitialized) return // braze not initialized
+    // braze not initialized
+    if (!brazeInitialized) return () => {}
 
     // tokens don't match! update braze SDK
     if (brazeToken !== prevBrazeToken) {
-      import('common/utilities/braze/braze-lazy-load').then(({ setSdkAuthenticationSignature }) => setSdkAuthenticationSignature(brazeToken))
+      import('common/utilities/braze/braze-lazy-load').then(({ setSdkAuthenticationSignature }) =>
+        setSdkAuthenticationSignature(brazeToken)
+      )
     }
   }, [brazeToken, prevBrazeToken, brazeInitialized])
 
   useEffect(() => {
     if (brazeLabUser && 'serviceWorker' in navigator) {
       navigator.serviceWorker.register('/service-worker.js').then(
-        (registration) => console.log('Service Worker registration successful with scope: ', registration.scope),
-        (err) => console.log('Service Worker registration failed: ', err)
+        (registration) =>
+          console.info('Service Worker registration successful with scope: ', registration.scope),
+        (err) => console.warn('Service Worker registration failed: ', err)
       )
     }
   }, [brazeLabUser])
@@ -123,8 +142,8 @@ export function ThirdPartyInit() {
 
   // Initialize Snowplow after OneTrust is ready
   useEffect(() => {
-    if (analyticsInit || !oneTrustReady) return
-    if (user_status === 'pending' || !sess_guid) return
+    if (analyticsInit || !oneTrustReady) return () => {}
+    if (user_status === 'pending' || !sess_guid) return () => {}
 
     const finalizeInit = () => dispatch(finalizeSnowplow())
     initializeSnowplow(user_id, sess_guid, analyticsCookie, finalizeInit)
@@ -136,14 +155,14 @@ export function ThirdPartyInit() {
 
   // Load Opt In Monster for marketing/conversion adventurers ... but not during dev
   useEffect(() => {
-    if (!isProduction) return
+    if (!isProduction) return () => {}
     loadOptinMonster()
   }, [isProduction])
 
   // Track Snowplow Page Views
   useEffect(() => {
-    if (user_status === 'pending') return
-    if (!analyticsInit) return
+    if (user_status === 'pending') return () => {}
+    if (!analyticsInit) return () => {}
 
     dispatch(trackPageView())
   }, [user_status, sess_guid, user_id, path, dispatch, analyticsInit])
