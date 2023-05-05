@@ -19,6 +19,7 @@ import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
 import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
 
 import { LIST_ITEMS_SUCCESS } from 'actions'
+import { LIST_ITEMS_UPDATE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -124,7 +125,7 @@ function* listItemsReorder({ id, items }) {
   try {
     // this optimistic update prevents a flash of unordered content
     const tempUpdate = { [id]: { listItemIds: items } }
-    yield put({ type: LIST_ITEMS_SUCCESS, itemsById: tempUpdate })
+    yield put({ type: LIST_ITEMS_UPDATE, itemsById: tempUpdate })
 
     // builds the data object, results in an array: [{ externalId, sortOrder }]
     const data = items.map((externalId, index) => ({ externalId, sortOrder: index + 1 }))
@@ -139,7 +140,7 @@ function* listItemsReorder({ id, items }) {
   } catch (error) {
     // reverts to old order
     const itemsById = { [id]: { listItemIds: oldIdOrder } }
-    yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
+    yield put({ type: LIST_ITEMS_UPDATE, itemsById })
     yield put({ type: LIST_ITEMS_REORDER_FAILURE, error })
   }
 }

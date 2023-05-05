@@ -1,4 +1,5 @@
 import { LIST_ITEMS_SUCCESS } from 'actions'
+import { LIST_ITEMS_UPDATE } from 'actions'
 import { LIST_ITEMS_SET_NO_IMAGE } from 'actions'
 import { HYDRATE } from 'actions'
 
@@ -11,7 +12,8 @@ export const setNoImage = (id) => ({ type: LIST_ITEMS_SET_NO_IMAGE, id })
  --------------------------------------------------------------- */
 export const listsDisplayReducers = (state = {}, action) => {
   switch (action.type) {
-    case LIST_ITEMS_SUCCESS: {
+    case LIST_ITEMS_SUCCESS:
+    case LIST_ITEMS_UPDATE: {
       const { itemsById = {} } = action
 
       const passedItemIds = Object.keys(itemsById)
