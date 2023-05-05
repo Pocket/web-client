@@ -118,7 +118,7 @@ function* listUpdateStatus({ id, status, listItemNoteVisibility }) {
 
 function* listItemsReorder({ id, items }) {
   // keeping track of this in case there's an error and we need to
-  // revert the id to the original order
+  // revert the id list to the original order
   const oldIdOrder = yield select(getListItemIds, id)
 
   try {
