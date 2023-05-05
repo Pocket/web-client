@@ -32,7 +32,7 @@ export const ReorderList = ({
   children
 }: ReorderListProps) => {
 
-  const handleOnDragEnd = (result: object) => {
+  const handleOnDragEnd = (result: any) => {
     // dropped outside the list
     if (!result.destination) return
 
