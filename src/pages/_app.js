@@ -6,7 +6,7 @@ import { appWithTranslation } from 'next-i18next'
 
 import { useEffect } from 'react'
 import { wrapper } from 'store'
-import { useDispatch, useSelector } from 'react-redux'
+import { Provider, useDispatch, useSelector } from 'react-redux'
 import { parseCookies } from 'nookies'
 
 import { setUser } from 'containers/account/account.state'
@@ -49,17 +49,20 @@ function PocketWebClient({ Component, pageProps, err }) {
     loadPolyfills()
   }, [])
 
-
   // Google Analytics
-  useEffect(()=> {
-    window.gtag = window.gtag || function() { window.dataLayer.push(arguments) }
+  useEffect(() => {
+    window.gtag =
+      window.gtag ||
+      function () {
+        window.dataLayer.push(arguments)
+      }
     window.gtag('js', new Date())
     window.gtag('config', GOOGLE_ANALYTICS_ID)
   }, [])
 
   // Check user status with cookies
   useEffect(() => {
-    if (user_status !== 'pending') return
+    if (user_status !== 'pending') return () => {}
 
     const cookies = parseCookies()
     const { sess_guid } = cookies
@@ -98,7 +101,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   // Hydrate user features/settings
   useEffect(() => {
-    if (user_status === 'pending' || flagsReady) return
+    if (user_status === 'pending' || flagsReady) return () => {}
     if (user_status === 'invalid') {
       dispatch(featuresHydrate({}))
       return
@@ -133,7 +136,6 @@ function PocketWebClient({ Component, pageProps, err }) {
     }
   }, [authRequired, user_status])
 
-  // Provider is created automatically by the wrapper by next-redux-wrapper
   const shouldRender = authRequired ? user_status !== 'pending' && user_status !== 'invalid' : true
 
   return (
@@ -146,9 +148,18 @@ function PocketWebClient({ Component, pageProps, err }) {
   )
 }
 
+function AppWithStore({ Component, ...rest }) {
+  const { store, props } = wrapper.useWrappedStore(rest)
+  return (
+    <Provider store={store}>
+      <PocketWebClient Component={Component} {...props} />
+    </Provider>
+  )
+}
+
 /**
  * Export the app.  This wraps the app with a few things:
  * 1. Redux: for managing state
  * 2. ReduxSaga: for managing async state requirements
  */
-export default wrapper.withRedux(appWithTranslation(PocketWebClient))
+export default appWithTranslation(AppWithStore)
