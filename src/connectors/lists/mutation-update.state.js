@@ -139,7 +139,7 @@ function* listItemsReorder({ id, items }) {
       let response = yield call(updateShareableListItems, batch)
       totalResponses = { ...totalResponses, ...response }
     }
-xw
+
     yield put({ type: LIST_ITEMS_REORDER_SUCCESS })
 
     // stores the updated sortOrder value
