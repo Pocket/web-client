@@ -135,7 +135,7 @@ export function ThirdPartyInit() {
       }
     }
 
-    let timer = setTimeout(checkCookies, 50)
+    const timer = setTimeout(checkCookies, 50)
 
     return () => clearTimeout(timer)
   }, [dispatch])

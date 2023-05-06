@@ -94,7 +94,7 @@ function* firePageView() {
 
 function* fireVariantEnroll({ variants }) {
   yield call(waitForInitialization)
-  for (let flag in variants) {
+  for (const flag in variants) {
     const variantEnrollEvent = createVariantEnrollEvent()
     const featureFlagEntity = createFeatureFlagEntity(flag, variants[flag])
 
@@ -104,7 +104,7 @@ function* fireVariantEnroll({ variants }) {
 
 function* fireFeatureEnroll({ hydrate }) {
   yield call(waitForInitialization)
-  for (let flag in hydrate) {
+  for (const flag in hydrate) {
     const { test: testName, variant, assigned } = hydrate[flag]
     const shouldBeTracked = variant !== 'disabled' && !!variant && assigned
     if (shouldBeTracked) {
