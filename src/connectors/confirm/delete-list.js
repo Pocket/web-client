@@ -30,7 +30,7 @@ export const ConfirmListDelete = () => {
       <ModalBody>
         <p>
           {t(
-            'lists:delete-list-confirmation',
+            'list:delete-list-confirmation',
             'Are you sure you want to delete this list? This cannot be undone.'
           )}
         </p>
