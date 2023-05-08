@@ -156,17 +156,16 @@ export const SaveToPocket = function ({
   )
 
   return saveStatus === 'saved' && allowRead ? (
-    <Link href={url}>
-      <a
-        data-cy={`article-read-now-${id}`}
-        onClick={onOpen}
-        className={saveClasses}
-        target={openExternal ? '_blank' : undefined}>
-        <ReadingIcon />
-        {hideCopy ? null : (
-          <span className="actionCopy">{t('item-action:read-now', 'Read Now')}</span>
-        )}
-      </a>
+    <Link
+      href={url}
+      data-cy={`article-read-now-${id}`}
+      onClick={onOpen}
+      className={saveClasses}
+      target={openExternal ? '_blank' : undefined}>
+      <ReadingIcon />
+      {hideCopy ? null : (
+        <span className="actionCopy">{t('item-action:read-now', 'Read Now')}</span>
+      )}
     </Link>
   ) : (
     <>

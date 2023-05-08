@@ -110,7 +110,7 @@ export const Item = (props) => {
   // Fire when item is selected by shortcut
   // This allows us to keep shortcuts in sync with tab selection and in view
   useEffect(() => {
-    if (!linkRef.current) return
+    if (!linkRef.current) return () => {}
     const selectedAndNotActive = shortcutSelected && document.activeElement !== linkRef.current
     const notSelectedAndActive = !shortcutSelected && document.activeElement === linkRef.current
 
@@ -147,25 +147,24 @@ export const Item = (props) => {
         />
       </span>
       <div>
-        <Link href={openUrl}>
-          <a
-            onClick={onOpen}
-            className="content-block"
-            data-cy="content-block"
-            target={linkTarget}
-            ref={linkRef}
-            rel={linkRel}>
-            <div className="content">
-              {fromPartner ? <PartnerOverline partnerType={partnerType} /> : null}
-              <h2 className={cx('title', openInNewTab && 'open-external')}>
-                {title}
-                {openInNewTab ? (
-                  <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
-                ) : null}
-              </h2>
-              <Excerpt useMarkdown={useMarkdown} excerpt={excerpt} />
-            </div>
-          </a>
+        <Link
+          href={openUrl}
+          onClick={onOpen}
+          className="content-block"
+          data-cy="content-block"
+          target={linkTarget}
+          ref={linkRef}
+          rel={linkRel}>
+          <div className="content">
+            {fromPartner ? <PartnerOverline partnerType={partnerType} /> : null}
+            <h2 className={cx('title', openInNewTab && 'open-external')}>
+              {title}
+              {openInNewTab ? (
+                <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
+              ) : null}
+            </h2>
+            <Excerpt useMarkdown={useMarkdown} excerpt={excerpt} />
+          </div>
         </Link>
         {listStatusInfo ? (
           <ListStatusLink
@@ -206,7 +205,7 @@ export const Item = (props) => {
             ) : null}
             {isUserList ? (
               <div className="user-list-context" data-cy="user-list-context">
-                <ListViewAltIcon /> List
+                <ListViewAltIcon /> {t('item:list', 'List')}
               </div>
             ) : null}
             {timeToRead && !isUserList ? (

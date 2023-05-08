@@ -111,7 +111,7 @@ export const DisplaySettings = ({
   const menuRef = useRef(null)
 
   useEffect(() => {
-    if (!focus || !menuOpen || forceShow) return
+    if (!focus || !menuOpen || forceShow) return () => {}
     const menuCurrent = menuRef.current
     const checkInnerFocus = () => {
       if (menuCurrent.querySelectorAll(':focus-within').length === 0) {

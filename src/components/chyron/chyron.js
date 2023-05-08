@@ -28,7 +28,7 @@ const Chyron = ({ instanceId, initialDismissed, initialSuccess, children }) => {
     // user successfully signing up for pocket hits
     if (chyronCompleted === CHYRON_COMPLETED || initialSuccess) {
       setDismissed(true)
-      return
+      return () => {}
     }
 
     //  check if the dismissal date > 30 days

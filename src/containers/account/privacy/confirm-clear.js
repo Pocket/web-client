@@ -106,7 +106,7 @@ const PreClear = ({ cancelClearAccount, confirmClearAccount, setClearChecked, cl
       <ModalBody className={accountClearStyles}>
         <Trans i18nKey="account:clear-copy">
           <p>
-            It's your data and you have control over it. If you wish, you can remove any data that
+            It’s your data and you have control over it. If you wish, you can remove any data that
             has been saved for your account.
           </p>
           <p>

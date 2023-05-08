@@ -170,18 +170,19 @@ export function Toast({
     [ITEMS_TAG_FAILURE]: t('toast:error-tagging', 'Error tagging item'),
 
     // Lists
-    [LIST_CREATE_SUCCESS]: 'List created',
-    [LIST_CREATE_FAILURE]: 'Error creating list',
-    [LIST_ADD_ITEM_SUCCESS]: 'Item added to list',
-    [LIST_ADD_ITEM_FAILURE]: 'Error adding item',
-    [LIST_DELETE_ITEM_SUCCESS]: 'Item removed from list',
-    [LIST_DELETE_ITEM_FAILURE]: 'Error removing item',
-    [LIST_UPDATE_SUCCESS]: 'List updated',
-    [LIST_UPDATE_FAILURE]: 'Error updating list',
-    [LIST_DELETE_SUCCESS]: 'List deleted',
-    [LIST_DELETE_FAILURE]: 'Error deleting list',
-    [LIST_ITEMS_REORDER_SUCCESS]: 'List updated',
-    [LIST_ITEMS_REORDER_FAILURE]: 'Error updating list'
+    [LIST_CREATE_SUCCESS]: t('toast:list-created', 'List created'),
+    [LIST_CREATE_FAILURE]: t('toast:error-creating-list', 'Error creating list'),
+    [LIST_UPDATE_SUCCESS]: t('toast:list-updated', 'List updated'),
+    [LIST_UPDATE_FAILURE]: t('toast:error-updating-list', 'Error updating list'),
+    [LIST_DELETE_SUCCESS]: t('toast:list-deleted', 'List deleted'),
+    [LIST_DELETE_FAILURE]: t('toast:error-deleting-list', 'Error deleting list'),
+    [LIST_ITEMS_REORDER_SUCCESS]: t('toast:list-updated', 'List updated'),
+    [LIST_ITEMS_REORDER_FAILURE]: t('toast:error-updating-list', 'Error updating list'),
+    // List items
+    [LIST_ADD_ITEM_SUCCESS]: t('toast:item-added-to-list', 'Item added to list'),
+    [LIST_ADD_ITEM_FAILURE]: t('toast:error-adding-item', 'Error adding item'),
+    [LIST_DELETE_ITEM_SUCCESS]: t('toast:item-removed-from list', 'Item removed from list'),
+    [LIST_DELETE_ITEM_FAILURE]: t('toast:error-removing-item', 'Error removing item')
   }
 
   const errors = [
@@ -207,7 +208,7 @@ export function Toast({
   const IconToShow = errors.includes(type) ? ErrorIcon : CheckIcon
 
   useEffect(() => {
-    if (!show) return
+    if (!show) return () => {} 
     const removeTime = showUndo ? 5000 : 3500
     const removeTimer = setTimeout(unmount, removeTime)
     return () => clearTimeout(removeTimer)

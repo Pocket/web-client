@@ -112,16 +112,15 @@ const GlobalNavLinks = ({ links, selectedLink, onLinkClick, className, ...remain
         const isSelected = link.name === selectedLink
         return (
           <li key={`global-nav-link-${link.name}`}>
-            <Link href={link.url}>
-              <a
-                id={link.id}
-                data-cy={link.id}
-                className={isSelected ? 'selected' : ''}
-                onClick={(event) => {
-                  handleClick(event, link.name, link.url)
-                }}>
-                {link.label}
-              </a>
+            <Link
+              href={link.url}
+              id={link.id}
+              data-cy={link.id}
+              className={isSelected ? 'selected' : ''}
+              onClick={(event) => {
+                handleClick(event, link.name, link.url)
+              }}>
+              {link.label}
             </Link>
           </li>
         )

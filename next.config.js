@@ -1,5 +1,5 @@
 const nextBuildId = require('next-build-id')
-const assetPrefix = process.env.ASSET_PREFIX || ''
+const assetPrefix = process.env.ASSET_PREFIX 
 const { i18n } = require('./next-i18next.config.js')
 const withLinaria = require('next-linaria')
 const { withSentryConfig } = require('@sentry/nextjs')

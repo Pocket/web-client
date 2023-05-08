@@ -9,6 +9,8 @@ const baseProps = {
   placeholder: 'Storybook placeholder text'
 }
 
+jest.mock('next/router', () => require('next-router-mock'))
+
 describe('GlobalNavSearch', () => {
   mockModal()
   it('applies the `placeholder` prop value correctly to the input', () => {
@@ -16,12 +18,12 @@ describe('GlobalNavSearch', () => {
     expect(getByPlaceholderText(baseProps.placeholder))
   })
 
-  it('calls the onSubmit callback when the form is submitted', () => {
+  it('calls the onSubmit callback when the form is submitted', async () => {
     const mockSubmit = jest.fn()
     const { getByCy } = wrappedRender(
       <GlobalNavSearch {...baseProps} onSubmit={mockSubmit} value="for a moment like this" />
     )
-    userEvent.click(getByCy('search-submit'))
+    await userEvent.click(getByCy('search-submit'))
     expect(mockSubmit).toHaveBeenCalledWith('for a moment like this')
   })
 
@@ -30,10 +32,10 @@ describe('GlobalNavSearch', () => {
     expect(queryByCy('search-close')).toBeFalsy()
   })
 
-  it('calls the onClose callback when the Close button is clicked', () => {
+  it('calls the onClose callback when the Close button is clicked', async () => {
     const mockClose = jest.fn()
     const { getByCy } = wrappedRender(<GlobalNavSearch {...baseProps} onClose={mockClose} />)
-    userEvent.click(getByCy('search-cancel'))
+    await userEvent.click(getByCy('search-cancel'))
     expect(mockClose).toHaveBeenCalled()
   })
 

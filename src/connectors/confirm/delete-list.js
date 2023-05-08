@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { mutateListDeleteCancel } from 'connectors/lists/mutation-delete.state'
 import { mutateListDeleteConfirm } from 'connectors/lists/mutation-delete.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { useTranslation } from 'react-i18next'
 
 export const ConfirmListDelete = () => {
+  const { t } = useTranslation()
+
   const dispatch = useDispatch()
 
   const showModal = useSelector((state) => state.mutationListDelete.open)
@@ -20,16 +23,21 @@ export const ConfirmListDelete = () => {
 
   return (
     <Modal
-      title="Delete List"
+      title={t('list:delete-list', 'Delete List')}
       isOpen={showModal}
-      screenReaderLabel="Delete List"
+      screenReaderLabel={t('list:delete-list', 'Delete List')}
       handleClose={cancelDelete}>
       <ModalBody>
-        <p>Are you sure you want to delete this list? This cannot be undone.</p>
+        <p>
+          {t(
+            'list:delete-list-confirmation',
+            'Are you sure you want to delete this list? This cannot be undone.'
+          )}
+        </p>
       </ModalBody>
       <ModalFooter>
         <button type="submit" data-cy="delete-confirm" onClick={confirmDelete} autoFocus={true}>
-          Delete
+          {t('list:delete', 'Delete')}
         </button>
       </ModalFooter>
     </Modal>

@@ -12,7 +12,7 @@ export const BrazeTools = () => {
   const brazeToken = useSelector((state) => state.userBraze?.token)
 
   useEffect(() => {
-    if (!brazeInitialized) return
+    if (!brazeInitialized) return () => {} 
     import('common/utilities/braze/braze-lazy-load').then(
       ({ isPushBlocked, isPushPermissionGranted }) => {
         if (isPushBlocked()) setPushDenied(true)
@@ -78,9 +78,7 @@ export const BrazeTools = () => {
 const BrazeOff = () => (
   <p>
     Braze is currently turned off. Please enable Braze on the{' '}
-    <Link href="/account">
-      <a>Account Settings </a>
-    </Link>
+    <Link href="/account">Account Settings</Link>
     page
   </p>
 )

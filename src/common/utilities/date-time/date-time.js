@@ -30,15 +30,15 @@ export function timeRelativeToNow(val) {
   } else if (diff === 1) {
     return `${diff} hour ago`
   } else if (diff < 24) {
-    let date = diff
+    const date = diff
     return `${date} hours ago`
   } else if (diff < 24 * 14) {
     // 14 days
-    let date = Math.round(diff / 24)
+    const date = Math.round(diff / 24)
     return `${date} days ago`
   }
 
-  let date = timestamp.format('MMM D, YYYY')
+  const date = timestamp.format('MMM D, YYYY')
   return `${date}`
 }
 

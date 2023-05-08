@@ -3,6 +3,7 @@ import { usePopover } from 'components/popover/popover'
 import { SaveIcon } from 'components/icons/SaveIcon'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 import { SavePopover } from 'components/item-actions/save-to-pocket'
+import { useTranslation } from 'react-i18next'
 
 const saveListStyles = css`
   .icon {
@@ -16,10 +17,12 @@ export const SaveListButton = ({
   saveStatus = "unsaved",
   saveAction
 }) => {
+  const { t } = useTranslation()
+
   const saveCopy = {
-    unsaved: "Save List",
-    saving: "Save List",
-    saved: "Saved"
+    unsaved: t('list:save-list', 'Save List'),
+    saving: t('list:save-list', 'Save List'),
+    saved: t('list:saved', 'Saved')
   }
 
   const handleClick = () => saveAction()

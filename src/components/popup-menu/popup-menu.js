@@ -150,10 +150,8 @@ export const PopupMenuItem = ({
         {getContent()}
       </a>
     ) : (
-      <Link href={href}>
-        <a id={id} {...remaining}>
-          {getContent()}
-        </a>
+      <Link href={href} id={id} {...remaining}>
+        {getContent()}
       </Link>
     )
   }
@@ -297,7 +295,8 @@ export const PopupMenu = ({
   } // Use Effect to create/set up trigger for modal on component mount
 
   useEffect(() => {
-    if (!trigger.current) return // attach click event to trigger
+    // attach click event to trigger
+    if (!trigger.current) return () => {}
 
     const triggerElement = trigger.current
     triggerElement.addEventListener('click', handleTriggerClick)
