@@ -9,18 +9,34 @@ import { EmptyCircledIcon } from 'components/icons/EmptyCircledIcon'
 import { CheckCircledIcon } from 'components/icons/CheckCircledIcon'
 import { ErrorIcon } from 'components/icons/ErrorIcon'
 
-const VisibilityDropdown = ({visibilityStatus}) => {
+const VisibilityDropdown = ({ visibilityStatus }) => {
   const { t } = useTranslation()
 
-  switch(visibilityStatus) {
+  switch (visibilityStatus) {
     case 'isPrivate':
-      return <><LockIcon /> {t('list:private-button-title', 'Private')} </>
-    case 'isMixed': 
-      return <><GlobeIcon /> {t('list:mixed-button-title', 'Public')} </>
-    case 'isPublic': 
-      return <><GlobeIcon /> {t('list:public-title', 'Public List & Notes')} </>
+      return (
+        <>
+          <LockIcon /> {t('list:private-button-title', 'Private')}{' '}
+        </>
+      )
+    case 'isMixed':
+      return (
+        <>
+          <GlobeIcon /> {t('list:mixed-button-title', 'Public')}{' '}
+        </>
+      )
+    case 'isPublic':
+      return (
+        <>
+          <GlobeIcon /> {t('list:public-title', 'Public List & Notes')}{' '}
+        </>
+      )
     default:
-      return <><ErrorIcon /> {t('list:loading', 'Loading')} </>
+      return (
+        <>
+          <ErrorIcon /> {t('list:loading', 'Loading')}{' '}
+        </>
+      )
   }
 }
 
@@ -30,27 +46,38 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
 
   const statusRef = useRef(null)
 
-  const handleSetPrivate = () => handleSetStatus({status: 'PRIVATE'})
-  const handleSetPublic = () => handleSetStatus({status: 'PUBLIC', listItemNoteVisibility: 'PUBLIC'})
-  const handleSetMixed = () => handleSetStatus({status: 'PUBLIC', listItemNoteVisibility: 'PRIVATE'})
+  const handleSetPrivate = () => handleSetStatus({ status: 'PRIVATE' })
+  const handleSetPublic = () =>
+    handleSetStatus({ status: 'PUBLIC', listItemNoteVisibility: 'PUBLIC' })
+  const handleSetMixed = () =>
+    handleSetStatus({ status: 'PUBLIC', listItemNoteVisibility: 'PRIVATE' })
 
-  const visibilityStatus =
-    (status === 'PRIVATE') ? 'isPrivate'
-    : (status === 'PUBLIC' && listItemNoteVisibility === 'PRIVATE') ? 'isMixed'
-    : (status === 'PUBLIC' && listItemNoteVisibility === 'PUBLIC' ) ? 'isPublic'
-    : null
+  const getVisbilityStatus = (status, listItemNoteVisibility) => {
+    if (status === 'PRIVATE') return 'isPrivate'
+    if (listItemNoteVisibility === 'PRIVATE') return 'isMixed'
+    return 'isPublic'
+  }
 
-  const privateIcon = visibilityStatus === 'isPrivate' ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
-  const mixedIcon = visibilityStatus === 'isMixed' ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
-  const publicIcon = visibilityStatus === 'isPublic' ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
+  const visibilityStatus = getVisbilityStatus(status, listItemNoteVisibility)
+
+  const privateIcon =
+    visibilityStatus === 'isPrivate' ? (
+      <CheckCircledIcon className="active" />
+    ) : (
+      <EmptyCircledIcon />
+    )
+  const mixedIcon =
+    visibilityStatus === 'isMixed' ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
+  const publicIcon =
+    visibilityStatus === 'isPublic' ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
 
   return (
     <>
       <button
         ref={statusRef}
-        className={cx("tiny", "outline", buttonStyles, status)}
+        className={cx('tiny', 'outline', buttonStyles, status)}
         data-cy="sort-options">
-        <VisibilityDropdown visibilityStatus={visibilityStatus}/>
+        <VisibilityDropdown visibilityStatus={visibilityStatus} />
         <ChevronDownIcon />
       </button>
       <PopupMenu
@@ -74,7 +101,7 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
           onClick={handleSetPrivate}
           icon={privateIcon}
           className={visibilityStatus === 'isPrivate' ? 'active' : null}
-          helperText={t('lists.private-description', 'Only you can view your list and notes.')}>
+          helperText={t('list:private-description', 'Only you can view your list and notes.')}>
           <span className="label-title">
             <LockIcon />
             {t('list:private-title', 'Private List')}
@@ -84,7 +111,10 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
           onClick={handleSetMixed}
           icon={mixedIcon}
           className={visibilityStatus === 'isMixed' ? 'active' : null}
-          helperText={t('lists.mixed-description', 'Publish your list to share via social media, email and messaging apps. Your notes will still be private.')}>
+          helperText={t(
+            'list:mixed-description',
+            'Publish your list to share via social media, email and messaging apps. Your notes will still be private.'
+          )}>
           <span className="label-title">
             <GlobeIcon />
             {t('list:mixed-title', 'Public List')}
@@ -94,7 +124,10 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
           onClick={handleSetPublic}
           icon={publicIcon}
           className={visibilityStatus === 'isPublic' ? 'active' : null}
-          helperText={t('lists.public-description', 'Publish your list of articles and notes to share via social media, email and messaging apps.')}>
+          helperText={t(
+            'list:public-description',
+            'Publish your list of articles and notes to share via social media, email and messaging apps.'
+          )}>
           <span className="label-title">
             <GlobeIcon />
             {t('list:public-title', 'Public List & Notes')}
@@ -132,8 +165,9 @@ const toggleStyles = css`
   button {
     align-items: center;
     border-bottom: 1px solid var(--color-dividerTertiary);
-    
-    &:hover, &:hover .label-secondary {
+
+    &:hover,
+    &:hover .label-secondary {
       transition: background-color 0.1s ease-out;
       background-color: var(--color-teal100);
       color: var(--color-actionPrimary);
