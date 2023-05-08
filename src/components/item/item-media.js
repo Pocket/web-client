@@ -142,7 +142,7 @@ export const CardMedia = function ({
       {topic ? <div className="topic-name">{topic}</div> : null}
       {isUserList ? (
         <div className="user-list">
-          <ListViewAltIcon /> List
+          <ListViewAltIcon /> {t('list:list', 'List')}
         </div>
       ) : null}
       {openUrl ? (

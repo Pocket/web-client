@@ -7,6 +7,7 @@ import { COPY_ITEM_URL } from 'actions'
 import { BASE_URL } from 'common/constants'
 import { LinkCopyIcon } from 'components/icons/LinkCopyIcon'
 import { bottomTooltip } from 'components/tooltip/tooltip'
+import { useTranslation } from 'react-i18next'
 
 const statusStyles = css`
   a {
@@ -35,6 +36,7 @@ const statusStyles = css`
 `
 
 export const PublicListUrl = ({ publicListInfo, handleCopyUrl, handleOpenUrl }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const { externalId, slug, callout, status } = publicListInfo
 
@@ -56,8 +58,8 @@ export const PublicListUrl = ({ publicListInfo, handleCopyUrl, handleOpenUrl }) 
         {linkDisplay}
       </Link>
       <button
-        aria-label="Copy Link"
-        data-tooltip="Copy Link"
+        aria-label={t('list:copy-link', 'Copy Link')}
+        data-tooltip={t('list:copy-link', 'Copy Link')}
         className={cx('copy', 'tiny', bottomTooltip)}
         data-cy="copy-link"
         onClick={handleCopy}>

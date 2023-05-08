@@ -1,6 +1,7 @@
 import { css } from 'linaria'
 import BorderSVG from 'static/images/sunken-treasure-chest.svg'
 import { ListAddIcon } from 'components/icons/ListAddIcon'
+import { useTranslation } from 'react-i18next'
 
 const emptyStyles = css`
   text-align: center;
@@ -14,6 +15,8 @@ const emptyStyles = css`
 `
 
 export const EmptyAllLists = ({ handleCreate }) => {
+  const { t } = useTranslation()
+
   const onCreateList = () => {
     handleCreate('empty-all-lists')
   }
@@ -21,9 +24,9 @@ export const EmptyAllLists = ({ handleCreate }) => {
   return (
     <div className={emptyStyles}>
       <img src={BorderSVG.src} alt="" />
-      <p>Create your first list.</p>
+      <p>{t('list:create-your-first-list', 'Create your first list.')}</p>
       <button className="outline" onClick={onCreateList}>
-        <ListAddIcon /> Create list
+        <ListAddIcon /> {t('list:create-list', 'Create list')}
       </button>
     </div>
   )

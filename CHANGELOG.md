@@ -1,3 +1,17 @@
+## [1.93.3](https://github.com/Pocket/web-client/compare/v1.93.2...v1.93.3) (2023-05-08)
+
+
+### Bug Fixes
+
+* **lists:** add translation support to Delete List modal ([705506c](https://github.com/Pocket/web-client/commit/705506cb0ee44b116470d4d5fc2434c296afc7b6))
+* **lists:** change namespace to list ([b74ea15](https://github.com/Pocket/web-client/commit/b74ea15b196af415cf1e49b1f5c49c0ced9fd382))
+* **lists:** fix two bad translation keys ([2991222](https://github.com/Pocket/web-client/commit/29912222493252692feff1c74a86fad1cb55eca8))
+* **lists:** fixed merge conflict ([30aed77](https://github.com/Pocket/web-client/commit/30aed7743777d7845538fc22913f40c34e3406f5))
+* **lists:** need to pass creator in object ([5083cb9](https://github.com/Pocket/web-client/commit/5083cb91a6e5b7214fbca43c9245cfd4670b77c0))
+* **lists:** one last lists key ([8302396](https://github.com/Pocket/web-client/commit/830239634824978f4b04f81e08dfefa27a513fd1))
+* **lists:** translated all the things ([e27ac76](https://github.com/Pocket/web-client/commit/e27ac76d2e39b30a04bf4bf3b877db6a7921f502))
+* **lists:** use single-quotes instead of double ([b10e037](https://github.com/Pocket/web-client/commit/b10e03769899c4b9a6c045e54b7fa879c98e16d5))
+
 ## [1.93.2](https://github.com/Pocket/web-client/compare/v1.93.1...v1.93.2) (2023-05-08)
 
 

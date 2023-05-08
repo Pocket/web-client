@@ -76,7 +76,7 @@ export function SavedActions({
 
   const actionTypes = {
     lists: {
-      label: 'Add to List',
+      label: t('item-action:add-to-list', 'Add to List'),
       hide: !inListsExperiment,
       icon: <ListAddIcon />,
       onClick: actionAddToList

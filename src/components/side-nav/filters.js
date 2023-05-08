@@ -33,12 +33,15 @@ export function FiltersSideNav({
       {inListsExperiment ? (
         <>
           <div className={sideNavActionHeader}>
-            <h4 className={sideNavHeader}>Lists</h4>
+            <h4 className={sideNavHeader}>{t('nav:lists', 'Lists')}</h4>
             <button
               className={buttonReset}
               onClick={handleCreateList}
               data-cy="side-nav-create-list">
-              <AddIcon className={bottomTooltip} data-tooltip="Create List" />
+              <AddIcon
+                className={bottomTooltip}
+                data-tooltip={t('nav:create-list', 'Create List')}
+              />
             </button>
           </div>
           <Link href="/lists" legacyBehavior>
@@ -48,8 +51,8 @@ export function FiltersSideNav({
               data-cy="side-nav-all-lists">
               <ListViewAltIcon className="side-nav-icon inactive" />
               <ListViewAltFilledIcon className="side-nav-icon active" />
-              All Lists
-              <span className="badge">New</span>
+              {t('nav:all-lists', 'All Lists')}
+              <span className="badge">{t('nav:new', 'New')}</span>
             </button>
           </Link>
           {listNames.length
