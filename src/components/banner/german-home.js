@@ -146,5 +146,5 @@ export const BannerGermanHome = () => {
         </div>
       </div>
     </div>
-  );
+  )
 }
