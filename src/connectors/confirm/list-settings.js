@@ -14,7 +14,7 @@ export const ListSettingsModal = ({ id }) => {
   const [error, setError] = useState(null)
 
   const list = useSelector((state) => state.listsDisplay[id])
-  const showModal = useSelector((state) => state.mutationlistUpdate.open)
+  const showModal = useSelector((state) => state.mutationListUpdate.listSettingsOpen)
   const titleToIdList = useSelector((state) => state.pageListsInfo.titleToIdList)
 
   const titleList = titleToIdList ? Object.keys(titleToIdList) : []

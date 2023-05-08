@@ -22,6 +22,7 @@ const getShareableListQuery = gql`
         publisher
         excerpt
         authors
+        note
         sortOrder
         createdAt
         updatedAt

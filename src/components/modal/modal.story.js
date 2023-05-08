@@ -4,6 +4,7 @@ import Modal, { ModalBody, ModalFooter } from './modal'
 import { TextArea } from 'components/form-fields/text-area'
 import { CreateEditShareableList } from 'components/shareable-lists/create-edit-modal'
 import { AddToListModal } from 'components/shareable-lists/add-to-list-modal'
+import { AddNoteModal } from 'components/shareable-lists/add-note-modal'
 import { COLORS } from 'mocks/_data/colors'
 
 export default {
@@ -54,6 +55,8 @@ export const AddToList = () => (
     selectOptions={COLORS}
   />
 )
+
+export const AddNote = () => <AddNoteModal appRootSelector={APP_ROOT_SELECTOR} showModal />
 
 export const Basic = () => (
   <Modal

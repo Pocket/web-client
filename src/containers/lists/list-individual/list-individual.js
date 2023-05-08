@@ -9,6 +9,7 @@ import { ListReorder } from 'containers/lists/list-individual/reorder'
 import { getIndividualListAction } from 'containers/lists/lists.state'
 import { ListSettingsModal } from 'connectors/confirm/list-settings'
 import { CreateListModal } from 'connectors/confirm/create-list'
+import { AddListItemNote } from 'connectors/confirm/list-item-note'
 import { ConfirmShare } from 'connectors/confirm/share-list'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { appSetMode } from 'connectors/app/app.state'
@@ -46,6 +47,7 @@ export const ListIndividual = () => {
       </Layout>
 
       <ListSettingsModal id={id} />
+      <AddListItemNote />
       <CreateListModal />
       <ConfirmShare snowplowId="shareable-list" />
       <Toasts />

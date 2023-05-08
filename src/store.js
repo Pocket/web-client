@@ -146,7 +146,7 @@ const listMutations = {
   mutationListCreate: mutationListCreateReducers,
   mutationListAdd: mutationListAddReducers,
   mutationListDelete: mutationListDeleteReducers,
-  mutationlistUpdate: mutationListUpdateReducers,
+  mutationListUpdate: mutationListUpdateReducers,
   mutationListShare: mutationListShareReducers
 }
 
@@ -160,7 +160,7 @@ const pageReducers = {
   pageCollectionInfo: [], // In future this will handle pagination
   pageCollectionStories: pageCollectionStoriesReducers,
   pageStoriesInfo: [],
-  pageListsInfo: pageListsInfoReducers,
+  pageListsInfo: pageListsInfoReducers
 }
 
 const discoverReducers = {
