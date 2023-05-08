@@ -24,6 +24,7 @@ const getShareableListPublicQuery = gql`
         title
         updatedAt
         url
+        note
       }
       user {
         username
