@@ -5,6 +5,7 @@ import { Item } from 'components/item/item'
 import { ShareList } from 'components/share-modal/share-list'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { PublicListUrl } from 'components/shareable-lists/public-list-url'
+import { useTranslation } from 'react-i18next'
 
 const reducedPaddingStyles = css`
   padding: 0;
@@ -24,6 +25,8 @@ export const ShareListModal = ({
   handleCopyUrl,
   handleOpenUrl
 }) => {
+  const { t } = useTranslation()
+
   const [imageUrl, setImageUrl] = useState(thumbnail)
   const onImageFail = () => setImageUrl('')
 
@@ -35,9 +38,9 @@ export const ShareListModal = ({
 
   return (
     <Modal
-      title="Share List"
+      title={t("lists:share-list", "Share List")}
       isOpen={showModal}
-      screenReaderLabel="Share List"
+      screenReaderLabel={t("lists:share-list", "Share List")}
       handleClose={cancelShare}>
       <ModalBody>
         <div className={cx(stackedGrid, stackedGridNoAside, reducedPaddingStyles)}>

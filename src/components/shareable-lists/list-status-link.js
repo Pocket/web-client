@@ -3,6 +3,7 @@ import { LockIcon } from 'components/icons/LockIcon'
 import { GlobeIcon } from 'components/icons/GlobeIcon'
 import { PublicListUrl } from './public-list-url'
 import { breakpointSmallTablet } from 'common/constants'
+import { useTranslation } from 'react-i18next'
 
 const statusStyles = css`
   display: flex;
@@ -36,6 +37,8 @@ const statusStyles = css`
 `
 
 export const ListStatusLink = ({ listStatusInfo, handleCopyUrl, handleOpenUrl }) => {
+  const { t } = useTranslation()
+
   const { status } = listStatusInfo
   const isPrivate = status === 'PRIVATE'
 
@@ -43,12 +46,12 @@ export const ListStatusLink = ({ listStatusInfo, handleCopyUrl, handleOpenUrl })
     <div className={cx('listStatus', statusStyles)}>
       {isPrivate ? (
         <div className="chip private">
-          <LockIcon /> Private
+          <LockIcon /> {t("lists:private", "Private")}
         </div>
       ) : (
         <>
           <div className="chip public">
-            <GlobeIcon /> Public
+            <GlobeIcon /> {t("lists:public", "Public")}
           </div>{' '}
           <PublicListUrl
             publicListInfo={listStatusInfo}

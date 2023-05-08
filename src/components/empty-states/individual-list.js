@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { css } from 'linaria'
 import BorderSVG from 'static/images/sunken-treasure-chest.svg'
+import { useTranslation } from 'react-i18next'
 
 const emptyStyles = css`
   text-align: center;
@@ -10,12 +11,14 @@ const emptyStyles = css`
 `
 
 export const EmptyIndividualLists = ({ handleClick }) => {
+  const { t } = useTranslation()
+
   return (
     <div className={emptyStyles}>
       <img src={BorderSVG.src} alt="" />
-      <p>Add items to your list. Go to Saves to get started.</p>
+      <p>{t("lists:add-items-to-your-list", "Add items to your list. Go to Saves to get started.")}</p>
       <Link href="/saves" className="button outline" onClick={handleClick}>
-        Go to Saves
+        {t("lists:go-to-saves", "Go to Saves")}
       </Link>
     </div>
   )

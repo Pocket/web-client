@@ -205,7 +205,7 @@ export const Item = (props) => {
             ) : null}
             {isUserList ? (
               <div className="user-list-context" data-cy="user-list-context">
-                <ListViewAltIcon /> List
+                <ListViewAltIcon /> {t('item:list', 'List')}
               </div>
             ) : null}
             {timeToRead && !isUserList ? (

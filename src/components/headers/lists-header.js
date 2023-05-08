@@ -11,6 +11,7 @@ import { VisibilityOptions } from 'components/shareable-lists/visibility-options
 import { ListStatusToggle } from 'components/shareable-lists/list-status-toggle'
 import { breakpointSmallTablet } from 'common/constants'
 import { PublicListUrl } from 'components/shareable-lists/public-list-url'
+import { useTranslation } from 'react-i18next'
 
 const listHeaderStyles = css`
   padding-bottom: 22px;
@@ -165,6 +166,8 @@ const publicListHeaderStyles = css`
 `
 
 export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, handleOldest }) => {
+  const { t } = useTranslation()
+
   const onCreateList = () => {
     handleCreateList('header')
   }
@@ -172,12 +175,12 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles)}>
       <h1 className="pageTitle" data-cy="page-title">
-        All Lists
+        {t("lists:all-lists", "All Lists")}
       </h1>
 
       <div className="create-sort">
         <button onClick={onCreateList} className="tiny">
-          <ListAddIcon /> Create List
+          <ListAddIcon /> {t("lists:create-list", "Create List")}
         </button>
         <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
       </div>
@@ -200,6 +203,8 @@ export const ListIndividualHeader = ({
   handleCopyUrl,
   handleOpenUrl
 }) => {
+  const { t } = useTranslation()
+
   const isPublic = status === 'PUBLIC'
   const publicListInfo = {
     externalId,
@@ -224,7 +229,7 @@ export const ListIndividualHeader = ({
       <div className="create-sort wrap">
         {isPublic ? (
           <button onClick={handleShare} className="tiny share">
-            <IosShareIcon /> Share
+            <IosShareIcon /> {t("lists:share", "Share")}
           </button>
         ) : null}
 
@@ -242,7 +247,7 @@ export const ListIndividualHeader = ({
         )}
 
         <button onClick={handleEdit} className="filter tiny outline">
-          <FiltersAltIcon /> Settings
+          <FiltersAltIcon /> {t("lists:settings", "Settings")}
         </button>
 
         {inListsDev ? (
@@ -294,8 +299,10 @@ export const ListPublicHeader = ({
   handleSaveAll,
   handleShare
 }) => {
-  const countText = listCount === 1 ? 'Item' : 'Items'
-  const creator = userName || 'Pocket User'
+  const { t } = useTranslation()
+
+  const countText = listCount === 1 ? t("lists:item", "Item") : t("lists:items", "items")
+  const creator = userName || t("lists:pocket-user", "Pocket User")
 
   return (
     <header className={publicListHeaderStyles}>
@@ -309,7 +316,7 @@ export const ListPublicHeader = ({
             src={avatarUrl}
             size="32px"
             className="list-user-avatar"
-            altText={`${creator}’s avatar`}
+            altText={t("list:creator-alt", "Avatar of {{creator}}", creator)}
           />
           <span>{creator}</span> |{' '}
           <span>
@@ -319,7 +326,7 @@ export const ListPublicHeader = ({
 
         <div className="share-save">
           <button onClick={handleShare} className="tiny share">
-            <IosShareIcon /> Share
+            <IosShareIcon /> {t("lists:share", "Share")}
           </button>
           <SaveListButton
             saveAction={handleSaveAll}

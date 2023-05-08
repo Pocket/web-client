@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { TextArea } from 'components/form-fields/text-area'
+import { useTranslation } from 'react-i18next'
 
 export const CreateEditShareableList = ({
   showModal,
@@ -15,6 +16,8 @@ export const CreateEditShareableList = ({
   error,
   appRootSelector
 }) => {
+  const { t } = useTranslation()
+
   const [listNameValue, setListNameValue] = useState(listName)
   const [descriptionValue, setDescriptionValue] = useState(listDescription || '')
 
@@ -44,7 +47,7 @@ export const CreateEditShareableList = ({
       <ModalBody>
         <TextArea
           autoFocus={true}
-          labelText="List Name"
+          labelText={t("lists:list-name", "List Name")}
           name="list-name"
           value={listNameValue}
           onChange={onNameChange}
@@ -55,7 +58,7 @@ export const CreateEditShareableList = ({
           error={error}
         />
         <TextArea
-          labelText="Description (optional)"
+          labelText={t("lists:description-optional", "Description (optional)")}
           name="list-description"
           value={descriptionValue}
           onChange={onDescriptionChange}
@@ -72,7 +75,7 @@ export const CreateEditShareableList = ({
           type="button"
           data-cy="create-edit-list-cancel"
           onClick={onClose}>
-          Cancel
+          {t("lists:cancel", "Cancel")}
         </button>
         <button
           className="primary"

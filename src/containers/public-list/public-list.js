@@ -12,6 +12,7 @@ import { ReportIcon } from 'components/icons/ReportIcon'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { shareListAction } from 'connectors/lists/mutation-share.state'
 import { ConfirmShare } from 'connectors/confirm/share-list'
+import { useTranslation } from 'react-i18next'
 
 function buildReportEmail(url) {
   const subject = `Report List: ${url}`
@@ -26,6 +27,8 @@ const footerStyle = css`
 `
 
 export const PublicList = ({ listId, slug, statusCode }) => {
+  const { t } = useTranslation()
+
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user?.auth)
@@ -96,7 +99,7 @@ export const PublicList = ({ listId, slug, statusCode }) => {
           : null}
         <footer className={footerStyle}>
           <button className="tiny outline" data-cy="report-list" onClick={onReport}>
-            <ReportIcon /> Report List
+            <ReportIcon /> {t("lists:report-list", "Report List")}
           </button>
         </footer>
       </Layout>

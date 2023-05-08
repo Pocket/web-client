@@ -6,6 +6,7 @@ import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { setNoImage } from 'connectors/lists/lists-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { useTranslation } from 'react-i18next'
 
 export const ListCard = ({ id, position }) => {
   const dispatch = useDispatch()
@@ -86,6 +87,7 @@ export const ListCard = ({ id, position }) => {
 }
 
 export const ListActions = ({ id, analyticsData }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const handleDeleteList = () => {
@@ -95,11 +97,11 @@ export const ListActions = ({ id, analyticsData }) => {
 
   return (
     <button
-      aria-label="Delete List"
+      aria-label={t("lists:delete-list", "Delete List")}
       data-cy="delete-list"
       className="tiny outline"
       onClick={handleDeleteList}>
-      <DeleteIcon /> Delete
+      <DeleteIcon /> {t("lists:delete", "Delete")}
     </button>
   )
 }

@@ -5,8 +5,11 @@ import { mutateListUpdateCancel } from 'connectors/lists/mutation-update.state'
 import { mutateListUpdateConfirm } from 'connectors/lists/mutation-update.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { existsInArray } from 'common/utilities/object-array/object-array'
+import { useTranslation } from 'react-i18next'
 
 export const ListSettingsModal = ({ id }) => {
+  const { t } = useTranslation()
+
   const dispatch = useDispatch()
   const [error, setError] = useState(null)
 
@@ -43,8 +46,8 @@ export const ListSettingsModal = ({ id }) => {
   return showModal ? (
     <CreateEditShareableList
       showModal={showModal}
-      modalTitle="List Settings"
-      modalSubmit="Save Changes"
+      modalTitle={t("lists:list-settings", "List Settings")}
+      modalSubmit={t("lists:save-changes", "Save Changes")}
       listName={title}
       listDescription={description}
       handleClose={handleClose}

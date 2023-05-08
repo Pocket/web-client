@@ -5,6 +5,7 @@ import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { setNoImage } from 'connectors/lists/lists-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { useTranslation } from 'react-i18next'
 
 export const IndividualListCard = ({ id, listId, position }) => {
   const dispatch = useDispatch()
@@ -62,6 +63,7 @@ export const IndividualListCard = ({ id, listId, position }) => {
 }
 
 export const ListActions = ({ id, listId, analyticsData }) => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const handleDeleteItem = () => {
@@ -71,11 +73,11 @@ export const ListActions = ({ id, listId, analyticsData }) => {
 
   return (
     <button
-      aria-label="Remove item from list"
+      aria-label={t("t:remove-item-from-list", "Remove item from list")}
       data-cy="remove-item"
       className="tiny outline"
       onClick={handleDeleteItem}>
-      Remove
+      {t("lists:remove", "Remove")}
     </button>
   )
 }
