@@ -45,7 +45,7 @@ function getListItemsById(listItems, listId, utmId) {
 // Builds a list item, compiles the analytics
 // Adds a utm paramter to the external url
 function deriveListItem(item, listId, utmId) {
-  const { externalId, url, title, excerpt, imageUrl, publisher, createdAt } = item
+  const { externalId, url, title, excerpt, imageUrl, publisher, note, createdAt } = item
   const analyticsData = {
     id: externalId,
     shareableListItemExternalId: externalId,
@@ -61,6 +61,7 @@ function deriveListItem(item, listId, utmId) {
   return {
     ...item,
     url: replaceUTM(url, utmId),
+    note: decodeSpecialChars(note),
     analyticsData
   }
 }
@@ -94,8 +95,8 @@ function deriveList(list, listId, listItems) {
 }
 
 function decodeSpecialChars(string) {
-  const GT_ENCODED = '&gt;'; // >
-  const LT_ENCODED = '&lt;'; // <
+  const GT_ENCODED = '&gt;' // >
+  const LT_ENCODED = '&lt;' // <
 
   if (!string) return string
 
