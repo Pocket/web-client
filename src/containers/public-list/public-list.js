@@ -98,7 +98,7 @@ export const PublicList = ({ listId, slug, statusCode }) => {
           : null}
         <footer className={footerStyle}>
           <button className="tiny outline" data-cy="report-list" onClick={onReport}>
-            <ReportIcon /> {t('lists:report-list', 'Report List')}
+            <ReportIcon /> {t('list:report-list', 'Report List')}
           </button>
         </footer>
       </Layout>

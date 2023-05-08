@@ -175,12 +175,12 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles)}>
       <h1 className="pageTitle" data-cy="page-title">
-        {t('lists:all-lists', 'All Lists')}
+        {t('list:all-lists', 'All Lists')}
       </h1>
 
       <div className="create-sort">
         <button onClick={onCreateList} className="tiny">
-          <ListAddIcon /> {t('lists:create-list', 'Create List')}
+          <ListAddIcon /> {t('list:create-list', 'Create List')}
         </button>
         <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
       </div>
@@ -229,7 +229,7 @@ export const ListIndividualHeader = ({
       <div className="create-sort wrap">
         {isPublic ? (
           <button onClick={handleShare} className="tiny share">
-            <IosShareIcon /> {t('lists:share', 'Share')}
+            <IosShareIcon /> {t('list:share', 'Share')}
           </button>
         ) : null}
 
@@ -247,7 +247,7 @@ export const ListIndividualHeader = ({
         )}
 
         <button onClick={handleEdit} className="filter tiny outline">
-          <FiltersAltIcon /> {t('lists:settings', 'Settings')}
+          <FiltersAltIcon /> {t('list:settings', 'Settings')}
         </button>
 
         {inListsDev ? (
@@ -301,8 +301,8 @@ export const ListPublicHeader = ({
 }) => {
   const { t } = useTranslation()
 
-  const countText = listCount === 1 ? t('lists:item', 'Item') : t('lists:items', 'items')
-  const creator = userName || t('lists:pocket-user', 'Pocket User')
+  const countText = listCount === 1 ? t('list:item', 'Item') : t('list:items', 'items')
+  const creator = userName || t('list:pocket-user', 'Pocket User')
 
   return (
     <header className={publicListHeaderStyles}>
@@ -326,7 +326,7 @@ export const ListPublicHeader = ({
 
         <div className="share-save">
           <button onClick={handleShare} className="tiny share">
-            <IosShareIcon /> {t('lists:share', 'Share')}
+            <IosShareIcon /> {t('list:share', 'Share')}
           </button>
           <SaveListButton
             saveAction={handleSaveAll}

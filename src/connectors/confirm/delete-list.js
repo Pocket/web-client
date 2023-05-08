@@ -23,9 +23,9 @@ export const ConfirmListDelete = () => {
 
   return (
     <Modal
-      title={t('lists:delete-list', 'Delete List')}
+      title={t('list:delete-list', 'Delete List')}
       isOpen={showModal}
-      screenReaderLabel={t('lists:delete-list', 'Delete List')}
+      screenReaderLabel={t('list:delete-list', 'Delete List')}
       handleClose={cancelDelete}>
       <ModalBody>
         <p>
@@ -37,7 +37,7 @@ export const ConfirmListDelete = () => {
       </ModalBody>
       <ModalFooter>
         <button type="submit" data-cy="delete-confirm" onClick={confirmDelete} autoFocus={true}>
-          {t('lists:delete', 'Delete')}
+          {t('list:delete', 'Delete')}
         </button>
       </ModalFooter>
     </Modal>

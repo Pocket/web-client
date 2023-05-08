@@ -47,7 +47,7 @@ export const CreateEditShareableList = ({
       <ModalBody>
         <TextArea
           autoFocus={true}
-          labelText={t('lists:list-name', 'List Name')}
+          labelText={t('list:list-name', 'List Name')}
           name="list-name"
           value={listNameValue}
           onChange={onNameChange}
@@ -58,7 +58,7 @@ export const CreateEditShareableList = ({
           error={error}
         />
         <TextArea
-          labelText={t('lists:description-optional', 'Description (optional)')}
+          labelText={t('list:description-optional', 'Description (optional)')}
           name="list-description"
           value={descriptionValue}
           onChange={onDescriptionChange}
@@ -75,7 +75,7 @@ export const CreateEditShareableList = ({
           type="button"
           data-cy="create-edit-list-cancel"
           onClick={onClose}>
-          {t('lists:cancel', 'Cancel')}
+          {t('list:cancel', 'Cancel')}
         </button>
         <button
           className="primary"

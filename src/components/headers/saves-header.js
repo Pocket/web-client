@@ -122,12 +122,12 @@ export const SavesHeader = ({
       {showCreateList ? (
         <div className="create-list">
           <div className="onboarding-badge">
-            <span className="new">{t('lists:new', 'New!')}</span>
+            <span className="new">{t('list:new', 'New!')}</span>
             {" "}
-            <span>{t('lists:add-items-to-a-list', 'Add items to a List')}</span>
+            <span>{t('list:add-items-to-a-list', 'Add items to a List')}</span>
           </div>
           <button onClick={handleCreateList} className="tiny">
-            <ListAddIcon /> {t('lists:create-list', 'Create List')}
+            <ListAddIcon /> {t('list:create-list', 'Create List')}
           </button>
         </div>
       ) : null}
