@@ -135,8 +135,8 @@ function* listItemsReorder({ id, items }) {
     let totalResponses = {}
 
     // submits the reordered list
-    for (let batch of batches) {
-      let response = yield call(updateShareableListItems, batch)
+    for (const batch of batches) {
+      const response = yield call(updateShareableListItems, batch)
       totalResponses = { ...totalResponses, ...response }
     }
 
