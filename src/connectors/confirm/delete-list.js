@@ -23,16 +23,21 @@ export const ConfirmListDelete = () => {
 
   return (
     <Modal
-      title={t("lists:delete-list", "Delete List")}
+      title={t('lists:delete-list', 'Delete List')}
       isOpen={showModal}
-      screenReaderLabel={t("lists:delete-list", "Delete List")}
+      screenReaderLabel={t('lists:delete-list', 'Delete List')}
       handleClose={cancelDelete}>
       <ModalBody>
-        <p>{t("lists:delete-list-confirmation", "Are you sure you want to delete this list? This cannot be undone.")}</p>
+        <p>
+          {t(
+            'lists:delete-list-confirmation',
+            'Are you sure you want to delete this list? This cannot be undone.'
+          )}
+        </p>
       </ModalBody>
       <ModalFooter>
         <button type="submit" data-cy="delete-confirm" onClick={confirmDelete} autoFocus={true}>
-          {t("lists:delete", "Delete")}
+          {t('lists:delete', 'Delete')}
         </button>
       </ModalFooter>
     </Modal>

@@ -73,11 +73,11 @@ export const ListActions = ({ id, listId, analyticsData }) => {
 
   return (
     <button
-      aria-label={t("t:remove-item-from-list", "Remove item from list")}
+      aria-label={t('t:remove-item-from-list', 'Remove item from list')}
       data-cy="remove-item"
       className="tiny outline"
       onClick={handleDeleteItem}>
-      {t("lists:remove", "Remove")}
+      {t('lists:remove', 'Remove')}
     </button>
   )
 }

@@ -21,7 +21,6 @@ function buildReportEmail(url) {
   return `mailto:reportlist@getpocket.com?subject=${subject}&body=${body}`
 }
 
-
 const footerStyle = css`
   padding-top: 16px;
 `
@@ -99,7 +98,7 @@ export const PublicList = ({ listId, slug, statusCode }) => {
           : null}
         <footer className={footerStyle}>
           <button className="tiny outline" data-cy="report-list" onClick={onReport}>
-            <ReportIcon /> {t("lists:report-list", "Report List")}
+            <ReportIcon /> {t('lists:report-list', 'Report List')}
           </button>
         </footer>
       </Layout>

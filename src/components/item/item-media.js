@@ -142,7 +142,11 @@ export const CardMedia = function ({
       {topic ? <div className="topic-name">{topic}</div> : null}
       {isUserList ? (
         <div className="user-list">
+<<<<<<< HEAD
           <ListViewAltIcon /> {t("lists:list", "List")}
+=======
+          <ListViewAltIcon /> {t('lists:list', 'List')}
+>>>>>>> e789227d (fix(lists): use single-quotes instead of double)
         </div>
       ) : null}
       {openUrl ? (

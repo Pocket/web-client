@@ -16,9 +16,11 @@ export const EmptyIndividualLists = ({ handleClick }) => {
   return (
     <div className={emptyStyles}>
       <img src={BorderSVG.src} alt="" />
-      <p>{t("lists:add-items-to-your-list", "Add items to your list. Go to Saves to get started.")}</p>
+      <p>
+        {t('lists:add-items-to-your-list', 'Add items to your list. Go to Saves to get started.')}
+      </p>
       <Link href="/saves" className="button outline" onClick={handleClick}>
-        {t("lists:go-to-saves", "Go to Saves")}
+        {t('lists:go-to-saves', 'Go to Saves')}
       </Link>
     </div>
   )

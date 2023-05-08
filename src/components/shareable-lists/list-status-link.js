@@ -46,12 +46,12 @@ export const ListStatusLink = ({ listStatusInfo, handleCopyUrl, handleOpenUrl })
     <div className={cx('listStatus', statusStyles)}>
       {isPrivate ? (
         <div className="chip private">
-          <LockIcon /> {t("lists:private", "Private")}
+          <LockIcon /> {t('lists:private', 'Private')}
         </div>
       ) : (
         <>
           <div className="chip public">
-            <GlobeIcon /> {t("lists:public", "Public")}
+            <GlobeIcon /> {t('lists:public', 'Public')}
           </div>{' '}
           <PublicListUrl
             publicListInfo={listStatusInfo}

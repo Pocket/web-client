@@ -58,8 +58,8 @@ export const PublicListUrl = ({ publicListInfo, handleCopyUrl, handleOpenUrl }) 
         {linkDisplay}
       </Link>
       <button
-        aria-label={t("lists:copy-link", "Copy Link")}
-        data-tooltip={t("lists:copy-link", "Copy Link")}
+        aria-label={t('lists:copy-link', 'Copy Link')}
+        data-tooltip={t('lists:copy-link', 'Copy Link')}
         className={cx('copy', 'tiny', bottomTooltip)}
         data-cy="copy-link"
         onClick={handleCopy}>

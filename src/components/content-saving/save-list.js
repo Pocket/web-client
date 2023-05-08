@@ -20,9 +20,9 @@ export const SaveListButton = ({
   const { t } = useTranslation()
 
   const saveCopy = {
-    unsaved: t("lists:save-list", "Save List"),
-    saving: t("lists:save-list", "Save List"),
-    saved: t("lists:saved", "Saved")
+    unsaved: t('lists:save-list', 'Save List'),
+    saving: t('lists:save-list', 'Save List'),
+    saved: t('lists:saved', 'Saved')
   }
 
   const handleClick = () => saveAction()
