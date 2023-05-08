@@ -233,17 +233,14 @@ export const ListIndividualHeader = ({
           </button>
         ) : null}
 
-        { inListsDev ? (
+        {inListsDev ? (
           <VisibilityOptions
             status={status}
             listItemNoteVisibility={listItemNoteVisibility}
             handleSetStatus={handleSetStatus}
           />
         ) : (
-          <ListStatusToggle
-            status={status}
-            handleSetStatus={handleSetStatus}
-          />
+          <ListStatusToggle status={status} handleSetStatus={handleSetStatus} />
         )}
 
         <button onClick={handleEdit} className="filter tiny outline">
@@ -260,12 +257,7 @@ export const ListIndividualHeader = ({
   )
 }
 
-export const ListSortHeader = ({
-  title,
-  description,
-  handleSave,
-  handleCancel,
-}) => {
+export const ListSortHeader = ({ title, description, handleSave, handleCancel }) => {
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles, 'list-individual')}>
       <div className="headline">
@@ -316,7 +308,7 @@ export const ListPublicHeader = ({
             src={avatarUrl}
             size="32px"
             className="list-user-avatar"
-            altText={t('list:creator-alt', 'Avatar of {{creator}}', creator)}
+            altText={t('list:creator-alt', 'Avatar of {{creator}}', { creator })}
           />
           <span>{creator}</span> |{' '}
           <span>
@@ -332,7 +324,7 @@ export const ListPublicHeader = ({
             saveAction={handleSaveAll}
             isAuthenticated={isAuthenticated}
             saveStatus={saveStatus}
-            />
+          />
         </div>
       </section>
     </header>
