@@ -8,11 +8,16 @@ export const AddListItemNote = () => {
   const dispatch = useDispatch()
 
   const id = useSelector((state) => state.mutationListUpdate.listItemId)
+  const position = useSelector((state) => state.mutationListUpdate.listItemPosition)
   const item = useSelector((state) => state.listsDisplay[id])
   const showModal = useSelector((state) => state.mutationListUpdate.listItemNoteOpen)
 
   if (!item) return null
-  const { note, analyticsData } = item
+  const { note, analyticsData: passedAnalytics } = item
+  const analyticsData = {
+    ...passedAnalytics,
+    sortOrder: position
+  }
 
   const handleClose = () => {
     dispatch(mutateListItemNoteCancel())

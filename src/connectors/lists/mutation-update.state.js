@@ -37,7 +37,7 @@ export const mutateListUpdateCancel = () => ({ type: LIST_UPDATE_CANCEL })
 export const mutateListUpdateConfirm = ({ title, description }) => ({ type: LIST_UPDATE_CONFIRM, title, description }) //prettier-ignore
 export const mutateListStatusAction = ({ id, status, listItemNoteVisibility }) => ({ type: LIST_UPDATE_STATUS_REQUEST, id, status, listItemNoteVisibility }) //prettier-ignore
 
-export const mutateListItemNote = (id) => ({ type: LIST_ITEM_ADD_NOTE_REQUEST, id })
+export const mutateListItemNote = ({ id, position }) => ({ type: LIST_ITEM_ADD_NOTE_REQUEST, id, position }) //prettier-ignore
 export const mutateListItemNoteCancel = () => ({ type: LIST_ITEM_ADD_NOTE_CANCEL })
 export const mutateListItemNoteConfirm = (note) => ({ type: LIST_ITEM_ADD_NOTE_CONFIRM, note })
 
@@ -49,6 +49,7 @@ const initialState = {
   listSettingsOpen: false,
   listItemNoteOpen: false,
   listItemId: null,
+  listItemPosition: null,
   lastUsedList: ''
 }
 
@@ -65,14 +66,14 @@ export const mutationListUpdateReducers = (state = initialState, action) => {
     }
 
     case LIST_ITEM_ADD_NOTE_REQUEST: {
-      const { id } = action
-      return { ...state, listItemNoteOpen: true, listItemId: id }
+      const { id, position } = action
+      return { ...state, listItemNoteOpen: true, listItemId: id, listItemPosition: position }
     }
 
     case LIST_ITEM_ADD_NOTE_SUCCESS:
     case LIST_ITEM_ADD_NOTE_FAILURE:
     case LIST_ITEM_ADD_NOTE_CANCEL: {
-      return { ...state, listItemNoteOpen: false, listItemId: null }
+      return { ...state, listItemNoteOpen: false, listItemId: null, listItemPosition: null }
     }
 
     default:

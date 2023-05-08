@@ -22,14 +22,14 @@ export const AddNoteModal = ({
 
   return (
     <Modal
-      title={t('list:add-note', 'Add note')}
+      title={t('list:add-note', 'Add Note')}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t('list:add-note', 'Add note')}
+      screenReaderLabel={t('list:add-note', 'Add Note')}
       handleClose={onClose}>
       <ModalBody>
         <TextArea
-          labelText="Note"
+          labelText={t('list:add-note', 'Add Note')}
           name="item-note"
           value={noteValue}
           onChange={onNoteChange}

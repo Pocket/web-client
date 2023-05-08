@@ -60,6 +60,7 @@ export const IndividualListCard = ({ id, listId, position }) => {
         onOpenOriginalUrl={onOpenOriginal}
         onOpen={onOpen}
         analyticsData={analyticsData}
+        position={position}
         Actions={ListActions}
         clamp
       />
@@ -79,7 +80,7 @@ const listActionStyles = css`
   }
 `
 
-export const ListActions = ({ id, listId, analyticsData }) => {
+export const ListActions = ({ id, listId, analyticsData, position }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
@@ -88,7 +89,7 @@ export const ListActions = ({ id, listId, analyticsData }) => {
 
   const handleAddNote = () => {
     dispatch(sendSnowplowEvent('shareable-list.item.note.add.intent', analyticsData))
-    dispatch(mutateListItemNote(id))
+    dispatch(mutateListItemNote({ id, position }))
   }
 
   const handleDeleteItem = () => {
@@ -100,12 +101,12 @@ export const ListActions = ({ id, listId, analyticsData }) => {
     <div className={listActionStyles}>
       {inListsDev ? (
         <button
-          aria-label="Add note"
+          aria-label={t('list:add-note', 'Add Note')}
           data-cy="add-note"
           className="tiny outline"
           onClick={handleAddNote}>
           <AddNoteIcon />
-          Add Note
+          {t('list:add-note', 'Add Note')}
         </button>
       ) : null}
       <button
