@@ -24,9 +24,9 @@ export const EmptyAllLists = ({ handleCreate }) => {
   return (
     <div className={emptyStyles}>
       <img src={BorderSVG.src} alt="" />
-      <p>{t("lists:create-your-first-list.", "Create your first list.")}</p>
+      <p>{t("lists:create-your-first-list", "Create your first list.")}</p>
       <button className="outline" onClick={onCreateList}>
-        <ListAddIcon /> {t("lists:Create list", "Create list")}
+        <ListAddIcon /> {t("lists:create-list", "Create list")}
       </button>
     </div>
   )
