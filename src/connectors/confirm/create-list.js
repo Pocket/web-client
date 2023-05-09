@@ -23,20 +23,23 @@ export const CreateListModal = () => {
   }
 
   const handleSubmit = (title, description) => {
-    if (existsInArray(titleList, title)) return setError('List name has already been used.')
+    const errorText = t('list:dupe-error', 'List name has already been used.')
+    if (existsInArray(titleList, title)) return setError(errorText)
 
     dispatch(mutateListConfirm({ title, description }))
     dispatch(sendSnowplowEvent('shareable-list.create.submit'))
     setError(null)
   }
 
-  const createList = (id) ? 'Create list with item' : 'Create list'
+  const createList = id
+    ? t('list:create-list-with-item', 'Create list with item')
+    : t('list:create-list', 'Create list')
 
   return showModal ? (
     <CreateEditShareableList
       showModal={showModal}
       modalTitle={createList}
-      modalSubmit={'Create List'}
+      modalSubmit={t('list:create-list', 'Create List')}
       handleClose={handleClose}
       handleSubmit={handleSubmit}
       error={error}

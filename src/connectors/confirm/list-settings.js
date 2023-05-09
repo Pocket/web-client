@@ -30,7 +30,8 @@ export const ListSettingsModal = ({ id }) => {
 
   const handleSubmit = (listNameValue, descriptionValue) => {
     if (existsInArray(titleList, listNameValue) && listNameValue !== title) {
-      return setError('List name has already been used.')
+      const errorText = t('list:dupe-error', 'List name has already been used.')
+      return setError(errorText)
     }
 
     const data = {

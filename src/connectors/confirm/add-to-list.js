@@ -6,8 +6,10 @@ import { mutateListAddCancel } from 'connectors/lists/mutation-add.state'
 import { mutateListAddConfirm } from 'connectors/lists/mutation-add.state'
 import { getAllListsAction } from 'containers/lists/lists.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { useTranslation } from 'next-i18next'
 
 export const ConfirmAddToList = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const id = useSelector((state) => state.mutationListAdd.id)
@@ -41,7 +43,7 @@ export const ConfirmAddToList = () => {
     dispatch(mutateListAddConfirm({ externalId, listTitle }))
   }
 
-  const addToList = 'Add to List'
+  const addToList = t('list:add-to-list', 'Add to List')
   const selectOptions = titleToIdList ? Object.keys(titleToIdList) : []
 
   return showModal ? (
