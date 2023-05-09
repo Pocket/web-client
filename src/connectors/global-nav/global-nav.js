@@ -68,10 +68,10 @@ const GlobalNav = (props) => {
   const isLoggedIn = useSelector((state) => !!state.user.auth)
   const retrievedAvatar = useSelector((state) => state?.userProfile?.avatar_url)
   const pocketLogoOutboundUrl = isLoggedIn ? '/saves' : 'https://getpocket.com'
-  const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
+  const enrolledPilot = useSelector((state) => state.pageListsInfo.enrolled)
   const featureState = useSelector((state) => state.features)
-  const inListsRelease = featureFlagActive({ flag: 'lists', featureState })
-  const showLists = inListsExperiment || inListsRelease
+  const enrolledRelease = featureFlagActive({ flag: 'lists', featureState })
+  const showLists = enrolledPilot || enrolledRelease
 
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.userProfile?.first_name)

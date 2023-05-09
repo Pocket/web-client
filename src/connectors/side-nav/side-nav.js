@@ -17,14 +17,14 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
   const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
   const appMode = useSelector((state) => state?.app?.mode)
   const titleToIdList = useSelector((state) => state.pageListsInfo.titleToIdList)
-  const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
+  const enrolledPilot = useSelector((state) => state.pageListsInfo.enrolled)
   const featureState = useSelector((state) => state.features)
-  const inListsRelease = featureFlagActive({ flag: 'lists', featureState })
-  const showLists = inListsExperiment || inListsRelease
+  const enrolledRelease = featureFlagActive({ flag: 'lists', featureState })
+  const showLists = enrolledPilot || enrolledRelease
 
   useEffect(() => {
-    if (inListsExperiment) dispatch(getAllListsAction())
-  }, [dispatch, inListsExperiment])
+    if (showLists) dispatch(getAllListsAction())
+  }, [dispatch, showLists])
 
   const trackMenuClick = (label) => dispatch(sendSnowplowEvent('side-nav', { label }))
   const handleCreateList = () => {
@@ -50,7 +50,7 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
       tag={tag}
       flagsReady={flagsReady}
       trackMenuClick={trackMenuClick}
-      inListsExperiment={showLists}
+      showLists={showLists}
       handleCreateList={handleCreateList}
       recentLists={titleToIdList}
     />

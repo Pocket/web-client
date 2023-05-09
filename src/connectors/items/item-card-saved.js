@@ -167,10 +167,11 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   const position = useSelector((state) => state.pageSavedIds.indexOf(id))
   const item = useSelector((state) => state.itemsDisplay[id])
   const hasLists = useSelector((state) => state.pageListsInfo.listsIds)
-  const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
+
+  const enrolledPilot = useSelector((state) => state.pageListsInfo.enrolled)
   const featureState = useSelector((state) => state.features)
-  const inListsRelease = featureFlagActive({ flag: 'lists', featureState })
-  const showLists = inListsExperiment || inListsRelease
+  const enrolledRelease = featureFlagActive({ flag: 'lists', featureState })
+  const showLists = enrolledPilot || enrolledRelease
 
   if (!itemSaved || !item) return null
   const { isFavorite, isArchived, tags} = itemSaved //prettier-ignore
@@ -221,7 +222,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   return (
     <SavedActions
       visibleCount={visibleCount}
-      inListsExperiment={showLists}
+      showLists={showLists}
       isPremium={isPremium}
       isArchived={isArchived}
       isFavorite={isFavorite}

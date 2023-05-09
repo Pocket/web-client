@@ -59,7 +59,7 @@ export function SavedActions({
   actionPremLibOpen,
   actionAddToList,
   permanentUrl,
-  inListsExperiment
+  showLists
 }) {
   const { t } = useTranslation()
   const archiveLabel = isArchived
@@ -77,7 +77,7 @@ export function SavedActions({
   const actionTypes = {
     lists: {
       label: t('item-action:add-to-list', 'Add to List'),
-      hide: !inListsExperiment,
+      hide: !showLists,
       icon: <ListAddIcon />,
       onClick: actionAddToList
     },

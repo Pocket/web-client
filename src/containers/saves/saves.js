@@ -47,7 +47,6 @@ export const Saves = (props) => {
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const total = useSelector((state) => state.pageSavedInfo.totalCount)
   const inBulkEdit = useSelector((state) => state?.app?.mode === 'bulk')
-  const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
 
   const enrolledPilot = useSelector((state) => state.pageListsInfo.enrolled)
   const enrolledRelease = featureFlagActive({ flag: 'lists', featureState })
@@ -91,7 +90,7 @@ export const Saves = (props) => {
           handleOldest={handleOldest}
           isPremium={isPremium}
           handleRelevance={handleRelevance}
-          inListsExperiment={enrolled}
+          showLists={enrolled}
           handleCreateList={handleCreateList}
           inBulkEdit={inBulkEdit}
         />
