@@ -447,6 +447,41 @@ export const shareableListActions = {
     ],
     description: 'Fired when a creator Saves a note in the Add Note modal'
   },
+  'shareable-list.item.note.delete.intent': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a creator clicks the "Delete" button on a list on the All Lists page'
+  },
+  'shareable-list.item.note.delete.cancel': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a creator clicks the "X" button in the Delete Note Modal'
+  },
+  'shareable-list.item.note.delete.confirm': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description: 'Fired when a creator clicks the "Delete" button in the Delete Note Modal'
+  },
 
   // PUBLIC list
   'public-list.save': {

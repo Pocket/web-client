@@ -9,6 +9,7 @@ import { setNoImage } from 'connectors/lists/lists-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { AddNoteIcon } from 'components/icons/AddNoteIcon'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { ItemNote } from './item-note'
 
 export const IndividualListCard = ({ id, listId, position }) => {
   const dispatch = useDispatch()
@@ -19,7 +20,7 @@ export const IndividualListCard = ({ id, listId, position }) => {
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
   if (!item) return null
-  const { externalId, title, excerpt, publisher, url, note, analyticsData: passedAnalytics } = item
+  const { externalId, title, excerpt, publisher, url, analyticsData: passedAnalytics } = item
   const analyticsData = {
     ...passedAnalytics,
     sortOrder: position,
@@ -64,7 +65,7 @@ export const IndividualListCard = ({ id, listId, position }) => {
         Actions={ListActions}
         clamp
       />
-      {inListsDev ? note : null}
+      {inListsDev ? <ItemNote externalId={externalId} position={position} /> : null}
     </div>
   )
 }
