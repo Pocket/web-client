@@ -1,3 +1,10 @@
+## [1.93.6](https://github.com/Pocket/web-client/compare/v1.93.5...v1.93.6) (2023-05-09)
+
+
+### Bug Fixes
+
+* **bulk:** adding tools back to global nav on page filters ([06b86ca](https://github.com/Pocket/web-client/commit/06b86ca825003daa7dee544be5b4556b8acec90c))
+
 ## [1.93.5](https://github.com/Pocket/web-client/compare/v1.93.4...v1.93.5) (2023-05-09)
 
 
