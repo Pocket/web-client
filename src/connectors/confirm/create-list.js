@@ -5,8 +5,10 @@ import { mutateListConfirm } from 'connectors/lists/mutation-create.state'
 import { mutateListCancel } from 'connectors/lists/mutation-create.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { existsInArray } from 'common/utilities/object-array/object-array'
+import { useTranslation } from 'next-i18next'
 
 export const CreateListModal = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const [error, setError] = useState(null)
 
