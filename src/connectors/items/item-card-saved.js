@@ -19,6 +19,8 @@ import { shareAction } from 'connectors/items/mutation-share.state'
 import { mutateListAddItem } from 'connectors/lists/mutation-add.state'
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
 
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 /**
  * Article Card
  * Creates a connected `Card` with the appropriate data and actions
@@ -164,8 +166,11 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   const { filters, sort } = useSelector((state) => state.pageSavedInfo)
   const position = useSelector((state) => state.pageSavedIds.indexOf(id))
   const item = useSelector((state) => state.itemsDisplay[id])
-  const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
   const hasLists = useSelector((state) => state.pageListsInfo.listsIds)
+  const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
+  const featureState = useSelector((state) => state.features)
+  const inListsRelease = featureFlagActive({ flag: 'lists', featureState })
+  const showLists = inListsExperiment || inListsRelease
 
   if (!itemSaved || !item) return null
   const { isFavorite, isArchived, tags} = itemSaved //prettier-ignore
@@ -216,7 +221,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   return (
     <SavedActions
       visibleCount={visibleCount}
-      inListsExperiment={inListsExperiment}
+      inListsExperiment={showLists}
       isPremium={isPremium}
       isArchived={isArchived}
       isFavorite={isFavorite}

@@ -33,6 +33,8 @@ import { LOGIN_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities/urls/urls'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
   const DISALLOWED_PROFILE_IMGS = ['profileBlue.png'] // file names of default urls returned by BE. If a user avatar url contains one of these, we prefer to return an empty string, in order to use the Web UI's Avatar default image instead
@@ -67,6 +69,9 @@ const GlobalNav = (props) => {
   const retrievedAvatar = useSelector((state) => state?.userProfile?.avatar_url)
   const pocketLogoOutboundUrl = isLoggedIn ? '/saves' : 'https://getpocket.com'
   const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
+  const featureState = useSelector((state) => state.features)
+  const inListsRelease = featureFlagActive({ flag: 'lists', featureState })
+  const showLists = inListsExperiment || inListsRelease
 
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.userProfile?.first_name)
@@ -129,7 +134,7 @@ const GlobalNav = (props) => {
       icon: <ListViewAltIcon />,
       label: t('nav:all-lists', 'All Lists'),
       newLabel: true,
-      url: inListsExperiment ? '/lists' : ''
+      url: showLists ? '/lists' : ''
     },
     {
       name: 'archive',

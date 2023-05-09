@@ -7,6 +7,8 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
 import { getAllListsAction } from 'containers/lists/lists.state'
 
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 export function SideNav({ type, subset, isLoggedIn, tag }) {
   const dispatch = useDispatch()
 
@@ -14,8 +16,11 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
   const pinnedTags = useSelector((state) => state.settings.pinnedTags)
   const pinnedTopics = useSelector((state) => state.settings.pinnedTopics)
   const appMode = useSelector((state) => state?.app?.mode)
-  const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
   const titleToIdList = useSelector((state) => state.pageListsInfo.titleToIdList)
+  const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
+  const featureState = useSelector((state) => state.features)
+  const inListsRelease = featureFlagActive({ flag: 'lists', featureState })
+  const showLists = inListsExperiment || inListsRelease
 
   useEffect(() => {
     if (inListsExperiment) dispatch(getAllListsAction())
@@ -45,7 +50,7 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
       tag={tag}
       flagsReady={flagsReady}
       trackMenuClick={trackMenuClick}
-      inListsExperiment={inListsExperiment}
+      inListsExperiment={showLists}
       handleCreateList={handleCreateList}
       recentLists={titleToIdList}
     />

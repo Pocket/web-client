@@ -26,6 +26,8 @@ import { CreateListModal } from 'connectors/confirm/create-list'
 
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
 
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 export const Saves = (props) => {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -47,6 +49,10 @@ export const Saves = (props) => {
   const inBulkEdit = useSelector((state) => state?.app?.mode === 'bulk')
   const inListsExperiment = useSelector((state) => state.pageListsInfo.enrolled)
 
+  const enrolledPilot = useSelector((state) => state.pageListsInfo.enrolled)
+  const enrolledRelease = featureFlagActive({ flag: 'lists', featureState })
+  const enrolled = enrolledPilot || enrolledRelease
+
   // Derived Values
   const shouldRender = userStatus !== 'pending'
   const { flagsReady } = featureState
@@ -64,7 +70,12 @@ export const Saves = (props) => {
   }
 
   return (
-    <Layout title={metaData.title} metaData={metaData} selectedNavLink={selectedNavLink} subset={subset} tag={tag}>
+    <Layout
+      title={metaData.title}
+      metaData={metaData}
+      selectedNavLink={selectedNavLink}
+      subset={subset}
+      tag={tag}>
       <SideNav type="saves" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
       <main className="main">
         <SuccessFXA type="saves" />
@@ -80,7 +91,7 @@ export const Saves = (props) => {
           handleOldest={handleOldest}
           isPremium={isPremium}
           handleRelevance={handleRelevance}
-          inListsExperiment={inListsExperiment}
+          inListsExperiment={enrolled}
           handleCreateList={handleCreateList}
           inBulkEdit={inBulkEdit}
         />
