@@ -29,6 +29,7 @@ export const AddNoteModal = ({
       handleClose={onClose}>
       <ModalBody>
         <TextArea
+          autoFocus={true}
           labelText={t('list:add-note', 'Add Note')}
           name="item-note"
           value={noteValue}
