@@ -56,7 +56,8 @@ const GlobalNav = (props) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
-  const selectedLink = selected !== undefined ? selected : getTopLevelPath(router?.pathname)
+  const topLevelPath = getTopLevelPath(router?.pathname)
+  const selectedLink = selected !== undefined ? selected : topLevelPath
 
   const appMode = useSelector((state) => state?.app?.mode)
   const flagsReady = useSelector((state) => state.features.flagsReady)
@@ -172,7 +173,7 @@ const GlobalNav = (props) => {
   /**
    * Tools are what we use on Saves
    */
-  const showNav = selectedLink === 'saves' && isLoggedIn
+  const showNav = topLevelPath === 'saves' && isLoggedIn
   const tools = showNav
     ? [
         {
