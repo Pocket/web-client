@@ -19,7 +19,8 @@ export const ItemNote = ({ externalId, position }) => {
   const analyticsData = {
     ...passedAnalytics,
     sortOrder: position,
-    position
+    position,
+    note
   }
 
   const handleEdit = () => {
