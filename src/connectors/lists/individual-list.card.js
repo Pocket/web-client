@@ -9,13 +9,10 @@ import { setNoImage } from 'connectors/lists/lists-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { AddNoteIcon } from 'components/icons/AddNoteIcon'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
-import { ItemNote } from './item-note'
 
 export const IndividualListCard = ({ id, listId, position }) => {
   const dispatch = useDispatch()
 
-  const featureState = useSelector((state) => state.features)
-  const inListsDev = featureFlagActive({ flag: 'lists.dev', featureState })
   const item = useSelector((state) => state.listsDisplay[id])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
@@ -66,7 +63,6 @@ export const IndividualListCard = ({ id, listId, position }) => {
         Actions={ListActions}
         clamp
       />
-      {inListsDev ? <ItemNote externalId={externalId} position={position} /> : null}
     </div>
   )
 }
