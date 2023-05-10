@@ -22,6 +22,7 @@ import { LIST_INDIVIDUAL_FAILURE } from 'actions'
 
 import { LIST_CREATE_SUCCESS } from 'actions'
 import { LIST_DELETE_SUCCESS } from 'actions'
+import { LIST_UPDATE_SUCCESS } from 'actions'
 
 import { VARIANTS_SAVE } from 'actions'
 
@@ -68,10 +69,15 @@ export const pageListsInfoReducers = (state = initialState, action) => {
     case LIST_DELETE_SUCCESS: {
       const { deletedId } = action
       const listsIds = state.listsIds.filter((id) => id !== deletedId)
-      const titleToIdList = Object.keys(state.titleToIdList)
-        .filter((title) => state.titleToIdList[title] !== deletedId)
-        .reduce((obj, title) => ({ ...obj, [title]: state.titleToIdList[title] }), {})
+      const titleToIdList = listDeleteHelper(state, deletedId)
       return { ...state, titleToIdList, listsIds }
+    }
+
+    case LIST_UPDATE_SUCCESS: {
+      const { externalId, title } = action
+      const titleToIdList = listUpdateHelper(state, externalId, title)
+
+      return { ...state, titleToIdList }
     }
 
     case LIST_ALL_REQUEST_SUCCESS: {
@@ -83,6 +89,20 @@ export const pageListsInfoReducers = (state = initialState, action) => {
       return state
   }
 }
+
+const listDeleteHelper = (state, deletedId) =>
+  Object.keys(state.titleToIdList)
+    .filter((title) => state.titleToIdList[title] !== deletedId)
+    .reduce((obj, title) => ({ ...obj, [title]: state.titleToIdList[title] }), {})
+
+const listUpdateHelper = (state, externalId, title) =>
+  Object.keys(state.titleToIdList).reduce(
+    (obj, name) => ({
+      ...obj,
+      [state.titleToIdList[name] === externalId ? title : name]: state.titleToIdList[name]
+    }),
+    {}
+  )
 
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
@@ -102,10 +122,10 @@ const getSortOrder = (state) => state.pageListsInfo?.sortOrder
 function* fetchListPilotStatus() {
   try {
     const enrolled = yield getShareableListPilotStatus()
-    const version = (enrolled) ? 'pilot.v1' : 'control'
+    const version = enrolled ? 'pilot.v1' : 'control'
     const variants = { 'shareable.lists': version }
 
-    yield put ({ type: VARIANTS_SAVE, variants })
+    yield put({ type: VARIANTS_SAVE, variants })
     yield put({ type: LIST_CHECK_PILOT_STATUS_SUCCESS, enrolled })
   } catch {
     yield put({ type: LIST_CHECK_PILOT_STATUS_FAILURE })
@@ -145,6 +165,6 @@ function* getIndividualList({ id }) {
 
 /** ASYNC REQUESTS
  --------------------------------------------------------------- */
- export function fetchPublicListHydrationData({ slug, listId }) {
+export function fetchPublicListHydrationData({ slug, listId }) {
   return getShareableListPublic({ slug, listId })
 }
