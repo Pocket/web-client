@@ -76,7 +76,6 @@ export const pageListsInfoReducers = (state = initialState, action) => {
     case LIST_UPDATE_SUCCESS: {
       const { externalId, title } = action
       const titleToIdList = listUpdateHelper(state, externalId, title)
-
       return { ...state, titleToIdList }
     }
 
