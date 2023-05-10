@@ -1,10 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { AddNoteModal } from 'components/shareable-lists/add-note-modal'
 import { mutateListItemNoteCancel } from 'connectors/lists/mutation-update.state'
 import { mutateListItemNoteConfirm } from 'connectors/lists/mutation-update.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const AddListItemNote = () => {
+  const { t } = useTranslation()
+
   const dispatch = useDispatch()
 
   const id = useSelector((state) => state.mutationListUpdate.listItemId)
@@ -32,6 +35,7 @@ export const AddListItemNote = () => {
   return showModal ? (
     <AddNoteModal
       showModal={showModal}
+      label={t('list:add-note', 'Add Note')}
       note={note}
       handleClose={handleClose}
       handleSubmit={handleSubmit}

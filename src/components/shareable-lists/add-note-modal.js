@@ -5,6 +5,7 @@ import { TextArea } from 'components/form-fields/text-area'
 
 export const AddNoteModal = ({
   showModal,
+  label,
   note = '',
   handleClose,
   handleSubmit,
@@ -22,15 +23,15 @@ export const AddNoteModal = ({
 
   return (
     <Modal
-      title={t('list:add-note', 'Add Note')}
+      title={label}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t('list:add-note', 'Add Note')}
+      screenReaderLabel={label}
       handleClose={onClose}>
       <ModalBody>
         <TextArea
           autoFocus={true}
-          labelText={t('list:add-note', 'Add Note')}
+          labelText={label}
           name="item-note"
           value={noteValue}
           onChange={onNoteChange}

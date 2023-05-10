@@ -20,12 +20,13 @@ export const IndividualListCard = ({ id, listId, position }) => {
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
   if (!item) return null
-  const { externalId, title, excerpt, publisher, url, analyticsData: passedAnalytics } = item
+  const { externalId, title, excerpt, publisher, url, note, analyticsData: passedAnalytics } = item
   const analyticsData = {
     ...passedAnalytics,
     sortOrder: position,
     position,
-    destination: 'external'
+    destination: 'external',
+    note
   }
 
   const itemImage = item?.noImage ? '' : item?.imageUrl
@@ -85,6 +86,7 @@ export const ListActions = ({ id, listId, analyticsData, position }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
+  const note = useSelector((state) => state.listsDisplay[id]?.note)
   const featureState = useSelector((state) => state.features)
   const inListsDev = featureFlagActive({ flag: 'lists.dev', featureState })
 
@@ -100,7 +102,7 @@ export const ListActions = ({ id, listId, analyticsData, position }) => {
 
   return (
     <div className={listActionStyles}>
-      {inListsDev ? (
+      {inListsDev && !note ? (
         <button
           aria-label={t('list:add-note', 'Add Note')}
           data-cy="add-note"

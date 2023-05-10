@@ -5,6 +5,7 @@ import { EditIcon } from 'components/icons/EditIcon'
 import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { mutateListItemNoteDelete } from './mutation-delete.state'
+import { mutateListItemNoteEdit } from './mutation-update.state'
 import { topTooltip } from 'components/tooltip/tooltip'
 
 export const ItemNote = ({ externalId, position }) => {
@@ -22,8 +23,8 @@ export const ItemNote = ({ externalId, position }) => {
   }
 
   const handleEdit = () => {
-    // dispatch(mutateListItemNote(externalId))
-    // dispatch(sendSnowplowEvent('shareable-list.item.note.edit.intent', analyticsData))
+    dispatch(mutateListItemNoteEdit({ id: externalId, position }))
+    dispatch(sendSnowplowEvent('shareable-list.item.note.edit.intent', analyticsData))
   }
 
   const handleDelete = () => {

@@ -22,6 +22,7 @@ import { LIST_ITEM_ADD_NOTE_CONFIRM } from 'actions'
 import { LIST_ITEM_ADD_NOTE_CANCEL } from 'actions'
 import { LIST_ITEM_ADD_NOTE_SUCCESS } from 'actions'
 import { LIST_ITEM_ADD_NOTE_FAILURE } from 'actions'
+import { LIST_ITEM_EDIT_NOTE_REQUEST } from 'actions'
 
 import { LIST_ITEMS_REORDER_REQUEST } from 'actions'
 import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
@@ -40,6 +41,7 @@ export const mutateListStatusAction = ({ id, status, listItemNoteVisibility }) =
 export const mutateListItemNote = ({ id, position }) => ({ type: LIST_ITEM_ADD_NOTE_REQUEST, id, position }) //prettier-ignore
 export const mutateListItemNoteCancel = () => ({ type: LIST_ITEM_ADD_NOTE_CANCEL })
 export const mutateListItemNoteConfirm = (note) => ({ type: LIST_ITEM_ADD_NOTE_CONFIRM, note })
+export const mutateListItemNoteEdit = ({ id, position }) => ({ type: LIST_ITEM_EDIT_NOTE_REQUEST, id, position }) //prettier-ignore
 
 export const mutateReorderListItems = ({ id, items }) => ({ type: LIST_ITEMS_REORDER_REQUEST, id, items }) //prettier-ignore
 
@@ -48,6 +50,7 @@ export const mutateReorderListItems = ({ id, items }) => ({ type: LIST_ITEMS_REO
 const initialState = {
   listSettingsOpen: false,
   listItemNoteOpen: false,
+  listItemNoteEditOpen: false,
   listItemId: null,
   listItemPosition: null,
   lastUsedList: ''
@@ -70,10 +73,21 @@ export const mutationListUpdateReducers = (state = initialState, action) => {
       return { ...state, listItemNoteOpen: true, listItemId: id, listItemPosition: position }
     }
 
+    case LIST_ITEM_EDIT_NOTE_REQUEST: {
+      const { id, position } = action
+      return { ...state, listItemNoteEditOpen: true, listItemId: id, listItemPosition: position }
+    }
+
     case LIST_ITEM_ADD_NOTE_SUCCESS:
     case LIST_ITEM_ADD_NOTE_FAILURE:
     case LIST_ITEM_ADD_NOTE_CANCEL: {
-      return { ...state, listItemNoteOpen: false, listItemId: null, listItemPosition: null }
+      return {
+        ...state,
+        listItemNoteOpen: false,
+        listItemNoteEditOpen: false,
+        listItemId: null,
+        listItemPosition: null
+      }
     }
 
     default:
@@ -87,6 +101,7 @@ export const mutationListUpdateSagas = [
   takeLatest(LIST_UPDATE_REQUEST, listUpdate),
   takeLatest(LIST_UPDATE_STATUS_REQUEST, listUpdateStatus),
   takeLatest(LIST_ITEM_ADD_NOTE_REQUEST, listItemAddNote),
+  takeLatest(LIST_ITEM_EDIT_NOTE_REQUEST, listItemAddNote),
   takeLatest(LIST_ITEMS_REORDER_REQUEST, listItemsReorder)
 ]
 

@@ -482,6 +482,64 @@ export const shareableListActions = {
     },
     description: 'Fired when a creator clicks the "Delete" button in the Delete Note Modal'
   },
+  'shareable-list.item.note.edit.intent': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description:
+      'Fired when a creator clicks the Edit Note button on a note on the individual list page'
+  },
+  'shareable-list.item.note.edit.cancel': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a creator cancels out of the Edit Note modal'
+  },
+  'shareable-list.item.note.edit.submit': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableListItem'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListItemExternalId',
+      'shareableListExternalId',
+      'givenUrl',
+      'title',
+      'excerpt',
+      'imageUrl',
+      'publisher',
+      'sortOrder',
+      'createdAt'
+    ],
+    description: 'Fired when a creator Saves a note in the Edit Note modal'
+  },
 
   // PUBLIC list
   'public-list.save': {
