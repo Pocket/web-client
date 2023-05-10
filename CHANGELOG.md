@@ -1,3 +1,11 @@
+## [1.93.9](https://github.com/Pocket/web-client/compare/v1.93.8...v1.93.9) (2023-05-10)
+
+
+### Bug Fixes
+
+* **list:** remove extraneous space from the state file ([146ba26](https://github.com/Pocket/web-client/commit/146ba268d75de539c4bfaab9807034ce19030c45))
+* **lists:** bug-fix renamed list should reflect in sidebar ([7294bec](https://github.com/Pocket/web-client/commit/7294bec95d84217236274eb57116368bacf00339))
+
 ## [1.93.8](https://github.com/Pocket/web-client/compare/v1.93.7...v1.93.8) (2023-05-09)
 
 
