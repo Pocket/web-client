@@ -126,15 +126,6 @@ export const ListActions = ({ id, listId, analyticsData, position }) => {
   )
 }
 
-const noteActionStyles = css`
-  button {
-    margin-left: 8px;
-    width: 32px;
-    height: 32px;
-    border: 0;
-  }
-`
-
 export const NoteActions = ({ externalId, analyticsData, position }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -150,7 +141,7 @@ export const NoteActions = ({ externalId, analyticsData, position }) => {
   }
 
   return (
-    <div className={noteActionStyles}>
+    <>
       <button
         className={cx(topTooltip, 'inline')}
         aria-label={t('list:edit-note', 'Edit Note')}
@@ -165,6 +156,6 @@ export const NoteActions = ({ externalId, analyticsData, position }) => {
         onClick={handleDelete}>
         <DeleteIcon />
       </button>
-    </div>
+    </>
   )
 }

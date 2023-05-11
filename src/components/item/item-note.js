@@ -31,6 +31,12 @@ const itemNoteStyles = css`
   .buttons {
     margin-left: auto;
     display: flex;
+    button {
+      margin-left: 8px;
+      width: 32px;
+      height: 32px;
+      border: 0;
+    }
   }
 `
 
