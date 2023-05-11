@@ -7,11 +7,12 @@ import { SortOrderIcon } from 'components/icons/SortOrderIcon'
 import Avatar from 'components/avatar/avatar'
 import { SaveListButton } from 'components/content-saving/save-list'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
-import { VisibilityOptions } from 'components/shareable-lists/visibility-options'
-import { ListStatusToggle } from 'components/shareable-lists/list-status-toggle'
 import { breakpointSmallTablet } from 'common/constants'
+import { breakpointSmallHandset } from 'common/constants'
+import { breakpointLargeHandset } from 'common/constants'
 import { PublicListUrl } from 'components/shareable-lists/public-list-url'
 import { useTranslation } from 'react-i18next'
+import { ListNoteStatus } from 'components/shareable-lists/list-note-status'
 
 const listHeaderStyles = css`
   padding-bottom: 22px;
@@ -34,22 +35,31 @@ const listHeaderStyles = css`
     }
   }
 
+  .list-actions,
+  .reorder {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+
+  .actions-start,
+  .actions-end {
+    * + button {
+      margin-left: 12px;
+    }
+  }
+
+  .reorder {
+    justify-content: end;
+
+    button + button {
+      margin-left: 12px;
+    }
+  }
+
   .create-sort {
     display: flex;
     align-items: center;
-
-    &.wrap {
-      flex-wrap: wrap;
-      margin-top: 12px;
-
-      > button {
-        margin: 0 12px 12px 0;
-
-        &:last-child {
-          margin-right: 0;
-        }
-      }
-    }
 
     select {
       min-width: 100px;
@@ -59,37 +69,44 @@ const listHeaderStyles = css`
     }
   }
 
-  .create-reorder {
-    .save {
-      margin-right: 12px;
+  ${breakpointLargeHandset} {
+    .list-actions {
+      display: block;
+
+      .actions-end {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+
+      .actions-start,
+      .actions-end {
+        button {
+          width: 100%;
+          margin-left: 0;
+          margin-top: 12px;
+        }
+      }
     }
   }
 
-  ${breakpointSmallTablet} {
-    &.list-individual {
-      flex-direction: column;
-
-      .create-sort {
-        margin-top: 12px;
-        flex-direction: column;
-        width: 100%;
-
-        button {
-          width: 100%;
-          margin: 12px 0 0;
-        }
+  ${breakpointSmallHandset} {
+    .reorder {
+      button + button {
+        margin-left: 8px;
       }
 
-      .create-reorder {
+      .actions-end {
         display: flex;
+        align-items: center;
         width: 100%;
+      }
 
-        .save {
-          flex-grow: 2;
-        }
-        .cancel {
-          flex-grow: 1;
-        }
+      .save {
+        flex-grow: 2;
+      }
+
+      .cancel {
+        flex-grow: 1;
       }
     }
   }
@@ -189,7 +206,9 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
 }
 
 export const ListIndividualHeader = ({
-  inListsDev,
+  enrolledPilot,
+  enrolledRelease,
+  enrolledDev,
   title,
   description,
   externalId,
@@ -206,6 +225,9 @@ export const ListIndividualHeader = ({
   const { t } = useTranslation()
 
   const isPublic = status === 'PUBLIC'
+  const enrolledInternal = enrolledDev || enrolledPilot
+  const showShare = isPublic && enrolledInternal
+
   const publicListInfo = {
     externalId,
     status,
@@ -226,38 +248,42 @@ export const ListIndividualHeader = ({
         />
       </div>
 
-      <div className="create-sort wrap">
-        {isPublic ? (
-          <button onClick={handleShare} className="tiny share">
-            <IosShareIcon /> {t('list:share', 'Share')}
+      <div className="list-actions">
+        <div className="actions-start">
+          {enrolledRelease && !enrolledInternal ? null : (
+            <ListNoteStatus
+              status={status}
+              listItemNoteVisibility={listItemNoteVisibility}
+              handleSetStatus={handleSetStatus}
+              enrolledDev={enrolledDev}
+            />
+          )}
+          {enrolledDev ? (
+            <button onClick={handleSort} className="sort tiny outline">
+              <SortOrderIcon /> {t('list:reorder', 'Reorder')}
+            </button>
+          ) : null}
+        </div>
+
+        <div className="actions-end share">
+          {showShare ? (
+            <button onClick={handleShare} className="tiny share">
+              <IosShareIcon /> {t('list:share', 'Share')}
+            </button>
+          ) : null}
+
+          <button onClick={handleEdit} className="filter tiny outline">
+            <FiltersAltIcon /> {t('list:settings', 'Settings')}
           </button>
-        ) : null}
-
-        {inListsDev ? (
-          <VisibilityOptions
-            status={status}
-            listItemNoteVisibility={listItemNoteVisibility}
-            handleSetStatus={handleSetStatus}
-          />
-        ) : (
-          <ListStatusToggle status={status} handleSetStatus={handleSetStatus} />
-        )}
-
-        <button onClick={handleEdit} className="filter tiny outline">
-          <FiltersAltIcon /> {t('list:settings', 'Settings')}
-        </button>
-
-        {inListsDev ? (
-          <button onClick={handleSort} className="sort tiny outline">
-            <SortOrderIcon /> Reorder
-          </button>
-        ) : null}
+        </div>
       </div>
     </header>
   )
 }
 
 export const ListSortHeader = ({ title, description, handleSave, handleCancel }) => {
+  const { t } = useTranslation()
+
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles, 'list-individual')}>
       <div className="headline">
@@ -267,14 +293,16 @@ export const ListSortHeader = ({ title, description, handleSave, handleCancel })
         <p className="description">{description}</p>
       </div>
 
-      <div className="create-reorder">
-        <button onClick={handleSave} className="tiny save">
-          <SortOrderIcon /> Save Order
-        </button>
+      <div className="reorder">
+        <div className="actions-end">
+          <button onClick={handleSave} className="tiny save">
+            <SortOrderIcon /> {t('list:save-order', 'Save Order')}
+          </button>
 
-        <button onClick={handleCancel} className="tiny outline cancel">
-          Cancel
-        </button>
+          <button onClick={handleCancel} className="tiny outline cancel">
+            {t('list:cancel', 'Cancel')}
+          </button>
+        </div>
       </div>
     </header>
   )

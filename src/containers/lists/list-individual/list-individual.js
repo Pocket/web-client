@@ -16,6 +16,8 @@ import { ConfirmShare } from 'connectors/confirm/share-list'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { appSetMode } from 'connectors/app/app.state'
 
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 export const ListIndividual = () => {
   const dispatch = useDispatch()
   const router = useRouter()
@@ -23,8 +25,11 @@ export const ListIndividual = () => {
 
   const [reorder, setReorder] = useState(false)
 
-  const enrolled = useSelector((state) => state.pageListsInfo.enrolled)
+  const featureState = useSelector((state) => state.features)
   const enrolledFetched = useSelector((state) => state.pageListsInfo.enrolledFetched)
+  const enrolledPilot = useSelector((state) => state.pageListsInfo.enrolled)
+  const enrolledRelease = featureFlagActive({ flag: 'lists', featureState })
+  const enrolled = enrolledPilot || enrolledRelease
 
   useEffect(() => {
     if (enrolled) dispatch(getIndividualListAction(id))

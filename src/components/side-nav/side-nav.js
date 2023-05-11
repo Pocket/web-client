@@ -173,7 +173,7 @@ export const sideNavItem = css`
     color: var(--color-navCurrentTabText);
     background-color: var(--color-navCurrentTab);
 
-    .side-nav-icon{
+    .side-nav-icon {
       &.active {
         display: block;
       }
@@ -195,7 +195,7 @@ export function SideNav({
   pinned,
   isDisabled,
   trackMenuClick,
-  inListsExperiment,
+  showLists,
   handleCreateList,
   recentLists
 }) {
@@ -261,7 +261,7 @@ export function SideNav({
             subActive={subActive}
             pinned={pinned}
             clickEvent={clickEvent}
-            inListsExperiment={inListsExperiment}
+            showLists={showLists}
             handleCreateList={handleCreateList}
             recentLists={recentLists}
           />

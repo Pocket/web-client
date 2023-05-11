@@ -13,7 +13,10 @@ export const ListContent = ({ id, toggleSort }) => {
 
   const list = useSelector((state) => state.listsDisplay[id])
   const featureState = useSelector((state) => state.features)
-  const inListsDev = featureFlagActive({ flag: 'lists.dev', featureState })
+
+  const enrolledDev = featureFlagActive({ flag: 'lists.dev', featureState })
+  const enrolledPilot = useSelector((state) => state.pageListsInfo.enrolled)
+  const enrolledRelease = featureFlagActive({ flag: 'lists', featureState })
 
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
@@ -75,7 +78,9 @@ export const ListContent = ({ id, toggleSort }) => {
   return shouldRender ? (
     <main className="main">
       <ListIndividualHeader
-        inListsDev={inListsDev}
+        enrolledDev={enrolledDev}
+        enrolledPilot={enrolledPilot}
+        enrolledRelease={enrolledRelease}
         title={title}
         description={description}
         status={status}

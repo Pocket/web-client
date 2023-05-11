@@ -20,7 +20,7 @@ export function FiltersSideNav({
   subActive,
   pinned,
   clickEvent,
-  inListsExperiment,
+  showLists,
   handleCreateList,
   recentLists
 }) {
@@ -30,7 +30,7 @@ export function FiltersSideNav({
 
   return (
     <>
-      {inListsExperiment ? (
+      {showLists ? (
         <>
           <div className={sideNavActionHeader}>
             <h4 className={sideNavHeader}>{t('nav:lists', 'Lists')}</h4>
