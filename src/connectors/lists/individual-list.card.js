@@ -2,13 +2,16 @@ import { cx, css } from 'linaria'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { mutateListItemNote } from './mutation-update.state'
-import { mutateListItemDelete } from './mutation-delete.state'
+import { mutateListItemDelete, mutateListItemNoteDelete } from './mutation-delete.state'
+import { EditIcon } from 'components/icons/EditIcon'
+import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { setNoImage } from 'connectors/lists/lists-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { AddNoteIcon } from 'components/icons/AddNoteIcon'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { topTooltip } from 'components/tooltip/tooltip'
 
 export const IndividualListCard = ({ id, listId, position }) => {
   const dispatch = useDispatch()
@@ -51,6 +54,7 @@ export const IndividualListCard = ({ id, listId, position }) => {
         title={title}
         excerpt={excerpt}
         itemImage={itemImage}
+        note={note}
         publisher={publisher}
         openUrl={url}
         externalUrl={url}
@@ -61,6 +65,7 @@ export const IndividualListCard = ({ id, listId, position }) => {
         analyticsData={analyticsData}
         position={position}
         Actions={ListActions}
+        NoteActions={NoteActions}
         clamp
       />
     </div>
@@ -116,5 +121,39 @@ export const ListActions = ({ id, listId, analyticsData, position }) => {
         {t('list:remove', 'Remove')}
       </button>
     </div>
+  )
+}
+
+export const NoteActions = ({ externalId, analyticsData }) => {
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
+
+  const handleEdit = () => {
+    // dispatch(mutateListItemNote(externalId))
+    // dispatch(sendSnowplowEvent('shareable-list.item.note.edit.intent', analyticsData))
+  }
+
+  const handleDelete = () => {
+    dispatch(mutateListItemNoteDelete(externalId))
+    dispatch(sendSnowplowEvent('shareable-list.item.note.delete.intent', analyticsData))
+  }
+
+  return (
+    <>
+      <button
+        className={cx(topTooltip, 'inline')}
+        aria-label={t('list:edit-note', 'Edit Note')}
+        data-tooltip={t('list:edit-note', 'Edit Note')}
+        onClick={handleEdit}>
+        <EditIcon />
+      </button>
+      <button
+        className={cx(topTooltip, 'inline')}
+        aria-label={t('list:delete-note', 'Delete Note')}
+        data-tooltip={t('list:delete-note', 'Delete Note')}
+        onClick={handleDelete}>
+        <DeleteIcon />
+      </button>
+    </>
   )
 }

@@ -17,7 +17,7 @@ export const PublicListCard = ({ listId, externalId, position }) => {
 
   if (!item || !listId) return null
 
-  const { title, excerpt, publisher, url, analyticsData: passedAnalytics } = item
+  const { title, excerpt, publisher, url, analyticsData: passedAnalytics, note } = item
   const itemImage = item?.noImage ? '' : item?.imageUrl
 
   const analyticsData = {
@@ -51,6 +51,7 @@ export const PublicListCard = ({ listId, externalId, position }) => {
         excerpt={excerpt}
         itemImage={itemImage}
         publisher={publisher}
+        note={note}
         openUrl={url}
         externalUrl={url}
         onImageFail={onImageFail}

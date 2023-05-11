@@ -11,9 +11,7 @@ import { itemStyles } from './item-styles'
 import { useInView } from 'react-intersection-observer'
 import { ListViewAltIcon } from 'components/icons/ListViewAltIcon'
 import { ListStatusLink } from 'components/shareable-lists/list-status-link'
-import { ItemNote } from 'connectors/lists/item-note'
-import { useSelector } from 'react-redux'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { ItemNote } from 'components/item/item-note'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
 
@@ -28,6 +26,7 @@ export const Item = (props) => {
     publisherLogo,
     excerpt,
     timeToRead,
+    note,
     isFavorite,
     isArchive,
     isPremium,
@@ -67,6 +66,7 @@ export const Item = (props) => {
 
     // Actions
     Actions,
+    NoteActions,
     shortcutSelect,
     selectBulk,
     analyticsData,
@@ -97,8 +97,6 @@ export const Item = (props) => {
   const linkRel = openInNewTab ? 'noopener noreferrer' : undefined
   const [tagsShown, setTagsShown] = useState(false)
   const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
-  const featureState = useSelector((state) => state.features)
-  const inListsDev = featureFlagActive({ flag: 'lists.dev', featureState })
 
   const linkRef = useRef(null)
   const footerRef = useRef(null)
@@ -250,7 +248,14 @@ export const Item = (props) => {
       {publisherLogo && publisher !== 'Pocket' ? (
         <img src={publisherLogo} alt={publisher} className="publisherLogo" />
       ) : null}
-      {inListsDev ? <ItemNote externalId={itemId} position={position} /> : null}
+      {note ? (
+        <ItemNote
+          note={note}
+          Actions={NoteActions}
+          externalId={itemId}
+          analyticsData={analyticsData}
+        />
+      ) : null}
     </article>
   )
 }
