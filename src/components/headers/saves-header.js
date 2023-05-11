@@ -94,7 +94,7 @@ export const SavesHeader = ({
   sortOrder,
   handleNewest,
   handleOldest,
-  inListsExperiment,
+  showLists,
   handleCreateList,
   inBulkEdit
 }) => {
@@ -110,7 +110,7 @@ export const SavesHeader = ({
     tags: t('headers:tags', 'Tags')
   }
 
-  const showCreateList = inListsExperiment && !inBulkEdit && subset !== 'tag-page'
+  const showCreateList = showLists && !inBulkEdit && subset !== 'tag-page'
 
   return subset ? (
     <header className={savesHeaderStyle}>
@@ -122,8 +122,7 @@ export const SavesHeader = ({
       {showCreateList ? (
         <div className="create-list">
           <div className="onboarding-badge">
-            <span className="new">{t('list:new', 'New!')}</span>
-            {" "}
+            <span className="new">{t('list:new', 'New!')}</span>{' '}
             <span>{t('list:add-items-to-a-list', 'Add items to a List')}</span>
           </div>
           <button onClick={handleCreateList} className="tiny">

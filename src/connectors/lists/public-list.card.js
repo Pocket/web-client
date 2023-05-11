@@ -24,7 +24,8 @@ export const PublicListCard = ({ listId, externalId, position }) => {
     ...passedAnalytics,
     sortOrder: position,
     position,
-    destination: 'external'
+    destination: 'external',
+    note
   }
 
   const onImageFail = () => dispatch(setNoImage(externalId))

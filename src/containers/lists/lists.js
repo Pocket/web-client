@@ -17,11 +17,17 @@ import { LoaderCentered } from 'components/loader/loader'
 
 import { Toasts } from 'connectors/toasts/toast-list'
 
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 export const Lists = () => {
   const dispatch = useDispatch()
 
-  const enrolled = useSelector((state) => state.pageListsInfo.enrolled)
+  const featureState = useSelector((state) => state.features)
   const enrolledFetched = useSelector((state) => state.pageListsInfo.enrolledFetched)
+  const enrolledPilot = useSelector((state) => state.pageListsInfo.enrolled)
+  const enrolledRelease = featureFlagActive({ flag: 'lists', featureState })
+  const enrolled = enrolledPilot || enrolledRelease
+
   const listsIds = useSelector((state) => state.pageListsInfo.listsIds)
   const userStatus = useSelector((state) => state.user.user_status)
   const sortOrder = useSelector((state) => state.pageListsInfo.sortOrder)
@@ -29,7 +35,7 @@ export const Lists = () => {
 
   const shouldRender = userStatus !== 'pending'
   const ids = sortOrder === 'DESC' ? listsIds : [...listsIds].reverse()
-  const showLists = listsIds?.length > 0 && !loading
+  const showLists = listsIds?.length > 0 && !loading && enrolled
 
   useEffect(() => {
     if (enrolled) dispatch(getAllListsAction())

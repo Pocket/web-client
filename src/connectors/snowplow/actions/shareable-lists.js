@@ -10,6 +10,7 @@ export const shareableListActions = {
     },
     expects: [
       'shareableListExternalId',
+      'listItemNoteVisibility',
       'title',
       'status',
       'moderationStatus',
@@ -26,6 +27,7 @@ export const shareableListActions = {
     },
     expects: [
       'shareableListExternalId',
+      'listItemNoteVisibility',
       'title',
       'status',
       'moderationStatus',
@@ -100,7 +102,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator clicks the "Delete" button on a list on the All Lists page'
   },
   'shareable-list.delete.cancel': {
@@ -125,7 +134,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator clicks the "Settings" button on a list on the All Lists page'
   },
   'shareable-list.edit-settings.cancel': {
@@ -134,7 +150,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator cancels out of the List Settings modal'
   },
   'shareable-list.edit-settings.submit': {
@@ -143,7 +166,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator submits changes in the List Settings modal'
   },
   'shareable-list.status.update': {
@@ -152,7 +182,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator updates the List status'
   },
   'shareable-list.share': {
@@ -161,7 +198,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator clicks the "Share" button on a list'
   },
   'shareable-list.share.facebook': {
@@ -170,7 +214,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator clicks the "FB" button in the Share List modal'
   },
   'shareable-list.share.twitter': {
@@ -179,7 +230,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator clicks the "Twitter" button in the Share List modal'
   },
   'shareable-list.share.linkedin': {
@@ -188,7 +246,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator clicks the "LinkedIn" button in the Share List modal'
   },
   'shareable-list.share.reddit': {
@@ -197,7 +262,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator clicks the "Reddit" button in the Share List modal'
   },
   'shareable-list.share.buffer': {
@@ -206,7 +278,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator clicks the "Buffer" button in the Share List modal'
   },
   'shareable-list.share.copy': {
@@ -215,7 +294,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator clicks the "Copy Link" button in the Share List modal'
   },
   'shareable-list.public-link.copy.share-modal': {
@@ -224,7 +310,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator copies the public URL from the Share List modal'
   },
   'shareable-list.public-link.copy.header': {
@@ -233,7 +326,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator copies the public URL from the Individual List page header'
   },
   'shareable-list.public-link.copy.all-lists': {
@@ -242,7 +342,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description:
       'Fired when a creator copies the public URL from one of the List cards on the All Lists page'
   },
@@ -252,7 +359,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'link'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator opens the public URL on the All Lists page'
   },
   'shareable-list.public-link.open.share-modal': {
@@ -261,7 +375,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'link'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator opens the public URL on the Share List modal'
   },
   'shareable-list.public-link.open.header': {
@@ -270,7 +391,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'link'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator opens the public URL on the Individual List page header'
   },
   'shareable-list.empty-list.go-to-saves': {
@@ -279,7 +407,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description:
       'Fired when a creator clicks the "Go to Saves" button on an empty Individual List page'
   },
@@ -548,7 +683,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a user saves a public list'
   },
   'public-list.unsave': {
@@ -557,7 +699,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a user unsaves a public list on the public list page'
   },
   'public-list.share': {
@@ -566,7 +715,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a creator clicks the "Share" button on a list on the public list page'
   },
   'public-list.share.facebook': {
@@ -575,7 +731,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description:
       'Fired when a creator clicks the "FB" button in the Share List modal on the public list page'
   },
@@ -585,7 +748,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description:
       'Fired when a creator clicks the "Twitter" button in the Share List modal on the public list page'
   },
@@ -595,7 +765,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description:
       'Fired when a creator clicks the "LinkedIn" button in the Share List modal on the public list page'
   },
@@ -605,7 +782,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description:
       'Fired when a creator clicks the "Reddit" button in the Share List modal on the public list page'
   },
@@ -615,7 +799,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description:
       'Fired when a creator clicks the "Buffer" button in the Share List modal on the public list page'
   },
@@ -625,7 +816,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description:
       'Fired when a creator clicks the "Copy Link" button in the Share List modal on the public list page'
   },
@@ -635,7 +833,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description:
       'Fired when a user copies the public URL from the Share List modal on the public list page'
   },
@@ -645,7 +850,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'link'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description:
       'Fired when a user opens the public URL on the Share List modal  on the public list page'
   },
@@ -655,7 +867,14 @@ export const shareableListActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['shareableListExternalId', 'title', 'status', 'moderationStatus', 'createdAt'],
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
     description: 'Fired when a user clicks the "Report" button on a public list page'
   },
 

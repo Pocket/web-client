@@ -157,6 +157,8 @@ const expectationTypes = {
   corpusRecommendationId: 'string',
   shareableListItemExternalId: 'string',
   shareableListExternalId: 'string',
+  listItemNoteVisibility: 'string',
+  note: 'string',
   slug: 'string',
   title: 'string',
   status: 'string',

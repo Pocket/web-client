@@ -23,6 +23,7 @@ export const ListCard = ({ id, position }) => {
     title,
     description,
     status,
+    listItemNoteVisibility,
     analyticsData: passedAnalytics
   } = list
   const url = `/sharedlists/${externalId}/${slug}`
@@ -31,6 +32,7 @@ export const ListCard = ({ id, position }) => {
 
   const analyticsData = {
     ...passedAnalytics,
+    listItemNoteVisibility,
     position,
     destination: 'internal'
   }
