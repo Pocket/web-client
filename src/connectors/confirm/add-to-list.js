@@ -37,6 +37,7 @@ export const ConfirmAddToList = () => {
     dispatch(
       sendSnowplowEvent('shareable-list.item.add.confirm', {
         ...item?.analyticsData,
+        listItemNoteVisibility: item?.listItemNoteVisibility,
         label: listTitle
       })
     )

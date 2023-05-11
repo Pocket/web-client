@@ -17,14 +17,15 @@ export const PublicListCard = ({ listId, externalId, position }) => {
 
   if (!item || !listId) return null
 
-  const { title, excerpt, publisher, url, analyticsData: passedAnalytics } = item
+  const { title, excerpt, publisher, url, analyticsData: passedAnalytics, note } = item
   const itemImage = item?.noImage ? '' : item?.imageUrl
 
   const analyticsData = {
     ...passedAnalytics,
     sortOrder: position,
     position,
-    destination: 'external'
+    destination: 'external',
+    note
   }
 
   const onImageFail = () => dispatch(setNoImage(externalId))

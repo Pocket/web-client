@@ -20,7 +20,11 @@ export const ListSettingsModal = ({ id }) => {
   const titleList = titleToIdList ? Object.keys(titleToIdList) : []
 
   if (!list) return null
-  const { title, description, analyticsData } = list
+  const { title, description, analyticsData: passedAnalytics, listItemNoteVisibility } = list
+  const analyticsData = {
+    ...passedAnalytics,
+    listItemNoteVisibility
+  }
 
   const handleClose = () => {
     dispatch(mutateListUpdateCancel())

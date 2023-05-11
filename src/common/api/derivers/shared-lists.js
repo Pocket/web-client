@@ -69,10 +69,12 @@ function deriveListItem(item, listId, utmId) {
 // Build a List and compile the analytics
 // Process the card image
 function deriveList(list, listId, listItems) {
-  const { slug, title, description, status, moderationStatus, createdAt } = list
+  const { listItemNoteVisibility, slug, title, description, status, moderationStatus, createdAt } =
+    list
   const analyticsData = {
     id: listId,
     shareableListExternalId: listId,
+    listItemNoteVisibility,
     slug: slug || '',
     title: title,
     description: description,

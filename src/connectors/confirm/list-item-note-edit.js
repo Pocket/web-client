@@ -19,7 +19,8 @@ export const EditListItemNote = () => {
   const { note, analyticsData: passedAnalytics } = item
   const analyticsData = {
     ...passedAnalytics,
-    sortOrder: position
+    sortOrder: position,
+    note
   }
 
   const handleClose = () => {

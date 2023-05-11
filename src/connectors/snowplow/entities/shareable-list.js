@@ -5,12 +5,13 @@ import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object
  * Schema information:
  * https://console.snowplowanalytics.com/cf0fba6b-23b3-49a0-9d79-7ce18b8f9618/data-structures/7b895f09809942a835587b02a58b7a835f92e16a726f5d224a43b90d219ae9c4
  */
-const SHAREABLE_LIST_SCHEMA_URL = getSchemaUri('shareable_list', '1-0-4')
+const SHAREABLE_LIST_SCHEMA_URL = getSchemaUri('shareable_list', '1-0-6')
 
 /**
  * Entity that describes the concept list that can be created then shared with other users regardless of logged-in status
  *
  * @param shareableListExternalId {string} @required - The unique backend identifier for a shared list
+ * @param listItemNoteVisibility {string} @required - Indication of whether the list's notes are private or public.
  * @param slug {string} - The slug for the shareable list
  * @param title {string} @required - The title of the shareable list
  * @param description {string} - The description of the shareable list (filled in by the user creating the list)
@@ -23,6 +24,7 @@ const SHAREABLE_LIST_SCHEMA_URL = getSchemaUri('shareable_list', '1-0-4')
  *
  * @returns {{schema: *, data: {
  *  shareable_list_external_id: string,
+ *  list_item_note_visibility: string,
  *  slug: string,
  *  title: string,
  *  description: string,
@@ -37,6 +39,7 @@ const SHAREABLE_LIST_SCHEMA_URL = getSchemaUri('shareable_list', '1-0-4')
 
 export const createShareableListEntity = ({
   shareableListExternalId,
+  listItemNoteVisibility = 'PRIVATE',
   slug,
   title,
   description,
@@ -50,6 +53,7 @@ export const createShareableListEntity = ({
   schema: SHAREABLE_LIST_SCHEMA_URL,
   data: getObjectWithValidKeysOnly({
     shareable_list_external_id: shareableListExternalId,
+    list_item_note_visibility: listItemNoteVisibility,
     slug: slug,
     title: title,
     description: description,

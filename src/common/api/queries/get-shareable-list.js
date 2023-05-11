@@ -11,6 +11,7 @@ const getShareableListQuery = gql`
       externalId
       slug
       status
+      listItemNoteVisibility
       moderationStatus
       createdAt
       updatedAt

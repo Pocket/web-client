@@ -41,7 +41,13 @@ export const ListContent = ({ id, toggleSort }) => {
 
   // Actions
   const handleSetStatus = ({ status, listItemNoteVisibility }) => {
-    dispatch(sendSnowplowEvent('shareable-list.status.update', { ...analyticsData, status }))
+    dispatch(
+      sendSnowplowEvent('shareable-list.status.update', {
+        ...analyticsData,
+        status,
+        listItemNoteVisibility
+      })
+    )
     dispatch(mutateListStatusAction({ id, status, listItemNoteVisibility }))
   }
   const handleShare = () => {
@@ -85,14 +91,11 @@ export const ListContent = ({ id, toggleSort }) => {
       />
 
       {showPlaceholder ? <EmptyIndividualLists handleClick={handleSavesClick} /> : null}
-      {listItemIds ? listItemIds.map((externalId, index) => (
-        <IndividualListCard
-          key={externalId}
-          id={externalId}
-          listId={id}
-          position={index}
-        />
-      )) : null}
+      {listItemIds
+        ? listItemIds.map((externalId, index) => (
+            <IndividualListCard key={externalId} id={externalId} listId={id} position={index} />
+          ))
+        : null}
     </main>
   ) : null
 }
