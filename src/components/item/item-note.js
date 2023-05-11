@@ -6,8 +6,8 @@ const itemNoteStyles = css`
   flex-direction: column;
   grid-column: span 12;
   padding: 16px 16px 14px 16px;
-  background: #f9fafb;
-  border-top: 1px solid #d9d9d9;
+  background: var(--color-activeCanvas);
+  border-top: 1px solid var(--color-dividerTertiary);
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
   .note {
