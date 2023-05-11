@@ -1,3 +1,11 @@
+## [1.94.3](https://github.com/Pocket/web-client/compare/v1.94.2...v1.94.3) (2023-05-11)
+
+
+### Bug Fixes
+
+* **list:** adding list note visibility to public list query ([dbdd6a8](https://github.com/Pocket/web-client/commit/dbdd6a86ff1ffdfd3d4279028121bbf3dfee44b9))
+* **list:** maintain current title and description on status change ([00d88b2](https://github.com/Pocket/web-client/commit/00d88b2d4596e5bf82850bc68f179527dbddcbd8))
+
 ## [1.94.2](https://github.com/Pocket/web-client/compare/v1.94.1...v1.94.2) (2023-05-11)
 
 

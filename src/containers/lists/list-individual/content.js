@@ -43,7 +43,7 @@ export const ListContent = ({ id, toggleSort }) => {
   }
 
   // Actions
-  const handleSetStatus = ({ status, listItemNoteVisibility }) => {
+  const handleSetStatus = ({ status, listItemNoteVisibility = 'PRIVATE' }) => {
     dispatch(
       sendSnowplowEvent('shareable-list.status.update', {
         ...analyticsData,

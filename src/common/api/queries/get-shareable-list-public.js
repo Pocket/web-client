@@ -10,6 +10,7 @@ const getShareableListPublicQuery = gql`
       status
       slug
       moderationStatus
+      listItemNoteVisibility
       externalId
       description
       createdAt
