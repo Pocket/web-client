@@ -107,6 +107,7 @@ export const mutationListUpdateSagas = [
 
 /** SAGA :: SELECTORS
  --------------------------------------------------------------- */
+const getListItem = (state, id) => state.listsDisplay[id]
 const getListItemIds = (state, id) => state.listsDisplay[id]?.listItemIds
 
 /** SAGAS :: RESPONDERS
@@ -150,7 +151,8 @@ function* listUpdateStatus({ id, status, listItemNoteVisibility }) {
     const response = yield call(updateShareableList, data)
     yield put({ type: LIST_UPDATE_STATUS_SUCCESS })
 
-    const itemsById = { [id]: { ...response } }
+    const { title, description } = yield select(getListItem, id)
+    const itemsById = { [id]: { ...response, title, description } }
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
   } catch (error) {
     yield put({ type: LIST_UPDATE_STATUS_FAILURE, error })
