@@ -132,7 +132,7 @@ function* listUpdate({ id }) {
     const response = yield call(updateShareableList, data)
     yield put({ type: LIST_UPDATE_SUCCESS, title, externalId: id })
 
-    const itemsById = { [id]: { ...response } }
+    const itemsById = { [id]: { ...response, ...data } }
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
   } catch (error) {
     yield put({ type: LIST_UPDATE_FAILURE, error })
