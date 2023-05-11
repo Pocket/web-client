@@ -34,7 +34,7 @@ const itemNoteStyles = css`
   }
 `
 
-export const ItemNote = ({ Actions, note, externalId, analyticsData }) => {
+export const ItemNote = ({ Actions, note, externalId, position, analyticsData }) => {
   return note ? (
     <div className={itemNoteStyles}>
       <span className="note">{note}</span>
@@ -42,7 +42,7 @@ export const ItemNote = ({ Actions, note, externalId, analyticsData }) => {
         <span className="creator" />
         {Actions ? (
           <div className="buttons">
-            <Actions externalId={externalId} analyticsData={analyticsData} />
+            <Actions externalId={externalId} position={position} analyticsData={analyticsData} />
           </div>
         ) : null}
       </footer>

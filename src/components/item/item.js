@@ -253,6 +253,7 @@ export const Item = (props) => {
           note={note}
           Actions={NoteActions}
           externalId={itemId}
+          position={position}
           analyticsData={analyticsData}
         />
       ) : null}

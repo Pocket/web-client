@@ -2,7 +2,9 @@ import { cx, css } from 'linaria'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { mutateListItemNote } from './mutation-update.state'
-import { mutateListItemDelete, mutateListItemNoteDelete } from './mutation-delete.state'
+import { mutateListItemNoteEdit } from './mutation-update.state'
+import { mutateListItemDelete } from './mutation-delete.state'
+import { mutateListItemNoteDelete } from './mutation-delete.state'
 import { EditIcon } from 'components/icons/EditIcon'
 import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { Item } from 'components/item/item'
@@ -124,13 +126,13 @@ export const ListActions = ({ id, listId, analyticsData, position }) => {
   )
 }
 
-export const NoteActions = ({ externalId, analyticsData }) => {
+export const NoteActions = ({ externalId, analyticsData, position }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
   const handleEdit = () => {
-    // dispatch(mutateListItemNote(externalId))
-    // dispatch(sendSnowplowEvent('shareable-list.item.note.edit.intent', analyticsData))
+    dispatch(mutateListItemNoteEdit({ id: externalId, position }))
+    dispatch(sendSnowplowEvent('shareable-list.item.note.edit.intent', analyticsData))
   }
 
   const handleDelete = () => {
