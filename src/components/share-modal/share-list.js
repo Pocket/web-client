@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { css, cx } from 'linaria'
 import copy from 'clipboard-copy'
 import { COPY_ITEM_URL } from 'actions'
-import { LinkCopyIcon } from 'components/icons/LinkCopyIcon'
+import { CopyIcon } from 'components/icons/CopyIcon'
 import { topTooltipDelayed } from 'components/tooltip/tooltip'
 import { socialButtonStyles } from 'components/social-button/social-button'
 import { SocialButton } from 'components/social-button/social-button'
@@ -42,7 +42,7 @@ export const ShareList = ({ openUrl, excerpt, title, quote, engagementEvent, can
         className={cx(socialButtonStyles, topTooltipDelayed)}
         data-cy="copy-link"
         onClick={copyUrl}>
-        <LinkCopyIcon />
+        <CopyIcon />
       </button>
 
       <SocialButton

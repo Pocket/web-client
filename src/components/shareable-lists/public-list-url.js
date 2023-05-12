@@ -5,7 +5,7 @@ import { css } from 'linaria'
 import copy from 'clipboard-copy'
 import { COPY_ITEM_URL } from 'actions'
 import { BASE_URL } from 'common/constants'
-import { LinkCopyIcon } from 'components/icons/LinkCopyIcon'
+import { CopyIcon } from 'components/icons/CopyIcon'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 import { useTranslation } from 'react-i18next'
 
@@ -63,7 +63,7 @@ export const PublicListUrl = ({ publicListInfo, handleCopyUrl, handleOpenUrl }) 
         className={cx('copy', 'tiny', bottomTooltip)}
         data-cy="copy-link"
         onClick={handleCopy}>
-        <LinkCopyIcon />
+        <CopyIcon />
       </button>
     </div>
   )
