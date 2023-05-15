@@ -24,8 +24,8 @@
       "connectors/*": ["src/connectors/*"],
       "layouts/*": ["src/containers/_layouts/*"],
       "pages/*": ["src/pages/*"],
-      "actions$/*": ["src/actions.js"],
-      "store$/*": ["src/store.js"]
+      "actions": ["src/actions.js"],
+      "store": ["src/store.js"]
     }
   },
   "include": [
