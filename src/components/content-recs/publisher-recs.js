@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { Trans } from 'next-i18next'
 

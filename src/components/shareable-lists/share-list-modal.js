@@ -1,4 +1,4 @@
-import { cx, css } from 'linaria'
+import { cx, css } from '@emotion/css'
 import { useState } from 'react'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { Item } from 'components/item/item'

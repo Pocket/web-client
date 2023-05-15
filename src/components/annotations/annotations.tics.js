@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { CardPositioning, Quote, CreatedDate } from './annotations.card' // CardWrapper
 import { AnnotationMenu } from './annotations.menu'
 

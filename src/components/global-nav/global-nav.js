@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { useTranslation } from 'next-i18next'
 

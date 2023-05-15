@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { cardsGrid } from 'components/items-layout/base'
 import { breakpointLargeHandset } from 'common/constants'
 

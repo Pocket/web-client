@@ -7,7 +7,7 @@ import { getScrollTop } from 'common/utilities/scroll/scroll'
 import { useViewport } from 'components/viewport-provider/viewport-provider'
 import { EmptyFilters } from 'components/empty-states/filters'
 
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 const itemsListStyle = css`
   position: relative;

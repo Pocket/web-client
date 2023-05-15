@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 
 export const stepperTooltip = css`
   &[data-tooltip] {

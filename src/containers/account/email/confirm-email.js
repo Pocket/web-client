@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 import { useState } from 'react'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
@@ -78,7 +78,11 @@ export const EmailModal = () => {
         <div>{emailError ? <span className="errorText">{error}</span> : null}</div>
       </ModalBody>
       <ModalFooter>
-        <button className="primary" type="submit" data-cy="update-primary-email-confirm" onClick={confirmEmail}>
+        <button
+          className="primary"
+          type="submit"
+          data-cy="update-primary-email-confirm"
+          onClick={confirmEmail}>
           {t('account:update-email', 'Update Email')}
         </button>
       </ModalFooter>

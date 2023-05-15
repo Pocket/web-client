@@ -1,4 +1,4 @@
-import { cx, css } from 'linaria'
+import { cx, css } from '@emotion/css'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { mutateListItemNote } from './mutation-update.state'

@@ -14,7 +14,7 @@ import savesResponse from 'mocks/savedItems.json'
 import discoverResponse from 'mocks/slateLineupResponse.json'
 import collectionResponse from 'mocks/collectionResponse.json'
 
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { cardsGrid } from 'components/items-layout/base'
 
 const grid = css`

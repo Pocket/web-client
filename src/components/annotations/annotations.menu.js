@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { Trans, useTranslation } from 'next-i18next'
 
 import { OverflowMenuIcon } from 'components/icons/OverflowMenuIcon'

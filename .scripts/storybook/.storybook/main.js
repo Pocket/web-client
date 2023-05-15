@@ -33,22 +33,6 @@ module.exports = {
     }
     config.resolve.alias = { ...config.resolve.alias, ...alias }
     config.resolve.alias['@braze/web-sdk'] = require.resolve('../../../__mocks__/braze-sdk.js')
-
-    // add support for Linaria preprocessing
-    config.module.rules.push({
-      test: /\.(ts|js|tsx|jsx)$/,
-      exclude: /node_modules/,
-      use: [
-        { loader: 'babel-loader' },
-        {
-          loader: 'linaria/loader',
-          options: {
-            sourceMap: process.env.NODE_ENV !== 'production'
-          }
-        }
-      ]
-    })
-
     config.node = { ...config.node, fs: 'empty' }
 
     // Return the altered config

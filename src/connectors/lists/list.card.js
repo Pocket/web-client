@@ -1,4 +1,4 @@
-import { cx } from 'linaria'
+import { cx } from '@emotion/css'
 import { useSelector, useDispatch } from 'react-redux'
 import { mutateListDelete } from 'connectors/lists/mutation-delete.state'
 import { Item } from 'components/item/item'

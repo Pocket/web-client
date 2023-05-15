@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { cardsGrid } from 'components/items-layout/base'
 import { breakpointLargeHandset } from 'common/constants'
 import { CardSkeleton } from 'components/item-card/card-skeleton'

@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import { breakpointSmallDesktop } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'

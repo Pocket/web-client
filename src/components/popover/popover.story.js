@@ -1,5 +1,5 @@
 import { usePopover, popoverBase } from 'components/popover/popover'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { createPortal } from 'react-dom'
 
 const Portal = ({ children }) => {

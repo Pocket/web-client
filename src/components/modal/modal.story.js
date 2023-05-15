@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import Modal, { ModalBody, ModalFooter } from './modal'
 import { TextArea } from 'components/form-fields/text-area'
 import { CreateEditShareableList } from 'components/shareable-lists/create-edit-modal'

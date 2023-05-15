@@ -2,7 +2,7 @@
 import Head from 'next/head'
 import { useTranslation } from 'next-i18next'
 import { useSelector } from 'react-redux'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 // Dependencies
 import Layout from 'layouts/main'

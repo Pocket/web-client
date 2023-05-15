@@ -2,7 +2,7 @@
 import * as Sentry from '@sentry/nextjs'
 import { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'next-i18next'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { REFRESH_KEY } from './ad-constants'
 import { REFRESH_VALUE } from './ad-constants'
 import { AD_SIZES } from './ad-constants'

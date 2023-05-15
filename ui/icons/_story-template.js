@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import copy from 'clipboard-copy'
 
 /*ICONS_IMPORTS*/

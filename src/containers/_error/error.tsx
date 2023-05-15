@@ -2,7 +2,7 @@
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 // Components
 import { GlobalFooter } from 'components/global-footer/global-footer'

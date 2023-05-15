@@ -1,5 +1,5 @@
 import Joyride, { EVENTS, STATUS, ACTIONS } from 'react-joyride'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { CloseButton } from 'components/close-button/close-button'
 import { breakpointSmallTablet } from 'common/constants'
 import { breakpointSmallHandset } from 'common/constants'

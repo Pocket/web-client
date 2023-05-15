@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { Trans } from 'next-i18next'
 import dayjs from 'dayjs'
 import Avatar from 'components/avatar/avatar'
@@ -92,7 +92,7 @@ export const MessageItem = ({
           </button>
         </header>
         <p className="comment">{comment}</p>
-        <Card {...item} itemType="message" cardShape="wide" onSave={handleSave}/>
+        <Card {...item} itemType="message" cardShape="wide" onSave={handleSave} />
       </aside>
     </div>
   ) : null

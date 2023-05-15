@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import EmailSignupForm from 'components/email-signup-form/email-signup-form'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { pocketHitsSignupRequested } from 'connectors/pocket-hits/pocket-hits.state'

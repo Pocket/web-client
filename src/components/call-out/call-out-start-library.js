@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { CrossIcon } from 'components/icons/CrossIcon'
 import { SIGNUP_URL } from 'common/constants'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'

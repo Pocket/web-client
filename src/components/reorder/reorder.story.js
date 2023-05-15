@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ReorderList, ReorderItem } from './reorder'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { COLORS } from 'mocks/_data/colors'
 
 export default {

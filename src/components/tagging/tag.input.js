@@ -1,7 +1,7 @@
 import React from 'react'
 import AutosizeInput from 'components/input-autosize/input-autosize'
 import { KEYS } from 'common/constants'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { validateEmail } from 'common/utilities/validate-email/validate-email'
 
 const inputWrapper = css`

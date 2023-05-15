@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Card } from 'components/item-card/card'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { SectionHeader } from 'components/headers/section-header'
 import { breakpointLargeHandset } from 'common/constants'
 import { useTranslation } from 'next-i18next'

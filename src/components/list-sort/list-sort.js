@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { useRef, useState } from 'react'
 import { SortByNewestIcon } from 'components/icons/SortByNewestIcon'
 import { SortByOldestIcon } from 'components/icons/SortByOldestIcon'

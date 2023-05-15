@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { useTranslation } from 'next-i18next'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
@@ -62,7 +62,9 @@ export const Premium = ({ isPremium, onPremiumImpression = () => {} }) => {
           </p>
           {isPremium ? (
             <a href="https://getpocket.com/premium/settings">
-              <button className="brand">{t('account:premium-manage', 'Manage Subscription')}</button>
+              <button className="brand">
+                {t('account:premium-manage', 'Manage Subscription')}
+              </button>
             </a>
           ) : (
             <a href={`${PREMIUM_URL}&utm_campaign=account-settings`} ref={viewRef}>

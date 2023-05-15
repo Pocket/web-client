@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 
 const pillStyle = css`
   display: inline-block;

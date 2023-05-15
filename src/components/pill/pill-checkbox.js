@@ -1,5 +1,5 @@
 import React from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { EmptyCircledIcon, CheckFilledIcon } from '../icons/icons'
 import { darkMode } from '../../constants/constants'
 const pillStyle = css`

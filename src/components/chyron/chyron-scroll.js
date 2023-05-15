@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { Chyron } from './chyron'
 

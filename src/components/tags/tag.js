@@ -1,5 +1,5 @@
 import React from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { buttonReset } from 'components/buttons/button-reset'
 import { CrossIcon } from 'components/icons/CrossIcon'
 

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { createPopper as createPopperInstance } from '@popperjs/core'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 
 const popupStyle = css`
   position: absolute;

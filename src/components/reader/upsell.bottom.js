@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { Trans } from 'next-i18next'
 import BigDiamondDark from 'static/images/reader-upsells/BigDiamond-dark.svg'
 import BigDiamondLight from 'static/images/reader-upsells/BigDiamond-light.svg'

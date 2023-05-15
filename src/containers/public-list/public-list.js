@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useDispatch, useSelector } from 'react-redux'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import Layout from 'layouts/main'
 import { ListPublicHeader } from 'components/headers/lists-header'
 import { PublicListCard } from 'connectors/lists/public-list.card'

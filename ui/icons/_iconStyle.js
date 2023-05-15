@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 export const iconStyle = css`
   display: inline-block;

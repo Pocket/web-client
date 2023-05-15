@@ -1,6 +1,6 @@
 import { SaveIcon } from 'components/icons/SaveIcon'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import { LOGIN_URL, SIGNUP_URL } from 'common/constants'
 import { useTranslation, Trans } from 'next-i18next'

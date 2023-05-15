@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 
 const logoDarkImg =
   'https://assets.getpocket.com/web-ui/assets/pocket-logo-dark-mode.a24d9ec3c81b642354a61fe27ae9edfb.svg'

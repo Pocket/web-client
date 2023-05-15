@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { containerMaxWidth, breakpointTinyTablet, breakpointLargeHandset } from 'common/constants'
 const pageContainerStyle = css`
   box-sizing: content-box;

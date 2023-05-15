@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { useTranslation } from 'next-i18next'
 import { IosShareIcon } from 'components/icons/IosShareIcon'
 import { topTooltip } from 'components/tooltip/tooltip'

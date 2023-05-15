@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { ArrowRightIcon } from 'components/icons/ArrowRightIcon'
 
 const linkWrapper = css`

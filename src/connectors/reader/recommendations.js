@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { COLUMN_WIDTH_RANGE } from 'common/constants'
 import { ItemCard } from 'connectors/items/item-card-transitional'
 import { breakpointTinyTablet } from 'common/constants'

@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import Layout from 'layouts/main'
 
 const feedbackStyles = css`

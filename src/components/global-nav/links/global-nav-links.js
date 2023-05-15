@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { Trans } from 'next-i18next'
 import { DiscoverIcon } from 'components/icons/DiscoverIcon'
 import { ListViewIcon } from 'components/icons/ListViewIcon'

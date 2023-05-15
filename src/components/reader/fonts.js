@@ -1,5 +1,5 @@
 /*prettier-ignore*/
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 const WhitneyBoldItalicWoff2 = 'https://assets.getpocket.com/web-ui/assets/Whitney-SemibldItal_Web.fdd7d75fa8fa59d56cc3c402c5bccb55.woff2'
 const WhitneyBoldItalicWoff = 'https://assets.getpocket.com/web-ui/assets/Whitney-SemibldItal_Web.b39a835ee55228424c846aec4093f6b9.woff'
 const WhitneyBoldWoff2 = 'https://assets.getpocket.com/web-ui/assets/Whitney-Semibld_Web.de2dee03c81082edf5341031656ea505.woff2'

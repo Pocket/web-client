@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 export const printLayout = css`
   @media print {
@@ -29,7 +29,7 @@ export const printLayout = css`
 
     :after {
       margin-top: 1rem;
-      content: 'Printed with ❤️ from Pocket'
+      content: 'Printed with ❤️ from Pocket';
     }
   }
 `

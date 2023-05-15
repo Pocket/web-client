@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -18,36 +14,19 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "jsxImportSource": "@emotion/react",
     "baseUrl": "./",
     "paths": {
-      "static/*": [
-        "public/static/*"
-      ],
-      "common/*": [
-        "src/common/*"
-      ],
-      "containers/*": [
-        "src/containers/*"
-      ],
-      "components/*": [
-        "src/components/*"
-      ],
-      "connectors/*": [
-        "src/connectors/*"
-      ],
-      "layouts/*": [
-        "src/containers/_layouts/*"
-      ],
-      "pages/*": [
-        "src/pages/*"
-      ],
-      "actions$/*": [
-        "src/actions.js"
-      ],
-      "store$/*": [
-        "src/store.js"
-      ]
-    },
+      "static/*": ["public/static/*"],
+      "common/*": ["src/common/*"],
+      "containers/*": ["src/containers/*"],
+      "components/*": ["src/components/*"],
+      "connectors/*": ["src/connectors/*"],
+      "layouts/*": ["src/containers/_layouts/*"],
+      "pages/*": ["src/pages/*"],
+      "actions$/*": ["src/actions.js"],
+      "store$/*": ["src/store.js"]
+    }
   },
   "include": [
     "next-env.d.ts",

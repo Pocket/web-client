@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { useScrollPercentage } from 'components/scroll/scroll-tracker'
 
 const barWrapper = css`

@@ -1,5 +1,5 @@
 import { CardMedia } from 'components/items-media/card-media'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 const imageWrapper = css`
   width: 500px;

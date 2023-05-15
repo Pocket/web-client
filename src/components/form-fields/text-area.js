@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import TextareaAutosize from 'react-textarea-autosize'
 import InputWrapper from './input-wrapper'
 export const DEFAULT_INITIAL_ROWS = 3

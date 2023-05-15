@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { useDispatch } from 'react-redux'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { breakpointLargeTablet } from 'common/constants'
 import { breakpointSmallTablet } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'

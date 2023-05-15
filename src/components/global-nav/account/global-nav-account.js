@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { Trans, useTranslation } from 'next-i18next'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { KEYS, PREMIUM_URL } from 'common/constants'

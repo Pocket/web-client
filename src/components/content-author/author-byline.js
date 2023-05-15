@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import Link from 'next/link'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 const BylineWrapper = css`
   font-family: var(--fontSansSerif);

@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 
 import { getReadItem } from './reader.state'
 

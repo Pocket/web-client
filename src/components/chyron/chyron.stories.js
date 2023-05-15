@@ -3,7 +3,7 @@ import { Chyron } from './chyron'
 import { ScrollChyron } from './chyron-scroll'
 import { ContentParsed } from 'components/content-parsed/content-parsed'
 import { articleContent } from 'mock/article'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 export default {
   title: 'Article/Chyron',

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useSelector } from 'react-redux'
 import { Loader } from 'components/loader/loader'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 const loadMoreStyle = css`
   grid-column: 1/-1;

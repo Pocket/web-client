@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { cx } from 'linaria'
+import { cx } from '@emotion/css'
 import { SyndicatedIcon } from 'components/icons/SyndicatedIcon'
 
 import { CardMedia } from 'components/items-media/card-media'

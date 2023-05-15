@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { DiscoverFilledIcon } from 'components/icons/DiscoverFilledIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'

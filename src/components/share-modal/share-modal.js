@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { useState } from 'react'
 import { useTranslation } from 'next-i18next'
 
@@ -69,9 +69,7 @@ export const ShareModal = ({
             cancelShare={cancelShare}
           />
         ) : null}
-        {active === 'recommend' ? (
-          <ShareRecommend recommendEvent={recommendEvent} />
-        ) : null}
+        {active === 'recommend' ? <ShareRecommend recommendEvent={recommendEvent} /> : null}
       </ModalTabs>
     </Modal>
   )

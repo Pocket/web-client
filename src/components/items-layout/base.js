@@ -1,7 +1,7 @@
 import { breakpointLargeHandset } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
 
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 // Adding this so we can compose within `css`
 export const cardsGrid = {

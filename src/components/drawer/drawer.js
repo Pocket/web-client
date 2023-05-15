@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import Modal from 'components/modal/modal'
 import { breakpointSmallTablet } from 'common/constants'
 const DRAWER_MOBILE_WIDTH = '256px'

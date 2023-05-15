@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { CloseButton } from 'components/close-button/close-button'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { Fade } from 'common/utilities/animation/fade'

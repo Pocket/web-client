@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { WhatsNewHeader } from 'components/headers/whats-new-header'

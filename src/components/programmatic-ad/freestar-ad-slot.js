@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useTranslation } from 'next-i18next'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import FreestarAdSlot from '@freestar/pubfig-adslot-react-component'
 
 const programmaticAdWrapperStyles = css`

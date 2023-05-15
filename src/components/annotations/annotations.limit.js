@@ -1,5 +1,5 @@
 /* eslint  react/jsx-no-target-blank: 0*/
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { PremiumIcon } from 'components/icons/PremiumIcon'
 import { ArrowLink } from 'components/arrow-link/arrow-link'

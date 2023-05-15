@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import PropTypes from 'prop-types'
 import { cardStyles } from './card-base'
 

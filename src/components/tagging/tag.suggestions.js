@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { SuggestedTag } from 'components/tags/tags'
 import { Trans } from 'next-i18next'
 

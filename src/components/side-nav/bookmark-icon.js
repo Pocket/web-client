@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { BookmarkFilledIcon } from 'components/icons/BookmarkFilledIcon'
 import { useInView } from 'react-intersection-observer'
 import { useHasChanged } from 'common/utilities/hooks/has-changed'

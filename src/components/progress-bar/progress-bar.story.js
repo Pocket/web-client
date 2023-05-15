@@ -1,5 +1,5 @@
 import { ProgressBar as Component } from './progress-bar'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 const lorem = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porttitor arcu felis, vel pulvinar nibh luctus non. Pellentesque tempus, elit non mollis cursus, nibh odio tempus mauris, at ornare elit mi in neque. Aenean fermentum efficitur eleifend. Nulla velit libero, ultrices vel aliquet vitae, cursus in dui. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris a ornare neque, vel cursus quam. Etiam interdum risus et justo gravida ornare. Donec molestie dictum finibus. Proin id magna sed arcu cursus luctus. Nunc lobortis pharetra urna, vel pharetra diam ornare auctor. Duis ullamcorper sed odio nec rhoncus. In hac habitasse platea dictumst. Vivamus vitae consectetur sem, ut iaculis nunc.',

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { confirmPasswordUpdate } from './profile.state'

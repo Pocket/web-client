@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { LISTEN_SPEEDS } from 'common/constants'
 import { ListenIcon } from 'components/icons/ListenIcon'
 

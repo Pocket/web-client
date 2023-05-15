@@ -1,7 +1,7 @@
 import React from 'react'
 import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
 import { breakpointSmallHandset } from 'common/constants'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { Trans } from 'next-i18next'
 
 const themeWrapper = css`

@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
@@ -32,7 +32,7 @@ export const ConfirmTagEdit = () => {
   const appRootSelector = '#__next'
 
   useEffect(() => {
-    if (tagToEdit === false) return () => {} 
+    if (tagToEdit === false) return () => {}
     setValue(tagToEdit)
   }, [tagToEdit])
 
@@ -62,7 +62,12 @@ export const ConfirmTagEdit = () => {
             want to proceed?
           </Trans>
         </em>
-        <button className="primary" disabled={!value.trim()} type="submit" data-cy="edit-tag-confirm" onClick={confirmTagEdit}>
+        <button
+          className="primary"
+          disabled={!value.trim()}
+          type="submit"
+          data-cy="edit-tag-confirm"
+          onClick={confirmTagEdit}>
           <Trans i18nKey="confirm:confirm">Confirm</Trans>
         </button>
       </ModalFooter>

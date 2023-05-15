@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 //Padding Player ratio: 100 / (1280 / 720)
 const videoWrapper = css`

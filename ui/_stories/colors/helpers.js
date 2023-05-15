@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import copy from 'clipboard-copy'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 export const colorGroups = css`
   font-family: var(--fontSansSerif);

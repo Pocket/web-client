@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { usePrevious } from 'common/utilities/hooks/has-changed'
 
 const itemWrapper = css`

@@ -179,8 +179,8 @@ function convertSvgToComponentString(svg, componentName) {
   svg = svg.replace(/ariaHidden=/gi, 'aria-hidden=')
 
   //prettier-ignore
-  var componentString =`import { iconStyle } from 'components/icons/_iconStyle'
-import { cx } from 'linaria'
+  var componentString = `import { iconStyle } from 'components/icons/_iconStyle'
+import { cx } from '@emotion/css'
 
 export const ${componentName}Icon = ({ className, ...rest }) => (
   <span className={cx(iconStyle, 'icon', className && className)} {...rest}>

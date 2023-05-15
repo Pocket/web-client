@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 
 import { CrossIcon } from 'components/icons/CrossIcon'
 

@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { capitalizeFirstLetter } from 'common/utilities/strings/strings'
 import { PinFilledIcon } from 'components/icons/PinFilledIcon'

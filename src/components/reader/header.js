@@ -1,5 +1,5 @@
 /* eslint  react/jsx-no-target-blank: 0*/
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import Link from 'next/link'
 import { Pill } from 'components/pill/pill'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'

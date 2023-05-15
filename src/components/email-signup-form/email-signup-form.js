@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import isEmail from 'validator/lib/isEmail'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import Recaptcha from 'react-google-recaptcha'
 import { TextInput } from 'components/form-fields/text-input'
 import { breakpointSmallHandset, breakpointLargeHandset } from 'common/constants'

@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { TextArea } from 'components/form-fields/text-area'
 import PropTypes from 'prop-types'
 

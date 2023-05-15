@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { cx } from 'linaria'
+import { cx } from '@emotion/css'
 import { useTranslation } from 'next-i18next'
 import { HomeHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'

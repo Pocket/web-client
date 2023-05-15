@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import PropTypes from 'prop-types'
 
 const barWrapper = css`

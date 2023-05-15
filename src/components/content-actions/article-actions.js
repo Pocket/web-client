@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { MailIcon } from 'components/icons/MailIcon'
 import { breakpointMediumTablet } from 'common/constants'

@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { Modal, ModalBody } from 'components/modal/modal'
 import { useTranslation } from 'next-i18next'
 import { PremiumIcon } from 'components/icons/PremiumIcon'
@@ -50,7 +50,8 @@ export function ShortCutDisplay({ copy, keyCopy, premium, isPremium, transKey })
     <tr key={keyCopy} className={rowClass}>
       <td>{t(`shortcuts:${transKey}`, copy)}</td>
       <td>
-        {premium ? <PremiumIcon className="premium-icon" /> : null} {t(`shortcuts:${transKey}-key`, keyCopy)}
+        {premium ? <PremiumIcon className="premium-icon" /> : null}{' '}
+        {t(`shortcuts:${transKey}-key`, keyCopy)}
       </td>
     </tr>
   )

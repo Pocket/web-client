@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown'
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { breakpointLargeHandset } from 'common/constants'
 import PropTypes from 'prop-types'
 

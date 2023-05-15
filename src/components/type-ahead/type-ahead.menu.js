@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 export const typeAheadWrapper = css`
   max-height: 7rem;
@@ -20,6 +20,4 @@ export const typeAheadWrapper = css`
   }
 `
 
-export const TypeAheadMenu = ({ children }) => (
-  <div className={typeAheadWrapper}>{children}</div>
-)
+export const TypeAheadMenu = ({ children }) => <div className={typeAheadWrapper}>{children}</div>

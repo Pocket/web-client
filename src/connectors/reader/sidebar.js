@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Sidebar } from 'components/reader/sidebar'
-import { cx } from 'linaria'
+import { cx } from '@emotion/css'
 import { toggleSidebar } from 'containers/read/reader.state'
 import { mutationHighlightDelete } from 'connectors/items/mutation-highlight.state'
 import { shareAction } from 'connectors/items/mutation-share.state'

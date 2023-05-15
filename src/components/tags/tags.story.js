@@ -8,7 +8,7 @@ import {
   WebOnlyTag,
   HighlightsTag
 } from './tags'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 export default {
   title: 'Components/Tags'

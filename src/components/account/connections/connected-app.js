@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { useTranslation } from 'next-i18next'
 
 const serviceStyle = css`

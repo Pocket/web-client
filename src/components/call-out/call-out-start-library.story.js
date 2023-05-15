@@ -1,7 +1,7 @@
 import { CallOutStartLibrary } from './call-out-start-library'
 import { CallOutStartLibraryExplore } from './call-out-start-library'
 
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 export default {
   title: 'Messaging/Start Library',

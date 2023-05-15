@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { useDispatch, useSelector } from 'react-redux'
 import { Listen } from 'connectors/listen/listen'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
@@ -43,14 +43,14 @@ export const ListenLogin = ({ itemId, path }) => {
   const loggedIn = userStatus === 'valid'
   const ElementToRender = loggedIn ? Listen : LoggedOut
 
-  return listenLab ? (
-    <ElementToRender itemId={itemId} path={path} clickEvent={signUpEvent} />
-  ) : null
+  return listenLab ? <ElementToRender itemId={itemId} path={path} clickEvent={signUpEvent} /> : null
 }
 
 const LoggedOut = ({ clickEvent, path = '' }) => (
   <p className={loggedOutStyle}>
     <ListenIcon /> Want to Listen to this article?{' '}
-    <a href={`${LOGIN_URL}?route=${path}`} onClick={clickEvent}>Sign in</a>
+    <a href={`${LOGIN_URL}?route=${path}`} onClick={clickEvent}>
+      Sign in
+    </a>
   </p>
 )

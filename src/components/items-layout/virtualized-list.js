@@ -1,5 +1,5 @@
 import { cardsGrid } from 'components/items-layout/base'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { breakpointSmallTablet } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'

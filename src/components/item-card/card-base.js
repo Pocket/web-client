@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { breakpointSmallDesktop } from 'common/constants'
 import { breakpointLargeTablet } from 'common/constants'
 import { breakpointMediumTablet } from 'common/constants'
@@ -248,8 +248,9 @@ export const cardStyles = css`
     display: none;
   }
 
-  .actions .item-actions{
-    button, a{
+  .actions .item-actions {
+    button,
+    a {
       border-color: transparent;
     }
   }

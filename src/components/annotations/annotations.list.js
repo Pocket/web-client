@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { AnnotationMenu } from './annotations.menu'
 import { cardStyles, Quote, CreatedDate } from './annotations.card'
 import { EmptyList } from './annotations.empty-list'

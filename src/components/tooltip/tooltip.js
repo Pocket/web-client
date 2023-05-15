@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 
 export const horizontalAnimation = `
   @keyframes tooltipFadeawayHorizontal {

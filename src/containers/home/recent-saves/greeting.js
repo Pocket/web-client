@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next'
 import { useSelector } from 'react-redux'
 import { getTimeOfDay } from 'common/utilities/date-time/date-time'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 
 const homeGreeting = css`

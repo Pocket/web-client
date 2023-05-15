@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { breakpointSmallTablet } from 'common/constants'
 import Link from 'next/link'
 

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { clearAllToasts } from 'connectors/toasts/toast.state'
 import { Toast } from './toast'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 const toastStyle = css`
   position: fixed;

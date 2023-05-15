@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { GlobalFooter } from 'components/global-footer/global-footer'
 import { PageContainer } from 'components/page-container/page-container'
 import { breakpointLargeTablet } from 'common/constants'

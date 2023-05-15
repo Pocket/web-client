@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { CrossIcon } from 'components/icons/CrossIcon'
 import { useTranslation, Trans } from 'next-i18next'
 

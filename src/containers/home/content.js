@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
-import { cx } from 'linaria'
+import { cx } from '@emotion/css'
 
 import { ItemCard } from 'connectors/items/item-card-transitional'
 import { standardGrid } from 'components/item/items-layout'

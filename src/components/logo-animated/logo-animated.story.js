@@ -1,5 +1,5 @@
 import { LogoAnimated } from './logo-animated'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 export default {
   title: 'Components/LogoAnimated'

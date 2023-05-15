@@ -3,7 +3,7 @@ import VisibilitySensor from './visibility-sensor'
 import { ContentParsed } from 'components/content-parsed/content-parsed'
 import { ScrollChyron } from 'components/chyron/chyron-scroll'
 import { articleContent } from 'mocks/_data/article'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 export default {
   title: 'Article/Visibility Sensor',

@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { useRef } from 'react'
 import { useTranslation } from 'next-i18next'
 import { PopupMenu, PopupMenuItem } from 'components/popup-menu/popup-menu'

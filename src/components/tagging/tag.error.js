@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { Trans } from 'next-i18next'
 
 const tagErrorWrapper = css`
@@ -19,13 +19,9 @@ const tagErrorWrapper = css`
 
 export const TagError = ({ email }) => {
   const msg = !email ? (
-    <Trans i18nKey="tags:tags-character-limit">
-      Tags are limited to 25 characters
-    </Trans>
+    <Trans i18nKey="tags:tags-character-limit">Tags are limited to 25 characters</Trans>
   ) : (
-    <Trans i18nKey="common:please-enter-valid-email">
-      Please enter a valid email address
-    </Trans>
+    <Trans i18nKey="common:please-enter-valid-email">Please enter a valid email address</Trans>
   )
 
   return <div className={tagErrorWrapper}>{msg}</div>

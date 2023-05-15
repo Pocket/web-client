@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { AdSlot } from 'components/programmatic-ad/freestar-ad-slot'
 
 const aboveTheFoldStyle = css`

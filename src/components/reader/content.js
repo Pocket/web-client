@@ -1,6 +1,6 @@
 //!! UPDATE HOOKS / REFACTOR TO TYPESCRIPT
 import { useEffect, useRef, useState } from 'react'
-import { cx } from 'linaria'
+import { cx } from '@emotion/css'
 import DOMPurify from 'dompurify'
 import { loadParsedImages } from './images'
 import { loadParsedVideos } from './videos'

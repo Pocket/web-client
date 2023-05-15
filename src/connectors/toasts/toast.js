@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { CheckIcon } from 'components/icons/CheckIcon'
 import { ErrorIcon } from 'components/icons/ErrorIcon'
 

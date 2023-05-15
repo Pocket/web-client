@@ -1,4 +1,4 @@
-import { cx } from 'linaria'
+import { cx } from '@emotion/css'
 import { itemActionStyle } from 'components/item-actions/base'
 import { menuItemStyle } from 'components/item-actions/base'
 import { OverflowAction } from 'components/item-actions/overflow'
@@ -34,7 +34,12 @@ export const MenuItem = ({
           {actionText ? <span className="actionText">{actionText}</span> : null}
         </a>
       ) : (
-        <button data-cy={label} className={itemStyle} onClick={onClick} aria-label={label} data-tooltip={label}>
+        <button
+          data-cy={label}
+          className={itemStyle}
+          onClick={onClick}
+          aria-label={label}
+          data-tooltip={label}>
           {icon ? icon : null}
           {actionText ? <span className="actionText">{actionText}</span> : null}
         </button>

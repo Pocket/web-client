@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { timeRelativeToNow } from 'common/utilities/date-time/date-time'
 import Avatar from 'components/avatar/avatar'
 import dayjs from 'dayjs'

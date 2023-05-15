@@ -1,7 +1,7 @@
 //!! UPDATE HOOKS / REFACTOR TO TYPESCRIPT
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { HomeIcon } from 'components/icons/HomeIcon'
 import { ArrowLeftIcon } from 'components/icons/ArrowLeftIcon'
 import { HighlightIcon } from 'components/icons/HighlightIcon'

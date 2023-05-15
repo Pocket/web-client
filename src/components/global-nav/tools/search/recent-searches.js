@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import { breakpointMediumHandset } from 'common/constants'

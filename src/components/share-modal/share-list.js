@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import copy from 'clipboard-copy'
 import { COPY_ITEM_URL } from 'actions'
 import { CopyIcon } from 'components/icons/CopyIcon'

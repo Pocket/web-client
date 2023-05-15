@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 
 const listStyle = css`

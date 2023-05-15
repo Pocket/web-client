@@ -1,6 +1,6 @@
 import { Onboarding } from './onboarding'
 import { useState } from 'react'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 export default {
   title: 'Overlays/Onboarding',

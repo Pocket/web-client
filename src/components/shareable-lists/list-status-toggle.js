@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { useRef } from 'react'
 import { PopupMenu, PopupMenuItem } from 'components/popup-menu/popup-menu'
 import { ChevronDownIcon } from 'components/icons/ChevronDownIcon'
@@ -19,7 +19,8 @@ const toggleStyles = css`
   button {
     align-items: center;
 
-    &:hover, &:hover .label-secondary {
+    &:hover,
+    &:hover .label-secondary {
       background: var(--color-teal100);
       color: var(--color-actionPrimary);
     }
@@ -39,23 +40,30 @@ export const ListStatusToggle = ({ status, handleSetStatus }) => {
 
   const statusRef = useRef(null)
 
-  const handleSetPrivate = () => handleSetStatus({status: 'PRIVATE'})
-  const handleSetPublic = () => handleSetStatus({status: 'PUBLIC'})
+  const handleSetPrivate = () => handleSetStatus({ status: 'PRIVATE' })
+  const handleSetPublic = () => handleSetStatus({ status: 'PUBLIC' })
 
-  const publicIcon = (status === 'PUBLIC') ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
-  const privateIcon = (status === 'PRIVATE') ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
+  const publicIcon =
+    status === 'PUBLIC' ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
+  const privateIcon =
+    status === 'PRIVATE' ? <CheckCircledIcon className="active" /> : <EmptyCircledIcon />
 
   return (
     <>
       <button
         ref={statusRef}
-        className={cx("tiny", "outline", buttonStyles, status)}
+        className={cx('tiny', 'outline', buttonStyles, status)}
         data-cy="sort-options">
         {status === 'PRIVATE' ? (
-          <><LockIcon /> Private</>
-        ): (
-          <><GlobeIcon /> Public</>
-        )} <ChevronDownIcon />
+          <>
+            <LockIcon /> Private
+          </>
+        ) : (
+          <>
+            <GlobeIcon /> Public
+          </>
+        )}{' '}
+        <ChevronDownIcon />
       </button>
       <PopupMenu
         className={toggleStyles}

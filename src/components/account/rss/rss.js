@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { useTranslation } from 'next-i18next'
 
 const pocketAppsStyle = css`
@@ -15,7 +15,7 @@ const RssLinks = ({ userName }) => {
   const unreadLink = `https://getpocket.com/users/${userName}/feed/unread`
   const readLink = `https://getpocket.com/users/${userName}/feed/read`
   const allLink = `https://getpocket.com/users/${userName}/feed/all`
-  
+
   return (
     <div className="sectionBody">
       <label htmlFor="something" className="connectionLabel">
@@ -52,8 +52,8 @@ const RssLinks = ({ userName }) => {
       </a>
       <div className="helperText full">
         {t('account:rss-feed-helper', 'Your RSS feeds are private and password protected.')}
-      </div>      
-    </div>  
+      </div>
+    </div>
   )
 }
 
@@ -65,14 +65,14 @@ const ChangeUsername = ({ onChangeUsername }) => {
       <label htmlFor="rss-change-username" className="connectionLabel labelWithContext">
         {t('account:profile-change-username', 'Change Username')}
         <div className="helperText full">
-          {t('account:rss-feed-username', 'You need to create a username to access your RSS feed.')}  
+          {t('account:rss-feed-username', 'You need to create a username to access your RSS feed.')}
         </div>
-      </label>              
+      </label>
       <div className="actionInline">
         <button id="rss-change-username" className="primary" onClick={onChangeUsername}>
           {t('account:profile-change-username', 'Change Username')}
-        </button>              
-      </div>            
+        </button>
+      </div>
     </div>
   )
 }
@@ -82,7 +82,7 @@ export const RSSFeeds = ({ userName, onChangeUsername }) => {
 
   return (
     <section className={pocketAppsStyle}>
-      <h2 id="rss">{t('account:rss', 'RSS Feeds')}</h2>  
+      <h2 id="rss">{t('account:rss', 'RSS Feeds')}</h2>
       {userName ? (
         <RssLinks userName={userName} />
       ) : (

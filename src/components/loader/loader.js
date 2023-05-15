@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 const loaderCentered = css`
   height: calc(100vh - 63px);
@@ -8,9 +8,7 @@ const loaderCentered = css`
   align-items: center;
   align-content: center;
 `
-export const LoaderCentered = ({ children }) => (
-  <div className={loaderCentered}>{children}</div>
-)
+export const LoaderCentered = ({ children }) => <div className={loaderCentered}>{children}</div>
 
 const loadMore = css`
   height: 200px;
@@ -20,9 +18,7 @@ const loadMore = css`
   align-items: center;
   align-content: center;
 `
-export const LoadMore = ({ children }) => (
-  <div className={loadMore}>{children}</div>
-)
+export const LoadMore = ({ children }) => <div className={loadMore}>{children}</div>
 
 const loadWrapper = css`
   display: inline-flex;

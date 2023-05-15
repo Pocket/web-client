@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { Trans } from 'next-i18next'
 import HighlightDark from 'static/images/reader-upsells/HighlightsAlt-dark.svg'
 import HighlightLight from 'static/images/reader-upsells/HighlightsAlt-light.svg'

@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { breakpointMediumHandset } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { breakpointMediumTablet } from 'common/constants'

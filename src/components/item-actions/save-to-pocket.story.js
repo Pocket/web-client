@@ -1,6 +1,6 @@
 import { SaveToPocket } from './save-to-pocket'
 import { useEffect, useState } from 'react'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 const styles = css`
   font-family: sans-serif;

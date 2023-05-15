@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { usePopover } from 'components/popover/popover'
 import { SaveIcon } from 'components/icons/SaveIcon'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
@@ -12,11 +12,7 @@ const saveListStyles = css`
   }
 `
 
-export const SaveListButton = ({
-  isAuthenticated,
-  saveStatus = "unsaved",
-  saveAction
-}) => {
+export const SaveListButton = ({ isAuthenticated, saveStatus = 'unsaved', saveAction }) => {
   const { t } = useTranslation()
 
   const saveCopy = {
@@ -45,10 +41,8 @@ export const SaveListButton = ({
       <button
         onClick={handleClick}
         ref={popTrigger}
-        className={cx(saveListStyles, "brand", "small")}
-      >
-        {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}{' '}
-        {saveCopy[saveStatus]}
+        className={cx(saveListStyles, 'brand', 'small')}>
+        {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />} {saveCopy[saveStatus]}
       </button>
       {!isAuthenticated && shown ? <SavePopover popoverRef={popBody} /> : null}
     </>

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
 import { HighlightIcon } from 'components/icons/HighlightIcon'

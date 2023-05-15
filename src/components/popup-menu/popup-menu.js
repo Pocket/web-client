@@ -1,7 +1,7 @@
 //!! UPDATE HOOKS / REFACTOR TO TYPESCRIPT
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import Popup from 'components/popup/popup'
 import Modal from 'components/modal/modal'
 import { useViewport } from 'components/viewport-provider/viewport-provider'

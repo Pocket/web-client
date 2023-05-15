@@ -1,5 +1,5 @@
 import ReactMarkdown from 'react-markdown'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 const introStyles = css`
   font-family: var(--fontSansSerif);

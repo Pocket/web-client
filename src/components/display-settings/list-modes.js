@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 
 import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
 import { GridViewIcon } from 'components/icons/GridViewIcon'

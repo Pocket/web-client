@@ -29,7 +29,7 @@ import { ItemCard } from './card'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import ErrorPage from 'pages/_error'
 
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { breakpointMediumHandset } from 'common/constants' // 479
 
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'

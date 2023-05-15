@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import RainbowReader from 'static/images/rainbow-reader-transparent.svg'
 import { LogoMark } from 'components/logo/logo'

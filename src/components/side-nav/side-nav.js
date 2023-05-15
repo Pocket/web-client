@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
-import { css } from 'linaria'
-import { cx } from 'linaria'
+import { css } from '@emotion/css'
+import { cx } from '@emotion/css'
 
 import { breakpointSmallDesktop } from 'common/constants'
 import { HomeIcon } from 'components/icons/HomeIcon'

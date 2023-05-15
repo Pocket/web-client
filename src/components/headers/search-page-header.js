@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { breakpointLargeTablet } from 'common/constants'
 import { FilterMenu } from 'components/list-filter-menu/list-filter-menu'
 import { useTranslation } from 'next-i18next'

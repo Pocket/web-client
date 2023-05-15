@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { Trans, useTranslation } from 'next-i18next'
 import { PremiumIcon } from 'components/icons/PremiumIcon'
 import { MenuIcon } from 'components/icons/MenuIcon'

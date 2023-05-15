@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 export const tagWrapper = css`
   font-size: 12px;

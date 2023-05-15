@@ -2,7 +2,7 @@ import { _themeGroups } from '../../styles/variables/colors'
 import { colorGroups } from './helpers'
 import { GroupHeading } from './helpers'
 import { ColorBlock } from './helpers'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 
 export default {
   title: 'UI/ColorThemes'

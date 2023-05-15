@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 const divideVerticalStyles = css`
   width: 1px;

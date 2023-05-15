@@ -1,12 +1,5 @@
-const nextBuildId = require('next-build-id')
-const assetPrefix = process.env.ASSET_PREFIX 
 const { i18n } = require('./next-i18next.config.js')
-const withLinaria = require('next-linaria')
 const { withSentryConfig } = require('@sentry/nextjs')
-
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true'
-})
 
 // For all available options, see:
 // https://github.com/getsentry/sentry-webpack-plugin#options.
@@ -21,7 +14,10 @@ const nextOptions = {
     RELEASE_VERSION: process.env.RELEASE_VERSION,
     TEST_SNOWPLOW: process.env.TEST_SNOWPLOW
   },
-  assetPrefix,
+  compiler: {
+    emotion: true
+  },
+  assetPrefix: process.env.ASSET_PREFIX,
   sentry: {
     disableServerWebpackPlugin: true,
     disableClientWebpackPlugin: true
@@ -70,22 +66,7 @@ const nextOptions = {
       }
     ]
   },
-  //prettier-ignore
-  webpack: (config, { webpack }) => {
-
-        config.plugins.push(
-          new webpack.DefinePlugin({
-            'process.env.BUILD_ID':  JSON.stringify(nextBuildId.sync({ dir: __dirname }))
-          }),
-          new webpack.ContextReplacementPlugin(/power-assert-formatter/)
-        )
-
-        return config
-      },
-  crossOrigin: 'anonymous',
-  generateBuildId: () => nextBuildId({ dir: __dirname })
+  crossOrigin: 'anonymous'
 }
 
-module.exports = withBundleAnalyzer(
-  withSentryConfig(withLinaria(nextOptions), SentryWebpackPluginOptions)
-)
+module.exports = withSentryConfig(nextOptions, SentryWebpackPluginOptions)

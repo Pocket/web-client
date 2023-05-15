@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 import { breakpointSmallDesktop } from 'common/constants' // 1023
 import { breakpointLargeTablet } from 'common/constants' // 1023
 import { useTranslation, Trans } from 'next-i18next'

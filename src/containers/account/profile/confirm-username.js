@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 import { useState } from 'react'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
@@ -101,7 +101,11 @@ export const UsernameModal = () => {
             'You will need to log in again after you update your username.'
           )}
         </div>
-        <button className="primary" type="submit" data-cy="update-username-confirm" onClick={confirmUsernmame}>
+        <button
+          className="primary"
+          type="submit"
+          data-cy="update-username-confirm"
+          onClick={confirmUsernmame}>
           {t('account:update-username', 'Update Username')}
         </button>
       </ModalFooter>

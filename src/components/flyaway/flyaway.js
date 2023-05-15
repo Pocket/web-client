@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { breakpointLargeHandset, breakpointLargeTablet } from 'common/constants'
 import { CloseButton } from 'components/close-button/close-button'
 import { containerMaxWidth } from 'common/constants'

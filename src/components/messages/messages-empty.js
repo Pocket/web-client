@@ -1,4 +1,4 @@
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { MessagesHeader } from 'components/headers/messages-header'
 import { useTranslation } from 'next-i18next'
 

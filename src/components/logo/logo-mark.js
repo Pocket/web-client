@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { screenReaderOnly } from '../../styles/helpers'
 const logoMarkImg =
   'https://assets.getpocket.com/web-ui/assets/pocket-logo-mark.dd8dec213208a4fbf2bff946d112aec3.svg'

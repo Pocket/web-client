@@ -1,5 +1,5 @@
 import React from 'react'
-import { css, cx } from 'linaria'
+import { css, cx } from '@emotion/css'
 import { breakpointLargeTablet } from 'common/constants' // 1023
 import { breakpointSmallTablet } from 'common/constants' // 839
 import { breakpointLargeHandset } from 'common/constants' // 599
