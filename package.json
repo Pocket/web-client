@@ -117,6 +117,7 @@
   "dependencies": {
     "@braze/web-sdk": "4.7.1",
     "@emotion/css": "11.11.0",
+    "@emotion/react": "11.11.0",
     "@freestar/pubfig-adslot-react-component": "3.6.0",
     "@n8tb1t/use-scroll-position": "2.0.3",
     "@next/bundle-analyzer": "13.4.2",
