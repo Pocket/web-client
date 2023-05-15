@@ -2,7 +2,7 @@
 
 exports[`ItemCard renders a story 1`] = `
 <article
-  class="c18o9ext grid noExcerpt"
+  class="css-17xj56a grid noExcerpt"
   data-cy="article-card-1731163180"
 >
   <div
@@ -12,7 +12,7 @@ exports[`ItemCard renders a story 1`] = `
     class="cardWrap"
   >
     <div
-      class="c97c5c media"
+      class="css-1v4yrya media"
     >
       <a
         data-cy="image-link"
@@ -37,7 +37,7 @@ exports[`ItemCard renders a story 1`] = `
             item-action:view-original
           </span>
           <span
-            class="i1qqph0t icon"
+            class="css-1bptydr icon"
           >
             <svg
               aria-hidden="true"
@@ -76,7 +76,7 @@ exports[`ItemCard renders a story 1`] = `
           Inside VW’s Campaign of Trickery
         </a>
         <span
-          class="i1qqph0t icon mobile-view-original"
+          class="css-1bptydr icon mobile-view-original"
           data-cy="view-original-icon"
         >
           <svg
@@ -125,14 +125,14 @@ exports[`ItemCard renders a story 1`] = `
     class="footer"
   >
     <div
-      class="i18uycg6 actions"
+      class="css-dz1tot actions"
     >
       <button
-        class="b5bt6fr sb4ns5w unsaved card-actions forceWidth"
+        class="unsaved card-actions forceWidth css-1sh3voc"
         data-cy="article-save-btn-1731163180"
       >
         <span
-          class="i1qqph0t icon"
+          class="css-1bptydr icon"
         >
           <svg
             aria-hidden="true"

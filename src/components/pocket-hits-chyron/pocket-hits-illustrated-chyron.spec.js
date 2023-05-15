@@ -2,6 +2,10 @@ import { render } from 'test-utils'
 import '@testing-library/jest-dom/extend-expect'
 import { PocketHitsIllustratedChyron } from './pocket-hits-illustrated-chyron'
 
+jest.mock('static/images/pocket-hits-chyron/border.svg', () => 'svg')
+jest.mock('static/images/pocket-hits-chyron/envelope-green.svg', () => 'svg')
+jest.mock('static/images/pocket-hits-chyron/envelope-red.svg', () => 'svg')
+
 describe('PocketHitsIllustratedChyron', () => {
   it('shows the form and hides the success message by default', () => {
     const { queryByCy, getByCy } = render(<PocketHitsIllustratedChyron />)
