@@ -69,7 +69,7 @@ function deriveListItem(item, listId, utmId) {
 // Build a List and compile the analytics
 // Process the card image
 function deriveList(list, listId, listItems) {
-  const { slug, title, description, status, moderationStatus, createdAt } = list //prettier-ignore
+  const { slug, title, description, status, moderationStatus, listItemNoteVisibility, createdAt } = list //prettier-ignore
   const analyticsData = {
     id: listId,
     shareableListExternalId: listId,
@@ -78,6 +78,7 @@ function deriveList(list, listId, listItems) {
     description: description,
     status: status,
     moderationStatus: moderationStatus,
+    listItemNoteVisibility: listItemNoteVisibility,
     createdAt: Date.parse(createdAt) / 1000
   }
 
