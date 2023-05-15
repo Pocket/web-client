@@ -86,7 +86,7 @@ export const Pagination = ({
       return (
         <PageLink
           pagePattern={pagePattern}
-          key={pageNumber}
+          key={`collection-${pageNumber}`}
           pageNumber={pageNumber}
           currentPage={currentPage}
         />
