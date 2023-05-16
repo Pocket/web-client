@@ -5,6 +5,7 @@ import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import { SectionHeader } from 'components/headers/section-header'
 import { matchSorter } from 'match-sorter'
 import { useTranslation, Trans } from 'next-i18next'
+import { EmptyTags } from 'components/empty-states/tags'
 
 const allTagStyle = css`
   .searchBlock {
@@ -73,6 +74,8 @@ export function TagList({ userTags, value, valueChange }) {
               </li>
             ))
           )}
+
+          {sortedTags.length === 0 && orderedTags.length === 0 ? <EmptyTags /> : null}
         </ul>
       </div>
     </div>

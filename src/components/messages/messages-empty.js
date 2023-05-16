@@ -17,12 +17,6 @@ export const MessageEmpty = () => {
           When someone shares items with you using Send to Friend, they will appear here.
         </Trans>
       </p>
-      <p>
-        <Trans i18nKey="messages:you-can-send-to-friend">
-          You can also use Send to Friend to share items directly to a friend’s Pocket. Look for
-          Send to Friend in the Share menu.
-        </Trans>
-      </p>
     </main>
   )
 }
