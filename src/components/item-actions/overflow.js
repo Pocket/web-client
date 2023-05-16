@@ -60,7 +60,7 @@ const MenuPopover = function ({ popoverRef, menuItems }) {
   )
 }
 
-export const OverflowAction = function ({ toggleLabel, menuItems, placement }) {
+export const OverflowAction = function ({ toggleLabel = '', placement = 'top-end', menuItems }) {
   const handleClick = (event) => {
     event.preventDefault()
     event.stopPropagation()
@@ -115,12 +115,5 @@ OverflowAction.propTypes = {
     'left',
     'left-start',
     'left-end'
-  ]),
-  alignRight: PropTypes.bool
-}
-
-OverflowAction.defaultProps = {
-  toggleLabel: '',
-  placement: 'top-end',
-  alignRight: false
+  ])
 }

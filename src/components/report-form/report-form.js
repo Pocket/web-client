@@ -87,7 +87,3 @@ ReportForm.propTypes = {
   handleTextAreaChange: PropTypes.func
 }
 
-ReportForm.defaultProps = {
-  handleRadioChange: () => {},
-  handleTextAreaChange: () => {}
-}

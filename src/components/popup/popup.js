@@ -93,12 +93,14 @@ const Popup = ({
   trigger,
   id,
   className,
-  animationDuration,
-  alwaysRender,
-  onOpen,
-  onClose,
-  popperOptions,
-  forceShow
+  animationDuration = 75,
+  alwaysRender = true,
+  onOpen = () => {},
+  onClose = () => {},
+  popperOptions = {
+    placement: 'bottom-start'
+  },
+  forceShow = false
 }) => {
   let popper
   let animationTimeout
@@ -297,23 +299,5 @@ Popup.propTypes = {
    */
   forceShow: PropTypes.bool
 }
-Popup.defaultProps = {
-  id: '',
-  className: '',
-  animationDuration: 75,
-  alwaysRender: true,
 
-  onOpen() {
-    /** noop */
-  },
-
-  onClose() {
-    /** noop */
-  },
-
-  popperOptions: {
-    placement: 'bottom-start'
-  },
-  forceShow: false
-}
 export default Popup

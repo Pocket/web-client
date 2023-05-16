@@ -37,7 +37,7 @@ const modalFooterStyles = css`
   }
 `
 
-export const ModalFooter = ({ children, hasBorder, isSticky, className }) => {
+export const ModalFooter = ({ children, hasBorder = true, isSticky = true, className }) => {
   return (
     <div
       className={cx(modalFooterStyles, hasBorder && 'bordered', isSticky && 'sticky', className)}>
@@ -49,11 +49,6 @@ export const ModalFooter = ({ children, hasBorder, isSticky, className }) => {
 ModalFooter.propTypes = {
   hasBorder: PropTypes.bool,
   isSticky: PropTypes.bool
-}
-
-ModalFooter.defaultProps = {
-  hasBorder: true,
-  isSticky: true
 }
 
 export default ModalFooter

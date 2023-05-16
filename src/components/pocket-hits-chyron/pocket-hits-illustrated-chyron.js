@@ -199,14 +199,14 @@ const captchaDisclaimer = css`
 `
 
 const PocketHitsIllustratedChyron = ({
-  isProcessing,
-  isSuccessful,
-  handleEmailSubmit,
-  handleEmailInputFocus,
-  handleValidationError,
-  signupError,
-  onVisible,
-  handleEmailDismiss,
+  isProcessing = false,
+  isSuccessful = false,
+  handleEmailSubmit = () => {},
+  handleEmailInputFocus = () => {},
+  handleValidationError = () => {},
+  onVisible = () => {},
+  handleEmailDismiss = () => {},
+  signupError = false,
   dismissChyron,
   completeChyron
 }) => {
@@ -331,26 +331,4 @@ PocketHitsIllustratedChyron.propTypes = {
    */
   signupError: PropTypes.bool
 }
-
-PocketHitsIllustratedChyron.defaultProps = {
-  isProcessing: false,
-  isSuccessful: false,
-  handleEmailSubmit() {
-    /** noop */
-  },
-  handleEmailInputFocus() {
-    /** noop */
-  },
-  handleValidationError() {
-    /** noop */
-  },
-  onVisible() {
-    /** noop */
-  },
-  handleEmailDismiss() {
-    /** noop */
-  },
-  signupError: false
-}
-
 export { PocketHitsIllustratedChyron }

@@ -199,17 +199,17 @@ const GlobalNav = ({
   subset,
   tag,
   appRootSelector,
-  pocketLogoOutboundUrl,
-  selectedLink,
-  isLoggedIn,
-  isPremium,
-  avatarSrc,
-  accountName,
-  profileUrl,
-  onLinkClick,
-  onToolClick,
+  pocketLogoOutboundUrl = '/explore?src=navbar',
+  selectedLink = '',
+  isLoggedIn = false,
+  isPremium = false,
+  avatarSrc = null,
+  accountName = undefined,
+  profileUrl = null,
+  onLinkClick = () => {},
+  onToolClick = () => {},
+  onAccountClick = () => {},
   onLoginClick,
-  onAccountClick,
   listMode,
   colorMode,
   setColorMode,
@@ -218,10 +218,10 @@ const GlobalNav = ({
   setDetailMode,
   showNotification,
   links,
-  tools,
+  tools = [],
   sendImpression,
   userStatus,
-  children
+  children = null
 }) => {
   const { t } = useTranslation()
 
@@ -409,27 +409,6 @@ GlobalNav.propTypes = {
    * Child element(s) to display _in place of_ standard links + tools + user functionality
    */
   children: PropTypes.node
-}
-
-GlobalNav.defaultProps = {
-  pocketLogoOutboundUrl: '/explore?src=navbar',
-  selectedLink: '',
-  isLoggedIn: false,
-  isPremium: false,
-  avatarSrc: null,
-  accountName: undefined,
-  profileUrl: null,
-  onLinkClick() {
-    /** noop */
-  },
-  onToolClick() {
-    /** noop */
-  },
-  onAccountClick() {
-    /** noop */
-  },
-  tools: [],
-  children: null
 }
 
 export default GlobalNav

@@ -30,7 +30,7 @@ const modalTabStyles = css`
   }
 `
 
-export const ModalTabs = ({ children, hasBorder, isSticky, className }) => {
+export const ModalTabs = ({ children, hasBorder = true, isSticky = true, className }) => {
   return (
     <div className={cx(modalTabStyles, hasBorder && 'bordered', isSticky && 'sticky', className)}>
       {children}
@@ -43,9 +43,5 @@ ModalTabs.propTypes = {
   isSticky: PropTypes.bool
 }
 
-ModalTabs.defaultProps = {
-  hasBorder: true,
-  isSticky: true
-}
 
 export default ModalTabs

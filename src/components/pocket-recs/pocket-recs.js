@@ -182,10 +182,10 @@ const recommendationsStyles = css`
 `
 
 export const PocketRecs = ({
-  recommendations,
-  maxRecommendations,
-  handleRecImpression,
-  handleRecClick
+  recommendations = [],
+  maxRecommendations = 3,
+  handleRecImpression = () => {},
+  handleRecClick = () => {}
 }) => {
   if (recommendations.length === 0) return null
 
@@ -230,13 +230,6 @@ PocketRecs.propTypes = {
    * Callback function to fire on Rec click
    */
   handleRecClick: PropTypes.func
-}
-
-PocketRecs.defaultProps = {
-  recommendations: [],
-  maxRecommendations: 3,
-  handleRecImpression: () => {},
-  handleRecClick: () => {}
 }
 
 export default PocketRecs

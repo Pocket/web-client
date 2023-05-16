@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from '@emotion/css'
+import { css, cx } from '@emotion/css'
 import { containerMaxWidth, breakpointTinyTablet, breakpointLargeHandset } from 'common/constants'
 const pageContainerStyle = css`
   box-sizing: content-box;
@@ -24,8 +24,8 @@ const pageContainerStyle = css`
  *
  */
 
-export const PageContainer = ({ children, className }) => {
-  return <div className={`${pageContainerStyle} ${className}`}>{children}</div>
+export const PageContainer = ({ children = null, className }) => {
+  return <div className={cx(pageContainerStyle, className && className)}>{children}</div>
 }
 
 PageContainer.propTypes = {
@@ -41,7 +41,4 @@ PageContainer.propTypes = {
    */
   className: PropTypes.string
 }
-PageContainer.defaultProps = {
-  children: null,
-  className: ''
-}
+

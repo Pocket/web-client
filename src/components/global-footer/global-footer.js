@@ -299,7 +299,7 @@ const engagementBlockStyle = css`
  * The `GlobalFooter` component appears at the bottom of every screen in our web applications.
  */
 export const GlobalFooter = (props) => {
-  const { device, hasBorder, hasColorBorder, minimal, anchored } = props
+  const { device, hasBorder = true, hasColorBorder = false, minimal, anchored } = props
   const { t } = useTranslation()
 
   const oneTrustClickHandler = () => window.OneTrust?.ToggleInfoDisplay()
@@ -514,7 +514,3 @@ GlobalFooter.propTypes = {
   hasColorBorder: PropTypes.bool
 }
 
-GlobalFooter.defaultProps = {
-  hasBorder: true,
-  hasColorBorder: false
-}

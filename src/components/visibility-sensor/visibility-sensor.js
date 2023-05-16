@@ -9,7 +9,8 @@ import ReactVisibilitySensor from 'react-visibility-sensor'
  * but wraps it with a configurable height threshold based on percentage, and
  * ensures that the callback is only called once on the first time visible.
  */
-const VisibilitySensor = ({ children, onVisible, heightThreshold }) => {
+const defaultHeightThreshold = 0.5 // 0.5 is industry standard for ads
+const VisibilitySensor = ({ children, onVisible, heightThreshold = defaultHeightThreshold }) => {
   const [offset, setOffset] = useState(0)
   const [isInvoked, setInvoked] = useState(false)
   const ref = useRef(null)
@@ -52,9 +53,5 @@ VisibilitySensor.propTypes = {
   heightThreshold: PropTypes.number
 }
 
-VisibilitySensor.defaultProps = {
-  // 0.5 is industry standard for ads
-  heightThreshold: 0.5
-}
 
 export default VisibilitySensor

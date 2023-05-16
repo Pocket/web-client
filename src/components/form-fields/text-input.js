@@ -15,17 +15,17 @@ import InputWrapper from './input-wrapper'
 export const TextInput = ({
   name,
   labelText,
-  helperText,
-  value,
-  error,
-  displayErrorInline,
-  className,
-  disabled,
-  onChange,
-  onFocus,
-  onBlur,
   inputStyles,
-  maxLength
+  maxLength,
+  helperText = null,
+  value = '',
+  error = null,
+  displayErrorInline = false,
+  className = null,
+  disabled = false,
+  onChange = () => {},
+  onFocus = () => {},
+  onBlur = () => {}
 }) => {
   return (
     <InputWrapper
@@ -118,15 +118,4 @@ TextInput.propTypes = {
    * Max character length for the input
    */
   maxLength: PropTypes.number
-}
-TextInput.defaultProps = {
-  helperText: null,
-  value: '',
-  error: null,
-  displayErrorInline: false,
-  className: null,
-  disabled: false,
-  onChange: () => {},
-  onFocus: () => {},
-  onBlur: () => {}
 }

@@ -34,11 +34,11 @@ export const pillboxStyle = css`
 const TopicsPillbox = ({
   id,
   omitPromoted,
-  topicsMap,
-  headingText,
-  headingClassName,
-  alignItems,
-  onTopicClick
+  topicsMap = null,
+  headingText = 'Discover Articles By Topic',
+  headingClassName = null,
+  alignItems = 'left',
+  onTopicClick = () => {}
 }) => {
   topicsMap = topicsMap || {}
   const topicsKeys = Object.keys(topicsMap).filter((topic) =>
@@ -134,16 +134,6 @@ TopicsPillbox.propTypes = {
    * topic index, and component id.x
    */
   onTopicClick: PropTypes.func
-}
-
-TopicsPillbox.defaultProps = {
-  topicsMap: null,
-  headingText: 'Discover Articles By Topic',
-  headingClassName: null,
-  alignItems: 'left',
-  onTopicClick() {
-    /** noop */
-  }
 }
 
 export default TopicsPillbox

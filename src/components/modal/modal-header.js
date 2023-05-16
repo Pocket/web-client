@@ -19,7 +19,7 @@ const modalHeaderStyles = css`
   }
 `
 
-export const ModalHeader = ({ title, hasBorder, isSticky, className }) => {
+export const ModalHeader = ({ title, hasBorder = true, isSticky = true, className }) => {
   return (
     <h6
       data-cy="modal-header"
@@ -35,9 +35,5 @@ ModalHeader.propTypes = {
   isSticky: PropTypes.bool
 }
 
-ModalHeader.defaultProps = {
-  hasBorder: true,
-  isSticky: true
-}
 
 export default ModalHeader

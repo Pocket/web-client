@@ -48,7 +48,7 @@ function mainLayout({
   subset,
   tag,
   selectedNavLink,
-  isFullWidthLayout
+  isFullWidthLayout = false
 }) {
   return (
     <>
@@ -76,11 +76,6 @@ mainLayout.propTypes = {
    * page content.
    */
   isFullWidthLayout: PropTypes.bool
-}
-
-mainLayout.defaultProps = {
-  selectedNavLink: undefined,
-  isFullWidthLayout: false
 }
 
 export default mainLayout

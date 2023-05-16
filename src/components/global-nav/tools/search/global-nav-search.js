@@ -158,14 +158,14 @@ const searchContainerStyle = css`
  * Component to expose search functionality to users in places like GlobalNav.
  */
 const GlobalNavSearch = ({
+  onClose = false,
+  onFocus = () => {},
+  onBlur = () => {},
+  value = '',
+  placeholder = 'nav:search-for-topics-and-interests', // default localized key
+  mobilePlaceholder = 'nav:search-for-topics', // default localized key
   onSubmit,
-  onClose,
-  onFocus,
-  onBlur,
-  value,
-  placeholder,
-  recentSearches,
-  mobilePlaceholder
+  recentSearches
 }) => {
   const { t } = useTranslation()
   const inputEl = useRef(null)
@@ -334,15 +334,6 @@ GlobalNavSearch.propTypes = {
    * at mobile widths
    */
   mobilePlaceholder: PropTypes.node
-}
-
-GlobalNavSearch.defaultProps = {
-  onClose: false,
-  onFocus: () => {},
-  onBlur: () => {},
-  value: '',
-  placeholder: 'nav:search-for-topics-and-interests', // default localized key
-  mobilePlaceholder: 'nav:search-for-topics' // default localized key
 }
 
 // This is so the localization parser can pick up these runtime variables

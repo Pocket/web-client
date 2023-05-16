@@ -12,7 +12,7 @@ const THIRTY_DAYS = 2592000
 const isDismissalExpired = (timeDismissed) =>
   getCurrentUnixTime() - parseInt(timeDismissed) > THIRTY_DAYS
 
-const Chyron = ({ instanceId, initialDismissed, initialSuccess, children }) => {
+const Chyron = ({ initialDismissed = false, initialSuccess = false, instanceId, children }) => {
   const [isDismissed, setDismissed] = useState(initialDismissed)
   const chyronId = `chyron-${instanceId}`
   const chyronDismissalDate = `chyron-dismissed-${instanceId}`
@@ -88,11 +88,6 @@ Chyron.propTypes = {
    * State to hold whether the Chyron's CTA had already been successfully triggered
    */
   initialSuccess: PropTypes.bool
-}
-
-Chyron.defaultProps = {
-  initialDismissed: false,
-  initialSuccess: false
 }
 
 export { Chyron }

@@ -18,7 +18,7 @@ const scrollChyronStyles = css`
   }
 `
 
-const ScrollChyron = ({ threshold, shouldHide, instanceId, children }) => {
+const ScrollChyron = ({ threshold = 400, shouldHide = false, instanceId, children }) => {
   const [isVisible, setVisible] = useState(false)
 
   useScrollPosition(
@@ -61,11 +61,6 @@ ScrollChyron.propTypes = {
    * Optional parameter to hide the chyron outside of normal flow
    */
   shouldHide: PropTypes.bool
-}
-
-ScrollChyron.defaultProps = {
-  threshold: 400,
-  shouldHide: false
 }
 
 export { ScrollChyron }

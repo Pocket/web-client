@@ -262,14 +262,14 @@ export const Menu = ({
  * to render so that links may be customized per page context.
  */
 const GlobalNavMobileMenu = ({
-  links,
+  links = DEFAULT_LINKS,
+  selectedLink = null,
+  onLinkClick = () => {},
+  onOpen = () => {},
+  onClosed = () => {},
+  isUserLoggedIn = false,
+  isUserPremium = false,
   subLinks,
-  selectedLink,
-  onLinkClick,
-  isUserLoggedIn,
-  isUserPremium,
-  onOpen,
-  onClosed,
   appRootSelector,
   isOpen,
   toggleMenuOpen,
@@ -298,7 +298,7 @@ const GlobalNavMobileMenu = ({
         onClick={handleOpen}
         aria-label={t('nav:open-the-pocket-mobile-menu', 'Open the Pocket mobile menu')}
         data-tooltip={t('nav:open', 'Open')}
-        className={cx(iconStyle, toggleClass, bottomTooltip, "inline")}>
+        className={cx(iconStyle, toggleClass, bottomTooltip, 'inline')}>
         <MenuIcon />
       </button>
       <Drawer
@@ -380,23 +380,6 @@ GlobalNavMobileMenu.propTypes = {
    * for mobile menu
    */
   forceShow: PropTypes.bool
-}
-
-GlobalNavMobileMenu.defaultProps = {
-  links: DEFAULT_LINKS,
-  selectedLink: null,
-  onLinkClick() {
-    /** noop */
-  },
-  onOpen() {
-    /** noop */
-  },
-  onClosed() {
-    /** noop */
-  },
-  isUserLoggedIn: false,
-  isUserPremium: false,
-  forceShow: false
 }
 
 export default GlobalNavMobileMenu

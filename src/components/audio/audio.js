@@ -31,11 +31,11 @@ const audioStyles = css`
 `
 
 export const Audio = ({
-  url,
-  playEvent,
-  pauseEvent,
-  rateChangeEvent,
-  endEvent,
+  url = null,
+  playEvent = () => {},
+  pauseEvent = () => {},
+  rateChangeEvent = () => {},
+  endEvent = () => {}
 }) => {
   const ref = useRef()
   const [playbackSpeed, setPlaybackSpeed] = useState(1)
@@ -63,18 +63,12 @@ export const Audio = ({
         controls
       />
       <select value={playbackSpeed} onChange={updatePlayback}>
-        {LISTEN_SPEEDS.map(val => (
-          <option value={val} key={val}>{val}x</option>
+        {LISTEN_SPEEDS.map((val) => (
+          <option value={val} key={val}>
+            {val}x
+          </option>
         ))}
       </select>
     </div>
   )
-}
-
-Audio.defaultProps = {
-  url: null,
-  playEvent: () => { },
-  pauseEvent: () => { },
-  rateChangeEvent: () => { },
-  endEvent: () => { }
 }

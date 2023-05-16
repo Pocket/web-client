@@ -101,7 +101,13 @@ const listStyle = css`
  * Component to render navigational links in the GlobalNav. Accepts a list of links
  * to render so that links may be customized per page context.
  */
-const GlobalNavLinks = ({ links, selectedLink, onLinkClick, className, ...remaining }) => {
+const GlobalNavLinks = ({
+  links = DEFAULT_LINKS,
+  selectedLink = null,
+  onLinkClick = () => {},
+  className,
+  ...remaining
+}) => {
   function handleClick(event, linkName, linkUrl) {
     onLinkClick(linkName, linkUrl)
   }
@@ -155,14 +161,6 @@ GlobalNavLinks.propTypes = {
    * url of that link.
    */
   onLinkClick: PropTypes.func
-}
-
-GlobalNavLinks.defaultProps = {
-  links: DEFAULT_LINKS,
-  selectedLink: null,
-  onLinkClick() {
-    /** noop */
-  }
 }
 
 export default GlobalNavLinks
