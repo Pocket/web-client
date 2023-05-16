@@ -1,3 +1,5 @@
+/** @type {import('next').NextConfig} */
+
 const { i18n } = require('./next-i18next.config.js')
 const { withSentryConfig } = require('@sentry/nextjs')
 
@@ -65,8 +67,7 @@ const nextOptions = {
         headers: [{ key: 'X-Frame-Options', value: 'SAMEORIGIN' }]
       }
     ]
-  },
-  crossOrigin: 'anonymous'
+  }
 }
 
 module.exports = withSentryConfig(nextOptions, SentryWebpackPluginOptions)
