@@ -30,7 +30,7 @@ export const EditListItemNote = () => {
 
   const handleSubmit = (note) => {
     dispatch(mutateListItemNoteConfirm(note))
-    dispatch(sendSnowplowEvent('shareable-list.item.note.edit.submit', { ...analyticsData, note }))
+    dispatch(sendSnowplowEvent('shareable-list.item.note.edit.confirm', { ...analyticsData, note }))
   }
 
   return showModal ? (

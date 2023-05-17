@@ -656,7 +656,7 @@ export const shareableListActions = {
     ],
     description: 'Fired when a creator cancels out of the Edit Note modal'
   },
-  'shareable-list.item.note.edit.submit': {
+  'shareable-list.item.note.edit.confirm': {
     eventType: 'engagement',
     entityTypes: ['ui', 'shareableListItem'],
     eventData: {
