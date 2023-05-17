@@ -1,3 +1,10 @@
+## [1.94.7](https://github.com/Pocket/web-client/compare/v1.94.6...v1.94.7) (2023-05-15)
+
+
+### Bug Fixes
+
+* **lists:** add the listItemNoteVisibility value to public list query ([f82bb95](https://github.com/Pocket/web-client/commit/f82bb95f582d2376d77458a122c3c9318b147d9c))
+
 ## [1.94.6](https://github.com/Pocket/web-client/compare/v1.94.5...v1.94.6) (2023-05-15)
 
 
