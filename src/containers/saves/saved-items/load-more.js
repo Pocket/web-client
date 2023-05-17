@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useRef } from 'react'
 import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 import { useSelector } from 'react-redux'
 import { Loader } from 'components/loader/loader'

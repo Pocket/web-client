@@ -8,9 +8,10 @@ exports[`SideNav renders the Account side nav 1`] = `
   <nav
     role="navigation"
   >
-    <button
+    <a
       class="css-16m92x4  "
       data-cy="side-nav-home"
+      href="/home?src=sidebar"
     >
       <span
         class="css-1bptydr icon side-nav-icon"
@@ -30,10 +31,11 @@ exports[`SideNav renders the Account side nav 1`] = `
       </span>
        
       nav:home
-    </button>
-    <button
+    </a>
+    <a
       class="css-16m92x4  "
       data-cy="side-nav-saves"
+      href="/saves?src=sidebar"
     >
       <span
         class="css-1bptydr icon side-nav-icon inactive"
@@ -73,10 +75,11 @@ exports[`SideNav renders the Account side nav 1`] = `
         </svg>
       </span>
       nav:saves
-    </button>
-    <button
+    </a>
+    <a
       class="css-16m92x4  "
       data-cy="side-nav-discover"
+      href="/explore?src=sidebar"
     >
       <span
         class="css-1bptydr icon side-nav-icon"
@@ -101,10 +104,11 @@ exports[`SideNav renders the Account side nav 1`] = `
       </span>
        
       nav:discover
-    </button>
-    <button
+    </a>
+    <a
       class="css-16m92x4  "
       data-cy="side-nav-collections"
+      href="/collections?src=sidebar"
     >
       <span
         class="css-1bptydr icon side-nav-icon"
@@ -143,7 +147,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       </span>
        
       nav:collections
-    </button>
+    </a>
     <div
       class="css-s9w2pk"
       data-cy="side-nav-account"
@@ -154,7 +158,7 @@ exports[`SideNav renders the Account side nav 1`] = `
   >
     <button
       aria-label="nav:return-to-top"
-      class="visible"
+      class="hidden"
       data-cy="side-nav-scroll-to-top"
     >
       <span
@@ -186,9 +190,10 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
   <nav
     role="navigation"
   >
-    <button
+    <a
       class="css-16m92x4  "
       data-cy="side-nav-home"
+      href="/home?src=sidebar"
     >
       <span
         class="css-1bptydr icon side-nav-icon"
@@ -208,10 +213,11 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       </span>
        
       nav:home
-    </button>
-    <button
+    </a>
+    <a
       class="css-16m92x4  "
       data-cy="side-nav-saves"
+      href="/saves?src=sidebar"
     >
       <span
         class="css-1bptydr icon side-nav-icon inactive"
@@ -251,10 +257,11 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
         </svg>
       </span>
       nav:saves
-    </button>
-    <button
+    </a>
+    <a
       class="css-16m92x4  "
       data-cy="side-nav-discover"
+      href="/explore?src=sidebar"
     >
       <span
         class="css-1bptydr icon side-nav-icon"
@@ -279,10 +286,11 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       </span>
        
       nav:discover
-    </button>
-    <button
+    </a>
+    <a
       class="css-16m92x4  "
       data-cy="side-nav-collections"
+      href="/collections?src=sidebar"
     >
       <span
         class="css-1bptydr icon side-nav-icon"
@@ -321,7 +329,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       </span>
        
       nav:collections
-    </button>
+    </a>
     <h4
       class="css-s9w2pk"
     >
@@ -514,7 +522,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
   >
     <button
       aria-label="nav:return-to-top"
-      class="visible"
+      class="hidden"
       data-cy="side-nav-scroll-to-top"
     >
       <span

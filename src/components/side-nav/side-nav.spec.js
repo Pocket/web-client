@@ -19,7 +19,7 @@ describe('SideNav', () => {
     trackMenuClick: handleClick
   }
 
-  xit('renders the Saves side nav and shows tags', () => {
+  it('renders the Saves side nav and shows tags', () => {
     useIntersectionObserver.mockReturnValue(mockEntry)
 
     const { queryByCy, queryAllByCy } = wrappedRender(<SideNav type="saves" {...baseProps} />)
@@ -45,7 +45,7 @@ describe('SideNav', () => {
     expect(queryByCy('side-nav')).toMatchSnapshot()
   })
 
-  xit('renders the Account side nav', () => {
+  it('renders the Account side nav', () => {
     const { queryByCy } = wrappedRender(<SideNav type="account" />)
 
     // Main section

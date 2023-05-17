@@ -233,29 +233,28 @@ export function SideNav({
           data-cy="side-nav-home">
           <HomeIcon className="side-nav-icon" /> {t('nav:home', 'Home')}
         </Link>
-        <Link href="/saves?src=sidebar" legacyBehavior>
-          <button className={subActive('unread')} onClick={clickEvent} data-cy="side-nav-saves">
-            <SaveIcon className="side-nav-icon inactive" />
-            <SaveFilledIcon className="side-nav-icon active" />
-            {t('nav:saves', 'Saves')}
-          </button>
+        <Link
+          href="/saves?src=sidebar"
+          className={subActive('unread')}
+          onClick={clickEvent}
+          data-cy="side-nav-saves">
+          <SaveIcon className="side-nav-icon inactive" />
+          <SaveFilledIcon className="side-nav-icon active" />
+          {t('nav:saves', 'Saves')}
         </Link>
-        <Link href="/explore?src=sidebar" legacyBehavior>
-          <button
-            className={subActive('discover')}
-            onClick={clickEvent}
-            data-cy="side-nav-discover">
-            <DiscoverIcon className="side-nav-icon" /> {t('nav:discover', 'Discover')}
-          </button>
+        <Link
+          href="/explore?src=sidebar"
+          className={subActive('discover')}
+          onClick={clickEvent}
+          data-cy="side-nav-discover">
+          <DiscoverIcon className="side-nav-icon" /> {t('nav:discover', 'Discover')}
         </Link>
-        <Link href="/collections?src=sidebar" legacyBehavior>
-          <button
-            className={subActive('collections')}
-            onClick={clickEvent}
-            ref={ref}
-            data-cy="side-nav-collections">
-            <CollectionsIcon className="side-nav-icon" /> {t('nav:collections', 'Collections')}
-          </button>
+        <Link
+          href="/collections?src=sidebar"
+          className={subActive('collections')}
+          onClick={clickEvent}
+          data-cy="side-nav-collections">
+          <CollectionsIcon className="side-nav-icon" /> {t('nav:collections', 'Collections')}
         </Link>
         {SubNav ? (
           <SubNav
