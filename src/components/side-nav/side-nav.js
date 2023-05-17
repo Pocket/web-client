@@ -1,8 +1,7 @@
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
-import { css } from '@emotion/css'
-import { cx } from '@emotion/css'
-
+import { css, cx } from '@emotion/css'
+import { useRef } from 'react'
 import { breakpointSmallDesktop } from 'common/constants'
 import { HomeIcon } from 'components/icons/HomeIcon'
 import { SaveIcon } from 'components/icons/SaveIcon'
@@ -11,7 +10,7 @@ import { ChevronUpIcon } from 'components/icons/ChevronUpIcon'
 import { DiscoverIcon } from 'components/icons/DiscoverIcon'
 import { CollectionsIcon } from 'components/icons/CollectionsIcon'
 
-import { useInView } from 'react-intersection-observer'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 
 import { FiltersSideNav } from './filters'
 import { AccountSideNav } from './account'
@@ -200,8 +199,11 @@ export function SideNav({
   recentLists
 }) {
   const { t } = useTranslation()
+  const viewRef = useRef(null)
 
-  const [ref, inView] = useInView({ threshold: 0.5 })
+  // Fire when item is in view
+  const entry = useIntersectionObserver(viewRef, { threshold: 0.5 })
+  const inView = !!entry?.isIntersecting
 
   const subActive = (active, isTag) => {
     const isActive = tag ? active === tag : active === subset
@@ -223,14 +225,13 @@ export function SideNav({
   return (
     <div className={wrapperClass} data-cy="side-nav">
       <nav role="navigation">
-        <Link href="/home?src=sidebar" legacyBehavior>
-          <button
-            ref={ref} // when ref offscreen, show "Return to top" button
-            className={subActive('home')}
-            onClick={clickEvent}
-            data-cy="side-nav-home">
-            <HomeIcon className="side-nav-icon" /> {t('nav:home', 'Home')}
-          </button>
+        <Link
+          href="/home?src=sidebar"
+          ref={viewRef} // when ref offscreen, show "Return to top" button
+          className={subActive('home')}
+          onClick={clickEvent}
+          data-cy="side-nav-home">
+          <HomeIcon className="side-nav-icon" /> {t('nav:home', 'Home')}
         </Link>
         <Link href="/saves?src=sidebar" legacyBehavior>
           <button className={subActive('unread')} onClick={clickEvent} data-cy="side-nav-saves">

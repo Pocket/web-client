@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useInView } from 'react-intersection-observer'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 import { useSelector } from 'react-redux'
 import { Loader } from 'components/loader/loader'
 import { css } from '@emotion/css'
@@ -29,7 +29,11 @@ const loadMoreRefStyle = css`
 `
 
 export function LoadMore({ loadMore }) {
-  const { ref, inView } = useInView()
+  const viewRef = useRef(null)
+
+  // Fire when item is in view
+  const entry = useIntersectionObserver(viewRef, { threshold: 0.5 })
+  const inView = !!entry?.isIntersecting
 
   const hasNextPage = useSelector((state) => state.pageSavedInfo.hasNextPage)
   const loading = useSelector((state) => state.pageSavedInfo.loading)
@@ -39,12 +43,7 @@ export function LoadMore({ loadMore }) {
   const shouldLoadMore = hasNextPage && !loading
 
   const loadMoreMessage = pageSavedIds.length ? 'Loading more items' : ''
-  useEffect(() => {
-    if (!inView) return () => {} 
-
-    // There are more items to load! Let's do it
-    if (shouldLoadMore) loadMore()
-  }, [inView, loadMore, shouldLoadMore])
+  if (inView && shouldLoadMore) loadMore()
 
   return loading || error ? (
     <div key="load-more" className={loadMoreStyle}>
@@ -57,6 +56,6 @@ export function LoadMore({ loadMore }) {
       )}
     </div>
   ) : (
-    <div ref={ref} className={loadMoreRefStyle} />
+    <div ref={viewRef} className={loadMoreRefStyle} />
   )
 }

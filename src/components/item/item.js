@@ -8,7 +8,8 @@ import { NewViewIcon } from 'components/icons/NewViewIcon'
 import { CardMedia } from 'components/item/item-media'
 import { ItemTags } from 'components/item/item-tags'
 import { itemStyles } from './item-styles'
-import { useInView } from 'react-intersection-observer'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
+
 import { ListViewAltIcon } from 'components/icons/ListViewAltIcon'
 import { ListStatusLink } from 'components/shareable-lists/list-status-link'
 import { ItemNote } from 'components/item/item-note'
@@ -96,8 +97,8 @@ export const Item = (props) => {
   const linkTarget = openInNewTab ? '_blank' : undefined
   const linkRel = openInNewTab ? 'noopener noreferrer' : undefined
   const [tagsShown, setTagsShown] = useState(false)
-  const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
 
+  const viewRef = useRef(null)
   const linkRef = useRef(null)
   const footerRef = useRef(null)
 
@@ -105,10 +106,9 @@ export const Item = (props) => {
   const hideTags = () => setTagsShown(false)
   const tagCount = tags?.length
 
-  // Fire when item is in view
-  useEffect(() => {
-    if (onItemInView) onItemInView(inView)
-  }, [inView, onItemInView])
+  // Fire a tracking event
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+  if (!!entry?.isIntersecting) onItemInView(true)
 
   // Fire when item is selected by shortcut
   // This allows us to keep shortcuts in sync with tab selection and in view

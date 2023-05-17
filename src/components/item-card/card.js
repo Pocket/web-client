@@ -8,7 +8,7 @@ import { ItemTags } from 'components/item-tags/item-tags'
 import { PartnerOverline } from 'components/content-partner/partner'
 import { cardStyles } from './card-base'
 import Link from 'next/link'
-import { useInView } from 'react-intersection-observer'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 import ReactMarkdown from 'react-markdown'
 import { NewViewIcon } from 'components/icons/NewViewIcon'
 
@@ -73,11 +73,11 @@ export const Card = (props) => {
 
     position,
     // UI
-    cardShape,
+    cardShape = 'grid',
+    showExcerpt = false,
+    showMedia = true,
+    hiddenActions = false,
     className,
-    showExcerpt,
-    showMedia,
-    hiddenActions,
     onImageFail,
     useMarkdown,
     partnerType,
@@ -85,9 +85,9 @@ export const Card = (props) => {
     topicName = false,
     style,
     // Tracking
-    onItemInView,
-    onOpenOriginalUrl,
-    onOpen,
+    onItemInView = () => {},
+    onOpenOriginalUrl = () => {},
+    onOpen = () => {},
     // Actions
     actionId,
     ActionMenu,
@@ -97,12 +97,11 @@ export const Card = (props) => {
 
   const linkRef = useRef(null)
   const articleRef = useRef(null)
+  const viewRef = useRef(null)
 
   // Fire when item is in view
-  const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
-  useEffect(() => {
-    onItemInView(inView)
-  }, [inView, onItemInView])
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+  if (!!entry?.isIntersecting) onItemInView(true)
 
   // Fire when item is selected by shortcut
   // This allows us to keep shortcuts in sync with tab selection and in view
@@ -303,16 +302,4 @@ Card.propTypes = {
   ActionMenu: PropTypes.func,
   shortcutSelect: PropTypes.func,
   bulkSelect: PropTypes.func
-}
-
-Card.defaultProps = {
-  cardShape: 'grid',
-  showExcerpt: false,
-  showMedia: true,
-  hiddenActions: false,
-  setNoImage: () => {},
-  onItemInView: () => {},
-  onOpen: () => {},
-  onOpenOriginalUrl: () => {},
-  bulkSelect: () => {}
 }

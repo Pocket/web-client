@@ -1,7 +1,7 @@
 import { css } from '@emotion/css'
 import { useTranslation } from 'next-i18next'
-import { useInView } from 'react-intersection-observer'
-import { useEffect } from 'react'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
+import { useRef } from 'react'
 import { PREMIUM_URL } from 'common/constants'
 import Tree from 'static/images/tree.svg'
 import TreeDark from 'static/images/tree-dark-mode.svg'
@@ -39,12 +39,11 @@ const premiumStyle = css`
 
 export const Premium = ({ isPremium, onPremiumImpression = () => {} }) => {
   const { t } = useTranslation()
+  const viewRef = useRef(null)
 
   // Fire when item is in view
-  const [viewRef, inView] = useInView({ triggerOnce: true, threshold: 0.5 })
-  useEffect(() => {
-    onPremiumImpression(inView)
-  }, [inView, onPremiumImpression])
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+  if (!!entry?.isIntersecting) onPremiumImpression(true)
 
   return (
     <section className={premiumStyle}>
