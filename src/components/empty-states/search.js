@@ -9,7 +9,7 @@ export const EmptySearch = () => {
     <div className={emptyStyles}>
       <img src={TreasureSVG.src} alt="" />
       <h4>{t('empty:search-title', 'No results found')}</h4>
-      <p>{t('empty:search-sub', 'Adjust your search terms and try again')}</p>
+      <p>{t('empty:search-sub', 'You don’t have any saves that match this search inquiry.')}</p>
     </div>
   )
 }
