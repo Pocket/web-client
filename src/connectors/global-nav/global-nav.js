@@ -217,6 +217,7 @@ const GlobalNav = (props) => {
   }
 
   const NavTakeover = navChildren[appMode]
+  const hideNav = noNav || appMode === 'reorder'
 
   const onLoginClick = (event) => {
     event.preventDefault()
@@ -250,7 +251,7 @@ const GlobalNav = (props) => {
       setDetailMode={setDetailMode}
       sendImpression={sendImpressionEvent}
       tools={tools}
-      noNav={noNav}
+      noNav={hideNav}
       flagsReady={flagsReady}>
       {NavTakeover ? <NavTakeover onClose={resetNav} /> : null}
     </GlobalNavComponent>
