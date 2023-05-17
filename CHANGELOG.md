@@ -1,3 +1,17 @@
+## [1.94.9](https://github.com/Pocket/web-client/compare/v1.94.8...v1.94.9) (2023-05-17)
+
+
+### Bug Fixes
+
+* **video:** update videos to use createroot over reactDOM.render ([59ae7c0](https://github.com/Pocket/web-client/commit/59ae7c05cbc3210119ce158a16271b8ec66066a0))
+
+## [1.94.8](https://github.com/Pocket/web-client/compare/v1.94.7...v1.94.8) (2023-05-17)
+
+
+### Bug Fixes
+
+* **list-note:** update note edit id to be confirm ([39a7114](https://github.com/Pocket/web-client/commit/39a711405a370c78db7e3612f595ffdc4b3978b0))
+
 ## [1.94.7](https://github.com/Pocket/web-client/compare/v1.94.6...v1.94.7) (2023-05-15)
 
 
