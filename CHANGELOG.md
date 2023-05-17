@@ -1,3 +1,10 @@
+## [1.94.8](https://github.com/Pocket/web-client/compare/v1.94.7...v1.94.8) (2023-05-17)
+
+
+### Bug Fixes
+
+* **list-note:** update note edit id to be confirm ([39a7114](https://github.com/Pocket/web-client/commit/39a711405a370c78db7e3612f595ffdc4b3978b0))
+
 ## [1.94.7](https://github.com/Pocket/web-client/compare/v1.94.6...v1.94.7) (2023-05-15)
 
 
