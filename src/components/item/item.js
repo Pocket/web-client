@@ -108,7 +108,7 @@ export const Item = (props) => {
 
   // Fire a tracking event
   const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
-  if (!!entry?.isIntersecting) onItemInView(true)
+  if (!!entry?.isIntersecting && onItemInView) onItemInView(true)
 
   // Fire when item is selected by shortcut
   // This allows us to keep shortcuts in sync with tab selection and in view
