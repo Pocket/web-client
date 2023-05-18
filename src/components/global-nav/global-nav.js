@@ -61,6 +61,10 @@ const headerStyle = css`
     display: none;
   }
 
+  .noNav.logo {
+    margin-left: -4px;
+  }
+
   ${breakpointSmallTablet} {
     .pocket-logo {
       &:hover {

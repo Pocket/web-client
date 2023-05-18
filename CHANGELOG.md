@@ -1,3 +1,10 @@
+## [1.94.11](https://github.com/Pocket/web-client/compare/v1.94.10...v1.94.11) (2023-05-18)
+
+
+### Bug Fixes
+
+* **lists:** hide global nav when in reorder ([0c1665d](https://github.com/Pocket/web-client/commit/0c1665da30ff13697d353073e29da19e4707b680))
+
 ## [1.94.10](https://github.com/Pocket/web-client/compare/v1.94.9...v1.94.10) (2023-05-17)
 
 
