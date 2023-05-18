@@ -5,21 +5,29 @@ import { ReorderItem } from 'components/reorder/reorder'
 import { ListSortHeader } from 'components/headers/lists-header'
 import { IndividualListReorderCard } from 'connectors/lists/individual-list.reorder.card'
 import { mutateReorderListItems } from 'connectors/lists/mutation-update.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const ListReorder = ({ id, toggleSort }) => {
   const dispatch = useDispatch()
 
-  const { title, description, listItemIds } = useSelector((state) => state.listsDisplay[id])
+  const { listItemIds, ...list } = useSelector((state) => state.listsDisplay[id])
   const [items, setItems] = useState(listItemIds)
+
+  const { title, description, listItemNoteVisibility, analyticsData: passedAnalytics } = list
+
+  const analyticsData = {
+    ...passedAnalytics,
+    listItemNoteVisibility
+  }
 
   const handleSave = () => {
     dispatch(mutateReorderListItems({ id, items }))
-    // dispatch(sendSnowplowEvent('shareable-list.sort.save', analyticsData??))
+    dispatch(sendSnowplowEvent('shareable-list.reorder.confirm', analyticsData))
     toggleSort(false)
   }
 
   const handleCancel = () => {
-    // dispatch(sendSnowplowEvent('shareable-list.sort.cancel', analyticsData??))
+    dispatch(sendSnowplowEvent('shareable-list.reorder.cancel', analyticsData))
     toggleSort(false)
   }
 

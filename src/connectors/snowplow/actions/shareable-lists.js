@@ -675,6 +675,51 @@ export const shareableListActions = {
     ],
     description: 'Fired when a creator Saves a note in the Edit Note modal'
   },
+  'shareable-list.reorder.intent': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ]
+  },
+  'shareable-list.reorder.cancel': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ]
+  },
+  'shareable-list.reorder.confirm': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'shareableList'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ]
+  },
 
   // PUBLIC list
   'public-list.save': {
