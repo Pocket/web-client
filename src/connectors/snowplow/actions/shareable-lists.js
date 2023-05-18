@@ -688,7 +688,8 @@ export const shareableListActions = {
       'status',
       'moderationStatus',
       'createdAt'
-    ]
+    ],
+    description: 'Fired when a creator clicks the Reorder button'
   },
   'shareable-list.reorder.cancel': {
     eventType: 'engagement',
@@ -703,7 +704,8 @@ export const shareableListActions = {
       'status',
       'moderationStatus',
       'createdAt'
-    ]
+    ],
+    description: 'Fired when a creator clicks the Cancel button after initiating a reorder'
   },
   'shareable-list.reorder.confirm': {
     eventType: 'engagement',
@@ -718,7 +720,8 @@ export const shareableListActions = {
       'status',
       'moderationStatus',
       'createdAt'
-    ]
+    ],
+    description: 'Fired when a creator clicks the Save button after initiating a reorder'
   },
 
   // PUBLIC list
