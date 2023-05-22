@@ -46,6 +46,7 @@ export const PublicListCard = ({ listId, externalId, position }) => {
   return (
     <div className={cx(stackedGrid, stackedGridNoAside)}>
       <Item
+        type="list-item"
         listId={listId}
         itemId={externalId}
         title={title}
