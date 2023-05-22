@@ -8,7 +8,7 @@ export const EmptyFavorites = () => {
 
   return (
     <div className={emptyStyles}>
-      <img src={TreasureSVG.src} alt="" />
+      <img src={TreasureSVG.src} alt="" aria-hidden="true" />
       <h4>{t('empty:favorites-title', 'Find your favorites here')}</h4>
       <p>
         <Trans i18nKey="empty:favorites-sub">

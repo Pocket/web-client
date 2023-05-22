@@ -8,7 +8,7 @@ export const EmptyArchive = () => {
 
   return (
     <div className={emptyStyles}>
-      <img src={TreasureSVG.src} alt="" />
+      <img src={TreasureSVG.src} alt="" aria-hidden="true" />
       <h4>{t('empty:archives-title', 'Keep your Pocket fresh and clean')}</h4>
       <p>
         <Trans i18nKey="empty:archives-sub">

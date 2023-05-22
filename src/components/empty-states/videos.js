@@ -7,7 +7,7 @@ export const EmptyVideos = () => {
 
   return (
     <div className={emptyStyles}>
-      <img src={TreasureSVG.src} alt="" />
+      <img src={TreasureSVG.src} alt="" aria-hidden="true" />
       <h4>{t('empty:videos-title', 'Videos you’ve saved will show up here')}</h4>
     </div>
   )

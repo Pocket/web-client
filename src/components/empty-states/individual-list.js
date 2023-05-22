@@ -8,7 +8,7 @@ export const EmptyIndividualLists = ({ handleClick }) => {
 
   return (
     <div className={emptyStyles}>
-      <img src={TreasureSVG.src} alt="" />
+      <img src={TreasureSVG.src} alt="" aria-hidden="true" />
       <p>
         {t('list:add-items-to-your-list', 'Add items to your list. Go to Saves to get started.')}
       </p>

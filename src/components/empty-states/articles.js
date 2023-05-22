@@ -7,7 +7,7 @@ export const EmptyArticles = () => {
 
   return (
     <div className={emptyStyles}>
-      <img src={TreasureSVG.src} alt="" />
+      <img src={TreasureSVG.src} alt="" aria-hidden="true" />
       <h4>{t('empty:articles-title', 'Here’s where you’ll see the articles you’ve saved.')}</h4>
       <p>{t('empty:articles-sub', 'Go to Discover to see our latest article recommendations.')}</p>
     </div>

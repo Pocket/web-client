@@ -258,12 +258,12 @@ export const ReaderNav = ({
               onClick={clickArchive}
               aria-label={
                 archive
-                  ? t('nav:re-add-to-list', 'Re-add to List')
+                  ? t('nav:re-add-to-saves', 'Re-add to Saves')
                   : t('nav:archive-article', 'Archive Article')
               }
               data-tooltip={
                 archive
-                  ? t('nav:re-add-to-list', 'Re-add to List')
+                  ? t('nav:re-add-to-saves', 'Re-add to Saves')
                   : t('nav:archive-article', 'Archive Article')
               }
               data-cy="reader-nav-archive"
@@ -273,8 +273,8 @@ export const ReaderNav = ({
 
             <button
               onClick={toggleDelete}
-              aria-label={t('nav:delete-from-library', 'Delete from Library')}
-              data-tooltip={t('nav:delete-from-library', 'Delete from Library')}
+              aria-label={t('nav:delete-from-saves', 'Delete from Saves')}
+              data-tooltip={t('nav:delete-from-saves', 'Delete from Saves')}
               data-cy="reader-nav-delete"
               className={cx(buttonClass, bottomTooltip)}>
               <DeleteIcon />
