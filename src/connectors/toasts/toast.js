@@ -181,7 +181,7 @@ export function Toast({
     // List items
     [LIST_ADD_ITEM_SUCCESS]: t('toast:item-added-to-list', 'Item added to list'),
     [LIST_ADD_ITEM_FAILURE]: t('toast:error-adding-item', 'Error adding item'),
-    [LIST_DELETE_ITEM_SUCCESS]: t('toast:item-removed-from list', 'Item removed from list'),
+    [LIST_DELETE_ITEM_SUCCESS]: t('toast:item-removed-from-list', 'Item removed from list'),
     [LIST_DELETE_ITEM_FAILURE]: t('toast:error-removing-item', 'Error removing item')
   }
 
@@ -208,7 +208,7 @@ export function Toast({
   const IconToShow = errors.includes(type) ? ErrorIcon : CheckIcon
 
   useEffect(() => {
-    if (!show) return () => {} 
+    if (!show) return () => {}
     const removeTime = showUndo ? 5000 : 3500
     const removeTimer = setTimeout(unmount, removeTime)
     return () => clearTimeout(removeTimer)
