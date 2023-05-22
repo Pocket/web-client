@@ -22,7 +22,10 @@ import { LIST_ITEM_ADD_NOTE_CONFIRM } from 'actions'
 import { LIST_ITEM_ADD_NOTE_CANCEL } from 'actions'
 import { LIST_ITEM_ADD_NOTE_SUCCESS } from 'actions'
 import { LIST_ITEM_ADD_NOTE_FAILURE } from 'actions'
+
 import { LIST_ITEM_EDIT_NOTE_REQUEST } from 'actions'
+import { LIST_ITEM_EDIT_NOTE_SUCCESS } from 'actions'
+import { LIST_ITEM_EDIT_NOTE_FAILURE } from 'actions'
 
 import { LIST_ITEMS_REORDER_REQUEST } from 'actions'
 import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
@@ -41,7 +44,7 @@ export const mutateListStatusAction = ({ id, status, listItemNoteVisibility }) =
 export const mutateListItemNote = ({ id, position }) => ({ type: LIST_ITEM_ADD_NOTE_REQUEST, id, position }) //prettier-ignore
 export const mutateListItemNoteCancel = () => ({ type: LIST_ITEM_ADD_NOTE_CANCEL })
 export const mutateListItemNoteConfirm = (note) => ({ type: LIST_ITEM_ADD_NOTE_CONFIRM, note })
-export const mutateListItemNoteEdit = ({ id, position }) => ({ type: LIST_ITEM_EDIT_NOTE_REQUEST, id, position }) //prettier-ignore
+export const mutateListItemNoteEdit = ({ id, position }) => ({ type: LIST_ITEM_EDIT_NOTE_REQUEST, id, position, edit: true }) //prettier-ignore
 
 export const mutateReorderListItems = ({ id, items }) => ({ type: LIST_ITEMS_REORDER_REQUEST, id, items }) //prettier-ignore
 
@@ -80,6 +83,8 @@ export const mutationListUpdateReducers = (state = initialState, action) => {
 
     case LIST_ITEM_ADD_NOTE_SUCCESS:
     case LIST_ITEM_ADD_NOTE_FAILURE:
+    case LIST_ITEM_EDIT_NOTE_SUCCESS:
+    case LIST_ITEM_EDIT_NOTE_FAILURE:
     case LIST_ITEM_ADD_NOTE_CANCEL: {
       return {
         ...state,
@@ -159,7 +164,7 @@ function* listUpdateStatus({ id, status, listItemNoteVisibility }) {
   }
 }
 
-function* listItemAddNote({ id }) {
+function* listItemAddNote({ id, edit }) {
   const { cancel, confirm } = yield race({
     confirm: take(LIST_ITEM_ADD_NOTE_CONFIRM),
     cancel: take(LIST_ITEM_ADD_NOTE_CANCEL)
@@ -175,12 +180,14 @@ function* listItemAddNote({ id }) {
     }
 
     const response = yield call(updateShareableListItem, data)
-    yield put({ type: LIST_ITEM_ADD_NOTE_SUCCESS })
+    const action = edit ? LIST_ITEM_EDIT_NOTE_SUCCESS : LIST_ITEM_ADD_NOTE_SUCCESS
+    yield put({ type: action })
 
     const itemsById = { [id]: { ...response } }
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
   } catch (error) {
-    yield put({ type: LIST_ITEM_ADD_NOTE_FAILURE, error })
+    const action = edit ? LIST_ITEM_EDIT_NOTE_FAILURE : LIST_ITEM_ADD_NOTE_FAILURE
+    yield put({ type: action, error })
   }
 }
 
