@@ -1,3 +1,34 @@
+## [1.94.12](https://github.com/Pocket/web-client/compare/v1.94.11...v1.94.12) (2023-05-18)
+
+
+### Bug Fixes
+
+* **lists:** adding descriptions to reorder event actions ([1c1ba49](https://github.com/Pocket/web-client/commit/1c1ba49f72519473034d0d56f0140beae3a2cc7b))
+* **lists:** adding snowplow events for reorder engagement ([f02da5f](https://github.com/Pocket/web-client/commit/f02da5f1536d78d83f4424229528917d8e767957))
+
+## [1.94.11](https://github.com/Pocket/web-client/compare/v1.94.10...v1.94.11) (2023-05-18)
+
+
+### Bug Fixes
+
+* **lists:** hide global nav when in reorder ([0c1665d](https://github.com/Pocket/web-client/commit/0c1665da30ff13697d353073e29da19e4707b680))
+
+## [1.94.10](https://github.com/Pocket/web-client/compare/v1.94.9...v1.94.10) (2023-05-17)
+
+
+### Bug Fixes
+
+* **empty-states:** adding empty states for all filters ([6ec39e7](https://github.com/Pocket/web-client/commit/6ec39e7d5d884543ff67f833d189a442e6799d96))
+* **filters:** update empty states based on copy updates ([c00f8fb](https://github.com/Pocket/web-client/commit/c00f8fb2d6358deffa02c7f78d5fba25d6cc0253))
+* **messages:** remove trans component from empty messages string ([9f849ec](https://github.com/Pocket/web-client/commit/9f849ec46d22f911d00e4ffb99c032bcf4dedb6d))
+
+## [1.94.9](https://github.com/Pocket/web-client/compare/v1.94.8...v1.94.9) (2023-05-17)
+
+
+### Bug Fixes
+
+* **video:** update videos to use createroot over reactDOM.render ([59ae7c0](https://github.com/Pocket/web-client/commit/59ae7c05cbc3210119ce158a16271b8ec66066a0))
+
 ## [1.94.8](https://github.com/Pocket/web-client/compare/v1.94.7...v1.94.8) (2023-05-17)
 
 

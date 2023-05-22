@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { loadMoreListItems } from './saved-items.state'
 import { getScrollTop } from 'common/utilities/scroll/scroll'
 import { useViewport } from 'components/viewport-provider/viewport-provider'
+import { EmptyFilters } from 'components/empty-states/filters'
 
 import { css } from 'linaria'
 
@@ -56,13 +57,13 @@ const LIST_DIMENSIONS = {
   }
 }
 
-export const ListOfItems = () => {
+export const ListOfItems = ({ subset }) => {
   const dispatch = useDispatch()
   const viewport = useViewport()
 
   const pageSavedIds = useSelector((state) => state.pageSavedIds)
-  const totalCount = useSelector((state) => state.pageSavedInfo.totalCount)
   const type = useSelector((state) => state.app.listMode)
+  const loading = useSelector((state) => state.pageSavedInfo.loading)
 
   const [startingIndex, setStartingIndex] = useState(0)
 
@@ -104,9 +105,6 @@ export const ListOfItems = () => {
     }
   }, [checkRange])
 
-  // We don't want to render until we have data
-  if (!totalCount) return null
-
   const loadMore = () => dispatch(loadMoreListItems())
   const itemsToShow = pageSavedIds.slice(startingIndex, startingIndex + itemsOnScreen + 1)
 
@@ -132,6 +130,7 @@ export const ListOfItems = () => {
               )
             })
           : null}
+        {!loading && pageSavedIds.length === 0 ? <EmptyFilters subset={subset} /> : null}
         <div style={{ height: totalHeight, width: 1, visibility: 'hidden' }}></div>
       </div>
       <LoadMore loadMore={loadMore} />

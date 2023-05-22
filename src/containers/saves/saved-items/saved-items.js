@@ -99,5 +99,5 @@ export const SavedItems = (props) => {
     dispatch(selectShortcutItem(false))
   }, [dispatch])
 
-  return <ListOfItems />
+  return <ListOfItems subset={sub} />
 }
