@@ -187,8 +187,6 @@ export function Toast({
     // List items
     [LIST_ADD_ITEM_SUCCESS]: t('toast:item-added-to-list', 'Item added to list'),
     [LIST_ADD_ITEM_FAILURE]: t('toast:error-adding-item', 'Error adding item'),
-    [LIST_DELETE_ITEM_SUCCESS]: t('toast:item-removed-from list', 'Item removed from list'),
-    [LIST_DELETE_ITEM_FAILURE]: t('toast:error-removing-item', 'Error removing item'),
     [LIST_ITEM_ADD_NOTE_SUCCESS]: t('toast:note-added', 'Note added'),
     [LIST_ITEM_ADD_NOTE_FAILURE]: t('toast:error-adding-note', 'Error adding note'),
     [LIST_ITEM_EDIT_NOTE_SUCCESS]: t('toast:note-updated', 'Note updated'),
