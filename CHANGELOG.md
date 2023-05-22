@@ -1,3 +1,10 @@
+## [1.94.13](https://github.com/Pocket/web-client/compare/v1.94.12...v1.94.13) (2023-05-22)
+
+
+### Bug Fixes
+
+* **lists:** fix bad translation key ([34d980d](https://github.com/Pocket/web-client/commit/34d980dd7548187e6d71ee338847d06e4b425453))
+
 ## [1.94.12](https://github.com/Pocket/web-client/compare/v1.94.11...v1.94.12) (2023-05-18)
 
 
