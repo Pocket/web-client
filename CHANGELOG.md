@@ -1,3 +1,10 @@
+## [1.94.14](https://github.com/Pocket/web-client/compare/v1.94.13...v1.94.14) (2023-05-22)
+
+
+### Bug Fixes
+
+* **lists:** adding toasts for note actions ([0eb9acf](https://github.com/Pocket/web-client/commit/0eb9acf58898ef46a7119ad6890cefc9f8c3b290))
+
 ## [1.94.13](https://github.com/Pocket/web-client/compare/v1.94.12...v1.94.13) (2023-05-22)
 
 
