@@ -144,6 +144,8 @@ const buttonStyle = css`
 `
 
 const CloseButton = ({ onClick }) => {
+  const { t } = useTranslation()
+
   return (
     <button className={`${buttonStyle} cancel-button`} onClick={onClick} data-cy="bulk-close">
       <CrossIcon className={navIconStyle} />
