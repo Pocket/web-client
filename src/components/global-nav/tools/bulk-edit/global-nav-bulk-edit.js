@@ -12,7 +12,7 @@ import { TagIcon } from 'components/icons/TagIcon'
 import { breakpointMediumHandset } from 'common/constants'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 
-import { Trans, useTranslation } from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 import Mousetrap from 'mousetrap'
 
 const bulkStyle = css`
@@ -147,9 +147,7 @@ const CloseButton = ({ onClick }) => {
   return (
     <button className={`${buttonStyle} cancel-button`} onClick={onClick} data-cy="bulk-close">
       <CrossIcon className={navIconStyle} />
-      <CloseLabel>
-        <Trans i18nKey="nav:cancel">Cancel</Trans>
-      </CloseLabel>
+      <CloseLabel>{t('nav:cancel', 'Cancel')}</CloseLabel>
     </button>
   )
 }
@@ -243,11 +241,9 @@ function GlobalNavBulkEdit({
             </button>
 
             <div className="labelText">
-              {bulkItemsCount ? (
-                `${bulkItemsCount} item${bulkItemsCount > 1 ? 's' : ''}` // needs additional translation help
-              ) : (
-                <Trans i18nKey="nav:select-items">Select Items</Trans>
-              )}
+              {bulkItemsCount
+                ? t('nav:item-count', '{{count}} items', { count: bulkItemsCount })
+                : t('nav:select-items', 'Select Items')}
             </div>
           </div>
         </div>
