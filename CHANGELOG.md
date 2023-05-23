@@ -1,3 +1,11 @@
+## [1.94.16](https://github.com/Pocket/web-client/compare/v1.94.15...v1.94.16) (2023-05-23)
+
+
+### Bug Fixes
+
+* **empty-states:** adding hidden label to images for screen readers ([88824ab](https://github.com/Pocket/web-client/commit/88824ab2c2c135d39269b720734933a7442e9afe))
+* **toats:** remove dupes ([3b3784b](https://github.com/Pocket/web-client/commit/3b3784bd2900ffc1d16105c0f1656138f497a81c))
+
 ## [1.94.15](https://github.com/Pocket/web-client/compare/v1.94.14...v1.94.15) (2023-05-23)
 
 
