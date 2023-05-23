@@ -1,3 +1,10 @@
+## [1.94.15](https://github.com/Pocket/web-client/compare/v1.94.14...v1.94.15) (2023-05-23)
+
+
+### Bug Fixes
+
+* **list:** updating item cards so layout is correct with note ([41c0300](https://github.com/Pocket/web-client/commit/41c03008a36c87c3bcc785b8a2226ff86cb42136))
+
 ## [1.94.14](https://github.com/Pocket/web-client/compare/v1.94.13...v1.94.14) (2023-05-22)
 
 

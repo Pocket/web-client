@@ -149,7 +149,7 @@ export const Item = (props) => {
           openUrl={openUrl}
         />
       </span>
-      <div>
+      <div className="item-links">
         <Link
           href={openUrl}
           onClick={onOpen}

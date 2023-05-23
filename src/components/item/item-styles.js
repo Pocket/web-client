@@ -1,6 +1,7 @@
 import { css } from 'linaria'
 import { breakpointLargeHandset } from 'common/constants'
 import { breakpointSmallTablet } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
 import { breakpointMediumHandset } from 'common/constants'
 
 export const itemStyles = css`
@@ -461,6 +462,20 @@ export const itemStyles = css`
       }
       .footer {
         grid-column: span 2;
+      }
+    }
+  }
+
+  &.list-item {
+    footer {
+      grid-column-start: 2;
+    }
+
+    ${breakpointTinyTablet} {
+      .media-block,
+      .item-links,
+      footer {
+        grid-column: span 12;
       }
     }
   }
