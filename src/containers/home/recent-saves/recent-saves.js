@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { cx } from '@emotion/css'
 import { useTranslation } from 'next-i18next'
 import { HomeHeader } from 'components/headers/home-header'
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,8 +23,7 @@ export const HomeRecentSaves = () => {
   }, [dispatch])
 
   return recentSaves?.length > 0 ? (
-    <SectionWrapper data-cy='home-section-recent-saves'>
-
+    <SectionWrapper data-cy="home-section-recent-saves">
       <HomeHeader
         headline={t('home:recent-saves-title', 'Recent Saves')}
         moreLinkText={t('home:recent-saves-link-text', 'Go to Saves')}

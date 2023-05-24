@@ -1,7 +1,7 @@
 import { css } from '@emotion/css'
 import { ErrorIcon } from 'components/icons/ErrorIcon'
 import { topTooltip } from 'components/tooltip/tooltip'
-import { useTranslation, Trans } from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 
 const emailStyle = css`
   padding-bottom: 3rem;

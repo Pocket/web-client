@@ -11,7 +11,6 @@ import { ItemCard } from 'connectors/items/item-card-transitional'
 import { heroGrid, stackedGrid } from 'components/item/items-layout'
 import { CallOutCollection } from 'components/call-out/call-out-collections'
 import { Pagination } from 'components/pagination/pagination'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 // Constants
 import { BASE_URL } from 'common/constants'

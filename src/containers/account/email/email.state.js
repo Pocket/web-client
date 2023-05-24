@@ -135,5 +135,5 @@ function* accountAliasRemove(action) {
 function* accountConfirmResend(action) {
   const { email } = action
 
-  const { status, error } = yield call(resendConfirmation, { email })
+  yield call(resendConfirmation, { email })
 }
