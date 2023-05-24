@@ -6,7 +6,7 @@ import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { setNoImage } from 'connectors/lists/lists-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 export const ListCard = ({ id, position }) => {
   const dispatch = useDispatch()

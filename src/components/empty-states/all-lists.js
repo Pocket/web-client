@@ -1,7 +1,7 @@
 import TreasureSVG from 'static/images/sunken-treasure-chest.svg'
 import { emptyStyles } from './styles'
 import { ListAddIcon } from 'components/icons/ListAddIcon'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 export const EmptyAllLists = ({ handleCreate }) => {
   const { t } = useTranslation()

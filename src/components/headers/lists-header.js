@@ -11,7 +11,7 @@ import { breakpointSmallTablet } from 'common/constants'
 import { breakpointSmallHandset } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { PublicListUrl } from 'components/shareable-lists/public-list-url'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { ListNoteStatus } from 'components/shareable-lists/list-note-status'
 
 const listHeaderStyles = css`

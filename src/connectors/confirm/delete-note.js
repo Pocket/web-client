@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { mutateListItemNoteDeleteCancel } from 'connectors/lists/mutation-delete.state'
 import { mutateListItemNoteDeleteConfirm } from 'connectors/lists/mutation-delete.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 export const ConfirmNoteDelete = () => {
   const { t } = useTranslation()

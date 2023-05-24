@@ -7,7 +7,7 @@ import { COPY_ITEM_URL } from 'actions'
 import { BASE_URL } from 'common/constants'
 import { CopyIcon } from 'components/icons/CopyIcon'
 import { bottomTooltip } from 'components/tooltip/tooltip'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 const statusStyles = css`
   a {

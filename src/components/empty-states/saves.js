@@ -1,6 +1,6 @@
 import LibrarySVG from 'static/images/home/myList.svg'
 import { emptyStyles } from './styles'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 export const EmptySaves = () => {
   const { t } = useTranslation()

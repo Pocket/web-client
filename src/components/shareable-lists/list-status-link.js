@@ -3,7 +3,7 @@ import { LockIcon } from 'components/icons/LockIcon'
 import { GlobeIcon } from 'components/icons/GlobeIcon'
 import { PublicListUrl } from './public-list-url'
 import { breakpointSmallTablet } from 'common/constants'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 const statusStyles = css`
   display: flex;

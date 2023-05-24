@@ -3,7 +3,7 @@ import { usePopover } from 'components/popover/popover'
 import { SaveIcon } from 'components/icons/SaveIcon'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 import { SavePopover } from 'components/item-actions/save-to-pocket'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 const saveListStyles = css`
   .icon {

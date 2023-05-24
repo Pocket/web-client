@@ -5,7 +5,7 @@ import { mutateListUpdateCancel } from 'connectors/lists/mutation-update.state'
 import { mutateListUpdateConfirm } from 'connectors/lists/mutation-update.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { existsInArray } from 'common/utilities/object-array/object-array'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 export const ListSettingsModal = ({ id }) => {
   const { t } = useTranslation()

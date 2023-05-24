@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { AddNoteModal } from 'components/shareable-lists/add-note-modal'
 import { mutateListItemNoteCancel } from 'connectors/lists/mutation-update.state'
 import { mutateListItemNoteConfirm } from 'connectors/lists/mutation-update.state'

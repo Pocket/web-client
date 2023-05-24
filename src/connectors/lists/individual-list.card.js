@@ -1,5 +1,5 @@
 import { cx, css } from '@emotion/css'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { mutateListItemNote } from './mutation-update.state'
 import { mutateListItemNoteEdit } from './mutation-update.state'

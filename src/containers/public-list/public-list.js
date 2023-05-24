@@ -12,7 +12,7 @@ import { ReportIcon } from 'components/icons/ReportIcon'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { shareListAction } from 'connectors/lists/mutation-share.state'
 import { ConfirmShare } from 'connectors/confirm/share-list'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 function buildReportEmail(url) {
   const subject = `Report List: ${url}`
