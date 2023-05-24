@@ -152,6 +152,7 @@ export const LOCALE_COMMON = [
   'home',
   'item-action',
   'item',
+  'list',
   'messages',
   'nav',
   'onboarding',
