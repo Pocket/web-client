@@ -16,7 +16,6 @@ export const ListContent = ({ id, toggleSort }) => {
 
   const enrolledDev = featureFlagActive({ flag: 'lists.dev', featureState })
   const enrolledPilot = useSelector((state) => state.pageListsInfo.enrolled)
-  const enrolledRelease = featureFlagActive({ flag: 'lists', featureState })
 
   const userStatus = useSelector((state) => state.user.user_status)
   const shouldRender = userStatus !== 'pending'
@@ -80,7 +79,6 @@ export const ListContent = ({ id, toggleSort }) => {
       <ListIndividualHeader
         enrolledDev={enrolledDev}
         enrolledPilot={enrolledPilot}
-        enrolledRelease={enrolledRelease}
         title={title}
         description={description}
         status={status}
