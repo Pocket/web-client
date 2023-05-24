@@ -258,11 +258,9 @@ export const ListIndividualHeader = ({
               enrolledDev={enrolledDev}
             />
           )}
-          {enrolledDev ? (
-            <button onClick={handleSort} className="sort tiny outline">
-              <SortOrderIcon /> {t('list:reorder', 'Reorder')}
-            </button>
-          ) : null}
+          <button onClick={handleSort} className="sort tiny outline">
+            <SortOrderIcon /> {t('list:reorder', 'Reorder')}
+          </button>
         </div>
 
         <div className="actions-end share">
