@@ -183,7 +183,7 @@ function* listItemAddNote({ id, edit }) {
     const action = edit ? LIST_ITEM_EDIT_NOTE_SUCCESS : LIST_ITEM_ADD_NOTE_SUCCESS
     yield put({ type: action })
 
-    const itemsById = { [id]: { ...response } }
+    const itemsById = { [id]: { ...response, note } }
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
   } catch (error) {
     const action = edit ? LIST_ITEM_EDIT_NOTE_FAILURE : LIST_ITEM_ADD_NOTE_FAILURE
