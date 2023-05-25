@@ -154,21 +154,24 @@ export const MobileLink = ({
   link: { name, isDisabled = false, url, icon, label, id, newLabel = false },
   isSelected,
   handleClick
-}) => (
-  <li>
-    <Link
-      href={isDisabled ? null : url}
-      id={id}
-      className={cx(isSelected && 'selected', isDisabled && 'disabled')}
-      onClick={(event) => {
-        handleClick(event, name, url)
-      }}>
-      {icon ? icon : null}
-      {label}
-      {newLabel ? <span className="badge">New</span> : null}
-    </Link>
-  </li>
-)
+}) => {
+  const { t } = useTranslation()
+  return (
+    <li>
+      <Link
+        href={isDisabled ? null : url}
+        id={id}
+        className={cx(isSelected && 'selected', isDisabled && 'disabled')}
+        onClick={(event) => {
+          handleClick(event, name, url)
+        }}>
+        {icon ? icon : null}
+        {label}
+        {newLabel ? <span className="badge">{t('nav:new', 'New')}</span> : null}
+      </Link>
+    </li>
+  )
+}
 
 const drawerHeaderStyles = css`
   height: var(--size400);
@@ -189,7 +192,7 @@ const DrawerHeader = ({ handleClose }) => {
         data-cy="mobile-menu"
         data-tooltip={t('nav:close', 'Close')}
         onClick={handleClose}
-        className={cx(iconStyle, bottomTooltip, "inline")}>
+        className={cx(iconStyle, bottomTooltip, 'inline')}>
         <ChevronLeftIcon />
       </button>
     </div>
@@ -298,7 +301,7 @@ const GlobalNavMobileMenu = ({
         onClick={handleOpen}
         aria-label={t('nav:open-the-pocket-mobile-menu', 'Open the Pocket mobile menu')}
         data-tooltip={t('nav:open', 'Open')}
-        className={cx(iconStyle, toggleClass, bottomTooltip, "inline")}>
+        className={cx(iconStyle, toggleClass, bottomTooltip, 'inline')}>
         <MenuIcon />
       </button>
       <Drawer
