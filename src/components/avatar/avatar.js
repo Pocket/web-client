@@ -58,7 +58,7 @@ const defaultStyle = css`
  * Component to display an avatar image by `src`. Defaults to an icon if no `src`
  * prop is provided. Avatar image will be cropped and centered to fit size specified.
  */
-const Avatar = ({ id, src, altText, size, className }) => {
+const Avatar = ({ id = '', size = '100px', src = null, altText = 'Your avatar', className }) => {
   const avatarStyleVariables = {
     width: size,
     height: size
@@ -105,13 +105,6 @@ Avatar.propTypes = {
    * or supplement styles.
    */
   className: PropTypes.string
-}
-
-Avatar.defaultProps = {
-  id: '',
-  size: '100px',
-  src: null,
-  altText: 'Your avatar'
 }
 
 export default Avatar

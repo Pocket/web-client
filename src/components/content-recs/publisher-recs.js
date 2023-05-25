@@ -115,10 +115,10 @@ const recommendationsStyles = css`
 
 export const PublisherRecs = ({
   publisher,
-  recommendations,
-  maxRecommendations,
-  handleRecImpression,
-  handleRecClick
+  recommendations = [],
+  maxRecommendations = 3,
+  handleRecImpression = () => {},
+  handleRecClick = () => {}
 }) => {
   if (recommendations.length === 0) return null
 
@@ -175,13 +175,3 @@ PublisherRecs.propTypes = {
   handleRecClick: PropTypes.func
 }
 
-PublisherRecs.defaultProps = {
-  recommendations: [],
-  maxRecommendations: 3,
-  handleRecImpression() {
-    /** noop */
-  },
-  handleRecClick() {
-    /** noop */
-  }
-}

@@ -1,5 +1,5 @@
 // Libraries
-import queryString from 'query-string'
+// import queryString from 'query-string'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import * as Sentry from '@sentry/nextjs'
 import Head from 'next/head'
@@ -30,16 +30,16 @@ export default function Trailhead({ statusCode, ...props }) {
 }
 
 export async function getServerSideProps(ctx) {
-  const { req, locale, query, defaultLocale, locales } = ctx
+  const { req, locale, query } = ctx //defaultLocale, locales
   try {
     /**
      * There is no guarantee that the referring source will include language pre-fix
      * If the first accrpt language header is non-english (default) and supported
      * We want to be able to prefix the destination with an explicit language code
      */
-    const lang = req.headers['accept-language']?.toString().substring(0, 2)
-    const supportedLocale = locales.includes(lang)
-    const langPrefix = lang !== defaultLocale && supportedLocale ? `/${lang}` : ''
+    // const lang = req.headers['accept-language']?.toString().substring(0, 2)
+    // const supportedLocale = locales.includes(lang)
+    // const langPrefix = lang !== defaultLocale && supportedLocale ? `/${lang}` : ''
 
     /**
      * Strip our unused query params that may contain sensitive data
@@ -54,8 +54,8 @@ export async function getServerSideProps(ctx) {
      * We create them this way to preserve non-sensitive query strings (like utm)
      * And make sure we are sending them to the proper langage
      */
-    const savesLink = queryString.stringifyUrl({ url: `${langPrefix}/saves`, query })
-    const homeLink = queryString.stringifyUrl({ url: `${langPrefix}/home`, query })
+    // const savesLink = queryString.stringifyUrl({ url: `${langPrefix}/saves`, query })
+    // const homeLink = queryString.stringifyUrl({ url: `${langPrefix}/home`, query })
 
     /**
      * Legacy User

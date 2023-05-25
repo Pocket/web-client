@@ -221,7 +221,7 @@ export const Item = (props) => {
                 className={cx('card-tags', tagsShown && 'show-tags')}
                 data-cy="card-tags"
                 onMouseEnter={showTags}>
-                {t('item:tag-count', '{{count}} tags', { count: tagCount })}
+                {t('item:tag-count', '{{tagCount}} tag', { tagCount: tagCount })}
                 <ItemTags className="itemTags" tags={tags} mouseLeave={hideTags} />
               </div>
             ) : null}

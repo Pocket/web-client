@@ -1,6 +1,5 @@
 import { requestGQL } from 'common/utilities/request/request'
 import { gql } from 'common/utilities/gql/gql'
-import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const setupMomentSlateQuery = gql`
   query SetupMomentSlate {

@@ -88,25 +88,25 @@ const checkboxStyle = css`
  */
 const EmailSignupForm = ({
   instanceId,
-  isProcessing,
-  errorMessage,
   displayErrorInline,
-  onValidSubmit,
-  onValidationError,
-  onFocus,
-  onChange,
-  onCheckboxChecked,
-  formClassName,
-  inputClassName,
-  buttonClassName,
-  hideCaptchaBadge,
-  inputLabel,
-  buttonLabel,
-  buttonVariant,
-  invalidEmailError,
-  buttonLabelProcessing,
-  showCheckbox,
-  checkboxLabel
+  isProcessing = false,
+  errorMessage = null,
+  onValidSubmit = () => {},
+  onValidationError = () => {},
+  onFocus = () => {},
+  onCheckboxChecked = () => {},
+  onChange = () => {},
+  formClassName = null,
+  inputClassName = null,
+  buttonClassName = null,
+  hideCaptchaBadge = false,
+  inputLabel = 'Your email address',
+  buttonLabel = 'Subscribe',
+  buttonVariant = 'primary',
+  invalidEmailError = INVALID_EMAIL_ERROR,
+  buttonLabelProcessing = PROCESSING_MESSAGE,
+  showCheckbox = false,
+  checkboxLabel = 'Stay updated on Pocket news, launches, surveys, and more.'
 }) => {
   const recaptchaRef = React.createRef()
   const [emailValue, setEmailValue] = useState('')
@@ -314,37 +314,6 @@ EmailSignupForm.propTypes = {
    * may require legal approval in certain countries.
    */
   checkboxLabel: PropTypes.string
-}
-
-EmailSignupForm.defaultProps = {
-  isProcessing: false,
-  errorMessage: null,
-  onValidSubmit() {
-    /** noop */
-  },
-  onValidationError() {
-    /** noop */
-  },
-  onFocus() {
-    /** noop */
-  },
-  onCheckboxChecked() {
-    /** noop */
-  },
-  onChange() {
-    /** noop */
-  },
-  formClassName: null,
-  inputClassName: null,
-  buttonClassName: null,
-  hideCaptchaBadge: false,
-  inputLabel: 'Your email address',
-  buttonLabel: 'Subscribe',
-  buttonVariant: 'primary',
-  invalidEmailError: INVALID_EMAIL_ERROR,
-  buttonLabelProcessing: PROCESSING_MESSAGE,
-  showCheckbox: false,
-  checkboxLabel: 'Stay updated on Pocket news, launches, surveys, and more.'
 }
 
 export default EmailSignupForm

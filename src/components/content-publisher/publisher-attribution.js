@@ -96,10 +96,10 @@ function PublisherInfo({ logoWide, publishedAt, name }) {
 }
 
 function PublisherAttribution({
-  publisher,
-  publishedAt,
-  handlePublisherImpression,
-  handlePublisherClick
+  publisher = null,
+  handlePublisherImpression = () => {},
+  handlePublisherClick = () => {},
+  publishedAt
 }) {
   return publisher ? (
     <cite className={AttributionWrapper}>
@@ -143,16 +143,6 @@ PublisherAttribution.propTypes = {
    * Callback function to fire an event on click
    */
   handlePublisherClick: PropTypes.func
-}
-
-PublisherAttribution.defaultProps = {
-  publisher: null,
-  handlePublisherImpression() {
-    /** noop */
-  },
-  handlePublisherClick() {
-    /** noop */
-  }
 }
 
 export { PublisherAttribution }

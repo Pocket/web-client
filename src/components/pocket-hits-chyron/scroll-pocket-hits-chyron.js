@@ -25,18 +25,19 @@ function _determineThreshold(percentage) {
 }
 
 const ScrollPocketHitsChyron = ({
-  instanceId,
-  isAuthenticated,
-  thresholdPercent,
-  handleSubmit,
-  handleSubmitSuccess,
-  handleSubmitFailure,
-  handleValidationError,
-  handleEmailInputFocus,
-  onVisible,
-  handleEmailDismiss,
-  utmCampaign,
-  utmSource
+  instanceId = DEFAULT_INSTANCE_ID,
+  isAuthenticated = false,
+  thresholdPercent = 0.5,
+  handleSubmit = () => {},
+  handleSubmitSuccess = () => {},
+  handleSubmitFailure = () => {},
+  handleValidationError = () => {},
+  handleEmailInputFocus = () => {},
+  onVisible = () => {},
+  handleEmailDismiss = () => {},
+  signupError = false,
+  utmCampaign = '',
+  utmSource = ''
 }) => {
   /* Variables */
   const dispatch = useDispatch()
@@ -162,36 +163,6 @@ ScrollPocketHitsChyron.propTypes = {
    * Paramater for the utmSource analytics field when submitting
    */
   utmSource: PropTypes.string
-}
-
-ScrollPocketHitsChyron.defaultProps = {
-  instanceId: DEFAULT_INSTANCE_ID,
-  isAuthenticated: false,
-  thresholdPercent: 0.5,
-  handleSubmit() {
-    /** noop */
-  },
-  handleSubmitSuccess() {
-    /** noop */
-  },
-  handleSubmitFailure() {
-    /** noop */
-  },
-  handleValidationError() {
-    /** noop */
-  },
-  handleEmailInputFocus() {
-    /** noop */
-  },
-  onVisible() {
-    /** noop */
-  },
-  handleEmailDismiss() {
-    /** noop */
-  },
-  signupError: false,
-  utmCampaign: '',
-  utmSource: ''
 }
 
 export { ScrollPocketHitsChyron }

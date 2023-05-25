@@ -265,14 +265,14 @@ export const Menu = ({
  * to render so that links may be customized per page context.
  */
 const GlobalNavMobileMenu = ({
-  links,
+  links = DEFAULT_LINKS,
+  selectedLink = null,
+  onLinkClick = () => {},
+  onOpen = () => {},
+  onClosed = () => {},
+  isUserLoggedIn = false,
+  isUserPremium = false,
   subLinks,
-  selectedLink,
-  onLinkClick,
-  isUserLoggedIn,
-  isUserPremium,
-  onOpen,
-  onClosed,
   appRootSelector,
   isOpen,
   toggleMenuOpen,
@@ -383,23 +383,6 @@ GlobalNavMobileMenu.propTypes = {
    * for mobile menu
    */
   forceShow: PropTypes.bool
-}
-
-GlobalNavMobileMenu.defaultProps = {
-  links: DEFAULT_LINKS,
-  selectedLink: null,
-  onLinkClick() {
-    /** noop */
-  },
-  onOpen() {
-    /** noop */
-  },
-  onClosed() {
-    /** noop */
-  },
-  isUserLoggedIn: false,
-  isUserPremium: false,
-  forceShow: false
 }
 
 export default GlobalNavMobileMenu

@@ -12,7 +12,7 @@ import { breakpointSmallHandset } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { PublicListUrl } from 'components/shareable-lists/public-list-url'
 import { useTranslation } from 'next-i18next'
-import { ListNoteStatus } from 'components/shareable-lists/list-note-status'
+import { VisibilityOptions } from 'components/shareable-lists/visibility-options'
 
 const listHeaderStyles = css`
   padding-bottom: 22px;
@@ -207,7 +207,6 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
 
 export const ListIndividualHeader = ({
   enrolledPilot,
-  enrolledRelease,
   enrolledDev,
   title,
   description,
@@ -250,19 +249,16 @@ export const ListIndividualHeader = ({
 
       <div className="list-actions">
         <div className="actions-start">
-          {enrolledRelease && !enrolledInternal ? null : (
-            <ListNoteStatus
+          {enrolledInternal ? (
+            <VisibilityOptions
               status={status}
               listItemNoteVisibility={listItemNoteVisibility}
               handleSetStatus={handleSetStatus}
-              enrolledDev={enrolledDev}
             />
-          )}
-          {enrolledDev ? (
-            <button onClick={handleSort} className="sort tiny outline">
-              <SortOrderIcon /> {t('list:reorder', 'Reorder')}
-            </button>
           ) : null}
+          <button onClick={handleSort} className="sort tiny outline">
+            <SortOrderIcon /> {t('list:reorder', 'Reorder')}
+          </button>
         </div>
 
         <div className="actions-end share">

@@ -150,15 +150,8 @@ const avatarStyle = css`
  * with account menu for logged in users.
  */
 const GlobalNavAccount = ({
-  isLoggedIn,
-  isPremium,
-  avatarSrc,
-  accountName,
-  profileUrl,
   appRootSelector,
-  onLinkClick,
   onLoginClick,
-  onAccountClick,
   userStatus,
   listMode,
   colorMode,
@@ -167,7 +160,14 @@ const GlobalNavAccount = ({
   setGridMode,
   setDetailMode,
   sendImpression,
-  showNotification
+  showNotification,
+  isLoggedIn = false,
+  isPremium = false,
+  avatarSrc = null,
+  accountName = 'You',
+  profileUrl = null,
+  onLinkClick = () => {},
+  onAccountClick = () => {}
 }) => {
   const { t } = useTranslation()
 
@@ -206,7 +206,8 @@ const GlobalNavAccount = ({
   const handleLogoutCase = () => {
     onLinkClick('logout')
     // Fire for all users when Braze launches
-    if (brazeInitialized) import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
+    if (brazeInitialized)
+      import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
   }
 
   function handleVisible() {
@@ -239,7 +240,7 @@ const GlobalNavAccount = ({
       <a
         href="https://getpocket.com/signup?src=navbar"
         id="global-nav-signup-link"
-        className={cx(signupLinkStyle, "button secondary")}
+        className={cx(signupLinkStyle, 'button secondary')}
         onClick={handleSignupCase}
         data-cy="signup-link">
         <ProfileIcon />
@@ -396,16 +397,6 @@ GlobalNavAccount.propTypes = {
    * Called when the user clicks on the avatar to open the account menu
    */
   onAccountClick: PropTypes.func
-}
-
-GlobalNavAccount.defaultProps = {
-  isLoggedIn: false,
-  isPremium: false,
-  avatarSrc: null,
-  accountName: 'You',
-  profileUrl: null,
-  onLinkClick: () => {},
-  onAccountClick: () => {}
 }
 
 export default GlobalNavAccount

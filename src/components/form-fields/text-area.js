@@ -12,21 +12,21 @@ const defaultTextareaStyles = css`
 export const TextArea = ({
   autoFocus,
   name,
-  initialRows,
-  maxRows,
-  characterLimit,
-  showCharacterLimit,
   labelText,
-  helperText,
-  value,
-  error,
-  displayErrorInline,
-  className,
-  disabled,
-  onChange,
-  onFocus,
-  onBlur,
-  textareaStyles
+  textareaStyles,
+  initialRows = DEFAULT_INITIAL_ROWS,
+  maxRows = DEFAULT_MAX_ROWS,
+  characterLimit = DEFAULT_CHAR_LIMIT,
+  showCharacterLimit = false,
+  helperText = null,
+  value = '',
+  error = null,
+  displayErrorInline = false,
+  className = null,
+  disabled = false,
+  onChange = () => {},
+  onFocus = () => {},
+  onBlur = () => {}
 }) => (
   <InputWrapper
     labelText={labelText}
@@ -137,19 +137,5 @@ TextArea.propTypes = {
    */
   onBlur: PropTypes.func
 }
-TextArea.defaultProps = {
-  initialRows: DEFAULT_INITIAL_ROWS,
-  maxRows: DEFAULT_MAX_ROWS,
-  characterLimit: DEFAULT_CHAR_LIMIT,
-  showCharacterLimit: false,
-  helperText: null,
-  value: '',
-  error: null,
-  displayErrorInline: false,
-  className: null,
-  disabled: false,
-  onChange: () => {},
-  onFocus: () => {},
-  onBlur: () => {}
-}
+
 export default TextArea

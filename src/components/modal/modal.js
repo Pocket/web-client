@@ -139,24 +139,26 @@ const overlayStyles = css`
 `
 
 const Modal = ({
-  title,
-  appRootSelector,
+  title = undefined,
+  appRootSelector = '#__next',
   screenReaderLabel,
-  isOpen,
+  isOpen = false,
   onClick,
-  forceMobile,
+  forceMobile = false,
+
   handleClose,
-  shouldCloseOnOverlayClick,
-  onAfterOpen,
-  onAfterClose,
-  modalContentClassName,
-  overlayClassName,
-  portalClassName,
-  showCloseButton,
-  doesAnimateTransition,
+  shouldCloseOnOverlayClick = true,
+  onAfterOpen = () => {},
+  onAfterClose = () => {},
+  modalContentClassName = '',
+
+  overlayClassName = '',
+  portalClassName = '',
+  showCloseButton = true,
+  doesAnimateTransition = true,
   children,
   className,
-  closeTimeoutMS
+  closeTimeoutMS = 75
 }) => {
   // aids in accessibility, http://reactcommunity.org/react-modal/accessibility/
   ReactModal.setAppElement(appRootSelector)
@@ -287,22 +289,6 @@ Modal.propTypes = {
    * Milliseconds to delay close, useful for outgoing animations
    */
   closeTimeoutMS: PropTypes.number
-}
-
-Modal.defaultProps = {
-  appRootSelector: '#__next',
-  title: undefined,
-  isOpen: false,
-  forceMobile: false,
-  shouldCloseOnOverlayClick: true,
-  onAfterOpen: () => {},
-  onAfterClose: () => {},
-  modalContentClassName: '',
-  overlayClassName: '',
-  portalClassName: '',
-  showCloseButton: true,
-  doesAnimateTransition: true,
-  closeTimeoutMS: 75
 }
 
 export { Modal, ModalHeader, ModalBody, ModalTabs, ModalFooter }

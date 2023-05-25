@@ -12,7 +12,6 @@ import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { setNoImage } from 'connectors/lists/lists-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { AddNoteIcon } from 'components/icons/AddNoteIcon'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { topTooltip } from 'components/tooltip/tooltip'
 
 export const IndividualListCard = ({ id, listId, position }) => {
@@ -91,8 +90,6 @@ export const ListActions = ({ id, listId, analyticsData, position }) => {
   const dispatch = useDispatch()
 
   const note = useSelector((state) => state.listsDisplay[id]?.note)
-  const featureState = useSelector((state) => state.features)
-  const inListsDev = featureFlagActive({ flag: 'lists.dev', featureState })
 
   const handleAddNote = () => {
     dispatch(sendSnowplowEvent('shareable-list.item.note.add.intent', analyticsData))
@@ -106,7 +103,7 @@ export const ListActions = ({ id, listId, analyticsData, position }) => {
 
   return (
     <div className={listActionStyles}>
-      {inListsDev && !note ? (
+      {!note ? (
         <button
           aria-label={t('list:add-note', 'Add Note')}
           data-cy="add-note"

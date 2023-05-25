@@ -180,15 +180,15 @@ const wrapper = css`
 `
 
 const CallOutPocketHitsSignup = ({
-  hide,
-  onVisible,
-  handleEmailInputFocus,
-  handleSubmit,
-  handleSubmitSuccess,
-  handleSubmitFailure,
-  handleValidationError,
-  utmCampaign,
-  utmSource,
+  hide = false,
+  handleSubmit = () => {},
+  handleSubmitSuccess = () => {},
+  handleEmailInputFocus = () => {},
+  handleSubmitFailure = () => {},
+  handleValidationError = () => {},
+  onVisible = () => {},
+  utmCampaign = '',
+  utmSource = '',
   locale = 'en'
 }) => {
   const { t } = useTranslation()
@@ -357,30 +357,6 @@ CallOutPocketHitsSignup.propTypes = {
    * Paramater for the utmSource analytics field when submitting
    */
   utmSource: PropTypes.string
-}
-
-CallOutPocketHitsSignup.defaultProps = {
-  hide: false,
-  handleSubmit() {
-    /** noop */
-  },
-  handleSubmitSuccess() {
-    /** noop */
-  },
-  handleEmailInputFocus() {
-    /** noop */
-  },
-  handleSubmitFailure() {
-    /** noop */
-  },
-  handleValidationError() {
-    /** noop */
-  },
-  onVisible() {
-    /** noop */
-  },
-  utmCampaign: '',
-  utmSource: ''
 }
 
 export { CallOutPocketHitsSignup }

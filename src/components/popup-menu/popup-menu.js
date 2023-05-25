@@ -121,11 +121,11 @@ const itemStyle = css`
 export const PopupMenuItem = ({
   children,
   id,
-  helperText,
-  className,
-  external,
-  href,
-  icon,
+  helperText = null,
+  className = '',
+  external = false,
+  href = null,
+  icon = null,
   ...remaining
 }) => {
   function getContent() {
@@ -211,13 +211,7 @@ PopupMenuItem.propTypes = {
    */
   icon: PropTypes.node
 }
-PopupMenuItem.defaultProps = {
-  helperText: null,
-  className: '',
-  href: null,
-  external: false,
-  icon: null
-}
+
 /** COMPONENT: PopupMenuGroup
  ---------------------------------------------------------------------------- */
 
@@ -260,16 +254,16 @@ export const PopupMenuGroup = ({ children }) => {
 
 export const PopupMenu = ({
   children,
-  id,
+  id = '',
   title,
   trigger,
   appRootSelector,
   screenReaderLabel,
-  onOpen,
-  onClose,
+  onOpen = () => {},
+  onClose = () => {},
   popperOptions,
   className,
-  forceShow
+  forceShow = false
 }) => {
   const viewport = useViewport() // if viewport not available, we're probably SSR and so set the default to the
   // desktop experience for SEO purposes
@@ -416,17 +410,5 @@ PopupMenu.propTypes = {
    */
   forceShow: PropTypes.bool
 }
-PopupMenu.defaultProps = {
-  id: '',
 
-  onOpen() {
-    /** noop */
-  },
-
-  onClose() {
-    /** noop */
-  },
-
-  forceShow: false
-}
 export default PopupMenu

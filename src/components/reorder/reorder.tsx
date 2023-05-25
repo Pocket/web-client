@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import { css, cx } from '@emotion/css'
 import { DragDropContext, Droppable, DroppableProvided, DroppableStateSnapshot } from 'react-beautiful-dnd'
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
+import { DropResult } from 'react-beautiful-dnd'
 
 // Dependencies
 import { reorderArray } from 'common/utilities/object-array/object-array'
@@ -13,15 +14,15 @@ import { reorderArray } from 'common/utilities/object-array/object-array'
  *
  */
 interface ListItem {
-  id: string;
+  id: string
 }
 
 interface ReorderListProps {
-  id?: string;
-  listItems: ListItem[];
-  updateList: (listItems: ListItem[]) => void;
-  className?: string;
-  children: ReactNode;
+  id?: string
+  listItems: ListItem[]
+  updateList: (listItems: ListItem[]) => void
+  className?: string
+  children: ReactNode
 }
 
 export const ReorderList = ({
@@ -31,16 +32,11 @@ export const ReorderList = ({
   className,
   children
 }: ReorderListProps) => {
-
-  const handleOnDragEnd = (result: any) => {
+  const handleOnDragEnd = (result: DropResult) => {
     // dropped outside the list
     if (!result.destination) return
 
-    const newItems = reorderArray(
-      listItems,
-      result.source.index,
-      result.destination.index
-    )
+    const newItems = reorderArray(listItems, result.source.index, result.destination.index)
 
     updateList(newItems)
   }
@@ -52,8 +48,7 @@ export const ReorderList = ({
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={cx(className, snapshot.isDraggingOver && 'isDraggingOver')}
-          >
+            className={cx(className, snapshot.isDraggingOver && 'isDraggingOver')}>
             {children}
             {provided.placeholder}
           </div>

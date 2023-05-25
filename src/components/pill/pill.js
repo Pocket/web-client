@@ -54,9 +54,9 @@ const pillStyle = css`
  * value and the pill will become a link to that url.
  */
 
-export const Pill = ({ children, promoted, href, className, ...remaining }) => {
+export const Pill = ({ promoted = false, children, href, className, ...remaining }) => {
   const elementProps = {
-    className: cx(pillStyle, className, promoted && 'promoted'),
+    className: cx(pillStyle, className && className, promoted && 'promoted'),
     href,
     ...remaining
   } // if an href is passed, element should be an anchor (hyperlink)
@@ -89,9 +89,4 @@ Pill.propTypes = {
    * CSS class name if styles need to be provided/overridden.
    */
   className: PropTypes.string
-}
-Pill.defaultProps = {
-  promoted: false,
-  href: undefined,
-  className: null
 }

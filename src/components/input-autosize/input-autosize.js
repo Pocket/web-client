@@ -44,10 +44,12 @@ class AutosizeInput extends Component {
   }
   constructor(props) {
     super(props)
+    const { id, minWidth = 1 } = props
+
     this.state = {
-      inputWidth: props.minWidth,
-      inputId: props.id,
-      prevId: props.id
+      inputWidth: minWidth,
+      inputId: id,
+      prevId: id
     }
   }
   componentDidMount() {
@@ -198,9 +200,6 @@ AutosizeInput.propTypes = {
   style: PropTypes.object, // css styles for the outer element
   value: PropTypes.any // field value
 }
-AutosizeInput.defaultProps = {
-  minWidth: 1,
-  injectStyles: true
-}
+
 
 export default AutosizeInput

@@ -1,3 +1,26 @@
+## [1.95.2](https://github.com/Pocket/web-client/compare/v1.95.1...v1.95.2) (2023-05-25)
+
+
+### Bug Fixes
+
+* **eslint:** cleanup minor warnings ([07f08d7](https://github.com/Pocket/web-client/commit/07f08d723d54294a21b36247b38170bdaf99b858))
+
+## [1.95.1](https://github.com/Pocket/web-client/compare/v1.95.0...v1.95.1) (2023-05-25)
+
+
+### Bug Fixes
+
+* **item:** align tag count variable ([479dda2](https://github.com/Pocket/web-client/commit/479dda2559304d085c247e6706f4357db6733505))
+
+# [1.95.0](https://github.com/Pocket/web-client/compare/v1.94.21...v1.95.0) (2023-05-25)
+
+
+### Features
+
+* **IndividualListCard:** show add note button ([5980df7](https://github.com/Pocket/web-client/commit/5980df7b247b42891f4813a2b26d7d9022f7cba8))
+* **ListIndividualHeader:** show reorder button ([01bd71c](https://github.com/Pocket/web-client/commit/01bd71cfab458d9d41a16addba05433a023d972d))
+* **ListIndividualHeader:** use VisibilityOptions ([d6441ed](https://github.com/Pocket/web-client/commit/d6441ed611425a8931d3a2d8881a4c007ac3607f))
+
 ## [1.94.21](https://github.com/Pocket/web-client/compare/v1.94.20...v1.94.21) (2023-05-24)
 
 

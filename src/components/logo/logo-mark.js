@@ -28,7 +28,5 @@ LogoMark.propTypes = {
    */
   className: PropTypes.string
 }
-LogoMark.defaultProps = {
-  className: ''
-}
+
 export default LogoMark

@@ -14,9 +14,9 @@ function GetStartedLayout({
   children,
   title = 'Pocket',
   canonical,
-  selectedNavLink,
   className = '',
-  forceWebView = false
+  forceWebView = false,
+  selectedNavLink = undefined
 }) {
   return (
     <>
@@ -43,11 +43,6 @@ GetStartedLayout.propTypes = {
    * page content.
    */
   isFullWidthLayout: PropTypes.bool
-}
-
-GetStartedLayout.defaultProps = {
-  selectedNavLink: undefined,
-  isFullWidthLayout: false
 }
 
 export default GetStartedLayout

@@ -97,13 +97,13 @@ const Tooltip = ({
 }
 
 export const Onboarding = ({
-  steps,
-  run,
-  stepIndex,
-  impressionEvent,
-  dismissEvent,
-  engagementEvent,
-  finishEvent
+  steps = [],
+  run = false,
+  stepIndex = 0,
+  impressionEvent = () => {},
+  dismissEvent = () => {},
+  engagementEvent = () => {},
+  finishEvent = () => {}
 }) => {
   const options = {
     arrowColor: '#fff',
@@ -149,14 +149,4 @@ export const Onboarding = ({
       spotlightClicks={true}
     />
   )
-}
-
-Onboarding.defaultProps = {
-  steps: [],
-  run: false,
-  stepIndex: 0,
-  impressionEvent: () => { },
-  dismissEvent: () => { },
-  engagementEvent: () => { },
-  finishEvent: () => { }
 }

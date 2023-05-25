@@ -154,13 +154,13 @@ const addContainerStyle = css`
  * Component to expose search functionality to users in places like GlobalNav.
  */
 const GlobalNavAdd = ({
-  onSubmit,
-  onClose,
-  onFocus,
-  onBlur,
-  value,
-  placeholder,
-  mobilePlaceholder
+  onClose = false,
+  onFocus = () => {},
+  onBlur = () => {},
+  value = '',
+  placeholder = 'nav:save-a-url-https',
+  mobilePlaceholder = 'nav:save-a-url',
+  onSubmit
 }) => {
   const { t } = useTranslation()
 
@@ -278,15 +278,6 @@ GlobalNavAdd.propTypes = {
    * at mobile widths
    */
   mobilePlaceholder: PropTypes.string
-}
-
-GlobalNavAdd.defaultProps = {
-  onClose: false,
-  onFocus: () => {},
-  onBlur: () => {},
-  value: '',
-  placeholder: 'nav:save-a-url-https',
-  mobilePlaceholder: 'nav:save-a-url'
 }
 
 // This is so the localization parser can pick up these runtime variables

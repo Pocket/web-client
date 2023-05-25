@@ -11,7 +11,6 @@ import { mutationUnDelete } from 'connectors/items/mutation-delete.state'
 
 import { ITEMS_UPSERT_SUCCESS } from 'actions'
 
-import { MUTATION_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
 
 import { MUTATION_ARCHIVE } from 'actions'

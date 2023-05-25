@@ -19,7 +19,7 @@ function mainLayout({
   canonical,
   noNav = false,
   selectedNavLink,
-  isFullWidthLayout,
+  isFullWidthLayout = false,
   noContainer = false,
   className = '',
   forceWebView = false
@@ -49,11 +49,6 @@ mainLayout.propTypes = {
    * page content.
    */
   isFullWidthLayout: PropTypes.bool
-}
-
-mainLayout.defaultProps = {
-  selectedNavLink: undefined,
-  isFullWidthLayout: false
 }
 
 export default mainLayout

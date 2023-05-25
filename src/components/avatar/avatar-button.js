@@ -81,7 +81,10 @@ const buttonStyles = css`
  */
 // eslint-disable-next-line react/display-name
 export const AvatarButton = React.forwardRef(
-  ({ id, size, label, src, onClick, className, ...rest }, ref) => {
+  (
+    { id = '', label = '', src = null, onClick = () => {}, className = null, size, ...rest },
+    ref
+  ) => {
     return (
       <button
         type="button"
@@ -131,12 +134,3 @@ AvatarButton.propTypes = {
   className: PropTypes.string
 }
 
-AvatarButton.defaultProps = {
-  label: '',
-  id: '',
-  src: null,
-  onClick() {
-    /** noop */
-  },
-  className: null
-}
