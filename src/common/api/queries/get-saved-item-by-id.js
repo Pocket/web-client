@@ -34,6 +34,7 @@ const getSavedItemByIdQuery = gql`
                 thumbnail: imageUrl
                 publisher
                 title
+                externalUrl: url
                 saveUrl: url
                 id
                 excerpt
