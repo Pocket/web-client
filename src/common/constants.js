@@ -1,12 +1,13 @@
 
 // POCKET
 export const CONSUMER_KEY = '94110-6d5ff7a89d72c869766af0e0' // web-client
-export const BASE_URL = 'https://getpocket.com'
-export const API_URL = 'https://getpocket.com'
-export const LOGIN_URL = 'https://getpocket.com/login'
-export const SIGNUP_URL = 'https://getpocket.com/signup'
-export const PREMIUM_URL = 'https://getpocket.com/premium?utm_source=web-app-premium-cta'
-export const GRAPHQL_URL = 'https://getpocket.com'
+export const BASE_URL = process.env.BASE_URL ?? 'https://getpocket.com'
+export const API_URL = process.env.API_URL ?? 'https://getpocket.com'
+export const LOGIN_URL = process.env.LOGIN_URL ?? 'https://getpocket.com/login'
+export const SIGNUP_URL = process.env.SIGNUP_URL ?? 'https://getpocket.com/signup'
+export const PREMIUM_URL =
+  process.env.PREMIUM_URL ?? 'https://getpocket.com/premium?utm_source=web-app-premium-cta'
+export const GRAPHQL_URL = process.env.GRAPHQL_URL ?? 'https://getpocket.com'
 export const READING_WPM = 220
 export const BATCH_SIZE = 30
 export const COLOR_MODE_PREFIX = 'colormode'

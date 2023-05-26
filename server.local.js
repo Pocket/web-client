@@ -1,4 +1,3 @@
-var https = require('https')
 var fs = require('fs')
 const { parse } = require('url')
 const dev = process.env.AS_PRODUCTION ? false : true //eslint-disable-line
@@ -15,6 +14,7 @@ function runServer(req, res) {
 }
 
 if (!pocketLocal) {
+  var https = require('https')
   var options = {
     key: fs.readFileSync('./localhost.web-client.getpocket.com-key.pem'),
     cert: fs.readFileSync('./localhost.web-client.getpocket.com.pem')
@@ -27,8 +27,9 @@ if (!pocketLocal) {
     })
   })
 } else {
+  var http = require('http')
   app.prepare().then(() => {
-    https.createServer({}, runServer).listen(8976, (err) => {
+    http.createServer({}, runServer).listen(8976, (err) => {
       if (err) throw err
       console.info('🌐  Ready at: https://localhost.web-client.getpocket.com')
       console.info('🌐  Also at: http://localhost:8976')
