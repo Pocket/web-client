@@ -36,7 +36,7 @@ export class TypeAhead extends React.Component {
   UNSAFE_componentWillUpdate(nextProps) {
     if (nextProps.inputValue !== this.props.inputValue) {
       const nextItems = matchSorter(this.allItems, nextProps.inputValue, {
-        threshold: rankings.CONTAINS
+        threshold: rankings.STARTS_WITH
       }).filter((item) => {
         if (!nextProps.inputValue) return false
         if (!item) return false
