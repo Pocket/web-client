@@ -1,3 +1,17 @@
+## [1.95.4](https://github.com/Pocket/web-client/compare/v1.95.3...v1.95.4) (2023-05-30)
+
+
+### Bug Fixes
+
+* **reader-recs:** fix missing external url in query needed for reader rec cards ([334dacd](https://github.com/Pocket/web-client/commit/334dacd544c99c224ade0fa945ad55c3c8ae2b2d))
+
+## [1.95.3](https://github.com/Pocket/web-client/compare/v1.95.2...v1.95.3) (2023-05-30)
+
+
+### Bug Fixes
+
+* **list:** adding meta data image ([15e70f9](https://github.com/Pocket/web-client/commit/15e70f90b3f2ff2cdf7a0f8312256295b4c76d9e))
+
 ## [1.95.2](https://github.com/Pocket/web-client/compare/v1.95.1...v1.95.2) (2023-05-25)
 
 
