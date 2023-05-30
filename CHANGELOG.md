@@ -1,3 +1,10 @@
+## [1.95.3](https://github.com/Pocket/web-client/compare/v1.95.2...v1.95.3) (2023-05-30)
+
+
+### Bug Fixes
+
+* **list:** adding meta data image ([15e70f9](https://github.com/Pocket/web-client/commit/15e70f90b3f2ff2cdf7a0f8312256295b4c76d9e))
+
 ## [1.95.2](https://github.com/Pocket/web-client/compare/v1.95.1...v1.95.2) (2023-05-25)
 
 
