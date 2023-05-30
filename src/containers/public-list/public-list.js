@@ -37,11 +37,11 @@ export const PublicList = ({ listId, slug, statusCode }) => {
   if (statusCode) return <ErrorPage statusCode={statusCode} />
   if (!list) return null
 
-  const { title, description, listItemIds, user, imageUrl, analyticsData } = list
+  const { title, description, listItemIds, user, itemImage, analyticsData } = list
   const listCount = listItemIds?.length
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
   const url = `${BASE_URL}/sharedlists/${listId}/${slug}`
-  const metaData = { title, description, url, image: imageUrl }
+  const metaData = { title, description, url, image: itemImage }
 
   // Actions
   const handleShare = () => {
