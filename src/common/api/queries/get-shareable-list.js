@@ -2,6 +2,8 @@ import { gql } from 'common/utilities/gql/gql'
 import * as Sentry from '@sentry/nextjs'
 import { requestGQL } from 'common/utilities/request/request'
 import { processIndividualList } from 'common/api/derivers/shared-lists'
+import { FRAGMENT_SAVED_ITEM } from 'common/api/fragments/fragment.savedItem'
+import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const getShareableListQuery = gql`
   query ShareableList($externalId: ID!) {
@@ -16,6 +18,14 @@ const getShareableListQuery = gql`
       createdAt
       updatedAt
       listItems {
+        item {
+          savedItem {
+            ...SavedItemDetails
+            item {
+              ...ItemDetails
+            }
+          }
+        }
         url
         title
         imageUrl
@@ -30,6 +40,8 @@ const getShareableListQuery = gql`
       }
     }
   }
+  ${FRAGMENT_SAVED_ITEM}
+  ${FRAGMENT_ITEM}
 `
 export function getShareableList(externalId) {
   return requestGQL({
