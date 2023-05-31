@@ -46,25 +46,27 @@ function getListItemsById(listItems, listId, utmId) {
 // Builds a list item, compiles the analytics
 // Adds a utm paramter to the external url
 function deriveListItem(listItem, listId, utmId) {
-  const { externalId, url, title, excerpt, imageUrl, publisher, note, createdAt, item } = listItem
-  const savedItem = deriveSavedItem(item?.savedItem, 'pocket_lists')
+  const { externalId, imageUrl, note, createdAt, item } = listItem
+
+  const savedItemNode = item?.savedItem
+  const derivedItem = deriveSavedItem(savedItemNode, utmId)
+  const { title, excerpt, publisher, givenUrl } = derivedItem?.item
 
   const analyticsData = {
     id: externalId,
     shareableListItemExternalId: externalId,
     shareableListExternalId: listId,
-    givenUrl: url,
-    title: title,
-    excerpt: excerpt,
-    imageUrl: imageUrl,
-    publisher: publisher,
+    givenUrl,
+    title,
+    excerpt,
+    imageUrl,
+    publisher,
     createdAt: Date.parse(createdAt) / 1000
   }
 
   return {
     ...listItem,
-    ...savedItem,
-    url: replaceUTM(url, utmId),
+    ...derivedItem,
     note: decodeSpecialChars(note),
     analyticsData
   }
