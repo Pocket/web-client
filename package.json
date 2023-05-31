@@ -111,7 +111,7 @@
     "@emotion/react": "11.11.0",
     "@freestar/pubfig-adslot-react-component": "3.6.0",
     "@n8tb1t/use-scroll-position": "2.0.3",
-    "@pocket/web-localization": "0.29.0",
+    "@pocket/web-localization": "0.30.0",
     "@popperjs/core": "2.11.7",
     "@sentry/integrations": "7.53.1",
     "@sentry/nextjs": "7.53.1",
