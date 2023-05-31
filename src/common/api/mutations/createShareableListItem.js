@@ -25,7 +25,8 @@ export function createShareableListItem({
   title,
   listExternalId,
   publisher,
-  itemId
+  itemId,
+  sortOrder
 }) {
   const data = {
     excerpt,
@@ -35,7 +36,7 @@ export function createShareableListItem({
     listExternalId,
     publisher,
     itemId,
-    sortOrder: 1
+    sortOrder
   }
 
   return requestGQL({
