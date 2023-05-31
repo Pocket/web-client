@@ -1,3 +1,10 @@
+## [1.95.9](https://github.com/Pocket/web-client/compare/v1.95.8...v1.95.9) (2023-05-31)
+
+
+### Bug Fixes
+
+* **lists:** add sort order when adding to a list ([425b872](https://github.com/Pocket/web-client/commit/425b8725ca040a60c347207b643da347ff50fc70))
+
 ## [1.95.8](https://github.com/Pocket/web-client/compare/v1.95.7...v1.95.8) (2023-05-31)
 
 
