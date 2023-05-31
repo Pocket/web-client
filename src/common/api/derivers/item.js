@@ -83,10 +83,10 @@ import { BASE_URL } from 'common/constants'
 
 /*------------------------------- */
 
-export function deriveSavedItem(node) {
+export function deriveSavedItem(node, utmId = 'pocket_saves') {
   const { item, ...nodeDetails } = node
   // node contains user-item data as well as the item itself
-  const derivedItem = deriveItemData({ item, utmId: 'pocket_saves', node: nodeDetails })
+  const derivedItem = deriveItemData({ item, utmId: utmId, node: nodeDetails })
   return { item: derivedItem, node: nodeDetails }
 }
 
