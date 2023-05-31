@@ -133,7 +133,7 @@ const GlobalNav = (props) => {
       name: 'lists',
       icon: <ListViewAltIcon />,
       label: t('nav:all-lists', 'All Lists'),
-      newLabel: true,
+      newLabel: false,
       url: showLists ? '/lists' : ''
     },
     {
