@@ -3,6 +3,7 @@ import { css } from '@emotion/css'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { AddIcon } from 'components/icons/AddIcon'
 import { breakpointMediumHandset } from 'common/constants'
+import { useTranslation } from 'next-i18next'
 
 const footerStyles = css`
   display: flex;
@@ -22,12 +23,14 @@ export const AddToListModal = ({
   appRootSelector,
   showModal,
   modalTitle,
-  handleCreate = () => { },
-  handleClose = () => { },
-  handleSubmit = () => { },
+  handleCreate = () => {},
+  handleClose = () => {},
+  handleSubmit = () => {},
   previouslySelected = '',
   selectOptions = []
 }) => {
+  const { t } = useTranslation()
+
   const [value, setValue] = useState(previouslySelected)
 
   const setOptionValue = (e) => setValue(e.target.value)
@@ -54,16 +57,16 @@ export const AddToListModal = ({
       </ModalBody>
       <ModalFooter className={footerStyles}>
         <button onClick={createAction} className="text create">
-          <AddIcon /> Create List
+          <AddIcon /> {t('list:create-list', 'Create List')}
         </button>
 
         <div>
           <button onClick={cancelAction} className="secondary">
-            Cancel
+            {t('list:cancel', 'Cancel')}
           </button>
 
           <button onClick={confirmAction} autoFocus={true}>
-            Save to List
+            {t('list:save-to-list', 'Save to List')}
           </button>
         </div>
       </ModalFooter>

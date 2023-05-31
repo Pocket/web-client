@@ -1,3 +1,11 @@
+## [1.95.7](https://github.com/Pocket/web-client/compare/v1.95.6...v1.95.7) (2023-05-31)
+
+
+### Bug Fixes
+
+* **list:** add to list modal translations ([2a780ff](https://github.com/Pocket/web-client/commit/2a780ffe10e1343986ddc808ac3e7bfe8b05db6d))
+* **list:** mobile nav translations ([a8f1dcd](https://github.com/Pocket/web-client/commit/a8f1dcd640fa9ac9b96bda43ab5c2e98fa3d36c8))
+
 ## [1.95.6](https://github.com/Pocket/web-client/compare/v1.95.5...v1.95.6) (2023-05-31)
 
 
