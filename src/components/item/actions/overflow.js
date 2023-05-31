@@ -46,6 +46,9 @@ const popoverMenuItem = css`
   .icon {
     height: 24px;
     margin: 0 0.5rem 0 0;
+    &.active {
+      color: var(--color-amber);
+    }
   }
 
   &:hover {
