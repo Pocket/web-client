@@ -1,6 +1,8 @@
 import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
 import { processIndividualList } from 'common/api/derivers/shared-lists'
+import { FRAGMENT_SAVED_ITEM } from 'common/api/fragments/fragment.savedItem'
+import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
 const getShareableListPublicQuery = gql`
   query ShareableListPublic($slug: String!, $externalId: ID!) {
@@ -15,6 +17,14 @@ const getShareableListPublicQuery = gql`
       description
       createdAt
       listItems {
+        item {
+          savedItem {
+            ...SavedItemDetails
+            item {
+              ...ItemDetails
+            }
+          }
+        }
         createdAt
         excerpt
         externalId
@@ -33,6 +43,8 @@ const getShareableListPublicQuery = gql`
       }
     }
   }
+  ${FRAGMENT_SAVED_ITEM}
+  ${FRAGMENT_ITEM}
 `
 export function getShareableListPublic({ listId, slug }) {
   return requestGQL({
