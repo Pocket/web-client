@@ -40,8 +40,9 @@ node_modules/
 # Output of 'npm pack'
 *.tgz
 
-# Storybook Cache
+# Storybook
 .cache
+storybook-static
 
 ### OSX ###
 *.DS_Store
