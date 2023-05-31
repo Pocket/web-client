@@ -1,3 +1,11 @@
+## [1.95.8](https://github.com/Pocket/web-client/compare/v1.95.7...v1.95.8) (2023-05-31)
+
+
+### Bug Fixes
+
+* **localization:** bumping the package again ([c1f31e6](https://github.com/Pocket/web-client/commit/c1f31e6b62e4340b1b853409dd0d6713ddc70dcd))
+* **localization:** bumping translation file ([13dac03](https://github.com/Pocket/web-client/commit/13dac032b83ba8fa362f22fb59e6b60b2893d7aa))
+
 ## [1.95.7](https://github.com/Pocket/web-client/compare/v1.95.6...v1.95.7) (2023-05-31)
 
 
