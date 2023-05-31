@@ -1,3 +1,10 @@
+## [1.95.6](https://github.com/Pocket/web-client/compare/v1.95.5...v1.95.6) (2023-05-31)
+
+
+### Bug Fixes
+
+* **highlights:** fixed wrong variable for number of highlights ([ad926f6](https://github.com/Pocket/web-client/commit/ad926f69fc8c6add6ccca083a62731ab4d14a7f2))
+
 ## [1.95.5](https://github.com/Pocket/web-client/compare/v1.95.4...v1.95.5) (2023-05-30)
 
 
