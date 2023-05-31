@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="295" failures="0" errors="0" time="5.545">
+  <testsuite name="getValueFromCookie" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:32" time="0.695" tests="3">
+    <testcase classname="getValueFromCookie returns a value from the cookie, when the given `key` is present" name="getValueFromCookie returns a value from the cookie, when the given `key` is present" time="0.001" file="src/common/utilities/cookies/cookies.spec.js">
+    </testcase>
+    <testcase classname="getValueFromCookie returns undefined from the cookie, when the given `key` is NOT present" name="getValueFromCookie returns undefined from the cookie, when the given `key` is NOT present" time="0" file="src/common/utilities/cookies/cookies.spec.js">
+    </testcase>
+    <testcase classname="getValueFromCookie returns false when cookie is not provided" name="getValueFromCookie returns false when cookie is not provided" time="0" file="src/common/utilities/cookies/cookies.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="numberWithCommas" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:32" time="0.692" tests="1">
+    <testcase classname="numberWithCommas returns a US formatted number with commas" name="numberWithCommas returns a US formatted number with commas" time="0.001" file="src/common/utilities/numbers/numbers.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="once" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:32" time="0.725" tests="2">
+    <testcase classname="once only runs its wrapped function one time" name="once only runs its wrapped function one time" time="0.01" file="src/common/utilities/once/once.spec.js">
+    </testcase>
+    <testcase classname="once correctly passes arguments to its child function" name="once correctly passes arguments to its child function" time="0" file="src/common/utilities/once/once.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="ElibibleUser" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:32" time="0.738" tests="5">
+    <testcase classname="ElibibleUser should return true if user started after the test start date" name="ElibibleUser should return true if user started after the test start date" time="0.001" file="src/common/utilities/account/account.spec.js">
+    </testcase>
+    <testcase classname="ElibibleUser should return false if user started before the test start date" name="ElibibleUser should return false if user started before the test start date" time="0" file="src/common/utilities/account/account.spec.js">
+    </testcase>
+    <testcase classname="ElibibleUser should return false if user started at the same time as the start date" name="ElibibleUser should return false if user started at the same time as the start date" time="0" file="src/common/utilities/account/account.spec.js">
+    </testcase>
+    <testcase classname="ElibibleUser should return false bad test start date is passed in" name="ElibibleUser should return false bad test start date is passed in" time="0.003" file="src/common/utilities/account/account.spec.js">
+    </testcase>
+    <testcase classname="ElibibleUser should return false a bad account date is passed in" name="ElibibleUser should return false a bad account date is passed in" time="0.001" file="src/common/utilities/account/account.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="gql function" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:32" time="0.736" tests="7">
+    <testcase classname="gql function should return an empty string when no parameters are passed" name="gql function should return an empty string when no parameters are passed" time="0.001" file="src/common/utilities/gql/gql.spec.ts">
+    </testcase>
+    <testcase classname="gql function should return the same string when only one string literal is passed" name="gql function should return the same string when only one string literal is passed" time="0" file="src/common/utilities/gql/gql.spec.ts">
+    </testcase>
+    <testcase classname="gql function should interpolate one variable into the string" name="gql function should interpolate one variable into the string" time="0.001" file="src/common/utilities/gql/gql.spec.ts">
+    </testcase>
+    <testcase classname="gql function should interpolate multiple variables into the string" name="gql function should interpolate multiple variables into the string" time="0" file="src/common/utilities/gql/gql.spec.ts">
+    </testcase>
+    <testcase classname="gql function should handle special characters in the variables" name="gql function should handle special characters in the variables" time="0" file="src/common/utilities/gql/gql.spec.ts">
+    </testcase>
+    <testcase classname="gql function should handle undefined and null variables" name="gql function should handle undefined and null variables" time="0" file="src/common/utilities/gql/gql.spec.ts">
+    </testcase>
+    <testcase classname="gql function should handle variables that are objects or arrays" name="gql function should handle variables that are objects or arrays" time="0" file="src/common/utilities/gql/gql.spec.ts">
+    </testcase>
+  </testsuite>
+  <testsuite name="getPublishedDate" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:32" time="0.716" tests="6">
+    <testcase classname="getPublishedDate returns a properly formatted date" name="getPublishedDate returns a properly formatted date" time="0.001" file="src/common/utilities/date-time/date-time.spec.js">
+    </testcase>
+    <testcase classname="timeRelativeToNow less than an hour ago" name="timeRelativeToNow less than an hour ago" time="0.001" file="src/common/utilities/date-time/date-time.spec.js">
+    </testcase>
+    <testcase classname="timeRelativeToNow exactly one hour" name="timeRelativeToNow exactly one hour" time="0" file="src/common/utilities/date-time/date-time.spec.js">
+    </testcase>
+    <testcase classname="timeRelativeToNow hours ago" name="timeRelativeToNow hours ago" time="0.001" file="src/common/utilities/date-time/date-time.spec.js">
+    </testcase>
+    <testcase classname="timeRelativeToNow 14 day time window" name="timeRelativeToNow 14 day time window" time="0" file="src/common/utilities/date-time/date-time.spec.js">
+    </testcase>
+    <testcase classname="timeRelativeToNow pure date" name="timeRelativeToNow pure date" time="0" file="src/common/utilities/date-time/date-time.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="urlWithPocketRedirect" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:32" time="0.817" tests="21">
+    <testcase classname="urlWithPocketRedirect returns a properly formatted pocket redirect url." name="urlWithPocketRedirect returns a properly formatted pocket redirect url." time="0.001" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="urlWithPocketRedirect escapes problematic characters in the original url." name="urlWithPocketRedirect escapes problematic characters in the original url." time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="getImageCacheUrl returns a properly formatted pocket image cache url." name="getImageCacheUrl returns a properly formatted pocket image cache url." time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="getImageCacheUrl escapes problematic characters in the original url." name="getImageCacheUrl escapes problematic characters in the original url." time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="getImageCacheUrl sets width and height if they are optionally passed in" name="getImageCacheUrl sets width and height if they are optionally passed in" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="getImageCacheUrl sets only width if it is optionally passed in" name="getImageCacheUrl sets only width if it is optionally passed in" time="0.001" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="getImageCacheUrl sets only height if it is optionally passed in" name="getImageCacheUrl sets only height if it is optionally passed in" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="getImageCacheUrl sets the format if it is optionally passed in" name="getImageCacheUrl sets the format if it is optionally passed in" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="getImageCacheUrl does not encode the image if it has been encoded already" name="getImageCacheUrl does not encode the image if it has been encoded already" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="getImageCacheUrl updates optional params of an already encoded image" name="getImageCacheUrl updates optional params of an already encoded image" time="0.001" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="getImageCacheUrl does not add extra dimensions from previously encoded images" name="getImageCacheUrl does not add extra dimensions from previously encoded images" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="getImageCacheUrl does does not use dimensions if none exist or are passed in" name="getImageCacheUrl does does not use dimensions if none exist or are passed in" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="getImageCacheUrl does preserves dimensions from previously encoded images if no image size is passed in" name="getImageCacheUrl does preserves dimensions from previously encoded images if no image size is passed in" time="0.001" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="domainForUrl returns a domain with extra info stripped" name="domainForUrl returns a domain with extra info stripped" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="domainForUrl returns handles https and http" name="domainForUrl returns handles https and http" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="domainForUrl returns handles top level domains properly" name="domainForUrl returns handles top level domains properly" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="domainForUrl returns false if no url is passed" name="domainForUrl returns false if no url is passed" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="getTopLevelPath returns top level path regardless of depth" name="getTopLevelPath returns top level path regardless of depth" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="replaceUTM should strip out utm codes without crushing other query params" name="replaceUTM should strip out utm codes without crushing other query params" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="replaceUTM should add utm source if passed" name="replaceUTM should add utm source if passed" time="0" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+    <testcase classname="replaceUTM should leave craigslist alone" name="replaceUTM should leave craigslist alone" time="0.001" file="src/common/utilities/urls/urls.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="arrayToObject" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:32" time="0.831" tests="18">
+    <testcase classname="arrayToObject returns an object with key/value pairs based on passed in id." name="arrayToObject returns an object with key/value pairs based on passed in id." time="0.001" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="arrayToObject ignores un-keyed data." name="arrayToObject ignores un-keyed data." time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="getObjectWithValidKeysOnly strips object keys whose values are undefined or null by default" name="getObjectWithValidKeysOnly strips object keys whose values are undefined or null by default" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="getObjectWithValidKeysOnly can validate with a custom validator function" name="getObjectWithValidKeysOnly can validate with a custom validator function" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="arraysAreEqual returns false if non-arrays are sent in" name="arraysAreEqual returns false if non-arrays are sent in" time="0.001" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="arraysAreEqual returns false if one of the values are not arrays" name="arraysAreEqual returns false if one of the values are not arrays" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="arraysAreEqual returns false the values are arrays that do not match" name="arraysAreEqual returns false the values are arrays that do not match" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="arraysAreEqual returns true if the array has the same values" name="arraysAreEqual returns true if the array has the same values" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="arraysAreEqual returns false if one array has extra values" name="arraysAreEqual returns false if one array has extra values" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="existsInArray returns false if non-array is passed in" name="existsInArray returns false if non-array is passed in" time="0.001" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="existsInArray returns false if value passed in is null or undefined" name="existsInArray returns false if value passed in is null or undefined" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="existsInArray returns false if the value doesn&apos;t exist in the array" name="existsInArray returns false if the value doesn&apos;t exist in the array" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="existsInArray returns true if the value exists in the array (cases match)" name="existsInArray returns true if the value exists in the array (cases match)" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="existsInArray returns true if the value exists in the array (cases don&apos;t match)" name="existsInArray returns true if the value exists in the array (cases don&apos;t match)" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="reorderArray should reorder the given list when startIndex is less than endIndex" name="reorderArray should reorder the given list when startIndex is less than endIndex" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="reorderArray should reorder the given list when startIndex is greater than endIndex" name="reorderArray should reorder the given list when startIndex is greater than endIndex" time="0.001" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="reorderArray should not modify the given list when startIndex and endIndex are equal" name="reorderArray should not modify the given list when startIndex and endIndex are equal" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+    <testcase classname="reorderArray should not modify the given list when startIndex or endIndex are out of bounds" name="reorderArray should not modify the given list when startIndex or endIndex are out of bounds" time="0" file="src/common/utilities/object-array/object-array.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="GlobalNavAvatar" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:33" time="2.511" tests="3">
+    <testcase classname="GlobalNavAvatar returns an empty string when passed a default avatar url we want to override" name="GlobalNavAvatar returns an empty string when passed a default avatar url we want to override" time="0.001" file="src/connectors/global-nav/global-nav.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavAvatar passes through the avatar url, when that url contains no substring in the disallowed list" name="GlobalNavAvatar passes through the avatar url, when that url contains no substring in the disallowed list" time="0" file="src/connectors/global-nav/global-nav.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavAvatar handles null and undefined by providing an empty string" name="GlobalNavAvatar handles null and undefined by providing an empty string" time="0" file="src/connectors/global-nav/global-nav.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="EmailSignupForm" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:33" time="2.963" tests="12">
+    <testcase classname="EmailSignupForm checkbox renders the checkbox if props.showCheckbox is true" name="EmailSignupForm checkbox renders the checkbox if props.showCheckbox is true" time="0.056" file="src/components/email-signup-form/email-signup-form.spec.js">
+    </testcase>
+    <testcase classname="EmailSignupForm checkbox uses the checkbox label passed as prop" name="EmailSignupForm checkbox uses the checkbox label passed as prop" time="0.007" file="src/components/email-signup-form/email-signup-form.spec.js">
+    </testcase>
+    <testcase classname="EmailSignupForm uses the input label passed as a prop" name="EmailSignupForm uses the input label passed as a prop" time="0.011" file="src/components/email-signup-form/email-signup-form.spec.js">
+    </testcase>
+    <testcase classname="EmailSignupForm uses the button label passed as a prop" name="EmailSignupForm uses the button label passed as a prop" time="0.003" file="src/components/email-signup-form/email-signup-form.spec.js">
+    </testcase>
+    <testcase classname="EmailSignupForm uses the button variant passed as a prop" name="EmailSignupForm uses the button variant passed as a prop" time="0.01" file="src/components/email-signup-form/email-signup-form.spec.js">
+    </testcase>
+    <testcase classname="EmailSignupForm renders a disabled/processing state if props.isProcessing is true" name="EmailSignupForm renders a disabled/processing state if props.isProcessing is true" time="0.011" file="src/components/email-signup-form/email-signup-form.spec.js">
+    </testcase>
+    <testcase classname="EmailSignupForm handles invalid emails gracefully" name="EmailSignupForm handles invalid emails gracefully" time="0.015" file="src/components/email-signup-form/email-signup-form.spec.js">
+    </testcase>
+    <testcase classname="EmailSignupForm displays an error message if passed as props.errorMessage" name="EmailSignupForm displays an error message if passed as props.errorMessage" time="0.01" file="src/components/email-signup-form/email-signup-form.spec.js">
+    </testcase>
+    <testcase classname="EmailSignupForm calls props.onFocus, passing the instanceId, when the input is focused" name="EmailSignupForm calls props.onFocus, passing the instanceId, when the input is focused" time="0.012" file="src/components/email-signup-form/email-signup-form.spec.js">
+    </testcase>
+    <testcase classname="EmailSignupForm calls props.onChange, passing the instanceId and value, when the input changes" name="EmailSignupForm calls props.onChange, passing the instanceId and value, when the input changes" time="0.006" file="src/components/email-signup-form/email-signup-form.spec.js">
+    </testcase>
+    <testcase classname="EmailSignupForm calls props.onValidSubmit, passing the instanceId and recaptcha response, when the user successfully completes the recaptcha" name="EmailSignupForm calls props.onValidSubmit, passing the instanceId and recaptcha response, when the user successfully completes the recaptcha" time="0.01" file="src/components/email-signup-form/email-signup-form.spec.js">
+    </testcase>
+    <testcase classname="EmailSignupForm applies a class to the form hide the recaptcha badge if props.hideRecaptchaBadge is true" name="EmailSignupForm applies a class to the form hide the recaptcha badge if props.hideRecaptchaBadge is true" time="0.002" file="src/components/email-signup-form/email-signup-form.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="PocketRecs" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:33" time="3.093" tests="5">
+    <testcase classname="PocketRecs does not render &lt;Heading&gt; or &lt;Recommendations&gt; when there are no recommendations" name="PocketRecs does not render &lt;Heading&gt; or &lt;Recommendations&gt; when there are no recommendations" time="0.008" file="src/components/pocket-recs/pocket-recs.spec.js">
+    </testcase>
+    <testcase classname="PocketRecs Publisher renders a Publisher with a logo image, when available" name="PocketRecs Publisher renders a Publisher with a logo image, when available" time="0.002" file="src/components/pocket-recs/pocket-recs.spec.js">
+    </testcase>
+    <testcase classname="PocketRecs Publisher renders the name of the Publisher when its logo url is not available" name="PocketRecs Publisher renders the name of the Publisher when its logo url is not available" time="0.001" file="src/components/pocket-recs/pocket-recs.spec.js">
+    </testcase>
+    <testcase classname="PocketRecs Recommendations limits the displayed articles to the max count if more than the max was passed in" name="PocketRecs Recommendations limits the displayed articles to the max count if more than the max was passed in" time="0.009" file="src/components/pocket-recs/pocket-recs.spec.js">
+    </testcase>
+    <testcase classname="PocketRecs Recommendations displays all articles passed in if less than the max number of articles" name="PocketRecs Recommendations displays all articles passed in if less than the max number of articles" time="0.011" file="src/components/pocket-recs/pocket-recs.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="PublisherRecs" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:33" time="3.132" tests="7">
+    <testcase classname="PublisherRecs does not render &lt;Publisher&gt; or &lt;RecommendedArticle&gt; when there are no recommendations" name="PublisherRecs does not render &lt;Publisher&gt; or &lt;RecommendedArticle&gt; when there are no recommendations" time="0.02" file="src/components/content-recs/publisher-recs.spec.js">
+    </testcase>
+    <testcase classname="RecommendedArticle limits the displayed articles to the max count if more than the max was passed in" name="RecommendedArticle limits the displayed articles to the max count if more than the max was passed in" time="0.033" file="src/components/content-recs/publisher-recs.spec.js">
+    </testcase>
+    <testcase classname="RecommendedArticle displays all articles passed in if less than the max number of articles" name="RecommendedArticle displays all articles passed in if less than the max number of articles" time="0.012" file="src/components/content-recs/publisher-recs.spec.js">
+    </testcase>
+    <testcase classname="Publisher renders a Publisher with a logo image, when available" name="Publisher renders a Publisher with a logo image, when available" time="0.002" file="src/components/content-recs/publisher-recs.spec.js">
+    </testcase>
+    <testcase classname="Publisher renders a Publisher with no logo when its logo url is not available" name="Publisher renders a Publisher with no logo when its logo url is not available" time="0.001" file="src/components/content-recs/publisher-recs.spec.js">
+    </testcase>
+    <testcase classname="Publisher renders a Publisher recommendationName, when available" name="Publisher renders a Publisher recommendationName, when available" time="0.001" file="src/components/content-recs/publisher-recs.spec.js">
+    </testcase>
+    <testcase classname="Publisher renders a Publisher name when a publisher has no recommendationName" name="Publisher renders a Publisher name when a publisher has no recommendationName" time="0.001" file="src/components/content-recs/publisher-recs.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="GlobalNavSearch" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:33" time="3.151" tests="7">
+    <testcase classname="GlobalNavSearch applies the `placeholder` prop value correctly to the input" name="GlobalNavSearch applies the `placeholder` prop value correctly to the input" time="0.041" file="src/components/global-nav/tools/search/global-nav-search.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavSearch calls the onSubmit callback when the form is submitted" name="GlobalNavSearch calls the onSubmit callback when the form is submitted" time="0.071" file="src/components/global-nav/tools/search/global-nav-search.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavSearch does not render a close button when no onClose is provided" name="GlobalNavSearch does not render a close button when no onClose is provided" time="0.007" file="src/components/global-nav/tools/search/global-nav-search.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavSearch calls the onClose callback when the Close button is clicked" name="GlobalNavSearch calls the onClose callback when the Close button is clicked" time="0.027" file="src/components/global-nav/tools/search/global-nav-search.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavSearch calls the onFocus callback when the search input is focused, passing the Event object" name="GlobalNavSearch calls the onFocus callback when the search input is focused, passing the Event object" time="0.003" file="src/components/global-nav/tools/search/global-nav-search.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavSearch calls the onBlur callback when the search input is blurred, passing the Event object" name="GlobalNavSearch calls the onBlur callback when the search input is blurred, passing the Event object" time="0.003" file="src/components/global-nav/tools/search/global-nav-search.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavSearch supplies the search input with a value if a `value` prop was passed in" name="GlobalNavSearch supplies the search input with a value if a `value` prop was passed in" time="0.002" file="src/components/global-nav/tools/search/global-nav-search.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="GlobalNav" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:33" time="3.258" tests="4">
+    <testcase classname="GlobalNav renders the &quot;Discover&quot; and &quot;Saves&quot; links by default" name="GlobalNav renders the &quot;Discover&quot; and &quot;Saves&quot; links by default" time="0.027" file="src/components/global-nav/global-nav.spec.js">
+    </testcase>
+    <testcase classname="GlobalNav renders the custom links when `links` prop is passed" name="GlobalNav renders the custom links when `links` prop is passed" time="0.006" file="src/components/global-nav/global-nav.spec.js">
+    </testcase>
+    <testcase classname="GlobalNav renders elements passed in `children` prop instead of standard nav, if provided" name="GlobalNav renders elements passed in `children` prop instead of standard nav, if provided" time="0.005" file="src/components/global-nav/global-nav.spec.js">
+    </testcase>
+    <testcase classname="GlobalNav uses the correct custom URL when a user clicks the Pocket Logo" name="GlobalNav uses the correct custom URL when a user clicks the Pocket Logo" time="0.004" file="src/components/global-nav/global-nav.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="SideNav" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:32" time="4.023" tests="2">
+    <testcase classname="SideNav renders the Saves side nav and shows tags" name="SideNav renders the Saves side nav and shows tags" time="0.029" file="src/components/side-nav/side-nav.spec.js">
+    </testcase>
+    <testcase classname="SideNav renders the Account side nav" name="SideNav renders the Account side nav" time="0.018" file="src/components/side-nav/side-nav.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="GlobalNavMobileMenu" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:33" time="3.314" tests="8">
+    <testcase classname="GlobalNavMobileMenu shows the menu when `isOpen` is true" name="GlobalNavMobileMenu shows the menu when `isOpen` is true" time="0.062" file="src/components/global-nav/mobile/global-nav-mobile-menu.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavMobileMenu does not show the menu when `isOpen` is false" name="GlobalNavMobileMenu does not show the menu when `isOpen` is false" time="0.015" file="src/components/global-nav/mobile/global-nav-mobile-menu.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavMobileMenu renders a premium section only when a user is logged in, but NOT premium" name="GlobalNavMobileMenu renders a premium section only when a user is logged in, but NOT premium" time="0.006" file="src/components/global-nav/mobile/global-nav-mobile-menu.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavMobileMenu does not renders a premium section when a user is premium" name="GlobalNavMobileMenu does not renders a premium section when a user is premium" time="0.004" file="src/components/global-nav/mobile/global-nav-mobile-menu.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavMobileMenu renders the correct number of links" name="GlobalNavMobileMenu renders the correct number of links" time="0.07" file="src/components/global-nav/mobile/global-nav-mobile-menu.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavMobileMenu renders the links with correct labels as specified in the `links` prop" name="GlobalNavMobileMenu renders the links with correct labels as specified in the `links` prop" time="0.01" file="src/components/global-nav/mobile/global-nav-mobile-menu.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavMobileMenu applies the &quot;selected&quot; link state correctly based on props.selectedLink" name="GlobalNavMobileMenu applies the &quot;selected&quot; link state correctly based on props.selectedLink" time="0.014" file="src/components/global-nav/mobile/global-nav-mobile-menu.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavMobileMenu calls the props.onLinkClick callback with the name and url of a link when clicked" name="GlobalNavMobileMenu calls the props.onLinkClick callback with the name and url of a link when clicked" time="0.045" file="src/components/global-nav/mobile/global-nav-mobile-menu.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="GlobalNavAccount" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:33" time="3.509" tests="11">
+    <testcase classname="GlobalNavAccount renders properly when the user is signed out" name="GlobalNavAccount renders properly when the user is signed out" time="0.013" file="src/components/global-nav/account/global-nav-account.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavAccount renders an upgrade link if the user is signed in but not a premium account" name="GlobalNavAccount renders an upgrade link if the user is signed in but not a premium account" time="0.051" file="src/components/global-nav/account/global-nav-account.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavAccount does not render an upgrade link if the user is signed and a premium account" name="GlobalNavAccount does not render an upgrade link if the user is signed and a premium account" time="0.006" file="src/components/global-nav/account/global-nav-account.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavAccount renders the user’s avatar when signed in, using props.avatarSrc" name="GlobalNavAccount renders the user’s avatar when signed in, using props.avatarSrc" time="0.093" file="src/components/global-nav/account/global-nav-account.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavAccount renders the &quot;view profile&quot; menu link using props.profileUrl as the href" name="GlobalNavAccount renders the &quot;view profile&quot; menu link using props.profileUrl as the href" time="0.015" file="src/components/global-nav/account/global-nav-account.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavAccount renders the &quot;view profile&quot; menu link using props.accountName as the display name" name="GlobalNavAccount renders the &quot;view profile&quot; menu link using props.accountName as the display name" time="0.007" file="src/components/global-nav/account/global-nav-account.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavAccount renders bubble notifications when set" name="GlobalNavAccount renders bubble notifications when set" time="0.006" file="src/components/global-nav/account/global-nav-account.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavAccount does not render bubble notifications by default" name="GlobalNavAccount does not render bubble notifications by default" time="0.005" file="src/components/global-nav/account/global-nav-account.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavAccount calls the onLogin callback when a login is clicked" name="GlobalNavAccount calls the onLogin callback when a login is clicked" time="0.021" file="src/components/global-nav/account/global-nav-account.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavAccount calls the onLinkClick callback when a login is clicked, passing name through" name="GlobalNavAccount calls the onLinkClick callback when a login is clicked, passing name through" time="0.003" file="src/components/global-nav/account/global-nav-account.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavAccount calls the onAccountClick callback when the account menu is opened" name="GlobalNavAccount calls the onAccountClick callback when the account menu is opened" time="0.208" file="src/components/global-nav/account/global-nav-account.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Collection — Story" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:36" time="1.112" tests="6">
+    <testcase classname="Collection — Story should derive clientAPI as expected" name="Collection — Story should derive clientAPI as expected" time="0.003" file="src/containers/collections/stories-page/card.spec.js">
+    </testcase>
+    <testcase classname="Collection — Story Snowplow collection.story.impression should be valid" name="Collection — Story Snowplow collection.story.impression should be valid" time="0" file="src/containers/collections/stories-page/card.spec.js">
+    </testcase>
+    <testcase classname="Collection — Story Snowplow collection.story.open should be valid" name="Collection — Story Snowplow collection.story.open should be valid" time="0.001" file="src/containers/collections/stories-page/card.spec.js">
+    </testcase>
+    <testcase classname="Collection — Story Snowplow collection.story.save should be valid" name="Collection — Story Snowplow collection.story.save should be valid" time="0" file="src/containers/collections/stories-page/card.spec.js">
+    </testcase>
+    <testcase classname="Collection — Story Snowplow collection.story.unsave should be valid" name="Collection — Story Snowplow collection.story.unsave should be valid" time="0" file="src/containers/collections/stories-page/card.spec.js">
+    </testcase>
+    <testcase classname="ItemCard renders a story" name="ItemCard renders a story" time="0.038" file="src/containers/collections/stories-page/card.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="GlobalNavLinks" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:36" time="0.529" tests="4">
+    <testcase classname="GlobalNavLinks renders the correct number of links" name="GlobalNavLinks renders the correct number of links" time="0.046" file="src/components/global-nav/links/global-nav-links.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavLinks renders the links with correct labels and urls as specified in the `links` prop" name="GlobalNavLinks renders the links with correct labels and urls as specified in the `links` prop" time="0.004" file="src/components/global-nav/links/global-nav-links.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavLinks applies the &quot;selected&quot; link state correctly based on props.selectedLink" name="GlobalNavLinks applies the &quot;selected&quot; link state correctly based on props.selectedLink" time="0.01" file="src/components/global-nav/links/global-nav-links.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavLinks calls the onLinkClick callback with the name and url of a link when clicked" name="GlobalNavLinks calls the onLinkClick callback with the name and url of a link when clicked" time="0.031" file="src/components/global-nav/links/global-nav-links.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="PublisherAttribution" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:36" time="0.679" tests="3">
+    <testcase classname="PublisherAttribution renders follow publisher section when including a articleCta" name="PublisherAttribution renders follow publisher section when including a articleCta" time="0.012" file="src/components/content-publisher/publisher-attribution.spec.js">
+    </testcase>
+    <testcase classname="PublisherAttribution doesn’t render a publisher image if logoWide is missing" name="PublisherAttribution doesn’t render a publisher image if logoWide is missing" time="0.001" file="src/components/content-publisher/publisher-attribution.spec.js">
+    </testcase>
+    <testcase classname="PublisherAttribution doesn’t render follow publisher section if articleCta is missing" name="PublisherAttribution doesn’t render follow publisher section if articleCta is missing" time="0.002" file="src/components/content-publisher/publisher-attribution.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="TopicsPillbox" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:36" time="0.501" tests="7">
+    <testcase classname="TopicsPillbox applies the center alignment css class if props.alignItems=&quot;center&quot;" name="TopicsPillbox applies the center alignment css class if props.alignItems=&quot;center&quot;" time="0.011" file="src/components/topics-pillbox/topics-pillbox.spec.js">
+    </testcase>
+    <testcase classname="TopicsPillbox wrappedRenders custom heading text if props.headingText is provided" name="TopicsPillbox wrappedRenders custom heading text if props.headingText is provided" time="0.015" file="src/components/topics-pillbox/topics-pillbox.spec.js">
+    </testcase>
+    <testcase classname="TopicsPillbox adds a custom heading css class if props.headingClassName is provided" name="TopicsPillbox adds a custom heading css class if props.headingClassName is provided" time="0.003" file="src/components/topics-pillbox/topics-pillbox.spec.js">
+    </testcase>
+    <testcase classname="TopicsPillbox wrappedRenders a pill for each topic in the topics data map" name="TopicsPillbox wrappedRenders a pill for each topic in the topics data map" time="0.001" file="src/components/topics-pillbox/topics-pillbox.spec.js">
+    </testcase>
+    <testcase classname="TopicsPillbox passes the correct formatted url based on slug to each topic pill" name="TopicsPillbox passes the correct formatted url based on slug to each topic pill" time="0.002" file="src/components/topics-pillbox/topics-pillbox.spec.js">
+    </testcase>
+    <testcase classname="TopicsPillbox puts promoted topic items at the front of the list" name="TopicsPillbox puts promoted topic items at the front of the list" time="0.013" file="src/components/topics-pillbox/topics-pillbox.spec.js">
+    </testcase>
+    <testcase classname="TopicsPillbox calls props.onTopicClick when the user clicks on a topic, passing through expected params" name="TopicsPillbox calls props.onTopicClick when the user clicks on a topic, passing through expected params" time="0.005" file="src/components/topics-pillbox/topics-pillbox.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="GlobalFooter" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:36" time="0.618" tests="2">
+    <testcase classname="GlobalFooter adds a top border to the footer if props.hasBorder is true" name="GlobalFooter adds a top border to the footer if props.hasBorder is true" time="0.017" file="src/components/global-footer/global-footer.spec.js">
+    </testcase>
+    <testcase classname="GlobalFooter adds a top colored border to the footer if props.hasColorBorder is true" name="GlobalFooter adds a top colored border to the footer if props.hasColorBorder is true" time="0.005" file="src/components/global-footer/global-footer.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="ScrollChyron" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.525" tests="2">
+    <testcase classname="ScrollChyron renders with children without problem" name="ScrollChyron renders with children without problem" time="0.036" file="src/components/chyron/chyron-scroll.spec.js">
+    </testcase>
+    <testcase classname="ScrollChyron does not render when shouldHide is true" name="ScrollChyron does not render when shouldHide is true" time="0.001" file="src/components/chyron/chyron-scroll.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="GlobalNavTools" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:36" time="0.596" tests="4">
+    <testcase classname="GlobalNavTools renders the correct number of buttons" name="GlobalNavTools renders the correct number of buttons" time="0.078" file="src/components/global-nav/tools/global-nav-tools.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavTools renders the buttons with correct title attributes as specified in the `tools` prop" name="GlobalNavTools renders the buttons with correct title attributes as specified in the `tools` prop" time="0.004" file="src/components/global-nav/tools/global-nav-tools.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavTools renders the buttons with correct icons as specified in the `links` prop" name="GlobalNavTools renders the buttons with correct icons as specified in the `links` prop" time="0.001" file="src/components/global-nav/tools/global-nav-tools.spec.js">
+    </testcase>
+    <testcase classname="GlobalNavTools calls the props.onToolClick callback with the name of the tool when clicked" name="GlobalNavTools calls the props.onToolClick callback with the name of the tool when clicked" time="0.016" file="src/components/global-nav/tools/global-nav-tools.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Modal" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.53" tests="4">
+    <testcase classname="Modal registers the app root for accessibility purposes" name="Modal registers the app root for accessibility purposes" time="0.01" file="src/components/modal/modal.spec.js">
+    </testcase>
+    <testcase classname="Modal passes the child through to the modal" name="Modal passes the child through to the modal" time="0.045" file="src/components/modal/modal.spec.js">
+    </testcase>
+    <testcase classname="Modal displays a close button when showCloseButtonProp is true" name="Modal displays a close button when showCloseButtonProp is true" time="0.003" file="src/components/modal/modal.spec.js">
+    </testcase>
+    <testcase classname="Modal does not display a close button when showCloseButtonProp is false" name="Modal does not display a close button when showCloseButtonProp is false" time="0.002" file="src/components/modal/modal.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Chyron" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.416" tests="3">
+    <testcase classname="Chyron renders with children without problem" name="Chyron renders with children without problem" time="0.023" file="src/components/chyron/chyron.spec.js">
+    </testcase>
+    <testcase classname="Chyron does not render when initialDismissed is true" name="Chyron does not render when initialDismissed is true" time="0.001" file="src/components/chyron/chyron.spec.js">
+    </testcase>
+    <testcase classname="Chyron does not render when initialSuccess is true" name="Chyron does not render when initialSuccess is true" time="0.001" file="src/components/chyron/chyron.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Avatar" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.338" tests="3">
+    <testcase classname="Avatar Applies a title attribute to the button if props.label is provided" name="Avatar Applies a title attribute to the button if props.label is provided" time="0.01" file="src/components/avatar/avatar-button.spec.js">
+    </testcase>
+    <testcase classname="Avatar Calls the props.onClick callback when the button is clicked" name="Avatar Calls the props.onClick callback when the button is clicked" time="0.005" file="src/components/avatar/avatar-button.spec.js">
+    </testcase>
+    <testcase classname="Avatar applies a css class name to the button element if props.className is provided" name="Avatar applies a css class name to the button element if props.className is provided" time="0.002" file="src/components/avatar/avatar-button.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Saves - Image" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.195" tests="13">
+    <testcase classname="Saves - Image should derive clientAPI as expected" name="Saves - Image should derive clientAPI as expected" time="0.003" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+    <testcase classname="Saves - Image Snowplow saves.card.view-original should be valid" name="Saves - Image Snowplow saves.card.view-original should be valid" time="0" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+    <testcase classname="Saves - Image Snowplow saves.card.permanent-library should be valid" name="Saves - Image Snowplow saves.card.permanent-library should be valid" time="0.001" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+    <testcase classname="Saves - Image Snowplow saves.card.open should be valid" name="Saves - Image Snowplow saves.card.open should be valid" time="0" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+    <testcase classname="Saves - Image Snowplow saves.card.impression should be valid" name="Saves - Image Snowplow saves.card.impression should be valid" time="0" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+    <testcase classname="Saves - Image Snowplow saves.share should be valid" name="Saves - Image Snowplow saves.share should be valid" time="0" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+    <testcase classname="Saves - Image Snowplow saves.delete should be valid" name="Saves - Image Snowplow saves.delete should be valid" time="0" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+    <testcase classname="Saves - Image Snowplow saves.archive should be valid" name="Saves - Image Snowplow saves.archive should be valid" time="0" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+    <testcase classname="Saves - Image Snowplow saves.unarchive should be valid" name="Saves - Image Snowplow saves.unarchive should be valid" time="0" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+    <testcase classname="Saves - Image Snowplow saves.favorite should be valid" name="Saves - Image Snowplow saves.favorite should be valid" time="0" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+    <testcase classname="Saves - Image Snowplow saves.un-favorite should be valid" name="Saves - Image Snowplow saves.un-favorite should be valid" time="0" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+    <testcase classname="Saves - Image Snowplow saves.tag should be valid" name="Saves - Image Snowplow saves.tag should be valid" time="0" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+    <testcase classname="Saves - Image Snowplow saves.add-to-list should be valid" name="Saves - Image Snowplow saves.add-to-list should be valid" time="0" file="src/common/api/derivers/list/image.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Saves - Collection" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.191" tests="13">
+    <testcase classname="Saves - Collection should derive clientAPI as expected" name="Saves - Collection should derive clientAPI as expected" time="0.003" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+    <testcase classname="Saves - Collection Snowplow saves.card.view-original should be valid" name="Saves - Collection Snowplow saves.card.view-original should be valid" time="0.001" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+    <testcase classname="Saves - Collection Snowplow saves.card.permanent-library should be valid" name="Saves - Collection Snowplow saves.card.permanent-library should be valid" time="0" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+    <testcase classname="Saves - Collection Snowplow saves.card.open should be valid" name="Saves - Collection Snowplow saves.card.open should be valid" time="0" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+    <testcase classname="Saves - Collection Snowplow saves.card.impression should be valid" name="Saves - Collection Snowplow saves.card.impression should be valid" time="0" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+    <testcase classname="Saves - Collection Snowplow saves.share should be valid" name="Saves - Collection Snowplow saves.share should be valid" time="0" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+    <testcase classname="Saves - Collection Snowplow saves.delete should be valid" name="Saves - Collection Snowplow saves.delete should be valid" time="0" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+    <testcase classname="Saves - Collection Snowplow saves.archive should be valid" name="Saves - Collection Snowplow saves.archive should be valid" time="0" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+    <testcase classname="Saves - Collection Snowplow saves.unarchive should be valid" name="Saves - Collection Snowplow saves.unarchive should be valid" time="0" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+    <testcase classname="Saves - Collection Snowplow saves.favorite should be valid" name="Saves - Collection Snowplow saves.favorite should be valid" time="0.005" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+    <testcase classname="Saves - Collection Snowplow saves.un-favorite should be valid" name="Saves - Collection Snowplow saves.un-favorite should be valid" time="0" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+    <testcase classname="Saves - Collection Snowplow saves.tag should be valid" name="Saves - Collection Snowplow saves.tag should be valid" time="0" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+    <testcase classname="Saves - Collection Snowplow saves.add-to-list should be valid" name="Saves - Collection Snowplow saves.add-to-list should be valid" time="0" file="src/common/api/derivers/list/collection.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Collection — Page" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.177" tests="13">
+    <testcase classname="Collection — Page should derive clientAPI as expected" name="Collection — Page should derive clientAPI as expected" time="0.003" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page Snowplow collection.impression should be valid" name="Collection — Page Snowplow collection.impression should be valid" time="0" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page Snowplow collection.open should be valid" name="Collection — Page Snowplow collection.open should be valid" time="0.001" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page Snowplow collection.save should be valid" name="Collection — Page Snowplow collection.save should be valid" time="0" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page Snowplow collection.unsave should be valid" name="Collection — Page Snowplow collection.unsave should be valid" time="0" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page Snowplow collection.story.unsave should be valid" name="Collection — Page Snowplow collection.story.unsave should be valid" time="0" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page Snowplow collection.page.save should be valid" name="Collection — Page Snowplow collection.page.save should be valid" time="0" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page Snowplow collection.page.unsave should be valid" name="Collection — Page Snowplow collection.page.unsave should be valid" time="0" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page Snowplow collection.share.facebook should be valid" name="Collection — Page Snowplow collection.share.facebook should be valid" time="0" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page Snowplow collection.share.twitter should be valid" name="Collection — Page Snowplow collection.share.twitter should be valid" time="0" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page Snowplow collection.share.linkedin should be valid" name="Collection — Page Snowplow collection.share.linkedin should be valid" time="0" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page Snowplow collection.share.reddit should be valid" name="Collection — Page Snowplow collection.share.reddit should be valid" time="0" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page Snowplow collection.share.email should be valid" name="Collection — Page Snowplow collection.share.email should be valid" time="0" file="src/common/api/derivers/collection/page.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Saves - Videos" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.25" tests="13">
+    <testcase classname="Saves - Videos should derive clientAPI as expected" name="Saves - Videos should derive clientAPI as expected" time="0.004" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+    <testcase classname="Saves - Videos Snowplow saves.card.view-original should be valid" name="Saves - Videos Snowplow saves.card.view-original should be valid" time="0" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+    <testcase classname="Saves - Videos Snowplow saves.card.permanent-library should be valid" name="Saves - Videos Snowplow saves.card.permanent-library should be valid" time="0" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+    <testcase classname="Saves - Videos Snowplow saves.card.open should be valid" name="Saves - Videos Snowplow saves.card.open should be valid" time="0" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+    <testcase classname="Saves - Videos Snowplow saves.card.impression should be valid" name="Saves - Videos Snowplow saves.card.impression should be valid" time="0.001" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+    <testcase classname="Saves - Videos Snowplow saves.share should be valid" name="Saves - Videos Snowplow saves.share should be valid" time="0" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+    <testcase classname="Saves - Videos Snowplow saves.delete should be valid" name="Saves - Videos Snowplow saves.delete should be valid" time="0" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+    <testcase classname="Saves - Videos Snowplow saves.archive should be valid" name="Saves - Videos Snowplow saves.archive should be valid" time="0" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+    <testcase classname="Saves - Videos Snowplow saves.unarchive should be valid" name="Saves - Videos Snowplow saves.unarchive should be valid" time="0" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+    <testcase classname="Saves - Videos Snowplow saves.favorite should be valid" name="Saves - Videos Snowplow saves.favorite should be valid" time="0" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+    <testcase classname="Saves - Videos Snowplow saves.un-favorite should be valid" name="Saves - Videos Snowplow saves.un-favorite should be valid" time="0" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+    <testcase classname="Saves - Videos Snowplow saves.tag should be valid" name="Saves - Videos Snowplow saves.tag should be valid" time="0" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+    <testcase classname="Saves - Videos Snowplow saves.add-to-list should be valid" name="Saves - Videos Snowplow saves.add-to-list should be valid" time="0.001" file="src/common/api/derivers/list/video.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Saves - Parsed" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.166" tests="13">
+    <testcase classname="Saves - Parsed should derive clientAPI as expected" name="Saves - Parsed should derive clientAPI as expected" time="0.003" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Parsed Snowplow saves.card.view-original should be valid" name="Saves - Parsed Snowplow saves.card.view-original should be valid" time="0" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Parsed Snowplow saves.card.permanent-library should be valid" name="Saves - Parsed Snowplow saves.card.permanent-library should be valid" time="0" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Parsed Snowplow saves.card.open should be valid" name="Saves - Parsed Snowplow saves.card.open should be valid" time="0" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Parsed Snowplow saves.card.impression should be valid" name="Saves - Parsed Snowplow saves.card.impression should be valid" time="0" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Parsed Snowplow saves.share should be valid" name="Saves - Parsed Snowplow saves.share should be valid" time="0.001" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Parsed Snowplow saves.delete should be valid" name="Saves - Parsed Snowplow saves.delete should be valid" time="0" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Parsed Snowplow saves.archive should be valid" name="Saves - Parsed Snowplow saves.archive should be valid" time="0" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Parsed Snowplow saves.unarchive should be valid" name="Saves - Parsed Snowplow saves.unarchive should be valid" time="0" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Parsed Snowplow saves.favorite should be valid" name="Saves - Parsed Snowplow saves.favorite should be valid" time="0" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Parsed Snowplow saves.un-favorite should be valid" name="Saves - Parsed Snowplow saves.un-favorite should be valid" time="0" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Parsed Snowplow saves.tag should be valid" name="Saves - Parsed Snowplow saves.tag should be valid" time="0" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Parsed Snowplow saves.add-to-list should be valid" name="Saves - Parsed Snowplow saves.add-to-list should be valid" time="0" file="src/common/api/derivers/list/parsed.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="PocketHitsIllustratedChyron" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.4" tests="2">
+    <testcase classname="PocketHitsIllustratedChyron shows the form and hides the success message by default" name="PocketHitsIllustratedChyron shows the form and hides the success message by default" time="0.018" file="src/components/pocket-hits-chyron/pocket-hits-illustrated-chyron.spec.js">
+    </testcase>
+    <testcase classname="PocketHitsIllustratedChyron shows the success message and hides the form when isSuccessful" name="PocketHitsIllustratedChyron shows the success message and hides the form when isSuccessful" time="0.003" file="src/components/pocket-hits-chyron/pocket-hits-illustrated-chyron.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Discover" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.214" tests="5">
+    <testcase classname="Discover should derive clientAPI as expected" name="Discover should derive clientAPI as expected" time="0.016" file="src/common/api/derivers/discover/discover.spec.js">
+    </testcase>
+    <testcase classname="Discover Snowplow discover.open should be valid" name="Discover Snowplow discover.open should be valid" time="0.001" file="src/common/api/derivers/discover/discover.spec.js">
+    </testcase>
+    <testcase classname="Discover Snowplow discover.impression should be valid" name="Discover Snowplow discover.impression should be valid" time="0" file="src/common/api/derivers/discover/discover.spec.js">
+    </testcase>
+    <testcase classname="Discover Snowplow discover.save should be valid" name="Discover Snowplow discover.save should be valid" time="0" file="src/common/api/derivers/discover/discover.spec.js">
+    </testcase>
+    <testcase classname="Discover Snowplow discover.unsave should be valid" name="Discover Snowplow discover.unsave should be valid" time="0" file="src/common/api/derivers/discover/discover.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Saves - Unparsed" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.189" tests="13">
+    <testcase classname="Saves - Unparsed should derive clientAPI as expected" name="Saves - Unparsed should derive clientAPI as expected" time="0.02" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Unparsed Snowplow saves.card.view-original should be valid" name="Saves - Unparsed Snowplow saves.card.view-original should be valid" time="0" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Unparsed Snowplow saves.card.permanent-library should be valid" name="Saves - Unparsed Snowplow saves.card.permanent-library should be valid" time="0" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Unparsed Snowplow saves.card.open should be valid" name="Saves - Unparsed Snowplow saves.card.open should be valid" time="0" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Unparsed Snowplow saves.card.impression should be valid" name="Saves - Unparsed Snowplow saves.card.impression should be valid" time="0" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Unparsed Snowplow saves.share should be valid" name="Saves - Unparsed Snowplow saves.share should be valid" time="0" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Unparsed Snowplow saves.delete should be valid" name="Saves - Unparsed Snowplow saves.delete should be valid" time="0" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Unparsed Snowplow saves.archive should be valid" name="Saves - Unparsed Snowplow saves.archive should be valid" time="0" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Unparsed Snowplow saves.unarchive should be valid" name="Saves - Unparsed Snowplow saves.unarchive should be valid" time="0" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Unparsed Snowplow saves.favorite should be valid" name="Saves - Unparsed Snowplow saves.favorite should be valid" time="0" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Unparsed Snowplow saves.un-favorite should be valid" name="Saves - Unparsed Snowplow saves.un-favorite should be valid" time="0" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Unparsed Snowplow saves.tag should be valid" name="Saves - Unparsed Snowplow saves.tag should be valid" time="0" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+    <testcase classname="Saves - Unparsed Snowplow saves.add-to-list should be valid" name="Saves - Unparsed Snowplow saves.add-to-list should be valid" time="0" file="src/common/api/derivers/list/unparsed.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Home" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.188" tests="4">
+    <testcase classname="Home should derive clientAPI as expected" name="Home should derive clientAPI as expected" time="0.002" file="src/common/api/derivers/discover/home.spec.js">
+    </testcase>
+    <testcase classname="Home Snowplow home.recent.impression should be valid" name="Home Snowplow home.recent.impression should be valid" time="0" file="src/common/api/derivers/discover/home.spec.js">
+    </testcase>
+    <testcase classname="Home Snowplow home.recent.open should be valid" name="Home Snowplow home.recent.open should be valid" time="0" file="src/common/api/derivers/discover/home.spec.js">
+    </testcase>
+    <testcase classname="Home Snowplow home.recent.view-original should be valid" name="Home Snowplow home.recent.view-original should be valid" time="0" file="src/common/api/derivers/discover/home.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Avatar" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.428" tests="5">
+    <testcase classname="Avatar Sets the width &amp; height styles of the avatar element to the size provided" name="Avatar Sets the width &amp; height styles of the avatar element to the size provided" time="0.023" file="src/components/avatar/avatar.spec.js">
+    </testcase>
+    <testcase classname="Avatar Renders a default icon if props.src isn’t provided" name="Avatar Renders a default icon if props.src isn’t provided" time="0.011" file="src/components/avatar/avatar.spec.js">
+    </testcase>
+    <testcase classname="Avatar Renders an image tag with src if props.src is provided" name="Avatar Renders an image tag with src if props.src is provided" time="0.015" file="src/components/avatar/avatar.spec.js">
+    </testcase>
+    <testcase classname="Avatar Includes alt text on the image tag if props.altText is provided" name="Avatar Includes alt text on the image tag if props.altText is provided" time="0.011" file="src/components/avatar/avatar.spec.js">
+    </testcase>
+    <testcase classname="Avatar applies a css class name to the outer node if props.className is provided" name="Avatar applies a css class name to the outer node if props.className is provided" time="0.001" file="src/components/avatar/avatar.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Collection — Page as Home Item" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.153" tests="13">
+    <testcase classname="Collection — Page as Home Item should derive clientAPI as expected" name="Collection — Page as Home Item should derive clientAPI as expected" time="0.002" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page as Home Item Snowplow collection.impression should be valid" name="Collection — Page as Home Item Snowplow collection.impression should be valid" time="0" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page as Home Item Snowplow collection.open should be valid" name="Collection — Page as Home Item Snowplow collection.open should be valid" time="0" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page as Home Item Snowplow collection.save should be valid" name="Collection — Page as Home Item Snowplow collection.save should be valid" time="0.001" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page as Home Item Snowplow collection.unsave should be valid" name="Collection — Page as Home Item Snowplow collection.unsave should be valid" time="0" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page as Home Item Snowplow collection.story.unsave should be valid" name="Collection — Page as Home Item Snowplow collection.story.unsave should be valid" time="0" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page as Home Item Snowplow collection.page.save should be valid" name="Collection — Page as Home Item Snowplow collection.page.save should be valid" time="0" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page as Home Item Snowplow collection.page.unsave should be valid" name="Collection — Page as Home Item Snowplow collection.page.unsave should be valid" time="0" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page as Home Item Snowplow collection.share.facebook should be valid" name="Collection — Page as Home Item Snowplow collection.share.facebook should be valid" time="0" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page as Home Item Snowplow collection.share.twitter should be valid" name="Collection — Page as Home Item Snowplow collection.share.twitter should be valid" time="0" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page as Home Item Snowplow collection.share.linkedin should be valid" name="Collection — Page as Home Item Snowplow collection.share.linkedin should be valid" time="0" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page as Home Item Snowplow collection.share.reddit should be valid" name="Collection — Page as Home Item Snowplow collection.share.reddit should be valid" time="0" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+    <testcase classname="Collection — Page as Home Item Snowplow collection.share.email should be valid" name="Collection — Page as Home Item Snowplow collection.share.email should be valid" time="0" file="src/common/api/derivers/collection/home.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Syndicated" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.175" tests="5">
+    <testcase classname="Syndicated should derive clientAPI as expected" name="Syndicated should derive clientAPI as expected" time="0.005" file="src/common/api/derivers/discover/syndicated.spec.js">
+    </testcase>
+    <testcase classname="Syndicated Snowplow discover.open should be valid" name="Syndicated Snowplow discover.open should be valid" time="0" file="src/common/api/derivers/discover/syndicated.spec.js">
+    </testcase>
+    <testcase classname="Syndicated Snowplow discover.impression should be valid" name="Syndicated Snowplow discover.impression should be valid" time="0" file="src/common/api/derivers/discover/syndicated.spec.js">
+    </testcase>
+    <testcase classname="Syndicated Snowplow discover.save should be valid" name="Syndicated Snowplow discover.save should be valid" time="0" file="src/common/api/derivers/discover/syndicated.spec.js">
+    </testcase>
+    <testcase classname="Syndicated Snowplow discover.unsave should be valid" name="Syndicated Snowplow discover.unsave should be valid" time="0.001" file="src/common/api/derivers/discover/syndicated.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Collection — Story" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.166" tests="5">
+    <testcase classname="Collection — Story should derive clientAPI as expected" name="Collection — Story should derive clientAPI as expected" time="0.002" file="src/common/api/derivers/collection/story.spec.js">
+    </testcase>
+    <testcase classname="Collection — Story Snowplow collection.story.impression should be valid" name="Collection — Story Snowplow collection.story.impression should be valid" time="0" file="src/common/api/derivers/collection/story.spec.js">
+    </testcase>
+    <testcase classname="Collection — Story Snowplow collection.story.open should be valid" name="Collection — Story Snowplow collection.story.open should be valid" time="0" file="src/common/api/derivers/collection/story.spec.js">
+    </testcase>
+    <testcase classname="Collection — Story Snowplow collection.story.save should be valid" name="Collection — Story Snowplow collection.story.save should be valid" time="0" file="src/common/api/derivers/collection/story.spec.js">
+    </testcase>
+    <testcase classname="Collection — Story Snowplow collection.story.unsave should be valid" name="Collection — Story Snowplow collection.story.unsave should be valid" time="0" file="src/common/api/derivers/collection/story.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Home" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.165" tests="1">
+    <testcase classname="Home should derive corpusItem as expected" name="Home should derive corpusItem as expected" time="0.003" file="src/common/api/derivers/discover/get-started.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Bulk Mutations - Select Items" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.097" tests="12">
+    <testcase classname="Bulk Mutations - Select Items should select a single item" name="Bulk Mutations - Select Items should select a single item" time="0.001" file="src/connectors/items/mutations.spec.js">
+    </testcase>
+    <testcase classname="Bulk Mutations - Select Items should add a selected id to the passed array" name="Bulk Mutations - Select Items should add a selected id to the passed array" time="0" file="src/connectors/items/mutations.spec.js">
+    </testcase>
+    <testcase classname="Bulk Mutations - Select Items should add a range of items when shift is used" name="Bulk Mutations - Select Items should add a range of items when shift is used" time="0" file="src/connectors/items/mutations.spec.js">
+    </testcase>
+    <testcase classname="Bulk Mutations - Select Items should select backwards" name="Bulk Mutations - Select Items should select backwards" time="0.002" file="src/connectors/items/mutations.spec.js">
+    </testcase>
+    <testcase classname="Bulk Mutations - Select Items should maintain gaps in single selections" name="Bulk Mutations - Select Items should maintain gaps in single selections" time="0.001" file="src/connectors/items/mutations.spec.js">
+    </testcase>
+    <testcase classname="Bulk Mutations - Select Items should close gaps in selections that span deselected" name="Bulk Mutations - Select Items should close gaps in selections that span deselected" time="0" file="src/connectors/items/mutations.spec.js">
+    </testcase>
+    <testcase classname="Bulk Mutations - Select Items should maintain gaps in selections that do not span deselected" name="Bulk Mutations - Select Items should maintain gaps in selections that do not span deselected" time="0" file="src/connectors/items/mutations.spec.js">
+    </testcase>
+    <testcase classname="Bulk Mutations - Select Items should maintain original order in our of order selections" name="Bulk Mutations - Select Items should maintain original order in our of order selections" time="0" file="src/connectors/items/mutations.spec.js">
+    </testcase>
+    <testcase classname="Bulk Mutations - De-Select Items should de-select a single item" name="Bulk Mutations - De-Select Items should de-select a single item" time="0.001" file="src/connectors/items/mutations.spec.js">
+    </testcase>
+    <testcase classname="Bulk Mutations - De-Select Items should de-select a range of items" name="Bulk Mutations - De-Select Items should de-select a range of items" time="0" file="src/connectors/items/mutations.spec.js">
+    </testcase>
+    <testcase classname="Bulk Mutations - De-Select Items should maintain gaps in that are not spanned in deselection" name="Bulk Mutations - De-Select Items should maintain gaps in that are not spanned in deselection" time="0" file="src/connectors/items/mutations.spec.js">
+    </testcase>
+    <testcase classname="Bulk Mutations - De-Select Items should not select items in gaps during deselection" name="Bulk Mutations - De-Select Items should not select items in gaps during deselection" time="0" file="src/connectors/items/mutations.spec.js">
+    </testcase>
+  </testsuite>
+  <testsuite name="Feature Flags" errors="0" failures="0" skipped="0" timestamp="2023-05-31T22:07:37" time="0.145" tests="5">
+    <testcase classname="Feature Flags checkActive returns false if not assigned" name="Feature Flags checkActive returns false if not assigned" time="0" file="src/connectors/feature-flags/feature-flags.spec.js">
+    </testcase>
+    <testcase classname="Feature Flags checkActive returns true if assigned with no variant" name="Feature Flags checkActive returns true if assigned with no variant" time="0" file="src/connectors/feature-flags/feature-flags.spec.js">
+    </testcase>
+    <testcase classname="Feature Flags checkActive returns false if assigned with control variant" name="Feature Flags checkActive returns false if assigned with control variant" time="0" file="src/connectors/feature-flags/feature-flags.spec.js">
+    </testcase>
+    <testcase classname="Feature Flags checkActive returns false if assigned with control-like variant" name="Feature Flags checkActive returns false if assigned with control-like variant" time="0" file="src/connectors/feature-flags/feature-flags.spec.js">
+    </testcase>
+    <testcase classname="Feature Flags checkActive returns true if assigned with non-control variant" name="Feature Flags checkActive returns true if assigned with non-control variant" time="0" file="src/connectors/feature-flags/feature-flags.spec.js">
+    </testcase>
+  </testsuite>
+</testsuites>

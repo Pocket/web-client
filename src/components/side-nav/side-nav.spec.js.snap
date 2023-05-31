@@ -9,7 +9,7 @@ exports[`SideNav renders the Account side nav 1`] = `
     role="navigation"
   >
     <a
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-home"
       href="/home?src=sidebar"
     >
@@ -33,7 +33,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:home
     </a>
     <a
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-saves"
       href="/saves?src=sidebar"
     >
@@ -77,7 +77,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:saves
     </a>
     <a
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-discover"
       href="/explore?src=sidebar"
     >
@@ -106,7 +106,7 @@ exports[`SideNav renders the Account side nav 1`] = `
       nav:discover
     </a>
     <a
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-collections"
       href="/collections?src=sidebar"
     >
@@ -191,7 +191,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     role="navigation"
   >
     <a
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-home"
       href="/home?src=sidebar"
     >
@@ -215,7 +215,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:home
     </a>
     <a
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-saves"
       href="/saves?src=sidebar"
     >
@@ -259,7 +259,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:saves
     </a>
     <a
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-discover"
       href="/explore?src=sidebar"
     >
@@ -288,7 +288,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:discover
     </a>
     <a
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-collections"
       href="/collections?src=sidebar"
     >
@@ -336,7 +336,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:filters
     </h4>
     <button
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-archive"
     >
       <span
@@ -369,7 +369,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:archive
     </button>
     <button
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-favorites"
     >
       <span
@@ -392,7 +392,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:favorites
     </button>
     <button
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-highlights"
     >
       <span
@@ -415,7 +415,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:highlights
     </button>
     <button
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-articles"
     >
       <span
@@ -443,7 +443,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:articles
     </button>
     <button
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-videos"
     >
       <span
@@ -479,7 +479,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:tags
     </h4>
     <button
-      class="css-16m92x4  "
+      class="css-gcpn2c  "
       data-cy="side-nav-all-tags"
     >
       <span
@@ -505,13 +505,13 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       nav:all-tags
     </button>
     <button
-      class="css-16m92x4  tag-class"
+      class="css-gcpn2c  tag-class"
       data-cy="side-nav-tags-home"
     >
       home
     </button>
     <button
-      class="css-16m92x4  tag-class"
+      class="css-gcpn2c  tag-class"
       data-cy="side-nav-tags-space"
     >
       space
