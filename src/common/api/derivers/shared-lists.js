@@ -1,5 +1,6 @@
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { replaceUTM } from 'common/utilities/urls/urls'
+import { deriveSavedItem } from './item'
 
 // Process a list of lists, viewable to the user only
 export function processAllList(responseData) {
@@ -44,8 +45,10 @@ function getListItemsById(listItems, listId, utmId) {
 
 // Builds a list item, compiles the analytics
 // Adds a utm paramter to the external url
-function deriveListItem(item, listId, utmId) {
-  const { externalId, url, title, excerpt, imageUrl, publisher, note, createdAt } = item
+function deriveListItem(listItem, listId, utmId) {
+  const { externalId, url, title, excerpt, imageUrl, publisher, note, createdAt, item } = listItem
+  const savedItem = deriveSavedItem(item?.savedItem, 'pocket_lists')
+
   const analyticsData = {
     id: externalId,
     shareableListItemExternalId: externalId,
@@ -59,7 +62,8 @@ function deriveListItem(item, listId, utmId) {
   }
 
   return {
-    ...item,
+    ...listItem,
+    ...savedItem,
     url: replaceUTM(url, utmId),
     note: decodeSpecialChars(note),
     analyticsData
