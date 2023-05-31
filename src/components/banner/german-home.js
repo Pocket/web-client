@@ -1,12 +1,10 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { useDispatch } from 'react-redux'
 import { css } from '@emotion/css'
 import { breakpointLargeTablet } from 'common/constants'
 import { breakpointSmallTablet } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
 import { breakpointSmallHandset } from 'common/constants'
-import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 import bannerCard from 'static/images/banner/german-home/cards.png'
 
@@ -119,18 +117,16 @@ const bannerStyles = css`
   }
 `
 
-export const BannerGermanHome = () => {
-  const dispatch = useDispatch()
+export const BannerGermanHome = ({
+  handleBannerImpression = () => {},
+  handleBannerClick = () => {}
+}) => {
   const bannerLink =
     'https://getpocket.com/de/collections/eine-partnerschaft-fuer-mehr-sichtbarkeit-bipoc-im-spotlight'
 
   useEffect(() => {
-    dispatch(sendSnowplowEvent('banner.german.home.impression'))
-  }, [dispatch])
-
-  const handleClick = () => {
-    dispatch(sendSnowplowEvent('banner.german.home.click'))
-  }
+    handleBannerImpression()
+  }, [handleBannerImpression])
 
   return (
     <div className={bannerBackground}>
@@ -140,7 +136,7 @@ export const BannerGermanHome = () => {
         </div>
         <h3>Entdecke Content, der die Autor*innen von „People of Deutschland“ inspiriert.</h3>
         <div className="call-to-action">
-          <Link href={bannerLink} onClick={handleClick}>
+          <Link href={bannerLink} onClick={handleBannerClick}>
             Entdecke Pocket Collections
           </Link>
         </div>

@@ -1,7 +1,7 @@
 import { BannerGermanHome as Component } from './german-home'
 
 export default {
-  title: 'Components/Banner/German Home',
+  title: 'Components/Banner',
   component: Component,
   argTypes: {
     onClick: { action: 'clicked' },
