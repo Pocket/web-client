@@ -17,11 +17,27 @@ import { topTooltip } from 'components/tooltip/tooltip'
 export const IndividualListCard = ({ id, listId, position }) => {
   const dispatch = useDispatch()
 
-  const item = useSelector((state) => state.listsDisplay[id])
+  const listItem = useSelector((state) => state.listsDisplay[id])
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
 
-  if (!item) return null
-  const { externalId, title, excerpt, publisher, url, note, analyticsData: passedAnalytics } = item
+  if (!listItem) return null
+
+  const { note, externalId, item, analyticsData: passedAnalytics } = listItem
+
+  const {
+    title,
+    excerpt,
+    publisher,
+    itemUrl,
+    readUrl,
+    externalUrl,
+    isInternalItem,
+    timeToRead,
+    isSyndicated
+  } = item
+
+  const openUrl = readUrl || externalUrl || itemUrl
+
   const analyticsData = {
     ...passedAnalytics,
     sortOrder: position,
@@ -30,7 +46,7 @@ export const IndividualListCard = ({ id, listId, position }) => {
     note
   }
 
-  const itemImage = item?.noImage ? '' : item?.imageUrl
+  const itemImage = listItem?.noImage ? '' : listItem?.imageUrl
   const onImageFail = () => dispatch(setNoImage(id))
 
   const onItemInView = (inView) => {
@@ -52,14 +68,17 @@ export const IndividualListCard = ({ id, listId, position }) => {
       <Item
         type="list-item"
         listId={listId}
-        itemId={externalId}
+        itemId={externalId} // should this be itemId?
         title={title}
         excerpt={excerpt}
         itemImage={itemImage}
         note={note}
         publisher={publisher}
-        openUrl={url}
-        externalUrl={url}
+        isInternalItem={isInternalItem}
+        openUrl={openUrl}
+        isSyndicated={isSyndicated}
+        timeToRead={timeToRead}
+        externalUrl={externalUrl}
         onImageFail={onImageFail}
         onItemInView={onItemInView}
         onOpenOriginalUrl={onOpenOriginal}
