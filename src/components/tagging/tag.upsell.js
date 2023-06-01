@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 import { PREMIUM_URL } from 'common/constants'
 import { PremiumIcon } from 'components/icons/PremiumIcon'
 import { Trans } from 'next-i18next'
@@ -28,26 +28,27 @@ const upsellWrapper = css`
 `
 
 export const TagUpsell = ({ onVisible }) => {
+  const viewRef = useRef(null)
   const handleVisible = () => onVisible('suggested-tags.upgrade-link')
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+  if (!!entry?.isIntersecting && onVisible) handleVisible()
 
   return (
-    <VisibilitySensor onVisible={handleVisible}>
-      <div className={upsellWrapper}>
-        <p>
-          <PremiumIcon />
-          <Trans i18nKey="tags:tag-stories-faster">
-            Tag stories faster than ever—get tag suggestions with
-          </Trans>
-        </p>
-        <ArrowLink
-          id="suggested-tags.upgrade-link"
-          dataCy="suggested-tags-upgrade"
-          margin="10px 0"
-          href={`${PREMIUM_URL}&utm_campaign=suggested-tags`}
-          target="_blank">
-          <Trans i18nKey="tags:pocket-premium">Pocket Premium</Trans>
-        </ArrowLink>
-      </div>
-    </VisibilitySensor>
+    <div className={upsellWrapper} ref={viewRef}>
+      <p>
+        <PremiumIcon />
+        <Trans i18nKey="tags:tag-stories-faster">
+          Tag stories faster than ever—get tag suggestions with
+        </Trans>
+      </p>
+      <ArrowLink
+        id="suggested-tags.upgrade-link"
+        dataCy="suggested-tags-upgrade"
+        margin="10px 0"
+        href={`${PREMIUM_URL}&utm_campaign=suggested-tags`}
+        target="_blank">
+        <Trans i18nKey="tags:pocket-premium">Pocket Premium</Trans>
+      </ArrowLink>
+    </div>
   )
 }

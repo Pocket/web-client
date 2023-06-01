@@ -1,8 +1,8 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/css'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { Trans } from 'next-i18next'
+import { useRef } from 'react'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
+import { useTranslation } from 'next-i18next'
 
 const publisherStyles = css`
   img {
@@ -17,24 +17,23 @@ const publisherStyles = css`
   }
   p {
     color: var(--color-textTertiary);
-    font-family: var(--fontSansSerif);
     font-size: 1.25rem;
     margin-bottom: 8px;
   }
   .publisher-name {
-    font-family: var(--fontSansSerif);
     font-weight: 600;
     color: var(--color-textSecondary);
   }
 `
 
 export const Publisher = ({ recommendationName, name, logo }) => {
+  const { t } = useTranslation()
   const publisherName = recommendationName || name || 'Publisher'
   return (
     <div className={publisherStyles}>
       {logo ? <img data-cy="publisher-logo" src={logo} alt={publisherName} /> : null}
       <h6 className="publisher-name" data-cy="publisher-recs-publisher-name">
-        <Trans i18nKey="discover:more-from-publisher">More from {{ publisherName }}</Trans>
+        {t('discover:more-from-publisher', 'More from {{ publisherName }}', { publisherName })}
       </h6>
     </div>
   )
@@ -71,6 +70,9 @@ const RecommendedArticle = ({
   handleRecImpression,
   handleRecClick
 }) => {
+  const viewRef = useRef(null)
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+
   if (!rec) return null
   const { title, url } = rec
 
@@ -82,19 +84,19 @@ const RecommendedArticle = ({
     handleRecClick({ position, corpusRecommendationId, url })
   }
 
+  if (!!entry?.isIntersecting) handleVisible()
+
   return (
-    <VisibilitySensor onVisible={handleVisible}>
-      <li className={recommendedArticleStyles} data-cy="publisher-recs-article">
-        <a
-          onClick={handleClick}
-          className="title"
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer">
-          {title}
-        </a>
-      </li>
-    </VisibilitySensor>
+    <li className={recommendedArticleStyles} data-cy="publisher-recs-article" ref={viewRef}>
+      <a
+        onClick={handleClick}
+        className="title"
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer">
+        {title}
+      </a>
+    </li>
   )
 }
 
@@ -174,4 +176,3 @@ PublisherRecs.propTypes = {
    */
   handleRecClick: PropTypes.func
 }
-

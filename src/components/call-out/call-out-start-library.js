@@ -1,15 +1,16 @@
-import React from 'react'
-import { css } from '@emotion/css'
+import { useRef } from 'react'
+import { css, cx } from '@emotion/css'
 import { CrossIcon } from 'components/icons/CrossIcon'
 import { SIGNUP_URL } from 'common/constants'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+
 import { breakpointSmallDesktop } from 'common/constants' // 1023
 import { breakpointLargeTablet } from 'common/constants' // 1023
 import { useTranslation, Trans } from 'next-i18next'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 
 const wrapper = css`
   position: relative;
-  margin-top: var(--spacing650);
+  margin-top: 6.5rem;
 
   &:before {
     position: absolute;
@@ -23,9 +24,13 @@ const wrapper = css`
 
   div {
     background-color: var(--color-calloutBackgroundPrimary);
-    padding: 3.625rem var(--spacing150) var(--spacing150);
+    padding: 1.5rem;
     width: 100%;
     position: relative;
+  }
+
+  &.withDismiss div {
+    padding-top: 3.625rem;
   }
 
   h6 {
@@ -40,7 +45,7 @@ const wrapper = css`
   .zigzag {
     stroke: var(--color-calloutAccent);
     margin-left: -78px;
-    margin-bottom: var(--spacing150);
+    margin-bottom: 1.5rem;
   }
 
   p {
@@ -75,9 +80,9 @@ const wrapper = css`
 
   .close-button {
     position: absolute;
-    right: var(--spacing100);
-    top: var(--spacing100);
-    font-size: var(--fontSize175);
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.75rem;
     color: var(--color-textPrimary);
     &:hover {
       color: var(--color-textPrimary);
@@ -86,7 +91,7 @@ const wrapper = css`
 
   ${breakpointSmallDesktop} {
     h6 {
-      font-size: var(--fontSize175);
+      font-size: 1.75rem;
       line-height: 129%;
     }
   }
@@ -100,10 +105,16 @@ export function CallOutStartLibrary({
   onVisible
 }) {
   const { t } = useTranslation()
+  const hasDismiss = typeof dismissChyron !== 'undefined'
+  const viewRef = useRef(null)
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+  if (!!entry?.isIntersecting && onVisible) onVisible()
 
   function handleCloseClick() {
-    handleDismiss()
-    dismissChyron()
+    if (hasDismiss) {
+      handleDismiss()
+      dismissChyron()
+    }
   }
 
   function handleButtonClick() {
@@ -112,50 +123,47 @@ export function CallOutStartLibrary({
   }
 
   return (
-    <VisibilitySensor onVisible={onVisible}>
-      <aside className={wrapper}>
-        <div>
+    <aside className={cx(wrapper, hasDismiss && 'withDismiss')} ref={viewRef}>
+      <div>
+        {hasDismiss ? (
           <button onClick={handleCloseClick} className="close-button inline">
             <CrossIcon />
           </button>
+        ) : null}
 
-          <h6>
-            {t(
-              'discover:save-these-to-personal-library',
-              'Save these stories in a personal library'
-            )}
-          </h6>
-          <svg
-            className="zigzag"
-            xmlns="http://www.w3.org/2000/svg"
-            width="192"
-            height="13"
-            fill="none">
-            <defs />
-            <path
-              stroke="#221F1F"
-              strokeMiterlimit="10"
-              strokeWidth="2"
-              d="M0 1.306c13.72 0 13.72 9.91 27.42 9.91 13.7 0 13.7-9.91 27.42-9.91 13.72 0 13.72 9.91 27.42 9.91 13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.42 9.91c13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.44 9.91"
-            />
-          </svg>
-          <p>
-            <Trans i18nKey="discover:build-your-library">
-              Use the <span className="pocket-svg"></span> button to build your personal library of
-              articles right in Pocket. Read them when you’re free in a quiet, calm space.
-            </Trans>
-          </p>
-          <a
-            className="button primary start-button"
-            target="_blank"
-            rel="noreferrer"
-            onClick={handleButtonClick}
-            href={`${SIGNUP_URL}?utm_source=explore&utm_medium=web`}>
-            {t('discover:start-your-library', 'Start your library')}
-          </a>
-        </div>
-      </aside>
-    </VisibilitySensor>
+        <h6>
+          {t('discover:save-these-to-personal-library', 'Save these stories in a personal library')}
+        </h6>
+        <svg
+          className="zigzag"
+          xmlns="http://www.w3.org/2000/svg"
+          width="192"
+          height="13"
+          fill="none">
+          <defs />
+          <path
+            stroke="#221F1F"
+            strokeMiterlimit="10"
+            strokeWidth="2"
+            d="M0 1.306c13.72 0 13.72 9.91 27.42 9.91 13.7 0 13.7-9.91 27.42-9.91 13.72 0 13.72 9.91 27.42 9.91 13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.42 9.91c13.72 0 13.72-9.91 27.44-9.91s13.72 9.91 27.44 9.91"
+          />
+        </svg>
+        <p>
+          <Trans i18nKey="discover:build-your-library">
+            Use the <span className="pocket-svg"></span> button to build your personal library of
+            articles right in Pocket. Read them when you’re free in a quiet, calm space.
+          </Trans>
+        </p>
+        <a
+          className="button primary start-button"
+          target="_blank"
+          rel="noreferrer"
+          onClick={handleButtonClick}
+          href={`${SIGNUP_URL}?utm_source=explore&utm_medium=web`}>
+          {t('discover:start-your-library', 'Start your library')}
+        </a>
+      </div>
+    </aside>
   )
 }
 
@@ -167,8 +175,8 @@ const ExplorePosition = css`
   background-color: rgba(0, 0, 0, 0.4);
   align-items: start;
   justify-content: space-between;
-  grid-column-gap: var(--spacing150);
-  grid-row-gap: var(--spacing150);
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 1.5rem;
   /* this is a 12 column grid */
   grid-template-columns: repeat(12, 1fr);
   grid-auto-flow: dense;
@@ -176,7 +184,7 @@ const ExplorePosition = css`
   section {
     grid-column-start: 10;
     grid-column-end: span 3;
-    margin-top: var(--size250);
+    margin-top: 2.5rem;
   }
 
   ${breakpointLargeTablet} {

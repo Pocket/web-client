@@ -14,7 +14,7 @@ import { PopupMenu, PopupMenuGroup, PopupMenuItem } from 'components/popup-menu/
 import { bottomTooltip } from 'components/tooltip/tooltip'
 import { ThemeSettings } from 'components/display-settings/theme'
 import { ListSettings } from 'components/display-settings/list-modes'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 
 import { FloatingNotification } from './notification'
 
@@ -175,6 +175,7 @@ const GlobalNavAccount = ({
 
   const accountMenuTriggerRef = useRef(null)
   const menuRef = useRef(null)
+  const viewRef = useRef(null)
 
   const [menuOpen, setMenuOpen] = useState(false)
   const [focus, setFocus] = useState(false)
@@ -210,9 +211,9 @@ const GlobalNavAccount = ({
       import('common/utilities/braze/braze-lazy-load').then(({ destroy }) => destroy())
   }
 
-  function handleVisible() {
-    sendImpression('global-nav.upgrade-link')
-  }
+  const handleVisible = () => sendImpression('global-nav.upgrade-link')
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+  if (!!entry?.isIntersecting && onVisible) handleVisible()
 
   const updateFocus = (e) => {
     if (e.charCode === KEYS.SPACE || e.charCode === KEYS.ENTER) setFocus(true)
@@ -252,19 +253,18 @@ const GlobalNavAccount = ({
   ) : (
     <div ref={menuRef}>
       {!isPremium ? (
-        <VisibilitySensor onVisible={handleVisible}>
-          <a
-            href={`${PREMIUM_URL}&utm_campaign=global-nav&src=navbar`}
-            id="global-nav.upgrade-link"
-            className={`${accountLinkStyle} ${upgradeLinkStyle}`}
-            onClick={handlePremiumCase}
-            data-cy="upgrade-link">
-            <PremiumIcon />
-            <span className="label">
-              <Trans i18nKey="nav:upgrade">Upgrade</Trans>
-            </span>
-          </a>
-        </VisibilitySensor>
+        <a
+          ref={viewRef}
+          href={`${PREMIUM_URL}&utm_campaign=global-nav&src=navbar`}
+          id="global-nav.upgrade-link"
+          className={`${accountLinkStyle} ${upgradeLinkStyle}`}
+          onClick={handlePremiumCase}
+          data-cy="upgrade-link">
+          <PremiumIcon />
+          <span className="label">
+            <Trans i18nKey="nav:upgrade">Upgrade</Trans>
+          </span>
+        </a>
       ) : null}
       <div className={cx(avatarWrapper, bottomTooltip)} data-tooltip={t('nav:account', 'Account')}>
         <AvatarButton

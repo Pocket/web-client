@@ -1,6 +1,6 @@
 import { cx } from '@emotion/css'
-import React, { useRef, useEffect, useState } from 'react'
-import { Trans, useTranslation } from 'next-i18next'
+import { useRef, useEffect, useState } from 'react'
+import { useTranslation } from 'next-i18next'
 import { breakpointMediumHandset } from 'common/constants'
 import { PopupMenu, PopupMenuGroup, PopupMenuItem } from 'components/popup-menu/popup-menu'
 
@@ -19,7 +19,8 @@ import { LineHeightSettings } from './line-height'
 import { ColumnWidthSettings } from './column-width'
 import { ThemeSettings } from './theme'
 import { FONT_TYPES } from 'components/fonts/fonts'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 import { FONT_RANGE } from 'common/constants'
 import { LINE_HEIGHT_RANGE } from 'common/constants'
 import { COLUMN_WIDTH_RANGE } from 'common/constants'
@@ -109,6 +110,7 @@ export const DisplaySettings = ({
 
   const displayButtonRef = useRef(null)
   const menuRef = useRef(null)
+  const viewRef = useRef(null)
 
   useEffect(() => {
     if (!focus || !menuOpen || forceShow) return () => {}
@@ -171,9 +173,9 @@ export const DisplaySettings = ({
     setFocus(false)
   }
 
-  const handleVisible = () => {
-    onVisible('reader.display-settings')
-  }
+  const handleVisible = () => onVisible('reader.display-settings')
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+  if (!!entry?.isIntersecting && onVisible) handleVisible()
 
   return (
     <div className={displayStyles} ref={menuRef}>
@@ -213,7 +215,7 @@ export const DisplaySettings = ({
               data-cy="display-font-back"
               onClick={toggleDisplayFonts}
               icon={<ChevronLeftIcon />}>
-              <Trans i18nKey="settings:font-options">Font Options</Trans>
+              {t('settings:font-options', 'Font Options')}
             </PopupMenuItem>
           ) : (
             <PopupMenuItem
@@ -260,7 +262,7 @@ export const DisplaySettings = ({
                 />
               </>
             ) : (
-              <VisibilitySensor onVisible={handleVisible}>
+              <div ref={viewRef}>
                 <PopupMenuGroup>
                   <PopupMenuItem
                     id="reader.display-settings"
@@ -268,10 +270,10 @@ export const DisplaySettings = ({
                     href={`${PREMIUM_URL}&utm_campaign=reader-display-settings`}
                     target="_premium"
                     icon={<PremiumIcon />}>
-                    <Trans i18nKey="settings:unlock-more-options">Unlock more options</Trans>
+                    {t('settings:unlock-more-options', 'Unlock more options')}
                   </PopupMenuItem>
                 </PopupMenuGroup>
-              </VisibilitySensor>
+              </div>
             )}
           </>
         )}

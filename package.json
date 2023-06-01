@@ -151,7 +151,6 @@
     "react-popper": "2.3.0",
     "react-redux": "8.0.5",
     "react-textarea-autosize": "8.4.1",
-    "react-visibility-sensor": "5.1.1",
     "redux": "4.2.1",
     "redux-saga": "1.2.3",
     "sharp": "0.32.1",

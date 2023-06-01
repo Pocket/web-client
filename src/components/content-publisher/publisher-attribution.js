@@ -1,10 +1,10 @@
-import React from 'react'
+import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/css'
 import { getPublishedDate } from 'common/utilities/date-time/date-time'
 import { breakpointLargeHandset } from 'common/constants'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { Trans } from 'next-i18next'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
+import { useTranslation } from 'next-i18next'
 
 const AttributionWrapper = css`
   hr {
@@ -15,7 +15,7 @@ const AttributionWrapper = css`
     margin: 2rem 0;
   }
   img {
-    max-height: var(--size250);
+    max-height: 2.5rem;
   }
   p {
     margin: 2rem 0;
@@ -29,10 +29,10 @@ const AttributionWrapper = css`
       color: var(--color-textPrimary);
       font-family: var(--fontSansSerif);
       font-weight: 600;
-      font-size: var(--fontSize100);
+      font-size: 1rem;
       font-style: normal;
       display: inline-block;
-      margin: 0 1.1875rem var(--spacing100) 0;
+      margin: 0 1.1875rem 1rem 0;
     }
     a.secondary {
       font-weight: 500;
@@ -45,14 +45,14 @@ const AttributionWrapper = css`
 
     hr {
       max-width: unset;
-      margin: var(--spacing100) 0;
+      margin: 1rem 0;
     }
     p {
-      margin: var(--spacing100) 0 1.3125rem;
+      margin: 1rem 0 1.3125rem;
       font-size: 0.875em;
     }
     .publisher-follow p {
-      margin: 0 0 var(--spacing075);
+      margin: 0 0 0.75rem;
     }
   }
 `
@@ -61,35 +61,40 @@ function FollowPublisher({ leadIn, text, url, handleImpression, handleClick }) {
   const onVisible = () => handleImpression(text)
   const onClick = () => handleClick(text)
 
+  const viewRef = useRef(null)
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+  if (!!entry?.isIntersecting) onVisible()
+
   return (
-    <VisibilitySensor onVisible={onVisible}>
-      <div className="publisher-follow" data-cy="follow-publisher">
-        <p>{leadIn}</p>
-        <a
-          className="button secondary"
-          onClick={onClick}
-          href={url}
-          /* eslint-disable-next-line */
-          target="_blank"
-          rel="noreferrer">
-          {text}
-        </a>
-      </div>
-    </VisibilitySensor>
+    <div className="publisher-follow" data-cy="follow-publisher" ref={viewRef}>
+      <p>{leadIn}</p>
+      <a
+        className="button secondary"
+        onClick={onClick}
+        href={url}
+        /* eslint-disable-next-line */
+        target="_blank"
+        rel="noreferrer">
+        {text}
+      </a>
+    </div>
   )
 }
 
 function PublisherInfo({ logoWide, publishedAt, name }) {
+  const { t } = useTranslation()
+
   const publishedDate = getPublishedDate(publishedAt)
   return name ? (
     <>
       <hr />
       {logoWide ? <img src={logoWide} data-cy="publisher-img" alt={`Logo for ${name}`} /> : null}
       <p>
-        <Trans i18nKey="discover:publisher-attribution">
-          This post originally appeared on {{ name }} and was published {{ publishedDate }}. This
-          article is republished here with permission.
-        </Trans>
+        {t(
+          'discover:publisher-attribution',
+          'This post originally appeared on {{ name }} and was published {{ publishedDate }}. This article is republished here with permission.',
+          { name, publishedDate }
+        )}
       </p>
     </>
   ) : null

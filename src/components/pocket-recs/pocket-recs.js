@@ -1,11 +1,11 @@
-import React from 'react'
+import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from '@emotion/css'
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { breakpointTinyTablet } from 'common/constants'
 import { breakpointMediumTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 
@@ -124,9 +124,7 @@ export const Recommendation = ({
   handleRecImpression,
   handleRecClick
 }) => {
-  if (!rec) return null
-  const { imageUrl, title, url, publisher, target } = rec
-  const thumbnailUrl = getImageCacheUrl(imageUrl, { width: 270, height: 150 })
+  const viewRef = useRef(null)
 
   const handleVisible = () => {
     handleRecImpression({ position, corpusRecommendationId, url })
@@ -136,20 +134,25 @@ export const Recommendation = ({
     handleRecClick({ position, corpusRecommendationId, url })
   }
 
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+  if (!!entry?.isIntersecting && onVisible) handleVisible()
+
+  if (!rec) return null
+  const { imageUrl, title, url, publisher, target } = rec
+  const thumbnailUrl = getImageCacheUrl(imageUrl, { width: 270, height: 150 })
+
   return (
-    <VisibilitySensor onVisible={handleVisible}>
-      <li className={recommendationStyles} data-cy="pocket-recs-article">
-        <Link href={url} className="thumbnail" onClick={handleClick}>
-          <img src={thumbnailUrl} alt={`Thumbnail image for article`} />
+    <li className={recommendationStyles} data-cy="pocket-recs-article" ref={viewRef}>
+      <Link href={url} className="thumbnail" onClick={handleClick}>
+        <img src={thumbnailUrl} alt={`Thumbnail image for article`} />
+      </Link>
+      <div className="details">
+        <Publisher name={publisher} logo={target?.publisher?.logoWideBlack} />
+        <Link href={url} onClick={handleClick}>
+          <h4 className="h5">{title}</h4>
         </Link>
-        <div className="details">
-          <Publisher name={publisher} logo={target?.publisher?.logoWideBlack} />
-          <Link href={url} onClick={handleClick}>
-            <h4 className="h5">{title}</h4>
-          </Link>
-        </div>
-      </li>
-    </VisibilitySensor>
+      </div>
+    </li>
   )
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { css, cx } from '@emotion/css'
 import { Trans } from 'next-i18next'
 import BigDiamondDark from 'static/images/reader-upsells/BigDiamond-dark.svg'
@@ -24,7 +24,7 @@ import TypeLight from 'static/images/reader-upsells/Type-light.svg'
 import TypeSepia from 'static/images/reader-upsells/Type-sepia.svg'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
 import { breakpointTinyTablet } from 'common/constants'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 import { PREMIUM_URL } from 'common/constants'
 
 const borderStyles = css`
@@ -519,20 +519,19 @@ function _determineItem() {
 
 export const BottomUpsell = ({ maxWidth, onVisible }) => {
   const [variant] = useState(_determineItem())
+  const viewRef = useRef(null)
 
-  const handleVisible = () => {
-    onVisible('reader.bottom.premium')
-  }
+  const handleVisible = () => onVisible('reader.bottom.premium')
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+  if (!!entry?.isIntersecting && onVisible) handleVisible()
 
   const Advertisement = AdsOptions[variant]
 
   return (
-    <VisibilitySensor onVisible={handleVisible}>
-      <aside className={borderStyles}>
-        <div className={upsellWrapper} style={{ maxWidth }}>
-          <Advertisement />
-        </div>
-      </aside>
-    </VisibilitySensor>
+    <aside className={borderStyles} ref={viewRef}>
+      <div className={upsellWrapper} style={{ maxWidth }}>
+        <Advertisement />
+      </div>
+    </aside>
   )
 }

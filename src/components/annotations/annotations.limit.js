@@ -1,10 +1,12 @@
 /* eslint  react/jsx-no-target-blank: 0*/
+import { useRef } from 'react'
 import { css } from '@emotion/css'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { PremiumIcon } from 'components/icons/PremiumIcon'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
-import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
-import { Trans, useTranslation } from 'next-i18next'
+import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
+
+import { useTranslation } from 'next-i18next'
 import { PREMIUM_URL } from 'common/constants'
 
 const upsellWrapper = css`
@@ -20,26 +22,29 @@ const upsellWrapper = css`
 `
 
 export const LimitNotice = ({ onVisible }) => {
+  const { t } = useTranslation()
+  const viewRef = useRef(null)
+
   const handleVisible = () => onVisible('highlights.limit.sidebar')
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+  if (!!entry?.isIntersecting && onVisible) handleVisible()
 
   return (
-    <VisibilitySensor onVisible={handleVisible}>
-      <div className={upsellWrapper}>
-        <p>
-          <PremiumIcon />{' '}
-          <Trans i18nKey="annotations:highlight-limit-copy">
-            You’re limited to 3 highlights per article. Pocket Premium members get unlimited
-            highlights.
-          </Trans>
-        </p>
-        <ArrowLink
-          id="highlights.limit.sidebar"
-          href={`${PREMIUM_URL}&utm_campaign=highlights-limit-sidebar`}
-          target="_blank">
-          <Trans i18nKey="annotations:upgrade-now">Upgrade now</Trans>
-        </ArrowLink>
-      </div>
-    </VisibilitySensor>
+    <div className={upsellWrapper} ref={viewRef}>
+      <p>
+        <PremiumIcon />{' '}
+        {t(
+          'annotations:highlight-limit-copy',
+          'You’re limited to 3 highlights per article. Pocket Premium members get unlimited highlights.'
+        )}
+      </p>
+      <ArrowLink
+        id="highlights.limit.sidebar"
+        href={`${PREMIUM_URL}&utm_campaign=highlights-limit-sidebar`}
+        target="_blank">
+        {t('annotations:upgrade-now', 'Upgrade now')}
+      </ArrowLink>
+    </div>
   )
 }
 
@@ -48,7 +53,9 @@ export const ModalLimitNotice = ({ showModal, closeModal, onVisible }) => {
   const { t } = useTranslation()
 
   const handleVisible = () => onVisible('highlights.limit.modal')
-
+  const viewRef = useRef(null)
+  const entry = useIntersectionObserver(viewRef, { freezeOnceVisible: true, threshold: 0.5 })
+  if (!!entry?.isIntersecting && onVisible) handleVisible()
   return (
     <Modal
       title={t('annotations:highlight-limit', 'Highlight Limit')}
@@ -57,25 +64,23 @@ export const ModalLimitNotice = ({ showModal, closeModal, onVisible }) => {
       screenReaderLabel={t('annotations:highlight-limit', 'Highlight Limit')}
       handleClose={closeModal}>
       <ModalBody>
-        <VisibilitySensor onVisible={handleVisible}>
-          <p>
-            <PremiumIcon />{' '}
-            <Trans i18nKey="annotations:highlight-limit-copy">
-              You’re limited to 3 highlights per article. Pocket Premium members get unlimited
-              highlights.
-            </Trans>{' '}
-            <ArrowLink
-              id="reader.highlights.limit"
-              href={`${PREMIUM_URL}&utm_campaign=highlights-limit-modal`}
-              target="_blank">
-              <Trans i18nKey="annotations:upgrade-now">Upgrade now</Trans>
-            </ArrowLink>
-          </p>
-        </VisibilitySensor>
+        <p ref={viewRef}>
+          <PremiumIcon />{' '}
+          {t(
+            'annotations:highlight-limit-copy',
+            'You’re limited to 3 highlights per article. Pocket Premium members get unlimited highlights.'
+          )}{' '}
+          <ArrowLink
+            id="reader.highlights.limit"
+            href={`${PREMIUM_URL}&utm_campaign=highlights-limit-modal`}
+            target="_blank">
+            {t('annotations:upgrade-now', 'Upgrade now')}
+          </ArrowLink>
+        </p>
       </ModalBody>
       <ModalFooter>
         <button className="primary" type="submit" onClick={closeModal}>
-          <Trans i18nKey="annotations:close">Close</Trans>
+          {t('annotations:close', 'Close')}
         </button>
       </ModalFooter>
     </Modal>
