@@ -1,6 +1,9 @@
 import '../../public/static/pocket-web-ui.css'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
 
+import createCache from '@emotion/cache'
+import { CacheProvider } from '@emotion/react'
+
 import { ViewportProvider } from 'components/viewport-provider/viewport-provider'
 import { appWithTranslation } from 'next-i18next'
 
@@ -31,6 +34,8 @@ import { DevTools } from 'connectors/dev-tools/dev-tools'
 
 /** App
  --------------------------------------------------------------- */
+const cache = createCache({ key: 'next' })
+ 
 function PocketWebClient({ Component, pageProps, err }) {
   // Initialize app once per page load
   const dispatch = useDispatch()
@@ -143,7 +148,9 @@ function PocketWebClient({ Component, pageProps, err }) {
       <ThirdPartyInit />
       <DevTools />
       <Shortcuts />
-      {shouldRender ? <Component {...pageProps} err={err} /> : null}
+      <CacheProvider value={cache}>
+        {shouldRender ? <Component {...pageProps} err={err} /> : null}
+      </CacheProvider>
     </ViewportProvider>
   )
 }
