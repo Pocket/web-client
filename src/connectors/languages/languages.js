@@ -17,7 +17,7 @@ const LANGUAGE_BY_LOCALE = {
   'pt-BR': 'Portuguese (Brazil)',
   ru: 'Russian',
   es: 'Spanish (Spain)',
-  'es-XL': 'Spanish (Latin America)'
+  'es-LA': 'Spanish (Latin America)'
 }
 
 export function Languages() {

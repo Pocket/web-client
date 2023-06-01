@@ -10,7 +10,6 @@ function inferInternationalizedLang() {
     'de-DE': ['de', 'de-DE'],
     'es-ES': ['es', 'es-ES'],
     'es-LA': ['es-LA'],
-    'es-XL': ['es-XL'],
     'fr-FR': ['fr', 'fr-FR'],
     'fr-CA': ['fr-CA'],
     'it-IT': ['it', 'it-IT'],
