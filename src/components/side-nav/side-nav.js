@@ -143,21 +143,6 @@ export const sideNavItem = css`
     margin-left: 0.75rem;
   }
 
-  .badge {
-    margin-left: 8px;
-    padding: 2px 8px;
-    background: var(--color-teal100);
-    border: 1px solid var(--color-teal100);
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    color: var(--color-teal50);
-    ${breakpointSmallDesktop} {
-      display: none;
-    }
-  }
-
   &:hover {
     color: var(--color-actionPrimary);
     background-color: transparent;
@@ -179,10 +164,6 @@ export const sideNavItem = css`
       &.inactive {
         display: none;
       }
-    }
-    .badge {
-      background: var(--color-white100);
-      border-color: var(--color-white100);
     }
   }
 `

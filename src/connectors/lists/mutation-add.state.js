@@ -14,7 +14,7 @@ import { LIST_CREATE_SUCCESS } from 'actions'
  --------------------------------------------------------------- */
 export const mutateListAddItem = (id) => ({ type: LIST_ADD_ITEM_REQUEST, id })
 export const mutateListAddCancel = () => ({ type: LIST_ADD_ITEM_CANCEL })
-export const mutateListAddConfirm = ({ externalId, listTitle }) => ({ type: LIST_ADD_ITEM_CONFIRM, externalId, listTitle })
+export const mutateListAddConfirm = ({ externalId, listTitle }) => ({ type: LIST_ADD_ITEM_CONFIRM, externalId, listTitle }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -50,13 +50,12 @@ export const mutationListAddReducers = (state = initialState, action) => {
 
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-export const mutationListAddSagas = [
-  takeLatest(LIST_ADD_ITEM_REQUEST, listAddItem)
-]
+export const mutationListAddSagas = [takeLatest(LIST_ADD_ITEM_REQUEST, listAddItem)]
 
 /** SAGA :: SELECTORS
  --------------------------------------------------------------- */
 const getItem = (state, id) => state.itemsDisplay[id]
+const getListLength = (state, id) => state.listsDisplay[id]?.listItemIds?.length
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -72,6 +71,7 @@ function* listAddItem({ id }) {
   try {
     const { externalId, listTitle } = confirm
     const { givenUrl, excerpt, thumbnail, title, publisher, itemId } = yield select(getItem, id)
+    const listLength = yield select(getListLength, externalId)
 
     const data = {
       url: givenUrl,
@@ -80,7 +80,8 @@ function* listAddItem({ id }) {
       title,
       publisher,
       itemId,
-      listExternalId: externalId
+      listExternalId: externalId,
+      sortOrder: listLength + 1
     }
 
     yield call(createShareableListItem, data)

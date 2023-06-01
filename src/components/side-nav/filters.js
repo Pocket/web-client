@@ -52,7 +52,6 @@ export function FiltersSideNav({
               <ListViewAltIcon className="side-nav-icon inactive" />
               <ListViewAltFilledIcon className="side-nav-icon active" />
               {t('nav:all-lists', 'All Lists')}
-              <span className="badge">{t('nav:new', 'New')}</span>
             </button>
           </Link>
           {listNames.length
