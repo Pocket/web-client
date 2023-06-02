@@ -12,6 +12,7 @@ pids
 
 # Coverage directory used by tools like istanbul
 coverage
+junit.xml
 
 # node-waf configuration
 .lock-wscript
@@ -115,3 +116,4 @@ cdktf.out/
 
 # Typescript
 next-env.d.ts
+
