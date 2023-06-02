@@ -1,0 +1,22 @@
+{
+  "decrease-column-width" : "Spaltenbreite verringern",
+  "decrease-line-height" : "Zeilenhöhe verringern",
+  "decrease-text-size" : "Text verkleinern",
+  "display-items-as-a-grid" : "Elemente als Raster anzeigen",
+  "display-items-as-a-list" : "Elemente als Liste anzeigen",
+  "display-items-in-detail" : "Elemente im Detail anzeigen",
+  "display-settings" : "Anzeigeeinstellungen",
+  "font-options" : "Verfügbare Schriftarten",
+  "increase-column-width" : "Spaltenbreite erhöhen",
+  "increase-line-height" : "Zeilenhöhe erhöhen",
+  "increase-text-size" : "Text vergrößern",
+  "open-display-settings" : "Anzeigeeinstellungen öffnen",
+  "sort-newest" : "Neuste zuerst",
+  "sort-oldest" : "Älteste zuerst",
+  "sort-options" : "Sortieroptionen",
+  "sort-relevance" : "Nach Relevanz",
+  "theme-dark" : "Dunkel",
+  "theme-light" : "Hell",
+  "theme-sepia" : "Sepia",
+  "unlock-more-options" : "Weitere Optionen freischalten"
+}

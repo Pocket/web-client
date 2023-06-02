@@ -1,0 +1,22 @@
+{
+  "decrease-column-width" : "Уменьшить ширину столбцов",
+  "decrease-line-height" : "Уменьшить высоту строки",
+  "decrease-text-size" : "Уменьшение размера шрифта",
+  "display-items-as-a-grid" : "Показать материалы в виде сетки",
+  "display-items-as-a-list" : "Показать материалы в виде списка",
+  "display-items-in-detail" : "Показать подробности о материале",
+  "display-settings" : "Отобразить настройки",
+  "font-options" : "Настройки шрифтов",
+  "increase-column-width" : "Увеличить ширину столбцов",
+  "increase-line-height" : "Увеличить высоту строки",
+  "increase-text-size" : "Увеличение размера шрифта",
+  "open-display-settings" : "Откройте настройки отображения",
+  "sort-newest" : "Сначала новые",
+  "sort-oldest" : "Сначала старые",
+  "sort-options" : "Настройки сортировки",
+  "sort-relevance" : "По релевантности",
+  "theme-dark" : "Темный",
+  "theme-light" : "Светлый",
+  "theme-sepia" : "Сепия",
+  "unlock-more-options" : "Разблокировать больше функций"
+}

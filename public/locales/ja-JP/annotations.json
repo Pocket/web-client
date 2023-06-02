@@ -1,0 +1,17 @@
+{
+  "added-date" : "{{date}} に追加済み",
+  "added-many-days-ago" : "{{date}} 日前に追加済み",
+  "added-one-day-ago" : "{{date}} 日前に追加済み",
+  "added-today" : "今日追加",
+  "close" : "閉じる",
+  "highlight" : "Highlight",
+  "highlight-limit" : "ハイライトの上限",
+  "highlight-limit-copy" : "記事1件につき3回までのハイライトが可能です。Pocket Premium メンバーになれば、上限なしにお好きなだけハイライトすることができます。",
+  "just-now" : "たった今",
+  "my-highlights" : "マイハイライト",
+  "open-highlights-menu" : "ハイライトメニューを開く",
+  "share" : "共有",
+  "upgrade-now" : "今すぐアップグレード",
+  "when-you-select-text" : "閲覧中に文字を選択すると、ここに表示されます。",
+  "you-havent-highlighted" : "まだ何もハイライトしていません。"
+}

@@ -1,0 +1,11 @@
+{
+  "a-friend-shared" : "Ein Freund hat etwas mit dir in Pocket geteilt. Bestätige bitte deine E-Mai-Adresse, um es dir anzusehen:",
+  "activity" : "Aktivität",
+  "confirmation" : "Bestätigung gesendet! Bitte sieh in deinem Posteingang nach.",
+  "dismiss" : "Verwerfen",
+  "inbox-is-empty" : "Dein Posteingang ist leer",
+  "messages" : "Nachrichten",
+  "oops" : "Hoppla! Da ist etwas schiefgegangen. Bitte versuche es später erneut.",
+  "resend-confirmation" : "Bestätigung erneut senden",
+  "when-someone-shares" : "Wenn jemand Elemente per „Einem Freund schicken“ mit dir teilt, erscheinen diese hier."
+}

@@ -1,0 +1,12 @@
+{
+  "all-tags" : "所有標籤",
+  "loading-suggested" : "……正在載入建議標籤",
+  "not-tagged" : "未標記",
+  "pocket-premium" : "Pocket Premium",
+  "recently-tagged-items" : "最近標記的項目",
+  "search-for-your-tags" : "搜尋您的標籤",
+  "start-tagging" : "開始向項目新增標籤，以便在此處看到相關推薦。",
+  "tag-stories-faster" : "更快速地標記篇章 — 若要獲取標籤建議，請使用",
+  "tags-character-limit" : "標籤長度限於 25 個字元",
+  "unable-to-find-suggested" : "找不到任何建議用於此項目的標籤。"
+}

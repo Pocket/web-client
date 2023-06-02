@@ -1,0 +1,23 @@
+{
+  "meta-description": "웹에서 아티클을 저장하고 조용한 개인 공간에서 읽을 수 있도록 Pocket이 Firefox에 내장되었습니다. 자세히 알아보고 라이브러리 구축을 시작하십시오.",
+  "meta-title": "Pocket for Firefox로 흥미로운 읽을거리로 가득한 개인 라이브러리를 만들어 보십시오",
+  "pocket-for-firefox": "Firefox용 Pocket",
+  "web-page-saving-to-pocket": "Pocket 라이브러리에 저장되고 있는 웹 페이지. 삽화.",
+  "hand-holding-web-page": "웹 페이지를 쥐고 있는 손. 삽화.",
+  "mobile-app-screen": "헤드폰이 있는 모바일 앱 화면. 삽화.",
+  "save-button-for-internet": "인터넷용 저장 버튼",
+  "click-save-wherever-you-are": "온라인 상태일 때 저장하려는 자료가 보이면 언제든 Firefox에서 <1> 버튼을 클릭하십시오. 읽기에 좋은 시간이 되면 Pocket에서 곧바로 목록으로 이동합니다.",
+  "personal-library": "흥미로운 읽을거리로 가득한 개인 라이브러리를 구축하십시오.",
+  "save-across-web": "Firefox에 포함된 <1></1> 버튼을 사용하면 웹에서 아티클을 저장하고 조용한 개인 공간에서 읽을 수 있습니다.",
+  "activate-pocket-in-firefox": "Firefox에서 Pocket 활성화",
+  "more-ways-to-sign-up": "더 많은 등록 방법",
+  "your-private-reading-nook": "사적인 독서 공간",
+  "pocket-strips-away-distractions": "저장한 자료를 읽을 준비가 되면 Pocket이 읽기에 좋은 조용한 공간을 제공합니다. 배너나 팝업 창과 같이 인터넷의 산만함을 모두 없애 읽는 데 더욱 집중할 수 있습니다.",
+  "listen": "듣기",
+  "highlights": "하이라이트",
+  "tags": "태그",
+  "special-features-for-focused-reading": "읽는 데 집중할 수 있는 특수 기능.",
+  "use-the-pocket-app-features": "Pocket 앱의 오디오 재생 옵션을 사용하여 스토리를 들을 수 있습니다. 다크 모드와 글꼴 옵션을 사용하여 Pocket에서 스토리가 표시되는 방식을 맞춤 설정하십시오. 태그를 사용해서 저장 내용을 추적하고 중요한 구절에는 하이라이트 표시를 할 수 있습니다. 오프라인에서도 읽기가 가능합니다.",
+  "start-your-personal-library": "지금 개인 라이브러리 구축을 시작하세요",
+  "get-pocket-premium-for-features": "최고의 Pocket 경험을 할 준비가 되셨나요? <1>Pocket Premium</1> 으로 업그레이드하면 저장하는 모든 것의 개인 백업 복사본을 포함하여 다양한 기능을 활용할 수 있습니다."
+}

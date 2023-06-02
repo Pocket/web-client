@@ -1,0 +1,11 @@
+{
+  "a-friend-shared" : "Un(e) ami(e) a partagé avec vous du contenu dans Pocket. Pour le voir, veuillez confirmer votre adresse e-mail :",
+  "activity" : "Activité",
+  "confirmation" : "La confirmation a été envoyée ! Veuillez consulter votre boîte de réception.",
+  "dismiss" : "Ignorer",
+  "inbox-is-empty" : "Votre boîte de réception est vide.",
+  "messages" : "Messages",
+  "oops" : "Oups ! Un problème est survenu. Veuillez réessayer ultérieurement.",
+  "resend-confirmation" : "Renvoyer la confirmation",
+  "when-someone-shares" : "Lorsqu'une personne partage des éléments avec vous via la fonction Envoyer à un(e) ami(e), ils apparaissent ici."
+}

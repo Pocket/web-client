@@ -1,0 +1,10 @@
+{
+  "item-count_one" : "{{count}} element",
+  "item-count_other" : "Elementy: {{count}}",
+  "list" : "Lista",
+  "story-count_one" : "Historie: {{count}}",
+  "story-count_other" : "Historie: {{count}}",
+  "tag-count_one" : "{{count}} tag",
+  "tag-count_other" : "Tagi: {{count}}",
+  "time-to-read" : "Min: {{timeToRead}}"
+}

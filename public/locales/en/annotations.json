@@ -1,0 +1,17 @@
+{
+  "added-date": "Added {{date}}",
+  "added-many-days-ago": "Added {{date}} days ago",
+  "added-one-day-ago": "Added {{date}} day ago",
+  "added-today": "Added Today",
+  "close": "Close",
+  "highlight": "Highlight",
+  "highlight-limit": "Highlight Limit",
+  "highlight-limit-copy": "You’re limited to 3 highlights per article. Pocket Premium members get unlimited highlights.",
+  "just-now": "Just now",
+  "my-highlights": "My Highlights",
+  "open-highlights-menu": "Open Highlights Menu",
+  "share": "Share",
+  "upgrade-now": "Upgrade now",
+  "when-you-select-text": "When you select text while you’re reading, it’ll appear here.",
+  "you-havent-highlighted": "You haven’t highlighted anything yet"
+}

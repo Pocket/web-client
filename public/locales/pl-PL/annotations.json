@@ -1,0 +1,17 @@
+{
+  "added-date" : "Data dodania: {{date}}",
+  "added-many-days-ago" : "Dodano {{date}} dni temu",
+  "added-one-day-ago" : "Dodano {{date}} dzień temu",
+  "added-today" : "Dodano dzisiaj",
+  "close" : "Zamknij",
+  "highlight" : "Polecane",
+  "highlight-limit" : "Limit wyróżnień",
+  "highlight-limit-copy" : "Użytkownik jest ograniczony do 3 wyróżnień na artykuł. Użytkownicy Pocket Premium mają do dyspozycji nieograniczoną liczbę wyróżnień.",
+  "just-now" : "teraz",
+  "my-highlights" : "Moje wyróżnienia",
+  "open-highlights-menu" : "Otwórz menu Wyróżnienia",
+  "share" : "Udostępnij",
+  "upgrade-now" : "Zaktualizuj teraz",
+  "when-you-select-text" : "Tutaj pojawi się tekst zaznaczony podczas czytania.",
+  "you-havent-highlighted" : "Jeszcze nie użyto wyróżnień"
+}

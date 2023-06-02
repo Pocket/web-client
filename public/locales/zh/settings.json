@@ -1,0 +1,22 @@
+{
+  "decrease-column-width" : "减少列宽",
+  "decrease-line-height" : "减少行高",
+  "decrease-text-size" : "缩小字体",
+  "display-items-as-a-grid" : "将项目显示为网格",
+  "display-items-as-a-list" : "将项目显示为列表",
+  "display-items-in-detail" : "详细显示项目",
+  "display-settings" : "显示设置",
+  "font-options" : "字体选项",
+  "increase-column-width" : "增加列宽",
+  "increase-line-height" : "增加行高",
+  "increase-text-size" : "放大字体",
+  "open-display-settings" : "打开显示设置",
+  "sort-newest" : "最新在前",
+  "sort-oldest" : "最早在前",
+  "sort-options" : "排序选项",
+  "sort-relevance" : "按相关性",
+  "theme-dark" : "深色",
+  "theme-light" : "浅色",
+  "theme-sepia" : "棕褐色",
+  "unlock-more-options" : "解锁更多选项"
+}

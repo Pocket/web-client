@@ -1,0 +1,22 @@
+{
+  "decrease-column-width" : "열 너비 줄이기",
+  "decrease-line-height" : "라인 높이 줄이기",
+  "decrease-text-size" : "텍스트 크기 축소",
+  "display-items-as-a-grid" : "항목을 격자로 표시",
+  "display-items-as-a-list" : "항목을 목록으로 표시",
+  "display-items-in-detail" : "항목을 자세히 표시",
+  "display-settings" : "디스플레이 설정",
+  "font-options" : "글꼴 옵션",
+  "increase-column-width" : "열 너비 늘리기",
+  "increase-line-height" : "라인 높이 늘리기",
+  "increase-text-size" : "텍스트 크기 확대",
+  "open-display-settings" : "디스플레이 설정 열기",
+  "sort-newest" : "최신 것 먼저",
+  "sort-oldest" : "오래된 것 먼저",
+  "sort-options" : "정렬 옵션",
+  "sort-relevance" : "관련성 기준",
+  "theme-dark" : "어둡게",
+  "theme-light" : "밝게",
+  "theme-sepia" : "세피아",
+  "unlock-more-options" : "추가 옵션 잠금 해제"
+}

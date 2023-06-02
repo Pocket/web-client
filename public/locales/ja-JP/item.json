@@ -1,0 +1,10 @@
+{
+  "item-count_one" : "{{count}} 件のアイテム",
+  "item-count_other" : "{{count}} 件のアイテム",
+  "list" : "リスト",
+  "story-count_one" : "{{count}} 件のストーリー",
+  "story-count_other" : "{{count}} 件のストーリー",
+  "tag-count_one" : "{{count}} 件のタグ",
+  "tag-count_other" : "{{count}} 件のタグ",
+  "time-to-read" : "{{timeToRead}} 分"
+}

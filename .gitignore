@@ -89,12 +89,6 @@ cypress/videos
 cypress/screenshots
 cypress/mochawesome
 
-# Locale files - We are pulling these from another repo and they are
-# copied over during the build step.
-public/static/locales/
-public/locales/
-.scripts/localization/config.json
-
 .scripts/qa/config.json
 
 # Icon files — We build these from raw svgs (in case they need adjustment)

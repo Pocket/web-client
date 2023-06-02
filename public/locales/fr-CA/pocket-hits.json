@@ -1,0 +1,17 @@
+{
+  "signup-next-step": "Prochaine étape : vérifiez votre Inbox",
+  "signup-next-step-confirm": "Nous venons d'envoyer un courriel pour confirmer votre abonnement. Cliquez sur le bouton apparaissant dans le courriel et vous serez prêt à décoller.",
+  "signup-confirm-subscription": "Confirmez votre abonnement au bulletin d'information de Pocket",
+  "signup-one-click-away": "Vous êtes à un clic de lectures fascinantes.",
+  "signup-confirm-email": "Confirmer l'adresse courriel",
+  "signup-email-preferences": "Vous recevez ce courriel, car vous vous êtes inscrit à Pocket. Pour mettre à jour vos préférences de courriel, cliquez <1>ici<1>.",
+  "signup-thanks": "Merci pour votre abonnement!",
+  "signup-check-inbox": "Consultez votre inbox tous les jours de la semaine pour obtenir des recommandations d'histoires provenant du Web.",
+  "signup-article-recommend": "En attendant, consultez certains des articles en anglais les plus populaires que nous recommandons.",
+  "signup-confirmation-link-expired": "Ce lien a expiré",
+  "signup-return-to-subscribe": "Vous pouvez toujours vous abonner au bulletin d'information de Pocket, qui vous propose des lectures fascinantes chaque jour de la semaine. Cliquez <1>ici</1> pour revenir à la page d'inscription au bulletin d'information.",
+  "discover-must-read": "Découvrez les articles à lire absolument",
+  "unsubscribe": "Vous désinscrire",
+  "privacy-policy": "Politique de confidentialité",
+  "help": "Aide"
+}
