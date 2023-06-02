@@ -475,6 +475,7 @@ async function setToken(settings) {
     console.log(
       'https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line'
     )
+    console.log('Additional setup for GPG')
     const { token } = await prompt({
       type: 'input',
       name: 'token',
