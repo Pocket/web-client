@@ -6,22 +6,18 @@ const { Bar } = cliProgress
 
 function inferInternationalizedLang() {
   const locales = {
-    en: ['en', 'en-KE'],
-    'de-DE': ['de', 'de-DE'],
-    'es-ES': ['es', 'es-ES'],
-    'es-LA': ['es-LA'],
-    'fr-FR': ['fr', 'fr-FR'],
-    'fr-CA': ['fr-CA'],
-    'it-IT': ['it', 'it-IT'],
-    'ja-JP': ['ja', 'ja-JP'],
-    'ko-KR': ['ko', 'ko-KR'],
-    'nl-NL': ['nl', 'nl-NL'],
-    'pl-PL': ['pl', 'pl-PL'],
-    'pt-PT': ['pt', 'pt-PT'],
-    'pt-BR': ['pt-BR'],
-    'ru-RU': ['ru', 'ru-RU'],
-    'zh-CN': ['zh', 'zh-CN'],
-    'zh-TW': ['zh-TW']
+    en: ['en-KE'],
+    'de-DE': ['de'],
+    'es-ES': ['es'],
+    'fr-FR': ['fr'],
+    'it-IT': ['it'],
+    'ja-JP': ['ja'],
+    'ko-KR': ['ko'],
+    'nl-NL': ['nl'],
+    'pl-PL': ['pl'],
+    'pt-PT': ['pt'],
+    'ru-RU': ['ru'],
+    'zh-CN': ['zh']
   }
   const progressBar = new Bar({
     barCompleteChar: '•',
@@ -46,10 +42,7 @@ function inferInternationalizedLang() {
 function distributeLocalizations(source, destinations) {
   destinations.forEach((destination) => {
     try {
-      copySync(
-        `node_modules/@pocket/web-localization/locales/${source}`,
-        `public/locales/${destination}`
-      )
+      copySync(`public/locales/${source}`, `public/locales/${destination}`)
     } catch (err) {
       console.error(err)
     }
