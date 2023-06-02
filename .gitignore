@@ -89,6 +89,8 @@ cypress/videos
 cypress/screenshots
 cypress/mochawesome
 
+# Sensitive artifact files
+.scripts/localization/config.json
 .scripts/qa/config.json
 
 # Icon files — We build these from raw svgs (in case they need adjustment)
