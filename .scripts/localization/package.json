@@ -1,23 +1,15 @@
 {
-  "name": "localization-scripts",
+  "name": "locale",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "chalk": "5.0.1",
-    "cli-progress": "^3.11.1",
-    "enquirer": "2.3.6",
-    "fs-extra": "10.1.0",
-    "gulp-sort": "^2.0.0",
-    "i18next-parser": "^6.5.0",
-    "isomorphic-unfetch": "3.1.0",
-    "simple-git": "3.7.1",
-    "vinyl-fs": "^3.0.3"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "extract": "i18next '../../src/**/*.{js,jsx,ts,tsx}'"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "i18next-parser": "^8.0.0"
+  }
 }
