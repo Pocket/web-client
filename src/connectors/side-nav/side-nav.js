@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
-import { getAllListsAction } from 'containers/lists/lists.state'
+import { getRecentListsAction } from 'containers/lists/lists.state'
 
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
@@ -23,7 +23,7 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
   const showLists = enrolledPilot || enrolledRelease
 
   useEffect(() => {
-    if (showLists) dispatch(getAllListsAction())
+    if (showLists) dispatch(getRecentListsAction())
   }, [dispatch, showLists])
 
   const trackMenuClick = (label) => dispatch(sendSnowplowEvent('side-nav', { label }))

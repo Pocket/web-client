@@ -4,6 +4,7 @@ import { getShareableListPilotStatus } from 'common/api/queries/get-shareable-li
 import { getShareableLists } from 'common/api/queries/get-shareable-lists'
 import { getShareableList } from 'common/api/queries/get-shareable-list'
 import { getShareableListPublic } from 'common/api/queries/get-shareable-list-public'
+import { getRecentShareableLists } from 'common/api/queries/get-shareable-lists-recent'
 
 import { LIST_ITEMS_SUCCESS } from 'actions'
 
@@ -24,14 +25,21 @@ import { LIST_CREATE_SUCCESS } from 'actions'
 import { LIST_DELETE_SUCCESS } from 'actions'
 import { LIST_UPDATE_SUCCESS } from 'actions'
 
+import { LIST_RECENT_REQUEST } from 'actions'
+import { LIST_RECENT_SUCCESS } from 'actions'
+import { LIST_RECENT_FAILURE } from 'actions'
+import { LIST_ADD_ITEM_SUCCESS } from 'actions'
+import { LIST_DELETE_ITEM_SUCCESS } from 'actions'
+
 import { VARIANTS_SAVE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
 export const checkListsPilotStatus = () => ({ type: LIST_CHECK_PILOT_STATUS_REQUEST })
-export const listsItemsSetSortOrder = (sortOrder) => ({type: LIST_PAGE_SET_SORT_ORDER_REQUEST, sortOrder}) //prettier-ignore
+export const listsItemsSetSortOrder = (sortOrder) => ({ type: LIST_PAGE_SET_SORT_ORDER_REQUEST, sortOrder }) //prettier-ignore
 export const getAllListsAction = () => ({ type: LIST_ALL_REQUEST })
 export const getIndividualListAction = (id) => ({ type: LIST_INDIVIDUAL_REQUEST, id })
+export const getRecentListsAction = () => ({ type: LIST_RECENT_REQUEST })
 
 /** LISTS PAGE REDUCERS
  --------------------------------------------------------------- */
@@ -59,29 +67,14 @@ export const pageListsInfoReducers = (state = initialState, action) => {
       return { ...state, sortOrder }
     }
 
-    case LIST_CREATE_SUCCESS: {
-      const { externalId, listTitle } = action
-      const listsIds = [externalId, ...state.listsIds]
-      const titleToIdList = { [listTitle]: externalId, ...state.titleToIdList }
-      return { ...state, titleToIdList, listsIds }
-    }
-
-    case LIST_DELETE_SUCCESS: {
-      const { deletedId } = action
-      const listsIds = state.listsIds.filter((id) => id !== deletedId)
-      const titleToIdList = listDeleteHelper(state, deletedId)
-      return { ...state, titleToIdList, listsIds }
-    }
-
-    case LIST_UPDATE_SUCCESS: {
-      const { externalId, title } = action
-      const titleToIdList = listUpdateHelper(state, externalId, title)
-      return { ...state, titleToIdList }
-    }
-
     case LIST_ALL_REQUEST_SUCCESS: {
       const { externalIds, titleToIdList } = action
       return { ...state, loading: false, titleToIdList, listsIds: externalIds }
+    }
+
+    case LIST_RECENT_SUCCESS: {
+      const { listsIds, titleToIdList } = action
+      return { ...state, listsIds, titleToIdList }
     }
 
     default:
@@ -89,27 +82,24 @@ export const pageListsInfoReducers = (state = initialState, action) => {
   }
 }
 
-const listDeleteHelper = (state, deletedId) =>
-  Object.keys(state.titleToIdList)
-    .filter((title) => state.titleToIdList[title] !== deletedId)
-    .reduce((obj, title) => ({ ...obj, [title]: state.titleToIdList[title] }), {})
-
-const listUpdateHelper = (state, externalId, title) =>
-  Object.keys(state.titleToIdList).reduce(
-    (obj, name) => ({
-      ...obj,
-      [state.titleToIdList[name] === externalId ? title : name]: state.titleToIdList[name]
-    }),
-    {}
-  )
-
 /** SAGAS :: WATCHERS
  --------------------------------------------------------------- */
 export const pageListsInfoSagas = [
   takeEvery(LIST_CHECK_PILOT_STATUS_REQUEST, fetchListPilotStatus),
   takeEvery(LIST_PAGE_SET_SORT_ORDER_REQUEST, adjustSortOrder),
   takeEvery(LIST_ALL_REQUEST, getAllLists),
-  takeEvery(LIST_INDIVIDUAL_REQUEST, getIndividualList)
+  takeEvery(LIST_INDIVIDUAL_REQUEST, getIndividualList),
+  takeEvery(
+    [
+      LIST_RECENT_REQUEST,
+      LIST_CREATE_SUCCESS,
+      LIST_DELETE_SUCCESS,
+      LIST_UPDATE_SUCCESS,
+      LIST_ADD_ITEM_SUCCESS,
+      LIST_DELETE_ITEM_SUCCESS
+    ],
+    getRecentLists
+  )
 ]
 
 /** SAGA :: SELECTORS
@@ -159,6 +149,21 @@ function* getIndividualList({ id }) {
     yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
   } catch (error) {
     yield put({ type: LIST_INDIVIDUAL_FAILURE, error })
+  }
+}
+
+function* getRecentLists() {
+  try {
+    const shareableLists = yield getRecentShareableLists()
+    const listsIds = shareableLists.map((list) => list.externalId)
+    const titleToIdList = shareableLists.reduce(
+      (obj, list) => ({ ...obj, [list.title]: list.externalId }),
+      {}
+    )
+
+    yield put({ type: LIST_RECENT_SUCCESS, listsIds, titleToIdList })
+  } catch {
+    yield put({ type: LIST_RECENT_FAILURE })
   }
 }
 

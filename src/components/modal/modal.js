@@ -230,7 +230,7 @@ Modal.propTypes = {
   /**
    * query selector specifying root element of React App
    */
-  appRootSelector: PropTypes.string.isRequired,
+  appRootSelector: PropTypes.string,
 
   // Exposing React Modal Props
   /**
