@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import { css, cx } from '@emotion/css'
 import { useRef } from 'react'
-import { breakpointSmallDesktop } from 'common/constants'
 import { HomeIcon } from 'components/icons/HomeIcon'
 import { SaveIcon } from 'components/icons/SaveIcon'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
@@ -175,7 +174,6 @@ export function SideNav({
   pinned,
   isDisabled,
   trackMenuClick,
-  showLists,
   handleCreateList,
   recentLists
 }) {
@@ -242,7 +240,6 @@ export function SideNav({
             subActive={subActive}
             pinned={pinned}
             clickEvent={clickEvent}
-            showLists={showLists}
             handleCreateList={handleCreateList}
             recentLists={recentLists}
           />

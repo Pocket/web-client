@@ -26,8 +26,6 @@ import { CreateListModal } from 'connectors/confirm/create-list'
 
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
 
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
-
 export const Saves = (props) => {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -47,10 +45,6 @@ export const Saves = (props) => {
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const total = useSelector((state) => state.pageSavedInfo.totalCount)
   const inBulkEdit = useSelector((state) => state?.app?.mode === 'bulk')
-
-  const enrolledPilot = useSelector((state) => state.pageListsInfo.enrolled)
-  const enrolledRelease = featureFlagActive({ flag: 'lists', featureState })
-  const enrolled = enrolledPilot || enrolledRelease
 
   // Derived Values
   const shouldRender = userStatus !== 'pending'
@@ -90,7 +84,6 @@ export const Saves = (props) => {
           handleOldest={handleOldest}
           isPremium={isPremium}
           handleRelevance={handleRelevance}
-          showLists={enrolled}
           handleCreateList={handleCreateList}
           inBulkEdit={inBulkEdit}
         />

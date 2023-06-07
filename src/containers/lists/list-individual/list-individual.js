@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import ErrorPage from 'containers/_error/error'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListContent } from 'containers/lists/list-individual/content'
@@ -16,8 +15,6 @@ import { ConfirmShare } from 'connectors/confirm/share-list'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { appSetMode } from 'connectors/app/app.state'
 
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
-
 export const ListIndividual = () => {
   const dispatch = useDispatch()
   const router = useRouter()
@@ -25,15 +22,11 @@ export const ListIndividual = () => {
 
   const [reorder, setReorder] = useState(false)
 
-  const featureState = useSelector((state) => state.features)
   const enrolledFetched = useSelector((state) => state.pageListsInfo.enrolledFetched)
-  const enrolledPilot = useSelector((state) => state.pageListsInfo.enrolled)
-  const enrolledRelease = featureFlagActive({ flag: 'lists', featureState })
-  const enrolled = enrolledPilot || enrolledRelease
 
   useEffect(() => {
-    if (enrolled) dispatch(getIndividualListAction(id))
-  }, [dispatch, id, enrolled])
+    dispatch(getIndividualListAction(id))
+  }, [dispatch, id])
 
   const toggleSort = (shouldReorder) => {
     const mode = shouldReorder ? 'reorder' : 'default'
@@ -44,7 +37,6 @@ export const ListIndividual = () => {
   const Content = reorder ? ListReorder : ListContent
 
   if (!enrolledFetched) return null
-  if (enrolledFetched && !enrolled) return <ErrorPage statusCode={404} />
 
   return (
     <>

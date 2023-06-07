@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import ErrorPage from 'containers/_error/error'
 import Layout from 'layouts/with-sidebar'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { ListsAllHeader } from 'components/headers/lists-header'
@@ -17,16 +16,10 @@ import { LoaderCentered } from 'components/loader/loader'
 
 import { Toasts } from 'connectors/toasts/toast-list'
 
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
-
 export const Lists = () => {
   const dispatch = useDispatch()
 
-  const featureState = useSelector((state) => state.features)
   const enrolledFetched = useSelector((state) => state.pageListsInfo.enrolledFetched)
-  const enrolledPilot = useSelector((state) => state.pageListsInfo.enrolled)
-  const enrolledRelease = featureFlagActive({ flag: 'lists', featureState })
-  const enrolled = enrolledPilot || enrolledRelease
 
   const listsIds = useSelector((state) => state.pageListsInfo.listsIds)
   const userStatus = useSelector((state) => state.user.user_status)
@@ -35,11 +28,11 @@ export const Lists = () => {
 
   const shouldRender = userStatus !== 'pending'
   const ids = sortOrder === 'DESC' ? listsIds : [...listsIds].reverse()
-  const showLists = listsIds?.length > 0 && !loading && enrolled
+  const showLists = listsIds?.length > 0 && !loading
 
   useEffect(() => {
-    if (enrolled) dispatch(getAllListsAction())
-  }, [dispatch, enrolled])
+    dispatch(getAllListsAction())
+  }, [dispatch])
 
   // Actions
   const handleCreateList = (identifier) => {
@@ -57,7 +50,6 @@ export const Lists = () => {
   }
 
   if (!enrolledFetched) return null
-  if (enrolledFetched && !enrolled) return <ErrorPage statusCode={404} />
   return (
     <Layout selectedNavLink="lists">
       <SideNav type="saves" subset="lists" />

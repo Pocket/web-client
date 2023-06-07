@@ -94,7 +94,6 @@ export const SavesHeader = ({
   sortOrder,
   handleNewest,
   handleOldest,
-  showLists,
   handleCreateList,
   inBulkEdit
 }) => {
@@ -110,7 +109,7 @@ export const SavesHeader = ({
     tags: t('headers:tags', 'Tags')
   }
 
-  const showCreateList = showLists && !inBulkEdit && subset !== 'tag-page'
+  const showCreateList = !inBulkEdit && subset !== 'tag-page'
 
   return subset ? (
     <header className={savesHeaderStyle}>
