@@ -16,55 +16,38 @@ import { sideNavActionHeader } from './side-nav'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 import { buttonReset } from 'components/buttons/button-reset'
 
-export function FiltersSideNav({
-  subActive,
-  pinned,
-  clickEvent,
-  handleCreateList,
-  recentLists
-}) {
+export function FiltersSideNav({ subActive, pinned, clickEvent, handleCreateList, recentLists }) {
   const { t } = useTranslation()
 
   const listNames = recentLists ? Object.keys(recentLists).slice(0, 3) : []
 
   return (
     <>
-      <>
-        <div className={sideNavActionHeader}>
-          <h4 className={sideNavHeader}>{t('nav:lists', 'Lists')}</h4>
-          <button
-            className={buttonReset}
-            onClick={handleCreateList}
-            data-cy="side-nav-create-list">
-            <AddIcon
-              className={bottomTooltip}
-              data-tooltip={t('nav:create-list', 'Create List')}
-            />
-          </button>
-        </div>
-        <Link href="/lists" legacyBehavior>
-          <button
-            className={subActive('lists')}
-            onClick={clickEvent}
-            data-cy="side-nav-all-lists">
-            <ListViewAltIcon className="side-nav-icon inactive" />
-            <ListViewAltFilledIcon className="side-nav-icon active" />
-            {t('nav:all-lists', 'All Lists')}
-          </button>
-        </Link>
-        {listNames.length
-          ? listNames.map((title) => (
-              <Link href={`/lists/${recentLists[title]}`} key={recentLists[title]} legacyBehavior>
-                <button
-                  className={subActive(recentLists[title], true)}
-                  onClick={clickEvent}
-                  data-cy={`side-nav-lists-${recentLists[title]}`}>
-                  {title}
-                </button>
-              </Link>
-            ))
-          : null}
-      </>
+      <div className={sideNavActionHeader}>
+        <h4 className={sideNavHeader}>{t('nav:lists', 'Lists')}</h4>
+        <button className={buttonReset} onClick={handleCreateList} data-cy="side-nav-create-list">
+          <AddIcon className={bottomTooltip} data-tooltip={t('nav:create-list', 'Create List')} />
+        </button>
+      </div>
+      <Link href="/lists" legacyBehavior>
+        <button className={subActive('lists')} onClick={clickEvent} data-cy="side-nav-all-lists">
+          <ListViewAltIcon className="side-nav-icon inactive" />
+          <ListViewAltFilledIcon className="side-nav-icon active" />
+          {t('nav:all-lists', 'All Lists')}
+        </button>
+      </Link>
+      {listNames.length
+        ? listNames.map((title) => (
+            <Link href={`/lists/${recentLists[title]}`} key={recentLists[title]} legacyBehavior>
+              <button
+                className={subActive(recentLists[title], true)}
+                onClick={clickEvent}
+                data-cy={`side-nav-lists-${recentLists[title]}`}>
+                {title}
+              </button>
+            </Link>
+          ))
+        : null}
 
       <h4 className={sideNavHeader}>{t('nav:filters', 'Filters')}</h4>
 
