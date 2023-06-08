@@ -6,6 +6,7 @@ import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { css, cx } from '@emotion/css'
 import { SavedActions } from './actions/saved'
 import { TransitionalActions } from './actions/transitional'
+import { SignalActions } from './actions/signaled'
 
 const savesItems = Object.values(savesResponse.edges).map((item) => {
   const derivedItem = deriveListItem(item)
@@ -51,9 +52,9 @@ export default {
     },
     itemToDisplay: {
       control: {
-        type: 'select',
-        options: Object.keys(itemsToDisplay)
-      }
+        type: 'select'
+      },
+      options: Object.keys(itemsToDisplay)
     },
     saveStatus: {
       control: {
@@ -63,9 +64,9 @@ export default {
     },
     tags: {
       control: {
-        type: 'inline-radio',
-        options: ['none', 'one', 'a few', 'ridiculous']
+        type: 'inline-radio'
       },
+      options: ['none', 'one', 'a few', 'ridiculous'],
       mapping: {
         none: [],
         one: [{ name: 'i am a tag' }],
@@ -82,22 +83,23 @@ export default {
     },
     Actions: {
       control: {
-        type: 'inline-radio',
-        options: ['discovery', 'saved']
+        type: 'inline-radio'
       },
+      options: ['discovery', 'saved', 'signaled'],
       mapping: {
         saved: SavedActions,
-        discovery: TransitionalActions
+        discovery: TransitionalActions,
+        signaled: SignalActions
       }
     },
     partnerType: {
       control: {
-        type: 'inline-radio',
-        options: [false, 'PARTNERED', 'SPONSORED']
-      }
+        type: 'inline-radio'
+      },
+      options: [false, 'PARTNERED', 'SPONSORED']
     },
     topicName: {
-      control: 'select',
+      control: { type: 'select' },
       options: Object.keys(topics),
       if: {
         arg: 'showTopic'
