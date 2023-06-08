@@ -227,7 +227,10 @@ const CallOutPocketHitsSignup = ({
     onVisible(FORM_ID)
   }
 
-  return hide ? null : (
+  const isEnglish = ['en', 'en-US'].includes(locale)
+  const shouldHide = hide || !isEnglish
+
+  return shouldHide ? null : (
     <VisibilitySensor onVisible={handleVisible}>
       <div className={`${wrapper} brandingMessage`} data-cy="pocket-hits-module">
         <div className="brandBlock">
