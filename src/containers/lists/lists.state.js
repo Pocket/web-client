@@ -31,6 +31,10 @@ import { LIST_RECENT_FAILURE } from 'actions'
 import { LIST_ADD_ITEM_SUCCESS } from 'actions'
 import { LIST_DELETE_ITEM_SUCCESS } from 'actions'
 import { LIST_UPDATE_STATUS_SUCCESS } from 'actions'
+import { LIST_ITEM_ADD_NOTE_SUCCESS } from 'actions'
+import { LIST_ITEM_EDIT_NOTE_SUCCESS } from 'actions'
+import { LIST_ITEM_NOTE_DELETE_SUCCESS } from 'actions'
+import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
 
 import { VARIANTS_SAVE } from 'actions'
 
@@ -98,7 +102,11 @@ export const pageListsInfoSagas = [
       LIST_UPDATE_SUCCESS,
       LIST_UPDATE_STATUS_SUCCESS,
       LIST_ADD_ITEM_SUCCESS,
-      LIST_DELETE_ITEM_SUCCESS
+      LIST_DELETE_ITEM_SUCCESS,
+      LIST_ITEM_ADD_NOTE_SUCCESS,
+      LIST_ITEM_EDIT_NOTE_SUCCESS,
+      LIST_ITEM_NOTE_DELETE_SUCCESS,
+      LIST_ITEMS_REORDER_SUCCESS
     ],
     getRecentLists
   )

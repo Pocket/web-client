@@ -1,3 +1,10 @@
+## [1.97.1](https://github.com/Pocket/web-client/compare/v1.97.0...v1.97.1) (2023-06-08)
+
+
+### Bug Fixes
+
+* **sidebar:** update list sidebar on list note change and reorder ([f6749c9](https://github.com/Pocket/web-client/commit/f6749c9dd4cf88729bb438e5d92e4d895021f84f))
+
 # [1.97.0](https://github.com/Pocket/web-client/compare/v1.96.1...v1.97.0) (2023-06-06)
 
 
