@@ -185,6 +185,10 @@ export const itemStyles = css`
     margin: var(--title-margin);
     line-height: var(--title-line-height);
 
+    &.withTopDetails {
+      margin-top: 0;
+    }
+
     &.open-external {
       a {
         margin-right: 0;
@@ -259,6 +263,20 @@ export const itemStyles = css`
     font-weight: 500;
     line-height: 1.25;
     color: var(--color-textSecondary);
+  }
+
+  .topDetails {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    font-style: normal;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--color-textSecondary);
+    height: 32px;
   }
 
   .context {
