@@ -95,7 +95,7 @@ function deriveList(list, listId, listItems) {
   }
 }
 
-function decodeSpecialChars(string) {
+export function decodeSpecialChars(string) {
   const GT_ENCODED = '&gt;' // >
   const LT_ENCODED = '&lt;' // <
 

@@ -6,6 +6,8 @@ import { getShareableList } from 'common/api/queries/get-shareable-list'
 import { getShareableListPublic } from 'common/api/queries/get-shareable-list-public'
 import { getRecentShareableLists } from 'common/api/queries/get-shareable-lists-recent'
 
+import { decodeSpecialChars } from 'common/api/derivers/shared-lists'
+
 import { LIST_ITEMS_SUCCESS } from 'actions'
 
 import { LIST_CHECK_PILOT_STATUS_REQUEST } from 'actions'
@@ -167,7 +169,7 @@ function* getRecentLists() {
     const shareableLists = yield getRecentShareableLists()
     const listsIds = shareableLists.map((list) => list.externalId)
     const titleToIdList = shareableLists.reduce(
-      (obj, list) => ({ ...obj, [list.title]: list.externalId }),
+      (obj, list) => ({ ...obj, [decodeSpecialChars(list.title)]: list.externalId }),
       {}
     )
 
