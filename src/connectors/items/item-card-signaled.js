@@ -2,7 +2,7 @@ import { ItemSignaled as Item } from 'components/item/item.signaled'
 import { useSelector, useDispatch } from 'react-redux'
 import { setNoImage } from 'connectors/items/items-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { TransitionalActions } from 'components/item/actions/transitional'
+import { SignaledActions } from 'components/item/actions/signaled'
 import { itemReportAction } from 'connectors/items/mutation-report.state'
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
@@ -90,13 +90,13 @@ export function ItemCard({
       onItemInView={onItemInView}
       onOpenOriginalUrl={onOpenOriginalUrl}
       onOpen={onOpen}
-      Actions={ActionsTransitional}
+      Actions={ActionsSignaled}
       snowplowId={snowplowId}
     />
   )
 }
 
-export function ActionsTransitional(props) {
+export function ActionsSignaled(props) {
   const { id, position, snowplowId } = props
   const dispatch = useDispatch()
 
@@ -123,17 +123,19 @@ export function ActionsTransitional(props) {
     dispatch(mutationDeleteTransitionalItem(saveItemId, id))
   }
 
-  // On Report
-  const onReport = () => dispatch(itemReportAction(id))
+  // On Signal
+  const onThumbsDown = () => {}
+  const onThumbsUp = () => {}
 
   return item ? (
-    <TransitionalActions
+    <SignaledActions
       id={id}
       isAuthenticated={isAuthenticated}
       saveStatus={saveStatus}
       onSave={onSave}
       onUnSave={onUnSave}
-      onReport={onReport}
+      onThumbsDown={onThumbsDown}
+      onThumbsUp={onThumbsUp}
     />
   ) : null
 }

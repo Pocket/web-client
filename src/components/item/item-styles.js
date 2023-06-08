@@ -141,6 +141,9 @@ export const itemStyles = css`
     bottom: 1rem;
     left: 1rem;
     text-transform: capitalize;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
   }
 
   .user-list {
@@ -265,6 +268,25 @@ export const itemStyles = css`
     color: var(--color-textSecondary);
   }
 
+  .report {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(26, 26, 26, 0.8);
+    font-size: 1.5rem;
+    line-height: 1em;
+    color: var(--color-white100);
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    .icon {
+      margin-top: 0;
+    }
+  }
+
   .topDetails {
     display: flex;
     overflow: hidden;
@@ -275,7 +297,7 @@ export const itemStyles = css`
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.25;
-    color: var(--color-textSecondary);
+    color: var(--color-textPrimary);
     height: 32px;
   }
 

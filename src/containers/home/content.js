@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { cx } from '@emotion/css'
 
-import { ItemCard } from 'connectors/items/item-card-transitional'
+import { ItemCard } from 'connectors/items/item-card-signaled'
 import { standardGrid } from 'components/item/items-layout'
 import { basicSlide } from 'components/item/items-layout'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'

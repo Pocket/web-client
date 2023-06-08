@@ -1,5 +1,6 @@
 import { ItemSignaled as ItemComponent } from './item.signaled'
 import savesResponse from 'mocks/savedItems.json'
+import { topics } from 'mocks/_data/article'
 import { deriveListItem } from 'common/api/derivers/item'
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { css, cx } from '@emotion/css'
@@ -61,6 +62,13 @@ export default {
         discovery: TransitionalActions,
         signaled: SignaledActions
       }
+    },
+    topicName: {
+      control: { type: 'select' },
+      options: Object.keys(topics),
+      if: {
+        arg: 'showTopic'
+      }
     }
   }
 }
@@ -84,6 +92,7 @@ export const Signaled = (args) => {
     isUserList,
     isInternalItem,
     onItemInView = () => {},
+    onReport = () => {},
     publisherLogo,
     fromPartner,
     clamp,
@@ -124,6 +133,7 @@ export const Signaled = (args) => {
       useMarkdown={true}
       topicName={topic}
       onItemInView={onItemInView}
+      onReport={onReport}
       {...args}
       className={cardClassnames}
     />
@@ -146,7 +156,7 @@ Signaled.args = {
   showExcerpt: true,
   partnerType: false,
   sideBySide: false,
-  showTopic: false,
-  topicName: null,
+  showTopic: true,
+  topicName: 'Technology',
   tags: 'none'
 }

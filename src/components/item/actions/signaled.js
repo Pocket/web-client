@@ -73,7 +73,9 @@ export function SignaledActions({
   isAuthenticated,
   saveStatus,
   onSave,
-  onUnSave
+  onUnSave,
+  onThumbsDown,
+  onThumbsUp
   // onReport
 }) {
   const { t } = useTranslation()
@@ -82,12 +84,12 @@ export function SignaledActions({
   return (
     <div className={`${signaledActionStyles} status-${saveStatus}`}>
       <div className="signals">
-        <button>
-          <ThumbsDownIcon />
+        <button onClick={onThumbsUp}>
+          <ThumbsUpIcon />
         </button>
 
-        <button>
-          <ThumbsUpIcon />
+        <button onClick={onThumbsDown}>
+          <ThumbsDownIcon />
         </button>
       </div>
 

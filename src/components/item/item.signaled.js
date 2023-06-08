@@ -8,6 +8,7 @@ import { NewViewIcon } from 'components/icons/NewViewIcon'
 import { CardMedia } from 'components/item/item-media'
 import { itemStyles } from './item-styles'
 import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
+import { OverflowMenuIcon } from 'components/icons/OverflowMenuIcon'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
 
@@ -62,6 +63,7 @@ export const ItemSignaled = (props) => {
     shortcutSelect,
     selectBulk,
     analyticsData,
+    onReport,
 
     // Tracking
     onItemInView,
@@ -135,6 +137,11 @@ export const ItemSignaled = (props) => {
           openInNewTab={openInNewTab}
           openUrl={openUrl}
         />
+        {onReport ? (
+          <button className="report" onClick={onReport}>
+            <OverflowMenuIcon />
+          </button>
+        ) : null}
       </span>
       <div className="item-links">
         <div className="content">
