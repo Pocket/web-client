@@ -1,3 +1,10 @@
+## [1.97.2](https://github.com/Pocket/web-client/compare/v1.97.1...v1.97.2) (2023-06-08)
+
+
+### Bug Fixes
+
+* **pocket-hits:** hide signup form for non english locales ([64a801b](https://github.com/Pocket/web-client/commit/64a801b94154a536b3c1386782ff2f4adf377f3c))
+
 ## [1.97.1](https://github.com/Pocket/web-client/compare/v1.97.0...v1.97.1) (2023-06-08)
 
 
