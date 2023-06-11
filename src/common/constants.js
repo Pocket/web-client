@@ -49,12 +49,12 @@ export const SNOWPLOW_POST_PATH = process.env.TEST_SNOWPLOW === 'included'
   ? '/com.snowplowanalytics.snowplow/tp2'
   : '/t/e'
 export const SNOWPLOW_COLLECTOR_URL = 'getpocket.com'
-export const SNOWPLOW_COLLECTOR_URL_DEV = process.env.TEST_SNOWPLOW === 'included'
-  ? 'http://localhost:9090'
-  : 'com-getpocket-prod1.mini.snplow.net'
-export const SNOWPLOW_COLLECTOR = process.env.SHOW_DEV === 'included'
-  ? SNOWPLOW_COLLECTOR_URL_DEV
-  : SNOWPLOW_COLLECTOR_URL
+export const SNOWPLOW_COLLECTOR_URL_DEV =
+  process.env.SNOWPLOW_URL || process.env.TEST_SNOWPLOW === 'included'
+    ? 'http://localhost:9090'
+    : 'com-getpocket-prod1.mini.snplow.net'
+export const SNOWPLOW_COLLECTOR =
+  process.env.SHOW_DEV === 'included' ? SNOWPLOW_COLLECTOR_URL_DEV : SNOWPLOW_COLLECTOR_URL
 
 export const SNOWPLOW_APP_ID = 'pocket-web'
 export const SNOWPLOW_APP_ID_DEV = 'pocket-web-dev'
