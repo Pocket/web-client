@@ -14,6 +14,11 @@ export const getStaticPaths = async () => {
   //We are only gonna paginate items with the label `collections-homepage`
   const totalPages = await fetchCollectionPageCount('en', ['collections-homepage'])
 
+  if (totalPages == 0) {
+    // If the query returned no pages, return no paths.
+    return { paths: [], fallback: 'blocking' }
+  }
+
   // We don't want the first page to be part of the pagination
   const pagesToPaginate = totalPages - 1
 
