@@ -7,7 +7,7 @@ import { css } from '@emotion/css'
 const toastStyle = css`
   position: fixed;
   bottom: 50px;
-  left: 50px;
+  right: 50px;
   z-index: var(--zIndexModal);
 `
 

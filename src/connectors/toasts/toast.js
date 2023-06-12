@@ -83,8 +83,8 @@ const toastWrapper = css`
     margin: 20px 0 0 0;
     min-width: 275px;
     border-radius: 4px;
-    background-color: var(--color-navCurrentTab);
-    color: var(--color-navCurrentTabText);
+    background-color: var(--color-actionPrimary);
+    color: var(--color-actionBrandText);
 
     p {
       margin: 0;
@@ -95,18 +95,18 @@ const toastWrapper = css`
     }
 
     button.text {
-      color: var(--color-navCurrentTabText);
+      color: var(--color-actionBrandText);
       font-weight: 500;
       cursor: pointer;
     }
 
     &.success {
-      background-color: var(--color-navCurrentTab);
-      color: var(--color-navCurrentTabText);
+      background-color: var(--color-actionPrimary);
+      color: var(--color-actionBrandText);
     }
     &.neutral {
-      background-color: var(--color-navCurrentTab);
-      color: var(--color-navCurrentTabText);
+      background-color: var(--color-actionPrimary);
+      color: var(--color-actionBrandText);
     }
     &.warn {
       background-color: var(--color-error);
@@ -220,6 +220,7 @@ export function Toast({
   const typeForMessage = actionType || type
   const showUndo = type === MUTATION_DELETE_SUCCESS && deletedItemPosition !== undefined
   const IconToShow = errors.includes(type) ? ErrorIcon : CheckIcon
+  const status = errors.includes(type) ? 'warn' : 'success'
 
   useEffect(() => {
     if (!show) return () => {}
@@ -240,7 +241,7 @@ export function Toast({
   return (
     <Fade show={show} remove={remove}>
       <div className={toastWrapper}>
-        <div className={cx('toastBlock', `${type}`)} data-cy={messages[typeForMessage]}>
+        <div className={cx('toastBlock', `${type}`, `${status}`)} data-cy={messages[typeForMessage]}>
           <p>{messages[typeForMessage]}</p>
           <div className="actionWrapper">
             {showUndo ? (
