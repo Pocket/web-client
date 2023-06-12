@@ -7,6 +7,7 @@ import { devModeToggle } from 'connectors/app/app.state'
 import { Features } from 'connectors/dev-tools/features'
 import { Links } from 'connectors/dev-tools/links'
 import { Resets } from 'connectors/dev-tools/resets'
+import { Toasts } from 'connectors/dev-tools/toasts'
 
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
@@ -41,6 +42,7 @@ export function QaModal() {
         <Features />
         <Resets />
         <Links toggleDevMode={toggleDevMode} />
+        <Toasts />
       </ModalBody>
     </Modal>
   )

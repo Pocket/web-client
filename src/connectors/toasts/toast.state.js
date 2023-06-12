@@ -1,5 +1,6 @@
 import { TOAST_CLEAR } from 'actions'
 import { TOAST_CLEAR_ALL } from 'actions'
+import { TOAST_TEST_MESSAGE } from 'actions'
 
 import { MUTATION_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
@@ -47,6 +48,7 @@ import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
  --------------------------------------------------------------- */
 export const clearToast = (stamp) => ({ type: TOAST_CLEAR, stamp })
 export const clearAllToasts = () => ({ type: TOAST_CLEAR_ALL })
+export const sendToast = (data) => (data)
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -73,6 +75,7 @@ export const actionToastsReducers = (state = initialState, action) => {
       ]
     }
 
+    case TOAST_TEST_MESSAGE:
     case ITEMS_ADD_SUCCESS:
     case SHARE_RECOMMEND_SUCCESS:
     case SHARE_RECOMMEND_FAILURE:
