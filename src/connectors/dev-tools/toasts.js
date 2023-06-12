@@ -60,6 +60,10 @@ import { LIST_ITEM_NOTE_DELETE_FAILURE } from 'actions'
 import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
 import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
 
+// These are separated out because these values are normally passed along as
+// the actionType on the MUTATION_SUCCESS action. In these instances we will use
+// TOAST_TEST_MESSAGE as the action so reducers don't break when responding to
+// MUTATION_SUCCESS
 const mutationTypes = [
   MUTATION_ARCHIVE,
   MUTATION_UNARCHIVE,
