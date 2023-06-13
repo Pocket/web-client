@@ -184,6 +184,7 @@ function* savedItemUpdateRequest(action) {
 
     const nodes = edges.reduce(getNodeFromEdge, {})
     const itemsById = edges.reduce(getItemFromEdge, {})
+    // Storing startCursor in case of further updates and we don't refetch items
     const { startCursor } = pageInfo
 
     yield put({ type: ITEMS_SUCCESS, itemsById })
