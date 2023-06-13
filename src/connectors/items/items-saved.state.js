@@ -1,4 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
+import * as Sentry from '@sentry/nextjs'
 import { getSavedItems } from 'common/api/queries/get-saved-items'
 import { getSavedItemsTagged } from 'common/api/queries/get-saved-items-tagged'
 import { getSavedItemsSearch } from 'common/api/queries/get-saved-items-search'
@@ -191,6 +192,10 @@ function* savedItemUpdateRequest(action) {
     yield put({ type: ITEMS_SAVED_PAGE_INFO_SUCCESS, pageInfo: { startCursor, totalCount } }) //prettier-ignore
     yield put({ type: ITEMS_SAVED_UPDATE_SUCCESS, savedItemIds, nodes })
   } catch (errors) {
+    Sentry.withScope((scope) => {
+      scope.setFingerprint('SavedItemUpdateRequest Error')
+      Sentry.captureMessage(errors)
+    })
     yield put({ type: ITEMS_SAVED_UPDATE_FAILURE, errors })
   }
 }

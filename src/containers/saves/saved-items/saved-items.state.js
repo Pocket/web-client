@@ -1,4 +1,5 @@
 import { put, call, select, takeEvery } from 'redux-saga/effects'
+import * as Sentry from '@sentry/nextjs'
 import { itemFiltersFromGraph } from 'common/api/queries/get-saved-items.filters'
 import { arraysAreEqual } from 'common/utilities/object-array/object-array'
 
@@ -342,7 +343,10 @@ function* loadPreviousItems() {
       }
     })
   } catch (err) {
-    console.warn(err)
+    Sentry.withScope((scope) => {
+      scope.setFingerprint('LoadPreviousItems Error')
+      Sentry.captureMessage(err)
+    })
   }
 }
 
