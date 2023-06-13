@@ -10,11 +10,12 @@ export const ConfirmDelete = () => {
 
   // Handle delete actions with confirmation
   const itemsToDelete = useSelector((state) => state.mutationDelete.itemIds)
+  const modalStatus = useSelector((state) => state.mutationDelete.showBulkDeleteModal)
   const batchTotal = useSelector((state) => state.mutationBulk.batchTotal)
   const batchCount = useSelector((state) => state.mutationBulk.batchCount)
   const batchStart = useSelector((state) => state.mutationBulk.batchStart)
 
-  const showModal = itemsToDelete.length > 0
+  const showModal = modalStatus && itemsToDelete.length > 0
   const confirmDelete = () => dispatch(mutationBulkConfirm())
   const cancelDelete = () => dispatch(mutationBulkCancel())
 
@@ -40,7 +41,12 @@ export const ConfirmDelete = () => {
       </ModalBody>
       {batchStart ? null : (
         <ModalFooter>
-          <button className="primary" type="submit" data-cy="delete-confirm" onClick={confirmDelete} autoFocus={true}>
+          <button
+            className="primary"
+            type="submit"
+            data-cy="delete-confirm"
+            onClick={confirmDelete}
+            autoFocus={true}>
             <Trans i18nKey="confirm:delete">Delete</Trans>
           </button>
         </ModalFooter>

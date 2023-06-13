@@ -18,6 +18,7 @@ import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
 import { shareAction } from 'connectors/items/mutation-share.state'
 import { mutateListAddItem } from 'connectors/lists/mutation-add.state'
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
+import { mutationDeleteConnectedItem } from 'connectors/items/mutation-delete.state'
 
 /**
  * Article Card
@@ -168,6 +169,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
 
   if (!itemSaved || !item) return null
   const { isFavorite, isArchived, tags} = itemSaved //prettier-ignore
+  const { givenUrl, permanentUrl, analyticsData: passedAnalyticsData, isInShareableList } = item
   const analyticsData = { ...passedAnalyticsData, position }
 
   /** ITEM MENU ITEMS
@@ -177,8 +179,13 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
     dispatch(shareAction({ item, position }))
   }
   const actionDelete = () => {
-    dispatch(sendSnowplowEvent(`${snowplowId}.delete`, analyticsData))
-    dispatch(mutationDelete(id))
+    if (isInShareableList) {
+      dispatch(sendSnowplowEvent(`${snowplowId}.delete`, analyticsData))
+      dispatch(mutationDeleteConnectedItem([id]))
+    } else {
+      dispatch(sendSnowplowEvent(`${snowplowId}.delete`, analyticsData))
+      dispatch(mutationDelete(id))
+    }
   }
   const actionArchive = () => {
     dispatch(sendSnowplowEvent(`${snowplowId}.archive`, analyticsData))

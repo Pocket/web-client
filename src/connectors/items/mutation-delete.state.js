@@ -13,23 +13,36 @@ import { MUTATION_BULK_DELETE } from 'actions'
 import { MUTATION_BULK_CANCEL } from 'actions'
 import { MUTATION_BULK_CONFIRM } from 'actions'
 
+import { MUTATION_DELETE_CONNECTED_ITEM } from 'actions'
+import { MUTATION_DELETE_CONNECTED_ITEM_CANCEL } from 'actions'
+import { MUTATION_DELETE_CONNECTED_ITEM_CONFIRM } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const mutationDelete = (itemId) => ({ type: MUTATION_DELETE, itemId })
 export const mutationUnDelete = (itemIds, itemPosition, previousStatus) => ({ type: MUTATION_UNDELETE, itemIds, itemPosition, previousStatus}) //prettier-ignore
 export const mutationDeleteTransitionalItem = (itemId, transitionId) => ({ type: MUTATION_DELETE, itemId, transitionId }) //prettier-ignore
 export const mutationBulkDelete = (itemIds) => ({ type: MUTATION_BULK_DELETE, itemIds })
+export const mutationDeleteConnectedItem = (itemIds) => ({ type: MUTATION_DELETE_CONNECTED_ITEM, itemIds }) //prettier-ignore
+export const mutationDeleteConnectedItemCancel = () => ({ type: MUTATION_DELETE_CONNECTED_ITEM_CANCEL }) //prettier-ignore
+export const mutationDeleteConnectedItemConfirm = () => ({ type: MUTATION_DELETE_CONNECTED_ITEM_CONFIRM }) //prettier-ignore
 
 /** REDUCERS
   --------------------------------------------------------------- */
-const initialState = { itemIds: [] }
+const initialState = { itemIds: [], showDeleteListModal: false, showBulkDeleteModal: false }
 export const mutationDeleteReducers = (state = initialState, action) => {
   switch (action.type) {
     case MUTATION_BULK_DELETE: {
       const { itemIds } = action
-      return { ...state, itemIds }
+      return { ...state, itemIds, showBulkDeleteModal: true }
     }
 
+    case MUTATION_DELETE_CONNECTED_ITEM: {
+      const { itemIds } = action
+      return { ...state, itemIds, showDeleteListModal: true }
+    }
+
+    case MUTATION_DELETE_CONNECTED_ITEM_CANCEL:
     case MUTATION_DELETE_SUCCESS:
     case MUTATION_BULK_CANCEL: {
       return initialState
@@ -45,7 +58,8 @@ export const mutationDeleteReducers = (state = initialState, action) => {
 export const mutationDeleteSagas = [
   takeEvery(MUTATION_DELETE, savedItemDelete),
   takeEvery(MUTATION_UNDELETE, savedItemUnDelete),
-  takeEvery(MUTATION_BULK_DELETE, savedItemsBulkDelete)
+  takeEvery(MUTATION_BULK_DELETE, savedItemsBulkDelete),
+  takeEvery(MUTATION_DELETE_CONNECTED_ITEM, savedItemInListDelete)
 ]
 
 /* SAGAS :: SELECTORS
@@ -91,6 +105,20 @@ function* savedItemsBulkDelete(action) {
   if (cancel) return
 
   // Batch and send api calls for the ids
+  const ids = yield call(batchSendMutations, itemIds, bulkDelete)
+  return yield put({ type: MUTATION_DELETE_SUCCESS, ids })
+}
+
+function* savedItemInListDelete(action) {
+  const { itemIds } = action
+
+  const { cancel } = yield race({
+    cancel: take(MUTATION_DELETE_CONNECTED_ITEM_CANCEL),
+    confirm: take(MUTATION_DELETE_CONNECTED_ITEM_CONFIRM)
+  })
+
+  if (cancel) return
+
   const ids = yield call(batchSendMutations, itemIds, bulkDelete)
   return yield put({ type: MUTATION_DELETE_SUCCESS, ids })
 }
