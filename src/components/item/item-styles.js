@@ -287,6 +287,19 @@ export const itemStyles = css`
     }
   }
 
+  .signals {
+    button .icon {
+      margin-top: 0;
+    }
+  }
+
+  &.demoted {
+    transition: transform 150ms cubic-bezier(0.37, 0, 0.63, 1),
+      opacity 140ms cubic-bezier(0.37, 0, 0.63, 1);
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
   .topDetails {
     display: flex;
     overflow: hidden;
@@ -299,6 +312,7 @@ export const itemStyles = css`
     line-height: 1.25;
     color: var(--color-textPrimary);
     height: 32px;
+    padding: 1.5rem 1rem 1rem;
   }
 
   .context {

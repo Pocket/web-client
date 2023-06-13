@@ -64,17 +64,17 @@ export const ItemSignaled = (props) => {
     selectBulk,
     analyticsData,
     onReport,
+    onDemote,
+    onPromote,
+    onCompleteDemotion,
+    isDemoted,
 
     // Tracking
     onItemInView,
     snowplowId,
     onOpenOriginalUrl,
-    onOpen,
-    onCopyPublicUrl,
-    onOpenPublicUrl
+    onOpen
   } = props
-
-  const { t } = useTranslation()
 
   /**
    * Layout is defined here.
@@ -115,14 +115,25 @@ export const ItemSignaled = (props) => {
     if (!shortcutSelected && shortcutSelect) shortcutSelect()
   }
 
+  const handleAnimationEnd = () => {
+    setTimeout(() => {
+      onCompleteDemotion()
+    }, 150)
+  }
+
+  const handleAnimationStart = () => {
+    console.log('Animation Started')
+  }
+
+  if (isDemoted) handleAnimationEnd()
+
   return (
     <article
       style={style}
-      className={itemClassName}
-      key={itemId}
+      className={cx(itemClassName, isDemoted && 'demoted')}
+      key={`signaled-${itemId}`}
       data-cy="article-card"
       onClick={selectBulk}
-      ref={viewRef}
       onFocus={handleFocus}>
       <span className="media-block" ref={footerRef}>
         <CardMedia
@@ -193,6 +204,8 @@ export const ItemSignaled = (props) => {
               isArchive={isArchive}
               isPremium={isPremium}
               saveStatus={saveStatus}
+              onDemote={onDemote}
+              onPromote={onPromote}
               analyticsData={analyticsData}
               position={position}
             />

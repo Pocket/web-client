@@ -5,7 +5,7 @@ import { HomeContent } from './content'
 import { SuccessFXA } from 'components/snackbar/success-fxa'
 import { HomeSetup } from './setup/setup'
 import { HomeGreeting } from './recent-saves/greeting'
-
+import { Toasts } from 'connectors/toasts/toast-list'
 
 export const Home = ({ metaData }) => {
   const userStatus = useSelector((state) => state.user.user_status)
@@ -20,6 +20,8 @@ export const Home = ({ metaData }) => {
       <HomeGreeting />
       <HomeRecentSaves />
       <HomeContent />
+
+      <Toasts surface="home" />
     </Layout>
   )
 }

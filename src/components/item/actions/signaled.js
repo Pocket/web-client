@@ -6,6 +6,7 @@ import { css } from '@emotion/css'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import { LOGIN_URL, SIGNUP_URL } from 'common/constants'
 import { useTranslation, Trans } from 'next-i18next'
+import { topTooltipDelayed } from 'components/tooltip/tooltip'
 
 const signaledActionStyles = css`
   display: flex;
@@ -74,21 +75,28 @@ export function SignaledActions({
   saveStatus,
   onSave,
   onUnSave,
-  onThumbsDown,
-  onThumbsUp
+  handlePromote,
+  handleDemote
   // onReport
 }) {
   const { t } = useTranslation()
   const { popTrigger, popBody, shown } = usePopover({ placement: 'top-end' })
   const isSaved = saveStatus === 'saved'
+
   return (
     <div className={`${signaledActionStyles} status-${saveStatus}`}>
       <div className="signals">
-        <button onClick={onThumbsUp}>
+        <button
+          onClick={handlePromote}
+          className={topTooltipDelayed}
+          data-tooltip={t('home:tooltip-promote', 'See more content like this')}>
           <ThumbsUpIcon />
         </button>
 
-        <button onClick={onThumbsDown}>
+        <button
+          onClick={handleDemote}
+          className={topTooltipDelayed}
+          data-tooltip={t('home:tooltip-demote', 'See less content like this')}>
           <ThumbsDownIcon />
         </button>
       </div>

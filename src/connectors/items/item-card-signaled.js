@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setNoImage } from 'connectors/items/items-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { SignaledActions } from 'components/item/actions/signaled'
-import { itemReportAction } from 'connectors/items/mutation-report.state'
 import { mutationUpsertTransitionalItem } from 'connectors/items/mutation-upsert.state'
 import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete.state'
+import { completeDemotion } from 'containers/home/home.state'
 
 /**
  * Article Card
@@ -14,11 +14,14 @@ import { mutationDeleteTransitionalItem } from 'connectors/items/mutation-delete
  */
 export function ItemCard({
   id,
+  slateId,
   position,
   className,
   cardShape,
   showExcerpt = true,
   useMarkdown,
+  onDemote,
+  onPromote,
   clamp,
   snowplowId
 }) {
@@ -27,10 +30,12 @@ export function ItemCard({
   // Get data from state
   const impressionFired = useSelector((state) => state.analytics.impressions.includes(id))
   const analyticsInitialized = useSelector((state) => state.analytics.initialized)
+  const isDemoted = useSelector((state) => state.pageHome.demotedIds.includes(id))
 
   const item = useSelector((state) => state.itemsDisplay[id])
   if (!item) return null
 
+  const onCompleteDemotion = () => dispatch(completeDemotion(slateId, id))
   const { readUrl, externalUrl, openExternal, syndicatedUrl, isCollection, authors, saveUrl } = item
 
   const openUrl = openExternal ? externalUrl : syndicatedUrl || readUrl || externalUrl || saveUrl
@@ -92,12 +97,17 @@ export function ItemCard({
       onOpen={onOpen}
       Actions={ActionsSignaled}
       snowplowId={snowplowId}
+      // Signal
+      onDemote={onDemote}
+      onCompleteDemotion={onCompleteDemotion}
+      onPromote={onPromote}
+      isDemoted={isDemoted}
     />
   )
 }
 
 export function ActionsSignaled(props) {
-  const { id, position, snowplowId } = props
+  const { id, position, snowplowId, onPromote, onDemote, completeDemotion } = props
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
@@ -123,10 +133,6 @@ export function ActionsSignaled(props) {
     dispatch(mutationDeleteTransitionalItem(saveItemId, id))
   }
 
-  // On Signal
-  const onThumbsDown = () => {}
-  const onThumbsUp = () => {}
-
   return item ? (
     <SignaledActions
       id={id}
@@ -134,8 +140,8 @@ export function ActionsSignaled(props) {
       saveStatus={saveStatus}
       onSave={onSave}
       onUnSave={onUnSave}
-      onThumbsDown={onThumbsDown}
-      onThumbsUp={onThumbsUp}
+      handlePromote={onPromote}
+      handleDemote={onDemote}
     />
   ) : null
 }
