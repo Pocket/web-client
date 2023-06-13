@@ -10,6 +10,9 @@ import { ITEMS_SAVED_FAILURE } from 'actions'
 import { MUTATION_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
 
+import { ITEMS_SAVED_UPDATE_REQUEST } from 'actions'
+import { ITEMS_SAVED_UPDATE_SUCCESS } from 'actions'
+
 import { ITEMS_UNDELETE_SUCCESS } from 'actions'
 
 import { ITEMS_SAVED_PAGE_INFO_SUCCESS } from 'actions'
@@ -49,6 +52,7 @@ import { GET_ITEMS_TAGS_ARCHIVED } from 'actions'
 import { GET_ITEMS_TAGS_FAVORITES } from 'actions'
 import { ITEMS_CLEAR_CURRENT } from 'actions'
 import { LOAD_MORE_ITEMS } from 'actions'
+import { LOAD_PREVIOUS_ITEMS } from 'actions'
 
 import { SNOWPLOW_SEND_EVENT } from 'actions'
 
@@ -90,6 +94,7 @@ export const savedItemsSetSortOrder = (sortOrder) => ({type: ITEMS_SAVED_PAGE_SE
 export const savedItemsSetSortBy = (sortBy) => ({ type: ITEMS_SAVED_PAGE_SET_SORT_BY, sortBy })
 
 export const loadMoreListItems = () => ({ type: LOAD_MORE_ITEMS })
+export const loadPreviousListItems = () => ({ type: LOAD_PREVIOUS_ITEMS })
 
 /** LIST SAVED REDUCERS
  --------------------------------------------------------------- */
@@ -190,8 +195,9 @@ export const pageSavedInfoReducers = (state = initialState, action) => {
 export const pageSavedIdsSagas = [
   takeEvery(MUTATION_SUCCESS, reconcileMutation),
   takeEvery(MUTATION_DELETE_SUCCESS, reconcileDeleteMutation),
-  takeEvery(ITEMS_UPSERT_SUCCESS, reconcileUpsert),
+  takeEvery([ ITEMS_UPSERT_SUCCESS, ITEMS_SAVED_UPDATE_SUCCESS ], reconcileUpsert),
   takeEvery(LOAD_MORE_ITEMS, loadMoreItems),
+  takeEvery(LOAD_PREVIOUS_ITEMS, loadPreviousItems),
   takeEvery(ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, adjustSortOrder),
   takeEvery(
     [
@@ -311,6 +317,28 @@ function* loadMoreItems() {
       count: 30,
       pagination: {
         after: endCursor
+      }
+    })
+  } catch (err) {
+    console.warn(err)
+  }
+}
+
+function* loadPreviousItems() {
+  try {
+    const { searchTerm, sortOrder, startCursor, actionType, tagNames } = yield select(
+      getSavedPageInfo
+    )
+    const type = yield call(itemRequestType, searchTerm, tagNames)
+    // We only want to fetch an update if the user is on Saves
+    if (type !== ITEMS_SAVED_REQUEST) return
+
+    yield put({
+      type: ITEMS_SAVED_UPDATE_REQUEST,
+      actionType,
+      sortOrder,
+      pagination: {
+        before: startCursor
       }
     })
   } catch (err) {
