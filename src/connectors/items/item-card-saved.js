@@ -168,7 +168,6 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
 
   if (!itemSaved || !item) return null
   const { isFavorite, isArchived, tags} = itemSaved //prettier-ignore
-  const { givenUrl, permanentUrl, analyticsData: passedAnalyticsData } = item
   const analyticsData = { ...passedAnalyticsData, position }
 
   /** ITEM MENU ITEMS

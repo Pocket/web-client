@@ -25,6 +25,7 @@ import { ConfirmAddToList } from 'connectors/confirm/add-to-list'
 import { CreateListModal } from 'connectors/confirm/create-list'
 
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
+import { ConfirmDeleteItemInList } from 'connectors/confirm/delete-item-in-list'
 
 export const Saves = (props) => {
   const router = useRouter()
@@ -92,6 +93,7 @@ export const Saves = (props) => {
 
       <ConfirmFavorite />
       <ConfirmDelete />
+      <ConfirmDeleteItemInList />
       <ConfirmArchive />
       <ConfirmTagging />
       <ConfirmShare />
