@@ -2,6 +2,7 @@ import { Toast as Component } from './toast'
 import { actionToastsReducers, sendToast } from 'connectors/toasts/toast.state'
 import { ITEMS_ADD_SUCCESS } from 'actions'
 import { actions, createToastData } from 'connectors/dev-tools/toasts'
+import { toastStyle } from 'connectors/toasts/toast-list'
 
 export default {
   title: 'Toast/Toast',
@@ -18,14 +19,16 @@ export const Toast = (args) => {
   const toast = args.type ? actionToastsReducers([], sendToast(data))[0] : undefined
 
   return (
-    <Component
-      {...toast}
-      count={toast.itemCount}
-      show={true}
-      remove={() => {}}
-      showUndo={args.showUndo}
-      handleUndo={() => {}}
-    />
+    <div className={toastStyle}>
+      <Component
+        {...toast}
+        count={toast.itemCount}
+        show={true}
+        remove={() => {}}
+        showUndo={args.showUndo}
+        handleUndo={() => {}}
+      />
+    </div>
   )
 }
 
