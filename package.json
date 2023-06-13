@@ -25,7 +25,7 @@
     "compile": "npm run compile:icons & npm run compile:styles",
     "compile:icons": "node ./.scripts/icons/compile-icons.js",
     "compile:styles": "node .scripts/styles/compile-styles.js",
-    "locale:inject": "node ./.scripts/localization/locale-inject",
+    "locale:inject": "node ./.scripts/localization/locale-inject.mjs",
     "locale:parse": "cd .scripts/localization/ && npm run extract",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
     "prettier:check": "prettier --check 'src/**/*.{js,jsx,ts,tsx}'",
