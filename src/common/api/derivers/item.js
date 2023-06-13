@@ -72,6 +72,7 @@ import { BASE_URL } from 'common/constants'
  * @param isSyndicated — true if this article is syndicated by pocket
  * @param isCollection — ?? Is this needed?
  * @param isUserList - TODO: will result in an added icon on item card
+ * @param isInShareableList - true if the item exists in one or more shareable lists
  * @param hasAnnotations — for filtering by annotation/highlights
  *
  * Analytics Properties
@@ -203,6 +204,7 @@ export function deriveItemData({
     isCollection: isCollection({ item }),
     isUserList: isUserList({ item }),
     isInternalItem: isInternalItem({ item, node, itemEnrichment, status: node?.status }),
+    isInShareableList: isInShareableList({ node }),
     fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
       url: analyticsUrl({ node, item, itemEnrichment }),
@@ -385,6 +387,18 @@ function syndicatedUrl({ item }) {
 
 function fromPartner({ itemEnrichment }) {
   return itemEnrichment?.fromPartner || false
+}
+
+/**
+ * IS IN SHAREABLE LIST
+ * ————————————————————————————————————
+ * @param {object} node SavedItem data for the item
+ * @returns {bool} whether the item has been added to at least one shareable list
+ */
+
+function isInShareableList({ node }) {
+  if (node?.shareableListTotalCount > 0) return true
+  return false
 }
 
 /**
