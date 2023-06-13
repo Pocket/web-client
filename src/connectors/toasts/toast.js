@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react'
-import DumbToast from 'components/toast/toast'
+import { Toast as DumbToast } from 'components/toast/toast'
 
 import { useDispatch } from 'react-redux'
 import { clearToast } from './toast.state'
