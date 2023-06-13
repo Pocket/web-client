@@ -5,7 +5,7 @@ import { actions, createToastData } from 'connectors/dev-tools/toasts'
 import { toastStyle } from 'connectors/toasts/toast-list'
 
 export default {
-  title: 'Toast/Toast',
+  title: 'Components/Toast',
   component: Component,
   argTypes: {
     count: { control: { type: 'number', min: 1 } },

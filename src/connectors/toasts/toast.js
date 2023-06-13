@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react'
-import { Toast as DumbToast } from 'components/toast/toast'
+import { Toast as ToastComponent } from 'components/toast/toast'
 
 import { useDispatch } from 'react-redux'
 import { clearToast } from './toast.state'
@@ -43,7 +43,7 @@ export function Toast({
   }
 
   return (
-    <DumbToast
+    <ToastComponent
       actionType={actionType}
       count={count}
       type={type}
