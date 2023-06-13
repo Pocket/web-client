@@ -8,6 +8,7 @@ export default {
   component: Component,
   argTypes: {
     count: { control: { type: 'number', min: 1 } },
+    showUndo: { control: { type: 'boolean' } },
     type: { control: { type: 'select' }, options: actions }
   }
 }
@@ -22,7 +23,7 @@ export const Toast = (args) => {
       count={toast.itemCount}
       show={true}
       remove={() => {}}
-      showUndo={() => {}}
+      showUndo={args.showUndo}
       handleUndo={() => {}}
     />
   )
@@ -30,5 +31,6 @@ export const Toast = (args) => {
 
 Toast.args = {
   count: 1,
+  showUndo: false,
   type: ITEMS_ADD_SUCCESS
 }
