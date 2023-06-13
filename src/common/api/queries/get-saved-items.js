@@ -24,6 +24,7 @@ const getSavedItemsQuery = gql`
             favoritedAt
             isArchived
             archivedAt
+            shareableListTotalCount
             tags {
               id
               name
