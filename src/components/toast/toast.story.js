@@ -16,7 +16,7 @@ export default {
 
 export const Toast = (args) => {
   const data = createToastData(args.type, args.count)
-  const toast = args.type ? actionToastsReducers([], sendToast(data))[0] : undefined
+  const toast = actionToastsReducers([], sendToast(data))[0]
 
   return (
     <div className={toastStyle}>
