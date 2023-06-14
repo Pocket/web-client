@@ -36,7 +36,7 @@ export const Toolbar = ({ id }) => {
   const fontSize = useSelector((state) => state.readerSettings.fontSize)
   const fontFamily = useSelector((state) => state.readerSettings.fontFamily)
 
-  const { analyticsData } = item
+  const { analyticsData, shareableListTotalCount } = item
 
   const { isArchived, isFavorite, tags } = savedData
 
@@ -53,8 +53,9 @@ export const Toolbar = ({ id }) => {
   }
 
   const itemDelete = () => {
+    const deleteAction = shareableListTotalCount > 0 ? mutationDeleteConnectedItem : mutationDelete
     dispatch(sendSnowplowEvent('reader.delete', analyticsData))
-    dispatch(mutationDelete(id))
+    dispatch(deleteAction(id))
   }
 
   const toggleFavorite = () => {
