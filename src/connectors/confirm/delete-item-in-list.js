@@ -10,6 +10,7 @@ export const ConfirmDeleteItemInList = () => {
 
   // Handle delete actions with confirmation
   const itemToDelete = useSelector((state) => state.mutationDelete.itemId)
+  const count = useSelector((state) => state.mutationDelete.count)
   const modalStatus = useSelector((state) => state.mutationDelete.showDeleteListModal)
   const showModal = modalStatus && itemToDelete?.length > 0
   const confirmDelete = () => dispatch(mutationDeleteConnectedItemConfirm())
@@ -25,10 +26,11 @@ export const ConfirmDeleteItemInList = () => {
       screenReaderLabel={t('confirm:confirm-delete-item-in-list', 'Confirm Delete')}
       handleClose={cancelDelete}>
       <ModalBody>
+        <p>TEMPORARY: Number of lists this item is in: {count}</p>
         <p>
           <Trans i18nKey="confirm:delete-item-in-list-copy">
-            Are you sure you want to delete this item? This will also remove it from Lists. This
-            action cannot be undone.
+            Are you sure you want to delete this item? This will also remove it from {count} Lists.
+            This action cannot be undone.
           </Trans>
         </p>
       </ModalBody>
@@ -38,7 +40,7 @@ export const ConfirmDeleteItemInList = () => {
           data-cy="delete-cancel"
           onClick={cancelDelete}
           autoFocus={true}>
-          <Trans i18nKey="confirm:cancel">Cancel</Trans>
+          {t('confirm:cancel', 'Cancel')}
         </button>
         <button
           className="primary"
@@ -46,7 +48,7 @@ export const ConfirmDeleteItemInList = () => {
           data-cy="delete-confirm"
           onClick={confirmDelete}
           autoFocus={true}>
-          <Trans i18nKey="confirm:delete">Delete</Trans>
+          {t('confirm:delete', 'Cancel')}
         </button>
       </ModalFooter>
     </Modal>
