@@ -48,7 +48,7 @@ export const ConfirmDeleteItemInList = () => {
           data-cy="delete-confirm"
           onClick={confirmDelete}
           autoFocus={true}>
-          {t('confirm:delete', 'Cancel')}
+          {t('confirm:delete', 'Delete')}
         </button>
       </ModalFooter>
     </Modal>

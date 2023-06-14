@@ -2,7 +2,7 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { mutationBulkConfirm, mutationBulkCancel } from 'connectors/items/mutations-bulk.state'
 import { BatchProcessing } from 'components/processing/processing'
-import { useTranslation, Trans } from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 
 export const ConfirmDelete = () => {
   const dispatch = useDispatch()
@@ -21,14 +21,15 @@ export const ConfirmDelete = () => {
   const cancelDelete = () => dispatch(mutationBulkCancel())
 
   const deleteCopy =
-    // aly update this - no Trans component
-    batchStatus === 'delete' ? (
-      <Trans i18nKey="confirm:delete-item-copy">
-        Are you sure you want to delete this item? This cannot be undone.
-      </Trans>
-    ) : (
-      <Trans i18nKey="confirm:delete-bulk-list-items-copy">pink elephants</Trans>
-    )
+    batchStatus === 'delete'
+      ? t(
+          'confirm:delete-item-copy',
+          'Are you sure you want to delete these items? This cannot be undone.'
+        )
+      : t(
+          'confirm:delete-bulk-list-items-copy',
+          'At least one of these items has been added to a list. Deleting it will remove it from lists. Are you sure you want to delete these items? This cannot be undone.'
+        )
 
   const deleteTitle =
     batchStatus === 'delete'
@@ -59,7 +60,7 @@ export const ConfirmDelete = () => {
             data-cy="delete-confirm"
             onClick={confirmDelete}
             autoFocus={true}>
-            <Trans i18nKey="confirm:delete">Delete</Trans>
+            {t('confirm:delete', 'Delete')}
           </button>
         </ModalFooter>
       )}
