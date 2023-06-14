@@ -14,29 +14,41 @@ export const ConfirmDelete = () => {
   const batchTotal = useSelector((state) => state.mutationBulk.batchTotal)
   const batchCount = useSelector((state) => state.mutationBulk.batchCount)
   const batchStart = useSelector((state) => state.mutationBulk.batchStart)
+  const batchStatus = useSelector((state) => state.mutationBulk.deleteAction)
 
   const showModal = modalStatus && itemsToDelete.length > 0
   const confirmDelete = () => dispatch(mutationBulkConfirm())
   const cancelDelete = () => dispatch(mutationBulkCancel())
 
+  const deleteCopy =
+    // aly update this - no Trans component
+    batchStatus === 'delete' ? (
+      <Trans i18nKey="confirm:delete-item-copy">
+        Are you sure you want to delete this item? This cannot be undone.
+      </Trans>
+    ) : (
+      <Trans i18nKey="confirm:delete-bulk-list-items-copy">pink elephants</Trans>
+    )
+
+  const deleteTitle =
+    batchStatus === 'delete'
+      ? t('confirm:delete-items', 'Delete Items')
+      : t('confirm:delete-bulk-list-items-title', 'Confirm Delete')
+
   const appRootSelector = '#__next'
 
   return (
     <Modal
-      title={t('confirm:delete-item', 'Delete Item')}
+      title={deleteTitle}
       appRootSelector={appRootSelector}
       isOpen={showModal}
-      screenReaderLabel={t('confirm:delete-item', 'Delete Item')}
+      screenReaderLabel={deleteTitle}
       handleClose={cancelDelete}>
       <ModalBody>
         {batchStart ? (
           <BatchProcessing batchTotal={batchTotal} batchCount={batchCount} />
         ) : (
-          <p>
-            <Trans i18nKey="confirm:delete-item-copy">
-              Are you sure you want to delete this item? This cannot be undone.
-            </Trans>
-          </p>
+          <p>{deleteCopy}</p>
         )}
       </ModalBody>
       {batchStart ? null : (

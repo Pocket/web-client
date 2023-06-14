@@ -37,6 +37,7 @@ const initialState = {
   endPosition: 0,
   favoriteAction: 'favorite', // determines if the action is favorite/unfavorite
   archiveAction: 'archive', // determines if the action is archive/unarchive
+  deleteAction: 'delete', // determines if the action is to delete an item that is in a list
   batchCount: 0,
   batchStart: false,
   batchTotal: 0
@@ -51,8 +52,15 @@ export const mutationBulkReducers = (state = initialState, action) => {
 
     case MUTATION_BULK_ADD:
     case MUTATION_BULK_REMOVE: {
-      const { previouslySelectedId, itemIds, favoriteAction, archiveAction } = action
-      return { ...state, previouslySelectedId, itemIds, favoriteAction, archiveAction }
+      const { previouslySelectedId, itemIds, favoriteAction, archiveAction, deleteAction } = action
+      return {
+        ...state,
+        previouslySelectedId,
+        itemIds,
+        favoriteAction,
+        archiveAction,
+        deleteAction
+      }
     }
 
     case MUTATION_BULK_CLEAR:
@@ -110,13 +118,17 @@ export function* itemBulkSelect(action) {
 
     const favoriteAction = itemIds.every((id) => !items[id].isFavorite) ? 'favorite' : 'unfavorite'
     const archiveAction = itemIds.every((id) => !items[id].isArchived) ? 'archive' : 'add'
+    const deleteAction = itemIds.every((id) => items[id].shareableListTotalCount === 0)
+      ? 'delete'
+      : 'deleteConnectedItem'
 
     return yield put({
       type: MUTATION_BULK_ADD,
       previouslySelectedId: id,
       itemIds,
       favoriteAction,
-      archiveAction
+      archiveAction,
+      deleteAction
     })
   } catch (error) {
     console.warn(error)
