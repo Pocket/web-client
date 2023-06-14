@@ -184,13 +184,9 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
     dispatch(shareAction({ item, position }))
   }
   const actionDelete = () => {
-    if (shareableListTotalCount > 0) {
-      dispatch(sendSnowplowEvent(`${snowplowId}.delete`, analyticsData))
-      dispatch(mutationDeleteConnectedItem(id))
-    } else {
-      dispatch(sendSnowplowEvent(`${snowplowId}.delete`, analyticsData))
-      dispatch(mutationDelete(id))
-    }
+    const deleteAction = shareableListTotalCount > 0 ? mutationDeleteConnectedItem : mutationDelete
+    dispatch(sendSnowplowEvent(`${snowplowId}.delete`, analyticsData))
+    dispatch(deleteAction(id))
   }
   const actionArchive = () => {
     dispatch(sendSnowplowEvent(`${snowplowId}.archive`, analyticsData))
