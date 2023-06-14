@@ -7,6 +7,7 @@ import { MUTATION_BULK_SET_CURRENT } from 'actions'
 
 import { MUTATION_DELETE } from 'actions'
 import { MUTATION_BULK_DELETE } from 'actions'
+import { MUTATION_DELETE_CONNECTED_ITEM } from 'actions'
 
 import { MUTATION_ARCHIVE } from 'actions'
 import { MUTATION_UNARCHIVE } from 'actions'
@@ -103,8 +104,8 @@ export const decreaseFontSize = () => ({ type: SHORTCUT_DECREASE_FONT_SIZE })
 export const increaseColumnWidth = () => ({type: SHORTCUT_INCREASE_COLUMN_WIDTH }) //prettier-ignore
 export const decreaseColumnWidth = () => ({type: SHORTCUT_DECREASE_COLUMN_WIDTH }) //prettier-ignore
 
-const sortOrderSetNew = () => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, sortOrder: 'DESC'})
-const sortOrderSetOld = () => ({type: ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, sortOrder: 'ASC'})
+const sortOrderSetNew = () => ({ type: ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, sortOrder: 'DESC' })
+const sortOrderSetOld = () => ({ type: ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, sortOrder: 'ASC' })
 
 // prettier-ignore
 export const listShortcuts = [
@@ -356,9 +357,13 @@ function* shortcutDeleteItem({ appMode }) {
 
   const id = yield select(getCurrentItemId)
   if (!id) return
-  
-  yield put({ type: MUTATION_DELETE, itemId:id })
 
+  const item = yield select(getItem, id)
+  const { shareableListTotalCount } = item
+
+  const deleteType = shareableListTotalCount > 0 ? MUTATION_DELETE_CONNECTED_ITEM : MUTATION_DELETE
+
+  yield put({ type: deleteType, itemId: id })
 }
 
 function* shortcutArchiveItem({ appMode }) {
@@ -406,7 +411,7 @@ function* shortcutEditTags({ appMode }) {
   const currentItem = yield select(getSavedItem, id)
   const tags = currentItem?.tags
 
-  yield put({ type: MUTATION_TAGGING, itemId:id, tags})
+  yield put({ type: MUTATION_TAGGING, itemId: id, tags })
 }
 
 function* shortcutBatchFavorite() {
@@ -414,10 +419,9 @@ function* shortcutBatchFavorite() {
   if (!bulkItems.length) return
 
   const batchFavorite = yield select(getBatchFavorite)
-  const type =
-    batchFavorite === 'favorite' ? MUTATION_BULK_FAVORITE : MUTATION_BULK_UNFAVORITE
+  const type = batchFavorite === 'favorite' ? MUTATION_BULK_FAVORITE : MUTATION_BULK_UNFAVORITE
 
-  yield put({type, itemIds: bulkItems})
+  yield put({ type, itemIds: bulkItems })
 }
 
 function* shortcutBatchArchive() {
@@ -425,22 +429,21 @@ function* shortcutBatchArchive() {
   if (!bulkItems.length) return
 
   const batchArchive = yield select(getBatchArchive)
-  const type =
-  batchArchive === 'archive' ? MUTATION_BULK_ARCHIVE : MUTATION_BULK_UNARCHIVE
+  const type = batchArchive === 'archive' ? MUTATION_BULK_ARCHIVE : MUTATION_BULK_UNARCHIVE
 
-  yield put({type, itemIds: bulkItems})
+  yield put({ type, itemIds: bulkItems })
 }
 
 function* shortcutBatchDelete() {
   const bulkItems = yield select(getBulkItems)
   if (!bulkItems.length) return
-  yield put({type:MUTATION_BULK_DELETE, itemIds: bulkItems})
+  yield put({ type: MUTATION_BULK_DELETE, itemIds: bulkItems })
 }
 
 function* shortcutBatchTag() {
   const bulkItems = yield select(getBulkItems)
   if (!bulkItems.length) return
-  yield put({type:MUTATION_BULK_TAGGING, itemIds: bulkItems})
+  yield put({ type: MUTATION_BULK_TAGGING, itemIds: bulkItems })
 }
 
 /**
