@@ -186,15 +186,15 @@ export const itemStyles = css`
     line-height: var(--title-line-height);
 
     &.open-external {
-      a {
-        margin-right: 0;
-        ${breakpointSmallTablet} {
-          margin-right: 0.5rem;
-        }
-      }
       .mobile-view-original {
         display: none;
-        ${breakpointSmallTablet} {
+      }
+      ${breakpointSmallTablet} {
+        .text {
+          display: inline-block;
+          margin-right: 0.5rem;
+        }
+        .mobile-view-original {
           display: inline-block;
         }
       }
