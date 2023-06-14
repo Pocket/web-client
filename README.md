@@ -64,6 +64,49 @@ The `/containers` folder contains a `layouts` folder. The components in this fol
 - Header
 - Footer
 
+## Localization
+
+### Library
+We use i18n (specificaly react-i18n) to handle localization throughout the project.  The library provides two patterns a `useTranslation` hook and a `<Trans>` component. We prefer the `useTranslation` hook in almost all instances.  If the translated block contains markup such as links or images the `<Trans>` component can be used for clarity, but it has limitations you should be aware of.
+
+- `useTranslations`: https://react.i18next.com/latest/usetranslation-hook
+- `Trans`: https://react.i18next.com/latest/trans-component
+
+> _IMPORTANT_ — At present, this library is initialized into our nextJS instance via a third-party library called `next-i18next`.  This is the recommended way to do this in nextJS using the `pages` pattern.  It does mean when you are importing `useTranslation` or `Trans` you should do so from `next-i18next` and _NOT_ directly from `react-i18next`.  The reason for this is that nextJS is universal and `next-i18next` does some additional work for us to support server side rendering (ssr).
+
+### Translations
+Translations are handled by Smartling via a Github integration.  This should make it a more streamlined to write your code normally and then run some simple scripts to prep them and trigger a job on Smartling. Once that job on Smartling has been authorized and completed, Smartling will submit a new PR back to our repo with all the translated files.
+
+1) As you write code, when you are including a new string, be sure to wrap it appropriately and use a namespace. Namespace is seperated by a `:` This helps us break up translations so we can load only what we need.
+```javascript
+mycoolnamespace:mystring-key
+``` 
+2) We use default fallbacks, so your code will be fine to ship so long as all stakeholders are aware that english will show up across all locales until the translations come back.
+```javascript
+t(`mycoolnamespace:mystring-key`, 'My default string that will be translated`)
+``` 
+3) In order for a string to be eligible for translation, you need to wrap it appropriately and we will end up picking it up with a parsing script.
+
+```js
+import { useTranslation } from 'next-i18next'
+
+export const Nav = ()=>{
+  const { t } = useTranslation()
+  return <div>{t(`nav:lists`, 'Lists')}</div>
+}
+```
+
+4) Once you are ready to make your PR, running `npm run parse` from the root directory will add new string to the `en.json` which you will be able to see as code changes in git.  Once those changes are merged into main, Smartling will automatically see and create a job for starting translations.
+
+Please use `locale` as the type and whatever we are operating on.
+```
+locales(nav): adding updates for shared lists
+```
+
+5) Once the PR from Smartling comes back it can be merged and other locales will pick up the appropriate language and there will be much rejoicing.
+
+
+
 ---
 
 ## Server
@@ -114,7 +157,6 @@ Finalize things by running the following command from the root of the web-client
 mkcert localhost.web-client.getpocket.com
 ```
 
-
 #### Running Locally
 
 To run the `web-client` site locally :
@@ -122,9 +164,6 @@ To run the `web-client` site locally :
 ```bash
 npm run dev
 ```
-
-*Note:* If this is the first time you are running the app, you will need to run `npm run build` before you can run `npm run dev` in order to download the localization files.
-
 You will need to update your hosts file to point localhost (127.0.0.1) to the hostname `localhost.web-client.getpocket.com`. Some of our third party API keys are only enabled for `getpocket.com`, and so will not work at `localhost`. See: https://linuxize.com/post/how-to-edit-your-hosts-file/
 
 The discover pages will be deployed locally on `localhost.web-client.getpocket.com`.
@@ -169,13 +208,8 @@ This will make a Cypress environment variable available as `POCKET_TEST_USER_SEC
 
 ## Deployment
 
-#### Feature Branches
-Each branch will have a subsequent feature branch that will deployed.
-> _Details to follow_
-
 #### Production Release
 Production release will happen automatically when a PR is merged to `main`.  Main is a protected branch and can only be modified with an approved PR.
-> _Details to follow_
 
 ---
 ## Contributing

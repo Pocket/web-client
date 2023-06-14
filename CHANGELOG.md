@@ -1,3 +1,12 @@
+## [1.98.2](https://github.com/Pocket/web-client/compare/v1.98.1...v1.98.2) (2023-06-14)
+
+
+### Bug Fixes
+
+* **locales:** add specific update to en `Lists` ([1f3e58a](https://github.com/Pocket/web-client/commit/1f3e58abc0072ee99b39e0d6a555f7e3831acb48))
+* **locales:** update injection script runner ([4f9fdc5](https://github.com/Pocket/web-client/commit/4f9fdc5d1ab78c505cec6855f965b84cde6be9e7))
+* **locale:** update parsing runner ([af585a2](https://github.com/Pocket/web-client/commit/af585a23e909d1edfb9e2c1ac4b3cc6790f185f8))
+
 ## [1.98.1](https://github.com/Pocket/web-client/compare/v1.98.0...v1.98.1) (2023-06-13)
 
 
