@@ -204,7 +204,7 @@ export function deriveItemData({
     isCollection: isCollection({ item }),
     isUserList: isUserList({ item }),
     isInternalItem: isInternalItem({ item, node, itemEnrichment, status: node?.status }),
-    shareableListTotalCount: shareableListTotalCount({ node }),
+    shareableListTotalCount: node?.shareableListTotalCount || 0,
     fromPartner: fromPartner({ itemEnrichment }),
     analyticsData: {
       url: analyticsUrl({ node, item, itemEnrichment }),
@@ -387,17 +387,6 @@ function syndicatedUrl({ item }) {
 
 function fromPartner({ itemEnrichment }) {
   return itemEnrichment?.fromPartner || false
-}
-
-/**
- * SHAREABLE LIST TOTAL COUNT
- * ————————————————————————————————————
- * @param {object} node SavedItem data for the item
- * @returns {number} Number of lists this item is in
- */
-
-function shareableListTotalCount({ node }) {
-  return node?.shareableListTotalCount
 }
 
 /**
