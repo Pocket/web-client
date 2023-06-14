@@ -72,7 +72,7 @@ import { BASE_URL } from 'common/constants'
  * @param isSyndicated — true if this article is syndicated by pocket
  * @param isCollection — ?? Is this needed?
  * @param isUserList - TODO: will result in an added icon on item card
- * @param shareableListTotalCount - true if the item exists in one or more shareable lists
+ * @param shareableListTotalCount - number of lists this item is in
  * @param hasAnnotations — for filtering by annotation/highlights
  *
  * Analytics Properties
