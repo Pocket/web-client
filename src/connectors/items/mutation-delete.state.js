@@ -23,7 +23,7 @@ export const mutationDelete = (itemId) => ({ type: MUTATION_DELETE, itemId })
 export const mutationUnDelete = (itemIds, itemPosition, previousStatus) => ({ type: MUTATION_UNDELETE, itemIds, itemPosition, previousStatus}) //prettier-ignore
 export const mutationDeleteTransitionalItem = (itemId, transitionId) => ({ type: MUTATION_DELETE, itemId, transitionId }) //prettier-ignore
 export const mutationBulkDelete = (itemIds) => ({ type: MUTATION_BULK_DELETE, itemIds })
-export const mutationDeleteConnectedItem = (itemIds) => ({ type: MUTATION_DELETE_CONNECTED_ITEM, itemIds }) //prettier-ignore
+export const mutationDeleteConnectedItem = (itemId) => ({ type: MUTATION_DELETE_CONNECTED_ITEM, itemId }) //prettier-ignore
 export const mutationDeleteConnectedItemCancel = () => ({ type: MUTATION_DELETE_CONNECTED_ITEM_CANCEL }) //prettier-ignore
 export const mutationDeleteConnectedItemConfirm = () => ({ type: MUTATION_DELETE_CONNECTED_ITEM_CONFIRM }) //prettier-ignore
 
@@ -38,8 +38,8 @@ export const mutationDeleteReducers = (state = initialState, action) => {
     }
 
     case MUTATION_DELETE_CONNECTED_ITEM: {
-      const { itemIds } = action
-      return { ...state, itemIds, showDeleteListModal: true }
+      const { itemId } = action
+      return { ...state, itemId, showDeleteListModal: true }
     }
 
     case MUTATION_DELETE_CONNECTED_ITEM_CANCEL:
@@ -110,7 +110,7 @@ function* savedItemsBulkDelete(action) {
 }
 
 function* savedItemInListDelete(action) {
-  const { itemIds } = action
+  const { itemId } = action
 
   const { cancel } = yield race({
     cancel: take(MUTATION_DELETE_CONNECTED_ITEM_CANCEL),
@@ -119,6 +119,6 @@ function* savedItemInListDelete(action) {
 
   if (cancel) return
 
-  const ids = yield call(batchSendMutations, itemIds, bulkDelete)
+  const ids = yield call(batchSendMutations, [itemId], bulkDelete)
   return yield put({ type: MUTATION_DELETE_SUCCESS, ids })
 }

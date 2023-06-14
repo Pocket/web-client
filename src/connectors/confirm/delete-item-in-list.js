@@ -9,9 +9,9 @@ export const ConfirmDeleteItemInList = () => {
   const { t } = useTranslation()
 
   // Handle delete actions with confirmation
-  const itemsToDelete = useSelector((state) => state.mutationDelete.itemIds)
+  const itemToDelete = useSelector((state) => state.mutationDelete.itemId)
   const modalStatus = useSelector((state) => state.mutationDelete.showDeleteListModal)
-  const showModal = modalStatus && itemsToDelete?.length > 0
+  const showModal = modalStatus && itemToDelete?.length > 0
   const confirmDelete = () => dispatch(mutationDeleteConnectedItemConfirm())
   const cancelDelete = () => dispatch(mutationDeleteConnectedItemCancel())
 

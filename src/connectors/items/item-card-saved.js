@@ -186,7 +186,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   const actionDelete = () => {
     if (shareableListTotalCount > 0) {
       dispatch(sendSnowplowEvent(`${snowplowId}.delete`, analyticsData))
-      dispatch(mutationDeleteConnectedItem([id]))
+      dispatch(mutationDeleteConnectedItem(id))
     } else {
       dispatch(sendSnowplowEvent(`${snowplowId}.delete`, analyticsData))
       dispatch(mutationDelete(id))
