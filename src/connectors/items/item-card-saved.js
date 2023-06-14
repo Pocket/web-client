@@ -169,7 +169,12 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
 
   if (!itemSaved || !item) return null
   const { isFavorite, isArchived, tags} = itemSaved //prettier-ignore
-  const { givenUrl, permanentUrl, analyticsData: passedAnalyticsData, isInShareableList } = item
+  const {
+    givenUrl,
+    permanentUrl,
+    analyticsData: passedAnalyticsData,
+    shareableListTotalCount
+  } = item
   const analyticsData = { ...passedAnalyticsData, position }
 
   /** ITEM MENU ITEMS
@@ -179,7 +184,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
     dispatch(shareAction({ item, position }))
   }
   const actionDelete = () => {
-    if (isInShareableList) {
+    if (shareableListTotalCount > 0) {
       dispatch(sendSnowplowEvent(`${snowplowId}.delete`, analyticsData))
       dispatch(mutationDeleteConnectedItem([id]))
     } else {
