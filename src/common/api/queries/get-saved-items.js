@@ -1,5 +1,6 @@
 import { requestGQL } from 'common/utilities/request/request'
 import { gql } from 'common/utilities/gql/gql'
+import { FRAGMENT_SAVED_ITEM } from 'common/api/fragments/fragment.savedItem'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 import { itemFiltersFromGraph } from './get-saved-items.filters'
 import { actionToCamelCase } from 'common/utilities/strings/strings'
@@ -15,20 +16,7 @@ const getSavedItemsQuery = gql`
         edges {
           cursor
           node {
-            url
-            _createdAt
-            _updatedAt
-            id
-            status
-            isFavorite
-            favoritedAt
-            isArchived
-            archivedAt
-            shareableListTotalCount
-            tags {
-              id
-              name
-            }
+            ...SavedItemDetails
             item {
               ...ItemDetails
             }
@@ -44,6 +32,7 @@ const getSavedItemsQuery = gql`
       }
     }
   }
+  ${FRAGMENT_SAVED_ITEM}
   ${FRAGMENT_ITEM}
 `
 export async function getSavedItems({ actionType, sortOrder = 'DESC', tagNames, pagination }) {
