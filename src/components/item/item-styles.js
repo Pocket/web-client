@@ -291,13 +291,28 @@ export const itemStyles = css`
     button .icon {
       margin-top: 0;
     }
+    .promoted {
+      color: var(--color-actionPrimary);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeAndDrop {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    90% {
+      opacity: 0;
+    }
+    100% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
   }
 
   &.demoted {
-    transition: transform 150ms cubic-bezier(0.37, 0, 0.63, 1),
-      opacity 140ms cubic-bezier(0.37, 0, 0.63, 1);
-    transform: scale(0.8);
-    opacity: 0;
+    animation: fadeAndDrop 150ms;
   }
 
   .topDetails {

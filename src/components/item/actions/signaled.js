@@ -1,3 +1,4 @@
+import { cx } from '@emotion/css'
 import { SaveIcon } from 'components/icons/SaveIcon'
 import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
 import { ThumbsDownIcon } from 'components/icons/ThumbsDownIcon'
@@ -72,6 +73,7 @@ const popoverContainer = css`
 export function SignaledActions({
   id,
   isAuthenticated,
+  isPromoted = true,
   saveStatus,
   onSave,
   onUnSave,
@@ -87,9 +89,9 @@ export function SignaledActions({
     <div className={`${signaledActionStyles} status-${saveStatus}`}>
       <div className="signals">
         <button
-          className={topTooltipDelayed}
           onClick={onPromote}
           disabled={isPromoted}
+          className={cx(topTooltipDelayed, isPromoted && 'promoted')}
           data-tooltip={t('home:tooltip-promote', 'See more content like this')}>
           <ThumbsUpIcon />
         </button>
