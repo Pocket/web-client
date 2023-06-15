@@ -123,12 +123,12 @@ export function ActionsSignaled(props) {
 
   const onDemote = () => {
     dispatch(sendSnowplowEvent('home.slate.thumbsdown', analyticsData))
-    dispatch(demoteHomeRec(slateId, id))
+    dispatch(demoteHomeRec(slateId, id, saveUrl))
   }
 
   const onPromote = () => {
     dispatch(sendSnowplowEvent('home.slate.thumbsup', analyticsData))
-    dispatch(promoteHomeRec(slateId, id))
+    dispatch(promoteHomeRec(slateId, id, saveUrl))
   }
 
   // Prep save action
