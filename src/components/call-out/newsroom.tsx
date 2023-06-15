@@ -1,7 +1,6 @@
 import { css } from '@emotion/css'
 import { breakpointSmallDesktop } from 'common/constants' // 1023
 import { breakpointMediumTablet } from 'common/constants' // 959
-import { useTranslation } from 'next-i18next'
 
 const wrapper = css`
   grid-column-start: 10;
@@ -86,12 +85,10 @@ const wrapper = css`
 `
 
 export function CallOutNewsroom() {
-  const { t } = useTranslation()
-
   return (
     <aside className={wrapper}>
       <div>
-        <h6>{t('banner:newsroom', 'How to Support Your Local Newsroom')}</h6>
+        <h6>How to Support Your Local Newsroom</h6>
         <ol>
           <li>
             Find your local newsroom using{' '}
