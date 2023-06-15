@@ -111,7 +111,9 @@ export const ItemSignaled = (props) => {
     if (!shortcutSelected && shortcutSelect) shortcutSelect()
   }
 
-  const onAnimationEnd = () => onCompleteDemotion()
+  const onAnimationEnd = (e) => {
+    if (e.target == viewRef.current) onCompleteDemotion()
+  }
 
   return (
     <article
