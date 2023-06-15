@@ -119,5 +119,23 @@ export const homeActions = {
     },
     expects: ['label'],
     description: 'Fired when a user clicks the `Exlore more *` link within each topic section'
+  },
+  'home.slate.thumbsup': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['corpusRecommendationId'],
+    description: 'Fired when a user clicks the thumbsup button on an article'
+  },
+  'home.slate.thumbsdown': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['corpusRecommendationId'],
+    description: 'Fired when a user clicks the thumbsdown button on an article'
   }
 }
