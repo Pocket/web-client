@@ -60,6 +60,8 @@ import { LIST_ITEM_NOTE_DELETE_FAILURE } from 'actions'
 import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
 import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
 
+import { HOME_REC_REQUEST_DEMOTE } from 'actions'
+
 export function Toast({
   stamp,
   type,
@@ -131,7 +133,10 @@ export function Toast({
     [LIST_ITEM_NOTE_DELETE_SUCCESS]: t('toast:note-deleted', 'Note deleted'),
     [LIST_ITEM_NOTE_DELETE_FAILURE]: t('toast:error-deleting-note', 'Error deleting note'),
     [LIST_DELETE_ITEM_SUCCESS]: t('toast:item-removed-from-list', 'Item removed from list'),
-    [LIST_DELETE_ITEM_FAILURE]: t('toast:error-removing-item', 'Error removing item')
+    [LIST_DELETE_ITEM_FAILURE]: t('toast:error-removing-item', 'Error removing item'),
+
+    // Signaled Cards
+    [HOME_REC_REQUEST_DEMOTE]: t('toast:home-rec-demote', 'Item Removed')
   }
 
   const errors = [
