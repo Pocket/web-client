@@ -15,6 +15,7 @@ const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul'
 export const ItemSignaled = (props) => {
   const {
     itemId,
+    slateId,
     listId,
     title,
     itemImage,
@@ -22,14 +23,12 @@ export const ItemSignaled = (props) => {
     publisher,
     publisherLogo,
     excerpt,
-    timeToRead,
     isFavorite,
     isArchive,
     isPremium,
     isSyndicated,
     isCollection,
     authors,
-    storyCount,
     isInternalItem,
     saveStatus,
     externalUrl,
@@ -38,7 +37,6 @@ export const ItemSignaled = (props) => {
     topicName,
     isUserList,
     type,
-    listStatusInfo,
 
     // Data
     bulkEdit,
@@ -64,8 +62,6 @@ export const ItemSignaled = (props) => {
     selectBulk,
     analyticsData,
     onReport,
-    onDemote,
-    onPromote,
     onCompleteDemotion,
     isDemoted,
 
@@ -115,17 +111,7 @@ export const ItemSignaled = (props) => {
     if (!shortcutSelected && shortcutSelect) shortcutSelect()
   }
 
-  const handleAnimationEnd = () => {
-    setTimeout(() => {
-      onCompleteDemotion()
-    }, 150)
-  }
-
-  const handleAnimationStart = () => {
-    console.log('Animation Started')
-  }
-
-  if (isDemoted) handleAnimationEnd()
+  const onAnimationEnd = () => onCompleteDemotion()
 
   return (
     <article
@@ -134,6 +120,8 @@ export const ItemSignaled = (props) => {
       key={`signaled-${itemId}`}
       data-cy="article-card"
       onClick={selectBulk}
+      ref={viewRef}
+      onAnimationEnd={onAnimationEnd}
       onFocus={handleFocus}>
       <span className="media-block" ref={footerRef}>
         <CardMedia
@@ -197,6 +185,7 @@ export const ItemSignaled = (props) => {
           {Actions ? (
             <Actions
               id={itemId}
+              slateId={slateId}
               listId={listId}
               visibleCount={visibleCount}
               snowplowId={snowplowId}
@@ -204,8 +193,6 @@ export const ItemSignaled = (props) => {
               isArchive={isArchive}
               isPremium={isPremium}
               saveStatus={saveStatus}
-              onDemote={onDemote}
-              onPromote={onPromote}
               analyticsData={analyticsData}
               position={position}
             />

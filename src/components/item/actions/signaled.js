@@ -75,8 +75,8 @@ export function SignaledActions({
   saveStatus,
   onSave,
   onUnSave,
-  handlePromote,
-  handleDemote
+  onDemote,
+  onPromote
   // onReport
 }) {
   const { t } = useTranslation()
@@ -87,14 +87,16 @@ export function SignaledActions({
     <div className={`${signaledActionStyles} status-${saveStatus}`}>
       <div className="signals">
         <button
-          onClick={handlePromote}
           className={topTooltipDelayed}
+          onClick={onPromote}
+          disabled={isPromoted}
           data-tooltip={t('home:tooltip-promote', 'See more content like this')}>
           <ThumbsUpIcon />
         </button>
 
         <button
-          onClick={handleDemote}
+          onClick={onDemote}
+          disabled={isPromoted}
           className={topTooltipDelayed}
           data-tooltip={t('home:tooltip-demote', 'See less content like this')}>
           <ThumbsDownIcon />

@@ -10,8 +10,6 @@ import { basicSlide } from 'components/item/items-layout'
 import { SectionWrapper } from 'components/section-wrapper/section-wrapper'
 import { getHomeContent } from './home.state'
 
-import { demoteHomeRec, promoteHomeRec } from './home.state'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { HomeHeader } from 'components/headers/home-header'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
@@ -218,44 +216,14 @@ function CardTransitional({ id }) {
 }
 
 function CardSignaled({ slateId, id: recId }) {
-  const dispatch = useDispatch()
-
-  const onDemote = () => dispatch(demoteHomeRec(slateId, recId))
-  const onPromote = () => dispatch(promoteHomeRec(slateId, recId))
-
-  return (
-    <ItemSignaled
-      onDemote={onDemote}
-      onPromote={onPromote}
-      key={recId}
-      id={recId}
-      slateId={slateId}
-      snowplowId="home.corpus"
-    />
-  )
+  return <ItemSignaled key={recId} id={recId} slateId={slateId} snowplowId="home.corpus" />
 }
 
 function SlateEmpty() {
   return (
     <div className={emptySlate}>
       <div className="glyph">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 50 47">
-          <g
-            stroke="#000"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-miterlimit="10"
-            stroke-width="1.86535"
-            clip-path="url(#a)">
-            <path d="m45.0073 2.50543 2.2198 8.18887c2.2197 8.1889 2.4995 21.515 0 21.7948-2.4996.276-5.4132-2.3616-9.8565-9.1626-4.4433-6.8011-6.387-21.51498-6.387-21.51498L1 13.4737s4.62234 15.501 11.0541 22.1156c4.8126 4.9469 6.8719 7.4464 10.5802 9.4946.209.1156.4626.1343.6902.0597l7.8568-2.6936c1.552-.72 5.999-3.2158 7.4204-4.1709l8.6216-5.7863" />
-            <path d="M37.5137 5.41895s3.0554 7.65535 4.8573 11.74055c1.8057 4.0851 2.4996 10.6101 2.4996 10.6101M7.80664 16.5974s1.2498 5.2043 6.52496 11.1735l7.495-4.2344s-2.6376-3.2606-4.3015-6.3161c-1.6676-3.0554-2.2197-4.3015-2.2197-4.3015l-7.49876 3.6785Zm13.05076-4.9289s3.3315-1.1117 5.9691-2.49955m-4.1683 6.79985 6.1072-2.2198m-4.3025 6.9651 5.693-2.1526M16.1367 31.6577s6.6631-2.6376 9.5767-3.8874c2.9137-1.2497 5.5513-3.1785 5.5513-3.1785m-11.6592 12.34s3.8873-1.2497 7.7038-3.4695 7.7039-4.1635 7.7039-4.1635" />
-          </g>
-          <defs>
-            <clipPath id="a">
-              <path fill="#fff" d="M0 0h50v47H0z" />
-            </clipPath>
-          </defs>
-        </svg>
+        <EmptyGlyph />
       </div>
       <h4>You made it to the end of the internet!</h4>
       Just kidding. We’ll have some more great stories here for you soon.
@@ -268,4 +236,26 @@ function getItemsOnSceen(width) {
   if (width <= 719) return 2
   if (width <= 1023) return 3
   return 4 // Everything
+}
+
+const EmptyGlyph = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 50 47">
+      <g
+        stroke="#000"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit="10"
+        strokeWidth="1.865"
+        clipPath="url(#a)">
+        <path d="M45.007 2.505l2.22 8.19c2.22 8.188 2.5 21.514 0 21.794-2.5.276-5.413-2.361-9.856-9.162-4.444-6.802-6.387-21.515-6.387-21.515L1 13.474s4.622 15.5 11.054 22.115c4.813 4.947 6.872 7.447 10.58 9.495a.873.873 0 00.69.06l7.857-2.694c1.552-.72 6-3.216 7.42-4.17l8.622-5.787"></path>
+        <path d="M37.514 5.419s3.055 7.655 4.857 11.74c1.806 4.086 2.5 10.61 2.5 10.61M7.807 16.598s1.25 5.205 6.525 11.174l7.495-4.234s-2.638-3.261-4.302-6.317c-1.667-3.055-2.22-4.301-2.22-4.301l-7.498 3.678zm13.05-4.929s3.332-1.111 5.97-2.499m-4.169 6.8l6.107-2.22m-4.302 6.965l5.693-2.152m-14.02 13.096s6.664-2.638 9.577-3.888c2.914-1.25 5.552-3.178 5.552-3.178m-11.66 12.34s3.888-1.25 7.704-3.47 7.704-4.163 7.704-4.163"></path>
+      </g>
+      <defs>
+        <clipPath id="a">
+          <path fill="#fff" d="M0 0h50v47H0z"></path>
+        </clipPath>
+      </defs>
+    </svg>
+  )
 }
