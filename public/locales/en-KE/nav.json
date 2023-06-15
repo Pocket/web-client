@@ -37,6 +37,7 @@
   "item-count_one": "{{count}} item",
   "item-count_other": "{{count}} items",
   "lists": "Lists",
+  "lists-title": "Lists",
   "log-in": "Log in",
   "log-out": "Log out",
   "manage-account": "Manage account",
