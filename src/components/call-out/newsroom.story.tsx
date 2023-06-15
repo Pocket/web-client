@@ -1,8 +1,8 @@
-import { BannerNewsroom as Component } from './newsroom'
+import { CallOutNewsroom as Component } from './newsroom'
 import { css } from '@emotion/css'
 
 export default {
-  title: 'Components/Banner',
+  title: 'Components/CallOut',
   component: Component
 }
 
@@ -21,4 +21,4 @@ const Template = (args) => (
     <Component {...args} />
   </div>
 )
-export const NewsroomBanner = Template.bind({})
+export const NewsroomCallOut = Template.bind({})

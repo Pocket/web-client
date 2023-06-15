@@ -85,7 +85,7 @@ const wrapper = css`
   }
 `
 
-export function BannerNewsroom() {
+export function CallOutNewsroom() {
   const { t } = useTranslation()
 
   return (

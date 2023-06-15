@@ -21,7 +21,7 @@ import { AdRailBottom } from 'components/content-ads/content-ads'
 import { ContentIntro } from 'components/content-intro/content-intro'
 import { AuthorBio } from 'components/content-author/author-bio'
 import { Partner } from 'components/content-partner/partner'
-import { BannerNewsroom } from 'components/banner/newsroom'
+import { CallOutNewsroom } from 'components/call-out/newsroom'
 
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
@@ -194,7 +194,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
             {/* Right aside content such as ads and recs */}
 
             {newsroomUrls.includes(url) ? (
-              <BannerNewsroom />
+              <CallOutNewsroom />
             ) : (
               <aside className="right-aside">
                 <AdRailTop allowAds={allowAds} targeting={targeting} />
