@@ -99,7 +99,7 @@ export function CallOutNewsroom() {
           <li>If they have a newsletter, subscribe and share it with friends</li>
           <li>Support your local news organization with a recurring donation</li>
           <li>
-            Learn more about the
+            Learn more about the{' '}
             <a href="https://www.theajp.org/why-local-news/" target="_blank">
               state of local news
             </a>
