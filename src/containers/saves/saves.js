@@ -65,7 +65,7 @@ export const Saves = (props) => {
 
   // Campaign
   const showNewsroomCampaign = featureFlagActive({ flag: 'newsroom', featureState })
-  const showBanner = showNewsroomCampaign ? 'newsroom' : false
+  const bannerCampaign = showNewsroomCampaign ? 'newsroom' : false
 
   return (
     <Layout
@@ -74,7 +74,7 @@ export const Saves = (props) => {
       selectedNavLink={selectedNavLink}
       subset={subset}
       tag={tag}
-      showBanner={showBanner}>
+      bannerCampaign={bannerCampaign}>
       <SideNav type="saves" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
       <main className="main">
         <SuccessFXA type="saves" />

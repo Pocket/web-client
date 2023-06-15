@@ -221,7 +221,7 @@ const GlobalNav = ({
   tools = [],
   sendImpression,
   userStatus,
-  showBanner,
+  bannerCampaign,
   Banner = null,
   children = null
 }) => {
@@ -251,7 +251,7 @@ const GlobalNav = ({
 
   return (
     <header className={cx(headerStyle, isLoggedIn && 'logged-in')}>
-      {Banner ? <Banner showBanner={showBanner} /> : null}
+      {bannerCampaign && Banner ? <Banner bannerCampaign={bannerCampaign} /> : null}
       <PageContainer className="global-nav-container">
         <nav className={navStyle} data-cy="global-nav">
           <div className="site-nav">

@@ -54,7 +54,7 @@ export const enforceDefaultAvatar = (avatarUrl = '') => {
  * provided to it to the GlobalNav component.
  */
 const GlobalNav = (props) => {
-  const { selectedLink: selected, subset, tag, noNav, showBanner } = props
+  const { selectedLink: selected, subset, tag, noNav, bannerCampaign } = props
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
@@ -220,7 +220,7 @@ const GlobalNav = (props) => {
     window.location.assign(`${LOGIN_URL}?src=navbar`)
   }
 
-  const CurrentBanner = showBanner ? Banner : null
+  const CurrentBanner = bannerCampaign ? Banner : null
 
   return (
     <GlobalNavComponent
@@ -249,7 +249,7 @@ const GlobalNav = (props) => {
       sendImpression={sendImpressionEvent}
       tools={tools}
       noNav={hideNav}
-      showBanner={showBanner}
+      bannerCampaign={bannerCampaign}
       Banner={CurrentBanner}
       flagsReady={flagsReady}>
       {NavTakeover ? <NavTakeover onClose={resetNav} /> : null}

@@ -52,13 +52,18 @@ function mainLayout({
   tag,
   selectedNavLink,
   isFullWidthLayout = false,
-  showBanner
+  bannerCampaign
 }) {
   return (
     <>
       <PocketHead title={title} canonical={canonical} metaData={metaData} />
-      <GlobalNav selectedLink={selectedNavLink} subset={subset} tag={tag} showBanner={showBanner} />
-      <div className={cx(fixedNavContainer, showBanner && 'withBanner')}>
+      <GlobalNav
+        selectedLink={selectedNavLink}
+        subset={subset}
+        tag={tag}
+        bannerCampaign={bannerCampaign}
+      />
+      <div className={cx(fixedNavContainer, bannerCampaign && 'withBanner')}>
         {isFullWidthLayout ? (
           children
         ) : (
