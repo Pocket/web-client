@@ -221,6 +221,8 @@ const GlobalNav = ({
   tools = [],
   sendImpression,
   userStatus,
+  showBanner,
+  Banner = null,
   children = null
 }) => {
   const { t } = useTranslation()
@@ -249,6 +251,7 @@ const GlobalNav = ({
 
   return (
     <header className={cx(headerStyle, isLoggedIn && 'logged-in')}>
+      {Banner ? <Banner showBanner={showBanner} /> : null}
       <PageContainer className="global-nav-container">
         <nav className={navStyle} data-cy="global-nav">
           <div className="site-nav">
