@@ -122,11 +122,11 @@ export const homeActions = {
   },
   'home.slate.thumbsup': {
     eventType: 'engagement',
-    entityTypes: ['ui'],
+    entityTypes: ['content', 'ui', 'corpusRecommendation'],
     eventData: {
       uiType: 'button'
     },
-    expects: ['corpusRecommendationId'],
+    expects: ['corpusRecommendationId', 'url'],
     description: 'Fired when a user clicks the thumbsup button on an article'
   },
   'home.slate.thumbsdown': {
@@ -135,7 +135,7 @@ export const homeActions = {
     eventData: {
       uiType: 'button'
     },
-    expects: ['corpusRecommendationId'],
+    expects: ['corpusRecommendationId', 'url'],
     description: 'Fired when a user clicks the thumbsdown button on an article'
   }
 }
