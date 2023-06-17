@@ -1,5 +1,5 @@
 import '../../public/static/pocket-web-ui.css'
-import { GOOGLE_ANALYTICS_ID } from 'common/constants'
+import { GOOGLE_ANALYTICS_ID, LOGIN_URL } from 'common/constants'
 
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
@@ -35,7 +35,7 @@ import { DevTools } from 'connectors/dev-tools/dev-tools'
 /** App
  --------------------------------------------------------------- */
 const cache = createCache({ key: 'next' })
- 
+
 function PocketWebClient({ Component, pageProps, err }) {
   // Initialize app once per page load
   const dispatch = useDispatch()
@@ -137,7 +137,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   useEffect(() => {
     if (authRequired && user_status === 'invalid') {
-      window.location = 'https://getpocket.com/login?src=web-client'
+      window.location = `${LOGIN_URL}?src=web-client`
     }
   }, [authRequired, user_status])
 

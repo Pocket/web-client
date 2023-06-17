@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { css, cx } from '@emotion/css'
 import { Trans, useTranslation } from 'next-i18next'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
-import { KEYS, PREMIUM_URL } from 'common/constants'
+import { KEYS, PREMIUM_URL, SIGNUP_URL, LOGIN_URL } from 'common/constants'
 
 import { breakpointLargeHandset } from 'common/constants'
 import { ProfileIcon } from 'components/icons/ProfileIcon'
@@ -230,7 +230,7 @@ const GlobalNavAccount = ({
   return !isLoggedIn ? (
     <div>
       <a
-        href="https://getpocket.com/login?src=navbar"
+        href={`${LOGIN_URL}?src=navbar`}
         id="global-nav-login-link"
         className={`${accountLinkStyle} login-link`}
         onClick={onLoginClick}
@@ -238,7 +238,7 @@ const GlobalNavAccount = ({
         <Trans i18nKey="nav:log-in">Log in</Trans>
       </a>
       <a
-        href="https://getpocket.com/signup?src=navbar"
+        href={`${SIGNUP_URL}?src=navbar`}
         id="global-nav-signup-link"
         className={cx(signupLinkStyle, 'button secondary')}
         onClick={handleSignupCase}
