@@ -1,13 +1,13 @@
 
 // POCKET
 export const CONSUMER_KEY = '94110-6d5ff7a89d72c869766af0e0' // web-client
-export const BASE_URL = process.env.BASE_URL ?? 'https://getpocket.com'
-export const API_URL = process.env.API_URL ?? 'https://getpocket.com'
-export const LOGIN_URL = process.env.LOGIN_URL ?? 'https://getpocket.com/login'
-export const SIGNUP_URL = process.env.SIGNUP_URL ?? 'https://getpocket.com/signup'
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://getpocket.com'
+export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'https://getpocket.com'
+export const LOGIN_URL = process.env.NEXT_PUBLIC_LOGIN_URL ?? 'https://getpocket.com/login'
+export const SIGNUP_URL = process.env.NEXT_PUBLIC_SIGNUP_URL ?? 'https://getpocket.com/signup'
 export const PREMIUM_URL =
   process.env.PREMIUM_URL ?? 'https://getpocket.com/premium?utm_source=web-app-premium-cta'
-export const GRAPHQL_URL = process.env.GRAPHQL_URL ?? 'https://getpocket.com'
+export const GRAPHQL_URL = process.env.NEXT_PUBLIC_GRAPHQL_URL ?? 'https://getpocket.com'
 export const READING_WPM = 220
 export const BATCH_SIZE = 30
 export const COLOR_MODE_PREFIX = 'colormode'
@@ -50,9 +50,9 @@ export const SNOWPLOW_POST_PATH = process.env.TEST_SNOWPLOW === 'included'
   : '/t/e'
 export const SNOWPLOW_COLLECTOR_URL = 'getpocket.com'
 export const SNOWPLOW_COLLECTOR_URL_DEV =
-  process.env.SNOWPLOW_URL || process.env.TEST_SNOWPLOW === 'included'
+  process.env.NEXT_PUBLIC_SNOWPLOW_URL ?? (process.env.TEST_SNOWPLOW === 'included'
     ? 'http://localhost:9090'
-    : 'com-getpocket-prod1.mini.snplow.net'
+    : 'com-getpocket-prod1.mini.snplow.net')
 export const SNOWPLOW_COLLECTOR =
   process.env.SHOW_DEV === 'included' ? SNOWPLOW_COLLECTOR_URL_DEV : SNOWPLOW_COLLECTOR_URL
 
