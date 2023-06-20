@@ -87,8 +87,8 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const { asPath: urlPath } = router
   const targeting = {
     URL: urlPath,
-    Category: IABParentCategory,
-    SubCategory: IABChildCategory,
+    Category: IABParentCategory?.slug,
+    SubCategory: IABChildCategory?.slug,
     ArticleID: externalId
   }
 
