@@ -31,7 +31,7 @@ if (!pocketLocal) {
   app.prepare().then(() => {
     http.createServer({}, runServer).listen(8976, (err) => {
       if (err) throw err
-      console.info('🌐  Ready at: https://localhost.web-client.getpocket.com')
+      console.info('🌐  Ready at: https://web-client.getpocket.local')
       console.info('🌐  Also at: http://localhost:8976')
     })
   })
