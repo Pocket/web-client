@@ -33,6 +33,8 @@ import { LOGIN_URL } from 'common/constants'
 import { getTopLevelPath } from 'common/utilities/urls/urls'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
+import { Banner } from './global-nav-banner'
+
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
   const DISALLOWED_PROFILE_IMGS = ['profileBlue.png'] // file names of default urls returned by BE. If a user avatar url contains one of these, we prefer to return an empty string, in order to use the Web UI's Avatar default image instead
@@ -52,7 +54,7 @@ export const enforceDefaultAvatar = (avatarUrl = '') => {
  * provided to it to the GlobalNav component.
  */
 const GlobalNav = (props) => {
-  const { selectedLink: selected, subset, tag, noNav } = props
+  const { selectedLink: selected, subset, tag, noNav, bannerCampaign } = props
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
@@ -218,6 +220,8 @@ const GlobalNav = (props) => {
     window.location.assign(`${LOGIN_URL}?src=navbar`)
   }
 
+  const CurrentBanner = bannerCampaign ? Banner : null
+
   return (
     <GlobalNavComponent
       pocketLogoOutboundUrl={pocketLogoOutboundUrl}
@@ -245,6 +249,8 @@ const GlobalNav = (props) => {
       sendImpression={sendImpressionEvent}
       tools={tools}
       noNav={hideNav}
+      bannerCampaign={bannerCampaign}
+      Banner={CurrentBanner}
       flagsReady={flagsReady}>
       {NavTakeover ? <NavTakeover onClose={resetNav} /> : null}
     </GlobalNavComponent>

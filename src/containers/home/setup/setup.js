@@ -244,12 +244,13 @@ export const HomeSetup = () => {
   const userTopics = useSelector((state) => state.homeSetup.userTopics)
   const isFinalized = useSelector((state) => state.homeSetup.finalizedTopics)
 
+
   useEffect(() => {
-    if (hideSetup) return () => {} 
+    if (hideSetup) return () => {}
     dispatch(getTopicSelectors())
   }, [dispatch, hideSetup])
 
-  if (hideSetup) return null
+  if (hideSetup || !setupStatus) return null
 
   const isSkipped = setupStatus === 'skipped'
   const isDismissed = setupStatus === 'dismissed'

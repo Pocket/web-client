@@ -21,6 +21,7 @@ import { AdRailBottom } from 'components/content-ads/content-ads'
 import { ContentIntro } from 'components/content-intro/content-intro'
 import { AuthorBio } from 'components/content-author/author-bio'
 import { Partner } from 'components/content-partner/partner'
+import { CallOutNewsroom } from 'components/call-out/newsroom'
 
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
@@ -48,6 +49,13 @@ const itemStyles = css`
     }
   }
 `
+
+const newsroomUrls = [
+  'https://getpocket.com/collections/the-american-journalism-project',
+  'https://getpocket.com/collections/ajp-systemic-injustice',
+  'https://getpocket.com/collections/ajp-lgbtq-legislation',
+  'https://getpocket.com/collections/ajp-community-heroes'
+]
 
 export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const dispatch = useDispatch()
@@ -184,10 +192,15 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
             </aside>
 
             {/* Right aside content such as ads and recs */}
-            <aside className="right-aside">
-              <AdRailTop allowAds={allowAds} targeting={targeting} />
-              <AdRailBottom allowAds={allowAds} targeting={targeting} />
-            </aside>
+
+            {newsroomUrls.includes(url) ? (
+              <CallOutNewsroom />
+            ) : (
+              <aside className="right-aside">
+                <AdRailTop allowAds={allowAds} targeting={targeting} />
+                <AdRailBottom allowAds={allowAds} targeting={targeting} />
+              </aside>
+            )}
 
             <div className="content-body">
               <img src={heroImage} alt="" className="hero-image" />

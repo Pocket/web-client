@@ -106,7 +106,7 @@ export function deriveCorpusItem(recommendation) {
     itemEnrichment: { url },
     analyticsData: { url, corpusRecommendationId },
     passedPublisher: publisher,
-    utmId: 'pocket_get_started'
+    utmId: 'pocket_home'
   })
 }
 

@@ -64,7 +64,7 @@ import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
 // the actionType on the MUTATION_SUCCESS action. In these instances we will use
 // TOAST_TEST_MESSAGE as the action so reducers don't break when responding to
 // MUTATION_SUCCESS
-const mutationTypes = [
+export const mutationTypes = [
   MUTATION_ARCHIVE,
   MUTATION_UNARCHIVE,
   MUTATION_FAVORITE,
@@ -79,7 +79,25 @@ const mutationTypes = [
   HIGHLIGHT_DELETE_SUCCESS
 ]
 
-const actions = [
+export function createToastData(action, count) {
+  // if a mutation, we need to include the action as the actionType
+  // otherwise a reducer somewhere is going to throw an error
+  const type = mutationTypes.includes(action) ? TOAST_TEST_MESSAGE : action
+
+  // ids and deletedItemPosition value are for MUTATION_DELETE_SUCCESS
+  // with a count of 5, ids will be [0, 1, 2, 3, 4]
+  const data = {
+    type,
+    actionType: action,
+    count: count,
+    ids: Array.from({ length: count }, (v, i) => i),
+    deletedItemPosition: count
+  }
+
+  return data
+}
+
+export const actions = [
   ...mutationTypes,
   MUTATION_DELETE_SUCCESS,
   ITEMS_ADD_SUCCESS,
@@ -124,20 +142,7 @@ export const Toasts = () => {
   const setCountValue = (e) => setCount(e.target.value)
 
   const handleClick = () => {
-    // if a mutation, we need to include the action as the actionType
-    // otherwise a reducer somewhere is going to throw an error
-    const type = mutationTypes.includes(value) ? TOAST_TEST_MESSAGE : value
-
-    // ids and deletedItemPosition value are for MUTATION_DELETE_SUCCESS
-    // with a count of 5, ids will be [0, 1, 2, 3, 4]
-    const data = {
-      type,
-      actionType: value,
-      count: Number(count),
-      ids: Array.from({length: Number(count)}, (v, i) => i),
-      deletedItemPosition: Number(count)
-    }
-
+    const data = createToastData(value, Number(count))
     dispatch(sendToast(data))
   }
 
@@ -152,7 +157,13 @@ export const Toasts = () => {
             </option>
           ))}
         </select>
-        <TextInput className="count" labelText="Count" name="count" value={count} onChange={setCountValue} />
+        <TextInput
+          className="count"
+          labelText="Count"
+          name="count"
+          value={count}
+          onChange={setCountValue}
+        />
         <button onClick={handleClick}>Pop! 🍞</button>
       </div>
     </div>

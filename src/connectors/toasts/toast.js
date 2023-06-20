@@ -1,17 +1,13 @@
 import React, { useEffect, useCallback, useState } from 'react'
-import { css, cx } from '@emotion/css'
-import { CheckIcon } from 'components/icons/CheckIcon'
-import { ErrorIcon } from 'components/icons/ErrorIcon'
-
-import { Fade } from 'common/utilities/animation/fade'
+import { useTranslation } from 'next-i18next'
 import { useDispatch } from 'react-redux'
 import { clearToast } from './toast.state'
-import { useTranslation } from 'next-i18next'
+import { Toast as ToastComponent } from 'components/toast/toast'
 import { mutationUnDelete } from 'connectors/items/mutation-delete.state'
 
-import { ITEMS_UPSERT_SUCCESS } from 'actions'
-
 import { MUTATION_DELETE_SUCCESS } from 'actions'
+
+import { ITEMS_UPSERT_SUCCESS } from 'actions'
 
 import { MUTATION_ARCHIVE } from 'actions'
 import { MUTATION_UNARCHIVE } from 'actions'
@@ -64,63 +60,7 @@ import { LIST_ITEM_NOTE_DELETE_FAILURE } from 'actions'
 import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
 import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
 
-const toastWrapper = css`
-  text-align: left;
-  width: 100%;
-  padding: 0;
-  box-sizing: border-box;
-  transform: translateZ(0.01);
-  .toastBlock {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    align-items: center;
-    line-height: 22px;
-    font-size: 16px;
-    font-family: 'Graphik Web';
-    padding: 20px;
-    border-radius: 4px;
-    margin: 20px 0 0 0;
-    min-width: 275px;
-    border-radius: 4px;
-    background-color: var(--color-actionPrimary);
-    color: var(--color-actionBrandText);
-
-    p {
-      margin: 0;
-    }
-
-    .actionWrapper {
-      padding-left: 1rem;
-    }
-
-    button.text {
-      color: var(--color-actionBrandText);
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    &.success {
-      background-color: var(--color-actionPrimary);
-      color: var(--color-actionBrandText);
-    }
-    &.neutral {
-      background-color: var(--color-actionPrimary);
-      color: var(--color-actionBrandText);
-    }
-    &.warn {
-      background-color: var(--color-error);
-      color: var(--color-actionBrandText);
-
-      button.text {
-        color: var(--color-actionBrandText);
-      }
-    }
-  }
-  &.actionWrapper {
-    text-align: right;
-  }
-`
+import { HOME_REC_REQUEST_DEMOTE } from 'actions'
 
 export function Toast({
   stamp,
@@ -193,7 +133,10 @@ export function Toast({
     [LIST_ITEM_NOTE_DELETE_SUCCESS]: t('toast:note-deleted', 'Note deleted'),
     [LIST_ITEM_NOTE_DELETE_FAILURE]: t('toast:error-deleting-note', 'Error deleting note'),
     [LIST_DELETE_ITEM_SUCCESS]: t('toast:item-removed-from-list', 'Item removed from list'),
-    [LIST_DELETE_ITEM_FAILURE]: t('toast:error-removing-item', 'Error removing item')
+    [LIST_DELETE_ITEM_FAILURE]: t('toast:error-removing-item', 'Error removing item'),
+
+    // Signaled Cards
+    [HOME_REC_REQUEST_DEMOTE]: t('toast:home-rec-demote', 'Item Removed')
   }
 
   const errors = [
@@ -219,8 +162,9 @@ export function Toast({
 
   const typeForMessage = actionType || type
   const showUndo = type === MUTATION_DELETE_SUCCESS && deletedItemPosition !== undefined
-  const IconToShow = errors.includes(type) ? ErrorIcon : CheckIcon
-  const status = errors.includes(type) ? 'warn' : 'success'
+  const isError = errors.includes(type)
+  const message = messages[typeForMessage]
+  const undoString = t('toast:undo', 'Undo')
 
   useEffect(() => {
     if (!show) return () => {}
@@ -239,21 +183,15 @@ export function Toast({
   }
 
   return (
-    <Fade show={show} remove={remove}>
-      <div className={toastWrapper}>
-        <div className={cx('toastBlock', `${type}`, `${status}`)} data-cy={messages[typeForMessage]}>
-          <p>{messages[typeForMessage]}</p>
-          <div className="actionWrapper">
-            {showUndo ? (
-              <button onClick={handleUndo} className="text">
-                {t('toast:undo', 'Undo')}
-              </button>
-            ) : (
-              <IconToShow />
-            )}
-          </div>
-        </div>
-      </div>
-    </Fade>
+    <ToastComponent
+      isError={isError}
+      message={message}
+      undoString={undoString}
+      type={type}
+      show={show}
+      remove={remove}
+      showUndo={showUndo}
+      handleUndo={handleUndo}
+    />
   )
 }

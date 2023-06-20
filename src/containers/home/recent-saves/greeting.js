@@ -26,9 +26,9 @@ export const HomeGreeting = () => {
   }
 
   const withNameGreeting = {
-    morning: t('home:good-morning-name', 'Good morning, {{ firstName }}!', { firstName }),
-    afternoon: t('home:good-afternoon-name', 'Good afternoon, {{ firstName }}!', { firstName }),
-    evening: t('home:good-evening-name', 'Good evening, {{ firstName }}!', { firstName })
+    morning: t('home:good-morning-name', 'Good morning, {{firstName}}!', { firstName }),
+    afternoon: t('home:good-afternoon-name', 'Good afternoon, {{firstName}}!', { firstName }),
+    evening: t('home:good-evening-name', 'Good evening, {{firstName}}!', { firstName })
   }
 
   const showName = firstName && firstName.length < 30

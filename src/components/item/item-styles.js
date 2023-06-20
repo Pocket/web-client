@@ -141,6 +141,9 @@ export const itemStyles = css`
     bottom: 1rem;
     left: 1rem;
     text-transform: capitalize;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
   }
 
   .user-list {
@@ -184,6 +187,10 @@ export const itemStyles = css`
     font-size: var(--title-size);
     margin: var(--title-margin);
     line-height: var(--title-line-height);
+
+    &.withTopDetails {
+      margin-top: 0;
+    }
 
     &.open-external {
       a {
@@ -259,6 +266,68 @@ export const itemStyles = css`
     font-weight: 500;
     line-height: 1.25;
     color: var(--color-textSecondary);
+  }
+
+  .report {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(26, 26, 26, 0.8);
+    font-size: 1.5rem;
+    line-height: 1em;
+    color: var(--color-white100);
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    .icon {
+      margin-top: 0;
+    }
+  }
+
+  .signals {
+    button .icon {
+      margin-top: 0;
+    }
+    .promoted {
+      color: var(--color-actionPrimary);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeAndDrop {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    90% {
+      opacity: 0;
+    }
+    100% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+  }
+
+  &.demoted {
+    animation: fadeAndDrop 150ms;
+  }
+
+  .topDetails {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    font-style: normal;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--color-textPrimary);
+    height: 32px;
+    padding: 1.5rem 1rem 1rem;
   }
 
   .context {

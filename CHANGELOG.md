@@ -1,3 +1,77 @@
+## [1.100.2](https://github.com/Pocket/web-client/compare/v1.100.1...v1.100.2) (2023-06-20)
+
+
+### Bug Fixes
+
+* **lists:** fetch list item count with recent list request ([8d0ef1a](https://github.com/Pocket/web-client/commit/8d0ef1a926faac3ae0b68430cc3f942ba4e17807))
+
+## [1.100.1](https://github.com/Pocket/web-client/compare/v1.100.0...v1.100.1) (2023-06-15)
+
+
+### Bug Fixes
+
+* **newsroom:** add missing space ([3703718](https://github.com/Pocket/web-client/commit/370371808fd2a13094d3c18f4e1a2006ab1e8177))
+
+# [1.100.0](https://github.com/Pocket/web-client/compare/v1.99.1...v1.100.0) (2023-06-15)
+
+
+### Bug Fixes
+
+* **home:** remove flash of setup on slow connections ([c36dba7](https://github.com/Pocket/web-client/commit/c36dba7a5b94c2d15186de8155731d751b2fed23))
+* **image:** allow limited view original ([9f65146](https://github.com/Pocket/web-client/commit/9f651467caaa41bd11209db5644777893599e3f7))
+* **item:** fix story ([dd4559b](https://github.com/Pocket/web-client/commit/dd4559b9ce462cd694bd62af7f7a0fd52bdd28c6))
+* **signaled:** don’t trigger on any old animation end ([f41a5e5](https://github.com/Pocket/web-client/commit/f41a5e551469bc8a33ce2b8335bc57d0fc240a5a))
+* **snowplow:** add thumbsup/down ([68a6bfe](https://github.com/Pocket/web-client/commit/68a6bfefe1a88295b0793bcdcd38f6188fe443a4))
+
+
+### Features
+
+* **card:** rough out signaled card ([d5dd7f9](https://github.com/Pocket/web-client/commit/d5dd7f99ed3ebacc7c98bddcc1afc4f32f6d612f))
+* **home:** add toast to demote ([5a4af78](https://github.com/Pocket/web-client/commit/5a4af788d0d82f4ce88590b70f9bacb51e1c76b8))
+* **home:** thumbs up / down functionality ([ad177e7](https://github.com/Pocket/web-client/commit/ad177e79588aa93128eff50b58ddbae9d555c53e))
+* **home:** use signaled cards ([7ba1584](https://github.com/Pocket/web-client/commit/7ba1584b9b37ea31717118c2ec1087e8422f766e))
+* **signaled:** add promoted styles ([0ec598f](https://github.com/Pocket/web-client/commit/0ec598fa668ab9ed7e961dc44ceba7ed6985ac93))
+* **signaled:** persist demotions ([4c98902](https://github.com/Pocket/web-client/commit/4c989026942a578b2624cfcfc2f6818972a58d24))
+
+## [1.99.1](https://github.com/Pocket/web-client/compare/v1.99.0...v1.99.1) (2023-06-15)
+
+
+### Bug Fixes
+
+* **call out:** newsroom callout links to a new tab ([52f4378](https://github.com/Pocket/web-client/commit/52f43780b306a18e866e8f558c67ecc7705b3af7))
+
+# [1.99.0](https://github.com/Pocket/web-client/compare/v1.98.3...v1.99.0) (2023-06-15)
+
+
+### Features
+
+* **banner:** add newsroom banner ([edb6820](https://github.com/Pocket/web-client/commit/edb68204bb5d8b70e1623ed9323aac09757508c8))
+* **banner:** add newsroom banner for saves ([a58a321](https://github.com/Pocket/web-client/commit/a58a3213146adef6edd2b53569cc6ead8ce7bd44))
+* **collections:** add newsroom banners ([5f0709b](https://github.com/Pocket/web-client/commit/5f0709be2ea8d8604e4bc63f1779382a53b40d3e))
+
+## [1.98.3](https://github.com/Pocket/web-client/compare/v1.98.2...v1.98.3) (2023-06-15)
+
+
+### Bug Fixes
+
+* **toast:** break out new toast UI component from connector ([6e027b5](https://github.com/Pocket/web-client/commit/6e027b5c4a8d90d22935917a2cfe5ea61066eb3c))
+* **toast:** fix bad import breaking actual app ([dccc407](https://github.com/Pocket/web-client/commit/dccc407a7649f5a72e0185f6bf1dc072c9c1b14a))
+* **toast:** fix width of toast story not matching actual ([95ba56b](https://github.com/Pocket/web-client/commit/95ba56b804a81b9e07b83f78549046291cee5b34))
+* **toast:** make showUndo variable for story ([093fa83](https://github.com/Pocket/web-client/commit/093fa839756eb9f26a08068111f508af4dbe5581))
+* **toast:** move business logic out from toast component ([28de534](https://github.com/Pocket/web-client/commit/28de5349943fe47421a30b5206ce83b5c6a1fe47))
+* **toast:** re-use action data creation from QA modal ([42ec6e3](https://github.com/Pocket/web-client/commit/42ec6e3515a666294c038e584af23c81cd672e83))
+* **toast:** remove guard against no type from early prototyping ([3c9f532](https://github.com/Pocket/web-client/commit/3c9f53212367f1819d8ea858276b91c32a4f4c28))
+* **toast:** rename dumbtoast and move story into components ([f449567](https://github.com/Pocket/web-client/commit/f44956716086483d480be4163ec988525f0ed3c9))
+
+## [1.98.2](https://github.com/Pocket/web-client/compare/v1.98.1...v1.98.2) (2023-06-14)
+
+
+### Bug Fixes
+
+* **locales:** add specific update to en `Lists` ([1f3e58a](https://github.com/Pocket/web-client/commit/1f3e58abc0072ee99b39e0d6a555f7e3831acb48))
+* **locales:** update injection script runner ([4f9fdc5](https://github.com/Pocket/web-client/commit/4f9fdc5d1ab78c505cec6855f965b84cde6be9e7))
+* **locale:** update parsing runner ([af585a2](https://github.com/Pocket/web-client/commit/af585a23e909d1edfb9e2c1ac4b3cc6790f185f8))
+
 ## [1.98.1](https://github.com/Pocket/web-client/compare/v1.98.0...v1.98.1) (2023-06-13)
 
 
