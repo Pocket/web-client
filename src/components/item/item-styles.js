@@ -253,6 +253,20 @@ export const itemStyles = css`
     grid-column-gap: var(--footer-column-gap);
     line-height: 1.25;
     padding-bottom: 0.725rem;
+    &.signaled {
+      grid-column-gap: 0;
+
+      .save {
+        padding: 0 0.5rem;
+
+        .copy {
+          color: var(--color-textPrimary);
+        }
+        &:hover .copy {
+          color: var(--color-actionBrand);
+        }
+      }
+    }
   }
 
   .details {
