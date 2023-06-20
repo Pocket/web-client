@@ -338,8 +338,7 @@ function* loadPreviousItems() {
 
     const ids = yield select(getSavedPageIds)
     const startCursor = yield select(getItemCursor, ids[0])
-    // If there's no startCursor then there's something wrong
-    // and we shouldn't fetch an update
+    // If there's no startCursor there's something wrong and we shouldn't update
     if (!startCursor) return
 
     yield put({
