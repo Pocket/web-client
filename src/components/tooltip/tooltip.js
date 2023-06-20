@@ -220,7 +220,7 @@ export const placementLeft = css`
 export const delayStyle = css`
   &[data-tooltip]:hover:before,
   &[data-tooltip]:hover:after {
-    animation-delay: 1.5s;
+    animation-delay: 1s;
   }
 `
 
