@@ -1,5 +1,6 @@
 import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { deriveSavedItem } from './item'
+import { deriveItemData } from './item'
 
 // Process a list of lists, viewable to the user only
 export function processAllList(responseData) {
@@ -30,6 +31,58 @@ export function processIndividualList(responseData, utmId) {
   }
 
   return { itemsById }
+}
+
+export function processPublicList(responseData, utmId) {
+  const { listItems, externalId: listId, ...rest } = responseData
+
+  const listItemsById = getPublicListItemsById(listItems, listId, utmId)
+  const individualList = deriveList(rest, listId, listItems)
+
+  const itemsById = {
+    ...listItemsById,
+    [listId]: individualList
+  }
+
+  return { itemsById }
+}
+
+function getPublicListItemsById(listItems, listId, utmId) {
+  const processedItems = listItems.map((listItem) => {
+    return derivePublicListItem(listItem, listId, utmId)
+  }, {})
+
+  return arrayToObject(processedItems, 'externalId')
+}
+
+function derivePublicListItem(listItem, listId, utmId) {
+  const { externalId, imageUrl, note, createdAt, item } = listItem
+
+  const derivedItem = deriveItemData({ item, utmId })
+
+  const { title, excerpt, publisher, givenUrl } = derivedItem
+
+  const analyticsData = {
+    id: externalId,
+    shareableListItemExternalId: externalId,
+    shareableListExternalId: listId,
+    givenUrl: givenUrl,
+    title: title,
+    excerpt: excerpt,
+    imageUrl: imageUrl,
+    publisher: publisher,
+    createdAt: Date.parse(createdAt) / 1000
+  }
+
+  return {
+    externalId,
+    imageUrl,
+    note,
+    createdAt,
+    ...derivedItem,
+    note: decodeSpecialChars(note),
+    analyticsData
+  }
 }
 
 // Loops through each list item and derives it

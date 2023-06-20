@@ -17,8 +17,18 @@ export const PublicListCard = ({ listId, externalId, position }) => {
 
   if (!item || !listId) return null
 
-  const { title, excerpt, publisher, url, analyticsData: passedAnalytics, note } = item
   const itemImage = item?.noImage ? '' : item?.imageUrl
+
+  const {
+    title,
+    excerpt,
+    publisher,
+    externalUrl,
+    note,
+    timeToRead,
+    isSyndicated,
+    analyticsData: passedAnalytics
+  } = item
 
   const analyticsData = {
     ...passedAnalytics,
@@ -54,8 +64,10 @@ export const PublicListCard = ({ listId, externalId, position }) => {
         itemImage={itemImage}
         publisher={publisher}
         note={note}
-        openUrl={url}
-        externalUrl={url}
+        openUrl={externalUrl}
+        externalUrl={externalUrl}
+        isSyndicated={isSyndicated}
+        timeToRead={timeToRead}
         onImageFail={onImageFail}
         onItemInView={onItemInView}
         onOpenOriginalUrl={onOpenOriginal}
@@ -73,17 +85,17 @@ export function ActionsTransitional({ id, analyticsData }) {
   const dispatch = useDispatch()
 
   const isAuthenticated = useSelector((state) => state.user.auth)
-  const { url } = useSelector((state) => state.listsDisplay[id])
+  const { givenUrl } = useSelector((state) => state.listsDisplay[id])
   const saveItemId = useSelector((state) => state.itemsTransitions[id])
   const saveStatus = saveItemId ? 'saved' : 'unsaved'
 
-  if (!url) return null
+  if (!givenUrl) return null
 
   // Prep save action
   const onSave = () => {
     if (!isAuthenticated) return
     dispatch(sendSnowplowEvent('public-list.item.save', analyticsData))
-    dispatch(mutationUpsertTransitionalItem(url, id))
+    dispatch(mutationUpsertTransitionalItem(givenUrl, id))
   }
 
   const onUnSave = () => {
