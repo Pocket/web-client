@@ -1,3 +1,10 @@
+## [1.100.3](https://github.com/Pocket/web-client/compare/v1.100.2...v1.100.3) (2023-06-20)
+
+
+### Bug Fixes
+
+* **collections:** load cat/subcat correctly ([d59b1aa](https://github.com/Pocket/web-client/commit/d59b1aacc5f8ba4f886125d360877b4268fe6074))
+
 ## [1.100.2](https://github.com/Pocket/web-client/compare/v1.100.1...v1.100.2) (2023-06-20)
 
 
