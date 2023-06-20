@@ -100,7 +100,7 @@ export function SignaledActions({
           onClick={onDemote}
           disabled={isPromoted}
           className={topTooltipDelayed}
-          data-tooltip={t('home:tooltip-demote', 'Not for for me')}>
+          data-tooltip={t('home:tooltip-demote', 'Not for me')}>
           <ThumbsDownIcon />
         </button>
       </div>
