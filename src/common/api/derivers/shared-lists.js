@@ -1,5 +1,5 @@
 import { arrayToObject } from 'common/utilities/object-array/object-array'
-import { replaceUTM } from 'common/utilities/urls/urls'
+import { deriveSavedItem } from './item'
 
 // Process a list of lists, viewable to the user only
 export function processAllList(responseData) {
@@ -35,8 +35,8 @@ export function processIndividualList(responseData, utmId) {
 // Loops through each list item and derives it
 // return an object with the external id as the keys and list info as the value
 function getListItemsById(listItems, listId, utmId) {
-  const processedItems = listItems.map((item) => {
-    return deriveListItem(item, listId, utmId)
+  const processedItems = listItems.map((listItem) => {
+    return deriveListItem(listItem, listId, utmId)
   }, {})
 
   return arrayToObject(processedItems, 'externalId')
@@ -44,13 +44,19 @@ function getListItemsById(listItems, listId, utmId) {
 
 // Builds a list item, compiles the analytics
 // Adds a utm paramter to the external url
-function deriveListItem(item, listId, utmId) {
-  const { externalId, url, title, excerpt, imageUrl, publisher, note, createdAt } = item
+function deriveListItem(listItem, listId, utmId) {
+  const { externalId, imageUrl, note, createdAt, item } = listItem
+  const { savedItem } = item
+
+  const derivedItem = deriveSavedItem({ ...savedItem, item }, utmId)
+
+  const { title, excerpt, publisher, givenUrl } = derivedItem?.item
+
   const analyticsData = {
     id: externalId,
     shareableListItemExternalId: externalId,
     shareableListExternalId: listId,
-    givenUrl: url,
+    givenUrl: givenUrl,
     title: title,
     excerpt: excerpt,
     imageUrl: imageUrl,
@@ -59,8 +65,11 @@ function deriveListItem(item, listId, utmId) {
   }
 
   return {
-    ...item,
-    url: replaceUTM(url, utmId),
+    externalId,
+    imageUrl,
+    note,
+    createdAt,
+    ...derivedItem,
     note: decodeSpecialChars(note),
     analyticsData
   }

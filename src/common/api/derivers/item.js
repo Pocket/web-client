@@ -83,10 +83,10 @@ import { BASE_URL } from 'common/constants'
 
 /*------------------------------- */
 
-export function deriveSavedItem(node) {
+export function deriveSavedItem(node, utmId = 'pocket_saves') {
   const { item, ...nodeDetails } = node
   // node contains user-item data as well as the item itself
-  const derivedItem = deriveItemData({ item, utmId: 'pocket_saves', node: nodeDetails })
+  const derivedItem = deriveItemData({ item, utmId: utmId, node: nodeDetails })
   return { item: derivedItem, node: nodeDetails }
 }
 
@@ -193,7 +193,7 @@ export function deriveItemData({
     publisher: publisher({ item, itemEnrichment, passedPublisher }),
     publisherLogo: item?.domainMetadata?.logo || false,
     externalUrl: externalUrl({ item, itemEnrichment, utmId }),
-    readUrl: readUrl({ item, node, status: node?.status }),
+    readUrl: readUrl({ item, node, status: node?.status, utmId }),
     itemUrl: node?.url || null,
     saveUrl: saveUrl({ item, itemEnrichment }),
     syndicatedUrl: syndicatedUrl({ item }),
@@ -335,8 +335,8 @@ function analyticsUrl({ node, item, itemEnrichment }) {
  * @param {object} item An item returned from the server
  * @return {string} url to use when reading
  */
-export function readUrl({ item, node, itemEnrichment, status }) {
-  const external = externalUrl({ item, itemEnrichment })
+export function readUrl({ item, node, itemEnrichment, status, utmId }) {
+  const external = externalUrl({ item, itemEnrichment, utmId })
   const readable = isReadable({ item })
   const collection = isCollection({ item })
   const userList = isUserList({ item })
