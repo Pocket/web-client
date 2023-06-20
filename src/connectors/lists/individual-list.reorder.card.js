@@ -28,12 +28,26 @@ const reorderStyles = css`
 export const IndividualListReorderCard = ({ id }) => {
   const dispatch = useDispatch()
 
-  const item = useSelector((state) => state.listsDisplay[id])
+  const listItem = useSelector((state) => state.listsDisplay[id])
+  if (!listItem) return null
 
-  if (!item) return null
-  const { externalId, title, excerpt, publisher, url } = item
+  const { item } = listItem
+  const {
+    externalId,
+    title,
+    excerpt,
+    publisher,
+    itemUrl,
+    readUrl,
+    externalUrl,
+    isInternalItem,
+    timeToRead,
+    isSyndicated
+  } = item
 
-  const itemImage = item?.noImage ? '' : item?.imageUrl
+  const openUrl = readUrl || externalUrl || itemUrl
+
+  const itemImage = listItem?.noImage ? '' : listItem?.imageUrl
   const onImageFail = () => dispatch(setNoImage(id))
 
   return (
@@ -44,8 +58,11 @@ export const IndividualListReorderCard = ({ id }) => {
         excerpt={excerpt}
         itemImage={itemImage}
         publisher={publisher}
-        openUrl={url}
+        openUrl={openUrl}
         onImageFail={onImageFail}
+        isInternalItem={isInternalItem}
+        isSyndicated={isSyndicated}
+        timeToRead={timeToRead}
         Actions={ReorderActions}
         clamp
       />
