@@ -238,7 +238,7 @@ const getSavedPageInfo = (state) => state.pageSavedInfo
 const getSavedPageIds = (state) => state.pageSavedIds
 const getSortOrder = (state) => state.pageSavedInfo?.sortOrder
 const getItems = (state) => state.itemsDisplay
-const getItemCursor = (state, id) => state.itemsSaved[id].cursor
+const getItemCursor = (state, id) => state.itemsSaved[id]?.cursor
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
