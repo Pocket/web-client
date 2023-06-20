@@ -211,9 +211,10 @@ const validateEdge = (edge) => !!edge?.node?.item
 const removeStarterArticle = (edge) => !STARTER_ARTICLES.includes(edge?.node?.item?.resolvedId)
 
 const getNodeFromEdge = (previous, current) => {
+  const cursor = current.cursor
   const { item, ...node } = current.node
   if (node.status === 'DELETED') return previous // REMOVE DELETED ITEMS FROM THE RESPONSE
-  return { ...previous, [node.id]: node }
+  return { ...previous, [node.id]: { cursor, ...node }}
 }
 
 const getItemFromEdge = (previous, current) => {
