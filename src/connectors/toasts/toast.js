@@ -61,6 +61,7 @@ import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
 import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
 
 import { HOME_REC_REQUEST_DEMOTE } from 'actions'
+import { HOME_REC_REQUEST_PROMOTE } from 'actions'
 
 export function Toast({
   stamp,
@@ -136,7 +137,8 @@ export function Toast({
     [LIST_DELETE_ITEM_FAILURE]: t('toast:error-removing-item', 'Error removing item'),
 
     // Signaled Cards
-    [HOME_REC_REQUEST_DEMOTE]: t('toast:home-rec-demote', 'Item Removed')
+    [HOME_REC_REQUEST_DEMOTE]: t('toast:home-rec-demote', 'We’ll recommend less stories like this'),
+    [HOME_REC_REQUEST_PROMOTE]: t('toast:home-rec-promote', 'We’ll recommend more stories like this')
   }
 
   const errors = [

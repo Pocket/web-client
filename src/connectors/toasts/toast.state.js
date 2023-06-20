@@ -45,6 +45,7 @@ import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
 import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
 
 import { HOME_REC_REQUEST_DEMOTE } from 'actions'
+import { HOME_REC_REQUEST_PROMOTE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -110,6 +111,7 @@ export const actionToastsReducers = (state = initialState, action) => {
     case LIST_ITEMS_REORDER_SUCCESS:
     case LIST_ITEMS_REORDER_FAILURE:
     case HOME_REC_REQUEST_DEMOTE:
+    case HOME_REC_REQUEST_PROMOTE:
     case COPY_ITEM_URL: {
       const { actions, count, actionType = false } = action
       const itemCount = actions ? actions?.length : count
