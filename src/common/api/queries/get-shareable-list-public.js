@@ -1,6 +1,5 @@
 import { gql } from 'common/utilities/gql/gql'
 import { requestGQL } from 'common/utilities/request/request'
-import { processIndividualList } from 'common/api/derivers/shared-lists'
 import { processPublicList } from 'common/api/derivers/shared-lists'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 
@@ -54,7 +53,6 @@ function handleResponse(response) {
   if (response?.errors) return response
 
   const responseData = response?.data?.shareableListPublic
-  // const processedData = processIndividualList(responseData, 'pocket_public_list')
   const processedData = processPublicList(responseData, 'pocket_public_list')
 
   return processedData

@@ -22,7 +22,7 @@ export function processAllList(responseData) {
 export function processIndividualList(responseData, utmId) {
   const { listItems, externalId: listId, ...rest } = responseData
 
-  const listItemsById = getListItemsById(listItems, listId, utmId)
+  const listItemsById = getListItemsById(listItems, listId, utmId, 'private')
   const individualList = deriveList(rest, listId, listItems)
 
   const itemsById = {
@@ -36,7 +36,7 @@ export function processIndividualList(responseData, utmId) {
 export function processPublicList(responseData, utmId) {
   const { listItems, externalId: listId, ...rest } = responseData
 
-  const listItemsById = getPublicListItemsById(listItems, listId, utmId)
+  const listItemsById = getListItemsById(listItems, listId, utmId, 'public')
   const individualList = deriveList(rest, listId, listItems)
 
   const itemsById = {
@@ -47,20 +47,26 @@ export function processPublicList(responseData, utmId) {
   return { itemsById }
 }
 
-function getPublicListItemsById(listItems, listId, utmId) {
+// Loops through each list item and derives it based on the public vs private status
+// return an object with the external id as the keys and list info as the value
+function getListItemsById(listItems, listId, utmId, status) {
+  const deriveFunction = status === 'public' ? derivePublicListItem : deriveListItem
   const processedItems = listItems.map((listItem) => {
-    return derivePublicListItem(listItem, listId, utmId)
+    return deriveFunction(listItem, listId, utmId)
   }, {})
 
   return arrayToObject(processedItems, 'externalId')
 }
 
-function derivePublicListItem(listItem, listId, utmId) {
+// Builds a saved list item
+// Derives list item & analytics data from item & savedItem metadata
+// Adds a utm parameter to the derived list item url
+// Used for the individual list page
+function deriveListItem(listItem, listId, utmId) {
   const { externalId, imageUrl, note, createdAt, item } = listItem
-
-  const derivedItem = deriveItemData({ item, utmId })
-
-  const { title, excerpt, publisher, givenUrl } = derivedItem
+  const { savedItem } = item
+  const derivedItem = deriveSavedItem({ ...savedItem, item }, utmId)
+  const { title, excerpt, publisher, givenUrl } = derivedItem?.item
 
   const analyticsData = {
     id: externalId,
@@ -85,25 +91,14 @@ function derivePublicListItem(listItem, listId, utmId) {
   }
 }
 
-// Loops through each list item and derives it
-// return an object with the external id as the keys and list info as the value
-function getListItemsById(listItems, listId, utmId) {
-  const processedItems = listItems.map((listItem) => {
-    return deriveListItem(listItem, listId, utmId)
-  }, {})
-
-  return arrayToObject(processedItems, 'externalId')
-}
-
-// Builds a list item, compiles the analytics
-// Adds a utm paramter to the external url
-function deriveListItem(listItem, listId, utmId) {
+// Builds a public list item
+// Derives list item & analytics data from item metadata only (since there is no savedItem)
+// Adds a utm parameter to the derived list item url
+// Used for the public list page
+function derivePublicListItem(listItem, listId, utmId) {
   const { externalId, imageUrl, note, createdAt, item } = listItem
-  const { savedItem } = item
-
-  const derivedItem = deriveSavedItem({ ...savedItem, item }, utmId)
-
-  const { title, excerpt, publisher, givenUrl } = derivedItem?.item
+  const derivedItem = deriveItemData({ item, utmId })
+  const { title, excerpt, publisher, givenUrl } = derivedItem
 
   const analyticsData = {
     id: externalId,
