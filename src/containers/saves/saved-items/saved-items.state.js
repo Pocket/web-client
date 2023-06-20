@@ -235,8 +235,10 @@ export const pageSavedIdsSagas = [
 /** SAGA :: SELECTORS
  --------------------------------------------------------------- */
 const getSavedPageInfo = (state) => state.pageSavedInfo
+const getSavedPageIds = (state) => state.pageSavedIds
 const getSortOrder = (state) => state.pageSavedInfo?.sortOrder
 const getItems = (state) => state.itemsDisplay
+const getItemCursor = (state, id) => state.itemsSaved[id].cursor
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -327,12 +329,18 @@ function* loadMoreItems() {
 
 function* loadPreviousItems() {
   try {
-    const { searchTerm, sortOrder, startCursor, actionType, tagNames } = yield select(
+    const { searchTerm, sortOrder, actionType, tagNames } = yield select(
       getSavedPageInfo
     )
     const type = yield call(itemRequestType, searchTerm, tagNames)
     // We only want to fetch an update if the user is on Saves
     if (type !== ITEMS_SAVED_REQUEST) return
+
+    const ids = yield select(getSavedPageIds)
+    const startCursor = yield select(getItemCursor, ids[0])
+    // If there's no startCursor then there's something wrong
+    // and we shouldn't fetch an update
+    if (!startCursor) return
 
     yield put({
       type: ITEMS_SAVED_UPDATE_REQUEST,
