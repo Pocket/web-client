@@ -7,6 +7,7 @@ import { getShareableListPublic } from 'common/api/queries/get-shareable-list-pu
 import { getRecentShareableLists } from 'common/api/queries/get-shareable-lists-recent'
 
 import { decodeSpecialChars } from 'common/api/derivers/shared-lists'
+import { arrayToObject } from 'common/utilities/object-array/object-array'
 
 import { LIST_ITEMS_SUCCESS } from 'actions'
 
@@ -168,12 +169,19 @@ function* getRecentLists() {
   try {
     const shareableLists = yield getRecentShareableLists()
     const listsIds = shareableLists.map((list) => list.externalId)
+    const lists = shareableLists.map(({ listItems, ...rest }) => ({
+      listItemIds: listItems.map(({ itemId }) => itemId),
+      ...rest
+    }))
+    const itemsById = arrayToObject(lists, 'externalId')
+
     const titleToIdList = shareableLists.reduce(
       (obj, list) => ({ ...obj, [decodeSpecialChars(list.title)]: list.externalId }),
       {}
     )
 
     yield put({ type: LIST_RECENT_SUCCESS, listsIds, titleToIdList })
+    yield put({ type: LIST_ITEMS_SUCCESS, itemsById })
   } catch {
     yield put({ type: LIST_RECENT_FAILURE })
   }
