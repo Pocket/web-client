@@ -34,7 +34,7 @@ export function processIndividualList(responseData, utmId, status) {
   return { itemsById }
 }
 
-// Loops through each list item and derives it based on the public vs private status
+// Loops through each list item and derives it based on the public vs internal status
 // return an object with the external id as the keys and list info as the value
 function getListItemsById(listItems, listId, utmId, status) {
   const processedItems = listItems.map((listItem) => {
