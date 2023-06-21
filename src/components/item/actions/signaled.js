@@ -7,7 +7,7 @@ import { css } from '@emotion/css'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import { LOGIN_URL, SIGNUP_URL } from 'common/constants'
 import { useTranslation, Trans } from 'next-i18next'
-import { topTooltipDelayed } from 'components/tooltip/tooltip'
+import { topTooltip } from 'components/tooltip/tooltip'
 
 const signaledActionStyles = css`
   display: flex;
@@ -91,7 +91,7 @@ export function SignaledActions({
         <button
           onClick={onPromote}
           disabled={isPromoted}
-          className={cx(topTooltipDelayed, isPromoted && 'promoted')}
+          className={cx(topTooltip, isPromoted && 'promoted')}
           data-tooltip={t('home:tooltip-promote', 'I like this')}>
           <ThumbsUpIcon />
         </button>
@@ -99,7 +99,7 @@ export function SignaledActions({
         <button
           onClick={onDemote}
           disabled={isPromoted}
-          className={topTooltipDelayed}
+          className={topTooltip}
           data-tooltip={t('home:tooltip-demote', 'Not for me')}>
           <ThumbsDownIcon />
         </button>
