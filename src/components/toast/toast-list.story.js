@@ -15,11 +15,11 @@ export default {
   }
 }
 
-function generateToast() {
+function generateToast(onlyErrors, onlyUndoable) {
   const stamp = Date.now()
   const type = ''
-  const isError = Math.random() > 0.5
-  const showUndo = Math.random() > 0.5
+  const isError = onlyErrors || Math.random() > 0.5
+  const showUndo = onlyUndoable || Math.random() > 0.5
   const messages = [
     'Homemade Strawberry Jam.',
     'Small Batch Loquat Jam.',
@@ -44,7 +44,7 @@ function generateToast() {
 export const ToastList = (args) => {
   const [toasts, setToasts] = useState([])
   const addToast = () => {
-    const newToasts = [...toasts, generateToast()]
+    const newToasts = [...toasts, generateToast(args.onlyErrors, args.onlyUndoable)]
     setToasts(newToasts)
   }
 
@@ -67,5 +67,7 @@ export const ToastList = (args) => {
 }
 
 ToastList.args = {
-  timeout: 1000
+  timeout: 1000,
+  onlyErrors: false,
+  onlyUndoable: false
 }
