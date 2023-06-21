@@ -1,3 +1,10 @@
+## [1.100.5](https://github.com/Pocket/web-client/compare/v1.100.4...v1.100.5) (2023-06-21)
+
+
+### Bug Fixes
+
+* **banner:** adjust newsroom copy ([60a1269](https://github.com/Pocket/web-client/commit/60a12692ac58c85ff65136053d1f5dd37c4d4703))
+
 ## [1.100.4](https://github.com/Pocket/web-client/compare/v1.100.3...v1.100.4) (2023-06-20)
 
 
