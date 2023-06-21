@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Toast } from './toast'
 import { toastStyle } from 'connectors/toasts/toast-list'
-import { css } from '@emotion/css'
-
-const styles = css``
 
 export default {
   title: 'Components/ToastList',
