@@ -67,5 +67,5 @@ export const ToastList = (args) => {
 }
 
 ToastList.args = {
-  timeout: 500
+  timeout: 1000
 }
