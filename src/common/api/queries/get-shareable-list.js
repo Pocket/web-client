@@ -24,13 +24,8 @@ const getShareableListQuery = gql`
             ...SavedItemDetails
           }
         }
-        url
-        title
         imageUrl
         externalId
-        publisher
-        excerpt
-        authors
         note
         sortOrder
         createdAt

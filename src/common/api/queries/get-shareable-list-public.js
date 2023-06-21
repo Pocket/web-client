@@ -19,17 +19,12 @@ const getShareableListPublicQuery = gql`
         item {
           ...ItemDetails
         }
-        createdAt
-        excerpt
-        externalId
         imageUrl
-        itemId
-        publisher
-        sortOrder
-        title
-        updatedAt
-        url
+        externalId
         note
+        sortOrder
+        createdAt
+        updatedAt
       }
       user {
         username
