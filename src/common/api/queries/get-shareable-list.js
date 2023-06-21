@@ -50,7 +50,7 @@ function handleResponse(response) {
   try {
     const { shareableList, errors } = response?.data || {}
     if (errors) throw new GetShareableListError(errors)
-    const processedData = processIndividualList(shareableList, 'pocket_list')
+    const processedData = processIndividualList(shareableList, 'pocket_list', 'internal')
 
     return processedData
   } catch (error) {

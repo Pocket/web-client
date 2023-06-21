@@ -17,26 +17,13 @@ export function processAllList(responseData) {
   return { externalIds, itemsById, titleToIdList }
 }
 
-// process an individual list, viewable to the user only
+// process an individual list
+// used for both internal and public views
 // returns an array of keys
-export function processIndividualList(responseData, utmId) {
+export function processIndividualList(responseData, utmId, status) {
   const { listItems, externalId: listId, ...rest } = responseData
 
-  const listItemsById = getListItemsById(listItems, listId, utmId, 'internal')
-  const individualList = deriveList(rest, listId, listItems)
-
-  const itemsById = {
-    ...listItemsById,
-    [listId]: individualList
-  }
-
-  return { itemsById }
-}
-
-export function processPublicList(responseData, utmId) {
-  const { listItems, externalId: listId, ...rest } = responseData
-
-  const listItemsById = getListItemsById(listItems, listId, utmId, 'public')
+  const listItemsById = getListItemsById(listItems, listId, utmId, status)
   const individualList = deriveList(rest, listId, listItems)
 
   const itemsById = {
@@ -55,23 +42,6 @@ function getListItemsById(listItems, listId, utmId, status) {
   }, {})
 
   return arrayToObject(processedItems, 'externalId')
-}
-
-// Based on public vs internal status
-// Runs the item that is returned from the server through our item derivers to build the correct metadata
-// Returns a derived item
-function deriveItemMetadata(item, utmId, status) {
-  if (status === 'internal') {
-    const { savedItem } = item
-    return deriveSavedItem({ ...savedItem, item }, utmId)
-  }
-
-  if (status === 'public') {
-    return deriveItemData({ item, utmId })
-  }
-
-  // Sentry error here?
-  return null
 }
 
 // Builds a list item from the server response data
@@ -105,6 +75,23 @@ function deriveListItem(listItem, listId, utmId, status) {
     note: decodeSpecialChars(note),
     analyticsData
   }
+}
+
+// Based on public vs internal status
+// Runs the item that is returned from the server through our item derivers to build the correct metadata
+// Returns a derived item
+function deriveItemMetadata(item, utmId, status) {
+  if (status === 'internal') {
+    const { savedItem } = item
+    return deriveSavedItem({ ...savedItem, item }, utmId)
+  }
+
+  if (status === 'public') {
+    return deriveItemData({ item, utmId })
+  }
+
+  // Sentry error here?
+  return null
 }
 
 // Build a List and compile the analytics
