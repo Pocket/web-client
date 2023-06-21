@@ -160,10 +160,10 @@ export const BannerNewsroom = ({ sendImpression = () => {}, handleClick = () => 
         <div className="media">
           <PocketLogo /> <AddIcon className="plus" /> <AJPLogo />
         </div>
-        <h3>Local&nbsp;stories, national&nbsp;interest.</h3>
+        <h3>Local&nbsp;stories, national&nbsp;interest</h3>
         <div className="call-to-action">
           <Link href={bannerLink} onClick={handleClick}>
-            Read a great article now
+            Explore great articles
           </Link>
         </div>
       </div>
