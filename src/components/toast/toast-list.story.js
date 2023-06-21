@@ -44,8 +44,7 @@ function generateToast(onlyErrors, onlyUndoable) {
 export const ToastList = (args) => {
   const [toasts, setToasts] = useState([])
   const addToast = () => {
-    const newToasts = [...toasts, generateToast(args.onlyErrors, args.onlyUndoable)]
-    setToasts(newToasts)
+    setToasts((toasts) => [...toasts, generateToast(args.onlyErrors, args.onlyUndoable)])
   }
 
   useEffect(() => {
@@ -54,7 +53,7 @@ export const ToastList = (args) => {
   }, [args.timeout, toasts])
 
   const remove = (stamp) => {
-    setToasts(toasts.filter((item) => item.stamp !== stamp))
+    setToasts((toasts) => toasts.filter((item) => item.stamp !== stamp))
   }
 
   return (
