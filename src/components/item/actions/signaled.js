@@ -92,7 +92,7 @@ export function SignaledActions({
           onClick={onPromote}
           disabled={isPromoted}
           className={cx(topTooltipDelayed, isPromoted && 'promoted')}
-          data-tooltip={t('home:tooltip-promote', 'See more content like this')}>
+          data-tooltip={t('home:tooltip-promote', 'I like this')}>
           <ThumbsUpIcon />
         </button>
 
@@ -100,7 +100,7 @@ export function SignaledActions({
           onClick={onDemote}
           disabled={isPromoted}
           className={topTooltipDelayed}
-          data-tooltip={t('home:tooltip-demote', 'See less content like this')}>
+          data-tooltip={t('home:tooltip-demote', 'Not for me')}>
           <ThumbsDownIcon />
         </button>
       </div>

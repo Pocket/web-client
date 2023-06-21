@@ -1,3 +1,12 @@
+## [1.100.4](https://github.com/Pocket/web-client/compare/v1.100.3...v1.100.4) (2023-06-20)
+
+
+### Bug Fixes
+
+* **home:** add toast to promote ([c2e0b12](https://github.com/Pocket/web-client/commit/c2e0b124c6a45ffb5a951284c3234e5f7b2e8569))
+* **home:** update signaled actions style ([311c771](https://github.com/Pocket/web-client/commit/311c771b283ddd35b0bc0c5d406c94af3019487b))
+* **tooltip:** decrease delay ([fc8a7bc](https://github.com/Pocket/web-client/commit/fc8a7bc11cdb651df1fc9d57af05848b290873f3))
+
 ## [1.100.3](https://github.com/Pocket/web-client/compare/v1.100.2...v1.100.3) (2023-06-20)
 
 

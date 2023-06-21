@@ -182,7 +182,7 @@ export const ItemSignaled = (props) => {
           </Link>
         </div>
       </div>
-      <footer className="footer">
+      <footer className="footer signaled">
         <div className="footer-actions">
           {Actions ? (
             <Actions
