@@ -59,7 +59,7 @@ export const ToastList = (args) => {
   return (
     <div className={toastStyle}>
       {toasts.map((toast) => (
-        <Toast {...toast} key={toast.stamp} remove={() => remove(toast.stamp)} />
+        <Toast {...toast} key={toast.stamp} remove={() => remove(toast.stamp)} undoString="Undo" />
       ))}
     </div>
   )

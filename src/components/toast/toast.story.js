@@ -9,7 +9,13 @@ export default {
 export const Toast = (args) => {
   return (
     <div className={toastStyle}>
-      <Component undoString="Undo" remove={() => {}} handleUndo={() => {}} type="" {...args} />
+      <Component
+        undoString={args.undoString}
+        remove={() => {}}
+        handleUndo={() => {}}
+        type=""
+        {...args}
+      />
     </div>
   )
 }
@@ -17,5 +23,6 @@ export const Toast = (args) => {
 Toast.args = {
   isError: false,
   message: 'you are perfect',
-  showUndo: false
+  showUndo: false,
+  undoString: 'Undo'
 }
