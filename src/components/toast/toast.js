@@ -2,6 +2,7 @@ import { css, cx } from '@emotion/css'
 import { CheckIcon } from 'components/icons/CheckIcon'
 import { ErrorIcon } from 'components/icons/ErrorIcon'
 import { Fade } from 'common/utilities/animation/fade'
+import { useEffect, useState } from 'react'
 
 const toastWrapper = css`
   text-align: left;
@@ -61,7 +62,22 @@ const toastWrapper = css`
   }
 `
 
-export function Toast({ isError, message, undoString, type, show, remove, showUndo, handleUndo }) {
+export function Toast({ isError, message, undoString, type, remove, showUndo, handleUndo }) {
+  const [show, setShow] = useState(false)
+  const mount = () => setShow(true)
+  const unmount = () => setShow(false)
+
+  useEffect(() => {
+    if (!show) return () => {}
+    const removeTime = showUndo ? 5000 : 3500
+    const removeTimer = setTimeout(unmount, removeTime)
+    return () => clearTimeout(removeTimer)
+  }, [show, showUndo])
+
+  useEffect(() => {
+    mount()
+  }, [])
+
   const IconToShow = isError ? ErrorIcon : CheckIcon
   const status = isError ? 'warn' : 'success'
 

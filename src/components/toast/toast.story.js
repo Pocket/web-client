@@ -9,14 +9,7 @@ export default {
 export const Toast = (args) => {
   return (
     <div className={toastStyle}>
-      <Component
-        show={true}
-        undoString="Undo"
-        remove={() => {}}
-        handleUndo={() => {}}
-        type=""
-        {...args}
-      />
+      <Component undoString="Undo" remove={() => {}} handleUndo={() => {}} type="" {...args} />
     </div>
   )
 }

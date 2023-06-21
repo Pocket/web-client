@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import { useTranslation } from 'next-i18next'
 import { useDispatch } from 'react-redux'
 import { clearToast } from './toast.state'
@@ -156,10 +156,6 @@ export function Toast({
     LIST_ITEMS_REORDER_FAILURE
   ]
 
-  const [show, setShow] = useState(false)
-  const mount = () => setShow(true)
-  const unmount = () => setShow(false)
-
   const remove = useCallback(() => dispatch(clearToast(stamp)), [stamp, dispatch])
 
   const typeForMessage = actionType || type
@@ -167,17 +163,6 @@ export function Toast({
   const isError = errors.includes(type)
   const message = messages[typeForMessage]
   const undoString = t('toast:undo', 'Undo')
-
-  useEffect(() => {
-    if (!show) return () => {}
-    const removeTime = showUndo ? 5000 : 3500
-    const removeTimer = setTimeout(unmount, removeTime)
-    return () => clearTimeout(removeTimer)
-  }, [show, showUndo, remove])
-
-  useEffect(() => {
-    mount()
-  }, [])
 
   const handleUndo = () => {
     dispatch(mutationUnDelete(ids, deletedItemPosition, previousStatus))
@@ -190,7 +175,6 @@ export function Toast({
       message={message}
       undoString={undoString}
       type={type}
-      show={show}
       remove={remove}
       showUndo={showUndo}
       handleUndo={handleUndo}
