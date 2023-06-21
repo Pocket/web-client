@@ -22,7 +22,7 @@ export function processAllList(responseData) {
 export function processIndividualList(responseData, utmId) {
   const { listItems, externalId: listId, ...rest } = responseData
 
-  const listItemsById = getListItemsById(listItems, listId, utmId, 'private')
+  const listItemsById = getListItemsById(listItems, listId, utmId, 'internal')
   const individualList = deriveList(rest, listId, listItems)
 
   const itemsById = {
@@ -50,54 +50,38 @@ export function processPublicList(responseData, utmId) {
 // Loops through each list item and derives it based on the public vs private status
 // return an object with the external id as the keys and list info as the value
 function getListItemsById(listItems, listId, utmId, status) {
-  const deriveFunction = status === 'public' ? derivePublicListItem : deriveListItem
   const processedItems = listItems.map((listItem) => {
-    return deriveFunction(listItem, listId, utmId)
+    return deriveListItem(listItem, listId, utmId, status)
   }, {})
 
   return arrayToObject(processedItems, 'externalId')
 }
 
-// Builds a saved list item
-// Derives list item & analytics data from item & savedItem metadata
-// Adds a utm parameter to the derived list item url
-// Used for the individual list page
-function deriveListItem(listItem, listId, utmId) {
-  const { externalId, imageUrl, note, createdAt, item } = listItem
-  const { savedItem } = item
-  const derivedItem = deriveSavedItem({ ...savedItem, item }, utmId)
-  const { title, excerpt, publisher, givenUrl } = derivedItem?.item
-
-  const analyticsData = {
-    id: externalId,
-    shareableListItemExternalId: externalId,
-    shareableListExternalId: listId,
-    givenUrl: givenUrl,
-    title: title,
-    excerpt: excerpt,
-    imageUrl: imageUrl,
-    publisher: publisher,
-    createdAt: Date.parse(createdAt) / 1000
+// Based on public vs internal status
+// Runs the item that is returned from the server through our item derivers to build the correct metadata
+// Returns a derived item
+function deriveItemMetadata(item, utmId, status) {
+  if (status === 'internal') {
+    const { savedItem } = item
+    return deriveSavedItem({ ...savedItem, item }, utmId)
   }
 
-  return {
-    externalId,
-    imageUrl,
-    note,
-    createdAt,
-    ...derivedItem,
-    note: decodeSpecialChars(note),
-    analyticsData
+  if (status === 'public') {
+    return deriveItemData({ item, utmId })
   }
+
+  // Sentry error here?
+  return null
 }
 
-// Builds a public list item
-// Derives list item & analytics data from item metadata only (since there is no savedItem)
+// Builds a list item from the server response data
+// Derives list item & analytics data from item & (potentially) savedItem metadata
 // Adds a utm parameter to the derived list item url
-// Used for the public list page
-function derivePublicListItem(listItem, listId, utmId) {
+// Returns a list item
+function deriveListItem(listItem, listId, utmId, status) {
   const { externalId, imageUrl, note, createdAt, item } = listItem
-  const derivedItem = deriveItemData({ item, utmId })
+  const derivedItem = deriveItemMetadata(item, utmId, status)
+
   const { title, excerpt, publisher, givenUrl } = derivedItem
 
   const analyticsData = {
