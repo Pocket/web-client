@@ -15,11 +15,11 @@ const wrapper = css`
     height: 100%;
     width: 100%;
     content: ' ';
-    background-color: #db6900;
+    background-color: var(--color-newsroomBackgroundSecondary);
   }
 
   div {
-    background-color: #fff0e3;
+    background-color: var(--color-newsroomBackgroundPrimary);
     padding: 2rem 1.5rem 1.5rem;
     width: 100%;
     position: relative;
@@ -31,7 +31,7 @@ const wrapper = css`
     font-weight: 500;
     line-height: 119%;
     margin-bottom: 1.875rem;
-    color: var(--color-textPrimary);
+    color: var(--color-newsroomBackgroundText);
   }
 
   .zigzag {
@@ -44,7 +44,7 @@ const wrapper = css`
     font-family: var(--fontSansSerif);
     font-size: 1rem;
     line-height: 150%;
-    color: var(--color-textPrimary);
+    color: var(--color-newsroomBackgroundText);
     margin: 0;
     padding: 0.5rem;
     li {
@@ -62,9 +62,9 @@ const wrapper = css`
     right: var(--spacing100);
     top: var(--spacing100);
     font-size: var(--fontSize175);
-    color: var(--color-textPrimary);
+    color: var(--color-newsroomBackgroundText);
     &:hover {
-      color: var(--color-textPrimary);
+      color: var(--color-newsroomBackgroundText);
     }
   }
 

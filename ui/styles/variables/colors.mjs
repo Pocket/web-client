@@ -418,6 +418,24 @@ const callouts = {
     light: _colorPalette.grey10,
     dark: _colorPalette.teal80,
     sepia: _colorPalette.grey10
+  },
+
+  newsroomBackgroundPrimary: {
+    light: '#FFF0E3',
+    dark: '#FFF0E3',
+    sepia: '#FFF0E3'
+  },
+
+  newsroomBackgroundSecondary: {
+    light: '#DB6900',
+    dark: '#DB6900',
+    sepia: '#DB6900'
+  },
+
+  newsroomBackgroundText: {
+    light: _colorPalette.grey10,
+    dark: _colorPalette.grey10,
+    sepia: _colorPalette.grey10
   }
 }
 
