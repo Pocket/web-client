@@ -28,7 +28,8 @@ export const marketingActions = {
     eventType: 'impression',
     entityTypes: ['ui'],
     eventData: {
-      component: 'ui'
+      component: 'ui',
+      uiType: 'button'
     },
     description: 'Banner at top of Saves for Newsroom campaign'
   }
