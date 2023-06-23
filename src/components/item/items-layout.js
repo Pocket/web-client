@@ -348,14 +348,14 @@ export const emptySlate = css`
   width: 100%;
   justify-content: center;
   align-items: center;
-  background-color: #f3f3f3;
+  background-color: var(--color-emptyCanvas);
   h4 {
     font-weight: 600;
     font-size: 1.5rem;
     margin: 1rem 0 0.25rem;
   }
   .glyph {
-    color: var(--color-textSecondary);
+    color: var(--color-textPrimary);
     svg {
       display: block;
       width: 50px;

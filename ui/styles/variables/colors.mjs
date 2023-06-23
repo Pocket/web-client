@@ -378,6 +378,11 @@ const raised = {
     light: _colorPalette.white100,
     dark: _colorPalette.grey20,
     sepia: _colorPalette.sepia96
+  },
+  emptyCanvas: {
+    light: '#f3f3f3',
+    dark: _colorPalette.grey20,
+    sepia: '#E0D9CA'
   }
 }
 
