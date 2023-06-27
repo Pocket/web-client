@@ -1,0 +1,11 @@
+{
+  "404-detail" : "",
+  "404-message" : "Il semble que la page à laquelle vous essayez d'accéder ait disparu. Veuillez contacter notre équipe d'assistance si vous pensez qu'il s'agit d'une erreur.",
+  "404-title" : "Oups ! Quelque chose ne va pas…",
+  "contact" : "Contacter l'assistance",
+  "message" : "Une erreur s'est produite. Essayez d'actualiser votre page pour voir si cela résout le problème. Si le problème persiste, veuillez contacter notre équipe d'assistance.",
+  "moderated-list-message" : "Cette liste n'est pas disponible car elle pourrait avoir enfreint les politiques de contenu partagé de Pocket.",
+  "notification-message" : "Le lien sur lequel vous avez cliqué renvoie aux paramètres de notification de votre téléphone, qui ne sont accessibles que sur un appareil mobile. Scannez le code QR pour installer Pocket sur votre téléphone.",
+  "notification-title" : "Apparemment, un problème est survenu.",
+  "title" : "Oups ! Quelque chose ne va pas…"
+}
