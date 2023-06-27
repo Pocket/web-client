@@ -14,7 +14,7 @@
   "clear-account" : "Account verwijderen",
   "clear-account-confirm" : "Account verwijderen",
   "clear-comply" : "Ik begrijp dat dit de data in mijn Pocket-account <1>permanent zal verwijderen!</1>",
-  "clear-copy" : "<0>Het zijn jouw data en jij hebt er de controle over. Als je wilt, kun je alle data verwijderen die zijn opgeslagen voor je account.<1>Dit verwijdert alleen de inhoud in je account, niet het account zelf. Je kunt nog steeds inloggen op je account.</1>",
+  "clear-copy" : "<0>Het zijn jouw data en jij hebt er de controle over. Als je wilt, kun je alle data verwijderen die zijn opgeslagen voor je account.</0><1>Dit verwijdert alleen de inhoud in je account, niet het account zelf. Je kunt nog steeds inloggen op je account.</1>",
   "confirm-change-username" : "Gebruikersnaam veranderen",
   "confirm-password" : "Nieuw wachtwoord bevestigen",
   "connected-services" : "Gekoppelde diensten",
