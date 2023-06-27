@@ -64,8 +64,10 @@ export const Saves = (props) => {
   }
 
   // Campaign
+  const { locale = 'en' } = router
+  const isEnglish = ['en', 'en-US'].includes(locale)
   const showNewsroomCampaign = featureFlagActive({ flag: 'newsroom', featureState })
-  const bannerCampaign = showNewsroomCampaign ? 'newsroom' : false
+  const bannerCampaign = showNewsroomCampaign && isEnglish ? 'newsroom' : false
 
   return (
     <Layout
