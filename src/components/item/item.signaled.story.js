@@ -1,4 +1,4 @@
-import { Item as ItemComponent } from './item'
+import { ItemSignaled as ItemComponent } from './item.signaled'
 import savesResponse from 'mocks/savedItems.json'
 import { topics } from 'mocks/_data/article'
 import { deriveListItem } from 'common/api/derivers/item'
@@ -6,7 +6,7 @@ import { arrayToObject } from 'common/utilities/object-array/object-array'
 import { css, cx } from '@emotion/css'
 import { SavedActions } from './actions/saved'
 import { TransitionalActions } from './actions/transitional'
-import { SignalActions } from './actions/signaled'
+import { SignaledActions } from './actions/signaled'
 
 const savesItems = Object.values(savesResponse.edges).map((item) => {
   const derivedItem = deriveListItem(item)
@@ -37,8 +37,8 @@ const gridContainer = css`
 `
 
 export default {
-  title: 'Item/Item',
-  component: Item,
+  title: 'Item/Signaled',
+  component: ItemComponent,
   decorators: [
     (Story) => (
       <div className={gridContainer}>
@@ -51,52 +51,17 @@ export default {
       control: { type: 'range', min: 2, max: 6, step: 1 }
     },
     itemToDisplay: {
-      control: {
-        type: 'select'
-      },
+      control: { type: 'select' },
       options: Object.keys(itemsToDisplay)
     },
-    saveStatus: {
-      control: {
-        type: 'inline-radio',
-        options: ['saved', 'unsaved']
-      }
-    },
-    tags: {
-      control: {
-        type: 'inline-radio'
-      },
-      options: ['none', 'one', 'a few', 'ridiculous'],
-      mapping: {
-        none: [],
-        one: [{ name: 'i am a tag' }],
-        'a few': [{ name: 'philosophy' }, { name: 'science' }],
-        ridiculous: [
-          { name: 'things' },
-          { name: 'stuff' },
-          { name: 'whatnot' },
-          { name: 'thing a ma bobs' },
-          { name: 'such organize' },
-          { name: 'much wow' }
-        ]
-      }
-    },
     Actions: {
-      control: {
-        type: 'inline-radio'
-      },
+      control: { type: 'inline-radio' },
       options: ['discovery', 'saved', 'signaled'],
       mapping: {
         saved: SavedActions,
         discovery: TransitionalActions,
-        signaled: SignalActions
+        signaled: SignaledActions
       }
-    },
-    partnerType: {
-      control: {
-        type: 'inline-radio'
-      },
-      options: [false, 'PARTNERED', 'SPONSORED']
     },
     topicName: {
       control: { type: 'select' },
@@ -104,32 +69,11 @@ export default {
       if: {
         arg: 'showTopic'
       }
-    },
-    itemId: { table: { disable: true } },
-    title: { table: { disable: true } },
-    publisher: { table: { disable: true } },
-    timeToRead: { table: { disable: true } },
-    excerpt: { table: { disable: true } },
-    hiddenActions: { table: { disable: true } },
-    bulkSelected: { table: { disable: true } },
-    authors: { table: { disable: true } },
-    fromPartner: { table: { disable: true } },
-    itemImage: { table: { disable: true } },
-    isUserList: { table: { disable: false } },
-    className: { table: { disable: false }, control: 'text' },
-    position: { table: { disable: true } },
-    bulkEdit: { table: { disable: true } },
-    bulkSelect: { table: { disable: true } },
-    shortcutSelect: { table: { disable: true } },
-    openUrl: { table: { disable: true } },
-    externalUrl: { table: { disable: true } },
-    onItemInView: { table: { disable: true } },
-    onOpen: { table: { disable: true } },
-    onOpenOriginalUrl: { table: { disable: true } }
+    }
   }
 }
 
-export const Item = (args) => {
+export const Signaled = (args) => {
   const itemToDisplay = args.itemToDisplay
   const item = itemsToDisplay[itemToDisplay]
 
@@ -148,6 +92,7 @@ export const Item = (args) => {
     isUserList,
     isInternalItem,
     onItemInView = () => {},
+    onReport = () => {},
     publisherLogo,
     fromPartner,
     clamp,
@@ -188,16 +133,17 @@ export const Item = (args) => {
       useMarkdown={true}
       topicName={topic}
       onItemInView={onItemInView}
+      onReport={onReport}
       {...args}
       className={cardClassnames}
     />
   )
 }
 
-Item.args = {
+Signaled.args = {
   cardSpan: 3,
   itemToDisplay: savesItems[0].storyName,
-  Actions: 'discovery',
+  Actions: 'signaled',
   saveStatus: 'unsaved',
   isSyndicated: false,
   isUserList: false,
@@ -210,7 +156,7 @@ Item.args = {
   showExcerpt: true,
   partnerType: false,
   sideBySide: false,
-  showTopic: false,
-  topicName: null,
+  showTopic: true,
+  topicName: 'Technology',
   tags: 'none'
 }

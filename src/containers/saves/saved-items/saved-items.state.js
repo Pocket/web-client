@@ -1,4 +1,5 @@
 import { put, call, select, takeEvery } from 'redux-saga/effects'
+import * as Sentry from '@sentry/nextjs'
 import { itemFiltersFromGraph } from 'common/api/queries/get-saved-items.filters'
 import { arraysAreEqual } from 'common/utilities/object-array/object-array'
 
@@ -9,6 +10,9 @@ import { ITEMS_UPSERT_INJECT } from 'actions'
 import { ITEMS_SAVED_FAILURE } from 'actions'
 import { MUTATION_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
+
+import { ITEMS_SAVED_UPDATE_REQUEST } from 'actions'
+import { ITEMS_SAVED_UPDATE_SUCCESS } from 'actions'
 
 import { ITEMS_UNDELETE_SUCCESS } from 'actions'
 
@@ -49,6 +53,7 @@ import { GET_ITEMS_TAGS_ARCHIVED } from 'actions'
 import { GET_ITEMS_TAGS_FAVORITES } from 'actions'
 import { ITEMS_CLEAR_CURRENT } from 'actions'
 import { LOAD_MORE_ITEMS } from 'actions'
+import { LOAD_PREVIOUS_ITEMS } from 'actions'
 
 import { SNOWPLOW_SEND_EVENT } from 'actions'
 
@@ -90,6 +95,7 @@ export const savedItemsSetSortOrder = (sortOrder) => ({type: ITEMS_SAVED_PAGE_SE
 export const savedItemsSetSortBy = (sortBy) => ({ type: ITEMS_SAVED_PAGE_SET_SORT_BY, sortBy })
 
 export const loadMoreListItems = () => ({ type: LOAD_MORE_ITEMS })
+export const loadPreviousListItems = () => ({ type: LOAD_PREVIOUS_ITEMS })
 
 /** LIST SAVED REDUCERS
  --------------------------------------------------------------- */
@@ -190,8 +196,9 @@ export const pageSavedInfoReducers = (state = initialState, action) => {
 export const pageSavedIdsSagas = [
   takeEvery(MUTATION_SUCCESS, reconcileMutation),
   takeEvery(MUTATION_DELETE_SUCCESS, reconcileDeleteMutation),
-  takeEvery(ITEMS_UPSERT_SUCCESS, reconcileUpsert),
+  takeEvery([ ITEMS_UPSERT_SUCCESS, ITEMS_SAVED_UPDATE_SUCCESS ], reconcileUpsert),
   takeEvery(LOAD_MORE_ITEMS, loadMoreItems),
+  takeEvery(LOAD_PREVIOUS_ITEMS, loadPreviousItems),
   takeEvery(ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, adjustSortOrder),
   takeEvery(
     [
@@ -228,8 +235,10 @@ export const pageSavedIdsSagas = [
 /** SAGA :: SELECTORS
  --------------------------------------------------------------- */
 const getSavedPageInfo = (state) => state.pageSavedInfo
+const getSavedPageIds = (state) => state.pageSavedIds
 const getSortOrder = (state) => state.pageSavedInfo?.sortOrder
 const getItems = (state) => state.itemsDisplay
+const getItemCursor = (state, id) => state.itemsSaved[id]?.cursor
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -315,6 +324,36 @@ function* loadMoreItems() {
     })
   } catch (err) {
     console.warn(err)
+  }
+}
+
+function* loadPreviousItems() {
+  try {
+    const { searchTerm, sortOrder, actionType, tagNames } = yield select(
+      getSavedPageInfo
+    )
+    const type = yield call(itemRequestType, searchTerm, tagNames)
+    // We only want to fetch an update if the user is on Saves
+    if (type !== ITEMS_SAVED_REQUEST) return
+
+    const ids = yield select(getSavedPageIds)
+    const startCursor = yield select(getItemCursor, ids[0])
+    // If there's no startCursor there's something wrong and we shouldn't update
+    if (!startCursor) return
+
+    yield put({
+      type: ITEMS_SAVED_UPDATE_REQUEST,
+      actionType,
+      sortOrder,
+      pagination: {
+        before: startCursor
+      }
+    })
+  } catch (err) {
+    Sentry.withScope((scope) => {
+      scope.setFingerprint('LoadPreviousItems Error')
+      Sentry.captureMessage(err)
+    })
   }
 }
 

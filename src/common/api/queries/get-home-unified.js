@@ -14,7 +14,7 @@ const getHomeQuery = gql`
           url
           text
         }
-        recommendations {
+        recommendations(count: 12) {
           corpusRecommendationId: id
           corpusItem {
             imageUrl

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { css } from '@emotion/css'
+import { css, cx } from '@emotion/css'
 import { GlobalFooter } from 'components/global-footer/global-footer'
 import { PageContainer } from 'components/page-container/page-container'
 import { breakpointLargeTablet } from 'common/constants'
@@ -38,6 +38,9 @@ const savesContainer = css`
 
 const fixedNavContainer = css`
   padding-top: 65px;
+  &.withBanner {
+    padding-top: 172px;
+  }
 `
 
 function mainLayout({
@@ -48,13 +51,19 @@ function mainLayout({
   subset,
   tag,
   selectedNavLink,
-  isFullWidthLayout = false
+  isFullWidthLayout = false,
+  bannerCampaign
 }) {
   return (
     <>
       <PocketHead title={title} canonical={canonical} metaData={metaData} />
-      <GlobalNav selectedLink={selectedNavLink} subset={subset} tag={tag} />
-      <div className={fixedNavContainer}>
+      <GlobalNav
+        selectedLink={selectedNavLink}
+        subset={subset}
+        tag={tag}
+        bannerCampaign={bannerCampaign}
+      />
+      <div className={cx(fixedNavContainer, bannerCampaign && 'withBanner')}>
         {isFullWidthLayout ? (
           children
         ) : (

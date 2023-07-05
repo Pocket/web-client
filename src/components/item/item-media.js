@@ -79,7 +79,8 @@ export const CardMedia = function ({
   isUserList,
   openUrl,
   onOpen,
-  openInNewTab
+  openInNewTab,
+  showViewOriginal = true
 }) {
   /**
    * Fallback images:
@@ -154,7 +155,7 @@ export const CardMedia = function ({
           target={linkTarget}
           rel={linkRel}>
           <MediaImage />
-          {openInNewTab ? (
+          {openInNewTab && showViewOriginal ? (
             <span className="view-original" data-cy="view-original">
               <span className="view-original-text">
                 {t('item-action:view-original', 'View Original')}
@@ -166,7 +167,7 @@ export const CardMedia = function ({
       ) : (
         <span className="no-link">
           <MediaImage />
-          {openInNewTab ? (
+          {openInNewTab && showViewOriginal ? (
             <span className="view-original" data-cy="view-original">
               <span className="view-original-text">
                 {t('item-action:view-original', 'View Original')}

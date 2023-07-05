@@ -7,6 +7,10 @@ const getRecentShareableListsQuery = gql`
     shareableLists {
       title
       externalId
+      listItems {
+        externalId
+        itemId: externalId
+      }
     }
   }
 `

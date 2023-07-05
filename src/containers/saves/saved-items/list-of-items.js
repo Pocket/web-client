@@ -3,6 +3,7 @@ import { LoadMore } from './load-more'
 import { MemoizedItemCard as ItemCard } from 'connectors/items/item-card-saved'
 import { useSelector, useDispatch } from 'react-redux'
 import { loadMoreListItems } from './saved-items.state'
+import { loadPreviousListItems } from './saved-items.state'
 import { getScrollTop } from 'common/utilities/scroll/scroll'
 import { useViewport } from 'components/viewport-provider/viewport-provider'
 import { EmptyFilters } from 'components/empty-states/filters'
@@ -89,6 +90,10 @@ export const ListOfItems = ({ subset }) => {
     if (startingIndex !== newIndex) setStartingIndex(newIndex)
   }, [columnCount, height, startingIndex, verticalPadding])
 
+  const checkVisibility = useCallback(() => {
+    if (document.visibilityState === 'visible') dispatch(loadPreviousListItems())
+  }, [dispatch])
+
   /** EFFECTS
  --------------------------------------------------------------- */
 
@@ -97,13 +102,15 @@ export const ListOfItems = ({ subset }) => {
     // Add event listener
     window.addEventListener('resize', checkRange)
     window.addEventListener('scroll', checkRange)
+    window.addEventListener('visibilitychange', checkVisibility)
 
     // Remove event listener on cleanup
     return () => {
       window.removeEventListener('resize', checkRange)
       window.removeEventListener('scroll', checkRange)
+      window.removeEventListener('visibilitychange', checkVisibility)
     }
-  }, [checkRange])
+  }, [checkRange, checkVisibility])
 
   const loadMore = () => dispatch(loadMoreListItems())
   const itemsToShow = pageSavedIds.slice(startingIndex, startingIndex + itemsOnScreen + 1)

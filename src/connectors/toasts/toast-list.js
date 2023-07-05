@@ -4,7 +4,7 @@ import { clearAllToasts } from 'connectors/toasts/toast.state'
 import { Toast } from './toast'
 import { css } from '@emotion/css'
 
-const toastStyle = css`
+export const toastStyle = css`
   position: fixed;
   bottom: 50px;
   right: 50px;
@@ -17,7 +17,7 @@ export const Toasts = () => {
   const toasts = useSelector((state) => state.toasts)
 
   useEffect(() => {
-  dispatch(clearAllToasts())
+    dispatch(clearAllToasts())
   }, [dispatch])
 
   return (

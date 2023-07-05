@@ -1,3 +1,138 @@
+## [1.100.11](https://github.com/Pocket/web-client/compare/v1.100.10...v1.100.11) (2023-06-27)
+
+
+### Bug Fixes
+
+* **banner:** newsroom only in us ([7ffdc18](https://github.com/Pocket/web-client/commit/7ffdc185f7584aefc71a088829105a7fe0db9b2d))
+
+## [1.100.10](https://github.com/Pocket/web-client/compare/v1.100.9...v1.100.10) (2023-06-23)
+
+
+### Bug Fixes
+
+* **home:** add empty state color backgrounds ([c33a258](https://github.com/Pocket/web-client/commit/c33a258bd00d42f09fa7f9e810372acd8674ea1b))
+
+## [1.100.9](https://github.com/Pocket/web-client/compare/v1.100.8...v1.100.9) (2023-06-22)
+
+
+### Bug Fixes
+
+* **banner:** add ui type to banner for newsroom campaign ([adc0ded](https://github.com/Pocket/web-client/commit/adc0ded8ea6b4a65542a59dcc187f4cdbe899ba5))
+
+## [1.100.8](https://github.com/Pocket/web-client/compare/v1.100.7...v1.100.8) (2023-06-21)
+
+
+### Bug Fixes
+
+* **home:** remove tooltip delay ([1a2c440](https://github.com/Pocket/web-client/commit/1a2c440bd37d1ddcfd5150a7b543a7b116d73c55))
+
+## [1.100.7](https://github.com/Pocket/web-client/compare/v1.100.6...v1.100.7) (2023-06-21)
+
+
+### Bug Fixes
+
+* **callout:** update colors for themes ([43de7b3](https://github.com/Pocket/web-client/commit/43de7b3df60aa21577eb50f9b65dd3c5bdb5176a))
+
+## [1.100.6](https://github.com/Pocket/web-client/compare/v1.100.5...v1.100.6) (2023-06-21)
+
+
+### Bug Fixes
+
+* **errors:** adding custom sentry errors for loading previous items ([d0906a1](https://github.com/Pocket/web-client/commit/d0906a135b2307770437de8bba3200dc2d3070e3))
+* **saves:** adding comments to responder function for clarity ([d5a2a86](https://github.com/Pocket/web-client/commit/d5a2a864e05804c17e170fdd07db6d7fcf0a980d))
+* **saves:** update comment regarding startcursor ([1d5900a](https://github.com/Pocket/web-client/commit/1d5900a40220a5cbda80cdd43a82c72b9c95b85a))
+* **saves:** update getitemcursor function with optional chaining ([675dee5](https://github.com/Pocket/web-client/commit/675dee5c5dd890a0c4e0411fe0ab06b6fcd0efc3))
+* **saves:** update how we get the startcursor variable ([cae3fcf](https://github.com/Pocket/web-client/commit/cae3fcf4f7139919c071b6c0e19d3907eabfc50d))
+* **saves:** update saves when browser regains focus ([d029c09](https://github.com/Pocket/web-client/commit/d029c0948b69e9a40c1f6cbd270d4022b816a966))
+
+## [1.100.5](https://github.com/Pocket/web-client/compare/v1.100.4...v1.100.5) (2023-06-21)
+
+
+### Bug Fixes
+
+* **banner:** adjust newsroom copy ([60a1269](https://github.com/Pocket/web-client/commit/60a12692ac58c85ff65136053d1f5dd37c4d4703))
+
+## [1.100.4](https://github.com/Pocket/web-client/compare/v1.100.3...v1.100.4) (2023-06-20)
+
+
+### Bug Fixes
+
+* **home:** add toast to promote ([c2e0b12](https://github.com/Pocket/web-client/commit/c2e0b124c6a45ffb5a951284c3234e5f7b2e8569))
+* **home:** update signaled actions style ([311c771](https://github.com/Pocket/web-client/commit/311c771b283ddd35b0bc0c5d406c94af3019487b))
+* **tooltip:** decrease delay ([fc8a7bc](https://github.com/Pocket/web-client/commit/fc8a7bc11cdb651df1fc9d57af05848b290873f3))
+
+## [1.100.3](https://github.com/Pocket/web-client/compare/v1.100.2...v1.100.3) (2023-06-20)
+
+
+### Bug Fixes
+
+* **collections:** load cat/subcat correctly ([d59b1aa](https://github.com/Pocket/web-client/commit/d59b1aacc5f8ba4f886125d360877b4268fe6074))
+
+## [1.100.2](https://github.com/Pocket/web-client/compare/v1.100.1...v1.100.2) (2023-06-20)
+
+
+### Bug Fixes
+
+* **lists:** fetch list item count with recent list request ([8d0ef1a](https://github.com/Pocket/web-client/commit/8d0ef1a926faac3ae0b68430cc3f942ba4e17807))
+
+## [1.100.1](https://github.com/Pocket/web-client/compare/v1.100.0...v1.100.1) (2023-06-15)
+
+
+### Bug Fixes
+
+* **newsroom:** add missing space ([3703718](https://github.com/Pocket/web-client/commit/370371808fd2a13094d3c18f4e1a2006ab1e8177))
+
+# [1.100.0](https://github.com/Pocket/web-client/compare/v1.99.1...v1.100.0) (2023-06-15)
+
+
+### Bug Fixes
+
+* **home:** remove flash of setup on slow connections ([c36dba7](https://github.com/Pocket/web-client/commit/c36dba7a5b94c2d15186de8155731d751b2fed23))
+* **image:** allow limited view original ([9f65146](https://github.com/Pocket/web-client/commit/9f651467caaa41bd11209db5644777893599e3f7))
+* **item:** fix story ([dd4559b](https://github.com/Pocket/web-client/commit/dd4559b9ce462cd694bd62af7f7a0fd52bdd28c6))
+* **signaled:** don’t trigger on any old animation end ([f41a5e5](https://github.com/Pocket/web-client/commit/f41a5e551469bc8a33ce2b8335bc57d0fc240a5a))
+* **snowplow:** add thumbsup/down ([68a6bfe](https://github.com/Pocket/web-client/commit/68a6bfefe1a88295b0793bcdcd38f6188fe443a4))
+
+
+### Features
+
+* **card:** rough out signaled card ([d5dd7f9](https://github.com/Pocket/web-client/commit/d5dd7f99ed3ebacc7c98bddcc1afc4f32f6d612f))
+* **home:** add toast to demote ([5a4af78](https://github.com/Pocket/web-client/commit/5a4af788d0d82f4ce88590b70f9bacb51e1c76b8))
+* **home:** thumbs up / down functionality ([ad177e7](https://github.com/Pocket/web-client/commit/ad177e79588aa93128eff50b58ddbae9d555c53e))
+* **home:** use signaled cards ([7ba1584](https://github.com/Pocket/web-client/commit/7ba1584b9b37ea31717118c2ec1087e8422f766e))
+* **signaled:** add promoted styles ([0ec598f](https://github.com/Pocket/web-client/commit/0ec598fa668ab9ed7e961dc44ceba7ed6985ac93))
+* **signaled:** persist demotions ([4c98902](https://github.com/Pocket/web-client/commit/4c989026942a578b2624cfcfc2f6818972a58d24))
+
+## [1.99.1](https://github.com/Pocket/web-client/compare/v1.99.0...v1.99.1) (2023-06-15)
+
+
+### Bug Fixes
+
+* **call out:** newsroom callout links to a new tab ([52f4378](https://github.com/Pocket/web-client/commit/52f43780b306a18e866e8f558c67ecc7705b3af7))
+
+# [1.99.0](https://github.com/Pocket/web-client/compare/v1.98.3...v1.99.0) (2023-06-15)
+
+
+### Features
+
+* **banner:** add newsroom banner ([edb6820](https://github.com/Pocket/web-client/commit/edb68204bb5d8b70e1623ed9323aac09757508c8))
+* **banner:** add newsroom banner for saves ([a58a321](https://github.com/Pocket/web-client/commit/a58a3213146adef6edd2b53569cc6ead8ce7bd44))
+* **collections:** add newsroom banners ([5f0709b](https://github.com/Pocket/web-client/commit/5f0709be2ea8d8604e4bc63f1779382a53b40d3e))
+
+## [1.98.3](https://github.com/Pocket/web-client/compare/v1.98.2...v1.98.3) (2023-06-15)
+
+
+### Bug Fixes
+
+* **toast:** break out new toast UI component from connector ([6e027b5](https://github.com/Pocket/web-client/commit/6e027b5c4a8d90d22935917a2cfe5ea61066eb3c))
+* **toast:** fix bad import breaking actual app ([dccc407](https://github.com/Pocket/web-client/commit/dccc407a7649f5a72e0185f6bf1dc072c9c1b14a))
+* **toast:** fix width of toast story not matching actual ([95ba56b](https://github.com/Pocket/web-client/commit/95ba56b804a81b9e07b83f78549046291cee5b34))
+* **toast:** make showUndo variable for story ([093fa83](https://github.com/Pocket/web-client/commit/093fa839756eb9f26a08068111f508af4dbe5581))
+* **toast:** move business logic out from toast component ([28de534](https://github.com/Pocket/web-client/commit/28de5349943fe47421a30b5206ce83b5c6a1fe47))
+* **toast:** re-use action data creation from QA modal ([42ec6e3](https://github.com/Pocket/web-client/commit/42ec6e3515a666294c038e584af23c81cd672e83))
+* **toast:** remove guard against no type from early prototyping ([3c9f532](https://github.com/Pocket/web-client/commit/3c9f53212367f1819d8ea858276b91c32a4f4c28))
+* **toast:** rename dumbtoast and move story into components ([f449567](https://github.com/Pocket/web-client/commit/f44956716086483d480be4163ec988525f0ed3c9))
+
 ## [1.98.2](https://github.com/Pocket/web-client/compare/v1.98.1...v1.98.2) (2023-06-14)
 
 
