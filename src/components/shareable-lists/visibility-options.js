@@ -47,10 +47,6 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
   const statusRef = useRef(null)
 
   const handleSetPrivate = () => handleSetStatus({ status: 'PRIVATE' })
-  const handleSetPublic = () =>
-    handleSetStatus({ status: 'PUBLIC', listItemNoteVisibility: 'PUBLIC' })
-  const handleSetMixed = () =>
-    handleSetStatus({ status: 'PUBLIC', listItemNoteVisibility: 'PRIVATE' })
 
   const getVisbilityStatus = (status, listItemNoteVisibility) => {
     if (status === 'PRIVATE') return 'isPrivate'
@@ -108,9 +104,10 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
           </span>
         </PopupMenuItem>
         <PopupMenuItem
-          onClick={handleSetMixed}
+          onClick={() => {}}
           icon={mixedIcon}
           className={visibilityStatus === 'isMixed' ? 'active' : null}
+          disabled={true}
           helperText={t(
             'list:mixed-description',
             'Publish your list to share via social media, email and messaging apps. Your notes will still be private.'
@@ -121,9 +118,10 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
           </span>
         </PopupMenuItem>
         <PopupMenuItem
-          onClick={handleSetPublic}
+          onClick={() => {}}
           icon={publicIcon}
           className={visibilityStatus === 'isPublic' ? 'active' : null}
+          disabled={true}
           helperText={t(
             'list:public-description',
             'Publish your list of articles and notes to share via social media, email and messaging apps.'
