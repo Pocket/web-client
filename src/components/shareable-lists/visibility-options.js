@@ -104,7 +104,6 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
           </span>
         </PopupMenuItem>
         <PopupMenuItem
-          onClick={() => {}}
           icon={mixedIcon}
           className={visibilityStatus === 'isMixed' ? 'active' : null}
           disabled={true}
@@ -118,7 +117,6 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
           </span>
         </PopupMenuItem>
         <PopupMenuItem
-          onClick={() => {}}
           icon={publicIcon}
           className={visibilityStatus === 'isPublic' ? 'active' : null}
           disabled={true}
