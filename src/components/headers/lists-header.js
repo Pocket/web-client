@@ -215,7 +215,6 @@ export const ListIndividualHeader = ({
   status,
   listItemNoteVisibility,
   handleSetStatus,
-  handleShare,
   handleEdit,
   handleSort,
   handleCopyUrl,
@@ -223,9 +222,7 @@ export const ListIndividualHeader = ({
 }) => {
   const { t } = useTranslation()
 
-  const isPublic = status === 'PUBLIC'
   const enrolledInternal = enrolledDev || enrolledPilot
-  const showShare = isPublic && enrolledInternal
 
   const publicListInfo = {
     externalId,
@@ -261,13 +258,7 @@ export const ListIndividualHeader = ({
           </button>
         </div>
 
-        <div className="actions-end share">
-          {showShare ? (
-            <button onClick={handleShare} className="tiny share">
-              <IosShareIcon /> {t('list:share', 'Share')}
-            </button>
-          ) : null}
-
+        <div className="actions-end">
           <button onClick={handleEdit} className="filter tiny outline">
             <FiltersAltIcon /> {t('list:settings', 'Settings')}
           </button>
