@@ -340,29 +340,28 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
               {isSuccessful ? (
                 <React.Fragment>
                   <h1 {...testIdAttribute('success-message')}>
-                    {'Done! Great reads are on the\u00A0way.'}
+                    Done! Great reads are on the\u00A0way.
                   </h1>
                   <h3 className="h6">
-                    {'Get ready for a daily dose of the best stories from around the\u00A0web.'}
+                    Get ready for a daily dose of the best stories from around the\u00A0web.
                   </h3>
                   <div className={mustReadsContainer}>
                     <img src={bookLibrary} alt="" />
                     <button
                       className="emphasized"
                       href="/explore/must-reads?utm_source=de-pocket-hits-signup-confirmation">
-                      {'Discover Must-Read Articles'}
+                      Discover Must-Read Articles
                     </button>
                   </div>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
                   <h1 className="h3">
-                    {'Your guide to the most fascinating articles from top\u00A0publications.'}
+                    Your guide to the most fascinating articles from top\u00A0publications.
                   </h1>
                   <h3 className="h6">
-                    {
-                      'Join millions of Pocket Hits subscribers and get inspired with our daily\u00A0newsletter.'
-                    }
+                    Join millions of Pocket Hits subscribers and get inspired with our
+                    daily\u00A0newsletter.
                   </h3>
                   <div className={formContainerStyle}>
                     <EmailSignupForm
@@ -377,21 +376,21 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                       }
                       displayErrorInline
                       buttonVariant="emphasized"
-                      inputLabel={'Your email address'}
-                      buttonLabel={'Subscribe'}
-                      invalidEmailError={'Invalid email address'}
-                      buttonLabelProcessing={'Working on it …'}
+                      inputLabel="Your email address"
+                      buttonLabel="Subscribe"
+                      invalidEmailError="Invalid email address"
+                      buttonLabelProcessing="Working on it …"
                       {...testIdAttribute('email-form')}
                     />
 
                     <div className={formSubtextWrapper}>
                       <span className={formSubtextLinks} {...testIdAttribute('form-subtext')}>
                         <a href="/privacy" target="_blank" rel="noopener noreferrer">
-                          {'Privacy'}
+                          Privacy
                         </a>
                         <span>·</span>
                         <a href="/tos" target="_blank" rel="noopener noreferrer">
-                          {'Terms'}
+                          Terms
                         </a>
                       </span>
                     </div>
@@ -401,7 +400,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
               )}
 
               <h6 className={cx(ruledHeadingStyle, 'color-amber')}>
-                {'See stories from publishers like these'}
+                See stories from publishers like these
               </h6>
 
               <PublisherGrid
