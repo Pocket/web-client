@@ -1,0 +1,563 @@
+import React, { Fragment, useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { css, cx } from '@emotion/css'
+import Head from 'next/head'
+// import { testIdAttribute } from '@pocket/web-utilities/test-utils'
+import Layout from 'layouts/main'
+// import {
+//   Banner,
+//   Button,
+//   PageContainer,
+//   breakpointLargeHandset,
+//   breakpointMediumHandset,
+//   breakpointMediumTablet,
+//   breakpointSmallHandset
+// } from '@pocket/web-ui'
+
+import { pocketHitsSignupRequested } from 'connectors/pocket-hits/pocket-hits.state'
+// import {
+//   trackPageView,
+//   trackEmailInputFocus,
+//   trackEmailCheckboxClick,
+//   trackEmailSubmit,
+//   trackEmailSubmitSuccess,
+//   trackEmailSubmitFailure,
+//   sendToSnowplow
+// } from './analytics'
+
+import EmailSignupForm from 'components/email-signup-form/email-signup-form'
+
+import metaImage from 'static/images/social-share/rainbow-lady.png'
+import bookLibrary from 'static/images/book-library.svg'
+import rainbowReader from 'static/images/rainbow-reader.svg'
+import popularScience from 'static/images/publisher-logos/logo-popularScience.png'
+import citylab from 'static/images/publisher-logos/logo-cityLab.png'
+import nautilus from 'static/images/publisher-logos/logo-nautilus.png'
+import outside from 'static/images/publisher-logos/logo-outside.png'
+import theAtlantic from 'static/images/publisher-logos/logo-theAtlantic.png'
+import mentalFloss from 'static/images/publisher-logos/logo-mentalFloss.png'
+import texasMonthly from 'static/images/publisher-logos/logo-texasMonthly.png'
+import saveur from 'static/images/publisher-logos/logo-saveur.png'
+import narratively from 'static/images/publisher-logos/logo-narratively.png'
+import atlasObscura from 'static/images/publisher-logos/logo-atlasObscura.png'
+import harvardBusinessReview from 'static/images/publisher-logos/logo-harvardReview.png'
+import kiplinger from 'static/images/publisher-logos/logo-kiplinger.png'
+import fastCompany from 'static/images/publisher-logos/logo-fastCompany.png'
+import inc from 'static/images/publisher-logos/logo-inc.png'
+import quartz from 'static/images/publisher-logos/logo-quartz.png'
+import theGuardian from 'static/images/publisher-logos/logo-guardian.png'
+
+// import translations from './translations/dictionary.json'
+import { PageContainer } from 'components/page-container/page-container'
+import {
+  breakpointLargeHandset,
+  breakpointMediumHandset,
+  breakpointMediumTablet,
+  breakpointSmallHandset
+} from 'common/constants'
+import PublisherGrid from 'components/pocket-hits-signup/publisher-grid'
+
+function testIdAttribute(id) {
+  if (process.env.NODE_ENV === 'test' || process.env.SHOW_DEV === 'included') {
+    return {
+      'data-test-id': id
+    }
+  }
+
+  return undefined
+}
+
+/** STYLES
+ ---------------------------------------------------------------------------- */
+
+const windowWrapper = css`
+  width: 100%;
+  height: 100%;
+  /* needed to prevent captcha badge overflow */
+  overflow-x: hidden;
+`
+
+const containerStyle = css`
+  padding: var(--spacing250) 0;
+  max-width: 740px;
+  margin: 0 auto;
+
+  h1 {
+    font-weight: 400;
+    text-align: center;
+    font-family: var(--fontSerifAlt);
+    font-size: var(--fontSize250);
+  }
+
+  h3 {
+    font-weight: 300;
+    text-align: center;
+    font-family: var(--fontSansSerif);
+    margin-bottom: var(--spacing250);
+  }
+
+  ${breakpointMediumTablet} {
+    padding: 0 0 var(--spacing150);
+
+    h1 {
+      font-size: var(--fontSize200);
+    }
+
+    h3 {
+      margin-bottom: var(--spacing150);
+    }
+  }
+
+  ${breakpointLargeHandset} {
+    padding: var(--spacing100) 0 var(--spacing150);
+  }
+
+  ${breakpointMediumHandset} {
+    h1 {
+      font-size: var(--fontSize175);
+      line-height: 130%;
+      margin-bottom: var(--spacing075);
+    }
+
+    h3 {
+      font-size: var(--fontSize100);
+      margin-bottom: var(--spacing150);
+    }
+  }
+
+  ${breakpointSmallHandset} {
+    padding: var(--spacing050) 0 var(--spacing150);
+
+    h1,
+    h3 {
+      text-align: left;
+    }
+  }
+`
+
+const formContainerStyle = css`
+  margin-bottom: var(--spacing650);
+
+  ${breakpointSmallHandset} {
+    margin-bottom: var(--spacing400);
+    form {
+      margin-bottom: var(--spacing100);
+    }
+  }
+
+  p {
+    font-family: var(--fontSansSerif);
+    font-size: 1rem;
+  }
+`
+
+const formSubtextWrapper = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+`
+
+const formSubtextLinks = css`
+  a {
+    display: inline-block;
+    font-family: var(--fontSansSerif);
+    font-size: var(--fontSize085);
+    font-weight: 300;
+    margin-left: var(--spacing025);
+  }
+  span {
+    padding: 0 0 0 0.25rem;
+  }
+`
+
+const heroImgStyle = css`
+  position: relative;
+  /* graphic is styled to overflow the boundaries of the content, so that on larger
+  screens the whole thing is visible, at small screens it becomes cropped. */
+  top: -6%;
+  left: -6%;
+  width: 112%;
+  margin: 0 0 var(--spacing250);
+
+  ${breakpointMediumHandset} {
+    width: 140%;
+    top: -20%;
+    left: -20%;
+  }
+`
+
+const mustReadsContainer = css`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacing400);
+
+  img {
+    position: relative;
+    width: 100%;
+    max-width: 170px;
+    margin: 0 auto var(--spacing250);
+  }
+
+  a {
+    margin: 0 auto;
+  }
+
+  ${breakpointMediumHandset} {
+    img {
+      max-width: 140px;
+    }
+  }
+`
+
+const ruledHeadingStyle = css`
+  display: block;
+  font-family: var(--fontSansSerif);
+  font-weight: normal;
+  font-size: var(--fontSize100);
+  line-height: 1.75em;
+  padding-bottom: var(--spacing050);
+  margin-bottom: var(--spacing250);
+  color: var(--color-textSecondary);
+  border-bottom: 2px solid var(--color-actionBrand);
+
+  &.color-amber {
+    border-bottom: 2px solid var(--color-amber);
+  }
+`
+
+const topBar = css`
+  margin-bottom: -1rem; /* custom spacing for PH signup page */
+
+  ${breakpointMediumTablet} {
+    margin-bottom: 0;
+  }
+`
+
+/** COMPONENT
+ ---------------------------------------------------------------------------- */
+
+/**
+ * Pocket Hits Signup Page UI
+ */
+export default function PocketHitsSignupPage({ language = 'en' }) {
+  /* Variables */
+  const dispatch = useDispatch()
+  const signupRequestState = useSelector((state) => state.pocketHits.signupRequestState)
+  const signupError = useSelector((state) => state.pocketHits.signupError)
+  const [activeForm, setActiveForm] = useState()
+
+  const isProcessing = signupRequestState === 'pending'
+  const isSuccessful = signupRequestState === 'success'
+
+  //   const dictionary = translations[language]
+
+  /* Effects */
+
+  // event: component mounted
+  //   useEffect(() => {
+  //     trackPageView()
+  //   }, [])
+
+  useEffect(() => {
+    // event: request success
+    if (signupRequestState === 'success') {
+      handleSubmitSuccess(activeForm)
+
+      // event: request error
+    } else if (signupRequestState === 'failure') {
+      handleSubmitFailure(activeForm)
+    }
+  }, [signupRequestState, activeForm])
+
+  /* Event Handlers */
+
+  function handleEmailInputFocus(formId) {
+    // trackEmailInputFocus(formId)
+  }
+
+  function handleEmailSubmit(formId, email, recaptchaResponseKey, marketingOptIn) {
+    setActiveForm(formId)
+
+    // trackEmailSubmit(formId)
+
+    // @TODO
+    // sendToSnowplow({ email, language })
+
+    dispatch(
+      pocketHitsSignupRequested(
+        email,
+        recaptchaResponseKey,
+        'explore-signup',
+        'marketing',
+        language,
+        marketingOptIn
+      )
+    )
+  }
+
+  function handleSubmitSuccess(formId) {
+    // if the user was looking at the bottom form, scroll them to the top so they
+    // can see the success message
+    if (global && global.scrollTo) {
+      global.scrollTo(0, 0)
+    }
+    // trackEmailSubmitSuccess(formId)
+  }
+
+  function handleSubmitFailure(formId) {
+    // trackEmailSubmitFailure(formId)
+  }
+
+  function handleCheckboxClick(formId) {
+    // trackEmailCheckboxClick(formId)
+  }
+
+  /* Output */
+  return (
+    <React.Fragment>
+      <Head>
+        {/* Default language */}
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href="https://getpocket.com/en/explore/pocket-hits-signup/"></link>
+        {/* List of available languages */}
+        <link
+          rel="alternate"
+          hreflang="en"
+          href="https://getpocket.com/en/explore/pocket-hits-signup/"
+          title="English"></link>
+        {/* <link
+          rel="alternate"
+          hreflang="de"
+          href="https://getpocket.com/de/explore/pocket-hits-signup/"
+          title="Deutsch"></link> */}
+      </Head>
+
+      <div className={windowWrapper}>
+        <Layout
+          title="Pocket: Pocket Hits Newsletter Signup"
+          metaData={{
+            url: 'https://getpocket.com/en/explore/pocket-hits-signup/',
+            description:
+              'Get Pocket’s newsletter and you’ll see fascinating articles of depth, substance and insight — in both German and English — selected from trusted sources.',
+            image: language === 'en' ? `${metaImage}` : null,
+            title: 'Pocket: Pocket Hits Newsletter Signup'
+          }}
+          canonical="https://getpocket.com/en/explore/pocket-hits-signup/"
+          selectedNavLink={null}
+          language={language}
+          isFullWidthLayout>
+          {/* <TranslateContent
+            language={language}
+            contentMap={{
+              de: (
+                <Banner className={topBar}>
+                  <span dangerouslySetInnerHTML={{ __html: dictionary.topbar }} />
+                </Banner>
+              )
+            }}
+            {...testIdAttribute('top-bar')}
+          /> */}
+
+          <PageContainer>
+            <div className={containerStyle}>
+              {isSuccessful ? (
+                <React.Fragment>
+                  <h1 {...testIdAttribute('success-message')}>
+                    {'Done! Great reads are on the\u00A0way.'}
+                  </h1>
+                  <h3 className="h6">
+                    {'Get ready for a daily dose of the best stories from around the\u00A0web.'}
+                  </h3>
+                  <div className={mustReadsContainer}>
+                    <img src={bookLibrary} alt="" />
+                    {/* @TODO */}
+                    <button
+                      className="emphasized"
+                      href="/explore/must-reads?utm_source=de-pocket-hits-signup-confirmation">
+                      {'Discover Must-Read Articles'}
+                    </button>
+                  </div>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <h1 className="h3">
+                    {'Your guide to the most fascinating articles from top\u00A0publications.'}
+                  </h1>
+                  <h3 className="h6">
+                    {
+                      'Join millions of Pocket Hits subscribers and get inspired with our daily\u00A0newsletter.'
+                    }
+                  </h3>
+                  <div className={formContainerStyle}>
+                    <EmailSignupForm
+                      instanceId="top"
+                      isProcessing={activeForm === 'top' && isProcessing}
+                      onFocus={handleEmailInputFocus}
+                      onCheckboxChecked={handleCheckboxClick}
+                      onValidSubmit={handleEmailSubmit}
+                      onValidationError={handleSubmitFailure}
+                      errorMessage={
+                        activeForm === 'top' && signupError ? 'Oops! Something went wrong.' : null
+                      }
+                      displayErrorInline
+                      buttonVariant="emphasized"
+                      inputLabel={'Your email address'}
+                      buttonLabel={'Subscribe'}
+                      invalidEmailError={'Invalid email address'}
+                      buttonLabelProcessing={'Working on it …'}
+                      {...testIdAttribute('email-form')}
+                    />
+
+                    {/* <TranslateContent
+                      language={language}
+                      contentMap={{
+                        de: <p>{dictionary.topEmailSignupForm.checkboxLabel}</p>
+                      }}
+                      {...testIdAttribute('description')}
+                    /> */}
+
+                    <div className={formSubtextWrapper}>
+                      <span className={formSubtextLinks} {...testIdAttribute('form-subtext')}>
+                        <a href="/privacy" target="_blank" rel="noopener noreferrer">
+                          {'Privacy'}
+                        </a>
+                        <span>·</span>
+                        <a href="/tos" target="_blank" rel="noopener noreferrer">
+                          {'Terms'}
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                  {/* <TranslateContent
+                    language={language}
+                    contentMap={{
+                      de: ' ',
+                      en: <img src={rainbowReader} className={heroImgStyle} alt="" />
+                    }}
+                    {...testIdAttribute('hero-image')}
+                  /> */}
+                  <img src={rainbowReader} className={heroImgStyle} alt="" />
+                </React.Fragment>
+              )}
+
+              {/* <TranslateContent
+                language={language}
+                contentMap={{
+                  de: (
+                    <TopicList
+                      topics={[
+                        'Wissenschaft',
+                        'Technologie',
+                        'Gesundheit',
+                        'Kultur',
+                        'Persönliche Weiterentwicklung',
+                        'Politik',
+                        'Nachrichten',
+                        'Reisen',
+                        'Überraschende Themen'
+                      ]}
+                    />
+                  )
+                }}
+                {...testIdAttribute('topic-list')}
+              /> */}
+
+              <h6 className={cx(ruledHeadingStyle, 'color-amber')}>
+                {'See stories from publishers like these'}
+              </h6>
+
+              <PublisherGrid
+                publishers={[
+                  {
+                    name: 'Popular Science',
+                    path: popularScience
+                  },
+                  {
+                    name: 'Citylab',
+                    path: citylab
+                  },
+                  {
+                    name: 'Nautilus',
+                    path: nautilus
+                  },
+                  {
+                    name: 'Outside',
+                    path: outside
+                  },
+                  {
+                    name: 'The Atlantic',
+                    path: theAtlantic
+                  },
+                  {
+                    name: 'Mental Floss',
+                    path: mentalFloss
+                  },
+                  {
+                    name: 'Texas Monthly',
+                    path: texasMonthly
+                  },
+                  {
+                    name: 'Saveur',
+                    path: saveur
+                  },
+                  {
+                    name: 'Narratively',
+                    path: narratively
+                  },
+                  {
+                    name: 'Atlas Obscura',
+                    path: atlasObscura
+                  },
+                  {
+                    name: 'Harvard Business Review',
+                    path: harvardBusinessReview
+                  },
+                  {
+                    name: 'Kiplinger',
+                    path: kiplinger
+                  },
+                  {
+                    name: 'Fast Company',
+                    path: fastCompany
+                  },
+                  {
+                    name: 'Inc.',
+                    path: inc
+                  },
+                  {
+                    name: 'Quartz',
+                    path: quartz
+                  },
+                  {
+                    name: 'The Guardian',
+                    path: theGuardian
+                  }
+                ]}
+              />
+
+              {!isSuccessful ? (
+                <React.Fragment>
+                  <h6 className={ruledHeadingStyle}>{'Sign up for Pocket Hits'}</h6>
+                  <EmailSignupForm
+                    instanceId="bottom"
+                    isProcessing={activeForm === 'bottom' && isProcessing}
+                    onFocus={handleEmailInputFocus}
+                    onValidSubmit={handleEmailSubmit}
+                    onValidationError={handleSubmitFailure}
+                    errorMessage={
+                      activeForm === 'bottom' && signupError ? 'Oops! Something went wrong.' : null
+                    }
+                    buttonVariant="emphasized"
+                  />
+                </React.Fragment>
+              ) : null}
+            </div>
+          </PageContainer>
+        </Layout>
+      </div>
+    </React.Fragment>
+  )
+}
