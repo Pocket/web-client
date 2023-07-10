@@ -6,7 +6,6 @@ import Head from 'next/head'
 import Layout from 'layouts/main'
 // import {
 //   Banner,
-//   Button,
 //   PageContainer,
 //   breakpointLargeHandset,
 //   breakpointMediumHandset,
@@ -373,7 +372,6 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                   </h3>
                   <div className={mustReadsContainer}>
                     <img src={bookLibrary} alt="" />
-                    {/* @TODO */}
                     <button
                       className="emphasized"
                       href="/explore/must-reads?utm_source=de-pocket-hits-signup-confirmation">
