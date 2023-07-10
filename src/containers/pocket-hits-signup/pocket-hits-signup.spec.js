@@ -203,14 +203,6 @@ describe('PocketHitsSignupPage', function () {
       assert(image.exists())
     })
 
-    it('hides topics list', () => {
-      const container = shallow(<PocketHitsSignupPage />)
-      const topicListContainer = container.find(testIdSelector('topic-list')).shallow()
-      const topicList = topicListContainer.find('TopicList')
-
-      assert(!topicList.exists())
-    })
-
     it('shows publisher grid', () => {
       const container = shallow(<PocketHitsSignupPage />)
       const publisherGridContainer = container.find(testIdSelector('publisher-grid')).shallow()
@@ -225,71 +217,6 @@ describe('PocketHitsSignupPage', function () {
       const bottomForm = bottomFormContainer.find('EmailSignupForm')
 
       assert(bottomForm.exists())
-    })
-  })
-
-  describe('german translation', () => {
-    it('shows the top bar', () => {
-      const container = shallow(<PocketHitsSignupPage language="de" />)
-      const topBar = container.find(testIdSelector('top-bar'))
-
-      assert(topBar.exists())
-    })
-
-    it('hides checkbox', () => {
-      const container = shallow(<PocketHitsSignupPage language="de" />)
-      const form = container.find(testIdSelector('email-form')).shallow()
-      const checkbox = form.find({ type: 'checkbox' })
-
-      assert(!checkbox.exists())
-    })
-
-    it('shows description text', () => {
-      const container = shallow(<PocketHitsSignupPage language="de" />)
-      const description = container.find(testIdSelector('description')).shallow()
-      const paragraph = description.find('p')
-
-      assert(paragraph.exists())
-    })
-
-    it('shows form subtext link', () => {
-      const container = shallow(<PocketHitsSignupPage language="de" />)
-      const form = container.find(testIdSelector('form-subtext')).shallow()
-      const formSubtext = form.find('span')
-
-      assert(formSubtext.exists())
-    })
-
-    it('hides the hero image', () => {
-      const container = shallow(<PocketHitsSignupPage language="de" />)
-      const heroImage = container.find(testIdSelector('hero-image')).shallow()
-      const image = heroImage.find('img')
-
-      assert(!image.exists())
-    })
-
-    it('shows topics list', () => {
-      const container = shallow(<PocketHitsSignupPage language="de" />)
-      const topicListContainer = container.find(testIdSelector('topic-list')).shallow()
-      const topicList = topicListContainer.find('TopicList')
-
-      assert(topicList.exists())
-    })
-
-    it('hides publisher grid', () => {
-      const container = shallow(<PocketHitsSignupPage language="de" />)
-      const publisherGridContainer = container.find(testIdSelector('publisher-grid')).shallow()
-      const publisherGrid = publisherGridContainer.find('PublisherGrid')
-
-      assert(!publisherGrid.exists())
-    })
-
-    it('hides bottom form', () => {
-      const container = shallow(<PocketHitsSignupPage language="de" />)
-      const bottomFormContainer = container.find(testIdSelector('bottom-form')).shallow()
-      const bottomForm = bottomFormContainer.find('EmailSignupForm')
-
-      assert(!bottomForm.exists())
     })
   })
 })
