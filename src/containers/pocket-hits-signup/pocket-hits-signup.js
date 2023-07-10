@@ -225,14 +225,6 @@ const ruledHeadingStyle = css`
   }
 `
 
-const topBar = css`
-  margin-bottom: -1rem; /* custom spacing for PH signup page */
-
-  ${breakpointMediumTablet} {
-    margin-bottom: 0;
-  }
-`
-
 /** COMPONENT
  ---------------------------------------------------------------------------- */
 
@@ -327,11 +319,6 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
           hreflang="en"
           href="https://getpocket.com/en/explore/pocket-hits-signup/"
           title="English"></link>
-        {/* <link
-          rel="alternate"
-          hreflang="de"
-          href="https://getpocket.com/de/explore/pocket-hits-signup/"
-          title="Deutsch"></link> */}
       </Head>
 
       <div className={windowWrapper}>
@@ -348,18 +335,6 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
           selectedNavLink={null}
           language={language}
           isFullWidthLayout>
-          {/* <TranslateContent
-            language={language}
-            contentMap={{
-              de: (
-                <Banner className={topBar}>
-                  <span dangerouslySetInnerHTML={{ __html: dictionary.topbar }} />
-                </Banner>
-              )
-            }}
-            {...testIdAttribute('top-bar')}
-          /> */}
-
           <PageContainer>
             <div className={containerStyle}>
               {isSuccessful ? (
@@ -409,14 +384,6 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                       {...testIdAttribute('email-form')}
                     />
 
-                    {/* <TranslateContent
-                      language={language}
-                      contentMap={{
-                        de: <p>{dictionary.topEmailSignupForm.checkboxLabel}</p>
-                      }}
-                      {...testIdAttribute('description')}
-                    /> */}
-
                     <div className={formSubtextWrapper}>
                       <span className={formSubtextLinks} {...testIdAttribute('form-subtext')}>
                         <a href="/privacy" target="_blank" rel="noopener noreferrer">
@@ -429,39 +396,9 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                       </span>
                     </div>
                   </div>
-                  {/* <TranslateContent
-                    language={language}
-                    contentMap={{
-                      de: ' ',
-                      en: <img src={rainbowReader} className={heroImgStyle} alt="" />
-                    }}
-                    {...testIdAttribute('hero-image')}
-                  /> */}
-                  <img src={rainbowReader} className={heroImgStyle} alt="" />
+                  <img src={rainbowReader} className={heroImgStyle} data-cy="hero-image" alt="" />
                 </React.Fragment>
               )}
-
-              {/* <TranslateContent
-                language={language}
-                contentMap={{
-                  de: (
-                    <TopicList
-                      topics={[
-                        'Wissenschaft',
-                        'Technologie',
-                        'Gesundheit',
-                        'Kultur',
-                        'Persönliche Weiterentwicklung',
-                        'Politik',
-                        'Nachrichten',
-                        'Reisen',
-                        'Überraschende Themen'
-                      ]}
-                    />
-                  )
-                }}
-                {...testIdAttribute('topic-list')}
-              /> */}
 
               <h6 className={cx(ruledHeadingStyle, 'color-amber')}>
                 {'See stories from publishers like these'}

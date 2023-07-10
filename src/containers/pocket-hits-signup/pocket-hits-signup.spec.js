@@ -163,28 +163,12 @@ describe('PocketHitsSignupPage', function () {
   // isn't supported, but different languages require different components
   // to be visible/hidden in different states.
   describe('english translation', () => {
-    it('hides the top bar', () => {
-      const container = shallow(<PocketHitsSignupPage />)
-      const topBar = container.find(testIdSelector('top-bar')).shallow()
-      const header = topBar.find('header')
-
-      assert(!header.exists())
-    })
-
     it('hides checkbox', () => {
       const container = shallow(<PocketHitsSignupPage />)
       const form = container.find(testIdSelector('email-form')).shallow()
       const checkbox = form.find({ type: 'checkbox' })
 
       assert(!checkbox.exists())
-    })
-
-    it('hides description text', () => {
-      const container = shallow(<PocketHitsSignupPage />)
-      const description = container.find(testIdSelector('description')).shallow()
-      const paragraph = description.find('p')
-
-      assert(!paragraph.exists())
     })
 
     it('shows form subtext link', () => {
