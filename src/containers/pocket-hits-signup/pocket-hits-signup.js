@@ -241,6 +241,73 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
   const isProcessing = signupRequestState === 'pending'
   const isSuccessful = signupRequestState === 'success'
 
+  const publishers = [
+    {
+      name: 'Popular Science',
+      path: popularScience
+    },
+    {
+      name: 'Citylab',
+      path: citylab
+    },
+    {
+      name: 'Nautilus',
+      path: nautilus
+    },
+    {
+      name: 'Outside',
+      path: outside
+    },
+    {
+      name: 'The Atlantic',
+      path: theAtlantic
+    },
+    {
+      name: 'Mental Floss',
+      path: mentalFloss
+    },
+    {
+      name: 'Texas Monthly',
+      path: texasMonthly
+    },
+    {
+      name: 'Saveur',
+      path: saveur
+    },
+    {
+      name: 'Narratively',
+      path: narratively
+    },
+    {
+      name: 'Atlas Obscura',
+      path: atlasObscura
+    },
+    {
+      name: 'Harvard Business Review',
+      path: harvardBusinessReview
+    },
+    {
+      name: 'Kiplinger',
+      path: kiplinger
+    },
+    {
+      name: 'Fast Company',
+      path: fastCompany
+    },
+    {
+      name: 'Inc.',
+      path: inc
+    },
+    {
+      name: 'Quartz',
+      path: quartz
+    },
+    {
+      name: 'The Guardian',
+      path: theGuardian
+    }
+  ]
+
   //   const dictionary = translations[language]
 
   /* Effects */
@@ -403,74 +470,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                 See stories from publishers like these
               </h6>
 
-              <PublisherGrid
-                publishers={[
-                  {
-                    name: 'Popular Science',
-                    path: popularScience
-                  },
-                  {
-                    name: 'Citylab',
-                    path: citylab
-                  },
-                  {
-                    name: 'Nautilus',
-                    path: nautilus
-                  },
-                  {
-                    name: 'Outside',
-                    path: outside
-                  },
-                  {
-                    name: 'The Atlantic',
-                    path: theAtlantic
-                  },
-                  {
-                    name: 'Mental Floss',
-                    path: mentalFloss
-                  },
-                  {
-                    name: 'Texas Monthly',
-                    path: texasMonthly
-                  },
-                  {
-                    name: 'Saveur',
-                    path: saveur
-                  },
-                  {
-                    name: 'Narratively',
-                    path: narratively
-                  },
-                  {
-                    name: 'Atlas Obscura',
-                    path: atlasObscura
-                  },
-                  {
-                    name: 'Harvard Business Review',
-                    path: harvardBusinessReview
-                  },
-                  {
-                    name: 'Kiplinger',
-                    path: kiplinger
-                  },
-                  {
-                    name: 'Fast Company',
-                    path: fastCompany
-                  },
-                  {
-                    name: 'Inc.',
-                    path: inc
-                  },
-                  {
-                    name: 'Quartz',
-                    path: quartz
-                  },
-                  {
-                    name: 'The Guardian',
-                    path: theGuardian
-                  }
-                ]}
-              />
+              <PublisherGrid publishers={publishers} />
 
               {!isSuccessful ? (
                 <React.Fragment>
