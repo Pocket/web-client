@@ -10,7 +10,7 @@ export const Links = ({ toggleDevMode }) => {
     },
     {
       title: 'Pocket Hits Signup',
-      src: '/pocket-hits-signup',
+      src: '/explore/pocket-hits-signup',
       description: 'wip migration of the discover page'
     }
   ]
