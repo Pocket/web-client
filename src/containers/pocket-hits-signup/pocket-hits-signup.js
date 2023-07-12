@@ -198,24 +198,14 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
   useEffect(() => {
     // event: request success
     if (signupRequestState === 'success') {
-      handleSubmitSuccess(activeForm)
-
-      // event: request error
-    } else if (signupRequestState === 'failure') {
-      handleSubmitFailure(activeForm)
+      handleSubmitSuccess()
     }
-  }, [signupRequestState, activeForm])
+  }, [signupRequestState])
 
   /* Event Handlers */
 
-  function handleEmailInputFocus(formId) {
-    // trackEmailInputFocus(formId)
-  }
-
   function handleEmailSubmit(formId, email, recaptchaResponseKey, marketingOptIn) {
     setActiveForm(formId)
-
-    // trackEmailSubmit(formId)
 
     dispatch(sendSnowplowEvent('pocket-hits.signup', { email, locale: language }))
 
@@ -231,20 +221,12 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
     )
   }
 
-  function handleSubmitSuccess(formId) {
+  function handleSubmitSuccess() {
     // if the user was looking at the bottom form, scroll them to the top so they
     // can see the success message
     if (global && global.scrollTo) {
       global.scrollTo(0, 0)
     }
-  }
-
-  function handleSubmitFailure(formId) {
-    // trackEmailSubmitFailure(formId)
-  }
-
-  function handleCheckboxClick(formId) {
-    // trackEmailCheckboxClick(formId)
   }
 
   /* Output */
@@ -308,10 +290,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                     <EmailSignupForm
                       instanceId="top"
                       isProcessing={activeForm === 'top' && isProcessing}
-                      onFocus={handleEmailInputFocus}
-                      onCheckboxChecked={handleCheckboxClick}
                       onValidSubmit={handleEmailSubmit}
-                      onValidationError={handleSubmitFailure}
                       errorMessage={
                         activeForm === 'top' && signupError ? 'Oops! Something went wrong.' : null
                       }
@@ -360,9 +339,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                   <EmailSignupForm
                     instanceId="bottom"
                     isProcessing={activeForm === 'bottom' && isProcessing}
-                    onFocus={handleEmailInputFocus}
                     onValidSubmit={handleEmailSubmit}
-                    onValidationError={handleSubmitFailure}
                     errorMessage={
                       activeForm === 'bottom' && signupError ? 'Oops! Something went wrong.' : null
                     }
