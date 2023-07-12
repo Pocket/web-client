@@ -15,6 +15,7 @@ const publisherGrid = css`
 
     .colormode-dark & {
       filter: invert(1);
+      mix-blend-mode: difference;
     }
   }
 
