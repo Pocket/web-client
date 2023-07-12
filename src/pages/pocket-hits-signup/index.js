@@ -5,7 +5,6 @@ import { LOCALE_COMMON } from 'common/constants'
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      authRequired: true,
       locale,
       ...(await serverSideTranslations(locale, [...LOCALE_COMMON]))
     }

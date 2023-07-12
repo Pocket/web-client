@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import { css } from '@emotion/css'
 import { breakpointLargeHandset, breakpointMediumHandset } from 'common/constants'
 
@@ -110,13 +109,6 @@ function PublisherGrid() {
       ))}
     </div>
   )
-}
-
-PublisherGrid.propTypes = {
-  /**
-   * Array of objects with path to image and name of publisher
-   */
-  publishers: PropTypes.array.isRequired
 }
 
 export default PublisherGrid

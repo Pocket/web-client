@@ -236,12 +236,12 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
         {/* Default language */}
         <link
           rel="alternate"
-          hreflang="x-default"
+          hrefLang="x-default"
           href="https://getpocket.com/en/explore/pocket-hits-signup/"></link>
         {/* List of available languages */}
         <link
           rel="alternate"
-          hreflang="en"
+          hrefLang="en"
           href="https://getpocket.com/en/explore/pocket-hits-signup/"
           title="English"></link>
       </Head>
