@@ -29,12 +29,6 @@ const loadMoreRefStyle = css`
 `
 
 export function LoadMore({ loadMore }) {
-  const viewRef = useRef(null)
-
-  // Fire when item is in view
-  const entry = useIntersectionObserver(viewRef, { threshold: 0.5 })
-  const inView = !!entry?.isIntersecting
-
   const hasNextPage = useSelector((state) => state.pageSavedInfo.hasNextPage)
   const loading = useSelector((state) => state.pageSavedInfo.loading)
   const error = useSelector((state) => state.pageSavedInfo.error)
@@ -43,7 +37,6 @@ export function LoadMore({ loadMore }) {
   const shouldLoadMore = hasNextPage && !loading
 
   const loadMoreMessage = pageSavedIds.length ? 'Loading more items' : ''
-  if (inView && shouldLoadMore) loadMore()
 
   return loading || error ? (
     <div key="load-more" className={loadMoreStyle}>
@@ -56,6 +49,17 @@ export function LoadMore({ loadMore }) {
       )}
     </div>
   ) : (
-    <div ref={viewRef} className={loadMoreRefStyle} />
+    <LoadMoreTrigger loadMore={loadMore} shouldLoadMore={shouldLoadMore} />
   )
+}
+
+function LoadMoreTrigger({ loadMore, shouldLoadMore }) {
+  const viewRef = useRef(null)
+
+  // Fire when item is in view
+  const entry = useIntersectionObserver(viewRef, { threshold: 0.5 })
+  const inView = !!entry?.isIntersecting
+  if (inView && shouldLoadMore) loadMore()
+
+  return <div ref={viewRef} className={loadMoreRefStyle} />
 }
