@@ -17,6 +17,9 @@ const publisherGrid = css`
       filter: invert(1);
       mix-blend-mode: difference;
     }
+    .colormode-sepia & {
+      mix-blend-mode: multiply;
+    }
   }
 
   ${breakpointLargeHandset} {
