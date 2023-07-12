@@ -1,3 +1,10 @@
+## [1.100.14](https://github.com/Pocket/web-client/compare/v1.100.13...v1.100.14) (2023-07-12)
+
+
+### Bug Fixes
+
+* **saves:** add separate component for lazy load trigger ([c934cca](https://github.com/Pocket/web-client/commit/c934cca5afe9ba770c77d77bf511f40fd951d44a))
+
 ## [1.100.13](https://github.com/Pocket/web-client/compare/v1.100.12...v1.100.13) (2023-07-06)
 
 
