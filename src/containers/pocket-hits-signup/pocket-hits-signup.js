@@ -1,8 +1,7 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { css, cx } from '@emotion/css'
 import Head from 'next/head'
-// import { testIdAttribute } from '@pocket/web-utilities/test-utils'
 import Layout from 'layouts/main'
 // import {
 //   Banner,
@@ -55,16 +54,6 @@ import {
   breakpointSmallHandset
 } from 'common/constants'
 import PublisherGrid from 'components/pocket-hits-signup/publisher-grid'
-
-function testIdAttribute(id) {
-  if (process.env.NODE_ENV === 'test' || process.env.SHOW_DEV === 'included') {
-    return {
-      'data-test-id': id
-    }
-  }
-
-  return undefined
-}
 
 /** STYLES
  ---------------------------------------------------------------------------- */
@@ -241,73 +230,6 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
   const isProcessing = signupRequestState === 'pending'
   const isSuccessful = signupRequestState === 'success'
 
-  const publishers = [
-    {
-      name: 'Popular Science',
-      path: popularScience
-    },
-    {
-      name: 'Citylab',
-      path: citylab
-    },
-    {
-      name: 'Nautilus',
-      path: nautilus
-    },
-    {
-      name: 'Outside',
-      path: outside
-    },
-    {
-      name: 'The Atlantic',
-      path: theAtlantic
-    },
-    {
-      name: 'Mental Floss',
-      path: mentalFloss
-    },
-    {
-      name: 'Texas Monthly',
-      path: texasMonthly
-    },
-    {
-      name: 'Saveur',
-      path: saveur
-    },
-    {
-      name: 'Narratively',
-      path: narratively
-    },
-    {
-      name: 'Atlas Obscura',
-      path: atlasObscura
-    },
-    {
-      name: 'Harvard Business Review',
-      path: harvardBusinessReview
-    },
-    {
-      name: 'Kiplinger',
-      path: kiplinger
-    },
-    {
-      name: 'Fast Company',
-      path: fastCompany
-    },
-    {
-      name: 'Inc.',
-      path: inc
-    },
-    {
-      name: 'Quartz',
-      path: quartz
-    },
-    {
-      name: 'The Guardian',
-      path: theGuardian
-    }
-  ]
-
   //   const dictionary = translations[language]
 
   /* Effects */
@@ -373,7 +295,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
 
   /* Output */
   return (
-    <React.Fragment>
+    <>
       <Head>
         {/* Default language */}
         <link
@@ -395,7 +317,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
             url: 'https://getpocket.com/en/explore/pocket-hits-signup/',
             description:
               'Get Pocket’s newsletter and you’ll see fascinating articles of depth, substance and insight — in both German and English — selected from trusted sources.',
-            image: language === 'en' ? `${metaImage}` : null,
+            image: language === 'en' ? `${metaImage.src}` : null,
             title: 'Pocket: Pocket Hits Newsletter Signup'
           }}
           canonical="https://getpocket.com/en/explore/pocket-hits-signup/"
@@ -405,12 +327,10 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
           <PageContainer>
             <div className={containerStyle}>
               {isSuccessful ? (
-                <React.Fragment>
-                  <h1 {...testIdAttribute('success-message')}>
-                    Done! Great reads are on the\u00A0way.
-                  </h1>
+                <>
+                  <h1 data-cy="success-message">Done! Great reads are on the&nbsp;way.</h1>
                   <h3 className="h6">
-                    Get ready for a daily dose of the best stories from around the\u00A0web.
+                    Get ready for a daily dose of the best stories from around the&nbsp;web.
                   </h3>
                   <div className={mustReadsContainer}>
                     <img src={bookLibrary} alt="" />
@@ -420,15 +340,15 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                       Discover Must-Read Articles
                     </button>
                   </div>
-                </React.Fragment>
+                </>
               ) : (
-                <React.Fragment>
+                <>
                   <h1 className="h3">
-                    Your guide to the most fascinating articles from top\u00A0publications.
+                    Your guide to the most fascinating articles from top&nbsp;publications.
                   </h1>
                   <h3 className="h6">
                     Join millions of Pocket Hits subscribers and get inspired with our
-                    daily\u00A0newsletter.
+                    daily&nbsp;newsletter.
                   </h3>
                   <div className={formContainerStyle}>
                     <EmailSignupForm
@@ -447,11 +367,14 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                       buttonLabel="Subscribe"
                       invalidEmailError="Invalid email address"
                       buttonLabelProcessing="Working on it …"
-                      {...testIdAttribute('email-form')}
+                      {...{
+                        'data-test-id': 'email-form'
+                      }}
+                      dataCy="email-form"
                     />
 
                     <div className={formSubtextWrapper}>
-                      <span className={formSubtextLinks} {...testIdAttribute('form-subtext')}>
+                      <span className={formSubtextLinks} data-cy="form-subtext">
                         <a href="/privacy" target="_blank" rel="noopener noreferrer">
                           Privacy
                         </a>
@@ -462,18 +385,23 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                       </span>
                     </div>
                   </div>
-                  <img src={rainbowReader} className={heroImgStyle} data-cy="hero-image" alt="" />
-                </React.Fragment>
+                  <img
+                    src={rainbowReader.src}
+                    className={heroImgStyle}
+                    data-cy="hero-image"
+                    alt=""
+                  />
+                </>
               )}
 
               <h6 className={cx(ruledHeadingStyle, 'color-amber')}>
                 See stories from publishers like these
               </h6>
 
-              <PublisherGrid publishers={publishers} />
+              <PublisherGrid />
 
               {!isSuccessful ? (
-                <React.Fragment>
+                <>
                   <h6 className={ruledHeadingStyle}>{'Sign up for Pocket Hits'}</h6>
                   <EmailSignupForm
                     instanceId="bottom"
@@ -486,12 +414,12 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                     }
                     buttonVariant="emphasized"
                   />
-                </React.Fragment>
+                </>
               ) : null}
             </div>
           </PageContainer>
         </Layout>
       </div>
-    </React.Fragment>
+    </>
   )
 }

@@ -106,7 +106,8 @@ const EmailSignupForm = ({
   invalidEmailError = INVALID_EMAIL_ERROR,
   buttonLabelProcessing = PROCESSING_MESSAGE,
   showCheckbox = false,
-  checkboxLabel = 'Stay updated on Pocket news, launches, surveys, and more.'
+  checkboxLabel = 'Stay updated on Pocket news, launches, surveys, and more.',
+  dataCy
 }) => {
   const recaptchaRef = React.createRef()
   const [emailValue, setEmailValue] = useState('')
@@ -158,6 +159,7 @@ const EmailSignupForm = ({
   return (
     <form
       className={cx(formStyle, formClassName, hideCaptchaBadge && 'hidden-captcha-badge')}
+      data-cy={dataCy}
       onSubmit={handleFormSubmit}
       autoComplete="off">
       <div className={cx(inputStyle, inputClassName)}>
