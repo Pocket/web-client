@@ -264,7 +264,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
             <div className={containerStyle}>
               {isSuccessful ? (
                 <>
-                  <h1 data-cy="success-message">Done! Great reads are on the&nbsp;way.</h1>
+                  <h1>Done! Great reads are on the&nbsp;way.</h1>
                   <h3 className="h6">
                     Get ready for a daily dose of the best stories from around the&nbsp;web.
                   </h3>
@@ -300,14 +300,10 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                       buttonLabel="Subscribe"
                       invalidEmailError="Invalid email address"
                       buttonLabelProcessing="Working on it …"
-                      {...{
-                        'data-test-id': 'email-form'
-                      }}
-                      dataCy="email-form"
                     />
 
                     <div className={formSubtextWrapper}>
-                      <span className={formSubtextLinks} data-cy="form-subtext">
+                      <span className={formSubtextLinks}>
                         <a href="/privacy" target="_blank" rel="noopener noreferrer">
                           Privacy
                         </a>
@@ -318,12 +314,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                       </span>
                     </div>
                   </div>
-                  <img
-                    src={rainbowReader.src}
-                    className={heroImgStyle}
-                    data-cy="hero-image"
-                    alt=""
-                  />
+                  <img src={rainbowReader.src} className={heroImgStyle} alt="" />
                 </>
               )}
 
