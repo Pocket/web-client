@@ -7,6 +7,11 @@ export const Links = ({ toggleDevMode }) => {
       title: 'Trailhead',
       src: '/trailhead',
       description: 'inaccessible canary for waypoint auth'
+    },
+    {
+      title: 'Pocket Hits Signup',
+      src: '/pocket-hits-signup',
+      description: 'wip migration of the discover page'
     }
   ]
 
