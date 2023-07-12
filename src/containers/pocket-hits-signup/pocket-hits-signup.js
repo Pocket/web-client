@@ -3,49 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { css, cx } from '@emotion/css'
 import Head from 'next/head'
 import Layout from 'layouts/main'
-// import {
-//   Banner,
-//   PageContainer,
-//   breakpointLargeHandset,
-//   breakpointMediumHandset,
-//   breakpointMediumTablet,
-//   breakpointSmallHandset
-// } from '@pocket/web-ui'
-
-import { pocketHitsSignupRequested } from 'connectors/pocket-hits/pocket-hits.state'
-// import {
-//   trackPageView,
-//   trackEmailInputFocus,
-//   trackEmailCheckboxClick,
-//   trackEmailSubmit,
-//   trackEmailSubmitSuccess,
-//   trackEmailSubmitFailure,
-//   sendToSnowplow
-// } from './analytics'
-
-import EmailSignupForm from 'components/email-signup-form/email-signup-form'
-
 import metaImage from 'static/images/social-share/rainbow-lady.png'
 import bookLibrary from 'static/images/book-library.svg'
 import rainbowReader from 'static/images/rainbow-reader.svg'
-import popularScience from 'static/images/publisher-logos/logo-popularScience.png'
-import citylab from 'static/images/publisher-logos/logo-cityLab.png'
-import nautilus from 'static/images/publisher-logos/logo-nautilus.png'
-import outside from 'static/images/publisher-logos/logo-outside.png'
-import theAtlantic from 'static/images/publisher-logos/logo-theAtlantic.png'
-import mentalFloss from 'static/images/publisher-logos/logo-mentalFloss.png'
-import texasMonthly from 'static/images/publisher-logos/logo-texasMonthly.png'
-import saveur from 'static/images/publisher-logos/logo-saveur.png'
-import narratively from 'static/images/publisher-logos/logo-narratively.png'
-import atlasObscura from 'static/images/publisher-logos/logo-atlasObscura.png'
-import harvardBusinessReview from 'static/images/publisher-logos/logo-harvardReview.png'
-import kiplinger from 'static/images/publisher-logos/logo-kiplinger.png'
-import fastCompany from 'static/images/publisher-logos/logo-fastCompany.png'
-import inc from 'static/images/publisher-logos/logo-inc.png'
-import quartz from 'static/images/publisher-logos/logo-quartz.png'
-import theGuardian from 'static/images/publisher-logos/logo-guardian.png'
-
-// import translations from './translations/dictionary.json'
+import EmailSignupForm from 'components/email-signup-form/email-signup-form'
 import { PageContainer } from 'components/page-container/page-container'
 import {
   breakpointLargeHandset,
@@ -54,6 +15,8 @@ import {
   breakpointSmallHandset
 } from 'common/constants'
 import PublisherGrid from 'components/pocket-hits-signup/publisher-grid'
+import { pocketHitsSignupRequested } from 'connectors/pocket-hits/pocket-hits.state'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 /** STYLES
  ---------------------------------------------------------------------------- */
@@ -230,14 +193,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
   const isProcessing = signupRequestState === 'pending'
   const isSuccessful = signupRequestState === 'success'
 
-  //   const dictionary = translations[language]
-
   /* Effects */
-
-  // event: component mounted
-  //   useEffect(() => {
-  //     trackPageView()
-  //   }, [])
 
   useEffect(() => {
     // event: request success
@@ -261,8 +217,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
 
     // trackEmailSubmit(formId)
 
-    // @TODO
-    // sendToSnowplow({ email, language })
+    dispatch(sendSnowplowEvent('pocket-hits.signup', { email, locale: language }))
 
     dispatch(
       pocketHitsSignupRequested(
@@ -282,7 +237,6 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
     if (global && global.scrollTo) {
       global.scrollTo(0, 0)
     }
-    // trackEmailSubmitSuccess(formId)
   }
 
   function handleSubmitFailure(formId) {
