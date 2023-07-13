@@ -252,7 +252,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
           metaData={{
             url: 'https://getpocket.com/en/explore/pocket-hits-signup/',
             description:
-              'Get Pocket’s newsletter and you’ll see fascinating articles of depth, substance and insight — in both German and English — selected from trusted sources.',
+              'Get Pocket’s newsletter and you’ll see fascinating articles of depth, substance and insight selected from trusted sources.',
             image: language === 'en' ? `${metaImage.src}` : null,
             title: 'Pocket: Pocket Hits Newsletter Signup'
           }}
