@@ -269,7 +269,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                     Get ready for a daily dose of the best stories from around the&nbsp;web.
                   </h3>
                   <div className={mustReadsContainer}>
-                    <img src={bookLibrary} alt="" />
+                    <img src={bookLibrary.src} alt="" />
                     <button
                       className="emphasized"
                       href="/explore/must-reads?utm_source=de-pocket-hits-signup-confirmation">
