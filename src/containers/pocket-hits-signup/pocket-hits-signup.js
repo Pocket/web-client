@@ -272,7 +272,7 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                     <img src={bookLibrary.src} alt="" />
                     <button
                       className="emphasized"
-                      href="/explore/must-reads?utm_source=de-pocket-hits-signup-confirmation">
+                      href="/explore?utm_source=de-pocket-hits-signup-confirmation">
                       Discover Must-Read Articles
                     </button>
                   </div>
