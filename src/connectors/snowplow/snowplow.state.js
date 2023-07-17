@@ -172,7 +172,9 @@ const expectationTypes = {
   imageUrl: 'string',
   authors: 'object',
   publisher: 'string',
-  sortOrder: 'number'
+  sortOrder: 'number',
+  email: 'string',
+  locale: 'string'
 }
 
 export function validateSnowplowExpectations({ identifier, expects, data }) {
