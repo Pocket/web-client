@@ -270,9 +270,9 @@ export default function PocketHitsSignupPage({ language = 'en' }) {
                   </h3>
                   <div className={mustReadsContainer}>
                     <img src={bookLibrary.src} alt="" />
-                    <button className="emphasized" href="/explore">
+                    <a className="button emphasized" href="/explore">
                       Discover Must-Read Articles
-                    </button>
+                    </a>
                   </div>
                 </>
               ) : (
