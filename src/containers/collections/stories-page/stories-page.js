@@ -54,7 +54,8 @@ const newsroomUrls = [
   'https://getpocket.com/collections/the-american-journalism-project',
   'https://getpocket.com/collections/ajp-systemic-injustice',
   'https://getpocket.com/collections/ajp-lgbtq-legislation',
-  'https://getpocket.com/collections/ajp-community-heroes'
+  'https://getpocket.com/collections/ajp-community-heroes',
+  'https://getpocket.com/collections/ajp-challenging-the-status-quo'
 ]
 
 export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
