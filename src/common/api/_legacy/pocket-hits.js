@@ -25,7 +25,8 @@ export const pocketHitsSignup = (
 ) => {
   return request({
     path: 'v3/newsletter/subscription',
-    data: {
+    method: 'POST',
+    body: JSON.stringify({
       email,
       'g-captcha-response': captchaResponseKey,
       utm_campaign: utmCampaign,
@@ -33,7 +34,7 @@ export const pocketHitsSignup = (
       locale,
       marketing_opt_in: marketingOptIn,
       frequency
-    }
+    })
   })
 }
 
