@@ -4,6 +4,8 @@ import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 import { itemFiltersFromGraph } from './get-saved-items.filters'
 import { actionToCamelCase } from 'common/utilities/strings/strings'
 
+import { LOGIN_URL } from 'common/constants'
+
 const getSavedItemsQuery = gql`
   query GetSavedItems(
     $filter: SavedItemsFilter
@@ -61,6 +63,11 @@ export async function getSavedItems({ actionType, sortOrder = 'DESC', tagNames, 
 function handleResponse(response) {
   const responseData = response?.data?.user?.savedItems
 
+  if (response?.errors && response?.errors?.[0]?.extensions?.status === 401) {
+    window.location = `${LOGIN_URL}?src=web-client`
+    throw new UnauthenticatedItemRequestError()
+  }
+
   if (!responseData) throw new Error(response?.errors)
 
   const { pageInfo, edges, totalCount } = responseData
@@ -71,5 +78,12 @@ class MalformedItemRequestError extends Error {
   constructor(message) {
     super(message)
     this.name = 'MalformedItemRequestError'
+  }
+}
+
+class UnauthenticatedItemRequestError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'UnauthenticatedItemRequestError'
   }
 }
