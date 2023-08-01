@@ -54,7 +54,7 @@ export const enforceDefaultAvatar = (avatarUrl = '') => {
  * provided to it to the GlobalNav component.
  */
 const GlobalNav = (props) => {
-  const { selectedLink: selected, subset, tag, noNav, bannerCampaign } = props
+  const { selectedLink: selected, subset, tag, noNav, bannerCampaign, onlyLogout } = props
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const router = useRouter()
@@ -71,6 +71,7 @@ const GlobalNav = (props) => {
 
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
   const accountName = useSelector((state) => state?.userProfile?.first_name)
+  const accountEmail = useSelector((state) => state?.userEmail?.email)
   const userId = useSelector((state) => state?.user?.user_id)
   const profileUrl = `${BASE_URL}/@${userId}?src=navbar`
 
@@ -235,6 +236,7 @@ const GlobalNav = (props) => {
       isPremium={isPremium}
       avatarSrc={avatarSrc}
       accountName={accountName}
+      accountEmail={accountEmail}
       profileUrl={profileUrl}
       userStatus={userStatus}
       onToolClick={toolClick}
@@ -249,6 +251,7 @@ const GlobalNav = (props) => {
       sendImpression={sendImpressionEvent}
       tools={tools}
       noNav={hideNav}
+      onlyLogout={onlyLogout}
       bannerCampaign={bannerCampaign}
       Banner={CurrentBanner}
       flagsReady={flagsReady}>

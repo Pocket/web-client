@@ -16,6 +16,7 @@ import GlobalNavLinks from './links/global-nav-links'
 import GlobalNavMobileMenu from './mobile/global-nav-mobile-menu'
 import GlobalNavTools from './tools/global-nav-tools'
 import GlobalNavAccount from './account/global-nav-account'
+import GlobalNavAccountLimited from './account/global-nav-account-limited'
 
 const headerStyle = css`
   width: 100%;
@@ -118,6 +119,10 @@ const navStyle = css`
     align-items: center;
   }
 
+  &.onlyLogout {
+    justify-content: space-between;
+  }
+
   .hamburger-icon {
     display: none;
     &:focus {
@@ -186,6 +191,15 @@ const toolsStyle = css`
   }
 `
 
+const logoutStyle = css`
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-column-gap: 2rem;
+  align-items: center;
+  a {
+    text-decoration: none;
+  }
+`
 /**
  * Navigation UI that sits at the top of any standard Pocket Web view.
  *
@@ -195,6 +209,7 @@ const toolsStyle = css`
  */
 const GlobalNav = ({
   noNav,
+  onlyLogout,
   subLinks,
   subset,
   tag,
@@ -205,6 +220,7 @@ const GlobalNav = ({
   isPremium = false,
   avatarSrc = null,
   accountName = undefined,
+  accountEmail = undefined,
   profileUrl = null,
   onLinkClick = () => {},
   onToolClick = () => {},
@@ -253,7 +269,7 @@ const GlobalNav = ({
     <header className={cx(headerStyle, isLoggedIn && 'logged-in')}>
       {bannerCampaign && Banner ? <Banner bannerCampaign={bannerCampaign} /> : null}
       <PageContainer className="global-nav-container">
-        <nav className={navStyle} data-cy="global-nav">
+        <nav className={cx(navStyle, onlyLogout && 'onlyLogout')} data-cy="global-nav">
           <div className="site-nav">
             {noNav ? null : (
               <GlobalNavMobileMenu
@@ -269,7 +285,7 @@ const GlobalNav = ({
                 toggleMenuOpen={setMobileMenuOpen}
               />
             )}
-            {noNav ? (
+            {noNav || onlyLogout ? (
               <Logo className="logo noNav" />
             ) : (
               <Link
@@ -288,6 +304,18 @@ const GlobalNav = ({
           </div>
           {children || noNav ? (
             children
+          ) : onlyLogout ? (
+            <div className={logoutStyle}>
+              <a href="/lo?src=fxa-learn-more">Log Out</a>
+              <GlobalNavAccountLimited
+                appRootSelector={appRootSelector}
+                avatarSrc={avatarSrc}
+                accountName={accountName}
+                accountEmail={accountEmail}
+                onAccountClick={onAccountClick}
+                userStatus={userStatus}
+              />
+            </div>
           ) : (
             <>
               <div className={linksStyle} aria-label={t('nav:page-navigation', 'Page navigation')}>
