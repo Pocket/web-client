@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import { css, cx } from '@emotion/css'
 import Layout from 'layouts/fxa'
@@ -7,9 +6,7 @@ import { LogoMark } from 'components/logo/logo'
 import { PageContainer } from 'components/page-container/page-container'
 import { AccountDeleteModal } from 'containers/account/privacy/confirm-delete'
 import { AccountClearModal } from 'containers/account/privacy/confirm-clear'
-
-import { accountClear } from 'containers/account/privacy//privacy.state'
-import { accountDelete } from 'containers/account/privacy//privacy.state'
+import { accountDelete } from 'containers/account/privacy/privacy.state'
 
 const leanMoreStyles = css`
   background-color: var(--color-teal100);
