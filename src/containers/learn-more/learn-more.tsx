@@ -7,6 +7,7 @@ import { PageContainer } from 'components/page-container/page-container'
 import { AccountDeleteModal } from 'containers/account/privacy/confirm-delete'
 import { AccountClearModal } from 'containers/account/privacy/confirm-clear'
 import { accountDelete } from 'containers/account/privacy/privacy.state'
+import { breakpointLargeHandset } from 'common/constants'
 
 const leanMoreStyles = css`
   background-color: var(--color-teal100);
@@ -32,6 +33,18 @@ const leanMoreStyles = css`
     margin: 0 0 2rem;
     list-style-position: inside;
   }
+
+  ${breakpointLargeHandset} {
+    button {
+      width: 100%;
+      font-size: 0.875rem;
+    }
+    ul {
+      text-align: left;
+      font-size: 0.875rem;
+      list-style-position: outside;
+    }
+  }
 `
 
 const noUpgradeStyles = css`
@@ -48,6 +61,7 @@ const noUpgradeStyles = css`
   ul {
     max-width: 936px;
     margin: 0 auto;
+    padding: 0;
   }
 
   li {
@@ -56,7 +70,7 @@ const noUpgradeStyles = css`
     display: grid;
     align-items: center;
     padding: 0.875rem 0;
-    border: 1px solid var(--color-grey95);
+    border: 1px solid var(--color-dividerTertiary);
     border-width: 0 0 1px;
     h3 {
       margin: 0 0 1rem;
@@ -72,6 +86,14 @@ const noUpgradeStyles = css`
       line-height: 1.25;
       text-align: left;
     }
+
+    ${breakpointLargeHandset} {
+      grid-template-columns: 1fr;
+      padding: 1rem;
+      border-width: 1px;
+      margin-bottom: 2rem;
+      border-radius: 1rem;
+    }
   }
 
   a {
@@ -84,7 +106,8 @@ export default function LearnMore() {
   const { t } = useTranslation()
 
   const dispatchAccountDelete = () => dispatch(accountDelete())
-  const isPremium = useSelector((state) => state.user.premium_status === '1')
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const isPremium = useSelector((state: any) => state.user.premium_status === '1')
 
   return (
     <Layout title={`Pocket - ${t('learn-more:title', 'Learn more about Firefox migration')}`}>
