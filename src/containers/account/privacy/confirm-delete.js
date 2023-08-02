@@ -14,14 +14,13 @@ const accountDeleteStyles = css`
     grid-column-gap: 1rem;
     grid-template-columns: repeat(12, 1fr);
     align-items: center;
+    padding: 1rem 0;
   }
   label {
-    grid-column: 1 / 11;
-    padding: 1rem 0 0.25rem;
+    grid-column: 2 / -1;
   }
 
   input[type='checkbox'] {
-    grid-column: span 2;
     margin: 0;
 
     &:before {
@@ -40,7 +39,7 @@ const accountDeleteStyles = css`
 
   .warn {
     font-style: italic;
-    color: var(--color-error);
+    /* color: var(--color-error); */
     em {
       font-weight: 600;
     }
@@ -48,20 +47,23 @@ const accountDeleteStyles = css`
 `
 
 const deleteFooterStyle = css`
-  justify-content: space-between;
+  justify-content: flex-end;
 `
 
-export const AccountDeleteModal = () => {
+export const AccountDeleteModal = ({ isPremium }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [deleteCheck, setDeleteCheck] = useState(false)
+  const [premiumCheck, setPremiumCheck] = useState(false)
 
   const confirmDeleteAccount = () => dispatch(accountDeleteConfirm())
   const cancelDeleteAccount = () => {
     setDeleteCheck(false)
+    setPremiumCheck(false)
     dispatch(accountDeleteCancel())
   }
   const setDeleteChecked = () => setDeleteCheck(!deleteCheck)
+  const setPremiumChecked = () => setPremiumCheck(!premiumCheck)
 
   const appRootSelector = '#__next'
   const showModal = useSelector((state) => state.userPrivacy?.deleteRequest)
@@ -70,6 +72,8 @@ export const AccountDeleteModal = () => {
   const error =
     errorCodes[deleteError]?.desc ||
     t('account:error-generic', 'We are experiencing some issues, please try again later')
+
+  const formReady = isPremium ? deleteCheck && premiumCheck : deleteCheck
 
   return (
     <Modal
@@ -84,38 +88,65 @@ export const AccountDeleteModal = () => {
             This will remove your account and all associated data. You will not be able to log in
             with your account or access any data you have saved.
           </p>
-          <p>
-            If you subscribe to Pocket Premium, please make sure that you{' '}
-            <a href="https://getpocket.com/premium_manage_subscription">cancel your subscription</a>{' '}
-            before deleting your account.
-          </p>
         </Trans>
-        <div className="toggleWrap warn">
-          <label htmlFor="deleteCheck" className="flush">
-            <Trans i18nKey="account:delete-comply">
-              I understand this will remove my Pocket account <em>Permanently!</em>
+        {isPremium ? (
+          <>
+            <Trans i18nKey="account:premium-confirm">
+              <p>
+                As a Pocket Premium subscriber, you must{' '}
+                <a href="https://getpocket.com/premium_manage_subscription">
+                  cancel your subscription
+                </a>{' '}
+                before deleting your account. If your subscription is not canceled first, all
+                subscription and payment information will be deleted and cannot be retrieved again
+                by Pocket.
+              </p>
             </Trans>
-          </label>
+
+            <div className="toggleWrap warn">
+              <input
+                onChange={setPremiumChecked}
+                checked={premiumCheck}
+                type="checkbox"
+                name="premiumCheck"
+                id="premiumCheck"
+              />
+              <label htmlFor="premiumCheck" className="flush">
+                <Trans i18nKey="account:premium-comply">
+                  I have canceled my Pocket Premium subscription.
+                </Trans>
+              </label>
+            </div>
+          </>
+        ) : null}
+        <div className="toggleWrap warn">
           <input
             onChange={setDeleteChecked}
             checked={deleteCheck}
             type="checkbox"
             name="deleteCheck"
             id="deleteCheck"
-            className="toggle"
           />
+          <label htmlFor="deleteCheck" className="flush">
+            <Trans i18nKey="account:delete-comply">
+              I understand this will remove my Pocket account <em>Permanently!</em>
+            </Trans>
+          </label>
         </div>
         <div>{deleteError ? <span className="errorText">{error}</span> : null}</div>
       </ModalBody>
       <ModalFooter className={deleteFooterStyle}>
-        <button className="secondary" data-cy="delete-account-confirm" onClick={cancelDeleteAccount}>
-          {t('account:cancel-delete', 'Get me out of here!')}
+        <button
+          className="secondary"
+          data-cy="delete-account-confirm"
+          onClick={cancelDeleteAccount}>
+          {t('account:cancel-delete', 'Cancel')}
         </button>
         <button
           className="brand"
           data-cy="delete-account-confirm"
           onClick={confirmDeleteAccount}
-          disabled={!deleteCheck}>
+          disabled={!formReady}>
           {t('account:delete-account-confirm', 'Delete Account')}
         </button>
       </ModalFooter>

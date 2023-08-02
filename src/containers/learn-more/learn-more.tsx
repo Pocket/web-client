@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import { css, cx } from '@emotion/css'
 import Layout from 'layouts/fxa'
@@ -84,6 +84,7 @@ export default function LearnMore() {
   const { t } = useTranslation()
 
   const dispatchAccountDelete = () => dispatch(accountDelete())
+  const isPremium = useSelector((state) => state.user.premium_status === '1')
 
   return (
     <Layout title={`Pocket - ${t('learn-more:title', 'Learn more about Firefox migration')}`}>
@@ -91,7 +92,7 @@ export default function LearnMore() {
         <div className={cx('main', leanMoreStyles)}>
           <PageContainer>
             <LogoMark className="logo" />
-            <h1>Update your Pocket login to&nbsp;a&nbsp;Firefox&nbsp;account</h1>
+            <h1>Update your Pocket login to a Firefox&nbsp;account</h1>
             <ul>
               <li>
                 You will still be able to use any browser, our iOS or Android apps to access Pocket
@@ -166,7 +167,7 @@ export default function LearnMore() {
           </ul>
         </PageContainer>
       </main>
-      <AccountDeleteModal />
+      <AccountDeleteModal isPremium={isPremium} />
       <AccountClearModal />
     </Layout>
   )

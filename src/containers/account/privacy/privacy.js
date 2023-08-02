@@ -11,7 +11,7 @@ import { rssProtect } from './privacy.state'
 export const Privacy = () => {
   const dispatch = useDispatch()
   const rssProtected = useSelector((state) => state?.userPrivacy?.rssProtected)
-
+  const isPremium = useSelector((state) => state.user.premium_status === '1')
   const dispatchAccountClear = () => dispatch(accountClear())
   const dispatchAccountDelete = () => dispatch(accountDelete())
   const dispatchRssProtect = () => dispatch(rssProtect(!rssProtected))
@@ -24,7 +24,7 @@ export const Privacy = () => {
         accountDelete={dispatchAccountDelete}
         accountClear={dispatchAccountClear}
       />
-      <AccountDeleteModal />
+      <AccountDeleteModal isPremium={isPremium} />
       <AccountClearModal />
     </>
   )
