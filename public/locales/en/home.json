@@ -6,5 +6,7 @@
   "good-morning": "Good morning!",
   "good-morning-name": "Good morning, {{firstName}}!",
   "recent-saves-link-text": "Go to Saves",
-  "recent-saves-title": "Recent Saves"
+  "recent-saves-title": "Recent Saves",
+  "tooltip-demote": "Not for me",
+  "tooltip-promote": "I like this"
 }

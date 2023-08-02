@@ -115,76 +115,96 @@ export default function LearnMore() {
         <div className={cx('main', leanMoreStyles)}>
           <PageContainer>
             <LogoMark className="logo" />
-            <h1>Update your Pocket login to a Firefox&nbsp;account</h1>
+            <h1>
+              {t('learn-more:update-header', 'Update your Pocket login to a Firefox&nbsp;account')}
+            </h1>
             <ul>
               <li>
-                You will still be able to use any browser, our iOS or Android apps to access Pocket
+                {t(
+                  'learn-more:condition-usage',
+                  'You will still be able to use any browser, our iOS or Android apps to access Pocket'
+                )}
               </li>
               <li>
-                Benefits of a Firefox account, powered by Mozilla, include better account security
+                {t(
+                  'learn-more:condition-benefits',
+                  'Benefits of a Firefox account, powered by Mozilla, include better account security'
+                )}
               </li>
-              <li>If you do not update to a Firefox account, you cannot access Pocket</li>
+              <li>
+                {t(
+                  'learn-more:condition-pocket-access',
+                  'If you do not update to a Firefox account, you cannot access Pocket'
+                )}
+              </li>
             </ul>
-
-            <button className="large">Update account</button>
+            <button className="large">{t('learn-more:update-button', 'Update account')}</button>
           </PageContainer>
         </div>
         <PageContainer className={noUpgradeStyles}>
           <h2>
-            Don’t want to update?
+            {t('learn-more:no-update-header', 'Don’t want to update?')}
             <br />
-            Here are your other options:
+            {t('learn-more:no-update-options', 'Here are your other options:')}
           </h2>
 
           <ul>
             <li>
               <div>
-                <h3>Frequently asked questions</h3>
-                <p>Review our Frequently Asked Questions about the switch.</p>
+                <h3>{t('learn-more:faq-header', 'Frequently asked questions')}</h3>
+                <p>
+                  {t(
+                    'learn-more:faq-body',
+                    'Review our Frequently Asked Questions about the switch.'
+                  )}
+                </p>
               </div>
               <a
                 className="button secondary"
                 href="https://help.getpocket.com/article/1187-pocket-migration-to-firefox-accounts">
-                Learn more
+                {t('learn-more:faq-button', 'Learn more')}
               </a>
             </li>
             <li>
               <div>
-                <h3>Export saves</h3>
+                <h3>{t('learn-more:export-header', 'Export saves')}</h3>
                 <p>
-                  Visit this page to export your Saves to an HTML file. (Note: may not include all
-                  tags.)
+                  {t(
+                    'learn-more:export-body',
+                    'Visit this page to export your Saves to an HTML file. (Note: may not include all tags.)'
+                  )}
                 </p>
               </div>
               <a className="button secondary" href="http://getpocket.com/export">
-                Export saves
+                {t('learn-more:export-button', 'Export saves')}
               </a>
             </li>
             <li>
               <div>
-                <h3>Cancel Premium subscription</h3>
+                <h3>{t('learn-more:cancel-header', 'Cancel Premium subscription')}</h3>
                 <p>
-                  To cancel your Premium subscription, visit this page which explains canceling for
-                  each subscription platform.{' '}
-                  <em>
-                    If you have a subscription, you must cancel it before deleting your account.
-                  </em>
+                  {t(
+                    'learn-more:cancel-body',
+                    'To cancel your Premium subscription, visit this page which explains canceling for each subscription platform. If you have a subscription, you must cancel it before deleting your account.'
+                  )}
                 </p>
               </div>
               <a className="button brand" href="https://getpocket.com/premium_manage_subscription">
-                Cancel Premium
+                {t('learn-more:cancel-button', 'Cancel Premium')}
               </a>
             </li>
             <li>
               <div>
-                <h3>Delete account</h3>
+                <h3>{t('learn-more:delete-header', 'Delete account')}</h3>
                 <p>
-                  Permanently delete your Pocket account. This will delete your account and all
-                  items within it.
+                  {t(
+                    'learn-more:delete-body',
+                    'Permanently delete your Pocket account. This will delete your account and all items within it.'
+                  )}
                 </p>
               </div>
               <button className="brand" onClick={dispatchAccountDelete}>
-                Delete account
+                {t('learn-more:delete-button', 'Delete account')}
               </button>
             </li>
           </ul>
