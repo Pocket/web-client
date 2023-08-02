@@ -1,5 +1,5 @@
 {
-  "item-count_one" : "{{count}}} elemento",
+  "item-count_one" : "{{count}} elemento",
   "item-count_other" : "{{count}} contenuti",
   "list" : "Elenco",
   "story-count_one" : "{{count}} storia",
