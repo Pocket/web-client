@@ -306,7 +306,7 @@ const GlobalNav = ({
             children
           ) : onlyLogout ? (
             <div className={logoutStyle}>
-              <a href="/lo?src=fxa-learn-more">Log Out</a>
+              <a href="/lo?src=fxa-learn-more">{t('nav:log-out', 'Log Out')}</a>
               <GlobalNavAccountLimited
                 appRootSelector={appRootSelector}
                 avatarSrc={avatarSrc}
