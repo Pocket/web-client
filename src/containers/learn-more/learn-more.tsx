@@ -112,7 +112,7 @@ export default function LearnMore() {
 
   const handleUpgrade = () => {
     // Set Cookie for FF Migration
-    setCookie(null, 'fxa_migration', 1, {
+    setCookie(null, 'fxa_migration', '1', {
       maxAge: 10 * 60,
       path: '/'
     })
