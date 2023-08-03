@@ -8,6 +8,7 @@ import { AccountDeleteModal } from 'containers/account/privacy/confirm-delete'
 import { AccountClearModal } from 'containers/account/privacy/confirm-clear'
 import { accountDelete } from 'containers/account/privacy/privacy.state'
 import { breakpointLargeHandset } from 'common/constants'
+import { setCookie } from 'nookies'
 
 const leanMoreStyles = css`
   background-color: var(--color-teal100);
@@ -109,6 +110,15 @@ export default function LearnMore() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isPremium = useSelector((state: any) => state.user.premium_status === '1')
 
+  const handleUpgrade = () => {
+    // Set Cookie for FF Migration
+    setCookie(null, 'fxa_migration', 1, {
+      maxAge: 10 * 60,
+      path: '/'
+    })
+    window.location.assign('/ff_signup?utm_campaign=pocket_migration')
+  }
+
   return (
     <Layout title={`Pocket - ${t('learn-more:title', 'Learn more about Firefox migration')}`}>
       <main>
@@ -138,7 +148,9 @@ export default function LearnMore() {
                 )}
               </li>
             </ul>
-            <button className="large">{t('learn-more:update-button', 'Update account')}</button>
+            <button className="large" onClick={handleUpgrade}>
+              {t('learn-more:update-button', 'Update account')}
+            </button>
           </PageContainer>
         </div>
         <PageContainer className={noUpgradeStyles}>
