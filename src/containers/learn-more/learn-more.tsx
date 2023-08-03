@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useTranslation } from 'next-i18next'
+import { useTranslation, Trans } from 'next-i18next'
 import { css, cx } from '@emotion/css'
 import Layout from 'layouts/fxa'
 import { LogoMark } from 'components/logo/logo'
@@ -126,7 +126,9 @@ export default function LearnMore() {
           <PageContainer>
             <LogoMark className="logo" />
             <h1>
-              {t('learn-more:update-header', 'Update your Pocket login to a Firefox&nbsp;account')}
+              <Trans i18nKey="learn-more:update-header">
+                Update your Pocket login to a Firefox&nbsp;account
+              </Trans>
             </h1>
             <ul>
               <li>
