@@ -4,9 +4,9 @@ import Link from 'next/link'
 export const Links = ({ toggleDevMode }) => {
   const links = [
     {
-      title: 'Trailhead',
-      src: '/trailhead',
-      description: 'inaccessible canary for waypoint auth'
+      title: 'FXA Learn More',
+      src: '/learn-more',
+      description: 'future blockade for non-fxa users'
     },
     {
       title: 'Pocket Hits Signup',
