@@ -1,0 +1,11 @@
+{
+  "404-detail" : "",
+  "404-message" : "Wygląda na to, że próbujesz odwiedzić stronę, która nie istnieje. Jeśli uważasz, że jest to błąd, skontaktuj się z naszym zespołem pomocy.",
+  "404-title" : "Ups! Coś poszło nie tak...",
+  "contact" : "Skontaktuj się z zespołem pomocy",
+  "message" : "Wystąpił błąd. Spróbuj odświeżyć stronę i sprawdź, czy problem został rozwiązany. Jeśli problem nadal występuje, skontaktuj się z zespołem pomocy.",
+  "moderated-list-message" : "Ta lista jest niedostępna, ponieważ mogła być niezgodna z zasadami Pocket dotyczącymi udostępnianych treści.",
+  "notification-message" : "Kliknięcie linku przekierowuje użytkownika do ustawień powiadomień telefonu, do których można uzyskać dostęp tylko na telefonie. Zeskanuj kod QR, aby zainstalować Pocket na telefonie.",
+  "notification-title" : "Hmm, wygląda na to, że coś poszło nie tak",
+  "title" : "Ups! Coś poszło nie tak..."
+}

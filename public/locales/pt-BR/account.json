@@ -14,7 +14,7 @@
   "clear-account" : "Limpar conta",
   "clear-account-confirm" : "Limpar conta",
   "clear-comply" : "Entendo que isso irá remover os dados da minha conta do Pocket <1>permanentemente!</1>",
-  "clear-copy" : "<0>São seus dados e você tem controle sobre eles. Se desejar, você pode remover todos os dados salvos em sua conta.</0><1>Essa ação removerá apenas o conteúdo da sua conta, não a conta em si. Você pode continuar fazendo login em sua conta normalmente.</1>",
+  "clear-copy" : "<0>São seus dados, e você tem controle sobre eles. Se desejar, você pode remover todos os dados salvos em sua conta.</0><1>Essa ação removerá apenas o conteúdo da sua conta, não a conta em si. Você pode continuar fazendo login em sua conta normalmente.</1>",
   "confirm-change-username" : "Alterar nome de usuário",
   "confirm-password" : "Confirmar nova senha",
   "connected-services" : "Serviços conectados",

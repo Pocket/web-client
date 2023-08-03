@@ -1,3 +1,10 @@
+## [1.101.1](https://github.com/Pocket/web-client/compare/v1.101.0...v1.101.1) (2023-08-03)
+
+
+### Bug Fixes
+
+* **localization:** formatting snafus ([69442e6](https://github.com/Pocket/web-client/commit/69442e60126df445deaaea019d9e5d60cebba25d))
+
 # [1.101.0](https://github.com/Pocket/web-client/compare/v1.100.18...v1.101.0) (2023-08-03)
 
 
