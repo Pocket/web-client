@@ -7,11 +7,6 @@ export const Links = ({ toggleDevMode }) => {
       title: 'FXA Learn More',
       src: '/learn-more',
       description: 'future blockade for non-fxa users'
-    },
-    {
-      title: 'Pocket Hits Signup',
-      src: '/explore/pocket-hits-signup',
-      description: 'wip migration of the discover page'
     }
   ]
 
