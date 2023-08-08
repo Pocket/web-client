@@ -41,6 +41,8 @@
   "pocket-applications" : "Pocket 应用程序",
   "pocket-applications-logged-in" : "您当前已在以下应用程序中登录 Pocket：",
   "premium" : "Premium",
+  "premium-comply" : "我已经取消了 Pocket Premium 订购。",
+  "premium-confirm" : "<0>作为 Pocket Premium 订购者，您必须先<2>取消订购</2>，然后才能删除帐号。如果您没有先取消订购，则所有订购和付款信息都将被删除，并且 Pocket 无法再次检索。</0>",
   "premium-copy" : "互联网纷乱繁杂。Pocket Premium 能为您提供一个美妙、无广告的空间，让您可以按自己的节奏汲取内容，并且随心所欲地保存至任何时候。",
   "premium-heading" : "您通往创意、灵感和专注力的道路。",
   "premium-manage" : "管理订购",

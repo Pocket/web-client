@@ -22,6 +22,8 @@
   "highlight-deleted_other" : "{{count}}개 하이라이트 제거됨",
   "highlighted_one" : "{{count}}개의 항목 하이라이트 표시됨",
   "highlighted_other" : "{{count}}개의 항목 하이라이트 표시됨",
+  "home-rec-demote" : "이같은 스토리를 더 적게 추천합니다.",
+  "home-rec-promote" : "이같은 스토리를 더 많이 추천합니다.",
   "item-added-to-list" : "목록에 항목 추가",
   "item-removed-from-list" : "목록에서 제거된 항목",
   "list-created" : "생성된 목록",

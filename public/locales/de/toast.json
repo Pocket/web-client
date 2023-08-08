@@ -22,6 +22,8 @@
   "highlight-deleted_other" : "{{count}} Markierungen entfernt",
   "highlighted_one" : "{{count}} Element markiert",
   "highlighted_other" : "{{count}} Elemente markiert",
+  "home-rec-demote" : "Wir empfehlen weniger Geschichten wie diese.",
+  "home-rec-promote" : "Wir empfehlen weitere Geschichten wie diese.",
   "item-added-to-list" : "Element zur Liste hinzugefügt",
   "item-removed-from-list" : "Element aus der Liste entfernt",
   "list-created" : "Liste erstellt",

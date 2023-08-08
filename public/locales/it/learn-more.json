@@ -1,0 +1,22 @@
+{
+  "cancel-body" : "Per annullare l'abbonamento a Premium, visita questa pagina che spiega le modalità di annullamento per ogni piattaforma. Se hai un abbonamento, devi annullarlo prima di eliminare il tuo account.",
+  "cancel-button" : "Annulla premium",
+  "cancel-header" : "Annulla l'abbonamento Premium",
+  "condition-benefits" : "I vantaggi di un account Firefox, con tecnologia Mozilla, includono una migliore sicurezza dell'account",
+  "condition-pocket-access" : "Se non esegui l'aggiornamento a un account Firefox, non puoi accedere a Pocket",
+  "condition-usage" : "Potrai comunque utilizzare qualsiasi browser o le nostre app per iOS o Android per accedere a Pocket",
+  "delete-body" : "Elimina definitivamente il tuo account Pocket. Questa operazione eliminerà il tuo account e tutti gli elementi al suo interno.",
+  "delete-button" : "Elimina account",
+  "delete-header" : "Elimina account",
+  "export-body" : "Visita questa pagina per esportare i tuoi salvataggi in un file HTML. (Nota: potrebbe non includere tutti i tag.)",
+  "export-button" : "Esporta salvataggi",
+  "export-header" : "Esporta salvataggi",
+  "faq-body" : "Consulta le nostre domande frequenti sul passaggio.",
+  "faq-button" : "Scopri di più",
+  "faq-header" : "Domande frequenti",
+  "no-update-header" : "Non vuoi aggiornare?",
+  "no-update-options" : "Ecco le altre opzioni:",
+  "title" : "Ulteriori informazioni sulla migrazione a Firefox",
+  "update-button" : "Aggiorna account",
+  "update-header" : "Aggiornare le credenziali di accesso a Pocket con un account Firefox"
+}

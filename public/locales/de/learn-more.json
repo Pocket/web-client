@@ -1,0 +1,22 @@
+{
+  "cancel-body" : "Premium-Abonnement kündigen: Du findest Informationen zur Kündigung für jede Abonnementplattform auf dieser Seite. Wenn du ein Abonnement hast, musst du es kündigen, bevor du dein Konto löschst.",
+  "cancel-button" : "Premium kündigen",
+  "cancel-header" : "Premium-Abonnement kündigen",
+  "condition-benefits" : "Zu den Vorteilen eines von Mozilla betriebenen Firefox-Kontos gehört eine bessere Kontosicherheit.",
+  "condition-pocket-access" : "Du kannst nur auf Pocket zugreifen wenn du ein Update auf ein Firefox-Konto vornimmst.",
+  "condition-usage" : "Du kannst weiterhin über jeden Browser und über unsere iOS- oder Android-Apps auf Pocket zugreifen.",
+  "delete-body" : "Dein Pocket-Konto dauerhaft löschen. Dadurch werden dein Konto und alle Elemente darin gelöscht.",
+  "delete-button" : "Konto löschen",
+  "delete-header" : "Konto löschen",
+  "export-body" : "Besuche diese Seite, um deine gespeicherten Inhalte in eine HTML-Datei zu exportieren. (Hinweis: Enthält möglicherweise nicht alle Tags.)",
+  "export-button" : "Gespeicherte Inhalte exportieren",
+  "export-header" : "Gespeicherte Inhalte exportieren",
+  "faq-body" : "Sieh dir unsere häufig gestellten Fragen zur Umstellung an.",
+  "faq-button" : "Mehr erfahren",
+  "faq-header" : "Häufig gestellte Fragen (FAQ)",
+  "no-update-header" : "Du möchtest kein Update durchführen?",
+  "no-update-options" : "Dies sind weitere Optionen:",
+  "title" : "Weitere Informationen zur Firefox-Migration",
+  "update-button" : "Konto aktualisieren",
+  "update-header" : "Aktualisiere deine Pocket-Anmeldeinformationen für ein Firefox-Konto."
+}

@@ -41,6 +41,8 @@
   "pocket-applications": "Pocket Applications",
   "pocket-applications-logged-in": "You are currently logged in to Pocket in these applications:",
   "premium": "Premium",
+  "premium-comply": "I have canceled my Pocket Premium subscription.",
+  "premium-confirm": "<0>As a Pocket Premium subscriber, you must <2>cancel your subscription</2> before deleting your account. If your subscription is not canceled first, all subscription and payment information will be deleted and cannot be retrieved again by Pocket.</0>",
   "premium-copy": "It’s a wild internet out there. Pocket Premium gives you a beautiful, ad-free space to absorb stories at your own pace—and keep them for however long you’d like.",
   "premium-heading": "Your path to ideas, inspiration, and focus.",
   "premium-manage": "Manage Subscription",

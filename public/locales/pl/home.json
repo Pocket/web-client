@@ -6,5 +6,7 @@
   "good-morning" : "Dzień dobry!",
   "good-morning-name" : "Dzień dobry, {{firstName}}!",
   "recent-saves-link-text" : "Przejdź do Zapisanych elementów",
-  "recent-saves-title" : "Niedawno zapisane"
+  "recent-saves-title" : "Niedawno zapisane",
+  "tooltip-demote" : "Nie interesuje mnie to",
+  "tooltip-promote" : "Podoba mi się to"
 }

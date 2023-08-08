@@ -41,6 +41,8 @@
   "pocket-applications" : "Aplicações do Pocket",
   "pocket-applications-logged-in" : "De momento está ligado ao Pocket nestas aplicações:",
   "premium" : "Premium",
+  "premium-comply" : "Cancelei a minha subscrição Pocket Premium.",
+  "premium-confirm" : "<0>Como subscritor do Pocket Premium, deve <2>cancelar a sua subscrição</2> antes de apagar a sua conta. Se a subscrição não for cancelada primeiro, todas as informações de subscrição e pagamento irão ser eliminadas e não poderão ser recuperadas pelo Pocket.</0>",
   "premium-copy" : "É uma Internet selvagem lá fora. O Pocket Premium oferece-lhe um espaço bonito, sem publicidade para absorver histórias ao seu ritmo—e guardá-las durante o tempo que quiser.",
   "premium-heading" : "O seu caminho para ideias, inspiração e foco.",
   "premium-manage" : "Gerir Subscrição",
