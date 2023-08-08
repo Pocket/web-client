@@ -22,6 +22,8 @@
   "highlight-deleted_other" : "已移除 {{count}} 個標記",
   "highlighted_one" : "已標記 {{count}} 個項目",
   "highlighted_other" : "已標記 {{count}} 個項目",
+  "home-rec-demote" : "我們會推薦更少類似的篇章",
+  "home-rec-promote" : "我們會推薦更多類似的篇章",
   "item-added-to-list" : "項目已新增至清單",
   "item-removed-from-list" : "已從清單移除項目",
   "list-created" : "已建立清單",
