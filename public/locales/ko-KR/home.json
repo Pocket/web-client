@@ -6,5 +6,7 @@
   "good-morning" : "안녕하세요!",
   "good-morning-name" : "안녕하세요, {{firstName}}님!",
   "recent-saves-link-text" : "저장으로 이동",
-  "recent-saves-title" : "최근 저장한 내용"
+  "recent-saves-title" : "최근 저장한 내용",
+  "tooltip-demote" : "관심 없음",
+  "tooltip-promote" : "마음에 듦"
 }
