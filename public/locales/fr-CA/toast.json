@@ -22,6 +22,8 @@
   "highlight-deleted_other" : "{{count}} surlignements supprimés",
   "highlighted_one" : "{{count}} élément surligné",
   "highlighted_other" : "{{count}} éléments surlignés",
+  "home-rec-demote" : "Nous vous recommanderons moins d'histoires comme celle-ci",
+  "home-rec-promote" : "Nous vous recommanderons d'autres histoires comme celle-ci",
   "item-added-to-list" : "Élément ajouté à la liste",
   "item-removed-from-list" : "Élément supprimé de la liste",
   "list-created" : "Liste créée",
