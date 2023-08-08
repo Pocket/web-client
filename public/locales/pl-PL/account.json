@@ -41,6 +41,8 @@
   "pocket-applications" : "Aplikacje Pocket",
   "pocket-applications-logged-in" : "Jesteś aktualnie zalogowany/-a do Pocket w tych aplikacjach:",
   "premium" : "Premium",
+  "premium-comply" : "Anulowałem(-am) subskrypcję Pocket Premium.",
+  "premium-confirm" : "<0>Jako posiadasz subskrypcji Pocket Premium musisz <2>anulować subskrypcję</2> przed usunięciem konta. Jeśli Twoja subskrypcja nie zostanie wcześniej anulowana, wszystkie informacje dotyczące subskrypcji i płatności zostaną usunięte i nie będą mogły zostać odzyskane przez Pocket.</0>",
   "premium-copy" : "W internecie panuje chaos. Pocket Premium to atrakcyjna przestrzeń bez reklam, w której możesz chłonąć historie we własnym tempie, a także zachować je jak długo chcesz.",
   "premium-heading" : "Twoja ścieżka pełna pomysłów, inspiracji i koncentracji.",
   "premium-manage" : "Zarządzanie subskrypcją",
