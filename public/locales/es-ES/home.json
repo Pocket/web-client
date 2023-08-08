@@ -6,5 +6,7 @@
   "good-morning" : "¡Buenos días!",
   "good-morning-name" : "¡Buenos días, {{firstName}}!",
   "recent-saves-link-text" : "Ir a Guardados",
-  "recent-saves-title" : "Guardados recientemente"
+  "recent-saves-title" : "Guardados recientemente",
+  "tooltip-demote" : "No es lo mío",
+  "tooltip-promote" : "Me gusta"
 }

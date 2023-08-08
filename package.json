@@ -8,7 +8,7 @@
     "npm": ">=8.0.0"
   },
   "scripts": {
-    "prep": "npm run locale:inject && npm run compile:icons",
+    "prep": "npm run compile:icons",
     "dev": "npm run prep && RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
     "analyze": "npm run prep && ANALYZE=true next build",
     "build": "npm run prep && next build",

@@ -37,7 +37,6 @@
   "item-count_one" : "{{count}} item",
   "item-count_other" : "{{count}} items",
   "lists" : "Lijsten",
-  "lists-title" : "Lijsten",
   "log-in" : "Inloggen",
   "log-out" : "Afmelden",
   "manage-account" : "Account beheren",

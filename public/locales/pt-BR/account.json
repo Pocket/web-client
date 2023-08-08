@@ -41,6 +41,8 @@
   "pocket-applications" : "Aplicativos do Pocket",
   "pocket-applications-logged-in" : "No momento, você está conectado ao Pocket nestes aplicativos:",
   "premium" : "Premium",
+  "premium-comply" : "Cancelei a minha assinatura do Pocket Premium.",
+  "premium-confirm" : "<0>Por ser assinante do Pocket Premium, você deve <2>cancelar sua assinatura</2> antes de excluir a conta. Se isso não for feito, todas as informações sobre a assinatura e pagamentos serão excluídas e não poderão ser recuperadas pelo Pocket.</0>",
   "premium-copy" : "O mundo da internet é uma bagunça só. O Pocket Premium oferece um espaço lindo e livre de anúncios para consumir matérias no seu ritmo — e guardá-las por quanto tempo quiser.",
   "premium-heading" : "O caminho para as ideias, inspirações e foco.",
   "premium-manage" : "Gerenciar assinatura",

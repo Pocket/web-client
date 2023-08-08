@@ -1,3 +1,11 @@
+## [1.101.3](https://github.com/Pocket/web-client/compare/v1.101.2...v1.101.3) (2023-08-08)
+
+
+### Bug Fixes
+
+* **locale:** injecting derived languages ([20d8c73](https://github.com/Pocket/web-client/commit/20d8c73c8e398f3ae23a7d49cdfbe5535f9ee27d))
+* **locale:** remove inject in prep (run manually) ([dd21790](https://github.com/Pocket/web-client/commit/dd21790e396e7f4a765c317ab613f7b9c87b6383))
+
 ## [1.101.2](https://github.com/Pocket/web-client/compare/v1.101.1...v1.101.2) (2023-08-03)
 
 

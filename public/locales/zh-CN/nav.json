@@ -37,7 +37,6 @@
   "item-count_one" : "{{count}} 个项目",
   "item-count_other" : "{{count}} 项",
   "lists" : "列表",
-  "lists-title" : "列表",
   "log-in" : "登录",
   "log-out" : "注销",
   "manage-account" : "管理帐号",

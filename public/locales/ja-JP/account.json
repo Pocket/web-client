@@ -41,6 +41,8 @@
   "pocket-applications" : "Pocket アプリケーション",
   "pocket-applications-logged-in" : "現在、以下のアプリケーションで Pocket にログインしています：",
   "premium" : "Premium",
+  "premium-comply" : "Pocket Premium の購読をキャンセルしました。",
+  "premium-confirm" : "<0>Pocket Premium をご購読いただいているお客様は、アカウントを削除する前に<2>購読をキャンセル</2>する必要があります。購読のキャンセルが最初に行われなかった場合、すべての購読情報とお支払い情報が削除され、Pocket がこれら情報を再度取得し直すことができなくなります。</0>",
   "premium-copy" : "インターネットの世界には雑音があふれています。Pocket Premium にご登録いただけば、広告が表示されない美しいスペースで、好きなだけストーリーに没頭でき、お気に入りのストーリーを永久に保存できます。",
   "premium-heading" : "アイデアの原石やインスピレーション、集中力を養うスペース。",
   "premium-manage" : "購読を管理",

@@ -1,0 +1,22 @@
+{
+  "cancel-body" : "要取消您的 Premium 订购，请访问此页面，其中解释了每个订购平台的取消方法。如果您有订购，则必须在删除帐号之前取消订购。",
+  "cancel-button" : "取消 Premium",
+  "cancel-header" : "取消 Premium 订购",
+  "condition-benefits" : "由 Mozilla 提供支持的 Firefox 帐号的好处包括更好的帐号安全性",
+  "condition-pocket-access" : "如果您没有更新到 Firefox 帐号，则无法访问 Pocket",
+  "condition-usage" : "您仍然可以使用任何浏览器、我们的 iOS 或 Android 应用程序来访问 Pocket",
+  "delete-body" : "永久删除您的 Pocket 帐号。这将删除您的帐号及其中的所有项目。",
+  "delete-button" : "删除帐号",
+  "delete-header" : "删除帐号",
+  "export-body" : "访问此页面，将您的保存内容导出为 HTML 文件。（注意：可能不包括所有标签。）",
+  "export-button" : "导出保存内容",
+  "export-header" : "导出保存内容",
+  "faq-body" : "查看有关切换的常见问题解答。",
+  "faq-button" : "了解更多",
+  "faq-header" : "常见问题",
+  "no-update-header" : "不想更新？",
+  "no-update-options" : "以下是您的其他选择：",
+  "title" : "了解有关 Firefox 迁移的更多信息",
+  "update-button" : "更新帐号",
+  "update-header" : "将您的 Pocket 登录信息更新为 Firefox 帐号"
+}

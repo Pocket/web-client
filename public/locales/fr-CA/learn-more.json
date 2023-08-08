@@ -1,0 +1,22 @@
+{
+  "cancel-body" : "Pour annuler votre abonnement Premium, consultez cette page qui explique l'annulation de chaque plateforme d'abonnement. Si vous avez un abonnement, vous devez l'annuler avant de supprimer votre compte.",
+  "cancel-button" : "Annuler Premium",
+  "cancel-header" : "Annuler l'abonnement Premium",
+  "condition-benefits" : "Les avantages d'un compte Firefox, propulsé par Mozilla, incluent une meilleure sécurité du compte",
+  "condition-pocket-access" : "Si vous ne mettez pas à jour votre compte Firefox, vous ne pouvez pas accéder à Pocket",
+  "condition-usage" : "Vous pourrez toujours utiliser n'importe quel navigateur, nos applications iOS ou Android pour accéder à Pocket",
+  "delete-body" : "Supprimez définitivement votre compte Pocket. Votre compte et tous les éléments qu'il contient seront supprimés.",
+  "delete-button" : "Supprimer le compte",
+  "delete-header" : "Supprimer le compte",
+  "export-body" : "Visitez cette page pour exporter vos enregistrements dans un fichier HTML. (Remarque : peut ne pas inclure toutes les balises.)",
+  "export-button" : "Exporter les enregistrements",
+  "export-header" : "Exporter les enregistrements",
+  "faq-body" : "Consultez notre foire aux questions sur le changement.",
+  "faq-button" : "En savoir plus",
+  "faq-header" : "Foire aux questions",
+  "no-update-header" : "Vous ne voulez pas mettre à jour?",
+  "no-update-options" : "Voici vos autres options :",
+  "title" : "En savoir plus sur la migration de Firefox",
+  "update-button" : "Mettre à jour le compte",
+  "update-header" : "Mettez à jour votre connexion Pocket à un compte Firefox"
+}

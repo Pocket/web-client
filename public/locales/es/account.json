@@ -41,6 +41,8 @@
   "pocket-applications" : "Aplicaciones de Pocket",
   "pocket-applications-logged-in" : "Actualmente has iniciado sesión en Pocket con estas aplicaciones:",
   "premium" : "Premium",
+  "premium-comply" : "He cancelado mi suscripción a Pocket Premium.",
+  "premium-confirm" : "<0>Como suscriptor de Pocket Premium, debes <2>cancelar tu suscripción</2> antes de eliminar tu cuenta. Si tu suscripción no se cancela primero, toda la información de suscripción y pago se eliminará y Pocket no podrá recuperarla de nuevo.</0>",
   "premium-copy" : "Internet es como una jungla. Pocket Premium te proporciona un espacio bonito y sin anuncios para absorber historias a tu ritmo y guardarlas todo el tiempo que quieras.",
   "premium-heading" : "El camino hacia las ideas, la inspiración y la concentración.",
   "premium-manage" : "Gestionar la suscripción",

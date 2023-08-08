@@ -22,6 +22,8 @@
   "highlight-deleted_other" : "Удалено выделенных элементов: {{count}}",
   "highlighted_one" : "Элемент {{count}} выделен",
   "highlighted_other" : "Выделено элементов: {{count}}",
+  "home-rec-demote" : "Мы будем рекомендовать меньше подобных историй",
+  "home-rec-promote" : "Мы порекомендуем больше подобных историй",
   "item-added-to-list" : "Элемент добавлен в список",
   "item-removed-from-list" : "Элемент удален из списка",
   "list-created" : "Список создан",

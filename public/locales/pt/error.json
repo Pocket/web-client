@@ -1,0 +1,11 @@
+{
+  "404-detail" : "",
+  "404-message" : "Parece que a página que está a tentar aceder desapareceu. Contacte a nossa equipa de assistência se considerar que se trata de um erro.",
+  "404-title" : "Ups! Algo correu mal.",
+  "contact" : "Contactar a Assistência",
+  "message" : "Houve um erro. Tente atualizar a sua página a ver se corrige as coisas. Se continuar com problemas, entre em contacto com a nossa equipa de assistência.",
+  "moderated-list-message" : "Esta lista não está disponível porque pode ter violado as Políticas de Conteúdo Partilhado do Pocket.",
+  "notification-message" : "A ligação em que clicou direciona-o para as definições de notificação do seu telemóvel, que só podem ser acedidas num dispositivo móvel. Digitalize o código QR para instalar o Pocket no seu telemóvel.",
+  "notification-title" : "Hmm, parece que algo correu mal",
+  "title" : "Ups! Algo correu mal."
+}

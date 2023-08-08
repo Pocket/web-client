@@ -1,0 +1,22 @@
+{
+  "cancel-body" : "Para cancelar tu suscripción Premium, visita esta página que explica cómo hacerlo en cada plataforma de suscripción. Si tienes una suscripción, debes cancelarla antes de eliminar tu cuenta.",
+  "cancel-button" : "Cancelar Premium",
+  "cancel-header" : "Cancelar suscripción Premium",
+  "condition-benefits" : "Los beneficios de una cuenta de Firefox, impulsada por Mozilla, incluyen una mejor seguridad de la cuenta",
+  "condition-pocket-access" : "Si no actualizas tu cuenta de Firefox, no puedes acceder a Pocket",
+  "condition-usage" : "Si quieres acceder a Pocket, podrás seguir usando cualquier navegador, además de nuestras aplicaciones para iOS o Android.",
+  "delete-body" : "Elimina tu cuenta de Pocket de forma definitiva. Esta acción eliminará tu cuenta y todos los elementos que contiene.",
+  "delete-button" : "Eliminar cuenta",
+  "delete-header" : "Eliminar cuenta",
+  "export-body" : "Visita esta página para exportar lo que has guardado a un archivo HTML. (Nota: es posible que no se incluyan todas las etiquetas).",
+  "export-button" : "Exportar Guardado",
+  "export-header" : "Exportar Guardado",
+  "faq-body" : "Lee nuestras preguntas frecuentes sobre el cambio.",
+  "faq-button" : "Más información",
+  "faq-header" : "Preguntas frecuentes",
+  "no-update-header" : "¿No quieres actualizar?",
+  "no-update-options" : "Estas son tus otras opciones:",
+  "title" : "Más información sobre la migración a Firefox",
+  "update-button" : "Actualizar cuenta",
+  "update-header" : "Cambia tu inicio de sesión de Pocket a una cuenta de Firefox"
+}

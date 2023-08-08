@@ -41,6 +41,8 @@
   "pocket-applications" : "Pocket-Anwendungen",
   "pocket-applications-logged-in" : "Du bist derzeit bei folgenden Anwendungen bei Pocket angemeldet:",
   "premium" : "Premium",
+  "premium-comply" : "Ich habe mein Pocket Premium-Abonnement gekündigt.",
+  "premium-confirm" : "<0>Als Pocket Premium-Abonnent musst du dein <2>Abonnement kündigen</2> , bevor du dein Konto löschen kannst. Wenn dein Abonnement nicht vorher gekündigt wird, werden alle Abonnement- und Zahlungsinformationen gelöscht und können von Pocket nicht mehr abgerufen werden.</0>",
   "premium-copy" : "Das Internet ist ziemlich chaotisch. Pocket Premium bietet dir einen wunderschönen, werbefreien Ort, an dem du Geschichten in deinem eigenen Tempo lesen und so lange aufbewahren kannst, wie du magst.",
   "premium-heading" : "Dein Ort für Ideen, Inspiration und Fokus.",
   "premium-manage" : "Abonnement verwalten",
