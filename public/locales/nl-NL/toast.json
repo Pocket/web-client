@@ -22,6 +22,8 @@
   "highlight-deleted_other" : "{{count}} markeringen verwijderd",
   "highlighted_one" : "{{count}} item gemarkeerd",
   "highlighted_other" : "{{count}} items gemarkeerd",
+  "home-rec-demote" : "We zullen minder verhalen zoals deze aanbevelen",
+  "home-rec-promote" : "We zullen meer verhalen zoals deze aanbevelen",
   "item-added-to-list" : "Item toegevoegd aan lijst",
   "item-removed-from-list" : "Item verwijderd uit lijst",
   "list-created" : "Lijst aangemaakt",
