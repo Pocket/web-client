@@ -22,6 +22,8 @@
   "highlight-deleted_other" : "{{count}} 个突出显示已删除",
   "highlighted_one" : "已突出显示 {{count}} 个项目",
   "highlighted_other" : "已突出显示 {{count}} 个项目",
+  "home-rec-demote" : "我们会推荐更少类似的故事",
+  "home-rec-promote" : "我们会推荐更多类似的故事",
   "item-added-to-list" : "项目已添加到列表",
   "item-removed-from-list" : "项目已从列表中移除",
   "list-created" : "列表已创建",
