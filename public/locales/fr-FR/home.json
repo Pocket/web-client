@@ -6,5 +6,7 @@
   "good-morning" : "Bonjour !",
   "good-morning-name" : "Bonjour, {{firstName}} !",
   "recent-saves-link-text" : "Accéder à Sauvegardes",
-  "recent-saves-title" : "Sauvegardes récentes"
+  "recent-saves-title" : "Sauvegardes récentes",
+  "tooltip-demote" : "Pas pour moi",
+  "tooltip-promote" : "J'aime"
 }
