@@ -1,0 +1,22 @@
+{
+  "cancel-body" : "Premium 구독을 취소하려면 이 페이지를 각 방문해서 각 구독 플랫폼에 대한 취소 사유를 설명해 주십시오. 구독 중인 경우 계정을 삭제하기 전에 구독을 취소해야 합니다.",
+  "cancel-button" : "Premium 취소",
+  "cancel-header" : "Premium 구독 취소",
+  "condition-benefits" : "Mozilla가 제공하는 Firefox 계정의 이점에는 보다 나은 계정 보안이 포함됩니다",
+  "condition-pocket-access" : "Firefox 계정으로 업데이트하지 않으면 Pocket에 액세스할 수 없습니다",
+  "condition-usage" : "모든 브라우저, iOS 또는 Android 앱을 사용하여 Pocket에 계속 액세스할 수 있습니다.",
+  "delete-body" : "Pocket 계정을 영구 삭제합니다. 계정과 함께 계정 내 모든 항목이 삭제됩니다.",
+  "delete-button" : "계정 삭제",
+  "delete-header" : "계정 삭제",
+  "export-body" : "저장한 내용을 HTML 파일로 내보내려면 이 페이지를 방문하십시오. (참고: 일부 태그가 포함되지 않을 수 있습니다.)",
+  "export-button" : "저장 내용 내보내기",
+  "export-header" : "저장 내용 내보내기",
+  "faq-body" : "스위치에 대한 자주 묻는 질문을 검토하십시오.",
+  "faq-button" : "더 보기",
+  "faq-header" : "자주 묻는 질문",
+  "no-update-header" : "업데이트하고 싶지 않으신가요?",
+  "no-update-options" : "다른 옵션은 다음과 같습니다:",
+  "title" : "Firefox 마이그레이션에 대해 자세히 알아보기",
+  "update-button" : "계정 업데이트",
+  "update-header" : "Pocket 로그인을 Firefox 계정으로 업데이트하십시오."
+}
