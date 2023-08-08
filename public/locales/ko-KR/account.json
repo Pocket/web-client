@@ -41,6 +41,8 @@
   "pocket-applications" : "Pocket 애플리케이션",
   "pocket-applications-logged-in" : "현재 다음 애플리케이션에서 Pocket에 로그인되어 있습니다:",
   "premium" : "Premium",
+  "premium-comply" : "Pocket Premium 구독을 취소했습니다.",
+  "premium-confirm" : "<0>Pocket Premium 구독자는 계정을 삭제하기 전에 <2>구독을 취소</2>해야 합니다. 먼저 구독을 취소하지 않으면 모든 구독 및 결제 정보가 삭제되며 Pocket에서 다시 검색할 수 없습니다.</0>",
   "premium-copy" : "미개척지와도 같은 인터넷 세상 속. Pocket Premium은 광고 없이 내가 원하는 대로 스토리를 수집하고 원하는 기간 만큼 보관할 수 있는 아름다운 공간을 제공합니다.",
   "premium-heading" : "아이디어와 영감, 관심사를 만나볼 수 있는 곳.",
   "premium-manage" : "구독 관리",
