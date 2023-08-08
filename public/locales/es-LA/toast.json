@@ -22,6 +22,8 @@
   "highlight-deleted_other" : "{{count}} resaltados eliminados",
   "highlighted_one" : "{{count}} enlace resaltado",
   "highlighted_other" : "{{count}} enlaces resaltados",
+  "home-rec-demote" : "Recomendaremos menos historias como esta",
+  "home-rec-promote" : "Recomendaremos más historias como esta",
   "item-added-to-list" : "Enlace agregado a la lista",
   "item-removed-from-list" : "Enlace eliminado de la lista",
   "list-created" : "Lista creada",
