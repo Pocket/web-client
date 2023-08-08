@@ -6,5 +6,7 @@
   "good-morning" : "早安！",
   "good-morning-name" : "{{firstName}}，早安！",
   "recent-saves-link-text" : "前往「儲存」",
-  "recent-saves-title" : "近期儲存"
+  "recent-saves-title" : "近期儲存",
+  "tooltip-demote" : "不適合我",
+  "tooltip-promote" : "我喜歡這個"
 }
