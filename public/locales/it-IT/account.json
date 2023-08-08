@@ -41,6 +41,8 @@
   "pocket-applications" : "Applicazioni di Pocket",
   "pocket-applications-logged-in" : "Al momento hai effettuato l'accesso a Pocket in queste applicazioni:",
   "premium" : "Premium",
+  "premium-comply" : "Ho annullato il mio abbonamento a Pocket Premium.",
+  "premium-confirm" : "<0>In qualità di abbonato a Pocket Premium, devi <2>annullare l'abbonamento</2> prima di eliminare il tuo account. Se l'abbonamento non viene annullato prima, tutte le informazioni relative all'abbonamento e al pagamento verranno eliminate e non potranno essere recuperate da Pocket.</0>",
   "premium-copy" : "Internet è una vera giungla. Pocket Premium ti offre uno spazio piacevole e senza pubblicità per assimilare le storie al tuo ritmo e conservarle per tutto il tempo che vuoi.",
   "premium-heading" : "Il tuo percorso verso idee, ispirazione e concentrazione.",
   "premium-manage" : "Gestisci l'abbonamento",
