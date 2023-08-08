@@ -6,5 +6,7 @@
   "good-morning" : "Доброе утро!",
   "good-morning-name" : "Доброе утро, {{firstName}}!",
   "recent-saves-link-text" : "Перейти к Сохраненному",
-  "recent-saves-title" : "Недавно сохраненное"
+  "recent-saves-title" : "Недавно сохраненное",
+  "tooltip-demote" : "Не подходит",
+  "tooltip-promote" : "Мне это подходит"
 }
