@@ -22,6 +22,8 @@
   "highlight-deleted_other" : "{{count}} 件のハイライトが削除されました",
   "highlighted_one" : "{{カウント}} 件のアイテムがハイライトされました",
   "highlighted_other" : "{{カウント}} 件のアイテムがハイライトされました",
+  "home-rec-demote" : "類似ストーリーを減らすことをおすすめします",
+  "home-rec-promote" : "類似ストーリーを増やすことをおすすめします",
   "item-added-to-list" : "リストにアイテムを追加しました",
   "item-removed-from-list" : "リストからアイテムを削除しました",
   "list-created" : "リストを作成しました",
