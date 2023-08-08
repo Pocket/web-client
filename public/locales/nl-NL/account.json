@@ -41,6 +41,8 @@
   "pocket-applications" : "Pocket-toepassingen",
   "pocket-applications-logged-in" : "Je bent momenteel in deze toepassingen ingelogd bij Pocket:",
   "premium" : "Premium",
+  "premium-comply" : "Ik heb mijn Pocket Premium-abonnement opgezegd.",
+  "premium-confirm" : "<0>Als Pocket Premium-abonnee moet je <2>je abonnement opzeggen</2> voordat je je account kunt verwijderen. Als je abonnement niet eerst wordt opgezegd, worden alle abonnements- en betalingsgegevens verwijderd en kunnen ze niet meer worden opgehaald door Pocket.</0>",
   "premium-copy" : "Het gaat er soms heftig aan toe op internet. Pocket Premium biedt je een mooie, advertentievrije ruimte om verhalen zo lang je wilt te bewaren, zodat je ze in je eigen tempo tot je kunt nemen.",
   "premium-heading" : "Je weg naar ideeën, inspiratie en focus.",
   "premium-manage" : "Abonnement beheren",
