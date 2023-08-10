@@ -10,6 +10,7 @@ import { resendEmailConfirmation } from 'containers/account/email/email.state'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { errorCodes } from 'common/errors'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Email = () => {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ export const Email = () => {
   const primaryEmail = useSelector((state) => state?.userEmail?.email)
   const aliasError = useSelector((state) => state?.userEmail?.aliasError)
   const aliases = useSelector((state) => state?.userEmail?.aliases)
+  const featureState = useSelector((state) => state.features)
   const onChangeEmailAlias = (e) => setEmailAlias(e.target.value)
 
   const onResendConfirmation = (email) => dispatch(resendEmailConfirmation(email))
@@ -29,6 +31,7 @@ export const Email = () => {
   const onRemoveAlias = (email) => dispatch(removeEmailAliasRequest(email))
 
   const emailAliasError = errorCodes[aliasError]?.desc || false
+  const isFxa = featureFlagActive({ flag: 'fxa', featureState })
 
   return (
     <>
@@ -42,6 +45,7 @@ export const Email = () => {
         onRemoveAlias={onRemoveAlias}
         onResendConfirmation={onResendConfirmation}
         aliases={aliases}
+        isFxa={isFxa}
       />
       <EmailModal />
     </>

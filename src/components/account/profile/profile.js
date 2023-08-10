@@ -13,6 +13,7 @@ export const Profile = ({
   onChangeFirstName,
   onChangeLastName,
   onChangeBio,
+  isFxa,
   onChangeUsername,
   onChangePassword,
   firstName,
@@ -41,15 +42,16 @@ export const Profile = ({
         />
         <label htmlFor="username">{t('account:profile-username', 'Username')}</label>
         <div className="contentDisplay">@{userName}</div>
-
-        <div className="actionBlock">
-          <button className="primary action" onClick={onChangeUsername}>
-            {t('account:profile-change-username', 'Change Username')}
-          </button>
-          <button className="primary action" onClick={onChangePassword}>
-            {t('account:profile-chage-password', 'Change Password')}
-          </button>
-        </div>
+        {isFxa ? null : (
+          <div className="actionBlock">
+            <button className="primary action" onClick={onChangeUsername}>
+              {t('account:profile-change-username', 'Change Username')}
+            </button>
+            <button className="primary action" onClick={onChangePassword}>
+              {t('account:profile-chage-password', 'Change Password')}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   )

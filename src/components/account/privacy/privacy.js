@@ -3,9 +3,12 @@ import { useTranslation } from 'next-i18next'
 const privacyStyle = css`
   padding-bottom: 3rem;
   border-bottom: var(--dividerStyle);
+  .actionInline button {
+    width: 100%;
+  }
 `
 
-export const Privacy = ({ accountClear, accountDelete, rssProtect, rssProtected }) => {
+export const Privacy = ({ accountClear, accountDelete, rssProtect, rssProtected, isFxa }) => {
   const { t } = useTranslation()
   return (
     <section className={privacyStyle}>
@@ -20,20 +23,21 @@ export const Privacy = ({ accountClear, accountDelete, rssProtect, rssProtected 
         </div>
         */}
 
-        <div className="toggleWrap">
-          <label htmlFor="rssPasswords" className="flush">
-            {t('account:privacy-rss', 'Disable password protection on my RSS feeds')}
-          </label>
-          <input
-            type="checkbox"
-            name="rssPasswords"
-            id="rssPasswords"
-            className="toggle"
-            checked={rssProtected}
-            onChange={rssProtect}
-          />
-        </div>
-
+        {isFxa ? null : (
+          <div className="toggleWrap">
+            <label htmlFor="rssPasswords" className="flush">
+              {t('account:privacy-rss', 'Disable password protection on my RSS feeds')}
+            </label>
+            <input
+              type="checkbox"
+              name="rssPasswords"
+              id="rssPasswords"
+              className="toggle"
+              checked={rssProtected}
+              onChange={rssProtect}
+            />
+          </div>
+        )}
         {/* Leaving this here until the export strat is revisited
         <label htmlFor="something" className="flush connectionLabel labelWithContext">
           Export my Pocket data

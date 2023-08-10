@@ -12,6 +12,7 @@ import { RSSFeeds } from 'containers/account/rss/rss'
 import { Privacy } from 'containers/account/privacy/privacy'
 import { useTranslation } from 'next-i18next'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Account = () => {
   const dispatch = useDispatch()
@@ -24,17 +25,20 @@ export const Account = () => {
   const onImpression = () => dispatch(sendSnowplowEvent('account.premium.upsell'))
   const onPremiumImpression = (inView) => (inView ? onImpression() : null)
 
+  const featureState = useSelector((state) => state.features)
+  const isFxa = featureFlagActive({ flag: 'fxa', featureState })
+
   return isLoggedIn ? (
     <Layout title="Pocket - Account">
       <SideNav type="account" isLoggedIn={isLoggedIn} />
       <main className={`main ${accountStyles}`}>
-        <h1>{t('account:manage-your-account', 'Manage your account')}</h1>
-        <Premium isPremium={isPremium} onPremiumImpression={onPremiumImpression}/>
+        <h1>{t('account:manage-your-profile', 'Manage your profile')}</h1>
+        <Premium isPremium={isPremium} onPremiumImpression={onPremiumImpression} />
         <Profile />
         <Email />
         <Braze />
         <ConnectedServices />
-        <RSSFeeds />
+        {isFxa ? null : <RSSFeeds />}
         <Privacy />
       </main>
       <Toasts />

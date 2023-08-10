@@ -167,8 +167,13 @@ export const accountStyles = css`
   }
 
   .actionInline {
-    grid-column: 8 / span 2;
+    grid-column: 8 / span 3;
     white-space: nowrap;
+    text-align: center;
+    .icon {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   .connectionLabel {
