@@ -163,8 +163,6 @@ function PocketWebClient({ Component, pageProps, err }) {
 
   const shouldRender = authRequired
     ? user_status !== 'pending' && user_status !== 'invalid' && flagsReady
-    : fxaFlag
-    ? false
     : true
 
   return (
