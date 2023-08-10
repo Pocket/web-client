@@ -22,7 +22,7 @@
   "delete-account": "Delete Account",
   "delete-account-confirm": "Delete Account",
   "delete-comply": "I understand this will remove my Pocket account <1>Permanently!</1>",
-  "delete-copy": "<0>This will remove your account and all associated data. You will not be able to log in with your account or access any data you have saved.</0><1>If you subscribe to Pocket Premium, please make sure that you <2>cancel your subscription</2> before deleting your account.</1>",
+  "delete-copy-alt": "This will remove your account and all associated data. You will not be able to log in with your account or access any data you have saved.",
   "email-addresses": "Email Addresses",
   "email-primary": "Primary Email",
   "email-resend-confirmation": "Re-send email confirmation",
