@@ -5,7 +5,7 @@ import { css, cx } from '@emotion/css'
 import { Trans, useTranslation } from 'next-i18next'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { KEYS, PREMIUM_URL } from 'common/constants'
-
+import { NewViewIcon } from 'components/icons/NewViewIcon'
 import { breakpointLargeHandset } from 'common/constants'
 import { ProfileIcon } from 'components/icons/ProfileIcon'
 import { PremiumIcon } from 'components/icons/PremiumIcon'
@@ -163,8 +163,10 @@ const GlobalNavAccount = ({
   showNotification,
   isLoggedIn = false,
   isPremium = false,
+  isFxa,
   avatarSrc = null,
   accountName = 'You',
+  accountEmail,
   profileUrl = null,
   onLinkClick = () => {},
   onAccountClick = () => {}
@@ -316,21 +318,31 @@ const GlobalNavAccount = ({
             id="account-menu-manage-account-link"
             onClick={handleManageAccountCase}
             data-cy="account-menu-manage-account-link">
-            <Trans i18nKey="nav:manage-account">Manage account</Trans>
+            <Trans i18nKey="nav:manage-profile">Manage profile</Trans>
           </PopupMenuItem>
+          {isFxa ? (
+            <PopupMenuItem
+              href="https://accounts.firefox.com/"
+              id="account-menu-manage-fxa-link"
+              className="label-wide"
+              data-cy="account-menu-manage-fxa-link">
+              <div className="manage-account">
+                <div>
+                  {accountEmail ? `${accountEmail}` : null}
+                  <div className="label-secondary">
+                    <Trans i18nKey="nav:manage-fxa">Manage your account</Trans>
+                  </div>
+                </div>
+                <NewViewIcon className="label-secondary" />
+              </div>
+            </PopupMenuItem>
+          ) : null}
           <PopupMenuItem
             href="https://help.getpocket.com/category/847-category?src=navbar"
             id="account-menu-help-link"
             onClick={handleHelpCase}
             data-cy="account-menu-help-link">
             <Trans i18nKey="nav:get-help">Get help</Trans>
-          </PopupMenuItem>
-          <PopupMenuItem
-            href="/saves/messages"
-            id="account-menu-messages-link"
-            onClick={handleMessagesCase}
-            data-cy="account-menu-messages-link">
-            <Trans i18nKey="nav:messages">Messages</Trans>
           </PopupMenuItem>
         </PopupMenuGroup>
         <PopupMenuGroup>

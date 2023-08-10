@@ -94,11 +94,21 @@ const itemStyle = css`
     }
   }
 
+  .manage-account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .icon {
     height: 1.5rem;
     line-height: 1rem;
     margin-right: var(--spacing075);
     margin-top: 1px;
+  }
+
+  &.label-wide .label {
+    width: 100%;
   }
 
   .label-secondary {

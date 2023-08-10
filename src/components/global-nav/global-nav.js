@@ -216,6 +216,7 @@ const GlobalNav = ({
   appRootSelector,
   pocketLogoOutboundUrl = '/explore?src=navbar',
   selectedLink = '',
+  isFxa = false,
   isLoggedIn = false,
   isPremium = false,
   avatarSrc = null,
@@ -339,6 +340,8 @@ const GlobalNav = ({
                 isLoggedIn={isLoggedIn}
                 avatarSrc={avatarSrc}
                 accountName={accountName}
+                accountEmail={accountEmail}
+                isFxa={isFxa}
                 profileUrl={profileUrl}
                 onLinkClick={onLinkClick}
                 onAccountClick={onAccountClick}
