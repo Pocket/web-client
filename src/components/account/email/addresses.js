@@ -1,5 +1,6 @@
 import { css } from '@emotion/css'
 import { ErrorIcon } from 'components/icons/ErrorIcon'
+import { NewViewIcon } from 'components/icons/NewViewIcon'
 import { topTooltip } from 'components/tooltip/tooltip'
 import { useTranslation } from 'next-i18next'
 
@@ -19,6 +20,9 @@ const emailStyle = css`
     font-size: 0.75rem;
     line-height: 1;
     grid-column: 3 / span 5;
+  }
+  .external .icon {
+    margin-left: 0.25rem;
   }
 `
 
@@ -60,6 +64,7 @@ export const EmailAddresses = ({
   emailAliasError,
   onResendConfirmation,
   onRemoveAlias,
+  isFxa,
   aliases = {}
 }) => {
   const { t } = useTranslation()
@@ -83,9 +88,17 @@ export const EmailAddresses = ({
           ) : null}
         </div>
 
-        <button className="secondary actionInline" onClick={onChangeEmail}>
-          {t('account:change-email', 'Change Email')}
-        </button>
+        {isFxa ? (
+          <a
+            className="button secondary actionInline external"
+            href="https://accounts.firefox.com/">
+            {t('account:change-email', 'Change Email')} <NewViewIcon />
+          </a>
+        ) : (
+          <button className="secondary actionInline" onClick={onChangeEmail}>
+            {t('account:change-email', 'Change Email')}
+          </button>
+        )}
 
         {primaryUnConfirmed ? (
           <button onClick={resendPrimaryConfirmation} className="inline subButton">
@@ -102,17 +115,21 @@ export const EmailAddresses = ({
             onResendConfirmation={onResendConfirmation}
           />
         ))}
-        <input
-          type="text"
-          name="addEmail"
-          placeholder={t('account:add-new-email', 'Add new email address')}
-          onChange={onChangeEmailAlias}
-          value={emailAlias}
-        />
-        <button className="primary actionInline" onClick={onAddEmailAlias}>
-          {t('account:add-email', 'Add Email')}
-        </button>
-        {emailAliasError ? <span className="errorText">{emailAliasError}</span> : null}
+        {isFxa ? null : (
+          <>
+            <input
+              type="text"
+              name="addEmail"
+              placeholder={t('account:add-new-email', 'Add new email address')}
+              onChange={onChangeEmailAlias}
+              value={emailAlias}
+            />
+            <button className="primary actionInline" onClick={onAddEmailAlias}>
+              {t('account:add-email', 'Add Email')}
+            </button>
+            {emailAliasError ? <span className="errorText">{emailAliasError}</span> : null}
+          </>
+        )}
       </div>
     </section>
   )
