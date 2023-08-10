@@ -83,12 +83,12 @@ export const AccountDeleteModal = ({ isPremium }) => {
       screenReaderLabel={t('account:delete-account', 'Delete Account')}
       handleClose={cancelDeleteAccount}>
       <ModalBody className={accountDeleteStyles}>
-        <Trans i18nKey="account:delete-copy">
-          <p>
-            This will remove your account and all associated data. You will not be able to log in
-            with your account or access any data you have saved.
-          </p>
-        </Trans>
+        <p>
+          {t(
+            'account:delete-copy-alt',
+            'This will remove your account and all associated data. You will not be able to log in with your account or access any data you have saved.'
+          )}
+        </p>
         {isPremium ? (
           <>
             <Trans i18nKey="account:premium-confirm">

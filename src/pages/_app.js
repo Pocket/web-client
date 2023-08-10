@@ -6,6 +6,7 @@ import { CacheProvider } from '@emotion/react'
 
 import { ViewportProvider } from 'components/viewport-provider/viewport-provider'
 import { appWithTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 
 import { useEffect } from 'react'
 import { wrapper } from 'store'
@@ -22,6 +23,7 @@ import { checkListsPilotStatus } from 'containers/lists/lists.state'
 
 import { appSetPreferences } from 'connectors/app/app.state'
 import { hydrateSettings } from 'connectors/settings/settings.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 import { ThirdPartyInit } from 'connectors/third-party/third-party-init'
 
@@ -35,14 +37,22 @@ import { DevTools } from 'connectors/dev-tools/dev-tools'
 /** App
  --------------------------------------------------------------- */
 const cache = createCache({ key: 'next' })
- 
+
 function PocketWebClient({ Component, pageProps, err }) {
   // Initialize app once per page load
   const dispatch = useDispatch()
 
-  const { user_status, user_id, sess_guid, birth } = useSelector((state) => state.user) //prettier-ignore
+  const router = useRouter()
+  const location = router.pathname
+
+  const { user_status, user_id, sess_guid, birth, isFXA} = useSelector((state) => state.user) //prettier-ignore
+  const featureState = useSelector((state) => state.features)
   const { flagsReady } = useSelector((state) => state.features)
   const { authRequired } = pageProps
+
+  const fxaFlag = featureFlagActive({ flag: 'lab', featureState })
+  const forceFxaRedirect = featureFlagActive({ flag: 'forceFxaRedirect', featureState })
+  const restrictedLink = authRequired && location !== '/learn-more' && (!isFXA || forceFxaRedirect)
 
   useEffect(() => {
     // Log out version for quick scan.  Can also help support get a read on
@@ -135,13 +145,25 @@ function PocketWebClient({ Component, pageProps, err }) {
     requestListsPilotStatus()
   }, [user_status, sess_guid, user_id, birth, dispatch, flagsReady])
 
+  // Check auth conditions
   useEffect(() => {
-    if (authRequired && user_status === 'invalid') {
+    // Adding flagsready here may slow non auth pages
+    if (!authRequired || user_status === 'pending') return () => {}
+
+    // User is not logged in
+    if (user_status === 'invalid') {
       window.location = 'https://getpocket.com/login?src=web-client'
     }
-  }, [authRequired, user_status])
 
-  const shouldRender = authRequired ? user_status !== 'pending' && user_status !== 'invalid' : true
+    // User is logged in but not via FXA
+    if (flagsReady && fxaFlag && restrictedLink) {
+      router.replace('/learn-more')
+    }
+  }, [authRequired, user_status, restrictedLink, router, flagsReady, fxaFlag])
+
+  const shouldRender = authRequired
+    ? user_status !== 'pending' && user_status !== 'invalid' && flagsReady
+    : true
 
   return (
     <ViewportProvider>

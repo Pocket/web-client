@@ -1,3 +1,17 @@
+# [1.102.0](https://github.com/Pocket/web-client/compare/v1.101.4...v1.102.0) (2023-08-10)
+
+
+### Bug Fixes
+
+* **app:** no silly ternary that wouldn’t work ([187997c](https://github.com/Pocket/web-client/commit/187997cb259dd284fdcb4a6b08ef435d266591f7))
+* **client:** restrict auth pages for non-fxa users ([aab1779](https://github.com/Pocket/web-client/commit/aab1779ecb0118bfe5a187a3f93f2c96f844f74b))
+* **copy:** update delete account format ([b9178a3](https://github.com/Pocket/web-client/commit/b9178a300b80b5a3d4c4a762f2673a7e0bd276e4))
+
+
+### Features
+
+* **fxa:** parse fxa status from v3 response ([08d5adf](https://github.com/Pocket/web-client/commit/08d5adfabf5fdf736d87f893e89a4b6b9e539b63))
+
 ## [1.101.4](https://github.com/Pocket/web-client/compare/v1.101.3...v1.101.4) (2023-08-08)
 
 

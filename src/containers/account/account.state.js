@@ -14,6 +14,7 @@ import { userProfileReducers, userProfileSagas } from 'containers/account/profil
 import { userEmailReducers, userEmailSagas } from 'containers/account/email/email.state'
 import { userConnectedServicesReducers, userConnectedServicesSagas } from 'containers/account/connections/connections.state' // prettier-ignore
 import { userPrivacyReducers, userPrivacySagas } from 'containers/account/privacy/privacy.state'
+import { getBool } from 'common/utilities/get-bool/get-bool'
 
 const initialState = {
   auth: false,
@@ -94,12 +95,13 @@ function* userRequest(action) {
 
   // Yay we have a user
   const { user } = response
-  const { username, first_name, last_name, profile, email, aliases, friend, ...rest } = user
-
+  const { username, first_name, last_name, profile, email, aliases, friend, is_fxa, ...rest } = user
+  const isFXA = getBool(is_fxa)
+  
   if (user)
     return yield put({
       type: USER_SUCCESS,
-      user: rest,
+      user: {...rest, isFXA},
       profile: { username, first_name, last_name, ...profile },
       aliases,
       email,
