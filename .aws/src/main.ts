@@ -108,10 +108,10 @@ private getSecretsManagerKmsAlias() {
       prefix: config.prefix,
       service: {
         criticalEscalationPolicyId: incidentManagement
-          .get('policy_frontend_id')
+          .get('policy_experience_critical_id')
           .toString(),
         nonCriticalEscalationPolicyId: incidentManagement
-          .get('policy_frontend_id')
+          .get('policy_experience_critical_id')
           .toString(),
       },
     });
