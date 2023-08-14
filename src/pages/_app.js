@@ -50,7 +50,7 @@ function PocketWebClient({ Component, pageProps, err }) {
   const { flagsReady } = useSelector((state) => state.features)
   const { authRequired } = pageProps
 
-  const fxaFlag = featureFlagActive({ flag: 'lab', featureState })
+  const fxaFlag = featureFlagActive({ flag: 'fxa', featureState })
   const forceFxaRedirect = featureFlagActive({ flag: 'forceFxaRedirect', featureState })
   const restrictedLink = authRequired && location !== '/learn-more' && (!isFXA || forceFxaRedirect)
 
