@@ -112,6 +112,7 @@ function* savedItemRequest(action) {
     yield put({ type: ITEMS_SAVED_SUCCESS, nodes, savedItemIds })
   } catch (errors) {
     yield put({ type: ITEMS_SAVED_FAILURE, errors })
+    Sentry.captureException(new SavedItemsError(errors))
   }
 }
 
@@ -138,6 +139,7 @@ function* savedItemTaggedRequest(action) {
     yield put({ type: ITEMS_SAVED_SUCCESS, nodes, savedItemIds })
   } catch (errors) {
     yield put({ type: ITEMS_SAVED_TAGGED_FAILURE, errors })
+    Sentry.captureException(new SavedItemsTaggedError(errors))
   }
 }
 
@@ -214,7 +216,7 @@ const getNodeFromEdge = (previous, current) => {
   const cursor = current.cursor
   const { item, ...node } = current.node
   if (node.status === 'DELETED') return previous // REMOVE DELETED ITEMS FROM THE RESPONSE
-  return { ...previous, [node.id]: { cursor, ...node }}
+  return { ...previous, [node.id]: { cursor, ...node } }
 }
 
 const getItemFromEdge = (previous, current) => {
@@ -233,4 +235,24 @@ const getSearchItemFromEdge = (previous, current) => {
   const { item, node } = deriveSavedItem(current.node.savedItem)
   if (node.status === 'DELETED') return previous
   return { ...previous, [node.id]: item } // REMOVE DELETED ITEMS FROM THE RESPONSE
+}
+
+/**
+ * Errors 
+ ----------------------------------------------------------------------------*/
+
+class SavedItemsError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'SavedItemsError'
+    this.logMessage = message
+  }
+}
+
+class SavedItemsTaggedError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'SavedItemsTaggedError'
+    this.logMessage = message
+  }
 }

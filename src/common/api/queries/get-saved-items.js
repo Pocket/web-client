@@ -3,6 +3,7 @@ import { gql } from 'common/utilities/gql/gql'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
 import { itemFiltersFromGraph } from './get-saved-items.filters'
 import { actionToCamelCase } from 'common/utilities/strings/strings'
+import * as Sentry from '@sentry/nextjs'
 
 import { LOGIN_URL } from 'common/constants'
 
@@ -68,10 +69,27 @@ function handleResponse(response) {
     throw new UnauthenticatedItemRequestError()
   }
 
-  if (!responseData) throw new Error(response?.errors)
+  // In grahpQL there could be response errors, but the response could still
+  // be semi-valid.  So we will just capture and move on
+  if (response?.errors) {
+    Sentry.withScope((scope) => {
+      scope.setFingerprint('SavedItemRequestErrors')
+      Sentry.captureMessage(response?.errors)
+    })
+  }
+
+  if (!responseData) throw new ItemRequestResponseMissingError(response?.errors)
 
   const { pageInfo, edges, totalCount } = responseData
   return { pageInfo, edges, totalCount }
+}
+
+class ItemRequestResponseMissingError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'GeneralItemRequestError'
+    this.logMessage = message
+  }
 }
 
 class MalformedItemRequestError extends Error {
