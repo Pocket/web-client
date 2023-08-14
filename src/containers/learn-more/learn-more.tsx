@@ -9,6 +9,7 @@ import { AccountClearModal } from 'containers/account/privacy/confirm-clear'
 import { accountDelete } from 'containers/account/privacy/privacy.state'
 import { breakpointLargeHandset } from 'common/constants'
 import { setCookie } from 'nookies'
+import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 const leanMoreStyles = css`
   background-color: var(--color-teal100);
@@ -106,17 +107,25 @@ export default function LearnMore() {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
-  const dispatchAccountDelete = () => dispatch(accountDelete())
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isPremium = useSelector((state: any) => state.user.premium_status === '1')
 
   const handleUpgrade = () => {
+    dispatch(sendSnowplowEvent('learnmore.upgrade'))
     // Set Cookie for FF Migration
     setCookie(null, 'fxa_migration', '1', {
       maxAge: 10 * 60,
       path: '/'
     })
     window.location.assign('/ff_signup?utm_campaign=pocket_migration')
+  }
+
+  const handleFaq = () => dispatch(sendSnowplowEvent('learnmore.upgrade'))
+  const handleExportSaves = () => dispatch(sendSnowplowEvent('learnmore.exportsaves'))
+  const handleCancelPremium = () => dispatch(sendSnowplowEvent('learnmore.cancelpremium'))
+  const handleDeleteAccount = () => {
+    dispatch(sendSnowplowEvent('learnmore.deleteaccount'))
+    dispatch(accountDelete())
   }
 
   return (
@@ -174,8 +183,10 @@ export default function LearnMore() {
                 </p>
               </div>
               <a
+                onClick={handleFaq}
                 className="button secondary"
-                href="https://help.getpocket.com/article/1187-pocket-migration-to-firefox-accounts">
+                href="https://help.getpocket.com/article/1187-pocket-migration-to-firefox-accounts"
+                target="_blank">
                 {t('learn-more:faq-button', 'Learn more')}
               </a>
             </li>
@@ -189,7 +200,10 @@ export default function LearnMore() {
                   )}
                 </p>
               </div>
-              <a className="button secondary" href="http://getpocket.com/export">
+              <a
+                onClick={handleExportSaves}
+                className="button secondary"
+                href="http://getpocket.com/export">
                 {t('learn-more:export-button', 'Export saves')}
               </a>
             </li>
@@ -203,7 +217,10 @@ export default function LearnMore() {
                   )}
                 </p>
               </div>
-              <a className="button brand" href="https://getpocket.com/premium_manage_subscription">
+              <a
+                onClick={handleCancelPremium}
+                className="button brand"
+                href="https://getpocket.com/premium_manage_subscription">
                 {t('learn-more:cancel-button', 'Cancel Premium')}
               </a>
             </li>
@@ -217,7 +234,7 @@ export default function LearnMore() {
                   )}
                 </p>
               </div>
-              <button className="brand" onClick={dispatchAccountDelete}>
+              <button className="brand" onClick={handleDeleteAccount}>
                 {t('learn-more:delete-button', 'Delete account')}
               </button>
             </li>
