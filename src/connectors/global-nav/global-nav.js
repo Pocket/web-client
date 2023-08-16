@@ -34,7 +34,6 @@ import { getTopLevelPath } from 'common/utilities/urls/urls'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 import { Banner } from './global-nav-banner'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 // check empty avatar value coming from endpoint (sample default avatar url to overwrite https://pocket-profile-images.s3.amazonaws.com/profileBlue.png)
 export const enforceDefaultAvatar = (avatarUrl = '') => {
@@ -64,7 +63,6 @@ const GlobalNav = (props) => {
 
   const appMode = useSelector((state) => state?.app?.mode)
   const flagsReady = useSelector((state) => state.features.flagsReady)
-  const featureState = useSelector((state) => state.features)
   const userStatus = useSelector((state) => state?.user?.user_status)
   const isPremium = useSelector((state) => parseInt(state?.user?.premium_status, 10) === 1 || false)
   const isLoggedIn = useSelector((state) => !!state.user.auth)
@@ -80,7 +78,8 @@ const GlobalNav = (props) => {
   const listMode = useSelector((state) => state?.app?.listMode)
   const colorMode = useSelector((state) => state?.app?.colorMode)
 
-  const isFxa = featureFlagActive({ flag: 'fxa', featureState })
+  // Has the user migrated to FXA?
+  const { isFXA } = useSelector((state) => state.user)
 
   const setAppColorMode = (colorMode) => dispatch(setColorMode(colorMode))
   const setListMode = () => dispatch(setListModeList())
@@ -241,7 +240,7 @@ const GlobalNav = (props) => {
       avatarSrc={avatarSrc}
       accountName={accountName}
       accountEmail={accountEmail}
-      isFxa={isFxa}
+      isFxa={isFXA}
       profileUrl={profileUrl}
       userStatus={userStatus}
       onToolClick={toolClick}

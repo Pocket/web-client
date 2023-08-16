@@ -12,21 +12,22 @@ import { RSSFeeds } from 'containers/account/rss/rss'
 import { Privacy } from 'containers/account/privacy/privacy'
 import { useTranslation } from 'next-i18next'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+
 
 export const Account = () => {
   const dispatch = useDispatch()
 
   // Profile content
   const isLoggedIn = useSelector((state) => !!state.user.auth)
+
+  // Has the user migrated to FXA?
+  const { isFXA } = useSelector((state) => state.user)
+
   const isPremium = useSelector((state) => state.user.premium_status === '1')
   const { t } = useTranslation()
 
   const onImpression = () => dispatch(sendSnowplowEvent('account.premium.upsell'))
   const onPremiumImpression = (inView) => (inView ? onImpression() : null)
-
-  const featureState = useSelector((state) => state.features)
-  const isFxa = featureFlagActive({ flag: 'fxa', featureState })
 
   return isLoggedIn ? (
     <Layout title="Pocket - Account">
@@ -38,7 +39,7 @@ export const Account = () => {
         <Email />
         <Braze />
         <ConnectedServices />
-        {isFxa ? null : <RSSFeeds />}
+        {isFXA ? null : <RSSFeeds />}
         <Privacy />
       </main>
       <Toasts />

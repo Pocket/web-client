@@ -207,23 +207,25 @@ export default function LearnMore() {
                 {t('learn-more:export-button', 'Export saves')}
               </a>
             </li>
-            <li>
-              <div>
-                <h3>{t('learn-more:cancel-header', 'Cancel Premium subscription')}</h3>
-                <p>
-                  {t(
-                    'learn-more:cancel-body',
-                    'To cancel your Premium subscription, visit this page which explains canceling for each subscription platform. If you have a subscription, you must cancel it before deleting your account.'
-                  )}
-                </p>
-              </div>
-              <a
-                onClick={handleCancelPremium}
-                className="button brand"
-                href="https://getpocket.com/premium_manage_subscription">
-                {t('learn-more:cancel-button', 'Cancel Premium')}
-              </a>
-            </li>
+            {isPremium ? (
+              <li>
+                <div>
+                  <h3>{t('learn-more:cancel-header', 'Cancel Premium subscription')}</h3>
+                  <p>
+                    {t(
+                      'learn-more:cancel-body',
+                      'To cancel your Premium subscription, visit this page which explains canceling for each subscription platform. If you have a subscription, you must cancel it before deleting your account.'
+                    )}
+                  </p>
+                </div>
+                <a
+                  onClick={handleCancelPremium}
+                  className="button brand"
+                  href="https://getpocket.com/premium_manage_subscription">
+                  {t('learn-more:cancel-button', 'Cancel Premium')}
+                </a>
+              </li>
+            ) : null}
             <li>
               <div>
                 <h3>{t('learn-more:delete-header', 'Delete account')}</h3>

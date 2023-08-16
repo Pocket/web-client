@@ -7,7 +7,6 @@ import { AccountClearModal } from 'containers/account/privacy/confirm-clear'
 import { accountClear } from './privacy.state'
 import { accountDelete } from './privacy.state'
 import { rssProtect } from './privacy.state'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Privacy = () => {
   const dispatch = useDispatch()
@@ -17,13 +16,13 @@ export const Privacy = () => {
   const dispatchAccountDelete = () => dispatch(accountDelete())
   const dispatchRssProtect = () => dispatch(rssProtect(!rssProtected))
 
-  const featureState = useSelector((state) => state.features)
-  const isFxa = featureFlagActive({ flag: 'fxa', featureState })
+  // Has the user migrated to FXA?
+  const { isFXA } = useSelector((state) => state.user)
 
   return (
     <>
       <PrivacyComponent
-        isFxa={isFxa}
+        isFxa={isFXA}
         rssProtected={rssProtected}
         rssProtect={dispatchRssProtect}
         accountDelete={dispatchAccountDelete}
