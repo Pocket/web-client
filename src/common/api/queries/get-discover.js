@@ -33,7 +33,7 @@ const getDiscoverLineupQuery = gql`
         recommendations {
           recommendationId: id
           id
-          curatedInfo {
+          curatedInfo: corpusItem {
             title
             excerpt
             imageSrc

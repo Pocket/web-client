@@ -14,7 +14,7 @@ const getSlateQuery = gql`
           ...ItemDetails
         }
         id
-        curatedInfo {
+        curatedInfo: corpusItem {
           title
           excerpt
           imageSrc
