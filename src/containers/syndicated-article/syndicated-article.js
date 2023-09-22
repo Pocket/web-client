@@ -96,7 +96,8 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     image: mainImage,
     type: 'article'
   }
-  const canonical = publisher?.attributeCanonicalToPublisher ? publisherUrl : url
+  const canonical = publisher?.attributeCanonicalToPublisher ? false : url
+  const noIndex = publisher?.attributeCanonicalToPublisher
 
   const ArticleLayout = isMobileWebView ? MobileLayout : Layout
 
@@ -148,6 +149,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         title={title}
         metaData={articleMetaData}
         canonical={canonical}
+        noIndex={noIndex}
         className={printLayout}>
         <main className={contentLayout}>
           <section>

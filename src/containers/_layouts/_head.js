@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { FACEBOOK_APP_ID } from 'common/constants'
 
-export const PocketHead = ({ metaData = {}, title: pageTitle, canonical, forceWebView }) => {
+export const PocketHead = ({ metaData = {}, title: pageTitle, canonical, noIndex, forceWebView }) => {
   const { url = '', description = '', title = '', type = 'website', image } = metaData
 
   const twitterCardType = image ? 'summary_large_image' : 'summary'
@@ -17,6 +17,7 @@ export const PocketHead = ({ metaData = {}, title: pageTitle, canonical, forceWe
       <title>{pageTitle}</title>
 
       {canonical ? <link rel="canonical" href={canonical} /> : null}
+      {noIndex ? <meta name="robots" content="noindex" /> : null}
 
       {forceWebView ? <meta name="x-pocket-force-webview"/> : null}
       {/*  Primary Meta Tags */}
