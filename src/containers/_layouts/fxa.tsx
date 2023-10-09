@@ -28,7 +28,7 @@ function mainLayout({
 }) {
   return (
     <>
-      <PocketHead title={title} canonical={canonical} metaData={metaData} forceWebView={true} />
+      <PocketHead title={title} canonical={canonical} metaData={metaData} forceWebView={true} noIndex={false}/>
       <GlobalNav onlyLogout={true} />
       <div className={cx(fixedNavContainer)}>{children}</div>
     </>

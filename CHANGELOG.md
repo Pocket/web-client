@@ -1,3 +1,24 @@
+## [1.102.7](https://github.com/Pocket/web-client/compare/v1.102.6...v1.102.7) (2023-09-27)
+
+
+### Bug Fixes
+
+* **learn-more:** rebranding text changes ([9607239](https://github.com/Pocket/web-client/commit/960723964f0124760df472759dc94cd3412de549))
+
+## [1.102.6](https://github.com/Pocket/web-client/compare/v1.102.5...v1.102.6) (2023-09-22)
+
+
+### Bug Fixes
+
+* **syndicated:** syndicated articles to noindex ([f9d45cf](https://github.com/Pocket/web-client/commit/f9d45cfa7cee641f02dddd993234f9bc758f79c9))
+
+## [1.102.5](https://github.com/Pocket/web-client/compare/v1.102.4...v1.102.5) (2023-08-16)
+
+
+### Bug Fixes
+
+* **fxa:** update account / learn more ([181628f](https://github.com/Pocket/web-client/commit/181628f93864746ab313e5fdb0666a58679bdc94))
+
 ## [1.102.4](https://github.com/Pocket/web-client/compare/v1.102.3...v1.102.4) (2023-08-15)
 
 

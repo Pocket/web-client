@@ -11,7 +11,6 @@ import { Profile as ProfileComponent } from 'components/account/profile/profile'
 import { AvatarModal } from 'containers/account/profile/confirm-avatar'
 import { PasswordModal } from 'containers/account/profile/confirm-password'
 import { UsernameModal } from 'containers/account/profile/confirm-username'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Profile = () => {
   const dispatch = useDispatch()
@@ -22,7 +21,6 @@ export const Profile = () => {
   const lastName = useSelector((state) => state?.userProfile?.last_name)
   const userName = useSelector((state) => state?.userProfile?.username)
   const bio = useSelector((state) => state?.userProfile?.description) || ''
-  const featureState = useSelector((state) => state.features)
   const avatarSrc = enforceDefaultAvatar(retrievedAvatar)
 
   const onChangePhoto = () => dispatch(updateAvatar())
@@ -34,7 +32,9 @@ export const Profile = () => {
   const onChangeUsername = () => dispatch(updateUsername())
   const onChangePassword = () => dispatch(updatePassword())
 
-  const isFxa = featureFlagActive({ flag: 'fxa', featureState })
+  // Has the user migrated to FXA?
+  const { isFXA } = useSelector((state) => state.user)
+
   return (
     <>
       <ProfileComponent
@@ -49,7 +49,7 @@ export const Profile = () => {
         lastName={lastName}
         userName={userName}
         bio={bio}
-        isFxa={isFxa}
+        isFxa={isFXA}
       />
       <AvatarModal />
       <PasswordModal />
