@@ -9,6 +9,7 @@ import { AccountClearModal } from 'containers/account/privacy/confirm-clear'
 import { accountDelete } from 'containers/account/privacy/privacy.state'
 import { breakpointLargeHandset } from 'common/constants'
 import { setCookie } from 'nookies'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 const leanMoreStyles = css`
@@ -108,6 +109,10 @@ export default function LearnMore() {
   const { t } = useTranslation()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const featureState = useSelector((state: any) => state.features)
+  const enrolledRebranding = featureFlagActive({ flag: 'fxa.rebranding', featureState })
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isPremium = useSelector((state: any) => state.user.premium_status === '1')
 
   const handleUpgrade = () => {
@@ -135,9 +140,13 @@ export default function LearnMore() {
           <PageContainer>
             <LogoMark className="logo" />
             <h1>
-              <Trans i18nKey="learn-more:update-header">
-                Update your Pocket login to a Firefox&nbsp;account
-              </Trans>
+              {enrolledRebranding ? (
+                <Trans i18nKey="learn-more:update-header-rebrand">Update your Pocket login</Trans>
+              ) : (
+                <Trans i18nKey="learn-more:update-header">
+                  Update your Pocket login to a Firefox&nbsp;account
+                </Trans>
+              )}
             </h1>
             <ul>
               <li>
@@ -147,16 +156,26 @@ export default function LearnMore() {
                 )}
               </li>
               <li>
-                {t(
-                  'learn-more:condition-benefits',
-                  'Benefits of a Firefox account, powered by Mozilla, include better account security'
-                )}
+                {enrolledRebranding
+                  ? t(
+                      'learn-more:condition-benefit-rebrand',
+                      'Benefits include better account security'
+                    )
+                  : t(
+                      'learn-more:condition-benefits',
+                      'Benefits of a Firefox account, powered by Mozilla, include better account security'
+                    )}
               </li>
               <li>
-                {t(
-                  'learn-more:condition-pocket-access',
-                  'If you do not update to a Firefox account, you cannot access Pocket'
-                )}
+                {enrolledRebranding
+                  ? t(
+                      'learn-more:condition-pocket-access-rebrand',
+                      'If you do not update, you cannot access Pocket'
+                    )
+                  : t(
+                      'learn-more:condition-pocket-access',
+                      'If you do not update to a Firefox account, you cannot access Pocket'
+                    )}
               </li>
             </ul>
             <button className="large" onClick={handleUpgrade}>
@@ -207,23 +226,25 @@ export default function LearnMore() {
                 {t('learn-more:export-button', 'Export saves')}
               </a>
             </li>
-            <li>
-              <div>
-                <h3>{t('learn-more:cancel-header', 'Cancel Premium subscription')}</h3>
-                <p>
-                  {t(
-                    'learn-more:cancel-body',
-                    'To cancel your Premium subscription, visit this page which explains canceling for each subscription platform. If you have a subscription, you must cancel it before deleting your account.'
-                  )}
-                </p>
-              </div>
-              <a
-                onClick={handleCancelPremium}
-                className="button brand"
-                href="https://getpocket.com/premium_manage_subscription">
-                {t('learn-more:cancel-button', 'Cancel Premium')}
-              </a>
-            </li>
+            {isPremium ? (
+              <li>
+                <div>
+                  <h3>{t('learn-more:cancel-header', 'Cancel Premium subscription')}</h3>
+                  <p>
+                    {t(
+                      'learn-more:cancel-body',
+                      'To cancel your Premium subscription, visit this page which explains canceling for each subscription platform. If you have a subscription, you must cancel it before deleting your account.'
+                    )}
+                  </p>
+                </div>
+                <a
+                  onClick={handleCancelPremium}
+                  className="button brand"
+                  href="https://getpocket.com/premium_manage_subscription">
+                  {t('learn-more:cancel-button', 'Cancel Premium')}
+                </a>
+              </li>
+            ) : null}
             <li>
               <div>
                 <h3>{t('learn-more:delete-header', 'Delete account')}</h3>
