@@ -3,7 +3,9 @@
   "cancel-button" : "Anuluj Premium",
   "cancel-header" : "Anuluj subskrypcję Premium",
   "condition-benefits" : "Jedną z zalet konta Firefox zapewnianego przez firmę Mozilla jest większe bezpieczeństwo",
+  "condition-benefits-rebrand" : "Korzyści obejmują większe bezpieczeństwo konta",
   "condition-pocket-access" : "Jeśli nie zaktualizujesz na konto Firefox, nie będziesz mieć dostępu do Pocket",
+  "condition-pocket-access-rebrand" : "Jeśli nie zaktualizujesz, nie będziesz mieć dostępu do Pocket",
   "condition-usage" : "Nadal będzie można korzystać z dowolnej przeglądarki i naszych aplikacji na iOS lub Androida, aby uzyskać dostęp do Pocket",
   "delete-body" : "Trwale usuń swoje konto Pocket. Spowoduje to usunięcie Twojego konta i wszystkich znajdujących się na nim elementów.",
   "delete-button" : "Usuń konto",
@@ -18,5 +20,6 @@
   "no-update-options" : "Oto inne dostępne opcje:",
   "title" : "Dowiedz się więcej o migracji do Firefox",
   "update-button" : "Zaktualizuj konto",
-  "update-header" : "Zaktualizuj login do Pocket na konto Firefox"
+  "update-header" : "Zaktualizuj login do Pocket na konto Firefox",
+  "update-header-rebrand" : "Zaktualizuj login Pocket"
 }
