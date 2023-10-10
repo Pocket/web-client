@@ -3,7 +3,9 @@
   "cancel-button" : "Premium をキャンセル",
   "cancel-header" : "Premium 購読をキャンセル",
   "condition-benefits" : "Mozilla 提供の Firefox アカウントには、アカウントセキュリティの向上などのメリットがあります",
+  "condition-benefits-rebrand" : "アカウントのセキュリティが向上するなどのメリットがあります",
   "condition-pocket-access" : "Firefox アカウントに更新しないと Pocket にアクセスできません",
+  "condition-pocket-access-rebrand" : "Pocket にアクセスするには更新する必要があります",
   "condition-usage" : "引き続きブラウザ、iOS または Android アプリを使用して Pocket にアクセスできます",
   "delete-body" : "Pocket アカウントを完全に削除します。アカウント自体と、その中に含まれるアイテムがすべて削除されます。",
   "delete-button" : "アカウントを削除",
@@ -18,5 +20,6 @@
   "no-update-options" : "その他のオプションは次のとおりです：",
   "title" : "Firefox への移行に関する詳細を見る",
   "update-button" : "アカウントを更新",
-  "update-header" : "Pocket ログインを Firefox アカウントに更新してください"
+  "update-header" : "Pocket ログインを Firefox アカウントに更新してください",
+  "update-header-rebrand" : "Pocket のログイン情報を更新"
 }
