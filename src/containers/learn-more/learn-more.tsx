@@ -158,7 +158,7 @@ export default function LearnMore() {
               <li>
                 {enrolledRebranding
                   ? t(
-                      'learn-more:condition-benefit-rebrand',
+                      'learn-more:condition-benefits-rebrand',
                       'Benefits include better account security'
                     )
                   : t(
