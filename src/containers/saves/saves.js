@@ -25,7 +25,6 @@ import { ConfirmAddToList } from 'connectors/confirm/add-to-list'
 import { CreateListModal } from 'connectors/confirm/create-list'
 
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Saves = (props) => {
   const router = useRouter()
@@ -63,20 +62,13 @@ export const Saves = (props) => {
     dispatch(mutateListCreate())
   }
 
-  // Campaign
-  const { locale = 'en' } = router
-  const isEnglish = ['en', 'en-US'].includes(locale)
-  const showNewsroomCampaign = featureFlagActive({ flag: 'newsroom', featureState })
-  const bannerCampaign = showNewsroomCampaign && isEnglish ? 'newsroom' : false
-
   return (
     <Layout
       title={metaData.title}
       metaData={metaData}
       selectedNavLink={selectedNavLink}
       subset={subset}
-      tag={tag}
-      bannerCampaign={bannerCampaign}>
+      tag={tag}>
       <SideNav type="saves" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
       <main className="main">
         <SuccessFXA type="saves" />

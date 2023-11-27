@@ -1,3 +1,10 @@
+## [1.102.9](https://github.com/Pocket/web-client/compare/v1.102.8...v1.102.9) (2023-11-27)
+
+
+### Bug Fixes
+
+* **saves:** remove newsroom banner ([a9837e2](https://github.com/Pocket/web-client/commit/a9837e275d0e48e2e28e121e8dc5305b05a40751))
+
 ## [1.102.8](https://github.com/Pocket/web-client/compare/v1.102.7...v1.102.8) (2023-10-11)
 
 
