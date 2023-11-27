@@ -1,10 +1,12 @@
 import { css } from '@emotion/css'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Listen } from 'connectors/listen/listen'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { LOGIN_URL } from 'common/constants'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { ListenIcon } from 'components/icons/ListenIcon'
+import { BRAZE_LISTEN } from 'common/utilities/braze/feature-flags'
 
 const loggedOutStyle = css`
   padding: 16px 18px;
@@ -33,17 +35,32 @@ const loggedOutStyle = css`
 
 export const ListenLogin = ({ itemId, path }) => {
   const dispatch = useDispatch()
-
+  const [listenEnrolled, setListenEnrolled] = useState(false)
+  const brazeInitialized = useSelector((state) => state?.braze?.initialized)
   const userStatus = useSelector((state) => state.user.user_status)
   const featureState = useSelector((state) => state.features)
   const listenLab = featureFlagActive({ flag: 'lab.listen', featureState })
+
+  useEffect(() => {
+    if (!brazeInitialized) return () => {}
+    import('common/utilities/braze/braze-lazy-load').then(
+      ({ logFeatureFlagImpression, getFeatureFlag }) => {
+        if (getFeatureFlag(BRAZE_LISTEN)) setListenEnrolled(true)
+        logFeatureFlagImpression(BRAZE_LISTEN)
+      }
+    )
+  }, [brazeInitialized])
+
+  const showListen = listenLab || listenEnrolled
 
   const signUpEvent = () => dispatch(sendSnowplowEvent('listen.signup'))
 
   const loggedIn = userStatus === 'valid'
   const ElementToRender = loggedIn ? Listen : LoggedOut
 
-  return listenLab ? <ElementToRender itemId={itemId} path={path} clickEvent={signUpEvent} /> : null
+  return showListen ? (
+    <ElementToRender itemId={itemId} path={path} clickEvent={signUpEvent} />
+  ) : null
 }
 
 const LoggedOut = ({ clickEvent, path = '' }) => (

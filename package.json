@@ -115,7 +115,7 @@
     "typescript": "5.0.4"
   },
   "dependencies": {
-    "@braze/web-sdk": "4.7.1",
+    "@braze/web-sdk": "5.0.1",
     "@emotion/css": "11.11.0",
     "@emotion/react": "11.11.0",
     "@freestar/pubfig-adslot-react-component": "3.6.0",
