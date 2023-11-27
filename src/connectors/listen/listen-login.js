@@ -45,7 +45,8 @@ export const ListenLogin = ({ itemId, path }) => {
     if (!brazeInitialized) return () => {}
     import('common/utilities/braze/braze-lazy-load').then(
       ({ logFeatureFlagImpression, getFeatureFlag }) => {
-        if (getFeatureFlag(BRAZE_LISTEN)) setListenEnrolled(true)
+        const flag = getFeatureFlag(BRAZE_LISTEN)
+        if (flag.enabled) setListenEnrolled(true)
         logFeatureFlagImpression(BRAZE_LISTEN)
       }
     )
