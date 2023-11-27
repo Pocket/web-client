@@ -54,7 +54,7 @@ jobs:
     resource_class: small
     # Define the container we will run the task in (standard node)
     docker:
-      - image: cimg/node:18.16
+      - image: cimg/node:20.10.0
     steps:
       # Setup Environment
       - setup
@@ -74,7 +74,7 @@ jobs:
     parallelism: 5
     # Define the container we will run the task in (standard node)
     docker:
-      - image: cimg/node:18.16
+      - image: cimg/node:20.10.0
     steps:
       # Setup Environment
       - setup
@@ -102,7 +102,7 @@ jobs:
     resource_class: small
     # Define the container we will run the task in (standard node)
     docker:
-      - image: cimg/node:18.16
+      - image: cimg/node:20.10.0
     steps:
       - setup
       - add_ssh_keys:
@@ -145,7 +145,7 @@ jobs:
     resource_class: medium
     # Define the container we will run the task in (standard node)
     docker:
-      - image: cimg/node:18.16
+      - image: cimg/node:20.10.0
     steps:
       # Setup Environment
       - setup
