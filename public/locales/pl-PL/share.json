@@ -1,12 +1,12 @@
 {
-  "comment" : "Komentarz",
-  "copy-link" : "Kopiuj łącze",
-  "recommend" : "Rekomenduj",
-  "share-item" : "Udostępnij element",
-  "share-to-buffer" : "Udostępnij w Buffer",
-  "share-to-facebook" : "Udostępnij na Facebooku",
-  "share-to-linkedin" : "Udostępnij w LinkedIn",
-  "share-to-reddit" : "Udostępnij w Reddit",
-  "share-to-twitter" : "Udostępnij na Twitterze",
-  "social-media" : "Media społecznościowe"
+  "comment" : "Comment",
+  "copy-link" : "Copy Link",
+  "recommend" : "Recommend",
+  "share-item" : "Share Item",
+  "share-to-buffer" : "Share to Buffer",
+  "share-to-facebook" : "Share to Facebook",
+  "share-to-linkedin" : "Share to LinkedIn",
+  "share-to-reddit" : "Share to Reddit",
+  "share-to-twitter" : "Share to Twitter",
+  "social-media" : "Social Media"
 }
