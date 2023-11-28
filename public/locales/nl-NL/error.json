@@ -1,11 +1,11 @@
 {
   "404-detail" : "",
-  "404-message" : "Het lijkt erop dat de pagina die je probeert te bereiken ontbreekt. Neem contact op met ons ondersteuningsteam als je denkt dat dit een fout is.",
-  "404-title" : "Oeps! Er is iets misgegaan...",
-  "contact" : "Contact opnemen met Pocket Support",
-  "message" : "Er is een fout opgetreden. Probeer je pagina te vernieuwen en kijk of het probleem daarmee wordt opgelost. Blijf je problemen ondervinden, neem dan contact op met ons ondersteuningsteam.",
-  "moderated-list-message" : "Deze Lijst is niet beschikbaar omdat deze mogelijk in strijd is met het beleid inzake gedeelde inhoud van Pocket.",
-  "notification-message" : "De link waarop je hebt geklikt, leidt je naar de meldingsinstellingen van je telefoon, die alleen toegankelijk zijn op een mobiel apparaat. Scan de QR-code om Pocket op je telefoon te installeren.",
-  "notification-title" : "Hmm, zo te zien is er iets misgegaan",
-  "title" : "Oeps! Er is iets misgegaan..."
+  "404-message" : "Looks like the page you are trying to reach has gone missing. Please contact our support team if you feel this is a mistake.",
+  "404-title" : "Oops! Something’s gone awry...",
+  "contact" : "Contact Support",
+  "message" : "There’s been an error. Try refreshing your page and see if that fixes things. If you’re still seeing the issue, please contact our support team.",
+  "moderated-list-message" : "This List is not available because it may have violated Pocket’s Shared Content Policies.",
+  "notification-message" : "The link you clicked directs you to your phone’s notification settings, which can only be accessed on a mobile device. Scan the QR code to install Pocket on your phone.",
+  "notification-title" : "Hmm, looks like something went wrong",
+  "title" : "Oops! Something’s gone awry..."
 }
