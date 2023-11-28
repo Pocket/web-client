@@ -1,9 +1,9 @@
 {
-  "archive" : "Архив",
-  "articles" : "Статьи",
-  "favorites" : "Избранное",
+  "archive" : "Archive",
+  "articles" : "Articles",
+  "favorites" : "Favorites",
   "highlights" : "Highlights",
-  "saves" : "Сохранения",
-  "tags" : "Теги",
-  "videos" : "Видео"
+  "saves" : "Saves",
+  "tags" : "Tags",
+  "videos" : "Videos"
 }
