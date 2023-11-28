@@ -1,11 +1,11 @@
 {
-  "a-friend-shared" : "Un(e) ami(e) a partagé avec vous du contenu dans Pocket. Pour le voir, veuillez confirmer votre adresse e-mail :",
-  "activity" : "Activité",
-  "confirmation" : "La confirmation a été envoyée ! Veuillez consulter votre boîte de réception.",
-  "dismiss" : "Ignorer",
-  "inbox-is-empty" : "Votre boîte de réception est vide.",
+  "a-friend-shared" : "A friend has shared something with you in Pocket. To view it, please confirm your email:",
+  "activity" : "Activity",
+  "confirmation" : "Confirmation sent! Please check your email.",
+  "dismiss" : "Dismiss",
+  "inbox-is-empty" : "Your Inbox is Empty",
   "messages" : "Messages",
-  "oops" : "Oups ! Un problème est survenu. Veuillez réessayer ultérieurement.",
-  "resend-confirmation" : "Renvoyer la confirmation",
-  "when-someone-shares" : "Lorsqu'une personne partage des éléments avec vous via la fonction Envoyer à un(e) ami(e), ils apparaissent ici."
+  "oops" : "Oops! Something went wrong. Please try again later.",
+  "resend-confirmation" : "Resend Confirmation",
+  "when-someone-shares" : "When someone shares items with you using Send to Friend, they will appear here."
 }
