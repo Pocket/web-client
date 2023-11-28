@@ -1,11 +1,11 @@
 {
-  "a-friend-shared" : "Een vriend heeft iets met je gedeeld in Pocket. Om het te bekijken, bevestig je je e-mail:",
-  "activity" : "Activiteiten",
-  "confirmation" : "Bevestiging is verstuurd! Controleer je inbox.",
-  "dismiss" : "Afwijzen",
-  "inbox-is-empty" : "Jouw inbox is leeg",
-  "messages" : "Berichten",
-  "oops" : "Oeps! Er is iets misgegaan. Probeer het later opnieuw.",
-  "resend-confirmation" : "Verstuur bevestiging opnieuw",
-  "when-someone-shares" : "Wanneer iemand items met je deelt met behulp van Stuur naar een Vriend, verschijnen ze hier."
+  "a-friend-shared" : "A friend has shared something with you in Pocket. To view it, please confirm your email:",
+  "activity" : "Activity",
+  "confirmation" : "Confirmation sent! Please check your email.",
+  "dismiss" : "Dismiss",
+  "inbox-is-empty" : "Your Inbox is Empty",
+  "messages" : "Messages",
+  "oops" : "Oops! Something went wrong. Please try again later.",
+  "resend-confirmation" : "Resend Confirmation",
+  "when-someone-shares" : "When someone shares items with you using Send to Friend, they will appear here."
 }
