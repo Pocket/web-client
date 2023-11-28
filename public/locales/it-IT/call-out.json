@@ -1,15 +1,15 @@
 {
-  "add-pocket-button" : "Aggiungi il pulsante <1></1> al tuo browser per raccogliere articoli, video e link dal web. Usa la nostra app per goderti queste risorse su qualsiasi dispositivo in un ambiente privo di distrazioni.",
-  "build-a-home" : "Assicurati uno spazio per tutto quello che ti interessa di più",
-  "email-address" : "Il tuo indirizzo email",
-  "error" : "Qualcosa è andato storto.",
-  "fuel-your-mind" : "Preparati a nutrire la tua mente.",
-  "interesting-stories" : "Storie interessanti per persone interessanti",
-  "pocket-hits-description" : "Questo sito è protetto da reCAPTCHA.",
-  "pocket-hits-success" : "È tutto pronto. Riceverai la tua prima e-mail da noi domani. Buon divertimento!",
-  "pocket-is-where" : "Pocket ti consente di consultare storie affascinanti provenienti da tutto il web con un unico strumento.",
+  "add-pocket-button" : "Add the <1></1> button to your browser to collect articles, videos, and links from across the web. Use our app to enjoy them on any device in a distraction-free environment.",
+  "build-a-home" : "Build a home for everything that interests you",
+  "email-address" : "Your email address",
+  "error" : "Oops! Something went wrong.",
+  "fuel-your-mind" : "Get ready to fuel your mind.",
+  "interesting-stories" : "Interesting stories for interesting people",
+  "pocket-hits-description" : "This site is protected by reCAPTCHA.",
+  "pocket-hits-success" : "All set. You’ll get your first email from us tomorrow. Enjoy!",
+  "pocket-is-where" : "Pocket is where you’ll find fascinating stories from all across the web, right here in one place.",
   "privacy" : "Privacy",
-  "sign-up" : "Registrati",
-  "subscribe" : "Iscriviti",
-  "terms" : "Termini"
+  "sign-up" : "Sign Up",
+  "subscribe" : "Subscribe",
+  "terms" : "Terms"
 }
