@@ -1,12 +1,12 @@
 {
-  "comment" : "코멘트",
-  "copy-link" : "링크 복사",
-  "recommend" : "권장",
-  "share-item" : "항목 공유",
-  "share-to-buffer" : "버퍼에 공유",
-  "share-to-facebook" : "Facebook에 공유",
-  "share-to-linkedin" : "LinkedIn에 공유",
-  "share-to-reddit" : "Reddit에 공유",
-  "share-to-twitter" : "Twitter에 공유",
-  "social-media" : "소셜 미디어"
+  "comment" : "Comment",
+  "copy-link" : "Copy Link",
+  "recommend" : "Recommend",
+  "share-item" : "Share Item",
+  "share-to-buffer" : "Share to Buffer",
+  "share-to-facebook" : "Share to Facebook",
+  "share-to-linkedin" : "Share to LinkedIn",
+  "share-to-reddit" : "Share to Reddit",
+  "share-to-twitter" : "Share to Twitter",
+  "social-media" : "Social Media"
 }
