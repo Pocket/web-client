@@ -1,10 +1,10 @@
 {
-  "item-count_one" : "{{count}}개 항목",
-  "item-count_other" : "{{count}}개 항목",
-  "list" : "목록",
-  "story-count_one" : "{{count}}개의 스토리",
-  "story-count_other" : "{{count}}개의 스토리",
-  "tag-count_one" : "{{count}}개 태그",
-  "tag-count_other" : "{{count}}개 태그",
-  "time-to-read" : "{{timeToRead}}분"
+  "item-count_one" : "{{count}} item",
+  "item-count_other" : "{{count}} items",
+  "list" : "List",
+  "story-count_one" : "{{count}} story",
+  "story-count_other" : "{{count}} stories",
+  "tag-count_one" : "{{count}} tag",
+  "tag-count_other" : "{{count}} tags",
+  "time-to-read" : "{{timeToRead}} min"
 }
