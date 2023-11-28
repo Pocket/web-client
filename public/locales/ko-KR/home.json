@@ -1,12 +1,12 @@
 {
-  "good-afternoon" : "안녕하세요!",
-  "good-afternoon-name" : "안녕하세요, {{firstName}}님!",
-  "good-evening" : "안녕하세요!",
-  "good-evening-name" : "안녕하세요, {{firstName}}님!",
-  "good-morning" : "안녕하세요!",
-  "good-morning-name" : "안녕하세요, {{firstName}}님!",
-  "recent-saves-link-text" : "저장으로 이동",
-  "recent-saves-title" : "최근 저장한 내용",
-  "tooltip-demote" : "관심 없음",
-  "tooltip-promote" : "마음에 듦"
+  "good-afternoon" : "Good afternoon!",
+  "good-afternoon-name" : "Good afternoon, {{firstName}}!",
+  "good-evening" : "Good evening!",
+  "good-evening-name" : "Good evening, {{firstName}}!",
+  "good-morning" : "Good morning!",
+  "good-morning-name" : "Good morning, {{firstName}}!",
+  "recent-saves-link-text" : "Go to Saves",
+  "recent-saves-title" : "Recent Saves",
+  "tooltip-demote" : "Not for me",
+  "tooltip-promote" : "I like this"
 }
