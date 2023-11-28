@@ -1,7 +1,7 @@
 {
-  "call-out-body" : "Nie wybieraj swojej kolejnej lektury na chybił trafił. Listy Pocket to najlepsze historie na wyciągnięcie ręki.",
-  "call-out-title" : "Znajdź to, co warto przeczytać",
-  "page-description" : "Wyselekcjonowane przewodniki po najlepszych stronach internetowych",
-  "page-title" : "Kolekcje do Pocket",
-  "pagination-title" : "Kolekcje do Pocket – Strona {{currentPage}}"
+  "call-out-body" : "Take the guesswork out of your next great read. Pocket lists put the best of the internet at your fingertips.",
+  "call-out-title" : "Find what's worth reading",
+  "page-description" : "Curated guides to the best of the web",
+  "page-title" : "Collections for Your Pocket",
+  "pagination-title" : "Collections for Your Pocket — Page {{currentPage}}"
 }
