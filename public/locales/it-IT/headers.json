@@ -1,9 +1,9 @@
 {
-  "archive" : "Archivia",
-  "articles" : "Articoli",
-  "favorites" : "Preferiti",
+  "archive" : "Archive",
+  "articles" : "Articles",
+  "favorites" : "Favorites",
   "highlights" : "Highlights",
-  "saves" : "Salvati",
-  "tags" : "Tag",
-  "videos" : "Video"
+  "saves" : "Saves",
+  "tags" : "Tags",
+  "videos" : "Videos"
 }
