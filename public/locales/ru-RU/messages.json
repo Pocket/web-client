@@ -1,11 +1,11 @@
 {
-  "a-friend-shared" : "Ваш друг поделился материалом в Pocket. Чтобы просмотреть этот материал, подтвердите свой email:",
-  "activity" : "Активность",
-  "confirmation" : "Подтверждение отправлено! Проверьте свою почту.",
-  "dismiss" : "Отменить",
-  "inbox-is-empty" : "Папка \"Входящие\" пуста",
-  "messages" : "Сообщения",
-  "oops" : "К сожалению, что-то пошло не так. Попробуйте позже.",
-  "resend-confirmation" : "Отправить подтверждение повторно",
-  "when-someone-shares" : "Когда кто-то делится с вами материалами через функцию \"Поделиться с другом\", они появляются здесь."
+  "a-friend-shared" : "A friend has shared something with you in Pocket. To view it, please confirm your email:",
+  "activity" : "Activity",
+  "confirmation" : "Confirmation sent! Please check your email.",
+  "dismiss" : "Dismiss",
+  "inbox-is-empty" : "Your Inbox is Empty",
+  "messages" : "Messages",
+  "oops" : "Oops! Something went wrong. Please try again later.",
+  "resend-confirmation" : "Resend Confirmation",
+  "when-someone-shares" : "When someone shares items with you using Send to Friend, they will appear here."
 }
