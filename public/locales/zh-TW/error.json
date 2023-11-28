@@ -1,11 +1,11 @@
 {
   "404-detail" : "",
-  "404-message" : "您嘗試造訪的網頁似乎已不知去向。如果您認為其中有誤，請聯絡我們的支援團隊。",
-  "404-title" : "抱歉！出了點問題……",
-  "contact" : "聯絡支援團隊",
-  "message" : "發生錯誤。嘗試重新整理網頁，看看是否能解決問題。如果仍有問題，請聯絡我們的支援團隊。",
-  "moderated-list-message" : "此清單可能違反了 Pocket 的共享內容政策，因此無法使用。",
-  "notification-message" : "所點按的連結會將導向手機的通知設定，只能在行動裝置上存取這些設定。掃描 QR 代碼即可在手機上安裝 Pocket。",
-  "notification-title" : "好像出了點問題",
-  "title" : "抱歉！出了點問題……"
+  "404-message" : "Looks like the page you are trying to reach has gone missing. Please contact our support team if you feel this is a mistake.",
+  "404-title" : "Oops! Something’s gone awry...",
+  "contact" : "Contact Support",
+  "message" : "There’s been an error. Try refreshing your page and see if that fixes things. If you’re still seeing the issue, please contact our support team.",
+  "moderated-list-message" : "This List is not available because it may have violated Pocket’s Shared Content Policies.",
+  "notification-message" : "The link you clicked directs you to your phone’s notification settings, which can only be accessed on a mobile device. Scan the QR code to install Pocket on your phone.",
+  "notification-title" : "Hmm, looks like something went wrong",
+  "title" : "Oops! Something’s gone awry..."
 }
