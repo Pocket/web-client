@@ -1,7 +1,7 @@
 {
-  "call-out-body" : "次に読むコンテンツを気分や憶測だけで選ぶ必要がなくなります。Pocket リストを使用すれば、インターネット上の最高に面白いコンテンツをすぐに読むことができます。",
-  "call-out-title" : "面白いコンテンツを見つける",
-  "page-description" : "ウェブ上の最高傑作を探すための厳選ガイド",
-  "page-title" : "あなたの Pocket にピッタリのコレクション",
-  "pagination-title" : "ポケットのコレクション — {{currentPage}} ページ"
+  "call-out-body" : "Take the guesswork out of your next great read. Pocket lists put the best of the internet at your fingertips.",
+  "call-out-title" : "Find what's worth reading",
+  "page-description" : "Curated guides to the best of the web",
+  "page-title" : "Collections for Your Pocket",
+  "pagination-title" : "Collections for Your Pocket — Page {{currentPage}}"
 }
