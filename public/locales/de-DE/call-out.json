@@ -1,15 +1,15 @@
 {
-  "add-pocket-button" : "Füge die <1></1>-Schaltfläche zu deinem Browser hinzu, um Artikel, Videos und Links aus dem Internet zu sammeln. Nutze unsere App, um das Gesammelte auf beliebigen Geräten in einer Umgebung ohne Ablenkungen zu genießen.",
-  "build-a-home" : "Erstelle einen eigenen Bereich für alles, was dich interessiert.",
-  "email-address" : "Deine E-Mail-Adresse",
-  "error" : "Hoppla! Da ist etwas schiefgegangen.",
-  "fuel-your-mind" : "Mach dich bereit für neue Denkanstöße.",
-  "interesting-stories" : "Interessante Geschichten für interessierte Menschen",
-  "pocket-hits-description" : "Diese Website wird durch reCAPTCHA geschützt.",
-  "pocket-hits-success" : "Alles erledigt. Du bekommst morgen deine erste E-Mail von uns. Viel Spaß!",
-  "pocket-is-where" : "Bei Pocket kannst du faszinierende Geschichten aus dem ganzen Web an einem Ort entdecken.",
-  "privacy" : "Datenschutz",
-  "sign-up" : "Registrieren",
-  "subscribe" : "Abonnieren",
-  "terms" : "Bedingungen"
+  "add-pocket-button" : "Add the <1></1> button to your browser to collect articles, videos, and links from across the web. Use our app to enjoy them on any device in a distraction-free environment.",
+  "build-a-home" : "Build a home for everything that interests you",
+  "email-address" : "Your email address",
+  "error" : "Oops! Something went wrong.",
+  "fuel-your-mind" : "Get ready to fuel your mind.",
+  "interesting-stories" : "Interesting stories for interesting people",
+  "pocket-hits-description" : "This site is protected by reCAPTCHA.",
+  "pocket-hits-success" : "All set. You’ll get your first email from us tomorrow. Enjoy!",
+  "pocket-is-where" : "Pocket is where you’ll find fascinating stories from all across the web, right here in one place.",
+  "privacy" : "Privacy",
+  "sign-up" : "Sign Up",
+  "subscribe" : "Subscribe",
+  "terms" : "Terms"
 }
