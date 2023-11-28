@@ -1,12 +1,12 @@
 {
-  "all-tags" : "Alle tags",
-  "loading-suggested" : "Gesuggereerde tags worden geladen...",
-  "not-tagged" : "Niet getagd",
+  "all-tags" : "All Tags",
+  "loading-suggested" : "... loading suggested tags",
+  "not-tagged" : "not tagged",
   "pocket-premium" : "Pocket Premium",
-  "recently-tagged-items" : "Onlangs getagde items",
-  "search-for-your-tags" : "Zoek naar je tags",
-  "start-tagging" : "Begin tags aan je items toe te voegen om ze hier voorgesteld te zien.",
-  "tag-stories-faster" : "Tag verhalen sneller dan ooit tevoren—krijg tagsuggesties met",
-  "tags-character-limit" : "Tags zijn beperkt tot 25 tekens",
-  "unable-to-find-suggested" : "We konden geen tags vinden om voor dit item te suggereren."
+  "recently-tagged-items" : "Recently Tagged Items",
+  "search-for-your-tags" : "Search for your tags",
+  "start-tagging" : "Start adding tags to your items in order to see them suggested here.",
+  "tag-stories-faster" : "Tag stories faster than ever—get tag suggestions with",
+  "tags-character-limit" : "Tags are limited to 25 characters",
+  "unable-to-find-suggested" : "We were unable to find any tags to suggest for this item."
 }
