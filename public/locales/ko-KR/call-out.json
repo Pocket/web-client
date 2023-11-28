@@ -1,15 +1,15 @@
 {
-  "add-pocket-button" : "웹에서 아티클, 비디오 및 링크를 수집하려면 브라우저에 <1> </1> 버튼을 추가하십시오. Pocket 앱을 사용하면 방해를 받지 않는 환경에서 어떤 기기에서나 읽을 수 있습니다.",
-  "build-a-home" : "관심있는 모든 것을 한 곳에 모아두세요.",
-  "email-address" : "이메일 주소",
-  "error" : "저런! 문제가 생겼습니다.",
-  "fuel-your-mind" : "마음의 양식을 채울 시간을 준비하세요.",
-  "interesting-stories" : "흥미로운 사람들을 위한 흥미로운 스토리",
-  "pocket-hits-description" : "이 사이트는 reCAPTCHA에 의해 보호됩니다.",
-  "pocket-hits-success" : "모두 설정되었습니다. 내일 첫 이메일을 받게 될 것입니다. 이제 사용해 보십시오!",
-  "pocket-is-where" : "Pocket은 웹에서 흥미로운 스토리를 찾아 한 곳에 보관해 둘 수 있는 곳입니다.",
-  "privacy" : "개인정보 보호정책",
-  "sign-up" : "등록",
-  "subscribe" : "구독",
-  "terms" : "약관"
+  "add-pocket-button" : "Add the <1></1> button to your browser to collect articles, videos, and links from across the web. Use our app to enjoy them on any device in a distraction-free environment.",
+  "build-a-home" : "Build a home for everything that interests you",
+  "email-address" : "Your email address",
+  "error" : "Oops! Something went wrong.",
+  "fuel-your-mind" : "Get ready to fuel your mind.",
+  "interesting-stories" : "Interesting stories for interesting people",
+  "pocket-hits-description" : "This site is protected by reCAPTCHA.",
+  "pocket-hits-success" : "All set. You’ll get your first email from us tomorrow. Enjoy!",
+  "pocket-is-where" : "Pocket is where you’ll find fascinating stories from all across the web, right here in one place.",
+  "privacy" : "Privacy",
+  "sign-up" : "Sign Up",
+  "subscribe" : "Subscribe",
+  "terms" : "Terms"
 }
