@@ -1,15 +1,15 @@
 {
-  "add-pocket-button" : "在瀏覽器上新增此<1></1>按鈕，以從網路上收集文章、影片和連結。使用我們的應用程式，在沒有干擾的環境中在所有裝置上盡情閱覽這些內容。",
-  "build-a-home" : "構建一隅來安放令您感興趣的所有內容",
-  "email-address" : "您的電子郵件地址",
-  "error" : "糟糕！出了點問題。",
-  "fuel-your-mind" : "開始瀏覽啟迪心靈的內容吧！",
-  "interesting-stories" : "供有趣的讀者閱覽的精彩篇章",
-  "pocket-hits-description" : "本網站受 reCAPTCHA 保護。",
-  "pocket-hits-success" : "準備就緒。明天您會收到我們的第一封電子郵件。盡情享受閱讀的樂趣吧！",
-  "pocket-is-where" : "Pocket 讓您可以集中查找網路上的精彩篇章。",
-  "privacy" : "隱私",
-  "sign-up" : "註冊",
-  "subscribe" : "訂閱",
-  "terms" : "條款"
+  "add-pocket-button" : "Add the <1></1> button to your browser to collect articles, videos, and links from across the web. Use our app to enjoy them on any device in a distraction-free environment.",
+  "build-a-home" : "Build a home for everything that interests you",
+  "email-address" : "Your email address",
+  "error" : "Oops! Something went wrong.",
+  "fuel-your-mind" : "Get ready to fuel your mind.",
+  "interesting-stories" : "Interesting stories for interesting people",
+  "pocket-hits-description" : "This site is protected by reCAPTCHA.",
+  "pocket-hits-success" : "All set. You’ll get your first email from us tomorrow. Enjoy!",
+  "pocket-is-where" : "Pocket is where you’ll find fascinating stories from all across the web, right here in one place.",
+  "privacy" : "Privacy",
+  "sign-up" : "Sign Up",
+  "subscribe" : "Subscribe",
+  "terms" : "Terms"
 }
