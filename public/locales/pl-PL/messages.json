@@ -1,11 +1,11 @@
 {
-  "a-friend-shared" : "Znajomy udostępnił Ci coś w aplikacji Pocket. Aby to wyświetlić, potwierdź swój adres e-mail:",
-  "activity" : "Aktywność",
-  "confirmation" : "Wysłano potwierdzenie! Sprawdź pocztę e-mail.",
-  "dismiss" : "Ignoruj",
-  "inbox-is-empty" : "Skrzynka odbiorcza jest pusta",
-  "messages" : "Wiadomości",
-  "oops" : "Wystąpił problem. Spróbuj ponownie później.",
-  "resend-confirmation" : "Ponownie wyślij potwierdzenie",
-  "when-someone-shares" : "Elementy udostępnione za pomocą funkcji Prześlij znajomym pojawiają się tutaj."
+  "a-friend-shared" : "A friend has shared something with you in Pocket. To view it, please confirm your email:",
+  "activity" : "Activity",
+  "confirmation" : "Confirmation sent! Please check your email.",
+  "dismiss" : "Dismiss",
+  "inbox-is-empty" : "Your Inbox is Empty",
+  "messages" : "Messages",
+  "oops" : "Oops! Something went wrong. Please try again later.",
+  "resend-confirmation" : "Resend Confirmation",
+  "when-someone-shares" : "When someone shares items with you using Send to Friend, they will appear here."
 }
