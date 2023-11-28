@@ -1,12 +1,12 @@
 {
-  "good-afternoon" : "Boa tarde!",
-  "good-afternoon-name" : "Boa tarde, {{firstName}}!",
-  "good-evening" : "Boa noite!",
-  "good-evening-name" : "Boa noite, {{firstName}}!",
-  "good-morning" : "Bom dia!",
-  "good-morning-name" : "Bom dia, {{firstName}}!",
-  "recent-saves-link-text" : "Ir para Guardado",
-  "recent-saves-title" : "Conteúdos Guardados Recentes",
-  "tooltip-demote" : "Não para mim",
-  "tooltip-promote" : "Gosto disto"
+  "good-afternoon" : "Good afternoon!",
+  "good-afternoon-name" : "Good afternoon, {{firstName}}!",
+  "good-evening" : "Good evening!",
+  "good-evening-name" : "Good evening, {{firstName}}!",
+  "good-morning" : "Good morning!",
+  "good-morning-name" : "Good morning, {{firstName}}!",
+  "recent-saves-link-text" : "Go to Saves",
+  "recent-saves-title" : "Recent Saves",
+  "tooltip-demote" : "Not for me",
+  "tooltip-promote" : "I like this"
 }
