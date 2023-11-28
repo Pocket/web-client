@@ -1,9 +1,9 @@
 {
   "item-count_one" : "{{count}} item",
-  "item-count_other" : "{{count}} itens",
-  "list" : "Lista",
-  "story-count_one" : "{{count}} matéria",
-  "story-count_other" : "{{count}} matérias",
+  "item-count_other" : "{{count}} items",
+  "list" : "List",
+  "story-count_one" : "{{count}} story",
+  "story-count_other" : "{{count}} stories",
   "tag-count_one" : "{{count}} tag",
   "tag-count_other" : "{{count}} tags",
   "time-to-read" : "{{timeToRead}} min"
