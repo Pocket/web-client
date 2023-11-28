@@ -1,7 +1,7 @@
 {
-  "close" : "Chiudi",
-  "close-label" : "Chiudi",
-  "delete" : "Elimina",
-  "please-enter-valid-email" : "Inserisci un indirizzo email valido",
-  "share" : "Condividi"
+  "close" : "Close",
+  "close-label" : "Close",
+  "delete" : "Delete",
+  "please-enter-valid-email" : "Please enter a valid email address",
+  "share" : "Share"
 }
