@@ -1,7 +1,7 @@
 {
-  "call-out-body" : "让您的下一篇精彩文章不再需要猜测。Pocket 列表让互联网的精华触手可得。",
-  "call-out-title" : "寻找值得阅读的内容",
-  "page-description" : "精心策划的网络精华指南",
-  "page-title" : "您的 Pocket 收藏",
-  "pagination-title" : "您的 Pocket 收藏 — 第 {{currentPage}} 页"
+  "call-out-body" : "Take the guesswork out of your next great read. Pocket lists put the best of the internet at your fingertips.",
+  "call-out-title" : "Find what's worth reading",
+  "page-description" : "Curated guides to the best of the web",
+  "page-title" : "Collections for Your Pocket",
+  "pagination-title" : "Collections for Your Pocket — Page {{currentPage}}"
 }
