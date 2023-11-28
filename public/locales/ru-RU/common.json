@@ -1,7 +1,7 @@
 {
-  "close" : "Закрыть",
-  "close-label" : "Закрыть",
-  "delete" : "Удалить",
-  "please-enter-valid-email" : "Введите действительный адрес email",
-  "share" : "Поделиться"
+  "close" : "Close",
+  "close-label" : "Close",
+  "delete" : "Delete",
+  "please-enter-valid-email" : "Please enter a valid email address",
+  "share" : "Share"
 }
