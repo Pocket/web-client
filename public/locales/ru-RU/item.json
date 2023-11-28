@@ -1,10 +1,10 @@
 {
-  "item-count_one" : "Элементов: {{count}}",
-  "item-count_other" : "Элементов: {{count}}",
-  "list" : "Список",
-  "story-count_one" : "{{count}} история",
-  "story-count_other" : "{{count}} историй",
-  "tag-count_one" : "{{count}} тег",
-  "tag-count_other" : "{{count}} тега(-ов)",
-  "time-to-read" : "{{timeToRead}} мин."
+  "item-count_one" : "{{count}} item",
+  "item-count_other" : "{{count}} items",
+  "list" : "List",
+  "story-count_one" : "{{count}} story",
+  "story-count_other" : "{{count}} stories",
+  "tag-count_one" : "{{count}} tag",
+  "tag-count_other" : "{{count}} tags",
+  "time-to-read" : "{{timeToRead}} min"
 }
