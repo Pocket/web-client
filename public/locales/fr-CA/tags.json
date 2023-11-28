@@ -1,12 +1,12 @@
 {
-  "all-tags" : "Toutes les balises",
-  "loading-suggested" : "Chargement des balises suggérées…",
-  "not-tagged" : "Non balisé",
-  "pocket-premium" : "Pocket Premium ",
-  "recently-tagged-items" : "Éléments récemment balisés",
-  "search-for-your-tags" : "Recherchez dans vos balises",
-  "start-tagging" : "Commencez à ajouter des balises à vos éléments pour qu'ils soient suggérés ici.",
-  "tag-stories-faster" : "Liez des histoires à des balises plus rapidement que jamais. Profitez des suggestions de balises avec",
-  "tags-character-limit" : "Les balises sont limitées à 25 caractères",
-  "unable-to-find-suggested" : "Nous avons été incapables de trouver de balises à suggérer pour cet élément."
+  "all-tags" : "All Tags",
+  "loading-suggested" : "... loading suggested tags",
+  "not-tagged" : "not tagged",
+  "pocket-premium" : "Pocket Premium",
+  "recently-tagged-items" : "Recently Tagged Items",
+  "search-for-your-tags" : "Search for your tags",
+  "start-tagging" : "Start adding tags to your items in order to see them suggested here.",
+  "tag-stories-faster" : "Tag stories faster than ever—get tag suggestions with",
+  "tags-character-limit" : "Tags are limited to 25 characters",
+  "unable-to-find-suggested" : "We were unable to find any tags to suggest for this item."
 }
