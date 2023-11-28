@@ -1,11 +1,11 @@
 {
   "404-detail" : "",
-  "404-message" : "이동하려는 페이지가 누락된 것 같습니다. 실수라고 생각되면 지원팀에 문의하십시오.",
-  "404-title" : "저런! 문제가 생겼습니다...",
-  "contact" : "지원팀에 연락하기",
-  "message" : "오류가 발생했습니다. 페이지를 새로 고친 후 문제가 해결되었는지 확인해 주십시오. 문제가 계속 발생하면 Pocket 지원팀에 연락하십시오.",
-  "moderated-list-message" : "이 목록은 Pocket의 공유 콘텐츠 정책을 위반했을 수 있으므로 사용할 수 없습니다.",
-  "notification-message" : "클릭한 링크는 모바일 장치에서만 액세스할 수 있는 휴대폰의 알림 설정으로 연결됩니다. QR 코드를 스캔하여 휴대폰에 Pocket을 설치합니다.",
-  "notification-title" : "뭔가 잘못된 것 같네요",
-  "title" : "저런! 문제가 생겼습니다..."
+  "404-message" : "Looks like the page you are trying to reach has gone missing. Please contact our support team if you feel this is a mistake.",
+  "404-title" : "Oops! Something’s gone awry...",
+  "contact" : "Contact Support",
+  "message" : "There’s been an error. Try refreshing your page and see if that fixes things. If you’re still seeing the issue, please contact our support team.",
+  "moderated-list-message" : "This List is not available because it may have violated Pocket’s Shared Content Policies.",
+  "notification-message" : "The link you clicked directs you to your phone’s notification settings, which can only be accessed on a mobile device. Scan the QR code to install Pocket on your phone.",
+  "notification-title" : "Hmm, looks like something went wrong",
+  "title" : "Oops! Something’s gone awry..."
 }
