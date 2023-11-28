@@ -1,12 +1,12 @@
 {
-  "all-tags" : "Tous les labels",
-  "loading-suggested" : "... chargement des labels suggérés",
-  "not-tagged" : "Sans label",
+  "all-tags" : "All Tags",
+  "loading-suggested" : "... loading suggested tags",
+  "not-tagged" : "not tagged",
   "pocket-premium" : "Pocket Premium",
-  "recently-tagged-items" : "Éléments auxquels un label a été récemment ajouté",
-  "search-for-your-tags" : "Rechercher vos labels",
-  "start-tagging" : "Commencez à ajouter des labels à vos éléments pour voir les suggestions ici.",
-  "tag-stories-faster" : "Ajoutez des labels aux histoires plus rapidement que jamais — obtenez des suggestions de label avec",
-  "tags-character-limit" : "Les labels sont limités à 25 caractères",
-  "unable-to-find-suggested" : "Nous n'avons trouvé aucun label à suggérer pour cet élément."
+  "recently-tagged-items" : "Recently Tagged Items",
+  "search-for-your-tags" : "Search for your tags",
+  "start-tagging" : "Start adding tags to your items in order to see them suggested here.",
+  "tag-stories-faster" : "Tag stories faster than ever—get tag suggestions with",
+  "tags-character-limit" : "Tags are limited to 25 characters",
+  "unable-to-find-suggested" : "We were unable to find any tags to suggest for this item."
 }
