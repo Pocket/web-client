@@ -1,12 +1,12 @@
 {
-  "good-afternoon" : "こんにちは！",
-  "good-afternoon-name" : "{{firstName}} さん、こんにちは！",
-  "good-evening" : "こんばんは！",
-  "good-evening-name" : "{{firstName}} さん、こんばんは！",
-  "good-morning" : "おはようございます！",
-  "good-morning-name" : "{{firstName}} さん、おはようございます！",
-  "recent-saves-link-text" : "保存アイテムに移動",
-  "recent-saves-title" : "最近保存したアイテム",
-  "tooltip-demote" : "自分には合わない",
-  "tooltip-promote" : "気に入っている"
+  "good-afternoon" : "Good afternoon!",
+  "good-afternoon-name" : "Good afternoon, {{firstName}}!",
+  "good-evening" : "Good evening!",
+  "good-evening-name" : "Good evening, {{firstName}}!",
+  "good-morning" : "Good morning!",
+  "good-morning-name" : "Good morning, {{firstName}}!",
+  "recent-saves-link-text" : "Go to Saves",
+  "recent-saves-title" : "Recent Saves",
+  "tooltip-demote" : "Not for me",
+  "tooltip-promote" : "I like this"
 }
