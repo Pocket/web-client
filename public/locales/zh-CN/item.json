@@ -1,10 +1,10 @@
 {
-  "item-count_one" : "{{count}} 个项目",
-  "item-count_other" : "{{count}} 项",
-  "list" : "列表",
-  "story-count_one" : "{{count}} 个故事",
-  "story-count_other" : "{{count}} 个故事",
-  "tag-count_one" : "{{count}} 个标记",
-  "tag-count_other" : "{{count}} 个标记",
-  "time-to-read" : "{{timeToRead}} 分钟"
+  "item-count_one" : "{{count}} item",
+  "item-count_other" : "{{count}} items",
+  "list" : "List",
+  "story-count_one" : "{{count}} story",
+  "story-count_other" : "{{count}} stories",
+  "tag-count_one" : "{{count}} tag",
+  "tag-count_other" : "{{count}} tags",
+  "time-to-read" : "{{timeToRead}} min"
 }
