@@ -1,9 +1,9 @@
 {
-  "archive" : "보관소",
-  "articles" : "아티클",
-  "favorites" : "즐겨찾기",
-  "highlights" : "하이라이트",
-  "saves" : "저장",
-  "tags" : "태그",
-  "videos" : "동영상"
+  "archive" : "Archive",
+  "articles" : "Articles",
+  "favorites" : "Favorites",
+  "highlights" : "Highlights",
+  "saves" : "Saves",
+  "tags" : "Tags",
+  "videos" : "Videos"
 }
