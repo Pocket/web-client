@@ -1,12 +1,12 @@
 {
-  "good-afternoon" : "Goedemiddag!",
-  "good-afternoon-name" : "Goedemiddag {{firstName}}!",
-  "good-evening" : "Goedenavond!",
-  "good-evening-name" : "Goedenavond {{firstName}}!",
-  "good-morning" : "Goedemorgen!",
-  "good-morning-name" : "Goedemorgen {{firstName}}!",
-  "recent-saves-link-text" : "Ga naar Opgeslagen",
-  "recent-saves-title" : "Recent opgeslagen",
-  "tooltip-demote" : "Niet voor mij",
-  "tooltip-promote" : "Ik vind dit leuk"
+  "good-afternoon" : "Good afternoon!",
+  "good-afternoon-name" : "Good afternoon, {{firstName}}!",
+  "good-evening" : "Good evening!",
+  "good-evening-name" : "Good evening, {{firstName}}!",
+  "good-morning" : "Good morning!",
+  "good-morning-name" : "Good morning, {{firstName}}!",
+  "recent-saves-link-text" : "Go to Saves",
+  "recent-saves-title" : "Recent Saves",
+  "tooltip-demote" : "Not for me",
+  "tooltip-promote" : "I like this"
 }
