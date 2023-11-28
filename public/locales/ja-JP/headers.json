@@ -1,9 +1,9 @@
 {
-  "archive" : "アーカイブ",
-  "articles" : "記事",
-  "favorites" : "お気に入り",
-  "highlights" : "ハイライト",
-  "saves" : "保存アイテム",
-  "tags" : "タグ",
-  "videos" : "ビデオ"
+  "archive" : "Archive",
+  "articles" : "Articles",
+  "favorites" : "Favorites",
+  "highlights" : "Highlights",
+  "saves" : "Saves",
+  "tags" : "Tags",
+  "videos" : "Videos"
 }
