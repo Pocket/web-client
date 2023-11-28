@@ -1,15 +1,15 @@
 {
-  "add-pocket-button" : "将 <1></1> 按钮添加到浏览器可收集网络上的文章、视频和链接。使用我们的应用程序在无干扰的环境中在任何设备上享受这些内容。",
-  "build-a-home" : "为您感兴趣的所有内容建立虚拟家园",
-  "email-address" : "您的电子邮件地址",
-  "error" : "糟糕！出错了。",
-  "fuel-your-mind" : "准备好激发您的思维。",
-  "interesting-stories" : "有趣的故事，适合有趣的人",
-  "pocket-hits-description" : "本网站受 reCAPTCHA 保护。",
-  "pocket-hits-success" : "一切准备就绪。明天您将收到我们的第一封电子邮件。尽情享受吧！",
-  "pocket-is-where" : "在 Pocket，您可以在一个地方找到网络上所有精彩的故事。",
-  "privacy" : "隐私保护",
-  "sign-up" : "注册",
-  "subscribe" : "订阅",
-  "terms" : "条款"
+  "add-pocket-button" : "Add the <1></1> button to your browser to collect articles, videos, and links from across the web. Use our app to enjoy them on any device in a distraction-free environment.",
+  "build-a-home" : "Build a home for everything that interests you",
+  "email-address" : "Your email address",
+  "error" : "Oops! Something went wrong.",
+  "fuel-your-mind" : "Get ready to fuel your mind.",
+  "interesting-stories" : "Interesting stories for interesting people",
+  "pocket-hits-description" : "This site is protected by reCAPTCHA.",
+  "pocket-hits-success" : "All set. You’ll get your first email from us tomorrow. Enjoy!",
+  "pocket-is-where" : "Pocket is where you’ll find fascinating stories from all across the web, right here in one place.",
+  "privacy" : "Privacy",
+  "sign-up" : "Sign Up",
+  "subscribe" : "Subscribe",
+  "terms" : "Terms"
 }
