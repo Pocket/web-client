@@ -1,11 +1,11 @@
 {
   "404-detail" : "",
-  "404-message" : "Il semble que la page que vous essayez d'ouvrir ait disparu. Veuillez contacter notre équipe de soutien si vous pensez qu'il s'agit d'une erreur.",
-  "404-title" : "Oups! Quelque chose a mal tourné...",
-  "contact" : "Communiquer avec l'équipe de soutien",
-  "message" : "Une erreur s'est produite. Essayez d'actualiser votre page pour voir si cela résout le problème. Si le problème persiste, veuillez communiquer avec notre équipe de soutien.",
-  "moderated-list-message" : "Cette liste n'est pas disponible, car elle enfreint peut-être les politiques relatives au contenu partagé de Pocket.",
-  "notification-message" : "Le lien sur lequel vous avez cliqué vous redirige vers les paramètres de notification de votre téléphone, accessibles uniquement depuis un appareil mobile. Scannez le code-barres 2D pour installer Pocket sur votre téléphone.",
-  "notification-title" : "Euh, on dirait qu'une erreur s'est produite.",
-  "title" : "Oups! Quelque chose a mal tourné..."
+  "404-message" : "Looks like the page you are trying to reach has gone missing. Please contact our support team if you feel this is a mistake.",
+  "404-title" : "Oops! Something’s gone awry...",
+  "contact" : "Contact Support",
+  "message" : "There’s been an error. Try refreshing your page and see if that fixes things. If you’re still seeing the issue, please contact our support team.",
+  "moderated-list-message" : "This List is not available because it may have violated Pocket’s Shared Content Policies.",
+  "notification-message" : "The link you clicked directs you to your phone’s notification settings, which can only be accessed on a mobile device. Scan the QR code to install Pocket on your phone.",
+  "notification-title" : "Hmm, looks like something went wrong",
+  "title" : "Oops! Something’s gone awry..."
 }
