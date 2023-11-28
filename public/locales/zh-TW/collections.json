@@ -1,7 +1,7 @@
 {
-  "call-out-body" : "剔除下一篇精彩文章中的臆測成份。Pocket 清單讓您輕鬆獲取網際網路的最佳內容。",
-  "call-out-title" : "尋找值得閱讀的內容",
-  "page-description" : "網路最佳內容精選指南",
-  "page-title" : "您的 Pocket 收藏內容",
-  "pagination-title" : "您的 Pocket 收藏內容 — 第 {{currentPage}} 頁"
+  "call-out-body" : "Take the guesswork out of your next great read. Pocket lists put the best of the internet at your fingertips.",
+  "call-out-title" : "Find what's worth reading",
+  "page-description" : "Curated guides to the best of the web",
+  "page-title" : "Collections for Your Pocket",
+  "pagination-title" : "Collections for Your Pocket — Page {{currentPage}}"
 }
