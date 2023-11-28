@@ -1,12 +1,12 @@
 {
-  "comment" : "Комментарий",
-  "copy-link" : "Скопировать ссылку",
-  "recommend" : "Рекомендовать",
-  "share-item" : "Поделиться материалом",
-  "share-to-buffer" : "Поделиться в Buffer",
-  "share-to-facebook" : "Поделиться в Facebook",
-  "share-to-linkedin" : "Поделиться в LinkedIn",
-  "share-to-reddit" : "Поделиться в Reddit",
-  "share-to-twitter" : "Поделиться в Twitter",
-  "social-media" : "Социальные сети"
+  "comment" : "Comment",
+  "copy-link" : "Copy Link",
+  "recommend" : "Recommend",
+  "share-item" : "Share Item",
+  "share-to-buffer" : "Share to Buffer",
+  "share-to-facebook" : "Share to Facebook",
+  "share-to-linkedin" : "Share to LinkedIn",
+  "share-to-reddit" : "Share to Reddit",
+  "share-to-twitter" : "Share to Twitter",
+  "social-media" : "Social Media"
 }
