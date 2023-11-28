@@ -1,9 +1,9 @@
 {
-  "archive" : "Arquivar",
-  "articles" : "Artigos",
-  "favorites" : "Favoritos",
-  "highlights" : "Destaques",
-  "saves" : "Salvos",
+  "archive" : "Archive",
+  "articles" : "Articles",
+  "favorites" : "Favorites",
+  "highlights" : "Highlights",
+  "saves" : "Saves",
   "tags" : "Tags",
-  "videos" : "Vídeos"
+  "videos" : "Videos"
 }
