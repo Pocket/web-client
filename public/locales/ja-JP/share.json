@@ -1,12 +1,12 @@
 {
-  "comment" : "コメント",
-  "copy-link" : "リンクをコピー",
-  "recommend" : "おすすめ",
-  "share-item" : "アイテムを共有",
-  "share-to-buffer" : "Buffer に共有",
-  "share-to-facebook" : "Facebook に共有",
-  "share-to-linkedin" : "LinkedIn に共有",
-  "share-to-reddit" : "Reddit に共有",
-  "share-to-twitter" : "Twitter に共有",
-  "social-media" : "ソーシャルメディア"
+  "comment" : "Comment",
+  "copy-link" : "Copy Link",
+  "recommend" : "Recommend",
+  "share-item" : "Share Item",
+  "share-to-buffer" : "Share to Buffer",
+  "share-to-facebook" : "Share to Facebook",
+  "share-to-linkedin" : "Share to LinkedIn",
+  "share-to-reddit" : "Share to Reddit",
+  "share-to-twitter" : "Share to Twitter",
+  "social-media" : "Social Media"
 }
