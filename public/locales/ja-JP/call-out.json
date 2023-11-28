@@ -1,15 +1,15 @@
 {
-  "add-pocket-button" : "ブラウザに <1></1> ボタンを追加して記事、動画、リンクをウェブ全体から集めましょう。Pocket アプリを使用すれば、邪魔が入らない環境で、どんなデバイスからもコンテンツをお楽しみいただけます。",
-  "build-a-home" : "興味のあるコンテンツを集めた「ホーム」を作成しましょう",
-  "email-address" : "メールアドレスを入力",
-  "error" : "エラーが発生したようです。",
-  "fuel-your-mind" : "インスピレーションをもらう準備はいいですか？",
-  "interesting-stories" : "面白い人のための面白いストーリー",
-  "pocket-hits-description" : "このサイトは reCAPTCHA により保護されています。",
-  "pocket-hits-success" : "準備完了です。当社からの最初のメールが明日届きます。どうぞお楽しみに！",
-  "pocket-is-where" : "ウェブで見つけた興味深いストーリーを Pocket に保存して、そのすべてに 1 か所からアクセスしましょう。",
-  "privacy" : "プライバシー",
-  "sign-up" : "登録",
-  "subscribe" : "配信に登録する",
-  "terms" : "利用規約"
+  "add-pocket-button" : "Add the <1></1> button to your browser to collect articles, videos, and links from across the web. Use our app to enjoy them on any device in a distraction-free environment.",
+  "build-a-home" : "Build a home for everything that interests you",
+  "email-address" : "Your email address",
+  "error" : "Oops! Something went wrong.",
+  "fuel-your-mind" : "Get ready to fuel your mind.",
+  "interesting-stories" : "Interesting stories for interesting people",
+  "pocket-hits-description" : "This site is protected by reCAPTCHA.",
+  "pocket-hits-success" : "All set. You’ll get your first email from us tomorrow. Enjoy!",
+  "pocket-is-where" : "Pocket is where you’ll find fascinating stories from all across the web, right here in one place.",
+  "privacy" : "Privacy",
+  "sign-up" : "Sign Up",
+  "subscribe" : "Subscribe",
+  "terms" : "Terms"
 }
