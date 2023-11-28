@@ -1,12 +1,12 @@
 {
-  "all-tags" : "すべてのタグ",
-  "loading-suggested" : "...タグの候補を読み込んでいます",
-  "not-tagged" : "タグ付けされていません",
+  "all-tags" : "All Tags",
+  "loading-suggested" : "... loading suggested tags",
+  "not-tagged" : "not tagged",
   "pocket-premium" : "Pocket Premium",
-  "recently-tagged-items" : "最近タグ付けしたアイテム",
-  "search-for-your-tags" : "タグを検索",
-  "start-tagging" : "ここでおすすめが表示されるようにするには、アイテムにタグを追加しましょう。",
-  "tag-stories-faster" : "ストーリーのタグ付けが今まで以上に簡単に。—タグ提案機能をお楽しみください。",
-  "tags-character-limit" : "タグは最大25文字となっています",
-  "unable-to-find-suggested" : "このアイテムにおすすめできるタグが見つかりませんでした。"
+  "recently-tagged-items" : "Recently Tagged Items",
+  "search-for-your-tags" : "Search for your tags",
+  "start-tagging" : "Start adding tags to your items in order to see them suggested here.",
+  "tag-stories-faster" : "Tag stories faster than ever—get tag suggestions with",
+  "tags-character-limit" : "Tags are limited to 25 characters",
+  "unable-to-find-suggested" : "We were unable to find any tags to suggest for this item."
 }
