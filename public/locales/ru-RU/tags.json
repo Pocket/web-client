@@ -1,12 +1,12 @@
 {
-  "all-tags" : "Все теги",
-  "loading-suggested" : "... загрузка рекомендованных тегов",
-  "not-tagged" : "Без тегов",
+  "all-tags" : "All Tags",
+  "loading-suggested" : "... loading suggested tags",
+  "not-tagged" : "not tagged",
   "pocket-premium" : "Pocket Premium",
-  "recently-tagged-items" : "Недавно отмеченные тегом материалы",
-  "search-for-your-tags" : "Искать по вашим тегам",
-  "start-tagging" : "Начните добавлять теги к вашим материалам, чтобы увидеть рекомендованные теги здесь.",
-  "tag-stories-faster" : "Помечайте материалы быстрее, чем когда-либо — получайте рекомендации для тегов в",
-  "tags-character-limit" : "Длина тега ограничена 25 символами",
-  "unable-to-find-suggested" : "Не удалось найти ни одного рекомендованного тега для этого материала."
+  "recently-tagged-items" : "Recently Tagged Items",
+  "search-for-your-tags" : "Search for your tags",
+  "start-tagging" : "Start adding tags to your items in order to see them suggested here.",
+  "tag-stories-faster" : "Tag stories faster than ever—get tag suggestions with",
+  "tags-character-limit" : "Tags are limited to 25 characters",
+  "unable-to-find-suggested" : "We were unable to find any tags to suggest for this item."
 }
