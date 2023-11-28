@@ -1,15 +1,15 @@
 {
-  "add-pocket-button" : "Добавьте кнопку <1></1> в браузер, чтобы собирать статьи, видео и ссылки из Интернета. Используйте наше приложение на любом устройстве и наслаждайтесь ими, не отвлекаясь.",
-  "build-a-home" : "Создайте пространство для всего, что вам интересно",
-  "email-address" : "Ваш адрес email",
-  "error" : "К сожалению, что-то пошло не так.",
-  "fuel-your-mind" : "Приготовьтесь подпитывать свой разум.",
-  "interesting-stories" : "Интересные материалы для интересных людей",
-  "pocket-hits-description" : "Этот сайт защищен reCAPTCHA.",
-  "pocket-hits-success" : "Все готово. Завтра вы получите от нас первое письмо. Наслаждайтесь!",
-  "pocket-is-where" : "Pocket - это место, в котором вы найдете увлекательные материалы со всей сети в одном месте.",
-  "privacy" : "Конфиденциальность",
-  "sign-up" : "Регистрация",
-  "subscribe" : "Подписаться",
-  "terms" : "Условия"
+  "add-pocket-button" : "Add the <1></1> button to your browser to collect articles, videos, and links from across the web. Use our app to enjoy them on any device in a distraction-free environment.",
+  "build-a-home" : "Build a home for everything that interests you",
+  "email-address" : "Your email address",
+  "error" : "Oops! Something went wrong.",
+  "fuel-your-mind" : "Get ready to fuel your mind.",
+  "interesting-stories" : "Interesting stories for interesting people",
+  "pocket-hits-description" : "This site is protected by reCAPTCHA.",
+  "pocket-hits-success" : "All set. You’ll get your first email from us tomorrow. Enjoy!",
+  "pocket-is-where" : "Pocket is where you’ll find fascinating stories from all across the web, right here in one place.",
+  "privacy" : "Privacy",
+  "sign-up" : "Sign Up",
+  "subscribe" : "Subscribe",
+  "terms" : "Terms"
 }
