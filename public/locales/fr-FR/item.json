@@ -1,10 +1,10 @@
 {
-  "item-count_one" : "{{count}} élément",
-  "item-count_other" : "{{count}} éléments",
-  "list" : "Liste",
-  "story-count_one" : "{{count}} histoire",
-  "story-count_other" : "{{count}} histoires",
-  "tag-count_one" : "{{count}} label",
-  "tag-count_other" : "{{count}} labels",
-  "time-to-read" : "{{timeToRead}} minutes"
+  "item-count_one" : "{{count}} item",
+  "item-count_other" : "{{count}} items",
+  "list" : "List",
+  "story-count_one" : "{{count}} story",
+  "story-count_other" : "{{count}} stories",
+  "tag-count_one" : "{{count}} tag",
+  "tag-count_other" : "{{count}} tags",
+  "time-to-read" : "{{timeToRead}} min"
 }
