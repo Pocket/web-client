@@ -1,7 +1,7 @@
 {
-  "close" : "閉じる",
-  "close-label" : "閉じる",
-  "delete" : "削除",
-  "please-enter-valid-email" : "有効なメールアドレスを入力してください",
-  "share" : "共有"
+  "close" : "Close",
+  "close-label" : "Close",
+  "delete" : "Delete",
+  "please-enter-valid-email" : "Please enter a valid email address",
+  "share" : "Share"
 }
