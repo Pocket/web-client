@@ -1,7 +1,7 @@
 {
-  "close" : "Fechar",
-  "close-label" : "Fechar",
-  "delete" : "Eliminar",
-  "please-enter-valid-email" : "Insira um endereço de e-mail válido",
-  "share" : "Partilha"
+  "close" : "Close",
+  "close-label" : "Close",
+  "delete" : "Delete",
+  "please-enter-valid-email" : "Please enter a valid email address",
+  "share" : "Share"
 }
