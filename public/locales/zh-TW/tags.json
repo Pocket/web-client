@@ -1,12 +1,12 @@
 {
-  "all-tags" : "所有標籤",
-  "loading-suggested" : "……正在載入建議標籤",
-  "not-tagged" : "未標記",
+  "all-tags" : "All Tags",
+  "loading-suggested" : "... loading suggested tags",
+  "not-tagged" : "not tagged",
   "pocket-premium" : "Pocket Premium",
-  "recently-tagged-items" : "最近標記的項目",
-  "search-for-your-tags" : "搜尋您的標籤",
-  "start-tagging" : "開始向項目新增標籤，以便在此處看到相關推薦。",
-  "tag-stories-faster" : "更快速地標記篇章 — 若要獲取標籤建議，請使用",
-  "tags-character-limit" : "標籤長度限於 25 個字元",
-  "unable-to-find-suggested" : "找不到任何建議用於此項目的標籤。"
+  "recently-tagged-items" : "Recently Tagged Items",
+  "search-for-your-tags" : "Search for your tags",
+  "start-tagging" : "Start adding tags to your items in order to see them suggested here.",
+  "tag-stories-faster" : "Tag stories faster than ever—get tag suggestions with",
+  "tags-character-limit" : "Tags are limited to 25 characters",
+  "unable-to-find-suggested" : "We were unable to find any tags to suggest for this item."
 }
