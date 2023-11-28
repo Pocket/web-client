@@ -1,9 +1,9 @@
 {
-  "archive" : "存档",
-  "articles" : "文本",
-  "favorites" : "添加到收藏夹",
-  "highlights" : "突出显示",
-  "saves" : "保存内容",
-  "tags" : "标记",
-  "videos" : "视频"
+  "archive" : "Archive",
+  "articles" : "Articles",
+  "favorites" : "Favorites",
+  "highlights" : "Highlights",
+  "saves" : "Saves",
+  "tags" : "Tags",
+  "videos" : "Videos"
 }
