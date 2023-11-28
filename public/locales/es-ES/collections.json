@@ -1,7 +1,7 @@
 {
-  "call-out-body" : "Elimina las conjeturas de tu próxima gran lectura. Las listas de Pocket ponen lo mejor de Internet al alcance de tu mano.",
-  "call-out-title" : "Encuentra lo que vale la pena leer",
-  "page-description" : "Guías selectas sobre lo mejor de la web",
-  "page-title" : "Colecciones para tu Pocket",
-  "pagination-title" : "Colecciones para tu Pocket — Página {{currentPage}}"
+  "call-out-body" : "Take the guesswork out of your next great read. Pocket lists put the best of the internet at your fingertips.",
+  "call-out-title" : "Find what's worth reading",
+  "page-description" : "Curated guides to the best of the web",
+  "page-title" : "Collections for Your Pocket",
+  "pagination-title" : "Collections for Your Pocket — Page {{currentPage}}"
 }
