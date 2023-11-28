@@ -1,11 +1,11 @@
 {
   "404-detail" : "",
-  "404-message" : "Offenbar ist die Seite, auf die du zugreifen möchtest, verschwunden. Kontaktiere bitte unser Support-Team, wenn du glaubst, dass hier ein Fehler aufgetreten ist.",
-  "404-title" : "Hoppla! Da ist etwas schiefgegangen …",
-  "contact" : "Support kontaktieren",
-  "message" : "Ein Fehler ist aufgetreten. Versuche, die Seite neu zu laden. Möglicherweise lässt sich das Problem hierdurch beheben. Sollten die Schwierigkeiten weiterhin bestehen, wende dich bitte an unser Support-Team.",
-  "moderated-list-message" : "Diese Liste ist nicht verfügbar, da sie möglicherweise gegen die Richtlinien für freigegebene Inhalte von Pocket verstoßen hat.",
-  "notification-message" : "Der angeklickte Link leitet dich zu den Benachrichtigungseinstellungen deines Smartphones weiter, auf die nur über ein Mobilgerät zugegriffen werden kann. Scanne den QR-Code, um Pocket auf deinem Handy zu installieren.",
-  "notification-title" : "Hoppla, es sieht so aus, als wäre etwas schiefgegangen.",
-  "title" : "Hoppla! Da ist etwas schiefgegangen …"
+  "404-message" : "Looks like the page you are trying to reach has gone missing. Please contact our support team if you feel this is a mistake.",
+  "404-title" : "Oops! Something’s gone awry...",
+  "contact" : "Contact Support",
+  "message" : "There’s been an error. Try refreshing your page and see if that fixes things. If you’re still seeing the issue, please contact our support team.",
+  "moderated-list-message" : "This List is not available because it may have violated Pocket’s Shared Content Policies.",
+  "notification-message" : "The link you clicked directs you to your phone’s notification settings, which can only be accessed on a mobile device. Scan the QR code to install Pocket on your phone.",
+  "notification-title" : "Hmm, looks like something went wrong",
+  "title" : "Oops! Something’s gone awry..."
 }
