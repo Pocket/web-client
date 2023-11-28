@@ -1,9 +1,9 @@
 {
-  "archive" : "封存",
-  "articles" : "文章",
-  "favorites" : "我的最愛",
-  "highlights" : "標記",
-  "saves" : "儲存項目",
-  "tags" : "標籤",
-  "videos" : "影片"
+  "archive" : "Archive",
+  "articles" : "Articles",
+  "favorites" : "Favorites",
+  "highlights" : "Highlights",
+  "saves" : "Saves",
+  "tags" : "Tags",
+  "videos" : "Videos"
 }
