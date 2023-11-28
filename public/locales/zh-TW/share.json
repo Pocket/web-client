@@ -1,12 +1,12 @@
 {
-  "comment" : "評論",
-  "copy-link" : "複製連結",
-  "recommend" : "推薦",
-  "share-item" : "分享項目",
-  "share-to-buffer" : "分享至 Buffer",
-  "share-to-facebook" : "分享至 Facebook",
-  "share-to-linkedin" : "分享至 LinkedIn",
-  "share-to-reddit" : "分享至 Reddit",
-  "share-to-twitter" : "分享至 Twitter",
-  "social-media" : "社交媒體"
+  "comment" : "Comment",
+  "copy-link" : "Copy Link",
+  "recommend" : "Recommend",
+  "share-item" : "Share Item",
+  "share-to-buffer" : "Share to Buffer",
+  "share-to-facebook" : "Share to Facebook",
+  "share-to-linkedin" : "Share to LinkedIn",
+  "share-to-reddit" : "Share to Reddit",
+  "share-to-twitter" : "Share to Twitter",
+  "social-media" : "Social Media"
 }
