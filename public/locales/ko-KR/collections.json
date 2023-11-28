@@ -1,7 +1,7 @@
 {
-  "call-out-body" : "다음에 무엇을 읽을지 고민하지 마세요. Pocket 목록을 통해 손끝에서 최고의 인터넷 아티클을 읽을 수 있습니다.",
-  "call-out-title" : "읽을거리 찾기",
-  "page-description" : "최고의 웹 컨텐츠 관리 안내서",
-  "page-title" : "Pocket용 콜렉션",
-  "pagination-title" : "Pocket용 콜렉션 — {{currentPage}}페이지"
+  "call-out-body" : "Take the guesswork out of your next great read. Pocket lists put the best of the internet at your fingertips.",
+  "call-out-title" : "Find what's worth reading",
+  "page-description" : "Curated guides to the best of the web",
+  "page-title" : "Collections for Your Pocket",
+  "pagination-title" : "Collections for Your Pocket — Page {{currentPage}}"
 }
