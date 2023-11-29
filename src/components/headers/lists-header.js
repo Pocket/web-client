@@ -223,6 +223,7 @@ export const ListIndividualHeader = ({
   const { t } = useTranslation()
 
   const enrolledInternal = enrolledDev || enrolledPilot
+  const isPublic = status !== 'PRIVATE'
 
   const publicListInfo = {
     externalId,
@@ -246,7 +247,7 @@ export const ListIndividualHeader = ({
 
       <div className="list-actions">
         <div className="actions-start">
-          {enrolledInternal ? (
+          {enrolledInternal && isPublic ? (
             <VisibilityOptions
               status={status}
               listItemNoteVisibility={listItemNoteVisibility}
