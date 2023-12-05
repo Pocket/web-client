@@ -17,5 +17,6 @@ export {
   subscribeToSdkAuthenticationFailures,
   logFeatureFlagImpression,
   getFeatureFlag,
-  getAllFeatureFlags
+  getAllFeatureFlags,
+  logCustomEvent
 } from '@braze/web-sdk'

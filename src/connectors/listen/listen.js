@@ -12,7 +12,7 @@ export const Listen = ({ itemId, path }) => {
 
   useEffect(() => {
     if (isAuthenticated && itemId) dispatch(getAudioFile(itemId))
-  }, [dispatch, isAuthenticated, itemId ])
+  }, [dispatch, isAuthenticated, itemId])
 
   if (!file) return null
 
@@ -21,13 +21,36 @@ export const Listen = ({ itemId, path }) => {
 
   const analyticsData = { url: path }
 
-  // Snowplow Events
-  const playEvent = () => dispatch(sendSnowplowEvent('listen.play', analyticsData))
-  const pauseEvent = () => dispatch(sendSnowplowEvent('listen.pause', analyticsData))
-  const rateChangeEvent = (rate) => dispatch(sendSnowplowEvent('listen.pause', { ...analyticsData, value: rate }))
-  const endEvent = () => dispatch(sendSnowplowEvent('listen.end', analyticsData))
+  // Events
+  const playEvent = () => {
+    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
+      logCustomEvent('listen.play', analyticsData)
+    )
+    dispatch(sendSnowplowEvent('listen.play', analyticsData))
+  }
 
-  return (url && available) ? (
+  const pauseEvent = () => {
+    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
+      logCustomEvent('listen.pause', analyticsData)
+    )
+    dispatch(sendSnowplowEvent('listen.pause', analyticsData))
+  }
+
+  const rateChangeEvent = (rate) => {
+    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
+      logCustomEvent('listen.rate', { ...analyticsData, value: rate })
+    )
+    dispatch(sendSnowplowEvent('listen.rate', { ...analyticsData, value: rate }))
+  }
+
+  const endEvent = () => {
+    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
+      logCustomEvent('listen.end', analyticsData)
+    )
+    dispatch(sendSnowplowEvent('listen.end', analyticsData))
+  }
+
+  return url && available ? (
     <Audio
       url={url}
       playEvent={playEvent}
