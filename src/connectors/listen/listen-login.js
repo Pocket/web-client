@@ -72,7 +72,7 @@ export const ListenLogin = ({ itemId, path }) => {
 const LoggedOut = ({ clickEvent, path = '' }) => (
   <p className={loggedOutStyle}>
     <ListenIcon /> Want to Listen to this article?{' '}
-    <a href={`${LOGIN_URL}?route=${path}`} onClick={clickEvent}>
+    <a href={`${LOGIN_URL}?route=${path}&utm_campaign=syndicated-listen`} onClick={clickEvent}>
       Sign in
     </a>
   </p>
