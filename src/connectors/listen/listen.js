@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getAudioFile } from 'connectors/listen/listen.state'
 import { Audio } from 'components/audio/audio'
+import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const Listen = ({ itemId, path }) => {
@@ -22,6 +23,13 @@ export const Listen = ({ itemId, path }) => {
   const analyticsData = { url: path }
 
   // Events
+  const handleVisible = () => {
+    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
+      logCustomEvent('listen.impression', analyticsData)
+    )
+    dispatch(sendSnowplowEvent('listen.impression', analyticsData))
+  }
+
   const playEvent = () => {
     import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
       logCustomEvent('listen.play', analyticsData)
@@ -51,12 +59,14 @@ export const Listen = ({ itemId, path }) => {
   }
 
   return url && available ? (
-    <Audio
-      url={url}
-      playEvent={playEvent}
-      pauseEvent={pauseEvent}
-      rateChangeEvent={rateChangeEvent}
-      endEvent={endEvent}
-    />
+    <VisibilitySensor onVisible={handleVisible}>
+      <Audio
+        url={url}
+        playEvent={playEvent}
+        pauseEvent={pauseEvent}
+        rateChangeEvent={rateChangeEvent}
+        endEvent={endEvent}
+      />
+    </VisibilitySensor>
   ) : null
 }
