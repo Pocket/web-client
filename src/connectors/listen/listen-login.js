@@ -54,7 +54,12 @@ export const ListenLogin = ({ itemId, path }) => {
 
   const showListen = listenLab || listenEnrolled
 
-  const signUpEvent = () => dispatch(sendSnowplowEvent('listen.signup'))
+  const signUpEvent = () => {
+    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
+      logCustomEvent('listen.signup', analyticsData)
+    )
+    dispatch(sendSnowplowEvent('listen.signup'))
+  }
 
   const loggedIn = userStatus === 'valid'
   const ElementToRender = loggedIn ? Listen : LoggedOut
