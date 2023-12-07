@@ -36,6 +36,7 @@ export const hydrateSettings = () => ({ type: SETTINGS_FETCH_REQUEST })
  --------------------------------------------------------------- */
 export const settingsReducers = (state = initialState, action) => {
   switch (action.type) {
+    case SETTINGS_FETCH_FAILURE:
     case SETTINGS_FETCH_SUCCESS:
     case SETTINGS_UPDATE: {
       const { settings } = action

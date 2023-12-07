@@ -119,6 +119,7 @@ function PocketWebClient({ Component, pageProps, err }) {
     if (user_status === 'pending' || flagsReady) return () => {}
     if (user_status === 'invalid') {
       dispatch(featuresHydrate({}))
+      dispatch(hydrateSettings())
       return () => {}
     }
 
