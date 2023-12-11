@@ -1,3 +1,10 @@
+## [1.102.17](https://github.com/Pocket/web-client/compare/v1.102.16...v1.102.17) (2023-12-11)
+
+
+### Bug Fixes
+
+* **recommend:** remove recommend feature ([69efdd9](https://github.com/Pocket/web-client/commit/69efdd9989934517ce1eace3eca268302fd7caef))
+
 ## [1.102.16](https://github.com/Pocket/web-client/compare/v1.102.15...v1.102.16) (2023-12-07)
 
 
