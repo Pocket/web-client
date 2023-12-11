@@ -1,13 +1,10 @@
 import { css } from '@emotion/css'
-import { useState } from 'react'
 import { useTranslation } from 'next-i18next'
 
-import { Modal, ModalBody, ModalTabs } from 'components/modal/modal'
+import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 
 import { Card } from 'components/item-card/card'
-import { SelectShareType } from './share-selector'
 import { ShareList } from './share-list'
-import { ShareRecommend } from './share-recommend'
 
 const shareQuote = css`
   margin: var(--spacing050) 0;
@@ -29,13 +26,9 @@ export const ShareModal = ({
   quote,
   showModal,
   cancelShare,
-  engagementEvent,
-  recommendEvent
+  engagementEvent
 }) => {
   const { t } = useTranslation()
-  const [active, setActive] = useState('social')
-
-  const activate = (tab) => setActive(tab)
 
   return (
     <Modal
@@ -57,20 +50,16 @@ export const ShareModal = ({
         />
         {quote ? <p className={shareQuote}>{quote}</p> : null}
       </ModalBody>
-      <ModalTabs>
-        <SelectShareType active={active} activate={activate} />
-        {active === 'social' ? (
-          <ShareList
-            openUrl={externalUrl}
-            excerpt={excerpt}
-            title={title}
-            quote={quote}
-            engagementEvent={engagementEvent}
-            cancelShare={cancelShare}
-          />
-        ) : null}
-        {active === 'recommend' ? <ShareRecommend recommendEvent={recommendEvent} /> : null}
-      </ModalTabs>
+      <ModalFooter>
+        <ShareList
+          openUrl={externalUrl}
+          excerpt={excerpt}
+          title={title}
+          quote={quote}
+          engagementEvent={engagementEvent}
+          cancelShare={cancelShare}
+        />
+      </ModalFooter>
     </Modal>
   )
 }
