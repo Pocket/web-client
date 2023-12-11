@@ -7,7 +7,6 @@ export const LOGIN_URL = 'https://getpocket.com/login'
 export const SIGNUP_URL = 'https://getpocket.com/signup'
 export const PREMIUM_URL = 'https://getpocket.com/premium?utm_source=web-app-premium-cta'
 export const GRAPHQL_URL = 'https://getpocket.com'
-export const READING_WPM = 220
 export const BATCH_SIZE = 30
 export const COLOR_MODE_PREFIX = 'colormode'
 export const MAX_TAG_NAME_LENGTH = 25
@@ -31,7 +30,6 @@ export const START_DATE_FOR_ONBOARDING = '2021-11-28 00:00:00'
 export const CAPTCHA_SITE_KEY = '6LfIpyYUAAAAAPtNSKafudr16odFL1eQte0vR0Py' // API key used with Google's ReCaptcha service
 export const GOOGLE_ANALYTICS_ID = 'UA-370613-9'
 export const FACEBOOK_APP_ID = '131450656879143'
-export const GREENHOUSE_JOBS_URL = 'https://boards-api.greenhouse.io/v1/boards/pocketco/jobs' // Greenhouse board id for Pocket org
 
 // BRAZE
 export const BRAZE_API_KEY_DEV = '76e48d24-506c-4e7e-bec2-c0f262ebbcd5' // API key for Pocket (Dev) - Web
@@ -76,20 +74,6 @@ export const SNOWPLOW_ANONYMOUS_CONFIG = {
   stateStorageStrategy: 'none', // over-rides stateStorageStrategy: cookieAndLocalStorage
   anonymousTracking: { withServerAnonymisation: true },
 }
-
-export const INTERNAL_DOMAINS = [
-  // Pocket Main Property
-  'getpocket.com',
-  'www.getpocket.com',
-  'pocket.com',
-  'www.pocket.com',
-  // Pocket Core Web
-  'app.getpocket.com',
-  'app.pocket.com',
-  // Pocket Blog
-  'blog.getpocket.com',
-  'blog.pocket.com'
-]
 
 export const KEYS = {
   BACKSPACE: 8,
@@ -145,24 +129,6 @@ export const LOCALE_COMMON = [
 ]
 
 export const LOCALE_ACCOUNT = ['account']
-
-export const HOME_TOPIC_SLATES = {
-  'business': 'af2cc2c0-1286-47a3-b8ce-187b905f94af',
-  'career': '00f0c593-3c99-4d5a-9297-c66f8b00be01',
-  'education': '856eb5f8-da7f-43ae-ac5e-25da402af0ae',
-  'entertainment': 'cceefa28-906e-47c5-b704-8c5b824ecd1b',
-  'food': '651d27ab-a898-4173-9700-dd1726fbaaa4',
-  'gaming': '951ae6c3-4438-458b-9936-7f3b8ff0f178',
-  'health': '47023d21-0aa6-4f98-9077-eac21fad44f1',
-  'parenting': '1a8de2be-db03-4a2f-901a-7c4c1cbd156a',
-  'personal-finance': 'f4b58337-4ab6-4563-9503-c384e773946f',
-  'politics': 'f8c945b0-52fa-4203-bb31-6747245fe021',
-  'science': 'b548b456-70c4-474d-a723-80d040d00fec',
-  'self-improvement': '5674f085-07b6-43c3-bcde-2774db3f6384',
-  'sports': 'e6c00454-4a00-47c1-8f22-906122c261ed',
-  'technology': 'ed9604ce-b752-48bd-b8c5-3a8cf6b54ced',
-  'travel': '4345efa7-2c89-4884-b836-3260757a3a97'
-}
 
 export const TOPICS_BY_NAME = {
   business: {
