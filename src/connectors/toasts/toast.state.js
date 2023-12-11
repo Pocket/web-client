@@ -19,9 +19,6 @@ import { COPY_ITEM_URL } from 'actions'
 import { ITEMS_TAG_SUCCESS } from 'actions'
 import { ITEMS_TAG_FAILURE } from 'actions'
 
-import { ADD_SHARE_SUCCESS } from 'actions'
-import { ADD_SHARE_FAILURE } from 'actions'
-
 import { LIST_CREATE_SUCCESS } from 'actions'
 import { LIST_CREATE_FAILURE } from 'actions'
 import { LIST_ADD_ITEM_SUCCESS } from 'actions'
@@ -79,8 +76,6 @@ export const actionToastsReducers = (state = initialState, action) => {
     case ITEMS_ADD_SUCCESS:
     case ITEMS_TAG_SUCCESS:
     case ITEMS_TAG_FAILURE:
-    case ADD_SHARE_SUCCESS:
-    case ADD_SHARE_FAILURE:
     case COLLECTIONS_SAVE_SUCCESS:
     case COLLECTION_PAGE_SAVE_SUCCESS:
     case DISCOVER_ITEMS_SAVE_SUCCESS:

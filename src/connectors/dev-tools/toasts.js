@@ -30,9 +30,6 @@ import { COPY_ITEM_URL } from 'actions'
 import { ITEMS_TAG_SUCCESS } from 'actions'
 import { ITEMS_TAG_FAILURE } from 'actions'
 
-import { ADD_SHARE_SUCCESS } from 'actions'
-import { ADD_SHARE_FAILURE } from 'actions'
-
 import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
 import { COLLECTION_PAGE_SAVE_SUCCESS } from 'actions'
 import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
@@ -100,8 +97,6 @@ export const actions = [
   ITEMS_ADD_SUCCESS,
   ITEMS_TAG_SUCCESS,
   ITEMS_TAG_FAILURE,
-  ADD_SHARE_SUCCESS,
-  ADD_SHARE_FAILURE,
   COLLECTIONS_SAVE_SUCCESS,
   COLLECTION_PAGE_SAVE_SUCCESS,
   DISCOVER_ITEMS_SAVE_SUCCESS,

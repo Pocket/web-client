@@ -27,9 +27,6 @@ import { COPY_ITEM_URL } from 'actions'
 import { ITEMS_TAG_SUCCESS } from 'actions'
 import { ITEMS_TAG_FAILURE } from 'actions'
 
-import { ADD_SHARE_SUCCESS } from 'actions'
-import { ADD_SHARE_FAILURE } from 'actions'
-
 import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
 import { COLLECTION_PAGE_SAVE_SUCCESS } from 'actions'
 import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
@@ -76,7 +73,6 @@ export function Toast({
     // Adding Items
     [ITEMS_UPSERT_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
     [ITEMS_ADD_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
-    [ADD_SHARE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
     [COLLECTIONS_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
     [COLLECTION_PAGE_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
     [DISCOVER_ITEMS_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
@@ -84,7 +80,6 @@ export function Toast({
     [MUTATION_UNARCHIVE]: t('toast:added', '{{count}} item added', { count }),
     [MUTATION_BULK_UNARCHIVE]: t('toast:unarchived', '{{count}} item added', { count }),
     [MUTATION_UPSERT]: t('toast:added', '{{count}} item added', { count }),
-    [ADD_SHARE_FAILURE]: t('toast:error-adding', 'Error adding item'),
 
     // Tagging Items
     [ITEMS_TAG_SUCCESS]: t('toast:tagged', '{{count}} item added', { count }),
@@ -141,7 +136,6 @@ export function Toast({
 
   const errors = [
     ITEMS_TAG_FAILURE,
-    ADD_SHARE_FAILURE,
     LIST_CREATE_FAILURE,
     LIST_ADD_ITEM_FAILURE,
     LIST_DELETE_ITEM_FAILURE,

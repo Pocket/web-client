@@ -19,9 +19,6 @@ import { APP_LIST_MODE_DETAIL } from 'actions'
 
 import { APP_COLOR_MODE_SET } from 'actions'
 
-import { APP_SET_RELEASE } from 'actions'
-import { APP_UPDATE_RELEASE } from 'actions'
-
 import { SNOWPLOW_SEND_EVENT } from 'actions'
 
 import { MUTATION_BULK_CLEAR } from 'actions'
@@ -33,15 +30,13 @@ import { COLOR_MODE_PREFIX } from 'common/constants'
 import { CACHE_KEY_COLOR_MODE } from 'common/constants'
 import { CACHE_KEY_LIST_MODE } from 'common/constants'
 import { CACHE_KEY_SORT_OPTIONS } from 'common/constants'
-import { CACHE_KEY_RELEASE_VERSION } from 'common/constants'
 
 const initialState = {
   devMode: false,
   mode: 'default',
   listMode: 'grid',
   colorMode: 'light',
-  sortOptions: {},
-  releaseVersion: null
+  sortOptions: {}
 }
 
 /** ACTIONS
@@ -65,8 +60,6 @@ export const setColorMode = (colorMode) => ({ type: APP_COLOR_MODE_SET, colorMod
 export const setColorModeLight = () => ({ type: APP_COLOR_MODE_SET, colorMode: 'light' }) //prettier-ignore
 export const setColorModeDark = () => ({ type: APP_COLOR_MODE_SET, colorMode: 'dark' }) //prettier-ignore
 export const setColorModeSepia = () => ({ type: APP_COLOR_MODE_SET, colorMode: 'sepia' }) //prettier-ignore
-
-export const setReleaseNotes = (releaseVersion) => ({ type: APP_UPDATE_RELEASE, releaseVersion }) //prettier-ignore
 
 /** REDUCERS
  --------------------------------------------------------------- */
@@ -109,11 +102,6 @@ export const appReducers = (state = initialState, action) => {
       return { ...state, mode }
     }
 
-    case APP_SET_RELEASE: {
-      const { releaseVersion } = action
-      return { ...state, releaseVersion }
-    }
-
     // SPECIAL HYDRATE:  This is sent from the next-redux wrapper and
     // it represents the state used to build the page on the server.
     case HYDRATE: {
@@ -137,8 +125,7 @@ export const appSagas = [
   takeLatest(APP_LIST_MODE_LIST, appListModeSet),
   takeLatest(APP_LIST_MODE_GRID, appListModeSet),
   takeLatest(APP_LIST_MODE_DETAIL, appListModeSet),
-  takeLatest(APP_COLOR_MODE_SET, appColorModeSet),
-  takeLatest(APP_UPDATE_RELEASE, appReleaseNotesSet)
+  takeLatest(APP_COLOR_MODE_SET, appColorModeSet)
 ]
 
 /** SAGA :: RESPONDERS
@@ -184,18 +171,12 @@ function* appSortOrderSet({ sortOrder }) {
   yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 }
 
-function* appReleaseNotesSet({ releaseVersion }) {
-  localStore.setItem(CACHE_KEY_RELEASE_VERSION, releaseVersion)
-  yield put({ type: APP_SET_RELEASE, releaseVersion })
-}
-
 function* appPreferences() {
   // This is a temporary measure to transfer cookies to local storage
   yield convertToLocalStorage()
 
   const colorMode = localStore.getItem(CACHE_KEY_COLOR_MODE) || 'light'
   const listMode = localStore.getItem(CACHE_KEY_LIST_MODE) || 'grid'
-  const releaseVersion = localStore.getItem(CACHE_KEY_RELEASE_VERSION)
 
   const storedSortOrder = localStore.getItem(CACHE_KEY_SORT_OPTIONS)
   const sortOrderParsed = storedSortOrder ? JSON.parse(storedSortOrder) : {}
@@ -205,7 +186,6 @@ function* appPreferences() {
     yield put({ type: APP_SORT_ORDER_SET, sortOrder: sortOrderParsed[subset], subset })
   }
 
-  yield put({ type: APP_SET_RELEASE, releaseVersion })
   yield put({ type: APP_COLOR_MODE_SET, colorMode, skipAnalytics: true })
   yield put({ type: APP_LIST_MODE_SET, listMode })
 }

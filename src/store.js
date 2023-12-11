@@ -38,9 +38,6 @@ import { pocketHitsSagas } from 'connectors/pocket-hits/pocket-hits.state'
 import { syndicatedArticleReducers } from 'containers/syndicated-article/syndicated-article.state'
 import { syndicatedArticleSagas } from 'containers/syndicated-article/syndicated-article.state'
 
-import { userMessageReducers } from 'containers/messages/user-messages.state'
-import { userMessageSagas } from 'containers/messages/user-messages.state'
-
 import { actionToastsReducers } from 'connectors/toasts/toast.state'
 
 import { shortcutReducers } from 'connectors/shortcuts/shortcuts.state.js'
@@ -168,7 +165,6 @@ const discoverReducers = {
 
 const libraryReducers = {
   userTags: userTagsReducers,
-  userMessages: userMessageReducers,
   userSearch: userSearchReducers
 }
 
@@ -228,7 +224,6 @@ function* rootSaga() {
     ...readerSettingsSagas,
     ...readerSagas, //graph
     ...pageHomeSaga,
-    ...userMessageSagas,
     ...userSearchSagas,
     ...shortcutSagas,
     ...brazeSagas,

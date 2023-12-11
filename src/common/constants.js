@@ -20,11 +20,9 @@ export const LISTEN_SPEEDS = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 3]
 export const CACHE_KEY_COLOR_MODE = 'pocket-color-mode'
 export const CACHE_KEY_LIST_MODE = 'pocket-list-mode'
 export const CACHE_KEY_SORT_OPTIONS = 'pocket-sort-options'
-export const CACHE_KEY_RELEASE_VERSION = 'pocket-release-version'
 export const CACHE_KEY_HOME_STORED_TOPICS = 'pocket-home-stored-topics'
 
 // RELEASE DATES
-export const RELEASE_NOTES_VERSION = 'jun-25-2021'
 export const START_DATE_FOR_HOME = '2021-08-09 00:00:00'
 export const START_DATE_FOR_GERMAN_HOME = '2023-01-26 00:00:00'
 export const START_DATE_FOR_ONBOARDING = '2021-11-28 00:00:00'
@@ -108,31 +106,6 @@ export const KEYS = {
 }
 
 export const ONETRUST_EMPTY_DEFAULT = ',,'
-
-export const API_ACTION_ADD = 'add'
-export const API_ACTION_ADD_FAIL = 'add_failed'
-export const API_ACTION_ARCHIVE = 'archive'
-export const API_ACTION_UNARCHIVE = 'readd'
-export const API_ACTION_FAVORITE = 'favorite'
-export const API_ACTION_UNFAVORITE = 'unfavorite'
-export const API_ACTION_DELETE = 'delete'
-export const API_ACTION_SCROLLED = 'scrolled'
-export const API_ACTION_SHARE = 'shared_to'
-export const API_ACTION_SHARE_TO = 'share_to_'
-export const API_ACTION_REPLACE_TAGS = 'tags_replace'
-export const API_ACTION_ADD_TAGS = 'tags_add'
-export const API_ACTION_TAGS_CLEARED = 'tags_clear'
-export const API_ACTION_ADD_ANNOTATION = 'add_annotation'
-export const API_ACTION_DELETE_ANNOTATION = 'delete_annotation'
-export const API_ACTION_SHARE_ADDED = 'share_added'
-export const API_ACTION_SHARE_IGNORED = 'share_ignored'
-
-
-// ANALYTICS
-export const ANALYTICS_UI = 'cxt_ui'
-export const ANALYTICS_VIEW = 'cxt_view'
-export const ANALYTICS_INDEX = 'cxt_index'
-export const ANALYTICS_LIST_MODE = 'cxt_list_view'
 
 // LOCALIZATION BLOCKS
 export const LOCALE_READER = [
