@@ -61,14 +61,5 @@ export const modalActions = {
     },
     expects: ['url', 'position'],
     description: 'Fired when a user clicks the Copy Link button in the Share modal'
-  },
-  'share.recommend': {
-    eventType: 'engagement',
-    entityTypes: ['content', 'ui'],
-    eventData: {
-      uiType: 'button'
-    },
-    expects: ['url', 'position'],
-    description: 'Fired when a user submits a Recommendation in the Share modal'
   }
 }

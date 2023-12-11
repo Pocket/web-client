@@ -1,3 +1,69 @@
+## [1.102.16](https://github.com/Pocket/web-client/compare/v1.102.15...v1.102.16) (2023-12-07)
+
+
+### Bug Fixes
+
+* **listen:** utm params on signup link ([8afa5f5](https://github.com/Pocket/web-client/commit/8afa5f56d0149c742b57b873acc50235ff979244))
+
+## [1.102.15](https://github.com/Pocket/web-client/compare/v1.102.14...v1.102.15) (2023-12-07)
+
+
+### Bug Fixes
+
+* **braze:** initialize braze for logged out users ([9595c65](https://github.com/Pocket/web-client/commit/9595c653b51093d327ef9d45c86302d3c14f6714))
+
+## [1.102.14](https://github.com/Pocket/web-client/compare/v1.102.13...v1.102.14) (2023-12-07)
+
+
+### Bug Fixes
+
+* **listen:** send braze event on signup action ([76316dd](https://github.com/Pocket/web-client/commit/76316ddf9eb9ffd6d948c03342fd7ae3fff345bc))
+
+## [1.102.13](https://github.com/Pocket/web-client/compare/v1.102.12...v1.102.13) (2023-12-07)
+
+
+### Bug Fixes
+
+* **listen:** add impression to listen ([b90deef](https://github.com/Pocket/web-client/commit/b90deef32a05672f387c82a11b31ef952e8f465a))
+
+## [1.102.12](https://github.com/Pocket/web-client/compare/v1.102.11...v1.102.12) (2023-12-05)
+
+
+### Bug Fixes
+
+* **listen:** add braze events for listen actions ([2608f9e](https://github.com/Pocket/web-client/commit/2608f9ed740e57f942fd9060ad52b25092204464))
+
+## [1.102.11](https://github.com/Pocket/web-client/compare/v1.102.10...v1.102.11) (2023-11-29)
+
+
+### Bug Fixes
+
+* **lists:** hide list status toggle when set to private ([2624ed6](https://github.com/Pocket/web-client/commit/2624ed6d6cfc1f5933892feb7aad0a12cb59a72d))
+
+## [1.102.10](https://github.com/Pocket/web-client/compare/v1.102.9...v1.102.10) (2023-11-27)
+
+
+### Bug Fixes
+
+* **listen:** add braze feature flag to listen ([715f054](https://github.com/Pocket/web-client/commit/715f054cce5ab759497f403701c16f980062e54e))
+* **listen:** update flag check for enabled status ([a47fa4f](https://github.com/Pocket/web-client/commit/a47fa4ffad61d66699a368d640706d4f20f7d265))
+* **listen:** update flag check for enabled status ([0a9707b](https://github.com/Pocket/web-client/commit/0a9707b72109023a9af52eae4406db11f8999ea2))
+
+## [1.102.9](https://github.com/Pocket/web-client/compare/v1.102.8...v1.102.9) (2023-11-27)
+
+
+### Bug Fixes
+
+* **saves:** remove newsroom banner ([a9837e2](https://github.com/Pocket/web-client/commit/a9837e275d0e48e2e28e121e8dc5305b05a40751))
+
+## [1.102.8](https://github.com/Pocket/web-client/compare/v1.102.7...v1.102.8) (2023-10-11)
+
+
+### Bug Fixes
+
+* **learn-more:** sneak in translation key correction ([4e0a888](https://github.com/Pocket/web-client/commit/4e0a88810885719ced917df0e001e18a073f94b6))
+* **learn-more:** translations for fxa->moza ([1b2268c](https://github.com/Pocket/web-client/commit/1b2268c550e7f7fe4e908936e5aefa3a96b1ea32))
+
 ## [1.102.7](https://github.com/Pocket/web-client/compare/v1.102.6...v1.102.7) (2023-09-27)
 
 

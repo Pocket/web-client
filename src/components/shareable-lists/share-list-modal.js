@@ -62,7 +62,7 @@ export const ShareListModal = ({
           handleOpenUrl={handleOpenUrl}
         />
       </ModalBody>
-      <ModalFooter className={reducedPaddingStyles}>
+      <ModalFooter>
         <ShareList
           openUrl={externalUrl}
           excerpt={description}

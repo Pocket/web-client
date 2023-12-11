@@ -16,6 +16,9 @@ const enableSDK = noop
 const destroy = noop
 const setSdkAuthenticationSignature = noop
 const subscribeToSdkAuthenticationFailures = noop
+const logFeatureFlagImpression = noop
+const getFeatureFlag = noop
+const getAllFeatureFlags = noop
 
 export {
   initialize,
@@ -32,5 +35,8 @@ export {
   enableSDK,
   destroy,
   setSdkAuthenticationSignature,
-  subscribeToSdkAuthenticationFailures
+  subscribeToSdkAuthenticationFailures,
+  logFeatureFlagImpression,
+  getFeatureFlag,
+  getAllFeatureFlags
 }

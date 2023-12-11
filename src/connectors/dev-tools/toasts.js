@@ -25,9 +25,6 @@ import { MUTATION_DELETE_SUCCESS } from 'actions'
 
 import { ITEMS_ADD_SUCCESS } from 'actions'
 
-import { SHARE_RECOMMEND_SUCCESS } from 'actions'
-import { SHARE_RECOMMEND_FAILURE } from 'actions'
-
 import { COPY_ITEM_URL } from 'actions'
 
 import { ITEMS_TAG_SUCCESS } from 'actions'
@@ -101,8 +98,6 @@ export const actions = [
   ...mutationTypes,
   MUTATION_DELETE_SUCCESS,
   ITEMS_ADD_SUCCESS,
-  SHARE_RECOMMEND_SUCCESS,
-  SHARE_RECOMMEND_FAILURE,
   ITEMS_TAG_SUCCESS,
   ITEMS_TAG_FAILURE,
   ADD_SHARE_SUCCESS,

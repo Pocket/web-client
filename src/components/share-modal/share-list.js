@@ -15,7 +15,10 @@ const socialIcons = css`
   align-items: center;
   align-content: center;
   justify-content: space-around;
-  padding: 16px 24px;
+
+  button {
+    margin: 0;
+  }
 `
 
 export const ShareList = ({ openUrl, excerpt, title, quote, engagementEvent, cancelShare }) => {

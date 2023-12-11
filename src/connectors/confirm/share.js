@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { ShareModal } from 'components/share-modal/share-modal'
 import { shareCancel } from 'connectors/items/mutation-share.state'
-import { shareRecommend } from 'connectors/items/mutation-share.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 
 export const ConfirmShare = () => {
@@ -30,11 +29,6 @@ export const ConfirmShare = () => {
     dispatch(sendSnowplowEvent(identifier, { ...analyticsData, position }))
   }
 
-  const recommendEvent = (comment) => {
-    dispatch(shareRecommend({ itemId, quote, comment }))
-    dispatch(sendSnowplowEvent('share.recommend', { ...analyticsData, position }))
-  }
-
   return (
     <ShareModal
       title={title}
@@ -48,7 +42,6 @@ export const ConfirmShare = () => {
       showModal={!!itemId}
       cancelShare={cancelShare}
       engagementEvent={engagementEvent}
-      recommendEvent={recommendEvent}
     />
   )
 }

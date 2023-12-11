@@ -1,10 +1,12 @@
 import { css } from '@emotion/css'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Listen } from 'connectors/listen/listen'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { LOGIN_URL } from 'common/constants'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { ListenIcon } from 'components/icons/ListenIcon'
+import { BRAZE_LISTEN } from 'common/utilities/braze/feature-flags'
 
 const loggedOutStyle = css`
   padding: 16px 18px;
@@ -33,23 +35,44 @@ const loggedOutStyle = css`
 
 export const ListenLogin = ({ itemId, path }) => {
   const dispatch = useDispatch()
-
+  const [listenEnrolled, setListenEnrolled] = useState(false)
+  const brazeInitialized = useSelector((state) => state?.braze?.initialized)
   const userStatus = useSelector((state) => state.user.user_status)
   const featureState = useSelector((state) => state.features)
   const listenLab = featureFlagActive({ flag: 'lab.listen', featureState })
 
-  const signUpEvent = () => dispatch(sendSnowplowEvent('listen.signup'))
+  useEffect(() => {
+    if (!brazeInitialized) return () => {}
+    import('common/utilities/braze/braze-lazy-load').then(
+      ({ logFeatureFlagImpression, getFeatureFlag }) => {
+        const flag = getFeatureFlag(BRAZE_LISTEN)
+        if (flag?.enabled) setListenEnrolled(true)
+        logFeatureFlagImpression(BRAZE_LISTEN)
+      }
+    )
+  }, [brazeInitialized])
+
+  const showListen = listenLab || listenEnrolled
+
+  const signUpEvent = () => {
+    import('common/utilities/braze/braze-lazy-load').then(({ logCustomEvent }) =>
+      logCustomEvent('listen.signup', analyticsData)
+    )
+    dispatch(sendSnowplowEvent('listen.signup'))
+  }
 
   const loggedIn = userStatus === 'valid'
   const ElementToRender = loggedIn ? Listen : LoggedOut
 
-  return listenLab ? <ElementToRender itemId={itemId} path={path} clickEvent={signUpEvent} /> : null
+  return showListen ? (
+    <ElementToRender itemId={itemId} path={path} clickEvent={signUpEvent} />
+  ) : null
 }
 
 const LoggedOut = ({ clickEvent, path = '' }) => (
   <p className={loggedOutStyle}>
     <ListenIcon /> Want to Listen to this article?{' '}
-    <a href={`${LOGIN_URL}?route=${path}`} onClick={clickEvent}>
+    <a href={`${LOGIN_URL}?route=${path}&utm_campaign=syndicated-listen`} onClick={clickEvent}>
       Sign in
     </a>
   </p>

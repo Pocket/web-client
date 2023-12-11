@@ -3,7 +3,9 @@
   "cancel-button" : "Annulla premium",
   "cancel-header" : "Annulla l'abbonamento Premium",
   "condition-benefits" : "I vantaggi di un account Firefox, con tecnologia Mozilla, includono una migliore sicurezza dell'account",
+  "condition-benefits-rebrand" : "Tra i vantaggi vi è una migliore sicurezza dell'account",
   "condition-pocket-access" : "Se non esegui l'aggiornamento a un account Firefox, non puoi accedere a Pocket",
+  "condition-pocket-access-rebrand" : "Se non fai l'aggiornamento, non puoi accedere a Pocket",
   "condition-usage" : "Potrai comunque utilizzare qualsiasi browser o le nostre app per iOS o Android per accedere a Pocket",
   "delete-body" : "Elimina definitivamente il tuo account Pocket. Questa operazione eliminerà il tuo account e tutti gli elementi al suo interno.",
   "delete-button" : "Elimina account",
@@ -18,5 +20,6 @@
   "no-update-options" : "Ecco le altre opzioni:",
   "title" : "Ulteriori informazioni sulla migrazione a Firefox",
   "update-button" : "Aggiorna account",
-  "update-header" : "Aggiornare le credenziali di accesso a Pocket con un account Firefox"
+  "update-header" : "Aggiornare le credenziali di accesso a Pocket con un account Firefox",
+  "update-header-rebrand" : "Aggiorna il tuo login Pocket"
 }

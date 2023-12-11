@@ -22,9 +22,6 @@ import { MUTATION_BULK_UNFAVORITE } from 'actions'
 
 import { ITEMS_ADD_SUCCESS } from 'actions'
 
-import { SHARE_RECOMMEND_SUCCESS } from 'actions'
-import { SHARE_RECOMMEND_FAILURE } from 'actions'
-
 import { COPY_ITEM_URL } from 'actions'
 
 import { ITEMS_TAG_SUCCESS } from 'actions'
@@ -97,8 +94,6 @@ export function Toast({
     [MUTATION_DELETE_SUCCESS]: t('toast:deleted', '{{count}} item deleted', { count }),
 
     // Sharing
-    [SHARE_RECOMMEND_SUCCESS]: t('toast:shared', '{{count}} item shared', { count }),
-    [SHARE_RECOMMEND_FAILURE]: t('toast:error-sharing', 'Error sharing item'),
     [COPY_ITEM_URL]: t('toast:url-copied', 'URL copied'),
 
     // Archive
@@ -138,11 +133,13 @@ export function Toast({
 
     // Signaled Cards
     [HOME_REC_REQUEST_DEMOTE]: t('toast:home-rec-demote', 'We’ll recommend less stories like this'),
-    [HOME_REC_REQUEST_PROMOTE]: t('toast:home-rec-promote', 'We’ll recommend more stories like this')
+    [HOME_REC_REQUEST_PROMOTE]: t(
+      'toast:home-rec-promote',
+      'We’ll recommend more stories like this'
+    )
   }
 
   const errors = [
-    SHARE_RECOMMEND_FAILURE,
     ITEMS_TAG_FAILURE,
     ADD_SHARE_FAILURE,
     LIST_CREATE_FAILURE,

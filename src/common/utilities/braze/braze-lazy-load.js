@@ -14,5 +14,9 @@ export {
   enableSDK,
   destroy,
   setSdkAuthenticationSignature,
-  subscribeToSdkAuthenticationFailures
+  subscribeToSdkAuthenticationFailures,
+  logFeatureFlagImpression,
+  getFeatureFlag,
+  getAllFeatureFlags,
+  logCustomEvent
 } from '@braze/web-sdk'

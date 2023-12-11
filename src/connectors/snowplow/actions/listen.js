@@ -37,5 +37,14 @@ export const listenActions = {
     eventData: {
       uiType: 'button'
     }
+  },
+  'listen.impression': {
+    eventType: 'impression',
+    entityTypes: ['ui'],
+    eventData: {
+      component: 'ui',
+      uiType: 'button'
+    },
+    description: 'Fired when the Listen module appears on screen'
   }
 }

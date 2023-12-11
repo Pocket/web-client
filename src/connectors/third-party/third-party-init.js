@@ -50,13 +50,14 @@ export function ThirdPartyInit() {
   const brazeLabUser = featureFlagActive({ flag: 'lab.braze', featureState })
 
   useEffect(() => {
-    // not logged in or opted out
-    if (!user_id || !enableBraze) return () => {}
+    // opted out
+    if (!enableBraze) return () => {}
 
     // braze already initialized
     if (brazeInitialized) return () => {}
 
-    if (!brazeToken) {
+    // no token but logged in
+    if (!brazeToken && user_id) {
       dispatch(fetchBrazeToken(user_id))
       return () => {}
     }
@@ -87,9 +88,9 @@ export function ThirdPartyInit() {
           doNotLoadFontAwesome: true
         })
         automaticallyShowInAppMessages()
-        changeUser(user_id, brazeToken)
+        if (user_id && brazeToken) changeUser(user_id, brazeToken)
         openSession()
-        subscribeToSdkAuthenticationFailures(() => dispatch(fetchBrazeToken(user_id)))
+        if (user_id) subscribeToSdkAuthenticationFailures(() => dispatch(fetchBrazeToken(user_id)))
       }
     )
 
@@ -175,18 +176,20 @@ export function ThirdPartyInit() {
     }
   }, [router.events, dispatch])
 
-  return <>
-    {/* put Scripts here instead of in Next Head  */}
-    {/* Google Tag Manager */}
-    <Script id="google-tag-manager">
-      {`
+  return (
+    <>
+      {/* put Scripts here instead of in Next Head  */}
+      {/* Google Tag Manager */}
+      <Script id="google-tag-manager">
+        {`
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-P4LPJ42');
       `}
-    </Script>
-    {/* End Google Tag Manager */}
-  </>
+      </Script>
+      {/* End Google Tag Manager */}
+    </>
+  )
 }

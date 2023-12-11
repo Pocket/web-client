@@ -14,9 +14,6 @@ import { COLLECTION_PAGE_SAVE_SUCCESS } from 'actions'
 import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
 import { ARTICLE_SAVE_SUCCESS } from 'actions'
 
-import { SHARE_RECOMMEND_SUCCESS } from 'actions'
-import { SHARE_RECOMMEND_FAILURE } from 'actions'
-
 import { COPY_ITEM_URL } from 'actions'
 
 import { ITEMS_TAG_SUCCESS } from 'actions'
@@ -80,8 +77,6 @@ export const actionToastsReducers = (state = initialState, action) => {
 
     case TOAST_TEST_MESSAGE:
     case ITEMS_ADD_SUCCESS:
-    case SHARE_RECOMMEND_SUCCESS:
-    case SHARE_RECOMMEND_FAILURE:
     case ITEMS_TAG_SUCCESS:
     case ITEMS_TAG_FAILURE:
     case ADD_SHARE_SUCCESS:
