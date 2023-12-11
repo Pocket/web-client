@@ -7,17 +7,9 @@ import { MUTATION_DELETE_SUCCESS } from 'actions'
 
 import { ITEMS_UPSERT_SUCCESS } from 'actions'
 
-import { ITEMS_ADD_SUCCESS } from 'actions'
-
-import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
-import { COLLECTION_PAGE_SAVE_SUCCESS } from 'actions'
-import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
 import { ARTICLE_SAVE_SUCCESS } from 'actions'
 
 import { COPY_ITEM_URL } from 'actions'
-
-import { ITEMS_TAG_SUCCESS } from 'actions'
-import { ITEMS_TAG_FAILURE } from 'actions'
 
 import { LIST_CREATE_SUCCESS } from 'actions'
 import { LIST_CREATE_FAILURE } from 'actions'
@@ -73,12 +65,6 @@ export const actionToastsReducers = (state = initialState, action) => {
     }
 
     case TOAST_TEST_MESSAGE:
-    case ITEMS_ADD_SUCCESS:
-    case ITEMS_TAG_SUCCESS:
-    case ITEMS_TAG_FAILURE:
-    case COLLECTIONS_SAVE_SUCCESS:
-    case COLLECTION_PAGE_SAVE_SUCCESS:
-    case DISCOVER_ITEMS_SAVE_SUCCESS:
     case ARTICLE_SAVE_SUCCESS:
     case MUTATION_SUCCESS:
     case ITEMS_UPSERT_SUCCESS:

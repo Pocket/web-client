@@ -8,7 +8,6 @@ import { UPDATE_FONT_TYPE } from 'actions'
 import { HYDRATE_DISPLAY_SETTINGS } from 'actions'
 import { SNOWPLOW_SEND_EVENT } from 'actions'
 import { READ_ITEM_SUCCESS } from 'actions'
-import { ARTICLE_ITEM_SUCCESS } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -67,27 +66,25 @@ export const readerSettingsSagas = [
     [UPDATE_LINE_HEIGHT, UPDATE_COLUMN_WIDTH, UPDATE_FONT_SIZE, UPDATE_FONT_TYPE],
     saveDisplaySettings
   ),
-  takeEvery([ARTICLE_ITEM_SUCCESS, READ_ITEM_SUCCESS], hydrateDisplaySettings)
+  takeEvery([READ_ITEM_SUCCESS], hydrateDisplaySettings)
 ]
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 
 function* saveDisplaySettings({ type, ...settings }) {
-  
   const settingKeys = Object.keys(settings)
   yield settingKeys.forEach((val) => {
     localStore.setItem(val.toString(), settings[val])
   })
 
   const identifier = 'reader.display'
-  
+
   // We only pass one of these at a time but we need to break them into expected format
   // So we take the name of the first value and apply it to the original object
   const label = settingKeys[0]
   const value = settings[label]?.toString()
-  const data = {label, value}
-
+  const data = { label, value }
 
   yield put({ type: SNOWPLOW_SEND_EVENT, identifier, data })
 }

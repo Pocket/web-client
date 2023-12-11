@@ -23,16 +23,8 @@ import { HIGHLIGHT_DELETE_SUCCESS } from 'actions'
 import { ITEMS_UPSERT_SUCCESS } from 'actions'
 import { MUTATION_DELETE_SUCCESS } from 'actions'
 
-import { ITEMS_ADD_SUCCESS } from 'actions'
-
 import { COPY_ITEM_URL } from 'actions'
 
-import { ITEMS_TAG_SUCCESS } from 'actions'
-import { ITEMS_TAG_FAILURE } from 'actions'
-
-import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
-import { COLLECTION_PAGE_SAVE_SUCCESS } from 'actions'
-import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
 import { ARTICLE_SAVE_SUCCESS } from 'actions'
 
 import { LIST_CREATE_SUCCESS } from 'actions'
@@ -94,12 +86,6 @@ export function createToastData(action, count) {
 export const actions = [
   ...mutationTypes,
   MUTATION_DELETE_SUCCESS,
-  ITEMS_ADD_SUCCESS,
-  ITEMS_TAG_SUCCESS,
-  ITEMS_TAG_FAILURE,
-  COLLECTIONS_SAVE_SUCCESS,
-  COLLECTION_PAGE_SAVE_SUCCESS,
-  DISCOVER_ITEMS_SAVE_SUCCESS,
   ARTICLE_SAVE_SUCCESS,
   ITEMS_UPSERT_SUCCESS,
   LIST_CREATE_SUCCESS,

@@ -20,16 +20,8 @@ import { MUTATION_BULK_UNARCHIVE } from 'actions'
 import { MUTATION_BULK_FAVORITE } from 'actions'
 import { MUTATION_BULK_UNFAVORITE } from 'actions'
 
-import { ITEMS_ADD_SUCCESS } from 'actions'
-
 import { COPY_ITEM_URL } from 'actions'
 
-import { ITEMS_TAG_SUCCESS } from 'actions'
-import { ITEMS_TAG_FAILURE } from 'actions'
-
-import { COLLECTIONS_SAVE_SUCCESS } from 'actions'
-import { COLLECTION_PAGE_SAVE_SUCCESS } from 'actions'
-import { DISCOVER_ITEMS_SAVE_SUCCESS } from 'actions'
 import { ARTICLE_SAVE_SUCCESS } from 'actions'
 
 import { HIGHLIGHT_SAVE_SUCCESS } from 'actions'
@@ -72,17 +64,12 @@ export function Toast({
   const messages = {
     // Adding Items
     [ITEMS_UPSERT_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
-    [ITEMS_ADD_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
-    [COLLECTIONS_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
-    [COLLECTION_PAGE_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
-    [DISCOVER_ITEMS_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
     [ARTICLE_SAVE_SUCCESS]: t('toast:added', '{{count}} item added', { count }),
     [MUTATION_UNARCHIVE]: t('toast:added', '{{count}} item added', { count }),
     [MUTATION_BULK_UNARCHIVE]: t('toast:unarchived', '{{count}} item added', { count }),
     [MUTATION_UPSERT]: t('toast:added', '{{count}} item added', { count }),
 
     // Tagging Items
-    [ITEMS_TAG_SUCCESS]: t('toast:tagged', '{{count}} item added', { count }),
     [MUTATION_TAGGING]: t('toast:tagged', '{{count}} item added', { count }),
 
     // Deleting
@@ -102,8 +89,6 @@ export function Toast({
 
     [HIGHLIGHT_SAVE_SUCCESS]: t('toast:highlighted', '{{count}} item highlighted', { count }), //prettier-ignore
     [HIGHLIGHT_DELETE_SUCCESS]: t('toast:highlight-deleted', '{{count}} highlight removed', { count }), //prettier-ignore
-
-    [ITEMS_TAG_FAILURE]: t('toast:error-tagging', 'Error tagging item'),
 
     // Lists
     [LIST_CREATE_SUCCESS]: t('toast:list-created', 'List created'),
@@ -135,7 +120,6 @@ export function Toast({
   }
 
   const errors = [
-    ITEMS_TAG_FAILURE,
     LIST_CREATE_FAILURE,
     LIST_ADD_ITEM_FAILURE,
     LIST_DELETE_ITEM_FAILURE,
