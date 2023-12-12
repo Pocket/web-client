@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
 import { breakpointSmallHandset } from 'common/constants'
 import { css } from '@emotion/css'
@@ -32,10 +32,22 @@ const Themes = [
   {
     id: 'sepia',
     label: <Trans i18nKey="settings:theme-sepia">Sepia</Trans>
+  },
+  {
+    id: 'system',
+    label: <Trans i18nKey="settings:theme-system">System</Trans>
   }
 ]
 
 export const ThemeSettings = ({ colorMode = 'light', setColorMode }) => {
+  useEffect(() => {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (colorMode === 'system') {
+        setColorMode(e.matches ? 'dark' : 'light')
+      }
+    })
+  }, [colorMode])
+
   const handleChange = (event) => setColorMode(event?.target?.value)
 
   return (

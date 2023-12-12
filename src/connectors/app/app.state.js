@@ -199,7 +199,7 @@ export function convertToLocalStorage() {
     },
     theme: {
       key: CACHE_KEY_COLOR_MODE,
-      valid: ['light', 'dark', 'sepia']
+      valid: ['light', 'dark', 'sepia', 'system']
     },
     birth: 'remove',
     first_name: 'remove',
@@ -235,6 +235,11 @@ export function convertToLocalStorage() {
 export function setColorClass(colorMode) {
   const htmlTag = global.document && global.document.documentElement
   if (!colorMode || !htmlTag) return
+
+  if (colorMode === 'system') {
+    const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    colorMode = isSystemDark ? 'dark' : 'light'
+  }
 
   htmlTag?.classList.toggle(`${COLOR_MODE_PREFIX}-light`, colorMode === 'light') //prettier-ignore
   htmlTag?.classList.toggle(`${COLOR_MODE_PREFIX}-dark`, colorMode === 'dark') //prettier-ignore

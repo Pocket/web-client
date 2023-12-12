@@ -28,6 +28,11 @@ class ClientDocument extends Document {
               let preferredColorMode;
               try {
                 preferredColorMode = localStorage.getItem('${CACHE_KEY_COLOR_MODE}');
+
+                if (preferredColorMode === 'system') {
+                  const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  preferredColorMode = isSystemDark ? 'dark' : 'light';
+                }
               } catch (err) {}
 
               setColorMode(preferredColorMode);
@@ -60,8 +65,13 @@ class ClientDocument extends Document {
         </Head>
         <body>
           {/* Google Tag Manager (noscript) */}
-          <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4LPJ42"
-            height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe></noscript>
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-P4LPJ42"
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}></iframe>
+          </noscript>
           {/* End Google Tag Manager (noscript) */}
           <Main />
           <NextScript />
