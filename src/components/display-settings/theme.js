@@ -40,13 +40,16 @@ const Themes = [
 ]
 
 export const ThemeSettings = ({ colorMode = 'light', setColorMode }) => {
+  const checkSystemTheme = () => setColorMode(colorMode)
+
   useEffect(() => {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      if (colorMode === 'system') {
-        setColorMode(e.matches ? 'dark' : 'light')
-      }
-    })
-  }, [colorMode])
+    const media = window.matchMedia('(prefers-color-scheme: dark)')
+    media.addEventListener('change', checkSystemTheme)
+
+    return () => {
+      media.removeEventListener('change', checkSystemTheme)
+    }
+  }, [checkSystemTheme])
 
   const handleChange = (event) => setColorMode(event?.target?.value)
 
