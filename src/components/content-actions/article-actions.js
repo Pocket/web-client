@@ -1,6 +1,7 @@
 import { css, cx } from '@emotion/css'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { MailIcon } from 'components/icons/MailIcon'
+import { MastodonIcon } from 'components/icons/MastodonIcon'
 import { breakpointMediumTablet } from 'common/constants'
 import { SocialButton } from 'components/social-button/social-button'
 
@@ -97,6 +98,14 @@ const shareContainer = css`
       }
     }
   }
+  .mastodon-share {
+    button:hover,
+    button:active {
+      svg {
+        color: var(--color-brandMastodon);
+      }
+    }
+  }
   .email-share {
     button:hover,
     button:active {
@@ -126,6 +135,7 @@ export const ArticleActions = function ({
   isAuthenticated,
   onSave = () => {},
   onShare = () => {},
+  onShareMastodon = () => {},
   saveStatus,
   excerpt = '',
   title,
@@ -190,6 +200,12 @@ export const ArticleActions = function ({
             summary={excerpt}
             url={buildShareUrl(url, 'linkedinsynd')}
           />
+        </div>
+
+        <div className="mastodon-share">
+          <button data-cy="share-mastodon" onClick={onShareMastodon}>
+            <MastodonIcon />
+          </button>
         </div>
 
         <div className="email-share">

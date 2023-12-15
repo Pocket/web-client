@@ -115,7 +115,8 @@ const platformBrandColors = {
   brandFacebook: '#3B5998',
   brandTwitter: '#00ACED',
   brandReddit: '#FF4500',
-  brandLinkedin: '#007BB6'
+  brandLinkedin: '#007BB6',
+  brandMastodon: '#563ACC'
 }
 
 export const _paletteGroups = [
@@ -493,12 +494,12 @@ const checkBoxes = {
   checkboxInputBorderSelected: {
     light: _colorPalette.teal50,
     dark: _colorPalette.white100,
-    sepia: _colorPalette.teal50,
+    sepia: _colorPalette.teal50
   },
   checkboxInputBackgroundSelected: {
     light: _colorPalette.teal50,
     dark: _colorPalette.white100,
-    sepia: _colorPalette.teal50,
+    sepia: _colorPalette.teal50
   }
 }
 
@@ -544,4 +545,13 @@ export const _colorModes = {
 }
 
 /** Used for stories */
-export const _themeGroups = { canvas, general, actions, forms, raised, dividers, callouts, checkBoxes }
+export const _themeGroups = {
+  canvas,
+  general,
+  actions,
+  forms,
+  raised,
+  dividers,
+  callouts,
+  checkBoxes
+}

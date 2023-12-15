@@ -4,6 +4,7 @@ import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
 import { BASE_URL } from 'common/constants'
 
 import { contentLayout } from 'components/content-layout/content-layout'
@@ -33,6 +34,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { ListenLogin as Listen } from 'connectors/listen/listen-login'
+import { ShareToMastodon } from 'components/share-modal/share-mastodon'
 
 // Possible query params passed via url
 const validParams = {
@@ -51,6 +53,8 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const topics = useSelector((state) => state.topicList?.topicsByName)
   const articleData = useSelector((state) => state.syndicatedArticle.articleData)
   const saveStatus = useSelector((state) => state.syndicatedArticle.saveStatus)
+
+  const [isMastodonOpen, setIsMastodonOpen] = useState(false)
 
   const {
     itemId,
@@ -113,6 +117,10 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
   const shareAction = (platform) => {
     const analyticsData = { url }
     dispatch(sendSnowplowEvent(`syndicated.share.${platform}`, analyticsData))
+  }
+
+  const toggleMastodon = () => {
+    setIsMastodonOpen(!isMastodonOpen)
   }
 
   const topicClick = (topic) => {
@@ -189,6 +197,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
                 excerpt={excerpt}
                 onSave={saveAction}
                 onShare={shareAction}
+                onShareMastodon={toggleMastodon}
                 saveStatus={saveStatus}
                 isAuthenticated={isAuthenticated}
                 className="sticky"
@@ -243,6 +252,12 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
             </section>
           ) : null}
         </main>
+        <ShareToMastodon
+          showModal={isMastodonOpen}
+          cancelShare={toggleMastodon}
+          shareAction={shareAction}
+          url={url}
+        />
         <Toasts />
       </ArticleLayout>
     </>

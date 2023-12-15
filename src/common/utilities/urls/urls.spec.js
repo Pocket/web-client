@@ -3,6 +3,7 @@ import { getImageCacheUrl } from './urls'
 import { domainForUrl } from './urls'
 import { getTopLevelPath } from './urls'
 import { replaceUTM } from './urls'
+import { isValidHttpUrl } from './urls'
 
 describe('urlWithPocketRedirect', () => {
   it('returns a properly formatted pocket redirect url.', () => {
@@ -186,5 +187,23 @@ describe('replaceUTM', () => {
 
   it('should leave craigslist alone', () => {
     expect(replaceUTM(craigslist, 'pocket')).toBe(craigslist)
+  })
+})
+
+describe('isValidHttpUrl', () => {
+  it('should return true when passed a valid url', () => {
+    expect(isValidHttpUrl('https://getpocket.com')).toBe(true)
+  })
+
+  it('should return false if url is passed without http/https', () => {
+    expect(isValidHttpUrl('www.getpocket.com')).toBeFalsy()
+  })
+
+  it('should return false if a non url is passed', () => {
+    expect(isValidHttpUrl('💪')).toBeFalsy()
+  })
+
+  it('should return false if no url is passed', () => {
+    expect(isValidHttpUrl()).toBeFalsy()
   })
 })
