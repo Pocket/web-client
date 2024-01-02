@@ -108,13 +108,10 @@ export function replaceUTM(passedUrl, source) {
  * @param {string} url
  */
 export function isValidHttpUrl(string) {
-  let url
-
   try {
-    url = new URL(string)
+    const url = new URL(string)
+    return url.protocol === 'http:' || url.protocol === 'https:'
   } catch (_) {
     return false
   }
-
-  return url.protocol === 'http:' || url.protocol === 'https:'
 }
