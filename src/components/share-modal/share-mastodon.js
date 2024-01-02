@@ -19,7 +19,12 @@ const customInstanceList = [
   { label: 'fosstodon.org', link: 'https://fosstodon.org' }
 ]
 
-export const ShareToMastodon = ({ url, showModal, cancelShare, shareAction }) => {
+export const ShareToMastodon = ({
+  url,
+  showModal = false,
+  cancelShare = () => {},
+  shareAction = () => {}
+}) => {
   const { t } = useTranslation()
   const [instance, setInstance] = useState('')
   const [checkbox, setCheckbox] = useState(false)
@@ -98,14 +103,13 @@ export const ShareToMastodon = ({ url, showModal, cancelShare, shareAction }) =>
           />
           <label htmlFor="save">Remember my instance</label>
         </div>
-        {/* {url} */}
       </ModalBody>
       <ModalFooter>
         <button
           className="primary"
           disabled={!isValidHttpUrl(instance.trim())}
           type="submit"
-          data-cy="edit-tag-confirm"
+          data-cy="share-mastodon-confirm"
           onClick={clickHandler}>
           Confirm
         </button>

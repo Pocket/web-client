@@ -53,6 +53,15 @@ export const modalActions = {
     expects: ['url', 'position'],
     description: 'Fired when a user clicks the Buffer button in the Share modal'
   },
+  'share.mastodon': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['url', 'position'],
+    description: 'Fired when a user clicks the Mastodon button in the Share modal'
+  },
   'share.copy': {
     eventType: 'engagement',
     entityTypes: ['content', 'ui'],

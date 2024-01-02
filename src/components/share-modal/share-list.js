@@ -5,8 +5,9 @@ import copy from 'clipboard-copy'
 import { COPY_ITEM_URL } from 'actions'
 import { CopyIcon } from 'components/icons/CopyIcon'
 import { topTooltipDelayed } from 'components/tooltip/tooltip'
-import { socialButtonStyles } from 'components/social-button/social-button'
 import { SocialButton } from 'components/social-button/social-button'
+import { MastodonIcon } from 'components/icons/MastodonIcon'
+import { socialButtonStyles } from 'components/social-button/social-button'
 
 const socialIcons = css`
   margin: 0;
@@ -21,13 +22,26 @@ const socialIcons = css`
   }
 `
 
-export const ShareList = ({ openUrl, excerpt, title, quote, engagementEvent, cancelShare }) => {
+export const ShareList = ({
+  openUrl,
+  excerpt,
+  title,
+  quote,
+  engagementEvent,
+  cancelShare,
+  handleMastodon
+}) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
   const onSocialShare = (service) => {
     engagementEvent(`share.${service}`)
     cancelShare()
+  }
+
+  const onShareMastodon = () => {
+    engagementEvent('share.mastodon')
+    handleMastodon()
   }
 
   const copyUrl = async () => {
@@ -80,6 +94,15 @@ export const ShareList = ({ openUrl, excerpt, title, quote, engagementEvent, can
         title={title}
         url={openUrl}
       />
+
+      <button
+        aria-label={t('share:share-to-mastodon', 'Share to Mastodon')}
+        data-tooltip={t('share:share-to-mastodon', 'Share to Mastodon')}
+        className={cx(socialButtonStyles, topTooltipDelayed)}
+        data-cy="share-mastodon"
+        onClick={onShareMastodon}>
+        <MastodonIcon />
+      </button>
 
       <SocialButton
         network="buffer"

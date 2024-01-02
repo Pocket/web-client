@@ -5,6 +5,7 @@ import Layout from 'layouts/main'
 import MobileLayout from 'layouts/mobile-web'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
 
 import { contentLayout } from 'components/content-layout/content-layout'
 import { printLayout } from 'components/content-layout/print-layout'
@@ -22,6 +23,7 @@ import { ContentIntro } from 'components/content-intro/content-intro'
 import { AuthorBio } from 'components/content-author/author-bio'
 import { Partner } from 'components/content-partner/partner'
 import { CallOutNewsroom } from 'components/call-out/newsroom'
+import { ShareToMastodon } from 'components/share-modal/share-mastodon'
 
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
 import { CardTopicsNav as TopicsBubbles } from 'connectors/topic-list/topic-list'
@@ -75,6 +77,8 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
   const showTopics = locale === 'en'
   const saveItemId = useSelector((state) => state.itemsTransitions[slug])
 
+  const [isMastodonOpen, setIsMastodonOpen] = useState(false)
+
   // Show error page if things have gone awry
   if (statusCode) return <ErrorPage statusCode={statusCode} />
 
@@ -125,6 +129,10 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
 
   const topicClick = (topic) => {
     dispatch(sendSnowplowEvent('collection.topic.click', { label: topic }))
+  }
+
+  const toggleMastodon = () => {
+    setIsMastodonOpen(!isMastodonOpen)
   }
 
   return (
@@ -187,6 +195,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
                 saveStatus={pageSaveStatus}
                 isAuthenticated={isAuthenticated}
                 onShare={shareAction}
+                onShareMastodon={toggleMastodon}
                 className="sticky"
                 url={url}
               />
@@ -248,6 +257,12 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
             </footer>
           </section>
         </main>
+        <ShareToMastodon
+          showModal={isMastodonOpen}
+          cancelShare={toggleMastodon}
+          shareAction={shareAction}
+          url={url}
+        />
       </ArticleLayout>
     </>
   )

@@ -26,7 +26,8 @@ export const ShareModal = ({
   quote,
   showModal,
   cancelShare,
-  engagementEvent
+  engagementEvent,
+  handleMastodon
 }) => {
   const { t } = useTranslation()
 
@@ -58,6 +59,7 @@ export const ShareModal = ({
           quote={quote}
           engagementEvent={engagementEvent}
           cancelShare={cancelShare}
+          handleMastodon={handleMastodon}
         />
       </ModalFooter>
     </Modal>

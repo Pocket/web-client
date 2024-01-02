@@ -73,7 +73,8 @@ export const collectionsActions = {
       uiType: 'button'
     },
     expects: ['url', 'position'],
-    description: 'Fired when a user clicks the `Saved` button post-save on a card on a collection story page at /collections/*'
+    description:
+      'Fired when a user clicks the `Saved` button post-save on a card on a collection story page at /collections/*'
   },
   'collection.page.save': {
     eventType: 'engagement',
@@ -103,7 +104,8 @@ export const collectionsActions = {
       uiType: 'button'
     },
     expects: ['url'],
-    description: 'Fired when a user clicks the FB button on a collection story page at /collections/*'
+    description:
+      'Fired when a user clicks the FB button on a collection story page at /collections/*'
   },
   'collection.share.twitter': {
     eventType: 'engagement',
@@ -112,7 +114,8 @@ export const collectionsActions = {
       uiType: 'button'
     },
     expects: ['url'],
-    description: 'Fired when a user clicks the Twitter button on a collection story page at /collections/*'
+    description:
+      'Fired when a user clicks the Twitter button on a collection story page at /collections/*'
   },
   'collection.share.linkedin': {
     eventType: 'engagement',
@@ -121,7 +124,8 @@ export const collectionsActions = {
       uiType: 'button'
     },
     expects: ['url'],
-    description: 'Fired when a user clicks the LinkedIn button on a collection story page at /collections/*'
+    description:
+      'Fired when a user clicks the LinkedIn button on a collection story page at /collections/*'
   },
   'collection.share.reddit': {
     eventType: 'engagement',
@@ -130,7 +134,18 @@ export const collectionsActions = {
       uiType: 'button'
     },
     expects: ['url'],
-    description: 'Fired when a user clicks the Reddit button on a collection story page at /collections/*'
+    description:
+      'Fired when a user clicks the Reddit button on a collection story page at /collections/*'
+  },
+  'collection.share.mastodon': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['url'],
+    description:
+      'Fired when a user clicks the Mastodon button on a collection story page at /collections/*'
   },
   'collection.share.email': {
     eventType: 'engagement',
@@ -139,7 +154,8 @@ export const collectionsActions = {
       uiType: 'button'
     },
     expects: ['url'],
-    description: 'Fired when a user clicks the email button on a collection story page at /collections/*'
+    description:
+      'Fired when a user clicks the email button on a collection story page at /collections/*'
   },
   'collection.topic.click': {
     eventType: 'engagement',

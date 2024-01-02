@@ -272,6 +272,22 @@ export const shareableListActions = {
     ],
     description: 'Fired when a creator clicks the "Reddit" button in the Share List modal'
   },
+  'shareable-list.share.mastodon': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description: 'Fired when a creator clicks the "Mastodon" button in the Share List modal'
+  },
   'shareable-list.share.buffer': {
     eventType: 'engagement',
     entityTypes: ['shareableList', 'ui'],
@@ -840,6 +856,23 @@ export const shareableListActions = {
     ],
     description:
       'Fired when a creator clicks the "Reddit" button in the Share List modal on the public list page'
+  },
+  'public-list.share.mastodon': {
+    eventType: 'engagement',
+    entityTypes: ['shareableList', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: [
+      'shareableListExternalId',
+      'listItemNoteVisibility',
+      'title',
+      'status',
+      'moderationStatus',
+      'createdAt'
+    ],
+    description:
+      'Fired when a creator clicks the "Mastodon" button in the Share List modal on the public list page'
   },
   'public-list.share.buffer': {
     eventType: 'engagement',

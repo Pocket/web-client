@@ -46,6 +46,15 @@ export const syndicatedArticleActions = {
     expects: ['url'],
     description: 'Fired when a user clicks the Reddit button on a syndicated article'
   },
+  'syndicated.share.mastodon': {
+    eventType: 'engagement',
+    entityTypes: ['content', 'ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['url'],
+    description: 'Fired when a user clicks the Mastodon button on a syndicated article'
+  },
   'syndicated.share.email': {
     eventType: 'engagement',
     entityTypes: ['content', 'ui'],
@@ -80,7 +89,7 @@ export const syndicatedArticleActions = {
     entityTypes: ['ui'],
     eventData: {
       uiType: 'button',
-      component: 'button',
+      component: 'button'
     },
     expects: ['label'],
     description:
@@ -127,5 +136,5 @@ export const syndicatedArticleActions = {
     },
     expects: ['corpusRecommendationId', 'url', 'position'],
     description: 'Fired when a user clicks a rec in the sidebar of a syndicated article'
-  },
+  }
 }

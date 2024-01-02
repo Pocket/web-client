@@ -22,6 +22,7 @@ export const ShareListModal = ({
   showModal,
   cancelShare,
   engagementEvent,
+  handleMastodon,
   handleCopyUrl,
   handleOpenUrl
 }) => {
@@ -69,6 +70,7 @@ export const ShareListModal = ({
           title={title}
           engagementEvent={engagementEvent}
           cancelShare={cancelShare}
+          handleMastodon={handleMastodon}
         />
       </ModalFooter>
     </Modal>
