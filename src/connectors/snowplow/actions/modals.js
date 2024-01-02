@@ -70,5 +70,14 @@ export const modalActions = {
     },
     expects: ['url', 'position'],
     description: 'Fired when a user clicks the Copy Link button in the Share modal'
+  },
+  'share.mastodon.confirm': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'menu'
+    },
+    expects: ['value'],
+    description: 'Fired when a user Confirms sharing to Mastodon in the Share to Mastodon modal'
   }
 }

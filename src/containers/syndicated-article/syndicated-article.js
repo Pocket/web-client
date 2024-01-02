@@ -123,6 +123,10 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     setIsMastodonOpen(!isMastodonOpen)
   }
 
+  const confirmMastodon = (instance) => {
+    dispatch(sendSnowplowEvent('share.mastodon.confirm', { value: instance }))
+  }
+
   const topicClick = (topic) => {
     dispatch(sendSnowplowEvent('syndicated.topic.click', { label: topic }))
   }
@@ -255,7 +259,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
         <ShareToMastodon
           showModal={isMastodonOpen}
           cancelShare={toggleMastodon}
-          shareAction={shareAction}
+          shareAction={confirmMastodon}
           url={url}
         />
         <Toasts />

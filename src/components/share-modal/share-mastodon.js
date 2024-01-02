@@ -48,7 +48,7 @@ export const ShareToMastodon = ({
 
   const handleCheckboxClick = (e) => setCheckbox(e.target.checked)
 
-  const callbackHandler = () => shareAction(network)
+  const callbackHandler = () => shareAction(instance.trim())
 
   const clickHandler = (e) => {
     e.preventDefault()

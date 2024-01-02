@@ -135,6 +135,10 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
     setIsMastodonOpen(!isMastodonOpen)
   }
 
+  const confirmMastodon = (instance) => {
+    dispatch(sendSnowplowEvent('share.mastodon.confirm', { value: instance }))
+  }
+
   return (
     <>
       <Head>
@@ -260,7 +264,7 @@ export function CollectionPage({ locale, queryParams = {}, slug, statusCode }) {
         <ShareToMastodon
           showModal={isMastodonOpen}
           cancelShare={toggleMastodon}
-          shareAction={shareAction}
+          shareAction={confirmMastodon}
           url={url}
         />
       </ArticleLayout>

@@ -37,6 +37,10 @@ export const ConfirmShare = ({ snowplowId }) => {
     dispatch(sendSnowplowEvent(`${snowplowId}.public-link.open.share-modal`, analyticsData))
   }
 
+  const confirmMastodon = (instance) => {
+    dispatch(sendSnowplowEvent('share.mastodon.confirm', { value: instance }))
+  }
+
   return (
     <>
       <ShareListModal
@@ -57,7 +61,7 @@ export const ConfirmShare = ({ snowplowId }) => {
       <ShareToMastodon
         showModal={mastodonOpen}
         cancelShare={cancelShare}
-        // shareAction={shareAction}
+        shareAction={confirmMastodon}
         url={url}
       />
     </>

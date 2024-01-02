@@ -149,6 +149,11 @@ export const ArticleActions = function ({
     window.location.href = emailUrl
   }
 
+  const mastodonAction = () => {
+    onShare('mastodon')
+    onShareMastodon()
+  }
+
   return (
     <div className={cx(shareContainer, className)}>
       <div className="social-actions">
@@ -203,7 +208,7 @@ export const ArticleActions = function ({
         </div>
 
         <div className="mastodon-share">
-          <button data-cy="share-mastodon" onClick={onShareMastodon}>
+          <button data-cy="share-mastodon" onClick={mastodonAction}>
             <MastodonIcon />
           </button>
         </div>
