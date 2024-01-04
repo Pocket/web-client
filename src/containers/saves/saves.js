@@ -25,6 +25,7 @@ import { ConfirmAddToList } from 'connectors/confirm/add-to-list'
 import { CreateListModal } from 'connectors/confirm/create-list'
 
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Saves = (props) => {
   const router = useRouter()
@@ -49,6 +50,7 @@ export const Saves = (props) => {
   // Derived Values
   const shouldRender = userStatus !== 'pending'
   const { flagsReady } = featureState
+  const enrolledAdvancedSearch = featureFlagActive({ flag: 'api.search', featureState })
 
   const ListHeader = searchTerm ? SearchPageHeader : SavesHeader
   const Header = tag ? TagPageHeader : ListHeader
@@ -86,6 +88,7 @@ export const Saves = (props) => {
           handleRelevance={handleRelevance}
           handleCreateList={handleCreateList}
           inBulkEdit={inBulkEdit}
+          enrolledAdvancedSearch={enrolledAdvancedSearch}
         />
         {flagsReady && shouldRender ? <SavedItems {...props} /> : null}
       </main>

@@ -2,6 +2,7 @@ import { put, call, select, takeEvery } from 'redux-saga/effects'
 import * as Sentry from '@sentry/nextjs'
 import { itemFiltersFromGraph } from 'common/api/queries/get-saved-items.filters'
 import { arraysAreEqual } from 'common/utilities/object-array/object-array'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 import { ITEMS_SAVED_REQUEST } from 'actions'
 import { ITEMS_SAVED_SUCCESS } from 'actions'
@@ -23,6 +24,8 @@ import { ITEMS_SAVED_PAGE_SET_SORT_ORDER } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_BY } from 'actions'
 import { ITEMS_SAVED_SEARCH_REQUEST } from 'actions'
 import { ITEMS_SAVED_TAGGED_REQUEST } from 'actions'
+
+import { ITEMS_SAVED_ADVANCED_SEARCH_REQUEST } from 'actions'
 
 import { ITEM_SAVED_REMOVE_FROM_LIST } from 'actions'
 import { SEARCH_SAVED_ITEMS } from 'actions'
@@ -151,6 +154,7 @@ export const pageSavedInfoReducers = (state = initialState, action) => {
   switch (action.type) {
     case ITEMS_SAVED_TAGGED_REQUEST:
     case ITEMS_SAVED_SEARCH_REQUEST:
+    case ITEMS_SAVED_ADVANCED_SEARCH_REQUEST:
     case ITEMS_SAVED_REQUEST: {
       const { sortOrder = 'DESC', tagNames, searchTerm, actionType } = action
       return { ...state, error: false, loading: true, sortOrder, actionType, tagNames, searchTerm }
@@ -196,7 +200,7 @@ export const pageSavedInfoReducers = (state = initialState, action) => {
 export const pageSavedIdsSagas = [
   takeEvery(MUTATION_SUCCESS, reconcileMutation),
   takeEvery(MUTATION_DELETE_SUCCESS, reconcileDeleteMutation),
-  takeEvery([ ITEMS_UPSERT_SUCCESS, ITEMS_SAVED_UPDATE_SUCCESS ], reconcileUpsert),
+  takeEvery([ITEMS_UPSERT_SUCCESS, ITEMS_SAVED_UPDATE_SUCCESS], reconcileUpsert),
   takeEvery(LOAD_MORE_ITEMS, loadMoreItems),
   takeEvery(LOAD_PREVIOUS_ITEMS, loadPreviousItems),
   takeEvery(ITEMS_SAVED_PAGE_SET_SORT_ORDER_REQUEST, adjustSortOrder),
@@ -239,6 +243,7 @@ const getSavedPageIds = (state) => state.pageSavedIds
 const getSortOrder = (state) => state.pageSavedInfo?.sortOrder
 const getItems = (state) => state.itemsDisplay
 const getItemCursor = (state, id) => state.itemsSaved[id]?.cursor
+const getFeatures = (state) => state.features
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -329,9 +334,7 @@ function* loadMoreItems() {
 
 function* loadPreviousItems() {
   try {
-    const { searchTerm, sortOrder, actionType, tagNames } = yield select(
-      getSavedPageInfo
-    )
+    const { searchTerm, sortOrder, actionType, tagNames } = yield select(getSavedPageInfo)
     const type = yield call(itemRequestType, searchTerm, tagNames)
     // We only want to fetch an update if the user is on Saves
     if (type !== ITEMS_SAVED_REQUEST) return
@@ -357,12 +360,12 @@ function* loadPreviousItems() {
   }
 }
 
-function* adjustSortOrder(action){
-  const {sortOrder} = action
+function* adjustSortOrder(action) {
+  const { sortOrder } = action
   const currentSortOrder = yield select(getSortOrder)
 
   // Don't change sort order if it's already in the same space
-  if(currentSortOrder === sortOrder) return
+  if (currentSortOrder === sortOrder) return
 
   yield put({ type: ITEMS_SAVED_PAGE_SET_SORT_ORDER, sortOrder })
 
@@ -383,8 +386,12 @@ function shouldBeFiltered(itemDetails, actionType) {
   if (filter?.statuses && !filter?.statuses.includes(node?.status)) return true
 }
 
-function itemRequestType(searchTerm, tagNames) {
+function* itemRequestType(searchTerm, tagNames) {
   if (tagNames?.length) return ITEMS_SAVED_TAGGED_REQUEST
-  if (searchTerm) return ITEMS_SAVED_SEARCH_REQUEST
+  if (searchTerm) {
+    const featureState = yield select(getFeatures)
+    const enrolled = featureFlagActive({ flag: 'api.search', featureState })
+    return enrolled ? ITEMS_SAVED_ADVANCED_SEARCH_REQUEST : ITEMS_SAVED_SEARCH_REQUEST
+  }
   return ITEMS_SAVED_REQUEST
 }

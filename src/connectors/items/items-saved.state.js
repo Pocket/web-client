@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 import { getSavedItems } from 'common/api/queries/get-saved-items'
 import { getSavedItemsTagged } from 'common/api/queries/get-saved-items-tagged'
 import { getSavedItemsSearch } from 'common/api/queries/get-saved-items-search'
+import { getSavedItemsAdvancedSearch } from 'common/api/queries/get-saved-items-advanced-search'
 
 import { deriveSavedItem } from 'common/api/derivers/item'
 import { STARTER_ARTICLES } from 'common/constants'
@@ -19,6 +20,7 @@ import { ITEMS_SAVED_UPDATE_FAILURE } from 'actions'
 
 import { ITEMS_SAVED_SEARCH_REQUEST } from 'actions'
 import { ITEMS_SAVED_SEARCH_FAILURE } from 'actions'
+import { ITEMS_SAVED_ADVANCED_SEARCH_REQUEST } from 'actions'
 
 import { ITEMS_SAVED_TAGGED_REQUEST } from 'actions'
 import { ITEMS_SAVED_TAGGED_FAILURE } from 'actions'
@@ -79,6 +81,7 @@ export const itemsSavedSagas = [
   takeEvery(ITEMS_SAVED_REQUEST, savedItemRequest),
   takeEvery(ITEMS_SAVED_TAGGED_REQUEST, savedItemTaggedRequest),
   takeEvery(ITEMS_SAVED_SEARCH_REQUEST, savedItemSearchRequest),
+  takeEvery(ITEMS_SAVED_ADVANCED_SEARCH_REQUEST, savedItemAdvancedSearchRequest),
   takeEvery(ITEMS_SAVED_UPDATE_REQUEST, savedItemUpdateRequest)
 ]
 
@@ -162,7 +165,31 @@ function* savedItemSearchRequest(action) {
   const itemsCount = savedItemIds.length
 
   yield put({ type: ITEMS_SUCCESS, itemsById })
-  yield put({ type: ITEMS_SAVED_PAGE_INFO_SUCCESS, pageInfo: { ...pageInfo, totalCount, searchTerm}, itemsCount }) //prettier-ignore
+  yield put({ type: ITEMS_SAVED_PAGE_INFO_SUCCESS, pageInfo: { ...pageInfo, totalCount, searchTerm }, itemsCount }) //prettier-ignore
+  yield put({ type: ITEMS_SAVED_SUCCESS, nodes, savedItemIds })
+}
+
+function* savedItemAdvancedSearchRequest(action) {
+  const { searchTerm, sortOrder, pagination } = action
+  // const { ...filter } = yield select(itemsFilter)
+
+  const { pageInfo, edges, totalCount } = yield getSavedItemsAdvancedSearch({
+    filter: {},
+    sortOrder,
+    queryString: searchTerm,
+    pagination
+  }) || {}
+
+  if (!pageInfo) return yield put({ type: ITEMS_SAVED_PAGE_INFO_FAILURE })
+  if (!edges) return yield put({ type: ITEMS_SAVED_SEARCH_FAILURE })
+
+  const savedItemIds = edges.map((edge) => edge.node.savedItem.id)
+  const nodes = edges.reduce(getSearchNodeFromEdge, {})
+  const itemsById = edges.reduce(getSearchItemFromEdge, {})
+  const itemsCount = savedItemIds.length
+
+  yield put({ type: ITEMS_SUCCESS, itemsById })
+  yield put({ type: ITEMS_SAVED_PAGE_INFO_SUCCESS, pageInfo: { ...pageInfo, totalCount, searchTerm }, itemsCount }) //prettier-ignore
   yield put({ type: ITEMS_SAVED_SUCCESS, nodes, savedItemIds })
 }
 
@@ -238,7 +265,7 @@ const getSearchItemFromEdge = (previous, current) => {
 }
 
 /**
- * Errors 
+ * Errors
  ----------------------------------------------------------------------------*/
 
 class SavedItemsError extends Error {

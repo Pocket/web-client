@@ -1,7 +1,8 @@
 import React from 'react'
 import { css, cx } from '@emotion/css'
-import { EmptyCircledIcon, CheckFilledIcon } from '../icons/icons'
-import { darkMode } from '../../constants/constants'
+import { EmptyCircledIcon } from 'components/icons/EmptyCircledIcon'
+import { CheckFilledIcon } from 'components/icons/CheckFilledIcon'
+
 const pillStyle = css`
   display: inline-flex;
   justify-content: flex-start;
@@ -56,7 +57,7 @@ const pillStyle = css`
     border-color: var(--color-actionPrimary);
     background: var(--color-actionPrimarySubdued);
 
-    ${darkMode} {
+    .colormode-dark & {
       svg path {
         fill: var(--color-actionPrimary);
       }
