@@ -27,38 +27,32 @@ export const SearchPageHeader = ({
   isPremium,
   handleNewest,
   handleOldest,
-  handleRelevance,
-  enrolledAdvancedSearch
+  handleRelevance
 }) => {
   const { t } = useTranslation()
 
   const isLoading = total === false
   return query ? (
-    <>
-      <header className={cx(savesHeaderStyle, searchStyles)}>
-        <h1 className="pageTitle" data-cy="page-title">
-          <em data-cy="search-query">“{query}”</em> —{' '}
-          {isLoading ? (
-            <span>
-              {t('search:searching', 'Searching')} <Loader />{' '}
-            </span>
-          ) : (
-            <span>
-              {total || 0} {t('search:search-results', 'Search Results')}
-            </span>
-          )}
-        </h1>
-        {!enrolledAdvancedSearch ? (
-          <FilterMenu subset="search" query={query} filter={filter} />
-        ) : null}
-        <ListSort
-          sortOrder={sortOrder}
-          // showRelevance={isPremium} // this is currently broken 1/4/24
-          handleNewest={handleNewest}
-          handleOldest={handleOldest}
-          handleRelevance={handleRelevance}
-        />
-      </header>
-    </>
+    <header className={cx(savesHeaderStyle, searchStyles)}>
+      <h1 className="pageTitle" data-cy="page-title">
+        <em data-cy="search-query">“{query}”</em> —{' '}
+        {isLoading ? (
+          <span>
+            {t('search:searching', 'Searching')} <Loader />{' '}
+          </span>
+        ) : (
+          <span>
+            {total || 0} {t('search:search-results', 'Search Results')}
+          </span>
+        )}
+      </h1>
+      <ListSort
+        sortOrder={sortOrder}
+        // showRelevance={isPremium} // this is currently broken 1/4/24
+        handleNewest={handleNewest}
+        handleOldest={handleOldest}
+        handleRelevance={handleRelevance}
+      />
+    </header>
   ) : null
 }

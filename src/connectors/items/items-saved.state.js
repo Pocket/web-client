@@ -20,7 +20,8 @@ import { ITEMS_SAVED_UPDATE_FAILURE } from 'actions'
 
 import { ITEMS_SAVED_SEARCH_REQUEST } from 'actions'
 import { ITEMS_SAVED_SEARCH_FAILURE } from 'actions'
-import { ITEMS_SAVED_ADVANCED_SEARCH_REQUEST } from 'actions'
+
+import { ITEMS_SAVED_FILTERED_REQUEST } from 'actions'
 
 import { ITEMS_SAVED_TAGGED_REQUEST } from 'actions'
 import { ITEMS_SAVED_TAGGED_FAILURE } from 'actions'
@@ -81,7 +82,7 @@ export const itemsSavedSagas = [
   takeEvery(ITEMS_SAVED_REQUEST, savedItemRequest),
   takeEvery(ITEMS_SAVED_TAGGED_REQUEST, savedItemTaggedRequest),
   takeEvery(ITEMS_SAVED_SEARCH_REQUEST, savedItemSearchRequest),
-  takeEvery(ITEMS_SAVED_ADVANCED_SEARCH_REQUEST, savedItemAdvancedSearchRequest),
+  takeEvery(ITEMS_SAVED_FILTERED_REQUEST, savedItemAdvancedSearchRequest),
   takeEvery(ITEMS_SAVED_UPDATE_REQUEST, savedItemUpdateRequest)
 ]
 

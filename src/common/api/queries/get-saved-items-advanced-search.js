@@ -1,8 +1,7 @@
 import { requestGQL } from 'common/utilities/request/request'
 import { gql } from 'common/utilities/gql/gql'
 import { FRAGMENT_ITEM } from 'common/api/fragments/fragment.item'
-import { itemFiltersFromGraph } from './get-saved-items.filters'
-import { actionToCamelCase } from 'common/utilities/strings/strings'
+import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object-array'
 
 const advancedSearchSavedItemsQuery = gql`
   query AdvancedSearch(
@@ -66,12 +65,12 @@ export async function getSavedItemsAdvancedSearch({
   queryString = '',
   pagination
 }) {
-  const variables = {
+  const variables = getObjectWithValidKeysOnly({
     filter,
     sort: { sortOrder, sortBy },
     queryString,
     pagination
-  }
+  })
 
   return requestGQL({ query: advancedSearchSavedItemsQuery, variables })
     .then(handleResponse)

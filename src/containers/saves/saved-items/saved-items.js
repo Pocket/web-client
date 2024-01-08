@@ -10,6 +10,7 @@ import { searchItemsArchived } from 'containers/saves/saved-items/saved-items.st
 import { searchItemsFavorites } from 'containers/saves/saved-items/saved-items.state'
 import { getItemsUnread } from 'containers/saves/saved-items/saved-items.state'
 import { getItemsArchived } from 'containers/saves/saved-items/saved-items.state'
+import { getItemsFiltered } from 'containers/saves/saved-items/saved-items.state'
 import { getItemsFavorites } from 'containers/saves/saved-items/saved-items.state'
 import { getItemsFavoritesUnread } from 'containers/saves/saved-items/saved-items.state'
 import { getItemsFavoritesArchived } from 'containers/saves/saved-items/saved-items.state'
@@ -33,6 +34,7 @@ import { getItemsTags } from 'containers/saves/saved-items/saved-items.state'
 export function filterSelector(subset, filter) {
   if (subset === 'unread') return getItemsUnread
   if (subset === 'archive') return getItemsArchived
+  if (subset === 'filter') return getItemsFiltered
 
   if (subset === 'favorites') {
     if (filter === 'unread') return getItemsFavoritesUnread

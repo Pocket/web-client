@@ -2,7 +2,6 @@ import { put, call, select, takeEvery } from 'redux-saga/effects'
 import * as Sentry from '@sentry/nextjs'
 import { itemFiltersFromGraph } from 'common/api/queries/get-saved-items.filters'
 import { arraysAreEqual } from 'common/utilities/object-array/object-array'
-import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 import { ITEMS_SAVED_REQUEST } from 'actions'
 import { ITEMS_SAVED_SUCCESS } from 'actions'
@@ -24,8 +23,7 @@ import { ITEMS_SAVED_PAGE_SET_SORT_ORDER } from 'actions'
 import { ITEMS_SAVED_PAGE_SET_SORT_BY } from 'actions'
 import { ITEMS_SAVED_SEARCH_REQUEST } from 'actions'
 import { ITEMS_SAVED_TAGGED_REQUEST } from 'actions'
-
-import { ITEMS_SAVED_ADVANCED_SEARCH_REQUEST } from 'actions'
+import { ITEMS_SAVED_FILTERED_REQUEST } from 'actions'
 
 import { ITEM_SAVED_REMOVE_FROM_LIST } from 'actions'
 import { SEARCH_SAVED_ITEMS } from 'actions'
@@ -35,6 +33,7 @@ import { SEARCH_SAVED_ITEMS_FAVORITES } from 'actions'
 
 import { GET_ITEMS_UNREAD } from 'actions'
 import { GET_ITEMS_ARCHIVED } from 'actions'
+import { GET_ITEMS_FILTERED } from 'actions'
 import { GET_ITEMS_FAVORITES } from 'actions'
 import { GET_ITEMS_FAVORITES_UNREAD } from 'actions'
 import { GET_ITEMS_FAVORITES_ARCHIVED } from 'actions'
@@ -64,6 +63,7 @@ import { SNOWPLOW_SEND_EVENT } from 'actions'
  --------------------------------------------------------------- */
 export const getItemsUnread = (sortOrder) => ({ type: GET_ITEMS_UNREAD, sortOrder}) //prettier-ignore
 export const getItemsArchived = (sortOrder) => ({ type: GET_ITEMS_ARCHIVED, sortOrder }) //prettier-ignore
+export const getItemsFiltered = () => ({ type: GET_ITEMS_FILTERED })
 
 export const getItemsFavorites = (sortOrder) => ({ type: GET_ITEMS_FAVORITES, sortOrder}) //prettier-ignore
 export const getItemsFavoritesUnread = (sortOrder) => ({ type: GET_ITEMS_FAVORITES_UNREAD, sortOrder}) //prettier-ignore
@@ -154,7 +154,6 @@ export const pageSavedInfoReducers = (state = initialState, action) => {
   switch (action.type) {
     case ITEMS_SAVED_TAGGED_REQUEST:
     case ITEMS_SAVED_SEARCH_REQUEST:
-    case ITEMS_SAVED_ADVANCED_SEARCH_REQUEST:
     case ITEMS_SAVED_REQUEST: {
       const { sortOrder = 'DESC', tagNames, searchTerm, actionType } = action
       return { ...state, error: false, loading: true, sortOrder, actionType, tagNames, searchTerm }
@@ -212,6 +211,7 @@ export const pageSavedIdsSagas = [
       SEARCH_SAVED_ITEMS_FAVORITES,
       GET_ITEMS_UNREAD,
       GET_ITEMS_ARCHIVED,
+      GET_ITEMS_FILTERED,
       GET_ITEMS_FAVORITES,
       GET_ITEMS_FAVORITES_UNREAD,
       GET_ITEMS_FAVORITES_ARCHIVED,
@@ -243,7 +243,6 @@ const getSavedPageIds = (state) => state.pageSavedIds
 const getSortOrder = (state) => state.pageSavedInfo?.sortOrder
 const getItems = (state) => state.itemsDisplay
 const getItemCursor = (state, id) => state.itemsSaved[id]?.cursor
-const getFeatures = (state) => state.features
 
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
@@ -304,7 +303,7 @@ function* requestItems(action) {
     yield put({ type: ITEMS_CLEAR_CURRENT })
   }
 
-  const type = yield call(itemRequestType, searchTerm, tagNames)
+  const type = yield call(itemRequestType, searchTerm, tagNames, actionType)
 
   yield put({ type, actionType, sortOrder, count, tagNames, searchTerm })
 }
@@ -314,7 +313,7 @@ function* loadMoreItems() {
     const { searchTerm, sortOrder, endCursor, actionType, tagNames } = yield select(
       getSavedPageInfo
     )
-    const type = yield call(itemRequestType, searchTerm, tagNames)
+    const type = yield call(itemRequestType, searchTerm, tagNames, actionType)
 
     yield put({
       type,
@@ -335,7 +334,7 @@ function* loadMoreItems() {
 function* loadPreviousItems() {
   try {
     const { searchTerm, sortOrder, actionType, tagNames } = yield select(getSavedPageInfo)
-    const type = yield call(itemRequestType, searchTerm, tagNames)
+    const type = yield call(itemRequestType, searchTerm, tagNames, actionType)
     // We only want to fetch an update if the user is on Saves
     if (type !== ITEMS_SAVED_REQUEST) return
 
@@ -386,12 +385,9 @@ function shouldBeFiltered(itemDetails, actionType) {
   if (filter?.statuses && !filter?.statuses.includes(node?.status)) return true
 }
 
-function* itemRequestType(searchTerm, tagNames) {
+function itemRequestType(searchTerm, tagNames, actionType) {
+  if (actionType === GET_ITEMS_FILTERED) return ITEMS_SAVED_FILTERED_REQUEST
   if (tagNames?.length) return ITEMS_SAVED_TAGGED_REQUEST
-  if (searchTerm) {
-    const featureState = yield select(getFeatures)
-    const enrolled = featureFlagActive({ flag: 'api.search', featureState })
-    return enrolled ? ITEMS_SAVED_ADVANCED_SEARCH_REQUEST : ITEMS_SAVED_SEARCH_REQUEST
-  }
+  if (searchTerm) return ITEMS_SAVED_SEARCH_REQUEST
   return ITEMS_SAVED_REQUEST
 }
