@@ -1,4 +1,4 @@
-import Layout from 'layouts/with-sidebar'
+import Layout from 'layouts/main'
 import { useSelector, useDispatch } from 'react-redux'
 import { SideNav } from 'connectors/side-nav/side-nav'
 import { useRouter } from 'next/router'
@@ -34,7 +34,7 @@ const headerSelector = (searchTerm, tag, subset) => {
   return SavesHeader
 }
 
-export const Saves = (props) => {
+export const Filter = (props) => {
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -76,9 +76,7 @@ export const Saves = (props) => {
       selectedNavLink={selectedNavLink}
       subset={subset}
       tag={tag}>
-      <SideNav type="saves" subset={subset} isLoggedIn={isLoggedIn} tag={tag} />
       <main className="main">
-        <SuccessFXA type="saves" />
         <Header
           subset={subset}
           title={selector}

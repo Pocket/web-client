@@ -59,18 +59,25 @@ const advancedSearchSavedItemsQuery = gql`
 `
 
 export async function getSavedItemsAdvancedSearch({
-  filter = {},
+  filter: submittedFilter = {},
   sortOrder = 'DESC', // 'ASC'
   sortBy = 'CREATED_AT', // 'TIME_TO_READ' || 'RELEVANCE'
   queryString = '',
   pagination
 }) {
+  const filter = getObjectWithValidKeysOnly(submittedFilter)
+
   const variables = getObjectWithValidKeysOnly({
     filter,
     sort: { sortOrder, sortBy },
     queryString,
     pagination
   })
+  if (Object.keys(variables.filter).length == 0) {
+    delete variables.filter
+  }
+
+  console.log({ variables })
 
   return requestGQL({ query: advancedSearchSavedItemsQuery, variables })
     .then(handleResponse)
@@ -78,6 +85,7 @@ export async function getSavedItemsAdvancedSearch({
 }
 
 function handleResponse(response) {
+  console.log({ response })
   const responseData = response?.data?.user?.advancedSearch
   if (!responseData) throw new MalformedItemAdvancedSearchError()
 

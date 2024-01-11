@@ -11,6 +11,10 @@ export const tagWrapper = css`
   position: relative;
 `
 
-export function TagBox({ children }) {
-  return <div className={tagWrapper}>{children}</div>
+export function TagBox({ children, onClick = () => {} }) {
+  return (
+    <div className={tagWrapper} onClick={onClick}>
+      {children}
+    </div>
+  )
 }

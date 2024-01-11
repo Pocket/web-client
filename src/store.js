@@ -59,6 +59,9 @@ import { itemsSavedSagas } from 'connectors/items/items-saved.state'
 import { itemsTransitionsReducers } from 'connectors/items/items-transition.state'
 import { itemsRelatedReducers } from 'connectors/items/items-related.state'
 
+import { itemsFilterReducers } from 'connectors/filter/items-filter.state'
+import { itemsFilterSagas } from 'connectors/filter/items-filter.state'
+
 import { mutationArchiveReducers } from 'connectors/items/mutation-archive.state'
 import { mutationArchiveSagas } from 'connectors/items/mutation-archive.state'
 
@@ -165,7 +168,8 @@ const discoverReducers = {
 
 const libraryReducers = {
   userTags: userTagsReducers,
-  userSearch: userSearchReducers
+  userSearch: userSearchReducers,
+  itemsFilter: itemsFilterReducers
 }
 
 const readerViewReducers = {
@@ -242,6 +246,7 @@ function* rootSaga() {
     ...mutationListDeleteSagas,
     ...mutationListUpdateSagas,
     ...mutationListAddSagas,
+    ...itemsFilterSagas,
     ...listenSagas
   ])
 }

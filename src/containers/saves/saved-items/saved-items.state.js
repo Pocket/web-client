@@ -124,6 +124,7 @@ export const pageSavedIdsReducers = (state = [], action) => {
     }
 
     // ! This is agressive clearing of the list
+    case ITEMS_SAVED_FILTERED_REQUEST:
     case ITEMS_SAVED_PAGE_SET_SORT_ORDER:
     case ITEMS_SAVED_PAGE_SET_SORT_BY:
     case ITEMS_CLEAR_CURRENT: {
@@ -157,6 +158,11 @@ export const pageSavedInfoReducers = (state = initialState, action) => {
     case ITEMS_SAVED_REQUEST: {
       const { sortOrder = 'DESC', tagNames, searchTerm, actionType } = action
       return { ...state, error: false, loading: true, sortOrder, actionType, tagNames, searchTerm }
+    }
+
+    case ITEMS_SAVED_FILTERED_REQUEST: {
+      const { actionType } = action
+      return { ...state, error: false, actionType }
     }
 
     case ITEMS_SAVED_PAGE_SET_FILTERS: {
@@ -313,6 +319,7 @@ function* loadMoreItems() {
     const { searchTerm, sortOrder, endCursor, actionType, tagNames } = yield select(
       getSavedPageInfo
     )
+    console.log({ actionType })
     const type = yield call(itemRequestType, searchTerm, tagNames, actionType)
 
     yield put({

@@ -1,4 +1,4 @@
-import { put, takeEvery } from 'redux-saga/effects'
+import { put, takeEvery, select } from 'redux-saga/effects'
 import * as Sentry from '@sentry/nextjs'
 import { getSavedItems } from 'common/api/queries/get-saved-items'
 import { getSavedItemsTagged } from 'common/api/queries/get-saved-items-tagged'
@@ -86,6 +86,10 @@ export const itemsSavedSagas = [
   takeEvery(ITEMS_SAVED_UPDATE_REQUEST, savedItemUpdateRequest)
 ]
 
+/** SAGA :: SELECTORS
+ --------------------------------------------------------------- */
+const getItemsFilter = (state) => state.itemsFilter
+
 /** SAGA :: RESPONDERS
  --------------------------------------------------------------- */
 
@@ -171,11 +175,11 @@ function* savedItemSearchRequest(action) {
 }
 
 function* savedItemAdvancedSearchRequest(action) {
-  const { searchTerm, sortOrder, pagination } = action
-  // const { ...filter } = yield select(itemsFilter)
+  const { pagination } = action
+  const { searchTerm, sortOrder, ...filter } = yield select(getItemsFilter)
 
   const { pageInfo, edges, totalCount } = yield getSavedItemsAdvancedSearch({
-    filter: {},
+    filter,
     sortOrder,
     queryString: searchTerm,
     pagination

@@ -50,7 +50,8 @@ export function TagInput(props) {
     hasError,
     setError,
     clearError,
-    inputRef
+    inputRef,
+    placeholder
   } = props
 
   /* Input Events
@@ -114,7 +115,7 @@ export function TagInput(props) {
       if (trimmedValue) {
         return addTag(`${trimmedValue}`)
       }
-      
+
       // Only allow submitting when input is empty
       if (!value) {
         submitForm()
@@ -156,6 +157,7 @@ export function TagInput(props) {
         onKeyUp={onKeyUp}
         onKeyDown={onKeyInput}
         onKeyPress={onKeyInput}
+        placeholder={placeholder}
       />
     </div>
   )

@@ -46,6 +46,7 @@ export const SearchPageHeader = ({
           </span>
         )}
       </h1>
+      <FilterMenu subset="search" query={query} filter={filter} />
       <ListSort
         sortOrder={sortOrder}
         // showRelevance={isPremium} // this is currently broken 1/4/24

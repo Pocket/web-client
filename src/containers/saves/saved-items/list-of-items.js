@@ -71,7 +71,7 @@ export const ListOfItems = ({ subset }) => {
   // Set up state to track for virtualization
   const breakpoint = getBreakpoint(viewport.width)
   const [widthPercentage, height, columnCount] = LIST_DIMENSIONS[type][breakpoint] //width
-  const width = typeof widthPercentage === 'string' ? widthPercentage : Math.min(Math.ceil(viewport.width*widthPercentage), 295) //prettier-ignore
+  const width = typeof widthPercentage === 'string' ? widthPercentage : Math.min(Math.ceil(viewport.width*widthPercentage), 600) //prettier-ignore
 
   const itemsOnScreen = 30
   const verticalPadding = type === 'list' ? 10 : 25
@@ -140,7 +140,7 @@ export const ListOfItems = ({ subset }) => {
         {!loading && pageSavedIds.length === 0 ? <EmptyFilters subset={subset} /> : null}
         <div style={{ height: totalHeight, width: 1, visibility: 'hidden' }}></div>
       </div>
-      <LoadMore loadMore={loadMore} />
+      {/* <LoadMore loadMore={loadMore} /> */}
     </>
   )
 }
