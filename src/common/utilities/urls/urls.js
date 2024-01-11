@@ -1,4 +1,5 @@
 import queryString from 'query-string'
+import isURL from 'validator/lib/isURL'
 
 /**
  * When a user leaves getpocket.com to an external article we route them through
@@ -114,4 +115,15 @@ export function isValidHttpUrl(string) {
   } catch (_) {
     return false
   }
+}
+
+/**
+ * Check whether a string is a valid URL
+ * @param {string} url
+ */
+export function isValidUrl(string = '') {
+  return isURL(string, {
+    protocols: ['http', 'https'],
+    allow_underscores: true
+  })
 }

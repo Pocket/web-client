@@ -4,6 +4,7 @@ import { domainForUrl } from './urls'
 import { getTopLevelPath } from './urls'
 import { replaceUTM } from './urls'
 import { isValidHttpUrl } from './urls'
+import { isValidUrl } from './urls'
 
 describe('urlWithPocketRedirect', () => {
   it('returns a properly formatted pocket redirect url.', () => {
@@ -190,20 +191,24 @@ describe('replaceUTM', () => {
   })
 })
 
-describe('isValidHttpUrl', () => {
+describe('isValidUrl', () => {
   it('should return true when passed a valid url', () => {
-    expect(isValidHttpUrl('https://getpocket.com')).toBe(true)
+    expect(isValidUrl('https://getpocket.com')).toBe(true)
   })
 
-  it('should return false if url is passed without http/https', () => {
-    expect(isValidHttpUrl('www.getpocket.com')).toBeFalsy()
+  it('should return true if url is passed without http/https', () => {
+    expect(isValidUrl('www.getpocket.com')).toBe(true)
   })
 
   it('should return false if a non url is passed', () => {
-    expect(isValidHttpUrl('💪')).toBeFalsy()
+    expect(isValidUrl('💪')).toBeFalsy()
   })
 
   it('should return false if no url is passed', () => {
-    expect(isValidHttpUrl()).toBeFalsy()
+    expect(isValidUrl()).toBeFalsy()
+  })
+
+  it('should return true if minimal url is passed', () => {
+    expect(isValidUrl('mastodon.social')).toBe(true)
   })
 })
