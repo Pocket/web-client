@@ -1,3 +1,10 @@
+## [1.103.1](https://github.com/Pocket/web-client/compare/v1.103.0...v1.103.1) (2024-01-09)
+
+
+### Bug Fixes
+
+* **apollo:** update to allow apollo router strictness ([48fa36d](https://github.com/Pocket/web-client/commit/48fa36dac02634967d44e9e6504db281132a0e6f))
+
 # [1.103.0](https://github.com/Pocket/web-client/compare/v1.102.18...v1.103.0) (2023-12-12)
 
 

@@ -67,6 +67,9 @@ export async function getSavedItemsSearch({
 
   const { filter, sort } = requestDetails
   const variables = { filter: { ...filter }, sort: { ...sort, sortOrder }, term, pagination }
+  if (Object.keys(variables.filter).length == 0){
+    delete variables.filter;
+  }
   const operationName = actionToCamelCase(actionType)
 
   return requestGQL({ query: searchSavedItemsQuery, operationName, variables })
