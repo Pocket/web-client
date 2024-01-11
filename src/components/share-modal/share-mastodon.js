@@ -81,7 +81,12 @@ export const ShareToMastodon = ({
       screenReaderLabel={t('share:share-mastodon', 'Share to Mastodon')}
       handleClose={cancelShare}>
       <ModalBody>
-        <label htmlFor="instance">What instance would you like to share this to?</label>
+        <label htmlFor="instance">
+          {t(
+            'share:share-mastodon-which-instance',
+            'What instance would you like to share this to?'
+          )}
+        </label>
         <input
           type="url"
           name="instance"
@@ -107,7 +112,9 @@ export const ShareToMastodon = ({
             onChange={handleCheckboxClick}
             checked={checkbox}
           />
-          <label htmlFor="save">Remember my instance</label>
+          <label htmlFor="save">
+            {t('share:share-mastodon-remember-instance', 'Remember my instance')}
+          </label>
         </div>
       </ModalBody>
       <ModalFooter>
@@ -117,7 +124,7 @@ export const ShareToMastodon = ({
           type="submit"
           data-cy="share-mastodon-confirm"
           onClick={clickHandler}>
-          Confirm
+          {t('share:share-confirm', 'Confirm')}
         </button>
       </ModalFooter>
     </Modal>
