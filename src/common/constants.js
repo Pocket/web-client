@@ -149,19 +149,6 @@ export const TOPICS_BY_NAME = {
     'topic_slug': 'career',
     'is_promoted': false
   },
-  coronavirus: {
-    'id': '53ace46e-fd12-4744-9647-fa633a9a044c',
-    'curator_label': 'COVID-19',
-    'display_name': 'Coronavirus',
-    'display_note': 'Stay informed with this curated guide to the global outbreak.  For official U.S. guidelines and health updates, visit [cdc.gov](http://www.cdc.gov).',
-    'page_type': 'editorial_collection',
-    'social_description': 'The latest analysis and in-depth reporting on the global COVID-19 outbreak, curated from around the web.',
-    'social_image': 'https://pocket-image-cache.com//filters:no_upscale():format(jpg):extract_cover()/https%3A%2F%2Fpocket-spoc-images.s3.amazonaws.com%2FEditorial_Images%2FGettyImages-1212213050.jpg',
-    'social_title': 'Essential Reads on the Coronavirus',
-    'topic': 'coronavirus',
-    'topic_slug': 'coronavirus',
-    'is_promoted': true
-  },
   education: {
     'id': '7bf5c80a-ffd1-436a-9dea-4f9badea463a',
     'curator_label': 'Education',

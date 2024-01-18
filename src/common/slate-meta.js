@@ -404,14 +404,6 @@ export const slateMeta = {
     slug: 'travel',
     type: 'topic'
   },
-  '796ca16f-4cd4-4dcb-84d5-477715c41668': {
-    id: '796ca16f-4cd4-4dcb-84d5-477715c41668',
-    displayName: 'Stay informed with this curated guide to the global outbreak.',
-    description: 'Coronavirus Slate',
-    curatorTopicLabel: 'COVID-19',
-    slug: 'coronavirus',
-    type: 'topic'
-  },
   '0f322865-64e6-472d-8147-b3d6637a7d67': {
     id: '0f322865-64e6-472d-8147-b3d6637a7d67',
     displayName: 'Our most-read Collections',
