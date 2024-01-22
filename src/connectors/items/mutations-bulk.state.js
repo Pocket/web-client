@@ -123,8 +123,8 @@ export function* itemBulkSelect(action) {
   }
 }
 
-export function* batchSendMutations(itemIds, apiCall) {
-  const batches = yield chunk(itemIds, BATCH_SIZE)
+export function* batchSendMutations(itemIds, apiCall, batchSize = BATCH_SIZE) {
+  const batches = yield chunk(itemIds, batchSize)
   let response
   let batchCount = batches.length
   let totalResponses = {}

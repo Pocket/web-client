@@ -169,6 +169,7 @@ function GlobalNavBulkEdit({
   favoriteAction,
   archiveAction,
   deleteAction,
+  addToListAction,
   clearBulkItems,
   bulkItemsCount
 }) {
@@ -240,6 +241,15 @@ function GlobalNavBulkEdit({
               className={cx(buttonStyle, bottomTooltip)}
               onClick={deleteAction}>
               <DeleteIcon className={bulkIconActions} />
+            </button>
+
+            <button
+              aria-label={t('nav:add-to-list', 'Add to List')}
+              data-tooltip={t('nav:add-to-list', 'Add to List')}
+              data-cy="bulk-add-to-list"
+              onClick={addToListAction}>
+              {/* TODO: Icon goes here? */}
+              Add to List
             </button>
 
             <div className="labelText">

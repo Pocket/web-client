@@ -8,6 +8,8 @@ import { mutationBulkFavorite } from 'connectors/items/mutation-favorite.state'
 import { mutationBulkUnFavorite } from 'connectors/items/mutation-favorite.state'
 import { mutationBulkTag } from 'connectors/items/mutation-tagging.state'
 
+import { mutateListBulkAddItems } from 'connectors/lists/mutation-add.state'
+
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -69,6 +71,14 @@ function GlobalNavBulkEditConnected({ onClose }) {
     }
   }
 
+  const addToListAction = () => {
+    if (bulkItemsCount) {
+      const items = buildBulkForAnalytics()
+      dispatch(sendSnowplowEvent('global-nav.bulk.add-to-list', items))
+      dispatch(mutateListBulkAddItems(bulkItems))
+    }
+  }
+
   return (
     <GlobalNavBulkEdit
       onClose={onClose}
@@ -78,6 +88,7 @@ function GlobalNavBulkEditConnected({ onClose }) {
       favoriteAction={favoriteAction}
       archiveAction={archiveAction}
       deleteAction={deleteAction}
+      addToListAction={addToListAction}
       clearBulkItems={clearBulkItems}
       bulkItemsCount={bulkItemsCount}
     />

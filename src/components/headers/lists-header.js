@@ -1,7 +1,7 @@
 import { css, cx } from '@emotion/css'
 import { savesHeaderStyle } from './saves-header'
 import { ListSort } from 'components/list-sort/list-sort'
-import { ListAddIcon } from 'components/icons/ListAddIcon'
+import { AddIcon } from 'components/icons/AddIcon'
 import { FiltersAltIcon } from 'components/icons/FiltersAltIcon'
 import { SortOrderIcon } from 'components/icons/SortOrderIcon'
 import Avatar from 'components/avatar/avatar'
@@ -197,7 +197,7 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
 
       <div className="create-sort">
         <button onClick={onCreateList} className="tiny">
-          <ListAddIcon /> {t('list:create-list', 'Create List')}
+          <AddIcon /> {t('list:create-list', 'Create List')}
         </button>
         <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
       </div>

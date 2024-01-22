@@ -37,6 +37,7 @@ import { LIST_UPDATE_SUCCESS } from 'actions'
 import { LIST_UPDATE_FAILURE } from 'actions'
 import { LIST_DELETE_SUCCESS } from 'actions'
 import { LIST_DELETE_FAILURE } from 'actions'
+import { LIST_BULK_ADD_ITEM_REQUEST } from 'actions'
 import { LIST_ITEM_ADD_NOTE_SUCCESS } from 'actions'
 import { LIST_ITEM_ADD_NOTE_FAILURE } from 'actions'
 import { LIST_ITEM_EDIT_NOTE_SUCCESS } from 'actions'
@@ -102,6 +103,7 @@ export function Toast({
     // List items
     [LIST_ADD_ITEM_SUCCESS]: t('toast:item-added-to-list', 'Item added to list'),
     [LIST_ADD_ITEM_FAILURE]: t('toast:error-adding-item', 'Error adding item'),
+    [LIST_BULK_ADD_ITEM_REQUEST]: t('toast:items-added-to-list', '{{count}} item added to list', { count }), //prettier-ignore
     [LIST_ITEM_ADD_NOTE_SUCCESS]: t('toast:note-added', 'Note added'),
     [LIST_ITEM_ADD_NOTE_FAILURE]: t('toast:error-adding-note', 'Error adding note'),
     [LIST_ITEM_EDIT_NOTE_SUCCESS]: t('toast:note-updated', 'Note updated'),
