@@ -35,7 +35,6 @@ export function ConfirmTagging() {
   const activeTags = useSelector((state) => state.mutationTagging.activeTags)
   const tagSuggestions = useSelector((state) => state.mutationTagging.tagSuggestions)
   const tagSuggestionStatus = useSelector((state) => state.mutationTagging.tagSuggestionStatus)
-  const tagsSince = useSelector((state) => state.userTags.since)
   const allTags = useSelector((state) => state.userTags.tagNames)
 
   const showModal = itemsToTag?.length > 0
@@ -110,7 +109,7 @@ export function ConfirmTagging() {
 
   useEffect(() => {
     dispatch(requestUserTags())
-  }, [dispatch, tagsSince])
+  }, [dispatch])
 
   useEffect(() => {
     setValue('')
