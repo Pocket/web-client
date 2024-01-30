@@ -10,6 +10,7 @@ import { USER_TAGS_PINS_SET } from 'actions'
 import { USER_TAGS_REQUEST } from 'actions'
 import { USER_TAGS_SUCCESS } from 'actions'
 import { USER_TAGS_FAILURE } from 'actions'
+import { USER_TAGS_UPDATE } from 'actions'
 
 import { USER_TAGS_EDIT } from 'actions'
 import { USER_TAGS_EDIT_CONFIRM } from 'actions'
@@ -47,6 +48,12 @@ export const userTagsReducers = (state = initialState, action) => {
     case USER_TAGS_SUCCESS: {
       const { tagNames } = action
       return { ...state, tagNames }
+    }
+
+    case USER_TAGS_UPDATE: {
+      const { tagNames } = action
+      const tags = [...state.tagNames, ...tagNames]
+      return { ...state, tagNames: tags }
     }
 
     case USER_TAGS_EDIT: {
@@ -113,14 +120,19 @@ const getPinnedTags = (state) => state.settings.pinnedTags
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-function* userTagsOnly() {
-  // This will need to be part of the larger request organization
-  const response = yield getUserTagsGraph()
-
+function* userTagsOnly({ pagination }) {
+  const response = yield getUserTagsGraph(pagination)
   if (!response) yield put({ type: USER_TAGS_FAILURE })
 
-  const { tagNames } = response
-  yield put({ type: USER_TAGS_SUCCESS, tagNames })
+  const { tagNames, pageInfo, totalCount } = response
+  const { hasNextPage, endCursor } = pageInfo
+
+  const type = pagination ? USER_TAGS_UPDATE : USER_TAGS_SUCCESS
+  yield put({ type, tagNames })
+
+  if (hasNextPage) {
+    yield call(userTagsOnly, { pagination: { after: endCursor } })
+  }
 }
 
 function* userTagsTogglePin(actions) {
