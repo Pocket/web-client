@@ -21,13 +21,14 @@ const getUsersTagsQuery = gql`
   }
 `
 
-export async function getUserTags() {
+export async function getUserTags(customPagination) {
   return requestGQL({
     query: getUsersTagsQuery,
     operationName: 'GetUsersTags',
     variables: {
       pagination: {
-        first: 1000000
+        first: 100, // 100 is the max
+        ...customPagination
       }
     }
   })
@@ -39,15 +40,8 @@ function handleResponse(response) {
   const responseData = response?.data?.user?.tags
   if (!responseData) throw new Error(response?.errors)
 
-  const { edges, totalCount } = responseData || {}
+  const { edges, totalCount, pageInfo } = responseData || {}
+  const tagNames = edges.map(({ node }) => node.name)
 
-  const tagsWithIds = edges.reduce((previous, current) => {
-    const id = current?.node?.id
-    const name = current?.node?.name
-    return { ...previous, [name]: id }
-  }, {})
-
-  const tagNames = Object.keys(tagsWithIds)
-
-  return { tagsWithIds, tagNames, totalCount }
+  return { tagNames, totalCount, pageInfo }
 }
