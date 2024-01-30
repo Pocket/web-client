@@ -4,11 +4,11 @@ import { config } from './config'
 
 import {
   App,
-  RemoteBackend,
-  DataTerraformRemoteState,
-  TerraformStack,
+  S3Backend,
   Aspects,
-  MigrateIds
+  MigrateIds,
+  DataTerraformRemoteState,
+  TerraformStack
 } from 'cdktf';
 
 import { ArchiveProvider } from '@cdktf/provider-archive/lib/provider';
@@ -32,11 +32,12 @@ class WebClient extends TerraformStack {
     new NullProvider(this, 'null-provider')
     new LocalProvider(this, 'local-provider')
     new ArchiveProvider(this, 'archive-provider')
-    new RemoteBackend(this, {
-      hostname: 'app.terraform.io',
-      organization: 'Pocket',
-      workspaces: [{ prefix: `${config.name}-` }]
-    })
+    new S3Backend(this, {
+      bucket: `mozilla-pocket-team-${config.environment.toLowerCase()}-terraform-state`,
+      dynamodbTable: `mozilla-pocket-team-${config.environment.toLowerCase()}-terraform-state`,
+      key: config.name,
+      region: 'us-east-1',
+    });
 
     const pocketVPC = new PocketVPC(this, 'pocket-vpc')
     const region = new DataAwsRegion(this, 'region')

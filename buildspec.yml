@@ -10,9 +10,6 @@ run-as: circleci
 
 env:
   variables:
-    #Terraform workspace that we operate in
-    TF_DEV_WORKSPACE: Dev
-    TF_WORKSPACE: Prod
     MAIN_BRANCH_REF: 'refs/heads/main'
     MAIN_BRANCH: 'main'
     #The ref of the dev branch we work against
