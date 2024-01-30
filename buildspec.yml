@@ -20,11 +20,14 @@ env:
     DEV_BRANCH: 'dev'
     #Metaflow requires a username to run
     USERNAME: 'codebuild'
+    TFCMT_REPO_OWNER: 'Pocket'
+    TFCMT_REPO_NAME: 'web-client'
   secrets-manager:
     #Pull in the default terraform cloud token
     TERRAFORM_TOKEN: 'CodeBuild/Default:terraform_token'
     PAGERDUTY_TOKEN: 'CodeBuild/Default:mozilla_pagerduty_token'
     GITHUB_ACCESS_TOKEN: 'CodeBuild/Default:github_access_token'
+    GITHUB_TOKEN: 'CodeBuild/Default:github_access_token'
 
 #All phases are ran within the pocket/pocket-build:prod docker image
 phases:
@@ -33,6 +36,9 @@ phases:
     commands:
       - |
         . /home/circleci/.codebuild_shims_wrapper.sh
+        curl -L https://github.com/suzuki-shunsuke/tfcmt/releases/download/v4.8.0/tfcmt_linux_amd64.tar.gz | tar xvzf - tfcmt
+        mv tfcmt /home/circleci/tfcmt
+        chmod a+x /home/circleci/tfcmt
         echo $CODEBUILD_WEBHOOK_HEAD_REF
         echo Setting Up Terraform Token
         rc="credentials \"app.terraform.io\" { "
@@ -57,11 +63,11 @@ phases:
     commands:
       - echo Build started on `date`
       ### If the branch is not main and its not dev, lets do a plan on prod.
-      - 'if [ "$CODEBUILD_WEBHOOK_HEAD_REF" != "$MAIN_BRANCH_REF" ] && [ "$CODEBUILD_WEBHOOK_HEAD_REF" != "$DEV_BRANCH_REF" ]; then terraform plan -lock=false -refresh=false -no-color; fi'
+      - 'if [ "$CODEBUILD_WEBHOOK_HEAD_REF" != "$MAIN_BRANCH_REF" ] && [ "$CODEBUILD_WEBHOOK_HEAD_REF" != "$DEV_BRANCH_REF" ]; then /home/circleci/tfcmt plan --skip-no-changes --patch -- terraform plan -lock=false -refresh=false -no-color; fi'
       #### If the branch is dev, lets do an apply on dev.
-      - 'if [ "$GIT_BRANCH" = "$DEV_BRANCH" ]; then TF_WORKSPACE=$TF_DEV_WORKSPACE TF_LOG=INFO terraform apply -auto-approve -no-color; fi'
+      - 'if [ "$GIT_BRANCH" = "$DEV_BRANCH" ]; then /home/circleci/tfcmt apply -- terraform apply -auto-approve -no-color; fi'
       #### If the branch is main lets apply.
-      - 'if [ "$GIT_BRANCH" = "$MAIN_BRANCH" ]; then terraform apply -auto-approve -no-color; fi'
+      - 'if [ "$GIT_BRANCH" = "$MAIN_BRANCH" ]; then /home/circleci/tfcmt apply -- terraform apply -auto-approve -no-color; fi'
   post_build:
     run-as: circleci
     commands:

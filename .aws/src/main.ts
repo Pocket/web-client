@@ -2,7 +2,14 @@ import { Construct } from 'constructs'
 
 import { config } from './config'
 
-import { App, RemoteBackend, TerraformStack, DataTerraformRemoteState } from 'cdktf'
+import {
+  App,
+  RemoteBackend,
+  DataTerraformRemoteState,
+  TerraformStack,
+  Aspects,
+  MigrateIds
+} from 'cdktf';
 
 import { ArchiveProvider } from '@cdktf/provider-archive/lib/provider';
 import { AwsProvider } from '@cdktf/provider-aws/lib/provider';
@@ -14,6 +21,7 @@ import { LocalProvider } from '@cdktf/provider-local/lib/provider';
 import { NullProvider } from '@cdktf/provider-null/lib/provider';
 import { PagerdutyProvider } from '@cdktf/provider-pagerduty/lib/provider';
 import { PocketALBApplication, PocketECSCodePipeline, PocketPagerDuty, PocketVPC } from '@pocket-tools/terraform-modules';
+import * as fs from 'fs';
 
 class WebClient extends TerraformStack {
   constructor(scope: Construct, name: string) {
@@ -44,6 +52,10 @@ class WebClient extends TerraformStack {
     })
 
     this.createApplicationCodePipeline(pocketApp)
+
+    // Pre cdktf 0.17 ids were generated differently so we need to apply a migration aspect
+    // https://developer.hashicorp.com/terraform/cdktf/concepts/aspects
+    Aspects.of(this).add(new MigrateIds());
   }
 
 
@@ -265,5 +277,7 @@ private getSecretsManagerKmsAlias() {
 }
 
 const app = new App()
-new WebClient(app, 'web-client')
+const stack = new WebClient(app, 'web-client');
+const tfEnvVersion = fs.readFileSync('.terraform-version', 'utf8');
+stack.addOverride('terraform.required_version', tfEnvVersion);
 app.synth()
