@@ -1,12 +1,8 @@
 import { put, call, takeEvery, select } from 'redux-saga/effects'
-import { fetchStoredTags } from 'common/api/_legacy/tags'
 import { renameStoredTag } from 'common/api/_legacy/tags'
 import { deleteStoredTag } from 'common/api/_legacy/tags'
 import { getUserTags as getUserTagsGraph } from 'common/api/queries/get-user-tags'
 
-import { USER_TAGS_GET_REQUEST } from 'actions'
-import { USER_TAGS_GET_SUCCESS } from 'actions'
-import { USER_TAGS_GET_FAILURE } from 'actions'
 import { USER_TAGS_PIN } from 'actions'
 import { USER_TAGS_PINS_SET } from 'actions'
 
@@ -14,6 +10,7 @@ import { USER_TAGS_PINS_SET } from 'actions'
 import { USER_TAGS_REQUEST } from 'actions'
 import { USER_TAGS_SUCCESS } from 'actions'
 import { USER_TAGS_FAILURE } from 'actions'
+import { USER_TAGS_UPDATE } from 'actions'
 
 import { USER_TAGS_EDIT } from 'actions'
 import { USER_TAGS_EDIT_CONFIRM } from 'actions'
@@ -29,7 +26,6 @@ import { USER_TAGS_DELETE_FAILURE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
-export const getUserTags = () => ({ type: USER_TAGS_GET_REQUEST }) //prettier-ignore
 export const pinUserTag = (tag) => ({ type: USER_TAGS_PIN, tag })
 export const editUserTag = (tag) => ({ type: USER_TAGS_EDIT, tag })
 export const cancelEditUserTag = () => ({ type: USER_TAGS_EDIT_CANCEL })
@@ -42,32 +38,22 @@ export const requestUserTags = () => ({ type: USER_TAGS_REQUEST })
 /** REDUCERS
  --------------------------------------------------------------- */
 const initialState = {
-  recentTags: [],
-  tagsList: [],
-  tagsWithItems: {},
-  itemsWithTags: [],
+  tagNames: [],
   tagToEdit: false,
-  tagToDelete: false,
-  since: false
+  tagToDelete: false
 }
 
 export const userTagsReducers = (state = initialState, action) => {
   switch (action.type) {
-    case USER_TAGS_GET_SUCCESS: {
-      const { tagsList, tagsWithItems, since, recentTags, itemsWithTags } = action
-      return {
-        ...state,
-        tagsList,
-        tagsWithItems,
-        since,
-        recentTags,
-        itemsWithTags
-      }
-    }
-
     case USER_TAGS_SUCCESS: {
       const { tagNames } = action
       return { ...state, tagNames }
+    }
+
+    case USER_TAGS_UPDATE: {
+      const { tagNames } = action
+      const tags = [...state.tagNames, ...tagNames]
+      return { ...state, tagNames: tags }
     }
 
     case USER_TAGS_EDIT: {
@@ -77,13 +63,13 @@ export const userTagsReducers = (state = initialState, action) => {
 
     case USER_TAGS_EDIT_SUCCESS: {
       const { new_tag, old_tag } = action
-      const tagsListDraft = state.tagsList.map((tag) => {
+      const tagNamesDraft = state.tagNames.map((tag) => {
         return tag === old_tag ? new_tag : tag
       })
 
       return {
         ...state,
-        tagsList: tagsListDraft,
+        tagNames: tagNamesDraft,
         tagToEdit: false
       }
     }
@@ -100,11 +86,11 @@ export const userTagsReducers = (state = initialState, action) => {
 
     case USER_TAGS_DELETE_SUCCESS: {
       const deletedTag = state.tagToDelete
-      const tagsListDraft = state.tagsList.filter((tag) => tag !== deletedTag)
+      const tagNamesDraft = state.tagNames.filter((tag) => tag !== deletedTag)
 
       return {
         ...state,
-        tagsList: tagsListDraft,
+        tagNames: tagNamesDraft,
         tagToDelete: false
       }
     }
@@ -122,7 +108,6 @@ export const userTagsReducers = (state = initialState, action) => {
 /** SAGAS :: WATCHERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 export const userTagsSagas = [
-  takeEvery(USER_TAGS_GET_REQUEST, userTagsRequest),
   takeEvery(USER_TAGS_REQUEST, userTagsOnly),
   takeEvery(USER_TAGS_PIN, userTagsTogglePin),
   takeEvery(USER_TAGS_EDIT_CONFIRM, userTagsEditConfirm),
@@ -135,28 +120,19 @@ const getPinnedTags = (state) => state.settings.pinnedTags
 
 /** SAGAS :: RESPONDERS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-function* userTagsOnly() {
-  // This will need to be part of the larger request organization
-  const response = yield getUserTagsGraph()
-
+function* userTagsOnly({ pagination }) {
+  const response = yield getUserTagsGraph(pagination)
   if (!response) yield put({ type: USER_TAGS_FAILURE })
 
-  const { tagNames } = response
-  yield put({ type: USER_TAGS_SUCCESS, tagNames })
-}
+  const { tagNames, pageInfo, totalCount } = response
+  const { hasNextPage, endCursor } = pageInfo
 
-function* userTagsRequest() {
-  const response = yield fetchStoredTags()
+  const type = pagination ? USER_TAGS_UPDATE : USER_TAGS_SUCCESS
+  yield put({ type, tagNames })
 
-  if (response.status !== 1) return yield put({ type: USER_TAGS_GET_FAILURE })
-
-  const { tags: tagsList, since } = response
-
-  yield put({
-    type: USER_TAGS_GET_SUCCESS,
-    since,
-    tagsList
-  })
+  if (hasNextPage) {
+    yield call(userTagsOnly, { pagination: { after: endCursor } })
+  }
 }
 
 function* userTagsTogglePin(actions) {

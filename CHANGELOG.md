@@ -1,3 +1,25 @@
+## [1.104.4](https://github.com/Pocket/web-client/compare/v1.104.3...v1.104.4) (2024-01-30)
+
+
+### Bug Fixes
+
+* **tfstate:** move tfstate to s3 ([05d6bed](https://github.com/Pocket/web-client/commit/05d6bedd8ff5454de6ed1a20054f82f5eae8f8d3))
+
+## [1.104.3](https://github.com/Pocket/web-client/compare/v1.104.2...v1.104.3) (2024-01-30)
+
+
+### Bug Fixes
+
+* **tags:** migrate the tall tags request on the all tags page to graphql ([5c5c46b](https://github.com/Pocket/web-client/commit/5c5c46bd4877d26f1e82035e904b2ba4aa965fdc))
+* **tags:** set up pagination for requesting tags ([dbb7e4b](https://github.com/Pocket/web-client/commit/dbb7e4bdb497f626ebd4c347d6cb1450ea08f100))
+
+## [1.104.2](https://github.com/Pocket/web-client/compare/v1.104.1...v1.104.2) (2024-01-22)
+
+
+### Bug Fixes
+
+* **waypoint:** route all en and de users to home ([082c684](https://github.com/Pocket/web-client/commit/082c68458bd8adb4caafb70ba207dec71b9faa60))
+
 ## [1.104.1](https://github.com/Pocket/web-client/compare/v1.104.0...v1.104.1) (2024-01-18)
 
 
