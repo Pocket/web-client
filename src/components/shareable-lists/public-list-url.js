@@ -40,7 +40,7 @@ export const PublicListUrl = ({ publicListInfo, handleCopyUrl, handleOpenUrl }) 
   const dispatch = useDispatch()
   const { externalId, slug, callout, status } = publicListInfo
 
-  if (status === 'PRIVATE') return null
+  if (status !== 'PUBLIC') return null
 
   const url = `/sharedlists/${externalId}/${slug}`
   const copyUrl = `${BASE_URL}${url}`

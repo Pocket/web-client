@@ -1,7 +1,8 @@
 import { put, takeLatest, take, race, call, select, all } from 'redux-saga/effects'
 import { createShareableListItem } from 'common/api/mutations/createShareableListItem'
-import { bulkAddShareableListItem } from 'common/api/mutations/createShareableListItem'
-import { batchSendMutations } from 'connectors/items/mutations-bulk.state'
+import { bulkCreateShareableListItems } from 'common/api/mutations/addToShareableList'
+import { chunk } from 'common/utilities/object-array/object-array'
+import { BATCH_SIZE } from 'common/constants'
 
 import { LIST_ADD_ITEM_REQUEST } from 'actions'
 import { LIST_ADD_ITEM_CONFIRM } from 'actions'
@@ -14,7 +15,7 @@ import { LIST_BULK_ADD_ITEM_REQUEST } from 'actions'
 import { LIST_CREATE_REQUEST } from 'actions'
 import { LIST_CREATE_SUCCESS } from 'actions'
 
-import { MUTATION_SUCCESS } from 'actions'
+import { MUTATION_BULK_BATCH_COMPLETE } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -108,7 +109,7 @@ function* listAddItem({ id }) {
   }
 }
 
-function* bulkListAddItem({ ids, type }) {
+function* bulkListAddItem({ ids }) {
   // Wait for the user to confirm or cancel
   const { cancel, confirm } = yield race({
     confirm: take(LIST_ADD_ITEM_CONFIRM),
@@ -119,10 +120,9 @@ function* bulkListAddItem({ ids, type }) {
 
   try {
     const { externalId, listTitle } = confirm
-    const listLength = yield select(getListLength, externalId)
     const itemData = yield all(ids.map((id) => select(getItem, id)))
 
-    const data = itemData.map((item, index) => {
+    const data = itemData.map((item) => {
       const { givenUrl, excerpt, thumbnail, title, publisher, itemId } = item
       return {
         url: givenUrl,
@@ -130,24 +130,22 @@ function* bulkListAddItem({ ids, type }) {
         imageUrl: thumbnail || null,
         title,
         publisher,
-        itemId,
-        listExternalId: externalId,
-        sortOrder: listLength + index + 1
+        itemId
       }
     })
 
-    // TODO: bump this up or ditch it entirely once we can support it
-    const tmpBatchSize = 1
-
     // Batch and send api calls for the ids
-    // TODO: be better, handle your errors
-    const nodes = yield call(batchSendMutations, data, bulkAddShareableListItem, tmpBatchSize)
-    if (nodes) {
-      const count = data.length
-      // TODO: uh oh, too many toasts
-      yield put({ type: LIST_ADD_ITEM_SUCCESS, listTitle })
-      return yield put({ type: MUTATION_SUCCESS, nodes: [], actionType: type, count })
+    const batches = yield chunk(data, BATCH_SIZE)
+    let totalResponses = {}
+
+    for (const batch of batches) {
+      const response = yield call(bulkCreateShareableListItems, batch, externalId)
+      totalResponses = { ...totalResponses, ...response }
     }
+
+    // TODO: uh oh, too many toasts
+    yield put({ type: LIST_ADD_ITEM_SUCCESS, listTitle })
+    yield put({ type: MUTATION_BULK_BATCH_COMPLETE })
   } catch (error) {
     yield put({ type: LIST_ADD_ITEM_FAILURE, error })
   }

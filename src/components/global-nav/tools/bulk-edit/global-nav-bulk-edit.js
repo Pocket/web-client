@@ -32,6 +32,9 @@ const bulkStyle = css`
     font-family: 'Graphik Web';
     font-style: normal;
     font-size: var(--fontSize100);
+    button {
+      margin-right: 2px;
+    }
     .labelText {
       padding-left: var(--spacing100);
       ${breakpointMediumHandset} {

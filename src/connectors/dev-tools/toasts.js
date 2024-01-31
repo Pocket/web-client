@@ -45,7 +45,6 @@ import { LIST_ITEM_NOTE_DELETE_SUCCESS } from 'actions'
 import { LIST_ITEM_NOTE_DELETE_FAILURE } from 'actions'
 import { LIST_ITEMS_REORDER_SUCCESS } from 'actions'
 import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
-import { LIST_BULK_ADD_ITEM_REQUEST } from 'actions'
 
 // These are separated out because these values are normally passed along as
 // the actionType on the MUTATION_SUCCESS action. In these instances we will use
@@ -63,8 +62,7 @@ export const mutationTypes = [
   MUTATION_BULK_FAVORITE,
   MUTATION_BULK_UNFAVORITE,
   HIGHLIGHT_SAVE_SUCCESS,
-  HIGHLIGHT_DELETE_SUCCESS,
-  LIST_BULK_ADD_ITEM_REQUEST
+  HIGHLIGHT_DELETE_SUCCESS
 ]
 
 export function createToastData(action, count) {

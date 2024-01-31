@@ -223,7 +223,7 @@ export const ListIndividualHeader = ({
   const { t } = useTranslation()
 
   const enrolledInternal = enrolledDev || enrolledPilot
-  const isPublic = status !== 'PRIVATE'
+  const isPublic = status === 'PUBLIC'
 
   const publicListInfo = {
     externalId,
