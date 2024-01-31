@@ -143,7 +143,6 @@ function* bulkListAddItem({ ids }) {
       totalResponses = { ...totalResponses, ...response }
     }
 
-    // TODO: uh oh, too many toasts
     yield put({ type: LIST_ADD_ITEM_SUCCESS, listTitle })
     yield put({ type: MUTATION_BULK_BATCH_COMPLETE })
   } catch (error) {
