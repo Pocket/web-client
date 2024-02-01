@@ -4,6 +4,7 @@ import { css, cx } from '@emotion/css'
 import { CrossIcon } from 'components/icons/CrossIcon'
 
 import { ArchiveIcon } from 'components/icons/ArchiveIcon'
+import { AddIcon } from 'components/icons/AddIcon'
 import { ListAddIcon } from 'components/icons/ListAddIcon'
 import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { FavoriteIcon } from 'components/icons/FavoriteIcon'
