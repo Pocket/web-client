@@ -15,6 +15,9 @@ import { LIST_BULK_ADD_ITEM_REQUEST } from 'actions'
 import { LIST_CREATE_REQUEST } from 'actions'
 import { LIST_CREATE_SUCCESS } from 'actions'
 
+import { MUTATION_BULK_BATCH_BEGIN } from 'actions'
+import { MUTATION_BULK_BATCH_FAILURE } from 'actions'
+import { MUTATION_BULK_BATCH_SUCCESS } from 'actions'
 import { MUTATION_BULK_BATCH_COMPLETE } from 'actions'
 
 /** ACTIONS
@@ -136,16 +139,20 @@ function* bulkListAddItem({ ids }) {
 
     // Batch and send api calls for the ids
     const batches = yield chunk(data, BATCH_SIZE)
-    let totalResponses = {}
+    let batchCount = batches.length
+
+    yield put({ type: MUTATION_BULK_BATCH_BEGIN, batchCount, batchTotal: batchCount })
 
     for (const batch of batches) {
-      const response = yield call(bulkCreateShareableListItems, batch, externalId)
-      totalResponses = { ...totalResponses, ...response }
+      batchCount -= 1
+      yield call(bulkCreateShareableListItems, batch, externalId)
+      yield put({ type: MUTATION_BULK_BATCH_SUCCESS, batchCount })
     }
 
     yield put({ type: LIST_ADD_ITEM_SUCCESS, listTitle })
     yield put({ type: MUTATION_BULK_BATCH_COMPLETE })
   } catch (error) {
     yield put({ type: LIST_ADD_ITEM_FAILURE, error })
+    yield put({ type: MUTATION_BULK_BATCH_FAILURE, batchCount: 0 })
   }
 }

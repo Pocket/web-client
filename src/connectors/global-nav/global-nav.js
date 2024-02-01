@@ -17,7 +17,7 @@ import { HomeIcon } from 'components/icons/HomeIcon'
 import { DiscoverIcon } from 'components/icons/DiscoverIcon'
 import { SaveIcon } from 'components/icons/SaveIcon'
 import { SearchIcon } from 'components/icons/SearchIcon'
-import { AddIcon } from 'components/icons/AddIcon'
+import { LinkCopyIcon } from 'components/icons/LinkCopyIcon'
 import { EditIcon } from 'components/icons/EditIcon'
 import { FavoriteIcon } from 'components/icons/FavoriteIcon'
 import { HighlightIcon } from 'components/icons/HighlightIcon'
@@ -188,7 +188,7 @@ const GlobalNav = (props) => {
         {
           name: 'add-item',
           label: t('nav:save', 'Save a URL'),
-          icon: <AddIcon />
+          icon: <LinkCopyIcon />
         },
         {
           name: 'bulk-edit',

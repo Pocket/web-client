@@ -4,12 +4,13 @@ import { css, cx } from '@emotion/css'
 import { CrossIcon } from 'components/icons/CrossIcon'
 
 import { ArchiveIcon } from 'components/icons/ArchiveIcon'
-import { AddIcon } from 'components/icons/AddIcon'
+import { ListAddIcon } from 'components/icons/ListAddIcon'
 import { DeleteIcon } from 'components/icons/DeleteIcon'
 import { FavoriteIcon } from 'components/icons/FavoriteIcon'
 import { FavoriteFilledIcon } from 'components/icons/FavoriteFilledIcon'
 import { TagIcon } from 'components/icons/TagIcon'
 import { breakpointMediumHandset } from 'common/constants'
+import { breakpointTinyTablet } from 'common/constants'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 
 import { useTranslation } from 'next-i18next'
@@ -37,61 +38,15 @@ const bulkStyle = css`
     }
     .labelText {
       padding-left: var(--spacing100);
-      ${breakpointMediumHandset} {
+      ${breakpointTinyTablet} {
         display: none;
       }
     }
   }
 
-  ${breakpointMediumHandset} {
+  ${breakpointTinyTablet} {
     .cancel-button {
       display: none;
-    }
-  }
-
-  .bulk-input {
-    /*search icon width + left margin + right margin*/
-    padding-left: calc(20px + var(--spacing050) + var(--spacing075));
-    height: var(--size300);
-    width: 100%;
-    max-width: initial;
-    margin-right: var(--spacing050);
-    &.has-value {
-      padding-right: var(--spacing400);
-    }
-
-    ${breakpointMediumHandset} {
-      padding-left: var(--spacing075);
-      &.has-value {
-        padding-right: 3rem;
-      }
-      margin-right: 0;
-    }
-  }
-
-  .bulk-button {
-    font-size: var(--fontSize100);
-  }
-
-  .error-message {
-    position: absolute;
-    width: 100%;
-    top: 100%;
-    left: 0;
-    padding-right: var(--spacing050);
-
-    ${breakpointMediumHandset} {
-      padding-right: 0;
-    }
-
-    div {
-      padding: 0.5em 1em;
-      background-color: var(--color-canvas);
-      color: var(--color-error);
-      border: var(--borderStyle);
-      border-top-width: 0;
-      border-radius: 0 0 var(--borderRadius) var(--borderRadius);
-      box-shadow: var(--raisedCanvas);
     }
   }
 `
@@ -143,6 +98,33 @@ const buttonStyle = css`
   ${breakpointMediumHandset} {
     padding-left: var(--size025);
     padding-right: var(--size025);
+  }
+`
+
+const fullButtonStyle = css`
+  margin-left: 4px;
+  font-size: 14px;
+  padding: 10px;
+
+  .icon {
+    width: 22px;
+    height: 22px;
+  }
+`
+
+const mobileOnly = css`
+  display: none;
+
+  ${breakpointTinyTablet} {
+    display: block;
+  }
+`
+
+const desktopOnly = css`
+  display: block;
+
+  ${breakpointTinyTablet} {
+    display: none;
   }
 `
 
@@ -247,12 +229,20 @@ function GlobalNavBulkEdit({
             </button>
 
             <button
-              aria-label={t('nav:add-to-list', 'Add to List')}
-              data-tooltip={t('nav:add-to-list', 'Add to List')}
-              data-cy="bulk-add-to-list"
+              aria-label={t('list:add-items-to-a-list', 'Add items to a List')}
+              data-tooltip={t('list:add-items-to-a-list', 'Add items to a List')}
+              data-cy="bulk-add-to-list-mobile"
+              className={cx(buttonStyle, bottomTooltip, mobileOnly)}
               onClick={addToListAction}>
-              {/* TODO: Icon goes here? */}
-              Add to List
+              <ListAddIcon className={bulkIconActions} />
+            </button>
+
+            <button
+              aria-label={t('list:add-items-to-a-list', 'Add items to a List')}
+              data-cy="bulk-add-to-list"
+              className={cx(fullButtonStyle, desktopOnly)}
+              onClick={addToListAction}>
+              <ListAddIcon /> {t('nav:add-to-list', 'Add to List')}
             </button>
 
             <div className="labelText">

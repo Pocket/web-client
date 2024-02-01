@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { AddToListModal } from 'components/shareable-lists/add-to-list-modal'
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
+import { mutateBulkListCreate } from 'connectors/lists/mutation-create.state'
 import { mutateListAddCancel } from 'connectors/lists/mutation-add.state'
 import { mutateListAddConfirm } from 'connectors/lists/mutation-add.state'
 import { getRecentListsAction } from 'containers/lists/lists.state'
@@ -13,17 +14,20 @@ export const ConfirmAddToList = () => {
   const dispatch = useDispatch()
 
   const id = useSelector((state) => state.mutationListAdd.id)
+  const ids = useSelector((state) => state.mutationListAdd.ids)
   const showModal = useSelector((state) => state.mutationListAdd.open)
   const lastUsedList = useSelector((state) => state.mutationListAdd.lastUsedList)
   const titleToIdList = useSelector((state) => state.pageListsInfo.titleToIdList)
-  const item = useSelector((state) => state.itemsDisplay[id])
+  const itemsDisplay = useSelector((state) => state.itemsDisplay)
+  const item = itemsDisplay[id]
 
   useEffect(() => {
     if (showModal) dispatch(getRecentListsAction())
   }, [dispatch, showModal])
 
   const handleCreate = () => {
-    dispatch(mutateListCreate(id))
+    if (id) dispatch(mutateListCreate(id))
+    if (ids) dispatch(mutateBulkListCreate(ids))
     dispatch(sendSnowplowEvent('shareable-list.item.add.create-list'))
   }
 
@@ -34,6 +38,7 @@ export const ConfirmAddToList = () => {
 
   const handleSubmit = (listTitle) => {
     const externalId = titleToIdList[listTitle]
+    // TODO: Analytics!!!
     dispatch(
       sendSnowplowEvent('shareable-list.item.add.confirm', {
         ...item?.analyticsData,

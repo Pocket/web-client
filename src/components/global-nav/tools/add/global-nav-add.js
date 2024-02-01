@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { AddIcon } from 'components/icons/AddIcon'
+import { LinkCopyIcon } from 'components/icons/LinkCopyIcon'
 import { CrossIcon } from 'components/icons/CrossIcon'
 import { ErrorIcon } from 'components/icons/ErrorIcon'
 import { breakpointMediumHandset } from 'common/constants'
@@ -72,7 +72,7 @@ const addStyle = css`
   }
 `
 
-const addIconStyle = css`
+const copyIconStyle = css`
   width: 20px;
   height: 20px;
   position: absolute;
@@ -212,7 +212,7 @@ const GlobalNavAdd = ({
   return (
     <form className={addStyle} onSubmit={handleSubmit} autoComplete="off">
       <div className={addContainerStyle}>
-        <AddIcon className={addIconStyle} />
+        <LinkCopyIcon className={copyIconStyle} />
         <input
           type="url"
           name="add-input"
