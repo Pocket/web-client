@@ -7,7 +7,7 @@ export const LOGIN_URL = 'https://getpocket.com/login'
 export const SIGNUP_URL = 'https://getpocket.com/signup'
 export const PREMIUM_URL = 'https://getpocket.com/premium?utm_source=web-app-premium-cta'
 export const GRAPHQL_URL = 'https://getpocket.com'
-export const BATCH_SIZE = 1
+export const BATCH_SIZE = 30
 export const COLOR_MODE_PREFIX = 'colormode'
 export const MAX_TAG_NAME_LENGTH = 25
 
