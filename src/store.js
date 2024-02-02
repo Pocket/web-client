@@ -65,7 +65,6 @@ import { mutationArchiveSagas } from 'connectors/items/mutation-archive.state'
 import { mutationDeleteReducers } from 'connectors/items/mutation-delete.state'
 import { mutationDeleteSagas } from 'connectors/items/mutation-delete.state'
 
-import { mutationRefreshReducers } from 'connectors/items/mutation-refresh.state'
 import { mutationRefreshSagas } from 'connectors/items/mutation-refresh.state'
 
 import { mutationFavoriteReducers } from 'connectors/items/mutation-favorite.state'
@@ -135,7 +134,6 @@ const itemMutations = {
   mutationFavorite: mutationFavoriteReducers,
   mutationArchive: mutationArchiveReducers,
   mutationDelete: mutationDeleteReducers,
-  mutationRefresh: mutationRefreshReducers,
   mutationTagging: mutationTaggingReducers,
   mutationHighlight: mutationHighlightReducers,
   mutationShare: mutationShareReducers,

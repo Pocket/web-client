@@ -6,10 +6,10 @@ import { FRAGMENT_SAVED_ITEM } from 'common/api/fragments/fragment.savedItem'
 const itemRefreshQuery = gql`
   mutation ItemRefresh($url: String!) {
     refreshItemArticle(url: $url) {
-        ...ItemDetails
-        savedItem {
-            ...SavedItemDetails
-        }
+      ...ItemDetails
+      savedItem {
+        ...SavedItemDetails
+      }
     }
   }
   ${FRAGMENT_ITEM}
@@ -23,13 +23,8 @@ export function itemRefresh(url) {
     variables: { url }
   })
     .then((response) => {
-        // Convert to a normal savedItem style response so the rest of Web Client handles like an upsert
-        const savedItem = response?.data?.refreshItemArticle?.savedItem
-        delete response?.data?.refreshItemArticle?.savedItem
-        return {
-            ...savedItem,
-            item: response?.data?.refreshItemArticle,
-        }
+      const { savedItem, ...item } = response?.data?.refreshItemArticle
+      return { ...savedItem, item }
     })
     .catch((error) => console.error(error))
 }

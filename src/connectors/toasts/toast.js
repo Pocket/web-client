@@ -84,7 +84,7 @@ export function Toast({
     [MUTATION_BULK_ARCHIVE]: t('toast:archived', '{{count}} item archived', { count }),
 
     // Refresh
-    [MUTATION_REFRESH]: t('toast:refreshed-item', 'Refreshed'),
+    [MUTATION_REFRESH]: t('toast:refreshed-item', '{{count}} item has been refreshed', { count }), //prettier-ignore
 
     [MUTATION_FAVORITE]: t('toast:added-to-favorites', '{{count}} item added to favorites', { count }), //prettier-ignore
     [MUTATION_UNFAVORITE]: t('toast:removed-from-favorites', '{{count}} item removed from favorites', { count }), //prettier-ignore

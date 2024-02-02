@@ -214,8 +214,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
   }
 
   const actionRefresh = () => {
-    console.log("called")
-    //dispatch(sendSnowplowEvent(`${snowplowId}.refresh`, analyticsData))
+    dispatch(sendSnowplowEvent(`${snowplowId}.refresh`, analyticsData))
     dispatch(mutationRefresh(item.givenUrl))
   }
 

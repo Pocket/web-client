@@ -282,6 +282,7 @@ export const SHARE_MASTODON = 'SHARE_MASTODON'
 
 // ITEMS
 export const ITEMS_SUCCESS = 'ITEMS_SUCCESS'
+export const ITEMS_UPDATE = 'ITEMS_UPDATE'
 
 // SAVED ITEMS (GraphQL as source)
 export const ITEMS_SAVED_REQUEST = 'ITEMS_SAVED_REQUEST'

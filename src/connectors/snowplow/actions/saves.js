@@ -111,6 +111,15 @@ export const savesActions = {
     expects: ['url', 'position'],
     description: 'Fired when a creator opens the Add to List modal'
   },
+  'saves.refresh': {
+    eventType: 'engagement',
+    entityTypes: ['ui', 'content'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['url', 'position'],
+    description: 'Fired when a user clicks the Refresh icon in a card on Saves'
+  },
   'saves.display.view': {
     eventType: 'engagement',
     entityTypes: ['ui'],
