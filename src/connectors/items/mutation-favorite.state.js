@@ -1,5 +1,5 @@
 import { put, call, take, race, takeEvery } from 'redux-saga/effects'
-import { itemFavorite, bulkFavorite} from 'common/api/mutations/favoriteItem'
+import { itemFavorite, bulkFavorite } from 'common/api/mutations/favoriteItem'
 import { itemUnFavorite, bulkUnFavorite } from 'common/api/mutations/unfavoriteItem'
 import { batchSendMutations } from './mutations-bulk.state'
 
@@ -10,6 +10,7 @@ import { MUTATION_BULK_FAVORITE } from 'actions'
 import { MUTATION_BULK_UNFAVORITE } from 'actions'
 import { MUTATION_BULK_CONFIRM } from 'actions'
 import { MUTATION_BULK_CANCEL } from 'actions'
+import { MUTATION_BULK_BATCH_BEGIN } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -30,7 +31,8 @@ export const mutationFavoriteReducers = (state = initialState, action) => {
     }
 
     case MUTATION_SUCCESS:
-    case MUTATION_BULK_CANCEL: {
+    case MUTATION_BULK_CANCEL:
+    case MUTATION_BULK_BATCH_BEGIN: {
       return initialState
     }
 

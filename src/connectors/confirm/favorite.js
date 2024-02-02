@@ -2,7 +2,6 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { mutationBulkConfirm, mutationBulkCancel } from 'connectors/items/mutations-bulk.state'
 
-import { BatchProcessing } from 'components/processing/processing'
 import { useTranslation, Trans } from 'next-i18next'
 
 export const ConfirmFavorite = () => {
@@ -11,9 +10,6 @@ export const ConfirmFavorite = () => {
 
   // Handle delete actions with confirmation
   const itemsToFavorite = useSelector((state) => state.mutationFavorite.itemIds)
-  const batchTotal = useSelector((state) => state.mutationBulk.batchTotal)
-  const batchCount = useSelector((state) => state.mutationBulk.batchCount)
-  const batchStart = useSelector((state) => state.mutationBulk.batchStart)
   const batchFavorite = useSelector((state) => state.mutationBulk.favoriteAction)
 
   const showModal = itemsToFavorite.length > 0
@@ -34,34 +30,26 @@ export const ConfirmFavorite = () => {
   const confirmFavorite = () => dispatch(mutationBulkConfirm())
   const cancelFavorite = () => dispatch(mutationBulkCancel())
 
-  const appRootSelector = '#__next'
-
   return (
     <Modal
       title={favoriteTitle}
-      appRootSelector={appRootSelector}
       isOpen={showModal}
       screenReaderLabel={favoriteTitle}
       handleClose={cancelFavorite}>
       <ModalBody>
-        {batchStart ? (
-          <BatchProcessing batchTotal={batchTotal} batchCount={batchCount} />
-        ) : (
-          <p>{favoriteCopy}</p>
-        )}
+        <p>{favoriteCopy}</p>
       </ModalBody>
-      {batchStart ? null : (
-        <ModalFooter>
-          <button
-            className="primary"
-            type="submit"
-            data-cy="favorite-modal-confirm"
-            onClick={confirmFavorite}
-            autoFocus={true}>
-            {favoriteTitle}
-          </button>
-        </ModalFooter>
-      )}
+
+      <ModalFooter>
+        <button
+          className="primary"
+          type="submit"
+          data-cy="favorite-modal-confirm"
+          onClick={confirmFavorite}
+          autoFocus={true}>
+          {favoriteTitle}
+        </button>
+      </ModalFooter>
     </Modal>
   )
 }

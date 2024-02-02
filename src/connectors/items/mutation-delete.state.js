@@ -12,6 +12,7 @@ import { MUTATION_UNDELETE } from 'actions'
 import { MUTATION_BULK_DELETE } from 'actions'
 import { MUTATION_BULK_CANCEL } from 'actions'
 import { MUTATION_BULK_CONFIRM } from 'actions'
+import { MUTATION_BULK_BATCH_BEGIN } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -31,7 +32,8 @@ export const mutationDeleteReducers = (state = initialState, action) => {
     }
 
     case MUTATION_DELETE_SUCCESS:
-    case MUTATION_BULK_CANCEL: {
+    case MUTATION_BULK_CANCEL:
+    case MUTATION_BULK_BATCH_BEGIN: {
       return initialState
     }
 

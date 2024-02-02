@@ -1,5 +1,5 @@
 import { put, call, race, take, takeEvery } from 'redux-saga/effects'
-import { itemArchive, bulkArchive} from 'common/api/mutations/archiveItem'
+import { itemArchive, bulkArchive } from 'common/api/mutations/archiveItem'
 import { itemUnArchive, bulkUnArchive } from 'common/api/mutations/unArchiveItem'
 import { batchSendMutations } from './mutations-bulk.state'
 
@@ -11,6 +11,7 @@ import { MUTATION_BULK_ARCHIVE } from 'actions'
 import { MUTATION_BULK_UNARCHIVE } from 'actions'
 import { MUTATION_BULK_CANCEL } from 'actions'
 import { MUTATION_BULK_CONFIRM } from 'actions'
+import { MUTATION_BULK_BATCH_BEGIN } from 'actions'
 
 /** ACTIONS
  --------------------------------------------------------------- */
@@ -32,7 +33,8 @@ export const mutationArchiveReducers = (state = { itemIds: [] }, action) => {
     }
 
     case MUTATION_SUCCESS:
-    case MUTATION_BULK_CANCEL: {
+    case MUTATION_BULK_CANCEL:
+    case MUTATION_BULK_BATCH_BEGIN: {
       return initialState
     }
 

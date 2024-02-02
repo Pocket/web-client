@@ -23,6 +23,7 @@ import { ConfirmTagEdit } from 'connectors/confirm/tag-edit'
 import { ConfirmTagDelete } from 'connectors/confirm/tag-delete'
 import { ConfirmAddToList } from 'connectors/confirm/add-to-list'
 import { CreateListModal } from 'connectors/confirm/create-list'
+import { BulkProcessing } from 'connectors/confirm/bulk-processing'
 
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
 
@@ -99,6 +100,7 @@ export const Saves = (props) => {
       <ConfirmTagDelete />
       <ConfirmAddToList />
       <CreateListModal />
+      <BulkProcessing />
 
       <Toasts />
     </Layout>

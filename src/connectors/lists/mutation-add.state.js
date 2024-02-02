@@ -61,6 +61,10 @@ export const mutationListAddReducers = (state = initialState, action) => {
       return { ...state, open: false, id: null, ids: null }
     }
 
+    case MUTATION_BULK_BATCH_BEGIN: {
+      return { ...state, open: false }
+    }
+
     default:
       return state
   }

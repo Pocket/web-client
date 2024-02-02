@@ -2,7 +2,6 @@ import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { mutationBulkConfirm, mutationBulkCancel } from 'connectors/items/mutations-bulk.state'
 
-import { BatchProcessing } from 'components/processing/processing'
 import { useTranslation, Trans } from 'next-i18next'
 
 export const ConfirmArchive = () => {
@@ -11,9 +10,6 @@ export const ConfirmArchive = () => {
 
   // Handle delete actions with confirmation
   const itemsToArchive = useSelector((state) => state.mutationArchive.itemIds)
-  const batchTotal = useSelector((state) => state.mutationBulk.batchTotal)
-  const batchCount = useSelector((state) => state.mutationBulk.batchCount)
-  const batchStart = useSelector((state) => state.mutationBulk.batchStart)
   const batchStatus = useSelector((state) => state.mutationBulk.archiveAction)
 
   const showModal = itemsToArchive.length > 0
@@ -35,34 +31,26 @@ export const ConfirmArchive = () => {
   const confirmArchive = () => dispatch(mutationBulkConfirm())
   const cancelArchive = () => dispatch(mutationBulkCancel())
 
-  const appRootSelector = '#__next'
-
   return (
     <Modal
       title={archiveTitle}
-      appRootSelector={appRootSelector}
       isOpen={showModal}
       screenReaderLabel={archiveTitle}
       handleClose={cancelArchive}>
       <ModalBody>
-        {batchStart ? (
-          <BatchProcessing batchTotal={batchTotal} batchCount={batchCount} />
-        ) : (
-          <p>{archiveCopy}</p>
-        )}
+        <p>{archiveCopy}</p>
       </ModalBody>
-      {batchStart ? null : (
-        <ModalFooter>
-          <button
-            className="primary"
-            type="submit"
-            data-cy="archive-modal-confirm"
-            onClick={confirmArchive}
-            autoFocus={true}>
-            {archiveTitle}
-          </button>
-        </ModalFooter>
-      )}
+
+      <ModalFooter>
+        <button
+          className="primary"
+          type="submit"
+          data-cy="archive-modal-confirm"
+          onClick={confirmArchive}
+          autoFocus={true}>
+          {archiveTitle}
+        </button>
+      </ModalFooter>
     </Modal>
   )
 }
