@@ -5,6 +5,7 @@ import { ArchiveIcon } from 'components/icons/ArchiveIcon'
 import { FavoriteIcon } from 'components/icons/FavoriteIcon'
 import { TagIcon } from 'components/icons/TagIcon'
 import { ReportIcon } from 'components/icons/ReportIcon'
+import { RefreshIcon } from 'components/icons/RefreshIcon'
 import { itemActionStyle } from 'components/item-actions/base'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
 import { OverflowAction } from 'components/item-actions/overflow'
@@ -39,6 +40,12 @@ export const Saves = ({ id }) => (
         key: `delete-${id}`,
         label: 'Delete',
         icon: <DeleteIcon />,
+        onClick: noop
+      },
+      {
+        key: `refresh-${id}`,
+        label: 'Refresh',
+        icon: <RefreshIcon />,
         onClick: noop
       }
     ]}

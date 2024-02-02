@@ -10,6 +10,7 @@ import { TagIcon } from 'components/icons/TagIcon'
 import { AddIcon } from 'components/icons/AddIcon'
 import { PermanentCopyIcon } from 'components/icons/PermanentCopyIcon'
 import { ListAddIcon } from 'components/icons/ListAddIcon'
+import { RefreshIcon } from 'components/icons/RefreshIcon'
 
 export const savedActionStyles = css`
   button,
@@ -57,6 +58,7 @@ export function SavedActions({
   actionShare,
   actionDelete,
   actionPremLibOpen,
+  actionRefresh,
   actionAddToList,
   permanentUrl,
 }) {
@@ -74,6 +76,11 @@ export function SavedActions({
   const correctFavoriteAction = isFavorite ? actionUnFavorite : actionFavorite
 
   const actionTypes = {
+    refresh: {
+      label: t('item-action:refresh', 'Refresh'),
+      icon: <RefreshIcon />,
+      onClick: actionRefresh
+    },
     lists: {
       label: t('item-action:add-to-list', 'Add to List'),
       icon: <ListAddIcon />,

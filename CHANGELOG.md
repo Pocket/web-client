@@ -1,3 +1,11 @@
+# [1.105.0](https://github.com/Pocket/web-client/compare/v1.104.4...v1.105.0) (2024-02-02)
+
+
+### Features
+
+* **refresh:** adding the ability to refresh an article ([7e16222](https://github.com/Pocket/web-client/commit/7e162221274595026c7b3d4acd4277b960d7588a))
+* **refresh:** refresh api call will now update the ui ([3cef52c](https://github.com/Pocket/web-client/commit/3cef52ca2a33002d4c7559f6d3c9d392c992436a))
+
 ## [1.104.4](https://github.com/Pocket/web-client/compare/v1.104.3...v1.104.4) (2024-01-30)
 
 

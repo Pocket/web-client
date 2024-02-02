@@ -18,6 +18,7 @@ import { mutationTagItem } from 'connectors/items/mutation-tagging.state'
 import { shareAction } from 'connectors/items/mutation-share.state'
 import { mutateListAddItem } from 'connectors/lists/mutation-add.state'
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
+import { mutationRefresh } from 'connectors/items/mutation-refresh.state'
 
 /**
  * Article Card
@@ -212,6 +213,11 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
     dispatch(sendSnowplowEvent(`${snowplowId}.card.permanent-library`, data))
   }
 
+  const actionRefresh = () => {
+    dispatch(sendSnowplowEvent(`${snowplowId}.refresh`, analyticsData))
+    dispatch(mutationRefresh(item.givenUrl))
+  }
+
   return (
     <SavedActions
       visibleCount={visibleCount}
@@ -226,6 +232,7 @@ function ActionsSaves({ id, snowplowId, visibleCount }) {
       actionUnFavorite={actionUnFavorite}
       actionTag={actionTag}
       actionPremLibOpen={actionPermLibOpen}
+      actionRefresh={actionRefresh}
       actionAddToList={actionAddToList}
       permanentUrl={permanentUrl}
     />

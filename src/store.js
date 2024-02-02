@@ -65,6 +65,8 @@ import { mutationArchiveSagas } from 'connectors/items/mutation-archive.state'
 import { mutationDeleteReducers } from 'connectors/items/mutation-delete.state'
 import { mutationDeleteSagas } from 'connectors/items/mutation-delete.state'
 
+import { mutationRefreshSagas } from 'connectors/items/mutation-refresh.state'
+
 import { mutationFavoriteReducers } from 'connectors/items/mutation-favorite.state'
 import { mutationFavoriteSagas } from 'connectors/items/mutation-favorite.state'
 
@@ -232,6 +234,7 @@ function* rootSaga() {
     ...pageListsInfoSagas,
     ...mutationArchiveSagas,
     ...mutationDeleteSagas,
+    ...mutationRefreshSagas,
     ...mutationFavoriteSagas,
     ...mutationUpsertSagas,
     ...mutationBulkSagas,

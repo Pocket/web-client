@@ -1,6 +1,7 @@
 import { ITEMS_SUCCESS } from 'actions'
 import { READ_ITEM_SUCCESS } from 'actions'
 import { ITEMS_SET_NO_IMAGE } from 'actions'
+import { ITEMS_UPDATE } from 'actions'
 import { HYDRATE } from 'actions'
 
 /** ACTIONS
@@ -23,7 +24,7 @@ export const itemsDisplayReducers = (state = {}, action) => {
       const preExistingItemIds = passedItemIds.filter((value) => Object.keys(state).includes(value))
 
       // This monstrosity avoids us clobbering the current derived display
-      // This can all be nuked once we achieve display item consistnecy from the graph
+      // This can all be nuked once we achieve display item consistency from the graph
       const preExistingItemsById = preExistingItemIds.reduce((previous, current) => {
         return { ...previous, [current]: { ...itemsById[current], ...state[current] } }
       }, {})
@@ -31,7 +32,21 @@ export const itemsDisplayReducers = (state = {}, action) => {
       // Wat?  This basically is an easy way to say use the existing state
       // but add new items by id ... but don't try and overwrite existing items
       // since the user has already seen them and we want things consistent.
+      return { ...state, ...itemsById, ...preExistingItemsById }
+    }
 
+    case ITEMS_UPDATE: {
+      const { itemsById = {} } = action
+
+      const passedItemIds = Object.keys(itemsById)
+      const preExistingItemIds = passedItemIds.filter((value) => Object.keys(state).includes(value))
+
+      const preExistingItemsById = preExistingItemIds.reduce((previous, current) => {
+        return { ...previous, [current]: { ...state[current], ...itemsById[current] } }
+      }, {})
+
+      // This basically is an easy way to say use the existing state but
+      // add new items by id ... and we may try to overwrite existing items
       return { ...state, ...itemsById, ...preExistingItemsById }
     }
 
