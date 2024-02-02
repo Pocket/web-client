@@ -12,6 +12,7 @@ import { ITEMS_UPSERT_SUCCESS } from 'actions'
 import { MUTATION_ARCHIVE } from 'actions'
 import { MUTATION_UNARCHIVE } from 'actions'
 import { MUTATION_FAVORITE } from 'actions'
+import { MUTATION_REFRESH } from 'actions'
 import { MUTATION_UNFAVORITE } from 'actions'
 import { MUTATION_TAGGING } from 'actions'
 import { MUTATION_UPSERT } from 'actions'
@@ -81,6 +82,9 @@ export function Toast({
     // Archive
     [MUTATION_ARCHIVE]: t('toast:archived', '{{count}} item archived', { count }),
     [MUTATION_BULK_ARCHIVE]: t('toast:archived', '{{count}} item archived', { count }),
+
+    // Refresh
+    [MUTATION_REFRESH]: t('toast:refreshed-item', 'Refreshed'),
 
     [MUTATION_FAVORITE]: t('toast:added-to-favorites', '{{count}} item added to favorites', { count }), //prettier-ignore
     [MUTATION_UNFAVORITE]: t('toast:removed-from-favorites', '{{count}} item removed from favorites', { count }), //prettier-ignore
