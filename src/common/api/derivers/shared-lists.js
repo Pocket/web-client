@@ -5,8 +5,12 @@ import { replaceUTM } from 'common/utilities/urls/urls'
 export function processAllList(responseData) {
   const allLists = responseData
 
-  const lists = responseData.map(({ externalId, listItems, ...rest }) => {
-    return deriveList(rest, externalId, listItems)
+  const lists = responseData.map(({ externalId, listItems, items, ...rest }) => {
+    if (listItems) return deriveList(rest, externalId, listItems)
+
+    const { edges, pageInfo, totalCount } = items
+    const list = { ...rest, pageInfo, totalCount }
+    return deriveList(list, externalId, edges)
   })
 
   const externalIds = allLists.map((list) => list.externalId)
@@ -19,10 +23,13 @@ export function processAllList(responseData) {
 // process an individual list, viewable to the user only
 // returns an array of keys
 export function processIndividualList(responseData, utmId) {
-  const { listItems, externalId: listId, ...rest } = responseData
+  const { items, externalId: listId, ...rest } = responseData
 
-  const listItemsById = getListItemsById(listItems, listId, utmId)
-  const individualList = deriveList(rest, listId, listItems)
+  const { edges, pageInfo, totalCount } = items
+  const list = { ...rest, pageInfo, totalCount }
+
+  const listItemsById = getListItemsById(edges, listId, utmId)
+  const individualList = deriveList(list, listId, edges)
 
   const itemsById = {
     ...listItemsById,
@@ -35,8 +42,8 @@ export function processIndividualList(responseData, utmId) {
 // Loops through each list item and derives it
 // return an object with the external id as the keys and list info as the value
 function getListItemsById(listItems, listId, utmId) {
-  const processedItems = listItems.map((item) => {
-    return deriveListItem(item, listId, utmId)
+  const processedItems = listItems.map(({ cursor, node }) => {
+    return deriveListItem({ ...node, cursor }, listId, utmId)
   }, {})
 
   return arrayToObject(processedItems, 'externalId')
@@ -82,13 +89,13 @@ function deriveList(list, listId, listItems) {
     createdAt: Date.parse(createdAt) / 1000
   }
 
-  const listItemIds = listItems.map((item) => item.externalId)
+  const listItemIds = listItems.map(({ node }) => node.externalId)
 
   return {
     ...list,
     title: decodeSpecialChars(title),
     description: decodeSpecialChars(description),
-    itemImage: listItems?.[0]?.imageUrl,
+    itemImage: listItems?.[0]?.node?.imageUrl,
     externalId: listId,
     listItemIds,
     analyticsData

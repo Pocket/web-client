@@ -4,7 +4,7 @@ import { gql } from 'common/utilities/gql/gql'
 import { processAllList } from 'common/api/derivers/shared-lists'
 
 const getShareableListsQuery = gql`
-  query GetShareableLists {
+  query GetShareableLists($pagination: PaginationInput) {
     shareableLists {
       title
       description
@@ -15,17 +15,36 @@ const getShareableListsQuery = gql`
       updatedAt
       moderationStatus
       externalId
-      listItems {
-        imageUrl
-        externalId
+      items(pagination: $pagination) {
+        edges {
+          cursor
+          node {
+            title
+            imageUrl
+            externalId
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
+        totalCount
       }
     }
   }
 `
+
 export async function getShareableLists() {
+  const variables = {
+    pagination: { first: 30 }
+  }
+
   return requestGQL({
     query: getShareableListsQuery,
-    operationName: 'GetShareableLists'
+    operationName: 'GetShareableLists',
+    variables
   })
     .then(handleResponse)
     .catch((error) => console.error(error))

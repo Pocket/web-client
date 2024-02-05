@@ -17,17 +17,17 @@ export const ListCard = ({ id, position }) => {
   if (!list) return null
 
   const {
-    listItemIds,
     externalId,
     slug,
     title,
     description,
     status,
+    totalCount,
     listItemNoteVisibility,
     analyticsData: passedAnalytics
   } = list
   const url = `/sharedlists/${externalId}/${slug}`
-  const itemCount = listItemIds?.length || 0
+  const itemCount = totalCount || '0'
   const itemImage = list?.noImage ? '' : list?.itemImage
 
   const analyticsData = {

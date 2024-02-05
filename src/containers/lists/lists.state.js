@@ -169,8 +169,8 @@ function* getRecentLists() {
   try {
     const shareableLists = yield getRecentShareableLists()
     const listsIds = shareableLists.map((list) => list.externalId)
-    const lists = shareableLists.map(({ listItems, ...rest }) => ({
-      listItemIds: listItems.map(({ itemId }) => itemId),
+    const lists = shareableLists.map(({ items, ...rest }) => ({
+      listItemIds: items.edges.map(({ node }) => node.itemId), // do we need this?
       ...rest
     }))
     const itemsById = arrayToObject(lists, 'externalId')

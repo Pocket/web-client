@@ -3,21 +3,40 @@ import * as Sentry from '@sentry/nextjs'
 import { gql } from 'common/utilities/gql/gql'
 
 const getRecentShareableListsQuery = gql`
-  query GetShareableLists {
+  query GetShareableLists($pagination: PaginationInput) {
     shareableLists {
       title
       externalId
-      listItems {
-        externalId
-        itemId: externalId
+      items(pagination: $pagination) {
+        edges {
+          cursor
+          node {
+            title
+            externalId
+            itemId: externalId
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
+        totalCount
       }
     }
   }
 `
+
 export async function getRecentShareableLists() {
+  const variables = {
+    pagination: { first: 30 }
+  }
+
   return requestGQL({
     query: getRecentShareableListsQuery,
-    operationName: 'GetRecentShareableLists'
+    operationName: 'GetRecentShareableLists',
+    variables
   })
     .then(handleResponse)
     .catch((error) => console.error(error))

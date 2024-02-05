@@ -4,7 +4,7 @@ import { requestGQL } from 'common/utilities/request/request'
 import { processIndividualList } from 'common/api/derivers/shared-lists'
 
 const getShareableListQuery = gql`
-  query ShareableList($externalId: ID!) {
+  query ShareableList($externalId: ID!, $pagination: PaginationInput) {
     shareableList(externalId: $externalId) {
       title
       description
@@ -15,27 +15,45 @@ const getShareableListQuery = gql`
       moderationStatus
       createdAt
       updatedAt
-      listItems {
-        url
-        title
-        imageUrl
-        externalId
-        publisher
-        excerpt
-        authors
-        note
-        sortOrder
-        createdAt
-        updatedAt
+      items(pagination: $pagination) {
+        edges {
+          cursor
+          node {
+            url
+            title
+            imageUrl
+            externalId
+            publisher
+            excerpt
+            authors
+            note
+            sortOrder
+            createdAt
+            updatedAt
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
+        totalCount
       }
     }
   }
 `
+
 export function getShareableList(externalId) {
+  const variables = {
+    pagination: { first: 5 },
+    externalId
+  }
+
   return requestGQL({
     query: getShareableListQuery,
     operationName: 'getShareableList',
-    variables: { externalId }
+    variables
   })
     .then(handleResponse)
     .catch((error) => console.error(error))
@@ -44,8 +62,11 @@ export function getShareableList(externalId) {
 function handleResponse(response) {
   try {
     const { shareableList, errors } = response?.data || {}
+    // console.log({ shareableList })
     if (errors) throw new GetShareableListError(errors)
     const processedData = processIndividualList(shareableList, 'pocket_list')
+
+    // console.log(JSON.stringify(processedData))
 
     return processedData
   } catch (error) {
