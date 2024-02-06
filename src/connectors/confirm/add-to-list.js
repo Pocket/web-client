@@ -38,9 +38,12 @@ export const ConfirmAddToList = () => {
 
   const handleSubmit = (listTitle) => {
     const externalId = titleToIdList[listTitle]
-    // TODO: Analytics!!!
+    const identifier = ids
+      ? 'shareable-list.item.bulk.add.confirm'
+      : 'shareable-list.item.add.confirm'
+
     dispatch(
-      sendSnowplowEvent('shareable-list.item.add.confirm', {
+      sendSnowplowEvent(identifier, {
         ...item?.analyticsData,
         listItemNoteVisibility: item?.listItemNoteVisibility,
         label: listTitle

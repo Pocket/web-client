@@ -78,6 +78,15 @@ export const shareableListActions = {
     },
     description: 'Fired when a creator clicks the "Create List" button in the "Create List" modal'
   },
+  'shareable-list.create.bulk.submit': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    description:
+      'Fired when a creator clicks the "Create List" button in the "Create List" modal after bulk edit'
+  },
   'shareable-list.sort.oldest': {
     eventType: 'engagement',
     entityTypes: ['ui'],
@@ -479,6 +488,15 @@ export const shareableListActions = {
     },
     expects: ['label', 'url'],
     description: 'Fired when a creator adds an item to a list'
+  },
+  'shareable-list.item.bulk.add.confirm': {
+    eventType: 'engagement',
+    entityTypes: ['ui'],
+    eventData: {
+      uiType: 'button'
+    },
+    expects: ['label'],
+    description: 'Fired when a creator adds items to a list from bulk edit'
   },
   'shareable-list.item.remove': {
     eventType: 'engagement',

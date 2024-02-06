@@ -14,6 +14,7 @@ export const CreateListModal = () => {
 
   const showModal = useSelector((state) => state.mutationListCreate.open)
   const id = useSelector((state) => state.mutationListCreate.id)
+  const ids = useSelector((state) => state.mutationListCreate.ids)
   const titleToIdList = useSelector((state) => state.pageListsInfo.titleToIdList)
 
   const titleList = titleToIdList ? Object.keys(titleToIdList) : []
@@ -28,8 +29,10 @@ export const CreateListModal = () => {
     const errorText = t('list:dupe-error', 'List name has already been used.')
     if (existsInArray(titleList, title)) return setError(errorText)
 
+    const identifier = ids ? 'shareable-list.create.bulk.submit' : 'shareable-list.create.submit'
+
     dispatch(mutateListConfirm({ title, description }))
-    dispatch(sendSnowplowEvent('shareable-list.create.submit'))
+    dispatch(sendSnowplowEvent(identifier))
     setError(null)
   }
 

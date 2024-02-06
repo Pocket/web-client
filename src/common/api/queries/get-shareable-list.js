@@ -44,9 +44,7 @@ const getShareableListQuery = gql`
   }
 `
 
-const testPagination = { first: 5 }
-
-export function getShareableList(externalId, pagination = testPagination) {
+export function getShareableList(externalId, pagination) {
   const variables = {
     pagination,
     externalId

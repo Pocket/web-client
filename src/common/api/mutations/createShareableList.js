@@ -44,7 +44,6 @@ export function createShareableList({ listData, listItemData }) {
 
 function handleResponse(response) {
   try {
-    console.log({ response })
     const { createShareableList, errors } = response?.data || {}
     if (errors) throw new CreateShareableListError(errors)
     const processedData = processAllList([createShareableList])
