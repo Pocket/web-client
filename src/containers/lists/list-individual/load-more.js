@@ -29,14 +29,14 @@ const loadMoreRefStyle = css`
 `
 
 export function LoadMore({ loadMore }) {
-  const hasNextPage = useSelector((state) => state.pageListsInfo.hasNextPage)
+  const hasNextPage = useSelector((state) => state.pageListsInfo.pageInfo?.hasNextPage)
   const loading = useSelector((state) => state.pageListsInfo.loading)
   const error = useSelector((state) => state.pageListsInfo.error)
-  const pageSavedIds = useSelector((state) => state.pageSavedIds)
+
+  if (!hasNextPage) return null
 
   const shouldLoadMore = hasNextPage && !loading
-
-  const loadMoreMessage = pageSavedIds.length ? 'Loading more items' : ''
+  const loadMoreMessage = hasNextPage ? 'Loading more items' : ''
 
   return loading || error ? (
     <div key="load-more" className={loadMoreStyle}>

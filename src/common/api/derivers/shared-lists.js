@@ -26,7 +26,7 @@ export function processIndividualList(responseData, utmId) {
   const { items, externalId: listId, ...rest } = responseData
 
   const { edges, pageInfo, totalCount } = items
-  const list = { ...rest, pageInfo, totalCount }
+  const list = { ...rest, totalCount }
 
   const listItemsById = getListItemsById(edges, listId, utmId)
   const individualList = deriveList(list, listId, edges)
@@ -36,7 +36,7 @@ export function processIndividualList(responseData, utmId) {
     [listId]: individualList
   }
 
-  return { itemsById }
+  return { itemsById, pageInfo, totalCount }
 }
 
 // Loops through each list item and derives it
@@ -89,7 +89,8 @@ function deriveList(list, listId, listItems) {
     createdAt: Date.parse(createdAt) / 1000
   }
 
-  const listItemIds = listItems.map(({ node }) => node.externalId)
+  // node.externalId  if it comes from items, externalId if it comes from listItems
+  const listItemIds = listItems.map(({ node, externalId }) => node?.externalId || externalId)
 
   return {
     ...list,

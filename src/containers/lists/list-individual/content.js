@@ -7,6 +7,8 @@ import { mutateListUpdateAction } from 'connectors/lists/mutation-update.state'
 import { mutateListStatusAction } from 'connectors/lists/mutation-update.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
+import { getMoreIndividualListAction } from '../lists.state'
+import { LoadMore } from './load-more'
 
 export const ListContent = ({ id, toggleSort }) => {
   const dispatch = useDispatch()
@@ -26,11 +28,12 @@ export const ListContent = ({ id, toggleSort }) => {
     description,
     slug,
     status,
+    totalCount,
     listItemIds,
     listItemNoteVisibility,
     analyticsData: passedAnalytics
   } = list
-  const showPlaceholder = listItemIds?.length === 0
+  const showPlaceholder = totalCount === 0
 
   const analyticsData = {
     ...passedAnalytics,
@@ -73,6 +76,7 @@ export const ListContent = ({ id, toggleSort }) => {
   const handleOpenUrl = () => {
     dispatch(sendSnowplowEvent('shareable-list.public-link.open.header', analyticsData))
   }
+  const loadMore = () => dispatch(getMoreIndividualListAction(id))
 
   return shouldRender ? (
     <main className="main">
@@ -99,6 +103,8 @@ export const ListContent = ({ id, toggleSort }) => {
             <IndividualListCard key={externalId} id={externalId} listId={id} position={index} />
           ))
         : null}
+
+      <LoadMore loadMore={loadMore} />
     </main>
   ) : null
 }

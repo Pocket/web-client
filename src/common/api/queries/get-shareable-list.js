@@ -44,9 +44,11 @@ const getShareableListQuery = gql`
   }
 `
 
-export function getShareableList(externalId) {
+const testPagination = { first: 5 }
+
+export function getShareableList(externalId, pagination = testPagination) {
   const variables = {
-    pagination: { first: 5 },
+    pagination,
     externalId
   }
 
@@ -62,11 +64,9 @@ export function getShareableList(externalId) {
 function handleResponse(response) {
   try {
     const { shareableList, errors } = response?.data || {}
-    // console.log({ shareableList })
+
     if (errors) throw new GetShareableListError(errors)
     const processedData = processIndividualList(shareableList, 'pocket_list')
-
-    // console.log(JSON.stringify(processedData))
 
     return processedData
   } catch (error) {
