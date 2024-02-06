@@ -253,7 +253,7 @@ function GlobalNavBulkEdit({
             </div>
           </div>
         </div>
-        <button className="bulk-cancel" onClick={clearAction} data-cy="clear-button">
+        <button className="bulk-cancel secondary" onClick={clearAction} data-cy="clear-button">
           {clearCopy}
         </button>
         {onClose ? <CloseButton onClick={onClose} data-cy="add-close" /> : null}
