@@ -6,8 +6,10 @@ export function processAllList(responseData) {
   const allLists = responseData
 
   const lists = responseData.map(({ externalId, listItems, items, ...rest }) => {
+    // This line supports old listItems format
     if (listItems) return deriveList(rest, externalId, listItems)
 
+    // This supports new items pagination
     const { edges, pageInfo, totalCount } = items
     const list = { ...rest, pageInfo, totalCount }
     return deriveList(list, externalId, edges)
@@ -42,6 +44,7 @@ export function processIndividualList(responseData, utmId) {
 // Loops through each list item and derives it
 // return an object with the external id as the keys and list info as the value
 function getListItemsById(listItems, listId, utmId) {
+  // Pulls cursor out and makes it a property of node
   const processedItems = listItems.map(({ cursor, node }) => {
     return deriveListItem({ ...node, cursor }, listId, utmId)
   }, {})
