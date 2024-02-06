@@ -52,6 +52,29 @@ function getListItemsById(listItems, listId, utmId) {
   return arrayToObject(processedItems, 'externalId')
 }
 
+// process a public list
+export function processPublicList(responseData, utmId) {
+  const { listItems, externalId: listId, ...rest } = responseData
+
+  const listItemsById = getPublicListItemsById(listItems, listId, utmId)
+  const individualList = deriveList(rest, listId, listItems)
+
+  const itemsById = {
+    ...listItemsById,
+    [listId]: individualList
+  }
+
+  return { itemsById }
+}
+
+function getPublicListItemsById(listItems, listId, utmId) {
+  const processedItems = listItems.map((item) => {
+    return deriveListItem(item, listId, utmId)
+  }, {})
+
+  return arrayToObject(processedItems, 'externalId')
+}
+
 // Builds a list item, compiles the analytics
 // Adds a utm paramter to the external url
 function deriveListItem(item, listId, utmId) {
@@ -94,12 +117,13 @@ function deriveList(list, listId, listItems) {
 
   // node.externalId  if it comes from items, externalId if it comes from listItems
   const listItemIds = listItems.map(({ node, externalId }) => node?.externalId || externalId)
+  const itemImage = listItems?.[0]?.node?.imageUrl || listItems?.[0]?.imageUrl
 
   return {
     ...list,
     title: decodeSpecialChars(title),
     description: decodeSpecialChars(description),
-    itemImage: listItems?.[0]?.node?.imageUrl,
+    itemImage,
     externalId: listId,
     listItemIds,
     analyticsData
