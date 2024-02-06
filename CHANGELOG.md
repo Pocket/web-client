@@ -1,3 +1,10 @@
+## [1.105.1](https://github.com/Pocket/web-client/compare/v1.105.0...v1.105.1) (2024-02-06)
+
+
+### Bug Fixes
+
+* **bulk:** update cancel button to secondary style ([e866639](https://github.com/Pocket/web-client/commit/e8666395882c877db31b1483b02c40ef6783dad8))
+
 # [1.105.0](https://github.com/Pocket/web-client/compare/v1.104.4...v1.105.0) (2024-02-02)
 
 
