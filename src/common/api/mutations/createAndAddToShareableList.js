@@ -7,6 +7,7 @@ const createAndAddToShareableListQuery = gql`
   mutation CreateAndAddToShareableList(
     $listData: CreateShareableListInput!
     $itemData: [AddItemInput!]!
+    $pagination: PaginationInput
   ) {
     createAndAddToShareableList(listData: $listData, itemData: $itemData) {
       title
@@ -17,26 +18,37 @@ const createAndAddToShareableListQuery = gql`
       externalId
       createdAt
       updatedAt
-      listItems {
-        createdAt
-        excerpt
-        externalId
-        imageUrl
-        itemId
-        sortOrder
-        title
-        updatedAt
-        url
-        publisher
+      items(pagination: $pagination) {
+        edges {
+          cursor
+          node {
+            title
+            imageUrl
+            externalId
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
+        totalCount
       }
     }
   }
 `
 export function createAndAddToShareableList(listData, itemData) {
+  const variables = {
+    pagination: { first: 30 },
+    listData,
+    itemData
+  }
+
   return requestGQL({
     query: createAndAddToShareableListQuery,
     operationName: 'createAndAddToShareableList',
-    variables: { listData, itemData }
+    variables
   })
     .then(handleResponse)
     .catch((error) => console.error(error))
