@@ -150,7 +150,7 @@ export function CallOutStartLibrary({
             target="_blank"
             rel="noreferrer"
             onClick={handleButtonClick}
-            href={`${SIGNUP_URL}?utm_source=explore&utm_medium=web`}>
+            href={`${SIGNUP_URL}?src=web-library-callout&utm_source=${global.location.href}&utm_medium=web`}>
             {t('discover:start-your-library', 'Start your library')}
           </a>
         </div>

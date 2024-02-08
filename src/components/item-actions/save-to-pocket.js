@@ -87,8 +87,8 @@ const popoverContainer = css`
 `
 
 export const SavePopover = function ({ popoverRef, id }) {
-  const loginUrl = `${LOGIN_URL}?route=${global.location.href}`
-  const signupUrl = `${SIGNUP_URL}?route=${global.location.href}`
+  const loginUrl = `${LOGIN_URL}?src=web-save&utm_source=${global.location.href}&route=${global.location.href}`
+  const signupUrl = `${SIGNUP_URL}?src=web-save&utm_source=${global.location.href}&route=${global.location.href}`
   return (
     //prettier-ignore
     <div className={popoverContainer} ref={popoverRef} data-cy={`article-save-login-popup-${id}`}>

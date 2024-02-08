@@ -113,7 +113,7 @@ function* accountDeleteProcess() {
   const { status, error } = response
 
   if (status === 1) {
-    document.location.href = LOGIN_URL
+    document.location.href = `${LOGIN_URL}?src=web-delete-success&utm_source=${global.location.href}`
     return yield put({ type: ACCOUNT_DELETE_SUCCESS })
   }
 

@@ -221,7 +221,7 @@ const GlobalNav = (props) => {
   const onLoginClick = (event) => {
     event.preventDefault()
     event.stopPropagation()
-    window.location.assign(`${LOGIN_URL}?src=navbar`)
+    window.location.assign(`${LOGIN_URL}?src=web-nav&utm_source=${global.location.href}`)
   }
 
   const CurrentBanner = bannerCampaign ? Banner : null

@@ -155,7 +155,7 @@ export function CallOutBuildHome({ source = 'explore', topBorder }) {
           className="button brand"
           target="_blank"
           rel="noreferrer"
-          href={`${SIGNUP_URL}?utm_source=${source}&utm_medium=web`}>
+          href={`${SIGNUP_URL}?src=web-add-callout&utm_source=${global.location.href}&utm_medium=web`}>
           {t('call-out:sign-up', 'Sign Up')}
         </a>
       </aside>

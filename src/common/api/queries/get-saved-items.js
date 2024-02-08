@@ -65,7 +65,7 @@ function handleResponse(response) {
   const responseData = response?.data?.user?.savedItems
 
   if (response?.errors && response?.errors?.[0]?.extensions?.status === 401) {
-    window.location = `${LOGIN_URL}?src=web-client`
+    window.location = `${LOGIN_URL}?src=web-reauth&utm_source=${window.location.href}`
     throw new UnauthenticatedItemRequestError()
   }
 

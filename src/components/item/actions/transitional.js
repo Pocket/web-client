@@ -69,12 +69,16 @@ export function TransitionalActions({
   return (
     <div className={`${transitionalActionStyles} status-${saveStatus}`}>
       {isSaved ? (
-        <button className="saved" ref={popTrigger} onClick={onUnSave} data-cy='article-save-btn-saved'>
+        <button
+          className="saved"
+          ref={popTrigger}
+          onClick={onUnSave}
+          data-cy="article-save-btn-saved">
           <SaveFilledIcon className="saveIcon" />
           <span className="copy">{t('item-action:save-saved', 'Saved')}</span>
         </button>
       ) : (
-        <button className="save" ref={popTrigger} onClick={onSave} data-cy='article-save-btn-save'>
+        <button className="save" ref={popTrigger} onClick={onSave} data-cy="article-save-btn-save">
           <SaveIcon className="saveIcon" />
           <span className="copy">{t('item-action:save-unsaved', 'Save')}</span>
         </button>
@@ -86,8 +90,8 @@ export function TransitionalActions({
 }
 
 export const SavePopover = function ({ popoverRef, id }) {
-  const loginUrl = `${LOGIN_URL}?route=${global.location.href}`
-  const signupUrl = `${SIGNUP_URL}?route=${global.location.href}`
+  const loginUrl = `${LOGIN_URL}?src=web-save&utm_source=${global.location.href}&route=${global.location.href}`
+  const signupUrl = `${SIGNUP_URL}?src=web-save&utm_source=${global.location.href}&route=${global.location.href}`
   return (
     //prettier-ignore
     <div className={popoverContainer} ref={popoverRef} data-cy={`article-save-login-popup-${id}`}>

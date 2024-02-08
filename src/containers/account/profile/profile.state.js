@@ -199,7 +199,7 @@ function* accountUsernameUpdate(action) {
 
   if (status === 1) {
     yield put({ type: ACCOUNT_USERNAME_UPDATE_SUCCESS })
-    document.location.href = LOGIN_URL
+    document.location.href = `${LOGIN_URL}?src=web-username-updated&utm_source=${global.location.href}`
     return
   }
   yield put({ type: ACCOUNT_USERNAME_UPDATE_FAILURE, err: error })
@@ -215,7 +215,7 @@ function* accountPasswordUpdate(action) {
 
   if (status === 1) {
     yield put({ type: ACCOUNT_PASSWORD_UPDATE_SUCCESS })
-    document.location.href = LOGIN_URL
+    document.location.href = `${LOGIN_URL}?src=web-password-updated&utm_source=${global.location.href}`
     return
   }
 

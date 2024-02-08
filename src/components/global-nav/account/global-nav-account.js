@@ -5,6 +5,7 @@ import { css, cx } from '@emotion/css'
 import { Trans, useTranslation } from 'next-i18next'
 import { useCorrectEffect } from 'common/utilities/hooks/use-correct-effect'
 import { KEYS, PREMIUM_URL } from 'common/constants'
+import { SIGNUP_URL, LOGIN_URL } from 'common/constants'
 import { NewViewIcon } from 'components/icons/NewViewIcon'
 import { breakpointLargeHandset } from 'common/constants'
 import { ProfileIcon } from 'components/icons/ProfileIcon'
@@ -204,7 +205,6 @@ const GlobalNavAccount = ({
   const handleViewProfileCase = () => onLinkClick('view-profile')
   const handleManageAccountCase = () => onLinkClick('manage-account')
   const handleHelpCase = () => onLinkClick('help')
-  const handleMessagesCase = () => onLinkClick('messages')
   const handleLogoutCase = () => {
     onLinkClick('logout')
     // Fire for all users when Braze launches
@@ -232,7 +232,7 @@ const GlobalNavAccount = ({
   return !isLoggedIn ? (
     <div>
       <a
-        href="https://getpocket.com/login?src=navbar"
+        href={`${LOGIN_URL}?src=web-nav&utm_source=${global.location.href}`}
         id="global-nav-login-link"
         className={`${accountLinkStyle} login-link`}
         onClick={onLoginClick}
@@ -240,7 +240,7 @@ const GlobalNavAccount = ({
         <Trans i18nKey="nav:log-in">Log in</Trans>
       </a>
       <a
-        href="https://getpocket.com/signup?src=navbar"
+        href={`${SIGNUP_URL}?src=web-nav&utm_source=${global.location.href}`}
         id="global-nav-signup-link"
         className={cx(signupLinkStyle, 'button secondary')}
         onClick={handleSignupCase}

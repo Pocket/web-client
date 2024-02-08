@@ -1,5 +1,6 @@
 import '../../public/static/pocket-web-ui.css'
 import { GOOGLE_ANALYTICS_ID } from 'common/constants'
+import { LOGIN_URL } from 'common/constants'
 
 import createCache from '@emotion/cache'
 import { CacheProvider } from '@emotion/react'
@@ -153,7 +154,7 @@ function PocketWebClient({ Component, pageProps, err }) {
 
     // User is not logged in
     if (user_status === 'invalid') {
-      window.location = 'https://getpocket.com/login?src=web-client'
+      window.location = `${LOGIN_URL}?src=web-auth&utm_source=${window.location.href}`
     }
 
     // User is logged in but not via FXA
