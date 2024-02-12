@@ -80,11 +80,11 @@ Translations are handled by Smartling via a Github integration.  This should mak
 1) As you write code, when you are including a new string, be sure to wrap it appropriately and use a namespace. Namespace is seperated by a `:` This helps us break up translations so we can load only what we need.
 ```javascript
 mycoolnamespace:mystring-key
-``` 
+```
 2) We use default fallbacks, so your code will be fine to ship so long as all stakeholders are aware that english will show up across all locales until the translations come back.
 ```javascript
 t(`mycoolnamespace:mystring-key`, 'My default string that will be translated`)
-``` 
+```
 3) In order for a string to be eligible for translation, you need to wrap it appropriately and we will end up picking it up with a parsing script.
 
 ```js
@@ -96,7 +96,7 @@ export const Nav = ()=>{
 }
 ```
 
-4) Once you are ready to make your PR, running `npm run parse` from the root directory will add new string to the `en.json` which you will be able to see as code changes in git.  Once those changes are merged into main, Smartling will automatically see and create a job for starting translations.
+4) Once you are ready to make your PR, running `npm run locale:parse` from the root directory will add new string to the `en.json` which you will be able to see as code changes in git.  Once those changes are merged into main, Smartling will automatically see and create a job for starting translations.
 
 Please use `locale` as the type and whatever we are operating on.
 ```
@@ -150,7 +150,7 @@ There are some challenges to doing this properly but we can streamline it quite 
 Once installed run the following to install a valid certificate on your machine.:
 ```bash
 mkcert -install
-``` 
+```
 
 Finalize things by running the following command from the root of the web-client folder. This will generate the certificates that the `server.local` is expecting.
 ```bash

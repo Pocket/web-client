@@ -3,7 +3,9 @@
   "cancel-button": "Cancel Premium",
   "cancel-header": "Cancel Premium subscription",
   "condition-benefits": "Benefits of a Firefox account, powered by Mozilla, include better account security",
+  "condition-benefits-rebrand": "Benefits include better account security",
   "condition-pocket-access": "If you do not update to a Firefox account, you cannot access Pocket",
+  "condition-pocket-access-rebrand": "If you do not update, you cannot access Pocket",
   "condition-usage": "You will still be able to use any browser, our iOS or Android apps to access Pocket",
   "delete-body": "Permanently delete your Pocket account. This will delete your account and all items within it.",
   "delete-button": "Delete account",
@@ -18,5 +20,6 @@
   "no-update-options": "Here are your other options:",
   "title": "Learn more about Firefox migration",
   "update-button": "Update account",
-  "update-header": "Update your Pocket login to a Firefox&nbsp;account"
+  "update-header": "Update your Pocket login to a Firefox&nbsp;account",
+  "update-header-rebrand": "Update your Pocket login"
 }
