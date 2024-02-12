@@ -33,7 +33,7 @@
   "note-deleted": "Note deleted",
   "note-updated": "Note updated",
   "refreshed-item_one": "{{count}} item has been refreshed",
-  "refreshed-item_other": "{{count}} item has been refreshed",
+  "refreshed-item_other": "{{count}} items have been refreshed",
   "removed-from-favorites_one": "{{count}} item removed from favorites",
   "removed-from-favorites_other": "{{count}} items removed from favorites",
   "tagged_one": "{{count}} item added",
