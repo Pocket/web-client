@@ -12,6 +12,7 @@ import { AddListItemNote } from 'connectors/confirm/list-item-note-add'
 import { EditListItemNote } from 'connectors/confirm/list-item-note-edit'
 import { ConfirmNoteDelete } from 'connectors/confirm/delete-note'
 import { ConfirmShare } from 'connectors/confirm/share-list'
+import { BulkProcessing } from 'connectors/confirm/bulk-processing'
 import { Toasts } from 'connectors/toasts/toast-list'
 import { appSetMode } from 'connectors/app/app.state'
 
@@ -28,11 +29,7 @@ export const ListIndividual = () => {
     dispatch(getIndividualListAction(id))
   }, [dispatch, id])
 
-  const toggleSort = (shouldReorder) => {
-    const mode = shouldReorder ? 'reorder' : 'default'
-    setReorder(shouldReorder)
-    dispatch(appSetMode(mode))
-  }
+  const toggleSort = (shouldReorder) => setReorder(shouldReorder)
 
   const Content = reorder ? ListReorder : ListContent
 
@@ -40,8 +37,8 @@ export const ListIndividual = () => {
 
   return (
     <>
-      <Layout>
-        <SideNav type="saves" tag={id} />
+      <Layout noNav={reorder}>
+        <SideNav type="saves" tag={id} disableSideNav={reorder} />
         <Content id={id} toggleSort={toggleSort} />
       </Layout>
 
@@ -51,6 +48,7 @@ export const ListIndividual = () => {
       <CreateListModal />
       <ConfirmNoteDelete />
       <ConfirmShare snowplowId="shareable-list" />
+      <BulkProcessing />
       <Toasts />
     </>
   )

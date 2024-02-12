@@ -52,7 +52,8 @@ function mainLayout({
   tag,
   selectedNavLink,
   isFullWidthLayout = false,
-  bannerCampaign
+  bannerCampaign,
+  noNav = false
 }) {
   return (
     <>
@@ -62,6 +63,7 @@ function mainLayout({
         subset={subset}
         tag={tag}
         bannerCampaign={bannerCampaign}
+        noNav={noNav}
       />
       <div className={cx(fixedNavContainer, bannerCampaign && 'withBanner')}>
         {isFullWidthLayout ? (

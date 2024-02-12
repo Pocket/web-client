@@ -30,7 +30,6 @@ export const mutationBulkCancel = () => ({ type: MUTATION_BULK_CANCEL })
 /** REDUCERS
   --------------------------------------------------------------- */
 const initialState = {
-  batchActive: false,
   itemIds: [],
   previouslySelectedId: null,
   currentId: null,

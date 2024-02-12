@@ -153,7 +153,7 @@ function* bulkListAddItem({ ids }) {
       yield put({ type: MUTATION_BULK_BATCH_SUCCESS, batchCount })
     }
 
-    yield put({ type: LIST_ADD_ITEM_SUCCESS, listTitle })
+    yield put({ type: LIST_ADD_ITEM_SUCCESS, listTitle, itemCount: data.length })
     yield put({ type: MUTATION_BULK_BATCH_COMPLETE })
   } catch (error) {
     yield put({ type: LIST_ADD_ITEM_FAILURE, error })

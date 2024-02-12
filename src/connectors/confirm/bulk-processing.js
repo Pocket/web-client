@@ -18,7 +18,7 @@ export const BulkProcessing = () => {
   return (
     <Modal
       title={t('confirm:processing-title', 'Processing')}
-      isOpen={batchStart}
+      isOpen={batchStart && batchTotal > 1}
       screenReaderLabel={t('confirm:processing-request', 'We are processing your request')}
       handleClose={handleClose}>
       <ModalBody>

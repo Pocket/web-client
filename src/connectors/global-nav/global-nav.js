@@ -216,7 +216,7 @@ const GlobalNav = (props) => {
   }
 
   const NavTakeover = navChildren[appMode]
-  const hideNav = noNav || appMode === 'reorder'
+  const hideNav = noNav
 
   const onLoginClick = (event) => {
     event.preventDefault()

@@ -34,6 +34,11 @@ import { LIST_ITEMS_REORDER_FAILURE } from 'actions'
 import { LIST_ITEMS_SUCCESS } from 'actions'
 import { LIST_ITEMS_UPDATE } from 'actions'
 
+import { MUTATION_BULK_BATCH_BEGIN } from 'actions'
+import { MUTATION_BULK_BATCH_FAILURE } from 'actions'
+import { MUTATION_BULK_BATCH_SUCCESS } from 'actions'
+import { MUTATION_BULK_BATCH_COMPLETE } from 'actions'
+
 /** ACTIONS
  --------------------------------------------------------------- */
 export const mutateListUpdateAction = (id) => ({ type: LIST_UPDATE_REQUEST, id })
@@ -204,15 +209,21 @@ function* listItemsReorder({ id, items }) {
     // builds the data object, results in an array: [{ externalId, sortOrder }]
     const data = items.map((externalId, index) => ({ externalId, sortOrder: index + 1 }))
     const batches = yield chunk(data, BATCH_SIZE)
+    let batchCount = batches.length
     let totalResponses = {}
+
+    yield put({ type: MUTATION_BULK_BATCH_BEGIN, batchCount, batchTotal: batchCount })
 
     // submits the reordered list
     for (const batch of batches) {
+      batchCount -= 1
       const response = yield call(updateShareableListItems, batch)
       totalResponses = { ...totalResponses, ...response }
+      yield put({ type: MUTATION_BULK_BATCH_SUCCESS, batchCount })
     }
 
     yield put({ type: LIST_ITEMS_REORDER_SUCCESS })
+    yield put({ type: MUTATION_BULK_BATCH_COMPLETE })
 
     // stores the updated sortOrder value
     const itemsById = arrayToObject(totalResponses, 'externalId')
@@ -222,5 +233,7 @@ function* listItemsReorder({ id, items }) {
     const itemsById = { [id]: { listItemIds: oldIdOrder } }
     yield put({ type: LIST_ITEMS_UPDATE, itemsById })
     yield put({ type: LIST_ITEMS_REORDER_FAILURE, error })
+
+    yield put({ type: MUTATION_BULK_BATCH_FAILURE, batchCount: 0 })
   }
 }

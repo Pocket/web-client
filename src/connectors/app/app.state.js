@@ -22,6 +22,7 @@ import { APP_COLOR_MODE_SET } from 'actions'
 import { SNOWPLOW_SEND_EVENT } from 'actions'
 
 import { MUTATION_BULK_CLEAR } from 'actions'
+import { MUTATION_BULK_BATCH_COMPLETE } from 'actions'
 
 import { HYDRATE } from 'actions'
 import { parseCookies, destroyCookie } from 'nookies'
@@ -96,9 +97,11 @@ export const appReducers = (state = initialState, action) => {
       return { ...state, colorMode }
     }
 
-    case APP_SET_MODE: {
-      // MODES  [default, search, add, bulk, reorder]
-      const { mode } = action
+    case APP_SET_MODE:
+    // Revert global nav once bulk action is complete
+    case MUTATION_BULK_BATCH_COMPLETE: {
+      // MODES  [default, search, add, bulk]
+      const { mode = 'default' } = action
       return { ...state, mode }
     }
 

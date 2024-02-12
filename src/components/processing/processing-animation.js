@@ -17,8 +17,8 @@ const animationWrapper = css`
 
   @keyframes smallSlideDown {
     0% {
-      -webkit-transform: translateY(-30%);
-      transform: translateY(-30%);
+      -webkit-transform: translateY(-14px);
+      transform: translateY(-14px);
     }
     100% {
       -webkit-transform: translateY(0);
@@ -32,8 +32,8 @@ const animationWrapper = css`
 
   @keyframes longSlideDown {
     0% {
-      -webkit-transform: translateY(-60%);
-      transform: translateY(-60%);
+      -webkit-transform: translateY(-13px);
+      transform: translateY(-13px);
     }
     100% {
       -webkit-transform: translateY(0);

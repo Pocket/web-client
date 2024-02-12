@@ -7,7 +7,7 @@ import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { mutateListCreate } from 'connectors/lists/mutation-create.state'
 import { getRecentListsAction } from 'containers/lists/lists.state'
 
-export function SideNav({ type, subset, isLoggedIn, tag }) {
+export function SideNav({ type, subset, isLoggedIn, tag, disableSideNav }) {
   const dispatch = useDispatch()
 
   const flagsReady = useSelector((state) => state.features.flagsReady)
@@ -26,7 +26,7 @@ export function SideNav({ type, subset, isLoggedIn, tag }) {
     dispatch(mutateListCreate())
   }
 
-  const isDisabled = appMode === 'bulk' || appMode === 'reorder'
+  const isDisabled = disableSideNav || appMode === 'bulk'
 
   const pinTypes = {
     home: pinnedTopics,
