@@ -39,7 +39,7 @@ export const BatchProcessing = ({ batchTotal, batchCount }) => {
       </aside>
       <main>
         <p>
-          <Trans i18nKey="confirm:new-processing">Hang tight, we’re making things happen</Trans> 😎
+          <Trans i18nKey="confirm:new-processing">Hang tight, we’re saving your changes</Trans> 😎
         </p>
         <ProgressPill total={batchTotal} current={batchTotal - batchCount} />
       </main>

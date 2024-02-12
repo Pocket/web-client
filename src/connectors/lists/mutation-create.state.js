@@ -176,7 +176,7 @@ function* itemsBulkCreateList({ ids }) {
       }
     }
 
-    yield put({ type: LIST_CREATE_SUCCESS, externalId, listTitle: title })
+    yield put({ type: LIST_CREATE_SUCCESS, externalId, listTitle: title, count: items.length })
     yield put({ type: MUTATION_BULK_BATCH_COMPLETE })
   } catch {
     yield put({ type: LIST_CREATE_FAILURE })
