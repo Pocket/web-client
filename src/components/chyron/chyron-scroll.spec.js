@@ -1,5 +1,5 @@
 import { render } from 'test-utils'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 
 import { ScrollChyron } from './chyron-scroll'
 

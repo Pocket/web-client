@@ -1,5 +1,5 @@
 import { render } from 'test-utils'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 
 import { PublisherAttribution } from 'components/content-publisher/publisher-attribution'
 import { publisher } from 'mock/article'

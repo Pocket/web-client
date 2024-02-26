@@ -1,5 +1,5 @@
 import { render, fireEvent, mockModal } from 'test-utils'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 import { PlayIcon } from 'components/icons/PlayIcon'
 import { TagIcon } from 'components/icons/TagIcon'
 
