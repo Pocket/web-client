@@ -4,6 +4,9 @@ WORKDIR /usr/src/app
 
 ARG RELEASE_VERSION
 
+## Add pnpm to all followup builder images
+RUN yarn global add pnpm
+
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
@@ -15,4 +18,4 @@ EXPOSE ${PORT}
 
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
