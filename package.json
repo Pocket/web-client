@@ -9,7 +9,7 @@
   },
   "packageManager": "pnpm@8.15.4",
   "scripts": {
-    "prep": "pnpm compile:icons && locale:inject",
+    "prep": "pnpm compile:icons",
     "dev": "pnpm prep && RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
     "analyze": "pnpm prep && ANALYZE=true next build",
     "build": "pnpm prep && next build",
