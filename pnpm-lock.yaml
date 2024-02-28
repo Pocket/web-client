@@ -241,8 +241,8 @@ importers:
         specifier: 16.0.0
         version: 16.0.0
       next-router-mock:
-        specifier: 0.9.3
-        version: 0.9.3(next@13.4.3)(react@18.2.0)
+        specifier: 0.9.12
+        version: 0.9.12(next@13.4.3)(react@18.2.0)
       prettier:
         specifier: 3.2.5
         version: 3.2.5
@@ -12528,8 +12528,8 @@ packages:
       react-redux: 8.0.5(@types/react@18.2.60)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
     dev: false
 
-  /next-router-mock@0.9.3(next@13.4.3)(react@18.2.0):
-    resolution: {integrity: sha512-jl8eFe71LpMVGeBMpoxILkGfEgGY7IfLy8XPyv05/o61p5oQRNpoMmk46VMxRIpt0fI8XcvznBZKpDK6vbYQcQ==}
+  /next-router-mock@0.9.12(next@13.4.3)(react@18.2.0):
+    resolution: {integrity: sha512-PzKn70RSqO50GHyYyhd4WJb9I526Abfq2VDP+YPV8yqlaR38OKtQAcWr3njR75UG+Ik6HououZHm7ucxl6LSnA==}
     peerDependencies:
       next: '>=10.0.0'
       react: '>=17.0.0'
