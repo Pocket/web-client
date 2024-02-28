@@ -1,5 +1,5 @@
 import { wrappedRender } from 'test-utils'
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom'
 
 import { storyFromClientApi } from 'common/api/derivers/collection/story.spec'
 import { ItemCard as StoryCard } from './card'
