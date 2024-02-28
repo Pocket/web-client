@@ -29,7 +29,8 @@
     "locale:inject": "node ./.scripts/localization/locale-inject.mjs",
     "locale:parse": "cd .scripts/localization/ && pnpm extract",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
-    "prettier:check": "prettier --check 'src/**/*.{js,jsx,ts,tsx}'"
+    "prettier:check": "prettier --check 'src/**/*.{js,jsx,ts,tsx}'",
+    "postinstall": "cd .scripts/localization && pnpm i -s && cd ../icons && pnpm i -s && cd ../styles && pnpm i -s"
   },
   "jest-junit": {
     "addFileAttribute": "true"
