@@ -1,0 +1,20 @@
+{
+  "name": "pocket-qa-integrations",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node ./run-integrations.js"
+  },
+  "dependencies": {
+    "chalk": "5.0.1",
+    "cli-progress": "^3.11.1",
+    "enquirer": "2.3.6",
+    "fs-extra": "10.1.0",
+    "ora": "^6.1.2",
+    "simple-git": "3.7.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
