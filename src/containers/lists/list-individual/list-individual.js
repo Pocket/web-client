@@ -14,7 +14,6 @@ import { ConfirmNoteDelete } from 'connectors/confirm/delete-note'
 import { ConfirmShare } from 'connectors/confirm/share-list'
 import { BulkProcessing } from 'connectors/confirm/bulk-processing'
 import { Toasts } from 'connectors/toasts/toast-list'
-import { appSetMode } from 'connectors/app/app.state'
 
 export const ListIndividual = () => {
   const dispatch = useDispatch()

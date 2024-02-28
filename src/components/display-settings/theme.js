@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
 import { breakpointSmallHandset } from 'common/constants'
 import { css } from '@emotion/css'
@@ -40,7 +40,7 @@ const Themes = [
 ]
 
 export const ThemeSettings = ({ colorMode = 'light', setColorMode }) => {
-  const checkSystemTheme = () => setColorMode(colorMode)
+  const checkSystemTheme = useCallback(() => setColorMode(colorMode), [setColorMode, colorMode])
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-color-scheme: dark)')

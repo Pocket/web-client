@@ -69,7 +69,7 @@ export const ColorBlock = ({ hex, colorKey, theme }) => {
   const colorValue = colorHex
   const colorVar = `var(--color-${colorKey})`
 
-  let timer = useRef()
+  const timer = useRef()
 
   const colorCopy = () => {
     copy(colorVar)

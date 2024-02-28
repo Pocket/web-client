@@ -138,7 +138,7 @@ export const Input = () => {
             </label>
             <label className="block">
               <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-              Option two is something else that's also super long to demonstrate the wrapping of
+              Option two is something else that’s also super long to demonstrate the wrapping of
               these fancy form controls.
             </label>
             <label className="block">
