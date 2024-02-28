@@ -20,11 +20,6 @@ commands:
           at: /tmp/workspace
       # Checkout source code into the working_directory.
       - checkout
-      # Restores a previously saved cache based on a key.
-      - restore_cache:
-          name: Restore pnpm Package Cache
-          keys:
-            - pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
       - run:
           name: Install pnpm package manager
           command: |
@@ -35,12 +30,7 @@ commands:
       - run:
           name: Install dependencies
           command: pnpm install
-      # Save the cache to avoid extraneous downloads
-      - save_cache:
-          key: pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
-          paths:
-            - .pnpm-store
-            - ./.next/cache
+
 
 # Jobs: Setting up tasks for CI to execute
 jobs:
