@@ -72,7 +72,7 @@
     ]
   },
   "devDependencies": {
-    "@apollo/rover": "0.14.1",
+    "@apollo/rover": "0.22.0",
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
     "@graphql-eslint/eslint-plugin": "3.19.1",
