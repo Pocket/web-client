@@ -64,10 +64,10 @@ dependencies:
     version: 13.2.2(i18next@23.10.0)(next@13.4.19)(react-i18next@14.0.5)(react@18.2.0)
   next-redux-saga:
     specifier: 4.1.2
-    version: 4.1.2(redux-saga@1.3.0)
+    version: 4.1.2(redux-saga@1.2.3)
   next-redux-wrapper:
     specifier: 8.1.0
-    version: 8.1.0(next@13.4.19)(react-redux@9.1.0)(react@18.2.0)
+    version: 8.1.0(next@13.4.19)(react-redux@8.0.7)(react@18.2.0)
   node-fetch:
     specifier: 3.3.2
     version: 3.3.2
@@ -105,20 +105,20 @@ dependencies:
     specifier: 2.3.0
     version: 2.3.0(@popperjs/core@2.11.8)(react-dom@18.2.0)(react@18.2.0)
   react-redux:
-    specifier: 9.1.0
-    version: 9.1.0(@types/react@18.2.59)(react@18.2.0)(redux@5.0.1)
+    specifier: 8.0.7
+    version: 8.0.7(@types/react@18.2.59)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
   react-textarea-autosize:
-    specifier: 8.5.3
-    version: 8.5.3(@types/react@18.2.59)(react@18.2.0)
+    specifier: 8.4.1
+    version: 8.4.1(@types/react@18.2.59)(react@18.2.0)
   react-visibility-sensor:
     specifier: 5.1.1
     version: 5.1.1(react-dom@18.2.0)(react@18.2.0)
   redux:
-    specifier: 5.0.1
-    version: 5.0.1
+    specifier: 4.2.1
+    version: 4.2.1
   redux-saga:
-    specifier: 1.3.0
-    version: 1.3.0
+    specifier: 1.2.3
+    version: 1.2.3
   storage-factory:
     specifier: 0.2.1
     version: 0.2.1
@@ -11877,15 +11877,15 @@ packages:
       react-i18next: 14.0.5(i18next@23.10.0)(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
-  /next-redux-saga@4.1.2(redux-saga@1.3.0):
+  /next-redux-saga@4.1.2(redux-saga@1.2.3):
     resolution: {integrity: sha512-UEI/8bRObquIpHeHX1RuqOFBe2zhI2gTHLijBLiinOZrCbir18B4/lJpymrEoHHpel0iiZEwV4R6jeUWYv+Avw==}
     peerDependencies:
       redux-saga: 1.x
     dependencies:
-      redux-saga: 1.3.0
+      redux-saga: 1.2.3
     dev: false
 
-  /next-redux-wrapper@8.1.0(next@13.4.19)(react-redux@9.1.0)(react@18.2.0):
+  /next-redux-wrapper@8.1.0(next@13.4.19)(react-redux@8.0.7)(react@18.2.0):
     resolution: {integrity: sha512-2hIau0hcI6uQszOtrvAFqgc0NkZegKYhBB7ZAKiG3jk7zfuQb4E7OV9jfxViqqojh3SEHdnFfPkN9KErttUKuw==}
     peerDependencies:
       next: '>=9'
@@ -11894,7 +11894,7 @@ packages:
     dependencies:
       next: 13.4.19(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
-      react-redux: 9.1.0(@types/react@18.2.59)(react@18.2.0)(redux@5.0.1)
+      react-redux: 8.0.7(@types/react@18.2.59)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
     dev: false
 
   /next-router-mock@0.9.12(next@13.4.19)(react@18.2.0):
@@ -13292,7 +13292,6 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
-    dev: true
 
   /react-joyride@2.7.4(@types/react@18.2.59)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-7MPuqM/z3g9iqCJZnmKNM2RArNgqYBpM8iknny4KjrHp/2wXlPtFL0LpqGiBhtiC0dCC2xe3pNpD9GdLZ2NxMA==}
@@ -13395,25 +13394,39 @@ packages:
       react-is: 17.0.2
     dev: false
 
-  /react-redux@9.1.0(@types/react@18.2.59)(react@18.2.0)(redux@5.0.1):
-    resolution: {integrity: sha512-6qoDzIO+gbrza8h3hjMA9aq4nwVFCKFtY2iLxCtVT38Swyy2C/dJCGBXHeHLtx6qlg/8qzc2MrhOeduf5K32wQ==}
+  /react-redux@8.0.7(@types/react@18.2.59)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1):
+    resolution: {integrity: sha512-1vRQuCQI5Y2uNmrMXg81RXKiBHY3jBzvCvNmZF437O/Z9/pZ+ba2uYHbemYXb3g8rjsacBGo+/wmfrQKzMhJsg==}
     peerDependencies:
-      '@types/react': ^18.2.25
-      react: ^18.0
-      react-native: '>=0.69'
-      redux: ^5.0.0
+      '@reduxjs/toolkit': ^1 || ^2.0.0-beta.0
+      '@types/react': ^16.8 || ^17.0 || ^18.0
+      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+      react-native: '>=0.59'
+      redux: ^4 || ^5.0.0-beta.0
     peerDependenciesMeta:
+      '@reduxjs/toolkit':
+        optional: true
       '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+      react-dom:
         optional: true
       react-native:
         optional: true
       redux:
         optional: true
     dependencies:
+      '@babel/runtime': 7.23.9
+      '@types/hoist-non-react-statics': 3.3.5
       '@types/react': 18.2.59
       '@types/use-sync-external-store': 0.0.3
+      hoist-non-react-statics: 3.3.2
       react: 18.2.0
-      redux: 5.0.1
+      react-dom: 18.2.0(react@18.2.0)
+      react-is: 18.2.0
+      redux: 4.2.1
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
@@ -13482,8 +13495,8 @@ packages:
       react: 18.2.0
     dev: true
 
-  /react-textarea-autosize@8.5.3(@types/react@18.2.59)(react@18.2.0):
-    resolution: {integrity: sha512-XT1024o2pqCuZSuBt9FwHlaDeNtVrtCXu0Rnz88t1jUGheCLa3PhjE1GH8Ctm2axEtvdCl5SUHYschyQ0L5QHQ==}
+  /react-textarea-autosize@8.4.1(@types/react@18.2.59)(react@18.2.0):
+    resolution: {integrity: sha512-aD2C+qK6QypknC+lCMzteOdIjoMbNlgSFmJjCV+DrfTPwp59i/it9mMNf2HDzvRjQgKAyBDPyLJhcrzElf2U4Q==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -13611,8 +13624,8 @@ packages:
       strip-indent: 3.0.0
     dev: true
 
-  /redux-saga@1.3.0:
-    resolution: {integrity: sha512-J9RvCeAZXSTAibFY0kGw6Iy4EdyDNW7k6Q+liwX+bsck7QVsU78zz8vpBRweEfANxnnlG/xGGeOvf6r8UXzNJQ==}
+  /redux-saga@1.2.3:
+    resolution: {integrity: sha512-HDe0wTR5nhd8Xr5xjGzoyTbdAw6rjy1GDplFt3JKtKN8/MnkQSRqK/n6aQQhpw5NI4ekDVOaW+w4sdxPBaCoTQ==}
     dependencies:
       '@redux-saga/core': 1.3.0
     dev: false
@@ -13621,10 +13634,6 @@ packages:
     resolution: {integrity: sha512-LAUYz4lc+Do8/g7aeRa8JkyDErK6ekstQaqWQrNRW//MY1TvCEpMtpTWvlQ+FPbWCx+Xixu/6SHt5N0HR+SB4w==}
     dependencies:
       '@babel/runtime': 7.23.9
-    dev: false
-
-  /redux@5.0.1:
-    resolution: {integrity: sha512-M9/ELqF6fy8FwmkpnF0S3YKOqMyoWJ4+CS5Efg2ct3oY9daQvd/Pc71FpGZsVsbl3Cpb+IIcjBDUnnyBdQbq4w==}
     dev: false
 
   /reflect.getprototypeof@1.0.5:
