@@ -1,15 +1,11 @@
 
-## Goal
+## Goals
 
 Insert purpose of pull request
 
 ## To Do:
 
 - [ ] Outstanding todo
-
-## Implementation Decisions
-
-Only if applicable
 
 ## Before you Submit
 
