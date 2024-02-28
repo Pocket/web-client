@@ -115,10 +115,10 @@
     "typescript": "5.0.4"
   },
   "dependencies": {
-    "@braze/web-sdk": "5.0.1",
+    "@braze/web-sdk": "5.1.1",
     "@emotion/css": "11.11.0",
     "@emotion/react": "11.11.0",
-    "@freestar/pubfig-adslot-react-component": "3.6.0",
+    "@freestar/pubfig-adslot-react-component": "3.6.1",
     "@n8tb1t/use-scroll-position": "2.0.3",
     "@popperjs/core": "2.11.7",
     "@sentry/integrations": "7.53.1",

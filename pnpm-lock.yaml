@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@braze/web-sdk':
-        specifier: 5.0.1
-        version: 5.0.1
+        specifier: 5.1.1
+        version: 5.1.1
       '@emotion/css':
         specifier: 11.11.0
         version: 11.11.0
@@ -18,8 +18,8 @@ importers:
         specifier: 11.11.0
         version: 11.11.0(@types/react@18.2.7)(react@18.2.0)
       '@freestar/pubfig-adslot-react-component':
-        specifier: 3.6.0
-        version: 3.6.0(prop-types@15.8.1)(react@18.2.0)
+        specifier: 3.6.1
+        version: 3.6.1(prop-types@15.8.1)(react@18.2.0)
       '@n8tb1t/use-scroll-position':
         specifier: 2.0.3
         version: 2.0.3(@types/react@18.2.7)(react@18.2.0)
@@ -3082,8 +3082,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@braze/web-sdk@5.0.1:
-    resolution: {integrity: sha512-G0NgEFvmHV8kmn2yQ/cxKFB3UcZDu8cEQOQppu2Me0N50yMxmKsIyorL3xjv78V5u72w2V2vZ85AuvDOegVi3A==}
+  /@braze/web-sdk@5.1.1:
+    resolution: {integrity: sha512-8Cjcgel9vQu4lw93y/pjXLhgASKOaSEVVpXDw3Kten27sa0N/4RNPsD4GREmNNVQlg6voy46Vadt+la1PQ+hNw==}
     dev: false
 
   /@colors/colors@1.5.0:
@@ -3795,8 +3795,8 @@ packages:
     resolution: {integrity: sha512-cEee/Z+I12mZcFJshKcCqC8tuX5hG3s+d+9nZ3LabqKF1vKdF41B92pJVCBggjAGORAeOzyyDDKrZwIkLffeOQ==}
     dev: true
 
-  /@freestar/pubfig-adslot-react-component@3.6.0(prop-types@15.8.1)(react@18.2.0):
-    resolution: {integrity: sha512-HEIzIUCS5dEF2myDEaECt85lSnWX242SCmVgjYuZPIUAyLcGjuGXK34Kh76h1yhg+oWH+V2qP6KMgQIQllKqCw==}
+  /@freestar/pubfig-adslot-react-component@3.6.1(prop-types@15.8.1)(react@18.2.0):
+    resolution: {integrity: sha512-2V3id56HBH3TQpNBsUWT5cUJ2LaVQ+YFQmqlb4QC+NOJjpTJCwhLEaS4bRhAw2tG81e2bLFfxkwhDosSBUOPxA==}
     peerDependencies:
       prop-types: '^15.7.2 '
       react: '>=15.7.0'
@@ -3805,6 +3805,7 @@ packages:
       lodash.sortby: 4.7.0
       prop-types: 15.8.1
       react: 18.2.0
+      terser: 5.28.1
     dev: false
 
   /@gilbarbara/deep-equal@0.1.2:
