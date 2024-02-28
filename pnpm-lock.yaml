@@ -11,6 +11,9 @@ importers:
       '@braze/web-sdk':
         specifier: 5.1.1
         version: 5.1.1
+      '@emotion/cache':
+        specifier: 11.11.0
+        version: 11.11.0
       '@emotion/css':
         specifier: 11.11.0
         version: 11.11.0
