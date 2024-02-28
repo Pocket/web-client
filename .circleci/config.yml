@@ -40,14 +40,13 @@ jobs:
   # ——————————————————————————————————————————————————————————————
   lint:
     # CPU and RAM resources for the job.
-    resource_class: small
+    resource_class: medium
     # Define the container we will run the task in (standard node)
     docker:
       - image: cimg/node:20.10.0
     steps:
       # Setup Environment
       - setup
-      - run: mkdir ~/junit
       # Run tests
       - run:
           name: Eslint
