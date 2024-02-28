@@ -1,5 +1,5 @@
 import { wrappedRender, fireEvent } from 'test-utils'
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/extend-expect'
 import TopicsPillbox from './topics-pillbox'
 
 const mockTopicsData = {

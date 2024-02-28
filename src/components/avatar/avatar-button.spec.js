@@ -1,5 +1,5 @@
 import { render, fireEvent } from 'test-utils'
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/extend-expect'
 
 import { AvatarButton } from './avatar-button'
 

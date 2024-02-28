@@ -1,5 +1,5 @@
 import { render } from 'test-utils'
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/extend-expect'
 
 import PocketRecs, { Publisher } from './pocket-recs'
 import { pocketRecommendations as pocketRecs } from 'mock/article'
@@ -18,9 +18,7 @@ describe('PocketRecs', () => {
     it('renders a Publisher with a logo image, when available', () => {
       const { corpusItem } = recommendations[0]
       const { publisher, target } = corpusItem
-      const { queryByCy } = render(
-        <Publisher name={publisher} logo={target?.publisher?.logoWideBlack} />
-      )
+      const { queryByCy } = render(<Publisher name={publisher} logo={target?.publisher?.logoWideBlack} />)
       expect(queryByCy('pocket-rec-publisher-logo')).toBeTruthy()
     })
 

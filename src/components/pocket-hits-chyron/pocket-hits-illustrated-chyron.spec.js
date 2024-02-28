@@ -1,5 +1,5 @@
 import { render } from 'test-utils'
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/extend-expect'
 import { PocketHitsIllustratedChyron } from './pocket-hits-illustrated-chyron'
 
 jest.mock('static/images/pocket-hits-chyron/border.svg', () => 'svg')

@@ -1,5 +1,5 @@
 import { render, fireEvent, mockModal } from 'test-utils'
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/extend-expect'
 import GlobalNavMobileMenu from './global-nav-mobile-menu'
 
 const baseProps = {

@@ -1,5 +1,5 @@
 import { render, fireEvent, mockGrecaptcha } from 'test-utils'
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/extend-expect'
 
 import EmailSignupForm, { PROCESSING_MESSAGE, INVALID_EMAIL_ERROR } from './email-signup-form'
 

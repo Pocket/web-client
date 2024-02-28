@@ -1,5 +1,5 @@
 import { wrappedRender, mockModal } from 'test-utils'
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/extend-expect'
 
 import GlobalNav from './global-nav'
 import { DEFAULT_LINKS } from './links/global-nav-links'

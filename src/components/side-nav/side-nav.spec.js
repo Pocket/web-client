@@ -1,5 +1,5 @@
 import { wrappedRender } from 'test-utils'
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/extend-expect'
 import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 import { SideNav } from './side-nav'
 
