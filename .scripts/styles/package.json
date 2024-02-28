@@ -11,11 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cssnano": "^5.1.12",
-    "hasha": "^5.2.2",
+    "cssnano": "^6.0.5",
+    "hasha": "^6.0.0",
     "postcss": "^8.4.14",
-    "postcss-import": "^14.1.0",
-    "postcss-nested": "^5.0.6",
+    "postcss-import": "^16.0.1",
+    "postcss-nested": "^6.0.1",
     "postcss-url": "^10.1.3"
   }
 }
