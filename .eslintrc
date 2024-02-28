@@ -6,10 +6,10 @@
     "OneTrust": true
   },
   "ignorePatterns": [
+    "*.stories.js",
     "*.spec.js",
     "*.tmp.js",
     "**/release-notes/*.js",
-    "**/storybook-static",
     "__mocks__/**/*.js"
   ],
   "rules": {

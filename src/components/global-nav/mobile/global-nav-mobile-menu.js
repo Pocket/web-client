@@ -139,6 +139,7 @@ export const MobileLink = ({
   isSelected,
   handleClick
 }) => {
+  const { t } = useTranslation()
   return (
     <li>
       <Link

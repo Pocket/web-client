@@ -10,6 +10,7 @@ import { resendEmailConfirmation } from 'containers/account/email/email.state'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { errorCodes } from 'common/errors'
+import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 
 export const Email = () => {
   const dispatch = useDispatch()

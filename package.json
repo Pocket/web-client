@@ -15,7 +15,7 @@
     "build": "pnpm prep && next build",
     "start": "next start -p 80",
     "start:local": "AS_PRODUCTION=true node ./server.local.js",
-    "lint": "eslint .",
+    "lint": "next lint",
     "test": "pnpm compile:icons && jest --reporters='default'",
     "test:e2e": "node ./.scripts/qa/e2e.js",
     "test:ci": "pnpm compile:icons && jest --ci",

@@ -124,7 +124,7 @@ function* userTagsOnly({ pagination }) {
   const response = yield getUserTagsGraph(pagination)
   if (!response) yield put({ type: USER_TAGS_FAILURE })
 
-  const { tagNames, pageInfo } = response
+  const { tagNames, pageInfo, totalCount } = response
   const { hasNextPage, endCursor } = pageInfo
 
   const type = pagination ? USER_TAGS_UPDATE : USER_TAGS_SUCCESS

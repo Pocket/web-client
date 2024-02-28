@@ -65,6 +65,7 @@ export function SyndicatedArticle({ queryParams = validParams, locale }) {
     authorNames,
     content,
     publishedAt,
+    publisherUrl,
     mainImage,
     slug,
     iabTopCategory,

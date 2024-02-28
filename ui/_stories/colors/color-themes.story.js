@@ -26,7 +26,7 @@ const themeClass = {
   sepia: 'colormode-sepia'
 }
 
-export const ColorThemes = () => {
+export const ColorThemes = (Story, context) => {
   const themeKeys = Object.keys(_themeGroups)
 
   return (
