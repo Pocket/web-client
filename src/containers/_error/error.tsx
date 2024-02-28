@@ -75,7 +75,7 @@ function NotFoundError() {
   return (
     <div className="content">
       <h1>{t('error:404-title', 'Oops! Something’s gone awry...')}</h1>
-      <cite>{t('error:404-detail', `'${url}' cannot be found.`)}</cite>
+      <cite suppressHydrationWarning>{t('error:404-detail', `'${url}' cannot be found.`)}</cite>
       <p data-cy="error-message">
         {t(
           'error:404-message',
@@ -161,7 +161,7 @@ function UserNotification({ birth, accountCreationDate }) {
     <div className="content">
       <h1>Welcome to the trailhead</h1>
       <p data-cy="error-message">
-      Your account was created on {birth} ... or was it {accountCreationDate}
+        Your account was created on {birth} ... or was it {accountCreationDate}
       </p>
     </div>
   )
