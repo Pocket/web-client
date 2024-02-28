@@ -7,17 +7,16 @@ module.exports = {
           convertColors: true,
           removeViewBox: false,
           removeHiddenElems: true,
-          removeScriptElement: true,
-          removeStyleElement: true,
           removeTitle: true,
           removeUselessStrokeAndFill: true,
           removeUnusedNS: true,
-          cleanupIDs: true,
           collapseGroups: true,
           sortAttrs: true
         }
       }
     },
+    'removeStyleElement',
+    'removeScriptElement',
     'removeDimensions',
     { name: 'removeAttrs', params: { attrs: 'class' } },
     {
