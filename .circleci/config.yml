@@ -20,26 +20,27 @@ commands:
           at: /tmp/workspace
       # Checkout source code into the working_directory.
       - checkout
+      # Add user to npmrc
+      - run:
+          name: Authenticate with GitHub package registry
+          command: echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" > ~/.npmrc
       # Restores a previously saved cache based on a key.
       - restore_cache:
-          name: Restore pnpm Package Cache
           keys:
-            - pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
-      - run:
-          name: Install pnpm package manager
-          command: |
-            corepack enable
-            corepack prepare pnpm@latest-8 --activate
-            pnpm config set store-dir .pnpm-store
+            # when lock file changes, use increasingly general patterns to restore cache
+            # If this gets our of sync, you can increment the version (vX).  Just be
+            # sure to match that version when saving the cache as well.
+            - node-v7-{{ checksum "package-lock.json" }}
+            - node-v7-
       # Install javascript dependencies
       - run:
           name: Install dependencies
-          command: pnpm install
+          command: npm install
       # Save the cache to avoid extraneous downloads
       - save_cache:
-          key: pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
+          key: node-v7-{{ checksum "package-lock.json" }}
           paths:
-            - .pnpm-store
+            - ./node_modules
             - ./.next/cache
 
 # Jobs: Setting up tasks for CI to execute
@@ -61,7 +62,7 @@ jobs:
       # Run tests
       - run:
           name: Eslint
-          command: pnpm lint
+          command: npm run lint
 
 
   # ——————————————————————————————————————————————————————————————
@@ -83,7 +84,7 @@ jobs:
           name: Run unit tests
           command: |
               TEST=$(circleci tests glob src/**/*.spec.js | circleci tests split --split-by=timings)
-              pnpm test:ci $TEST -- -w=50%
+              npm run test:ci $TEST -- -w=50%
       - run:
           command: cp junit.xml ~/junit/
           when: always
@@ -108,7 +109,7 @@ jobs:
           fingerprints:
             - '95:3f:a9:02:0d:06:71:f9:5d:90:1e:a0:e5:e3:c3:25'
       # Semantic Release
-      - run: pnpm dlx semantic-release
+      - run: npx semantic-release
       - run:
           name: Check for new release
           command: |
