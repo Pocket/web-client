@@ -1,5 +1,5 @@
 {
-  "name": "styles",
+  "name": "@scripts/styles",
   "version": "1.0.0",
   "description": "",
   "main": "compile-styles.js",

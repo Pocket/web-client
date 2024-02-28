@@ -5,31 +5,31 @@
   "main": "index.js",
   "engines": {
     "node": ">=18.0.0",
-    "npm": ">=8.0.0"
+    "pnpm": ">=8.15.4"
   },
+  "packageManager": "pnpm@8.15.4",
   "scripts": {
-    "prep": "npm run compile:icons",
-    "dev": "npm run prep && RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
-    "analyze": "npm run prep && ANALYZE=true next build",
-    "build": "npm run prep && next build",
+    "prep": "pnpm compile:icons && locale:inject",
+    "dev": "pnpm prep && RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included node ./server.local.js",
+    "analyze": "pnpm prep && ANALYZE=true next build",
+    "build": "pnpm prep && next build",
     "start": "next start -p 80",
     "start:local": "AS_PRODUCTION=true node ./server.local.js",
     "lint": "next lint",
-    "test": "npm run compile:icons && jest --reporters='default'",
+    "test": "pnpm compile:icons && jest --reporters='default'",
     "test:e2e": "node ./.scripts/qa/e2e.js",
-    "test:ci": "npm run compile:icons && jest --ci",
+    "test:ci": "pnpm compile:icons && jest --ci",
     "test:snowplow": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included TEST_SNOWPLOW=included node ./server.local.js",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "storybook:start": "npx serve ./storybook-static",
-    "compile": "npm run compile:icons & npm run compile:styles",
+    "storybook:start": "pnpm dlx serve ./storybook-static",
+    "compile": "pnpm compile:icons & pnpm compile:styles",
     "compile:icons": "node ./.scripts/icons/compile-icons.js",
     "compile:styles": "node .scripts/styles/compile-styles.js",
     "locale:inject": "node ./.scripts/localization/locale-inject.mjs",
-    "locale:parse": "cd .scripts/localization/ && npm run extract",
+    "locale:parse": "cd .scripts/localization/ && pnpm extract",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
-    "prettier:check": "prettier --check 'src/**/*.{js,jsx,ts,tsx}'",
-    "postinstall": "cd .scripts/localization && npm install -s && cd ../icons && npm install -s && cd ../styles && npm install -s"
+    "prettier:check": "prettier --check 'src/**/*.{js,jsx,ts,tsx}'"
   },
   "jest-junit": {
     "addFileAttribute": "true"
@@ -120,7 +120,6 @@
     "@emotion/react": "11.11.0",
     "@freestar/pubfig-adslot-react-component": "3.6.0",
     "@n8tb1t/use-scroll-position": "2.0.3",
-    "@pocket/web-localization": "0.30.0",
     "@popperjs/core": "2.11.7",
     "@sentry/integrations": "7.53.1",
     "@sentry/nextjs": "7.53.1",
