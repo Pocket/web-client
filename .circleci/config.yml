@@ -97,7 +97,7 @@ jobs:
           fingerprints:
             - '95:3f:a9:02:0d:06:71:f9:5d:90:1e:a0:e5:e3:c3:25'
       # Semantic Release
-      - run: pnpm exec semantic-release
+      - run: pnpm dlx semantic-release
       - run:
           name: Check for new release
           command: |
