@@ -17,7 +17,6 @@
     "start:local": "AS_PRODUCTION=true node ./server.local.js",
     "lint": "next lint",
     "test": "pnpm compile:icons && jest --reporters='default'",
-    "test:e2e": "node ./.scripts/qa/e2e.js",
     "test:ci": "pnpm compile:icons && jest --ci",
     "test:snowplow": "RELEASE_VERSION=$(git describe --abbrev=0 --tags) SHOW_DEV=included TEST_SNOWPLOW=included node ./server.local.js",
     "storybook": "storybook dev -p 6006",
@@ -29,7 +28,8 @@
     "locale:inject": "node ./.scripts/localization/locale-inject.mjs",
     "locale:parse": "cd .scripts/localization/ && pnpm extract",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
-    "prettier:check": "prettier --check 'src/**/*.{js,jsx,ts,tsx}'"
+    "format": "lint-staged",
+    "prepare": "husky"
   },
   "jest-junit": {
     "addFileAttribute": "true"
@@ -48,11 +48,6 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   },
   "release": {
     "branches": [
@@ -106,6 +101,7 @@
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "jest-junit": "16.0.0",
+    "lint-staged": "15.2.2",
     "next-router-mock": "0.9.12",
     "prettier": "3.2.5",
     "storybook": "7.6.17",
