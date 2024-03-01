@@ -28,7 +28,8 @@ const config: Config = {
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/coverage'],
   setupFilesAfterEnv: ['@config/jest/mocks/matchmedia.js'],
   testEnvironment: 'jsdom',
-  snapshotResolver: '@config/jest/setup/jest.snapshot-resolver.ts'
+  snapshotResolver: '@config/jest/setup/jest.snapshot-resolver.ts',
+  reporters: ['default', 'jest-junit']
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
