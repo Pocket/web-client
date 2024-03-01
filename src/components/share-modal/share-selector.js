@@ -58,7 +58,7 @@ function ShareTypeTab({ active, activate, tab, children }) {
   const isActive = active === tab
   return (
     <button
-      data-cy={`share-tab-${tab}`}
+      data-testid={`share-tab-${tab}`}
       onClick={onClick}
       className={cx(buttonReset, isActive ? 'active' : null)}>
       {children}

@@ -36,7 +36,7 @@ export const ConfirmNoteDelete = () => {
         </p>
       </ModalBody>
       <ModalFooter>
-        <button type="submit" data-cy="delete-confirm" onClick={confirmDelete} autoFocus={true}>
+        <button type="submit" data-testid="delete-confirm" onClick={confirmDelete} autoFocus={true}>
           {t('list:delete', 'Delete')}
         </button>
       </ModalFooter>

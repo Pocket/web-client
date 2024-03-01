@@ -23,7 +23,7 @@ export const HomeRecentSaves = () => {
   }, [dispatch])
 
   return recentSaves?.length > 0 ? (
-    <SectionWrapper data-cy="home-section-recent-saves">
+    <SectionWrapper data-testid="home-section-recent-saves">
       <HomeHeader
         headline={t('home:recent-saves-title', 'Recent Saves')}
         moreLinkText={t('home:recent-saves-link-text', 'Go to Saves')}

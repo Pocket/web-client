@@ -53,7 +53,7 @@ export function OffsetList({
   )
 
   return (
-    <div className={listClass} data-cy={dataCy}>
+    <div className={listClass} data-testid={dataCy}>
       {!items.length && showSkeleton
         ? [...Array(count)].map((x, i) => <CardSkeleton key={i} />)
         : null}

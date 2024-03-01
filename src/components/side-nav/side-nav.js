@@ -50,7 +50,9 @@ export const sideNavWrapper = css`
       pointer-events: none;
       box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
       opacity: 0;
-      transition: all 150ms ease-in-out, opacity 450ms ease-in-out;
+      transition:
+        all 150ms ease-in-out,
+        opacity 450ms ease-in-out;
 
       &:hover {
         color: var(--color-textPrimary);
@@ -202,21 +204,21 @@ export function SideNav({
   const SubNav = navTypes[type]
 
   return (
-    <div className={wrapperClass} data-cy="side-nav">
+    <div className={wrapperClass} data-testid="side-nav">
       <nav role="navigation">
         <Link
           href="/home?src=sidebar"
           ref={viewRef} // when ref offscreen, show "Return to top" button
           className={subActive('home')}
           onClick={clickEvent}
-          data-cy="side-nav-home">
+          data-testid="side-nav-home">
           <HomeIcon className="side-nav-icon" /> {t('nav:home', 'Home')}
         </Link>
         <Link
           href="/saves?src=sidebar"
           className={subActive('unread')}
           onClick={clickEvent}
-          data-cy="side-nav-saves">
+          data-testid="side-nav-saves">
           <SaveIcon className="side-nav-icon inactive" />
           <SaveFilledIcon className="side-nav-icon active" />
           {t('nav:saves', 'Saves')}
@@ -225,14 +227,14 @@ export function SideNav({
           href="/explore?src=sidebar"
           className={subActive('discover')}
           onClick={clickEvent}
-          data-cy="side-nav-discover">
+          data-testid="side-nav-discover">
           <DiscoverIcon className="side-nav-icon" /> {t('nav:discover', 'Discover')}
         </Link>
         <Link
           href="/collections?src=sidebar"
           className={subActive('collections')}
           onClick={clickEvent}
-          data-cy="side-nav-collections">
+          data-testid="side-nav-collections">
           <CollectionsIcon className="side-nav-icon" /> {t('nav:collections', 'Collections')}
         </Link>
         {SubNav ? (
@@ -250,7 +252,7 @@ export function SideNav({
           onClick={scrollToTop}
           aria-label={t('nav:return-to-top', 'Return to top')}
           className={!inView ? 'visible' : 'hidden'}
-          data-cy="side-nav-scroll-to-top">
+          data-testid="side-nav-scroll-to-top">
           <ChevronUpIcon />
         </button>
       </div>

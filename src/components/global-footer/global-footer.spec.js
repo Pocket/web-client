@@ -1,4 +1,4 @@
-import { render } from 'test-utils'
+import { render } from '@config/jest'
 import '@testing-library/jest-dom'
 
 import { GlobalFooter } from './global-footer'

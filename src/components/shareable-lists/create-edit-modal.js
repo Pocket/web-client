@@ -73,7 +73,7 @@ export const CreateEditShareableList = ({
           className="secondary"
           disabled={false}
           type="button"
-          data-cy="create-edit-list-cancel"
+          data-testid="create-edit-list-cancel"
           onClick={onClose}>
           {t('list:cancel', 'Cancel')}
         </button>
@@ -81,7 +81,7 @@ export const CreateEditShareableList = ({
           className="primary"
           disabled={listNameEmpty}
           type="submit"
-          data-cy="create-edit-list-confirm"
+          data-testid="create-edit-list-confirm"
           onClick={onSubmit}>
           {modalSubmit}
         </button>

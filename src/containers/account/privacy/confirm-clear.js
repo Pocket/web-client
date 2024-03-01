@@ -132,12 +132,15 @@ const PreClear = ({ cancelClearAccount, confirmClearAccount, setClearChecked, cl
         <div>{clearError ? <span className="errorText">{error}</span> : null}</div>
       </ModalBody>
       <ModalFooter className={clearFooterStyle}>
-        <button className="secondary" data-cy="clear-account-confirm" onClick={cancelClearAccount}>
+        <button
+          className="secondary"
+          data-testid="clear-account-confirm"
+          onClick={cancelClearAccount}>
           {t('account:cancel-clear', 'Get me out of here!')}
         </button>
         <button
           className="brand"
-          data-cy="clear-account-confirm"
+          data-testid="clear-account-confirm"
           onClick={confirmClearAccount}
           disabled={!clearCheck}>
           {t('account:clear-account-confirm', 'Clear Account')}
@@ -156,7 +159,10 @@ const PostClear = ({ cancelClearAccount }) => {
       </ModalBody>
       <ModalFooter className={clearFooterStyle}>
         <div></div>
-        <button className="primary" data-cy="clear-account-finalize" onClick={cancelClearAccount}>
+        <button
+          className="primary"
+          data-testid="clear-account-finalize"
+          onClick={cancelClearAccount}>
           Continue
         </button>
       </ModalFooter>

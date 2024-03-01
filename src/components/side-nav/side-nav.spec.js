@@ -1,4 +1,4 @@
-import { wrappedRender } from 'test-utils'
+import { render } from '@config/jest'
 import '@testing-library/jest-dom'
 import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 import { SideNav } from './side-nav'
@@ -22,52 +22,52 @@ describe('SideNav', () => {
   it('renders the Saves side nav and shows tags', () => {
     useIntersectionObserver.mockReturnValue(mockEntry)
 
-    const { queryByCy, queryAllByCy } = wrappedRender(<SideNav type="saves" {...baseProps} />)
+    const { queryByTestId, queryAllByTestId } = render(<SideNav type="saves" {...baseProps} />)
 
     // Main section
-    expect(queryByCy('side-nav-home')).toBeInTheDocument()
-    expect(queryByCy('side-nav-saves')).toBeInTheDocument()
-    expect(queryByCy('side-nav-discover')).toBeInTheDocument()
-    expect(queryByCy('side-nav-collections')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-home')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-saves')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-discover')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-collections')).toBeInTheDocument()
 
     // Filters section
-    expect(queryByCy('side-nav-archive')).toBeInTheDocument()
-    expect(queryByCy('side-nav-favorites')).toBeInTheDocument()
-    expect(queryByCy('side-nav-highlights')).toBeInTheDocument()
-    expect(queryByCy('side-nav-articles')).toBeInTheDocument()
-    expect(queryByCy('side-nav-videos')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-archive')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-favorites')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-highlights')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-articles')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-videos')).toBeInTheDocument()
 
     // Tags section
-    expect(queryByCy('side-nav-all-tags')).toBeInTheDocument()
-    expect(queryAllByCy(/side-nav-tags-(.+)/)).toHaveLength(2)
+    expect(queryByTestId('side-nav-all-tags')).toBeInTheDocument()
+    expect(queryAllByTestId(/side-nav-tags-(.+)/)).toHaveLength(2)
 
     // Snapshot
-    expect(queryByCy('side-nav')).toMatchSnapshot()
+    expect(queryByTestId('side-nav')).toMatchSnapshot()
   })
 
   it('renders the Account side nav', () => {
-    const { queryByCy } = wrappedRender(<SideNav type="account" />)
+    const { queryByTestId } = render(<SideNav type="account" />)
 
     // Main section
-    expect(queryByCy('side-nav-home')).toBeInTheDocument()
-    expect(queryByCy('side-nav-saves')).toBeInTheDocument()
-    expect(queryByCy('side-nav-discover')).toBeInTheDocument()
-    expect(queryByCy('side-nav-collections')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-home')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-saves')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-discover')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-collections')).toBeInTheDocument()
 
     // Filters section
-    expect(queryByCy('side-nav-archive')).not.toBeInTheDocument()
-    expect(queryByCy('side-nav-favorites')).not.toBeInTheDocument()
-    expect(queryByCy('side-nav-highlights')).not.toBeInTheDocument()
-    expect(queryByCy('side-nav-articles')).not.toBeInTheDocument()
-    expect(queryByCy('side-nav-videos')).not.toBeInTheDocument()
+    expect(queryByTestId('side-nav-archive')).not.toBeInTheDocument()
+    expect(queryByTestId('side-nav-favorites')).not.toBeInTheDocument()
+    expect(queryByTestId('side-nav-highlights')).not.toBeInTheDocument()
+    expect(queryByTestId('side-nav-articles')).not.toBeInTheDocument()
+    expect(queryByTestId('side-nav-videos')).not.toBeInTheDocument()
 
     // Tags section
-    expect(queryByCy('side-nav-all-tags')).not.toBeInTheDocument()
+    expect(queryByTestId('side-nav-all-tags')).not.toBeInTheDocument()
 
     // Placeholder for when we might add more to the account sidebar
-    expect(queryByCy('side-nav-account')).toBeInTheDocument()
+    expect(queryByTestId('side-nav-account')).toBeInTheDocument()
 
     // Snapshot
-    expect(queryByCy('side-nav')).toMatchSnapshot()
+    expect(queryByTestId('side-nav')).toMatchSnapshot()
   })
 })

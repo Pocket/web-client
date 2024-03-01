@@ -1,4 +1,4 @@
-import { wrappedRender } from 'test-utils'
+import { render } from '@config/jest'
 import '@testing-library/jest-dom'
 
 import { storyFromClientApi } from 'common/api/derivers/collection/story.spec'
@@ -20,7 +20,7 @@ describe('ItemCard', () => {
   }
 
   it('renders a story', () => {
-    const { getByCy } = wrappedRender(<StoryCard id={derivedStory.itemId} position={3} />, { initialState }) //prettier-ignore
-    expect(getByCy('article-card-', { exact: false })).toMatchSnapshot()
+    const { getByTestId } = render(<StoryCard id={derivedStory.itemId} position={3} />, { initialState }) //prettier-ignore
+    expect(getByTestId('article-card-', { exact: false })).toMatchSnapshot()
   })
 })

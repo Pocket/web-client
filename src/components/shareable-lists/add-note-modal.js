@@ -42,10 +42,10 @@ export const AddNoteModal = ({
         />
       </ModalBody>
       <ModalFooter>
-        <button className="secondary" type="button" data-cy="note-cancel" onClick={onClose}>
+        <button className="secondary" type="button" data-testid="note-cancel" onClick={onClose}>
           {t('list:cancel', 'Cancel')}
         </button>
-        <button className="primary" type="submit" data-cy="note-confirm" onClick={onSubmit}>
+        <button className="primary" type="submit" data-testid="note-confirm" onClick={onSubmit}>
           {t('list:save', 'Save')}
         </button>
       </ModalFooter>

@@ -113,7 +113,7 @@ export const SocialButton = ({ network, label, onSocialShare, ...rest }) => {
       className={cx(socialButtonStyles, topTooltipDelayed)}
       aria-label={label}
       data-tooltip={label}
-      data-cy={`share-${network}`}>
+      data-testid={`share-${network}`}>
       <SocialIcon />
     </button>
   )

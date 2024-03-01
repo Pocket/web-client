@@ -150,13 +150,13 @@ export const CardMedia = function ({
         <Link
           href={openUrl}
           tabIndex="-1"
-          data-cy="image-link"
+          data-testid="image-link"
           onClick={onOpen}
           target={linkTarget}
           rel={linkRel}>
           <MediaImage />
           {openInNewTab && showViewOriginal ? (
-            <span className="view-original" data-cy="view-original">
+            <span className="view-original" data-testid="view-original">
               <span className="view-original-text">
                 {t('item-action:view-original', 'View Original')}
               </span>
@@ -168,7 +168,7 @@ export const CardMedia = function ({
         <span className="no-link">
           <MediaImage />
           {openInNewTab && showViewOriginal ? (
-            <span className="view-original" data-cy="view-original">
+            <span className="view-original" data-testid="view-original">
               <span className="view-original-text">
                 {t('item-action:view-original', 'View Original')}
               </span>

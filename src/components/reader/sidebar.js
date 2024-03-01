@@ -124,7 +124,7 @@ export const Sidebar = ({
                   : t('nav:open-highlights-menu', 'Open Highlights Menu')
               }
               className={buttonReset}
-              data-cy="reader-sidebar-toggle">
+              data-testid="reader-sidebar-toggle">
               {sideBarOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </button>
           </div>

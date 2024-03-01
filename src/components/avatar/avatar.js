@@ -69,9 +69,9 @@ const Avatar = ({ id = '', size = '100px', src = null, altText = 'Your avatar', 
       className={cx(avatarStyle, !!src && 'with-image', !src && 'default', className && className)}
       style={avatarStyleVariables}>
       {src ? (
-        <img src={src} alt={altText} className={imageStyle} data-cy={`avatar-image-${id}`} />
+        <img src={src} alt={altText} className={imageStyle} data-testid={`avatar-image-${id}`} />
       ) : (
-        <ProfileIcon className={defaultStyle} data-cy={`avatar-default-${id}`} />
+        <ProfileIcon className={defaultStyle} data-testid={`avatar-default-${id}`} />
       )}
     </span>
   )

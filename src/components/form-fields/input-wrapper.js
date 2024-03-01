@@ -27,16 +27,16 @@ const InputWrapper = ({
         !!errorWithLengthCheck && 'invalid',
         disabled && 'disabled'
       )}
-      data-cy="input-wrapper">
+      data-testid="input-wrapper">
       {children}
       <span className={cx('label-wrapper', !!value && 'has-value')}>
-        <label htmlFor={name} data-cy="input-label">
+        <label htmlFor={name} data-testid="input-label">
           {labelText}
         </label>
       </span>
 
       {(helperText || showCharacterLimit) && !errorWithLengthCheck ? (
-        <span className={helperTextStyle} data-cy="helper-text">
+        <span className={helperTextStyle} data-testid="helper-text">
           {showCharacterLimit ? characterCountLabel : helperText}
         </span>
       ) : null}
@@ -44,7 +44,7 @@ const InputWrapper = ({
       {errorWithLengthCheck && typeof errorWithLengthCheck === 'string' ? (
         <span
           className={cx(helperTextStyle, errorMessageStyle, displayErrorInline & 'inline-error')}
-          data-cy="error-text">
+          data-testid="error-text">
           {errorWithLengthCheck}
         </span>
       ) : null}

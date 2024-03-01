@@ -145,7 +145,7 @@ export const PopupMenuItem = ({
         <span className="label">
           {children}
           {helperText ? (
-            <span className="label-secondary" data-cy="popup-menu-helper-text">
+            <span className="label-secondary" data-testid="popup-menu-helper-text">
               {helperText}
             </span>
           ) : null}
@@ -339,7 +339,7 @@ export const PopupMenu = ({
         isOpen={isMenuOpen}
         className={className}
         forceMobile
-        data-cy="modal">
+        data-testid="modal">
         {getContent()}
       </Modal>
     )
@@ -351,7 +351,7 @@ export const PopupMenu = ({
         popperOptions={popperOptions}
         forceShow={forceShow}
         onClose={handleModalClose}
-        data-cy="popup">
+        data-testid="popup">
         {getContent()}
       </Popup>
     )

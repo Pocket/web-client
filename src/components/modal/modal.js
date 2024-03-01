@@ -57,7 +57,8 @@ const modalStyles = css`
   left: var(--spacing400);
   z-index: var(--zIndexModal);
   /* exit transition */
-  transition: opacity var(--dialogsDurationExitMS) var(--easingDecelerate),
+  transition:
+    opacity var(--dialogsDurationExitMS) var(--easingDecelerate),
     transform var(--dialogsDurationExitMS) var(--easingDecelerate);
 
   &.animation-base {
@@ -71,7 +72,8 @@ const modalStyles = css`
     opacity: 1;
     transform: scale(1);
     /* enter transition */
-    transition: opacity var(--dialogsDurationEnterMS) var(--easingAccelerate),
+    transition:
+      opacity var(--dialogsDurationEnterMS) var(--easingAccelerate),
       transform var(--dialogsDurationEnterMS) var(--easingAccelerate);
   }
 
@@ -117,7 +119,8 @@ const overlayStyles = css`
   bottom: 0;
   z-index: var(--zIndexModalShade);
   /* exit transition */
-  transition: opacity var(--dialogsDurationExitMS) var(--easingAccelerate),
+  transition:
+    opacity var(--dialogsDurationExitMS) var(--easingAccelerate),
     transform var(--dialogsDurationExitMS) var(--easingAccelerate);
 
   &.animation-base {
@@ -129,7 +132,8 @@ const overlayStyles = css`
     pointer-events: auto;
     opacity: 1;
     /* enter transition */
-    transition: opacity var(--dialogsDurationEnterMS) var(--easingDecelerate),
+    transition:
+      opacity var(--dialogsDurationEnterMS) var(--easingDecelerate),
       transform var(--dialogsDurationEnterMS) var(--easingDecelerate);
   }
 
@@ -206,7 +210,7 @@ const Modal = ({
         )}
         portalClassName={cx(portalClassName)}
         closeTimeoutMS={closeTimeoutMS} // necessary to make outgoing animation display
-        data-cy="modal"
+        data-testid="modal"
         contentRef={(node) => (modalContentRef = node)}>
         <div ref={modalContentRef}>
           {/** Error on this ref */}

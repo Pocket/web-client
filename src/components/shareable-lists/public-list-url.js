@@ -61,7 +61,7 @@ export const PublicListUrl = ({ publicListInfo, handleCopyUrl, handleOpenUrl }) 
         aria-label={t('list:copy-link', 'Copy Link')}
         data-tooltip={t('list:copy-link', 'Copy Link')}
         className={cx('copy', 'tiny', bottomTooltip)}
-        data-cy="copy-link"
+        data-testid="copy-link"
         onClick={handleCopy}>
         <CopyIcon />
       </button>

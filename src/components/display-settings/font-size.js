@@ -31,7 +31,7 @@ export const FontSizeSettings = ({ clickDecrease, clickIncrease, range, current,
         <StepperButton
           active={minusActive()}
           onClick={handleDecrease}
-          data-cy="display-text-size-decrease"
+          data-testid="display-text-size-decrease"
           aria-label={t('settings:decrease-text-size', 'Decrease Text Size')}
           data-tooltip={t('settings:decrease-text-size', 'Decrease Text Size')}>
           <RemoveIcon />
@@ -40,7 +40,7 @@ export const FontSizeSettings = ({ clickDecrease, clickIncrease, range, current,
         <StepperButton
           active={plusActive()}
           onClick={handleIncrease}
-          data-cy="display-text-size-increase"
+          data-testid="display-text-size-increase"
           aria-label={t('settings:increase-text-size', 'Increase Text Size')}
           data-tooltip={t('settings:increase-text-size', 'Increase Text Size')}>
           <AddIcon />

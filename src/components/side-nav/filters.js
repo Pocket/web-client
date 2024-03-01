@@ -25,12 +25,18 @@ export function FiltersSideNav({ subActive, pinned, clickEvent, handleCreateList
     <>
       <div className={sideNavActionHeader}>
         <h4 className={sideNavHeader}>{t('nav:lists', 'Lists')}</h4>
-        <button className={buttonReset} onClick={handleCreateList} data-cy="side-nav-create-list">
+        <button
+          className={buttonReset}
+          onClick={handleCreateList}
+          data-testid="side-nav-create-list">
           <AddIcon className={bottomTooltip} data-tooltip={t('nav:create-list', 'Create List')} />
         </button>
       </div>
       <Link href="/lists" legacyBehavior>
-        <button className={subActive('lists')} onClick={clickEvent} data-cy="side-nav-all-lists">
+        <button
+          className={subActive('lists')}
+          onClick={clickEvent}
+          data-testid="side-nav-all-lists">
           <ListViewAltIcon className="side-nav-icon inactive" />
           <ListViewAltFilledIcon className="side-nav-icon active" />
           {t('nav:all-lists', 'All Lists')}
@@ -42,7 +48,7 @@ export function FiltersSideNav({ subActive, pinned, clickEvent, handleCreateList
               <button
                 className={subActive(recentLists[title], true)}
                 onClick={clickEvent}
-                data-cy={`side-nav-lists-${recentLists[title]}`}>
+                data-testid={`side-nav-lists-${recentLists[title]}`}>
                 {title}
               </button>
             </Link>
@@ -52,7 +58,10 @@ export function FiltersSideNav({ subActive, pinned, clickEvent, handleCreateList
       <h4 className={sideNavHeader}>{t('nav:filters', 'Filters')}</h4>
 
       <Link href="/saves/archive" legacyBehavior>
-        <button className={subActive('archive')} onClick={clickEvent} data-cy="side-nav-archive">
+        <button
+          className={subActive('archive')}
+          onClick={clickEvent}
+          data-testid="side-nav-archive">
           <ArchiveIcon className="side-nav-icon" /> {t('nav:archive', 'Archive')}
         </button>
       </Link>
@@ -61,7 +70,7 @@ export function FiltersSideNav({ subActive, pinned, clickEvent, handleCreateList
         <button
           className={subActive('favorites')}
           onClick={clickEvent}
-          data-cy="side-nav-favorites">
+          data-testid="side-nav-favorites">
           <FavoriteIcon className="side-nav-icon" /> {t('nav:favorites', 'Favorites')}
         </button>
       </Link>
@@ -70,26 +79,29 @@ export function FiltersSideNav({ subActive, pinned, clickEvent, handleCreateList
         <button
           className={subActive('highlights')}
           onClick={clickEvent}
-          data-cy="side-nav-highlights">
+          data-testid="side-nav-highlights">
           <HighlightIcon className="side-nav-icon" /> {t('nav:highlights', 'Highlights')}
         </button>
       </Link>
 
       <Link href="/saves/articles" legacyBehavior>
-        <button className={subActive('articles')} onClick={clickEvent} data-cy="side-nav-articles">
+        <button
+          className={subActive('articles')}
+          onClick={clickEvent}
+          data-testid="side-nav-articles">
           <ArticleIcon className="side-nav-icon" /> {t('nav:articles', 'Articles')}
         </button>
       </Link>
 
       <Link href="/saves/videos" legacyBehavior>
-        <button className={subActive('videos')} onClick={clickEvent} data-cy="side-nav-videos">
+        <button className={subActive('videos')} onClick={clickEvent} data-testid="side-nav-videos">
           <VideoIcon className="side-nav-icon" /> {t('nav:videos', 'Videos')}
         </button>
       </Link>
 
       <h4 className={sideNavHeader}>{t('nav:tags', 'Tags')}</h4>
       <Link href="/saves/tags" legacyBehavior>
-        <button className={subActive('tag')} onClick={clickEvent} data-cy="side-nav-all-tags">
+        <button className={subActive('tag')} onClick={clickEvent} data-testid="side-nav-all-tags">
           <TagIcon className="side-nav-icon" /> {t('nav:all-tags', 'All Tags')}
         </button>
       </Link>
@@ -99,7 +111,7 @@ export function FiltersSideNav({ subActive, pinned, clickEvent, handleCreateList
               <button
                 className={subActive(tag, true)}
                 onClick={clickEvent}
-                data-cy={`side-nav-tags-${tag}`}>
+                data-testid={`side-nav-tags-${tag}`}>
                 {tag}
               </button>
             </Link>

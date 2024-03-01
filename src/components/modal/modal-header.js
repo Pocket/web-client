@@ -22,7 +22,7 @@ const modalHeaderStyles = css`
 export const ModalHeader = ({ title, hasBorder = true, isSticky = true, className }) => {
   return (
     <h6
-      data-cy="modal-header"
+      data-testid="modal-header"
       className={cx(modalHeaderStyles, hasBorder && 'bordered', isSticky && 'sticky', className)}>
       {title}
     </h6>
@@ -34,6 +34,5 @@ ModalHeader.propTypes = {
   hasBorder: PropTypes.bool,
   isSticky: PropTypes.bool
 }
-
 
 export default ModalHeader

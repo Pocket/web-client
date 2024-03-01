@@ -81,7 +81,7 @@ export const EmailModal = () => {
         <button
           className="primary"
           type="submit"
-          data-cy="update-primary-email-confirm"
+          data-testid="update-primary-email-confirm"
           onClick={confirmEmail}>
           {t('account:update-email', 'Update Email')}
         </button>

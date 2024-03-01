@@ -138,13 +138,13 @@ export const AccountDeleteModal = ({ isPremium }) => {
       <ModalFooter className={deleteFooterStyle}>
         <button
           className="secondary"
-          data-cy="delete-account-confirm"
+          data-testid="delete-account-confirm"
           onClick={cancelDeleteAccount}>
           {t('account:cancel-delete', 'Cancel')}
         </button>
         <button
           className="brand"
-          data-cy="delete-account-confirm"
+          data-testid="delete-account-confirm"
           onClick={confirmDeleteAccount}
           disabled={!formReady}>
           {t('account:delete-account-confirm', 'Delete Account')}

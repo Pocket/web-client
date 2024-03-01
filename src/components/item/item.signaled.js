@@ -120,7 +120,7 @@ export const ItemSignaled = (props) => {
       style={style}
       className={cx(itemClassName, isDemoted && 'demoted')}
       key={`signaled-${itemId}`}
-      data-cy="article-card"
+      data-testid="article-card"
       onClick={selectBulk}
       ref={viewRef}
       onAnimationEnd={onAnimationEnd}
@@ -168,14 +168,14 @@ export const ItemSignaled = (props) => {
             href={openUrl}
             onClick={onOpen}
             className="content-block"
-            data-cy="content-block"
+            data-testid="content-block"
             target={linkTarget}
             ref={linkRef}
             rel={linkRel}>
             <h2 className={cx('title withTopDetails', openInNewTab && 'open-external')}>
               {title}
               {openInNewTab ? (
-                <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
+                <NewViewIcon className="mobile-view-original" data-testid="view-original-icon" />
               ) : null}
             </h2>
             <Excerpt useMarkdown={useMarkdown} excerpt={excerpt} />
@@ -232,7 +232,7 @@ const Publisher = ({ publisher, externalUrl, onOpenOriginalUrl, isSyndicated }) 
           className="publisher"
           href={externalUrl}
           onClick={onOpenOriginalUrl}
-          data-cy="publisher-link"
+          data-testid="publisher-link"
           tabIndex={0}
           target="_blank"
           rel="noopener noreferrer">

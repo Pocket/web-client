@@ -35,7 +35,7 @@ export const LineHeightSettings = ({
         <StepperButton
           active={minusActive()}
           onClick={handleDecrease}
-          data-cy="display-line-height-decrease"
+          data-testid="display-line-height-decrease"
           aria-label={t('settings:decrease-line-height', 'Decrease Line Height')}
           data-tooltip={t('settings:decrease-line-height', 'Decrease Line Height')}>
           <RemoveIcon />
@@ -44,7 +44,7 @@ export const LineHeightSettings = ({
         <StepperButton
           active={plusActive()}
           onClick={handleIncrease}
-          data-cy="display-line-height-increase"
+          data-testid="display-line-height-increase"
           aria-label={t('settings:increase-line-height', 'Increase Line Height')}
           data-tooltip={t('settings:increase-line-height', 'Increase Line Height')}>
           <AddIcon />

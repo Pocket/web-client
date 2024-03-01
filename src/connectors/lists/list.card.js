@@ -100,7 +100,7 @@ export const ListActions = ({ id, analyticsData }) => {
   return (
     <button
       aria-label={t('list:delete-list', 'Delete List')}
-      data-cy="delete-list"
+      data-testid="delete-list"
       className="tiny outline"
       onClick={handleDeleteList}>
       <DeleteIcon /> {t('list:delete', 'Delete')}

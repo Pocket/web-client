@@ -1,4 +1,4 @@
-import { render, fireEvent, mockModal } from 'test-utils'
+import { render, fireEvent, mockModal } from '@config/jest'
 import '@testing-library/jest-dom'
 import GlobalNavMobileMenu from './global-nav-mobile-menu'
 
@@ -27,28 +27,28 @@ describe('GlobalNavMobileMenu', () => {
   mockModal()
 
   it('shows the menu when `isOpen` is true', () => {
-    const { getByCy } = render(<GlobalNavMobileMenu {...baseProps} isOpen={true} />)
-    expect(getByCy('mobile-menu'))
+    const { getByTestId } = render(<GlobalNavMobileMenu {...baseProps} isOpen={true} />)
+    expect(getByTestId('mobile-menu'))
   })
 
   it('does not show the menu when `isOpen` is false', () => {
     // Menu is held in the drawer component
-    const { queryByCy } = render(<GlobalNavMobileMenu {...baseProps} isOpen={false} />)
-    expect(queryByCy('mobile-menu')).toBeFalsy()
+    const { queryByTestId } = render(<GlobalNavMobileMenu {...baseProps} isOpen={false} />)
+    expect(queryByTestId('mobile-menu')).toBeFalsy()
   })
 
   it('renders a premium section only when a user is logged in, but NOT premium', () => {
-    const { getByCy } = render(
+    const { getByTestId } = render(
       <GlobalNavMobileMenu {...baseProps} isUserLoggedIn={true} isUserPremium={false} />
     )
-    expect(getByCy('premium-nudge-section'))
+    expect(getByTestId('premium-nudge-section'))
   })
 
   it('does not renders a premium section when a user is premium', () => {
-    const { queryByCy } = render(
+    const { queryByTestId } = render(
       <GlobalNavMobileMenu {...baseProps} isUserLoggedIn={true} isUserPremium={true} />
     )
-    expect(queryByCy('premium-nudge-section')).toBeFalsy()
+    expect(queryByTestId('premium-nudge-section')).toBeFalsy()
   })
 
   it('renders the correct number of links', () => {

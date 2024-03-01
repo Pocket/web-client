@@ -134,7 +134,7 @@ const closeButtonStyle = css`
 
 const CloseButton = ({ onClick }) => {
   return (
-    <button className={closeButtonStyle} onClick={onClick} data-cy="search-cancel">
+    <button className={closeButtonStyle} onClick={onClick} data-testid="search-cancel">
       <CrossIcon className={closeIconStyle} />
       <CloseLabel>
         <Trans i18nKey="nav:cancel">Cancel</Trans>
@@ -280,7 +280,7 @@ const GlobalNavSearch = ({
           onBlur={handleBlur}
           onKeyUp={handleKeyUp}
           placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
-          data-cy="search-input"
+          data-testid="search-input"
           enterKeyHint="search"
         />
         <RecentSearches searchTerms={recentSearches} isFocused={isFocused} />
@@ -292,11 +292,11 @@ const GlobalNavSearch = ({
           </div>
         ) : null}
       </div>
-      <button className="search-button" data-cy="search-submit">
+      <button className="search-button" data-testid="search-submit">
         <Trans i18nKey="nav:search">Search</Trans>
       </button>
       <input type="submit" className="mobile-submit" />
-      {onClose ? <CloseButton onClick={onClose} data-cy="search-close" /> : null}
+      {onClose ? <CloseButton onClick={onClose} data-testid="search-close" /> : null}
     </form>
   )
 }

@@ -63,7 +63,7 @@ export const ThemeSettings = ({ colorMode = 'light', setColorMode }) => {
                 name="theme"
                 value={id}
                 id={id}
-                data-cy={`display-theme-${id}`}
+                data-testid={`display-theme-${id}`}
                 onChange={handleChange}
                 checked={colorMode === id}
               />

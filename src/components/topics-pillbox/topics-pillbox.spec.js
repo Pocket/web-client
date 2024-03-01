@@ -1,4 +1,4 @@
-import { wrappedRender, fireEvent } from 'test-utils'
+import { render, fireEvent } from '@config/jest'
 import '@testing-library/jest-dom'
 import TopicsPillbox from './topics-pillbox'
 
@@ -36,39 +36,39 @@ const baseProps = {
 
 describe('TopicsPillbox', () => {
   it('applies the center alignment css class if props.alignItems="center"', () => {
-    const { container } = wrappedRender(<TopicsPillbox {...baseProps} alignItems="center" />)
+    const { container } = render(<TopicsPillbox {...baseProps} alignItems="center" />)
     expect(container.firstChild).toHaveClass('align-center')
   })
 
-  it('wrappedRenders custom heading text if props.headingText is provided', () => {
-    const { getByCy } = wrappedRender(<TopicsPillbox {...baseProps} headingText="Nom nom" />)
-    expect(getByCy('heading')).toHaveTextContent('Nom nom')
+  it('renders custom heading text if props.headingText is provided', () => {
+    const { getByTestId } = render(<TopicsPillbox {...baseProps} headingText="Nom nom" />)
+    expect(getByTestId('heading')).toHaveTextContent('Nom nom')
   })
 
   it('adds a custom heading css class if props.headingClassName is provided', () => {
-    const { getByCy } = wrappedRender(
+    const { getByTestId } = render(
       <TopicsPillbox {...baseProps} headingClassName="the-sweetness" />
     )
-    expect(getByCy('heading')).toHaveClass('the-sweetness')
+    expect(getByTestId('heading')).toHaveClass('the-sweetness')
   })
 
-  it('wrappedRenders a pill for each topic in the topics data map', () => {
+  it('renders a pill for each topic in the topics data map', () => {
     const topicNames = Object.keys(mockTopicsData)
-    const { getByCy } = wrappedRender(<TopicsPillbox {...baseProps} />)
-    topicNames.forEach((topic) => expect(getByCy(`topic-pill-${topic}`)))
+    const { getByTestId } = render(<TopicsPillbox {...baseProps} />)
+    topicNames.forEach((topic) => expect(getByTestId(`topic-pill-${topic}`)))
   })
 
   it('passes the correct formatted url based on slug to each topic pill', () => {
     const topicNames = Object.keys(mockTopicsData)
-    const { getByCy } = wrappedRender(<TopicsPillbox {...baseProps} />)
+    const { getByTestId } = render(<TopicsPillbox {...baseProps} />)
     topicNames.forEach((topic) => {
-      expect(getByCy(`topic-pill-${topic}`)).toHaveAttribute('href', topic.url)
+      expect(getByTestId(`topic-pill-${topic}`)).toHaveAttribute('href', topic.url)
     })
   })
 
   it('puts promoted topic items at the front of the list', () => {
-    const { queryAllByCy } = wrappedRender(<TopicsPillbox {...baseProps} />)
-    expect(queryAllByCy('topic-pill', { exact: false })[0]).toHaveAttribute(
+    const { queryAllByTestId } = render(<TopicsPillbox {...baseProps} />)
+    expect(queryAllByTestId('topic-pill', { exact: false })[0]).toHaveAttribute(
       'href',
       '/explore/superheroes'
     )
@@ -76,10 +76,8 @@ describe('TopicsPillbox', () => {
 
   it('calls props.onTopicClick when the user clicks on a topic, passing through expected params', () => {
     const handleClick = jest.fn()
-    const { queryAllByCy } = wrappedRender(
-      <TopicsPillbox {...baseProps} onTopicClick={handleClick} />
-    )
-    const firstPill = queryAllByCy('topic-pill', { exact: false })[0]
+    const { queryAllByTestId } = render(<TopicsPillbox {...baseProps} onTopicClick={handleClick} />)
+    const firstPill = queryAllByTestId('topic-pill', { exact: false })[0]
     fireEvent.click(firstPill)
     expect(handleClick).toBeCalledWith('superheroes', 0, 'pez-dispenser')
   })

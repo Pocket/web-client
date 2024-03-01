@@ -28,7 +28,7 @@ export const ArrowLink = ({ href, target, margin, onClick, children, id, dataCy 
     href={href}
     target={target}
     id={id}
-    data-cy={dataCy}
+    data-testid={dataCy}
     onClick={onClick}>
     {children}
     <ArrowRightIcon className="arrow-icon" />

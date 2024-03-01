@@ -225,7 +225,7 @@ const LibraryAd = () => (
     <div className={buttonWrapper}>
       <a
         id="reader.bottom.premium.library"
-        data-cy="reader-bottom-premium"
+        data-testid="reader-bottom-premium"
         className="button primary"
         target="_blank"
         rel="noreferrer"
@@ -269,7 +269,7 @@ const SearchAd = () => (
     <div className={buttonWrapper}>
       <a
         id="reader.bottom.premium.search"
-        data-cy="reader-bottom-premium"
+        data-testid="reader-bottom-premium"
         className="button primary"
         target="_blank"
         rel="noreferrer"
@@ -313,7 +313,7 @@ const FocusedAd = () => (
     <div className={buttonWrapper}>
       <a
         id="reader.bottom.premium.focused"
-        data-cy="reader-bottom-premium"
+        data-testid="reader-bottom-premium"
         className="button primary"
         target="_blank"
         rel="noreferrer"
@@ -358,7 +358,7 @@ const TypeAd = () => (
     <div className={buttonWrapper}>
       <a
         id="reader.bottom.premium.type"
-        data-cy="reader-bottom-premium"
+        data-testid="reader-bottom-premium"
         className="button primary"
         target="_blank"
         rel="noreferrer"
@@ -403,7 +403,7 @@ const BigDiamondAd = () => (
     <div className={buttonWrapper}>
       <a
         id="reader.bottom.premium.features"
-        data-cy="reader-bottom-premium"
+        data-testid="reader-bottom-premium"
         className="button primary"
         target="_blank"
         rel="noreferrer"
@@ -447,7 +447,7 @@ const HighlightAd = () => (
     <div className={buttonWrapper}>
       <a
         id="reader.bottom.premium.highlights"
-        data-cy="reader-bottom-premium"
+        data-testid="reader-bottom-premium"
         className="button primary"
         target="_blank"
         rel="noreferrer"
@@ -491,7 +491,7 @@ const TagsAd = () => (
     <div className={buttonWrapper}>
       <a
         id="reader.bottom.premium.tags"
-        data-cy="reader-bottom-premium"
+        data-testid="reader-bottom-premium"
         className="button primary"
         target="_blank"
         rel="noreferrer"

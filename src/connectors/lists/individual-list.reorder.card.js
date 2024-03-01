@@ -58,7 +58,7 @@ export const ReorderActions = () => {
     <button
       tabIndex="-1"
       aria-label="Reorder items"
-      data-cy="reorder-items"
+      data-testid="reorder-items"
       className="inline large">
       <ReorderIcon />
     </button>

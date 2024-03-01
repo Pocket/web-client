@@ -74,7 +74,7 @@ const MenuPopover = function ({ popoverRef, menuItems }) {
           <a
             href={url}
             key={label}
-            data-cy={label}
+            data-testid={label}
             className={popoverMenuItem}
             onClick={onClick}
             target="_blank"
@@ -83,7 +83,7 @@ const MenuPopover = function ({ popoverRef, menuItems }) {
             {label}
           </a>
         ) : (
-          <div key={label} data-cy={label} className={popoverMenuItem} onClick={onClick}>
+          <div key={label} data-testid={label} className={popoverMenuItem} onClick={onClick}>
             {icon ? icon : null}
             {label}
           </div>
@@ -104,7 +104,7 @@ export const OverflowMenu = function ({ toggleLabel, menuItems }) {
   return (
     <>
       <button
-        data-cy="overflow"
+        data-testid="overflow"
         className={popoverTrigger}
         onClick={handleClick}
         ref={popTrigger}

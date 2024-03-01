@@ -181,7 +181,7 @@ export function ConfirmTagging() {
             className="primary"
             disabled={!value.trim() ? fresh : false}
             type="submit"
-            data-cy="tagging-confirm"
+            data-testid="tagging-confirm"
             onClick={handleSave}>
             <Trans i18nKey="confirm:save">Save</Trans>
           </button>

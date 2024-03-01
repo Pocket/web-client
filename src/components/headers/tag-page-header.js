@@ -67,7 +67,7 @@ export const TaggedHeader = ({
   return (
     <div className={tagPageHeaderStyle}>
       <header className={savesHeaderStyle}>
-        <h1 className="pageTitle" data-cy="page-title">
+        <h1 className="pageTitle" data-testid="page-title">
           {capitalizeFirstLetter(title)}
         </h1>
         <FilterMenu subset={subset} filter={filter} tag={tag} />
@@ -77,7 +77,7 @@ export const TaggedHeader = ({
         <button
           aria-label={isPinned ? t('nav:unpin-tag', 'Unpin Tag') : t('nav:pin-tag', 'Pin Tag')}
           data-tooltip={isPinned ? t('nav:unpin-tag', 'Unpin Tag') : t('nav:pin-tag', 'Pin Tag')}
-          data-cy={isPinned ? 'tag-unpin' : 'tag-pin'}
+          data-testid={isPinned ? 'tag-unpin' : 'tag-pin'}
           className={cx(buttonReset, bottomTooltipDelayed)}
           onClick={pinTag}>
           {isPinned ? <PinFilledIcon /> : <PinIcon />}
@@ -86,7 +86,7 @@ export const TaggedHeader = ({
         <button
           aria-label={t('nav:edit-tag', 'Edit Tag')}
           data-tooltip={t('nav:edit-tag', 'Edit Tag')}
-          data-cy="tag-edit"
+          data-testid="tag-edit"
           className={cx(buttonReset, bottomTooltipDelayed)}
           onClick={editTag}>
           <EditIcon />
@@ -95,7 +95,7 @@ export const TaggedHeader = ({
         <button
           aria-label={t('nav:delete-tag', 'Delete Tag')}
           data-tooltip={t('nav:delete-tag', 'Delete Tag')}
-          data-cy="tag-delete"
+          data-testid="tag-delete"
           className={cx(buttonReset, bottomTooltipDelayed)}
           onClick={deleteTag}>
           <DeleteIcon />

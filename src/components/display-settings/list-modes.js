@@ -58,7 +58,7 @@ export const ListSettings = ({ listMode = 'grid', setListMode, setGridMode, setD
           <button
             aria-label={t('settings:display-items-as-a-list', 'Display items as a list')}
             data-tooltip={t('settings:display-items-as-a-list', 'Display items as a list')}
-            data-cy="display-list"
+            data-testid="display-list"
             className={cx(buttonReset, bottomTooltip, 'backing')}>
             <ListViewIcon />
           </button>
@@ -67,7 +67,7 @@ export const ListSettings = ({ listMode = 'grid', setListMode, setGridMode, setD
           <button
             aria-label={t('settings:display-items-in-detail', 'Display items in detail')}
             data-tooltip={t('settings:display-items-in-detail', 'Display items in detail')}
-            data-cy="display-detail"
+            data-testid="display-detail"
             className={cx(buttonReset, bottomTooltip, 'backing')}>
             <DetailViewIcon />
           </button>
@@ -76,7 +76,7 @@ export const ListSettings = ({ listMode = 'grid', setListMode, setGridMode, setD
           <button
             aria-label={t('settings:display-items-as-a-grid', 'Display items as a grid')}
             data-tooltip={t('settings:display-items-as-a-grid', 'Display items as a grid')}
-            data-cy="display-grid"
+            data-testid="display-grid"
             className={cx(buttonReset, bottomTooltip, 'backing')}>
             <GridViewIcon />
           </button>

@@ -49,7 +49,7 @@ const Chyron = ({ initialDismissed = false, initialSuccess = false, instanceId, 
   }, [chyronDismissalDate, chyronId, initialSuccess])
 
   return isDismissed || initialSuccess ? null : (
-    <div data-cy="chyron-wrapper">
+    <div data-testid="chyron-wrapper">
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, {
           // makes this dismiss and success functions available to all children

@@ -104,7 +104,7 @@ export const UsernameModal = () => {
         <button
           className="primary"
           type="submit"
-          data-cy="update-username-confirm"
+          data-testid="update-username-confirm"
           onClick={confirmUsernmame}>
           {t('account:update-username', 'Update Username')}
         </button>

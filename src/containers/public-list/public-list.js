@@ -97,7 +97,7 @@ export const PublicList = ({ listId, slug, statusCode }) => {
             ))
           : null}
         <footer className={footerStyle}>
-          <button className="tiny outline" data-cy="report-list" onClick={onReport}>
+          <button className="tiny outline" data-testid="report-list" onClick={onReport}>
             <ReportIcon /> {t('list:report-list', 'Report List')}
           </button>
         </footer>

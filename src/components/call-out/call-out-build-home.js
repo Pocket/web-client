@@ -138,7 +138,7 @@ const wrapper = css`
 export function CallOutBuildHome({ topBorder }) {
   const { t } = useTranslation()
   return (
-    <div className={cx(wrapper, topBorder && 'topBorder')} data-cy="signup-module">
+    <div className={cx(wrapper, topBorder && 'topBorder')} data-testid="signup-module">
       <aside>
         <p className="h3 title">
           {t('call-out:build-a-home', 'Build a home for everything that interests you')}

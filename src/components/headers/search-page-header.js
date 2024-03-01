@@ -34,8 +34,8 @@ export const SearchPageHeader = ({
   const isLoading = total === false
   return query ? (
     <header className={cx(savesHeaderStyle, searchStyles)}>
-      <h1 className="pageTitle" data-cy="page-title">
-        <em data-cy="search-query">“{query}”</em> —{' '}
+      <h1 className="pageTitle" data-testid="page-title">
+        <em data-testid="search-query">“{query}”</em> —{' '}
         {isLoading ? (
           <span>
             {t('search:searching', 'Searching')} <Loader />{' '}

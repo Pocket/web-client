@@ -104,7 +104,7 @@ export const ConfirmReport = () => {
             className="primary"
             disabled={submitDisabled}
             type="submit"
-            data-cy="submit-report-feedback"
+            data-testid="submit-report-feedback"
             onClick={confirmReport}>
             <Trans i18nKey="confirm:report-feedback">Report Feedback</Trans>
           </button>

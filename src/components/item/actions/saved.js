@@ -60,7 +60,7 @@ export function SavedActions({
   actionPremLibOpen,
   actionRefresh,
   actionAddToList,
-  permanentUrl,
+  permanentUrl
 }) {
   const { t } = useTranslation()
   const archiveLabel = isArchived
@@ -142,7 +142,7 @@ export function VisibleAction({ actions }) {
         className={`${topTooltip} button`}
         data-tooltip={label}
         aria-label={label}
-        data-cy={label}
+        data-testid={label}
         onClick={onClick}
         target="_blank"
         rel="noreferrer">
@@ -154,7 +154,7 @@ export function VisibleAction({ actions }) {
         className={topTooltip}
         data-tooltip={label}
         aria-label={label}
-        data-cy={label}
+        data-testid={label}
         onClick={onClick}>
         {icon}
       </button>

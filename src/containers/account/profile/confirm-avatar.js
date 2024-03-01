@@ -142,7 +142,7 @@ export const AvatarModal = () => {
           <button
             className="primary"
             type="submit"
-            data-cy="avatar-confirm"
+            data-testid="avatar-confirm"
             onClick={confirmAvatar}
             autoFocus={true}
             disabled={!imagePreview}>

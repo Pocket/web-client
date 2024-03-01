@@ -93,7 +93,7 @@ export const AvatarButton = React.forwardRef(
         onClick={onClick}
         {...rest}
         ref={ref}>
-        <Avatar size={size} src={src} altText={label} data-cy={`avatar-button-avatar-${id}`} />
+        <Avatar size={size} src={src} altText={label} data-testid={`avatar-button-avatar-${id}`} />
       </button>
     )
   }
@@ -133,4 +133,3 @@ AvatarButton.propTypes = {
    */
   className: PropTypes.string
 }
-

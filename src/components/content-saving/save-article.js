@@ -145,7 +145,7 @@ function SaveStoryButton({ url, isAuthenticated, saveStatus, saveAction, id, tra
 
   return (
     <>
-      <button className="primary" onClick={handleClick} ref={popTrigger} data-cy={id}>
+      <button className="primary" onClick={handleClick} ref={popTrigger} data-testid={id}>
         {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}
         {saveCopy[saveStatus]}
       </button>

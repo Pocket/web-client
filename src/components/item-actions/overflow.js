@@ -43,7 +43,7 @@ const PopoverMenuItem = ({ item: { label, icon, hide, onClick } }) => {
   if (hide) return null
 
   return (
-    <div data-cy={label} className={popoverMenuItem} onClick={onClick}>
+    <div data-testid={label} className={popoverMenuItem} onClick={onClick}>
       {icon ? icon : null}
       {label}
     </div>
@@ -82,7 +82,7 @@ export const OverflowAction = function ({ toggleLabel = '', placement = 'top-end
   return (
     <>
       <button
-        data-cy="overflow"
+        data-testid="overflow"
         className={menuItemStyle}
         onClick={handleClick}
         ref={popTrigger}

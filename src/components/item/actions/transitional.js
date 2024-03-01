@@ -73,12 +73,16 @@ export function TransitionalActions({
           className="saved"
           ref={popTrigger}
           onClick={onUnSave}
-          data-cy="article-save-btn-saved">
+          data-testid="article-save-btn-saved">
           <SaveFilledIcon className="saveIcon" />
           <span className="copy">{t('item-action:save-saved', 'Saved')}</span>
         </button>
       ) : (
-        <button className="save" ref={popTrigger} onClick={onSave} data-cy="article-save-btn-save">
+        <button
+          className="save"
+          ref={popTrigger}
+          onClick={onSave}
+          data-testid="article-save-btn-save">
           <SaveIcon className="saveIcon" />
           <span className="copy">{t('item-action:save-unsaved', 'Save')}</span>
         </button>
@@ -94,10 +98,10 @@ export const SavePopover = function ({ popoverRef, id }) {
   const signupUrl = `${SIGNUP_URL}?src=web-save&utm_source=${global.location.href}&route=${global.location.href}`
   return (
     //prettier-ignore
-    <div className={popoverContainer} ref={popoverRef} data-cy={`article-save-login-popup-${id}`}>
+    <div className={popoverContainer} ref={popoverRef} data-testid={`article-save-login-popup-${id}`}>
       <Trans i18nKey="item-action:no-auth-save">
-        <a className="popoverLink" href={loginUrl} data-cy="save-login">Log in</a> or{' '}
-        <a className="popoverLink" href={signupUrl} data-cy="save-signup">Sign up</a> to save this article.
+        <a className="popoverLink" href={loginUrl} data-testid="save-login">Log in</a> or{' '}
+        <a className="popoverLink" href={signupUrl} data-testid="save-signup">Sign up</a> to save this article.
       </Trans>
     </div>
   )

@@ -60,7 +60,7 @@ const TopicsPillbox = ({
 
   return (
     <div className={cx(pillboxStyle, `align-${alignItems}`)}>
-      <h4 className={cx('h5', headingClassName)} data-cy="heading">
+      <h4 className={cx('h5', headingClassName)} data-testid="heading">
         {headingText}
       </h4>
       <ul>
@@ -73,7 +73,7 @@ const TopicsPillbox = ({
                 onClick={(event) => {
                   handleTopicClick(event, topic.topic, index)
                 }}
-                data-cy={`topic-pill-${topic.topic}`}>
+                data-testid={`topic-pill-${topic.topic}`}>
                 {topic.display_name}
               </Pill>
             </li>

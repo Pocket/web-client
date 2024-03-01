@@ -132,7 +132,7 @@ export const Item = (props) => {
       style={style}
       className={itemClassName}
       key={itemId}
-      data-cy="article-card"
+      data-testid="article-card"
       onClick={selectBulk}
       ref={viewRef}
       onFocus={handleFocus}>
@@ -154,7 +154,7 @@ export const Item = (props) => {
           href={openUrl}
           onClick={onOpen}
           className="content-block"
-          data-cy="content-block"
+          data-testid="content-block"
           target={linkTarget}
           ref={linkRef}
           rel={linkRel}>
@@ -163,7 +163,7 @@ export const Item = (props) => {
             <h2 className={cx('title', openInNewTab && 'open-external')}>
               <span className="text">{title}</span>
               {openInNewTab ? (
-                <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
+                <NewViewIcon className="mobile-view-original" data-testid="view-original-icon" />
               ) : null}
             </h2>
             <Excerpt useMarkdown={useMarkdown} excerpt={excerpt} />
@@ -197,29 +197,29 @@ export const Item = (props) => {
 
           <div className="context">
             {storyCount ? (
-              <div className="story-count" data-cy="story-count">
+              <div className="story-count" data-testid="story-count">
                 {t('item:story-count', '{{count}} stories', { count: storyCount })}
               </div>
             ) : null}
             {itemCount ? (
-              <div className="item-count" data-cy="item-count">
+              <div className="item-count" data-testid="item-count">
                 {t('item:item-count', '{{count}} items', { count: itemCount })}
               </div>
             ) : null}
             {isUserList ? (
-              <div className="user-list-context" data-cy="user-list-context">
+              <div className="user-list-context" data-testid="user-list-context">
                 <ListViewAltIcon /> {t('item:list', 'List')}
               </div>
             ) : null}
             {timeToRead && !isUserList ? (
-              <div className="time-to-read" data-cy="time-to-read">
+              <div className="time-to-read" data-testid="time-to-read">
                 {t('item:time-to-read', '{{timeToRead}} min', { timeToRead: timeToRead })}
               </div>
             ) : null}
             {tags?.length && type === 'detail' ? (
               <div
                 className={cx('card-tags', tagsShown && 'show-tags')}
-                data-cy="card-tags"
+                data-testid="card-tags"
                 onMouseEnter={showTags}>
                 {t('item:tag-count', '{{count}} tag', { count: tagCount })}
                 <ItemTags className="itemTags" tags={tags} mouseLeave={hideTags} />
@@ -288,7 +288,7 @@ const Publisher = ({ publisher, externalUrl, onOpenOriginalUrl, isSyndicated }) 
           className="publisher"
           href={externalUrl}
           onClick={onOpenOriginalUrl}
-          data-cy="publisher-link"
+          data-testid="publisher-link"
           tabIndex={0}
           target="_blank"
           rel="noopener noreferrer">

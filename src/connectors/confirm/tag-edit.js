@@ -47,7 +47,7 @@ export const ConfirmTagEdit = () => {
         <div className={inputWrapper}>
           <input
             type="text"
-            data-cy="edit-tag-input"
+            data-testid="edit-tag-input"
             autoFocus={true}
             value={value}
             onChange={onChange}
@@ -66,7 +66,7 @@ export const ConfirmTagEdit = () => {
           className="primary"
           disabled={!value.trim()}
           type="submit"
-          data-cy="edit-tag-confirm"
+          data-testid="edit-tag-confirm"
           onClick={confirmTagEdit}>
           <Trans i18nKey="confirm:confirm">Confirm</Trans>
         </button>

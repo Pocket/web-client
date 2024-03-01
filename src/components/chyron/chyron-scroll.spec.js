@@ -1,4 +1,4 @@
-import { render } from 'test-utils'
+import { render } from '@config/jest'
 import '@testing-library/jest-dom'
 
 import { ScrollChyron } from './chyron-scroll'
@@ -11,20 +11,20 @@ describe('ScrollChyron', () => {
   }
 
   it('renders with children without problem', () => {
-    const { queryByCy } = render(
+    const { queryByTestId } = render(
       <ScrollChyron {...baseProps}>
         <TestComponent />
       </ScrollChyron>
     )
-    expect(queryByCy('scroll-chyron-wrapper')).toBeTruthy()
+    expect(queryByTestId('scroll-chyron-wrapper')).toBeTruthy()
   })
 
   it('does not render when shouldHide is true', () => {
-    const { queryByCy } = render(
+    const { queryByTestId } = render(
       <ScrollChyron {...baseProps} shouldHide>
         <TestComponent />
       </ScrollChyron>
     )
-    expect(queryByCy('scroll-chyron-wrapper')).toBeFalsy()
+    expect(queryByTestId('scroll-chyron-wrapper')).toBeFalsy()
   })
 })

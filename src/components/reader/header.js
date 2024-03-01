@@ -158,7 +158,7 @@ export const ItemHeader = ({
       <div className={pocketInfo}>
         <a
           id="reader.external-link.view-original"
-          data-cy="view-original"
+          data-testid="view-original"
           className={viewOriginal}
           onClick={viewOriginalEvent}
           href={externalUrl}
@@ -175,7 +175,7 @@ export const ItemHeader = ({
                   <Link
                     href={`/saves/tags/${encodeURIComponent(tag)}`}
                     id={`reader.tag.${tag}`}
-                    data-cy={`reader-tag-${tag}`}>
+                    data-testid={`reader-tag-${tag}`}>
                     <Pill>{tag}</Pill>
                   </Link>
                 </li>

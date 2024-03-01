@@ -1,4 +1,4 @@
-import { render, fireEvent } from 'test-utils'
+import { render, fireEvent } from '@config/jest'
 import '@testing-library/jest-dom'
 
 import { AvatarButton } from './avatar-button'

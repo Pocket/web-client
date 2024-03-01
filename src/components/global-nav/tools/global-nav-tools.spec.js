@@ -1,4 +1,4 @@
-import { render, fireEvent, mockModal } from 'test-utils'
+import { render, fireEvent, mockModal } from '@config/jest'
 import '@testing-library/jest-dom'
 import { PlayIcon } from 'components/icons/PlayIcon'
 import { TagIcon } from 'components/icons/TagIcon'
@@ -13,9 +13,9 @@ describe('GlobalNavTools', () => {
       {
         name: 'cheeses',
         label: 'Cheeses',
-        icon: <PlayIcon data-cy="play-icon" />
+        icon: <PlayIcon data-testid="play-icon" />
       },
-      { name: 'chocolates', label: 'Chocolates', icon: <TagIcon data-cy="tag-icon" /> }
+      { name: 'chocolates', label: 'Chocolates', icon: <TagIcon data-testid="tag-icon" /> }
     ]
   }
 
@@ -31,9 +31,9 @@ describe('GlobalNavTools', () => {
   })
 
   it('renders the buttons with correct icons as specified in the `links` prop', () => {
-    const { queryByCy } = render(<GlobalNavTools {...baseProps} />)
-    expect(queryByCy('play-icon')).toBeTruthy()
-    expect(queryByCy('tag-icon')).toBeTruthy()
+    const { queryByTestId } = render(<GlobalNavTools {...baseProps} />)
+    expect(queryByTestId('play-icon')).toBeTruthy()
+    expect(queryByTestId('tag-icon')).toBeTruthy()
   })
 
   it('calls the props.onToolClick callback with the name of the tool when clicked', () => {

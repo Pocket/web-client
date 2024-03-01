@@ -227,7 +227,7 @@ const TopicButton = ({ topic }) => {
   return (
     <label
       className={cx(topicStyle, isSelected && 'selected')}
-      data-cy={`topic-pill-${topicTestId}`}>
+      data-testid={`topic-pill-${topicTestId}`}>
       <input type="checkbox" checked={isSelected} onChange={toggleTopic} />
       {topic.name}
     </label>
@@ -243,7 +243,6 @@ export const HomeSetup = () => {
   const topicsSelectors = useSelector((state) => state.homeSetup.topicsSelectors)
   const userTopics = useSelector((state) => state.homeSetup.userTopics)
   const isFinalized = useSelector((state) => state.homeSetup.finalizedTopics)
-
 
   useEffect(() => {
     if (hideSetup) return () => {}
@@ -288,7 +287,7 @@ export const HomeSetup = () => {
 
   return !isDismissed && showSelectionSetup ? (
     <div className={containerClass}>
-      <SectionWrapper data-cy='onboarding-section'>
+      <SectionWrapper data-testid="onboarding-section">
         <SectionToRender
           hasTopics={userTopics.length}
           isReselect={isReselect}
@@ -332,18 +331,18 @@ const TopicSelector = ({
       </div>
       <div className="actions">
         {hasTopics || isReselect ? null : (
-          <button onClick={handleSkip} className="text" data-cy="onboarding-skip">
+          <button onClick={handleSkip} className="text" data-testid="onboarding-skip">
             Skip
           </button>
         )}
         {isReselect ? (
-          <button onClick={handleCancel} className="text" data-cy="onboarding-cancel">
+          <button onClick={handleCancel} className="text" data-testid="onboarding-cancel">
             Cancel
           </button>
         ) : null}
         <button
           onClick={handleContinue}
-          data-cy="onboarding-continue"
+          data-testid="onboarding-continue"
           disabled={!hasTopics}
           className={cx(!hasTopics && 'disabled')}>
           Continue

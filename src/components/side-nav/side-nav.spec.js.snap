@@ -2,15 +2,15 @@
 
 exports[`SideNav renders the Account side nav 1`] = `
 <div
-  class="css-1rfkhee side-nav"
-  data-cy="side-nav"
+  class="css-c1dtfw side-nav"
+  data-testid="side-nav"
 >
   <nav
     role="navigation"
   >
     <a
       class="css-gcpn2c  "
-      data-cy="side-nav-home"
+      data-testid="side-nav-home"
       href="/home?src=sidebar"
     >
       <span
@@ -34,7 +34,7 @@ exports[`SideNav renders the Account side nav 1`] = `
     </a>
     <a
       class="css-gcpn2c  "
-      data-cy="side-nav-saves"
+      data-testid="side-nav-saves"
       href="/saves?src=sidebar"
     >
       <span
@@ -78,7 +78,7 @@ exports[`SideNav renders the Account side nav 1`] = `
     </a>
     <a
       class="css-gcpn2c  "
-      data-cy="side-nav-discover"
+      data-testid="side-nav-discover"
       href="/explore?src=sidebar"
     >
       <span
@@ -107,7 +107,7 @@ exports[`SideNav renders the Account side nav 1`] = `
     </a>
     <a
       class="css-gcpn2c  "
-      data-cy="side-nav-collections"
+      data-testid="side-nav-collections"
       href="/collections?src=sidebar"
     >
       <span
@@ -150,7 +150,7 @@ exports[`SideNav renders the Account side nav 1`] = `
     </a>
     <div
       class="css-s9w2pk"
-      data-cy="side-nav-account"
+      data-testid="side-nav-account"
     />
   </nav>
   <div
@@ -159,7 +159,7 @@ exports[`SideNav renders the Account side nav 1`] = `
     <button
       aria-label="nav:return-to-top"
       class="hidden"
-      data-cy="side-nav-scroll-to-top"
+      data-testid="side-nav-scroll-to-top"
     >
       <span
         class="css-1bptydr icon"
@@ -184,15 +184,15 @@ exports[`SideNav renders the Account side nav 1`] = `
 
 exports[`SideNav renders the Saves side nav and shows tags 1`] = `
 <div
-  class="css-1rfkhee side-nav"
-  data-cy="side-nav"
+  class="css-c1dtfw side-nav"
+  data-testid="side-nav"
 >
   <nav
     role="navigation"
   >
     <a
       class="css-gcpn2c  "
-      data-cy="side-nav-home"
+      data-testid="side-nav-home"
       href="/home?src=sidebar"
     >
       <span
@@ -216,7 +216,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     </a>
     <a
       class="css-gcpn2c  "
-      data-cy="side-nav-saves"
+      data-testid="side-nav-saves"
       href="/saves?src=sidebar"
     >
       <span
@@ -260,7 +260,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     </a>
     <a
       class="css-gcpn2c  "
-      data-cy="side-nav-discover"
+      data-testid="side-nav-discover"
       href="/explore?src=sidebar"
     >
       <span
@@ -289,7 +289,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     </a>
     <a
       class="css-gcpn2c  "
-      data-cy="side-nav-collections"
+      data-testid="side-nav-collections"
       href="/collections?src=sidebar"
     >
       <span
@@ -340,7 +340,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
       </h4>
       <button
         class="css-rpqv52"
-        data-cy="side-nav-create-list"
+        data-testid="side-nav-create-list"
       >
         <span
           class="icon css-19mp698"
@@ -363,7 +363,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     </div>
     <button
       class="css-gcpn2c  "
-      data-cy="side-nav-all-lists"
+      data-testid="side-nav-all-lists"
     >
       <span
         class="css-1bptydr icon side-nav-icon inactive"
@@ -402,7 +402,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     </h4>
     <button
       class="css-gcpn2c  "
-      data-cy="side-nav-archive"
+      data-testid="side-nav-archive"
     >
       <span
         class="css-1bptydr icon side-nav-icon"
@@ -435,7 +435,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     </button>
     <button
       class="css-gcpn2c  "
-      data-cy="side-nav-favorites"
+      data-testid="side-nav-favorites"
     >
       <span
         class="css-1bptydr icon side-nav-icon"
@@ -458,7 +458,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     </button>
     <button
       class="css-gcpn2c  "
-      data-cy="side-nav-highlights"
+      data-testid="side-nav-highlights"
     >
       <span
         class="css-1bptydr icon side-nav-icon"
@@ -481,7 +481,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     </button>
     <button
       class="css-gcpn2c  "
-      data-cy="side-nav-articles"
+      data-testid="side-nav-articles"
     >
       <span
         class="css-1bptydr icon side-nav-icon"
@@ -509,7 +509,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     </button>
     <button
       class="css-gcpn2c  "
-      data-cy="side-nav-videos"
+      data-testid="side-nav-videos"
     >
       <span
         class="css-1bptydr icon side-nav-icon"
@@ -545,7 +545,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     </h4>
     <button
       class="css-gcpn2c  "
-      data-cy="side-nav-all-tags"
+      data-testid="side-nav-all-tags"
     >
       <span
         class="css-1bptydr icon side-nav-icon"
@@ -571,13 +571,13 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     </button>
     <button
       class="css-gcpn2c  tag-class"
-      data-cy="side-nav-tags-home"
+      data-testid="side-nav-tags-home"
     >
       home
     </button>
     <button
       class="css-gcpn2c  tag-class"
-      data-cy="side-nav-tags-space"
+      data-testid="side-nav-tags-space"
     >
       space
     </button>
@@ -588,7 +588,7 @@ exports[`SideNav renders the Saves side nav and shows tags 1`] = `
     <button
       aria-label="nav:return-to-top"
       class="hidden"
-      data-cy="side-nav-scroll-to-top"
+      data-testid="side-nav-scroll-to-top"
     >
       <span
         class="css-1bptydr icon"

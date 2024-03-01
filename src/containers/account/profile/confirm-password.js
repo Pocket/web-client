@@ -134,7 +134,11 @@ export const PasswordModal = () => {
             'You will need to log in again after you update your password.'
           )}
         </div>
-        <button className="primary" type="submit" data-cy="update-password-confirm" onClick={confirmPassword}>
+        <button
+          className="primary"
+          type="submit"
+          data-testid="update-password-confirm"
+          onClick={confirmPassword}>
           {t('account:update-password', 'Update Password')}
         </button>
       </ModalFooter>

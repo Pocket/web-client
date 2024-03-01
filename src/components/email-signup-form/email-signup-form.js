@@ -170,7 +170,7 @@ const EmailSignupForm = ({
           displayErrorInline={displayErrorInline}
           onFocus={handleInputFocus}
           disabled={isProcessing || isRecaptchaProcessing}
-          data-cy="email-input"
+          data-testid="email-input"
         />
       </div>
       <div className={cx(buttonStyle, buttonClassName)}>
@@ -178,12 +178,12 @@ const EmailSignupForm = ({
           type="submit"
           disabled={isProcessing || isRecaptchaProcessing}
           className={buttonVariant}
-          data-cy="submit-button">
+          data-testid="submit-button">
           {isProcessing || isRecaptchaProcessing ? buttonLabelProcessing : buttonLabel}
         </button>
       </div>
       {showCheckbox ? (
-        <div className={cx(checkboxStyle)} data-cy="checkbox">
+        <div className={cx(checkboxStyle)} data-testid="checkbox">
           <input
             type="checkbox"
             onChange={handleCheckboxClick}
@@ -198,7 +198,7 @@ const EmailSignupForm = ({
         size="invisible"
         sitekey={CAPTCHA_SITE_KEY}
         onChange={handleRecaptchaComplete}
-        data-cy="recaptcha"
+        data-testid="recaptcha"
       />
     </form>
   )

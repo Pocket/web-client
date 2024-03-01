@@ -117,7 +117,7 @@ export const ListOfItems = ({ subset }) => {
 
   return (
     <>
-      <div className={itemsListStyle} data-cy={`list-of-items-view-${type}`}>
+      <div className={itemsListStyle} data-testid={`list-of-items-view-${type}`}>
         {itemsToShow
           ? itemsToShow.map((itemId) => {
               const positionOfItem = pageSavedIds.indexOf(itemId)

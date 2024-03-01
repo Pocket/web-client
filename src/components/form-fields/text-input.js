@@ -46,7 +46,7 @@ export const TextInput = ({
         onFocus={onFocus}
         onBlur={onBlur}
         className={inputStyles}
-        data-cy="text-input"
+        data-testid="text-input"
         maxLength={maxLength}
       />
     </InputWrapper>

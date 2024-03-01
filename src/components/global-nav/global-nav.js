@@ -270,7 +270,7 @@ const GlobalNav = ({
     <header className={cx(headerStyle, isLoggedIn && 'logged-in')}>
       {bannerCampaign && Banner ? <Banner bannerCampaign={bannerCampaign} /> : null}
       <PageContainer className="global-nav-container">
-        <nav className={cx(navStyle, onlyLogout && 'onlyLogout')} data-cy="global-nav">
+        <nav className={cx(navStyle, onlyLogout && 'onlyLogout')} data-testid="global-nav">
           <div className="site-nav">
             {noNav ? null : (
               <GlobalNavMobileMenu
@@ -297,7 +297,7 @@ const GlobalNav = ({
                 onClick={(event) => {
                   handleLinkClick('pocket', event)
                 }}
-                data-cy="logo-link">
+                data-testid="logo-link">
                 <Logo className="logo" />
                 {isLoggedIn ? <LogoMark className="logo-mark" /> : null}
               </Link>
@@ -325,7 +325,7 @@ const GlobalNav = ({
                   className="links"
                   links={links}
                   onLinkClick={onLinkClick}
-                  data-cy="primary-links"
+                  data-testid="primary-links"
                 />
               </div>
 

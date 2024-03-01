@@ -44,7 +44,7 @@ export const ConfirmFavorite = () => {
         <button
           className="primary"
           type="submit"
-          data-cy="favorite-modal-confirm"
+          data-testid="favorite-modal-confirm"
           onClick={confirmFavorite}
           autoFocus={true}>
           {favoriteTitle}

@@ -234,13 +234,13 @@ const PocketHitsIllustratedChyron = ({
           <figure className={illustration} />
           {isSuccessful ? (
             <div className={promoBlurbWrapper}>
-              <h3 className={promoBlurb} data-cy="pocket-hits-chyron-success">
+              <h3 className={promoBlurb} data-testid="pocket-hits-chyron-success">
                 All set. You’ll get your first email from us tomorrow.&nbsp;Enjoy!
               </h3>
             </div>
           ) : (
             <div>
-              <section data-cy="pocket-hits-chyron">
+              <section data-testid="pocket-hits-chyron">
                 <h3 className={promoBlurb}>
                   Get fascinating stories daily with <span>Pocket’s newsletter</span>.
                 </h3>

@@ -72,7 +72,7 @@ export const FontSettings = ({ updateFontFamily, currentFont, isPremium }) => {
         return (
           <PopupMenuItem
             key={font}
-            data-cy={`display-select-font-${font}`}
+            data-testid={`display-select-font-${font}`}
             className={cx(fontFamilyButton, showPremium && 'showPremium')}
             icon={showPremium ? <PremiumIcon /> : null}
             onClick={click}

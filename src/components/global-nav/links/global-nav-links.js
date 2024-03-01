@@ -121,7 +121,7 @@ const GlobalNavLinks = ({
             <Link
               href={link.url}
               id={link.id}
-              data-cy={link.id}
+              data-testid={link.id}
               className={isSelected ? 'selected' : ''}
               onClick={(event) => {
                 handleClick(event, link.name, link.url)

@@ -48,7 +48,7 @@ export const CloseButton = ({ handleClose, dataCy, closeButtonOverrides }) => {
 
   return (
     <button
-      data-cy={dataCy}
+      data-testid={dataCy}
       className={cx('close', closeButtonStyles, closeButtonOverrides)}
       aria-label={t('common:close-label', 'Close')}
       onClick={handleClose}>

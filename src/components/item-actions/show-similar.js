@@ -79,7 +79,7 @@ export const ShowSimilar = function ({ id, similarAction, className, hideCopy = 
     <button
       className={saveClasses}
       onClick={handleClick}
-      data-cy={`article-similar-btn-${id}`}
+      data-testid={`article-similar-btn-${id}`}
       data-tooltip={t('item-action:show-similar', 'Show Similar Items')}>
       <SimilarIcon />
       {hideCopy ? null : (

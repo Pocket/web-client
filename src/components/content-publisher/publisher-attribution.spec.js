@@ -1,4 +1,4 @@
-import { render } from 'test-utils'
+import { render } from '@config/jest'
 import '@testing-library/jest-dom'
 
 import { PublisherAttribution } from 'components/content-publisher/publisher-attribution'
@@ -10,17 +10,17 @@ describe('PublisherAttribution', () => {
   const noArticleCta = publisher.theVerge
 
   it('renders follow publisher section when including a articleCta', () => {
-    const { queryByCy } = render(<PublisherAttribution publisher={withCustomButton} />)
-    expect(queryByCy('follow-publisher')).toBeInTheDocument()
+    const { queryByTestId } = render(<PublisherAttribution publisher={withCustomButton} />)
+    expect(queryByTestId('follow-publisher')).toBeInTheDocument()
   })
 
   it('doesn’t render a publisher image if logoWide is missing', () => {
-    const { queryByCy } = render(<PublisherAttribution publisher={withNoLogo} />)
-    expect(queryByCy('publisher-img')).toBeFalsy()
+    const { queryByTestId } = render(<PublisherAttribution publisher={withNoLogo} />)
+    expect(queryByTestId('publisher-img')).toBeFalsy()
   })
 
   it('doesn’t render follow publisher section if articleCta is missing', () => {
-    const { queryByCy } = render(<PublisherAttribution publisher={noArticleCta} />)
-    expect(queryByCy('follow-publisher')).toBeFalsy()
+    const { queryByTestId } = render(<PublisherAttribution publisher={noArticleCta} />)
+    expect(queryByTestId('follow-publisher')).toBeFalsy()
   })
 })

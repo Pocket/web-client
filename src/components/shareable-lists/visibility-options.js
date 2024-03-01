@@ -72,7 +72,7 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
       <button
         ref={statusRef}
         className={cx('tiny', 'outline', buttonStyles, status)}
-        data-cy="sort-options">
+        data-testid="sort-options">
         <VisibilityDropdown visibilityStatus={visibilityStatus} />
         <ChevronDownIcon />
       </button>

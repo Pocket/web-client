@@ -152,7 +152,7 @@ export const Card = (props) => {
       ref={articleRef}
       className={card}
       key={itemId}
-      data-cy={`article-card-${itemId}`}
+      data-testid={`article-card-${itemId}`}
       onClick={selectBulk}>
       <div className="selectedBack" />
 
@@ -179,7 +179,7 @@ export const Card = (props) => {
                   href={openUrl}
                   ref={linkRef}
                   onClick={onOpen}
-                  data-cy="title-link"
+                  data-testid="title-link"
                   tabIndex={0}
                   target={linkTarget}
                   rel={linkRel}
@@ -187,7 +187,7 @@ export const Card = (props) => {
                   {title}
                 </Link>
                 {openInNewTab ? (
-                  <NewViewIcon className="mobile-view-original" data-cy="view-original-icon" />
+                  <NewViewIcon className="mobile-view-original" data-testid="view-original-icon" />
                 ) : null}
               </>
             ) : (
@@ -211,7 +211,7 @@ export const Card = (props) => {
                     className="publisher"
                     href={externalUrl}
                     onClick={onOpenOriginalUrl}
-                    data-cy="publisher-link"
+                    data-testid="publisher-link"
                     tabIndex={0}
                     target="_blank"
                     rel="noopener noreferrer">
@@ -223,7 +223,7 @@ export const Card = (props) => {
               </>
             ) : null}
             {timeToRead ? (
-              <span className="readtime" data-cy="read-time">
+              <span className="readtime" data-testid="read-time">
                 {' '}
                 · {timeToRead} min
               </span>

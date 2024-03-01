@@ -231,7 +231,7 @@ const Popup = ({
       {alwaysRender || isShowRequested || isShown ? (
         <div
           className={cx('popup-content', isShown && 'enter', isAnimationApplied && 'animate-to')}
-          data-cy={`popup-content-${id}`}>
+          data-testid={`popup-content-${id}`}>
           {children}
         </div>
       ) : null}

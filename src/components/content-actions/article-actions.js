@@ -208,13 +208,13 @@ export const ArticleActions = function ({
         </div>
 
         <div className="mastodon-share">
-          <button data-cy="share-mastodon" onClick={mastodonAction}>
+          <button data-testid="share-mastodon" onClick={mastodonAction}>
             <MastodonIcon />
           </button>
         </div>
 
         <div className="email-share">
-          <button data-cy="share-email" onClick={emailAction}>
+          <button data-testid="share-email" onClick={emailAction}>
             <MailIcon />
           </button>
         </div>

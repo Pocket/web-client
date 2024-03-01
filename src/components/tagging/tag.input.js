@@ -114,7 +114,7 @@ export function TagInput(props) {
       if (trimmedValue) {
         return addTag(`${trimmedValue}`)
       }
-      
+
       // Only allow submitting when input is empty
       if (!value) {
         submitForm()
@@ -145,7 +145,7 @@ export function TagInput(props) {
   return (
     <div className={inputWrapper}>
       <AutosizeInput
-        data-cy="tagging-input"
+        data-testid="tagging-input"
         autoFocus={true} //eslint-disable-line
         className={autoWrapper}
         inputRef={inputRef}

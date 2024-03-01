@@ -113,7 +113,7 @@ export const SavesHeader = ({
 
   return subset ? (
     <header className={savesHeaderStyle}>
-      <h1 className="pageTitle" data-cy="page-title">
+      <h1 className="pageTitle" data-testid="page-title">
         {translatedHeaders[title]}
       </h1>
       <FilterMenu subset={subset} filter={filter} />

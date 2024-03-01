@@ -122,7 +122,7 @@ export const ShareToMastodon = ({
           className="primary"
           disabled={!isValidUrl(instance.trim())}
           type="submit"
-          data-cy="share-mastodon-confirm"
+          data-testid="share-mastodon-confirm"
           onClick={clickHandler}>
           {t('share:share-confirm', 'Confirm')}
         </button>

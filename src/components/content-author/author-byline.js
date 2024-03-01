@@ -62,7 +62,7 @@ function Authors({ authors }) {
   return (
     <ul>
       {authors.map((author) => (
-        <li key={`author-byline-${author}`} itemProp="author" data-cy="author">
+        <li key={`author-byline-${author}`} itemProp="author" data-testid="author">
           {author}
         </li>
       ))}
@@ -80,7 +80,7 @@ function Authors({ authors }) {
 function AuthorByline({ url, name, showAuthors, authorNames }) {
   return (
     <cite className={BylineWrapper}>
-      <Link href={url} data-cy="author-url">
+      <Link href={url} data-testid="author-url">
         {name}
       </Link>
       {showAuthors ? <Authors authors={authorNames} /> : null}

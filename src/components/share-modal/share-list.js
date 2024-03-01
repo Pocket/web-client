@@ -57,7 +57,7 @@ export const ShareList = ({
         aria-label={t('share:copy-link', 'Copy Link')}
         data-tooltip={t('share:copy-link', 'Copy Link')}
         className={cx(socialButtonStyles, topTooltipDelayed)}
-        data-cy="copy-link"
+        data-testid="copy-link"
         onClick={copyUrl}>
         <CopyIcon />
       </button>
@@ -99,7 +99,7 @@ export const ShareList = ({
         aria-label={t('share:share-to-mastodon', 'Share to Mastodon')}
         data-tooltip={t('share:share-to-mastodon', 'Share to Mastodon')}
         className={cx(socialButtonStyles, topTooltipDelayed)}
-        data-cy="share-mastodon"
+        data-testid="share-mastodon"
         onClick={onShareMastodon}>
         <MastodonIcon />
       </button>

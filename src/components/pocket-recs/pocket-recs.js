@@ -15,7 +15,7 @@ const headingStyles = css`
 const Heading = () => {
   const { t } = useTranslation()
   return (
-    <h3 className={cx('h6', headingStyles)} data-cy="pocket-recs-heading">
+    <h3 className={cx('h6', headingStyles)} data-testid="pocket-recs-heading">
       {t('discover:more-stories-from-pocket', 'More Stories from Pocket')}
     </h3>
   )
@@ -52,9 +52,9 @@ const publisherStyles = css`
 export const Publisher = ({ name, logo }) => (
   <div className={publisherStyles}>
     {logo ? (
-      <img src={logo} data-cy="pocket-rec-publisher-logo" alt={`Logo for ${name}`} />
+      <img src={logo} data-testid="pocket-rec-publisher-logo" alt={`Logo for ${name}`} />
     ) : (
-      <span data-cy="pocket-rec-publisher-name">{name}</span>
+      <span data-testid="pocket-rec-publisher-name">{name}</span>
     )}
   </div>
 )
@@ -138,7 +138,7 @@ export const Recommendation = ({
 
   return (
     <VisibilitySensor onVisible={handleVisible}>
-      <li className={recommendationStyles} data-cy="pocket-recs-article">
+      <li className={recommendationStyles} data-testid="pocket-recs-article">
         <Link href={url} className="thumbnail" onClick={handleClick}>
           <img src={thumbnailUrl} alt={`Thumbnail image for article`} />
         </Link>
@@ -194,7 +194,7 @@ export const PocketRecs = ({
   return (
     <div className={cx(pocketRecsStyles, 'pocket-recs')}>
       <Heading />
-      <ul className={recommendationsStyles} data-cy="pocket-recommended-articles">
+      <ul className={recommendationsStyles} data-testid="pocket-recommended-articles">
         {recsToDisplay.map(({ corpusItem, corpusRecommendationId }, index) => (
           <Recommendation
             key={corpusItem?.id}

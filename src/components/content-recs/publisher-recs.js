@@ -32,8 +32,8 @@ export const Publisher = ({ recommendationName, name, logo }) => {
   const publisherName = recommendationName || name || 'Publisher'
   return (
     <div className={publisherStyles}>
-      {logo ? <img data-cy="publisher-logo" src={logo} alt={publisherName} /> : null}
-      <h6 className="publisher-name" data-cy="publisher-recs-publisher-name">
+      {logo ? <img data-testid="publisher-logo" src={logo} alt={publisherName} /> : null}
+      <h6 className="publisher-name" data-testid="publisher-recs-publisher-name">
         <Trans i18nKey="discover:more-from-publisher">More from {{ publisherName }}</Trans>
       </h6>
     </div>
@@ -84,7 +84,7 @@ const RecommendedArticle = ({
 
   return (
     <VisibilitySensor onVisible={handleVisible}>
-      <li className={recommendedArticleStyles} data-cy="publisher-recs-article">
+      <li className={recommendedArticleStyles} data-testid="publisher-recs-article">
         <a
           onClick={handleClick}
           className="title"
@@ -127,8 +127,8 @@ export const PublisherRecs = ({
   return (
     <div className={publisherWrap}>
       <div>
-        <Publisher {...publisher} data-cy="publisher-header" />
-        <ul className={recommendationsStyles} data-cy="publisher-recommended-articles">
+        <Publisher {...publisher} data-testid="publisher-header" />
+        <ul className={recommendationsStyles} data-testid="publisher-recommended-articles">
           {recsToDisplay.map(({ corpusItem, corpusRecommendationId }, index) => (
             <RecommendedArticle
               key={corpusItem?.id}
@@ -174,4 +174,3 @@ PublisherRecs.propTypes = {
    */
   handleRecClick: PropTypes.func
 }
-

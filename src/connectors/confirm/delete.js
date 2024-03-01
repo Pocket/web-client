@@ -32,7 +32,7 @@ export const ConfirmDelete = () => {
         <button
           className="primary"
           type="submit"
-          data-cy="delete-confirm"
+          data-testid="delete-confirm"
           onClick={confirmDelete}
           autoFocus={true}>
           <Trans i18nKey="confirm:delete">Delete</Trans>

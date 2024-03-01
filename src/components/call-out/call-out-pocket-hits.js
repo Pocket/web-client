@@ -232,7 +232,7 @@ const CallOutPocketHitsSignup = ({
 
   return shouldHide ? null : (
     <VisibilitySensor onVisible={handleVisible}>
-      <div className={`${wrapper} brandingMessage`} data-cy="pocket-hits-module">
+      <div className={`${wrapper} brandingMessage`} data-testid="pocket-hits-module">
         <div className="brandBlock">
           <aside>{t('call-out:fuel-your-mind', 'Get ready to fuel your mind.')}</aside>
           <blockquote>

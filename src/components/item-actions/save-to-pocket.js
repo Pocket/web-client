@@ -91,10 +91,10 @@ export const SavePopover = function ({ popoverRef, id }) {
   const signupUrl = `${SIGNUP_URL}?src=web-save&utm_source=${global.location.href}&route=${global.location.href}`
   return (
     //prettier-ignore
-    <div className={popoverContainer} ref={popoverRef} data-cy={`article-save-login-popup-${id}`}>
+    <div className={popoverContainer} ref={popoverRef} data-testid={`article-save-login-popup-${id}`}>
       <Trans i18nKey="item-action:no-auth-save">
-        <a className="popoverLink" href={loginUrl} data-cy="save-login">Log in</a> or{' '}
-        <a className="popoverLink" href={signupUrl} data-cy="save-signup">Sign up</a> to save this article.
+        <a className="popoverLink" href={loginUrl} data-testid="save-login">Log in</a> or{' '}
+        <a className="popoverLink" href={signupUrl} data-testid="save-signup">Sign up</a> to save this article.
       </Trans>
     </div>
   )
@@ -158,7 +158,7 @@ export const SaveToPocket = function ({
   return saveStatus === 'saved' && allowRead ? (
     <Link
       href={url}
-      data-cy={`article-read-now-${id}`}
+      data-testid={`article-read-now-${id}`}
       onClick={onOpen}
       className={saveClasses}
       target={openExternal ? '_blank' : undefined}>
@@ -173,7 +173,7 @@ export const SaveToPocket = function ({
         className={saveClasses}
         onClick={handleClick}
         ref={popTrigger}
-        data-cy={`article-save-btn-${id}`}>
+        data-testid={`article-save-btn-${id}`}>
         {saveStatus === 'saved' ? <SaveFilledIcon /> : <SaveIcon />}
         {hideCopy ? null : <div className="actionCopy">{saveCopy[saveStatus]}</div>}
       </button>

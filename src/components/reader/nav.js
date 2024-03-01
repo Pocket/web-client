@@ -193,14 +193,14 @@ export const ReaderNav = ({
     ? t('nav:back-to-home', 'Back to Home')
     : t('nav:back-to-saves', 'Back to Saves')
   return (
-    <header className={headerStyle} data-cy="reader-nav">
+    <header className={headerStyle} data-testid="reader-nav">
       <div className="global-nav-container">
         <nav className={navStyle}>
           <button
             onClick={clickGoBack}
             aria-label={returnCopy}
             data-tooltip={returnCopy}
-            data-cy="reader-nav-go-back"
+            data-testid="reader-nav-go-back"
             className={cx(buttonClass, rightTooltip, 'go-back')}>
             {getStarted ? (
               <>
@@ -225,7 +225,7 @@ export const ReaderNav = ({
                   ? t('nav:close-highlights-menu', 'Close Highlights Menu')
                   : t('nav:open-highlights-menu', 'Open Highlights Menu')
               }
-              data-cy="reader-nav-highlights"
+              data-testid="reader-nav-highlights"
               className={cx(buttonClass, bottomTooltip)}>
               <HighlightIcon />
             </button>
@@ -234,7 +234,7 @@ export const ReaderNav = ({
               onClick={toggleTagging}
               aria-label={t('nav:tag-article', 'Tag Article')}
               data-tooltip={t('nav:tag-article', 'Tag Article')}
-              data-cy="reader-nav-tag"
+              data-testid="reader-nav-tag"
               className={cx(buttonClass, bottomTooltip)}>
               <TagIcon />
             </button>
@@ -251,7 +251,7 @@ export const ReaderNav = ({
                   ? t('nav:remove-from-favorites', 'Remove from Favorites')
                   : t('nav:favorite-article', 'Favorite Article')
               }
-              data-cy="reader-nav-favorite"
+              data-testid="reader-nav-favorite"
               className={cx(buttonClass, bottomTooltip, favorite && 'favorite')}>
               {favorite ? <FavoriteFilledIcon /> : <FavoriteIcon />}
             </button>
@@ -268,7 +268,7 @@ export const ReaderNav = ({
                   ? t('nav:re-add-to-saves', 'Re-add to Saves')
                   : t('nav:archive-article', 'Archive Article')
               }
-              data-cy="reader-nav-archive"
+              data-testid="reader-nav-archive"
               className={cx(buttonClass, bottomTooltip)}>
               {archive ? <AddCircledIcon /> : <ArchiveIcon />}
             </button>
@@ -277,7 +277,7 @@ export const ReaderNav = ({
               onClick={toggleDelete}
               aria-label={t('nav:delete-from-saves', 'Delete from Saves')}
               data-tooltip={t('nav:delete-from-saves', 'Delete from Saves')}
-              data-cy="reader-nav-delete"
+              data-testid="reader-nav-delete"
               className={cx(buttonClass, bottomTooltip)}>
               <DeleteIcon />
             </button>
@@ -286,7 +286,7 @@ export const ReaderNav = ({
               onClick={toggleShare}
               aria-label={t('nav:share-article', 'Share Article')}
               data-tooltip={t('nav:share-article', 'Share Article')}
-              data-cy="reader-nav-share"
+              data-testid="reader-nav-share"
               className={cx(buttonClass, bottomTooltip)}>
               <IosShareIcon />
             </button>

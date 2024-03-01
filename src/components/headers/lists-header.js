@@ -191,7 +191,7 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
 
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles)}>
-      <h1 className="pageTitle" data-cy="page-title">
+      <h1 className="pageTitle" data-testid="page-title">
         {t('list:all-lists', 'All Lists')}
       </h1>
 
@@ -234,7 +234,7 @@ export const ListIndividualHeader = ({
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles, 'list-individual')}>
       <div className="headline">
-        <h1 className="pageTitle" data-cy="page-title">
+        <h1 className="pageTitle" data-testid="page-title">
           {title}
         </h1>
         <p className="description">{description}</p>
@@ -275,7 +275,7 @@ export const ListSortHeader = ({ title, description, handleSave, handleCancel })
   return (
     <header className={cx(savesHeaderStyle, listHeaderStyles, 'list-individual')}>
       <div className="headline">
-        <h1 className="pageTitle" data-cy="page-title">
+        <h1 className="pageTitle" data-testid="page-title">
           {title}
         </h1>
         <p className="description">{description}</p>

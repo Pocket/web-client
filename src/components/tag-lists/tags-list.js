@@ -40,7 +40,7 @@ export function TagList({ userTags, value, valueChange }) {
           value={value}
           onChange={valueChange}
           type="text"
-          data-cy="all-tags-input"
+          data-testid="all-tags-input"
           placeholder={t('tags:search-for-your-tags', 'Search for your tags')}
         />
       </div>
@@ -48,7 +48,7 @@ export function TagList({ userTags, value, valueChange }) {
         <ul className="list">
           {'un-tagged'.includes(value) ? (
             <li>
-              <Link href={'/saves/tags/_untagged_'} data-cy="all-tags-not-tagged">
+              <Link href={'/saves/tags/_untagged_'} data-testid="all-tags-not-tagged">
                 <Pill>
                   <Trans i18nKey="tags:not-tagged">not tagged</Trans>
                 </Pill>
@@ -59,7 +59,9 @@ export function TagList({ userTags, value, valueChange }) {
             <>
               {sortedTags.map((tag) => (
                 <li key={tag}>
-                  <Link href={`/saves/tags/${encodeURIComponent(tag)}`} data-cy={`all-tags-${tag}`}>
+                  <Link
+                    href={`/saves/tags/${encodeURIComponent(tag)}`}
+                    data-testid={`all-tags-${tag}`}>
                     <Pill>{tag}</Pill>
                   </Link>
                 </li>
@@ -68,7 +70,9 @@ export function TagList({ userTags, value, valueChange }) {
           ) : (
             orderedTags.map((tag) => (
               <li key={tag}>
-                <Link href={`/saves/tags/${encodeURIComponent(tag)}`} data-cy={`all-tags-${tag}`}>
+                <Link
+                  href={`/saves/tags/${encodeURIComponent(tag)}`}
+                  data-testid={`all-tags-${tag}`}>
                   <Pill>{tag}</Pill>
                 </Link>
               </li>

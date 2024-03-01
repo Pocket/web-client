@@ -63,7 +63,7 @@ function FollowPublisher({ leadIn, text, url, handleImpression, handleClick }) {
 
   return (
     <VisibilitySensor onVisible={onVisible}>
-      <div className="publisher-follow" data-cy="follow-publisher">
+      <div className="publisher-follow" data-testid="follow-publisher">
         <p>{leadIn}</p>
         <a
           className="button secondary"
@@ -84,7 +84,9 @@ function PublisherInfo({ logoWide, publishedAt, name }) {
   return name ? (
     <>
       <hr />
-      {logoWide ? <img src={logoWide} data-cy="publisher-img" alt={`Logo for ${name}`} /> : null}
+      {logoWide ? (
+        <img src={logoWide} data-testid="publisher-img" alt={`Logo for ${name}`} />
+      ) : null}
       <p>
         <Trans i18nKey="discover:publisher-attribution">
           This post originally appeared on {{ name }} and was published {{ publishedDate }}. This

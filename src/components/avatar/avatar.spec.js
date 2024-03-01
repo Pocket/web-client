@@ -1,4 +1,4 @@
-import { render } from 'test-utils'
+import { render } from '@config/jest'
 import '@testing-library/jest-dom'
 
 import Avatar from './avatar'
@@ -20,8 +20,8 @@ describe('Avatar', () => {
   })
 
   it('Renders a default icon if props.src isn’t provided', () => {
-    const { queryByCy } = render(<Avatar {...baseProps} />)
-    expect(queryByCy('avatar-default-')).toBeInTheDocument()
+    const { queryByTestId } = render(<Avatar {...baseProps} />)
+    expect(queryByTestId('avatar-default-')).toBeInTheDocument()
   })
 
   it('Renders an image tag with src if props.src is provided', () => {

@@ -131,7 +131,7 @@ export const AnnotationMenu = ({
       <div className={relativeWrapper}>
         <button
           aria-label={t('annotations:open-highlights-menu', 'Open Highlights Menu')}
-          data-cy={`highlight-menu-${id}`}
+          data-testid={`highlight-menu-${id}`}
           ref={selfRef}
           onClick={toggleMenu}
           className={cx(
@@ -155,13 +155,13 @@ export const AnnotationMenu = ({
             <PopupMenuGroup>
               <PopupMenuItem
                 onClick={handleDelete}
-                data-cy={`highlight-delete-${id}`}
+                data-testid={`highlight-delete-${id}`}
                 icon={<DeleteIcon />}>
                 <Trans i18nKey="delete">Delete</Trans>
               </PopupMenuItem>
               <PopupMenuItem
                 onClick={handleShare}
-                data-cy={`highlight-share-${id}`}
+                data-testid={`highlight-share-${id}`}
                 icon={<IosShareIcon />}>
                 <Trans i18nKey="share">Share</Trans>
               </PopupMenuItem>

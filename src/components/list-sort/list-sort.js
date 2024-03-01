@@ -90,7 +90,7 @@ export const ListSort = ({
         ref={sortOptionsRef}
         className={cx(buttonReset, sortStyles)}
         onClick={handleOpen}
-        data-cy="sort-options"
+        data-testid="sort-options"
         onKeyPress={updateFocus}>
         {sortIcon[sortOrder]}
       </button>
@@ -110,17 +110,17 @@ export const ListSort = ({
             }
           ]
         }}>
-        <PopupMenuItem data-cy="sort-oldest" onClick={handleOldest} disabled={sortAscDisabled}>
+        <PopupMenuItem data-testid="sort-oldest" onClick={handleOldest} disabled={sortAscDisabled}>
           <SortByOldestIcon />
           {t('settings:sort-oldest', 'Oldest first')}
         </PopupMenuItem>
-        <PopupMenuItem data-cy="sort-newest" onClick={handleNewest} disabled={sortDescDisabled}>
+        <PopupMenuItem data-testid="sort-newest" onClick={handleNewest} disabled={sortDescDisabled}>
           <SortByNewestIcon />
           {t('settings:sort-newest', 'Newest first')}
         </PopupMenuItem>
         {showRelevance ? (
           <PopupMenuItem
-            data-cy="sort-relevance"
+            data-testid="sort-relevance"
             onClick={handleRelevance}
             disabled={relevanceDisabled}>
             <RelevanceIcon />

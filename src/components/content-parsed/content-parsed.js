@@ -406,7 +406,7 @@ const articleWrapper = css`
 export function ContentParsed({ content }) {
   return (
     <article className={articleWrapper}>
-      <div className={resetWrapper} data-cy="parsed-content">
+      <div className={resetWrapper} data-testid="parsed-content">
         <section className={contentWrapper} dangerouslySetInnerHTML={{ __html: content }} />
       </div>
     </article>

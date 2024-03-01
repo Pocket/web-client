@@ -68,7 +68,7 @@ export function Toast({ isError, message, undoString, type, show, remove, showUn
   return (
     <Fade show={show} remove={remove}>
       <div className={toastWrapper}>
-        <div className={cx('toastBlock', `${type}`, `${status}`)} data-cy={message}>
+        <div className={cx('toastBlock', `${type}`, `${status}`)} data-testid={message}>
           <p>{message}</p>
           <div className="actionWrapper">
             {showUndo ? (

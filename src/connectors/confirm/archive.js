@@ -45,7 +45,7 @@ export const ConfirmArchive = () => {
         <button
           className="primary"
           type="submit"
-          data-cy="archive-modal-confirm"
+          data-testid="archive-modal-confirm"
           onClick={confirmArchive}
           autoFocus={true}>
           {archiveTitle}

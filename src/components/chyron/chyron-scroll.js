@@ -35,7 +35,7 @@ const ScrollChyron = ({ threshold = 400, shouldHide = false, instanceId, childre
 
   const chyronClassName = cx(scrollChyronStyles, isVisible && 'isVisible')
   return shouldHide ? null : (
-    <div className={chyronClassName} data-cy="scroll-chyron-wrapper">
+    <div className={chyronClassName} data-testid="scroll-chyron-wrapper">
       <Chyron instanceId={instanceId}>{children}</Chyron>
     </div>
   )

@@ -100,7 +100,7 @@ export function FilterMenu({ subset, filter, tag, query }) {
     <div className={cx(filterStyle, 'filter-wrapper')}>
       <button
         ref={popTrigger}
-        data-cy="filter-trigger"
+        data-testid="filter-trigger"
         className={cx(buttonReset, 'filter-trigger')}>
         {activeTitle}
         <ChevronDownIcon style={{ marginTop: 0, paddingLeft: '3px' }} />
@@ -109,21 +109,21 @@ export function FilterMenu({ subset, filter, tag, query }) {
         <div className="filter-menu" ref={popBody}>
           <div>
             <Link href={`/saves/${path}${searchQuery}`} legacyBehavior>
-              <button className={filterActive()} data-cy="filter-all-items">
+              <button className={filterActive()} data-testid="filter-all-items">
                 <Trans i18nKey="nav:all-items">All items</Trans>
               </button>
             </Link>
           </div>
           <div>
             <Link href={`/saves/${path}/unread${searchQuery}`} legacyBehavior>
-              <button className={filterActive('unread')} data-cy="filter-saves">
+              <button className={filterActive('unread')} data-testid="filter-saves">
                 <Trans i18nKey="nav:saves">Saves</Trans>
               </button>
             </Link>
           </div>
           <div>
             <Link href={`/saves/${path}/archive${searchQuery}`} legacyBehavior>
-              <button className={filterActive('archive')} data-cy="filter-archive">
+              <button className={filterActive('archive')} data-testid="filter-archive">
                 <Trans i18nKey="nav:archive">Archive</Trans>
               </button>
             </Link>
@@ -131,7 +131,7 @@ export function FilterMenu({ subset, filter, tag, query }) {
           {path === 'favorites' || subset === 'search' ? null : (
             <div>
               <Link href={`/saves/${path}/favorites`} legacyBehavior>
-                <button className={filterActive('favorites')} data-cy="filter-favorites">
+                <button className={filterActive('favorites')} data-testid="filter-favorites">
                   <Trans i18nKey="nav:favorites">Favorites</Trans>
                 </button>
               </Link>

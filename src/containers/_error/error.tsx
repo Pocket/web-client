@@ -76,7 +76,7 @@ function NotFoundError() {
     <div className="content">
       <h1>{t('error:404-title', 'Oops! Something’s gone awry...')}</h1>
       <cite suppressHydrationWarning>{t('error:404-detail', `'${url}' cannot be found.`)}</cite>
-      <p data-cy="error-message">
+      <p data-testid="error-message">
         {t(
           'error:404-message',
           `Looks like the page you are trying to reach has gone missing. Please contact our support team if you feel this is a mistake.`
@@ -98,7 +98,7 @@ function ModeratedListError() {
   return (
     <div className="content">
       <h1>{t('error:title', 'Oops! Something’s gone awry...')}</h1>
-      <p data-cy="error-message">
+      <p data-testid="error-message">
         {t(
           'error:moderated-list-message',
           `This List is not available because it may have violated Pocket’s Shared Content Policies.`
@@ -118,7 +118,7 @@ function MobileNotification() {
       <div>
         <h1>{t('error:notification-title', 'Hmm, looks like something went wrong')}</h1>
         <div>
-          <p data-cy="error-message">
+          <p data-testid="error-message">
             {t(
               'error:notification-message',
               'The link you clicked directs you to your phone’s notification settings, which can only be accessed on a mobile device. Scan the QR code to install Pocket on your phone.'
@@ -139,7 +139,7 @@ function GeneralError() {
   return (
     <div className="content">
       <h1>{t('error:title', 'Oops! Something’s gone awry...')}</h1>
-      <p data-cy="error-message">
+      <p data-testid="error-message">
         {t(
           'error:message',
           `There’s been an error. Try refreshing your page and see if that fixes things. If you’re still seeing the issue, please contact our support team.`
@@ -160,7 +160,7 @@ function UserNotification({ birth, accountCreationDate }) {
   return (
     <div className="content">
       <h1>Welcome to the trailhead</h1>
-      <p data-cy="error-message">
+      <p data-testid="error-message">
         Your account was created on {birth} ... or was it {accountCreationDate}
       </p>
     </div>
@@ -174,7 +174,7 @@ function ImpossibleError() {
   return (
     <div className="content">
       <h1>How did you...</h1>
-      <p data-cy="error-message">
+      <p data-testid="error-message">
         This is an internal error ... we must have taken a wrong turn somewhere ...
       </p>
     </div>

@@ -236,7 +236,7 @@ const GlobalNavAccount = ({
         id="global-nav-login-link"
         className={`${accountLinkStyle} login-link`}
         onClick={onLoginClick}
-        data-cy="login-link">
+        data-testid="login-link">
         <Trans i18nKey="nav:log-in">Log in</Trans>
       </a>
       <a
@@ -244,7 +244,7 @@ const GlobalNavAccount = ({
         id="global-nav-signup-link"
         className={cx(signupLinkStyle, 'button secondary')}
         onClick={handleSignupCase}
-        data-cy="signup-link">
+        data-testid="signup-link">
         <ProfileIcon />
         <span className="label">
           <Trans i18nKey="nav:sign-up">Sign up</Trans>
@@ -260,7 +260,7 @@ const GlobalNavAccount = ({
             id="global-nav.upgrade-link"
             className={`${accountLinkStyle} ${upgradeLinkStyle}`}
             onClick={handlePremiumCase}
-            data-cy="upgrade-link">
+            data-testid="upgrade-link">
             <PremiumIcon />
             <span className="label">
               <Trans i18nKey="nav:upgrade">Upgrade</Trans>
@@ -276,11 +276,11 @@ const GlobalNavAccount = ({
           size="40px"
           label={null}
           className={avatarStyle}
-          data-cy="account-menu-avatar"
+          data-testid="account-menu-avatar"
           onClick={handleOpen}
           onKeyPress={updateFocus}
         />
-        {showNotification ? <FloatingNotification data-cy="notification-avatar" /> : null}
+        {showNotification ? <FloatingNotification data-testid="notification-avatar" /> : null}
       </div>
       <PopupMenu
         trigger={accountMenuTriggerRef}
@@ -300,7 +300,7 @@ const GlobalNavAccount = ({
             }
           ]
         }}
-        data-cy="account-menu">
+        data-testid="account-menu">
         <PopupMenuGroup>
           <PopupMenuItem
             external={true}
@@ -308,7 +308,7 @@ const GlobalNavAccount = ({
             helperText={t('nav:view-profile', 'View Profile')}
             id="account-menu-profile-link"
             onClick={handleViewProfileCase}
-            data-cy="account-menu-profile-link">
+            data-testid="account-menu-profile-link">
             {accountName}
           </PopupMenuItem>
         </PopupMenuGroup>
@@ -317,7 +317,7 @@ const GlobalNavAccount = ({
             href="/account?src=navbar"
             id="account-menu-manage-account-link"
             onClick={handleManageAccountCase}
-            data-cy="account-menu-manage-account-link">
+            data-testid="account-menu-manage-account-link">
             <Trans i18nKey="nav:manage-profile">Manage profile</Trans>
           </PopupMenuItem>
           {isFxa ? (
@@ -325,7 +325,7 @@ const GlobalNavAccount = ({
               href="https://accounts.firefox.com/"
               id="account-menu-manage-fxa-link"
               className="label-wide"
-              data-cy="account-menu-manage-fxa-link">
+              data-testid="account-menu-manage-fxa-link">
               <div className="manage-account">
                 <div>
                   {accountEmail ? `${accountEmail}` : null}
@@ -341,7 +341,7 @@ const GlobalNavAccount = ({
             href="https://help.getpocket.com/category/847-category?src=navbar"
             id="account-menu-help-link"
             onClick={handleHelpCase}
-            data-cy="account-menu-help-link">
+            data-testid="account-menu-help-link">
             <Trans i18nKey="nav:get-help">Get help</Trans>
           </PopupMenuItem>
         </PopupMenuGroup>
@@ -351,7 +351,7 @@ const GlobalNavAccount = ({
             href="https://getpocket.com/lo?src=navbar"
             id="account-menu-logout-link"
             onClick={handleLogoutCase}
-            data-cy="account-menu-logout-link">
+            data-testid="account-menu-logout-link">
             <Trans i18nKey="nav:log-out">Log out</Trans>
           </PopupMenuItem>
         </PopupMenuGroup>

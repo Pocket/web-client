@@ -171,7 +171,7 @@ const DrawerHeader = ({ handleClose }) => {
     <div className={drawerHeaderStyles}>
       <button
         aria-label={t('nav:close-the-pocket-mobile-menu', 'Close the Pocket mobile menu')}
-        data-cy="mobile-menu"
+        data-testid="mobile-menu"
         data-tooltip={t('nav:close', 'Close')}
         onClick={handleClose}
         className={cx(iconStyle, bottomTooltip, 'inline')}>
@@ -223,7 +223,7 @@ export const Menu = ({
     {isUserLoggedIn && !isUserPremium ? (
       <>
         <hr className="nav-divider" />
-        <span className="subhead" data-cy="premium-nudge-section">
+        <span className="subhead" data-testid="premium-nudge-section">
           <Trans i18nKey="nav:try-premium">Try Premium</Trans>
         </span>
         {premiumLinks.map((premiumLink) => {
@@ -279,7 +279,7 @@ const GlobalNavMobileMenu = ({
   return (
     <>
       <button
-        data-cy="nav-hamburger"
+        data-testid="nav-hamburger"
         onClick={handleOpen}
         aria-label={t('nav:open-the-pocket-mobile-menu', 'Open the Pocket mobile menu')}
         data-tooltip={t('nav:open', 'Open')}

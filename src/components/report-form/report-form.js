@@ -52,7 +52,7 @@ export function ReportForm({
             name="reason"
             value={id}
             id={id}
-            data-cy={id}
+            data-testid={id}
             onChange={handleRadioChange}
             checked={currentReason === id}
           />
@@ -86,4 +86,3 @@ ReportForm.propTypes = {
   handleRadioChange: PropTypes.func,
   handleTextAreaChange: PropTypes.func
 }
-

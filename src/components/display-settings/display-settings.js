@@ -180,7 +180,7 @@ export const DisplaySettings = ({
       <button
         aria-label={t('settings:open-display-settings', 'Open Display Settings')}
         data-tooltip={t('settings:open-display-settings', 'Open Display Settings')}
-        data-cy="reader-nav-display-settings"
+        data-testid="reader-nav-display-settings"
         className={cx(buttonReset, buttonStyles, leftTooltip, mobileStyles)}
         ref={displayButtonRef}
         onClick={handleOpen}
@@ -210,14 +210,14 @@ export const DisplaySettings = ({
         <PopupMenuGroup>
           {displayFonts ? (
             <PopupMenuItem
-              data-cy="display-font-back"
+              data-testid="display-font-back"
               onClick={toggleDisplayFonts}
               icon={<ChevronLeftIcon />}>
               <Trans i18nKey="settings:font-options">Font Options</Trans>
             </PopupMenuItem>
           ) : (
             <PopupMenuItem
-              data-cy="display-select-font"
+              data-testid="display-select-font"
               className={fontFamilyButton}
               onClick={toggleDisplayFonts}>
               {FONT_TYPES[fontFamily].name}
@@ -264,7 +264,7 @@ export const DisplaySettings = ({
                 <PopupMenuGroup>
                   <PopupMenuItem
                     id="reader.display-settings"
-                    data-cy="display-premium-unlock"
+                    data-testid="display-premium-unlock"
                     href={`${PREMIUM_URL}&utm_campaign=reader-display-settings`}
                     target="_premium"
                     icon={<PremiumIcon />}>

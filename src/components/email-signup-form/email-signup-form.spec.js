@@ -1,4 +1,4 @@
-import { render, fireEvent, mockGrecaptcha } from 'test-utils'
+import { render, fireEvent, mockGrecaptcha } from '@config/jest'
 import '@testing-library/jest-dom'
 
 import EmailSignupForm, { PROCESSING_MESSAGE, INVALID_EMAIL_ERROR } from './email-signup-form'
@@ -34,8 +34,8 @@ describe('EmailSignupForm', () => {
   })
 
   it('uses the button variant passed as a prop', () => {
-    const { queryByCy } = render(<EmailSignupForm {...baseProps} buttonVariant="emphasized" />)
-    expect(queryByCy('submit-button')).toHaveClass('emphasized')
+    const { queryByTestId } = render(<EmailSignupForm {...baseProps} buttonVariant="emphasized" />)
+    expect(queryByTestId('submit-button')).toHaveClass('emphasized')
   })
 
   it('renders a disabled/processing state if props.isProcessing is true', () => {
@@ -46,11 +46,11 @@ describe('EmailSignupForm', () => {
 
   it('handles invalid emails gracefully', () => {
     const onValidationError = jest.fn()
-    const { queryByText, getByCy, getByText, getByRole } = render(
+    const { queryByText, getByTestId, getByText, getByRole } = render(
       <EmailSignupForm {...baseProps} onValidationError={onValidationError} />
     )
 
-    const submitButton = getByCy('submit-button')
+    const submitButton = getByTestId('submit-button')
     const emailInput = getByRole('textbox')
     fireEvent.change(emailInput, { target: { value: 'cheesemail' } })
     fireEvent.click(submitButton)
@@ -96,11 +96,11 @@ describe('EmailSignupForm', () => {
   it('calls props.onValidSubmit, passing the instanceId and recaptcha response, when the user successfully completes the recaptcha', () => {
     mockGrecaptcha({ forceCallbackType: 'success', token: 'cheese-response-token' })
     const onValidSubmit = jest.fn()
-    const { getByCy, getByRole } = render(
+    const { getByTestId, getByRole } = render(
       <EmailSignupForm {...baseProps} onValidSubmit={onValidSubmit} />
     )
 
-    const submitButton = getByCy('submit-button')
+    const submitButton = getByTestId('submit-button')
     const emailInput = getByRole('textbox')
 
     fireEvent.change(emailInput, { target: { value: 'gouda@cheese.com' } })

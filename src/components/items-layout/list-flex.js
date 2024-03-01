@@ -50,7 +50,7 @@ export function FlexList({
   )
 
   return (
-    <div className={listClass} data-cy={dataCy}>
+    <div className={listClass} data-testid={dataCy}>
       {items.slice(start, end).map((id, index) => (
         <ItemCard
           id={id}

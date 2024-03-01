@@ -133,7 +133,7 @@ const CloseButton = ({ onClick }) => {
   const { t } = useTranslation()
 
   return (
-    <button className={`${buttonStyle} cancel-button`} onClick={onClick} data-cy="bulk-close">
+    <button className={`${buttonStyle} cancel-button`} onClick={onClick} data-testid="bulk-close">
       <CrossIcon className={navIconStyle} />
       <CloseLabel>{t('nav:cancel', 'Cancel')}</CloseLabel>
     </button>
@@ -180,7 +180,7 @@ function GlobalNavBulkEdit({
             <button
               aria-label={t('nav:tag', 'Tag')}
               data-tooltip={t('nav:tag', 'Tag')}
-              data-cy="bulk-tag"
+              data-testid="bulk-tag"
               className={cx(buttonStyle, bottomTooltip)}
               onClick={tagAction}>
               <TagIcon className={bulkIconActions} />
@@ -193,7 +193,7 @@ function GlobalNavBulkEdit({
               data-tooltip={
                 shouldFavorite ? t('nav:favorite', 'Favorite') : t('nav:unfavorite', 'Unfavorite')
               }
-              data-cy="bulk-favorite"
+              data-testid="bulk-favorite"
               className={cx(buttonStyle, bottomTooltip)}
               onClick={favoriteAction}>
               {shouldFavorite ? (
@@ -210,7 +210,7 @@ function GlobalNavBulkEdit({
               data-tooltip={
                 shouldArchive ? t('nav:archive-tooltip', 'Archive') : t('nav:add-tooltip', 'Add')
               }
-              data-cy="bulk-archive"
+              data-testid="bulk-archive"
               className={cx(buttonStyle, bottomTooltip)}
               onClick={archiveAction}>
               {shouldArchive ? (
@@ -223,7 +223,7 @@ function GlobalNavBulkEdit({
             <button
               aria-label={t('nav:delete', 'Delete')}
               data-tooltip={t('nav:delete', 'Delete')}
-              data-cy="bulk-delete"
+              data-testid="bulk-delete"
               className={cx(buttonStyle, bottomTooltip)}
               onClick={deleteAction}>
               <DeleteIcon className={bulkIconActions} />
@@ -232,7 +232,7 @@ function GlobalNavBulkEdit({
             <button
               aria-label={t('list:add-items-to-a-list', 'Add items to a List')}
               data-tooltip={t('list:add-items-to-a-list', 'Add items to a List')}
-              data-cy="bulk-add-to-list-mobile"
+              data-testid="bulk-add-to-list-mobile"
               className={cx(buttonStyle, bottomTooltip, mobileOnly)}
               onClick={addToListAction}>
               <ListAddIcon className={bulkIconActions} />
@@ -240,7 +240,7 @@ function GlobalNavBulkEdit({
 
             <button
               aria-label={t('list:add-items-to-a-list', 'Add items to a List')}
-              data-cy="bulk-add-to-list"
+              data-testid="bulk-add-to-list"
               className={cx(fullButtonStyle, desktopOnly)}
               onClick={addToListAction}>
               <ListAddIcon /> {t('nav:add-to-list', 'Add to List')}
@@ -253,10 +253,10 @@ function GlobalNavBulkEdit({
             </div>
           </div>
         </div>
-        <button className="bulk-cancel secondary" onClick={clearAction} data-cy="clear-button">
+        <button className="bulk-cancel secondary" onClick={clearAction} data-testid="clear-button">
           {clearCopy}
         </button>
-        {onClose ? <CloseButton onClick={onClose} data-cy="add-close" /> : null}
+        {onClose ? <CloseButton onClick={onClose} data-testid="add-close" /> : null}
       </div>
     </div>
   )

@@ -134,7 +134,7 @@ const closeButtonStyle = css`
 
 const CloseButton = ({ onClick }) => {
   return (
-    <button className={closeButtonStyle} onClick={onClick} data-cy="add-cancel">
+    <button className={closeButtonStyle} onClick={onClick} data-testid="add-cancel">
       <CrossIcon className={closeIconStyle} />
       <CloseLabel>
         <Trans i18nKey="nav:cancel">Cancel</Trans>
@@ -225,7 +225,7 @@ const GlobalNavAdd = ({
           onBlur={onBlur}
           onKeyUp={handleKeyUp}
           placeholder={isMobile ? t(mobilePlaceholder) : t(placeholder)}
-          data-cy="add-input"
+          data-testid="add-input"
           enterKeyHint="send"
         />
         {inputError ? (
@@ -236,11 +236,11 @@ const GlobalNavAdd = ({
           </div>
         ) : null}
       </div>
-      <button className="add-button" onClick={handleSubmit} data-cy="add-submit">
+      <button className="add-button" onClick={handleSubmit} data-testid="add-submit">
         <Trans i18nKey="nav:add">Add</Trans>
       </button>
       <input type="submit" className="mobile-submit" />
-      {onClose ? <CloseButton onClick={onClose} data-cy="add-close" /> : null}
+      {onClose ? <CloseButton onClick={onClose} data-testid="add-close" /> : null}
     </form>
   )
 }

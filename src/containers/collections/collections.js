@@ -65,7 +65,7 @@ export default function Collections({ locale, noIndex, totalResults, perPage, cu
         ) : null}
 
         <header>
-          <h1 className="pageTitle" data-cy="page-title">
+          <h1 className="pageTitle" data-testid="page-title">
             {title}
           </h1>
           <h2>

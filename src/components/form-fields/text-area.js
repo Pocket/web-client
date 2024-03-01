@@ -51,7 +51,7 @@ export const TextArea = ({
       onFocus={onFocus}
       onBlur={onBlur}
       maxLength={characterLimit}
-      data-cy="textarea-input"
+      data-testid="textarea-input"
     />
   </InputWrapper>
 )

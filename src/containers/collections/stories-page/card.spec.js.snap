@@ -3,7 +3,7 @@
 exports[`ItemCard renders a story 1`] = `
 <article
   class="css-17xj56a grid noExcerpt"
-  data-cy="article-card-1731163180"
+  data-testid="article-card-1731163180"
 >
   <div
     class="selectedBack"
@@ -15,7 +15,7 @@ exports[`ItemCard renders a story 1`] = `
       class="css-1v4yrya media"
     >
       <a
-        data-cy="image-link"
+        data-testid="image-link"
         href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_collection_story"
         rel="noopener noreferrer"
         tabindex="-1"
@@ -29,7 +29,7 @@ exports[`ItemCard renders a story 1`] = `
         />
         <span
           class="view-original"
-          data-cy="view-original"
+          data-testid="view-original"
         >
           <span
             class="view-original-text"
@@ -67,7 +67,7 @@ exports[`ItemCard renders a story 1`] = `
         class="title open-external"
       >
         <a
-          data-cy="title-link"
+          data-testid="title-link"
           href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_collection_story"
           rel="noopener noreferrer"
           tabindex="0"
@@ -77,7 +77,7 @@ exports[`ItemCard renders a story 1`] = `
         </a>
         <span
           class="css-1bptydr icon mobile-view-original"
-          data-cy="view-original-icon"
+          data-testid="view-original-icon"
         >
           <svg
             aria-hidden="true"
@@ -110,7 +110,7 @@ exports[`ItemCard renders a story 1`] = `
         </div>
         <a
           class="publisher"
-          data-cy="publisher-link"
+          data-testid="publisher-link"
           href="https://www.nytimes.com/2017/05/06/business/inside-vws-campaign-of-trickery.html?utm_source=pocket_collection_story"
           rel="noopener noreferrer"
           tabindex="0"
@@ -129,7 +129,7 @@ exports[`ItemCard renders a story 1`] = `
     >
       <button
         class="unsaved card-actions forceWidth css-1sh3voc"
-        data-cy="article-save-btn-1731163180"
+        data-testid="article-save-btn-1731163180"
       >
         <span
           class="css-1bptydr icon"

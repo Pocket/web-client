@@ -87,7 +87,7 @@ function StaticSlate({ slateId, firstSlate, Card }) {
   const testId = headline.toLowerCase().replaceAll(' ', '-')
 
   return (
-    <SectionWrapper className="homeSection" data-cy={`home-section-${testId}`}>
+    <SectionWrapper className="homeSection" data-testid={`home-section-${testId}`}>
       <HomeHeader
         headline={headline}
         subheadline={subheadline}
@@ -159,7 +159,7 @@ function SlideSlate({ slateId }) {
 
   return (
     <>
-      <SectionWrapper className="homeSection slideSection" data-cy={`home-section-${testId}`}>
+      <SectionWrapper className="homeSection slideSection" data-testid={`home-section-${testId}`}>
         <HomeHeader
           headline={headline}
           subheadline={subheadline}
@@ -168,10 +168,18 @@ function SlideSlate({ slateId }) {
           moreLinkClick={moreLinkClick}
         />
         <div className={cx('controls', hideSlide && 'no-slide')}>
-          <button className="text" onClick={slideOut} disabled={slideStart} data-cy="carousel-back">
+          <button
+            className="text"
+            onClick={slideOut}
+            disabled={slideStart}
+            data-testid="carousel-back">
             <ChevronLeftIcon />
           </button>
-          <button className="text" onClick={slideIn} disabled={slideEnd} data-cy="carousel-forward">
+          <button
+            className="text"
+            onClick={slideIn}
+            disabled={slideEnd}
+            data-testid="carousel-forward">
             <ChevronRightIcon />
           </button>
         </div>
@@ -196,7 +204,7 @@ function ExploreMoreTopics() {
   const onTopicClick = (topic) => dispatch(sendSnowplowEvent('home.topic.click', { label: topic }))
 
   return (
-    <SectionWrapper className="homeSection" data-cy="topic-selector">
+    <SectionWrapper className="homeSection" data-testid="topic-selector">
       <TopicsPillbox
         omitPromoted={true}
         id={'page-topics'}

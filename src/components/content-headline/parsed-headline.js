@@ -34,7 +34,7 @@ const Description = css`
 export function ParsedHeadline({ title, description, useMarkdown }) {
   return (
     <>
-      <h1 className={Headline} data-cy="parsed-headline">
+      <h1 className={Headline} data-testid="parsed-headline">
         {title}
       </h1>
       <h2 className={Description}>

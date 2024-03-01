@@ -124,11 +124,11 @@ const GlobalNavAccountLimited = ({
           size="40px"
           label={null}
           className={avatarStyle}
-          data-cy="account-menu-avatar"
+          data-testid="account-menu-avatar"
           onClick={handleOpen}
           onKeyPress={updateFocus}
         />
-        {showNotification ? <FloatingNotification data-cy="notification-avatar" /> : null}
+        {showNotification ? <FloatingNotification data-testid="notification-avatar" /> : null}
       </div>
       <PopupMenu
         trigger={accountMenuTriggerRef}
@@ -148,7 +148,7 @@ const GlobalNavAccountLimited = ({
             }
           ]
         }}
-        data-cy="account-menu">
+        data-testid="account-menu">
         <PopupMenuGroup>
           <div className={staticMenu}>
             <div>{accountName}</div>
@@ -160,7 +160,7 @@ const GlobalNavAccountLimited = ({
             href="https://help.getpocket.com/category/847-category?src=navbar"
             id="account-menu-help-link"
             onClick={handleHelpCase}
-            data-cy="account-menu-help-link">
+            data-testid="account-menu-help-link">
             <Trans i18nKey="nav:get-help">Get help</Trans>
           </PopupMenuItem>
         </PopupMenuGroup>
@@ -170,7 +170,7 @@ const GlobalNavAccountLimited = ({
             href="https://getpocket.com/lo?src=navbar"
             id="account-menu-logout-link"
             onClick={handleLogoutCase}
-            data-cy="account-menu-logout-link">
+            data-testid="account-menu-logout-link">
             <Trans i18nKey="nav:log-out">Log out</Trans>
           </PopupMenuItem>
         </PopupMenuGroup>
