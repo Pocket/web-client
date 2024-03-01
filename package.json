@@ -109,6 +109,7 @@
     "@emotion/css": "11.11.2",
     "@emotion/react": "11.11.4",
     "@freestar/pubfig-adslot-react-component": "3.6.1",
+    "@mozilla/glean": "4.0.0",
     "@n8tb1t/use-scroll-position": "2.0.3",
     "@popperjs/core": "2.11.8",
     "@sentry/integrations": "7.103.0",

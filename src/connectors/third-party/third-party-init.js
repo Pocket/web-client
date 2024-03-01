@@ -17,6 +17,8 @@ import { fetchBrazeToken } from 'connectors/third-party/braze.state'
 
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { usePrevious } from 'common/utilities/hooks/has-changed'
+import { initializeGlean } from '../../common/setup/glean'
+import GleanMetrics from '@mozilla/glean/metrics';
 
 /**
  * Initialization file. We are using this because of the way the _app file
@@ -30,6 +32,7 @@ export function ThirdPartyInit() {
 
   const path = router.asPath
   const [analyticsInit, analyticsInitSet] = useState(false)
+  const [gleanInit, gleanInitSet] = useState(false)
 
   const { user_status, user_id, sess_guid } = useSelector((state) => state.user)
   const oneTrustReady = useSelector((state) => state.oneTrust?.trustReady)
@@ -175,6 +178,29 @@ export function ThirdPartyInit() {
       router.events.off('routeChangeComplete', pageview)
     }
   }, [router.events, dispatch])
+
+  // Initialize Glean after OneTrust is ready
+  useEffect(() => {
+    if (gleanInit || !oneTrustReady) return () => {}
+    // if (user_status === 'pending' || !sess_guid) return () => {}
+
+    // Simpler name for now
+    const userAllowedAnalytics = analyticsCookie
+
+    // const finalizeInit = () => dispatch(finalizeSnowplow())
+    initializeGlean(user_id, userAllowedAnalytics)
+
+    // Setting this so we don't get a glut of false positives with shifting
+    // cookie preferences
+    gleanInitSet(true)
+  }, [oneTrustReady, analyticsCookie, dispatch, user_status, sess_guid, user_id, gleanInit])
+
+  // Track Glean Page Views
+  useEffect(() => {
+    if (!gleanInit) return () => {}
+
+    GleanMetrics.pageLoad()
+  }, [user_status, sess_guid, user_id, path, dispatch, gleanInit])
 
   return (
     <>

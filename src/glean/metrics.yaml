@@ -1,0 +1,54 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+# This file defines the metrics that are recorded by the Glean SDK.
+# APIs to use these pings are automatically generated at build time using
+# the `glean_parser` PyPI package.
+
+# Metrics in this file may make use of SDK reserved ping names. See
+# https://mozilla.github.io/glean/book/dev/core/internal/reserved-ping-names.html
+# for additional information.
+
+# Disable line-length rule because of links in descriptions.
+# yamllint disable rule:line-length
+
+---
+$schema: moz://mozilla.org/schemas/glean/metrics/2-0-0
+
+page:
+  load:
+    type: event
+    description: |
+      An event triggered when a page is loaded.
+    bugs:
+      - 
+    data_reviews:
+      - 
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - klong@mozilla.com
+    expires: never
+    extra_keys:
+      page:
+        description: The page that was loaded, e.g. "Home", "Pings", "Ping", "Help".
+        type: string
+
+  click:
+    type: event
+    description: |
+      An event triggered when an element is clicked on a page.
+    bugs:
+      - 
+    data_reviews:
+      - 
+    data_sensitivity:
+      - interaction
+    notification_emails:
+      - klong@mozilla.com
+    expires: never
+    extra_keys:
+      button:
+        description: The element label that was clicked, e.g. "Details", "Raw JSON", "Copy Payload" etc.
+        type: string
