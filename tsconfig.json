@@ -1,18 +1,6 @@
 {
+  "extends": "@config/typescript-config/nextjs.json",
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "incremental": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
     "jsxImportSource": "@emotion/react",
     "baseUrl": "./",
     "paths": {
@@ -26,7 +14,5 @@
       "actions": ["src/actions.js"],
       "store": ["src/store.js"]
     }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
-  "exclude": ["node_modules"]
+  }
 }
