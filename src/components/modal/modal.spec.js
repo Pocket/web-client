@@ -8,7 +8,7 @@ const ReactModalMock = ({ children }) => <div>{children}</div>
 ReactModalMock.setAppElement = setAppElementStub
 jest.mock('react-modal', () => ReactModalMock)
 
-let portalRoot = document.getElementById('portal')
+const portalRoot = document.getElementById('portal')
 if (!portalRoot) {
   const portalRoot = document.createElement('div')
   portalRoot.setAttribute('id', 'root')

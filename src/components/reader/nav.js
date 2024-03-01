@@ -25,6 +25,7 @@ import { ProgressBar } from 'components/progress-bar/progress-bar'
 import { useTranslation } from 'next-i18next'
 import Mousetrap from 'mousetrap'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
+import { useCallback } from 'react'
 
 const headerStyle = css`
   position: fixed;
@@ -158,11 +159,12 @@ export const ReaderNav = ({
   const setColumnWidth = (val) => dispatch(updateColumnWidth(val))
   const { getStarted } = router.query
 
-  const goBack = () => {
+  const goBack = useCallback(() => {
     if (getStarted) return router.push('/home')
     if (window.history.length > 1) return window.history.go(-1)
     document.location.href = '/saves'
-  }
+  }, [getStarted, router])
+
   const clickGoBack = () => {
     const identifier = getStarted ? 'get-started.reader.gohome' : 'reader.goback'
     dispatch(sendSnowplowEvent(identifier))
@@ -185,7 +187,7 @@ export const ReaderNav = ({
 
     Mousetrap.bind('b', shortcutGoBack)
     return () => Mousetrap.unbind('b')
-  }, [dispatch])
+  }, [dispatch, goBack])
 
   const returnCopy = getStarted
     ? t('nav:back-to-home', 'Back to Home')

@@ -135,7 +135,7 @@ const wrapper = css`
   }
 `
 
-export function CallOutBuildHome({ source = 'explore', topBorder }) {
+export function CallOutBuildHome({ topBorder }) {
   const { t } = useTranslation()
   return (
     <div className={cx(wrapper, topBorder && 'topBorder')} data-cy="signup-module">

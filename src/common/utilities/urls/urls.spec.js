@@ -3,7 +3,6 @@ import { getImageCacheUrl } from './urls'
 import { domainForUrl } from './urls'
 import { getTopLevelPath } from './urls'
 import { replaceUTM } from './urls'
-import { isValidHttpUrl } from './urls'
 import { isValidUrl } from './urls'
 
 describe('urlWithPocketRedirect', () => {
