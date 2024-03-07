@@ -2,3 +2,6 @@
 constants.js
 actions.js
 fonts.js
+
+// Ignore circleCI confgig
+.circleci/config.yml
