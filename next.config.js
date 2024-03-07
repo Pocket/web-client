@@ -14,7 +14,8 @@ const nextOptions = {
   env: {
     SHOW_DEV: process.env.SHOW_DEV,
     RELEASE_VERSION: process.env.RELEASE_VERSION,
-    TEST_SNOWPLOW: process.env.TEST_SNOWPLOW
+    TEST_SNOWPLOW: process.env.TEST_SNOWPLOW,
+    REVALIDATION_TOKEN: process.env.REVALIDATION_TOKEN
   },
   compiler: {
     emotion: true
