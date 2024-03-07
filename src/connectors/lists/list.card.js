@@ -40,7 +40,8 @@ export const ListCard = ({ id, position }) => {
   const onImageFail = () => dispatch(setNoImage(id))
 
   const onItemInView = (inView) => {
-    if (!impressionFired && inView) {
+    const validAnalytics = !!passedAnalytics?.shareableListExternalId
+    if (!impressionFired && inView && validAnalytics) {
       dispatch(sendSnowplowEvent('shareable-list.impression', analyticsData))
     }
   }
