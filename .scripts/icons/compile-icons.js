@@ -17,7 +17,8 @@ const path = require('path')
 const { optimize, loadConfig } = require('svgo')
 const cliProgress = require('cli-progress')
 
-const SVG_INPUT_DIR = 'ui/icons'
+const ICON_DIRECTORY = 'ui/icons'
+const SVG_INPUT_DIR = 'ui/icons/svgs'
 const JS_OUTPUT_DIR = 'src/components/icons'
 
 const copyOptions = {
@@ -44,9 +45,12 @@ function buildImport(component) {
 
 function buildStory(imports) {
   const importStatements = imports.map(buildImport).join('\n')
-  const componentsArray = imports.map((component) => `${component.componentName}Icon`).join(',')
+  const componentsArray = imports
+    .map((component) => `${component.componentName}Icon`)
+    .sort()
+    .join(',')
 
-  fs.readFile(`${SVG_INPUT_DIR}/_story-template.js`, 'utf8', function (err, data) {
+  fs.readFile(`${ICON_DIRECTORY}/_story-template.js`, 'utf8', function (err, data) {
     if (err) return console.log(err)
 
     const importResults = data.replace(/\/\*ICONS_IMPORTS\*\//g, importStatements)
@@ -112,7 +116,7 @@ const processSvgs = async function (onSuccess) {
     progressBar.increment()
   })
 
-  fs.copy(`${SVG_INPUT_DIR}/_iconStyle.js`, `${JS_OUTPUT_DIR}/_iconStyle.js`, (err) => {
+  fs.copy(`${ICON_DIRECTORY}/_iconStyle.js`, `${JS_OUTPUT_DIR}/_iconStyle.js`, (err) => {
     if (err) return console.error(err)
     progressBar.stop()
   })
