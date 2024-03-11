@@ -8,6 +8,7 @@
     "linkDirectory": true
   },
   "scripts": {
+    "postinstall": "ts-node build.ts",
     "build": "ts-node build.ts"
   },
   "keywords": [],
