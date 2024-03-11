@@ -410,7 +410,6 @@ input[type="reset"] {
     pointer-events: none;
   }
 
-
   /** We don't want to outline tooltip*/
   &[data-tooltip] {
     border: 2px solid var(--color-canvas);
@@ -428,12 +427,13 @@ input[type="reset"] {
   &.small {
     font-size: 0.85rem;
     padding: 0.75rem;
+    line-height: 1rem;
   }
 
   &.tiny {
     font-size: 0.85rem;
     padding: 0.375rem 0.75rem;
-
+    line-height: 1rem;
     .icon {
       font-size: 1rem;
     }
@@ -550,5 +550,8 @@ input[type="reset"] {
 }
 
 .icon {
-  height: 1.5em;
+  height: 1.5rem;
+}
+.icon.small {
+  height: 1rem;
 }
