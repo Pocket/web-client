@@ -103,6 +103,9 @@ ui/styles/fonts.pcss
 ui/styles/fonts-reader.pcss
 ui/styles/global-variables.pcss
 
+# We don't want to commit built icons files
+ui/icons/dist/
+
 # TS Terraform build 
 .terraform/
 node_modules/
