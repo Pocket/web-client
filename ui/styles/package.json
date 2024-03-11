@@ -1,0 +1,20 @@
+{
+  "name": "@ui/styles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "postcss index.pcss -o ../../public/static/pocket-web-ui.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cssnano": "6.1.0",
+    "postcss": "8.4.35",
+    "postcss-cli": "11.0.0",
+    "postcss-nested": "6.0.1",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^9.3.0"
+  }
+}

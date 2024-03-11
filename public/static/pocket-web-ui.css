@@ -1,6 +1,6 @@
 /* BROWSER RESETS --------------------------------------------- */
 *,:after,:before{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(0,0,0,0);font-family:sans-serif;line-height:1.15}
+html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}
 article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}
 body{background-color:#fff;color:#212529;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-size:1rem;font-weight:400;line-height:1.5;margin:0;text-align:left}
 [tabindex="-1"]:focus{outline:0!important}
@@ -161,6 +161,8 @@ a.button+a.button,a.button+input[type=button],a.button+input[type=reset],a.butto
 #ot-sdk-btn.optanon-show-settings,#ot-sdk-btn.ot-sdk-show-settings{color:var(--color-textPrimary);text-decoration:underline}
 #ot-sdk-btn.optanon-show-settings:hover,#ot-sdk-btn.ot-sdk-show-settings:hover{color:var(--color-textLinkHover)}
 #ot-sdk-btn.optanon-show-settings:focus,#ot-sdk-btn.ot-sdk-show-settings:focus{outline:none}
+.icon{height:1.5rem}
+.icon.small{height:1rem}
 /* APP FONTS --------------------------------------------- */
 @font-face{font-family:Blanco OSF;src:url(https://assets.getpocket.com/web-ui/assets/BlancoOSFWeb-Regular.7d5a8216b7607638e81feb748552a702.woff2)}
 @font-face{font-family:Blanco OSF;font-weight:700;src:url(https://assets.getpocket.com/web-ui/assets/BlancoOSFWeb-Bold.5597c92771d64715fcfc7af63ba976e9.woff2)}
@@ -214,6 +216,3 @@ a.button+a.button,a.button+input[type=button],a.button+input[type=reset],a.butto
 .ab-iam-root .ab-message-text{color:var(--color-textPrimary)!important;font-family:var(--fontSansSerif)!important;font-weight:400!important}
 .ab-iam-root .ab-close-button svg path{fill:var(--color-textPrimary)!important}
 .ab-iam-root .ab-close-button:hover svg path{fill:var(--color-textLinkHover)!important}
-
-.icon {height: 1.5rem;}
-.icon.small {height: 1rem;}
