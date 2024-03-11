@@ -27,7 +27,7 @@ async function compileIcons() {
 
     const baseFileName = path.basename(file, '.svg')
     const componentName = camelcase(baseFileName)
-    const jsOutputFilename = `${OUTPUT_DIR}/${componentName}.tsx`
+    const jsOutputFilename = `${OUTPUT_DIR}/${componentName}Icon.tsx`
     const importPath = `${OUTPUT_DIR}/${componentName}`
     imports.push({
       name: baseFileName,
@@ -61,7 +61,7 @@ function writeIndex(imports: ImportData[]) {
 }
 
 function buildImport(component: ImportData) {
-  return `export { ${component.componentName}Icon } from './${component.componentName}'`
+  return `export { ${component.componentName}Icon } from './${component.componentName}Icon'`
 }
 
 /**
@@ -72,6 +72,11 @@ function buildImport(component: ImportData) {
  * @return {String} The resulting component.
  */
 function convertSvgToComponentString(svg: string, componentName: string) {
+  const hasFillColor = /\<svg(.*)fill=(.+?)\>/g.test(svg)
+  if (!hasFillColor) {
+    svg = svg.replace('<svg ', '<svg fill="currentColor" ')
+  }
+
   // camel case the attributes for react
   svg = svg.replace(/-([a-z]*=\"([^"]*)\")/gi, (s, attr) => {
     return attr.charAt(0).toUpperCase() + attr.slice(1)
