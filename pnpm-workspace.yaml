@@ -3,3 +3,4 @@ packages:
   - '.scripts/*'
   - 'config/*'
   - 'common/*'
+  - 'ui/*'

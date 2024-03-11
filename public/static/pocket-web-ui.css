@@ -214,3 +214,5 @@ a.button+a.button,a.button+input[type=button],a.button+input[type=reset],a.butto
 .ab-iam-root .ab-message-text{color:var(--color-textPrimary)!important;font-family:var(--fontSansSerif)!important;font-weight:400!important}
 .ab-iam-root .ab-close-button svg path{fill:var(--color-textPrimary)!important}
 .ab-iam-root .ab-close-button:hover svg path{fill:var(--color-textLinkHover)!important}
+
+.icon {height: 1.5rem;}
