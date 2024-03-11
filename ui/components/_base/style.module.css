@@ -1,0 +1,25 @@
+.iconGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 4fr);
+  grid-row-gap: 1em;
+  grid-column-gap: 1em;
+  justify-content: space-between;
+  justify-items: center;
+  margin: 0 0 2em 0;
+}
+
+.iconBlock {
+  display: flex;
+  width: 100%;
+  font-size: 16px;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-actionPrimarySubdued);
+  }
+  svg {
+    margin-right: 8px;
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@ui/components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@config/typescript-config": "workspace:*",
+    "@types/react": "18.2.64"
+  },
+  "dependencies": {
+    "@ui/icons": "workspace:*"
+  }
+}
