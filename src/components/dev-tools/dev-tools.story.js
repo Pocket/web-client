@@ -1,5 +1,5 @@
 import { sectionStyles } from './tool-styles'
-import { LinkCopyIcon } from 'components/icons/LinkCopyIcon'
+import { LinkCopyIcon } from '@ui/icons/LinkCopyIcon'
 
 export default {
   title: 'Dev/Tools'

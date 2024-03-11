@@ -1,5 +1,5 @@
 import { css, cx } from '@emotion/css'
-import { PremiumIcon } from '../../../src/components/icons/PremiumIcon'
+import { PremiumIcon } from '@ui/icons/PremiumIcon'
 
 export default {
   title: 'UI/Button'

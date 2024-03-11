@@ -1,6 +1,6 @@
 import { css, cx } from '@emotion/css'
-import { LockIcon } from 'components/icons/LockIcon'
-import { GlobeIcon } from 'components/icons/GlobeIcon'
+import { LockIcon } from '@ui/icons/LockIcon'
+import { GlobeIcon } from '@ui/icons/GlobeIcon'
 import { PublicListUrl } from './public-list-url'
 import { breakpointSmallTablet } from 'common/constants'
 import { useTranslation } from 'next-i18next'
@@ -46,12 +46,12 @@ export const ListStatusLink = ({ listStatusInfo, handleCopyUrl, handleOpenUrl })
     <div className={cx('listStatus', statusStyles)}>
       {isPrivate ? (
         <div className="chip private">
-          <LockIcon /> {t('list:private', 'Private')}
+          <LockIcon className="small" /> {t('list:private', 'Private')}
         </div>
       ) : (
         <>
           <div className="chip public">
-            <GlobeIcon /> {t('list:public', 'Public')}
+            <GlobeIcon className="small" /> {t('list:public', 'Public')}
           </div>{' '}
           <PublicListUrl
             publicListInfo={listStatusInfo}

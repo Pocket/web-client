@@ -6,7 +6,7 @@ import { breakpointSmallDesktop } from 'common/constants'
 import { breakpointSmallTablet } from 'common/constants'
 import { breakpointTinyTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
-import { AddIcon } from 'components/icons/AddIcon'
+import { AddIcon } from '@ui/icons/AddIcon'
 
 const bannerBackground = css`
   --color-banner-primary: #db6900;

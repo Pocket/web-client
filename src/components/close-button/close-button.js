@@ -1,5 +1,5 @@
 import { css, cx } from '@emotion/css'
-import { CrossIcon } from 'components/icons/CrossIcon'
+import { CrossIcon } from '@ui/icons/CrossIcon'
 import { useTranslation, Trans } from 'next-i18next'
 
 const closeButtonStyles = css`

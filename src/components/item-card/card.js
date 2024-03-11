@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { cx } from '@emotion/css'
-import { SyndicatedIcon } from 'components/icons/SyndicatedIcon'
+import { SyndicatedIcon } from '@ui/icons/SyndicatedIcon'
 
 import { CardMedia } from 'components/items-media/card-media'
 import { ItemTags } from 'components/item-tags/item-tags'
@@ -10,7 +10,7 @@ import { cardStyles } from './card-base'
 import Link from 'next/link'
 import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 import ReactMarkdown from 'react-markdown'
-import { NewViewIcon } from 'components/icons/NewViewIcon'
+import { NewViewIcon } from '@ui/icons/NewViewIcon'
 
 /** Card
  * Item card for display.

@@ -3,11 +3,11 @@ import { getObjectWithValidKeysOnly } from 'common/utilities/object-array/object
 import { openWindow } from 'common/utilities/open-window/open-window'
 import { topTooltipDelayed } from 'components/tooltip/tooltip'
 
-import { FacebookColorIcon } from 'components/icons/FacebookColorIcon'
-import { TwitterColorIcon } from 'components/icons/TwitterColorIcon'
-import { LinkedinMonoIcon } from 'components/icons/LinkedinMonoIcon'
-import { RedditMonoIcon } from 'components/icons/RedditMonoIcon'
-import { BufferIcon } from 'components/icons/BufferIcon'
+import { FacebookColorIcon } from '@ui/icons/FacebookColorIcon'
+import { TwitterColorIcon } from '@ui/icons/TwitterColorIcon'
+import { LinkedinMonoIcon } from '@ui/icons/LinkedinMonoIcon'
+import { RedditMonoIcon } from '@ui/icons/RedditMonoIcon'
+import { BufferIcon } from '@ui/icons/BufferIcon'
 
 export const socialButtonStyles = css`
   display: flex;

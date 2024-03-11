@@ -1,12 +1,12 @@
 import { css, cx } from '@emotion/css'
 import { savesHeaderStyle } from './saves-header'
 import { ListSort } from 'components/list-sort/list-sort'
-import { AddIcon } from 'components/icons/AddIcon'
-import { FiltersAltIcon } from 'components/icons/FiltersAltIcon'
-import { SortOrderIcon } from 'components/icons/SortOrderIcon'
+import { AddIcon } from '@ui/icons/AddIcon'
+import { FiltersAltIcon } from '@ui/icons/FiltersAltIcon'
+import { SortOrderIcon } from '@ui/icons/SortOrderIcon'
 import Avatar from 'components/avatar/avatar'
 import { SaveListButton } from 'components/content-saving/save-list'
-import { IosShareIcon } from 'components/icons/IosShareIcon'
+import { IosShareIcon } from '@ui/icons/IosShareIcon'
 import { breakpointSmallTablet } from 'common/constants'
 import { breakpointSmallHandset } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
@@ -197,7 +197,7 @@ export const ListsAllHeader = ({ sortOrder, handleCreateList, handleNewest, hand
 
       <div className="create-sort">
         <button onClick={onCreateList} className="tiny">
-          <AddIcon /> {t('list:create-list', 'Create List')}
+          <AddIcon className="small" /> {t('list:create-list', 'Create List')}
         </button>
         <ListSort sortOrder={sortOrder} handleNewest={handleNewest} handleOldest={handleOldest} />
       </div>
@@ -255,13 +255,13 @@ export const ListIndividualHeader = ({
             />
           ) : null}
           <button onClick={handleSort} className="sort tiny outline">
-            <SortOrderIcon /> {t('list:reorder', 'Reorder')}
+            <SortOrderIcon className="small" /> {t('list:reorder', 'Reorder')}
           </button>
         </div>
 
         <div className="actions-end">
           <button onClick={handleEdit} className="filter tiny outline">
-            <FiltersAltIcon /> {t('list:settings', 'Settings')}
+            <FiltersAltIcon className="small" /> {t('list:settings', 'Settings')}
           </button>
         </div>
       </div>

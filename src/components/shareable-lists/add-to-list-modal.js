@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { css } from '@emotion/css'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
-import { AddIcon } from 'components/icons/AddIcon'
+import { AddIcon } from '@ui/icons/AddIcon'
 import { breakpointMediumHandset } from 'common/constants'
 import { useTranslation } from 'next-i18next'
 

@@ -1,5 +1,5 @@
 import { css } from '@emotion/css'
-import { ArrowRightIcon } from 'components/icons/ArrowRightIcon'
+import { ArrowRightIcon } from '@ui/icons/ArrowRightIcon'
 
 const linkWrapper = css`
   font-family: 'Graphik Web';

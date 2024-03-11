@@ -5,7 +5,7 @@ import { Listen } from 'connectors/listen/listen'
 import { featureFlagActive } from 'connectors/feature-flags/feature-flags'
 import { LOGIN_URL } from 'common/constants'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { ListenIcon } from 'components/icons/ListenIcon'
+import { ListenIcon } from '@ui/icons/ListenIcon'
 import { BRAZE_LISTEN } from 'common/utilities/braze/feature-flags'
 
 const loggedOutStyle = css`

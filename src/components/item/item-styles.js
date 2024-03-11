@@ -390,6 +390,7 @@ export const itemStyles = css`
     display: inline-block;
     margin: -0.25rem 0 0 0.25rem;
     font-size: 1rem;
+    height: 1rem;
   }
 
   .tags-container {

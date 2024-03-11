@@ -9,10 +9,10 @@ import {
   topTooltip,
   topTooltipDelayed
 } from './tooltip'
-import { ArrowDownIcon } from 'components/icons/ArrowDownIcon'
-import { ArrowUpIcon } from 'components/icons/ArrowUpIcon'
-import { ArrowLeftIcon } from 'components/icons/ArrowLeftIcon'
-import { ArrowRightIcon } from 'components/icons/ArrowRightIcon'
+import { ArrowDownIcon } from '@ui/icons/ArrowDownIcon'
+import { ArrowUpIcon } from '@ui/icons/ArrowUpIcon'
+import { ArrowLeftIcon } from '@ui/icons/ArrowLeftIcon'
+import { ArrowRightIcon } from '@ui/icons/ArrowRightIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 
 const container = css`

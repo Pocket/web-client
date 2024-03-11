@@ -6,9 +6,9 @@ import { breakpointTinyTablet } from 'common/constants'
 import { breakpointLargeHandset } from 'common/constants'
 import { breakpointTinyHandset } from 'common/constants'
 import { PageContainer } from 'components/page-container/page-container'
-import { FacebookMonoIcon } from 'components/icons/FacebookMonoIcon'
-import { TwitterMonoIcon } from 'components/icons/TwitterMonoIcon'
-import { InstagramMonoIcon } from 'components/icons/InstagramMonoIcon'
+import { FacebookMonoIcon } from '@ui/icons/FacebookMonoIcon'
+import { TwitterMonoIcon } from '@ui/icons/TwitterMonoIcon'
+import { InstagramMonoIcon } from '@ui/icons/InstagramMonoIcon'
 import { Trans, useTranslation } from 'next-i18next'
 import { Languages } from 'connectors/languages/languages'
 import { PREMIUM_URL } from 'common/constants'
@@ -513,4 +513,3 @@ GlobalFooter.propTypes = {
    */
   hasColorBorder: PropTypes.bool
 }
-

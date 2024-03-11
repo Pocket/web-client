@@ -1,7 +1,7 @@
 /* eslint  react/jsx-no-target-blank: 0*/
 import { css } from '@emotion/css'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
-import { PremiumIcon } from 'components/icons/PremiumIcon'
+import { PremiumIcon } from '@ui/icons/PremiumIcon'
 import { ArrowLink } from 'components/arrow-link/arrow-link'
 import VisibilitySensor from 'components/visibility-sensor/visibility-sensor'
 import { Trans, useTranslation } from 'next-i18next'

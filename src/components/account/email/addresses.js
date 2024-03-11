@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
-import { ErrorIcon } from 'components/icons/ErrorIcon'
-import { NewViewIcon } from 'components/icons/NewViewIcon'
+import { ErrorIcon } from '@ui/icons/ErrorIcon'
+import { NewViewIcon } from '@ui/icons/NewViewIcon'
 import { topTooltip } from 'components/tooltip/tooltip'
 import { useTranslation } from 'next-i18next'
 

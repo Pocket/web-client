@@ -1,5 +1,5 @@
-import { SaveIcon } from 'components/icons/SaveIcon'
-import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
+import { SaveIcon } from '@ui/icons/SaveIcon'
+import { SaveFilledIcon } from '@ui/icons/SaveFilledIcon'
 import { css } from '@emotion/css'
 import { usePopover, popoverBase } from 'components/popover/popover'
 import { LOGIN_URL, SIGNUP_URL } from 'common/constants'

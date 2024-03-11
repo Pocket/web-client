@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { confirmAvatarUpdate } from './profile.state'
 import { cancelAvatarUpdate } from './profile.state'
 import { updateAvatarError } from './profile.state'
-import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
+import { ChevronRightIcon } from '@ui/icons/ChevronRightIcon'
 import { AvatarPreview } from 'components/account/profile/avatar'
 import { useTranslation } from 'next-i18next'
 

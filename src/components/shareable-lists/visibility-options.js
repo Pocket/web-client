@@ -2,12 +2,12 @@ import { css, cx } from '@emotion/css'
 import { useRef } from 'react'
 import { useTranslation } from 'next-i18next'
 import { PopupMenu, PopupMenuItem } from 'components/popup-menu/popup-menu'
-import { ChevronDownIcon } from 'components/icons/ChevronDownIcon'
-import { LockIcon } from 'components/icons/LockIcon'
-import { GlobeIcon } from 'components/icons/GlobeIcon'
-import { EmptyCircledIcon } from 'components/icons/EmptyCircledIcon'
-import { CheckCircledIcon } from 'components/icons/CheckCircledIcon'
-import { ErrorIcon } from 'components/icons/ErrorIcon'
+import { ChevronDownIcon } from '@ui/icons/ChevronDownIcon'
+import { LockIcon } from '@ui/icons/LockIcon'
+import { GlobeIcon } from '@ui/icons/GlobeIcon'
+import { EmptyCircledIcon } from '@ui/icons/EmptyCircledIcon'
+import { CheckCircledIcon } from '@ui/icons/CheckCircledIcon'
+import { ErrorIcon } from '@ui/icons/ErrorIcon'
 
 const VisibilityDropdown = ({ visibilityStatus }) => {
   const { t } = useTranslation()
@@ -16,25 +16,25 @@ const VisibilityDropdown = ({ visibilityStatus }) => {
     case 'isPrivate':
       return (
         <>
-          <LockIcon /> {t('list:private-button-title', 'Private')}{' '}
+          <LockIcon className="small" /> {t('list:private-button-title', 'Private')}{' '}
         </>
       )
     case 'isMixed':
       return (
         <>
-          <GlobeIcon /> {t('list:mixed-button-title', 'Public')}{' '}
+          <GlobeIcon className="small" /> {t('list:mixed-button-title', 'Public')}{' '}
         </>
       )
     case 'isPublic':
       return (
         <>
-          <GlobeIcon /> {t('list:public-title', 'Public List & Notes')}{' '}
+          <GlobeIcon className="small" /> {t('list:public-title', 'Public List & Notes')}{' '}
         </>
       )
     default:
       return (
         <>
-          <ErrorIcon /> {t('list:loading', 'Loading')}{' '}
+          <ErrorIcon className="small" /> {t('list:loading', 'Loading')}{' '}
         </>
       )
   }
@@ -74,7 +74,7 @@ export const VisibilityOptions = ({ handleSetStatus, status, listItemNoteVisibil
         className={cx('tiny', 'outline', buttonStyles, status)}
         data-testid="sort-options">
         <VisibilityDropdown visibilityStatus={visibilityStatus} />
-        <ChevronDownIcon />
+        <ChevronDownIcon className="small" />
       </button>
       <PopupMenu
         className={toggleStyles}

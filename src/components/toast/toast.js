@@ -1,6 +1,6 @@
 import { css, cx } from '@emotion/css'
-import { CheckIcon } from 'components/icons/CheckIcon'
-import { ErrorIcon } from 'components/icons/ErrorIcon'
+import { CheckIcon } from '@ui/icons/CheckIcon'
+import { ErrorIcon } from '@ui/icons/ErrorIcon'
 import { Fade } from 'common/utilities/animation/fade'
 
 const toastWrapper = css`

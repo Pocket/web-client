@@ -1,9 +1,9 @@
 import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
 import { StepperWrapper, IconWrapper, StepperButton } from 'components/stepper/stepper'
 import { StepperRange } from 'components/stepper/stepper-range'
-import { AddIcon } from 'components/icons/AddIcon'
-import { RemoveIcon } from 'components/icons/RemoveIcon'
-import { MarginsIcon } from 'components/icons/MarginsIcon'
+import { AddIcon } from '@ui/icons/AddIcon'
+import { RemoveIcon } from '@ui/icons/RemoveIcon'
+import { MarginsIcon } from '@ui/icons/MarginsIcon'
 import { useTranslation } from 'next-i18next'
 
 export const ColumnWidthSettings = ({

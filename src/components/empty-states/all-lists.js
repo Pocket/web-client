@@ -1,6 +1,6 @@
 import TreasureSVG from 'static/images/sunken-treasure-chest.svg'
 import { emptyStyles } from './styles'
-import { AddIcon } from 'components/icons/AddIcon'
+import { AddIcon } from '@ui/icons/AddIcon'
 import { useTranslation } from 'next-i18next'
 
 export const EmptyAllLists = ({ handleCreate }) => {

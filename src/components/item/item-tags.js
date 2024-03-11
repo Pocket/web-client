@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { tagBase } from 'components/tags/tag'
 import { tagWrapper } from 'components/tags/tag'
-import { TagIcon } from 'components/icons/TagIcon'
+import { TagIcon } from '@ui/icons/TagIcon'
 
 export function ItemTags({ tags, mouseLeave }) {
   const handleMouseLeave = function () {

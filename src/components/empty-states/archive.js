@@ -1,6 +1,6 @@
 import TreasureSVG from 'static/images/sunken-treasure-chest.svg'
 import { emptyStyles } from './styles'
-import { ArchiveIcon } from 'components/icons/ArchiveIcon'
+import { ArchiveIcon } from '@ui/icons/ArchiveIcon'
 import { useTranslation, Trans } from 'next-i18next'
 
 export const EmptyArchive = () => {

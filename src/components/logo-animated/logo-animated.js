@@ -1,5 +1,5 @@
 import { css, cx } from '@emotion/css'
-import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
+import { SaveFilledIcon } from '@ui/icons/SaveFilledIcon'
 
 const logoWrapper = css`
   display: inline-block;

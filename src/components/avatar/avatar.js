@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css, cx } from '@emotion/css'
-import { ProfileIcon } from 'components/icons/ProfileIcon'
+import { ProfileIcon } from '@ui/icons/ProfileIcon'
 
 const avatarStyle = css`
   display: block;

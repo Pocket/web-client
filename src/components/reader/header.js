@@ -5,7 +5,7 @@ import { Pill } from 'components/pill/pill'
 import { pillboxStyle } from 'components/topics-pillbox/topics-pillbox'
 import { Trans } from 'next-i18next'
 import dayjs from 'dayjs'
-import { NewViewIcon } from 'components/icons/NewViewIcon'
+import { NewViewIcon } from '@ui/icons/NewViewIcon'
 
 /* COMPONENTS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

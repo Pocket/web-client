@@ -1,7 +1,7 @@
 import { render, fireEvent, mockModal } from '@config/jest'
 import '@testing-library/jest-dom'
-import { PlayIcon } from 'components/icons/PlayIcon'
-import { TagIcon } from 'components/icons/TagIcon'
+import { PlayIcon } from '@ui/icons/PlayIcon'
+import { TagIcon } from '@ui/icons/TagIcon'
 
 import GlobalNavTools from './global-nav-tools'
 

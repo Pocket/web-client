@@ -2,7 +2,7 @@ import { css } from '@emotion/css'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import { getImageCacheUrl } from 'common/utilities/urls/urls'
-import { NewViewIcon } from 'components/icons/NewViewIcon'
+import { NewViewIcon } from '@ui/icons/NewViewIcon'
 
 const cardMediaStyles = css`
   --aspect-percent: 56.25%;

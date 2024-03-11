@@ -1,5 +1,5 @@
 import { css, cx } from '@emotion/css'
-import { HighlightIcon } from 'components/icons/HighlightIcon'
+import { HighlightIcon } from '@ui/icons/HighlightIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
 

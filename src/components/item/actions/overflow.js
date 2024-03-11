@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
 import { usePopover } from 'components/popover/popover'
-import { OverflowMenuIcon } from 'components/icons/OverflowMenuIcon'
+import { OverflowMenuIcon } from '@ui/icons/OverflowMenuIcon'
 
 const popoverContainer = css`
   background-color: var(--color-canvas);

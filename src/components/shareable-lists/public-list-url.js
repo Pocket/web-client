@@ -5,7 +5,7 @@ import { css } from '@emotion/css'
 import copy from 'clipboard-copy'
 import { COPY_ITEM_URL } from 'actions'
 import { BASE_URL } from 'common/constants'
-import { CopyIcon } from 'components/icons/CopyIcon'
+import { CopyIcon } from '@ui/icons/CopyIcon'
 import { bottomTooltip } from 'components/tooltip/tooltip'
 import { useTranslation } from 'next-i18next'
 
@@ -63,7 +63,7 @@ export const PublicListUrl = ({ publicListInfo, handleCopyUrl, handleOpenUrl }) 
         className={cx('copy', 'tiny', bottomTooltip)}
         data-testid="copy-link"
         onClick={handleCopy}>
-        <CopyIcon />
+        <CopyIcon className="small" />
       </button>
     </div>
   )

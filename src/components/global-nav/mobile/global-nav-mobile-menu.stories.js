@@ -1,7 +1,7 @@
 import React from 'react'
 import GlobalNavMobileMenu from './global-nav-mobile-menu'
-import { DiscoverIcon } from 'components/icons/DiscoverIcon'
-import { ListViewIcon } from 'components/icons/ListViewIcon'
+import { DiscoverIcon } from '@ui/icons/DiscoverIcon'
+import { ListViewIcon } from '@ui/icons/ListViewIcon'
 
 const baseProps = {
   appRootSelector: '#root',

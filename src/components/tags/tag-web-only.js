@@ -1,5 +1,5 @@
 import { css, cx } from '@emotion/css'
-import { DiscoverFilledIcon } from 'components/icons/DiscoverFilledIcon'
+import { DiscoverFilledIcon } from '@ui/icons/DiscoverFilledIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
 

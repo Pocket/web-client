@@ -138,8 +138,8 @@ a.button:disabled,button:disabled,input[type=button]:disabled,input[type=reset]:
 a.button[data-tooltip],button[data-tooltip],input[type=button][data-tooltip],input[type=reset][data-tooltip],input[type=submit][data-tooltip]{border:2px solid var(--color-canvas)}
 a.button[data-tooltip]:focus,button[data-tooltip]:focus,input[type=button][data-tooltip]:focus,input[type=reset][data-tooltip]:focus,input[type=submit][data-tooltip]:focus{box-shadow:0 0 0 2px var(--color-actionFocus);outline:none}
 a.button.large,button.large,input[type=button].large,input[type=reset].large,input[type=submit].large{font-size:1.25rem;padding:1rem}
-a.button.small,button.small,input[type=button].small,input[type=reset].small,input[type=submit].small{font-size:.85rem;padding:.75rem}
-a.button.tiny,button.tiny,input[type=button].tiny,input[type=reset].tiny,input[type=submit].tiny{font-size:.85rem;padding:.375rem .75rem}
+a.button.small,button.small,input[type=button].small,input[type=reset].small,input[type=submit].small{font-size:.85rem;line-height:1rem;padding:.75rem}
+a.button.tiny,button.tiny,input[type=button].tiny,input[type=reset].tiny,input[type=submit].tiny{font-size:.85rem;line-height:1rem;padding:.375rem .75rem}
 a.button.tiny .icon,button.tiny .icon,input[type=button].tiny .icon,input[type=reset].tiny .icon,input[type=submit].tiny .icon{font-size:1rem}
 .colormode-dark a.button,.colormode-dark button,.colormode-dark input[type=button],.colormode-dark input[type=reset],.colormode-dark input[type=submit]{font-weight:500}
 a.button.secondary,button.secondary,input[type=button].secondary,input[type=reset].secondary,input[type=submit].secondary{background-color:var(--color-canvas);border:1px solid var(--color-actionSecondary);color:var(--color-actionSecondaryText)}
@@ -216,3 +216,4 @@ a.button+a.button,a.button+input[type=button],a.button+input[type=reset],a.butto
 .ab-iam-root .ab-close-button:hover svg path{fill:var(--color-textLinkHover)!important}
 
 .icon {height: 1.5rem;}
+.icon.small {height: 1rem;}

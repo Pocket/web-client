@@ -1,8 +1,8 @@
 import { StepperWrapper, IconWrapper, StepperButton } from './stepper'
 import { StepperRange } from './stepper-range'
-import { AddIcon } from 'components/icons/AddIcon'
-import { RemoveIcon } from 'components/icons/RemoveIcon'
-import { TextSettingsIcon } from 'components/icons/TextSettingsIcon'
+import { AddIcon } from '@ui/icons/AddIcon'
+import { RemoveIcon } from '@ui/icons/RemoveIcon'
+import { TextSettingsIcon } from '@ui/icons/TextSettingsIcon'
 import { useState } from 'react'
 
 export default {

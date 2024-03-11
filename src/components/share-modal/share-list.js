@@ -3,10 +3,10 @@ import { useTranslation } from 'next-i18next'
 import { css, cx } from '@emotion/css'
 import copy from 'clipboard-copy'
 import { COPY_ITEM_URL } from 'actions'
-import { CopyIcon } from 'components/icons/CopyIcon'
+import { CopyIcon } from '@ui/icons/CopyIcon'
 import { topTooltipDelayed } from 'components/tooltip/tooltip'
 import { SocialButton } from 'components/social-button/social-button'
-import { MastodonIcon } from 'components/icons/MastodonIcon'
+import { MastodonIcon } from '@ui/icons/MastodonIcon'
 import { socialButtonStyles } from 'components/social-button/social-button'
 
 const socialIcons = css`

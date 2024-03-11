@@ -3,12 +3,12 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import ReactMarkdown from 'react-markdown'
-import { SyndicatedIcon } from 'components/icons/SyndicatedIcon'
-import { NewViewIcon } from 'components/icons/NewViewIcon'
+import { SyndicatedIcon } from '@ui/icons/SyndicatedIcon'
+import { NewViewIcon } from '@ui/icons/NewViewIcon'
 import { CardMedia } from 'components/item/item-media'
 import { itemStyles } from './item-styles'
 import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
-import { OverflowMenuIcon } from 'components/icons/OverflowMenuIcon'
+import { OverflowMenuIcon } from '@ui/icons/OverflowMenuIcon'
 
 const allowsMarkdownElements = ['h1', 'h2', 'h3', 'p', 'a', 'strong', 'em', 'ul', 'ol', 'li']
 

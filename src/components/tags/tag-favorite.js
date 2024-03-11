@@ -1,5 +1,5 @@
 import { css, cx } from '@emotion/css'
-import { FavoriteIcon } from 'components/icons/FavoriteIcon'
+import { FavoriteIcon } from '@ui/icons/FavoriteIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 import { tagBase } from './tags'
 

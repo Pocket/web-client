@@ -35,9 +35,9 @@ importers:
       '@sentry/nextjs':
         specifier: 7.103.0
         version: 7.103.0(next@14.1.0)(react@18.2.0)(webpack@5.90.3)
-      '@storybook/addon-styling-webpack':
-        specifier: 0.0.6
-        version: 0.0.6(webpack@5.90.3)
+      '@ui/icons':
+        specifier: workspace:*
+        version: link:ui/icons/dist
       body-scroll-lock:
         specifier: 4.0.0-beta.0
         version: 4.0.0-beta.0
@@ -282,9 +282,6 @@ importers:
       cssnano:
         specifier: ^6.0.5
         version: 6.0.5(postcss@8.4.35)
-      fs-extra:
-        specifier: 11.2.0
-        version: 11.2.0
       hasha:
         specifier: ^6.0.0
         version: 6.0.0
@@ -4999,15 +4996,6 @@ packages:
       ts-dedent: 2.2.0
     dev: true
 
-  /@storybook/addon-styling-webpack@0.0.6(webpack@5.90.3):
-    resolution: {integrity: sha512-JjM2FXFiHpjbJsp7nRUEMhYBRpK6ukBKsbtWzCrAGOfUgoElcGwPY8KhSKSnRknIhebonGK1bxalh3u8bGZ/dw==}
-    peerDependencies:
-      webpack: ^5.0.0
-    dependencies:
-      '@storybook/node-logger': 7.6.17
-      webpack: 5.90.3(@swc/core@1.4.2)(esbuild@0.18.20)
-    dev: false
-
   /@storybook/addon-toolbars@7.6.17:
     resolution: {integrity: sha512-UMrchbUHiyWrh6WuGnpy34Jqzkx/63B+MSgb3CW7YsQaXz64kE0Rol0TNSznnB+mYXplcqH+ndI4r4kFsmgwDg==}
     dev: true
@@ -5529,6 +5517,7 @@ packages:
 
   /@storybook/node-logger@7.6.17:
     resolution: {integrity: sha512-w59MQuXhhUNrUVmVkXhMwIg2nvFWjdDczLTwYLorhfsE36CWeUOY5QCZWQy0Qf/h+jz8Uo7Evy64qn18v9C4wA==}
+    dev: true
 
   /@storybook/postinstall@7.6.17:
     resolution: {integrity: sha512-WaWqB8o9vUc9aaVls+povQSVirf1Xd1LZcVhUKfAocAF3mzYUsnJsVqvnbjRj/F96UFVihOyDt9Zjl/9OvrCvQ==}

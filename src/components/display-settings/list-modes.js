@@ -1,9 +1,9 @@
 import { css, cx } from '@emotion/css'
 
 import { PopupMenuGroup } from 'components/popup-menu/popup-menu'
-import { GridViewIcon } from 'components/icons/GridViewIcon'
-import { ListViewIcon } from 'components/icons/ListViewIcon'
-import { DetailViewIcon } from 'components/icons/DetailViewIcon'
+import { GridViewIcon } from '@ui/icons/GridViewIcon'
+import { ListViewIcon } from '@ui/icons/ListViewIcon'
+import { DetailViewIcon } from '@ui/icons/DetailViewIcon'
 import { buttonReset } from 'components/buttons/button-reset'
 
 import { bottomTooltip } from 'components/tooltip/tooltip'

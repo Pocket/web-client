@@ -1,10 +1,10 @@
 import React from 'react'
 
 import GlobalNavTools from './global-nav-tools'
-import { SearchIcon } from 'components/icons/SearchIcon'
-import { AddIcon } from 'components/icons/AddIcon'
-import { EditIcon } from 'components/icons/EditIcon'
-import { NotificationIcon } from 'components/icons/NotificationIcon'
+import { SearchIcon } from '@ui/icons/SearchIcon'
+import { AddIcon } from '@ui/icons/AddIcon'
+import { EditIcon } from '@ui/icons/EditIcon'
+import { NotificationIcon } from '@ui/icons/NotificationIcon'
 
 export default {
   title: 'GlobalNav/GlobalNavTools',

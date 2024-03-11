@@ -1,6 +1,6 @@
 import TreasureSVG from 'static/images/sunken-treasure-chest.svg'
 import { emptyStyles } from './styles'
-import { FavoriteIcon } from 'components/icons/FavoriteIcon'
+import { FavoriteIcon } from '@ui/icons/FavoriteIcon'
 import { useTranslation, Trans } from 'next-i18next'
 
 export const EmptyFavorites = () => {

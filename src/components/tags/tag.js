@@ -1,7 +1,7 @@
 import React from 'react'
 import { css, cx } from '@emotion/css'
 import { buttonReset } from 'components/buttons/button-reset'
-import { CrossIcon } from 'components/icons/CrossIcon'
+import { CrossIcon } from '@ui/icons/CrossIcon'
 
 export const tagBase = css`
   font-family: 'Graphik Web';
@@ -58,6 +58,10 @@ const closeWrapper = css`
   }
   &.selected:hover {
     color: var(--color-actionPrimaryText);
+  }
+
+  .icon {
+    height: 1em;
   }
 `
 

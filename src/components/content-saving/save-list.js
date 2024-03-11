@@ -1,7 +1,7 @@
 import { css, cx } from '@emotion/css'
 import { usePopover } from 'components/popover/popover'
-import { SaveIcon } from 'components/icons/SaveIcon'
-import { SaveFilledIcon } from 'components/icons/SaveFilledIcon'
+import { SaveIcon } from '@ui/icons/SaveIcon'
+import { SaveFilledIcon } from '@ui/icons/SaveFilledIcon'
 import { SavePopover } from 'components/item-actions/save-to-pocket'
 import { useTranslation } from 'next-i18next'
 

@@ -5,13 +5,13 @@ import { mutateListItemNote } from './mutation-update.state'
 import { mutateListItemNoteEdit } from './mutation-update.state'
 import { mutateListItemDelete } from './mutation-delete.state'
 import { mutateListItemNoteDelete } from './mutation-delete.state'
-import { EditIcon } from 'components/icons/EditIcon'
-import { DeleteIcon } from 'components/icons/DeleteIcon'
+import { EditIcon } from '@ui/icons/EditIcon'
+import { DeleteIcon } from '@ui/icons/DeleteIcon'
 import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { setNoImage } from 'connectors/lists/lists-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
-import { AddNoteIcon } from 'components/icons/AddNoteIcon'
+import { AddNoteIcon } from '@ui/icons/AddNoteIcon'
 import { topTooltip } from 'components/tooltip/tooltip'
 
 export const IndividualListCard = ({ id, listId, position }) => {
@@ -109,7 +109,7 @@ export const ListActions = ({ id, listId, analyticsData, position }) => {
           data-testid="add-note"
           className="tiny outline"
           onClick={handleAddNote}>
-          <AddNoteIcon />
+          <AddNoteIcon className="small" />
           {t('list:add-note', 'Add Note')}
         </button>
       ) : null}

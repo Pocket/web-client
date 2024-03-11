@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
 import { setNoImage } from 'connectors/lists/lists-display.state'
-import { ReorderIcon } from 'components/icons/ReorderIcon'
+import { ReorderIcon } from '@ui/icons/ReorderIcon'
 
 const reorderStyles = css`
   article {

@@ -1,7 +1,7 @@
 import { css, cx } from '@emotion/css'
 import { Modal, ModalBody } from 'components/modal/modal'
 import { useTranslation } from 'next-i18next'
-import { PremiumIcon } from 'components/icons/PremiumIcon'
+import { PremiumIcon } from '@ui/icons/PremiumIcon'
 
 const shortcutsStyle = css`
   table {

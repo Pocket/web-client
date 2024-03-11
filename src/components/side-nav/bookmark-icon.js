@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { css, cx } from '@emotion/css'
-import { BookmarkFilledIcon } from 'components/icons/BookmarkFilledIcon'
+import { BookmarkFilledIcon } from '@ui/icons/BookmarkFilledIcon'
 import { useIntersectionObserver } from 'common/utilities/intersection/intersection'
 import { useHasChanged } from 'common/utilities/hooks/has-changed'
 

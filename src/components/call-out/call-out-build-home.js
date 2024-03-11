@@ -5,7 +5,7 @@ import { breakpointMediumTablet } from 'common/constants' // 959
 import { breakpointTinyTablet } from 'common/constants' // 719
 import { breakpointMediumHandset } from 'common/constants' // 479
 import { breakpointSmallHandset } from 'common/constants' // 399
-import { SaveIcon } from 'components/icons/SaveIcon'
+import { SaveIcon } from '@ui/icons/SaveIcon'
 import { SIGNUP_URL } from 'common/constants'
 import laptopImg from 'static/images/laptop-mylist.png'
 import { Trans, useTranslation } from 'next-i18next'

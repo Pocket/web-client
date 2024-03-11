@@ -2,8 +2,8 @@ import { useRef, useEffect } from 'react'
 import { css, cx } from '@emotion/css'
 import { buttonReset } from 'components/buttons/button-reset'
 import { overlayBase } from 'components/overlay/overlay'
-import { HighlightIcon } from 'components/icons/HighlightIcon'
-import { IosShareIcon } from 'components/icons/IosShareIcon'
+import { HighlightIcon } from '@ui/icons/HighlightIcon'
+import { IosShareIcon } from '@ui/icons/IosShareIcon'
 import { Trans } from 'next-i18next'
 
 const popupContainer = css`

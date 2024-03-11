@@ -1,7 +1,7 @@
 import { css, cx } from '@emotion/css'
 import { SaveToPocket } from 'components/item-actions/save-to-pocket'
-import { MailIcon } from 'components/icons/MailIcon'
-import { MastodonIcon } from 'components/icons/MastodonIcon'
+import { MailIcon } from '@ui/icons/MailIcon'
+import { MastodonIcon } from '@ui/icons/MastodonIcon'
 import { breakpointMediumTablet } from 'common/constants'
 import { SocialButton } from 'components/social-button/social-button'
 

@@ -1,15 +1,15 @@
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 
-import { FavoriteIcon } from 'components/icons/FavoriteIcon'
-import { HighlightIcon } from 'components/icons/HighlightIcon'
-import { TagIcon } from 'components/icons/TagIcon'
-import { ArticleIcon } from 'components/icons/ArticleIcon'
-import { ArchiveIcon } from 'components/icons/ArchiveIcon'
-import { VideoIcon } from 'components/icons/VideoIcon'
-import { AddIcon } from 'components/icons/AddIcon'
-import { ListViewAltIcon } from 'components/icons/ListViewAltIcon'
-import { ListViewAltFilledIcon } from 'components/icons/ListViewAltFilledIcon'
+import { FavoriteIcon } from '@ui/icons/FavoriteIcon'
+import { HighlightIcon } from '@ui/icons/HighlightIcon'
+import { TagIcon } from '@ui/icons/TagIcon'
+import { ArticleIcon } from '@ui/icons/ArticleIcon'
+import { ArchiveIcon } from '@ui/icons/ArchiveIcon'
+import { VideoIcon } from '@ui/icons/VideoIcon'
+import { AddIcon } from '@ui/icons/AddIcon'
+import { ListViewAltIcon } from '@ui/icons/ListViewAltIcon'
+import { ListViewAltFilledIcon } from '@ui/icons/ListViewAltFilledIcon'
 
 import { sideNavHeader } from './side-nav'
 import { sideNavActionHeader } from './side-nav'
@@ -29,7 +29,10 @@ export function FiltersSideNav({ subActive, pinned, clickEvent, handleCreateList
           className={buttonReset}
           onClick={handleCreateList}
           data-testid="side-nav-create-list">
-          <AddIcon className={bottomTooltip} data-tooltip={t('nav:create-list', 'Create List')} />
+          <AddIcon
+            className={`${bottomTooltip} small`}
+            data-tooltip={t('nav:create-list', 'Create List')}
+          />
         </button>
       </div>
       <Link href="/lists" legacyBehavior>

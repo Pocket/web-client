@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { mutateListDelete } from 'connectors/lists/mutation-delete.state'
 import { Item } from 'components/item/item'
 import { stackedGrid, stackedGridNoAside } from 'components/item/items-layout'
-import { DeleteIcon } from 'components/icons/DeleteIcon'
+import { DeleteIcon } from '@ui/icons/DeleteIcon'
 import { setNoImage } from 'connectors/lists/lists-display.state'
 import { sendSnowplowEvent } from 'connectors/snowplow/snowplow.state'
 import { useTranslation } from 'next-i18next'
@@ -104,7 +104,7 @@ export const ListActions = ({ id, analyticsData }) => {
       data-testid="delete-list"
       className="tiny outline"
       onClick={handleDeleteList}>
-      <DeleteIcon /> {t('list:delete', 'Delete')}
+      <DeleteIcon className="small" /> {t('list:delete', 'Delete')}
     </button>
   )
 }

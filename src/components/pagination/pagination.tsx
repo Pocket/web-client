@@ -3,9 +3,9 @@ import { css, cx } from '@emotion/css'
 import Link from 'next/link'
 
 // Dependencies
-import { OverflowMenuIcon } from 'components/icons/OverflowMenuIcon'
-import { ChevronLeftIcon } from 'components/icons/ChevronLeftIcon'
-import { ChevronRightIcon } from 'components/icons/ChevronRightIcon'
+import { OverflowMenuIcon } from '@ui/icons/OverflowMenuIcon'
+import { ChevronLeftIcon } from '@ui/icons/ChevronLeftIcon'
+import { ChevronRightIcon } from '@ui/icons/ChevronRightIcon'
 
 /**
  * Pagination
@@ -21,10 +21,10 @@ export const Pagination = ({
   currentPage,
   perPageCount
 }: {
-  pagePattern: string,
-  totalResults: number,
-  totalLinksShown: number,
-  currentPage: number,
+  pagePattern: string
+  totalResults: number
+  totalLinksShown: number
+  currentPage: number
   perPageCount: number
 }) => {
   //Some static settings in case we need to adjust

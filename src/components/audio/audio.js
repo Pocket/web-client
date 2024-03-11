@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { css } from '@emotion/css'
 import { LISTEN_SPEEDS } from 'common/constants'
-import { ListenIcon } from 'components/icons/ListenIcon'
+import { ListenIcon } from '@ui/icons/ListenIcon'
 
 const audioStyles = css`
   display: flex;
