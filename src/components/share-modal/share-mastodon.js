@@ -5,6 +5,7 @@ import { openWindow } from 'common/utilities/open-window/open-window'
 import { Modal, ModalBody, ModalFooter } from 'components/modal/modal'
 import { localStore } from 'common/utilities/browser-storage/browser-storage'
 import { isValidUrl } from 'common/utilities/urls/urls'
+import { CACHE_KEY_MASTODON_INSTANCE } from 'common/constants'
 
 export const localStoreWrapper = css`
   margin-top: 8px;
