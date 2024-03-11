@@ -75,6 +75,9 @@ export const SNOWPLOW_ANONYMOUS_CONFIG = {
   anonymousTracking: { withServerAnonymisation: true },
 }
 
+// Mastodon 
+export const CACHE_KEY_MASTODON_INSTANCE = 'preferred-mastodon-instance'
+
 export const KEYS = {
   BACKSPACE: 8,
   TAB: 9,
