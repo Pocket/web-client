@@ -1,32 +1,20 @@
-import { css, cx } from '@emotion/css'
+import style from './style.module.css'
+
 import { PremiumIcon } from '@ui/icons/PremiumIcon'
 
-export default {
+import type { Meta } from '@storybook/react'
+
+const meta: Meta = {
   title: 'UI/Button'
 }
 
-const buttonContainer = css`
-  font-family: var(--fontSansSerif);
-  h4 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0 0 0.5rem;
-  }
-  .buttonList {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 1.5rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--color-dividerTertiary);
-  }
-`
+export default meta
 
 export const Button = () => {
   return (
-    <div className={buttonContainer}>
+    <div className={style.buttonContainer}>
       <h4>large</h4>
-      <div className="buttonList">
+      <div className={style.buttonList}>
         <button className="primary large">Primary</button>
         <button className="secondary large">Secondary</button>
         <button className="brand large">Brand</button>
@@ -37,7 +25,7 @@ export const Button = () => {
       </div>
 
       <h4>standard</h4>
-      <div className="buttonList">
+      <div className={style.buttonList}>
         <button className="primary">Primary</button>
         <button className="secondary">Secondary</button>
         <button className="brand">Brand</button>
@@ -48,7 +36,7 @@ export const Button = () => {
       </div>
 
       <h4>small</h4>
-      <div className="buttonList">
+      <div className={style.buttonList}>
         <button className="primary small">Primary</button>
         <button className="secondary small">Secondary</button>
         <button className="brand small">Brand</button>
@@ -59,7 +47,7 @@ export const Button = () => {
       </div>
 
       <h4>tiny</h4>
-      <div className="buttonList">
+      <div className={style.buttonList}>
         <button className="primary tiny">Primary</button>
         <button className="secondary tiny">Secondary</button>
         <button className="brand tiny">Brand</button>

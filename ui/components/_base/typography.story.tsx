@@ -1,6 +1,10 @@
-export default {
+import type { Meta } from '@storybook/react'
+
+const meta: Meta = {
   title: 'UI/Typography'
 }
+
+export default meta
 
 export const Typography = () => {
   return (

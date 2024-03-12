@@ -1,18 +1,16 @@
-import { css } from '@emotion/css'
+import style from './style.module.css'
 
-export default {
+import type { Meta } from '@storybook/react'
+
+const meta: Meta = {
   title: 'UI/Input'
 }
 
-const inputStyles = css`
-  & > div {
-    margin-bottom: 1rem;
-  }
-`
+export default meta
 
 export const Input = () => {
   return (
-    <div className={inputStyles}>
+    <div className={style.inputContainer}>
       <div>
         <label>
           <span>Text</span> <input type="text" />
@@ -154,7 +152,7 @@ export const Input = () => {
           </div>
           <div>
             <label htmlFor="textarea">Example textarea</label>
-            <textarea id="textarea" rows="3"></textarea>
+            <textarea id="textarea" rows={3}></textarea>
           </div>
           <div>
             <label htmlFor="date">Example date</label>
