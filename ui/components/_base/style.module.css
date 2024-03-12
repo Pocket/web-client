@@ -23,3 +23,22 @@
     margin-right: 8px;
   }
 }
+
+.colorGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 16px;
+}
+
+.colorBlock {
+  margin: 0 0 8px;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 32px auto;
+  column-gap: 16px;
+  & > div {
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+  }
+}
