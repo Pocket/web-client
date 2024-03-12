@@ -22,9 +22,8 @@
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "storybook:start": "pnpm dlx serve ./storybook-static",
-    "compile:styles": "node .scripts/styles/compile-styles.js",
-    "locale:inject": "node ./.scripts/localization/locale-inject.mjs",
-    "locale:parse": "cd .scripts/localization/ && pnpm extract",
+    "locale:inject": "node ./common/localization/locale-inject.mjs",
+    "locale:parse": "cd common/localization/ && pnpm extract",
     "schema": "rover graph fetch pocket-client-api@current >| schema.graphql",
     "format": "lint-staged",
     "prepare": "husky"
