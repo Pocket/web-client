@@ -14,5 +14,6 @@
       "actions": ["src/actions.js"],
       "store": ["src/store.js"]
     }
-  }
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
 }
