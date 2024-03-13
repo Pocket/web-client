@@ -99,7 +99,7 @@
     "next-router-mock": "0.9.12",
     "prettier": "3.2.5",
     "storybook": "7.6.17",
-    "typescript": "5.3.3"
+    "typescript": "5.4.2"
   },
   "dependencies": {
     "@braze/web-sdk": "5.1.1",
