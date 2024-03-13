@@ -75,7 +75,8 @@
       }
       main .animated {
         display: block;
-        width: 236px;
+        width: 60%;
+        max-width: 236px;
       }
       main .static {
         display: none;
@@ -169,6 +170,17 @@
 
         main .content {
           padding: 56px 0 28px;
+        }
+      }
+      @media (max-height: 800px) {
+        main .content {
+          padding-top: 30px;
+        }
+        main .visuals {
+          margin-bottom: 20px;
+        }
+        main .animated {
+          width: 40%;
         }
       }
       @media (max-height: 680px) {
