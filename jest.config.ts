@@ -32,5 +32,16 @@ const config: Config = {
   reporters: ['default', 'jest-junit']
 }
 
+const esModules = ['query-string', 'decode-uri-component', 'split-on-first', 'filter-obj']
+
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-export default createJestConfig(config)
+const generateConfig = async () => {
+  const generated = await createJestConfig(config)()
+  return {
+    ...generated,
+    transformIgnorePatterns: esModules.length
+      ? [`<rootDir>/node_modules/.pnpm/(?!${esModules.join('|')})`]
+      : []
+  }
+}
+export default generateConfig
