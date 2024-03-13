@@ -9,7 +9,7 @@
   "license": "ISC",
   "devDependencies": {
     "@config/typescript-config": "workspace:*",
-    "@types/react": "18.2.64"
+    "@types/react": "18.2.65"
   },
   "dependencies": {
     "@ui/icons": "workspace:*"
